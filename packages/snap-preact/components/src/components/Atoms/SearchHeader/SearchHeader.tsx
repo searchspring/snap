@@ -4,7 +4,7 @@ import { jsx, css } from '@emotion/react';
 import { observer } from 'mobx-react-lite';
 
 import { Theme, useTheme, CacheProvider } from '../../../providers';
-import { ComponentProps, StylingCSS } from '../../../types';
+import { ComponentProps, RootNodeProperties } from '../../../types';
 import type { SearchController } from '@searchspring/snap-controller';
 import { mergeProps } from '../../../utilities';
 import { SearchMerchandisingStore, SearchPaginationStore, SearchQueryStore } from '@searchspring/snap-store-mobx';
@@ -49,7 +49,7 @@ export const SearchHeader = observer((properties: SearchHeaderProps): JSX.Elemen
 
 	const { titleText, subtitleText, correctedQueryText, noResultsText, didYouMeanText } = props;
 
-	const styling: { css?: StylingCSS } = {};
+	const styling: RootNodeProperties = { 'ss-name': props.name };
 	const stylingProps = props;
 
 	if (styleScript && !disableStyles) {

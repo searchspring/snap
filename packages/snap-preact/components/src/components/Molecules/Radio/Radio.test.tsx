@@ -6,6 +6,7 @@ import userEvent from '@testing-library/user-event';
 import { Radio } from './Radio';
 import { iconPaths } from '../../Atoms/Icon';
 import { Theme, ThemeProvider } from '../../../providers';
+import { A11Y_ATTRIBUTE } from '../../../hooks/useA11y';
 
 describe('Radio Component', () => {
 	const globalTheme = {
@@ -94,12 +95,12 @@ describe('Radio Component', () => {
 
 			expect(element).toBeInTheDocument();
 
-			expect(element).toHaveAttribute('ssA11y');
+			expect(element).toHaveAttribute(A11Y_ATTRIBUTE);
 
 			const rendered2 = render(<Radio checked disableA11y />);
 
 			const element2 = rendered2.container.querySelector('.ss__radio');
-			expect(element2).not.toHaveAttribute('ssA11y');
+			expect(element2).not.toHaveAttribute(A11Y_ATTRIBUTE);
 		});
 
 		it('respects the disabled prop', () => {

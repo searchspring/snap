@@ -17,7 +17,7 @@ import { Facets, FacetsProps } from '../../Organisms/Facets';
 import { defined, cloneWithProps, mergeProps } from '../../../utilities';
 import { createHoverProps } from '../../../toolbox';
 import { Theme, useTheme, CacheProvider } from '../../../providers';
-import { ComponentProps, FacetDisplay, BreakpointsProps, StylingCSS, ResultComponent } from '../../../types';
+import { ComponentProps, FacetDisplay, BreakpointsProps, RootNodeProperties, ResultComponent } from '../../../types';
 import { useDisplaySettings } from '../../../hooks/useDisplaySettings';
 import { Lang, useA11y, useLang } from '../../../hooks';
 
@@ -344,6 +344,7 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 		style,
 		controller,
 		styleScript,
+		treePath,
 	} = props;
 
 	const subProps: AutocompleteSubProps = {
@@ -355,6 +356,7 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 				disableStyles,
 			}),
 			theme: props.theme,
+			treePath,
 		},
 		banner: {
 			// default props
@@ -365,6 +367,7 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 			}),
 			// component theme overrides
 			theme: props.theme,
+			treePath,
 		},
 		results: {
 			// default props
@@ -377,6 +380,7 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 			}),
 			// component theme overrides
 			theme: props.theme,
+			treePath,
 		},
 		icon: {
 			// default props
@@ -389,6 +393,7 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 			}),
 			// component theme overrides
 			theme: props.theme,
+			treePath,
 		},
 	};
 
@@ -437,7 +442,7 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 		showResults = false;
 	}
 
-	const styling: { css?: StylingCSS } = {};
+	const styling: RootNodeProperties = { 'ss-name': props.name };
 	const stylingProps = {
 		...props,
 		inputViewportOffsetBottom,
@@ -551,6 +556,7 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 								emIfy,
 								onTermClick,
 								controller,
+								treePath,
 							})
 						) : (
 							<>
@@ -705,7 +711,7 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 				{!hideFacets &&
 					(facetsSlot ? (
 						<div className="ss__autocomplete__facets">
-							{cloneWithProps(facetsSlot, { facets: facetsToShow, merchandising, facetsTitle, hideBanners, controller, valueProps })}
+							{cloneWithProps(facetsSlot, { facets: facetsToShow, merchandising, facetsTitle, hideBanners, controller, valueProps, treePath })}
 						</div>
 					) : (
 						facetsToShow.length > 0 && (
@@ -722,7 +728,7 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 										</div>
 									) : null}
 									<Facets {...subProps.facets} facets={facetsToShow} />
-									{!hideBanners ? <Banner {...subProps.banner} content={merchandising.content} type={ContentType.LEFT} /> : null}
+									{!hideBanners ? <Banner {...subProps.banner} content={merchandising.content} type={ContentType.LEFT} name={'left'} /> : null}
 								</div>
 							</>
 						)
@@ -731,17 +737,17 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 				{!hideContent ? (
 					contentSlot ? (
 						<div className="ss__autocomplete__content">
-							{cloneWithProps(contentSlot, { results, merchandising, search, pagination, filters, controller })}
+							{cloneWithProps(contentSlot, { results, merchandising, search, pagination, filters, controller, treePath })}
 						</div>
 					) : showResults ? (
 						<div className="ss__autocomplete__content">
 							<>
-								{!hideBanners ? <Banner {...subProps.banner} content={merchandising.content} type={ContentType.HEADER} /> : null}
-								{!hideBanners ? <Banner {...subProps.banner} content={merchandising.content} type={ContentType.BANNER} /> : null}
+								{!hideBanners ? <Banner {...subProps.banner} content={merchandising.content} type={ContentType.HEADER} name={'header'} /> : null}
+								{!hideBanners ? <Banner {...subProps.banner} content={merchandising.content} type={ContentType.BANNER} name={'banner'} /> : null}
 								{results.length > 0 ? (
 									<div className="ss__autocomplete__content__results">
 										{resultsSlot ? (
-											cloneWithProps(resultsSlot, { results, contentTitle, controller })
+											cloneWithProps(resultsSlot, { results, contentTitle, controller, treePath })
 										) : (
 											<>
 												{(contentTitle || lang.contentTitle.value) && results.length > 0 ? (
@@ -756,14 +762,14 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 								) : (
 									<div className="ss__autocomplete__content__no-results">
 										{noResultsSlot ? (
-											cloneWithProps(noResultsSlot, { search, pagination, controller })
+											cloneWithProps(noResultsSlot, { search, pagination, controller, treePath })
 										) : (
 											<div {...mergedLang.noResultsText?.all}></div>
 										)}
 									</div>
 								)}
 
-								{!hideBanners ? <Banner {...subProps.banner} content={merchandising.content} type={ContentType.FOOTER} /> : null}
+								{!hideBanners ? <Banner {...subProps.banner} content={merchandising.content} type={ContentType.FOOTER} name={'footer'} /> : null}
 
 								{/* {RecommendationTemplateComponent && recsController?.store?.loaded && (
 									<div className="ss__autocomplete__content__recommendations">
@@ -773,7 +779,7 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 
 								{!hideLink ? (
 									linkSlot ? (
-										cloneWithProps(linkSlot, { search, results, pagination, filters, controller })
+										cloneWithProps(linkSlot, { search, results, pagination, filters, controller, treePath })
 									) : search?.query?.string && results.length > 0 ? (
 										<div className="ss__autocomplete__content__info">
 											<a
@@ -782,7 +788,7 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 												{...mergedLang.contentInfo.attributes}
 											>
 												<span {...mergedLang.contentInfo.value}></span>
-												<Icon name="seeMoreIcon" {...subProps.icon} />
+												<Icon {...subProps.icon} />
 											</a>
 										</div>
 									) : null

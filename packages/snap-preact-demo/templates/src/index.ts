@@ -39,19 +39,55 @@ new SnapTemplates({
 			style: globalStyles,
 			overrides: {
 				components: {
-					toolbar: {
-						named: {
-							topToolBar: {
-								hidePagination: true,
-							},
-							bottomToolBar: {
-								hideFilterSummary: false,
-								hidePerPage: false,
-								hideSortBy: false,
-								hideLayoutSelector: false,
-							},
+					price: {
+						style: {
+							background: 'red',
 						},
 					},
+					toolbar: {
+						hidePerPage: true,
+						// hidePagination: true,
+						style: {
+							background: 'red',
+						},
+					},
+
+					'toolbar.top': {
+						hidePerPage: true,
+						hidePagination: true,
+					},
+
+					'search toolbar.top': {
+						hidePerPage: false,
+						hidePagination: false,
+					},
+
+					'search toolbar': {
+						hidePerPage: false,
+						// style: {
+						// 	background: 'blue'
+						// }
+					},
+
+					'search toolbar.bottom': {
+						hidePerPage: false,
+						hidePagination: false,
+						style: {
+							background: 'pink',
+						},
+					},
+
+					// 'icon.next': {
+					// 	icon: 'cog',
+					// },
+
+					// 'carousel icon.next': {
+					// 	icon: 'cog',
+					// },
+
+					// 'pagination icon.next': {
+					// 	icon: 'cog',
+					// },
 				},
 				layoutOptions: [
 					{
@@ -63,9 +99,7 @@ new SnapTemplates({
 									hideSortBy: true,
 								},
 								results: {
-									named: {
-										searchResults: { columns: 2 },
-									},
+									columns: 2,
 								},
 							},
 						},
@@ -77,9 +111,7 @@ new SnapTemplates({
 						overrides: {
 							components: {
 								results: {
-									named: {
-										searchResults: { columns: 4 },
-									},
+									columns: 4,
 								},
 							},
 						},
@@ -92,7 +124,34 @@ new SnapTemplates({
 								hideLast: true,
 							},
 						},
-						// layoutOptions: [],
+						layoutOptions: [
+							{
+								value: 1,
+								label: 'one',
+								overrides: {
+									components: {
+										toolbar: {
+											hideSortBy: true,
+										},
+										results: {
+											columns: 1,
+										},
+									},
+								},
+							},
+							{
+								value: 3,
+								label: 'three',
+								default: true,
+								overrides: {
+									components: {
+										results: {
+											columns: 3,
+										},
+									},
+								},
+							},
+						],
 					},
 					{
 						// layoutOptions: [],
@@ -132,7 +191,7 @@ new SnapTemplates({
 			{
 				// does this force usage to after the input only?
 				selector: 'input.searchspring-ac',
-				theme: 'myTheme',
+				// theme: 'myTheme',
 				component: 'Autocomplete',
 				// resultComponent: 'CustomResult',
 			},

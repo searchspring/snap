@@ -4,7 +4,7 @@ import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
 import { observer } from 'mobx-react-lite';
 import { mergeProps } from '../../../utilities';
-import { ComponentProps, StylingCSS } from '../../../types';
+import { ComponentProps, RootNodeProperties } from '../../../types';
 import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { useState } from 'react';
 import { Lang, useA11y, useLang } from '../../../hooks';
@@ -96,7 +96,7 @@ export const Toggle = observer((properties: ToggleProps): JSX.Element => {
 
 	const { toggled, round, onClick, label, disabled, disableStyles, className, style, styleScript } = props;
 
-	const styling: { css?: StylingCSS } = {};
+	const styling: RootNodeProperties = { 'ss-name': props.name };
 	const stylingProps = props;
 
 	if (styleScript && !disableStyles) {

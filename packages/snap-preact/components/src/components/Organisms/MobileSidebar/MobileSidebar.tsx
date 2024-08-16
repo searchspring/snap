@@ -5,7 +5,7 @@ import classnames from 'classnames';
 import { observer } from 'mobx-react-lite';
 
 import { Theme, useTheme, CacheProvider } from '../../../providers';
-import { ComponentProps, StylingCSS } from '../../../types';
+import { ComponentProps, RootNodeProperties } from '../../../types';
 import { Slideout, SlideoutProps } from '../../Molecules/Slideout';
 import { defined, mergeProps } from '../../../utilities';
 import { SearchController } from '@searchspring/snap-controller';
@@ -13,6 +13,7 @@ import { Sidebar, SidebarProps } from '../Sidebar';
 import { Button, ButtonProps } from '../../Atoms/Button';
 import { Lang, useA11y, useLang } from '../../../hooks';
 import { MutableRef, useRef } from 'preact/hooks';
+import { IconProps, IconType } from '../../Atoms/Icon';
 import deepmerge from 'deepmerge';
 
 const CSS = {
@@ -87,9 +88,10 @@ export const MobileSidebar = observer((properties: MobileSidebarProps): JSX.Elem
 		disableStyles,
 		className,
 		style,
+		treePath,
 	} = props;
 
-	const styling: { css?: StylingCSS } = {};
+	const styling: RootNodeProperties = { 'ss-name': props.name };
 
 	if (!disableStyles) {
 		styling.css = [CSS.toolbar(), style];
@@ -110,6 +112,7 @@ export const MobileSidebar = observer((properties: MobileSidebarProps): JSX.Elem
 			}),
 			// component theme overrides
 			theme: props?.theme,
+			treePath,
 		},
 		button: {
 			// default props
@@ -121,6 +124,7 @@ export const MobileSidebar = observer((properties: MobileSidebarProps): JSX.Elem
 			}),
 			// component theme overrides
 			theme: props?.theme,
+			treePath,
 		},
 		sidebar: {
 			// default props
@@ -137,6 +141,7 @@ export const MobileSidebar = observer((properties: MobileSidebarProps): JSX.Elem
 			}),
 			// component theme overrides
 			theme: props?.theme,
+			treePath,
 		},
 	};
 
@@ -191,7 +196,6 @@ export const MobileSidebar = observer((properties: MobileSidebarProps): JSX.Elem
 						{!hideCloseButton && (
 							<Button
 								className="ss__mobile-sidebar__header__close-button"
-								name="ss__mobile-sidebar__header__close-button"
 								disableStyles={true}
 								onClick={() => toggleActive()}
 								ref={(e: any) => {
@@ -202,29 +206,29 @@ export const MobileSidebar = observer((properties: MobileSidebarProps): JSX.Elem
 								icon={closeButtonIcon}
 								lang={{ button: lang.closeButtonText }}
 								{...subProps.button}
+								name={'close'}
 							></Button>
 						)}
 					</div>
 				)}
 
-				<Sidebar className="ss__mobile-sidebar__body" name={'mobile-sidebar__body'} controller={controller} {...subProps.sidebar} />
+				<Sidebar className="ss__mobile-sidebar__body" controller={controller} {...subProps.sidebar} />
 
 				{!hideFooter && (
 					<div className="ss__mobile-sidebar__footer">
 						{!hideApplyButton && (
 							<Button
 								className="ss__mobile-sidebar__footer__apply-button"
-								name={'mobile-sidebar__footer__apply-button'}
 								icon={applyButtonIcon}
 								onClick={() => toggleActive()}
 								lang={{ button: lang.applyButtonText }}
 								{...subProps.button}
+								name={'apply'}
 							/>
 						)}
 						{!hideClearButton && (
 							<Button
 								className="ss__mobile-sidebar__footer__clear-button"
-								name={'mobile-sidebar__footer__clear-button'}
 								icon={clearButtonIcon}
 								onClick={() => {
 									controller?.urlManager.remove('filter').remove('page').go();
@@ -232,6 +236,7 @@ export const MobileSidebar = observer((properties: MobileSidebarProps): JSX.Elem
 								}}
 								lang={{ button: lang.clearButtonText }}
 								{...subProps.button}
+								name={'clear'}
 							/>
 						)}
 					</div>
@@ -248,7 +253,6 @@ export const MobileSidebar = observer((properties: MobileSidebarProps): JSX.Elem
 					buttonContent={
 						<Button
 							className="ss__mobile-sidebar__slideout__button"
-							name={'mobile-sidebar__slideout__button'}
 							icon={openButtonIcon}
 							ref={openButtonRef}
 							onClick={() => {
@@ -257,6 +261,7 @@ export const MobileSidebar = observer((properties: MobileSidebarProps): JSX.Elem
 								});
 							}}
 							{...subProps.button}
+							name={'slideout'}
 							lang={{ button: lang.openButtonText }}
 						></Button>
 					}
@@ -274,11 +279,11 @@ export interface MobileSidebarProps extends ComponentProps {
 	titleText?: string;
 	openButtonText?: string;
 	clearButtonText?: string;
-	applyButtonIcon?: string;
-	clearButtonIcon?: string;
+	applyButtonIcon?: IconType | Partial<IconProps>;
+	clearButtonIcon?: IconType | Partial<IconProps>;
 	applyButtonText?: string;
-	closeButtonIcon?: string;
-	openButtonIcon?: string;
+	closeButtonIcon?: IconType | Partial<IconProps>;
+	openButtonIcon?: IconType | Partial<IconProps>;
 	hideHeader?: boolean;
 	hideFooter?: boolean;
 	hideFacets?: boolean;

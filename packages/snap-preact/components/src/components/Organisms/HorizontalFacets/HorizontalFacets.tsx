@@ -8,7 +8,7 @@ import deepmerge from 'deepmerge';
 import { Facet, FacetProps } from '../Facet';
 import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { defined, mergeProps } from '../../../utilities';
-import { ComponentProps, StylingCSS } from '../../../types';
+import { ComponentProps, RootNodeProperties } from '../../../types';
 import type { SearchController, AutocompleteController } from '@searchspring/snap-controller';
 import type { ValueFacet } from '@searchspring/snap-store-mobx';
 import type { IndividualFacetType } from '../Facets/Facets';
@@ -103,6 +103,7 @@ export const HorizontalFacets = observer((properties: HorizontalFacetsProps): JS
 		style,
 		styleScript,
 		controller,
+		treePath,
 	} = props;
 
 	const facetClickEvent = (e: React.MouseEvent<Element, MouseEvent>) => {
@@ -157,6 +158,7 @@ export const HorizontalFacets = observer((properties: HorizontalFacetsProps): JS
 			}),
 			// component theme overrides
 			theme: props?.theme,
+			treePath,
 		},
 		icon: {
 			// default props
@@ -169,6 +171,7 @@ export const HorizontalFacets = observer((properties: HorizontalFacetsProps): JS
 			}),
 			// component theme overrides
 			theme: props?.theme,
+			treePath,
 		},
 		facet: {
 			// default props
@@ -184,6 +187,7 @@ export const HorizontalFacets = observer((properties: HorizontalFacetsProps): JS
 			}),
 			// component theme overrides
 			theme: props?.theme,
+			treePath,
 		},
 		MobileSidebar: {
 			// default props
@@ -198,10 +202,11 @@ export const HorizontalFacets = observer((properties: HorizontalFacetsProps): JS
 			}),
 			// component theme overrides
 			theme: props?.theme,
+			treePath,
 		},
 	};
 
-	const styling: { css?: StylingCSS } = {};
+	const styling: RootNodeProperties = { 'ss-name': props.name };
 	const stylingProps = props;
 
 	if (styleScript && !disableStyles) {

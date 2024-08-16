@@ -6,7 +6,7 @@ import classnames from 'classnames';
 
 import { Theme, useTheme, useSnap } from '../../../providers';
 import { cloneWithProps, mergeProps } from '../../../utilities';
-import { ComponentProps, StylingCSS } from '../../../types';
+import { ComponentProps, RootNodeProperties } from '../../../types';
 import { filters } from '@searchspring/snap-toolbox';
 import { useComponent } from '../../../hooks/useComponent';
 import { useCreateController } from '../../../hooks/useCreateController';
@@ -70,9 +70,10 @@ export const NoResults = observer((properties: NoResultsProps): JSX.Element => {
 		className,
 		style,
 		styleScript,
+		treePath,
 	} = props;
 
-	const styling: { css?: StylingCSS } = {};
+	const styling: RootNodeProperties = { 'ss-name': props.name };
 	const stylingProps = props;
 
 	if (styleScript && !disableStyles) {
@@ -170,7 +171,7 @@ export const NoResults = observer((properties: NoResultsProps): JSX.Element => {
 				(typeof contentSlot == 'string' ? (
 					<div className="ss__no-results__slot" dangerouslySetInnerHTML={{ __html: contentSlot }}></div>
 				) : (
-					<div className="ss__no-results__slot">{cloneWithProps(contentSlot, { controller })}</div>
+					<div className="ss__no-results__slot">{cloneWithProps(contentSlot, { controller, treePath })}</div>
 				))}
 
 			{!hideSuggestions && (suggestionsTitleText || suggestionsExist) && (

@@ -5,7 +5,7 @@ import classnames from 'classnames';
 import { observer } from 'mobx-react';
 
 import { Theme, useTheme, CacheProvider, useSnap } from '../../../providers';
-import { ComponentProps, StylingCSS, ComponentMap } from '../../../types';
+import { ComponentProps, RootNodeProperties, ComponentMap } from '../../../types';
 import { defaultBadgeComponentMap } from '../../../utilities';
 import { useComponent } from '../../../hooks';
 import type { Product } from '@searchspring/snap-store-mobx';
@@ -35,7 +35,7 @@ export const CalloutBadge = observer((properties: CalloutBadgeProps): JSX.Elemen
 	};
 	const { result, tag, renderEmpty, disableStyles, className, style } = props;
 
-	const styling: { css?: StylingCSS } = {};
+	const styling: RootNodeProperties = { 'ss-name': props.name };
 
 	const badgeComponentMap = {
 		...defaultBadgeComponentMap,

@@ -4,7 +4,7 @@ import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
 import { observer } from 'mobx-react-lite';
 import { mergeProps, defined } from '../../../utilities';
-import { ComponentProps, StylingCSS } from '../../../types';
+import { ComponentProps, RootNodeProperties } from '../../../types';
 import { Theme, useTheme, CacheProvider } from '../../../providers';
 import type { FacetValue, ValueFacet } from '@searchspring/snap-store-mobx';
 import { Toggle, ToggleProps } from '../../Atoms/Toggle';
@@ -29,7 +29,7 @@ export const FacetToggle = observer((properties: FacetToggleProps): JSX.Element 
 
 	const props = mergeProps('facetToggle', globalTheme, defaultProps, properties);
 
-	const { label, onClick, disableStyles, className, style, styleScript } = props;
+	const { label, onClick, disableStyles, className, style, styleScript, treePath } = props;
 
 	const subProps: FacetToggleSubProps = {
 		Toggle: {
@@ -42,10 +42,11 @@ export const FacetToggle = observer((properties: FacetToggleProps): JSX.Element 
 			}),
 			// component theme overrides
 			theme: props?.theme,
+			treePath,
 		},
 	};
 
-	const styling: { css?: StylingCSS } = {};
+	const styling: RootNodeProperties = { 'ss-name': props.name };
 	const stylingProps = props;
 
 	if (styleScript && !disableStyles) {

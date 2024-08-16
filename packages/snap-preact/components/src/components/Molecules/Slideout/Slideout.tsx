@@ -7,7 +7,7 @@ import classnames from 'classnames';
 
 import { defined, cloneWithProps, mergeProps } from '../../../utilities';
 import { Theme, useTheme, CacheProvider } from '../../../providers';
-import { ComponentProps, StylingCSS } from '../../../types';
+import { ComponentProps, RootNodeProperties } from '../../../types';
 import { useMediaQuery } from '../../../hooks';
 import { Overlay, OverlayProps } from '../../Atoms/Overlay';
 
@@ -46,8 +46,20 @@ export const Slideout = observer((properties: SlideoutProps): JSX.Element => {
 
 	const props = mergeProps('slideout', globalTheme, defaultProps, properties);
 
-	const { children, active, buttonContent, noButtonWrapper, displayAt, transitionSpeed, overlayColor, disableStyles, className, style, styleScript } =
-		props;
+	const {
+		children,
+		active,
+		buttonContent,
+		noButtonWrapper,
+		displayAt,
+		transitionSpeed,
+		overlayColor,
+		disableStyles,
+		className,
+		style,
+		styleScript,
+		treePath,
+	} = props;
 
 	const subProps: SlideoutSubProps = {
 		overlay: {
@@ -63,6 +75,7 @@ export const Slideout = observer((properties: SlideoutProps): JSX.Element => {
 			}),
 			// component theme overrides
 			theme: props?.theme,
+			treePath,
 		},
 	};
 
@@ -89,7 +102,7 @@ export const Slideout = observer((properties: SlideoutProps): JSX.Element => {
 
 	document.body.style.overflow = isVisible && isActive ? 'hidden' : '';
 
-	const styling: { css?: StylingCSS } = {};
+	const styling: RootNodeProperties = { 'ss-name': props.name };
 	const stylingProps = { ...props, isActive };
 
 	if (styleScript && !disableStyles) {
@@ -104,15 +117,15 @@ export const Slideout = observer((properties: SlideoutProps): JSX.Element => {
 		<CacheProvider>
 			{buttonContent &&
 				(noButtonWrapper ? (
-					cloneWithProps(buttonContent, { toggleActive, active: isActive })
+					cloneWithProps(buttonContent, { toggleActive, active: isActive, treePath })
 				) : (
 					<div className="ss__slideout__button" onClick={() => toggleActive()}>
-						{cloneWithProps(buttonContent, { active: isActive })}
+						{cloneWithProps(buttonContent, { active: isActive, treePath })}
 					</div>
 				))}
 
 			<div className={classnames('ss__slideout', className, { 'ss__slideout--active': isActive })} {...styling}>
-				{renderContent && cloneWithProps(children, { toggleActive, active: isActive })}
+				{renderContent && cloneWithProps(children, { toggleActive, active: isActive, treePath })}
 			</div>
 			<Overlay {...subProps.overlay} active={isActive} onClick={toggleActive} />
 		</CacheProvider>

@@ -1,12 +1,13 @@
 import { h } from 'preact';
 import { render, waitFor } from '@testing-library/preact';
-import { Facet } from './Facet';
+import { Facet, FacetProps } from './Facet';
 import { ThemeProvider } from '../../../providers';
 
 import userEvent from '@testing-library/user-event';
 import { ValueFacet, RangeFacet } from '@searchspring/snap-store-mobx';
 import { SearchResponseModelFacet, SearchResponseModelFacetValueAllOf } from '@searchspring/snapi-types';
 import { MockData } from '@searchspring/snap-shared';
+import { IconType } from '../../Atoms/Icon';
 
 const mockData = new MockData();
 const searchResponseFacets = mockData.search().facets!;
@@ -152,7 +153,7 @@ describe('Facet Component', () => {
 		});
 
 		it('renders with specified icons', async () => {
-			const args = {
+			const args: FacetProps = {
 				facet: facetOverflowMock as ValueFacet,
 				iconCollapse: 'angle-down',
 				iconExpand: 'angle-up',

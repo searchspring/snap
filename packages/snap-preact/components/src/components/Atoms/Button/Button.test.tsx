@@ -5,6 +5,7 @@ import userEvent from '@testing-library/user-event';
 
 import { Button } from './Button';
 import { ThemeProvider } from '../../../providers';
+import { A11Y_ATTRIBUTE } from '../../../hooks/useA11y';
 
 describe('Button Component', () => {
 	describe('styled', () => {
@@ -356,12 +357,12 @@ describe('Button Component', () => {
 			const buttonElement = rendered.container.querySelector('.ss__button');
 			expect(buttonElement).toBeInTheDocument();
 
-			expect(buttonElement).toHaveAttribute('ssA11y');
+			expect(buttonElement).toHaveAttribute(A11Y_ATTRIBUTE);
 
 			const rendered2 = render(<Button content={content} disableA11y />);
 
 			const buttonElement2 = rendered2.container.querySelector('.ss__button');
-			expect(buttonElement2).not.toHaveAttribute('ssA11y');
+			expect(buttonElement2).not.toHaveAttribute(A11Y_ATTRIBUTE);
 		});
 
 		it('renders with children prop', () => {

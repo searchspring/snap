@@ -8,7 +8,7 @@ import { Carousel, CarouselProps as CarouselProps } from '../../Molecules/Carous
 import { Result, ResultProps } from '../../Molecules/Result';
 import { defined, mergeProps } from '../../../utilities';
 import { Theme, useTheme, CacheProvider } from '../../../providers';
-import { ComponentProps, BreakpointsProps, StylingCSS, ResultComponent } from '../../../types';
+import { ComponentProps, BreakpointsProps, RootNodeProperties, ResultComponent } from '../../../types';
 import { useDisplaySettings } from '../../../hooks/useDisplaySettings';
 import { RecommendationProfileTracker } from '../../Trackers/Recommendation/ProfileTracker';
 import { RecommendationResultTracker } from '../../Trackers/Recommendation/ResultTracker';
@@ -199,6 +199,7 @@ export const RecommendationBundle = observer((properties: RecommendationBundlePr
 		style,
 		className,
 		styleScript,
+		treePath,
 		...additionalProps
 	} = props;
 
@@ -247,6 +248,7 @@ export const RecommendationBundle = observer((properties: RecommendationBundlePr
 			}),
 			// component theme overrides
 			theme: props?.theme,
+			treePath,
 		},
 		result: {
 			// default props
@@ -259,6 +261,7 @@ export const RecommendationBundle = observer((properties: RecommendationBundlePr
 			}),
 			// component theme overrides
 			theme: props?.theme,
+			treePath,
 		},
 	};
 
@@ -269,7 +272,7 @@ export const RecommendationBundle = observer((properties: RecommendationBundlePr
 		slidesPerView = resultsToRender.length;
 	}
 
-	const styling: { css?: StylingCSS } = {};
+	const styling: RootNodeProperties = { 'ss-name': props.name };
 	const stylingProps = props;
 
 	if (styleScript && !disableStyles) {
@@ -438,7 +441,7 @@ export const RecommendationBundle = observer((properties: RecommendationBundlePr
 															/>
 														);
 													} else {
-														return <Result {...subProps.result} controller={controller} result={seed} />;
+														return <Result {...subProps.result} controller={controller} result={seed} name={'seed'} />;
 													}
 												})()}
 											</BundleSelector>
@@ -493,7 +496,7 @@ export const RecommendationBundle = observer((properties: RecommendationBundlePr
 																				/>
 																			);
 																		} else {
-																			return <Result {...subProps.result} controller={controller} result={result} />;
+																			return <Result {...subProps.result} controller={controller} result={result} name={'seed'} />;
 																		}
 																	})()}
 																</BundleSelector>

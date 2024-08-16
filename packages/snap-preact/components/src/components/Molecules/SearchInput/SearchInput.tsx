@@ -7,7 +7,7 @@ import { observer } from 'mobx-react';
 import { Icon, IconProps } from '../../Atoms/Icon/Icon';
 import { defined, mergeProps } from '../../../utilities';
 import { Theme, useTheme, CacheProvider } from '../../../providers';
-import { ComponentProps, StylingCSS } from '../../../types';
+import { ComponentProps, RootNodeProperties } from '../../../types';
 
 const CSS = {
 	searchInput: ({ theme }: Partial<SearchInputProps>) =>
@@ -39,7 +39,7 @@ export const SearchInput = observer((properties: SearchInputProps): JSX.Element 
 
 	const props = mergeProps('searchInput', globalTheme, defaultProps, properties);
 
-	const { placeholder, onChange, hideIcon, disableStyles, style, styleScript, className } = props;
+	const { placeholder, onChange, hideIcon, disableStyles, style, styleScript, className, treePath } = props;
 
 	const subProps: SearchInputSubProps = {
 		icon: {
@@ -53,10 +53,11 @@ export const SearchInput = observer((properties: SearchInputProps): JSX.Element 
 			}),
 			// component theme overrides
 			theme: props?.theme,
+			treePath,
 		},
 	};
 
-	const styling: { css?: StylingCSS } = {};
+	const styling: RootNodeProperties = { 'ss-name': props.name };
 	const stylingProps = props;
 
 	if (styleScript && !disableStyles) {

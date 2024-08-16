@@ -4,7 +4,7 @@ import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
 
 import { Theme, useTheme, CacheProvider } from '../../../providers';
-import { ComponentProps, StylingCSS, ListOption } from '../../../types';
+import { ComponentProps, RootNodeProperties, ListOption } from '../../../types';
 import { defined, mergeProps } from '../../../utilities';
 import { useState } from 'react';
 import { Radio, RadioProps } from '../Radio/Radio';
@@ -71,6 +71,7 @@ export function RadioList(properties: RadioListProps): JSX.Element {
 		className,
 		style,
 		styleScript,
+		treePath,
 	} = props;
 
 	const subProps: RadioListSubProps = {
@@ -85,6 +86,7 @@ export function RadioList(properties: RadioListProps): JSX.Element {
 			}),
 			// component theme overrides
 			theme: props?.theme,
+			treePath,
 		},
 		Icon: {
 			className: 'ss__radio-list__option__icon',
@@ -94,10 +96,11 @@ export function RadioList(properties: RadioListProps): JSX.Element {
 			}),
 			// component theme overrides
 			theme: props?.theme,
+			treePath,
 		},
 	};
 
-	const styling: { css?: StylingCSS } = {};
+	const styling: RootNodeProperties = { 'ss-name': props.name };
 	const stylingProps = { ...props };
 
 	if (styleScript && !disableStyles) {

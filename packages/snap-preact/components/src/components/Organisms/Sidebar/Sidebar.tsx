@@ -4,7 +4,7 @@ import classnames from 'classnames';
 import { observer } from 'mobx-react-lite';
 
 import { Theme, useTheme, CacheProvider } from '../../../providers';
-import { ComponentProps, StylingCSS } from '../../../types';
+import { ComponentProps, RootNodeProperties } from '../../../types';
 import { FilterSummary, FilterSummaryProps } from '../FilterSummary';
 import { SortBy, SortByProps } from '../../Molecules/SortBy';
 import { PerPage, PerPageProps } from '../../Molecules/PerPage';
@@ -27,10 +27,22 @@ export const Sidebar = observer((properties: SidebarProps): JSX.Element => {
 
 	const props = mergeProps('sidebar', globalTheme, defaultProps, properties);
 
-	const { controller, hideTitle, titleText, hideFacets, hidePerPage, hideSortBy, hideFilterSummary, disableStyles, style, styleScript, className } =
-		props;
+	const {
+		controller,
+		hideTitle,
+		titleText,
+		hideFacets,
+		hidePerPage,
+		hideSortBy,
+		hideFilterSummary,
+		disableStyles,
+		style,
+		styleScript,
+		className,
+		treePath,
+	} = props;
 
-	const styling: { css?: StylingCSS } = {};
+	const styling: RootNodeProperties = { 'ss-name': props.name };
 	const stylingProps = props;
 
 	if (styleScript && !disableStyles) {
@@ -53,6 +65,7 @@ export const Sidebar = observer((properties: SidebarProps): JSX.Element => {
 			}),
 			// component theme overrides
 			theme: props?.theme,
+			treePath,
 		},
 		facets: {
 			// default props
@@ -65,6 +78,7 @@ export const Sidebar = observer((properties: SidebarProps): JSX.Element => {
 			}),
 			// component theme overrides
 			theme: props?.theme,
+			treePath,
 		},
 		sortBy: {
 			// default props
@@ -77,6 +91,7 @@ export const Sidebar = observer((properties: SidebarProps): JSX.Element => {
 			}),
 			// component theme overrides
 			theme: props?.theme,
+			treePath,
 		},
 		perPage: {
 			// default props
@@ -89,6 +104,7 @@ export const Sidebar = observer((properties: SidebarProps): JSX.Element => {
 			}),
 			// component theme overrides
 			theme: props?.theme,
+			treePath,
 		},
 	};
 

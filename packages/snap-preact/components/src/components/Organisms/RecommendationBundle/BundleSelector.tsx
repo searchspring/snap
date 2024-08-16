@@ -6,7 +6,7 @@ import { Theme, useTheme } from '../../../providers';
 import { Checkbox, CheckboxProps } from '../../Molecules/Checkbox';
 import { Icon, IconProps, IconType } from '../../Atoms/Icon';
 import { mergeProps } from '../../../utilities';
-import type { ComponentProps, StylingCSS } from '../../../types';
+import type { ComponentProps, RootNodeProperties } from '../../../types';
 import { Lang, useLang } from '../../../hooks';
 import deepmerge from 'deepmerge';
 
@@ -22,7 +22,7 @@ export const BundleSelector = observer((properties: BundleSelectorProps): JSX.El
 
 	const props = mergeProps('bundleSelector', globalTheme, defaultProps, properties);
 
-	const { children, checked, icon, seedText, seed, hideCheckboxes, onCheck, disableStyles, className, style, styleScript } = props;
+	const { children, checked, icon, seedText, seed, hideCheckboxes, onCheck, disableStyles, className, style, styleScript, treePath } = props;
 
 	const subProps: BundleSelectorSubProps = {
 		icon: {
@@ -33,6 +33,7 @@ export const BundleSelector = observer((properties: BundleSelectorProps): JSX.El
 			...globalTheme?.components?.icon,
 			// component theme overrides
 			theme: props?.theme,
+			treePath,
 		},
 		checkbox: {
 			className: 'ss__recommendation-bundle__wrapper__selector__result-wrapper__checkbox',
@@ -43,10 +44,11 @@ export const BundleSelector = observer((properties: BundleSelectorProps): JSX.El
 			...globalTheme?.components?.checkbox,
 			// component theme overrides
 			theme: props?.theme,
+			treePath,
 		},
 	};
 
-	const styling: { css?: StylingCSS } = {};
+	const styling: RootNodeProperties = { 'ss-name': props.name };
 	const stylingProps = props;
 
 	if (styleScript && !disableStyles) {

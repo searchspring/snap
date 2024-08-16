@@ -6,7 +6,7 @@ import classnames from 'classnames';
 
 import type { AutocompleteController } from '@searchspring/snap-controller';
 import type { AutocompleteTermStore } from '@searchspring/snap-store-mobx';
-import { ComponentProps, StylingCSS } from '../../../types';
+import { ComponentProps, RootNodeProperties } from '../../../types';
 import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { createHoverProps } from '../../../toolbox';
 import { mergeProps } from '../../../utilities';
@@ -46,7 +46,7 @@ export const Terms = observer((properties: TermsProps): JSX.Element => {
 	const currentInput = controller?.store?.state?.input;
 	const terms = props.terms || controller?.store.terms;
 
-	const styling: { css?: StylingCSS } = {};
+	const styling: RootNodeProperties = { 'ss-name': props.name };
 	const stylingProps = props;
 
 	if (styleScript && !disableStyles) {

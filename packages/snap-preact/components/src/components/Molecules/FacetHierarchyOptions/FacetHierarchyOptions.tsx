@@ -6,7 +6,7 @@ import { observer } from 'mobx-react';
 
 import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { mergeProps } from '../../../utilities';
-import { ComponentProps, StylingCSS } from '../../../types';
+import { ComponentProps, RootNodeProperties } from '../../../types';
 import { createHoverProps } from '../../../toolbox';
 import type { FacetHierarchyValue, ValueFacet } from '@searchspring/snap-store-mobx';
 import { Lang, useLang } from '../../../hooks';
@@ -99,7 +99,7 @@ export const FacetHierarchyOptions = observer((properties: FacetHierarchyOptions
 
 	const { values, hideCount, onClick, disableStyles, previewOnFocus, valueProps, facet, horizontal, className, style, styleScript } = props;
 
-	const styling: { css?: StylingCSS } = {};
+	const styling: RootNodeProperties = { 'ss-name': props.name };
 	const stylingProps = props;
 
 	if (styleScript && !disableStyles) {

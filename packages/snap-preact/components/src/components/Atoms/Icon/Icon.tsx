@@ -4,7 +4,7 @@ import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
 
 import { Theme, useTheme, CacheProvider } from '../../../providers';
-import { ComponentProps, StylingCSS } from '../../../types';
+import { ComponentProps, RootNodeProperties } from '../../../types';
 import { iconPaths, IconType } from './paths';
 import { mergeProps } from '../../../utilities';
 
@@ -28,11 +28,11 @@ export function Icon(properties: IconProps): JSX.Element {
 
 	const props = mergeProps('icon', globalTheme, defaultProps, properties);
 
-	const { color, icon, path, children, size, width, height, viewBox, disableStyles, className, style, styleScript, ...otherProps } = props;
+	const { color, icon, path, children, size, width, height, viewBox, disableStyles, className, style, styleScript, name, ...otherProps } = props;
 
 	const iconPath = iconPaths[icon as IconType] || path;
 	const pathType = typeof iconPath;
-	const styling: { css?: StylingCSS } = {};
+	const styling: RootNodeProperties = { 'ss-name': name };
 	const stylingProps = props;
 
 	if (styleScript && !disableStyles) {
@@ -60,7 +60,7 @@ export function Icon(properties: IconProps): JSX.Element {
 					} else if (pathType === 'string') {
 						return <path fill={disableStyles ? color : undefined} d={iconPath as string} />;
 					} else if (iconPath && pathType === 'object' && Array.isArray(iconPath)) {
-						return iconPath.map((p: SVGPathElement, i) => <p.type key={i} {...p.attributes} />);
+						return (iconPath as SVGPathElement[]).map((p, i) => <p.type key={i} {...p.attributes} />);
 					}
 				})()}
 			</svg>
@@ -86,4 +86,18 @@ export interface IconProps extends ComponentProps {
 	width?: string | number;
 	height?: string | number;
 	viewBox?: string;
+	name?: IconNames;
 }
+export type IconNames =
+	| 'next'
+	| 'prev'
+	| 'active'
+	| 'inactive'
+	| 'star--empty'
+	| 'star--full'
+	| 'selection'
+	| 'open'
+	| 'close'
+	| 'option'
+	| 'expand'
+	| 'collapse';

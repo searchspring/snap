@@ -5,7 +5,7 @@ import classnames from 'classnames';
 import { observer } from 'mobx-react-lite';
 
 import { Theme, useTheme, CacheProvider } from '../../../providers';
-import { ComponentProps, StylingCSS } from '../../../types';
+import { ComponentProps, RootNodeProperties } from '../../../types';
 import { defined, mergeProps } from '../../../utilities';
 import { Lang, useIntersection, useLang } from '../../../hooks';
 import type { SearchPaginationStore } from '@searchspring/snap-store-mobx';
@@ -156,6 +156,7 @@ export const LoadMore = observer((properties: LoadMoreProps): JSX.Element => {
 		className,
 		style,
 		styleScript,
+		treePath,
 	} = props;
 
 	const store = pagination || controller?.store?.pagination;
@@ -179,6 +180,7 @@ export const LoadMore = observer((properties: LoadMoreProps): JSX.Element => {
 			}),
 			// component theme overrides
 			theme: props?.theme,
+			treePath,
 		},
 		icon: {
 			// default props
@@ -191,6 +193,7 @@ export const LoadMore = observer((properties: LoadMoreProps): JSX.Element => {
 			}),
 			// component theme overrides
 			theme: props?.theme,
+			treePath,
 		},
 	};
 
@@ -198,7 +201,7 @@ export const LoadMore = observer((properties: LoadMoreProps): JSX.Element => {
 		return <Fragment></Fragment>;
 	}
 
-	const styling: { css?: StylingCSS } = {};
+	const styling: RootNodeProperties = { 'ss-name': props.name };
 	const stylingProps = { ...props, pagination: store };
 
 	if (styleScript && !disableStyles) {

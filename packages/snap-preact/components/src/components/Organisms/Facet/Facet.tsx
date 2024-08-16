@@ -12,7 +12,7 @@ import { FacetSlider, FacetSliderProps } from '../../Molecules/FacetSlider';
 import { SearchInput, SearchInputProps } from '../../Molecules/SearchInput';
 import { Icon, IconProps, IconType } from '../../Atoms/Icon';
 import { Dropdown, DropdownProps } from '../../Atoms/Dropdown';
-import { ComponentProps, FacetDisplay, StylingCSS } from '../../../types';
+import { ComponentProps, FacetDisplay, RootNodeProperties } from '../../../types';
 import type { ValueFacet, RangeFacet, FacetHierarchyValue, FacetValue, FacetRangeValue } from '@searchspring/snap-store-mobx';
 
 import { defined, cloneWithProps, mergeProps } from '../../../utilities';
@@ -105,6 +105,7 @@ export const Facet = observer((properties: FacetProps): JSX.Element => {
 		className,
 		style,
 		styleScript,
+		treePath,
 	} = props;
 
 	const subProps: FacetSubProps = {
@@ -121,6 +122,7 @@ export const Facet = observer((properties: FacetProps): JSX.Element => {
 			}),
 			// component theme overrides
 			theme: props?.theme,
+			treePath,
 		},
 		icon: {
 			// default props
@@ -135,6 +137,7 @@ export const Facet = observer((properties: FacetProps): JSX.Element => {
 			}),
 			// component theme overrides
 			theme: props?.theme,
+			treePath,
 		},
 		showMoreLessIcon: {
 			// default props
@@ -149,6 +152,7 @@ export const Facet = observer((properties: FacetProps): JSX.Element => {
 			}),
 			// component theme overrides
 			theme: props?.theme,
+			treePath,
 		},
 		facetHierarchyOptions: {
 			// default props
@@ -164,6 +168,7 @@ export const Facet = observer((properties: FacetProps): JSX.Element => {
 			}),
 			// component theme overrides
 			theme: props?.theme,
+			treePath,
 		},
 		facetListOptions: {
 			// default props
@@ -179,6 +184,7 @@ export const Facet = observer((properties: FacetProps): JSX.Element => {
 			}),
 			// component theme overrides
 			theme: props?.theme,
+			treePath,
 		},
 		facetGridOptions: {
 			// default props
@@ -194,6 +200,7 @@ export const Facet = observer((properties: FacetProps): JSX.Element => {
 			}),
 			// component theme overrides
 			theme: props?.theme,
+			treePath,
 		},
 		facetPaletteOptions: {
 			// default props
@@ -209,6 +216,7 @@ export const Facet = observer((properties: FacetProps): JSX.Element => {
 			}),
 			// component theme overrides
 			theme: props?.theme,
+			treePath,
 		},
 		facetToggle: {
 			// default props
@@ -221,6 +229,7 @@ export const Facet = observer((properties: FacetProps): JSX.Element => {
 			}),
 			// component theme overrides
 			theme: props?.theme,
+			treePath,
 		},
 		facetSlider: {
 			// default props
@@ -233,6 +242,7 @@ export const Facet = observer((properties: FacetProps): JSX.Element => {
 			}),
 			// component theme overrides
 			theme: props?.theme,
+			treePath,
 		},
 		searchInput: {
 			// default props
@@ -245,6 +255,7 @@ export const Facet = observer((properties: FacetProps): JSX.Element => {
 			}),
 			// component theme overrides
 			theme: props?.theme,
+			treePath,
 		},
 	};
 
@@ -258,7 +269,7 @@ export const Facet = observer((properties: FacetProps): JSX.Element => {
 		limitedValues = (facet as ValueFacet)?.values;
 	}
 
-	const styling: { css?: StylingCSS } = {};
+	const styling: RootNodeProperties = { 'ss-name': props.name };
 	const stylingProps = { ...props, color };
 
 	if (styleScript && !disableStyles) {
@@ -343,6 +354,7 @@ export const Facet = observer((properties: FacetProps): JSX.Element => {
 									{...(facet?.collapsed
 										? { ...(typeof iconExpand == 'string' ? { icon: iconExpand } : (iconExpand as Partial<IconProps>)) }
 										: { ...(typeof iconCollapse == 'string' ? { icon: iconCollapse } : (iconCollapse as Partial<IconProps>)) })}
+									name={facet?.collapsed ? 'expand' : 'collapse'}
 								/>
 							)}
 						</div>
@@ -373,6 +385,7 @@ const FacetContent = (props: any) => {
 		disableOverflow,
 		previewOnFocus,
 		valueProps,
+		treePath,
 		lang,
 	} = props;
 
@@ -385,7 +398,7 @@ const FacetContent = (props: any) => {
 				{(() => {
 					//manual options component
 					if (optionsSlot) {
-						return cloneWithProps(optionsSlot, { facet, valueProps, limit, previewOnFocus });
+						return cloneWithProps(optionsSlot, { facet, valueProps, limit, previewOnFocus, treePath });
 					} else {
 						switch (facet?.display) {
 							case FacetDisplay.TOGGLE:
@@ -414,7 +427,7 @@ const FacetContent = (props: any) => {
 			{!disableOverflow && (facet as ValueFacet)?.overflow?.enabled && (
 				<div className="ss__facet__show-more-less" onClick={() => (facet as ValueFacet).overflow?.toggle()} ref={(e) => useA11y(e)}>
 					{overflowSlot ? (
-						cloneWithProps(overflowSlot, { facet })
+						cloneWithProps(overflowSlot, { facet, treePath })
 					) : (
 						<Fragment>
 							<Icon

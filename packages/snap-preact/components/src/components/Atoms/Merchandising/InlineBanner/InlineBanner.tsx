@@ -3,7 +3,7 @@ import { Fragment, h } from 'preact';
 import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
 import { Theme, useTheme, CacheProvider } from '../../../../providers';
-import { ComponentProps, ResultsLayout, ResultsLayoutType, StylingCSS } from '../../../../types';
+import { ComponentProps, ResultsLayout, ResultsLayoutType, RootNodeProperties } from '../../../../types';
 import { mergeProps } from '../../../../utilities';
 
 import type { Banner } from '@searchspring/snap-store-mobx';
@@ -42,7 +42,7 @@ export function InlineBanner(properties: InlineBannerProps): JSX.Element {
 
 	const { banner, disableStyles, className, layout, onClick, style, styleScript } = props;
 
-	const styling: { css?: StylingCSS } = {};
+	const styling: RootNodeProperties = { 'ss-name': props.name };
 	const stylingProps = props;
 
 	if (styleScript && !disableStyles) {

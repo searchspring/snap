@@ -6,7 +6,7 @@ import classnames from 'classnames';
 
 import { defined, mergeProps } from '../../../utilities';
 import { Theme, useTheme, CacheProvider } from '../../../providers';
-import { ComponentProps, StylingCSS } from '../../../types';
+import { ComponentProps, RootNodeProperties } from '../../../types';
 import { Button, ButtonProps } from '../../Atoms/Button';
 import { Icon, IconProps, IconType } from '../../Atoms/Icon';
 import type { Filter as FilterType } from '@searchspring/snap-store-mobx';
@@ -39,7 +39,8 @@ export const Filter = observer((properties: FilterProps): JSX.Element => {
 
 	const props = mergeProps('filter', globalTheme, defaultProps, properties);
 
-	const { filter, facetLabel, valueLabel, url, hideFacetLabel, onClick, icon, separator, disableStyles, className, style, styleScript } = props;
+	const { filter, facetLabel, valueLabel, url, hideFacetLabel, onClick, icon, separator, disableStyles, className, style, styleScript, treePath } =
+		props;
 
 	const link = filter?.url?.link || url?.link;
 	const value = filter?.value.label || valueLabel;
@@ -57,6 +58,7 @@ export const Filter = observer((properties: FilterProps): JSX.Element => {
 			}),
 			// component theme overrides
 			theme: props.theme,
+			treePath,
 		},
 		icon: {
 			// default props
@@ -72,10 +74,11 @@ export const Filter = observer((properties: FilterProps): JSX.Element => {
 			}),
 			// component theme overrides
 			theme: props.theme,
+			treePath,
 		},
 	};
 
-	const styling: { css?: StylingCSS } = {};
+	const styling: RootNodeProperties = { 'ss-name': props.name };
 	const stylingProps = props;
 
 	if (styleScript && !disableStyles) {
@@ -154,3 +157,5 @@ interface FilterSubProps {
 	button: ButtonProps;
 	icon: IconProps;
 }
+
+export type FilterNames = 'clear-all';

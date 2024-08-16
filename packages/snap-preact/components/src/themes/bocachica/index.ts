@@ -27,29 +27,29 @@ export const bocachica: Theme = {
 		{
 			value: 1,
 			icon: 'square',
-			overrides: {
-				components: {
-					results: {
-						named: {
-							searchResults: { columns: 1 },
-						},
-					},
-				},
-			},
+			// overrides: {
+			// 	components: {
+			// 		results: {
+			// 			named: {
+			// 				searchResults: { columns: 1 },
+			// 			},
+			// 		},
+			// 	},
+			// },
 		},
 		{
 			value: 2,
 			default: true,
 			icon: 'layout-large',
-			overrides: {
-				components: {
-					results: {
-						named: {
-							searchResults: { columns: 2 },
-						},
-					},
-				},
-			},
+			// overrides: {
+			// 	components: {
+			// 		results: {
+			// 			named: {
+			// 				searchResults: { columns: 2 },
+			// 			},
+			// 		},
+			// 	},
+			// },
 		},
 	],
 	components: {
@@ -233,15 +233,15 @@ export const bocachica: Theme = {
 				results: {
 					columns: 2,
 				},
-				toolbar: {
-					named: {
-						topToolBar: {
-							hidePagination: true,
-							hideSortBy: true,
-							hidePerPage: true,
-						},
-					},
-				},
+				// toolbar: {
+				// 	named: {
+				// 		topToolBar: {
+				// 			hidePagination: true,
+				// 			hideSortBy: true,
+				// 			hidePerPage: true,
+				// 		},
+				// 	},
+				// },
 				autocomplete: {
 					hideFacets: true,
 					vertical: true,
@@ -262,13 +262,13 @@ export const bocachica: Theme = {
 				results: {
 					columns: 2,
 				},
-				toolbar: {
-					named: {
-						topToolBar: {
-							hidePagination: true,
-						},
-					},
-				},
+				// toolbar: {
+				// 	named: {
+				// 		topToolBar: {
+				// 			hidePagination: true,
+				// 		},
+				// 	},
+				// },
 				autocomplete: {
 					hideFacets: true,
 					vertical: true,
@@ -290,13 +290,13 @@ export const bocachica: Theme = {
 				results: {
 					columns: 3,
 				},
-				toolbar: {
-					named: {
-						topToolBar: {
-							hidePagination: true,
-						},
-					},
-				},
+				// toolbar: {
+				// 	named: {
+				// 		topToolBar: {
+				// 			hidePagination: true,
+				// 		},
+				// 	},
+				// },
 				autocomplete: {
 					vertical: true,
 					horizontalTerms: true,
@@ -327,13 +327,13 @@ export const bocachica: Theme = {
 				results: {
 					columns: 4,
 				},
-				toolbar: {
-					named: {
-						topToolBar: {
-							hidePagination: true,
-						},
-					},
-				},
+				// toolbar: {
+				// 	named: {
+				// 		topToolBar: {
+				// 			hidePagination: true,
+				// 		},
+				// 	},
+				// },
 				autocomplete: {
 					theme: {
 						components: {
