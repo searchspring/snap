@@ -3,38 +3,39 @@ import { render } from '@testing-library/preact';
 import { ThemeProvider } from '../../../providers';
 import userEvent from '@testing-library/user-event';
 import { Grid } from './Grid';
+import { GridLang } from './Grid';
+
+const options = [
+	{
+		value: 'one',
+		disabled: true,
+	},
+	{
+		value: 'two',
+	},
+	{
+		value: 'three',
+	},
+	{
+		value: 'four',
+	},
+	{
+		value: 'five',
+	},
+	{
+		value: 'six',
+	},
+	{
+		value: 'seven',
+	},
+	{
+		value: 'eight',
+	},
+];
 
 describe('Grid Component', () => {
 	let gridComponent;
 	let gridElement;
-
-	const options = [
-		{
-			value: 'one',
-			disabled: true,
-		},
-		{
-			value: 'two',
-		},
-		{
-			value: 'three',
-		},
-		{
-			value: 'four',
-		},
-		{
-			value: 'five',
-		},
-		{
-			value: 'six',
-		},
-		{
-			value: 'seven',
-		},
-		{
-			value: 'eight',
-		},
-	];
 
 	it('renders', () => {
 		gridComponent = render(<Grid options={options} />);
@@ -261,35 +262,225 @@ describe('Grid Component', () => {
 	});
 });
 
-describe('FacetGridOptions theming works', () => {
-	const options = [
-		{
-			value: 'one',
-			disabled: true,
-		},
-		{
-			value: 'two',
-		},
-		{
-			value: 'three',
-		},
-		{
-			value: 'four',
-		},
-		{
-			value: 'five',
-		},
-		{
-			value: 'six',
-		},
-		{
-			value: 'seven',
-		},
-		{
-			value: 'eight',
-		},
-	];
+describe('Grid lang works', () => {
+	const selector = '.ss__grid';
 
+	it('immediately available lang options', async () => {
+		const langOptions = ['showMoreText'];
+
+		//text attributes/values
+		const value = 'custom value';
+		const altText = 'custom alt';
+		const ariaLabel = 'custom label';
+		const ariaValueText = 'custom value text';
+		const title = 'custom title';
+
+		const valueMock = jest.fn(() => value);
+		const altMock = jest.fn(() => altText);
+		const labelMock = jest.fn(() => ariaLabel);
+		const valueTextMock = jest.fn(() => ariaValueText);
+		const titleMock = jest.fn(() => title);
+
+		const langObjs = [
+			{
+				value: value,
+				attributes: {
+					alt: altText,
+					'aria-label': ariaLabel,
+					'aria-valuetext': ariaValueText,
+					title: title,
+				},
+			},
+			{
+				value: valueMock,
+				attributes: {
+					alt: altMock,
+					'aria-label': labelMock,
+					'aria-valuetext': valueTextMock,
+					title: titleMock,
+				},
+			},
+			{
+				value: `<div>${value}</div>`,
+				attributes: {
+					alt: altText,
+					'aria-label': ariaLabel,
+					'aria-valuetext': ariaValueText,
+					title: title,
+				},
+			},
+		];
+
+		langOptions.forEach((option) => {
+			langObjs.forEach((langObj) => {
+				const lang: Partial<GridLang> = {
+					[`${option}`]: langObj,
+				};
+
+				let valueSatisfied = false;
+				let altSatisfied = false;
+				let labelSatisfied = false;
+				let valueTextSatisfied = false;
+				let titleSatisfied = false;
+
+				// @ts-ignore
+				const rendered = render(<Grid options={options} lang={lang} columns={2} rows={2} />);
+
+				const element = rendered.container.querySelector(selector);
+				expect(element).toBeInTheDocument();
+
+				const langElems = rendered.container.querySelectorAll(`[ss-lang=${option}]`);
+				expect(langElems.length).toBeGreaterThan(0);
+				langElems.forEach((elem) => {
+					if (typeof langObj.value == 'function') {
+						expect(valueMock).toHaveBeenCalledWith({
+							limited: 4,
+							remainder: 4,
+						});
+
+						if (elem?.innerHTML == value) {
+							valueSatisfied = true;
+						}
+					} else {
+						if (elem?.innerHTML == langObj.value) {
+							valueSatisfied = true;
+						}
+					}
+
+					if (elem.getAttribute('alt') == altText) {
+						altSatisfied = true;
+					}
+					if (elem.getAttribute('aria-label') == ariaLabel) {
+						labelSatisfied = true;
+					}
+					if (elem.getAttribute('aria-valuetext') == ariaValueText) {
+						valueTextSatisfied = true;
+					}
+					if (elem.getAttribute('title') == title) {
+						titleSatisfied = true;
+					}
+				});
+
+				expect(valueSatisfied).toBeTruthy();
+				expect(altSatisfied).toBeTruthy();
+				expect(labelSatisfied).toBeTruthy();
+				expect(valueTextSatisfied).toBeTruthy();
+				expect(titleSatisfied).toBeTruthy();
+
+				jest.restoreAllMocks();
+			});
+		});
+	});
+
+	it('custom lang options', async () => {
+		const lessValue = 'less value';
+		const lessAltText = 'less alt';
+		const lessAriaLabel = 'less label';
+		const lessAriaValueText = 'less value text';
+		const lessTitle = 'less title';
+
+		const valueMock = jest.fn(() => lessValue);
+		const altMock = jest.fn(() => lessAltText);
+		const labelMock = jest.fn(() => lessAriaLabel);
+		const valueTextMock = jest.fn(() => lessAriaValueText);
+		const titleMock = jest.fn(() => lessTitle);
+
+		const langObjs = [
+			{
+				value: lessValue,
+				attributes: {
+					alt: lessAltText,
+					'aria-label': lessAriaLabel,
+					'aria-valuetext': lessAriaValueText,
+					title: lessTitle,
+				},
+			},
+			{
+				value: valueMock,
+				attributes: {
+					alt: altMock,
+					'aria-label': labelMock,
+					'aria-valuetext': valueTextMock,
+					title: titleMock,
+				},
+			},
+			{
+				value: `<div>${lessValue}</div>`,
+				attributes: {
+					alt: lessAltText,
+					'aria-label': lessAriaLabel,
+					'aria-valuetext': lessAriaValueText,
+					title: lessTitle,
+				},
+			},
+		];
+
+		langObjs.forEach(async (langObj) => {
+			const lang = {
+				[`showLessText`]: langObj,
+			};
+
+			let valueSatisfied = false;
+			let altSatisfied = false;
+			let labelSatisfied = false;
+			let valueTextSatisfied = false;
+			let titleSatisfied = false;
+
+			// @ts-ignore
+			const rendered = render(<Grid options={options} lang={lang} columns={2} rows={2} />);
+
+			const element = rendered.container.querySelector(selector);
+			expect(element).toBeInTheDocument();
+
+			let overflowButton = rendered.container.querySelector('.ss__grid__show-more-wrapper');
+
+			await userEvent.click(overflowButton!);
+
+			const lessElems = rendered.container.querySelectorAll(`[ss-lang=showLessText]`);
+
+			expect(lessElems.length).toBeGreaterThan(0);
+			lessElems.forEach((elem) => {
+				if (typeof langObj.value == 'function') {
+					expect(valueMock).toHaveBeenCalledWith({
+						limited: 4,
+						remainder: 4,
+					});
+
+					if (elem?.innerHTML == lessValue) {
+						valueSatisfied = true;
+					}
+				} else {
+					if (elem?.innerHTML == langObj.value) {
+						valueSatisfied = true;
+					}
+				}
+
+				if (elem.getAttribute('alt') == lessAltText) {
+					altSatisfied = true;
+				}
+				if (elem.getAttribute('aria-label') == lessAriaLabel) {
+					labelSatisfied = true;
+				}
+				if (elem.getAttribute('aria-valuetext') == lessAriaValueText) {
+					valueTextSatisfied = true;
+				}
+				if (elem.getAttribute('title') == lessTitle) {
+					titleSatisfied = true;
+				}
+			});
+
+			expect(valueSatisfied).toBeTruthy();
+			expect(altSatisfied).toBeTruthy();
+			expect(labelSatisfied).toBeTruthy();
+			expect(valueTextSatisfied).toBeTruthy();
+			expect(titleSatisfied).toBeTruthy();
+
+			jest.restoreAllMocks();
+		});
+	});
+});
+
+describe('Grid theming works', () => {
 	it('is themeable with ThemeProvider', () => {
 		const globalTheme = {
 			components: {

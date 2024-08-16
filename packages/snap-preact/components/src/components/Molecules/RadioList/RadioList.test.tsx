@@ -217,7 +217,7 @@ describe('RadioList Component', () => {
 		expect(optionElements).toBeInTheDocument();
 
 		expect(optionElements.innerHTML).toBe(
-			`<span class=\"ss__radio ss__radio-list__option__radio ss-stz164-I\" aria-label=\" unchecked radio button\" role=\"radio\" aria-checked=\"false\"><svg class=\"ss__icon ss__icon--bullet-o ss__radio__icon--inactive ss-1p5j2kw-Icon\" viewBox=\"0 0 56 56\" xmlns=\"http://www.w3.org/2000/svg\" name=\"ss__radio__icon--inactive\"><circle cx=\"28\" cy=\"28\" r=\"20\" stroke-width=\"3\" fill=\"white\"></circle></svg></span>`
+			`<span class=\"ss__radio ss__radio-list__option__radio ss-1n8vnmv\" ss-lang=\"radio\" aria-label=\" unchecked radio button\" role=\"radio\" aria-checked=\"false\"><svg ss-name=\"inactive\" class=\"ss__icon ss__icon--bullet-o ss__radio__icon--inactive ss-rbptfi\" viewBox=\"0 0 56 56\" xmlns=\"http://www.w3.org/2000/svg\"><circle cx=\"28\" cy=\"28\" r=\"20\" stroke-width=\"3\" fill=\"white\"></circle></svg></span>`
 		);
 
 		await userEvent.click(optionElements);
@@ -228,7 +228,7 @@ describe('RadioList Component', () => {
 	it('it can render Icon options', async () => {
 		const selectFn = jest.fn();
 
-		const iconOptions = [
+		const iconOptions: ListOption[] = [
 			{
 				label: '1 wide',
 				value: '1 wide',
@@ -270,7 +270,7 @@ describe('RadioList Component', () => {
 	it('it can hide Icon options', async () => {
 		const selectFn = jest.fn();
 
-		const iconOptions = [
+		const iconOptions: ListOption[] = [
 			{
 				label: '1 wide',
 				value: '1 wide',
@@ -348,6 +348,117 @@ describe('RadioList Component', () => {
 		const element = rendered.container.querySelector('.ss__radio-list');
 		expect(element).toBeInTheDocument();
 		expect(element).toHaveClass(className);
+	});
+
+	describe('RadioList lang works', () => {
+		const selector = '.ss__radio-list';
+
+		it('immediately available lang options', async () => {
+			const langOptions = ['title'];
+
+			//text attributes/values
+			const value = 'custom value';
+			const altText = 'custom alt';
+			const ariaLabel = 'custom label';
+			const ariaValueText = 'custom value text';
+			const title = 'custom title';
+
+			const valueMock = jest.fn(() => value);
+			const altMock = jest.fn(() => altText);
+			const labelMock = jest.fn(() => ariaLabel);
+			const valueTextMock = jest.fn(() => ariaValueText);
+			const titleMock = jest.fn(() => title);
+
+			const langObjs = [
+				{
+					value: value,
+					attributes: {
+						alt: altText,
+						'aria-label': ariaLabel,
+						'aria-valuetext': ariaValueText,
+						title: title,
+					},
+				},
+				{
+					value: valueMock,
+					attributes: {
+						alt: altMock,
+						'aria-label': labelMock,
+						'aria-valuetext': valueTextMock,
+						title: titleMock,
+					},
+				},
+				{
+					value: `<div>${value}</div>`,
+					attributes: {
+						alt: altText,
+						'aria-label': ariaLabel,
+						'aria-valuetext': ariaValueText,
+						title: title,
+					},
+				},
+			];
+
+			langOptions.forEach((option) => {
+				langObjs.forEach((langObj) => {
+					const lang = {
+						[`${option}`]: langObj,
+					};
+
+					let valueSatisfied = false;
+					let altSatisfied = false;
+					let labelSatisfied = false;
+					let valueTextSatisfied = false;
+					let titleSatisfied = false;
+
+					// @ts-ignore
+					const rendered = render(<RadioList options={options} lang={lang} />);
+
+					const element = rendered.container.querySelector(selector);
+					expect(element).toBeInTheDocument();
+
+					const langElems = rendered.container.querySelectorAll(`[ss-lang=${option}]`);
+					expect(langElems.length).toBeGreaterThan(0);
+					langElems.forEach((elem) => {
+						if (typeof langObj.value == 'function') {
+							expect(valueMock).toHaveBeenCalledWith({
+								options: options,
+								selectedOptions: undefined,
+							});
+
+							if (elem?.innerHTML == value) {
+								valueSatisfied = true;
+							}
+						} else {
+							if (elem?.innerHTML == langObj.value) {
+								valueSatisfied = true;
+							}
+						}
+
+						if (elem.getAttribute('alt') == altText) {
+							altSatisfied = true;
+						}
+						if (elem.getAttribute('aria-label') == ariaLabel) {
+							labelSatisfied = true;
+						}
+						if (elem.getAttribute('aria-valuetext') == ariaValueText) {
+							valueTextSatisfied = true;
+						}
+						if (elem.getAttribute('title') == title) {
+							titleSatisfied = true;
+						}
+					});
+
+					expect(valueSatisfied).toBeTruthy();
+					expect(altSatisfied).toBeTruthy();
+					expect(labelSatisfied).toBeTruthy();
+					expect(valueTextSatisfied).toBeTruthy();
+					expect(titleSatisfied).toBeTruthy();
+
+					jest.restoreAllMocks();
+				});
+			});
+		});
 	});
 
 	it('is themeable with ThemeProvider', () => {

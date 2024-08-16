@@ -6,6 +6,7 @@ import userEvent from '@testing-library/user-event';
 import { Checkbox } from './Checkbox';
 import { iconPaths } from '../../Atoms/Icon';
 import { ThemeProvider } from '../../../providers';
+import { A11Y_ATTRIBUTE } from '../../../hooks/useA11y';
 
 const globalTheme = {
 	components: {
@@ -91,12 +92,12 @@ describe('Checkbox Component', () => {
 
 			expect(checkbox).toBeInTheDocument();
 
-			expect(checkbox).toHaveAttribute('ssA11y');
+			expect(checkbox).toHaveAttribute(A11Y_ATTRIBUTE);
 
 			const rendered2 = render(<Checkbox checked disableA11y />);
 
 			const checkbox2 = rendered2.container.querySelector('.ss__checkbox');
-			expect(checkbox2).not.toHaveAttribute('ssA11y');
+			expect(checkbox2).not.toHaveAttribute(A11Y_ATTRIBUTE);
 		});
 
 		it('respects the disabled prop', () => {
@@ -146,6 +147,90 @@ describe('Checkbox Component', () => {
 			expect(rendered.container).toBeInTheDocument();
 			expect(checkboxElement?.classList.length).toBe(1);
 			expect(checkboxElement?.className.match(/disabled/)).toBeFalsy();
+		});
+
+		describe('Checkbox lang works', () => {
+			const selector = '.ss__checkbox';
+
+			it('immediately available lang options', async () => {
+				const langOptions = ['checkbox'];
+
+				//text attributes/values
+				const value = 'custom value';
+				const altText = 'custom alt';
+				const ariaLabel = 'custom label';
+				const ariaValueText = 'custom value text';
+				const title = 'custom title';
+
+				const valueMock = jest.fn(() => value);
+				const altMock = jest.fn(() => altText);
+				const labelMock = jest.fn(() => ariaLabel);
+				const valueTextMock = jest.fn(() => ariaValueText);
+				const titleMock = jest.fn(() => title);
+
+				const langObjs = [
+					{
+						value: value,
+						attributes: {
+							alt: altText,
+							'aria-label': ariaLabel,
+							'aria-valuetext': ariaValueText,
+							title: title,
+						},
+					},
+					{
+						value: valueMock,
+						attributes: {
+							alt: altMock,
+							'aria-label': labelMock,
+							'aria-valuetext': valueTextMock,
+							title: titleMock,
+						},
+					},
+					{
+						value: `<div>${value}</div>`,
+						attributes: {
+							alt: altText,
+							'aria-label': ariaLabel,
+							'aria-valuetext': ariaValueText,
+							title: title,
+						},
+					},
+				];
+
+				langOptions.forEach((option) => {
+					langObjs.forEach((langObj) => {
+						const lang = {
+							[`${option}`]: langObj,
+						};
+						// @ts-ignore
+						const rendered = render(<Checkbox lang={lang} />);
+
+						const element = rendered.container.querySelector(selector);
+						expect(element).toBeInTheDocument();
+						const langElem = rendered.container.querySelector(`[ss-lang=${option}]`);
+
+						expect(langElem).toBeInTheDocument();
+						if (typeof langObj.value == 'function') {
+							expect(valueMock).toHaveBeenCalledWith({
+								checkedState: false,
+								disabled: undefined,
+							});
+
+							expect(langElem?.innerHTML).toBe(value);
+						} else {
+							expect(langElem?.innerHTML).toBe(langObj.value);
+						}
+
+						expect(langElem).toHaveAttribute('alt', altText);
+						expect(langElem).toHaveAttribute('aria-label', ariaLabel);
+						expect(langElem).toHaveAttribute('aria-valuetext', ariaValueText);
+						expect(langElem).toHaveAttribute('title', title);
+
+						jest.restoreAllMocks();
+					});
+				});
+			});
 		});
 
 		it('is themeable with ThemeProvider', () => {

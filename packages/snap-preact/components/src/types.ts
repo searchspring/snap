@@ -8,10 +8,9 @@ import { MutableRef } from 'preact/hooks';
 import type { Snap, SnapTemplates } from '../../src';
 import type { DeepPartial } from '../../src/types';
 import type { FunctionalComponent, RenderableProps } from 'preact';
-import type { CSSInterpolation } from '@emotion/serialize/types';
+import type { CSSInterpolation } from '@emotion/serialize';
 
 export interface ComponentProps {
-	name?: string;
 	className?: string;
 	disableStyles?: boolean;
 	style?: CSSInterpolation;
@@ -20,6 +19,8 @@ export interface ComponentProps {
 	controller?: AbstractController;
 	snap?: Snap | SnapTemplates;
 	ref?: MutableRef<any> | React.RefObject<any> | ((e: any) => void);
+	name?: string;
+	treePath?: string;
 }
 
 export type ListOption = {
@@ -77,6 +78,11 @@ export type BreakpointsEntry = {
 };
 
 export type StylingCSS = Array<CSSInterpolation | SerializedStyles>;
+
+export type RootNodeProperties = {
+	css?: StylingCSS;
+	'ss-name'?: string;
+};
 
 export type SwatchOption = ListOption & {
 	backgroundImageUrl?: string;

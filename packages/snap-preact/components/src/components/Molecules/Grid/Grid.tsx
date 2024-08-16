@@ -4,12 +4,13 @@ import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
 
 import { Theme, useTheme, CacheProvider } from '../../../providers';
-import { ComponentProps, StylingCSS, ListOption, SwatchOption } from '../../../types';
+import { ComponentProps, RootNodeProperties, ListOption, SwatchOption } from '../../../types';
 import { useState } from 'react';
-import { useA11y } from '../../../hooks';
+import { Lang, useA11y, useLang } from '../../../hooks';
 import { Image, ImageProps } from '../../Atoms/Image';
 import { cloneWithProps, defined } from '../../../utilities';
 import { filters } from '@searchspring/snap-toolbox';
+import deepmerge from 'deepmerge';
 
 const CSS = {
 	Grid: ({ theme, columns, gapSize, disableOverflowAction }: Partial<GridProps>) =>
@@ -143,6 +144,7 @@ export function Grid(properties: GridProps): JSX.Element {
 		onOverflowButtonClick,
 		className,
 		style,
+		treePath,
 	} = props;
 
 	const subProps: GridSubProps = {
@@ -157,12 +159,13 @@ export function Grid(properties: GridProps): JSX.Element {
 			}),
 			// component theme overrides
 			theme: props?.theme,
+			treePath,
 		},
 	};
 
 	let selected = props.selected;
 
-	const styling: { css?: StylingCSS } = {};
+	const styling: RootNodeProperties = { 'ss-name': props.name };
 	if (!disableStyles) {
 		styling.css = [CSS.Grid({ theme, columns, gapSize, disableOverflowAction }), style];
 	} else if (style) {
@@ -210,6 +213,23 @@ export function Grid(properties: GridProps): JSX.Element {
 	const OverflowButtonElem = () => {
 		const showButton = hideShowLess ? (!limited ? false : true) : true;
 
+		//initialize lang
+		const defaultLang = {
+			showMoreText: {
+				value: `+ ${remainder}`,
+			},
+			showLessText: {
+				value: 'Less',
+			},
+		};
+
+		//deep merge with props.lang
+		const lang = deepmerge(defaultLang, props.lang || {});
+		const mergedLang = useLang(lang as any, {
+			limited,
+			remainder,
+		});
+
 		return showButton && remainder > 0 && options.length !== limit ? (
 			<div
 				className={`ss__grid__show-more-wrapper ${overflowButtonInGrid ? 'ss__grid__option' : ''}`}
@@ -217,13 +237,14 @@ export function Grid(properties: GridProps): JSX.Element {
 					!disableOverflowAction && setLimited(!limited);
 					onOverflowButtonClick && onOverflowButtonClick(e, Boolean(limited), remainder);
 				}}
+				{...(limited ? mergedLang.showMoreText.attributes : mergedLang.showLessText.attributes)}
 			>
 				{overflowButton ? (
-					cloneWithProps(overflowButton, { limited, remainder })
+					cloneWithProps(overflowButton, { limited, remainder, treePath })
 				) : limited ? (
-					<span className={'ss__grid__show-more'}>{`+ ${remainder}`}</span>
+					<span className={'ss__grid__show-more'} {...mergedLang.showMoreText.value}></span>
 				) : remainder ? (
-					<span className={'ss__grid__show-less'}>Less</span>
+					<span className={'ss__grid__show-less'} {...mergedLang.showLessText.value}></span>
 				) : (
 					<Fragment />
 				)}
@@ -294,6 +315,18 @@ export interface GridProps extends ComponentProps {
 	overflowButton?: JSX.Element;
 	overflowButtonInGrid?: boolean;
 	onOverflowButtonClick?: (e: React.MouseEvent<HTMLElement, MouseEvent>, status: boolean, remainder: number) => void;
+	lang?: Partial<GridLang>;
+}
+
+export interface GridLang {
+	showMoreText: Lang<{
+		limited: number | boolean;
+		remainder: number;
+	}>;
+	showLessText: Lang<{
+		limited: number | boolean;
+		remainder: number;
+	}>;
 }
 
 interface GridSubProps {

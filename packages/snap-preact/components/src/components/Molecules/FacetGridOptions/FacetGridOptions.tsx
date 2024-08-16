@@ -7,8 +7,10 @@ import { observer } from 'mobx-react';
 import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { mergeProps } from '../../../utilities';
 import { createHoverProps } from '../../../toolbox';
-import { ComponentProps, StylingCSS } from '../../../types';
+import { ComponentProps, RootNodeProperties } from '../../../types';
 import type { FacetValue, ValueFacet } from '@searchspring/snap-store-mobx';
+import { Lang, useLang } from '../../../hooks';
+import deepmerge from 'deepmerge';
 
 const CSS = {
 	grid: ({ columns, gapSize, gridSize, theme }: Partial<FacetGridOptionsProps>) =>
@@ -89,7 +91,7 @@ export const FacetGridOptions = observer((properties: FacetGridOptionsProps): JS
 		props.columns = 0;
 	}
 
-	const styling: { css?: StylingCSS } = {};
+	const styling: RootNodeProperties = { 'ss-name': props.name };
 	const stylingProps = props;
 
 	if (styleScript && !disableStyles) {
@@ -105,33 +107,51 @@ export const FacetGridOptions = observer((properties: FacetGridOptionsProps): JS
 	return facetValues?.length ? (
 		<CacheProvider>
 			<div {...styling} className={classnames('ss__facet-grid-options', className)}>
-				{(facetValues as FacetValue[]).map((value) => (
-					<a
-						className={classnames('ss__facet-grid-options__option', { 'ss__facet-grid-options__option--filtered': value.filtered })}
-						aria-label={
-							value.filtered
-								? `remove selected filter ${facet?.label || ''} - ${value.label}`
-								: facet?.label
-								? `filter by ${facet?.label} - ${value.label}`
-								: `filter by ${value.label}`
-						}
-						href={value.url?.link?.href}
-						{...valueProps}
-						onClick={(e: React.MouseEvent<Element, MouseEvent>) => {
-							value.url?.link?.onClick(e);
-							onClick && onClick(e);
-						}}
-						{...(previewOnFocus ? createHoverProps(() => value?.preview && value.preview()) : {})}
-					>
-						<span
-							className={classnames('ss__facet-grid-options__option__value', {
-								'ss__facet-grid-options__option__value--smaller': value.label.length > 3,
-							})}
+				{(facetValues as FacetValue[]).map((value) => {
+					//initialize lang
+					const defaultLang = {
+						gridOption: {
+							attributes: {
+								'aria-label': `${
+									value.filtered
+										? `remove selected filter ${facet?.label || ''} - ${value.label}`
+										: facet?.label
+										? `filter by ${facet?.label} - ${value.label}`
+										: `filter by ${value.label}`
+								}`,
+							},
+						},
+					};
+
+					//deep merge with props.lang
+					const lang = deepmerge(defaultLang, props.lang || {});
+					const mergedLang = useLang(lang as any, {
+						facet,
+						value,
+					});
+
+					return (
+						<a
+							className={classnames('ss__facet-grid-options__option', { 'ss__facet-grid-options__option--filtered': value.filtered })}
+							href={value.url?.link?.href}
+							{...valueProps}
+							onClick={(e: React.MouseEvent<Element, MouseEvent>) => {
+								value.url?.link?.onClick(e);
+								onClick && onClick(e);
+							}}
+							{...(previewOnFocus ? createHoverProps(() => value?.preview && value.preview()) : {})}
+							{...mergedLang.gridOption?.all}
 						>
-							{value.label}
-						</span>
-					</a>
-				))}
+							<span
+								className={classnames('ss__facet-grid-options__option__value', {
+									'ss__facet-grid-options__option__value--smaller': value.label.length > 3,
+								})}
+							>
+								{value.label}
+							</span>
+						</a>
+					);
+				})}
 			</div>
 		</CacheProvider>
 	) : (
@@ -149,4 +169,12 @@ export interface FacetGridOptionsProps extends ComponentProps {
 	facet?: ValueFacet;
 	previewOnFocus?: boolean;
 	valueProps?: any;
+	lang?: Partial<FacetGridOptionsLang>;
+}
+
+export interface FacetGridOptionsLang {
+	gridOption: Lang<{
+		facet: ValueFacet;
+		value: FacetValue;
+	}>;
 }

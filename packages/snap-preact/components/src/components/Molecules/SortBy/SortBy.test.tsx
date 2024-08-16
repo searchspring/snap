@@ -95,7 +95,136 @@ describe('SortBy Component', () => {
 
 		const element = rendered.container.querySelector('.ss__sortby__select');
 
-		expect(element?.classList).toHaveLength(2);
+		expect(element?.classList).toHaveLength(3);
+	});
+
+	describe('Select lang works', () => {
+		const selector = '.ss__sortby';
+
+		it('immediately available lang options', async () => {
+			const langOptions = ['label'];
+
+			const typeOptions = ['dropdown', 'list', 'radio'];
+
+			//text attributes/values
+			const value = 'custom value';
+			const altText = 'custom alt';
+			const ariaLabel = 'custom label';
+			const ariaValueText = 'custom value text';
+			const title = 'custom title';
+
+			const valueMock = jest.fn(() => value);
+			const altMock = jest.fn(() => altText);
+			const labelMock = jest.fn(() => ariaLabel);
+			const valueTextMock = jest.fn(() => ariaValueText);
+			const titleMock = jest.fn(() => title);
+
+			const langObjs = [
+				{
+					value: value,
+					attributes: {
+						alt: altText,
+						'aria-label': ariaLabel,
+						'aria-valuetext': ariaValueText,
+						title: title,
+					},
+				},
+				{
+					value: valueMock,
+					attributes: {
+						alt: altMock,
+						'aria-label': labelMock,
+						'aria-valuetext': valueTextMock,
+						title: titleMock,
+					},
+				},
+				{
+					value: `<div>${value}</div>`,
+					attributes: {
+						alt: altText,
+						'aria-label': ariaLabel,
+						'aria-valuetext': ariaValueText,
+						title: title,
+					},
+				},
+			];
+
+			langOptions.forEach((option) => {
+				typeOptions.forEach((typeOption) => {
+					langObjs.forEach((langObj) => {
+						const lang = {
+							[`${option}`]: langObj,
+						};
+
+						let valueSatisfied = false;
+						let altSatisfied = false;
+						let labelSatisfied = false;
+						let valueTextSatisfied = false;
+						let titleSatisfied = false;
+
+						// @ts-ignore
+						const rendered = render(<SortBy sorting={sortingStore} type={typeOption} lang={lang} />);
+						const element = rendered.container.querySelector(selector);
+						expect(element).toBeInTheDocument();
+
+						let langElems;
+						if (typeOption == 'dropdown') {
+							langElems = rendered.container.querySelectorAll(`[ss-lang=buttonLabel]`);
+						} else {
+							langElems = rendered.container.querySelectorAll(`[ss-lang=title]`);
+						}
+						expect(langElems.length).toBeGreaterThan(0);
+
+						langElems.forEach((elem) => {
+							if (typeof langObj.value == 'function') {
+								if (typeOption == 'dropdown') {
+									expect(valueMock).toHaveBeenCalledWith({
+										label: 'Sort By',
+										open: false,
+										options: sortingStore.options,
+										selectedOptions: [sortingStore.current],
+									});
+								} else {
+									expect(valueMock).toHaveBeenCalledWith({
+										options: sortingStore.options,
+										selectedOptions: [sortingStore.current],
+									});
+								}
+
+								if (elem?.innerHTML == value) {
+									valueSatisfied = true;
+								}
+							} else {
+								if (elem?.innerHTML == langObj.value) {
+									valueSatisfied = true;
+								}
+							}
+
+							if (elem.getAttribute('alt') == altText) {
+								altSatisfied = true;
+							}
+							if (elem.getAttribute('aria-label') == ariaLabel) {
+								labelSatisfied = true;
+							}
+							if (elem.getAttribute('aria-valuetext') == ariaValueText) {
+								valueTextSatisfied = true;
+							}
+							if (elem.getAttribute('title') == title) {
+								titleSatisfied = true;
+							}
+						});
+
+						expect(valueSatisfied).toBeTruthy();
+						expect(altSatisfied).toBeTruthy();
+						expect(labelSatisfied).toBeTruthy();
+						expect(valueTextSatisfied).toBeTruthy();
+						expect(titleSatisfied).toBeTruthy();
+
+						jest.restoreAllMocks();
+					});
+				});
+			});
+		});
 	});
 
 	it('is themeable with ThemeProvider', () => {

@@ -5,7 +5,7 @@ import classnames from 'classnames';
 import { useState } from 'preact/hooks';
 import { Icon, IconProps } from '../../Atoms/Icon/Icon';
 
-import { ComponentProps, StylingCSS } from '../../../types';
+import { ComponentProps, RootNodeProperties } from '../../../types';
 import { defined, mergeProps } from '../../../utilities';
 import { Theme, useTheme } from '../../../providers';
 
@@ -250,7 +250,7 @@ export const BranchOverride = (properties: BranchOverrideProps): JSX.Element => 
 
 	const props = mergeProps('branchOverride', globalTheme, defaultProps, properties);
 
-	const { branch, details, error, className, darkMode, disableStyles, style, styleScript, onRemoveClick } = props;
+	const { branch, details, error, className, darkMode, disableStyles, style, styleScript, onRemoveClick, treePath } = props;
 
 	const subProps: BranchOverrideSubProps = {
 		icon: {
@@ -265,6 +265,7 @@ export const BranchOverride = (properties: BranchOverrideProps): JSX.Element => 
 			}),
 			// component theme overrides
 			theme: props?.theme,
+			treePath,
 		},
 	};
 
@@ -276,7 +277,7 @@ export const BranchOverride = (properties: BranchOverrideProps): JSX.Element => 
 		setThemeName('failureTheme');
 	}
 
-	const styling: { css?: StylingCSS } = {};
+	const styling: RootNodeProperties = { 'ss-name': props.name };
 	const stylingProps = props;
 
 	if (styleScript && !disableStyles) {

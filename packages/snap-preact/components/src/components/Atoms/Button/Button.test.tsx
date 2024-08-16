@@ -5,6 +5,7 @@ import userEvent from '@testing-library/user-event';
 
 import { Button } from './Button';
 import { ThemeProvider } from '../../../providers';
+import { A11Y_ATTRIBUTE } from '../../../hooks/useA11y';
 
 describe('Button Component', () => {
 	describe('styled', () => {
@@ -81,9 +82,9 @@ describe('Button Component', () => {
 			const dummyButton = rendered.getByText('a dummy button');
 			dummyButton.focus();
 
-			const button = rendered.getByText(content);
+			const button = rendered.container.querySelector('.ss__button');
 
-			const styles = getComputedStyle(button);
+			const styles = getComputedStyle(button!);
 			expect(styles.color).toBe(color);
 			expect(styles.backgroundColor).toBe(backgroundColor);
 			expect(styles.borderColor).toBe(borderColor);
@@ -96,7 +97,7 @@ describe('Button Component', () => {
 
 			const rendered = render(<Button icon={icon}>{content}</Button>);
 
-			const button = rendered.getByText(content);
+			const button = rendered.container.querySelector('.ss__button');
 			const iconElem = rendered.container.querySelector(`.ss__button .ss__icon`);
 			expect(iconElem).toBeInTheDocument();
 			expect(button).toBeInTheDocument();
@@ -150,6 +151,87 @@ describe('Button Component', () => {
 			const buttonElement = rendered!.container.querySelector('.ss__button');
 			expect(buttonElement?.classList.length).toBe(1);
 			expect(buttonElement).toBeInTheDocument();
+		});
+
+		describe('Button lang works', () => {
+			const selector = '.ss__button';
+
+			it('immediately available lang options', async () => {
+				const langOptions = ['button'];
+
+				//text attributes/values
+				const value = 'custom value';
+				const altText = 'custom alt';
+				const ariaLabel = 'custom label';
+				const ariaValueText = 'custom value text';
+				const title = 'custom title';
+
+				const valueMock = jest.fn(() => value);
+				const altMock = jest.fn(() => altText);
+				const labelMock = jest.fn(() => ariaLabel);
+				const valueTextMock = jest.fn(() => ariaValueText);
+				const titleMock = jest.fn(() => title);
+
+				const langObjs = [
+					{
+						value: value,
+						attributes: {
+							alt: altText,
+							'aria-label': ariaLabel,
+							'aria-valuetext': ariaValueText,
+							title: title,
+						},
+					},
+					{
+						value: valueMock,
+						attributes: {
+							alt: altMock,
+							'aria-label': labelMock,
+							'aria-valuetext': valueTextMock,
+							title: titleMock,
+						},
+					},
+					{
+						value: `<div>${value}</div>`,
+						attributes: {
+							alt: altText,
+							'aria-label': ariaLabel,
+							'aria-valuetext': ariaValueText,
+							title: title,
+						},
+					},
+				];
+
+				langOptions.forEach((option) => {
+					langObjs.forEach((langObj) => {
+						const lang = {
+							[`${option}`]: langObj,
+						};
+						// @ts-ignore
+						const rendered = render(<Button lang={lang} />);
+
+						const element = rendered.container.querySelector(selector);
+						expect(element).toBeInTheDocument();
+						const langElem = rendered.container.querySelector(`[ss-lang=${option}]`);
+
+						expect(langElem).toBeInTheDocument();
+						if (typeof langObj.value == 'function') {
+							expect(valueMock).toHaveBeenLastCalledWith({});
+							expect(langElem?.innerHTML).toBe(value);
+						} else {
+							expect(valueMock).not.toHaveBeenCalled();
+							expect(langElem?.innerHTML).toBe(langObj.value);
+						}
+
+						expect(langElem).toHaveAttribute('alt', altText);
+						expect(langElem).toHaveAttribute('aria-label', ariaLabel);
+						expect(langElem).toHaveAttribute('aria-valuetext', ariaValueText);
+						expect(langElem).toHaveAttribute('title', title);
+
+						jest.clearAllMocks();
+					});
+				});
+			});
 		});
 
 		it('is themeable with ThemeProvider', () => {
@@ -275,12 +357,12 @@ describe('Button Component', () => {
 			const buttonElement = rendered.container.querySelector('.ss__button');
 			expect(buttonElement).toBeInTheDocument();
 
-			expect(buttonElement).toHaveAttribute('ssA11y');
+			expect(buttonElement).toHaveAttribute(A11Y_ATTRIBUTE);
 
 			const rendered2 = render(<Button content={content} disableA11y />);
 
 			const buttonElement2 = rendered2.container.querySelector('.ss__button');
-			expect(buttonElement2).not.toHaveAttribute('ssA11y');
+			expect(buttonElement2).not.toHaveAttribute(A11Y_ATTRIBUTE);
 		});
 
 		it('renders with children prop', () => {
