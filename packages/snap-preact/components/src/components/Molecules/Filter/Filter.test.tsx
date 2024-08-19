@@ -44,7 +44,13 @@ describe('Filter Component', () => {
 	});
 
 	it('renders with Filter prop data', () => {
-		const filters = new SearchFilterStore(services, mockData.filters!, mockData.meta);
+		const filters = new SearchFilterStore({
+			services,
+			data: {
+				search: mockData,
+				meta: mockData.meta,
+			},
+		});
 		const filter = filters[0];
 		const rendered = render(<Filter filter={filter} />);
 

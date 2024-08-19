@@ -18,8 +18,20 @@ describe('Search Header Component', () => {
 
 	const data = new MockData().searchMeta('dress');
 
-	const paginationStore = new SearchPaginationStore(searchConfig, services, data.pagination, data.meta);
-	const queryStore = new SearchQueryStore(services, data.search!);
+	const paginationStore = new SearchPaginationStore({
+		config: searchConfig,
+		services,
+		data: {
+			search: data,
+			meta: data.meta,
+		},
+	});
+	const queryStore = new SearchQueryStore({
+		services,
+		data: {
+			search: data,
+		},
+	});
 
 	it('renders with classname', () => {
 		const className = 'classy';
@@ -258,8 +270,8 @@ describe('Search Header Component', () => {
 		it('custom lang options', async () => {
 			//oq
 			const oqData = new MockData().searchMeta('oq');
-			const oqPaginationStore = new SearchPaginationStore(searchConfig, services, oqData.pagination, oqData.meta);
-			const oqQueryStore = new SearchQueryStore(services, oqData.search!);
+			const oqPaginationStore = new SearchPaginationStore({ config: searchConfig, services, data: { search: oqData, meta: oqData.meta } });
+			const oqQueryStore = new SearchQueryStore({ services, data: { search: oqData } });
 
 			const oqValue = 'oq value';
 			const oqAltText = 'oq alt';
@@ -295,8 +307,12 @@ describe('Search Header Component', () => {
 
 			//no results
 			const noResultsdata = new MockData().searchMeta('noResults');
-			const emptyPaginationStore = new SearchPaginationStore(searchConfig, services, noResultsdata.pagination, noResultsdata.meta);
-			const emptyQueryStore = new SearchQueryStore(services, noResultsdata.search!);
+			const emptyPaginationStore = new SearchPaginationStore({
+				config: searchConfig,
+				services,
+				data: { search: noResultsdata, meta: noResultsdata.meta },
+			});
+			const emptyQueryStore = new SearchQueryStore({ services, data: { search: noResultsdata } });
 
 			const emptyValue = 'empty value';
 			const emptyAltText = 'empty alt';
@@ -332,8 +348,8 @@ describe('Search Header Component', () => {
 
 			//did you mean
 			const dymData = new MockData().searchMeta('dym');
-			const dymPaginationStore = new SearchPaginationStore(searchConfig, services, dymData.pagination, dymData.meta);
-			const dymQueryStore = new SearchQueryStore(services, dymData.search!);
+			const dymPaginationStore = new SearchPaginationStore({ config: searchConfig, services, data: { search: dymData, meta: dymData.meta } });
+			const dymQueryStore = new SearchQueryStore({ services, data: { search: dymData } });
 
 			const dymValue = 'dym value';
 			const dymAltText = 'dym alt';
@@ -371,8 +387,20 @@ describe('Search Header Component', () => {
 
 	describe('No Results', () => {
 		const noResultsdata = new MockData().searchMeta('noResults');
-		const emptyPaginationStore = new SearchPaginationStore(searchConfig, services, noResultsdata.pagination, noResultsdata.meta);
-		const emptyQueryStore = new SearchQueryStore(services, noResultsdata.search!);
+		const emptyPaginationStore = new SearchPaginationStore({
+			config: searchConfig,
+			services,
+			data: {
+				search: noResultsdata,
+				meta: noResultsdata.meta,
+			},
+		});
+		const emptyQueryStore = new SearchQueryStore({
+			services,
+			data: {
+				search: noResultsdata,
+			},
+		});
 
 		it('renders the default no results title', async () => {
 			const rendered = render(<SearchHeader paginationStore={emptyPaginationStore} queryStore={emptyQueryStore} />);
@@ -418,8 +446,20 @@ describe('Search Header Component', () => {
 
 	describe('correctedQueryText', () => {
 		const oqData = new MockData().searchMeta('oq');
-		const oqPaginationStore = new SearchPaginationStore(searchConfig, services, oqData.pagination, oqData.meta);
-		const oqQueryStore = new SearchQueryStore(services, oqData.search!);
+		const oqPaginationStore = new SearchPaginationStore({
+			config: searchConfig,
+			services,
+			data: {
+				search: oqData,
+				meta: oqData.meta,
+			},
+		});
+		const oqQueryStore = new SearchQueryStore({
+			services,
+			data: {
+				search: oqData,
+			},
+		});
 
 		it('renders the default correctedQueryText', async () => {
 			const rendered = render(<SearchHeader paginationStore={oqPaginationStore} queryStore={oqQueryStore} />);
@@ -465,8 +505,20 @@ describe('Search Header Component', () => {
 
 	describe('didyoumean text', () => {
 		const dymData = new MockData().searchMeta('dym');
-		const dymPaginationStore = new SearchPaginationStore(searchConfig, services, dymData.pagination, dymData.meta);
-		const dymQueryStore = new SearchQueryStore(services, dymData.search!);
+		const dymPaginationStore = new SearchPaginationStore({
+			config: searchConfig,
+			services,
+			data: {
+				search: dymData,
+				meta: dymData.meta,
+			},
+		});
+		const dymQueryStore = new SearchQueryStore({
+			services,
+			data: {
+				search: dymData,
+			},
+		});
 
 		it('renders the default dymText', async () => {
 			const rendered = render(<SearchHeader paginationStore={dymPaginationStore} queryStore={dymQueryStore} />);
@@ -514,9 +566,25 @@ describe('Search Header Component', () => {
 
 	describe('landing page', () => {
 		const landingData = new MockData().searchMeta('landingPage');
-		const landingPaginationStore = new SearchPaginationStore(searchConfig, services, landingData.pagination, landingData.meta);
-		const landingQueryStore = new SearchQueryStore(services, landingData.search!);
-		const merchandisingStore = new SearchMerchandisingStore(services, landingData.merchandising!);
+		const landingPaginationStore = new SearchPaginationStore({
+			config: searchConfig,
+			services,
+			data: {
+				search: landingData,
+				meta: landingData.meta,
+			},
+		});
+		const landingQueryStore = new SearchQueryStore({
+			services,
+			data: {
+				search: landingData,
+			},
+		});
+		const merchandisingStore = new SearchMerchandisingStore({
+			data: {
+				search: landingData,
+			},
+		});
 
 		it('renders the default correctedQueryText', async () => {
 			const rendered = render(

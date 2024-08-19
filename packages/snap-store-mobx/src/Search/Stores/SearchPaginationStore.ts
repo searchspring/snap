@@ -1,8 +1,17 @@
 import { observable, action, computed, makeObservable } from 'mobx';
 
-import type { StoreConfigs, StoreServices, SearchStoreConfig } from '../../types';
-import type { SearchResponseModelPagination, MetaResponseModel } from '@searchspring/snapi-types';
+import type { StoreServices, SearchStoreConfig } from '../../types';
 import type { UrlManager } from '@searchspring/snap-url-manager';
+import { MetaResponseModel, SearchResponseModel } from '@searchspring/snapi-types';
+
+type SearchPaginationStoreConfig = {
+	config?: SearchStoreConfig; // optional due to AutocompleteStore using SearchPaginationStore
+	services: StoreServices;
+	data: {
+		search: SearchResponseModel;
+		meta: MetaResponseModel;
+	};
+};
 
 export class SearchPaginationStore {
 	public services: StoreServices;
@@ -13,29 +22,23 @@ export class SearchPaginationStore {
 	public defaultPageSize: number;
 	public totalResults: number;
 	public totalPages: number;
-	public controllerConfig: StoreConfigs;
+	public controllerConfig?: SearchStoreConfig;
 
-	constructor(
-		config: StoreConfigs,
-		services: StoreServices,
-		paginationData: SearchResponseModelPagination = {
-			page: undefined,
-			pageSize: undefined,
-			totalResults: undefined,
-			totalPages: undefined,
-		},
-		meta: MetaResponseModel
-	) {
-		const paginationSettings = (config as SearchStoreConfig)?.settings?.pagination;
+	constructor(params: SearchPaginationStoreConfig) {
+		const { services, data, config } = params || {};
+		const { search, meta } = data || {};
+		const { pagination } = search || {};
+
+		const paginationSettings = config?.settings?.pagination;
 
 		this.services = services;
 		this.controllerConfig = config;
 
-		this.page = paginationData.page!;
-		this.pageSize = paginationData.pageSize!;
-		this.totalResults = paginationData.totalResults!;
+		this.page = pagination?.page!;
+		this.pageSize = pagination?.pageSize!;
+		this.totalResults = pagination?.totalResults!;
 		this.defaultPageSize = meta?.pagination?.defaultPageSize!;
-		this.totalPages = paginationData.totalPages!;
+		this.totalPages = pagination?.totalPages!;
 
 		const pageSizeOptions = paginationSettings?.pageSizeOptions || [
 			{
@@ -81,7 +84,7 @@ export class SearchPaginationStore {
 	}
 
 	public get begin(): number {
-		if ((this.controllerConfig as SearchStoreConfig).settings?.infinite) {
+		if (this.controllerConfig?.settings?.infinite) {
 			return 1;
 		}
 		return this.pageSize * (this.page - 1) + 1;

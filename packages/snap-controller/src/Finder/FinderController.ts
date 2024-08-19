@@ -133,7 +133,7 @@ export class FinderController extends AbstractController {
 			await this.init();
 		}
 
-		if (this.store.state.persisted) {
+		if (this.store.persisted) {
 			return;
 		}
 
