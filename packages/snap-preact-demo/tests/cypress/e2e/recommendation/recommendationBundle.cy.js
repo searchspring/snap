@@ -103,11 +103,11 @@ describe('BundledRecommendations', () => {
 						.should('exist')
 						.should('have.text', 'Subtotal for 3 items');
 					//price
-					cy.get(`${config?.selectors?.recommendation.cta} .ss__price--strike`).should('exist').should('have.text', '$100.00');
+					cy.get(`${config?.selectors?.recommendation.cta} .ss__price--strike`).should('exist').should('have.text', '$125.00');
 					//strike
 					cy.get(`${config?.selectors?.recommendation.cta} .ss__recommendation-bundle__wrapper__cta__subtotal__price .ss__price`)
 						.should('exist')
-						.should('have.text', '$75.00');
+						.should('have.text', '$109.00');
 					//button
 					cy.get(`${config?.selectors?.recommendation.cta} .ss__recommendation-bundle__wrapper__cta__button`)
 						.should('exist')
@@ -115,8 +115,8 @@ describe('BundledRecommendations', () => {
 
 					cy.snapController(config?.selectors?.recommendation.controller).then(({ store }) => {
 						expect(store.cart.count).to.equal(3);
-						expect(store.cart.price).to.equal(75);
-						expect(store.cart.msrp).to.equal(100);
+						expect(store.cart.price).to.equal(109);
+						expect(store.cart.msrp).to.equal(125);
 					});
 				});
 		});
