@@ -88,6 +88,18 @@ import { Scrollbar } from 'swiper';
 <Recommendation controller={controller} modules={[Scrollbar]} scrollbar={{ draggable: true }} />
 ```
 
+### lazyRender 
+The `lazyRender` prop specifies an object of lazy rendering settings. The settings include an `enable` toggle (defaults to `true`) as well as an `offset` (default `"10%"`) to specify at what distance the component should start rendering relative to the bottom of the viewport.
+
+```jsx
+const customLazyRenderProps = {
+	enabled: true,
+	offset: "20px" // any css margin values accepted - px, %, etc...
+}
+
+<Recommendation controller={controller} lazyRender={ customLazyRenderProps } />
+```
+
 ### breakpoints
 An object that modifies the responsive behavior of the carousel at various viewports. 
 
