@@ -78,19 +78,19 @@ describe('BundledRecommendations', () => {
 					.should('exist')
 					.should('have.text', 'Subtotal for 4 items');
 				//price
-				cy.get(`${config?.selectors?.recommendation.cta} .ss__price--strike`).should('exist').should('have.text', '$150.00');
+				cy.get(`${config?.selectors?.recommendation.cta} .ss__price--strike`).should('exist').should('have.text', '$175.00');
 				//strike
 				cy.get(`${config?.selectors?.recommendation.cta} .ss__recommendation-bundle__wrapper__cta__subtotal__price .ss__price`)
 					.should('exist')
-					.should('have.text', '$123.00');
+					.should('have.text', '$157.00');
 				//button
 				cy.get(`${config?.selectors?.recommendation.cta} .ss__recommendation-bundle__wrapper__cta__button`)
 					.should('exist')
 					.should('have.text', 'Add All To Cart');
 
 				expect(store.cart.count).to.equal(4);
-				expect(store.cart.price).to.equal(123);
-				expect(store.cart.msrp).to.equal(150);
+				expect(store.cart.price).to.equal(157);
+				expect(store.cart.msrp).to.equal(175);
 			});
 
 			//check it is responsive to cartstore changes.
