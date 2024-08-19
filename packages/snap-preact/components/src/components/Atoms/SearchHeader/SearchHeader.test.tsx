@@ -270,8 +270,8 @@ describe('Search Header Component', () => {
 		it('custom lang options', async () => {
 			//oq
 			const oqData = new MockData().searchMeta('oq');
-			const oqPaginationStore = new SearchPaginationStore(searchConfig, services, oqData.pagination, oqData.meta);
-			const oqQueryStore = new SearchQueryStore(services, oqData.search!);
+			const oqPaginationStore = new SearchPaginationStore({ config: searchConfig, services, data: { search: oqData, meta: oqData.meta } });
+			const oqQueryStore = new SearchQueryStore({ services, data: { search: oqData } });
 
 			const oqValue = 'oq value';
 			const oqAltText = 'oq alt';
@@ -307,8 +307,12 @@ describe('Search Header Component', () => {
 
 			//no results
 			const noResultsdata = new MockData().searchMeta('noResults');
-			const emptyPaginationStore = new SearchPaginationStore(searchConfig, services, noResultsdata.pagination, noResultsdata.meta);
-			const emptyQueryStore = new SearchQueryStore(services, noResultsdata.search!);
+			const emptyPaginationStore = new SearchPaginationStore({
+				config: searchConfig,
+				services,
+				data: { search: noResultsdata, meta: noResultsdata.meta },
+			});
+			const emptyQueryStore = new SearchQueryStore({ services, data: { search: noResultsdata } });
 
 			const emptyValue = 'empty value';
 			const emptyAltText = 'empty alt';
@@ -344,8 +348,8 @@ describe('Search Header Component', () => {
 
 			//did you mean
 			const dymData = new MockData().searchMeta('dym');
-			const dymPaginationStore = new SearchPaginationStore(searchConfig, services, dymData.pagination, dymData.meta);
-			const dymQueryStore = new SearchQueryStore(services, dymData.search!);
+			const dymPaginationStore = new SearchPaginationStore({ config: searchConfig, services, data: { search: dymData, meta: dymData.meta } });
+			const dymQueryStore = new SearchQueryStore({ services, data: { search: dymData } });
 
 			const dymValue = 'dym value';
 			const dymAltText = 'dym alt';
