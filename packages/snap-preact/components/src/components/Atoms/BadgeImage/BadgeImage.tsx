@@ -5,7 +5,7 @@ import classnames from 'classnames';
 import { observer } from 'mobx-react';
 
 import { Theme, useTheme, CacheProvider } from '../../../providers';
-import { ComponentProps, StylingCSS } from '../../../types';
+import { ComponentProps, RootNodeProperties } from '../../../types';
 
 const CSS = {
 	BadgeImage: () => {
@@ -29,7 +29,7 @@ export const BadgeImage = observer((properties: BadgeImageProps): JSX.Element =>
 	};
 	const { label, url, tag, disableStyles, className, style } = props;
 
-	const styling: { css?: StylingCSS } = {};
+	const styling: RootNodeProperties = { 'ss-name': props.name };
 
 	if (!disableStyles) {
 		styling.css = [CSS.BadgeImage(), style];

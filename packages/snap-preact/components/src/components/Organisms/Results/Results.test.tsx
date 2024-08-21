@@ -12,14 +12,14 @@ import { MockData } from '@searchspring/snap-shared';
 const mockData = new MockData();
 const searchResponse = mockData.searchMeta();
 
-const mockResults = new SearchResultStore(
-	{ id: 'test' },
-	{ urlManager: new UrlManager(new UrlTranslator()) },
-	searchResponse.meta,
-	searchResponse.results,
-	searchResponse.pagination,
-	searchResponse.merchandising
-);
+const mockResults = new SearchResultStore({
+	config: { id: 'test' },
+	state: { loaded: false },
+	data: {
+		search: searchResponse,
+		meta: searchResponse.meta,
+	},
+});
 
 describe('Results Component', () => {
 	const DetailSlot = () => {

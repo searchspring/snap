@@ -5,11 +5,13 @@ import classnames from 'classnames';
 import { observer } from 'mobx-react';
 
 import { Theme, useTheme, CacheProvider } from '../../../providers';
-import { ComponentProps, StylingCSS } from '../../../types';
+import { ComponentProps, RootNodeProperties } from '../../../types';
 import { defined, mergeProps } from '../../../utilities';
 import { Checkbox, CheckboxProps } from '../Checkbox/Checkbox';
 import { createHoverProps } from '../../../toolbox';
 import type { FacetValue, ValueFacet } from '@searchspring/snap-store-mobx';
+import { Lang, useLang } from '../../../hooks';
+import deepmerge from 'deepmerge';
 
 const CSS = {
 	list: ({ theme, horizontal, hideCheckbox }: Partial<FacetListOptionsProps>) =>
@@ -50,7 +52,8 @@ export const FacetListOptions = observer((properties: FacetListOptionsProps): JS
 
 	const props = mergeProps('facetListOptions', globalTheme, defaultProps, properties);
 
-	const { values, hideCheckbox, hideCount, onClick, previewOnFocus, valueProps, facet, disableStyles, className, style, styleScript } = props;
+	const { values, hideCheckbox, hideCount, onClick, previewOnFocus, valueProps, facet, disableStyles, className, style, styleScript, treePath } =
+		props;
 
 	const subProps: FacetListOptionsSubProps = {
 		checkbox: {
@@ -64,10 +67,11 @@ export const FacetListOptions = observer((properties: FacetListOptionsProps): JS
 			}),
 			// component theme overrides
 			theme: props?.theme,
+			treePath,
 		},
 	};
 
-	const styling: { css?: StylingCSS } = {};
+	const styling: RootNodeProperties = { 'ss-name': props.name };
 	const stylingProps = props;
 
 	if (styleScript && !disableStyles) {
@@ -83,31 +87,49 @@ export const FacetListOptions = observer((properties: FacetListOptionsProps): JS
 	return facetValues?.length ? (
 		<CacheProvider>
 			<div {...styling} className={classnames('ss__facet-list-options', className)}>
-				{(facetValues as FacetValue[]).map((value) => (
-					<a
-						className={classnames('ss__facet-list-options__option', { 'ss__facet-list-options__option--filtered': value.filtered })}
-						aria-label={
-							value.filtered
-								? `remove selected filter ${facet?.label || ''} - ${value.label}`
-								: facet?.label
-								? `filter by ${facet?.label} - ${value.label}`
-								: `filter by ${value.label}`
-						}
-						href={value.url?.link?.href}
-						{...valueProps}
-						onClick={(e: React.MouseEvent<Element, MouseEvent>) => {
-							value.url?.link?.onClick(e);
-							onClick && onClick(e);
-						}}
-						{...(previewOnFocus ? createHoverProps(() => value?.preview && value.preview()) : {})}
-					>
-						{!hideCheckbox && <Checkbox {...subProps.checkbox} checked={value.filtered} disableA11y={true} />}
-						<span className="ss__facet-list-options__option__value">
-							{value.label}
-							{!hideCount && value?.count > 0 && <span className="ss__facet-list-options__option__value__count">({value.count})</span>}
-						</span>
-					</a>
-				))}
+				{(facetValues as FacetValue[]).map((value) => {
+					//initialize lang
+					const defaultLang = {
+						listOption: {
+							attributes: {
+								'aria-label': `${
+									value.filtered
+										? `remove selected filter ${facet?.label || ''} - ${value.label}`
+										: facet?.label
+										? `filter by ${facet?.label} - ${value.label}`
+										: `filter by ${value.label}`
+								}`,
+							},
+						},
+					};
+
+					//deep merge with props.lang
+					const lang = deepmerge(defaultLang, props.lang || {});
+					const mergedLang = useLang(lang as any, {
+						facet,
+						value,
+					});
+
+					return (
+						<a
+							className={classnames('ss__facet-list-options__option', { 'ss__facet-list-options__option--filtered': value.filtered })}
+							href={value.url?.link?.href}
+							{...valueProps}
+							onClick={(e: React.MouseEvent<Element, MouseEvent>) => {
+								value.url?.link?.onClick(e);
+								onClick && onClick(e);
+							}}
+							{...(previewOnFocus ? createHoverProps(() => value?.preview && value.preview()) : {})}
+							{...mergedLang.listOption?.all}
+						>
+							{!hideCheckbox && <Checkbox {...subProps.checkbox} checked={value.filtered} disableA11y={true} />}
+							<span className="ss__facet-list-options__option__value">
+								{value.label}
+								{!hideCount && value?.count > 0 && <span className="ss__facet-list-options__option__value__count">({value.count})</span>}
+							</span>
+						</a>
+					);
+				})}
 			</div>
 		</CacheProvider>
 	) : (
@@ -124,6 +146,14 @@ export interface FacetListOptionsProps extends ComponentProps {
 	onClick?: (e: React.MouseEvent) => void;
 	previewOnFocus?: boolean;
 	valueProps?: any;
+	lang?: Partial<FacetListOptionsLang>;
+}
+
+export interface FacetListOptionsLang {
+	listOption: Lang<{
+		facet: ValueFacet;
+		value: FacetValue;
+	}>;
 }
 
 interface FacetListOptionsSubProps {

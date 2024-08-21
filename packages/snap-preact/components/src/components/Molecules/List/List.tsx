@@ -4,13 +4,14 @@ import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
 
 import { Theme, useTheme, CacheProvider } from '../../../providers';
-import { ComponentProps, StylingCSS, ListOption } from '../../../types';
+import { ComponentProps, RootNodeProperties, ListOption } from '../../../types';
 import { defined, mergeProps } from '../../../utilities';
 import { useState } from 'react';
 import { Checkbox, CheckboxProps } from '../Checkbox';
-import { useA11y } from '../../../hooks';
+import { Lang, useA11y, useLang } from '../../../hooks';
 import { Icon, IconProps } from '../../Atoms/Icon';
 import { filters } from '@searchspring/snap-toolbox';
+import deepmerge from 'deepmerge';
 
 const CSS = {
 	List: ({ horizontal }: Partial<ListProps>) =>
@@ -89,6 +90,7 @@ export function List(properties: ListProps): JSX.Element {
 		className,
 		style,
 		styleScript,
+		treePath,
 	} = props;
 
 	let selected = props.selected;
@@ -103,6 +105,7 @@ export function List(properties: ListProps): JSX.Element {
 			}),
 			// component theme overrides
 			theme: props?.theme,
+			treePath,
 		},
 		icon: {
 			// default props
@@ -113,10 +116,11 @@ export function List(properties: ListProps): JSX.Element {
 			}),
 			// component theme overrides
 			theme: props?.theme,
+			treePath,
 		},
 	};
 
-	const styling: { css?: StylingCSS } = {};
+	const styling: RootNodeProperties = { 'ss-name': props.name };
 	const stylingProps = { ...props };
 
 	if (styleScript && !disableStyles) {
@@ -166,10 +170,24 @@ export function List(properties: ListProps): JSX.Element {
 		setSelection(newArray);
 	};
 
+	//initialize lang
+	const defaultLang = {};
+
+	//deep merge with props.lang
+	const lang = deepmerge(defaultLang, props.lang || {});
+	const mergedLang = useLang(lang as any, {
+		options,
+		selectedOptions: selection,
+	});
+
 	return typeof options == 'object' && options?.length ? (
 		<CacheProvider>
 			<div {...styling} className={classnames('ss__list', disabled ? 'ss__list--disabled' : '', className)}>
-				{titleText && <h5 className="ss__list__title">{titleText}</h5>}
+				{(titleText || lang?.title?.value) && (
+					<h5 className="ss__list__title" {...mergedLang.title?.all}>
+						{titleText}
+					</h5>
+				)}
 
 				<ul className={`ss__list__options`} role="listbox" aria-label={titleText}>
 					{options.map((option: ListOption) => {
@@ -220,6 +238,14 @@ export interface ListProps extends ComponentProps {
 	native?: boolean;
 	selected?: ListOption | ListOption[];
 	requireSelection?: boolean;
+	lang?: Partial<ListLang>;
+}
+
+export interface ListLang {
+	title?: Lang<{
+		options: ListOption[];
+		selectedOptions: ListOption[];
+	}>;
 }
 
 interface ListSubProps {

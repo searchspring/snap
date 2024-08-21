@@ -1,26 +1,26 @@
 import { observable, makeObservable } from 'mobx';
 import type { UrlManager } from '@searchspring/snap-url-manager';
-import type { AutocompleteStateStore } from './AutocompleteStateStore';
 import type { AutocompleteStoreConfig, StoreServices } from '../../types';
-import type { AutocompleteResponseModelAllOfAutocomplete, SearchResponseModelPagination, SearchResponseModelSearch } from '@searchspring/snapi-types';
+import { AutocompleteStateStore } from './AutocompleteStateStore';
+import { AutocompleteResponseModel } from '@searchspring/snapi-types';
 
+type AutocompleteTermStoreConfig = Omit<TermData, 'data'> & {
+	config: AutocompleteStoreConfig;
+	data: {
+		autocomplete: AutocompleteResponseModel;
+	};
+};
 export class AutocompleteTermStore extends Array<Term> {
 	static get [Symbol.species](): ArrayConstructor {
 		return Array;
 	}
 
-	constructor(
-		services: StoreServices,
-		autocomplete: AutocompleteResponseModelAllOfAutocomplete,
-		paginationData: SearchResponseModelPagination,
-		search: SearchResponseModelSearch,
-		resetTerms: () => void,
-		rootState: AutocompleteStateStore,
-		config: AutocompleteStoreConfig
-	) {
-		const suggestions = [...(autocomplete?.alternatives ? autocomplete.alternatives : []).map((term) => term.text!)];
+	constructor(params: AutocompleteTermStoreConfig) {
+		const { config, data } = params || {};
+		const { autocomplete, search, pagination } = data?.autocomplete || {};
+		const suggestions = [...(autocomplete?.alternatives ? autocomplete.alternatives : []).map((term) => term.text)] as string[];
 
-		if (config.settings?.integratedSpellCorrection) {
+		if (config?.settings?.integratedSpellCorrection) {
 			if (autocomplete?.correctedQuery && search?.query && autocomplete.correctedQuery.toLowerCase() != search.query.toLowerCase()) {
 				// the query was corrected
 				suggestions.unshift(autocomplete.correctedQuery);
@@ -31,10 +31,10 @@ export class AutocompleteTermStore extends Array<Term> {
 			if (autocomplete?.suggested?.text) {
 				// a suggestion for query
 				suggestions.unshift(autocomplete.suggested.text);
-			} else if (autocomplete?.correctedQuery && paginationData.totalResults) {
+			} else if (autocomplete?.correctedQuery && pagination?.totalResults) {
 				// the query was corrected
 				suggestions.unshift(autocomplete.correctedQuery);
-			} else if (autocomplete?.query && paginationData.totalResults) {
+			} else if (autocomplete?.query && pagination?.totalResults) {
 				// there were no suggestions or corrections,
 				suggestions.unshift(autocomplete?.query);
 			}
@@ -44,16 +44,16 @@ export class AutocompleteTermStore extends Array<Term> {
 
 		suggestions.map((term, index) =>
 			terms.push(
-				new Term(
-					services,
-					{
-						active: index === 0,
-						value: term,
+				new Term({
+					...params,
+					data: {
+						term: {
+							active: index === 0,
+							value: term,
+						},
+						terms,
 					},
-					terms,
-					resetTerms,
-					rootState
-				)
+				})
 			)
 		);
 
@@ -61,33 +61,47 @@ export class AutocompleteTermStore extends Array<Term> {
 	}
 }
 
+export type TermData = {
+	services: StoreServices;
+	functions: {
+		resetTerms: () => void;
+	};
+	state: {
+		autocomplete: AutocompleteStateStore;
+	};
+	data: {
+		term: {
+			active: boolean;
+			value: string;
+		};
+		terms: Term[];
+	};
+};
+
 export class Term {
 	public active: boolean;
 	public value: string;
 	public preview: () => void;
 	public url: UrlManager;
 
-	constructor(
-		services: StoreServices,
-		term: { active: boolean; value: string },
-		terms: Term[],
-		resetTerms: () => void,
-		rootState: AutocompleteStateStore
-	) {
-		this.active = term.active;
-		this.value = term.value;
+	constructor(params: TermData) {
+		const { services, functions, state, data } = params || {};
+		const { term, terms } = data || {};
+
+		this.active = term?.active;
+		this.value = term?.value;
 
 		this.url = services?.urlManager?.set({ query: this.value });
 
 		this.preview = () => {
-			resetTerms();
+			functions.resetTerms();
 			terms.map((term) => {
 				term.active = false;
 			});
 
 			this.active = true;
-			rootState.locks.terms.lock();
-			rootState.locks.facets.unlock();
+			state.autocomplete.locks.terms.lock();
+			state.autocomplete.locks.facets.unlock();
 
 			this.url?.set({ query: this.value }).go();
 		};

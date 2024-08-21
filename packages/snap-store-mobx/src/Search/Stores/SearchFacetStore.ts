@@ -5,90 +5,101 @@ import type { UrlManager } from '@searchspring/snap-url-manager';
 import type { StorageStore } from '../../Storage/StorageStore';
 import type { AutocompleteStoreConfig, SearchStoreConfig, StoreServices, FacetStoreConfig } from '../../types';
 import type {
-	MetaResponseModel,
 	MetaResponseModelFacet,
 	MetaResponseModelFacetDefaults,
 	MetaResponseModelFacetSlider,
 	MetaResponseModelFacetValueMultipleEnum,
 	MetaResponseModelFacetHierarchyAllOf,
-	SearchResponseModelPagination,
 	SearchResponseModelFacet,
 	SearchResponseModelFacetRange,
 	SearchResponseModelFacetValue,
 	SearchResponseModelFacetValueAllOf,
 	SearchResponseModelFacetValueAllOfValues,
 	SearchRequestModelFilterRangeAllOfValue,
-	SearchResponseModelMerchandising,
+	SearchResponseModel,
+	MetaResponseModel,
 } from '@searchspring/snapi-types';
+
+export type SearchFacetStoreConfig = {
+	config: SearchStoreConfig | AutocompleteStoreConfig;
+	stores: {
+		storage: StorageStore;
+	};
+	services: StoreServices;
+	data: {
+		search: SearchResponseModel;
+		meta: MetaResponseModel;
+	};
+};
 
 export class SearchFacetStore extends Array {
 	static get [Symbol.species](): ArrayConstructor {
 		return Array;
 	}
-	constructor(
-		config: SearchStoreConfig | AutocompleteStoreConfig,
-		services: StoreServices,
-		storage: StorageStore,
-		facetsData: SearchResponseModelFacet[] = [],
-		pagination: SearchResponseModelPagination = {},
-		meta: MetaResponseModel,
-		merchandising: SearchResponseModelMerchandising
-	) {
-		const facets = facetsData
-			.filter((facet: SearchResponseModelFacet & SearchResponseModelFacetValueAllOf) => {
-				const facetMeta = facet.field && meta.facets && (meta.facets[facet.field] as MetaResponseModelFacet & MetaResponseModelFacetDefaults);
 
-				// exclude facets that have no meta data
-				if (!facetMeta) return false;
+	constructor(params: SearchFacetStoreConfig) {
+		const config = params?.config || {};
+		const { services, stores, data } = params || {};
+		const { search, meta } = data || {};
+		const { facets, merchandising, pagination } = search || {};
+		const { storage } = stores || {};
 
-				// exclude facets that have mismatched meta data
-				if ((facetMeta.display == 'slider' && facet.type !== 'range') || (facet.type == 'range' && facetMeta.display !== 'slider')) {
-					return false;
-				}
+		const facetsArr =
+			facets
+				?.filter((facet: SearchResponseModelFacet & SearchResponseModelFacetValueAllOf) => {
+					const facetMeta = facet.field && meta.facets && (meta.facets[facet.field] as MetaResponseModelFacet & MetaResponseModelFacetDefaults);
 
-				// trim facets - remove facets that have no use
-				const facetConfig = config.settings?.facets?.fields && facet.field && config.settings?.facets?.fields[facet.field];
-				const shouldTrim = typeof facetConfig?.trim == 'boolean' ? facetConfig?.trim : config.settings?.facets?.trim;
-				if (shouldTrim) {
-					if (
-						facet.type === 'range' &&
-						(facet as SearchResponseModelFacetRange)?.range?.low == (facet as SearchResponseModelFacetRange)?.range?.high
-					) {
+					// exclude facets that have no meta data
+					if (!facetMeta) return false;
+
+					// exclude facets that have mismatched meta data
+					if ((facetMeta.display == 'slider' && facet.type !== 'range') || (facet.type == 'range' && facetMeta.display !== 'slider')) {
 						return false;
-					} else if (facet.values?.length == 0) {
-						return false;
-					} else if (!facet.filtered && facet.values?.length == 1) {
-						if (merchandising?.content?.inline) {
-							return facet.values[0].count! + merchandising.content?.inline.length != pagination.totalResults;
-						} else {
-							return facet.values[0].count != pagination.totalResults;
+					}
+
+					// trim facets - remove facets that have no use
+					const facetConfig = config.settings?.facets?.fields && facet.field && config.settings?.facets?.fields[facet.field];
+					const shouldTrim = typeof facetConfig?.trim == 'boolean' ? facetConfig?.trim : config.settings?.facets?.trim;
+					if (shouldTrim) {
+						if (
+							facet.type === 'range' &&
+							(facet as SearchResponseModelFacetRange)?.range?.low == (facet as SearchResponseModelFacetRange)?.range?.high
+						) {
+							return false;
+						} else if (facet.values?.length == 0) {
+							return false;
+						} else if (!facet.filtered && facet.values?.length == 1) {
+							if (merchandising?.content?.inline) {
+								return facet.values[0].count! + merchandising.content?.inline.length != pagination!.totalResults;
+							} else {
+								return facet.values[0].count != pagination!.totalResults;
+							}
 						}
 					}
-				}
 
-				return true;
-			})
-			.map((facet) => {
-				const facetMeta = facet.field && meta.facets && meta.facets[facet.field];
-				const facetConfig = deepmerge(
-					{ ...config.settings?.facets, fields: undefined },
-					(config.settings?.facets?.fields && facet.field && config.settings?.facets?.fields[facet.field]) || {}
-				);
-				delete facetConfig.fields;
+					return true;
+				})
+				.map((facet) => {
+					const facetMeta = facet.field && meta.facets && meta.facets[facet.field];
+					const facetConfig = deepmerge(
+						{ ...config.settings?.facets, fields: undefined },
+						(config.settings?.facets?.fields && facet.field && config.settings?.facets?.fields[facet.field]) || {}
+					);
+					delete facetConfig.fields;
 
-				switch (facet.type) {
-					case 'range':
-						return new RangeFacet(services, storage, facet, facetMeta || {}, facetConfig);
-					case 'value':
-					case 'range-buckets':
-					default:
-						return new ValueFacet(services, storage, facet, facetMeta || {}, facetConfig);
-				}
-			});
+					switch (facet.type) {
+						case 'range':
+							return new RangeFacet(services, storage, facet, facetMeta || {}, facetConfig);
+						case 'value':
+						case 'range-buckets':
+						default:
+							return new ValueFacet(services, storage, facet, facetMeta || {}, facetConfig);
+					}
+				}) || [];
 
 		// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 		// @ts-ignore
-		super(...facets);
+		super(...facetsArr);
 	}
 }
 

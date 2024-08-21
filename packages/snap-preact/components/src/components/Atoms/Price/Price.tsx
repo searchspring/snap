@@ -6,7 +6,7 @@ import classnames from 'classnames';
 
 import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { FormattedNumberProps } from '../FormattedNumber/FormattedNumber';
-import { StylingCSS } from '../../../types';
+import { RootNodeProperties } from '../../../types';
 import { mergeProps } from '../../../utilities';
 
 const CSS = {
@@ -62,7 +62,7 @@ export function Price(properties: PriceProps): JSX.Element {
 		});
 	}
 
-	const styling: { css?: StylingCSS } = {};
+	const styling: RootNodeProperties = { 'ss-name': props.name };
 	const stylingProps = props;
 
 	if (styleScript && !disableStyles) {
@@ -91,3 +91,4 @@ export interface PriceProps extends Omit<FormattedNumberProps, 'value'> {
 	value?: number;
 	lineThrough?: boolean;
 }
+export type PriceNames = 'price--msrp';

@@ -12,13 +12,15 @@ import { FacetSlider, FacetSliderProps } from '../../Molecules/FacetSlider';
 import { SearchInput, SearchInputProps } from '../../Molecules/SearchInput';
 import { Icon, IconProps, IconType } from '../../Atoms/Icon';
 import { Dropdown, DropdownProps } from '../../Atoms/Dropdown';
-import { ComponentProps, FacetDisplay, StylingCSS } from '../../../types';
+import { ComponentProps, FacetDisplay, RootNodeProperties } from '../../../types';
 import type { ValueFacet, RangeFacet, FacetHierarchyValue, FacetValue, FacetRangeValue } from '@searchspring/snap-store-mobx';
 
 import { defined, cloneWithProps, mergeProps } from '../../../utilities';
 import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { useA11y } from '../../../hooks/useA11y';
 import { FacetToggle, FacetToggleProps } from '../../Molecules/FacetToggle';
+import { Lang, useLang } from '../../../hooks';
+import deepmerge from 'deepmerge';
 
 const CSS = {
 	facet: ({ color, theme }: Partial<FacetProps>) =>
@@ -103,6 +105,7 @@ export const Facet = observer((properties: FacetProps): JSX.Element => {
 		className,
 		style,
 		styleScript,
+		treePath,
 	} = props;
 
 	const subProps: FacetSubProps = {
@@ -119,6 +122,7 @@ export const Facet = observer((properties: FacetProps): JSX.Element => {
 			}),
 			// component theme overrides
 			theme: props?.theme,
+			treePath,
 		},
 		icon: {
 			// default props
@@ -133,6 +137,7 @@ export const Facet = observer((properties: FacetProps): JSX.Element => {
 			}),
 			// component theme overrides
 			theme: props?.theme,
+			treePath,
 		},
 		showMoreLessIcon: {
 			// default props
@@ -147,6 +152,7 @@ export const Facet = observer((properties: FacetProps): JSX.Element => {
 			}),
 			// component theme overrides
 			theme: props?.theme,
+			treePath,
 		},
 		facetHierarchyOptions: {
 			// default props
@@ -162,6 +168,7 @@ export const Facet = observer((properties: FacetProps): JSX.Element => {
 			}),
 			// component theme overrides
 			theme: props?.theme,
+			treePath,
 		},
 		facetListOptions: {
 			// default props
@@ -177,6 +184,7 @@ export const Facet = observer((properties: FacetProps): JSX.Element => {
 			}),
 			// component theme overrides
 			theme: props?.theme,
+			treePath,
 		},
 		facetGridOptions: {
 			// default props
@@ -192,6 +200,7 @@ export const Facet = observer((properties: FacetProps): JSX.Element => {
 			}),
 			// component theme overrides
 			theme: props?.theme,
+			treePath,
 		},
 		facetPaletteOptions: {
 			// default props
@@ -207,6 +216,7 @@ export const Facet = observer((properties: FacetProps): JSX.Element => {
 			}),
 			// component theme overrides
 			theme: props?.theme,
+			treePath,
 		},
 		facetToggle: {
 			// default props
@@ -219,6 +229,7 @@ export const Facet = observer((properties: FacetProps): JSX.Element => {
 			}),
 			// component theme overrides
 			theme: props?.theme,
+			treePath,
 		},
 		facetSlider: {
 			// default props
@@ -231,6 +242,7 @@ export const Facet = observer((properties: FacetProps): JSX.Element => {
 			}),
 			// component theme overrides
 			theme: props?.theme,
+			treePath,
 		},
 		searchInput: {
 			// default props
@@ -243,6 +255,7 @@ export const Facet = observer((properties: FacetProps): JSX.Element => {
 			}),
 			// component theme overrides
 			theme: props?.theme,
+			treePath,
 		},
 	};
 
@@ -256,7 +269,7 @@ export const Facet = observer((properties: FacetProps): JSX.Element => {
 		limitedValues = (facet as ValueFacet)?.values;
 	}
 
-	const styling: { css?: StylingCSS } = {};
+	const styling: RootNodeProperties = { 'ss-name': props.name };
 	const stylingProps = { ...props, color };
 
 	if (styleScript && !disableStyles) {
@@ -289,6 +302,31 @@ export const Facet = observer((properties: FacetProps): JSX.Element => {
 		className,
 		...props,
 	};
+
+	//initialize lang
+	const defaultLang = {
+		showMoreText: {
+			value: facetContentProps.showMoreText,
+		},
+		showLessText: {
+			value: facetContentProps.showLessText,
+		},
+		dropdownButton: {
+			attributes: {
+				'aria-label': `currently ${facet?.collapsed ? 'collapsed' : 'open'} ${facet.label} facet dropdown ${
+					(facet as ValueFacet).values?.length ? (facet as ValueFacet).values?.length + ' options' : ''
+				}`,
+			},
+		},
+	};
+
+	//deep merge with props.lang
+	const lang = deepmerge(defaultLang, props.lang || {});
+	const mergedLang = useLang(lang as any, {
+		facet,
+	});
+	facetContentProps.lang = mergedLang;
+
 	if (justContent) {
 		return <FacetContent {...facetContentProps}></FacetContent>;
 	}
@@ -307,17 +345,16 @@ export const Facet = observer((properties: FacetProps): JSX.Element => {
 							ref={(e) => useA11y(e, disableCollapse ? -1 : 0)}
 							role="heading"
 							aria-level={3}
-							aria-label={`currently ${facet?.collapsed ? 'collapsed' : 'open'} ${facet.label} facet dropdown ${
-								(facet as ValueFacet).values?.length ? (facet as ValueFacet).values?.length + ' options' : ''
-							}`}
+							{...mergedLang.dropdownButton.attributes}
 						>
-							{facet?.label}
+							<span {...mergedLang.dropdownButton.value}>{facet?.label}</span>
 							{!disableCollapse && (
 								<Icon
 									{...subProps.icon}
 									{...(facet?.collapsed
 										? { ...(typeof iconExpand == 'string' ? { icon: iconExpand } : (iconExpand as Partial<IconProps>)) }
 										: { ...(typeof iconCollapse == 'string' ? { icon: iconCollapse } : (iconCollapse as Partial<IconProps>)) })}
+									name={facet?.collapsed ? 'expand' : 'collapse'}
 								/>
 							)}
 						</div>
@@ -343,13 +380,13 @@ const FacetContent = (props: any) => {
 		overflowSlot,
 		optionsSlot,
 		searchable,
-		showMoreText,
-		showLessText,
 		iconOverflowMore,
 		iconOverflowLess,
 		disableOverflow,
 		previewOnFocus,
 		valueProps,
+		treePath,
+		lang,
 	} = props;
 
 	return (
@@ -361,7 +398,7 @@ const FacetContent = (props: any) => {
 				{(() => {
 					//manual options component
 					if (optionsSlot) {
-						return cloneWithProps(optionsSlot, { facet, valueProps, limit, previewOnFocus });
+						return cloneWithProps(optionsSlot, { facet, valueProps, limit, previewOnFocus, treePath });
 					} else {
 						switch (facet?.display) {
 							case FacetDisplay.TOGGLE:
@@ -390,18 +427,16 @@ const FacetContent = (props: any) => {
 			{!disableOverflow && (facet as ValueFacet)?.overflow?.enabled && (
 				<div className="ss__facet__show-more-less" onClick={() => (facet as ValueFacet).overflow?.toggle()} ref={(e) => useA11y(e)}>
 					{overflowSlot ? (
-						cloneWithProps(overflowSlot, { facet })
+						cloneWithProps(overflowSlot, { facet, treePath })
 					) : (
 						<Fragment>
-							{
-								<Icon
-									{...subProps.showMoreLessIcon}
-									{...(((facet as ValueFacet).overflow?.remaining || 0) > 0
-										? { ...(typeof iconOverflowMore == 'string' ? { icon: iconOverflowMore } : (iconOverflowMore as Partial<IconProps>)) }
-										: { ...(typeof iconOverflowLess == 'string' ? { icon: iconOverflowLess } : (iconOverflowLess as Partial<IconProps>)) })}
-								/>
-							}
-							<span>{((facet as ValueFacet)?.overflow?.remaining || 0) > 0 ? showMoreText : showLessText}</span>
+							<Icon
+								{...subProps.showMoreLessIcon}
+								{...(((facet as ValueFacet).overflow?.remaining || 0) > 0
+									? { ...(typeof iconOverflowMore == 'string' ? { icon: iconOverflowMore } : (iconOverflowMore as Partial<IconProps>)) }
+									: { ...(typeof iconOverflowLess == 'string' ? { icon: iconOverflowLess } : (iconOverflowLess as Partial<IconProps>)) })}
+							/>
+							<span {...(((facet as ValueFacet)?.overflow?.remaining || 0) > 0 ? lang.showMoreText?.all : lang.showLessText?.all)}></span>
 						</Fragment>
 					)}
 				</div>
@@ -448,6 +483,19 @@ interface OptionalFacetProps extends ComponentProps {
 	searchable?: boolean;
 	justContent?: boolean;
 	horizontal?: boolean;
+	lang?: Partial<FacetLang>;
+}
+
+export interface FacetLang {
+	showMoreText: Lang<{
+		facet: ValueFacet | RangeFacet;
+	}>;
+	showLessText: Lang<{
+		facet: ValueFacet | RangeFacet;
+	}>;
+	dropdownButton: Lang<{
+		facet: ValueFacet | RangeFacet;
+	}>;
 }
 
 type FieldProps = {

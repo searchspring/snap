@@ -1,7 +1,7 @@
 import { h } from 'preact';
 import { render } from '@testing-library/preact';
 import userEvent from '@testing-library/user-event';
-import { useA11y } from './useA11y';
+import { A11Y_ATTRIBUTE, useA11y } from './useA11y';
 
 describe('useA11y hook', () => {
 	it('can use the hook and get the attributes and eventlisteners', () => {
@@ -16,7 +16,7 @@ describe('useA11y hook', () => {
 
 		const Element = rendered.container.querySelector('#findMe');
 		expect(Element).toBeInTheDocument();
-		expect(Element).toHaveAttribute('ssA11y');
+		expect(Element).toHaveAttribute(A11Y_ATTRIBUTE);
 		expect(Element).toHaveAttribute('tabIndex', '0');
 
 		userEvent.tab();
@@ -46,7 +46,7 @@ describe('useA11y hook', () => {
 
 		const Element = rendered.container.querySelector('#findMe');
 		expect(Element).toBeInTheDocument();
-		expect(Element).toHaveAttribute('ssA11y');
+		expect(Element).toHaveAttribute(A11Y_ATTRIBUTE);
 		expect(Element).toHaveAttribute('tabIndex', `${tabindex}`);
 
 		userEvent.tab();

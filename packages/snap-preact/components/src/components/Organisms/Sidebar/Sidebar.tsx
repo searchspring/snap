@@ -4,13 +4,15 @@ import classnames from 'classnames';
 import { observer } from 'mobx-react-lite';
 
 import { Theme, useTheme, CacheProvider } from '../../../providers';
-import { ComponentProps, StylingCSS } from '../../../types';
+import { ComponentProps, RootNodeProperties } from '../../../types';
 import { FilterSummary, FilterSummaryProps } from '../FilterSummary';
 import { SortBy, SortByProps } from '../../Molecules/SortBy';
 import { PerPage, PerPageProps } from '../../Molecules/PerPage';
 import { defined, mergeProps } from '../../../utilities';
 import { Facets, FacetsProps } from '../Facets';
 import { SearchController } from '@searchspring/snap-controller';
+import { Lang, useLang } from '../../../hooks';
+import deepmerge from 'deepmerge';
 
 const CSS = {
 	Sidebar: ({}: Partial<SidebarProps>) => css({}),
@@ -25,10 +27,22 @@ export const Sidebar = observer((properties: SidebarProps): JSX.Element => {
 
 	const props = mergeProps('sidebar', globalTheme, defaultProps, properties);
 
-	const { controller, hideTitle, titleText, hideFacets, hidePerPage, hideSortBy, hideFilterSummary, disableStyles, style, styleScript, className } =
-		props;
+	const {
+		controller,
+		hideTitle,
+		titleText,
+		hideFacets,
+		hidePerPage,
+		hideSortBy,
+		hideFilterSummary,
+		disableStyles,
+		style,
+		styleScript,
+		className,
+		treePath,
+	} = props;
 
-	const styling: { css?: StylingCSS } = {};
+	const styling: RootNodeProperties = { 'ss-name': props.name };
 	const stylingProps = props;
 
 	if (styleScript && !disableStyles) {
@@ -51,6 +65,7 @@ export const Sidebar = observer((properties: SidebarProps): JSX.Element => {
 			}),
 			// component theme overrides
 			theme: props?.theme,
+			treePath,
 		},
 		facets: {
 			// default props
@@ -63,6 +78,7 @@ export const Sidebar = observer((properties: SidebarProps): JSX.Element => {
 			}),
 			// component theme overrides
 			theme: props?.theme,
+			treePath,
 		},
 		sortBy: {
 			// default props
@@ -75,6 +91,7 @@ export const Sidebar = observer((properties: SidebarProps): JSX.Element => {
 			}),
 			// component theme overrides
 			theme: props?.theme,
+			treePath,
 		},
 		perPage: {
 			// default props
@@ -87,13 +104,25 @@ export const Sidebar = observer((properties: SidebarProps): JSX.Element => {
 			}),
 			// component theme overrides
 			theme: props?.theme,
+			treePath,
 		},
 	};
+
+	//initialize lang
+	const defaultLang: Partial<SidebarLang> = {
+		titleText: {
+			value: titleText,
+		},
+	};
+
+	//deep merge with props.lang
+	const lang = deepmerge(defaultLang, props.lang || {});
+	const mergedLang = useLang(lang as any, { controller: controller });
 
 	return controller?.store?.loaded && controller?.store?.pagination?.totalResults > 0 ? (
 		<CacheProvider>
 			<div {...styling} className={classnames('ss__sidebar', className)}>
-				{!hideTitle && <h4 className="ss__sidebar__title">{titleText}</h4>}
+				{!hideTitle && <h4 className="ss__sidebar__title" {...mergedLang.titleText?.all}></h4>}
 
 				{!hideFilterSummary && <FilterSummary {...subProps.filterSummary} />}
 
@@ -117,6 +146,13 @@ export interface SidebarProps extends ComponentProps {
 	hidePerPage?: boolean;
 	hideSortBy?: boolean;
 	hideFilterSummary?: boolean;
+	lang?: Partial<SidebarLang>;
+}
+
+export interface SidebarLang {
+	titleText: Lang<{
+		controller: SearchController;
+	}>;
 }
 
 interface SidebarSubProps {
