@@ -1,24 +1,7 @@
 import { TemplatesStore } from './TemplateStore';
-import { StorageStore } from '@searchspring/snap-store-mobx';
 import type { SnapTemplatesConfig } from '../SnapTemplate';
 
 describe('TemplateStore', () => {
-	// const config: SnapTemplatesConfig = {
-	//     // components: {},
-	//     // config: {
-	//     //     siteId: '8uyt2m',
-	//     //     currency: 'USD',
-	//     //     language: 'en',
-	//     // },
-	//     themes: {
-	//         global: {
-	//             extends: 'bocachica',
-	//             // style: '',
-	//             // variables: {},
-	//             // overrides: {},
-	//         },
-	//     }
-	// }
 	it('has expected defaults', () => {
 		const config: SnapTemplatesConfig = {
 			themes: {
