@@ -5,14 +5,16 @@ import classnames from 'classnames';
 import { observer } from 'mobx-react-lite';
 
 import { Theme, useTheme, CacheProvider } from '../../../providers';
-import { ComponentProps, StylingCSS } from '../../../types';
+import { ComponentProps, RootNodeProperties } from '../../../types';
 import { Slideout, SlideoutProps } from '../../Molecules/Slideout';
 import { defined, mergeProps } from '../../../utilities';
 import { SearchController } from '@searchspring/snap-controller';
 import { Sidebar, SidebarProps } from '../Sidebar';
 import { Button, ButtonProps } from '../../Atoms/Button';
-import { useA11y } from '../../../hooks';
+import { Lang, useA11y, useLang } from '../../../hooks';
 import { MutableRef, useRef } from 'preact/hooks';
+import { IconProps, IconType } from '../../Atoms/Icon';
+import deepmerge from 'deepmerge';
 
 const CSS = {
 	toolbar: () =>
@@ -86,9 +88,10 @@ export const MobileSidebar = observer((properties: MobileSidebarProps): JSX.Elem
 		disableStyles,
 		className,
 		style,
+		treePath,
 	} = props;
 
-	const styling: { css?: StylingCSS } = {};
+	const styling: RootNodeProperties = { 'ss-name': props.name };
 
 	if (!disableStyles) {
 		styling.css = [CSS.toolbar(), style];
@@ -109,6 +112,7 @@ export const MobileSidebar = observer((properties: MobileSidebarProps): JSX.Elem
 			}),
 			// component theme overrides
 			theme: props?.theme,
+			treePath,
 		},
 		button: {
 			// default props
@@ -120,6 +124,7 @@ export const MobileSidebar = observer((properties: MobileSidebarProps): JSX.Elem
 			}),
 			// component theme overrides
 			theme: props?.theme,
+			treePath,
 		},
 		sidebar: {
 			// default props
@@ -136,11 +141,40 @@ export const MobileSidebar = observer((properties: MobileSidebarProps): JSX.Elem
 			}),
 			// component theme overrides
 			theme: props?.theme,
+			treePath,
 		},
 	};
 
 	const closeButtonRef: MutableRef<any> = useRef();
 	const openButtonRef: MutableRef<any> = useRef();
+
+	//initialize lang
+	const defaultLang = {
+		openButtonText: {
+			value: openButtonText,
+		},
+		clearButtonText: {
+			value: clearButtonText,
+		},
+		applyButtonText: {
+			value: applyButtonText,
+		},
+		titleText: {
+			value: titleText,
+		},
+		closeButtonText: {
+			value: closeButtonText,
+			attributes: {
+				'aria-label': closeButtonText || `close ${openButtonText} button`,
+			},
+		},
+	};
+
+	//deep merge with props.lang
+	const lang = deepmerge(defaultLang, props.lang || {});
+	const mergedLang = useLang(lang as any, {
+		controller,
+	});
 
 	const Content = (props: any) => {
 		const { toggleActive } = props;
@@ -157,16 +191,12 @@ export const MobileSidebar = observer((properties: MobileSidebarProps): JSX.Elem
 			>
 				{!hideHeader && (
 					<div className="ss__mobile-sidebar__header">
-						<h4 aria-atomic="true" aria-live="polite" className="ss__mobile-sidebar__header__title">
-							{titleText}
-						</h4>
+						<h4 aria-atomic="true" aria-live="polite" className="ss__mobile-sidebar__header__title" {...mergedLang.titleText?.all}></h4>
 
 						{!hideCloseButton && (
 							<Button
 								className="ss__mobile-sidebar__header__close-button"
-								name="ss__mobile-sidebar__header__close-button"
 								disableStyles={true}
-								aria-label={closeButtonText || `close ${openButtonText} button`}
 								onClick={() => toggleActive()}
 								ref={(e: any) => {
 									if (e) {
@@ -174,39 +204,39 @@ export const MobileSidebar = observer((properties: MobileSidebarProps): JSX.Elem
 									}
 								}}
 								icon={closeButtonIcon}
+								lang={{ button: lang.closeButtonText }}
 								{...subProps.button}
-							>
-								{closeButtonText}
-							</Button>
+								name={'close'}
+							></Button>
 						)}
 					</div>
 				)}
 
-				<Sidebar className="ss__mobile-sidebar__body" name={'mobile-sidebar__body'} controller={controller} {...subProps.sidebar} />
+				<Sidebar className="ss__mobile-sidebar__body" controller={controller} {...subProps.sidebar} />
 
 				{!hideFooter && (
 					<div className="ss__mobile-sidebar__footer">
 						{!hideApplyButton && (
 							<Button
 								className="ss__mobile-sidebar__footer__apply-button"
-								name={'mobile-sidebar__footer__apply-button'}
-								content={applyButtonText}
 								icon={applyButtonIcon}
 								onClick={() => toggleActive()}
+								lang={{ button: lang.applyButtonText }}
 								{...subProps.button}
+								name={'apply'}
 							/>
 						)}
 						{!hideClearButton && (
 							<Button
 								className="ss__mobile-sidebar__footer__clear-button"
-								name={'mobile-sidebar__footer__clear-button'}
 								icon={clearButtonIcon}
-								content={clearButtonText}
 								onClick={() => {
 									controller?.urlManager.remove('filter').remove('page').go();
 									toggleActive();
 								}}
+								lang={{ button: lang.clearButtonText }}
 								{...subProps.button}
+								name={'clear'}
 							/>
 						)}
 					</div>
@@ -223,18 +253,17 @@ export const MobileSidebar = observer((properties: MobileSidebarProps): JSX.Elem
 					buttonContent={
 						<Button
 							className="ss__mobile-sidebar__slideout__button"
-							name={'mobile-sidebar__slideout__button'}
 							icon={openButtonIcon}
 							ref={openButtonRef}
-							{...subProps.button}
 							onClick={() => {
 								setTimeout(() => {
 									contentRef.current?.base?.focus();
 								});
 							}}
-						>
-							{openButtonText}
-						</Button>
+							{...subProps.button}
+							name={'slideout'}
+							lang={{ button: lang.openButtonText }}
+						></Button>
 					}
 					{...subProps.slideout}
 				>
@@ -250,11 +279,11 @@ export interface MobileSidebarProps extends ComponentProps {
 	titleText?: string;
 	openButtonText?: string;
 	clearButtonText?: string;
-	applyButtonIcon?: string;
-	clearButtonIcon?: string;
+	applyButtonIcon?: IconType | Partial<IconProps>;
+	clearButtonIcon?: IconType | Partial<IconProps>;
 	applyButtonText?: string;
-	closeButtonIcon?: string;
-	openButtonIcon?: string;
+	closeButtonIcon?: IconType | Partial<IconProps>;
+	openButtonIcon?: IconType | Partial<IconProps>;
 	hideHeader?: boolean;
 	hideFooter?: boolean;
 	hideFacets?: boolean;
@@ -266,6 +295,17 @@ export interface MobileSidebarProps extends ComponentProps {
 	hideCloseButton?: boolean;
 	closeButtonText?: string;
 	displayAt?: string;
+	lang?: Partial<MobileSidebarLang>;
+}
+
+export interface MobileSidebarLang {
+	openButtonText: Lang<never>;
+	clearButtonText: Lang<never>;
+	applyButtonText: Lang<never>;
+	titleText: Lang<{
+		controller: SearchController;
+	}>;
+	closeButtonText: Lang<never>;
 }
 
 interface MobileSidebarSubProps {

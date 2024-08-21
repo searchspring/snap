@@ -6,6 +6,7 @@ import userEvent from '@testing-library/user-event';
 import { Radio } from './Radio';
 import { iconPaths } from '../../Atoms/Icon';
 import { Theme, ThemeProvider } from '../../../providers';
+import { A11Y_ATTRIBUTE } from '../../../hooks/useA11y';
 
 describe('Radio Component', () => {
 	const globalTheme = {
@@ -94,12 +95,12 @@ describe('Radio Component', () => {
 
 			expect(element).toBeInTheDocument();
 
-			expect(element).toHaveAttribute('ssA11y');
+			expect(element).toHaveAttribute(A11Y_ATTRIBUTE);
 
 			const rendered2 = render(<Radio checked disableA11y />);
 
 			const element2 = rendered2.container.querySelector('.ss__radio');
-			expect(element2).not.toHaveAttribute('ssA11y');
+			expect(element2).not.toHaveAttribute(A11Y_ATTRIBUTE);
 		});
 
 		it('respects the disabled prop', () => {
@@ -159,6 +160,90 @@ describe('Radio Component', () => {
 			expect(rendered.container).toBeInTheDocument();
 			expect(RadioElement?.classList.length).toBe(1);
 			expect(RadioElement?.className.match(/disabled/)).toBeFalsy();
+		});
+
+		describe('Radio lang works', () => {
+			const selector = '.ss__radio';
+
+			it('immediately available lang options', async () => {
+				const langOptions = ['radio'];
+
+				//text attributes/values
+				const value = 'custom value';
+				const altText = 'custom alt';
+				const ariaLabel = 'custom label';
+				const ariaValueText = 'custom value text';
+				const title = 'custom title';
+
+				const valueMock = jest.fn(() => value);
+				const altMock = jest.fn(() => altText);
+				const labelMock = jest.fn(() => ariaLabel);
+				const valueTextMock = jest.fn(() => ariaValueText);
+				const titleMock = jest.fn(() => title);
+
+				const langObjs = [
+					{
+						value: value,
+						attributes: {
+							alt: altText,
+							'aria-label': ariaLabel,
+							'aria-valuetext': ariaValueText,
+							title: title,
+						},
+					},
+					{
+						value: valueMock,
+						attributes: {
+							alt: altMock,
+							'aria-label': labelMock,
+							'aria-valuetext': valueTextMock,
+							title: titleMock,
+						},
+					},
+					{
+						value: `<div>${value}</div>`,
+						attributes: {
+							alt: altText,
+							'aria-label': ariaLabel,
+							'aria-valuetext': ariaValueText,
+							title: title,
+						},
+					},
+				];
+
+				langOptions.forEach((option) => {
+					langObjs.forEach((langObj) => {
+						const lang = {
+							[`${option}`]: langObj,
+						};
+
+						// @ts-ignore
+						const rendered = render(<Radio lang={lang} />);
+
+						const element = rendered.container.querySelector(selector);
+						expect(element).toBeInTheDocument();
+						const langElem = rendered.container.querySelector(`[ss-lang=${option}]`);
+						console.log(option);
+						expect(langElem).toBeInTheDocument();
+						if (typeof langObj.value == 'function') {
+							expect(langElem?.innerHTML).toBe(value);
+							expect(valueMock).toHaveBeenCalledWith({
+								disabled: undefined,
+								checkedState: false,
+							});
+						} else {
+							expect(langElem?.innerHTML).toBe(langObj.value);
+						}
+
+						expect(langElem).toHaveAttribute('alt', altText);
+						expect(langElem).toHaveAttribute('aria-label', ariaLabel);
+						expect(langElem).toHaveAttribute('aria-valuetext', ariaValueText);
+						expect(langElem).toHaveAttribute('title', title);
+
+						jest.restoreAllMocks();
+					});
+				});
+			});
 		});
 
 		it('is themeable with ThemeProvider', () => {

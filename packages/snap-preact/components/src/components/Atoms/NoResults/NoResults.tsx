@@ -6,7 +6,7 @@ import classnames from 'classnames';
 
 import { Theme, useTheme, useSnap } from '../../../providers';
 import { cloneWithProps, mergeProps } from '../../../utilities';
-import { ComponentProps, StylingCSS } from '../../../types';
+import { ComponentProps, RootNodeProperties } from '../../../types';
 import { filters } from '@searchspring/snap-toolbox';
 import { useComponent } from '../../../hooks/useComponent';
 import { useCreateController } from '../../../hooks/useCreateController';
@@ -14,6 +14,10 @@ import type { RecommendationController, RecommendationControllerConfig } from '@
 import type { ResultComponent } from '../../../';
 import type { FunctionalComponent } from 'preact';
 import type { SnapTemplates } from '../../../../../src';
+import type { SearchController } from '@searchspring/snap-controller';
+import deepmerge from 'deepmerge';
+import { useLang } from '../../../hooks';
+import type { Lang } from '../../../hooks';
 
 const CSS = {
 	noResults: () => css({}),
@@ -66,9 +70,10 @@ export const NoResults = observer((properties: NoResultsProps): JSX.Element => {
 		className,
 		style,
 		styleScript,
+		treePath,
 	} = props;
 
-	const styling: { css?: StylingCSS } = {};
+	const styling: RootNodeProperties = { 'ss-name': props.name };
 	const stylingProps = props;
 
 	if (styleScript && !disableStyles) {
@@ -121,43 +126,67 @@ export const NoResults = observer((properties: NoResultsProps): JSX.Element => {
 
 	const RecommendationTemplateResultComponent = recommendationTemplateResultComponent as ResultComponent | undefined;
 
+	//deep merge with props.lang
+	const defaultLang: Partial<NoResultsLang> = {
+		suggestionsTitleText: {
+			value: suggestionsTitleText,
+		},
+		suggestionsList: {
+			value: `${
+				suggestionsList
+					? suggestionsList.map((suggestion: any) => `<li class="ss__no-results__suggestions__list__option">${suggestion}</li>`).join('')
+					: undefined
+			}
+			`,
+		},
+		contactsTitleText: {
+			value: contactsTitleText,
+		},
+		contactsList: {
+			value: `${
+				contactsList
+					? contactsList
+							.map(
+								(contact: NoResultsContact) =>
+									`<div class='ss__no-results__contact__detail ss__no-results__contact__detail--${filters.handleize(
+										contact.title
+									)}'><h4 class="ss__no-results__contact__detail__title">${contact.title}</h4><p class="ss__no-results__contact__detail__content">${
+										contact.content
+									}</p></div>`
+							)
+							.join('')
+					: undefined
+			}`,
+		},
+	};
+
+	const lang = deepmerge(defaultLang, props.lang || {});
+	const mergedLang = useLang(lang as any, {
+		controller: controller,
+	});
+
 	return (
 		<div className={classnames('ss__no-results', className)} {...styling}>
 			{contentSlot &&
 				(typeof contentSlot == 'string' ? (
 					<div className="ss__no-results__slot" dangerouslySetInnerHTML={{ __html: contentSlot }}></div>
 				) : (
-					<div className="ss__no-results__slot">{cloneWithProps(contentSlot, { controller })}</div>
+					<div className="ss__no-results__slot">{cloneWithProps(contentSlot, { controller, treePath })}</div>
 				))}
 
 			{!hideSuggestions && (suggestionsTitleText || suggestionsExist) && (
 				<div className="ss__no-results__suggestions">
-					{suggestionsTitleText && (
-						<h4 className="ss__no-results__suggestions__title" dangerouslySetInnerHTML={{ __html: suggestionsTitleText }}></h4>
-					)}
+					{suggestionsTitleText && <h4 className="ss__no-results__suggestions__title" {...mergedLang.suggestionsTitleText?.all}></h4>}
 
-					{suggestionsExist && (
-						<ul className="ss__no-results__suggestions__list">
-							{suggestionsList.map((suggestion: any) => (
-								<li className="ss__no-results__suggestions__list__option" dangerouslySetInnerHTML={{ __html: suggestion }}></li>
-							))}
-						</ul>
-					)}
+					{suggestionsExist && <ul className="ss__no-results__suggestions__list" {...mergedLang.suggestionsList?.all}></ul>}
 				</div>
 			)}
 
 			{!hideContact && (contactsTitleText || contactsExist) && (
 				<div className="ss__no-results__contact">
-					{contactsTitleText && <h4 className="ss__no-results__contact__title" dangerouslySetInnerHTML={{ __html: contactsTitleText }}></h4>}
+					{contactsTitleText && <h4 className="ss__no-results__contact__title" {...mergedLang.contactsTitleText?.all}></h4>}
 
-					{contactsExist &&
-						contactsList.map((contact: NoResultsContact) => (
-							<div className={`ss__no-results__contact__detail ss__no-results__contact__detail--${filters.handleize(contact.title)}`}>
-								<h4 className="ss__no-results__contact__detail__title" dangerouslySetInnerHTML={{ __html: contact.title }}></h4>
-
-								<p className="ss__no-results__contact__detail__content" dangerouslySetInnerHTML={{ __html: contact.content }}></p>
-							</div>
-						))}
+					{contactsExist && <div {...mergedLang.contactsList?.all}></div>}
 				</div>
 			)}
 
@@ -187,7 +216,7 @@ export interface NoResultsProps extends ComponentProps {
 	hideSuggestions?: boolean;
 	contactsTitleText?: string;
 	contactsList?: NoResultsContact[];
-
+	lang?: NoResultsLang;
 	templates?: {
 		recommendation?: {
 			enabled: boolean;
@@ -196,4 +225,11 @@ export interface NoResultsProps extends ComponentProps {
 			config?: Partial<RecommendationControllerConfig>;
 		};
 	};
+}
+
+export interface NoResultsLang {
+	suggestionsTitleText: Lang<{ controller: SearchController }>;
+	contactsTitleText: Lang<{ controller: SearchController }>;
+	contactsList: Lang<{ controller: SearchController }>;
+	suggestionsList: Lang<{ controller: SearchController }>;
 }

@@ -5,21 +5,18 @@ import { AbstractStore } from '../Abstract/AbstractStore';
 import { SearchPaginationStore } from '../Search/Stores';
 import { StorageStore } from '../Storage/StorageStore';
 import { FinderSelectionStore } from './Stores';
-import type { FinderStoreConfig, StoreServices, SelectedSelection, FinderStoreState } from '../types';
+import type { FinderStoreConfig, StoreServices, SelectedSelection } from '../types';
 import { UrlManager } from '@searchspring/snap-url-manager';
 import { MetaStore } from '../Meta/MetaStore';
 
-export class FinderStore extends AbstractStore {
+export class FinderStore extends AbstractStore<FinderStoreConfig> {
 	public services: StoreServices;
-	public config!: FinderStoreConfig;
 	public meta!: MetaStore;
 	public storage: StorageStore;
 	public persistedStorage!: StorageStore;
 	public pagination!: SearchPaginationStore;
 	public selections!: FinderSelectionStore;
-	public state: FinderStoreState = {
-		persisted: false,
-	};
+	public persisted: boolean = false;
 
 	constructor(config: FinderStoreConfig, services: StoreServices) {
 		super(config);
@@ -30,10 +27,10 @@ export class FinderStore extends AbstractStore {
 
 		this.services = services;
 
-		if (config.persist?.enabled) {
+		if (this.config.persist?.enabled) {
 			this.persistedStorage = new StorageStore({
 				type: 'local',
-				key: `ss-${config.id}-persisted`,
+				key: `ss-${this.config.id}-persisted`,
 			});
 		}
 
@@ -60,7 +57,7 @@ export class FinderStore extends AbstractStore {
 	public reset = (): void => {
 		if (this.config.persist?.enabled) {
 			this.persistedStorage?.clear();
-			this.state.persisted = false;
+			this.persisted = false;
 		}
 
 		if (this.services.urlManager.state.filter) {
@@ -86,7 +83,7 @@ export class FinderStore extends AbstractStore {
 				// if the config has not changed and the data is not expired then persist
 				if (stringifiedPersistedConfig === stringifiedConfig && !isExpired) {
 					this.update(data, selections);
-					this.state.persisted = true;
+					this.persisted = true;
 					this.services.urlManager.go();
 				} else {
 					this.reset();
@@ -98,15 +95,35 @@ export class FinderStore extends AbstractStore {
 	public update(data: SearchResponseModel & { meta?: MetaResponseModel }, selectedSelections?: SelectedSelection[]): void {
 		this.error = undefined;
 		this.loaded = !!data.pagination;
-		this.meta = new MetaStore(data.meta);
-		this.pagination = new SearchPaginationStore(this.config, this.services, data.pagination, this.meta.data);
-		this.selections = new FinderSelectionStore(this.config, this.services, {
-			state: this.state,
-			facets: data.facets || [],
-			meta: this.meta.data,
-			loading: this.loading,
-			storage: this.storage,
-			selections: selectedSelections || [],
+		this.meta = new MetaStore({
+			data: {
+				meta: data.meta!,
+			},
+		});
+		this.pagination = new SearchPaginationStore({
+			config: this.config,
+			services: this.services,
+			data: {
+				search: data,
+				meta: this.meta.data,
+			},
+		});
+
+		this.selections = new FinderSelectionStore({
+			config: this.config,
+			services: this.services,
+			stores: {
+				storage: this.storage,
+			},
+			state: {
+				persisted: this.persisted,
+				loading: this.loading,
+			},
+			data: {
+				search: data,
+				meta: this.meta.data,
+				selections: selectedSelections || [],
+			},
 		});
 
 		// providing access to response data without exposing it

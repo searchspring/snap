@@ -1,8 +1,7 @@
-import type { StoreServices } from '../../types';
 import type {
-	SearchResponseModelMerchandising,
 	SearchResponseModelMerchandisingContentInline,
 	SearchResponseModelMerchandisingCampaigns,
+	SearchResponseModel,
 } from '@searchspring/snapi-types';
 
 export enum ContentType {
@@ -15,6 +14,12 @@ export enum ContentType {
 
 export type BannerContent = Partial<Record<ContentType, Content>>;
 
+type SearchMerchandisingStoreConfig = {
+	data: {
+		search: SearchResponseModel;
+	};
+};
+
 export class SearchMerchandisingStore {
 	public redirect = '';
 	public content: BannerContent = {};
@@ -22,28 +27,29 @@ export class SearchMerchandisingStore {
 	public landingPage?: SearchResponseModelMerchandisingCampaigns;
 	public personalized?: boolean;
 
-	constructor(services: StoreServices, merchData: SearchResponseModelMerchandising) {
-		if (merchData) {
-			this.redirect = merchData.redirect || '';
+	constructor(params: SearchMerchandisingStoreConfig) {
+		const { merchandising } = params?.data?.search || {};
+		if (merchandising) {
+			this.redirect = merchandising.redirect || '';
 
-			if (merchData.content) {
+			if (merchandising.content) {
 				Object.values(ContentType).forEach((type) => {
-					if (merchData.content && merchData.content[type]) {
-						this.content[type] = new Content(merchData.content[type]!);
+					if (merchandising.content && merchandising.content[type]) {
+						this.content[type] = new Content(merchandising.content[type]!);
 					}
 				});
 			}
-			if (merchData.campaigns) {
-				this.campaigns = merchData.campaigns;
+			if (merchandising.campaigns) {
+				this.campaigns = merchandising.campaigns;
 				// if we find a 'landing-page', get landingPage details from merchandising.campaigns
-				merchData.campaigns.forEach((campaign) => {
+				merchandising.campaigns.forEach((campaign) => {
 					if (campaign.type == 'landing-page') {
 						this.landingPage = campaign;
 					}
 				});
 			}
 
-			if (merchData.personalized) this.personalized = merchData.personalized;
+			if (merchandising.personalized) this.personalized = merchandising.personalized;
 		}
 	}
 }

@@ -24,7 +24,7 @@ const autocompleteConfig = {
 
 describe('Autocomplete Store', () => {
 	let searchData: AutocompleteResponseModel & {
-		meta: MetaResponseModel & MetaResponseModelFacetDefaults;
+		meta: MetaResponseModel;
 	};
 
 	beforeEach(() => {

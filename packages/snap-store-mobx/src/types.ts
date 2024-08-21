@@ -6,6 +6,7 @@ import type {
 	MetaResponseModelBadgeTag,
 	SearchResponseModelResultBadges,
 } from '@searchspring/snapi-types';
+
 // Abstract
 export type StoreConfig = {
 	id: string;
@@ -162,10 +163,6 @@ export type SelectedSelection = {
 	selected: string;
 	data: SearchResponseModelFacetValueAllOfValues[];
 	facet: any;
-};
-
-export type FinderStoreState = {
-	persisted: boolean;
 };
 
 export type ResultBadge = MetaResponseModelBadgeTag & SearchResponseModelResultBadges;

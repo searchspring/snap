@@ -7,12 +7,14 @@ import { observer } from 'mobx-react-lite';
 import { filters } from '@searchspring/snap-toolbox';
 
 import { defined, mergeProps } from '../../../utilities';
-import { ComponentProps, StylingCSS } from '../../../types';
+import { ComponentProps, RootNodeProperties } from '../../../types';
 import { Icon, IconProps } from '../../Atoms/Icon';
 import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { createHoverProps } from '../../../toolbox';
 import type { FacetValue, ValueFacet } from '@searchspring/snap-store-mobx';
 import { Checkbox, CheckboxProps } from '../Checkbox';
+import { Lang, useLang } from '../../../hooks';
+import deepmerge from 'deepmerge';
 
 const CSS = {
 	palette: ({ columns, gapSize, gridSize, theme }: Partial<FacetPaletteOptionsProps>) =>
@@ -194,6 +196,7 @@ export const FacetPaletteOptions = observer((properties: FacetPaletteOptionsProp
 		className,
 		style,
 		styleScript,
+		treePath,
 	} = props;
 
 	if (horizontal) {
@@ -215,6 +218,7 @@ export const FacetPaletteOptions = observer((properties: FacetPaletteOptionsProp
 			}),
 			// component theme overrides
 			theme: props?.theme,
+			treePath,
 		},
 		checkbox: {
 			// default props
@@ -227,10 +231,11 @@ export const FacetPaletteOptions = observer((properties: FacetPaletteOptionsProp
 			}),
 			// component theme overrides
 			theme: props?.theme,
+			treePath,
 		},
 	};
 
-	const styling: { css?: StylingCSS } = {};
+	const styling: RootNodeProperties = { 'ss-name': props.name };
 	const stylingProps = props;
 
 	if (styleScript && !disableStyles) {
@@ -246,53 +251,71 @@ export const FacetPaletteOptions = observer((properties: FacetPaletteOptionsProp
 	return facetValues?.length ? (
 		<CacheProvider>
 			<div {...styling} className={classnames('ss__facet-palette-options', `ss__facet-palette-options--${layout?.toLowerCase()}`, className)}>
-				{(facetValues as FacetValue[]).map((value) => (
-					<a
-						className={classnames(
-							'ss__facet-palette-options__option',
-							{ 'ss__facet-palette-options__option--filtered': value.filtered },
-							`ss__facet-palette-options__option--${layout?.toLowerCase()}`
-						)}
-						aria-label={
-							value.filtered
-								? `remove selected filter ${facet?.label || ''} - ${value.label}`
-								: facet?.label
-									? `filter by ${facet?.label} - ${value.label}`
-									: `filter by ${value.label}`
-						}
-						href={value.url?.link?.href}
-						{...valueProps}
-						onClick={(e: React.MouseEvent<Element, MouseEvent>) => {
-							value.url?.link?.onClick(e);
-							onClick && onClick(e);
-						}}
-						{...(previewOnFocus ? createHoverProps(() => value?.preview && value.preview()) : {})}
-					>
-						{!hideCheckbox && <Checkbox {...subProps.checkbox} checked={value.filtered} disableA11y={true} />}
-						<div className="ss__facet-palette-options__option__wrapper">
-							<div
-								className={classnames(
-									'ss__facet-palette-options__option__palette',
-									`ss__facet-palette-options__option__palette--${filters.handleize(value.value)}`
-								)}
-								style={{
-									background:
-										colorMapping && colorMapping[value.label] && colorMapping[value.label].background
-											? colorMapping[value.label].background
-											: value.value,
-								}}
-							>
-								{!hideIcon && value.filtered && layout?.toLowerCase() == 'grid' && <Icon {...subProps.icon} />}
+				{(facetValues as FacetValue[]).map((value) => {
+					//initialize lang
+					const defaultLang = {
+						paletteOption: {
+							attributes: {
+								'aria-label': `${
+									value.filtered
+										? `remove selected filter ${facet?.label || ''} - ${value.label}`
+										: facet?.label
+										? `filter by ${facet?.label} - ${value.label}`
+										: `filter by ${value.label}`
+								}`,
+							},
+						},
+					};
+
+					//deep merge with props.lang
+					const lang = deepmerge(defaultLang, props.lang || {});
+					const mergedLang = useLang(lang as any, {
+						facet,
+						value,
+					});
+
+					return (
+						<a
+							className={classnames(
+								'ss__facet-palette-options__option',
+								{ 'ss__facet-palette-options__option--filtered': value.filtered },
+								`ss__facet-palette-options__option--${layout?.toLowerCase()}`
+							)}
+							href={value.url?.link?.href}
+							{...valueProps}
+							onClick={(e: React.MouseEvent<Element, MouseEvent>) => {
+								value.url?.link?.onClick(e);
+								onClick && onClick(e);
+							}}
+							{...(previewOnFocus ? createHoverProps(() => value?.preview && value.preview()) : {})}
+							{...mergedLang.paletteOption?.all}
+						>
+							{!hideCheckbox && <Checkbox {...subProps.checkbox} checked={value.filtered} disableA11y={true} />}
+							<div className="ss__facet-palette-options__option__wrapper">
+								<div
+									className={classnames(
+										'ss__facet-palette-options__option__palette',
+										`ss__facet-palette-options__option__palette--${filters.handleize(value.value)}`
+									)}
+									style={{
+										background:
+											colorMapping && colorMapping[value.label] && colorMapping[value.label].background
+												? colorMapping[value.label].background
+												: value.value,
+									}}
+								>
+									{!hideIcon && value.filtered && layout?.toLowerCase() == 'grid' && <Icon {...subProps.icon} />}
+								</div>
 							</div>
-						</div>
-						{!hideLabel && (
-							<span className="ss__facet-palette-options__option__value">
-								{colorMapping && colorMapping[value.label] && colorMapping[value.label].label ? colorMapping[value.label].label : value.label}
-							</span>
-						)}
-						{!hideCount && value?.count > 0 && <span className="ss__facet-palette-options__option__value__count">({value.count})</span>}
-					</a>
-				))}
+							{!hideLabel && (
+								<span className="ss__facet-palette-options__option__value">
+									{colorMapping && colorMapping[value.label] && colorMapping[value.label].label ? colorMapping[value.label].label : value.label}
+								</span>
+							)}
+							{!hideCount && value?.count > 0 && <span className="ss__facet-palette-options__option__value__count">({value.count})</span>}
+						</a>
+					);
+				})}
 			</div>
 		</CacheProvider>
 	) : (
@@ -321,6 +344,14 @@ export interface FacetPaletteOptionsProps extends ComponentProps {
 			background?: string;
 		};
 	};
+	lang?: Partial<FacetPaletteOptionsLang>;
+}
+
+export interface FacetPaletteOptionsLang {
+	paletteOption: Lang<{
+		facet: ValueFacet;
+		value: FacetValue;
+	}>;
 }
 
 interface FacetPaletteOptionsSubProps {

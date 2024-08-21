@@ -7,9 +7,12 @@ import { observer } from 'mobx-react';
 import { Filter, FilterProps } from '../../Molecules/Filter';
 import { defined, mergeProps } from '../../../utilities';
 import { Theme, useTheme, CacheProvider } from '../../../providers';
-import { ComponentProps, StylingCSS } from '../../../types';
+import { ComponentProps, RootNodeProperties } from '../../../types';
 import type { SearchController, AutocompleteController } from '@searchspring/snap-controller';
 import type { Filter as FilterType } from '@searchspring/snap-store-mobx';
+import { IconProps, IconType } from '../../Atoms/Icon';
+import { Lang, useLang } from '../../../hooks';
+import deepmerge from 'deepmerge';
 
 const CSS = {
 	filterSummary: ({}: Partial<FilterSummaryProps>) =>
@@ -53,10 +56,12 @@ export const FilterSummary = observer((properties: FilterSummaryProps): JSX.Elem
 		className,
 		style,
 		styleScript,
+		treePath,
 	} = props;
 
 	const subProps: FilterSummarySubProps = {
 		filter: {
+			name: 'filter',
 			// default props
 			className: 'ss__filter-summary__filter',
 			// global theme
@@ -70,10 +75,11 @@ export const FilterSummary = observer((properties: FilterSummaryProps): JSX.Elem
 			}),
 			// component theme overrides
 			theme: props.theme,
+			treePath,
 		},
 	};
 
-	const styling: { css?: StylingCSS } = {};
+	const styling: RootNodeProperties = { 'ss-name': props.name };
 	const stylingProps = props;
 
 	if (styleScript && !disableStyles) {
@@ -84,10 +90,23 @@ export const FilterSummary = observer((properties: FilterSummaryProps): JSX.Elem
 		styling.css = [style];
 	}
 
+	//initialize lang
+	const defaultLang = {
+		title: {
+			value: title,
+		},
+	};
+
+	//deep merge with props.lang
+	const lang = deepmerge(defaultLang, props.lang || {});
+	const mergedLang = useLang(lang as any, {
+		filters,
+	});
+
 	return filters?.length ? (
 		<CacheProvider>
 			<div {...styling} className={classnames('ss__filter-summary', className)}>
-				<div className="ss__filter-summary__title">{title}</div>
+				<div className="ss__filter-summary__title" {...mergedLang.title?.all}></div>
 
 				{filters.map((filter) => (
 					<Filter {...subProps.filter} filter={filter} onClick={(e) => onClick && onClick(e, filter)} />
@@ -96,6 +115,7 @@ export const FilterSummary = observer((properties: FilterSummaryProps): JSX.Elem
 				{!hideClearAll && (
 					<Filter
 						{...subProps.filter}
+						name={'clear-all'}
 						icon={clearAllIcon}
 						className={`${subProps?.filter?.className} ss__filter-summary__clear-all`}
 						hideFacetLabel
@@ -113,8 +133,8 @@ export const FilterSummary = observer((properties: FilterSummaryProps): JSX.Elem
 export interface FilterSummaryProps extends ComponentProps {
 	filters?: FilterType[];
 	title?: string;
-	filterIcon?: string;
-	clearAllIcon?: string;
+	filterIcon?: IconType | Partial<IconProps>;
+	clearAllIcon?: IconType | Partial<IconProps>;
 	separator?: string;
 	hideFacetLabel?: boolean;
 	clearAllLabel?: string;
@@ -122,6 +142,13 @@ export interface FilterSummaryProps extends ComponentProps {
 	onClick?: (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>, filterFilter: FilterType) => void;
 	onClearAllClick?: (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => void;
 	controller?: SearchController | AutocompleteController;
+	lang?: Partial<FilterSummaryLang>;
+}
+
+export interface FilterSummaryLang {
+	title: Lang<{
+		filters: FilterType[];
+	}>;
 }
 
 interface FilterSummarySubProps {

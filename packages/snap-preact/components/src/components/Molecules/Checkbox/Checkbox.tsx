@@ -5,11 +5,13 @@ import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
 import { observer } from 'mobx-react';
 
-import { ComponentProps, StylingCSS } from '../../../types';
+import { ComponentProps, RootNodeProperties } from '../../../types';
 import { defined, mergeProps } from '../../../utilities';
 import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { Icon, IconProps, IconType } from '../../Atoms/Icon';
 import { useA11y } from '../../../hooks/useA11y';
+import { Lang, useLang } from '../../../hooks';
+import deepmerge from 'deepmerge';
 
 const CSS = {
 	checkbox: ({ size, color, theme }: Partial<CheckboxProps>) => {
@@ -60,6 +62,7 @@ export const Checkbox = observer((properties: CheckboxProps): JSX.Element => {
 		style,
 		styleScript,
 		theme,
+		treePath,
 	} = props;
 
 	const pixelSize = isNaN(Number(size)) ? size : `${size}px`;
@@ -80,6 +83,7 @@ export const Checkbox = observer((properties: CheckboxProps): JSX.Element => {
 			}),
 			// component theme overrides
 			theme: props.theme,
+			treePath,
 		},
 	};
 
@@ -105,7 +109,7 @@ export const Checkbox = observer((properties: CheckboxProps): JSX.Element => {
 		}
 	};
 
-	const styling: { css?: StylingCSS } = {};
+	const styling: RootNodeProperties = { 'ss-name': props.name };
 	const stylingProps = props;
 
 	if (styleScript && !disableStyles) {
@@ -119,6 +123,22 @@ export const Checkbox = observer((properties: CheckboxProps): JSX.Element => {
 	} else if (style) {
 		styling.css = [style];
 	}
+
+	//initialize lang
+	const defaultLang = {
+		checkbox: {
+			attributes: {
+				'aria-label': `${disabled ? 'disabled' : ''} ${checkedState ? 'checked' : 'unchecked'} checkbox`,
+			},
+		},
+	};
+
+	//deep merge with props.lang
+	const lang = deepmerge(defaultLang, props.lang || {});
+	const mergedLang = useLang(lang as any, {
+		checkedState,
+		disabled,
+	});
 
 	return (
 		<CacheProvider>
@@ -138,9 +158,9 @@ export const Checkbox = observer((properties: CheckboxProps): JSX.Element => {
 					className={classnames('ss__checkbox', { 'ss__checkbox--disabled': disabled }, className)}
 					onClick={(e) => clickFunc(e)}
 					ref={(e) => (!disableA11y ? useA11y(e) : null)}
-					aria-label={`${disabled ? 'disabled' : ''} ${checkedState ? 'checked' : 'unchecked'} checkbox`}
 					role="checkbox"
 					aria-checked={checkedState}
+					{...mergedLang.checkbox?.all}
 				>
 					{checkedState ? (
 						<Icon {...subProps.icon} {...(typeof icon == 'string' ? { icon: icon } : (icon as Partial<IconProps>))} />
@@ -167,4 +187,12 @@ export interface CheckboxProps extends ComponentProps {
 	startChecked?: boolean;
 	native?: boolean;
 	disableA11y?: boolean;
+	lang?: Partial<CheckboxLang>;
+}
+
+export interface CheckboxLang {
+	checkbox: Lang<{
+		checkedState: boolean;
+		disabled: boolean;
+	}>;
 }

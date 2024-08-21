@@ -8,7 +8,7 @@ import { observer } from 'mobx-react';
 import { Facet, FacetProps } from '../Facet';
 import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { defined, mergeProps } from '../../../utilities';
-import { ComponentProps, StylingCSS } from '../../../types';
+import { ComponentProps, RootNodeProperties } from '../../../types';
 import type { SearchController, AutocompleteController } from '@searchspring/snap-controller';
 import type { ValueFacet, RangeFacet } from '@searchspring/snap-store-mobx';
 
@@ -25,7 +25,7 @@ export const Facets = observer((properties: FacetsProps): JSX.Element => {
 
 	let props = mergeProps('facets', globalTheme, defaultProps, properties);
 
-	const { limit, onFacetOptionClick, disableStyles, className, style, styleScript, controller } = props;
+	const { limit, onFacetOptionClick, disableStyles, className, style, styleScript, controller, treePath } = props;
 
 	const facetClickEvent = (e: React.MouseEvent<Element, MouseEvent>) => {
 		onFacetOptionClick && onFacetOptionClick(e);
@@ -76,10 +76,11 @@ export const Facets = observer((properties: FacetsProps): JSX.Element => {
 			}),
 			// component theme overrides
 			theme: props.theme,
+			treePath,
 		},
 	};
 
-	const styling: { css?: StylingCSS } = {};
+	const styling: RootNodeProperties = { 'ss-name': props.name };
 	const stylingProps = props;
 
 	if (styleScript && !disableStyles) {

@@ -3,7 +3,7 @@ import { h, Fragment } from 'preact';
 import { css, Global } from '@emotion/react';
 import classnames from 'classnames';
 import { useState } from 'preact/hooks';
-import { ComponentProps, StylingCSS } from '../../../types';
+import { ComponentProps, RootNodeProperties } from '../../../types';
 import { ChromePicker } from 'react-color';
 import { Icon } from '../../Atoms/Icon/Icon';
 import { Button } from '../../Atoms/Button';
@@ -180,7 +180,7 @@ export const TemplatesEditor = observer((properties: TemplatesEditorProps): JSX.
 	const [selectedLanguage, changeLanguage] = useState(templatesStore.language);
 	const [selectedCurrency, changeCurrency] = useState(templatesStore.currency);
 
-	const styling: { css?: StylingCSS } = {
+	const styling: RootNodeProperties = {
 		css: [CSS.TemplatesEditor({ ...properties })],
 	};
 

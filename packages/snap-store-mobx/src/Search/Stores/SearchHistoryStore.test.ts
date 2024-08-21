@@ -10,12 +10,14 @@ describe('History Store', () => {
 	beforeEach(() => {
 		// stores will share saved data unless config contains different siteId
 		// this will reset that data for each test
-		const historyStore = new SearchHistoryStore({}, services);
+		// @ts-ignore - imcomplete config
+		const historyStore = new SearchHistoryStore({ services, config: {} });
 		historyStore.reset();
 	});
 
 	it('has all functions we expect and terms are empty intially and works with empty config', () => {
-		const historyStore = new SearchHistoryStore({}, services);
+		// @ts-ignore - imcomplete config
+		const historyStore = new SearchHistoryStore({ services, config: {} });
 
 		expect(historyStore.save).toBeDefined();
 		expect(historyStore.remove).toBeDefined();
@@ -26,7 +28,8 @@ describe('History Store', () => {
 
 	it('contains the correct terms', () => {
 		const historyData = ['dressred', 'dress', 'glasses'];
-		const historyStore = new SearchHistoryStore({}, services);
+		// @ts-ignore - imcomplete config
+		const historyStore = new SearchHistoryStore({ services, config: {} });
 		historyData.map((term) => historyStore.save(term));
 
 		expect(historyStore.queries).toHaveLength(historyData.length);
@@ -43,7 +46,8 @@ describe('History Store', () => {
 
 	it('uses the same storage for other history stores when no siteId is provided', () => {
 		const historyData = ['one', 'two', 'three'];
-		const historyStore = new SearchHistoryStore({}, services);
+		// @ts-ignore - imcomplete config
+		const historyStore = new SearchHistoryStore({ services, config: {} });
 		historyData.map((term) => historyStore.save(term));
 
 		historyData.reverse();
@@ -53,7 +57,8 @@ describe('History Store', () => {
 			expect(term.string).toBe(historyData[idx]);
 		});
 
-		const historyStoreAgain = new SearchHistoryStore({}, services);
+		// @ts-ignore - imcomplete config
+		const historyStoreAgain = new SearchHistoryStore({ services, config: {} });
 		expect(historyStoreAgain.queries).toHaveLength(historyData.length);
 		historyStoreAgain.queries.map((term, idx) => {
 			expect(term.string).toBe(historyData[idx]);
@@ -62,7 +67,7 @@ describe('History Store', () => {
 
 	it('uses the different storage for other history stores different siteIds are used', () => {
 		const historyData = ['one', 'two', 'three'];
-		const historyStore = new SearchHistoryStore({ siteId: '123123' }, services);
+		const historyStore = new SearchHistoryStore({ services, config: { id: '', globals: { siteId: '123123' } } });
 		historyData.map((term) => historyStore.save(term));
 
 		historyData.reverse();
@@ -73,7 +78,7 @@ describe('History Store', () => {
 		});
 
 		const historyDataAgain = ['a', 'b', 'c'];
-		const historyStoreAgain = new SearchHistoryStore({ siteId: 'abcabc' }, services);
+		const historyStoreAgain = new SearchHistoryStore({ services, config: { id: '', globals: { siteId: 'abcabc' } } });
 		historyDataAgain.map((term) => historyStoreAgain.save(term));
 
 		historyDataAgain.reverse();
@@ -87,7 +92,8 @@ describe('History Store', () => {
 	it('can be configured with a new urlRoot', () => {
 		const rootUrl = '/collection/shop';
 		const historyData = ['dressred', 'dress', 'glasses'];
-		const historyStore = new SearchHistoryStore({ url: rootUrl }, services);
+
+		const historyStore = new SearchHistoryStore({ services, config: { id: '', settings: { history: { url: rootUrl } } } });
 
 		historyData.map((term) => historyStore.save(term));
 
@@ -105,7 +111,7 @@ describe('History Store', () => {
 
 	it('will push duplicated term to the beginning of the array when they are re-saved', () => {
 		const historyData = ['one', 'two', 'three'];
-		const historyStore = new SearchHistoryStore({ siteId: '123123' }, services);
+		const historyStore = new SearchHistoryStore({ services, config: { siteId: '123123', id: '' } });
 		historyData.map((term) => historyStore.save(term));
 
 		historyData.reverse();
@@ -126,7 +132,8 @@ describe('History Store', () => {
 	it('can remove a term', () => {
 		const initialHistoryData = ['dressred', 'dress', 'glasses'];
 
-		const historyStore = new SearchHistoryStore({}, services);
+		// @ts-ignore - imcomplete config
+		const historyStore = new SearchHistoryStore({ services, config: {} });
 		initialHistoryData.map((term) => historyStore.save(term));
 
 		expect(historyStore.queries).toHaveLength(initialHistoryData.length);
@@ -150,7 +157,8 @@ describe('History Store', () => {
 	it('can reset all terms', () => {
 		const historyData = ['dressred', 'dress', 'glasses'];
 
-		const historyStore = new SearchHistoryStore({}, services);
+		// @ts-ignore - imcomplete config
+		const historyStore = new SearchHistoryStore({ services, config: {} });
 		historyData.map((term) => historyStore.save(term));
 
 		expect(historyStore.queries).toHaveLength(historyData.length);
@@ -163,7 +171,8 @@ describe('History Store', () => {
 	it('has a function to get stored data', () => {
 		const historyData = ['dressred', 'dress', 'glasses'];
 
-		const historyStore = new SearchHistoryStore({}, services);
+		// @ts-ignore - imcomplete config
+		const historyStore = new SearchHistoryStore({ services, config: {} });
 		historyData.map((term) => historyStore.save(term));
 
 		expect(historyStore.queries).toHaveLength(historyData.length);
@@ -180,8 +189,8 @@ describe('History Store', () => {
 
 	it('has queries with undefined url properties when no services are present', () => {
 		const historyData = ['dressred', 'dress', 'glasses'];
-		// @ts-ignore
-		const historyStore = new SearchHistoryStore({}, undefined);
+		// @ts-ignore - services is not present
+		const historyStore = new SearchHistoryStore({ services: undefined, config: {} });
 		historyData.map((term) => historyStore.save(term));
 
 		historyStore.queries.forEach((term) => {
@@ -192,8 +201,8 @@ describe('History Store', () => {
 	it('has queries with undefined url properties when no urlManager is present', () => {
 		const services = {};
 		const historyData = ['dressred', 'dress', 'glasses'];
-		// @ts-ignore
-		const historyStore = new SearchHistoryStore({}, services);
+		// @ts-ignore - urlManager is not present
+		const historyStore = new SearchHistoryStore({ services, config: {} });
 		historyData.map((term) => historyStore.save(term));
 
 		historyStore.queries.forEach((term) => {
@@ -204,13 +213,18 @@ describe('History Store', () => {
 	it('listens to limit when config is passed', async () => {
 		const historyData = ['dressred', 'dress', 'glasses', 'term', 'term2', 'term3', 'term4', 'term5'];
 		const config = {
-			max: 5,
+			id: '',
+			settings: {
+				history: {
+					max: 5,
+				},
+			},
 		};
-		const historyStore = new SearchHistoryStore(config, services);
+		const historyStore = new SearchHistoryStore({ services, config });
 		historyData.map((term) => historyStore.save(term));
 
-		expect(historyStore.queries).toHaveLength(config.max);
-		const trimmedData = historyData.slice(historyData.length - config.max).reverse();
+		expect(historyStore.queries).toHaveLength(config.settings.history.max);
+		const trimmedData = historyData.slice(historyData.length - config.settings.history.max).reverse();
 		historyStore.queries.map((term, idx) => {
 			expect(term.string).toBe(trimmedData[idx]);
 		});
@@ -220,9 +234,14 @@ describe('History Store', () => {
 		const historyData = ['dress', 'glasses', 'term', 'term2', 'term3', 'term4', 'term5'];
 
 		const config = {
-			max: 20,
+			id: '',
+			settings: {
+				history: {
+					max: 20,
+				},
+			},
 		};
-		const historyStore = new SearchHistoryStore(config, services);
+		const historyStore = new SearchHistoryStore({ services, config });
 		historyData.map((term) => historyStore.save(term));
 
 		historyData.reverse();
@@ -232,7 +251,7 @@ describe('History Store', () => {
 		});
 
 		// new store uses same data as previous store so will trim the terms on construction
-		new SearchHistoryStore({ ...config, max: 3 }, services);
+		new SearchHistoryStore({ services, config: { ...config, settings: { history: { max: 3 } } } });
 		expect(historyStore.queries).toHaveLength(3);
 		historyStore.queries.map((term, idx) => {
 			expect(term.string).toBe(historyData[idx]);
@@ -243,9 +262,14 @@ describe('History Store', () => {
 		const historyData = ['dressred', 'dress', 'glasses'];
 
 		const config = {
-			max: 5,
+			id: '',
+			settings: {
+				history: {
+					max: 5,
+				},
+			},
 		};
-		const historyStore = new SearchHistoryStore(config, services);
+		const historyStore = new SearchHistoryStore({ services, config });
 		historyData.map((term) => historyStore.save(term));
 
 		historyData.reverse();
@@ -255,17 +279,22 @@ describe('History Store', () => {
 		});
 
 		// new store uses same data as previous store so will empty the terms on construction
-		new SearchHistoryStore({ ...config, max: 0 }, services);
+		new SearchHistoryStore({ services, config: { ...config, settings: { history: { max: 0 } } } });
 		expect(historyStore.queries).toHaveLength(0);
 	});
 
 	it('does not save when config max is zero', async () => {
 		const config = {
-			max: 0,
+			id: '',
+			settings: {
+				history: {
+					max: 0,
+				},
+			},
 		};
-		const historyStore = new SearchHistoryStore(config, services);
+		const historyStore = new SearchHistoryStore({ services, config });
 		historyStore.save('dont save');
 
-		expect(historyStore.queries).toHaveLength(config.max);
+		expect(historyStore.queries).toHaveLength(config.settings.history.max);
 	});
 });
