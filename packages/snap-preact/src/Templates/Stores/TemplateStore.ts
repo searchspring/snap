@@ -10,10 +10,11 @@ import type { ResultComponent } from '../../../components/src';
 import type { DeepPartial, GlobalThemeStyleScript } from '../../types';
 import type { Theme, ThemeVariables } from '../../../components/src';
 export type TemplateThemeTypes = 'library' | 'local';
-export type RecTypes = 'default' | 'email' | 'bundle';
-export type TemplateTypes = 'search' | 'autocomplete' | `recommendation.${RecTypes}`;
+export type TemplateTypes = 'search' | 'autocomplete' | `recommendation`;
 export type TemplateCustomComponentTypes = 'result' | 'badge';
-export type TemplateComponentTypes = TemplateTypes | TemplateCustomComponentTypes;
+export type SubType = 'bundle' | 'default' | 'email';
+
+type TargetMap = { [targetId: string]: TargetStore };
 
 export type TemplateTarget = {
 	selector?: string;
@@ -70,8 +71,10 @@ export class TemplatesStore {
 	dependencies: TemplatesStoreDependencies;
 
 	targets: {
-		[key in TemplateTypes]: {
-			[targetId: string]: TargetStore;
+		search: TargetMap;
+		autocomplete: TargetMap;
+		recommendation: {
+			[key in SubType]: TargetMap;
 		};
 	};
 
@@ -100,9 +103,11 @@ export class TemplatesStore {
 		this.targets = {
 			search: {},
 			autocomplete: {},
-			'recommendation.bundle': {},
-			'recommendation.default': {},
-			'recommendation.email': {},
+			recommendation: {
+				bundle: {},
+				default: {},
+				email: {},
+			},
 		};
 
 		this.themes = {
@@ -169,10 +174,15 @@ export class TemplatesStore {
 	}
 
 	// TODO - rename to addTargeter / and change template - target(er) in SnapTemplate (config) and elsewhere
-	public addTarget(type: TemplateTypes, target: TemplateTarget): string | undefined {
+	public addTarget(type: TemplateTypes, target: TemplateTarget, subType?: SubType): string | undefined {
 		const targetId = target.selector || target.component;
 		if (targetId) {
-			this.targets[type][targetId] = new TargetStore(target, this.dependencies, this.settings);
+			if (type === 'recommendation' && subType) {
+				this.targets.recommendation[subType][targetId] = new TargetStore(target, this.dependencies, this.settings);
+			} else {
+				this.targets[type as Exclude<TemplateTypes, 'recommendation'>][targetId] = new TargetStore(target, this.dependencies, this.settings);
+			}
+
 			if (this.settings.editMode) {
 				// triggers a rerender for TemplateEditor
 				this.targets = { ...this.targets };
@@ -181,8 +191,11 @@ export class TemplatesStore {
 		}
 	}
 
-	public getTarget(type: TemplateTypes, targetId: string) {
-		return this.targets[type][targetId];
+	public getTarget(type: TemplateTypes, subType: SubType | undefined, targetId: string) {
+		if (type === 'recommendation' && subType) {
+			return this.targets[type][subType][targetId];
+		}
+		return this.targets[type as Exclude<TemplateTypes, 'recommendation'>][targetId];
 	}
 
 	public addTheme(config: {

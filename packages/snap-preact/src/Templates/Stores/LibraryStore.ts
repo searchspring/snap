@@ -1,17 +1,29 @@
 import { FunctionalComponent, RenderableProps } from 'preact';
 
 import type { Theme } from '../../../components/src';
-import type { TemplateComponentTypes, TemplateCustomComponentTypes } from './TemplateStore';
+import type { TemplateCustomComponentTypes } from './TemplateStore';
 import type { TemplateStoreComponentConfig } from './TemplateStore';
 
+type LibraryComponentImport = {
+	[componentName: string]: (args?: any) => Promise<FunctionalComponent<RenderableProps<any>>>;
+};
+type LibraryComponentMap = {
+	[componentName: string]: FunctionalComponent<RenderableProps<any>>;
+};
 type LibraryImports = {
 	theme: {
 		[themeName: string]: (args?: any) => Theme | Promise<Theme>;
 	};
 	component: {
-		[key in TemplateComponentTypes]: {
-			[componentName: string]: (args?: any) => Promise<FunctionalComponent<RenderableProps<any>>>;
+		search: LibraryComponentImport;
+		autocomplete: LibraryComponentImport;
+		recommendation: {
+			bundle: LibraryComponentImport;
+			default: LibraryComponentImport;
+			email: LibraryComponentImport;
 		};
+		badge: LibraryComponentImport;
+		result: LibraryComponentImport;
 	};
 	language: {
 		[languageName: string]: () => Promise<Partial<Theme>>;
@@ -28,15 +40,23 @@ export class LibraryStore {
 	} = {};
 
 	components: {
-		[key in TemplateComponentTypes]: {
-			[componentName: string]: FunctionalComponent<RenderableProps<any>>;
+		search: LibraryComponentMap;
+		autocomplete: LibraryComponentMap;
+		recommendation: {
+			bundle: LibraryComponentMap;
+			default: LibraryComponentMap;
+			email: LibraryComponentMap;
 		};
+		badge: LibraryComponentMap;
+		result: LibraryComponentMap;
 	} = {
 		search: {},
 		autocomplete: {},
-		'recommendation.bundle': {},
-		'recommendation.default': {},
-		'recommendation.email': {},
+		recommendation: {
+			bundle: {},
+			default: {},
+			email: {},
+		},
 		badge: {},
 		result: {},
 	};
@@ -82,25 +102,27 @@ export class LibraryStore {
 					);
 				},
 			},
-			'recommendation.bundle': {
-				RecommendationBundle: async () => {
-					return (
-						this.components['recommendation.bundle'].RecommendationBundle ||
-						(this.components['recommendation.bundle'].RecommendationBundle = (
-							await import('./library/components/RecommendationBundle')
-						).RecommendationBundle)
-					);
+			recommendation: {
+				bundle: {
+					RecommendationBundle: async () => {
+						return (
+							this.components.recommendation.bundle.RecommendationBundle ||
+							(this.components.recommendation.bundle.RecommendationBundle = (
+								await import('./library/components/RecommendationBundle')
+							).RecommendationBundle)
+						);
+					},
 				},
-			},
-			'recommendation.default': {
-				Recommendation: async () => {
-					return (
-						this.components['recommendation.default'].Recommendation ||
-						(this.components['recommendation.default'].Recommendation = (await import('./library/components/Recommendation')).Recommendation)
-					);
+				default: {
+					Recommendation: async () => {
+						return (
+							this.components.recommendation.default.Recommendation ||
+							(this.components.recommendation.default.Recommendation = (await import('./library/components/Recommendation')).Recommendation)
+						);
+					},
 				},
+				email: {},
 			},
-			'recommendation.email': {},
 			badge: {},
 			result: {
 				Result: async () => {
@@ -146,10 +168,7 @@ export class LibraryStore {
 		// only allow certain types: 'results' and 'badges' - otherwise section components could be added (eg: 'search')
 		if (ALLOWED_CUSTOM_COMPONENT_TYPES.includes(type) && this.components[type]) {
 			this.import.component[type][name] = async () => {
-				return (
-					this.components[type as keyof typeof this.components][name] ||
-					(this.components[type as keyof typeof this.components][name] = await componentFn())
-				);
+				return this.components[type][name] || (this.components[type][name] = await componentFn());
 			};
 		}
 	}
@@ -158,16 +177,24 @@ export class LibraryStore {
 		// load everything
 		const loadPromises: Promise<any>[] = [];
 		Object.keys(this.import).forEach((importGroup) => {
-			console.log('importGroup', importGroup);
 			const importList = this.import[importGroup as keyof typeof this.import];
-			console.log('importList', importList);
 
 			Object.keys(importList).forEach((importName) => {
 				if (importGroup === 'component') {
-					const componentGroup = importList[importName as keyof typeof importList] as { [componentName: string]: () => Promise<any> };
-					Object.keys(componentGroup).forEach((componentName) => {
-						loadPromises.push(componentGroup[componentName]());
-					});
+					if (importName === 'recommendation') {
+						const componentSubType = importList.recommendation;
+						Object.keys(componentSubType).forEach((type) => {
+							const componentGroup = componentSubType[type as keyof typeof componentSubType] as { [componentName: string]: () => Promise<any> };
+							Object.keys(componentGroup).forEach((componentName) => {
+								loadPromises.push(componentGroup[componentName]());
+							});
+						});
+					} else {
+						const componentGroup = importList[importName as keyof typeof importList] as { [componentName: string]: () => Promise<any> };
+						Object.keys(componentGroup).forEach((componentName) => {
+							loadPromises.push(componentGroup[componentName]());
+						});
+					}
 				} else {
 					const importer = importList[importName as keyof typeof importList] as () => Promise<any>;
 					loadPromises.push(importer());

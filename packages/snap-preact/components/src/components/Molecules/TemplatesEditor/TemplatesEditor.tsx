@@ -130,33 +130,38 @@ export const TemplatesEditor = observer((properties: TemplatesEditorProps): JSX.
 	const { onRemoveClick, templatesStore } = properties;
 	const searchTargets = Object.keys(templatesStore.targets.search || {}).map((target) => ({
 		type: 'search',
+		subType: '',
 		target,
 		template: templatesStore.targets.search[target],
 		selector: templatesStore.targets.search[target].selector,
 	}));
 	const autocompleteTargets = Object.keys(templatesStore.targets.autocomplete || {}).map((target) => ({
 		type: 'autocomplete',
+		subType: '',
 		target,
 		template: templatesStore.targets.autocomplete[target],
 		selector: templatesStore.targets.autocomplete[target].selector,
 	}));
-	const recommendationBundleTargets = Object.keys(templatesStore.targets['recommendation.bundle'] || {}).map((target) => ({
-		type: 'recommendation.bundle',
+	const recommendationBundleTargets = Object.keys(templatesStore.targets.recommendation.bundle || {}).map((target) => ({
+		type: 'recommendation',
+		subType: 'bundle',
 		target,
-		template: templatesStore.targets['recommendation.bundle'][target],
-		selector: templatesStore.targets['recommendation.bundle'][target].selector,
+		template: templatesStore.targets.recommendation.bundle[target],
+		selector: templatesStore.targets.recommendation.bundle[target].selector,
 	}));
-	const recommendationDefaultTargets = Object.keys(templatesStore.targets['recommendation.default'] || {}).map((target) => ({
-		type: 'recommendation.default',
+	const recommendationDefaultTargets = Object.keys(templatesStore.targets.recommendation.default || {}).map((target) => ({
+		type: 'recommendation',
+		subType: 'default',
 		target,
-		template: templatesStore.targets['recommendation.default'][target],
-		selector: templatesStore.targets['recommendation.default'][target].selector,
+		template: templatesStore.targets.recommendation.default[target],
+		selector: templatesStore.targets.recommendation.default[target].selector,
 	}));
-	const recommendationEmailTargets = Object.keys(templatesStore.targets['recommendation.email'] || {}).map((target) => ({
-		type: 'recommendation.email',
+	const recommendationEmailTargets = Object.keys(templatesStore.targets.recommendation.email || {}).map((target) => ({
+		type: 'recommendation',
+		subType: 'email',
 		target,
-		template: templatesStore.targets['recommendation.email'][target],
-		selector: templatesStore.targets['recommendation.email'][target].selector,
+		template: templatesStore.targets.recommendation.email[target],
+		selector: templatesStore.targets.recommendation.email[target].selector,
 	}));
 	const targets = [
 		...searchTargets,
@@ -189,7 +194,7 @@ export const TemplatesEditor = observer((properties: TemplatesEditorProps): JSX.
 		if (b === 'global') return 1;
 		return 0;
 	});
-	const selectedTargetConfig = templatesStore.getTarget(selectedTarget.type, selectedTarget.target);
+	const selectedTargetConfig = templatesStore.getTarget(selectedTarget.type, selectedTarget.subType, selectedTarget.target);
 
 	const themeRef = templatesStore.themes[selectedTarget.template.theme.location][selectedTarget.template.theme.name];
 	const theme = themeRef.theme;
@@ -303,8 +308,10 @@ export const TemplatesEditor = observer((properties: TemplatesEditorProps): JSX.
 							const { selectedIndex, options } = e.currentTarget;
 							const selectedOption = options[selectedIndex];
 							const targetId = selectedOption.value;
-							const controller = selectedOption.closest('optgroup')?.label;
-							const newTarget = targets.find((target) => target.target === targetId && target.type === controller);
+							const optgroup = selectedOption.closest('optgroup');
+							const controller = optgroup?.label;
+							const subType = optgroup?.dataset.subtype || '';
+							const newTarget = targets.find((target) => target.target === targetId && target.type === controller && target.subType === subType);
 							if (newTarget) {
 								changeTargetSelection(newTarget);
 							}
@@ -325,21 +332,21 @@ export const TemplatesEditor = observer((properties: TemplatesEditorProps): JSX.
 							</optgroup>
 						)}
 						{recommendationBundleTargets && (
-							<optgroup label="recommendation.bundle">
+							<optgroup label="recommendation" data-subtype="bundle">
 								{recommendationBundleTargets.map((target) => (
 									<option>{target.target}</option>
 								))}
 							</optgroup>
 						)}
 						{recommendationDefaultTargets && (
-							<optgroup label="recommendation.default">
+							<optgroup label="recommendation" data-subtype="default">
 								{recommendationDefaultTargets.map((target) => (
 									<option>{target.target}</option>
 								))}
 							</optgroup>
 						)}
 						{recommendationEmailTargets && (
-							<optgroup label="recommendation.email">
+							<optgroup label="recommendation" data-subtype="email">
 								{recommendationEmailTargets.map((target) => (
 									<option>{target.target}</option>
 								))}
@@ -356,13 +363,18 @@ export const TemplatesEditor = observer((properties: TemplatesEditorProps): JSX.
 							const { selectedIndex, options } = e.currentTarget;
 							const selectedOption = options[selectedIndex];
 							const selectedTemplate = selectedOption.value;
-
-							templatesStore.targets[selectedTarget.type][selectedTarget.target].setComponent(selectedTemplate);
+							if (selectedTarget.type === 'recommendation' && selectedTarget.subType) {
+								templatesStore.targets[selectedTarget.type][selectedTarget.subType][selectedTarget.target].setComponent(selectedTemplate);
+							} else {
+								templatesStore.targets[selectedTarget.type][selectedTarget.target].setComponent(selectedTemplate);
+							}
 						}}
 					>
-						{Object.keys(library.components[selectedTarget.type] || {}).map((componentName: string) => {
-							return <option selected={componentName === selectedTarget.template.component}>{componentName}</option>;
-						})}
+						{Object.keys(library.components[selectedTarget.type][selectedTarget.subType] || library.components[selectedTarget.type] || {}).map(
+							(componentName: string) => {
+								return <option selected={componentName === selectedTarget.template.component}>{componentName}</option>;
+							}
+						)}
 					</select>
 				</div>
 
@@ -374,7 +386,11 @@ export const TemplatesEditor = observer((properties: TemplatesEditorProps): JSX.
 							const { selectedIndex, options } = e.currentTarget;
 							const selectedOption = options[selectedIndex];
 							const selectedTemplate = selectedOption.value;
-							templatesStore.targets[selectedTarget.type][selectedTarget.target].setResultComponent(selectedTemplate);
+							if (selectedTarget.type === 'recommendation' && selectedTarget.subType) {
+								templatesStore.targets[selectedTarget.type][selectedTarget.subType][selectedTarget.target].setResultComponent(selectedTemplate);
+							} else {
+								templatesStore.targets[selectedTarget.type][selectedTarget.target].setResultComponent(selectedTemplate);
+							}
 						}}
 					>
 						{Object.keys(library.components.result || {}).map((componentName: string) => {
@@ -393,7 +409,11 @@ export const TemplatesEditor = observer((properties: TemplatesEditorProps): JSX.
 							const selectedTheme = selectedOption.value;
 							const type = selectedOption.closest('optgroup')?.label;
 
-							templatesStore.targets[selectedTarget.type][selectedTarget.target].setTheme(selectedTheme, type);
+							if (selectedTarget.type === 'recommendation' && selectedTarget.subType) {
+								templatesStore.targets[selectedTarget.type][selectedTarget.subType][selectedTarget.target].setTheme(selectedTheme, type);
+							} else {
+								templatesStore.targets[selectedTarget.type][selectedTarget.target].setTheme(selectedTheme, type);
+							}
 						}}
 					>
 						<optgroup label="library">

@@ -4,14 +4,20 @@ import { Controllers } from '@searchspring/snap-controller';
 import { ThemeProvider, SnapProvider, Theme } from '../../../providers';
 import type { SnapTemplates } from '../../../../../src';
 // TODO: cleanup path to just /src when exports added
-import type { TemplatesStore, TemplateTypes } from '../../../../../src/Templates/Stores/TemplateStore';
+import type { SubType, TemplatesStore, TemplateTypes } from '../../../../../src/Templates/Stores/TemplateStore';
 import type { ResultComponent as ResultComponentType } from '../../../';
 
 export const TemplateSelect = observer((properties: TemplateSelectProps): JSX.Element => {
-	const { snap, templatesStore, targetId, type, controller, ...otherProps } = properties;
+	const { snap, templatesStore, targetId, type, subType, controller, ...otherProps } = properties;
 	const { loading } = templatesStore;
-	const targeter = templatesStore.getTarget(type, targetId);
-	const Component = templatesStore?.library?.components[type as keyof typeof templatesStore.library.components][targeter.component];
+	const targeter = templatesStore.getTarget(type, subType, targetId);
+	let Component;
+	if (type === 'recommendation' && subType) {
+		Component = templatesStore?.library?.components[type][subType][targeter.component];
+	} else {
+		Component = templatesStore?.library?.components[type as Exclude<TemplateTypes, 'recommendation'>][targeter.component];
+	}
+
 	let ResultComponent: ResultComponentType | undefined = undefined;
 	if (targeter.resultComponent) {
 		ResultComponent = templatesStore?.library?.components.result[targeter.resultComponent];
@@ -41,6 +47,7 @@ export interface TemplateSelectProps {
 	templatesStore: TemplatesStore;
 	targetId: string;
 	type: TemplateTypes;
+	subType: SubType;
 	controller: Controllers;
 	snap: SnapTemplates;
 	theme?: Theme;
