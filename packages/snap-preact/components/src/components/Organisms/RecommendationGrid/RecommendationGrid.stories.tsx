@@ -2,7 +2,7 @@ import { h } from 'preact';
 
 import { ArgsTable, PRIMARY_STORY, Markdown } from '@storybook/blocks';
 
-import { RecommendationList, RecommendationListProps } from './RecommendationList';
+import { RecommendationGrid, RecommendationGridProps } from './RecommendationGrid';
 import { componentArgs, highlightedCode } from '../../../utilities';
 import { Snapify } from '../../../utilities/snapify';
 
@@ -10,8 +10,8 @@ import Readme from './readme.md';
 import type { RecommendationController } from '@searchspring/snap-controller';
 
 export default {
-	title: 'Organisms/RecommendationList',
-	component: RecommendationList,
+	title: 'Organisms/RecommendationGrid',
+	component: RecommendationGrid,
 	tags: ['autodocs'],
 	parameters: {
 		docs: {
@@ -74,24 +74,31 @@ export default {
 			control: { type: 'none' },
 		},
 		columns: {
-			defaultValue: 4,
 			description: 'Number of columns in results grid',
 			table: {
 				type: {
 					summary: 'number',
 				},
-				defaultValue: { summary: 4 },
 			},
 			control: { type: 'number' },
 		},
 		rows: {
-			description: 'Number of rows in results grid - adding this will put a hard limit on the results',
+			description: 'Number of rows in results grid',
 			table: {
 				type: {
 					summary: 'number',
 				},
 			},
 			control: { type: 'number' },
+		},
+		trim: {
+			description: 'trim off extra results based on columns and rows?',
+			table: {
+				type: {
+					summary: 'boolean',
+				},
+			},
+			control: { type: 'boolean' },
 		},
 		gapSize: {
 			defaultValue: '20px',
@@ -121,11 +128,11 @@ export default {
 
 const snapInstance = Snapify.recommendation({ id: 'RecommendationList', tag: 'trending', globals: { siteId: '8uyt2m' } });
 
-export const Grid = (args: RecommendationListProps, { loaded: { controller } }: { loaded: { controller: RecommendationController } }) => {
-	return <RecommendationList {...args} controller={controller} results={controller?.store?.results} columns={2} rows={4} />;
+export const List = (args: RecommendationGridProps, { loaded: { controller } }: { loaded: { controller: RecommendationController } }) => {
+	return <RecommendationGrid {...args} controller={controller} results={controller?.store?.results} />;
 };
 
-Grid.loaders = [
+List.loaders = [
 	async () => {
 		await snapInstance.search();
 		return {
@@ -134,11 +141,11 @@ Grid.loaders = [
 	},
 ];
 
-export const List = (args: RecommendationListProps, { loaded: { controller } }: { loaded: { controller: RecommendationController } }) => {
-	return <RecommendationList {...args} controller={controller} results={controller?.store?.results} rows={1} />;
+export const Grid = (args: RecommendationGridProps, { loaded: { controller } }: { loaded: { controller: RecommendationController } }) => {
+	return <RecommendationGrid columns={4} {...args} controller={controller} results={controller?.store?.results} />;
 };
 
-List.loaders = [
+Grid.loaders = [
 	async () => {
 		await snapInstance.search();
 		return {

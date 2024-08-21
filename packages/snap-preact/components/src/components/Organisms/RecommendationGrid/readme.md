@@ -1,4 +1,4 @@
-# RecommendationList
+# RecommendationGrid
 
 Renders a List of results utilizing `<Result />` components.
 
@@ -11,42 +11,49 @@ Renders a List of results utilizing `<Result />` components.
 The `controller` prop specifies a reference to the recommendation controller.
 
 ```jsx
-<RecommendationList controller={controller.store.results} />
+<RecommendationGrid controller={controller.store.results} />
 ```
 
 ### results
 The `results` prop specifies a reference to the results store array. If no results prop is passed in, the component will default to using the results in controller.store. 
 
 ```jsx
-<RecommendationList results={controller.store.results} />
+<RecommendationGrid results={controller.store.results} />
 ```
 
 ### title
 The `title` prop specifies the title text to render.
 
 ```jsx
-<RecommendationList results={controller.store.results} title={'Recommended For You'} />
+<RecommendationGrid results={controller.store.results} title={'Recommended For You'} />
 ```
 
 ### columns
 The `columns` prop specifies the number of columns to display. 
 
 ```jsx
-<RecommendationList results={controller.store.results} columns={4} />
+<RecommendationGrid results={controller.store.results} columns={4} />
 ```
 
 ### rows
 The `rows` prop specifies the number of rows to display.
 
 ```jsx
-<RecommendationList results={controller.store.results} rows={2} />
+<RecommendationGrid results={controller.store.results} rows={2} />
+```
+
+### trim
+The `trim` prop specifies whether we should trim off excess results in order to have equal rows and columns.
+
+```jsx
+<RecommendationGrid results={controller.store.results} rows={3} trim={true} />
 ```
 
 ### gapSize
 The `gapSize` prop specifies the gap size between each result.
 
 ```jsx
-<RecommendationList results={controller.store.results} gapSize={'10px'} />
+<RecommendationGrid results={controller.store.results} gapSize={'10px'} />
 ```
 
 ### breakpoints
@@ -77,7 +84,7 @@ const breakpoints = {
 ```
 
 ```jsx
-<RecommendationList results={controller.store.results} breakpoints={breakpoints} />
+<RecommendationGrid results={controller.store.results} breakpoints={breakpoints} />
 ```
 
 ### ResultComponent
@@ -93,5 +100,5 @@ const CustomResult = ({
 	return <div>{result.mappings.core?.name}</div>
 }
 
-<RecommendationList results={controller.store.results} resultComponent={CustomResult} />
+<RecommendationGrid results={controller.store.results} resultComponent={CustomResult} />
 ```

@@ -49,7 +49,7 @@ import type { HorizontalFacetsProps } from '../components/Organisms/HorizontalFa
 import type { FacetsProps } from '../components/Organisms/Facets';
 import type { FilterSummaryProps } from '../components/Organisms/FilterSummary';
 import type { RecommendationBundleProps } from '../components/Organisms/RecommendationBundle';
-import type { RecommendationListProps } from '../components/Organisms/RecommendationList';
+import type { RecommendationGridProps } from '../components/Organisms/RecommendationGrid';
 import type { ResultsProps } from '../components/Organisms/Results';
 import type { SearchHeaderProps } from '../components/Atoms/SearchHeader';
 import type { SidebarProps } from '../components/Organisms/Sidebar';
@@ -123,7 +123,7 @@ export type ThemeComponents = {
 	filterSummary?: GenericComponentProps<FilterSummaryProps>;
 	noResults?: GenericComponentProps<NoResultsProps>;
 	recommendationBundle?: GenericComponentProps<RecommendationBundleProps>;
-	recommendationList?: GenericComponentProps<RecommendationListProps>;
+	recommendationList?: GenericComponentProps<RecommendationGridProps>;
 	results?: GenericComponentProps<ResultsProps>;
 	searchHeader?: GenericComponentProps<SearchHeaderProps>;
 	sidebar?: GenericComponentProps<SidebarProps>;

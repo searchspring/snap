@@ -14,44 +14,30 @@ import { RecommendationProfileTracker } from '../../Trackers/Recommendation/Prof
 import { RecommendationResultTracker } from '../../Trackers/Recommendation/ResultTracker';
 
 const CSS = {
-	results: ({ columns, gapSize }: Partial<RecommendationListProps>) =>
+	results: ({ columns, gapSize }: Partial<RecommendationGridProps>) =>
 		css({
-			display: 'flex',
-			flexFlow: 'row wrap',
-			gap: gapSize,
-			gridTemplateRows: 'auto',
-			gridTemplateColumns: `repeat(${columns}, 1fr)`,
+			overflow: 'auto',
+			maxWidth: '100%',
+			maxHeight: '100%',
+			'.ss__recommendation-list__results': {
+				display: 'flex',
+				flexFlow: 'row wrap',
+				gap: gapSize,
 
-			'& .ss__result': {
-				boxSizing: 'border-box',
-				flex: '0 1 auto',
-				width: `calc(${100 / columns!}% - (${columns! - 1} * ${gapSize} / ${columns} ) )`,
-				marginRight: gapSize,
-				marginBottom: gapSize,
-
-				[`&:nth-of-type(${columns}n)`]: {
-					marginRight: '0',
-				},
-			},
-			'@supports (display: grid)': {
-				display: 'grid',
-
-				'& .ss__result': {
-					width: 'initial',
-					flex: undefined,
-					margin: 0,
+				'@supports (display: grid)': {
+					display: 'grid',
+					gridTemplateRows: 'auto',
+					gridTemplateColumns: `repeat(${columns}, 1fr)`,
 				},
 			},
 		}),
 };
 
-export const RecommendationList = observer((properties: RecommendationListProps): JSX.Element => {
+export const RecommendationGrid = observer((properties: RecommendationGridProps): JSX.Element => {
 	const globalTheme: Theme = useTheme();
 
-	const defaultProps: Partial<RecommendationListProps> = {
+	const defaultProps: Partial<RecommendationGridProps> = {
 		results: properties.controller?.store?.results,
-		columns: properties.controller?.store?.results.length,
-		rows: 1,
 		gapSize: '20px',
 	};
 
@@ -68,9 +54,9 @@ export const RecommendationList = observer((properties: RecommendationListProps)
 		};
 	}
 
-	const { disableStyles, title, resultComponent, className, style, theme, styleScript, controller } = props;
+	const { disableStyles, title, resultComponent, trim, className, style, theme, styleScript, controller } = props;
 
-	const subProps: RecommendationListSubProps = {
+	const subProps: RecommendationGridSubProps = {
 		result: {
 			// default props
 			className: 'ss__recommendation-list__result',
@@ -86,8 +72,24 @@ export const RecommendationList = observer((properties: RecommendationListProps)
 	};
 
 	let results = props.results || controller.store.results;
+	if (!props.columns && !props.rows) {
+		props.rows = 1;
+		props.columns = results.length;
+	} else if (props.columns && !props.rows) {
+		props.rows = Math.floor(results.length / props.columns);
 
-	if (props?.columns && props?.rows && props.columns > 0 && props.rows > 0) {
+		if (trim) {
+			const remainder = results.length % props.columns;
+			results = results.slice(0, results.length - remainder);
+		}
+	} else if (props.rows && !props.columns) {
+		if (trim) {
+			const remainder = results.length % props.rows;
+			results = results.slice(0, results.length - remainder);
+		}
+
+		props.columns = Math.ceil(results.length / props.rows);
+	} else if (props?.columns && props?.rows && props.columns > 0 && props.rows > 0) {
 		results = results?.slice(0, props.columns * props.rows);
 	}
 
@@ -108,20 +110,22 @@ export const RecommendationList = observer((properties: RecommendationListProps)
 				<div {...styling} className={classnames('ss__recommendation-list', className)}>
 					{title && <h3 className="ss__recommendation-list__title">{title}</h3>}
 
-					{results.map((result) =>
-						(() => {
-							if (resultComponent && controller) {
-								const ResultComponent = resultComponent;
-								return <ResultComponent controller={controller} result={result as Product} theme={theme} />;
-							} else {
-								return (
-									<RecommendationResultTracker result={result as Product} controller={controller}>
-										<Result key={(result as Product).id} {...subProps.result} result={result as Product} controller={controller} />
-									</RecommendationResultTracker>
-								);
-							}
-						})()
-					)}
+					<div className="ss__recommendation-list__results">
+						{results.map((result) =>
+							(() => {
+								if (resultComponent && controller) {
+									const ResultComponent = resultComponent;
+									return <ResultComponent controller={controller} result={result as Product} theme={theme} />;
+								} else {
+									return (
+										<RecommendationResultTracker result={result as Product} controller={controller}>
+											<Result key={(result as Product).id} {...subProps.result} result={result as Product} controller={controller} />
+										</RecommendationResultTracker>
+									);
+								}
+							})()
+						)}
+					</div>
 				</div>
 			</RecommendationProfileTracker>
 		</CacheProvider>
@@ -130,17 +134,18 @@ export const RecommendationList = observer((properties: RecommendationListProps)
 	);
 });
 
-export interface RecommendationListProps extends ComponentProps {
+export interface RecommendationGridProps extends ComponentProps {
 	controller: RecommendationController;
 	title?: string;
 	results?: Product[];
 	columns?: number;
 	rows?: number;
 	gapSize?: string;
+	trim?: boolean;
 	breakpoints?: BreakpointsProps;
 	resultComponent?: ResultComponent;
 }
 
-interface RecommendationListSubProps {
+interface RecommendationGridSubProps {
 	result: Partial<ResultProps>;
 }

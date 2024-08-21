@@ -1,5 +1,5 @@
 import { h } from 'preact';
-import { RecommendationList } from './RecommendationList';
+import { RecommendationGrid } from './RecommendationGrid';
 import 'whatwg-fetch';
 import { render, waitFor } from '@testing-library/preact';
 import { ThemeProvider } from '../../../providers/theme';
@@ -25,7 +25,7 @@ const services = {
 };
 let controller: RecommendationController;
 
-describe('Results Component', () => {
+describe('RecommendationGrid Component', () => {
 	beforeEach(async () => {
 		controller = new RecommendationController(recommendConfig, {
 			client: new MockClient(globals, {}),
@@ -65,7 +65,7 @@ describe('Results Component', () => {
 	};
 
 	it('renders list', () => {
-		const rendered = render(<RecommendationList controller={controller} />);
+		const rendered = render(<RecommendationGrid controller={controller} />);
 
 		const list = rendered.container.querySelector('.ss__recommendation-list')!;
 		expect(list).toBeInTheDocument();
@@ -81,7 +81,7 @@ describe('Results Component', () => {
 	it('renders title', () => {
 		const titleText = 'my custom title';
 
-		const rendered = render(<RecommendationList title={titleText} controller={controller} />);
+		const rendered = render(<RecommendationGrid title={titleText} controller={controller} />);
 
 		const list = rendered.container.querySelector('.ss__recommendation-list')!;
 		expect(list).toBeInTheDocument();
@@ -96,7 +96,7 @@ describe('Results Component', () => {
 			columns: 3,
 		};
 
-		const rendered = render(<RecommendationList controller={controller} {...args} />);
+		const rendered = render(<RecommendationGrid controller={controller} {...args} />);
 		const results = rendered.container.querySelectorAll('.ss__result');
 		expect(results.length).toBe(args.columns * args.rows);
 	});
@@ -108,7 +108,7 @@ describe('Results Component', () => {
 			gapSize: '40px',
 		};
 
-		const rendered = render(<RecommendationList controller={controller} {...args} />);
+		const rendered = render(<RecommendationGrid controller={controller} {...args} />);
 		const resultsElement = rendered.container.querySelector('.ss__recommendation-list')!;
 		const resultsElementStyles = getComputedStyle(resultsElement);
 
@@ -135,7 +135,7 @@ describe('Results Component', () => {
 		const args = {
 			breakpoints: customBreakpoints,
 		};
-		const rendered = render(<RecommendationList controller={controller} {...args} />);
+		const rendered = render(<RecommendationGrid controller={controller} {...args} />);
 		const resultsElement = rendered.container.querySelector('.ss__recommendation-list');
 
 		expect(resultsElement).toBeInTheDocument();
@@ -157,7 +157,7 @@ describe('Results Component', () => {
 
 	it('renders with classname', () => {
 		const className = 'classy';
-		const rendered = render(<RecommendationList controller={controller} className={className} />);
+		const rendered = render(<RecommendationGrid controller={controller} className={className} />);
 
 		const resultsElement = rendered.container.querySelector('.ss__recommendation-list');
 		expect(resultsElement).toBeInTheDocument();
@@ -165,7 +165,7 @@ describe('Results Component', () => {
 	});
 
 	it('can disable styles', () => {
-		const rendered = render(<RecommendationList controller={controller} disableStyles />);
+		const rendered = render(<RecommendationGrid controller={controller} disableStyles />);
 
 		const resultsElement = rendered.container.querySelector('.ss__recommendation-list');
 
@@ -178,7 +178,7 @@ describe('Results Component', () => {
 		};
 		const rendered = render(
 			<ThemeProvider theme={theme}>
-				<RecommendationList {...args} />
+				<RecommendationGrid {...args} />
 			</ThemeProvider>
 		);
 		const resultsElement = rendered.container.querySelector('.ss__recommendation-list')!;
@@ -189,7 +189,7 @@ describe('Results Component', () => {
 		const args = {
 			controller: controller,
 		};
-		const rendered = render(<RecommendationList {...args} theme={theme} />);
+		const rendered = render(<RecommendationGrid {...args} theme={theme} />);
 		const resultsElement = rendered.container.querySelector('.ss__recommendation-list')!;
 		expect(resultsElement).toHaveClass(theme.components.recommendationList.className);
 	});
@@ -216,7 +216,7 @@ describe('Results Component', () => {
 
 		const rendered = render(
 			<ThemeProvider theme={globalTheme}>
-				<RecommendationList {...args} theme={componentTheme} />
+				<RecommendationGrid {...args} theme={componentTheme} />
 			</ThemeProvider>
 		);
 
