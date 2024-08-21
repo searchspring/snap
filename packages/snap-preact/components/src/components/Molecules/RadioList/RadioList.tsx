@@ -4,12 +4,13 @@ import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
 
 import { Theme, useTheme, CacheProvider } from '../../../providers';
-import { ComponentProps, StylingCSS, ListOption } from '../../../types';
+import { ComponentProps, RootNodeProperties, ListOption } from '../../../types';
 import { defined, mergeProps } from '../../../utilities';
 import { useState } from 'react';
 import { Radio, RadioProps } from '../Radio/Radio';
-import { useA11y } from '../../../hooks';
+import { Lang, useA11y, useLang } from '../../../hooks';
 import { Icon, IconProps } from '../../Atoms/Icon';
+import deepmerge from 'deepmerge';
 
 const CSS = {
 	radioList: ({}: Partial<RadioListProps>) =>
@@ -70,6 +71,7 @@ export function RadioList(properties: RadioListProps): JSX.Element {
 		className,
 		style,
 		styleScript,
+		treePath,
 	} = props;
 
 	const subProps: RadioListSubProps = {
@@ -84,6 +86,7 @@ export function RadioList(properties: RadioListProps): JSX.Element {
 			}),
 			// component theme overrides
 			theme: props?.theme,
+			treePath,
 		},
 		Icon: {
 			className: 'ss__radio-list__option__icon',
@@ -93,10 +96,11 @@ export function RadioList(properties: RadioListProps): JSX.Element {
 			}),
 			// component theme overrides
 			theme: props?.theme,
+			treePath,
 		},
 	};
 
-	const styling: { css?: StylingCSS } = {};
+	const styling: RootNodeProperties = { 'ss-name': props.name };
 	const stylingProps = { ...props };
 
 	if (styleScript && !disableStyles) {
@@ -118,10 +122,24 @@ export function RadioList(properties: RadioListProps): JSX.Element {
 		setSelection(option);
 	};
 
+	//initialize lang
+	const defaultLang = {};
+
+	//deep merge with props.lang
+	const lang = deepmerge(defaultLang, props.lang || {});
+	const mergedLang = useLang(lang as any, {
+		options,
+		selectedOptions: selection,
+	});
+
 	return typeof options == 'object' && options?.length ? (
 		<CacheProvider>
 			<div {...styling} className={classnames('ss__radio-list', disabled ? 'ss__radio-list--disabled' : '', className)}>
-				{titleText && <h5 className="ss__radio-list__title">{titleText}</h5>}
+				{(titleText || lang?.title?.value) && (
+					<h5 className="ss__radio-list__title" {...mergedLang.title?.all}>
+						{titleText}
+					</h5>
+				)}
 
 				<ul className={`ss__radio-list__options-wrapper`} role="listbox" aria-label={titleText}>
 					{options.map((option: ListOption) => {
@@ -167,6 +185,14 @@ export interface RadioListProps extends ComponentProps {
 	titleText?: string;
 	disabled?: boolean;
 	selected?: ListOption;
+	lang?: Partial<RadioListLang>;
+}
+
+export interface RadioListLang {
+	title?: Lang<{
+		options: ListOption[];
+		selectedOptions: ListOption[];
+	}>;
 }
 
 interface RadioListSubProps {

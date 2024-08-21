@@ -24,6 +24,4 @@ const paginationStyleScript = ({ theme }: PaginationProps) => {
 // Pagination component props
 export const pagination: Partial<PaginationProps> = {
 	styleScript: paginationStyleScript,
-	nextButton: 'Next »',
-	prevButton: '« Previous',
 };

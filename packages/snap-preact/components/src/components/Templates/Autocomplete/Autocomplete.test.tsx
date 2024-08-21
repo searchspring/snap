@@ -710,6 +710,295 @@ describe('Autocomplete Component', () => {
 		global.innerWidth = 1500;
 	});
 
+	it('Autocomplete lang works', async () => {
+		const mockStorage: {
+			[key: string]: string;
+		} = {};
+		global.Storage.prototype.setItem = jest.fn((key, value) => {
+			mockStorage[key] = value;
+		});
+		global.Storage.prototype.getItem = jest.fn((key) => mockStorage[key]);
+		const historyData = ['dress', 'sleep', 'shirt', 'sandal', 'shoes'];
+		global.localStorage.setItem(`ss-history`, JSON.stringify({ history: JSON.stringify(historyData) }));
+
+		const controller = createAutocompleteController({ client: clientConfig, controller: acConfig }, { client: mockClient });
+		await controller.bind();
+
+		const args = {
+			controller,
+			input: controller.config.selector,
+			retainTrending: true,
+			retainHistory: true,
+		};
+
+		const input = document.querySelector('.searchspring-ac') as HTMLInputElement;
+		input.focus();
+		input.value = 'dress';
+
+		await waitFor(() => {
+			expect(controller.store.results.length).toBeGreaterThan(0);
+		});
+
+		const langOptions = [
+			'termsTitle',
+			'trendingTitle',
+			'historyTitle',
+			'facetsTitle',
+			'contentTitle',
+			'closeButton',
+			'trendingTerm',
+			'suggestionsTerm',
+			'historyTerm',
+			'contentInfo',
+		];
+
+		//text attributes/values
+		const value = 'custom value';
+		const altText = 'custom alt';
+		const ariaLabel = 'custom label';
+		const ariaValueText = 'custom value text';
+		const title = 'custom title';
+
+		const valueMock = jest.fn(() => value);
+		const altMock = jest.fn(() => altText);
+		const labelMock = jest.fn(() => ariaLabel);
+		const valueTextMock = jest.fn(() => ariaValueText);
+		const titleMock = jest.fn(() => title);
+
+		const langObjs = [
+			{
+				value: value,
+				attributes: {
+					alt: altText,
+					'aria-label': ariaLabel,
+					'aria-valuetext': ariaValueText,
+					title: title,
+				},
+			},
+			{
+				value: valueMock,
+				attributes: {
+					alt: altMock,
+					'aria-label': labelMock,
+					'aria-valuetext': valueTextMock,
+					title: titleMock,
+				},
+			},
+			{
+				value: `<div>${value}</div>`,
+				attributes: {
+					alt: altText,
+					'aria-label': ariaLabel,
+					'aria-valuetext': ariaValueText,
+					title: title,
+				},
+			},
+		];
+
+		langOptions.forEach(async (option) => {
+			langObjs.forEach(async (langObj) => {
+				const lang = {
+					[`${option}`]: langObj,
+				};
+
+				let valueSatisfied = false;
+				let altSatisfied = false;
+				let labelSatisfied = false;
+				let valueTextSatisfied = false;
+				let titleSatisfied = false;
+
+				const rendered = render(<Autocomplete lang={lang} {...args} />, { container });
+
+				const autocomplete = rendered.container.querySelector('.ss__autocomplete');
+				expect(autocomplete).toBeInTheDocument();
+
+				const langElems = rendered.container.querySelectorAll(`[ss-lang=${option}]`);
+				console.log(option);
+
+				expect(langElems.length).toBeGreaterThan(0);
+				langElems.forEach((elem) => {
+					if (typeof langObj.value == 'function') {
+						if (option == 'trendingTerm') {
+							controller.store.trending.forEach((term, idx) => {
+								expect(valueMock).toHaveBeenCalledWith({
+									controller: controller,
+									term: term,
+									index: idx,
+								});
+							});
+						} else if ('suggestionsTerm') {
+							controller.store.terms.forEach((term, idx) => {
+								expect(valueMock).toHaveBeenCalledWith({
+									controller: controller,
+									term: term,
+									index: idx,
+								});
+							});
+						} else if ('historyTerm') {
+							controller.store.history.forEach((term, idx) => {
+								expect(valueMock).toHaveBeenCalledWith({
+									controller: controller,
+									term: term,
+									index: idx,
+								});
+							});
+						} else {
+							expect(valueMock).toHaveBeenCalledWith({
+								controller: controller,
+							});
+						}
+
+						if (elem?.innerHTML == value) {
+							valueSatisfied = true;
+						}
+					} else {
+						if (elem?.innerHTML == langObj.value) {
+							valueSatisfied = true;
+						}
+					}
+					if (elem.getAttribute('alt') == altText) {
+						altSatisfied = true;
+					}
+					if (elem.getAttribute('aria-label') == ariaLabel) {
+						labelSatisfied = true;
+					}
+					if (elem.getAttribute('aria-valuetext') == ariaValueText) {
+						valueTextSatisfied = true;
+					}
+					if (elem.getAttribute('title') == title) {
+						titleSatisfied = true;
+					}
+				});
+
+				expect(valueSatisfied).toBeTruthy();
+				expect(altSatisfied).toBeTruthy();
+				expect(labelSatisfied).toBeTruthy();
+				expect(valueTextSatisfied).toBeTruthy();
+				expect(titleSatisfied).toBeTruthy();
+
+				jest.restoreAllMocks();
+			});
+		});
+	});
+
+	it('noresultstext lang works', async () => {
+		const value = 'custom value';
+		const altText = 'custom alt';
+		const ariaLabel = 'custom label';
+		const ariaValueText = 'custom value text';
+		const title = 'custom title';
+
+		const valueMock = jest.fn(() => value);
+		const altMock = jest.fn(() => altText);
+		const labelMock = jest.fn(() => ariaLabel);
+		const valueTextMock = jest.fn(() => ariaValueText);
+		const titleMock = jest.fn(() => title);
+
+		const langObjs = [
+			{
+				value: value,
+				attributes: {
+					alt: altText,
+					'aria-label': ariaLabel,
+					'aria-valuetext': ariaValueText,
+					title: title,
+				},
+			},
+			{
+				value: valueMock,
+				attributes: {
+					alt: altMock,
+					'aria-label': labelMock,
+					'aria-valuetext': valueTextMock,
+					title: titleMock,
+				},
+			},
+			{
+				value: `<div>${value}</div>`,
+				attributes: {
+					alt: altText,
+					'aria-label': ariaLabel,
+					'aria-valuetext': ariaValueText,
+					title: title,
+				},
+			},
+		];
+
+		const controller = createAutocompleteController({ client: clientConfig, controller: acConfig }, { client: mockClient });
+		await controller.bind();
+
+		const args = {
+			controller,
+			input: controller.config.selector,
+		};
+
+		(controller.client as MockClient).mockData.updateConfig({ autocomplete: 'ac.noresults' });
+
+		const input = document.querySelector('.searchspring-ac') as HTMLInputElement;
+		input.value = 'efjii4iieiiedid';
+
+		input.focus();
+
+		await waitFor(() => {
+			expect(controller.store.search.query?.string).toBe('efjii4iieiiedid');
+
+			langObjs.forEach(async (langObj) => {
+				const lang = {
+					[`noResultsText`]: langObj,
+				};
+
+				let valueSatisfied = false;
+				let altSatisfied = false;
+				let labelSatisfied = false;
+				let valueTextSatisfied = false;
+				let titleSatisfied = false;
+
+				const rendered = render(<Autocomplete lang={lang} {...args} />, { container });
+
+				const autocomplete = rendered.container.querySelector('.ss__autocomplete');
+				expect(autocomplete).toBeInTheDocument();
+
+				const langElems = rendered.container.querySelectorAll(`[ss-lang=noResultsText]`);
+				expect(langElems.length).toBeGreaterThan(0);
+
+				langElems.forEach((elem) => {
+					if (typeof langObj.value == 'function') {
+						expect(valueMock).toHaveBeenCalledWith({
+							controller: controller,
+						});
+						if (elem?.innerHTML == value) {
+							valueSatisfied = true;
+						}
+					} else {
+						if (elem?.innerHTML == langObj.value) {
+							valueSatisfied = true;
+						}
+					}
+					if (elem.getAttribute('alt') == altText) {
+						altSatisfied = true;
+					}
+					if (elem.getAttribute('aria-label') == ariaLabel) {
+						labelSatisfied = true;
+					}
+					if (elem.getAttribute('aria-valuetext') == ariaValueText) {
+						valueTextSatisfied = true;
+					}
+					if (elem.getAttribute('title') == title) {
+						titleSatisfied = true;
+					}
+				});
+
+				expect(valueSatisfied).toBeTruthy();
+				expect(altSatisfied).toBeTruthy();
+				expect(labelSatisfied).toBeTruthy();
+				expect(valueTextSatisfied).toBeTruthy();
+				expect(titleSatisfied).toBeTruthy();
+
+				jest.restoreAllMocks();
+			});
+		});
+	});
+
 	describe('AutoComplete theming works', () => {
 		it('is themeable with ThemeProvider', async () => {
 			const globalTheme = {

@@ -7,11 +7,13 @@ import classnames from 'classnames';
 
 import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { defined, mergeProps } from '../../../utilities';
-import { ComponentProps, StylingCSS, ListOption } from '../../../types';
+import { ComponentProps, RootNodeProperties, ListOption } from '../../../types';
 import { Dropdown, DropdownProps } from '../../Atoms/Dropdown';
 import { Button, ButtonProps } from '../../Atoms/Button';
 import { Icon, IconProps, IconType } from '../../Atoms/Icon';
 import { useA11y } from '../../../hooks/useA11y';
+import { Lang, useLang } from '../../../hooks';
+import deepmerge from 'deepmerge';
 
 const CSS = {
 	select: ({ color, backgroundColor, borderColor, theme }: Partial<SelectProps>) =>
@@ -106,6 +108,7 @@ export const Select = observer((properties: SelectProps): JSX.Element => {
 		className,
 		style,
 		styleScript,
+		treePath,
 	} = props;
 	let { options } = props;
 
@@ -121,6 +124,7 @@ export const Select = observer((properties: SelectProps): JSX.Element => {
 			}),
 			// component theme overrides
 			theme: props?.theme,
+			treePath,
 		},
 		button: {
 			// default props
@@ -137,6 +141,7 @@ export const Select = observer((properties: SelectProps): JSX.Element => {
 			}),
 			// component theme overrides
 			theme: props?.theme,
+			treePath,
 		},
 		icon: {
 			// default props
@@ -190,7 +195,7 @@ export const Select = observer((properties: SelectProps): JSX.Element => {
 		!stayOpenOnSelection && setOpen(false);
 	};
 
-	const styling: { css?: StylingCSS } = {};
+	const styling: RootNodeProperties = { 'ss-name': props.name };
 	const stylingProps = props;
 
 	if (styleScript && !disableStyles) {
@@ -207,15 +212,36 @@ export const Select = observer((properties: SelectProps): JSX.Element => {
 
 	const selectedOptions = options.filter((option) => selection?.value === option.value);
 
+	//initialize lang
+	const defaultLang = {
+		buttonLabel: {
+			value: label,
+			attributes: {
+				'aria-label': `${label} dropdown, ${options.length} options ${
+					selectedOptions.length ? `, Currently selected option is ${selectedOptions[0].label}` : ''
+				}`,
+			},
+		},
+	};
+
+	//deep merge with props.lang
+	const lang = deepmerge(defaultLang, props.lang || {});
+	const mergedLang = useLang(lang as any, {
+		options,
+		selectedOptions,
+		label,
+		open,
+	});
+
 	// options can be an Array or ObservableArray - but should have length
 	return typeof options == 'object' && options?.length ? (
 		<CacheProvider>
 			<div {...styling} className={classnames('ss__select', { 'ss__select--disabled': disabled }, className)}>
 				{native ? (
 					<>
-						{label && !hideLabelOnSelection && (
+						{(label || lang.buttonLabel.value) && !hideLabelOnSelection && (
 							<span className="ss__select__label">
-								{label}
+								<label {...mergedLang.buttonLabel?.all}></label>
 								{separator && <span className="ss__select__label__separator">{separator}</span>}
 							</span>
 						)}
@@ -256,17 +282,15 @@ export const Select = observer((properties: SelectProps): JSX.Element => {
 						disableA11y
 						button={
 							<Button {...subProps.button} disableA11y={true}>
-								{label && !hideLabelOnSelection && (
+								{(label || lang.buttonLabel.value) && !hideLabelOnSelection && (
 									<span
 										className="ss__select__label"
 										ref={(e) => useA11y(e)}
-										aria-label={`${label} dropdown, ${options.length} options ${
-											selectedOptions.length ? `, Currently selected option is ${selectedOptions[0].label}` : ''
-										}`}
 										aria-expanded={open}
 										role="button"
+										{...mergedLang.buttonLabel.attributes}
 									>
-										{label}
+										<label {...mergedLang.buttonLabel.value}></label>
 										{separator && selection && <span className="ss__select__label__separator">{separator}</span>}
 									</span>
 								)}
@@ -277,6 +301,7 @@ export const Select = observer((properties: SelectProps): JSX.Element => {
 											<Icon
 												{...subProps.icon}
 												className="ss__select__selection__icon"
+												name={'selection'}
 												{...(typeof selection.icon == 'string' ? { icon: selection.icon } : (selection.icon as Partial<IconProps>))}
 											/>
 										)}
@@ -286,6 +311,7 @@ export const Select = observer((properties: SelectProps): JSX.Element => {
 								{!hideIcon && (
 									<Icon
 										{...subProps.icon}
+										name={open ? 'open' : 'close'}
 										{...(open
 											? { ...(typeof iconClose == 'string' ? { icon: iconClose } : (iconClose as Partial<IconProps>)) }
 											: { ...(typeof iconOpen == 'string' ? { icon: iconOpen } : (iconOpen as Partial<IconProps>)) })}
@@ -310,6 +336,7 @@ export const Select = observer((properties: SelectProps): JSX.Element => {
 									{option.icon && !hideOptionIcons && (
 										<Icon
 											{...subProps.icon}
+											name={'option'}
 											className="ss__select__select__option__icon"
 											{...(typeof option.icon == 'string' ? { icon: option.icon } : (option.icon as Partial<IconProps>))}
 										/>
@@ -356,4 +383,14 @@ export interface SelectProps extends ComponentProps {
 	hideIcon?: boolean;
 	hideOptionIcons?: boolean;
 	hideOptionLabels?: boolean;
+	lang?: Partial<SelectLang>;
+}
+
+export interface SelectLang {
+	buttonLabel: Lang<{
+		options: ListOption[];
+		selectedOptions: ListOption[];
+		label: string;
+		open: boolean;
+	}>;
 }

@@ -12,10 +12,12 @@ import { Carousel, CarouselProps, defaultCarouselBreakpoints, defaultVerticalCar
 import { Result, ResultProps } from '../../Molecules/Result';
 import { defined, mergeProps } from '../../../utilities';
 import { Theme, useTheme, CacheProvider } from '../../../providers';
-import { ComponentProps, BreakpointsProps, StylingCSS, ResultComponent } from '../../../types';
+import { ComponentProps, BreakpointsProps, RootNodeProperties, ResultComponent } from '../../../types';
 import { useDisplaySettings } from '../../../hooks/useDisplaySettings';
 import { RecommendationProfileTracker } from '../../Trackers/Recommendation/ProfileTracker';
 import { RecommendationResultTracker } from '../../Trackers/Recommendation/ResultTracker';
+import { Lang, useLang } from '../../../hooks';
+import deepmerge from 'deepmerge';
 
 const CSS = {
 	recommendation: ({ vertical }: Partial<RecommendationProps>) =>
@@ -72,6 +74,7 @@ export const Recommendation = observer((properties: RecommendationProps): JSX.El
 		className,
 		styleScript,
 		vertical,
+		treePath,
 		...additionalProps
 	} = props;
 
@@ -99,6 +102,7 @@ export const Recommendation = observer((properties: RecommendationProps): JSX.El
 			}),
 			// component theme overrides
 			theme: props?.theme,
+			treePath,
 		},
 		result: {
 			// default props
@@ -109,10 +113,11 @@ export const Recommendation = observer((properties: RecommendationProps): JSX.El
 			}),
 			// component theme overrides
 			theme: props?.theme,
+			treePath,
 		},
 	};
 
-	const styling: { css?: StylingCSS } = {};
+	const styling: RootNodeProperties = { 'ss-name': props.name };
 	const stylingProps = props;
 
 	if (styleScript && !disableStyles) {
@@ -123,11 +128,22 @@ export const Recommendation = observer((properties: RecommendationProps): JSX.El
 		styling.css = [style];
 	}
 
+	//initialize lang
+	const defaultLang: Partial<RecommendationLang> = {
+		titleText: {
+			value: `${title}`,
+		},
+	};
+
+	//deep merge with props.lang
+	const lang = deepmerge(defaultLang, props.lang || {});
+	const mergedLang = useLang(lang as any, {});
+
 	return children || resultsToRender?.length ? (
 		<CacheProvider>
 			<div {...styling} className={classnames('ss__recommendation', className)}>
 				<RecommendationProfileTracker controller={controller}>
-					{title && <h3 className="ss__recommendation__title">{title}</h3>}
+					{title && <h3 className="ss__recommendation__title" {...mergedLang.titleText?.all}></h3>}
 					<Carousel
 						prevButton={prevButton}
 						nextButton={nextButton}
@@ -167,6 +183,7 @@ export const Recommendation = observer((properties: RecommendationProps): JSX.El
 });
 
 export type RecommendationProps = {
+	controller: RecommendationController;
 	title?: JSX.Element | string;
 	breakpoints?: BreakpointsProps;
 	prevButton?: JSX.Element | string;
@@ -175,13 +192,18 @@ export type RecommendationProps = {
 	loop?: boolean;
 	results?: Product[];
 	pagination?: boolean;
-	controller: RecommendationController;
 	children?: ComponentChildren;
 	vertical?: boolean;
 	resultComponent?: ResultComponent;
+	lang?: Partial<RecommendationLang>;
 } & Omit<SwiperOptions, 'breakpoints'> &
 	ComponentProps;
 
+export interface RecommendationLang {
+	titleText?: Lang<{
+		controller: RecommendationController;
+	}>;
+}
 interface RecommendationSubProps {
 	result: Partial<ResultProps>;
 	carousel: Partial<CarouselProps>;

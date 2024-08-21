@@ -5,14 +5,15 @@ import classnames from 'classnames';
 import { observer } from 'mobx-react-lite';
 
 import { Theme, useTheme, CacheProvider } from '../../../providers';
-import { ComponentProps, StylingCSS } from '../../../types';
+import { ComponentProps, RootNodeProperties } from '../../../types';
 import { defined, mergeProps } from '../../../utilities';
-import { useIntersection } from '../../../hooks';
+import { Lang, useIntersection, useLang } from '../../../hooks';
 import type { SearchPaginationStore } from '@searchspring/snap-store-mobx';
 import type { SearchController } from '@searchspring/snap-controller';
 import { Button, ButtonProps } from '../../Atoms/Button';
 import { Icon, IconProps, IconType } from '../../Atoms/Icon';
 import { useFuncDebounce } from '../../../hooks';
+import deepmerge from 'deepmerge';
 
 const CSS = {
 	LoadMore: ({
@@ -155,6 +156,7 @@ export const LoadMore = observer((properties: LoadMoreProps): JSX.Element => {
 		className,
 		style,
 		styleScript,
+		treePath,
 	} = props;
 
 	const store = pagination || controller?.store?.pagination;
@@ -178,6 +180,7 @@ export const LoadMore = observer((properties: LoadMoreProps): JSX.Element => {
 			}),
 			// component theme overrides
 			theme: props?.theme,
+			treePath,
 		},
 		icon: {
 			// default props
@@ -190,6 +193,7 @@ export const LoadMore = observer((properties: LoadMoreProps): JSX.Element => {
 			}),
 			// component theme overrides
 			theme: props?.theme,
+			treePath,
 		},
 	};
 
@@ -197,7 +201,7 @@ export const LoadMore = observer((properties: LoadMoreProps): JSX.Element => {
 		return <Fragment></Fragment>;
 	}
 
-	const styling: { css?: StylingCSS } = {};
+	const styling: RootNodeProperties = { 'ss-name': props.name };
 	const stylingProps = { ...props, pagination: store };
 
 	if (styleScript && !disableStyles) {
@@ -228,6 +232,25 @@ export const LoadMore = observer((properties: LoadMoreProps): JSX.Element => {
 		}
 	}
 
+	//initialize lang
+	const defaultLang = {
+		loadMoreButton: {
+			value: loadMoreText,
+			attributes: {
+				'aria-label': loadMoreText,
+			},
+		},
+		progressText: {
+			value: `You've viewed ${store?.end} of ${store?.totalResults} products`,
+		},
+	};
+
+	//deep merge with props.lang
+	const lang = deepmerge(defaultLang, props.lang || {});
+	const mergedLang = useLang(lang as any, {
+		paginationStore: store,
+	});
+
 	return store.totalResults ? (
 		<CacheProvider>
 			<div
@@ -248,10 +271,10 @@ export const LoadMore = observer((properties: LoadMoreProps): JSX.Element => {
 								store.next?.url.go({ history: 'replace' });
 								onClick && onClick(e);
 							}}
-							aria-label={loadMoreText}
 							{...subProps.button}
+							{...mergedLang.loadMoreButton.attributes}
 						>
-							{loadMoreText}
+							<span {...mergedLang.loadMoreButton.value}>{loadMoreText}</span>
 							{loadingIcon && isLoading && loadingLocation === 'button' ? (
 								<Icon {...subProps.icon} {...(typeof loadingIcon == 'string' ? { icon: loadingIcon } : (loadingIcon as Partial<IconProps>))} />
 							) : (
@@ -274,11 +297,7 @@ export const LoadMore = observer((properties: LoadMoreProps): JSX.Element => {
 										<div className={`ss__load-more__progress__indicator__bar`}></div>
 									</div>
 								)}
-								{!hideProgressText && (
-									<div className={'ss__load-more__progress__text'}>
-										You've viewed {store?.end} of {store?.totalResults} products
-									</div>
-								)}
+								{!hideProgressText && <div className={'ss__load-more__progress__text'} {...mergedLang.progressText?.all}></div>}
 							</Fragment>
 						)}
 						{progressIndicator === 'radial' && (
@@ -334,4 +353,14 @@ export interface LoadMoreProps extends ComponentProps {
 	loadingIcon?: IconType | Partial<IconProps>;
 	loadingLocation?: 'button' | 'outside';
 	onClick?: (event: React.MouseEvent<HTMLElement, MouseEvent>) => void;
+	lang?: Partial<LoadMoreLang>;
+}
+
+export interface LoadMoreLang {
+	loadMoreButton: Lang<{
+		paginationStore: SearchPaginationStore;
+	}>;
+	progressText: Lang<{
+		paginationStore: SearchPaginationStore;
+	}>;
 }

@@ -123,7 +123,7 @@ describe('Finder Store', () => {
 
 				expect(finderStore.config.persist?.enabled).toBe(true);
 				expect(finderStore.loaded).toBe(true);
-				expect(finderStore.state.persisted).toBe(false);
+				expect(finderStore.persisted).toBe(false);
 
 				const selections = finderStore.selections!;
 				const valueToSelect = selections[0].values.filter((value) => value.count! > 10)[0].value;
@@ -140,7 +140,7 @@ describe('Finder Store', () => {
 				const finderStore2 = new FinderStore(config, services);
 				finderStore2.loadPersisted();
 
-				expect(finderStore2.state.persisted).toBe(true);
+				expect(finderStore2.persisted).toBe(true);
 				expect(finderStore2.selections && finderStore2.selections[0].selected).toBe(valueToSelect);
 
 				expect(finderStore2.config.persist?.lockSelections).toBe(false);
@@ -163,7 +163,7 @@ describe('Finder Store', () => {
 
 				expect(finderStore.config.persist?.enabled).toBe(true);
 				expect(finderStore.loaded).toBe(true);
-				expect(finderStore.state.persisted).toBe(false);
+				expect(finderStore.persisted).toBe(false);
 				expect(finderStore.config.persist?.lockSelections).toBe(true);
 
 				const selections = finderStore.selections!;
@@ -176,7 +176,7 @@ describe('Finder Store', () => {
 				const finderStore2 = new FinderStore(config, services);
 				finderStore2.loadPersisted();
 
-				expect(finderStore2.state.persisted).toBe(true);
+				expect(finderStore2.persisted).toBe(true);
 				expect(finderStore2.selections && finderStore2.selections[0].selected).toBe(valueToSelect);
 
 				expect(finderStore2.config.persist?.lockSelections).toBe(true);
@@ -199,7 +199,7 @@ describe('Finder Store', () => {
 
 				expect(finderStore.config.persist?.enabled).toBe(true);
 				expect(finderStore.loaded).toBe(true);
-				expect(finderStore.state.persisted).toBe(false);
+				expect(finderStore.persisted).toBe(false);
 				expect(finderStore.config.persist?.lockSelections).toBe(true);
 
 				const selections = finderStore.selections!;
@@ -212,7 +212,7 @@ describe('Finder Store', () => {
 				// should not have expired yet
 				const finderStore2 = new FinderStore(config, services);
 				finderStore2.loadPersisted();
-				expect(finderStore2.state.persisted).toBe(true);
+				expect(finderStore2.persisted).toBe(true);
 
 				// should be expired now
 				await new Promise((resolve) => setTimeout(resolve, config.persist?.expiration! + 10));
@@ -221,7 +221,7 @@ describe('Finder Store', () => {
 				const spy = jest.spyOn(finderStore3, 'reset');
 				finderStore3.loadPersisted();
 
-				expect(finderStore3.state.persisted).toBe(false);
+				expect(finderStore3.persisted).toBe(false);
 				expect(spy).toHaveBeenCalled();
 
 				spy.mockClear();
@@ -254,7 +254,7 @@ describe('Finder Store', () => {
 				// should not persist due to config mismatch
 				const finderStore2 = new FinderStore(config, services);
 				finderStore2.loadPersisted();
-				expect(finderStore2.state.persisted).toBe(false);
+				expect(finderStore2.persisted).toBe(false);
 				expect(finderStore2.selections?.length).toBe(0);
 			});
 
@@ -293,7 +293,7 @@ describe('Finder Store', () => {
 				// should not persist due to config mismatch
 				const finderStore2 = new FinderStore(config, services);
 				finderStore2.loadPersisted();
-				expect(finderStore2.state.persisted).toBe(true);
+				expect(finderStore2.persisted).toBe(true);
 			});
 
 			it('it will NOT reset persisted selections if something in the config middleware has changed', () => {
@@ -333,7 +333,7 @@ describe('Finder Store', () => {
 				// should not persist due to config mismatch
 				const finderStore2 = new FinderStore(config, services);
 				finderStore2.loadPersisted();
-				expect(finderStore2.state.persisted).toBe(true);
+				expect(finderStore2.persisted).toBe(true);
 			});
 		});
 	});

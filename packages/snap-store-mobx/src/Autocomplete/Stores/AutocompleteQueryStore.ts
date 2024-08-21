@@ -1,19 +1,24 @@
 import { observable, makeObservable } from 'mobx';
 import type { UrlManager } from '@searchspring/snap-url-manager';
-import type { SearchResponseModelSearch, AutocompleteResponseModelAllOfAutocomplete } from '@searchspring/snapi-types';
 import type { AutocompleteStoreConfig, StoreServices } from '../../types';
+import { AutocompleteResponseModel } from '@searchspring/snapi-types';
+
+type AutocompleteQueryStoreConfig = {
+	config: AutocompleteStoreConfig;
+	services: StoreServices;
+	data: {
+		autocomplete: AutocompleteResponseModel;
+	};
+};
 
 export class AutocompleteQueryStore {
 	public query?: Query;
 	public originalQuery?: Query;
 	public correctedQuery?: Query;
 
-	constructor(
-		services: StoreServices,
-		autocomplete: AutocompleteResponseModelAllOfAutocomplete,
-		search: SearchResponseModelSearch,
-		config: AutocompleteStoreConfig
-	) {
+	constructor(params: AutocompleteQueryStoreConfig) {
+		const { services, data, config } = params || {};
+		const { search, autocomplete } = data?.autocomplete || {};
 		const observables: Observables = {};
 
 		if (search?.query) {

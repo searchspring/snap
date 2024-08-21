@@ -5,7 +5,7 @@ import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
 import { observer } from 'mobx-react';
 
-import { ComponentProps, StylingCSS } from '../../../types';
+import { ComponentProps, RootNodeProperties } from '../../../types';
 import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { useClickOutside } from '../../../hooks';
 import { cloneWithProps, mergeProps } from '../../../utilities';
@@ -60,6 +60,7 @@ export const Dropdown = observer((properties: DropdownProps): JSX.Element => {
 		className,
 		style,
 		styleScript,
+		treePath,
 	} = props;
 
 	let showContent: boolean | undefined, setShowContent: undefined | StateUpdater<boolean | undefined>;
@@ -93,7 +94,7 @@ export const Dropdown = observer((properties: DropdownProps): JSX.Element => {
 		}
 	};
 
-	const styling: { css?: StylingCSS } = {};
+	const styling: RootNodeProperties = { 'ss-name': props.name };
 
 	const [classId] = useState((Math.random() + 1).toString(36).substring(7));
 	const stylingProps: Partial<DropdownProps> & { classId: string } = { ...props, classId: classId };
@@ -124,13 +125,13 @@ export const Dropdown = observer((properties: DropdownProps): JSX.Element => {
 						}
 					}}
 				>
-					{cloneWithProps(button, { open: showContent, toggleOpen: toggleShowContent })}
+					{cloneWithProps(button, { open: showContent, toggleOpen: toggleShowContent, treePath })}
 				</div>
 
 				{(content || children) && (
 					<div className={`ss__dropdown__content ss__dropdown__content--${classId}`}>
-						{cloneWithProps(content, { open: showContent, toggleOpen: toggleShowContent })}
-						{cloneWithProps(children, { open: showContent, toggleOpen: toggleShowContent })}
+						{cloneWithProps(content, { open: showContent, toggleOpen: toggleShowContent, treePath })}
+						{cloneWithProps(children, { open: showContent, toggleOpen: toggleShowContent, treePath })}
 					</div>
 				)}
 			</div>

@@ -5,12 +5,14 @@ import classnames from 'classnames';
 
 import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { defined, mergeProps } from '../../../utilities';
-import { ComponentProps, StylingCSS } from '../../../types';
+import { ComponentProps, ListOption, RootNodeProperties } from '../../../types';
 import { Select, SelectProps } from '../Select';
 import { SearchSortingStore } from '@searchspring/snap-store-mobx';
 import type { SearchController } from '@searchspring/snap-controller';
 import { RadioList, RadioListProps } from '../RadioList';
 import { List, ListProps } from '../List';
+import { Lang } from '../../../hooks';
+import deepmerge from 'deepmerge';
 
 const CSS = {
 	sortBy: ({}: Partial<SortByProps>) => css({}),
@@ -26,7 +28,7 @@ export const SortBy = observer((properties: SortByProps): JSX.Element => {
 
 	const props = mergeProps('sortBy', globalTheme, defaultProps, properties);
 
-	const { sorting, type, controller, label, disableStyles, className, style, styleScript } = props;
+	const { sorting, type, controller, label, disableStyles, className, style, styleScript, treePath } = props;
 
 	const store = sorting || controller?.store?.sorting;
 
@@ -40,6 +42,7 @@ export const SortBy = observer((properties: SortByProps): JSX.Element => {
 			}),
 			// component theme overrides
 			theme: props?.theme,
+			treePath,
 		},
 		RadioList: {
 			// global theme
@@ -50,6 +53,7 @@ export const SortBy = observer((properties: SortByProps): JSX.Element => {
 			}),
 			// component theme overrides
 			theme: props?.theme,
+			treePath,
 		},
 		List: {
 			multiSelect: false,
@@ -63,10 +67,11 @@ export const SortBy = observer((properties: SortByProps): JSX.Element => {
 			}),
 			// component theme overrides
 			theme: props?.theme,
+			treePath,
 		},
 	};
 
-	const styling: { css?: StylingCSS } = {};
+	const styling: RootNodeProperties = { 'ss-name': props.name };
 	const stylingProps = props;
 
 	if (styleScript && !disableStyles) {
@@ -77,13 +82,23 @@ export const SortBy = observer((properties: SortByProps): JSX.Element => {
 		styling.css = [style];
 	}
 
+	//initialize lang
+	const defaultLang = {
+		label: {
+			value: label,
+		},
+	};
+
+	//deep merge with props.lang
+	const lang = deepmerge(defaultLang, props.lang || {});
+
 	// options can be an Array or ObservableArray - but should have length
 	return store?.current && typeof store?.options == 'object' && store.options?.length ? (
 		<CacheProvider>
 			{type?.toLowerCase() == 'dropdown' && (
 				<Select
 					{...styling}
-					className={classnames('ss__sortby__select', className)}
+					className={classnames('ss__sortby', 'ss__sortby__select', className)}
 					{...subProps.Select}
 					label={label}
 					options={store.options}
@@ -91,13 +106,16 @@ export const SortBy = observer((properties: SortByProps): JSX.Element => {
 					onSelect={(e, selection) => {
 						selection?.url?.go();
 					}}
+					lang={{
+						buttonLabel: lang.label,
+					}}
 				/>
 			)}
 
 			{type?.toLowerCase() == 'list' && (
 				<List
 					{...styling}
-					className={classnames('ss__sortby__list', className)}
+					className={classnames('ss__sortby', 'ss__sortby__list', className)}
 					{...subProps.List}
 					options={store.options}
 					selected={store.current}
@@ -105,19 +123,25 @@ export const SortBy = observer((properties: SortByProps): JSX.Element => {
 					onSelect={(e, selection) => {
 						selection?.url?.go();
 					}}
+					lang={{
+						title: lang.label,
+					}}
 				/>
 			)}
 
 			{type?.toLowerCase() == 'radio' && (
 				<RadioList
 					{...styling}
-					className={classnames('ss__sortby__radioList', className)}
+					className={classnames('ss__sortby', 'ss__sortby__radioList', className)}
 					{...subProps.RadioList}
 					options={store.options}
 					selected={store.current}
 					titleText={label}
 					onSelect={(e, selection) => {
 						selection?.url?.go();
+					}}
+					lang={{
+						title: lang.label,
 					}}
 				/>
 			)}
@@ -138,4 +162,12 @@ export interface SortByProps extends ComponentProps {
 	controller?: SearchController;
 	label?: string;
 	type?: 'dropdown' | 'list' | 'radio';
+	lang?: Partial<SortByLang>;
+}
+
+export interface SortByLang {
+	label: Lang<{
+		options: ListOption[];
+		selectedOptions: ListOption[];
+	}>;
 }

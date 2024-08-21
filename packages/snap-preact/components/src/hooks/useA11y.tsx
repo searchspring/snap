@@ -1,5 +1,6 @@
 const KEYCODE_TAB = 9;
 const KEYCODE_ESC = 27;
+export const A11Y_ATTRIBUTE = 'ss-a11y';
 
 export function useA11y(elem: any, tabIndex?: number, trapFocus?: boolean, escCallback?: () => unknown) {
 	const styleId = 'ssA11yFocusStyle';
@@ -7,13 +8,13 @@ export function useA11y(elem: any, tabIndex?: number, trapFocus?: boolean, escCa
 		const style = document.createElement('style');
 		style.type = 'text/css';
 		style.id = styleId;
-		style.innerHTML = `[ssA11y]:focus-visible { outline: -webkit-focus-ring-color auto 1px !important; }`;
+		style.innerHTML = `[${A11Y_ATTRIBUTE}]:focus-visible { outline: -webkit-focus-ring-color auto 1px !important; }`;
 		document.getElementsByTagName('head')[0].appendChild(style);
 	}
 
-	if (elem && !elem.attributes?.ssA11y) {
+	if (elem && !elem.attributes?.[A11Y_ATTRIBUTE]) {
 		//A11y attribute is for debouncing on rerenders
-		elem.setAttribute('ssA11y', true);
+		elem.setAttribute(A11Y_ATTRIBUTE, true);
 
 		//tab index 0 is default and used for actionable elements.
 		elem.setAttribute('tabIndex', `${tabIndex || 0}`);

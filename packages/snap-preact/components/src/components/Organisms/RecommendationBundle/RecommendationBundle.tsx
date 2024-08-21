@@ -8,7 +8,7 @@ import { Carousel, CarouselProps as CarouselProps } from '../../Molecules/Carous
 import { Result, ResultProps } from '../../Molecules/Result';
 import { defined, mergeProps } from '../../../utilities';
 import { Theme, useTheme, CacheProvider } from '../../../providers';
-import { ComponentProps, BreakpointsProps, StylingCSS, ResultComponent } from '../../../types';
+import { ComponentProps, BreakpointsProps, RootNodeProperties, ResultComponent } from '../../../types';
 import { useDisplaySettings } from '../../../hooks/useDisplaySettings';
 import { RecommendationProfileTracker } from '../../Trackers/Recommendation/ProfileTracker';
 import { RecommendationResultTracker } from '../../Trackers/Recommendation/ResultTracker';
@@ -18,6 +18,7 @@ import type { Product } from '@searchspring/snap-store-mobx';
 import { BundleSelector } from './BundleSelector';
 import { BundledCTA } from './BundleCTA';
 import { useEffect } from 'react';
+import { Lang } from '../../../hooks';
 
 const CSS = {
 	recommendationBundle: ({ slidesPerView, spaceBetween, ctaInline, vertical, separatorIcon }: any) =>
@@ -198,6 +199,7 @@ export const RecommendationBundle = observer((properties: RecommendationBundlePr
 		style,
 		className,
 		styleScript,
+		treePath,
 		...additionalProps
 	} = props;
 
@@ -246,6 +248,7 @@ export const RecommendationBundle = observer((properties: RecommendationBundlePr
 			}),
 			// component theme overrides
 			theme: props?.theme,
+			treePath,
 		},
 		result: {
 			// default props
@@ -258,6 +261,7 @@ export const RecommendationBundle = observer((properties: RecommendationBundlePr
 			}),
 			// component theme overrides
 			theme: props?.theme,
+			treePath,
 		},
 	};
 
@@ -268,7 +272,7 @@ export const RecommendationBundle = observer((properties: RecommendationBundlePr
 		slidesPerView = resultsToRender.length;
 	}
 
-	const styling: { css?: StylingCSS } = {};
+	const styling: RootNodeProperties = { 'ss-name': props.name };
 	const stylingProps = props;
 
 	if (styleScript && !disableStyles) {
@@ -376,6 +380,22 @@ export const RecommendationBundle = observer((properties: RecommendationBundlePr
 	const seedRef = useRef();
 	const carouselRef = useRef();
 
+	//initialize lang
+	const defaultLang: Partial<RecommendationBundleLang> = {
+		seedText: {
+			value: 'This Product',
+		},
+		ctaButtonText: {
+			value: 'Add All To Cart',
+		},
+		ctaButtonSuccessText: {
+			value: 'Bundle Added!',
+		},
+	};
+
+	//deep merge with props.lang
+	const lang = deepmerge(defaultLang, props.lang || {});
+
 	return resultsToRender?.length ? (
 		<CacheProvider>
 			<div {...styling} className={classnames('ss__recommendation-bundle', { 'ss__recommendation-bundle--stacked': !ctaInline }, className)}>
@@ -406,6 +426,7 @@ export const RecommendationBundle = observer((properties: RecommendationBundlePr
 												hideCheckboxes={hideCheckboxes}
 												theme={props.theme}
 												ref={seedRef}
+												lang={{ seedText: lang.seedText }}
 											>
 												{(() => {
 													if (resultComponent && controller) {
@@ -420,7 +441,7 @@ export const RecommendationBundle = observer((properties: RecommendationBundlePr
 															/>
 														);
 													} else {
-														return <Result {...subProps.result} controller={controller} result={seed} />;
+														return <Result {...subProps.result} controller={controller} result={seed} name={'seed'} />;
 													}
 												})()}
 											</BundleSelector>
@@ -460,6 +481,7 @@ export const RecommendationBundle = observer((properties: RecommendationBundlePr
 																	checked={selected}
 																	hideCheckboxes={hideCheckboxes}
 																	theme={props.theme}
+																	lang={{ seedText: lang.seedText }}
 																>
 																	{(() => {
 																		if (resultComponent && controller) {
@@ -474,7 +496,7 @@ export const RecommendationBundle = observer((properties: RecommendationBundlePr
 																				/>
 																			);
 																		} else {
-																			return <Result {...subProps.result} controller={controller} result={result} />;
+																			return <Result {...subProps.result} controller={controller} result={result} name={'seed'} />;
 																		}
 																	})()}
 																</BundleSelector>
@@ -565,6 +587,7 @@ export const RecommendationBundle = observer((properties: RecommendationBundlePr
 												checked={selected}
 												hideCheckboxes={hideCheckboxes}
 												theme={props.theme}
+												lang={{ seedText: lang.seedText }}
 											>
 												{(() => {
 													if (resultComponent && controller) {
@@ -628,6 +651,10 @@ export const RecommendationBundle = observer((properties: RecommendationBundlePr
 								ctaButtonSuccessText={ctaButtonSuccessText}
 								ctaButtonSuccessTimeout={ctaButtonSuccessTimeout}
 								ctaIcon={ctaIcon}
+								lang={{
+									ctaButtonSuccessText: lang.ctaButtonSuccessText,
+									ctaButtonText: lang.ctaButtonText,
+								}}
 							/>
 						)}
 					</div>
@@ -640,6 +667,10 @@ export const RecommendationBundle = observer((properties: RecommendationBundlePr
 							ctaButtonSuccessText={ctaButtonSuccessText}
 							ctaButtonSuccessTimeout={ctaButtonSuccessTimeout}
 							ctaIcon={ctaIcon}
+							lang={{
+								ctaButtonSuccessText: lang.ctaButtonSuccessText,
+								ctaButtonText: lang.ctaButtonText,
+							}}
 						/>
 					)}
 				</RecommendationProfileTracker>
@@ -677,6 +708,13 @@ export interface RecommendationBundleProps extends ComponentProps {
 	vertical?: boolean;
 	carousel?: BundleCarouselProps;
 	slidesPerView?: number; // TODO: remove this prop?
+	lang?: Partial<RecommendationBundleLang>;
+}
+
+export interface RecommendationBundleLang {
+	seedText: Lang<never>;
+	ctaButtonText: Lang<never>;
+	ctaButtonSuccessText: Lang<never>;
 }
 
 interface RecommendationBundleSubProps {

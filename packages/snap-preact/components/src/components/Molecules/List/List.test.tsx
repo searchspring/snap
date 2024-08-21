@@ -333,7 +333,7 @@ describe('List Component', () => {
 		expect(optionElements).toBeInTheDocument();
 
 		expect(optionElements.innerHTML).toBe(
-			`<span class=\"ss__checkbox ss-1mgplc8\" aria-label=\" unchecked checkbox\" role=\"checkbox\" aria-checked=\"false\"><span class=\"ss__checkbox__empty\"></span></span>`
+			`<span class=\"ss__checkbox ss-1mgplc8\" role=\"checkbox\" aria-checked=\"false\" ss-lang=\"checkbox\" aria-label=\" unchecked checkbox\"><span class=\"ss__checkbox__empty\"></span></span>`
 		);
 
 		await userEvent.click(optionElements);
@@ -344,7 +344,7 @@ describe('List Component', () => {
 	it('it can render Icon options', async () => {
 		const selectFn = jest.fn();
 
-		const iconOptions = [
+		const iconOptions: ListOption[] = [
 			{
 				label: '1 wide',
 				value: '1 wide',
@@ -386,7 +386,7 @@ describe('List Component', () => {
 	it('it can hide Icon options', async () => {
 		const selectFn = jest.fn();
 
-		const iconOptions = [
+		const iconOptions: ListOption[] = [
 			{
 				label: '1 wide',
 				value: '1 wide',
@@ -431,6 +431,117 @@ describe('List Component', () => {
 		const titleElem = rendered.container.querySelector('.ss__list__title');
 
 		expect(titleElem).toHaveTextContent(title);
+	});
+
+	describe('List lang works', () => {
+		const selector = '.ss__list';
+
+		it('immediately available lang options', async () => {
+			const langOptions = ['title'];
+
+			//text attributes/values
+			const value = 'custom value';
+			const altText = 'custom alt';
+			const ariaLabel = 'custom label';
+			const ariaValueText = 'custom value text';
+			const title = 'custom title';
+
+			const valueMock = jest.fn(() => value);
+			const altMock = jest.fn(() => altText);
+			const labelMock = jest.fn(() => ariaLabel);
+			const valueTextMock = jest.fn(() => ariaValueText);
+			const titleMock = jest.fn(() => title);
+
+			const langObjs = [
+				{
+					value: value,
+					attributes: {
+						alt: altText,
+						'aria-label': ariaLabel,
+						'aria-valuetext': ariaValueText,
+						title: title,
+					},
+				},
+				{
+					value: valueMock,
+					attributes: {
+						alt: altMock,
+						'aria-label': labelMock,
+						'aria-valuetext': valueTextMock,
+						title: titleMock,
+					},
+				},
+				{
+					value: `<div>${value}</div>`,
+					attributes: {
+						alt: altText,
+						'aria-label': ariaLabel,
+						'aria-valuetext': ariaValueText,
+						title: title,
+					},
+				},
+			];
+
+			langOptions.forEach((option) => {
+				langObjs.forEach((langObj) => {
+					const lang = {
+						[`${option}`]: langObj,
+					};
+
+					let valueSatisfied = false;
+					let altSatisfied = false;
+					let labelSatisfied = false;
+					let valueTextSatisfied = false;
+					let titleSatisfied = false;
+
+					// @ts-ignore
+					const rendered = render(<List options={options} lang={lang} />);
+
+					const element = rendered.container.querySelector(selector);
+					expect(element).toBeInTheDocument();
+
+					const langElems = rendered.container.querySelectorAll(`[ss-lang=${option}]`);
+					expect(langElems.length).toBeGreaterThan(0);
+					langElems.forEach((elem) => {
+						if (typeof langObj.value == 'function') {
+							expect(valueMock).toHaveBeenCalledWith({
+								options: options,
+								selectedOptions: [],
+							});
+
+							if (elem?.innerHTML == value) {
+								valueSatisfied = true;
+							}
+						} else {
+							if (elem?.innerHTML == langObj.value) {
+								valueSatisfied = true;
+							}
+						}
+
+						if (elem.getAttribute('alt') == altText) {
+							altSatisfied = true;
+						}
+						if (elem.getAttribute('aria-label') == ariaLabel) {
+							labelSatisfied = true;
+						}
+						if (elem.getAttribute('aria-valuetext') == ariaValueText) {
+							valueTextSatisfied = true;
+						}
+						if (elem.getAttribute('title') == title) {
+							titleSatisfied = true;
+						}
+					});
+
+					expect(valueSatisfied).toBeTruthy();
+					expect(altSatisfied).toBeTruthy();
+					expect(labelSatisfied).toBeTruthy();
+					expect(valueTextSatisfied).toBeTruthy();
+					expect(titleSatisfied).toBeTruthy();
+
+					jest.restoreAllMocks();
+				});
+			});
+		});
 	});
 
 	it('can disableStyles', () => {
