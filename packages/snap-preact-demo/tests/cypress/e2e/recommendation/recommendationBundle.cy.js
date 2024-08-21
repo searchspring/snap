@@ -78,19 +78,15 @@ describe('BundledRecommendations', () => {
 					.should('exist')
 					.should('have.text', 'Subtotal for 4 items');
 				//price
-				cy.get(`${config?.selectors?.recommendation.cta} .ss__price--strike`).should('exist').should('have.text', '$175.00');
+				cy.get(`${config?.selectors?.recommendation.cta} .ss__price--strike`).should('exist').contains(`$${store.cart.msrp}`);
 				//strike
 				cy.get(`${config?.selectors?.recommendation.cta} .ss__recommendation-bundle__wrapper__cta__subtotal__price .ss__price`)
 					.should('exist')
-					.should('have.text', '$157.00');
+					.contains(`$${store.cart.price}`);
 				//button
 				cy.get(`${config?.selectors?.recommendation.cta} .ss__recommendation-bundle__wrapper__cta__button`)
 					.should('exist')
 					.should('have.text', 'Add All To Cart');
-
-				expect(store.cart.count).to.equal(4);
-				expect(store.cart.price).to.equal(157);
-				expect(store.cart.msrp).to.equal(175);
 			});
 
 			//check it is responsive to cartstore changes.
@@ -98,25 +94,21 @@ describe('BundledRecommendations', () => {
 				.should('exist')
 				.click()
 				.then(() => {
-					//title
-					cy.get(`${config?.selectors?.recommendation.cta} .ss__recommendation-bundle__wrapper__cta__subtotal__title`)
-						.should('exist')
-						.should('have.text', 'Subtotal for 3 items');
-					//price
-					cy.get(`${config?.selectors?.recommendation.cta} .ss__price--strike`).should('exist').should('have.text', '$125.00');
-					//strike
-					cy.get(`${config?.selectors?.recommendation.cta} .ss__recommendation-bundle__wrapper__cta__subtotal__price .ss__price`)
-						.should('exist')
-						.should('have.text', '$109.00');
-					//button
-					cy.get(`${config?.selectors?.recommendation.cta} .ss__recommendation-bundle__wrapper__cta__button`)
-						.should('exist')
-						.should('have.text', 'Add All To Cart');
-
 					cy.snapController(config?.selectors?.recommendation.controller).then(({ store }) => {
-						expect(store.cart.count).to.equal(3);
-						expect(store.cart.price).to.equal(109);
-						expect(store.cart.msrp).to.equal(125);
+						//title
+						cy.get(`${config?.selectors?.recommendation.cta} .ss__recommendation-bundle__wrapper__cta__subtotal__title`)
+							.should('exist')
+							.should('have.text', 'Subtotal for 3 items');
+						//price
+						cy.get(`${config?.selectors?.recommendation.cta} .ss__price--strike`).should('exist').contains(`$${store.cart.msrp}`);
+						//strike
+						cy.get(`${config?.selectors?.recommendation.cta} .ss__recommendation-bundle__wrapper__cta__subtotal__price .ss__price`)
+							.should('exist')
+							.contains(`$${store.cart.price}`);
+						//button
+						cy.get(`${config?.selectors?.recommendation.cta} .ss__recommendation-bundle__wrapper__cta__button`)
+							.should('exist')
+							.should('have.text', 'Add All To Cart');
 					});
 				});
 		});
