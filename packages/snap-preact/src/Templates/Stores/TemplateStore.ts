@@ -237,7 +237,7 @@ export class TemplatesStore {
 	public async setLanguage(languageCode: string) {
 		if (languageCode in this.library.import.language) {
 			await this.library.import.language[languageCode as keyof typeof this.library.import.language]();
-			const language = this.library.locales.currencies[languageCode];
+			const language = this.library.locales.languages[languageCode];
 
 			if (language) {
 				this.language = languageCode;

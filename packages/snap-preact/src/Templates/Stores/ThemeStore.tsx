@@ -196,7 +196,7 @@ export class ThemeStore {
 	}
 }
 
-function mergeLayers(...layers: Partial<Theme>[]): Partial<Theme> {
+export function mergeLayers(...layers: Partial<Theme>[]): Partial<Theme> {
 	return deepmerge.all(layers, { isMergeableObject: isPlainObject, arrayMerge: combineMerge });
 }
 

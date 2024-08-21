@@ -105,6 +105,9 @@ export class LibraryStore {
 			en: async () => {
 				return this.locales.languages.en || (this.locales.languages.en = (await import('./library/languages/en')).en);
 			},
+			fr: async () => {
+				return this.locales.languages.fr || (this.locales.languages.fr = (await import('./library/languages/fr')).fr);
+			},
 		},
 		currency: {
 			usd: async () => {
@@ -151,9 +154,7 @@ export class LibraryStore {
 		// load everything
 		const loadPromises: Promise<any>[] = [];
 		Object.keys(this.import).forEach((importGroup) => {
-			console.log('importGroup', importGroup);
 			const importList = this.import[importGroup as keyof typeof this.import];
-			console.log('importList', importList);
 
 			Object.keys(importList).forEach((importName) => {
 				if (importGroup === 'component') {
