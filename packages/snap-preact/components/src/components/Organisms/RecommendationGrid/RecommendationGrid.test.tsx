@@ -58,7 +58,7 @@ describe('RecommendationGrid Component', () => {
 
 	const theme = {
 		components: {
-			recommendationList: {
+			recommendationGrid: {
 				className: 'classy',
 			},
 		},
@@ -67,14 +67,12 @@ describe('RecommendationGrid Component', () => {
 	it('renders list', () => {
 		const rendered = render(<RecommendationGrid controller={controller} />);
 
-		const list = rendered.container.querySelector('.ss__recommendation-list')!;
+		const list = rendered.container.querySelector('.ss__recommendation-grid')!;
 		expect(list).toBeInTheDocument();
-		const listStyles = getComputedStyle(list);
-		expect(listStyles['grid-template-columns' as keyof CSSStyleDeclaration]).toBe('repeat(20, 1fr)');
 
 		const resultElement = rendered.getByText(controller.store.results[0].mappings.core?.name!);
 		expect(resultElement).toBeInTheDocument();
-		const results = rendered.container.querySelectorAll('.ss__recommendation-list__result');
+		const results = rendered.container.querySelectorAll('.ss__recommendation-grid__result');
 		expect(results.length).toBe(controller.store.results.length);
 	});
 
@@ -83,9 +81,9 @@ describe('RecommendationGrid Component', () => {
 
 		const rendered = render(<RecommendationGrid title={titleText} controller={controller} />);
 
-		const list = rendered.container.querySelector('.ss__recommendation-list')!;
+		const list = rendered.container.querySelector('.ss__recommendation-grid')!;
 		expect(list).toBeInTheDocument();
-		const titleElem = rendered.container.querySelector('.ss__recommendation-list__title')!;
+		const titleElem = rendered.container.querySelector('.ss__recommendation-grid__title')!;
 		expect(titleElem).toBeInTheDocument();
 		expect(titleElem.innerHTML).toBe(titleText);
 	});
@@ -101,6 +99,31 @@ describe('RecommendationGrid Component', () => {
 		expect(results.length).toBe(args.columns * args.rows);
 	});
 
+	it('auto adjusts columns', () => {
+		const args = {
+			rows: 3,
+		};
+
+		const rendered = render(<RecommendationGrid controller={controller} {...args} />);
+		const elem = rendered.container.querySelector('.ss__recommendation-grid__results');
+		const styles = getComputedStyle(elem!);
+
+		expect(styles.gridTemplateColumns).toBe('repeat(7, 1fr)');
+	});
+
+	it('can use trim', () => {
+		const args = {
+			rows: 3,
+			trim: true,
+		};
+
+		const rendered = render(<RecommendationGrid controller={controller} {...args} />);
+		const elem = rendered.container.querySelector('.ss__recommendation-grid__results');
+		const styles = getComputedStyle(elem!);
+
+		expect(styles.gridTemplateColumns).toBe('repeat(6, 1fr)');
+	});
+
 	it('renders custom rows and gapsize', () => {
 		const args = {
 			columns: 2,
@@ -109,17 +132,17 @@ describe('RecommendationGrid Component', () => {
 		};
 
 		const rendered = render(<RecommendationGrid controller={controller} {...args} />);
-		const resultsElement = rendered.container.querySelector('.ss__recommendation-list')!;
-		const resultsElementStyles = getComputedStyle(resultsElement);
+		const resultsElement = rendered.container.querySelector('.ss__recommendation-grid')!;
+		expect(resultsElement).toBeInTheDocument();
+		const gridElem = rendered.container.querySelector('.ss__recommendation-grid__results');
+		expect(gridElem).toBeInTheDocument();
+		const resultsElementStyles = getComputedStyle(gridElem!);
 
 		expect(resultsElementStyles.gridTemplateColumns).toBe(`repeat(${args.columns}, 1fr)`);
+		expect(resultsElementStyles.gap).toBe(args.gapSize);
 
 		const result = rendered.container.querySelectorAll('.ss__result')!;
-
 		expect(result[0]).toBeInTheDocument();
-		const resultStyles = getComputedStyle(result[0]);
-		expect(resultStyles.marginRight).toBe(args.gapSize);
-		expect(resultStyles.marginBottom).toBe(args.gapSize);
 	});
 
 	it('can use breakpoints', async () => {
@@ -136,7 +159,7 @@ describe('RecommendationGrid Component', () => {
 			breakpoints: customBreakpoints,
 		};
 		const rendered = render(<RecommendationGrid controller={controller} {...args} />);
-		const resultsElement = rendered.container.querySelector('.ss__recommendation-list');
+		const resultsElement = rendered.container.querySelector('.ss__recommendation-grid');
 
 		expect(resultsElement).toBeInTheDocument();
 		expect(resultsElement).toHaveClass('desktop');
@@ -159,7 +182,7 @@ describe('RecommendationGrid Component', () => {
 		const className = 'classy';
 		const rendered = render(<RecommendationGrid controller={controller} className={className} />);
 
-		const resultsElement = rendered.container.querySelector('.ss__recommendation-list');
+		const resultsElement = rendered.container.querySelector('.ss__recommendation-grid');
 		expect(resultsElement).toBeInTheDocument();
 		expect(resultsElement).toHaveClass(className);
 	});
@@ -167,7 +190,7 @@ describe('RecommendationGrid Component', () => {
 	it('can disable styles', () => {
 		const rendered = render(<RecommendationGrid controller={controller} disableStyles />);
 
-		const resultsElement = rendered.container.querySelector('.ss__recommendation-list');
+		const resultsElement = rendered.container.querySelector('.ss__recommendation-grid');
 
 		expect(resultsElement?.classList).toHaveLength(1);
 	});
@@ -181,8 +204,8 @@ describe('RecommendationGrid Component', () => {
 				<RecommendationGrid {...args} />
 			</ThemeProvider>
 		);
-		const resultsElement = rendered.container.querySelector('.ss__recommendation-list')!;
-		expect(resultsElement).toHaveClass(theme.components.recommendationList.className);
+		const resultsElement = rendered.container.querySelector('.ss__recommendation-grid')!;
+		expect(resultsElement).toHaveClass(theme.components.recommendationGrid.className);
 	});
 
 	it('is themeable with theme prop', () => {
@@ -190,8 +213,8 @@ describe('RecommendationGrid Component', () => {
 			controller: controller,
 		};
 		const rendered = render(<RecommendationGrid {...args} theme={theme} />);
-		const resultsElement = rendered.container.querySelector('.ss__recommendation-list')!;
-		expect(resultsElement).toHaveClass(theme.components.recommendationList.className);
+		const resultsElement = rendered.container.querySelector('.ss__recommendation-grid')!;
+		expect(resultsElement).toHaveClass(theme.components.recommendationGrid.className);
 	});
 
 	it('is themeable with theme prop overrides ThemeProvider', () => {
@@ -201,14 +224,14 @@ describe('RecommendationGrid Component', () => {
 
 		const globalTheme = {
 			components: {
-				recommendationList: {
+				recommendationGrid: {
 					className: 'notClassy',
 				},
 			},
 		};
 		const componentTheme = {
 			components: {
-				recommendationList: {
+				recommendationGrid: {
 					className: 'Classy',
 				},
 			},
@@ -220,8 +243,8 @@ describe('RecommendationGrid Component', () => {
 			</ThemeProvider>
 		);
 
-		const resultsElement = rendered.container.querySelector('.ss__recommendation-list')!;
-		expect(resultsElement).toHaveClass(componentTheme.components.recommendationList.className);
-		expect(resultsElement).not.toHaveClass(globalTheme.components.recommendationList.className);
+		const resultsElement = rendered.container.querySelector('.ss__recommendation-grid')!;
+		expect(resultsElement).toHaveClass(componentTheme.components.recommendationGrid.className);
+		expect(resultsElement).not.toHaveClass(globalTheme.components.recommendationGrid.className);
 	});
 });

@@ -19,15 +19,15 @@ const CSS = {
 			overflow: 'auto',
 			maxWidth: '100%',
 			maxHeight: '100%',
-			'.ss__recommendation-list__results': {
+			'.ss__recommendation-grid__results': {
 				display: 'flex',
 				flexFlow: 'row wrap',
 				gap: gapSize,
+				gridTemplateRows: 'auto',
+				gridTemplateColumns: `repeat(${columns}, 1fr)`,
 
 				'@supports (display: grid)': {
 					display: 'grid',
-					gridTemplateRows: 'auto',
-					gridTemplateColumns: `repeat(${columns}, 1fr)`,
 				},
 			},
 		}),
@@ -41,7 +41,7 @@ export const RecommendationGrid = observer((properties: RecommendationGridProps)
 		gapSize: '20px',
 	};
 
-	let props = mergeProps('recommendationList', globalTheme, defaultProps, properties);
+	let props = mergeProps('recommendationGrid', globalTheme, defaultProps, properties);
 
 	if (!properties.theme?.name) {
 		// breakpoint settings are calculated in ThemeStore for snap templates
@@ -59,7 +59,7 @@ export const RecommendationGrid = observer((properties: RecommendationGridProps)
 	const subProps: RecommendationGridSubProps = {
 		result: {
 			// default props
-			className: 'ss__recommendation-list__result',
+			className: 'ss__recommendation-grid__result',
 			// global theme
 			...globalTheme?.components?.result,
 			// inherited props
@@ -107,10 +107,10 @@ export const RecommendationGrid = observer((properties: RecommendationGridProps)
 	return results?.length ? (
 		<CacheProvider>
 			<RecommendationProfileTracker controller={controller}>
-				<div {...styling} className={classnames('ss__recommendation-list', className)}>
-					{title && <h3 className="ss__recommendation-list__title">{title}</h3>}
+				<div {...styling} className={classnames('ss__recommendation-grid', className)}>
+					{title && <h3 className="ss__recommendation-grid__title">{title}</h3>}
 
-					<div className="ss__recommendation-list__results">
+					<div className="ss__recommendation-grid__results">
 						{results.map((result) =>
 							(() => {
 								if (resultComponent && controller) {

@@ -204,7 +204,12 @@ export const Icons = (props: CarouselProps) => {
 			{Object.keys(iconPaths).map((icon, index) => {
 				return (
 					<div style={{ margin: '0 auto', textAlign: 'center' }}>
-						<Icon icon={icon} color={shiftColor('#3a23ad', (index + '111').padStart(6, '1'))} size="80px" style={{ padding: '20px' }} />
+						<Icon
+							icon={icon as keyof typeof iconPaths}
+							color={shiftColor('#3a23ad', (index + '111').padStart(6, '1'))}
+							size="80px"
+							style={{ padding: '20px' }}
+						/>
 						<div style={{ textAlign: 'center' }}>{icon}</div>
 					</div>
 				);
