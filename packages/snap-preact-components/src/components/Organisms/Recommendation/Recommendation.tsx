@@ -4,13 +4,14 @@ import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
 import { observer } from 'mobx-react';
 import deepmerge from 'deepmerge';
-
+import { useState, useRef } from 'preact/hooks';
 import type { RecommendationController } from '@searchspring/snap-controller';
 import type { Product } from '@searchspring/snap-store-mobx';
 
 import { Carousel, CarouselProps, defaultCarouselBreakpoints, defaultVerticalCarouselBreakpoints } from '../../Molecules/Carousel';
 import { Result, ResultProps } from '../../Molecules/Result';
 import { defined } from '../../../utilities';
+import { useIntersection } from '../../../hooks';
 import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { ComponentProps, BreakpointsProps, StylingCSS } from '../../../types';
 import { useDisplaySettings } from '../../../hooks/useDisplaySettings';
@@ -68,9 +69,16 @@ export const Recommendation = observer((properties: RecommendationProps): JSX.El
 		disableStyles,
 		style,
 		className,
+		lazyRender,
 		vertical,
 		...additionalProps
 	} = props;
+
+	const mergedlazyRender = {
+		enabled: true,
+		offset: '10%',
+		...lazyRender,
+	};
 
 	if (!controller || controller.type !== 'recommendation') {
 		throw new Error(`<Recommendation> Component requires 'controller' prop with an instance of RecommendationController`);
@@ -120,35 +128,59 @@ export const Recommendation = observer((properties: RecommendationProps): JSX.El
 		styling.css = [style];
 	}
 
+	const [isVisible, setIsVisible] = useState(false);
+
+	const recsRef = useRef(null);
+	const inView = mergedlazyRender?.enabled ? useIntersection(recsRef, `${mergedlazyRender.offset} 0px ${mergedlazyRender.offset} 0px`, true) : true;
+	if (inView) {
+		setIsVisible(true);
+	}
+
 	return children || resultsToRender?.length ? (
 		<CacheProvider>
-			<div {...styling} className={classnames('ss__recommendation', className)}>
-				<RecommendationProfileTracker controller={controller}>
-					{title && <h3 className="ss__recommendation__title">{title}</h3>}
-					<Carousel
-						prevButton={prevButton}
-						nextButton={nextButton}
-						hideButtons={hideButtons}
-						loop={loop}
-						pagination={pagination}
-						breakpoints={breakpoints}
-						{...subProps.carousel}
-						{...additionalProps}
-						{...displaySettings}
-					>
+			<div {...styling} className={classnames('ss__recommendation', className)} ref={recsRef}>
+				{isVisible ? (
+					<RecommendationProfileTracker controller={controller}>
+						{title && <h3 className="ss__recommendation__title">{title}</h3>}
+						<Carousel
+							prevButton={prevButton}
+							nextButton={nextButton}
+							hideButtons={hideButtons}
+							loop={loop}
+							pagination={pagination}
+							breakpoints={breakpoints}
+							{...subProps.carousel}
+							{...additionalProps}
+							{...displaySettings}
+						>
+							{Array.isArray(children) && children.length
+								? children.map((child: any, idx: number) => (
+										<RecommendationResultTracker controller={controller} result={resultsToRender[idx]}>
+											{child}
+										</RecommendationResultTracker>
+								  ))
+								: resultsToRender.map((result) => (
+										<RecommendationResultTracker controller={controller} result={result}>
+											<Result {...subProps.result} controller={controller} result={result} />
+										</RecommendationResultTracker>
+								  ))}
+						</Carousel>
+					</RecommendationProfileTracker>
+				) : (
+					<RecommendationProfileTracker controller={controller}>
 						{Array.isArray(children) && children.length
 							? children.map((child: any, idx: number) => (
 									<RecommendationResultTracker controller={controller} result={resultsToRender[idx]}>
-										{child}
+										<></>
 									</RecommendationResultTracker>
 							  ))
 							: resultsToRender.map((result) => (
 									<RecommendationResultTracker controller={controller} result={result}>
-										<Result {...subProps.result} controller={controller} result={result} />
+										<></>
 									</RecommendationResultTracker>
 							  ))}
-					</Carousel>
-				</RecommendationProfileTracker>
+					</RecommendationProfileTracker>
+				)}
 			</div>
 		</CacheProvider>
 	) : (
@@ -168,6 +200,10 @@ export interface RecommendationProps extends ComponentProps {
 	controller: RecommendationController;
 	children?: ComponentChildren;
 	vertical?: boolean;
+	lazyRender?: {
+		enabled: boolean;
+		offset?: string;
+	};
 }
 
 interface RecommendationSubProps {
