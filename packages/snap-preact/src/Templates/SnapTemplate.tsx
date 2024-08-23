@@ -13,7 +13,7 @@ import type { UrlTranslatorConfig } from '@searchspring/snap-url-manager';
 import type { RecommendationInstantiatorConfigSettings, RecommendationComponentObject } from '../Instantiators/RecommendationInstantiator';
 import type { SnapFeatures } from '../types';
 import type { SnapConfig, ExtendedTarget } from '../Snap';
-import type { SubType, TemplateStoreConfig } from './Stores/TemplateStore';
+import type { RecsTemplateTypes, TemplateStoreConfig, TemplateTypes } from './Stores/TemplateStore';
 
 export const THEME_EDIT_COOKIE = 'ssThemeEdit';
 export const GLOBAL_THEME_NAME = 'global';
@@ -215,23 +215,24 @@ export function createRecommendationComponentMapping(
 
 	return Object.keys(templateConfig.recommendation || {})
 		.filter((key) => ['default', 'email', 'bundle'].includes(key))
-		.reduce((mapping, subType) => {
-			Object.keys(templateConfig.recommendation![subType as SubType] || {}).forEach((targetName) => {
-				const target = templateConfig.recommendation![subType as SubType]![targetName] as TemplateTarget;
+		.reduce((mapping, recsType) => {
+			Object.keys(templateConfig.recommendation![recsType as RecsTemplateTypes] || {}).forEach((targetName) => {
+				const type: TemplateTypes = `recommendation/${recsType as RecsTemplateTypes}`;
+				const target = templateConfig.recommendation![recsType as RecsTemplateTypes]![targetName] as TemplateTarget;
 				const mappedConfig: RecommendationComponentObject = {
 					component: async () => {
 						const componentImportPromises = [];
-						componentImportPromises.push(templatesStore.library.import.component.recommendation[subType as SubType][target.component]());
+						componentImportPromises.push(templatesStore.library.import.component.recommendation[recsType as RecsTemplateTypes][target.component]());
 						if (target.resultComponent && templatesStore.library.import.component.result[target.resultComponent]) {
 							componentImportPromises.push(templatesStore.library.import.component.result[target.resultComponent]());
 						}
 						await Promise.all(componentImportPromises);
 						return TemplateSelect;
 					},
-					props: { type: 'recommendation', subType, templatesStore },
+					props: { type, templatesStore },
 					onTarget: function (domTarget, elem, injectedElem, controller) {
 						target.selector = `#${controller.id}`;
-						const targetId = templatesStore.addTarget('recommendation', target, subType as SubType);
+						const targetId = templatesStore.addTarget(type, target);
 
 						this.props = this.props || {};
 						this.props.targetId = targetId;

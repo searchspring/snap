@@ -4,29 +4,28 @@ import { Controllers } from '@searchspring/snap-controller';
 import { ThemeProvider, SnapProvider, Theme } from '../../../providers';
 import type { SnapTemplates } from '../../../../../src';
 // TODO: cleanup path to just /src when exports added
-import type { SubType, TemplatesStore, TemplateTypes } from '../../../../../src/Templates/Stores/TemplateStore';
+import type { TemplatesStore, TemplateThemeTypes, TemplateTypes } from '../../../../../src/Templates/Stores/TemplateStore';
 import type { ResultComponent as ResultComponentType } from '../../../';
 
 export const TemplateSelect = observer((properties: TemplateSelectProps): JSX.Element => {
-	const { snap, templatesStore, targetId, type, subType, controller, ...otherProps } = properties;
+	const { snap, templatesStore, targetId, type, controller, ...otherProps } = properties;
 	const { loading } = templatesStore;
-	const targeter = templatesStore.getTarget(type, subType, targetId);
-	let Component;
-	if (type === 'recommendation' && subType) {
-		Component = templatesStore?.library?.components[type][subType][targeter.component];
-	} else {
-		Component = templatesStore?.library?.components[type as Exclude<TemplateTypes, 'recommendation'>][targeter.component];
+	const targeter = templatesStore.getTarget(type, targetId);
+	if (!targeter) {
+		controller.log.error(`Target "${targetId}" not found in store for type "${type}"`);
+		return <Fragment />;
 	}
+	const Component = templatesStore.library.getComponent(type, targeter.component);
 
 	let ResultComponent: ResultComponentType | undefined = undefined;
 	if (targeter.resultComponent) {
-		ResultComponent = templatesStore?.library?.components.result[targeter.resultComponent];
+		ResultComponent = templatesStore.library.components.result[targeter.resultComponent];
 		if (!ResultComponent) {
 			controller.log.error(`Result component "${targeter.resultComponent}" not found in library for target "${targetId}"`);
 			return <Fragment />;
 		}
 	}
-	const themeLocation = templatesStore?.themes?.[targeter.theme.location];
+	const themeLocation = templatesStore?.themes?.[targeter.theme.location as TemplateThemeTypes];
 	const themeStore = themeLocation && themeLocation[targeter.theme.name];
 	const theme = themeStore?.theme;
 
@@ -47,7 +46,6 @@ export interface TemplateSelectProps {
 	templatesStore: TemplatesStore;
 	targetId: string;
 	type: TemplateTypes;
-	subType: SubType;
 	controller: Controllers;
 	snap: SnapTemplates;
 	theme?: Theme;

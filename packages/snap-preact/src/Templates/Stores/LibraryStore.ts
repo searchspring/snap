@@ -1,7 +1,7 @@
 import { FunctionalComponent, RenderableProps } from 'preact';
 
 import type { Theme } from '../../../components/src';
-import type { TemplateCustomComponentTypes } from './TemplateStore';
+import type { TemplateCustomComponentTypes, TemplateTypes } from './TemplateStore';
 import type { TemplateStoreComponentConfig } from './TemplateStore';
 
 type LibraryComponentImport = {
@@ -158,6 +158,19 @@ export class LibraryStore {
 				});
 			});
 		}
+	}
+
+	getComponent(type: TemplateTypes, name: string): FunctionalComponent<RenderableProps<any>> | undefined {
+		const paths = type.split('/');
+		paths.push(name);
+		let importPath: any = this.components;
+		for (let i = 0; i < paths.length; i++) {
+			if (!importPath[paths[i]]) {
+				return undefined;
+			}
+			importPath = importPath[paths[i]];
+		}
+		return importPath;
 	}
 
 	async addComponentImport(
