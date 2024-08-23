@@ -9,7 +9,11 @@ describe('LibraryStore', () => {
 		expect(store.components).toStrictEqual({
 			search: {},
 			autocomplete: {},
-			recommendation: {},
+			recommendation: {
+				bundle: {},
+				default: {},
+				email: {},
+			},
 			badge: {},
 			result: {},
 		});
