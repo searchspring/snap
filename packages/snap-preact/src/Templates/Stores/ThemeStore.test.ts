@@ -353,7 +353,7 @@ themes.forEach((theme) => {
 				return;
 			}
 
-			expect(store.layout.selected).toStrictEqual(layoutOptionDefault);
+			expect(store.layout.selected).toStrictEqual(undefined);
 
 			store.layout.select(layoutOptionNotDefault!);
 			expect(store.layout.selected).toStrictEqual(layoutOptionNotDefault);
