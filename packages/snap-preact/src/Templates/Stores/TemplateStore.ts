@@ -10,9 +10,11 @@ import type { ResultComponent } from '../../../components/src';
 import type { DeepPartial, GlobalThemeStyleScript } from '../../types';
 import type { Theme, ThemeVariables } from '../../../components/src';
 export type TemplateThemeTypes = 'library' | 'local';
-export type TemplateTypes = 'search' | 'autocomplete' | 'recommendation';
+export type TemplateTypes = 'search' | 'autocomplete' | `recommendation/${RecsTemplateTypes}`;
 export type TemplateCustomComponentTypes = 'result' | 'badge';
-export type TemplateComponentTypes = 'search' | 'autocomplete' | 'recommendation' | TemplateCustomComponentTypes;
+export type RecsTemplateTypes = 'bundle' | 'default' | 'email';
+
+type TargetMap = { [targetId: string]: TargetStore };
 
 export type TemplateTarget = {
 	selector?: string;
@@ -69,8 +71,10 @@ export class TemplatesStore {
 	dependencies: TemplatesStoreDependencies;
 
 	targets: {
-		[key in TemplateTypes]: {
-			[targetId: string]: TargetStore;
+		search: TargetMap;
+		autocomplete: TargetMap;
+		recommendation: {
+			[key in RecsTemplateTypes]: TargetMap;
 		};
 	};
 
@@ -99,7 +103,11 @@ export class TemplatesStore {
 		this.targets = {
 			search: {},
 			autocomplete: {},
-			recommendation: {},
+			recommendation: {
+				bundle: {},
+				default: {},
+				email: {},
+			},
 		};
 
 		this.themes = {
@@ -165,17 +173,39 @@ export class TemplatesStore {
 		});
 	}
 
-	// TODO - rename to addTargeter / and change template - target(er) in SnapTemplate (config) and elsewhere
 	public addTarget(type: TemplateTypes, target: TemplateTarget): string | undefined {
 		const targetId = target.selector || target.component;
 		if (targetId) {
-			this.targets[type][targetId] = new TargetStore(target, this.dependencies, this.settings);
+			const path = type.split('/');
+			let targetPath: any = this.targets;
+			for (let index = 0; index < path.length; index++) {
+				if (!targetPath[path[index]]) {
+					return;
+				}
+				targetPath = targetPath[path[index]];
+			}
+			(targetPath as TargetMap)[targetId] = new TargetStore(target, this.dependencies, this.settings);
+
+			if (this.settings.editMode) {
+				// triggers a rerender for TemplateEditor
+				this.targets = { ...this.targets };
+			}
 			return targetId;
 		}
 	}
 
-	public getTarget(type: TemplateTypes, targetId: string) {
-		return this.targets[type][targetId];
+	public getTarget(type: TemplateTypes, targetId: string): TargetStore | undefined {
+		const path = type.split('/');
+		path.push(targetId);
+		let targetPath: any = this.targets;
+		for (let index = 0; index < path.length; index++) {
+			if (!targetPath[path[index]]) {
+				return;
+			}
+			targetPath = targetPath[path[index]];
+		}
+
+		return targetPath;
 	}
 
 	public addTheme(config: {

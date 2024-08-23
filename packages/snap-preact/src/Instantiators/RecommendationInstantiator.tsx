@@ -21,6 +21,7 @@ export type RecommendationComponentObject = {
 	props?: {
 		[name: string]: any;
 	};
+	onTarget: (target: Target, elem: Element | undefined, injectedElem: Element | undefined, controller: RecommendationController) => void;
 };
 
 export type RecommendationInstantiatorConfigSettings = {
@@ -320,6 +321,10 @@ export class RecommendationInstantiator {
 							snap?: Snap;
 					  }> = undefined;
 
+				props.className = `ss__recommendation-${component.toLowerCase()}`;
+				injectedElem?.setAttribute('id', `${controllerConfig.id}`);
+				(this.config.components[component] as RecommendationComponentObject)?.onTarget?.(target, elem, injectedElem, controller);
+
 				if (this.config.components[component] && typeof this.config.components[component] == 'function') {
 					RecommendationsComponent = await (this.config.components[component] as RecommendationComponentFunc)();
 				} else if (this.config.components[component] && typeof this.config.components[component] == 'object') {
@@ -331,8 +336,6 @@ export class RecommendationInstantiator {
 					const importResolutions = await Promise.all(importPromises);
 					RecommendationsComponent = importResolutions[0];
 				}
-
-				props.className = `ss__recommendation-${component.toLowerCase()}`;
 
 				if (!RecommendationsComponent) {
 					this.logger.error(
