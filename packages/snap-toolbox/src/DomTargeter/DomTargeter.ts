@@ -7,6 +7,7 @@ export type Target = {
 	emptyTarget?: boolean;
 	hideTarget?: boolean;
 	autoRetarget?: boolean;
+	unsetTargetMinHeight?: boolean;
 	clickRetarget?: boolean | string;
 	[any: string]: unknown;
 };
@@ -106,13 +107,13 @@ export class DomTargeter {
 
 		const errors: string[] = [];
 
-		targetElemPairs.forEach(({ target, elem }) => {
+		targetElemPairs.forEach(async ({ target, elem }) => {
 			if (target.inject) {
 				try {
 					const injectedElem = this.inject(elem, target);
 					this.targetedElems = this.targetedElems.concat(elem);
 
-					this.onTarget(target, injectedElem, elem);
+					await this.onTarget(target, injectedElem, elem);
 				} catch (e) {
 					errors.push(String(e));
 				}
@@ -121,11 +122,17 @@ export class DomTargeter {
 				target.emptyTarget = target.emptyTarget ?? true;
 				if (target.emptyTarget) while (elem.firstChild && elem.removeChild(elem.firstChild));
 
-				this.onTarget(target, elem);
+				await this.onTarget(target, elem);
 			}
 
 			// unhide target
 			target.hideTarget && this.unhideTarget(target.selector);
+
+			// remove styles by default
+			target.unsetTargetMinHeight = target.unsetTargetMinHeight ?? true;
+			if (target.unsetTargetMinHeight && (elem as HTMLElement).style.minHeight) {
+				(elem as HTMLElement).style.minHeight = '';
+			}
 		});
 
 		if (errors.length) {

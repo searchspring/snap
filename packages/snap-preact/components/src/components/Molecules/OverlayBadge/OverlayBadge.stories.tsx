@@ -102,11 +102,21 @@ export default {
 			},
 			control: { type: 'boolean' },
 		},
+		limit: {
+			description: 'Number of badges per slot',
+			table: {
+				type: {
+					summary: 'number',
+				},
+				defaultValue: { summary: '1' },
+			},
+			control: { type: 'number' },
+		},
 		...componentArgs,
 	},
 };
 
-const snapInstance = Snapify.search({ id: 'Result', globals: { siteId: '8uyt2m' } });
+const snapInstance = Snapify.search({ id: 'OverlayBadge', globals: { siteId: '8uyt2m' } });
 
 const ObservableOverlayBadge = observer(({ args, controller }: { args: OverlayBadgeProps; controller: SearchController }) => {
 	return (
@@ -138,14 +148,24 @@ Default.loaders = [
 
 			response.results[0].badges = [
 				{
-					tag: 'free-shipping-overlay',
+					tag: 'free-shipping',
 					value: 'Free Shipping',
 				},
-			];
-			response.results[1].badges = [
 				{
-					tag: 'free-shipping-callout',
-					value: 'Free Shipping',
+					tag: 'last-one',
+					value: 'Last One!',
+				},
+				{
+					tag: 'on-sale',
+					value: 'On Sale',
+				},
+				{
+					tag: 'save-percent',
+					value: 'Save 30%',
+				},
+				{
+					tag: 'inventory-remaining',
+					value: '1 in stock',
 				},
 			];
 
@@ -159,7 +179,12 @@ Default.loaders = [
 								name: 'Left',
 							},
 						],
-						right: [],
+						right: [
+							{
+								tag: 'right',
+								name: 'Right',
+							},
+						],
 						callout: [
 							{
 								tag: 'callout',
@@ -168,23 +193,53 @@ Default.loaders = [
 						],
 					},
 					tags: {
-						'free-shipping-overlay': {
+						'free-shipping': {
 							location: 'left/left',
 							component: 'BadgeRectangle',
 							priority: 1,
 							enabled: true,
 							parameters: {
-								color: '#FF0000',
+								color: '#3A23AD',
 								colorText: '#FFFFFF',
 							},
 						},
-						'free-shipping-callout': {
-							location: 'callout/callout',
+						'last-one': {
+							location: 'left/left',
+							component: 'BadgePill',
+							priority: 1,
+							enabled: true,
+							parameters: {
+								color: '#515151',
+								colorText: '#FFFFFF',
+							},
+						},
+						'inventory-remaining': {
+							location: 'left/left',
+							component: 'BadgePill',
+							priority: 1,
+							enabled: true,
+							parameters: {
+								color: '#382F5A',
+								colorText: '#FFFFFF',
+							},
+						},
+						'on-sale': {
+							location: 'right/right',
+							component: 'BadgePill',
+							priority: 1,
+							enabled: true,
+							parameters: {
+								color: '#00CEE1',
+								colorText: '#FFFFFF',
+							},
+						},
+						'save-percent': {
+							location: 'right/right',
 							component: 'BadgeRectangle',
 							priority: 1,
 							enabled: true,
 							parameters: {
-								color: '#FF0000',
+								color: '#8F6CF6',
 								colorText: '#FFFFFF',
 							},
 						},
@@ -192,7 +247,9 @@ Default.loaders = [
 				},
 			};
 		});
+
 		await snapInstance.search();
+
 		return {
 			controller: snapInstance,
 		};

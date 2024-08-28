@@ -1,8 +1,13 @@
 import { AppMode } from '@searchspring/snap-toolbox';
 import { BeaconEvent } from './BeaconEvent';
 
+export type CurrencyContext = {
+	code: string;
+};
+
 export type TrackerGlobals = {
 	siteId: string;
+	currency?: CurrencyContext;
 };
 
 export type DoNotTrackEntry = {
@@ -97,6 +102,7 @@ export interface BeaconContext {
 		type?: string;
 		id?: string;
 	};
+	currency?: CurrencyContext;
 }
 
 export interface BeaconMeta {
@@ -127,14 +133,16 @@ export interface TrackErrorEvent {
 	details?: { [any: string]: unknown };
 }
 export interface ProductViewEvent {
+	uid?: string;
 	sku?: string;
+	childUid?: string;
 	childSku?: string;
 }
 export interface CartViewEvent {
-	items: Product[];
+	items: ProductData[];
 }
 
-export interface Product extends ProductViewEvent {
+export interface ProductData extends ProductViewEvent {
 	qty: string | number;
 	price: string | number;
 }
@@ -142,21 +150,23 @@ export interface Product extends ProductViewEvent {
 export interface OrderTransactionEvent {
 	orderId?: string | number;
 	total?: string | number;
+	transactionTotal?: string | number;
 	city?: string;
 	state?: string;
 	country?: string;
-	items: Product[];
+	items: ProductData[];
 }
 
 export interface OrderTransactionData {
 	order?: {
 		id?: string | number;
 		total?: string | number;
+		transactionTotal?: string | number;
 		city?: string;
 		state?: string;
 		country?: string;
 	};
-	items: Product[];
+	items: ProductData[];
 }
 
 export interface RecommendationsEvent {

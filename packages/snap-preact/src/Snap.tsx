@@ -53,6 +53,7 @@ export type ExtendedTarget = Target & {
 	};
 	onTarget?: OnTarget;
 	prefetch?: boolean;
+	renderAfterSearch?: boolean;
 };
 
 export type SnapConfig = {
@@ -305,7 +306,7 @@ export class Snap {
 		let globalContext: ContextVariables = {};
 		try {
 			// get global context
-			globalContext = getContext(['shopper', 'config', 'merchandising', 'siteId']);
+			globalContext = getContext(['shopper', 'config', 'merchandising', 'siteId', 'currency']);
 		} catch (err) {
 			console.error('Snap failed to find global context');
 		}
@@ -353,7 +354,8 @@ export class Snap {
 		try {
 			const urlParams = url(window.location.href);
 			const branchOverride = urlParams?.params?.query?.branch || cookies.get(BRANCH_COOKIE);
-
+			const cookieDomain =
+				(typeof window !== 'undefined' && window.location.hostname && '.' + window.location.hostname.replace(/^www\./, '')) || undefined;
 			/* app mode priority:
 				1. node env
 				2. config
@@ -373,10 +375,10 @@ export class Snap {
 			// query param / cookiev override
 			if ((urlParams?.params?.query && 'dev' in urlParams.params.query) || !!cookies.get(DEV_COOKIE)) {
 				if (urlParams?.params.query?.dev == 'false' || urlParams?.params.query?.dev == '0') {
-					cookies.unset(DEV_COOKIE);
+					cookies.unset(DEV_COOKIE, cookieDomain);
 					this.mode = AppMode.production;
 				} else {
-					cookies.set(DEV_COOKIE, '1', 'Lax', 0);
+					cookies.set(DEV_COOKIE, '1', 'Lax', 0, cookieDomain);
 					this.mode = AppMode.development;
 				}
 			}
@@ -394,7 +396,14 @@ export class Snap {
 			this.logger = services?.logger || new Logger({ prefix: 'Snap Preact ', mode: this.mode });
 
 			// create tracker
-			const trackerGlobals = this.config.tracker?.globals || (this.config.client!.globals as ClientGlobals);
+			let trackerGlobals = this.config.tracker?.globals || (this.config.client!.globals as ClientGlobals);
+
+			if (this.context.currency?.code) {
+				trackerGlobals = deepmerge(trackerGlobals || {}, {
+					currency: this.context.currency,
+				});
+			}
+
 			const trackerConfig = deepmerge(this.config.tracker?.config || {}, { framework: 'preact', mode: this.mode });
 			this.tracker = services?.tracker || new Tracker(trackerGlobals, trackerConfig);
 
@@ -428,7 +437,7 @@ export class Snap {
 
 				// set a cookie with branch
 				if (featureFlags.cookies) {
-					cookies.set(BRANCH_COOKIE, branchOverride, 'Lax', 3600000); // 1 hour
+					cookies.set(BRANCH_COOKIE, branchOverride, 'Lax', 3600000, cookieDomain); // 1 hour
 				} else {
 					this.logger.warn('Cookies are not supported/enabled by this browser, branch overrides will not persist!');
 				}
@@ -483,7 +492,7 @@ export class Snap {
 								{...props}
 								branch={branchOverride}
 								onRemoveClick={() => {
-									cookies.unset(BRANCH_COOKIE);
+									cookies.unset(BRANCH_COOKIE, cookieDomain);
 									const urlState = url(window.location.href);
 									delete urlState?.params.query['branch'];
 
@@ -588,32 +597,36 @@ export class Snap {
 							window.searchspring.controller[cntrlr.config.id] = this.controllers[cntrlr.config.id] = cntrlr;
 							this._controllerPromises[cntrlr.config.id] = new Promise((resolve) => resolve(cntrlr));
 
-							let searched = false;
-							const runSearch = () => {
-								if (!searched) {
+							let searchPromise: Promise<void> | null = null;
+
+							const runSearch = async () => {
+								if (!searchPromise) {
 									// handle custom initial UrlManager state
 									if (controller.url?.initial) {
 										getInitialUrlState(controller.url.initial, cntrlr.urlManager).go({ history: 'replace' });
 									}
 
-									searched = true;
-									this.controllers[controller.config.id].search();
+									searchPromise = this.controllers[controller.config.id].search();
 								}
+
+								return searchPromise;
 							};
 
 							const targetFunction = async (target: ExtendedTarget, elem: Element, originalElem: Element) => {
-								runSearch();
+								const targetFunctionPromises: Promise<any>[] = [];
+								if (target.renderAfterSearch) {
+									targetFunctionPromises.push(runSearch());
+								} else {
+									targetFunctionPromises.push(Promise.resolve());
+									runSearch();
+								}
+
 								const onTarget = target.onTarget as OnTarget;
 								onTarget && (await onTarget(target, elem, originalElem));
 
 								try {
-									const importPromises = [];
-									// dynamically import the component
-									importPromises.push(target.component!());
-
-									const importResolutions = await Promise.all(importPromises);
-									const Component = importResolutions[0];
-
+									targetFunctionPromises.push(target.component!());
+									const [_, Component] = await Promise.all(targetFunctionPromises);
 									setTimeout(() => {
 										render(<Component controller={this.controllers[controller.config.id]} snap={this} {...target.props} />, elem);
 									});
@@ -642,7 +655,7 @@ export class Snap {
 											render(<Skeleton />, elem);
 										});
 									}
-									targetFunction(target, elem, originalElem!);
+									await targetFunction(target, elem, originalElem!);
 								});
 							});
 						} catch (err) {

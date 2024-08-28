@@ -21,6 +21,10 @@ The `AutocompleteController` is used when making queries to the API `autocomplet
 | settings.history.showResults | if history limit is set and there is no input, the first term results will be displayed | false |   | 
 | settings.redirects.merchandising | boolean to disable merchandising redirects when ac form is submitted | true |   | 
 | settings.redirects.singleResult | enable redirect to product detail page if search yields 1 result count | false |   |
+| settings.variants.field | used to set the field in which to grab the variant data from | ➖ |   | 
+| settings.variants.realtime.enabled | enable real time variant updates | ➖ |   | 
+| settings.variants.realtime.filters | specify which filters to use to determine which results are updated | ➖ |   | 
+| settings.variants.options | object keyed by individual option field values for configuration of any option settings  | ➖ |   | 
 
 <br>
 
@@ -121,3 +125,65 @@ autocompleteController.search();
 ### beforeSubmit
 - Called with `eventData` = { controller, input }
 - Invoked prior to submission of autocomplete search
+
+## Variants
+
+### Variant Options Configuration
+The `settings.variants.options` is an object keyed by individual option field name for configuration of any option settings.
+
+| option | description | default value | required | 
+|---|---|:---:|:---:|
+| label | allows for changing the label of the option - (color -> colour) | ➖ |   | 
+| preSelected | array of option values to preselect - ['red','blue'] | ➖ |   | 
+| thumbnailBackgroundImages | boolean used for setting the option background image as the variant thumbnail image  | ➖ |   | 
+| mappings | object keyed by individual optionValues for mapping value attribute overrides  | ➖ |   | 
+| mappings[optionValue].label | setting to override the value label  | ➖ |   | 
+| mappings[optionValue].background | setting to override the value background  | ➖ |   | 
+| mappings[optionValue].backgroundImageUrl | setting to override the value backgroundImageUrl  | ➖ |   | 
+
+```jsx
+const config = {
+	settings:  {
+		variants: {
+			field: "ss__variants",
+			options: {
+				color: {
+					label: "Colour",
+					preSelected: ['transparent'],
+					mappings: {
+						red: {
+							label: 'Cherry',
+							backroundImageUrl: '/images/cherry.png'
+						},
+						blue: {
+							label: "Sky",
+							background: "teal",
+						}
+					}
+				}
+			}
+		}
+	}	
+}
+```
+### Realtime Variants
+
+#### Variant Option Attributes:
+When `realtime` is enabled the attributes `ss-variant-option` and `ss-variant-option-selected` are queried for and used to determine current variant selection and to also attach click events to know when to adjust variant selections in the selection stores. These attributes are needed in order for realtime variants to work properly. 
+
+The attributes are to be added on each variant option in the platform product page main option buttons. The `ss-variant-option` attribute also expects a value of the option feild and option value seperated by a `:`. 
+
+```jsx
+<div>
+	<a href="/products/tee--red" ss-variant-option="Color:red" ss-variant-option-selected>Red</a>
+	<a href="/products/tee--blue" ss-variant-option="Color:Blue">Blue</a>
+	<a href="/products/tee--green" ss-variant-option="Color:Green">Green</a>
+	<a href="/products/tee--yellow" ss-variant-option="Color:Yellow">Yellow</a>
+</div>
+```
+
+### Variant Option filters:
+When `realtime` is enabled, by default the realtime updates will apply to all results in the store that have matching options available. However if this is not desired behaviour you may pass an array of filters to `settings.variants.realtime.filters`. 
+
+Available filters include `first` and `unaltered`. The `first` filter will only update the first result in the store. The `unaltered` filter will update any result that has not yet been altered by the user. 
+

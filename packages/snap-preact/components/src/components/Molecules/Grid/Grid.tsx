@@ -1,16 +1,16 @@
 import { Fragment, h } from 'preact';
 
 import { jsx, css } from '@emotion/react';
+import { useState } from 'preact/hooks';
 import classnames from 'classnames';
+import deepmerge from 'deepmerge';
+import { filters } from '@searchspring/snap-toolbox';
 
 import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { ComponentProps, RootNodeProperties, ListOption, SwatchOption } from '../../../types';
-import { useState } from 'react';
 import { Lang, useA11y, useLang } from '../../../hooks';
 import { Image, ImageProps } from '../../Atoms/Image';
 import { cloneWithProps, defined } from '../../../utilities';
-import { filters } from '@searchspring/snap-toolbox';
-import deepmerge from 'deepmerge';
 
 const CSS = {
 	Grid: ({ theme, columns, gapSize, disableOverflowAction }: Partial<GridProps>) =>

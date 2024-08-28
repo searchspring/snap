@@ -1,11 +1,11 @@
 import { Fragment, h } from 'preact';
 
+import { useState } from 'preact/hooks';
 import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
 
 import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { ComponentProps, RootNodeProperties, SwatchOption, BreakpointsProps } from '../../../types';
-import { useState } from 'react';
 import { useA11y, useDisplaySettings } from '../../../hooks';
 import { Carousel, CarouselProps } from '../Carousel';
 import { defined } from '../../../utilities';
@@ -247,8 +247,7 @@ export type SwatchesProps = {
 	carousel?: Partial<CarouselProps>;
 	grid?: Partial<GridProps>;
 	type?: 'carousel' | 'grid';
-} & // 	  } // 			carousel?: Partial<CarouselProps>; // 			type?: 'carousel'; // 	| { //  & (
-// 	| {
+} & // 	| { // 	  } // 			carousel?: Partial<CarouselProps>; // 			type?: 'carousel'; // 	| { //  & (
 // 			type?: 'grid';
 // 			grid?: Partial<GridProps>;
 // 	  }

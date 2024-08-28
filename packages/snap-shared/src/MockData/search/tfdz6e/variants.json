@@ -1,0 +1,356 @@
+{
+  "pagination": {
+    "totalResults": 1,
+    "page": 1,
+    "pageSize": 30,
+    "totalPages": 1
+  },
+  "results": [
+    {
+      "id": "4007",
+      "mappings": {
+        "core": {
+          "uid": "4007",
+          "sku": "LS-EEBP",
+          "name": "Easter Egg with Boho Etched Pattern",
+          "url": "/easter-egg-with-boho-etched-pattern/",
+          "price": 0,
+          "msrp": 0,
+          "imageUrl": "https://cdn11.bigcommerce.com/s-6d1tnboxyx/images/stencil/500x659/products/4007/27880/woodpeckers-crafts-easter-egg-with-boho-etched-pattern__44621.1.jpg",
+          "thumbnailImageUrl": "https://cdn11.bigcommerce.com/s-6d1tnboxyx/images/stencil/500x659/products/4007/27880/woodpeckers-crafts-easter-egg-with-boho-etched-pattern__44621.1.jpg",
+          "ratingCount": "0",
+          "brand": "Woodpeckers Crafts",
+          "popularity": "279"
+        }
+      },
+      "attributes": {
+        "availability": "available",
+        "categories": [
+          "Plywood and Wood Cutouts",
+          "Wooden Seasonal Cutouts",
+          "Wood Spring & Easter Cutouts",
+          "Shop By Season",
+          "Easter and Spring",
+          "Laser Cutouts"
+        ],
+        "categories_hierarchy": [
+          "Plywood and Wood Cutouts",
+          "Plywood and Wood Cutouts>Wooden Seasonal Cutouts",
+          "Plywood and Wood Cutouts>Wooden Seasonal Cutouts>Wood Spring & Easter Cutouts",
+          "Shop By Season",
+          "Shop By Season>Easter and Spring",
+          "Plywood and Wood Cutouts>Laser Cutouts"
+        ],
+        "cdn_images": "28082,woodpeckers-crafts-easter-egg-with-boho-etched-pattern__24263,jpg|27929,woodpeckers-crafts-easter-egg-with-boho-etched-pattern__44790,jpg|28010,woodpeckers-crafts-easter-egg-with-boho-etched-pattern__22446,jpg|27877,woodpeckers-crafts-easter-egg-with-boho-etched-pattern__70969,jpg",
+        "child_sku_options": "[{\"option_value_id\":2900,\"value\":\"5 Inch\",\"option_id\":570,\"option\":\"Size\",\"product_option_id\":570,\"id\":8732,\"product_id\":4007,\"child_sku\":\"LS-EEBP-5\",\"price\":0.68,\"calculated_price\":0.68,\"retail_price\":null,\"width\":3.7175,\"height\":5,\"depth\":0.125,\"purchasing_disabled\":false,\"image_url\":\"\",\"cost_price\":0,\"upc\":\"\",\"mpn\":\"\",\"inventory_level\":99999},{\"option_value_id\":2901,\"value\":\"6 Inch\",\"option_id\":570,\"option\":\"Size\",\"product_option_id\":570,\"id\":8733,\"product_id\":4007,\"child_sku\":\"LS-EEBP-6\",\"price\":1.05,\"calculated_price\":1.05,\"retail_price\":null,\"width\":4.461,\"height\":6,\"depth\":0.125,\"purchasing_disabled\":false,\"image_url\":\"\",\"cost_price\":0,\"upc\":\"\",\"mpn\":\"\",\"inventory_level\":99999},{\"option_value_id\":2902,\"value\":\"7 Inch\",\"option_id\":570,\"option\":\"Size\",\"product_option_id\":570,\"id\":8734,\"product_id\":4007,\"child_sku\":\"LS-EEBP-7\",\"price\":1.28,\"calculated_price\":1.28,\"retail_price\":null,\"width\":5.2045,\"height\":7,\"depth\":0.125,\"purchasing_disabled\":false,\"image_url\":\"\",\"cost_price\":0,\"upc\":\"\",\"mpn\":\"\",\"inventory_level\":99999},{\"option_value_id\":2903,\"value\":\"8 Inch\",\"option_id\":570,\"option\":\"Size\",\"product_option_id\":570,\"id\":8735,\"product_id\":4007,\"child_sku\":\"LS-EEBP-8\",\"price\":1.79,\"calculated_price\":1.79,\"retail_price\":null,\"width\":5.948,\"height\":8,\"depth\":0.125,\"purchasing_disabled\":false,\"image_url\":\"\",\"cost_price\":0,\"upc\":\"\",\"mpn\":\"\",\"inventory_level\":99999},{\"option_value_id\":2904,\"value\":\"9 Inch\",\"option_id\":570,\"option\":\"Size\",\"product_option_id\":570,\"id\":8736,\"product_id\":4007,\"child_sku\":\"LS-EEBP-9\",\"price\":2.35,\"calculated_price\":2.35,\"retail_price\":null,\"width\":6.6915,\"height\":9,\"depth\":0.125,\"purchasing_disabled\":false,\"image_url\":\"\",\"cost_price\":0,\"upc\":\"\",\"mpn\":\"\",\"inventory_level\":99999},{\"option_value_id\":2905,\"value\":\"10 Inch\",\"option_id\":570,\"option\":\"Size\",\"product_option_id\":570,\"id\":8737,\"product_id\":4007,\"child_sku\":\"LS-EEBP-10\",\"price\":3.23,\"calculated_price\":3.23,\"retail_price\":null,\"width\":7.435,\"height\":10,\"depth\":0.125,\"purchasing_disabled\":false,\"image_url\":\"\",\"cost_price\":0,\"upc\":\"\",\"mpn\":\"\",\"inventory_level\":99999},{\"option_value_id\":2906,\"value\":\"12 Inch\",\"option_id\":570,\"option\":\"Size\",\"product_option_id\":570,\"id\":8738,\"product_id\":4007,\"child_sku\":\"LS-EEBP-12\",\"price\":4.71,\"calculated_price\":4.71,\"retail_price\":null,\"width\":8.922,\"height\":12,\"depth\":0.125,\"purchasing_disabled\":false,\"image_url\":\"\",\"cost_price\":0,\"upc\":\"\",\"mpn\":\"\",\"inventory_level\":99999},{\"option_value_id\":2907,\"value\":\"14 Inch\",\"option_id\":570,\"option\":\"Size\",\"product_option_id\":570,\"id\":8739,\"product_id\":4007,\"child_sku\":\"LS-EEBP-14\",\"price\":5.65,\"calculated_price\":5.65,\"retail_price\":null,\"width\":10.409,\"height\":14,\"depth\":0.125,\"purchasing_disabled\":false,\"image_url\":\"\",\"cost_price\":0,\"upc\":\"\",\"mpn\":\"\",\"inventory_level\":99999},{\"option_value_id\":2908,\"value\":\"16 Inch\",\"option_id\":570,\"option\":\"Size\",\"product_option_id\":570,\"id\":8740,\"product_id\":4007,\"child_sku\":\"LS-EEBP-16\",\"price\":9.41,\"calculated_price\":9.41,\"retail_price\":null,\"width\":11.896,\"height\":16,\"depth\":0.125,\"purchasing_disabled\":false,\"image_url\":\"\",\"cost_price\":0,\"upc\":\"\",\"mpn\":\"\",\"inventory_level\":99999},{\"option_value_id\":2909,\"value\":\"18 Inch\",\"option_id\":570,\"option\":\"Size\",\"product_option_id\":570,\"id\":8741,\"product_id\":4007,\"child_sku\":\"LS-EEBP-18\",\"price\":9.41,\"calculated_price\":9.41,\"retail_price\":null,\"width\":13.383,\"height\":18,\"depth\":0.125,\"purchasing_disabled\":false,\"image_url\":\"\",\"cost_price\":0,\"upc\":\"\",\"mpn\":\"\",\"inventory_level\":99999}]",
+        "child_skus": [
+          "LS-EEBP-5",
+          "LS-EEBP-6",
+          "LS-EEBP-7",
+          "LS-EEBP-8",
+          "LS-EEBP-9",
+          "LS-EEBP-10",
+          "LS-EEBP-12",
+          "LS-EEBP-14",
+          "LS-EEBP-16",
+          "LS-EEBP-18"
+        ],
+        "depth": "0",
+        "height": "0",
+        "id": "8f3b460ca891ef8375d35152b79d19fd",
+        "images": "k/383/woodpeckers-crafts-easter-egg-with-boho-etched-pattern__24263.jpg|r/555/woodpeckers-crafts-easter-egg-with-boho-etched-pattern__44790.jpg|j/898/woodpeckers-crafts-easter-egg-with-boho-etched-pattern__22446.jpg|p/674/woodpeckers-crafts-easter-egg-with-boho-etched-pattern__70969.jpg",
+        "intellisuggestData": "eJwqSUupMktlYEhNLC5JLVJITU9XSMrPyGfwCdZ1dXUKYDBkMGQwYDBkSC_KTAEEAAD__zAJDEQ",
+        "intellisuggestSignature": "9b2f31f2e39929f18576d83d9d1fb072ca4928a4761e74d09ff91d0388dcbdfb",
+        "inventory_level": "999990",
+        "inventory_tracking": "sku",
+        "is_featured": "false",
+        "is_free_shipping": "false",
+        "is_visible": "true",
+        "map_price": "0",
+        "option_set_id": "529",
+        "product_type_unigram": "egg",
+        "rating_count": "0",
+        "result_depth": [
+          "1/8\""
+        ],
+        "result_height": [
+          "5\"",
+          "6\"",
+          "7\"",
+          "8\"",
+          "9\"",
+          "10\"",
+          "12\"",
+          "14\"",
+          "16\"",
+          "18\""
+        ],
+        "result_width": [
+          "3-11/16\"",
+          "4-7/16\"",
+          "5-3/16\"",
+          "5-15/16\"",
+          "6-11/16\"",
+          "7-7/16\"",
+          "8-15/16\"",
+          "10-7/16\"",
+          "11-7/8\"",
+          "13-3/8\""
+        ],
+        "reviews_count": "0",
+        "reviews_rating_sum": "0",
+        "ss_days_since_created": "129",
+        "ss_filter_depth": [
+          "0.125"
+        ],
+        "ss_filter_height": [
+          "5",
+          "6",
+          "7",
+          "8",
+          "9",
+          "10",
+          "12",
+          "14",
+          "16",
+          "18"
+        ],
+        "ss_filter_width": [
+          "3.7175",
+          "4.461",
+          "5.2045",
+          "5.948",
+          "6.6915",
+          "7.435",
+          "8.922",
+          "10.409",
+          "11.896",
+          "13.383"
+        ],
+        "ss_hover_image": "https://cdn11.bigcommerce.com/s-6d1tnboxyx/images/stencil/500x659/products/4007/28082/woodpeckers-crafts-easter-egg-with-boho-etched-pattern__24263.1.jpg",
+        "ss_image": "https://cdn11.bigcommerce.com/s-6d1tnboxyx/images/stencil/500x659/products/4007/27880/woodpeckers-crafts-easter-egg-with-boho-etched-pattern__44621.1.jpg",
+        "ss_in_stock": "1",
+        "ss_price_range": [
+          "0.68",
+          "9.41"
+        ],
+        "ss_variant_depth": [
+          "0.125"
+        ],
+        "ss_variant_height": [
+          "5",
+          "6",
+          "7",
+          "8",
+          "9",
+          "10",
+          "12",
+          "14",
+          "16",
+          "18"
+        ],
+        "ss_variant_width": [
+          "3.7175",
+          "4.461",
+          "5.2045",
+          "5.948",
+          "6.6915",
+          "7.435",
+          "8.922",
+          "10.409",
+          "11.896",
+          "13.383"
+        ],
+        "ss_variants": "[{\"mappings\":{\"core\":{\"uid\":4007,\"price\":0.68,\"sku\":\"LS-EEBP-5\"}},\"attributes\":{\"quantity\":99999,\"available\":true},\"options\":{\"Size\":{\"value\":\"5 Inch\",\"optionValue\":2900,\"optionId\":570}}},{\"mappings\":{\"core\":{\"uid\":4007,\"price\":1.05,\"sku\":\"LS-EEBP-6\"}},\"attributes\":{\"quantity\":99999,\"available\":true},\"options\":{\"Size\":{\"value\":\"6 Inch\",\"optionValue\":2901,\"optionId\":570}}},{\"mappings\":{\"core\":{\"uid\":4007,\"price\":1.28,\"sku\":\"LS-EEBP-7\"}},\"attributes\":{\"quantity\":99999,\"available\":true},\"options\":{\"Size\":{\"value\":\"7 Inch\",\"optionValue\":2902,\"optionId\":570}}},{\"mappings\":{\"core\":{\"uid\":4007,\"price\":1.79,\"sku\":\"LS-EEBP-8\"}},\"attributes\":{\"quantity\":99999,\"available\":true},\"options\":{\"Size\":{\"value\":\"8 Inch\",\"optionValue\":2903,\"optionId\":570}}},{\"mappings\":{\"core\":{\"uid\":4007,\"price\":2.35,\"sku\":\"LS-EEBP-9\"}},\"attributes\":{\"quantity\":99999,\"available\":true},\"options\":{\"Size\":{\"value\":\"9 Inch\",\"optionValue\":2904,\"optionId\":570}}},{\"mappings\":{\"core\":{\"uid\":4007,\"price\":3.23,\"sku\":\"LS-EEBP-10\"}},\"attributes\":{\"quantity\":99999,\"available\":true},\"options\":{\"Size\":{\"value\":\"10 Inch\",\"optionValue\":2905,\"optionId\":570}}},{\"mappings\":{\"core\":{\"uid\":4007,\"price\":4.71,\"sku\":\"LS-EEBP-12\"}},\"attributes\":{\"quantity\":99999,\"available\":true},\"options\":{\"Size\":{\"value\":\"12 Inch\",\"optionValue\":2906,\"optionId\":570}}},{\"mappings\":{\"core\":{\"uid\":4007,\"price\":5.65,\"sku\":\"LS-EEBP-14\"}},\"attributes\":{\"quantity\":99999,\"available\":true},\"options\":{\"Size\":{\"value\":\"14 Inch\",\"optionValue\":2907,\"optionId\":570}}},{\"mappings\":{\"core\":{\"uid\":4007,\"price\":9.41,\"sku\":\"LS-EEBP-16\"}},\"attributes\":{\"quantity\":99999,\"available\":true},\"options\":{\"Size\":{\"value\":\"16 Inch\",\"optionValue\":2908,\"optionId\":570}}},{\"mappings\":{\"core\":{\"uid\":4007,\"price\":9.41,\"sku\":\"LS-EEBP-18\"}},\"attributes\":{\"quantity\":99999,\"available\":true},\"options\":{\"Size\":{\"value\":\"18 Inch\",\"optionValue\":2909,\"optionId\":570}}}]",
+        "ss_visibility": "1",
+        "total_sold": "279",
+        "width": "0"
+      },
+      "children": []
+    }
+  ],
+  "filters": [],
+  "facets": [
+    {
+      "field": "result_height",
+      "type": "value",
+      "filtered": false,
+      "values": [
+        {
+          "filtered": false,
+          "value": "5\"",
+          "label": "5\"",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "6\"",
+          "label": "6\"",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "7\"",
+          "label": "7\"",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "8\"",
+          "label": "8\"",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "9\"",
+          "label": "9\"",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "10\"",
+          "label": "10\"",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "12\"",
+          "label": "12\"",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "14\"",
+          "label": "14\"",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "16\"",
+          "label": "16\"",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "18\"",
+          "label": "18\"",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "field": "result_width",
+      "type": "value",
+      "filtered": false,
+      "values": [
+        {
+          "filtered": false,
+          "value": "3-11/16\"",
+          "label": "3-11/16\"",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "4-7/16\"",
+          "label": "4-7/16\"",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "5-3/16\"",
+          "label": "5-3/16\"",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "5-15/16\"",
+          "label": "5-15/16\"",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "6-11/16\"",
+          "label": "6-11/16\"",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "7-7/16\"",
+          "label": "7-7/16\"",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "8-15/16\"",
+          "label": "8-15/16\"",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "10-7/16\"",
+          "label": "10-7/16\"",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "11-7/8\"",
+          "label": "11-7/8\"",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "13-3/8\"",
+          "label": "13-3/8\"",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "field": "result_depth",
+      "type": "value",
+      "filtered": false,
+      "values": [
+        {
+          "filtered": false,
+          "value": "1/8\"",
+          "label": "1/8\"",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "field": "categories_hierarchy",
+      "type": "value",
+      "filtered": false,
+      "values": [
+        {
+          "filtered": false,
+          "value": "Plywood and Wood Cutouts",
+          "label": "Plywood and Wood Cutouts",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "Shop By Season",
+          "label": "Shop By Season",
+          "count": 1
+        }
+      ]
+    }
+  ],
+  "sorting": [],
+  "merchandising": {
+    "redirect": "",
+    "content": {},
+    "campaigns": [
+      {
+        "id": "163014",
+        "title": "Global Boost Rules (Cutouts and 1-3/4\" Cube and Coffins and 12x12x1/4 plywood)",
+        "type": "global"
+      }
+    ]
+  },
+  "search": {
+    "query": "easter egg boho"
+  }
+}

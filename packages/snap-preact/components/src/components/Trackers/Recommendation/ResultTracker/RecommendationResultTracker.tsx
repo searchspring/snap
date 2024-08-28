@@ -13,8 +13,17 @@ const CSS = {
 };
 
 export const RecommendationResultTracker = observer((properties: RecommendationResultTrackerProps): JSX.Element => {
-	const { children, result, controller, className, disableStyles, style, styleScript } = properties;
+	const defaultTrack = {
+		impression: true,
+		click: true,
+	};
 
+	const { children, result, track, controller, className, disableStyles, style, styleScript } = properties;
+
+	const mergedTrack = {
+		...defaultTrack,
+		...track,
+	};
 	const resultRef = useRef(null);
 	const resultInViewport = useIntersection(resultRef, '0px');
 
@@ -23,8 +32,7 @@ export const RecommendationResultTracker = observer((properties: RecommendationR
 	}
 
 	controller.track.product.render(result);
-
-	if (resultInViewport) {
+	if (resultInViewport && mergedTrack.impression) {
 		// intersection observer can trigger in any random order,
 		// so we need to check if profile impression has been sent and send if not.
 		if (!controller.events.impression) {
@@ -47,7 +55,7 @@ export const RecommendationResultTracker = observer((properties: RecommendationR
 	return (
 		<div
 			className={classnames('ss__recommendation-result-tracker', className)}
-			onClick={(e: any) => controller.track.product.click(e, result)}
+			onClick={(e: any) => mergedTrack.click && controller.track.product.click(e, result)}
 			ref={resultRef}
 			{...styling}
 		>
@@ -60,4 +68,8 @@ export interface RecommendationResultTrackerProps extends ComponentProps {
 	children: any;
 	result: Product;
 	controller: RecommendationController;
+	track?: {
+		impression?: boolean;
+		click?: boolean;
+	};
 }

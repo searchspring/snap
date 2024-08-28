@@ -178,6 +178,7 @@ let config: SnapConfig = {
 					{
 						selector: '#searchspring-content',
 						hideTarget: true,
+						renderAfterSearch: true,
 						skeleton: () => ContentSkel,
 						component: async () => {
 							return (await import('./components/Content/Content')).Content;
@@ -186,6 +187,7 @@ let config: SnapConfig = {
 					{
 						selector: '#searchspring-sidebar',
 						hideTarget: true,
+						renderAfterSearch: true,
 						skeleton: () => SidebarSkel,
 						component: async () => {
 							return (await import('./components/Sidebar/Sidebar')).Sidebar;

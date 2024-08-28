@@ -148,6 +148,20 @@ export default {
 			},
 			control: { type: 'text' },
 		},
+		lazyRender: {
+			description: 'Lazy render settings object',
+			defaultValue: {
+				enabled: true,
+				offset: '10%',
+			},
+			table: {
+				type: {
+					summary: 'object',
+				},
+				defaultValue: { summary: 'Lazy render settings object' },
+			},
+			control: { type: 'object' },
+		},
 		breakpoints: {
 			defaultValue: undefined,
 			description: 'Recommendation title',

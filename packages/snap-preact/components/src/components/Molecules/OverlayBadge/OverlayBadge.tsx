@@ -62,13 +62,14 @@ export const OverlayBadge = observer((properties: OverlayBadgeProps): JSX.Elemen
 
 	const props: OverlayBadgeProps = {
 		// default props
+		limit: 1,
 		// global theme
 		...globalTheme?.components?.overlayBadge,
 		// props
 		...properties,
 		...properties.theme?.components?.overlayBadge,
 	};
-	const { result, children, controller, renderEmpty, disableStyles, className, style } = props;
+	const { result, children, controller, renderEmpty, limit, disableStyles, className, style } = props;
 
 	const styling: RootNodeProperties = { 'ss-name': props.name };
 
@@ -77,7 +78,6 @@ export const OverlayBadge = observer((properties: OverlayBadgeProps): JSX.Elemen
 		return <Fragment />;
 	}
 
-	const limit = 1;
 	const meta = controller?.store?.meta;
 	const group = 'overlay';
 	const grid = meta?.badges?.groups?.[group]?.grid;
@@ -156,4 +156,5 @@ export interface OverlayBadgeProps extends ComponentProps {
 	children: ComponentChildren;
 	renderEmpty?: boolean;
 	componentMap?: ComponentMap;
+	limit?: number;
 }

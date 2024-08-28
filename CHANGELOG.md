@@ -3,6 +3,75 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.59.0](https://github.com/searchspring/snap/compare/v0.58.3...v0.59.0) (2024-08-22)
+
+### Bug Fixes
+
+- **eslint:** fix eslint to allow commits to implementations from monorepo ([c700cbd](https://github.com/searchspring/snap/commit/c700cbd21591533613704898655cdca4b01ec693))
+
+### Features
+
+- **preact-components/recommendation:** adding new lazyRender prop to help improve performance score ([f81e7cb](https://github.com/searchspring/snap/commit/f81e7cbd273650f23d45a60e2e81375656cfe1b5))
+- **targeter:** unset of min-height for domTargeter and option to wait for search to render in Snap ([e029b67](https://github.com/searchspring/snap/commit/e029b678c6be946550a9f49bba546d914b3fce07))
+
+## [0.58.3](https://github.com/searchspring/snap/compare/v0.58.2...v0.58.3) (2024-07-31)
+
+### Bug Fixes
+
+- **cartstore:** bugfix for cartstore handling floating 0s for pricing ([9c31166](https://github.com/searchspring/snap/commit/9c311669f0875af758c3a0aba25ce654886e4b96))
+- **cartstore:** handle floating 0s in cartstore pricing ([b34e004](https://github.com/searchspring/snap/commit/b34e004a83ff24d0b00e715e4b2177830825d611))
+- **preact-components-recommendationbundle:** adding hideSeed prop ([44ab1d6](https://github.com/searchspring/snap/commit/44ab1d622fddb153f97c6f2358bd20b8fe048eff))
+
+### Reverts
+
+- **cartstore:** reverting previous commit that was directly to develop ([5eef09a](https://github.com/searchspring/snap/commit/5eef09a306fd650cc08844ce580d7c02c283451a))
+
+## [0.58.2](https://github.com/searchspring/snap/compare/v0.58.1...v0.58.2) (2024-07-08)
+
+**Note:** Version bump only for package @searchspring/snap
+
+## [0.58.1](https://github.com/searchspring/snap/compare/v0.58.0...v0.58.1) (2024-07-03)
+
+### Bug Fixes
+
+- **cookies:** updating cookies to use domain when calling `unset` function ([b5315c1](https://github.com/searchspring/snap/commit/b5315c128fb77c6cad810f5793dbecf681e85337))
+
+# [0.58.0](https://github.com/searchspring/snap/compare/v0.57.0...v0.58.0) (2024-07-02)
+
+### Bug Fixes
+
+- **checkbox:** checkbox size prop now accepts both string and number ([911cffb](https://github.com/searchspring/snap/commit/911cffbd6dbc1aeb15ec6f2707ecb0ec0226588a))
+- **preact-components-carousel:** dont pass breakpoints to swiper ([344e3b8](https://github.com/searchspring/snap/commit/344e3b83c2cdeef84ab973cb1d7b4dce4c62f1d7))
+
+### Features
+
+- **preact-components:** adding ability to have "stacked" badges to overlay and callout badges ([1fd1767](https://github.com/searchspring/snap/commit/1fd1767109cb536c4ceb48273cba1042954dae49))
+
+# [0.57.0](https://github.com/searchspring/snap/compare/v0.56.6...v0.57.0) (2024-06-26)
+
+### Bug Fixes
+
+- **preact-components-carousel:** call updae slide classes onResize to update disabled classnames ([8f80ea2](https://github.com/searchspring/snap/commit/8f80ea224c45c8c0245320d7c906e013309c9a68))
+
+### Features
+
+- **cookies:** add subdomain support ([b907206](https://github.com/searchspring/snap/commit/b9072063374138361123cf8a0f375db93fecb172))
+- **tracker:** add currency context, add transactionTotal to order transaction payload ([998bf8e](https://github.com/searchspring/snap/commit/998bf8e8f77ee6667bb680cfd7e6769ec72189fe))
+
+## [0.56.6](https://github.com/searchspring/snap/compare/v0.56.5...v0.56.6) (2024-06-07)
+
+### Bug Fixes
+
+- **platforms/bigcommerce/addtocart:** updating function to work with attributes in new groovy script ([f116681](https://github.com/searchspring/snap/commit/f1166815a6fc94b7d3f4c4cb6637469987012583))
+- **store-mobx/searchresultstore:** normalizing variant price data to ensure they are numbers ([09fd97e](https://github.com/searchspring/snap/commit/09fd97ea43d235ed75eef439b676abf1e4f65e17))
+
+## [0.56.5](https://github.com/searchspring/snap/compare/v0.56.4...v0.56.5) (2024-06-03)
+
+### Bug Fixes
+
+- **searchresultstore:** filter out unavailable variants at contruction ([e03b8b1](https://github.com/searchspring/snap/commit/e03b8b19cfe69a5ec3c7939a9591ec2e2c11631d))
+- **searchresultstore:** needed to filter out unavailable options even if there are no selections ([207fa48](https://github.com/searchspring/snap/commit/207fa48fdfe38340bcdb6e7901106e4daefdeaff))
+
 ## [0.56.4](https://github.com/searchspring/snap/compare/v0.56.3...v0.56.4) (2024-05-28)
 
 ### Bug Fixes
