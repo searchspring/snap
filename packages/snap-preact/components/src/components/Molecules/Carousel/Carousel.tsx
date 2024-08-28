@@ -335,6 +335,8 @@ export const Carousel = observer((properties: CarouselProps): JSX.Element => {
 		}
 	};
 
+	delete additionalProps.breakpoints;
+
 	return children?.length ? (
 		<CacheProvider>
 			<div
@@ -403,10 +405,11 @@ export const Carousel = observer((properties: CarouselProps): JSX.Element => {
 					controller={undefined} // prevent passing controller in additionalProps (causes unnecessary swiper updates and errors)
 					navigation={navigation}
 					pagination={pagination}
-					onResize={() => {
+					onResize={(swiper) => {
 						if (additionalProps.onResize) {
 							additionalProps.onResize();
 						}
+						swiper.updateSlidesClasses();
 						attachClasstoLastVisibleSlide();
 					}}
 					onTransitionEnd={() => {

@@ -1,17 +1,17 @@
 import { Fragment, h } from 'preact';
 
+import { useState } from 'preact/hooks';
 import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
+import deepmerge from 'deepmerge';
+import { filters } from '@searchspring/snap-toolbox';
 
 import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { ComponentProps, RootNodeProperties, ListOption } from '../../../types';
 import { defined, mergeProps } from '../../../utilities';
-import { useState } from 'react';
 import { Checkbox, CheckboxProps } from '../Checkbox';
 import { Lang, useA11y, useLang } from '../../../hooks';
 import { Icon, IconProps } from '../../Atoms/Icon';
-import { filters } from '@searchspring/snap-toolbox';
-import deepmerge from 'deepmerge';
 
 const CSS = {
 	List: ({ horizontal }: Partial<ListProps>) =>

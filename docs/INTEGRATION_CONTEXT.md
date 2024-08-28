@@ -10,16 +10,17 @@ There are a few core context variables utilized by Snap, `shopper`, `merchandisi
 |---|---|:---:|---|
 | shopper.id | logged in user unique identifier | all | required for personalization functionallity |
 | shopper.cart | array of cart objects, each object in the array can contain `sku` and/or `childSku` | all | current cart contents, required if checkout process does not contain a dedicated cart page (ie. slideout cart) |
+| currency.code | currency code string, ie. 'EUR' (ISO 4217) | all | currency code of the shopper's cart contents or order confirmation. Used for beacon events containing pricing data |
 | merchandising.segments | array of strings used for merchandising | any | segmented merchandising allows for custom control over products returned on search requests and must also be setup within the Searchspring Management Console (SMC) |
 | config | object containing Snap configurations | any | advanced usage of Snap (not recommended for standard integrations) |
 
 ## Examples
 
-The custom variable example below shows a custom context being added for 'region'. The value would typically be assigned server side using template logic. This would be used to possibly toggle the siteId utilized by the client (to fetch different catalog data) or to modify text or currency displays.
+The custom variable example below shows a custom context being added for 'page'. The value would typically be assigned server side using template logic. This would be used to possibly toggle the siteId utilized by the client (to fetch different catalog data) or to modify text or currency displays.
 
 ```html
 <script src="https://snapui.searchspring.io/[your_site_id]/bundle.js">
-	region = "US";
+	page = "404";
 </script>
 ```
 
@@ -35,6 +36,9 @@ When used, shopper context should always include at least an `id`; the `cart` co
 				childSku: 'product123_a' ,
 			}
 		]
+	};
+	currency = {
+		code: 'EUR'
 	};
 </script>
 ```
@@ -53,12 +57,15 @@ Example using multiple context variables together.
 
 ```html
 <script src="https://snapui.searchspring.io/[your_site_id]/bundle.js">
-	region = "CAD";
+	page = "404";
 	shopper = {
 		id: 'canadian@shopper.com'
 	};
 	merchandising = {
 		segments: ['country:canada']
+	};
+	currency = {
+		code: 'EUR'
 	};
 </script>
 ```

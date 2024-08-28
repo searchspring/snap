@@ -57,6 +57,13 @@ The `enabled` prop is a sub prop under the `carousel` prop. It specifies weather
 <RecommendationBundle controller={controller} onAddToCart={(e, items)=>{console.log(items)}} carousel={ enabled:false } />
 ```
 
+### hideSeed
+The `hideSeed` prop specifies if the seed result should be rendered or not.  
+
+```jsx
+<RecommendationBundle controller={controller} onAddToCart={(e, items)=>{console.log(items)}} hideSeed={true} />
+```
+
 ### seedInCarousel
 The `seedInCarousel` prop is a sub prop under the `carousel` prop. It specifies if the seed product should be included in the carousel or not.  
 
@@ -213,6 +220,18 @@ The `modules` prop accepts additional [Swiper Modules](https://swiperjs.com/swip
 ```jsx
 import { Scrollbar } from 'swiper';
 <RecommendationBundle controller={controller} onAddToCart={(e, items)=>{console.log(items)}} modules={[Scrollbar]} scrollbar={{ draggable: true }} />
+```
+
+### lazyRender 
+The `lazyRender` prop specifies an object of lazy rendering settings. The settings include an `enable` toggle (defaults to `true`) as well as an `offset` (default `"10%"`) to specify at what distance the component should start rendering relative to the bottom of the viewport.
+
+```jsx
+const customLazyRenderProps = {
+	enabled: true,
+	offset: "20px" // any css margin values accepted - px, %, etc...
+}
+
+<RecommendationBundle controller={controller} lazyRender={ customLazyRenderProps } onAddToCart={(e, items)=>{console.log(items)}} />
 ```
 
 ### breakpoints

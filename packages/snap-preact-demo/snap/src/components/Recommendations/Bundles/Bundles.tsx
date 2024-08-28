@@ -19,6 +19,9 @@ export const Bundles = observer((props) => {
 	const bundleRecsProps = {
 		controller: controller,
 		onAddToCart: (data) => controller.log.debug('ADDING TO CART', data),
+		lazyRender: {
+			enabled: false,
+		},
 	};
 
 	return (

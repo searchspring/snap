@@ -83,7 +83,9 @@ This method will call the `retarget` method on all `DomTargeters` set in the Tra
 ```html
 <script type="searchspring/track/product/view">
     item = {
+        uid: '123',
         sku: 'product123',
+        childUid: '123_a',
         childSku: 'product123_a',
     };
 </script>
@@ -95,13 +97,17 @@ This method will call the `retarget` method on all `DomTargeters` set in the Tra
 <script type="searchspring/track/cart/view">
     items = [
         {
+            uid: '123',
             sku: 'product123',
+            childUid: '123_a',
             childSku: 'product123_a',
             qty: '1',
             price: '9.99',
         },
         {
+            uid: '456',
             sku: 'product456',
+            childUid: '456_a',
             childSku: 'product456_a',
             qty: '2',
             price: '10.99',
@@ -116,20 +122,25 @@ This method will call the `retarget` method on all `DomTargeters` set in the Tra
 <script type="searchspring/track/order/transaction">
     order = {
         id: '123456',
-        total: '31.97',
+        total: '34.29',
+		transactionTotal: '31.97',
         city: 'Los Angeles',
         state: 'CA',
         country: 'US',
     };
     items = [
         {
+            uid: '123',
             sku: 'product123',
+            childUid: '123_a',
             childSku: 'product123_a',
             qty: '1',
             price: '9.99'
         },
         {
+            uid: '456',
             sku: 'product456',
+            childUid: '456_a',
             childSku: 'product456_a',
             qty: '2',
             price: '10.99'
@@ -149,7 +160,9 @@ Each tracking method expects a data object which contains different attributes d
 
 ```typescript
 tracker.track.product.view({
+    uid: '123',
     sku: 'product123',
+    childUid: '123_a',
     childSku: 'product123_a',
 });
 ```
@@ -158,7 +171,9 @@ If a bundle is using multiple Snap Controllers with different `siteId`, an optio
 
 ```typescript
 tracker.track.product.view({
+    uid: '123',
     sku: 'product123',
+    childUid: '123_a',
     childSku: 'product123_a',
 }, 'abc123');
 ```
@@ -192,6 +207,8 @@ A beacon event payload object provided to the `track.event` method may contain t
 
 `context.website.trackingCode` - optional `context` object that will be merged with constructed context object. Can be used to specify a different `siteId` value.
 
+`context.currency.code` - optional `context` object that will be merged with constructed context object. Can be used to specify a different `currency` value.
+
 ```typescript
 const payload = {
     type: BeaconType.CLICK,
@@ -204,6 +221,9 @@ const payload = {
     context: {
         website: {
             trackingCode: 'abc123',
+        },
+        currency: {
+            code: 'USD',
         },
     },
 };
@@ -263,11 +283,13 @@ tracker.track.product.click({
 ```
 
 ### Product View `track.product.view`
-Tracks product page views. Should be invoked from a product detail page. A `sku` and/or `childSku` are required.
+Tracks product page views. Should be invoked from a product detail page. A `uid` and/or `sku` and/or `childUid` and/or `childSku` are required.
 
 ```typescript
 tracker.track.product.view({
+    ud: '123',
     sku: 'product123',
+    childUid: '123_a',
     childSku: 'product123_a',
 });
 ```
@@ -283,19 +305,23 @@ tracker.track.shopper.login({
 ```
 
 ### Cart View `track.cart.view`
-Tracks cart contents. Should be invoked from a cart page. Each item object must contain a `qty`, `price`, (`sku` and/or `childSku`)
+Tracks cart contents. Should be invoked from a cart page. Each item object must contain a `qty`, `price`, (`uid` and/or `sku` and/or `childUid` and/or `childSku`)
 
 ```typescript
 tracker.track.cart.view({
     items: [
         {
+            uid: '123',
             sku: 'product123',
+            childUid: '123_a',
             childSku: 'product123_a',
             qty: '1',
             price: '9.99',
         },
         {
+            uid: '456',
             sku: 'product456',
+            childUid: '456_a',
             childSku: 'product456_a',
             qty: '2',
             price: '10.99',
@@ -311,7 +337,9 @@ Tracks order transaction. Should be invoked from an order confirmation page. Exp
 
 `order.id` - (optional) order id
 
-`order.otal` - (optional) sub total of all items
+`order.total` - (optional) transaction total of all items after tax and shipping
+
+`order.transactionTotal` - (optional) transaction total of all items before tax and shipping
 
 `order.city` - (optional) city name
 
@@ -325,20 +353,25 @@ Tracks order transaction. Should be invoked from an order confirmation page. Exp
 tracker.track.order.transaction({
     order: {
         id: '123456',
-        total: '31.97',
+        total: '34.29',
+        transactionTotal: '31.97',
         city: 'Los Angeles',
         state: 'CA',
         country: 'US',
     },
     items: [
         {
+            uid: '123',
             sku: 'product123',
+            childUid: '123_a',
             childSku: 'product123_a',
             qty: '1',
             price: '9.99'
         },
         {
+            uid: '456',
             sku: 'product456',
+            childUid: '456_a',
             childSku: 'product456_a',
             qty: '2',
             price: '10.99'
@@ -350,10 +383,10 @@ tracker.track.order.transaction({
 ## Tracker properties
 
 ### `globals` property
-When constructing an instance of `Tracker`, a globals object is required to be constructed. This object contains a `siteId` key and value. 
+When constructing an instance of `Tracker`, a globals object is required to be constructed. This object contains a `siteId` key and value. An optional `currency` object with a `code` property containing a string can be provided. 
 
 ```typescript
-const globals = { siteId: 'abc123' };
+const globals = { siteId: 'abc123', currency: { code: 'EUR' } };
 const tracker = new Tracker(globals);
 console.log(tracker.globals === globals) // true
 ```
@@ -381,6 +414,8 @@ The `context` property is generated at the time of instantiating Tracker. It is 
 
 `website.trackingCode` - the `siteId` specified in the globals object
 
+`currency.code` - the optional `currency` specified in the globals object
+
 ```typescript
 context: {
     userId: '0560d7e7-148a-4b1d-b12c-924f164d3d00',
@@ -389,6 +424,9 @@ context: {
     shopperId: 'shopper0001',
     website: {
         trackingCode: 'abc123',
+    },
+    currency: {
+        code: 'USD',
     },
 }
 ```
@@ -401,6 +439,16 @@ The `namespace` property contains the Tracker namespace. Invoking this method is
 
 ### `track` property
 The `track` property contains various tracking events. See `track` methods section above.
+
+### `setCurrency` method
+Sets the currency code on the tracker context.
+
+```typescript
+const tracker = new Tracker();
+
+tracker.setCurrency({ code: 'EUR' })
+```
+ 
 
 ### `getUserId` method
 Returns an object containing the `userId` stored in the `ssUserId` cookie (with a fallback to localstorage.) If key doesn't exist, a new ID will be generated, saved to cookie/localstorage, and returned. 
@@ -436,7 +484,7 @@ console.log(tracker.getShopperId())
 The `cookies` property provides access to the `cart` and `viewed` tracking cookies.
 
 #### `cookies.cart.get` method
-Returns an array of strings containing the `sku` of each item last registered as being in the shopping cart. This value is stored in the `ssCartProducts` cookie and is set via the calls to the `tracker.track.cart.view` event.
+Returns an array of strings containing the `uids` and/or `skus` of each item last registered as being in the shopping cart. This value is stored in the `ssCartProducts` cookie and is set via the calls to the `tracker.track.cart.view` event.
 
 ```typescript
 const tracker = new Tracker();
@@ -491,7 +539,7 @@ tracker.cookies.cart.clear();
 ```
 
 #### `cookies.viewed.get` method
-Returns an array of strings containing the `sku` of items which have been viewed. This value is stored in the `ssViewedProducts` cookie and is set via the calls to the `tracker.track.product.view` event.
+Returns an array of strings containing the `uids` and/or `skus` of items which have been viewed. This value is stored in the `ssViewedProducts` cookie and is set via the calls to the `tracker.track.product.view` event.
 
 ```typescript
 const tracker = new Tracker();
