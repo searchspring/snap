@@ -1,4 +1,5 @@
-import { css, HorizontalSearchProps } from '../../../../../index';
+import { css } from '@emotion/react';
+import type { HorizontalSearchProps } from '../../../../../components/Templates/HorizontalSearch';
 
 // CSS in JS style script for the HorizontalSearch component
 const horizontalSearchStyleScript = ({ theme }: HorizontalSearchProps) => {

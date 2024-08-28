@@ -1,4 +1,5 @@
-import { css, OverlayProps } from '../../../../../index';
+import { css } from '@emotion/react';
+import type { OverlayProps } from '../../../../../components/Atoms/Overlay';
 
 // CSS in JS style script for the Overlay component
 const overlayStyleScript = ({ color, transitionSpeed, theme }: OverlayProps) => {

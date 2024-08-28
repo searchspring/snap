@@ -1,4 +1,5 @@
-import { css, BadgeImageProps } from '../../../../../index';
+import { css } from '@emotion/react';
+import type { BadgeImageProps } from '../../../../../components/Atoms/BadgeImage';
 
 // CSS in JS style script for the BadgeImage component
 const badgeImageStyleScript = ({ theme }: BadgeImageProps) => {

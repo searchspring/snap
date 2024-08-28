@@ -1,4 +1,5 @@
-import { css, FacetsProps } from '../../../../../index';
+import { css } from '@emotion/react';
+import type { FacetsProps } from '../../../../../components/Organisms/Facets';
 
 // CSS in JS style script for the Facets component
 const facetsStyleScript = ({ theme }: FacetsProps) => {

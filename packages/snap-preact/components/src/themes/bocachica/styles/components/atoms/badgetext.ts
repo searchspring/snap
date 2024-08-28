@@ -1,4 +1,5 @@
-import { css, BadgeTextProps } from '../../../../../index';
+import { css } from '@emotion/react';
+import type { BadgeTextProps } from '../../../../../components/Atoms/BadgeText';
 
 // CSS in JS style script for the BadgeText component
 const badgeTextStyleScript = ({ colorText, theme }: BadgeTextProps) => {

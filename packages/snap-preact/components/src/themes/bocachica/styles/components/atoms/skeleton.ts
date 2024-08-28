@@ -1,5 +1,5 @@
-import { keyframes } from '@emotion/react';
-import { css, SkeletonProps } from '../../../../../index';
+import { css, keyframes } from '@emotion/react';
+import type { SkeletonProps } from '../../../../../components/Atoms/Skeleton';
 
 // CSS in JS style script for the Skeleton component
 const skeletonStyleScript = ({ width, height, round, backgroundColor, animatedColor, theme }: SkeletonProps) => {

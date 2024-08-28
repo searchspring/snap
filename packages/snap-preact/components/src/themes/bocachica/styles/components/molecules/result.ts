@@ -1,4 +1,5 @@
-import { css, ResultProps } from '../../../../../index';
+import { css } from '@emotion/react';
+import type { ResultProps } from '../../../../../components/Molecules/Result';
 
 // CSS in JS style script for the Result component
 const resultStyleScript = ({ theme }: ResultProps) => {

@@ -1,4 +1,5 @@
-import { css, SearchProps } from '../../../../../index';
+import { css } from '@emotion/react';
+import type { SearchProps } from '../../../../../components/Templates/Search';
 
 // CSS in JS style script for the Search component
 const searchStyleScript = ({ mobileSidebarDisplayAt, theme }: SearchProps) => {

@@ -1,6 +1,5 @@
-import { keyframes } from '@emotion/react';
-
-import { css, LoadMoreProps } from '../../../../../index';
+import { css, keyframes } from '@emotion/react';
+import type { LoadMoreProps } from '../../../../../components/Molecules/LoadMore';
 
 // CSS in JS style script for the LoadMore component
 const loadMoreStyleScript = ({

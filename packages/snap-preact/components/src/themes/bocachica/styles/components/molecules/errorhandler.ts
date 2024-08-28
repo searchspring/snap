@@ -1,5 +1,5 @@
-import { css, ErrorHandlerProps } from '../../../../../index';
-
+import { css } from '@emotion/react';
+import type { ErrorHandlerProps } from '../../../../../components/Molecules/ErrorHandler';
 import { lightenDarkenColor } from '../../../../../utilities';
 
 // CSS in JS style script for the ErrorHandler component

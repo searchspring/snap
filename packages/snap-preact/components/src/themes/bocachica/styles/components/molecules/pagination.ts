@@ -1,4 +1,5 @@
-import { css, PaginationProps } from '../../../../../index';
+import { css } from '@emotion/react';
+import type { PaginationProps } from '../../../../../components/Molecules/Pagination';
 
 // CSS in JS style script for the Pagination component
 const paginationStyleScript = ({ theme }: PaginationProps) => {

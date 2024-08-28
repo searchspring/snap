@@ -1,1 +1,1 @@
-export { pike } from '../../../../../components/src';
+export { pike } from '../../../../../components/src/themes/pike';

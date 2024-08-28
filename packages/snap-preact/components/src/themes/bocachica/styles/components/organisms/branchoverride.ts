@@ -1,4 +1,5 @@
-import { css, BranchOverrideProps, BranchOverrideTheme } from '../../../../../index';
+import { css } from '@emotion/react';
+import type { BranchOverrideProps, BranchOverrideTheme } from '../../../../../components/Organisms/BranchOverride';
 
 const darkTheme: BranchOverrideTheme = {
 	class: 'ss__branch-override--dark',

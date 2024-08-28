@@ -1,4 +1,5 @@
-import { css, SearchHeaderProps } from '../../../../../index';
+import { css } from '@emotion/react';
+import type { SearchHeaderProps } from '../../../../../components/Atoms/SearchHeader';
 
 // CSS in JS style script for the SearchHeader component
 const searchHeaderStyleScript = ({ theme }: SearchHeaderProps) => {

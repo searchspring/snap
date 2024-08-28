@@ -1,4 +1,5 @@
-import { css, CheckboxProps } from '../../../../../index';
+import { css } from '@emotion/react';
+import type { CheckboxProps } from '../../../../../components/Molecules/Checkbox';
 
 // CSS in JS style script for the Checkbox component
 const checkboxStyleScript = ({ size, color, theme }: CheckboxProps) => {

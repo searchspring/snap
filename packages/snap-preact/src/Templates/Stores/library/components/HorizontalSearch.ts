@@ -1,1 +1,1 @@
-export { HorizontalSearch } from '../../../../../components/src';
+export { HorizontalSearch } from '../../../../../components/src/components/Templates/HorizontalSearch';

@@ -1,4 +1,5 @@
-import { css, RadioListProps } from '../../../../../index';
+import { css } from '@emotion/react';
+import type { RadioListProps } from '../../../../../components/Molecules/RadioList';
 
 // CSS in JS style script for the RadioList component
 const radioListStyleScript = ({ theme }: RadioListProps) => {

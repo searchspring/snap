@@ -1,7 +1,8 @@
-import { css, CarouselProps } from '../../../../../index';
+import { css } from '@emotion/react';
+import type { CarouselProps } from '../../../../../components/Molecules/Carousel';
 
 // CSS in JS style script for the Carousel component
-const carouselStyleScript = ({ vertical, theme }: CarouselProps) => {
+const carouselStyleScript = ({ vertical, theme }: any) => {
 	const variables = theme?.variables;
 
 	return css({

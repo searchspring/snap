@@ -1,1 +1,1 @@
-export { RecommendationBundle } from '../../../../../components/src';
+export { RecommendationBundle } from '../../../../../components/src/components/Organisms/RecommendationBundle';

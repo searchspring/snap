@@ -1,4 +1,5 @@
-import { css, FacetToggleProps } from '../../../../../index';
+import { css } from '@emotion/react';
+import type { FacetToggleProps } from '../../../../../components/Molecules/FacetToggle';
 
 // CSS in JS style script for the FacetToggle component
 const facetToggleStyleScript = ({ theme }: FacetToggleProps) => {

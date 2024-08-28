@@ -1,4 +1,5 @@
-import { css, BannerProps } from '../../../../../index';
+import { css } from '@emotion/react';
+import type { BannerProps } from '../../../../../components/Atoms/Merchandising/Banner';
 
 // CSS in JS style script for the Banner component
 const bannerStyleScript = ({ theme }: BannerProps) => {
