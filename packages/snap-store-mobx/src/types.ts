@@ -1,4 +1,5 @@
 import type { UrlManager } from '@searchspring/snap-url-manager';
+import type { RecommendRequestModel } from '@searchspring/snap-client';
 import type {
 	SearchResponseModelFacetValueAllOfValues,
 	AutocompleteRequestModel,
@@ -134,12 +135,13 @@ export type AutocompleteStoreConfig = StoreConfig & {
 
 // Recommendation config
 export type RecommendationStoreConfig = StoreConfig & {
-	globals?: any;
+	globals?: Partial<RecommendRequestModel>;
 	tag: string;
 	branch?: string;
 	realtime?: boolean;
 	batched?: boolean;
 	order?: number;
+	groupId?: number;
 	settings?: {
 		variants?: VariantConfig;
 	};

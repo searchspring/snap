@@ -339,29 +339,181 @@ describe('RecommendationInstantiator', () => {
 		});
 
 		expect(clientSpy).toHaveBeenCalledTimes(1);
-		expect(clientSpy).toHaveBeenCalledWith({
-			batched: true,
-			branch: 'testing',
-			categories: ['cats', 'dogs'],
-			filters: [
-				{
-					type: 'value',
-					field: 'color',
-					value: 'blue',
+		expect(clientSpy).toHaveBeenCalledWith(
+			{
+				batched: true,
+				branch: 'testing',
+				categories: ['cats', 'dogs'],
+				filters: [
+					{
+						type: 'value',
+						field: 'color',
+						value: 'blue',
+					},
+					{
+						type: 'range',
+						field: 'price',
+						value: { low: 0, high: 20 },
+					},
+				],
+				brands: ['nike', 'h&m'],
+				limit: 5,
+				product: 'sku1',
+				shopper: 'snapdev',
+				siteId: 'abc123',
+				tag: 'trending',
+			},
+			1
+		);
+	});
+
+	it.only('can use new style script tags and context', async () => {
+		const profileContextArray = [
+			{
+				profile: 'trending',
+				target: '#tout1',
+				options: {
+					limit: 1,
+					categories: ['1234'],
+					brands: ['12345'],
+					filters: [
+						{
+							field: 'color',
+							type: 'value',
+							value: 'red',
+						},
+					],
 				},
-				{
-					type: 'range',
-					field: 'price',
-					value: { low: 0, high: 20 },
+			},
+			{
+				profile: 'similar',
+				target: '#tout2',
+				options: {
+					limit: 2,
+					categories: ['5678'],
+					brands: ['65432'],
+					filters: [
+						{
+							field: 'color',
+							type: 'value',
+							value: 'blue',
+						},
+					],
 				},
-			],
-			brands: ['nike', 'h&m'],
-			limits: 5,
-			product: 'sku1',
-			shopper: 'snapdev',
-			siteId: 'abc123',
-			tag: 'trending',
+			},
+		];
+
+		//good testing to build off of
+		document.body.innerHTML = `
+			<div id="tout1"></div>
+			<div id="tout2"></div>
+			<script type="searchspring/recommendations">
+				globals = {
+					product: "C-AD-W1-1869P",
+					shopperId: 'snapdev',
+					blockedItems: ['1234','5678'],
+                    cart: ['5678']
+				};
+				
+				profiles = [
+					{
+						profile: 'trending',
+						target: '#tout1',
+						options: {
+							limit: 1,
+							categories: ["1234"],
+							brands: ["12345"],
+							filters: [{
+								field: 'color',
+								type: 'value',
+								value: "red"
+							}]
+						}
+					},
+					{
+						profile: 'similar',
+						target: '#tout2',
+						options: {
+                            limit: 2,
+                            categories: ["5678"],
+                            brands: ["65432"],
+                            filters: [{
+                                field: 'color',
+                                type: 'value',
+                                value: "blue"
+                            }]
+                        },
+					},
+				];
+			</script>
+		`;
+
+		const client = new MockClient(baseConfig.client!.globals, {});
+		const clientSpy = jest.spyOn(client, 'recommend');
+
+		const recommendationInstantiator = new RecommendationInstantiator(baseConfig, { client });
+		await wait();
+		expect(Object.keys(recommendationInstantiator.controller).length).toBe(2);
+		Object.keys(recommendationInstantiator.controller).forEach((controllerId, index) => {
+			const controller = recommendationInstantiator.controller[controllerId];
+			expect(controller.context).toStrictEqual({
+				globals: {
+					product: 'C-AD-W1-1869P',
+					shopperId: 'snapdev',
+					blockedItems: ['1234', '5678'],
+					cart: ['5678'],
+				},
+				...profileContextArray[index],
+			});
 		});
+		const groupId = recommendationInstantiator.controller[Object.keys(recommendationInstantiator.controller)[0]].store.config.groupId;
+
+		expect(clientSpy).toHaveBeenCalledTimes(2);
+		expect(clientSpy).toHaveBeenNthCalledWith(
+			1,
+			{
+				batched: true,
+				blockedItems: ['1234', '5678'],
+				branch: 'production',
+				brands: ['12345'],
+				cart: ['5678'],
+				categories: ['1234'],
+				limit: 1,
+				profileFilters: [
+					{
+						field: 'color',
+						type: 'value',
+						value: 'red',
+					},
+				],
+				siteId: '8uyt2m',
+				tag: 'trending',
+			},
+			groupId
+		);
+
+		expect(clientSpy).toHaveBeenNthCalledWith(
+			2,
+			{
+				batched: true,
+				blockedItems: ['1234', '5678'],
+				branch: 'production',
+				brands: ['65432'],
+				cart: ['5678'],
+				categories: ['5678'],
+				limit: 2,
+				profileFilters: [
+					{
+						field: 'color',
+						type: 'value',
+						value: 'blue',
+					},
+				],
+				siteId: '8uyt2m',
+				tag: 'similar',
+			},
+			groupId
+		);
 	});
 
 	it('will utilize attachments (plugins / middleware) added via methods upon creation of controller', async () => {

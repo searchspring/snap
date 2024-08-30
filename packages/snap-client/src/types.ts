@@ -23,7 +23,7 @@ export type ClientConfig = {
 	search?: RequesterConfig<SearchRequestModel>;
 	autocomplete?: RequesterConfig<AutocompleteRequestModel> & { requesters?: HybridRequesterConfig };
 	finder?: RequesterConfig<SearchRequestModel>;
-	recommend?: RequesterConfig<RecommendRequestModel>;
+	recommend?: RequesterConfig<RecommendRequestModel | TransformedRequestModel>;
 	suggest?: RequesterConfig<SuggestRequestModel>;
 };
 
@@ -103,7 +103,7 @@ export type TrendingResponseModel = {
 };
 
 export type RecommendRequestModel = {
-	tags: string[];
+	tag: string;
 	siteId: string;
 	product?: string;
 	products?: string[];
@@ -115,17 +115,53 @@ export type RecommendRequestModel = {
 	test?: boolean;
 	batched?: boolean;
 	limits?: number | number[];
+	limit?: number;
 	order?: number;
 	filters?: RecommendationRequestFilterModel[];
 	blockedItems?: string[];
+	groupId?: number;
+	profileFilters?: RecommendationRequestFilterModel[];
+	searchTerm?: string;
+	dedupe?: boolean;
+	branch?: string;
 };
 
-export type GetRecommendRequestModel = Omit<RecommendRequestModel, 'filters'> & {
-	[filter: `filter.${string}`]: (string | number)[];
+export type TransformedRequestModel = {
+	profiles: RecommendPostProfileObject[];
+	globals: {
+		product?: string;
+		products?: string[];
+		blockedItems?: string[];
+		cart?: string[];
+		lastViewed?: string[];
+		withRecInfo?: boolean;
+	};
+	groupId?: number;
 };
 
-export type PostRecommendRequestModel = Omit<RecommendRequestModel, 'filters'> & {
+//TODO: move to snapi
+export type PostRecommendAPISpec = {
+	siteId: string;
+	profiles: (Omit<RecommendPostProfileObject, 'filters'> & { filters?: PostRecommendRequestFiltersModel[] })[];
+	product?: string;
+	products?: string[];
+	shopper?: string;
+	cart?: string[];
+	lastViewed?: string[];
+	test?: boolean;
+	withRecInfo?: boolean;
+	blockedItems?: string[];
 	filters?: PostRecommendRequestFiltersModel[];
+};
+
+export type RecommendPostProfileObject = {
+	tag: string;
+	categories?: string[];
+	brands?: string[];
+	limit?: number;
+	dedupe?: boolean;
+	searchTerm?: string;
+	filters?: RecommendationRequestFilterModel[];
 };
 
 export type PostRecommendRequestFiltersModel = {
@@ -168,22 +204,6 @@ export type ProfileResponseModel = {
 			};
 		};
 	};
-};
-
-export type RecommendCombinedRequestModel = {
-	tag: string;
-	siteId: string;
-	product?: string;
-	products?: string[];
-	shopper?: string;
-	categories?: string[];
-	brands?: string[];
-	cart?: string[];
-	lastViewed?: string[];
-	test?: boolean;
-	branch?: string;
-	filters?: RecommendationRequestFilterModel[];
-	blockedItems?: string[];
 };
 
 export type RecommendationRequestFilterModel = RecommendationRequestRangeFilterModel | RecommendationRequestValueFilterModel;

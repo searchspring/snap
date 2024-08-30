@@ -44,7 +44,7 @@ describe('Recommendations', () => {
 	describe('Tests Recommendations', () => {
 		it('has a controller', function () {
 			cy.snapController(config?.selectors?.recommendation.controller).then(({ store }) => {
-				expect(store.config.globals.limits).equals(store.results.length);
+				expect(store.config.globals.limit).equals(store.results.length);
 				expect(store.config.globals.product.length).to.greaterThan(0);
 			});
 		});

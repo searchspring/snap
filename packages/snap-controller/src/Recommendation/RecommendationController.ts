@@ -8,7 +8,7 @@ import { ControllerTypes } from '../types';
 import type { ProductViewEvent } from '@searchspring/snap-tracker';
 import type { RecommendationStore } from '@searchspring/snap-store-mobx';
 import type { Next } from '@searchspring/snap-event-manager';
-import type { RecommendCombinedRequestModel } from '@searchspring/snap-client';
+import type { RecommendRequestModel } from '@searchspring/snap-client';
 import type { RecommendationControllerConfig, BeforeSearchObj, AfterStoreObj, ControllerServices, ContextVariables } from '../types';
 
 type RecommendationTrackMethods = {
@@ -101,10 +101,10 @@ export class RecommendationController extends AbstractController {
 			let skus: Array<string> = [];
 			switch (this.store.profile.placement) {
 				case ProfilePlacement.PRODUCTPAGE:
-					if (this.config.globals.product) {
-						skus = [this.config.globals.product];
-					} else if (this.config.globals.products) {
-						skus = this.config.globals.products;
+					if (this.config.globals?.product) {
+						skus = [this.config.globals?.product];
+					} else if (this.config.globals?.products) {
+						skus = this.config.globals?.products;
 					}
 					break;
 				case ProfilePlacement.BASKETPAGE:
@@ -131,7 +131,7 @@ export class RecommendationController extends AbstractController {
 					const payload: BeaconPayload = {
 						type: BeaconType.PROFILE_PRODUCT_CLICK,
 						category: BeaconCategory.RECOMMENDATIONS,
-						context: this.config.globals.siteId ? { website: { trackingCode: this.config.globals.siteId } } : undefined,
+						context: this.config.globals?.siteId ? { website: { trackingCode: this.config.globals?.siteId } } : undefined,
 						event: {
 							context: {
 								action: 'navigate',
@@ -160,7 +160,7 @@ export class RecommendationController extends AbstractController {
 					const payload: BeaconPayload = {
 						type: BeaconType.PROFILE_PRODUCT_IMPRESSION,
 						category: BeaconCategory.RECOMMENDATIONS,
-						context: this.config.globals.siteId ? { website: { trackingCode: this.config.globals.siteId } } : undefined,
+						context: this.config.globals?.siteId ? { website: { trackingCode: this.config.globals?.siteId } } : undefined,
 						event: {
 							context: {
 								placement: this.store.profile.placement,
@@ -188,7 +188,7 @@ export class RecommendationController extends AbstractController {
 					const payload: BeaconPayload = {
 						type: BeaconType.PROFILE_PRODUCT_RENDER,
 						category: BeaconCategory.RECOMMENDATIONS,
-						context: this.config.globals.siteId ? { website: { trackingCode: this.config.globals.siteId } } : undefined,
+						context: this.config.globals?.siteId ? { website: { trackingCode: this.config.globals?.siteId } } : undefined,
 						event: {
 							context: {
 								placement: this.store.profile.placement,
@@ -223,7 +223,7 @@ export class RecommendationController extends AbstractController {
 					const payload: BeaconPayload = {
 						type: BeaconType.PROFILE_PRODUCT_REMOVEDFROMBUNDLE,
 						category: BeaconCategory.RECOMMENDATIONS,
-						context: this.config.globals.siteId ? { website: { trackingCode: this.config.globals.siteId } } : undefined,
+						context: this.config.globals?.siteId ? { website: { trackingCode: this.config.globals?.siteId } } : undefined,
 						event: {
 							context: {
 								placement: this.store.profile.placement,
@@ -258,7 +258,7 @@ export class RecommendationController extends AbstractController {
 					const payload: BeaconPayload = {
 						type: BeaconType.PROFILE_PRODUCT_ADDEDTOBUNDLE,
 						category: BeaconCategory.RECOMMENDATIONS,
-						context: this.config.globals.siteId ? { website: { trackingCode: this.config.globals.siteId } } : undefined,
+						context: this.config.globals?.siteId ? { website: { trackingCode: this.config.globals?.siteId } } : undefined,
 						event: {
 							context: {
 								placement: this.store.profile.placement,
@@ -287,7 +287,7 @@ export class RecommendationController extends AbstractController {
 				const event: BeaconEvent | undefined = this.tracker.track.event({
 					type: BeaconType.PROFILE_ADDBUNDLE,
 					category: BeaconCategory.RECOMMENDATIONS,
-					context: this.config.globals.siteId ? { website: { trackingCode: this.config.globals.siteId } } : undefined,
+					context: this.config.globals?.siteId ? { website: { trackingCode: this.config.globals?.siteId } } : undefined,
 					event: {
 						context: {
 							placement: this.store.profile.placement,
@@ -318,7 +318,7 @@ export class RecommendationController extends AbstractController {
 				const event: BeaconEvent | undefined = this.tracker.track.event({
 					type: BeaconType.PROFILE_CLICK,
 					category: BeaconCategory.RECOMMENDATIONS,
-					context: this.config.globals.siteId ? { website: { trackingCode: this.config.globals.siteId } } : undefined,
+					context: this.config.globals?.siteId ? { website: { trackingCode: this.config.globals?.siteId } } : undefined,
 					event: {
 						context: {
 							action: 'navigate',
@@ -344,7 +344,7 @@ export class RecommendationController extends AbstractController {
 				const event: BeaconEvent | undefined = this.tracker.track.event({
 					type: BeaconType.PROFILE_IMPRESSION,
 					category: BeaconCategory.RECOMMENDATIONS,
-					context: this.config.globals.siteId ? { website: { trackingCode: this.config.globals.siteId } } : undefined,
+					context: this.config.globals?.siteId ? { website: { trackingCode: this.config.globals?.siteId } } : undefined,
 					event: {
 						context: {
 							placement: this.store.profile.placement,
@@ -369,7 +369,7 @@ export class RecommendationController extends AbstractController {
 				const event: BeaconEvent | undefined = this.tracker.track.event({
 					type: BeaconType.PROFILE_RENDER,
 					category: BeaconCategory.RECOMMENDATIONS,
-					context: this.config.globals.siteId ? { website: { trackingCode: this.config.globals.siteId } } : undefined,
+					context: this.config.globals?.siteId ? { website: { trackingCode: this.config.globals?.siteId } } : undefined,
 					event: {
 						context: {
 							placement: this.store.profile.placement,
@@ -394,8 +394,8 @@ export class RecommendationController extends AbstractController {
 		} as RecommendationTrackMethods;
 	})();
 
-	get params(): RecommendCombinedRequestModel {
-		const params: RecommendCombinedRequestModel = {
+	get params(): RecommendRequestModel {
+		const params = {
 			tag: this.config.tag,
 			batched: this.config.batched,
 			branch: this.config.branch || 'production',
@@ -420,7 +420,7 @@ export class RecommendationController extends AbstractController {
 			}
 		}
 
-		return params;
+		return params as RecommendRequestModel;
 	}
 
 	search = async (): Promise<void> => {
@@ -448,7 +448,7 @@ export class RecommendationController extends AbstractController {
 
 			const searchProfile = this.profiler.create({ type: 'event', name: 'search', context: params }).start();
 
-			const response = await this.client.recommend(params);
+			const response = await this.client.recommend(params, this.config.groupId);
 			searchProfile.stop();
 			this.log.profile(searchProfile);
 
