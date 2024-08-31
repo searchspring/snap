@@ -120,7 +120,7 @@ const CSS = {
 
 							'& a': {
 								fontWeight: 'bold',
-								color: theme?.variables?.color?.primary,
+								color: theme?.variables?.colors?.primary,
 							},
 						},
 					},
@@ -174,7 +174,7 @@ const CSS = {
 
 					'& a': {
 						fontWeight: 'bold',
-						color: theme?.variables?.color?.primary,
+						color: theme?.variables?.colors?.primary,
 
 						'& .ss__icon': {
 							marginLeft: '5px',

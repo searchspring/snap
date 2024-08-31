@@ -33,7 +33,7 @@ const CSS = {
 				alignItems: 'center',
 				color: color,
 				border: 'none',
-				borderBottom: `2px solid ${theme?.variables?.color?.primary || '#ccc'}`,
+				borderBottom: `2px solid ${theme?.variables?.colors?.primary || '#ccc'}`,
 				padding: '6px 0',
 			},
 			'& .ss__facet__options': {

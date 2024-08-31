@@ -24,7 +24,7 @@ const selectStyleScript = ({ color, backgroundColor, borderColor, theme }: Selec
 				fontWeight: 'bold',
 				'&:hover': {
 					backgroundColor: 'initial',
-					color: variables?.color?.secondary || 'unset',
+					color: variables?.colors?.secondary || 'unset',
 				},
 				'& .ss__select__dropdown__button__icon': {
 					transition: 'transform 0.25s ease 0s',
@@ -54,7 +54,7 @@ const selectStyleScript = ({ color, backgroundColor, borderColor, theme }: Selec
 				listStyle: 'none',
 				cursor: 'pointer',
 				padding: '6px 30px',
-				color: variables?.color?.secondary,
+				color: variables?.colors?.secondary,
 				'&.ss__select__select__option--selected': {
 					background: `rgba(109,113,117,.06)`,
 				},

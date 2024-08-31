@@ -12,7 +12,7 @@ const paginationStyleScript = ({ theme }: PaginationProps) => {
 			minHeight: '1em',
 			minWidth: '1em',
 			textAlign: 'center',
-			color: variables?.color?.secondary,
+			color: variables?.colors?.secondary,
 
 			'&.ss__pagination__page--active': {
 				textDecoration: 'underline',

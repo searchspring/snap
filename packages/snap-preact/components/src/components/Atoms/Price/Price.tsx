@@ -12,7 +12,7 @@ import { mergeProps } from '../../../utilities';
 const CSS = {
 	price: ({ theme }: Partial<PriceProps>) =>
 		css({
-			color: theme?.variables?.color?.primary,
+			color: theme?.variables?.colors?.primary,
 			'&.ss__price--strike': {
 				textDecoration: 'line-through',
 				color: 'initial',

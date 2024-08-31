@@ -8,7 +8,7 @@ const searchHeaderStyleScript = ({ theme }: SearchHeaderProps) => {
 	return css({
 		textAlign: 'center',
 		' .ss__search-header__title': {
-			color: variables?.color?.primary,
+			color: variables?.colors?.primary,
 		},
 	});
 };

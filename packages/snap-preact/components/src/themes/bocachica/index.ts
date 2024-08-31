@@ -3,7 +3,7 @@ import * as style from './styles/styles';
 
 const bocachicaVariables: ThemeVariables = {
 	breakpoints: [0, 767, 999, 1299],
-	color: {
+	colors: {
 		primary: '#202223',
 		secondary: '#6d7175',
 		accent: '#6d7175',

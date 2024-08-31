@@ -25,13 +25,13 @@ const CSS = {
 				display: 'flex',
 				justifyContent: 'center',
 				alignItems: 'center',
-				border: `1px solid ${theme?.variables?.color?.primary || '#333'}`,
+				border: `1px solid ${theme?.variables?.colors?.primary || '#333'}`,
 				aspectRatio: '1/1',
 				margin: 'auto',
 				flexDirection: 'column',
 
 				'&.ss__swatches__carousel__swatch--selected': {
-					border: `2px solid ${theme?.variables?.color?.primary || '#333'}`,
+					border: `2px solid ${theme?.variables?.colors?.primary || '#333'}`,
 				},
 
 				'&.ss__swatches__carousel__swatch--disabled:before, &.ss__swatches__carousel__swatch--unavailable:before': {
@@ -247,8 +247,7 @@ export type SwatchesProps = {
 	carousel?: Partial<CarouselProps>;
 	grid?: Partial<GridProps>;
 	type?: 'carousel' | 'grid';
-} & // 	| { // 	  } // 			carousel?: Partial<CarouselProps>; // 			type?: 'carousel'; // 	| { //  & (
-// 			type?: 'grid';
+} & // 			type?: 'grid'; // 	| { // 	  } // 			carousel?: Partial<CarouselProps>; // 			type?: 'carousel'; // 	| { //  & (
 // 			grid?: Partial<GridProps>;
 // 	  }
 // )

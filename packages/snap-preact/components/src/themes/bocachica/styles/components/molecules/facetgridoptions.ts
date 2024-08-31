@@ -9,7 +9,7 @@ const facetGridOptionsStyleScript = ({ columns, gapSize, gridSize, theme }: Face
 		display: 'flex',
 		flexFlow: 'row wrap',
 		gridTemplateColumns: columns ? `repeat(${columns}, 1fr)` : `repeat(auto-fill, minmax(${gridSize}, 1fr))`,
-		color: variables?.color?.secondary,
+		color: variables?.colors?.secondary,
 		gap: gapSize,
 		gridAutoRows: `1fr`,
 
@@ -18,7 +18,7 @@ const facetGridOptionsStyleScript = ({ columns, gapSize, gridSize, theme }: Face
 			justifyContent: 'center',
 			alignItems: 'center',
 			flex: '0 1 auto',
-			border: `1px solid ${variables?.color?.secondary || '#333'}`,
+			border: `1px solid ${variables?.colors?.secondary || '#333'}`,
 			borderRadius: '3px',
 			textAlign: 'center',
 			wordBreak: 'break-all',
@@ -26,14 +26,14 @@ const facetGridOptionsStyleScript = ({ columns, gapSize, gridSize, theme }: Face
 			padding: '1em 0',
 			width: `calc(100% / ${columns} - ${2 * Math.round((columns! + 2) / 2)}px)`,
 			margin: `0 ${gapSize} ${gapSize} 0`,
-			color: variables?.color?.secondary,
+			color: variables?.colors?.secondary,
 
 			[`:nth-of-type(${columns}n)`]: {
 				marginRight: '0',
 			},
 			'&.ss__facet-grid-options__option--filtered': {
-				background: variables?.color?.active?.background || '#ccc',
-				color: variables?.color?.active?.foreground,
+				background: variables?.colors?.active?.background || '#ccc',
+				color: variables?.colors?.active?.foreground,
 			},
 			'&:hover:not(.ss__facet-grid-options__option--filtered)': {
 				cursor: 'pointer',

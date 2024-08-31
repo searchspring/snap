@@ -59,12 +59,18 @@ describe('TargetStore', () => {
 		};
 		const store = new TargetStore(template, dependencies, settings);
 
+		expect(store.component).toStrictEqual('Search');
 		store.setComponent('NewSearch');
 		expect(store.component).toStrictEqual('NewSearch');
 
+		expect(store.resultComponent).toStrictEqual('CustomResult');
 		store.setResultComponent('NewResult');
 		expect(store.resultComponent).toStrictEqual('NewResult');
 
+		expect(store.theme).toStrictEqual({
+			location: 'local',
+			name: 'customTheme',
+		});
 		store.setTheme('newTheme', 'local' as TemplateThemeTypes);
 		expect(store.theme).toStrictEqual({
 			location: 'local',

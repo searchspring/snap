@@ -3,7 +3,7 @@ import * as style from './styles/styles';
 
 const pikeVariables: ThemeVariables = {
 	breakpoints: [0, 540, 767, 1200],
-	color: {
+	colors: {
 		primary: 'blue',
 		secondary: 'blue',
 		accent: 'blue',

@@ -40,7 +40,7 @@ describe('Results Component', () => {
 	};
 
 	it('renders grid view', () => {
-		const rendered = render(<Results layout={Layout.GRID} results={mockResults} />);
+		const rendered = render(<Results layout={Layout.grid} results={mockResults} />);
 		const resultElement = rendered.getByText(mockResults[0].mappings.core?.name!);
 		expect(resultElement).toBeInTheDocument();
 
@@ -50,7 +50,7 @@ describe('Results Component', () => {
 	});
 
 	it('renders list view', () => {
-		const rendered = render(<Results layout={Layout.LIST} results={mockResults} />);
+		const rendered = render(<Results layout={Layout.list} results={mockResults} />);
 		const resultElement = rendered.getByText(mockResults[0].mappings.core?.name!);
 		expect(resultElement).toBeInTheDocument();
 
@@ -64,7 +64,7 @@ describe('Results Component', () => {
 	});
 
 	it('renders all', () => {
-		const rendered = render(<Results layout={Layout.GRID} results={mockResults} />);
+		const rendered = render(<Results layout={Layout.grid} results={mockResults} />);
 		const results = rendered.container.querySelectorAll('.ss__results__result');
 		expect(results.length).toBe(mockResults.length);
 	});
@@ -75,7 +75,7 @@ describe('Results Component', () => {
 			columns: 3,
 		};
 
-		const rendered = render(<Results layout={Layout.GRID} results={mockResults} {...args} />);
+		const rendered = render(<Results layout={Layout.grid} results={mockResults} {...args} />);
 		const results = rendered.container.querySelectorAll('.ss__result');
 		expect(results.length).toBe(args.columns * args.rows);
 	});
@@ -86,7 +86,7 @@ describe('Results Component', () => {
 			gapSize: '40px',
 		};
 
-		const rendered = render(<Results layout={Layout.GRID} results={mockResults} {...args} />);
+		const rendered = render(<Results layout={Layout.grid} results={mockResults} {...args} />);
 		const resultsElement = rendered.container.querySelector('.ss__results')!;
 		const resultsElementStyles = getComputedStyle(resultsElement);
 
@@ -103,10 +103,10 @@ describe('Results Component', () => {
 	it('can use breakpoints', async () => {
 		const customBreakpoints = {
 			0: {
-				layout: Layout.GRID,
+				layout: Layout.grid,
 			},
 			700: {
-				layout: Layout.LIST,
+				layout: Layout.list,
 			},
 		};
 
@@ -162,7 +162,7 @@ describe('Results Component', () => {
 		};
 
 		const args = {
-			layout: Layout.GRID,
+			layout: Layout.grid,
 			results: mockResults,
 		};
 		const rendered = render(
@@ -180,7 +180,7 @@ describe('Results Component', () => {
 
 	it('is themeable with ThemeProvider', () => {
 		const args = {
-			layout: Layout.GRID,
+			layout: Layout.grid,
 			results: mockResults,
 		};
 		const rendered = render(
@@ -195,7 +195,7 @@ describe('Results Component', () => {
 
 	it('is themeable with theme prop', () => {
 		const args = {
-			layout: Layout.GRID,
+			layout: Layout.grid,
 			results: mockResults,
 		};
 		const rendered = render(<Results {...args} theme={theme} />);
@@ -206,7 +206,7 @@ describe('Results Component', () => {
 
 	it('is themeable with theme prop overrides ThemeProvider', () => {
 		const args = {
-			layout: Layout.GRID,
+			layout: Layout.grid,
 			results: mockResults,
 		};
 
@@ -297,7 +297,7 @@ describe('Results Component', () => {
 		};
 
 		const args = {
-			layout: Layout.GRID,
+			layout: Layout.grid,
 			results: mockResults,
 			breakpoints: customBreakpoints,
 			theme: componentTheme,

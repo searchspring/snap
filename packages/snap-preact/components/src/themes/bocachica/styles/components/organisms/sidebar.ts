@@ -11,7 +11,7 @@ const sidebarStyleScript = ({ theme }: SidebarProps) => {
 		paddingInlineEnd: '60px',
 
 		'& .ss__sidebar__title': {
-			color: variables?.color?.primary,
+			color: variables?.colors?.primary,
 		},
 	});
 };

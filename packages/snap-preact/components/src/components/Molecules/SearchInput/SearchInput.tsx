@@ -15,7 +15,7 @@ const CSS = {
 			display: 'flex',
 			alignItems: 'center',
 			justifyContent: 'center',
-			border: `1px solid ${theme?.variables?.color?.primary || '#ccc'}`,
+			border: `1px solid ${theme?.variables?.colors?.primary || '#ccc'}`,
 
 			'& .ss__icon': {
 				padding: '5px',

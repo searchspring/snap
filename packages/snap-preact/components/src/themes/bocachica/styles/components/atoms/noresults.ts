@@ -6,9 +6,9 @@ const noResultsStyleScript = ({ theme }: NoResultsProps) => {
 	const variables = theme?.variables;
 
 	return css({
-		color: variables?.color?.secondary,
+		color: variables?.colors?.secondary,
 		' .ss__title': {
-			color: variables?.color?.secondary,
+			color: variables?.colors?.secondary,
 		},
 	});
 };

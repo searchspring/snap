@@ -15,7 +15,7 @@ const facetPaletteStyleScript = ({ columns, gapSize, theme }: FacetPaletteOption
 			width: `calc(100% / ${columns} - ${2 * Math.round((columns! + 2) / 2)}px )`,
 			marginRight: gapSize,
 			marginBottom: gapSize,
-			color: variables?.color?.secondary,
+			color: variables?.colors?.secondary,
 
 			[`:nth-of-type(${columns}n)`]: {
 				marginRight: '0',
@@ -38,7 +38,7 @@ const facetPaletteStyleScript = ({ columns, gapSize, theme }: FacetPaletteOption
 			},
 			'&.ss__facet-palette-options__option--filtered': {
 				'& .ss__facet-palette-options__option__wrapper': {
-					borderColor: variables?.color?.secondary || '#333',
+					borderColor: variables?.colors?.secondary || '#333',
 					padding: '2px',
 					borderWidth: '2px',
 				},

@@ -26,7 +26,7 @@ const CSS = {
 				justifyContent: 'center',
 				alignItems: 'center',
 				flex: '0 1 auto',
-				border: `1px solid ${theme?.variables?.color?.primary || '#333'}`,
+				border: `1px solid ${theme?.variables?.colors?.primary || '#333'}`,
 				textAlign: 'center',
 				wordBreak: 'break-all',
 				boxSizing: 'border-box',
@@ -38,12 +38,12 @@ const CSS = {
 					marginRight: '0',
 				},
 				'&.ss__facet-grid-options__option--filtered': {
-					background: theme?.variables?.color?.primary || '#ccc',
-					color: theme?.variables?.color?.secondary,
+					background: theme?.variables?.colors?.primary || '#ccc',
+					color: theme?.variables?.colors?.secondary,
 				},
 				'&:hover:not(.ss__facet-grid-options__option--filtered)': {
 					cursor: 'pointer',
-					background: theme?.variables?.color?.hover?.background || '#f8f8f8',
+					background: theme?.variables?.colors?.hover?.background || '#f8f8f8',
 				},
 				'& .ss__facet-grid-options__option__value': {
 					'&.ss__facet-grid-options__option__value--smaller': {

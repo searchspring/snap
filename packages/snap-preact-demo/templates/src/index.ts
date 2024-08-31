@@ -30,7 +30,7 @@ new SnapTemplates({
 		global: {
 			extends: 'bocachica',
 			variables: {
-				color: {
+				colors: {
 					primary: 'red',
 					secondary: 'blue',
 				},
