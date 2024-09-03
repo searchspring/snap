@@ -93,7 +93,7 @@ describe('RecommendationResultTracker Component', () => {
 			expect(trackfn).toHaveBeenCalledWith({
 				type: BeaconType.PROFILE_PRODUCT_RENDER,
 				category: BeaconCategory.RECOMMENDATIONS,
-				context: controller.config.globals.siteId ? { website: { trackingCode: controller.config.globals.siteId } } : undefined,
+				context: controller.config.globals?.siteId ? { website: { trackingCode: controller.config.globals.siteId } } : undefined,
 				pid: controller.events.render!.id,
 				event: {
 					context: {
@@ -135,7 +135,7 @@ describe('RecommendationResultTracker Component', () => {
 			expect(trackfn).toHaveBeenCalledWith({
 				type: BeaconType.PROFILE_PRODUCT_IMPRESSION,
 				category: BeaconCategory.RECOMMENDATIONS,
-				context: controller.config.globals.siteId ? { website: { trackingCode: controller.config.globals.siteId } } : undefined,
+				context: controller.config.globals?.siteId ? { website: { trackingCode: controller.config.globals.siteId } } : undefined,
 				pid: controller.events.impression?.id,
 				event: {
 					context: {
@@ -165,7 +165,7 @@ describe('RecommendationResultTracker Component', () => {
 			expect.objectContaining({
 				type: BeaconType.PROFILE_PRODUCT_CLICK,
 				category: BeaconCategory.RECOMMENDATIONS,
-				context: controller.config.globals.siteId ? { website: { trackingCode: controller.config.globals.siteId } } : undefined,
+				context: controller.config.globals?.siteId ? { website: { trackingCode: controller.config.globals.siteId } } : undefined,
 				// pid: controller.events.click?.id,
 				event: {
 					context: {
@@ -224,7 +224,7 @@ describe('RecommendationResultTracker Component', () => {
 			expect(trackfn).toHaveBeenCalledWith({
 				type: BeaconType.PROFILE_PRODUCT_RENDER,
 				category: BeaconCategory.RECOMMENDATIONS,
-				context: controller.config.globals.siteId ? { website: { trackingCode: controller.config.globals.siteId } } : undefined,
+				context: controller.config.globals?.siteId ? { website: { trackingCode: controller.config.globals.siteId } } : undefined,
 				pid: controller.events.render!.id,
 				event: {
 					context: {
@@ -270,7 +270,7 @@ describe('RecommendationResultTracker Component', () => {
 			expect.objectContaining({
 				type: BeaconType.PROFILE_PRODUCT_CLICK,
 				category: BeaconCategory.RECOMMENDATIONS,
-				context: controller.config.globals.siteId ? { website: { trackingCode: controller.config.globals.siteId } } : undefined,
+				context: controller.config.globals?.siteId ? { website: { trackingCode: controller.config.globals.siteId } } : undefined,
 				// pid: controller.events.click?.id,
 				event: {
 					context: {
@@ -331,7 +331,7 @@ describe('RecommendationResultTracker Component', () => {
 			expect(trackfn).toHaveBeenCalledWith({
 				type: BeaconType.PROFILE_PRODUCT_RENDER,
 				category: BeaconCategory.RECOMMENDATIONS,
-				context: controller.config.globals.siteId ? { website: { trackingCode: controller.config.globals.siteId } } : undefined,
+				context: controller.config.globals?.siteId ? { website: { trackingCode: controller.config.globals.siteId } } : undefined,
 				pid: controller.events.render!.id,
 				event: {
 					context: {
@@ -373,7 +373,7 @@ describe('RecommendationResultTracker Component', () => {
 			expect(trackfn).toHaveBeenCalledWith({
 				type: BeaconType.PROFILE_PRODUCT_IMPRESSION,
 				category: BeaconCategory.RECOMMENDATIONS,
-				context: controller.config.globals.siteId ? { website: { trackingCode: controller.config.globals.siteId } } : undefined,
+				context: controller.config.globals?.siteId ? { website: { trackingCode: controller.config.globals.siteId } } : undefined,
 				pid: controller.events.impression?.id,
 				event: {
 					context: {
