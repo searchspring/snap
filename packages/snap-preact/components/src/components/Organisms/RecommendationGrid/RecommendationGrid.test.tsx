@@ -65,7 +65,7 @@ describe('RecommendationGrid Component', () => {
 	};
 
 	it('renders list', () => {
-		const rendered = render(<RecommendationGrid controller={controller} />);
+		const rendered = render(<RecommendationGrid controller={controller} lazyRender={{ enabled: false }} />);
 
 		const list = rendered.container.querySelector('.ss__recommendation-grid')!;
 		expect(list).toBeInTheDocument();
@@ -79,7 +79,7 @@ describe('RecommendationGrid Component', () => {
 	it('renders title', () => {
 		const titleText = 'my custom title';
 
-		const rendered = render(<RecommendationGrid title={titleText} controller={controller} />);
+		const rendered = render(<RecommendationGrid title={titleText} controller={controller} lazyRender={{ enabled: false }} />);
 
 		const list = rendered.container.querySelector('.ss__recommendation-grid')!;
 		expect(list).toBeInTheDocument();
@@ -94,7 +94,7 @@ describe('RecommendationGrid Component', () => {
 			columns: 3,
 		};
 
-		const rendered = render(<RecommendationGrid controller={controller} {...args} />);
+		const rendered = render(<RecommendationGrid controller={controller} {...args} lazyRender={{ enabled: false }} />);
 		const results = rendered.container.querySelectorAll('.ss__result');
 		expect(results.length).toBe(args.columns * args.rows);
 	});
@@ -104,7 +104,7 @@ describe('RecommendationGrid Component', () => {
 			rows: 3,
 		};
 
-		const rendered = render(<RecommendationGrid controller={controller} {...args} />);
+		const rendered = render(<RecommendationGrid controller={controller} {...args} lazyRender={{ enabled: false }} />);
 		const elem = rendered.container.querySelector('.ss__recommendation-grid__results');
 		const styles = getComputedStyle(elem!);
 
@@ -117,7 +117,7 @@ describe('RecommendationGrid Component', () => {
 			trim: true,
 		};
 
-		const rendered = render(<RecommendationGrid controller={controller} {...args} />);
+		const rendered = render(<RecommendationGrid controller={controller} {...args} lazyRender={{ enabled: false }} />);
 		const elem = rendered.container.querySelector('.ss__recommendation-grid__results');
 		const styles = getComputedStyle(elem!);
 
@@ -129,9 +129,10 @@ describe('RecommendationGrid Component', () => {
 			columns: 2,
 			rows: 3,
 			gapSize: '40px',
+			lazyRender: { enabled: false },
 		};
 
-		const rendered = render(<RecommendationGrid controller={controller} {...args} />);
+		const rendered = render(<RecommendationGrid controller={controller} {...args} lazyRender={{ enabled: false }} />);
 		const resultsElement = rendered.container.querySelector('.ss__recommendation-grid')!;
 		expect(resultsElement).toBeInTheDocument();
 		const gridElem = rendered.container.querySelector('.ss__recommendation-grid__results');
@@ -180,7 +181,7 @@ describe('RecommendationGrid Component', () => {
 
 	it('renders with classname', () => {
 		const className = 'classy';
-		const rendered = render(<RecommendationGrid controller={controller} className={className} />);
+		const rendered = render(<RecommendationGrid controller={controller} className={className} lazyRender={{ enabled: false }} />);
 
 		const resultsElement = rendered.container.querySelector('.ss__recommendation-grid');
 		expect(resultsElement).toBeInTheDocument();
@@ -188,7 +189,7 @@ describe('RecommendationGrid Component', () => {
 	});
 
 	it('can disable styles', () => {
-		const rendered = render(<RecommendationGrid controller={controller} disableStyles />);
+		const rendered = render(<RecommendationGrid controller={controller} lazyRender={{ enabled: false }} disableStyles />);
 
 		const resultsElement = rendered.container.querySelector('.ss__recommendation-grid');
 
@@ -201,7 +202,7 @@ describe('RecommendationGrid Component', () => {
 		};
 		const rendered = render(
 			<ThemeProvider theme={theme}>
-				<RecommendationGrid {...args} />
+				<RecommendationGrid lazyRender={{ enabled: false }} {...args} />
 			</ThemeProvider>
 		);
 		const resultsElement = rendered.container.querySelector('.ss__recommendation-grid')!;
@@ -212,7 +213,7 @@ describe('RecommendationGrid Component', () => {
 		const args = {
 			controller: controller,
 		};
-		const rendered = render(<RecommendationGrid {...args} theme={theme} />);
+		const rendered = render(<RecommendationGrid {...args} lazyRender={{ enabled: false }} theme={theme} />);
 		const resultsElement = rendered.container.querySelector('.ss__recommendation-grid')!;
 		expect(resultsElement).toHaveClass(theme.components.recommendationGrid.className);
 	});
@@ -239,7 +240,7 @@ describe('RecommendationGrid Component', () => {
 
 		const rendered = render(
 			<ThemeProvider theme={globalTheme}>
-				<RecommendationGrid {...args} theme={componentTheme} />
+				<RecommendationGrid {...args} lazyRender={{ enabled: false }} theme={componentTheme} />
 			</ThemeProvider>
 		);
 
