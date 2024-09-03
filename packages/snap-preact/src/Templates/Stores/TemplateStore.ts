@@ -115,7 +115,7 @@ export class TemplatesStore {
 			library: {},
 		};
 
-		this.library = new LibraryStore(config.components);
+		this.library = new LibraryStore({ components: config.components });
 
 		this.language =
 			(this.settings.editMode && this.storage.get('language')) ||
@@ -173,8 +173,8 @@ export class TemplatesStore {
 		});
 	}
 
-	public addTarget(type: TemplateTypes, target: TemplateTarget): string | undefined {
-		const targetId = target.selector || target.component;
+	public addTarget(type: TemplateTypes, templateTarget: TemplateTarget): string | undefined {
+		const targetId = templateTarget.selector || templateTarget.component;
 		if (targetId) {
 			const path = type.split('/');
 			let targetPath: any = this.targets;
@@ -184,7 +184,11 @@ export class TemplatesStore {
 				}
 				targetPath = targetPath[path[index]];
 			}
-			(targetPath as TargetMap)[targetId] = new TargetStore(target, this.dependencies, this.settings);
+			(targetPath as TargetMap)[targetId] = new TargetStore({
+				templateTarget,
+				dependencies: this.dependencies,
+				settings: this.settings,
+			});
 
 			if (this.settings.editMode) {
 				// triggers a rerender for TemplateEditor
@@ -219,7 +223,11 @@ export class TemplatesStore {
 		innerWidth?: number;
 		style?: GlobalThemeStyleScript;
 	}) {
-		const theme = new ThemeStore(config, this.dependencies, this.settings);
+		const theme = new ThemeStore({
+			config,
+			dependencies: this.dependencies,
+			settings: this.settings,
+		});
 		const themeLocation = this.themes[config.type as keyof typeof this.themes] || {};
 		themeLocation[config.name] = theme;
 	}
