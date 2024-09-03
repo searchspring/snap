@@ -30,7 +30,7 @@ const loadingBarStyleScript = ({ color, height, backgroundColor, theme }: Loadin
 			top: '0',
 			left: '-200px',
 			height: '100%',
-			background: `${color || variables?.color?.accent || '#ccc'}`,
+			background: `${color || variables?.colors?.accent || '#ccc'}`,
 			animation: `${animation} 2s linear infinite`,
 		},
 	});

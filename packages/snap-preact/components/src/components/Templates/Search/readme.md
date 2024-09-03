@@ -134,7 +134,7 @@ const layoutConfig = {
                 icon: {
                     icon: 'layout-list',
                 },
-                component: (props) => <Result {...props} controller={controller} layout={ResultsLayout.LIST}/>,
+                component: (props) => <Result {...props} controller={controller} layout={ResultsLayout.list}/>,
                 columns:1,
             }
         },

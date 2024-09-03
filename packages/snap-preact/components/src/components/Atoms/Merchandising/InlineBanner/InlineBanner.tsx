@@ -3,7 +3,7 @@ import { Fragment, h } from 'preact';
 import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
 import { Theme, useTheme, CacheProvider } from '../../../../providers';
-import { ComponentProps, ResultsLayout, ResultsLayoutType, RootNodeProperties } from '../../../../types';
+import { ComponentProps, ResultsLayout, RootNodeProperties } from '../../../../types';
 import { mergeProps } from '../../../../utilities';
 
 import type { Banner } from '@searchspring/snap-store-mobx';
@@ -34,7 +34,7 @@ const CSS = {
 export function InlineBanner(properties: InlineBannerProps): JSX.Element {
 	const globalTheme: Theme = useTheme();
 	const defaultProps: Partial<InlineBannerProps> = {
-		layout: ResultsLayout.GRID,
+		layout: ResultsLayout.grid,
 		width: 'auto',
 	};
 
@@ -74,6 +74,6 @@ export function InlineBanner(properties: InlineBannerProps): JSX.Element {
 export interface InlineBannerProps extends ComponentProps {
 	banner: Banner;
 	width?: string;
-	layout?: ResultsLayoutType;
+	layout?: keyof typeof ResultsLayout | ResultsLayout;
 	onClick?: (e: React.MouseEvent, banner: Banner) => void;
 }

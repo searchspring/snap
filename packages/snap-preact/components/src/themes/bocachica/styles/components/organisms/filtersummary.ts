@@ -10,19 +10,19 @@ const filterSummaryStyleScript = ({ theme }: FilterSummaryProps) => {
 		'& .ss__filter-summary__filter': {
 			margin: '5px 10px 5px 0',
 			'& .ss__filter__button': {
-				backgroundColor: variables?.color?.active?.background || '#ccc',
-				color: variables?.color?.active?.foreground,
+				backgroundColor: variables?.colors?.active?.background || '#ccc',
+				color: variables?.colors?.active?.foreground,
 				border: 'none',
 
 				'& .ss__filter__button__icon': {
-					fill: variables?.color?.active?.accent,
+					fill: variables?.colors?.active?.accent,
 				},
 			},
 		},
 		'& .ss__filter-summary__title': {
 			fontSize: '1.2em',
 			fontWeight: 'bold',
-			color: variables?.color?.secondary,
+			color: variables?.colors?.secondary,
 		},
 	});
 };

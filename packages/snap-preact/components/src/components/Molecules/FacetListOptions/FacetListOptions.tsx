@@ -27,11 +27,11 @@ const CSS = {
 				textDecoration: 'none',
 				'&:hover': {
 					cursor: 'pointer',
-					background: theme?.variables?.color?.hover?.background,
+					background: theme?.variables?.colors?.hover?.background,
 				},
 				'&.ss__facet-list-options__option--filtered': {
 					fontWeight: 'bold',
-					color: theme?.variables?.color?.primary,
+					color: theme?.variables?.colors?.primary,
 				},
 				'& .ss__facet-list-options__option__value': {
 					marginLeft: hideCheckbox ? '' : '8px',

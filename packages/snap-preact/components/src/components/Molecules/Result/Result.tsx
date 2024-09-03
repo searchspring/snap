@@ -9,7 +9,7 @@ import { Price, PriceProps } from '../../Atoms/Price';
 import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { defined, cloneWithProps, mergeProps } from '../../../utilities';
 import { filters } from '@searchspring/snap-toolbox';
-import { ComponentProps, ResultsLayoutType, ResultsLayout, RootNodeProperties } from '../../../types';
+import { ComponentProps, ResultsLayout, RootNodeProperties } from '../../../types';
 import { CalloutBadge, CalloutBadgeProps } from '../../Molecules/CalloutBadge';
 import { OverlayBadge, OverlayBadgeProps } from '../../Molecules/OverlayBadge';
 import type { SearchController, AutocompleteController, RecommendationController } from '@searchspring/snap-controller';
@@ -77,7 +77,7 @@ export const Result = observer((properties: ResultProps): JSX.Element => {
 	const globalTheme: Theme = useTheme();
 
 	const defaultProps: Partial<ResultProps> = {
-		layout: ResultsLayout.GRID,
+		layout: ResultsLayout.grid,
 	};
 
 	const props = mergeProps('result', globalTheme, defaultProps, properties);
@@ -265,7 +265,7 @@ export interface ResultProps extends ComponentProps {
 	hidePricing?: boolean;
 	detailSlot?: JSX.Element | JSX.Element[];
 	fallback?: string;
-	layout?: ResultsLayoutType;
+	layout?: keyof typeof ResultsLayout | ResultsLayout;
 	truncateTitle?: TruncateTitleProps;
 	onClick?: (e: React.MouseEvent<HTMLAnchorElement, Event>) => void;
 	controller?: SearchController | AutocompleteController | RecommendationController;

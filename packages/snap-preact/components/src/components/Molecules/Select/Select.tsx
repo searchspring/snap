@@ -41,7 +41,7 @@ const CSS = {
 				listStyle: 'none',
 				padding: '0',
 				marginTop: '-1px',
-				border: `1px solid ${borderColor || color || theme?.variables?.color?.primary || '#333'}`,
+				border: `1px solid ${borderColor || color || theme?.variables?.colors?.primary || '#333'}`,
 
 				'.ss__select__dropdown__button': {
 					alignItems: 'center',
@@ -62,7 +62,7 @@ const CSS = {
 						fontWeight: 'bold',
 					},
 					'&:hover': {
-						backgroundColor: theme?.variables?.color?.hover?.background || '#f8f8f8',
+						backgroundColor: theme?.variables?.colors?.hover?.background || '#f8f8f8',
 					},
 				},
 			},

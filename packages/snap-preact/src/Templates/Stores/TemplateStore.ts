@@ -6,9 +6,9 @@ import { TargetStore } from './TargetStore';
 import { LibraryStore } from './LibraryStore';
 import { debounce } from '@searchspring/snap-toolbox';
 
-import type { ResultComponent } from '../../../components/src';
-import type { DeepPartial, GlobalThemeStyleScript } from '../../types';
-import type { Theme, ThemeVariables } from '../../../components/src';
+import type { ResultComponent, ThemeMinimal, ThemeOverrides, ThemePartial, ThemeVariablesPartial } from '../../../components/src';
+import type { GlobalThemeStyleScript } from '../../types';
+import type { Theme } from '../../../components/src';
 export type TemplateThemeTypes = 'library' | 'local';
 export type TemplateTypes = 'search' | 'autocomplete' | `recommendation/${RecsTemplateTypes}`;
 export type TemplateCustomComponentTypes = 'result' | 'badge';
@@ -38,8 +38,8 @@ type WindowProperties = {
 type TemplateStoreThemeConfig = {
 	extends: 'pike' | 'bocachica'; // various themes available
 	style?: GlobalThemeStyleScript;
-	variables?: DeepPartial<ThemeVariables>;
-	overrides?: Theme;
+	variables?: ThemeVariablesPartial;
+	overrides?: ThemeOverrides;
 };
 
 export type TemplateStoreComponentConfig = {
@@ -212,10 +212,10 @@ export class TemplatesStore {
 		name: string;
 		type: TemplateThemeTypes;
 		base: Theme;
-		overrides?: Theme;
-		variables?: DeepPartial<ThemeVariables>;
-		currency: Partial<Theme>;
-		language: Partial<Theme>;
+		overrides?: ThemePartial;
+		variables?: ThemeVariablesPartial;
+		currency: ThemeMinimal;
+		language: ThemeMinimal;
 		innerWidth?: number;
 		style?: GlobalThemeStyleScript;
 	}) {

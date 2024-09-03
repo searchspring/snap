@@ -18,13 +18,13 @@ const CSS = {
 			display: 'inline-flex',
 			padding: '5px 10px',
 			position: 'relative',
-			color: color || theme?.variables?.color?.primary,
+			color: color || theme?.variables?.colors?.primary,
 			outline: 0,
 			backgroundColor: backgroundColor || '#fff',
-			border: `1px solid ${borderColor || color || theme?.variables?.color?.primary || '#333'}`,
+			border: `1px solid ${borderColor || color || theme?.variables?.colors?.primary || '#333'}`,
 			'&:hover': {
 				cursor: 'pointer',
-				backgroundColor: theme?.variables?.color?.hover?.background || '#f8f8f8',
+				backgroundColor: theme?.variables?.colors?.hover?.background || '#f8f8f8',
 			},
 			'&.ss__button--disabled': {
 				opacity: 0.7,

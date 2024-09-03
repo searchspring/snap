@@ -6,12 +6,12 @@ const priceStyleScript = ({ theme }: PriceProps) => {
 	const variables = theme?.variables;
 
 	return css({
-		color: variables?.color?.secondary,
+		color: variables?.colors?.secondary,
 		margin: '0 0.5rem 0 0',
 
 		'&.ss__price--strike': {
 			textDecoration: 'line-through',
-			color: variables?.color?.secondary || 'inherit',
+			color: variables?.colors?.secondary || 'inherit',
 			opacity: 0.5,
 		},
 	});

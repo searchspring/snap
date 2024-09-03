@@ -11,16 +11,16 @@ const facetHierarchyOptionsStyleScript = ({ horizontal, theme }: FacetHierarchyO
 			flexWrap: 'wrap',
 			'& .ss__facet-hierarchy-options__option': {
 				margin: '0 5px 5px 0',
-				color: variables?.color?.secondary,
+				color: variables?.colors?.secondary,
 				flex: '0 1 auto',
-				border: `1px solid ${variables?.color?.secondary || '#333'}`,
+				border: `1px solid ${variables?.colors?.secondary || '#333'}`,
 				padding: '0.5em 0.5em',
 				textDecoration: 'none',
 				'&.ss__facet-hierarchy-options__option--filtered': {
 					fontWeight: 'bold',
 					marginRight: '2em',
-					backgroundColor: variables?.color?.active?.background,
-					color: variables?.color?.active?.foreground,
+					backgroundColor: variables?.colors?.active?.background,
+					color: variables?.colors?.active?.foreground,
 					'&:hover': {
 						cursor: 'default',
 					},
@@ -29,7 +29,7 @@ const facetHierarchyOptionsStyleScript = ({ horizontal, theme }: FacetHierarchyO
 					'&:before': {
 						content: `'\\0000ab'`,
 						padding: '0 2px 0 0',
-						color: variables?.color?.accent,
+						color: variables?.colors?.accent,
 					},
 				},
 				'& .ss__facet-hierarchy-options__option__value': {
@@ -48,7 +48,7 @@ const facetHierarchyOptionsStyleScript = ({ horizontal, theme }: FacetHierarchyO
 			padding: '6px 0',
 			textDecoration: 'none',
 			alignItems: 'center',
-			color: variables?.color?.secondary,
+			color: variables?.colors?.secondary,
 
 			'&:hover': {
 				cursor: 'pointer',
@@ -66,7 +66,7 @@ const facetHierarchyOptionsStyleScript = ({ horizontal, theme }: FacetHierarchyO
 				'&:before': {
 					content: `'\\0000ab'`,
 					padding: '0 2px 0 0',
-					color: variables?.color?.accent,
+					color: variables?.colors?.accent,
 				},
 			},
 			'& .ss__facet-hierarchy-options__option__value': {

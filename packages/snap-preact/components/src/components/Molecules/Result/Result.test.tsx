@@ -97,9 +97,9 @@ describe('Result Component', () => {
 	});
 
 	it('should can change the layout', () => {
-		const rendered = render(<Result result={mockResults[1] as Product} layout={ResultsLayout.LIST} />);
+		const rendered = render(<Result result={mockResults[1] as Product} layout={ResultsLayout.list} />);
 		const Element = rendered.container.querySelector('.ss__result');
-		expect(Element).toHaveClass(`ss__result--${ResultsLayout.LIST}`);
+		expect(Element).toHaveClass(`ss__result--${ResultsLayout.list}`);
 	});
 
 	it('can truncate the title', () => {

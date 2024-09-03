@@ -22,7 +22,7 @@ const facetStyleScript = ({ color, theme }: FacetProps) => {
 			display: 'flex',
 			justifyContent: 'space-between',
 			alignItems: 'center',
-			color: color || variables?.color?.secondary,
+			color: color || variables?.colors?.secondary,
 			fontWeight: 'bold',
 		},
 		'& .ss__facet__options': {
@@ -38,14 +38,14 @@ const facetStyleScript = ({ color, theme }: FacetProps) => {
 				background: '#f2f2f2',
 			},
 			'&::-webkit-scrollbar-thumb': {
-				background: variables?.color?.secondary || '#ccc',
+				background: variables?.colors?.secondary || '#ccc',
 			},
 		},
 		'& .ss__facet__show-more-less': {
 			display: 'block',
 			margin: '8px',
 			cursor: 'pointer',
-			color: color || variables?.color?.secondary,
+			color: color || variables?.colors?.secondary,
 			'& .ss__icon': {
 				marginRight: '8px',
 			},

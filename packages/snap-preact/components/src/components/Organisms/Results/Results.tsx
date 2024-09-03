@@ -10,7 +10,7 @@ import type { SearchResultStore, Product, Banner } from '@searchspring/snap-stor
 import { ContentType } from '@searchspring/snap-store-mobx';
 import { InlineBanner, InlineBannerProps } from '../../Atoms/Merchandising/InlineBanner';
 import { Result, ResultProps } from '../../Molecules/Result';
-import { ComponentProps, ResultsLayout, ResultsLayoutType, BreakpointsProps, RootNodeProperties, ResultComponent } from '../../../types';
+import { ComponentProps, ResultsLayout, BreakpointsProps, RootNodeProperties, ResultComponent } from '../../../types';
 import { defined, mergeProps } from '../../../utilities';
 import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { useDisplaySettings } from '../../../hooks/useDisplaySettings';
@@ -73,7 +73,7 @@ export const Results = observer((properties: ResultsProps): JSX.Element => {
 		results: properties.controller?.store?.results,
 		columns: 4,
 		gapSize: '20px',
-		layout: ResultsLayout.GRID,
+		layout: ResultsLayout.grid,
 		breakpoints: defaultBreakpointsProps,
 	};
 
@@ -127,7 +127,7 @@ export const Results = observer((properties: ResultsProps): JSX.Element => {
 	}
 
 	const styling: RootNodeProperties = { 'ss-name': props.name };
-	const stylingProps = { ...props, columns: layout == ResultsLayout.LIST ? 1 : props.columns, gapSize: props.gapSize, theme };
+	const stylingProps = { ...props, columns: layout == ResultsLayout.list ? 1 : props.columns, gapSize: props.gapSize, theme };
 
 	if (styleScript && !disableStyles) {
 		styling.css = [styleScript(stylingProps), style];
@@ -178,7 +178,7 @@ export interface ResultsProps extends ComponentProps {
 	columns?: number;
 	rows?: number;
 	gapSize?: string;
-	layout?: ResultsLayoutType;
+	layout?: keyof typeof ResultsLayout | ResultsLayout;
 	breakpoints?: BreakpointsProps;
 	controller?: SearchController | AutocompleteController | RecommendationController;
 	resultComponent?: ResultComponent;

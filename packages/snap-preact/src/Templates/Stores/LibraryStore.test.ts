@@ -62,6 +62,7 @@ describe('LibraryStore', () => {
 		for (let index = 0; index < themes.length; index++) {
 			const theme = themes[index];
 			expect(store.import.theme[theme]).toBeDefined();
+			expect(store.themes[theme]).not.toBeDefined();
 			await store.import.theme[theme]();
 			expect(store.themes[theme]).toBeDefined();
 		}
@@ -70,6 +71,7 @@ describe('LibraryStore', () => {
 		for (let index = 0; index < autocompleteComponents.length; index++) {
 			const componentName = autocompleteComponents[index];
 			expect(store.import.component.autocomplete[componentName]).toBeDefined();
+			expect(store.components.autocomplete[componentName]).not.toBeDefined();
 			await store.import.component.autocomplete[componentName]();
 			expect(store.components.autocomplete[componentName]).toBeDefined();
 		}
@@ -78,6 +80,7 @@ describe('LibraryStore', () => {
 		for (let index = 0; index < searchComponents.length; index++) {
 			const componentName = searchComponents[index];
 			expect(store.import.component.search[componentName]).toBeDefined();
+			expect(store.components.search[componentName]).not.toBeDefined();
 			await store.import.component.search[componentName]();
 			expect(store.components.search[componentName]).toBeDefined();
 		}
@@ -95,6 +98,7 @@ describe('LibraryStore', () => {
 		for (let index = 0; index < badgeComponents.length; index++) {
 			const componentName = badgeComponents[index];
 			expect(store.import.component.badge[componentName]).toBeDefined();
+			expect(store.components.badge[componentName]).not.toBeDefined();
 			await store.import.component.badge[componentName]();
 			expect(store.components.badge[componentName]).toBeDefined();
 		}
@@ -103,6 +107,7 @@ describe('LibraryStore', () => {
 		for (let index = 0; index < resultComponents.length; index++) {
 			const componentName = resultComponents[index];
 			expect(store.import.component.result[componentName]).toBeDefined();
+			expect(store.components.result[componentName]).not.toBeDefined();
 			await store.import.component.result[componentName]();
 			expect(store.components.result[componentName]).toBeDefined();
 		}
@@ -111,6 +116,7 @@ describe('LibraryStore', () => {
 		for (let index = 0; index < languages.length; index++) {
 			const language = languages[index];
 			expect(store.import.language[language]).toBeDefined();
+			expect(store.locales.languages[language]).not.toBeDefined();
 			await store.import.language[language]();
 			expect(store.locales.languages[language]).toBeDefined();
 		}
@@ -119,6 +125,7 @@ describe('LibraryStore', () => {
 		for (let index = 0; index < currencies.length; index++) {
 			const currency = currencies[index];
 			expect(store.import.currency[currency]).toBeDefined();
+			expect(store.locales.currencies[currency]).not.toBeDefined();
 			await store.import.currency[currency]();
 			expect(store.locales.currencies[currency]).toBeDefined();
 		}

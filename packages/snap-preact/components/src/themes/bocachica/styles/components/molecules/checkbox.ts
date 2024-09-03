@@ -11,7 +11,7 @@ const checkboxStyleScript = ({ size, color, theme }: CheckboxProps) => {
 		justifyContent: 'center',
 		height: size,
 		width: size,
-		border: `1px solid ${color || variables?.color?.secondary || '#333'}`,
+		border: `1px solid ${color || variables?.colors?.secondary || '#333'}`,
 		borderRadius: '3px',
 		'&.ss__checkbox--disabled': {
 			opacity: 0.7,
