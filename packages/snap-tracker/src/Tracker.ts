@@ -743,9 +743,9 @@ export class Tracker {
 	};
 
 	sendEvents = (eventsToSend?: BeaconEvent[]): void => {
-		// if (this.mode !== AppMode.production) {
-		// 	return;
-		// }
+		if (this.mode !== AppMode.production) {
+			return;
+		}
 
 		const savedEvents = JSON.parse(this.localStorage.get(LOCALSTORAGE_BEACON_POOL_NAME) || '[]') as BeaconEvent[];
 		if (eventsToSend) {
