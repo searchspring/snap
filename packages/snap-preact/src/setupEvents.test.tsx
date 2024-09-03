@@ -67,7 +67,7 @@ describe('setupEvents', () => {
 						],
 					},
 				},
-				recommend_trending_1: {
+				recommend_trending_0: {
 					type: 'recommendation',
 					config: {
 						realtime: false,
