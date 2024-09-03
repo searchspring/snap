@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.59.0](https://github.com/searchspring/snap/compare/v0.58.3...v0.59.0) (2024-08-22)
+
+### Bug Fixes
+
+- **eslint:** fix eslint to allow commits to implementations from monorepo ([c700cbd](https://github.com/searchspring/snap/commit/c700cbd21591533613704898655cdca4b01ec693))
+
+### Features
+
+- **preact-components/recommendation:** adding new lazyRender prop to help improve performance score ([f81e7cb](https://github.com/searchspring/snap/commit/f81e7cbd273650f23d45a60e2e81375656cfe1b5))
+- **targeter:** unset of min-height for domTargeter and option to wait for search to render in Snap ([e029b67](https://github.com/searchspring/snap/commit/e029b678c6be946550a9f49bba546d914b3fce07))
+
 ## [0.58.3](https://github.com/searchspring/snap/compare/v0.58.2...v0.58.3) (2024-07-31)
 
 ### Bug Fixes

@@ -55,7 +55,7 @@ export class RecommendAPI extends API {
 				headers: headerParameters,
 				query: queryParameters,
 			},
-			'/api/personalized-recommendations/profile.json' + JSON.stringify(queryParameters)
+			JSON.stringify(queryParameters)
 		);
 
 		return response as unknown as ProfileResponseModel;
@@ -183,7 +183,7 @@ export class RecommendAPI extends API {
 				headers: headerParameters,
 				body: requestParameters,
 			},
-			path + JSON.stringify(requestParameters)
+			JSON.stringify(requestParameters)
 		);
 
 		return response as unknown as RecommendResponseModel;

@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.59.0](https://github.com/searchspring/snap/compare/v0.58.3...v0.59.0) (2024-08-22)
+
+### Features
+
+- **preact-components/recommendation:** adding new lazyRender prop to help improve performance score ([f81e7cb](https://github.com/searchspring/snap/commit/f81e7cbd273650f23d45a60e2e81375656cfe1b5))
+
 ## [0.58.3](https://github.com/searchspring/snap/compare/v0.58.2...v0.58.3) (2024-07-31)
 
 ### Bug Fixes

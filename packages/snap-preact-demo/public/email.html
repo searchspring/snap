@@ -28,8 +28,9 @@
         const recommendResponse = [{"results":results,"profile":{"tag":profile}}];
         const profileResponse = {"profile":{"tag":profile,"display":{"template":{"component":component},"templateParameters":{}}}};
 
-        const profileKey = `/api/personalized-recommendations/profile.json{"tag":"${profile}","siteId":"${siteID}","branch":"production"}`;
-        const recommendKey = `/boost/${siteID}/recommend{"tags":["${profile}"],"limits":[20],"siteId":"8uyt2m"}`;
+        const profileKey = `/api/personalized-recommendations/profile.json/{"tag":"${profile}","siteId":"${siteID}","branch":"production"}`;
+        const recommendKey = `/boost/${siteID}/recommend/{"tags":["${profile}"],"limits":[20],"siteId":"8uyt2m"}`;
+				const wildCardKey = `/boost/${siteID}/recommend/*`;
 
 
         document.addEventListener('RecsReady', () => {
@@ -54,7 +55,8 @@
                         cache: {
                             entries: {
                                 [profileKey]: profileResponse,
-                                [recommendKey]: recommendResponse,
+                                //[recommendKey]: recommendResponse,
+                                [wildCardKey]: recommendResponse,
                             }
                         },
                         

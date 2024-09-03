@@ -160,8 +160,6 @@
                             src="https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/4468_copyright_reddressboutique_2017__large.jpg">
                     </div>
                 </div>
-                <div id="tout1"></div>
-                <div id="tout2"></div>
                 <div id="right">
                     <div id="product-info" class="section">
                         <h2 id="name">Stripe Out Off-The-Shoulder Dress</h2>
@@ -172,48 +170,6 @@
                     <div id="product-description" class="section"></div>
                 </div>
             </div>
-
-            <script type="searchspring/recommendations">
-                globals = {
-                    product: "C-AD-W1-1869P",
-                    blockedItems: ['1234','5678'],
-                    cart: ['5678'],
-                    shopperId: 'snapdev'
-
-                };
-                profiles = [
-                    {
-                        profile: 'similar',
-                        target: '#tout1',
-                        options: {
-                            limit: 1,
-                            categories: ["1234"],
-                            brands: ["12345"],
-                            cart: ["123456"],
-                            filters: [{
-                                field: 'color',
-                                type: 'value',
-                                value: "red"
-                            }]
-                        },
-                    },
-                    {
-                        profile: 'cross-sell-test',
-                        target: '#tout2',
-                        options: {
-                            limit: 2,
-                            categories: ["5678"],
-                            brands: ["65432"],
-                            filters: [{
-                                field: 'color',
-                                type: 'value',
-                                value: "blue"
-                            }]
-
-                        },
-                    },
-                ];
-            </script>
 
             <script type="searchspring/recommend" profile="similar">
                 product = "C-AD-W1-1869P";
