@@ -6,6 +6,7 @@ import { setupEvents } from './setupEvents';
 describe('setupEvents', () => {
 	let eventManager: EventManager;
 	const makeSelectionsSpy = jest.fn();
+	const makeSearchSpy = jest.fn();
 
 	beforeAll(() => {
 		eventManager = setupEvents();
@@ -13,6 +14,7 @@ describe('setupEvents', () => {
 		window.searchspring = {
 			controller: {
 				search: {
+					search: makeSearchSpy,
 					store: {
 						results: [
 							{
@@ -43,6 +45,11 @@ describe('setupEvents', () => {
 					},
 				},
 				recommend_similar_0: {
+					type: 'recommendation',
+					config: {
+						realtime: true,
+					},
+					search: makeSearchSpy,
 					store: {
 						results: [
 							{
@@ -59,6 +66,13 @@ describe('setupEvents', () => {
 							},
 						],
 					},
+				},
+				recommend_trending_1: {
+					type: 'recommendation',
+					config: {
+						realtime: false,
+					},
+					search: makeSearchSpy,
 				},
 			},
 		};
@@ -189,6 +203,69 @@ describe('setupEvents', () => {
 
 			expect(makeSelectionsSpy).toHaveBeenCalledTimes(5);
 			expect(makeSelectionsSpy).toHaveBeenCalledWith(options);
+
+			jest.clearAllMocks();
+		});
+	});
+
+	describe('controller/updateRecs', () => {
+		it('can listen for controller/updateRecs event and invoked without parameters', () => {
+			expect(makeSearchSpy).not.toHaveBeenCalled();
+
+			//no data passed at all
+			expect(() => {
+				eventManager.fire('controller/updateRecs');
+			}).not.toThrow();
+
+			expect(makeSearchSpy).toHaveBeenCalledTimes(1);
+
+			jest.clearAllMocks();
+		});
+
+		it('can pass exact match controllerId', () => {
+			expect(makeSearchSpy).not.toHaveBeenCalled();
+			const controllerIds = 'recommend_similar_0';
+			expect(() => {
+				eventManager.fire('controller/updateRecs', { controllerIds });
+			}).not.toThrow();
+
+			expect(makeSearchSpy).toHaveBeenCalledTimes(1);
+
+			jest.clearAllMocks();
+		});
+
+		it('can pass partial regex match controllerId', () => {
+			expect(makeSearchSpy).not.toHaveBeenCalled();
+			const controllerIds = [/^recommend_/];
+			expect(() => {
+				eventManager.fire('controller/updateRecs', { controllerIds });
+			}).not.toThrow();
+
+			expect(makeSearchSpy).toHaveBeenCalledTimes(1);
+
+			jest.clearAllMocks();
+		});
+
+		it('only invokes for recommendation type and if exists', () => {
+			expect(makeSearchSpy).not.toHaveBeenCalled();
+			const controllerIds = ['recommend_similar_0', 'search', 'dne'];
+			expect(() => {
+				eventManager.fire('controller/updateRecs', { controllerIds });
+			}).not.toThrow();
+
+			expect(makeSearchSpy).toHaveBeenCalledTimes(1);
+
+			jest.clearAllMocks();
+		});
+
+		it('does not invoke if config.realtime is false', () => {
+			expect(makeSearchSpy).not.toHaveBeenCalled();
+			const controllerIds = ['recommend_trending_1', 'search', 'dne'];
+			expect(() => {
+				eventManager.fire('controller/updateRecs', { controllerIds });
+			}).not.toThrow();
+
+			expect(makeSearchSpy).toHaveBeenCalledTimes(0);
 
 			jest.clearAllMocks();
 		});

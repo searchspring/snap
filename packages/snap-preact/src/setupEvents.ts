@@ -48,5 +48,40 @@ export const setupEvents = () => {
 		await next();
 	});
 
+	type ControllerUpdateRecsData = {
+		controllerIds?: (string | RegExp)[];
+	};
+
+	eventManager.on('controller/updateRecs', async (data: ControllerUpdateRecsData, next: Next) => {
+		const { controllerIds } = data || {};
+
+		const controllerListToUse: AbstractController[] = [];
+		Object.keys(window.searchspring.controller).forEach((controller) => {
+			const current = window.searchspring.controller[controller];
+			if (current.type !== 'recommendation' || !current.config?.realtime) {
+				return;
+			}
+			if (controllerIds && Array.isArray(controllerIds)) {
+				controllerIds.forEach((id) => {
+					if (id instanceof RegExp) {
+						if (controller.match(id)?.length) {
+							controllerListToUse.push(current);
+						}
+					} else if (controller == id) {
+						controllerListToUse.push(current);
+					}
+				});
+			} else {
+				controllerListToUse.push(current);
+			}
+		});
+
+		controllerListToUse.map((controller) => {
+			controller.search();
+		});
+
+		await next();
+	});
+
 	return eventManager;
 };

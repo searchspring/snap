@@ -133,6 +133,11 @@ it can also take regex for partial matches -
 controllerIds: [/^recommend_/]
 ```
 
+### controller/updateRecs
+The `controller/updateRecs` event takes a payload with an optional `controllerIds` similar to the `controller/selectVariantOptions` example above. If not provided then all recommendation controllers will be affected. 
+
+This event will loop through recommendation controllers and invoke the `controller.search()` method if the `controller.config.realtime` option is `true`. This also requires [cart attribute tracking](https://github.com/searchspring/snap/blob/main/docs/INTEGRATION_TRACKING.md)
+
 ## Controller Events
 
 On the controller we can attach middleware via `on` or `plugin` methods.
