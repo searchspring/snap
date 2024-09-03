@@ -12,7 +12,7 @@ import { mergeProps } from '../../../utilities';
 const CSS = {
 	price: ({ theme }: Partial<PriceProps>) =>
 		css({
-			color: theme?.variables?.color?.primary,
+			color: theme?.variables?.colors?.primary,
 			'&.ss__price--strike': {
 				textDecoration: 'line-through',
 				color: 'initial',
@@ -53,12 +53,11 @@ export function Price(properties: PriceProps): JSX.Element {
 	let formattedPrice: string | undefined;
 	if (value) {
 		formattedPrice = filters.currency(value, {
-			symbol,
+			symbol: '',
 			decimalPlaces,
 			padDecimalPlaces,
 			thousandsSeparator,
 			decimalSeparator,
-			symbolAfter,
 		});
 	}
 
@@ -78,7 +77,9 @@ export function Price(properties: PriceProps): JSX.Element {
 		) : (
 			<CacheProvider>
 				<span {...styling} className={classnames('ss__price', { 'ss__price--strike': lineThrough }, className)}>
-					{formattedPrice}
+					{symbol && !symbolAfter ? <span className={'ss__price__symbol'}>{symbol}</span> : <></>}
+					<span className={'ss__price__value'}>{formattedPrice}</span>
+					{symbol && symbolAfter ? <span className={'ss__price__symbol'}>{symbol}</span> : <></>}
 				</span>
 			</CacheProvider>
 		);

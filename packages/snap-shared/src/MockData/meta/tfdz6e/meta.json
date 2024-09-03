@@ -1,0 +1,148 @@
+{
+  "facets": {
+    "categories_hierarchy": {
+      "multiple": "single",
+      "display": "hierarchy",
+      "label": "Category",
+      "collapsed": true,
+      "hierarchyDelimiter": ">"
+    },
+    "custom_color": {
+      "multiple": "or",
+      "display": "palette",
+      "label": "Color",
+      "collapsed": true
+    },
+    "custom_depth": {
+      "multiple": "or",
+      "display": "list",
+      "label": "Depth",
+      "collapsed": true
+    },
+    "custom_diameter": {
+      "multiple": "or",
+      "display": "list",
+      "label": "Diameter",
+      "collapsed": true
+    },
+    "custom_head_diameter": {
+      "multiple": "or",
+      "display": "list",
+      "label": "Head Diameter",
+      "collapsed": true
+    },
+    "custom_height": {
+      "multiple": "or",
+      "display": "list",
+      "label": "Height",
+      "collapsed": true
+    },
+    "custom_hole_size": {
+      "multiple": "or",
+      "display": "list",
+      "label": "Hole Size",
+      "collapsed": true
+    },
+    "custom_material": {
+      "multiple": "or",
+      "display": "list",
+      "label": "Type of Wood",
+      "collapsed": true
+    },
+    "custom_shape": {
+      "multiple": "or",
+      "display": "list",
+      "label": "Shape",
+      "collapsed": true
+    },
+    "custom_tenon_diameter": {
+      "multiple": "or",
+      "display": "list",
+      "label": "Tenon Diameter",
+      "collapsed": true
+    },
+    "custom_tenon_length": {
+      "multiple": "or",
+      "display": "list",
+      "label": "Tenon Length",
+      "collapsed": true
+    },
+    "custom_type_of_metal": {
+      "multiple": "or",
+      "display": "list",
+      "label": "Type of Metal",
+      "collapsed": true
+    },
+    "result_depth": {
+      "multiple": "or",
+      "display": "list",
+      "label": "Thickness",
+      "collapsed": true
+    },
+    "result_height": {
+      "multiple": "or",
+      "display": "list",
+      "label": "Length",
+      "collapsed": true
+    },
+    "result_width": {
+      "multiple": "or",
+      "display": "list",
+      "label": "Width",
+      "collapsed": true
+    }
+  },
+  "sortOptions": [
+    {
+      "type": "relevance",
+      "field": "relevance",
+      "direction": "desc",
+      "label": "Best Match"
+    },
+    {
+      "type": "field",
+      "field": "total_sold",
+      "direction": "desc",
+      "label": "Most Popular"
+    },
+    {
+      "type": "field",
+      "field": "ss_days_since_created",
+      "direction": "asc",
+      "label": "Newest"
+    },
+    {
+      "type": "field",
+      "field": "calculated_price",
+      "direction": "asc",
+      "label": "Price: Low to High"
+    },
+    {
+      "type": "field",
+      "field": "calculated_price",
+      "direction": "desc",
+      "label": "Price: High to Low"
+    },
+    {
+      "type": "field",
+      "field": "ss_diameter_inches",
+      "direction": "asc",
+      "label": "Diameter: Low to High"
+    },
+    {
+      "type": "field",
+      "field": "ss_diameter_inches",
+      "direction": "desc",
+      "label": "Diameter: High to Low"
+    },
+    {
+      "type": "field",
+      "field": "rating_average",
+      "direction": "desc",
+      "label": "Highest Rated"
+    }
+  ],
+  "pagination": {
+    "defaultPageSize": 72
+  }
+}

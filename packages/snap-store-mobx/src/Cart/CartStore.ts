@@ -30,19 +30,24 @@ export class CartStore {
 	}
 
 	get price(): number {
-		let price = 0;
+		let newPrice = 0;
 		this.items.forEach((item) => {
-			price += +(item.display.mappings.core?.price || 0) * item.quantity;
+			// account for string prices, and floating 0s.
+			newPrice = (newPrice * 100 + +(+((item.display.mappings.core?.price || 0) * 100) * item.quantity)) / 100 || 0;
 		});
-		return price;
+		return newPrice;
 	}
 
 	get msrp(): number {
-		let price = 0;
+		let newPrice = 0;
 		this.items.forEach((item) => {
-			price += (+(item.display.mappings.core?.msrp || 0) || +(item.display.mappings.core?.price || 0) || 0) * item.quantity;
+			// account for string prices, and floating 0s.
+			newPrice =
+				(newPrice * 100 +
+					+((+((item.display.mappings.core?.msrp || 0) * 100) || +((item.display.mappings.core?.price || 0) * 100) || 0) * item.quantity)) /
+					100 || 0;
 		});
-		return price;
+		return newPrice;
 	}
 
 	public addItems(items: Product[]): void {

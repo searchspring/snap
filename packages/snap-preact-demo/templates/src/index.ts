@@ -30,7 +30,7 @@ new SnapTemplates({
 		global: {
 			extends: 'bocachica',
 			variables: {
-				color: {
+				colors: {
 					primary: 'red',
 					secondary: 'blue',
 				},
@@ -178,7 +178,13 @@ new SnapTemplates({
 		settings: {
 			branch: BRANCHNAME,
 		},
-		templates: {
+		bundle: {
+			Bundle: {
+				component: 'RecommendationBundle',
+				// resultComponent: 'CustomResultSecondary',
+			},
+		},
+		default: {
 			Recs: {
 				component: 'Recommendation',
 				// resultComponent: 'CustomResultSecondary',

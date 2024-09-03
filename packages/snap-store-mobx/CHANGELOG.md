@@ -3,6 +3,54 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.59.0](https://github.com/searchspring/snap/compare/v0.58.3...v0.59.0) (2024-08-22)
+
+**Note:** Version bump only for package @searchspring/snap-store-mobx
+
+## [0.58.3](https://github.com/searchspring/snap/compare/v0.58.2...v0.58.3) (2024-07-31)
+
+### Bug Fixes
+
+- **cartstore:** bugfix for cartstore handling floating 0s for pricing ([9c31166](https://github.com/searchspring/snap/commit/9c311669f0875af758c3a0aba25ce654886e4b96))
+- **cartstore:** handle floating 0s in cartstore pricing ([b34e004](https://github.com/searchspring/snap/commit/b34e004a83ff24d0b00e715e4b2177830825d611))
+
+### Reverts
+
+- **cartstore:** reverting previous commit that was directly to develop ([5eef09a](https://github.com/searchspring/snap/commit/5eef09a306fd650cc08844ce580d7c02c283451a))
+
+## [0.58.2](https://github.com/searchspring/snap/compare/v0.58.1...v0.58.2) (2024-07-08)
+
+**Note:** Version bump only for package @searchspring/snap-store-mobx
+
+## [0.58.1](https://github.com/searchspring/snap/compare/v0.58.0...v0.58.1) (2024-07-03)
+
+### Bug Fixes
+
+- **cookies:** updating cookies to use domain when calling `unset` function ([b5315c1](https://github.com/searchspring/snap/commit/b5315c128fb77c6cad810f5793dbecf681e85337))
+
+# [0.58.0](https://github.com/searchspring/snap/compare/v0.57.0...v0.58.0) (2024-07-02)
+
+**Note:** Version bump only for package @searchspring/snap-store-mobx
+
+# [0.57.0](https://github.com/searchspring/snap/compare/v0.56.6...v0.57.0) (2024-06-26)
+
+### Features
+
+- **cookies:** add subdomain support ([b907206](https://github.com/searchspring/snap/commit/b9072063374138361123cf8a0f375db93fecb172))
+
+## [0.56.6](https://github.com/searchspring/snap/compare/v0.56.5...v0.56.6) (2024-06-07)
+
+### Bug Fixes
+
+- **store-mobx/searchresultstore:** normalizing variant price data to ensure they are numbers ([09fd97e](https://github.com/searchspring/snap/commit/09fd97ea43d235ed75eef439b676abf1e4f65e17))
+
+## [0.56.5](https://github.com/searchspring/snap/compare/v0.56.4...v0.56.5) (2024-06-03)
+
+### Bug Fixes
+
+- **searchresultstore:** filter out unavailable variants at contruction ([e03b8b1](https://github.com/searchspring/snap/commit/e03b8b19cfe69a5ec3c7939a9591ec2e2c11631d))
+- **searchresultstore:** needed to filter out unavailable options even if there are no selections ([207fa48](https://github.com/searchspring/snap/commit/207fa48fdfe38340bcdb6e7901106e4daefdeaff))
+
 ## [0.56.4](https://github.com/searchspring/snap/compare/v0.56.3...v0.56.4) (2024-05-28)
 
 ### Bug Fixes

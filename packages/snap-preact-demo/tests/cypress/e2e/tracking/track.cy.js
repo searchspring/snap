@@ -2,11 +2,15 @@ import { BeaconType, BeaconCategory } from '@searchspring/snap-tracker';
 
 describe('Tracking', () => {
 	beforeEach(() => {
+		cy.clearCookies();
+
 		cy.on('window:before:load', (win) => {
 			win.mergeSnapConfig = {
 				mode: 'production',
 			};
 		});
+
+		cy.wait(1000);
 	});
 	it('tracked shopper login', () => {
 		cy.visit('https://localhost:2222/snap');
@@ -18,6 +22,8 @@ describe('Tracking', () => {
 		// wait for first login event
 		cy.wait(`@${BeaconType.LOGIN}`).then(() => {
 			// initial init will send a login event for the shopper due to integration script variables
+
+			cy.wait(100);
 			const shopperId = 'snaptest';
 			cy.get('#login').click();
 			cy.get('#login-modal').find('input').type(shopperId);
@@ -43,6 +49,7 @@ describe('Tracking', () => {
 			expect(store).to.haveOwnProperty('pagination');
 			expect(store.pagination.totalResults).to.be.greaterThan(0);
 
+			cy.wait(100);
 			cy.get(`.ss__result:first`).should('exist').trigger('click');
 
 			cy.wait(`@${BeaconType.CLICK}`).should((interception) => {
@@ -89,6 +96,7 @@ describe('Tracking', () => {
 				expect(beacon.category).to.equal(BeaconCategory.PAGEVIEW);
 
 				expect(beacon.event).to.be.an('object').to.include.all.keys(['sku']);
+				expect(beacon.event.uid).to.equal('182146');
 				expect(beacon.event.sku).to.equal('C-AD-W1-1869P');
 			});
 
@@ -122,8 +130,20 @@ describe('Tracking', () => {
 				expect(beacon.event).to.have.property('items');
 				expect(beacon.event.items).to.be.an('array').to.have.length(2);
 
-				expect(beacon.event.items[0]).to.be.an('object').include.all.keys(['sku', 'qty', 'price']);
-				expect(beacon.event.items[1]).to.be.an('object').include.all.keys(['sku', 'qty', 'price']);
+				expect(beacon.event.items[0]).to.be.an('object').include.all.keys(['uid', 'sku', 'qty', 'price']);
+				expect(beacon.event.items[1]).to.be.an('object').include.all.keys(['uid', 'sku', 'qty', 'price']);
+				expect(beacon.event.items[0]).to.deep.equal({
+					uid: '182146',
+					sku: 'C-AD-W1-1869P',
+					qty: '1',
+					price: '48',
+				});
+				expect(beacon.event.items[1]).to.deep.equal({
+					uid: '174287',
+					sku: 'C-AD-Y5-814MD',
+					qty: '1',
+					price: '36',
+				});
 			});
 
 			cy.wait('@pixel').should((interception) => {
@@ -159,8 +179,21 @@ describe('Tracking', () => {
 				expect(beacon.event).to.have.property('items');
 				expect(beacon.event.items).to.be.an('array').to.have.length(2);
 
-				expect(beacon.event.items[0]).to.be.an('object').include.all.keys(['sku', 'qty', 'price']);
-				expect(beacon.event.items[1]).to.be.an('object').include.all.keys(['sku', 'qty', 'price']);
+				expect(beacon.event.items[0]).to.be.an('object').include.all.keys(['uid', 'sku', 'qty', 'price']);
+				expect(beacon.event.items[1]).to.be.an('object').include.all.keys(['uid', 'sku', 'qty', 'price']);
+
+				expect(beacon.event.items[0]).to.deep.equal({
+					uid: '99688',
+					sku: 'C-BP-G7-B1469',
+					qty: '1',
+					price: '22',
+				});
+				expect(beacon.event.items[1]).to.deep.equal({
+					uid: '181655',
+					sku: 'C-VJ-P2-32007',
+					qty: '1',
+					price: '39',
+				});
 			});
 
 			cy.wait('@pixel').should((interception) => {
@@ -223,6 +256,7 @@ describe('Tracking', () => {
 				});
 			});
 
+			cy.wait(100);
 			// scroll down
 			cy.get('.ss__recommendation:first').scrollIntoView();
 
@@ -269,6 +303,7 @@ describe('Tracking', () => {
 					});
 				});
 
+			cy.wait(100);
 			// click next button and assert new profile product impressions
 			cy.get('.ss__recommendation:first .ss__carousel__next').should('exist').trigger('click');
 
@@ -305,6 +340,7 @@ describe('Tracking', () => {
 				});
 			});
 
+			cy.wait(100);
 			// click on result
 			cy.get('.ss__recommendation:first .ss__result')
 				.filter(':visible:first')

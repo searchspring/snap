@@ -1,6 +1,5 @@
-import { keyframes } from '@emotion/react';
-
-import { css, LoadMoreProps } from '../../../../../index';
+import { css, keyframes } from '@emotion/react';
+import type { LoadMoreProps } from '../../../../../components/Molecules/LoadMore';
 
 // CSS in JS style script for the LoadMore component
 const loadMoreStyleScript = ({
@@ -48,11 +47,11 @@ const loadMoreStyleScript = ({
 				gap: '5px',
 				'& .ss__load-more__progress__indicator': {
 					width: progressIndicatorWidth,
-					background: backgroundColor || variables?.color?.secondary || '#f8f8f8',
+					background: backgroundColor || variables?.colors?.secondary || '#f8f8f8',
 					borderRadius: progressIndicatorSize,
 					'& .ss__load-more__progress__indicator__bar': {
 						width: pagination ? `${(pagination.end / pagination.totalResults) * 100}%` : '',
-						background: color || variables?.color?.primary || '#ccc',
+						background: color || variables?.colors?.primary || '#ccc',
 						borderRadius: progressIndicatorSize,
 						height: progressIndicatorSize,
 					},
@@ -75,7 +74,7 @@ const loadMoreStyleScript = ({
 
 				'& .ss__load-more__progress__indicator': {
 					'& .ss__load-more__progress__indicator__radial': {
-						background: backgroundColor || variables?.color?.secondary || '#f8f8f8',
+						background: backgroundColor || variables?.colors?.secondary || '#f8f8f8',
 						height: progressIndicatorWidth,
 						width: progressIndicatorWidth,
 						borderRadius: '50%',
@@ -109,7 +108,7 @@ const loadMoreStyleScript = ({
 					'& .ss__load-more__progress__indicator__radial__mask': {
 						'& .ss__load-more__progress__indicator__radial__mask__fill': {
 							clipPath: `inset(0px calc((${progressIndicatorWidth} / 2)) 0px 0px)`,
-							backgroundColor: color || variables?.color?.primary || '#ccc',
+							backgroundColor: color || variables?.colors?.primary || '#ccc',
 						},
 						'&.ss__load-more__progress__indicator__radial__mask--full': {
 							animation: `${radialAnimation} ease-in-out 1s`,

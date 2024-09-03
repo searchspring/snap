@@ -1,4 +1,5 @@
-import { css, FilterProps } from '../../../../../index';
+import { css } from '@emotion/react';
+import type { FilterProps } from '../../../../../components/Molecules/Filter';
 
 // CSS in JS style script for the Filter component
 const filterStyleScript = ({ theme }: FilterProps) => {

@@ -59,7 +59,7 @@ const CSS = {
 				},
 			},
 			'.swiper-pagination-bullet-active': {
-				background: theme?.variables?.color?.primary || 'inherit',
+				background: theme?.variables?.colors?.primary || 'inherit',
 			},
 			'.ss__carousel__next-wrapper, .ss__carousel__prev-wrapper': {
 				display: 'flex',
@@ -130,7 +130,7 @@ const CSS = {
 				margin: '0 4px',
 				'&.swiper-pagination-bullet-active': {
 					opacity: '0.8',
-					background: theme?.variables?.color?.primary || '#000',
+					background: theme?.variables?.colors?.primary || '#000',
 				},
 			},
 			'.swiper-slide-invisible-blank': {
@@ -335,6 +335,8 @@ export const Carousel = observer((properties: CarouselProps): JSX.Element => {
 		}
 	};
 
+	delete additionalProps.breakpoints;
+
 	return children?.length ? (
 		<CacheProvider>
 			<div
@@ -403,10 +405,11 @@ export const Carousel = observer((properties: CarouselProps): JSX.Element => {
 					controller={undefined} // prevent passing controller in additionalProps (causes unnecessary swiper updates and errors)
 					navigation={navigation}
 					pagination={pagination}
-					onResize={() => {
+					onResize={(swiper) => {
 						if (additionalProps.onResize) {
 							additionalProps.onResize();
 						}
+						swiper.updateSlidesClasses();
 						attachClasstoLastVisibleSlide();
 					}}
 					onTransitionEnd={() => {

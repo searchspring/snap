@@ -114,8 +114,8 @@ export const NoResults = observer((properties: NoResultsProps): JSX.Element => {
 				recommendationTemplateResultComponent = useComponent(snap?.templates?.library.import.component.result, resultComponentName);
 			}
 
-			if (componentName && snap?.templates?.library.import.component.recommendation) {
-				recommendationTemplateComponent = useComponent(snap?.templates?.library.import.component.recommendation, componentName);
+			if (componentName && snap?.templates?.library.import.component.recommendation.default) {
+				recommendationTemplateComponent = useComponent(snap?.templates?.library.import.component.recommendation.default, componentName);
 			}
 		}
 	}

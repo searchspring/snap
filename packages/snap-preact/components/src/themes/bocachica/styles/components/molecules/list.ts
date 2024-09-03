@@ -1,4 +1,5 @@
-import { css, ListProps } from '../../../../../index';
+import { css } from '@emotion/react';
+import type { ListProps } from '../../../../../components/Molecules/List';
 
 // CSS in JS style script for the List component
 const listStyleScript = ({ horizontal, theme }: ListProps) => {

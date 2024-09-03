@@ -1,12 +1,11 @@
 import type { SerializedStyles } from '@emotion/react';
-import type { Theme } from './providers/theme';
+import type { ThemeMinimal, Theme } from './providers/theme';
 import type { AbstractController } from '@searchspring/snap-controller';
 import type { UrlManager } from '@searchspring/snap-url-manager';
 import type { Product } from '@searchspring/snap-store-mobx';
 import { IconProps, IconType } from './components/Atoms/Icon';
 import { MutableRef } from 'preact/hooks';
 import type { Snap, SnapTemplates } from '../../src';
-import type { DeepPartial } from '../../src/types';
 import type { FunctionalComponent, RenderableProps } from 'preact';
 import type { CSSInterpolation } from '@emotion/serialize';
 
@@ -29,7 +28,7 @@ export type ListOption = {
 	disabled?: boolean;
 	default?: boolean;
 	icon?: IconType | Partial<IconProps>;
-	overrides?: DeepPartial<Theme>;
+	overrides?: ThemeMinimal;
 	url?: UrlManager;
 	available?: boolean;
 };
@@ -43,11 +42,9 @@ export type ResultComponent<Props extends Record<string, any> = object> = React.
 >;
 
 export enum ResultsLayout {
-	GRID = 'grid',
-	LIST = 'list',
+	grid = 'grid',
+	list = 'list',
 }
-
-export type ResultsLayoutType = ResultsLayout.GRID | ResultsLayout.LIST;
 
 // TODO: move to store or use store or snapi types
 export enum FacetType {

@@ -1,4 +1,5 @@
-import { css, SlideoutProps } from '../../../../../index';
+import { css } from '@emotion/react';
+import type { SlideoutProps } from '../../../../../components/Molecules/Slideout';
 
 // CSS in JS style script for the Slideout component
 const slideoutStyleScript = ({ isActive, width, transitionSpeed, slideDirection, theme }: SlideoutProps & { isActive: boolean }) => {

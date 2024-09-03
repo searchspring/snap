@@ -1,11 +1,11 @@
 import { Fragment, h } from 'preact';
 
+import { useState } from 'preact/hooks';
 import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
 
 import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { ComponentProps, RootNodeProperties, SwatchOption, BreakpointsProps } from '../../../types';
-import { useState } from 'react';
 import { useA11y, useDisplaySettings } from '../../../hooks';
 import { Carousel, CarouselProps } from '../Carousel';
 import { defined } from '../../../utilities';
@@ -25,13 +25,13 @@ const CSS = {
 				display: 'flex',
 				justifyContent: 'center',
 				alignItems: 'center',
-				border: `1px solid ${theme?.variables?.color?.primary || '#333'}`,
+				border: `1px solid ${theme?.variables?.colors?.primary || '#333'}`,
 				aspectRatio: '1/1',
 				margin: 'auto',
 				flexDirection: 'column',
 
 				'&.ss__swatches__carousel__swatch--selected': {
-					border: `2px solid ${theme?.variables?.color?.primary || '#333'}`,
+					border: `2px solid ${theme?.variables?.colors?.primary || '#333'}`,
 				},
 
 				'&.ss__swatches__carousel__swatch--disabled:before, &.ss__swatches__carousel__swatch--unavailable:before': {
@@ -247,9 +247,7 @@ export type SwatchesProps = {
 	carousel?: Partial<CarouselProps>;
 	grid?: Partial<GridProps>;
 	type?: 'carousel' | 'grid';
-} & // 	| { // 	  } // 			carousel?: Partial<CarouselProps>; // 			type?: 'carousel'; // 	| { //  & (
-// 			type?: 'grid';
-// 			grid?: Partial<GridProps>;
+} & // 			grid?: Partial<GridProps>; // 			type?: 'grid'; // 	| { // 	  } // 			carousel?: Partial<CarouselProps>; // 			type?: 'carousel'; // 	| { //  & (
 // 	  }
 // )
 ComponentProps;

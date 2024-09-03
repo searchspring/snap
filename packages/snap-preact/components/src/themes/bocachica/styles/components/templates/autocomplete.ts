@@ -1,4 +1,5 @@
-import { css, AutocompleteProps } from '../../../../../index';
+import { css } from '@emotion/react';
+import type { AutocompleteProps } from '../../../../../components/Templates/Autocomplete';
 
 // CSS in JS style script for the Autocomplete component
 const autocompleteStyleScript = ({
@@ -39,7 +40,7 @@ const autocompleteStyleScript = ({
 		'.ss__autocomplete__title--trending, .ss__autocomplete__title--history, .ss__autocomplete__title--terms': {
 			fontWeight: 'normal',
 			margin: 0,
-			color: variables?.color?.secondary || '#c5c5c5',
+			color: variables?.colors?.secondary || '#c5c5c5',
 			textTransform: 'uppercase',
 			padding: '10px',
 			'& h5': {
@@ -60,7 +61,7 @@ const autocompleteStyleScript = ({
 			minWidth: '150px',
 			order: 1,
 			background: '#fff',
-			borderBottom: vertical ? `1px solid ${variables?.color?.primary || '#333'}` : undefined,
+			borderBottom: vertical ? `1px solid ${variables?.colors?.primary || '#333'}` : undefined,
 
 			'& .ss__autocomplete__terms__options': {
 				display: vertical || horizontalTerms ? 'flex' : undefined,
@@ -73,7 +74,7 @@ const autocompleteStyleScript = ({
 					'& a': {
 						display: 'block',
 						padding: '10px',
-						color: variables?.color?.primary,
+						color: variables?.colors?.primary,
 
 						'& em': {
 							fontStyle: 'normal',
@@ -97,7 +98,7 @@ const autocompleteStyleScript = ({
 			order: 2,
 			padding: vertical ? '10px 20px' : '10px',
 			overflowY: vertical ? undefined : 'auto',
-			borderBottom: vertical ? `1px solid ${variables?.color?.primary || '#333'}` : undefined,
+			borderBottom: vertical ? `1px solid ${variables?.colors?.primary || '#333'}` : undefined,
 
 			'& .ss__facet-palette-options, .ss__facet-grid-options': {
 				gridTemplateColumns: 'repeat(auto-fill, minmax(36px, 1fr))',
@@ -108,7 +109,7 @@ const autocompleteStyleScript = ({
 			},
 
 			'& .ss__facet__header': {
-				color: variables?.color?.primary,
+				color: variables?.colors?.primary,
 				textTransform: 'uppercase',
 			},
 
@@ -159,7 +160,7 @@ const autocompleteStyleScript = ({
 				'& a': {
 					fontWeight: 'bold',
 					textTransform: 'uppercase',
-					color: variables?.color?.primary,
+					color: variables?.colors?.primary,
 
 					'& .ss__icon': {
 						marginLeft: '5px',

@@ -1,4 +1,5 @@
-import { css, HorizontalFacetsProps } from '../../../../../index';
+import { css } from '@emotion/react';
+import type { HorizontalFacetsProps } from '../../../../../components/Organisms/HorizontalFacets';
 
 // CSS in JS style script for the Facets component
 const horizontalFacetsStyleScript = ({ theme }: HorizontalFacetsProps) => {
@@ -33,11 +34,11 @@ const horizontalFacetsStyleScript = ({ theme }: HorizontalFacetsProps) => {
 
 				'&.ss__dropdown--open': {
 					'& .ss__dropdown__button__heading': {
-						backgroundColor: variables?.color?.active?.background,
-						color: variables?.color?.active?.foreground,
+						backgroundColor: variables?.colors?.active?.background,
+						color: variables?.colors?.active?.foreground,
 
 						'& .ss__icon': {
-							fill: variables?.color?.active?.accent,
+							fill: variables?.colors?.active?.accent,
 							transform: 'rotate(180deg)',
 						},
 					},
@@ -56,7 +57,7 @@ const horizontalFacetsStyleScript = ({ theme }: HorizontalFacetsProps) => {
 			'& .ss__horizontal-facets__header__dropdown': {
 				'&.ss__dropdown--open': {
 					'& .ss__dropdown__content': {
-						border: `1px solid ${variables?.color?.active?.background || '#ccc'}`,
+						border: `1px solid ${variables?.colors?.active?.background || '#ccc'}`,
 					},
 				},
 			},

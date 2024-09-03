@@ -1,7 +1,9 @@
 import { h, Fragment, ComponentChildren } from 'preact';
+import { useState, useRef } from 'preact/hooks';
 import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
 import { observer } from 'mobx-react';
+import deepmerge from 'deepmerge';
 
 import type { SwiperOptions } from 'swiper/types';
 
@@ -11,13 +13,13 @@ import type { Product } from '@searchspring/snap-store-mobx';
 import { Carousel, CarouselProps, defaultCarouselBreakpoints, defaultVerticalCarouselBreakpoints } from '../../Molecules/Carousel';
 import { Result, ResultProps } from '../../Molecules/Result';
 import { defined, mergeProps } from '../../../utilities';
+import { useIntersection } from '../../../hooks';
 import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { ComponentProps, BreakpointsProps, RootNodeProperties, ResultComponent } from '../../../types';
 import { useDisplaySettings } from '../../../hooks/useDisplaySettings';
 import { RecommendationProfileTracker } from '../../Trackers/Recommendation/ProfileTracker';
 import { RecommendationResultTracker } from '../../Trackers/Recommendation/ResultTracker';
 import { Lang, useLang } from '../../../hooks';
-import deepmerge from 'deepmerge';
 
 const CSS = {
 	recommendation: ({ vertical }: Partial<RecommendationProps>) =>
@@ -73,10 +75,17 @@ export const Recommendation = observer((properties: RecommendationProps): JSX.El
 		style,
 		className,
 		styleScript,
+		lazyRender,
 		vertical,
 		treePath,
 		...additionalProps
 	} = props;
+
+	const mergedlazyRender = {
+		enabled: true,
+		offset: '10%',
+		...lazyRender,
+	};
 
 	if (!controller || controller.type !== 'recommendation') {
 		throw new Error(`<Recommendation> Component requires 'controller' prop with an instance of RecommendationController`);
@@ -128,6 +137,14 @@ export const Recommendation = observer((properties: RecommendationProps): JSX.El
 		styling.css = [style];
 	}
 
+	const [isVisible, setIsVisible] = useState(false);
+
+	const recsRef = useRef(null);
+	const inView = mergedlazyRender?.enabled ? useIntersection(recsRef, `${mergedlazyRender.offset} 0px ${mergedlazyRender.offset} 0px`, true) : true;
+	if (inView) {
+		setIsVisible(true);
+	}
+
 	//initialize lang
 	const defaultLang: Partial<RecommendationLang> = {
 		titleText: {
@@ -141,44 +158,64 @@ export const Recommendation = observer((properties: RecommendationProps): JSX.El
 
 	return children || resultsToRender?.length ? (
 		<CacheProvider>
-			<div {...styling} className={classnames('ss__recommendation', className)}>
-				<RecommendationProfileTracker controller={controller}>
-					{title && <h3 className="ss__recommendation__title" {...mergedLang.titleText?.all}></h3>}
-					<Carousel
-						prevButton={prevButton}
-						nextButton={nextButton}
-						hideButtons={hideButtons}
-						loop={loop}
-						pagination={pagination}
-						breakpoints={breakpoints}
-						{...subProps.carousel}
-						{...additionalProps}
-						{...displaySettings}
-					>
+			<div {...styling} className={classnames('ss__recommendation', className)} ref={recsRef}>
+				{isVisible ? (
+					<RecommendationProfileTracker controller={controller}>
+						{title && (
+							<h3 className="ss__recommendation__title" {...mergedLang.titleText?.all}>
+								{title}
+							</h3>
+						)}
+						<Carousel
+							prevButton={prevButton}
+							nextButton={nextButton}
+							hideButtons={hideButtons}
+							loop={loop}
+							pagination={pagination}
+							breakpoints={breakpoints}
+							{...subProps.carousel}
+							{...additionalProps}
+							{...displaySettings}
+						>
+							{Array.isArray(children) && children.length
+								? children.map((child: any, idx: number) => (
+										<RecommendationResultTracker controller={controller} result={resultsToRender[idx]}>
+											{child}
+										</RecommendationResultTracker>
+								  ))
+								: resultsToRender.map((result) => (
+										<RecommendationResultTracker controller={controller} result={result}>
+											{(() => {
+												if (resultComponent && controller) {
+													const ResultComponent = resultComponent;
+													return <ResultComponent controller={controller} result={result} />;
+												} else {
+													return <Result key={result.id} {...subProps.result} controller={controller} result={result} />;
+												}
+											})()}
+										</RecommendationResultTracker>
+								  ))}
+						</Carousel>
+					</RecommendationProfileTracker>
+				) : (
+					<RecommendationProfileTracker controller={controller}>
 						{Array.isArray(children) && children.length
 							? children.map((child: any, idx: number) => (
 									<RecommendationResultTracker controller={controller} result={resultsToRender[idx]}>
-										{child}
+										<></>
 									</RecommendationResultTracker>
 							  ))
 							: resultsToRender.map((result) => (
 									<RecommendationResultTracker controller={controller} result={result}>
-										{(() => {
-											if (resultComponent && controller) {
-												const ResultComponent = resultComponent;
-												return <ResultComponent controller={controller} result={result} />;
-											} else {
-												return <Result key={result.id} {...subProps.result} controller={controller} result={result} />;
-											}
-										})()}
+										<></>
 									</RecommendationResultTracker>
 							  ))}
-					</Carousel>
-				</RecommendationProfileTracker>
+					</RecommendationProfileTracker>
+				)}
 			</div>
 		</CacheProvider>
 	) : (
-		<Fragment></Fragment>
+		<></>
 	);
 });
 
@@ -196,6 +233,10 @@ export type RecommendationProps = {
 	vertical?: boolean;
 	resultComponent?: ResultComponent;
 	lang?: Partial<RecommendationLang>;
+	lazyRender?: {
+		enabled: boolean;
+		offset?: string;
+	};
 } & Omit<SwiperOptions, 'breakpoints'> &
 	ComponentProps;
 

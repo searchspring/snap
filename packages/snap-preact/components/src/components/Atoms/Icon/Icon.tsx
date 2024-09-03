@@ -11,8 +11,8 @@ import { mergeProps } from '../../../utilities';
 const CSS = {
 	icon: ({ color, height, width, size, theme }: Partial<IconProps>) =>
 		css({
-			fill: color || theme?.variables?.color?.primary || '#333',
-			stroke: color || theme?.variables?.color?.primary || '#333',
+			fill: color || theme?.variables?.colors?.primary || '#333',
+			stroke: color || theme?.variables?.colors?.primary || '#333',
 			width: isNaN(Number(width || size)) ? width || size : `${width || size}px`,
 			height: isNaN(Number(height || size)) ? height || size : `${height || size}px`,
 			position: 'relative',

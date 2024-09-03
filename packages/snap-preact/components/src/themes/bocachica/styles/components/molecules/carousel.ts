@@ -1,4 +1,5 @@
-import { css, CarouselProps } from '../../../../../index';
+import { css } from '@emotion/react';
+import type { CarouselProps } from '../../../../../components/Molecules/Carousel';
 
 // CSS in JS style script for the Carousel component
 const carouselStyleScript = ({ vertical, theme }: CarouselProps) => {
@@ -43,7 +44,7 @@ const carouselStyleScript = ({ vertical, theme }: CarouselProps) => {
 			},
 		},
 		'.swiper-pagination-bullet-active': {
-			background: variables?.color?.accent || 'inherit',
+			background: variables?.colors?.accent || 'inherit',
 		},
 		'.ss__carousel__next-wrapper, .ss__carousel__prev-wrapper': {
 			display: 'flex',
@@ -109,13 +110,13 @@ const carouselStyleScript = ({ vertical, theme }: CarouselProps) => {
 			height: '8px',
 			display: 'inline-block',
 			borderRadius: '50%',
-			background: variables?.color?.accent || '#000',
+			background: variables?.colors?.accent || '#000',
 			opacity: '.5',
 			cursor: 'pointer',
 			margin: '0 4px',
 			'&.swiper-pagination-bullet-active': {
 				opacity: '1',
-				background: variables?.color?.active?.accent || '#000',
+				background: variables?.colors?.active?.accent || '#000',
 			},
 		},
 		'.swiper-container-pointer-events': {

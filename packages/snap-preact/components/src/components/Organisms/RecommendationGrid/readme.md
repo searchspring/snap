@@ -56,6 +56,19 @@ The `gapSize` prop specifies the gap size between each result.
 <RecommendationGrid results={controller.store.results} gapSize={'10px'} />
 ```
 
+
+### lazyRender 
+The `lazyRender` prop specifies an object of lazy rendering settings. The settings include an `enable` toggle (defaults to `true`) as well as an `offset` (default `"10%"`) to specify at what distance the component should start rendering relative to the bottom of the viewport.
+
+```jsx
+const customLazyRenderProps = {
+	enabled: true,
+	offset: "20px" // any css margin values accepted - px, %, etc...
+}
+
+<RecommendationGrid results={controller.store.results} lazyRender={ customLazyRenderProps } />
+```
+
 ### breakpoints
 An object that modifies the responsive behavior of the `<Result />` component.
 

@@ -1,4 +1,5 @@
-import { css, SidebarProps } from '../../../../../index';
+import { css } from '@emotion/react';
+import type { SidebarProps } from '../../../../../components/Organisms/Sidebar';
 
 // CSS in JS style script for the Sidebar component
 const sidebarStyleScript = ({ theme }: SidebarProps) => {
@@ -10,7 +11,7 @@ const sidebarStyleScript = ({ theme }: SidebarProps) => {
 		paddingInlineEnd: '60px',
 
 		'& .ss__sidebar__title': {
-			color: variables?.color?.primary,
+			color: variables?.colors?.primary,
 		},
 	});
 };

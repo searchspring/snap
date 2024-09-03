@@ -6,13 +6,15 @@ import { TargetStore } from './TargetStore';
 import { LibraryStore } from './LibraryStore';
 import { debounce } from '@searchspring/snap-toolbox';
 
-import type { ResultComponent } from '../../../components/src';
-import type { DeepPartial, GlobalThemeStyleScript } from '../../types';
-import type { Theme, ThemeVariables } from '../../../components/src';
+import type { ResultComponent, ThemeMinimal, ThemeOverrides, ThemePartial, ThemeVariablesPartial } from '../../../components/src';
+import type { GlobalThemeStyleScript } from '../../types';
+import type { Theme } from '../../../components/src';
 export type TemplateThemeTypes = 'library' | 'local';
-export type TemplateTypes = 'search' | 'autocomplete' | 'recommendation';
+export type TemplateTypes = 'search' | 'autocomplete' | `recommendation/${RecsTemplateTypes}`;
 export type TemplateCustomComponentTypes = 'result' | 'badge';
-export type TemplateComponentTypes = 'search' | 'autocomplete' | 'recommendation' | TemplateCustomComponentTypes;
+export type RecsTemplateTypes = 'bundle' | 'default' | 'email';
+
+type TargetMap = { [targetId: string]: TargetStore };
 
 export type TemplateTarget = {
 	selector?: string;
@@ -36,8 +38,8 @@ type WindowProperties = {
 type TemplateStoreThemeConfig = {
 	extends: 'pike' | 'bocachica'; // various themes available
 	style?: GlobalThemeStyleScript;
-	variables?: DeepPartial<ThemeVariables>;
-	overrides?: Theme;
+	variables?: ThemeVariablesPartial;
+	overrides?: ThemeOverrides;
 };
 
 export type TemplateStoreComponentConfig = {
@@ -69,8 +71,10 @@ export class TemplatesStore {
 	dependencies: TemplatesStoreDependencies;
 
 	targets: {
-		[key in TemplateTypes]: {
-			[targetId: string]: TargetStore;
+		search: TargetMap;
+		autocomplete: TargetMap;
+		recommendation: {
+			[key in RecsTemplateTypes]: TargetMap;
 		};
 	};
 
@@ -99,7 +103,11 @@ export class TemplatesStore {
 		this.targets = {
 			search: {},
 			autocomplete: {},
-			recommendation: {},
+			recommendation: {
+				bundle: {},
+				default: {},
+				email: {},
+			},
 		};
 
 		this.themes = {
@@ -165,27 +173,49 @@ export class TemplatesStore {
 		});
 	}
 
-	// TODO - rename to addTargeter / and change template - target(er) in SnapTemplate (config) and elsewhere
 	public addTarget(type: TemplateTypes, target: TemplateTarget): string | undefined {
 		const targetId = target.selector || target.component;
 		if (targetId) {
-			this.targets[type][targetId] = new TargetStore(target, this.dependencies, this.settings);
+			const path = type.split('/');
+			let targetPath: any = this.targets;
+			for (let index = 0; index < path.length; index++) {
+				if (!targetPath[path[index]]) {
+					return;
+				}
+				targetPath = targetPath[path[index]];
+			}
+			(targetPath as TargetMap)[targetId] = new TargetStore(target, this.dependencies, this.settings);
+
+			if (this.settings.editMode) {
+				// triggers a rerender for TemplateEditor
+				this.targets = { ...this.targets };
+			}
 			return targetId;
 		}
 	}
 
-	public getTarget(type: TemplateTypes, targetId: string) {
-		return this.targets[type][targetId];
+	public getTarget(type: TemplateTypes, targetId: string): TargetStore | undefined {
+		const path = type.split('/');
+		path.push(targetId);
+		let targetPath: any = this.targets;
+		for (let index = 0; index < path.length; index++) {
+			if (!targetPath[path[index]]) {
+				return;
+			}
+			targetPath = targetPath[path[index]];
+		}
+
+		return targetPath;
 	}
 
 	public addTheme(config: {
 		name: string;
 		type: TemplateThemeTypes;
 		base: Theme;
-		overrides?: Theme;
-		variables?: DeepPartial<ThemeVariables>;
-		currency: Partial<Theme>;
-		language: Partial<Theme>;
+		overrides?: ThemePartial;
+		variables?: ThemeVariablesPartial;
+		currency: ThemeMinimal;
+		language: ThemeMinimal;
 		innerWidth?: number;
 		style?: GlobalThemeStyleScript;
 	}) {
@@ -237,7 +267,7 @@ export class TemplatesStore {
 	public async setLanguage(languageCode: string) {
 		if (languageCode in this.library.import.language) {
 			await this.library.import.language[languageCode as keyof typeof this.library.import.language]();
-			const language = this.library.locales.currencies[languageCode];
+			const language = this.library.locales.languages[languageCode];
 
 			if (language) {
 				this.language = languageCode;

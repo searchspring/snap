@@ -1,1 +1,1 @@
-export { Result } from '../../../../../components/src';
+export { Result } from '../../../../../components/src/components/Molecules/Result';

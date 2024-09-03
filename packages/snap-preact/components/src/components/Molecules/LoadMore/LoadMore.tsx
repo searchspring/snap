@@ -53,11 +53,11 @@ const CSS = {
 					gap: '5px',
 					'& .ss__load-more__progress__indicator': {
 						width: progressIndicatorWidth,
-						background: backgroundColor || theme?.variables?.color?.secondary || '#f8f8f8',
+						background: backgroundColor || theme?.variables?.colors?.secondary || '#f8f8f8',
 						borderRadius: progressIndicatorSize,
 						'& .ss__load-more__progress__indicator__bar': {
 							width: pagination ? `${(pagination.end / pagination.totalResults) * 100}%` : '',
-							background: color || theme?.variables?.color?.primary || '#ccc',
+							background: color || theme?.variables?.colors?.primary || '#ccc',
 							borderRadius: progressIndicatorSize,
 							height: progressIndicatorSize,
 						},
@@ -80,7 +80,7 @@ const CSS = {
 
 					'& .ss__load-more__progress__indicator': {
 						'& .ss__load-more__progress__indicator__radial': {
-							background: backgroundColor || theme?.variables?.color?.secondary || '#f8f8f8',
+							background: backgroundColor || theme?.variables?.colors?.secondary || '#f8f8f8',
 							height: progressIndicatorWidth,
 							width: progressIndicatorWidth,
 							borderRadius: '50%',
@@ -113,7 +113,7 @@ const CSS = {
 						'& .ss__load-more__progress__indicator__radial__mask': {
 							'& .ss__load-more__progress__indicator__radial__mask__fill': {
 								clipPath: `inset(0px calc((${progressIndicatorWidth} / 2)) 0px 0px)`,
-								backgroundColor: color || theme?.variables?.color?.primary || '#ccc',
+								backgroundColor: color || theme?.variables?.colors?.primary || '#ccc',
 							},
 							'&.ss__load-more__progress__indicator__radial__mask--full': {
 								transform: `rotate(${radialAngle}deg)`,

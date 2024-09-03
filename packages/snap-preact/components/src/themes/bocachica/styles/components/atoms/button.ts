@@ -1,4 +1,5 @@
-import { css, ButtonProps } from '../../../../../index';
+import { css } from '@emotion/react';
+import type { ButtonProps } from '../../../../../components/Atoms/Button';
 
 // CSS in JS style script for the Button component
 const buttonStyleScript = ({ color, backgroundColor, borderColor, theme }: ButtonProps) => {
@@ -8,16 +9,16 @@ const buttonStyleScript = ({ color, backgroundColor, borderColor, theme }: Butto
 		display: 'inline-flex',
 		padding: '5px 10px',
 		position: 'relative',
-		color: color || variables?.color?.secondary,
+		color: color || variables?.colors?.secondary,
 		outline: 0,
 		backgroundColor: backgroundColor,
-		border: `1px solid ${borderColor || variables?.color?.accent || '#333'}`,
+		border: `1px solid ${borderColor || variables?.colors?.accent || '#333'}`,
 		borderRadius: '3px',
 		'&:hover': {
 			cursor: 'pointer',
-			backgroundColor: variables?.color?.hover?.background,
-			color: variables?.color?.hover?.foreground,
-			borderColor: borderColor || variables?.color?.hover?.accent,
+			backgroundColor: variables?.colors?.hover?.background,
+			color: variables?.colors?.hover?.foreground,
+			borderColor: borderColor || variables?.colors?.hover?.accent,
 		},
 		'&.ss__button--disabled': {
 			opacity: 0.7,

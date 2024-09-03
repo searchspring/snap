@@ -1,4 +1,5 @@
-import { css, FacetSliderProps } from '../../../../../index';
+import { css } from '@emotion/react';
+import type { FacetSliderProps } from '../../../../../components/Molecules/FacetSlider';
 
 // CSS in JS style script for the FacetSlider component
 const facetSliderStyleScript = ({
@@ -19,7 +20,7 @@ const facetSliderStyleScript = ({
 		flexDirection: 'column',
 		marginTop: '5px',
 		marginBottom: showTicks && stickyHandleLabel ? '22px' : showTicks || stickyHandleLabel ? '10px' : '5px',
-		color: variables?.color?.secondary,
+		color: variables?.colors?.secondary,
 
 		'& .ss__facet-slider__slider': {
 			position: 'relative',
@@ -50,7 +51,7 @@ const facetSliderStyleScript = ({
 			},
 		},
 		'& .ss__facet-slider__rail': {
-			background: railColor || variables?.color?.secondary || '#333',
+			background: railColor || variables?.colors?.secondary || '#333',
 			height: '100%',
 		},
 		'& .ss__facet-slider__segment': {
@@ -61,7 +62,7 @@ const facetSliderStyleScript = ({
 			textAlign: 'center',
 			'& button': {
 				'& .ss__facet-slider__handle': {
-					background: handleColor || variables?.color?.secondary || '#333',
+					background: handleColor || variables?.colors?.secondary || '#333',
 					display: 'flex',
 					alignItems: 'center',
 					justifyContent: 'center',
@@ -70,7 +71,7 @@ const facetSliderStyleScript = ({
 					borderRadius: '100%',
 					fontSize: '0.7rem',
 					whiteSpace: 'nowrap',
-					color: valueTextColor || variables?.color?.secondary || 'initial',
+					color: valueTextColor || variables?.colors?.secondary || 'initial',
 					fontWeight: 'normal',
 					transform: 'translateY(0) scale(0.9)',
 					transition: 'all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275)',
@@ -78,7 +79,7 @@ const facetSliderStyleScript = ({
 					cursor: 'pointer',
 
 					'&:after': {
-						backgroundColor: variables?.color?.accent || '#ffffff',
+						backgroundColor: variables?.colors?.accent || '#ffffff',
 						width: '30%',
 						height: '30%',
 						top: '0',
@@ -93,13 +94,13 @@ const facetSliderStyleScript = ({
 					},
 
 					'&.ss__facet-slider__handle--active': {
-						background: handleDraggingColor || handleColor || variables?.color?.active?.background || '#000',
+						background: handleDraggingColor || handleColor || variables?.colors?.active?.background || '#000',
 						'& label.ss__facet-slider__handle__label': {
 							background: '#fff',
 							padding: '0 5px',
 						},
 						'&:after': {
-							backgroundColor: variables?.color?.active?.foreground || '#ffffff',
+							backgroundColor: variables?.colors?.active?.foreground || '#ffffff',
 						},
 					},
 
@@ -128,7 +129,7 @@ const facetSliderStyleScript = ({
 		'& .ss__facet-slider__labels': {
 			textAlign: 'center',
 			marginTop: showTicks && !stickyHandleLabel ? '40px' : '20px',
-			color: variables?.color?.secondary || valueTextColor,
+			color: variables?.colors?.secondary || valueTextColor,
 
 			'& .ss__facet-slider__label--0': {
 				'&:after': {

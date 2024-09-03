@@ -1,16 +1,16 @@
 import { Fragment, h } from 'preact';
 
 import { jsx, css } from '@emotion/react';
+import { useState } from 'preact/hooks';
 import classnames from 'classnames';
+import deepmerge from 'deepmerge';
+import { filters } from '@searchspring/snap-toolbox';
 
 import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { ComponentProps, RootNodeProperties, ListOption, SwatchOption } from '../../../types';
-import { useState } from 'react';
 import { Lang, useA11y, useLang } from '../../../hooks';
 import { Image, ImageProps } from '../../Atoms/Image';
 import { cloneWithProps, defined } from '../../../utilities';
-import { filters } from '@searchspring/snap-toolbox';
-import deepmerge from 'deepmerge';
 
 const CSS = {
 	Grid: ({ theme, columns, gapSize, disableOverflowAction }: Partial<GridProps>) =>
@@ -32,7 +32,7 @@ const CSS = {
 					justifyContent: 'center',
 					alignItems: 'center',
 					flex: '0 1 auto',
-					border: `1px solid ${theme?.variables?.color?.primary || '#333'}`,
+					border: `1px solid ${theme?.variables?.colors?.primary || '#333'}`,
 					textAlign: 'center',
 					wordBreak: 'break-all',
 					padding: '1em 0',
@@ -47,7 +47,7 @@ const CSS = {
 						marginRight: '0',
 					},
 					'&.ss__grid__option--selected': {
-						border: `2px solid ${theme?.variables?.color?.primary || '#333'}`,
+						border: `2px solid ${theme?.variables?.colors?.primary || '#333'}`,
 					},
 
 					'&.ss__grid__option--disabled': {
@@ -76,7 +76,7 @@ const CSS = {
 
 					'&:hover:not(.ss__grid__option--selected)': {
 						cursor: 'pointer',
-						background: theme?.variables?.color?.hover?.background || '#f8f8f8',
+						background: theme?.variables?.colors?.hover?.background || '#f8f8f8',
 					},
 				},
 

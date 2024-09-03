@@ -1,4 +1,5 @@
-import { css, FacetProps } from '../../../../../index';
+import { css } from '@emotion/react';
+import type { FacetProps } from '../../../../../components/Organisms/Facet';
 
 // CSS in JS style script for the Facet component
 const facetStyleScript = ({ color, theme }: FacetProps) => {
@@ -21,7 +22,7 @@ const facetStyleScript = ({ color, theme }: FacetProps) => {
 			display: 'flex',
 			justifyContent: 'space-between',
 			alignItems: 'center',
-			color: color || variables?.color?.secondary,
+			color: color || variables?.colors?.secondary,
 			fontWeight: 'bold',
 		},
 		'& .ss__facet__options': {
@@ -37,14 +38,14 @@ const facetStyleScript = ({ color, theme }: FacetProps) => {
 				background: '#f2f2f2',
 			},
 			'&::-webkit-scrollbar-thumb': {
-				background: variables?.color?.secondary || '#ccc',
+				background: variables?.colors?.secondary || '#ccc',
 			},
 		},
 		'& .ss__facet__show-more-less': {
 			display: 'block',
 			margin: '8px',
 			cursor: 'pointer',
-			color: color || variables?.color?.secondary,
+			color: color || variables?.colors?.secondary,
 			'& .ss__icon': {
 				marginRight: '8px',
 			},

@@ -38,7 +38,7 @@ const CSS = {
 			'& .ss__error-handler__button': {
 				backgroundColor: 'white',
 				color: 'inherit',
-				borderColor: theme?.variables?.color?.primary,
+				borderColor: theme?.variables?.colors?.primary,
 				width: ['150px', 'fit-content'],
 				margin: '5px 10px',
 

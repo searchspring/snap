@@ -46,13 +46,13 @@ export default {
 		},
 		layout: {
 			description: 'Banner layout',
-			defaultValue: ResultsLayout.GRID,
+			defaultValue: ResultsLayout.grid,
 			table: {
 				type: {
 					summary: 'string',
 				},
 			},
-			options: [ResultsLayout.GRID, ResultsLayout.LIST],
+			options: [ResultsLayout.grid, ResultsLayout.list],
 			control: {
 				type: 'select',
 			},

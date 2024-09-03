@@ -1,5 +1,5 @@
-import { keyframes } from '@emotion/react';
-import { css, LoadingBarProps } from '../../../../../index';
+import { css, keyframes } from '@emotion/react';
+import type { LoadingBarProps } from '../../../../../components/Atoms/Loading';
 
 // CSS in JS style script for the LoadingBar component
 const loadingBarStyleScript = ({ color, height, backgroundColor, theme }: LoadingBarProps) => {
@@ -30,7 +30,7 @@ const loadingBarStyleScript = ({ color, height, backgroundColor, theme }: Loadin
 			top: '0',
 			left: '-200px',
 			height: '100%',
-			background: `${color || variables?.color?.accent || '#ccc'}`,
+			background: `${color || variables?.colors?.accent || '#ccc'}`,
 			animation: `${animation} 2s linear infinite`,
 		},
 	});

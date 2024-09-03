@@ -22,11 +22,11 @@ const CSS = {
 				alignItems: 'center',
 				'&:hover': {
 					cursor: 'pointer',
-					background: theme?.variables?.color?.hover?.background,
+					background: theme?.variables?.colors?.hover?.background,
 				},
 				'&.ss__facet-hierarchy-options__option--filtered': {
 					fontWeight: 'bold',
-					color: theme?.variables?.color?.primary,
+					color: theme?.variables?.colors?.primary,
 					'&:hover': {
 						cursor: 'default',
 						background: 'unset',
@@ -39,7 +39,7 @@ const CSS = {
 					'&:before': {
 						content: `'\\0000ab'`,
 						padding: '0 2px 0 0',
-						color: theme?.variables?.color?.primary,
+						color: theme?.variables?.colors?.primary,
 					},
 				},
 				'& .ss__facet-hierarchy-options__option__value': {
@@ -63,11 +63,11 @@ const CSS = {
 
 				'&:hover': {
 					cursor: 'pointer',
-					background: theme?.variables?.color?.hover?.background,
+					background: theme?.variables?.colors?.hover?.background,
 				},
 				'&.ss__facet-hierarchy-options__option--filtered': {
 					fontWeight: 'bold',
-					color: theme?.variables?.color?.primary,
+					color: theme?.variables?.colors?.primary,
 					marginRight: '2em',
 					'&:hover': {
 						cursor: 'default',
@@ -78,7 +78,7 @@ const CSS = {
 					'&:before': {
 						content: `'\\0000ab'`,
 						padding: '0 2px 0 0',
-						color: theme?.variables?.color?.primary,
+						color: theme?.variables?.colors?.primary,
 					},
 				},
 				'& .ss__facet-hierarchy-options__option__value': {

@@ -61,7 +61,7 @@ export default {
 					summary: 'string',
 				},
 			},
-			options: [ResultsLayout.GRID, ResultsLayout.LIST],
+			options: [ResultsLayout.grid, ResultsLayout.list],
 			control: {
 				type: 'select',
 			},
@@ -136,7 +136,7 @@ Grid.loaders = [
 ];
 
 export const List = (args: ResultsProps, { loaded: { controller } }: { loaded: { controller: SearchController } }) => {
-	return <Results {...args} controller={controller} results={controller?.store?.results} layout={ResultsLayout.LIST} />;
+	return <Results {...args} controller={controller} results={controller?.store?.results} layout={ResultsLayout.list} />;
 };
 
 List.loaders = [

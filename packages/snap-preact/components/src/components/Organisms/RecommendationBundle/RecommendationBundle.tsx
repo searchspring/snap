@@ -1,12 +1,12 @@
 import { h, Fragment } from 'preact';
 import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
-import { useRef } from 'preact/hooks';
+import { useRef, useEffect, useState } from 'preact/hooks';
 import { observer } from 'mobx-react';
 import deepmerge from 'deepmerge';
 import { Carousel, CarouselProps as CarouselProps } from '../../Molecules/Carousel';
 import { Result, ResultProps } from '../../Molecules/Result';
-import { defined, mergeProps } from '../../../utilities';
+import { defined, mergeProps, cloneWithProps } from '../../../utilities';
 import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { ComponentProps, BreakpointsProps, RootNodeProperties, ResultComponent } from '../../../types';
 import { useDisplaySettings } from '../../../hooks/useDisplaySettings';
@@ -17,8 +17,8 @@ import type { RecommendationController } from '@searchspring/snap-controller';
 import type { Product } from '@searchspring/snap-store-mobx';
 import { BundleSelector } from './BundleSelector';
 import { BundledCTA } from './BundleCTA';
-import { useEffect } from 'react';
 import { Lang } from '../../../hooks';
+import { useIntersection } from '../../../hooks';
 
 const CSS = {
 	recommendationBundle: ({ slidesPerView, spaceBetween, ctaInline, vertical, separatorIcon }: any) =>
@@ -190,6 +190,7 @@ export const RecommendationBundle = observer((properties: RecommendationBundlePr
 		separatorIconSeedOnly,
 		resultComponent,
 		ctaSlot,
+		hideSeed,
 		ctaButtonText,
 		ctaButtonSuccessText,
 		ctaButtonSuccessTimeout,
@@ -197,11 +198,18 @@ export const RecommendationBundle = observer((properties: RecommendationBundlePr
 		ctaIcon,
 		ctaInline,
 		style,
+		lazyRender,
 		className,
 		styleScript,
 		treePath,
 		...additionalProps
 	} = props;
+
+	const mergedlazyRender = {
+		enabled: true,
+		offset: '10%',
+		...lazyRender,
+	};
 
 	const mergedCarouselProps = {
 		enabled: true,
@@ -220,7 +228,7 @@ export const RecommendationBundle = observer((properties: RecommendationBundlePr
 	let resultsToRender: Product[] = results || controller.store?.results;
 
 	if (limit) {
-		resultsToRender = resultsToRender.slice(0, limit);
+		resultsToRender = resultsToRender.slice(0, hideSeed ? limit + 1 : limit);
 	}
 
 	const cartStore = controller.store.cart;
@@ -379,6 +387,12 @@ export const RecommendationBundle = observer((properties: RecommendationBundlePr
 
 	const seedRef = useRef();
 	const carouselRef = useRef();
+	const [isVisible, setIsVisible] = useState(false);
+	const recsRef = useRef(null);
+	const inView = mergedlazyRender?.enabled ? useIntersection(recsRef, `${mergedlazyRender.offset} 0px ${mergedlazyRender.offset} 0px`, true) : true;
+	if (inView) {
+		setIsVisible(true);
+	}
 
 	//initialize lang
 	const defaultLang: Partial<RecommendationBundleLang> = {
@@ -398,251 +412,215 @@ export const RecommendationBundle = observer((properties: RecommendationBundlePr
 
 	return resultsToRender?.length ? (
 		<CacheProvider>
-			<div {...styling} className={classnames('ss__recommendation-bundle', { 'ss__recommendation-bundle--stacked': !ctaInline }, className)}>
-				<RecommendationProfileTracker controller={controller}>
-					{title && (
-						<h3 className="ss__recommendation-bundle__title">
-							<span>{title}</span>
-						</h3>
-					)}
-
-					<div
-						className={classnames('ss__recommendation-bundle__wrapper', {
-							'ss__recommendation-bundle__wrapper--seed-in-carousel': seedInCarousel,
-							'ss__recommendation-bundle__wrapper--vertical': vertical,
-						})}
-					>
-						{carouselEnabled ? (
-							<Fragment>
-								{!seedInCarousel && (
-									<div className="ss__recommendation-bundle__wrapper__seed-container">
-										<RecommendationResultTracker controller={controller} result={seed}>
-											<BundleSelector
-												seedText={seedText}
-												seed={true}
-												onCheck={() => onProductSelect(seed)}
-												checked={selectedItems.findIndex((item) => item.id == seed.id) > -1}
-												icon={separatorIcon}
-												hideCheckboxes={hideCheckboxes}
-												theme={props.theme}
-												ref={seedRef}
-												lang={{ seedText: lang.seedText }}
-											>
-												{(() => {
-													if (resultComponent && controller) {
-														const ResultComponent = resultComponent;
-														return (
-															<ResultComponent
-																controller={controller}
-																result={seed}
-																seed={true}
-																selected={selectedItems.findIndex((item) => item.id == seed.id) > -1}
-																onProductSelect={onProductSelect}
-															/>
-														);
-													} else {
-														return <Result {...subProps.result} controller={controller} result={seed} name={'seed'} />;
-													}
-												})()}
-											</BundleSelector>
-										</RecommendationResultTracker>
-									</div>
-								)}
-								<div className="ss__recommendation-bundle__wrapper__carousel">
-									<Carousel
-										prevButton={prevButton}
-										nextButton={nextButton}
-										hideButtons={hideButtons}
-										loop={loop}
-										spaceBetween={spaceBetween}
-										pagination={pagination}
-										breakpoints={modifiedBreakpoints}
-										watchSlidesProgress={true}
-										observer={true}
-										vertical={vertical}
-										onResize={() => setSeedwidth()}
-										{...subProps.carousel}
-										{...additionalProps}
-										{...displaySettings}
-										ref={carouselRef}
-									>
-										{seedInCarousel
-											? resultsToRender.map((result, idx) => {
-													const selected = selectedItems.findIndex((item) => item.id == result.id) > -1;
-
-													if (idx == 0) {
-														return (
-															<RecommendationResultTracker controller={controller} result={result}>
-																<BundleSelector
-																	seedText={seedText}
-																	seed={true}
-																	icon={separatorIcon}
-																	onCheck={() => onProductSelect(result)}
-																	checked={selected}
-																	hideCheckboxes={hideCheckboxes}
-																	theme={props.theme}
-																	lang={{ seedText: lang.seedText }}
-																>
-																	{(() => {
-																		if (resultComponent && controller) {
-																			const ResultComponent = resultComponent;
-																			return (
-																				<ResultComponent
-																					controller={controller}
-																					result={result}
-																					seed={true}
-																					selected={selected}
-																					onProductSelect={onProductSelect}
-																				/>
-																			);
-																		} else {
-																			return <Result {...subProps.result} controller={controller} result={result} name={'seed'} />;
-																		}
-																	})()}
-																</BundleSelector>
-															</RecommendationResultTracker>
-														);
-													} else {
-														return (
-															<RecommendationResultTracker controller={controller} result={result}>
-																<BundleSelector
-																	icon={separatorIconSeedOnly ? false : separatorIcon}
-																	onCheck={() => onProductSelect(result)}
-																	checked={selected}
-																	hideCheckboxes={hideCheckboxes}
-																	theme={props.theme}
-																	className={idx + 1 == resultsToRender.length ? 'ss__recommendation-bundle__wrapper__selector--last' : ''}
-																>
-																	{(() => {
-																		if (resultComponent && controller) {
-																			const ResultComponent = resultComponent;
-																			return (
-																				<ResultComponent
-																					controller={controller}
-																					result={result}
-																					seed={false}
-																					selected={selected}
-																					onProductSelect={onProductSelect}
-																				/>
-																			);
-																		} else {
-																			return <Result {...subProps.result} controller={controller} result={result} />;
-																		}
-																	})()}
-																</BundleSelector>
-															</RecommendationResultTracker>
-														);
-													}
-											  })
-											: resultsToRender
-													.filter((result, idx) => idx !== 0)
-													.map((result, idx, results) => {
-														const selected = selectedItems.findIndex((item) => item.id == result.id) > -1;
-
-														return (
-															<RecommendationResultTracker controller={controller} result={result}>
-																<BundleSelector
-																	icon={separatorIconSeedOnly ? false : separatorIcon}
-																	onCheck={() => onProductSelect(result)}
-																	checked={selected}
-																	hideCheckboxes={hideCheckboxes}
-																	theme={props.theme}
-																	className={idx + 1 == results.length ? 'ss__recommendation-bundle__wrapper__selector--last' : ''}
-																>
-																	{(() => {
-																		if (resultComponent && controller) {
-																			const ResultComponent = resultComponent;
-																			return (
-																				<ResultComponent
-																					controller={controller}
-																					result={result}
-																					seed={false}
-																					selected={selected}
-																					onProductSelect={onProductSelect}
-																				/>
-																			);
-																		} else {
-																			return <Result {...subProps.result} controller={controller} result={result} />;
-																		}
-																	})()}
-																</BundleSelector>
-															</RecommendationResultTracker>
-														);
-													})}
-									</Carousel>
-								</div>
-							</Fragment>
-						) : (
-							resultsToRender.map((result, idx) => {
-								const selected = selectedItems.findIndex((item) => item.id == result.id) > -1;
-
-								if (idx == 0) {
-									return (
-										<RecommendationResultTracker controller={controller} result={result}>
-											<BundleSelector
-												seedText={seedText}
-												seed={true}
-												icon={separatorIcon}
-												onCheck={() => onProductSelect(result)}
-												checked={selected}
-												hideCheckboxes={hideCheckboxes}
-												theme={props.theme}
-												lang={{ seedText: lang.seedText }}
-											>
-												{(() => {
-													if (resultComponent && controller) {
-														const ResultComponent = resultComponent;
-														return (
-															<ResultComponent
-																controller={controller}
-																result={result}
-																seed={true}
-																selected={selected}
-																onProductSelect={onProductSelect}
-															/>
-														);
-													} else {
-														return <Result {...subProps.result} controller={controller} result={result} />;
-													}
-												})()}
-											</BundleSelector>
-										</RecommendationResultTracker>
-									);
-								} else {
-									return (
-										<RecommendationResultTracker controller={controller} result={result}>
-											<BundleSelector
-												icon={separatorIconSeedOnly ? false : separatorIcon}
-												onCheck={() => onProductSelect(result)}
-												checked={selected}
-												hideCheckboxes={hideCheckboxes}
-												theme={props.theme}
-												className={idx + 1 == resultsToRender.length ? 'ss__recommendation-bundle__wrapper__selector--last' : ''}
-											>
-												{(() => {
-													if (resultComponent && controller) {
-														const ResultComponent = resultComponent;
-														return (
-															<ResultComponent
-																controller={controller}
-																result={result}
-																seed={false}
-																selected={selected}
-																onProductSelect={onProductSelect}
-															/>
-														);
-													} else {
-														return <Result {...subProps.result} controller={controller} result={result} />;
-													}
-												})()}
-											</BundleSelector>
-										</RecommendationResultTracker>
-									);
-								}
-							})
+			<div
+				{...styling}
+				ref={recsRef}
+				className={classnames('ss__recommendation-bundle', { 'ss__recommendation-bundle--stacked': !ctaInline }, className)}
+			>
+				{isVisible ? (
+					<RecommendationProfileTracker controller={controller}>
+						{title && (
+							<h3 className="ss__recommendation-bundle__title">
+								<span>{title}</span>
+							</h3>
 						)}
 
-						{ctaInline && (
+						<div
+							className={classnames('ss__recommendation-bundle__wrapper', {
+								'ss__recommendation-bundle__wrapper--seed-in-carousel': seedInCarousel,
+								'ss__recommendation-bundle__wrapper--vertical': vertical,
+							})}
+						>
+							{carouselEnabled ? (
+								<Fragment>
+									{!seedInCarousel && !hideSeed && (
+										<div className="ss__recommendation-bundle__wrapper__seed-container">
+											<RecommendationResultTracker controller={controller} result={seed} track={{ impression: false }}>
+												<BundleSelector
+													seedText={seedText}
+													seed={true}
+													onCheck={() => onProductSelect(seed)}
+													checked={selectedItems.findIndex((item) => item.id == seed.id) > -1}
+													icon={separatorIcon}
+													hideCheckboxes={hideCheckboxes}
+													theme={props.theme}
+													ref={seedRef}
+													lang={{ seedText: lang.seedText }}
+												>
+													{resultComponent ? (
+														cloneWithProps(resultComponent, {
+															result: seed,
+															seed: true,
+															selected: selectedItems.findIndex((item) => item.id == seed.id) > -1,
+															onProductSelect,
+														})
+													) : (
+														<Result {...subProps.result} controller={controller} result={seed} />
+													)}
+												</BundleSelector>
+											</RecommendationResultTracker>
+										</div>
+									)}
+									<div className="ss__recommendation-bundle__wrapper__carousel">
+										<Carousel
+											prevButton={prevButton}
+											nextButton={nextButton}
+											hideButtons={hideButtons}
+											loop={loop}
+											spaceBetween={spaceBetween}
+											pagination={pagination}
+											breakpoints={modifiedBreakpoints}
+											watchSlidesProgress={true}
+											observer={true}
+											vertical={vertical}
+											onResize={() => setSeedwidth()}
+											{...subProps.carousel}
+											{...additionalProps}
+											{...displaySettings}
+											ref={carouselRef}
+										>
+											{seedInCarousel
+												? resultsToRender
+														.filter((result, idx) => (hideSeed && idx == 0 ? false : true))
+														.map((result, idx) => {
+															const selected = selectedItems.findIndex((item) => item.id == result.id) > -1;
+
+															if (idx == 0 && !hideSeed) {
+																return (
+																	<RecommendationResultTracker controller={controller} result={result} track={{ impression: false }}>
+																		<BundleSelector
+																			seedText={seedText}
+																			seed={true}
+																			icon={separatorIcon}
+																			onCheck={() => onProductSelect(result)}
+																			checked={selected}
+																			hideCheckboxes={hideCheckboxes}
+																			theme={props.theme}
+																			lang={{ seedText: lang.seedText }}
+																		>
+																			{resultComponent ? (
+																				cloneWithProps(resultComponent, { result: result, seed: true, selected, onProductSelect })
+																			) : (
+																				<Result {...subProps.result} controller={controller} result={result} />
+																			)}
+																		</BundleSelector>
+																	</RecommendationResultTracker>
+																);
+															} else {
+																return (
+																	<RecommendationResultTracker controller={controller} result={result}>
+																		<BundleSelector
+																			icon={separatorIconSeedOnly ? false : separatorIcon}
+																			onCheck={() => onProductSelect(result)}
+																			checked={selected}
+																			hideCheckboxes={hideCheckboxes}
+																			theme={props.theme}
+																			className={idx + 1 == resultsToRender.length ? 'ss__recommendation-bundle__wrapper__selector--last' : ''}
+																		>
+																			{resultComponent ? (
+																				cloneWithProps(resultComponent, { result: result, seed: false, selected, onProductSelect })
+																			) : (
+																				<Result {...subProps.result} controller={controller} result={result} />
+																			)}
+																		</BundleSelector>
+																	</RecommendationResultTracker>
+																);
+															}
+														})
+												: resultsToRender
+														.filter((result, idx) => idx !== 0)
+														.map((result, idx, results) => {
+															const selected = selectedItems.findIndex((item) => item.id == result.id) > -1;
+
+															return (
+																<RecommendationResultTracker controller={controller} result={result}>
+																	<BundleSelector
+																		icon={separatorIconSeedOnly ? false : separatorIcon}
+																		onCheck={() => onProductSelect(result)}
+																		checked={selected}
+																		hideCheckboxes={hideCheckboxes}
+																		theme={props.theme}
+																		className={idx + 1 == results.length ? 'ss__recommendation-bundle__wrapper__selector--last' : ''}
+																	>
+																		{resultComponent ? (
+																			cloneWithProps(resultComponent, { result: result, seed: false, selected, onProductSelect })
+																		) : (
+																			<Result {...subProps.result} controller={controller} result={result} />
+																		)}
+																	</BundleSelector>
+																</RecommendationResultTracker>
+															);
+														})}
+										</Carousel>
+									</div>
+								</Fragment>
+							) : (
+								resultsToRender
+									.filter((result, idx) => (hideSeed && idx == 0 ? false : true))
+									.map((result, idx) => {
+										const selected = selectedItems.findIndex((item) => item.id == result.id) > -1;
+
+										if (idx == 0 && !hideSeed) {
+											return (
+												<RecommendationResultTracker controller={controller} result={result} track={{ impression: false }}>
+													<BundleSelector
+														seedText={seedText}
+														seed={true}
+														icon={separatorIcon}
+														onCheck={() => onProductSelect(result)}
+														checked={selected}
+														hideCheckboxes={hideCheckboxes}
+														theme={props.theme}
+														lang={{ seedText: lang.seedText }}
+													>
+														{resultComponent ? (
+															cloneWithProps(resultComponent, { result: result, seed: true, selected, onProductSelect })
+														) : (
+															<Result {...subProps.result} controller={controller} result={result} />
+														)}
+													</BundleSelector>
+												</RecommendationResultTracker>
+											);
+										} else {
+											return (
+												<RecommendationResultTracker controller={controller} result={result}>
+													<BundleSelector
+														icon={separatorIconSeedOnly ? false : separatorIcon}
+														onCheck={() => onProductSelect(result)}
+														checked={selected}
+														hideCheckboxes={hideCheckboxes}
+														theme={props.theme}
+														className={idx + 1 == resultsToRender.length ? 'ss__recommendation-bundle__wrapper__selector--last' : ''}
+													>
+														{resultComponent ? (
+															cloneWithProps(resultComponent, { result: result, seed: false, selected, onProductSelect })
+														) : (
+															<Result {...subProps.result} controller={controller} result={result} />
+														)}
+													</BundleSelector>
+												</RecommendationResultTracker>
+											);
+										}
+									})
+							)}
+
+							{ctaInline && (
+								<BundledCTA
+									ctaSlot={ctaSlot}
+									cartStore={cartStore}
+									onAddToCart={(e: any) => addToCart(e)}
+									ctaButtonText={ctaButtonText}
+									ctaButtonSuccessText={ctaButtonSuccessText}
+									ctaButtonSuccessTimeout={ctaButtonSuccessTimeout}
+									ctaIcon={ctaIcon}
+									lang={{
+										ctaButtonSuccessText: lang.ctaButtonSuccessText,
+										ctaButtonText: lang.ctaButtonText,
+									}}
+								/>
+							)}
+						</div>
+						{!ctaInline && (
 							<BundledCTA
 								ctaSlot={ctaSlot}
 								cartStore={cartStore}
@@ -657,23 +635,16 @@ export const RecommendationBundle = observer((properties: RecommendationBundlePr
 								}}
 							/>
 						)}
-					</div>
-					{!ctaInline && (
-						<BundledCTA
-							ctaSlot={ctaSlot}
-							cartStore={cartStore}
-							onAddToCart={(e: any) => addToCart(e)}
-							ctaButtonText={ctaButtonText}
-							ctaButtonSuccessText={ctaButtonSuccessText}
-							ctaButtonSuccessTimeout={ctaButtonSuccessTimeout}
-							ctaIcon={ctaIcon}
-							lang={{
-								ctaButtonSuccessText: lang.ctaButtonSuccessText,
-								ctaButtonText: lang.ctaButtonText,
-							}}
-						/>
-					)}
-				</RecommendationProfileTracker>
+					</RecommendationProfileTracker>
+				) : (
+					<RecommendationProfileTracker controller={controller}>
+						{resultsToRender.map((result) => (
+							<RecommendationResultTracker controller={controller} result={result}>
+								<></>
+							</RecommendationResultTracker>
+						))}
+					</RecommendationProfileTracker>
+				)}
 			</div>
 		</CacheProvider>
 	) : (
@@ -696,6 +667,7 @@ export interface RecommendationBundleProps extends ComponentProps {
 	resultComponent?: ResultComponent<{ seed?: boolean; selected?: boolean; onProductSelect?: (product: Product) => void }>;
 	preselectedCount?: number;
 	hideCheckboxes?: boolean;
+	hideSeed?: boolean;
 	seedText?: string;
 	separatorIconSeedOnly?: boolean;
 	separatorIcon?: IconType | Partial<IconProps> | false;
@@ -709,6 +681,10 @@ export interface RecommendationBundleProps extends ComponentProps {
 	carousel?: BundleCarouselProps;
 	slidesPerView?: number; // TODO: remove this prop?
 	lang?: Partial<RecommendationBundleLang>;
+	lazyRender?: {
+		enabled: boolean;
+		offset?: string;
+	};
 }
 
 export interface RecommendationBundleLang {

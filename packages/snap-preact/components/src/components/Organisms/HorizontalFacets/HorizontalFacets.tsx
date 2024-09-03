@@ -44,7 +44,7 @@ const CSS = {
 					'&.ss__dropdown--open': {
 						'& .ss__dropdown__button__heading': {
 							'& .ss__icon': {
-								fill: theme?.variables?.color?.active?.accent,
+								fill: theme?.variables?.colors?.active?.accent,
 							},
 						},
 						'& .ss__dropdown__content': {
@@ -62,7 +62,7 @@ const CSS = {
 				'& .ss__horizontal-facets__header__dropdown': {
 					'&.ss__dropdown--open': {
 						'& .ss__dropdown__content': {
-							border: `1px solid ${theme?.variables?.color?.active?.background || '#ccc'}`,
+							border: `1px solid ${theme?.variables?.colors?.active?.background || '#ccc'}`,
 						},
 					},
 				},

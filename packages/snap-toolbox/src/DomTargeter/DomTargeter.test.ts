@@ -241,6 +241,79 @@ describe('DomTargeter', () => {
 		expect(classNames).toEqual(['before-1', 'after-2', 'prepend-3', 'append-4', 'prepend-5', 'append-6', 'replaced']);
 	});
 
+	it('injects into elements and removes `min-height` by default', async () => {
+		const fn = jest.fn();
+		const dom = createDocument(`
+			<div id="content" style="min-height: 100vh"></div>
+		`);
+
+		const document = dom.window.document;
+
+		let contentElem = document.querySelector('#content');
+		expect(contentElem).not.toBeNull();
+
+		// initially element has a minHeight
+		expect((contentElem as HTMLElement).style.minHeight).toBe('100vh');
+
+		new DomTargeter(
+			[
+				{
+					selector: '#content',
+				},
+			],
+			(target: Target, elem: Element) => {
+				// on target function
+				fn();
+			},
+			document
+		);
+
+		// wait is needed due to promise usage (async)
+		await wait(200);
+
+		expect(fn).toHaveBeenCalledTimes(1);
+
+		// after onTarget resolves element minHeight is removed
+		expect((contentElem as HTMLElement).style.minHeight).toBe('');
+	});
+
+	it('injects into elements and does not remove `min-height` if configured not to', async () => {
+		const fn = jest.fn();
+		const dom = createDocument(`
+			<div id="content" style="min-height: 100vh"></div>
+		`);
+
+		const document = dom.window.document;
+
+		let contentElem = document.querySelector('#content');
+		expect(contentElem).not.toBeNull();
+
+		// initially element has a minHeight
+		expect((contentElem as HTMLElement).style.minHeight).toBe('100vh');
+
+		new DomTargeter(
+			[
+				{
+					unsetTargetMinHeight: false,
+					selector: '#content',
+				},
+			],
+			(target: Target, elem: Element) => {
+				// on target function
+				fn();
+			},
+			document
+		);
+
+		// wait is needed due to promise usage (async)
+		await wait(200);
+
+		expect(fn).toHaveBeenCalledTimes(1);
+
+		// after onTarget resolves element minHeight is removed
+		expect((contentElem as HTMLElement).style.minHeight).toBe('100vh');
+	});
+
 	it('injects into dynamically added elements with autoRetarget', async () => {
 		const dom = createDocument(`
 			<div id="content"></div>

@@ -1,4 +1,5 @@
-import { css, RecommendationProps } from '../../../../../index';
+import { css } from '@emotion/react';
+import type { RecommendationProps } from '../../../../../components/Templates/Recommendation';
 
 // CSS in JS style script for the Recommendation component
 const recommendationStyleScript = ({ vertical, theme }: RecommendationProps) => {
@@ -8,7 +9,7 @@ const recommendationStyleScript = ({ vertical, theme }: RecommendationProps) => 
 	return css({
 		height: vertical ? '100%' : undefined,
 		'& .ss__recommendation__title': {
-			color: variables?.color?.primary,
+			color: variables?.colors?.primary,
 		},
 		'.ss__result__image-wrapper': {
 			height: vertical ? '85%' : undefined,

@@ -1,4 +1,5 @@
-import { css, PerPageProps } from '../../../../../index';
+import { css } from '@emotion/react';
+import type { PerPageProps } from '../../../../../components/Molecules/PerPage';
 
 // CSS in JS style script for the PerPage component
 const perPageStyleScript = ({ theme }: PerPageProps) => {

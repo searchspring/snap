@@ -1,5 +1,5 @@
 export const cookies: Cookies = {
-	set: (name: string, val: string, sameSite?: string, expires?: number): void => {
+	set: (name: string, val: string, sameSite?: string, expires?: number, domain?: string): void => {
 		sameSite = sameSite || 'Lax';
 
 		let cookie = name + '=' + encodeURIComponent(val) + ';' + 'SameSite=' + sameSite + ';path=/;';
@@ -12,6 +12,10 @@ export const cookies: Cookies = {
 			const d = new Date();
 			d.setTime(d.getTime() + expires);
 			cookie += 'expires=' + d['toUTCString']() + ';';
+		}
+
+		if (domain) {
+			cookie += 'domain=' + domain + ';';
 		}
 
 		window.document.cookie = cookie;
@@ -34,13 +38,19 @@ export const cookies: Cookies = {
 
 		return '';
 	},
-	unset: (name: string): void => {
-		window.document.cookie = name + '=; path=/; Max-Age=-99999999;';
+	unset: (name: string, domain?: string): void => {
+		let cookie = name + '=; path=/; Max-Age=-99999999;';
+
+		if (domain) {
+			cookie += 'domain=' + domain + ';';
+		}
+
+		window.document.cookie = cookie;
 	},
 };
 
 interface Cookies {
-	set: (name: string, val: string, sameSite: string, expires: number) => void;
+	set: (name: string, val: string, sameSite?: string, expires?: number, domain?: string) => void;
 	get: (name: string) => string;
-	unset: (name: string) => void;
+	unset: (name: string, domain?: string) => void;
 }

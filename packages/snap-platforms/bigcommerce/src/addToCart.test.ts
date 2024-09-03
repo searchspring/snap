@@ -1,6 +1,5 @@
 import 'whatwg-fetch';
 import { addToCart } from './addToCart';
-import { Product } from '@searchspring/snap-store-mobx';
 import { MockClient } from '@searchspring/snap-shared';
 import { SearchStore } from '@searchspring/snap-store-mobx';
 import { UrlManager, QueryStringTranslator, reactLinker } from '@searchspring/snap-url-manager';
@@ -10,9 +9,15 @@ import { Logger } from '@searchspring/snap-logger';
 import { Tracker } from '@searchspring/snap-tracker';
 import { SearchController } from '@searchspring/snap-controller';
 
+import type { Product, SearchResultStore, SearchStoreConfig } from '@searchspring/snap-store-mobx';
+
+const HEADERS = { 'Content-Type': 'application/json', Accept: 'application/json' };
+const MOCK_CART_ID = '123456789';
 const ORIGIN = 'http://localhost';
-const ADD_ROUTE = '/remote/v1/cart/add';
-const CART_ROUTE = '/cart.php';
+const CART_ROUTE = '/api/storefront/carts';
+const CART_EXISTS_ROUTE = `/api/storefront/carts/${MOCK_CART_ID}/items`;
+const REDIRECT_ROUTE = '/cart.php';
+const MOCK_ADDED_RESPONSE = { id: MOCK_CART_ID };
 
 const wait = (time = 1) => {
 	return new Promise((resolve) => {
@@ -36,15 +41,17 @@ const searchConfigDefault = {
 	},
 	settings: {},
 };
-let results: any;
-let controller: any;
-let errMock: any;
 
-// @ts-ignore
-const fetchMock = jest.spyOn(global, 'fetch').mockImplementation(() => Promise.resolve({ json: () => Promise.resolve([]), ok: true, status: 200 }));
+let results: SearchResultStore;
+let controller: SearchController;
+let errMock: any;
+let fetchMock: any;
+
+const client = new MockClient(globals, {});
+// TODO: need to use variant data from BigCommerce
 
 const controllerServices: any = {
-	client: new MockClient(globals, {}),
+	client,
 	store: new SearchStore(searchConfig, services),
 	urlManager,
 	eventManager: new EventManager(),
@@ -63,6 +70,18 @@ describe('addToCart', () => {
 		results = controller.store.results;
 
 		errMock = jest.spyOn(console, 'error').mockImplementation(() => {});
+
+		// @ts-ignore
+		fetchMock = jest.spyOn(global, 'fetch').mockImplementation((url) => {
+			let response: any = [];
+			if (url == CART_ROUTE) {
+				response = [{ id: MOCK_CART_ID }];
+			} else if (url == CART_EXISTS_ROUTE) {
+				response = MOCK_ADDED_RESPONSE;
+			}
+
+			return Promise.resolve({ json: () => Promise.resolve(response), ok: true, status: 200 });
+		});
 	});
 
 	beforeEach(() => {
@@ -77,110 +96,33 @@ describe('addToCart', () => {
 	});
 
 	it('requires product(s) to be passed', () => {
-		// @ts-ignore
+		// @ts-ignore - adding with no params
 		addToCart();
 
 		expect(fetchMock).not.toHaveBeenCalled();
 		expect(errMock).toHaveBeenCalledWith('Error: no products to add');
 	});
 
-	it('adds data passed', () => {
-		const item = results[0] as Product;
-		addToCart([item]);
-
-		const obj = {
-			product_id: item.id,
-			quantity: item.quantity,
-			action: 'add',
-		};
-		const params = {
-			body: JSON.stringify(obj),
-			credentials: 'same-origin',
-			headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-			method: 'POST',
-		};
-
-		expect(fetchMock).toHaveBeenCalledWith(ADD_ROUTE, params);
-
-		fetchMock.mockClear();
-	});
-
-	it('can add multiple quantities', () => {
-		const item = results[0] as Product;
-
-		item.quantity = 4;
-
-		addToCart([item]);
-
-		const obj = {
-			product_id: item.id,
-			quantity: 4,
-			action: 'add',
-		};
-
-		const params = {
-			body: JSON.stringify(obj),
-			credentials: 'same-origin',
-			headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-			method: 'POST',
-		};
-
-		expect(fetchMock).toHaveBeenCalledWith(ADD_ROUTE, params);
-
-		fetchMock.mockClear();
-
-		item.quantity = 1;
-	});
-
-	it('can use alternate id column', () => {
+	it('will log an error when it cannot find a custom id', async () => {
 		const config = {
-			idFieldName: 'mappings.core.url',
+			idFieldName: 'mappings.dne.nope',
 		};
 
 		const item = results[0] as Product;
 
-		addToCart([item], config);
+		await addToCart([item], config);
 
-		const obj = {
-			product_id: item.mappings.core?.url,
-			quantity: item.quantity,
-			action: 'add',
-		};
-
-		const params = {
-			body: JSON.stringify(obj),
-			credentials: 'same-origin',
-			headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-			method: 'POST',
-		};
-
-		expect(fetchMock).toHaveBeenCalledWith(ADD_ROUTE, params);
-
-		fetchMock.mockClear();
+		expect(errMock).toHaveBeenCalledWith(`Error: couldnt find column in item data. please verify 'idFieldName' in the config.`);
+		expect(fetchMock).not.toHaveBeenCalled();
 	});
 
 	it('will redirect by default', async () => {
 		const item = results[0] as Product;
 
-		addToCart([item]);
-
-		const obj = {
-			product_id: item.id,
-			quantity: item.quantity,
-			action: 'add',
-		};
-		const params = {
-			body: JSON.stringify(obj),
-			credentials: 'same-origin',
-			headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-			method: 'POST',
-		};
-
-		expect(fetchMock).toHaveBeenCalledWith(ADD_ROUTE, params);
-
+		await addToCart([item]);
 		await wait(10);
 
-		expect(window.location.href).toEqual(CART_ROUTE);
+		expect(window.location.href).toEqual(REDIRECT_ROUTE);
 
 		fetchMock.mockClear();
 	});
@@ -191,22 +133,7 @@ describe('addToCart', () => {
 			redirect: false,
 		};
 
-		addToCart([item], config);
-
-		const obj = {
-			product_id: item.id,
-			quantity: item.quantity,
-			action: 'add',
-		};
-		const params = {
-			body: JSON.stringify(obj),
-			credentials: 'same-origin',
-			headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-			method: 'POST',
-		};
-
-		expect(fetchMock).toHaveBeenCalledWith(ADD_ROUTE, params);
-
+		await addToCart([item], config);
 		await wait(10);
 
 		expect(window.location.href).toEqual(ORIGIN);
@@ -221,22 +148,7 @@ describe('addToCart', () => {
 
 		const item = results[0] as Product;
 
-		addToCart([item], config);
-
-		const obj = {
-			product_id: item.id,
-			quantity: item.quantity,
-			action: 'add',
-		};
-		const params = {
-			body: JSON.stringify(obj),
-			credentials: 'same-origin',
-			headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-			method: 'POST',
-		};
-
-		expect(fetchMock).toHaveBeenCalledWith(ADD_ROUTE, params);
-
+		await addToCart([item], config);
 		await wait(10);
 
 		expect(window.location.href).toEqual(config.redirect);
@@ -244,28 +156,308 @@ describe('addToCart', () => {
 		fetchMock.mockClear();
 	});
 
-	it('can add multiple items', async () => {
-		const items = results.slice(0, 3) as Product[];
-		addToCart(items);
+	it('will return the API response after adding', async () => {
+		const item = results[0] as Product;
 
-		for (let i = 0; i < items.length; i++) {
-			const obj = {
-				product_id: items[i].id,
-				quantity: items[i].quantity,
-				action: 'add',
-			};
-			const params = {
-				body: JSON.stringify(obj),
-				credentials: 'same-origin',
-				headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-				method: 'POST',
-			};
+		const response = await addToCart([item]);
 
-			await wait(10);
-
-			expect(fetchMock).toHaveBeenCalledWith(ADD_ROUTE, params);
-		}
+		expect(response).toStrictEqual(MOCK_ADDED_RESPONSE);
 
 		fetchMock.mockClear();
+	});
+
+	describe('when a cart exists', () => {
+		it('can add a single simple product', async () => {
+			const item = results[0] as Product;
+
+			await addToCart([item]);
+
+			const getParams = {
+				headers: HEADERS,
+				method: 'GET',
+			};
+
+			expect(fetchMock).toHaveBeenCalledWith(CART_ROUTE, getParams);
+
+			const postBody = {
+				lineItems: [
+					{
+						product_id: item.id,
+						quantity: item.quantity,
+					},
+				],
+			};
+
+			const postParams = {
+				headers: HEADERS,
+				method: 'POST',
+				body: JSON.stringify(postBody),
+			};
+
+			expect(fetchMock).toHaveBeenLastCalledWith(CART_EXISTS_ROUTE, postParams);
+			expect(fetchMock).toHaveBeenCalledTimes(2);
+
+			fetchMock.mockClear();
+		});
+
+		it('can add a single product with options', async () => {
+			client.mockData.updateConfig({ siteId: 'tfdz6e', search: 'variants' });
+			const optionSearchConfig: SearchStoreConfig = {
+				...searchConfig,
+				settings: {
+					redirects: {
+						singleResult: false,
+					},
+					variants: {
+						field: 'ss_variants',
+					},
+				},
+			};
+			const optionController = new SearchController(optionSearchConfig, controllerServices);
+
+			await optionController.search();
+
+			const results = optionController.store.results;
+
+			const item = results[0] as Product;
+
+			await addToCart([item]);
+
+			const getParams = {
+				headers: HEADERS,
+				method: 'GET',
+			};
+
+			expect(fetchMock).toHaveBeenCalledWith(CART_ROUTE, getParams);
+
+			const postBody = {
+				lineItems: [
+					{
+						product_id: item.display.mappings.core?.uid,
+						quantity: item.quantity,
+						optionSelections: [
+							{
+								optionId: 570,
+								optionValue: 2900,
+							},
+						],
+					},
+				],
+			};
+
+			const postParams = {
+				headers: HEADERS,
+				method: 'POST',
+				body: JSON.stringify(postBody),
+			};
+
+			expect(fetchMock).toHaveBeenLastCalledWith(CART_EXISTS_ROUTE, postParams);
+			expect(fetchMock).toHaveBeenCalledTimes(2);
+
+			fetchMock.mockClear();
+		});
+
+		it('can add multiple items', async () => {
+			const items = results.slice(0, 3) as Product[];
+			items.forEach((item) => item.quantity++);
+
+			await addToCart(items);
+
+			const getParams = {
+				headers: HEADERS,
+				method: 'GET',
+			};
+
+			expect(fetchMock).toHaveBeenCalledWith(CART_ROUTE, getParams);
+
+			const postBody = {
+				lineItems: items.map((item) => ({
+					product_id: item.id,
+					quantity: item.quantity,
+				})),
+			};
+
+			const postParams = {
+				headers: HEADERS,
+				method: 'POST',
+				body: JSON.stringify(postBody),
+			};
+
+			expect(fetchMock).toHaveBeenLastCalledWith(CART_EXISTS_ROUTE, postParams);
+			expect(fetchMock).toHaveBeenCalledTimes(2);
+
+			fetchMock.mockClear();
+		});
+
+		it('can use alternate id column', async () => {
+			const config = {
+				idFieldName: 'mappings.core.sku',
+			};
+
+			const item = results[0] as Product;
+
+			await addToCart([item], config);
+
+			const getParams = {
+				headers: HEADERS,
+				method: 'GET',
+			};
+
+			expect(fetchMock).toHaveBeenCalledWith(CART_ROUTE, getParams);
+
+			const postBody = {
+				lineItems: [
+					{
+						product_id: item.mappings.core?.sku,
+						quantity: item.quantity,
+					},
+				],
+			};
+
+			const postParams = {
+				headers: HEADERS,
+				method: 'POST',
+				body: JSON.stringify(postBody),
+			};
+
+			expect(fetchMock).toHaveBeenLastCalledWith(CART_EXISTS_ROUTE, postParams);
+			expect(fetchMock).toHaveBeenCalledTimes(2);
+
+			fetchMock.mockClear();
+		});
+	});
+
+	describe('when NO cart exists', () => {
+		beforeAll(() => {
+			// @ts-ignore
+			fetchMock = jest.spyOn(global, 'fetch').mockImplementation((url) => {
+				let response: any = [];
+				if (url == CART_EXISTS_ROUTE) {
+					response = MOCK_ADDED_RESPONSE;
+				}
+
+				return Promise.resolve({ json: () => Promise.resolve(response), ok: true, status: 200 });
+			});
+		});
+
+		it('can add a single simple product', async () => {
+			const item = results[0] as Product;
+
+			await addToCart([item]);
+
+			const getParams = {
+				headers: HEADERS,
+				method: 'GET',
+			};
+
+			expect(fetchMock).toHaveBeenCalledWith(CART_ROUTE, getParams);
+
+			const postBody = {
+				lineItems: [
+					{
+						product_id: item.id,
+						quantity: item.quantity,
+					},
+				],
+			};
+
+			const postParams = {
+				headers: HEADERS,
+				method: 'POST',
+				body: JSON.stringify(postBody),
+			};
+
+			expect(fetchMock).toHaveBeenLastCalledWith(CART_ROUTE, postParams);
+			expect(fetchMock).toHaveBeenCalledTimes(2);
+
+			fetchMock.mockClear();
+		});
+
+		it('can add a single product with options', async () => {
+			client.mockData.updateConfig({ siteId: 'tfdz6e', search: 'variants' });
+			const optionSearchConfig: SearchStoreConfig = {
+				...searchConfig,
+				settings: {
+					redirects: {
+						singleResult: false,
+					},
+					variants: {
+						field: 'ss_variants',
+					},
+				},
+			};
+			const optionController = new SearchController(optionSearchConfig, controllerServices);
+
+			await optionController.search();
+
+			const results = optionController.store.results;
+
+			const item = results[0] as Product;
+
+			await addToCart([item]);
+
+			const getParams = {
+				headers: HEADERS,
+				method: 'GET',
+			};
+
+			expect(fetchMock).toHaveBeenCalledWith(CART_ROUTE, getParams);
+
+			const postBody = {
+				lineItems: [
+					{
+						product_id: item.display.mappings.core?.uid,
+						quantity: item.quantity,
+						optionSelections: [
+							{
+								optionId: 570,
+								optionValue: 2900,
+							},
+						],
+					},
+				],
+			};
+
+			const postParams = {
+				headers: HEADERS,
+				method: 'POST',
+				body: JSON.stringify(postBody),
+			};
+
+			expect(fetchMock).toHaveBeenLastCalledWith(CART_ROUTE, postParams);
+			expect(fetchMock).toHaveBeenCalledTimes(2);
+
+			fetchMock.mockClear();
+		});
+
+		it('can add multiple items', async () => {
+			const items = results.slice(0, 3) as Product[];
+			await addToCart(items);
+
+			const getParams = {
+				headers: HEADERS,
+				method: 'GET',
+			};
+
+			expect(fetchMock).toHaveBeenCalledWith(CART_ROUTE, getParams);
+
+			const postBody = {
+				lineItems: items.map((item) => ({
+					product_id: item.id,
+					quantity: item.quantity,
+				})),
+			};
+
+			const postParams = {
+				headers: HEADERS,
+				method: 'POST',
+				body: JSON.stringify(postBody),
+			};
+
+			expect(fetchMock).toHaveBeenLastCalledWith(CART_ROUTE, postParams);
+			expect(fetchMock).toHaveBeenCalledTimes(2);
+
+			fetchMock.mockClear();
+		});
 	});
 });

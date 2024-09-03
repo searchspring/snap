@@ -22,7 +22,7 @@ const CSS = {
 			justifyContent: 'center',
 			height: pixelSize,
 			width: pixelSize,
-			border: `1px solid ${color || theme?.variables?.color?.primary || '#333'}`,
+			border: `1px solid ${color || theme?.variables?.colors?.primary || '#333'}`,
 			'&.ss__checkbox--disabled': {
 				opacity: 0.7,
 			},
@@ -76,7 +76,7 @@ export const Checkbox = observer((properties: CheckboxProps): JSX.Element => {
 			...globalTheme?.components?.icon,
 			// inherited props
 			...defined({
-				color: iconColor || color || theme?.variables?.color?.primary,
+				color: iconColor || color || theme?.variables?.colors?.primary,
 				disableStyles,
 				icon,
 				size: size && `calc(${pixelSize} - 30%)`,

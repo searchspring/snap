@@ -55,13 +55,16 @@ export class SearchPaginationStore {
 			},
 		];
 
-		this.pageSizeOptions = pageSizeOptions.map(
-			(pageOption: any) =>
-				new PageSizeOption(this.services, this.pageSize, {
-					label: pageOption.label,
-					value: pageOption.value,
-				})
-		);
+		//dont allow any page size options over the api limit of 100
+		this.pageSizeOptions = pageSizeOptions
+			.filter((option) => option.value <= 100)
+			.map(
+				(pageOption: any) =>
+					new PageSizeOption(this.services, this.pageSize, {
+						label: pageOption.label,
+						value: pageOption.value,
+					})
+			);
 
 		this.pageSizeOption = this.pageSizeOptions.find((option) => option.active);
 

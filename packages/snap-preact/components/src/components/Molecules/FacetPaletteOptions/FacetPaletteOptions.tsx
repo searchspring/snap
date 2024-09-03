@@ -47,7 +47,7 @@ const CSS = {
 				},
 				'&.ss__facet-palette-options__option--filtered': {
 					'& .ss__facet-palette-options__option__wrapper': {
-						borderColor: theme?.variables?.color?.primary || '#333',
+						borderColor: theme?.variables?.colors?.primary || '#333',
 						padding: '0px',
 						borderWidth: '4px',
 					},
@@ -129,7 +129,7 @@ const CSS = {
 
 				'.ss__facet-palette-options__option--filtered': {
 					'& .ss__facet-palette-options__option__wrapper': {
-						borderColor: theme?.variables?.color?.primary || '#333' + ' !important',
+						borderColor: theme?.variables?.colors?.primary || '#333' + ' !important',
 						padding: '0px',
 						borderWidth: '4px',
 					},

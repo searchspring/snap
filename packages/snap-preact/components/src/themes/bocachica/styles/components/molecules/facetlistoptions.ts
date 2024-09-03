@@ -1,4 +1,5 @@
-import { css, FacetListOptionsProps } from '../../../../../index';
+import { css } from '@emotion/react';
+import type { FacetListOptionsProps } from '../../../../../components/Molecules/FacetListOptions';
 
 // CSS in JS style script for the FacetListOptions component
 const facetListOptionsStyleScript = ({ hideCheckbox, horizontal, theme }: FacetListOptionsProps) => {
@@ -12,9 +13,9 @@ const facetListOptionsStyleScript = ({ hideCheckbox, horizontal, theme }: FacetL
 			display: horizontal ? undefined : 'flex',
 			alignItems: horizontal ? undefined : 'center',
 			margin: horizontal ? '0 5px 5px 0' : '0 0 5px 0',
-			color: variables?.color?.secondary,
+			color: variables?.colors?.secondary,
 			flex: horizontal ? '0 1 auto' : undefined,
-			border: horizontal ? `1px solid ${variables?.color?.secondary || '#333'}` : undefined,
+			border: horizontal ? `1px solid ${variables?.colors?.secondary || '#333'}` : undefined,
 			padding: horizontal ? '0.5em 0.5em' : undefined,
 			textDecoration: 'none',
 
