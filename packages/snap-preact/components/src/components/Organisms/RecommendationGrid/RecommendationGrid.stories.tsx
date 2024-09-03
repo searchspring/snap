@@ -156,7 +156,11 @@ List.loaders = [
 ];
 
 export const Grid = (args: RecommendationGridProps, { loaded: { controller } }: { loaded: { controller: RecommendationController } }) => {
-	return <RecommendationGrid columns={4} {...args} controller={controller} results={controller?.store?.results} />;
+	return <RecommendationGrid {...args} controller={controller} results={controller?.store?.results} />;
+};
+
+Grid.args = {
+	columns: 4,
 };
 
 Grid.loaders = [
