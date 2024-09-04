@@ -171,7 +171,7 @@ export class RecommendAPI extends API {
 
 	async postRecommendations(requestParameters: PostRecommendAPISpec): Promise<RecommendResponseModel> {
 		const headerParameters: HTTPHeaders = {};
-		headerParameters['Content-Type'] = 'application/json';
+		headerParameters['Content-Type'] = 'text/plain';
 
 		const siteId = requestParameters.siteId;
 		const path = `/boost/${siteId}/recommend`;

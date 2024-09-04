@@ -352,7 +352,7 @@ describe('Snap Client', () => {
 
 			const recommendParams = {
 				headers: {
-					'Content-Type': 'application/json',
+					'Content-Type': 'text/plain',
 				},
 				method: 'POST',
 				path: '/boost/8uyt2m/recommend',
@@ -599,7 +599,7 @@ describe('Snap Client', () => {
 
 				const recommendParams = {
 					headers: {
-						'Content-Type': 'application/json',
+						'Content-Type': 'text/plain',
 					},
 					method: 'POST',
 					path: '/boost/8uyt2m/recommend',
