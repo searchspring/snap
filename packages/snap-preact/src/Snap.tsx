@@ -299,19 +299,19 @@ export class Snap {
 				// add skus to cart
 				const skus = attributes[`ss-${trackerId}-cart-add`].split(',');
 				this.tracker.cookies.cart.add(skus);
-				this.eventManager.fire('controller/updateRecs');
+				this.eventManager.fire('controller/recommendation/update');
 			} else if (attributes[`ss-${trackerId}-cart-remove`]) {
 				// remove skus from cart
 				const skus = attributes[`ss-${trackerId}-cart-remove`].split(',');
 				this.tracker.cookies.cart.remove(skus);
-				this.eventManager.fire('controller/updateRecs');
+				this.eventManager.fire('controller/recommendation/update');
 			} else if (`ss-${trackerId}-cart-clear` in attributes) {
 				// clear all from cart
 				this.tracker.cookies.cart.clear();
-				this.eventManager.fire('controller/updateRecs');
+				this.eventManager.fire('controller/recommendation/update');
 			} else if (`ss-${trackerId}-cart-view` in attributes) {
 				// update recs
-				this.eventManager.fire('controller/updateRecs');
+				this.eventManager.fire('controller/recommendation/update');
 			} else if (attributes[`ss-${trackerId}-intellisuggest`] && attributes[`ss-${trackerId}-intellisuggest-signature`]) {
 				// product click
 				const intellisuggestData = attributes[`ss-${trackerId}-intellisuggest`];
