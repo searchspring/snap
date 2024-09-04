@@ -3,6 +3,11 @@ import { TemplateTarget, type TemplatesStoreSettings, type TemplatesStoreDepende
 
 const GLOBAL_THEME_NAME = 'global';
 
+type TargetStoreConfig = {
+	target: TemplateTarget;
+	dependencies: TemplatesStoreDependencies;
+	settings: TemplatesStoreSettings;
+};
 export class TargetStore {
 	public selector: string;
 	public component: string;
@@ -13,15 +18,16 @@ export class TargetStore {
 	};
 	private dependencies: TemplatesStoreDependencies;
 
-	constructor(template: TemplateTarget, dependencies: TemplatesStoreDependencies, settings: TemplatesStoreSettings) {
+	constructor(params: TargetStoreConfig) {
+		const { target, dependencies, settings } = params;
 		this.dependencies = dependencies;
-		this.selector = template.selector || '';
-		this.component = (settings.editMode && this.dependencies.storage.get(`templates.${this.selector}.component`)) || template.component;
+		this.selector = target.selector || '';
+		this.component = (settings.editMode && this.dependencies.storage.get(`templates.${this.selector}.component`)) || target.component;
 		this.resultComponent =
-			(settings.editMode && this.dependencies.storage.get(`templates.${this.selector}.resultComponent`)) || template.resultComponent;
+			(settings.editMode && this.dependencies.storage.get(`templates.${this.selector}.resultComponent`)) || target.resultComponent;
 		this.theme = (settings.editMode && this.dependencies.storage.get(`templates.${this.selector}.theme`)) || {
 			location: 'local',
-			name: template.theme || GLOBAL_THEME_NAME,
+			name: target.theme || GLOBAL_THEME_NAME,
 		};
 
 		makeObservable(this, {

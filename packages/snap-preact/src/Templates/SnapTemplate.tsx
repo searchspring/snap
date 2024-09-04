@@ -97,7 +97,7 @@ export class SnapTemplates extends Snap {
 		const urlParams = url(window.location.href);
 		const editMode = Boolean(urlParams?.params?.query?.theme || cookies.get(THEME_EDIT_COOKIE));
 
-		const templatesStore = new TemplatesStore(config, { editMode });
+		const templatesStore = new TemplatesStore({ config, settings: { editMode } });
 
 		const snapConfig = createSnapConfig(config, templatesStore);
 

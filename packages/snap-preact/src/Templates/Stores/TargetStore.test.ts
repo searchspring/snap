@@ -16,10 +16,10 @@ describe('TargetStore', () => {
 	});
 
 	it('has expected defaults', () => {
-		const template = {
+		const target = {
 			component: '',
 		};
-		const store = new TargetStore(template, dependencies, settings);
+		const store = new TargetStore({ target, dependencies, settings });
 		expect(store).toBeDefined();
 		expect(store.selector).toStrictEqual('');
 		expect(store.component).toStrictEqual('');
@@ -33,31 +33,31 @@ describe('TargetStore', () => {
 	});
 
 	it('can create a TargetStore', () => {
-		const template = {
+		const target = {
 			selector: '.test',
 			theme: 'customTheme',
 			component: 'Search',
 			resultComponent: 'CustomResult',
 		};
-		const store = new TargetStore(template, dependencies, settings);
+		const store = new TargetStore({ target, dependencies, settings });
 		expect(store).toBeDefined();
-		expect(store.selector).toStrictEqual(template.selector);
-		expect(store.component).toStrictEqual(template.component);
-		expect(store.resultComponent).toStrictEqual(template.resultComponent);
+		expect(store.selector).toStrictEqual(target.selector);
+		expect(store.component).toStrictEqual(target.component);
+		expect(store.resultComponent).toStrictEqual(target.resultComponent);
 		expect(store.theme).toStrictEqual({
 			location: 'local',
-			name: template.theme,
+			name: target.theme,
 		});
 	});
 
 	it('can setComponent, setResultComponent, setTheme', () => {
-		const template = {
+		const target = {
 			selector: '.test',
 			theme: 'customTheme',
 			component: 'Search',
 			resultComponent: 'CustomResult',
 		};
-		const store = new TargetStore(template, dependencies, settings);
+		const store = new TargetStore({ target, dependencies, settings });
 
 		expect(store.component).toStrictEqual('Search');
 		store.setComponent('NewSearch');

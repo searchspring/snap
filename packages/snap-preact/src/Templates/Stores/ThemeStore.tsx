@@ -12,7 +12,7 @@ import type { GlobalThemeStyleScript } from '../../types';
 import type { ListOption } from '../../../components/src/types';
 import { observer } from 'mobx-react';
 
-export type ThemeStoreConfig = {
+export type ThemeStoreThemeConfig = {
 	name: string;
 	type: TemplateThemeTypes;
 	base: Theme;
@@ -47,6 +47,12 @@ class SelectedLayout {
 	}
 }
 
+type ThemeStoreConfig = {
+	config: ThemeStoreThemeConfig;
+	dependencies: TemplatesStoreDependencies;
+	settings: TemplatesStoreSettings;
+};
+
 export class ThemeStore {
 	public name: string;
 	public type: string;
@@ -61,7 +67,8 @@ export class ThemeStore {
 	stored: ThemePartial;
 	innerWidth?: number;
 
-	constructor(config: ThemeStoreConfig, dependencies: TemplatesStoreDependencies, settings: TemplatesStoreSettings) {
+	constructor(params: ThemeStoreConfig) {
+		const { config, dependencies, settings } = params;
 		this.dependencies = dependencies;
 
 		const { name, style, type, base, overrides, variables, currency, language, innerWidth } = config;

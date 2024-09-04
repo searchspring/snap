@@ -35,7 +35,7 @@ describe('LibraryStore', () => {
 				Dne: async () => ({} as ResultComponent),
 			},
 		};
-		const store = new LibraryStore(components);
+		const store = new LibraryStore({ components });
 		expect(store).toBeDefined();
 
 		expect(store.import.component.result['Result']).toBeDefined();

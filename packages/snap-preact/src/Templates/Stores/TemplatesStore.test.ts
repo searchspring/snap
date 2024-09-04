@@ -10,7 +10,7 @@ describe('TemplateStore', () => {
 				},
 			},
 		};
-		const store = new TemplatesStore(config, { editMode: true });
+		const store = new TemplatesStore({ config, settings: { editMode: true } });
 		expect(store).toBeDefined();
 		expect(store.loading).toBe(false);
 		expect(store.config).toBe(config);
@@ -33,7 +33,7 @@ describe('TemplateStore', () => {
 				language: 'fr',
 			},
 		};
-		const store = new TemplatesStore(config);
+		const store = new TemplatesStore({ config });
 		expect(store.config).toBe(config);
 		expect(store.language).toBe(config.config?.language);
 		expect(store.currency).toBe(config.config?.currency);
@@ -52,7 +52,7 @@ describe('TemplateStore', () => {
 				language: 'dne',
 			},
 		};
-		const store = new TemplatesStore(config);
+		const store = new TemplatesStore({ config });
 		expect(store.config).toBe(config);
 		expect(store.language).toBe('en');
 		expect(store.currency).toBe('usd');
@@ -69,7 +69,7 @@ describe('TemplateStore', () => {
 				siteId: '8uyt2m',
 			},
 		};
-		const store = new TemplatesStore(config);
+		const store = new TemplatesStore({ config });
 		expect(store.language).toBe('en');
 		expect(store.currency).toBe('usd');
 
@@ -91,7 +91,7 @@ describe('TemplateStore', () => {
 				siteId: '8uyt2m',
 			},
 		};
-		const store = new TemplatesStore(config);
+		const store = new TemplatesStore({ config });
 		expect(store.window.innerWidth).toBe(global.window.innerWidth);
 
 		const width = 1000;
@@ -110,7 +110,7 @@ describe('TemplateStore', () => {
 				},
 			},
 		};
-		const store = new TemplatesStore(config);
+		const store = new TemplatesStore({ config });
 
 		// addTheme from config
 		const spy = jest.spyOn(store, 'addTheme');
@@ -161,17 +161,17 @@ describe('TemplateStore', () => {
 				},
 			},
 		};
-		const store = new TemplatesStore(config);
+		const store = new TemplatesStore({ config });
 		const type = 'search';
-		const templateTarget = {
+		const target = {
 			selector: '.test',
 			theme: 'global',
 			component: 'Search',
 			resultComponent: 'Result',
 		};
-		const targetId = store.addTarget(type, templateTarget);
+		const targetId = store.addTarget(type, target);
 		expect(targetId).toBeDefined();
-		expect([templateTarget.selector, templateTarget.component]).toContain(targetId);
+		expect([target.selector, target.component]).toContain(targetId);
 		expect(store.targets[type][targetId!]).toBeDefined();
 		expect(store.getTarget(type, targetId!)).toBe(store.targets[type][targetId!]);
 	});

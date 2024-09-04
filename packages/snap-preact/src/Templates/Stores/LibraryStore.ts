@@ -34,6 +34,10 @@ type LibraryImports = {
 };
 const ALLOWED_CUSTOM_COMPONENT_TYPES: TemplateCustomComponentTypes[] = ['result', 'badge'];
 
+type LibraryStoreConfig = {
+	components?: TemplateStoreComponentConfig;
+};
+
 export class LibraryStore {
 	themes: {
 		[themeName: string]: Theme;
@@ -151,7 +155,8 @@ export class LibraryStore {
 		},
 	};
 
-	constructor(components?: TemplateStoreComponentConfig) {
+	constructor(params?: LibraryStoreConfig) {
+		const { components } = params || {};
 		// allow for configuration to supply custom component imports
 		if (components) {
 			Object.keys(components).forEach((type) => {
