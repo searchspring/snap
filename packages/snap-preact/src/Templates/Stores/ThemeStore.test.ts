@@ -2,7 +2,7 @@ import { configure as configureMobx } from 'mobx';
 import '@testing-library/jest-dom';
 import { waitFor } from '@testing-library/preact';
 
-import { ThemeStore, ThemeConfig, mergeThemeLayers } from './ThemeStore';
+import { ThemeStore, ThemeStoreThemeConfig, mergeThemeLayers } from './ThemeStore';
 import { StorageStore } from '@searchspring/snap-store-mobx';
 import type { TemplatesStoreDependencies, TemplateThemeTypes, TemplatesStoreSettings } from './TemplateStore';
 import type { Theme, ThemeVariables, ThemePartial } from '../../../components/src/providers/theme';
@@ -111,7 +111,7 @@ describe('ThemeStore', () => {
 	});
 
 	it('has expected defaults and can invoke methods', () => {
-		const config: ThemeConfig = {
+		const config: ThemeStoreThemeConfig = {
 			name: 'global',
 			type: 'local',
 			base: {
@@ -187,7 +187,7 @@ describe('ThemeStore', () => {
 	});
 
 	it('can get theme', () => {
-		const config: ThemeConfig = {
+		const config: ThemeStoreThemeConfig = {
 			name: 'global',
 			type: 'local',
 			base: testTheme,
@@ -215,7 +215,7 @@ describe('ThemeStore', () => {
 	});
 
 	it('can get theme with overrides applied', () => {
-		const config: ThemeConfig = {
+		const config: ThemeStoreThemeConfig = {
 			name: 'global',
 			type: 'local',
 			base: testTheme,
@@ -246,7 +246,7 @@ describe('ThemeStore', () => {
 	});
 
 	it('can get theme with overrides and variables applied', () => {
-		const config: ThemeConfig = {
+		const config: ThemeStoreThemeConfig = {
 			name: 'global',
 			type: 'local',
 			base: testTheme,
@@ -301,7 +301,7 @@ describe('ThemeStore', () => {
 	});
 
 	it('can get theme with currency and language applied', () => {
-		const config: ThemeConfig = {
+		const config: ThemeStoreThemeConfig = {
 			name: 'global',
 			type: 'local',
 			base: testTheme,
@@ -371,7 +371,7 @@ describe('ThemeStore', () => {
 		const bpIndex = 0; // simulate being at first breakpoint
 		expect(testTheme.variables?.breakpoints[bpIndex]).toBe(0);
 
-		const config: ThemeConfig = {
+		const config: ThemeStoreThemeConfig = {
 			name: 'global',
 			type: 'local',
 			base: testTheme,
@@ -414,7 +414,7 @@ describe('ThemeStore', () => {
 		const bpIndex = 3;
 		expect(testTheme.variables?.breakpoints[bpIndex]).toBeGreaterThan(0);
 
-		const config: ThemeConfig = {
+		const config: ThemeStoreThemeConfig = {
 			name: 'global',
 			type: 'local',
 			base: testTheme,
@@ -455,7 +455,7 @@ describe('ThemeStore', () => {
 		const bpIndex = 0; // simulate being at first breakpoint
 		expect(testTheme.variables?.breakpoints[bpIndex]).toBe(0);
 
-		const config: ThemeConfig = {
+		const config: ThemeStoreThemeConfig = {
 			name: 'global',
 			type: 'local',
 			base: testTheme,
@@ -516,7 +516,7 @@ describe('ThemeStore', () => {
 		const bpIndex = 0; // simulate being at first breakpoint
 		expect(testTheme.variables?.breakpoints[bpIndex]).toBe(0);
 
-		const config: ThemeConfig = {
+		const config: ThemeStoreThemeConfig = {
 			name: 'global',
 			type: 'local',
 			base: testTheme,
@@ -589,7 +589,7 @@ describe('ThemeStore', () => {
 
 	it('can select layoutOption', () => {
 		const bpIndex = 0;
-		const config: ThemeConfig = {
+		const config: ThemeStoreThemeConfig = {
 			name: 'global',
 			type: 'local',
 			base: testTheme,
@@ -644,7 +644,7 @@ describe('ThemeStore', () => {
 	});
 
 	it('adds a style sheet to the page when a style is provided', async () => {
-		const config: ThemeConfig = {
+		const config: ThemeStoreThemeConfig = {
 			name: 'globally',
 			type: 'local',
 			base: testTheme,

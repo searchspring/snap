@@ -1,14 +1,13 @@
 import { observable, makeObservable } from 'mobx';
 import { StorageStore, StorageType } from '@searchspring/snap-store-mobx';
 import { SnapTemplatesConfig } from '../SnapTemplate';
-import { ThemeStore } from './ThemeStore';
+import { ThemeStore, ThemeStoreThemeConfig } from './ThemeStore';
 import { TargetStore } from './TargetStore';
 import { LibraryStore } from './LibraryStore';
 import { debounce } from '@searchspring/snap-toolbox';
 
-import type { ResultComponent, ThemeMinimal, ThemeOverrides, ThemePartial, ThemeVariablesPartial } from '../../../components/src';
+import type { ResultComponent, ThemeOverrides, ThemeVariablesPartial } from '../../../components/src';
 import type { GlobalThemeStyleScript } from '../../types';
-import type { Theme } from '../../../components/src';
 export type TemplateThemeTypes = 'library' | 'local';
 export type TemplateTypes = 'search' | 'autocomplete' | `recommendation/${RecsTemplateTypes}`;
 export type TemplateCustomComponentTypes = 'result' | 'badge';
@@ -61,6 +60,12 @@ export type TemplateStoreConfig = {
 };
 
 const RESIZE_DEBOUNCE = 100;
+
+type TemplatesStoreConfig = {
+	config: TemplateStoreConfig;
+	settings?: TemplatesStoreSettings;
+};
+
 export class TemplatesStore {
 	loading = false;
 	config: SnapTemplatesConfig;
@@ -91,7 +96,8 @@ export class TemplatesStore {
 
 	window: WindowProperties = { innerWidth: 0 };
 
-	constructor(config: TemplateStoreConfig, settings?: TemplatesStoreSettings) {
+	constructor(params: TemplatesStoreConfig) {
+		const { config, settings } = params || {};
 		this.config = config;
 		this.storage = new StorageStore({ type: StorageType.local, key: 'ss-templates' });
 
@@ -173,8 +179,8 @@ export class TemplatesStore {
 		});
 	}
 
-	public addTarget(type: TemplateTypes, templateTarget: TemplateTarget): string | undefined {
-		const targetId = templateTarget.selector || templateTarget.component;
+	public addTarget(type: TemplateTypes, target: TemplateTarget): string | undefined {
+		const targetId = target.selector || target.component;
 		if (targetId) {
 			const path = type.split('/');
 			let targetPath: any = this.targets;
@@ -185,7 +191,7 @@ export class TemplatesStore {
 				targetPath = targetPath[path[index]];
 			}
 			(targetPath as TargetMap)[targetId] = new TargetStore({
-				templateTarget,
+				target,
 				dependencies: this.dependencies,
 				settings: this.settings,
 			});
@@ -212,17 +218,7 @@ export class TemplatesStore {
 		return targetPath;
 	}
 
-	public addTheme(config: {
-		name: string;
-		type: TemplateThemeTypes;
-		base: Theme;
-		overrides?: ThemePartial;
-		variables?: ThemeVariablesPartial;
-		currency: ThemeMinimal;
-		language: ThemeMinimal;
-		innerWidth?: number;
-		style?: GlobalThemeStyleScript;
-	}) {
+	public addTheme(config: ThemeStoreThemeConfig) {
 		const theme = new ThemeStore({
 			config,
 			dependencies: this.dependencies,

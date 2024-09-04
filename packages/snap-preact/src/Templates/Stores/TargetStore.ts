@@ -4,7 +4,7 @@ import { TemplateTarget, type TemplatesStoreSettings, type TemplatesStoreDepende
 const GLOBAL_THEME_NAME = 'global';
 
 type TargetStoreConfig = {
-	templateTarget: TemplateTarget;
+	target: TemplateTarget;
 	dependencies: TemplatesStoreDependencies;
 	settings: TemplatesStoreSettings;
 };
@@ -19,15 +19,15 @@ export class TargetStore {
 	private dependencies: TemplatesStoreDependencies;
 
 	constructor(params: TargetStoreConfig) {
-		const { templateTarget, dependencies, settings } = params;
+		const { target, dependencies, settings } = params;
 		this.dependencies = dependencies;
-		this.selector = templateTarget.selector || '';
-		this.component = (settings.editMode && this.dependencies.storage.get(`templates.${this.selector}.component`)) || templateTarget.component;
+		this.selector = target.selector || '';
+		this.component = (settings.editMode && this.dependencies.storage.get(`templates.${this.selector}.component`)) || target.component;
 		this.resultComponent =
-			(settings.editMode && this.dependencies.storage.get(`templates.${this.selector}.resultComponent`)) || templateTarget.resultComponent;
+			(settings.editMode && this.dependencies.storage.get(`templates.${this.selector}.resultComponent`)) || target.resultComponent;
 		this.theme = (settings.editMode && this.dependencies.storage.get(`templates.${this.selector}.theme`)) || {
 			location: 'local',
-			name: templateTarget.theme || GLOBAL_THEME_NAME,
+			name: target.theme || GLOBAL_THEME_NAME,
 		};
 
 		makeObservable(this, {
