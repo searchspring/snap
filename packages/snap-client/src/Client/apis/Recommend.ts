@@ -2,14 +2,7 @@ import { API, ApiConfiguration } from './Abstract';
 import { HTTPHeaders, PostRecommendRequestFiltersModel } from '../../types';
 import { AppMode } from '@searchspring/snap-toolbox';
 import { transformRecommendationFiltersPost } from '../transforms';
-import {
-	ProfileRequestModel,
-	ProfileResponseModel,
-	RecommendResponseModel,
-	RecommendRequestModel,
-	TransformedRequestModel,
-	PostRecommendAPISpec,
-} from '../../types';
+import { ProfileRequestModel, ProfileResponseModel, RecommendResponseModel, RecommendRequestModel, PostRecommendAPISpec } from '../../types';
 
 class Deferred {
 	promise: Promise<any>;
@@ -24,7 +17,7 @@ class Deferred {
 	}
 }
 
-type CombinedIncoming = Partial<RecommendRequestModel> & Partial<TransformedRequestModel>;
+type CombinedIncoming = Partial<RecommendRequestModel>;
 type BatchEntry = {
 	request: CombinedIncoming;
 	deferred: Deferred;
@@ -62,8 +55,10 @@ export class RecommendAPI extends API {
 	}
 
 	async batchRecommendations(parameters: RecommendRequestModel): Promise<RecommendResponseModel> {
+		const groupId = parameters.groupId || 1;
+
 		// set up batch key and deferred promises
-		const key = parameters.batched ? `${parameters.siteId}:${parameters.groupId}` : `${Math.random()}:${parameters.groupId}`;
+		const key = parameters.batched ? `${parameters.siteId}:${groupId}` : `${Math.random()}:${groupId}`;
 		const batch = (this.batches[key] = this.batches[key] || { timeout: null, request: { profiles: [] }, entries: [] });
 		const deferred = new Deferred();
 
@@ -71,17 +66,13 @@ export class RecommendAPI extends API {
 
 		const newParams = {
 			...parameters,
-			profiles: [
-				{
-					tag: tag,
-					categories,
-					brands,
-					limit: limit ? limit : limits ? (typeof limits == 'number' ? limits : limits[0]) : undefined,
-					searchTerm,
-					filters: profileFilters,
-					dedupe,
-				},
-			],
+			tag: tag,
+			categories,
+			brands,
+			limit: limit ? limit : limits ? (typeof limits == 'number' ? limits : limits[0]) : undefined,
+			searchTerm,
+			profileFilters,
+			dedupe,
 			filters,
 		};
 
@@ -102,22 +93,29 @@ export class RecommendAPI extends API {
 			// now that the requests are in proper order, map through them
 			// and build out the batches
 			batch.entries.map((entry) => {
-				const { profiles } = entry.request;
+				const { tag, categories, brands, searchTerm, profileFilters, dedupe } = entry.request;
+				let limit = entry.request.limit;
 
-				if (profiles) {
-					profiles.forEach((profile) => {
-						if (!profile.limit) {
-							profile.limit = 20;
-						}
-
-						let transformedFilters;
-						if (profile.filters) {
-							transformedFilters = transformRecommendationFiltersPost(profile.filters) as PostRecommendRequestFiltersModel[];
-						}
-
-						batch.request.profiles?.push({ ...profile, filters: transformedFilters });
-					});
+				if (!limit) {
+					limit = 20;
 				}
+
+				const profile: any = {
+					tag,
+					categories,
+					brands,
+					limit,
+					searchTerm,
+					filters: profileFilters,
+					dedupe,
+				};
+
+				let transformedFilters;
+				if (profile.filters) {
+					transformedFilters = transformRecommendationFiltersPost(profile.filters) as PostRecommendRequestFiltersModel[];
+				}
+
+				batch.request.profiles?.push({ ...profile, filters: transformedFilters });
 
 				batch.request = {
 					...batch.request,

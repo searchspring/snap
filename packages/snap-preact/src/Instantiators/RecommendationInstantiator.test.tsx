@@ -339,35 +339,33 @@ describe('RecommendationInstantiator', () => {
 		});
 
 		expect(clientSpy).toHaveBeenCalledTimes(1);
-		expect(clientSpy).toHaveBeenCalledWith(
-			{
-				batched: true,
-				branch: 'testing',
-				categories: ['cats', 'dogs'],
-				filters: [
-					{
-						type: 'value',
-						field: 'color',
-						value: 'blue',
-					},
-					{
-						type: 'range',
-						field: 'price',
-						value: { low: 0, high: 20 },
-					},
-				],
-				brands: ['nike', 'h&m'],
-				limit: 5,
-				product: 'sku1',
-				shopper: 'snapdev',
-				siteId: 'abc123',
-				tag: 'trending',
-			},
-			1
-		);
+		expect(clientSpy).toHaveBeenCalledWith({
+			batched: true,
+			branch: 'testing',
+			categories: ['cats', 'dogs'],
+			filters: [
+				{
+					type: 'value',
+					field: 'color',
+					value: 'blue',
+				},
+				{
+					type: 'range',
+					field: 'price',
+					value: { low: 0, high: 20 },
+				},
+			],
+			groupId: 1,
+			brands: ['nike', 'h&m'],
+			limit: 5,
+			product: 'sku1',
+			shopper: 'snapdev',
+			siteId: 'abc123',
+			tag: 'trending',
+		});
 	});
 
-	it.only('can use new style script tags and context', async () => {
+	it('can use new style script tags and context', async () => {
 		const profileContextArray = [
 			{
 				profile: 'trending',
@@ -469,51 +467,45 @@ describe('RecommendationInstantiator', () => {
 		const groupId = recommendationInstantiator.controller[Object.keys(recommendationInstantiator.controller)[0]].store.config.groupId;
 
 		expect(clientSpy).toHaveBeenCalledTimes(2);
-		expect(clientSpy).toHaveBeenNthCalledWith(
-			1,
-			{
-				batched: true,
-				blockedItems: ['1234', '5678'],
-				branch: 'production',
-				brands: ['12345'],
-				cart: ['5678'],
-				categories: ['1234'],
-				limit: 1,
-				profileFilters: [
-					{
-						field: 'color',
-						type: 'value',
-						value: 'red',
-					},
-				],
-				siteId: '8uyt2m',
-				tag: 'trending',
-			},
-			groupId
-		);
+		expect(clientSpy).toHaveBeenNthCalledWith(1, {
+			batched: true,
+			blockedItems: ['1234', '5678'],
+			branch: 'production',
+			brands: ['12345'],
+			cart: ['5678'],
+			categories: ['1234'],
+			limit: 1,
+			profileFilters: [
+				{
+					field: 'color',
+					type: 'value',
+					value: 'red',
+				},
+			],
+			groupId,
+			siteId: '8uyt2m',
+			tag: 'trending',
+		});
 
-		expect(clientSpy).toHaveBeenNthCalledWith(
-			2,
-			{
-				batched: true,
-				blockedItems: ['1234', '5678'],
-				branch: 'production',
-				brands: ['65432'],
-				cart: ['5678'],
-				categories: ['5678'],
-				limit: 2,
-				profileFilters: [
-					{
-						field: 'color',
-						type: 'value',
-						value: 'blue',
-					},
-				],
-				siteId: '8uyt2m',
-				tag: 'similar',
-			},
-			groupId
-		);
+		expect(clientSpy).toHaveBeenNthCalledWith(2, {
+			batched: true,
+			blockedItems: ['1234', '5678'],
+			branch: 'production',
+			brands: ['65432'],
+			cart: ['5678'],
+			categories: ['5678'],
+			limit: 2,
+			profileFilters: [
+				{
+					field: 'color',
+					type: 'value',
+					value: 'blue',
+				},
+			],
+			groupId,
+			siteId: '8uyt2m',
+			tag: 'similar',
+		});
 	});
 
 	it('will utilize attachments (plugins / middleware) added via methods upon creation of controller', async () => {

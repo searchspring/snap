@@ -3,7 +3,7 @@ import { ApiConfiguration } from './Abstract';
 import { RecommendAPI } from './Recommend';
 import { MockData } from '@searchspring/snap-shared';
 
-import type { RecommendRequestModel, TransformedRequestModel, PostRecommendAPISpec } from '../../types';
+import type { PostRecommendAPISpec } from '../../types';
 
 const mockData = new MockData();
 

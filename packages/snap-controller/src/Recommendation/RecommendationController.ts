@@ -400,6 +400,7 @@ export class RecommendationController extends AbstractController {
 			batched: this.config.batched,
 			branch: this.config.branch || 'production',
 			order: this.context?.options?.order,
+			groupId: this.config.groupId,
 			...this.config.globals,
 		};
 
@@ -448,7 +449,7 @@ export class RecommendationController extends AbstractController {
 
 			const searchProfile = this.profiler.create({ type: 'event', name: 'search', context: params }).start();
 
-			const response = await this.client.recommend(params, this.config.groupId);
+			const response = await this.client.recommend(params);
 			searchProfile.stop();
 			this.log.profile(searchProfile);
 

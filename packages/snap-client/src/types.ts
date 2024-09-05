@@ -23,7 +23,7 @@ export type ClientConfig = {
 	search?: RequesterConfig<SearchRequestModel>;
 	autocomplete?: RequesterConfig<AutocompleteRequestModel> & { requesters?: HybridRequesterConfig };
 	finder?: RequesterConfig<SearchRequestModel>;
-	recommend?: RequesterConfig<RecommendRequestModel | TransformedRequestModel>;
+	recommend?: RequesterConfig<RecommendRequestModel>;
 	suggest?: RequesterConfig<SuggestRequestModel>;
 };
 
@@ -124,19 +124,6 @@ export type RecommendRequestModel = {
 	searchTerm?: string;
 	dedupe?: boolean;
 	branch?: string;
-};
-
-export type TransformedRequestModel = {
-	profiles: RecommendPostProfileObject[];
-	globals: {
-		product?: string;
-		products?: string[];
-		blockedItems?: string[];
-		cart?: string[];
-		lastViewed?: string[];
-		withRecInfo?: boolean;
-	};
-	groupId?: number;
 };
 
 //TODO: move to snapi

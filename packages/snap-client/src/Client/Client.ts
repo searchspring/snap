@@ -171,7 +171,7 @@ export class Client {
 		return this.requesters.suggest.getTrending(params as TrendingRequestModel);
 	}
 
-	async recommend(params: RecommendRequestModel, groupId?: number): Promise<RecommendCombinedResponseModel> {
+	async recommend(params: RecommendRequestModel): Promise<RecommendCombinedResponseModel> {
 		const { tag, ...otherParams } = params;
 		if (!tag) {
 			throw 'tag parameter is required';
@@ -190,7 +190,6 @@ export class Client {
 		const recommendParams = {
 			tag: tag,
 			...otherParams,
-			groupId: groupId || 1,
 			siteId: params.siteId || this.globals.siteId,
 		};
 
