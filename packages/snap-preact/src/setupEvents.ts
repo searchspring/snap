@@ -38,7 +38,7 @@ export const setupEvents = () => {
 		const { controllerIds } = data || {};
 
 		//filter through all recommendation controllers for matches with profileIds and realtime config
-		const controllers = matchControllers(controllerIds, (controller) => {
+		const controllers = matchControllers(controllerIds).filter((controller) => {
 			return Boolean(controller.type === 'recommendation' && controller.config?.realtime);
 		});
 
@@ -52,16 +52,9 @@ export const setupEvents = () => {
 	return eventManager;
 };
 
-const matchControllers = (
-	matchIds: (string | RegExp)[] | undefined,
-	conditionCallback?: (ctrl: AbstractController) => boolean
-): AbstractController[] => {
+const matchControllers = (matchIds: (string | RegExp)[] | undefined): AbstractController[] => {
 	return Object.keys(window.searchspring.controller || {}).reduce((arr, id) => {
 		const controller = window.searchspring.controller[id] as AbstractController;
-
-		if (conditionCallback && !conditionCallback(controller)) {
-			return arr;
-		}
 
 		if (!matchIds) {
 			arr.push(controller);
