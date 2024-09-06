@@ -150,7 +150,7 @@ export const Gallery = (): JSX.Element => {
 			{Object.keys(iconPaths).map((icon) => {
 				return (
 					<div style={{ marginBottom: '40px' }}>
-						<Icon icon={icon} size="40px" style={{ padding: '20px' }} />
+						<Icon icon={icon as keyof typeof iconPaths} size="40px" style={{ padding: '20px' }} />
 						<div style={{ textAlign: 'center' }}>{icon}</div>
 					</div>
 				);

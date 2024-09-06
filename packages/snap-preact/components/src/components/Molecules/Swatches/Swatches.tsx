@@ -247,8 +247,7 @@ export type SwatchesProps = {
 	carousel?: Partial<CarouselProps>;
 	grid?: Partial<GridProps>;
 	type?: 'carousel' | 'grid';
-} & // 			type?: 'grid'; // 	| { // 	  } // 			carousel?: Partial<CarouselProps>; // 			type?: 'carousel'; // 	| { //  & (
-// 			grid?: Partial<GridProps>;
+} & // 			grid?: Partial<GridProps>; // 			type?: 'grid'; // 	| { // 	  } // 			carousel?: Partial<CarouselProps>; // 			type?: 'carousel'; // 	| { //  & (
 // 	  }
 // )
 ComponentProps;

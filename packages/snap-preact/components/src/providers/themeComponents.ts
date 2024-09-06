@@ -49,6 +49,7 @@ import type { HorizontalFacetsProps } from '../components/Organisms/HorizontalFa
 import type { FacetsProps } from '../components/Organisms/Facets';
 import type { FilterSummaryProps } from '../components/Organisms/FilterSummary';
 import type { RecommendationBundleProps } from '../components/Organisms/RecommendationBundle';
+import type { RecommendationGridProps } from '../components/Organisms/RecommendationGrid';
 import type { ResultsProps } from '../components/Organisms/Results';
 import type { SearchHeaderProps } from '../components/Atoms/SearchHeader';
 import type { SidebarProps } from '../components/Organisms/Sidebar';
@@ -131,6 +132,8 @@ export type ThemeComponents = {
 	[K in UnNamedThemeComponentSelectors<'sidebar'>]?: GenericComponentProps<SidebarProps>;
 } & { [K in UnNamedThemeComponentSelectors<'mobileSidebar'>]?: GenericComponentProps<MobileSidebarProps> } & {
 	[K in NamedThemeComponentSelectors<'toolbar', ToolbarNames>]?: GenericComponentProps<ToolbarProps>;
+} & {
+	[K in UnNamedThemeComponentSelectors<'recommendationGrid'>]?: GenericComponentProps<RecommendationGridProps>;
 } /* TEMPLATES */ & { [K in UnNamedThemeComponentSelectors<'autocomplete'>]?: GenericComponentProps<AutocompleteProps> } & {
 	[K in UnNamedThemeComponentSelectors<'recommendation'>]?: GenericComponentProps<RecommendationProps>;
 } & { [K in UnNamedThemeComponentSelectors<'search'>]?: GenericComponentProps<SearchProps> } & {
