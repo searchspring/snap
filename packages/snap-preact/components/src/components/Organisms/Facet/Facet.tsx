@@ -499,5 +499,5 @@ export interface FacetLang {
 }
 
 type FieldProps = {
-	[variable: string]: FacetProps;
+	[variable: string]: Omit<FacetProps, 'facet'>;
 };

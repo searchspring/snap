@@ -97,7 +97,7 @@ export const en_translation: LangComponents = {
 			value: (data) => `${data}`,
 		},
 	},
-	horizontalFacets: {
+	facetsHorizontal: {
 		dropdownButton: {
 			attributes: {
 				'aria-label': (data) =>

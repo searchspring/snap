@@ -2,7 +2,7 @@ import { h } from 'preact';
 import { withThemeFromJSXProvider } from '@storybook/addon-themes';
 
 import { ThemeProvider } from '../src/providers/theme';
-import { bocachica, pike } from '../src/themes';
+import { bocachica } from '../src/themes';
 
 // custom styles for storybook
 import './styles.scss';
@@ -11,7 +11,6 @@ export const decorators = [
 	withThemeFromJSXProvider({
 		themes: {
 			bocachica: bocachica,
-			pike: pike,
 			none: {},
 		},
 		defaultTheme: 'bocachica',

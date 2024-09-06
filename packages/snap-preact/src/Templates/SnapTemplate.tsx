@@ -21,7 +21,7 @@ export const THEME_EDIT_COOKIE = 'ssThemeEdit';
 export type SearchTargetConfig = {
 	selector: string;
 	theme?: string;
-	component: 'Search' | 'HorizontalSearch'; // various component (template) types allowed
+	component: 'Search' | 'SearchHorizontal'; // various component (template) types allowed
 	resultComponent?: string;
 };
 
@@ -34,7 +34,7 @@ export type AutocompleteTargetConfig = {
 
 export type RecommendationDefaultTargetConfig = {
 	theme?: string;
-	component: 'Recommendation'; // various components (templates) available
+	component: 'Recommendation' | 'RecommendationGrid'; // various components (templates) available
 	resultComponent?: string;
 };
 export type RecommendationEmailTargetConfig = {

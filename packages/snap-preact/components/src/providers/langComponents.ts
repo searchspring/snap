@@ -44,10 +44,10 @@ import type { SortByLang } from '../components/Molecules/SortBy';
 // import type { SwatchesLang } from '../components/Molecules/Swatches';
 // import type { VariantSelectionLang } from '../components/Molecules/VariantSelection';
 import type { FacetLang } from '../components/Organisms/Facet';
-import type { HorizontalFacetsLang } from '../components/Organisms/HorizontalFacets';
+import type { FacetsHorizontalLang } from '../components/Organisms/FacetsHorizontal';
 // import type { FacetsLang } from '../components/Organisms/Facets';
 import type { FilterSummaryLang } from '../components/Organisms/FilterSummary';
-import type { RecommendationBundleLang } from '../components/Organisms/RecommendationBundle';
+import type { RecommendationBundleLang } from '../components/Templates/RecommendationBundle';
 // import type { ResultsLang } from '../components/Organisms/Results';
 import type { SearchHeaderLang } from '../components/Atoms/SearchHeader';
 import type { SidebarLang } from '../components/Organisms/Sidebar';
@@ -55,7 +55,7 @@ import type { SidebarLang } from '../components/Organisms/Sidebar';
 import type { AutocompleteLang } from '../components/Templates/Autocomplete';
 import type { RecommendationLang } from '../components/Templates/Recommendation';
 import type { SearchLang } from '../components/Templates/Search';
-// import type { HorizontalSearchLang } from '../components/Templates/HorizontalSearch';
+// import type { SearchHorizontalLang } from '../components/Templates/SearchHorizontal';
 import type { NoResultsLang } from '../components/Atoms/NoResults';
 import type { MobileSidebarLang } from '../components/Organisms/MobileSidebar';
 
@@ -115,7 +115,7 @@ export type LangComponentOverrides = {
 	/* ORGANISMS */
 	facet?: Partial<FacetLang>;
 	// facets?: Partial<FacetsLang>
-	horizontalFacets?: Partial<HorizontalFacetsLang>;
+	facetsHorizontal?: Partial<FacetsHorizontalLang>;
 	filterSummary?: Partial<FilterSummaryLang>;
 	noResults?: Partial<NoResultsLang>;
 	recommendationBundle?: Partial<RecommendationBundleLang>;
@@ -128,7 +128,7 @@ export type LangComponentOverrides = {
 	autocomplete?: Partial<AutocompleteLang>;
 	recommendation?: Partial<RecommendationLang>;
 	search?: Partial<SearchLang>;
-	// horizontalSearch?: Partial<HorizontalSearchLang>
+	// searchHorizontal?: Partial<SearchHorizontalLang>
 };
 
 export type LangComponents = {
@@ -185,7 +185,7 @@ export type LangComponents = {
 	/* ORGANISMS */
 	facet: FacetLang;
 	// facets: FacetsLang
-	horizontalFacets: HorizontalFacetsLang;
+	facetsHorizontal: FacetsHorizontalLang;
 	filterSummary: FilterSummaryLang;
 	noResults: NoResultsLang;
 	recommendationBundle: RecommendationBundleLang;
@@ -198,5 +198,5 @@ export type LangComponents = {
 	autocomplete: AutocompleteLang;
 	recommendation: RecommendationLang;
 	search: SearchLang;
-	// horizontalSearch: HorizontalSearchLang
+	// searchHorizontal: SearchHorizontalLang
 };

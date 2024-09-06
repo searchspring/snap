@@ -1,1 +1,1 @@
-export { bocachica } from '../../../../../components/src/themes/bocachica';
+export { bocachica } from '../../../../../components/src/themes/bocachica/bocachica';

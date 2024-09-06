@@ -3,7 +3,7 @@ import { h } from 'preact';
 import { ArgsTable, PRIMARY_STORY, Markdown } from '@storybook/blocks';
 
 import { Carousel, CarouselProps } from './Carousel';
-import { Icon, iconPaths } from '../../Atoms/Icon';
+import { Icon, iconPaths, IconType } from '../../Atoms/Icon';
 import { componentArgs, shiftColor, highlightedCode } from '../../../utilities';
 import Readme from './readme.md';
 
@@ -204,12 +204,7 @@ export const Icons = (props: CarouselProps) => {
 			{Object.keys(iconPaths).map((icon, index) => {
 				return (
 					<div style={{ margin: '0 auto', textAlign: 'center' }}>
-						<Icon
-							icon={icon as keyof typeof iconPaths}
-							color={shiftColor('#3a23ad', (index + '111').padStart(6, '1'))}
-							size="80px"
-							style={{ padding: '20px' }}
-						/>
+						<Icon icon={icon as IconType} color={shiftColor('#3a23ad', (index + '111').padStart(6, '1'))} size="80px" style={{ padding: '20px' }} />
 						<div style={{ textAlign: 'center' }}>{icon}</div>
 					</div>
 				);

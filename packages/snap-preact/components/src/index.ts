@@ -56,20 +56,20 @@ export * from './components/Molecules/VariantSelection';
 export * from './components/Organisms/BranchOverride';
 export * from './components/Organisms/Facet';
 export * from './components/Organisms/Facets';
-export * from './components/Organisms/HorizontalFacets';
+export * from './components/Organisms/FacetsHorizontal';
 export * from './components/Organisms/FilterSummary';
 export * from './components/Organisms/MobileSidebar';
-export * from './components/Organisms/RecommendationBundle';
-export * from './components/Organisms/RecommendationGrid';
 export * from './components/Organisms/Results';
 export * from './components/Organisms/Sidebar';
 export * from './components/Organisms/Toolbar';
 
-// TEMAPLTES
+// TEMPLATES
 export * from './components/Templates/Autocomplete';
 export * from './components/Templates/Recommendation';
+export * from './components/Templates/RecommendationBundle';
+export * from './components/Templates/RecommendationGrid';
 export * from './components/Templates/Search';
-export * from './components/Templates/HorizontalSearch';
+export * from './components/Templates/SearchHorizontal';
 
 // TRACKERS
 export * from './components/Trackers/Recommendation/ProfileTracker';
