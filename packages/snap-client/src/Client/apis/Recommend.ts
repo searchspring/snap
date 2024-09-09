@@ -17,9 +17,8 @@ class Deferred {
 	}
 }
 
-type CombinedIncoming = Partial<RecommendRequestModel>;
 type BatchEntry = {
-	request: CombinedIncoming;
+	request: RecommendRequestModel;
 	deferred: Deferred;
 };
 
@@ -55,14 +54,14 @@ export class RecommendAPI extends API {
 	}
 
 	async batchRecommendations(parameters: RecommendRequestModel): Promise<RecommendResponseModel> {
-		const groupId = parameters.groupId || 1;
+		const batchId = parameters.batchId || 1;
 
 		// set up batch key and deferred promises
-		const key = parameters.batched ? `${parameters.siteId}:${groupId}` : `${Math.random()}:${groupId}`;
+		const key = parameters.batched ? `${parameters.siteId}:${batchId}` : `${Math.random()}:${batchId}`;
 		const batch = (this.batches[key] = this.batches[key] || { timeout: null, request: { profiles: [] }, entries: [] });
 		const deferred = new Deferred();
 
-		const { tag, limits, limit, searchTerm, filters, profileFilters, dedupe, categories, brands } = parameters;
+		const { tag, limits, limit, query, filters, profileFilters, dedupe, categories, brands } = parameters;
 
 		const newParams = {
 			...parameters,
@@ -70,7 +69,7 @@ export class RecommendAPI extends API {
 			categories,
 			brands,
 			limit: limit ? limit : limits ? (typeof limits == 'number' ? limits : limits[0]) : undefined,
-			searchTerm,
+			searchTerm: query,
 			profileFilters,
 			dedupe,
 			filters,
@@ -93,7 +92,7 @@ export class RecommendAPI extends API {
 			// now that the requests are in proper order, map through them
 			// and build out the batches
 			batch.entries.map((entry) => {
-				const { tag, categories, brands, searchTerm, profileFilters, dedupe } = entry.request;
+				const { tag, categories, brands, query, profileFilters, dedupe } = entry.request;
 				let limit = entry.request.limit;
 
 				if (!limit) {
@@ -105,7 +104,7 @@ export class RecommendAPI extends API {
 					categories,
 					brands,
 					limit,
-					searchTerm,
+					query,
 					filters: profileFilters,
 					dedupe,
 				};

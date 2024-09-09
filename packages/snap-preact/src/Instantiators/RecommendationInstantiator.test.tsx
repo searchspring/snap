@@ -355,7 +355,7 @@ describe('RecommendationInstantiator', () => {
 					value: { low: 0, high: 20 },
 				},
 			],
-			groupId: 1,
+			batchId: 1,
 			brands: ['nike', 'h&m'],
 			limit: 5,
 			product: 'sku1',
@@ -464,7 +464,7 @@ describe('RecommendationInstantiator', () => {
 				...profileContextArray[index],
 			});
 		});
-		const groupId = recommendationInstantiator.controller[Object.keys(recommendationInstantiator.controller)[0]].store.config.groupId;
+		const batchId = recommendationInstantiator.controller[Object.keys(recommendationInstantiator.controller)[0]].store.config.batchId;
 
 		expect(clientSpy).toHaveBeenCalledTimes(2);
 		expect(clientSpy).toHaveBeenNthCalledWith(1, {
@@ -482,7 +482,7 @@ describe('RecommendationInstantiator', () => {
 					value: 'red',
 				},
 			],
-			groupId,
+			batchId,
 			siteId: '8uyt2m',
 			tag: 'trending',
 		});
@@ -502,7 +502,7 @@ describe('RecommendationInstantiator', () => {
 					value: 'blue',
 				},
 			],
-			groupId,
+			batchId,
 			siteId: '8uyt2m',
 			tag: 'similar',
 		});

@@ -1,16 +1,20 @@
 ## Recommendations Integration
 
-Changes to the recommendation integration scripts were made in Snap `v.0.60.0`. Legacy Recommmendation Integrations docs can still be found [`here`](https://github.com/searchspring/snap/blob/main/packages/snap-preact/src/Instantiators/README.md)
+Changes to the recommendation integration scripts were made in Snap `v0.60.0`. Legacy Recommmendation Integrations docs can still be found [`here`](https://github.com/searchspring/snap/blob/main/docs/INTEGRATION_LEGACY_RECOMMENDATIONS.md)
 
-It is recommended to utilize the [`RecommendationInstantiator`](https://github.com/searchspring/snap/blob/main/packages/snap-preact/src/Instantiators/README.md) for integration of product recommendations. This method allows recommendations to be placed anywhere on the site with a single script block (requires the `bundle.js` script also).
+It is recommended to utilize the [`RecommendationInstantiator`](https://github.com/searchspring/snap/blob/main/packages/snap-preact/src/Instantiators/README.md) for integration of product recommendations. This method allows recommendations to be placed anywhere on the page with a single script block (requires the `bundle.js` script also).
 
 ```html
 <script type="searchspring/recommendations">
-	globals = {};
+	globals = {
+		shopper: {
+			id: 'snapdev'
+		}
+	};
 	profiles = [
 		{
 			profile: 'recently-viewed',
-			target: '.above-content',
+			target: '.ss__recs__recently-viewed',
 			options: {
 				limit: 5
 			}
@@ -19,43 +23,57 @@ It is recommended to utilize the [`RecommendationInstantiator`](https://github.c
 </script>
 ```
 
-The `RecommendationInstantiator` will look for these elements on the page and attempt to inject components based on the `profiles` specified. In the example above, the profile specified is the `recently-viewed` profile, and is set to render inside the target `.above-content`, this profile would typically be setup to display the last products viewed by the shopper. These profiles must be setup in the Searchspring Management Console (SMC) and have associated Snap templates selected.
+The `RecommendationInstantiator` will look for these elements on the page and attempt to inject components based on the `profiles` specified. In the example above, the profile specified is the `recently-viewed` profile, and is set to render inside the target `.ss__recs__recently-viewed`, this profile would typically be setup to display the last products viewed by the shopper. These profiles must be setup in the Searchspring Management Console (SMC) and have associated Snap templates selected.
 
 
 ## Recommendation Context Variables
-Context variables may be applied to individual recommendation profiles similar to how they are done on the integration script tag. Variables here may be required depending on the profile type utilized, and can be used to alter the results displayed by our recommendations.
+Context variables are applied to individual recommendation profiles similar to how they are done on the integration script tag. Variables here may be required depending on the profile placement, and can be used to alter the results displayed by our recommendations.
 
 ### Globals Variables
-| Option | Value | Page | Description |
-|---|---|:---:|---|
-| products | array of SKU strings | product detail page | SKU value(s) to identify the current product(s) being viewed |
-| cart | array (or function that returns an array) of current cart skus | all | optional method of setting cart contents |
-| shopper.id | logged in user unique identifier | all | required for personalization functionallity if not provided to the bundle (global) context |
+| Option | Value | Placement | Description | Required
+|---|---|:---:|---|:---:|
+| products | array of SKU strings | product detail page | SKU value(s) to identify the current product(s) being viewed | ✔️ |
+| cart | array (or function that returns an array) of current cart skus | all | optional method of setting cart contents |   |
+| shopper.id | logged in user unique identifier | all | required for personalization functionallity if not provided to the bundle (global) context |   |
 
 
 ### Profile Specific Variables
-| Option | Value | Page | Description |
-|---|---|:---:|---|
-| profile | string | all | profile name to use |
-| target | string | all | CSS selector to render component inside |
-| options.siteId | global siteId overwrite | all | optional global siteId overwrite |
-| options.categories | array of category path strings | all | optional category identifiers used in category trending recommendation profiles |
-| options.brands | array of brand strings | all | optional brand identifiers used in brand trending recommendation profiles |
-| options.branch | template branch overwrite | all | optional branch overwrite for recommendations template (advanced usage) |
-| options.dedupe | boolean (default: `true`) | all | dedupe products across all profiles in the batch |
-| options.searchTerm | string | all | query to search |
-| options.filters | array of filters | all | optional recommendation filters |
-| options.realtime | boolean | all | optional update recommendations if cart contents change (requires [cart attribute tracking](https://github.com/searchspring/snap/blob/main/docs/INTEGRATION_TRACKING.md)) |
-| options.blockedItems | array of strings | all | SKU values to identify which products to exclude from the response |
-| options.order | number | all | optional order number for recommendation params to be added to the batched request. Profiles that do not specify an order will be placed at the end, in the occurrence they appear in the DOM.
-| options.limit | number (default: 20, max: 20) | all | optional maximum number of results to display, can also be set globally [via config globals](https://github.com/searchspring/snap/tree/main/packages/snap-controller/src/Recommendation) |
+| Option | Value | Placement | Description | Required
+|---|---|:---:|---|:---:|
+| profile | string | all | profile name to use | ✔️ |
+| target | string | all | CSS selector to render component inside | ✔️ |
+| options.siteId | global siteId overwrite | all | optional global siteId overwrite |   |
+| options.categories | array of category path strings | all | optional category identifiers used in category trending recommendation profiles |   |
+| options.brands | array of brand strings | all | optional brand identifiers used in brand trending recommendation profiles |   |
+| options.branch | template branch overwrite | all | optional branch overwrite for recommendations template (advanced usage) |   |
+| options.dedupe | boolean (default: `true`) | all | dedupe products across all profiles in the batch |   |
+| options.searchTerm | string | all | query to search |   |
+| options.filters | array of filters | all | optional recommendation filters |   |
+| options.realtime | boolean | all | optional update recommendations if cart contents change (requires [cart attribute tracking](https://github.com/searchspring/snap/blob/main/docs/INTEGRATION_TRACKING.md)) |   |
+| options.blockedItems | array of strings | all | SKU values to identify which products to exclude from the response |   |
+| options.limit | number (default: 20, max: 20) | all | optional maximum number of results to display, can also be set globally [via config globals](https://github.com/searchspring/snap/tree/main/packages/snap-controller/src/Recommendation) |   |
 
 
 ## Batching and Ordering
-By default, each script tag will fetch the recommendations for each profile it finds a target for in a single batched request. The priority order is based on the order listed in the profiles array. 
-In most cases batching everything is the best practice, however for profiles like a mini cart (side cart) de-duplication may not be desired. De-duplication can be turned off per profile with a `dedupe: false` value, or you can add an additional script to fetch the recommendations in a seperate batch. 
+Each "searchspring/recommendations" script block groups multiple recommendation profiles into a single API request, known as a batch. By default, the script tag fetches recommendations for all profiles with a matching target in one batched request. The order of profiles in the array determines their priority within the batch.
 
-The example below shows how to manually specify the order and batching of specific profiles.
+While batching all profiles together is generally the most efficient approach, there may be cases where separate batching is preferred. For instance, recommendations for a mini cart (side cart) might not require de-duplication with other recommendations. You can disable de-duplication for a specific profile by setting `dedupe: false` in its options, or create a separate batch by using an additional script tag.
+
+## Deduping
+
+Deduping is a process that prevents the same product from appearing in multiple recommendation profiles within a single batch. This is particularly useful when you have several recommendation profiles on a page and want to ensure a diverse range of products is shown to the user.
+
+Here's how deduping works:
+
+1. By default, deduping is enabled for all profiles in a batch (`options.dedupe: true`).
+2. The order of profiles in the array determines their priority for deduping.
+3. When a product is returned for a higher-priority profile, it becomes unavailable for lower-priority profiles in the same batch.
+
+For example, if you have three profiles in this order: "Customers Also Bought", "Similar Products", and "You May Also Like", and a product is returned for "Customers Also Bought", it won't appear in "Similar Products" or "You May Also Like".
+
+You can disable deduping for specific profiles by setting `options.dedupe: false`. This is useful for profiles where you want to ensure certain products always appear, regardless of their presence in other recommendations.
+
+Here's an example that demonstrates deduping:
 
 ```html
 <script type="searchspring/recommendations">
@@ -65,38 +83,21 @@ The example below shows how to manually specify the order and batching of specif
 	profiles = [
 		{
 			profile: 'customers-also-bought',
-			target: '.crosssell',
+			target: '.ss__recs__crosssell',
 			options: {
 				limit: 5
 			}
 		},
 		{
 			profile: 'customers-also-viewed',
-			target: '.similar'
+			target: '.ss__recs__similar'
 		},
-		//same batch, but dedupe false
+		// same batch, but dedupe false
 		{
-			profile: 'bundle',
-			target: '.similar',
+			profile: 'customers-also-like',
+			target: '.ss__recs__alsoliked',
 			options: {
 				dedupe: false
-			}
-		}
-	];
-	
-</script>
-
-<!-- seperate batch -->
-<script type="searchspring/recommendations">
-	globals = {
-		products: ['product123']
-	};
-	profiles = [
-		{
-			profile: 'quick-cart',
-			target: '.crosssell',
-			options: {
-				limit: 5
 			}
 		}
 	];
@@ -107,7 +108,7 @@ The example below shows how to manually specify the order and batching of specif
 
 The examples below assume that the `similar` profile has been setup in the Searchspring Management Console (SMC), and that a Snap `bundle.js` script exists on the page and has been configured with a `RecommendationInstantiator`.
 
-A typical "similar" profile that would display products similar to the product passed in via the `product` context variable.
+A typical "similar" profile that would display products similar to the product passed in via the `products` global context variable.
 
 ```html
 <script type="searchspring/recommendations">
@@ -117,7 +118,7 @@ A typical "similar" profile that would display products similar to the product p
 	profiles = [
 		{
 			profile: 'customers-also-viewed',
-			target: '.similar'
+			target: '.ss__recs__similar'
 		}
 	];
 </script>
@@ -133,7 +134,7 @@ If tracking scripts are not in place, "crosssell" profiles may require the cart 
 	profiles = [
 		{
 			profile: 'customers-also-bought',
-			target: '.crosssell'
+			target: '.ss__recs__crosssell'
 		}
 	];
 </script>
@@ -151,21 +152,21 @@ If the shopper identifier is not beeing captured by the `bundle.js` context, it 
 	profiles = [
 		{
 			profile: 'view-cart',
-			target: '.cart'
+			target: '.ss__recs__cart'
 		}
 	];
 </script>
 ```
 
 ### Filters
-The example shown below will filter the recommendations for products matching color: blue, & red, and price range 0 - 20.
+The example shown below will filter the recommendations for products matching field `color` with a value `blue` and `red`, as well as a field `price` with a range from `0` to `20`.
 
 ```html
 <script type="searchspring/recommendations">
 	profiles = [
 		{
 			profile: 'customers-also-bought',
-			target: '.crosssell',
+			target: '.ss__recs__crosssell',
 			options: {
 				filters: [
 					{

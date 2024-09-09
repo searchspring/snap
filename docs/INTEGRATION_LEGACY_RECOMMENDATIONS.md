@@ -1,6 +1,6 @@
 ## Recommendations Integration (Legacy)
 
-For integrations using Snap `v0.60.0` and newer, please reference the updated [`integration docs`](https://searchspring.github.io/snap/#/integration-recommendations).
+For integrations using Snap `v0.60.0` and newer, please reference the updated [`integration docs`](https://github.com/searchspring/snap/blob/main/docs/INTEGRATION_RECOMMENDATIONS.md).
 
 
 It is recommended to utilize the [`RecommendationInstantiator`](https://github.com/searchspring/snap/blob/main/packages/snap-preact/src/Instantiators/README.md) for integration of product recommendations. This method allows recommendations to be placed anywhere on the site with a single script block (requires the `bundle.js` script also).

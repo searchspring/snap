@@ -141,7 +141,7 @@ export type RecommendationStoreConfig = StoreConfig & {
 	realtime?: boolean;
 	batched?: boolean;
 	order?: number;
-	groupId?: number;
+	batchId?: number;
 	settings?: {
 		variants?: VariantConfig;
 	};

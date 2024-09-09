@@ -57,14 +57,14 @@ describe('Recommend Api', () => {
 
 		const params = {
 			method: 'POST',
-			body: '{"siteId":"88uyt2m","profiles":[{"tag":"dress"}]}',
+			body: '{"siteId":"8uyt2m","profiles":[{"tag":"dress"}]}',
 			headers: {
 				'Content-Type': 'text/plain',
 			},
 		};
 
 		const requestParameters: PostRecommendAPISpec = {
-			siteId: '88uyt2m',
+			siteId: '8uyt2m',
 			profiles: [
 				{
 					tag: 'dress',
@@ -72,7 +72,7 @@ describe('Recommend Api', () => {
 			],
 		};
 
-		const requestUrl = 'https://88uyt2m.a.searchspring.io/boost/88uyt2m/recommend';
+		const requestUrl = 'https://8uyt2m.a.searchspring.io/boost/8uyt2m/recommend';
 
 		const requestMock = jest
 			.spyOn(global.window, 'fetch')
@@ -151,7 +151,7 @@ describe('Recommend Api', () => {
 			batched: true,
 			...batchParams,
 		});
-		// @ts-ignore
+
 		api.batchRecommendations({
 			tag: 'crossSell',
 			limits: 10,
@@ -323,7 +323,6 @@ describe('Recommend Api', () => {
 			.spyOn(global.window, 'fetch')
 			.mockImplementation(() => Promise.resolve({ status: 200, json: () => Promise.resolve(response) } as Response));
 
-		// @ts-ignore
 		const promise1 = api.batchRecommendations({
 			tag: 'similar',
 			categories: ['shirts'],
@@ -333,7 +332,6 @@ describe('Recommend Api', () => {
 			...batchParams,
 		});
 
-		// @ts-ignore
 		const promise2 = api.batchRecommendations({
 			tag: 'crosssell',
 			categories: ['dress'],
@@ -433,7 +431,6 @@ describe('Recommend Api', () => {
 			.spyOn(global.window, 'fetch')
 			.mockImplementation(() => Promise.resolve({ status: 200, json: () => Promise.resolve(mockData.recommend()) } as Response));
 
-		// @ts-ignore
 		api.batchRecommendations({ tag: 'crossSell', products: ['some_sku', 'some_sku2'], ...batchParams });
 
 		//add delay for paramBatch.timeout
@@ -458,7 +455,6 @@ describe('Recommend Api', () => {
 			.spyOn(global.window, 'fetch')
 			.mockImplementation(() => Promise.resolve({ status: 200, json: () => Promise.resolve(mockData.recommend()) } as Response));
 
-		// @ts-ignore
 		api.batchRecommendations({ tag: 'crossSell', blockedItems: ['blocked_sku1', 'blocked_sku2'], ...batchParams });
 
 		//add delay for paramBatch.timeout
@@ -527,7 +523,6 @@ describe('Recommend Api', () => {
 			.mockImplementation(() => Promise.resolve({ status: 200, json: () => Promise.resolve({}) } as Response));
 
 		for (let i = 0; i < 100; i++) {
-			// @ts-ignore
 			api.batchRecommendations({
 				tag: i.toString(),
 				...batchParams,

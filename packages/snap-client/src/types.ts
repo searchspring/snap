@@ -119,9 +119,9 @@ export type RecommendRequestModel = {
 	order?: number;
 	filters?: RecommendationRequestFilterModel[];
 	blockedItems?: string[];
-	groupId?: number;
+	batchId?: number;
 	profileFilters?: RecommendationRequestFilterModel[];
-	searchTerm?: string;
+	query?: string;
 	dedupe?: boolean;
 	branch?: string;
 };
@@ -147,7 +147,7 @@ export type RecommendPostProfileObject = {
 	brands?: string[];
 	limit?: number;
 	dedupe?: boolean;
-	searchTerm?: string;
+	query?: string;
 	filters?: RecommendationRequestFilterModel[];
 };
 
