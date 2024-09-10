@@ -1,12 +1,6 @@
 import { MockData } from '@searchspring/snap-shared';
 import { CartStore } from './CartStore';
-import { UrlManager, UrlTranslator } from '@searchspring/snap-url-manager';
 import { Product, SearchResultStore } from '../Search/Stores/SearchResultStore';
-import { waitFor } from '@testing-library/preact';
-
-const services = {
-	urlManager: new UrlManager(new UrlTranslator()),
-};
 
 const _mockData = new MockData();
 
@@ -21,7 +15,9 @@ const results = new SearchResultStore({
 		loaded: true,
 	},
 	data: {
-		search: mockData,
+		search: {
+			results: mockData.recommend.results,
+		},
 		meta: _mockData.meta(),
 	},
 });

@@ -122,7 +122,7 @@ export class RecommendAPI extends API {
 					batch.request.test = true;
 				}
 
-				let response: RecommendResponseModel;
+				let response: RecommendResponseModel[];
 				if (charsParams(batch.request) > 1024) {
 					if (batch.request['product']) {
 						batch.request['product'] = batch.request['product'].toString();
@@ -152,7 +152,7 @@ export class RecommendAPI extends API {
 				}
 
 				batch.entries?.forEach((entry, index) => {
-					entry.deferred.resolve([response[index]]);
+					entry.deferred.resolve(response[index]);
 				});
 			} catch (err) {
 				batch.entries?.forEach((entry) => {
@@ -164,7 +164,7 @@ export class RecommendAPI extends API {
 		return deferred.promise;
 	}
 
-	async getRecommendations(queryParameters: GetRecommendRequestModel): Promise<RecommendResponseModel> {
+	async getRecommendations(queryParameters: GetRecommendRequestModel): Promise<RecommendResponseModel[]> {
 		const headerParameters: HTTPHeaders = {};
 
 		const siteId = queryParameters.siteId;
@@ -179,11 +179,10 @@ export class RecommendAPI extends API {
 			},
 			path + JSON.stringify(queryParameters)
 		);
-
-		return response as unknown as RecommendResponseModel;
+		return response as unknown as RecommendResponseModel[];
 	}
 
-	async postRecommendations(requestParameters: PostRecommendRequestModel): Promise<RecommendResponseModel> {
+	async postRecommendations(requestParameters: PostRecommendRequestModel): Promise<RecommendResponseModel[]> {
 		const headerParameters: HTTPHeaders = {};
 		headerParameters['Content-Type'] = 'application/json';
 
@@ -200,7 +199,7 @@ export class RecommendAPI extends API {
 			path + JSON.stringify(requestParameters)
 		);
 
-		return response as unknown as RecommendResponseModel;
+		return response as unknown as RecommendResponseModel[];
 	}
 }
 

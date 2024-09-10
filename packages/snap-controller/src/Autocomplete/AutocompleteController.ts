@@ -88,7 +88,7 @@ export class AutocompleteController extends AbstractController {
 			await next();
 
 			// cancel search if no input or query doesn't match current urlState
-			if (ac.response.autocomplete.query != ac.controller.urlManager.state.query) {
+			if (ac.response.search.autocomplete.query != ac.controller.urlManager.state.query) {
 				ac.controller.store.loading = false;
 				return false;
 			}
@@ -507,11 +507,11 @@ export class AutocompleteController extends AbstractController {
 	}
 
 	searchTrending = async (): Promise<void> => {
-		let terms;
+		let trending;
 		const storedTerms = this.storage.get('terms');
 		if (storedTerms) {
 			// terms exist in storage, update store
-			terms = JSON.parse(storedTerms);
+			trending = JSON.parse(storedTerms);
 		} else {
 			// query for trending terms, save to storage, update store
 			const trendingParams = {
@@ -520,16 +520,17 @@ export class AutocompleteController extends AbstractController {
 
 			const trendingProfile = this.profiler.create({ type: 'event', name: 'trending', context: trendingParams }).start();
 
-			terms = await this.client.trending(trendingParams);
+			const response = await this.client.trending(trendingParams);
+			trending = response.trending;
 
 			trendingProfile.stop();
 			this.log.profile(trendingProfile);
-			if (terms?.trending?.queries?.length) {
-				this.storage.set('terms', JSON.stringify(terms));
+			if (trending?.trending?.queries?.length) {
+				this.storage.set('terms', JSON.stringify(trending));
 			}
 		}
 
-		this.store.updateTrendingTerms(terms);
+		this.store.updateTrendingTerms(trending);
 	};
 
 	search = async (): Promise<void> => {
@@ -563,12 +564,7 @@ export class AutocompleteController extends AbstractController {
 
 			const searchProfile = this.profiler.create({ type: 'event', name: 'search', context: params }).start();
 
-			const [meta, response] = await this.client.autocomplete(params);
-			// @ts-ignore : MockClient will overwrite the client search() method and use SearchData to return mock data which already contains meta data
-			if (!response.meta) {
-				// @ts-ignore : MockClient will overwrite the client search() method and use SearchData to return mock data which already contains meta data
-				response.meta = meta;
-			}
+			const { meta, search } = await this.client.autocomplete(params);
 
 			searchProfile.stop();
 			this.log.profile(searchProfile);
@@ -579,7 +575,10 @@ export class AutocompleteController extends AbstractController {
 				await this.eventManager.fire('afterSearch', {
 					controller: this,
 					request: params,
-					response,
+					response: {
+						meta,
+						search,
+					},
 				});
 			} catch (err: any) {
 				if (err?.message == 'cancelled') {
@@ -596,7 +595,7 @@ export class AutocompleteController extends AbstractController {
 			this.log.profile(afterSearchProfile);
 
 			// update the store
-			this.store.update(response);
+			this.store.update({ meta, search });
 
 			const afterStoreProfile = this.profiler.create({ type: 'event', name: 'afterStore', context: params }).start();
 
@@ -604,7 +603,10 @@ export class AutocompleteController extends AbstractController {
 				await this.eventManager.fire('afterStore', {
 					controller: this,
 					request: params,
-					response,
+					response: {
+						meta,
+						search,
+					},
 				});
 			} catch (err: any) {
 				if (err?.message == 'cancelled') {

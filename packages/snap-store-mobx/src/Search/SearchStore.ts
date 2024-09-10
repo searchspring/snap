@@ -45,7 +45,7 @@ export class SearchStore extends AbstractStore<SearchStoreConfig> {
 			config: this.config,
 		});
 
-		this.update();
+		this.update({ search: {}, meta: {} });
 
 		makeObservable(this, {
 			search: observable,
@@ -59,26 +59,27 @@ export class SearchStore extends AbstractStore<SearchStoreConfig> {
 	}
 
 	public reset(): void {
-		this.update();
+		this.update({ search: {}, meta: {} });
 	}
 
-	public update(data: SearchResponseModel & { meta?: MetaResponseModel } = {}): void {
+	public update(data: { search: SearchResponseModel; meta: MetaResponseModel }): void {
+		const { search, meta } = data || {};
 		this.error = undefined;
 		this.meta = new MetaStore({
 			data: {
-				meta: data.meta!,
+				meta,
 			},
 		});
 		this.merchandising = new SearchMerchandisingStore({
 			data: {
-				search: data,
+				search,
 			},
 		});
 
 		this.search = new SearchQueryStore({
 			services: this.services,
 			data: {
-				search: data,
+				search,
 			},
 		});
 
@@ -89,7 +90,7 @@ export class SearchStore extends AbstractStore<SearchStoreConfig> {
 				storage: this.storage,
 			},
 			data: {
-				search: data,
+				search,
 				meta: this.meta.data,
 			},
 		});
@@ -97,7 +98,7 @@ export class SearchStore extends AbstractStore<SearchStoreConfig> {
 		this.filters = new SearchFilterStore({
 			services: this.services,
 			data: {
-				search: data,
+				search,
 				meta: this.meta.data,
 			},
 		});
@@ -108,7 +109,7 @@ export class SearchStore extends AbstractStore<SearchStoreConfig> {
 				loaded: this.loaded,
 			},
 			data: {
-				search: data,
+				search,
 				meta: this.meta.data,
 			},
 		});
@@ -117,7 +118,7 @@ export class SearchStore extends AbstractStore<SearchStoreConfig> {
 			config: this.config,
 			services: this.services,
 			data: {
-				search: data,
+				search,
 				meta: this.meta.data,
 			},
 		});
@@ -125,11 +126,11 @@ export class SearchStore extends AbstractStore<SearchStoreConfig> {
 		this.sorting = new SearchSortingStore({
 			services: this.services,
 			data: {
-				search: data,
+				search,
 				meta: this.meta.data,
 			},
 		});
 
-		this.loaded = !!data.pagination;
+		this.loaded = Boolean(search?.pagination);
 	}
 }

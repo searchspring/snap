@@ -4,7 +4,7 @@ import { Product, SearchResultStore } from '../Search/Stores';
 import { CartStore } from '../Cart/CartStore';
 import { RecommendationProfileStore } from './Stores';
 import type { RecommendationStoreConfig, StoreServices } from '../types';
-import type { RecommendCombinedResponseModel } from '@searchspring/snap-client';
+import type { ProfileResponseModel, RecommendResponseModel } from '@searchspring/snap-client';
 import { MetaResponseModel } from '@searchspring/snapi-types';
 import { MetaStore } from '../Meta/MetaStore';
 
@@ -12,7 +12,7 @@ export class RecommendationStore extends AbstractStore<RecommendationStoreConfig
 	public services: StoreServices;
 	public meta!: MetaStore;
 	public loaded = false;
-	public profile!: RecommendationProfileStore;
+	public profile!: RecommendationProfileStore | Record<string, any>;
 	public results!: Product[];
 	public cart!: CartStore;
 
@@ -34,19 +34,24 @@ export class RecommendationStore extends AbstractStore<RecommendationStoreConfig
 	}
 
 	public reset(): void {
-		this.update();
+		this.error = undefined;
+		this.loaded = false;
+		this.profile = {};
+		this.results = [];
 	}
 
-	public update(data?: RecommendCombinedResponseModel & { meta?: MetaResponseModel }): void {
+	public update(data: { meta: MetaResponseModel; profile: ProfileResponseModel; recommend: RecommendResponseModel }): void {
+		const { meta, profile, recommend } = data || {};
+
 		this.error = undefined;
 		this.meta = new MetaStore({
 			data: {
-				meta: data?.meta!,
+				meta,
 			},
 		});
 		this.profile = new RecommendationProfileStore({
 			data: {
-				recommend: data!,
+				profile,
 			},
 		});
 		this.results = new SearchResultStore({
@@ -56,7 +61,7 @@ export class RecommendationStore extends AbstractStore<RecommendationStoreConfig
 			},
 			data: {
 				search: {
-					results: data?.results,
+					results: recommend.results,
 				},
 				meta: this.meta.data,
 			},
@@ -67,6 +72,6 @@ export class RecommendationStore extends AbstractStore<RecommendationStoreConfig
 			this.cart = new CartStore();
 		}
 
-		this.loaded = !!data?.profile;
+		this.loaded = !!profile;
 	}
 }

@@ -389,8 +389,8 @@ describe('Recommend Api', () => {
 
 		const [response1, response2] = await Promise.all([promise1, promise2]);
 
-		expect(response1[0].results.length).toBe(response[1].results.length);
-		expect(response2[0].results.length).toBe(response[0].results.length);
+		expect(response1.results.length).toBe(response[1].results.length);
+		expect(response2.results.length).toBe(response[0].results.length);
 
 		requestMock.mockReset();
 	});

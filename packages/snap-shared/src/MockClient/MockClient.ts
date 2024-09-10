@@ -36,7 +36,8 @@ export class MockClient extends Client {
 
 		if (this.mockConfig.delay) await wait(this.mockConfig.delay);
 
-		return Promise.all([this.meta() as MetaResponseModel, searchData as SearchResponseModel]);
+		const [meta, search] = await Promise.all([this.meta() as MetaResponseModel, searchData as SearchResponseModel]);
+		return { meta, search };
 	}
 
 	async finder() {
@@ -44,7 +45,8 @@ export class MockClient extends Client {
 
 		if (this.mockConfig.delay) await wait(this.mockConfig.delay);
 
-		return Promise.all([this.meta() as MetaResponseModel, searchData as SearchResponseModel]);
+		const [meta, search] = await Promise.all([this.meta() as MetaResponseModel, searchData as SearchResponseModel]);
+		return { meta, search };
 	}
 
 	async autocomplete() {
@@ -52,7 +54,8 @@ export class MockClient extends Client {
 
 		if (this.mockConfig.delay) await wait(this.mockConfig.delay);
 
-		return Promise.all([this.meta() as MetaResponseModel, autocompleteData as AutocompleteResponseModel]);
+		const [meta, search] = await Promise.all([this.meta() as MetaResponseModel, autocompleteData as AutocompleteResponseModel]);
+		return { meta, search };
 	}
 
 	async recommend() {
@@ -61,10 +64,11 @@ export class MockClient extends Client {
 		return this.mockData.recommend();
 	}
 
-	async trending(): Promise<TrendingResponseModel> {
+	async trending(): Promise<{ trending: TrendingResponseModel }> {
 		if (this.mockConfig.delay) await wait(this.mockConfig.delay);
 
-		return this.mockData.trending();
+		const trending = this.mockData.trending();
+		return { trending };
 	}
 }
 

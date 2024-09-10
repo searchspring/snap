@@ -123,8 +123,8 @@ export class MockData {
 			const resultsFile = `${__dirname}/recommend/results/${this.config.siteId}/${files?.resultsFile || this.config.recommend?.results}.json`;
 			return {
 				meta: this.meta(),
-				profile: getJSON(profileFile).profile,
-				results: getJSON(resultsFile)[0].results,
+				profile: getJSON(profileFile),
+				recommend: getJSON(resultsFile)[0],
 			};
 		} catch (err) {
 			throw 'Search JSON not found.';

@@ -47,11 +47,18 @@ const baseNonHierarchyConfig = {
 const configs = [baseHierarchyConfig, baseNonHierarchyConfig];
 
 describe('Finder Store', () => {
-	let config: FinderStoreConfig, searchData: SearchResponseModel & { meta: MetaResponseModel };
+	let config: FinderStoreConfig;
+	let searchData: {
+		meta: MetaResponseModel;
+		search: SearchResponseModel;
+	};
 
 	beforeEach(() => {
 		config = Object.assign({}, baseHierarchyConfig);
-		searchData = mockData.searchMeta();
+		searchData = {
+			search: mockData.search(),
+			meta: mockData.meta(),
+		};
 	});
 
 	it('throws if invalid services object', () => {
@@ -94,19 +101,33 @@ describe('Finder Store', () => {
 		expect(finderStore.meta).toBeDefined();
 		expect(finderStore.meta.data).toStrictEqual(searchData.meta);
 
-		expect(finderStore.pagination?.totalResults).toBe(searchData.pagination?.totalResults);
+		expect(finderStore.pagination?.totalResults).toBe(searchData.search.pagination?.totalResults);
 
 		expect(finderStore.selections).toHaveLength(config.fields.reduce((count, field) => (count += field.levels?.length!), 0));
 	});
 
 	configs.forEach((baseConfig) => {
 		const isHierarchy = 'levels' in baseConfig.fields[0];
-		let config: FinderStoreConfig, searchData: SearchResponseModel & { meta: MetaResponseModel };
+		let config: FinderStoreConfig;
+		let searchData: {
+			search: SearchResponseModel;
+			meta: MetaResponseModel;
+		};
 
 		describe(`Finder Store with ${isHierarchy ? 'Hierarchy' : 'Non-Hierarchy'} Selections`, () => {
 			beforeEach(() => {
 				config = Object.assign({}, baseConfig);
-				searchData = isHierarchy ? mockData.searchMeta() : mockData.searchMeta('non_hierarchy');
+				if (isHierarchy) {
+					searchData = {
+						search: mockData.search(),
+						meta: mockData.meta(),
+					};
+				} else {
+					searchData = {
+						search: mockData.search('non_hierarchy'),
+						meta: mockData.meta(),
+					};
+				}
 			});
 
 			it('can persist selections', () => {

@@ -82,7 +82,7 @@ export class AutocompleteStore extends AbstractStore<AutocompleteStoreConfig> {
 
 	public reset(): void {
 		this.state.reset();
-		this.update();
+		this.update({ meta: {}, search: {} });
 		this.resetTerms();
 	}
 
@@ -142,7 +142,7 @@ export class AutocompleteStore extends AbstractStore<AutocompleteStoreConfig> {
 		}
 	}
 
-	public updateTrendingTerms(data: TrendingResponseModel): void {
+	public updateTrendingTerms(trending: TrendingResponseModel): void {
 		this.trending = new AutocompleteTrendingStore({
 			services: this.services,
 			functions: {
@@ -154,23 +154,22 @@ export class AutocompleteStore extends AbstractStore<AutocompleteStoreConfig> {
 				autocomplete: this.state,
 			},
 			data: {
-				trending: data,
+				trending,
 			},
 		});
 	}
 
-	public update(data: AutocompleteResponseModel & { meta?: MetaResponseModel } = {}): void {
+	public update(data: { meta: MetaResponseModel; search: AutocompleteResponseModel }): void {
 		if (!data) return;
+		const { meta, search } = data || {};
 		this.error = undefined;
 		this.meta = new MetaStore({
-			data: {
-				meta: data.meta!,
-			},
+			data: { meta },
 		});
 
 		// set the query to match the actual queried term and not the input query
-		if (data.search) {
-			this.state.url = this.services.urlManager = this.services.urlManager.set('query', data.search.query);
+		if (search.search) {
+			this.state.url = this.services.urlManager = this.services.urlManager.set('query', search.search.query);
 		}
 
 		// only run if we want to update the terms (not locked)
@@ -187,17 +186,17 @@ export class AutocompleteStore extends AbstractStore<AutocompleteStoreConfig> {
 					autocomplete: this.state,
 				},
 				data: {
-					autocomplete: data,
+					autocomplete: search,
 				},
 			});
 
 			// only lock if there was data
-			data.autocomplete && this.state.locks.terms.lock();
+			search.autocomplete && this.state.locks.terms.lock();
 		}
 
 		this.merchandising = new SearchMerchandisingStore({
 			data: {
-				search: data,
+				search,
 			},
 		});
 
@@ -205,7 +204,7 @@ export class AutocompleteStore extends AbstractStore<AutocompleteStoreConfig> {
 			config: this.config,
 			services: this.services,
 			data: {
-				autocomplete: data,
+				autocomplete: search,
 			},
 		});
 
@@ -221,7 +220,7 @@ export class AutocompleteStore extends AbstractStore<AutocompleteStoreConfig> {
 					autocomplete: this.state,
 				},
 				data: {
-					search: data,
+					search,
 					meta: this.meta.data,
 				},
 			});
@@ -230,7 +229,7 @@ export class AutocompleteStore extends AbstractStore<AutocompleteStoreConfig> {
 		this.filters = new SearchFilterStore({
 			services: this.services,
 			data: {
-				search: data,
+				search,
 				meta: this.meta.data,
 			},
 		});
@@ -241,7 +240,7 @@ export class AutocompleteStore extends AbstractStore<AutocompleteStoreConfig> {
 				loaded: this.loaded,
 			},
 			data: {
-				search: data,
+				search,
 				meta: this.meta.data,
 			},
 		});
@@ -255,7 +254,7 @@ export class AutocompleteStore extends AbstractStore<AutocompleteStoreConfig> {
 		this.pagination = new SearchPaginationStore({
 			services: this.services,
 			data: {
-				search: data,
+				search,
 				meta: this.meta.data,
 			},
 		});
@@ -263,11 +262,11 @@ export class AutocompleteStore extends AbstractStore<AutocompleteStoreConfig> {
 		this.sorting = new SearchSortingStore({
 			services: this.services,
 			data: {
-				search: data,
+				search,
 				meta: this.meta.data,
 			},
 		});
 
-		this.loaded = !!data.pagination;
+		this.loaded = Boolean(search?.pagination);
 	}
 }

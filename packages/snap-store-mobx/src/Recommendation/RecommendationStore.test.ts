@@ -17,7 +17,7 @@ describe('RecommendationStore store', () => {
 		};
 		const store = new RecommendationStore(recommendationConfig, services);
 		expect(store.loaded).toBe(false);
-		expect(store.profile).toEqual({ display: {}, type: 'default' });
+		expect(store.profile).toStrictEqual({});
 		expect(store.results).toStrictEqual([]);
 	});
 
@@ -34,14 +34,14 @@ describe('RecommendationStore store', () => {
 
 		expect(store.loaded).toBe(true);
 
-		expect(store.profile?.tag).toBe(data.profile.tag);
-		expect(store.profile?.placement).toBe(data.profile.placement);
-		expect(store.profile?.display).toStrictEqual(data.profile.display);
+		expect(store.profile?.tag).toBe(data.profile.profile.tag);
+		expect(store.profile?.placement).toBe(data.profile.profile.placement);
+		expect(store.profile?.display).toStrictEqual(data.profile.profile.display);
 
-		expect(store.results).toHaveLength(data.results.length);
+		expect(store.results).toHaveLength(data.recommend.results.length);
 		expect(store.results && store.results[0].type).toBe('product');
-		expect(store.results && store.results[0].id).toStrictEqual(data.results[0].id);
-		expect(store.results && store.results[0].mappings).toStrictEqual(data.results[0].mappings);
-		expect(store.results && store.results[0].attributes).toStrictEqual(data.results[0].attributes);
+		expect(store.results && store.results[0].id).toStrictEqual(data.recommend.results[0].id);
+		expect(store.results && store.results[0].mappings).toStrictEqual(data.recommend.results[0].mappings);
+		expect(store.results && store.results[0].attributes).toStrictEqual(data.recommend.results[0].attributes);
 	});
 });

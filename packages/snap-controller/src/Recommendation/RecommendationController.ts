@@ -448,7 +448,7 @@ export class RecommendationController extends AbstractController {
 
 			const searchProfile = this.profiler.create({ type: 'event', name: 'search', context: params }).start();
 
-			const response = await this.client.recommend(params);
+			const { meta, profile, recommend } = await this.client.recommend(params);
 			searchProfile.stop();
 			this.log.profile(searchProfile);
 
@@ -458,7 +458,7 @@ export class RecommendationController extends AbstractController {
 				await this.eventManager.fire('afterSearch', {
 					controller: this,
 					request: params,
-					response,
+					response: { meta, profile, recommend },
 				});
 			} catch (err: any) {
 				if (err?.message == 'cancelled') {
@@ -475,7 +475,7 @@ export class RecommendationController extends AbstractController {
 			this.log.profile(afterSearchProfile);
 
 			// update the store
-			this.store.update(response);
+			this.store.update({ meta, profile, recommend });
 
 			const afterStoreProfile = this.profiler.create({ type: 'event', name: 'afterStore', context: params }).start();
 
@@ -483,7 +483,7 @@ export class RecommendationController extends AbstractController {
 				await this.eventManager.fire('afterStore', {
 					controller: this,
 					request: params,
-					response,
+					response: { meta, profile, recommend },
 				});
 			} catch (err: any) {
 				if (err?.message == 'cancelled') {
