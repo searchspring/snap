@@ -1,4 +1,4 @@
-import { ThemeComponents } from './themeComponents';
+import { ThemeComponentOverrides } from './themeComponents';
 import { ListOption } from '../types';
 import type { DeepPartial } from '../../../src/types';
 
@@ -56,11 +56,11 @@ export type Theme = {
 	name?: string; // Used as a flag in components to provide backwards compatability
 	variables?: ThemeVariables;
 	responsive?: [ThemeResponsive, ThemeResponsive, ThemeResponsive, ThemeResponsive];
-	components?: ThemeComponents;
+	components?: ThemeComponentOverrides;
 	layoutOptions?: ListOption[];
 };
 
-type ThemeResponsive = Pick<Theme, 'components' | 'layoutOptions'>;
+export type ThemeResponsive = Pick<Theme, 'components' | 'layoutOptions'>;
 export type ThemePartial = Omit<Theme, 'variables' | 'name'> & { variables?: ThemeVariablesPartial };
 export type ThemeOverrides = Pick<Theme, 'components' | 'layoutOptions' | 'responsive'>;
 export type ThemeMinimal = Pick<Theme, 'components'>;

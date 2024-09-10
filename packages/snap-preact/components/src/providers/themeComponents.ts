@@ -45,19 +45,19 @@ import type { SwatchesProps } from '../components/Molecules/Swatches';
 import type { VariantSelectionProps } from '../components/Molecules/VariantSelection';
 import type { BranchOverrideProps } from '../components/Organisms/BranchOverride';
 import type { FacetProps } from '../components/Organisms/Facet';
-import type { HorizontalFacetsProps } from '../components/Organisms/HorizontalFacets';
+import type { FacetsHorizontalProps } from '../components/Organisms/FacetsHorizontal';
 import type { FacetsProps } from '../components/Organisms/Facets';
 import type { FilterSummaryProps } from '../components/Organisms/FilterSummary';
-import type { RecommendationBundleProps } from '../components/Organisms/RecommendationBundle';
-import type { RecommendationGridProps } from '../components/Organisms/RecommendationGrid';
 import type { ResultsProps } from '../components/Organisms/Results';
 import type { SearchHeaderProps } from '../components/Atoms/SearchHeader';
 import type { SidebarProps } from '../components/Organisms/Sidebar';
 import type { ToolbarProps, ToolbarNames } from '../components/Organisms/Toolbar';
 import type { AutocompleteProps } from '../components/Templates/Autocomplete';
 import type { RecommendationProps } from '../components/Templates/Recommendation';
+import type { RecommendationBundleProps } from '../components/Templates/RecommendationBundle';
+import type { RecommendationGridProps } from '../components/Templates/RecommendationGrid';
 import type { SearchProps } from '../components/Templates/Search';
-import type { HorizontalSearchProps } from '../components/Templates/HorizontalSearch';
+import type { SearchHorizontalProps } from '../components/Templates/SearchHorizontal';
 import type { NoResultsProps } from '../components/Atoms/NoResults';
 import type { MobileSidebarProps } from '../components/Organisms/MobileSidebar';
 
@@ -72,6 +72,76 @@ type UnNamedThemeComponentSelectors<ComponentType extends string> = ComponentTyp
 type GenericComponentProps<Props> = Partial<Omit<Props, 'breakpoints'>>;
 
 export type ThemeComponents = {
+	/* ATOMS */
+	badgeImage: GenericComponentProps<BadgeImageProps>;
+	badgePill: GenericComponentProps<BadgePillProps>;
+	badgeRectangle: GenericComponentProps<BadgeRectangleProps>;
+	badgeText: GenericComponentProps<BadgeTextProps>;
+	breadcrumbs: GenericComponentProps<BreadcrumbsProps>;
+	button: GenericComponentProps<ButtonProps>;
+	dropdown: GenericComponentProps<DropdownProps>;
+	formattedNumber: GenericComponentProps<FormattedNumberProps>;
+	icon: GenericComponentProps<IconProps>;
+	image: GenericComponentProps<ImageProps>;
+	loadingBar: GenericComponentProps<LoadingBarProps>;
+	banner: GenericComponentProps<BannerProps>;
+	inlineBanner: GenericComponentProps<InlineBannerProps>;
+	overlay: GenericComponentProps<OverlayProps>;
+	price: GenericComponentProps<PriceProps>;
+	skeleton: GenericComponentProps<SkeletonProps>;
+	terms: GenericComponentProps<TermsProps>;
+	toggle: GenericComponentProps<ToggleProps>;
+	/* MOLECULES */
+	calloutBadge: GenericComponentProps<CalloutBadgeProps>;
+	carousel: GenericComponentProps<CarouselProps>;
+	checkbox: GenericComponentProps<CheckboxProps>;
+	grid: GenericComponentProps<GridProps>;
+	layoutSelector: GenericComponentProps<LayoutSelectorProps>;
+	list: GenericComponentProps<ListProps>;
+	radio: GenericComponentProps<RadioProps>;
+	errorHandler: GenericComponentProps<ErrorHandlerProps>;
+	facetGridOptions: GenericComponentProps<FacetGridOptionsProps>;
+	facetHierarchyOptions: GenericComponentProps<FacetHierarchyOptionsProps>;
+	facetListOptions: GenericComponentProps<FacetListOptionsProps>;
+	facetPaletteOptions: GenericComponentProps<FacetPaletteOptionsProps>;
+	facetSlider: GenericComponentProps<FacetSliderProps>;
+	facetToggle: GenericComponentProps<FacetToggleProps>;
+	filter: GenericComponentProps<FilterProps>;
+	loadMore: GenericComponentProps<LoadMoreProps>;
+	overlayBadge: GenericComponentProps<OverlayBadgeProps>;
+	pagination: GenericComponentProps<PaginationProps>;
+	perPage: GenericComponentProps<PerPageProps>;
+	radioList: GenericComponentProps<RadioListProps>;
+	rating: GenericComponentProps<RatingProps>;
+	result: GenericComponentProps<ResultProps>;
+	searchInput: GenericComponentProps<SearchInputProps>;
+	select: GenericComponentProps<SelectProps>;
+	slideout: GenericComponentProps<SlideoutProps>;
+	sortBy: GenericComponentProps<SortByProps>;
+	swatches: GenericComponentProps<SwatchesProps>;
+	variantSelection: GenericComponentProps<VariantSelectionProps>;
+	/* ORGANISMS */
+	branchOverride: GenericComponentProps<BranchOverrideProps>;
+	facet: GenericComponentProps<FacetProps>;
+	facets: GenericComponentProps<FacetsProps>;
+	facetsHorizontal: GenericComponentProps<FacetsHorizontalProps>;
+	filterSummary: GenericComponentProps<FilterSummaryProps>;
+	noResults: GenericComponentProps<NoResultsProps>;
+	results: GenericComponentProps<ResultsProps>;
+	searchHeader: GenericComponentProps<SearchHeaderProps>;
+	sidebar: GenericComponentProps<SidebarProps>;
+	mobileSidebar: GenericComponentProps<MobileSidebarProps>;
+	toolbar: GenericComponentProps<ToolbarProps>;
+	/* TEMPLATES */
+	autocomplete: GenericComponentProps<AutocompleteProps>;
+	recommendation: GenericComponentProps<RecommendationProps>;
+	recommendationBundle: GenericComponentProps<RecommendationBundleProps>;
+	recommendationGrid: GenericComponentProps<RecommendationGridProps>;
+	search: GenericComponentProps<SearchProps>;
+	searchHorizontal: GenericComponentProps<SearchHorizontalProps>;
+};
+
+export type ThemeComponentOverrides = {
 	/* ATOMS */
 	[K in UnNamedThemeComponentSelectors<'badgeImage'>]?: GenericComponentProps<BadgeImageProps>;
 } & { [K in UnNamedThemeComponentSelectors<'badgePill'>]?: GenericComponentProps<BadgePillProps> } & {
@@ -123,19 +193,19 @@ export type ThemeComponents = {
 } /* ORGANISMS */ & { [K in UnNamedThemeComponentSelectors<'branchOverride'>]?: GenericComponentProps<BranchOverrideProps> } & {
 	[K in UnNamedThemeComponentSelectors<'facet'>]?: GenericComponentProps<FacetProps>;
 } & { [K in UnNamedThemeComponentSelectors<'facets'>]?: GenericComponentProps<FacetsProps> } & {
-	[K in UnNamedThemeComponentSelectors<'horizontalFacets'>]?: GenericComponentProps<HorizontalFacetsProps>;
+	[K in UnNamedThemeComponentSelectors<'facetsHorizontal'>]?: GenericComponentProps<FacetsHorizontalProps>;
 } & { [K in UnNamedThemeComponentSelectors<'filterSummary'>]?: GenericComponentProps<FilterSummaryProps> } & {
 	[K in UnNamedThemeComponentSelectors<'noResults'>]?: GenericComponentProps<NoResultsProps>;
-} & { [K in UnNamedThemeComponentSelectors<'recommendationBundle'>]?: GenericComponentProps<RecommendationBundleProps> } & {
+} & {
 	[K in UnNamedThemeComponentSelectors<'results'>]?: GenericComponentProps<ResultsProps>;
 } & { [K in UnNamedThemeComponentSelectors<'searchHeader'>]?: GenericComponentProps<SearchHeaderProps> } & {
 	[K in UnNamedThemeComponentSelectors<'sidebar'>]?: GenericComponentProps<SidebarProps>;
 } & { [K in UnNamedThemeComponentSelectors<'mobileSidebar'>]?: GenericComponentProps<MobileSidebarProps> } & {
 	[K in NamedThemeComponentSelectors<'toolbar', ToolbarNames>]?: GenericComponentProps<ToolbarProps>;
-} & {
-	[K in UnNamedThemeComponentSelectors<'recommendationGrid'>]?: GenericComponentProps<RecommendationGridProps>;
 } /* TEMPLATES */ & { [K in UnNamedThemeComponentSelectors<'autocomplete'>]?: GenericComponentProps<AutocompleteProps> } & {
 	[K in UnNamedThemeComponentSelectors<'recommendation'>]?: GenericComponentProps<RecommendationProps>;
+} & { [K in UnNamedThemeComponentSelectors<'recommendationBundle'>]?: GenericComponentProps<RecommendationBundleProps> } & {
+	[K in UnNamedThemeComponentSelectors<'recommendationGrid'>]?: GenericComponentProps<RecommendationGridProps>;
 } & { [K in UnNamedThemeComponentSelectors<'search'>]?: GenericComponentProps<SearchProps> } & {
-	[K in UnNamedThemeComponentSelectors<'horizontalSearch'>]?: GenericComponentProps<HorizontalSearchProps>;
+	[K in UnNamedThemeComponentSelectors<'searchHorizontal'>]?: GenericComponentProps<SearchHorizontalProps>;
 };

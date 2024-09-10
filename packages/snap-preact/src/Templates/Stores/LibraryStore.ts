@@ -79,9 +79,6 @@ export class LibraryStore {
 
 	import: LibraryImports = {
 		theme: {
-			pike: async () => {
-				return this.themes.pike || (this.themes.pike = (await import('./library/themes/pike')).pike);
-			},
 			bocachica: async () => {
 				return this.themes.bocachica || (this.themes.bocachica = (await import('./library/themes/bocachica')).bocachica);
 			},
@@ -99,10 +96,10 @@ export class LibraryStore {
 				Search: async () => {
 					return this.components.search.Search || (this.components.search.Search = (await import('./library/components/Search')).Search);
 				},
-				HorizontalSearch: async () => {
+				SearchHorizontal: async () => {
 					return (
-						this.components.search.HorizontalSearch ||
-						(this.components.search.HorizontalSearch = (await import('./library/components/HorizontalSearch')).HorizontalSearch)
+						this.components.search.SearchHorizontal ||
+						(this.components.search.SearchHorizontal = (await import('./library/components/SearchHorizontal')).SearchHorizontal)
 					);
 				},
 			},
@@ -122,6 +119,14 @@ export class LibraryStore {
 						return (
 							this.components.recommendation.default.Recommendation ||
 							(this.components.recommendation.default.Recommendation = (await import('./library/components/Recommendation')).Recommendation)
+						);
+					},
+					RecommendationGrid: async () => {
+						return (
+							this.components.recommendation.default.RecommendationGrid ||
+							(this.components.recommendation.default.RecommendationGrid = (
+								await import('./library/components/RecommendationGrid')
+							).RecommendationGrid)
 						);
 					},
 				},
