@@ -130,7 +130,16 @@ export class LibraryStore {
 						);
 					},
 				},
-				email: {},
+				email: {
+					RecommendationEmail: async () => {
+						return (
+							this.components.recommendation.email.RecommendationEmail ||
+							(this.components.recommendation.email.RecommendationEmail = (
+								await import('./library/components/RecommendationEmail')
+							).RecommendationEmail)
+						);
+					},
+				},
 			},
 			badge: {},
 			result: {
