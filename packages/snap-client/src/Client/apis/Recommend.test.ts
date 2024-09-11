@@ -259,6 +259,41 @@ describe('Recommend Api', () => {
 		requestMock.mockReset();
 	});
 
+	it('batchRecommendations uses parameters regardless of order specified in requests', async () => {
+		const api = new RecommendAPI(new ApiConfiguration({}));
+
+		const requestMock = jest
+			.spyOn(global.window, 'fetch')
+			.mockImplementation(() => Promise.resolve({ status: 200, json: () => Promise.resolve(mockData.recommend()) } as Response));
+
+		api.batchRecommendations({
+			tag: 'similar',
+			products: ['sku1'],
+			batched: true,
+			siteId: '8uyt2m',
+		});
+
+		api.batchRecommendations({
+			tag: 'crossSell',
+			batched: true,
+			siteId: '8uyt2m',
+		});
+
+		//add delay for paramBatch.timeout
+		await wait(250);
+
+		const POSTParams = {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'text/plain',
+			},
+			body: '{"profiles":[{"tag":"similar","limit":20},{"tag":"crossSell","limit":20}],"siteId":"8uyt2m","products":["sku1"]}',
+		};
+
+		expect(requestMock).toHaveBeenCalledWith(RequestUrl, POSTParams);
+		requestMock.mockReset();
+	});
+
 	it('batchRecommendations handles order prop as expected', async () => {
 		const api = new RecommendAPI(new ApiConfiguration({}));
 

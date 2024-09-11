@@ -72,12 +72,21 @@ export class RecommendAPI extends API {
 			// delete the batch so a new one can take its place
 			delete this.batches[key];
 
-			//resort batch entries based on order
+			// resort batch entries based on order
 			batch.entries.sort(sortBatchEntries);
 
-			// now that the requests are in proper order, map through them
-			// and build out the batches
+			// now that the requests are in proper order, map through them and build out the batches
 			batch.entries.map((entry) => {
+				// use products request only and combine when needed
+				if (entry.request.product) {
+					if (Array.isArray(entry.request.products) && entry.request.products.indexOf(entry.request.product) == -1) {
+						entry.request.products = entry.request.products.concat(entry.request.product);
+					} else {
+						entry.request.products = [entry.request.product];
+					}
+				}
+
+				// parameters used for profile specific
 				const { tag, categories, brands, query, filters, dedupe } = entry.request;
 
 				let transformedFilters;
@@ -85,6 +94,7 @@ export class RecommendAPI extends API {
 					transformedFilters = transformRecommendationFiltersPost(filters) as RecommendPostRequestFiltersModel[];
 				}
 
+				// build profile specific parameters
 				const profile: RecommendPostRequestProfileModel = {
 					tag,
 					categories,
@@ -97,37 +107,21 @@ export class RecommendAPI extends API {
 
 				batch.request.profiles?.push(profile);
 
-				batch.request = {
-					...batch.request,
-					siteId: parameters.siteId,
-					product: parameters.product,
-					products: parameters.products,
-					blockedItems: parameters.blockedItems,
-					test: parameters.test,
-					cart: parameters.cart,
-					lastViewed: parameters.lastViewed,
-					shopper: parameters.shopper,
-				} as RecommendPostRequestModel;
-
-				// use products request only and combine when needed
-				if (batch.request.product) {
-					if (Array.isArray(batch.request.products) && batch.request.products.indexOf(batch.request.product) == -1) {
-						batch.request.products = batch.request.products.concat(batch.request.product);
-					} else {
-						batch.request.products = [batch.request.product];
-					}
-
-					delete batch.request.product;
-				}
+				// parameters used globally
+				const { siteId, products, blockedItems, test, cart, lastViewed, shopper } = entry.request;
+				// only when these parameters are defined should they be added to the list
+				if (siteId) batch.request.siteId = siteId;
+				if (products) batch.request.products = products;
+				if (blockedItems) batch.request.blockedItems = blockedItems;
+				if (test) batch.request.test = test;
+				if (cart) batch.request.cart = cart;
+				if (lastViewed) batch.request.lastViewed = lastViewed;
+				if (shopper) batch.request.shopper = shopper;
 			});
 
 			try {
 				if (this.configuration.mode == AppMode.development) {
 					batch.request.test = true;
-				}
-
-				if (batch.request['product']) {
-					batch.request['product'] = batch.request['product'].toString();
 				}
 
 				const response = await this.postRecommendations(batch.request as RecommendPostRequestModel);
