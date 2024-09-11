@@ -85,7 +85,7 @@ describe('RecommendationProfileTracker Component', () => {
 		expect(trackfn).toHaveBeenCalledWith({
 			type: BeaconType.PROFILE_RENDER,
 			category: BeaconCategory.RECOMMENDATIONS,
-			context: controller.config.globals.siteId ? { website: { trackingCode: controller.config.globals.siteId } } : undefined,
+			context: controller.config.globals?.siteId ? { website: { trackingCode: controller.config.globals?.siteId } } : undefined,
 			event: {
 				context: {
 					placement: controller.store.profile.placement,
@@ -109,7 +109,7 @@ describe('RecommendationProfileTracker Component', () => {
 		expect(trackfn).toHaveBeenCalledWith({
 			type: BeaconType.PROFILE_CLICK,
 			category: BeaconCategory.RECOMMENDATIONS,
-			context: controller.config.globals.siteId ? { website: { trackingCode: controller.config.globals.siteId } } : undefined,
+			context: controller.config.globals?.siteId ? { website: { trackingCode: controller.config.globals?.siteId } } : undefined,
 			event: {
 				context: {
 					action: 'navigate',
@@ -147,7 +147,7 @@ describe('RecommendationProfileTracker Component', () => {
 		expect(trackfn).toHaveBeenNthCalledWith(1, {
 			type: BeaconType.PROFILE_IMPRESSION,
 			category: BeaconCategory.RECOMMENDATIONS,
-			context: controller.config.globals.siteId ? { website: { trackingCode: controller.config.globals.siteId } } : undefined,
+			context: controller.config.globals?.siteId ? { website: { trackingCode: controller.config.globals?.siteId } } : undefined,
 			event: {
 				context: {
 					placement: controller.store.profile.placement,
@@ -204,7 +204,7 @@ describe('RecommendationProfileTracker Component', () => {
 		expect(trackfn).toHaveBeenCalledWith({
 			type: BeaconType.PROFILE_RENDER,
 			category: BeaconCategory.RECOMMENDATIONS,
-			context: controller.config.globals.siteId ? { website: { trackingCode: controller.config.globals.siteId } } : undefined,
+			context: controller.config.globals?.siteId ? { website: { trackingCode: controller.config.globals?.siteId } } : undefined,
 			event: {
 				context: {
 					placement: controller.store.profile.placement,
@@ -228,7 +228,7 @@ describe('RecommendationProfileTracker Component', () => {
 		expect(trackfn).toHaveBeenCalledWith({
 			type: BeaconType.PROFILE_CLICK,
 			category: BeaconCategory.RECOMMENDATIONS,
-			context: controller.config.globals.siteId ? { website: { trackingCode: controller.config.globals.siteId } } : undefined,
+			context: controller.config.globals?.siteId ? { website: { trackingCode: controller.config.globals?.siteId } } : undefined,
 			event: {
 				context: {
 					action: 'navigate',

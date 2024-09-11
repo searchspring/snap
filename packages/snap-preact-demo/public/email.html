@@ -30,6 +30,8 @@
 
         const profileKey = `/api/personalized-recommendations/profile.json{"tag":"${profile}","siteId":"${siteID}","branch":"production"}`;
         const recommendKey = `/boost/${siteID}/recommend{"tags":["${profile}"],"limits":[20],"siteId":"8uyt2m"}`;
+				const profileWildCardKey = `/api/personalized-recommendations/profile.json/*`;
+				const recommendWildCardKey = `/boost/${siteID}/recommend/*`;
 
 
         document.addEventListener('RecsReady', () => {
@@ -55,6 +57,8 @@
                             entries: {
                                 [profileKey]: profileResponse,
                                 [recommendKey]: recommendResponse,
+                                [profileWildCardKey]: profileResponse,
+                                [recommendWildCardKey]: recommendResponse,
                             }
                         },
                         

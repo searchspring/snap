@@ -170,7 +170,7 @@ export class AutocompleteStore extends AbstractStore {
 		// only run if we want to update the facets (not locked)
 		if (!this.state.locks.facets.locked) {
 			this.facets = new AutocompleteFacetStore(
-				this.config,
+				this.config as AutocompleteStoreConfig,
 				this.services,
 				this.storage,
 				data.facets || [],

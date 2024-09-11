@@ -42,6 +42,7 @@
 				{ a: "(https://github.com/searchspring/snap/blob/main/docs/INTEGRATION_DEBUGGING.md)", b: "(#/integration-debugging)"},
 				{ a: "(https://github.com/searchspring/snap/blob/main/docs/INTEGRATION_TRACKING.md)", b: "(#/integration-tracking)"},
 				{ a: "(https://github.com/searchspring/snap/blob/main/docs/INTEGRATION_RECOMMENDATIONS.md)", b: "(#/integration-recommendations)"},
+				{ a: "(https://github.com/searchspring/snap/blob/main/docs/INTEGRATION_LEGACY_RECOMMENDATIONS.md)", b: "(#/integration-legacy-recommendations)"},
 
 				{ a: "https://github.com/searchspring/snap/blob/main/images/snap-dependencies.jpg?raw=true", b: "./images/snap-dependencies.jpg"},
 				{ a: "https://github.com/searchspring/snap/blob/main/images/snap-dependencies.png?raw=true", b: "./images/snap-dependencies.png"},
@@ -244,7 +245,7 @@
 			app.component('Link', {
 				props: ['link', 'active'],
 				template: `
-					<router-link v-if="link.route" :key="link.route" :to="'' + link.route" :class="{ 'active': active }">
+					<router-link v-if="link.route && !link.hidden" :key="link.route" :to="'' + link.route" :class="{ 'active': active }">
 						{{link.label}}
 					</router-link>
 			

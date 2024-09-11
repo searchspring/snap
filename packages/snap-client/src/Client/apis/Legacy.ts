@@ -20,7 +20,7 @@ export class LegacyAPI extends API {
 				headers: headerParameters,
 				query: queryParameters,
 			},
-			path + JSON.stringify(cacheParameters)
+			JSON.stringify(cacheParameters)
 		);
 
 		return legacyResponse;
@@ -38,7 +38,7 @@ export class LegacyAPI extends API {
 				headers: headerParameters,
 				body: requestParameters,
 			},
-			'/api/meta/meta.json' + JSON.stringify(requestParameters)
+			JSON.stringify(requestParameters)
 		);
 
 		return response as MetaResponseModel;
@@ -54,7 +54,7 @@ export class LegacyAPI extends API {
 				headers: headerParameters,
 				query: queryParameters as unknown as HTTPQuery,
 			},
-			'/api/meta/meta.json' + JSON.stringify(queryParameters)
+			JSON.stringify(queryParameters)
 		);
 
 		return response as MetaResponseModel;
