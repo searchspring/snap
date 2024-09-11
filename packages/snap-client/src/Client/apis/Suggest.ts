@@ -12,7 +12,7 @@ export class SuggestAPI extends API {
 				headers: headerParameters,
 				query: queryParameters,
 			},
-			'/api/suggest/query' + JSON.stringify(queryParameters)
+			JSON.stringify(queryParameters)
 		);
 
 		return response as unknown as SuggestResponseModel;
@@ -29,7 +29,7 @@ export class SuggestAPI extends API {
 				headers: headerParameters,
 				body: requestParameters,
 			},
-			'/api/suggest/query' + JSON.stringify(requestParameters)
+			JSON.stringify(requestParameters)
 		);
 
 		return response as unknown as SuggestResponseModel;
@@ -45,7 +45,7 @@ export class SuggestAPI extends API {
 				headers: headerParameters,
 				query: queryParameters,
 			},
-			'/api/suggest/trending' + JSON.stringify(queryParameters)
+			JSON.stringify(queryParameters)
 		);
 
 		return response as unknown as TrendingResponseModel;
@@ -62,7 +62,7 @@ export class SuggestAPI extends API {
 				headers: headerParameters,
 				body: requestParameters,
 			},
-			'/api/suggest/trending' + JSON.stringify(requestParameters)
+			JSON.stringify(requestParameters)
 		);
 
 		return response as unknown as TrendingResponseModel;

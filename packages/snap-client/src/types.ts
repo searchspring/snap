@@ -103,8 +103,8 @@ export type TrendingResponseModel = {
 };
 
 export type RecommendRequestModel = {
-	tags: string[];
-	siteId: string;
+	tag: string;
+	siteId?: string;
 	product?: string;
 	products?: string[];
 	shopper?: string;
@@ -113,22 +113,48 @@ export type RecommendRequestModel = {
 	cart?: string[];
 	lastViewed?: string[];
 	test?: boolean;
-	batched?: boolean;
-	limits?: number | number[];
-	order?: number;
+	branch?: string;
 	filters?: RecommendationRequestFilterModel[];
 	blockedItems?: string[];
+	batched?: boolean;
+	limit?: number;
+	order?: number;
+	batchId?: number;
+	query?: string;
+	dedupe?: boolean;
 };
 
-export type GetRecommendRequestModel = Omit<RecommendRequestModel, 'filters'> & {
-	[filter: `filter.${string}`]: (string | number)[];
+//TODO: move to snapi
+export type RecommendPostRequestModel = {
+	siteId: string;
+	profiles: RecommendPostRequestProfileModel[];
+	product?: string;
+	products?: string[];
+	shopper?: string;
+	cart?: string[];
+	lastViewed?: string[];
+	test?: boolean;
+	withRecInfo?: boolean;
+	blockedItems?: string[];
+	filters?: RecommendPostRequestFiltersModel[];
 };
 
-export type PostRecommendRequestModel = Omit<RecommendRequestModel, 'filters'> & {
-	filters?: PostRecommendRequestFiltersModel[];
+export type RecommendPostRequestProfileModel = Omit<RecommendRequestProfileModel, 'filters' | 'query'> & {
+	filters?: RecommendPostRequestFiltersModel[];
+	searchTerm?: string;
 };
 
-export type PostRecommendRequestFiltersModel = {
+export type RecommendRequestProfileModel = {
+	tag: string;
+	categories?: string[];
+	brands?: string[];
+	limit?: number;
+	dedupe?: boolean;
+	query?: string;
+	filters?: RecommendationRequestFilterModel[];
+};
+
+export type RecommendPostRequestFiltersModel = {
 	field: string;
 	type: '=' | '==' | '===' | '!=' | '!==' | '>' | '<' | '>=' | '<=';
 	values: (string | number)[];
@@ -168,22 +194,6 @@ export type ProfileResponseModel = {
 			};
 		};
 	};
-};
-
-export type RecommendCombinedRequestModel = {
-	tag: string;
-	siteId: string;
-	product?: string;
-	products?: string[];
-	shopper?: string;
-	categories?: string[];
-	brands?: string[];
-	cart?: string[];
-	lastViewed?: string[];
-	test?: boolean;
-	branch?: string;
-	filters?: RecommendationRequestFilterModel[];
-	blockedItems?: string[];
 };
 
 export type RecommendationRequestFilterModel = RecommendationRequestRangeFilterModel | RecommendationRequestValueFilterModel;
