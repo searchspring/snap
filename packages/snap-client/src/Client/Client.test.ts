@@ -351,18 +351,24 @@ describe('Snap Client', () => {
 			const profileCacheKey = '{"tag":"dress","siteId":"8uyt2m"}';
 
 			const recommendParams = {
-				headers: {},
-				method: 'GET',
+				headers: {
+					'Content-Type': 'text/plain',
+				},
+				method: 'POST',
 				path: '/boost/8uyt2m/recommend',
-				query: {
-					limits: [20],
-					siteId: '8uyt2m',
-					tags: ['dress'],
+				body: {
+					profiles: [
+						{
+							limit: 20,
+							tag: 'dress',
+						},
+					],
 					test: true,
+					siteId: '8uyt2m',
 				},
 			};
 
-			const recommendCacheKey = '{"tags":["dress"],"limits":[20],"siteId":"8uyt2m","test":true}';
+			const recommendCacheKey = '{"profiles":[{"tag":"dress","limit":20}],"siteId":"8uyt2m","test":true}';
 
 			expect(recommendRequesterSpy).toHaveBeenCalledTimes(2);
 			expect(recommendRequesterSpy.mock.calls).toEqual([
@@ -592,18 +598,24 @@ describe('Snap Client', () => {
 				const profileCacheKey = '{"tag":"dress","siteId":"8uyt2m"}';
 
 				const recommendParams = {
-					headers: {},
-					method: 'GET',
+					headers: {
+						'Content-Type': 'text/plain',
+					},
+					method: 'POST',
 					path: '/boost/8uyt2m/recommend',
-					query: {
-						limits: [20],
-						siteId: '8uyt2m',
-						tags: ['dress'],
+					body: {
+						profiles: [
+							{
+								limit: 20,
+								tag: 'dress',
+							},
+						],
 						test: true,
+						siteId: '8uyt2m',
 					},
 				};
 
-				const recommendCacheKey = '{"tags":["dress"],"limits":[20],"siteId":"8uyt2m","test":true}';
+				const recommendCacheKey = '{"profiles":[{"tag":"dress","limit":20}],"siteId":"8uyt2m","test":true}';
 
 				expect(recommendRequesterSpy).toHaveBeenCalledTimes(2);
 				expect(recommendRequesterSpy.mock.calls).toEqual([

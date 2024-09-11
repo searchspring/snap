@@ -280,6 +280,7 @@ describe('RecommendationInstantiator', () => {
 		document.body.innerHTML = `<script type="searchspring/recommend" profile="${DEFAULT_PROFILE}">
 			shopper = { id: 'snapdev' };
 			product = 'sku1';
+			custom = { some: 'thing' };
 			options = {
 				branch: 'testing',
 				siteId: 'abc123',
@@ -292,9 +293,9 @@ describe('RecommendationInstantiator', () => {
 						value: 'blue'
 					},
 					{
-						  type: 'range',
-						  field: 'price',
-						  value: { low: 0, high: 20 }
+						type: 'range',
+						field: 'price',
+						value: { low: 0, high: 20 }
 					}
 				],
 				brands: ['nike', 'h&m'],
@@ -316,6 +317,7 @@ describe('RecommendationInstantiator', () => {
 					id: 'snapdev',
 				},
 				product: 'sku1',
+				custom: { some: 'thing' },
 				options: {
 					branch: 'testing',
 					categories: ['cats', 'dogs'],
@@ -355,12 +357,179 @@ describe('RecommendationInstantiator', () => {
 					value: { low: 0, high: 20 },
 				},
 			],
+			batchId: 1,
 			brands: ['nike', 'h&m'],
-			limits: 5,
-			product: 'sku1',
+			limit: 5,
+			products: ['sku1'],
 			shopper: 'snapdev',
 			siteId: 'abc123',
 			tag: 'trending',
+		});
+	});
+
+	it('can use new style script tags and context', async () => {
+		const profileContextArray = [
+			{
+				profile: 'trending',
+				target: '#tout1',
+				custom: { some: 'thing1' },
+				options: {
+					siteId: '8uyt2m',
+					limit: 1,
+					categories: ['1234'],
+					brands: ['12345'],
+					filters: [
+						{
+							field: 'price',
+							type: 'range',
+							value: {
+								low: 20,
+								high: 40,
+							},
+						},
+					],
+				},
+			},
+			{
+				profile: 'similar',
+				target: '#tout2',
+				custom: { some: 'thing2' },
+				options: {
+					limit: 2,
+					categories: ['5678'],
+					brands: ['65432'],
+					filters: [
+						{
+							field: 'color',
+							type: 'value',
+							value: 'blue',
+						},
+					],
+				},
+			},
+		];
+
+		//good testing to build off of
+		document.body.innerHTML = `
+			<div id="tout1"></div>
+			<div id="tout2"></div>
+			<script type="searchspring/recommendations">
+				custom = { some: 'thing' };
+				globals = {
+					products: ["C-AD-W1-1869P"],
+					shopper: {
+						id: 'snapdev',
+					},
+					blockedItems: ['1234','5678'],
+					cart: ['5678']
+				};
+				
+				profiles = [
+					{
+						profile: 'trending',
+						target: '#tout1',
+						custom: { some: 'thing1' },
+						options: {
+							siteId: '8uyt2m',
+							limit: 1,
+							categories: ["1234"],
+							brands: ["12345"],
+							filters: [{
+								field: 'price',
+								type: 'range',
+								value: {
+									low: 20,
+									high: 40
+								}
+							}]
+						}
+					},
+					{
+						profile: 'similar',
+						target: '#tout2',
+						custom: { some: 'thing2' },
+						options: {
+							limit: 2,
+							categories: ["5678"],
+							brands: ["65432"],
+							filters: [{
+								field: 'color',
+								type: 'value',
+								value: "blue"
+							}]
+						},
+					},
+				];
+			</script>
+		`;
+
+		const client = new MockClient(baseConfig.client!.globals, {});
+		const clientSpy = jest.spyOn(client, 'recommend');
+
+		const recommendationInstantiator = new RecommendationInstantiator(baseConfig, { client });
+		await wait();
+		expect(Object.keys(recommendationInstantiator.controller).length).toBe(2);
+		Object.keys(recommendationInstantiator.controller).forEach((controllerId, index) => {
+			const controller = recommendationInstantiator.controller[controllerId];
+			expect(controller.context).toStrictEqual({
+				custom: { some: 'thing' },
+				globals: {
+					products: ['C-AD-W1-1869P'],
+					shopper: { id: 'snapdev' },
+					blockedItems: ['1234', '5678'],
+					cart: ['5678'],
+				},
+				profile: profileContextArray[index],
+			});
+		});
+		const batchId = recommendationInstantiator.controller[Object.keys(recommendationInstantiator.controller)[0]].store.config.batchId;
+
+		expect(clientSpy).toHaveBeenCalledTimes(2);
+		expect(clientSpy).toHaveBeenNthCalledWith(1, {
+			batched: true,
+			blockedItems: ['1234', '5678'],
+			branch: 'production',
+			brands: ['12345'],
+			cart: ['5678'],
+			categories: ['1234'],
+			limit: 1,
+			filters: [
+				{
+					field: 'price',
+					type: 'range',
+					value: {
+						low: 20,
+						high: 40,
+					},
+				},
+			],
+			products: ['C-AD-W1-1869P'],
+			shopper: 'snapdev',
+			batchId,
+			siteId: '8uyt2m',
+			tag: 'trending',
+		});
+
+		expect(clientSpy).toHaveBeenNthCalledWith(2, {
+			batched: true,
+			blockedItems: ['1234', '5678'],
+			branch: 'production',
+			brands: ['65432'],
+			cart: ['5678'],
+			categories: ['5678'],
+			limit: 2,
+			filters: [
+				{
+					field: 'color',
+					type: 'value',
+					value: 'blue',
+				},
+			],
+			products: ['C-AD-W1-1869P'],
+			shopper: 'snapdev',
+			batchId,
+			siteId: undefined,
+			tag: 'similar',
 		});
 	});
 

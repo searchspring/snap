@@ -89,7 +89,7 @@ export class SearchStore extends AbstractStore {
 		this.merchandising = new SearchMerchandisingStore(this.services, data?.merchandising || {});
 		this.search = new SearchQueryStore(this.services, data?.search || {});
 		this.facets = new SearchFacetStore(
-			this.config,
+			this.config as SearchStoreConfig,
 			this.services,
 			this.storage,
 			data.facets,
