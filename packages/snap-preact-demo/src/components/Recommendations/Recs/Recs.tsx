@@ -1,7 +1,7 @@
 import { h, Component } from 'preact';
 import { observer } from 'mobx-react';
 
-import { Carousel, Recommendation, Result } from '@searchspring/snap-preact-components';
+import { Recommendation, Result } from '@searchspring/snap-preact-components';
 
 type RecsProps = {
 	controller?: RecommendationController;
@@ -22,18 +22,12 @@ export class Recs extends Component<RecsProps> {
 	render() {
 		const controller = this.props.controller;
 		const store = controller?.store;
-		const arr = Array.from(Array(9).keys());
+		const parameters = store?.profile?.display?.templateParameters;
 
 		return (
 			<div>
-				<Carousel>
-					{arr.map((num) => (
-						<div>{num}!!!</div>
-					))}
-				</Carousel>
-
 				<hr style={{ margin: '20px 0' }} />
-				<Recommendation controller={controller} title={'Recommended For You'} speed={0} lazyRender={{ enabled: false }}>
+				<Recommendation controller={controller} title={parameters.title} speed={0} lazyRender={{ enabled: false }}>
 					{store.results.map((result) => (
 						<Result controller={controller} result={result}></Result>
 					))}

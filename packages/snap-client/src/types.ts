@@ -104,7 +104,7 @@ export type TrendingResponseModel = {
 
 export type RecommendRequestModel = {
 	tag: string;
-	siteId: string;
+	siteId?: string;
 	product?: string;
 	products?: string[];
 	shopper?: string;
@@ -113,23 +113,21 @@ export type RecommendRequestModel = {
 	cart?: string[];
 	lastViewed?: string[];
 	test?: boolean;
-	batched?: boolean;
-	limits?: number | number[];
-	limit?: number;
-	order?: number;
+	branch?: string;
 	filters?: RecommendationRequestFilterModel[];
 	blockedItems?: string[];
+	batched?: boolean;
+	limit?: number;
+	order?: number;
 	batchId?: number;
-	profileFilters?: RecommendationRequestFilterModel[];
 	query?: string;
 	dedupe?: boolean;
-	branch?: string;
 };
 
 //TODO: move to snapi
-export type PostRecommendAPISpec = {
+export type RecommendPostRequestModel = {
 	siteId: string;
-	profiles: (Omit<RecommendPostProfileObject, 'filters'> & { filters?: PostRecommendRequestFiltersModel[] })[];
+	profiles: RecommendPostRequestProfileModel[];
 	product?: string;
 	products?: string[];
 	shopper?: string;
@@ -138,10 +136,15 @@ export type PostRecommendAPISpec = {
 	test?: boolean;
 	withRecInfo?: boolean;
 	blockedItems?: string[];
-	filters?: PostRecommendRequestFiltersModel[];
+	filters?: RecommendPostRequestFiltersModel[];
 };
 
-export type RecommendPostProfileObject = {
+export type RecommendPostRequestProfileModel = Omit<RecommendRequestProfileModel, 'filters' | 'query'> & {
+	filters?: RecommendPostRequestFiltersModel[];
+	searchTerm?: string;
+};
+
+export type RecommendRequestProfileModel = {
 	tag: string;
 	categories?: string[];
 	brands?: string[];
@@ -151,7 +154,7 @@ export type RecommendPostProfileObject = {
 	filters?: RecommendationRequestFilterModel[];
 };
 
-export type PostRecommendRequestFiltersModel = {
+export type RecommendPostRequestFiltersModel = {
 	field: string;
 	type: '=' | '==' | '===' | '!=' | '!==' | '>' | '<' | '>=' | '<=';
 	values: (string | number)[];

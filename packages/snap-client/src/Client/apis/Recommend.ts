@@ -1,8 +1,8 @@
 import { API, ApiConfiguration } from './Abstract';
-import { HTTPHeaders, PostRecommendRequestFiltersModel } from '../../types';
+import { HTTPHeaders, RecommendPostRequestFiltersModel, RecommendPostRequestProfileModel } from '../../types';
 import { AppMode } from '@searchspring/snap-toolbox';
 import { transformRecommendationFiltersPost } from '../transforms';
-import { ProfileRequestModel, ProfileResponseModel, RecommendResponseModel, RecommendRequestModel, PostRecommendAPISpec } from '../../types';
+import { ProfileRequestModel, ProfileResponseModel, RecommendResponseModel, RecommendRequestModel, RecommendPostRequestModel } from '../../types';
 
 class Deferred {
 	promise: Promise<any>;
@@ -27,7 +27,7 @@ export class RecommendAPI extends API {
 	private batches: {
 		[key: string]: {
 			timeout: number | NodeJS.Timeout;
-			request: PostRecommendAPISpec;
+			request: RecommendPostRequestModel;
 			entries: BatchEntry[];
 		};
 	};
@@ -61,22 +61,8 @@ export class RecommendAPI extends API {
 		const batch = (this.batches[key] = this.batches[key] || { timeout: null, request: { profiles: [] }, entries: [] });
 		const deferred = new Deferred();
 
-		const { tag, limits, limit, query, filters, profileFilters, dedupe, categories, brands } = parameters;
-
-		const newParams = {
-			...parameters,
-			tag: tag,
-			categories,
-			brands,
-			limit: limit ? limit : limits ? (typeof limits == 'number' ? limits : limits[0]) : undefined,
-			searchTerm: query,
-			profileFilters,
-			dedupe,
-			filters,
-		};
-
 		// add each request to the list
-		batch.entries.push({ request: newParams, deferred: deferred });
+		batch.entries.push({ request: parameters, deferred: deferred });
 
 		// wait for all of the requests to come in
 		const timeoutClear = typeof window !== 'undefined' ? window.clearTimeout : clearTimeout;
@@ -92,29 +78,24 @@ export class RecommendAPI extends API {
 			// now that the requests are in proper order, map through them
 			// and build out the batches
 			batch.entries.map((entry) => {
-				const { tag, categories, brands, query, profileFilters, dedupe } = entry.request;
-				let limit = entry.request.limit;
+				const { tag, categories, brands, query, filters, dedupe } = entry.request;
 
-				if (!limit) {
-					limit = 20;
+				let transformedFilters;
+				if (filters) {
+					transformedFilters = transformRecommendationFiltersPost(filters) as RecommendPostRequestFiltersModel[];
 				}
 
-				const profile: any = {
+				const profile: RecommendPostRequestProfileModel = {
 					tag,
 					categories,
 					brands,
-					limit,
-					query,
-					filters: profileFilters,
+					limit: entry.request.limit || 20,
+					searchTerm: query,
+					filters: transformedFilters,
 					dedupe,
 				};
 
-				let transformedFilters;
-				if (profile.filters) {
-					transformedFilters = transformRecommendationFiltersPost(profile.filters) as PostRecommendRequestFiltersModel[];
-				}
-
-				batch.request.profiles?.push({ ...profile, filters: transformedFilters });
+				batch.request.profiles?.push(profile);
 
 				batch.request = {
 					...batch.request,
@@ -126,19 +107,17 @@ export class RecommendAPI extends API {
 					cart: parameters.cart,
 					lastViewed: parameters.lastViewed,
 					shopper: parameters.shopper,
-				} as PostRecommendAPISpec;
+				} as RecommendPostRequestModel;
 
-				// combine product data if both 'product' and 'products' are used
-				if (batch.request.product && Array.isArray(batch.request.products) && batch.request.products.indexOf(batch.request.product) == -1) {
-					batch.request.products = batch.request.products.concat(batch.request.product);
+				// use products request only and combine when needed
+				if (batch.request.product) {
+					if (Array.isArray(batch.request.products) && batch.request.products.indexOf(batch.request.product) == -1) {
+						batch.request.products = batch.request.products.concat(batch.request.product);
+					} else {
+						batch.request.products = [batch.request.product];
+					}
 
 					delete batch.request.product;
-				}
-
-				// transform global filters here
-				if (entry.request.filters) {
-					const globalFiltersToAdd = transformRecommendationFiltersPost(entry.request.filters!) as PostRecommendRequestFiltersModel[];
-					batch.request['filters'] = globalFiltersToAdd;
 				}
 			});
 
@@ -151,7 +130,7 @@ export class RecommendAPI extends API {
 					batch.request['product'] = batch.request['product'].toString();
 				}
 
-				const response = await this.postRecommendations(batch.request as PostRecommendAPISpec);
+				const response = await this.postRecommendations(batch.request as RecommendPostRequestModel);
 
 				batch.entries?.forEach((entry, index) => {
 					entry.deferred.resolve([response[index]]);
@@ -166,7 +145,7 @@ export class RecommendAPI extends API {
 		return deferred.promise;
 	}
 
-	async postRecommendations(requestParameters: PostRecommendAPISpec): Promise<RecommendResponseModel> {
+	async postRecommendations(requestParameters: RecommendPostRequestModel): Promise<RecommendResponseModel> {
 		const headerParameters: HTTPHeaders = {};
 		headerParameters['Content-Type'] = 'text/plain';
 

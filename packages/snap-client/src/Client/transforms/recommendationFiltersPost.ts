@@ -1,7 +1,7 @@
-import { RecommendationRequestFilterModel, PostRecommendRequestFiltersModel } from '../../types';
+import { RecommendationRequestFilterModel, RecommendPostRequestFiltersModel } from '../../types';
 
 export const transformRecommendationFiltersPost = (filters: RecommendationRequestFilterModel[]) => {
-	const filterArray: PostRecommendRequestFiltersModel[] = [];
+	const filterArray: RecommendPostRequestFiltersModel[] = [];
 	filters.map((filter) => {
 		if (filter.type == 'value') {
 			//check if filterArray contains a filter for this value already

@@ -3,7 +3,7 @@ import { ApiConfiguration } from './Abstract';
 import { RecommendAPI } from './Recommend';
 import { MockData } from '@searchspring/snap-shared';
 
-import type { PostRecommendAPISpec } from '../../types';
+import type { RecommendPostRequestModel } from '../../types';
 
 const mockData = new MockData();
 
@@ -63,7 +63,7 @@ describe('Recommend Api', () => {
 			},
 		};
 
-		const requestParameters: PostRecommendAPISpec = {
+		const requestParameters: RecommendPostRequestModel = {
 			siteId: '8uyt2m',
 			profiles: [
 				{
@@ -147,14 +147,14 @@ describe('Recommend Api', () => {
 
 		api.batchRecommendations({
 			tag: 'similar',
-			limits: 14,
+			limit: 14,
 			batched: true,
 			...batchParams,
 		});
 
 		api.batchRecommendations({
 			tag: 'crossSell',
-			limits: 10,
+			limit: 10,
 			batched: true,
 			...batchParams,
 		});
@@ -167,7 +167,7 @@ describe('Recommend Api', () => {
 			headers: {
 				'Content-Type': 'text/plain',
 			},
-			body: '{"profiles":[{"tag":"similar","limit":14},{"tag":"crossSell","limit":10}],"siteId":"8uyt2m","product":"marnie-runner-2-7x10","lastViewed":["marnie-runner-2-7x10","ruby-runner-2-7x10","abbie-runner-2-7x10","riley-4x6","joely-5x8","helena-4x6","kwame-4x6","sadie-4x6","candice-runner-2-7x10","esmeray-4x6","camilla-230x160","candice-4x6","sahara-4x6","dayna-4x6","moema-4x6"]}',
+			body: '{"profiles":[{"tag":"similar","limit":14},{"tag":"crossSell","limit":10}],"siteId":"8uyt2m","products":["marnie-runner-2-7x10"],"lastViewed":["marnie-runner-2-7x10","ruby-runner-2-7x10","abbie-runner-2-7x10","riley-4x6","joely-5x8","helena-4x6","kwame-4x6","sadie-4x6","candice-runner-2-7x10","esmeray-4x6","camilla-230x160","candice-4x6","sahara-4x6","dayna-4x6","moema-4x6"]}',
 		};
 
 		expect(requestMock).toHaveBeenCalledWith(RequestUrl, POSTParams);
@@ -185,14 +185,14 @@ describe('Recommend Api', () => {
 		api.batchRecommendations({
 			tag: 'similar',
 			categories: ['shirts'],
-			limits: 14,
+			limit: 14,
 			batched: true,
 			...batchParams,
 		});
 		//no category
 		api.batchRecommendations({
 			tag: 'crossSell',
-			limits: 10,
+			limit: 10,
 			batched: true,
 			...batchParams,
 		});
@@ -200,7 +200,7 @@ describe('Recommend Api', () => {
 		api.batchRecommendations({
 			tag: 'crossSell',
 			categories: ['pants'],
-			limits: 10,
+			limit: 10,
 			batched: true,
 			...batchParams,
 		});
@@ -213,7 +213,7 @@ describe('Recommend Api', () => {
 			headers: {
 				'Content-Type': 'text/plain',
 			},
-			body: '{"profiles":[{"tag":"similar","categories":["shirts"],"limit":14},{"tag":"crossSell","limit":10},{"tag":"crossSell","categories":["pants"],"limit":10}],"siteId":"8uyt2m","product":"marnie-runner-2-7x10","lastViewed":["marnie-runner-2-7x10","ruby-runner-2-7x10","abbie-runner-2-7x10","riley-4x6","joely-5x8","helena-4x6","kwame-4x6","sadie-4x6","candice-runner-2-7x10","esmeray-4x6","camilla-230x160","candice-4x6","sahara-4x6","dayna-4x6","moema-4x6"]}',
+			body: '{"profiles":[{"tag":"similar","categories":["shirts"],"limit":14},{"tag":"crossSell","limit":10},{"tag":"crossSell","categories":["pants"],"limit":10}],"siteId":"8uyt2m","products":["marnie-runner-2-7x10"],"lastViewed":["marnie-runner-2-7x10","ruby-runner-2-7x10","abbie-runner-2-7x10","riley-4x6","joely-5x8","helena-4x6","kwame-4x6","sadie-4x6","candice-runner-2-7x10","esmeray-4x6","camilla-230x160","candice-4x6","sahara-4x6","dayna-4x6","moema-4x6"]}',
 		};
 
 		expect(requestMock).toHaveBeenCalledWith(RequestUrl, POSTParams);
@@ -231,7 +231,7 @@ describe('Recommend Api', () => {
 		api.batchRecommendations({
 			tag: 'similar',
 			brands: ['shirts'],
-			limits: 14,
+			limit: 14,
 			batched: true,
 			...batchParams,
 		});
@@ -239,7 +239,7 @@ describe('Recommend Api', () => {
 		api.batchRecommendations({
 			tag: 'crossSell',
 			brands: ['pants', 'pants2'],
-			limits: 10,
+			limit: 10,
 			batched: true,
 			...batchParams,
 		});
@@ -252,7 +252,7 @@ describe('Recommend Api', () => {
 			headers: {
 				'Content-Type': 'text/plain',
 			},
-			body: '{"profiles":[{"tag":"similar","brands":["shirts"],"limit":14},{"tag":"crossSell","brands":["pants","pants2"],"limit":10}],"siteId":"8uyt2m","product":"marnie-runner-2-7x10","lastViewed":["marnie-runner-2-7x10","ruby-runner-2-7x10","abbie-runner-2-7x10","riley-4x6","joely-5x8","helena-4x6","kwame-4x6","sadie-4x6","candice-runner-2-7x10","esmeray-4x6","camilla-230x160","candice-4x6","sahara-4x6","dayna-4x6","moema-4x6"]}',
+			body: '{"profiles":[{"tag":"similar","brands":["shirts"],"limit":14},{"tag":"crossSell","brands":["pants","pants2"],"limit":10}],"siteId":"8uyt2m","products":["marnie-runner-2-7x10"],"lastViewed":["marnie-runner-2-7x10","ruby-runner-2-7x10","abbie-runner-2-7x10","riley-4x6","joely-5x8","helena-4x6","kwame-4x6","sadie-4x6","candice-runner-2-7x10","esmeray-4x6","camilla-230x160","candice-4x6","sahara-4x6","dayna-4x6","moema-4x6"]}',
 		};
 
 		expect(requestMock).toHaveBeenCalledWith(RequestUrl, POSTParams);
@@ -270,7 +270,7 @@ describe('Recommend Api', () => {
 		api.batchRecommendations({
 			tag: 'similar',
 			categories: ['shirts'],
-			limits: 14,
+			limit: 14,
 			order: 3,
 			batched: true,
 			...batchParams,
@@ -278,14 +278,14 @@ describe('Recommend Api', () => {
 		//no order
 		api.batchRecommendations({
 			tag: 'crossSell',
-			limits: 10,
+			limit: 10,
 			batched: true,
 			...batchParams,
 		});
 		//no category
 		api.batchRecommendations({
 			tag: 'crossSell',
-			limits: 10,
+			limit: 10,
 			order: 2,
 			batched: true,
 			...batchParams,
@@ -294,7 +294,7 @@ describe('Recommend Api', () => {
 		api.batchRecommendations({
 			tag: 'crossSell',
 			categories: ['pants'],
-			limits: 10,
+			limit: 10,
 			order: 1,
 			batched: true,
 			...batchParams,
@@ -305,7 +305,7 @@ describe('Recommend Api', () => {
 			headers: {
 				'Content-Type': 'text/plain',
 			},
-			body: '{"profiles":[{"tag":"crossSell","categories":["pants"],"limit":10},{"tag":"crossSell","limit":10},{"tag":"similar","categories":["shirts"],"limit":14},{"tag":"crossSell","limit":10}],"siteId":"8uyt2m","product":"marnie-runner-2-7x10","lastViewed":["marnie-runner-2-7x10","ruby-runner-2-7x10","abbie-runner-2-7x10","riley-4x6","joely-5x8","helena-4x6","kwame-4x6","sadie-4x6","candice-runner-2-7x10","esmeray-4x6","camilla-230x160","candice-4x6","sahara-4x6","dayna-4x6","moema-4x6"]}',
+			body: '{"profiles":[{"tag":"crossSell","categories":["pants"],"limit":10},{"tag":"crossSell","limit":10},{"tag":"similar","categories":["shirts"],"limit":14},{"tag":"crossSell","limit":10}],"siteId":"8uyt2m","products":["marnie-runner-2-7x10"],"lastViewed":["marnie-runner-2-7x10","ruby-runner-2-7x10","abbie-runner-2-7x10","riley-4x6","joely-5x8","helena-4x6","kwame-4x6","sadie-4x6","candice-runner-2-7x10","esmeray-4x6","camilla-230x160","candice-4x6","sahara-4x6","dayna-4x6","moema-4x6"]}',
 		};
 
 		//add delay for paramBatch.timeout
@@ -326,7 +326,7 @@ describe('Recommend Api', () => {
 		const promise1 = api.batchRecommendations({
 			tag: 'similar',
 			categories: ['shirts'],
-			limits: 10,
+			limit: 10,
 			order: 2,
 			batched: true,
 			...batchParams,
@@ -335,7 +335,7 @@ describe('Recommend Api', () => {
 		const promise2 = api.batchRecommendations({
 			tag: 'crosssell',
 			categories: ['dress'],
-			limits: 20,
+			limit: 20,
 			order: 1,
 			batched: true,
 			...batchParams,
@@ -349,7 +349,7 @@ describe('Recommend Api', () => {
 			headers: {
 				'Content-Type': 'text/plain',
 			},
-			body: '{"profiles":[{"tag":"crosssell","categories":["dress"],"limit":20},{"tag":"similar","categories":["shirts"],"limit":10}],"siteId":"8uyt2m","product":"marnie-runner-2-7x10","lastViewed":["marnie-runner-2-7x10","ruby-runner-2-7x10","abbie-runner-2-7x10","riley-4x6","joely-5x8","helena-4x6","kwame-4x6","sadie-4x6","candice-runner-2-7x10","esmeray-4x6","camilla-230x160","candice-4x6","sahara-4x6","dayna-4x6","moema-4x6"]}',
+			body: '{"profiles":[{"tag":"crosssell","categories":["dress"],"limit":20},{"tag":"similar","categories":["shirts"],"limit":10}],"siteId":"8uyt2m","products":["marnie-runner-2-7x10"],"lastViewed":["marnie-runner-2-7x10","ruby-runner-2-7x10","abbie-runner-2-7x10","riley-4x6","joely-5x8","helena-4x6","kwame-4x6","sadie-4x6","candice-runner-2-7x10","esmeray-4x6","camilla-230x160","candice-4x6","sahara-4x6","dayna-4x6","moema-4x6"]}',
 		};
 
 		expect(requestMock).toHaveBeenCalledWith(RequestUrl, POSTParams);
@@ -371,7 +371,7 @@ describe('Recommend Api', () => {
 
 		api.batchRecommendations({
 			tag: 'crossSell',
-			limits: 10,
+			limit: 10,
 			filters: [
 				{
 					type: 'value',
@@ -389,7 +389,7 @@ describe('Recommend Api', () => {
 			headers: {
 				'Content-Type': 'text/plain',
 			},
-			body: '{"profiles":[{"tag":"crossSell","limit":10}],"siteId":"8uyt2m","product":"marnie-runner-2-7x10","lastViewed":["marnie-runner-2-7x10","ruby-runner-2-7x10","abbie-runner-2-7x10","riley-4x6","joely-5x8","helena-4x6","kwame-4x6","sadie-4x6","candice-runner-2-7x10","esmeray-4x6","camilla-230x160","candice-4x6","sahara-4x6","dayna-4x6","moema-4x6"],"filters":[{"field":"color","type":"=","values":["red"]}]}',
+			body: '{"profiles":[{"tag":"crossSell","limit":10,"filters":[{"field":"color","type":"=","values":["red"]}]}],"siteId":"8uyt2m","products":["marnie-runner-2-7x10"],"lastViewed":["marnie-runner-2-7x10","ruby-runner-2-7x10","abbie-runner-2-7x10","riley-4x6","joely-5x8","helena-4x6","kwame-4x6","sadie-4x6","candice-runner-2-7x10","esmeray-4x6","camilla-230x160","candice-4x6","sahara-4x6","dayna-4x6","moema-4x6"]}',
 		};
 
 		expect(requestMock).toHaveBeenCalledWith(RequestUrl, POSTParams);
@@ -407,7 +407,7 @@ describe('Recommend Api', () => {
 		api.batchRecommendations({
 			tag: 'crossSell',
 			...batchParams,
-			limits: undefined,
+			limit: undefined,
 		});
 
 		//add delay for paramBatch.timeout
@@ -417,7 +417,7 @@ describe('Recommend Api', () => {
 			headers: {
 				'Content-Type': 'text/plain',
 			},
-			body: '{"profiles":[{"tag":"crossSell","limit":20}],"siteId":"8uyt2m","product":"marnie-runner-2-7x10","lastViewed":["marnie-runner-2-7x10","ruby-runner-2-7x10","abbie-runner-2-7x10","riley-4x6","joely-5x8","helena-4x6","kwame-4x6","sadie-4x6","candice-runner-2-7x10","esmeray-4x6","camilla-230x160","candice-4x6","sahara-4x6","dayna-4x6","moema-4x6"]}',
+			body: '{"profiles":[{"tag":"crossSell","limit":20}],"siteId":"8uyt2m","products":["marnie-runner-2-7x10"],"lastViewed":["marnie-runner-2-7x10","ruby-runner-2-7x10","abbie-runner-2-7x10","riley-4x6","joely-5x8","helena-4x6","kwame-4x6","sadie-4x6","candice-runner-2-7x10","esmeray-4x6","camilla-230x160","candice-4x6","sahara-4x6","dayna-4x6","moema-4x6"]}',
 		};
 
 		expect(requestMock).toHaveBeenCalledWith(RequestUrl, POSTParams);
@@ -465,7 +465,7 @@ describe('Recommend Api', () => {
 			headers: {
 				'Content-Type': 'text/plain',
 			},
-			body: '{"profiles":[{"tag":"crossSell","limit":20}],"siteId":"8uyt2m","product":"marnie-runner-2-7x10","blockedItems":["blocked_sku1","blocked_sku2"],"lastViewed":["marnie-runner-2-7x10","ruby-runner-2-7x10","abbie-runner-2-7x10","riley-4x6","joely-5x8","helena-4x6","kwame-4x6","sadie-4x6","candice-runner-2-7x10","esmeray-4x6","camilla-230x160","candice-4x6","sahara-4x6","dayna-4x6","moema-4x6"]}',
+			body: '{"profiles":[{"tag":"crossSell","limit":20}],"siteId":"8uyt2m","products":["marnie-runner-2-7x10"],"blockedItems":["blocked_sku1","blocked_sku2"],"lastViewed":["marnie-runner-2-7x10","ruby-runner-2-7x10","abbie-runner-2-7x10","riley-4x6","joely-5x8","helena-4x6","kwame-4x6","sadie-4x6","candice-runner-2-7x10","esmeray-4x6","camilla-230x160","candice-4x6","sahara-4x6","dayna-4x6","moema-4x6"]}',
 		};
 
 		expect(requestMock).toHaveBeenCalledWith(RequestUrl, POSTParams);
@@ -487,10 +487,15 @@ describe('Recommend Api', () => {
 					return {
 						tag: index.toString(),
 						limit: 20,
+						filters: [
+							{ field: 'color', type: '=', values: ['blue'] },
+							{ field: 'price', type: '>=', values: [0] },
+							{ field: 'price', type: '<=', values: [20] },
+						],
 					};
 				}),
 				siteId: '8uyt2m',
-				product: 'marnie-runner-2-7x10',
+				products: ['marnie-runner-2-7x10'],
 				lastViewed: [
 					'marnie-runner-2-7x10',
 					'ruby-runner-2-7x10',
@@ -507,11 +512,6 @@ describe('Recommend Api', () => {
 					'sahara-4x6',
 					'dayna-4x6',
 					'moema-4x6',
-				],
-				filters: [
-					{ field: 'color', type: '=', values: ['blue'] },
-					{ field: 'price', type: '>=', values: [0] },
-					{ field: 'price', type: '<=', values: [20] },
 				],
 			}),
 		};

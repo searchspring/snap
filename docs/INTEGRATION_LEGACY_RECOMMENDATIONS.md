@@ -26,6 +26,7 @@ Context variables may be applied to individual recommendation profiles similar t
 | options.brands | array of brand strings | all | optional brand identifiers used in brand trending recommendation profiles |
 | options.branch | template branch overwrite | all | optional branch overwrite for recommendations template (advanced usage) |
 | options.filters | array of filters | all | optional recommendation filters |
+| options.query | string | all | query to search |
 | options.realtime | boolean | all | optional update recommendations if cart contents change (requires [cart attribute tracking](https://github.com/searchspring/snap/blob/main/docs/INTEGRATION_TRACKING.md)) |
 | options.blockedItems | array of strings | all | SKU values to identify which products to exclude from the response |
 | options.batched | boolean (default: `true`)| all | only applies to recommendation context, optional disable profile from being batched in a single request, can also be set globally [via config](https://github.com/searchspring/snap/tree/main/packages/snap-controller/src/Recommendation) | 

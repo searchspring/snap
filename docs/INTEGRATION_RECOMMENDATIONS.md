@@ -33,6 +33,7 @@ Context variables are applied to individual recommendation profiles similar to h
 | Option | Value | Placement | Description | Required
 |---|---|:---:|---|:---:|
 | products | array of SKU strings | product detail page | SKU value(s) to identify the current product(s) being viewed | ✔️ |
+| blockedItems | array of strings | all | SKU values to identify which products to exclude from the response |   |
 | cart | array (or function that returns an array) of current cart skus | all | optional method of setting cart contents |   |
 | shopper.id | logged in user unique identifier | all | required for personalization functionallity if not provided to the bundle (global) context |   |
 
@@ -47,10 +48,9 @@ Context variables are applied to individual recommendation profiles similar to h
 | options.brands | array of brand strings | all | optional brand identifiers used in brand trending recommendation profiles |   |
 | options.branch | template branch overwrite | all | optional branch overwrite for recommendations template (advanced usage) |   |
 | options.dedupe | boolean (default: `true`) | all | dedupe products across all profiles in the batch |   |
-| options.searchTerm | string | all | query to search |   |
+| options.query | string | dynamic custom | query to search |   |
 | options.filters | array of filters | all | optional recommendation filters |   |
 | options.realtime | boolean | all | optional update recommendations if cart contents change (requires [cart attribute tracking](https://github.com/searchspring/snap/blob/main/docs/INTEGRATION_TRACKING.md)) |   |
-| options.blockedItems | array of strings | all | SKU values to identify which products to exclude from the response |   |
 | options.limit | number (default: 20, max: 20) | all | optional maximum number of results to display, can also be set globally [via config globals](https://github.com/searchspring/snap/tree/main/packages/snap-controller/src/Recommendation) |   |
 
 

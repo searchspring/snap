@@ -51,20 +51,24 @@ type RecommendationProfileCounts = {
 };
 
 type ProfileSpecificProfile = {
+	custom?: any;
+	options: Pick<RecommendRequestModel, 'siteId' | 'categories' | 'brands' | 'branch' | 'filters' | 'limit' | 'query' | 'dedupe'> & {
+		realtime?: boolean;
+	};
 	profile: string;
 	target: string;
-	options: Partial<RecommendRequestModel>;
 };
 
 type ProfileSpecificGlobals = {
-	products?: string[];
-	siteId?: string;
+	blockedItems: string[];
 	cart?: string[] | (() => string[]);
+	products?: string[];
 	shopper?: { id?: string };
+	siteId?: string;
 };
 
-type ExtendedRecommendaitonTarget = Target & {
-	context?: ProfileSpecificProfile;
+type ExtendedRecommendaitonProfileTarget = Target & {
+	profile?: ProfileSpecificProfile;
 };
 
 export class RecommendationInstantiator {
@@ -146,92 +150,72 @@ export class RecommendationInstantiator {
 			],
 			async (target: Target, elem: Element | undefined, originalElem: Element | undefined) => {
 				const elemContext = getContext(
-					['shopperId', 'shopper', 'product', 'products', 'seed', 'cart', 'options', 'profile', 'profiles', 'globals', 'custom'],
+					['shopperId', 'shopper', 'product', 'products', 'seed', 'cart', 'options', 'profile', 'custom', 'profiles', 'globals'],
 					(originalElem || elem) as HTMLScriptElement
 				);
 
-				const context: ContextVariables = deepmerge(this.context, elemContext);
+				if (elemContext.profiles && elemContext.profiles.length) {
+					// using the new script integration structure
 
-				const profiles = context.profiles as ProfileSpecificProfile[];
-				const globals = context.globals as ProfileSpecificGlobals;
+					// type the new profile specific integration context variables
+					const scriptContextProfiles = elemContext.profiles as ProfileSpecificProfile[];
+					const scriptContextGlobals = elemContext.globals as ProfileSpecificGlobals;
 
-				// controller globals and shared things
+					// grab from globals
+					const requestGlobals: Partial<RecommendRequestModel> = {
+						blockedItems: scriptContextGlobals.blockedItems,
+						cart: scriptContextGlobals.cart && getArrayFunc(scriptContextGlobals.cart),
+						products: scriptContextGlobals.products,
+						shopper: scriptContextGlobals.shopper?.id,
+						siteId: scriptContextGlobals.siteId,
+						batchId: Math.random(),
+					};
 
-				if (profiles && profiles.length) {
-					const targetsArr: ExtendedRecommendaitonTarget[] = [];
-					const batchId = Math.random();
+					const targetsArr: ExtendedRecommendaitonProfileTarget[] = [];
 
-					profiles.forEach((profile) => {
+					// build out the targets array for each profile
+					scriptContextProfiles.forEach((profile) => {
 						if (profile.target) {
 							const targetObj = {
 								selector: profile.target,
 								autoRetarget: true,
 								clickRetarget: true,
-								context: profile,
+								profile,
 							};
 
 							targetsArr.push(targetObj);
 						}
 					});
 
-					new DomTargeter(targetsArr, async (target: ExtendedRecommendaitonTarget, elem: Element | undefined, originalElem: Element | undefined) => {
-						const profileContext: ContextVariables = deepmerge(this.context, { ...target.context, globals });
+					new DomTargeter(
+						targetsArr,
+						async (target: ExtendedRecommendaitonProfileTarget, elem: Element | undefined, originalElem: Element | undefined) => {
+							if (target.profile?.profile) {
+								const profileRequestGlobals: RecommendRequestModel = { ...requestGlobals, ...target.profile?.options, tag: target.profile.profile };
+								const profileContext: ContextVariables = deepmerge(this.context, { globals: scriptContextGlobals, profile: target.profile });
+								if (elemContext.custom) {
+									profileContext.custom = elemContext.custom;
+								}
 
-						const { options: profileOptions } = profileContext;
-						const controllerGlobals: Partial<RecommendRequestModel> = {};
-
-						const tag = profileContext.profile;
-
-						// context globals
-						if (profileContext.globals) {
-							if (profileContext.globals.siteId) {
-								controllerGlobals.siteId = profileContext.globals.siteId;
-							}
-							if (profileContext.globals.products) {
-								controllerGlobals.products = profileContext.globals.products;
-							}
-							if (profileContext.globals.blockedItems) {
-								controllerGlobals.blockedItems = profileContext.globals.blockedItems;
-							}
-							if (profileContext.globals.cart) {
-								controllerGlobals.cart = profileContext.globals.cart;
+								readyTheController(this, elem, profileContext, profileCount, originalElem, profileRequestGlobals);
 							}
 						}
-
-						if (profileOptions?.filters) {
-							controllerGlobals.profileFilters = profileOptions.filters;
-						}
-
-						if (typeof profileOptions?.dedupe == 'boolean') {
-							controllerGlobals.dedupe = profileOptions.dedupe;
-						}
-
-						readyTheController(this, elem, profileContext, profileCount, originalElem, batchId, controllerGlobals, tag);
-					});
+					);
 				} else {
-					const { product, seed, options } = context;
+					// using the "legacy" method
+					const { profile, products, product, seed, options, batched, shopper, shopperId } = elemContext;
 
-					const controllerGlobals: any = {};
+					const profileRequestGlobals: Partial<RecommendRequestModel> = {
+						tag: profile,
+						batched: batched ?? true,
+						batchId: 1,
+						products: products || (product && [product]) || (seed && [seed]),
+						cart: elemContext.cart && getArrayFunc(elemContext.cart),
+						shopper: shopper?.id || shopperId,
+						...options,
+					};
 
-					const tag = elem?.getAttribute('searchspring-recommend');
-
-					if (product || seed) {
-						controllerGlobals.product = product || seed;
-					}
-
-					if (options?.siteId) {
-						controllerGlobals.siteId = options.siteId;
-					}
-
-					if (options?.branch) {
-						controllerGlobals.branch = options.branch;
-					}
-
-					if (options?.filters) {
-						controllerGlobals.filters = options.filters;
-					}
-
-					readyTheController(this, elem, context, profileCount, originalElem, 1, controllerGlobals, tag);
+					readyTheController(this, elem, elemContext, profileCount, originalElem, profileRequestGlobals);
 				}
 			}
 		);
@@ -256,76 +240,38 @@ async function readyTheController(
 	context: ContextVariables,
 	profileCount: RecommendationProfileCounts,
 	elem: Element | undefined,
-	batchId: number,
-	controllerGlobals: Partial<RecommendationControllerConfig>,
-	tag: string | null | undefined
+	controllerGlobals: Partial<RecommendationControllerConfig>
 ) {
-	const { shopper, shopperId, products, cart, options } = context;
-	const blockedItems = context.options?.blockedItems;
+	const { batched, batchId, realtime, cart, tag } = controllerGlobals;
 
 	if (!tag) {
 		// FEEDBACK: change message depending on script integration type (profile vs. legacy)
-		instance.logger.warn(`'profile' attribute is missing from <script> tag, skipping this profile`, elem);
+		instance.logger.warn(`'profile' is missing from <script> tag, skipping this profile`, elem);
 		return;
 	}
 
-	if (shopper || shopperId) {
-		controllerGlobals.shopper = shopper?.id || shopperId;
-	}
-	if (products) {
-		controllerGlobals.products = products;
-	}
-	if (options?.query) {
-		controllerGlobals.query = options.query;
-	}
-
-	if (options?.categories) {
-		controllerGlobals.categories = options.categories;
-	}
-	if (options?.brands) {
-		controllerGlobals.brands = options.brands;
-	}
-	if (options?.limit && Number.isInteger(Number(options?.limit))) {
-		controllerGlobals.limit = Number(options?.limit);
-	}
-	if (blockedItems && Array.isArray(blockedItems)) {
-		controllerGlobals.blockedItems = blockedItems;
-	}
-
-	let cartContents;
-	if (typeof cart === 'function') {
-		try {
-			const cartFuncContents = cart();
-			if (Array.isArray(cartFuncContents)) {
-				cartContents = cartFuncContents;
-			}
-		} catch (e) {
-			instance.logger.warn(`Error getting cart contents from function`, e);
-		}
-	} else if (Array.isArray(cart)) {
-		cartContents = cart;
-	}
-	if (Array.isArray(cartContents)) {
-		instance.tracker.cookies.cart.set(cartContents);
-		controllerGlobals.cart = instance.tracker.cookies.cart.get();
+	if (Array.isArray(cart)) {
+		instance.tracker.cookies.cart.set(cart);
 	}
 
 	profileCount[tag] = profileCount[tag] + 1 || 1;
 
-	const defaultGlobals = {
+	const defaultGlobals: Partial<RecommendRequestModel> = {
 		limit: 20,
 	};
 
-	const globals = deepmerge(
-		deepmerge(deepmerge(defaultGlobals, instance.config.client?.globals || {}), (instance.config.config?.globals as any) || {}),
-		controllerGlobals
-	);
+	const globals: Partial<RecommendRequestModel> = deepmerge.all([
+		defaultGlobals,
+		instance.config.client?.globals || {},
+		instance.config.config?.globals || {},
+		controllerGlobals,
+	]);
 
 	const controllerConfig = {
 		id: `recommend_${tag}_${profileCount[tag] - 1}`,
 		tag,
-		batched: options?.batched ?? true,
-		realtime: Boolean(options?.realtime),
+		batched: batched ?? true,
+		realtime: Boolean(realtime),
 		batchId: batchId,
 		...instance.config.config,
 		globals,
@@ -365,11 +311,11 @@ async function readyTheController(
 			},
 			{ client: instance.client, tracker: instance.tracker }
 		);
-	}
 
-	instance.uses.forEach((attachements) => controller.use(attachements));
-	instance.plugins.forEach((plugin) => controller.plugin(plugin.func, ...plugin.args));
-	instance.middleware.forEach((middleware) => controller.on(middleware.event, ...middleware.func));
+		instance.uses.forEach((attachements) => controller.use(attachements));
+		instance.plugins.forEach((plugin) => controller.plugin(plugin.func, ...plugin.args));
+		instance.middleware.forEach((middleware) => controller.on(middleware.event, ...middleware.func));
+	}
 
 	// run a search on the controller if it has not yet and it is not currently
 	if (!controller.store.loaded && !controller.store.loading) {
@@ -424,4 +370,21 @@ async function readyTheController(
 			render(<RecommendationsComponent controller={controller} />, injectedElem);
 		}
 	});
+}
+
+function getArrayFunc(arrayOrFunc: string[] | (() => string[])): string[] {
+	if (typeof arrayOrFunc === 'function') {
+		try {
+			const funcContents = arrayOrFunc();
+			if (Array.isArray(funcContents)) {
+				return funcContents;
+			}
+		} catch (e) {
+			// function didn't return an array
+		}
+	} else if (Array.isArray(arrayOrFunc)) {
+		return arrayOrFunc;
+	}
+
+	return [];
 }

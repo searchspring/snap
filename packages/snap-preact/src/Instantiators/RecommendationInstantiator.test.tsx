@@ -280,6 +280,7 @@ describe('RecommendationInstantiator', () => {
 		document.body.innerHTML = `<script type="searchspring/recommend" profile="${DEFAULT_PROFILE}">
 			shopper = { id: 'snapdev' };
 			product = 'sku1';
+			custom = { some: 'thing' };
 			options = {
 				branch: 'testing',
 				siteId: 'abc123',
@@ -292,9 +293,9 @@ describe('RecommendationInstantiator', () => {
 						value: 'blue'
 					},
 					{
-						  type: 'range',
-						  field: 'price',
-						  value: { low: 0, high: 20 }
+						type: 'range',
+						field: 'price',
+						value: { low: 0, high: 20 }
 					}
 				],
 				brands: ['nike', 'h&m'],
@@ -316,6 +317,7 @@ describe('RecommendationInstantiator', () => {
 					id: 'snapdev',
 				},
 				product: 'sku1',
+				custom: { some: 'thing' },
 				options: {
 					branch: 'testing',
 					categories: ['cats', 'dogs'],
@@ -358,7 +360,7 @@ describe('RecommendationInstantiator', () => {
 			batchId: 1,
 			brands: ['nike', 'h&m'],
 			limit: 5,
-			product: 'sku1',
+			products: ['sku1'],
 			shopper: 'snapdev',
 			siteId: 'abc123',
 			tag: 'trending',
@@ -370,15 +372,20 @@ describe('RecommendationInstantiator', () => {
 			{
 				profile: 'trending',
 				target: '#tout1',
+				custom: { some: 'thing1' },
 				options: {
+					siteId: '8uyt2m',
 					limit: 1,
 					categories: ['1234'],
 					brands: ['12345'],
 					filters: [
 						{
-							field: 'color',
-							type: 'value',
-							value: 'red',
+							field: 'price',
+							type: 'range',
+							value: {
+								low: 20,
+								high: 40,
+							},
 						},
 					],
 				},
@@ -386,6 +393,7 @@ describe('RecommendationInstantiator', () => {
 			{
 				profile: 'similar',
 				target: '#tout2',
+				custom: { some: 'thing2' },
 				options: {
 					limit: 2,
 					categories: ['5678'],
@@ -406,41 +414,50 @@ describe('RecommendationInstantiator', () => {
 			<div id="tout1"></div>
 			<div id="tout2"></div>
 			<script type="searchspring/recommendations">
+				custom = { some: 'thing' };
 				globals = {
-					product: "C-AD-W1-1869P",
-					shopperId: 'snapdev',
+					products: ["C-AD-W1-1869P"],
+					shopper: {
+						id: 'snapdev',
+					},
 					blockedItems: ['1234','5678'],
-                    cart: ['5678']
+					cart: ['5678']
 				};
 				
 				profiles = [
 					{
 						profile: 'trending',
 						target: '#tout1',
+						custom: { some: 'thing1' },
 						options: {
+							siteId: '8uyt2m',
 							limit: 1,
 							categories: ["1234"],
 							brands: ["12345"],
 							filters: [{
-								field: 'color',
-								type: 'value',
-								value: "red"
+								field: 'price',
+								type: 'range',
+								value: {
+									low: 20,
+									high: 40
+								}
 							}]
 						}
 					},
 					{
 						profile: 'similar',
 						target: '#tout2',
+						custom: { some: 'thing2' },
 						options: {
-                            limit: 2,
-                            categories: ["5678"],
-                            brands: ["65432"],
-                            filters: [{
-                                field: 'color',
-                                type: 'value',
-                                value: "blue"
-                            }]
-                        },
+							limit: 2,
+							categories: ["5678"],
+							brands: ["65432"],
+							filters: [{
+								field: 'color',
+								type: 'value',
+								value: "blue"
+							}]
+						},
 					},
 				];
 			</script>
@@ -455,13 +472,14 @@ describe('RecommendationInstantiator', () => {
 		Object.keys(recommendationInstantiator.controller).forEach((controllerId, index) => {
 			const controller = recommendationInstantiator.controller[controllerId];
 			expect(controller.context).toStrictEqual({
+				custom: { some: 'thing' },
 				globals: {
-					product: 'C-AD-W1-1869P',
-					shopperId: 'snapdev',
+					products: ['C-AD-W1-1869P'],
+					shopper: { id: 'snapdev' },
 					blockedItems: ['1234', '5678'],
 					cart: ['5678'],
 				},
-				...profileContextArray[index],
+				profile: profileContextArray[index],
 			});
 		});
 		const batchId = recommendationInstantiator.controller[Object.keys(recommendationInstantiator.controller)[0]].store.config.batchId;
@@ -475,13 +493,18 @@ describe('RecommendationInstantiator', () => {
 			cart: ['5678'],
 			categories: ['1234'],
 			limit: 1,
-			profileFilters: [
+			filters: [
 				{
-					field: 'color',
-					type: 'value',
-					value: 'red',
+					field: 'price',
+					type: 'range',
+					value: {
+						low: 20,
+						high: 40,
+					},
 				},
 			],
+			products: ['C-AD-W1-1869P'],
+			shopper: 'snapdev',
 			batchId,
 			siteId: '8uyt2m',
 			tag: 'trending',
@@ -495,15 +518,17 @@ describe('RecommendationInstantiator', () => {
 			cart: ['5678'],
 			categories: ['5678'],
 			limit: 2,
-			profileFilters: [
+			filters: [
 				{
 					field: 'color',
 					type: 'value',
 					value: 'blue',
 				},
 			],
+			products: ['C-AD-W1-1869P'],
+			shopper: 'snapdev',
 			batchId,
-			siteId: '8uyt2m',
+			siteId: undefined,
 			tag: 'similar',
 		});
 	});
