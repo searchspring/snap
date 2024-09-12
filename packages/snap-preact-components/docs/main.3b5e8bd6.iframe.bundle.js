@@ -1,4 +1,4 @@
-/*! For license information please see main.65aede7a.iframe.bundle.js.LICENSE.txt */
+/*! For license information please see main.3b5e8bd6.iframe.bundle.js.LICENSE.txt */
 (self.webpackChunk_searchspring_snap_preact_components = self.webpackChunk_searchspring_snap_preact_components || []).push([
 	[792],
 	{
@@ -26921,7 +26921,7 @@
 							!mergedlazyRender.enabled ||
 							(0, useIntersection.v)(recsRef, mergedlazyRender.offset + ' 0px ' + mergedlazyRender.offset + ' 0px', !0)) &&
 							setIsVisible(!0),
-						children || (null != resultsToRender && resultsToRender.length)
+						(Array.isArray(children) && children.length) || (null != resultsToRender && resultsToRender.length)
 							? (0, emotion_react_browser_esm.Y)(
 									cache._,
 									null,
@@ -36631,20 +36631,11 @@
 							{
 								key: 'params',
 								get: function get() {
-									var _this$context,
-										_this$context$options,
-										params = Object.assign(
+									var params = Object.assign(
 											{
 												tag: this.config.tag,
 												batched: this.config.batched,
 												branch: this.config.branch || 'production',
-												order:
-													null === (_this$context = this.context) ||
-													void 0 === _this$context ||
-													null === (_this$context$options = _this$context.options) ||
-													void 0 === _this$context$options
-														? void 0
-														: _this$context$options.order,
 												batchId: this.config.batchId,
 											},
 											this.config.globals
@@ -41444,37 +41435,39 @@
 				transformRecommendationFiltersPost =
 					(__webpack_require__('../../node_modules/core-js/modules/es.array.find-index.js'),
 					function transformRecommendationFiltersPost(filters) {
-						var filterArray = [];
-						return (
-							filters.map(function (filter) {
-								if ('value' == filter.type) {
-									var i = filterArray.findIndex(function (_filter) {
-										return _filter.field == filter.field;
-									});
-									if (i > -1) filterArray[i].values.push(filter.value);
-									else {
-										var val = { field: filter.field, type: '=', values: [filter.value] };
-										filterArray.push(val);
+						if (filters) {
+							var filterArray = [];
+							return (
+								filters.map(function (filter) {
+									if ('value' == filter.type) {
+										var i = filterArray.findIndex(function (_filter) {
+											return _filter.field == filter.field;
+										});
+										if (i > -1) filterArray[i].values.push(filter.value);
+										else {
+											var val = { field: filter.field, type: '=', values: [filter.value] };
+											filterArray.push(val);
+										}
+									} else if ('range' == filter.type) {
+										if ('number' == typeof filter.value.low) {
+											var low = { field: filter.field, type: '>=', values: [filter.value.low] },
+												_i = filterArray.findIndex(function (_filter) {
+													return _filter.field == filter.field && '>=' == _filter.type;
+												});
+											_i > -1 ? (filterArray[_i] = low) : filterArray.push(low);
+										}
+										if ('number' == typeof filter.value.high) {
+											var high = { field: filter.field, type: '<=', values: [filter.value.high] },
+												_i2 = filterArray.findIndex(function (_filter) {
+													return _filter.field == filter.field && '<=' == _filter.type;
+												});
+											_i2 > -1 ? (filterArray[_i2] = high) : filterArray.push(high);
+										}
 									}
-								} else if ('range' == filter.type) {
-									if ('number' == typeof filter.value.low) {
-										var low = { field: filter.field, type: '>=', values: [filter.value.low] },
-											_i = filterArray.findIndex(function (_filter) {
-												return _filter.field == filter.field && '>=' == _filter.type;
-											});
-										_i > -1 ? (filterArray[_i] = low) : filterArray.push(low);
-									}
-									if ('number' == typeof filter.value.high) {
-										var high = { field: filter.field, type: '<=', values: [filter.value.high] },
-											_i2 = filterArray.findIndex(function (_filter) {
-												return _filter.field == filter.field && '<=' == _filter.type;
-											});
-										_i2 > -1 ? (filterArray[_i2] = high) : filterArray.push(high);
-									}
-								}
-							}),
-							filterArray
-						);
+								}),
+								filterArray
+							);
+						}
 					});
 			function Recommend_regeneratorRuntime() {
 				Recommend_regeneratorRuntime = function _regeneratorRuntime() {
@@ -41982,7 +41975,8 @@
 								value:
 									((_batchRecommendations = Recommend_asyncToGenerator(
 										Recommend_regeneratorRuntime().mark(function _callee3(parameters) {
-											var batchId,
+											var _parameters$profile,
+												batchId,
 												key,
 												batch,
 												deferred,
@@ -41996,7 +41990,13 @@
 															case 0:
 																return (
 																	(batchId = parameters.batchId || 1),
-																	(key = parameters.batched ? parameters.siteId + ':' + batchId : Math.random() + ':' + batchId),
+																	(key = parameters.batched
+																		? ((null === (_parameters$profile = parameters.profile) || void 0 === _parameters$profile
+																				? void 0
+																				: _parameters$profile.siteId) || parameters.siteId) +
+																		  ':' +
+																		  batchId
+																		: Math.random() + ':' + batchId),
 																	(batch = this.batches[key] = this.batches[key] || { timeout: null, request: { profiles: [] }, entries: [] }),
 																	(deferred = new Deferred()),
 																	batch.entries.push({ request: parameters, deferred }),
@@ -42016,76 +42016,121 @@
 																										delete _this3.batches[key],
 																										batch.entries.sort(sortBatchEntries),
 																										batch.entries.map(function (entry) {
-																											var _batch$request$profil,
-																												transformedFilters,
-																												_entry$request = entry.request,
-																												tag = _entry$request.tag,
-																												categories = _entry$request.categories,
-																												brands = _entry$request.brands,
-																												query = _entry$request.query,
-																												filters = _entry$request.filters,
-																												dedupe = _entry$request.dedupe;
-																											filters && (transformedFilters = transformRecommendationFiltersPost(filters));
-																											var profile = {
-																												tag,
-																												categories,
-																												brands,
-																												limit: entry.request.limit || 20,
-																												searchTerm: query,
-																												filters: transformedFilters,
-																												dedupe,
-																											};
-																											null === (_batch$request$profil = batch.request.profiles) ||
-																												void 0 === _batch$request$profil ||
-																												_batch$request$profil.push(profile),
-																												(batch.request = Object.assign({}, batch.request, {
-																													siteId: parameters.siteId,
-																													product: parameters.product,
-																													products: parameters.products,
-																													blockedItems: parameters.blockedItems,
-																													test: parameters.test,
-																													cart: parameters.cart,
-																													lastViewed: parameters.lastViewed,
-																													shopper: parameters.shopper,
-																												})),
-																												batch.request.product &&
-																													(Array.isArray(batch.request.products) &&
-																													-1 == batch.request.products.indexOf(batch.request.product)
-																														? (batch.request.products = batch.request.products.concat(batch.request.product))
-																														: (batch.request.products = [batch.request.product]),
-																													delete batch.request.product);
+																											var _entry$request$profil2;
+																											if (
+																												(entry.request.product &&
+																													(Array.isArray(entry.request.products) &&
+																													-1 == entry.request.products.indexOf(entry.request.product)
+																														? (entry.request.products = entry.request.products.concat(entry.request.product))
+																														: (entry.request.products = [entry.request.product])),
+																												entry.request.profile)
+																											) {
+																												var _batch$request$profil,
+																													_entry$request = entry.request,
+																													tag = _entry$request.tag,
+																													_entry$request$profil = _entry$request.profile,
+																													categories = _entry$request$profil.categories,
+																													brands = _entry$request$profil.brands,
+																													_blockedItems = _entry$request$profil.blockedItems,
+																													limit = _entry$request$profil.limit,
+																													query = _entry$request$profil.query,
+																													_filters = _entry$request$profil.filters,
+																													dedupe = _entry$request$profil.dedupe,
+																													profile = Object.assign(
+																														{ tag },
+																														defined({
+																															categories,
+																															brands,
+																															blockedItems: _blockedItems,
+																															limit,
+																															searchTerm: query,
+																															filters: transformRecommendationFiltersPost(_filters),
+																															dedupe,
+																														})
+																													);
+																												null === (_batch$request$profil = batch.request.profiles) ||
+																													void 0 === _batch$request$profil ||
+																													_batch$request$profil.push(profile);
+																											} else {
+																												var _batch$request$profil2,
+																													_entry$request2 = entry.request,
+																													_tag = _entry$request2.tag,
+																													_categories = _entry$request2.categories,
+																													_brands = _entry$request2.brands,
+																													_limit = _entry$request2.limit,
+																													_query = _entry$request2.query,
+																													_dedupe = _entry$request2.dedupe,
+																													_profile = Object.assign(
+																														{ tag: _tag },
+																														defined({
+																															categories: _categories,
+																															brands: _brands,
+																															limit: _limit,
+																															searchTerm: _query,
+																															dedupe: _dedupe,
+																														})
+																													);
+																												null === (_batch$request$profil2 = batch.request.profiles) ||
+																													void 0 === _batch$request$profil2 ||
+																													_batch$request$profil2.push(_profile);
+																											}
+																											var _entry$request3 = entry.request,
+																												products = _entry$request3.products,
+																												blockedItems = _entry$request3.blockedItems,
+																												filters = _entry$request3.filters,
+																												test = _entry$request3.test,
+																												cart = _entry$request3.cart,
+																												lastViewed = _entry$request3.lastViewed,
+																												shopper = _entry$request3.shopper;
+																											batch.request = Object.assign(
+																												{},
+																												batch.request,
+																												defined({
+																													siteId:
+																														(null === (_entry$request$profil2 = entry.request.profile) ||
+																														void 0 === _entry$request$profil2
+																															? void 0
+																															: _entry$request$profil2.siteId) || entry.request.siteId,
+																													products,
+																													blockedItems,
+																													filters: transformRecommendationFiltersPost(filters),
+																													test,
+																													cart,
+																													lastViewed,
+																													shopper,
+																												})
+																											);
 																										}),
 																										(_context2.prev = 3),
 																										_this3.configuration.mode == AppMode.development && (batch.request.test = !0),
-																										batch.request.product && (batch.request.product = batch.request.product.toString()),
-																										(_context2.next = 8),
+																										(_context2.next = 7),
 																										_this3.postRecommendations(batch.request)
 																									);
-																								case 8:
+																								case 7:
 																									(response = _context2.sent),
 																										null === (_batch$entries = batch.entries) ||
 																											void 0 === _batch$entries ||
 																											_batch$entries.forEach(function (entry, index) {
 																												entry.deferred.resolve([response[index]]);
 																											}),
-																										(_context2.next = 15);
+																										(_context2.next = 14);
 																									break;
-																								case 12:
-																									(_context2.prev = 12),
+																								case 11:
+																									(_context2.prev = 11),
 																										(_context2.t0 = _context2.catch(3)),
 																										null === (_batch$entries2 = batch.entries) ||
 																											void 0 === _batch$entries2 ||
 																											_batch$entries2.forEach(function (entry) {
 																												entry.deferred.reject(_context2.t0);
 																											});
-																								case 15:
+																								case 14:
 																								case 'end':
 																									return _context2.stop();
 																							}
 																					},
 																					_callee2,
 																					null,
-																					[[3, 12]]
+																					[[3, 11]]
 																				);
 																			})
 																		),
@@ -42160,6 +42205,15 @@
 					: one.order > two.order
 					? 1
 					: 0;
+			}
+			function defined(properties) {
+				var definedProps = {};
+				return (
+					Object.keys(properties).map(function (key) {
+						void 0 !== properties[key] && (definedProps[key] = properties[key]);
+					}),
+					definedProps
+				);
 			}
 			var _excluded = ['tag'];
 			function Client_slicedToArray(arr, i) {
@@ -49633,7 +49687,7 @@
 					(this.event = payload.event),
 					(this.id = payload.id),
 					(this.pid = payload.pid),
-					(this.meta = { initiator: { lib: 'searchspring/snap', 'lib.version': '0.60.0', 'lib.framework': config.framework } }),
+					(this.meta = { initiator: { lib: 'searchspring/snap', 'lib.version': '0.60.1', 'lib.framework': config.framework } }),
 					(this.id = (0, v4.A)());
 			});
 			function Tracker_toConsumableArray(arr) {
@@ -50189,7 +50243,7 @@
 									_this$globals$currenc.code &&
 									(this.context.currency = this.globals.currency),
 								(null !== (_window$searchspring = window.searchspring) && void 0 !== _window$searchspring && _window$searchspring.tracker) ||
-									((window.searchspring = window.searchspring || {}), (window.searchspring.tracker = this), (window.searchspring.version = '0.60.0')),
+									((window.searchspring = window.searchspring || {}), (window.searchspring.tracker = this), (window.searchspring.version = '0.60.1')),
 								setTimeout(function () {
 									_this.targeters.push(
 										new DomTargeter([{ selector: 'script[type^="searchspring/track/"]', emptyTarget: !1 }], function (target, elem) {
