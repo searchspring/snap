@@ -359,7 +359,6 @@ describe('Snap Client', () => {
 				body: {
 					profiles: [
 						{
-							limit: 20,
 							tag: 'dress',
 						},
 					],
@@ -368,7 +367,7 @@ describe('Snap Client', () => {
 				},
 			};
 
-			const recommendCacheKey = '{"profiles":[{"tag":"dress","limit":20}],"siteId":"8uyt2m","test":true}';
+			const recommendCacheKey = '{"profiles":[{"tag":"dress"}],"siteId":"8uyt2m","test":true}';
 
 			expect(recommendRequesterSpy).toHaveBeenCalledTimes(2);
 			expect(recommendRequesterSpy.mock.calls).toEqual([
@@ -606,7 +605,6 @@ describe('Snap Client', () => {
 					body: {
 						profiles: [
 							{
-								limit: 20,
 								tag: 'dress',
 							},
 						],
@@ -615,7 +613,7 @@ describe('Snap Client', () => {
 					},
 				};
 
-				const recommendCacheKey = '{"profiles":[{"tag":"dress","limit":20}],"siteId":"8uyt2m","test":true}';
+				const recommendCacheKey = '{"profiles":[{"tag":"dress"}],"siteId":"8uyt2m","test":true}';
 
 				expect(recommendRequesterSpy).toHaveBeenCalledTimes(2);
 				expect(recommendRequesterSpy.mock.calls).toEqual([

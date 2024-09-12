@@ -1,5 +1,5 @@
 import { API, ApiConfiguration } from './Abstract';
-import { HTTPHeaders, RecommendPostRequestFiltersModel, RecommendPostRequestProfileModel } from '../../types';
+import { HTTPHeaders, RecommendPostRequestProfileModel } from '../../types';
 import { AppMode } from '@searchspring/snap-toolbox';
 import { transformRecommendationFiltersPost } from '../transforms';
 import { ProfileRequestModel, ProfileResponseModel, RecommendResponseModel, RecommendRequestModel, RecommendPostRequestModel } from '../../types';
@@ -57,7 +57,7 @@ export class RecommendAPI extends API {
 		const batchId = parameters.batchId || 1;
 
 		// set up batch key and deferred promises
-		const key = parameters.batched ? `${parameters.siteId}:${batchId}` : `${Math.random()}:${batchId}`;
+		const key = parameters.batched ? `${parameters.profile?.siteId || parameters.siteId}:${batchId}` : `${Math.random()}:${batchId}`;
 		const batch = (this.batches[key] = this.batches[key] || { timeout: null, request: { profiles: [] }, entries: [] });
 		const deferred = new Deferred();
 
@@ -86,37 +86,59 @@ export class RecommendAPI extends API {
 					}
 				}
 
-				// parameters used for profile specific
-				const { tag, categories, brands, query, filters, dedupe } = entry.request;
+				// build profile specific parameters
+				if (entry.request.profile) {
+					const {
+						tag,
+						profile: { categories, brands, blockedItems, limit, query, filters, dedupe },
+					} = entry.request;
 
-				let transformedFilters;
-				if (filters) {
-					transformedFilters = transformRecommendationFiltersPost(filters) as RecommendPostRequestFiltersModel[];
+					const profile: RecommendPostRequestProfileModel = {
+						tag,
+						...defined({
+							categories,
+							brands,
+							blockedItems,
+							limit: limit,
+							searchTerm: query,
+							filters: transformRecommendationFiltersPost(filters),
+							dedupe,
+						}),
+					};
+
+					batch.request.profiles?.push(profile);
+				} else {
+					const { tag, categories, brands, limit, query, dedupe } = entry.request;
+
+					const profile: RecommendPostRequestProfileModel = {
+						tag,
+						...defined({
+							categories,
+							brands,
+							limit: limit,
+							searchTerm: query,
+							dedupe,
+						}),
+					};
+
+					batch.request.profiles?.push(profile);
 				}
 
-				// build profile specific parameters
-				const profile: RecommendPostRequestProfileModel = {
-					tag,
-					categories,
-					brands,
-					limit: entry.request.limit || 20,
-					searchTerm: query,
-					filters: transformedFilters,
-					dedupe,
-				};
-
-				batch.request.profiles?.push(profile);
-
 				// parameters used globally
-				const { siteId, products, blockedItems, test, cart, lastViewed, shopper } = entry.request;
-				// only when these parameters are defined should they be added to the list
-				if (siteId) batch.request.siteId = siteId;
-				if (products) batch.request.products = products;
-				if (blockedItems) batch.request.blockedItems = blockedItems;
-				if (test) batch.request.test = test;
-				if (cart) batch.request.cart = cart;
-				if (lastViewed) batch.request.lastViewed = lastViewed;
-				if (shopper) batch.request.shopper = shopper;
+				const { products, blockedItems, filters, test, cart, lastViewed, shopper } = entry.request;
+				batch.request = {
+					...batch.request,
+					...defined({
+						siteId: entry.request.profile?.siteId || entry.request.siteId,
+						products,
+						blockedItems,
+						filters: transformRecommendationFiltersPost(filters),
+						test,
+						cart,
+						lastViewed,
+						shopper,
+					}),
+				};
 			});
 
 			try {
@@ -181,4 +203,20 @@ function sortBatchEntries(a: BatchEntry, b: BatchEntry) {
 		return 1;
 	}
 	return 0;
+}
+
+type DefinedProps = {
+	[key: string]: any;
+};
+
+export function defined(properties: Record<string, any>): DefinedProps {
+	const definedProps: DefinedProps = {};
+
+	Object.keys(properties).map((key) => {
+		if (properties[key] !== undefined) {
+			definedProps[key] = properties[key];
+		}
+	});
+
+	return definedProps;
 }
