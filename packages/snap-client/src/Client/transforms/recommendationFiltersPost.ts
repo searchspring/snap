@@ -1,6 +1,8 @@
 import { RecommendationRequestFilterModel, RecommendPostRequestFiltersModel } from '../../types';
 
-export const transformRecommendationFiltersPost = (filters: RecommendationRequestFilterModel[]) => {
+export const transformRecommendationFiltersPost = (filters?: RecommendationRequestFilterModel[]) => {
+	if (!filters) return;
+
 	const filterArray: RecommendPostRequestFiltersModel[] = [];
 	filters.map((filter) => {
 		if (filter.type == 'value') {

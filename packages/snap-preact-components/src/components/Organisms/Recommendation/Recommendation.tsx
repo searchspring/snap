@@ -136,7 +136,7 @@ export const Recommendation = observer((properties: RecommendationProps): JSX.El
 		setIsVisible(true);
 	}
 
-	return children || resultsToRender?.length ? (
+	return (Array.isArray(children) && children.length) || resultsToRender?.length ? (
 		<CacheProvider>
 			<div {...styling} className={classnames('ss__recommendation', className)} ref={recsRef}>
 				{isVisible ? (

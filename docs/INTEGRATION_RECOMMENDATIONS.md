@@ -14,7 +14,7 @@ It is recommended to utilize the [`RecommendationInstantiator`](https://github.c
 	profiles = [
 		{
 			profile: 'recently-viewed',
-			target: '.ss__recs__recently-viewed',
+			selector: '.ss__recs__recently-viewed',
 			options: {
 				limit: 5
 			}
@@ -23,7 +23,7 @@ It is recommended to utilize the [`RecommendationInstantiator`](https://github.c
 </script>
 ```
 
-The `RecommendationInstantiator` will look for these elements on the page and attempt to inject components based on the `profiles` specified. In the example above, the profile specified is the `recently-viewed` profile, and is set to render inside the target `.ss__recs__recently-viewed`, this profile would typically be setup to display the last products viewed by the shopper. These profiles must be setup in the Searchspring Management Console (SMC) and have associated Snap templates selected.
+The `RecommendationInstantiator` will look for these elements on the page and attempt to inject components based on the `profiles` specified. In the example above, the profile specified is the `recently-viewed` profile, and is set to render inside the selector `.ss__recs__recently-viewed`, this profile would typically be setup to display the last products viewed by the shopper. These profiles must be setup in the Searchspring Management Console (SMC) and have associated Snap templates selected.
 
 
 ## Recommendation Context Variables
@@ -34,6 +34,7 @@ Context variables are applied to individual recommendation profiles similar to h
 |---|---|:---:|---|:---:|
 | products | array of SKU strings | product detail page | SKU value(s) to identify the current product(s) being viewed | ✔️ |
 | blockedItems | array of strings | all | SKU values to identify which products to exclude from the response |   |
+| filters | array of filters | all | optional recommendation filters to apply to ALL profiles in the batch |   |
 | cart | array (or function that returns an array) of current cart skus | all | optional method of setting cart contents |   |
 | shopper.id | logged in user unique identifier | all | required for personalization functionallity if not provided to the bundle (global) context |   |
 
@@ -42,7 +43,7 @@ Context variables are applied to individual recommendation profiles similar to h
 | Option | Value | Placement | Description | Required
 |---|---|:---:|---|:---:|
 | profile | string | all | profile name to use | ✔️ |
-| target | string | all | CSS selector to render component inside | ✔️ |
+| selector | string | all | CSS selector to render component inside | ✔️ |
 | options.siteId | global siteId overwrite | all | optional global siteId overwrite |   |
 | options.categories | array of category path strings | all | optional category identifiers used in category trending recommendation profiles |   |
 | options.brands | array of brand strings | all | optional brand identifiers used in brand trending recommendation profiles |   |
@@ -55,7 +56,7 @@ Context variables are applied to individual recommendation profiles similar to h
 
 
 ## Batching and Ordering
-Each "searchspring/recommendations" script block groups multiple recommendation profiles into a single API request, known as a batch. By default, the script tag fetches recommendations for all profiles with a matching target in one batched request. The order of profiles in the array determines their priority within the batch.
+Each "searchspring/recommendations" script block groups multiple recommendation profiles into a single API request, known as a batch. By default, the script tag fetches recommendations for all profiles with a matching selector in one batched request. The order of profiles in the array determines their priority within the batch.
 
 While batching all profiles together is generally the most efficient approach, there may be cases where separate batching is preferred. For instance, recommendations for a mini cart (side cart) might not require de-duplication with other recommendations. You can disable de-duplication for a specific profile by setting `dedupe: false` in its options, or create a separate batch by using an additional script tag.
 
@@ -83,19 +84,19 @@ Here's an example that demonstrates deduping:
 	profiles = [
 		{
 			profile: 'customers-also-bought',
-			target: '.ss__recs__crosssell',
+			selector: '.ss__recs__crosssell',
 			options: {
 				limit: 5
 			}
 		},
 		{
 			profile: 'customers-also-viewed',
-			target: '.ss__recs__similar'
+			selector: '.ss__recs__similar'
 		},
 		// same batch, but dedupe false
 		{
 			profile: 'customers-also-like',
-			target: '.ss__recs__alsoliked',
+			selector: '.ss__recs__alsoliked',
 			options: {
 				dedupe: false
 			}
@@ -118,7 +119,7 @@ A typical "similar" profile that would display products similar to the product p
 	profiles = [
 		{
 			profile: 'customers-also-viewed',
-			target: '.ss__recs__similar'
+			selector: '.ss__recs__similar'
 		}
 	];
 </script>
@@ -134,7 +135,7 @@ If tracking scripts are not in place, "crosssell" profiles may require the cart 
 	profiles = [
 		{
 			profile: 'customers-also-bought',
-			target: '.ss__recs__crosssell'
+			selector: '.ss__recs__crosssell'
 		}
 	];
 </script>
@@ -152,7 +153,7 @@ If the shopper identifier is not beeing captured by the `bundle.js` context, it 
 	profiles = [
 		{
 			profile: 'view-cart',
-			target: '.ss__recs__cart'
+			selector: '.ss__recs__cart'
 		}
 	];
 </script>
@@ -166,7 +167,7 @@ The example shown below will filter the recommendations for products matching fi
 	profiles = [
 		{
 			profile: 'customers-also-bought',
-			target: '.ss__recs__crosssell',
+			selector: '.ss__recs__crosssell',
 			options: {
 				filters: [
 					{
