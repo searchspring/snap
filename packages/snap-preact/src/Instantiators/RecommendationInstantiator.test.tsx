@@ -342,28 +342,107 @@ describe('RecommendationInstantiator', () => {
 
 		expect(clientSpy).toHaveBeenCalledTimes(1);
 		expect(clientSpy).toHaveBeenCalledWith({
-			batched: true,
+			tag: 'trending',
+			products: ['sku1'],
+			shopper: 'snapdev',
 			branch: 'testing',
-			categories: ['cats', 'dogs'],
+			batched: true,
+			siteId: baseConfig.client?.globals.siteId,
+			profile: {
+				siteId: 'abc123',
+				branch: 'testing',
+				categories: ['cats', 'dogs'],
+				filters: [
+					{
+						type: 'value',
+						field: 'color',
+						value: 'blue',
+					},
+					{
+						type: 'range',
+						field: 'price',
+						value: { low: 0, high: 20 },
+					},
+				],
+				brands: ['nike', 'h&m'],
+				limit: 5,
+			},
+		});
+	});
+
+	it('uses the globals from the config in the request', async () => {
+		document.body.innerHTML = `<script type="searchspring/recommend" profile="${DEFAULT_PROFILE}">
+			options = {
+				filters: [
+					{
+						type: 'value',
+						field: 'color',
+						value: 'blue'
+					},
+				],
+			}
+		</script>`;
+
+		const client = new MockClient(baseConfig.client!.globals, {});
+		const clientSpy = jest.spyOn(client, 'recommend');
+
+		const globalConfig = {
+			...baseConfig,
+			client: {
+				globals: {
+					siteId: '8uyt2m',
+					filters: [
+						{
+							type: 'value',
+							field: 'color',
+							value: 'red',
+						},
+					],
+				},
+			},
+		};
+
+		const recommendationInstantiator = new RecommendationInstantiator(globalConfig, { client });
+		await wait();
+		expect(Object.keys(recommendationInstantiator.controller).length).toBe(1);
+		Object.keys(recommendationInstantiator.controller).forEach((controllerId) => {
+			const controller = recommendationInstantiator.controller[controllerId];
+			expect(controller.context).toStrictEqual({
+				profile: 'trending',
+				options: {
+					filters: [
+						{
+							type: 'value',
+							field: 'color',
+							value: 'blue',
+						},
+					],
+				},
+			});
+		});
+
+		expect(clientSpy).toHaveBeenCalledTimes(1);
+		expect(clientSpy).toHaveBeenCalledWith({
+			tag: 'trending',
+			branch: 'production',
+			batched: true,
+			siteId: baseConfig.client?.globals.siteId,
 			filters: [
 				{
 					type: 'value',
 					field: 'color',
-					value: 'blue',
-				},
-				{
-					type: 'range',
-					field: 'price',
-					value: { low: 0, high: 20 },
+					value: 'red',
 				},
 			],
-			batchId: 1,
-			brands: ['nike', 'h&m'],
-			limit: 5,
-			products: ['sku1'],
-			shopper: 'snapdev',
-			siteId: 'abc123',
-			tag: 'trending',
+			profile: {
+				filters: [
+					{
+						type: 'value',
+						field: 'color',
+						value: 'blue',
+					},
+				],
+			},
 		});
 	});
 
@@ -371,10 +450,10 @@ describe('RecommendationInstantiator', () => {
 		const profileContextArray = [
 			{
 				profile: 'trending',
-				target: '#tout1',
+				selector: '#tout1',
 				custom: { some: 'thing1' },
 				options: {
-					siteId: '8uyt2m',
+					siteId: 'abc123',
 					limit: 1,
 					categories: ['1234'],
 					brands: ['12345'],
@@ -392,7 +471,7 @@ describe('RecommendationInstantiator', () => {
 			},
 			{
 				profile: 'similar',
-				target: '#tout2',
+				selector: '#tout2',
 				custom: { some: 'thing2' },
 				options: {
 					limit: 2,
@@ -427,10 +506,10 @@ describe('RecommendationInstantiator', () => {
 				profiles = [
 					{
 						profile: 'trending',
-						target: '#tout1',
+						selector: '#tout1',
 						custom: { some: 'thing1' },
 						options: {
-							siteId: '8uyt2m',
+							siteId: 'abc123',
 							limit: 1,
 							categories: ["1234"],
 							brands: ["12345"],
@@ -446,7 +525,7 @@ describe('RecommendationInstantiator', () => {
 					},
 					{
 						profile: 'similar',
-						target: '#tout2',
+						selector: '#tout2',
 						custom: { some: 'thing2' },
 						options: {
 							limit: 2,
@@ -486,50 +565,55 @@ describe('RecommendationInstantiator', () => {
 
 		expect(clientSpy).toHaveBeenCalledTimes(2);
 		expect(clientSpy).toHaveBeenNthCalledWith(1, {
-			batched: true,
-			blockedItems: ['1234', '5678'],
-			branch: 'production',
-			brands: ['12345'],
-			cart: ['5678'],
-			categories: ['1234'],
-			limit: 1,
-			filters: [
-				{
-					field: 'price',
-					type: 'range',
-					value: {
-						low: 20,
-						high: 40,
-					},
-				},
-			],
+			tag: 'trending',
 			products: ['C-AD-W1-1869P'],
+			cart: ['5678'],
+			blockedItems: ['1234', '5678'],
 			shopper: 'snapdev',
 			batchId,
-			siteId: '8uyt2m',
-			tag: 'trending',
+			siteId: baseConfig.client?.globals.siteId,
+			branch: 'production',
+			batched: true,
+			profile: {
+				brands: ['12345'],
+				categories: ['1234'],
+				limit: 1,
+				siteId: 'abc123',
+				filters: [
+					{
+						field: 'price',
+						type: 'range',
+						value: {
+							low: 20,
+							high: 40,
+						},
+					},
+				],
+			},
 		});
 
 		expect(clientSpy).toHaveBeenNthCalledWith(2, {
-			batched: true,
-			blockedItems: ['1234', '5678'],
-			branch: 'production',
-			brands: ['65432'],
-			cart: ['5678'],
-			categories: ['5678'],
-			limit: 2,
-			filters: [
-				{
-					field: 'color',
-					type: 'value',
-					value: 'blue',
-				},
-			],
+			tag: 'similar',
 			products: ['C-AD-W1-1869P'],
 			shopper: 'snapdev',
 			batchId,
-			siteId: undefined,
-			tag: 'similar',
+			siteId: baseConfig.client?.globals.siteId,
+			batched: true,
+			blockedItems: ['1234', '5678'],
+			branch: 'production',
+			cart: ['5678'],
+			profile: {
+				limit: 2,
+				brands: ['65432'],
+				categories: ['5678'],
+				filters: [
+					{
+						field: 'color',
+						type: 'value',
+						value: 'blue',
+					},
+				],
+			},
 		});
 	});
 

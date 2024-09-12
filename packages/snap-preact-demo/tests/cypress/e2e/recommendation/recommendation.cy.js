@@ -66,7 +66,7 @@ describe('Recommendations', () => {
 			describe('Tests Recommendations', () => {
 				it('has a controller', function () {
 					cy.snapController(integration?.selectors?.recommendation.controller).then(({ store }) => {
-						expect(store.config.globals.limit).equals(store.results.length);
+						expect(store.results.length).equals(20); // max limit when no limit specified
 						expect((store.config.globals.product || store.config.globals.products).length).to.be.greaterThan(0);
 					});
 				});

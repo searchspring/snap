@@ -1,5 +1,5 @@
 import { API, ApiConfiguration } from './Abstract';
-import { HTTPHeaders, RecommendPostRequestFiltersModel, RecommendPostRequestProfileModel } from '../../types';
+import { HTTPHeaders, RecommendPostRequestProfileModel } from '../../types';
 import { AppMode } from '@searchspring/snap-toolbox';
 import { transformRecommendationFiltersPost } from '../transforms';
 import { ProfileRequestModel, ProfileResponseModel, RecommendResponseModel, RecommendRequestModel, RecommendPostRequestModel } from '../../types';
@@ -57,7 +57,7 @@ export class RecommendAPI extends API {
 		const batchId = parameters.batchId || 1;
 
 		// set up batch key and deferred promises
-		const key = parameters.batched ? `${parameters.siteId}:${batchId}` : `${Math.random()}:${batchId}`;
+		const key = parameters.batched ? `${parameters.profile?.siteId || parameters.siteId}:${batchId}` : `${Math.random()}:${batchId}`;
 		const batch = (this.batches[key] = this.batches[key] || { timeout: null, request: { profiles: [] }, entries: [] });
 		const deferred = new Deferred();
 
@@ -72,62 +72,78 @@ export class RecommendAPI extends API {
 			// delete the batch so a new one can take its place
 			delete this.batches[key];
 
-			//resort batch entries based on order
+			// resort batch entries based on order
 			batch.entries.sort(sortBatchEntries);
 
-			// now that the requests are in proper order, map through them
-			// and build out the batches
+			// now that the requests are in proper order, map through them and build out the batches
 			batch.entries.map((entry) => {
-				const { tag, categories, brands, query, filters, dedupe } = entry.request;
-
-				let transformedFilters;
-				if (filters) {
-					transformedFilters = transformRecommendationFiltersPost(filters) as RecommendPostRequestFiltersModel[];
+				// use products request only and combine when needed
+				if (entry.request.product) {
+					if (Array.isArray(entry.request.products) && entry.request.products.indexOf(entry.request.product) == -1) {
+						entry.request.products = entry.request.products.concat(entry.request.product);
+					} else {
+						entry.request.products = [entry.request.product];
+					}
 				}
 
-				const profile: RecommendPostRequestProfileModel = {
-					tag,
-					categories,
-					brands,
-					limit: entry.request.limit || 20,
-					searchTerm: query,
-					filters: transformedFilters,
-					dedupe,
-				};
+				// build profile specific parameters
+				if (entry.request.profile) {
+					const {
+						tag,
+						profile: { categories, brands, blockedItems, limit, query, filters, dedupe },
+					} = entry.request;
 
-				batch.request.profiles?.push(profile);
+					const profile: RecommendPostRequestProfileModel = {
+						tag,
+						...defined({
+							categories,
+							brands,
+							blockedItems,
+							limit: limit,
+							searchTerm: query,
+							filters: transformRecommendationFiltersPost(filters),
+							dedupe,
+						}),
+					};
 
+					batch.request.profiles?.push(profile);
+				} else {
+					const { tag, categories, brands, limit, query, dedupe } = entry.request;
+
+					const profile: RecommendPostRequestProfileModel = {
+						tag,
+						...defined({
+							categories,
+							brands,
+							limit: limit,
+							searchTerm: query,
+							dedupe,
+						}),
+					};
+
+					batch.request.profiles?.push(profile);
+				}
+
+				// parameters used globally
+				const { products, blockedItems, filters, test, cart, lastViewed, shopper } = entry.request;
 				batch.request = {
 					...batch.request,
-					siteId: parameters.siteId,
-					product: parameters.product,
-					products: parameters.products,
-					blockedItems: parameters.blockedItems,
-					test: parameters.test,
-					cart: parameters.cart,
-					lastViewed: parameters.lastViewed,
-					shopper: parameters.shopper,
-				} as RecommendPostRequestModel;
-
-				// use products request only and combine when needed
-				if (batch.request.product) {
-					if (Array.isArray(batch.request.products) && batch.request.products.indexOf(batch.request.product) == -1) {
-						batch.request.products = batch.request.products.concat(batch.request.product);
-					} else {
-						batch.request.products = [batch.request.product];
-					}
-
-					delete batch.request.product;
-				}
+					...defined({
+						siteId: entry.request.profile?.siteId || entry.request.siteId,
+						products,
+						blockedItems,
+						filters: transformRecommendationFiltersPost(filters),
+						test,
+						cart,
+						lastViewed,
+						shopper,
+					}),
+				};
 			});
 
 			try {
 				if (this.configuration.mode == AppMode.development) {
 					batch.request.test = true;
-				}
-
-				if (batch.request['product']) {
-					batch.request['product'] = batch.request['product'].toString();
 				}
 
 				const response = await this.postRecommendations(batch.request as RecommendPostRequestModel);
@@ -187,4 +203,20 @@ function sortBatchEntries(a: BatchEntry, b: BatchEntry) {
 		return 1;
 	}
 	return 0;
+}
+
+type DefinedProps = {
+	[key: string]: any;
+};
+
+export function defined(properties: Record<string, any>): DefinedProps {
+	const definedProps: DefinedProps = {};
+
+	Object.keys(properties).map((key) => {
+		if (properties[key] !== undefined) {
+			definedProps[key] = properties[key];
+		}
+	});
+
+	return definedProps;
 }
