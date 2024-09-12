@@ -399,7 +399,6 @@ export class RecommendationController extends AbstractController {
 			tag: this.config.tag,
 			batched: this.config.batched,
 			branch: this.config.branch || 'production',
-			order: this.context?.options?.order,
 			batchId: this.config.batchId,
 			...this.config.globals,
 		};

@@ -102,24 +102,34 @@ export type TrendingResponseModel = {
 	};
 };
 
-export type RecommendRequestModel = {
-	tag: string;
-	siteId?: string;
+export type RecommendRequestModel = RecommendRequestGlobalsModel &
+	RecommendRequestOptionsModel & {
+		tag: string;
+		profile?: RecommendRequestOptionsModel;
+	};
+
+export type RecommendRequestGlobalsModel = {
 	product?: string;
 	products?: string[];
-	shopper?: string;
-	categories?: string[];
-	brands?: string[];
 	cart?: string[];
 	lastViewed?: string[];
+	shopper?: string;
+	filters?: RecommendationRequestFilterModel[];
+	blockedItems?: string[];
+	batchId?: number;
 	test?: boolean;
+};
+
+export type RecommendRequestOptionsModel = {
+	siteId?: string;
+	categories?: string[];
+	brands?: string[];
 	branch?: string;
 	filters?: RecommendationRequestFilterModel[];
 	blockedItems?: string[];
 	batched?: boolean;
 	limit?: number;
 	order?: number;
-	batchId?: number;
 	query?: string;
 	dedupe?: boolean;
 };
@@ -139,19 +149,15 @@ export type RecommendPostRequestModel = {
 	filters?: RecommendPostRequestFiltersModel[];
 };
 
-export type RecommendPostRequestProfileModel = Omit<RecommendRequestProfileModel, 'filters' | 'query'> & {
-	filters?: RecommendPostRequestFiltersModel[];
-	searchTerm?: string;
-};
-
-export type RecommendRequestProfileModel = {
+export type RecommendPostRequestProfileModel = {
 	tag: string;
 	categories?: string[];
 	brands?: string[];
+	blockedItems?: string[];
 	limit?: number;
 	dedupe?: boolean;
-	query?: string;
-	filters?: RecommendationRequestFilterModel[];
+	searchTerm?: string;
+	filters?: RecommendPostRequestFiltersModel[];
 };
 
 export type RecommendPostRequestFiltersModel = {
