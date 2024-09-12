@@ -6,15 +6,9 @@ import { Client } from '@searchspring/snap-client';
 import { Logger } from '@searchspring/snap-logger';
 import { Tracker } from '@searchspring/snap-tracker';
 
-import type { ClientConfig, ClientGlobals, RecommendRequestModel } from '@searchspring/snap-client';
+import type { ClientConfig, ClientGlobals, RecommendRequestModel, RecommendationRequestFilterModel } from '@searchspring/snap-client';
 import type { UrlTranslatorConfig } from '@searchspring/snap-url-manager';
-import type {
-	AbstractController,
-	RecommendationController,
-	Attachments,
-	ContextVariables,
-	RecommendationControllerConfig,
-} from '@searchspring/snap-controller';
+import type { AbstractController, RecommendationController, Attachments, ContextVariables } from '@searchspring/snap-controller';
 import type { VariantConfig } from '@searchspring/snap-store-mobx';
 import type { Middleware } from '@searchspring/snap-event-manager';
 import type { Target } from '@searchspring/snap-toolbox';
@@ -56,15 +50,15 @@ type ProfileSpecificProfile = {
 		realtime?: boolean;
 	};
 	profile: string;
-	target: string;
+	selector: string;
 };
 
 type ProfileSpecificGlobals = {
+	filters?: RecommendationRequestFilterModel[];
 	blockedItems: string[];
 	cart?: string[] | (() => string[]);
 	products?: string[];
 	shopper?: { id?: string };
-	siteId?: string;
 };
 
 type ExtendedRecommendaitonProfileTarget = Target & {
@@ -152,12 +146,26 @@ export class RecommendationInstantiator {
 			],
 			async (target: Target, elem: Element | undefined, originalElem: Element | undefined) => {
 				const elemContext = getContext(
-					['shopperId', 'shopper', 'product', 'products', 'seed', 'cart', 'options', 'profile', 'custom', 'profiles', 'globals'],
+					[
+						'shopperId',
+						'shopper',
+						'product',
+						'products',
+						'seed',
+						'cart',
+						'filters',
+						'blockedItems',
+						'options',
+						'profile',
+						'custom',
+						'profiles',
+						'globals',
+					],
 					(originalElem || elem) as HTMLScriptElement
 				);
 
 				if (elemContext.profiles && elemContext.profiles.length) {
-					// using the new script integration structure
+					// using the "grouped block" integration structure
 
 					// type the new profile specific integration context variables
 					const scriptContextProfiles = elemContext.profiles as ProfileSpecificProfile[];
@@ -165,21 +173,23 @@ export class RecommendationInstantiator {
 
 					// grab from globals
 					const requestGlobals: Partial<RecommendRequestModel> = {
-						blockedItems: scriptContextGlobals.blockedItems,
-						cart: scriptContextGlobals.cart && getArrayFunc(scriptContextGlobals.cart),
-						products: scriptContextGlobals.products,
-						shopper: scriptContextGlobals.shopper?.id,
-						siteId: scriptContextGlobals.siteId,
-						batchId: Math.random(),
+						...defined({
+							blockedItems: scriptContextGlobals.blockedItems,
+							filters: scriptContextGlobals.filters,
+							cart: scriptContextGlobals.cart && getArrayFunc(scriptContextGlobals.cart),
+							products: scriptContextGlobals.products,
+							shopper: scriptContextGlobals.shopper?.id,
+							batchId: Math.random(),
+						}),
 					};
 
 					const targetsArr: ExtendedRecommendaitonProfileTarget[] = [];
 
 					// build out the targets array for each profile
 					scriptContextProfiles.forEach((profile) => {
-						if (profile.target) {
+						if (profile.selector) {
 							const targetObj = {
-								selector: profile.target,
+								selector: profile.selector,
 								autoRetarget: true,
 								clickRetarget: true,
 								profile,
@@ -193,7 +203,11 @@ export class RecommendationInstantiator {
 						targetsArr,
 						async (target: ExtendedRecommendaitonProfileTarget, elem: Element | undefined, originalElem: Element | undefined) => {
 							if (target.profile?.profile) {
-								const profileRequestGlobals: RecommendRequestModel = { ...requestGlobals, ...target.profile?.options, tag: target.profile.profile };
+								const profileRequestGlobals: RecommendRequestModel = {
+									...requestGlobals,
+									profile: target.profile?.options,
+									tag: target.profile.profile,
+								};
 								const profileContext: ContextVariables = deepmerge(this.context, { globals: scriptContextGlobals, profile: target.profile });
 								if (elemContext.custom) {
 									profileContext.custom = elemContext.custom;
@@ -204,17 +218,19 @@ export class RecommendationInstantiator {
 						}
 					);
 				} else {
-					// using the "legacy" method
-					const { profile, products, product, seed, options, batched, shopper, shopperId } = elemContext;
+					// using the "legacy" integration structure
+					const { profile, products, product, seed, filters, blockedItems, options, shopper, shopperId } = elemContext;
 
 					const profileRequestGlobals: Partial<RecommendRequestModel> = {
 						tag: profile,
-						batched: batched ?? true,
-						batchId: 1,
-						products: products || (product && [product]) || (seed && [seed]),
-						cart: elemContext.cart && getArrayFunc(elemContext.cart),
-						shopper: shopper?.id || shopperId,
-						...options,
+						...defined({
+							products: products || (product && [product]) || (seed && [seed]),
+							cart: elemContext.cart && getArrayFunc(elemContext.cart),
+							shopper: shopper?.id || shopperId,
+							filters,
+							blockedItems,
+							profile: options,
+						}),
 					};
 
 					readyTheController(this, elem, elemContext, profileCount, originalElem, profileRequestGlobals);
@@ -242,9 +258,10 @@ async function readyTheController(
 	context: ContextVariables,
 	profileCount: RecommendationProfileCounts,
 	elem: Element | undefined,
-	controllerGlobals: Partial<RecommendationControllerConfig>
+	controllerGlobals: Partial<RecommendRequestModel>
 ) {
-	const { batched, batchId, realtime, cart, tag } = controllerGlobals;
+	const { profile, batchId, cart, tag } = controllerGlobals;
+	const batched = (profile?.batched || controllerGlobals.batched) ?? true;
 
 	if (!tag) {
 		// FEEDBACK: change message depending on script integration type (profile vs. legacy)
@@ -258,12 +275,7 @@ async function readyTheController(
 
 	profileCount[tag] = profileCount[tag] + 1 || 1;
 
-	const defaultGlobals: Partial<RecommendRequestModel> = {
-		limit: 20,
-	};
-
 	const globals: Partial<RecommendRequestModel> = deepmerge.all([
-		defaultGlobals,
 		instance.config.client?.globals || {},
 		instance.config.config?.globals || {},
 		controllerGlobals,
@@ -273,11 +285,15 @@ async function readyTheController(
 		id: `recommend_${tag}_${profileCount[tag] - 1}`,
 		tag,
 		batched: batched ?? true,
-		realtime: Boolean(realtime),
+		realtime: Boolean(context.options?.realtime ?? context.profile?.options?.realtime),
 		batchId: batchId,
 		...instance.config.config,
 		globals,
 	};
+
+	if (profile?.branch) {
+		controllerConfig.branch = profile?.branch;
+	}
 
 	// try to find an existing controller by similar configuration
 	let controller = Object.keys(instance.controller)
@@ -389,4 +405,20 @@ function getArrayFunc(arrayOrFunc: string[] | (() => string[])): string[] {
 	}
 
 	return [];
+}
+
+type DefinedProps = {
+	[key: string]: any;
+};
+
+export function defined(properties: Record<string, any>): DefinedProps {
+	const definedProps: DefinedProps = {};
+
+	Object.keys(properties).map((key) => {
+		if (properties[key] !== undefined) {
+			definedProps[key] = properties[key];
+		}
+	});
+
+	return definedProps;
 }
