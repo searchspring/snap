@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.60.1](https://github.com/searchspring/snap/compare/v0.60.0...v0.60.1) (2024-09-12)
+
+### Bug Fixes
+
+- **preact-components/recommendation:** adjusting logic to prevent rendering title with zero results ([bb0212a](https://github.com/searchspring/snap/commit/bb0212a8412ed5337a50be83a95ce3fb24c3bb8d))
+
 # [0.60.0](https://github.com/searchspring/snap/compare/v0.59.0...v0.60.0) (2024-09-11)
 
 ### Features

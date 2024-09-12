@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.60.1](https://github.com/searchspring/snap/compare/v0.60.0...v0.60.1) (2024-09-12)
+
+### Bug Fixes
+
+- **client/recommend:** adjusting request batching to ensure undefined entries do not overwrite ([5b2e460](https://github.com/searchspring/snap/commit/5b2e4607d3a286bd508c265e782cbc76f92114f7))
+
 # [0.60.0](https://github.com/searchspring/snap/compare/v0.59.0...v0.60.0) (2024-09-11)
 
 ### Features

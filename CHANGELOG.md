@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.60.1](https://github.com/searchspring/snap/compare/v0.60.0...v0.60.1) (2024-09-12)
+
+### Bug Fixes
+
+- **client/recommend:** adjusting request batching to ensure undefined entries do not overwrite ([5b2e460](https://github.com/searchspring/snap/commit/5b2e4607d3a286bd508c265e782cbc76f92114f7))
+- **preact-components/recommendation:** adjusting logic to prevent rendering title with zero results ([bb0212a](https://github.com/searchspring/snap/commit/bb0212a8412ed5337a50be83a95ce3fb24c3bb8d))
+- **preact/instantiator/recommendation:** adding fallback selector to support email recs imager ([0201f9d](https://github.com/searchspring/snap/commit/0201f9d7ef4149dce64701e20c2aa145240578f7))
+
 # [0.60.0](https://github.com/searchspring/snap/compare/v0.59.0...v0.60.0) (2024-09-11)
 
 ### Features
