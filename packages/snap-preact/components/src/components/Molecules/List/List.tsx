@@ -204,6 +204,7 @@ export function List(properties: ListProps): JSX.Element {
 								title={option.label}
 								role="option"
 								aria-selected={selected}
+								aria-disabled={option.disabled || option?.available === false}
 							>
 								{!hideOptionCheckboxes && <Checkbox {...subProps.checkbox} checked={selected} disableA11y={true} />}
 

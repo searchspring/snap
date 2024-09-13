@@ -126,11 +126,7 @@ export const Checkbox = observer((properties: CheckboxProps): JSX.Element => {
 
 	//initialize lang
 	const defaultLang = {
-		checkbox: {
-			attributes: {
-				'aria-label': `${disabled ? 'disabled' : ''} ${checkedState ? 'checked' : 'unchecked'} checkbox`,
-			},
-		},
+		checkbox: {},
 	};
 
 	//deep merge with props.lang
@@ -158,6 +154,7 @@ export const Checkbox = observer((properties: CheckboxProps): JSX.Element => {
 					className={classnames('ss__checkbox', { 'ss__checkbox--disabled': disabled }, className)}
 					onClick={(e) => clickFunc(e)}
 					ref={(e) => (!disableA11y ? useA11y(e) : null)}
+					aria-disabled={disabled}
 					role="checkbox"
 					aria-checked={checkedState}
 					{...mergedLang.checkbox?.all}

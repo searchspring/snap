@@ -11,7 +11,7 @@ import { Button, ButtonProps } from '../../Atoms/Button';
 import { Icon, IconProps, IconType } from '../../Atoms/Icon';
 import type { Filter as FilterType } from '@searchspring/snap-store-mobx';
 import type { UrlManager } from '@searchspring/snap-url-manager';
-import { Lang, useLang } from '../../../hooks';
+import { Lang, useA11y, useLang } from '../../../hooks';
 import deepmerge from 'deepmerge';
 
 const CSS = {
@@ -39,8 +39,22 @@ export const Filter = observer((properties: FilterProps): JSX.Element => {
 
 	const props = mergeProps('filter', globalTheme, defaultProps, properties);
 
-	const { filter, facetLabel, valueLabel, url, hideFacetLabel, onClick, icon, separator, disableStyles, className, style, styleScript, treePath } =
-		props;
+	const {
+		filter,
+		facetLabel,
+		valueLabel,
+		url,
+		hideFacetLabel,
+		onClick,
+		icon,
+		disableA11y,
+		separator,
+		disableStyles,
+		className,
+		style,
+		styleScript,
+		treePath,
+	} = props;
 
 	const link = filter?.url?.link || url?.link;
 	const value = filter?.value.label || valueLabel;
@@ -116,6 +130,7 @@ export const Filter = observer((properties: FilterProps): JSX.Element => {
 				}}
 				href={link?.href}
 				{...mergedLang.filter?.all}
+				ref={(e) => (!disableA11y ? useA11y(e) : null)}
 			>
 				<Button {...subProps.button} disableA11y={true}>
 					<Icon {...subProps.icon} {...(typeof icon == 'string' ? { icon: icon } : (icon as Partial<IconProps>))} />
@@ -144,6 +159,7 @@ export interface FilterProps extends ComponentProps {
 	icon?: IconType | Partial<IconProps>;
 	separator?: string;
 	lang?: Partial<FilterLang>;
+	disableA11y?: boolean;
 }
 
 export interface FilterLang {

@@ -207,6 +207,7 @@ export function Swatches(properties: SwatchesProps): JSX.Element {
 									style={{ background: option.background ? option.background : option.backgroundImageUrl ? `` : option.value }}
 									onClick={(e) => !disabled && !option?.disabled && makeSelection(e as any, option)}
 									ref={(e) => useA11y(e)}
+									aria-disabled={option.disabled || option?.available === false}
 									role="option"
 									aria-selected={selected}
 								>
@@ -247,8 +248,7 @@ export type SwatchesProps = {
 	carousel?: Partial<CarouselProps>;
 	grid?: Partial<GridProps>;
 	type?: 'carousel' | 'grid';
-} & // 			grid?: Partial<GridProps>; // 			type?: 'grid'; // 	| { // 	  } // 			carousel?: Partial<CarouselProps>; // 			type?: 'carousel'; // 	| { //  & (
-// 	  }
+} & // 	  } // 			grid?: Partial<GridProps>; // 			type?: 'grid'; // 	| { // 	  } // 			carousel?: Partial<CarouselProps>; // 			type?: 'carousel'; // 	| { //  & (
 // )
 ComponentProps;
 

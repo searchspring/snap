@@ -314,17 +314,10 @@ export const en_translation: LangComponents = {
                 ${data?.search?.query ? `for <span class="ss__search-header__results-query">"${data.search.query.string}"</span>` : ''}
             `;
 			},
-			attributes: {
-				'aria-label': (data) => `Now showing ${data?.pagination?.totalResults} items in the product grid`,
-			},
 		},
 		correctedQueryText: {
 			value: (data) => {
 				return `No results found for <em>"${data?.search?.originalQuery?.string}"</em>, showing results for <em>"${data?.search?.query?.string}"</em> instead.`;
-			},
-			attributes: {
-				'aria-label': (data) =>
-					`No results found for ${data?.search?.originalQuery?.string}, showing results for ${data?.search?.query?.string} instead`,
 			},
 		},
 		noResultsText: {
@@ -336,9 +329,6 @@ export const en_translation: LangComponents = {
                 </span>`
 						: `<span>No results found.</span>`
 				}`;
-			},
-			attributes: {
-				'aria-label': (data) => `No results found for ${data?.search?.query?.string}`,
 			},
 		},
 		didYouMeanText: {

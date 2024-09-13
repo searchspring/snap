@@ -24,9 +24,9 @@ new SnapTemplates({
 		},
 	},
 	themes: {
-		myTheme: {
-			extends: 'pike',
-		},
+		// myTheme: {
+		// 	extends: 'pike',
+		// },
 		global: {
 			extends: 'bocachica',
 			variables: {
@@ -161,9 +161,9 @@ new SnapTemplates({
 				],
 			},
 		},
-		otherTheme: {
-			extends: 'pike',
-		},
+		// otherTheme: {
+		// 	extends: 'pike',
+		// },
 	},
 	search: {
 		targets: [

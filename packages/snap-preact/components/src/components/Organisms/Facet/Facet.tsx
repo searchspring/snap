@@ -425,7 +425,12 @@ const FacetContent = (props: any) => {
 			</div>
 
 			{!disableOverflow && (facet as ValueFacet)?.overflow?.enabled && (
-				<div className="ss__facet__show-more-less" onClick={() => (facet as ValueFacet).overflow?.toggle()} ref={(e) => useA11y(e)}>
+				<div
+					className="ss__facet__show-more-less"
+					aria-live="polite"
+					onClick={() => (facet as ValueFacet).overflow?.toggle()}
+					ref={(e) => useA11y(e)}
+				>
 					{overflowSlot ? (
 						cloneWithProps(overflowSlot, { facet, treePath })
 					) : (

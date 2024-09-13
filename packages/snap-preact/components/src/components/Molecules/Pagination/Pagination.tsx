@@ -175,6 +175,7 @@ export const Pagination = observer((properties: PaginationProps): JSX.Element =>
 									className={classnames('ss__pagination__page', 'ss__pagination__page--active')}
 									{...mergedPageLang.page?.all}
 									aria-current="true"
+									aria-live="polite"
 								>
 									{page.number}
 								</span>

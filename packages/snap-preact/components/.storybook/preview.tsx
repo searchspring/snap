@@ -13,7 +13,7 @@ export const decorators = [
 			bocachica: bocachica,
 			none: {},
 		},
-		defaultTheme: 'bocachica',
+		defaultTheme: 'none',
 		Provider: ThemeProvider,
 	}),
 ];

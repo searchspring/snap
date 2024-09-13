@@ -10,7 +10,7 @@ import { defined, mergeProps } from '../../../utilities';
 import { Checkbox, CheckboxProps } from '../Checkbox/Checkbox';
 import { createHoverProps } from '../../../toolbox';
 import type { FacetValue, ValueFacet } from '@searchspring/snap-store-mobx';
-import { Lang, useLang } from '../../../hooks';
+import { Lang, useA11y, useLang } from '../../../hooks';
 import deepmerge from 'deepmerge';
 
 const CSS = {
@@ -52,8 +52,21 @@ export const FacetListOptions = observer((properties: FacetListOptionsProps): JS
 
 	const props = mergeProps('facetListOptions', globalTheme, defaultProps, properties);
 
-	const { values, hideCheckbox, hideCount, onClick, previewOnFocus, valueProps, facet, disableStyles, className, style, styleScript, treePath } =
-		props;
+	const {
+		values,
+		hideCheckbox,
+		hideCount,
+		onClick,
+		previewOnFocus,
+		valueProps,
+		facet,
+		disableA11y,
+		disableStyles,
+		className,
+		style,
+		styleScript,
+		treePath,
+	} = props;
 
 	const subProps: FacetListOptionsSubProps = {
 		checkbox: {
@@ -121,6 +134,7 @@ export const FacetListOptions = observer((properties: FacetListOptionsProps): JS
 							}}
 							{...(previewOnFocus ? createHoverProps(() => value?.preview && value.preview()) : {})}
 							{...mergedLang.listOption?.all}
+							ref={(e) => (!disableA11y ? useA11y(e) : null)}
 						>
 							{!hideCheckbox && <Checkbox {...subProps.checkbox} checked={value.filtered} disableA11y={true} />}
 							<span className="ss__facet-list-options__option__value">
@@ -147,6 +161,7 @@ export interface FacetListOptionsProps extends ComponentProps {
 	previewOnFocus?: boolean;
 	valueProps?: any;
 	lang?: Partial<FacetListOptionsLang>;
+	disableA11y?: boolean;
 }
 
 export interface FacetListOptionsLang {

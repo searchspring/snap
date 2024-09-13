@@ -86,6 +86,14 @@ export function Image(properties: ImageProps): JSX.Element {
 						hoverSrc && setHover(false);
 						onMouseOut && onMouseOut(e);
 					}}
+					// onFocus={(e: React.FocusEvent<HTMLImageElement>) => {
+					// 	hoverSrc && setHover(true);
+					// 	onMouseOver && onMouseOver(e);
+					// }}
+					// onBlur={(e: React.FocusEvent<HTMLImageElement>) => {
+					// 	hoverSrc && setHover(false);
+					// 	onMouseOut && onMouseOut(e);
+					// }}
 				/>
 			</div>
 		</CacheProvider>
@@ -97,8 +105,8 @@ export interface ImageProps extends ComponentProps {
 	src: string;
 	fallback?: string;
 	hoverSrc?: string;
-	onMouseOver?: (e: React.MouseEvent<HTMLImageElement>) => void;
-	onMouseOut?: (e: React.MouseEvent<HTMLImageElement>) => void;
+	onMouseOver?: (e: React.MouseEvent<HTMLImageElement> | React.FocusEvent<HTMLImageElement>) => void;
+	onMouseOut?: (e: React.MouseEvent<HTMLImageElement> | React.FocusEvent<HTMLImageElement>) => void;
 	onError?: (e: React.MouseEvent<HTMLImageElement>) => void;
 	onLoad?: (e: React.MouseEvent<HTMLImageElement>) => void;
 	onClick?: (e: React.MouseEvent<HTMLImageElement>) => void;

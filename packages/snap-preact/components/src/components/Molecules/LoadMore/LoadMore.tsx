@@ -29,6 +29,14 @@ const CSS = {
 		const radialAngle = Math.max(3.6, ((360 / 100) * Math.floor((pagination!.end / pagination!.totalResults) * 100)) / 2);
 
 		return css({
+			'& .ss__load-more__button--disabled': {
+				opacity: 0.7,
+				borderColor: 'rgba(51,51,51,0.7)',
+				backgroundColor: 'initial',
+				'&:hover': {
+					cursor: 'default',
+				},
+			},
 			'& .ss__load-more__button--hidden': {
 				display: 'none',
 			},
@@ -171,7 +179,7 @@ export const LoadMore = observer((properties: LoadMoreProps): JSX.Element => {
 				{ 'ss__load-more__button--hidden': isLoading && loadingLocation === 'outside' },
 				{ 'ss__load-more__button--disabled': isButtonDisabled }
 			),
-			disabled: isButtonDisabled,
+			// disabled: isButtonDisabled,
 			// global theme
 			...globalTheme?.components?.button,
 			// inherited props
@@ -297,14 +305,16 @@ export const LoadMore = observer((properties: LoadMoreProps): JSX.Element => {
 										<div className={`ss__load-more__progress__indicator__bar`}></div>
 									</div>
 								)}
-								{!hideProgressText && <div className={'ss__load-more__progress__text'} {...mergedLang.progressText?.all}></div>}
+								{!hideProgressText && (
+									<div aria-atomic="true" aria-live="polite" className={'ss__load-more__progress__text'} {...mergedLang.progressText?.all}></div>
+								)}
 							</Fragment>
 						)}
 						{progressIndicator === 'radial' && (
 							<Fragment>
 								{!hideProgressText && hideProgressIndicator ? (
 									// displays text when progress indicator is hidden but hideProgressText is not
-									<div className="ss__load-more__progress__text">{`${store.end} / ${store.totalResults}`}</div>
+									<div aria-atomic="true" aria-live="polite" className="ss__load-more__progress__text">{`${store.end} / ${store.totalResults}`}</div>
 								) : !hideProgressIndicator ? (
 									<div className={'ss__load-more__progress__indicator'}>
 										<div className="ss__load-more__progress__indicator__radial">
@@ -314,7 +324,10 @@ export const LoadMore = observer((properties: LoadMoreProps): JSX.Element => {
 											<div className="ss__load-more__progress__indicator__radial__mask ss__load-more__progress__indicator__radial__mask--half">
 												<div className="ss__load-more__progress__indicator__radial__mask__fill"></div>
 											</div>
-											<div className="ss__load-more__progress__text"> {!hideProgressText ? `${store.end} / ${store.totalResults}` : ''}</div>
+											<div aria-atomic="true" aria-live="polite" className="ss__load-more__progress__text">
+												{' '}
+												{!hideProgressText ? `${store.end} / ${store.totalResults}` : ''}
+											</div>
 										</div>
 									</div>
 								) : (

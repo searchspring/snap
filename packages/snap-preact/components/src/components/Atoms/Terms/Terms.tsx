@@ -11,12 +11,19 @@ import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { createHoverProps } from '../../../toolbox';
 import { mergeProps } from '../../../utilities';
 import { Term } from '@searchspring/snap-store-mobx';
-import { useLang } from '../../../hooks';
+import { useA11y, useLang } from '../../../hooks';
 import type { Lang } from '../../../hooks';
 import deepmerge from 'deepmerge';
 
 const CSS = {
-	Terms: ({}: Partial<TermsProps>) => css({}),
+	Terms: ({}: Partial<TermsProps>) =>
+		css({
+			'& .ss__terms__options': {
+				listStyle: 'none',
+				padding: '0px',
+				margin: '0px',
+			},
+		}),
 };
 
 const escapeRegExp = (string: string): string => {
@@ -42,7 +49,7 @@ export const Terms = observer((properties: TermsProps): JSX.Element => {
 	const defaultProps: Partial<TermsProps> = {};
 
 	const props = mergeProps('terms', globalTheme, defaultProps, properties);
-	const { title, onTermClick, limit, previewOnHover, emIfy, disableStyles, style, className, controller, styleScript } = props;
+	const { title, onTermClick, limit, previewOnHover, emIfy, disableStyles, style, disableA11y, className, controller, styleScript } = props;
 	const currentInput = controller?.store?.state?.input;
 	const terms = props.terms || controller?.store.terms;
 
@@ -66,6 +73,11 @@ export const Terms = observer((properties: TermsProps): JSX.Element => {
 
 	const termsToShow = limit ? terms?.slice(0, limit) : terms;
 
+	const escCallback = () => {
+		// remove focus from input (close the autocomplete)
+		controller?.setFocused && controller?.setFocused();
+	};
+
 	return termsToShow?.length ? (
 		<CacheProvider>
 			<div {...styling} className={classnames('ss__terms', className)}>
@@ -74,7 +86,7 @@ export const Terms = observer((properties: TermsProps): JSX.Element => {
 						<h5>{title}</h5>
 					</div>
 				) : null}
-				<div className="ss__terms__options" role={'list'} aria-label={title}>
+				<ul className="ss__terms__options" aria-label={title} ref={(e) => !disableA11y && useA11y(e, 0, true, escCallback)}>
 					{termsToShow?.map((term, idx) => {
 						//initialize lang
 						const defaultLang = {
@@ -96,7 +108,7 @@ export const Terms = observer((properties: TermsProps): JSX.Element => {
 						});
 
 						return (
-							<div
+							<li
 								className={classnames('ss__terms__option', {
 									'ss__terms__option--active': term.active,
 								})}
@@ -105,13 +117,13 @@ export const Terms = observer((properties: TermsProps): JSX.Element => {
 									onClick={(e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => termClickEvent(e, term)}
 									href={term.url.href}
 									{...(previewOnHover ? createHoverProps(term.preview) : {})}
-									role="link"
+									// role="link"
 									{...mergedLang.term?.all}
 								></a>
-							</div>
+							</li>
 						);
 					})}
-				</div>
+				</ul>
 			</div>
 		</CacheProvider>
 	) : (
@@ -128,6 +140,7 @@ export interface TermsProps extends ComponentProps {
 	previewOnHover?: boolean;
 	emIfy?: boolean;
 	lang?: Partial<TermsLang>;
+	disableA11y?: boolean;
 }
 
 export interface TermsLang {
