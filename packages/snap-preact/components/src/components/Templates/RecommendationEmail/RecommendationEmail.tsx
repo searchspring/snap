@@ -2,7 +2,7 @@ import { h, Fragment } from 'preact';
 import { jsx } from '@emotion/react';
 import { observer } from 'mobx-react';
 
-import type { RecommendationController } from '@searchspring/snap-controller';
+import type { AbstractController, RecommendationController } from '@searchspring/snap-controller';
 import type { Product } from '@searchspring/snap-store-mobx';
 
 import { Result, ResultProps } from '../../Molecules/Result';
@@ -34,16 +34,16 @@ export const RecommendationEmail = observer((properties: RecommendationEmailProp
 		},
 	};
 
-	const resultsToRender: Product[] = results || controller.store?.results;
+	const resultsToRender = results || controller?.store?.results || [];
 
-	return Array.isArray(resultsToRender) && resultsToRender.length > 0 ? (
+	return resultsToRender.length > 0 ? (
 		<Fragment>
 			{resultsToRender.map((result, idx) => (
 				<div key={idx} id={`ss-emailrec${idx}`} style={{ display: 'block', width: resultWidth }}>
 					{(() => {
 						if (resultComponent) {
 							const ResultComponent = resultComponent;
-							return <ResultComponent controller={controller} result={result} {...resultProps} email={true} />;
+							return <ResultComponent controller={controller as AbstractController} result={result} {...resultProps} email={true} />;
 						} else {
 							return (
 								<Result
