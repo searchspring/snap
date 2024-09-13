@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.60.1](https://github.com/searchspring/snap/compare/v0.60.0...v0.60.1) (2024-09-12)
+
+**Note:** Version bump only for package @searchspring/snap-store-mobx
+
+# [0.60.0](https://github.com/searchspring/snap/compare/v0.59.0...v0.60.0) (2024-09-11)
+
+### Features
+
+- **recommendationapi:** new Recommendation API Profile Specific Parameters ([0ca961b](https://github.com/searchspring/snap/commit/0ca961bbb1873e8bba26280cddb0c30c4177cfe0))
+
 # [0.59.0](https://github.com/searchspring/snap/compare/v0.58.3...v0.59.0) (2024-08-22)
 
 **Note:** Version bump only for package @searchspring/snap-store-mobx

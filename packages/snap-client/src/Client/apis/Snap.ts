@@ -22,7 +22,7 @@ export class SnapAPI extends API {
 				headers: headerParameters,
 				body: requestParameters,
 			},
-			'/api/v1/meta' + JSON.stringify(requestParameters)
+			JSON.stringify(requestParameters)
 		);
 
 		return response as MetaResponseModel;
@@ -39,7 +39,7 @@ export class SnapAPI extends API {
 				headers: headerParameters,
 				body: requestParameters,
 			},
-			'/api/v1/search' + JSON.stringify(requestParameters)
+			JSON.stringify(requestParameters)
 		);
 
 		return response as SearchResponseModel;
@@ -56,7 +56,7 @@ export class SnapAPI extends API {
 				headers: headerParameters,
 				body: requestParameters,
 			},
-			'/api/v1/autocomplete' + JSON.stringify(requestParameters)
+			JSON.stringify(requestParameters)
 		);
 
 		return response as AutocompleteResponseModel;
