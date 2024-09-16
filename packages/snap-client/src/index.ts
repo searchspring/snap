@@ -4,8 +4,9 @@ export {
 	ClientGlobals,
 	ClientConfig,
 	TrendingResponseModel,
-	RecommendCombinedRequestModel,
 	RecommendCombinedResponseModel,
 	ProfileResponseModel,
 	RecommendResponseModel,
+	RecommendRequestModel,
+	RecommendationRequestFilterModel,
 } from './types';

@@ -7,10 +7,9 @@ import type {
 	TrendingRequestModel,
 	TrendingResponseModel,
 	ProfileRequestModel,
-	RecommendRequestModel,
-	RecommendCombinedRequestModel,
 	ProfileResponseModel,
 	RecommendResponseModel,
+	RecommendRequestModel,
 } from '../types';
 
 import type {
@@ -178,7 +177,7 @@ export class Client {
 	}
 
 	async recommend(
-		params: RecommendCombinedRequestModel
+		params: RecommendRequestModel
 	): Promise<{ meta: MetaResponseModel; profile: ProfileResponseModel; recommend: RecommendResponseModel }> {
 		const { tag, ...otherParams } = params;
 		if (!tag) {
@@ -195,8 +194,8 @@ export class Client {
 			delete otherParams.branch;
 		}
 
-		const recommendParams: RecommendRequestModel = {
-			tags: [tag],
+		const recommendParams = {
+			tag: tag,
 			...otherParams,
 			siteId: params.siteId || this.globals.siteId,
 		};
