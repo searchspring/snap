@@ -190,6 +190,12 @@ new SnapTemplates({
 				// resultComponent: 'CustomResultSecondary',
 			},
 		},
+		email: {
+			Email: {
+				component: 'RecommendationEmail',
+				// resultComponent: 'CustomResultSecondary',
+			},
+		},
 	},
 	autocomplete: {
 		inputSelector: 'input.searchspring-ac, .thing2',
