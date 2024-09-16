@@ -102,33 +102,65 @@ export type TrendingResponseModel = {
 	};
 };
 
-export type RecommendRequestModel = {
-	tags: string[];
+export type RecommendRequestModel = RecommendRequestGlobalsModel &
+	RecommendRequestOptionsModel & {
+		tag: string;
+		profile?: RecommendRequestOptionsModel;
+	};
+
+export type RecommendRequestGlobalsModel = {
+	product?: string;
+	products?: string[];
+	cart?: string[];
+	lastViewed?: string[];
+	shopper?: string;
+	filters?: RecommendationRequestFilterModel[];
+	blockedItems?: string[];
+	batchId?: number;
+	test?: boolean;
+};
+
+export type RecommendRequestOptionsModel = {
+	siteId?: string;
+	categories?: string[];
+	brands?: string[];
+	branch?: string;
+	filters?: RecommendationRequestFilterModel[];
+	blockedItems?: string[];
+	batched?: boolean;
+	limit?: number;
+	order?: number;
+	query?: string;
+	dedupe?: boolean;
+};
+
+//TODO: move to snapi
+export type RecommendPostRequestModel = {
 	siteId: string;
+	profiles: RecommendPostRequestProfileModel[];
 	product?: string;
 	products?: string[];
 	shopper?: string;
-	categories?: string[];
-	brands?: string[];
 	cart?: string[];
 	lastViewed?: string[];
 	test?: boolean;
-	batched?: boolean;
-	limits?: number | number[];
-	order?: number;
-	filters?: RecommendationRequestFilterModel[];
+	withRecInfo?: boolean;
 	blockedItems?: string[];
+	filters?: RecommendPostRequestFiltersModel[];
 };
 
-export type GetRecommendRequestModel = Omit<RecommendRequestModel, 'filters'> & {
-	[filter: `filter.${string}`]: (string | number)[];
+export type RecommendPostRequestProfileModel = {
+	tag: string;
+	categories?: string[];
+	brands?: string[];
+	blockedItems?: string[];
+	limit?: number;
+	dedupe?: boolean;
+	searchTerm?: string;
+	filters?: RecommendPostRequestFiltersModel[];
 };
 
-export type PostRecommendRequestModel = Omit<RecommendRequestModel, 'filters'> & {
-	filters?: PostRecommendRequestFiltersModel[];
-};
-
-export type PostRecommendRequestFiltersModel = {
+export type RecommendPostRequestFiltersModel = {
 	field: string;
 	type: '=' | '==' | '===' | '!=' | '!==' | '>' | '<' | '>=' | '<=';
 	values: (string | number)[];
@@ -168,22 +200,6 @@ export type ProfileResponseModel = {
 			};
 		};
 	};
-};
-
-export type RecommendCombinedRequestModel = {
-	tag: string;
-	siteId: string;
-	product?: string;
-	products?: string[];
-	shopper?: string;
-	categories?: string[];
-	brands?: string[];
-	cart?: string[];
-	lastViewed?: string[];
-	test?: boolean;
-	branch?: string;
-	filters?: RecommendationRequestFilterModel[];
-	blockedItems?: string[];
 };
 
 export type RecommendationRequestFilterModel = RecommendationRequestRangeFilterModel | RecommendationRequestValueFilterModel;

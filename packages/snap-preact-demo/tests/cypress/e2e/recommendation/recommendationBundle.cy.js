@@ -46,7 +46,7 @@ describe('BundledRecommendations', () => {
 	describe('Tests Bundle', () => {
 		it('has a controller', function () {
 			cy.snapController(config?.selectors?.recommendation.controller).then(({ store }) => {
-				expect(store.config.globals.product.length).to.greaterThan(0);
+				expect(store.config.globals.products.length).to.greaterThan(0);
 			});
 		});
 

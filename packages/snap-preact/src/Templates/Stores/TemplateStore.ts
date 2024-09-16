@@ -35,7 +35,7 @@ type WindowProperties = {
 };
 
 type TemplateStoreThemeConfig = {
-	extends: 'pike' | 'bocachica'; // various themes available
+	extends: 'bocachica'; // various themes available
 	style?: GlobalThemeStyleScript;
 	variables?: ThemeVariablesPartial;
 	overrides?: ThemeOverrides;

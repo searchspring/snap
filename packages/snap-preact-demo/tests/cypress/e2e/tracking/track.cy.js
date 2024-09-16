@@ -23,7 +23,7 @@ describe('Tracking', () => {
 		cy.wait(`@${BeaconType.LOGIN}`).then(() => {
 			// initial init will send a login event for the shopper due to integration script variables
 
-			cy.wait(100);
+			cy.wait(1000);
 			const shopperId = 'snaptest';
 			cy.get('#login').click();
 			cy.get('#login-modal').find('input').type(shopperId);
@@ -49,7 +49,7 @@ describe('Tracking', () => {
 			expect(store).to.haveOwnProperty('pagination');
 			expect(store.pagination.totalResults).to.be.greaterThan(0);
 
-			cy.wait(100);
+			cy.wait(1000);
 			cy.get(`.ss__result:first`).should('exist').trigger('click');
 
 			cy.wait(`@${BeaconType.CLICK}`).should((interception) => {
@@ -84,6 +84,7 @@ describe('Tracking', () => {
 	});
 
 	it('tracked product view', () => {
+		cy.wait(1000);
 		cy.visit('https://localhost:2222/snap/product.html');
 
 		cy.snapController().then(({ store }) => {
@@ -117,6 +118,7 @@ describe('Tracking', () => {
 	});
 
 	it('tracked cart view', () => {
+		cy.wait(1000);
 		cy.visit('https://localhost:2222/snap/cart.html');
 		cy.snapController().then(({ store }) => {
 			cy.wait(`@${BeaconType.CART}`).should((interception) => {
@@ -167,6 +169,7 @@ describe('Tracking', () => {
 	});
 
 	it('tracked order transaction', () => {
+		cy.wait(1000);
 		cy.visit('https://localhost:2222/snap/order.html');
 		cy.snapController().then(({ store }) => {
 			cy.wait(`@${BeaconType.ORDER}`).should((interception) => {
@@ -217,6 +220,7 @@ describe('Tracking', () => {
 	});
 
 	it('tracked all recommendation interaction events', () => {
+		cy.wait(1000);
 		cy.visit('https://localhost:2222/snap/product.html');
 
 		cy.snapController('recommend_similar_0').then(({ store }) => {
@@ -256,7 +260,7 @@ describe('Tracking', () => {
 				});
 			});
 
-			cy.wait(100);
+			cy.wait(1000);
 			// scroll down
 			cy.get('.ss__recommendation:first').scrollIntoView();
 
@@ -303,7 +307,7 @@ describe('Tracking', () => {
 					});
 				});
 
-			cy.wait(100);
+			cy.wait(1000);
 			// click next button and assert new profile product impressions
 			cy.get('.ss__recommendation:first .ss__carousel__next').should('exist').trigger('click');
 
@@ -340,7 +344,7 @@ describe('Tracking', () => {
 				});
 			});
 
-			cy.wait(100);
+			cy.wait(1000);
 			// click on result
 			cy.get('.ss__recommendation:first .ss__result')
 				.filter(':visible:first')

@@ -166,6 +166,14 @@ var documents = [
 						searchable: true,
 					},
 					{
+						label: 'Recommendations (legacy)',
+						route: '/integration-legacy-recommendations',
+						type: 'markdown',
+						url: './docs/INTEGRATION_LEGACY_RECOMMENDATIONS.md',
+						searchable: true,
+						hidden: true,
+					},
+					{
 						label: 'Tracking',
 						route: '/integration-tracking',
 						type: 'markdown',

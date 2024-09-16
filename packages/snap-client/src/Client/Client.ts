@@ -7,9 +7,8 @@ import type {
 	TrendingRequestModel,
 	TrendingResponseModel,
 	ProfileRequestModel,
-	RecommendRequestModel,
-	RecommendCombinedRequestModel,
 	RecommendCombinedResponseModel,
+	RecommendRequestModel,
 } from '../types';
 
 import type {
@@ -172,7 +171,7 @@ export class Client {
 		return this.requesters.suggest.getTrending(params as TrendingRequestModel);
 	}
 
-	async recommend(params: RecommendCombinedRequestModel): Promise<RecommendCombinedResponseModel> {
+	async recommend(params: RecommendRequestModel): Promise<RecommendCombinedResponseModel> {
 		const { tag, ...otherParams } = params;
 		if (!tag) {
 			throw 'tag parameter is required';
@@ -188,8 +187,8 @@ export class Client {
 			delete otherParams.branch;
 		}
 
-		const recommendParams: RecommendRequestModel = {
-			tags: [tag],
+		const recommendParams = {
+			tag: tag,
 			...otherParams,
 			siteId: params.siteId || this.globals.siteId,
 		};

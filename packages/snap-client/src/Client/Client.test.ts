@@ -162,7 +162,7 @@ describe('Snap Client', () => {
 				},
 			};
 
-			const metaCacheKey = '/api/meta/meta.json{"siteId":"8uyt2m"}';
+			const metaCacheKey = '{"siteId":"8uyt2m"}';
 
 			expect(metaRequesterSpy).toHaveBeenCalledTimes(1);
 			expect(metaRequesterSpy.mock.calls).toEqual([
@@ -180,8 +180,7 @@ describe('Snap Client', () => {
 					suggestionCount: 5,
 				},
 			};
-			const suggestCacheKey =
-				'/api/suggest/query{"siteId":["8uyt2m"],"language":"en","query":["hello"],"suggestionCount":5,"disableSpellCorrect":true}';
+			const suggestCacheKey = '{"siteId":["8uyt2m"],"language":"en","query":["hello"],"suggestionCount":5,"disableSpellCorrect":true}';
 
 			expect(suggestRequesterSpy).toHaveBeenCalledTimes(1);
 			expect(suggestRequesterSpy.mock.calls).toEqual([
@@ -199,7 +198,7 @@ describe('Snap Client', () => {
 					siteId: ['8uyt2m'],
 				},
 			};
-			const acCacheKey = '/api/search/autocomplete.json{"siteId":["8uyt2m"],"redirectResponse":"full","ajaxCatalog":"Snap","resultsFormat":"native"}';
+			const acCacheKey = '{"siteId":["8uyt2m"],"redirectResponse":"full","ajaxCatalog":"Snap","resultsFormat":"native"}';
 
 			expect(acRequesterSpy).toHaveBeenCalledTimes(1);
 			expect(acRequesterSpy.mock.calls).toEqual([
@@ -236,7 +235,7 @@ describe('Snap Client', () => {
 				},
 			};
 
-			const metaCacheKey = '/api/meta/meta.json{"siteId":"8uyt2m"}';
+			const metaCacheKey = '{"siteId":"8uyt2m"}';
 
 			expect(metaRequesterSpy).toHaveBeenCalledTimes(1);
 			expect(metaRequesterSpy.mock.calls).toEqual([[metaRequest, metaCacheKey]]);
@@ -274,7 +273,7 @@ describe('Snap Client', () => {
 				query: { resultsFormat: 'native', siteId: ['8uyt2m'], ajaxCatalog: 'Snap' },
 			};
 
-			const searchcacheKey = '/api/search/search.json{"siteId":["8uyt2m"],"ajaxCatalog":"Snap","resultsFormat":"native"}';
+			const searchcacheKey = '{"siteId":["8uyt2m"],"ajaxCatalog":"Snap","resultsFormat":"native"}';
 
 			expect(searchRequesterSpy).toHaveBeenCalledTimes(1);
 			expect(searchRequesterSpy.mock.calls).toEqual([[searchparams, searchcacheKey]]);
@@ -288,7 +287,7 @@ describe('Snap Client', () => {
 				},
 			};
 
-			const metaCacheKey = '/api/meta/meta.json{"siteId":"8uyt2m"}';
+			const metaCacheKey = '{"siteId":"8uyt2m"}';
 
 			expect(metaRequesterSpy).toHaveBeenCalledTimes(1);
 			expect(metaRequesterSpy.mock.calls).toEqual([[metaRequest, metaCacheKey]]);
@@ -315,7 +314,7 @@ describe('Snap Client', () => {
 
 			const trendingparams = { headers: {}, method: 'GET', path: '/api/suggest/trending', query: { siteId: '8uyt2m' } };
 
-			const trendingcacheKey = '/api/suggest/trending{"siteId":"8uyt2m"}';
+			const trendingcacheKey = '{"siteId":"8uyt2m"}';
 
 			expect(suggestRequesterSpy).toHaveBeenCalledTimes(1);
 			expect(suggestRequesterSpy.mock.calls).toEqual([[trendingparams, trendingcacheKey]]);
@@ -349,21 +348,26 @@ describe('Snap Client', () => {
 				},
 			};
 
-			const profileCacheKey = '/api/personalized-recommendations/profile.json{"tag":"dress","siteId":"8uyt2m"}';
+			const profileCacheKey = '{"tag":"dress","siteId":"8uyt2m"}';
 
 			const recommendParams = {
-				headers: {},
-				method: 'GET',
+				headers: {
+					'Content-Type': 'text/plain',
+				},
+				method: 'POST',
 				path: '/boost/8uyt2m/recommend',
-				query: {
-					limits: [20],
-					siteId: '8uyt2m',
-					tags: ['dress'],
+				body: {
+					profiles: [
+						{
+							tag: 'dress',
+						},
+					],
 					test: true,
+					siteId: '8uyt2m',
 				},
 			};
 
-			const recommendCacheKey = '/boost/8uyt2m/recommend{"tags":["dress"],"limits":[20],"siteId":"8uyt2m","test":true}';
+			const recommendCacheKey = '{"profiles":[{"tag":"dress"}],"siteId":"8uyt2m","test":true}';
 
 			expect(recommendRequesterSpy).toHaveBeenCalledTimes(2);
 			expect(recommendRequesterSpy.mock.calls).toEqual([
@@ -413,7 +417,7 @@ describe('Snap Client', () => {
 					},
 				};
 
-				const metaCacheKey = '/api/meta/meta.json{"siteId":"8uyt2m"}';
+				const metaCacheKey = '{"siteId":"8uyt2m"}';
 
 				expect(metaRequesterSpy).toHaveBeenCalledTimes(1);
 				expect(metaRequesterSpy.mock.calls).toEqual([
@@ -431,8 +435,7 @@ describe('Snap Client', () => {
 						suggestionCount: 5,
 					},
 				};
-				const suggestCacheKey =
-					'/api/suggest/query{"siteId":["8uyt2m"],"language":"en","query":["hello"],"suggestionCount":5,"disableSpellCorrect":true}';
+				const suggestCacheKey = '{"siteId":["8uyt2m"],"language":"en","query":["hello"],"suggestionCount":5,"disableSpellCorrect":true}';
 
 				expect(suggestRequesterSpy).toHaveBeenCalledTimes(1);
 				expect(suggestRequesterSpy.mock.calls).toEqual([
@@ -450,8 +453,7 @@ describe('Snap Client', () => {
 						siteId: ['8uyt2m'],
 					},
 				};
-				const acCacheKey =
-					'/api/search/autocomplete.json{"siteId":["8uyt2m"],"redirectResponse":"full","ajaxCatalog":"Snap","resultsFormat":"native"}';
+				const acCacheKey = '{"siteId":["8uyt2m"],"redirectResponse":"full","ajaxCatalog":"Snap","resultsFormat":"native"}';
 
 				expect(acRequesterSpy).toHaveBeenCalledTimes(1);
 				expect(acRequesterSpy.mock.calls).toEqual([
@@ -486,7 +488,7 @@ describe('Snap Client', () => {
 					},
 				};
 
-				const metaCacheKey = '/api/meta/meta.json{"siteId":"8uyt2m"}';
+				const metaCacheKey = '{"siteId":"8uyt2m"}';
 
 				expect(metaRequesterSpy).toHaveBeenCalledTimes(1);
 				expect(metaRequesterSpy.mock.calls).toEqual([[metaRequest, metaCacheKey]]);
@@ -521,7 +523,7 @@ describe('Snap Client', () => {
 					query: { resultsFormat: 'native', siteId: ['8uyt2m'], ajaxCatalog: 'Snap' },
 				};
 
-				const searchcacheKey = '/api/search/search.json{"siteId":["8uyt2m"],"ajaxCatalog":"Snap","resultsFormat":"native"}';
+				const searchcacheKey = '{"siteId":["8uyt2m"],"ajaxCatalog":"Snap","resultsFormat":"native"}';
 
 				expect(searchRequesterSpy).toHaveBeenCalledTimes(1);
 				expect(searchRequesterSpy.mock.calls).toEqual([[searchparams, searchcacheKey]]);
@@ -535,7 +537,7 @@ describe('Snap Client', () => {
 					},
 				};
 
-				const metaCacheKey = '/api/meta/meta.json{"siteId":"8uyt2m"}';
+				const metaCacheKey = '{"siteId":"8uyt2m"}';
 
 				expect(metaRequesterSpy).toHaveBeenCalledTimes(1);
 				expect(metaRequesterSpy.mock.calls).toEqual([[metaRequest, metaCacheKey]]);
@@ -560,7 +562,7 @@ describe('Snap Client', () => {
 
 				const trendingparams = { headers: {}, method: 'GET', path: '/api/suggest/trending', query: { siteId: '8uyt2m' } };
 
-				const trendingcacheKey = '/api/suggest/trending{"siteId":"8uyt2m"}';
+				const trendingcacheKey = '{"siteId":"8uyt2m"}';
 
 				expect(suggestRequesterSpy).toHaveBeenCalledTimes(1);
 				expect(suggestRequesterSpy.mock.calls).toEqual([[trendingparams, trendingcacheKey]]);
@@ -592,21 +594,26 @@ describe('Snap Client', () => {
 					},
 				};
 
-				const profileCacheKey = '/api/personalized-recommendations/profile.json{"tag":"dress","siteId":"8uyt2m"}';
+				const profileCacheKey = '{"tag":"dress","siteId":"8uyt2m"}';
 
 				const recommendParams = {
-					headers: {},
-					method: 'GET',
+					headers: {
+						'Content-Type': 'text/plain',
+					},
+					method: 'POST',
 					path: '/boost/8uyt2m/recommend',
-					query: {
-						limits: [20],
-						siteId: '8uyt2m',
-						tags: ['dress'],
+					body: {
+						profiles: [
+							{
+								tag: 'dress',
+							},
+						],
 						test: true,
+						siteId: '8uyt2m',
 					},
 				};
 
-				const recommendCacheKey = '/boost/8uyt2m/recommend{"tags":["dress"],"limits":[20],"siteId":"8uyt2m","test":true}';
+				const recommendCacheKey = '{"profiles":[{"tag":"dress"}],"siteId":"8uyt2m","test":true}';
 
 				expect(recommendRequesterSpy).toHaveBeenCalledTimes(2);
 				expect(recommendRequesterSpy.mock.calls).toEqual([

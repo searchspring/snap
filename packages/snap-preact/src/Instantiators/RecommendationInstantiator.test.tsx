@@ -280,6 +280,7 @@ describe('RecommendationInstantiator', () => {
 		document.body.innerHTML = `<script type="searchspring/recommend" profile="${DEFAULT_PROFILE}">
 			shopper = { id: 'snapdev' };
 			product = 'sku1';
+			custom = { some: 'thing' };
 			options = {
 				branch: 'testing',
 				siteId: 'abc123',
@@ -292,9 +293,9 @@ describe('RecommendationInstantiator', () => {
 						value: 'blue'
 					},
 					{
-						  type: 'range',
-						  field: 'price',
-						  value: { low: 0, high: 20 }
+						type: 'range',
+						field: 'price',
+						value: { low: 0, high: 20 }
 					}
 				],
 				brands: ['nike', 'h&m'],
@@ -316,6 +317,7 @@ describe('RecommendationInstantiator', () => {
 					id: 'snapdev',
 				},
 				product: 'sku1',
+				custom: { some: 'thing' },
 				options: {
 					branch: 'testing',
 					categories: ['cats', 'dogs'],
@@ -340,27 +342,278 @@ describe('RecommendationInstantiator', () => {
 
 		expect(clientSpy).toHaveBeenCalledTimes(1);
 		expect(clientSpy).toHaveBeenCalledWith({
-			batched: true,
+			tag: 'trending',
+			products: ['sku1'],
+			shopper: 'snapdev',
 			branch: 'testing',
-			categories: ['cats', 'dogs'],
+			batched: true,
+			siteId: baseConfig.client?.globals.siteId,
+			profile: {
+				siteId: 'abc123',
+				branch: 'testing',
+				categories: ['cats', 'dogs'],
+				filters: [
+					{
+						type: 'value',
+						field: 'color',
+						value: 'blue',
+					},
+					{
+						type: 'range',
+						field: 'price',
+						value: { low: 0, high: 20 },
+					},
+				],
+				brands: ['nike', 'h&m'],
+				limit: 5,
+			},
+		});
+	});
+
+	it('uses the globals from the config in the request', async () => {
+		document.body.innerHTML = `<script type="searchspring/recommend" profile="${DEFAULT_PROFILE}">
+			options = {
+				filters: [
+					{
+						type: 'value',
+						field: 'color',
+						value: 'blue'
+					},
+				],
+			}
+		</script>`;
+
+		const client = new MockClient(baseConfig.client!.globals, {});
+		const clientSpy = jest.spyOn(client, 'recommend');
+
+		const globalConfig = {
+			...baseConfig,
+			client: {
+				globals: {
+					siteId: '8uyt2m',
+					filters: [
+						{
+							type: 'value',
+							field: 'color',
+							value: 'red',
+						},
+					],
+				},
+			},
+		};
+
+		const recommendationInstantiator = new RecommendationInstantiator(globalConfig, { client });
+		await wait();
+		expect(Object.keys(recommendationInstantiator.controller).length).toBe(1);
+		Object.keys(recommendationInstantiator.controller).forEach((controllerId) => {
+			const controller = recommendationInstantiator.controller[controllerId];
+			expect(controller.context).toStrictEqual({
+				profile: 'trending',
+				options: {
+					filters: [
+						{
+							type: 'value',
+							field: 'color',
+							value: 'blue',
+						},
+					],
+				},
+			});
+		});
+
+		expect(clientSpy).toHaveBeenCalledTimes(1);
+		expect(clientSpy).toHaveBeenCalledWith({
+			tag: 'trending',
+			branch: 'production',
+			batched: true,
+			siteId: baseConfig.client?.globals.siteId,
 			filters: [
 				{
 					type: 'value',
 					field: 'color',
-					value: 'blue',
-				},
-				{
-					type: 'range',
-					field: 'price',
-					value: { low: 0, high: 20 },
+					value: 'red',
 				},
 			],
-			brands: ['nike', 'h&m'],
-			limits: 5,
-			product: 'sku1',
-			shopper: 'snapdev',
-			siteId: 'abc123',
+			profile: {
+				filters: [
+					{
+						type: 'value',
+						field: 'color',
+						value: 'blue',
+					},
+				],
+			},
+		});
+	});
+
+	it('can use new style script tags and context', async () => {
+		const profileContextArray = [
+			{
+				profile: 'trending',
+				selector: '#tout1',
+				custom: { some: 'thing1' },
+				options: {
+					siteId: 'abc123',
+					limit: 1,
+					categories: ['1234'],
+					brands: ['12345'],
+					filters: [
+						{
+							field: 'price',
+							type: 'range',
+							value: {
+								low: 20,
+								high: 40,
+							},
+						},
+					],
+				},
+			},
+			{
+				profile: 'similar',
+				selector: '#tout2',
+				custom: { some: 'thing2' },
+				options: {
+					limit: 2,
+					categories: ['5678'],
+					brands: ['65432'],
+					filters: [
+						{
+							field: 'color',
+							type: 'value',
+							value: 'blue',
+						},
+					],
+				},
+			},
+		];
+
+		//good testing to build off of
+		document.body.innerHTML = `
+			<div id="tout1"></div>
+			<div id="tout2"></div>
+			<script type="searchspring/recommendations">
+				custom = { some: 'thing' };
+				globals = {
+					products: ["C-AD-W1-1869P"],
+					shopper: {
+						id: 'snapdev',
+					},
+					blockedItems: ['1234','5678'],
+					cart: ['5678']
+				};
+				
+				profiles = [
+					{
+						profile: 'trending',
+						selector: '#tout1',
+						custom: { some: 'thing1' },
+						options: {
+							siteId: 'abc123',
+							limit: 1,
+							categories: ["1234"],
+							brands: ["12345"],
+							filters: [{
+								field: 'price',
+								type: 'range',
+								value: {
+									low: 20,
+									high: 40
+								}
+							}]
+						}
+					},
+					{
+						profile: 'similar',
+						selector: '#tout2',
+						custom: { some: 'thing2' },
+						options: {
+							limit: 2,
+							categories: ["5678"],
+							brands: ["65432"],
+							filters: [{
+								field: 'color',
+								type: 'value',
+								value: "blue"
+							}]
+						},
+					},
+				];
+			</script>
+		`;
+
+		const client = new MockClient(baseConfig.client!.globals, {});
+		const clientSpy = jest.spyOn(client, 'recommend');
+
+		const recommendationInstantiator = new RecommendationInstantiator(baseConfig, { client });
+		await wait();
+		expect(Object.keys(recommendationInstantiator.controller).length).toBe(2);
+		Object.keys(recommendationInstantiator.controller).forEach((controllerId, index) => {
+			const controller = recommendationInstantiator.controller[controllerId];
+			expect(controller.context).toStrictEqual({
+				custom: { some: 'thing' },
+				globals: {
+					products: ['C-AD-W1-1869P'],
+					shopper: { id: 'snapdev' },
+					blockedItems: ['1234', '5678'],
+					cart: ['5678'],
+				},
+				profile: profileContextArray[index],
+			});
+		});
+		const batchId = recommendationInstantiator.controller[Object.keys(recommendationInstantiator.controller)[0]].store.config.batchId;
+
+		expect(clientSpy).toHaveBeenCalledTimes(2);
+		expect(clientSpy).toHaveBeenNthCalledWith(1, {
 			tag: 'trending',
+			products: ['C-AD-W1-1869P'],
+			cart: ['5678'],
+			blockedItems: ['1234', '5678'],
+			shopper: 'snapdev',
+			batchId,
+			siteId: baseConfig.client?.globals.siteId,
+			branch: 'production',
+			batched: true,
+			profile: {
+				brands: ['12345'],
+				categories: ['1234'],
+				limit: 1,
+				siteId: 'abc123',
+				filters: [
+					{
+						field: 'price',
+						type: 'range',
+						value: {
+							low: 20,
+							high: 40,
+						},
+					},
+				],
+			},
+		});
+
+		expect(clientSpy).toHaveBeenNthCalledWith(2, {
+			tag: 'similar',
+			products: ['C-AD-W1-1869P'],
+			shopper: 'snapdev',
+			batchId,
+			siteId: baseConfig.client?.globals.siteId,
+			batched: true,
+			blockedItems: ['1234', '5678'],
+			branch: 'production',
+			cart: ['5678'],
+			profile: {
+				limit: 2,
+				brands: ['65432'],
+				categories: ['5678'],
+				filters: [
+					{
+						field: 'color',
+						type: 'value',
+						value: 'blue',
+					},
+				],
+			},
 		});
 	});
 
