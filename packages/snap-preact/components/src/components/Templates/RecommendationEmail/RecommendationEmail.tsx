@@ -74,7 +74,7 @@ export type RecommendationEmailProps = {
 	controller?: RecommendationController;
 	results?: Product[];
 	resultComponent?: ResultComponent<{ email: boolean }>;
-	resultProps?: Partial<ResultProps | Record<string, any>>;
+	resultProps?: Partial<ResultProps> | Record<string, any>;
 	resultWidth?: string;
 } & ComponentProps;
 

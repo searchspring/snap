@@ -2,6 +2,8 @@
 
 Renders product result cards to be used in email recommendation profiles. It's designed to render email recommendations in a structured format, optimized for generating images of product cards used for email recommendations. 
 
+This component is not intended for front-end display. It is an internal dependency for Email Recommendations.
+
 ## Sub-components
 - Result (default)
 
@@ -34,9 +36,9 @@ The `resultComponent` prop allows you to specify a custom component to render ea
 Note: `resultProps` and `{ email: true }` will be spread as props onto each result component that is rendered.
 
 ```jsx
-import { customResult } from '../components/customResult';
+import { CustomResult } from '../components/CustomResult';
 
-<RecommendationEmail controller={controller} resultComponent={customResult} />
+<RecommendationEmail controller={controller} resultComponent={CustomResult} />
 ```
 
 ### resultWidth
