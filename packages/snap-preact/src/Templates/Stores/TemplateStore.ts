@@ -3,7 +3,7 @@ import { StorageStore, StorageType } from '@searchspring/snap-store-mobx';
 import { SnapTemplatesConfig } from '../SnapTemplate';
 import { ThemeStore, ThemeStoreThemeConfig } from './ThemeStore';
 import { TargetStore } from './TargetStore';
-import { LibraryStore } from './LibraryStore';
+import { CurrencyCodes, LanguageCodes, LibraryStore } from './LibraryStore';
 import { debounce } from '@searchspring/snap-toolbox';
 
 import type { ResultComponent, ThemeOverrides, ThemeVariablesPartial } from '../../../components/src';
@@ -51,8 +51,8 @@ export type TemplateStoreConfig = {
 	components?: TemplateStoreComponentConfig;
 	config?: {
 		siteId?: string;
-		currency?: string;
-		language?: string;
+		currency?: CurrencyCodes;
+		language?: LanguageCodes;
 	};
 	themes: {
 		global: TemplateStoreThemeConfig;
@@ -70,8 +70,8 @@ export class TemplatesStore {
 	loading = false;
 	config: SnapTemplatesConfig;
 	storage: StorageStore;
-	language: string;
-	currency: string;
+	language: LanguageCodes;
+	currency: CurrencyCodes;
 	settings: TemplatesStoreSettings;
 	dependencies: TemplatesStoreDependencies;
 
@@ -155,8 +155,8 @@ export class TemplatesStore {
 				const base = this.library.themes[themeConfig.extends];
 				const overrides = themeConfig.overrides || {};
 				const variables = themeConfig.variables || {};
-				const currency = this.library.locales.currencies[this.currency];
-				const language = this.library.locales.languages[this.language];
+				const currency = this.library.locales.currencies[this.currency] || {};
+				const language = this.library.locales.languages[this.language] || {};
 
 				this.addTheme({
 					name: themeKey,
@@ -248,9 +248,9 @@ export class TemplatesStore {
 		}
 	}
 
-	public async setCurrency(currencyCode: string) {
+	public async setCurrency(currencyCode: CurrencyCodes) {
 		if (currencyCode in this.library.import.currency) {
-			await this.library.import.currency[currencyCode as keyof typeof this.library.import.currency]();
+			await this.library.import.currency[currencyCode]();
 			const currency = this.library.locales.currencies[currencyCode];
 
 			if (currency) {
@@ -268,9 +268,9 @@ export class TemplatesStore {
 		}
 	}
 
-	public async setLanguage(languageCode: string) {
+	public async setLanguage(languageCode: LanguageCodes) {
 		if (languageCode in this.library.import.language) {
-			await this.library.import.language[languageCode as keyof typeof this.library.import.language]();
+			await this.library.import.language[languageCode]();
 			const language = this.library.locales.languages[languageCode];
 
 			if (language) {
@@ -301,8 +301,8 @@ export class TemplatesStore {
 				name: themeName,
 				type: 'library',
 				base: theme,
-				language: this.library.locales.languages[this.language],
-				currency: this.library.locales.currencies[this.currency],
+				language: this.library.locales.languages[this.language] || {},
+				currency: this.library.locales.currencies[this.currency] || {},
 				innerWidth: this.window.innerWidth,
 			});
 		}
