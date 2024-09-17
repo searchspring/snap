@@ -520,12 +520,11 @@ export class AutocompleteController extends AbstractController {
 
 			const trendingProfile = this.profiler.create({ type: 'event', name: 'trending', context: trendingParams }).start();
 
-			const response = await this.client.trending(trendingParams);
-			trending = response.trending;
+			trending = await this.client.trending(trendingParams);
 
 			trendingProfile.stop();
 			this.log.profile(trendingProfile);
-			if (trending?.trending?.queries?.length) {
+			if (trending?.trending.queries?.length) {
 				this.storage.set('terms', JSON.stringify(trending));
 			}
 		}

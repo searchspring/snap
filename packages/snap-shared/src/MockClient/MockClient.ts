@@ -64,11 +64,10 @@ export class MockClient extends Client {
 		return this.mockData.recommend();
 	}
 
-	async trending(): Promise<{ trending: TrendingResponseModel }> {
+	async trending(): Promise<TrendingResponseModel> {
 		if (this.mockConfig.delay) await wait(this.mockConfig.delay);
 
-		const trending = this.mockData.trending();
-		return { trending };
+		return this.mockData.trending();
 	}
 }
 

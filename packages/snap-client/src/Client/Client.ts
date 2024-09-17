@@ -169,11 +169,10 @@ export class Client {
 		return { meta, search };
 	}
 
-	async trending(params: Partial<TrendingRequestModel>): Promise<{ trending: TrendingResponseModel }> {
+	async trending(params: Partial<TrendingRequestModel>): Promise<TrendingResponseModel> {
 		params = deepmerge({ siteId: this.globals.siteId }, params || {});
 
-		const trending = await this.requesters.suggest.getTrending(params as TrendingRequestModel);
-		return { trending };
+		return this.requesters.suggest.getTrending(params as TrendingRequestModel);
 	}
 
 	async recommend(

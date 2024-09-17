@@ -150,7 +150,7 @@ const clientConfig = {
 
 const client = new Client(globals, clientConfig);
 
-const results = await client.search({
+const response = await client.search({
   search: {
     query: {
       string: 'dress'
@@ -163,7 +163,7 @@ const results = await client.search({
 ```typescript
 const client = new Client(globals, clientConfig);
 
-const [meta, results] = await client.search({
+const { meta, results } = await client.search({
   search: {
     query: {
       string: 'dress'
@@ -178,7 +178,7 @@ Makes a request to the Searchspring Search API and returns a promise.
 ```typescript
 const client = new Client(globals, clientConfig);
 
-const [meta, results] = await client.search({
+const { meta, results } = await client.search({
   search: {
     query: {
       string: 'dress'
@@ -193,7 +193,7 @@ Makes a request to the Searchspring Autocomplete API and returns a promise.
 ```typescript
 const client = new Client(globals, clientConfig);
 
-const [meta, results] = await client.autocomplete({
+const { meta, results } = await client.autocomplete({
   suggestions: {
     count: 5
   },
@@ -219,7 +219,7 @@ Makes a request to the Searchspring Trending API and returns a promise.
 
 ```typescript
 const client = new Client(globals, clientConfig);
-const results = await client.trending({
+const trending = await client.trending({
   siteId: 'abc123',
   limit: 5
 });
@@ -230,7 +230,7 @@ Makes a request to the Searchspring finder API and returns a promise.
 
 ```typescript
 const client = new Client(globals, clientConfig);
-const [meta, results] = await client.finder({
+const { meta, results } = await client.finder({
   filters: [{
     type: "value",
     field: "color",
@@ -245,7 +245,7 @@ Makes a request to the Searchspring Recommend API and returns a promise.
 
 ```typescript
 const client = new Client(globals, clientConfig);
-const results = await client.recommend({
+const { profile, meta, recommend } = await client.recommend({
   tag: 'similar',
   siteId: 'abc123',
   products: ['product123'],
