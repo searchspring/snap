@@ -11,7 +11,7 @@ import { MetaStore } from '../Meta/MetaStore';
 
 export class FinderStore extends AbstractStore<FinderStoreConfig> {
 	public services: StoreServices;
-	public meta!: MetaStore;
+	public meta?: MetaStore;
 	public storage: StorageStore;
 	public persistedStorage!: StorageStore;
 	public pagination!: SearchPaginationStore;
@@ -94,8 +94,6 @@ export class FinderStore extends AbstractStore<FinderStoreConfig> {
 
 	public update(data: { meta: MetaResponseModel; search: SearchResponseModel }, selectedSelections?: SelectedSelection[]): void {
 		const { meta, search } = data || {};
-		this.error = undefined;
-		this.loaded = Boolean(search?.pagination);
 		this.meta = new MetaStore({
 			data: { meta },
 		});
@@ -143,5 +141,8 @@ export class FinderStore extends AbstractStore<FinderStoreConfig> {
 				);
 			}
 		};
+
+		this.error = undefined;
+		this.loaded = Boolean(search?.pagination);
 	}
 }

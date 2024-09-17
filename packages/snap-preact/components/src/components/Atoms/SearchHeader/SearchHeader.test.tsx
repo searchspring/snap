@@ -1,8 +1,7 @@
 import { h } from 'preact';
-import { render, waitFor } from '@testing-library/preact';
+import { render } from '@testing-library/preact';
 import { SearchHeader } from './SearchHeader';
-import { Theme, ThemeProvider } from '../../../providers';
-import type { SearchResultStore } from '@searchspring/snap-store-mobx';
+import { ThemeProvider } from '../../../providers';
 import { MockData } from '@searchspring/snap-shared';
 import { SearchMerchandisingStore, SearchPaginationStore, SearchQueryStore } from '@searchspring/snap-store-mobx';
 import { UrlManager, UrlTranslator } from '@searchspring/snap-url-manager';
@@ -22,14 +21,14 @@ describe('Search Header Component', () => {
 		config: searchConfig,
 		services,
 		data: {
-			search: data,
+			search: data.search,
 			meta: data.meta,
 		},
 	});
 	const queryStore = new SearchQueryStore({
 		services,
 		data: {
-			search: data,
+			search: data.search,
 		},
 	});
 
@@ -270,8 +269,8 @@ describe('Search Header Component', () => {
 		it('custom lang options', async () => {
 			//oq
 			const oqData = new MockData().searchMeta('oq');
-			const oqPaginationStore = new SearchPaginationStore({ config: searchConfig, services, data: { search: oqData, meta: oqData.meta } });
-			const oqQueryStore = new SearchQueryStore({ services, data: { search: oqData } });
+			const oqPaginationStore = new SearchPaginationStore({ config: searchConfig, services, data: { search: oqData.search, meta: oqData.meta } });
+			const oqQueryStore = new SearchQueryStore({ services, data: { search: oqData.search } });
 
 			const oqValue = 'oq value';
 			const oqAltText = 'oq alt';
@@ -310,9 +309,9 @@ describe('Search Header Component', () => {
 			const emptyPaginationStore = new SearchPaginationStore({
 				config: searchConfig,
 				services,
-				data: { search: noResultsdata, meta: noResultsdata.meta },
+				data: { search: noResultsdata.search, meta: noResultsdata.meta },
 			});
-			const emptyQueryStore = new SearchQueryStore({ services, data: { search: noResultsdata } });
+			const emptyQueryStore = new SearchQueryStore({ services, data: { search: noResultsdata.search } });
 
 			const emptyValue = 'empty value';
 			const emptyAltText = 'empty alt';
@@ -348,8 +347,8 @@ describe('Search Header Component', () => {
 
 			//did you mean
 			const dymData = new MockData().searchMeta('dym');
-			const dymPaginationStore = new SearchPaginationStore({ config: searchConfig, services, data: { search: dymData, meta: dymData.meta } });
-			const dymQueryStore = new SearchQueryStore({ services, data: { search: dymData } });
+			const dymPaginationStore = new SearchPaginationStore({ config: searchConfig, services, data: { search: dymData.search, meta: dymData.meta } });
+			const dymQueryStore = new SearchQueryStore({ services, data: { search: dymData.search } });
 
 			const dymValue = 'dym value';
 			const dymAltText = 'dym alt';
@@ -391,14 +390,14 @@ describe('Search Header Component', () => {
 			config: searchConfig,
 			services,
 			data: {
-				search: noResultsdata,
+				search: noResultsdata.search,
 				meta: noResultsdata.meta,
 			},
 		});
 		const emptyQueryStore = new SearchQueryStore({
 			services,
 			data: {
-				search: noResultsdata,
+				search: noResultsdata.search,
 			},
 		});
 
@@ -450,14 +449,14 @@ describe('Search Header Component', () => {
 			config: searchConfig,
 			services,
 			data: {
-				search: oqData,
+				search: oqData.search,
 				meta: oqData.meta,
 			},
 		});
 		const oqQueryStore = new SearchQueryStore({
 			services,
 			data: {
-				search: oqData,
+				search: oqData.search,
 			},
 		});
 
@@ -509,14 +508,14 @@ describe('Search Header Component', () => {
 			config: searchConfig,
 			services,
 			data: {
-				search: dymData,
+				search: dymData.search,
 				meta: dymData.meta,
 			},
 		});
 		const dymQueryStore = new SearchQueryStore({
 			services,
 			data: {
-				search: dymData,
+				search: dymData.search,
 			},
 		});
 
@@ -570,19 +569,19 @@ describe('Search Header Component', () => {
 			config: searchConfig,
 			services,
 			data: {
-				search: landingData,
+				search: landingData.search,
 				meta: landingData.meta,
 			},
 		});
 		const landingQueryStore = new SearchQueryStore({
 			services,
 			data: {
-				search: landingData,
+				search: landingData.search,
 			},
 		});
 		const merchandisingStore = new SearchMerchandisingStore({
 			data: {
-				search: landingData,
+				search: landingData.search,
 			},
 		});
 

@@ -19,7 +19,7 @@ const services = {
 const mockData = new MockData();
 
 describe('Filter Store', () => {
-	let searchData: SearchResponseModel & { meta: MetaResponseModel };
+	let searchData: { meta: MetaResponseModel; search: SearchResponseModel };
 	beforeEach(() => {
 		expect.hasAssertions();
 
@@ -50,11 +50,11 @@ describe('Filter Store', () => {
 	});
 
 	it('will have filter data that matches what was passed in', () => {
-		const filtersInput = searchData.filters;
+		const filtersInput = searchData.search.filters;
 		const filters = new SearchFilterStore({
 			services,
 			data: {
-				search: searchData,
+				search: searchData.search,
 				meta: searchData.meta,
 			},
 		});
@@ -90,7 +90,7 @@ describe('Filter Store', () => {
 		const filters = new SearchFilterStore({
 			services,
 			data: {
-				search: searchData,
+				search: searchData.search,
 				meta: searchData.meta,
 			},
 		});

@@ -29,14 +29,14 @@ describe('SearchResultStore', () => {
 
 	it('returns an empty array when passed an empty array [] of results', () => {
 		const searchData = mockData.searchMeta();
-		searchData.results = [];
+		searchData.search.results = [];
 		const results = new SearchResultStore({
 			config: searchConfig,
 			state: {
 				loaded: false,
 			},
 			data: {
-				search: searchData,
+				search: searchData.search,
 				meta: {},
 			},
 		});
@@ -53,12 +53,12 @@ describe('SearchResultStore', () => {
 				loaded: false,
 			},
 			data: {
-				search: searchData,
+				search: searchData.search,
 				meta: {},
 			},
 		});
 
-		expect(results.length).toBe(searchData.results?.length);
+		expect(results.length).toBe(searchData.search.results?.length);
 	});
 
 	it('has result data that matches what was passed in', () => {
@@ -70,25 +70,25 @@ describe('SearchResultStore', () => {
 				loaded: false,
 			},
 			data: {
-				search: searchData,
+				search: searchData.search,
 				meta: {},
 			},
 		});
 
 		results.forEach((result, index) => {
 			// check id
-			expect(result.id).toBe(searchData.results && searchData.results[index].id);
+			expect(result.id).toBe(searchData.search.results && searchData.search.results[index].id);
 
 			// check core mappings
 			Object.keys(result.mappings.core!).forEach((key) => {
-				const core = searchData.results && searchData.results[index]?.mappings?.core;
+				const core = searchData.search.results && searchData.search.results[index]?.mappings?.core;
 				const value = core && core[key as keyof SearchResponseModelResultCoreMappings];
 				expect(result.mappings?.core && result.mappings?.core[key as keyof SearchResponseModelResultCoreMappings]).toBe(value);
 			});
 
 			// check attributes
 			Object.keys(result.attributes).forEach((key) => {
-				const attributes = searchData.results && searchData.results[index] && searchData.results[index].attributes;
+				const attributes = searchData.search.results && searchData.search.results[index] && searchData.search.results[index].attributes;
 				const value = attributes && attributes[key];
 				expect(result.attributes[key]).toStrictEqual(value);
 			});
@@ -156,7 +156,7 @@ describe('SearchResultStore', () => {
 					loaded: false,
 				},
 				data: {
-					search: searchData,
+					search: searchData.search,
 					meta: searchData.meta,
 				},
 			});
@@ -208,7 +208,7 @@ describe('SearchResultStore', () => {
 					loaded: false,
 				},
 				data: {
-					search: searchData,
+					search: searchData.search,
 					meta: searchData.meta,
 				},
 			});
@@ -242,14 +242,14 @@ describe('SearchResultStore', () => {
 					loaded: false,
 				},
 				data: {
-					search: searchData,
+					search: searchData.search,
 					meta: searchData.meta,
 				},
 			});
-			expect(results.length).toBe(searchData.pagination?.pageSize);
+			expect(results.length).toBe(searchData.search.results?.length);
 
 			results.forEach((result, index) => {
-				const productData = searchData.results && searchData.results[index];
+				const productData = searchData.search.results && searchData.search.results[index];
 				const variantData = productData?.attributes?.ss_variants;
 				expect(variantData).toBeDefined();
 				const parsedVariantData = JSON.parse(variantData as unknown as string);
@@ -279,17 +279,17 @@ describe('SearchResultStore', () => {
 					loaded: false,
 				},
 				data: {
-					search: searchData,
+					search: searchData.search,
 					meta: searchData.meta,
 				},
 			});
-			expect(results.length).toBe(searchData.pagination?.pageSize);
+			expect(results.length).toBe(searchData.search.pagination?.pageSize);
 
 			const variantDataToUse = results[2].attributes.ss_variants;
 			const parsedVariantDataToUse = JSON.parse(variantDataToUse as unknown as string);
 
 			results.forEach((result, index) => {
-				const productData = searchData.results && searchData.results[index];
+				const productData = searchData.search.results && searchData.search.results[index];
 				const variantData = productData?.attributes?.ss_variants;
 
 				expect(variantData).toBeDefined();
@@ -341,11 +341,11 @@ describe('SearchResultStore', () => {
 					loaded: false,
 				},
 				data: {
-					search: searchData,
+					search: searchData.search,
 					meta: searchData.meta,
 				},
 			});
-			expect(results.length).toBe(searchData.pagination?.pageSize);
+			expect(results.length).toBe(searchData.search.pagination?.pageSize);
 
 			const resultForTest = results[0] as Product;
 			expect(resultForTest).toBeDefined();
@@ -390,18 +390,18 @@ describe('SearchResultStore', () => {
 					loaded: false,
 				},
 				data: {
-					search: searchData,
+					search: searchData.search,
 					meta: searchData.meta,
 				},
 			});
-			expect(results.length).toBe(searchData.pagination?.pageSize);
+			expect(results.length).toBe(searchData.search.pagination?.pageSize);
 
 			const variantDataToUse = results[0].attributes.ss_variants as string;
 			const parsedVariantDataToUse = JSON.parse(variantDataToUse);
 
 			const resultForTest = results[0] as Product;
 
-			const productData = searchData.results && searchData.results[0];
+			const productData = searchData.search.results && searchData.search.results[0];
 			const variantData = productData?.attributes?.ss_variants;
 
 			expect(variantData).toBeDefined();
@@ -468,18 +468,18 @@ describe('SearchResultStore', () => {
 					loaded: false,
 				},
 				data: {
-					search: searchData,
+					search: searchData.search,
 					meta: searchData.meta,
 				},
 			});
-			expect(results.length).toBe(searchData.pagination?.pageSize);
+			expect(results.length).toBe(searchData.search.pagination?.pageSize);
 
 			const variantDataToUse = results[0].attributes.ss_variants as string;
 			const parsedVariantDataToUse = JSON.parse(variantDataToUse);
 
 			const resultForTest = results[0] as Product;
 
-			const productData = searchData.results && searchData.results[0];
+			const productData = searchData.search.results && searchData.search.results[0];
 			const variantData = productData?.attributes?.ss_variants;
 
 			expect(variantData).toBeDefined();
@@ -596,12 +596,12 @@ describe('SearchResultStore', () => {
 					loaded: false,
 				},
 				data: {
-					search: searchData,
+					search: searchData.search,
 					meta: searchData.meta,
 				},
 			});
 
-			expect(results.length).toBe(searchData.pagination?.pageSize);
+			expect(results.length).toBe(searchData.search.pagination?.pageSize);
 
 			const resultForTest = results[0] as Product;
 			expect(resultForTest).toBeDefined();
@@ -642,12 +642,12 @@ describe('SearchResultStore', () => {
 					loaded: false,
 				},
 				data: {
-					search: searchData,
+					search: searchData.search,
 					meta: searchData.meta,
 				},
 			});
 
-			expect(results.length).toBe(searchData.pagination?.pageSize);
+			expect(results.length).toBe(searchData.search.pagination?.pageSize);
 
 			const resultForTest = results[0] as Product;
 			expect(resultForTest).toBeDefined();
@@ -698,12 +698,12 @@ describe('SearchResultStore', () => {
 					loaded: false,
 				},
 				data: {
-					search: searchData,
+					search: searchData.search,
 					meta: searchData.meta,
 				},
 			});
 
-			expect(results.length).toBe(searchData.pagination?.pageSize);
+			expect(results.length).toBe(searchData.search.pagination?.pageSize);
 
 			const resultForTest = results[0] as Product;
 			expect(resultForTest).toBeDefined();
@@ -753,12 +753,12 @@ describe('SearchResultStore', () => {
 					loaded: false,
 				},
 				data: {
-					search: searchData,
+					search: searchData.search,
 					meta: searchData.meta,
 				},
 			});
 
-			expect(results.length).toBe(searchData.pagination?.pageSize);
+			expect(results.length).toBe(searchData.search.pagination?.pageSize);
 
 			const resultForTest = results[0] as Product;
 			expect(resultForTest).toBeDefined();
@@ -811,12 +811,12 @@ describe('SearchResultStore', () => {
 					loaded: false,
 				},
 				data: {
-					search: searchData,
+					search: searchData.search,
 					meta: searchData.meta,
 				},
 			});
 
-			expect(results.length).toBe(searchData.pagination?.pageSize);
+			expect(results.length).toBe(searchData.search.pagination?.pageSize);
 
 			const resultForTest = results[0] as Product;
 			expect(resultForTest).toBeDefined();
@@ -865,11 +865,11 @@ describe('SearchResultStore', () => {
 					loaded: false,
 				},
 				data: {
-					search: searchData,
+					search: searchData.search,
 					meta: searchData.meta,
 				},
 			});
-			expect(results.length).toBe(searchData.pagination?.pageSize);
+			expect(results.length).toBe(searchData.search.pagination?.pageSize);
 
 			const resultForTest = results[0] as Product;
 			expect(resultForTest).toBeDefined();
@@ -914,11 +914,11 @@ describe('SearchResultStore', () => {
 					loaded: false,
 				},
 				data: {
-					search: searchData,
+					search: searchData.search,
 					meta: searchData.meta,
 				},
 			});
-			expect(results.length).toBe(searchData.pagination?.pageSize);
+			expect(results.length).toBe(searchData.search.pagination?.pageSize);
 
 			const resultForTest = results[0] as Product;
 			expect(resultForTest).toBeDefined();
@@ -943,7 +943,7 @@ describe('SearchResultStore', () => {
 			it('has specific properties', () => {
 				const mask = new ProductMask();
 				const searchData = mockData.updateConfig({ siteId: 'z7h1jh' }).searchMeta('variants');
-				const variantData = searchData.results![0].attributes?.ss_variants as unknown as string;
+				const variantData = searchData.search.results![0].attributes?.ss_variants as unknown as string;
 				const parsedVariantData = JSON.parse(variantData) as VariantData[];
 
 				parsedVariantData.forEach((variantData) => {
@@ -970,7 +970,7 @@ describe('SearchResultStore', () => {
 			it('requires variants data and a mask to construct', () => {
 				const mask = new ProductMask();
 				const searchData = mockData.updateConfig({ siteId: 'z7h1jh' }).searchMeta('variants');
-				const variantData = searchData.results![0].attributes?.ss_variants as unknown as string;
+				const variantData = searchData.search.results![0].attributes?.ss_variants as unknown as string;
 				const parsedVariantData = JSON.parse(variantData) as VariantData[];
 				const variants = new Variants({
 					data: {
@@ -1002,7 +1002,7 @@ describe('SearchResultStore', () => {
 			it('can set an active variant with `setActive`', () => {
 				const mask = new ProductMask();
 				const searchData = mockData.updateConfig({ siteId: 'z7h1jh' }).searchMeta('variants');
-				const variantData = searchData.results![0].attributes?.ss_variants as unknown as string;
+				const variantData = searchData.search.results![0].attributes?.ss_variants as unknown as string;
 				const parsedVariantData = JSON.parse(variantData) as VariantData[];
 				const variants = new Variants({
 					data: {
@@ -1023,7 +1023,7 @@ describe('SearchResultStore', () => {
 			it('can set an active variant with `setActive`', () => {
 				const mask = new ProductMask();
 				const searchData = mockData.updateConfig({ siteId: 'z7h1jh' }).searchMeta('variants');
-				const variantData = searchData.results![0].attributes?.ss_variants as unknown as string;
+				const variantData = searchData.search.results![0].attributes?.ss_variants as unknown as string;
 				const parsedVariantData = JSON.parse(variantData) as VariantData[];
 				const variants = new Variants({
 					data: {
@@ -1044,7 +1044,7 @@ describe('SearchResultStore', () => {
 			it('can set an active variant with `setActive`', () => {
 				const mask = new ProductMask();
 				const searchData = mockData.updateConfig({ siteId: 'z7h1jh' }).searchMeta('variants');
-				const variantData = searchData.results![0].attributes?.ss_variants as unknown as string;
+				const variantData = searchData.search.results![0].attributes?.ss_variants as unknown as string;
 				const parsedVariantData = JSON.parse(variantData) as VariantData[];
 				const variants = new Variants({
 					data: {
@@ -1065,7 +1065,7 @@ describe('SearchResultStore', () => {
 			it('has selections that it builds and selects from options', () => {
 				const mask = new ProductMask();
 				const searchData = mockData.updateConfig({ siteId: 'z7h1jh' }).searchMeta('variants');
-				const variantData = searchData.results![0].attributes?.ss_variants as unknown as string;
+				const variantData = searchData.search.results![0].attributes?.ss_variants as unknown as string;
 				const parsedVariantData = JSON.parse(variantData) as VariantData[];
 				const variants = new Variants({
 					data: {
@@ -1097,7 +1097,7 @@ describe('SearchResultStore', () => {
 			it('will adjust selections based on availability', () => {
 				const mask = new ProductMask();
 				const searchData = mockData.updateConfig({ siteId: 'z7h1jh' }).searchMeta('variants');
-				const variantData = searchData.results![0].attributes?.ss_variants as unknown as string;
+				const variantData = searchData.search.results![0].attributes?.ss_variants as unknown as string;
 				const parsedVariantData = JSON.parse(variantData) as VariantData[];
 				const variants = new Variants({
 					data: {
@@ -1117,7 +1117,7 @@ describe('SearchResultStore', () => {
 			it('will use previous selections based on availability', () => {
 				const mask = new ProductMask();
 				const searchData = mockData.updateConfig({ siteId: 'z7h1jh' }).searchMeta('variants');
-				const variantData = searchData.results![0].attributes?.ss_variants as unknown as string;
+				const variantData = searchData.search.results![0].attributes?.ss_variants as unknown as string;
 				const parsedVariantData = JSON.parse(variantData) as VariantData[];
 				const variants = new Variants({
 					data: {
@@ -1156,13 +1156,15 @@ describe('SearchResultStore', () => {
 					loaded: false,
 				},
 				data: {
-					search: searchData,
+					search: searchData.search,
 					meta: {},
 				},
 			});
 
-			expect(results.length).toBe(searchData.pagination?.pageSize);
-			expect((results[1] as Banner).value).toBe(searchData.merchandising?.content?.inline && searchData.merchandising.content.inline[0].value);
+			expect(results.length).toBe(searchData.search.pagination?.pageSize);
+			expect((results[1] as Banner).value).toBe(
+				searchData.search.merchandising?.content?.inline && searchData.search.merchandising.content.inline[0].value
+			);
 		});
 
 		it('splices inline banners into the results array', () => {
@@ -1174,13 +1176,13 @@ describe('SearchResultStore', () => {
 					loaded: false,
 				},
 				data: {
-					search: searchData,
+					search: searchData.search,
 					meta: {},
 				},
 			});
 
-			expect(results.length).toBe(searchData.pagination?.pageSize);
-			const inlineData = searchData.merchandising?.content?.inline!;
+			expect(results.length).toBe(searchData.search.pagination?.pageSize);
+			const inlineData = searchData.search.merchandising?.content?.inline!;
 			expect(results[2].id).toBe(`ss-ib-${inlineData[0].config?.position?.index}`);
 			expect((results[2] as Banner).value).toBe(inlineData[0].value);
 			expect(results[3].id).toBe(`ss-ib-${inlineData[1].config?.position?.index}`);
@@ -1196,13 +1198,13 @@ describe('SearchResultStore', () => {
 					loaded: false,
 				},
 				data: {
-					search: searchData,
+					search: searchData.search,
 					meta: {},
 				},
 			});
 
 			expect(results.length).toBe(1);
-			const inlineData = searchData.merchandising?.content?.inline!;
+			const inlineData = searchData.search.merchandising?.content?.inline!;
 			expect(results[0].id).toBe(`ss-ib-${inlineData[2].config?.position?.index}`);
 			expect((results[0] as Banner).value).toBe(inlineData[2].value);
 		});
@@ -1216,13 +1218,13 @@ describe('SearchResultStore', () => {
 					loaded: false,
 				},
 				data: {
-					search: searchData,
+					search: searchData.search,
 					meta: {},
 				},
 			});
 
 			expect(results.length).toBe(11);
-			const inlineData = searchData.merchandising?.content?.inline!;
+			const inlineData = searchData.search.merchandising?.content?.inline!;
 			expect(results[0].id).toBe(`ss-ib-${inlineData[0].config?.position?.index}`);
 			expect((results[0] as Banner).value).toBe(inlineData[0].value);
 
@@ -1300,18 +1302,18 @@ describe('SearchResultStore', () => {
 					loaded: false,
 				},
 				data: {
-					search: searchData,
+					search: searchData.search,
 					meta: searchData.meta,
 				},
 			});
 
-			expect(results.length).toBe(searchData.pagination?.pageSize);
+			expect(results.length).toBe(searchData.search.pagination?.pageSize);
 
 			const indexOfOverlayBadge = 0;
 			const result = results[indexOfOverlayBadge] as Product;
 			expect(result.badges?.all).toBeDefined();
 
-			const resultBadges = searchData.results![indexOfOverlayBadge].badges!;
+			const resultBadges = searchData.search.results![indexOfOverlayBadge].badges!;
 			expect(resultBadges).toBeDefined();
 			expect(result.badges.all.length).toStrictEqual(resultBadges?.length);
 
@@ -1346,18 +1348,18 @@ describe('SearchResultStore', () => {
 					loaded: false,
 				},
 				data: {
-					search: searchData,
+					search: searchData.search,
 					meta: searchData.meta,
 				},
 			});
 
-			expect(results.length).toBe(searchData.pagination?.pageSize);
+			expect(results.length).toBe(searchData.search.pagination?.pageSize);
 
 			const indexOfOverlayBadge = 2;
 			const result = results[indexOfOverlayBadge] as Product;
 			expect(result.badges?.all).toBeDefined();
 
-			const resultBadges = searchData.results![indexOfOverlayBadge].badges!;
+			const resultBadges = searchData.search.results![indexOfOverlayBadge].badges!;
 			expect(resultBadges).toBeDefined();
 			expect(result.badges.all.length).toStrictEqual(resultBadges?.length);
 
@@ -1394,7 +1396,7 @@ describe('SearchResultStore', () => {
 					loaded: false,
 				},
 				data: {
-					search: searchData,
+					search: searchData.search,
 					meta: searchData.meta,
 				},
 			});
@@ -1403,7 +1405,7 @@ describe('SearchResultStore', () => {
 			const result = results[indexOfOverlayBadge] as Product;
 			expect(result.badges?.all).toBeDefined();
 
-			const resultBadges = searchData.results![indexOfOverlayBadge].badges!;
+			const resultBadges = searchData.search.results![indexOfOverlayBadge].badges!;
 			expect(resultBadges).toBeDefined();
 			expect(result.badges.all.length).toStrictEqual(resultBadges?.length);
 
@@ -1432,7 +1434,7 @@ describe('SearchResultStore', () => {
 					loaded: false,
 				},
 				data: {
-					search: searchData,
+					search: searchData.search,
 					meta: searchData.meta,
 				},
 			});

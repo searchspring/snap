@@ -83,7 +83,7 @@ describe('Finder Store', () => {
 		expect(finderStore.loaded).toBe(false);
 
 		expect(finderStore.meta).toBeDefined();
-		expect(finderStore.meta.data).toStrictEqual({});
+		expect(finderStore.meta?.data).toStrictEqual({});
 
 		expect(finderStore.pagination).toBeDefined();
 		expect(finderStore.pagination?.totalResults).toBeUndefined();
@@ -99,7 +99,7 @@ describe('Finder Store', () => {
 		expect(finderStore.loaded).toBe(true);
 
 		expect(finderStore.meta).toBeDefined();
-		expect(finderStore.meta.data).toStrictEqual(searchData.meta);
+		expect(finderStore.meta?.data).toStrictEqual(searchData.meta);
 
 		expect(finderStore.pagination?.totalResults).toBe(searchData.search.pagination?.totalResults);
 

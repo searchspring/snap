@@ -47,7 +47,7 @@ describe('Filter Component', () => {
 		const filters = new SearchFilterStore({
 			services,
 			data: {
-				search: mockData,
+				search: mockData.search,
 				meta: mockData.meta,
 			},
 		});

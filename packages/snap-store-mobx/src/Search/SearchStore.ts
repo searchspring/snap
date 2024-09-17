@@ -18,7 +18,7 @@ import { MetaStore } from '../Meta/MetaStore';
 
 export class SearchStore extends AbstractStore<SearchStoreConfig> {
 	public services: StoreServices;
-	public meta!: MetaStore;
+	public meta?: MetaStore;
 	public merchandising!: SearchMerchandisingStore;
 	public search!: SearchQueryStore;
 	public facets!: SearchFacetStore;
@@ -64,7 +64,6 @@ export class SearchStore extends AbstractStore<SearchStoreConfig> {
 
 	public update(data: { search: SearchResponseModel; meta: MetaResponseModel }): void {
 		const { search, meta } = data || {};
-		this.error = undefined;
 		this.meta = new MetaStore({
 			data: {
 				meta,
@@ -131,6 +130,7 @@ export class SearchStore extends AbstractStore<SearchStoreConfig> {
 			},
 		});
 
+		this.error = undefined;
 		this.loaded = Boolean(search?.pagination);
 	}
 }

@@ -17,7 +17,7 @@ describe('SortBy Component', () => {
 	const sortingStore = new SearchSortingStore({
 		services,
 		data: {
-			search: data,
+			search: data.search,
 			meta: data.meta,
 		},
 	});

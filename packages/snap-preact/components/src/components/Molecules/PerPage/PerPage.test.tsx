@@ -23,7 +23,7 @@ describe('PerPage Component', () => {
 		config: searchConfig,
 		services,
 		data: {
-			search: data,
+			search: data.search,
 			meta: data.meta,
 		},
 	});

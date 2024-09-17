@@ -40,7 +40,7 @@ export class RecommendAPI extends API {
 	async getProfile(queryParameters: ProfileRequestModel): Promise<ProfileResponseModel> {
 		const headerParameters: HTTPHeaders = {};
 
-		const response = await this.request(
+		const response = await this.request<ProfileResponseModel>(
 			{
 				path: '/api/personalized-recommendations/profile.json',
 				method: 'GET',
@@ -50,7 +50,7 @@ export class RecommendAPI extends API {
 			JSON.stringify(queryParameters)
 		);
 
-		return response as unknown as ProfileResponseModel;
+		return response;
 	}
 
 	async batchRecommendations(parameters: RecommendRequestModel): Promise<RecommendResponseModel> {
@@ -168,7 +168,7 @@ export class RecommendAPI extends API {
 		const siteId = requestParameters.siteId;
 		const path = `/boost/${siteId}/recommend`;
 
-		const response = await this.request(
+		const response = await this.request<RecommendResponseModel[]>(
 			{
 				path,
 				method: 'POST',
@@ -178,7 +178,7 @@ export class RecommendAPI extends API {
 			JSON.stringify(requestParameters)
 		);
 
-		return response as unknown as RecommendResponseModel[];
+		return response;
 	}
 }
 

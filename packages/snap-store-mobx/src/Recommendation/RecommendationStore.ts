@@ -10,11 +10,11 @@ import { MetaStore } from '../Meta/MetaStore';
 
 export class RecommendationStore extends AbstractStore<RecommendationStoreConfig> {
 	public services: StoreServices;
-	public meta!: MetaStore;
+	public meta?: MetaStore;
 	public loaded = false;
-	public profile!: RecommendationProfileStore | Record<string, any>;
-	public results!: Product[];
-	public cart!: CartStore;
+	public profile: RecommendationProfileStore | Record<string, any> = {};
+	public results: Product[] = [];
+	public cart?: CartStore;
 
 	constructor(config: RecommendationStoreConfig, services: StoreServices) {
 		super(config);
@@ -24,8 +24,6 @@ export class RecommendationStore extends AbstractStore<RecommendationStoreConfig
 		}
 
 		this.services = services;
-
-		this.reset();
 
 		makeObservable(this, {
 			profile: observable,

@@ -92,17 +92,17 @@ export class MockData {
 		}
 	}
 
-	searchMeta(file?: string) {
+	searchMeta(file?: string): { meta: MetaResponseModel; search: SearchResponseModel } {
 		try {
-			return { meta: this.meta(), ...this.search(file) };
+			return { meta: this.meta(), search: this.search(file) };
 		} catch (err) {
 			throw 'Search JSON not found.';
 		}
 	}
 
-	autocompleteMeta(file?: string) {
+	autocompleteMeta(file?: string): { meta: MetaResponseModel; search: AutocompleteResponseModel } {
 		try {
-			return { meta: this.meta(), ...this.autocomplete(file) };
+			return { meta: this.meta(), search: this.autocomplete(file) };
 		} catch (err) {
 			throw 'Search JSON not found.';
 		}

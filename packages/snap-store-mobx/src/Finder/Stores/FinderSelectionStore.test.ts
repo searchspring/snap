@@ -31,7 +31,7 @@ describe('FinderSelectionStore', () => {
 
 		const storage = new StorageStore();
 
-		let data: SearchResponseModel & { meta: MetaResponseModel }, store: FinderSelectionStore, selectionValue: string | undefined;
+		let data, store: FinderSelectionStore, selectionValue: string | undefined;
 
 		beforeAll(() => {
 			data = mockData.searchMeta();
@@ -46,7 +46,7 @@ describe('FinderSelectionStore', () => {
 					loading: false,
 				},
 				data: {
-					search: data,
+					search: data.search,
 					meta: data.meta,
 					selections: [],
 				},
@@ -94,7 +94,7 @@ describe('FinderSelectionStore', () => {
 					loading: false,
 				},
 				data: {
-					search: data,
+					search: data.search,
 					meta: data.meta,
 					selections: [],
 				},
@@ -172,10 +172,7 @@ describe('FinderSelectionStore', () => {
 			],
 		};
 
-		let data: SearchResponseModel & { meta: MetaResponseModel },
-			store: FinderSelectionStore,
-			storage: StorageStore,
-			selectionValue: string | undefined;
+		let data, store: FinderSelectionStore, storage: StorageStore, selectionValue: string | undefined;
 
 		beforeAll(() => {
 			data = mockData.searchMeta('hierarchy');
@@ -192,7 +189,7 @@ describe('FinderSelectionStore', () => {
 					loading: false,
 				},
 				data: {
-					search: data,
+					search: data.search,
 					meta: data.meta,
 					selections: [],
 				},
@@ -231,7 +228,7 @@ describe('FinderSelectionStore', () => {
 					loading: false,
 				},
 				data: {
-					search: data,
+					search: data.search,
 					meta: data.meta,
 					selections: [],
 				},
@@ -246,10 +243,7 @@ describe('FinderSelectionStore', () => {
 	});
 
 	describe('Non-hierarchy', () => {
-		let data: SearchResponseModel & { meta: MetaResponseModel },
-			store: FinderSelectionStore,
-			storage: StorageStore,
-			selectionValue: string | undefined;
+		let data, store: FinderSelectionStore, storage: StorageStore, selectionValue: string | undefined;
 
 		const config = {
 			id: 'finder2',
@@ -288,7 +282,7 @@ describe('FinderSelectionStore', () => {
 					loading: false,
 				},
 				data: {
-					search: data,
+					search: data.search,
 					meta: data.meta,
 					selections: [],
 				},
@@ -340,7 +334,7 @@ describe('FinderSelectionStore', () => {
 					loading: false,
 				},
 				data: {
-					search: data,
+					search: data.search,
 					meta: data.meta,
 					selections: [],
 				},

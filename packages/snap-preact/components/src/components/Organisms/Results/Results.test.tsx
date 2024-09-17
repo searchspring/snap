@@ -16,7 +16,7 @@ const mockResults = new SearchResultStore({
 	config: { id: 'test' },
 	state: { loaded: false },
 	data: {
-		search: searchResponse,
+		search: searchResponse.search,
 		meta: searchResponse.meta,
 	},
 });

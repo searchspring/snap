@@ -27,7 +27,7 @@ import { MetaStore } from '../Meta/MetaStore';
 
 export class AutocompleteStore extends AbstractStore<AutocompleteStoreConfig> {
 	public services: StoreServices;
-	public meta!: MetaStore;
+	public meta?: MetaStore;
 	public merchandising!: SearchMerchandisingStore;
 	public search!: AutocompleteQueryStore;
 	public terms!: AutocompleteTermStore;
@@ -162,7 +162,6 @@ export class AutocompleteStore extends AbstractStore<AutocompleteStoreConfig> {
 	public update(data: { meta: MetaResponseModel; search: AutocompleteResponseModel }): void {
 		if (!data) return;
 		const { meta, search } = data || {};
-		this.error = undefined;
 		this.meta = new MetaStore({
 			data: { meta },
 		});
@@ -267,6 +266,7 @@ export class AutocompleteStore extends AbstractStore<AutocompleteStoreConfig> {
 			},
 		});
 
+		this.error = undefined;
 		this.loaded = Boolean(search?.pagination);
 	}
 }
