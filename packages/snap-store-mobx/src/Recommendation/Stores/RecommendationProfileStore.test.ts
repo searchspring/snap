@@ -17,9 +17,9 @@ describe('RecommendationProfileStore store', () => {
 	it('create profile using mock profile data', () => {
 		const data = mockData.recommend();
 
-		const store = new RecommendationProfileStore({ data: { recommend: data } });
-		expect(store.tag).toStrictEqual(data.profile.tag);
-		expect(store.placement).toStrictEqual(data.profile.placement);
-		expect(store.display).toStrictEqual(data.profile.display);
+		const store = new RecommendationProfileStore({ data: { profile: data.profile } });
+		expect(store.tag).toStrictEqual(data.profile.profile.tag);
+		expect(store.placement).toStrictEqual(data.profile.profile.placement);
+		expect(store.display).toStrictEqual(data.profile.profile.display);
 	});
 });

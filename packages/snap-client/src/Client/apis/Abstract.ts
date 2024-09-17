@@ -34,7 +34,7 @@ export class API {
 		return this.configuration.mode;
 	}
 
-	protected async request(context: RequestOpts, cacheKey?: string): Promise<Response> {
+	protected async request<T>(context: RequestOpts, cacheKey?: string): Promise<T> {
 		const { url, init } = this.createFetchParams(context);
 
 		if (cacheKey) {
@@ -42,7 +42,7 @@ export class API {
 			if (cachedResponse) {
 				this.retryCount = 0; // reset count and delay incase rate limit occurs again before a page refresh
 				this.retryDelay = 1000;
-				return cachedResponse;
+				return cachedResponse as T;
 			}
 		}
 		let response;

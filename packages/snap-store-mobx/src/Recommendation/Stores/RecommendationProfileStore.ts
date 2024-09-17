@@ -1,10 +1,9 @@
 import { observable, makeObservable } from 'mobx';
-
-import type { RecommendCombinedResponseModel } from '@searchspring/snap-client';
+import type { ProfileResponseModel } from '@searchspring/snap-client';
 
 type RecommendationProfileStoreConfig = {
 	data: {
-		recommend: RecommendCombinedResponseModel;
+		profile: ProfileResponseModel;
 	};
 };
 export class RecommendationProfileStore {
@@ -15,12 +14,11 @@ export class RecommendationProfileStore {
 
 	constructor(params: RecommendationProfileStoreConfig) {
 		const { data } = params || {};
-		const { recommend } = data || {};
+		const { profile } = data?.profile || {};
 
-		if (!recommend?.profile?.tag) {
+		if (!profile?.tag) {
 			return;
 		}
-		const { profile } = recommend;
 
 		this.tag = profile.tag;
 		this.placement = profile.placement;

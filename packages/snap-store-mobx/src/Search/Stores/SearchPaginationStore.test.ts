@@ -16,9 +16,7 @@ const searchConfig = {
 };
 
 describe('Pagination Store', () => {
-	let searchData: SearchResponseModel & {
-		meta: MetaResponseModel & MetaResponseModelFacetDefaults;
-	};
+	let searchData: { meta: MetaResponseModel; search: SearchResponseModel };
 	beforeEach(() => {
 		expect.hasAssertions();
 
@@ -38,11 +36,11 @@ describe('Pagination Store', () => {
 			config: searchConfig,
 			services,
 			data: {
-				search: searchData,
+				search: searchData.search,
 				meta: searchData.meta,
 			},
 		});
-		expect(pagination.page).toBe(searchData.pagination?.page);
+		expect(pagination.page).toBe(searchData.search.pagination?.page);
 	});
 
 	it('sets the pageSize', () => {
@@ -50,11 +48,11 @@ describe('Pagination Store', () => {
 			config: searchConfig,
 			services,
 			data: {
-				search: searchData,
+				search: searchData.search,
 				meta: searchData.meta,
 			},
 		});
-		expect(pagination.pageSize).toBe(searchData.pagination?.pageSize);
+		expect(pagination.pageSize).toBe(searchData.search.pagination?.pageSize);
 	});
 
 	it('sets the defaultPageSize', () => {
@@ -62,7 +60,7 @@ describe('Pagination Store', () => {
 			config: searchConfig,
 			services,
 			data: {
-				search: searchData,
+				search: searchData.search,
 				meta: searchData.meta,
 			},
 		});
@@ -74,11 +72,11 @@ describe('Pagination Store', () => {
 			config: searchConfig,
 			services,
 			data: {
-				search: searchData,
+				search: searchData.search,
 				meta: searchData.meta,
 			},
 		});
-		expect(pagination.totalResults).toBe(searchData.pagination?.totalResults);
+		expect(pagination.totalResults).toBe(searchData.search.pagination?.totalResults);
 	});
 
 	it('sets the default pageSizeOptions', () => {
@@ -86,7 +84,7 @@ describe('Pagination Store', () => {
 			config: searchConfig,
 			services,
 			data: {
-				search: searchData,
+				search: searchData.search,
 				meta: searchData.meta,
 			},
 		});
@@ -118,7 +116,7 @@ describe('Pagination Store', () => {
 			config: tempConfig,
 			services,
 			data: {
-				search: searchData,
+				search: searchData.search,
 				meta: searchData.meta,
 			},
 		});
@@ -156,7 +154,7 @@ describe('Pagination Store', () => {
 			config: tempConfig,
 			services,
 			data: {
-				search: searchData,
+				search: searchData.search,
 				meta: searchData.meta,
 			},
 		});
@@ -170,7 +168,7 @@ describe('Pagination Store', () => {
 			config: searchConfig,
 			services,
 			data: {
-				search: searchData,
+				search: searchData.search,
 				meta: searchData.meta,
 			},
 		});
@@ -184,7 +182,7 @@ describe('Pagination Store', () => {
 			config: searchConfig,
 			services,
 			data: {
-				search: searchData,
+				search: searchData.search,
 				meta: searchData.meta,
 			},
 		});
@@ -197,13 +195,13 @@ describe('Pagination Store', () => {
 			config: searchConfig,
 			services,
 			data: {
-				search: searchData,
+				search: searchData.search,
 				meta: searchData.meta,
 			},
 		});
 		expect(pagination.end).toBeDefined;
 
-		expect(pagination.end).toEqual(searchData.pagination?.pageSize! * searchData.pagination?.page!);
+		expect(pagination.end).toEqual(searchData.search.pagination?.pageSize! * searchData.search.pagination?.page!);
 		expect(pagination.end).toEqual(pagination.pageSize * pagination.page);
 	});
 
@@ -212,7 +210,7 @@ describe('Pagination Store', () => {
 			config: searchConfig,
 			services,
 			data: {
-				search: searchData,
+				search: searchData.search,
 				meta: searchData.meta,
 			},
 		});
@@ -227,7 +225,7 @@ describe('Pagination Store', () => {
 			config: searchConfig,
 			services,
 			data: {
-				search: searchData,
+				search: searchData.search,
 				meta: searchData.meta,
 			},
 		});
@@ -242,12 +240,12 @@ describe('Pagination Store', () => {
 			config: searchConfig,
 			services,
 			data: {
-				search: searchData,
+				search: searchData.search,
 				meta: searchData.meta,
 			},
 		});
 		expect(pagination.totalPages).toBeDefined;
-		expect(pagination.totalPages).toEqual(Math.ceil(searchData.pagination?.totalResults! / searchData.pagination?.pageSize!));
+		expect(pagination.totalPages).toEqual(Math.ceil(searchData.search.pagination?.totalResults! / searchData.search.pagination?.pageSize!));
 	});
 
 	it('can get multiple pages', () => {
@@ -255,12 +253,12 @@ describe('Pagination Store', () => {
 			config: searchConfig,
 			services,
 			data: {
-				search: searchData,
+				search: searchData.search,
 				meta: searchData.meta,
 			},
 		});
 		expect(pagination.multiplePages).toBeDefined;
-		expect(pagination.multiplePages).toEqual(Boolean(searchData.pagination?.pageSize! < searchData.pagination?.totalResults!));
+		expect(pagination.multiplePages).toEqual(Boolean(searchData.search.pagination?.pageSize! < searchData.search.pagination?.totalResults!));
 	});
 
 	it('can get current page', () => {
@@ -268,7 +266,7 @@ describe('Pagination Store', () => {
 			config: searchConfig,
 			services,
 			data: {
-				search: searchData,
+				search: searchData.search,
 				meta: searchData.meta,
 			},
 		});
@@ -286,13 +284,13 @@ describe('Pagination Store', () => {
 			config: searchConfig,
 			services,
 			data: {
-				search: searchData,
+				search: searchData.search,
 				meta: searchData.meta,
 			},
 		});
 		expect(pagination.first).toBeDefined;
 		expect(pagination.first.number).toEqual(1);
-		expect(pagination.first.active).toEqual(Boolean(searchData.pagination?.page === 1));
+		expect(pagination.first.active).toEqual(Boolean(searchData.search.pagination?.page === 1));
 	});
 
 	it('can get last page', () => {
@@ -300,24 +298,24 @@ describe('Pagination Store', () => {
 			config: searchConfig,
 			services,
 			data: {
-				search: searchData,
+				search: searchData.search,
 				meta: searchData.meta,
 			},
 		});
 		expect(pagination.last).toBeDefined;
 		expect(pagination.last.number).toEqual(pagination.totalPages);
-		expect(pagination.last.active).toEqual(Boolean(pagination.totalPages === searchData.pagination?.page));
+		expect(pagination.last.active).toEqual(Boolean(pagination.totalPages === searchData.search.pagination?.page));
 	});
 
 	it('does not get next page when on last page', () => {
 		// @ts-ignore
-		searchData.pagination.page = Math.floor(searchData.pagination?.totalResults! / searchData.pagination?.pageSize!) + 1;
+		searchData.search.pagination.page = Math.floor(searchData.search.pagination?.totalResults! / searchData.search.pagination?.pageSize!) + 1;
 
 		const pagination = new SearchPaginationStore({
 			config: searchConfig,
 			services,
 			data: {
-				search: searchData,
+				search: searchData.search,
 				meta: searchData.meta,
 			},
 		});
@@ -329,13 +327,13 @@ describe('Pagination Store', () => {
 			config: searchConfig,
 			services,
 			data: {
-				search: searchData,
+				search: searchData.search,
 				meta: searchData.meta,
 			},
 		});
 
 		expect(pagination.next).toBeDefined;
-		expect(pagination.next?.number).toEqual(searchData.pagination?.page! + 1);
+		expect(pagination.next?.number).toEqual(searchData.search.pagination?.page! + 1);
 	});
 
 	it('does not get prev page when on first page', () => {
@@ -343,7 +341,7 @@ describe('Pagination Store', () => {
 			config: searchConfig,
 			services,
 			data: {
-				search: searchData,
+				search: searchData.search,
 				meta: searchData.meta,
 			},
 		});
@@ -357,13 +355,13 @@ describe('Pagination Store', () => {
 			config: searchConfig,
 			services,
 			data: {
-				search: searchData,
+				search: searchData.search,
 				meta: searchData.meta,
 			},
 		});
 
 		expect(pagination.previous).toBeDefined;
-		expect(pagination.previous?.number).toEqual(searchData.pagination?.page! - 1);
+		expect(pagination.previous?.number).toEqual(searchData.search.pagination?.page! - 1);
 	});
 
 	it('can get prev page when not on first page', () => {
@@ -371,7 +369,7 @@ describe('Pagination Store', () => {
 			config: searchConfig,
 			services,
 			data: {
-				search: searchData,
+				search: searchData.search,
 				meta: searchData.meta,
 			},
 		});
@@ -388,7 +386,7 @@ describe('Pagination Store', () => {
 			config: searchConfig,
 			services,
 			data: {
-				search: searchData,
+				search: searchData.search,
 				meta: searchData.meta,
 			},
 		});
@@ -403,7 +401,7 @@ describe('Pagination Store', () => {
 			config: searchConfig,
 			services,
 			data: {
-				search: searchData,
+				search: searchData.search,
 				meta: searchData.meta,
 			},
 		});
@@ -418,7 +416,7 @@ describe('Pagination Store', () => {
 			config: searchConfig,
 			services,
 			data: {
-				search: searchData,
+				search: searchData.search,
 				meta: searchData.meta,
 			},
 		});
@@ -430,7 +428,7 @@ describe('Pagination Store', () => {
 			config: searchConfig,
 			services,
 			data: {
-				search: searchData,
+				search: searchData.search,
 				meta: searchData.meta,
 			},
 		});
@@ -443,7 +441,7 @@ describe('Pagination Store', () => {
 			config: searchConfig,
 			services,
 			data: {
-				search: searchData,
+				search: searchData.search,
 				meta: searchData.meta,
 			},
 		});
@@ -461,7 +459,7 @@ describe('Pagination Store', () => {
 			config: searchConfig,
 			services,
 			data: {
-				search: searchData,
+				search: searchData.search,
 				meta: searchData.meta,
 			},
 		});
@@ -479,7 +477,7 @@ describe('Pagination Store', () => {
 			config: searchConfig,
 			services,
 			data: {
-				search: searchData,
+				search: searchData.search,
 				meta: searchData.meta,
 			},
 		});
@@ -495,7 +493,7 @@ describe('Pagination Store', () => {
 			config: searchConfig,
 			services,
 			data: {
-				search: searchData,
+				search: searchData.search,
 				meta: searchData.meta,
 			},
 		});

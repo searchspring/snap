@@ -17,7 +17,7 @@ const mockData = new MockData().searchMeta('filtered');
 const filters = new SearchFilterStore({
 	services,
 	data: {
-		search: mockData,
+		search: mockData.search,
 		meta: mockData.meta,
 	},
 });
@@ -253,7 +253,7 @@ describe('FilterSummary theming works', () => {
 	const filters = new SearchFilterStore({
 		services,
 		data: {
-			search: mockData,
+			search: mockData.search,
 			meta: mockData.meta,
 		},
 	});

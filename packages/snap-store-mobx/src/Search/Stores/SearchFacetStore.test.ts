@@ -32,9 +32,7 @@ configure({
 });
 
 describe('Facet Store', () => {
-	let searchData: SearchResponseModel & {
-		meta: MetaResponseModel & MetaResponseModelFacetDefaults;
-	};
+	let searchData: { meta: MetaResponseModel; search: SearchResponseModel };
 
 	let storageStore: StorageStore;
 	beforeEach(() => {
@@ -57,7 +55,7 @@ describe('Facet Store', () => {
 	});
 
 	it('returns an empty array when passed an empty array [] of facets', () => {
-		searchData.facets = [];
+		searchData.search.facets = [];
 		const facets = new SearchFacetStore({
 			config: searchConfig,
 			stores: {
@@ -65,7 +63,7 @@ describe('Facet Store', () => {
 			},
 			services,
 			data: {
-				search: searchData,
+				search: searchData.search,
 				meta: searchData.meta,
 			},
 		});
@@ -82,12 +80,12 @@ describe('Facet Store', () => {
 			},
 			services,
 			data: {
-				search: searchData,
+				search: searchData.search,
 				meta: searchData.meta,
 			},
 		});
 
-		expect(facets.length).toBe(searchData.facets?.length);
+		expect(facets.length).toBe(searchData.search.facets?.length);
 	});
 
 	it('adds a reference to services to each facet', () => {
@@ -98,7 +96,7 @@ describe('Facet Store', () => {
 			},
 			services,
 			data: {
-				search: searchData,
+				search: searchData.search,
 				meta: searchData.meta,
 			},
 		});
@@ -116,7 +114,7 @@ describe('Facet Store', () => {
 			},
 			services,
 			data: {
-				search: searchData,
+				search: searchData.search,
 				meta: searchData.meta,
 			},
 		});
@@ -138,13 +136,13 @@ describe('Facet Store', () => {
 			},
 			services,
 			data: {
-				search: searchData,
+				search: searchData.search,
 				meta: searchData.meta,
 			},
 		});
 
 		facets.forEach((facet, index) => {
-			const searchDataFacet = searchData.facets && searchData.facets[index];
+			const searchDataFacet = searchData.search.facets && searchData.search.facets[index];
 			expect(facet.field).toBe(searchDataFacet?.field);
 			expect(facet.filtered).toStrictEqual(searchDataFacet?.filtered);
 			expect(facet.type).toStrictEqual(searchDataFacet?.type);
@@ -159,7 +157,7 @@ describe('Facet Store', () => {
 			},
 			services,
 			data: {
-				search: searchData,
+				search: searchData.search,
 				meta: searchData.meta,
 			},
 		});
@@ -180,7 +178,7 @@ describe('Facet Store', () => {
 			},
 			services,
 			data: {
-				search: searchData,
+				search: searchData.search,
 				meta: searchData.meta,
 			},
 		});
@@ -197,7 +195,7 @@ describe('Facet Store', () => {
 			},
 			services,
 			data: {
-				search: searchData,
+				search: searchData.search,
 				meta: searchData.meta,
 			},
 		});
@@ -222,7 +220,7 @@ describe('Facet Store', () => {
 			},
 			services,
 			data: {
-				search: searchData,
+				search: searchData.search,
 				meta: searchData.meta,
 			},
 		});
@@ -246,7 +244,7 @@ describe('Facet Store', () => {
 			},
 			services,
 			data: {
-				search: searchData,
+				search: searchData.search,
 				meta: searchData.meta,
 			},
 		});
@@ -267,7 +265,7 @@ describe('Facet Store', () => {
 			},
 			services,
 			data: {
-				search: searchData,
+				search: searchData.search,
 				meta: searchData.meta,
 			},
 		});
@@ -293,7 +291,7 @@ describe('Facet Store', () => {
 			},
 			services,
 			data: {
-				search: searchData,
+				search: searchData.search,
 				meta: searchData.meta,
 			},
 		});
@@ -323,7 +321,7 @@ describe('Facet Store', () => {
 			},
 			services,
 			data: {
-				search: searchData,
+				search: searchData.search,
 				meta: searchData.meta,
 			},
 		});
@@ -357,7 +355,7 @@ describe('Facet Store', () => {
 			},
 			services,
 			data: {
-				search: searchData,
+				search: searchData.search,
 				meta: searchData.meta,
 			},
 		});
@@ -374,7 +372,7 @@ describe('Facet Store', () => {
 			},
 			services,
 			data: {
-				search: searchData,
+				search: searchData.search,
 				meta: searchData.meta,
 			},
 		});
@@ -407,7 +405,7 @@ describe('Facet Store', () => {
 					},
 					services,
 					data: {
-						search: searchData,
+						search: searchData.search,
 						meta: searchData.meta,
 					},
 				});
@@ -433,11 +431,11 @@ describe('Facet Store', () => {
 					},
 					services,
 					data: {
-						search: searchData,
+						search: searchData.search,
 						meta: searchData.meta,
 					},
 				});
-				expect(facets.length).not.toBe(searchData.facets?.length);
+				expect(facets.length).not.toBe(searchData.search.facets?.length);
 				expect(facets.length).toBe(1);
 			});
 
@@ -465,7 +463,7 @@ describe('Facet Store', () => {
 					},
 					services,
 					data: {
-						search: searchData,
+						search: searchData.search,
 						meta: searchData.meta,
 					},
 				});
@@ -496,7 +494,7 @@ describe('Facet Store', () => {
 					},
 					services,
 					data: {
-						search: searchData,
+						search: searchData.search,
 						meta: searchData.meta,
 					},
 				});
@@ -524,7 +522,7 @@ describe('Facet Store', () => {
 					},
 					services,
 					data: {
-						search: searchData,
+						search: searchData.search,
 						meta: searchData.meta,
 					},
 				});
@@ -557,7 +555,7 @@ describe('Facet Store', () => {
 					},
 					services,
 					data: {
-						search: searchData,
+						search: searchData.search,
 						meta: searchData.meta,
 					},
 				});
@@ -591,7 +589,7 @@ describe('Facet Store', () => {
 					},
 					services,
 					data: {
-						search: searchData,
+						search: searchData.search,
 						meta: searchData.meta,
 					},
 				});
@@ -629,7 +627,7 @@ describe('Facet Store', () => {
 					},
 					services,
 					data: {
-						search: searchData,
+						search: searchData.search,
 						meta: searchData.meta,
 					},
 				});
@@ -664,13 +662,13 @@ describe('Facet Store', () => {
 					},
 					services,
 					data: {
-						search: searchData,
+						search: searchData.search,
 						meta: searchData.meta,
 					},
 				});
 				expect(facets.length).toBe(1);
 
-				const searchDataFacet = searchData.facets && (searchData.facets[0] as SearchResponseModelFacetRange);
+				const searchDataFacet = searchData.search.facets && (searchData.search.facets[0] as SearchResponseModelFacetRange);
 				expect(facets[0].range.low).toBe(searchDataFacet?.range?.low);
 				expect(facets[0].range.high).toBe(searchDataFacet?.range?.high);
 				expect(facets[0].active.low).toBe(searchDataFacet?.range?.low);
@@ -687,12 +685,12 @@ describe('Facet Store', () => {
 					},
 					services,
 					data: {
-						search: filteredSearchData,
+						search: filteredSearchData.search,
 						meta: filteredSearchData.meta,
 					},
 				});
 
-				const updatedSearchDataFacet = filteredSearchData.facets && (filteredSearchData.facets[0] as SearchResponseModelFacetRange);
+				const updatedSearchDataFacet = filteredSearchData.search.facets && (filteredSearchData.search.facets[0] as SearchResponseModelFacetRange);
 				expect(updatedFacets.length).toBe(1);
 				expect(updatedFacets[0].range.low).toBe(searchDataFacet?.range?.low);
 				expect(updatedFacets[0].range.high).toBe(searchDataFacet?.range?.high);
@@ -719,12 +717,12 @@ describe('Facet Store', () => {
 					},
 					services,
 					data: {
-						search: searchData,
+						search: searchData.search,
 						meta: searchData.meta,
 					},
 				});
 
-				const searchDataFacet = searchData.facets && (searchData.facets[0] as SearchResponseModelFacetRange);
+				const searchDataFacet = searchData.search.facets && (searchData.search.facets[0] as SearchResponseModelFacetRange);
 				expect(facets.length).toBe(1);
 				expect(facets[0].range.low).toBe(searchDataFacet?.range?.low);
 				expect(facets[0].range.high).toBe(searchDataFacet?.range?.high);
@@ -742,12 +740,12 @@ describe('Facet Store', () => {
 					},
 					services,
 					data: {
-						search: filteredSearchData,
+						search: filteredSearchData.search,
 						meta: filteredSearchData.meta,
 					},
 				});
 
-				const filteredSearchDataFacet = filteredSearchData.facets && (filteredSearchData.facets[0] as SearchResponseModelFacetRange);
+				const filteredSearchDataFacet = filteredSearchData.search.facets && (filteredSearchData.search.facets[0] as SearchResponseModelFacetRange);
 				expect(updatedFacets.length).toBe(1);
 				expect(updatedFacets[0].range.low).toBe(filteredSearchDataFacet?.range?.low);
 				expect(updatedFacets[0].range.high).toBe(filteredSearchDataFacet?.range?.high);
@@ -779,12 +777,12 @@ describe('Facet Store', () => {
 					},
 					services,
 					data: {
-						search: searchData,
+						search: searchData.search,
 						meta: searchData.meta,
 					},
 				});
 
-				const searchDataFacet = searchData.facets && (searchData.facets[0] as SearchResponseModelFacetRange);
+				const searchDataFacet = searchData.search.facets && (searchData.search.facets[0] as SearchResponseModelFacetRange);
 				expect(facets.length).toBe(1);
 				expect(facets[0].range.low).toBe(searchDataFacet?.range?.low);
 				expect(facets[0].range.high).toBe(searchDataFacet?.range?.high);
@@ -802,12 +800,12 @@ describe('Facet Store', () => {
 					},
 					services,
 					data: {
-						search: filteredSearchData,
+						search: filteredSearchData.search,
 						meta: filteredSearchData.meta,
 					},
 				});
 
-				const filteredSearchDataFacet = filteredSearchData.facets && (filteredSearchData.facets[0] as SearchResponseModelFacetRange);
+				const filteredSearchDataFacet = filteredSearchData.search.facets && (filteredSearchData.search.facets[0] as SearchResponseModelFacetRange);
 				expect(updatedFacets.length).toBe(1);
 				expect(updatedFacets[0].range.low).toBe(searchDataFacet?.range?.low);
 				expect(updatedFacets[0].range.high).toBe(searchDataFacet?.range?.high);
@@ -839,12 +837,12 @@ describe('Facet Store', () => {
 					},
 					services,
 					data: {
-						search: searchData,
+						search: searchData.search,
 						meta: searchData.meta,
 					},
 				});
 
-				const searchDataFacet = searchData.facets && (searchData.facets[0] as SearchResponseModelFacetRange);
+				const searchDataFacet = searchData.search.facets && (searchData.search.facets[0] as SearchResponseModelFacetRange);
 				expect(facets.length).toBe(1);
 				expect(facets[0].range.low).toBe(searchDataFacet?.range?.low);
 				expect(facets[0].range.high).toBe(searchDataFacet?.range?.high);
@@ -862,12 +860,12 @@ describe('Facet Store', () => {
 					},
 					services,
 					data: {
-						search: filteredSearchData,
+						search: filteredSearchData.search,
 						meta: filteredSearchData.meta,
 					},
 				});
 
-				const filteredSearchDataFacet = filteredSearchData.facets && (filteredSearchData.facets[0] as SearchResponseModelFacetRange);
+				const filteredSearchDataFacet = filteredSearchData.search.facets && (filteredSearchData.search.facets[0] as SearchResponseModelFacetRange);
 				expect(updatedFacets.length).toBe(1);
 				expect(updatedFacets[0].range.low).toBe(filteredSearchDataFacet?.range?.low);
 				expect(updatedFacets[0].range.high).toBe(filteredSearchDataFacet?.range?.high);
@@ -896,7 +894,7 @@ describe('Facet Store', () => {
 					},
 					services,
 					data: {
-						search: searchData,
+						search: searchData.search,
 						meta: searchData.meta,
 					},
 				});
@@ -924,7 +922,7 @@ describe('Facet Store', () => {
 					},
 					services,
 					data: {
-						search: searchData,
+						search: searchData.search,
 						meta: searchData.meta,
 					},
 				});
@@ -957,7 +955,7 @@ describe('Facet Store', () => {
 					},
 					services,
 					data: {
-						search: searchData,
+						search: searchData.search,
 						meta: searchData.meta,
 					},
 				});
@@ -993,7 +991,7 @@ describe('Facet Store', () => {
 					},
 					services,
 					data: {
-						search: searchData,
+						search: searchData.search,
 						meta: searchData.meta,
 					},
 				});
@@ -1016,7 +1014,7 @@ describe('Facet Store', () => {
 				},
 				services,
 				data: {
-					search: searchData,
+					search: searchData.search,
 					meta: searchData.meta,
 				},
 			});
@@ -1035,14 +1033,14 @@ describe('Facet Store', () => {
 					},
 					services,
 					data: {
-						search: searchData,
+						search: searchData.search,
 						meta: searchData.meta,
 					},
 				});
 
 				facets.forEach((facet, index) => {
 					if (facet.type == 'value') {
-						expect(facet.values.length).toBe((searchData.facets && (searchData.facets[index] as ValueFacet))?.values.length);
+						expect(facet.values.length).toBe((searchData.search.facets && (searchData.search.facets[index] as ValueFacet))?.values.length);
 					}
 				});
 			});
@@ -1057,7 +1055,7 @@ describe('Facet Store', () => {
 					},
 					services,
 					data: {
-						search: searchData,
+						search: searchData.search,
 						meta: searchData.meta,
 					},
 				});
@@ -1082,7 +1080,7 @@ describe('Facet Store', () => {
 					},
 					services,
 					data: {
-						search: searchData,
+						search: searchData.search,
 						meta: searchData.meta,
 					},
 				});
@@ -1106,7 +1104,7 @@ describe('Facet Store', () => {
 					},
 					services,
 					data: {
-						search: searchData,
+						search: searchData.search,
 						meta: searchData.meta,
 					},
 				});
@@ -1128,7 +1126,7 @@ describe('Facet Store', () => {
 					},
 					services,
 					data: {
-						search: searchData,
+						search: searchData.search,
 						meta: searchData.meta,
 					},
 				});
@@ -1153,7 +1151,7 @@ describe('Facet Store', () => {
 					},
 					services,
 					data: {
-						search: searchData,
+						search: searchData.search,
 						meta: searchData.meta,
 					},
 				});
@@ -1178,7 +1176,7 @@ describe('Facet Store', () => {
 					},
 					services,
 					data: {
-						search: searchData,
+						search: searchData.search,
 						meta: searchData.meta,
 					},
 				});
@@ -1186,7 +1184,7 @@ describe('Facet Store', () => {
 				facets.forEach((facet, index) => {
 					if (facet.type == 'range-buckets') {
 						expect(facet.values.length).toBe(
-							(searchData?.facets && (searchData.facets[index] as SearchResponseModelFacetRangeBuckets))?.values?.length
+							(searchData?.search.facets && (searchData.search.facets[index] as SearchResponseModelFacetRangeBuckets))?.values?.length
 						);
 						facet.values.forEach((value: FacetRangeValue) => {
 							expect(value).toHaveProperty('low');
@@ -1206,7 +1204,7 @@ describe('Facet Store', () => {
 					},
 					services,
 					data: {
-						search: searchData,
+						search: searchData.search,
 						meta: searchData.meta,
 					},
 				});
@@ -1230,7 +1228,7 @@ describe('Facet Store', () => {
 					},
 					services,
 					data: {
-						search: searchData,
+						search: searchData.search,
 						meta: searchData.meta,
 					},
 				});
@@ -1251,7 +1249,7 @@ describe('Facet Store', () => {
 					},
 					services,
 					data: {
-						search: searchData,
+						search: searchData.search,
 						meta: searchData.meta,
 					},
 				});
@@ -1284,7 +1282,7 @@ describe('Facet Store', () => {
 				},
 				services,
 				data: {
-					search: searchData,
+					search: searchData.search,
 					meta: searchData.meta,
 				},
 			});
@@ -1307,14 +1305,14 @@ describe('Facet Store', () => {
 				},
 				services,
 				data: {
-					search: searchData,
+					search: searchData.search,
 					meta: searchData.meta,
 				},
 			});
 
 			facets.forEach((facet: RangeFacet, index: number) => {
 				if (facet.type == 'range') {
-					const searchDataFacet = searchData.facets && (searchData.facets[index] as SearchResponseModelFacetRange);
+					const searchDataFacet = searchData.search.facets && (searchData.search.facets[index] as SearchResponseModelFacetRange);
 					expect(facet.step).toBe(searchDataFacet?.step);
 					expect(facet.range).toStrictEqual(searchDataFacet?.range);
 					expect(facet.active).toStrictEqual(searchDataFacet?.active);
@@ -1332,7 +1330,7 @@ describe('Facet Store', () => {
 				},
 				services,
 				data: {
-					search: searchData,
+					search: searchData.search,
 					meta: searchData.meta,
 				},
 			});

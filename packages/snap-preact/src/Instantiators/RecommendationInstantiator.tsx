@@ -362,8 +362,8 @@ async function readyTheController(
 	window.searchspring.controller = window.searchspring.controller || {};
 	window.searchspring.controller[controller.config.id] = controller;
 
-	const profileVars = controller.store.profile.display.templateParameters;
-	const component = controller.store.profile.display.template?.component;
+	const profileVars = controller.store.profile.display?.templateParameters;
+	const component = controller.store.profile.display?.template?.component;
 
 	if (controller.store.error) {
 		//something went wrong

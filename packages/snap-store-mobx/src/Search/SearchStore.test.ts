@@ -15,10 +15,10 @@ const searchConfig = {
 const mockData = new MockData();
 
 describe('Search Store', () => {
-	let searchData: SearchResponseModel & { meta: MetaResponseModel };
+	let searchData: { search: SearchResponseModel; meta: MetaResponseModel };
 
 	beforeEach(() => {
-		searchData = mockData.searchMeta();
+		searchData = { search: mockData.search(), meta: mockData.meta() };
 	});
 
 	it('returns correct initial state', () => {
@@ -27,7 +27,7 @@ describe('Search Store', () => {
 		expect(searchStore.loading).toBe(false);
 
 		expect(searchStore.meta).toBeDefined();
-		expect(searchStore.meta.data).toStrictEqual({});
+		expect(searchStore.meta?.data).toStrictEqual({});
 
 		expect(searchStore.merchandising).toBeDefined();
 		expect(searchStore.merchandising).toEqual({ redirect: '', content: {}, campaigns: [] });
@@ -53,24 +53,24 @@ describe('Search Store', () => {
 
 	it('update function updates all of the stores', () => {
 		const searchStore = new SearchStore(searchConfig, services);
-		searchStore.update(searchData as SearchResponseModel);
+		searchStore.update(searchData);
 
 		expect(searchStore.meta).toBeDefined();
-		expect(searchStore.meta.data).toStrictEqual(searchData.meta);
+		expect(searchStore.meta?.data).toStrictEqual(searchData.meta);
 
 		expect(searchStore.search).toBeDefined();
-		expect(searchStore.search?.query).toStrictEqual(searchData.search?.query);
+		expect(searchStore.search?.query).toStrictEqual(searchData.search.search?.query);
 
 		expect(searchStore.merchandising).toBeDefined();
-		expect(searchStore.merchandising).toEqual(searchData.merchandising);
+		expect(searchStore.merchandising).toEqual(searchData.search.merchandising);
 
-		expect(searchStore.facets).toHaveLength(searchData.facets?.length!);
+		expect(searchStore.facets).toHaveLength(searchData.search.facets?.length!);
 
 		expect(searchStore.filters).toHaveLength(0);
 
-		expect(searchStore.results).toHaveLength(searchData.results?.length!);
+		expect(searchStore.results).toHaveLength(searchData.search.results?.length!);
 
-		expect(searchStore.pagination?.totalResults).toBe(searchData.pagination?.totalResults);
+		expect(searchStore.pagination?.totalResults).toBe(searchData.search.pagination?.totalResults);
 
 		expect(searchStore.sorting?.options).toHaveLength(searchData.meta.sortOptions?.filter((option) => option.type == 'field').length!);
 	});

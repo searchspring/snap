@@ -11,7 +11,7 @@ import { MetaStore } from '../Meta/MetaStore';
 
 export class FinderStore extends AbstractStore<FinderStoreConfig> {
 	public services: StoreServices;
-	public meta!: MetaStore;
+	public meta?: MetaStore;
 	public storage: StorageStore;
 	public persistedStorage!: StorageStore;
 	public pagination!: SearchPaginationStore;
@@ -36,7 +36,7 @@ export class FinderStore extends AbstractStore<FinderStoreConfig> {
 
 		this.storage = new StorageStore();
 
-		this.update({ meta: {} });
+		this.update({ meta: {}, search: {} });
 
 		makeObservable(this, {
 			selections: observable,
@@ -92,19 +92,16 @@ export class FinderStore extends AbstractStore<FinderStoreConfig> {
 		}
 	}
 
-	public update(data: SearchResponseModel & { meta?: MetaResponseModel }, selectedSelections?: SelectedSelection[]): void {
-		this.error = undefined;
-		this.loaded = !!data.pagination;
+	public update(data: { meta: MetaResponseModel; search: SearchResponseModel }, selectedSelections?: SelectedSelection[]): void {
+		const { meta, search } = data || {};
 		this.meta = new MetaStore({
-			data: {
-				meta: data.meta!,
-			},
+			data: { meta },
 		});
 		this.pagination = new SearchPaginationStore({
 			config: this.config,
 			services: this.services,
 			data: {
-				search: data,
+				search,
 				meta: this.meta.data,
 			},
 		});
@@ -120,7 +117,7 @@ export class FinderStore extends AbstractStore<FinderStoreConfig> {
 				loading: this.loading,
 			},
 			data: {
-				search: data,
+				search,
 				meta: this.meta.data,
 				selections: selectedSelections || [],
 			},
@@ -130,7 +127,7 @@ export class FinderStore extends AbstractStore<FinderStoreConfig> {
 		this.save = () => {
 			if (this.config.persist?.enabled && this.persistedStorage && this?.selections?.filter((selection) => selection.selected).length) {
 				this.persistedStorage.set('config', this.config);
-				this.persistedStorage.set('data', data);
+				this.persistedStorage.set('data', search);
 				this.persistedStorage.set('date', Date.now());
 				this.persistedStorage.set(
 					'selections',
@@ -144,5 +141,8 @@ export class FinderStore extends AbstractStore<FinderStoreConfig> {
 				);
 			}
 		};
+
+		this.error = undefined;
+		this.loaded = Boolean(search?.pagination);
 	}
 }

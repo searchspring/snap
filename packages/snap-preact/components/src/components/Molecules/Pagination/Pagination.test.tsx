@@ -25,7 +25,7 @@ describe('Pagination Component', () => {
 		config: searchConfig,
 		services,
 		data: {
-			search: data,
+			search: data.search,
 			meta: data.meta,
 		},
 	});
@@ -87,7 +87,7 @@ describe('Lets test the Pagination Component optional props', () => {
 		config: searchConfig,
 		services,
 		data: {
-			search: data,
+			search: data.search,
 			meta: data.meta,
 		},
 	});
@@ -294,7 +294,7 @@ describe('Pagination theming works', () => {
 		config: searchConfig,
 		services,
 		data: {
-			search: data,
+			search: data.search,
 			meta: data.meta,
 		},
 	});

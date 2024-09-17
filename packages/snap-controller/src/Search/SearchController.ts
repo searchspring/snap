@@ -92,9 +92,9 @@ export class SearchController extends AbstractController {
 		// add 'afterSearch' middleware
 		this.eventManager.on('afterSearch', async (search: AfterSearchObj, next: Next): Promise<void | boolean> => {
 			const config = search.controller.config as SearchControllerConfig;
-			const redirectURL = search.response?.merchandising?.redirect;
+			const redirectURL = search.response?.search?.merchandising?.redirect;
 			const searchStore = search.controller.store as SearchStore;
-			if (redirectURL && config?.settings?.redirects?.merchandising && !search?.response?.filters?.length && !searchStore.loaded) {
+			if (redirectURL && config?.settings?.redirects?.merchandising && !search?.response?.search?.filters?.length && !searchStore.loaded) {
 				window.location.replace(redirectURL);
 				return false;
 			}
@@ -102,13 +102,15 @@ export class SearchController extends AbstractController {
 			const nonBackgroundFilters = search?.request?.filters?.filter((filter) => !filter.background);
 			if (
 				config?.settings?.redirects?.singleResult &&
-				search?.response?.search?.query &&
-				search?.response?.pagination?.totalResults === 1 &&
+				search?.response?.search?.search?.query &&
+				search?.response?.search?.pagination?.totalResults === 1 &&
 				!nonBackgroundFilters?.length &&
 				!(search.controller as SearchController).previousResults.length
 			) {
-				window.location.replace(search?.response.results[0].mappings.core.url);
-				return false;
+				if (search?.response?.search?.results?.[0]?.mappings?.core?.url) {
+					window.location.replace(search.response.search.results[0].mappings.core.url);
+					return false;
+				}
 			}
 
 			await next();
@@ -357,7 +359,7 @@ export class SearchController extends AbstractController {
 			const searchProfile = this.profiler.create({ type: 'event', name: 'search', context: params }).start();
 
 			let meta: MetaResponseModel = {};
-			let response: SearchResponseModel & { meta?: MetaResponseModel } = {};
+			let search: SearchResponseModel = {};
 
 			// infinite scroll functionality (after page 1)
 			if (this.config.settings?.infinite && params.pagination?.page && params.pagination.page > 1) {
@@ -397,38 +399,37 @@ export class SearchController extends AbstractController {
 
 					const backfillResponses = await Promise.all(backfillRequests);
 
-					// backfillResponses are [meta, searchResponse][]
+					// backfillResponses are [{ meta: MetaResponseModel, search: SearchResponseModel }]
 					// set the meta and response to the first page of backfillResponses
-					meta = backfillResponses[0][0];
-					response = backfillResponses[0][1];
+					meta = backfillResponses[0].meta;
+					search = backfillResponses[0].search;
 
 					// accumulate results from all backfill responses
 					const backfillResults: SearchResponseModelResult[] = backfillResponses.reduce((results, response) => {
-						// response is [meta, searchResponse]
-						return results.concat(...response[1].results!);
+						// response is { meta: MetaResponseModel, search: SearchResponseModel }
+						return results.concat(...response.search.results!);
 					}, [] as SearchResponseModelResult[]);
 
 					// overwrite pagination params to expected state
-					response.pagination!.totalPages = Math.ceil(response.pagination!.totalResults! / response.pagination!.pageSize!);
-					response.pagination!.page = params.pagination?.page;
+					search.pagination!.totalPages = Math.ceil(search.pagination!.totalResults! / search.pagination!.pageSize!);
+					search.pagination!.page = params.pagination?.page;
 
 					// set the response results with results from backfill responses
-					response.results = backfillResults;
+					search.results = backfillResults;
 				} else {
 					// infinite with no backfills.
-					[meta, response] = await this.client.search(params);
+					const response = await this.client.search(params);
+					meta = response.meta;
+					search = response.search;
 
 					// append new results to previous results
-					response.results = [...this.previousResults, ...(response.results || [])];
+					search.results = [...this.previousResults, ...(search.results || [])];
 				}
 			} else {
 				// standard request (not using infinite scroll)
-				[meta, response] = await this.client.search(params);
-			}
-
-			// MockClient will overwrite the client search() method and use SearchData to return mock data which already contains meta data
-			if (!response.meta) {
-				response.meta = meta;
+				const res = await this.client.search(params);
+				meta = res.meta;
+				search = res.search;
 			}
 
 			searchProfile.stop();
@@ -440,7 +441,7 @@ export class SearchController extends AbstractController {
 				await this.eventManager.fire('afterSearch', {
 					controller: this,
 					request: params,
-					response,
+					response: { meta, search },
 				});
 			} catch (err: any) {
 				if (err?.message == 'cancelled') {
@@ -458,11 +459,11 @@ export class SearchController extends AbstractController {
 
 			// store previous results for infinite usage
 			if (this.config.settings?.infinite) {
-				this.previousResults = JSON.parse(JSON.stringify(response.results));
+				this.previousResults = JSON.parse(JSON.stringify(search.results));
 			}
 
 			// update the store
-			this.store.update(response);
+			this.store.update({ meta, search });
 
 			const afterStoreProfile = this.profiler.create({ type: 'event', name: 'afterStore', context: params }).start();
 
@@ -470,7 +471,7 @@ export class SearchController extends AbstractController {
 				await this.eventManager.fire('afterStore', {
 					controller: this,
 					request: params,
-					response,
+					response: { meta, search },
 				});
 			} catch (err: any) {
 				if (err?.message == 'cancelled') {
