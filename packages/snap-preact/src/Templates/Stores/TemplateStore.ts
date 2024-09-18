@@ -3,7 +3,7 @@ import { StorageStore, StorageType } from '@searchspring/snap-store-mobx';
 import { SnapTemplatesConfig } from '../SnapTemplate';
 import { ThemeStore, ThemeStoreThemeConfig } from './ThemeStore';
 import { TargetStore } from './TargetStore';
-import { CurrencyCodes, LanguageCodes, LibraryStore } from './LibraryStore';
+import { CurrencyCodes, LanguageCodes, LibraryImports, LibraryStore } from './LibraryStore';
 import { debounce } from '@searchspring/snap-toolbox';
 
 import type { LangComponentOverrides, ResultComponent, ThemeMinimal, ThemeOverrides, ThemeVariablesPartial } from '../../../components/src';
@@ -15,11 +15,18 @@ export type RecsTemplateTypes = 'bundle' | 'default' | 'email';
 
 type TargetMap = { [targetId: string]: TargetStore };
 
+type ComponentLibraryType =
+	| keyof LibraryImports['component']['autocomplete']
+	| keyof LibraryImports['component']['search']
+	| keyof LibraryImports['component']['recommendation']['default']
+	| keyof LibraryImports['component']['recommendation']['bundle']
+	| keyof LibraryImports['component']['recommendation']['email'];
+
 export type TemplateTarget = {
 	selector?: string;
-	theme?: string;
-	component: string;
-	resultComponent?: string;
+	theme?: keyof LibraryImports['theme'] | (string & NonNullable<unknown>);
+	component: ComponentLibraryType | (string & NonNullable<unknown>);
+	resultComponent?: keyof LibraryImports['component']['result'] | (string & NonNullable<unknown>);
 };
 
 export type TemplatesStoreSettings = {
@@ -35,8 +42,9 @@ type WindowProperties = {
 };
 
 type TemplateStoreThemeConfig = {
-	extends: 'bocachica'; // various themes available
+	extends: keyof LibraryImports['theme'];
 	style?: GlobalThemeStyleScript;
+	resultComponent?: keyof LibraryImports['component']['result'] | (string & NonNullable<unknown>);
 	variables?: ThemeVariablesPartial;
 	overrides?: ThemeOverrides;
 };
@@ -88,7 +96,7 @@ export class TemplatesStore {
 
 	themes: {
 		local: {
-			[themeName: 'global' | string]: ThemeStore;
+			[themeName: string]: ThemeStore;
 		};
 		library: {
 			[themeName: string]: ThemeStore;
@@ -152,9 +160,16 @@ export class TemplatesStore {
 		// setup local themes
 		Object.keys(config.themes).map((themeKey) => {
 			const themeConfig = config.themes[themeKey];
-			const imports = [importCurrency, importLanguage, this.library.import.theme[themeConfig.extends]()];
 
-			Promise.all(imports).then(() => {
+			// import component if defined
+			if (themeConfig.resultComponent && this.library.import.component.result[themeConfig.resultComponent]) {
+				this.library.import.component.result[themeConfig.resultComponent]();
+			}
+
+			// import theme dependencies
+			const themeImports = [importCurrency, importLanguage, this.library.import.theme[themeConfig.extends]()];
+
+			Promise.all(themeImports).then(() => {
 				const base = this.library.themes[themeConfig.extends];
 				const overrides = themeConfig.overrides || {};
 				const variables = themeConfig.variables || {};

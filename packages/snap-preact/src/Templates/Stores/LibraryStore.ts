@@ -14,7 +14,7 @@ type LibraryComponentMap = {
 
 export type LibraryImports = {
 	theme: {
-		bocachica: (args?: any) => Theme | Promise<Theme>;
+		bocachica: (args?: any) => Promise<Theme>;
 	};
 	component: {
 		search: {

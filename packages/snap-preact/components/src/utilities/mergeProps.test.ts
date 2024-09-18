@@ -1,4 +1,5 @@
 import { Theme } from '..';
+import { GLOBAL_THEME_NAME } from '../../../src/Templates/Stores/TargetStore';
 import { SelectProps } from '../components/Molecules/Select';
 import { sortSelectors, filterSelectors, mergeProps } from './mergeProps';
 
@@ -136,7 +137,7 @@ describe('mergeProps function with theme name', () => {
 	it('has named theme with variables, layoutOptions, and treePath', () => {
 		const componentType = 'select';
 		const globalTheme: Theme = {
-			name: 'global',
+			name: GLOBAL_THEME_NAME,
 			variables: {
 				breakpoints: [0, 540, 767, 1200],
 				colors: {
@@ -191,7 +192,7 @@ describe('mergeProps function with theme name', () => {
 	it('globalTheme components overrides defaultProps', () => {
 		const componentType = 'select';
 		const globalTheme = {
-			name: 'global',
+			name: GLOBAL_THEME_NAME,
 			components: {
 				[componentType]: {
 					startOpen: true,
@@ -225,7 +226,7 @@ describe('mergeProps function with theme name', () => {
 	it('properties overrides defaultProps', () => {
 		const componentType = 'select';
 		const globalTheme = {
-			name: 'global',
+			name: GLOBAL_THEME_NAME,
 		};
 
 		const defaultProps: Partial<SelectProps> = {
@@ -252,7 +253,7 @@ describe('mergeProps function with theme name', () => {
 	it('globalTheme overrides properties', () => {
 		const componentType = 'select';
 		const globalTheme = {
-			name: 'global',
+			name: GLOBAL_THEME_NAME,
 			components: {
 				[componentType]: {
 					startOpen: '1',
@@ -292,7 +293,7 @@ describe('mergeProps function with theme name', () => {
 	it('nested theme on properties', () => {
 		const componentType = 'select';
 		const globalTheme = {
-			name: 'global',
+			name: GLOBAL_THEME_NAME,
 			components: {
 				[componentType]: {
 					startOpen: '1',
@@ -345,7 +346,7 @@ describe('mergeProps function with theme name', () => {
 	it('nested treePath and named component', () => {
 		const componentType = 'select';
 		const globalTheme = {
-			name: 'global',
+			name: GLOBAL_THEME_NAME,
 		};
 
 		const defaultProps: Partial<SelectProps> = {};
