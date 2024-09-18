@@ -14,6 +14,7 @@ import type { RecommendationInstantiatorConfigSettings, RecommendationComponentO
 import type { SnapFeatures } from '../types';
 import type { SnapConfig, ExtendedTarget } from '../Snap';
 import type { RecsTemplateTypes, TemplateStoreConfig, TemplateTypes } from './Stores/TemplateStore';
+import { LibraryImports } from './Stores/LibraryStore';
 
 export const THEME_EDIT_COOKIE = 'ssThemeEdit';
 
@@ -21,30 +22,30 @@ export const THEME_EDIT_COOKIE = 'ssThemeEdit';
 export type SearchTargetConfig = {
 	selector: string;
 	theme?: string;
-	component: 'Search' | 'SearchHorizontal'; // various component (template) types allowed
+	component: keyof LibraryImports['component']['search'];
 	resultComponent?: string;
 };
 
 export type AutocompleteTargetConfig = {
 	selector: string;
 	theme?: string;
-	component: 'Autocomplete'; // various components (templates) available
+	component: keyof LibraryImports['component']['autocomplete'];
 	resultComponent?: string;
 };
 
 export type RecommendationDefaultTargetConfig = {
 	theme?: string;
-	component: 'Recommendation' | 'RecommendationGrid'; // various components (templates) available
+	component: keyof LibraryImports['component']['recommendation']['default'];
 	resultComponent?: string;
 };
 export type RecommendationEmailTargetConfig = {
 	theme?: string;
-	component: 'RecommendationEmail'; // various components (templates) available
+	component: keyof LibraryImports['component']['recommendation']['email'];
 	resultComponent?: string;
 };
 export type RecommendationBundleTargetConfig = {
 	theme?: string;
-	component: 'RecommendationBundle'; // various components (templates) available
+	component: keyof LibraryImports['component']['recommendation']['bundle'];
 	resultComponent?: string;
 };
 
@@ -214,14 +215,28 @@ export function createRecommendationComponentMapping(
 
 	return Object.keys(templateConfig.recommendation || {})
 		.filter((key) => ['default', 'email', 'bundle'].includes(key))
-		.reduce((mapping, recsType) => {
-			Object.keys(templateConfig.recommendation![recsType as RecsTemplateTypes] || {}).forEach((targetName) => {
-				const type: TemplateTypes = `recommendation/${recsType as RecsTemplateTypes}`;
-				const target = templateConfig.recommendation![recsType as RecsTemplateTypes]![targetName] as TemplateTarget;
+		.reduce((mapping, type) => {
+			const recsType = type as RecsTemplateTypes;
+			Object.keys(templateConfig.recommendation![recsType] || {}).forEach((targetName) => {
+				const type: TemplateTypes = `recommendation/${recsType}`;
+				const target = templateConfig.recommendation![recsType]![targetName] as TemplateTarget;
 				const mappedConfig: RecommendationComponentObject = {
 					component: async () => {
 						const componentImportPromises = [];
-						componentImportPromises.push(templatesStore.library.import.component.recommendation[recsType as RecsTemplateTypes][target.component]());
+						switch (recsType) {
+							case 'default': {
+								const importLocation = templatesStore.library.import.component.recommendation.default;
+								componentImportPromises.push(importLocation[target.component as keyof typeof importLocation]());
+							}
+							case 'bundle': {
+								const importLocation = templatesStore.library.import.component.recommendation.bundle;
+								componentImportPromises.push(importLocation[target.component as keyof typeof importLocation]());
+							}
+							case 'email': {
+								const importLocation = templatesStore.library.import.component.recommendation.email;
+								componentImportPromises.push(importLocation[target.component as keyof typeof importLocation]());
+							}
+						}
 						if (target.resultComponent && templatesStore.library.import.component.result[target.resultComponent]) {
 							componentImportPromises.push(templatesStore.library.import.component.result[target.resultComponent]());
 						}

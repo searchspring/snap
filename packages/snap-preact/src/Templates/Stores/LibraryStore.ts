@@ -7,23 +7,42 @@ import type { TemplateStoreComponentConfig } from './TemplateStore';
 type LibraryComponentImport = {
 	[componentName: string]: (args?: any) => Promise<FunctionalComponent<RenderableProps<any>>>;
 };
+
 type LibraryComponentMap = {
 	[componentName: string]: FunctionalComponent<RenderableProps<any>>;
 };
-type LibraryImports = {
+
+export type LibraryImports = {
 	theme: {
-		[themeName: string]: (args?: any) => Theme | Promise<Theme>;
+		bocachica: (args?: any) => Theme | Promise<Theme>;
 	};
 	component: {
-		search: LibraryComponentImport;
-		autocomplete: LibraryComponentImport;
-		recommendation: {
-			bundle: LibraryComponentImport;
-			default: LibraryComponentImport;
-			email: LibraryComponentImport;
+		search: {
+			Search: (args?: any) => Promise<FunctionalComponent<RenderableProps<any>>>;
+			SearchHorizontal: (args?: any) => Promise<FunctionalComponent<RenderableProps<any>>>;
 		};
-		badge: LibraryComponentImport;
-		result: LibraryComponentImport;
+		autocomplete: {
+			Autocomplete: (args?: any) => Promise<FunctionalComponent<RenderableProps<any>>>;
+		};
+		recommendation: {
+			bundle: {
+				RecommendationBundle: (args?: any) => Promise<FunctionalComponent<RenderableProps<any>>>;
+			};
+			default: {
+				Recommendation: (args?: any) => Promise<FunctionalComponent<RenderableProps<any>>>;
+				RecommendationGrid: (args?: any) => Promise<FunctionalComponent<RenderableProps<any>>>;
+			};
+			email: {
+				RecommendationEmail: (args?: any) => Promise<FunctionalComponent<RenderableProps<any>>>;
+			};
+		};
+		badge: {
+			[componentName: string]: (args?: any) => Promise<FunctionalComponent<RenderableProps<any>>>;
+		};
+		result: {
+			Result: (args?: any) => Promise<FunctionalComponent<RenderableProps<any>>>;
+			[componentName: string]: (args?: any) => Promise<FunctionalComponent<RenderableProps<any>>>;
+		};
 	};
 	language: {
 		[languageName in LanguageCodes]: () => Promise<ThemeMinimal>;
