@@ -20,6 +20,7 @@ export type ThemeStoreThemeConfig = {
 	variables?: ThemeVariablesPartial;
 	currency: ThemeMinimal;
 	language: ThemeMinimal;
+	languageOverrides: ThemeMinimal;
 	innerWidth?: number;
 	style?: GlobalThemeStyleScript;
 };
@@ -64,6 +65,7 @@ export class ThemeStore {
 	variables: ThemeVariablesPartial;
 	currency: ThemeMinimal;
 	language: ThemeMinimal;
+	languageOverrides: ThemeMinimal;
 	stored: ThemePartial;
 	innerWidth?: number;
 
@@ -71,7 +73,7 @@ export class ThemeStore {
 		const { config, dependencies, settings } = params;
 		this.dependencies = dependencies;
 
-		const { name, style, type, base, overrides, variables, currency, language, innerWidth } = config;
+		const { name, style, type, base, overrides, variables, currency, language, languageOverrides, innerWidth } = config;
 		this.name = name;
 		this.type = type;
 		this.base = base;
@@ -80,6 +82,7 @@ export class ThemeStore {
 		this.variables = variables || {};
 		this.currency = currency;
 		this.language = language;
+		this.languageOverrides = languageOverrides;
 		this.stored = (settings.editMode && this.dependencies.storage.get(`themes.${this.type}.${this.name}.variables`)) || {};
 		this.innerWidth = innerWidth;
 
@@ -120,11 +123,12 @@ export class ThemeStore {
 				2. base theme responsive breakpoints
 				3. currency overrides
 				4. language overrides
-				5. theme overrides
-				6. theme overrides at responsive breakpoints
-				7. altered theme variables
-				8. layout option overrides
-				9. stored theme editor overrides
+				5. language translation overrides
+				6. theme overrides
+				7. theme overrides at responsive breakpoints
+				8. altered theme variables
+				9. layout option overrides
+				10. stored theme editor overrides
 		*/
 
 		const breakpoints = (this.variables.breakpoints || this.base.variables?.breakpoints) as number[];
@@ -132,9 +136,18 @@ export class ThemeStore {
 		const baseBreakpoint = getOverridesAtWidth(this.innerWidth, breakpoints, this.base);
 		const overrideBreakpoint = getOverridesAtWidth(this.innerWidth, breakpoints, this.overrides);
 
-		let theme: Theme = mergeThemeLayers(this.base, baseBreakpoint, this.currency, this.language, this.overrides, overrideBreakpoint, {
-			variables: this.variables,
-		} as ThemePartial) as Theme;
+		let theme: Theme = mergeThemeLayers(
+			this.base,
+			baseBreakpoint,
+			this.currency,
+			this.language,
+			this.languageOverrides,
+			this.overrides,
+			overrideBreakpoint,
+			{
+				variables: this.variables,
+			} as ThemePartial
+		) as Theme;
 
 		// find layout option overrides
 		const layoutOptions = theme.layoutOptions;

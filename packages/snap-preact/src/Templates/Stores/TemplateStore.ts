@@ -6,7 +6,7 @@ import { TargetStore } from './TargetStore';
 import { CurrencyCodes, LanguageCodes, LibraryStore } from './LibraryStore';
 import { debounce } from '@searchspring/snap-toolbox';
 
-import type { ResultComponent, ThemeOverrides, ThemeVariablesPartial } from '../../../components/src';
+import type { LangComponentOverrides, ResultComponent, ThemeMinimal, ThemeOverrides, ThemeVariablesPartial } from '../../../components/src';
 import type { GlobalThemeStyleScript } from '../../types';
 export type TemplateThemeTypes = 'library' | 'local';
 export type TemplateTypes = 'search' | 'autocomplete' | `recommendation/${RecsTemplateTypes}`;
@@ -53,6 +53,9 @@ export type TemplateStoreConfig = {
 		siteId?: string;
 		currency?: CurrencyCodes;
 		language?: LanguageCodes;
+	};
+	translations?: {
+		[currencyName in LanguageCodes]?: LangComponentOverrides;
 	};
 	themes: {
 		global: TemplateStoreThemeConfig;
@@ -157,6 +160,7 @@ export class TemplatesStore {
 				const variables = themeConfig.variables || {};
 				const currency = this.library.locales.currencies[this.currency] || {};
 				const language = this.library.locales.languages[this.language] || {};
+				const languageOverrides = transformTranslationsToTheme((this.config.translations && this.config.translations[this.language]) || {});
 
 				this.addTheme({
 					name: themeKey,
@@ -167,6 +171,7 @@ export class TemplatesStore {
 					variables,
 					currency,
 					language,
+					languageOverrides,
 					innerWidth: this.window.innerWidth,
 				});
 			});
@@ -302,10 +307,25 @@ export class TemplatesStore {
 				type: 'library',
 				base: theme,
 				language: this.library.locales.languages[this.language] || {},
+				languageOverrides: transformTranslationsToTheme((this.config.translations && this.config.translations[this.language]) || {}),
 				currency: this.library.locales.currencies[this.currency] || {},
 				innerWidth: this.window.innerWidth,
 			});
 		}
 		this.loading = false;
 	}
+}
+
+function transformTranslationsToTheme(translations: LangComponentOverrides): ThemeMinimal {
+	const translationTheme: ThemeMinimal = {
+		components: {},
+	};
+
+	Object.keys(translations).forEach((component) => {
+		translationTheme.components![component as keyof typeof translationTheme.components] = {
+			lang: translations[component as keyof typeof translationTheme.components],
+		};
+	});
+
+	return translationTheme;
 }
