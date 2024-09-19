@@ -8,8 +8,8 @@ import type { TemplatesStoreDependencies, TemplateThemeTypes, TemplatesStoreSett
 import type { Theme, ThemeVariables, ThemePartial } from '../../../components/src/providers/theme';
 import { GLOBAL_THEME_NAME } from './TargetStore';
 
-// configure MobX
-configureMobx({ enforceActions: 'never' });
+// configure MobX - useProxies: 'never' matches what we are doing for browser support (IE 11)
+configureMobx({ enforceActions: 'never', useProxies: 'never' });
 
 const testThemeVariables: ThemeVariables = {
 	breakpoints: [0, 420, 720, 1440],
@@ -676,7 +676,7 @@ describe('ThemeStore', () => {
 
 		new ThemeStore({ config, dependencies, settings });
 
-		// wait for rendering of BranchOverride component
+		// wait for rendering of stylesheets
 		await waitFor(() => {
 			const styleElements = document.querySelectorAll('head style')!;
 			expect(styleElements).toHaveLength(2);
@@ -685,6 +685,29 @@ describe('ThemeStore', () => {
 
 			expect(styleElements[1]).toHaveAttribute('data-emotion', 'ss-global');
 		});
+	});
+
+	it('correctly merges observable variable arrays', async () => {
+		// due to mobx observable arrays being objects, we need to ensure that the mergeThemeLayers function
+		// correctly merges observable arrays (ThemeStore uses toJS function)
+
+		const config: ThemeStoreThemeConfig = {
+			name: 'globally',
+			type: 'local',
+			base: testTheme,
+			overrides: {},
+			variables: {
+				breakpoints: [1, 2, 3, 4],
+			},
+			currency: {},
+			language: {},
+			languageOverrides: {},
+			innerWidth: 0,
+		};
+
+		const themeStore = new ThemeStore({ config, dependencies, settings });
+
+		expect(themeStore.theme.variables?.breakpoints).toStrictEqual(config.variables?.breakpoints);
 	});
 });
 

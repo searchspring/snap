@@ -1,5 +1,5 @@
 import { h, render } from 'preact';
-import { observable, makeObservable } from 'mobx';
+import { observable, makeObservable, toJS } from 'mobx';
 import deepmerge from 'deepmerge';
 import { isPlainObject } from 'is-plain-object';
 import { StorageStore } from '@searchspring/snap-store-mobx';
@@ -145,7 +145,7 @@ export class ThemeStore {
 			this.overrides,
 			overrideBreakpoint,
 			{
-				variables: this.variables,
+				variables: toJS(this.variables),
 			} as ThemePartial
 		) as Theme;
 
