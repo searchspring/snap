@@ -136,18 +136,21 @@ export class ThemeStore {
 		const baseBreakpoint = getOverridesAtWidth(this.innerWidth, breakpoints, this.base);
 		const overrideBreakpoint = getOverridesAtWidth(this.innerWidth, breakpoints, this.overrides);
 
-		let theme: Theme = mergeThemeLayers(
-			this.base,
-			baseBreakpoint,
-			this.currency,
-			this.language,
-			this.languageOverrides,
-			this.overrides,
-			overrideBreakpoint,
-			{
-				variables: toJS(this.variables),
-			} as ThemePartial
-		) as Theme;
+		const base = { ...this.base };
+		const overrides = { ...this.overrides };
+
+		if (this.overrides.layoutOptions?.length) {
+			base.layoutOptions = [];
+		}
+
+		if (overrideBreakpoint.layoutOptions?.length) {
+			base.layoutOptions = [];
+			overrides.layoutOptions = [];
+		}
+
+		let theme: Theme = mergeThemeLayers(base, baseBreakpoint, this.currency, this.language, this.languageOverrides, overrides, overrideBreakpoint, {
+			variables: toJS(this.variables),
+		} as ThemePartial) as Theme;
 
 		// find layout option overrides
 		const layoutOptions = theme.layoutOptions;

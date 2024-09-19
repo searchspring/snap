@@ -179,6 +179,19 @@ export function Grid(properties: GridProps): JSX.Element {
 	// selection state
 	const [selection, setSelection] = useState((selected as ListOption[]) || []);
 
+	// reset selection if 'selected' prop changes
+	try {
+		if (selection && selected) {
+			const selectionstr = JSON.stringify(selection);
+			const selectedstr = JSON.stringify(selected);
+			if (selectionstr !== selectedstr) {
+				setSelection(selected);
+			}
+		}
+	} catch (e) {
+		// noop
+	}
+
 	const makeSelection = (e: React.MouseEvent<HTMLElement>, option: ListOption) => {
 		if (multiSelect) {
 			let newArray: ListOption[];
