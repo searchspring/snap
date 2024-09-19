@@ -10,6 +10,8 @@ import { ComponentProps, ListOption, RootNodeProperties } from '../../../types';
 import { Select, SelectProps } from '../Select';
 import { List, ListProps } from '../List';
 import { RadioList, RadioListProps } from '../RadioList';
+import { Lang } from '../../../hooks';
+import deepmerge from 'deepmerge';
 
 const CSS = {
 	LayoutSelector: ({}: Partial<LayoutSelectorProps>) => css({}),
@@ -27,7 +29,7 @@ export const LayoutSelector = observer((properties: LayoutSelectorProps): JSX.El
 
 	const props = mergeProps('layoutSelector', globalTheme, defaultProps, properties);
 
-	const { options, selected, type, onSelect, label, showSingleOption, disableStyles, className, style, styleScript, treePath } = props;
+	const { options, selected, type, onSelect, showSingleOption, label, disableStyles, className, style, styleScript, treePath } = props;
 
 	const subProps: SelectSubProps = {
 		Select: {
@@ -79,6 +81,16 @@ export const LayoutSelector = observer((properties: LayoutSelectorProps): JSX.El
 		styling.css = [style];
 	}
 
+	//initialize lang
+	const defaultLang = {
+		label: {
+			value: label,
+		},
+	};
+
+	//deep merge with props.lang
+	const lang = deepmerge(defaultLang, props.lang || {});
+
 	// options can be an Array or ObservableArray - but should have length
 	return (options && options.length > 1) || (options?.length === 1 && showSingleOption) ? (
 		<CacheProvider>
@@ -92,6 +104,9 @@ export const LayoutSelector = observer((properties: LayoutSelectorProps): JSX.El
 					selected={selected}
 					onSelect={(e, option) => {
 						onSelect(e, option);
+					}}
+					lang={{
+						buttonLabel: lang.label,
 					}}
 				/>
 			)}
@@ -107,6 +122,9 @@ export const LayoutSelector = observer((properties: LayoutSelectorProps): JSX.El
 					options={options}
 					selected={selected}
 					titleText={label}
+					lang={{
+						title: lang.label,
+					}}
 				/>
 			)}
 
@@ -121,6 +139,9 @@ export const LayoutSelector = observer((properties: LayoutSelectorProps): JSX.El
 					options={options}
 					selected={selected}
 					titleText={label}
+					lang={{
+						title: lang.label,
+					}}
 				/>
 			)}
 		</CacheProvider>
@@ -128,7 +149,6 @@ export const LayoutSelector = observer((properties: LayoutSelectorProps): JSX.El
 		<Fragment></Fragment>
 	);
 });
-
 interface SelectSubProps {
 	Select: Partial<SelectProps>;
 	RadioList: Partial<RadioListProps>;
@@ -142,4 +162,12 @@ export interface LayoutSelectorProps extends ComponentProps {
 	label?: string;
 	type?: 'dropdown' | 'list' | 'radio';
 	showSingleOption?: boolean;
+	lang?: Partial<LayoutSelectorLang>;
+}
+
+export interface LayoutSelectorLang {
+	label: Lang<{
+		options: ListOption[];
+		selectedOptions: ListOption[];
+	}>;
 }
