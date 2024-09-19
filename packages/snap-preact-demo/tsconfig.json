@@ -9,7 +9,7 @@
 		"useDefineForClassFields": true,
 		"strict": false,
 		"jsx": "react-jsx",
-		"jsxImportSource": "preact",
+		"jsxImportSource": "@emotion/react",
 	},
 	"include": [
 		"snap/src",

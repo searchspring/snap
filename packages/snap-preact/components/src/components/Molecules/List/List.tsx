@@ -134,15 +134,19 @@ export function List(properties: ListProps): JSX.Element {
 	if (selected && !Array.isArray(selected)) {
 		selected = [selected];
 	}
+
 	// selection state
 	const [selection, setSelection] = useState((selected as ListOption[]) || []);
 
+	// original selection state
+	const [originalSelected] = useState((selected as ListOption[]) || []);
 	// reset selection if 'selected' prop changes
 	try {
-		if (selection && selected) {
-			const selectionstr = JSON.stringify(selection);
+		if (selected) {
+			const originalSelectedstr = JSON.stringify(originalSelected);
 			const selectedstr = JSON.stringify(selected);
-			if (selectionstr !== selectedstr) {
+			const selectionstr = JSON.stringify(selection);
+			if (originalSelectedstr !== selectedstr && selectedstr !== selectionstr) {
 				setSelection(selected);
 			}
 		}
