@@ -1,35 +1,54 @@
 import { FunctionalComponent, RenderableProps } from 'preact';
 
-import type { Theme } from '../../../components/src';
+import type { Theme, ThemeMinimal } from '../../../components/src';
 import type { TemplateCustomComponentTypes, TemplateTypes } from './TemplateStore';
 import type { TemplateStoreComponentConfig } from './TemplateStore';
 
 type LibraryComponentImport = {
 	[componentName: string]: (args?: any) => Promise<FunctionalComponent<RenderableProps<any>>>;
 };
+
 type LibraryComponentMap = {
 	[componentName: string]: FunctionalComponent<RenderableProps<any>>;
 };
-type LibraryImports = {
+
+export type LibraryImports = {
 	theme: {
-		[themeName: string]: (args?: any) => Theme | Promise<Theme>;
+		bocachica: (args?: any) => Promise<Theme>;
 	};
 	component: {
-		search: LibraryComponentImport;
-		autocomplete: LibraryComponentImport;
-		recommendation: {
-			bundle: LibraryComponentImport;
-			default: LibraryComponentImport;
-			email: LibraryComponentImport;
+		search: {
+			Search: (args?: any) => Promise<FunctionalComponent<RenderableProps<any>>>;
+			SearchHorizontal: (args?: any) => Promise<FunctionalComponent<RenderableProps<any>>>;
 		};
-		badge: LibraryComponentImport;
-		result: LibraryComponentImport;
+		autocomplete: {
+			Autocomplete: (args?: any) => Promise<FunctionalComponent<RenderableProps<any>>>;
+		};
+		recommendation: {
+			bundle: {
+				RecommendationBundle: (args?: any) => Promise<FunctionalComponent<RenderableProps<any>>>;
+			};
+			default: {
+				Recommendation: (args?: any) => Promise<FunctionalComponent<RenderableProps<any>>>;
+				RecommendationGrid: (args?: any) => Promise<FunctionalComponent<RenderableProps<any>>>;
+			};
+			email: {
+				RecommendationEmail: (args?: any) => Promise<FunctionalComponent<RenderableProps<any>>>;
+			};
+		};
+		badge: {
+			[componentName: string]: (args?: any) => Promise<FunctionalComponent<RenderableProps<any>>>;
+		};
+		result: {
+			Result: (args?: any) => Promise<FunctionalComponent<RenderableProps<any>>>;
+			[componentName: string]: (args?: any) => Promise<FunctionalComponent<RenderableProps<any>>>;
+		};
 	};
 	language: {
-		[languageName: string]: () => Promise<Partial<Theme>>;
+		[languageName in LanguageCodes]: () => Promise<ThemeMinimal>;
 	};
 	currency: {
-		[currencyName: string]: () => Promise<Partial<Theme>>;
+		[currencyName in CurrencyCodes]: () => Promise<ThemeMinimal>;
 	};
 };
 const ALLOWED_CUSTOM_COMPONENT_TYPES: TemplateCustomComponentTypes[] = ['result', 'badge'];
@@ -37,6 +56,9 @@ const ALLOWED_CUSTOM_COMPONENT_TYPES: TemplateCustomComponentTypes[] = ['result'
 type LibraryStoreConfig = {
 	components?: TemplateStoreComponentConfig;
 };
+
+export type CurrencyCodes = 'usd' | 'eur' | 'aud';
+export type LanguageCodes = 'en';
 
 export class LibraryStore {
 	themes: {
@@ -67,10 +89,10 @@ export class LibraryStore {
 
 	locales: {
 		currencies: {
-			[currencyName: string]: Partial<Theme>;
+			[currencyName in CurrencyCodes]?: ThemeMinimal;
 		};
 		languages: {
-			[languageName: string]: Partial<Theme>;
+			[languageName in LanguageCodes]?: ThemeMinimal;
 		};
 	} = {
 		currencies: {},
@@ -152,9 +174,6 @@ export class LibraryStore {
 			en: async () => {
 				return this.locales.languages.en || (this.locales.languages.en = (await import('./library/languages/en')).en);
 			},
-			fr: async () => {
-				return this.locales.languages.fr || (this.locales.languages.fr = (await import('./library/languages/fr')).fr);
-			},
 		},
 		currency: {
 			usd: async () => {
@@ -217,7 +236,7 @@ export class LibraryStore {
 			Object.keys(importList).forEach((importName) => {
 				if (importGroup === 'component') {
 					if (importName === 'recommendation') {
-						const componentSubType = importList.recommendation;
+						const componentSubType = (importList as LibraryStore['import']['component']).recommendation;
 						Object.keys(componentSubType).forEach((type) => {
 							const componentGroup = componentSubType[type as keyof typeof componentSubType] as { [componentName: string]: () => Promise<any> };
 							Object.keys(componentGroup).forEach((componentName) => {
@@ -225,13 +244,16 @@ export class LibraryStore {
 							});
 						});
 					} else {
-						const componentGroup = importList[importName as keyof typeof importList] as { [componentName: string]: () => Promise<any> };
+						const componentGroup = importList[importName as keyof typeof importList] as LibraryComponentImport;
 						Object.keys(componentGroup).forEach((componentName) => {
 							loadPromises.push(componentGroup[componentName]());
 						});
 					}
-				} else {
-					const importer = importList[importName as keyof typeof importList] as () => Promise<any>;
+				} else if (importGroup === 'language' || importGroup === 'currency') {
+					const importer = importList[importName as keyof typeof importList] as () => Promise<ThemeMinimal>;
+					loadPromises.push(importer());
+				} else if (importGroup === 'theme') {
+					const importer = importList[importName as keyof typeof importList] as () => Promise<Theme>;
 					loadPromises.push(importer());
 				}
 			});

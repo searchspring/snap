@@ -2,20 +2,15 @@ import { SnapTemplates } from '@searchspring/snap-preact';
 import { CustomResult } from './components/Result';
 import { globalStyles } from './styles';
 
-// import { en_translation, fr_translation } from '@searchspring/snap-preact/translations';
-
 new SnapTemplates({
 	config: {
 		siteId: '8uyt2m',
 		language: 'en',
 		currency: 'usd',
-		// translations: {
-		// 	en: en_translation,
-		// 	fr: fr_translation,
-		// }
 	},
 	components: {
 		result: {
+			Global: async () => (await import('./components/Result')).CustomResultSecondary,
 			CustomResult: () => CustomResult,
 			CustomResultSecondary: async () => (await import('./components/Result')).CustomResultSecondary,
 		},
@@ -26,9 +21,13 @@ new SnapTemplates({
 	themes: {
 		myTheme: {
 			extends: 'bocachica',
+			resultComponent: 'CustomResult',
 		},
 		global: {
 			extends: 'bocachica',
+			// resultComponent: 'CustomResultSecondary',
+			// resultComponent: 'Global',
+			resultComponent: 'CustomResult',
 			variables: {
 				colors: {
 					primary: 'red',
@@ -39,6 +38,18 @@ new SnapTemplates({
 			style: globalStyles,
 			overrides: {
 				components: {
+					noResults: {
+						templates: {
+							recommendation: {
+								enabled: true,
+								component: 'Recommendation',
+								// resultComponent: 'Global',
+								config: {
+									tag: 'similar',
+								},
+							},
+						},
+					},
 					price: {
 						style: {
 							background: 'red',
@@ -170,32 +181,9 @@ new SnapTemplates({
 			{
 				selector: '#searchspring-layout',
 				component: 'Search',
-				resultComponent: 'CustomResultSecondary',
+				// resultComponent: 'Result',
 			},
 		],
-	},
-	recommendation: {
-		settings: {
-			branch: BRANCHNAME,
-		},
-		bundle: {
-			Bundle: {
-				component: 'RecommendationBundle',
-				// resultComponent: 'CustomResultSecondary',
-			},
-		},
-		default: {
-			Recs: {
-				component: 'Recommendation',
-				// resultComponent: 'CustomResultSecondary',
-			},
-		},
-		email: {
-			Email: {
-				component: 'RecommendationEmail',
-				// resultComponent: 'CustomResultSecondary',
-			},
-		},
 	},
 	autocomplete: {
 		inputSelector: 'input.searchspring-ac, .thing2',

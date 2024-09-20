@@ -1,21 +1,16 @@
-import { h, Component } from 'preact';
+import { h } from 'preact';
 import { observer } from 'mobx-react';
 
-import { Select, withStore } from '@searchspring/snap-preact/components';
+import { Select, withController } from '@searchspring/snap-preact/components';
 
 type PerPageProps = {
-	store?: SearchStore;
+	controller?: SearchController;
 };
 
-@withStore
-@observer
-export class PerPage extends Component<PerPageProps> {
-	constructor(props: PerPageProps) {
-		super(props);
-	}
-
-	render() {
-		const { pagination } = this.props.store;
+export const PerPage = withController(
+	observer(({ controller }: PerPageProps) => {
+		const store = controller.store;
+		const { pagination } = store;
 
 		return (
 			<div className="ss-per-page">
@@ -29,5 +24,5 @@ export class PerPage extends Component<PerPageProps> {
 				/>
 			</div>
 		);
-	}
-}
+	})
+);

@@ -21,13 +21,20 @@ export const TemplateSelect = observer((properties: TemplateSelectProps): JSX.El
 	if (targeter.resultComponent) {
 		ResultComponent = templatesStore.library.components.result[targeter.resultComponent];
 		if (!ResultComponent) {
-			controller.log.error(`Result component "${targeter.resultComponent}" not found in library for target "${targetId}"`);
-			return <Fragment />;
+			const error = `Result component "${targeter.resultComponent}" not found in library for target "${targetId}"`;
+			controller.log.error(error);
+			throw error;
 		}
 	}
 	const themeLocation = templatesStore?.themes?.[targeter.theme.location as TemplateThemeTypes];
 	const themeStore = themeLocation && themeLocation[targeter.theme.name];
 	const theme = themeStore?.theme;
+
+	if (!theme) {
+		const error = `Theme "${targeter.theme.name}" not found in library for target "${targetId}"`;
+		controller.log.error(error);
+		throw error;
+	}
 
 	// ensuring that theme and component are ready to render
 	return !loading && theme && Component ? (

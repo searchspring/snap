@@ -10,42 +10,48 @@ import { TemplateTarget, TemplatesStore } from './Stores/TemplateStore';
 import type { Target } from '@searchspring/snap-toolbox';
 import type { SearchStoreConfigSettings, AutocompleteStoreConfigSettings } from '@searchspring/snap-store-mobx';
 import type { UrlTranslatorConfig } from '@searchspring/snap-url-manager';
-import type { RecommendationInstantiatorConfigSettings, RecommendationComponentObject } from '../Instantiators/RecommendationInstantiator';
+import type {
+	RecommendationInstantiatorConfigSettings,
+	RecommendationComponentObject,
+	RecommendationInstantiatorConfig,
+} from '../Instantiators/RecommendationInstantiator';
 import type { SnapFeatures } from '../types';
 import type { SnapConfig, ExtendedTarget } from '../Snap';
 import type { RecsTemplateTypes, TemplateStoreConfig, TemplateTypes } from './Stores/TemplateStore';
+import { LibraryImports } from './Stores/LibraryStore';
+import { GLOBAL_THEME_NAME } from './Stores/TargetStore';
 
 export const THEME_EDIT_COOKIE = 'ssThemeEdit';
 
 // TODO: tabbing, finder
 export type SearchTargetConfig = {
 	selector: string;
-	theme?: string;
-	component: 'Search' | 'SearchHorizontal'; // various component (template) types allowed
-	resultComponent?: string;
+	theme?: keyof LibraryImports['theme'] | (string & NonNullable<unknown>);
+	component: keyof LibraryImports['component']['search'];
+	resultComponent?: keyof LibraryImports['component']['result'] | (string & NonNullable<unknown>);
 };
 
 export type AutocompleteTargetConfig = {
 	selector: string;
-	theme?: string;
-	component: 'Autocomplete'; // various components (templates) available
-	resultComponent?: string;
+	theme?: keyof LibraryImports['theme'] | (string & NonNullable<unknown>);
+	component: keyof LibraryImports['component']['autocomplete'];
+	resultComponent?: keyof LibraryImports['component']['result'] | (string & NonNullable<unknown>);
 };
 
 export type RecommendationDefaultTargetConfig = {
-	theme?: string;
-	component: 'Recommendation' | 'RecommendationGrid'; // various components (templates) available
-	resultComponent?: string;
+	theme?: keyof LibraryImports['theme'] | (string & NonNullable<unknown>);
+	component: keyof LibraryImports['component']['recommendation']['default'];
+	resultComponent?: keyof LibraryImports['component']['result'] | (string & NonNullable<unknown>);
 };
 export type RecommendationEmailTargetConfig = {
-	theme?: string;
-	component: 'RecommendationEmail'; // various components (templates) available
-	resultComponent?: string;
+	theme?: keyof LibraryImports['theme'] | (string & NonNullable<unknown>);
+	component: keyof LibraryImports['component']['recommendation']['email'];
+	resultComponent?: keyof LibraryImports['component']['result'] | (string & NonNullable<unknown>);
 };
 export type RecommendationBundleTargetConfig = {
-	theme?: string;
-	component: 'RecommendationBundle'; // various components (templates) available
-	resultComponent?: string;
+	theme?: keyof LibraryImports['theme'] | (string & NonNullable<unknown>);
+	component: keyof LibraryImports['component']['recommendation']['bundle'];
+	resultComponent?: keyof LibraryImports['component']['result'] | (string & NonNullable<unknown>);
 };
 
 export type SnapTemplatesConfig = TemplateStoreConfig & {
@@ -54,14 +60,14 @@ export type SnapTemplatesConfig = TemplateStoreConfig & {
 	search?: {
 		targets: [SearchTargetConfig, ...SearchTargetConfig[]];
 		settings?: SearchStoreConfigSettings;
-		breakpointSettings?: SearchStoreConfigSettings[];
+		// breakpointSettings?: SearchStoreConfigSettings[];
 		/* controller settings breakpoints work with caveat of having settings locked to initialized breakpoint */
 	};
 	autocomplete?: {
 		inputSelector: string;
 		targets: [AutocompleteTargetConfig, ...AutocompleteTargetConfig[]];
 		settings?: AutocompleteStoreConfigSettings;
-		breakpointSettings?: AutocompleteStoreConfigSettings[];
+		// breakpointSettings?: AutocompleteStoreConfigSettings[];
 		/* controller settings breakpoints work with caveat of having settings locked to initialized breakpoint */
 	};
 	recommendation?: {
@@ -74,8 +80,8 @@ export type SnapTemplatesConfig = TemplateStoreConfig & {
 		bundle?: {
 			[profileComponentName: string]: RecommendationBundleTargetConfig;
 		};
-		settings: RecommendationInstantiatorConfigSettings;
-		breakpointSettings?: RecommendationInstantiatorConfigSettings[];
+		settings?: RecommendationInstantiatorConfigSettings;
+		// breakpointSettings?: RecommendationInstantiatorConfigSettings[];
 		/* controller settings breakpoints work with caveat of having settings locked to initialized breakpoint */
 	};
 };
@@ -163,6 +169,10 @@ export function mapBreakpoints<ControllerConfigSettings>(
 export const createSearchTargeters = (templateConfig: SnapTemplatesConfig, templatesStore: TemplatesStore): ExtendedTarget[] => {
 	const targets = templateConfig.search?.targets || [];
 	return targets.map((target) => {
+		// use theme provided resultComponent if specified
+		if (!target.resultComponent && templateConfig.themes[target.theme || GLOBAL_THEME_NAME].resultComponent) {
+			target.resultComponent = templateConfig.themes[target.theme || GLOBAL_THEME_NAME].resultComponent;
+		}
 		const targetId = templatesStore.addTarget('search', target);
 		const targeter: ExtendedTarget = {
 			selector: target.selector,
@@ -186,6 +196,11 @@ export const createSearchTargeters = (templateConfig: SnapTemplatesConfig, templ
 export function createAutocompleteTargeters(templateConfig: SnapTemplatesConfig, templatesStore: TemplatesStore): ExtendedTarget[] {
 	const targets = templateConfig.autocomplete?.targets || [];
 	return targets.map((target) => {
+		// use theme provided resultComponent if specified
+		if (!target.resultComponent && templateConfig.themes[target.theme || GLOBAL_THEME_NAME].resultComponent) {
+			target.resultComponent = templateConfig.themes[target.theme || GLOBAL_THEME_NAME].resultComponent;
+		}
+
 		const targetId = templatesStore.addTarget('autocomplete', target);
 		const targeter: ExtendedTarget = {
 			selector: target.selector,
@@ -214,14 +229,37 @@ export function createRecommendationComponentMapping(
 
 	return Object.keys(templateConfig.recommendation || {})
 		.filter((key) => ['default', 'email', 'bundle'].includes(key))
-		.reduce((mapping, recsType) => {
-			Object.keys(templateConfig.recommendation![recsType as RecsTemplateTypes] || {}).forEach((targetName) => {
-				const type: TemplateTypes = `recommendation/${recsType as RecsTemplateTypes}`;
-				const target = templateConfig.recommendation![recsType as RecsTemplateTypes]![targetName] as TemplateTarget;
+		.reduce((mapping, type) => {
+			const recsType = type as RecsTemplateTypes;
+			Object.keys(templateConfig.recommendation![recsType] || {}).forEach((targetName) => {
+				const type: TemplateTypes = `recommendation/${recsType}`;
+				const target = templateConfig.recommendation![recsType]![targetName] as TemplateTarget;
+
+				// use theme provided resultComponent if specified
+				if (!target.resultComponent && templateConfig.themes[target.theme || GLOBAL_THEME_NAME].resultComponent) {
+					target.resultComponent = templateConfig.themes[target.theme || GLOBAL_THEME_NAME].resultComponent;
+				}
+
 				const mappedConfig: RecommendationComponentObject = {
 					component: async () => {
 						const componentImportPromises = [];
-						componentImportPromises.push(templatesStore.library.import.component.recommendation[recsType as RecsTemplateTypes][target.component]());
+						switch (recsType) {
+							case 'default': {
+								const importLocation = templatesStore.library.import.component.recommendation.default;
+								componentImportPromises.push(importLocation[target.component as keyof typeof importLocation]());
+								break;
+							}
+							case 'bundle': {
+								const importLocation = templatesStore.library.import.component.recommendation.bundle;
+								componentImportPromises.push(importLocation[target.component as keyof typeof importLocation]());
+								break;
+							}
+							case 'email': {
+								const importLocation = templatesStore.library.import.component.recommendation.email;
+								componentImportPromises.push(importLocation[target.component as keyof typeof importLocation]());
+								break;
+							}
+						}
 						if (target.resultComponent && templatesStore.library.import.component.result[target.resultComponent]) {
 							componentImportPromises.push(templatesStore.library.import.component.result[target.resultComponent]());
 						}
@@ -312,10 +350,34 @@ export function createSnapConfig(templateConfig: SnapTemplatesConfig, templatesS
 	}
 
 	/* RECOMMENDATION INSTANTIATOR */
+	const originalRecsConfig = templateConfig.recommendation || {};
+	templateConfig.recommendation = deepmerge(
+		{
+			settings: {
+				branch: 'production',
+			},
+			bundle: {
+				Bundle: {
+					component: 'RecommendationBundle',
+				},
+			},
+			default: {
+				Recs: {
+					component: 'Recommendation',
+				},
+			},
+			email: {
+				Email: {
+					component: 'RecommendationEmail',
+				},
+			},
+		},
+		originalRecsConfig
+	) as SnapTemplatesConfig['recommendation'];
 	if (templateConfig.recommendation && snapConfig.instantiators) {
-		const recommendationInstantiatorConfig = {
+		const recommendationInstantiatorConfig: RecommendationInstantiatorConfig = {
 			components: createRecommendationComponentMapping(templateConfig, templatesStore),
-			config: templateConfig.recommendation?.settings || {},
+			config: templateConfig.recommendation?.settings!,
 		};
 
 		// merge the responsive settings if there are any

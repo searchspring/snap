@@ -165,14 +165,20 @@ export const Select = observer((properties: SelectProps): JSX.Element => {
 	// selection state
 	const [selection, setSelection] = useState<ListOption | undefined>(selected);
 
+	// original selection state
+	const [originalSelected] = useState(selected as ListOption);
 	// reset selection if 'selected' prop changes
-	if (selection && selected && selection != selected) {
-		setSelection(selected);
-	}
-
-	// reset selection if 'selected' prop changes
-	if (selection && selected && selection != selected) {
-		setSelection(selected);
+	try {
+		if (selected) {
+			const originalSelectedstr = JSON.stringify(originalSelected);
+			const selectedstr = JSON.stringify(selected);
+			const selectionstr = JSON.stringify(selection);
+			if (originalSelectedstr !== selectedstr && selectedstr !== selectionstr) {
+				setSelection(selected);
+			}
+		}
+	} catch (e) {
+		// noop
 	}
 
 	if (selection && clearSelection) {

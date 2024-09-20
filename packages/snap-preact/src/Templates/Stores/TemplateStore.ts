@@ -3,10 +3,10 @@ import { StorageStore, StorageType } from '@searchspring/snap-store-mobx';
 import { SnapTemplatesConfig } from '../SnapTemplate';
 import { ThemeStore, ThemeStoreThemeConfig } from './ThemeStore';
 import { TargetStore } from './TargetStore';
-import { LibraryStore } from './LibraryStore';
+import { CurrencyCodes, LanguageCodes, LibraryImports, LibraryStore } from './LibraryStore';
 import { debounce } from '@searchspring/snap-toolbox';
 
-import type { ResultComponent, ThemeOverrides, ThemeVariablesPartial } from '../../../components/src';
+import type { LangComponentOverrides, ResultComponent, ThemeMinimal, ThemeOverrides, ThemeVariablesPartial } from '../../../components/src';
 import type { GlobalThemeStyleScript } from '../../types';
 export type TemplateThemeTypes = 'library' | 'local';
 export type TemplateTypes = 'search' | 'autocomplete' | `recommendation/${RecsTemplateTypes}`;
@@ -15,11 +15,18 @@ export type RecsTemplateTypes = 'bundle' | 'default' | 'email';
 
 type TargetMap = { [targetId: string]: TargetStore };
 
+type ComponentLibraryType =
+	| keyof LibraryImports['component']['autocomplete']
+	| keyof LibraryImports['component']['search']
+	| keyof LibraryImports['component']['recommendation']['default']
+	| keyof LibraryImports['component']['recommendation']['bundle']
+	| keyof LibraryImports['component']['recommendation']['email'];
+
 export type TemplateTarget = {
 	selector?: string;
-	theme?: string;
-	component: string;
-	resultComponent?: string;
+	theme?: keyof LibraryImports['theme'] | (string & NonNullable<unknown>);
+	component: ComponentLibraryType | (string & NonNullable<unknown>);
+	resultComponent?: keyof LibraryImports['component']['result'] | (string & NonNullable<unknown>);
 };
 
 export type TemplatesStoreSettings = {
@@ -35,8 +42,9 @@ type WindowProperties = {
 };
 
 type TemplateStoreThemeConfig = {
-	extends: 'bocachica'; // various themes available
+	extends: keyof LibraryImports['theme'];
 	style?: GlobalThemeStyleScript;
+	resultComponent?: keyof LibraryImports['component']['result'] | (string & NonNullable<unknown>);
 	variables?: ThemeVariablesPartial;
 	overrides?: ThemeOverrides;
 };
@@ -51,8 +59,11 @@ export type TemplateStoreConfig = {
 	components?: TemplateStoreComponentConfig;
 	config?: {
 		siteId?: string;
-		currency?: string;
-		language?: string;
+		currency?: CurrencyCodes;
+		language?: LanguageCodes;
+	};
+	translations?: {
+		[currencyName in LanguageCodes]?: LangComponentOverrides;
 	};
 	themes: {
 		global: TemplateStoreThemeConfig;
@@ -70,8 +81,8 @@ export class TemplatesStore {
 	loading = false;
 	config: SnapTemplatesConfig;
 	storage: StorageStore;
-	language: string;
-	currency: string;
+	language: LanguageCodes;
+	currency: CurrencyCodes;
 	settings: TemplatesStoreSettings;
 	dependencies: TemplatesStoreDependencies;
 
@@ -85,7 +96,7 @@ export class TemplatesStore {
 
 	themes: {
 		local: {
-			[themeName: 'global' | string]: ThemeStore;
+			[themeName: string]: ThemeStore;
 		};
 		library: {
 			[themeName: string]: ThemeStore;
@@ -149,14 +160,22 @@ export class TemplatesStore {
 		// setup local themes
 		Object.keys(config.themes).map((themeKey) => {
 			const themeConfig = config.themes[themeKey];
-			const imports = [importCurrency, importLanguage, this.library.import.theme[themeConfig.extends]()];
 
-			Promise.all(imports).then(() => {
+			// import component if defined
+			if (themeConfig.resultComponent && this.library.import.component.result[themeConfig.resultComponent]) {
+				this.library.import.component.result[themeConfig.resultComponent]();
+			}
+
+			// import theme dependencies
+			const themeImports = [importCurrency, importLanguage, this.library.import.theme[themeConfig.extends]()];
+
+			Promise.all(themeImports).then(() => {
 				const base = this.library.themes[themeConfig.extends];
 				const overrides = themeConfig.overrides || {};
 				const variables = themeConfig.variables || {};
-				const currency = this.library.locales.currencies[this.currency];
-				const language = this.library.locales.languages[this.language];
+				const currency = this.library.locales.currencies[this.currency] || {};
+				const language = this.library.locales.languages[this.language] || {};
+				const languageOverrides = transformTranslationsToTheme((this.config.translations && this.config.translations[this.language]) || {});
 
 				this.addTheme({
 					name: themeKey,
@@ -167,6 +186,7 @@ export class TemplatesStore {
 					variables,
 					currency,
 					language,
+					languageOverrides,
 					innerWidth: this.window.innerWidth,
 				});
 			});
@@ -248,9 +268,9 @@ export class TemplatesStore {
 		}
 	}
 
-	public async setCurrency(currencyCode: string) {
+	public async setCurrency(currencyCode: CurrencyCodes) {
 		if (currencyCode in this.library.import.currency) {
-			await this.library.import.currency[currencyCode as keyof typeof this.library.import.currency]();
+			await this.library.import.currency[currencyCode]();
 			const currency = this.library.locales.currencies[currencyCode];
 
 			if (currency) {
@@ -268,9 +288,9 @@ export class TemplatesStore {
 		}
 	}
 
-	public async setLanguage(languageCode: string) {
+	public async setLanguage(languageCode: LanguageCodes) {
 		if (languageCode in this.library.import.language) {
-			await this.library.import.language[languageCode as keyof typeof this.library.import.language]();
+			await this.library.import.language[languageCode]();
 			const language = this.library.locales.languages[languageCode];
 
 			if (language) {
@@ -301,11 +321,26 @@ export class TemplatesStore {
 				name: themeName,
 				type: 'library',
 				base: theme,
-				language: this.library.locales.languages[this.language],
-				currency: this.library.locales.currencies[this.currency],
+				language: this.library.locales.languages[this.language] || {},
+				languageOverrides: transformTranslationsToTheme((this.config.translations && this.config.translations[this.language]) || {}),
+				currency: this.library.locales.currencies[this.currency] || {},
 				innerWidth: this.window.innerWidth,
 			});
 		}
 		this.loading = false;
 	}
+}
+
+function transformTranslationsToTheme(translations: LangComponentOverrides): ThemeMinimal {
+	const translationTheme: ThemeMinimal = {
+		components: {},
+	};
+
+	Object.keys(translations).forEach((component) => {
+		translationTheme.components![component as keyof typeof translationTheme.components] = {
+			lang: translations[component as keyof typeof translationTheme.components],
+		};
+	});
+
+	return translationTheme;
 }

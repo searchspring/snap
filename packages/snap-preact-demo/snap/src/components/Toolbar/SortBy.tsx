@@ -1,21 +1,16 @@
-import { h, Component } from 'preact';
+import { h } from 'preact';
 import { observer } from 'mobx-react';
 
-import { Select, withStore } from '@searchspring/snap-preact/components';
+import { Select, withController } from '@searchspring/snap-preact/components';
 
 type SortByProps = {
-	store?: SearchStore;
+	controller?: SearchController;
 };
 
-@withStore
-@observer
-export class SortBy extends Component<SortByProps> {
-	constructor(props: SortByProps) {
-		super(props);
-	}
-
-	render() {
-		const { sorting } = this.props.store;
+export const SortBy = withController(
+	observer(({ controller }: SortByProps) => {
+		const store = controller.store;
+		const { sorting } = store;
 
 		return (
 			<Select
@@ -28,5 +23,5 @@ export class SortBy extends Component<SortByProps> {
 				}}
 			/>
 		);
-	}
-}
+	})
+);

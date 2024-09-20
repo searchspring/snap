@@ -370,6 +370,7 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 			treePath,
 		},
 		results: {
+			name: 'autocomplete',
 			// default props
 			className: 'ss__autocomplete__results',
 			breakpoints: props.breakpoints,

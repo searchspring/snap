@@ -1,4 +1,4 @@
-import { h, Component } from 'preact';
+import { h } from 'preact';
 import { observer } from 'mobx-react';
 
 import { ThemeProvider, LoadingBar, defaultTheme, StoreProvider, ControllerProvider, SnapProvider } from '@searchspring/snap-preact/components';
@@ -11,29 +11,27 @@ type ContentProps = {
 	snap?: Snap;
 };
 
-@observer
-export class Content extends Component<ContentProps> {
-	render() {
-		const store = this.props.controller.store;
-		const snap = this.props.snap;
-		const theme = snap?.templates?.themes.local.global.theme;
+export const Content = observer(({ controller, snap }: ContentProps) => {
+	const store = controller.store;
+	const theme = snap?.templates?.themes.local.global.theme;
 
-		return (
-			<SnapProvider snap={snap}>
-				<ControllerProvider controller={this.props.controller}>
-					<ThemeProvider theme={theme || defaultTheme}>
-						<StoreProvider store={store}>
-							<div>
-								<LoadingBar active={store.loading} />
+	return (
+		<SnapProvider snap={snap}>
+			<ControllerProvider controller={controller}>
+				<ThemeProvider theme={theme || defaultTheme}>
+					<StoreProvider store={store}>
+						<div>
+							<LoadingBar active={store.loading} />
 
-								<Header />
+							<Header />
 
-								{store.pagination.totalResults ? <Results /> : store.pagination.totalResults === 0 && <NoResults />}
-							</div>
-						</StoreProvider>
-					</ThemeProvider>
-				</ControllerProvider>
-			</SnapProvider>
-		);
-	}
-}
+							{store.pagination.totalResults ? <Results /> : store.pagination.totalResults === 0 && <NoResults />}
+						</div>
+					</StoreProvider>
+				</ThemeProvider>
+			</ControllerProvider>
+		</SnapProvider>
+	);
+});
+
+export default Content;

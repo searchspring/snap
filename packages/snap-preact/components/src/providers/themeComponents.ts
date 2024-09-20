@@ -48,7 +48,7 @@ import type { FacetProps } from '../components/Organisms/Facet';
 import type { FacetsHorizontalProps } from '../components/Organisms/FacetsHorizontal';
 import type { FacetsProps } from '../components/Organisms/Facets';
 import type { FilterSummaryProps } from '../components/Organisms/FilterSummary';
-import type { ResultsProps } from '../components/Organisms/Results';
+import type { ResultsNames, ResultsProps } from '../components/Organisms/Results';
 import type { SearchHeaderProps } from '../components/Atoms/SearchHeader';
 import type { SidebarProps } from '../components/Organisms/Sidebar';
 import type { ToolbarProps, ToolbarNames } from '../components/Organisms/Toolbar';
@@ -199,7 +199,7 @@ export type ThemeComponentOverrides = {
 } & { [K in UnNamedThemeComponentSelectors<'filterSummary'>]?: GenericComponentProps<FilterSummaryProps> } & {
 	[K in UnNamedThemeComponentSelectors<'noResults'>]?: GenericComponentProps<NoResultsProps>;
 } & {
-	[K in UnNamedThemeComponentSelectors<'results'>]?: GenericComponentProps<ResultsProps>;
+	[K in NamedThemeComponentSelectors<'results', ResultsNames>]?: GenericComponentProps<ResultsProps>;
 } & { [K in UnNamedThemeComponentSelectors<'searchHeader'>]?: GenericComponentProps<SearchHeaderProps> } & {
 	[K in UnNamedThemeComponentSelectors<'sidebar'>]?: GenericComponentProps<SidebarProps>;
 } & { [K in UnNamedThemeComponentSelectors<'mobileSidebar'>]?: GenericComponentProps<MobileSidebarProps> } & {

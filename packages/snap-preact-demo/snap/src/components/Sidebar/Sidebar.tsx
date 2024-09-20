@@ -1,4 +1,4 @@
-import { h, Component } from 'preact';
+import { h } from 'preact';
 import { observer } from 'mobx-react';
 
 import {
@@ -7,7 +7,6 @@ import {
 	FilterSummary,
 	Facets,
 	StoreProvider,
-	withStore,
 	withController,
 	ControllerProvider,
 } from '@searchspring/snap-preact/components';
@@ -16,40 +15,35 @@ type SidebarProps = {
 	controller?: SearchController;
 };
 
-@observer
-export class Sidebar extends Component<SidebarProps> {
-	render() {
-		const store = this.props.controller.store;
+export const Sidebar = observer(({ controller }: SidebarProps) => {
+	const store = controller.store;
 
-		return (
-			<ThemeProvider theme={defaultTheme}>
-				<ControllerProvider controller={this.props.controller}>
-					<StoreProvider store={store}>
-						<SidebarContents />
-					</StoreProvider>
-				</ControllerProvider>
-			</ThemeProvider>
-		);
-	}
-}
+	return (
+		<ThemeProvider theme={defaultTheme}>
+			<ControllerProvider controller={controller}>
+				<StoreProvider store={store}>
+					<SidebarContents />
+				</StoreProvider>
+			</ControllerProvider>
+		</ThemeProvider>
+	);
+});
 
 type SidebarContentsProps = {
 	controller?: SearchController;
 	store?: SearchStore;
 };
 
-@withController
-@withStore
-@observer
-export class SidebarContents extends Component<SidebarContentsProps> {
-	render() {
-		const { filters, facets } = this.props.store;
+export const SidebarContents = withController(
+	observer(({ controller }: SidebarContentsProps) => {
+		const store = controller.store;
+		const { filters, facets } = store;
 
 		return (
 			<div className="ss-sidebar-container">
-				<FilterSummary filters={filters} controller={this.props.controller} />
+				<FilterSummary filters={filters} controller={controller} />
 				<Facets facets={facets} />
 			</div>
 		);
-	}
-}
+	})
+);

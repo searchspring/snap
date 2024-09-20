@@ -6,9 +6,10 @@ import { ThemeStore, ThemeStoreThemeConfig, mergeThemeLayers } from './ThemeStor
 import { StorageStore } from '@searchspring/snap-store-mobx';
 import type { TemplatesStoreDependencies, TemplateThemeTypes, TemplatesStoreSettings } from './TemplateStore';
 import type { Theme, ThemeVariables, ThemePartial } from '../../../components/src/providers/theme';
+import { GLOBAL_THEME_NAME } from './TargetStore';
 
-// configure MobX
-configureMobx({ enforceActions: 'never' });
+// configure MobX - useProxies: 'never' matches what we are doing for browser support (IE 11)
+configureMobx({ enforceActions: 'never', useProxies: 'never' });
 
 const testThemeVariables: ThemeVariables = {
 	breakpoints: [0, 420, 720, 1440],
@@ -112,7 +113,7 @@ describe('ThemeStore', () => {
 
 	it('has expected defaults and can invoke methods', () => {
 		const config: ThemeStoreThemeConfig = {
-			name: 'global',
+			name: GLOBAL_THEME_NAME,
 			type: 'local',
 			base: {
 				name: 'empty',
@@ -124,6 +125,7 @@ describe('ThemeStore', () => {
 			variables: {},
 			currency: {},
 			language: {},
+			languageOverrides: {},
 			innerWidth: 0,
 		};
 
@@ -188,13 +190,14 @@ describe('ThemeStore', () => {
 
 	it('can get theme', () => {
 		const config: ThemeStoreThemeConfig = {
-			name: 'global',
+			name: GLOBAL_THEME_NAME,
 			type: 'local',
 			base: testTheme,
 			overrides: {},
 			variables: {},
 			currency: {},
 			language: {},
+			languageOverrides: {},
 			innerWidth: 0,
 		};
 
@@ -216,7 +219,7 @@ describe('ThemeStore', () => {
 
 	it('can get theme with overrides applied', () => {
 		const config: ThemeStoreThemeConfig = {
-			name: 'global',
+			name: GLOBAL_THEME_NAME,
 			type: 'local',
 			base: testTheme,
 			overrides: {
@@ -229,6 +232,7 @@ describe('ThemeStore', () => {
 			variables: {},
 			currency: {},
 			language: {},
+			languageOverrides: {},
 			innerWidth: 0,
 		};
 
@@ -247,7 +251,7 @@ describe('ThemeStore', () => {
 
 	it('can get theme with overrides and variables applied', () => {
 		const config: ThemeStoreThemeConfig = {
-			name: 'global',
+			name: GLOBAL_THEME_NAME,
 			type: 'local',
 			base: testTheme,
 			overrides: {
@@ -277,6 +281,7 @@ describe('ThemeStore', () => {
 			},
 			currency: {},
 			language: {},
+			languageOverrides: {},
 			innerWidth: 0,
 		};
 
@@ -302,7 +307,7 @@ describe('ThemeStore', () => {
 
 	it('can get theme with currency and language applied', () => {
 		const config: ThemeStoreThemeConfig = {
-			name: 'global',
+			name: GLOBAL_THEME_NAME,
 			type: 'local',
 			base: testTheme,
 			overrides: {
@@ -344,6 +349,7 @@ describe('ThemeStore', () => {
 					},
 				},
 			},
+			languageOverrides: {},
 			innerWidth: 0,
 		};
 
@@ -372,13 +378,14 @@ describe('ThemeStore', () => {
 		expect(testTheme.variables?.breakpoints[bpIndex]).toBe(0);
 
 		const config: ThemeStoreThemeConfig = {
-			name: 'global',
+			name: GLOBAL_THEME_NAME,
 			type: 'local',
 			base: testTheme,
 			overrides: {},
 			variables: {},
 			currency: {},
 			language: {},
+			languageOverrides: {},
 			innerWidth: 300,
 		};
 
@@ -415,13 +422,14 @@ describe('ThemeStore', () => {
 		expect(testTheme.variables?.breakpoints[bpIndex]).toBeGreaterThan(0);
 
 		const config: ThemeStoreThemeConfig = {
-			name: 'global',
+			name: GLOBAL_THEME_NAME,
 			type: 'local',
 			base: testTheme,
 			overrides: {},
 			variables: {},
 			currency: {},
 			language: {},
+			languageOverrides: {},
 			innerWidth: 1600,
 		};
 
@@ -456,7 +464,7 @@ describe('ThemeStore', () => {
 		expect(testTheme.variables?.breakpoints[bpIndex]).toBe(0);
 
 		const config: ThemeStoreThemeConfig = {
-			name: 'global',
+			name: GLOBAL_THEME_NAME,
 			type: 'local',
 			base: testTheme,
 			overrides: {
@@ -476,6 +484,7 @@ describe('ThemeStore', () => {
 			},
 			currency: {},
 			language: {},
+			languageOverrides: {},
 			innerWidth: 50,
 		};
 
@@ -517,7 +526,7 @@ describe('ThemeStore', () => {
 		expect(testTheme.variables?.breakpoints[bpIndex]).toBe(0);
 
 		const config: ThemeStoreThemeConfig = {
-			name: 'global',
+			name: GLOBAL_THEME_NAME,
 			type: 'local',
 			base: testTheme,
 			overrides: {
@@ -545,6 +554,7 @@ describe('ThemeStore', () => {
 					results: { columns: 11 },
 				},
 			},
+			languageOverrides: {},
 			innerWidth: 50,
 		};
 
@@ -590,13 +600,14 @@ describe('ThemeStore', () => {
 	it('can select layoutOption', () => {
 		const bpIndex = 0;
 		const config: ThemeStoreThemeConfig = {
-			name: 'global',
+			name: GLOBAL_THEME_NAME,
 			type: 'local',
 			base: testTheme,
 			overrides: {},
 			variables: {},
 			currency: {},
 			language: {},
+			languageOverrides: {},
 			innerWidth: 0,
 		};
 
@@ -652,6 +663,7 @@ describe('ThemeStore', () => {
 			variables: {},
 			currency: {},
 			language: {},
+			languageOverrides: {},
 			innerWidth: 0,
 			style: (theme) => {
 				return {
@@ -664,7 +676,7 @@ describe('ThemeStore', () => {
 
 		new ThemeStore({ config, dependencies, settings });
 
-		// wait for rendering of BranchOverride component
+		// wait for rendering of stylesheets
 		await waitFor(() => {
 			const styleElements = document.querySelectorAll('head style')!;
 			expect(styleElements).toHaveLength(2);
@@ -673,6 +685,29 @@ describe('ThemeStore', () => {
 
 			expect(styleElements[1]).toHaveAttribute('data-emotion', 'ss-global');
 		});
+	});
+
+	it('correctly merges observable variable arrays', async () => {
+		// due to mobx observable arrays being objects, we need to ensure that the mergeThemeLayers function
+		// correctly merges observable arrays (ThemeStore uses toJS function)
+
+		const config: ThemeStoreThemeConfig = {
+			name: 'globally',
+			type: 'local',
+			base: testTheme,
+			overrides: {},
+			variables: {
+				breakpoints: [1, 2, 3, 4],
+			},
+			currency: {},
+			language: {},
+			languageOverrides: {},
+			innerWidth: 0,
+		};
+
+		const themeStore = new ThemeStore({ config, dependencies, settings });
+
+		expect(themeStore.theme.variables?.breakpoints).toStrictEqual(config.variables?.breakpoints);
 	});
 });
 
