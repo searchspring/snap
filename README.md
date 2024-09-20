@@ -3,6 +3,8 @@
 </p>
 <br/><br/>
 
+# Snap 1.0
+
 Welcome to Snap - Searchspring's SDK for integrating into front end web apps. We invite your participation through issues, discussions and pull requests! Please reference Searchspring's [Community Contribution Guidelines](https://github.com/searchspring/community/blob/main/CONTRIBUTING.md).
 
 Please reference the [Snap Documentation](https://searchspring.github.io/snap/) to get started using Snap to build applications.
