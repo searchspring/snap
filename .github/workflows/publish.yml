@@ -14,6 +14,7 @@ jobs:
       - name: Checkout repositiory
         uses: actions/checkout@v2
         with:
+          token: ${{ secrets.MACHINE_001 }}
           fetch-depth: "0"
 
       - name: Set Github credentials
