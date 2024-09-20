@@ -92,17 +92,17 @@ export class MockData {
 		}
 	}
 
-	searchMeta(file?: string) {
+	searchMeta(file?: string): { meta: MetaResponseModel; search: SearchResponseModel } {
 		try {
-			return { meta: this.meta(), ...this.search(file) };
+			return { meta: this.meta(), search: this.search(file) };
 		} catch (err) {
 			throw 'Search JSON not found.';
 		}
 	}
 
-	autocompleteMeta(file?: string) {
+	autocompleteMeta(file?: string): { meta: MetaResponseModel; search: AutocompleteResponseModel } {
 		try {
-			return { meta: this.meta(), ...this.autocomplete(file) };
+			return { meta: this.meta(), search: this.autocomplete(file) };
 		} catch (err) {
 			throw 'Search JSON not found.';
 		}
@@ -123,8 +123,8 @@ export class MockData {
 			const resultsFile = `${__dirname}/recommend/results/${this.config.siteId}/${files?.resultsFile || this.config.recommend?.results}.json`;
 			return {
 				meta: this.meta(),
-				profile: getJSON(profileFile).profile,
-				results: getJSON(resultsFile)[0].results,
+				profile: getJSON(profileFile),
+				recommend: getJSON(resultsFile)[0],
 			};
 		} catch (err) {
 			throw 'Search JSON not found.';

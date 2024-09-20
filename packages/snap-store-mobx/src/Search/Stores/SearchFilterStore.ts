@@ -3,37 +3,50 @@ import { makeObservable, observable } from 'mobx';
 import type { UrlManager } from '@searchspring/snap-url-manager';
 import type { StoreServices } from '../../types';
 import type {
-	SearchResponseModelFilter,
-	MetaResponseModel,
 	SearchResponseModelFilterRange,
 	SearchResponseModelFilterValue,
 	MetaResponseModelFacetDefaults,
 	MetaResponseModelFacet,
+	SearchResponseModel,
+	MetaResponseModel,
 } from '@searchspring/snapi-types';
+
+type SearchFilterStoreConfig = {
+	services: StoreServices;
+	data: {
+		search: SearchResponseModel;
+		meta: MetaResponseModel;
+	};
+};
 
 export class SearchFilterStore extends Array<RangeFilter | Filter> {
 	static get [Symbol.species](): ArrayConstructor {
 		return Array;
 	}
 
-	constructor(services: StoreServices, filtersData: SearchResponseModelFilter[] = [], meta: MetaResponseModel) {
-		const filters = filtersData.map((filter) => {
-			const field = filter.field!;
-			const facetMeta = meta.facets && (meta.facets[field] as MetaResponseModelFacet & MetaResponseModelFacetDefaults);
+	constructor(params: SearchFilterStoreConfig) {
+		const { services, data } = params || {};
+		const { search, meta } = data || {};
+		const { filters } = search || {};
 
-			switch (filter.type) {
-				case 'range':
-					const rangeFilter = filter as SearchResponseModelFilterRange;
-					return new RangeFilter(services, rangeFilter, facetMeta!);
+		const filtersArr =
+			filters?.map((filter) => {
+				const field = filter.field!;
+				const facetMeta = meta.facets && meta.facets[field];
 
-				case 'value':
-				default:
-					const valueFilter = filter as SearchResponseModelFilterValue;
-					return new Filter(services, valueFilter, facetMeta!);
-			}
-		});
+				switch (filter.type) {
+					case 'range':
+						const rangeFilter = filter as SearchResponseModelFilterRange;
+						return new RangeFilter(services, rangeFilter, facetMeta!);
 
-		super(...filters);
+					case 'value':
+					default:
+						const valueFilter = filter as SearchResponseModelFilterValue;
+						return new Filter(services, valueFilter, facetMeta!);
+				}
+			}) || [];
+
+		super(...filtersArr);
 	}
 }
 

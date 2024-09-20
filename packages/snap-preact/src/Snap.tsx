@@ -30,10 +30,11 @@ import type { Target, OnTarget } from '@searchspring/snap-toolbox';
 import type { UrlTranslatorConfig } from '@searchspring/snap-url-manager';
 
 import { default as createSearchController } from './create/createSearchController';
-import { configureSnapFeatures } from './configureSnapFeatures';
 import { RecommendationInstantiator, RecommendationInstantiatorConfig } from './Instantiators/RecommendationInstantiator';
-import type { SnapControllerServices, SnapControllerConfig, InitialUrlConfig } from './types';
+import type { SnapControllerServices, SnapControllerConfig, InitialUrlConfig, SnapFeatures } from './types';
+import { configureSnapFeatures } from './utils';
 import { setupEvents } from './setupEvents';
+import type { TemplatesStore } from './Templates/Stores/TemplateStore';
 
 // configure MobX
 configureMobx({ useProxies: 'never', isolateGlobalState: true, enforceActions: 'never' });
@@ -42,7 +43,7 @@ export const BRANCH_COOKIE = 'ssBranch';
 export const DEV_COOKIE = 'ssDev';
 export const STYLESHEET_CLASSNAME = 'ss-snap-bundle-styles';
 
-type ExtendedTarget = Target & {
+export type ExtendedTarget = Target & {
 	name?: string;
 	controller?: AbstractController;
 	component?: () => Promise<any> | any;
@@ -53,12 +54,6 @@ type ExtendedTarget = Target & {
 	onTarget?: OnTarget;
 	prefetch?: boolean;
 	renderAfterSearch?: boolean;
-};
-
-type SnapFeatures = {
-	integratedSpellCorrection?: {
-		enabled?: boolean;
-	};
 };
 
 export type SnapConfig = {
@@ -115,10 +110,11 @@ type SnapServices = {
 	client?: Client;
 	tracker?: Tracker;
 	logger?: Logger;
+	templatesStore?: TemplatesStore;
 };
 
 const SESSION_ATTRIBUTION = 'ssAttribution';
-
+const MAX_PARENT_LEVELS = 3;
 const COMPONENT_ERROR = `Uncaught Error - Invalid value passed as the component.
 This usually happens when you pass a JSX Element, and not a function that returns the component, in the snap config. 
 		
@@ -172,6 +168,7 @@ export class Snap {
 	} = {};
 
 	public eventManager: EventManager;
+	public templates?: TemplatesStore;
 
 	public getInstantiator = (id: string): Promise<RecommendationInstantiator> => {
 		return this._instantiatorPromises[id] || Promise.reject(`getInstantiator could not find instantiator with id: ${id}`);
@@ -268,6 +265,65 @@ export class Snap {
 	};
 
 	public handlers = {
+		attributes: (event: MouseEvent): void => {
+			const trackerId = this.tracker.config.id;
+			const attributeList = [
+				`ss-${trackerId}-cart-add`,
+				`ss-${trackerId}-cart-remove`,
+				`ss-${trackerId}-cart-clear`,
+				`ss-${trackerId}-cart-view`,
+				`ss-${trackerId}-intellisuggest`,
+				`ss-${trackerId}-intellisuggest-signature`,
+				`href`,
+			];
+			const attributes: { [key: string]: any } = {};
+			let levels = 0;
+
+			let elem: HTMLElement | null = null;
+			elem = event && (event.target as HTMLElement);
+
+			while (Object.keys(attributes).length == 0 && elem !== null && levels <= MAX_PARENT_LEVELS) {
+				Object.values(elem.attributes).forEach((attr: Attr) => {
+					const attrName = attr.nodeName;
+
+					if (attributeList.indexOf(attrName) != -1) {
+						attributes[attrName] = elem && elem.getAttribute(attrName);
+					}
+				});
+
+				elem = elem.parentElement;
+				levels++;
+			}
+
+			if (attributes[`ss-${trackerId}-cart-add`]) {
+				// add skus to cart
+				const skus = attributes[`ss-${trackerId}-cart-add`].split(',');
+				this.tracker.cookies.cart.add(skus);
+				this.eventManager.fire('controller/recommendation/update');
+			} else if (attributes[`ss-${trackerId}-cart-remove`]) {
+				// remove skus from cart
+				const skus = attributes[`ss-${trackerId}-cart-remove`].split(',');
+				this.tracker.cookies.cart.remove(skus);
+				this.eventManager.fire('controller/recommendation/update');
+			} else if (`ss-${trackerId}-cart-clear` in attributes) {
+				// clear all from cart
+				this.tracker.cookies.cart.clear();
+				this.eventManager.fire('controller/recommendation/update');
+			} else if (`ss-${trackerId}-cart-view` in attributes) {
+				// update recs
+				this.eventManager.fire('controller/recommendation/update');
+			} else if (attributes[`ss-${trackerId}-intellisuggest`] && attributes[`ss-${trackerId}-intellisuggest-signature`]) {
+				// product click
+				const intellisuggestData = attributes[`ss-${trackerId}-intellisuggest`];
+				const intellisuggestSignature = attributes[`ss-${trackerId}-intellisuggest-signature`];
+				const href = attributes['href'];
+				this.tracker.track.product.click({
+					intellisuggestData,
+					intellisuggestSignature,
+					href,
+				});
+			}
+		},
 		error: (event: ErrorEvent): void => {
 			try {
 				const { filename } = event;
@@ -301,6 +357,8 @@ export class Snap {
 	constructor(config: SnapConfig, services?: SnapServices) {
 		window.removeEventListener('error', this.handlers.error);
 		window.addEventListener('error', this.handlers.error);
+		document.removeEventListener('click', this.handlers.attributes);
+		document.addEventListener('click', this.handlers.attributes);
 
 		this.config = config;
 
@@ -351,6 +409,9 @@ export class Snap {
 			}
 		}
 
+		if (services?.templatesStore) {
+			this.templates = services.templatesStore;
+		}
 		try {
 			const urlParams = url(window.location.href);
 			const branchOverride = urlParams?.params?.query?.branch || cookies.get(BRANCH_COOKIE);
@@ -486,11 +547,11 @@ export class Snap {
 							props.error = err;
 						}
 
-						const BranchOverride = (await import('./components/BranchOverride')).BranchOverride;
+						const BranchOverride = (await import('../components/src')).BranchOverride;
 						render(
 							<BranchOverride
 								{...props}
-								name={branchOverride}
+								branch={branchOverride}
 								onRemoveClick={() => {
 									cookies.unset(BRANCH_COOKIE, cookieDomain);
 									const urlState = url(window.location.href);
@@ -536,6 +597,7 @@ export class Snap {
 		window.searchspring = window.searchspring || {};
 		window.searchspring.context = this.context;
 		if (this.client) window.searchspring.client = this.client;
+		if (services?.templatesStore) window.searchspring.templates = this.templates;
 
 		if (this.eventManager) {
 			window.searchspring.on = (event: string, ...func: any) => {
@@ -627,7 +689,7 @@ export class Snap {
 									targetFunctionPromises.push(target.component!());
 									const [_, Component] = await Promise.all(targetFunctionPromises);
 									setTimeout(() => {
-										render(<Component controller={this.controllers[controller.config.id]} {...target.props} />, elem);
+										render(<Component controller={this.controllers[controller.config.id]} snap={this} {...target.props} />, elem);
 									});
 								} catch (err) {
 									this.logger.error(err);
@@ -688,16 +750,19 @@ export class Snap {
 									onTarget && (await onTarget(target, elem, originalElem));
 
 									try {
-										const Component = (await target.component!()) as React.ElementType<{
-											controller: AutocompleteController;
-											input: HTMLInputElement | string | Element;
-										}>;
+										const importPromises = [];
+										// dynamically import the component
+										importPromises.push(target.component!());
+
+										const importResolutions = await Promise.all(importPromises);
+										const Component = importResolutions[0];
 
 										setTimeout(() => {
 											render(
 												<Component
 													controller={this.controllers[controller.config.id] as AutocompleteController}
 													input={originalElem}
+													snap={this}
 													{...target.props}
 												/>,
 												elem
@@ -798,7 +863,7 @@ export class Snap {
 										const Component = await target.component!();
 
 										setTimeout(() => {
-											render(<Component controller={this.controllers[controller.config.id]} {...target.props} />, elem);
+											render(<Component controller={this.controllers[controller.config.id]} snap={this} {...target.props} />, elem);
 										});
 									} catch (err) {
 										this.logger.error(err);
@@ -874,7 +939,7 @@ export class Snap {
 										const Component = await target.component!();
 
 										setTimeout(() => {
-											render(<Component controller={this.controllers[controller.config.id]} {...target.props} />, elem);
+											render(<Component controller={this.controllers[controller.config.id]} snap={this} {...target.props} />, elem);
 										});
 									} catch (err) {
 										this.logger.error(err);
@@ -939,6 +1004,7 @@ export class Snap {
 							client: this.client,
 							tracker: this.tracker,
 							logger: this.logger,
+							snap: this,
 						},
 						this.context
 					);

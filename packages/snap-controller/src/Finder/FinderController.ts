@@ -133,7 +133,7 @@ export class FinderController extends AbstractController {
 			await this.init();
 		}
 
-		if (this.store.state.persisted) {
+		if (this.store.persisted) {
 			return;
 		}
 
@@ -157,12 +157,7 @@ export class FinderController extends AbstractController {
 
 			const searchProfile = this.profiler.create({ type: 'event', name: 'search', context: params }).start();
 
-			const [meta, response] = await this.client.finder(params);
-			// @ts-ignore : MockClient will overwrite the client search() method and use SearchData to return mock data which already contains meta data
-			if (!response.meta) {
-				// @ts-ignore : MockClient will overwrite the client search() method and use SearchData to return mock data which already contains meta data
-				response.meta = meta;
-			}
+			const { meta, search } = await this.client.finder(params);
 
 			searchProfile.stop();
 			this.log.profile(searchProfile);
@@ -173,7 +168,10 @@ export class FinderController extends AbstractController {
 				await this.eventManager.fire('afterSearch', {
 					controller: this,
 					request: params,
-					response,
+					response: {
+						meta,
+						search,
+					},
 				});
 			} catch (err: any) {
 				if (err?.message == 'cancelled') {
@@ -190,8 +188,7 @@ export class FinderController extends AbstractController {
 			this.log.profile(afterSearchProfile);
 
 			// update the store
-			// @ts-ignore : MockClient will overwrite the client search() method and use SearchData to return mock data which already contains meta data
-			this.store.update(response);
+			this.store.update({ meta, search });
 
 			const afterStoreProfile = this.profiler.create({ type: 'event', name: 'afterStore', context: params }).start();
 
@@ -199,7 +196,10 @@ export class FinderController extends AbstractController {
 				await this.eventManager.fire('afterStore', {
 					controller: this,
 					request: params,
-					response,
+					response: {
+						meta,
+						search,
+					},
 				});
 			} catch (err: any) {
 				if (err?.message == 'cancelled') {

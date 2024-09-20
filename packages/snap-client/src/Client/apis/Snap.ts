@@ -15,7 +15,7 @@ export class SnapAPI extends API {
 		const headerParameters: HTTPHeaders = {};
 		headerParameters['Content-Type'] = 'application/json';
 
-		const response = await this.request(
+		const response = await this.request<MetaResponseModel>(
 			{
 				path: '/api/v1/meta',
 				method: 'POST',
@@ -25,14 +25,14 @@ export class SnapAPI extends API {
 			JSON.stringify(requestParameters)
 		);
 
-		return response as MetaResponseModel;
+		return response;
 	}
 
 	async postSearch(requestParameters: SearchRequestModel): Promise<SearchResponseModel> {
 		const headerParameters: HTTPHeaders = {};
 		headerParameters['Content-Type'] = 'application/json';
 
-		const response = await this.request(
+		const response = await this.request<SearchResponseModel>(
 			{
 				path: '/api/v1/search',
 				method: 'POST',
@@ -42,14 +42,14 @@ export class SnapAPI extends API {
 			JSON.stringify(requestParameters)
 		);
 
-		return response as SearchResponseModel;
+		return response;
 	}
 
 	async postAutocomplete(requestParameters: AutocompleteRequestModel): Promise<AutocompleteResponseModel> {
 		const headerParameters: HTTPHeaders = {};
 		headerParameters['Content-Type'] = 'application/json';
 
-		const response = await this.request(
+		const response = await this.request<AutocompleteResponseModel>(
 			{
 				path: '/api/v1/autocomplete',
 				method: 'POST',
@@ -59,6 +59,6 @@ export class SnapAPI extends API {
 			JSON.stringify(requestParameters)
 		);
 
-		return response as AutocompleteResponseModel;
+		return response;
 	}
 }

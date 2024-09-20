@@ -2,6 +2,7 @@ const rootConfig = require('../../jest.base.config.json');
 module.exports = {
 	...rootConfig,
 	displayName: 'snap-preact',
+	roots: ['<rootDir>/src', '<rootDir>/components/src'],
 	moduleNameMapper: {
 		'^react$': 'preact/compat',
 		'^react-dom/test-utils$': 'preact/test-utils',
@@ -14,5 +15,6 @@ module.exports = {
 		'^preact/test-utils$': '<rootDir>/../../node_modules/preact/test-utils/dist/testUtils.js',
 		'^preact/jsx-runtime$': '<rootDir>/../../node_modules/preact/jsx-runtime/dist/jsxRuntime.js',
 	},
+	setupFilesAfterEnv: ['<rootDir>/components/src/setupTests.ts'],
 	testTimeout: 10000,
 };

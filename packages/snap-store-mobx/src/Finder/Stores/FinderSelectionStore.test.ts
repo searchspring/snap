@@ -1,7 +1,7 @@
 import { UrlManager, UrlTranslator } from '@searchspring/snap-url-manager';
 import { MockData } from '@searchspring/snap-shared';
 
-import { FinderSelectionStore, FinderSelectionStoreData } from './FinderSelectionStore';
+import { FinderSelectionStore } from './FinderSelectionStore';
 import { StorageStore } from '../../Storage/StorageStore';
 import { SearchResponseModel, MetaResponseModel } from '@searchspring/snapi-types';
 
@@ -31,22 +31,26 @@ describe('FinderSelectionStore', () => {
 
 		const storage = new StorageStore();
 
-		let data: SearchResponseModel & { meta: MetaResponseModel },
-			store: FinderSelectionStore,
-			selectionValue: string | undefined,
-			selectionStoreData: FinderSelectionStoreData;
+		let data, store: FinderSelectionStore, selectionValue: string | undefined;
 
 		beforeAll(() => {
 			data = mockData.searchMeta();
-			selectionStoreData = {
-				state: { persisted: false },
-				facets: data.facets!,
-				meta: data.meta,
-				loading: false,
-				storage: storage,
-				selections: [],
-			};
-			store = new FinderSelectionStore(config, services, selectionStoreData);
+			store = new FinderSelectionStore({
+				config,
+				services,
+				stores: {
+					storage,
+				},
+				state: {
+					persisted: false,
+					loading: false,
+				},
+				data: {
+					search: data.search,
+					meta: data.meta,
+					selections: [],
+				},
+			});
 		});
 
 		it('has correct number of selections', () => {
@@ -79,7 +83,22 @@ describe('FinderSelectionStore', () => {
 			// change data to simulate API call due to urlManager change via set().go() invocation
 			data = mockData.searchMeta('hierarchy_selected');
 
-			store = new FinderSelectionStore(config, services, selectionStoreData);
+			store = new FinderSelectionStore({
+				config,
+				services,
+				stores: {
+					storage,
+				},
+				state: {
+					persisted: false,
+					loading: false,
+				},
+				data: {
+					search: data.search,
+					meta: data.meta,
+					selections: [],
+				},
+			});
 
 			store.forEach((selection, index) => {
 				switch (index) {
@@ -153,24 +172,28 @@ describe('FinderSelectionStore', () => {
 			],
 		};
 
-		let data: SearchResponseModel & { meta: MetaResponseModel },
-			store: FinderSelectionStore,
-			storage: StorageStore,
-			selectionValue: string | undefined,
-			selectionStoreData: FinderSelectionStoreData;
+		let data, store: FinderSelectionStore, storage: StorageStore, selectionValue: string | undefined;
 
 		beforeAll(() => {
 			data = mockData.searchMeta('hierarchy');
 			storage = new StorageStore();
-			selectionStoreData = {
-				state: { persisted: false },
-				facets: data.facets!,
-				meta: data.meta,
-				loading: false,
-				storage: storage,
-				selections: [],
-			};
-			store = new FinderSelectionStore(config, services, selectionStoreData);
+
+			store = new FinderSelectionStore({
+				config,
+				services,
+				stores: {
+					storage,
+				},
+				state: {
+					persisted: false,
+					loading: false,
+				},
+				data: {
+					search: data.search,
+					meta: data.meta,
+					selections: [],
+				},
+			});
 		});
 
 		it('is not using levels for this test', () => {
@@ -194,16 +217,22 @@ describe('FinderSelectionStore', () => {
 			// change data to simulate API call due to urlManager change via set().go() invocation
 			data = mockData.searchMeta('hierarchy_selected');
 
-			selectionStoreData = {
-				state: { persisted: false },
-				facets: data.facets!,
-				meta: data.meta,
-				loading: false,
-				storage: storage,
-				selections: [],
-			};
-
-			store = new FinderSelectionStore(config, services, selectionStoreData);
+			store = new FinderSelectionStore({
+				config,
+				services,
+				stores: {
+					storage,
+				},
+				state: {
+					persisted: false,
+					loading: false,
+				},
+				data: {
+					search: data.search,
+					meta: data.meta,
+					selections: [],
+				},
+			});
 
 			expect(store.length).toBe(config.fields.length + 1); // 1 -> 2 selections after selection
 
@@ -214,11 +243,7 @@ describe('FinderSelectionStore', () => {
 	});
 
 	describe('Non-hierarchy', () => {
-		let data: SearchResponseModel & { meta: MetaResponseModel },
-			store: FinderSelectionStore,
-			storage: StorageStore,
-			selectionValue: string | undefined,
-			selectionStoreData: FinderSelectionStoreData;
+		let data, store: FinderSelectionStore, storage: StorageStore, selectionValue: string | undefined;
 
 		const config = {
 			id: 'finder2',
@@ -246,15 +271,22 @@ describe('FinderSelectionStore', () => {
 		beforeAll(() => {
 			data = mockData.searchMeta('non_hierarchy');
 			storage = new StorageStore();
-			selectionStoreData = {
-				state: { persisted: false },
-				facets: data.facets!,
-				meta: data.meta,
-				loading: false,
-				storage: storage,
-				selections: [],
-			};
-			store = new FinderSelectionStore(config, services, selectionStoreData);
+			store = new FinderSelectionStore({
+				config,
+				services,
+				stores: {
+					storage,
+				},
+				state: {
+					persisted: false,
+					loading: false,
+				},
+				data: {
+					search: data.search,
+					meta: data.meta,
+					selections: [],
+				},
+			});
 		});
 
 		it('has correct number of selections', () => {
@@ -291,7 +323,22 @@ describe('FinderSelectionStore', () => {
 
 			data = mockData.searchMeta('non_hierarchy_selected');
 
-			store = new FinderSelectionStore(config, services, selectionStoreData);
+			store = new FinderSelectionStore({
+				config,
+				services,
+				stores: {
+					storage,
+				},
+				state: {
+					persisted: false,
+					loading: false,
+				},
+				data: {
+					search: data.search,
+					meta: data.meta,
+					selections: [],
+				},
+			});
 
 			expect(store[0].selected).toBe(selectionValue);
 

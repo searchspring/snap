@@ -171,7 +171,7 @@ export type RecommendResponseModel = {
 		tag: string;
 	};
 	results: SearchResponseModelResult[];
-}[];
+};
 
 export type ProfileRequestModel = {
 	siteId: string;

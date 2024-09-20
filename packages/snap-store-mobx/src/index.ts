@@ -3,6 +3,7 @@ export { AutocompleteStore } from './Autocomplete/AutocompleteStore';
 export { FinderStore } from './Finder/FinderStore';
 export { SearchStore } from './Search/SearchStore';
 export * from './Search/Stores/';
+export * from './Autocomplete/Stores/';
 export { RecommendationStore } from './Recommendation/RecommendationStore';
 export { CartStore } from './Cart/CartStore';
 export { StorageStore, StorageConfig, StorageType } from './Storage/StorageStore';

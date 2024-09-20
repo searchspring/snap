@@ -12,6 +12,25 @@ import type { AbstractController, RecommendationController, Attachments, Context
 import type { VariantConfig } from '@searchspring/snap-store-mobx';
 import type { Middleware } from '@searchspring/snap-event-manager';
 import type { Target } from '@searchspring/snap-toolbox';
+import type { Snap } from '../Snap';
+
+type RecommendationComponentFunc = () => Promise<any> | any;
+
+export type RecommendationComponentObject = {
+	component: RecommendationComponentFunc;
+	props?: {
+		[name: string]: any;
+	};
+	onTarget: (target: Target, elem: Element | undefined, injectedElem: Element | undefined, controller: RecommendationController) => void;
+};
+
+export type RecommendationInstantiatorConfigSettings = {
+	branch: string;
+	realtime?: boolean;
+	batched?: boolean;
+	limit?: number;
+	variants?: VariantConfig;
+};
 
 export type RecommendationInstantiatorConfig = {
 	mode?: keyof typeof AppMode | AppMode;
@@ -20,15 +39,9 @@ export type RecommendationInstantiatorConfig = {
 		config?: ClientConfig;
 	};
 	components: {
-		[name: string]: () => Promise<any> | any;
+		[name: string]: RecommendationComponentFunc | RecommendationComponentObject;
 	};
-	config: {
-		branch: string;
-		realtime?: boolean;
-		batched?: boolean;
-		limit?: number;
-		variants?: VariantConfig;
-	} & Attachments;
+	config: RecommendationInstantiatorConfigSettings & Attachments;
 	selector?: string;
 	url?: UrlTranslatorConfig;
 	context?: ContextVariables;
@@ -38,6 +51,7 @@ export type RecommendationInstantiatorServices = {
 	client?: Client;
 	logger?: Logger;
 	tracker?: Tracker;
+	snap?: Snap;
 };
 
 type RecommendationProfileCounts = {
@@ -213,7 +227,7 @@ export class RecommendationInstantiator {
 									profileContext.custom = elemContext.custom;
 								}
 
-								readyTheController(this, elem, profileContext, profileCount, originalElem, profileRequestGlobals);
+								readyTheController(this, services || {}, elem, profileContext, profileCount, originalElem, profileRequestGlobals, target);
 							}
 						}
 					);
@@ -233,7 +247,7 @@ export class RecommendationInstantiator {
 						}),
 					};
 
-					readyTheController(this, elem, elemContext, profileCount, originalElem, profileRequestGlobals);
+					readyTheController(this, services || {}, elem, elemContext, profileCount, originalElem, profileRequestGlobals, target);
 				}
 			}
 		);
@@ -254,11 +268,13 @@ export class RecommendationInstantiator {
 
 async function readyTheController(
 	instance: RecommendationInstantiator,
+	services: RecommendationInstantiatorServices,
 	injectedElem: Element | undefined,
 	context: ContextVariables,
 	profileCount: RecommendationProfileCounts,
 	elem: Element | undefined,
-	controllerGlobals: Partial<RecommendRequestModel>
+	controllerGlobals: Partial<RecommendRequestModel>,
+	target: ExtendedRecommendaitonProfileTarget
 ) {
 	const { profile, batchId, cart, tag } = controllerGlobals;
 	const batched = (profile?.batched || controllerGlobals.batched) ?? true;
@@ -346,8 +362,8 @@ async function readyTheController(
 	window.searchspring.controller = window.searchspring.controller || {};
 	window.searchspring.controller[controller.config.id] = controller;
 
-	const profileVars = controller.store.profile.display.templateParameters;
-	const component = controller.store.profile.display.template?.component;
+	const profileVars = controller.store.profile.display?.templateParameters;
+	const component = controller.store.profile.display?.template?.component;
 
 	if (controller.store.error) {
 		//something went wrong
@@ -370,11 +386,29 @@ async function readyTheController(
 		return;
 	}
 
-	const RecommendationsComponent =
-		instance.config.components[component] &&
-		((await instance.config.components[component]()) as React.ElementType<{
-			controller: RecommendationController;
-		}>);
+	let props: Record<string, unknown> = {};
+	let RecommendationsComponent:
+		| undefined
+		| React.ElementType<{
+				controller: RecommendationController;
+				snap?: Snap;
+		  }> = undefined;
+
+	props.className = `ss__recommendation-${component.toLowerCase()}`;
+	injectedElem?.setAttribute('id', `${controllerConfig.id}`);
+	(instance.config.components[component] as RecommendationComponentObject)?.onTarget?.(target, elem, injectedElem, controller);
+
+	if (instance.config.components[component] && typeof instance.config.components[component] == 'function') {
+		RecommendationsComponent = await (instance.config.components[component] as RecommendationComponentFunc)();
+	} else if (instance.config.components[component] && typeof instance.config.components[component] == 'object') {
+		props = (instance.config.components[component] as RecommendationComponentObject).props || {};
+		const importPromises = [];
+		// dynamically import the component
+		importPromises.push((instance.config.components[component] as RecommendationComponentObject).component());
+
+		const importResolutions = await Promise.all(importPromises);
+		RecommendationsComponent = importResolutions[0];
+	}
 
 	if (!RecommendationsComponent) {
 		instance.logger.error(
@@ -384,8 +418,8 @@ async function readyTheController(
 	}
 
 	setTimeout(() => {
-		if (injectedElem) {
-			render(<RecommendationsComponent controller={controller} />, injectedElem);
+		if (injectedElem && RecommendationsComponent) {
+			render(<RecommendationsComponent controller={controller} snap={services?.snap} {...props} />, injectedElem);
 		}
 	});
 }

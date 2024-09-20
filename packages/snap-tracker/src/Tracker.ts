@@ -42,7 +42,6 @@ const LOCALSTORAGE_BEACON_POOL_NAME = 'ssBeaconPool';
 const CART_PRODUCTS = 'ssCartProducts';
 const VIEWED_PRODUCTS = 'ssViewedProducts';
 const MAX_VIEWED_COUNT = 20;
-const MAX_PARENT_LEVELS = 3;
 
 const defaultConfig: TrackerConfig = {
 	id: 'track',
@@ -58,7 +57,7 @@ export class Tracker {
 	private isSending: number | undefined;
 	private doNotTrack: DoNotTrackEntry[];
 
-	private config: TrackerConfig;
+	public config: TrackerConfig;
 	private targeters: DomTargeter[] = [];
 
 	constructor(globals: TrackerGlobals, config?: TrackerConfig) {
@@ -131,82 +130,6 @@ export class Tracker {
 					}
 				})
 			);
-		});
-
-		document.addEventListener('click', (event: Event) => {
-			const updateRecsControllers = (): void => {
-				if (window.searchspring.controller) {
-					Object.keys(window.searchspring.controller).forEach((name) => {
-						const controller = window.searchspring.controller[name];
-						if (controller.type === 'recommendation' && controller.config?.realtime) {
-							controller.search();
-						}
-					});
-				}
-			};
-
-			const getClickAttributes = (event: Event): Record<string, any> => {
-				const attributeList = [
-					`ss-${this.config.id}-cart-add`,
-					`ss-${this.config.id}-cart-remove`,
-					`ss-${this.config.id}-cart-clear`,
-					`ss-${this.config.id}-cart-view`,
-					`ss-${this.config.id}-intellisuggest`,
-					`ss-${this.config.id}-intellisuggest-signature`,
-					`href`,
-				];
-				const attributes: { [key: string]: any } = {};
-				let levels = 0;
-
-				let elem: HTMLElement | null = null;
-				elem = event && (event.target as HTMLElement);
-
-				while (Object.keys(attributes).length == 0 && elem !== null && levels <= MAX_PARENT_LEVELS) {
-					Object.values(elem.attributes).forEach((attr: Attr) => {
-						const attrName = attr.nodeName;
-
-						if (attributeList.indexOf(attrName) != -1) {
-							attributes[attrName] = elem && elem.getAttribute(attrName);
-						}
-					});
-
-					elem = elem.parentElement;
-					levels++;
-				}
-
-				return attributes;
-			};
-
-			const attributes = getClickAttributes(event);
-
-			if (attributes[`ss-${this.config.id}-cart-add`]) {
-				// add skus to cart
-				const skus = attributes[`ss-${this.config.id}-cart-add`].split(',');
-				this.cookies.cart.add(skus);
-				updateRecsControllers();
-			} else if (attributes[`ss-${this.config.id}-cart-remove`]) {
-				// remove skus from cart
-				const skus = attributes[`ss-${this.config.id}-cart-remove`].split(',');
-				this.cookies.cart.remove(skus);
-				updateRecsControllers();
-			} else if (`ss-${this.config.id}-cart-clear` in attributes) {
-				// clear all from cart
-				this.cookies.cart.clear();
-				updateRecsControllers();
-			} else if (`ss-${this.config.id}-cart-view` in attributes) {
-				// update recs
-				updateRecsControllers();
-			} else if (attributes[`ss-${this.config.id}-intellisuggest`] && attributes[`ss-${this.config.id}-intellisuggest-signature`]) {
-				// product click
-				const intellisuggestData = attributes[`ss-${this.config.id}-intellisuggest`];
-				const intellisuggestSignature = attributes[`ss-${this.config.id}-intellisuggest-signature`];
-				const href = attributes['href'];
-				this.track.product.click({
-					intellisuggestData,
-					intellisuggestSignature,
-					href,
-				});
-			}
 		});
 
 		this.sendEvents();

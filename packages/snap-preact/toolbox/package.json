@@ -1,0 +1,8 @@
+{
+	"name": "snap-preact-toolbox",
+	"private": true,
+	"description": "Snap Preact Toolbox Library",
+	"main": "../dist/cjs/toolbox/src/index.js",
+	"module": "../dist/esm/toolbox/src/index.js",
+	"sideEffects": false
+}

@@ -9,10 +9,11 @@ describe('Meta Store', () => {
 	let metaData: MetaResponseModel;
 
 	beforeEach(() => {
-		metaData = mockData.searchMeta().meta;
+		metaData = mockData.meta();
 	});
 
 	it('can construct without metaData', () => {
+		// @ts-ignore - missing meta data
 		const store = new MetaStore();
 		expect(store.data).toEqual({});
 		expect(store.badges.groups.overlay).toStrictEqual({ sections: ['left', 'right'], grid: [] });
@@ -34,7 +35,7 @@ describe('Meta Store', () => {
 	});
 
 	it('can construct given meta data', () => {
-		const store = new MetaStore(metaData);
+		const store = new MetaStore({ data: { meta: metaData } });
 		expect(store.data).toStrictEqual(metaData);
 		expect(store.badges.groups.overlay).toStrictEqual({
 			sections: ['left', 'right'],

@@ -19,7 +19,7 @@ const services = {
 const mockData = new MockData();
 
 describe('Filter Store', () => {
-	let searchData: SearchResponseModel & { meta: MetaResponseModel };
+	let searchData: { meta: MetaResponseModel; search: SearchResponseModel };
 	beforeEach(() => {
 		expect.hasAssertions();
 
@@ -31,21 +31,33 @@ describe('Filter Store', () => {
 	});
 
 	it('returns an empty array when nothing is passed to the constructor', () => {
-		// @ts-ignore
-		const filters = new SearchFilterStore(undefined, undefined, undefined);
+		// @ts-ignore - empty constructor
+		const filters = new SearchFilterStore();
 
 		expect(filters.length).toBe(0);
 	});
 
 	it('returns an empty array when passed empty data', () => {
-		const filters = new SearchFilterStore(services, [], {});
+		const filters = new SearchFilterStore({
+			services,
+			data: {
+				search: {},
+				meta: {},
+			},
+		});
 
 		expect(filters.length).toBe(0);
 	});
 
 	it('will have filter data that matches what was passed in', () => {
-		const filtersInput = searchData.filters;
-		const filters = new SearchFilterStore(services, filtersInput, searchData.meta);
+		const filtersInput = searchData.search.filters;
+		const filters = new SearchFilterStore({
+			services,
+			data: {
+				search: searchData.search,
+				meta: searchData.meta,
+			},
+		});
 
 		// check filter values
 		filters.forEach((filter, index) => {
@@ -75,8 +87,13 @@ describe('Filter Store', () => {
 	});
 
 	it('uses the urlManager service to generate urls on the filters', () => {
-		const filtersInput = searchData.filters;
-		const filters = new SearchFilterStore(services, filtersInput, searchData.meta);
+		const filters = new SearchFilterStore({
+			services,
+			data: {
+				search: searchData.search,
+				meta: searchData.meta,
+			},
+		});
 
 		// check filter values
 		filters.forEach((filter) => {
