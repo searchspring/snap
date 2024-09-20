@@ -7,12 +7,42 @@ import type {
 	MetaResponseModelBadgeTag,
 	SearchResponseModelResultBadges,
 } from '@searchspring/snapi-types';
+
 // Abstract
 export type StoreConfig = {
 	id: string;
 	[any: string]: unknown;
 };
 
+export type SearchStoreConfigSettings = {
+	redirects?: {
+		merchandising?: boolean;
+		singleResult?: boolean;
+	};
+	facets?: FacetStoreConfig & {
+		fields?: {
+			[field: string]: FacetStoreConfig;
+		};
+	};
+	infinite?: {
+		backfill?: number;
+	};
+	restorePosition?: {
+		enabled: boolean;
+		onPageShow?: boolean;
+	};
+	variants?: VariantConfig;
+	history?: {
+		url?: string;
+		max?: number;
+	};
+	pagination?: {
+		pageSizeOptions?: {
+			label: string;
+			value: number;
+		}[];
+	};
+};
 export type VariantConfigFilterTypes = 'first' | 'unaltered';
 
 export type VariantConfig = {
@@ -44,35 +74,7 @@ export type VariantOptionConfigMappings = {
 // Search Config
 export type SearchStoreConfig = StoreConfig & {
 	globals?: Partial<SearchRequestModel>;
-	settings?: {
-		redirects?: {
-			merchandising?: boolean;
-			singleResult?: boolean;
-		};
-		facets?: FacetStoreConfig & {
-			fields?: {
-				[field: string]: FacetStoreConfig;
-			};
-		};
-		infinite?: {
-			backfill?: number;
-		};
-		restorePosition?: {
-			enabled: boolean;
-			onPageShow?: boolean;
-		};
-		variants?: VariantConfig;
-		history?: {
-			url?: string;
-			max?: number;
-		};
-		pagination?: {
-			pageSizeOptions?: {
-				label: string;
-				value: number;
-			}[];
-		};
-	};
+	settings?: SearchStoreConfigSettings;
 };
 
 export type FacetStoreConfig = {
@@ -163,10 +165,6 @@ export type SelectedSelection = {
 	selected: string;
 	data: SearchResponseModelFacetValueAllOfValues[];
 	facet: any;
-};
-
-export type FinderStoreState = {
-	persisted: boolean;
 };
 
 export type ResultBadge = MetaResponseModelBadgeTag & SearchResponseModelResultBadges;

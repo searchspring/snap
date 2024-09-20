@@ -1,0 +1,13 @@
+<!-- .storybook/manager-head.html -->
+
+<!-- styling used to hide the toolbar on "docs" pages -->
+<style>
+	[role='main']:nth-child(5) div:has(+ [offset]) {
+		display: none;
+	}
+
+	[role='main']:nth-child(5) [offset] {
+		top: 0;
+		height: 100%;
+	}
+</style>

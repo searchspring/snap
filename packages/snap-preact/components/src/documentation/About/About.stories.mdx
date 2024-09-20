@@ -1,0 +1,40 @@
+import { Meta, Markdown } from '@storybook/blocks';
+import Readme from '../About/About.md';
+import { highlightedCode } from '../../utilities';
+
+<Meta title="Documentation/About" />
+
+<style>
+	{`
+	.header {
+		display: flex;
+		align-items: center;
+	}
+
+	.header .subtitle {
+		text-transform: uppercase;
+		color: #00cee1;
+	}
+
+	.header img {
+		width: 300px;
+		margin-right: 20px;
+	}
+	`}
+</style>
+
+<div class="header">
+	<span class="subtitle">SNAP PREACT COMPONENTS</span>
+</div>
+
+---
+
+<Markdown
+	options={{
+		overrides: {
+			code: highlightedCode,
+		},
+	}}
+>
+	{Readme}
+</Markdown>

@@ -29,36 +29,44 @@ describe('Facet store', () => {
 	it('uses the search store FacetStore', () => {
 		const searchData = mockData.autocompleteMeta('ac.facetStore.test');
 		const storageStore = new StorageStore();
-		const rootState = new AutocompleteStateStore(services);
-		const facetStore = new AutocompleteFacetStore(
-			autocompleteConfig,
+		const rootState = new AutocompleteStateStore({ services });
+		const facetStore = new AutocompleteFacetStore({
+			config: autocompleteConfig,
 			services,
-			storageStore,
-			searchData.facets!,
-			searchData.pagination!,
-			searchData.meta,
-			rootState,
-			searchData.merchandising || {}
-		);
+			stores: {
+				storage: storageStore,
+			},
+			state: {
+				autocomplete: rootState,
+			},
+			data: {
+				search: searchData.search,
+				meta: searchData.meta,
+			},
+		});
 
-		expect(facetStore).toHaveLength(searchData.facets?.length!);
+		expect(facetStore).toHaveLength(searchData.search.facets?.length!);
 	});
 
 	it('adds a preview function to each facet value', () => {
 		const searchData = mockData.autocompleteMeta('ac.facetStore.test');
 		const storageStore = new StorageStore();
-		const rootState = new AutocompleteStateStore(services);
+		const rootState = new AutocompleteStateStore({ services });
 
-		const facetStore = new AutocompleteFacetStore(
-			autocompleteConfig,
+		const facetStore = new AutocompleteFacetStore({
+			config: autocompleteConfig,
 			services,
-			storageStore,
-			searchData.facets!,
-			searchData.pagination!,
-			searchData.meta,
-			rootState,
-			searchData.merchandising || {}
-		);
+			stores: {
+				storage: storageStore,
+			},
+			state: {
+				autocomplete: rootState,
+			},
+			data: {
+				search: searchData.search,
+				meta: searchData.meta,
+			},
+		});
 
 		expect(rootState.locks.terms.locked).toBe(false);
 

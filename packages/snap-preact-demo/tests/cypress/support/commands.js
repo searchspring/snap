@@ -63,6 +63,29 @@ Cypress.Commands.add('snapController', (controllerId = 'search', options) => {
 	});
 });
 
+Cypress.Commands.add('snapController', (controllerId = 'search', options) => {
+	const defaultOptions = {
+		delay: 300,
+	};
+
+	const mergedOptions = { ...defaultOptions, ...options };
+	return cy.wait(mergedOptions.delay).then(() => {
+		return cy.window().then((window) => {
+			return new Cypress.Promise((resolve) => {
+				const checkTimeout = 150;
+				const interval = setInterval(() => {
+					if (window.searchspring?.controller && window.searchspring.controller[controllerId]) {
+						if (!window.searchspring.controller[controllerId].store.loading) {
+							clearInterval(interval);
+							resolve(window.searchspring.controller[controllerId]);
+						}
+					}
+				}, checkTimeout);
+			});
+		});
+	});
+});
+
 Cypress.Commands.add('waitForBundle', () => {
 	return cy.window().then((window) => {
 		return new Cypress.Promise((resolve) => {

@@ -3,8 +3,6 @@ import deepmerge from 'deepmerge';
 import { isPlainObject } from 'is-plain-object';
 import type {
 	SearchStoreConfig,
-	StoreServices,
-	StoreConfigs,
 	ResultBadge,
 	VariantOptionConfig,
 	VariantConfig,
@@ -13,50 +11,60 @@ import type {
 } from '../../types';
 import type {
 	SearchResponseModelResult,
-	SearchResponseModelPagination,
-	SearchResponseModelMerchandising,
 	SearchResponseModelResultMappings,
 	SearchResponseModelMerchandisingContentInline,
 	SearchResponseModelMerchandisingContentConfig,
+	SearchResponseModel,
 	MetaResponseModel,
 } from '@searchspring/snapi-types';
 
 const VARIANT_ATTRIBUTE = 'ss-variant-option';
 const VARIANT_ATTRIBUTE_SELECTED = 'ss-variant-option-selected';
 
+type SearchResultStoreConfig = {
+	config: SearchStoreConfig | AutocompleteStoreConfig | RecommendationStoreConfig;
+	state: {
+		loaded: boolean;
+	};
+	data: {
+		search: SearchResponseModel;
+		meta: MetaResponseModel;
+	};
+};
+
 export class SearchResultStore extends Array<Product | Banner> {
 	static get [Symbol.species](): ArrayConstructor {
 		return Array;
 	}
 
-	constructor(
-		config: StoreConfigs,
-		services: StoreServices,
-		metaData: MetaResponseModel,
-		resultData?: SearchResponseModelResult[],
-		paginationData?: SearchResponseModelPagination,
-		merchData?: SearchResponseModelMerchandising,
-		loaded?: boolean
-	) {
-		let results: (Product | Banner)[] = (resultData || []).map((result) => {
-			return new Product(services, result, metaData, config);
+	constructor(params: SearchResultStoreConfig) {
+		const { config, data, state } = params || {};
+		const { search, meta } = data || {};
+		const { results, merchandising, pagination } = search || {};
+		const { loaded } = state || {};
+
+		let resultsArr: (Product | Banner)[] = (results || []).map((result) => {
+			return new Product({
+				config,
+				data: { result, meta },
+			});
 		});
 
-		const variantConfig = (config as SearchStoreConfig | AutocompleteStoreConfig | RecommendationStoreConfig)?.settings?.variants;
+		const variantConfig = config?.settings?.variants;
 
 		// preselected variant options
 		if (variantConfig?.realtime?.enabled) {
 			// attach click events - ONLY happens once (known limitation)
-			if (!loaded && results.length) {
+			if (!loaded && resultsArr.length) {
 				document.querySelectorAll(`[${VARIANT_ATTRIBUTE}]`).forEach((elem) => {
 					if (variantConfig?.field && !variantConfig?.realtime?.enabled === false) {
-						elem.addEventListener('click', () => variantOptionClick(elem, variantConfig, results));
+						elem.addEventListener('click', () => variantOptionClick(elem, variantConfig, resultsArr));
 					}
 				});
 			}
 
 			// check for attributes for preselection
-			if (results.length) {
+			if (resultsArr.length) {
 				if (variantConfig?.field && !variantConfig?.realtime?.enabled === false) {
 					const options: Record<string, string[]> = {};
 					// grab values from elements on the page to form preselected elements
@@ -70,27 +78,35 @@ export class SearchResultStore extends Array<Product | Banner> {
 						}
 					});
 
-					makeVariantSelections(variantConfig, options, results);
+					makeVariantSelections(variantConfig, options, resultsArr);
 				}
 			}
 		}
 
-		if (merchData?.content?.inline) {
-			const banners = merchData.content.inline
+		if (merchandising?.content?.inline) {
+			const banners = merchandising.content.inline
 				.sort(function (a, b) {
 					return a.config!.position!.index! - b.config!.position!.index!;
 				})
 				.map((banner) => {
-					return new Banner(services, banner);
+					return new Banner({
+						data: { banner },
+					});
 				});
 
-			if (banners && paginationData?.totalResults) {
-				results = addBannersToResults(config, results, banners, paginationData);
+			if (banners && pagination?.totalResults) {
+				resultsArr = addBannersToResults(params, resultsArr, banners);
 			}
 		}
-		super(...results);
+		super(...resultsArr);
 	}
 }
+
+type BannerData = {
+	data: {
+		banner: SearchResponseModelMerchandisingContentInline;
+	};
+};
 
 export class Banner {
 	public type = 'banner';
@@ -103,7 +119,8 @@ export class Banner {
 	public config: SearchResponseModelMerchandisingContentConfig;
 	public value: string;
 
-	constructor(services: StoreServices, banner: SearchResponseModelMerchandisingContentInline) {
+	constructor(bannerData: BannerData) {
+		const { banner } = bannerData?.data || {};
 		this.id = 'ss-ib-' + banner.config!.position!.index;
 		this.config = banner.config!;
 		this.value = banner.value!;
@@ -140,6 +157,13 @@ type ProductMinimal = {
 	mappings: SearchResponseModelResultMappings;
 };
 
+type ProductData = {
+	config: SearchStoreConfig | AutocompleteStoreConfig | RecommendationStoreConfig;
+	data: {
+		result: SearchResponseModelResult;
+		meta: MetaResponseModel;
+	};
+};
 export class Product {
 	public type = 'product';
 	public id: string;
@@ -155,31 +179,49 @@ export class Product {
 	public mask = new ProductMask();
 	public variants?: Variants;
 
-	constructor(services: StoreServices, result: SearchResponseModelResult, metaData: MetaResponseModel, config?: StoreConfigs) {
+	constructor(productData: ProductData) {
+		const { config } = productData || {};
+		const { result, meta } = productData?.data || {};
 		this.id = result.id!;
 		this.attributes = result.attributes!;
+
 		this.mappings = result.mappings!;
 
-		this.badges = new Badges(result, metaData);
+		this.badges = new Badges({
+			data: {
+				meta,
+				result,
+			},
+		});
 
-		const variantsField = (config as SearchStoreConfig)?.settings?.variants?.field;
+		const variantsField = config?.settings?.variants?.field;
 		if (config && variantsField && this.attributes && this.attributes[variantsField]) {
 			try {
 				// parse the field (JSON)
 				const parsedVariants: VariantData[] = JSON.parse(this.attributes[variantsField] as string);
 
-				this.variants = new Variants(parsedVariants, this.mask, (config as SearchStoreConfig)?.settings?.variants);
+				this.variants = new Variants({
+					config: config.settings?.variants,
+					data: {
+						mask: this.mask,
+						variants: parsedVariants,
+					},
+				});
 			} catch (err) {
 				// failed to parse the variant JSON
 				console.error(err, `Invalid variant JSON for product id: ${result.id}`);
 			}
 		}
 
-		if (result?.children?.length) {
+		if (result.children?.length) {
 			this.children = result.children.map((variant, index) => {
-				return new Child(services, {
-					id: `${result.id}-${index}`,
-					...variant,
+				return new Child({
+					data: {
+						result: {
+							id: `${result.id}-${index}`,
+							...variant,
+						},
+					},
 				});
 			});
 		}
@@ -208,18 +250,27 @@ export class Product {
 	}
 }
 
+type BadgesData = {
+	data: {
+		meta: MetaResponseModel;
+		result: SearchResponseModelResult;
+	};
+};
+
 export class Badges {
 	public all: ResultBadge[] = [];
 
-	constructor(result: SearchResponseModelResult, metaData: MetaResponseModel) {
+	constructor(badgesData: BadgesData) {
+		const { data } = badgesData || {};
+		const { meta, result } = data || {};
 		this.all = (result.badges || [])
 			.filter((badge) => {
 				// remove badges that are not in the meta or are disabled
-				return !!(badge?.tag && metaData?.badges?.tags && metaData?.badges?.tags[badge.tag] && metaData?.badges?.tags[badge.tag].enabled);
+				return !!(badge?.tag && meta.badges?.tags && meta.badges?.tags[badge.tag] && meta.badges?.tags[badge.tag].enabled);
 			})
 			.map((badge) => {
 				// merge badge with badge meta data
-				const metaBadgeData = metaData?.badges?.tags?.[badge.tag]!;
+				const metaBadgeData = meta.badges?.tags?.[badge.tag]!;
 
 				return {
 					...badge,
@@ -295,6 +346,14 @@ export class ProductMask {
 	}
 }
 
+type VariantsData = {
+	config?: VariantConfig;
+	data: {
+		mask: ProductMask;
+		variants: VariantData[];
+	};
+};
+
 export class Variants {
 	public active?: Variant;
 	public data: Variant[] = [];
@@ -302,7 +361,9 @@ export class Variants {
 	public setActive: (variant: Variant) => void;
 	private config?: VariantConfig;
 
-	constructor(variantData: VariantData[], mask: ProductMask, config?: VariantConfig) {
+	constructor(variantData: VariantsData) {
+		const { config, data } = variantData || {};
+		const { variants, mask } = data || {};
 		// setting function in constructor to prevent exposing mask as class property
 		this.setActive = (variant: Variant) => {
 			this.active = variant;
@@ -313,7 +374,7 @@ export class Variants {
 			this.config = config;
 		}
 
-		this.update(variantData, config);
+		this.update(variants, config);
 	}
 
 	public update(variantData: VariantData[], config = this.config) {
@@ -340,7 +401,9 @@ export class Variants {
 						}
 					});
 
-					return new Variant(variant);
+					return new Variant({
+						data: { variant },
+					});
 				});
 
 			//need to reset this.selections first
@@ -348,7 +411,15 @@ export class Variants {
 
 			options.map((option) => {
 				const variantOptionConfig = this.config?.options && this.config.options[option];
-				this.selections.push(new VariantSelection(this, option, variantOptionConfig));
+				this.selections.push(
+					new VariantSelection({
+						config: variantOptionConfig,
+						data: {
+							variants: this,
+							selectorField: option,
+						},
+					})
+				);
 			});
 
 			const preselectedOptions: Record<string, string[]> = {};
@@ -458,6 +529,13 @@ export type VariantSelectionValue = {
 	available?: boolean;
 };
 
+type VariantSelectionData = {
+	config?: VariantOptionConfig;
+	data: {
+		variants: Variants;
+		selectorField: string;
+	};
+};
 export class VariantSelection {
 	public field: string;
 	public label: string;
@@ -467,10 +545,12 @@ export class VariantSelection {
 	private config: VariantOptionConfig;
 	private variantsUpdate: () => void;
 
-	constructor(variants: Variants, selectorField: string, variantConfig?: VariantOptionConfig) {
+	constructor(variantSelectionData: VariantSelectionData) {
+		const { data, config } = variantSelectionData || {};
+		const { variants, selectorField } = data || {};
 		this.field = selectorField;
-		this.label = variantConfig?.label || selectorField;
-		this.config = variantConfig || {};
+		this.label = config?.label || selectorField;
+		this.config = config || {};
 
 		// needed to prevent attaching variants as class property
 		this.variantsUpdate = () => variants.refineSelections(this);
@@ -585,7 +665,7 @@ export class VariantSelection {
 		this.values.forEach((val) => (val.available = false));
 	}
 
-	public select(value: string, internalSelection = false) {
+	public select(value: string | number, internalSelection = false) {
 		const valueExist = this.values.find((val) => val.value == value);
 		if (valueExist) {
 			if (!internalSelection) {
@@ -610,10 +690,12 @@ export class Variant {
 	};
 	public custom = {};
 
-	constructor(variantData: VariantData) {
-		this.attributes = variantData.attributes;
-		this.mappings = variantData.mappings;
-		this.options = variantData.options;
+	constructor(variantData: { data: { variant: VariantData } }) {
+		const { data } = variantData || {};
+		const { variant } = data || {};
+		this.attributes = variant.attributes;
+		this.mappings = variant.mappings;
+		this.options = variant.options;
 		this.available = (this.attributes.available as boolean) || false;
 
 		makeObservable(this, {
@@ -625,13 +707,19 @@ export class Variant {
 	}
 }
 
+type ChildData = {
+	data: {
+		result: SearchResponseModelResult;
+	};
+};
 class Child {
 	public type = 'child';
 	public id: string;
 	public attributes: Record<string, unknown> = {};
 	public custom = {};
 
-	constructor(services: StoreServices, result: SearchResponseModelResult) {
+	constructor(childData: ChildData) {
+		const { result } = childData?.data || {};
 		this.id = result.id!;
 		this.attributes = result.attributes!;
 
@@ -643,10 +731,14 @@ class Child {
 	}
 }
 
-function addBannersToResults(config: StoreConfigs, results: (Product | Banner)[], banners: Banner[], paginationData: SearchResponseModelPagination) {
+function addBannersToResults(params: SearchResultStoreConfig, results: (Product | Banner)[], banners: Banner[]) {
+	const { config, data } = params || {};
+	const { search } = data || {};
+	const { pagination } = search || {};
+
 	const productCount = results.length;
-	let minIndex = paginationData.pageSize! * (paginationData.page! - 1);
-	const maxIndex = minIndex + paginationData.pageSize!;
+	let minIndex = pagination?.pageSize! * (pagination?.page! - 1);
+	const maxIndex = minIndex + pagination?.pageSize!;
 
 	if ((config as SearchStoreConfig)?.settings?.infinite) {
 		minIndex = 0;
@@ -656,7 +748,7 @@ function addBannersToResults(config: StoreConfigs, results: (Product | Banner)[]
 		.reduce((adding, banner) => {
 			const resultCount = productCount + adding.length;
 
-			if (banner.config.position!.index! >= minIndex && (banner.config.position!.index! < maxIndex || resultCount < paginationData.pageSize!)) {
+			if (banner.config.position!.index! >= minIndex && (banner.config.position!.index! < maxIndex || resultCount < pagination?.pageSize!)) {
 				adding.push(banner);
 			}
 

@@ -23,12 +23,16 @@ const autocompleteConfig = {
 };
 
 describe('Autocomplete Store', () => {
-	let searchData: AutocompleteResponseModel & {
-		meta: MetaResponseModel & MetaResponseModelFacetDefaults;
+	let searchData: {
+		meta: MetaResponseModel;
+		search: AutocompleteResponseModel;
 	};
 
 	beforeEach(() => {
-		searchData = mockData.autocompleteMeta();
+		searchData = {
+			search: mockData.autocomplete(),
+			meta: mockData.meta(),
+		};
 	});
 
 	it('links the controller and controller urlManager to state', () => {
@@ -43,7 +47,7 @@ describe('Autocomplete Store', () => {
 		expect(autocompleteStore.loading).toBe(false);
 
 		expect(autocompleteStore.meta).toBeDefined();
-		expect(autocompleteStore.meta.data).toStrictEqual({});
+		expect(autocompleteStore.meta?.data).toStrictEqual({});
 
 		expect(autocompleteStore.terms).toBeDefined();
 		expect(autocompleteStore.terms).toStrictEqual([]);
@@ -82,23 +86,23 @@ describe('Autocomplete Store', () => {
 		autocompleteStore.update(searchData);
 
 		expect(autocompleteStore.meta).toBeDefined();
-		expect(autocompleteStore.meta.data).toStrictEqual(searchData.meta);
+		expect(autocompleteStore.meta?.data).toStrictEqual(searchData.meta);
 
 		expect(autocompleteStore.search).toBeDefined();
 		expect(autocompleteStore.search?.query).toBeDefined();
-		expect(autocompleteStore.search?.query?.string).toEqual(searchData.autocomplete?.query);
+		expect(autocompleteStore.search?.query?.string).toEqual(searchData.search.autocomplete?.query);
 		expect(autocompleteStore.search?.originalQuery).toBeUndefined();
 
 		expect(autocompleteStore.merchandising).toBeDefined();
-		expect(autocompleteStore.merchandising).toEqual(searchData.merchandising);
+		expect(autocompleteStore.merchandising).toEqual(searchData.search.merchandising);
 
-		expect(autocompleteStore.facets).toHaveLength(searchData?.facets?.length!);
+		expect(autocompleteStore.facets).toHaveLength(searchData?.search.facets?.length!);
 
 		expect(autocompleteStore.filters).toHaveLength(0);
 
-		expect(autocompleteStore.results).toHaveLength(searchData?.results?.length!);
+		expect(autocompleteStore.results).toHaveLength(searchData?.search.results?.length!);
 
-		expect(autocompleteStore.pagination?.totalResults).toBe(searchData.pagination?.totalResults);
+		expect(autocompleteStore.pagination?.totalResults).toBe(searchData.search.pagination?.totalResults);
 
 		expect(autocompleteStore.sorting?.options).toHaveLength(searchData.meta.sortOptions?.length!);
 

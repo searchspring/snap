@@ -1,8 +1,17 @@
 import { observable, makeObservable } from 'mobx';
 
+import { escapeHTML } from '@searchspring/snap-toolbox';
+
 import type { UrlManager } from '@searchspring/snap-url-manager';
 import type { StoreServices } from '../../types';
-import type { SearchResponseModelSearch, SearchResponseModelSearchMatchTypeEnum } from '@searchspring/snapi-types';
+import type { SearchResponseModel, SearchResponseModelSearchMatchTypeEnum } from '@searchspring/snapi-types';
+
+type SearchQueryStoreConfig = {
+	services: StoreServices;
+	data: {
+		search: SearchResponseModel;
+	};
+};
 
 export class SearchQueryStore {
 	public query?: Query;
@@ -10,7 +19,9 @@ export class SearchQueryStore {
 	public originalQuery?: Query;
 	public matchType?: SearchResponseModelSearchMatchTypeEnum;
 
-	constructor(services: StoreServices, search: SearchResponseModelSearch) {
+	constructor(params: SearchQueryStoreConfig) {
+		const { services, data } = params || {};
+		const { search } = data.search || {};
 		const observables: Observables = {};
 
 		if (search?.query) {
@@ -49,7 +60,7 @@ export class Query {
 	public url: UrlManager;
 
 	constructor(services: StoreServices, query: string) {
-		this.string = query;
+		this.string = escapeHTML(query);
 
 		this.url = services?.urlManager?.remove('page').remove('filter').set('query', this.string);
 

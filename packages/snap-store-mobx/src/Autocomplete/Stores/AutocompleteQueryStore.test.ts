@@ -21,22 +21,34 @@ describe('AutocompleteQueryStore store', () => {
 	it('contains search', () => {
 		const searchData = mockData.autocompleteMeta();
 
-		const queryStore = new AutocompleteQueryStore(services, searchData.autocomplete!, searchData.search!, config);
+		const queryStore = new AutocompleteQueryStore({
+			config,
+			services,
+			data: {
+				autocomplete: searchData.search,
+			},
+		});
 		expect(queryStore).toBeDefined();
 		expect(queryStore.query).toBeDefined();
-		expect(queryStore.query?.string).toEqual(searchData.autocomplete?.query);
+		expect(queryStore.query?.string).toEqual(searchData.search.autocomplete?.query);
 		expect(queryStore.originalQuery).toBeUndefined();
 	});
 
 	it('contains correctedQuery in search when corrected', () => {
 		const searchData = mockData.autocompleteMeta('corrected');
 
-		const queryStore = new AutocompleteQueryStore(services, searchData.autocomplete!, searchData.search!, config);
+		const queryStore = new AutocompleteQueryStore({
+			config,
+			services,
+			data: {
+				autocomplete: searchData.search,
+			},
+		});
 		expect(queryStore).toBeDefined();
 		expect(queryStore.query).toBeDefined();
-		expect(queryStore.query?.string).toStrictEqual(searchData.search?.query);
+		expect(queryStore.query?.string).toStrictEqual(searchData.search.search?.query);
 		expect(queryStore.correctedQuery).toBeDefined();
-		expect(queryStore.correctedQuery?.string).toStrictEqual(searchData.autocomplete?.correctedQuery);
+		expect(queryStore.correctedQuery?.string).toStrictEqual(searchData.search.autocomplete?.correctedQuery);
 	});
 
 	it('contains originalQuery in search when corrected without integratedSpellCorrection', () => {
@@ -44,11 +56,17 @@ describe('AutocompleteQueryStore store', () => {
 
 		config.settings.integratedSpellCorrection = false;
 
-		const queryStore = new AutocompleteQueryStore(services, searchData.autocomplete!, searchData.search!, config);
+		const queryStore = new AutocompleteQueryStore({
+			config,
+			services,
+			data: {
+				autocomplete: searchData.search,
+			},
+		});
 		expect(queryStore).toBeDefined();
 		expect(queryStore.query).toBeDefined();
-		expect(queryStore.query?.string).toStrictEqual(searchData.search?.query);
+		expect(queryStore.query?.string).toStrictEqual(searchData.search.search?.query);
 		expect(queryStore.originalQuery).toBeDefined();
-		expect(queryStore.originalQuery?.string).toStrictEqual(searchData.autocomplete?.query);
+		expect(queryStore.originalQuery?.string).toStrictEqual(searchData.search.autocomplete?.query);
 	});
 });

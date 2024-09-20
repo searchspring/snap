@@ -1,4 +1,4 @@
-import { htmlUnescape } from '../utils/htmlUnescape';
+import { unescapeHTML } from '@searchspring/snap-toolbox';
 
 import {
 	SearchRequestModel,
@@ -462,11 +462,11 @@ function decodeProperty(encoded: string | string[] | SearchResponseModelResultBa
 	if (Array.isArray(encoded)) {
 		return encoded.map((item) => {
 			if (typeof item === 'string') {
-				return htmlUnescape(String(item));
+				return unescapeHTML(String(item));
 			}
 			return item;
 		});
 	} else {
-		return htmlUnescape(String(encoded));
+		return unescapeHTML(String(encoded));
 	}
 }
