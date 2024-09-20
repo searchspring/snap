@@ -57,18 +57,5 @@ jobs:
       - name: Publish packages
         run: npm run publish
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Configure AWS credentials
-        uses: aws-actions/configure-aws-credentials@v1
-        with:
-          aws-access-key-id: ${{ secrets.SNAPFU_AWS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.SNAPFU_AWS_SECRET_ACCESS_KEY }}
-          aws-region: us-east-1
-
-      - name: Generate Metrics Files
-        run: npm run build:metrics
-
-      - name: Upload Metrics Files to S3
-        run: aws s3 sync --region us-east-1 ./metrics/data s3://datawarehouse-stage/team-metrics-import/
+          NODE_AUTH_TOKEN: ${{ secrets.MACHINE_001 }}
+          GH_TOKEN: ${{ secrets.MACHINE_001 }}
