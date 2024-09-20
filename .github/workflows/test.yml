@@ -26,6 +26,8 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: 20
+          registry-url: 'https://npm.pkg.github.com'
+          scope: '@searchspring'
 
       - name: Cache node modules
         uses: actions/cache@v2
@@ -42,6 +44,8 @@ jobs:
 
       - name: Install packages
         run: npm ci
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Build
         run: npm run build
