@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.1.0](https://github.com/searchspring/snap/compare/v0.60.1...v1.1.0) (2024-09-20)
+
+### Bug Fixes
+
+- improve template typing, refactor template store config ([e5f78ea](https://github.com/searchspring/snap/commit/e5f78eac3bf951e95f8dc1599dc2a43bccbab2d1))
+
+### Features
+
+- layout Selector & general polishing ([dc56c5c](https://github.com/searchspring/snap/commit/dc56c5cf1f879254d1258488865a4161f94c56f4))
+- **preact-components-ss-lang:** adding foundation for multi language support to preact components ([4dce617](https://github.com/searchspring/snap/commit/4dce617ec14fb6897d66278b90b5cc17e97665bd))
+- **preact-components/storybook:** updating storybook to latest version - build stable ([43c598d](https://github.com/searchspring/snap/commit/43c598d0e4d11d76364ff2775ecdcabe489023a8))
+- **preact-components:** making progress toward layout templating support ([92c2ce6](https://github.com/searchspring/snap/commit/92c2ce6b207dcb1e922674d55e289354b71612da))
+
 ## [0.60.1](https://github.com/searchspring/snap/compare/v0.60.0...v0.60.1) (2024-09-12)
 
 **Note:** Version bump only for package @searchspring/snap-store-mobx

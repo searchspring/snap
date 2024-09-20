@@ -3,6 +3,50 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.1.0](https://github.com/searchspring/snap/compare/v0.60.1...v1.1.0) (2024-09-20)
+
+### Bug Fixes
+
+- add lang to layoutselector ([9f54848](https://github.com/searchspring/snap/commit/9f54848591413c9ef70c06de1357536a1400d7b7))
+- add result card to template editor ([9949159](https://github.com/searchspring/snap/commit/99491592c5d33e3caabe61b4488faaae064b1c3c))
+- bocachica theme polish ([88d3073](https://github.com/searchspring/snap/commit/88d3073ee30b9e64ec9377940e07b82d7d9221dd))
+- color picker single display, broken template selection ([f446710](https://github.com/searchspring/snap/commit/f4467109e07d13e06c3eaffdb5aeb73fe152dd64))
+- improve template typing, refactor template store config ([e5f78ea](https://github.com/searchspring/snap/commit/e5f78eac3bf951e95f8dc1599dc2a43bccbab2d1))
+- **loadmore:** add missing conditional check to loadingIcon ([06fd5db](https://github.com/searchspring/snap/commit/06fd5db1c432c999da550c59c92a7b2079879a71))
+- misc fixes during pr group review ([f26fd1c](https://github.com/searchspring/snap/commit/f26fd1cf23d6e3f202ce08c9e8851b1116627832))
+- pr feedback ([8133e6d](https://github.com/searchspring/snap/commit/8133e6d025b860283e03c2271283dd6adfd4b721))
+- **preact/layout:** fixing bug with breakpoints ([7f9d405](https://github.com/searchspring/snap/commit/7f9d405a575f392c614dcc0b2129be7e53f2c4ca))
+- **preact/templates:** misc fixes ([d9aae9f](https://github.com/searchspring/snap/commit/d9aae9f8997c455c53c274f5d3c85e5e244b825b))
+- **preact:** corrected an issue with HorizontalSearch import ([b7312cc](https://github.com/searchspring/snap/commit/b7312cc1430ce13e6efb3d7129a5f6be10b8beef))
+- recommendationEmail storybook ([3ec48ea](https://github.com/searchspring/snap/commit/3ec48ea0444e1e4d17208f4e93f680377e1adc2d))
+- theme global style support ([b4a4c0d](https://github.com/searchspring/snap/commit/b4a4c0d057a817d5fb9d731b4b36b737794ab3a8))
+- theme mergeProps ([8c582e9](https://github.com/searchspring/snap/commit/8c582e9fa0ae03bf01d88f89556654ceebd85a6b))
+- themeStore variable.breakpoints undefined in theme due to mobx observable obj ([32e6400](https://github.com/searchspring/snap/commit/32e6400ec7e68fb0556852c903e3c25279097967))
+
+### Features
+
+- add initial theme with default styleScripts for each atom component ([eb38754](https://github.com/searchspring/snap/commit/eb387547bad845f0d59485954ecffa20fb48f9df))
+- add LoadMore component to Toolbar component ([9a01659](https://github.com/searchspring/snap/commit/9a016594302103a515698e3dfa3dda62750e6293))
+- add onTarget to template recommendations config ([5ae8c21](https://github.com/searchspring/snap/commit/5ae8c212e64ecde3605a50ff9febbf587a8e5949))
+- add RecommendationEmail component ([422f110](https://github.com/searchspring/snap/commit/422f110519214d4d887452c1da81644c1c802217))
+- add ss-name to components and assign names ([b111352](https://github.com/searchspring/snap/commit/b11135288a58d5a7704460cd25fed57da09f327c))
+- add theme styleScripts for each molecule component ([dc0f429](https://github.com/searchspring/snap/commit/dc0f4296721f1845dcf81b73580a82bee4b73c6d))
+- add theme switch functionality ([b351fcf](https://github.com/searchspring/snap/commit/b351fcf1d12947d9659ce8d312c7e9636dbfbcd2))
+- cascading component props ([5c4d061](https://github.com/searchspring/snap/commit/5c4d06198e301629f9cb7bf7179de5f83e218642))
+- layout Selector & general polishing ([dc56c5c](https://github.com/searchspring/snap/commit/dc56c5cf1f879254d1258488865a4161f94c56f4))
+- make snap available to all components, add recommendations to noresults & autocomplete ([3f385d0](https://github.com/searchspring/snap/commit/3f385d0df8aa4bc3195355a307870b0f0146e77d))
+- **preact-components-recommendationlist:** adding new recommendationList component ([6d1a071](https://github.com/searchspring/snap/commit/6d1a071ded1545815368c9963322e913a19d5433))
+- **preact-components-ss-lang:** adding foundation for multi language support to preact components ([4dce617](https://github.com/searchspring/snap/commit/4dce617ec14fb6897d66278b90b5cc17e97665bd))
+- **preact-components/storybook:** updating storybook to latest version - build stable ([43c598d](https://github.com/searchspring/snap/commit/43c598d0e4d11d76364ff2775ecdcabe489023a8))
+- **preact-templates:** added ability to use breakpoints in theme ([bd74136](https://github.com/searchspring/snap/commit/bd741364fcbd7ddb85ac908c952b54343ebd85e2))
+- **preact/templates:** adding support of ResultComponent usage in templates (alternative to layout) ([86819a6](https://github.com/searchspring/snap/commit/86819a6a9ef5a39092b9131b8a01667ef356d051))
+- **preact/templates:** adding translation layer for language translations ([052babc](https://github.com/searchspring/snap/commit/052babc8cd913a4ec4e4c8cb8ef986b0b4f00cad))
+- responsive themestore and breakpoint props ([d4faf3a](https://github.com/searchspring/snap/commit/d4faf3acdd2703b0225d4784c078ada967c64527))
+- separate recommendation types ([4a03491](https://github.com/searchspring/snap/commit/4a03491766fd3dbd3eeddf8d91ed4572bd4ae6bf))
+- **snap-layout/theming:** work towards theming a snap layout using styleScripts ([b6be05e](https://github.com/searchspring/snap/commit/b6be05eee8fc0a06c9e853a591aa0d380158fc0c))
+- support template themes in snap-preact ([df9d905](https://github.com/searchspring/snap/commit/df9d9057a1554d7eb62830002c3db990e0f8f272))
+- theme reactivity initial interface ([c017aad](https://github.com/searchspring/snap/commit/c017aadd4add7591bd98fcfbdb8db8985bf2d498))
+
 ## [0.60.1](https://github.com/searchspring/snap/compare/v0.60.0...v0.60.1) (2024-09-12)
 
 ### Bug Fixes
