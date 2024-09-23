@@ -67,6 +67,7 @@ jobs:
           npm run build:docs 
           git add docs/snap-docs.json
           git add -A packages/snap-*/docs/
+          git add -A packages/snap-preact/components/docs/
           git commit -m "chore(docs): generation"
           git push
 

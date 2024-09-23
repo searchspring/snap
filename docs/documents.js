@@ -576,7 +576,7 @@ var documents = [
 				label: 'Preact',
 				route: '/components-preact',
 				type: 'iframe',
-				url: './packages/snap-preact-components/docs/',
+				url: './packages/snap-preact/components/docs/',
 				searchable: false,
 			},
 		],
