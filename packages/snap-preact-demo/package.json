@@ -1,7 +1,7 @@
 {
 	"name": "@searchspring/snap-preact-demo",
 	"private": true,
-	"version": "1.1.7",
+	"version": "1.1.8",
 	"description": "demo store for development and testing",
 	"author": "Searchspring",
 	"license": "MIT",
@@ -33,7 +33,7 @@
 		"scaffold": "snapfu-core"
 	},
 	"dependencies": {
-		"@searchspring/snap-preact": "^1.1.7",
+		"@searchspring/snap-preact": "^1.1.8",
 		"deepmerge": "4.3.1",
 		"mobx-react": "7.6.0",
 		"preact": "10.9.0"
