@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.1.10](https://github.com/searchspring/snap-1.0/compare/v1.1.9...v1.1.10) (2024-09-23)
+
+**Note:** Version bump only for package @searchspring/snap
+
 ## [1.1.9](https://github.com/searchspring/snap-1.0/compare/v1.1.8...v1.1.9) (2024-09-23)
 
 **Note:** Version bump only for package @searchspring/snap
