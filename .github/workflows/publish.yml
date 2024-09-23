@@ -10,11 +10,11 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       packages: write
+      contents: write
     steps:
       - name: Checkout repositiory
         uses: actions/checkout@v2
         with:
-          token: ${{ secrets.MACHINE_001 }}
           fetch-depth: "0"
 
       - name: Set Github credentials
