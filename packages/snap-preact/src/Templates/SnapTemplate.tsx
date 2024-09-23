@@ -362,7 +362,7 @@ export function createSnapConfig(templateConfig: SnapTemplatesConfig, templatesS
 				},
 			},
 			default: {
-				Recs: {
+				Default: {
 					component: 'Recommendation',
 				},
 			},
