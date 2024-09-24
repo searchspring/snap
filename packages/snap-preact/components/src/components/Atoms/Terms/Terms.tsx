@@ -117,7 +117,6 @@ export const Terms = observer((properties: TermsProps): JSX.Element => {
 									onClick={(e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => termClickEvent(e, term)}
 									href={term.url.href}
 									{...(previewOnHover ? createHoverProps(term.preview) : {})}
-									// role="link"
 									{...mergedLang.term?.all}
 								></a>
 							</li>
