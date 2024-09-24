@@ -112,6 +112,7 @@ export const Checkbox = observer((properties: CheckboxProps): JSX.Element => {
 					{...styling}
 					className={classnames('ss__checkbox', { 'ss__checkbox--disabled': disabled }, className)}
 					type="checkbox"
+					aria-checked={checkedState}
 					onClick={(e) => clickFunc(e)}
 					disabled={disabled}
 					checked={checkedState}
@@ -122,8 +123,9 @@ export const Checkbox = observer((properties: CheckboxProps): JSX.Element => {
 					className={classnames('ss__checkbox', { 'ss__checkbox--disabled': disabled }, className)}
 					onClick={(e) => clickFunc(e)}
 					ref={(e) => (!disableA11y ? useA11y(e) : null)}
-					aria-label={`${disabled ? 'disabled' : ''} ${checkedState ? 'checked' : 'unchecked'} checkbox`}
+					aria-disabled={disabled}
 					role="checkbox"
+					aria-checked={checkedState}
 				>
 					{checkedState ? <Icon {...subProps.icon} /> : <span className="ss__checkbox__empty" />}
 				</span>

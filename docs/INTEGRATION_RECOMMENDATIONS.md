@@ -1,8 +1,11 @@
 ## Recommendations Integration
+It is recommended to utilize the [`RecommendationInstantiator`](https://github.com/searchspring/snap/blob/main/packages/snap-preact/src/Instantiators/README.md) for integration of product recommendations (standard when using Snap object).
 
 Changes to the recommendation integration scripts were made in Snap `v0.60.0`. Legacy Recommmendation Integrations docs can still be found [`here`](https://github.com/searchspring/snap/blob/main/docs/INTEGRATION_LEGACY_RECOMMENDATIONS.md)
 
-It is recommended to utilize the [`RecommendationInstantiator`](https://github.com/searchspring/snap/blob/main/packages/snap-preact/src/Instantiators/README.md) for integration of product recommendations. This method allows recommendations to be placed anywhere on the page with a single script block (requires the `bundle.js` script also).
+Recommendations script blocks can be placed anywhere on the page and will automatically target and batch requests for all profiles specified in the block (requires the `bundle.js` script also). Batching profiles is important for deduplication of recommended products (see more below).
+
+The block below uses the `recently-viewed` profile which would typically be setup to display the last products viewed by the shopper. Profiles must be setup in the Searchspring Management Console (SMC) and have associated Snap templates selected.
 
 ```html
 <script type="searchspring/recommendations">
@@ -21,13 +24,15 @@ It is recommended to utilize the [`RecommendationInstantiator`](https://github.c
 		}
 	];
 </script>
+
+<div class="ss__recs__recently-viewed"><!-- recommendations will render here --></div>
 ```
 
-The `RecommendationInstantiator` will look for these elements on the page and attempt to inject components based on the `profiles` specified. In the example above, the profile specified is the `recently-viewed` profile, and is set to render inside the selector `.ss__recs__recently-viewed`, this profile would typically be setup to display the last products viewed by the shopper. These profiles must be setup in the Searchspring Management Console (SMC) and have associated Snap templates selected.
+The `RecommendationInstantiator` will look for these script blocks on the page and attempt to inject components based on the `selector` specified in each profile. In the example above, the profile specified is the `recently-viewed` profile, and is set to render inside the `.ss__recs__recently-viewed` element just below the script block. The targeted element could exist anywhere on the page - but it is recommended to group elements with script blocks whenever possible (for easy integration identification). The component to render into the targeted `selector` is setup within the `RecommendationInstantiator` configuration.
 
 
 ## Recommendation Context Variables
-Context variables are applied to individual recommendation profiles similar to how they are done on the integration script tag. Variables here may be required depending on the profile placement, and can be used to alter the results displayed by our recommendations.
+Context variables are set within the script blocks and can be used to set either global or per profile (profile specific) functionality. Variables are used to alter the results displayed by our recommendations and may be required depending on the profile placements in use.
 
 ### Globals Variables
 | Option | Value | Placement | Description | Required
@@ -47,6 +52,7 @@ Context variables are applied to individual recommendation profiles similar to h
 | options.siteId | global siteId overwrite | all | optional global siteId overwrite |   |
 | options.categories | array of category path strings | all | optional category identifiers used in category trending recommendation profiles |   |
 | options.brands | array of brand strings | all | optional brand identifiers used in brand trending recommendation profiles |   |
+| options.blockedItems | array of strings | all | SKU values to identify which products to exclude from the profile response |   |
 | options.branch | template branch overwrite | all | optional branch overwrite for recommendations template (advanced usage) |   |
 | options.dedupe | boolean (default: `true`) | all | dedupe products across all profiles in the batch |   |
 | options.query | string | dynamic custom | query to search |   |
