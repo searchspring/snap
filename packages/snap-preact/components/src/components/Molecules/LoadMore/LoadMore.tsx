@@ -179,7 +179,6 @@ export const LoadMore = observer((properties: LoadMoreProps): JSX.Element => {
 				{ 'ss__load-more__button--hidden': isLoading && loadingLocation === 'outside' },
 				{ 'ss__load-more__button--disabled': isButtonDisabled }
 			),
-			// disabled: isButtonDisabled,
 			// global theme
 			...globalTheme?.components?.button,
 			// inherited props

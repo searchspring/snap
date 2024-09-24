@@ -320,8 +320,12 @@ export const Select = observer((properties: SelectProps): JSX.Element => {
 							</Button>
 						}
 					>
-						{/* <ul className="ss__select__select" role="listbox" aria-label={typeof label == 'string' ? label : ''} ref={(e) => useA11y(e, -1, true, () => setOpen(false))}> */}
-						<ul className="ss__select__select" role="listbox" aria-label={typeof label == 'string' ? label : ''}>
+						<ul
+							className="ss__select__select"
+							role="listbox"
+							aria-label={typeof label == 'string' ? label : ''}
+							ref={(e) => useA11y(e, -1, true, () => setOpen(false))}
+						>
 							{options.map((option) => (
 								<li
 									ref={(e) => useA11y(e)}

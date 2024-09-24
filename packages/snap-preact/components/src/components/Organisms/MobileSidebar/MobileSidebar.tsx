@@ -165,7 +165,7 @@ export const MobileSidebar = observer((properties: MobileSidebarProps): JSX.Elem
 		closeButtonText: {
 			value: closeButtonText,
 			attributes: {
-				'aria-label': closeButtonText || `close ${openButtonText} button`,
+				'aria-label': closeButtonText || `close ${openButtonText}`,
 			},
 		},
 	};
