@@ -1,4 +1,4 @@
-/*! For license information please see main.3b5e8bd6.iframe.bundle.js.LICENSE.txt */
+/*! For license information please see main.938e0acf.iframe.bundle.js.LICENSE.txt */
 (self.webpackChunk_searchspring_snap_preact_components = self.webpackChunk_searchspring_snap_preact_components || []).push([
 	[792],
 	{
@@ -7450,6 +7450,7 @@
 												className
 											),
 											type: 'checkbox',
+											'aria-checked': checkedState,
 											onClick: function onClick(e) {
 												return clickFunc(e);
 											},
@@ -7471,8 +7472,9 @@
 											ref: function ref(e) {
 												return disableA11y ? null : (0, _hooks_useA11y__WEBPACK_IMPORTED_MODULE_20__.i)(e);
 											},
-											'aria-label': (disabled ? 'disabled' : '') + ' ' + (checkedState ? 'checked' : 'unchecked') + ' checkbox',
+											'aria-disabled': disabled,
 											role: 'checkbox',
+											'aria-checked': checkedState,
 										}),
 										checkedState
 											? (0, _emotion_react__WEBPACK_IMPORTED_MODULE_15__.Y)(
@@ -41433,7 +41435,8 @@
 					var _getAutocomplete, _getFinder, _getSearch, _getMeta;
 				})(API),
 				transformRecommendationFiltersPost =
-					(__webpack_require__('../../node_modules/core-js/modules/es.array.find-index.js'),
+					(__webpack_require__('../../node_modules/core-js/modules/es.set.js'),
+					__webpack_require__('../../node_modules/core-js/modules/es.array.find-index.js'),
 					function transformRecommendationFiltersPost(filters) {
 						if (filters) {
 							var filterArray = [];
@@ -42081,7 +42084,22 @@
 																												test = _entry$request3.test,
 																												cart = _entry$request3.cart,
 																												lastViewed = _entry$request3.lastViewed,
-																												shopper = _entry$request3.shopper;
+																												shopper = _entry$request3.shopper,
+																												dedupedProducts = Array.from(new Set((batch.request.products || []).concat(products || []))),
+																												dedupedBlockedItems = Array.from(
+																													new Set((batch.request.blockedItems || []).concat(blockedItems || []))
+																												),
+																												dedupedFilters = Array.from(
+																													new Set(
+																														(batch.request.filters || [])
+																															.concat(transformRecommendationFiltersPost(filters) || [])
+																															.map(function (filter) {
+																																return JSON.stringify(filter);
+																															})
+																													)
+																												).map(function (stringyFilter) {
+																													return JSON.parse(stringyFilter);
+																												});
 																											batch.request = Object.assign(
 																												{},
 																												batch.request,
@@ -42091,9 +42109,9 @@
 																														void 0 === _entry$request$profil2
 																															? void 0
 																															: _entry$request$profil2.siteId) || entry.request.siteId,
-																													products,
-																													blockedItems,
-																													filters: transformRecommendationFiltersPost(filters),
+																													products: dedupedProducts.length ? dedupedProducts : void 0,
+																													blockedItems: dedupedBlockedItems.length ? dedupedBlockedItems : void 0,
+																													filters: dedupedFilters.length ? dedupedFilters : void 0,
 																													test,
 																													cart,
 																													lastViewed,
@@ -49418,9 +49436,7 @@
 						]
 					);
 				})(),
-				v4 =
-					(__webpack_require__('../../node_modules/core-js/modules/es.set.js'),
-					__webpack_require__('../../node_modules/uuid/dist/esm-browser/v4.js'));
+				v4 = __webpack_require__('../../node_modules/uuid/dist/esm-browser/v4.js');
 			function charsParams(params) {
 				if ('object' != typeof params) throw new Error('function requires an object');
 				return Object.keys(params).reduce(function (count, key) {
@@ -49687,7 +49703,7 @@
 					(this.event = payload.event),
 					(this.id = payload.id),
 					(this.pid = payload.pid),
-					(this.meta = { initiator: { lib: 'searchspring/snap', 'lib.version': '0.60.1', 'lib.framework': config.framework } }),
+					(this.meta = { initiator: { lib: 'searchspring/snap', 'lib.version': '0.60.2', 'lib.framework': config.framework } }),
 					(this.id = (0, v4.A)());
 			});
 			function Tracker_toConsumableArray(arr) {
@@ -49882,7 +49898,7 @@
 															uniqueCartItems = Array.from(new Set([].concat(Tracker_toConsumableArray(lastViewedProducts), [sku]))).map(function (
 																item
 															) {
-																return item.trim();
+																return ('' + item).trim();
 															});
 														cookies.set('ssViewedProducts', uniqueCartItems.slice(0, 20).join(','), 'Lax', 220752e6, COOKIE_DOMAIN),
 															lastViewedProducts.includes(sku) || _this.sendPreflight();
@@ -50136,7 +50152,7 @@
 										set: function set(items) {
 											if (items.length) {
 												var cartItems = items.map(function (item) {
-														return item.trim();
+														return ('' + item).trim();
 													}),
 													uniqueCartItems = Array.from(new Set(cartItems));
 												cookies.set('ssCartProducts', uniqueCartItems.join(','), 'Lax', 0, COOKIE_DOMAIN),
@@ -50149,7 +50165,7 @@
 											if (items.length) {
 												var currentCartItems = _this.cookies.cart.get(),
 													itemsToAdd = items.map(function (item) {
-														return item.trim();
+														return ('' + item).trim();
 													}),
 													uniqueCartItems = Array.from(
 														new Set([].concat(Tracker_toConsumableArray(currentCartItems), Tracker_toConsumableArray(itemsToAdd)))
@@ -50164,7 +50180,7 @@
 											if (items.length) {
 												var currentCartItems = _this.cookies.cart.get(),
 													itemsToRemove = items.map(function (item) {
-														return item.trim();
+														return ('' + item).trim();
 													}),
 													updatedItems = currentCartItems.filter(function (item) {
 														return !itemsToRemove.includes(item);
@@ -50243,7 +50259,7 @@
 									_this$globals$currenc.code &&
 									(this.context.currency = this.globals.currency),
 								(null !== (_window$searchspring = window.searchspring) && void 0 !== _window$searchspring && _window$searchspring.tracker) ||
-									((window.searchspring = window.searchspring || {}), (window.searchspring.tracker = this), (window.searchspring.version = '0.60.1')),
+									((window.searchspring = window.searchspring || {}), (window.searchspring.tracker = this), (window.searchspring.version = '0.60.2')),
 								setTimeout(function () {
 									_this.targeters.push(
 										new DomTargeter([{ selector: 'script[type^="searchspring/track/"]', emptyTarget: !1 }], function (target, elem) {
