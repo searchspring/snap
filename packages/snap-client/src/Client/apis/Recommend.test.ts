@@ -1,9 +1,9 @@
 import 'whatwg-fetch';
-import { ApiConfiguration } from './Abstract';
+import { ApiConfiguration, ApiConfigurationParameters } from './Abstract';
 import { RecommendAPI } from './Recommend';
 import { MockData } from '@searchspring/snap-shared';
 
-import type { RecommendRequestModel } from '../../types';
+import type { RecommendPostRequestModel } from '../../types';
 
 const mockData = new MockData();
 
@@ -13,9 +13,11 @@ const wait = (time?: number) => {
 	});
 };
 
+const apiConfig: ApiConfigurationParameters = { cache: { enabled: false } };
+
 describe('Recommend Api', () => {
 	it('has expected default functions', () => {
-		const api = new RecommendAPI(new ApiConfiguration({}));
+		const api = new RecommendAPI(new ApiConfiguration(apiConfig));
 
 		// @ts-ignore - accessing private property
 		expect(api?.batches).toBeDefined();
@@ -24,13 +26,11 @@ describe('Recommend Api', () => {
 
 		expect(api?.batchRecommendations).toBeDefined();
 
-		expect(api?.getRecommendations).toBeDefined();
-
 		expect(api?.postRecommendations).toBeDefined();
 	});
 
 	it('can call getProfile', async () => {
-		const api = new RecommendAPI(new ApiConfiguration({}));
+		const api = new RecommendAPI(new ApiConfiguration(apiConfig));
 
 		const params = {
 			body: undefined,
@@ -54,51 +54,33 @@ describe('Recommend Api', () => {
 		requestMock.mockClear();
 	});
 
-	it('can call getRecommendations', async () => {
-		const api = new RecommendAPI(new ApiConfiguration({}));
-
-		const params = {
-			method: 'GET',
-			headers: {},
-		};
-
-		const requestUrl = 'https://8uyt2m.a.searchspring.io/boost/8uyt2m/recommend?siteId=8uyt2m&tags=dress';
-
-		const requestMock = jest
-			.spyOn(global.window, 'fetch')
-			.mockImplementation(() => Promise.resolve({ status: 200, json: () => Promise.resolve({}) } as Response));
-
-		await api.getRecommendations({
-			siteId: '8uyt2m',
-			tags: ['dress'],
-		});
-
-		expect(requestMock).toHaveBeenCalledWith(requestUrl, params);
-
-		requestMock.mockClear();
-	});
-
 	it('can call postRecommendations', async () => {
-		const api = new RecommendAPI(new ApiConfiguration({}));
+		const api = new RecommendAPI(new ApiConfiguration(apiConfig));
 
 		const params = {
 			method: 'POST',
-			body: '{"siteId":"88uyt2m","tags":["dress"]}',
+			body: '{"siteId":"8uyt2m","profiles":[{"tag":"dress"}]}',
 			headers: {
-				'Content-Type': 'application/json',
+				'Content-Type': 'text/plain',
 			},
 		};
 
-		const requestUrl = 'https://88uyt2m.a.searchspring.io/boost/88uyt2m/recommend';
+		const requestParameters: RecommendPostRequestModel = {
+			siteId: '8uyt2m',
+			profiles: [
+				{
+					tag: 'dress',
+				},
+			],
+		};
+
+		const requestUrl = 'https://8uyt2m.a.searchspring.io/boost/8uyt2m/recommend';
 
 		const requestMock = jest
 			.spyOn(global.window, 'fetch')
 			.mockImplementation(() => Promise.resolve({ status: 200, json: () => Promise.resolve({}) } as Response));
 
-		await api.postRecommendations({
-			siteId: '88uyt2m',
-			tags: ['dress'],
-		});
+		await api.postRecommendations(requestParameters);
 
 		expect(requestMock).toHaveBeenCalledWith(requestUrl, params);
 
@@ -106,14 +88,17 @@ describe('Recommend Api', () => {
 	});
 
 	it('can call batchRecommendations', async () => {
-		const api = new RecommendAPI(new ApiConfiguration({}));
+		const api = new RecommendAPI(new ApiConfiguration(apiConfig));
 
 		const params = {
-			method: 'GET',
-			headers: {},
+			method: 'POST',
+			headers: {
+				'Content-Type': 'text/plain',
+			},
+			body: `{"profiles":[{"tag":"similar"}],"siteId":"8uyt2m"}`,
 		};
 
-		const requestUrl = 'https://8uyt2m.a.searchspring.io/boost/8uyt2m/recommend?tags=similar&limits=20&siteId=8uyt2m';
+		const requestUrl = 'https://8uyt2m.a.searchspring.io/boost/8uyt2m/recommend';
 
 		const requestMock = jest
 			.spyOn(global.window, 'fetch')
@@ -121,7 +106,7 @@ describe('Recommend Api', () => {
 
 		await api.batchRecommendations({
 			siteId: '8uyt2m',
-			tags: ['similar'],
+			tag: 'similar',
 		});
 
 		//add delay for paramBatch.timeout
@@ -131,12 +116,7 @@ describe('Recommend Api', () => {
 		requestMock.mockReset();
 	});
 
-	const GETParams = {
-		method: 'GET',
-		headers: {},
-	};
-
-	const batchParams: Partial<RecommendRequestModel> = {
+	const batchParams = {
 		siteId: '8uyt2m',
 		lastViewed: [
 			'marnie-runner-2-7x10',
@@ -158,28 +138,25 @@ describe('Recommend Api', () => {
 		product: 'marnie-runner-2-7x10',
 	};
 
+	const RequestUrl = 'https://8uyt2m.a.searchspring.io/boost/8uyt2m/recommend';
+
 	it('batchRecommendations batches as expected', async () => {
-		const api = new RecommendAPI(new ApiConfiguration({}));
+		const api = new RecommendAPI(new ApiConfiguration(apiConfig));
 
 		const requestMock = jest
 			.spyOn(global.window, 'fetch')
 			.mockImplementation(() => Promise.resolve({ status: 200, json: () => Promise.resolve(mockData.recommend()) } as Response));
 
-		const GETRequestUrl =
-			'https://8uyt2m.a.searchspring.io/boost/8uyt2m/recommend?tags=similar&tags=crossSell&limits=14&limits=10&siteId=8uyt2m&lastViewed=marnie-runner-2-7x10&lastViewed=ruby-runner-2-7x10&lastViewed=abbie-runner-2-7x10&lastViewed=riley-4x6&lastViewed=joely-5x8&lastViewed=helena-4x6&lastViewed=kwame-4x6&lastViewed=sadie-4x6&lastViewed=candice-runner-2-7x10&lastViewed=esmeray-4x6&lastViewed=camilla-230x160&lastViewed=candice-4x6&lastViewed=sahara-4x6&lastViewed=dayna-4x6&lastViewed=moema-4x6&product=marnie-runner-2-7x10';
-
-		//product array changed to single product string
-		// @ts-ignore
 		api.batchRecommendations({
-			tags: ['similar'],
-			limits: 14,
+			tag: 'similar',
+			limit: 14,
 			batched: true,
 			...batchParams,
 		});
-		// @ts-ignore
+
 		api.batchRecommendations({
-			tags: ['crossSell'],
-			limits: 10,
+			tag: 'crossSell',
+			limit: 10,
 			batched: true,
 			...batchParams,
 		});
@@ -187,43 +164,45 @@ describe('Recommend Api', () => {
 		//add delay for paramBatch.timeout
 		await wait(250);
 
-		expect(requestMock).toHaveBeenCalledWith(GETRequestUrl, GETParams);
+		const POSTParams = {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'text/plain',
+			},
+			body: '{"profiles":[{"tag":"similar","limit":14},{"tag":"crossSell","limit":10}],"siteId":"8uyt2m","products":["marnie-runner-2-7x10"],"lastViewed":["marnie-runner-2-7x10","ruby-runner-2-7x10","abbie-runner-2-7x10","riley-4x6","joely-5x8","helena-4x6","kwame-4x6","sadie-4x6","candice-runner-2-7x10","esmeray-4x6","camilla-230x160","candice-4x6","sahara-4x6","dayna-4x6","moema-4x6"]}',
+		};
+
+		expect(requestMock).toHaveBeenCalledWith(RequestUrl, POSTParams);
 		requestMock.mockReset();
 	});
 
 	it('batchRecommendations handles multiple categories as expected', async () => {
-		const api = new RecommendAPI(new ApiConfiguration({}));
+		const api = new RecommendAPI(new ApiConfiguration(apiConfig));
 
 		const requestMock = jest
 			.spyOn(global.window, 'fetch')
 			.mockImplementation(() => Promise.resolve({ status: 200, json: () => Promise.resolve(mockData.recommend()) } as Response));
 
-		const GETRequestUrl =
-			'https://8uyt2m.a.searchspring.io/boost/8uyt2m/recommend?tags=similar&tags=crossSell&tags=crossSell&limits=14&limits=10&limits=10&categories=shirts&categories=pants&siteId=8uyt2m&lastViewed=marnie-runner-2-7x10&lastViewed=ruby-runner-2-7x10&lastViewed=abbie-runner-2-7x10&lastViewed=riley-4x6&lastViewed=joely-5x8&lastViewed=helena-4x6&lastViewed=kwame-4x6&lastViewed=sadie-4x6&lastViewed=candice-runner-2-7x10&lastViewed=esmeray-4x6&lastViewed=camilla-230x160&lastViewed=candice-4x6&lastViewed=sahara-4x6&lastViewed=dayna-4x6&lastViewed=moema-4x6&product=marnie-runner-2-7x10';
-
 		//shirt category
-		// @ts-ignore
 		api.batchRecommendations({
-			tags: ['similar'],
+			tag: 'similar',
 			categories: ['shirts'],
-			limits: 14,
+			limit: 14,
 			batched: true,
 			...batchParams,
 		});
 		//no category
-		// @ts-ignore
 		api.batchRecommendations({
-			tags: ['crossSell'],
-			limits: 10,
+			tag: 'crossSell',
+			limit: 10,
 			batched: true,
 			...batchParams,
 		});
 		//pants category
-		// @ts-ignore
 		api.batchRecommendations({
-			tags: ['crossSell'],
+			tag: 'crossSell',
 			categories: ['pants'],
-			limits: 10,
+			limit: 10,
 			batched: true,
 			...batchParams,
 		});
@@ -231,34 +210,38 @@ describe('Recommend Api', () => {
 		//add delay for paramBatch.timeout
 		await wait(250);
 
-		expect(requestMock).toHaveBeenCalledWith(GETRequestUrl, GETParams);
+		const POSTParams = {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'text/plain',
+			},
+			body: '{"profiles":[{"tag":"similar","categories":["shirts"],"limit":14},{"tag":"crossSell","limit":10},{"tag":"crossSell","categories":["pants"],"limit":10}],"siteId":"8uyt2m","products":["marnie-runner-2-7x10"],"lastViewed":["marnie-runner-2-7x10","ruby-runner-2-7x10","abbie-runner-2-7x10","riley-4x6","joely-5x8","helena-4x6","kwame-4x6","sadie-4x6","candice-runner-2-7x10","esmeray-4x6","camilla-230x160","candice-4x6","sahara-4x6","dayna-4x6","moema-4x6"]}',
+		};
+
+		expect(requestMock).toHaveBeenCalledWith(RequestUrl, POSTParams);
 		requestMock.mockReset();
 	});
 
 	it('batchRecommendations handles multiple brands as expected', async () => {
-		const api = new RecommendAPI(new ApiConfiguration({}));
+		const api = new RecommendAPI(new ApiConfiguration(apiConfig));
 
 		const requestMock = jest
 			.spyOn(global.window, 'fetch')
 			.mockImplementation(() => Promise.resolve({ status: 200, json: () => Promise.resolve(mockData.recommend()) } as Response));
 
-		const GETRequestUrl = `https://8uyt2m.a.searchspring.io/boost/8uyt2m/recommend?tags=similar&tags=crossSell&limits=14&limits=10&brands=shirts&brands=pants&brands=pants2&siteId=8uyt2m&lastViewed=marnie-runner-2-7x10&lastViewed=ruby-runner-2-7x10&lastViewed=abbie-runner-2-7x10&lastViewed=riley-4x6&lastViewed=joely-5x8&lastViewed=helena-4x6&lastViewed=kwame-4x6&lastViewed=sadie-4x6&lastViewed=candice-runner-2-7x10&lastViewed=esmeray-4x6&lastViewed=camilla-230x160&lastViewed=candice-4x6&lastViewed=sahara-4x6&lastViewed=dayna-4x6&lastViewed=moema-4x6&product=marnie-runner-2-7x10`;
-
 		//shirt category
-		// @ts-ignore
 		api.batchRecommendations({
-			tags: ['similar'],
+			tag: 'similar',
 			brands: ['shirts'],
-			limits: 14,
+			limit: 14,
 			batched: true,
 			...batchParams,
 		});
 		//pants category
-		// @ts-ignore
 		api.batchRecommendations({
-			tags: ['crossSell'],
+			tag: 'crossSell',
 			brands: ['pants', 'pants2'],
-			limits: 10,
+			limit: 10,
 			batched: true,
 			...batchParams,
 		});
@@ -266,50 +249,274 @@ describe('Recommend Api', () => {
 		//add delay for paramBatch.timeout
 		await wait(250);
 
-		expect(requestMock).toHaveBeenCalledWith(GETRequestUrl, GETParams);
+		const POSTParams = {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'text/plain',
+			},
+			body: '{"profiles":[{"tag":"similar","brands":["shirts"],"limit":14},{"tag":"crossSell","brands":["pants","pants2"],"limit":10}],"siteId":"8uyt2m","products":["marnie-runner-2-7x10"],"lastViewed":["marnie-runner-2-7x10","ruby-runner-2-7x10","abbie-runner-2-7x10","riley-4x6","joely-5x8","helena-4x6","kwame-4x6","sadie-4x6","candice-runner-2-7x10","esmeray-4x6","camilla-230x160","candice-4x6","sahara-4x6","dayna-4x6","moema-4x6"]}',
+		};
+
+		expect(requestMock).toHaveBeenCalledWith(RequestUrl, POSTParams);
+		requestMock.mockReset();
+	});
+
+	it('batchRecommendations uses parameters regardless of order specified in requests', async () => {
+		const api = new RecommendAPI(new ApiConfiguration(apiConfig));
+
+		const requestMock = jest
+			.spyOn(global.window, 'fetch')
+			.mockImplementation(() => Promise.resolve({ status: 200, json: () => Promise.resolve(mockData.recommend()) } as Response));
+
+		api.batchRecommendations({
+			tag: 'similar',
+			products: ['sku1'],
+			batched: true,
+			siteId: '8uyt2m',
+			limit: 20,
+		});
+
+		api.batchRecommendations({
+			tag: 'crossSell',
+			batched: true,
+			siteId: '8uyt2m',
+		});
+
+		//add delay for paramBatch.timeout
+		await wait(250);
+
+		const POSTParams = {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'text/plain',
+			},
+			body: '{"profiles":[{"tag":"similar","limit":20},{"tag":"crossSell"}],"siteId":"8uyt2m","products":["sku1"]}',
+		};
+
+		expect(requestMock).toHaveBeenCalledWith(RequestUrl, POSTParams);
+		requestMock.mockReset();
+	});
+
+	it('batchRecommendations unbatches properly', async () => {
+		const api = new RecommendAPI(new ApiConfiguration(apiConfig));
+
+		const requestMock = jest
+			.spyOn(global.window, 'fetch')
+			.mockImplementation(() => Promise.resolve({ status: 200, json: () => Promise.resolve(mockData.recommend()) } as Response));
+
+		api.batchRecommendations({
+			tag: 'similar',
+			products: ['sku1'],
+			batched: false,
+			siteId: '8uyt2m',
+			limit: 20,
+		});
+
+		api.batchRecommendations({
+			tag: 'crossSell',
+			batched: true,
+			siteId: '8uyt2m',
+		});
+
+		api.batchRecommendations({
+			tag: 'static',
+			batched: true,
+			siteId: '8uyt2m',
+		});
+
+		//add delay for paramBatch.timeout
+		await wait(250);
+
+		const firstBatchPOSTParams = {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'text/plain',
+			},
+			body: '{"profiles":[{"tag":"similar","limit":20}],"siteId":"8uyt2m","products":["sku1"]}',
+		};
+		const secondBatchPOSTParams = {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'text/plain',
+			},
+			body: '{"profiles":[{"tag":"crossSell"},{"tag":"static"}],"siteId":"8uyt2m"}',
+		};
+
+		expect(requestMock).toHaveBeenCalledTimes(2);
+		expect(requestMock).toHaveBeenNthCalledWith(1, 'https://8uyt2m.a.searchspring.io/boost/8uyt2m/recommend', firstBatchPOSTParams);
+		expect(requestMock).toHaveBeenNthCalledWith(2, 'https://8uyt2m.a.searchspring.io/boost/8uyt2m/recommend', secondBatchPOSTParams);
+		requestMock.mockReset();
+	});
+
+	it('batchRecommendations can be passed a profile', async () => {
+		const api = new RecommendAPI(new ApiConfiguration(apiConfig));
+
+		const requestMock = jest
+			.spyOn(global.window, 'fetch')
+			.mockImplementation(() => Promise.resolve({ status: 200, json: () => Promise.resolve(mockData.recommend()) } as Response));
+
+		api.batchRecommendations({
+			tag: 'similar',
+			siteId: '8uyt2m',
+			products: ['sku1'],
+			batched: true,
+			profile: {
+				limit: 20,
+			},
+		});
+
+		api.batchRecommendations({
+			tag: 'crossSell',
+			siteId: '8uyt2m',
+			batched: true,
+			profile: {
+				limit: 10,
+			},
+		});
+
+		//add delay for paramBatch.timeout
+		await wait(250);
+
+		const POSTParams = {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'text/plain',
+			},
+			body: '{"profiles":[{"tag":"similar","limit":20},{"tag":"crossSell","limit":10}],"siteId":"8uyt2m","products":["sku1"]}',
+		};
+
+		expect(requestMock).toHaveBeenCalledWith(RequestUrl, POSTParams);
+		requestMock.mockReset();
+	});
+
+	it('batchRecommendations unbatches when different siteIds are provided', async () => {
+		const api = new RecommendAPI(new ApiConfiguration(apiConfig));
+
+		const requestMock = jest
+			.spyOn(global.window, 'fetch')
+			.mockImplementation(() => Promise.resolve({ status: 200, json: () => Promise.resolve(mockData.recommend()) } as Response));
+
+		api.batchRecommendations({
+			tag: 'similar',
+			products: ['sku1'],
+			batched: true,
+			siteId: '8uyt2m',
+			profile: {
+				limit: 20,
+			},
+		});
+
+		api.batchRecommendations({
+			tag: 'crossSell',
+			batched: true,
+			siteId: '8uyt2m',
+			profile: {
+				siteId: '123abc',
+				limit: 5,
+			},
+		});
+
+		//add delay for paramBatch.timeout
+		await wait(250);
+
+		const POSTParams8uyt2m = {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'text/plain',
+			},
+			body: '{"profiles":[{"tag":"similar","limit":20}],"siteId":"8uyt2m","products":["sku1"]}',
+		};
+		const POSTParams123abc = {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'text/plain',
+			},
+			body: '{"profiles":[{"tag":"crossSell","limit":5}],"siteId":"123abc"}',
+		};
+
+		expect(requestMock).toHaveBeenCalledTimes(2);
+		expect(requestMock).toHaveBeenNthCalledWith(1, 'https://8uyt2m.a.searchspring.io/boost/8uyt2m/recommend', POSTParams8uyt2m);
+		expect(requestMock).toHaveBeenNthCalledWith(2, 'https://123abc.a.searchspring.io/boost/123abc/recommend', POSTParams123abc);
 		requestMock.mockReset();
 	});
 
 	it('batchRecommendations handles order prop as expected', async () => {
-		const api = new RecommendAPI(new ApiConfiguration({}));
+		const api = new RecommendAPI(new ApiConfiguration(apiConfig));
 
 		const requestMock = jest
 			.spyOn(global.window, 'fetch')
 			.mockImplementation(() => Promise.resolve({ status: 200, json: () => Promise.resolve(mockData.recommend()) } as Response));
 
 		//shirt category
-		// @ts-ignore
 		api.batchRecommendations({
-			tags: ['similar'],
+			tag: 'similar',
 			categories: ['shirts'],
-			limits: 14,
+			limit: 14,
 			order: 3,
 			batched: true,
 			...batchParams,
 		});
 		//no order
-		// @ts-ignore
 		api.batchRecommendations({
-			tags: ['crossSell'],
-			limits: 10,
+			tag: 'crossSell',
+			limit: 10,
 			batched: true,
 			...batchParams,
 		});
 		//no category
-		// @ts-ignore
 		api.batchRecommendations({
-			tags: ['crossSell'],
-			limits: 10,
+			tag: 'crossSell',
+			limit: 10,
 			order: 2,
 			batched: true,
 			...batchParams,
 		});
 		//pants category
-		// @ts-ignore
 		api.batchRecommendations({
-			tags: ['crossSell'],
+			tag: 'crossSell',
 			categories: ['pants'],
-			limits: 10,
+			limit: 10,
+			order: 1,
+			batched: true,
+			...batchParams,
+		});
+
+		const POSTParams = {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'text/plain',
+			},
+			body: '{"profiles":[{"tag":"crossSell","categories":["pants"],"limit":10},{"tag":"crossSell","limit":10},{"tag":"similar","categories":["shirts"],"limit":14},{"tag":"crossSell","limit":10}],"siteId":"8uyt2m","products":["marnie-runner-2-7x10"],"lastViewed":["marnie-runner-2-7x10","ruby-runner-2-7x10","abbie-runner-2-7x10","riley-4x6","joely-5x8","helena-4x6","kwame-4x6","sadie-4x6","candice-runner-2-7x10","esmeray-4x6","camilla-230x160","candice-4x6","sahara-4x6","dayna-4x6","moema-4x6"]}',
+		};
+
+		//add delay for paramBatch.timeout
+		await wait(250);
+
+		expect(requestMock).toHaveBeenCalledWith(RequestUrl, POSTParams);
+		requestMock.mockReset();
+	});
+
+	it('batchRecommendations resolves in right order with order prop', async () => {
+		const api = new RecommendAPI(new ApiConfiguration(apiConfig));
+		const response = mockData.file('recommend/results/8uyt2m/ordered.json');
+
+		const requestMock = jest
+			.spyOn(global.window, 'fetch')
+			.mockImplementation(() => Promise.resolve({ status: 200, json: () => Promise.resolve(response) } as Response));
+
+		const promise1 = api.batchRecommendations({
+			tag: 'similar',
+			categories: ['shirts'],
+			limit: 10,
+			order: 2,
+			batched: true,
+			...batchParams,
+		});
+
+		const promise2 = api.batchRecommendations({
+			tag: 'crosssell',
+			categories: ['dress'],
+			limit: 20,
 			order: 1,
 			batched: true,
 			...batchParams,
@@ -317,23 +524,35 @@ describe('Recommend Api', () => {
 
 		//add delay for paramBatch.timeout
 		await wait(250);
-		const reorderedGetURL =
-			'https://8uyt2m.a.searchspring.io/boost/8uyt2m/recommend?tags=crossSell&tags=crossSell&tags=similar&tags=crossSell&limits=10&limits=10&limits=14&limits=10&categories=pants&categories=shirts&siteId=8uyt2m&lastViewed=marnie-runner-2-7x10&lastViewed=ruby-runner-2-7x10&lastViewed=abbie-runner-2-7x10&lastViewed=riley-4x6&lastViewed=joely-5x8&lastViewed=helena-4x6&lastViewed=kwame-4x6&lastViewed=sadie-4x6&lastViewed=candice-runner-2-7x10&lastViewed=esmeray-4x6&lastViewed=camilla-230x160&lastViewed=candice-4x6&lastViewed=sahara-4x6&lastViewed=dayna-4x6&lastViewed=moema-4x6&product=marnie-runner-2-7x10';
-		expect(requestMock).toHaveBeenCalledWith(reorderedGetURL, GETParams);
+
+		const POSTParams = {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'text/plain',
+			},
+			body: '{"profiles":[{"tag":"crosssell","categories":["dress"],"limit":20},{"tag":"similar","categories":["shirts"],"limit":10}],"siteId":"8uyt2m","products":["marnie-runner-2-7x10"],"lastViewed":["marnie-runner-2-7x10","ruby-runner-2-7x10","abbie-runner-2-7x10","riley-4x6","joely-5x8","helena-4x6","kwame-4x6","sadie-4x6","candice-runner-2-7x10","esmeray-4x6","camilla-230x160","candice-4x6","sahara-4x6","dayna-4x6","moema-4x6"]}',
+		};
+
+		expect(requestMock).toHaveBeenCalledWith(RequestUrl, POSTParams);
+
+		const [response1, response2] = await Promise.all([promise1, promise2]);
+
+		expect(response1.results.length).toBe(response[1].results.length);
+		expect(response2.results.length).toBe(response[0].results.length);
+
 		requestMock.mockReset();
 	});
 
 	it('batchRecommendations handles filters expected', async () => {
-		const api = new RecommendAPI(new ApiConfiguration({}));
+		const api = new RecommendAPI(new ApiConfiguration(apiConfig));
 
 		const requestMock = jest
 			.spyOn(global.window, 'fetch')
 			.mockImplementation(() => Promise.resolve({ status: 200, json: () => Promise.resolve(mockData.recommend()) } as Response));
 
-		// @ts-ignore
 		api.batchRecommendations({
-			tags: ['crossSell'],
-			limits: 10,
+			tag: 'crossSell',
+			limit: 10,
 			filters: [
 				{
 					type: 'value',
@@ -346,133 +565,89 @@ describe('Recommend Api', () => {
 
 		//add delay for paramBatch.timeout
 		await wait(250);
-		const reorderedGetURL =
-			'https://8uyt2m.a.searchspring.io/boost/8uyt2m/recommend?tags=crossSell&limits=10&siteId=8uyt2m&lastViewed=marnie-runner-2-7x10&lastViewed=ruby-runner-2-7x10&lastViewed=abbie-runner-2-7x10&lastViewed=riley-4x6&lastViewed=joely-5x8&lastViewed=helena-4x6&lastViewed=kwame-4x6&lastViewed=sadie-4x6&lastViewed=candice-runner-2-7x10&lastViewed=esmeray-4x6&lastViewed=camilla-230x160&lastViewed=candice-4x6&lastViewed=sahara-4x6&lastViewed=dayna-4x6&lastViewed=moema-4x6&product=marnie-runner-2-7x10&filter.color=red';
-		expect(requestMock).toHaveBeenCalledWith(reorderedGetURL, GETParams);
-		requestMock.mockReset();
-	});
+		const POSTParams = {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'text/plain',
+			},
+			body: '{"profiles":[{"tag":"crossSell","limit":10}],"siteId":"8uyt2m","products":["marnie-runner-2-7x10"],"filters":[{"field":"color","type":"=","values":["red"]}],"lastViewed":["marnie-runner-2-7x10","ruby-runner-2-7x10","abbie-runner-2-7x10","riley-4x6","joely-5x8","helena-4x6","kwame-4x6","sadie-4x6","candice-runner-2-7x10","esmeray-4x6","camilla-230x160","candice-4x6","sahara-4x6","dayna-4x6","moema-4x6"]}',
+		};
 
-	it('batchRecommendations resolves in right order with order prop', async () => {
-		const api = new RecommendAPI(new ApiConfiguration({}));
-		const response = mockData.file('recommend/results/8uyt2m/ordered.json');
-
-		const requestMock = jest
-			.spyOn(global.window, 'fetch')
-			.mockImplementation(() => Promise.resolve({ status: 200, json: () => Promise.resolve(response) } as Response));
-
-		// @ts-ignore
-		const promise1 = api.batchRecommendations({
-			tags: ['similar'],
-			categories: ['shirts'],
-			limits: 10,
-			order: 2,
-			batched: true,
-			...batchParams,
-		});
-
-		// @ts-ignore
-		const promise2 = api.batchRecommendations({
-			tags: ['crosssell'],
-			categories: ['dress'],
-			limits: 20,
-			order: 1,
-			batched: true,
-			...batchParams,
-		});
-
-		//add delay for paramBatch.timeout
-		await wait(250);
-		const reorderedGetURL =
-			'https://8uyt2m.a.searchspring.io/boost/8uyt2m/recommend?tags=crosssell&tags=similar&limits=20&limits=10&categories=dress&categories=shirts&siteId=8uyt2m&lastViewed=marnie-runner-2-7x10&lastViewed=ruby-runner-2-7x10&lastViewed=abbie-runner-2-7x10&lastViewed=riley-4x6&lastViewed=joely-5x8&lastViewed=helena-4x6&lastViewed=kwame-4x6&lastViewed=sadie-4x6&lastViewed=candice-runner-2-7x10&lastViewed=esmeray-4x6&lastViewed=camilla-230x160&lastViewed=candice-4x6&lastViewed=sahara-4x6&lastViewed=dayna-4x6&lastViewed=moema-4x6&product=marnie-runner-2-7x10';
-
-		expect(requestMock).toHaveBeenCalledWith(reorderedGetURL, GETParams);
-
-		const [response1, response2] = await Promise.all([promise1, promise2]);
-
-		expect(response1[0].results.length).toBe(response[1].results.length);
-		expect(response2[0].results.length).toBe(response[0].results.length);
-
-		requestMock.mockReset();
-	});
-
-	it('batchRecommendations handles undefined limits', async () => {
-		const api = new RecommendAPI(new ApiConfiguration({}));
-
-		const requestMock = jest
-			.spyOn(global.window, 'fetch')
-			.mockImplementation(() => Promise.resolve({ status: 200, json: () => Promise.resolve(mockData.recommend()) } as Response));
-
-		const requestURL =
-			'https://8uyt2m.a.searchspring.io/boost/8uyt2m/recommend?tags=crossSell&limits=20&siteId=8uyt2m&lastViewed=marnie-runner-2-7x10&lastViewed=ruby-runner-2-7x10&lastViewed=abbie-runner-2-7x10&lastViewed=riley-4x6&lastViewed=joely-5x8&lastViewed=helena-4x6&lastViewed=kwame-4x6&lastViewed=sadie-4x6&lastViewed=candice-runner-2-7x10&lastViewed=esmeray-4x6&lastViewed=camilla-230x160&lastViewed=candice-4x6&lastViewed=sahara-4x6&lastViewed=dayna-4x6&lastViewed=moema-4x6&product=marnie-runner-2-7x10';
-
-		//now consts try with no limits
-		// @ts-ignore
-		api.batchRecommendations({
-			tags: ['crossSell'],
-			...batchParams,
-			limits: undefined,
-		});
-
-		//add delay for paramBatch.timeout
-		await wait(250);
-
-		expect(requestMock).toHaveBeenCalledWith(requestURL, GETParams);
+		expect(requestMock).toHaveBeenCalledWith(RequestUrl, POSTParams);
 		requestMock.mockReset();
 	});
 
 	it('batchRecommendations will combine `product` and `products` params into `products` when used together', async () => {
-		const api = new RecommendAPI(new ApiConfiguration({}));
+		const api = new RecommendAPI(new ApiConfiguration(apiConfig));
 
 		const requestMock = jest
 			.spyOn(global.window, 'fetch')
 			.mockImplementation(() => Promise.resolve({ status: 200, json: () => Promise.resolve(mockData.recommend()) } as Response));
 
-		const requestURL =
-			'https://8uyt2m.a.searchspring.io/boost/8uyt2m/recommend?tags=crossSell&limits=20&products=some_sku&products=some_sku2&products=marnie-runner-2-7x10&siteId=8uyt2m&lastViewed=marnie-runner-2-7x10&lastViewed=ruby-runner-2-7x10&lastViewed=abbie-runner-2-7x10&lastViewed=riley-4x6&lastViewed=joely-5x8&lastViewed=helena-4x6&lastViewed=kwame-4x6&lastViewed=sadie-4x6&lastViewed=candice-runner-2-7x10&lastViewed=esmeray-4x6&lastViewed=camilla-230x160&lastViewed=candice-4x6&lastViewed=sahara-4x6&lastViewed=dayna-4x6&lastViewed=moema-4x6';
-
-		// @ts-ignore
-		api.batchRecommendations({ tags: ['crossSell'], products: ['some_sku', 'some_sku2'], ...batchParams });
+		api.batchRecommendations({ tag: 'crossSell', products: ['some_sku', 'some_sku2'], ...batchParams });
 
 		//add delay for paramBatch.timeout
 		await wait(250);
 
-		expect(requestMock).toHaveBeenCalledWith(requestURL, GETParams);
+		const POSTParams = {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'text/plain',
+			},
+			body: '{"profiles":[{"tag":"crossSell"}],"siteId":"8uyt2m","products":["some_sku","some_sku2","marnie-runner-2-7x10"],"lastViewed":["marnie-runner-2-7x10","ruby-runner-2-7x10","abbie-runner-2-7x10","riley-4x6","joely-5x8","helena-4x6","kwame-4x6","sadie-4x6","candice-runner-2-7x10","esmeray-4x6","camilla-230x160","candice-4x6","sahara-4x6","dayna-4x6","moema-4x6"]}',
+		};
+
+		expect(requestMock).toHaveBeenCalledWith(RequestUrl, POSTParams);
 		requestMock.mockReset();
 	});
 
 	it('batchRecommendations will utilize the `blockedItems` parameter when provided', async () => {
-		const api = new RecommendAPI(new ApiConfiguration({}));
+		const api = new RecommendAPI(new ApiConfiguration(apiConfig));
 
 		const requestMock = jest
 			.spyOn(global.window, 'fetch')
 			.mockImplementation(() => Promise.resolve({ status: 200, json: () => Promise.resolve(mockData.recommend()) } as Response));
 
-		const requestURL =
-			'https://8uyt2m.a.searchspring.io/boost/8uyt2m/recommend?tags=undefined&limits=20&blockedItems=blocked_sku1&blockedItems=blocked_sku2&siteId=8uyt2m&lastViewed=marnie-runner-2-7x10&lastViewed=ruby-runner-2-7x10&lastViewed=abbie-runner-2-7x10&lastViewed=riley-4x6&lastViewed=joely-5x8&lastViewed=helena-4x6&lastViewed=kwame-4x6&lastViewed=sadie-4x6&lastViewed=candice-runner-2-7x10&lastViewed=esmeray-4x6&lastViewed=camilla-230x160&lastViewed=candice-4x6&lastViewed=sahara-4x6&lastViewed=dayna-4x6&lastViewed=moema-4x6&product=marnie-runner-2-7x10';
-
-		// @ts-ignore
-		api.batchRecommendations({ blockedItems: ['blocked_sku1', 'blocked_sku2'], ...batchParams });
+		api.batchRecommendations({ tag: 'crossSell', blockedItems: ['blocked_sku1', 'blocked_sku2'], ...batchParams });
 
 		//add delay for paramBatch.timeout
 		await wait(250);
 
-		expect(requestMock).toHaveBeenCalledWith(requestURL, GETParams);
+		const POSTParams = {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'text/plain',
+			},
+			body: '{"profiles":[{"tag":"crossSell"}],"siteId":"8uyt2m","products":["marnie-runner-2-7x10"],"blockedItems":["blocked_sku1","blocked_sku2"],"lastViewed":["marnie-runner-2-7x10","ruby-runner-2-7x10","abbie-runner-2-7x10","riley-4x6","joely-5x8","helena-4x6","kwame-4x6","sadie-4x6","candice-runner-2-7x10","esmeray-4x6","camilla-230x160","candice-4x6","sahara-4x6","dayna-4x6","moema-4x6"]}',
+		};
+
+		expect(requestMock).toHaveBeenCalledWith(RequestUrl, POSTParams);
 		requestMock.mockReset();
 	});
 
 	it('batchRecommendations handles POST requests', async () => {
-		const api = new RecommendAPI(new ApiConfiguration({}));
+		const api = new RecommendAPI(new ApiConfiguration(apiConfig));
 
 		//now consts try a post
 		const POSTParams = {
 			method: 'POST',
 			headers: {
-				'Content-Type': 'application/json',
+				'Content-Type': 'text/plain',
 			},
+
 			body: JSON.stringify({
-				tags: Array.from({ length: 100 }, (item, index) => index + ''),
-				limits: Array(100).fill(20),
+				profiles: Array.from({ length: 100 }, (item, index) => {
+					return {
+						tag: index.toString(),
+					};
+				}),
 				siteId: '8uyt2m',
+				products: ['marnie-runner-2-7x10'],
+				filters: [
+					{ field: 'color', type: '=', values: ['blue'] },
+					{ field: 'price', type: '>=', values: [0] },
+					{ field: 'price', type: '<=', values: [20] },
+				],
 				lastViewed: [
 					'marnie-runner-2-7x10',
 					'ruby-runner-2-7x10',
@@ -490,14 +665,9 @@ describe('Recommend Api', () => {
 					'dayna-4x6',
 					'moema-4x6',
 				],
-				product: 'marnie-runner-2-7x10',
-				filters: [
-					{ field: 'color', type: '=', values: ['blue'] },
-					{ field: 'price', type: '>=', values: [0] },
-					{ field: 'price', type: '<=', values: [20] },
-				],
 			}),
 		};
+
 		const POSTRequestUrl = 'https://8uyt2m.a.searchspring.io/boost/8uyt2m/recommend';
 
 		const POSTRequestMock = jest
@@ -505,9 +675,8 @@ describe('Recommend Api', () => {
 			.mockImplementation(() => Promise.resolve({ status: 200, json: () => Promise.resolve({}) } as Response));
 
 		for (let i = 0; i < 100; i++) {
-			// @ts-ignore
 			api.batchRecommendations({
-				tags: [i.toString()],
+				tag: i.toString(),
 				...batchParams,
 				filters: [
 					{

@@ -17,7 +17,7 @@ const mockResults = new SearchResultStore({
 	config: { id: 'test' },
 	state: { loaded: false },
 	data: {
-		search: searchResponse,
+		search: searchResponse.search,
 		meta: searchResponse.meta,
 	},
 });
@@ -38,7 +38,7 @@ describe('Result Component', () => {
 	it('renders title', () => {
 		const rendered = render(<Result result={mockResults[0] as Product} />);
 		const title = rendered.container.querySelector('.ss__result .ss__result__details .ss__result__details__title');
-		expect(title?.textContent).toBe(searchResponse.results![0].mappings?.core?.name);
+		expect(title?.textContent).toBe(searchResponse.search.results![0].mappings?.core?.name);
 	});
 
 	it('renders pricing', () => {

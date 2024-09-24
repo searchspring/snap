@@ -1,31 +1,27 @@
-import { ListOption } from '../../types';
+import { Theme } from '../../providers/theme';
 
-export const layoutOptions: ListOption[] = [
+export const layoutOptions: Theme['layoutOptions'] = [
 	{
 		value: 1,
 		icon: 'square',
-		// overrides: {
-		// 	components: {
-		// 		results: {
-		// 			named: {
-		// 				searchResults: { columns: 1 },
-		// 			},
-		// 		},
-		// 	},
-		// },
+		overrides: {
+			components: {
+				'results.search': {
+					columns: 1,
+				},
+			},
+		},
 	},
 	{
 		value: 2,
 		default: true,
 		icon: 'layout-large',
-		// overrides: {
-		// 	components: {
-		// 		results: {
-		// 			named: {
-		// 				searchResults: { columns: 2 },
-		// 			},
-		// 		},
-		// 	},
-		// },
+		overrides: {
+			components: {
+				'results.search': {
+					columns: 2,
+				},
+			},
+		},
 	},
 ];

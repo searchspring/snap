@@ -1,4 +1,4 @@
-import { h, Fragment, Component } from 'preact';
+import { h, Fragment } from 'preact';
 import { observer } from 'mobx-react';
 
 import { withController } from '@searchspring/snap-preact/components';
@@ -7,13 +7,11 @@ type HeaderProps = {
 	controller?: SearchController;
 };
 
-@withController
-@observer
-export class Header extends Component<HeaderProps> {
-	render() {
-		const { pagination, search } = this.props.controller.store;
+export const Header = withController(
+	observer(({ controller }: HeaderProps) => {
+		const { pagination, search } = controller.store;
+		const landingPage = controller.store.merchandising.landingPage;
 
-		const landingPage = this.props.controller.store.merchandising.landingPage;
 		return (
 			<header className="ss-header-container">
 				{landingPage ? (
@@ -60,5 +58,5 @@ export class Header extends Component<HeaderProps> {
 				)}
 			</header>
 		);
-	}
-}
+	})
+);

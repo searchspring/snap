@@ -8,12 +8,13 @@ on:
 jobs:
   Merge:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     if: ${{ github.event.workflow_run.conclusion == 'success' }}
     steps:
       - name: Checkout repositiory
         uses: actions/checkout@v2
         with:
-          token: ${{ secrets.MACHINE_PAT }}
           fetch-depth: "0"
           ref: "develop"
 

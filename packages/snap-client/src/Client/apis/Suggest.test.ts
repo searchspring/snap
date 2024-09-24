@@ -43,20 +43,20 @@ describe('Suggest Api', () => {
 		const api = new SuggestAPI(new ApiConfiguration({}));
 
 		const params = {
-			body: '{"siteId":"88uyt2m","query":"dress"}',
+			body: '{"siteId":"abc123","query":"dress"}',
 			headers: {
 				'Content-Type': 'application/json',
 			},
 			method: 'POST',
 		};
-		const requestUrl = 'https://88uyt2m.a.searchspring.io/api/suggest/query';
+		const requestUrl = 'https://abc123.a.searchspring.io/api/suggest/query';
 
 		const requestMock = jest
 			.spyOn(global.window, 'fetch')
 			.mockImplementation(() => Promise.resolve({ status: 200, json: () => Promise.resolve({}) } as Response));
 
 		await api.postSuggest({
-			siteId: '88uyt2m',
+			siteId: 'abc123',
 			query: 'dress',
 		});
 

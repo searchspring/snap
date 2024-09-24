@@ -7,9 +7,9 @@ import type {
 	TrendingRequestModel,
 	TrendingResponseModel,
 	ProfileRequestModel,
+	ProfileResponseModel,
+	RecommendResponseModel,
 	RecommendRequestModel,
-	RecommendCombinedRequestModel,
-	RecommendCombinedResponseModel,
 } from '../types';
 
 import type {
@@ -144,26 +144,29 @@ export class Client {
 		return this.requesters.meta.getMeta(params);
 	}
 
-	async autocomplete(params: AutocompleteRequestModel = {}): Promise<[MetaResponseModel, AutocompleteResponseModel]> {
+	async autocomplete(params: AutocompleteRequestModel = {}): Promise<{ meta: MetaResponseModel; search: AutocompleteResponseModel }> {
 		if (!params.search?.query?.string) {
 			throw 'query string parameter is required';
 		}
 
 		params = deepmerge(this.globals, params);
 
-		return Promise.all([this.meta({ siteId: params.siteId || '' }), this.requesters.autocomplete.getAutocomplete(params)]);
+		const [meta, search] = await Promise.all([this.meta({ siteId: params.siteId || '' }), this.requesters.autocomplete.getAutocomplete(params)]);
+		return { meta, search };
 	}
 
-	async search(params: SearchRequestModel = {}): Promise<[MetaResponseModel, SearchResponseModel]> {
+	async search(params: SearchRequestModel = {}): Promise<{ meta: MetaResponseModel; search: SearchResponseModel }> {
 		params = deepmerge(this.globals, params);
 
-		return Promise.all([this.meta({ siteId: params.siteId || '' }), this.requesters.search.getSearch(params)]);
+		const [meta, search] = await Promise.all([this.meta({ siteId: params.siteId || '' }), this.requesters.search.getSearch(params)]);
+		return { meta, search };
 	}
 
-	async finder(params: SearchRequestModel = {}): Promise<[MetaResponseModel, SearchResponseModel]> {
+	async finder(params: SearchRequestModel = {}): Promise<{ meta: MetaResponseModel; search: SearchResponseModel }> {
 		params = deepmerge(this.globals, params);
 
-		return Promise.all([this.meta({ siteId: params.siteId || '' }), this.requesters.finder.getFinder(params)]);
+		const [meta, search] = await Promise.all([this.meta({ siteId: params.siteId || '' }), this.requesters.finder.getFinder(params)]);
+		return { meta, search };
 	}
 
 	async trending(params: Partial<TrendingRequestModel>): Promise<TrendingResponseModel> {
@@ -172,7 +175,9 @@ export class Client {
 		return this.requesters.suggest.getTrending(params as TrendingRequestModel);
 	}
 
-	async recommend(params: RecommendCombinedRequestModel): Promise<RecommendCombinedResponseModel> {
+	async recommend(
+		params: RecommendRequestModel
+	): Promise<{ meta: MetaResponseModel; profile: ProfileResponseModel; recommend: RecommendResponseModel }> {
 		const { tag, ...otherParams } = params;
 		if (!tag) {
 			throw 'tag parameter is required';
@@ -188,22 +193,22 @@ export class Client {
 			delete otherParams.branch;
 		}
 
-		const recommendParams: RecommendRequestModel = {
-			tags: [tag],
+		const recommendParams = {
+			tag: tag,
 			...otherParams,
 			siteId: params.siteId || this.globals.siteId,
 		};
 
-		const [meta, profile, recommendations] = await Promise.all([
+		const [meta, profile, recommend] = await Promise.all([
 			this.meta(params.siteId ? { siteId: params.siteId } : undefined),
 			this.requesters.recommend.getProfile(profileParams),
 			this.requesters.recommend.batchRecommendations(recommendParams),
 		]);
 
 		return {
-			...profile,
 			meta,
-			results: recommendations[0] && recommendations[0].results,
+			profile,
+			recommend,
 		};
 	}
 }

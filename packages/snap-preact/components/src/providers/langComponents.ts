@@ -27,7 +27,7 @@ import type { FacetSliderLang } from '../components/Molecules/FacetSlider';
 // import type { FacetToggleLang } from '../components/Molecules/FacetToggle';
 import type { FilterLang } from '../components/Molecules/Filter';
 import type { GridLang } from '../components/Molecules/Grid';
-// import type { LayoutSelectorLang } from '../components/Molecules/LayoutSelector';
+import type { LayoutSelectorLang } from '../components/Molecules/LayoutSelector';
 import type { ListLang } from '../components/Molecules/List';
 import type { LoadMoreLang } from '../components/Molecules/LoadMore';
 // import type { OverlayBadgeLang } from '../components/Molecules/OverlayBadge';
@@ -87,7 +87,7 @@ export type LangComponentOverrides = {
 	// carousel?: Partial<CarouselLang>
 	checkbox?: Partial<CheckboxLang>;
 	grid?: Partial<GridLang>;
-	// layoutSelector?: Partial<LayoutSelectorLang>
+	layoutSelector?: Partial<LayoutSelectorLang>;
 	list?: Partial<ListLang>;
 	radio?: Partial<RadioLang>;
 	errorHandler?: Partial<ErrorHandlerLang>;
@@ -157,7 +157,7 @@ export type LangComponents = {
 	// carousel: CarouselLang
 	checkbox: CheckboxLang;
 	grid: GridLang;
-	// layoutSelector: LayoutSelectorLang
+	layoutSelector: LayoutSelectorLang;
 	list: ListLang;
 	radio: RadioLang;
 	errorHandler: ErrorHandlerLang;

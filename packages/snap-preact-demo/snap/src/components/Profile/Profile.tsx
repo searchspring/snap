@@ -1,108 +1,91 @@
 // TODO move to components library
-import { h, Component } from 'preact';
+import { h } from 'preact';
+import { useEffect, useRef } from 'preact/hooks';
 
 type ProfileProps = {
 	name: string;
 	controller: SearchController;
 	context?: any;
+	children?: any;
 };
 
-export class Profile extends Component<ProfileProps> {
-	name;
-	controller;
-	log;
-	profiler;
-	profile;
+export const Profile = ({ name, controller, context, children }: ProfileProps) => {
+	const log = controller.log;
+	const profiler = controller.profiler;
+	const profileRef = useRef(profiler.create({ type: 'component', name, context }).start());
 
-	logComponent = {
+	const logComponent = {
 		creation: ({ name }: { name: string }) => {
-			this.log.dev(
+			log.dev(
 				`%c +  %c<${name}/>  %c::  %cCREATED`,
-				`color: ${this.log.colors.orange}; font-weight: bold; font-size: 14px; line-height: 12px;`,
-				`color: ${this.log.colors.orange};`,
-				`color: ${this.log.colors.orangedark};`,
-				`color: ${this.log.colors.orange}; font-weight: bold;`
+				`color: ${log.colors.orange}; font-weight: bold; font-size: 14px; line-height: 12px;`,
+				`color: ${log.colors.orange};`,
+				`color: ${log.colors.orangedark};`,
+				`color: ${log.colors.orange}; font-weight: bold;`
 			);
 		},
 		change: ({ name, info = 'changed' }: { name: string; info: string }) => {
-			this.log.dev(
-				`%c ${this.log.emoji.lightning}  %c<${name}/>  %c::  %c${info.toUpperCase()}`,
-				`color: ${this.log.colors.orange}; font-weight: bold; font-size: 14px; line-height: 12px;`,
-				`color: ${this.log.colors.orange};`,
-				`color: ${this.log.colors.orangedark};`,
-				`color: ${this.log.colors.orangedark}; font-weight: bold;`
+			log.dev(
+				`%c ${log.emoji.lightning}  %c<${name}/>  %c::  %c${info.toUpperCase()}`,
+				`color: ${log.colors.orange}; font-weight: bold; font-size: 14px; line-height: 12px;`,
+				`color: ${log.colors.orange};`,
+				`color: ${log.colors.orangedark};`,
+				`color: ${log.colors.orangedark}; font-weight: bold;`
 			);
 		},
 		error: ({ name, error = 'component crash' }: { name: string; error: string }) => {
-			this.log.dev(
-				`%c ${this.log.emoji.bang}  %c<${name}/>  %c::  %cERROR  %c::  %c${error}`,
-				`color: ${this.log.colors.red}`,
-				`color: ${this.log.colors.red};`,
-				`color: ${this.log.colors.orangedark};`,
-				`color: ${this.log.colors.red}; font-weight: bold;`,
-				`color: ${this.log.colors.orangedark};`,
-				`color: ${this.log.colors.redlight};`
+			log.dev(
+				`%c ${log.emoji.bang}  %c<${name}/>  %c::  %cERROR  %c::  %c${error}`,
+				`color: ${log.colors.red}`,
+				`color: ${log.colors.red};`,
+				`color: ${log.colors.orangedark};`,
+				`color: ${log.colors.red}; font-weight: bold;`,
+				`color: ${log.colors.orangedark};`,
+				`color: ${log.colors.redlight};`
 			);
 		},
 		render: ({ name, time }: { name: string; time: number }) => {
-			this.log.dev(
-				`%c ${this.log.emoji.magic}  %c<${name}/>  %c::  %cRENDERED  %c::  %c${time}ms`,
-				`color: ${this.log.colors.orange};`,
-				`color: ${this.log.colors.orange};`,
-				`color: ${this.log.colors.orangedark};`,
-				`color: ${this.log.colors.orangedark}; font-weight: bold;`,
-				`color: ${this.log.colors.orangedark};`,
-				`color: ${this.log.colors.grey};`
+			log.dev(
+				`%c ${log.emoji.magic}  %c<${name}/>  %c::  %cRENDERED  %c::  %c${time}ms`,
+				`color: ${log.colors.orange};`,
+				`color: ${log.colors.orange};`,
+				`color: ${log.colors.orangedark};`,
+				`color: ${log.colors.orangedark}; font-weight: bold;`,
+				`color: ${log.colors.orangedark};`,
+				`color: ${log.colors.grey};`
 			);
 		},
 		removal: ({ name }: { name: string }) => {
-			this.log.dev(
+			log.dev(
 				`%c -  %c<${name}/>  %c::  %cREMOVED`,
-				`color: ${this.log.colors.orange}; font-weight: bold; font-size: 14px; line-height: 12px;`,
-				`color: ${this.log.colors.orange};`,
-				`color: ${this.log.colors.orangedark};`,
-				`color: ${this.log.colors.reddark}; font-weight: bold;`
+				`color: ${log.colors.orange}; font-weight: bold; font-size: 14px; line-height: 12px;`,
+				`color: ${log.colors.orange};`,
+				`color: ${log.colors.orangedark};`,
+				`color: ${log.colors.reddark}; font-weight: bold;`
 			);
 		},
 	};
 
-	constructor(props: ProfileProps) {
-		super(props);
+	useEffect(() => {
+		const profile = profileRef.current;
+		profile.stop();
+		logComponent.render({ name, time: profile.time.run });
 
-		this.name = props.name;
-		this.controller = props.controller;
-		this.log = this.controller.log;
-		this.profiler = this.controller.profiler;
-		this.context = props.context;
-		this.profile = this.createProfile();
-	}
+		return () => {
+			logComponent.removal({ name });
+		};
+	}, []);
 
-	shouldComponentUpdate() {
-		this.profile = this.createProfile();
-		this.logComponent.change({ name: this.name, info: 'update triggered' });
-		return true;
-	}
+	useEffect(() => {
+		const profile = profiler.create({ type: 'component', name, context }).start();
+		profileRef.current = profile;
+		logComponent.change({ name, info: 'update triggered' });
 
-	componentDidMount() {
-		this.profile.stop();
-		this.logComponent.render({ name: this.name, time: this.profile.time.run });
-	}
+		return () => {
+			profile.stop();
+			logComponent.change({ name, info: 'updated' });
+		};
+	});
 
-	componentDidUpdate() {
-		this.profile.stop();
-
-		this.logComponent.change({ name: this.name, info: 'updated' });
-	}
-
-	componentDidCatch(error: string) {
-		this.logComponent.error({ name: this.name, error });
-	}
-
-	createProfile() {
-		return this.profiler.create({ type: 'component', name: this.name, context: this.context }).start();
-	}
-
-	render() {
-		return this.props.children;
-	}
-}
+	return <>{children}</>;
+};

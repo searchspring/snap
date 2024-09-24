@@ -113,6 +113,7 @@ export const SearchHorizontal = observer((properties: SearchHorizontalProps): JS
 			treePath,
 		},
 		Results: {
+			name: 'search',
 			// default props
 			resultComponent: resultComponent,
 			// inherited props

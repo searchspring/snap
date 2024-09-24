@@ -140,7 +140,7 @@ describe('Recommendation Controller', () => {
 		expect(trackfn).toHaveBeenCalledWith({
 			type: BeaconType.PROFILE_CLICK,
 			category: BeaconCategory.RECOMMENDATIONS,
-			context: controller.config.globals.siteId ? { website: { trackingCode: controller.config.globals.siteId } } : undefined,
+			context: controller.config.globals?.siteId ? { website: { trackingCode: controller.config.globals?.siteId } } : undefined,
 			event: {
 				context: {
 					action: 'navigate',
@@ -153,7 +153,7 @@ describe('Recommendation Controller', () => {
 					placement: controller.store.profile.placement,
 					threshold: controller.store.profile.display.threshold,
 					templateId: controller.store.profile.display.template.uuid,
-					seed: [{ sku: recommendConfig.globals.product }],
+					seed: [{ sku: recommendConfig.globals?.product }],
 				},
 			},
 		});
@@ -176,7 +176,7 @@ describe('Recommendation Controller', () => {
 		expect(trackfn).toHaveBeenCalledWith({
 			type: BeaconType.PROFILE_PRODUCT_CLICK,
 			category: BeaconCategory.RECOMMENDATIONS,
-			context: controller.config.globals.siteId ? { website: { trackingCode: controller.config.globals.siteId } } : undefined,
+			context: controller.config.globals?.siteId ? { website: { trackingCode: controller.config.globals?.siteId } } : undefined,
 			event: {
 				context: {
 					action: 'navigate',
@@ -189,7 +189,7 @@ describe('Recommendation Controller', () => {
 					mappings: {
 						core: result.mappings.core,
 					},
-					seed: [{ sku: recommendConfig.globals.product }],
+					seed: [{ sku: recommendConfig.globals?.product }],
 				},
 			},
 			pid: controller.events.click!.id,
@@ -227,7 +227,7 @@ describe('Recommendation Controller', () => {
 		expect(trackfn).toHaveBeenCalledWith({
 			type: BeaconType.PROFILE_CLICK,
 			category: BeaconCategory.RECOMMENDATIONS,
-			context: controller.config.globals.siteId ? { website: { trackingCode: controller.config.globals.siteId } } : undefined,
+			context: controller.config.globals?.siteId ? { website: { trackingCode: controller.config.globals?.siteId } } : undefined,
 			event: {
 				context: {
 					action: 'navigate',
@@ -263,7 +263,7 @@ describe('Recommendation Controller', () => {
 		expect(trackfn).toHaveBeenCalledWith({
 			type: BeaconType.PROFILE_PRODUCT_CLICK,
 			category: BeaconCategory.RECOMMENDATIONS,
-			context: controller.config.globals.siteId ? { website: { trackingCode: controller.config.globals.siteId } } : undefined,
+			context: controller.config.globals?.siteId ? { website: { trackingCode: controller.config.globals?.siteId } } : undefined,
 			event: {
 				context: {
 					action: 'navigate',
@@ -314,7 +314,7 @@ describe('Recommendation Controller', () => {
 		expect(trackfn).toHaveBeenCalledWith({
 			type: BeaconType.PROFILE_CLICK,
 			category: BeaconCategory.RECOMMENDATIONS,
-			context: controller.config.globals.siteId ? { website: { trackingCode: controller.config.globals.siteId } } : undefined,
+			context: controller.config.globals?.siteId ? { website: { trackingCode: controller.config.globals?.siteId } } : undefined,
 			event: {
 				context: {
 					action: 'navigate',
@@ -350,7 +350,7 @@ describe('Recommendation Controller', () => {
 		expect(trackfn).toHaveBeenCalledWith({
 			type: BeaconType.PROFILE_PRODUCT_CLICK,
 			category: BeaconCategory.RECOMMENDATIONS,
-			context: controller.config.globals.siteId ? { website: { trackingCode: controller.config.globals.siteId } } : undefined,
+			context: controller.config.globals?.siteId ? { website: { trackingCode: controller.config.globals?.siteId } } : undefined,
 			event: {
 				context: {
 					action: 'navigate',
@@ -396,7 +396,7 @@ describe('Recommendation Controller', () => {
 		expect(trackfn).toHaveBeenCalledWith({
 			type: BeaconType.PROFILE_RENDER,
 			category: BeaconCategory.RECOMMENDATIONS,
-			context: controller.config.globals.siteId ? { website: { trackingCode: controller.config.globals.siteId } } : undefined,
+			context: controller.config.globals?.siteId ? { website: { trackingCode: controller.config.globals?.siteId } } : undefined,
 			event: {
 				context: {
 					placement: controller.store.profile.placement,
@@ -408,7 +408,7 @@ describe('Recommendation Controller', () => {
 					placement: controller.store.profile.placement,
 					threshold: controller.store.profile.display.threshold,
 					templateId: controller.store.profile.display.template.uuid,
-					seed: [{ sku: recommendConfig.globals.product }],
+					seed: [{ sku: recommendConfig.globals?.product }],
 				},
 			},
 		});
@@ -454,7 +454,7 @@ describe('Recommendation Controller', () => {
 		expect(trackfn).toHaveBeenCalledWith({
 			type: BeaconType.PROFILE_RENDER,
 			category: BeaconCategory.RECOMMENDATIONS,
-			context: controller.config.globals.siteId ? { website: { trackingCode: controller.config.globals.siteId } } : undefined,
+			context: controller.config.globals?.siteId ? { website: { trackingCode: controller.config.globals?.siteId } } : undefined,
 			event: {
 				context: {
 					placement: controller.store.profile.placement,
@@ -466,7 +466,7 @@ describe('Recommendation Controller', () => {
 					placement: controller.store.profile.placement,
 					threshold: controller.store.profile.display.threshold,
 					templateId: controller.store.profile.display.template.uuid,
-					seed: [{ sku: recommendConfig.globals.product }],
+					seed: [{ sku: recommendConfig.globals?.product }],
 				},
 			},
 		});
@@ -510,7 +510,7 @@ describe('Recommendation Controller', () => {
 		expect(trackfn).toHaveBeenCalledWith({
 			type: BeaconType.PROFILE_IMPRESSION,
 			category: BeaconCategory.RECOMMENDATIONS,
-			context: controller.config.globals.siteId ? { website: { trackingCode: controller.config.globals.siteId } } : undefined,
+			context: controller.config.globals?.siteId ? { website: { trackingCode: controller.config.globals?.siteId } } : undefined,
 			event: {
 				context: {
 					placement: controller.store.profile.placement,
@@ -522,7 +522,7 @@ describe('Recommendation Controller', () => {
 					placement: controller.store.profile.placement,
 					threshold: controller.store.profile.display.threshold,
 					templateId: controller.store.profile.display.template.uuid,
-					seed: [{ sku: recommendConfig.globals.product }],
+					seed: [{ sku: recommendConfig.globals?.product }],
 				},
 			},
 		});
@@ -546,7 +546,7 @@ describe('Recommendation Controller', () => {
 		expect(trackfn).toHaveBeenCalledWith({
 			type: BeaconType.PROFILE_PRODUCT_IMPRESSION,
 			category: BeaconCategory.RECOMMENDATIONS,
-			context: controller.config.globals.siteId ? { website: { trackingCode: controller.config.globals.siteId } } : undefined,
+			context: controller.config.globals?.siteId ? { website: { trackingCode: controller.config.globals?.siteId } } : undefined,
 			event: {
 				context: {
 					placement: controller.store.profile.placement,
@@ -558,7 +558,7 @@ describe('Recommendation Controller', () => {
 					mappings: {
 						core: result.mappings.core,
 					},
-					seed: [{ sku: recommendConfig.globals.product }],
+					seed: [{ sku: recommendConfig.globals?.product }],
 				},
 			},
 			pid: controller.events.impression!.id,

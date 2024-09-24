@@ -61,15 +61,15 @@ describe('LibraryStore', () => {
 		const themes = Object.keys(store.import.theme);
 		for (let index = 0; index < themes.length; index++) {
 			const theme = themes[index];
-			expect(store.import.theme[theme]).toBeDefined();
+			expect(store.import.theme[theme as keyof typeof store.import.theme]).toBeDefined();
 			expect(store.themes[theme]).not.toBeDefined();
-			await store.import.theme[theme]();
+			await store.import.theme[theme as keyof typeof store.import.theme]();
 			expect(store.themes[theme]).toBeDefined();
 		}
 
 		const autocompleteComponents = Object.keys(store.import.component.autocomplete);
 		for (let index = 0; index < autocompleteComponents.length; index++) {
-			const componentName = autocompleteComponents[index];
+			const componentName = autocompleteComponents[index] as keyof typeof store.import.component.autocomplete;
 			expect(store.import.component.autocomplete[componentName]).toBeDefined();
 			expect(store.components.autocomplete[componentName]).not.toBeDefined();
 			await store.import.component.autocomplete[componentName]();
@@ -79,9 +79,9 @@ describe('LibraryStore', () => {
 		const searchComponents = Object.keys(store.import.component.search);
 		for (let index = 0; index < searchComponents.length; index++) {
 			const componentName = searchComponents[index];
-			expect(store.import.component.search[componentName]).toBeDefined();
+			expect(store.import.component.search[componentName as keyof typeof store.import.component.search]).toBeDefined();
 			expect(store.components.search[componentName]).not.toBeDefined();
-			await store.import.component.search[componentName]();
+			await store.import.component.search[componentName as keyof typeof store.import.component.search]();
 			expect(store.components.search[componentName]).toBeDefined();
 		}
 
@@ -115,19 +115,19 @@ describe('LibraryStore', () => {
 		const languages = Object.keys(store.import.language);
 		for (let index = 0; index < languages.length; index++) {
 			const language = languages[index];
-			expect(store.import.language[language]).toBeDefined();
-			expect(store.locales.languages[language]).not.toBeDefined();
-			await store.import.language[language]();
-			expect(store.locales.languages[language]).toBeDefined();
+			expect(store.import.language[language as keyof typeof store.import.language]).toBeDefined();
+			expect(store.locales.languages[language as keyof typeof store.locales.languages]).not.toBeDefined();
+			await store.import.language[language as keyof typeof store.import.language]();
+			expect(store.locales.languages[language as keyof typeof store.locales.languages]).toBeDefined();
 		}
 
 		const currencies = Object.keys(store.import.currency);
 		for (let index = 0; index < currencies.length; index++) {
 			const currency = currencies[index];
-			expect(store.import.currency[currency]).toBeDefined();
-			expect(store.locales.currencies[currency]).not.toBeDefined();
-			await store.import.currency[currency]();
-			expect(store.locales.currencies[currency]).toBeDefined();
+			expect(store.import.currency[currency as keyof typeof store.import.currency]).toBeDefined();
+			expect(store.locales.currencies[currency as keyof typeof store.locales.currencies]).not.toBeDefined();
+			await store.import.currency[currency as keyof typeof store.import.currency]();
+			expect(store.locales.currencies[currency as keyof typeof store.locales.currencies]).toBeDefined();
 		}
 	});
 

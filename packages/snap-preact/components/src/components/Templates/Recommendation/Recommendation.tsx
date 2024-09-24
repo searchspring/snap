@@ -156,7 +156,7 @@ export const Recommendation = observer((properties: RecommendationProps): JSX.El
 	const lang = deepmerge(defaultLang, props.lang || {});
 	const mergedLang = useLang(lang as any, {});
 
-	return children || resultsToRender?.length ? (
+	return (Array.isArray(children) && children.length) || resultsToRender?.length ? (
 		<CacheProvider>
 			<div {...styling} className={classnames('ss__recommendation', className)} ref={recsRef}>
 				{isVisible ? (

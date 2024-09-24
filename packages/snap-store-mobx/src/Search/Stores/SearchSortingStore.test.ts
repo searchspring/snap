@@ -22,12 +22,14 @@ describe('Sorting Store', () => {
 
 	it('returns an empty array when nothing is passed as sorting', () => {
 		const searchData = mockData.searchMeta();
+		// @ts-ignore - testing empty data
 		searchData.search = undefined;
+		// @ts-ignore - testing empty data
 		searchData.sorting = undefined;
 		const sort = new SearchSortingStore({
 			services,
 			data: {
-				search: searchData,
+				search: searchData.search,
 				meta: searchData.meta,
 			},
 		});
@@ -36,29 +38,31 @@ describe('Sorting Store', () => {
 
 	it('uses the search response sorting data to set the "current" sort', () => {
 		const searchData = mockData.searchMeta('sorting');
-		searchData.search = undefined;
+		searchData.search.search = undefined;
 		const sort = new SearchSortingStore({
 			services,
 			data: {
-				search: searchData,
+				search: searchData.search,
 				meta: searchData.meta,
 			},
 		});
 
 		expect(sort.current).toBeDefined();
-		expect(sort.current?.field).toBe(searchData.sorting && searchData.sorting[0].field);
-		expect(sort.current?.direction).toBe(searchData.sorting && searchData.sorting[0].direction);
+		expect(sort.current?.field).toBe(searchData.search?.sorting && searchData.search.sorting[0].field);
+		expect(sort.current?.direction).toBe(searchData.search?.sorting && searchData.search.sorting[0].direction);
 	});
 
 	describe('without a search query', () => {
 		it('uses the meta data to construct its options', () => {
 			const searchData = mockData.searchMeta();
+			// @ts-ignore - testing empty data
 			searchData.search = undefined;
+			// @ts-ignore - testing empty data
 			searchData.sorting = undefined;
 			const sort = new SearchSortingStore({
 				services,
 				data: {
-					search: searchData,
+					search: searchData.search,
 					meta: searchData.meta,
 				},
 			});
@@ -79,12 +83,14 @@ describe('Sorting Store', () => {
 
 		it('uses the first sort option to set "current" when the search response sorting data is empty', () => {
 			const searchData = mockData.searchMeta();
+			// @ts-ignore - testing empty data
 			searchData.search = undefined;
+			// @ts-ignore - testing empty data
 			searchData.sorting = undefined;
 			const sort = new SearchSortingStore({
 				services,
 				data: {
-					search: searchData,
+					search: searchData.search,
 					meta: searchData.meta,
 				},
 			});
@@ -99,11 +105,11 @@ describe('Sorting Store', () => {
 
 		it('uses the first sorting option to set "current" when response sorting data is not empty', () => {
 			const searchData = mockData.searchMeta('sorting');
-			searchData.search = undefined;
+			searchData.search.search = undefined;
 			const sort = new SearchSortingStore({
 				services,
 				data: {
-					search: searchData,
+					search: searchData.search,
 					meta: searchData.meta,
 				},
 			});
@@ -112,19 +118,19 @@ describe('Sorting Store', () => {
 			expect(sort.options).toHaveLength(sortingData?.length!);
 
 			expect(sort.current).toBeDefined();
-			expect(sort.current?.field).toBe(searchData.sorting && searchData.sorting[0].field);
-			expect(sort.current?.direction).toBe(searchData.sorting && searchData.sorting[0].direction);
+			expect(sort.current?.field).toBe(searchData.search?.sorting && searchData.search.sorting[0].field);
+			expect(sort.current?.direction).toBe(searchData.search?.sorting && searchData.search.sorting[0].direction);
 		});
 	});
 
 	describe('with a search query', () => {
 		it('uses the meta data to construct its options', () => {
 			const searchData = mockData.searchMeta('dress');
-			searchData.sorting = undefined;
+			searchData.search.sorting = undefined;
 			const sort = new SearchSortingStore({
 				services,
 				data: {
-					search: searchData,
+					search: searchData.search,
 					meta: searchData.meta,
 				},
 			});
@@ -151,7 +157,7 @@ describe('Sorting Store', () => {
 			const sort = new SearchSortingStore({
 				services,
 				data: {
-					search: searchData,
+					search: searchData.search,
 					meta: searchData.meta,
 				},
 			});
@@ -160,8 +166,8 @@ describe('Sorting Store', () => {
 			expect(sort.options).toHaveLength(sortingData?.length!);
 
 			expect(sort.current).toBeDefined();
-			expect(sort.current?.field).toBe(searchData.sorting && searchData.sorting[0].field);
-			expect(sort.current?.direction).toBe(searchData.sorting && searchData.sorting[0].direction);
+			expect(sort.current?.field).toBe(searchData.search?.sorting && searchData.search.sorting[0].field);
+			expect(sort.current?.direction).toBe(searchData.search?.sorting && searchData.search.sorting[0].direction);
 		});
 	});
 });

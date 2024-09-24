@@ -3,6 +3,81 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.1.10](https://github.com/searchspring/snap-1.0/compare/v1.1.9...v1.1.10) (2024-09-23)
+
+**Note:** Version bump only for package @searchspring/snap-preact-demo
+
+## [1.1.9](https://github.com/searchspring/snap-1.0/compare/v1.1.8...v1.1.9) (2024-09-23)
+
+**Note:** Version bump only for package @searchspring/snap-preact-demo
+
+## [1.1.8](https://github.com/searchspring/snap-1.0/compare/v1.1.7...v1.1.8) (2024-09-23)
+
+**Note:** Version bump only for package @searchspring/snap-preact-demo
+
+## [1.1.7](https://github.com/searchspring/snap-1.0/compare/v1.1.6...v1.1.7) (2024-09-20)
+
+**Note:** Version bump only for package @searchspring/snap-preact-demo
+
+## [1.1.6](https://github.com/searchspring/snap-1.0/compare/v1.1.5...v1.1.6) (2024-09-20)
+
+**Note:** Version bump only for package @searchspring/snap-preact-demo
+
+## [1.1.5](https://github.com/searchspring/snap-1.0/compare/v1.1.4...v1.1.5) (2024-09-20)
+
+**Note:** Version bump only for package @searchspring/snap-preact-demo
+
+## [1.1.4](https://github.com/searchspring/snap-1.0/compare/v1.1.3...v1.1.4) (2024-09-20)
+
+**Note:** Version bump only for package @searchspring/snap-preact-demo
+
+## [1.1.3](https://github.com/searchspring/snap-1.0/compare/v1.1.2...v1.1.3) (2024-09-20)
+
+**Note:** Version bump only for package @searchspring/snap-preact-demo
+
+## [1.1.2](https://github.com/searchspring/snap-1.0/compare/v1.1.1...v1.1.2) (2024-09-20)
+
+**Note:** Version bump only for package @searchspring/snap-preact-demo
+
+## [1.1.1](https://github.com/searchspring/snap-1.0/compare/v1.1.0...v1.1.1) (2024-09-20)
+
+**Note:** Version bump only for package @searchspring/snap-preact-demo
+
+# [1.1.0](https://github.com/searchspring/snap-1.0/compare/v0.60.1...v1.1.0) (2024-09-20)
+
+### Bug Fixes
+
+- improve template typing, refactor template store config ([e5f78ea](https://github.com/searchspring/snap-1.0/commit/e5f78eac3bf951e95f8dc1599dc2a43bccbab2d1))
+- **preact-demo:** cleanup and adding long missing polyfil ([f5b7d15](https://github.com/searchspring/snap-1.0/commit/f5b7d159dc1961e59ec527761d065631cbd2e8a4))
+- **preact/templates:** misc fixes ([d9aae9f](https://github.com/searchspring/snap-1.0/commit/d9aae9f8997c455c53c274f5d3c85e5e244b825b))
+
+### Features
+
+- add onTarget to template recommendations config ([5ae8c21](https://github.com/searchspring/snap-1.0/commit/5ae8c212e64ecde3605a50ff9febbf587a8e5949))
+- add ss-name to components and assign names ([b111352](https://github.com/searchspring/snap-1.0/commit/b11135288a58d5a7704460cd25fed57da09f327c))
+- cascading component props ([5c4d061](https://github.com/searchspring/snap-1.0/commit/5c4d06198e301629f9cb7bf7179de5f83e218642))
+- layout Selector & general polishing ([dc56c5c](https://github.com/searchspring/snap-1.0/commit/dc56c5cf1f879254d1258488865a4161f94c56f4))
+- make snap available to all components, add recommendations to noresults & autocomplete ([3f385d0](https://github.com/searchspring/snap-1.0/commit/3f385d0df8aa4bc3195355a307870b0f0146e77d))
+- **preact-components-ss-lang:** adding foundation for multi language support to preact components ([4dce617](https://github.com/searchspring/snap-1.0/commit/4dce617ec14fb6897d66278b90b5cc17e97665bd))
+- **preact-components/layout:** adding Layout and Flex components and experimenting with them ([97a20dd](https://github.com/searchspring/snap-1.0/commit/97a20dd758d9c9bb8051f515100d79ffab997bfb))
+- **preact-components/storybook:** updating storybook to latest version - build stable ([43c598d](https://github.com/searchspring/snap-1.0/commit/43c598d0e4d11d76364ff2775ecdcabe489023a8))
+- **preact-components:** making progress toward layout templating support ([92c2ce6](https://github.com/searchspring/snap-1.0/commit/92c2ce6b207dcb1e922674d55e289354b71612da))
+- **preact/templates:** adding translation layer for language translations ([052babc](https://github.com/searchspring/snap-1.0/commit/052babc8cd913a4ec4e4c8cb8ef986b0b4f00cad))
+- responsive themestore and breakpoint props ([d4faf3a](https://github.com/searchspring/snap-1.0/commit/d4faf3acdd2703b0225d4784c078ada967c64527))
+- separate recommendation types ([4a03491](https://github.com/searchspring/snap-1.0/commit/4a03491766fd3dbd3eeddf8d91ed4572bd4ae6bf))
+- support template themes in snap-preact ([df9d905](https://github.com/searchspring/snap-1.0/commit/df9d9057a1554d7eb62830002c3db990e0f8f272))
+
+## [0.60.1](https://github.com/searchspring/snap/compare/v0.60.0...v0.60.1) (2024-09-12)
+
+**Note:** Version bump only for package @searchspring/snap-preact-demo
+
+# [0.60.0](https://github.com/searchspring/snap/compare/v0.59.0...v0.60.0) (2024-09-11)
+
+### Features
+
+- **client:** adding support for wildcard cache entries - to be used by email image generator only ([9f59823](https://github.com/searchspring/snap/commit/9f59823e9586235b53315021ab7440d3b309ea3f))
+- **recommendationapi:** new Recommendation API Profile Specific Parameters ([0ca961b](https://github.com/searchspring/snap/commit/0ca961bbb1873e8bba26280cddb0c30c4177cfe0))
+
 # [0.59.0](https://github.com/searchspring/snap/compare/v0.58.3...v0.59.0) (2024-08-22)
 
 ### Features

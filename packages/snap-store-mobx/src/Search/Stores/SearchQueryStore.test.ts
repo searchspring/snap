@@ -15,7 +15,7 @@ describe('SearchQueryStore store', () => {
 		const queryStore = new SearchQueryStore({
 			services,
 			data: {
-				search: searchData,
+				search: searchData.search,
 			},
 		});
 
@@ -29,15 +29,15 @@ describe('SearchQueryStore store', () => {
 		const queryStore = new SearchQueryStore({
 			services,
 			data: {
-				search: searchData,
+				search: searchData.search,
 			},
 		});
 
 		expect(queryStore).toBeDefined();
 		expect(queryStore.query).toBeDefined();
-		expect(queryStore.query?.string).toEqual(searchData.search?.query);
+		expect(queryStore.query?.string).toEqual(searchData.search.search?.query);
 		expect(queryStore.didYouMean).toBeDefined();
-		expect(queryStore.didYouMean?.string).toEqual(searchData.search?.didYouMean);
+		expect(queryStore.didYouMean?.string).toEqual(searchData.search.search?.didYouMean);
 		expect(queryStore.didYouMean?.url).toBeDefined();
 	});
 
@@ -47,11 +47,11 @@ describe('SearchQueryStore store', () => {
 		const queryStore = new SearchQueryStore({
 			services,
 			data: {
-				search: searchData,
+				search: searchData.search,
 			},
 		});
 
 		expect(queryStore).toBeDefined();
-		expect(queryStore.matchType).toEqual(searchData.search?.matchType);
+		expect(queryStore.matchType).toEqual(searchData.search.search?.matchType);
 	});
 });

@@ -20,7 +20,7 @@ export class LegacyAPI extends API {
 				headers: headerParameters,
 				query: queryParameters,
 			},
-			path + JSON.stringify(cacheParameters)
+			JSON.stringify(cacheParameters)
 		);
 
 		return legacyResponse;
@@ -31,33 +31,33 @@ export class LegacyAPI extends API {
 
 		headerParameters['Content-Type'] = 'application/json';
 
-		const response = await this.request(
+		const response = await this.request<MetaResponseModel>(
 			{
 				path: '/api/meta/meta.json',
 				method: 'POST',
 				headers: headerParameters,
 				body: requestParameters,
 			},
-			'/api/meta/meta.json' + JSON.stringify(requestParameters)
+			JSON.stringify(requestParameters)
 		);
 
-		return response as MetaResponseModel;
+		return response;
 	}
 
 	async getMeta(queryParameters: MetaRequestModel): Promise<MetaResponseModel> {
 		const headerParameters: HTTPHeaders = {};
 
-		const response = await this.request(
+		const response = await this.request<MetaResponseModel>(
 			{
 				path: '/api/meta/meta.json',
 				method: 'GET',
 				headers: headerParameters,
 				query: queryParameters as unknown as HTTPQuery,
 			},
-			'/api/meta/meta.json' + JSON.stringify(queryParameters)
+			JSON.stringify(queryParameters)
 		);
 
-		return response as MetaResponseModel;
+		return response;
 	}
 
 	async getSearch(queryParameters: any): Promise<any> {

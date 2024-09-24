@@ -9,7 +9,7 @@ describe('Meta Store', () => {
 	let metaData: MetaResponseModel;
 
 	beforeEach(() => {
-		metaData = mockData.searchMeta().meta;
+		metaData = mockData.meta();
 	});
 
 	it('can construct without metaData', () => {

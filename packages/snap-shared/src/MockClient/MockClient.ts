@@ -36,7 +36,8 @@ export class MockClient extends Client {
 
 		if (this.mockConfig.delay) await wait(this.mockConfig.delay);
 
-		return Promise.all([this.meta() as MetaResponseModel, searchData as SearchResponseModel]);
+		const [meta, search] = await Promise.all([this.meta() as MetaResponseModel, searchData as SearchResponseModel]);
+		return { meta, search };
 	}
 
 	async finder() {
@@ -44,7 +45,8 @@ export class MockClient extends Client {
 
 		if (this.mockConfig.delay) await wait(this.mockConfig.delay);
 
-		return Promise.all([this.meta() as MetaResponseModel, searchData as SearchResponseModel]);
+		const [meta, search] = await Promise.all([this.meta() as MetaResponseModel, searchData as SearchResponseModel]);
+		return { meta, search };
 	}
 
 	async autocomplete() {
@@ -52,7 +54,8 @@ export class MockClient extends Client {
 
 		if (this.mockConfig.delay) await wait(this.mockConfig.delay);
 
-		return Promise.all([this.meta() as MetaResponseModel, autocompleteData as AutocompleteResponseModel]);
+		const [meta, search] = await Promise.all([this.meta() as MetaResponseModel, autocompleteData as AutocompleteResponseModel]);
+		return { meta, search };
 	}
 
 	async recommend() {

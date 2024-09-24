@@ -1,3 +1,12 @@
 export * from './Client/Client';
 
-export { ClientGlobals, ClientConfig, TrendingResponseModel, RecommendCombinedRequestModel, RecommendCombinedResponseModel } from './types';
+export {
+	ClientGlobals,
+	ClientConfig,
+	TrendingResponseModel,
+	RecommendCombinedResponseModel,
+	ProfileResponseModel,
+	RecommendResponseModel,
+	RecommendRequestModel,
+	RecommendationRequestFilterModel,
+} from './types';

@@ -64,11 +64,11 @@ describe('Term Store', () => {
 				autocomplete: rootState,
 			},
 			data: {
-				autocomplete: searchData,
+				autocomplete: searchData.search,
 			},
 		});
 
-		const expected = [searchData.autocomplete?.suggested?.text, ...searchData.autocomplete?.alternatives?.map((alt) => alt.text)!];
+		const expected = [searchData.search.autocomplete?.suggested?.text, ...searchData.search.autocomplete?.alternatives?.map((alt) => alt.text)!];
 
 		expect(termStore.map((term) => term.value)).toStrictEqual(expected);
 	});
@@ -86,7 +86,7 @@ describe('Term Store', () => {
 				autocomplete: rootState,
 			},
 			data: {
-				autocomplete: searchData,
+				autocomplete: searchData.search,
 			},
 		});
 
@@ -114,7 +114,7 @@ describe('Term Store', () => {
 				autocomplete: rootState,
 			},
 			data: {
-				autocomplete: searchData,
+				autocomplete: searchData.search,
 			},
 		});
 
@@ -138,7 +138,7 @@ describe('Term Store', () => {
 				autocomplete: rootState,
 			},
 			data: {
-				autocomplete: searchData,
+				autocomplete: searchData.search,
 			},
 		});
 
@@ -159,11 +159,11 @@ describe('Term Store', () => {
 				autocomplete: rootState,
 			},
 			data: {
-				autocomplete: searchData,
+				autocomplete: searchData.search,
 			},
 		});
 
-		expect(termStore.filter((term) => term.active).map((term) => term.value)).toStrictEqual([searchData.autocomplete?.query]);
+		expect(termStore.filter((term) => term.active).map((term) => term.value)).toStrictEqual([searchData.search.search?.query]);
 	});
 
 	it('has a preview function on terms', () => {
@@ -178,7 +178,7 @@ describe('Term Store', () => {
 				autocomplete: rootState,
 			},
 			data: {
-				autocomplete: searchData,
+				autocomplete: searchData.search,
 			},
 		});
 

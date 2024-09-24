@@ -24,7 +24,7 @@
     "clean:packages": "lerna exec --parallel --stream 'rm -rf ./node_modules package-lock.json' && rm -rf ./node_modules package-lock.json",
     "format": "lerna exec --parallel --stream 'npm run format'",
     "storybook:preact": "npm run storybook --workspace=@searchspring/snap-preact",
-    "publish": "lerna publish --conventional-commits --no-git-reset --no-verify-access --force-publish --yes --create-release github",
+    "publish": "lerna publish --conventional-commits --no-git-reset --no-verify-access --force-publish --yes",
     "prepare": "husky install"
   },
   "prettier": "@searchspring/prettier",

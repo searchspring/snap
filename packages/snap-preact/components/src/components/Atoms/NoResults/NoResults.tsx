@@ -18,6 +18,7 @@ import type { SearchController } from '@searchspring/snap-controller';
 import deepmerge from 'deepmerge';
 import { useLang } from '../../../hooks';
 import type { Lang } from '../../../hooks';
+import type { LibraryImports } from '../../../../../src/Templates/Stores/LibraryStore';
 
 const CSS = {
 	noResults: () => css({}),
@@ -93,8 +94,14 @@ export const NoResults = observer((properties: NoResultsProps): JSX.Element => {
 
 	if (templates?.recommendation?.enabled) {
 		const componentName = templates?.recommendation?.component || 'Recommendation';
-		const resultComponentName = templates?.recommendation?.resultComponent;
 		const snap = useSnap() as SnapTemplates;
+		const themeName = properties.theme?.name;
+		let defaultResultComponentFromTheme;
+		if (themeName) {
+			defaultResultComponentFromTheme = snap?.templates?.config.themes[themeName]?.resultComponent;
+		}
+
+		const resultComponentName = (templates?.recommendation?.resultComponent || defaultResultComponentFromTheme) as string;
 		const mergedConfig = Object.assign(
 			{
 				id: '',
@@ -220,8 +227,8 @@ export interface NoResultsProps extends ComponentProps {
 	templates?: {
 		recommendation?: {
 			enabled: boolean;
-			component?: 'Recommendation'; // Need a type for allowed recommendation component names (that would exist in the library)
-			resultComponent?: string;
+			component?: keyof LibraryImports['component']['recommendation']['default'];
+			resultComponent?: keyof LibraryImports['component']['result'] | (string & NonNullable<unknown>);
 			config?: Partial<RecommendationControllerConfig>;
 		};
 	};

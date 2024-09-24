@@ -1,5 +1,5 @@
 import { StorageStore } from '@searchspring/snap-store-mobx';
-import { TargetStore } from './TargetStore';
+import { GLOBAL_THEME_NAME, TargetStore } from './TargetStore';
 import { TemplatesStoreDependencies, TemplatesStoreSettings, TemplateThemeTypes } from './TemplateStore';
 
 describe('TargetStore', () => {
@@ -26,7 +26,7 @@ describe('TargetStore', () => {
 		expect(store.resultComponent).toBeUndefined();
 		expect(store.theme).toStrictEqual({
 			location: 'local',
-			name: 'global',
+			name: GLOBAL_THEME_NAME,
 		});
 		// @ts-ignore - private property
 		expect(store.dependencies).toBe(dependencies);

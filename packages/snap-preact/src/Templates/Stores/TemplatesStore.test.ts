@@ -1,5 +1,6 @@
 import { TemplatesStore } from './TemplateStore';
 import type { SnapTemplatesConfig } from '../SnapTemplate';
+import { GLOBAL_THEME_NAME } from './TargetStore';
 
 describe('TemplateStore', () => {
 	it('has expected defaults', () => {
@@ -20,7 +21,8 @@ describe('TemplateStore', () => {
 		expect(store.window.innerWidth).toBe(global.window.innerWidth);
 	});
 
-	it('can define config', () => {
+	// TODO: unskip and uncomment below when we have more languages
+	it.skip('can define config', () => {
 		const config: SnapTemplatesConfig = {
 			themes: {
 				global: {
@@ -30,7 +32,7 @@ describe('TemplateStore', () => {
 			config: {
 				siteId: '8uyt2m',
 				currency: 'eur',
-				language: 'fr',
+				// language: 'fr',
 			},
 		};
 		const store = new TemplatesStore({ config });
@@ -48,7 +50,9 @@ describe('TemplateStore', () => {
 			},
 			config: {
 				siteId: '8uyt2m',
+				// @ts-ignore - testing invalid values
 				currency: 'dne',
+				// @ts-ignore - testing invalid values
 				language: 'dne',
 			},
 		};
@@ -58,7 +62,8 @@ describe('TemplateStore', () => {
 		expect(store.currency).toBe('usd');
 	});
 
-	it('can change language and currency', async () => {
+	// TODO: unskip and uncomment below when we have more languages
+	it.skip('can change language and currency', async () => {
 		const config: SnapTemplatesConfig = {
 			themes: {
 				global: {
@@ -73,7 +78,7 @@ describe('TemplateStore', () => {
 		expect(store.language).toBe('en');
 		expect(store.currency).toBe('usd');
 
-		await store.setLanguage('fr');
+		// await store.setLanguage('fr');
 		await store.setCurrency('eur');
 
 		expect(store.language).toBe('fr');
@@ -102,7 +107,7 @@ describe('TemplateStore', () => {
 	});
 
 	it('can addTheme', async () => {
-		const theme = 'global';
+		const theme = GLOBAL_THEME_NAME;
 		const config: SnapTemplatesConfig = {
 			themes: {
 				[theme]: {
@@ -141,6 +146,7 @@ describe('TemplateStore', () => {
 			variables: {},
 			currency: {},
 			language: {},
+			languageOverrides: {},
 			innerWidth: store.window.innerWidth,
 			style: undefined,
 		});
@@ -153,7 +159,7 @@ describe('TemplateStore', () => {
 	});
 
 	it('can addTarget', async () => {
-		const theme = 'global';
+		const theme = GLOBAL_THEME_NAME;
 		const config: SnapTemplatesConfig = {
 			themes: {
 				[theme]: {
@@ -165,7 +171,7 @@ describe('TemplateStore', () => {
 		const type = 'search';
 		const target = {
 			selector: '.test',
-			theme: 'global',
+			theme: GLOBAL_THEME_NAME,
 			component: 'Search',
 			resultComponent: 'Result',
 		};

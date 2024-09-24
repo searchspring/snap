@@ -48,7 +48,7 @@ import type { FacetProps } from '../components/Organisms/Facet';
 import type { FacetsHorizontalProps } from '../components/Organisms/FacetsHorizontal';
 import type { FacetsProps } from '../components/Organisms/Facets';
 import type { FilterSummaryProps } from '../components/Organisms/FilterSummary';
-import type { ResultsProps } from '../components/Organisms/Results';
+import type { ResultsNames, ResultsProps } from '../components/Organisms/Results';
 import type { SearchHeaderProps } from '../components/Atoms/SearchHeader';
 import type { SidebarProps } from '../components/Organisms/Sidebar';
 import type { ToolbarProps, ToolbarNames } from '../components/Organisms/Toolbar';
@@ -56,6 +56,7 @@ import type { AutocompleteProps } from '../components/Templates/Autocomplete';
 import type { RecommendationProps } from '../components/Templates/Recommendation';
 import type { RecommendationBundleProps } from '../components/Templates/RecommendationBundle';
 import type { RecommendationGridProps } from '../components/Templates/RecommendationGrid';
+import type { RecommendationEmailProps } from '../components/Templates/RecommendationEmail';
 import type { SearchProps } from '../components/Templates/Search';
 import type { SearchHorizontalProps } from '../components/Templates/SearchHorizontal';
 import type { NoResultsProps } from '../components/Atoms/NoResults';
@@ -137,6 +138,7 @@ export type ThemeComponents = {
 	recommendation: GenericComponentProps<RecommendationProps>;
 	recommendationBundle: GenericComponentProps<RecommendationBundleProps>;
 	recommendationGrid: GenericComponentProps<RecommendationGridProps>;
+	recommendationEmail: GenericComponentProps<RecommendationEmailProps>;
 	search: GenericComponentProps<SearchProps>;
 	searchHorizontal: GenericComponentProps<SearchHorizontalProps>;
 };
@@ -197,7 +199,7 @@ export type ThemeComponentOverrides = {
 } & { [K in UnNamedThemeComponentSelectors<'filterSummary'>]?: GenericComponentProps<FilterSummaryProps> } & {
 	[K in UnNamedThemeComponentSelectors<'noResults'>]?: GenericComponentProps<NoResultsProps>;
 } & {
-	[K in UnNamedThemeComponentSelectors<'results'>]?: GenericComponentProps<ResultsProps>;
+	[K in NamedThemeComponentSelectors<'results', ResultsNames>]?: GenericComponentProps<ResultsProps>;
 } & { [K in UnNamedThemeComponentSelectors<'searchHeader'>]?: GenericComponentProps<SearchHeaderProps> } & {
 	[K in UnNamedThemeComponentSelectors<'sidebar'>]?: GenericComponentProps<SidebarProps>;
 } & { [K in UnNamedThemeComponentSelectors<'mobileSidebar'>]?: GenericComponentProps<MobileSidebarProps> } & {
@@ -206,6 +208,6 @@ export type ThemeComponentOverrides = {
 	[K in UnNamedThemeComponentSelectors<'recommendation'>]?: GenericComponentProps<RecommendationProps>;
 } & { [K in UnNamedThemeComponentSelectors<'recommendationBundle'>]?: GenericComponentProps<RecommendationBundleProps> } & {
 	[K in UnNamedThemeComponentSelectors<'recommendationGrid'>]?: GenericComponentProps<RecommendationGridProps>;
-} & { [K in UnNamedThemeComponentSelectors<'search'>]?: GenericComponentProps<SearchProps> } & {
-	[K in UnNamedThemeComponentSelectors<'searchHorizontal'>]?: GenericComponentProps<SearchHorizontalProps>;
-};
+} & { [K in UnNamedThemeComponentSelectors<'recommendationEmail'>]?: GenericComponentProps<RecommendationEmailProps> } & {
+	[K in UnNamedThemeComponentSelectors<'search'>]?: GenericComponentProps<SearchProps>;
+} & { [K in UnNamedThemeComponentSelectors<'searchHorizontal'>]?: GenericComponentProps<SearchHorizontalProps> };

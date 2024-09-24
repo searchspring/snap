@@ -114,6 +114,22 @@ export function RadioList(properties: RadioListProps): JSX.Element {
 	// selection state
 	const [selection, setSelection] = useState<ListOption | undefined>(selected);
 
+	// original selection state
+	const [originalSelected] = useState(selected as ListOption);
+	// reset selection if 'selected' prop changes
+	try {
+		if (selected) {
+			const originalSelectedstr = JSON.stringify(originalSelected);
+			const selectedstr = JSON.stringify(selected);
+			const selectionstr = JSON.stringify(selection);
+			if (originalSelectedstr !== selectedstr && selectedstr !== selectionstr) {
+				setSelection(selected);
+			}
+		}
+	} catch (e) {
+		// noop
+	}
+
 	const makeSelection = (e: React.MouseEvent<HTMLElement>, option: ListOption) => {
 		if (onSelect) {
 			onSelect(e, option!);

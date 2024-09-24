@@ -1,8 +1,8 @@
 import { API, ApiConfiguration } from './Abstract';
-import { HTTPHeaders, PostRecommendRequestFiltersModel, PostRecommendRequestModel, GetRecommendRequestModel } from '../../types';
-import { AppMode, charsParams } from '@searchspring/snap-toolbox';
-import { transformRecommendationFiltersGet, transformRecommendationFiltersPost } from '../transforms';
-import { ProfileRequestModel, ProfileResponseModel, RecommendRequestModel, RecommendResponseModel } from '../../types';
+import { HTTPHeaders, RecommendPostRequestProfileModel } from '../../types';
+import { AppMode } from '@searchspring/snap-toolbox';
+import { transformRecommendationFiltersPost } from '../transforms';
+import { ProfileRequestModel, ProfileResponseModel, RecommendResponseModel, RecommendRequestModel, RecommendPostRequestModel } from '../../types';
 
 class Deferred {
 	promise: Promise<any>;
@@ -27,7 +27,7 @@ export class RecommendAPI extends API {
 	private batches: {
 		[key: string]: {
 			timeout: number | NodeJS.Timeout;
-			request: Partial<RecommendRequestModel>;
+			request: RecommendPostRequestModel;
 			entries: BatchEntry[];
 		};
 	};
@@ -40,23 +40,25 @@ export class RecommendAPI extends API {
 	async getProfile(queryParameters: ProfileRequestModel): Promise<ProfileResponseModel> {
 		const headerParameters: HTTPHeaders = {};
 
-		const response = await this.request(
+		const response = await this.request<ProfileResponseModel>(
 			{
 				path: '/api/personalized-recommendations/profile.json',
 				method: 'GET',
 				headers: headerParameters,
 				query: queryParameters,
 			},
-			'/api/personalized-recommendations/profile.json' + JSON.stringify(queryParameters)
+			JSON.stringify(queryParameters)
 		);
 
-		return response as unknown as ProfileResponseModel;
+		return response;
 	}
 
 	async batchRecommendations(parameters: RecommendRequestModel): Promise<RecommendResponseModel> {
+		const batchId = parameters.batchId || 1;
+
 		// set up batch key and deferred promises
-		const key = parameters.batched ? parameters.siteId : `${Math.random()}`;
-		const batch = (this.batches[key] = this.batches[key] || { timeout: null, request: { tags: [], limits: [] }, entries: [] });
+		const key = parameters.batched ? `${parameters.profile?.siteId || parameters.siteId}:${batchId}` : `${Math.random()}:${batchId}`;
+		const batch = (this.batches[key] = this.batches[key] || { timeout: null, request: { profiles: [] }, entries: [] });
 		const deferred = new Deferred();
 
 		// add each request to the list
@@ -70,51 +72,73 @@ export class RecommendAPI extends API {
 			// delete the batch so a new one can take its place
 			delete this.batches[key];
 
-			// reorder the requests by order value in context.
+			// resort batch entries based on order
 			batch.entries.sort(sortBatchEntries);
 
-			// now that the requests are in proper order, map through them
-			// and build out the batches
+			// now that the requests are in proper order, map through them and build out the batches
 			batch.entries.map((entry) => {
-				const { tags, categories, brands, ...otherParams } = entry.request;
-				let limits = entry.request.limits;
-
-				if (!limits) {
-					limits = 20;
-				}
-				const [tag] = tags || [];
-
-				delete otherParams.batched; // remove from request parameters
-				delete otherParams.order; // remove from request parameters
-				delete otherParams.limits;
-
-				batch.request.tags!.push(tag);
-
-				if (categories) {
-					if (!batch.request.categories) {
-						batch.request.categories = Array.isArray(categories) ? categories : [categories];
+				// use products request only and combine when needed
+				if (entry.request.product) {
+					if (Array.isArray(entry.request.products) && entry.request.products.indexOf(entry.request.product) == -1) {
+						entry.request.products = entry.request.products.concat(entry.request.product);
 					} else {
-						batch.request.categories = batch.request.categories.concat(categories);
+						entry.request.products = [entry.request.product];
 					}
 				}
 
-				if (brands) {
-					if (!batch.request.brands) {
-						batch.request.brands = Array.isArray(brands) ? brands : [brands];
-					} else {
-						batch.request.brands = batch.request.brands.concat(brands);
-					}
+				// build profile specific parameters
+				if (entry.request.profile) {
+					const {
+						tag,
+						profile: { categories, brands, blockedItems, limit, query, filters, dedupe },
+					} = entry.request;
+
+					const profile: RecommendPostRequestProfileModel = {
+						tag,
+						...defined({
+							categories,
+							brands,
+							blockedItems,
+							limit: limit,
+							searchTerm: query,
+							filters: transformRecommendationFiltersPost(filters),
+							dedupe,
+						}),
+					};
+
+					batch.request.profiles?.push(profile);
+				} else {
+					const { tag, categories, brands, limit, query, dedupe } = entry.request;
+
+					const profile: RecommendPostRequestProfileModel = {
+						tag,
+						...defined({
+							categories,
+							brands,
+							limit: limit,
+							searchTerm: query,
+							dedupe,
+						}),
+					};
+
+					batch.request.profiles?.push(profile);
 				}
 
-				batch.request.limits = (batch.request.limits as number[]).concat(limits);
-				batch.request = { ...batch.request, ...otherParams };
-
-				// combine product data if both 'product' and 'products' are used
-				if (batch.request.product && Array.isArray(batch.request.products)) {
-					batch.request.products = batch.request.products.concat(batch.request.product);
-
-					delete batch.request.product;
-				}
+				// parameters used globally
+				const { products, blockedItems, filters, test, cart, lastViewed, shopper } = entry.request;
+				batch.request = {
+					...batch.request,
+					...defined({
+						siteId: entry.request.profile?.siteId || entry.request.siteId,
+						products,
+						blockedItems,
+						filters: transformRecommendationFiltersPost(filters),
+						test,
+						cart,
+						lastViewed,
+						shopper,
+					}),
+				};
 			});
 
 			try {
@@ -122,37 +146,10 @@ export class RecommendAPI extends API {
 					batch.request.test = true;
 				}
 
-				let response: RecommendResponseModel;
-				if (charsParams(batch.request) > 1024) {
-					if (batch.request['product']) {
-						batch.request['product'] = batch.request['product'].toString();
-					}
-
-					//transform filters here
-					if (batch.request.filters) {
-						(batch.request as PostRecommendRequestModel)['filters'] = transformRecommendationFiltersPost(
-							batch.request.filters
-						) as PostRecommendRequestFiltersModel[];
-					}
-
-					response = await this.postRecommendations(batch.request as PostRecommendRequestModel);
-				} else {
-					if (batch.request.filters) {
-						const filters = transformRecommendationFiltersGet(batch.request.filters);
-						if (filters) {
-							Object.keys(filters).map((filter) => {
-								const _filter = filter as `filter.${string}`;
-								(batch.request as GetRecommendRequestModel)[_filter] = filters[_filter as keyof typeof filters];
-							});
-						}
-					}
-
-					delete batch.request.filters;
-					response = await this.getRecommendations(batch.request as GetRecommendRequestModel);
-				}
+				const response = await this.postRecommendations(batch.request as RecommendPostRequestModel);
 
 				batch.entries?.forEach((entry, index) => {
-					entry.deferred.resolve([response[index]]);
+					entry.deferred.resolve(response[index]);
 				});
 			} catch (err) {
 				batch.entries?.forEach((entry) => {
@@ -164,62 +161,62 @@ export class RecommendAPI extends API {
 		return deferred.promise;
 	}
 
-	async getRecommendations(queryParameters: GetRecommendRequestModel): Promise<RecommendResponseModel> {
+	async postRecommendations(requestParameters: RecommendPostRequestModel): Promise<RecommendResponseModel[]> {
 		const headerParameters: HTTPHeaders = {};
-
-		const siteId = queryParameters.siteId;
-		const path = `/boost/${siteId}/recommend`;
-
-		const response = await this.request(
-			{
-				path,
-				method: 'GET',
-				headers: headerParameters,
-				query: queryParameters,
-			},
-			path + JSON.stringify(queryParameters)
-		);
-
-		return response as unknown as RecommendResponseModel;
-	}
-
-	async postRecommendations(requestParameters: PostRecommendRequestModel): Promise<RecommendResponseModel> {
-		const headerParameters: HTTPHeaders = {};
-		headerParameters['Content-Type'] = 'application/json';
+		headerParameters['Content-Type'] = 'text/plain';
 
 		const siteId = requestParameters.siteId;
 		const path = `/boost/${siteId}/recommend`;
 
-		const response = await this.request(
+		const response = await this.request<RecommendResponseModel[]>(
 			{
 				path,
 				method: 'POST',
 				headers: headerParameters,
 				body: requestParameters,
 			},
-			path + JSON.stringify(requestParameters)
+			JSON.stringify(requestParameters)
 		);
 
-		return response as unknown as RecommendResponseModel;
+		return response;
 	}
 }
 
 function sortBatchEntries(a: BatchEntry, b: BatchEntry) {
+	const one = a.request as RecommendRequestModel;
+	const two = b.request as RecommendRequestModel;
+
 	// undefined order goes last
-	if (a.request.order == undefined && b.request.order == undefined) {
+	if (one.order == undefined && two.order == undefined) {
 		return 0;
 	}
-	if (a.request.order == undefined && b.request.order != undefined) {
+	if (one.order == undefined && two.order != undefined) {
 		return 1;
 	}
-	if (b.request.order == undefined && a.request.order != undefined) {
+	if (two.order == undefined && one.order != undefined) {
 		return -1;
 	}
-	if (a.request.order! < b.request.order!) {
+	if (one.order! < two.order!) {
 		return -1;
 	}
-	if (a.request.order! > b.request.order!) {
+	if (one.order! > two.order!) {
 		return 1;
 	}
 	return 0;
+}
+
+type DefinedProps = {
+	[key: string]: any;
+};
+
+export function defined(properties: Record<string, any>): DefinedProps {
+	const definedProps: DefinedProps = {};
+
+	Object.keys(properties).map((key) => {
+		if (properties[key] !== undefined) {
+			definedProps[key] = properties[key];
+		}
+	});
+
+	return definedProps;
 }

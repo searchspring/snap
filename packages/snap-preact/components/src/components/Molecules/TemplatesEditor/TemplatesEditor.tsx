@@ -10,6 +10,7 @@ import { Button } from '../../Atoms/Button';
 import { observer } from 'mobx-react-lite';
 import { debounce } from '@searchspring/snap-toolbox';
 import { CacheProvider } from '../../../providers';
+import { GLOBAL_THEME_NAME } from '../../../../../src/Templates/Stores/TargetStore';
 
 const CSS = {
 	ColorDisplay: ({ color, isColorPickerVisible }: any) =>
@@ -185,8 +186,8 @@ export const TemplatesEditor = observer((properties: TemplatesEditorProps): JSX.
 	const currencyKeys = Object.keys(currencies);
 	const libraryThemes = Object.keys(templatesStore.themes.library || {});
 	const lcoalThemes = Object.keys(templatesStore.themes.local || {}).sort((a, b) => {
-		if (a === 'global') return -1;
-		if (b === 'global') return 1;
+		if (a === GLOBAL_THEME_NAME) return -1;
+		if (b === GLOBAL_THEME_NAME) return 1;
 		return 0;
 	});
 	const selectedTargetConfig = templatesStore.getTarget(selectedTarget.type, selectedTarget.target);

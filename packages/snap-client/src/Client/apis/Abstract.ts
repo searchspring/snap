@@ -34,15 +34,15 @@ export class API {
 		return this.configuration.mode;
 	}
 
-	protected async request(context: RequestOpts, cacheKey?: any): Promise<Response> {
+	protected async request<T>(context: RequestOpts, cacheKey?: string): Promise<T> {
 		const { url, init } = this.createFetchParams(context);
 
 		if (cacheKey) {
-			const cachedResponse = this.cache.get(cacheKey);
+			const cachedResponse = this.cache.get(`${context.path}/${cacheKey}`) || this.cache.get(`${context.path}/*`);
 			if (cachedResponse) {
 				this.retryCount = 0; // reset count and delay incase rate limit occurs again before a page refresh
 				this.retryDelay = 1000;
-				return cachedResponse;
+				return cachedResponse as T;
 			}
 		}
 		let response;
@@ -57,7 +57,7 @@ export class API {
 				this.retryDelay = 1000;
 				if (cacheKey) {
 					// save in the cache before returning
-					this.cache.set(cacheKey, responseJSON);
+					this.cache.set(`${context.path}/${cacheKey}`, responseJSON);
 				}
 				return responseJSON;
 			} else if (response.status == 429) {

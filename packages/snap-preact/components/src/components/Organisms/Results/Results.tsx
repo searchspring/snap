@@ -12,9 +12,11 @@ import { InlineBanner, InlineBannerProps } from '../../Atoms/Merchandising/Inlin
 import { Result, ResultProps } from '../../Molecules/Result';
 import { ComponentProps, ResultsLayout, BreakpointsProps, RootNodeProperties, ResultComponent } from '../../../types';
 import { defined, mergeProps } from '../../../utilities';
-import { Theme, useTheme, CacheProvider } from '../../../providers';
+import { Theme, useTheme, CacheProvider, useSnap } from '../../../providers';
 import { useDisplaySettings } from '../../../hooks/useDisplaySettings';
 import { SearchResultTracker } from '../../Trackers/SearchResultTracker';
+import { SnapTemplates } from '../../../../../src';
+import { useComponent } from '../../../hooks';
 
 const CSS = {
 	results: ({ columns, gapSize }: Partial<ResultsProps>) =>
@@ -90,7 +92,8 @@ export const Results = observer((properties: ResultsProps): JSX.Element => {
 		};
 	}
 
-	const { disableStyles, resultComponent, className, layout, style, theme, styleScript, controller, treePath } = props;
+	const { disableStyles, className, layout, style, theme, styleScript, controller, treePath } = props;
+	let { resultComponent } = props;
 
 	const subProps: ResultsSubProps = {
 		result: {
@@ -137,6 +140,16 @@ export const Results = observer((properties: ResultsProps): JSX.Element => {
 		styling.css = [style];
 	}
 
+	if (typeof resultComponent === 'string') {
+		const snap = useSnap() as SnapTemplates;
+		if (snap?.templates?.library.import.component.result) {
+			resultComponent = useComponent(snap?.templates?.library.import.component.result, resultComponent);
+			if (!resultComponent) {
+				return <Fragment></Fragment>;
+			}
+		}
+	}
+
 	return results?.length ? (
 		<CacheProvider>
 			<div {...styling} className={classnames('ss__results', `ss__results-${props.layout}`, className)}>
@@ -181,10 +194,12 @@ export interface ResultsProps extends ComponentProps {
 	layout?: keyof typeof ResultsLayout | ResultsLayout;
 	breakpoints?: BreakpointsProps;
 	controller?: SearchController | AutocompleteController | RecommendationController;
-	resultComponent?: ResultComponent;
+	resultComponent?: ResultComponent | string;
 }
 
 interface ResultsSubProps {
 	result: Partial<ResultProps>;
 	inlineBanner: Partial<InlineBannerProps>;
 }
+
+export type ResultsNames = 'search' | 'autocomplete';

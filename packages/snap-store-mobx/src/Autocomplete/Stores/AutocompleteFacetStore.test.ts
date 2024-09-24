@@ -40,12 +40,12 @@ describe('Facet store', () => {
 				autocomplete: rootState,
 			},
 			data: {
-				search: searchData,
+				search: searchData.search,
 				meta: searchData.meta,
 			},
 		});
 
-		expect(facetStore).toHaveLength(searchData.facets?.length!);
+		expect(facetStore).toHaveLength(searchData.search.facets?.length!);
 	});
 
 	it('adds a preview function to each facet value', () => {
@@ -63,7 +63,7 @@ describe('Facet store', () => {
 				autocomplete: rootState,
 			},
 			data: {
-				search: searchData,
+				search: searchData.search,
 				meta: searchData.meta,
 			},
 		});

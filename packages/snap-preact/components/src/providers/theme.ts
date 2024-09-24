@@ -57,7 +57,7 @@ export type Theme = {
 	variables?: ThemeVariables;
 	responsive?: [ThemeResponsive, ThemeResponsive, ThemeResponsive, ThemeResponsive];
 	components?: ThemeComponentOverrides;
-	layoutOptions?: ListOption[];
+	layoutOptions?: (Omit<ListOption, 'overrides'> & { overrides: ThemeMinimal })[];
 };
 
 export type ThemeResponsive = Pick<Theme, 'components' | 'layoutOptions'>;

@@ -171,8 +171,18 @@
                 </div>
             </div>
 
-            <script type="searchspring/recommend" profile="similar">
-                product = "C-AD-W1-1869P";
+            <div class="ss__recs__similar">stuff...</div>
+
+            <script type="searchspring/recommendations">
+                    globals = {
+                        products: ['C-AD-W1-1869P'],
+                    };
+                    profiles = [
+                        {
+                            profile: 'similar',
+                            selector: '.ss__recs__similar'
+                        },
+                    ]
             </script>
         </div>
     </main>

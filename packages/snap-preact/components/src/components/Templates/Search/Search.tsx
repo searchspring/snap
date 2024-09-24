@@ -157,6 +157,7 @@ export const Search = observer((properties: SearchProps): JSX.Element => {
 			treePath,
 		},
 		Results: {
+			name: 'search',
 			// default props
 			resultComponent: resultComponent,
 			// inherited props

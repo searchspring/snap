@@ -64,16 +64,16 @@ describe('Legacy Api', () => {
 			.mockImplementation(() => Promise.resolve({ status: 200, json: () => Promise.resolve({}) } as Response));
 
 		const params = {
-			body: '{"siteId":"88uyt2m"}',
+			body: '{"siteId":"abc123"}',
 			headers: {
 				'Content-Type': 'application/json',
 			},
 			method: 'POST',
 		};
-		const reuestUrl = 'https://88uyt2m.a.searchspring.io/api/meta/meta.json';
+		const reuestUrl = 'https://abc123.a.searchspring.io/api/meta/meta.json';
 
 		await api.postMeta({
-			siteId: '88uyt2m',
+			siteId: 'abc123',
 		});
 
 		expect(requestMock).toHaveBeenCalledWith(reuestUrl, params);
