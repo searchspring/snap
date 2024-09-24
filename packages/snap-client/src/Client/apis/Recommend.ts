@@ -1,5 +1,5 @@
 import { API, ApiConfiguration } from './Abstract';
-import { HTTPHeaders, RecommendPostRequestFiltersModel, RecommendPostRequestProfileModel } from '../../types';
+import { HTTPHeaders, RecommendPostRequestProfileModel } from '../../types';
 import { AppMode } from '@searchspring/snap-toolbox';
 import { transformRecommendationFiltersPost } from '../transforms';
 import { ProfileRequestModel, ProfileResponseModel, RecommendResponseModel, RecommendRequestModel, RecommendPostRequestModel } from '../../types';
@@ -128,14 +128,10 @@ export class RecommendAPI extends API {
 				const { products, blockedItems, filters, test, cart, lastViewed, shopper } = entry.request;
 
 				// merge and de-dupe global array fields
-				const dedupedProducts = Array.from(new Set(([] as string[]).concat(batch.request.products || [], products || [])));
-				const dedupedBlockedItems = Array.from(([] as string[]).concat(batch.request.blockedItems || [], blockedItems || []));
+				const dedupedProducts = Array.from(new Set((batch.request.products || []).concat(products || [])));
+				const dedupedBlockedItems = Array.from(new Set((batch.request.blockedItems || []).concat(blockedItems || [])));
 				const dedupedFilters = Array.from(
-					new Set(
-						([] as RecommendPostRequestFiltersModel[])
-							.concat(batch.request.filters || [], transformRecommendationFiltersPost(filters) || [])
-							.map((filter) => JSON.stringify(filter))
-					)
+					new Set((batch.request.filters || []).concat(transformRecommendationFiltersPost(filters) || []).map((filter) => JSON.stringify(filter)))
 				).map((stringyFilter) => JSON.parse(stringyFilter));
 
 				batch.request = {
