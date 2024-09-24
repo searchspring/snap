@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.60.2](https://github.com/searchspring/snap/compare/v0.60.1...v0.60.2) (2024-09-24)
+
+### Bug Fixes
+
+- **client/recommend:** adjusting recommend request to merge and de-dupe global parameters ([9e919ab](https://github.com/searchspring/snap/commit/9e919ab8cc73f48276755131541f889be078e186))
+
 ## [0.60.1](https://github.com/searchspring/snap/compare/v0.60.0...v0.60.1) (2024-09-12)
 
 ### Bug Fixes
