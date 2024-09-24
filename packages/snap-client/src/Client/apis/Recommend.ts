@@ -128,15 +128,15 @@ export class RecommendAPI extends API {
 				const { products, blockedItems, filters, test, cart, lastViewed, shopper } = entry.request;
 
 				// merge and de-dupe global array fields
-				const dedupedProducts = [...new Set(([] as string[]).concat(batch.request.products || [], products || []))];
-				const dedupedBlockedItems = [...new Set(([] as string[]).concat(batch.request.blockedItems || [], blockedItems || []))];
-				const dedupedFilters = [
-					...new Set(
+				const dedupedProducts = Array.from(new Set(([] as string[]).concat(batch.request.products || [], products || [])));
+				const dedupedBlockedItems = Array.from(([] as string[]).concat(batch.request.blockedItems || [], blockedItems || []));
+				const dedupedFilters = Array.from(
+					new Set(
 						([] as RecommendPostRequestFiltersModel[])
 							.concat(batch.request.filters || [], transformRecommendationFiltersPost(filters) || [])
 							.map((filter) => JSON.stringify(filter))
-					),
-				].map((stringyFilter) => JSON.parse(stringyFilter));
+					)
+				).map((stringyFilter) => JSON.parse(stringyFilter));
 
 				batch.request = {
 					...batch.request,
