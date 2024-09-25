@@ -13,9 +13,10 @@ import type { SearchController, AutocompleteController } from '@searchspring/sna
 import type { ValueFacet } from '@searchspring/snap-store-mobx';
 import type { IndividualFacetType } from '../Facets/Facets';
 import { MobileSidebar, MobileSidebarProps } from '../MobileSidebar';
-import { Lang, useClickOutside, useLang } from '../../../hooks';
+import { Lang, useA11y, useClickOutside, useLang } from '../../../hooks';
 import { Dropdown, DropdownProps } from '../../Atoms/Dropdown';
 import { Icon, IconProps, IconType } from '../../Atoms/Icon';
+import { useEffect } from 'react';
 
 const CSS = {
 	facets: ({ theme }: Partial<FacetsHorizontalProps>) =>
@@ -223,6 +224,11 @@ export const FacetsHorizontal = observer((properties: FacetsHorizontalProps): JS
 		selectedFacet && setSelectedFacet(undefined);
 	});
 
+	let contentRef: any;
+	useEffect(() => {
+		!overlay && contentRef?.focus();
+	}, [selectedFacet]);
+
 	return facetsToShow && facetsToShow?.length > 0 ? (
 		<CacheProvider>
 			<div
@@ -236,7 +242,7 @@ export const FacetsHorizontal = observer((properties: FacetsHorizontalProps): JS
 						const defaultLang = {
 							dropdownButton: {
 								attributes: {
-									'aria-label': `currently ${selectedFacet?.field === facet.field ? 'collapsed' : 'open'} ${facet.field} facet dropdown ${
+									'aria-label': `currently ${selectedFacet?.field === facet.field ? 'open' : 'collapsed'} ${facet.field} facet dropdown ${
 										(facet as ValueFacet).values?.length ? (facet as ValueFacet).values?.length + ' options' : ''
 									}`,
 								},
@@ -267,7 +273,13 @@ export const FacetsHorizontal = observer((properties: FacetsHorizontalProps): JS
 									setSelectedFacet(facet);
 								}}
 								button={
-									<div className="ss__dropdown__button__heading" role="heading" aria-level={3} {...mergedLang.dropdownButton.attributes}>
+									<div
+										className="ss__dropdown__button__heading"
+										ref={(e) => useA11y(e, 0)}
+										role="heading"
+										aria-level={3}
+										{...mergedLang.dropdownButton.attributes}
+									>
 										<span {...mergedLang.dropdownButton.value}>{facet?.label}</span>
 										<Icon
 											{...subProps.icon}
@@ -292,6 +304,15 @@ export const FacetsHorizontal = observer((properties: FacetsHorizontalProps): JS
 
 				{!overlay && selectedFacet && (
 					<div
+						ref={(e) => {
+							useA11y(e, 0, true, () => {
+								setSelectedFacet(undefined);
+								setTimeout(() => {
+									(innerRef.current?.querySelector('.ss__dropdown__button__heading') as HTMLElement)?.focus();
+								});
+							});
+							contentRef = e;
+						}}
 						className={classnames(
 							'ss__facets-horizontal__content',
 							`ss__facets-horizontal__content--${selectedFacet.display}`,
