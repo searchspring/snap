@@ -12,7 +12,7 @@ import { Tracker } from '@searchspring/snap-tracker';
 import { MockClient } from '@searchspring/snap-shared';
 
 import { SearchController, getStorableRequestParams, generateHrefSelector } from './SearchController';
-import type { SearchControllerConfig, BeforeSearchObj, RestorePositionObj, ElementPositionObj } from '../types';
+import type { SearchControllerConfig, BeforeSearchObj, RestorePositionObj, ElementPositionObj, AfterSearchObj } from '../types';
 import type { SearchRequestModel } from '@searchspring/snapi-types';
 
 const globals = { siteId: 'ga9kq2' };
@@ -226,6 +226,62 @@ describe('Search Controller', () => {
 				expect(controller.store.results.length).toBe(0);
 			}
 		});
+	});
+
+	it(`allows mutation of response in 'afterSearch' middleware`, async function () {
+		const controller = new SearchController(searchConfig, {
+			client: new MockClient(globals, {}),
+			store: new SearchStore(searchConfig, services),
+			urlManager,
+			eventManager: new EventManager(),
+			profiler: new Profiler(),
+			logger: new Logger(),
+			tracker: new Tracker(globals),
+		});
+
+		controller.on('afterSearch', ({ response }: AfterSearchObj) => {
+			response.search.results[0].mappings.core.name = 'mutated';
+			response.meta.badges = {
+				locations: {
+					left: [
+						{
+							tag: 'left',
+							name: 'Left',
+						},
+					],
+					right: [
+						{
+							tag: 'right',
+							name: 'Right',
+						},
+					],
+					callout: [
+						{
+							tag: 'callout',
+							name: 'Callout',
+						},
+					],
+				},
+				tags: {
+					'free-shipping': {
+						location: 'callout/callout',
+						component: 'BadgeRectangle',
+						priority: 1,
+						enabled: true,
+						parameters: {
+							color: '#3A23AD',
+							colorText: '#FFFFFF',
+						},
+					},
+				},
+			};
+		});
+
+		await controller.search();
+
+		// store should have updated data
+		expect(controller.store.results[0].mappings.core?.name).toBe('mutated');
+		expect(Object.keys(controller.store.meta?.data.badges?.tags ?? {}).length).toBe(1);
 	});
 
 	it('can set landingPage param', async () => {
