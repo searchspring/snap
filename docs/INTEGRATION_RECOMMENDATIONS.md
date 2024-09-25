@@ -25,10 +25,10 @@ The block below uses the `recently-viewed` profile which would typically be setu
 	];
 </script>
 
-<div class="ss__recs__recently-viewed"><!-- recommendations will render here --></div>
+<div class="ss__recs__recently-viewed" style="min-height: 100vh;"><!-- recommendations will render here --></div>
 ```
 
-The `RecommendationInstantiator` will look for these script blocks on the page and attempt to inject components based on the `selector` specified in each profile. In the example above, the profile specified is the `recently-viewed` profile, and is set to render inside the `.ss__recs__recently-viewed` element just below the script block. The targeted element could exist anywhere on the page - but it is recommended to group elements with script blocks whenever possible (for easy integration identification). The component to render into the targeted `selector` is setup within the `RecommendationInstantiator` configuration.
+The `RecommendationInstantiator` will look for these script blocks on the page and attempt to inject components based on the `selector` specified in each profile. In the example above, the profile specified is the `recently-viewed` profile, and is set to render inside the `.ss__recs__recently-viewed` element just below the script block. The targeted element could exist anywhere on the page - but it is recommended to group elements with script blocks whenever possible (for easy integration identification). The component to render into the targeted `selector` is setup within the `RecommendationInstantiator` configuration. The targeted element should be given a `min-height` inline style to prevent cumulative layout shift.
 
 
 ## Recommendation Context Variables
