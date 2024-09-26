@@ -199,6 +199,32 @@ var documents = [
 		],
 	},
 	{
+		categoryName: 'Templates',
+		links: [
+			{
+				label: 'Setup',
+				route: '/templates-setup',
+				type: 'markdown',
+				url: './docs/TEMPLATES_SETUP.md',
+				searchable: true,
+			},
+			{
+				label: 'Config',
+				route: '/templates-config',
+				type: 'markdown',
+				url: './docs/TEMPLATES_CONFIG.md',
+				searchable: true,
+			},
+			{
+				label: 'Theming',
+				route: '/templates-theming',
+				type: 'markdown',
+				url: './docs/TEMPLATES_THEMING.md',
+				searchable: true,
+			},
+		],
+	},
+	{
 		categoryName: 'Packages',
 		links: [
 			{
