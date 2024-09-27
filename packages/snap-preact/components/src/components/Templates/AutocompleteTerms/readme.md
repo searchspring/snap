@@ -1,4 +1,4 @@
-# Terms
+# AutocompleteTerms
 
 Renders a list of terms for autocomplete. 
 
@@ -9,7 +9,7 @@ Renders a list of terms for autocomplete.
 The `controller` prop specifies a reference to the autocomplete controller.
 
 ```jsx
-<Terms controller={controller} />
+<AutocompleteTerms controller={controller} />
 ```
 
 ### Terms
@@ -17,7 +17,7 @@ The `controller` prop specifies a reference to the autocomplete controller.
 The `terms` prop specifies a reference to an autocomplete term store, if terms are not provided, the terms in the controller store will be used. 
 
 ```jsx
-<Terms controller={controller} terms={terms}/>
+<AutocompleteTerms controller={controller} terms={terms}/>
 ```
 
 ### title
@@ -25,7 +25,7 @@ The `terms` prop specifies a reference to an autocomplete term store, if terms a
 The `title` prop is will display the given text above the terms area. The default value is blank. 
 
 ```jsx
-<Terms controller={controller} title={'Suggestions'}/>
+<AutocompleteTerms controller={controller} title={'Suggestions'}/>
 ```
 
 ### limit
@@ -33,7 +33,7 @@ The `title` prop is will display the given text above the terms area. The defaul
 The `limit` prop is used for number of terms to render. Please note that this does not limit the number of terms fetched by the controller.  
 
 ```jsx
-<Terms controller={controller} limit={4}/>
+<AutocompleteTerms controller={controller} limit={4}/>
 ```
 
 ### previewOnHover
@@ -41,7 +41,7 @@ The `limit` prop is used for number of terms to render. Please note that this do
 The `previewOnFocus` prop will invoke the `term.preview()` method when the value has been hovered over.
 
 ```jsx
-<Terms controller={controller} previewOnHover={true}/>
+<AutocompleteTerms controller={controller} previewOnHover={true}/>
 ```
 
 ### emify
@@ -49,7 +49,7 @@ The `previewOnFocus` prop will invoke the `term.preview()` method when the value
 The `emify` will automatically wrap non-matching characters within the term with an `<em>` element for different styling purposes. 
 
 ```jsx
-<Terms controller={controller} emify={true}/>
+<AutocompleteTerms controller={controller} emify={true}/>
 ```
 
 ### onTermClick
@@ -57,5 +57,5 @@ The `emify` will automatically wrap non-matching characters within the term with
 The `onTermClick` prop allows for a custom callback function for when a term value is clicked. The function is passed the clicked terms reference in the term store. 
 
 ```jsx
-<Terms controller={controller} onTermClick={(e, term)=>{console.log(e, term)}}/>
+<AutocompleteTerms controller={controller} onTermClick={(e, term)=>{console.log(e, term)}}/>
 ```

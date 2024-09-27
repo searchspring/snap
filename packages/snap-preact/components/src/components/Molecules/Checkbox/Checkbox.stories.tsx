@@ -81,7 +81,7 @@ export default {
 				type: {
 					summary: 'string',
 				},
-				defaultValue: { summary: 'theme.colors.primary' },
+				defaultValue: { summary: 'theme.variables.colors.primary' },
 			},
 			control: { type: 'color' },
 		},
@@ -91,7 +91,7 @@ export default {
 				type: {
 					summary: 'string',
 				},
-				defaultValue: { summary: 'theme.colors.primary' },
+				defaultValue: { summary: 'theme.variables.colors.primary' },
 			},
 			control: { type: 'color' },
 		},

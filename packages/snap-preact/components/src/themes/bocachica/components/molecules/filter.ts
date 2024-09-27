@@ -11,8 +11,13 @@ const filterStyleScript = ({ theme }: FilterProps) => {
 		display: 'inline-flex',
 		'& .ss__filter__button': {
 			alignItems: 'center',
+			backgroundColor: variables?.colors?.active?.background || '#ccc',
+			color: variables?.colors?.active?.foreground,
+
 			'& .ss__filter__button__icon': {
-				marginRight: '5px',
+				fill: variables?.colors?.active?.foreground,
+				stroke: variables?.colors?.active?.foreground,
+				margin: '0 5px 0 0',
 			},
 		},
 		'& .ss__filter__label': {

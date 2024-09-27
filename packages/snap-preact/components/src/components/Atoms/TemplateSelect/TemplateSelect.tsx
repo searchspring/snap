@@ -3,7 +3,6 @@ import { observer } from 'mobx-react-lite';
 import { Controllers } from '@searchspring/snap-controller';
 import { ThemeProvider, SnapProvider, Theme } from '../../../providers';
 import type { SnapTemplates } from '../../../../../src';
-// TODO: cleanup path to just /src when exports added
 import type { TemplatesStore, TemplateThemeTypes, TemplateTypes } from '../../../../../src/Templates/Stores/TemplateStore';
 import type { ResultComponent as ResultComponentType } from '../../../';
 

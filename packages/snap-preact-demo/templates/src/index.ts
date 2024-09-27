@@ -1,6 +1,6 @@
 import { SnapTemplates } from '@searchspring/snap-preact';
-import { CustomResult } from './components/Result';
-import { globalStyles } from './styles';
+// import { CustomResult } from './components/Result';
+// import { globalStyles } from './styles';
 
 new SnapTemplates({
 	config: {
@@ -10,186 +10,53 @@ new SnapTemplates({
 	},
 	components: {
 		result: {
-			Global: async () => (await import('./components/Result')).CustomResultSecondary,
-			CustomResult: () => CustomResult,
-			CustomResultSecondary: async () => (await import('./components/Result')).CustomResultSecondary,
+			// CustomResult: async () => (await import('./components/Result')).CustomResultSecondary,
 		},
 		badge: {
 			// CustomPill: async () => (await import('./components/Result')).Result,
 		},
 	},
 	themes: {
-		myTheme: {
-			extends: 'bocachica',
-			resultComponent: 'CustomResult',
-		},
 		global: {
 			extends: 'bocachica',
-			// resultComponent: 'CustomResultSecondary',
-			// resultComponent: 'Global',
-			resultComponent: 'CustomResult',
 			variables: {
 				colors: {
-					primary: 'red',
-					secondary: 'blue',
+					primary: '#3A23AD',
+					secondary: '#4c3ce2',
+					accent: '#00cee1',
+					active: {
+						foreground: '#333333',
+						background: '#f8f6fd',
+						accent: '#3A23AD',
+					},
+					hover: {
+						foreground: '#333333',
+						background: '#f8f6fd',
+						accent: '#3A23AD',
+					},
 				},
-				breakpoints: [0, 768, 1024, 1280],
 			},
-			style: globalStyles,
 			overrides: {
 				components: {
-					noResults: {
-						templates: {
-							recommendation: {
-								enabled: true,
-								component: 'Recommendation',
-								// resultComponent: 'Global',
-								config: {
-									tag: 'similar',
-								},
-							},
-						},
-					},
-					price: {
-						style: {
-							background: 'red',
-						},
-					},
-					toolbar: {
-						hidePerPage: true,
-						// hidePagination: true,
-						style: {
-							background: 'red',
-						},
-					},
-
-					'toolbar.top': {
-						hidePerPage: true,
-						hidePagination: true,
-					},
-
-					'search toolbar.top': {
-						hidePerPage: false,
-						hidePagination: false,
-					},
-
-					'search toolbar': {
-						hidePerPage: false,
-						// style: {
-						// 	background: 'blue'
-						// }
-					},
-
-					'search toolbar.bottom': {
-						hidePerPage: false,
-						hidePagination: false,
-						style: {
-							background: 'pink',
-						},
-					},
-
-					// 'icon.next': {
-					// 	icon: 'cog',
-					// },
-
-					// 'carousel icon.next': {
-					// 	icon: 'cog',
-					// },
-
-					// 'pagination icon.next': {
-					// 	icon: 'cog',
-					// },
+					// overrides here...
 				},
-				layoutOptions: [
-					{
-						value: 2,
-						label: 'two',
-						overrides: {
-							components: {
-								toolbar: {
-									hideSortBy: true,
-								},
-								results: {
-									columns: 2,
-								},
-							},
-						},
-					},
-					{
-						value: 4,
-						label: 'four',
-						default: true,
-						overrides: {
-							components: {
-								results: {
-									columns: 4,
-								},
-							},
-						},
-					},
-				],
-				responsive: [
-					{
-						components: {
-							pagination: {
-								hideLast: true,
-							},
-						},
-						layoutOptions: [
-							{
-								value: 1,
-								label: 'one',
-								overrides: {
-									components: {
-										toolbar: {
-											hideSortBy: true,
-										},
-										results: {
-											columns: 1,
-										},
-									},
-								},
-							},
-							{
-								value: 3,
-								label: 'three',
-								default: true,
-								overrides: {
-									components: {
-										results: {
-											columns: 3,
-										},
-									},
-								},
-							},
-						],
-					},
-					{
-						// layoutOptions: [],
-					},
-					{},
-					{},
-				],
 			},
-		},
-		otherTheme: {
-			extends: 'bocachica',
 		},
 	},
 	search: {
 		targets: [
 			{
 				selector: '#searchspring-layout',
+				// theme: 'myTheme',
 				component: 'Search',
 				// resultComponent: 'Result',
 			},
 		],
 	},
 	autocomplete: {
-		inputSelector: 'input.searchspring-ac, .thing2',
+		inputSelector: 'input.searchspring-ac',
 		targets: [
 			{
-				// does this force usage to after the input only?
 				selector: 'input.searchspring-ac',
 				// theme: 'myTheme',
 				component: 'Autocomplete',

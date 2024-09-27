@@ -2,14 +2,15 @@ import { css } from '@emotion/react';
 import type { FacetPaletteOptionsProps } from '../../../../components/Molecules/FacetPaletteOptions';
 
 // CSS in JS style script for the FacetPaletteOptions component
-const facetPaletteStyleScript = ({ columns, gapSize, theme }: FacetPaletteOptionsProps) => {
+const facetPaletteStyleScript = ({ columns, gapSize, gridSize, theme }: FacetPaletteOptionsProps) => {
 	const variables = theme?.variables;
 
 	return css({
 		display: 'flex',
 		flexFlow: 'row wrap',
-		gridTemplateColumns: columns ? `repeat(${columns}, 1fr)` : 'repeat(auto-fill, minmax(45px, 1fr))',
-		gap: gapSize,
+		gridTemplateColumns: columns
+			? `repeat(${columns}, calc((100% - (${columns! - 1} * ${gapSize}))/ ${columns}))`
+			: `repeat(auto-fill, minmax(${gridSize}, 1fr))`,
 
 		'& .ss__facet-palette-options__option': {
 			width: `calc(100% / ${columns} - ${2 * Math.round((columns! + 2) / 2)}px )`,

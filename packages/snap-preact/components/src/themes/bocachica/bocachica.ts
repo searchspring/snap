@@ -4,7 +4,7 @@ import { layoutOptions } from './layoutOptions';
 import { responsive } from './responsive';
 
 const bocachicaVariables: ThemeVariables = {
-	breakpoints: [0, 767, 999, 1299],
+	breakpoints: [0, 767, 1024, 1400],
 	colors: {
 		primary: '#202223',
 		secondary: '#6d7175',

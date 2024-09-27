@@ -9,6 +9,7 @@ import Readme from '../BadgeImage/readme.md';
 export default {
 	title: 'Atoms/BadgeImage',
 	component: BadgeImage,
+	tags: ['autodocs'],
 	parameters: {
 		docs: {
 			page: () => (

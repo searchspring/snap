@@ -165,19 +165,6 @@ Default.loaders = [
 	},
 ];
 
-export const ToggleSidebar = (args: SearchProps, { loaded: { controller } }: { loaded: { controller: SearchController } }) => {
-	return <Search toggleSidebarButtonText="Hide Sidebar" {...args} controller={controller} />;
-};
-
-ToggleSidebar.loaders = [
-	async () => {
-		await snapInstance.search();
-		return {
-			controller: snapInstance,
-		};
-	},
-];
-
 export const NoResults = (args: SearchProps, { loaded: { controller } }: { loaded: { controller: SearchController } }) => {
 	return <Search {...args} controller={controller} />;
 };

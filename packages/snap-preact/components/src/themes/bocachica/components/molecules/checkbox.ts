@@ -13,8 +13,15 @@ const checkboxStyleScript = ({ size, color, theme }: CheckboxProps) => {
 		width: size,
 		border: `1px solid ${color || variables?.colors?.secondary || '#333'}`,
 		borderRadius: '3px',
+		'&.ss__checkbox--active': {
+			backgroundColor: variables?.colors?.active.background,
+			'.ss__icon': {
+				fill: variables?.colors?.active.foreground,
+				stroke: variables?.colors?.active.foreground,
+			},
+		},
 		'&.ss__checkbox--disabled': {
-			opacity: 0.7,
+			opacity: 0.3,
 		},
 		'& .ss__checkbox__empty': {
 			display: 'inline-block',

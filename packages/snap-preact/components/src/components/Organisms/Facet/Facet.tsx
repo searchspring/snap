@@ -18,7 +18,7 @@ import type { ValueFacet, RangeFacet, FacetHierarchyValue, FacetValue, FacetRang
 import { defined, cloneWithProps, mergeProps } from '../../../utilities';
 import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { useA11y } from '../../../hooks/useA11y';
-import { FacetToggle, FacetToggleProps } from '../../Molecules/FacetToggle';
+// import { FacetToggle, FacetToggleProps } from '../../Molecules/FacetToggle';
 import { Lang, useLang } from '../../../hooks';
 import deepmerge from 'deepmerge';
 
@@ -218,19 +218,19 @@ export const Facet = observer((properties: FacetProps): JSX.Element => {
 			theme: props?.theme,
 			treePath,
 		},
-		facetToggle: {
-			// default props
-			className: 'ss__facet__facet-toggle',
-			// global theme
-			...globalTheme?.components?.facetToggle,
-			// inherited props
-			...defined({
-				disableStyles,
-			}),
-			// component theme overrides
-			theme: props?.theme,
-			treePath,
-		},
+		// facetToggle: {
+		// 	// default props
+		// 	className: 'ss__facet__facet-toggle',
+		// 	// global theme
+		// 	...globalTheme?.components?.facetToggle,
+		// 	// inherited props
+		// 	...defined({
+		// 		disableStyles,
+		// 	}),
+		// 	// component theme overrides
+		// 	theme: props?.theme,
+		// 	treePath,
+		// },
 		facetSlider: {
 			// default props
 			className: 'ss__facet__facet-slider',
@@ -401,8 +401,8 @@ const FacetContent = (props: any) => {
 						return cloneWithProps(optionsSlot, { facet, valueProps, limit, previewOnFocus, treePath });
 					} else {
 						switch (facet?.display) {
-							case FacetDisplay.TOGGLE:
-								return <FacetToggle {...subProps.facetToggle} facet={facet as ValueFacet} />;
+							// case FacetDisplay.TOGGLE:
+							// 	return <FacetToggle {...subProps.facetToggle} facet={facet as ValueFacet} />;
 							case FacetDisplay.SLIDER:
 								return <FacetSlider {...subProps.facetSlider} facet={facet as RangeFacet} />;
 							case FacetDisplay.GRID:
@@ -451,7 +451,7 @@ interface FacetSubProps {
 	facetGridOptions: Partial<FacetGridOptionsProps>;
 	facetPaletteOptions: Partial<FacetPaletteOptionsProps>;
 	facetHierarchyOptions: Partial<FacetHierarchyOptionsProps>;
-	facetToggle: Partial<FacetToggleProps>;
+	// facetToggle: Partial<FacetToggleProps>;
 	facetSlider: Partial<FacetSliderProps>;
 	searchInput: Partial<SearchInputProps>;
 	icon: Partial<IconProps>;

@@ -11,7 +11,7 @@ import { filters } from '@searchspring/snap-toolbox';
 import { useComponent } from '../../../hooks/useComponent';
 import { useCreateController } from '../../../hooks/useCreateController';
 import type { RecommendationController, RecommendationControllerConfig } from '@searchspring/snap-controller';
-import type { ResultComponent } from '../../../';
+import type { RecommendationGridProps, RecommendationProps, ResultComponent } from '../../../';
 import type { FunctionalComponent } from 'preact';
 import type { SnapTemplates } from '../../../../../src';
 import type { SearchController } from '@searchspring/snap-controller';
@@ -34,25 +34,25 @@ export const NoResults = observer((properties: NoResultsProps): JSX.Element => {
 			`Remove possible redundant keywords (ie. "products").`,
 			`Use other words to describe what you are searching for.`,
 		],
-		contactsTitleText: `Still can't find what you're looking for? <a href="/contact-us">Contact us</a>.`,
-		contactsList: [
-			{
-				title: `Address`,
-				content: `123 Street Address<br />City, State, Zipcode`,
-			},
-			{
-				title: `Hours`,
-				content: `Monday - Saturday, 00:00am - 00:00pm<br />Sunday, 00:00am - 00:00pm`,
-			},
-			{
-				title: `Phone`,
-				content: `<a href="tel:1234567890">123-456-7890</a>`,
-			},
-			{
-				title: `Email`,
-				content: `<a href="mailto:email@site.com">email@site.com</a>`,
-			},
-		],
+		// contactsTitleText: `Still can't find what you're looking for? <a href="/contact-us">Contact us</a>.`,
+		// contactsList: [
+		// 	{
+		// 		title: `Address`,
+		// 		content: `123 Street Address<br />City, State, Zipcode`,
+		// 	},
+		// 	{
+		// 		title: `Hours`,
+		// 		content: `Monday - Saturday, 00:00am - 00:00pm<br />Sunday, 00:00am - 00:00pm`,
+		// 	},
+		// 	{
+		// 		title: `Phone`,
+		// 		content: `<a href="tel:1234567890">123-456-7890</a>`,
+		// 	},
+		// 	{
+		// 		title: `Email`,
+		// 		content: `<a href="mailto:email@site.com">email@site.com</a>`,
+		// 	},
+		// ],
 	};
 
 	const props = mergeProps('noResults', globalTheme, defaultProps, properties);
@@ -95,23 +95,25 @@ export const NoResults = observer((properties: NoResultsProps): JSX.Element => {
 	if (templates?.recommendation?.enabled) {
 		const componentName = templates?.recommendation?.component || 'Recommendation';
 		const snap = useSnap() as SnapTemplates;
-		const themeName = properties.theme?.name;
-		let defaultResultComponentFromTheme;
-		if (themeName) {
-			defaultResultComponentFromTheme = snap?.templates?.config.themes[themeName]?.resultComponent;
-		}
 
-		const resultComponentName = (templates?.recommendation?.resultComponent || defaultResultComponentFromTheme) as string;
-		const mergedConfig = Object.assign(
-			{
-				id: '',
-				tag: 'no-results',
-				branch: 'production',
-			},
-			templates.recommendation!.config
-		);
-		mergedConfig.id = mergedConfig.id || `search-${mergedConfig.tag}`;
-		if (snap) {
+		if (snap?.templates) {
+			const themeName = properties.theme?.name;
+			let defaultResultComponentFromTheme;
+			if (themeName) {
+				defaultResultComponentFromTheme = snap?.templates?.config.themes[themeName]?.resultComponent;
+			}
+
+			const resultComponentName = (templates?.recommendation?.resultComponent || defaultResultComponentFromTheme) as string;
+			const mergedConfig = Object.assign(
+				{
+					id: '',
+					tag: 'no-results',
+					branch: 'production',
+				},
+				templates.recommendation!.config
+			);
+			mergedConfig.id = mergedConfig.id || `search-${mergedConfig.tag}`;
+
 			recsController = useCreateController<RecommendationController>(snap, 'recommendation', mergedConfig);
 			if (!recsController?.store?.loaded && !recsController?.store?.loading && recsController?.store.error?.type !== 'error') {
 				recsController?.search();
@@ -128,7 +130,7 @@ export const NoResults = observer((properties: NoResultsProps): JSX.Element => {
 	}
 
 	const RecommendationTemplateComponent = recommendationTemplateComponent as
-		| FunctionalComponent<{ controller: RecommendationController; resultComponent?: ResultComponent; name: string }>
+		| FunctionalComponent<RecommendationProps | RecommendationGridProps>
 		| undefined;
 
 	const RecommendationTemplateResultComponent = recommendationTemplateResultComponent as ResultComponent | undefined;
@@ -183,7 +185,7 @@ export const NoResults = observer((properties: NoResultsProps): JSX.Element => {
 
 			{!hideSuggestions && (suggestionsTitleText || suggestionsExist) && (
 				<div className="ss__no-results__suggestions">
-					{suggestionsTitleText && <h4 className="ss__no-results__suggestions__title" {...mergedLang.suggestionsTitleText?.all}></h4>}
+					{suggestionsTitleText && <h3 className="ss__no-results__suggestions__title" {...mergedLang.suggestionsTitleText?.all}></h3>}
 
 					{suggestionsExist && <ul className="ss__no-results__suggestions__list" {...mergedLang.suggestionsList?.all}></ul>}
 				</div>
@@ -191,7 +193,7 @@ export const NoResults = observer((properties: NoResultsProps): JSX.Element => {
 
 			{!hideContact && (contactsTitleText || contactsExist) && (
 				<div className="ss__no-results__contact">
-					{contactsTitleText && <h4 className="ss__no-results__contact__title" {...mergedLang.contactsTitleText?.all}></h4>}
+					{contactsTitleText && <h3 className="ss__no-results__contact__title" {...mergedLang.contactsTitleText?.all}></h3>}
 
 					{contactsExist && <div {...mergedLang.contactsList?.all}></div>}
 				</div>
@@ -201,6 +203,7 @@ export const NoResults = observer((properties: NoResultsProps): JSX.Element => {
 				<div className="ss__no-results__recommendations">
 					<RecommendationTemplateComponent
 						controller={recsController}
+						title={recsController.store?.profile?.display?.templateParameters?.title}
 						resultComponent={RecommendationTemplateResultComponent}
 						name={'noResultsRecommendations'}
 					/>

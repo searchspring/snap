@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import type { NoResultsProps } from '../../../../components/Atoms/NoResults';
+import type { NoResultsProps } from '../../../../components/Organisms/NoResults';
 
 // CSS in JS style script for the NoResults component
 const noResultsStyleScript = ({ theme }: NoResultsProps) => {

@@ -39,6 +39,7 @@ const Providers = observer(
 	({ templateStore, children, themeName }: { templateStore: TemplatesStore; themeName: string; children: ComponentChildren }) => {
 		const themeLocation = templateStore.themes.library[themeName];
 		const mergedTheme = themeLocation?.theme || {};
+
 		return (
 			<SnapProvider snap={snapTemplates}>
 				<ThemeProvider theme={mergedTheme}>{children}</ThemeProvider>
@@ -56,14 +57,23 @@ const CustomThemeProvider = ({ theme, children }: { theme: Theme; children: Comp
 };
 
 export const decorators = [
-	withThemeFromJSXProvider({
-		themes: {
-			bocachica: () => snapTemplates.templates.themes.library.bocachica.theme,
-			none: {},
-		},
-		defaultTheme: 'none',
-		Provider: CustomThemeProvider,
-	}),
+	(Story: any, context: any) => {
+		// if the component is a template we should utilize the themeStore theme
+		// otherwise we should use the base theme (stripped of all props except styleScripts)
+
+		const templateStory = context.kind.match(/^Template/);
+
+		const themeDecoratorFn = withThemeFromJSXProvider({
+			themes: {
+				bocachica: templateStory ? snapTemplates.templates.themes.library.bocachica.theme : generateBasicTheme(bocachica),
+				none: {},
+			},
+			defaultTheme: 'none',
+			Provider: templateStory ? CustomThemeProvider : ThemeProvider,
+		});
+
+		return themeDecoratorFn(Story, context);
+	},
 ];
 
 export const parameters = {
@@ -83,3 +93,22 @@ export const parameters = {
 		},
 	},
 };
+
+function generateBasicTheme(theme: Theme): Theme {
+	// strip off everything except for stylescripts and variables
+
+	const basicTheme: Theme = {
+		name: theme.name,
+		variables: theme.variables,
+		components: {},
+	};
+
+	for (const componentName in theme.components) {
+		const componentProps = theme.components[componentName as keyof typeof theme.components];
+		basicTheme.components![componentName as keyof typeof basicTheme.components] = {
+			styleScript: componentProps?.styleScript,
+		};
+	}
+
+	return basicTheme;
+}

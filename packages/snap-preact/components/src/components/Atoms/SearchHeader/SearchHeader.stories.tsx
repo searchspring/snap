@@ -142,7 +142,7 @@ export default {
 	},
 };
 
-const snapInstance = Snapify.search({ id: 'SearchHeader', globals: { siteId: '8uyt2m', search: { query: { string: '*' } } } });
+const snapInstance = Snapify.search({ id: 'SearchHeader', globals: { siteId: '8uyt2m', search: { query: { string: 'dress' } } } });
 
 export const Default = (args: SearchHeaderProps, { loaded: { controller } }: { loaded: { controller: SearchController } }) => {
 	return <SearchHeader {...args} controller={controller} />;
@@ -189,6 +189,28 @@ CorrectedResults.loaders = [
 		await correctedSnapInstance.search();
 		return {
 			controller: correctedSnapInstance,
+		};
+	},
+];
+
+const dymSnapInstance = Snapify.search({
+	id: 'SearchHeader-dymResults',
+	globals: { siteId: '8uyt2m', search: { query: { string: 'dnfarwts' } } },
+});
+
+export const DidYouMeanResults = (args: SearchHeaderProps, { loaded: { controller } }: { loaded: { controller: SearchController } }) => {
+	return <SearchHeader {...args} controller={controller} />;
+};
+
+DidYouMeanResults.loaders = [
+	async () => {
+		dymSnapInstance.on('afterSearch', ({ response }: any) => {
+			response.search.search.query = 'redd dress';
+			response.search.search.didYouMean = 'red dress';
+		});
+		await dymSnapInstance.search();
+		return {
+			controller: dymSnapInstance,
 		};
 	},
 ];

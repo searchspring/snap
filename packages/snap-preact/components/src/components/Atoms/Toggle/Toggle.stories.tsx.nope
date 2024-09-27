@@ -84,15 +84,25 @@ export default {
 			},
 			control: { type: 'boolean' },
 		},
+		buttonColor: {
+			description: 'Change the background color of the toggle button',
+			table: {
+				type: {
+					summary: 'string',
+				},
+				defaultValue: { summary: '#fff' },
+			},
+			control: { type: 'color' },
+		},
 		activeColor: {
 			description: 'Change the background color of the toggle when active',
 			table: {
 				type: {
 					summary: 'string',
 				},
-				defaultValue: { summary: '#2196F3' },
+				defaultValue: { summary: '#3A23AD' },
 			},
-			control: { type: 'text' },
+			control: { type: 'color' },
 		},
 		inactiveColor: {
 			description: 'Change the background color of the toggle when in active',
@@ -102,17 +112,7 @@ export default {
 				},
 				defaultValue: { summary: '#ccc' },
 			},
-			control: { type: 'text' },
-		},
-		buttonColor: {
-			description: 'Change the background color of the toggle button',
-			table: {
-				type: {
-					summary: 'string',
-				},
-				defaultValue: { summary: 'white' },
-			},
-			control: { type: 'text' },
+			control: { type: 'color' },
 		},
 		onClick: {
 			description: 'Toggle click event handler',

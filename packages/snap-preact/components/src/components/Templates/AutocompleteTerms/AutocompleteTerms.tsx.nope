@@ -16,7 +16,7 @@ import type { Lang } from '../../../hooks';
 import deepmerge from 'deepmerge';
 
 const CSS = {
-	Terms: ({}: Partial<TermsProps>) => css({}),
+	Terms: ({}: Partial<AutocompleteTermsProps>) => css({}),
 };
 
 const escapeRegExp = (string: string): string => {
@@ -37,9 +37,9 @@ const emIfyTerm = (term: string, search: string): string => {
 	return `<em>${term}</em>`;
 };
 
-export const Terms = observer((properties: TermsProps): JSX.Element => {
+export const AutocompleteTerms = observer((properties: AutocompleteTermsProps): JSX.Element => {
 	const globalTheme: Theme = useTheme();
-	const defaultProps: Partial<TermsProps> = {};
+	const defaultProps: Partial<AutocompleteTermsProps> = {};
 
 	const props = mergeProps('terms', globalTheme, defaultProps, properties);
 	const { title, onTermClick, limit, previewOnHover, emIfy, disableStyles, style, className, controller, styleScript } = props;
@@ -119,7 +119,7 @@ export const Terms = observer((properties: TermsProps): JSX.Element => {
 	);
 });
 
-export interface TermsProps extends ComponentProps {
+export interface AutocompleteTermsProps extends ComponentProps {
 	controller?: AutocompleteController;
 	terms?: AutocompleteTermStore;
 	title?: string;
@@ -127,10 +127,10 @@ export interface TermsProps extends ComponentProps {
 	onTermClick?: (e: React.MouseEvent<Element, MouseEvent>, term: Term) => void;
 	previewOnHover?: boolean;
 	emIfy?: boolean;
-	lang?: Partial<TermsLang>;
+	lang?: Partial<AutocompleteTermsLang>;
 }
 
-export interface TermsLang {
+export interface AutocompleteTermsLang {
 	term: Lang<{
 		index: number;
 		numberOfTerms: number;

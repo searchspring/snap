@@ -43,9 +43,6 @@ const carouselStyleScript = ({ vertical, theme }: CarouselProps) => {
 				margin: '4px',
 			},
 		},
-		'.swiper-pagination-bullet-active': {
-			background: variables?.colors?.accent || 'inherit',
-		},
 		'.ss__carousel__next-wrapper, .ss__carousel__prev-wrapper': {
 			display: 'flex',
 			justifyContent: 'center',
@@ -110,13 +107,13 @@ const carouselStyleScript = ({ vertical, theme }: CarouselProps) => {
 			height: '8px',
 			display: 'inline-block',
 			borderRadius: '50%',
-			background: variables?.colors?.accent || '#000',
+			background: '#ccc',
 			opacity: '.5',
 			cursor: 'pointer',
 			margin: '0 4px',
 			'&.swiper-pagination-bullet-active': {
 				opacity: '1',
-				background: variables?.colors?.active?.accent || '#000',
+				background: variables?.colors?.accent || '#3A23AD',
 			},
 		},
 		'.swiper-container-pointer-events': {

@@ -22,7 +22,7 @@ const CSS = {
 			'& .ss__filter__button': {
 				alignItems: 'center',
 				'& .ss__filter__button__icon': {
-					marginRight: '5px',
+					margin: '0 5px 0 0',
 				},
 			},
 			'& .ss__filter__label': {

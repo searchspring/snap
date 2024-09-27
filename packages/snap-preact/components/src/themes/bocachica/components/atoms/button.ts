@@ -14,19 +14,25 @@ const buttonStyleScript = ({ color, backgroundColor, borderColor, theme }: Butto
 		backgroundColor: backgroundColor,
 		border: `1px solid ${borderColor || variables?.colors?.accent || '#333'}`,
 		borderRadius: '3px',
-		'&:hover': {
+		'&:not(.ss__button--disabled):hover': {
 			cursor: 'pointer',
 			backgroundColor: variables?.colors?.hover?.background,
 			color: variables?.colors?.hover?.foreground,
 			borderColor: borderColor || variables?.colors?.hover?.accent,
+			'.ss__icon': {
+				fill: variables?.colors?.hover?.foreground,
+				stroke: variables?.colors?.hover?.foreground,
+			},
 		},
 		'&.ss__button--disabled': {
-			opacity: 0.7,
-			borderColor: 'rgba(51,51,51,0.7)',
+			opacity: 0.3,
 			backgroundColor: 'initial',
 			'&:hover': {
 				cursor: 'default',
 			},
+		},
+		'.ss__icon': {
+			marginLeft: '10px',
 		},
 	});
 };

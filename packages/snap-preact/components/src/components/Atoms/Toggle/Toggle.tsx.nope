@@ -11,7 +11,7 @@ import { Lang, useA11y, useLang } from '../../../hooks';
 import deepmerge from 'deepmerge';
 
 const CSS = {
-	toggle: ({ activeColor, inactiveColor: deActiveColor, buttonColor, size }: Partial<ToggleProps>) =>
+	toggle: ({ activeColor, inactiveColor, buttonColor, size, theme }: Partial<ToggleProps>) =>
 		css({
 			display: 'flex',
 			alignItems: 'center',
@@ -46,7 +46,7 @@ const CSS = {
 				left: '0',
 				right: '0',
 				bottom: '0',
-				backgroundColor: `${deActiveColor}`,
+				backgroundColor: inactiveColor || theme?.variables?.colors?.secondary || '#ccc',
 				transition: '.4s',
 			},
 
@@ -57,13 +57,13 @@ const CSS = {
 				width: `calc(${size} / 2 - 4px)`,
 				left: '4px',
 				bottom: '4px',
-				backgroundColor: `${buttonColor}`,
+				backgroundColor: buttonColor || theme?.variables?.colors?.primary || '#fff',
 				transition: '.4s',
 				zIndex: 1,
 			},
 
 			'& .ss__toggle__switch--filtered .ss__toggle__slider-box': {
-				backgroundColor: `${activeColor}`,
+				backgroundColor: activeColor || theme?.variables?.colors?.accent || '#3A23AD',
 			},
 
 			'& .ss__toggle__switch--filtered .ss__toggle__slider-box .ss__toggle__slider': {
@@ -86,10 +86,7 @@ export const Toggle = observer((properties: ToggleProps): JSX.Element => {
 
 	const defaultProps: Partial<ToggleProps> = {
 		round: true,
-		size: '60px',
-		activeColor: '#2196F3',
-		inactiveColor: '#ccc',
-		buttonColor: 'white',
+		size: '40px',
 	};
 
 	const props = mergeProps('toggle', globalTheme, defaultProps, properties);

@@ -17,7 +17,7 @@ import type {
 } from '../Instantiators/RecommendationInstantiator';
 import type { SnapFeatures } from '../types';
 import type { SnapConfig, ExtendedTarget } from '../Snap';
-import type { RecsTemplateTypes, TemplateStoreConfig, TemplateTypes } from './Stores/TemplateStore';
+import type { RecsTemplateTypes, TemplatesStoreConfigConfig, TemplateTypes } from './Stores/TemplateStore';
 import { LibraryImports } from './Stores/LibraryStore';
 import { GLOBAL_THEME_NAME } from './Stores/TargetStore';
 
@@ -54,7 +54,7 @@ export type RecommendationBundleTargetConfig = {
 	resultComponent?: keyof LibraryImports['component']['result'] | (string & NonNullable<unknown>);
 };
 
-export type SnapTemplatesConfig = TemplateStoreConfig & {
+export type SnapTemplatesConfig = TemplatesStoreConfigConfig & {
 	url?: UrlTranslatorConfig;
 	features?: SnapFeatures;
 	search?: {
@@ -99,6 +99,7 @@ export const DEFAULT_AUTOCOMPLETE_CONTROLLER_SETTINGS: AutocompleteStoreConfigSe
 };
 
 export class SnapTemplates extends Snap {
+	templates: TemplatesStore;
 	constructor(config: SnapTemplatesConfig) {
 		const urlParams = url(window.location.href);
 		const editMode = Boolean(urlParams?.params?.query?.theme || cookies.get(THEME_EDIT_COOKIE));
@@ -108,6 +109,8 @@ export class SnapTemplates extends Snap {
 		const snapConfig = createSnapConfig(config, templatesStore);
 
 		super(snapConfig, { templatesStore });
+
+		this.templates = templatesStore;
 
 		if (editMode) {
 			setTimeout(async () => {
@@ -129,7 +132,7 @@ export class SnapTemplates extends Snap {
 						},
 					],
 					async (target: Target, elem: Element) => {
-						const TemplateEditor = (await import('../../components/src/')).TemplatesEditor;
+						const TemplateEditor = (await import('../../components/src')).TemplatesEditor;
 
 						render(
 							<TemplateEditor

@@ -3,14 +3,14 @@ import { h } from 'preact';
 import { ArgsTable, PRIMARY_STORY, Markdown } from '@storybook/blocks';
 
 import { componentArgs, highlightedCode } from '../../../utilities';
-import { Terms, TermsProps } from './Terms';
+import { AutocompleteTerms, AutocompleteTermsProps } from './AutocompleteTerms';
 import Readme from './readme.md';
 import { AutocompleteController } from '@searchspring/snap-controller';
 import { Snapify } from '../../../utilities/snapify';
 
 export default {
-	title: 'Atoms/Terms',
-	component: Terms,
+	title: 'Templates/AutocompleteTerms',
+	component: AutocompleteTerms,
 	tags: ['autodocs'],
 	parameters: {
 		docs: {
@@ -140,11 +140,11 @@ const snapInstance = Snapify.autocomplete({
 	},
 });
 
-export const Default = (args: TermsProps, { loaded: { controller } }: { loaded: { controller: AutocompleteController } }) => {
+export const Default = (args: AutocompleteTermsProps, { loaded: { controller } }: { loaded: { controller: AutocompleteController } }) => {
 	setTimeout(() => {
 		controller.bind();
 	});
-	return <Terms {...args} controller={controller} />;
+	return <AutocompleteTerms {...args} controller={controller} />;
 };
 
 Default.loaders = [

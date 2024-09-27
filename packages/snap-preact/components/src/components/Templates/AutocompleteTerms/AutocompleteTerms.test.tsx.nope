@@ -4,7 +4,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { render, waitFor } from '@testing-library/preact';
 import { ThemeProvider } from '../../../providers';
 
-import { Terms } from './Terms';
+import { AutocompleteTerms } from './AutocompleteTerms';
 import { AutocompleteController, AutocompleteControllerConfig } from '@searchspring/snap-controller';
 import { createAutocompleteController } from '../../../../../src/create';
 import { MockClient } from '@searchspring/snap-shared';
@@ -95,7 +95,7 @@ describe('Terms Component', () => {
 	});
 
 	it('renders', async () => {
-		const rendered = render(<Terms controller={controller} terms={mockTerms} />);
+		const rendered = render(<AutocompleteTerms controller={controller} terms={mockTerms} />);
 		const terms = rendered.container.querySelector('.ss__terms');
 		expect(terms).toBeInTheDocument();
 	});
@@ -103,13 +103,13 @@ describe('Terms Component', () => {
 	it('renders with terms just in controller', async () => {
 		const modded = controller;
 		modded.store.terms = mockTerms;
-		const rendered = render(<Terms controller={controller} />);
+		const rendered = render(<AutocompleteTerms controller={controller} />);
 		const terms = rendered.container.querySelector('.ss__terms');
 		expect(terms).toBeInTheDocument();
 	});
 
 	it('doesnt render with no controller or terms', async () => {
-		const rendered = render(<Terms />);
+		const rendered = render(<AutocompleteTerms />);
 		const terms = rendered.container.querySelector('.ss__terms');
 		expect(terms).not.toBeInTheDocument();
 	});
@@ -125,7 +125,7 @@ describe('Terms Component', () => {
 
 		userEvent.type(input!, 'dre');
 
-		const rendered = render(<Terms controller={controller} terms={mockTerms} emIfy={true} />);
+		const rendered = render(<AutocompleteTerms controller={controller} terms={mockTerms} emIfy={true} />);
 		const termOptions = rendered.container.querySelectorAll('.ss__terms__option a')[0];
 
 		expect(termOptions?.innerHTML).toBe('dre<em>ss</em>');
@@ -134,7 +134,7 @@ describe('Terms Component', () => {
 	it('passed in terms take priority over controller terms', async () => {
 		const modded = controller;
 		modded.store.terms = [...mockTerms].reverse();
-		const rendered = render(<Terms controller={modded} terms={mockTerms} />);
+		const rendered = render(<AutocompleteTerms controller={modded} terms={mockTerms} />);
 		const termOptions = rendered.container.querySelectorAll('.ss__terms__option a');
 		termOptions.forEach((option, index) => {
 			expect(option).toBeInTheDocument();
@@ -145,7 +145,7 @@ describe('Terms Component', () => {
 
 	it('renders with a title', async () => {
 		const title = 'Suggestions';
-		const rendered = render(<Terms controller={controller} terms={mockTerms} title={title} />);
+		const rendered = render(<AutocompleteTerms controller={controller} terms={mockTerms} title={title} />);
 		const terms = rendered.container.querySelector('.ss__terms');
 		const titleElem = rendered.container.querySelector('.ss__terms__title');
 		expect(terms).toBeInTheDocument();
@@ -154,7 +154,7 @@ describe('Terms Component', () => {
 	});
 
 	it('previewonhover', async () => {
-		const rendered = render(<Terms controller={controller} terms={mockTerms} previewOnHover />);
+		const rendered = render(<AutocompleteTerms controller={controller} terms={mockTerms} previewOnHover />);
 		const termOptions = rendered.container.querySelector('.ss__terms__option a');
 		expect(termOptions).toBeInTheDocument();
 
@@ -165,14 +165,14 @@ describe('Terms Component', () => {
 
 	it('respects the limit', async () => {
 		const limit = 3;
-		const rendered = render(<Terms controller={controller} terms={mockTerms} limit={limit} />);
+		const rendered = render(<AutocompleteTerms controller={controller} terms={mockTerms} limit={limit} />);
 		const termOptions = rendered.container.querySelectorAll('.ss__terms__option');
 		expect(termOptions).toHaveLength(limit);
 	});
 
 	it('Can set custom onClick', async () => {
 		const onClick = jest.fn();
-		const rendered = render(<Terms controller={controller} terms={mockTerms} onTermClick={onClick} />);
+		const rendered = render(<AutocompleteTerms controller={controller} terms={mockTerms} onTermClick={onClick} />);
 		const termOptions = rendered.container.querySelector('.ss__terms__option a');
 
 		userEvent.click(termOptions!);
@@ -183,14 +183,14 @@ describe('Terms Component', () => {
 	it('renders with classname', () => {
 		const className = 'classy';
 
-		const rendered = render(<Terms controller={controller} terms={mockTerms} className={className} />);
+		const rendered = render(<AutocompleteTerms controller={controller} terms={mockTerms} className={className} />);
 		const terms = rendered.container.querySelector('.ss__terms');
 
 		expect(terms).toHaveClass(className);
 	});
 
 	it('disables styles', () => {
-		const rendered = render(<Terms controller={controller} terms={mockTerms} disableStyles />);
+		const rendered = render(<AutocompleteTerms controller={controller} terms={mockTerms} disableStyles />);
 		const terms = rendered.container.querySelector('.ss__terms');
 
 		expect(terms?.classList).toHaveLength(1);
@@ -251,7 +251,7 @@ describe('Terms Component', () => {
 						[`${option}`]: langObj,
 					};
 					// @ts-ignore
-					const rendered = render(<Terms lang={lang} controller={controller} terms={mockTerms} />);
+					const rendered = render(<AutocompleteTerms lang={lang} controller={controller} terms={mockTerms} />);
 
 					const element = rendered.container.querySelector(selector);
 					expect(element).toBeInTheDocument();
@@ -294,7 +294,7 @@ describe('Terms Component', () => {
 		};
 		const rendered = render(
 			<ThemeProvider theme={globalTheme}>
-				<Terms controller={controller} terms={mockTerms} />
+				<AutocompleteTerms controller={controller} terms={mockTerms} />
 			</ThemeProvider>
 		);
 		const terms = rendered.container.querySelector('.ss__terms');
@@ -310,7 +310,7 @@ describe('Terms Component', () => {
 				},
 			},
 		};
-		const rendered = render(<Terms controller={controller} terms={mockTerms} theme={propTheme} />);
+		const rendered = render(<AutocompleteTerms controller={controller} terms={mockTerms} theme={propTheme} />);
 		const terms = rendered.container.querySelector('.ss__terms');
 		expect(terms).toBeInTheDocument();
 		expect(terms?.classList.length).toBe(1);
@@ -333,7 +333,7 @@ describe('Terms Component', () => {
 		};
 		const rendered = render(
 			<ThemeProvider theme={globalTheme}>
-				<Terms controller={controller} terms={mockTerms} theme={propTheme} />
+				<AutocompleteTerms controller={controller} terms={mockTerms} theme={propTheme} />
 			</ThemeProvider>
 		);
 

@@ -7,7 +7,7 @@ import { componentArgs, highlightedCode } from '../../../utilities';
 import Readme from './readme.md';
 
 export default {
-	title: 'Atoms/NoResults',
+	title: 'Organisms/NoResults',
 	component: NoResults,
 	tags: ['autodocs'],
 	parameters: {
@@ -28,6 +28,17 @@ export default {
 			),
 		},
 	},
+	decorators: [
+		(Story: any) => (
+			<div
+				style={{
+					maxWidth: '900px',
+				}}
+			>
+				<Story />
+			</div>
+		),
+	],
 	argTypes: {
 		contentSlot: {
 			description: 'Slot for adding custom content',
@@ -101,3 +112,13 @@ export default {
 };
 
 export const Default = (args: NoResultsProps) => <NoResults {...args} />;
+
+export const WithRecommendations = (args: NoResultsProps) => <NoResults {...args} />;
+
+WithRecommendations.args = {
+	templates: {
+		recommendation: {
+			enabled: true,
+		},
+	},
+};

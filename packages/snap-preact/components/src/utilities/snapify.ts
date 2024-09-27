@@ -1,5 +1,3 @@
-import { h } from 'preact';
-
 import { configure as configureMobx } from 'mobx';
 import { SearchController, AutocompleteController, RecommendationController } from '@searchspring/snap-controller';
 import { Client } from '@searchspring/snap-client';

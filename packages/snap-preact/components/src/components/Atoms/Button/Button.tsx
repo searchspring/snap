@@ -27,8 +27,7 @@ const CSS = {
 				backgroundColor: theme?.variables?.colors?.hover?.background || '#f8f8f8',
 			},
 			'&.ss__button--disabled': {
-				opacity: 0.7,
-				borderColor: 'rgba(51,51,51,0.7)',
+				opacity: 0.3,
 				backgroundColor: 'initial',
 				'&:hover': {
 					cursor: 'default',
@@ -65,6 +64,7 @@ export const Button = observer((properties: ButtonProps): JSX.Element => {
 
 	const subProps: ButtonSubProps = {
 		icon: {
+			className: 'ss__button__icon',
 			// default props
 			// global theme
 			...globalTheme?.components?.icon,
@@ -115,7 +115,7 @@ export const Button = observer((properties: ButtonProps): JSX.Element => {
 		<CacheProvider>
 			{native ? (
 				<button {...elementProps}>
-					<span {...mergedLang.button?.all}>
+					<span className="ss__button__content" {...mergedLang.button?.all}>
 						{content}
 						{children}
 					</span>
@@ -123,7 +123,7 @@ export const Button = observer((properties: ButtonProps): JSX.Element => {
 				</button>
 			) : (
 				<div {...(!disableA11y ? a11yProps : {})} {...elementProps} role={'button'} aria-disabled={disabled}>
-					<span {...mergedLang.button?.all}>
+					<span className="ss__button__content" {...mergedLang.button?.all}>
 						{content}
 						{children}
 					</span>

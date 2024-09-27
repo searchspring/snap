@@ -14,6 +14,7 @@ import type { Product } from '@searchspring/snap-store-mobx';
 export default {
 	title: 'Molecules/CalloutBadge',
 	component: CalloutBadge,
+	tags: ['autodocs'],
 	parameters: {
 		docs: {
 			page: () => (
@@ -134,7 +135,7 @@ Default.loaders = [
 			 * a page reload is not required
 			 */
 
-			response.results[0].badges = [
+			response.search.results[0].badges = [
 				{
 					tag: 'free-shipping',
 					value: 'Free Shipping',

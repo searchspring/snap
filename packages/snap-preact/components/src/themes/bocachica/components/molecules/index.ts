@@ -8,7 +8,7 @@ export { facetHierarchyOptions } from './facetHierarchyOptions';
 export { facetListOptions } from './facetListOptions';
 export { facetPaletteOptions } from './facetPaletteOptions';
 export { facetSlider } from './facetSlider';
-export { facetToggle } from './facetToggle';
+// export { facetToggle } from './facetToggle';
 export { filter } from './filter';
 export { grid } from './grid';
 export { layoutSelector } from './layoutSelector';

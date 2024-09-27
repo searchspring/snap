@@ -9,7 +9,7 @@ import { ComponentProps, ResultComponent, RootNodeProperties } from '../../../ty
 import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { Toolbar, ToolbarProps } from '../../Organisms/Toolbar';
 import { SearchHeader, SearchHeaderProps } from '../../Atoms/SearchHeader';
-import { NoResults, NoResultsProps } from '../../Atoms/NoResults';
+import { NoResults, NoResultsProps } from '../../Organisms/NoResults';
 import { Banner, BannerProps } from '../../Atoms/Merchandising';
 import { ContentType } from '@searchspring/snap-store-mobx';
 import { FacetsHorizontal, FacetsHorizontalProps } from '../../Organisms/FacetsHorizontal';

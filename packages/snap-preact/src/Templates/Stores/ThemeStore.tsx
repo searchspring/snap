@@ -3,7 +3,7 @@ import { observable, makeObservable, toJS } from 'mobx';
 import deepmerge from 'deepmerge';
 import { isPlainObject } from 'is-plain-object';
 import { StorageStore } from '@searchspring/snap-store-mobx';
-import { TemplateThemeTypes, type TemplatesStoreSettings, type TemplatesStoreDependencies } from './TemplateStore';
+import { TemplateThemeTypes, type TemplatesStoreConfigSettings, type TemplatesStoreDependencies } from './TemplateStore';
 import { Global, css } from '@emotion/react';
 
 import { ThemeMinimal, ThemeVariablesPartial, type Theme, ThemePartial, ThemeOverrides } from '../../../components/src';
@@ -51,7 +51,7 @@ class SelectedLayout {
 type ThemeStoreConfig = {
 	config: ThemeStoreThemeConfig;
 	dependencies: TemplatesStoreDependencies;
-	settings: TemplatesStoreSettings;
+	settings: TemplatesStoreConfigSettings;
 };
 
 export class ThemeStore {

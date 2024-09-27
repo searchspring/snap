@@ -1,12 +1,12 @@
 import { observable, makeObservable } from 'mobx';
-import { TemplateTarget, type TemplatesStoreSettings, type TemplatesStoreDependencies, type TemplateThemeTypes } from './TemplateStore';
+import { TemplateTarget, type TemplatesStoreConfigSettings, type TemplatesStoreDependencies, type TemplateThemeTypes } from './TemplateStore';
 
 export const GLOBAL_THEME_NAME = 'global';
 
 type TargetStoreConfig = {
 	target: TemplateTarget;
 	dependencies: TemplatesStoreDependencies;
-	settings: TemplatesStoreSettings;
+	settings: TemplatesStoreConfigSettings;
 };
 export class TargetStore {
 	public selector: string;

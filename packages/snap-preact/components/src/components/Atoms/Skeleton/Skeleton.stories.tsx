@@ -74,25 +74,23 @@ export default {
 		},
 		backgroundColor: {
 			description: 'Background color',
-			defaultValue: '#ebebeb',
 			table: {
 				type: {
 					summary: 'string',
 				},
-				defaultValue: { summary: 'string' },
+				defaultValue: { summary: '#ebebeb' },
 			},
-			control: { type: 'text' },
+			control: { type: 'color' },
 		},
 		animatedColor: {
 			description: 'Color setting for the vertical animated bar',
-			defaultValue: '#f5f5f5',
 			table: {
 				type: {
 					summary: 'string',
 				},
-				defaultValue: { summary: 'string' },
+				defaultValue: { summary: '#f5f5f5' },
 			},
-			control: { type: 'text' },
+			control: { type: 'color' },
 		},
 		...componentArgs,
 	},

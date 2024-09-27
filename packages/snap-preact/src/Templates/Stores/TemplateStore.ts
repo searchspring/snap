@@ -1,6 +1,6 @@
 import { observable, makeObservable } from 'mobx';
 import { StorageStore, StorageType } from '@searchspring/snap-store-mobx';
-import { SnapTemplatesConfig } from '../SnapTemplate';
+import { SnapTemplatesConfig } from '../SnapTemplates';
 import { ThemeStore, ThemeStoreThemeConfig } from './ThemeStore';
 import { TargetStore } from './TargetStore';
 import { CurrencyCodes, LanguageCodes, LibraryImports, LibraryStore } from './LibraryStore';
@@ -29,7 +29,7 @@ export type TemplateTarget = {
 	resultComponent?: keyof LibraryImports['component']['result'] | (string & NonNullable<unknown>);
 };
 
-export type TemplatesStoreSettings = {
+export type TemplatesStoreConfigSettings = {
 	editMode: boolean;
 };
 
@@ -55,7 +55,7 @@ export type TemplateStoreComponentConfig = {
 	};
 };
 
-export type TemplateStoreConfig = {
+export type TemplatesStoreConfigConfig = {
 	components?: TemplateStoreComponentConfig;
 	config?: {
 		siteId?: string;
@@ -72,9 +72,9 @@ export type TemplateStoreConfig = {
 
 const RESIZE_DEBOUNCE = 100;
 
-type TemplatesStoreConfig = {
-	config: TemplateStoreConfig;
-	settings?: TemplatesStoreSettings;
+export type TemplatesStoreConfig = {
+	config: TemplatesStoreConfigConfig;
+	settings?: TemplatesStoreConfigSettings;
 };
 
 export class TemplatesStore {
@@ -83,7 +83,7 @@ export class TemplatesStore {
 	storage: StorageStore;
 	language: LanguageCodes;
 	currency: CurrencyCodes;
-	settings: TemplatesStoreSettings;
+	settings: TemplatesStoreConfigSettings;
 	dependencies: TemplatesStoreDependencies;
 
 	targets: {
