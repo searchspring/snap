@@ -6,7 +6,7 @@ import { observer } from 'mobx-react';
 
 import { Icon, IconProps } from '../../Atoms/Icon/Icon';
 import { Button, ButtonProps } from '../../Atoms/Button/Button';
-import { defined, lightenDarkenColor, mergeProps } from '../../../utilities';
+import { defined, Colour, mergeProps } from '../../../utilities';
 
 import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { ComponentProps, RootNodeProperties } from '../../../types';
@@ -15,6 +15,10 @@ import { ErrorType } from '@searchspring/snap-store-mobx';
 import type { AbstractController } from '@searchspring/snap-controller';
 import { Lang, useLang } from '../../../hooks';
 import deepmerge from 'deepmerge';
+
+const warnColor = new Colour('#ecaa15');
+const errorColor = new Colour('#cc1212');
+const infoColor = new Colour('#4c3ce2');
 
 const CSS = {
 	errorHandler: ({ theme }: Partial<ErrorHandlerProps>) =>
@@ -29,49 +33,86 @@ const CSS = {
 				padding: '10px',
 				display: 'flex',
 				alignItems: 'center',
+				'.ss__error-handler__message__type': {
+					fontWeight: 'bold',
+					marginRight: '5px',
+				},
 
 				'.ss__icon': {
-					marginRight: '5px',
+					marginRight: '10px',
 				},
 			},
 
 			'& .ss__error-handler__button': {
-				backgroundColor: 'white',
+				backgroundColor: 'unset',
 				color: 'inherit',
 				borderColor: theme?.variables?.colors?.primary,
 				width: ['150px', 'fit-content'],
 				margin: '5px 10px',
+				'&:hover': {
+					backgroundColor: 'unset',
+					borderColor: 'unset',
+					color: 'unset',
+					'.ss__icon': {
+						fill: 'unset',
+						stroke: 'unset',
+					},
+				},
 
 				'.ss__icon': {
-					marginRight: '5px',
+					margin: '0 5px 0 0',
 				},
 			},
 
 			'&.ss__error-handler--error': {
-				backgroundColor: lightenDarkenColor('#cc1212', 180),
-				borderLeftColor: '#cc1212',
+				backgroundColor: errorColor.lighten(180).hex,
+				borderLeftColor: errorColor.hex,
 				'.ss__error-handler__message': {
 					'.ss__icon': {
-						fill: '#cc1212',
+						fill: errorColor.hex,
 					},
 				},
 			},
 			'&.ss__error-handler--warning': {
-				backgroundColor: lightenDarkenColor('#ecaa15', 180),
-				borderLeftColor: '#ecaa15',
+				backgroundColor: warnColor.lighten(180).hex,
+				borderLeftColor: warnColor.hex,
 				'.ss__icon': {
-					fill: '#ecaa15',
+					fill: warnColor.hex,
+					stroke: warnColor.hex,
 				},
 				'.ss__error-handler__button': {
-					borderColor: '#ecaa15',
+					color: warnColor.hex,
+					borderColor: warnColor.hex,
+					fontWeight: 'bold',
+					textTransform: 'uppercase',
+					display: 'inline-flex',
+					alignItems: 'center',
+					'.ss__button__content': {
+						order: 2,
+					},
+					'.ss__button__icon': {
+						order: 1,
+						width: '10px',
+						height: '10px',
+						fill: warnColor.hex,
+						stroke: warnColor.hex,
+					},
+					'&:hover': {
+						color: warnColor.darken(30).hex,
+						borderColor: warnColor.darken(30).hex,
+						'.ss__button__icon': {
+							fill: warnColor.darken(30).hex,
+							stroke: warnColor.darken(30).hex,
+						},
+					},
 				},
 			},
 			'&.ss__error-handler--info': {
-				backgroundColor: lightenDarkenColor('#4c3ce2', 180),
-				borderLeftColor: '#4c3ce2',
+				backgroundColor: infoColor.lighten(180).hex,
+				borderLeftColor: infoColor.hex,
 				'.ss__error-handler__message': {
 					'.ss__icon': {
-						fill: '#4c3ce2',
+						fill: infoColor.hex,
 					},
 				},
 			},
@@ -89,6 +130,7 @@ export const ErrorHandler = observer((properties: ErrorHandlerProps): JSX.Elemen
 	const subProps: ErrorHandlerSubProps = {
 		icon: {
 			// default props
+			size: '18px',
 			className: 'ss__error-handler__icon',
 			// global theme
 			...globalTheme?.components?.icon,
@@ -100,9 +142,10 @@ export const ErrorHandler = observer((properties: ErrorHandlerProps): JSX.Elemen
 			theme: props.theme,
 			treePath,
 		},
-		button: {
+		buttonRetry: {
 			// default props
 			className: 'ss__error-handler__button',
+			icon: 'rotate-right',
 			// global theme
 			...globalTheme?.components?.button,
 			// inherited props
@@ -131,16 +174,16 @@ export const ErrorHandler = observer((properties: ErrorHandlerProps): JSX.Elemen
 	//initialize lang
 	const defaultLang = {
 		warningText: {
-			value: `<b>Warning:&nbsp;</b>`,
+			value: `Warning:`,
 		},
 		infoText: {
-			value: `<b>Info:&nbsp;</b>`,
+			value: `Info:`,
 		},
 		errorText: {
-			value: `<b>Error:&nbsp;</b>`,
+			value: `Error:`,
 		},
 		reloadText: {
-			value: `Reload`,
+			value: `Retry`,
 		},
 	};
 
@@ -160,19 +203,18 @@ export const ErrorHandler = observer((properties: ErrorHandlerProps): JSX.Elemen
 								<>
 									<div className="ss__error-handler__message">
 										<Icon {...subProps.icon} icon={'warn'} />
-										<span {...mergedLang.warningText?.all}></span>
-										{errorObject.message}
+										<span className="ss__error-handler__message__type" {...mergedLang.warningText?.all}></span>
+										<span className="ss__error-handler__message__content">{errorObject.message}</span>
 									</div>
 									{errorObject?.code == 429 ? (
 										<Button
-											{...subProps.button}
+											{...subProps.buttonRetry}
 											onClick={(e) => {
 												onRetryClick ? onRetryClick(e) : controller?.search();
 											}}
 											{...mergedLang.reloadText.attributes}
 										>
-											<Icon {...subProps.icon} icon={'rotate-right'} />
-											<span {...mergedLang.reloadText.value}></span>
+											<span className="ss__error-handler__button__text" {...mergedLang.reloadText.value}></span>
 										</Button>
 									) : null}
 								</>
@@ -181,16 +223,16 @@ export const ErrorHandler = observer((properties: ErrorHandlerProps): JSX.Elemen
 							return (
 								<div className="ss__error-handler__message">
 									<Icon {...subProps.icon} icon={'error'} />
-									<span {...mergedLang.errorText?.all}></span>
-									{errorObject.message}
+									<span className="ss__error-handler__message__type" {...mergedLang.errorText?.all}></span>
+									<span className="ss__error-handler__message__content">{errorObject.message}</span>
 								</div>
 							);
 						case ErrorType.INFO:
 							return (
 								<div className="ss__error-handler__message">
 									<Icon {...subProps.icon} icon={'info'} />
-									<span {...mergedLang.infoText?.all}></span>
-									{errorObject.message}
+									<span className="ss__error-handler__message__type" {...mergedLang.infoText?.all}></span>
+									<span className="ss__error-handler__message__content">{errorObject.message}</span>
 								</div>
 							);
 					}
@@ -230,5 +272,5 @@ export interface ErrorHandlerLang {
 
 interface ErrorHandlerSubProps {
 	icon: IconProps;
-	button: ButtonProps;
+	buttonRetry: ButtonProps;
 }
