@@ -58,7 +58,7 @@ export const RecommendationBundleVertical = observer((properties: Recommendation
 		styling.css = [style];
 	}
 
-	return <RecommendationBundle {...styling} {...props} {...subProps.recommendationBundle} />;
+	return <RecommendationBundle {...styling} {...subProps.recommendationBundle} {...props} />;
 });
 
 export type RecommendationBundleVerticalProps = Omit<RecommendationBundleProps, 'vertical' | 'ctaInline'> & ComponentProps;

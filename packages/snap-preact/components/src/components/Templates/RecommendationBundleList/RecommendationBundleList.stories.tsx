@@ -11,6 +11,7 @@ import type { RecommendationController } from '@searchspring/snap-controller';
 import type { Product } from '@searchspring/snap-store-mobx';
 import type { Next } from '@searchspring/snap-event-manager';
 import type { RecommendationControllerConfig } from '@searchspring/snap-controller';
+import { iconPaths } from '../../Atoms/Icon';
 
 export default {
 	title: 'Templates/RecommendationBundleList',
@@ -103,6 +104,55 @@ export default {
 				},
 			},
 			control: { type: 'number' },
+		},
+		carousel: {
+			description: 'Carousel settings object',
+			defaultValue: {
+				enabled: true,
+				loop: false,
+			},
+			table: {
+				type: {
+					summary: 'object',
+				},
+				defaultValue: { summary: 'Carousel settings object' },
+			},
+			control: { type: 'object' },
+		},
+		hideSeed: {
+			description: 'Hide/show seed result',
+			defaultValue: false,
+			table: {
+				type: {
+					summary: 'boolean',
+				},
+				defaultValue: { summary: false },
+			},
+			control: { type: 'boolean' },
+		},
+		separatorIconSeedOnly: {
+			description: 'boolean to only have seperator Icon for the seed product',
+			table: {
+				type: {
+					summary: 'boolean',
+				},
+				defaultValue: { summary: true },
+			},
+			control: { type: 'boolean' },
+		},
+		separatorIcon: {
+			defaultValue: 'plus',
+			description: 'Icon to render between results',
+			table: {
+				type: {
+					summary: 'string',
+				},
+				defaultValue: { summary: 'plus' },
+			},
+			control: {
+				type: 'select',
+				options: [...Object.keys(iconPaths)],
+			},
 		},
 		preselectedCount: {
 			description: 'Number of results to have selected by default. (seed included)',

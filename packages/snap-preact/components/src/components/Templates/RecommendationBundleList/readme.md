@@ -49,6 +49,46 @@ The `resultComponent` prop allows for a custom result component to be rendered. 
 <RecommendationBundleList controller={controller} onAddToCart={(e, items)=>{console.log(items)}} resultComponent={<ResultSlot />} />
 ```
 
+
+### carousel 
+The `carousel` prop specifies an object of carousel settings. These settings will be merged with the default settings (listed below). All valid Carousel component props (and any non-documented SwiperJS props) can be used here. The below example uses the `prevButton`, `nextButton` and `loop` props from the Carousel:
+
+```jsx
+type BundleCarouselProps = {
+	enabled: boolean;
+	seedInCarousel?: boolean;
+} & CarouselProps
+
+const customCarouselProps = {
+	enabled: true,
+	loop: false,
+	prevButton: 'Previous',
+	nextButton: 'Next'
+}
+<RecommendationBundle controller={controller} onAddToCart={(e, items)=>{console.log(items)}} carousel={ customCarouselProps } />
+```
+
+### enabled
+The `enabled` prop is a sub prop under the `carousel` prop. It specifies weather the bundle should render as a carousel or not.
+
+```jsx
+<RecommendationBundle controller={controller} onAddToCart={(e, items)=>{console.log(items)}} carousel={ enabled:false } />
+```
+
+### hideSeed
+The `hideSeed` prop specifies if the seed result should be rendered or not.  
+
+```jsx
+<RecommendationBundle controller={controller} onAddToCart={(e, items)=>{console.log(items)}} hideSeed={true} />
+```
+
+### seedInCarousel
+The `seedInCarousel` prop is a sub prop under the `carousel` prop. It specifies if the seed product should be included in the carousel or not.  
+
+```jsx
+<RecommendationBundle controller={controller} onAddToCart={(e, items)=>{console.log(items)}} carousel={ seedInCarousel:true } />
+```
+
 ### ctaButtonText
 The `ctaButtonText` prop specifies the inner text to render in the add to cart button.
 
@@ -82,6 +122,20 @@ The `ctaSlot` prop allows for a custom add to cart cta component to be rendered.
 
 ```jsx
 <RecommendationBundleList controller={controller} onAddToCart={(e, items)=>{console.log(items)}} ctaSlot={<CTASlot />} />
+```
+
+### separatorIcon
+The `separatorIcon` prop specifies the icon to render between products. Takes an object with `Icon` component props or a string.     
+
+```jsx
+<RecommendationBundle controller={controller} onAddToCart={(e, items)=>{console.log(items)}} separatorIcon={'cog'} />
+```
+
+### separatorIconSeedOnly
+The `separatorIconSeedOnly` prop specifies if the seperator Icon should only be rendered after the seed or after every product.     
+
+```jsx
+<RecommendationBundle controller={controller} onAddToCart={(e, items)=>{console.log(items)}} separatorIconSeedOnly={true} />
 ```
 
 ### preselectedCount

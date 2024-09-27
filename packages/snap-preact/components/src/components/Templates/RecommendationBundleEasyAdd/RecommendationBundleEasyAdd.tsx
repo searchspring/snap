@@ -60,7 +60,7 @@ export const RecommendationBundleEasyAdd = observer((properties: RecommendationB
 		styling.css = [style];
 	}
 
-	return <RecommendationBundle {...styling} {...props} {...subProps.recommendationBundle} />;
+	return <RecommendationBundle {...styling} {...subProps.recommendationBundle} {...props} />;
 });
 
 export type RecommendationBundleEasyAddProps = Omit<

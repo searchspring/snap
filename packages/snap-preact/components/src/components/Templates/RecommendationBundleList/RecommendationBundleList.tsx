@@ -120,24 +120,14 @@ export const RecommendationBundleList = observer((properties: RecommendationBund
 
 	return (
 		<div className={'ss__recommendation-bundle-list'} {...styling}>
-			<RecommendationBundle {...props} {...subProps.recommendationBundle} />
+			<RecommendationBundle {...subProps.recommendationBundle} {...props} />
 		</div>
 	);
 });
 
 export type RecommendationBundleListProps = Omit<
 	RecommendationBundleProps,
-	| 'carousel'
-	| 'seedText'
-	| 'hideSeed'
-	| 'vertical'
-	| 'separatorIconSeedOnly'
-	| 'separatorIcon'
-	| 'ctaInline'
-	| 'ctaIcon'
-	| 'vertical'
-	| 'carousel'
-	| 'slidesPerView'
+	'seedText' | 'vertical' | 'ctaInline' | 'ctaIcon' | 'vertical' | 'slidesPerView'
 > &
 	ComponentProps;
 
