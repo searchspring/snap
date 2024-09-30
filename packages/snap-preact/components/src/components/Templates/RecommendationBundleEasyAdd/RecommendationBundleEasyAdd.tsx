@@ -20,14 +20,14 @@ export const RecommendationBundleEasyAdd = observer((properties: RecommendationB
 	const globalTheme: Theme = useTheme();
 	const defaultProps: Partial<RecommendationBundleEasyAddProps> = {};
 
-	const props = mergeProps('RecommendationBundleEasyAdd', globalTheme, defaultProps, properties);
+	const props = mergeProps('recommendationBundleEasyAdd', globalTheme, defaultProps, properties);
 
-	const { treePath, styleScript, theme, style, disableStyles } = props;
+	const { treePath, styleScript, theme, style, disableStyles, ...additionalProps } = props;
 
 	const subProps: RecommendationBundleEasyAddSubProps = {
 		recommendationBundle: {
 			// default props
-			className: 'ss__recommendation-easy-add__recommendation-bundle',
+			className: 'ss__recommendation-bundle-easy-add',
 			hideCheckboxes: true,
 			seedText: '',
 			ctaButtonText: 'Add Both',
@@ -60,7 +60,7 @@ export const RecommendationBundleEasyAdd = observer((properties: RecommendationB
 		styling.css = [style];
 	}
 
-	return <RecommendationBundle {...styling} {...subProps.recommendationBundle} {...props} />;
+	return <RecommendationBundle {...styling} {...subProps.recommendationBundle} {...additionalProps} />;
 });
 
 export type RecommendationBundleEasyAddProps = Omit<

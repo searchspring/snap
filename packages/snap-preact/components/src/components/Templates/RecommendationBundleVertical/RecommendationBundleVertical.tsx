@@ -23,14 +23,14 @@ export const RecommendationBundleVertical = observer((properties: Recommendation
 	const globalTheme: Theme = useTheme();
 	const defaultProps: Partial<RecommendationBundleVerticalProps> = {};
 
-	const props = mergeProps('RecommendationBundleVertical', globalTheme, defaultProps, properties);
+	const props = mergeProps('recommendationBundleVertical', globalTheme, defaultProps, properties);
 
-	const { treePath, styleScript, theme, style, disableStyles } = props;
+	const { treePath, styleScript, theme, style, disableStyles, ...additionalProps } = props;
 
 	const subProps: RecommendationBundleVerticalSubProps = {
 		recommendationBundle: {
 			// default props
-			className: 'ss__recommendation-bundle-vertical__recommendation-bundle',
+			className: 'ss__recommendation-bundle-vertical',
 			ctaInline: false,
 			carousel: {
 				enabled: false,
@@ -58,7 +58,7 @@ export const RecommendationBundleVertical = observer((properties: Recommendation
 		styling.css = [style];
 	}
 
-	return <RecommendationBundle {...styling} {...subProps.recommendationBundle} {...props} />;
+	return <RecommendationBundle {...styling} {...subProps.recommendationBundle} {...additionalProps} />;
 });
 
 export type RecommendationBundleVerticalProps = Omit<RecommendationBundleProps, 'vertical' | 'ctaInline'> & ComponentProps;

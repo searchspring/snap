@@ -11,6 +11,7 @@ import { Button } from '../../Atoms/Button';
 import { Icon } from '../../Atoms/Icon';
 import { Image } from '../../Atoms/Image';
 import { Result } from '../../Molecules/Result';
+import { BundledCTAProps } from '../RecommendationBundle/BundleCTA';
 
 const CSS = {
 	RecommendationBundleList: ({}: Partial<RecommendationBundleListProps>) =>
@@ -43,29 +44,24 @@ const CSS = {
 					cursor: 'pointer',
 					border: '1px solid black',
 				},
-			},
+				'.cta__inner_images': {
+					display: 'flex',
+					flexDirection: 'row',
+				},
 
-			'.ss__recommendation-bundle': {
-				'.ss__recommendation-bundle__wrapper__cta': {
-					'.cta__inner_images': {
-						display: 'flex',
-						flexDirection: 'row',
-					},
+				'.cta__inner__image-wrapper .ss__icon': {
+					top: '50%',
+					position: 'absolute',
+					right: '-0.5em',
+				},
 
-					'.cta__inner__image-wrapper .ss__icon': {
-						top: '50%',
-						position: 'absolute',
-						right: '-0.5em',
-					},
+				'.cta__inner__image-wrapper:last-of-type .ss__icon': {
+					display: 'none',
+				},
 
-					'.cta__inner__image-wrapper:last-of-type .ss__icon': {
-						display: 'none',
-					},
-
-					'.cta__inner__image-wrapper': {
-						padding: '0px 15px',
-						position: 'relative',
-					},
+				'.cta__inner__image-wrapper': {
+					padding: '0px 15px',
+					position: 'relative',
 				},
 			},
 		}),
@@ -75,14 +71,14 @@ export const RecommendationBundleList = observer((properties: RecommendationBund
 	const globalTheme: Theme = useTheme();
 	const defaultProps: Partial<RecommendationBundleListProps> = {};
 
-	const props = mergeProps('RecommendationBundleList', globalTheme, defaultProps, properties);
+	const props = mergeProps('recommendationBundleList', globalTheme, defaultProps, properties);
 
-	const { treePath, styleScript, theme, style, disableStyles } = props;
+	const { treePath, styleScript, theme, style, disableStyles, ...additionalProps } = props;
 
 	const subProps: RecommendationBundleListSubProps = {
 		recommendationBundle: {
 			// default props
-			className: 'ss__recommendation-bundle-list__recommendation-bundle',
+			className: 'ss__recommendation-bundle-list',
 			seedText: '',
 			ctaInline: false,
 			limit: 5,
@@ -91,9 +87,8 @@ export const RecommendationBundleList = observer((properties: RecommendationBund
 				enabled: false,
 				seedInCarousel: true,
 			},
-			ctaSlot: <CTASlot />,
-			// @ts-ignore - TODO typing for this seems wrong.
-			resultComponent: <Result hideImage={true} />,
+			ctaSlot: (props) => <CTASlot {...props} />,
+			resultComponent: (props) => <Result hideImage={true} {...props} />,
 			vertical: true,
 			separatorIcon: false,
 
@@ -118,11 +113,7 @@ export const RecommendationBundleList = observer((properties: RecommendationBund
 		styling.css = [style];
 	}
 
-	return (
-		<div className={'ss__recommendation-bundle-list'} {...styling}>
-			<RecommendationBundle {...subProps.recommendationBundle} {...props} />
-		</div>
-	);
+	return <RecommendationBundle {...styling} {...subProps.recommendationBundle} {...additionalProps} />;
 });
 
 export type RecommendationBundleListProps = Omit<
@@ -135,9 +126,8 @@ interface RecommendationBundleListSubProps {
 	recommendationBundle: Partial<RecommendationBundleProps>;
 }
 
-const CTASlot = observer((props: any) => {
+const CTASlot = observer((props: BundledCTAProps): JSX.Element => {
 	const cartStore = props.cartStore;
-
 	return (
 		<div className="cta">
 			<div className="cta__inner">
@@ -175,7 +165,7 @@ const CTASlot = observer((props: any) => {
 					disabled={cartStore.items.length == 0}
 					disableStyles
 					className={`cta__add-button ${props.addedToCart ? 'cta__add-button--thanks' : ''}`}
-					onClick={() => props.onAddToCart()}
+					onClick={(e) => props.onAddToCart(e)}
 				>
 					{props.addedToCart ? props.ctaButtonSuccessText : props.ctaButtonText}
 				</Button>
