@@ -16,9 +16,9 @@ import type { AbstractController } from '@searchspring/snap-controller';
 import { Lang, useLang } from '../../../hooks';
 import deepmerge from 'deepmerge';
 
-const warnColor = new Colour('#ecaa15');
-const errorColor = new Colour('#cc1212');
-const infoColor = new Colour('#4c3ce2');
+const warnColour = new Colour('#ecaa15');
+const errorColour = new Colour('#cc1212');
+const infoColour = new Colour('#4c3ce2');
 
 const CSS = {
 	errorHandler: ({ theme }: Partial<ErrorHandlerProps>) =>
@@ -65,24 +65,24 @@ const CSS = {
 			},
 
 			'&.ss__error-handler--error': {
-				backgroundColor: errorColor.lighten(180).hex,
-				borderLeftColor: errorColor.hex,
+				backgroundColor: errorColour.lighten(180).hex,
+				borderLeftColor: errorColour.hex,
 				'.ss__error-handler__message': {
 					'.ss__icon': {
-						fill: errorColor.hex,
+						fill: errorColour.hex,
 					},
 				},
 			},
 			'&.ss__error-handler--warning': {
-				backgroundColor: warnColor.lighten(180).hex,
-				borderLeftColor: warnColor.hex,
+				backgroundColor: warnColour.lighten(180).hex,
+				borderLeftColor: warnColour.hex,
 				'.ss__icon': {
-					fill: warnColor.hex,
-					stroke: warnColor.hex,
+					fill: warnColour.hex,
+					stroke: warnColour.hex,
 				},
 				'.ss__error-handler__button': {
-					color: warnColor.hex,
-					borderColor: warnColor.hex,
+					color: warnColour.hex,
+					borderColor: warnColour.hex,
 					fontWeight: 'bold',
 					textTransform: 'uppercase',
 					display: 'inline-flex',
@@ -94,25 +94,25 @@ const CSS = {
 						order: 1,
 						width: '10px',
 						height: '10px',
-						fill: warnColor.hex,
-						stroke: warnColor.hex,
+						fill: warnColour.hex,
+						stroke: warnColour.hex,
 					},
 					'&:hover': {
-						color: warnColor.darken(30).hex,
-						borderColor: warnColor.darken(30).hex,
+						color: warnColour.darken(30).hex,
+						borderColor: warnColour.darken(30).hex,
 						'.ss__button__icon': {
-							fill: warnColor.darken(30).hex,
-							stroke: warnColor.darken(30).hex,
+							fill: warnColour.darken(30).hex,
+							stroke: warnColour.darken(30).hex,
 						},
 					},
 				},
 			},
 			'&.ss__error-handler--info': {
-				backgroundColor: infoColor.lighten(180).hex,
-				borderLeftColor: infoColor.hex,
+				backgroundColor: infoColour.lighten(180).hex,
+				borderLeftColor: infoColour.hex,
 				'.ss__error-handler__message': {
 					'.ss__icon': {
-						fill: infoColor.hex,
+						fill: infoColour.hex,
 					},
 				},
 			},

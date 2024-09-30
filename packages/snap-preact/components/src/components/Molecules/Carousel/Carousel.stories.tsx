@@ -4,7 +4,7 @@ import { ArgsTable, PRIMARY_STORY, Markdown } from '@storybook/blocks';
 
 import { Carousel, CarouselProps } from './Carousel';
 import { Icon, iconPaths, IconType } from '../../Atoms/Icon';
-import { componentArgs, Color, highlightedCode } from '../../../utilities';
+import { componentArgs, Colour, highlightedCode } from '../../../utilities';
 import Readme from './readme.md';
 
 export default {
@@ -184,7 +184,7 @@ export default {
 const count = 10;
 const carouselStep = Math.floor(180 / count);
 const colors = Array.from(Array(count).keys());
-const color = new Color('#3a23ad');
+const color = new Colour('#3a23ad');
 
 export const Colors = (props: CarouselProps) => {
 	return (
