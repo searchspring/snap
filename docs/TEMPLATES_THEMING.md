@@ -48,6 +48,7 @@ Each theme contains the following properties:
 |----------------------|-------------|------|---------|
 | `themes` | Theme configurations | Object | Required |
 | `themes.global` | Global theme configuration | Object | Required |
+| `themes[customTheme]` | Custom theme configuration | Object | Required |
 | `themes.global.extends` | Base theme to extend | String | Required |
 | `themes.global.resultComponent` | Custom result component | String | - |
 | `themes.global.variables` | Theme variables (colors, breakpoints, etc.) | Object | - |
@@ -55,14 +56,15 @@ Each theme contains the following properties:
 | `themes.global.overrides` | Component and layout overrides | Object | - |
 
 
-* Note: Also applicable to themes that are not the `global` theme. Ie. `themes.customTheme`
+\* Note: Also applicable to themes that are not the `global` theme. Ie. `themes.customTheme`
+
 
 #### Theme `extends`
-When using Snap Templates you are typically expecting a template to already be defined. The `extends` property is the base theme name to start from and will already contain variables, breakpoint overrides, and component props by default (unless choosing a blank theme)
+The `extends` property is the base theme name to start from and will already contain variables, breakpoint overrides, and component props by default (unless choosing a blank theme)
 
 
 #### Theme `resultComponent`
-The `resultComponent` property allows you to specify a custom component for rendering results within a theme. If not defined, the default `Result` component will be used. You can set this property at the theme level to establish a default for all features using that theme. The custom component should be declared in the `components` section of your configuration.
+The `resultComponent` property allows you to specify a custom component for rendering results within a theme. If not defined, the default `Result` component will be used. You can set this property at the theme level to establish a default for all features using that theme. If using a custom component, it must be declared in the `components` section of your configuration.
 
 
 #### Theme `variables`
@@ -75,21 +77,11 @@ new SnapTemplates({
 		global: {
 			extends: 'bocachica',
 			variables: {
-				breakpoints: [0, 768, 1024, 1280],
+				breakpoints: [768, 1024, 1280],
 				colors: {
 					primary: '#202223',
 					secondary: '#6d7175',
-					accent: '#6d7175',
-					active: {
-						foreground: '#ffffff',
-						background: '#6d7175',
-						accent: '#ffffff',
-					},
-					hover: {
-						foreground: '#ffffff',
-						background: '#000000',
-						accent: '#ffffff',
-					},
+					accent: '#000000',
 				},
 			},
 		},
@@ -102,14 +94,16 @@ new SnapTemplates({
 Specifies a function that returns [emotion object styles](https://emotion.sh/docs/object-styles). This function receives theme variables as props and allows you to create styles that respond to specific breakpoints. The resulting styles are injected into the document's `<head>` element. It's important to note that these styles are scoped to the current theme by being prefixed with a class name derived from the theme's name. As a result, the styles will only affect elements that are using this particular theme.
 
 ```jsx
-export const globalStyles = (theme) => {
+const globalStyles = (theme) => {
 	const { variables } = theme;
 	return {
 		'.ss__result': {
 			background: variables.color.primary,
 		},
 		[`@media (max-width: ${variables.breakpoints[1]}px)`]: {
-			'.ss__result': {},
+			'.ss__result': {
+				background: variables.color.secondary,
+			},
 		},
 	};
 };
@@ -127,16 +121,16 @@ new SnapTemplates({
 ```
 
 #### Theme `overrides`
-The `overrides` property in a theme configuration allows you to customize specific components and layout options. It consists of three main sections:
+Themes and components provide prop their own default component prop configurations, the `overrides` property in a theme configuration allows you to customize these. It consists of three main sections:
 
 1. `components`: Allows you to override properties of individual components.
 2. `layoutOptions`: Enables you to define custom layout options.
 3. `responsive`: Lets you specify different overrides for various breakpoints.
 
-Here's an example of how to use the `overrides` property:
 
 ##### Theme `overrides.components`
-The `components` section of `overrides` allows you to customize specific component prop overrides in your theme. This includes the ability to define either a `styleScript` or `style` prop for each component. When using Snap Templates, each component is automatically assigned a `styleScript` prop that varies depending on the theme. This `styleScript` contains the default CSS style definitions for the component. You have the option to completely replace these default styles by specifying your own `styleScript`. Alternatively, if you wish to preserve the default styles while adding your own, you can use the `style` prop. This approach allows you to append your custom styles to the existing theme `styleScript` rather than overwriting it entirely.
+The `components` section of `overrides` allows you to customize specific component prop overrides in your theme.
+
 
 ```jsx
 import { css } from '@emotion/react';
@@ -149,40 +143,13 @@ new SnapTemplates({
 			overrides: {
 				components: {
 					image: {
-						lazy: false
+						lazy: false,
 						style: {
 							boxShadow: '2px 2px rgba(0,0,0,0.2)',
 						},
 					},
 					button: {
-						native: true
-						styleScript: ({ color, backgroundColor, borderColor, theme }: ButtonProps) => {
-							const variables = theme?.variables;
-							return css({
-								display: 'inline-flex',
-								padding: '5px 10px',
-								position: 'relative',
-								color: color || variables?.colors?.secondary,
-								outline: 0,
-								backgroundColor: backgroundColor,
-								border: `1px solid ${borderColor || variables?.colors?.accent || '#333'}`,
-								borderRadius: '3px',
-								'&:hover': {
-									cursor: 'pointer',
-									backgroundColor: variables?.colors?.hover?.background,
-									color: variables?.colors?.hover?.foreground,
-									borderColor: borderColor || variables?.colors?.hover?.accent,
-								},
-								'&.ss__button--disabled': {
-									opacity: 0.7,
-									borderColor: 'rgba(51,51,51,0.7)',
-									backgroundColor: 'initial',
-									'&:hover': {
-										cursor: 'default',
-									},
-								},
-							});
-						},
+						native: true,
 					},
 				},
 			},
@@ -193,12 +160,12 @@ new SnapTemplates({
 ```
 
 
-##### Theme `overrides` with Cascading Component Selectors
-While the previous example demonstrated overriding all instances of image and button components, you may often need to target specific subcomponents within a larger component or template. This is where cascading component selectors come into play.
+##### Theme `overrides` with Cascading Component Props
+While the previous example demonstrated overriding all instances of image and button components, you may often need to target specific sub-components within a larger component or template. This is where cascading component props come into play.
 
-Cascading component selectors within `overrides.components` are available as TypeScript types. It's strongly recommended to use your IDE's IntelliSense (code completion) feature to explore available cascading component selector values, rather than trying to memorize the subcomponent structure of each component.
+Cascading component props within `overrides.components` are available as TypeScript types. It's strongly recommended to use your IDE's IntelliSense (code completion) feature to explore available cascading component prop selectors and values.
 
-Some components contain multiple subcomponents of the same type. For instance, the `<Pagination>` component includes icons for both `<Icon name='next'>` and `<Icon name='prev'>`. To target a specific icon, you can add a "class-like" suffix to the component selector, which will target that particular icon by its `name` attribute.
+Some components contain multiple subcomponents of the same type. For instance, the `<Pagination>` component includes icons for both `<Icon name='next'>` and `<Icon name='prev'>`. To target a specific icon, you can add a "class-like" suffix to the component selector, which will target that particular icon by its `name` attribute. When named, components will contain a `ss-name` attribute in the DOM with the available name to target.
 
 Here's an example that demonstrates targeting specific subcomponents:
 
@@ -213,8 +180,14 @@ new SnapTemplates({
 					'carousel icon.next': {
 						icon: 'angle-right',
 					},
+					'carousel icon.prev': {
+						icon: 'angle-left',
+					},
 					'autocomplete image': {
 						lazy: false,
+						style: {
+							boxShadow: '2px 2px rgba(0,0,0,0.2)',
+						},
 					},
 					'autocomplete button': {
 						native: true,
@@ -274,11 +247,11 @@ new SnapTemplates({
 ##### Theme `overrides.responsive`
 The `responsive` section in `overrides` allows you to define responsive configurations for your theme. These configurations are applied based on the current viewport size, enabling you to create responsive designs that adapt to different screen sizes. 
 
-The breakpoint values are defined in the theme's `variables.breakpoints`. For example, if you have `variables.breakpoints: [0, 768, 1024, 1280]`, you would need to provide an array of 4 objects in `overrides.responsive`, corresponding to each breakpoint.
+The breakpoint values are defined in the theme's `variables.breakpoints`. For example, if you have `variables.breakpoints: [768, 1024, 1280]`, you would need to provide an array of 3 objects in `overrides.responsive`, corresponding to each breakpoint.
 
 Each object in the `responsive` array follows the same structure as the `overrides` interface. 
 
-In this example, we'll hide the `layoutOptions` for the first two mobile breakpoints and set various results columns.
+In this example, we'll hide the `layoutOptions` for the first two breakpoints (mobile and tablet) and set various results columns.
 
 ```jsx
 new SnapTemplates({
@@ -336,13 +309,6 @@ new SnapTemplates({
 							},
 						},
 					},
-					{
-						components: {
-							results: {
-								columns: 4,
-							},
-						},
-					}
 				]
 			},
 		},

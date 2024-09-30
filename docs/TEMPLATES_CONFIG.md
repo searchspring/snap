@@ -16,13 +16,10 @@ Standard Snap:
 Snap Templates:
   - Utilizes pre-built, Searchspring-managed templates and themes
   - Enables rapid integration and customization
-  - Leverages Snap's existing library of components
+  - Leverages Snap's existing [library of components](https://github.com/searchspring/snap/tree/main/packages/snap-preact-components)
   - Requires less development effort, ideal for quick implementations
   - Offers a more guided, configuration-based approach
   - Allows for some customization through theming and overrides
-
-
-To get started, we recommend using Snapfu to initialize a project. See Getting Started section.
 
 
 
@@ -30,11 +27,10 @@ To get started, we recommend using Snapfu to initialize a project. See Getting S
 
 Snap templates is entirely configuration based. The configuration defines which features are enabled and which template and theme they utilize.
 
-Here is an example starting configuration to enable search and autocomplete using the default `bocachica` theme.
+Here is a minimal example starting configuration to enable search and autocomplete using the `bocachica` theme.
 
 ```jsx
 import { SnapTemplates } from '@searchspring/snap-preact';
-import { globalStyles } from './styles';
 
 new SnapTemplates({
 	config: {
@@ -42,44 +38,9 @@ new SnapTemplates({
 		language: 'en',
 		currency: 'usd',
 	},
-	// components: {
-	// 	result: {
-	// 		CustomResult: async () => (await import('./components/Result')).CustomResult,
-	// 	},
-	// 	badge: {
-	// 		CustomPill: async () => (await import('./components/Result')).Result,
-	// 	},
-	// },
 	themes: {
 		global: {
 			extends: 'bocachica',
-			style: globalStyles,
-			// resultComponent: 'Result',
-			// variables: {
-			// 	breakpoints: [0, 768, 1024, 1280],
-			// },
-			// overrides: {
-			// 	components: {},
-			// 	layoutOptions: [],
-			// 	responsive: [
-			// 		{
-			// 			components: {},
-			// 			layoutOptions: [],
-			// 		},
-			// 		{
-			// 			components: {},
-			// 			layoutOptions: [],
-			// 		},
-			// 		{
-			// 			components: {},
-			// 			layoutOptions: [],
-			// 		},
-			// 		{
-			// 			components: {},
-			// 			layoutOptions: [],
-			// 		},
-			// 	],
-			// },
 		},
 	},
 	search: {
@@ -87,8 +48,6 @@ new SnapTemplates({
 			{
 				selector: '#searchspring-templates',
 				component: 'Search',
-				// resultComponent: 'Result',
-				// theme: 'global',
 			},
 		],
 	},
@@ -98,8 +57,6 @@ new SnapTemplates({
 			{
 				selector: 'input#search-input',
 				component: 'Autocomplete',
-				// resultComponent: 'Result',
-				// theme: 'global',
 			},
 		],
 	},
@@ -116,9 +73,9 @@ new SnapTemplates({
 | `config.language` | Language code for localization | String | 'en' |
 | `config.currency` | Currency code for pricing | String | 'usd' |
 
-The `config.config` object defines the Searchspring siteId and current localization to be used. 
+The `config` object defines the Searchspring siteId and current localization to be used. 
 
-If a `siteId` is not provided, the siteId found on the `bundle.js` url path will be used. For example `8uyt2m` will be used if the page contains the following script and siteId is omitted from `config.config.siteId`:
+If a `siteId` is not provided, the siteId found on the `bundle.js` url path will be used. For example `8uyt2m` will be used if the page contains the following script and siteId is omitted from `config.siteId`:
 
 ```
 <script src="https://snapui.searchspring.io/8uyt2m/bundle.js" id="searchspring-context"></script>
@@ -139,18 +96,37 @@ It is possible to switch language and currency at run-time using methods on the 
 
 When defining a supported `config.language`, text translations are applied accross components in each template. It is possible to override these default text translations by using `config.translations`
 
-In this example, we'll change the `Select` component's button label text to `'Ouvrir'` when the `'fr'` language locale is used.
+Translations overrides can be provided in two ways:
+
+1. Simple translations: Use a string value for straightforward text replacements.
+2. Complex translations: Utilize functions to access component props and apply logic for dynamic text generation.
+
+The example below demonstrates both approaches for French language translations:
+- The `FilterSummary` component uses a simple string translation.
+- The `SearchHeader` component employs a function to generate dynamic text based on search parameters and also applies translations to the "aria-label" attribute.
+
+
 
 ```jsx
 new SnapTemplates({
 	...
 	translations: {
 		fr: {
-			select: {
-				buttonLabel: {
-					label: 'Ouvrir'
+			filterSummary: {
+				title: {
+					value: 'Filtres actuels'
 				}
-			}
+			},
+			searchHeader: {
+				noResultsText: {
+					value: ({ pagination, search }) => {
+						return `<span>${search?.query ? 'Aucun résultat trouvé pour' + search.query.string : 'Aucun résultat trouvé' }</span>`
+					},
+					attributes: {
+						'aria-label': `Aucun résultat trouvé pour ${search?.query?.string}`,
+					},
+				}
+			},
 		}
 	},
 	...
@@ -158,7 +134,8 @@ new SnapTemplates({
 
 
 ### Registering additional components
-Snap Templates was built to intentionally not support custom preact components composing the search experience and layouts. Although in practice this is not always feasiable. At a minimum Snap Templates supports customization of the Result component and support for custom badge components. These custom result and badge components must first be register them via `config.components` before they can be applied to a target. This can be imported either synchronously or asynchronously.
+Snap Templates was built to intentionally not support custom Preact components composing the search experience and layouts. Snap Templates supports customization of the Result component and support for custom badge components. Custom result and badge components must first be registered via `config.components` before they can be applied to a feature target. Component registration can be defined as synchronously or asynchronously function imports.
+
 
 
 | Configuration Option | Description | Type | Default |
@@ -168,17 +145,17 @@ Snap Templates was built to intentionally not support custom preact components c
 | `components.result[name]` | Custom result component definition | Function (component) | - |
 
 ```jsx
-import { CustomResult } from './components/Result';
+import { SychronousCustomResult } from './components/Result';
 
 new SnapTemplates({
 	...
 	components: {
 		result: {
-			CustomResult: () => CustomResult,
-			CustomResultSecondary: async () => (await import('./components/Result')).CustomResultSecondary,
+			SychronousCustomResult: () => SychronousCustomResult,
+			DynamicCustomResult: async () => (await import('./components/Result')).DynamicCustomResult,
 		},
 		badge: {
-			CustomPill: async () => (await import('./components/Result')).Result,
+			CustomPill: async () => (await import('./components/Badges')).CustomPill,
 		},
 	},
 	...
@@ -190,7 +167,7 @@ new SnapTemplates({
 |----------------------|-------------|------|---------|
 | `url` | UrlTranslator configuration | UrlTranslatorConfig Object | - |
 
-See [url translator configuration]() for more documentation
+See [UrlTranslator configuration](https://github.com/searchspring/snap/tree/main/packages/snap-url-manager/src/Translators/Url) for more documentation
 
 
 ### Feature toggles
@@ -198,7 +175,7 @@ See [url translator configuration]() for more documentation
 | Configuration Option | Description | Type | Default |
 |----------------------|-------------|------|---------|
 | `features` | Feature toggles | Object | - |
-| `features.integratedSpellCorrection.enabled` | Enable integrated spell correction | Boolean | false |
+| `features.integratedSpellCorrection.enabled` | Enable integrated spell correction | Boolean | true |
 
 
 ### Templates Theming
@@ -210,36 +187,29 @@ See [Theming](https://github.com/searchspring/snap/blob/main/docs/TEMPLATES_THEM
 |----------------------|-------------|------|---------|
 | `themes` | Theme configurations | Object | Required |
 | `themes.global` | Global theme configuration | Object | Required |
-| `themes.global.extends` | Base theme to extend | String | Required |
-| `themes.global.variables` | Theme variables (colors, breakpoints, etc.) | Object | - |
-| `themes.global.style` | Global styles | Function | - |
-| `themes.global.overrides` | Component and layout overrides | Object | - |
+| `themes[customTheme]` | Custom theme configuration | Object | - |
 
 
 ### Feature Targets
 
 Feature targets are used to enable and configure various Searchspring features in a Snap Templates integration. Each feature target specifies where and how a component should be rendered on the page, along with any custom configurations or themes.
 
-The main feature targets are:
-
-1. Search
-2. Autocomplete
-3. Recommendation
-
 Each of these feature targets has its own configuration options, allowing you to tailor the behavior and appearance of the components to your specific needs.
 
 Each target across all features contains the following common properties:
 
-`selector` - DOM selector where this target will inject into
-
 `component` - The template component name to render in the target selector
 
-`resultComponent` - The result component name that will be rendered within the target template component if that template utilizes a result component.
+`resultComponent` - The result component name that will be rendered within the target template component if that template utilizes a result component. Components from the library as well as any components registered via the config can be utilized here.
 
 `theme` - The theme name that this template will use.
 
 
 #### Search
+
+In addition to the common target properties, the following properties apply to the search target(s):
+
+`selector` - DOM selector where this target will inject into
 
 | Configuration Option | Description | Type | Default |
 |----------------------|-------------|------|---------|
@@ -254,6 +224,8 @@ Each target across all features contains the following common properties:
 
 In addition to the common target properties, the following properties apply to the autocomplete target(s):
 
+`selector` - DOM selector where this target will inject into
+
 `inputSelector` - The DOM selector of the `<input>` element(s) autocomplete should bind to. Typically this will match the target `selector` value however defining an alternative value in `selector` allows the `component` to inject into a separate DOM node.
 
 | Configuration Option | Description | Type | Default |
@@ -267,13 +239,6 @@ In addition to the common target properties, the following properties apply to t
 | `autocomplete.targets[].theme` | Theme to use for autocomplete | String | 'global' |
 
 #### Recommendation
-
-There are three types of recommendations:
-
-1. default
-2. bundle
-3. email
-
 In addition to the defining recommendation targets, the recommendation configuration also contains the following following properties:
 
 `settings` - Recommendation Instantiator config settings. 
@@ -284,6 +249,13 @@ In addition to the defining recommendation targets, the recommendation configura
 | `recommendation.settings` | Recommendation Instantiator Config Settings | RecommendationInstantiatorConfigSettings | - |
 
 
+There are three types of recommendations:
+
+1. default
+2. bundle
+3. email
+
+
 #### Default Recommendations
 
 Standard product recommendation typically rendered in a carousel
@@ -292,7 +264,7 @@ Standard product recommendation typically rendered in a carousel
 |----------------------|-------------|------|---------|
 | `recommendation.default` | Default recommendation configurations | Object | - |
 | `recommendation.default[profileComponentName]` | Configuration for a specific default recommendation profile | Object | - |
-| `recommendation.default[profileComponentName].component` | Component to use for default recommendation | String | Required |
+| `recommendation.default[profileComponentName].component` | Component to use for default recommendation | String | 'Recommendation' |
 | `recommendation.default[profileComponentName].resultComponent` | Custom result component for default recommendation | String | 'Result' |
 | `recommendation.default[profileComponentName].theme` | Theme to use for default recommendation | String | 'global' |
 
@@ -305,19 +277,19 @@ Product recommendations that require and include a seed product sku.
 |----------------------|-------------|------|---------|
 | `recommendation.bundle` | Bundle recommendation configurations | Object | - |
 | `recommendation.bundle[profileComponentName]` | Configuration for a specific bundle recommendation profile | Object | - |
-| `recommendation.bundle[profileComponentName].component` | Component to use for bundle recommendation | String | Required |
+| `recommendation.bundle[profileComponentName].component` | Component to use for bundle recommendation | String | 'RecommendationBundle' |
 | `recommendation.bundle[profileComponentName].resultComponent` | Custom result component for bundle recommendation | String | 'Result' |
 | `recommendation.bundle[profileComponentName].theme` | Theme to use for bundle recommendation | String | 'global' |
 
 
 #### Email Recommendations
 
-Product recommendations for external email campaigns. Email recommendations are not directly rendered via Snap on a storefront or within emails. Instead, email campains provide product recommendations by displaying images. Searchspring's email image generation service utilizes the Result component from the Snap integration to create email recommendations.
+Product recommendations for external email campaigns. Email recommendations are not directly rendered via Snap on a storefront or within emails. Instead, email campaigns provide product recommendations by displaying images. Searchspring's email image generation service utilizes the `resultComponent` from the Snap integration to create email recommendations.
 
 | Configuration Option | Description | Type | Default |
 |----------------------|-------------|------|---------|
 | `recommendation.email` | Email recommendation configurations | Object | - |
 | `recommendation.email[profileComponentName]` | Configuration for a specific email recommendation profile | Object | - |
-| `recommendation.email[profileComponentName].component` | Component to use for email recommendation | String | Required |
+| `recommendation.email[profileComponentName].component` | Component to use for email recommendation | String | 'RecommendationEmail' |
 | `recommendation.email[profileComponentName].resultComponent` | Custom result component for email recommendation | String | 'Result' |
 | `recommendation.email[profileComponentName].theme` | Theme to use for email recommendation | String | 'global' |
