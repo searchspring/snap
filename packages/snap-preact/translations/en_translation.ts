@@ -88,7 +88,7 @@ export const en_translation: LangComponents = {
 		},
 		closeButtonText: {
 			attributes: {
-				'aria-label': `close Filters button`,
+				'aria-label': `close Filters`,
 			},
 		},
 	},
@@ -139,11 +139,7 @@ export const en_translation: LangComponents = {
 		},
 	},
 	radio: {
-		radio: {
-			attributes: {
-				'aria-label': (data) => `${data?.disabled ? 'disabled' : ''} ${data?.checkedState ? 'checked' : 'unchecked'} radio button`,
-			},
-		},
+		radio: {},
 	},
 	pagination: {
 		previous: {
@@ -279,11 +275,7 @@ export const en_translation: LangComponents = {
 		},
 	},
 	checkbox: {
-		checkbox: {
-			attributes: {
-				'aria-label': (data) => `${data?.disabled ? 'disabled' : ''} ${data?.checkedState ? 'checked' : 'unchecked'} checkbox`,
-			},
-		},
+		checkbox: {},
 	},
 	toggle: {
 		toggleSwitch: {

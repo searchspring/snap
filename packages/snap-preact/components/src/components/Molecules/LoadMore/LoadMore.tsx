@@ -33,6 +33,7 @@ const CSS = {
 				opacity: 0.7,
 				borderColor: 'rgba(51,51,51,0.7)',
 				backgroundColor: 'initial',
+				pointerEvents: 'none',
 				'&:hover': {
 					cursor: 'default',
 				},
