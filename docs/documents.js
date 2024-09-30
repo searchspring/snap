@@ -202,13 +202,6 @@ var documents = [
 		categoryName: 'Templates',
 		links: [
 			{
-				label: 'Setup',
-				route: '/templates-setup',
-				type: 'markdown',
-				url: './docs/TEMPLATES_SETUP.md',
-				searchable: true,
-			},
-			{
 				label: 'Config',
 				route: '/templates-config',
 				type: 'markdown',

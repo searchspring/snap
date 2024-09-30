@@ -136,9 +136,11 @@ The `overrides` property in a theme configuration allows you to customize specif
 Here's an example of how to use the `overrides` property:
 
 ##### Theme `overrides.components`
-The `components` section of `overrides` allows you to customize specific component prop overrides in your theme. 
+The `components` section of `overrides` allows you to customize specific component prop overrides in your theme. This includes the ability to define either a `styleScript` or `style` prop for each component. When using Snap Templates, each component is automatically assigned a `styleScript` prop that varies depending on the theme. This `styleScript` contains the default CSS style definitions for the component. You have the option to completely replace these default styles by specifying your own `styleScript`. Alternatively, if you wish to preserve the default styles while adding your own, you can use the `style` prop. This approach allows you to append your custom styles to the existing theme `styleScript` rather than overwriting it entirely.
 
 ```jsx
+import { css } from '@emotion/react';
+
 new SnapTemplates({
 	...
 	themes: {
@@ -148,9 +150,39 @@ new SnapTemplates({
 				components: {
 					image: {
 						lazy: false
+						style: {
+							boxShadow: '2px 2px rgba(0,0,0,0.2)',
+						},
 					},
 					button: {
 						native: true
+						styleScript: ({ color, backgroundColor, borderColor, theme }: ButtonProps) => {
+							const variables = theme?.variables;
+							return css({
+								display: 'inline-flex',
+								padding: '5px 10px',
+								position: 'relative',
+								color: color || variables?.colors?.secondary,
+								outline: 0,
+								backgroundColor: backgroundColor,
+								border: `1px solid ${borderColor || variables?.colors?.accent || '#333'}`,
+								borderRadius: '3px',
+								'&:hover': {
+									cursor: 'pointer',
+									backgroundColor: variables?.colors?.hover?.background,
+									color: variables?.colors?.hover?.foreground,
+									borderColor: borderColor || variables?.colors?.hover?.accent,
+								},
+								'&.ss__button--disabled': {
+									opacity: 0.7,
+									borderColor: 'rgba(51,51,51,0.7)',
+									backgroundColor: 'initial',
+									'&:hover': {
+										cursor: 'default',
+									},
+								},
+							});
+						},
 					},
 				},
 			},
@@ -159,6 +191,7 @@ new SnapTemplates({
 	...
 });
 ```
+
 
 ##### Theme `overrides` with Cascading Component Selectors
 While the previous example demonstrated overriding all instances of image and button components, you may often need to target specific subcomponents within a larger component or template. This is where cascading component selectors come into play.

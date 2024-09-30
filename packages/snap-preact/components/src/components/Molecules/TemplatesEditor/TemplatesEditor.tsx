@@ -470,27 +470,36 @@ const ThemeEditor = (props: any): any => {
 	const isColorPickerVisible = props.isColorPickerVisible;
 	const [colorBeingEdited, setColorBeingEdited] = useState('');
 
-	// if (!props?.property) {
-	// 	// Property is empty
-	// 	return;
-	// }
-
-	if (Array.isArray(props.property)) {
-		// string input comma separated
-		return;
-		// return (
-		// 	<Fragment>
-		// 		<label>{path.join('.')}: </label>
-		// 		<input type="text" value={props.property.join(',')} />
-		// 		<span>(csv)</span>
-		// 	</Fragment>
-		// );
+	if (!props?.property || Array.isArray(props.property) || typeof props.property === 'number' || typeof props.property === 'boolean') {
+		// ignore arrays, numbers, and booleans
+		return null;
 	}
 
-	if (typeof props.property === 'number' || typeof props.property === 'string' || typeof props.property === 'boolean') {
+	if (typeof props.property === 'object') {
+		// object means we need to recurse until we get to the primitives
+		return Object.values(props.property).map((property, index) => {
+			return (
+				<Fragment>
+					<div className={classnames({ 'theme-editor': index > 0 })}>
+						<ThemeEditor
+							key={index}
+							property={property}
+							rootEditingKey={rootEditingKey}
+							themeName={themeName}
+							setOverride={setOverride}
+							propertyName={Object.getOwnPropertyNames(props.property)[index]}
+							pathPrefix={[...pathPrefix, props.propertyName]}
+							isColorPickerVisible={isColorPickerVisible}
+							setColorPickerVisible={setColorPickerVisible}
+						/>
+					</div>
+				</Fragment>
+			);
+		});
+	} else if (typeof props.property === 'string') {
 		const value = props.property.toString();
-		if (path.includes('color')) {
-			const key = path.join('.');
+		const key = path.join('.');
+		if (path.includes('colors')) {
 			return (
 				<Fragment>
 					<label>{key}: </label>
@@ -506,7 +515,7 @@ const ThemeEditor = (props: any): any => {
 						}}
 					></div>
 					<div className={'color-value'}>{value}</div>
-					{isColorPickerVisible == key ? (
+					{isColorPickerVisible == key && (
 						<ChromePicker
 							color={colorBeingEdited}
 							onChange={(color) => {
@@ -519,33 +528,11 @@ const ThemeEditor = (props: any): any => {
 								});
 							}}
 						/>
-					) : (
-						''
 					)}
 				</Fragment>
 			);
-		} else {
-			// string input
 		}
 	}
-
-	return Object.values(props.property).map((property, index) => (
-		<Fragment>
-			<div className={classnames({ 'theme-editor': index > 0 })}>
-				<ThemeEditor
-					key={index}
-					property={property}
-					rootEditingKey={rootEditingKey}
-					themeName={themeName}
-					setOverride={setOverride}
-					propertyName={Object.getOwnPropertyNames(props.property)[index]}
-					pathPrefix={[...pathPrefix, props.propertyName]}
-					isColorPickerVisible={isColorPickerVisible}
-					setColorPickerVisible={setColorPickerVisible}
-				/>
-			</div>
-		</Fragment>
-	));
 };
 
 export interface TemplatesEditorProps extends ComponentProps {
