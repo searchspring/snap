@@ -16,7 +16,7 @@ import { IconProps, IconType } from '../../Atoms/Icon';
 import type { RecommendationController } from '@searchspring/snap-controller';
 import type { Product } from '@searchspring/snap-store-mobx';
 import { BundleSelector } from './BundleSelector';
-import { BundledCTA } from './BundleCTA';
+import { BundledCTA, BundledCTAProps } from './BundleCTA';
 import { Lang } from '../../../hooks';
 import { useIntersection } from '../../../hooks';
 
@@ -664,7 +664,12 @@ export interface RecommendationBundleProps extends ComponentProps {
 	onAddToCart: (e: MouseEvent, items: Product[]) => void;
 	title?: JSX.Element | string;
 	breakpoints?: BreakpointsProps;
-	resultComponent?: ResultComponent<{ seed?: boolean; selected?: boolean; onProductSelect?: (product: Product) => void }>;
+	resultComponent?: ResultComponent<{
+		controller: RecommendationController;
+		seed?: boolean;
+		selected?: boolean;
+		onProductSelect?: (product: Product) => void;
+	}>;
 	preselectedCount?: number;
 	hideCheckboxes?: boolean;
 	hideSeed?: boolean;
@@ -676,7 +681,7 @@ export interface RecommendationBundleProps extends ComponentProps {
 	ctaButtonText?: string;
 	ctaButtonSuccessText?: string;
 	ctaButtonSuccessTimeout?: number;
-	ctaSlot?: JSX.Element;
+	ctaSlot?: JSX.Element | React.FunctionComponent<BundledCTAProps>;
 	vertical?: boolean;
 	carousel?: BundleCarouselProps;
 	slidesPerView?: number; // TODO: remove this prop?

@@ -2,7 +2,7 @@ import { h } from 'preact';
 
 import { ArgsTable, PRIMARY_STORY, Markdown } from '@storybook/blocks';
 
-import { RecommendationBundle, RecommendationBundleProps } from '../RecommendationBundle';
+import { RecommendationBundleVertical, RecommendationBundleVerticalProps } from './RecommendationBundleVertical';
 import { componentArgs, highlightedCode } from '../../../utilities';
 import { Snapify } from '../../../utilities/snapify';
 
@@ -14,8 +14,8 @@ import { iconPaths } from '../../Atoms/Icon';
 import type { RecommendationControllerConfig } from '@searchspring/snap-controller';
 
 export default {
-	title: 'Templates/RecommendationBundle',
-	component: RecommendationBundle,
+	title: 'Templates/RecommendationBundleVertical',
+	component: RecommendationBundleVertical,
 	tags: ['autodocs'],
 	parameters: {
 		docs: {
@@ -39,7 +39,7 @@ export default {
 		(Story: any) => (
 			<div
 				style={{
-					maxWidth: '900px',
+					maxWidth: '300px',
 					height: '500px',
 				}}
 			>
@@ -102,6 +102,9 @@ export default {
 				type: {
 					summary: 'number',
 				},
+				defaultValue: {
+					summary: 3,
+				},
 			},
 			control: { type: 'number' },
 		},
@@ -151,23 +154,11 @@ export default {
 		},
 		hideSeed: {
 			description: 'Hide/show seed result',
-			defaultValue: false,
 			table: {
 				type: {
 					summary: 'boolean',
 				},
-				defaultValue: { summary: false },
-			},
-			control: { type: 'boolean' },
-		},
-		vertical: {
-			description: 'set the recommendation to render vertically',
-			defaultValue: false,
-			table: {
-				type: {
-					summary: 'boolean',
-				},
-				defaultValue: { summary: false },
+				defaultValue: { summary: true },
 			},
 			control: { type: 'boolean' },
 		},
@@ -238,16 +229,6 @@ export default {
 			},
 			control: { type: 'number' },
 		},
-		ctaInline: {
-			description: 'boolean to enable the stacked add to cart button display',
-			table: {
-				type: {
-					summary: 'boolean',
-				},
-				defaultValue: { summary: true },
-			},
-			control: { type: 'boolean' },
-		},
 		ctaSlot: {
 			description: 'Slot for custom add to cart component',
 			table: {
@@ -296,8 +277,11 @@ const config: RecommendationControllerConfig = {
 
 const snapInstance = Snapify.recommendation(config);
 
-export const Default = (props: RecommendationBundleProps, { loaded: { controller } }: { loaded: { controller: RecommendationController } }) => {
-	return <RecommendationBundle {...props} controller={controller} results={controller.store.results.reverse()} />;
+export const Default = (
+	props: RecommendationBundleVerticalProps,
+	{ loaded: { controller } }: { loaded: { controller: RecommendationController } }
+) => {
+	return <RecommendationBundleVertical {...props} controller={controller} results={controller.store.results} />;
 };
 
 Default.loaders = [
@@ -312,3 +296,7 @@ Default.loaders = [
 		};
 	},
 ];
+
+Default.args = {
+	limit: 3,
+};
