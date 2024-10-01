@@ -86,19 +86,20 @@ describe('VariantSelection Component', async () => {
 		});
 	});
 
-	describe('swatches VariantSelection', () => {
-		it('renders as swatch with type', () => {
-			mount(<VariantSelection selection={selection} type={'swatches'} />);
-			cy.get('.ss__variant-selection__swatches').should('exist');
-			cy.get('.ss__swatches__carousel__swatch').should('have.length', selection.values.length);
-		});
-	});
-
 	describe('List VariantSelection', () => {
 		it('renders as list with type', () => {
 			mount(<VariantSelection selection={selection} type={'list'} />);
 			cy.get('.ss__variant-selection__list').should('exist');
 			cy.get('.ss__list__option').should('have.length', selection.values.length);
+		});
+	});
+
+	describe('swatches VariantSelection', () => {
+		it('renders as swatch with type', () => {
+			selection = controller.store.results[0].variants?.selections[0];
+			mount(<VariantSelection selection={selection} type={'swatches'} />);
+			cy.get('.ss__variant-selection__swatches').should('exist');
+			cy.get('.ss__swatches__carousel__swatch').should('have.length', selection.values.length);
 		});
 	});
 });
