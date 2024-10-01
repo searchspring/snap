@@ -139,7 +139,7 @@ describe('mergeProps function with theme name', () => {
 		const globalTheme: Theme = {
 			name: GLOBAL_THEME_NAME,
 			variables: {
-				breakpoints: [0, 540, 767, 1200],
+				breakpoints: [540, 767, 1200],
 				colors: {
 					primary: '#3A23AD',
 					secondary: '#00cee1',
