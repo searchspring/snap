@@ -2,7 +2,7 @@ import { h } from 'preact';
 
 import { ArgsTable, PRIMARY_STORY, Markdown } from '@storybook/blocks';
 
-import { RecommendationBundle, RecommendationBundleProps } from '../RecommendationBundle';
+import { RecommendationBundleList, RecommendationBundleListProps } from './RecommendationBundleList';
 import { componentArgs, highlightedCode } from '../../../utilities';
 import { Snapify } from '../../../utilities/snapify';
 
@@ -10,12 +10,12 @@ import Readme from './readme.md';
 import type { RecommendationController } from '@searchspring/snap-controller';
 import type { Product } from '@searchspring/snap-store-mobx';
 import type { Next } from '@searchspring/snap-event-manager';
-import { iconPaths } from '../../Atoms/Icon';
 import type { RecommendationControllerConfig } from '@searchspring/snap-controller';
+import { iconPaths } from '../../Atoms/Icon';
 
 export default {
-	title: 'Templates/RecommendationBundle',
-	component: RecommendationBundle,
+	title: 'Templates/RecommendationBundleList',
+	component: RecommendationBundleList,
 	tags: ['autodocs'],
 	parameters: {
 		docs: {
@@ -39,7 +39,7 @@ export default {
 		(Story: any) => (
 			<div
 				style={{
-					maxWidth: '900px',
+					maxWidth: '300px',
 					height: '500px',
 				}}
 			>
@@ -119,49 +119,8 @@ export default {
 			},
 			control: { type: 'object' },
 		},
-		preselectedCount: {
-			description: 'Number of results to have selected by default. (seed included)',
-			table: {
-				type: {
-					summary: 'number',
-				},
-			},
-			control: { type: 'number' },
-		},
-		hideCheckboxes: {
-			defaultValue: false,
-			description: 'Hide/show bundle checkboxes in results',
-			table: {
-				type: {
-					summary: 'boolean',
-				},
-				defaultValue: { summary: false },
-			},
-			control: { type: 'boolean' },
-		},
-		seedText: {
-			description: 'Text to render in seed product badge',
-			table: {
-				type: {
-					summary: 'string',
-				},
-				defaultValue: { summary: 'Seed Product' },
-			},
-			control: { type: 'text' },
-		},
 		hideSeed: {
 			description: 'Hide/show seed result',
-			defaultValue: false,
-			table: {
-				type: {
-					summary: 'boolean',
-				},
-				defaultValue: { summary: false },
-			},
-			control: { type: 'boolean' },
-		},
-		vertical: {
-			description: 'set the recommendation to render vertically',
 			defaultValue: false,
 			table: {
 				type: {
@@ -195,6 +154,15 @@ export default {
 				options: [...Object.keys(iconPaths)],
 			},
 		},
+		preselectedCount: {
+			description: 'Number of results to have selected by default. (seed included)',
+			table: {
+				type: {
+					summary: 'number',
+				},
+			},
+			control: { type: 'number' },
+		},
 		ctaButtonText: {
 			description: 'text to render in add to cart button',
 			table: {
@@ -202,29 +170,6 @@ export default {
 					summary: 'string',
 				},
 				defaultValue: { summary: 'Add All To Cart' },
-			},
-			control: { type: 'text' },
-		},
-		ctaIcon: {
-			desciption: 'The `ctaIcon` prop specifies the icon to render in the CTA. Takes an object with `Icon` component props or a string.',
-			table: {
-				type: {
-					summary: 'string',
-				},
-				defaultValue: { summary: 'bag' },
-			},
-			control: {
-				type: 'select',
-				options: [...Object.keys(iconPaths)],
-			},
-		},
-		ctaButtonSuccessText: {
-			description: 'text to temporarily render in the add to cart button after it is clicked',
-			table: {
-				type: {
-					summary: 'string',
-				},
-				defaultValue: { summary: 'Bundle Added!' },
 			},
 			control: { type: 'text' },
 		},
@@ -238,15 +183,15 @@ export default {
 			},
 			control: { type: 'number' },
 		},
-		ctaInline: {
-			description: 'boolean to enable the stacked add to cart button display',
+		ctaButtonSuccessText: {
+			description: 'text to temporarily render in the add to cart button after it is clicked',
 			table: {
 				type: {
-					summary: 'boolean',
+					summary: 'string',
 				},
-				defaultValue: { summary: true },
+				defaultValue: { summary: 'Bundle Added!' },
 			},
-			control: { type: 'boolean' },
+			control: { type: 'text' },
 		},
 		ctaSlot: {
 			description: 'Slot for custom add to cart component',
@@ -296,8 +241,8 @@ const config: RecommendationControllerConfig = {
 
 const snapInstance = Snapify.recommendation(config);
 
-export const Default = (props: RecommendationBundleProps, { loaded: { controller } }: { loaded: { controller: RecommendationController } }) => {
-	return <RecommendationBundle {...props} controller={controller} results={controller.store.results.reverse()} />;
+export const Default = (props: RecommendationBundleListProps, { loaded: { controller } }: { loaded: { controller: RecommendationController } }) => {
+	return <RecommendationBundleList {...props} controller={controller} results={controller.store.results} />;
 };
 
 Default.loaders = [

@@ -102,8 +102,8 @@ export interface BundleSelectorSubProps {
 	icon: Partial<IconProps>;
 }
 
-interface BundledCTAProps extends ComponentProps {
-	ctaSlot?: JSX.Element;
+export interface BundledCTAProps extends ComponentProps {
+	ctaSlot?: JSX.Element | React.FunctionComponent<BundledCTAProps>;
 	cartStore: CartStore;
 	onAddToCart: (e: React.MouseEvent<HTMLElement, MouseEvent>) => void;
 	ctaIcon?: IconType | Partial<IconProps> | false;
