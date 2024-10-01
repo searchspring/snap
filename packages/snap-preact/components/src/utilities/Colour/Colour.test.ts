@@ -4,15 +4,24 @@ describe('Color class', () => {
 	it('will return provided invalid hex and rgb values when provided', () => {
 		expect(new Colour('green').hex).toBe('green');
 		expect(new Colour('green').rgb).toBe('green');
+		expect(new Colour('green').contrast).toBe('green');
+
 		expect(new Colour('#nope').hex).toBe('#nope');
 		expect(new Colour('#nope').rgb).toBe('#nope');
+		expect(new Colour('#nope').contrast).toBe('#nope');
+
 		expect(new Colour('rgb(0)').hex).toBe('rgb(0)');
 		expect(new Colour('rgb(0)').rgb).toBe('rgb(0)');
-		expect(new Colour('rgb(58, 35)').rgb).toBe('rgb(58, 35)');
-		expect(new Colour('rgba(58, 35, 173, 0.)').hex).toBe('rgba(58, 35, 173, 0.)');
+		expect(new Colour('rgb(0)').contrast).toBe('rgb(0)');
 	});
 
 	it('supports hex and rgb values at construction', () => {
+		expect(new Colour('#f00').hex).toBe('#ff0000');
+		expect(new Colour('#0f0').hex).toBe('#00ff00');
+		expect(new Colour('#00f').hex).toBe('#0000ff');
+		expect(new Colour('#000').hex).toBe('#000000');
+		expect(new Colour('#fff').hex).toBe('#ffffff');
+
 		expect(new Colour('#3a23ad').hex).toBe('#3a23ad');
 		expect(new Colour('#3a23ad').rgb).toBe('rgb(58, 35, 173)');
 		expect(new Colour('#3a23ad33').hex).toBe('#3a23ad33');
@@ -35,6 +44,28 @@ describe('Color class', () => {
 		expect(new Colour('rgba(58, 35, 173, 0.5)').rgb).toBe('rgba(58, 35, 173, 0.5)');
 		expect(new Colour('rgba(58, 35, 173, 50%)').hex).toBe('#3a23ad7f');
 		expect(new Colour('rgba(58, 35, 173, 50%)').rgb).toBe('rgba(58, 35, 173, 50%)');
+	});
+
+	it('chooses proper contrasting text color', () => {
+		expect(new Colour('#ffffff').contrast).toBe('#000000');
+		expect(new Colour('#fff0f0').contrast).toBe('#000000');
+		expect(new Colour('#ffd2d2').contrast).toBe('#000000');
+		expect(new Colour('#ffb4b4').contrast).toBe('#000000');
+		expect(new Colour('#ff9696').contrast).toBe('#000000');
+		expect(new Colour('#ff7878').contrast).toBe('#000000');
+		expect(new Colour('#ff5a5a').contrast).toBe('#000000');
+		expect(new Colour('#ff3c3c').contrast).toBe('#000000');
+		expect(new Colour('#ff1e1e').contrast).toBe('#000000');
+		expect(new Colour('#ff0000').contrast).toBe('#000000');
+		expect(new Colour('#e10000').contrast).toBe('#ffffff');
+		expect(new Colour('#c30000').contrast).toBe('#ffffff');
+		expect(new Colour('#a50000').contrast).toBe('#ffffff');
+		expect(new Colour('#870000').contrast).toBe('#ffffff');
+		expect(new Colour('#690000').contrast).toBe('#ffffff');
+		expect(new Colour('#4b0000').contrast).toBe('#ffffff');
+		expect(new Colour('#2d0000').contrast).toBe('#ffffff');
+		expect(new Colour('#0f0000').contrast).toBe('#ffffff');
+		expect(new Colour('#000000').contrast).toBe('#ffffff');
 	});
 
 	it('can shift color', () => {

@@ -29,6 +29,7 @@ export class Colour {
 			return this.hexValue;
 		}
 
+		// when invalid color provided to constructor
 		return this.value;
 	}
 
@@ -37,6 +38,29 @@ export class Colour {
 			return this.rgbValue;
 		}
 
+		// when invalid color provided to constructor
+		return this.value;
+	}
+
+	public get contrast(): string | undefined {
+		if (this.hexValue) {
+			// determine if text should be black or white by common algorithm
+			const red = parseInt(this.hexValue.slice(1, 3), 16);
+			const green = parseInt(this.hexValue.slice(3, 5), 16);
+			const blue = parseInt(this.hexValue.slice(5, 7), 16);
+
+			const normalized = [red / 255, green / 255, blue / 255];
+			const calculation = normalized.map((color) => {
+				if (color <= 0.03928) {
+					return color / 12.92;
+				}
+				return Math.pow((color + 0.055) / 1.055, 2.4);
+			});
+			const luminosity = 0.2126 * calculation[0] + 0.7152 * calculation[1] + 0.0722 * calculation[2];
+			return luminosity <= 0.179 ? '#ffffff' : '#000000';
+		}
+
+		// when invalid color provided to constructor
 		return this.value;
 	}
 
@@ -44,6 +68,11 @@ export class Colour {
 		this.value = value;
 
 		if (value) {
+			if (value.match(/^#[a,b,c,d,e,f,0-9]{3}$/i)) {
+				// convert 3 digit hex to 6 digit hex
+				value = `#${value[1].repeat(2)}${value[2].repeat(2)}${value[3].repeat(2)}`;
+			}
+
 			if (Colour.isHex(value)) {
 				// store hex value after verification
 				this.hexValue = value;
@@ -156,7 +185,7 @@ export class Colour {
 		// padout with zeros to ensure 2 digit alpha
 		const newAlpha = a.toString(16).padStart(2, '0');
 
-		const hexValue = `${color.slice(0, 7) as string}${newAlpha}`;
+		const hexValue = `${color.slice(0, 7)}${newAlpha}`;
 
 		if (isRgb) {
 			return Colour.hexToRgb(hexValue);
