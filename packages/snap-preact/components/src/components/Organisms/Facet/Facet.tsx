@@ -23,17 +23,18 @@ import { Lang, useLang } from '../../../hooks';
 import deepmerge from 'deepmerge';
 
 const CSS = {
-	facet: ({ color, theme }: Partial<FacetProps>) =>
+	facet: ({ color, theme, disableCollapse }: Partial<FacetProps>) =>
 		css({
 			width: '100%',
 			margin: '0 0 20px 0',
 			'& .ss__facet__header': {
+				cursor: disableCollapse ? undefined : 'pointer',
 				display: 'flex',
 				justifyContent: 'space-between',
 				alignItems: 'center',
-				color: color,
+				color: color || theme?.variables?.colors?.primary,
 				border: 'none',
-				borderBottom: `2px solid ${theme?.variables?.colors?.primary || '#ccc'}`,
+				borderBottom: `2px solid ${theme?.variables?.colors?.secondary || '#ccc'}`,
 				padding: '6px 0',
 			},
 			'& .ss__facet__options': {
@@ -164,7 +165,7 @@ export const Facet = observer((properties: FacetProps): JSX.Element => {
 				disableStyles,
 				previewOnFocus,
 				valueProps,
-				horizontal: (properties as any)?.overlay ? false : horizontal, // overlay facets should not be horizontal
+				horizontal,
 			}),
 			// component theme overrides
 			theme: props?.theme,
@@ -180,7 +181,7 @@ export const Facet = observer((properties: FacetProps): JSX.Element => {
 				disableStyles,
 				previewOnFocus,
 				valueProps,
-				horizontal: (properties as any)?.overlay ? false : horizontal, // overlay facets should not be horizontal
+				horizontal,
 			}),
 			// component theme overrides
 			theme: props?.theme,

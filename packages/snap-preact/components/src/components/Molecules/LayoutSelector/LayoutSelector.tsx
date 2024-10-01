@@ -14,7 +14,12 @@ import { Lang } from '../../../hooks';
 import deepmerge from 'deepmerge';
 
 const CSS = {
-	LayoutSelector: ({}: Partial<LayoutSelectorProps>) => css({}),
+	LayoutSelector: ({}: Partial<LayoutSelectorProps>) =>
+		css({
+			'.ss__button__content': {
+				display: 'flex',
+			},
+		}),
 };
 
 export const LayoutSelector = observer((properties: LayoutSelectorProps): JSX.Element => {

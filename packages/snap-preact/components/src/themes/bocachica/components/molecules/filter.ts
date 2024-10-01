@@ -1,22 +1,24 @@
 import { css } from '@emotion/react';
 import type { FilterProps } from '../../../../components/Molecules/Filter';
+import { Colour } from '../../../../utilities';
 
 // CSS in JS style script for the Filter component
 const filterStyleScript = ({ theme }: FilterProps) => {
 	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	const variables = theme?.variables;
+	const backgroundColor = new Colour(variables?.colors.primary);
 
 	return css({
 		textDecoration: 'none',
 		display: 'inline-flex',
 		'& .ss__filter__button': {
 			alignItems: 'center',
-			backgroundColor: variables?.colors?.active?.background || '#ccc',
-			color: variables?.colors?.active?.foreground,
+			backgroundColor: backgroundColor.hex,
+			color: backgroundColor.contrast,
 
 			'& .ss__filter__button__icon': {
-				fill: variables?.colors?.active?.foreground,
-				stroke: variables?.colors?.active?.foreground,
+				fill: backgroundColor.contrast,
+				stroke: backgroundColor.contrast,
 				margin: '0 5px 0 0',
 			},
 		},

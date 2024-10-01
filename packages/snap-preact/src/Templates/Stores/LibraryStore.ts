@@ -1,7 +1,7 @@
 import { FunctionalComponent, RenderableProps } from 'preact';
 
 import type { Theme, ThemeMinimal } from '../../../components/src';
-import type { TemplateCustomComponentTypes, TemplateTypes } from './TemplateStore';
+import { transformTranslationsToTheme, type TemplateCustomComponentTypes, type TemplateTypes } from './TemplateStore';
 import type { TemplateStoreComponentConfig } from './TemplateStore';
 
 type LibraryComponentImport = {
@@ -14,6 +14,7 @@ type LibraryComponentMap = {
 
 export type LibraryImports = {
 	theme: {
+		base: (args?: any) => Promise<Theme>;
 		bocachica: (args?: any) => Promise<Theme>;
 	};
 	component: {
@@ -58,7 +59,7 @@ type LibraryStoreConfig = {
 };
 
 export type CurrencyCodes = 'usd' | 'eur' | 'aud';
-export type LanguageCodes = 'en';
+export type LanguageCodes = 'en' | 'fr';
 
 export class LibraryStore {
 	themes: {
@@ -101,6 +102,9 @@ export class LibraryStore {
 
 	import: LibraryImports = {
 		theme: {
+			base: async () => {
+				return this.themes.base || (this.themes.base = (await import('./library/themes/base')).base);
+			},
 			bocachica: async () => {
 				return this.themes.bocachica || (this.themes.bocachica = (await import('./library/themes/bocachica')).bocachica);
 			},
@@ -173,6 +177,9 @@ export class LibraryStore {
 		language: {
 			en: async () => {
 				return this.locales.languages.en || (this.locales.languages.en = (await import('./library/languages/en')).en);
+			},
+			fr: async () => {
+				return this.locales.languages.en || (this.locales.languages.fr = transformTranslationsToTheme((await import('./library/languages/fr')).fr));
 			},
 		},
 		currency: {

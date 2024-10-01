@@ -4,7 +4,7 @@ import { observer } from 'mobx-react-lite';
 
 import { SnapTemplates, TemplatesStore } from '../../src';
 import { ThemeProvider } from '../src/providers/theme';
-import { bocachica } from '../src/themes';
+import { base, bocachica } from '../src/themes';
 
 // custom styles for storybook
 import './styles.scss';
@@ -29,6 +29,17 @@ snapTemplates.templates.addTheme({
 	name: 'bocachica',
 	type: 'library',
 	base: bocachica,
+	language: {},
+	languageOverrides: {},
+	currency: {},
+	innerWidth: window.innerWidth,
+});
+
+// base
+snapTemplates.templates.addTheme({
+	name: 'base',
+	type: 'library',
+	base: base,
 	language: {},
 	languageOverrides: {},
 	currency: {},
@@ -66,9 +77,9 @@ export const decorators = [
 		const themeDecoratorFn = withThemeFromJSXProvider({
 			themes: {
 				bocachica: templateStory ? snapTemplates.templates.themes.library.bocachica.theme : generateBasicTheme(bocachica),
-				none: {},
+				base: templateStory ? snapTemplates.templates.themes.library.base.theme : generateBasicTheme(base),
 			},
-			defaultTheme: 'none',
+			defaultTheme: 'base',
 			Provider: templateStory ? CustomThemeProvider : ThemeProvider,
 		});
 

@@ -331,7 +331,7 @@ export class TemplatesStore {
 	}
 }
 
-function transformTranslationsToTheme(translations: LangComponentOverrides): ThemeMinimal {
+export function transformTranslationsToTheme(translations: LangComponentOverrides): ThemeMinimal {
 	const translationTheme: ThemeMinimal = {
 		components: {},
 	};

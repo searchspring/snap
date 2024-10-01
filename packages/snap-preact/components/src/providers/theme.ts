@@ -1,6 +1,5 @@
 import { ThemeComponentOverrides } from './themeComponents';
 import { ListOption } from '../types';
-import type { DeepPartial } from '../../../src/types';
 
 export { css, useTheme, withTheme, ThemeProvider } from '@emotion/react';
 
@@ -11,35 +10,15 @@ export const defaultTheme: Theme = {
 			primary: '#3A23AD',
 			secondary: '#4c3ce2',
 			accent: '#00cee1',
-			active: {
-				foreground: '#333333',
-				background: '#f8f6fd',
-				accent: '#3A23AD',
-			},
-			hover: {
-				foreground: '#333333',
-				background: '#f8f6fd',
-				accent: '#3A23AD',
-			},
 		},
 	},
 };
 
 type ThemeVariableBreakpoints = [number, number, number, number];
 type ThemeVaraibleColors = {
-	primary: string; // (search header text, regular text, result title)
-	secondary: string; // (headings, dropdown button text)
-	accent: string; // (icons, borders)
-	active: {
-		foreground: string; // (active state text)
-		background: string; // (active state)
-		accent: string; // (icons, borders)
-	};
-	hover: {
-		foreground: string; // (active state text)
-		background: string; // (active state)
-		accent: string; // (icons, borders)
-	};
+	primary: string;
+	secondary: string;
+	accent: string;
 };
 
 export type ThemeVariables = {
@@ -49,7 +28,7 @@ export type ThemeVariables = {
 
 export type ThemeVariablesPartial = {
 	breakpoints?: ThemeVariableBreakpoints;
-	colors?: DeepPartial<ThemeVaraibleColors>;
+	colors?: ThemeVaraibleColors;
 };
 
 export type Theme = {

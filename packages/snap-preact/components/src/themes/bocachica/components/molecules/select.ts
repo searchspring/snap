@@ -24,7 +24,11 @@ const selectStyleScript = ({ color, backgroundColor, borderColor, theme }: Selec
 				fontWeight: 'bold',
 				'&:hover': {
 					backgroundColor: 'initial',
-					color: variables?.colors?.secondary || 'unset',
+					color: variables?.colors?.primary,
+					'.ss__icon': {
+						fill: variables?.colors?.accent,
+						stroke: variables?.colors?.accent,
+					},
 				},
 				'& .ss__select__dropdown__button__icon': {
 					transition: 'transform 0.25s ease 0s',

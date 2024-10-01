@@ -20,21 +20,15 @@ import { useState } from 'preact/hooks';
 import deepmerge from 'deepmerge';
 
 const CSS = {
-	Search: ({ mobileSidebarDisplayAt }: Partial<SearchProps>) =>
+	Search: ({}: Partial<SearchProps>) =>
 		css({
 			display: 'flex',
 			minHeight: '600px',
 
-			'.ss__search__sidebar': {
+			'.ss__sidebar': {
 				flex: '0 1 auto',
-				width: '250px',
+				width: '270px',
 				margin: '0 40px 0 0',
-			},
-
-			'.ss_desktop': {
-				[`@media only screen and (max-width: ${mobileSidebarDisplayAt})`]: {
-					display: 'none',
-				},
 			},
 
 			'.ss__search__content': {
@@ -42,20 +36,6 @@ const CSS = {
 				padding: '0px 10px',
 				width: '100%',
 				boxSizing: 'border-box',
-			},
-
-			[`@media only screen and (max-width: ${mobileSidebarDisplayAt})`]: {
-				flexDirection: 'column',
-			},
-
-			'.ss__search__content__toolbar--top-toolbar': {
-				display: 'flex',
-				justifyContent: 'flex-end',
-				margin: '10px 0px',
-			},
-
-			'.ss__layout__select': {
-				float: 'left',
 			},
 		}),
 };
@@ -113,7 +93,7 @@ export const Search = observer((properties: SearchProps): JSX.Element => {
 		TopToolbar: {
 			name: 'top',
 			// default props
-			hidePagination: Boolean(controller.config.settings?.infinite),
+			hidePagination: true,
 			hideFilterSummary: true,
 			// inherited props
 			...defined({
@@ -286,8 +266,6 @@ export const Search = observer((properties: SearchProps): JSX.Element => {
 
 					{!hideMobileSidebar && store.pagination.totalResults > 0 && <MobileSidebar controller={controller} {...subProps.MobileSidebar} />}
 
-					<div className="clear"></div>
-
 					{store.pagination.totalResults ? (
 						<Results {...subProps.Results} controller={controller} />
 					) : (
@@ -295,8 +273,6 @@ export const Search = observer((properties: SearchProps): JSX.Element => {
 					)}
 
 					{!hideFooterBanner && <Banner content={merchandising.content} type={ContentType.FOOTER} name={'footer'} />}
-
-					<div className="clear"></div>
 
 					{!hideBottomToolBar && store.pagination.totalResults > 0 && (
 						<Toolbar {...subProps.BottomToolbar} className="ss__search__content__toolbar--bottom-toolbar" controller={controller} />

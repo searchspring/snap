@@ -50,7 +50,7 @@ import type { VariantSelectionProps } from '../components/Molecules/VariantSelec
 import type { BranchOverrideProps } from '../components/Organisms/BranchOverride';
 import type { FacetProps } from '../components/Organisms/Facet';
 import type { FacetsHorizontalProps } from '../components/Organisms/FacetsHorizontal';
-import type { FacetsProps } from '../components/Organisms/Facets';
+import type { FacetsNames, FacetsProps } from '../components/Organisms/Facets';
 import type { FilterSummaryProps } from '../components/Organisms/FilterSummary';
 import type { MobileSidebarProps } from '../components/Organisms/MobileSidebar';
 import type { NoResultsProps } from '../components/Organisms/NoResults';
@@ -207,7 +207,7 @@ export type ThemeComponentOverrides =
 	/* ORGANISMS */
 	{ [K in UnNamedThemeComponentSelectors<'branchOverride'>]?: GenericComponentProps<BranchOverrideProps> } &
 	{ [K in UnNamedThemeComponentSelectors<'facet'>]?: GenericComponentProps<FacetProps> } &
-	{ [K in UnNamedThemeComponentSelectors<'facets'>]?: GenericComponentProps<FacetsProps> } &
+	{ [K in NamedThemeComponentSelectors<'facets', FacetsNames>]?: GenericComponentProps<FacetsProps> } &
 	{ [K in UnNamedThemeComponentSelectors<'facetsHorizontal'>]?: GenericComponentProps<FacetsHorizontalProps> } &
 	{ [K in UnNamedThemeComponentSelectors<'filterSummary'>]?: GenericComponentProps<FilterSummaryProps> } &
 	{ [K in UnNamedThemeComponentSelectors<'noResults'>]?: GenericComponentProps<NoResultsProps> } &

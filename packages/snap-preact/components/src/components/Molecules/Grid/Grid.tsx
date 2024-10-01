@@ -76,7 +76,6 @@ const CSS = {
 
 					'&:hover:not(.ss__grid__option--selected)': {
 						cursor: 'pointer',
-						background: theme?.variables?.colors?.hover?.background || '#f8f8f8',
 					},
 				},
 

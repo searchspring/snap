@@ -6,7 +6,11 @@ const searchHorizontalStyleScript = ({ theme }: SearchHorizontalProps) => {
 	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	const variables = theme?.variables;
 
-	return css({});
+	return css({
+		'.ss__filter-summary': {
+			margin: '10px 0',
+		},
+	});
 };
 
 // SearchHorizontal component props

@@ -62,7 +62,7 @@ const CSS = {
 						fontWeight: 'bold',
 					},
 					'&:hover': {
-						backgroundColor: theme?.variables?.colors?.hover?.background || '#f8f8f8',
+						backgroundColor: theme?.variables?.colors?.accent || '#f8f8f8',
 					},
 				},
 			},

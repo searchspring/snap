@@ -8,17 +8,7 @@ const bocachicaVariables: ThemeVariables = {
 	colors: {
 		primary: '#202223',
 		secondary: '#6d7175',
-		accent: '#6d7175',
-		active: {
-			foreground: '#ffffff',
-			background: '#6d7175',
-			accent: '#ffffff',
-		},
-		hover: {
-			foreground: '#ffffff',
-			background: '#000000',
-			accent: '#ffffff',
-		},
+		accent: '#3a23ad',
 	},
 };
 

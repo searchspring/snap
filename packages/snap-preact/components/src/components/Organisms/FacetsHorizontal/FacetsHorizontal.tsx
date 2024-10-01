@@ -18,11 +18,12 @@ import { Dropdown, DropdownProps } from '../../Atoms/Dropdown';
 import { Icon, IconProps, IconType } from '../../Atoms/Icon';
 
 const CSS = {
-	facets: ({ theme }: Partial<FacetsHorizontalProps>) =>
+	facets: ({}: Partial<FacetsHorizontalProps>) =>
 		css({
 			'& .ss__facets-horizontal__header': {
 				display: 'flex',
 				flexWrap: 'wrap',
+				gap: '10px',
 
 				'& .ss__mobile-sidebar': {
 					margin: '0 10px',
@@ -43,9 +44,7 @@ const CSS = {
 
 					'&.ss__dropdown--open': {
 						'& .ss__dropdown__button__heading': {
-							'& .ss__icon': {
-								fill: theme?.variables?.colors?.active?.accent,
-							},
+							'& .ss__icon': {},
 						},
 						'& .ss__dropdown__content': {
 							padding: '10px',
@@ -61,9 +60,7 @@ const CSS = {
 			'&.ss__facets-horizontal--overlay': {
 				'& .ss__facets-horizontal__header__dropdown': {
 					'&.ss__dropdown--open': {
-						'& .ss__dropdown__content': {
-							border: `1px solid ${theme?.variables?.colors?.active?.background || '#ccc'}`,
-						},
+						'& .ss__dropdown__content': {},
 					},
 				},
 			},
@@ -83,6 +80,7 @@ export const FacetsHorizontal = observer((properties: FacetsHorizontalProps): JS
 
 	const defaultProps: Partial<FacetsHorizontalProps> = {
 		limit: 6,
+		overlay: true,
 		iconCollapse: 'angle-up',
 		iconExpand: 'angle-down',
 		facets: properties.controller?.store?.facets,
@@ -127,8 +125,8 @@ export const FacetsHorizontal = observer((properties: FacetsHorizontalProps): JS
 		},
 	};
 
-	// merge deeply the themeDefaults with the theme props and the displaySettings theme props (do not merge arrays, but replace them)
-	const theme = deepmerge(themeDefaults, props?.theme || {}, { arrayMerge: (destinationArray, sourceArray) => sourceArray });
+	// merge deeply the themeDefaults with the theme prop
+	const theme = deepmerge(themeDefaults, props?.theme || {});
 
 	props = {
 		...props,
@@ -138,9 +136,13 @@ export const FacetsHorizontal = observer((properties: FacetsHorizontalProps): JS
 	let facetsToShow = facets;
 	let isOverflowing = false;
 
-	if (limit && facets && limit > 0) {
+	if (typeof limit != 'undefined' && Number.isInteger(limit) && facets) {
 		isOverflowing = facets.length > +limit;
-		facetsToShow = facets.slice(0, +limit);
+		if (limit > 0) {
+			facetsToShow = facets.slice(0, +limit);
+		} else if (limit == 0) {
+			facetsToShow = [];
+		}
 	}
 
 	const subProps: FacetsHorizontalSubProps = {
@@ -177,7 +179,7 @@ export const FacetsHorizontal = observer((properties: FacetsHorizontalProps): JS
 			// default props
 			className: `ss__facets-horizontal__content__facet`,
 			justContent: true,
-			horizontal: true,
+			// horizontal: true,
 			// global theme
 			...globalTheme?.components?.facet,
 			// inherited props
@@ -223,7 +225,7 @@ export const FacetsHorizontal = observer((properties: FacetsHorizontalProps): JS
 		selectedFacet && setSelectedFacet(undefined);
 	});
 
-	return facetsToShow && facetsToShow?.length > 0 ? (
+	return (facetsToShow && facetsToShow?.length > 0) || isOverflowing ? (
 		<CacheProvider>
 			<div
 				className={classnames('ss__facets-horizontal', { 'ss__facets-horizontal--overlay': overlay }, className)}
@@ -231,7 +233,7 @@ export const FacetsHorizontal = observer((properties: FacetsHorizontalProps): JS
 				{...styling}
 			>
 				<div className="ss__facets-horizontal__header">
-					{facetsToShow.map((facet: IndividualFacetType) => {
+					{facetsToShow?.map((facet: IndividualFacetType) => {
 						//initialize lang
 						const defaultLang = {
 							dropdownButton: {

@@ -19,8 +19,6 @@ const facetHierarchyOptionsStyleScript = ({ horizontal, theme }: FacetHierarchyO
 				'&.ss__facet-hierarchy-options__option--filtered': {
 					fontWeight: 'bold',
 					marginRight: '2em',
-					backgroundColor: variables?.colors?.active?.background,
-					color: variables?.colors?.active?.foreground,
 					'&:hover': {
 						cursor: 'default',
 					},

@@ -14,7 +14,12 @@ import { RadioList, RadioListProps } from '../RadioList';
 import { List, ListProps } from '../List';
 
 const CSS = {
-	perPage: ({}: Partial<PerPageProps>) => css({}),
+	perPage: ({}: Partial<PerPageProps>) =>
+		css({
+			'.ss__button__content': {
+				display: 'flex',
+			},
+		}),
 };
 
 export const PerPage = observer((properties: PerPageProps): JSX.Element => {

@@ -5,35 +5,27 @@ import { SnapTemplates } from '@searchspring/snap-preact';
 new SnapTemplates({
 	config: {
 		siteId: '8uyt2m',
-		language: 'en',
-		currency: 'usd',
+		language: 'fr',
+		currency: 'aud',
 	},
 	components: {
 		result: {
-			// CustomResult: async () => (await import('./components/Result')).CustomResultSecondary,
+			CustomResult: async () => (await import('./components/Result')).CustomResult,
 		},
 		badge: {
 			// CustomPill: async () => (await import('./components/Result')).Result,
 		},
 	},
+	// plugins: [['scrollToTop', {}]],
 	themes: {
 		global: {
-			extends: 'bocachica',
+			extends: 'base',
 			variables: {
+				breakpoints: [0, 720, 1024, 1600],
 				colors: {
-					primary: '#3A23AD',
-					secondary: '#4c3ce2',
-					accent: '#00cee1',
-					active: {
-						foreground: '#333333',
-						background: '#f8f6fd',
-						accent: '#3A23AD',
-					},
-					hover: {
-						foreground: '#333333',
-						background: '#f8f6fd',
-						accent: '#3A23AD',
-					},
+					primary: '#6d7175',
+					secondary: '#202223',
+					accent: '#333333',
 				},
 			},
 			overrides: {
@@ -46,6 +38,7 @@ new SnapTemplates({
 	search: {
 		targets: [
 			{
+				// plugins: [['shopifyIntegration', { config }], ['shopifyMarkets', { config }]],
 				selector: '#searchspring-layout',
 				// theme: 'myTheme',
 				component: 'Search',

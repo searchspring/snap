@@ -45,13 +45,7 @@ const CSS = {
 					borderRadius: '100%',
 					padding: '2px',
 				},
-				'&.ss__facet-palette-options__option--filtered': {
-					'& .ss__facet-palette-options__option__wrapper': {
-						borderColor: theme?.variables?.colors?.primary || '#333',
-						padding: '0px',
-						borderWidth: '4px',
-					},
-				},
+
 				'& .ss__facet-palette-options__option__palette': {
 					paddingTop: 'calc(100% - 2px)',
 					border: '1px solid #EBEBEB',
@@ -90,6 +84,7 @@ const CSS = {
 
 			'&.ss__facet-palette-options--list': {
 				'& .ss__facet-palette-options__option__wrapper': {
+					borderColor: 'transparent',
 					width: '16px',
 					height: 'fit-content',
 				},

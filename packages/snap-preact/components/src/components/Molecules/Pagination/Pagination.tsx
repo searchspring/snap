@@ -14,7 +14,7 @@ import deepmerge from 'deepmerge';
 import { Lang, useLang } from '../../../hooks';
 
 const CSS = {
-	pagination: ({ theme }: Partial<PaginationProps>) =>
+	pagination: ({}: Partial<PaginationProps>) =>
 		css({
 			'& .ss__pagination__page': {
 				padding: '5px',
@@ -25,9 +25,7 @@ const CSS = {
 				'&.ss__pagination__page--active': {
 					fontWeight: 'bold',
 				},
-				'&:hover:not(.ss__pagination__page--active)': {
-					backgroundColor: theme?.variables?.colors?.hover?.background || '#f8f8f8',
-				},
+				'&:hover:not(.ss__pagination__page--active)': {},
 			},
 		}),
 };
@@ -126,7 +124,7 @@ export const Pagination = observer((properties: PaginationProps): JSX.Element =>
 		paginationStore: store,
 	});
 
-	return pageNumbers && store?.totalResults ? (
+	return pageNumbers && pageNumbers.length > 1 && store?.totalResults ? (
 		<CacheProvider>
 			<div {...styling} className={classnames('ss__pagination', className)}>
 				<nav role="navigation" aria-label="Pagination">

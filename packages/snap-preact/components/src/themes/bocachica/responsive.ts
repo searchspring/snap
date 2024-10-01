@@ -2,18 +2,38 @@ import { ThemeResponsive } from '../../providers/theme';
 
 const mobileOverrides: ThemeResponsive = {
 	components: {
-		results: {
-			columns: 2,
+		search: {
+			theme: {
+				components: {
+					results: {
+						columns: 2,
+					},
+				},
+			},
 		},
-		// toolbar: {
-		// 	named: {
-		// 		topToolBar: {
-		// 			hidePagination: true,
-		// 			hideSortBy: true,
-		// 			hidePerPage: true,
-		// 		},
-		// 	},
-		// },
+		facetsHorizontal: {
+			limit: 0,
+		},
+		mobileSidebar: {
+			hideSortBy: false,
+		},
+		searchHorizontal: {
+			theme: {
+				components: {
+					'toolbar.middle': {
+						hidePerPage: true,
+						hideSortBy: true,
+					},
+				},
+			},
+		},
+		sortBy: {
+			type: 'radio',
+		},
+		toolbar: {
+			hideSortBy: true,
+			hidePerPage: true,
+		},
 		autocomplete: {
 			hideFacets: true,
 			vertical: true,
@@ -31,17 +51,20 @@ const mobileOverrides: ThemeResponsive = {
 };
 
 const tabletOverrides: ThemeResponsive = {
+	layoutOptions: [],
 	components: {
-		results: {
-			columns: 2,
+		search: {
+			theme: {
+				components: {
+					results: {
+						columns: 3,
+					},
+				},
+			},
 		},
-		// toolbar: {
-		// 	named: {
-		// 		topToolBar: {
-		// 			hidePagination: true,
-		// 		},
-		// 	},
-		// },
+		facetsHorizontal: {
+			limit: 3,
+		},
 		autocomplete: {
 			hideFacets: true,
 			vertical: true,
@@ -61,16 +84,18 @@ const tabletOverrides: ThemeResponsive = {
 const desktopOverrides: ThemeResponsive = {
 	layoutOptions: [],
 	components: {
-		results: {
-			columns: 3,
+		search: {
+			theme: {
+				components: {
+					results: {
+						columns: 3,
+					},
+				},
+			},
 		},
-		// toolbar: {
-		// 	named: {
-		// 		topToolBar: {
-		// 			hidePagination: true,
-		// 		},
-		// 	},
-		// },
+		facetsHorizontal: {
+			limit: 5,
+		},
 		autocomplete: {
 			vertical: true,
 			horizontalTerms: true,
@@ -78,14 +103,7 @@ const desktopOverrides: ThemeResponsive = {
 				components: {
 					results: {
 						rows: 1,
-						columns: 4,
-					},
-					facets: {
-						style: {
-							// horizontal facets
-							width: '100%',
-							display: 'flex',
-						},
+						columns: 3,
 					},
 					facet: {
 						limit: 4,
@@ -99,16 +117,15 @@ const desktopOverrides: ThemeResponsive = {
 const widescreenOverrides: ThemeResponsive = {
 	layoutOptions: [],
 	components: {
-		results: {
-			columns: 4,
+		search: {
+			theme: {
+				components: {
+					results: {
+						columns: 4,
+					},
+				},
+			},
 		},
-		// toolbar: {
-		// 	named: {
-		// 		topToolBar: {
-		// 			hidePagination: true,
-		// 		},
-		// 	},
-		// },
 		autocomplete: {
 			theme: {
 				components: {

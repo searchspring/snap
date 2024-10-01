@@ -3,50 +3,37 @@ import type { FacetPaletteOptionsProps } from '../../../../components/Molecules/
 
 // CSS in JS style script for the FacetPaletteOptions component
 const facetPaletteStyleScript = ({ columns, gapSize, gridSize, theme }: FacetPaletteOptionsProps) => {
-	const variables = theme?.variables;
-
 	return css({
 		display: 'flex',
 		flexFlow: 'row wrap',
 		gridTemplateColumns: columns
 			? `repeat(${columns}, calc((100% - (${columns! - 1} * ${gapSize}))/ ${columns}))`
 			: `repeat(auto-fill, minmax(${gridSize}, 1fr))`,
+		gap: gapSize,
+
+		'& .ss__facet-palette-options__option--list': {
+			display: 'flex',
+			flexDirection: 'row',
+			paddingLeft: '6px',
+		},
 
 		'& .ss__facet-palette-options__option': {
 			width: `calc(100% / ${columns} - ${2 * Math.round((columns! + 2) / 2)}px )`,
 			marginRight: gapSize,
 			marginBottom: gapSize,
-			color: variables?.colors?.secondary,
-
 			[`:nth-of-type(${columns}n)`]: {
 				marginRight: '0',
 			},
 
-			'&:hover': {
-				cursor: 'pointer',
-				'.ss__facet-palette-options__option__wrapper': {
-					borderColor: '#EBEBEB',
-				},
-				'& .ss__facet-palette-options__option__palette': {
-					'& .ss__facet-palette-options__icon': {
-						opacity: 1,
-					},
-				},
-			},
 			'& .ss__facet-palette-options__option__wrapper': {
 				border: `2px solid transparent`,
 				borderRadius: '3px',
+				padding: '2px',
 			},
-			'&.ss__facet-palette-options__option--filtered': {
-				'& .ss__facet-palette-options__option__wrapper': {
-					borderColor: variables?.colors?.secondary || '#333',
-					padding: '2px',
-					borderWidth: '2px',
-				},
-			},
+
 			'& .ss__facet-palette-options__option__palette': {
-				paddingTop: '100%',
-				boxShadow: `0px 0px 0 1px #EBEBEB`,
+				paddingTop: 'calc(100% - 2px)',
+				border: '1px solid #EBEBEB',
 				borderRadius: '3px',
 				position: 'relative',
 				'& .ss__facet-palette-options__icon': {
@@ -78,6 +65,78 @@ const facetPaletteStyleScript = ({ columns, gapSize, gridSize, theme }: FacetPal
 				margin: '0',
 				width: 'initial',
 			},
+		},
+
+		'&.ss__facet-palette-options--list': {
+			'& .ss__facet-palette-options__option__wrapper': {
+				borderColor: 'transparent',
+				width: '16px',
+				height: 'fit-content',
+			},
+
+			'.ss__facet-palette-options__option--filtered': {
+				'& .ss__facet-palette-options__option__value': {
+					fontWeight: 'bold',
+				},
+			},
+
+			'& .ss__facet-palette-options__option--list': {
+				alignItems: 'center',
+				marginTop: `calc(${gapSize} / 2)`,
+				marginBottom: `calc(${gapSize} / 2)`,
+			},
+
+			'& .ss__facet-palette-options__option__value__count': {
+				marginLeft: '5px',
+			},
+
+			'& .ss__facet-palette-options__checkbox': {
+				marginRight: '5px',
+			},
+
+			display: 'flex',
+			flexDirection: 'column',
+		},
+
+		'&.ss__facet-palette-options--grid': {
+			'& .ss__facet-palette-options__checkbox': {
+				display: 'flex',
+				textAlign: 'center',
+				overflow: 'hidden',
+				margin: 'auto',
+				marginBottom: '5px',
+			},
+
+			'.ss__facet-palette-options__option--filtered': {
+				'& .ss__facet-palette-options__option__wrapper': {
+					borderColor: theme?.variables?.colors?.primary || '#333' + ' !important',
+					padding: '0px',
+					borderWidth: '4px',
+				},
+			},
+
+			'& .ss__facet-palette-options__option': {
+				'&:hover': {
+					cursor: 'pointer',
+					'.ss__facet-palette-options__option__wrapper': {
+						borderColor: '#EBEBEB',
+					},
+					'& .ss__facet-palette-options__option__palette': {
+						'& .ss__facet-palette-options__icon': {
+							opacity: 1,
+						},
+					},
+				},
+			},
+		},
+
+		'& .ss__facet-palette-options__option__value__count': {
+			fontSize: '0.8em',
+			display: 'block',
+			textAlign: 'center',
+			overflow: 'hidden',
+			textOverflow: 'ellipsis',
+			whiteSpace: 'nowrap',
 		},
 	});
 };

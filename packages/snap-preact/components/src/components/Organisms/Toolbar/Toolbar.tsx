@@ -17,7 +17,13 @@ import { LayoutSelector, LayoutSelectorProps } from '../../Molecules/LayoutSelec
 import { SnapTemplates } from '../../../../../src';
 
 const CSS = {
-	toolbar: ({}: Partial<ToolbarProps>) => css({}),
+	toolbar: ({}: Partial<ToolbarProps>) =>
+		css({
+			display: 'flex',
+			justifyContent: 'flex-end',
+			margin: '10px 0px',
+			gap: '10px',
+		}),
 };
 
 export const Toolbar = observer((properties: ToolbarProps): JSX.Element => {

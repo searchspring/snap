@@ -11,10 +11,13 @@ import { defined, mergeProps } from '../../../utilities';
 import { Icon, IconProps, IconType } from '../Icon';
 import { Lang, useLang } from '../../../hooks';
 import deepmerge from 'deepmerge';
+import { Colour } from '../../../utilities';
 
 const CSS = {
-	button: ({ color, backgroundColor, borderColor, theme }: Partial<ButtonProps>) =>
-		css({
+	button: ({ color, backgroundColor, borderColor, theme }: Partial<ButtonProps>) => {
+		const lightenedPrimary = new Colour(theme?.variables?.colors?.primary).lighten(212);
+
+		return css({
 			display: 'inline-flex',
 			padding: '5px 10px',
 			position: 'relative',
@@ -22,9 +25,9 @@ const CSS = {
 			outline: 0,
 			backgroundColor: backgroundColor || '#fff',
 			border: `1px solid ${borderColor || color || theme?.variables?.colors?.primary || '#333'}`,
-			'&:hover': {
+			'&:not(.ss__button--disabled):hover': {
 				cursor: 'pointer',
-				backgroundColor: theme?.variables?.colors?.hover?.background || '#f8f8f8',
+				backgroundColor: lightenedPrimary.hex || '#f8f8f8',
 			},
 			'&.ss__button--disabled': {
 				opacity: 0.3,
@@ -33,7 +36,11 @@ const CSS = {
 					cursor: 'default',
 				},
 			},
-		}),
+			'.ss__button__content': {
+				width: '100%',
+			},
+		});
+	},
 	native: ({}) => css({}),
 };
 

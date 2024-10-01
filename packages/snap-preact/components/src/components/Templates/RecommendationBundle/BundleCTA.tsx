@@ -5,7 +5,7 @@ import { observer } from 'mobx-react';
 import classnames from 'classnames';
 import { cloneWithProps } from '../../../utilities';
 import { Button } from '../../Atoms/Button';
-import { Price } from '../../Atoms/Price';
+import { Price, PriceProps } from '../../Atoms/Price';
 import { Theme, useTheme } from '../../../providers';
 import { Icon, IconProps, IconType } from '../../Atoms/Icon';
 import type { ComponentProps } from '../../../types';
@@ -38,9 +38,26 @@ export const BundledCTA = observer((properties: BundledCTAProps): JSX.Element =>
 
 	const subProps: BundleSelectorSubProps = {
 		icon: {
+			name: 'bundle-cart',
 			// default props
 			className: 'ss__recommendation-bundle__wrapper__cta__icon',
 			size: 50,
+			// global theme
+			...globalTheme?.components?.icon,
+			// component theme overrides
+			theme: props?.theme,
+			treePath,
+		},
+		subtotalStrike: {
+			// default props
+			// global theme
+			...globalTheme?.components?.icon,
+			// component theme overrides
+			theme: props?.theme,
+			treePath,
+		},
+		subtotalPrice: {
+			// default props
 			// global theme
 			...globalTheme?.components?.icon,
 			// component theme overrides
@@ -71,13 +88,13 @@ export const BundledCTA = observer((properties: BundledCTAProps): JSX.Element =>
 						<div className="ss__recommendation-bundle__wrapper__cta__subtotal__prices">
 							{cartStore.msrp && cartStore.msrp !== cartStore.price ? (
 								<label className="ss__recommendation-bundle__wrapper__cta__subtotal__strike">
-									Was <Price lineThrough={true} value={cartStore.msrp} />
+									Was <Price {...subProps.subtotalStrike} lineThrough={true} value={cartStore.msrp} />
 								</label>
 							) : (
 								<Fragment></Fragment>
 							)}
 							<label className="ss__recommendation-bundle__wrapper__cta__subtotal__price">
-								<Price value={cartStore.price} />
+								<Price {...subProps.subtotalPrice} value={cartStore.price} />
 							</label>
 						</div>
 					</div>
@@ -99,6 +116,8 @@ export const BundledCTA = observer((properties: BundledCTAProps): JSX.Element =>
 });
 
 export interface BundleSelectorSubProps {
+	subtotalStrike: Partial<PriceProps>;
+	subtotalPrice: Partial<PriceProps>;
 	icon: Partial<IconProps>;
 }
 

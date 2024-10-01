@@ -144,16 +144,6 @@ describe('mergeProps function with theme name', () => {
 					primary: '#3A23AD',
 					secondary: '#00cee1',
 					accent: '#4c3ce2',
-					active: {
-						foreground: '#333333',
-						background: '#f8f6fd',
-						accent: '#3A23AD',
-					},
-					hover: {
-						foreground: '#333333',
-						background: '#f8f6fd',
-						accent: '#3A23AD',
-					},
 				},
 			},
 			layoutOptions: [

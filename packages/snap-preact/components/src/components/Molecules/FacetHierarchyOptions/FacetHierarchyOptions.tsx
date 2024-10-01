@@ -22,7 +22,6 @@ const CSS = {
 				alignItems: 'center',
 				'&:hover': {
 					cursor: 'pointer',
-					background: theme?.variables?.colors?.hover?.background,
 				},
 				'&.ss__facet-hierarchy-options__option--filtered': {
 					fontWeight: 'bold',
@@ -63,7 +62,6 @@ const CSS = {
 
 				'&:hover': {
 					cursor: 'pointer',
-					background: theme?.variables?.colors?.hover?.background,
 				},
 				'&.ss__facet-hierarchy-options__option--filtered': {
 					fontWeight: 'bold',

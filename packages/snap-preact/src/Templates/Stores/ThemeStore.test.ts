@@ -4,7 +4,7 @@ import { waitFor } from '@testing-library/preact';
 
 import { ThemeStore, ThemeStoreThemeConfig, mergeThemeLayers } from './ThemeStore';
 import { StorageStore } from '@searchspring/snap-store-mobx';
-import type { TemplatesStoreDependencies, TemplateThemeTypes, TemplatesStoreSettings } from './TemplateStore';
+import type { TemplatesStoreDependencies, TemplateThemeTypes, TemplatesStoreConfigSettings } from './TemplateStore';
 import type { Theme, ThemeVariables, ThemePartial } from '../../../components/src/providers/theme';
 import { GLOBAL_THEME_NAME } from './TargetStore';
 
@@ -17,16 +17,6 @@ const testThemeVariables: ThemeVariables = {
 		primary: 'test.color.primary',
 		secondary: 'test.color.secondary',
 		accent: 'test.color.accent',
-		active: {
-			foreground: 'test.color.active.foreground',
-			background: 'test.color.active.background',
-			accent: 'test.color.active.accent',
-		},
-		hover: {
-			foreground: 'test.color.hover.foreground',
-			background: 'test.color.hover.background',
-			accent: 'test.color.hover.accent',
-		},
 	},
 };
 
@@ -97,7 +87,7 @@ const testTheme: Theme = {
 
 describe('ThemeStore', () => {
 	let dependencies: TemplatesStoreDependencies;
-	let settings: TemplatesStoreSettings;
+	let settings: TemplatesStoreConfigSettings;
 
 	beforeEach(() => {
 		dependencies = {
@@ -267,16 +257,6 @@ describe('ThemeStore', () => {
 					primary: 'primary',
 					secondary: 'secondary',
 					accent: 'accent',
-					active: {
-						foreground: 'active.foreground',
-						background: 'active.background',
-						accent: 'active.accent',
-					},
-					hover: {
-						foreground: 'hover.foreground',
-						background: 'hover.background',
-						accent: 'hover.account',
-					},
 				},
 			},
 			currency: {},
@@ -323,16 +303,6 @@ describe('ThemeStore', () => {
 					primary: 'primary',
 					secondary: 'secondary',
 					accent: 'accent',
-					active: {
-						foreground: 'active.foreground',
-						background: 'active.background',
-						accent: 'active.accent',
-					},
-					hover: {
-						foreground: 'hover.foreground',
-						background: 'hover.background',
-						accent: 'hover.account',
-					},
 				},
 			},
 			currency: {
@@ -718,12 +688,8 @@ describe('mergeThemeLayers function', () => {
 				breakpoints: [1, 2, 3, 4],
 				colors: {
 					primary: 'blue',
-					active: {
-						accent: 'blue',
-					},
-					hover: {
-						accent: 'blue',
-					},
+					secondary: 'red',
+					accent: 'green',
 				},
 			},
 		};
@@ -733,10 +699,8 @@ describe('mergeThemeLayers function', () => {
 				breakpoints: [5, 6, 7, 8],
 				colors: {
 					primary: 'red',
-					active: {
-						foreground: 'red',
-						accent: 'red',
-					},
+					secondary: 'blue',
+					accent: 'green',
 				},
 			},
 		};
@@ -747,13 +711,8 @@ describe('mergeThemeLayers function', () => {
 				breakpoints: [5, 6, 7, 8],
 				colors: {
 					primary: 'red',
-					active: {
-						foreground: 'red',
-						accent: 'red',
-					},
-					hover: {
-						accent: 'blue',
-					},
+					secondary: 'blue',
+					accent: 'green',
 				},
 			},
 		});
@@ -961,12 +920,8 @@ describe('mergeThemeLayers function', () => {
 				breakpoints: [1, 2, 3, 4],
 				colors: {
 					primary: 'blue',
-					active: {
-						accent: 'blue',
-					},
-					hover: {
-						accent: 'blue',
-					},
+					secondary: 'red',
+					accent: 'yellow',
 				},
 			},
 			components: {
@@ -1044,13 +999,8 @@ describe('mergeThemeLayers function', () => {
 				breakpoints: [0, 420, 720, 1440],
 				colors: {
 					primary: 'red',
-					active: {
-						accent: 'red',
-					},
-					hover: {
-						foreground: 'red',
-						background: 'red',
-					},
+					secondary: 'yellow',
+					accent: 'orange',
 				},
 			},
 			components: {
@@ -1084,14 +1034,8 @@ describe('mergeThemeLayers function', () => {
 				breakpoints: [0, 420, 720, 1440],
 				colors: {
 					primary: 'red',
-					active: {
-						accent: 'red',
-					},
-					hover: {
-						accent: 'blue',
-						foreground: 'red',
-						background: 'red',
-					},
+					secondary: 'yellow',
+					accent: 'orange',
 				},
 			},
 			components: {

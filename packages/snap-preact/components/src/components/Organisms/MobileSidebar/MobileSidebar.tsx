@@ -17,7 +17,7 @@ import { IconProps, IconType } from '../../Atoms/Icon';
 import deepmerge from 'deepmerge';
 
 const CSS = {
-	toolbar: () =>
+	toolbar: ({}: Partial<MobileSidebarProps>) =>
 		css({
 			'& .ss__mobile-sidebar__header': {
 				display: 'flex',
@@ -42,10 +42,11 @@ const CSS = {
 				cursor: 'pointer',
 			},
 
-			'& .ss__mobile-sidebar__cta-wrapper': {
-				justifyContent: 'space-around',
-				flexDirection: 'row',
+			'& .ss__mobile-sidebar__footer': {
 				display: 'flex',
+				gap: '10px',
+				justifyContent: 'center',
+				flexDirection: 'row',
 			},
 		}),
 };
@@ -89,12 +90,16 @@ export const MobileSidebar = observer((properties: MobileSidebarProps): JSX.Elem
 		className,
 		style,
 		treePath,
+		styleScript,
 	} = props;
 
 	const styling: RootNodeProperties = { 'ss-name': props.name };
+	const stylingProps = props;
 
-	if (!disableStyles) {
-		styling.css = [CSS.toolbar(), style];
+	if (styleScript && !disableStyles) {
+		styling.css = [styleScript(stylingProps), style];
+	} else if (!disableStyles) {
+		styling.css = [CSS.toolbar(stylingProps), style];
 	} else if (style) {
 		styling.css = [style];
 	}
@@ -244,7 +249,9 @@ export const MobileSidebar = observer((properties: MobileSidebarProps): JSX.Elem
 			</div>
 		);
 	};
+
 	const contentRef: MutableRef<any> = useRef();
+
 	return (
 		<CacheProvider>
 			<div {...styling} className={classnames('ss__mobile-sidebar', className)}>

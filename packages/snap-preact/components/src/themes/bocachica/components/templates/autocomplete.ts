@@ -198,6 +198,9 @@ export const autocomplete: Partial<AutocompleteProps> = {
 				hideLabel: true,
 				columns: 3,
 			},
+			results: {
+				columns: 2,
+			},
 			result: {
 				hideBadge: true,
 			},

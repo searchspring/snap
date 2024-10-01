@@ -15,7 +15,12 @@ import { Lang } from '../../../hooks';
 import deepmerge from 'deepmerge';
 
 const CSS = {
-	sortBy: ({}: Partial<SortByProps>) => css({}),
+	sortBy: ({}: Partial<SortByProps>) =>
+		css({
+			'.ss__button__content': {
+				display: 'flex',
+			},
+		}),
 };
 
 export const SortBy = observer((properties: SortByProps): JSX.Element => {

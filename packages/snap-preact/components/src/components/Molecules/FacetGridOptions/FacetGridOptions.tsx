@@ -5,7 +5,7 @@ import classnames from 'classnames';
 import { observer } from 'mobx-react';
 
 import { Theme, useTheme, CacheProvider } from '../../../providers';
-import { mergeProps } from '../../../utilities';
+import { Colour, mergeProps } from '../../../utilities';
 import { createHoverProps } from '../../../toolbox';
 import { ComponentProps, RootNodeProperties } from '../../../types';
 import type { FacetValue, ValueFacet } from '@searchspring/snap-store-mobx';
@@ -39,11 +39,12 @@ const CSS = {
 				},
 				'&.ss__facet-grid-options__option--filtered': {
 					background: theme?.variables?.colors?.primary || '#ccc',
-					color: theme?.variables?.colors?.secondary,
+					color: new Colour(theme?.variables?.colors?.primary).contrast || '#333',
 				},
 				'&:hover:not(.ss__facet-grid-options__option--filtered)': {
 					cursor: 'pointer',
-					background: theme?.variables?.colors?.hover?.background || '#f8f8f8',
+					background: theme?.variables?.colors?.secondary || '#f8f8f8',
+					color: new Colour(theme?.variables?.colors?.secondary).contrast || '#333',
 				},
 				'& .ss__facet-grid-options__option__value': {
 					'&.ss__facet-grid-options__option__value--smaller': {

@@ -1,9 +1,11 @@
 import { css } from '@emotion/react';
 import type { CheckboxProps } from '../../../../components/Molecules/Checkbox';
+import { Colour } from '../../../../utilities';
 
 // CSS in JS style script for the Checkbox component
 const checkboxStyleScript = ({ size, color, theme }: CheckboxProps) => {
 	const variables = theme?.variables;
+	const backgroundColor = new Colour(color || variables?.colors.primary);
 
 	return css({
 		display: 'inline-flex',
@@ -11,13 +13,13 @@ const checkboxStyleScript = ({ size, color, theme }: CheckboxProps) => {
 		justifyContent: 'center',
 		height: size,
 		width: size,
-		border: `1px solid ${color || variables?.colors?.secondary || '#333'}`,
+		border: `1px solid ${backgroundColor.hex}`,
 		borderRadius: '3px',
 		'&.ss__checkbox--active': {
-			backgroundColor: variables?.colors?.active.background,
+			backgroundColor: backgroundColor.hex,
 			'.ss__icon': {
-				fill: variables?.colors?.active.foreground,
-				stroke: variables?.colors?.active.foreground,
+				fill: backgroundColor.contrast,
+				stroke: backgroundColor.contrast,
 			},
 		},
 		'&.ss__checkbox--disabled': {

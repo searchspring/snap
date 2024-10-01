@@ -1,27 +1,30 @@
 import { css } from '@emotion/react';
 import type { ButtonProps } from '../../../../components/Atoms/Button';
+import { Colour } from '../../../../utilities';
 
 // CSS in JS style script for the Button component
 const buttonStyleScript = ({ color, backgroundColor, borderColor, theme }: ButtonProps) => {
 	const variables = theme?.variables;
+	const borderColour = new Colour(borderColor || variables?.colors.primary);
+	const colour = new Colour(color || variables?.colors.primary);
+	const hoverBackgroundColour = new Colour(backgroundColor || variables?.colors.primary);
 
 	return css({
 		display: 'inline-flex',
 		padding: '5px 10px',
 		position: 'relative',
-		color: color || variables?.colors?.secondary,
+		color: colour.hex,
 		outline: 0,
-		backgroundColor: backgroundColor,
-		border: `1px solid ${borderColor || variables?.colors?.accent || '#333'}`,
+		backgroundColor: '#fff',
+		border: `1px solid ${borderColour.hex}`,
 		borderRadius: '3px',
 		'&:not(.ss__button--disabled):hover': {
 			cursor: 'pointer',
-			backgroundColor: variables?.colors?.hover?.background,
-			color: variables?.colors?.hover?.foreground,
-			borderColor: borderColor || variables?.colors?.hover?.accent,
+			backgroundColor: hoverBackgroundColour.hex,
+			color: hoverBackgroundColour.contrast,
 			'.ss__icon': {
-				fill: variables?.colors?.hover?.foreground,
-				stroke: variables?.colors?.hover?.foreground,
+				fill: hoverBackgroundColour.contrast,
+				stroke: hoverBackgroundColour.contrast,
 			},
 		},
 		'&.ss__button--disabled': {
@@ -33,6 +36,9 @@ const buttonStyleScript = ({ color, backgroundColor, borderColor, theme }: Butto
 		},
 		'.ss__icon': {
 			marginLeft: '10px',
+		},
+		'.ss__button__content': {
+			width: '100%',
 		},
 	});
 };
