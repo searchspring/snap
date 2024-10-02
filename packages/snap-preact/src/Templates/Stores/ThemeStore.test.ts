@@ -68,7 +68,6 @@ const testTheme: Theme = {
 			components: {
 				results: {
 					columns: 1,
-					treePath: 'asdf',
 				},
 			},
 		},
