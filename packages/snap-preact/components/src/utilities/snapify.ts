@@ -89,7 +89,7 @@ export class Snapify {
 }
 
 function createSearchController(config: CreateConfig): SearchController {
-	const urlManager = new UrlManager(new UrlTranslator(), reactLinker);
+	const urlManager = new UrlManager(new UrlTranslator({ settings: { coreType: 'query', corePrefix: config.controller.id } }), reactLinker);
 
 	const cntrlr = new SearchController(config.controller as SearchControllerConfig, {
 		client: new Client(config.client.globals, config.client.config),
