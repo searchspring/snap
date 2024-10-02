@@ -21,7 +21,7 @@ new SnapTemplates({
 		global: {
 			extends: 'base',
 			variables: {
-				breakpoints: [0, 720, 1024, 1600],
+				breakpoints: [768, 1024, 1280],
 				colors: {
 					primary: '#6d7175',
 					secondary: '#202223',
@@ -32,6 +32,75 @@ new SnapTemplates({
 				components: {
 					// overrides here...
 				},
+				layoutOptions: [
+					{
+						value: 2,
+						label: 'two',
+						overrides: {
+							components: {
+								toolbar: {
+									hideSortBy: true,
+								},
+								results: {
+									columns: 2,
+								},
+							},
+						},
+					},
+					{
+						value: 4,
+						label: 'four',
+						default: true,
+						overrides: {
+							components: {
+								results: {
+									columns: 4,
+								},
+							},
+						},
+					},
+				],
+				responsive: [
+					{
+						components: {
+							pagination: {
+								hideLast: true,
+							},
+						},
+						layoutOptions: [
+							{
+								value: 1,
+								label: 'one',
+								overrides: {
+									components: {
+										toolbar: {
+											hideSortBy: true,
+										},
+										results: {
+											columns: 1,
+										},
+									},
+								},
+							},
+							{
+								value: 3,
+								label: 'three',
+								default: true,
+								overrides: {
+									components: {
+										results: {
+											columns: 3,
+										},
+									},
+								},
+							},
+						],
+					},
+					{
+						// layoutOptions: [],
+					},
+					{},
+				],
 			},
 		},
 	},

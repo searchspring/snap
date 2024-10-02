@@ -114,34 +114,4 @@ const desktopOverrides: ThemeResponsive = {
 	},
 };
 
-const widescreenOverrides: ThemeResponsive = {
-	layoutOptions: [],
-	components: {
-		search: {
-			theme: {
-				components: {
-					results: {
-						columns: 4,
-					},
-				},
-			},
-		},
-		autocomplete: {
-			theme: {
-				components: {
-					results: {
-						rows: 2,
-						columns: 2,
-					},
-				},
-			},
-		},
-	},
-};
-
-export const responsive: [ThemeResponsive, ThemeResponsive, ThemeResponsive, ThemeResponsive] = [
-	mobileOverrides,
-	tabletOverrides,
-	desktopOverrides,
-	widescreenOverrides,
-];
+export const responsive: [ThemeResponsive, ThemeResponsive, ThemeResponsive] = [mobileOverrides, tabletOverrides, desktopOverrides];

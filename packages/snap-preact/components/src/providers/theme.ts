@@ -5,7 +5,7 @@ export { css, useTheme, withTheme, ThemeProvider } from '@emotion/react';
 
 export const defaultTheme: Theme = {
 	variables: {
-		breakpoints: [0, 540, 767, 1200],
+		breakpoints: [540, 767, 1200],
 		colors: {
 			primary: '#3A23AD',
 			secondary: '#4c3ce2',
@@ -14,7 +14,7 @@ export const defaultTheme: Theme = {
 	},
 };
 
-type ThemeVariableBreakpoints = [number, number, number, number];
+type ThemeVariableBreakpoints = [number, number, number];
 type ThemeVaraibleColors = {
 	primary: string;
 	secondary: string;
@@ -34,7 +34,7 @@ export type ThemeVariablesPartial = {
 export type Theme = {
 	name?: string; // Used as a flag in components to provide backwards compatability
 	variables?: ThemeVariables;
-	responsive?: [ThemeResponsive, ThemeResponsive, ThemeResponsive, ThemeResponsive];
+	responsive?: [ThemeResponsive, ThemeResponsive, ThemeResponsive];
 	components?: ThemeComponentOverrides;
 	layoutOptions?: (Omit<ListOption, 'overrides'> & { overrides: ThemeMinimal })[];
 };

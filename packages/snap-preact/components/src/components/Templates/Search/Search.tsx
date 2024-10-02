@@ -44,7 +44,7 @@ export const Search = observer((properties: SearchProps): JSX.Element => {
 	const globalTheme: Theme = useTheme();
 
 	const defaultProps: Partial<SearchProps> = {
-		mobileSidebarDisplayAt: '991px',
+		mobileSidebarDisplayAt: globalTheme?.variables?.breakpoints?.at(0) ? `${globalTheme.variables?.breakpoints?.at(0)}px` : '991px',
 	};
 
 	const props = mergeProps('search', globalTheme, defaultProps, properties);
