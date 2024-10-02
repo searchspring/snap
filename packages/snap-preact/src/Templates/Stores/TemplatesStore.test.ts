@@ -1,5 +1,5 @@
 import { TemplatesStore } from './TemplateStore';
-import type { SnapTemplatesConfig } from '../SnapTemplate';
+import type { SnapTemplatesConfig } from '../SnapTemplates';
 import { GLOBAL_THEME_NAME } from './TargetStore';
 
 describe('TemplateStore', () => {

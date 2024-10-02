@@ -176,10 +176,10 @@ export class LibraryStore {
 		},
 		language: {
 			en: async () => {
-				return this.locales.languages.en || (this.locales.languages.en = (await import('./library/languages/en')).en);
+				return this.locales.languages.en || (this.locales.languages.en = transformTranslationsToTheme((await import('./library/languages/en')).en));
 			},
 			fr: async () => {
-				return this.locales.languages.en || (this.locales.languages.fr = transformTranslationsToTheme((await import('./library/languages/fr')).fr));
+				return this.locales.languages.fr || (this.locales.languages.fr = transformTranslationsToTheme((await import('./library/languages/fr')).fr));
 			},
 		},
 		currency: {

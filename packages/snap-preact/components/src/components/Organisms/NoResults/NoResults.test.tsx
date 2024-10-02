@@ -103,8 +103,8 @@ describe('NoResults  Component', () => {
 		expect(element).toBeInTheDocument();
 		expect(suggestionTitle?.innerHTML).toBe('Suggestions');
 		expect(suggestionsList).toHaveLength(3);
-		expect(contactsTitle?.innerHTML).toBe('Still can\'t find what you\'re looking for? <a href="/contact-us">Contact us</a>.');
-		expect(contactList).toHaveLength(4);
+		expect(contactsTitle).not.toBeInTheDocument();
+		expect(contactList).toHaveLength(0);
 	});
 
 	it('can change the suggestion title', () => {
@@ -182,6 +182,28 @@ describe('NoResults  Component', () => {
 		const selector = '.ss__no-results';
 
 		it('immediately available lang options', async () => {
+			const propsWithLang = {
+				contactsTitleText: `Still can't find what you're looking for? <a href="/contact-us">Contact us</a>.`,
+				contactsList: [
+					{
+						title: `Address`,
+						content: `123 Street Address<br />City, State, Zipcode`,
+					},
+					{
+						title: `Hours`,
+						content: `Monday - Saturday, 00:00am - 00:00pm<br />Sunday, 00:00am - 00:00pm`,
+					},
+					{
+						title: `Phone`,
+						content: `<a href="tel:1234567890">123-456-7890</a>`,
+					},
+					{
+						title: `Email`,
+						content: `<a href="mailto:email@site.com">email@site.com</a>`,
+					},
+				],
+			};
+
 			const langOptions = ['suggestionsTitleText', 'contactsTitleText', 'contactsList', 'suggestionsList'];
 
 			//text attributes/values
@@ -234,7 +256,7 @@ describe('NoResults  Component', () => {
 					};
 
 					// @ts-ignore
-					const rendered = render(<NoResults lang={lang} />);
+					const rendered = render(<NoResults lang={lang} {...propsWithLang} />);
 
 					const element = rendered.container.querySelector(selector);
 					expect(element).toBeInTheDocument();
