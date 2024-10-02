@@ -33,7 +33,7 @@ new SnapTemplates({
 					primary: 'red',
 					secondary: 'blue',
 				},
-				breakpoints: [0, 768, 1024, 1280],
+				breakpoints: [768, 1024, 1280],
 			},
 			style: globalStyles,
 			overrides: {
@@ -167,7 +167,6 @@ new SnapTemplates({
 					{
 						// layoutOptions: [],
 					},
-					{},
 					{},
 				],
 			},
