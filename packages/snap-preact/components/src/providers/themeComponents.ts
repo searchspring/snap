@@ -77,7 +77,23 @@ type NamedThemeComponentSelectors<ComponentType extends string, ComponentNames e
 
 type UnNamedThemeComponentSelectors<ComponentType extends string> = ComponentType | `${string} ${ComponentType}`;
 
-type GenericComponentProps<Props> = Partial<Omit<Props, 'breakpoints'>>;
+type GenericComponentProps<Props> = Partial<Omit<Props, OmittedComponentProps>>;
+type OmittedComponentProps =
+	| 'breakpoints'
+	| 'styleScript'
+	| 'controller'
+	| 'results'
+	| 'facets'
+	| 'facet'
+	| 'result'
+	| 'filter'
+	| 'lang'
+	| 'className'
+	| 'ref'
+	| 'snap'
+	| 'name'
+	| 'treePath'
+	| 'disableStyles';
 
 export type ThemeComponents = {
 	/* ATOMS */

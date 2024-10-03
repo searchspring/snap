@@ -338,6 +338,7 @@ export function transformTranslationsToTheme(translations: LangComponentOverride
 
 	Object.keys(translations).forEach((component) => {
 		translationTheme.components![component as keyof typeof translationTheme.components] = {
+			// @ts-ignore - using lang here but it is not an allowable override
 			lang: translations[component as keyof typeof translationTheme.components],
 		};
 	});
