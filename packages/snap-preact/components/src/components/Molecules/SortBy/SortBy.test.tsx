@@ -98,7 +98,7 @@ describe('SortBy Component', () => {
 		expect(element?.classList).toHaveLength(3);
 	});
 
-	describe('Select lang works', () => {
+	describe('Sortby lang works', () => {
 		const selector = '.ss__sortby';
 
 		it('immediately available lang options', async () => {
