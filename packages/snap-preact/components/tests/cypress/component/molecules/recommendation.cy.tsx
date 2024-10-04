@@ -57,7 +57,7 @@ describe('Recommendation Component', async () => {
 	});
 
 	it('tracks as expected', () => {
-		const spy = cy.spy(controller.tracker.track, 'event').as('trackfn');
+		cy.spy(controller.tracker.track, 'event').as('trackfn');
 
 		mount(
 			<Recommendation controller={controller} speed={0} lazyRender={{ enabled: false }}>
