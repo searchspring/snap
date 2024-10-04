@@ -20,11 +20,25 @@ The `hideSuggestions` prop will prevent the suggestions list and title from rend
 <NoResults hideSuggestions={true} />
 ```
 
+### hideContactsTitleText
+The `hideContactsTitleText` prop allows you to hide the contacts title.
+
+```jsx
+<NoResults hideContactsTitleText={true} />
+```
+
 ### suggestionsTitleText
 The `suggestionsTitleText` prop allows you to set the inner text of the suggestions title.
 
 ```jsx
 <NoResults suggestionsTitleText={'suggestions'} />
+```
+
+### hideSuggestionsTitleText
+The `hideSuggestionsTitleText` prop allows you to hide the suggestions title.
+
+```jsx
+<NoResults hideSuggestionsTitleText={true} />
 ```
 
 ### suggestionsList

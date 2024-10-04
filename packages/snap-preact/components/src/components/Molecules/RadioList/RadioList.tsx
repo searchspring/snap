@@ -63,6 +63,7 @@ export function RadioList(properties: RadioListProps): JSX.Element {
 		hideOptionRadios,
 		hideOptionIcons,
 		hideOptionLabels,
+		hideTitleText,
 		native,
 		disabled,
 		selected,
@@ -151,7 +152,7 @@ export function RadioList(properties: RadioListProps): JSX.Element {
 	return typeof options == 'object' && options?.length ? (
 		<CacheProvider>
 			<div {...styling} className={classnames('ss__radio-list', disabled ? 'ss__radio-list--disabled' : '', className)}>
-				{(titleText || lang?.title?.value) && (
+				{(titleText || lang?.title?.value) && !hideTitleText && (
 					<h5 className="ss__radio-list__title" {...mergedLang.title?.all}>
 						{titleText}
 					</h5>
@@ -199,6 +200,7 @@ export interface RadioListProps extends ComponentProps {
 	hideOptionIcons?: boolean;
 	onSelect?: (e: React.MouseEvent<HTMLElement>, option: ListOption) => void;
 	titleText?: string;
+	hideTitleText?: string;
 	disabled?: boolean;
 	selected?: ListOption;
 	lang?: Partial<RadioListLang>;

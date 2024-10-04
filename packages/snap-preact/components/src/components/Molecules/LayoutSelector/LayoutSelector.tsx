@@ -29,7 +29,8 @@ export const LayoutSelector = observer((properties: LayoutSelectorProps): JSX.El
 
 	const props = mergeProps('layoutSelector', globalTheme, defaultProps, properties);
 
-	const { options, selected, type, onSelect, showSingleOption, label, disableStyles, className, style, styleScript, treePath } = props;
+	const { options, selected, type, onSelect, showSingleOption, hideLabel, disableStyles, className, style, styleScript, treePath } = props;
+	let label = props.label;
 
 	const subProps: SelectSubProps = {
 		Select: {
@@ -79,6 +80,10 @@ export const LayoutSelector = observer((properties: LayoutSelectorProps): JSX.El
 		styling.css = [CSS.LayoutSelector(stylingProps), style];
 	} else if (style) {
 		styling.css = [style];
+	}
+
+	if (hideLabel) {
+		label = undefined;
 	}
 
 	//initialize lang
@@ -160,6 +165,7 @@ export interface LayoutSelectorProps extends ComponentProps {
 	options?: ListOption[];
 	selected?: ListOption;
 	label?: string;
+	hideLabel?: boolean;
 	type?: 'dropdown' | 'list' | 'radio';
 	showSingleOption?: boolean;
 	lang?: Partial<LayoutSelectorLang>;

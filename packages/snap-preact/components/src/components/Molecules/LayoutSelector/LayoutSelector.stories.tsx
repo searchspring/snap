@@ -71,6 +71,17 @@ export default {
 			},
 			control: { type: 'text' },
 		},
+		hideLabel: {
+			defaultValue: false,
+			description: 'hide selector label',
+			table: {
+				type: {
+					summary: 'boolean',
+				},
+				defaultValue: { summary: false },
+			},
+			control: { type: 'boolean' },
+		},
 		selected: {
 			description: 'currently selected option',
 			table: {

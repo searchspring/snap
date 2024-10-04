@@ -83,6 +83,11 @@ export const MobileSidebar = observer((properties: MobileSidebarProps): JSX.Elem
 		closeButtonIcon,
 		openButtonIcon,
 		titleText,
+		hideTitleText,
+		hideCloseButtonText,
+		hideOpenButtonText,
+		hideClearButtonText,
+		hideApplyButtonText,
 		displayAt,
 		hideClearButton,
 		disableStyles,
@@ -151,19 +156,19 @@ export const MobileSidebar = observer((properties: MobileSidebarProps): JSX.Elem
 	//initialize lang
 	const defaultLang = {
 		openButtonText: {
-			value: openButtonText,
+			value: !hideOpenButtonText ? openButtonText : undefined,
 		},
 		clearButtonText: {
-			value: clearButtonText,
+			value: !hideClearButtonText ? clearButtonText : undefined,
 		},
 		applyButtonText: {
-			value: applyButtonText,
+			value: !hideApplyButtonText ? applyButtonText : undefined,
 		},
 		titleText: {
 			value: titleText,
 		},
 		closeButtonText: {
-			value: closeButtonText,
+			value: !hideCloseButtonText ? closeButtonText : undefined,
 			attributes: {
 				'aria-label': closeButtonText || `close ${openButtonText} button`,
 			},
@@ -191,7 +196,9 @@ export const MobileSidebar = observer((properties: MobileSidebarProps): JSX.Elem
 			>
 				{!hideHeader && (
 					<div className="ss__mobile-sidebar__header">
-						<h4 aria-atomic="true" aria-live="polite" className="ss__mobile-sidebar__header__title" {...mergedLang.titleText?.all}></h4>
+						{!hideTitleText && (
+							<h4 aria-atomic="true" aria-live="polite" className="ss__mobile-sidebar__header__title" {...mergedLang.titleText?.all}></h4>
+						)}
 
 						{!hideCloseButton && (
 							<Button
@@ -277,6 +284,11 @@ export const MobileSidebar = observer((properties: MobileSidebarProps): JSX.Elem
 export interface MobileSidebarProps extends ComponentProps {
 	controller: SearchController;
 	titleText?: string;
+	hideTitleText?: boolean;
+	hideOpenButtonText?: boolean;
+	hideClearButtonText?: boolean;
+	hideApplyButtonText?: boolean;
+	hideCloseButtonText?: boolean;
 	openButtonText?: string;
 	clearButtonText?: string;
 	applyButtonIcon?: IconType | Partial<IconProps>;

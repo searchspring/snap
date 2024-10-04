@@ -28,7 +28,8 @@ export const SortBy = observer((properties: SortByProps): JSX.Element => {
 
 	const props = mergeProps('sortBy', globalTheme, defaultProps, properties);
 
-	const { sorting, type, controller, label, disableStyles, className, style, styleScript, treePath } = props;
+	const { sorting, type, controller, hideLabel, disableStyles, className, style, styleScript, treePath } = props;
+	let label = props.label;
 
 	const store = sorting || controller?.store?.sorting;
 
@@ -80,6 +81,10 @@ export const SortBy = observer((properties: SortByProps): JSX.Element => {
 		styling.css = [CSS.sortBy(stylingProps), style];
 	} else if (style) {
 		styling.css = [style];
+	}
+
+	if (hideLabel) {
+		label = undefined;
 	}
 
 	//initialize lang
@@ -161,6 +166,7 @@ export interface SortByProps extends ComponentProps {
 	sorting?: SearchSortingStore;
 	controller?: SearchController;
 	label?: string;
+	hideLabel?: boolean;
 	type?: 'dropdown' | 'list' | 'radio';
 	lang?: Partial<SortByLang>;
 }
