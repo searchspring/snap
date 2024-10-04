@@ -1,5 +1,3 @@
-import 'whatwg-fetch';
-import { h } from 'preact';
 import { VariantSelection } from '../../../../src/components/Molecules/VariantSelection';
 import { mount } from '@cypress/react';
 import { RecommendationStore, VariantSelection as VariantSelectionType } from '@searchspring/snap-store-mobx';

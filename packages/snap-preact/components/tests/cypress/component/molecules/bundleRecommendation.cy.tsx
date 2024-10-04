@@ -1,4 +1,3 @@
-import 'whatwg-fetch';
 import { Fragment, h } from 'preact';
 import { RecommendationStore } from '@searchspring/snap-store-mobx';
 import { UrlManager, QueryStringTranslator, reactLinker } from '@searchspring/snap-url-manager';
@@ -49,20 +48,24 @@ const theme = {
 
 const client = new Client(globals, {});
 
-const controller = new RecommendationController(recommendConfig, {
-	client: client,
-	store: new RecommendationStore(recommendConfig, services),
-	urlManager,
-	eventManager: new EventManager(),
-	profiler: new Profiler(),
-	logger: new Logger(),
-	tracker: new Tracker(globals, { mode: 'development' }),
-});
+let controller;
 
 describe('RecommendationBundle Component', async () => {
-	before(async () => {
+	before(() => {
 		cy.intercept('*recommend*', json);
 		cy.intercept('*profile*', profile);
+	});
+
+	beforeEach(async () => {
+		controller = new RecommendationController(recommendConfig, {
+			client: client,
+			store: new RecommendationStore(recommendConfig, services),
+			urlManager,
+			eventManager: new EventManager(),
+			profiler: new Profiler(),
+			logger: new Logger(),
+			tracker: new Tracker(globals, { mode: 'development' }),
+		});
 		await controller.search();
 	});
 

@@ -1,5 +1,3 @@
-import 'whatwg-fetch';
-import { h } from 'preact';
 import { Swatches } from '../../../../src/components/Molecules/Swatches';
 import { mount } from '@cypress/react';
 import { ThemeProvider } from '../../../../src/providers';

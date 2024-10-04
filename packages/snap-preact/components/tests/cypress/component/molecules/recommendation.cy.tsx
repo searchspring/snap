@@ -1,6 +1,3 @@
-import 'whatwg-fetch';
-import { h } from 'preact';
-
 import { RecommendationStore } from '@searchspring/snap-store-mobx';
 import { UrlManager, QueryStringTranslator, reactLinker } from '@searchspring/snap-url-manager';
 import { Tracker } from '@searchspring/snap-tracker';
@@ -37,27 +34,30 @@ const theme = {
 };
 
 const client = new Client(globals, {});
-
-const controller = new RecommendationController(recommendConfig, {
-	client: client,
-	store: new RecommendationStore(recommendConfig, services),
-	urlManager,
-	eventManager: new EventManager(),
-	profiler: new Profiler(),
-	logger: new Logger(),
-	tracker: new Tracker(globals, { mode: 'development' }),
-});
+let controller;
 
 describe('Recommendation Component', async () => {
-	before(async () => {
+	before(() => {
 		cy.intercept('*recommend*', json);
 		cy.intercept('*profile*', profile);
+	});
+
+	beforeEach(async () => {
+		controller = new RecommendationController(recommendConfig, {
+			client: client,
+			store: new RecommendationStore(recommendConfig, services),
+			urlManager,
+			eventManager: new EventManager(),
+			profiler: new Profiler(),
+			logger: new Logger(),
+			tracker: new Tracker(globals, { mode: 'development' }),
+		});
 
 		await controller.search();
 	});
 
 	it('tracks as expected', () => {
-		// const spy = cy.spy(controller.tracker.track, 'event').as('trackfn');
+		const spy = cy.spy(controller.tracker.track, 'event').as('trackfn');
 
 		mount(
 			<Recommendation controller={controller} speed={0} lazyRender={{ enabled: false }}>
