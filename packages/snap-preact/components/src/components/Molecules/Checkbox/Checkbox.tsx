@@ -161,6 +161,7 @@ export const Checkbox = observer((properties: CheckboxProps): JSX.Element => {
 					aria-disabled={disabled}
 					role="checkbox"
 					aria-checked={checkedState}
+					{...mergedLang.checkbox.all}
 				>
 					{checkedState ? (
 						<Icon {...subProps.icon} {...(typeof icon == 'string' ? { icon: icon } : (icon as Partial<IconProps>))} />

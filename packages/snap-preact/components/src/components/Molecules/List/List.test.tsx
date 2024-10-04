@@ -333,7 +333,7 @@ describe('List Component', () => {
 		expect(optionElements).toBeInTheDocument();
 
 		expect(optionElements.innerHTML).toBe(
-			`<span class=\"ss__checkbox ss-v51376-I\" role=\"checkbox\" aria-checked=\"false\"><span class=\"ss__checkbox__empty\"></span></span>`
+			`<span class=\"ss__checkbox ss-1mgplc8\" role=\"checkbox\" aria-checked=\"false\" ss-lang=\"checkbox\" aria-label=\" unchecked checkbox\"><span class=\"ss__checkbox__empty\"></span></span>`
 		);
 
 		await userEvent.click(optionElements);

@@ -8,7 +8,7 @@ import { Profiler } from '@searchspring/snap-profiler';
 import { Logger } from '@searchspring/snap-logger';
 import { Client } from '@searchspring/snap-client';
 import { RecommendationController } from '@searchspring/snap-controller';
-import { RecommendationBundle } from '../../../../src/components/Organisms/RecommendationBundle';
+import { RecommendationBundle } from '../../../../src/components/Templates/RecommendationBundle';
 import { mount } from '@cypress/react';
 import { ThemeProvider } from '../../../../src/providers';
 import { Result } from '../../../../src/components/Molecules/Result';
