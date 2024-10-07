@@ -296,7 +296,7 @@ export class Tracker {
 					const sku = data?.childSku || data?.childUid || data?.sku || data?.uid;
 					if (sku) {
 						const lastViewedProducts = this.cookies.viewed.get();
-						const uniqueCartItems = Array.from(new Set([...lastViewedProducts, sku])).map((item) => item.trim());
+						const uniqueCartItems = Array.from(new Set([...lastViewedProducts, sku])).map((item) => `${item}`.trim());
 						cookies.set(
 							VIEWED_PRODUCTS,
 							uniqueCartItems.slice(0, MAX_VIEWED_COUNT).join(','),
@@ -611,7 +611,7 @@ export class Tracker {
 			},
 			set: (items: string[]): void => {
 				if (items.length) {
-					const cartItems = items.map((item) => item.trim());
+					const cartItems = items.map((item) => `${item}`.trim());
 					const uniqueCartItems = Array.from(new Set(cartItems));
 					cookies.set(CART_PRODUCTS, uniqueCartItems.join(','), COOKIE_SAMESITE, 0, COOKIE_DOMAIN);
 
@@ -624,7 +624,7 @@ export class Tracker {
 			add: (items: string[]): void => {
 				if (items.length) {
 					const currentCartItems = this.cookies.cart.get();
-					const itemsToAdd = items.map((item) => item.trim());
+					const itemsToAdd = items.map((item) => `${item}`.trim());
 					const uniqueCartItems = Array.from(new Set([...currentCartItems, ...itemsToAdd]));
 					cookies.set(CART_PRODUCTS, uniqueCartItems.join(','), COOKIE_SAMESITE, 0, COOKIE_DOMAIN);
 
@@ -637,7 +637,7 @@ export class Tracker {
 			remove: (items: string[]): void => {
 				if (items.length) {
 					const currentCartItems = this.cookies.cart.get();
-					const itemsToRemove = items.map((item) => item.trim());
+					const itemsToRemove = items.map((item) => `${item}`.trim());
 					const updatedItems = currentCartItems.filter((item) => !itemsToRemove.includes(item));
 					cookies.set(CART_PRODUCTS, updatedItems.join(','), COOKIE_SAMESITE, 0, COOKIE_DOMAIN);
 
