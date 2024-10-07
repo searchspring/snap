@@ -44,7 +44,7 @@ const facetStyleScript = ({ color, disableCollapse, theme }: FacetProps) => {
 		},
 		'& .ss__facet__show-more-less': {
 			display: 'block',
-			margin: '8px',
+			margin: '8px 5px',
 			cursor: 'pointer',
 			color: color || variables?.colors?.secondary,
 			'& .ss__icon': {

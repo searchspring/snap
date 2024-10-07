@@ -28,6 +28,9 @@ export type LibraryImports = {
 		recommendation: {
 			bundle: {
 				RecommendationBundle: (args?: any) => Promise<FunctionalComponent<RenderableProps<any>>>;
+				RecommendationBundleEasyAdd: (args?: any) => Promise<FunctionalComponent<RenderableProps<any>>>;
+				RecommendationBundleList: (args?: any) => Promise<FunctionalComponent<RenderableProps<any>>>;
+				RecommendationBundleVertical: (args?: any) => Promise<FunctionalComponent<RenderableProps<any>>>;
 			};
 			default: {
 				Recommendation: (args?: any) => Promise<FunctionalComponent<RenderableProps<any>>>;
@@ -137,6 +140,30 @@ export class LibraryStore {
 							(this.components.recommendation.bundle.RecommendationBundle = (
 								await import('./library/components/RecommendationBundle')
 							).RecommendationBundle)
+						);
+					},
+					RecommendationBundleEasyAdd: async () => {
+						return (
+							this.components.recommendation.bundle.RecommendationBundleEasyAdd ||
+							(this.components.recommendation.bundle.RecommendationBundleEasyAdd = (
+								await import('./library/components/RecommendationBundleEasyAdd')
+							).RecommendationBundleEasyAdd)
+						);
+					},
+					RecommendationBundleList: async () => {
+						return (
+							this.components.recommendation.bundle.RecommendationBundleList ||
+							(this.components.recommendation.bundle.RecommendationBundleList = (
+								await import('./library/components/RecommendationBundleList')
+							).RecommendationBundleList)
+						);
+					},
+					RecommendationBundleVertical: async () => {
+						return (
+							this.components.recommendation.bundle.RecommendationBundleVertical ||
+							(this.components.recommendation.bundle.RecommendationBundleVertical = (
+								await import('./library/components/RecommendationBundleVertical')
+							).RecommendationBundleVertical)
 						);
 					},
 				},

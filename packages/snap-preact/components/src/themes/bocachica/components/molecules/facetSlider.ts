@@ -56,6 +56,7 @@ const facetSliderStyleScript = ({
 		},
 		'& .ss__facet-slider__segment': {
 			background: trackColor || '#f2f2f2',
+			borderRadius: '3px',
 			height: '100%',
 		},
 		'& .ss__facet-slider__handles': {

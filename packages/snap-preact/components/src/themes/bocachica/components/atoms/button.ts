@@ -1,30 +1,31 @@
 import { css } from '@emotion/react';
 import type { ButtonProps } from '../../../../components/Atoms/Button';
-import { Colour } from '../../../../utilities';
+import Color from 'color';
 
 // CSS in JS style script for the Button component
 const buttonStyleScript = ({ color, backgroundColor, borderColor, theme }: ButtonProps) => {
 	const variables = theme?.variables;
-	const borderColour = new Colour(borderColor || variables?.colors.primary);
-	const colour = new Colour(color || variables?.colors.primary);
-	const hoverBackgroundColour = new Colour(backgroundColor || variables?.colors.primary);
+	const borderColour = new Color(borderColor || color || variables?.colors.primary);
+	const colour = new Color(color || variables?.colors.primary);
+	const hoverBackgroundColour = new Color(backgroundColor || color || variables?.colors.primary);
+	const hoverColour = hoverBackgroundColour.isDark() ? '#fff' : '#000';
 
 	return css({
 		display: 'inline-flex',
 		padding: '5px 10px',
 		position: 'relative',
-		color: colour.hex,
+		color: colour.hex(),
 		outline: 0,
 		backgroundColor: '#fff',
-		border: `1px solid ${borderColour.hex}`,
+		border: `1px solid ${borderColour.hex()}`,
 		borderRadius: '3px',
 		'&:not(.ss__button--disabled):hover': {
 			cursor: 'pointer',
-			backgroundColor: hoverBackgroundColour.hex,
-			color: hoverBackgroundColour.contrast,
+			backgroundColor: hoverBackgroundColour.hex(),
+			color: hoverColour,
 			'.ss__icon': {
-				fill: hoverBackgroundColour.contrast,
-				stroke: hoverBackgroundColour.contrast,
+				fill: hoverColour,
+				stroke: hoverColour,
 			},
 		},
 		'&.ss__button--disabled': {

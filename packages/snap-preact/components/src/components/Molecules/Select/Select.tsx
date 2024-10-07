@@ -152,7 +152,7 @@ export const Select = observer((properties: SelectProps): JSX.Element => {
 			...defined({
 				disableStyles,
 				color: iconColor || color,
-				size: '14px',
+				size: '16px',
 			}),
 			// component theme overrides
 			theme: props?.theme,

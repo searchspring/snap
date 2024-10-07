@@ -23,28 +23,8 @@ const snapTemplates = new SnapTemplates({
 });
 
 // need to add each theme synchronously
-
-// bocachica
-snapTemplates.templates.addTheme({
-	name: 'bocachica',
-	type: 'library',
-	base: bocachica,
-	language: {},
-	languageOverrides: {},
-	currency: {},
-	innerWidth: window.innerWidth,
-});
-
-// base
-snapTemplates.templates.addTheme({
-	name: 'base',
-	type: 'library',
-	base: base,
-	language: {},
-	languageOverrides: {},
-	currency: {},
-	innerWidth: window.innerWidth,
-});
+addTheme(snapTemplates, 'bocachica', bocachica);
+addTheme(snapTemplates, 'base', base);
 
 const Providers = observer(
 	({ templateStore, children, themeName }: { templateStore: TemplatesStore; themeName: string; children: ComponentChildren }) => {
@@ -76,8 +56,10 @@ export const decorators = [
 
 		const themeDecoratorFn = withThemeFromJSXProvider({
 			themes: {
-				bocachica: templateStory ? snapTemplates.templates.themes.library.bocachica.theme : generateBasicTheme(bocachica),
-				base: templateStory ? snapTemplates.templates.themes.library.base.theme : generateBasicTheme(base),
+				bocachica: templateStory
+					? snapTemplates.templates.themes.library.bocachica.theme
+					: snapTemplates.templates.themes.local.bocachicaSimple.theme,
+				base: templateStory ? snapTemplates.templates.themes.library.base.theme : snapTemplates.templates.themes.local.baseSimple.theme,
 			},
 			defaultTheme: 'base',
 			Provider: templateStory ? CustomThemeProvider : ThemeProvider,
@@ -105,10 +87,32 @@ export const parameters = {
 	},
 };
 
-function generateBasicTheme(theme: Theme): Theme {
+// add the full theme for template stories, and add a "simple" theme for all other stories
+function addTheme(snapTemplates: SnapTemplates, themeName: string, theme: Theme) {
+	snapTemplates.templates.addTheme({
+		name: themeName,
+		type: 'library',
+		base: theme,
+		language: {},
+		languageOverrides: {},
+		currency: {},
+		innerWidth: window.innerWidth,
+	});
+	snapTemplates.templates.addTheme({
+		name: `${themeName}Simple`,
+		type: 'local',
+		base: generateSimpleTheme(theme),
+		language: {},
+		languageOverrides: {},
+		currency: {},
+		innerWidth: window.innerWidth,
+	});
+}
+
+function generateSimpleTheme(theme: Theme): Theme {
 	// strip off everything except for stylescripts and variables
 
-	const basicTheme: Theme = {
+	const simpleTheme: Theme = {
 		name: theme.name,
 		variables: theme.variables,
 		components: {},
@@ -116,10 +120,11 @@ function generateBasicTheme(theme: Theme): Theme {
 
 	for (const componentName in theme.components) {
 		const componentProps = theme.components[componentName as keyof typeof theme.components];
-		basicTheme.components![componentName as keyof typeof basicTheme.components] = {
+		simpleTheme.components![componentName as keyof typeof simpleTheme.components] = {
+			// @ts-ignore - type was removed for overrides
 			styleScript: componentProps?.styleScript,
 		};
 	}
 
-	return basicTheme;
+	return simpleTheme;
 }

@@ -9,11 +9,11 @@ import type { Snap, SnapTemplates } from '../../src';
 import type { FunctionalComponent, RenderableProps } from 'preact';
 import type { CSSInterpolation } from '@emotion/serialize';
 
-export interface ComponentProps {
+export interface ComponentProps<Props = any> {
 	className?: string;
 	disableStyles?: boolean;
 	style?: CSSInterpolation;
-	styleScript?: (props: any) => SerializedStyles;
+	styleScript?: (props: Props) => SerializedStyles;
 	theme?: Theme;
 	controller?: AbstractController;
 	snap?: Snap | SnapTemplates;

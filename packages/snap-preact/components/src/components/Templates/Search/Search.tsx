@@ -229,14 +229,7 @@ export const Search = observer((properties: SearchProps): JSX.Element => {
 			<div {...styling} className={classnames('ss__search', className)}>
 				{!hideSidebar && !isMobile && (
 					<div className="ss__search__sidebar-wrapper">
-						{toggleSidebarButtonText || lang.toggleSidebarButtonText?.value ? (
-							sidebarOpenState && (
-								<Fragment>
-									<Sidebar {...subProps.Sidebar} controller={controller} />
-									{!hideLeftBanner && <Banner content={merchandising.content} type={ContentType.LEFT} name={'left'} />}
-								</Fragment>
-							)
-						) : (
+						{sidebarOpenState && (
 							<Fragment>
 								<Sidebar {...subProps.Sidebar} controller={controller} />
 								{!hideLeftBanner && <Banner content={merchandising.content} type={ContentType.LEFT} name={'left'} />}

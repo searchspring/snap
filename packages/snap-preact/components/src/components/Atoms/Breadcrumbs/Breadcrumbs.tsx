@@ -57,7 +57,7 @@ export const Breadcrumbs = observer((properties: BreadcrumbsProps): JSX.Element 
 	);
 });
 
-export interface BreadcrumbsProps extends ComponentProps {
+export interface BreadcrumbsProps extends ComponentProps<BreadcrumbsProps> {
 	data: {
 		label: string;
 		url?: string;

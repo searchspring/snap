@@ -11,11 +11,11 @@ import { defined, mergeProps } from '../../../utilities';
 import { Icon, IconProps, IconType } from '../Icon';
 import { Lang, useLang } from '../../../hooks';
 import deepmerge from 'deepmerge';
-import { Colour } from '../../../utilities';
+import Color from 'color';
 
 const CSS = {
 	button: ({ color, backgroundColor, borderColor, theme }: Partial<ButtonProps>) => {
-		const lightenedPrimary = new Colour(theme?.variables?.colors?.primary).lighten(212);
+		const lightenedPrimary = new Color(backgroundColor || color || theme?.variables?.colors?.primary).lightness(95);
 
 		return css({
 			display: 'inline-flex',
@@ -27,7 +27,7 @@ const CSS = {
 			border: `1px solid ${borderColor || color || theme?.variables?.colors?.primary || '#333'}`,
 			'&:not(.ss__button--disabled):hover': {
 				cursor: 'pointer',
-				backgroundColor: lightenedPrimary.hex || '#f8f8f8',
+				backgroundColor: lightenedPrimary.hex() || '#f8f8f8',
 			},
 			'&.ss__button--disabled': {
 				opacity: 0.3,
@@ -147,7 +147,7 @@ interface ButtonSubProps {
 	icon: Partial<IconProps>;
 }
 
-export interface ButtonProps extends ComponentProps {
+export interface ButtonProps extends ComponentProps<ButtonProps> {
 	backgroundColor?: string;
 	borderColor?: string;
 	color?: string;

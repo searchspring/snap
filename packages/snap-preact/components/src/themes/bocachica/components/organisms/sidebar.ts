@@ -6,11 +6,9 @@ const sidebarStyleScript = ({ theme }: SidebarProps) => {
 	const variables = theme?.variables;
 
 	return css({
-		'&:not(.ss__mobile-sidebar__body)': {
-			boxSizing: 'border-box',
-			width: '320px',
-			paddingInlineEnd: '60px',
-		},
+		boxSizing: 'border-box',
+		width: '300px',
+		paddingRight: '40px',
 
 		'& .ss__sidebar__title': {
 			color: variables?.colors?.primary,

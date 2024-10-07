@@ -363,6 +363,15 @@ export function createSnapConfig(templateConfig: SnapTemplatesConfig, templatesS
 				Bundle: {
 					component: 'RecommendationBundle',
 				},
+				BundleEasyAdd: {
+					component: 'RecommendationBundleEasyAdd',
+				},
+				BundleList: {
+					component: 'RecommendationBundleList',
+				},
+				BundleVertical: {
+					component: 'RecommendationBundleVertical',
+				},
 			},
 			default: {
 				Default: {

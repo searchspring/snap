@@ -1,11 +1,12 @@
 import { css } from '@emotion/react';
 import type { FacetGridOptionsProps } from '../../../../components/Molecules/FacetGridOptions';
-import { Colour } from '../../../../utilities';
+import Color from 'color';
 
 // CSS in JS style script for the FacetGridOptions component
 const facetGridOptionsStyleScript = ({ columns, gapSize, gridSize, theme }: FacetGridOptionsProps) => {
 	const variables = theme?.variables;
-	const backgroundColor = new Colour(variables?.colors.primary);
+	const backgroundColor = new Color(variables?.colors.primary);
+	const color = backgroundColor.isDark() ? '#fff' : '#000';
 
 	return css({
 		display: 'flex',
@@ -20,7 +21,7 @@ const facetGridOptionsStyleScript = ({ columns, gapSize, gridSize, theme }: Face
 			justifyContent: 'center',
 			alignItems: 'center',
 			flex: '0 1 auto',
-			border: `1px solid ${backgroundColor.hex}`,
+			border: `1px solid ${backgroundColor.hex()}`,
 			borderRadius: '3px',
 			textAlign: 'center',
 			wordBreak: 'break-all',
@@ -33,8 +34,8 @@ const facetGridOptionsStyleScript = ({ columns, gapSize, gridSize, theme }: Face
 				marginRight: '0',
 			},
 			'&.ss__facet-grid-options__option--filtered': {
-				background: backgroundColor.hex,
-				color: backgroundColor.contrast,
+				background: backgroundColor.hex(),
+				color: color,
 			},
 			'&:hover:not(.ss__facet-grid-options__option--filtered)': {
 				cursor: 'pointer',

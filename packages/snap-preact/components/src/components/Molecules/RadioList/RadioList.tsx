@@ -90,6 +90,7 @@ export function RadioList(properties: RadioListProps): JSX.Element {
 		},
 		Icon: {
 			className: 'ss__radio-list__option__icon',
+			size: '16px',
 			// inherited props
 			...defined({
 				disableStyles,

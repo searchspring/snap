@@ -64,6 +64,9 @@ import type { AutocompleteProps } from '../components/Templates/Autocomplete';
 // import type { AutocompleteTermsProps } from '../components/Templates/AutocompleteTerms';
 import type { RecommendationProps } from '../components/Templates/Recommendation';
 import type { RecommendationBundleProps } from '../components/Templates/RecommendationBundle';
+import type { RecommendationBundleEasyAddProps } from '../components/Templates/RecommendationBundleEasyAdd';
+import type { RecommendationBundleListProps } from '../components/Templates/RecommendationBundleList';
+import type { RecommendationBundleVerticalProps } from '../components/Templates/RecommendationBundleVertical';
 import type { RecommendationGridProps } from '../components/Templates/RecommendationGrid';
 import type { RecommendationEmailProps } from '../components/Templates/RecommendationEmail';
 import type { SearchProps } from '../components/Templates/Search';
@@ -163,6 +166,9 @@ export type ThemeComponents = {
 	// autocompleteTerms: GenericComponentProps<AutocompleteTermsProps>;
 	recommendation: GenericComponentProps<RecommendationProps>;
 	recommendationBundle: GenericComponentProps<RecommendationBundleProps>;
+	recommendationBundleEasyAdd: GenericComponentProps<RecommendationBundleEasyAddProps>;
+	recommendationBundleList: GenericComponentProps<RecommendationBundleListProps>;
+	recommendationBundleVertical: GenericComponentProps<RecommendationBundleVerticalProps>;
 	recommendationGrid: GenericComponentProps<RecommendationGridProps>;
 	recommendationEmail: GenericComponentProps<RecommendationEmailProps>;
 	search: GenericComponentProps<SearchProps>;
@@ -238,6 +244,9 @@ export type ThemeComponentOverrides =
 	// { [K in UnNamedThemeComponentSelectors<'autocompleteTerms'>]?: GenericComponentProps<AutocompleteTermsProps> } &
 	{ [K in UnNamedThemeComponentSelectors<'recommendation'>]?: GenericComponentProps<RecommendationProps> } &
 	{ [K in UnNamedThemeComponentSelectors<'recommendationBundle'>]?: GenericComponentProps<RecommendationBundleProps> } &
+	{ [K in UnNamedThemeComponentSelectors<'recommendationBundleEasyAdd'>]?: GenericComponentProps<RecommendationBundleEasyAddProps> } &
+	{ [K in UnNamedThemeComponentSelectors<'recommendationBundleList'>]?: GenericComponentProps<RecommendationBundleListProps> } &
+	{ [K in UnNamedThemeComponentSelectors<'recommendationBundleVertical'>]?: GenericComponentProps<RecommendationBundleVerticalProps> } &
 	{ [K in UnNamedThemeComponentSelectors<'recommendationGrid'>]?: GenericComponentProps<RecommendationGridProps> } &
 	{ [K in UnNamedThemeComponentSelectors<'recommendationEmail'>]?: GenericComponentProps<RecommendationEmailProps> } & 
 	{ [K in UnNamedThemeComponentSelectors<'search'>]?: GenericComponentProps<SearchProps> } &

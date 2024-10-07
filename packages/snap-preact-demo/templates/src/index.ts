@@ -5,7 +5,7 @@ import { SnapTemplates } from '@searchspring/snap-preact';
 new SnapTemplates({
 	config: {
 		siteId: '8uyt2m',
-		language: 'fr',
+		language: 'en',
 		currency: 'aud',
 	},
 	components: {
@@ -16,10 +16,9 @@ new SnapTemplates({
 			// CustomPill: async () => (await import('./components/Result')).Result,
 		},
 	},
-	// plugins: [['scrollToTop', {}]],
 	themes: {
 		global: {
-			extends: 'base',
+			extends: 'bocachica',
 			variables: {
 				breakpoints: [768, 1024, 1280],
 				colors: {
@@ -32,82 +31,12 @@ new SnapTemplates({
 				components: {
 					// overrides here...
 				},
-				layoutOptions: [
-					{
-						value: 2,
-						label: 'two',
-						overrides: {
-							components: {
-								toolbar: {
-									hideSortBy: true,
-								},
-								results: {
-									columns: 2,
-								},
-							},
-						},
-					},
-					{
-						value: 4,
-						label: 'four',
-						default: true,
-						overrides: {
-							components: {
-								results: {
-									columns: 4,
-								},
-							},
-						},
-					},
-				],
-				responsive: [
-					{
-						components: {
-							pagination: {
-								hideLast: true,
-							},
-						},
-						layoutOptions: [
-							{
-								value: 1,
-								label: 'one',
-								overrides: {
-									components: {
-										toolbar: {
-											hideSortBy: true,
-										},
-										results: {
-											columns: 1,
-										},
-									},
-								},
-							},
-							{
-								value: 3,
-								label: 'three',
-								default: true,
-								overrides: {
-									components: {
-										results: {
-											columns: 3,
-										},
-									},
-								},
-							},
-						],
-					},
-					{
-						// layoutOptions: [],
-					},
-					{},
-				],
 			},
 		},
 	},
 	search: {
 		targets: [
 			{
-				// plugins: [['shopifyIntegration', { config }], ['shopifyMarkets', { config }]],
 				selector: '#searchspring-layout',
 				// theme: 'myTheme',
 				component: 'Search',

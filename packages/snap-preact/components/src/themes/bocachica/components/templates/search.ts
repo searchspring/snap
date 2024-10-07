@@ -13,7 +13,6 @@ const searchStyleScript = ({ theme }: SearchProps) => {
 		'.ss__sidebar': {
 			flex: '0 1 auto',
 			width: '300px',
-			margin: '0 40px 0 0',
 		},
 
 		'.ss__search__content': {

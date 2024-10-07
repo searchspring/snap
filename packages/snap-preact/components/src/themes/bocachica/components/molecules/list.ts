@@ -55,4 +55,11 @@ const listStyleScript = ({ horizontal, theme }: ListProps) => {
 // List component props
 export const list: Partial<ListProps> = {
 	styleScript: listStyleScript,
+	theme: {
+		components: {
+			icon: {
+				size: '24px',
+			},
+		},
+	},
 };

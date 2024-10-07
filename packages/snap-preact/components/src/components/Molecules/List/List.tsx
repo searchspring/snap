@@ -110,6 +110,7 @@ export function List(properties: ListProps): JSX.Element {
 		icon: {
 			// default props
 			className: 'ss__list__option__icon',
+			size: '16px',
 			// inherited props
 			...defined({
 				disableStyles,

@@ -1,4 +1,3 @@
-import { h } from 'preact';
 import { css } from '@emotion/react';
 import type { RecommendationBundleProps } from '../../../../components/Templates/RecommendationBundle';
 
