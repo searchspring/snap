@@ -52,7 +52,6 @@ export const BundledCTA = observer((properties: BundledCTAProps): JSX.Element =>
 	//deep merge with props.lang
 	const lang = deepmerge({}, props.lang || {});
 	const mergedLang = useLang(lang as any, {});
-
 	return (
 		<div className={`ss__recommendation-bundle__wrapper__cta`}>
 			{ctaSlot ? (

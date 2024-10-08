@@ -99,7 +99,7 @@ export default {
 			},
 			control: { type: 'text' },
 		},
-		subTitleText: {
+		subtitleText: {
 			description: 'Search Subtitle Text',
 			table: {
 				type: {

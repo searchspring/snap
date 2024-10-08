@@ -83,6 +83,7 @@ export const Search = observer((properties: SearchProps): JSX.Element => {
 		hideTopToolbar,
 		resultComponent,
 		hideBottomToolBar,
+		hideToggleSidebarButtonText,
 		mobileSidebarDisplayAt,
 		treePath,
 	} = props;
@@ -249,7 +250,7 @@ export const Search = observer((properties: SearchProps): JSX.Element => {
 			<div {...styling} className={classnames('ss__search', className)}>
 				{!hideSidebar && !isMobile && (
 					<div className="ss__search__sidebar-wrapper">
-						{toggleSidebarButtonText || lang.toggleSidebarButtonText?.value ? (
+						{!hideToggleSidebarButtonText && (toggleSidebarButtonText || lang.toggleSidebarButtonText?.value) ? (
 							sidebarOpenState && (
 								<Fragment>
 									<Sidebar {...subProps.Sidebar} controller={controller} />
@@ -269,7 +270,7 @@ export const Search = observer((properties: SearchProps): JSX.Element => {
 					{!hideHeaderBanner && <Banner content={merchandising.content} type={ContentType.HEADER} name={'header'} />}
 					{!hideBannerBanner && <Banner content={merchandising.content} type={ContentType.BANNER} name={'banner'} />}
 
-					{(toggleSidebarButtonText || lang.toggleSidebarButtonText?.value) && (
+					{!hideToggleSidebarButtonText && (toggleSidebarButtonText || lang.toggleSidebarButtonText?.value) && (
 						<Button
 							onClick={() => setSidebarOpenState(!sidebarOpenState)}
 							className="ss__search__sidebar-wrapper-toggle"
@@ -319,6 +320,7 @@ export interface SearchProps extends ComponentProps {
 	hideBottomToolBar?: boolean;
 	hideMerchandisingBanners?: boolean | string[];
 	toggleSidebarButtonText?: string;
+	hideToggleSidebarButtonText?: boolean;
 	lang?: Partial<SearchLang>;
 }
 

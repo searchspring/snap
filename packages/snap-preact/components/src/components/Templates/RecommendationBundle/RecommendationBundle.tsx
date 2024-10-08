@@ -197,6 +197,7 @@ export const RecommendationBundle = observer((properties: RecommendationBundlePr
 		disableStyles,
 		ctaIcon,
 		ctaInline,
+		hideSeedText,
 		style,
 		lazyRender,
 		className,
@@ -397,13 +398,13 @@ export const RecommendationBundle = observer((properties: RecommendationBundlePr
 	//initialize lang
 	const defaultLang: Partial<RecommendationBundleLang> = {
 		seedText: {
-			value: 'This Product',
+			value: hideSeedText ? '' : seedText,
 		},
 		ctaButtonText: {
-			value: 'Add All To Cart',
+			value: ctaButtonText,
 		},
 		ctaButtonSuccessText: {
-			value: 'Bundle Added!',
+			value: ctaButtonSuccessText,
 		},
 	};
 
@@ -674,6 +675,7 @@ export interface RecommendationBundleProps extends ComponentProps {
 	hideCheckboxes?: boolean;
 	hideSeed?: boolean;
 	seedText?: string;
+	hideSeedText?: boolean;
 	separatorIconSeedOnly?: boolean;
 	separatorIcon?: IconType | Partial<IconProps> | false;
 	ctaInline?: boolean;

@@ -77,6 +77,7 @@ export const Recommendation = observer((properties: RecommendationProps): JSX.El
 		styleScript,
 		lazyRender,
 		vertical,
+		hideTitle,
 		treePath,
 		...additionalProps
 	} = props;
@@ -161,7 +162,7 @@ export const Recommendation = observer((properties: RecommendationProps): JSX.El
 			<div {...styling} className={classnames('ss__recommendation', className)} ref={recsRef}>
 				{isVisible ? (
 					<RecommendationProfileTracker controller={controller}>
-						{title && (
+						{title && !hideTitle && (
 							<h3 className="ss__recommendation__title" {...mergedLang.titleText?.all}>
 								{title}
 							</h3>
@@ -222,6 +223,7 @@ export const Recommendation = observer((properties: RecommendationProps): JSX.El
 export type RecommendationProps = {
 	controller: RecommendationController;
 	title?: JSX.Element | string;
+	hideTitle?: boolean;
 	breakpoints?: BreakpointsProps;
 	prevButton?: JSX.Element | string;
 	nextButton?: JSX.Element | string;
