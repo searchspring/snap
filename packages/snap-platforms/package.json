@@ -21,6 +21,7 @@
 		"@searchspring/snap-toolbox": "^1.1.11"
 	},
 	"devDependencies": {
+		"@searchspring/snap-controller": "^1.1.11",
 		"@searchspring/snap-store-mobx": "^1.1.11"
 	},
 	"sideEffects": false,
