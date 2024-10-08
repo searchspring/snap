@@ -7,8 +7,14 @@ const mobileOverrides: ThemeResponsive = {
 			icon: 'square',
 			overrides: {
 				components: {
-					'results.search': {
-						columns: 1,
+					search: {
+						theme: {
+							components: {
+								results: {
+									columns: 1,
+								},
+							},
+						},
 					},
 				},
 			},
@@ -19,8 +25,14 @@ const mobileOverrides: ThemeResponsive = {
 			icon: 'layout-large',
 			overrides: {
 				components: {
-					'results.search': {
-						columns: 2,
+					search: {
+						theme: {
+							components: {
+								results: {
+									columns: 2,
+								},
+							},
+						},
 					},
 				},
 			},

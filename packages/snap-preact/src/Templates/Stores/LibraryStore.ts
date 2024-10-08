@@ -228,9 +228,11 @@ export class LibraryStore {
 		if (components) {
 			Object.keys(components).forEach((type) => {
 				const componentsOfType = components[type as keyof typeof components];
-				Object.keys(componentsOfType).forEach((component) => {
-					this.addComponentImport(type as TemplateCustomComponentTypes, component, componentsOfType[component as keyof typeof components]);
-				});
+				if (componentsOfType) {
+					Object.keys(componentsOfType).forEach((component) => {
+						this.addComponentImport(type as TemplateCustomComponentTypes, component, componentsOfType[component as keyof typeof components]);
+					});
+				}
 			});
 		}
 	}

@@ -6,7 +6,14 @@ import { TargetStore } from './TargetStore';
 import { CurrencyCodes, LanguageCodes, LibraryImports, LibraryStore } from './LibraryStore';
 import { debounce } from '@searchspring/snap-toolbox';
 
-import type { LangComponentOverrides, ResultComponent, ThemeMinimal, ThemeOverrides, ThemeVariablesPartial } from '../../../components/src';
+import type {
+	LangComponentOverrides,
+	ResultComponent,
+	ThemeComponents,
+	ThemeMinimal,
+	ThemeOverrides,
+	ThemeVariablesPartial,
+} from '../../../components/src';
 import type { GlobalThemeStyleScript } from '../../types';
 export type TemplateThemeTypes = 'library' | 'local';
 export type TemplateTypes = 'search' | 'autocomplete' | `recommendation/${RecsTemplateTypes}`;
@@ -50,7 +57,7 @@ type TemplateStoreThemeConfig = {
 };
 
 export type TemplateStoreComponentConfig = {
-	[key in TemplateCustomComponentTypes]: {
+	[key in TemplateCustomComponentTypes]?: {
 		[componentName: string]: (args?: any) => Promise<ResultComponent> | ResultComponent;
 	};
 };
@@ -332,16 +339,16 @@ export class TemplatesStore {
 }
 
 export function transformTranslationsToTheme(translations: LangComponentOverrides): ThemeMinimal {
-	const translationTheme: ThemeMinimal = {
-		components: {},
-	};
+	const components: Partial<ThemeComponents> = {};
 
 	Object.keys(translations).forEach((component) => {
-		translationTheme.components![component as keyof typeof translationTheme.components] = {
-			// @ts-ignore - using lang here but it is not an allowable override
-			lang: translations[component as keyof typeof translationTheme.components],
+		components[component as keyof typeof components] = {
+			// @ts-ignore - don't know which component it may be
+			lang: translations[component as keyof typeof translations],
 		};
 	});
 
-	return translationTheme;
+	return {
+		components,
+	};
 }

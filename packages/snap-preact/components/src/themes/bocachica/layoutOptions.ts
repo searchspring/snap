@@ -1,3 +1,3 @@
-import { Theme } from '../../providers/theme';
+import { ThemeComplete } from '../../providers/theme';
 
-export const layoutOptions: Theme['layoutOptions'] = [];
+export const layoutOptions: ThemeComplete['layoutOptions'] = [];

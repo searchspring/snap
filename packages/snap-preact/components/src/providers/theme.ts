@@ -1,4 +1,4 @@
-import { ThemeComponentOverrides } from './themeComponents';
+import { ThemeComponentOverrides, ThemeComponentRestrictedOverrides, ThemeComponents } from './themeComponents';
 import { ListOption } from '../types';
 
 export { css, useTheme, withTheme, ThemeProvider } from '@emotion/react';
@@ -39,7 +39,9 @@ export type Theme = {
 	layoutOptions?: (Omit<ListOption, 'overrides'> & { overrides: ThemeMinimal })[];
 };
 
-export type ThemeResponsive = Pick<Theme, 'components' | 'layoutOptions'>;
+export type ThemeComplete = Required<Theme> & { components: ThemeComponents };
+
+export type ThemeResponsive = Pick<Theme, 'layoutOptions'> & { components?: ThemeComponentRestrictedOverrides };
 export type ThemePartial = Omit<Theme, 'variables' | 'name'> & { variables?: ThemeVariablesPartial };
-export type ThemeOverrides = Pick<Theme, 'components' | 'layoutOptions' | 'responsive'>;
+export type ThemeOverrides = Pick<Theme, 'layoutOptions' | 'responsive'> & { components?: ThemeComponentRestrictedOverrides };
 export type ThemeMinimal = Pick<Theme, 'components'>;
