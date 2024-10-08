@@ -3,6 +3,13 @@ import { FunctionalComponent, RenderableProps } from 'preact';
 import type { Theme, ThemeMinimal } from '../../../components/src';
 import type { TemplateCustomComponentTypes, TemplateTypes } from './TemplateStore';
 import type { TemplateStoreComponentConfig } from './TemplateStore';
+import type { PluginFunction } from '@searchspring/snap-controller';
+import { backgroundFilters as shopifyBackgroundFilters, updateResultsUrl as shopifyUpdateResultsUrl } from '@searchspring/snap-platforms/shopify';
+import { backgroundFilters as bigcommerceBackgroundFilters } from '@searchspring/snap-platforms/bigcommerce';
+import { backgroundFilters as magento2BackgroundFilters } from '@searchspring/snap-platforms/magento2';
+import { genericBackgroundFilters } from './library/middleware/genericBackgroundFilters';
+import { scrollToTop } from './library/middleware/scrollToTop';
+import { storeLogger } from './library/middleware/storeLogger';
 
 type LibraryComponentImport = {
 	[componentName: string]: (args?: any) => Promise<FunctionalComponent<RenderableProps<any>>>;
@@ -15,6 +22,23 @@ type LibraryComponentMap = {
 export type LibraryImports = {
 	theme: {
 		bocachica: (args?: any) => Promise<Theme>;
+	};
+	plugins: {
+		shopify: {
+			backgroundFilters: PluginFunction;
+			updateResultsUrl: PluginFunction;
+		};
+		bigcommerce: {
+			backgroundFilters: PluginFunction;
+		};
+		magento2: {
+			backgroundFilters: PluginFunction;
+		};
+		other: {
+			genericBackgroundFilters: PluginFunction;
+			scrollToTop: PluginFunction;
+			storeLogger: PluginFunction;
+		};
 	};
 	component: {
 		search: {
@@ -103,6 +127,23 @@ export class LibraryStore {
 		theme: {
 			bocachica: async () => {
 				return this.themes.bocachica || (this.themes.bocachica = (await import('./library/themes/bocachica')).bocachica);
+			},
+		},
+		plugins: {
+			shopify: {
+				backgroundFilters: shopifyBackgroundFilters,
+				updateResultsUrl: shopifyUpdateResultsUrl,
+			},
+			bigcommerce: {
+				backgroundFilters: bigcommerceBackgroundFilters,
+			},
+			magento2: {
+				backgroundFilters: magento2BackgroundFilters,
+			},
+			other: {
+				genericBackgroundFilters: genericBackgroundFilters,
+				scrollToTop: scrollToTop,
+				storeLogger: storeLogger,
 			},
 		},
 		component: {

@@ -2,11 +2,53 @@ import { SnapTemplates } from '@searchspring/snap-preact';
 import { CustomResult } from './components/Result';
 import { globalStyles } from './styles';
 
+/*
+<script>
+	backgroundFilters = [{ field, value, type }];
+</script>
+*/
+
 new SnapTemplates({
 	config: {
 		siteId: '8uyt2m',
 		language: 'en',
 		currency: 'usd',
+	},
+	platform: {
+		// bigcommerce: {
+		shopify: {
+			backgroundFilters: {
+				// tags: [{
+				// 	enabled: true,
+				// 	field: 'ss_tags',
+				// 	value: 'context.tags'
+				// }],
+				// collection: [{
+				// 	enabled: true,
+				// 	field: 'collection',
+				// 	value: 'context.collection'
+				// }],
+				// other: [{
+				// 	field: 'shopperGroup',
+				// 	value: 'shopper.group',
+				// 	enabled: true,
+				// }]
+			},
+			updateResultsUrl: {
+				enabled: true,
+			},
+			scrollToTop: {
+				enabled: true,
+				// options: {
+				// 	top: 0,
+				// 	left: 0,
+				// 	behavior: 'smooth',
+				// }
+			},
+			storeLogger: {
+				enabled: true,
+			},
+		},
 	},
 	components: {
 		result: {

@@ -4,12 +4,13 @@ import deepmerge from 'deepmerge';
 import { Snap } from '../Snap';
 import { TemplateSelect } from '../../components/src';
 
-import { DomTargeter, url, cookies } from '@searchspring/snap-toolbox';
+import { DomTargeter, url, cookies, getContext } from '@searchspring/snap-toolbox';
 import { TemplateTarget, TemplatesStore } from './Stores/TemplateStore';
 
 import type { Target } from '@searchspring/snap-toolbox';
 import type { SearchStoreConfigSettings, AutocompleteStoreConfigSettings } from '@searchspring/snap-store-mobx';
 import type { UrlTranslatorConfig } from '@searchspring/snap-url-manager';
+import type { PluginGrouping } from '@searchspring/snap-controller';
 import type {
 	RecommendationInstantiatorConfigSettings,
 	RecommendationComponentObject,
@@ -17,8 +18,15 @@ import type {
 } from '../Instantiators/RecommendationInstantiator';
 import type { SnapFeatures } from '../types';
 import type { SnapConfig, ExtendedTarget } from '../Snap';
-import type { RecsTemplateTypes, TemplateStoreConfig, TemplateTypes } from './Stores/TemplateStore';
-import { LibraryImports } from './Stores/LibraryStore';
+import type {
+	GenericPluginsConfig,
+	IntegrationPlatforms,
+	RecsTemplateTypes,
+	ShopifyStandardPluginConfig,
+	TemplateStoreConfig,
+	TemplateTypes,
+} from './Stores/TemplateStore';
+import type { LibraryImports } from './Stores/LibraryStore';
 import { GLOBAL_THEME_NAME } from './Stores/TargetStore';
 
 export const THEME_EDIT_COOKIE = 'ssThemeEdit';
@@ -105,7 +113,33 @@ export class SnapTemplates extends Snap {
 
 		const templatesStore = new TemplatesStore({ config, settings: { editMode } });
 
+		const platforms = Object.keys(config.platform || {});
+		if (platforms.length > 1) {
+			throw new Error('SnapTemplates: only one platform can be used at a time');
+		}
+		const platform = platforms[0];
+		if (platform) {
+			templatesStore.platform = platform as IntegrationPlatforms;
+		}
+
 		const snapConfig = createSnapConfig(config, templatesStore);
+
+		// get more context (all the things needed for the platform of choice as well as generic backgroundFilters)
+		let contextParams = ['backgroundFilters'];
+		switch (platform) {
+			case 'shopify':
+				contextParams = contextParams.concat(['collection', 'tags']);
+				break;
+			case 'bigcommerce':
+				contextParams = contextParams.concat(['category', 'brand']);
+				break;
+			case 'magento2':
+				contextParams = contextParams.concat(['category']);
+				break;
+			default:
+				break;
+		}
+		snapConfig.context = getContext(contextParams);
 
 		super(snapConfig, { templatesStore });
 
@@ -303,7 +337,7 @@ export function createSnapConfig(templateConfig: SnapTemplatesConfig, templatesS
 		const searchControllerConfig = {
 			config: {
 				id: 'search',
-				plugins: [],
+				plugins: createPlugins(templateConfig, templatesStore),
 				settings: templateConfig.search.settings || {},
 			},
 			targeters: createSearchTargeters(templateConfig, templatesStore),
@@ -329,7 +363,7 @@ export function createSnapConfig(templateConfig: SnapTemplatesConfig, templatesS
 		const autocompleteControllerConfig = {
 			config: {
 				id: 'autocomplete',
-				plugins: [],
+				plugins: createPlugins(templateConfig, templatesStore),
 				selector: templateConfig.autocomplete.inputSelector,
 				settings: autocompleteControllerSettings,
 			},
@@ -377,7 +411,10 @@ export function createSnapConfig(templateConfig: SnapTemplatesConfig, templatesS
 	if (templateConfig.recommendation && snapConfig.instantiators) {
 		const recommendationInstantiatorConfig: RecommendationInstantiatorConfig = {
 			components: createRecommendationComponentMapping(templateConfig, templatesStore),
-			config: templateConfig.recommendation?.settings!,
+			config: {
+				plugins: createPlugins(templateConfig, templatesStore),
+				...templateConfig.recommendation?.settings!,
+			},
 		};
 
 		// merge the responsive settings if there are any
@@ -393,6 +430,46 @@ export function createSnapConfig(templateConfig: SnapTemplatesConfig, templatesS
 		snapConfig.instantiators.recommendation = recommendationInstantiatorConfig;
 	}
 
-	// return new Snap(snapConfig);
 	return snapConfig;
+}
+
+function createPlugins(templateConfig: SnapTemplatesConfig, templatesStore: TemplatesStore): PluginGrouping[] {
+	const plugins: PluginGrouping[] = [[templatesStore.library.import.plugins.other.genericBackgroundFilters]];
+
+	if (templatesStore.platform) {
+		const platformConfig = templateConfig.platform?.[templatesStore.platform] as unknown as GenericPluginsConfig;
+		const genericBackgroundFiltersConfig = platformConfig.backgroundFilters?.other || [];
+		if (genericBackgroundFiltersConfig.length) {
+			plugins[0].push(genericBackgroundFiltersConfig);
+		}
+
+		switch (templatesStore.platform) {
+			case 'shopify':
+				plugins.push([templatesStore.library.import.plugins.shopify.backgroundFilters, platformConfig.backgroundFilters]);
+				if ((platformConfig as ShopifyStandardPluginConfig).updateResultsUrl) {
+					plugins.push([
+						templatesStore.library.import.plugins.shopify.updateResultsUrl,
+						(platformConfig as ShopifyStandardPluginConfig).updateResultsUrl,
+					]);
+				}
+				break;
+			case 'bigcommerce':
+				plugins.push([templatesStore.library.import.plugins.bigcommerce.backgroundFilters, platformConfig.backgroundFilters]);
+				break;
+			case 'magento2':
+				plugins.push([templatesStore.library.import.plugins.magento2.backgroundFilters, platformConfig.backgroundFilters]);
+				break;
+			default:
+				break;
+		}
+
+		if (platformConfig.scrollToTop) {
+			plugins.push([templatesStore.library.import.plugins.other.scrollToTop, platformConfig.scrollToTop]);
+		}
+		if (platformConfig.storeLogger) {
+			plugins.push([templatesStore.library.import.plugins.other.storeLogger, platformConfig.storeLogger]);
+		}
+	}
+
+	return plugins;
 }

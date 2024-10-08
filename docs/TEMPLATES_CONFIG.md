@@ -86,6 +86,123 @@ It is possible to switch language and currency at run-time using methods on the 
 - `window.searchspring.templates.setLanguage('fr')`
 
 
+### Platform Middleware
+
+| Configuration Option | Description | Type | Default |
+|----------------------|-------------|------|---------|
+| `platform` | Platform-specific middleware configurations | Object | - |
+| `platform[platform]` | Platform-specific configurations | Object | - |
+| `platform[platform].backgroundFilters` | Background filter configurations | Object | - |
+| `platform[platform].scrollToTop` | Configuration for scrolling to top after search | Object | - |
+| `platform[platform].storeLogger` | Configuration for store logging | Object | - |
+
+The `platform` object allows you to configure platform-specific middleware. Currently, `shopify`, `bigcommerce`, `magento2` and `other` are supported and share the following common options:
+
+#### backgroundFilters
+Allows you to set up background (or non-background using other) filters. You can configure filters for tags, collections, or other fields.
+
+| Configuration Option | Description | Type | Default |
+|----------------------|-------------|------|---------|
+| `platform[platform].backgroundFilters` | Background filter configurations | Object | - |
+| `platform[platform].backgroundFilters.tags` | Background tag filter configurations | Array | - |
+| `platform[platform].backgroundFilters.collection` | Background collection filter configurations | Array | - |
+| `platform[platform].backgroundFilters.other` | Background filter configurations for custom fields | Array | - |
+| `platform[platform].backgroundFilters['tags' \| 'collection' \| 'other'][]` | Background filter object | Object | - |
+| `platform[platform].backgroundFilters['tags' \| 'collection' \| 'other'][].enabled` | Enables filter | boolean | false |
+| `platform[platform].backgroundFilters['tags' \| 'collection' \| 'other'][].field` | Defines filter field name | string | - |
+| `platform[platform].backgroundFilters['tags' \| 'collection' \| 'other'][].value` | Defines filter value | string | - |
+| `platform[platform].backgroundFilters['tags' \| 'collection' \| 'other'][].background` | Defines if filter should be background | boolean | true |
+
+```jsx
+platform: {
+	other: {
+		backgroundFilters: {
+			tags: [{
+				enabled: true,
+				field: 'ss_tags',
+				value: 'instock'
+			}],
+			collection: [{
+				enabled: true,
+				field: 'collection',
+				value: 'mens'
+			}],
+			other: [{
+				enabled: true,
+				field: 'custom',
+				value: '1',
+				background: false,
+			}],
+		}
+	}
+}
+```
+
+#### scrollToTop
+Configures the behavior of scrolling to the top of the page upon the 'afterStore' event
+
+| Configuration Option | Description | Type | Default |
+|----------------------|-------------|------|---------|
+| `platform[platform].scrollToTop` | Scroll to top middleware configuration | Object | - |
+| `platform[platform].scrollToTop.enabled` | Enables middleware | boolean | false |
+| `platform[platform].scrollToTop.options` | [`window.scroll` options configuration](https://developer.mozilla.org/en-US/docs/Web/API/Window/scroll#options) | Object | `{ top: 0, left: 0, behavior: 'smooth' }` |
+
+```jsx
+platform: {
+	other: {
+		scrollToTop: {
+			enabled: true,
+			options: {
+				top: 0,
+				left: 0,
+				behavior: "auto" | "instant" | "smooth"
+			}
+		}
+	}
+}
+```
+
+#### storeLogger
+Enables logging of the store upon the 'afterStore' event
+
+| Configuration Option | Description | Type | Default |
+|----------------------|-------------|------|---------|
+| `platform[platform].storeLogger` | Store logger middleware configuration | Object | - |
+| `platform[platform].storeLogger.enabled` | Enables middleware | boolean | false |
+
+```jsx
+platform: {
+	other: {
+		storeLogger: {
+			enabled: true
+		}
+	}
+}
+```
+
+### Shopify Platform Middleware
+In addition when platform is `shopify`, the following middleware is available:
+
+| Configuration Option | Description | Type | Default |
+|----------------------|-------------|------|---------|
+| `platform.shopify.updateResultsUrl` | Shopify Updating results URL configuration | Object | - |
+| `platform.shopify.updateResultsUrl.enabled` | Enables middleware | Object | - |
+
+
+#### updateResultsUrl
+Enables updating the URL with search results. Product urls will be prefixed with their category route.
+
+```jsx
+platform: {
+	shopify: {
+		updateResultsUrl: {
+			enabled: true
+		}
+	}
+}
+```
+
+
 ### Language Translations
 
 | Configuration Option | Description | Type | Default |
