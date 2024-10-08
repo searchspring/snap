@@ -397,13 +397,13 @@ export const RecommendationBundle = observer((properties: RecommendationBundlePr
 	//initialize lang
 	const defaultLang: Partial<RecommendationBundleLang> = {
 		seedText: {
-			value: 'This Product',
+			value: seedText,
 		},
 		ctaButtonText: {
-			value: 'Add All To Cart',
+			value: ctaButtonText,
 		},
 		ctaButtonSuccessText: {
-			value: 'Bundle Added!',
+			value: ctaButtonSuccessText,
 		},
 	};
 

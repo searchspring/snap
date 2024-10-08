@@ -1,6 +1,6 @@
 import { h } from 'preact';
 
-import { render } from '@testing-library/preact';
+import { render, waitFor } from '@testing-library/preact';
 import userEvent from '@testing-library/user-event';
 
 import { Checkbox } from './Checkbox';
@@ -73,6 +73,20 @@ describe('Checkbox Component', () => {
 			expect(clickFn).toHaveBeenCalled();
 		});
 
+		it('adjusts aria attributes', async () => {
+			const rendered = render(<Checkbox />);
+
+			const checkboxElement = rendered.container.querySelector('.ss__checkbox')!;
+
+			expect(checkboxElement.getAttribute('aria-checked')).toBe('false');
+
+			userEvent.click(checkboxElement);
+
+			await waitFor(() => {
+				expect(checkboxElement.getAttribute('aria-checked')).toBe('true');
+			});
+		});
+
 		it('renders with additional style using prop', () => {
 			const style = {
 				padding: '20px',
@@ -105,6 +119,7 @@ describe('Checkbox Component', () => {
 			const rendered = render(<Checkbox disabled onClick={clickFn} />);
 			const checkboxElement = rendered.container.querySelector('.ss__checkbox');
 
+			expect(checkboxElement?.getAttribute('aria-disabled')).toBe('true');
 			expect(checkboxElement?.className.match(/disabled/)).toBeTruthy();
 			if (checkboxElement) userEvent.click(checkboxElement);
 			expect(clickFn).not.toHaveBeenCalled();

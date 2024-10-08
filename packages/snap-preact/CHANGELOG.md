@@ -91,6 +91,18 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 - support template themes in snap-preact ([df9d905](https://github.com/searchspring/snap/commit/df9d9057a1554d7eb62830002c3db990e0f8f272))
 - theme reactivity initial interface ([c017aad](https://github.com/searchspring/snap/commit/c017aadd4add7591bd98fcfbdb8db8985bf2d498))
 
+## [0.60.4](https://github.com/searchspring/snap/compare/v0.60.3...v0.60.4) (2024-09-25)
+
+**Note:** Version bump only for package @searchspring/snap-preact
+
+## [0.60.3](https://github.com/searchspring/snap/compare/v0.60.2...v0.60.3) (2024-09-25)
+
+**Note:** Version bump only for package @searchspring/snap-preact
+
+## [0.60.2](https://github.com/searchspring/snap/compare/v0.60.1...v0.60.2) (2024-09-24)
+
+**Note:** Version bump only for package @searchspring/snap-preact
+
 ## [0.60.1](https://github.com/searchspring/snap/compare/v0.60.0...v0.60.1) (2024-09-12)
 
 ### Bug Fixes
