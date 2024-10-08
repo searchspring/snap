@@ -31,7 +31,7 @@ describe('PerPage Component', () => {
 	it('it renders with options', () => {
 		const rendered = render(<PerPage pagination={paginationStore} />);
 
-		const element = rendered.container.querySelector('.ss__perpage__select');
+		const element = rendered.container.querySelector('.ss__per-page__select');
 
 		expect(element).toBeInTheDocument();
 	});
@@ -40,7 +40,7 @@ describe('PerPage Component', () => {
 		const label = 'my label';
 		const rendered = render(<PerPage label={label} pagination={paginationStore} />);
 
-		const element = rendered.container.querySelector('.ss__perpage__select');
+		const element = rendered.container.querySelector('.ss__per-page__select');
 		const labelElem = rendered.container.querySelector('.ss__select__label');
 
 		expect(element).toBeInTheDocument();
@@ -51,21 +51,21 @@ describe('PerPage Component', () => {
 	it('it renders as a dropdown type', () => {
 		const rendered = render(<PerPage type={'dropdown'} pagination={paginationStore} />);
 
-		const element = rendered.container.querySelector('.ss__perpage__select');
+		const element = rendered.container.querySelector('.ss__per-page__select');
 		expect(element).toBeInTheDocument();
 	});
 
 	it('it renders as a list type', () => {
 		const rendered = render(<PerPage type={'list'} pagination={paginationStore} />);
 
-		const element = rendered.container.querySelector('.ss__perpage__list.ss__list');
+		const element = rendered.container.querySelector('.ss__per-page__list.ss__list');
 		expect(element).toBeInTheDocument();
 	});
 
 	it('it renders as a Radio type', () => {
 		const rendered = render(<PerPage type={'radio'} pagination={paginationStore} />);
 
-		const element = rendered.container.querySelector('.ss__perpage__radioList.ss__radio-list');
+		const element = rendered.container.querySelector('.ss__per-page__radioList.ss__radio-list');
 		expect(element).toBeInTheDocument();
 	});
 
@@ -84,7 +84,7 @@ describe('PerPage Component', () => {
 		const className = 'classy';
 		const rendered = render(<PerPage pagination={paginationStore} className={className} />);
 
-		const element = rendered.container.querySelector('.ss__perpage__select');
+		const element = rendered.container.querySelector('.ss__per-page__select');
 		expect(element).toBeInTheDocument();
 		expect(element).toHaveClass(className);
 	});
@@ -92,13 +92,13 @@ describe('PerPage Component', () => {
 	it('can disable styles', () => {
 		const rendered = render(<PerPage pagination={paginationStore} disableStyles />);
 
-		const element = rendered.container.querySelector('.ss__perpage__select');
+		const element = rendered.container.querySelector('.ss__per-page__select');
 
 		expect(element?.classList).toHaveLength(3);
 	});
 
 	describe('Perpage lang works', () => {
-		const selector = '.ss__perpage';
+		const selector = '.ss__per-page';
 
 		it('immediately available lang options', async () => {
 			const langOptions = ['label'];
@@ -239,7 +239,7 @@ describe('PerPage Component', () => {
 				<PerPage pagination={paginationStore} />
 			</ThemeProvider>
 		);
-		const element = rendered.container.querySelector('.ss__perpage__select');
+		const element = rendered.container.querySelector('.ss__per-page__select');
 		expect(element).toBeInTheDocument();
 		expect(element).toHaveClass(globalTheme.components.perPage.className);
 	});
@@ -253,7 +253,7 @@ describe('PerPage Component', () => {
 			},
 		};
 		const rendered = render(<PerPage pagination={paginationStore} theme={propTheme} />);
-		const element = rendered.container.querySelector('.ss__perpage__select');
+		const element = rendered.container.querySelector('.ss__per-page__select');
 		expect(element).toBeInTheDocument();
 		expect(element).toHaveClass(propTheme.components.perPage.className);
 	});
@@ -279,7 +279,7 @@ describe('PerPage Component', () => {
 			</ThemeProvider>
 		);
 
-		const element = rendered.container.querySelector('.ss__perpage__select');
+		const element = rendered.container.querySelector('.ss__per-page__select');
 		expect(element).toBeInTheDocument();
 		expect(element).toHaveClass(propTheme.components.perPage.className);
 		expect(element).not.toHaveClass(globalTheme.components.perPage.className);

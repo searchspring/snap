@@ -9,16 +9,22 @@ describe('useLang hook', () => {
 	});
 
 	it('the hook returns expected data', () => {
-		const val = 'stringy';
+		const vals = {
+			value: 'stringy',
+			label: 'label',
+			valueText: 'valueText',
+			title: 'title',
+			alt: 'alty',
+		};
 		const name = 'thing';
 		const lang: LangObjType = {
 			[name]: {
-				value: val,
+				value: vals.value,
 				attributes: {
-					'aria-label': val,
-					alt: val,
-					'aria-valuetext': val,
-					title: val,
+					'aria-label': vals.label,
+					alt: vals.alt,
+					'aria-valuetext': vals.valueText,
+					title: vals.title,
 				},
 			},
 		};
@@ -27,25 +33,25 @@ describe('useLang hook', () => {
 			[name]: {
 				all: {
 					dangerouslySetInnerHTML: {
-						__html: val,
+						__html: vals.value,
 					},
-					'aria-label': val,
-					alt: val,
-					'aria-valuetext': val,
-					title: val,
+					'aria-label': vals.label,
+					alt: vals.alt,
+					'aria-valuetext': vals.valueText,
+					title: vals.title,
 					'ss-lang': name,
 				},
 				value: {
 					dangerouslySetInnerHTML: {
-						__html: val,
+						__html: vals.value,
 					},
 					'ss-lang': name,
 				},
 				attributes: {
-					'aria-label': val,
-					alt: val,
-					'aria-valuetext': val,
-					title: val,
+					'aria-label': vals.label,
+					alt: vals.alt,
+					'aria-valuetext': vals.valueText,
+					title: vals.title,
 					'ss-lang': name,
 				},
 			},
@@ -53,9 +59,29 @@ describe('useLang hook', () => {
 	});
 
 	it('the hook can handle multiple lang objs', () => {
-		const val = 'stringy';
-		const val2 = 'stringy2';
-		const val3 = 'stringy3';
+		const vals = {
+			value: 'stringy',
+			label: 'label',
+			valueText: 'valueText',
+			title: 'title',
+			alt: 'alty',
+		};
+
+		const vals2 = {
+			value: 'stringy2',
+			label: 'label2',
+			valueText: 'valueText2',
+			title: 'title2',
+			alt: 'alty2',
+		};
+
+		const vals3 = {
+			value: 'stringy3',
+			label: 'label3',
+			valueText: 'valueText3',
+			title: 'title3',
+			alt: 'alty3',
+		};
 
 		const name = 'thing';
 		const name2 = 'thing2';
@@ -63,30 +89,30 @@ describe('useLang hook', () => {
 
 		const lang: LangObjType = {
 			[name]: {
-				value: val,
+				value: vals.value,
 				attributes: {
-					'aria-label': val,
-					alt: val,
-					'aria-valuetext': val,
-					title: val,
+					'aria-label': vals.label,
+					alt: vals.alt,
+					'aria-valuetext': vals.valueText,
+					title: vals.title,
 				},
 			},
 			[name2]: {
-				value: val2,
+				value: vals2.value,
 				attributes: {
-					'aria-label': val2,
-					alt: val2,
-					'aria-valuetext': val2,
-					title: val2,
+					'aria-label': vals2.label,
+					alt: vals2.alt,
+					'aria-valuetext': vals2.valueText,
+					title: vals2.title,
 				},
 			},
 			[name3]: {
-				value: val3,
+				value: vals3.value,
 				attributes: {
-					'aria-label': val3,
-					alt: val3,
-					'aria-valuetext': val3,
-					title: val3,
+					'aria-label': vals3.label,
+					alt: vals3.alt,
+					'aria-valuetext': vals3.valueText,
+					title: vals3.title,
 				},
 			},
 		};
@@ -95,75 +121,75 @@ describe('useLang hook', () => {
 			[name]: {
 				all: {
 					dangerouslySetInnerHTML: {
-						__html: val,
+						__html: vals.value,
 					},
-					'aria-label': val,
-					alt: val,
-					'aria-valuetext': val,
-					title: val,
+					'aria-label': vals.label,
+					alt: vals.alt,
+					'aria-valuetext': vals.valueText,
+					title: vals.title,
 					'ss-lang': name,
 				},
 				value: {
 					dangerouslySetInnerHTML: {
-						__html: val,
+						__html: vals.value,
 					},
 					'ss-lang': name,
 				},
 				attributes: {
-					'aria-label': val,
-					alt: val,
-					'aria-valuetext': val,
-					title: val,
+					'aria-label': vals.label,
+					alt: vals.alt,
+					'aria-valuetext': vals.valueText,
+					title: vals.title,
 					'ss-lang': name,
 				},
 			},
 			[name2]: {
 				all: {
 					dangerouslySetInnerHTML: {
-						__html: val2,
+						__html: vals2.value,
 					},
-					'aria-label': val2,
-					alt: val2,
-					'aria-valuetext': val2,
-					title: val2,
+					'aria-label': vals2.label,
+					alt: vals2.alt,
+					'aria-valuetext': vals2.valueText,
+					title: vals2.title,
 					'ss-lang': name2,
 				},
 				value: {
 					dangerouslySetInnerHTML: {
-						__html: val2,
+						__html: vals2.value,
 					},
 					'ss-lang': name2,
 				},
 				attributes: {
-					'aria-label': val2,
-					alt: val2,
-					'aria-valuetext': val2,
-					title: val2,
+					'aria-label': vals2.label,
+					alt: vals2.alt,
+					'aria-valuetext': vals2.valueText,
+					title: vals2.title,
 					'ss-lang': name2,
 				},
 			},
 			[name3]: {
 				all: {
 					dangerouslySetInnerHTML: {
-						__html: val3,
+						__html: vals3.value,
 					},
-					'aria-label': val3,
-					alt: val3,
-					'aria-valuetext': val3,
-					title: val3,
+					'aria-label': vals3.label,
+					alt: vals3.alt,
+					'aria-valuetext': vals3.valueText,
+					title: vals3.title,
 					'ss-lang': name3,
 				},
 				value: {
 					dangerouslySetInnerHTML: {
-						__html: val3,
+						__html: vals3.value,
 					},
 					'ss-lang': name3,
 				},
 				attributes: {
-					'aria-label': val3,
-					alt: val3,
-					'aria-valuetext': val3,
-					title: val3,
+					'aria-label': vals3.label,
+					alt: vals3.alt,
+					'aria-valuetext': vals3.valueText,
+					title: vals3.title,
 					'ss-lang': name3,
 				},
 			},
@@ -171,16 +197,22 @@ describe('useLang hook', () => {
 	});
 
 	it('the hook can handle functions', () => {
-		const val = 'stringy';
+		const vals = {
+			value: 'stringy',
+			label: 'label',
+			valueText: 'valueText',
+			title: 'title',
+			alt: 'alty',
+		};
 		const name = 'thing';
 		const lang: LangObjType = {
 			[name]: {
-				value: () => val,
+				value: () => vals.value,
 				attributes: {
-					'aria-label': () => val,
-					alt: val,
-					'aria-valuetext': () => val,
-					title: () => val,
+					'aria-label': () => vals.label,
+					alt: vals.alt,
+					'aria-valuetext': () => vals.valueText,
+					title: () => vals.title,
 				},
 			},
 		};
@@ -189,25 +221,25 @@ describe('useLang hook', () => {
 			[name]: {
 				all: {
 					dangerouslySetInnerHTML: {
-						__html: val,
+						__html: vals.value,
 					},
-					'aria-label': val,
-					alt: val,
-					'aria-valuetext': val,
-					title: val,
+					'aria-label': vals.label,
+					alt: vals.alt,
+					'aria-valuetext': vals.valueText,
+					title: vals.title,
 					'ss-lang': name,
 				},
 				value: {
 					dangerouslySetInnerHTML: {
-						__html: val,
+						__html: vals.value,
 					},
 					'ss-lang': name,
 				},
 				attributes: {
-					'aria-label': val,
-					alt: val,
-					'aria-valuetext': val,
-					title: val,
+					'aria-label': vals.label,
+					alt: vals.alt,
+					'aria-valuetext': vals.valueText,
+					title: vals.title,
 					'ss-lang': name,
 				},
 			},
@@ -215,17 +247,23 @@ describe('useLang hook', () => {
 	});
 
 	it('the hook can pass data to use in values', () => {
-		const val = 'stringy';
+		const vals = {
+			value: 'stringy',
+			label: 'label',
+			valueText: 'valueText',
+			title: 'title',
+			alt: 'alty',
+		};
 		const dataVal = 'stuff';
 		const name = 'thing';
 		const lang: LangObjType = {
 			[name]: {
-				value: (data) => `${val} + ${data.my_data}`,
+				value: (data) => `${vals.value} + ${data.my_data}`,
 				attributes: {
-					'aria-label': (data) => `${val} + ${data.my_data}`,
-					alt: (data) => `${val} + ${data.my_data}`,
-					'aria-valuetext': (data) => `${val} + ${data.my_data}`,
-					title: (data) => `${val} + ${data.my_data}`,
+					'aria-label': (data) => `${vals.label} + ${data.my_data}`,
+					alt: (data) => `${vals.alt} + ${data.my_data}`,
+					'aria-valuetext': (data) => `${vals.valueText} + ${data.my_data}`,
+					title: (data) => `${vals.title} + ${data.my_data}`,
 				},
 			},
 		};
@@ -234,25 +272,25 @@ describe('useLang hook', () => {
 			[name]: {
 				all: {
 					dangerouslySetInnerHTML: {
-						__html: `${val} + ${dataVal}`,
+						__html: `${vals.value} + ${dataVal}`,
 					},
-					'aria-label': `${val} + ${dataVal}`,
-					alt: `${val} + ${dataVal}`,
-					'aria-valuetext': `${val} + ${dataVal}`,
-					title: `${val} + ${dataVal}`,
+					'aria-label': `${vals.label} + ${dataVal}`,
+					alt: `${vals.alt} + ${dataVal}`,
+					'aria-valuetext': `${vals.valueText} + ${dataVal}`,
+					title: `${vals.title} + ${dataVal}`,
 					'ss-lang': name,
 				},
 				value: {
 					dangerouslySetInnerHTML: {
-						__html: `${val} + ${dataVal}`,
+						__html: `${vals.value} + ${dataVal}`,
 					},
 					'ss-lang': name,
 				},
 				attributes: {
-					'aria-label': `${val} + ${dataVal}`,
-					alt: `${val} + ${dataVal}`,
-					'aria-valuetext': `${val} + ${dataVal}`,
-					title: `${val} + ${dataVal}`,
+					'aria-label': `${vals.label} + ${dataVal}`,
+					alt: `${vals.alt} + ${dataVal}`,
+					'aria-valuetext': `${vals.valueText} + ${dataVal}`,
+					title: `${vals.title} + ${dataVal}`,
 					'ss-lang': name,
 				},
 			},
@@ -288,15 +326,21 @@ describe('useLang hook', () => {
 	});
 
 	it('the hook can return only attributes', () => {
-		const val = 'stringy';
+		const vals = {
+			value: 'stringy',
+			label: 'label',
+			valueText: 'valueText',
+			title: 'title',
+			alt: 'alty',
+		};
 		const name = 'thing';
 		const lang: LangObjType = {
 			[name]: {
 				attributes: {
-					'aria-label': () => val,
-					alt: val,
-					'aria-valuetext': () => val,
-					title: () => val,
+					'aria-label': vals.label,
+					alt: vals.alt,
+					'aria-valuetext': vals.valueText,
+					title: vals.title,
 				},
 			},
 		};
@@ -305,17 +349,17 @@ describe('useLang hook', () => {
 		expect(data).toEqual({
 			[name]: {
 				all: {
-					'aria-label': val,
-					alt: val,
-					'aria-valuetext': val,
-					title: val,
+					'aria-label': vals.label,
+					alt: vals.alt,
+					'aria-valuetext': vals.valueText,
+					title: vals.title,
 					'ss-lang': name,
 				},
 				attributes: {
-					'aria-label': val,
-					alt: val,
-					'aria-valuetext': val,
-					title: val,
+					'aria-label': vals.label,
+					alt: vals.alt,
+					'aria-valuetext': vals.valueText,
+					title: vals.title,
 					'ss-lang': name,
 				},
 			},

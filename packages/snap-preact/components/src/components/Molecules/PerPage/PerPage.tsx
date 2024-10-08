@@ -105,7 +105,7 @@ export const PerPage = observer((properties: PerPageProps): JSX.Element => {
 			{type?.toLowerCase() == 'dropdown' && (
 				<Select
 					{...styling}
-					className={classnames('ss__perpage', 'ss__perpage__select', className)}
+					className={classnames('ss__per-page', 'ss__per-page__select', className)}
 					{...subProps.select}
 					label={label}
 					options={store.pageSizeOptions}
@@ -122,7 +122,7 @@ export const PerPage = observer((properties: PerPageProps): JSX.Element => {
 			{type?.toLowerCase() == 'list' && (
 				<List
 					{...styling}
-					className={classnames('ss__perpage', 'ss__perpage__list', className)}
+					className={classnames('ss__per-page', 'ss__per-page__list', className)}
 					{...subProps.List}
 					onSelect={(e: any, option: any) => {
 						store.setPageSize(+option!.value);
@@ -139,7 +139,7 @@ export const PerPage = observer((properties: PerPageProps): JSX.Element => {
 			{type?.toLowerCase() == 'radio' && (
 				<RadioList
 					{...styling}
-					className={classnames('ss__perpage', 'ss__perpage__radioList', className)}
+					className={classnames('ss__per-page', 'ss__per-page__radioList', className)}
 					{...subProps.RadioList}
 					onSelect={(e: any, option: any) => {
 						store.setPageSize(+option!.value);
