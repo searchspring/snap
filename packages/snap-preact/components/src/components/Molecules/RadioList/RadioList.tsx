@@ -200,7 +200,7 @@ export interface RadioListProps extends ComponentProps {
 	hideOptionIcons?: boolean;
 	onSelect?: (e: React.MouseEvent<HTMLElement>, option: ListOption) => void;
 	titleText?: string;
-	hideTitleText?: string;
+	hideTitleText?: boolean;
 	disabled?: boolean;
 	selected?: ListOption;
 	lang?: Partial<RadioListLang>;

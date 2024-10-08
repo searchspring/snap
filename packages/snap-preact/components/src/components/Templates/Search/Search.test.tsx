@@ -207,6 +207,19 @@ describe('Search Template Component', () => {
 		});
 	});
 
+	it('can hide the toggle sidebar button text', async () => {
+		const buttonText = 'click me to open sidebar';
+
+		const rendered = render(<Search controller={controller} hideToggleSidebarButtonText={true} toggleSidebarButtonText={buttonText} />);
+		const element = rendered.container.querySelector('.ss__search')!;
+		const button = rendered.container.querySelector('.ss__search__sidebar-wrapper-toggle');
+		const sidebar = rendered.container.querySelector('.ss__sidebar');
+
+		expect(element).toBeInTheDocument();
+		expect(button).not.toBeInTheDocument();
+		expect(sidebar).toBeInTheDocument();
+	});
+
 	it('shows mobilesider instead of sidebar on mobile', () => {
 		//override matchmedia to always return true
 		Object.defineProperty(window, 'matchMedia', {

@@ -129,6 +129,28 @@ describe('NoResults  Component', () => {
 		expect(contactsTitle?.innerHTML).toBe(title);
 	});
 
+	it('can hide the suggestion title', () => {
+		const title = 'title';
+		const rendered = render(<NoResults suggestionsTitleText={title} hideSuggestionsTitleText={true} />);
+
+		const element = rendered.container.querySelector('.ss__no-results');
+		const suggestionTitle = rendered.container.querySelector('.ss__no-results__suggestions__title');
+
+		expect(element).toBeInTheDocument();
+		expect(suggestionTitle).not.toBeInTheDocument();
+	});
+
+	it('can hide the contact title', () => {
+		const title = 'title';
+		const rendered = render(<NoResults contactsTitleText={title} hideContactsTitleText={true} />);
+
+		const element = rendered.container.querySelector('.ss__no-results');
+		const contactsTitle = rendered.container.querySelector('.ss__no-results__contact__title');
+
+		expect(element).toBeInTheDocument();
+		expect(contactsTitle).not.toBeInTheDocument();
+	});
+
 	it('can hide the contact section', () => {
 		const rendered = render(<NoResults hideContact={true} />);
 
