@@ -1,5 +1,3 @@
-import 'whatwg-fetch';
-import { h } from 'preact';
 import { Carousel } from '../../../../src/components/Molecules/Carousel';
 import { Scrollbar } from 'swiper/modules';
 import { mount } from '@cypress/react';

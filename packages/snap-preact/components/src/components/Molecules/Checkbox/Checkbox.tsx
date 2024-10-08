@@ -158,9 +158,10 @@ export const Checkbox = observer((properties: CheckboxProps): JSX.Element => {
 					className={classnames('ss__checkbox', { 'ss__checkbox--disabled': disabled }, className)}
 					onClick={(e) => clickFunc(e)}
 					ref={(e) => (!disableA11y ? useA11y(e) : null)}
+					aria-disabled={disabled}
 					role="checkbox"
 					aria-checked={checkedState}
-					{...mergedLang.checkbox?.all}
+					{...mergedLang.checkbox.all}
 				>
 					{checkedState ? (
 						<Icon {...subProps.icon} {...(typeof icon == 'string' ? { icon: icon } : (icon as Partial<IconProps>))} />

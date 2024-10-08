@@ -123,6 +123,20 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 - **snap-layout/theming:** work towards theming a snap layout using styleScripts ([b6be05e](https://github.com/searchspring/snap-1.0/commit/b6be05eee8fc0a06c9e853a591aa0d380158fc0c))
 - support template themes in snap-preact ([df9d905](https://github.com/searchspring/snap-1.0/commit/df9d9057a1554d7eb62830002c3db990e0f8f272))
 - theme reactivity initial interface ([c017aad](https://github.com/searchspring/snap-1.0/commit/c017aadd4add7591bd98fcfbdb8db8985bf2d498))
+## [0.60.4](https://github.com/searchspring/snap/compare/v0.60.3...v0.60.4) (2024-09-25)
+
+**Note:** Version bump only for package @searchspring/snap
+
+## [0.60.3](https://github.com/searchspring/snap/compare/v0.60.2...v0.60.3) (2024-09-25)
+
+**Note:** Version bump only for package @searchspring/snap
+
+## [0.60.2](https://github.com/searchspring/snap/compare/v0.60.1...v0.60.2) (2024-09-24)
+
+### Bug Fixes
+
+- **client/recommend:** adjusting recommend request to merge and de-dupe global parameters ([9e919ab](https://github.com/searchspring/snap/commit/9e919ab8cc73f48276755131541f889be078e186))
+- **tracker:** adding stringification prior to trim to prevent error when numbers are provided ([6787188](https://github.com/searchspring/snap/commit/67871881028d92b8097eb9ce764ee1120ca953bf))
 
 ## [0.60.1](https://github.com/searchspring/snap/compare/v0.60.0...v0.60.1) (2024-09-12)
 

@@ -1,6 +1,3 @@
-import 'whatwg-fetch';
-import { h } from 'preact';
-
 import { RecommendationStore } from '@searchspring/snap-store-mobx';
 import { UrlManager, QueryStringTranslator, reactLinker } from '@searchspring/snap-url-manager';
 import { Tracker } from '@searchspring/snap-tracker';
@@ -11,7 +8,7 @@ import { Client } from '@searchspring/snap-client';
 import { RecommendationController } from '@searchspring/snap-controller';
 import json from '../../fixtures/recommend-results-default.json';
 import profile from '../../fixtures/profile-default.json';
-import { Recommendation } from '../../../../src/components/Organisms/Recommendation';
+import { Recommendation } from '../../../../src/components/Templates/Recommendation';
 import { mount } from '@cypress/react';
 import { ThemeProvider } from '../../../../src/providers';
 
@@ -37,30 +34,33 @@ const theme = {
 };
 
 const client = new Client(globals, {});
-
-const controller = new RecommendationController(recommendConfig, {
-	client: client,
-	store: new RecommendationStore(recommendConfig, services),
-	urlManager,
-	eventManager: new EventManager(),
-	profiler: new Profiler(),
-	logger: new Logger(),
-	tracker: new Tracker(globals, { mode: 'development' }),
-});
+let controller;
 
 describe('Recommendation Component', async () => {
-	before(async () => {
+	before(() => {
 		cy.intercept('*recommend*', json);
 		cy.intercept('*profile*', profile);
+	});
+
+	beforeEach(async () => {
+		controller = new RecommendationController(recommendConfig, {
+			client: client,
+			store: new RecommendationStore(recommendConfig, services),
+			urlManager,
+			eventManager: new EventManager(),
+			profiler: new Profiler(),
+			logger: new Logger(),
+			tracker: new Tracker(globals, { mode: 'development' }),
+		});
 
 		await controller.search();
 	});
 
 	it('tracks as expected', () => {
-		// const spy = cy.spy(controller.tracker.track, 'event').as('trackfn');
+		cy.spy(controller.tracker.track, 'event').as('trackfn');
 
 		mount(
-			<Recommendation controller={controller}>
+			<Recommendation controller={controller} speed={0} lazyRender={{ enabled: false }}>
 				{controller.store.results.map((result, idx) => (
 					<div className={'findMe'} key={idx}>
 						<div className="result">{result.mappings.core?.name}</div>
@@ -248,6 +248,21 @@ describe('Recommendation Component', async () => {
 		cy.get('.ss__carousel__prev').should('exist');
 		cy.get('.ss__carousel__next').should('exist');
 		cy.get('.swiper-slide:not(.swiper-slide-duplicate) .result').should('have.length', 20);
+	});
+
+	it('doesnt render with no results', () => {
+		mount(
+			<Recommendation title="hi" controller={controller} results={[]}>
+				{controller.store.results.map((result, idx) => (
+					<div className="result" key={idx}>
+						{result.mappings.core?.name}
+					</div>
+				))}
+			</Recommendation>
+		);
+
+		cy.get('.ss__recommendation').should('not.exist');
+		cy.get('.ss__recommendation .ss__recommendation__title').should('not.exist');
 	});
 
 	it('can disable styling', () => {
