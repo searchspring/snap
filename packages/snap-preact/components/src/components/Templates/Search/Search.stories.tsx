@@ -52,7 +52,7 @@ export default {
 			},
 			control: { type: 'text' },
 		},
-		hideToggleSidebarButtonText: {
+		hideToggleSidebarButton: {
 			defaultValue: false,
 			description: 'hide the toggle Sidebar button',
 			table: {

@@ -113,7 +113,12 @@ describe('LayoutSelector Component', () => {
 
 	it('can hide label', () => {
 		const label = 'my label';
-		const rendered = render(<LayoutSelector hideLabel={true} onSelect={onSelect} label={label} options={options} />);
+		const lang = {
+			label: {
+				value: 'lang label',
+			},
+		};
+		const rendered = render(<LayoutSelector lang={lang} hideLabel={true} onSelect={onSelect} label={label} options={options} />);
 
 		const element = rendered.container.querySelector('.ss__layout__select');
 		const labelElem = rendered.container.querySelector('.ss__select__label');

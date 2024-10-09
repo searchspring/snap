@@ -77,21 +77,21 @@ The `hideSubtitleText` prop hides the subtitle text.
 ```
 
 ### hideCorrectedQueryText
-The `hideCorrectedQueryText` prop hides the corrected Query text.
+The `hideCorrectedQueryText` prop hides the corrected query text.
 
 ```jsx
 <SearchHeader controller={controller} hideCorrectedQueryText={true} />
 ```
 
 ### hideNoResultsText
-The `hideNoResultsText` prop hides the hides the no results text.
+The `hideNoResultsText` prop hides the no results text.
 
 ```jsx
 <SearchHeader controller={controller} hideNoResultsText={true} />
 ```
 
 ### hideDidYouMeanText
-The `hideDidYouMeanText` prop hides the hides did you mean text.
+The `hideDidYouMeanText` prop hides did you mean text.
 
 ```jsx
 <SearchHeader controller={controller} hideDidYouMeanText={true} />

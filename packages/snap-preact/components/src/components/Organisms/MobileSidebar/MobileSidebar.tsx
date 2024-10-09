@@ -156,19 +156,19 @@ export const MobileSidebar = observer((properties: MobileSidebarProps): JSX.Elem
 	//initialize lang
 	const defaultLang = {
 		openButtonText: {
-			value: !hideOpenButtonText ? openButtonText : undefined,
+			value: openButtonText,
 		},
 		clearButtonText: {
-			value: !hideClearButtonText ? clearButtonText : undefined,
+			value: clearButtonText,
 		},
 		applyButtonText: {
-			value: !hideApplyButtonText ? applyButtonText : undefined,
+			value: applyButtonText,
 		},
 		titleText: {
 			value: titleText,
 		},
 		closeButtonText: {
-			value: !hideCloseButtonText ? closeButtonText : undefined,
+			value: closeButtonText,
 			attributes: {
 				'aria-label': closeButtonText || `close ${openButtonText} button`,
 			},
@@ -177,6 +177,20 @@ export const MobileSidebar = observer((properties: MobileSidebarProps): JSX.Elem
 
 	//deep merge with props.lang
 	const lang = deepmerge(defaultLang, props.lang || {});
+
+	if (hideOpenButtonText) {
+		delete lang.openButtonText.value;
+	}
+	if (hideClearButtonText) {
+		delete lang.clearButtonText.value;
+	}
+	if (hideCloseButtonText) {
+		delete lang.closeButtonText.value;
+	}
+	if (hideApplyButtonText) {
+		delete lang.applyButtonText.value;
+	}
+
 	const mergedLang = useLang(lang as any, {
 		controller,
 	});

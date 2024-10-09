@@ -207,10 +207,10 @@ describe('Search Template Component', () => {
 		});
 	});
 
-	it('can hide the toggle sidebar button text', async () => {
+	it('can hide the toggle sidebar button', async () => {
 		const buttonText = 'click me to open sidebar';
 
-		const rendered = render(<Search controller={controller} hideToggleSidebarButtonText={true} toggleSidebarButtonText={buttonText} />);
+		const rendered = render(<Search controller={controller} hideToggleSidebarButton={true} toggleSidebarButtonText={buttonText} />);
 		const element = rendered.container.querySelector('.ss__search')!;
 		const button = rendered.container.querySelector('.ss__search__sidebar-wrapper-toggle');
 		const sidebar = rendered.container.querySelector('.ss__sidebar');

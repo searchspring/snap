@@ -398,7 +398,7 @@ export const RecommendationBundle = observer((properties: RecommendationBundlePr
 	//initialize lang
 	const defaultLang: Partial<RecommendationBundleLang> = {
 		seedText: {
-			value: hideSeedText ? '' : seedText,
+			value: seedText,
 		},
 		ctaButtonText: {
 			value: ctaButtonText,
@@ -410,6 +410,10 @@ export const RecommendationBundle = observer((properties: RecommendationBundlePr
 
 	//deep merge with props.lang
 	const lang = deepmerge(defaultLang, props.lang || {});
+
+	if (hideSeedText) {
+		delete lang.seedText.value;
+	}
 
 	return resultsToRender?.length ? (
 		<CacheProvider>

@@ -83,10 +83,6 @@ export const SortBy = observer((properties: SortByProps): JSX.Element => {
 		styling.css = [style];
 	}
 
-	if (hideLabel) {
-		label = undefined;
-	}
-
 	//initialize lang
 	const defaultLang = {
 		label: {
@@ -96,6 +92,11 @@ export const SortBy = observer((properties: SortByProps): JSX.Element => {
 
 	//deep merge with props.lang
 	const lang = deepmerge(defaultLang, props.lang || {});
+
+	if (hideLabel) {
+		delete lang.label.value;
+		label = undefined;
+	}
 
 	// options can be an Array or ObservableArray - but should have length
 	return store?.current && typeof store?.options == 'object' && store.options?.length ? (

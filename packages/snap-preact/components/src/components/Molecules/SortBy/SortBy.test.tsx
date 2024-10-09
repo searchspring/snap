@@ -51,7 +51,12 @@ describe('SortBy Component', () => {
 
 	it('it can hide the label', () => {
 		const label = 'my label';
-		const rendered = render(<SortBy hideLabel={true} label={label} sorting={sortingStore} />);
+		const lang = {
+			label: {
+				value: 'lang label',
+			},
+		};
+		const rendered = render(<SortBy lang={lang} hideLabel={true} label={label} sorting={sortingStore} />);
 
 		const element = rendered.container.querySelector('.ss__sortby__select');
 		const labelElem = rendered.container.querySelector('.ss__select__label');

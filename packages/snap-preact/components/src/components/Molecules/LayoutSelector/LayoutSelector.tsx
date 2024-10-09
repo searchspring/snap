@@ -82,10 +82,6 @@ export const LayoutSelector = observer((properties: LayoutSelectorProps): JSX.El
 		styling.css = [style];
 	}
 
-	if (hideLabel) {
-		label = undefined;
-	}
-
 	//initialize lang
 	const defaultLang = {
 		label: {
@@ -95,6 +91,11 @@ export const LayoutSelector = observer((properties: LayoutSelectorProps): JSX.El
 
 	//deep merge with props.lang
 	const lang = deepmerge(defaultLang, props.lang || {});
+
+	if (hideLabel) {
+		delete lang.label.value;
+		label = undefined;
+	}
 
 	// options can be an Array or ObservableArray - but should have length
 	return (options && options.length > 1) || (options?.length === 1 && showSingleOption) ? (

@@ -246,7 +246,14 @@ describe('MobileSidebar Component', () => {
 	it('can hide the close button text', async () => {
 		const icon = 'cog';
 		const title = 'title text';
-		const rendered = render(<MobileSidebar hideCloseButtonText={true} controller={controller} closeButtonText={title} closeButtonIcon={icon} />);
+		const lang = {
+			closeButtonText: {
+				value: 'lang text',
+			},
+		};
+		const rendered = render(
+			<MobileSidebar lang={lang} hideCloseButtonText={true} controller={controller} closeButtonText={title} closeButtonIcon={icon} />
+		);
 		const slideoutButton = rendered.container.querySelector('.ss__mobile-sidebar__slideout__button');
 		userEvent.click(slideoutButton!);
 
@@ -254,6 +261,7 @@ describe('MobileSidebar Component', () => {
 			const elem = rendered.container.querySelector(`.ss__mobile-sidebar__header__close-button`);
 			const iconElem = rendered.container.querySelector(`.ss__mobile-sidebar__header .ss__mobile-sidebar__header__close-button .ss__icon--${icon}`);
 			expect(elem).not.toHaveTextContent(title);
+			expect(elem).not.toHaveTextContent(lang.closeButtonText.value);
 			expect(iconElem).toBeInTheDocument();
 		});
 	});
@@ -272,11 +280,19 @@ describe('MobileSidebar Component', () => {
 	it('can hide the open text', async () => {
 		const icon = 'cog';
 		const title = 'title text';
-		const rendered = render(<MobileSidebar controller={controller} hideOpenButtonText={true} openButtonText={title} openButtonIcon={icon} />);
+		const lang = {
+			openButtonText: {
+				value: 'lang text',
+			},
+		};
+		const rendered = render(
+			<MobileSidebar lang={lang} controller={controller} hideOpenButtonText={true} openButtonText={title} openButtonIcon={icon} />
+		);
 		const slideoutButton = rendered.container.querySelector('.ss__mobile-sidebar__slideout__button');
 
 		const iconElem = rendered.container.querySelector(`.ss__mobile-sidebar__slideout__button .ss__icon--${icon}`);
 		expect(slideoutButton).not.toHaveTextContent(title);
+		expect(slideoutButton).not.toHaveTextContent(lang.openButtonText.value);
 		expect(iconElem).toBeInTheDocument();
 	});
 
@@ -301,7 +317,14 @@ describe('MobileSidebar Component', () => {
 	it('can hide the apply button text', async () => {
 		const text = 'some text';
 		const icon = 'cog';
-		const rendered = render(<MobileSidebar hideApplyButtonText={true} controller={controller} applyButtonIcon={icon} applyButtonText={text} />);
+		const lang = {
+			applyButtonText: {
+				value: 'lang text',
+			},
+		};
+		const rendered = render(
+			<MobileSidebar lang={lang} hideApplyButtonText={true} controller={controller} applyButtonIcon={icon} applyButtonText={text} />
+		);
 		const slideoutButton = rendered.container.querySelector('.ss__mobile-sidebar__slideout__button');
 		userEvent.click(slideoutButton!);
 
@@ -312,6 +335,7 @@ describe('MobileSidebar Component', () => {
 			const element = rendered.container.querySelector('.ss__mobile-sidebar__content');
 			expect(element).toBeInTheDocument();
 			expect(applyButton).not.toHaveTextContent(text);
+			expect(applyButton).not.toHaveTextContent(lang.applyButtonText.value);
 			expect(iconElem).toBeInTheDocument();
 		});
 	});
@@ -334,8 +358,14 @@ describe('MobileSidebar Component', () => {
 	it('can hide clear button text', async () => {
 		const text = 'click me';
 		const icon = 'cog';
-
-		const rendered = render(<MobileSidebar hideClearButtonText={true} controller={controller} clearButtonIcon={icon} clearButtonText={text} />);
+		const lang = {
+			clearButtonText: {
+				value: 'lang text',
+			},
+		};
+		const rendered = render(
+			<MobileSidebar lang={lang} hideClearButtonText={true} controller={controller} clearButtonIcon={icon} clearButtonText={text} />
+		);
 		const slideoutButton = rendered.container.querySelector('.ss__mobile-sidebar__slideout__button');
 		userEvent.click(slideoutButton!);
 
@@ -343,6 +373,7 @@ describe('MobileSidebar Component', () => {
 			const element = rendered.container.querySelector('.ss__mobile-sidebar__footer__clear-button');
 			const iconElem = rendered.container.querySelector(`.ss__mobile-sidebar__footer__clear-button .ss__icon--${icon}`);
 			expect(iconElem).toBeInTheDocument();
+			expect(element).not.toHaveTextContent(lang.clearButtonText.value);
 			expect(element).not.toHaveTextContent(text);
 		});
 	});
@@ -424,7 +455,12 @@ describe('MobileSidebar Component', () => {
 
 	it('can hide titleText', async () => {
 		const text = 'title text';
-		const rendered = render(<MobileSidebar hideTitleText={true} controller={controller} titleText={text} />);
+		const lang = {
+			titleText: {
+				value: 'lang text',
+			},
+		};
+		const rendered = render(<MobileSidebar lang={lang} hideTitleText={true} controller={controller} titleText={text} />);
 		const slideoutButton = rendered.container.querySelector('.ss__mobile-sidebar__slideout__button');
 		userEvent.click(slideoutButton!);
 
