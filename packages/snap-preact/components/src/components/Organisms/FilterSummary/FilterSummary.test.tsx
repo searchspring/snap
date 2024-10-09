@@ -167,7 +167,7 @@ describe('FilterSummary lang works', () => {
 	const selector = '.ss__filter-summary';
 
 	it('immediately available lang options', async () => {
-		const langOptions = ['title'];
+		const langOptions = ['title', 'clearAllLabel'];
 
 		//text attributes/values
 		const value = 'custom value';

@@ -95,6 +95,9 @@ export const FilterSummary = observer((properties: FilterSummaryProps): JSX.Elem
 		title: {
 			value: title,
 		},
+		clearAllLabel: {
+			value: clearAllLabel,
+		},
 	};
 
 	//deep merge with props.lang
@@ -121,6 +124,9 @@ export const FilterSummary = observer((properties: FilterSummaryProps): JSX.Elem
 						hideFacetLabel
 						valueLabel={clearAllLabel}
 						onClick={(e) => onClearAllClick && onClearAllClick(e)}
+						lang={{
+							filter: lang.clearAllLabel,
+						}}
 					/>
 				)}
 			</div>
@@ -148,6 +154,10 @@ export interface FilterSummaryProps extends ComponentProps {
 export interface FilterSummaryLang {
 	title: Lang<{
 		filters: FilterType[];
+	}>;
+	clearAllLabel: Lang<{
+		label?: string;
+		value?: string;
 	}>;
 }
 

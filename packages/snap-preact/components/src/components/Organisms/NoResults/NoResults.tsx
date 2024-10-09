@@ -220,7 +220,7 @@ export interface NoResultsProps extends ComponentProps {
 
 export interface NoResultsLang {
 	suggestionsTitleText: Lang<{ controller: SearchController }>;
-	contactsTitleText: Lang<{ controller: SearchController }>;
-	contactsList: Lang<{ controller: SearchController }>;
 	suggestionsList: Lang<{ controller: SearchController }>;
+	contactsTitleText?: Lang<{ controller: SearchController }>;
+	contactsList?: Lang<{ controller: SearchController }>;
 }

@@ -12,7 +12,7 @@ export const fr: LangComponents = {
 	},
 	autocomplete: {
 		trendingTitle: {
-			value: 'Popular Searches',
+			value: 'Recherches populaires',
 		},
 		termsTitle: {
 			value: '',
@@ -24,39 +24,39 @@ export const fr: LangComponents = {
 			value: 'Filtres',
 		},
 		historyTitle: {
-			value: 'Previously Searched',
+			value: 'Recherche précédente',
 		},
 		closeButton: {
-			value: 'Close Autocomplete',
+			value: 'Fermer la saisie semi-automatique',
 			attributes: {
-				'aria-label': 'close autocomplete',
+				'aria-label': 'Fermer la saisie semi-automatique',
 			},
 		},
 		noResultsText: {
 			value: (data) =>
-				`<p>No results found for "${
+				`<p>Aucun résultat trouvé pour "${
 					data?.controller?.store?.search.originalQuery?.string || data?.controller?.store?.search.query?.string
-				}".</p><p>Please try another search.</p>`,
+				}".</p><p>Veuillez essayer une autre recherche.</p>`,
 		},
 		contentInfo: {
 			value: (data) =>
-				`See ${data?.controller?.store?.pagination.totalResults} ${
-					data?.controller?.store?.filters.length && data?.controller?.store?.filters.length > 0 ? 'filtered' : ''
-				} result${data?.controller?.store?.pagination.totalResults == 1 ? '' : 's'} for "${data?.controller?.store?.search.query?.string}"`,
+				`voir ${data?.controller?.store?.pagination.totalResults} ${
+					data?.controller?.store?.filters.length && data?.controller?.store?.filters.length > 0 ? 'filtré' : ''
+				} résultat${data?.controller?.store?.pagination.totalResults == 1 ? '' : 's'} for "${data?.controller?.store?.search.query?.string}"`,
 		},
 		historyTerm: {
 			attributes: {
-				'aria-label': (data) => `item ${data?.index! + 1} of ${data?.controller?.store?.history.length}, ${data?.term?.value}`,
+				'aria-label': (data) => `article ${data?.index! + 1} de ${data?.controller?.store?.history.length}, ${data?.term?.value}`,
 			},
 		},
 		trendingTerm: {
 			attributes: {
-				'aria-label': (data) => `item ${data?.index! + 1} of ${data?.controller?.store?.trending.length}, ${data?.term?.value}`,
+				'aria-label': (data) => `article ${data?.index! + 1} de ${data?.controller?.store?.trending.length}, ${data?.term?.value}`,
 			},
 		},
 		suggestionsTerm: {
 			attributes: {
-				'aria-label': (data) => `item ${data?.index! + 1} of ${data?.controller?.store?.terms.length}, ${data?.term?.value}`,
+				'aria-label': (data) => `article ${data?.index! + 1} de ${data?.controller?.store?.terms.length}, ${data?.term?.value}`,
 			},
 		},
 	},
@@ -67,13 +67,13 @@ export const fr: LangComponents = {
 	},
 	recommendationBundle: {
 		seedText: {
-			value: 'This Product',
+			value: 'Ce produit',
 		},
 		ctaButtonText: {
-			value: 'Add All To Cart',
+			value: 'Ajouter tout au panier',
 		},
 		ctaButtonSuccessText: {
-			value: 'Bundle Added!',
+			value: 'Offre groupée ajoutée!',
 		},
 	},
 	mobileSidebar: {
@@ -91,7 +91,7 @@ export const fr: LangComponents = {
 		},
 		closeButtonText: {
 			attributes: {
-				'aria-label': `close Filters button`,
+				'aria-label': `fermer le bouton Filtres`,
 			},
 		},
 	},
@@ -100,12 +100,19 @@ export const fr: LangComponents = {
 			value: 'Trier Par',
 		},
 	},
+	perPage: {
+		label: {
+			value: 'par page',
+		},
+	},
 	facetsHorizontal: {
 		dropdownButton: {
 			attributes: {
 				'aria-label': (data) =>
-					`currently ${data?.selectedFacet?.field === data?.facet?.field ? 'collapsed' : 'open'} ${data?.facet?.field} facet dropdown ${
-						(data?.facet as ValueFacet)?.values?.length ? (data?.facet as ValueFacet)?.values?.length + ' options' : ''
+					`actuellement ${data?.selectedFacet?.field === data?.facet?.field ? 'effondré' : 'ouvrir'} ${
+						data?.facet?.field
+					} liste déroulante des facettes ${
+						(data?.facet as ValueFacet)?.values?.length ? (data?.facet as ValueFacet)?.values?.length + ' choix' : ''
 					}`,
 			},
 		},
@@ -113,6 +120,9 @@ export const fr: LangComponents = {
 	filterSummary: {
 		title: {
 			value: 'Filtres Actuels',
+		},
+		clearAllLabel: {
+			value: 'Tout effacer',
 		},
 	},
 	facet: {
@@ -125,8 +135,8 @@ export const fr: LangComponents = {
 		dropdownButton: {
 			attributes: {
 				'aria-label': (data) =>
-					`currently ${data?.facet?.collapsed ? 'collapsed' : 'open'} ${data?.facet?.label} facet dropdown ${
-						(data?.facet as ValueFacet)?.values?.length ? (data?.facet as ValueFacet)?.values?.length + ' options' : ''
+					`actuellement ${data?.facet?.collapsed ? 'effondré' : 'ouvrir'} ${data?.facet?.label} liste déroulante des facettes ${
+						(data?.facet as ValueFacet)?.values?.length ? (data?.facet as ValueFacet)?.values?.length + ' choix' : ''
 					}`,
 			},
 		},
@@ -135,8 +145,8 @@ export const fr: LangComponents = {
 		buttonLabel: {
 			attributes: {
 				'aria-label': (data) =>
-					`${data?.label} dropdown, ${data?.options?.length} options ${
-						data?.selectedOptions?.length ? `, Currently selected option is ${data?.selectedOptions[0].label}` : ''
+					`${data?.label} dérouler, ${data?.options?.length} choix ${
+						data?.selectedOptions?.length ? `, L'option actuellement sélectionnée est ${data?.selectedOptions[0].label}` : ''
 					}`,
 			},
 		},
@@ -144,45 +154,45 @@ export const fr: LangComponents = {
 	radio: {
 		radio: {
 			attributes: {
-				'aria-label': (data) => `${data?.disabled ? 'disabled' : ''} ${data?.checkedState ? 'checked' : 'unchecked'} radio button`,
+				'aria-label': (data) => `${data?.disabled ? 'désactivé' : ''} ${data?.checkedState ? 'à carreaux' : 'décoché'} bouton radio`,
 			},
 		},
 	},
 	pagination: {
 		previous: {
 			attributes: {
-				'aria-label': 'go to previous page',
+				'aria-label': 'aller à la page précédente',
 			},
 		},
 		next: {
 			attributes: {
-				'aria-label': 'go to next page',
+				'aria-label': 'aller à la page suivante',
 			},
 		},
 		first: {
 			attributes: {
-				'aria-label': 'go to first page',
+				'aria-label': 'aller à la première page',
 			},
 		},
 		last: {
 			attributes: {
-				'aria-label': (data) => `go to last page ${data?.paginationStore?.last.number}`,
+				'aria-label': (data) => `aller à la dernière page ${data?.paginationStore?.last?.number}`,
 			},
 		},
 		page: {
 			attributes: {
-				'aria-label': (data) => `go to page ${data?.page?.number}`,
+				'aria-label': (data) => `aller à la page ${data?.page?.number}`,
 			},
 		},
 	},
 	loadMore: {
 		loadMoreButton: {
 			attributes: {
-				'aria-label': 'Load More',
+				'aria-label': 'Charger plus',
 			},
 		},
 		progressText: {
-			value: (data) => `You've viewed ${data?.paginationStore?.end} of ${data?.paginationStore?.totalResults} products`,
+			value: (data) => `Vous avez consulté ${data?.paginationStore?.end} de ${data?.paginationStore?.totalResults} produits`,
 		},
 	},
 	grid: {
@@ -190,24 +200,24 @@ export const fr: LangComponents = {
 			value: (data) => `+ ${data?.remainder}`,
 		},
 		showLessText: {
-			value: 'Less',
+			value: 'Moins',
 		},
 	},
 	filter: {
 		filter: {
 			attributes: {
-				'aria-label': (data) => `${!data?.label ? data?.value || '' : `remove selected ${data?.label} filter ${data?.value}`}`,
+				'aria-label': (data) => `${!data?.label ? data?.value || '' : `supprimer la sélection ${data?.label} filtre ${data?.value}`}`,
 			},
 		},
 	},
 	facetSlider: {
 		sliderHandle: {
 			attributes: {
-				'aria-label': (data) => `${data?.facet?.label} slider button`,
+				'aria-label': (data) => `${data?.facet?.label} bouton curseur`,
 				'aria-valuetext': (data) =>
-					`${data?.facet?.label} slider button, current value ${data?.value}, ${
-						data?.facet?.range?.low ? `min value ${data?.facet?.range?.low},` : ``
-					} ${data?.facet?.range?.high ? `max value ${data?.facet?.range?.high}` : ``}`,
+					`${data?.facet?.label} bouton curseur, valeur actuelle ${data?.value}, ${
+						data?.facet?.range?.low ? `valeur minimale ${data?.facet?.range?.low},` : ``
+					} ${data?.facet?.range?.high ? `valeur maximale ${data?.facet?.range?.high}` : ``}`,
 			},
 		},
 	},
@@ -217,10 +227,10 @@ export const fr: LangComponents = {
 				'aria-label': (data) =>
 					`${
 						data?.value?.filtered
-							? `remove selected filter ${data?.facet?.label || ''} - ${data?.value?.label}`
+							? `supprimer le filtre sélectionné ${data?.facet?.label || ''} - ${data?.value?.label}`
 							: data?.facet?.label
-							? `filter by ${data?.facet?.label} - ${data?.value?.label}`
-							: `filter by ${data?.value?.label}`
+							? `filtrer par ${data?.facet?.label} - ${data?.value?.label}`
+							: `filtrer par ${data?.value?.label}`
 					}`,
 			},
 		},
@@ -231,10 +241,10 @@ export const fr: LangComponents = {
 				'aria-label': (data) =>
 					`${
 						data?.value?.filtered
-							? `remove selected filter ${data?.facet?.label || ''} - ${data?.value?.label}`
+							? `supprimer le filtre sélectionné ${data?.facet?.label || ''} - ${data?.value?.label}`
 							: data?.facet?.label
-							? `filter by ${data?.facet?.label} - ${data?.value?.label}`
-							: `filter by ${data?.value?.label}`
+							? `filtrer par ${data?.facet?.label} - ${data?.value?.label}`
+							: `filtrer par ${data?.value?.label}`
 					}`,
 			},
 		},
@@ -245,10 +255,10 @@ export const fr: LangComponents = {
 				'aria-label': (data) =>
 					`${
 						data?.value?.filtered
-							? `remove selected filter ${data?.facet?.label || ''} - ${data?.value?.label}`
+							? `supprimer le filtre sélectionné ${data?.facet?.label || ''} - ${data?.value?.label}`
 							: data?.facet?.label
-							? `filter by ${data?.facet?.label} - ${data?.value?.label}`
-							: `filter by ${data?.value?.label}`
+							? `filtrer par ${data?.facet?.label} - ${data?.value?.label}`
+							: `filtrer par ${data?.value?.label}`
 					}`,
 			},
 		},
@@ -259,32 +269,32 @@ export const fr: LangComponents = {
 				'aria-label': (data) =>
 					`${
 						data?.value?.filtered
-							? `remove selected filter ${data?.facet?.label || ''} - ${data?.value?.label}`
+							? `supprimer le filtre sélectionné ${data?.facet?.label || ''} - ${data?.value?.label}`
 							: data?.facet?.label
-							? `filter by ${data?.facet?.label} - ${data?.value?.label}`
-							: `filter by ${data?.value?.label}`
+							? `filtrer par ${data?.facet?.label} - ${data?.value?.label}`
+							: `filtrer par ${data?.value?.label}`
 					}`,
 			},
 		},
 	},
 	errorHandler: {
 		warningText: {
-			value: `<b>Warning:&nbsp;</b>`,
+			value: `<b>Avertissement:&nbsp;</b>`,
 		},
 		infoText: {
-			value: `<b>Info:&nbsp;</b>`,
+			value: `<b>Informations:&nbsp;</b>`,
 		},
 		errorText: {
-			value: `<b>Error:&nbsp;</b>`,
+			value: `<b>Erreur:&nbsp;</b>`,
 		},
 		reloadText: {
-			value: `Reload`,
+			value: `Recharger`,
 		},
 	},
 	checkbox: {
 		checkbox: {
 			attributes: {
-				'aria-label': (data) => `${data?.disabled ? 'disabled' : ''} ${data?.checkedState ? 'checked' : 'unchecked'} checkbox`,
+				'aria-label': (data) => `${data?.disabled ? 'désactivé' : ''} ${data?.checkedState ? 'à carreaux' : 'décoché'} case à cocher`,
 			},
 		},
 	},
@@ -318,16 +328,16 @@ export const fr: LangComponents = {
             `;
 			},
 			attributes: {
-				'aria-label': (data) => `Now showing ${data?.pagination?.totalResults} items in the product grid`,
+				'aria-label': (data) => `Affichage maintenant de ${data?.pagination?.totalResults} éléments dans la grille de produits`,
 			},
 		},
 		correctedQueryText: {
 			value: (data) => {
-				return `Aucun résultat trouvé pour <em>"${data?.search?.originalQuery?.string}"</em>, montrant les résultats pour <em>"${data?.search?.query?.string}"</em> instead.`;
+				return `Aucun résultat trouvé pour <em>"${data?.search?.originalQuery?.string}"</em>, montrant les résultats pour <em>"${data?.search?.query?.string}"</em> plutôt.`;
 			},
 			attributes: {
 				'aria-label': (data) =>
-					`Aucun résultat trouvé pour ${data?.search?.originalQuery?.string}, showing results for ${data?.search?.query?.string} instead`,
+					`Aucun résultat trouvé pour ${data?.search?.originalQuery?.string}, safficher les résultats pour ${data?.search?.query?.string} à la place`,
 			},
 		},
 		noResultsText: {
@@ -341,12 +351,12 @@ export const fr: LangComponents = {
 				}`;
 			},
 			attributes: {
-				'aria-label': (data) => `No results found for ${data?.search?.query?.string}`,
+				'aria-label': (data) => `Aucun résultat trouvé pour ${data?.search?.query?.string}`,
 			},
 		},
 		didYouMeanText: {
 			value: (data) => {
-				return `Did you mean <a href=${data?.search?.didYouMean?.url.href}>${data?.search?.didYouMean?.string}</a>?`;
+				return `Vouliez-vous dire <a href=${data?.search?.didYouMean?.url.href}>${data?.search?.didYouMean?.string}</a>?`;
 			},
 		},
 	},
@@ -356,28 +366,28 @@ export const fr: LangComponents = {
 		},
 		suggestionsList: {
 			value:
-				'<ul className="ss__no-results__suggestions__list"><li className="ss__no-results__suggestions__list__option">Check for misspellings.</li><li className="ss__no-results__suggestions__list__option">Remove possible redundant keywords (ie. "products").</li><li className="ss__no-results__suggestions__list__option">Use other words to describe what you are searching for.</li></ul>',
+				'<ul className="ss__no-results__suggestions__list"><li className="ss__no-results__suggestions__list__option">Vérifiez les fautes d’orthographe.</li><li className="ss__no-results__suggestions__list__option">Supprimez les éventuels mots-clés redondants (ie: "produits").</li><li className="ss__no-results__suggestions__list__option">Utilisez d\'autres mots pour décrire ce que vous recherchez.</li></ul>',
 		},
-		contactsTitleText: {
-			value: `Still can't find what you're looking for? <a href="/contact-us">Contact us</a>.`,
-		},
-		contactsList: {
-			value: `<div className='ss__no-results__contact__detail'>
-                        <h4 className="ss__no-results__contact__detail__title">Address</h4>
-                        <p className="ss__no-results__contact__detail__content">123 Street Address City, State, Zipcode</p>
-                    </div>
-                    <div className='ss__no-results__contact__detail'>
-                        <h4 className="ss__no-results__contact__detail__title">Hours</h4>
-                        <p className="ss__no-results__contact__detail__content">Monday - Saturday, 00:00am - 00:00pm Sunday, 00:00am - 00:00pm</p>
-                    </div>
-                    <div className='ss__no-results__contact__detail'>
-                        <h4 className="ss__no-results__contact__detail__title">Phone</h4>
-                        <p className="ss__no-results__contact__detail__content"><a href="tel:1234567890">123-456-7890</a></p>
-                    </div>
-                    <div className='ss__no-results__contact__detail'>
-                        <h4 className="ss__no-results__contact__detail__title">Email</h4>
-                        <p className="ss__no-results__contact__detail__content"><a href="mailto:email@site.com">email@site.com</a></p>
-                    </div>`,
-		},
+		// contactsTitleText: {
+		// 	value: `Vous ne trouvez toujours pas ce que vous cherchez? <a href="/contact-us">Contactez-nous</a>.`,
+		// },
+		// contactsList: {
+		// 	value: `<div className='ss__no-results__contact__detail'>
+		//                 <h4 className="ss__no-results__contact__detail__title">Adresse</h4>
+		//                 <p className="ss__no-results__contact__detail__content">123 Adresse Ville, État, Code postal</p>
+		//             </div>
+		//             <div className='ss__no-results__contact__detail'>
+		//                 <h4 className="ss__no-results__contact__detail__title">Heures</h4>
+		//                 <p className="ss__no-results__contact__detail__content">Lundi - Samedi, 00:00am - 00:00pm Samedi, 00:00am - 00:00pm</p>
+		//             </div>
+		//             <div className='ss__no-results__contact__detail'>
+		//                 <h4 className="ss__no-results__contact__detail__title">Téléphone</h4>
+		//                 <p className="ss__no-results__contact__detail__content"><a href="tel:1234567890">123-456-7890</a></p>
+		//             </div>
+		//             <div className='ss__no-results__contact__detail'>
+		//                 <h4 className="ss__no-results__contact__detail__title">Email</h4>
+		//                 <p className="ss__no-results__contact__detail__content"><a href="mailto:email@site.com">email@site.com</a></p>
+		//             </div>`,
+		// },
 	},
 };

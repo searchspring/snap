@@ -34,7 +34,7 @@ import type { ListLang } from '../components/Molecules/List';
 import type { LoadMoreLang } from '../components/Molecules/LoadMore';
 // import type { OverlayBadgeLang } from '../components/Molecules/OverlayBadge';
 import type { PaginationLang } from '../components/Molecules/Pagination';
-// import type { PerPageLang } from '../components/Molecules/PerPage';
+import type { PerPageLang } from '../components/Molecules/PerPage';
 import type { RadioLang } from '../components/Molecules/Radio';
 import type { RadioListLang } from '../components/Molecules/RadioList';
 // import type { RatingLang } from '../components/Molecules/Rating';
@@ -108,7 +108,7 @@ export type LangComponentOverrides = {
 	loadMore?: Partial<LoadMoreLang>;
 	// overlayBadge?: Partial<OverlayBadgeLang>
 	pagination?: Partial<PaginationLang>;
-	// perPage?: Partial<PerPageLang>
+	perPage?: Partial<PerPageLang>;
 	radioList?: Partial<RadioListLang>;
 	// rating?: Partial<RatingLang>
 	// result?: Partial<ResultLang>
@@ -179,7 +179,7 @@ export type LangComponents = {
 	loadMore: LoadMoreLang;
 	// overlayBadge: OverlayBadgeLang
 	pagination: PaginationLang;
-	// perPage: PerPageLang
+	perPage: PerPageLang;
 	radioList: RadioListLang;
 	// rating: RatingLang
 	// result: ResultLang
