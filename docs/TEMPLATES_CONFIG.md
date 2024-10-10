@@ -96,42 +96,42 @@ It is possible to switch language and currency at run-time using methods on the 
 | `platform[platform].scrollToTop` | Configuration for scrolling to top after search | Object | - |
 | `platform[platform].storeLogger` | Configuration for store logging | Object | - |
 
-The `platform` object allows you to configure platform-specific middleware. Currently, `shopify`, `bigcommerce`, `magento2` and `other` are supported and share the following common options:
+The `platform` object allows you to configure platform-specific middleware. Currently, `shopify`, `bigcommerce`, `magento2` and `common` are supported and share the following common options:
 
 #### backgroundFilters
-Allows you to set up background (or non-background using other) filters. You can configure filters for tags, collections, or other fields.
+Allows you to set up background filters. You can configure filters for tags, collections, or other fields.
 
 | Configuration Option | Description | Type | Default |
 |----------------------|-------------|------|---------|
 | `platform[platform].backgroundFilters` | Background filter configurations | Object | - |
-| `platform[platform].backgroundFilters.tags` | Background tag filter configurations | Array | - |
-| `platform[platform].backgroundFilters.collection` | Background collection filter configurations | Array | - |
-| `platform[platform].backgroundFilters.other` | Background filter configurations for custom fields | Array | - |
-| `platform[platform].backgroundFilters['tags' \| 'collection' \| 'other'][]` | Background filter object | Object | - |
-| `platform[platform].backgroundFilters['tags' \| 'collection' \| 'other'][].enabled` | Enables filter | boolean | false |
-| `platform[platform].backgroundFilters['tags' \| 'collection' \| 'other'][].field` | Defines filter field name | string | - |
-| `platform[platform].backgroundFilters['tags' \| 'collection' \| 'other'][].value` | Defines filter value | string | - |
-| `platform[platform].backgroundFilters['tags' \| 'collection' \| 'other'][].background` | Defines if filter should be background | boolean | true |
+| `platform[platform].backgroundFilters.filters[]` | Background filter definitions | Array | - |
+| `platform[platform].backgroundFilters.filters[].type` | Defines if filter should be 'value' or 'range' type | 'value' | 'range' | true |
+| `platform[platform].backgroundFilters.filters[].field` | Defines filter field name | string | - |
+| `platform[platform].backgroundFilters.filters[].value` | Defines filter value. If `type` is 'value', this must be a string, otherwise if `type` is 'range', this must be an object with `low` and `high` properties | string | { low: number, high: number } | - |
 
 ```jsx
 platform: {
-	other: {
+	common: {
 		backgroundFilters: {
-			tags: [{
-				enabled: true,
+			filters: [{
+				type: 'value',
 				field: 'ss_tags',
 				value: 'instock'
-			}],
-			collection: [{
-				enabled: true,
+			},
+			{
+				type: 'value',
 				field: 'collection',
 				value: 'mens'
-			}],
-			other: [{
-				enabled: true,
+			},
+			{
+				type: 'value',
 				field: 'custom',
 				value: '1',
-				background: false,
+			},
+			{
+				type: 'range',
+				field: 'price',
+				value: { low: 10, high: 20 },
 			}],
 		}
 	}
@@ -145,11 +145,12 @@ Configures the behavior of scrolling to the top of the page upon the 'afterStore
 |----------------------|-------------|------|---------|
 | `platform[platform].scrollToTop` | Scroll to top middleware configuration | Object | - |
 | `platform[platform].scrollToTop.enabled` | Enables middleware | boolean | false |
+| `platform[platform].scrollToTop.selector` | Query selector to scroll to | string | - |
 | `platform[platform].scrollToTop.options` | [`window.scroll` options configuration](https://developer.mozilla.org/en-US/docs/Web/API/Window/scroll#options) | Object | `{ top: 0, left: 0, behavior: 'smooth' }` |
 
 ```jsx
 platform: {
-	other: {
+	common: {
 		scrollToTop: {
 			enabled: true,
 			options: {
@@ -172,7 +173,7 @@ Enables logging of the store upon the 'afterStore' event
 
 ```jsx
 platform: {
-	other: {
+	common: {
 		storeLogger: {
 			enabled: true
 		}
@@ -185,18 +186,21 @@ In addition when platform is `shopify`, the following middleware is available:
 
 | Configuration Option | Description | Type | Default |
 |----------------------|-------------|------|---------|
-| `platform.shopify.updateResultsUrl` | Shopify Updating results URL configuration | Object | - |
-| `platform.shopify.updateResultsUrl.enabled` | Enables middleware | Object | - |
+| `platform.shopify.mutateResults` | Shopify Updating results configuration | Object | - |
+| `platform.shopify.mutateResults.url` | Results URL Mutation configuration | Object | - |
+| `platform.shopify.mutateResults.url.enabled` | Enables middleware | Object | - |
 
 
-#### updateResultsUrl
+#### mutateResults
 Enables updating the URL with search results. Product urls will be prefixed with their category route.
 
 ```jsx
 platform: {
 	shopify: {
-		updateResultsUrl: {
-			enabled: true
+		mutateResults: {
+			url: {
+				enabled: true
+			}
 		}
 	}
 }

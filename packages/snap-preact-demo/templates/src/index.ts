@@ -18,6 +18,13 @@ new SnapTemplates({
 		// bigcommerce: {
 		shopify: {
 			backgroundFilters: {
+				filters: [
+					// {
+					// 	type: 'value',
+					// 	field: 'ss_tags',
+					// 	value: 'context.tags'
+					// }
+				],
 				// tags: [{
 				// 	enabled: true,
 				// 	field: 'ss_tags',
@@ -28,22 +35,25 @@ new SnapTemplates({
 				// 	field: 'collection',
 				// 	value: 'context.collection'
 				// }],
-				// other: [{
+				// common: [{
 				// 	field: 'shopperGroup',
 				// 	value: 'shopper.group',
 				// 	enabled: true,
 				// }]
 			},
-			updateResultsUrl: {
-				enabled: true,
+			mutateResults: {
+				url: {
+					enabled: true,
+				},
 			},
 			scrollToTop: {
 				enabled: true,
+				selector: '#searchspring-layout',
 				// options: {
-				// 	top: 0,
+				// top: 0,
 				// 	left: 0,
 				// 	behavior: 'smooth',
-				// }
+				// },
 			},
 			storeLogger: {
 				enabled: true,

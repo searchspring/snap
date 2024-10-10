@@ -4,12 +4,15 @@ import type { Theme, ThemeMinimal } from '../../../components/src';
 import type { TemplateCustomComponentTypes, TemplateTypes } from './TemplateStore';
 import type { TemplateStoreComponentConfig } from './TemplateStore';
 import type { PluginFunction } from '@searchspring/snap-controller';
-import { backgroundFilters as shopifyBackgroundFilters, updateResultsUrl as shopifyUpdateResultsUrl } from '@searchspring/snap-platforms/shopify';
-import { backgroundFilters as bigcommerceBackgroundFilters } from '@searchspring/snap-platforms/bigcommerce';
-import { backgroundFilters as magento2BackgroundFilters } from '@searchspring/snap-platforms/magento2';
-import { genericBackgroundFilters } from './library/middleware/genericBackgroundFilters';
-import { scrollToTop } from './library/middleware/scrollToTop';
-import { storeLogger } from './library/middleware/storeLogger';
+import {
+	pluginBackgroundFilters as shopifyPluginBackgroundFilters,
+	pluginMutateResults as shopifyPluginMutateResults,
+} from '@searchspring/snap-platforms/shopify';
+import { pluginBackgroundFilters as bigcommercePluginBackgroundFilters } from '@searchspring/snap-platforms/bigcommerce';
+import { pluginBackgroundFilters as magento2PluginBackgroundFilters } from '@searchspring/snap-platforms/magento2';
+import { pluginGenericBackgroundFilters } from './library/plugins/pluginGenericBackgroundFilters';
+import { pluginScrollToTop } from './library/plugins/pluginScrollToTop';
+import { pluginStoreLogger } from './library/plugins/pluginStoreLogger';
 
 type LibraryComponentImport = {
 	[componentName: string]: (args?: any) => Promise<FunctionalComponent<RenderableProps<any>>>;
@@ -26,7 +29,7 @@ export type LibraryImports = {
 	plugins: {
 		shopify: {
 			backgroundFilters: PluginFunction;
-			updateResultsUrl: PluginFunction;
+			mutateResults: PluginFunction;
 		};
 		bigcommerce: {
 			backgroundFilters: PluginFunction;
@@ -34,7 +37,7 @@ export type LibraryImports = {
 		magento2: {
 			backgroundFilters: PluginFunction;
 		};
-		other: {
+		common: {
 			genericBackgroundFilters: PluginFunction;
 			scrollToTop: PluginFunction;
 			storeLogger: PluginFunction;
@@ -131,19 +134,19 @@ export class LibraryStore {
 		},
 		plugins: {
 			shopify: {
-				backgroundFilters: shopifyBackgroundFilters,
-				updateResultsUrl: shopifyUpdateResultsUrl,
+				backgroundFilters: shopifyPluginBackgroundFilters,
+				mutateResults: shopifyPluginMutateResults,
 			},
 			bigcommerce: {
-				backgroundFilters: bigcommerceBackgroundFilters,
+				backgroundFilters: bigcommercePluginBackgroundFilters,
 			},
 			magento2: {
-				backgroundFilters: magento2BackgroundFilters,
+				backgroundFilters: magento2PluginBackgroundFilters,
 			},
-			other: {
-				genericBackgroundFilters: genericBackgroundFilters,
-				scrollToTop: scrollToTop,
-				storeLogger: storeLogger,
+			common: {
+				genericBackgroundFilters: pluginGenericBackgroundFilters,
+				scrollToTop: pluginScrollToTop,
+				storeLogger: pluginStoreLogger,
 			},
 		},
 		component: {

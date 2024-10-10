@@ -434,40 +434,34 @@ export function createSnapConfig(templateConfig: SnapTemplatesConfig, templatesS
 }
 
 function createPlugins(templateConfig: SnapTemplatesConfig, templatesStore: TemplatesStore): PluginGrouping[] {
-	const plugins: PluginGrouping[] = [[templatesStore.library.import.plugins.other.genericBackgroundFilters]];
+	const plugins: PluginGrouping[] = [[templatesStore.library.import.plugins.common.genericBackgroundFilters]];
 
 	if (templatesStore.platform) {
 		const platformConfig = templateConfig.platform?.[templatesStore.platform] as unknown as GenericPluginsConfig;
-		const genericBackgroundFiltersConfig = platformConfig.backgroundFilters?.other || [];
-		if (genericBackgroundFiltersConfig.length) {
-			plugins[0].push(genericBackgroundFiltersConfig);
+		if (platformConfig.backgroundFilters) {
+			plugins[0].push(platformConfig.backgroundFilters || { filters: [] });
 		}
+
+		plugins.push([templatesStore.library.import.plugins.common.scrollToTop, platformConfig.scrollToTop || { enabled: true }]);
+		plugins.push([templatesStore.library.import.plugins.common.storeLogger, platformConfig.storeLogger || { enabled: true }]);
 
 		switch (templatesStore.platform) {
 			case 'shopify':
-				plugins.push([templatesStore.library.import.plugins.shopify.backgroundFilters, platformConfig.backgroundFilters]);
-				if ((platformConfig as ShopifyStandardPluginConfig).updateResultsUrl) {
-					plugins.push([
-						templatesStore.library.import.plugins.shopify.updateResultsUrl,
-						(platformConfig as ShopifyStandardPluginConfig).updateResultsUrl,
-					]);
-				}
+				plugins.push([templatesStore.library.import.plugins.shopify.backgroundFilters]);
+				plugins.push([templatesStore.library.import.plugins.shopify.backgroundFilters]);
+				plugins.push([
+					templatesStore.library.import.plugins.shopify.mutateResults,
+					(platformConfig as ShopifyStandardPluginConfig).mutateResults || { url: { enabled: true } },
+				]);
 				break;
 			case 'bigcommerce':
-				plugins.push([templatesStore.library.import.plugins.bigcommerce.backgroundFilters, platformConfig.backgroundFilters]);
+				plugins.push([templatesStore.library.import.plugins.bigcommerce.backgroundFilters]);
 				break;
 			case 'magento2':
-				plugins.push([templatesStore.library.import.plugins.magento2.backgroundFilters, platformConfig.backgroundFilters]);
+				plugins.push([templatesStore.library.import.plugins.magento2.backgroundFilters]);
 				break;
 			default:
 				break;
-		}
-
-		if (platformConfig.scrollToTop) {
-			plugins.push([templatesStore.library.import.plugins.other.scrollToTop, platformConfig.scrollToTop]);
-		}
-		if (platformConfig.storeLogger) {
-			plugins.push([templatesStore.library.import.plugins.other.storeLogger, platformConfig.storeLogger]);
 		}
 	}
 

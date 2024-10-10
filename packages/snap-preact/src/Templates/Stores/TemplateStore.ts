@@ -5,13 +5,10 @@ import { ThemeStore, ThemeStoreThemeConfig } from './ThemeStore';
 import { TargetStore } from './TargetStore';
 import { CurrencyCodes, LanguageCodes, LibraryImports, LibraryStore } from './LibraryStore';
 import { debounce } from '@searchspring/snap-toolbox';
-import type {
-	UpdateResultsUrlConfig,
-	GenericBackgroundFiltersConfig,
-	GenericBackgroundFilterPluginConfig,
-} from '@searchspring/snap-platforms/shopify';
-import type { ScrollToTopConfig } from './library/middleware/scrollToTop';
-import type { StoreLoggerConfig } from './library/middleware/storeLogger';
+import type { PluginMutateResultsConfig } from '@searchspring/snap-platforms/shopify';
+import type { PluginGenericBackgroundFilterPluginConfig } from './library/plugins/pluginGenericBackgroundFilters';
+import type { PluginScrollToTopConfig } from './library/plugins/pluginScrollToTop';
+import type { PluginStoreLoggerConfig } from './library/plugins/pluginStoreLogger';
 import type { LangComponentOverrides, ResultComponent, ThemeMinimal, ThemeOverrides, ThemeVariablesPartial } from '../../../components/src';
 import type { GlobalThemeStyleScript } from '../../types';
 
@@ -64,15 +61,15 @@ export type TemplateStoreComponentConfig = {
 };
 
 export type GenericPluginsConfig = {
-	backgroundFilters?: GenericBackgroundFiltersConfig & {
-		other?: GenericBackgroundFilterPluginConfig[];
-	};
-	scrollToTop?: ScrollToTopConfig;
-	storeLogger?: StoreLoggerConfig;
+	backgroundFilters?: PluginGenericBackgroundFilterPluginConfig;
+	scrollToTop?: PluginScrollToTopConfig;
+	storeLogger?: PluginStoreLoggerConfig;
 };
 export type ShopifyStandardPluginConfig = GenericPluginsConfig & {
-	updateResultsUrl?: UpdateResultsUrlConfig;
+	mutateResults?: PluginMutateResultsConfig;
 };
+export type BigcommerceStandardPluginConfig = GenericPluginsConfig;
+export type Magento2StandardPluginConfig = GenericPluginsConfig;
 
 export type TemplateStoreConfig = {
 	components?: TemplateStoreComponentConfig;
@@ -83,8 +80,8 @@ export type TemplateStoreConfig = {
 	};
 	platform?: {
 		shopify?: ShopifyStandardPluginConfig;
-		bigcommerce?: GenericPluginsConfig;
-		magento2?: GenericPluginsConfig;
+		bigcommerce?: BigcommerceStandardPluginConfig;
+		magento2?: Magento2StandardPluginConfig;
 		other?: GenericPluginsConfig;
 	};
 	translations?: {
