@@ -1,12 +1,13 @@
 import type { AbstractController } from '@searchspring/snap-controller';
 
+export type ScrollBehavior = 'auto' | 'instant' | 'smooth';
 export type PluginScrollToTopConfig = {
 	enabled: boolean;
 	selector?: string;
 	options?: {
 		top?: number;
 		left?: number;
-		behavior?: 'auto' | 'instant' | 'smooth';
+		behavior?: ScrollBehavior;
 	};
 };
 export const pluginScrollToTop = async (cntrlr: AbstractController, config: PluginScrollToTopConfig): Promise<void> => {

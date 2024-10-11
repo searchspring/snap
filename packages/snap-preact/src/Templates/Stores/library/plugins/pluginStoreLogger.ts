@@ -17,7 +17,7 @@ export const pluginStoreLogger = async (cntrlr: AbstractController, config: Plug
 		return;
 	}
 
-	if (Array.isArray(config.controllerIds) && (!config.controllerIds.includes(cntrlr.id) || !config.controllerIds.some((id) => cntrlr.id.match(id)))) {
+	if (Array.isArray(config.controllerIds) && !config.controllerIds.includes(cntrlr.id) && !config.controllerIds.some((id) => cntrlr.id.match(id))) {
 		return;
 	}
 

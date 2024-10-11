@@ -87,16 +87,18 @@ It is possible to switch language and currency at run-time using methods on the 
 
 
 ### Platform Middleware
+The `platform` object allows you to configure platform-specific middleware. By default when platform is set to `shopify`, `bigcommerce`, `magento2` or `common`, the following middleware are enabled by default:
 
 | Configuration Option | Description | Type | Default |
 |----------------------|-------------|------|---------|
 | `platform` | Platform-specific middleware configurations | Object | - |
 | `platform[platform]` | Platform-specific configurations | Object | - |
-| `platform[platform].backgroundFilters` | Background filter configurations | Object | - |
-| `platform[platform].scrollToTop` | Configuration for scrolling to top after search | Object | - |
-| `platform[platform].storeLogger` | Configuration for store logging | Object | - |
+| `platform[platform].backgroundFilters` | Background filter configurations | Object | Enabled |
+| `platform[platform].scrollToTop` | Configuration for scrolling to top after search | Object | Enabled |
+| `platform[platform].storeLogger` | Configuration for store logging | Object | Enabled |
 
-The `platform` object allows you to configure platform-specific middleware. Currently, `shopify`, `bigcommerce`, `magento2` and `common` are supported and share the following common options:
+*Note*: When `shopify`, `bigcommerce` or `magento2` is defined as the platform, additional middleware is automatically applied in SnapTemplates to handle platform specific context variables from the Searchspring installation script block. The script context also supports defining generic `backgroundFilters` and does not require defining a platform to be defined.
+
 
 #### backgroundFilters
 Allows you to set up background filters. You can configure filters for tags, collections, or other fields.
@@ -107,7 +109,7 @@ Allows you to set up background filters. You can configure filters for tags, col
 | `platform[platform].backgroundFilters.filters[]` | Background filter definitions | Array | - |
 | `platform[platform].backgroundFilters.filters[].type` | Defines if filter should be 'value' or 'range' type | 'value' | 'range' | true |
 | `platform[platform].backgroundFilters.filters[].field` | Defines filter field name | string | - |
-| `platform[platform].backgroundFilters.filters[].value` | Defines filter value. If `type` is 'value', this must be a string, otherwise if `type` is 'range', this must be an object with `low` and `high` properties | string | { low: number, high: number } | - |
+| `platform[platform].backgroundFilters.filters[].value` | Defines filter value. If `type` is 'value', this must be a string, otherwise if `type` is 'range', this must be an object with `low` and `high` properties | string \| { low: number, high: number } | - |
 
 ```jsx
 platform: {
@@ -141,10 +143,12 @@ platform: {
 #### scrollToTop
 Configures the behavior of scrolling to the top of the page upon the 'afterStore' event
 
+*Note*: Only applicable to SearchController (search feature target for search and category pages)
+
 | Configuration Option | Description | Type | Default |
 |----------------------|-------------|------|---------|
 | `platform[platform].scrollToTop` | Scroll to top middleware configuration | Object | - |
-| `platform[platform].scrollToTop.enabled` | Enables middleware | boolean | false |
+| `platform[platform].scrollToTop.enabled` | Enables middleware | boolean | true |
 | `platform[platform].scrollToTop.selector` | Query selector to scroll to | string | - |
 | `platform[platform].scrollToTop.options` | [`window.scroll` options configuration](https://developer.mozilla.org/en-US/docs/Web/API/Window/scroll#options) | Object | `{ top: 0, left: 0, behavior: 'smooth' }` |
 
@@ -153,6 +157,7 @@ platform: {
 	common: {
 		scrollToTop: {
 			enabled: true,
+			selector: '#searchspring-layout',
 			options: {
 				top: 0,
 				left: 0,
@@ -192,7 +197,7 @@ In addition when platform is `shopify`, the following middleware is available:
 
 
 #### mutateResults
-Enables updating the URL with search results. Product urls will be prefixed with their category route.
+Enables updating the URL with search results. Product urls will be prefixed with their category route. This also requires platform specific context variable `collection` to be defined.
 
 ```jsx
 platform: {

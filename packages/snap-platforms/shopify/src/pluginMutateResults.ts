@@ -29,7 +29,7 @@ export const pluginMutateResults = async (cntrlr: AbstractController, config: Pl
 		};
 
 		const updateUrlFn = (handle: string): string | undefined => {
-			if (cntrlr.type == 'search') {
+			if (cntrlr.type == 'search' && handle) {
 				const hasRoute =
 					typeof window.Shopify == 'object' && typeof window.Shopify.routes == 'object' && typeof window.Shopify.routes.root == 'string'
 						? true
@@ -47,7 +47,7 @@ export const pluginMutateResults = async (cntrlr: AbstractController, config: Pl
 				results.forEach((result: Product | Banner) => {
 					if (result.type != 'banner') {
 						const updatedUrl = updateUrlFn(result.attributes.handle as string);
-						if (updatedUrl) {
+						if (updatedUrl && updatedUrl !== result.mappings.core?.url) {
 							result.mappings.core!.url = updatedUrl;
 						}
 					}
