@@ -52,6 +52,17 @@ export default {
 			},
 			control: { type: 'text' },
 		},
+		hideToggleSidebarButton: {
+			defaultValue: false,
+			description: 'hide the toggle Sidebar button',
+			table: {
+				type: {
+					summary: 'boolean',
+				},
+				defaultValue: { summary: false },
+			},
+			control: { type: 'boolean' },
+		},
 		mobileSidebarDisplayAt: {
 			defaultValue: '',
 			description: 'Media query for when to render the mobileSidebar',

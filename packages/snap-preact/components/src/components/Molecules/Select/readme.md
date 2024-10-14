@@ -46,6 +46,13 @@ The `label` prop specifies the label for this select. This can be a string or JS
 <Select options={controller.store.sorting.options} label={'Sort By'} />
 ```
 
+### hideLabel
+The `hideLabel` prop hides the select header label.
+
+```jsx
+<Select options={controller.store.sorting.options} label={'Sort By'} hideLabel={true} />
+```
+
 ### separator
 The `separator` prop is rendered between the `label` prop and the select dropdown. This can be a string or JSX element.
 

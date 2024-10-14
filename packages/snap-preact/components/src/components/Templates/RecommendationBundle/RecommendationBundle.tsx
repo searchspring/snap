@@ -197,6 +197,7 @@ export const RecommendationBundle = observer((properties: RecommendationBundlePr
 		disableStyles,
 		ctaIcon,
 		ctaInline,
+		hideSeedText,
 		style,
 		lazyRender,
 		className,
@@ -409,6 +410,10 @@ export const RecommendationBundle = observer((properties: RecommendationBundlePr
 
 	//deep merge with props.lang
 	const lang = deepmerge(defaultLang, props.lang || {});
+
+	if (hideSeedText) {
+		delete lang.seedText.value;
+	}
 
 	return resultsToRender?.length ? (
 		<CacheProvider>
@@ -674,6 +679,7 @@ export interface RecommendationBundleProps extends ComponentProps {
 	hideCheckboxes?: boolean;
 	hideSeed?: boolean;
 	seedText?: string;
+	hideSeedText?: boolean;
 	separatorIconSeedOnly?: boolean;
 	separatorIcon?: IconType | Partial<IconProps> | false;
 	ctaInline?: boolean;

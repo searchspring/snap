@@ -83,6 +83,11 @@ export const MobileSidebar = observer((properties: MobileSidebarProps): JSX.Elem
 		closeButtonIcon,
 		openButtonIcon,
 		titleText,
+		hideTitleText,
+		hideCloseButtonText,
+		hideOpenButtonText,
+		hideClearButtonText,
+		hideApplyButtonText,
 		displayAt,
 		hideClearButton,
 		disableStyles,
@@ -172,6 +177,20 @@ export const MobileSidebar = observer((properties: MobileSidebarProps): JSX.Elem
 
 	//deep merge with props.lang
 	const lang = deepmerge(defaultLang, props.lang || {});
+
+	if (hideOpenButtonText) {
+		delete lang.openButtonText.value;
+	}
+	if (hideClearButtonText) {
+		delete lang.clearButtonText.value;
+	}
+	if (hideCloseButtonText) {
+		delete lang.closeButtonText.value;
+	}
+	if (hideApplyButtonText) {
+		delete lang.applyButtonText.value;
+	}
+
 	const mergedLang = useLang(lang as any, {
 		controller,
 	});
@@ -191,7 +210,9 @@ export const MobileSidebar = observer((properties: MobileSidebarProps): JSX.Elem
 			>
 				{!hideHeader && (
 					<div className="ss__mobile-sidebar__header">
-						<h4 aria-atomic="true" aria-live="polite" className="ss__mobile-sidebar__header__title" {...mergedLang.titleText?.all}></h4>
+						{!hideTitleText && (
+							<h4 aria-atomic="true" aria-live="polite" className="ss__mobile-sidebar__header__title" {...mergedLang.titleText?.all}></h4>
+						)}
 
 						{!hideCloseButton && (
 							<Button
@@ -277,6 +298,11 @@ export const MobileSidebar = observer((properties: MobileSidebarProps): JSX.Elem
 export interface MobileSidebarProps extends ComponentProps {
 	controller: SearchController;
 	titleText?: string;
+	hideTitleText?: boolean;
+	hideOpenButtonText?: boolean;
+	hideClearButtonText?: boolean;
+	hideApplyButtonText?: boolean;
+	hideCloseButtonText?: boolean;
 	openButtonText?: string;
 	clearButtonText?: string;
 	applyButtonIcon?: IconType | Partial<IconProps>;

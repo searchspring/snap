@@ -28,7 +28,8 @@ export const SortBy = observer((properties: SortByProps): JSX.Element => {
 
 	const props = mergeProps('sortBy', globalTheme, defaultProps, properties);
 
-	const { sorting, type, controller, label, disableStyles, className, style, styleScript, treePath } = props;
+	const { sorting, type, controller, hideLabel, disableStyles, className, style, styleScript, treePath } = props;
+	let label = props.label;
 
 	const store = sorting || controller?.store?.sorting;
 
@@ -91,6 +92,11 @@ export const SortBy = observer((properties: SortByProps): JSX.Element => {
 
 	//deep merge with props.lang
 	const lang = deepmerge(defaultLang, props.lang || {});
+
+	if (hideLabel) {
+		delete lang.label.value;
+		label = undefined;
+	}
 
 	// options can be an Array or ObservableArray - but should have length
 	return store?.current && typeof store?.options == 'object' && store.options?.length ? (
@@ -161,6 +167,7 @@ export interface SortByProps extends ComponentProps {
 	sorting?: SearchSortingStore;
 	controller?: SearchController;
 	label?: string;
+	hideLabel?: boolean;
 	type?: 'dropdown' | 'list' | 'radio';
 	lang?: Partial<SortByLang>;
 }

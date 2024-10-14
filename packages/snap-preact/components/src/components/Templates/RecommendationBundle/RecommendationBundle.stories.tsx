@@ -149,6 +149,17 @@ export default {
 			},
 			control: { type: 'text' },
 		},
+		hideSeedText: {
+			description: 'Hide seed product badge text',
+			defaultValue: false,
+			table: {
+				type: {
+					summary: 'boolean',
+				},
+				defaultValue: { summary: false },
+			},
+			control: { type: 'boolean' },
+		},
 		hideSeed: {
 			description: 'Hide/show seed result',
 			defaultValue: false,

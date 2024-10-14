@@ -163,6 +163,17 @@ export default {
 			},
 			control: { type: 'text' },
 		},
+		hideShowMoreLessText: {
+			defaultValue: false,
+			description: 'hide show more / show less text',
+			table: {
+				type: {
+					summary: 'boolean',
+				},
+				defaultValue: { summary: false },
+			},
+			control: { type: 'boolean' },
+		},
 		iconOverflowMore: {
 			defaultValue: 'plus',
 			description: 'Icon for when facet can show more',

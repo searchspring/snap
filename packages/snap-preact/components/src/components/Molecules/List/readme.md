@@ -70,6 +70,13 @@ The `titleText` prop is will render a title element
 <List options={store.options} titleText={'Per Page'} />
 ```
 
+### hideTitleText
+The `hideTitleText` prop is will hide the title element
+
+```jsx
+<List options={store.options} titleText={'Per Page'} hideTitleText={true} />
+```
+
 ### disabled
 The `disabled` prop will put the inputs in a disabled state.
 

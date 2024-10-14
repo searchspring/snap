@@ -99,7 +99,7 @@ export default {
 			},
 			control: { type: 'text' },
 		},
-		subTitleText: {
+		subtitleText: {
 			description: 'Search Subtitle Text',
 			table: {
 				type: {
@@ -137,6 +137,56 @@ export default {
 				defaultValue: { summary: 'Did you mean <a href=${search?.didYouMean?.url.href}>${search?.didYouMean?.string}</a>?' },
 			},
 			control: { type: 'text' },
+		},
+		hideTitleText: {
+			description: 'Hide title title',
+			table: {
+				type: {
+					summary: 'boolean',
+				},
+				defaultValue: { summary: false },
+			},
+			control: { type: 'boolean' },
+		},
+		hideSubtitleText: {
+			description: 'Hide subtitle',
+			table: {
+				type: {
+					summary: 'boolean',
+				},
+				defaultValue: { summary: false },
+			},
+			control: { type: 'boolean' },
+		},
+		hideCorrectedQueryText: {
+			description: 'Hide CorrectedQuery Text',
+			table: {
+				type: {
+					summary: 'boolean',
+				},
+				defaultValue: { summary: false },
+			},
+			control: { type: 'boolean' },
+		},
+		hideNoResultsText: {
+			description: 'Hide No Results Text',
+			table: {
+				type: {
+					summary: 'boolean',
+				},
+				defaultValue: { summary: false },
+			},
+			control: { type: 'boolean' },
+		},
+		hideDidYouMeanText: {
+			description: 'Hide Did You Mean Text',
+			table: {
+				type: {
+					summary: 'boolean',
+				},
+				defaultValue: { summary: false },
+			},
+			control: { type: 'boolean' },
 		},
 		...componentArgs,
 	},

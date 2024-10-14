@@ -433,6 +433,15 @@ describe('List Component', () => {
 		expect(titleElem).toHaveTextContent(title);
 	});
 
+	it('can hide the titleText', () => {
+		const title = 'My Title';
+		const rendered = render(<List hideTitleText={true} titleText={title} options={options} />);
+
+		const titleElem = rendered.container.querySelector('.ss__list__title');
+
+		expect(titleElem).not.toBeInTheDocument();
+	});
+
 	describe('List lang works', () => {
 		const selector = '.ss__list';
 
