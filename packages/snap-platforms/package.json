@@ -29,6 +29,11 @@
 		"dist/**/*"
 	],
 	"exports": {
+		"./common": {
+			"types": "./dist/esm/common/src/index.d.ts",
+			"import": "./dist/esm/common/src/index.js",
+			"require": "./dist/cjs/common/src/index.js"
+		},
 		"./shopify": {
 			"types": "./dist/esm/shopify/src/index.d.ts",
 			"import": "./dist/esm/shopify/src/index.js",
