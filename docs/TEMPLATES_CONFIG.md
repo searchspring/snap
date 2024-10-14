@@ -1,31 +1,18 @@
-## Templates
-
-Snap Templates is an alternative method of creating a Searchspring integration. The documentation in this 'Templates' section is only applicable if you are utilizing the `SnapTemplates` export. While there is overlap across other pages in the documentation, this section aims to outline the differences.
-
-```jsx
-import { SnapTemplates } from '@searchspring/snap-preact';
-```
-
-Snap and Snap Templates offer different approaches to creating a Searchspring integration. While Snap offers more flexibility, Snap Templates provides a streamlined solution for those seeking a faster integration process with pre-designed, customizable templates.
-
-Standard Snap:
-  - Provides full control over the configuration and component tree
-  - Allows for custom component creation and arrangement
-  - Requires more development effort and expertise
-
-Snap Templates:
-  - Utilizes pre-built, Searchspring-managed templates and themes
-  - Enables rapid integration and customization
-  - Leverages Snap's existing [library of components](https://github.com/searchspring/snap/tree/main/packages/snap-preact-components)
-  - Requires less development effort, ideal for quick implementations
-  - Offers a more guided, configuration-based approach
-  - Allows for some customization through theming and overrides
-
-
-
 ## Templates Config
 
-Snap templates is entirely configuration based. The configuration defines which features are enabled and which template and theme they utilize.
+Snap templates is entirely configuration based. The configuration defines which features are enabled and which template and theme they utilize. A configuration will consist of several top level groups that together define the template.
+
+| Configuration Key | Description |
+|----|-----------------------|
+| `config` | Global configuration options |
+| `components` | Custom component registration |
+| `translations` | Custom language translations |
+| `url` | URL translator configuration |
+| `features` | Integration feature configuration |
+| `themes` | Theme configuration |
+| `search` | Search feature target declarations |
+| `autocomplete` | Autocomplete feature target declarations |
+| `recommendation` | Recommendation feature target declarations |
 
 Here is a minimal example starting configuration to enable search and autocomplete using the `bocachica` theme.
 
@@ -64,18 +51,19 @@ new SnapTemplates({
 ```
 
 
-### Config
+### Templates Config
 
-| Configuration Option | Description | Type | Default |
-|----------------------|-------------|------|---------|
-| `config` | Global configuration options | Object | - |
-| `config.siteId` | Searchspring Site ID | String | - |
-| `config.language` | Language code for localization | String | 'en' |
-| `config.currency` | Currency code for pricing | String | 'usd' |
+| Configuration Option | Description | Type | Default | Required |
+|----------------------|-------------|------|:---------:|:---------:|
+| `config` | Global configuration options | Object | ➖ | ✔️ |
+| `config.platform` | Shopping platform for the integration | String | 'other' | ✔️ |
+| `config.siteId` | Searchspring Site ID | String | ➖ | ➖ |
+| `config.language` | Language code for localization | String | 'en' | ➖ |
+| `config.currency` | Currency code for pricing | String | 'usd' | ➖ |
 
-The `config` object defines the Searchspring siteId and current localization to be used. 
+The `config` object defines the integration platform, Searchspring siteId and current localization to be used. 
 
-If a `siteId` is not provided, the siteId found on the `bundle.js` url path will be used. For example `8uyt2m` will be used if the page contains the following script and siteId is omitted from `config.siteId`:
+If a `siteId` is not provided, the siteId found on the `bundle.js` url path will be used. For example `8uyt2m` will be used if the page contains the following script:
 
 ```
 <script src="https://snapui.searchspring.io/8uyt2m/bundle.js" id="searchspring-context"></script>
@@ -86,30 +74,32 @@ It is possible to switch language and currency at run-time using methods on the 
 - `window.searchspring.templates.setLanguage('fr')`
 
 
-### Platform Middleware
-The `platform` object allows you to configure platform-specific middleware. By default when platform is set to `shopify`, `bigcommerce`, `magento2` or `common`, the following middleware are enabled by default:
+### Plugins
+Plugins provide functionality to tie into various events within the Snap controllers by adding middleware on these events. The `plugins` object allows you to use and configure various plugins that are available within Snap Templates. Plugin configuration are grouped by the integration platform, `common` (apply to all platforms), `shopify`, `bigcommerce` and `magento2`.
 
 | Configuration Option | Description | Type | Default |
 |----------------------|-------------|------|---------|
-| `platform` | Platform-specific middleware configurations | Object | - |
-| `platform[platform]` | Platform-specific configurations | Object | - |
-| `platform[platform].backgroundFilters` | Background filter configurations | Object | Enabled |
-| `platform[platform].scrollToTop` | Configuration for scrolling to top after search | Object | Enabled |
-| `platform[platform].storeLogger` | Configuration for store logging | Object | Enabled |
-
-*Note*: When `shopify`, `bigcommerce` or `magento2` is defined as the platform, additional middleware is automatically applied in SnapTemplates to handle platform specific context variables from the Searchspring installation script block. The script context also supports defining generic `backgroundFilters` and does not require defining a platform to be defined.
+| `plugins` | Platform-specific plugin configurations | Object | ➖ |
+| `plugins.common` | Platform-specific configurations | Object | ➖ |
+| `plugins.common.backgroundFilters` | Background filter configurations | Object | Enabled |
+| `plugins.common.scrollToTop` | Configuration for scrolling to top after search | Object | Enabled |
 
 
 #### backgroundFilters
 Allows you to set up background filters. You can configure filters for tags, collections, or other fields.
 
-| Configuration Option | Description | Type | Default |
+> [!NOTE]
+> The common backgroundFilters plugin provides a generic manual way of setting background filters; however, when `shopify`, `bigcommerce` or `magento2` are defined in the `config.platform`, additional plugins are attached to handle platform specific functionality, for example, setting `backgroundFilters`.
+
+| Configuration Option | Description | Type | Required |
 |----------------------|-------------|------|---------|
-| `platform[platform].backgroundFilters` | Background filter configurations | Object | - |
-| `platform[platform].backgroundFilters.filters[]` | Background filter definitions | Array | - |
-| `platform[platform].backgroundFilters.filters[].type` | Defines if filter should be 'value' or 'range' type | 'value' | 'range' | true |
-| `platform[platform].backgroundFilters.filters[].field` | Defines filter field name | string | - |
-| `platform[platform].backgroundFilters.filters[].value` | Defines filter value. If `type` is 'value', this must be a string, otherwise if `type` is 'range', this must be an object with `low` and `high` properties | string \| { low: number, high: number } | - |
+| `plugins.common.backgroundFilters` | Background filter configurations | Object | ➖ |
+| `plugins.common.backgroundFilters.filters[]` | Background filter definitions | Array | ➖ |
+| `plugins.common.backgroundFilters.filters[].type` | Defines if filter should be 'value' or 'range' type | 'value' \| 'range' | ✔️ |
+| `plugins.common.backgroundFilters.filters[].field` | Defines filter field name | string | ✔️ |
+| `plugins.common.backgroundFilters.filters[].value` | Defines filter value. If `type` is 'value', this must be a string, otherwise if `type` is 'range', this must be an object with `low` and `high` properties | string \| { low: number, high: number } | ✔️ |
+| `plugins.common.backgroundFilters.filters[].controllerIds` | Defines which controllers the filter should apply to | (string \| regexp)[]  | ➖ |
+| `plugins.common.backgroundFilters.filters[].controllerType` | Defines which controller types the filter should apply to | (string)[] | ➖ |
 
 ```jsx
 platform: {
@@ -141,16 +131,17 @@ platform: {
 ```
 
 #### scrollToTop
-Configures the behavior of scrolling to the top of the page upon the 'afterStore' event
+Configures the behavior of scrolling to the top of the page after a search has occurred.
 
-*Note*: Only applicable to SearchController (search feature target for search and category pages)
+> [!NOTE]
+> This plugin only applies to search and category pages (search controllers)
 
 | Configuration Option | Description | Type | Default |
 |----------------------|-------------|------|---------|
-| `platform[platform].scrollToTop` | Scroll to top middleware configuration | Object | - |
-| `platform[platform].scrollToTop.enabled` | Enables middleware | boolean | true |
-| `platform[platform].scrollToTop.selector` | Query selector to scroll to | string | - |
-| `platform[platform].scrollToTop.options` | [`window.scroll` options configuration](https://developer.mozilla.org/en-US/docs/Web/API/Window/scroll#options) | Object | `{ top: 0, left: 0, behavior: 'smooth' }` |
+| `platform.common.scrollToTop` | Scroll to top plugin configuration | Object | ➖ |
+| `platform.common.scrollToTop.enabled` | Enables plugin | boolean | true |
+| `platform.common.scrollToTop.selector` | Query selector to scroll to | string | 'body' |
+| `platform.common.scrollToTop.options` | [`window.scroll` options configuration](https://developer.mozilla.org/en-US/docs/Web/API/Window/scroll#options) | Object | `{ top: 0, left: 0, behavior: 'smooth' }` |
 
 ```jsx
 platform: {
@@ -168,36 +159,18 @@ platform: {
 }
 ```
 
-#### storeLogger
-Enables logging of the store upon the 'afterStore' event
+### Shopify Platform Plugin
+In addition when platform is `shopify`, the following plugins are available:
 
 | Configuration Option | Description | Type | Default |
 |----------------------|-------------|------|---------|
-| `platform[platform].storeLogger` | Store logger middleware configuration | Object | - |
-| `platform[platform].storeLogger.enabled` | Enables middleware | boolean | false |
-
-```jsx
-platform: {
-	common: {
-		storeLogger: {
-			enabled: true
-		}
-	}
-}
-```
-
-### Shopify Platform Middleware
-In addition when platform is `shopify`, the following middleware is available:
-
-| Configuration Option | Description | Type | Default |
-|----------------------|-------------|------|---------|
-| `platform.shopify.mutateResults` | Shopify Updating results configuration | Object | - |
-| `platform.shopify.mutateResults.url` | Results URL Mutation configuration | Object | - |
-| `platform.shopify.mutateResults.url.enabled` | Enables middleware | Object | - |
+| `plugins.shopify.mutateResults` | Shopify Updating results configuration | Object | ➖ |
+| `plugins.shopify.mutateResults.collectionInUrl` | Results URL Mutation configuration | Object | ➖ |
+| `plugins.shopify.mutateResults.collectionInUrl.enabled` | Enables middleware | Object | true |
 
 
 #### mutateResults
-Enables updating the URL with search results. Product urls will be prefixed with their category route. This also requires platform specific context variable `collection` to be defined.
+Enables updating the URL for products within search results; product URLs will be prefixed with their category route. The platform specific context variable `collection` must be provided for this functionality.
 
 ```jsx
 platform: {
@@ -216,9 +189,9 @@ platform: {
 
 | Configuration Option | Description | Type | Default |
 |----------------------|-------------|------|---------|
-| `translations` | Translation overrides | Object | - |
-| `translations[languageCode]` | Translation overrides for specific language code | Object | - |
-| `translations[languageCode][componentName]` | Translations for a specific component | Component Lang Object | - |
+| `translations` | Translation overrides | Object | ➖ |
+| `translations[languageCode]` | Translation overrides for specific language code | Object | ➖ |
+| `translations[languageCode][componentName]` | Translations for a specific component | Component Lang Object | ➖ |
 
 When defining a supported `config.language`, text translations are applied accross components in each template. It is possible to override these default text translations by using `config.translations`
 
@@ -266,9 +239,9 @@ Snap Templates was built to intentionally not support custom Preact components c
 
 | Configuration Option | Description | Type | Default |
 |----------------------|-------------|------|---------|
-| `components` | Custom component definitions | Object | - |
-| `components.badge[name]` | Custom badge component definition | Function (component) | - |
-| `components.result[name]` | Custom result component definition | Function (component) | - |
+| `components` | Custom component definitions | Object | ➖ |
+| `components.badge[name]` | Custom badge component definition | Function (component) | ➖ |
+| `components.result[name]` | Custom result component definition | Function (component) | ➖ |
 
 ```jsx
 import { SychronousCustomResult } from './components/Result';
@@ -291,7 +264,7 @@ new SnapTemplates({
 
 | Configuration Option | Description | Type | Default |
 |----------------------|-------------|------|---------|
-| `url` | UrlTranslator configuration | UrlTranslatorConfig Object | - |
+| `url` | UrlTranslator configuration | UrlTranslatorConfig Object | ➖ |
 
 See [UrlTranslator configuration](https://github.com/searchspring/snap/tree/main/packages/snap-url-manager/src/Translators/Url) for more documentation
 
@@ -300,7 +273,7 @@ See [UrlTranslator configuration](https://github.com/searchspring/snap/tree/main
 
 | Configuration Option | Description | Type | Default |
 |----------------------|-------------|------|---------|
-| `features` | Feature toggles | Object | - |
+| `features` | Feature toggles | Object | ➖ |
 | `features.integratedSpellCorrection.enabled` | Enable integrated spell correction | Boolean | true |
 
 
@@ -313,7 +286,7 @@ See [Theming](https://github.com/searchspring/snap/blob/main/docs/TEMPLATES_THEM
 |----------------------|-------------|------|---------|
 | `themes` | Theme configurations | Object | Required |
 | `themes.global` | Global theme configuration | Object | Required |
-| `themes[customTheme]` | Custom theme configuration | Object | - |
+| `themes[customTheme]` | Custom theme configuration | Object | ➖ |
 
 
 ### Feature Targets
@@ -339,7 +312,7 @@ In addition to the common target properties, the following properties apply to t
 
 | Configuration Option | Description | Type | Default |
 |----------------------|-------------|------|---------|
-| `search` | Search configuration | Object | - |
+| `search` | Search configuration | Object | ➖ |
 | `search.targets` | Search target configurations | Array | Required |
 | `search.targets[].selector` | CSS selector for search target | String | Required |
 | `search.targets[].component` | Component to use for search | String | Required |
@@ -356,7 +329,7 @@ In addition to the common target properties, the following properties apply to t
 
 | Configuration Option | Description | Type | Default |
 |----------------------|-------------|------|---------|
-| `autocomplete` | Autocomplete configuration | Object | - |
+| `autocomplete` | Autocomplete configuration | Object | ➖ |
 | `autocomplete.inputSelector` | CSS selector for autocomplete input | String | Required |
 | `autocomplete.targets` | Autocomplete target configurations | Array | Required |
 | `autocomplete.targets[].selector` | CSS selector for autocomplete target | String | Required |
@@ -371,8 +344,8 @@ In addition to the defining recommendation targets, the recommendation configura
 
 | Configuration Option | Description | Type | Default |
 |----------------------|-------------|------|---------|
-| `recommendation` | Recommendation configuration | Object | - |
-| `recommendation.settings` | Recommendation Instantiator Config Settings | RecommendationInstantiatorConfigSettings | - |
+| `recommendation` | Recommendation configuration | Object | ➖ |
+| `recommendation.settings` | Recommendation Instantiator Config Settings | RecommendationInstantiatorConfigSettings | ➖ |
 
 
 There are three types of recommendations:
@@ -388,8 +361,8 @@ Standard product recommendation typically rendered in a carousel
 
 | Configuration Option | Description | Type | Default |
 |----------------------|-------------|------|---------|
-| `recommendation.default` | Default recommendation configurations | Object | - |
-| `recommendation.default[profileComponentName]` | Configuration for a specific default recommendation profile | Object | - |
+| `recommendation.default` | Default recommendation configurations | Object | ➖ |
+| `recommendation.default[profileComponentName]` | Configuration for a specific default recommendation profile | Object | ➖ |
 | `recommendation.default[profileComponentName].component` | Component to use for default recommendation | String | 'Recommendation' |
 | `recommendation.default[profileComponentName].resultComponent` | Custom result component for default recommendation | String | 'Result' |
 | `recommendation.default[profileComponentName].theme` | Theme to use for default recommendation | String | 'global' |
@@ -401,8 +374,8 @@ Product recommendations that require and include a seed product sku.
 
 | Configuration Option | Description | Type | Default |
 |----------------------|-------------|------|---------|
-| `recommendation.bundle` | Bundle recommendation configurations | Object | - |
-| `recommendation.bundle[profileComponentName]` | Configuration for a specific bundle recommendation profile | Object | - |
+| `recommendation.bundle` | Bundle recommendation configurations | Object | ➖ |
+| `recommendation.bundle[profileComponentName]` | Configuration for a specific bundle recommendation profile | Object | ➖ |
 | `recommendation.bundle[profileComponentName].component` | Component to use for bundle recommendation | String | 'RecommendationBundle' |
 | `recommendation.bundle[profileComponentName].resultComponent` | Custom result component for bundle recommendation | String | 'Result' |
 | `recommendation.bundle[profileComponentName].theme` | Theme to use for bundle recommendation | String | 'global' |
@@ -414,8 +387,8 @@ Product recommendations for external email campaigns. Email recommendations are 
 
 | Configuration Option | Description | Type | Default |
 |----------------------|-------------|------|---------|
-| `recommendation.email` | Email recommendation configurations | Object | - |
-| `recommendation.email[profileComponentName]` | Configuration for a specific email recommendation profile | Object | - |
+| `recommendation.email` | Email recommendation configurations | Object | ➖ |
+| `recommendation.email[profileComponentName]` | Configuration for a specific email recommendation profile | Object | ➖ |
 | `recommendation.email[profileComponentName].component` | Component to use for email recommendation | String | 'RecommendationEmail' |
 | `recommendation.email[profileComponentName].resultComponent` | Custom result component for email recommendation | String | 'Result' |
 | `recommendation.email[profileComponentName].theme` | Theme to use for email recommendation | String | 'global' |

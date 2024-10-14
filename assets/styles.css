@@ -42,6 +42,7 @@ table {
 	border-radius: 3px;
 	width: 100%;
 	box-shadow: 0 0 1px rgb(0 0 0 / 35%);
+	margin-bottom: 1em;
 }
 
 table thead {
@@ -170,6 +171,79 @@ table td {
     padding-bottom: 5px;
 	font-size: 2em;
 	margin-top: 0px;
+}
+
+.markdown-alert {
+	padding: .5em 1em;
+	margin: 1em 0;
+	color: inherit;
+	border-left: .25em solid #ccc;
+}
+
+.markdown-alert>:first-child {
+	margin-top: 0;
+}
+
+.markdown-alert>:last-child {
+	margin-bottom: 0;
+}
+
+.markdown-alert .markdown-alert-title {
+	display: flex;
+	font-weight: bold;
+	align-items: center;
+	line-height: 1;
+}
+
+.markdown-alert.markdown-alert-note {
+	border-left-color: #382F5A;
+	background-color: #f0eef6;
+}
+.markdown-alert.markdown-alert-note .markdown-alert-title {
+	color: #382F5A;
+}
+
+.markdown-alert.markdown-alert-tip {
+	border-left-color: #00CEE1;
+	background-color: #e5fdff;
+}
+.markdown-alert.markdown-alert-tip .markdown-alert-title {
+	color: #00CEE1;
+}
+
+.markdown-alert.markdown-alert-important {
+	border-left-color: #8F6CF6;
+	background-color: #ede7fd;
+}
+.markdown-alert.markdown-alert-important .markdown-alert-title {
+	color: #8F6CF6;
+}
+
+.markdown-alert.markdown-alert-warning {
+	border-left-color: #9a6700;
+	background-color: #fff7e5;
+}
+.markdown-alert.markdown-alert-warning .markdown-alert-title {
+	color: #9a6700;
+}
+
+.markdown-alert.markdown-alert-caution {
+	border-left-color: #d1242f;
+	background-color: #fbe9ea;
+}
+.markdown-alert.markdown-alert-caution .markdown-alert-title {
+	color: #d1242f;
+}
+
+.octicon {
+	display: inline-block;
+	overflow: visible !important;
+	vertical-align: text-bottom;
+	fill: currentColor;
+}
+
+.mr-2 {
+	margin-right: .5em !important;
 }
 
 #content iframe {
