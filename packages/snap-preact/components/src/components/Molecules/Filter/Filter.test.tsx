@@ -152,13 +152,11 @@ describe('Filter Component', () => {
 			const langOptions = ['filter'];
 
 			//text attributes/values
-			const value = 'custom value';
 			const altText = 'custom alt';
 			const ariaLabel = 'custom label';
 			const ariaValueText = 'custom value text';
 			const title = 'custom title';
 
-			const valueMock = jest.fn(() => value);
 			const altMock = jest.fn(() => altText);
 			const labelMock = jest.fn(() => ariaLabel);
 			const valueTextMock = jest.fn(() => ariaValueText);
@@ -166,7 +164,6 @@ describe('Filter Component', () => {
 
 			const langObjs = [
 				{
-					value: value,
 					attributes: {
 						alt: altText,
 						'aria-label': ariaLabel,
@@ -175,7 +172,6 @@ describe('Filter Component', () => {
 					},
 				},
 				{
-					value: valueMock,
 					attributes: {
 						alt: altMock,
 						'aria-label': labelMock,
@@ -184,7 +180,6 @@ describe('Filter Component', () => {
 					},
 				},
 				{
-					value: `<div>${value}</div>`,
 					attributes: {
 						alt: altText,
 						'aria-label': ariaLabel,
@@ -208,16 +203,6 @@ describe('Filter Component', () => {
 					const langElem = rendered.container.querySelector(`[ss-lang=${option}]`);
 
 					expect(langElem).toBeInTheDocument();
-					if (typeof langObj.value == 'function') {
-						expect(langElem?.innerHTML).toBe(value);
-
-						expect(valueMock).toHaveBeenCalledWith({
-							label: args.facetLabel,
-							value: args.valueLabel,
-						});
-					} else {
-						expect(langElem?.innerHTML).toBe(langObj.value);
-					}
 
 					expect(langElem).toHaveAttribute('alt', altText);
 					expect(langElem).toHaveAttribute('aria-label', ariaLabel);

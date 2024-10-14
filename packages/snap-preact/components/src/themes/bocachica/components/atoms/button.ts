@@ -12,6 +12,8 @@ const buttonStyleScript = ({ color, backgroundColor, borderColor, theme }: Butto
 
 	return css({
 		display: 'inline-flex',
+		alignItems: 'center',
+		gap: '5px',
 		padding: '5px 10px',
 		position: 'relative',
 		color: colour.hex(),
@@ -35,11 +37,11 @@ const buttonStyleScript = ({ color, backgroundColor, borderColor, theme }: Butto
 				cursor: 'default',
 			},
 		},
-		'.ss__icon': {
-			marginLeft: '10px',
-		},
 		'.ss__button__content': {
 			width: '100%',
+		},
+		label: {
+			cursor: 'pointer',
 		},
 	});
 };

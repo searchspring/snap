@@ -7,6 +7,7 @@ export const defaultTheme: Theme = {
 	variables: {
 		breakpoints: [540, 767, 1200],
 		colors: {
+			text: '#222222',
 			primary: '#3A23AD',
 			secondary: '#4c3ce2',
 			accent: '#00cee1',
@@ -16,6 +17,7 @@ export const defaultTheme: Theme = {
 
 type ThemeVariableBreakpoints = [number, number, number];
 type ThemeVaraibleColors = {
+	text?: string;
 	primary: string;
 	secondary: string;
 	accent: string;

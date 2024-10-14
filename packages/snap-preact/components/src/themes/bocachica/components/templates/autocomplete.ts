@@ -31,7 +31,6 @@ const autocompleteStyleScript = ({
 		maxWidth: '100vw',
 		maxHeight: viewportMaxHeight && inputViewportOffsetBottom ? `calc(100vh - ${inputViewportOffsetBottom + 10}px)` : undefined,
 		overflowY: viewportMaxHeight && horizontalTerms && !vertical ? 'scroll' : undefined,
-		padding: '0 20px',
 
 		'&.ss__autocomplete--only-terms': {
 			width: `${vertical || horizontalTerms || contentSlotExists ? width : '150px'}`,
@@ -43,8 +42,7 @@ const autocompleteStyleScript = ({
 			color: variables?.colors?.secondary || '#c5c5c5',
 			textTransform: 'uppercase',
 			padding: '10px',
-			'& h5': {
-				fontSize: '.8em',
+			h5: {
 				margin: 0,
 			},
 		},
@@ -53,7 +51,7 @@ const autocompleteStyleScript = ({
 			order: vertical ? 2 : undefined,
 		},
 
-		'& .ss__autocomplete__terms': {
+		'.ss__autocomplete__terms': {
 			display: 'flex',
 			flexDirection: 'column',
 			flex: `1 1 auto`,
@@ -63,26 +61,26 @@ const autocompleteStyleScript = ({
 			background: '#fff',
 			borderBottom: vertical ? `1px solid ${variables?.colors?.primary || '#333'}` : undefined,
 
-			'& .ss__autocomplete__terms__options': {
+			'.ss__autocomplete__terms__options': {
 				display: vertical || horizontalTerms ? 'flex' : undefined,
 				flexWrap: 'wrap',
 
-				'& .ss__autocomplete__terms__option': {
+				'.ss__autocomplete__terms__option': {
 					textAlign: vertical || horizontalTerms ? 'center' : undefined,
 					wordBreak: 'break-all',
 
-					'& a': {
+					a: {
 						display: 'block',
-						padding: '10px',
-						color: variables?.colors?.primary,
+						padding: '5px 10px',
+						color: variables?.colors?.secondary,
 
-						'& em': {
+						em: {
 							fontStyle: 'normal',
 						},
 					},
 
 					'&.ss__autocomplete__terms__option--active': {
-						'& a': {
+						a: {
 							fontWeight: 'bold',
 						},
 					},
@@ -90,38 +88,44 @@ const autocompleteStyleScript = ({
 			},
 		},
 
-		'& .ss__autocomplete__facets': {
+		'.ss__facet__header, h5': {
+			color: variables?.colors?.primary,
+			textTransform: 'uppercase',
+			margin: '0 0 20px 0',
+			lineHeight: 1.2,
+			fontSize: '14px',
+		},
+
+		'.ss__autocomplete__facets': {
 			display: 'flex',
-			flex: `0 0 ${vertical ? 'auto' : '200px'}`,
+			flex: `0 0 150px`,
 			flexDirection: vertical ? 'row' : 'column',
 			columnGap: '20px',
 			order: 2,
 			padding: vertical ? '10px 20px' : '10px',
 			overflowY: vertical ? undefined : 'auto',
-			borderBottom: vertical ? `1px solid ${variables?.colors?.primary || '#333'}` : undefined,
 
-			'& .ss__facet-palette-options, .ss__facet-grid-options': {
+			'.ss__facets': {
+				display: 'flex',
+				flexDirection: vertical ? 'row' : 'column',
+				columnGap: '20px',
+			},
+
+			'.ss__facet': {
+				margin: vertical ? '0 20px 0 0' : undefined,
+				flex: vertical ? '0 1 150px' : undefined,
+			},
+
+			'.ss__facet-palette-options, .ss__facet-grid-options': {
 				gridTemplateColumns: 'repeat(auto-fill, minmax(36px, 1fr))',
 			},
 
-			'& .ss__facet': {
-				margin: vertical ? '0 20px 0 0' : undefined,
-			},
-
-			'& .ss__facet__header': {
-				color: variables?.colors?.primary,
-				textTransform: 'uppercase',
-			},
-
-			'& .ss__facet__options': {
+			'.ss__facet__options': {
 				maxHeight: '250px',
 			},
 
-			'& .ss__facet-list-options__option__value': {
+			'.ss__facet-list-options__option__value': {
 				textAlign: 'left',
-			},
-			'& .ss__autocomplete__facet': {
-				flex: vertical ? '0 1 150px' : undefined,
 			},
 			'.ss__facet-hierarchy-options__option.ss__facet-hierarchy-options__option--filtered~.ss__facet-hierarchy-options__option:not(.ss__facet-hierarchy-options__option--filtered)':
 				{
@@ -134,7 +138,7 @@ const autocompleteStyleScript = ({
 				display: 'none',
 			},
 		},
-		'& .ss__autocomplete__content': {
+		'.ss__autocomplete__content': {
 			display: 'flex',
 			flex: `1 1 ${hideFacets ? 'auto' : '0%'}`,
 			flexDirection: 'column',
@@ -144,25 +148,25 @@ const autocompleteStyleScript = ({
 			margin: noResults ? '0 auto' : undefined,
 			padding: vertical ? '10px 20px' : '10px',
 
-			'& .ss__banner.ss__banner--header, .ss__banner.ss__banner--banner': {
+			'.ss__banner.ss__banner--header, .ss__banner.ss__banner--banner': {
 				marginBottom: '10px',
 			},
-			'& .ss__banner.ss__banner--footer': {
+			'.ss__banner.ss__banner--footer': {
 				margin: '10px 0',
 			},
-			'& .ss__autocomplete__content__results': {
+			'.ss__autocomplete__content__results': {
 				minHeight: '0%',
 			},
-			'& .ss__autocomplete__content__info': {
+			'.ss__autocomplete__content__info': {
 				padding: '10px',
-				textAlign: noResults ? 'center' : 'left',
+				textAlign: noResults ? 'center' : 'right',
 
-				'& a': {
+				a: {
 					fontWeight: 'bold',
 					textTransform: 'uppercase',
 					color: variables?.colors?.primary,
 
-					'& .ss__icon': {
+					'.ss__icon': {
 						marginLeft: '5px',
 					},
 				},
@@ -174,6 +178,7 @@ const autocompleteStyleScript = ({
 // Autocomplete component props
 export const autocomplete: Partial<AutocompleteProps> = {
 	styleScript: autocompleteStyleScript,
+	trendingTitle: 'Popular',
 	theme: {
 		components: {
 			facet: {
@@ -182,10 +187,10 @@ export const autocomplete: Partial<AutocompleteProps> = {
 				disableCollapse: true,
 			},
 			facets: {
-				limit: 3,
+				limit: 2,
 			},
 			facetGridOptions: {
-				columns: 4,
+				columns: 3,
 			},
 			facetHierarchyOptions: {
 				hideCount: true,
@@ -200,6 +205,7 @@ export const autocomplete: Partial<AutocompleteProps> = {
 			},
 			results: {
 				columns: 2,
+				rows: 1,
 			},
 			result: {
 				hideBadge: true,

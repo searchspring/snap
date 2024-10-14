@@ -10,19 +10,19 @@ import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { ComponentProps, RootNodeProperties, ListOption, SwatchOption } from '../../../types';
 import { Lang, useA11y, useLang } from '../../../hooks';
 import { Image, ImageProps } from '../../Atoms/Image';
-import { cloneWithProps, defined } from '../../../utilities';
+import { cloneWithProps, defined, mergeProps } from '../../../utilities';
 
 const CSS = {
 	Grid: ({ theme, columns, gapSize, disableOverflowAction }: Partial<GridProps>) =>
 		css({
-			'& .ss__grid__options': {
+			'.ss__grid__options': {
 				display: 'flex',
 				flexFlow: 'row wrap',
 				gridTemplateColumns: `repeat(${columns}, 1fr)`,
 				gap: gapSize,
 				gridAutoRows: `1fr`,
 
-				'& .ss__grid__option': {
+				'.ss__grid__option': {
 					display: 'flex',
 					flexDirection: 'column',
 					boxSizing: 'content-box',
@@ -82,7 +82,7 @@ const CSS = {
 				'@supports (display: grid)': {
 					display: 'grid',
 
-					'& .ss__grid__option': {
+					'.ss__grid__option': {
 						padding: '0',
 						margin: '0',
 						width: 'initial',
@@ -101,7 +101,10 @@ const CSS = {
 				},
 			},
 
-			'& .ss__grid__show-more-wrapper': {
+			'.ss__grid__show-more-wrapper': {
+				'&:not(.ss__grid__option)': {
+					margin: '8px',
+				},
 				'&:hover': {
 					cursor: disableOverflowAction ? 'initial !important' : 'pointer !important',
 				},
@@ -111,19 +114,15 @@ const CSS = {
 
 export function Grid(properties: GridProps): JSX.Element {
 	const globalTheme: Theme = useTheme();
-	const theme = { ...globalTheme, ...properties.theme };
 
-	const props: GridProps = {
+	const defaultProps: Partial<GridProps> = {
 		// default props
 		multiSelect: false,
 		columns: 4,
 		gapSize: '8px',
-		// global theme
-		...globalTheme?.components?.grid,
-		// props
-		...properties,
-		...properties.theme?.components?.grid,
 	};
+
+	const props = mergeProps('grid', globalTheme, defaultProps, properties);
 
 	const {
 		titleText,
@@ -135,7 +134,6 @@ export function Grid(properties: GridProps): JSX.Element {
 		columns,
 		rows,
 		hideShowLess,
-		gapSize,
 		overflowButtonInGrid,
 		disabled,
 		options,
@@ -143,13 +141,14 @@ export function Grid(properties: GridProps): JSX.Element {
 		onOverflowButtonClick,
 		className,
 		style,
+		styleScript,
 		treePath,
 	} = props;
 
 	const subProps: GridSubProps = {
 		image: {
 			// default props
-			className: 'ss__swatches__Image',
+			className: 'ss__grid__image',
 			// global theme
 			...globalTheme?.components?.image,
 			// inherited props
@@ -165,8 +164,12 @@ export function Grid(properties: GridProps): JSX.Element {
 	let selected = props.selected;
 
 	const styling: RootNodeProperties = { 'ss-name': props.name };
-	if (!disableStyles) {
-		styling.css = [CSS.Grid({ theme, columns, gapSize, disableOverflowAction }), style];
+	const stylingProps = props;
+
+	if (styleScript && !disableStyles) {
+		styling.css = [styleScript(stylingProps), style];
+	} else if (!disableStyles) {
+		styling.css = [CSS.Grid(stylingProps), style];
 	} else if (style) {
 		styling.css = [style];
 	}
@@ -223,18 +226,18 @@ export function Grid(properties: GridProps): JSX.Element {
 	const limit = rows && columns ? columns * rows : options.length;
 	const remainder = Math.max(0, options.length - (limit - (overflowButtonInGrid ? 1 : 0)));
 
-	const [limited, setLimited] = useState<number | boolean>(remainder);
+	const [limited, setLimited] = useState<boolean>(!!remainder);
 
 	const OverflowButtonElem = () => {
-		const showButton = hideShowLess ? (!limited ? false : true) : true;
+		const showButton = hideShowLess ? limited : true;
 
 		//initialize lang
 		const defaultLang = {
 			showMoreText: {
-				value: `+ ${remainder}`,
+				value: overflowButtonInGrid ? `+ ${remainder}` : 'Show More',
 			},
 			showLessText: {
-				value: 'Less',
+				value: overflowButtonInGrid ? `- ${remainder}` : 'Show Less',
 			},
 		};
 
@@ -281,7 +284,7 @@ export function Grid(properties: GridProps): JSX.Element {
 						if (!limited || options.length == limit || idx < limit - (overflowButtonInGrid ? 1 : 0)) {
 							return (
 								<div
-									className={classnames(`ss__grid__option ss__grid__option--${filters.handleize(option.value.toString())}`, {
+									className={classnames(`ss__grid__option ss__grid__option-value--${filters.handleize(option.value.toString())}`, {
 										'ss__grid__option--selected': selected,
 										'ss__grid__option--disabled': option?.disabled,
 										'ss__grid__option--unavailable': option?.available === false,
@@ -289,7 +292,7 @@ export function Grid(properties: GridProps): JSX.Element {
 									style={{ background: option.background ? option.background : option.backgroundImageUrl ? undefined : option.value }}
 									onClick={(e) => !disabled && !option?.disabled && makeSelection(e as any, option)}
 									ref={(e) => useA11y(e)}
-									title={option.label}
+									title={option.label || option.value.toString()}
 									role="option"
 									aria-selected={selected}
 								>
@@ -335,12 +338,14 @@ export interface GridProps extends ComponentProps {
 
 export interface GridLang {
 	showMoreText: Lang<{
-		limited: number | boolean;
+		limited: boolean;
 		remainder: number;
+		overflowButtonInGrid: boolean;
 	}>;
 	showLessText: Lang<{
-		limited: number | boolean;
+		limited: boolean;
 		remainder: number;
+		overflowButtonInGrid: boolean;
 	}>;
 }
 

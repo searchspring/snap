@@ -9,6 +9,8 @@ const layoutSelectorStyleScript = ({ theme }: LayoutSelectorProps) => {
 	return css({
 		'.ss__button__content': {
 			display: 'flex',
+			alignItems: 'center',
+			gap: '7px',
 		},
 		'.ss__list__option': {
 			color: `rgba(109,113,117,.2)`,

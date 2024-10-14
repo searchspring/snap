@@ -96,7 +96,7 @@ describe('MobileSidebar Component', () => {
 			title = rendered.container.querySelector('.ss__mobile-sidebar__header__title');
 			summary = rendered.container.querySelector('.ss__filter-summary');
 			sortby = rendered.container.querySelector('.ss__sortby__select');
-			perpage = rendered.container.querySelector('.ss__perpage__select');
+			perpage = rendered.container.querySelector('.ss__per-page__select');
 			facets = rendered.container.querySelector('.ss__facets');
 			expect(title).toBeInTheDocument();
 			expect(summary).toBeInTheDocument();

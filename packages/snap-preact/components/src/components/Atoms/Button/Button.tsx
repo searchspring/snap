@@ -19,6 +19,7 @@ const CSS = {
 
 		return css({
 			display: 'inline-flex',
+			alignItems: 'center',
 			padding: '5px 10px',
 			position: 'relative',
 			color: color || theme?.variables?.colors?.primary,
@@ -38,6 +39,9 @@ const CSS = {
 			},
 			'.ss__button__content': {
 				width: '100%',
+			},
+			label: {
+				cursor: 'pointer',
 			},
 		});
 	},
@@ -118,6 +122,7 @@ export const Button = observer((properties: ButtonProps): JSX.Element => {
 	//deep merge with props.lang
 	const langs = deepmerge(defaultLang, lang || {});
 	const mergedLang = useLang(langs as any, {});
+
 	return content || children || icon || lang?.button?.value ? (
 		<CacheProvider>
 			{native ? (

@@ -115,7 +115,7 @@ export const Filter = observer((properties: FilterProps): JSX.Element => {
 					onClick && onClick(e);
 				}}
 				href={link?.href}
-				{...mergedLang.filter?.all}
+				{...mergedLang.filter?.attributes}
 			>
 				<Button {...subProps.button} disableA11y={true}>
 					<Icon {...subProps.icon} {...(typeof icon == 'string' ? { icon: icon } : (icon as Partial<IconProps>))} />

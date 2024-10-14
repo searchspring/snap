@@ -125,7 +125,7 @@ export const FilterSummary = observer((properties: FilterSummaryProps): JSX.Elem
 						valueLabel={clearAllLabel}
 						onClick={(e) => onClearAllClick && onClearAllClick(e)}
 						lang={{
-							filter: lang.clearAllLabel,
+							filter: { attributes: { 'aria-label': clearAllLabel } },
 						}}
 					/>
 				)}

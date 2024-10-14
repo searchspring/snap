@@ -11,6 +11,10 @@ const facetPaletteStyleScript = ({ columns, horizontal, gapSize, gridSize, theme
 			: `repeat(auto-fill, minmax(${gridSize}, 1fr))`,
 		gap: gapSize,
 
+		a: {
+			color: theme?.variables?.colors?.text,
+		},
+
 		'.ss__facet-palette-options__option--list': {
 			display: 'flex',
 			flexDirection: 'row',

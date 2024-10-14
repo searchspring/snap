@@ -22,7 +22,7 @@ const CSS = {
 			justifyItems: 'flex-start',
 			gap: '5px',
 
-			'& .ss__list__options': {
+			'.ss__list__options': {
 				border: 'none',
 				listStyle: 'none',
 				padding: '0px',
@@ -40,7 +40,7 @@ const CSS = {
 				alignItems: 'center',
 				gap: '5px',
 
-				'& .ss__list__option__label , .ss__list__option__icon': {
+				'.ss__list__option__label , .ss__list__option__icon': {
 					cursor: 'pointer',
 				},
 			},
@@ -202,9 +202,9 @@ export function List(properties: ListProps): JSX.Element {
 		<CacheProvider>
 			<div {...styling} className={classnames('ss__list', disabled ? 'ss__list--disabled' : '', className)}>
 				{(titleText || lang?.title?.value) && (
-					<h5 className="ss__list__title" {...mergedLang.title?.all}>
+					<label className="ss__list__title" {...mergedLang.title?.all}>
 						{titleText}
-					</h5>
+					</label>
 				)}
 
 				<ul className={`ss__list__options`} role="listbox" aria-label={titleText}>

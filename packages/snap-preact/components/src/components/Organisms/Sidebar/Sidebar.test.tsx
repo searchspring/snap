@@ -61,7 +61,7 @@ describe('Sidebar Component', () => {
 		const title = rendered.container.querySelector('.ss__sidebar__title');
 		const summary = rendered.container.querySelector('.ss__filter-summary');
 		const sortby = rendered.container.querySelector('.ss__sortby__select');
-		const perpage = rendered.container.querySelector('.ss__perpage__select');
+		const perpage = rendered.container.querySelector('.ss__per-page__select');
 		const facets = rendered.container.querySelector('.ss__facets');
 
 		expect(title).toBeInTheDocument();

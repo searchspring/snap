@@ -9,6 +9,7 @@ const sortByStyleScript = ({ theme }: SortByProps) => {
 	return css({
 		'.ss__button__content': {
 			display: 'flex',
+			alignItems: 'center',
 			gap: '7px',
 		},
 	});

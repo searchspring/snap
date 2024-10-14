@@ -11,6 +11,7 @@ const listStyleScript = ({ horizontal, theme }: ListProps) => {
 		flexDirection: horizontal ? 'row' : 'column',
 		alignItems: horizontal ? 'center' : undefined,
 		justifyItems: 'flex-start',
+		gap: '8px',
 
 		'& .ss__list__options': {
 			border: 'none',

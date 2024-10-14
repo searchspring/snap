@@ -18,6 +18,7 @@ const CSS = {
 		css({
 			'.ss__button__content': {
 				display: 'flex',
+				alignItems: 'center',
 			},
 		}),
 };

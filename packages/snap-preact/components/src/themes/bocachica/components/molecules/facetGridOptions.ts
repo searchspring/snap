@@ -16,6 +16,10 @@ const facetGridOptionsStyleScript = ({ columns, gapSize, gridSize, theme }: Face
 		gap: gapSize,
 		gridAutoRows: `1fr`,
 
+		a: {
+			color: theme?.variables?.colors?.text,
+		},
+
 		'& .ss__facet-grid-options__option': {
 			display: 'flex',
 			justifyContent: 'center',

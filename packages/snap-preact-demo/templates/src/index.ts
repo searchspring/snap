@@ -40,7 +40,7 @@ new SnapTemplates({
 				selector: '#searchspring-layout',
 				// theme: 'myTheme',
 				component: 'Search',
-				// resultComponent: 'Result',
+				// resultComponent: 'CustomResult',
 			},
 		],
 	},
