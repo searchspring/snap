@@ -164,9 +164,16 @@ export class TemplatesStore {
 			window.addEventListener('resize', debouncedHandleResize);
 		}
 
+		// theme loading promise
+		this.loading = true;
+		const themePromises: Promise<void>[] = [];
+
 		// setup local themes
 		Object.keys(config.themes).map((themeKey) => {
 			const themeConfig = config.themes[themeKey];
+			// add promise
+			const themeDefer = new Deferred();
+			themePromises.push(themeDefer.promise);
 
 			// import component if defined
 			if (themeConfig.resultComponent && this.library.import.component.result[themeConfig.resultComponent]) {
@@ -196,7 +203,13 @@ export class TemplatesStore {
 					languageOverrides,
 					innerWidth: this.window.innerWidth,
 				});
+
+				themeDefer.resolve();
 			});
+		});
+
+		Promise.all(themePromises).then(() => {
+			this.loading = false;
 		});
 
 		makeObservable(this, {
@@ -351,4 +364,17 @@ export function transformTranslationsToTheme(translations: LangComponentOverride
 	return {
 		components,
 	};
+}
+
+class Deferred {
+	promise: Promise<any>;
+	resolve: any;
+	reject: any;
+
+	constructor() {
+		this.promise = new Promise((resolve, reject) => {
+			this.reject = reject;
+			this.resolve = resolve;
+		});
+	}
 }

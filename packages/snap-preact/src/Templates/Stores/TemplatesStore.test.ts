@@ -13,7 +13,7 @@ describe('TemplateStore', () => {
 		};
 		const store = new TemplatesStore({ config, settings: { editMode: true } });
 		expect(store).toBeDefined();
-		expect(store.loading).toBe(false);
+		expect(store.loading).toBe(true);
 		expect(store.config).toBe(config);
 		expect(store.language).toBe('en');
 		expect(store.currency).toBe('usd');
