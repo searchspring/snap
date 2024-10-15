@@ -152,6 +152,22 @@ describe('Facet Component', () => {
 			await waitFor(() => expect(facetElement).toHaveTextContent(args.showMoreText));
 		});
 
+		it('can hide show more/less text prop', async () => {
+			const args = {
+				facet: facetOverflowMock as ValueFacet,
+				showMoreText: 'Show More please',
+				showLessText: 'Show Less please',
+				hideShowMoreLessText: true,
+			};
+			// @ts-ignore - readonly
+			args.facet.refinedValues = args.facet.values;
+			const rendered = render(<Facet {...args} />);
+			const facetElement = rendered.container.querySelector('.ss__facet__show-more-less')!;
+			expect(facetElement).toBeInTheDocument();
+			expect(facetElement).not.toHaveTextContent(args.showMoreText);
+			expect(facetElement).not.toHaveTextContent(args.showLessText);
+		});
+
 		it('renders with specified icons', async () => {
 			const args: FacetProps = {
 				facet: facetOverflowMock as ValueFacet,

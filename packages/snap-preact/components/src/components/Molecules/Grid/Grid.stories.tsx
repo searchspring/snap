@@ -293,6 +293,7 @@ backgroundColors.args = {
 		},
 	],
 	hideLabels: true,
+	columns: 5,
 	overflowButtonInGrid: true,
 	rows: 1,
 } as GridProps;

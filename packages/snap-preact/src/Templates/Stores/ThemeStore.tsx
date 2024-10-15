@@ -3,7 +3,7 @@ import { observable, makeObservable, toJS } from 'mobx';
 import deepmerge from 'deepmerge';
 import { isPlainObject } from 'is-plain-object';
 import { StorageStore } from '@searchspring/snap-store-mobx';
-import { TemplateThemeTypes, type TemplatesStoreSettings, type TemplatesStoreDependencies } from './TemplateStore';
+import { TemplateThemeTypes, type TemplatesStoreConfigSettings, type TemplatesStoreDependencies } from './TemplateStore';
 import { Global, css } from '@emotion/react';
 
 import { ThemeMinimal, ThemeVariablesPartial, type Theme, ThemePartial, ThemeOverrides } from '../../../components/src';
@@ -51,7 +51,7 @@ class SelectedLayout {
 type ThemeStoreConfig = {
 	config: ThemeStoreThemeConfig;
 	dependencies: TemplatesStoreDependencies;
-	settings: TemplatesStoreSettings;
+	settings: TemplatesStoreConfigSettings;
 };
 
 export class ThemeStore {
@@ -234,16 +234,14 @@ export function mergeThemeLayers(...layers: ThemePartial[]): ThemePartial {
 export function getOverridesAtWidth(width: number | undefined, breakpoints: number[], theme: ThemePartial): ThemePartial {
 	let overrides: ThemePartial = {};
 	if (width && Number.isInteger(width) && theme.responsive) {
-		const breakpoint = breakpoints.find((breakpoint) => width! < breakpoint);
+		const breakpoint = breakpoints.find((breakpoint) => width! <= breakpoint);
 
 		if (breakpoint) {
 			const breakpointIndex = breakpoints.indexOf(breakpoint);
-			const responsiveIndex = Math.max(breakpointIndex - 1, 0); // index 0 also applies to under first breakpoint
-			overrides = (theme.responsive && (theme.responsive as any)[responsiveIndex]) || {};
-		} else if (width >= breakpoints[breakpoints.length - 1]) {
-			// if innerWidth is greater than the last breakpoint, use the last breakpoint
-			const responsiveIndex = breakpoints.length - 1;
-			overrides = (theme.responsive && (theme.responsive as any)[responsiveIndex]) || {};
+			overrides = (theme.responsive && (theme.responsive as any)[breakpointIndex]) || {};
+		} else if (width > breakpoints[breakpoints.length - 1]) {
+			// if innerWidth is greater than the last breakpoint, don't apply any responsive overrides
+			overrides = {};
 		}
 	}
 

@@ -3,7 +3,6 @@ import { observer } from 'mobx-react-lite';
 import { Controllers } from '@searchspring/snap-controller';
 import { ThemeProvider, SnapProvider, Theme } from '../../../providers';
 import type { SnapTemplates } from '../../../../../src';
-// TODO: cleanup path to just /src when exports added
 import type { TemplatesStore, TemplateThemeTypes, TemplateTypes } from '../../../../../src/Templates/Stores/TemplateStore';
 import type { ResultComponent as ResultComponentType } from '../../../';
 
@@ -20,7 +19,7 @@ export const TemplateSelect = observer((properties: TemplateSelectProps): JSX.El
 	let ResultComponent: ResultComponentType | undefined = undefined;
 	if (targeter.resultComponent) {
 		ResultComponent = templatesStore.library.components.result[targeter.resultComponent];
-		if (!ResultComponent) {
+		if (!loading && !ResultComponent) {
 			const error = `Result component "${targeter.resultComponent}" not found in library for target "${targetId}"`;
 			controller.log.error(error);
 			throw error;
@@ -30,7 +29,7 @@ export const TemplateSelect = observer((properties: TemplateSelectProps): JSX.El
 	const themeStore = themeLocation && themeLocation[targeter.theme.name];
 	const theme = themeStore?.theme;
 
-	if (!theme) {
+	if (!loading && !theme) {
 		const error = `Theme "${targeter.theme.name}" not found in library for target "${targetId}"`;
 		controller.log.error(error);
 		throw error;

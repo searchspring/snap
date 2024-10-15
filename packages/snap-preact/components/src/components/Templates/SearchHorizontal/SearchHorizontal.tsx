@@ -9,7 +9,7 @@ import { ComponentProps, ResultComponent, RootNodeProperties } from '../../../ty
 import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { Toolbar, ToolbarProps } from '../../Organisms/Toolbar';
 import { SearchHeader, SearchHeaderProps } from '../../Atoms/SearchHeader';
-import { NoResults, NoResultsProps } from '../../Atoms/NoResults';
+import { NoResults, NoResultsProps } from '../../Organisms/NoResults';
 import { Banner, BannerProps } from '../../Atoms/Merchandising';
 import { ContentType } from '@searchspring/snap-store-mobx';
 import { FacetsHorizontal, FacetsHorizontalProps } from '../../Organisms/FacetsHorizontal';
@@ -190,8 +190,6 @@ export const SearchHorizontal = observer((properties: SearchHorizontalProps): JS
 						<Toolbar {...subProps.MiddleToolbar} className="ss__search-horizontal__content__toolbar--middle-toolbar" controller={controller} />
 					)}
 
-					<div className="clear"></div>
-
 					{store.pagination.totalResults ? (
 						<Results {...subProps.Results} controller={controller} breakpoints={{}} />
 					) : (
@@ -199,8 +197,6 @@ export const SearchHorizontal = observer((properties: SearchHorizontalProps): JS
 					)}
 
 					{!hideFooterBanner && <Banner {...subProps.Banner} content={merchandising.content} type={ContentType.FOOTER} name={'footer'} />}
-
-					<div className="clear"></div>
 
 					{!hideBottomToolBar && store.pagination.totalResults > 0 && (
 						<Toolbar {...subProps.BottomToolbar} className="ss__search-horizontal__content__toolbar--bottom-toolbar" controller={controller} />

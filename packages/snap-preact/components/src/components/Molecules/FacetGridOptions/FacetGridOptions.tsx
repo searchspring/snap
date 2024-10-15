@@ -11,10 +11,15 @@ import { ComponentProps, RootNodeProperties } from '../../../types';
 import type { FacetValue, ValueFacet } from '@searchspring/snap-store-mobx';
 import { Lang, useLang } from '../../../hooks';
 import deepmerge from 'deepmerge';
+import Color from 'color';
 
 const CSS = {
-	grid: ({ columns, gapSize, gridSize, theme }: Partial<FacetGridOptionsProps>) =>
-		css({
+	grid: ({ columns, gapSize, gridSize, theme }: Partial<FacetGridOptionsProps>) => {
+		const variables = theme?.variables;
+		const backgroundColor = new Color(variables?.colors.primary);
+		const color = backgroundColor.isDark() ? '#fff' : '#000';
+
+		return css({
 			display: 'flex',
 			flexFlow: 'row wrap',
 			gridTemplateColumns: columns ? `repeat(${columns}, 1fr)` : `repeat(auto-fill, minmax(${gridSize}, 1fr))`,
@@ -26,7 +31,7 @@ const CSS = {
 				justifyContent: 'center',
 				alignItems: 'center',
 				flex: '0 1 auto',
-				border: `1px solid ${theme?.variables?.colors?.primary || '#333'}`,
+				border: `1px solid ${backgroundColor.hex() || '#333'}`,
 				textAlign: 'center',
 				wordBreak: 'break-all',
 				boxSizing: 'border-box',
@@ -38,12 +43,13 @@ const CSS = {
 					marginRight: '0',
 				},
 				'&.ss__facet-grid-options__option--filtered': {
-					background: theme?.variables?.colors?.primary || '#ccc',
-					color: theme?.variables?.colors?.secondary,
+					background: backgroundColor.hex() || '#ccc',
+					color: color || '#333',
 				},
 				'&:hover:not(.ss__facet-grid-options__option--filtered)': {
 					cursor: 'pointer',
-					background: theme?.variables?.colors?.hover?.background || '#f8f8f8',
+					background: backgroundColor.hex() || '#f8f8f8',
+					color: color || '#333',
 				},
 				'& .ss__facet-grid-options__option__value': {
 					'&.ss__facet-grid-options__option__value--smaller': {
@@ -72,7 +78,8 @@ const CSS = {
 					gridColumn: '1 / 1',
 				},
 			},
-		}),
+		});
+	},
 };
 
 export const FacetGridOptions = observer((properties: FacetGridOptionsProps): JSX.Element => {

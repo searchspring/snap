@@ -21,6 +21,7 @@
 		"@searchspring/snap-toolbox": "^1.1.11"
 	},
 	"devDependencies": {
+		"@searchspring/snap-controller": "^1.1.11",
 		"@searchspring/snap-store-mobx": "^1.1.11"
 	},
 	"sideEffects": false,
@@ -28,6 +29,11 @@
 		"dist/**/*"
 	],
 	"exports": {
+		"./common": {
+			"types": "./dist/esm/common/src/index.d.ts",
+			"import": "./dist/esm/common/src/index.js",
+			"require": "./dist/cjs/common/src/index.js"
+		},
 		"./shopify": {
 			"types": "./dist/esm/shopify/src/index.d.ts",
 			"import": "./dist/esm/shopify/src/index.js",

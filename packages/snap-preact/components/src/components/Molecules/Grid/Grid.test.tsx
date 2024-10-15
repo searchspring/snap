@@ -2,7 +2,7 @@ import { h } from 'preact';
 import { render } from '@testing-library/preact';
 import { ThemeProvider } from '../../../providers';
 import userEvent from '@testing-library/user-event';
-import { Grid } from './Grid';
+import { Grid, GridProps } from './Grid';
 import { GridLang } from './Grid';
 
 const options = [
@@ -172,7 +172,7 @@ describe('Grid Component', () => {
 
 		expect(optionElems).toHaveLength(args.columns * args.rows);
 		expect(overflowButton).toBeInTheDocument();
-		expect(overflowButton).toHaveTextContent(`+ ${options.length - args.columns * args.rows}`);
+		expect(overflowButton).toHaveTextContent(`Show More`);
 
 		await userEvent.click(overflowButton!);
 
@@ -181,7 +181,26 @@ describe('Grid Component', () => {
 
 		expect(optionElems).toHaveLength(options.length);
 		expect(overflowButton).toBeInTheDocument();
-		expect(overflowButton).toHaveTextContent(`Less`);
+		expect(overflowButton).toHaveTextContent(`Show Less`);
+	});
+
+	it('has different text content when the overflow button is in the grid', async () => {
+		const args: Partial<GridProps> = {
+			gapSize: '10px',
+			columns: 2,
+			overflowButtonInGrid: true,
+			rows: 2,
+		};
+
+		const rendered = render(<Grid options={options} {...args} />);
+
+		let overflowButton = rendered.container.querySelector('.ss__grid__show-more-wrapper');
+		expect(overflowButton).toHaveTextContent(`+ ${options.length - args.columns! * args.rows! + 1}`);
+
+		await userEvent.click(overflowButton!);
+
+		overflowButton = rendered.container.querySelector('.ss__grid__show-more-wrapper');
+		expect(overflowButton).toHaveTextContent(`- ${options.length - args.columns! * args.rows! + 1}`);
 	});
 
 	it('can disableOverflowAction, and set overflowButtonInGrid', async () => {
@@ -334,7 +353,7 @@ describe('Grid lang works', () => {
 				langElems.forEach((elem) => {
 					if (typeof langObj.value == 'function') {
 						expect(valueMock).toHaveBeenCalledWith({
-							limited: 4,
+							limited: true,
 							remainder: 4,
 						});
 
@@ -442,7 +461,7 @@ describe('Grid lang works', () => {
 			lessElems.forEach((elem) => {
 				if (typeof langObj.value == 'function') {
 					expect(valueMock).toHaveBeenCalledWith({
-						limited: 4,
+						limited: true,
 						remainder: 4,
 					});
 

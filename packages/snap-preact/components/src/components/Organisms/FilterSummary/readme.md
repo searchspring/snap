@@ -28,6 +28,12 @@ The `title` prop specifies the title of the filter summary wrapper. The default 
 <FilterSummary filters={controller.store.filters} title={'Current Filters'} />
 ```
 
+### hideTitle
+The `hideTitle` prop will hide the title element.
+
+```jsx
+<FilterSummary filters={controller.store.filters} title={'Current Filters'} hideTitle={true}/>
+```
 ### filterIcon
 The `filterIcon` prop is the name of the icon to render for each filter. 
 

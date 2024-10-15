@@ -11,6 +11,7 @@
 	<link rel="preconnect" href="https://fonts.gstatic.com">
 	<link href="https://fonts.googleapis.com/css2?family=Roboto&family=Ubuntu&display=swap" rel="stylesheet">
 	<script src="https://cdn.jsdelivr.net/npm/marked@3.0.8/lib/marked.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/marked-alert@2.1.0/dist/index.umd.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.6.0/build/highlight.min.js"></script>
 	<script src="https://kit.fontawesome.com/c1798fb82d.js" crossorigin="anonymous"></script>
 	<title>Snap Documentation</title>
@@ -102,6 +103,8 @@
 			});
 			return markdown
 		}
+
+		marked.use(markedAlert());
 		
 		import('./docs/documents.js').then(function (_) {
 			const documents = _.default;

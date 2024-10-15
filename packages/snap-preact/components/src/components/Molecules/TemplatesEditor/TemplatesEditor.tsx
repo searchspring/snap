@@ -167,10 +167,6 @@ export const TemplatesEditor = observer((properties: TemplatesEditorProps): JSX.
 		...recommendationEmailTargets,
 	];
 
-	if (targets.length === 0) {
-		return <div>no themes found</div>;
-	}
-
 	const [collapsed, setCollapsed] = useState(false);
 	const [selectedTarget, changeTargetSelection] = useState(targets[0]);
 	const [selectedLanguage, changeLanguage] = useState(templatesStore.language);

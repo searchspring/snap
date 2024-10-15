@@ -49,6 +49,22 @@ describe('SortBy Component', () => {
 		expect(labelElem).toBeInTheDocument();
 	});
 
+	it('it can hide the label', () => {
+		const label = 'my label';
+		const lang = {
+			label: {
+				value: 'lang label',
+			},
+		};
+		const rendered = render(<SortBy lang={lang} hideLabel={true} label={label} sorting={sortingStore} />);
+
+		const element = rendered.container.querySelector('.ss__sortby__select');
+		const labelElem = rendered.container.querySelector('.ss__select__label');
+
+		expect(element).toBeInTheDocument();
+		expect(labelElem).not.toBeInTheDocument();
+	});
+
 	it('it renders as a dropdown type', () => {
 		const rendered = render(<SortBy type={'dropdown'} sorting={sortingStore} />);
 		const element = rendered.container.querySelector('.ss__sortby__select');
@@ -98,7 +114,7 @@ describe('SortBy Component', () => {
 		expect(element?.classList).toHaveLength(3);
 	});
 
-	describe('Select lang works', () => {
+	describe('Sortby lang works', () => {
 		const selector = '.ss__sortby';
 
 		it('immediately available lang options', async () => {

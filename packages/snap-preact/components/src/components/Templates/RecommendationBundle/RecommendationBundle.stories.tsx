@@ -16,6 +16,7 @@ import type { RecommendationControllerConfig } from '@searchspring/snap-controll
 export default {
 	title: 'Templates/RecommendationBundle',
 	component: RecommendationBundle,
+	tags: ['autodocs'],
 	parameters: {
 		docs: {
 			page: () => (
@@ -147,6 +148,17 @@ export default {
 				defaultValue: { summary: 'Seed Product' },
 			},
 			control: { type: 'text' },
+		},
+		hideSeedText: {
+			description: 'Hide seed product badge text',
+			defaultValue: false,
+			table: {
+				type: {
+					summary: 'boolean',
+				},
+				defaultValue: { summary: false },
+			},
+			control: { type: 'boolean' },
 		},
 		hideSeed: {
 			description: 'Hide/show seed result',

@@ -139,21 +139,11 @@ describe('mergeProps function with theme name', () => {
 		const globalTheme: Theme = {
 			name: GLOBAL_THEME_NAME,
 			variables: {
-				breakpoints: [0, 540, 767, 1200],
+				breakpoints: [540, 767, 1200],
 				colors: {
 					primary: '#3A23AD',
 					secondary: '#00cee1',
 					accent: '#4c3ce2',
-					active: {
-						foreground: '#333333',
-						background: '#f8f6fd',
-						accent: '#3A23AD',
-					},
-					hover: {
-						foreground: '#333333',
-						background: '#f8f6fd',
-						accent: '#3A23AD',
-					},
 				},
 			},
 			layoutOptions: [

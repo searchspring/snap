@@ -99,6 +99,12 @@ The `showLessText` prop contains the text to display in the facet overflow butto
 <Facet facet={controller.store.facets[0]} showLessText={'Show Less'} />
 ```
 
+## hideShowMoreLessText
+The `hideShowMoreLessText` prop hides the show more / show less text.
+
+```jsx
+<Facet facet={controller.store.facets[0]} hideShowMoreLessText={true} />
+```
 ### iconOverflowMore
 The `iconOverflowMore` prop contains the icon name of the facet overflow button when collapsed. Default is `'plus'`
 

@@ -625,6 +625,113 @@ describe('Recommend Api', () => {
 		requestMock.mockReset();
 	});
 
+	it('batchRecommendations deduplicates certain global request parameters', async () => {
+		const api = new RecommendAPI(new ApiConfiguration(apiConfig));
+
+		//now consts try a post
+		const POSTParams = {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'text/plain',
+			},
+
+			body: JSON.stringify({
+				profiles: [
+					{ tag: 'profile1' },
+					{ tag: 'profile2', filters: [{ field: 'size', type: '=', values: ['small'] }] },
+					{ tag: 'profile3', blockedItems: ['sku3p'] },
+				],
+				siteId: '8uyt2m',
+				products: ['product1', 'product2', 'product3', 'product4'],
+				blockedItems: ['sku1', 'sku3', 'sku4', 'sku2'],
+				filters: [
+					{ field: 'color', type: '=', values: ['blue'] },
+					{ field: 'price', type: '>=', values: [0] },
+					{ field: 'price', type: '<=', values: [20] },
+					{ field: 'price', type: '<=', values: [40] },
+					{ field: 'color', type: '=', values: ['green'] },
+				],
+			}),
+		};
+
+		const POSTRequestUrl = 'https://8uyt2m.a.searchspring.io/boost/8uyt2m/recommend';
+
+		const POSTRequestMock = jest
+			.spyOn(global.window, 'fetch')
+			.mockImplementation(() => Promise.resolve({ status: 200, json: () => Promise.resolve({}) } as Response));
+
+		// profile 1
+		api.batchRecommendations({
+			tag: 'profile1',
+			siteId: '8uyt2m',
+			products: ['product1'],
+			blockedItems: ['sku1'],
+			filters: [
+				{
+					type: 'value',
+					field: 'color',
+					value: 'blue',
+				},
+				{
+					type: 'range',
+					field: 'price',
+					value: { low: 0, high: 20 },
+				},
+			],
+			batched: true,
+		});
+
+		// profile 2
+		api.batchRecommendations({
+			tag: 'profile2',
+			profile: {
+				filters: [
+					{
+						type: 'value',
+						field: 'size',
+						value: 'small',
+					},
+				],
+			},
+			siteId: '8uyt2m',
+			products: ['product2', 'product3'],
+			blockedItems: ['sku3', 'sku4'],
+			filters: [
+				{
+					type: 'range',
+					field: 'price',
+					value: { low: 0, high: 40 },
+				},
+			],
+			batched: true,
+		});
+
+		// profile 3
+		api.batchRecommendations({
+			tag: 'profile3',
+			profile: {
+				blockedItems: ['sku3p'],
+			},
+			siteId: '8uyt2m',
+			product: 'product4',
+			blockedItems: ['sku2', 'sku3'],
+			filters: [
+				{
+					type: 'value',
+					field: 'color',
+					value: 'green',
+				},
+			],
+			batched: true,
+		});
+
+		//add delay for paramBatch.timeout
+		await wait(250);
+
+		expect(POSTRequestMock).toHaveBeenCalledWith(POSTRequestUrl, POSTParams);
+		POSTRequestMock.mockReset();
+	});
+
 	it('batchRecommendations handles POST requests', async () => {
 		const api = new RecommendAPI(new ApiConfiguration(apiConfig));
 
@@ -643,6 +750,7 @@ describe('Recommend Api', () => {
 				}),
 				siteId: '8uyt2m',
 				products: ['marnie-runner-2-7x10'],
+				blockedItems: ['sku1', 'sku2', 'sku3'],
 				filters: [
 					{ field: 'color', type: '=', values: ['blue'] },
 					{ field: 'price', type: '>=', values: [0] },
@@ -678,6 +786,97 @@ describe('Recommend Api', () => {
 			api.batchRecommendations({
 				tag: i.toString(),
 				...batchParams,
+				blockedItems: ['sku1', 'sku2', 'sku3'],
+				filters: [
+					{
+						type: 'value',
+						field: 'color',
+						value: 'blue',
+					},
+					{
+						type: 'range',
+						field: 'price',
+						value: { low: 0, high: 20 },
+					},
+				],
+				batched: true,
+			});
+		}
+
+		//add delay for paramBatch.timeout
+		await wait(250);
+
+		expect(POSTRequestMock).toHaveBeenCalledWith(POSTRequestUrl, POSTParams);
+		POSTRequestMock.mockReset();
+	});
+
+	it('batchRecommendations handles POST requests with profile specific request parameters', async () => {
+		const api = new RecommendAPI(new ApiConfiguration(apiConfig));
+
+		//now consts try a post
+		const POSTParams = {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'text/plain',
+			},
+
+			body: JSON.stringify({
+				profiles: Array.from({ length: 100 }, (item, index) => {
+					return {
+						tag: index.toString(),
+						blockedItems: ['skuBlocked', `sku${index}`],
+						filters: [{ field: 'color', type: '=', values: ['red'] }],
+					};
+				}),
+				siteId: '8uyt2m',
+				products: ['marnie-runner-2-7x10'],
+				blockedItems: ['sku1', 'sku2', 'sku3'],
+				filters: [
+					{ field: 'color', type: '=', values: ['blue'] },
+					{ field: 'price', type: '>=', values: [0] },
+					{ field: 'price', type: '<=', values: [20] },
+				],
+				lastViewed: [
+					'marnie-runner-2-7x10',
+					'ruby-runner-2-7x10',
+					'abbie-runner-2-7x10',
+					'riley-4x6',
+					'joely-5x8',
+					'helena-4x6',
+					'kwame-4x6',
+					'sadie-4x6',
+					'candice-runner-2-7x10',
+					'esmeray-4x6',
+					'camilla-230x160',
+					'candice-4x6',
+					'sahara-4x6',
+					'dayna-4x6',
+					'moema-4x6',
+				],
+			}),
+		};
+
+		const POSTRequestUrl = 'https://8uyt2m.a.searchspring.io/boost/8uyt2m/recommend';
+
+		const POSTRequestMock = jest
+			.spyOn(global.window, 'fetch')
+			.mockImplementation(() => Promise.resolve({ status: 200, json: () => Promise.resolve({}) } as Response));
+
+		for (let i = 0; i < 100; i++) {
+			api.batchRecommendations({
+				tag: i.toString(),
+				profile: {
+					blockedItems: ['skuBlocked', `sku${i}`],
+					filters: [
+						{
+							type: 'value',
+							field: 'color',
+							value: 'red',
+						},
+					],
+				},
+				...batchParams,
+				blockedItems: ['sku1', 'sku2', 'sku3'],
 				filters: [
 					{
 						type: 'value',

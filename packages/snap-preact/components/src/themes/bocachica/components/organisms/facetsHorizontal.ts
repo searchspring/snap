@@ -10,14 +10,11 @@ const facetsHorizontalStyleScript = ({ theme }: FacetsHorizontalProps) => {
 		'& .ss__facets-horizontal__header': {
 			display: 'flex',
 			flexWrap: 'wrap',
-
-			'& .ss__mobile-sidebar': {
-				margin: '0 10px',
-			},
+			gap: '10px',
 
 			'& .ss__facets-horizontal__header__dropdown': {
 				flex: '0 0 0%',
-				margin: '0 0 10px 0',
+				margin: '0',
 				boxSizing: 'border-box',
 				minWidth: '100px',
 
@@ -30,15 +27,13 @@ const facetsHorizontalStyleScript = ({ theme }: FacetsHorizontalProps) => {
 					justifyContent: 'space-between',
 					alignItems: 'center',
 					padding: '5px 10px',
+					color: variables?.colors?.secondary,
+					fontWeight: 'bold',
 				},
 
 				'&.ss__dropdown--open': {
 					'& .ss__dropdown__button__heading': {
-						backgroundColor: variables?.colors?.active?.background,
-						color: variables?.colors?.active?.foreground,
-
 						'& .ss__icon': {
-							fill: variables?.colors?.active?.accent,
 							transform: 'rotate(180deg)',
 						},
 					},
@@ -56,8 +51,11 @@ const facetsHorizontalStyleScript = ({ theme }: FacetsHorizontalProps) => {
 		'&.ss__facets-horizontal--overlay': {
 			'& .ss__facets-horizontal__header__dropdown': {
 				'&.ss__dropdown--open': {
+					'& .ss__dropdown__button': {
+						boxShadow: '0 6px 12px 1px #0000001f',
+					},
 					'& .ss__dropdown__content': {
-						border: `1px solid ${variables?.colors?.active?.background || '#ccc'}`,
+						boxShadow: '0 6px 12px 1px #0000001f',
 					},
 				},
 			},

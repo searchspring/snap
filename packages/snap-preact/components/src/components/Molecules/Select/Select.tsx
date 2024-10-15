@@ -14,27 +14,30 @@ import { Icon, IconProps, IconType } from '../../Atoms/Icon';
 import { useA11y } from '../../../hooks/useA11y';
 import { Lang, useLang } from '../../../hooks';
 import deepmerge from 'deepmerge';
+import Color from 'color';
 
 const CSS = {
-	select: ({ color, backgroundColor, borderColor, theme }: Partial<SelectProps>) =>
-		css({
+	select: ({ color, backgroundColor, borderColor, theme }: Partial<SelectProps>) => {
+		const lightenedPrimary = new Color(backgroundColor || color || theme?.variables?.colors?.primary).lightness(95);
+
+		return css({
 			display: 'inline-flex',
 			color: color,
 			'&.ss__select--disabled': {
 				opacity: 0.7,
 			},
-			'& .ss__select__dropdown__button__icon': {
-				margin: 'auto 0 auto 5px',
-			},
-			'& .ss__select__label': {
-				marginRight: '5px',
-			},
 
-			'& .ss__select__selection__icon': {
+			'.ss__select__selection__icon': {
 				margin: '0px 5px 0px 0px',
 			},
 
-			'& .ss__select__select': {
+			'.ss__button__content': {
+				display: 'flex',
+				alignItems: 'center',
+				gap: '5px',
+			},
+
+			'.ss__select__select': {
 				position: 'relative',
 				zIndex: '10000',
 				backgroundColor: backgroundColor || '#fff',
@@ -47,26 +50,23 @@ const CSS = {
 					alignItems: 'center',
 				},
 
-				'& .ss__select__select__option': {
+				'.ss__select__select__option': {
 					cursor: 'pointer',
 					padding: '6px 8px',
 					color: 'initial',
 					display: 'flex',
 					alignItems: 'center',
 
-					'& .ss__select__select__option__icon': {
-						margin: '0px 5px 0px 0px',
-					},
-
 					'&.ss__select__select__option--selected': {
 						fontWeight: 'bold',
 					},
 					'&:hover': {
-						backgroundColor: theme?.variables?.colors?.hover?.background || '#f8f8f8',
+						backgroundColor: lightenedPrimary.hex() || '#f8f8f8',
 					},
 				},
 			},
-		}),
+		});
+	},
 	native: ({}) => css({}),
 };
 
@@ -89,6 +89,7 @@ export const Select = observer((properties: SelectProps): JSX.Element => {
 		clearSelection,
 		disableClickOutside,
 		disabled,
+		hideLabel,
 		hideLabelOnSelection,
 		iconColor,
 		iconClose,
@@ -152,7 +153,7 @@ export const Select = observer((properties: SelectProps): JSX.Element => {
 			...defined({
 				disableStyles,
 				color: iconColor || color,
-				size: '14px',
+				size: '12px',
 			}),
 			// component theme overrides
 			theme: props?.theme,
@@ -245,7 +246,7 @@ export const Select = observer((properties: SelectProps): JSX.Element => {
 			<div {...styling} className={classnames('ss__select', { 'ss__select--disabled': disabled }, className)}>
 				{native ? (
 					<>
-						{(label || lang.buttonLabel.value) && !hideLabelOnSelection && (
+						{(label || lang.buttonLabel.value) && !hideLabel && !hideLabelOnSelection && (
 							<span className="ss__select__label">
 								<label {...mergedLang.buttonLabel?.all}></label>
 								{separator && <span className="ss__select__label__separator">{separator}</span>}
@@ -288,7 +289,7 @@ export const Select = observer((properties: SelectProps): JSX.Element => {
 						disableA11y
 						button={
 							<Button {...subProps.button} disableA11y={true}>
-								{(label || lang.buttonLabel.value) && !hideLabelOnSelection && (
+								{(label || lang.buttonLabel.value) && !hideLabelOnSelection && !hideLabel && (
 									<span
 										className="ss__select__label"
 										ref={(e) => useA11y(e)}
@@ -379,6 +380,7 @@ export interface SelectProps extends ComponentProps {
 	iconClose?: IconType | Partial<IconProps>;
 	iconOpen?: IconType | Partial<IconProps>;
 	label?: string | JSX.Element;
+	hideLabel?: boolean;
 	native?: boolean;
 	onSelect?: (e: React.ChangeEvent<HTMLSelectElement> | React.MouseEvent<HTMLElement>, option?: ListOption) => void;
 	selected?: ListOption;

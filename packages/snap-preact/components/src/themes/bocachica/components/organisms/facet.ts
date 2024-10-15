@@ -2,7 +2,7 @@ import { css } from '@emotion/react';
 import type { FacetProps } from '../../../../components/Organisms/Facet';
 
 // CSS in JS style script for the Facet component
-const facetStyleScript = ({ color, theme }: FacetProps) => {
+const facetStyleScript = ({ color, disableCollapse, theme }: FacetProps) => {
 	const variables = theme?.variables;
 
 	return css({
@@ -19,10 +19,11 @@ const facetStyleScript = ({ color, theme }: FacetProps) => {
 			},
 		},
 		'& .ss__facet__header': {
+			cursor: disableCollapse ? undefined : 'pointer',
 			display: 'flex',
 			justifyContent: 'space-between',
 			alignItems: 'center',
-			color: color || variables?.colors?.secondary,
+			color: color || variables?.colors?.primary,
 			fontWeight: 'bold',
 		},
 		'& .ss__facet__options': {
@@ -43,7 +44,7 @@ const facetStyleScript = ({ color, theme }: FacetProps) => {
 		},
 		'& .ss__facet__show-more-less': {
 			display: 'block',
-			margin: '8px',
+			margin: '8px 5px',
 			cursor: 'pointer',
 			color: color || variables?.colors?.secondary,
 			'& .ss__icon': {

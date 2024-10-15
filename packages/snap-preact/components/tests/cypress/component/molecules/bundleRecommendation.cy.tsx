@@ -1,4 +1,3 @@
-import 'whatwg-fetch';
 import { Fragment, h } from 'preact';
 import { RecommendationStore } from '@searchspring/snap-store-mobx';
 import { UrlManager, QueryStringTranslator, reactLinker } from '@searchspring/snap-url-manager';
@@ -8,7 +7,7 @@ import { Profiler } from '@searchspring/snap-profiler';
 import { Logger } from '@searchspring/snap-logger';
 import { Client } from '@searchspring/snap-client';
 import { RecommendationController } from '@searchspring/snap-controller';
-import { RecommendationBundle } from '../../../../src/components/Organisms/RecommendationBundle';
+import { RecommendationBundle } from '../../../../src/components/Templates/RecommendationBundle';
 import { mount } from '@cypress/react';
 import { ThemeProvider } from '../../../../src/providers';
 import { Result } from '../../../../src/components/Molecules/Result';
@@ -49,20 +48,24 @@ const theme = {
 
 const client = new Client(globals, {});
 
-const controller = new RecommendationController(recommendConfig, {
-	client: client,
-	store: new RecommendationStore(recommendConfig, services),
-	urlManager,
-	eventManager: new EventManager(),
-	profiler: new Profiler(),
-	logger: new Logger(),
-	tracker: new Tracker(globals, { mode: 'development' }),
-});
+let controller;
 
 describe('RecommendationBundle Component', async () => {
-	before(async () => {
+	before(() => {
 		cy.intercept('*recommend*', json);
 		cy.intercept('*profile*', profile);
+	});
+
+	beforeEach(async () => {
+		controller = new RecommendationController(recommendConfig, {
+			client: client,
+			store: new RecommendationStore(recommendConfig, services),
+			urlManager,
+			eventManager: new EventManager(),
+			profiler: new Profiler(),
+			logger: new Logger(),
+			tracker: new Tracker(globals, { mode: 'development' }),
+		});
 		await controller.search();
 	});
 
@@ -320,7 +323,9 @@ describe('RecommendationBundle Component', async () => {
 
 		cy.get('.ss__recommendation-bundle').should('exist');
 		cy.get('.ss__recommendation-bundle .ss__recommendation-bundle__wrapper__selector__result-wrapper__checkbox').should('not.exist');
+	});
 
+	it('renders checkboxes by default', () => {
 		mount(<RecommendationBundle controller={controller} onAddToCart={cy.stub().as('onAddToCart')} />);
 
 		cy.get('.ss__recommendation-bundle').should('exist');
@@ -417,6 +422,27 @@ describe('RecommendationBundle Component', async () => {
 		)
 			.should('exist')
 			.should('have.text', seedText);
+	});
+
+	it('can hide the seed badge text', () => {
+		const seedText = 'this is the seed';
+		const lang = {
+			seedText: {
+				value: 'langy seed text',
+			},
+		};
+
+		mount(
+			<RecommendationBundle hideSeedText={true} lang={lang} controller={controller} seedText={seedText} onAddToCart={cy.stub().as('onAddToCart')} />
+		);
+
+		cy.get('.ss__recommendation-bundle').should('exist');
+		cy.get(
+			'.ss__recommendation-bundle .ss__recommendation-bundle__wrapper__selector--seed .ss__recommendation-bundle__wrapper__selector__result-wrapper__seed-badge'
+		)
+			.should('exist')
+			.should('not.have.text', seedText)
+			.should('not.have.text', lang.seedText.value);
 	});
 
 	it('can set seed icon only', () => {

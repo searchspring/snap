@@ -16,7 +16,7 @@ import { IconProps, IconType } from '../../Atoms/Icon';
 import type { RecommendationController } from '@searchspring/snap-controller';
 import type { Product } from '@searchspring/snap-store-mobx';
 import { BundleSelector } from './BundleSelector';
-import { BundledCTA } from './BundleCTA';
+import { BundledCTA, BundledCTAProps } from './BundleCTA';
 import { Lang } from '../../../hooks';
 import { useIntersection } from '../../../hooks';
 
@@ -197,6 +197,7 @@ export const RecommendationBundle = observer((properties: RecommendationBundlePr
 		disableStyles,
 		ctaIcon,
 		ctaInline,
+		hideSeedText,
 		style,
 		lazyRender,
 		className,
@@ -397,18 +398,22 @@ export const RecommendationBundle = observer((properties: RecommendationBundlePr
 	//initialize lang
 	const defaultLang: Partial<RecommendationBundleLang> = {
 		seedText: {
-			value: 'This Product',
+			value: seedText,
 		},
 		ctaButtonText: {
-			value: 'Add All To Cart',
+			value: ctaButtonText,
 		},
 		ctaButtonSuccessText: {
-			value: 'Bundle Added!',
+			value: ctaButtonSuccessText,
 		},
 	};
 
 	//deep merge with props.lang
 	const lang = deepmerge(defaultLang, props.lang || {});
+
+	if (hideSeedText) {
+		delete lang.seedText.value;
+	}
 
 	return resultsToRender?.length ? (
 		<CacheProvider>
@@ -664,11 +669,17 @@ export interface RecommendationBundleProps extends ComponentProps {
 	onAddToCart: (e: MouseEvent, items: Product[]) => void;
 	title?: JSX.Element | string;
 	breakpoints?: BreakpointsProps;
-	resultComponent?: ResultComponent<{ seed?: boolean; selected?: boolean; onProductSelect?: (product: Product) => void }>;
+	resultComponent?: ResultComponent<{
+		controller: RecommendationController;
+		seed?: boolean;
+		selected?: boolean;
+		onProductSelect?: (product: Product) => void;
+	}>;
 	preselectedCount?: number;
 	hideCheckboxes?: boolean;
 	hideSeed?: boolean;
 	seedText?: string;
+	hideSeedText?: boolean;
 	separatorIconSeedOnly?: boolean;
 	separatorIcon?: IconType | Partial<IconProps> | false;
 	ctaInline?: boolean;
@@ -676,7 +687,7 @@ export interface RecommendationBundleProps extends ComponentProps {
 	ctaButtonText?: string;
 	ctaButtonSuccessText?: string;
 	ctaButtonSuccessTimeout?: number;
-	ctaSlot?: JSX.Element;
+	ctaSlot?: JSX.Element | React.FunctionComponent<BundledCTAProps>;
 	vertical?: boolean;
 	carousel?: BundleCarouselProps;
 	slidesPerView?: number; // TODO: remove this prop?

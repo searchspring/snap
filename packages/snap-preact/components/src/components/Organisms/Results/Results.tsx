@@ -162,7 +162,11 @@ export const Results = observer((properties: ResultsProps): JSX.Element => {
 								// TODO: wrap with SearchResultTracker component (need to create)
 								if (resultComponent && controller) {
 									const ResultComponent = resultComponent;
-									return <ResultComponent controller={controller} result={result as Product} theme={theme} />;
+									return (
+										<SearchResultTracker result={result as Product} controller={controller as SearchController}>
+											<ResultComponent key={(result as Product).id} controller={controller} result={result as Product} theme={theme} />
+										</SearchResultTracker>
+									);
 								} else {
 									return (
 										<SearchResultTracker result={result as Product} controller={controller as SearchController}>

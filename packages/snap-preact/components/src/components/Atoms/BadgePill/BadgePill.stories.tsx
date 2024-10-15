@@ -9,6 +9,7 @@ import Readme from '../BadgePill/readme.md';
 export default {
 	title: 'Atoms/BadgePill',
 	component: BadgePill,
+	tags: ['autodocs'],
 	parameters: {
 		docs: {
 			page: () => (

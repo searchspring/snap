@@ -62,3 +62,37 @@ const getDym = (controller) => {
 <SearchHeader controller={controller} didYouMeanText={getDym} />
 ```
 
+### hideTitleText
+The `hideTitleText` prop hides the title text.
+
+```jsx
+<SearchHeader controller={controller} hideTitleText={true} />
+```
+
+### hideSubtitleText
+The `hideSubtitleText` prop hides the subtitle text.
+
+```jsx
+<SearchHeader controller={controller} hideSubtitleText={true} />
+```
+
+### hideCorrectedQueryText
+The `hideCorrectedQueryText` prop hides the corrected query text.
+
+```jsx
+<SearchHeader controller={controller} hideCorrectedQueryText={true} />
+```
+
+### hideNoResultsText
+The `hideNoResultsText` prop hides the no results text.
+
+```jsx
+<SearchHeader controller={controller} hideNoResultsText={true} />
+```
+
+### hideDidYouMeanText
+The `hideDidYouMeanText` prop hides did you mean text.
+
+```jsx
+<SearchHeader controller={controller} hideDidYouMeanText={true} />
+```

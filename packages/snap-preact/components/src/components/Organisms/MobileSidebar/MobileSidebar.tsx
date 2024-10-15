@@ -17,7 +17,7 @@ import { IconProps, IconType } from '../../Atoms/Icon';
 import deepmerge from 'deepmerge';
 
 const CSS = {
-	toolbar: () =>
+	toolbar: ({}: Partial<MobileSidebarProps>) =>
 		css({
 			'& .ss__mobile-sidebar__header': {
 				display: 'flex',
@@ -42,10 +42,11 @@ const CSS = {
 				cursor: 'pointer',
 			},
 
-			'& .ss__mobile-sidebar__cta-wrapper': {
-				justifyContent: 'space-around',
-				flexDirection: 'row',
+			'& .ss__mobile-sidebar__footer': {
 				display: 'flex',
+				gap: '10px',
+				justifyContent: 'center',
+				flexDirection: 'row',
 			},
 		}),
 };
@@ -83,18 +84,27 @@ export const MobileSidebar = observer((properties: MobileSidebarProps): JSX.Elem
 		closeButtonIcon,
 		openButtonIcon,
 		titleText,
+		hideTitleText,
+		hideCloseButtonText,
+		hideOpenButtonText,
+		hideClearButtonText,
+		hideApplyButtonText,
 		displayAt,
 		hideClearButton,
 		disableStyles,
 		className,
 		style,
 		treePath,
+		styleScript,
 	} = props;
 
 	const styling: RootNodeProperties = { 'ss-name': props.name };
+	const stylingProps = props;
 
-	if (!disableStyles) {
-		styling.css = [CSS.toolbar(), style];
+	if (styleScript && !disableStyles) {
+		styling.css = [styleScript(stylingProps), style];
+	} else if (!disableStyles) {
+		styling.css = [CSS.toolbar(stylingProps), style];
 	} else if (style) {
 		styling.css = [style];
 	}
@@ -172,6 +182,20 @@ export const MobileSidebar = observer((properties: MobileSidebarProps): JSX.Elem
 
 	//deep merge with props.lang
 	const lang = deepmerge(defaultLang, props.lang || {});
+
+	if (hideOpenButtonText) {
+		delete lang.openButtonText.value;
+	}
+	if (hideClearButtonText) {
+		delete lang.clearButtonText.value;
+	}
+	if (hideCloseButtonText) {
+		delete lang.closeButtonText.value;
+	}
+	if (hideApplyButtonText) {
+		delete lang.applyButtonText.value;
+	}
+
 	const mergedLang = useLang(lang as any, {
 		controller,
 	});
@@ -191,7 +215,9 @@ export const MobileSidebar = observer((properties: MobileSidebarProps): JSX.Elem
 			>
 				{!hideHeader && (
 					<div className="ss__mobile-sidebar__header">
-						<h4 aria-atomic="true" aria-live="polite" className="ss__mobile-sidebar__header__title" {...mergedLang.titleText?.all}></h4>
+						{!hideTitleText && (
+							<h4 aria-atomic="true" aria-live="polite" className="ss__mobile-sidebar__header__title" {...mergedLang.titleText?.all}></h4>
+						)}
 
 						{!hideCloseButton && (
 							<Button
@@ -244,7 +270,9 @@ export const MobileSidebar = observer((properties: MobileSidebarProps): JSX.Elem
 			</div>
 		);
 	};
+
 	const contentRef: MutableRef<any> = useRef();
+
 	return (
 		<CacheProvider>
 			<div {...styling} className={classnames('ss__mobile-sidebar', className)}>
@@ -277,6 +305,11 @@ export const MobileSidebar = observer((properties: MobileSidebarProps): JSX.Elem
 export interface MobileSidebarProps extends ComponentProps {
 	controller: SearchController;
 	titleText?: string;
+	hideTitleText?: boolean;
+	hideOpenButtonText?: boolean;
+	hideClearButtonText?: boolean;
+	hideApplyButtonText?: boolean;
+	hideCloseButtonText?: boolean;
 	openButtonText?: string;
 	clearButtonText?: string;
 	applyButtonIcon?: IconType | Partial<IconProps>;

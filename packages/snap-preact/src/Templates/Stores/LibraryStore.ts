@@ -1,8 +1,16 @@
 import { FunctionalComponent, RenderableProps } from 'preact';
 
 import type { Theme, ThemeMinimal } from '../../../components/src';
-import type { TemplateCustomComponentTypes, TemplateTypes } from './TemplateStore';
+import { transformTranslationsToTheme, type TemplateCustomComponentTypes, type TemplateTypes } from './TemplateStore';
 import type { TemplateStoreComponentConfig } from './TemplateStore';
+import type { PluginFunction } from '@searchspring/snap-controller';
+import { pluginBackgroundFilters as shopifyPluginBackgroundFilters } from './library/plugins/shopify/pluginBackgroundFilters';
+import { pluginMutateResults as shopifyPluginMutateResults } from './library/plugins/shopify/pluginMutateResults';
+import { pluginBackgroundFilters as bigCommercePluginBackgroundFilters } from './library/plugins/bigCommerce/pluginBackgroundFilters';
+import { pluginBackgroundFilters as magento2PluginBackgroundFilters } from './library/plugins/magento2/pluginBackgroundFilters';
+import { pluginBackgroundFilters } from './library/plugins/common/pluginBackgroundFilters';
+import { pluginScrollToTop } from './library/plugins/common/pluginScrollToTop';
+import { pluginLogger } from './library/plugins/common/pluginLogger';
 
 type LibraryComponentImport = {
 	[componentName: string]: (args?: any) => Promise<FunctionalComponent<RenderableProps<any>>>;
@@ -14,7 +22,25 @@ type LibraryComponentMap = {
 
 export type LibraryImports = {
 	theme: {
+		base: (args?: any) => Promise<Theme>;
 		bocachica: (args?: any) => Promise<Theme>;
+	};
+	plugins: {
+		shopify: {
+			backgroundFilters: typeof shopifyPluginBackgroundFilters;
+			mutateResults: typeof shopifyPluginMutateResults;
+		};
+		bigcommerce: {
+			backgroundFilters: PluginFunction;
+		};
+		magento2: {
+			backgroundFilters: PluginFunction;
+		};
+		common: {
+			backgroundFilters: typeof pluginBackgroundFilters;
+			scrollToTop: typeof pluginScrollToTop;
+			logger: typeof pluginLogger;
+		};
 	};
 	component: {
 		search: {
@@ -27,6 +53,9 @@ export type LibraryImports = {
 		recommendation: {
 			bundle: {
 				RecommendationBundle: (args?: any) => Promise<FunctionalComponent<RenderableProps<any>>>;
+				RecommendationBundleEasyAdd: (args?: any) => Promise<FunctionalComponent<RenderableProps<any>>>;
+				RecommendationBundleList: (args?: any) => Promise<FunctionalComponent<RenderableProps<any>>>;
+				RecommendationBundleVertical: (args?: any) => Promise<FunctionalComponent<RenderableProps<any>>>;
 			};
 			default: {
 				Recommendation: (args?: any) => Promise<FunctionalComponent<RenderableProps<any>>>;
@@ -58,7 +87,7 @@ type LibraryStoreConfig = {
 };
 
 export type CurrencyCodes = 'usd' | 'eur' | 'aud';
-export type LanguageCodes = 'en';
+export type LanguageCodes = 'en' | 'fr';
 
 export class LibraryStore {
 	themes: {
@@ -101,8 +130,28 @@ export class LibraryStore {
 
 	import: LibraryImports = {
 		theme: {
+			base: async () => {
+				return this.themes.base || (this.themes.base = (await import('./library/themes/base')).base);
+			},
 			bocachica: async () => {
 				return this.themes.bocachica || (this.themes.bocachica = (await import('./library/themes/bocachica')).bocachica);
+			},
+		},
+		plugins: {
+			shopify: {
+				backgroundFilters: shopifyPluginBackgroundFilters,
+				mutateResults: shopifyPluginMutateResults,
+			},
+			bigcommerce: {
+				backgroundFilters: bigCommercePluginBackgroundFilters,
+			},
+			magento2: {
+				backgroundFilters: magento2PluginBackgroundFilters,
+			},
+			common: {
+				backgroundFilters: pluginBackgroundFilters,
+				scrollToTop: pluginScrollToTop,
+				logger: pluginLogger,
 			},
 		},
 		component: {
@@ -133,6 +182,30 @@ export class LibraryStore {
 							(this.components.recommendation.bundle.RecommendationBundle = (
 								await import('./library/components/RecommendationBundle')
 							).RecommendationBundle)
+						);
+					},
+					RecommendationBundleEasyAdd: async () => {
+						return (
+							this.components.recommendation.bundle.RecommendationBundleEasyAdd ||
+							(this.components.recommendation.bundle.RecommendationBundleEasyAdd = (
+								await import('./library/components/RecommendationBundleEasyAdd')
+							).RecommendationBundleEasyAdd)
+						);
+					},
+					RecommendationBundleList: async () => {
+						return (
+							this.components.recommendation.bundle.RecommendationBundleList ||
+							(this.components.recommendation.bundle.RecommendationBundleList = (
+								await import('./library/components/RecommendationBundleList')
+							).RecommendationBundleList)
+						);
+					},
+					RecommendationBundleVertical: async () => {
+						return (
+							this.components.recommendation.bundle.RecommendationBundleVertical ||
+							(this.components.recommendation.bundle.RecommendationBundleVertical = (
+								await import('./library/components/RecommendationBundleVertical')
+							).RecommendationBundleVertical)
 						);
 					},
 				},
@@ -172,7 +245,10 @@ export class LibraryStore {
 		},
 		language: {
 			en: async () => {
-				return this.locales.languages.en || (this.locales.languages.en = (await import('./library/languages/en')).en);
+				return this.locales.languages.en || (this.locales.languages.en = transformTranslationsToTheme((await import('./library/languages/en')).en));
+			},
+			fr: async () => {
+				return this.locales.languages.fr || (this.locales.languages.fr = transformTranslationsToTheme((await import('./library/languages/fr')).fr));
 			},
 		},
 		currency: {
@@ -194,9 +270,11 @@ export class LibraryStore {
 		if (components) {
 			Object.keys(components).forEach((type) => {
 				const componentsOfType = components[type as keyof typeof components];
-				Object.keys(componentsOfType).forEach((component) => {
-					this.addComponentImport(type as TemplateCustomComponentTypes, component, componentsOfType[component as keyof typeof components]);
-				});
+				if (componentsOfType) {
+					Object.keys(componentsOfType).forEach((component) => {
+						this.addComponentImport(type as TemplateCustomComponentTypes, component, componentsOfType[component as keyof typeof components]);
+					});
+				}
 			});
 		}
 	}

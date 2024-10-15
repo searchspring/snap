@@ -30,6 +30,13 @@ The `label` prop specifies an label to render as the title.
 <SortBy controller={controller} label={'Sort By'}/>
 ```
 
+### hideLabel
+The `hideLabel` prop hides the header title label
+
+```jsx
+<SortBy controller={controller} label={'Sort By'} hideLabel={true} />
+```
+
 ### type
 The `type` prop specifies which type of SortBy component to render. You can choose from 1 of 3 options - "Dropdown" | "List" | "Radio".
 By default "Dropdown" is used. and will render a dropdown using the Select component. "Radio" will render a RadioSelect component, and "List" will render a RadioSelect component with radios disabled.

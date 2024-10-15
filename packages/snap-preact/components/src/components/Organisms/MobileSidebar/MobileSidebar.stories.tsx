@@ -254,6 +254,51 @@ export default {
 				type: 'select',
 			},
 		},
+		hideTitleText: {
+			description: 'hides the title text',
+			table: {
+				type: {
+					summary: 'boolean',
+				},
+			},
+			control: { type: 'boolean' },
+		},
+		hideOpenButtonText: {
+			description: 'hides the open button text',
+			table: {
+				type: {
+					summary: 'boolean',
+				},
+			},
+			control: { type: 'boolean' },
+		},
+		hideClearButtonText: {
+			description: 'hides the clear all filters button text',
+			table: {
+				type: {
+					summary: 'boolean',
+				},
+			},
+			control: { type: 'boolean' },
+		},
+		hideApplyButtonText: {
+			description: 'hides the apply filters button text',
+			table: {
+				type: {
+					summary: 'boolean',
+				},
+			},
+			control: { type: 'boolean' },
+		},
+		hideCloseButtonText: {
+			description: 'hides the close button text',
+			table: {
+				type: {
+					summary: 'boolean',
+				},
+			},
+			control: { type: 'boolean' },
+		},
 		...componentArgs,
 	},
 };

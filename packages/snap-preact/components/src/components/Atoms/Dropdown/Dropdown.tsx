@@ -26,6 +26,7 @@ const CSS = {
 				cursor: `${disableOverlay ? 'default' : 'pointer'}`,
 			},
 			[`.ss__dropdown__content`]: {
+				backgroundColor: '#fff',
 				position: 'absolute',
 				minWidth: '100%',
 				visibility: 'hidden',

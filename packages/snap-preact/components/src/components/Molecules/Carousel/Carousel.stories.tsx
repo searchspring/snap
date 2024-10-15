@@ -4,7 +4,7 @@ import { ArgsTable, PRIMARY_STORY, Markdown } from '@storybook/blocks';
 
 import { Carousel, CarouselProps } from './Carousel';
 import { Icon, iconPaths, IconType } from '../../Atoms/Icon';
-import { componentArgs, shiftColor, highlightedCode } from '../../../utilities';
+import { componentArgs, Colour, highlightedCode } from '../../../utilities';
 import Readme from './readme.md';
 
 export default {
@@ -181,13 +181,16 @@ export default {
 	},
 };
 
-const colors = Array.from(Array(9).keys());
+const count = 10;
+const carouselStep = Math.floor(180 / count);
+const colors = Array.from(Array(count).keys());
+const color = new Colour('#3a23ad');
 
 export const Colors = (props: CarouselProps) => {
 	return (
 		<Carousel {...props}>
 			{colors.map((number, index) => (
-				<div style={{ height: '100px', width: '100px', background: shiftColor('#3a23ad', (index + `111`).padStart(6, '0')), margin: '0 auto' }}></div>
+				<div style={{ height: '100px', width: '100px', background: color.lighten(index * carouselStep).hex, margin: '0 auto' }}></div>
 			))}
 		</Carousel>
 	);
@@ -198,13 +201,15 @@ Colors.args = {
 	loop: false,
 };
 
+const iconPathStep = Math.floor(180 / Object.keys(iconPaths).length);
+
 export const Icons = (props: CarouselProps) => {
 	return (
 		<Carousel {...props}>
 			{Object.keys(iconPaths).map((icon, index) => {
 				return (
 					<div style={{ margin: '0 auto', textAlign: 'center' }}>
-						<Icon icon={icon as IconType} color={shiftColor('#3a23ad', (index + '111').padStart(6, '1'))} size="80px" style={{ padding: '20px' }} />
+						<Icon icon={icon as IconType} color={color.lighten(index * iconPathStep).hex} size="80px" style={{ padding: '20px' }} />
 						<div style={{ textAlign: 'center' }}>{icon}</div>
 					</div>
 				);

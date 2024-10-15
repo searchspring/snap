@@ -56,6 +56,7 @@ const facetSliderStyleScript = ({
 		},
 		'& .ss__facet-slider__segment': {
 			background: trackColor || '#f2f2f2',
+			borderRadius: '3px',
 			height: '100%',
 		},
 		'& .ss__facet-slider__handles': {
@@ -78,29 +79,11 @@ const facetSliderStyleScript = ({
 					position: 'relative',
 					cursor: 'pointer',
 
-					'&:after': {
-						backgroundColor: variables?.colors?.accent || '#ffffff',
-						width: '30%',
-						height: '30%',
-						top: '0',
-						bottom: '0',
-						left: '0',
-						content: '""',
-						position: 'absolute',
-						right: '0',
-						borderRadius: '12px',
-						margin: 'auto',
-						cursor: 'pointer',
-					},
-
 					'&.ss__facet-slider__handle--active': {
-						background: handleDraggingColor || handleColor || variables?.colors?.active?.background || '#000',
+						background: handleDraggingColor || handleColor || variables?.colors?.secondary || '#000',
 						'& label.ss__facet-slider__handle__label': {
 							background: '#fff',
 							padding: '0 5px',
-						},
-						'&:after': {
-							backgroundColor: variables?.colors?.active?.foreground || '#ffffff',
 						},
 					},
 

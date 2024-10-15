@@ -22,7 +22,7 @@ const CSS = {
 			'& .ss__filter__button': {
 				alignItems: 'center',
 				'& .ss__filter__button__icon': {
-					marginRight: '5px',
+					margin: '0 5px 0 0',
 				},
 			},
 			'& .ss__filter__label': {
@@ -115,7 +115,7 @@ export const Filter = observer((properties: FilterProps): JSX.Element => {
 					onClick && onClick(e);
 				}}
 				href={link?.href}
-				{...mergedLang.filter?.all}
+				{...mergedLang.filter?.attributes}
 			>
 				<Button {...subProps.button} disableA11y={true}>
 					<Icon {...subProps.icon} {...(typeof icon == 'string' ? { icon: icon } : (icon as Partial<IconProps>))} />

@@ -11,14 +11,12 @@ export * from './components/Atoms/Icon';
 export * from './components/Atoms/Image';
 export * from './components/Atoms/Loading';
 export * from './components/Atoms/Merchandising';
-export * from './components/Atoms/NoResults';
 export * from './components/Atoms/Overlay';
 export * from './components/Atoms/Price';
 export * from './components/Atoms/SearchHeader';
 export * from './components/Atoms/Skeleton';
 export * from './components/Atoms/TemplateSelect';
-export * from './components/Atoms/Terms';
-export * from './components/Atoms/Toggle';
+// export * from './components/Atoms/Toggle';
 
 // MOLECULES
 export * from './components/Molecules/CalloutBadge';
@@ -30,7 +28,7 @@ export * from './components/Molecules/FacetHierarchyOptions';
 export * from './components/Molecules/FacetListOptions';
 export * from './components/Molecules/FacetPaletteOptions';
 export * from './components/Molecules/FacetSlider';
-export * from './components/Molecules/FacetToggle';
+// export * from './components/Molecules/FacetToggle';
 export * from './components/Molecules/Filter';
 export * from './components/Molecules/LayoutSelector';
 export * from './components/Molecules/List';
@@ -59,12 +57,14 @@ export * from './components/Organisms/Facets';
 export * from './components/Organisms/FacetsHorizontal';
 export * from './components/Organisms/FilterSummary';
 export * from './components/Organisms/MobileSidebar';
+export * from './components/Organisms/NoResults';
 export * from './components/Organisms/Results';
 export * from './components/Organisms/Sidebar';
 export * from './components/Organisms/Toolbar';
 
 // TEMPLATES
 export * from './components/Templates/Autocomplete';
+// export * from './components/Templates/AutocompleteTerms';
 export * from './components/Templates/Recommendation';
 export * from './components/Templates/RecommendationBundle';
 export * from './components/Templates/RecommendationGrid';

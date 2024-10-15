@@ -82,7 +82,7 @@ export const useLang = (lang: LangObjType, data?: any): LangAttributesObj => {
 				};
 				if (currentLangSettings?.attributes?.['aria-label']) {
 					if (typeof currentLangSettings.attributes?.['aria-label'] == 'function') {
-						currentObj.attributes!['aria-label'] = currentLangSettings.attributes['aria-label']({ data });
+						currentObj.attributes!['aria-label'] = currentLangSettings.attributes['aria-label'](data);
 					} else {
 						currentObj.attributes!['aria-label'] = currentLangSettings.attributes['aria-label'];
 					}

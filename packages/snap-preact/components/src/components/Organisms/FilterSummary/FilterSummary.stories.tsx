@@ -63,6 +63,16 @@ export default {
 			},
 			control: { type: 'text' },
 		},
+		hideTitle: {
+			description: 'Hide title',
+			table: {
+				type: {
+					summary: 'boolean',
+				},
+				defaultValue: { summary: false },
+			},
+			control: 'boolean',
+		},
 		hideFacetLabel: {
 			description: 'Hide filter facet label',
 			table: {

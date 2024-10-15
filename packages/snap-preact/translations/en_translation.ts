@@ -6,6 +6,11 @@ export const en_translation: LangComponents = {
 	button: {},
 	search: {},
 	list: {},
+	layoutSelector: {
+		label: {
+			value: 'layout',
+		},
+	},
 	radioList: {},
 	autocomplete: {
 		trendingTitle: {
@@ -94,7 +99,12 @@ export const en_translation: LangComponents = {
 	},
 	sortBy: {
 		label: {
-			value: (data) => `${data}`,
+			value: 'Sort By',
+		},
+	},
+	perPage: {
+		label: {
+			value: 'Per Page',
 		},
 	},
 	facetsHorizontal: {
@@ -110,6 +120,9 @@ export const en_translation: LangComponents = {
 	filterSummary: {
 		title: {
 			value: 'Current Filters',
+		},
+		clearAllLabel: {
+			value: 'Clear All',
 		},
 	},
 	facet: {
@@ -285,22 +298,22 @@ export const en_translation: LangComponents = {
 			},
 		},
 	},
-	toggle: {
-		toggleSwitch: {
-			attributes: {
-				'aria-label': (data) =>
-					`currently ${data?.toggledState ? 'selected' : 'not selected'} toggle switch ${data?.label ? `for ${data?.label}` : ''} `,
-			},
-		},
-	},
-	terms: {
-		term: {
-			value: (data) => `${data?.term.value}`,
-			attributes: {
-				'aria-label': (data) => `item ${(data?.index || 0) + 1} of ${data?.numberOfTerms}, ${data?.term.value}`,
-			},
-		},
-	},
+	// toggle: {
+	// 	toggleSwitch: {
+	// 		attributes: {
+	// 			'aria-label': (data) =>
+	// 				`currently ${data?.toggledState ? 'selected' : 'not selected'} toggle switch ${data?.label ? `for ${data?.label}` : ''} `,
+	// 		},
+	// 	},
+	// },
+	// terms: {
+	// 	term: {
+	// 		value: (data) => `${data?.term.value}`,
+	// 		attributes: {
+	// 			'aria-label': (data) => `item ${(data?.index || 0) + 1} of ${data?.numberOfTerms}, ${data?.term.value}`,
+	// 		},
+	// 	},
+	// },
 	searchHeader: {
 		titleText: {
 			value: (data) => {
