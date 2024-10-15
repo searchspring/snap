@@ -13,50 +13,26 @@ new SnapTemplates({
 		siteId: '8uyt2m',
 		language: 'en',
 		currency: 'usd',
+		platform: 'shopify',
 	},
-	platform: {
-		// bigcommerce: {
-		shopify: {
+	plugins: {
+		common: {
 			backgroundFilters: {
 				filters: [
-					// {
-					// 	type: 'value',
-					// 	field: 'ss_tags',
-					// 	value: 'context.tags'
-					// }
+					{
+						type: 'value',
+						value: 'Blue',
+						field: 'Color',
+					},
 				],
-				// tags: [{
-				// 	enabled: true,
-				// 	field: 'ss_tags',
-				// 	value: 'context.tags'
-				// }],
-				// collection: [{
-				// 	enabled: true,
-				// 	field: 'collection',
-				// 	value: 'context.collection'
-				// }],
-				// common: [{
-				// 	field: 'shopperGroup',
-				// 	value: 'shopper.group',
-				// 	enabled: true,
-				// }]
 			},
+		},
+
+		shopify: {
 			mutateResults: {
-				url: {
+				collectionInUrl: {
 					enabled: true,
 				},
-			},
-			scrollToTop: {
-				enabled: true,
-				selector: '#searchspring-layout',
-				// options: {
-				// top: 0,
-				// 	left: 0,
-				// 	behavior: 'smooth',
-				// },
-			},
-			storeLogger: {
-				enabled: true,
 			},
 		},
 	},

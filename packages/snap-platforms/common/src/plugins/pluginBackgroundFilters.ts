@@ -28,13 +28,14 @@ export const pluginBackgroundFilters = (cntrlr: AbstractController, config: Comm
 			((filter.type === 'value' && (typeof filter.value === 'string' || typeof filter.value === 'number')) ||
 				(filter.type === 'range' && typeof filter.value === 'object'))
 		) {
-			if (Array.isArray(filter.controllerTypes) && !filter.controllerTypes.includes(cntrlr.type)) {
+			if (Array.isArray(filter.controllerTypes) && !(filter.controllerTypes as string[]).includes(cntrlr.type)) {
 				return;
 			}
 
 			if (
 				Array.isArray(filter.controllerIds) &&
-				(!filter.controllerIds.includes(cntrlr.id) || !filter.controllerIds.some((id) => id instanceof RegExp && cntrlr.id.match(id)))
+				!filter.controllerIds.includes(cntrlr.id) &&
+				!filter.controllerIds.some((id) => id instanceof RegExp && cntrlr.id.match(id))
 			) {
 				return;
 			}

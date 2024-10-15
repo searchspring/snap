@@ -18,16 +18,20 @@ import type {
 } from '../Instantiators/RecommendationInstantiator';
 import type { SnapFeatures } from '../types';
 import type { SnapConfig, ExtendedTarget } from '../Snap';
-import type {
-	GenericPluginsConfig,
-	IntegrationPlatforms,
-	RecsTemplateTypes,
-	ShopifyStandardPluginConfig,
-	TemplateStoreConfig,
-	TemplateTypes,
-} from './Stores/TemplateStore';
+import type { RecsTemplateTypes, TemplateStoreConfig, TemplateTypes } from './Stores/TemplateStore';
 import type { LibraryImports } from './Stores/LibraryStore';
 import { GLOBAL_THEME_NAME } from './Stores/TargetStore';
+import type {
+	CommonPluginBackgroundFilterConfig,
+	pluginBackgroundFilters,
+	pluginScrollToTop,
+	CommonPluginScrollToTopConfig,
+	pluginLogger,
+} from '@searchspring/snap-platforms/common';
+import type { pluginBackgroundFilters as shopifyPluginBackgroundFilters } from '@searchspring/snap-platforms/shopify';
+import { pluginMutateResults as shopifyPluginMutateResults, ShopifyPluginMutateResultsConfig } from '@searchspring/snap-platforms/shopify';
+import type { pluginBackgroundFilters as bigCommercePluginBackgroundFilters } from '@searchspring/snap-platforms/bigcommerce';
+import type { pluginBackgroundFilters as magento2PluginBackgroundFilters } from '@searchspring/snap-platforms/magento2';
 
 export const THEME_EDIT_COOKIE = 'ssThemeEdit';
 
@@ -94,6 +98,21 @@ export type SnapTemplatesConfig = TemplateStoreConfig & {
 	};
 };
 
+type TemplatePlugins =
+	// common
+	| [typeof pluginBackgroundFilters, CommonPluginBackgroundFilterConfig]
+	| [typeof pluginScrollToTop, CommonPluginScrollToTopConfig]
+	| [typeof pluginLogger]
+	// shopify
+	| [typeof shopifyPluginBackgroundFilters]
+	| [typeof shopifyPluginMutateResults, ShopifyPluginMutateResultsConfig]
+	// bigCommerce
+	| [typeof bigCommercePluginBackgroundFilters]
+	// magento2
+	| [typeof magento2PluginBackgroundFilters];
+
+type TemplatePluginGrouping = TemplatePlugins[];
+
 export const DEFAULT_FEATURES: SnapFeatures = {
 	integratedSpellCorrection: {
 		enabled: true,
@@ -113,24 +132,15 @@ export class SnapTemplates extends Snap {
 
 		const templatesStore = new TemplatesStore({ config, settings: { editMode } });
 
-		const platforms = Object.keys(config.platform || {});
-		if (platforms.length > 1) {
-			throw new Error('SnapTemplates: only one platform can be used at a time');
-		}
-		const platform = platforms[0];
-		if (platform) {
-			templatesStore.platform = platform as IntegrationPlatforms;
-		}
-
 		const snapConfig = createSnapConfig(config, templatesStore);
 
 		// get more context (all the things needed for the platform of choice as well as generic backgroundFilters)
 		let contextParams = ['backgroundFilters'];
-		switch (platform) {
+		switch (templatesStore.platform) {
 			case 'shopify':
 				contextParams = contextParams.concat(['collection', 'tags']);
 				break;
-			case 'bigcommerce':
+			case 'bigCommerce':
 				contextParams = contextParams.concat(['category', 'brand']);
 				break;
 			case 'magento2':
@@ -434,36 +444,32 @@ export function createSnapConfig(templateConfig: SnapTemplatesConfig, templatesS
 }
 
 function createPlugins(templateConfig: SnapTemplatesConfig, templatesStore: TemplatesStore): PluginGrouping[] {
-	const plugins: PluginGrouping[] = [[templatesStore.library.import.plugins.common.genericBackgroundFilters]];
+	const plugins: TemplatePluginGrouping = [];
 
-	if (templatesStore.platform) {
-		const platformConfig = templateConfig.platform?.[templatesStore.platform] as unknown as GenericPluginsConfig;
-		if (platformConfig.backgroundFilters) {
-			plugins[0].push(platformConfig.backgroundFilters || { filters: [] });
-		}
+	plugins.push([
+		templatesStore.library.import.plugins.common.backgroundFilters,
+		templateConfig.plugins?.common?.backgroundFilters || { filters: [] },
+	]);
+	plugins.push([templatesStore.library.import.plugins.common.scrollToTop, templateConfig.plugins?.common?.scrollToTop || { enabled: true }]);
+	plugins.push([templatesStore.library.import.plugins.common.logger]);
 
-		plugins.push([templatesStore.library.import.plugins.common.scrollToTop, platformConfig.scrollToTop || { enabled: true }]);
-		plugins.push([templatesStore.library.import.plugins.common.storeLogger, platformConfig.storeLogger || { enabled: true }]);
-
-		switch (templatesStore.platform) {
-			case 'shopify':
-				plugins.push([templatesStore.library.import.plugins.shopify.backgroundFilters]);
-				plugins.push([templatesStore.library.import.plugins.shopify.backgroundFilters]);
-				plugins.push([
-					templatesStore.library.import.plugins.shopify.mutateResults,
-					(platformConfig as ShopifyStandardPluginConfig).mutateResults || { url: { enabled: true } },
-				]);
-				break;
-			case 'bigcommerce':
-				plugins.push([templatesStore.library.import.plugins.bigcommerce.backgroundFilters]);
-				break;
-			case 'magento2':
-				plugins.push([templatesStore.library.import.plugins.magento2.backgroundFilters]);
-				break;
-			default:
-				break;
-		}
+	switch (templatesStore.platform) {
+		case 'shopify':
+			plugins.push([templatesStore.library.import.plugins.shopify.backgroundFilters]);
+			plugins.push([
+				templatesStore.library.import.plugins.shopify.mutateResults,
+				templateConfig.plugins?.shopify?.mutateResults || { collectionInUrl: { enabled: true } },
+			]);
+			break;
+		case 'bigCommerce':
+			plugins.push([templatesStore.library.import.plugins.bigcommerce.backgroundFilters]);
+			break;
+		case 'magento2':
+			plugins.push([templatesStore.library.import.plugins.magento2.backgroundFilters]);
+			break;
+		default:
+			break;
 	}
 
-	return plugins;
+	return plugins as PluginGrouping[];
 }

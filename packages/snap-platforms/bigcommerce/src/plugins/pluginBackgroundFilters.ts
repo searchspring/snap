@@ -1,28 +1,13 @@
 import type { ClientGlobals } from '@searchspring/snap-client';
 import type { AbstractController } from '@searchspring/snap-controller';
 import type { Next } from '@searchspring/snap-event-manager';
+import type { PluginBackgroundFilterGlobal } from '../../../common/src';
 
-///// Duplicated typing TODO: move to shared location /////
-export type ValueBackgroundFilter = {
-	type: 'value';
-	field: string;
-	value: string | number;
-};
-export type RangeBackgroundFilter = {
-	type: 'range';
-	field: string;
-	value: { low: number; high: number };
-};
-export type BackgroundFilter = ValueBackgroundFilter | RangeBackgroundFilter;
-export type BackgroundFilterGlobal = BackgroundFilter & { background: true };
-export type PluginControl = {
-	controllerIds?: (string | RegExp)[];
-	controllerTypes?: ('search' | 'autocomplete' | 'recommendation' | string)[];
-};
-///// /////////////////////////////////////////////// /////
+export const pluginBackgroundFilters = (cntrlr: AbstractController) => {
+	// only applies to search controllers
+	if (cntrlr.type != 'search') return;
 
-export const pluginBackgroundFilters = async (cntrlr: AbstractController): Promise<void> => {
-	const backgroundFilters: BackgroundFilterGlobal[] = [];
+	const backgroundFilters: PluginBackgroundFilterGlobal[] = [];
 
 	if (cntrlr.context?.category?.path) {
 		const categoryPath = replaceCharacters(cntrlr.context.category.path);

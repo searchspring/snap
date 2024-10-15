@@ -14,5 +14,5 @@ export type PluginBackgroundFilter = ValueBackgroundFilter | RangeBackgroundFilt
 export type PluginBackgroundFilterGlobal = PluginBackgroundFilter & { background: true };
 export type PluginControl = {
 	controllerIds?: (string | RegExp)[];
-	controllerTypes?: ('search' | 'autocomplete' | 'recommendation' | string)[];
+	controllerTypes?: ('search' | 'autocomplete' | 'recommendation')[];
 };

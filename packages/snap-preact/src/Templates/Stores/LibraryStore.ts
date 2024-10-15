@@ -4,15 +4,13 @@ import type { Theme, ThemeMinimal } from '../../../components/src';
 import type { TemplateCustomComponentTypes, TemplateTypes } from './TemplateStore';
 import type { TemplateStoreComponentConfig } from './TemplateStore';
 import type { PluginFunction } from '@searchspring/snap-controller';
-import {
-	pluginBackgroundFilters as shopifyPluginBackgroundFilters,
-	pluginMutateResults as shopifyPluginMutateResults,
-} from '@searchspring/snap-platforms/shopify';
-import { pluginBackgroundFilters as bigcommercePluginBackgroundFilters } from '@searchspring/snap-platforms/bigcommerce';
-import { pluginBackgroundFilters as magento2PluginBackgroundFilters } from '@searchspring/snap-platforms/magento2';
-import { pluginGenericBackgroundFilters } from './library/plugins/pluginGenericBackgroundFilters';
-import { pluginScrollToTop } from './library/plugins/pluginScrollToTop';
-import { pluginStoreLogger } from './library/plugins/pluginStoreLogger';
+import { pluginBackgroundFilters as shopifyPluginBackgroundFilters } from './library/plugins/shopify/pluginBackgroundFilters';
+import { pluginMutateResults as shopifyPluginMutateResults } from './library/plugins/shopify/pluginMutateResults';
+import { pluginBackgroundFilters as bigCommercePluginBackgroundFilters } from './library/plugins/bigCommerce/pluginBackgroundFilters';
+import { pluginBackgroundFilters as magento2PluginBackgroundFilters } from './library/plugins/magento2/pluginBackgroundFilters';
+import { pluginBackgroundFilters } from './library/plugins/common/pluginBackgroundFilters';
+import { pluginScrollToTop } from './library/plugins/common/pluginScrollToTop';
+import { pluginLogger } from './library/plugins/common/pluginLogger';
 
 type LibraryComponentImport = {
 	[componentName: string]: (args?: any) => Promise<FunctionalComponent<RenderableProps<any>>>;
@@ -28,8 +26,8 @@ export type LibraryImports = {
 	};
 	plugins: {
 		shopify: {
-			backgroundFilters: PluginFunction;
-			mutateResults: PluginFunction;
+			backgroundFilters: typeof shopifyPluginBackgroundFilters;
+			mutateResults: typeof shopifyPluginMutateResults;
 		};
 		bigcommerce: {
 			backgroundFilters: PluginFunction;
@@ -38,9 +36,9 @@ export type LibraryImports = {
 			backgroundFilters: PluginFunction;
 		};
 		common: {
-			genericBackgroundFilters: PluginFunction;
-			scrollToTop: PluginFunction;
-			storeLogger: PluginFunction;
+			backgroundFilters: typeof pluginBackgroundFilters;
+			scrollToTop: typeof pluginScrollToTop;
+			logger: typeof pluginLogger;
 		};
 	};
 	component: {
@@ -138,15 +136,15 @@ export class LibraryStore {
 				mutateResults: shopifyPluginMutateResults,
 			},
 			bigcommerce: {
-				backgroundFilters: bigcommercePluginBackgroundFilters,
+				backgroundFilters: bigCommercePluginBackgroundFilters,
 			},
 			magento2: {
 				backgroundFilters: magento2PluginBackgroundFilters,
 			},
 			common: {
-				genericBackgroundFilters: pluginGenericBackgroundFilters,
+				backgroundFilters: pluginBackgroundFilters,
 				scrollToTop: pluginScrollToTop,
-				storeLogger: pluginStoreLogger,
+				logger: pluginLogger,
 			},
 		},
 		component: {

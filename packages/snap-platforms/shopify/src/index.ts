@@ -1,3 +1,3 @@
 export * from './addToCart';
-export * from './pluginBackgroundFilters';
-export * from './pluginMutateResults';
+export * from './plugins/pluginBackgroundFilters';
+export * from './plugins/pluginMutateResults';

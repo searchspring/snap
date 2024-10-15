@@ -41,7 +41,7 @@ const controllerServices: any = {
 };
 
 describe('Shopify pluginMutateResults', () => {
-	describe('requires shopify to exist on the dom', () => {
+	describe('requires Shopify to exist as a global on the window', () => {
 		beforeAll(async () => {
 			searchConfig = { ...searchConfigDefault };
 			controller = new SearchController(searchConfig, controllerServices);
@@ -56,20 +56,31 @@ describe('Shopify pluginMutateResults', () => {
 			errMock.mockRestore();
 		});
 
-		it('requires shopify to exist on the dom', () => {
+		it('will log a warning if Shopify global does not exist', () => {
+			const collectionContext = {
+				handle: 'collection-handle',
+				name: 'Collection Name',
+			};
+			controller.context.collection = collectionContext;
+
 			const config = {
-				url: {
+				collectionInUrl: {
 					enabled: true,
 				},
 			};
 
 			pluginMutateResults(controller, config);
 
-			expect(errMock).toHaveBeenCalledWith(expect.stringContaining('Error: window.Shopify not found'), expect.any(String), expect.any(String));
+			expect(errMock).toHaveBeenCalledWith(
+				expect.stringContaining('window.Shopify not found'),
+				expect.any(String),
+				expect.any(String),
+				expect.any(String)
+			);
 		});
 	});
 
-	describe('has shopify in the dom', () => {
+	describe('has Shopify as a global on the window', () => {
 		beforeAll(async () => {
 			errMock = jest.spyOn(console, 'log').mockImplementation(() => {});
 		});
@@ -102,7 +113,7 @@ describe('Shopify pluginMutateResults', () => {
 
 		it('requires config.enabled', async () => {
 			const config = {
-				url: {
+				collectionInUrl: {
 					enabled: false,
 				},
 			};
@@ -116,7 +127,7 @@ describe('Shopify pluginMutateResults', () => {
 
 		it('requires context.collection to be defined', async () => {
 			const config = {
-				url: {
+				collectionInUrl: {
 					enabled: true,
 				},
 			};
@@ -137,7 +148,7 @@ describe('Shopify pluginMutateResults', () => {
 			controller.context.collection = collectionContext;
 
 			const config = {
-				url: {
+				collectionInUrl: {
 					enabled: true,
 				},
 			};

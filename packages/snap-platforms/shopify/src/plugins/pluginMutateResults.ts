@@ -8,19 +8,19 @@ declare global {
 	}
 }
 
-export type PluginMutateResultsConfig = {
-	url?: {
+export type ShopifyPluginMutateResultsConfig = {
+	collectionInUrl?: {
 		enabled: boolean;
 	};
 };
 
-export const pluginMutateResults = async (cntrlr: AbstractController, config: PluginMutateResultsConfig): Promise<void> => {
-	if (!window.Shopify) {
-		cntrlr.log.error('Error: window.Shopify not found');
-		return;
-	}
+export const pluginMutateResults = (cntrlr: AbstractController, config: ShopifyPluginMutateResultsConfig) => {
+	if (config?.collectionInUrl?.enabled && cntrlr.context.collection?.handle) {
+		if (!window.Shopify) {
+			cntrlr.log.warn('shopify/plugins/mutateResults: window.Shopify not found');
+			return;
+		}
 
-	if (config.url?.enabled && cntrlr.context.collection?.handle) {
 		const collectionName = cntrlr.context.collection.name.replace(/\&\#39\;/, "'");
 		const page = {
 			id: cntrlr.context.collection.handle,
@@ -29,18 +29,16 @@ export const pluginMutateResults = async (cntrlr: AbstractController, config: Pl
 		};
 
 		const updateUrlFn = (handle: string): string | undefined => {
-			if (cntrlr.type == 'search' && handle) {
-				const hasRoute =
-					typeof window.Shopify == 'object' && typeof window.Shopify.routes == 'object' && typeof window.Shopify.routes.root == 'string'
-						? true
-						: false;
-				const routeShopify = hasRoute ? window.Shopify.routes.root : '/';
+			if (handle) {
+				const routeShopify = window?.Shopify?.routes?.root || '/';
 				const routeCollection = page.type == 'collection' ? `collections/${page.id}/` : ``;
 				return `${routeShopify}${routeCollection}products/${handle}`;
 			}
 		};
 
 		cntrlr.on('afterStore', async ({ controller }: { controller: AbstractController }, next: Next) => {
+			if (cntrlr.type != 'search') return;
+
 			const { results } = controller.store as SearchStore;
 
 			if (page.type == 'collection' && results && results.length !== 0) {
