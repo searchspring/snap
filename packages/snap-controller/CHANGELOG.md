@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.2.0](https://github.com/searchspring/snap/compare/v1.1.11...v1.2.0) (2024-10-15)
+
+### Bug Fixes
+
+- **controller/search:** grouped response so that references are preserved - added test to ensure ([d885259](https://github.com/searchspring/snap/commit/d885259852c409a217d5701a58fd9dc0881cc839))
+
 ## [1.1.11](https://github.com/searchspring/snap/compare/v1.1.10...v1.1.11) (2024-09-30)
 
 **Note:** Version bump only for package @searchspring/snap-controller

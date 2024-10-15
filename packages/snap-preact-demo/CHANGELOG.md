@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.2.0](https://github.com/searchspring/snap-1.0/compare/v1.1.11...v1.2.0) (2024-10-15)
+
+### Bug Fixes
+
+- templates plugins ([247ebf7](https://github.com/searchspring/snap-1.0/commit/247ebf7e621c31b4e21f42ed66b2c1dd070e092b))
+- update demostore index.ts ([9680044](https://github.com/searchspring/snap-1.0/commit/96800445ad659be26916d91cff13418c8c33b703))
+
 ## [1.1.11](https://github.com/searchspring/snap-1.0/compare/v1.1.10...v1.1.11) (2024-09-30)
 
 **Note:** Version bump only for package @searchspring/snap-preact-demo

@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.2.0](https://github.com/searchspring/snap-1.0/compare/v1.1.11...v1.2.0) (2024-10-15)
+
+### Bug Fixes
+
+- **client/recommend:** adjusting recommend request to merge and de-dupe global parameters ([9e919ab](https://github.com/searchspring/snap-1.0/commit/9e919ab8cc73f48276755131541f889be078e186))
+- **controller/search:** grouped response so that references are preserved - added test to ensure ([d885259](https://github.com/searchspring/snap-1.0/commit/d885259852c409a217d5701a58fd9dc0881cc839))
+- **preact/storybook:** making each controller have separate url params to revent storybook bug ([5ab2ecf](https://github.com/searchspring/snap-1.0/commit/5ab2ecfd8a831fafb3b80cd5cb47840074b1f4b3))
+- **preact/templates:** ensuring availability of theme on load by adding loading state changes ([e70782e](https://github.com/searchspring/snap-1.0/commit/e70782eb7afd6ac11304898e553f92f4633878be))
+- templates plugins ([247ebf7](https://github.com/searchspring/snap-1.0/commit/247ebf7e621c31b4e21f42ed66b2c1dd070e092b))
+- **templates:** updating default recommendation component name ([7191f91](https://github.com/searchspring/snap-1.0/commit/7191f9123b9a26e69128c76fb3770eb719ee9a01))
+- **tracker:** adding stringification prior to trim to prevent error when numbers are provided ([6787188](https://github.com/searchspring/snap-1.0/commit/67871881028d92b8097eb9ce764ee1120ca953bf))
+- update demostore index.ts ([9680044](https://github.com/searchspring/snap-1.0/commit/96800445ad659be26916d91cff13418c8c33b703))
+
+### Features
+
+- **preact-components/recommendationbundle:** adding new components for bundle variant components ([f90a1e1](https://github.com/searchspring/snap-1.0/commit/f90a1e1b24cc35d2206bb07fdc65114a352b1e60))
+- **preact/colour:** adding 'contrast' to Colour for contrasting text color calculation ([545421a](https://github.com/searchspring/snap-1.0/commit/545421a36c9c804ad371204da01253bbecd0cdc5))
+- **preact/components:** adding Colour to assist with shades and transparency of theme variables ([663de5a](https://github.com/searchspring/snap-1.0/commit/663de5aaf74306d7ea56e0655275131dc7d16e0b))
+
 ## [1.1.11](https://github.com/searchspring/snap-1.0/compare/v1.1.10...v1.1.11) (2024-09-30)
 
 **Note:** Version bump only for package @searchspring/snap
@@ -123,6 +142,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 - **snap-layout/theming:** work towards theming a snap layout using styleScripts ([b6be05e](https://github.com/searchspring/snap-1.0/commit/b6be05eee8fc0a06c9e853a591aa0d380158fc0c))
 - support template themes in snap-preact ([df9d905](https://github.com/searchspring/snap-1.0/commit/df9d9057a1554d7eb62830002c3db990e0f8f272))
 - theme reactivity initial interface ([c017aad](https://github.com/searchspring/snap-1.0/commit/c017aadd4add7591bd98fcfbdb8db8985bf2d498))
+
 ## [0.60.4](https://github.com/searchspring/snap/compare/v0.60.3...v0.60.4) (2024-09-25)
 
 **Note:** Version bump only for package @searchspring/snap

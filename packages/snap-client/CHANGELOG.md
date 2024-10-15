@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.2.0](https://github.com/searchspring/snap/compare/v1.1.11...v1.2.0) (2024-10-15)
+
+### Bug Fixes
+
+- **client/recommend:** adjusting recommend request to merge and de-dupe global parameters ([9e919ab](https://github.com/searchspring/snap/commit/9e919ab8cc73f48276755131541f889be078e186))
+
 ## [1.1.11](https://github.com/searchspring/snap/compare/v1.1.10...v1.1.11) (2024-09-30)
 
 **Note:** Version bump only for package @searchspring/snap-client
@@ -50,6 +56,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 # [1.1.0](https://github.com/searchspring/snap/compare/v0.60.1...v1.1.0) (2024-09-20)
 
 **Note:** Version bump only for package @searchspring/snap-client
+
 ## [0.60.4](https://github.com/searchspring/snap/compare/v0.60.3...v0.60.4) (2024-09-25)
 
 **Note:** Version bump only for package @searchspring/snap-client
