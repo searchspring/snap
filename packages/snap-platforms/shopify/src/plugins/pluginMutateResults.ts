@@ -36,23 +36,23 @@ export const pluginMutateResults = (cntrlr: AbstractController, config: ShopifyP
 			}
 		};
 
-		cntrlr.on('afterStore', async ({ controller }: { controller: AbstractController }, next: Next) => {
-			if (cntrlr.type != 'search') return;
+		if (cntrlr.type == 'search') {
+			cntrlr.on('afterStore', async ({ controller }: { controller: AbstractController }, next: Next) => {
+				const { results } = controller.store as SearchStore;
 
-			const { results } = controller.store as SearchStore;
-
-			if (page.type == 'collection' && results && results.length !== 0) {
-				results.forEach((result: Product | Banner) => {
-					if (result.type != 'banner') {
-						const updatedUrl = updateUrlFn(result.attributes.handle as string);
-						if (updatedUrl && updatedUrl !== result.mappings.core?.url) {
-							result.mappings.core!.url = updatedUrl;
+				if (page.type == 'collection' && results && results.length !== 0) {
+					results.forEach((result: Product | Banner) => {
+						if (result.type != 'banner') {
+							const updatedUrl = updateUrlFn(result.attributes.handle as string);
+							if (updatedUrl && updatedUrl !== result.mappings.core?.url) {
+								result.mappings.core!.url = updatedUrl;
+							}
 						}
-					}
-				});
-			}
+					});
+				}
 
-			await next();
-		});
+				await next();
+			});
+		}
 	}
 };
