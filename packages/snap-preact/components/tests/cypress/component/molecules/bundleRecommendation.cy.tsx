@@ -424,6 +424,27 @@ describe('RecommendationBundle Component', async () => {
 			.should('have.text', seedText);
 	});
 
+	it('can hide the seed badge text', () => {
+		const seedText = 'this is the seed';
+		const lang = {
+			seedText: {
+				value: 'langy seed text',
+			},
+		};
+
+		mount(
+			<RecommendationBundle hideSeedText={true} lang={lang} controller={controller} seedText={seedText} onAddToCart={cy.stub().as('onAddToCart')} />
+		);
+
+		cy.get('.ss__recommendation-bundle').should('exist');
+		cy.get(
+			'.ss__recommendation-bundle .ss__recommendation-bundle__wrapper__selector--seed .ss__recommendation-bundle__wrapper__selector__result-wrapper__seed-badge'
+		)
+			.should('exist')
+			.should('not.have.text', seedText)
+			.should('not.have.text', lang.seedText.value);
+	});
+
 	it('can set seed icon only', () => {
 		// can set seed icon only with seed not in carousel
 		mount(<RecommendationBundle controller={controller} separatorIconSeedOnly={true} onAddToCart={cy.stub().as('onAddToCart')} />);

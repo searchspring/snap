@@ -66,6 +66,17 @@ export default {
 			},
 			control: { type: 'text' },
 		},
+		hideTitle: {
+			defaultValue: false,
+			description: 'hide title',
+			table: {
+				type: {
+					summary: 'boolean',
+				},
+				defaultValue: { summary: false },
+			},
+			control: { type: 'boolean' },
+		},
 		loop: {
 			defaultValue: true,
 			description: 'Recommendation pagination loops',

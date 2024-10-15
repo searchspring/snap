@@ -386,6 +386,7 @@ const FacetContent = (props: any) => {
 		disableOverflow,
 		previewOnFocus,
 		valueProps,
+		hideShowMoreLessText,
 		treePath,
 		lang,
 	} = props;
@@ -437,7 +438,9 @@ const FacetContent = (props: any) => {
 									? { ...(typeof iconOverflowMore == 'string' ? { icon: iconOverflowMore } : (iconOverflowMore as Partial<IconProps>)) }
 									: { ...(typeof iconOverflowLess == 'string' ? { icon: iconOverflowLess } : (iconOverflowLess as Partial<IconProps>)) })}
 							/>
-							<span {...(((facet as ValueFacet)?.overflow?.remaining || 0) > 0 ? lang.showMoreText?.all : lang.showLessText?.all)}></span>
+							{!hideShowMoreLessText && (
+								<span {...(((facet as ValueFacet)?.overflow?.remaining || 0) > 0 ? lang.showMoreText?.all : lang.showLessText?.all)}></span>
+							)}
 						</Fragment>
 					)}
 				</div>
@@ -475,6 +478,7 @@ interface OptionalFacetProps extends ComponentProps {
 	disableOverflow?: boolean;
 	previewOnFocus?: boolean;
 	valueProps?: any;
+	hideShowMoreLessText?: boolean;
 	showMoreText?: string;
 	showLessText?: string;
 	iconOverflowMore?: IconType | Partial<IconProps>;

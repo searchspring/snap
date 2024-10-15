@@ -89,6 +89,7 @@ export const Select = observer((properties: SelectProps): JSX.Element => {
 		clearSelection,
 		disableClickOutside,
 		disabled,
+		hideLabel,
 		hideLabelOnSelection,
 		iconColor,
 		iconClose,
@@ -245,7 +246,7 @@ export const Select = observer((properties: SelectProps): JSX.Element => {
 			<div {...styling} className={classnames('ss__select', { 'ss__select--disabled': disabled }, className)}>
 				{native ? (
 					<>
-						{(label || lang.buttonLabel.value) && !hideLabelOnSelection && (
+						{(label || lang.buttonLabel.value) && !hideLabel && !hideLabelOnSelection && (
 							<span className="ss__select__label">
 								<label {...mergedLang.buttonLabel?.all}></label>
 								{separator && <span className="ss__select__label__separator">{separator}</span>}
@@ -288,7 +289,7 @@ export const Select = observer((properties: SelectProps): JSX.Element => {
 						disableA11y
 						button={
 							<Button {...subProps.button} disableA11y={true}>
-								{(label || lang.buttonLabel.value) && !hideLabelOnSelection && (
+								{(label || lang.buttonLabel.value) && !hideLabelOnSelection && !hideLabel && (
 									<span
 										className="ss__select__label"
 										ref={(e) => useA11y(e)}
@@ -379,6 +380,7 @@ export interface SelectProps extends ComponentProps {
 	iconClose?: IconType | Partial<IconProps>;
 	iconOpen?: IconType | Partial<IconProps>;
 	label?: string | JSX.Element;
+	hideLabel?: boolean;
 	native?: boolean;
 	onSelect?: (e: React.ChangeEvent<HTMLSelectElement> | React.MouseEvent<HTMLElement>, option?: ListOption) => void;
 	selected?: ListOption;

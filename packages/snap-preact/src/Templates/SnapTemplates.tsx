@@ -4,12 +4,13 @@ import deepmerge from 'deepmerge';
 import { Snap } from '../Snap';
 import { TemplateSelect } from '../../components/src';
 
-import { DomTargeter, url, cookies } from '@searchspring/snap-toolbox';
+import { DomTargeter, url, cookies, getContext } from '@searchspring/snap-toolbox';
 import { TemplateTarget, TemplatesStore } from './Stores/TemplateStore';
 
 import type { Target } from '@searchspring/snap-toolbox';
 import type { SearchStoreConfigSettings, AutocompleteStoreConfigSettings } from '@searchspring/snap-store-mobx';
 import type { UrlTranslatorConfig } from '@searchspring/snap-url-manager';
+import type { PluginGrouping } from '@searchspring/snap-controller';
 import type {
 	RecommendationInstantiatorConfigSettings,
 	RecommendationComponentObject,
@@ -20,6 +21,17 @@ import type { SnapConfig, ExtendedTarget } from '../Snap';
 import type { RecsTemplateTypes, TemplatesStoreConfigConfig, TemplateTypes } from './Stores/TemplateStore';
 import { LibraryImports } from './Stores/LibraryStore';
 import { GLOBAL_THEME_NAME } from './Stores/TargetStore';
+import type {
+	CommonPluginBackgroundFilterConfig,
+	pluginBackgroundFilters,
+	pluginScrollToTop,
+	CommonPluginScrollToTopConfig,
+	pluginLogger,
+} from '@searchspring/snap-platforms/common';
+import type { pluginBackgroundFilters as shopifyPluginBackgroundFilters } from '@searchspring/snap-platforms/shopify';
+import { pluginMutateResults as shopifyPluginMutateResults, ShopifyPluginMutateResultsConfig } from '@searchspring/snap-platforms/shopify';
+import type { pluginBackgroundFilters as bigCommercePluginBackgroundFilters } from '@searchspring/snap-platforms/bigcommerce';
+import type { pluginBackgroundFilters as magento2PluginBackgroundFilters } from '@searchspring/snap-platforms/magento2';
 
 export const THEME_EDIT_COOKIE = 'ssThemeEdit';
 
@@ -86,6 +98,21 @@ export type SnapTemplatesConfig = TemplatesStoreConfigConfig & {
 	};
 };
 
+type TemplatePlugins =
+	// common
+	| [typeof pluginBackgroundFilters, CommonPluginBackgroundFilterConfig]
+	| [typeof pluginScrollToTop, CommonPluginScrollToTopConfig]
+	| [typeof pluginLogger]
+	// shopify
+	| [typeof shopifyPluginBackgroundFilters]
+	| [typeof shopifyPluginMutateResults, ShopifyPluginMutateResultsConfig]
+	// bigCommerce
+	| [typeof bigCommercePluginBackgroundFilters]
+	// magento2
+	| [typeof magento2PluginBackgroundFilters];
+
+type TemplatePluginGrouping = TemplatePlugins[];
+
 export const DEFAULT_FEATURES: SnapFeatures = {
 	integratedSpellCorrection: {
 		enabled: true,
@@ -107,6 +134,23 @@ export class SnapTemplates extends Snap {
 		const templatesStore = new TemplatesStore({ config, settings: { editMode } });
 
 		const snapConfig = createSnapConfig(config, templatesStore);
+
+		// get more context (all the things needed for the platform of choice as well as generic backgroundFilters)
+		let contextParams = ['backgroundFilters'];
+		switch (templatesStore.platform) {
+			case 'shopify':
+				contextParams = contextParams.concat(['collection', 'tags']);
+				break;
+			case 'bigCommerce':
+				contextParams = contextParams.concat(['category', 'brand']);
+				break;
+			case 'magento2':
+				contextParams = contextParams.concat(['category']);
+				break;
+			default:
+				break;
+		}
+		snapConfig.context = getContext(contextParams);
 
 		super(snapConfig, { templatesStore });
 
@@ -306,7 +350,7 @@ export function createSnapConfig(templateConfig: SnapTemplatesConfig, templatesS
 		const searchControllerConfig = {
 			config: {
 				id: 'search',
-				plugins: [],
+				plugins: createPlugins(templateConfig, templatesStore),
 				settings: templateConfig.search.settings || {},
 			},
 			targeters: createSearchTargeters(templateConfig, templatesStore),
@@ -332,7 +376,7 @@ export function createSnapConfig(templateConfig: SnapTemplatesConfig, templatesS
 		const autocompleteControllerConfig = {
 			config: {
 				id: 'autocomplete',
-				plugins: [],
+				plugins: createPlugins(templateConfig, templatesStore),
 				selector: templateConfig.autocomplete.inputSelector,
 				settings: autocompleteControllerSettings,
 			},
@@ -389,7 +433,10 @@ export function createSnapConfig(templateConfig: SnapTemplatesConfig, templatesS
 	if (templateConfig.recommendation && snapConfig.instantiators) {
 		const recommendationInstantiatorConfig: RecommendationInstantiatorConfig = {
 			components: createRecommendationComponentMapping(templateConfig, templatesStore),
-			config: templateConfig.recommendation?.settings!,
+			config: {
+				plugins: createPlugins(templateConfig, templatesStore),
+				...templateConfig.recommendation?.settings!,
+			},
 		};
 
 		// merge the responsive settings if there are any
@@ -405,6 +452,36 @@ export function createSnapConfig(templateConfig: SnapTemplatesConfig, templatesS
 		snapConfig.instantiators.recommendation = recommendationInstantiatorConfig;
 	}
 
-	// return new Snap(snapConfig);
 	return snapConfig;
+}
+
+function createPlugins(templateConfig: SnapTemplatesConfig, templatesStore: TemplatesStore): PluginGrouping[] {
+	const plugins: TemplatePluginGrouping = [];
+
+	plugins.push([
+		templatesStore.library.import.plugins.common.backgroundFilters,
+		templateConfig.plugins?.common?.backgroundFilters || { filters: [] },
+	]);
+	plugins.push([templatesStore.library.import.plugins.common.scrollToTop, templateConfig.plugins?.common?.scrollToTop || { enabled: true }]);
+	plugins.push([templatesStore.library.import.plugins.common.logger]);
+
+	switch (templatesStore.platform) {
+		case 'shopify':
+			plugins.push([templatesStore.library.import.plugins.shopify.backgroundFilters]);
+			plugins.push([
+				templatesStore.library.import.plugins.shopify.mutateResults,
+				templateConfig.plugins?.shopify?.mutateResults || { collectionInUrl: { enabled: true } },
+			]);
+			break;
+		case 'bigCommerce':
+			plugins.push([templatesStore.library.import.plugins.bigcommerce.backgroundFilters]);
+			break;
+		case 'magento2':
+			plugins.push([templatesStore.library.import.plugins.magento2.backgroundFilters]);
+			break;
+		default:
+			break;
+	}
+
+	return plugins as PluginGrouping[];
 }

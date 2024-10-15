@@ -6,7 +6,8 @@ new SnapTemplates({
 	config: {
 		siteId: '8uyt2m',
 		language: 'en',
-		currency: 'aud',
+		currency: 'usd',
+		platform: 'shopify',
 	},
 	components: {
 		result: {

@@ -68,6 +68,12 @@ describe('FilterSummary Component', () => {
 		expect(title).toHaveTextContent('you clicked these earlier');
 	});
 
+	it('can hide the title', () => {
+		const rendered = render(<FilterSummary hideTitle={true} filters={filters} title={'you clicked these earlier'} />);
+		const title = rendered.container.querySelector('.ss__filter-summary__title');
+		expect(title).not.toBeInTheDocument();
+	});
+
 	it('renders with specified icons', async () => {
 		const args = {
 			filters: filters,

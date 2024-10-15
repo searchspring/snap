@@ -264,6 +264,15 @@ describe('Select Component', () => {
 			expect(buttonLabel).toHaveTextContent(label);
 		});
 
+		it('can hide the "label" with hidelabel', () => {
+			const label = 'selectme';
+			const rendered = render(<Select hideLabel={true} label={label} options={options} />);
+
+			const buttonLabel = rendered.container.querySelector('.ss__select__label');
+
+			expect(buttonLabel).not.toBeInTheDocument();
+		});
+
 		it('renders the "separator" prop in button when there is a label and a selection is made', async () => {
 			const separator = ':::';
 			const label = 'color';

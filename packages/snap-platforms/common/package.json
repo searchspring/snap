@@ -1,0 +1,8 @@
+{
+	"name": "snap-platforms-common",
+	"private": true,
+	"description": "Snap Common Platform Library",
+	"main": "../dist/cjs/common/src/index.js",
+	"module": "../dist/esm/common/src/index.js",
+	"sideEffects": false
+}

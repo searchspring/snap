@@ -72,6 +72,16 @@ export default {
 			},
 			control: { type: 'text' },
 		},
+		hideLabel: {
+			description: 'hide the Header label',
+			table: {
+				type: {
+					summary: 'boolean',
+				},
+				defaultValue: { summary: false },
+			},
+			control: { type: 'boolean' },
+		},
 		clearSelection: {
 			description: 'Unselect label',
 			table: {

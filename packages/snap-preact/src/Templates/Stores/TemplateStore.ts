@@ -5,7 +5,9 @@ import { ThemeStore, ThemeStoreThemeConfig } from './ThemeStore';
 import { TargetStore } from './TargetStore';
 import { CurrencyCodes, LanguageCodes, LibraryImports, LibraryStore } from './LibraryStore';
 import { debounce } from '@searchspring/snap-toolbox';
-
+import type { ShopifyPluginMutateResultsConfig } from '@searchspring/snap-platforms/shopify';
+import type { CommonPluginBackgroundFilterConfig } from '@searchspring/snap-platforms/common';
+import type { CommonPluginScrollToTopConfig } from '@searchspring/snap-platforms/common';
 import type {
 	LangComponentOverrides,
 	ResultComponent,
@@ -14,7 +16,8 @@ import type {
 	ThemeOverrides,
 	ThemeVariablesPartial,
 } from '../../../components/src';
-import type { GlobalThemeStyleScript } from '../../types';
+import type { GlobalThemeStyleScript, IntegrationPlatforms } from '../../types';
+
 export type TemplateThemeTypes = 'library' | 'local';
 export type TemplateTypes = 'search' | 'autocomplete' | `recommendation/${RecsTemplateTypes}`;
 export type TemplateCustomComponentTypes = 'result' | 'badge';
@@ -62,12 +65,25 @@ export type TemplateStoreComponentConfig = {
 	};
 };
 
+export type CommonPlugins = {
+	backgroundFilters?: CommonPluginBackgroundFilterConfig;
+	scrollToTop?: CommonPluginScrollToTopConfig;
+};
+export type ShopifyPlugins = {
+	mutateResults?: ShopifyPluginMutateResultsConfig;
+};
+
 export type TemplatesStoreConfigConfig = {
 	components?: TemplateStoreComponentConfig;
-	config?: {
+	config: {
 		siteId?: string;
 		currency?: CurrencyCodes;
 		language?: LanguageCodes;
+		platform: IntegrationPlatforms;
+	};
+	plugins?: {
+		common?: CommonPlugins;
+		shopify?: ShopifyPlugins;
 	};
 	translations?: {
 		[currencyName in LanguageCodes]?: LangComponentOverrides;
@@ -90,6 +106,7 @@ export class TemplatesStore {
 	storage: StorageStore;
 	language: LanguageCodes;
 	currency: CurrencyCodes;
+	platform: IntegrationPlatforms;
 	settings: TemplatesStoreConfigSettings;
 	dependencies: TemplatesStoreDependencies;
 
@@ -117,6 +134,9 @@ export class TemplatesStore {
 	constructor(params: TemplatesStoreConfig) {
 		const { config, settings } = params || {};
 		this.config = config;
+
+		this.platform = config.config?.platform || 'other';
+
 		this.storage = new StorageStore({ type: StorageType.local, key: 'ss-templates' });
 
 		this.dependencies = {

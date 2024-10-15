@@ -265,6 +265,44 @@ describe('Recommendation Component', async () => {
 		cy.get('.ss__recommendation .ss__recommendation__title').should('not.exist');
 	});
 
+	it('renders custom title', () => {
+		const titleText = 'custom title';
+		mount(
+			<Recommendation title={titleText} controller={controller}>
+				{controller.store.results.map((result, idx) => (
+					<div className="result" key={idx}>
+						{result.mappings.core?.name}
+					</div>
+				))}
+			</Recommendation>
+		);
+
+		cy.get('.ss__recommendation').should('exist');
+		cy.get('.ss__recommendation .ss__recommendation__title').should('exist');
+		cy.get('.ss__recommendation .ss__recommendation__title').should('have.text', titleText);
+	});
+
+	it('can hide title with hideTitle', () => {
+		const titleText = 'custom title';
+		const lang = {
+			titleText: {
+				value: 'lang custom title',
+			},
+		};
+		mount(
+			<Recommendation hideTitle={true} lang={lang} title={titleText} controller={controller}>
+				{controller.store.results.map((result, idx) => (
+					<div className="result" key={idx}>
+						{result.mappings.core?.name}
+					</div>
+				))}
+			</Recommendation>
+		);
+
+		cy.get('.ss__recommendation').should('exist');
+		cy.get('.ss__recommendation .ss__recommendation__title').should('not.exist');
+	});
+
 	it('can disable styling', () => {
 		mount(
 			<Recommendation controller={controller} disableStyles>

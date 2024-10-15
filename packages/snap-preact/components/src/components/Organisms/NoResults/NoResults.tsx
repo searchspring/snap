@@ -41,6 +41,8 @@ export const NoResults = observer((properties: NoResultsProps): JSX.Element => {
 	const {
 		contentSlot,
 		suggestionsTitleText,
+		hideSuggestionsTitleText,
+		hideContactsTitleText,
 		suggestionsList,
 		hideContact,
 		contactsTitleText,
@@ -166,7 +168,9 @@ export const NoResults = observer((properties: NoResultsProps): JSX.Element => {
 
 			{!hideSuggestions && (suggestionsTitleText || suggestionsExist) && (
 				<div className="ss__no-results__suggestions">
-					{suggestionsTitleText && <h3 className="ss__no-results__suggestions__title" {...mergedLang.suggestionsTitleText?.all}></h3>}
+					{suggestionsTitleText && !hideSuggestionsTitleText && (
+						<h3 className="ss__no-results__suggestions__title" {...mergedLang.suggestionsTitleText?.all}></h3>
+					)}
 
 					{suggestionsExist && <ul className="ss__no-results__suggestions__list" {...mergedLang.suggestionsList?.all}></ul>}
 				</div>
@@ -174,7 +178,7 @@ export const NoResults = observer((properties: NoResultsProps): JSX.Element => {
 
 			{!hideContact && (contactsTitleText || contactsExist) && (
 				<div className="ss__no-results__contact">
-					{contactsTitleText && <h3 className="ss__no-results__contact__title" {...mergedLang.contactsTitleText?.all}></h3>}
+					{contactsTitleText && !hideContactsTitleText && <h3 className="ss__no-results__contact__title" {...mergedLang.contactsTitleText?.all}></h3>}
 
 					{contactsExist && <div {...mergedLang.contactsList?.all}></div>}
 				</div>
@@ -202,10 +206,12 @@ type NoResultsContact = {
 export interface NoResultsProps extends ComponentProps {
 	contentSlot?: string | JSX.Element;
 	suggestionsTitleText?: string;
+	hideSuggestionsTitleText?: boolean;
 	suggestionsList?: string[];
 	hideContact?: boolean;
 	hideSuggestions?: boolean;
 	contactsTitleText?: string;
+	hideContactsTitleText?: boolean;
 	contactsList?: NoResultsContact[];
 	lang?: NoResultsLang;
 	templates?: {

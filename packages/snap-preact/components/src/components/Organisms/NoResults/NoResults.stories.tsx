@@ -88,6 +88,26 @@ export default {
 			},
 			control: { type: 'boolean' },
 		},
+		hideContactsTitleText: {
+			description: 'Hide contact section title',
+			table: {
+				type: {
+					summary: 'boolean',
+				},
+				defaultValue: { summary: false },
+			},
+			control: { type: 'boolean' },
+		},
+		hideSuggestionsTitleText: {
+			description: 'Hide suggestions section title',
+			table: {
+				type: {
+					summary: 'boolean',
+				},
+				defaultValue: { summary: false },
+			},
+			control: { type: 'boolean' },
+		},
 		contactsTitleText: {
 			description: 'contact section title',
 			table: {
