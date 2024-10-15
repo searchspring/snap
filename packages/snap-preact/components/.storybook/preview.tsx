@@ -14,6 +14,7 @@ import { SnapProvider, Theme } from '../src';
 const snapTemplates = new SnapTemplates({
 	config: {
 		siteId: '8uyt2m',
+		platform: 'other',
 	},
 	themes: {
 		global: {
