@@ -17,6 +17,8 @@ import type { CSSInterpolation } from '@emotion/serialize';
 import type { ThemeVariables } from '../components/src';
 import { AppMode } from '@searchspring/snap-toolbox';
 
+export type IntegrationPlatforms = 'shopify' | 'bigCommerce' | 'magento2' | 'other';
+
 export type SnapControllerServices = {
 	client?: Client;
 	store?: SearchStore | AutocompleteStore | FinderStore | RecommendationStore;

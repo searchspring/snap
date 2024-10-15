@@ -44,19 +44,20 @@ new SnapTemplates({
 ### Creating a theme
 Each theme contains the following properties:
 
-| Configuration Option | Description | Type | Default |
+| Configuration Option | Description | Type | Required |
 |----------------------|-------------|------|---------|
-| `themes` | Theme configurations | Object | Required |
-| `themes.global` | Global theme configuration | Object | Required |
-| `themes[customTheme]` | Custom theme configuration | Object | Required |
-| `themes.global.extends` | Base theme to extend | String | Required |
-| `themes.global.resultComponent` | Custom result component | String | - |
-| `themes.global.variables` | Theme variables (colors, breakpoints, etc.) | Object | - |
-| `themes.global.style` | Global styles | Function | - |
-| `themes.global.overrides` | Component and layout overrides | Object | - |
+| `themes` | Theme configurations | Object | ✔️ |
+| `themes.global` | Global theme configuration | Object | ✔️ |
+| `themes[customTheme]` | Custom theme configuration | Object | ✔️ |
+| `themes.global.extends` | Base theme to extend | String | ✔️ |
+| `themes.global.resultComponent` | Custom result component | String | ➖ |
+| `themes.global.variables` | Theme variables (colors, breakpoints, etc.) | Object | ➖ |
+| `themes.global.style` | Global styles | Function | ➖ |
+| `themes.global.overrides` | Component and layout overrides | Object | ➖ |
 
 
-\* Note: Also applicable to themes that are not the `global` theme. Ie. `themes.customTheme`
+> [!NOTE]
+> These configurations are also applicable to themes that are not the `global` theme. Ie. `themes.customTheme`
 
 
 #### Theme `extends`

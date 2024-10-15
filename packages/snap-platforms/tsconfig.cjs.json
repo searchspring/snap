@@ -1,6 +1,7 @@
 {
 	"extends": "../../tsconfig.cjs.json",
 	"include": [
+		"common/src",
 		"bigcommerce/src",
 		"magento2/src",
 		"shopify/src"

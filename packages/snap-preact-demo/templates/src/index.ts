@@ -2,11 +2,39 @@ import { SnapTemplates } from '@searchspring/snap-preact';
 import { CustomResult } from './components/Result';
 import { globalStyles } from './styles';
 
+/*
+<script>
+	backgroundFilters = [{ field, value, type }];
+</script>
+*/
+
 new SnapTemplates({
 	config: {
 		siteId: '8uyt2m',
 		language: 'en',
 		currency: 'usd',
+		platform: 'shopify',
+	},
+	plugins: {
+		common: {
+			backgroundFilters: {
+				filters: [
+					{
+						type: 'value',
+						value: 'Blue',
+						field: 'Color',
+					},
+				],
+			},
+		},
+
+		shopify: {
+			mutateResults: {
+				collectionInUrl: {
+					enabled: true,
+				},
+			},
+		},
 	},
 	components: {
 		result: {
