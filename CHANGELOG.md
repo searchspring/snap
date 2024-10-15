@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.2.1](https://github.com/searchspring/snap-1.0/compare/v1.2.0...v1.2.1) (2024-10-15)
+
+### Bug Fixes
+
+- **preact/storybook:** fixing storybook ([3a53e92](https://github.com/searchspring/snap-1.0/commit/3a53e9254e3fb1df84f68d97cb9111b78ce80c54))
+
 # [1.2.0](https://github.com/searchspring/snap-1.0/compare/v1.1.11...v1.2.0) (2024-10-15)
 
 ### Bug Fixes
