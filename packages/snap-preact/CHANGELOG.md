@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.2.2](https://github.com/searchspring/snap/compare/v1.2.1...v1.2.2) (2024-10-21)
+
+### Bug Fixes
+
+- autocomplete using wrong input selector ([d0c228c](https://github.com/searchspring/snap/commit/d0c228cc08a373db1791345d06ab3cc43e8e0d51))
+- export global theme type ([379c7a6](https://github.com/searchspring/snap/commit/379c7a6b7f134442159ea6210702712f060fa2b8))
+
 ## [1.2.1](https://github.com/searchspring/snap/compare/v1.2.0...v1.2.1) (2024-10-15)
 
 ### Bug Fixes
