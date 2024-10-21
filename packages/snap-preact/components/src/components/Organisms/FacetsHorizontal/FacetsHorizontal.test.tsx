@@ -79,7 +79,7 @@ describe('FacetsHorizontal Component', () => {
 		const rendered = render(<FacetsHorizontal {...args} />);
 
 		const facetsHorizontalElement = rendered.container.querySelector('.ss__facets-horizontal');
-		expect(facetsHorizontalElement?.classList).toHaveLength(1);
+		expect(facetsHorizontalElement?.classList).toHaveLength(2);
 	});
 
 	describe('FacetsHorizontal lang works', () => {

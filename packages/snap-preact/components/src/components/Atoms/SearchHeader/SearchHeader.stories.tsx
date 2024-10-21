@@ -99,7 +99,7 @@ export default {
 			},
 			control: { type: 'text' },
 		},
-		subTitleText: {
+		subtitleText: {
 			description: 'Search Subtitle Text',
 			table: {
 				type: {
@@ -138,11 +138,61 @@ export default {
 			},
 			control: { type: 'text' },
 		},
+		hideTitleText: {
+			description: 'Hide title title',
+			table: {
+				type: {
+					summary: 'boolean',
+				},
+				defaultValue: { summary: false },
+			},
+			control: { type: 'boolean' },
+		},
+		hideSubtitleText: {
+			description: 'Hide subtitle',
+			table: {
+				type: {
+					summary: 'boolean',
+				},
+				defaultValue: { summary: false },
+			},
+			control: { type: 'boolean' },
+		},
+		hideCorrectedQueryText: {
+			description: 'Hide CorrectedQuery Text',
+			table: {
+				type: {
+					summary: 'boolean',
+				},
+				defaultValue: { summary: false },
+			},
+			control: { type: 'boolean' },
+		},
+		hideNoResultsText: {
+			description: 'Hide No Results Text',
+			table: {
+				type: {
+					summary: 'boolean',
+				},
+				defaultValue: { summary: false },
+			},
+			control: { type: 'boolean' },
+		},
+		hideDidYouMeanText: {
+			description: 'Hide Did You Mean Text',
+			table: {
+				type: {
+					summary: 'boolean',
+				},
+				defaultValue: { summary: false },
+			},
+			control: { type: 'boolean' },
+		},
 		...componentArgs,
 	},
 };
 
-const snapInstance = Snapify.search({ id: 'SearchHeader', globals: { siteId: '8uyt2m', search: { query: { string: '*' } } } });
+const snapInstance = Snapify.search({ id: 'SearchHeader', globals: { siteId: '8uyt2m', search: { query: { string: 'dress' } } } });
 
 export const Default = (args: SearchHeaderProps, { loaded: { controller } }: { loaded: { controller: SearchController } }) => {
 	return <SearchHeader {...args} controller={controller} />;
@@ -189,6 +239,28 @@ CorrectedResults.loaders = [
 		await correctedSnapInstance.search();
 		return {
 			controller: correctedSnapInstance,
+		};
+	},
+];
+
+const dymSnapInstance = Snapify.search({
+	id: 'SearchHeader-dymResults',
+	globals: { siteId: '8uyt2m', search: { query: { string: 'dnfarwts' } } },
+});
+
+export const DidYouMeanResults = (args: SearchHeaderProps, { loaded: { controller } }: { loaded: { controller: SearchController } }) => {
+	return <SearchHeader {...args} controller={controller} />;
+};
+
+DidYouMeanResults.loaders = [
+	async () => {
+		dymSnapInstance.on('afterSearch', ({ response }: any) => {
+			response.search.search.query = 'redd dress';
+			response.search.search.didYouMean = 'red dress';
+		});
+		await dymSnapInstance.search();
+		return {
+			controller: dymSnapInstance,
 		};
 	},
 ];

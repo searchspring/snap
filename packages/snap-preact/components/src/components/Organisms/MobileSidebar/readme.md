@@ -157,3 +157,37 @@ The `clearButtonIcon` prop specifies the name of an icon to add to the sidebar c
 <MobileSidebar controller={controller} clearButtonIcon={'close'} />
 ```
 
+### hideTitleText 
+The `hideTitleText` prop hides the title text.
+
+```jsx
+<MobileSidebar controller={controller} clearButtonIcon={'close'} hideTitleText={true} />
+```
+
+### hideOpenButtonText 
+The `hideOpenButtonText` prop hides the open button text.
+
+```jsx
+<MobileSidebar controller={controller} openButtonText={'open'} hideOpenButtonText={true} />
+```
+
+### hideClearButtonText 
+The `hideClearButtonText` prop hides the clear button text.
+
+```jsx
+<MobileSidebar controller={controller} clearButtonText={'start over'} hideClearButtonText={true} />
+```
+
+### hideApplyButtonText 
+The `hideApplyButtonText` prop hides the apply button text.
+
+```jsx
+<MobileSidebar controller={controller} applyButtonText={'Apply Changees'} hideApplyButtonText={true} />
+```
+
+### hideCloseButtonText 
+The `hideCloseButtonText` prop hides the close button text.
+
+```jsx
+<MobileSidebar controller={controller} closeButtonText={'close'} hideCloseButtonText={true} />
+```

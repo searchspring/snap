@@ -9,7 +9,7 @@ const facetHierarchyOptionsStyleScript = ({ horizontal, theme }: FacetHierarchyO
 		return css({
 			display: 'flex',
 			flexWrap: 'wrap',
-			'& .ss__facet-hierarchy-options__option': {
+			'.ss__facet-hierarchy-options__option': {
 				margin: '0 5px 5px 0',
 				color: variables?.colors?.secondary,
 				flex: '0 1 auto',
@@ -19,8 +19,6 @@ const facetHierarchyOptionsStyleScript = ({ horizontal, theme }: FacetHierarchyO
 				'&.ss__facet-hierarchy-options__option--filtered': {
 					fontWeight: 'bold',
 					marginRight: '2em',
-					backgroundColor: variables?.colors?.active?.background,
-					color: variables?.colors?.active?.foreground,
 					'&:hover': {
 						cursor: 'default',
 					},
@@ -32,8 +30,8 @@ const facetHierarchyOptionsStyleScript = ({ horizontal, theme }: FacetHierarchyO
 						color: variables?.colors?.accent,
 					},
 				},
-				'& .ss__facet-hierarchy-options__option__value': {
-					'& .ss__facet-hierarchy-options__option__value__count': {
+				'.ss__facet-hierarchy-options__option__value': {
+					'.ss__facet-hierarchy-options__option__value__count': {
 						fontSize: '0.8em',
 						marginLeft: '6px',
 					},
@@ -43,7 +41,7 @@ const facetHierarchyOptionsStyleScript = ({ horizontal, theme }: FacetHierarchyO
 	}
 
 	return css({
-		'& .ss__facet-hierarchy-options__option': {
+		'.ss__facet-hierarchy-options__option': {
 			display: 'flex',
 			padding: '6px 0',
 			textDecoration: 'none',
@@ -58,7 +56,7 @@ const facetHierarchyOptionsStyleScript = ({ horizontal, theme }: FacetHierarchyO
 				'&:hover': {
 					cursor: 'default',
 				},
-				'& ~ .ss__facet-hierarchy-options__option:not(.ss__facet-hierarchy-options__option--filtered)': {
+				'~ .ss__facet-hierarchy-options__option:not(.ss__facet-hierarchy-options__option--filtered)': {
 					paddingLeft: '16px',
 				},
 			},
@@ -69,9 +67,8 @@ const facetHierarchyOptionsStyleScript = ({ horizontal, theme }: FacetHierarchyO
 					color: variables?.colors?.accent,
 				},
 			},
-			'& .ss__facet-hierarchy-options__option__value': {
-				marginLeft: '8px',
-				'& .ss__facet-hierarchy-options__option__value__count': {
+			'.ss__facet-hierarchy-options__option__value': {
+				'.ss__facet-hierarchy-options__option__value__count': {
 					fontSize: '0.8em',
 					marginLeft: '6px',
 				},

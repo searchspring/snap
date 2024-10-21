@@ -1,8 +1,6 @@
-import 'whatwg-fetch';
-import { h } from 'preact';
 import { VariantSelection } from '../../../../src/components/Molecules/VariantSelection';
 import { mount } from '@cypress/react';
-import { RecommendationStore } from '@searchspring/snap-store-mobx';
+import { RecommendationStore, VariantSelection as VariantSelectionType } from '@searchspring/snap-store-mobx';
 import { UrlManager, QueryStringTranslator, reactLinker } from '@searchspring/snap-url-manager';
 import { Tracker } from '@searchspring/snap-tracker';
 import { EventManager } from '@searchspring/snap-event-manager';
@@ -53,7 +51,7 @@ const controller = new RecommendationController(recommendConfig, {
 // 	},
 // };
 
-let selection;
+let selection: VariantSelectionType;
 
 describe('VariantSelection Component', async () => {
 	before(async () => {
@@ -61,7 +59,7 @@ describe('VariantSelection Component', async () => {
 		cy.intercept('*profile*', profile);
 		await controller.search();
 
-		selection = controller.store.results[0].variants?.selections[1];
+		selection = controller.store.results[0].variants?.selections[1]!;
 	});
 
 	describe('Dropdown VariantSelection', () => {
@@ -86,19 +84,20 @@ describe('VariantSelection Component', async () => {
 		});
 	});
 
-	describe('swatches VariantSelection', () => {
-		it('renders as swatch with type', () => {
-			mount(<VariantSelection selection={selection} type={'swatches'} />);
-			cy.get('.ss__variant-selection__swatches').should('exist');
-			cy.get('.ss__swatches__carousel__swatch').should('have.length', selection.values.length);
-		});
-	});
-
 	describe('List VariantSelection', () => {
 		it('renders as list with type', () => {
 			mount(<VariantSelection selection={selection} type={'list'} />);
 			cy.get('.ss__variant-selection__list').should('exist');
 			cy.get('.ss__list__option').should('have.length', selection.values.length);
+		});
+	});
+
+	describe('swatches VariantSelection', () => {
+		it('renders as swatch with type', () => {
+			selection = controller.store.results[0].variants?.selections[0]!;
+			mount(<VariantSelection selection={selection} type={'swatches'} />);
+			cy.get('.ss__variant-selection__swatches').should('exist');
+			cy.get('.ss__swatches__carousel__swatch').should('have.length', selection.values.length);
 		});
 	});
 });

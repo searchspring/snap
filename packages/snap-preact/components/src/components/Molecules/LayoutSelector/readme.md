@@ -88,6 +88,13 @@ The `label` prop specifies the label to render. Defaults to `"Layout"`.
 <LayoutSelector label={"Layout"} onSelect={(e, option) => callback()} options={layoutOptions} />
 ```
 
+### hideLabel
+The `hideLabel` prop hides the selector label.
+
+```jsx
+<LayoutSelector hideLabel={true} label={"Layout"} onSelect={(e, option) => callback()} options={layoutOptions} />
+```
+
 ### showSingleOption
 The `showSingleOption` prop specifies if the component should render if the provided options prop contains a single option. 
 ```jsx

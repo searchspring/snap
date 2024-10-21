@@ -10,8 +10,14 @@ const toolbarStyleScript = ({ theme }: ToolbarProps) => {
 		display: 'flex',
 		justifyContent: 'space-between',
 		alignItems: 'center',
+		marginBottom: '10px',
 
-		'&.ss__search__content__toolbar--bottom-toolbar': {
+		'&.ss__search__content__toolbar--top-toolbar': {
+			alignItems: 'flex-end',
+			justifyContent: 'flex-end',
+		},
+
+		'&.ss__search__content__toolbar--bottom-toolbar, &.ss__search-horizontal__content__toolbar--bottom-toolbar': {
 			justifyContent: 'center',
 		},
 	});

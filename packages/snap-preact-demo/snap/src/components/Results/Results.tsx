@@ -87,13 +87,13 @@ export const NoResults = withSnap(
 
 			return (
 				<div className="ss-no-results">
-					<div className="ss-no-results-container">
-						{dym && (
+					{dym && (
+						<div className="ss-no-results-container">
 							<p className="ss-did-you-mean">
 								Did you mean <a href={dym.url.href}>{dym.string}</a>?
 							</p>
-						)}
-					</div>
+						</div>
+					)}
 
 					<div className="ss-no-results-container">
 						<h4 className="ss-title">Suggestions</h4>
@@ -141,7 +141,7 @@ export const NoResults = withSnap(
 								<a href="mailto:email@sitename.com">email@sitename.com</a>
 							</p>
 						</div>
-						<div>{recsController?.store?.loaded && <Recommendation controller={recsController} />}</div>
+						<div style={{ maxWidth: '100%' }}>{recsController?.store?.loaded && <Recommendation controller={recsController} />}</div>
 					</div>
 				</div>
 			);

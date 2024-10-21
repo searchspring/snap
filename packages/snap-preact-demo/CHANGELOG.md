@@ -3,6 +3,21 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.2.1](https://github.com/searchspring/snap-1.0/compare/v1.2.0...v1.2.1) (2024-10-15)
+
+**Note:** Version bump only for package @searchspring/snap-preact-demo
+
+# [1.2.0](https://github.com/searchspring/snap-1.0/compare/v1.1.11...v1.2.0) (2024-10-15)
+
+### Bug Fixes
+
+- templates plugins ([247ebf7](https://github.com/searchspring/snap-1.0/commit/247ebf7e621c31b4e21f42ed66b2c1dd070e092b))
+- update demostore index.ts ([9680044](https://github.com/searchspring/snap-1.0/commit/96800445ad659be26916d91cff13418c8c33b703))
+
+## [1.1.11](https://github.com/searchspring/snap-1.0/compare/v1.1.10...v1.1.11) (2024-09-30)
+
+**Note:** Version bump only for package @searchspring/snap-preact-demo
+
 ## [1.1.10](https://github.com/searchspring/snap-1.0/compare/v1.1.9...v1.1.10) (2024-09-23)
 
 **Note:** Version bump only for package @searchspring/snap-preact-demo
@@ -66,6 +81,18 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 - responsive themestore and breakpoint props ([d4faf3a](https://github.com/searchspring/snap-1.0/commit/d4faf3acdd2703b0225d4784c078ada967c64527))
 - separate recommendation types ([4a03491](https://github.com/searchspring/snap-1.0/commit/4a03491766fd3dbd3eeddf8d91ed4572bd4ae6bf))
 - support template themes in snap-preact ([df9d905](https://github.com/searchspring/snap-1.0/commit/df9d9057a1554d7eb62830002c3db990e0f8f272))
+
+## [0.60.4](https://github.com/searchspring/snap/compare/v0.60.3...v0.60.4) (2024-09-25)
+
+**Note:** Version bump only for package @searchspring/snap-preact-demo
+
+## [0.60.3](https://github.com/searchspring/snap/compare/v0.60.2...v0.60.3) (2024-09-25)
+
+**Note:** Version bump only for package @searchspring/snap-preact-demo
+
+## [0.60.2](https://github.com/searchspring/snap/compare/v0.60.1...v0.60.2) (2024-09-24)
+
+**Note:** Version bump only for package @searchspring/snap-preact-demo
 
 ## [0.60.1](https://github.com/searchspring/snap/compare/v0.60.0...v0.60.1) (2024-09-12)
 

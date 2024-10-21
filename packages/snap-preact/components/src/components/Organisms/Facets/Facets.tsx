@@ -94,7 +94,7 @@ export const Facets = observer((properties: FacetsProps): JSX.Element => {
 		<CacheProvider>
 			<div className={classnames('ss__facets', className)} {...styling}>
 				{facets.map((facet) => (
-					<Facet {...subProps.facet} facet={facet} />
+					<Facet key={facet.field} {...subProps.facet} facet={facet} />
 				))}
 			</div>
 		</CacheProvider>
@@ -115,3 +115,5 @@ export interface FacetsProps extends ComponentProps {
 	controller?: SearchController | AutocompleteController;
 	onFacetOptionClick?: (e: React.MouseEvent<Element, MouseEvent>) => void;
 }
+
+export type FacetsNames = 'search' | 'autocomplete';

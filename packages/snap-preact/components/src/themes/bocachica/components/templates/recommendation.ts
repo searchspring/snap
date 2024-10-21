@@ -7,6 +7,7 @@ const recommendationStyleScript = ({ vertical, theme }: RecommendationProps) => 
 	const variables = theme?.variables;
 
 	return css({
+		margin: '20px 0',
 		height: vertical ? '100%' : undefined,
 		'& .ss__recommendation__title': {
 			color: variables?.colors?.primary,

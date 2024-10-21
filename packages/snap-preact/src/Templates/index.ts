@@ -1,2 +1,2 @@
-export { SnapTemplates } from './SnapTemplate';
-export type { SnapTemplatesConfig } from './SnapTemplate';
+export { SnapTemplates } from './SnapTemplates';
+export type { SnapTemplatesConfig } from './SnapTemplates';

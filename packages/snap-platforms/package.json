@@ -1,6 +1,6 @@
 {
 	"name": "@searchspring/snap-platforms",
-	"version": "1.1.10",
+	"version": "1.2.1",
 	"description": "Snap Platforms Library",
 	"author": "Searchspring",
 	"license": "MIT",
@@ -18,16 +18,22 @@
 		"test:watch": "jest --watch"
 	},
 	"dependencies": {
-		"@searchspring/snap-toolbox": "^1.1.10"
+		"@searchspring/snap-toolbox": "^1.2.1"
 	},
 	"devDependencies": {
-		"@searchspring/snap-store-mobx": "^1.1.10"
+		"@searchspring/snap-controller": "^1.2.1",
+		"@searchspring/snap-store-mobx": "^1.2.1"
 	},
 	"sideEffects": false,
 	"files": [
 		"dist/**/*"
 	],
 	"exports": {
+		"./common": {
+			"types": "./dist/esm/common/src/index.d.ts",
+			"import": "./dist/esm/common/src/index.js",
+			"require": "./dist/cjs/common/src/index.js"
+		},
 		"./shopify": {
 			"types": "./dist/esm/shopify/src/index.d.ts",
 			"import": "./dist/esm/shopify/src/index.js",

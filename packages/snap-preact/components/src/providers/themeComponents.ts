@@ -1,3 +1,4 @@
+/* ATOMS */
 import type { BadgeImageProps } from '../components/Atoms/BadgeImage';
 import type { BadgePillProps } from '../components/Atoms/BadgePill';
 import type { BadgeRectangleProps } from '../components/Atoms/BadgeRectangle';
@@ -13,8 +14,9 @@ import type { BannerNames, BannerProps, InlineBannerProps } from '../components/
 import type { OverlayProps } from '../components/Atoms/Overlay';
 import type { PriceNames, PriceProps } from '../components/Atoms/Price';
 import type { SkeletonProps } from '../components/Atoms/Skeleton';
-import type { TermsProps } from '../components/Atoms/Terms';
-import type { ToggleProps } from '../components/Atoms/Toggle';
+// import type { ToggleProps } from '../components/Atoms/Toggle';
+
+/* MOLECULES */
 import type { CalloutBadgeProps } from '../components/Molecules/CalloutBadge';
 import type { CarouselProps } from '../components/Molecules/Carousel';
 import type { CheckboxProps } from '../components/Molecules/Checkbox';
@@ -24,7 +26,7 @@ import type { FacetHierarchyOptionsProps } from '../components/Molecules/FacetHi
 import type { FacetListOptionsProps } from '../components/Molecules/FacetListOptions';
 import type { FacetPaletteOptionsProps } from '../components/Molecules/FacetPaletteOptions';
 import type { FacetSliderProps } from '../components/Molecules/FacetSlider';
-import type { FacetToggleProps } from '../components/Molecules/FacetToggle';
+// import type { FacetToggleProps } from '../components/Molecules/FacetToggle';
 import type { FilterNames, FilterProps } from '../components/Molecules/Filter';
 import type { GridProps } from '../components/Molecules/Grid';
 import type { LayoutSelectorProps } from '../components/Molecules/LayoutSelector';
@@ -43,24 +45,32 @@ import type { SlideoutProps } from '../components/Molecules/Slideout';
 import type { SortByProps } from '../components/Molecules/SortBy';
 import type { SwatchesProps } from '../components/Molecules/Swatches';
 import type { VariantSelectionProps } from '../components/Molecules/VariantSelection';
+
+/* ORGANISMS */
 import type { BranchOverrideProps } from '../components/Organisms/BranchOverride';
 import type { FacetProps } from '../components/Organisms/Facet';
 import type { FacetsHorizontalProps } from '../components/Organisms/FacetsHorizontal';
-import type { FacetsProps } from '../components/Organisms/Facets';
+import type { FacetsNames, FacetsProps } from '../components/Organisms/Facets';
 import type { FilterSummaryProps } from '../components/Organisms/FilterSummary';
+import type { MobileSidebarProps } from '../components/Organisms/MobileSidebar';
+import type { NoResultsProps } from '../components/Organisms/NoResults';
 import type { ResultsNames, ResultsProps } from '../components/Organisms/Results';
 import type { SearchHeaderProps } from '../components/Atoms/SearchHeader';
 import type { SidebarProps } from '../components/Organisms/Sidebar';
 import type { ToolbarProps, ToolbarNames } from '../components/Organisms/Toolbar';
+
+/* TEMPLATES */
 import type { AutocompleteProps } from '../components/Templates/Autocomplete';
+// import type { AutocompleteTermsProps } from '../components/Templates/AutocompleteTerms';
 import type { RecommendationProps } from '../components/Templates/Recommendation';
 import type { RecommendationBundleProps } from '../components/Templates/RecommendationBundle';
+import type { RecommendationBundleEasyAddProps } from '../components/Templates/RecommendationBundleEasyAdd';
+import type { RecommendationBundleListProps } from '../components/Templates/RecommendationBundleList';
+import type { RecommendationBundleVerticalProps } from '../components/Templates/RecommendationBundleVertical';
 import type { RecommendationGridProps } from '../components/Templates/RecommendationGrid';
 import type { RecommendationEmailProps } from '../components/Templates/RecommendationEmail';
 import type { SearchProps } from '../components/Templates/Search';
 import type { SearchHorizontalProps } from '../components/Templates/SearchHorizontal';
-import type { NoResultsProps } from '../components/Atoms/NoResults';
-import type { MobileSidebarProps } from '../components/Organisms/MobileSidebar';
 
 type NamedThemeComponentSelectors<ComponentType extends string, ComponentNames extends string> =
 	| ComponentType
@@ -70,144 +80,251 @@ type NamedThemeComponentSelectors<ComponentType extends string, ComponentNames e
 
 type UnNamedThemeComponentSelectors<ComponentType extends string> = ComponentType | `${string} ${ComponentType}`;
 
-type GenericComponentProps<Props> = Partial<Omit<Props, 'breakpoints'>>;
+type RestrictedComponentProps<Props> = Partial<Omit<Props, OmittedComponentProps>>;
+type OmittedComponentProps =
+	| 'breakpoints'
+	| 'styleScript'
+	| 'controller'
+	| 'results'
+	| 'facets'
+	| 'facet'
+	| 'result'
+	| 'filter'
+	| 'lang'
+	| 'className'
+	| 'ref'
+	| 'snap'
+	| 'name'
+	| 'treePath'
+	| 'disableStyles';
 
 export type ThemeComponents = {
 	/* ATOMS */
-	badgeImage: GenericComponentProps<BadgeImageProps>;
-	badgePill: GenericComponentProps<BadgePillProps>;
-	badgeRectangle: GenericComponentProps<BadgeRectangleProps>;
-	badgeText: GenericComponentProps<BadgeTextProps>;
-	breadcrumbs: GenericComponentProps<BreadcrumbsProps>;
-	button: GenericComponentProps<ButtonProps>;
-	dropdown: GenericComponentProps<DropdownProps>;
-	formattedNumber: GenericComponentProps<FormattedNumberProps>;
-	icon: GenericComponentProps<IconProps>;
-	image: GenericComponentProps<ImageProps>;
-	loadingBar: GenericComponentProps<LoadingBarProps>;
-	banner: GenericComponentProps<BannerProps>;
-	inlineBanner: GenericComponentProps<InlineBannerProps>;
-	overlay: GenericComponentProps<OverlayProps>;
-	price: GenericComponentProps<PriceProps>;
-	skeleton: GenericComponentProps<SkeletonProps>;
-	terms: GenericComponentProps<TermsProps>;
-	toggle: GenericComponentProps<ToggleProps>;
+	badgeImage: Partial<BadgeImageProps>;
+	badgePill: Partial<BadgePillProps>;
+	badgeRectangle: Partial<BadgeRectangleProps>;
+	badgeText: Partial<BadgeTextProps>;
+	breadcrumbs: Partial<BreadcrumbsProps>;
+	button: Partial<ButtonProps>;
+	dropdown: Partial<DropdownProps>;
+	formattedNumber: Partial<FormattedNumberProps>;
+	icon: Partial<IconProps>;
+	image: Partial<ImageProps>;
+	loadingBar: Partial<LoadingBarProps>;
+	banner: Partial<BannerProps>;
+	inlineBanner: Partial<InlineBannerProps>;
+	overlay: Partial<OverlayProps>;
+	price: Partial<PriceProps>;
+	skeleton: Partial<SkeletonProps>;
+	// toggle: Partial<ToggleProps>;
+
 	/* MOLECULES */
-	calloutBadge: GenericComponentProps<CalloutBadgeProps>;
-	carousel: GenericComponentProps<CarouselProps>;
-	checkbox: GenericComponentProps<CheckboxProps>;
-	grid: GenericComponentProps<GridProps>;
-	layoutSelector: GenericComponentProps<LayoutSelectorProps>;
-	list: GenericComponentProps<ListProps>;
-	radio: GenericComponentProps<RadioProps>;
-	errorHandler: GenericComponentProps<ErrorHandlerProps>;
-	facetGridOptions: GenericComponentProps<FacetGridOptionsProps>;
-	facetHierarchyOptions: GenericComponentProps<FacetHierarchyOptionsProps>;
-	facetListOptions: GenericComponentProps<FacetListOptionsProps>;
-	facetPaletteOptions: GenericComponentProps<FacetPaletteOptionsProps>;
-	facetSlider: GenericComponentProps<FacetSliderProps>;
-	facetToggle: GenericComponentProps<FacetToggleProps>;
-	filter: GenericComponentProps<FilterProps>;
-	loadMore: GenericComponentProps<LoadMoreProps>;
-	overlayBadge: GenericComponentProps<OverlayBadgeProps>;
-	pagination: GenericComponentProps<PaginationProps>;
-	perPage: GenericComponentProps<PerPageProps>;
-	radioList: GenericComponentProps<RadioListProps>;
-	rating: GenericComponentProps<RatingProps>;
-	result: GenericComponentProps<ResultProps>;
-	searchInput: GenericComponentProps<SearchInputProps>;
-	select: GenericComponentProps<SelectProps>;
-	slideout: GenericComponentProps<SlideoutProps>;
-	sortBy: GenericComponentProps<SortByProps>;
-	swatches: GenericComponentProps<SwatchesProps>;
-	variantSelection: GenericComponentProps<VariantSelectionProps>;
+	calloutBadge: Partial<CalloutBadgeProps>;
+	carousel: Partial<CarouselProps>;
+	checkbox: Partial<CheckboxProps>;
+	grid: Partial<GridProps>;
+	layoutSelector: Partial<LayoutSelectorProps>;
+	list: Partial<ListProps>;
+	radio: Partial<RadioProps>;
+	errorHandler: Partial<ErrorHandlerProps>;
+	facetGridOptions: Partial<FacetGridOptionsProps>;
+	facetHierarchyOptions: Partial<FacetHierarchyOptionsProps>;
+	facetListOptions: Partial<FacetListOptionsProps>;
+	facetPaletteOptions: Partial<FacetPaletteOptionsProps>;
+	facetSlider: Partial<FacetSliderProps>;
+	// facetToggle: Partial<FacetToggleProps>;
+	filter: Partial<FilterProps>;
+	loadMore: Partial<LoadMoreProps>;
+	overlayBadge: Partial<OverlayBadgeProps>;
+	pagination: Partial<PaginationProps>;
+	perPage: Partial<PerPageProps>;
+	radioList: Partial<RadioListProps>;
+	rating: Partial<RatingProps>;
+	result: Partial<ResultProps>;
+	searchInput: Partial<SearchInputProps>;
+	select: Partial<SelectProps>;
+	slideout: Partial<SlideoutProps>;
+	sortBy: Partial<SortByProps>;
+	swatches: Partial<SwatchesProps>;
+	variantSelection: Partial<VariantSelectionProps>;
+
 	/* ORGANISMS */
-	branchOverride: GenericComponentProps<BranchOverrideProps>;
-	facet: GenericComponentProps<FacetProps>;
-	facets: GenericComponentProps<FacetsProps>;
-	facetsHorizontal: GenericComponentProps<FacetsHorizontalProps>;
-	filterSummary: GenericComponentProps<FilterSummaryProps>;
-	noResults: GenericComponentProps<NoResultsProps>;
-	results: GenericComponentProps<ResultsProps>;
-	searchHeader: GenericComponentProps<SearchHeaderProps>;
-	sidebar: GenericComponentProps<SidebarProps>;
-	mobileSidebar: GenericComponentProps<MobileSidebarProps>;
-	toolbar: GenericComponentProps<ToolbarProps>;
+	branchOverride: Partial<BranchOverrideProps>;
+	facet: Partial<FacetProps>;
+	facets: Partial<FacetsProps>;
+	facetsHorizontal: Partial<FacetsHorizontalProps>;
+	filterSummary: Partial<FilterSummaryProps>;
+	noResults: Partial<NoResultsProps>;
+	results: Partial<ResultsProps>;
+	searchHeader: Partial<SearchHeaderProps>;
+	sidebar: Partial<SidebarProps>;
+	mobileSidebar: Partial<MobileSidebarProps>;
+	toolbar: Partial<ToolbarProps>;
+
 	/* TEMPLATES */
-	autocomplete: GenericComponentProps<AutocompleteProps>;
-	recommendation: GenericComponentProps<RecommendationProps>;
-	recommendationBundle: GenericComponentProps<RecommendationBundleProps>;
-	recommendationGrid: GenericComponentProps<RecommendationGridProps>;
-	recommendationEmail: GenericComponentProps<RecommendationEmailProps>;
-	search: GenericComponentProps<SearchProps>;
-	searchHorizontal: GenericComponentProps<SearchHorizontalProps>;
+	autocomplete: Partial<AutocompleteProps>;
+	// autocompleteTerms: Partial<AutocompleteTermsProps>;
+	recommendation: Partial<RecommendationProps>;
+	recommendationBundle: Partial<RecommendationBundleProps>;
+	recommendationBundleEasyAdd: Partial<RecommendationBundleEasyAddProps>;
+	recommendationBundleList: Partial<RecommendationBundleListProps>;
+	recommendationBundleVertical: Partial<RecommendationBundleVerticalProps>;
+	recommendationGrid: Partial<RecommendationGridProps>;
+	recommendationEmail: Partial<RecommendationEmailProps>;
+	search: Partial<SearchProps>;
+	searchHorizontal: Partial<SearchHorizontalProps>;
 };
 
-export type ThemeComponentOverrides = {
+// prettier-ignore
+export type ThemeComponentOverrides =
 	/* ATOMS */
-	[K in UnNamedThemeComponentSelectors<'badgeImage'>]?: GenericComponentProps<BadgeImageProps>;
-} & { [K in UnNamedThemeComponentSelectors<'badgePill'>]?: GenericComponentProps<BadgePillProps> } & {
-	[K in UnNamedThemeComponentSelectors<'badgeRectangle'>]?: GenericComponentProps<BadgeRectangleProps>;
-} & { [K in UnNamedThemeComponentSelectors<'badgeText'>]?: GenericComponentProps<BadgeTextProps> } & {
-	[K in UnNamedThemeComponentSelectors<'breadcrumbs'>]?: GenericComponentProps<BreadcrumbsProps>;
-} & { [K in NamedThemeComponentSelectors<'button', ButtonNames>]?: GenericComponentProps<ButtonProps> } & {
-	[K in UnNamedThemeComponentSelectors<'dropdown'>]?: GenericComponentProps<DropdownProps>;
-} & { [K in UnNamedThemeComponentSelectors<'formattedNumber'>]?: GenericComponentProps<FormattedNumberProps> } & {
-	[K in NamedThemeComponentSelectors<'icon', IconNames>]?: GenericComponentProps<IconProps>;
-} & { [K in UnNamedThemeComponentSelectors<'image'>]?: GenericComponentProps<ImageProps> } & {
-	[K in UnNamedThemeComponentSelectors<'loadingBar'>]?: GenericComponentProps<LoadingBarProps>;
-} & { [K in NamedThemeComponentSelectors<'banner', BannerNames>]?: GenericComponentProps<BannerProps> } & {
-	[K in UnNamedThemeComponentSelectors<'inlineBanner'>]?: GenericComponentProps<InlineBannerProps>;
-} & { [K in UnNamedThemeComponentSelectors<'overlay'>]?: GenericComponentProps<OverlayProps> } & {
-	[K in NamedThemeComponentSelectors<'price', PriceNames>]?: GenericComponentProps<PriceProps>;
-} & { [K in UnNamedThemeComponentSelectors<'skeleton'>]?: GenericComponentProps<SkeletonProps> } & {
-	[K in UnNamedThemeComponentSelectors<'terms'>]?: GenericComponentProps<TermsProps>;
-} & { [K in UnNamedThemeComponentSelectors<'toggle'>]?: GenericComponentProps<ToggleProps> } /* MOLECULES */ & {
-	[K in UnNamedThemeComponentSelectors<'calloutBadge'>]?: GenericComponentProps<CalloutBadgeProps>;
-} & {
-	[K in UnNamedThemeComponentSelectors<'carousel'>]?: GenericComponentProps<CarouselProps>;
-} & { [K in UnNamedThemeComponentSelectors<'checkbox'>]?: GenericComponentProps<CheckboxProps> } & {
-	[K in UnNamedThemeComponentSelectors<'grid'>]?: GenericComponentProps<GridProps>;
-} & { [K in UnNamedThemeComponentSelectors<'layoutSelector'>]?: GenericComponentProps<LayoutSelectorProps> } & {
-	[K in UnNamedThemeComponentSelectors<'list'>]?: GenericComponentProps<ListProps>;
-} & { [K in UnNamedThemeComponentSelectors<'radio'>]?: GenericComponentProps<RadioProps> } & {
-	[K in UnNamedThemeComponentSelectors<'errorHandler'>]?: GenericComponentProps<ErrorHandlerProps>;
-} & { [K in UnNamedThemeComponentSelectors<'facetGridOptions'>]?: GenericComponentProps<FacetGridOptionsProps> } & {
-	[K in UnNamedThemeComponentSelectors<'facetHierarchyOptions'>]?: GenericComponentProps<FacetHierarchyOptionsProps>;
-} & { [K in UnNamedThemeComponentSelectors<'facetListOptions'>]?: GenericComponentProps<FacetListOptionsProps> } & {
-	[K in UnNamedThemeComponentSelectors<'facetPaletteOptions'>]?: GenericComponentProps<FacetPaletteOptionsProps>;
-} & { [K in UnNamedThemeComponentSelectors<'facetSlider'>]?: GenericComponentProps<FacetSliderProps> } & {
-	[K in UnNamedThemeComponentSelectors<'facetToggle'>]?: GenericComponentProps<FacetToggleProps>;
-} & { [K in NamedThemeComponentSelectors<'filter', FilterNames>]?: GenericComponentProps<FilterProps> } & {
-	[K in UnNamedThemeComponentSelectors<'loadMore'>]?: GenericComponentProps<LoadMoreProps>;
-} & { [K in UnNamedThemeComponentSelectors<'overlayBadge'>]?: GenericComponentProps<OverlayBadgeProps> } & {
-	[K in UnNamedThemeComponentSelectors<'pagination'>]?: GenericComponentProps<PaginationProps>;
-} & { [K in UnNamedThemeComponentSelectors<'perPage'>]?: GenericComponentProps<PerPageProps> } & {
-	[K in UnNamedThemeComponentSelectors<'radioList'>]?: GenericComponentProps<RadioListProps>;
-} & { [K in UnNamedThemeComponentSelectors<'rating'>]?: GenericComponentProps<RatingProps> } & {
-	[K in NamedThemeComponentSelectors<'result', ResultNames>]?: GenericComponentProps<ResultProps>;
-} & { [K in UnNamedThemeComponentSelectors<'searchInput'>]?: GenericComponentProps<SearchInputProps> } & {
-	[K in UnNamedThemeComponentSelectors<'select'>]?: GenericComponentProps<SelectProps>;
-} & { [K in UnNamedThemeComponentSelectors<'slideout'>]?: GenericComponentProps<SlideoutProps> } & {
-	[K in UnNamedThemeComponentSelectors<'sortBy'>]?: GenericComponentProps<SortByProps>;
-} & { [K in UnNamedThemeComponentSelectors<'swatches'>]?: GenericComponentProps<SwatchesProps> } & {
-	[K in UnNamedThemeComponentSelectors<'variantSelection'>]?: GenericComponentProps<VariantSelectionProps>;
-} /* ORGANISMS */ & { [K in UnNamedThemeComponentSelectors<'branchOverride'>]?: GenericComponentProps<BranchOverrideProps> } & {
-	[K in UnNamedThemeComponentSelectors<'facet'>]?: GenericComponentProps<FacetProps>;
-} & { [K in UnNamedThemeComponentSelectors<'facets'>]?: GenericComponentProps<FacetsProps> } & {
-	[K in UnNamedThemeComponentSelectors<'facetsHorizontal'>]?: GenericComponentProps<FacetsHorizontalProps>;
-} & { [K in UnNamedThemeComponentSelectors<'filterSummary'>]?: GenericComponentProps<FilterSummaryProps> } & {
-	[K in UnNamedThemeComponentSelectors<'noResults'>]?: GenericComponentProps<NoResultsProps>;
-} & {
-	[K in NamedThemeComponentSelectors<'results', ResultsNames>]?: GenericComponentProps<ResultsProps>;
-} & { [K in UnNamedThemeComponentSelectors<'searchHeader'>]?: GenericComponentProps<SearchHeaderProps> } & {
-	[K in UnNamedThemeComponentSelectors<'sidebar'>]?: GenericComponentProps<SidebarProps>;
-} & { [K in UnNamedThemeComponentSelectors<'mobileSidebar'>]?: GenericComponentProps<MobileSidebarProps> } & {
-	[K in NamedThemeComponentSelectors<'toolbar', ToolbarNames>]?: GenericComponentProps<ToolbarProps>;
-} /* TEMPLATES */ & { [K in UnNamedThemeComponentSelectors<'autocomplete'>]?: GenericComponentProps<AutocompleteProps> } & {
-	[K in UnNamedThemeComponentSelectors<'recommendation'>]?: GenericComponentProps<RecommendationProps>;
-} & { [K in UnNamedThemeComponentSelectors<'recommendationBundle'>]?: GenericComponentProps<RecommendationBundleProps> } & {
-	[K in UnNamedThemeComponentSelectors<'recommendationGrid'>]?: GenericComponentProps<RecommendationGridProps>;
-} & { [K in UnNamedThemeComponentSelectors<'recommendationEmail'>]?: GenericComponentProps<RecommendationEmailProps> } & {
-	[K in UnNamedThemeComponentSelectors<'search'>]?: GenericComponentProps<SearchProps>;
-} & { [K in UnNamedThemeComponentSelectors<'searchHorizontal'>]?: GenericComponentProps<SearchHorizontalProps> };
+	{ [K in UnNamedThemeComponentSelectors<'badgeImage'>]?: Partial<BadgeImageProps> } &
+	{ [K in UnNamedThemeComponentSelectors<'badgePill'>]?: Partial<BadgePillProps> } &
+	{ [K in UnNamedThemeComponentSelectors<'badgeRectangle'>]?: Partial<BadgeRectangleProps> } &
+	{ [K in UnNamedThemeComponentSelectors<'badgeText'>]?: Partial<BadgeTextProps> } &
+	{ [K in UnNamedThemeComponentSelectors<'breadcrumbs'>]?: Partial<BreadcrumbsProps> } &
+	{ [K in NamedThemeComponentSelectors<'button', ButtonNames>]?: Partial<ButtonProps> } &
+	{ [K in UnNamedThemeComponentSelectors<'dropdown'>]?: Partial<DropdownProps> } &
+	{ [K in UnNamedThemeComponentSelectors<'formattedNumber'>]?: Partial<FormattedNumberProps> } &
+	{ [K in NamedThemeComponentSelectors<'icon', IconNames>]?: Partial<IconProps> } &
+	{ [K in UnNamedThemeComponentSelectors<'image'>]?: Partial<ImageProps> } &
+	{ [K in UnNamedThemeComponentSelectors<'loadingBar'>]?: Partial<LoadingBarProps> } &
+	{ [K in NamedThemeComponentSelectors<'banner', BannerNames>]?: Partial<BannerProps> } &
+	{ [K in UnNamedThemeComponentSelectors<'inlineBanner'>]?: Partial<InlineBannerProps> } &
+	{ [K in UnNamedThemeComponentSelectors<'overlay'>]?: Partial<OverlayProps> } &
+	{ [K in NamedThemeComponentSelectors<'price', PriceNames>]?: Partial<PriceProps> } &
+	{ [K in UnNamedThemeComponentSelectors<'skeleton'>]?: Partial<SkeletonProps> } &
+	// { [K in UnNamedThemeComponentSelectors<'toggle'>]?: Partial<ToggleProps> } &
+	
+	/* MOLECULES */
+	{ [K in UnNamedThemeComponentSelectors<'calloutBadge'>]?: Partial<CalloutBadgeProps> } & 
+	{ [K in UnNamedThemeComponentSelectors<'carousel'>]?: Partial<CarouselProps> } &
+	{ [K in UnNamedThemeComponentSelectors<'checkbox'>]?: Partial<CheckboxProps> } &
+	{ [K in UnNamedThemeComponentSelectors<'grid'>]?: Partial<GridProps> } &
+	{ [K in UnNamedThemeComponentSelectors<'layoutSelector'>]?: Partial<LayoutSelectorProps> } &
+	{ [K in UnNamedThemeComponentSelectors<'list'>]?: Partial<ListProps> } &
+	{ [K in UnNamedThemeComponentSelectors<'radio'>]?: Partial<RadioProps> } &
+	{ [K in UnNamedThemeComponentSelectors<'errorHandler'>]?: Partial<ErrorHandlerProps> } &
+	{ [K in UnNamedThemeComponentSelectors<'facetGridOptions'>]?: Partial<FacetGridOptionsProps> } &
+	{ [K in UnNamedThemeComponentSelectors<'facetHierarchyOptions'>]?: Partial<FacetHierarchyOptionsProps> } &
+	{ [K in UnNamedThemeComponentSelectors<'facetListOptions'>]?: Partial<FacetListOptionsProps> } &
+	{ [K in UnNamedThemeComponentSelectors<'facetPaletteOptions'>]?: Partial<FacetPaletteOptionsProps> } &
+	{ [K in UnNamedThemeComponentSelectors<'facetSlider'>]?: Partial<FacetSliderProps> } &
+	// { [K in UnNamedThemeComponentSelectors<'facetToggle'>]?: Partial<FacetToggleProps> } &
+	{ [K in NamedThemeComponentSelectors<'filter', FilterNames>]?: Partial<FilterProps> } &
+	{ [K in UnNamedThemeComponentSelectors<'loadMore'>]?: Partial<LoadMoreProps> } &
+	{ [K in UnNamedThemeComponentSelectors<'overlayBadge'>]?: Partial<OverlayBadgeProps> } &
+	{ [K in UnNamedThemeComponentSelectors<'pagination'>]?: Partial<PaginationProps> } &
+	{ [K in UnNamedThemeComponentSelectors<'perPage'>]?: Partial<PerPageProps> } &
+	{ [K in UnNamedThemeComponentSelectors<'radioList'>]?: Partial<RadioListProps> } &
+	{ [K in UnNamedThemeComponentSelectors<'rating'>]?: Partial<RatingProps> } &
+	{ [K in NamedThemeComponentSelectors<'result', ResultNames>]?: Partial<ResultProps> } &
+	{ [K in UnNamedThemeComponentSelectors<'searchInput'>]?: Partial<SearchInputProps> } &
+	{ [K in UnNamedThemeComponentSelectors<'select'>]?: Partial<SelectProps> } &
+	{ [K in UnNamedThemeComponentSelectors<'slideout'>]?: Partial<SlideoutProps> } &
+	{ [K in UnNamedThemeComponentSelectors<'sortBy'>]?: Partial<SortByProps> } &
+	{ [K in UnNamedThemeComponentSelectors<'swatches'>]?: Partial<SwatchesProps> } &
+	{ [K in UnNamedThemeComponentSelectors<'variantSelection'>]?: Partial<VariantSelectionProps> } &
+
+	/* ORGANISMS */
+	{ [K in UnNamedThemeComponentSelectors<'branchOverride'>]?: Partial<BranchOverrideProps> } &
+	{ [K in UnNamedThemeComponentSelectors<'facet'>]?: Partial<FacetProps> } &
+	{ [K in NamedThemeComponentSelectors<'facets', FacetsNames>]?: Partial<FacetsProps> } &
+	{ [K in UnNamedThemeComponentSelectors<'facetsHorizontal'>]?: Partial<FacetsHorizontalProps> } &
+	{ [K in UnNamedThemeComponentSelectors<'filterSummary'>]?: Partial<FilterSummaryProps> } &
+	{ [K in UnNamedThemeComponentSelectors<'noResults'>]?: Partial<NoResultsProps> } &
+	{ [K in NamedThemeComponentSelectors<'results', ResultsNames>]?: Partial<ResultsProps> } &
+	{ [K in UnNamedThemeComponentSelectors<'searchHeader'>]?: Partial<SearchHeaderProps> } &
+	{ [K in UnNamedThemeComponentSelectors<'sidebar'>]?: Partial<SidebarProps> } &
+	{ [K in UnNamedThemeComponentSelectors<'mobileSidebar'>]?: Partial<MobileSidebarProps> } &
+	{ [K in NamedThemeComponentSelectors<'toolbar', ToolbarNames>]?: Partial<ToolbarProps> } &
+
+	/* TEMPLATES */
+	{ [K in UnNamedThemeComponentSelectors<'autocomplete'>]?: Partial<AutocompleteProps> } &
+	// { [K in UnNamedThemeComponentSelectors<'autocompleteTerms'>]?: Partial<AutocompleteTermsProps> } &
+	{ [K in UnNamedThemeComponentSelectors<'recommendation'>]?: Partial<RecommendationProps> } &
+	{ [K in UnNamedThemeComponentSelectors<'recommendationBundle'>]?: Partial<RecommendationBundleProps> } &
+	{ [K in UnNamedThemeComponentSelectors<'recommendationBundleEasyAdd'>]?: Partial<RecommendationBundleEasyAddProps> } &
+	{ [K in UnNamedThemeComponentSelectors<'recommendationBundleList'>]?: Partial<RecommendationBundleListProps> } &
+	{ [K in UnNamedThemeComponentSelectors<'recommendationBundleVertical'>]?: Partial<RecommendationBundleVerticalProps> } &
+	{ [K in UnNamedThemeComponentSelectors<'recommendationGrid'>]?: Partial<RecommendationGridProps> } &
+	{ [K in UnNamedThemeComponentSelectors<'recommendationEmail'>]?: Partial<RecommendationEmailProps> } & 
+	{ [K in UnNamedThemeComponentSelectors<'search'>]?: Partial<SearchProps> } &
+	{ [K in UnNamedThemeComponentSelectors<'searchHorizontal'>]?: Partial<SearchHorizontalProps> };
+
+// prettier-ignore
+export type ThemeComponentRestrictedOverrides =
+	/* ATOMS */
+	{ [K in UnNamedThemeComponentSelectors<'badgeImage'>]?: RestrictedComponentProps<BadgeImageProps> } &
+	{ [K in UnNamedThemeComponentSelectors<'badgePill'>]?: RestrictedComponentProps<BadgePillProps> } &
+	{ [K in UnNamedThemeComponentSelectors<'badgeRectangle'>]?: RestrictedComponentProps<BadgeRectangleProps> } &
+	{ [K in UnNamedThemeComponentSelectors<'badgeText'>]?: RestrictedComponentProps<BadgeTextProps> } &
+	{ [K in UnNamedThemeComponentSelectors<'breadcrumbs'>]?: RestrictedComponentProps<BreadcrumbsProps> } &
+	{ [K in NamedThemeComponentSelectors<'button', ButtonNames>]?: RestrictedComponentProps<ButtonProps> } &
+	{ [K in UnNamedThemeComponentSelectors<'dropdown'>]?: RestrictedComponentProps<DropdownProps> } &
+	{ [K in UnNamedThemeComponentSelectors<'formattedNumber'>]?: RestrictedComponentProps<FormattedNumberProps> } &
+	{ [K in NamedThemeComponentSelectors<'icon', IconNames>]?: RestrictedComponentProps<IconProps> } &
+	{ [K in UnNamedThemeComponentSelectors<'image'>]?: RestrictedComponentProps<ImageProps> } &
+	{ [K in UnNamedThemeComponentSelectors<'loadingBar'>]?: RestrictedComponentProps<LoadingBarProps> } &
+	{ [K in NamedThemeComponentSelectors<'banner', BannerNames>]?: RestrictedComponentProps<BannerProps> } &
+	{ [K in UnNamedThemeComponentSelectors<'inlineBanner'>]?: RestrictedComponentProps<InlineBannerProps> } &
+	{ [K in UnNamedThemeComponentSelectors<'overlay'>]?: RestrictedComponentProps<OverlayProps> } &
+	{ [K in NamedThemeComponentSelectors<'price', PriceNames>]?: RestrictedComponentProps<PriceProps> } &
+	{ [K in UnNamedThemeComponentSelectors<'skeleton'>]?: RestrictedComponentProps<SkeletonProps> } &
+	// { [K in UnNamedThemeComponentSelectors<'toggle'>]?: RestrictedComponentProps<ToggleProps> } &
+	
+	/* MOLECULES */
+	{ [K in UnNamedThemeComponentSelectors<'calloutBadge'>]?: RestrictedComponentProps<CalloutBadgeProps> } & 
+	{ [K in UnNamedThemeComponentSelectors<'carousel'>]?: RestrictedComponentProps<CarouselProps> } &
+	{ [K in UnNamedThemeComponentSelectors<'checkbox'>]?: RestrictedComponentProps<CheckboxProps> } &
+	{ [K in UnNamedThemeComponentSelectors<'grid'>]?: RestrictedComponentProps<GridProps> } &
+	{ [K in UnNamedThemeComponentSelectors<'layoutSelector'>]?: RestrictedComponentProps<LayoutSelectorProps> } &
+	{ [K in UnNamedThemeComponentSelectors<'list'>]?: RestrictedComponentProps<ListProps> } &
+	{ [K in UnNamedThemeComponentSelectors<'radio'>]?: RestrictedComponentProps<RadioProps> } &
+	{ [K in UnNamedThemeComponentSelectors<'errorHandler'>]?: RestrictedComponentProps<ErrorHandlerProps> } &
+	{ [K in UnNamedThemeComponentSelectors<'facetGridOptions'>]?: RestrictedComponentProps<FacetGridOptionsProps> } &
+	{ [K in UnNamedThemeComponentSelectors<'facetHierarchyOptions'>]?: RestrictedComponentProps<FacetHierarchyOptionsProps> } &
+	{ [K in UnNamedThemeComponentSelectors<'facetListOptions'>]?: RestrictedComponentProps<FacetListOptionsProps> } &
+	{ [K in UnNamedThemeComponentSelectors<'facetPaletteOptions'>]?: RestrictedComponentProps<FacetPaletteOptionsProps> } &
+	{ [K in UnNamedThemeComponentSelectors<'facetSlider'>]?: RestrictedComponentProps<FacetSliderProps> } &
+	// { [K in UnNamedThemeComponentSelectors<'facetToggle'>]?: RestrictedComponentProps<FacetToggleProps> } &
+	{ [K in NamedThemeComponentSelectors<'filter', FilterNames>]?: RestrictedComponentProps<FilterProps> } &
+	{ [K in UnNamedThemeComponentSelectors<'loadMore'>]?: RestrictedComponentProps<LoadMoreProps> } &
+	{ [K in UnNamedThemeComponentSelectors<'overlayBadge'>]?: RestrictedComponentProps<OverlayBadgeProps> } &
+	{ [K in UnNamedThemeComponentSelectors<'pagination'>]?: RestrictedComponentProps<PaginationProps> } &
+	{ [K in UnNamedThemeComponentSelectors<'perPage'>]?: RestrictedComponentProps<PerPageProps> } &
+	{ [K in UnNamedThemeComponentSelectors<'radioList'>]?: RestrictedComponentProps<RadioListProps> } &
+	{ [K in UnNamedThemeComponentSelectors<'rating'>]?: RestrictedComponentProps<RatingProps> } &
+	{ [K in NamedThemeComponentSelectors<'result', ResultNames>]?: RestrictedComponentProps<ResultProps> } &
+	{ [K in UnNamedThemeComponentSelectors<'searchInput'>]?: RestrictedComponentProps<SearchInputProps> } &
+	{ [K in UnNamedThemeComponentSelectors<'select'>]?: RestrictedComponentProps<SelectProps> } &
+	{ [K in UnNamedThemeComponentSelectors<'slideout'>]?: RestrictedComponentProps<SlideoutProps> } &
+	{ [K in UnNamedThemeComponentSelectors<'sortBy'>]?: RestrictedComponentProps<SortByProps> } &
+	{ [K in UnNamedThemeComponentSelectors<'swatches'>]?: RestrictedComponentProps<SwatchesProps> } &
+	{ [K in UnNamedThemeComponentSelectors<'variantSelection'>]?: RestrictedComponentProps<VariantSelectionProps> } &
+
+	/* ORGANISMS */
+	{ [K in UnNamedThemeComponentSelectors<'branchOverride'>]?: RestrictedComponentProps<BranchOverrideProps> } &
+	{ [K in UnNamedThemeComponentSelectors<'facet'>]?: RestrictedComponentProps<FacetProps> } &
+	{ [K in NamedThemeComponentSelectors<'facets', FacetsNames>]?: RestrictedComponentProps<FacetsProps> } &
+	{ [K in UnNamedThemeComponentSelectors<'facetsHorizontal'>]?: RestrictedComponentProps<FacetsHorizontalProps> } &
+	{ [K in UnNamedThemeComponentSelectors<'filterSummary'>]?: RestrictedComponentProps<FilterSummaryProps> } &
+	{ [K in UnNamedThemeComponentSelectors<'noResults'>]?: RestrictedComponentProps<NoResultsProps> } &
+	{ [K in NamedThemeComponentSelectors<'results', ResultsNames>]?: RestrictedComponentProps<ResultsProps> } &
+	{ [K in UnNamedThemeComponentSelectors<'searchHeader'>]?: RestrictedComponentProps<SearchHeaderProps> } &
+	{ [K in UnNamedThemeComponentSelectors<'sidebar'>]?: RestrictedComponentProps<SidebarProps> } &
+	{ [K in UnNamedThemeComponentSelectors<'mobileSidebar'>]?: RestrictedComponentProps<MobileSidebarProps> } &
+	{ [K in NamedThemeComponentSelectors<'toolbar', ToolbarNames>]?: RestrictedComponentProps<ToolbarProps> } &
+
+	/* TEMPLATES */
+	{ [K in UnNamedThemeComponentSelectors<'autocomplete'>]?: RestrictedComponentProps<AutocompleteProps> } &
+	// { [K in UnNamedThemeComponentSelectors<'autocompleteTerms'>]?: RestrictedComponentProps<AutocompleteTermsProps> } &
+	{ [K in UnNamedThemeComponentSelectors<'recommendation'>]?: RestrictedComponentProps<RecommendationProps> } &
+	{ [K in UnNamedThemeComponentSelectors<'recommendationBundle'>]?: RestrictedComponentProps<RecommendationBundleProps> } &
+	{ [K in UnNamedThemeComponentSelectors<'recommendationBundleEasyAdd'>]?: RestrictedComponentProps<RecommendationBundleEasyAddProps> } &
+	{ [K in UnNamedThemeComponentSelectors<'recommendationBundleList'>]?: RestrictedComponentProps<RecommendationBundleListProps> } &
+	{ [K in UnNamedThemeComponentSelectors<'recommendationBundleVertical'>]?: RestrictedComponentProps<RecommendationBundleVerticalProps> } &
+	{ [K in UnNamedThemeComponentSelectors<'recommendationGrid'>]?: RestrictedComponentProps<RecommendationGridProps> } &
+	{ [K in UnNamedThemeComponentSelectors<'recommendationEmail'>]?: RestrictedComponentProps<RecommendationEmailProps> } & 
+	{ [K in UnNamedThemeComponentSelectors<'search'>]?: RestrictedComponentProps<SearchProps> } &
+	{ [K in UnNamedThemeComponentSelectors<'searchHorizontal'>]?: RestrictedComponentProps<SearchHorizontalProps> };

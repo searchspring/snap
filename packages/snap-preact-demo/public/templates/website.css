@@ -599,13 +599,14 @@ input[type='text'] {
 
   .ss-lite-main-layout .ss-lite-sidebar {
     -webkit-box-flex: 0;
-    -webkit-flex: 0 1 auto;
-    -ms-flex: 0 1 auto;
-    flex: 0 1 auto;
+    -webkit-flex: 0 0 250px;
+    -ms-flex: 0 0 250px;
+    flex: 0 0 250px;
     max-width: 250px;
     margin: 0 40px 0 0; }
   .ss-lite-main-layout .ss-lite-content {
-    max-width: 100%;
+    width: 100%;
+    min-width: 0;
   }
 
 /* Footer

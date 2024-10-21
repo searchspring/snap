@@ -418,19 +418,22 @@ export class SearchController extends AbstractController {
 					search.results = backfillResults;
 				} else {
 					// infinite with no backfills.
-					const response = await this.client.search(params);
-					meta = response.meta;
-					search = response.search;
+					const infiniteResponse = await this.client.search(params);
+					meta = infiniteResponse.meta;
+					search = infiniteResponse.search;
 
 					// append new results to previous results
 					search.results = [...this.previousResults, ...(search.results || [])];
 				}
 			} else {
 				// standard request (not using infinite scroll)
-				const res = await this.client.search(params);
-				meta = res.meta;
-				search = res.search;
+				const searchResponse = await this.client.search(params);
+				meta = searchResponse.meta;
+				search = searchResponse.search;
 			}
+
+			// need to reconsolidate in order for references to be preserved
+			const response = { meta, search };
 
 			searchProfile.stop();
 			this.log.profile(searchProfile);
@@ -441,7 +444,7 @@ export class SearchController extends AbstractController {
 				await this.eventManager.fire('afterSearch', {
 					controller: this,
 					request: params,
-					response: { meta, search },
+					response,
 				});
 			} catch (err: any) {
 				if (err?.message == 'cancelled') {
@@ -463,7 +466,7 @@ export class SearchController extends AbstractController {
 			}
 
 			// update the store
-			this.store.update({ meta, search });
+			this.store.update(response);
 
 			const afterStoreProfile = this.profiler.create({ type: 'event', name: 'afterStore', context: params }).start();
 
@@ -471,7 +474,7 @@ export class SearchController extends AbstractController {
 				await this.eventManager.fire('afterStore', {
 					controller: this,
 					request: params,
-					response: { meta, search },
+					response,
 				});
 			} catch (err: any) {
 				if (err?.message == 'cancelled') {

@@ -51,6 +51,16 @@ export default {
 			},
 			control: { type: 'text' },
 		},
+		hideTitleText: {
+			description: 'hide title text',
+			table: {
+				type: {
+					summary: 'boolean',
+				},
+				defaultValue: { summary: false },
+			},
+			control: { type: 'boolean' },
+		},
 		hideOptionCheckboxes: {
 			description: 'enable/disable checkboxes',
 			table: {

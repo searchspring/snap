@@ -9,6 +9,7 @@ import Readme from '../BadgeText/readme.md';
 export default {
 	title: 'Atoms/BadgeText',
 	component: BadgeText,
+	tags: ['autodocs'],
 	parameters: {
 		docs: {
 			page: () => (

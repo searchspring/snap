@@ -57,7 +57,7 @@ export const BadgePill = observer((properties: BadgePillProps): JSX.Element => {
 	);
 });
 
-export interface BadgePillProps extends ComponentProps {
+export interface BadgePillProps extends ComponentProps<BadgePillProps> {
 	value: string;
 	color?: string;
 	colorText?: string;

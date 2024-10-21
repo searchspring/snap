@@ -45,6 +45,13 @@ The `title` prop specifies the carousel title
 <Recommendation controller={controller} title={'Recommended Products'} />
 ```
 
+### hideTitle
+The `hideTitle` prop hides the carousel title
+
+```jsx
+<Recommendation controller={controller} title={'Recommended Products'} hideTitle={true} />
+```
+
 ### pagination
 The `pagination` prop specifies if the carousel should display pagination dots. 
 

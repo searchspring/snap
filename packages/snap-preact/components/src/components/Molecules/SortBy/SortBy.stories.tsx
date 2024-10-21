@@ -58,6 +58,16 @@ export default {
 			},
 			control: { type: 'text' },
 		},
+		hideLabel: {
+			description: 'hide header label',
+			table: {
+				type: {
+					summary: 'boolean',
+				},
+				defaultValue: { summary: false },
+			},
+			control: { type: 'boolean' },
+		},
 		type: {
 			description: 'type of Select to render.',
 			table: {

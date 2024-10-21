@@ -199,6 +199,32 @@ var documents = [
 		],
 	},
 	{
+		categoryName: 'Templates',
+		links: [
+			{
+				label: 'About',
+				route: '/templates-about',
+				type: 'markdown',
+				url: './docs/TEMPLATES_ABOUT.md',
+				searchable: true,
+			},
+			{
+				label: 'Config',
+				route: '/templates-config',
+				type: 'markdown',
+				url: './docs/TEMPLATES_CONFIG.md',
+				searchable: true,
+			},
+			{
+				label: 'Theming',
+				route: '/templates-theming',
+				type: 'markdown',
+				url: './docs/TEMPLATES_THEMING.md',
+				searchable: true,
+			},
+		],
+	},
+	{
 		categoryName: 'Packages',
 		links: [
 			{
@@ -437,6 +463,13 @@ var documents = [
 				url: './packages/snap-platforms/README.md',
 				searchable: true,
 				links: [
+					{
+						label: 'Common',
+						route: '/package-platforms-common',
+						type: 'markdown',
+						url: './packages/snap-platforms/common/README.md',
+						searchable: true,
+					},
 					{
 						label: 'BigCommerce',
 						route: '/package-platforms-bigcommerce',

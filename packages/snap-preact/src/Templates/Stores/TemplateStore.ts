@@ -1,13 +1,23 @@
 import { observable, makeObservable } from 'mobx';
 import { StorageStore, StorageType } from '@searchspring/snap-store-mobx';
-import { SnapTemplatesConfig } from '../SnapTemplate';
+import { SnapTemplatesConfig } from '../SnapTemplates';
 import { ThemeStore, ThemeStoreThemeConfig } from './ThemeStore';
 import { TargetStore } from './TargetStore';
 import { CurrencyCodes, LanguageCodes, LibraryImports, LibraryStore } from './LibraryStore';
 import { debounce } from '@searchspring/snap-toolbox';
+import type { ShopifyPluginMutateResultsConfig } from '@searchspring/snap-platforms/shopify';
+import type { CommonPluginBackgroundFilterConfig } from '@searchspring/snap-platforms/common';
+import type { CommonPluginScrollToTopConfig } from '@searchspring/snap-platforms/common';
+import type {
+	LangComponentOverrides,
+	ResultComponent,
+	ThemeComponents,
+	ThemeMinimal,
+	ThemeOverrides,
+	ThemeVariablesPartial,
+} from '../../../components/src';
+import type { GlobalThemeStyleScript, IntegrationPlatforms } from '../../types';
 
-import type { LangComponentOverrides, ResultComponent, ThemeMinimal, ThemeOverrides, ThemeVariablesPartial } from '../../../components/src';
-import type { GlobalThemeStyleScript } from '../../types';
 export type TemplateThemeTypes = 'library' | 'local';
 export type TemplateTypes = 'search' | 'autocomplete' | `recommendation/${RecsTemplateTypes}`;
 export type TemplateCustomComponentTypes = 'result' | 'badge';
@@ -29,7 +39,7 @@ export type TemplateTarget = {
 	resultComponent?: keyof LibraryImports['component']['result'] | (string & NonNullable<unknown>);
 };
 
-export type TemplatesStoreSettings = {
+export type TemplatesStoreConfigSettings = {
 	editMode: boolean;
 };
 
@@ -50,17 +60,30 @@ type TemplateStoreThemeConfig = {
 };
 
 export type TemplateStoreComponentConfig = {
-	[key in TemplateCustomComponentTypes]: {
+	[key in TemplateCustomComponentTypes]?: {
 		[componentName: string]: (args?: any) => Promise<ResultComponent> | ResultComponent;
 	};
 };
 
-export type TemplateStoreConfig = {
+export type CommonPlugins = {
+	backgroundFilters?: CommonPluginBackgroundFilterConfig;
+	scrollToTop?: CommonPluginScrollToTopConfig;
+};
+export type ShopifyPlugins = {
+	mutateResults?: ShopifyPluginMutateResultsConfig;
+};
+
+export type TemplatesStoreConfigConfig = {
 	components?: TemplateStoreComponentConfig;
-	config?: {
+	config: {
 		siteId?: string;
 		currency?: CurrencyCodes;
 		language?: LanguageCodes;
+		platform: IntegrationPlatforms;
+	};
+	plugins?: {
+		common?: CommonPlugins;
+		shopify?: ShopifyPlugins;
 	};
 	translations?: {
 		[currencyName in LanguageCodes]?: LangComponentOverrides;
@@ -72,9 +95,9 @@ export type TemplateStoreConfig = {
 
 const RESIZE_DEBOUNCE = 100;
 
-type TemplatesStoreConfig = {
-	config: TemplateStoreConfig;
-	settings?: TemplatesStoreSettings;
+export type TemplatesStoreConfig = {
+	config: TemplatesStoreConfigConfig;
+	settings?: TemplatesStoreConfigSettings;
 };
 
 export class TemplatesStore {
@@ -83,7 +106,8 @@ export class TemplatesStore {
 	storage: StorageStore;
 	language: LanguageCodes;
 	currency: CurrencyCodes;
-	settings: TemplatesStoreSettings;
+	platform: IntegrationPlatforms;
+	settings: TemplatesStoreConfigSettings;
 	dependencies: TemplatesStoreDependencies;
 
 	targets: {
@@ -110,6 +134,9 @@ export class TemplatesStore {
 	constructor(params: TemplatesStoreConfig) {
 		const { config, settings } = params || {};
 		this.config = config;
+
+		this.platform = config.config?.platform || 'other';
+
 		this.storage = new StorageStore({ type: StorageType.local, key: 'ss-templates' });
 
 		this.dependencies = {
@@ -157,9 +184,16 @@ export class TemplatesStore {
 			window.addEventListener('resize', debouncedHandleResize);
 		}
 
+		// theme loading promise
+		this.loading = true;
+		const themePromises: Promise<void>[] = [];
+
 		// setup local themes
 		Object.keys(config.themes).map((themeKey) => {
 			const themeConfig = config.themes[themeKey];
+			// add promise
+			const themeDefer = new Deferred();
+			themePromises.push(themeDefer.promise);
 
 			// import component if defined
 			if (themeConfig.resultComponent && this.library.import.component.result[themeConfig.resultComponent]) {
@@ -189,7 +223,13 @@ export class TemplatesStore {
 					languageOverrides,
 					innerWidth: this.window.innerWidth,
 				});
+
+				themeDefer.resolve();
 			});
+		});
+
+		Promise.all(themePromises).then(() => {
+			this.loading = false;
 		});
 
 		makeObservable(this, {
@@ -331,16 +371,30 @@ export class TemplatesStore {
 	}
 }
 
-function transformTranslationsToTheme(translations: LangComponentOverrides): ThemeMinimal {
-	const translationTheme: ThemeMinimal = {
-		components: {},
-	};
+export function transformTranslationsToTheme(translations: LangComponentOverrides): ThemeMinimal {
+	const components: Partial<ThemeComponents> = {};
 
 	Object.keys(translations).forEach((component) => {
-		translationTheme.components![component as keyof typeof translationTheme.components] = {
-			lang: translations[component as keyof typeof translationTheme.components],
+		components[component as keyof typeof components] = {
+			// @ts-ignore - don't know which component it may be
+			lang: translations[component as keyof typeof translations],
 		};
 	});
 
-	return translationTheme;
+	return {
+		components,
+	};
+}
+
+class Deferred {
+	promise: Promise<any>;
+	resolve: any;
+	reject: any;
+
+	constructor() {
+		this.promise = new Promise((resolve, reject) => {
+			this.reject = reject;
+			this.resolve = resolve;
+		});
+	}
 }

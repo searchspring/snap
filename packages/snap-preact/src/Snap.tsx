@@ -1,4 +1,3 @@
-/** @jsx h */
 import { h, render } from 'preact';
 import deepmerge from 'deepmerge';
 import { isPlainObject } from 'is-plain-object';

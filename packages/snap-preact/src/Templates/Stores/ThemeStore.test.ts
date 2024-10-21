@@ -4,7 +4,7 @@ import { waitFor } from '@testing-library/preact';
 
 import { ThemeStore, ThemeStoreThemeConfig, mergeThemeLayers } from './ThemeStore';
 import { StorageStore } from '@searchspring/snap-store-mobx';
-import type { TemplatesStoreDependencies, TemplateThemeTypes, TemplatesStoreSettings } from './TemplateStore';
+import type { TemplatesStoreDependencies, TemplateThemeTypes, TemplatesStoreConfigSettings } from './TemplateStore';
 import type { Theme, ThemeVariables, ThemePartial } from '../../../components/src/providers/theme';
 import { GLOBAL_THEME_NAME } from './TargetStore';
 
@@ -12,21 +12,11 @@ import { GLOBAL_THEME_NAME } from './TargetStore';
 configureMobx({ enforceActions: 'never', useProxies: 'never' });
 
 const testThemeVariables: ThemeVariables = {
-	breakpoints: [0, 420, 720, 1440],
+	breakpoints: [420, 720, 1440],
 	colors: {
 		primary: 'test.color.primary',
 		secondary: 'test.color.secondary',
 		accent: 'test.color.accent',
-		active: {
-			foreground: 'test.color.active.foreground',
-			background: 'test.color.active.background',
-			accent: 'test.color.active.accent',
-		},
-		hover: {
-			foreground: 'test.color.hover.foreground',
-			background: 'test.color.hover.background',
-			accent: 'test.color.hover.accent',
-		},
 	},
 };
 
@@ -85,19 +75,12 @@ const testTheme: Theme = {
 				},
 			},
 		},
-		{
-			components: {
-				results: {
-					columns: 4,
-				},
-			},
-		},
 	],
 };
 
 describe('ThemeStore', () => {
 	let dependencies: TemplatesStoreDependencies;
-	let settings: TemplatesStoreSettings;
+	let settings: TemplatesStoreConfigSettings;
 
 	beforeEach(() => {
 		dependencies = {
@@ -118,7 +101,7 @@ describe('ThemeStore', () => {
 			base: {
 				name: 'empty',
 				variables: testThemeVariables,
-				responsive: [{}, {}, {}, {}],
+				responsive: [{}, {}, {}],
 				components: {},
 			},
 			overrides: {},
@@ -262,21 +245,11 @@ describe('ThemeStore', () => {
 				},
 			},
 			variables: {
-				breakpoints: [100, 200, 300, 400],
+				breakpoints: [100, 200, 300],
 				colors: {
 					primary: 'primary',
 					secondary: 'secondary',
 					accent: 'accent',
-					active: {
-						foreground: 'active.foreground',
-						background: 'active.background',
-						accent: 'active.accent',
-					},
-					hover: {
-						foreground: 'hover.foreground',
-						background: 'hover.background',
-						accent: 'hover.account',
-					},
 				},
 			},
 			currency: {},
@@ -318,21 +291,11 @@ describe('ThemeStore', () => {
 				},
 			},
 			variables: {
-				breakpoints: [100, 200, 300, 400],
+				breakpoints: [100, 200, 300],
 				colors: {
 					primary: 'primary',
 					secondary: 'secondary',
 					accent: 'accent',
-					active: {
-						foreground: 'active.foreground',
-						background: 'active.background',
-						accent: 'active.accent',
-					},
-					hover: {
-						foreground: 'hover.foreground',
-						background: 'hover.background',
-						accent: 'hover.account',
-					},
 				},
 			},
 			currency: {
@@ -373,9 +336,8 @@ describe('ThemeStore', () => {
 		});
 	});
 
-	it('can get theme at breakpoint', () => {
+	it('can get theme at first breakpoint', () => {
 		const bpIndex = 0; // simulate being at first breakpoint
-		expect(testTheme.variables?.breakpoints[bpIndex]).toBe(0);
 
 		const config: ThemeStoreThemeConfig = {
 			name: GLOBAL_THEME_NAME,
@@ -386,7 +348,7 @@ describe('ThemeStore', () => {
 			currency: {},
 			language: {},
 			languageOverrides: {},
-			innerWidth: 300,
+			innerWidth: testTheme.variables?.breakpoints[bpIndex]! - 10,
 		};
 
 		const store = new ThemeStore({ config, dependencies, settings });
@@ -417,9 +379,8 @@ describe('ThemeStore', () => {
 		expect(merged.components?.results?.columns).toBe(1);
 	});
 
-	it('can get theme with last breakpoint applied', () => {
-		const bpIndex = 3;
-		expect(testTheme.variables?.breakpoints[bpIndex]).toBeGreaterThan(0);
+	it('should not have overrides applied if past last breakpoint', () => {
+		const bpIndex = testTheme.variables?.breakpoints.length! - 1;
 
 		const config: ThemeStoreThemeConfig = {
 			name: GLOBAL_THEME_NAME,
@@ -430,7 +391,7 @@ describe('ThemeStore', () => {
 			currency: {},
 			language: {},
 			languageOverrides: {},
-			innerWidth: 1600,
+			innerWidth: testTheme.variables?.breakpoints[bpIndex]! + 10,
 		};
 
 		const store = new ThemeStore({ config, dependencies, settings });
@@ -439,16 +400,7 @@ describe('ThemeStore', () => {
 		const layoutOptions = config.base.responsive?.[bpIndex].layoutOptions || config.base.layoutOptions;
 		const defaultLayoutOptionOverrides = layoutOptions?.find((option) => option.default)?.overrides || {};
 
-		const baseResponsiveOverrides = config.base.responsive?.[bpIndex]!;
-
-		const merged = mergeThemeLayers(
-			config.base,
-			config.currency,
-			config.language,
-			config.overrides!,
-			baseResponsiveOverrides,
-			defaultLayoutOptionOverrides
-		);
+		const merged = mergeThemeLayers(config.base, config.currency, config.language, config.overrides!, defaultLayoutOptionOverrides);
 
 		expect(store.theme).toStrictEqual({
 			...merged,
@@ -456,12 +408,11 @@ describe('ThemeStore', () => {
 		});
 
 		// extra assertions on 'test' theme
-		expect(merged.components?.results?.columns).toBe(4);
+		expect(merged.components?.results?.columns).toBe(5);
 	});
 
 	it('can get theme at breakpoint and use breakpoint overrides', () => {
 		const bpIndex = 0; // simulate being at first breakpoint
-		expect(testTheme.variables?.breakpoints[bpIndex]).toBe(0);
 
 		const config: ThemeStoreThemeConfig = {
 			name: GLOBAL_THEME_NAME,
@@ -476,11 +427,10 @@ describe('ThemeStore', () => {
 					},
 					{},
 					{},
-					{},
 				],
 			},
 			variables: {
-				breakpoints: [0, 100, 200, 300],
+				breakpoints: [100, 200, 300],
 			},
 			currency: {},
 			language: {},
@@ -523,7 +473,6 @@ describe('ThemeStore', () => {
 
 	it('can get theme with all the things ', () => {
 		const bpIndex = 0; // simulate being at first breakpoint
-		expect(testTheme.variables?.breakpoints[bpIndex]).toBe(0);
 
 		const config: ThemeStoreThemeConfig = {
 			name: GLOBAL_THEME_NAME,
@@ -538,11 +487,10 @@ describe('ThemeStore', () => {
 					},
 					{},
 					{},
-					{},
 				],
 			},
 			variables: {
-				breakpoints: [0, 100, 200, 300],
+				breakpoints: [100, 200, 300],
 			},
 			currency: {
 				components: {
@@ -697,7 +645,7 @@ describe('ThemeStore', () => {
 			base: testTheme,
 			overrides: {},
 			variables: {
-				breakpoints: [1, 2, 3, 4],
+				breakpoints: [1, 2, 3],
 			},
 			currency: {},
 			language: {},
@@ -715,28 +663,22 @@ describe('mergeThemeLayers function', () => {
 	it(`deep merges 'variables' in ThemePartials`, () => {
 		const themePartial1: ThemePartial = {
 			variables: {
-				breakpoints: [1, 2, 3, 4],
+				breakpoints: [1, 2, 3],
 				colors: {
 					primary: 'blue',
-					active: {
-						accent: 'blue',
-					},
-					hover: {
-						accent: 'blue',
-					},
+					secondary: 'red',
+					accent: 'green',
 				},
 			},
 		};
 
 		const themePartial2: ThemePartial = {
 			variables: {
-				breakpoints: [5, 6, 7, 8],
+				breakpoints: [4, 5, 6],
 				colors: {
 					primary: 'red',
-					active: {
-						foreground: 'red',
-						accent: 'red',
-					},
+					secondary: 'blue',
+					accent: 'green',
 				},
 			},
 		};
@@ -744,16 +686,11 @@ describe('mergeThemeLayers function', () => {
 		const merged = mergeThemeLayers(themePartial1, themePartial2);
 		expect(merged).toStrictEqual({
 			variables: {
-				breakpoints: [5, 6, 7, 8],
+				breakpoints: [4, 5, 6],
 				colors: {
 					primary: 'red',
-					active: {
-						foreground: 'red',
-						accent: 'red',
-					},
-					hover: {
-						accent: 'blue',
-					},
+					secondary: 'blue',
+					accent: 'green',
 				},
 			},
 		});
@@ -769,7 +706,6 @@ describe('mergeThemeLayers function', () => {
 				},
 				{},
 				{},
-				{},
 			],
 		};
 
@@ -780,7 +716,6 @@ describe('mergeThemeLayers function', () => {
 						result: { layout: 'grid' },
 					},
 				},
-				{},
 				{},
 				{
 					components: {
@@ -799,7 +734,6 @@ describe('mergeThemeLayers function', () => {
 						results: { columns: 1 },
 					},
 				},
-				{},
 				{},
 				{
 					components: {
@@ -958,15 +892,11 @@ describe('mergeThemeLayers function', () => {
 	it(`deep merges all the things in ThemePartials`, () => {
 		const themePartial1: ThemePartial = {
 			variables: {
-				breakpoints: [1, 2, 3, 4],
+				breakpoints: [1, 2, 3],
 				colors: {
 					primary: 'blue',
-					active: {
-						accent: 'blue',
-					},
-					hover: {
-						accent: 'blue',
-					},
+					secondary: 'red',
+					accent: 'yellow',
 				},
 			},
 			components: {
@@ -1008,7 +938,6 @@ describe('mergeThemeLayers function', () => {
 				},
 				{},
 				{},
-				{},
 			],
 			layoutOptions: [
 				{
@@ -1041,16 +970,11 @@ describe('mergeThemeLayers function', () => {
 
 		const themePartial2: ThemePartial = {
 			variables: {
-				breakpoints: [0, 420, 720, 1440],
+				breakpoints: [420, 720, 1440],
 				colors: {
 					primary: 'red',
-					active: {
-						accent: 'red',
-					},
-					hover: {
-						foreground: 'red',
-						background: 'red',
-					},
+					secondary: 'yellow',
+					accent: 'orange',
 				},
 			},
 			components: {
@@ -1073,7 +997,6 @@ describe('mergeThemeLayers function', () => {
 					components: {},
 				},
 				{},
-				{},
 			],
 			layoutOptions: [],
 		};
@@ -1081,17 +1004,11 @@ describe('mergeThemeLayers function', () => {
 		const merged = mergeThemeLayers(themePartial1, themePartial2);
 		expect(merged).toStrictEqual({
 			variables: {
-				breakpoints: [0, 420, 720, 1440],
+				breakpoints: [420, 720, 1440],
 				colors: {
 					primary: 'red',
-					active: {
-						accent: 'red',
-					},
-					hover: {
-						accent: 'blue',
-						foreground: 'red',
-						background: 'red',
-					},
+					secondary: 'yellow',
+					accent: 'orange',
 				},
 			},
 			components: {
@@ -1114,7 +1031,6 @@ describe('mergeThemeLayers function', () => {
 					layoutOptions: [],
 				},
 				{ components: {} },
-				{},
 				{},
 			],
 			layoutOptions: [],

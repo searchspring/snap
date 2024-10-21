@@ -10,7 +10,7 @@ import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { Sidebar, SidebarProps } from '../../Organisms/Sidebar';
 import { Toolbar, ToolbarProps } from '../../Organisms/Toolbar';
 import { SearchHeader, SearchHeaderProps } from '../../Atoms/SearchHeader';
-import { NoResults, NoResultsProps } from '../../Atoms/NoResults';
+import { NoResults, NoResultsProps } from '../../Organisms/NoResults';
 import { Lang, useMediaQuery } from '../../../hooks';
 import { MobileSidebar, MobileSidebarProps } from '../../Organisms/MobileSidebar';
 import { Button, ButtonProps } from '../../Atoms/Button';
@@ -20,21 +20,15 @@ import { useState } from 'preact/hooks';
 import deepmerge from 'deepmerge';
 
 const CSS = {
-	Search: ({ mobileSidebarDisplayAt }: Partial<SearchProps>) =>
+	Search: ({}: Partial<SearchProps>) =>
 		css({
 			display: 'flex',
 			minHeight: '600px',
 
-			'.ss__search__sidebar': {
+			'.ss__sidebar': {
 				flex: '0 1 auto',
-				width: '250px',
+				width: '270px',
 				margin: '0 40px 0 0',
-			},
-
-			'.ss_desktop': {
-				[`@media only screen and (max-width: ${mobileSidebarDisplayAt})`]: {
-					display: 'none',
-				},
 			},
 
 			'.ss__search__content': {
@@ -43,20 +37,6 @@ const CSS = {
 				width: '100%',
 				boxSizing: 'border-box',
 			},
-
-			[`@media only screen and (max-width: ${mobileSidebarDisplayAt})`]: {
-				flexDirection: 'column',
-			},
-
-			'.ss__search__content__toolbar--top-toolbar': {
-				display: 'flex',
-				justifyContent: 'flex-end',
-				margin: '10px 0px',
-			},
-
-			'.ss__layout__select': {
-				float: 'left',
-			},
 		}),
 };
 
@@ -64,7 +44,7 @@ export const Search = observer((properties: SearchProps): JSX.Element => {
 	const globalTheme: Theme = useTheme();
 
 	const defaultProps: Partial<SearchProps> = {
-		mobileSidebarDisplayAt: '991px',
+		mobileSidebarDisplayAt: globalTheme?.variables?.breakpoints?.at(0) ? `${globalTheme.variables?.breakpoints?.at(0)}px` : '991px',
 	};
 
 	const props = mergeProps('search', globalTheme, defaultProps, properties);
@@ -83,6 +63,7 @@ export const Search = observer((properties: SearchProps): JSX.Element => {
 		hideTopToolbar,
 		resultComponent,
 		hideBottomToolBar,
+		hideToggleSidebarButton,
 		mobileSidebarDisplayAt,
 		treePath,
 	} = props;
@@ -113,7 +94,7 @@ export const Search = observer((properties: SearchProps): JSX.Element => {
 		TopToolbar: {
 			name: 'top',
 			// default props
-			hidePagination: Boolean(controller.config.settings?.infinite),
+			hidePagination: true,
 			hideFilterSummary: true,
 			// inherited props
 			...defined({
@@ -249,14 +230,7 @@ export const Search = observer((properties: SearchProps): JSX.Element => {
 			<div {...styling} className={classnames('ss__search', className)}>
 				{!hideSidebar && !isMobile && (
 					<div className="ss__search__sidebar-wrapper">
-						{toggleSidebarButtonText || lang.toggleSidebarButtonText?.value ? (
-							sidebarOpenState && (
-								<Fragment>
-									<Sidebar {...subProps.Sidebar} controller={controller} />
-									{!hideLeftBanner && <Banner content={merchandising.content} type={ContentType.LEFT} name={'left'} />}
-								</Fragment>
-							)
-						) : (
+						{sidebarOpenState && (
 							<Fragment>
 								<Sidebar {...subProps.Sidebar} controller={controller} />
 								{!hideLeftBanner && <Banner content={merchandising.content} type={ContentType.LEFT} name={'left'} />}
@@ -269,7 +243,7 @@ export const Search = observer((properties: SearchProps): JSX.Element => {
 					{!hideHeaderBanner && <Banner content={merchandising.content} type={ContentType.HEADER} name={'header'} />}
 					{!hideBannerBanner && <Banner content={merchandising.content} type={ContentType.BANNER} name={'banner'} />}
 
-					{(toggleSidebarButtonText || lang.toggleSidebarButtonText?.value) && (
+					{!hideToggleSidebarButton && (toggleSidebarButtonText || lang.toggleSidebarButtonText?.value) && (
 						<Button
 							onClick={() => setSidebarOpenState(!sidebarOpenState)}
 							className="ss__search__sidebar-wrapper-toggle"
@@ -286,8 +260,6 @@ export const Search = observer((properties: SearchProps): JSX.Element => {
 
 					{!hideMobileSidebar && store.pagination.totalResults > 0 && <MobileSidebar controller={controller} {...subProps.MobileSidebar} />}
 
-					<div className="clear"></div>
-
 					{store.pagination.totalResults ? (
 						<Results {...subProps.Results} controller={controller} />
 					) : (
@@ -295,8 +267,6 @@ export const Search = observer((properties: SearchProps): JSX.Element => {
 					)}
 
 					{!hideFooterBanner && <Banner content={merchandising.content} type={ContentType.FOOTER} name={'footer'} />}
-
-					<div className="clear"></div>
 
 					{!hideBottomToolBar && store.pagination.totalResults > 0 && (
 						<Toolbar {...subProps.BottomToolbar} className="ss__search__content__toolbar--bottom-toolbar" controller={controller} />
@@ -319,6 +289,7 @@ export interface SearchProps extends ComponentProps {
 	hideBottomToolBar?: boolean;
 	hideMerchandisingBanners?: boolean | string[];
 	toggleSidebarButtonText?: string;
+	hideToggleSidebarButton?: boolean;
 	lang?: Partial<SearchLang>;
 }
 

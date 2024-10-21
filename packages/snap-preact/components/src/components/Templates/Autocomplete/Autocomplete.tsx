@@ -57,11 +57,11 @@ const CSS = {
 			maxHeight: viewportMaxHeight && inputViewportOffsetBottom ? `calc(100vh - ${inputViewportOffsetBottom + 10}px)` : undefined,
 			overflowY: viewportMaxHeight && horizontalTerms && !vertical ? 'scroll' : undefined,
 
-			'& .ss__autocomplete__close-button': {
+			'.ss__autocomplete__close-button': {
 				color: '#c5c5c5',
 				fontSize: '.8em',
 			},
-			'& .ss__autocomplete__close-button:focus': {
+			'.ss__autocomplete__close-button:focus': {
 				top: '0px !important',
 				left: '0px !important',
 				zIndex: '1',
@@ -77,7 +77,7 @@ const CSS = {
 				color: '#c5c5c5',
 				textTransform: 'uppercase',
 				padding: '10px',
-				'& h5': {
+				h5: {
 					fontSize: '.8em',
 					margin: 0,
 				},
@@ -87,7 +87,7 @@ const CSS = {
 				order: vertical ? 2 : undefined,
 			},
 
-			'& .ss__autocomplete__terms': {
+			'.ss__autocomplete__terms': {
 				display: 'flex',
 				flexDirection: 'column',
 				flex: `1 1 auto`,
@@ -96,21 +96,21 @@ const CSS = {
 				order: 1,
 				background: '#f8f8f8',
 
-				'& .ss__autocomplete__terms__options': {
+				'.ss__autocomplete__terms__options': {
 					display: vertical || horizontalTerms ? 'flex' : undefined,
 					justifyContent: 'space-evenly',
 					flexWrap: 'wrap',
 
-					'& .ss__autocomplete__terms__option': {
+					'.ss__autocomplete__terms__option': {
 						flexGrow: vertical || horizontalTerms ? '1' : undefined,
 						textAlign: vertical || horizontalTerms ? 'center' : undefined,
 						wordBreak: 'break-all',
 
-						'& a': {
+						a: {
 							display: 'block',
 							padding: vertical || horizontalTerms ? '10px 30px' : '10px',
 
-							'& em': {
+							em: {
 								fontStyle: 'normal',
 							},
 						},
@@ -118,7 +118,7 @@ const CSS = {
 						'&.ss__autocomplete__terms__option--active': {
 							background: '#fff',
 
-							'& a': {
+							a: {
 								fontWeight: 'bold',
 								color: theme?.variables?.colors?.primary,
 							},
@@ -127,7 +127,7 @@ const CSS = {
 				},
 			},
 
-			'& .ss__autocomplete__facets': {
+			'.ss__autocomplete__facets': {
 				display: 'flex',
 				flex: `0 0 150px`,
 				flexDirection: vertical ? 'row' : 'column',
@@ -135,8 +135,10 @@ const CSS = {
 				order: 2,
 				padding: vertical ? '10px 20px' : '10px',
 				overflowY: vertical ? undefined : 'auto',
-				'& .ss__autocomplete__facet': {
-					flex: vertical ? '0 1 150px' : undefined,
+				'.ss__facets': {
+					display: 'flex',
+					flexDirection: vertical ? 'row' : 'column',
+					columnGap: '20px',
 				},
 				'.ss__facet-hierarchy-options__option.ss__facet-hierarchy-options__option--filtered~.ss__facet-hierarchy-options__option:not(.ss__facet-hierarchy-options__option--filtered)':
 					{
@@ -149,7 +151,7 @@ const CSS = {
 					display: 'none',
 				},
 			},
-			'& .ss__autocomplete__content': {
+			'.ss__autocomplete__content': {
 				display: 'flex',
 				flex: `1 1 ${hideFacets ? 'auto' : '0%'}`,
 				flexDirection: 'column',
@@ -159,24 +161,24 @@ const CSS = {
 				margin: noResults ? '0 auto' : undefined,
 				padding: vertical ? '10px 20px' : '10px',
 
-				'& .ss__banner.ss__banner--header, .ss__banner.ss__banner--banner': {
+				'.ss__banner.ss__banner--header, .ss__banner.ss__banner--banner': {
 					marginBottom: '10px',
 				},
-				'& .ss__banner.ss__banner--footer': {
+				'.ss__banner.ss__banner--footer': {
 					margin: '10px 0',
 				},
-				'& .ss__autocomplete__content__results': {
+				'.ss__autocomplete__content__results': {
 					minHeight: '0%',
 				},
-				'& .ss__autocomplete__content__info': {
+				'.ss__autocomplete__content__info': {
 					padding: '10px',
 					textAlign: noResults ? 'center' : 'right',
 
-					'& a': {
+					a: {
 						fontWeight: 'bold',
 						color: theme?.variables?.colors?.primary,
 
-						'& .ss__icon': {
+						'.ss__icon': {
 							marginLeft: '5px',
 						},
 					},
@@ -349,6 +351,7 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 
 	const subProps: AutocompleteSubProps = {
 		facets: {
+			name: 'autocomplete',
 			// default props
 			limit: 3,
 			// inherited props
@@ -529,7 +532,7 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 		<CacheProvider>
 			<div
 				{...styling}
-				className={classnames('ss__autocomplete', className, { 'ss__autocomplete--only-terms': onlyTerms })}
+				className={classnames('ss__autocomplete', className, { 'ss__autocomplete--only-terms': onlyTerms, 'ss__autocomplete--vertical': vertical })}
 				onClick={(e) => e.stopPropagation()}
 				ref={(e) => useA11y(e, 0, true, reset)}
 			>

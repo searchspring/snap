@@ -47,7 +47,18 @@ export const SearchHeader = observer((properties: SearchHeaderProps): JSX.Elemen
 	const props = mergeProps('searchHeader', globalTheme, defaultProps, properties);
 	const { disableStyles, style, styleScript, className } = props;
 
-	const { titleText, subtitleText, correctedQueryText, noResultsText, didYouMeanText } = props;
+	const {
+		titleText,
+		subtitleText,
+		correctedQueryText,
+		noResultsText,
+		didYouMeanText,
+		hideTitleText,
+		hideSubtitleText,
+		hideCorrectedQueryText,
+		hideNoResultsText,
+		hideDidYouMeanText,
+	} = props;
 
 	const styling: RootNodeProperties = { 'ss-name': props.name };
 	const stylingProps = props;
@@ -95,14 +106,16 @@ export const SearchHeader = observer((properties: SearchHeaderProps): JSX.Elemen
 					<Fragment>
 						{pagination?.totalResults ? (
 							<>
-								<h3
-									className={classnames('ss__search-header__title', 'ss__search-header__title--results')}
-									aria-atomic="true"
-									aria-live="polite"
-									{...mergedLang.titleText?.all}
-								></h3>
+								{!hideTitleText && (
+									<h3
+										className={classnames('ss__search-header__title', 'ss__search-header__title--results')}
+										aria-atomic="true"
+										aria-live="polite"
+										{...mergedLang.titleText?.all}
+									></h3>
+								)}
 
-								{search?.originalQuery && (
+								{search?.originalQuery && !hideCorrectedQueryText && (
 									<h5
 										className={classnames('ss__search-header__title', 'ss__search-header__title--corrected')}
 										aria-atomic="true"
@@ -114,14 +127,16 @@ export const SearchHeader = observer((properties: SearchHeaderProps): JSX.Elemen
 						) : (
 							pagination?.totalResults === 0 && (
 								<div className="ss__search-header__no-results-wrapper">
-									<h3
-										className={classnames('ss__search-header__title', 'ss__search-header__title--no-results')}
-										aria-atomic="true"
-										aria-live="polite"
-										{...mergedLang.noResultsText?.all}
-									></h3>
+									{!hideNoResultsText && (
+										<h3
+											className={classnames('ss__search-header__title', 'ss__search-header__title--no-results')}
+											aria-atomic="true"
+											aria-live="polite"
+											{...mergedLang.noResultsText?.all}
+										></h3>
+									)}
 
-									{search?.didYouMean && (
+									{search?.didYouMean && !hideDidYouMeanText && (
 										<h4
 											className={classnames('ss__search-header__title', 'ss__search-header__title--dym')}
 											aria-atomic="true"
@@ -133,7 +148,7 @@ export const SearchHeader = observer((properties: SearchHeaderProps): JSX.Elemen
 							)
 						)}
 
-						{(subtitleText || lang.subtitleText.value) && (
+						{(subtitleText || lang.subtitleText.value) && !hideSubtitleText && (
 							<h4
 								className={classnames('ss__search-header__title', 'ss__search-header__title--subtitle')}
 								aria-atomic="true"
@@ -159,6 +174,12 @@ export interface SearchHeaderProps extends ComponentProps {
 	correctedQueryText?: string | ((data: data) => string);
 	noResultsText?: string | ((data: data) => string);
 	didYouMeanText?: string | ((data: data) => string);
+	hideTitleText?: boolean;
+	hideSubtitleText?: boolean;
+	hideCorrectedQueryText?: boolean;
+	hideNoResultsText?: boolean;
+	hideDidYouMeanText?: boolean;
+
 	lang?: Partial<SearchHeaderLang>;
 }
 

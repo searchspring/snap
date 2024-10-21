@@ -27,7 +27,6 @@ const CSS = {
 				textDecoration: 'none',
 				'&:hover': {
 					cursor: 'pointer',
-					background: theme?.variables?.colors?.hover?.background,
 				},
 				'&.ss__facet-list-options__option--filtered': {
 					fontWeight: 'bold',

@@ -66,13 +66,13 @@ export default {
 			control: { type: 'boolean' },
 		},
 		overlay: {
-			defaultValue: false,
+			defaultValue: true,
 			description: 'Render facet options as a dropdown overlay',
 			table: {
 				type: {
 					summary: 'boolean',
 				},
-				defaultValue: { summary: false },
+				defaultValue: { summary: true },
 			},
 			control: { type: 'boolean' },
 		},

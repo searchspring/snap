@@ -17,7 +17,7 @@ import { Lang, useLang } from '../../../hooks';
 import deepmerge from 'deepmerge';
 
 const CSS = {
-	palette: ({ columns, gapSize, gridSize, theme }: Partial<FacetPaletteOptionsProps>) =>
+	palette: ({ columns, horizontal, gapSize, gridSize, theme }: Partial<FacetPaletteOptionsProps>) =>
 		css({
 			display: 'flex',
 			flexFlow: 'row wrap',
@@ -26,13 +26,12 @@ const CSS = {
 				: `repeat(auto-fill, minmax(${gridSize}, 1fr))`,
 			gap: gapSize,
 
-			'& .ss__facet-palette-options__option--list': {
+			'.ss__facet-palette-options__option--list': {
 				display: 'flex',
 				flexDirection: 'row',
-				paddingLeft: '6px',
 			},
 
-			'& .ss__facet-palette-options__option': {
+			'.ss__facet-palette-options__option': {
 				width: `calc(100% / ${columns} - ${2 * Math.round((columns! + 2) / 2)}px )`,
 				marginRight: gapSize,
 				marginBottom: gapSize,
@@ -40,24 +39,18 @@ const CSS = {
 					marginRight: '0',
 				},
 
-				'& .ss__facet-palette-options__option__wrapper': {
+				'.ss__facet-palette-options__option__wrapper': {
 					border: `2px solid transparent`,
 					borderRadius: '100%',
 					padding: '2px',
 				},
-				'&.ss__facet-palette-options__option--filtered': {
-					'& .ss__facet-palette-options__option__wrapper': {
-						borderColor: theme?.variables?.colors?.primary || '#333',
-						padding: '0px',
-						borderWidth: '4px',
-					},
-				},
-				'& .ss__facet-palette-options__option__palette': {
+
+				'.ss__facet-palette-options__option__palette': {
 					paddingTop: 'calc(100% - 2px)',
 					border: '1px solid #EBEBEB',
 					borderRadius: '100%',
 					position: 'relative',
-					'& .ss__facet-palette-options__icon': {
+					'.ss__facet-palette-options__icon': {
 						position: 'absolute',
 						top: 0,
 						right: 0,
@@ -71,7 +64,7 @@ const CSS = {
 						opacity: 0,
 					},
 				},
-				'& .ss__facet-palette-options__option__value': {
+				'.ss__facet-palette-options__option__value': {
 					display: 'block',
 					textAlign: 'center',
 					overflow: 'hidden',
@@ -82,44 +75,43 @@ const CSS = {
 			'@supports (display: grid)': {
 				display: 'grid',
 
-				'& .ss__facet-palette-options__option': {
+				'.ss__facet-palette-options__option': {
 					margin: '0',
 					width: 'initial',
 				},
 			},
 
 			'&.ss__facet-palette-options--list': {
-				'& .ss__facet-palette-options__option__wrapper': {
+				display: 'flex',
+				flexDirection: horizontal ? 'row' : 'column',
+
+				'.ss__facet-palette-options__option__wrapper': {
+					borderColor: 'transparent',
 					width: '16px',
 					height: 'fit-content',
 				},
 
 				'.ss__facet-palette-options__option--filtered': {
-					'& .ss__facet-palette-options__option__value': {
+					'.ss__facet-palette-options__option__value': {
 						fontWeight: 'bold',
 					},
 				},
 
-				'& .ss__facet-palette-options__option--list': {
+				'.ss__facet-palette-options__option--list': {
 					alignItems: 'center',
-					marginTop: `calc(${gapSize} / 2)`,
-					marginBottom: `calc(${gapSize} / 2)`,
 				},
 
-				'& .ss__facet-palette-options__option__value__count': {
+				'.ss__facet-palette-options__option__value__count': {
 					marginLeft: '5px',
 				},
 
-				'& .ss__facet-palette-options__checkbox': {
+				'.ss__facet-palette-options__checkbox': {
 					marginRight: '5px',
 				},
-
-				display: 'flex',
-				flexDirection: 'column',
 			},
 
 			'&.ss__facet-palette-options--grid': {
-				'& .ss__facet-palette-options__checkbox': {
+				'.ss__facet-palette-options__checkbox': {
 					display: 'flex',
 					textAlign: 'center',
 					overflow: 'hidden',
@@ -128,21 +120,21 @@ const CSS = {
 				},
 
 				'.ss__facet-palette-options__option--filtered': {
-					'& .ss__facet-palette-options__option__wrapper': {
+					'.ss__facet-palette-options__option__wrapper': {
 						borderColor: theme?.variables?.colors?.primary || '#333' + ' !important',
 						padding: '0px',
 						borderWidth: '4px',
 					},
 				},
 
-				'& .ss__facet-palette-options__option': {
+				'.ss__facet-palette-options__option': {
 					'&:hover': {
 						cursor: 'pointer',
 						'.ss__facet-palette-options__option__wrapper': {
 							borderColor: '#EBEBEB',
 						},
-						'& .ss__facet-palette-options__option__palette': {
-							'& .ss__facet-palette-options__icon': {
+						'.ss__facet-palette-options__option__palette': {
+							'.ss__facet-palette-options__icon': {
 								opacity: 1,
 							},
 						},
@@ -150,7 +142,7 @@ const CSS = {
 				},
 			},
 
-			'& .ss__facet-palette-options__option__value__count': {
+			'.ss__facet-palette-options__option__value__count': {
 				fontSize: '0.8em',
 				display: 'block',
 				textAlign: 'center',
@@ -282,6 +274,7 @@ export const FacetPaletteOptions = observer((properties: FacetPaletteOptionsProp
 								`ss__facet-palette-options__option--${layout?.toLowerCase()}`
 							)}
 							href={value.url?.link?.href}
+							{...(hideLabel ? { title: value.label } : {})}
 							{...valueProps}
 							onClick={(e: React.MouseEvent<Element, MouseEvent>) => {
 								value.url?.link?.onClick(e);

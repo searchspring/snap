@@ -52,6 +52,17 @@ export default {
 			},
 			control: { type: 'text' },
 		},
+		hideToggleSidebarButton: {
+			defaultValue: false,
+			description: 'hide the toggle Sidebar button',
+			table: {
+				type: {
+					summary: 'boolean',
+				},
+				defaultValue: { summary: false },
+			},
+			control: { type: 'boolean' },
+		},
 		mobileSidebarDisplayAt: {
 			defaultValue: '',
 			description: 'Media query for when to render the mobileSidebar',
@@ -157,19 +168,6 @@ export const Default = (args: SearchProps, { loaded: { controller } }: { loaded:
 };
 
 Default.loaders = [
-	async () => {
-		await snapInstance.search();
-		return {
-			controller: snapInstance,
-		};
-	},
-];
-
-export const ToggleSidebar = (args: SearchProps, { loaded: { controller } }: { loaded: { controller: SearchController } }) => {
-	return <Search toggleSidebarButtonText="Hide Sidebar" {...args} controller={controller} />;
-};
-
-ToggleSidebar.loaders = [
 	async () => {
 		await snapInstance.search();
 		return {

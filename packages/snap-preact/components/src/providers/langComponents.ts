@@ -1,3 +1,4 @@
+/* ATOMS */
 // import type { BadgeImageLang } from '../components/Atoms/BadgeImage';
 // import type { BadgePillLang } from '../components/Atoms/BadgePill';
 // import type { BadgeRectangleLang } from '../components/Atoms/BadgeRectangle';
@@ -13,8 +14,9 @@ import type { ButtonLang } from '../components/Atoms/Button';
 // import type { OverlayLang } from '../components/Atoms/Overlay';
 // import type { PriceLang } from '../components/Atoms/Price';
 // import type { SkeletonLang } from '../components/Atoms/Skeleton';
-import type { TermsLang } from '../components/Atoms/Terms';
-import type { ToggleLang } from '../components/Atoms/Toggle';
+// import type { ToggleLang } from '../components/Atoms/Toggle';
+
+/* MOLECULES */
 // import type { CalloutBadgeLang } from '../components/Molecules/CalloutBadge';
 // import type { CarouselLang } from '../components/Molecules/Carousel';
 import type { CheckboxLang } from '../components/Molecules/Checkbox';
@@ -32,7 +34,7 @@ import type { ListLang } from '../components/Molecules/List';
 import type { LoadMoreLang } from '../components/Molecules/LoadMore';
 // import type { OverlayBadgeLang } from '../components/Molecules/OverlayBadge';
 import type { PaginationLang } from '../components/Molecules/Pagination';
-// import type { PerPageLang } from '../components/Molecules/PerPage';
+import type { PerPageLang } from '../components/Molecules/PerPage';
 import type { RadioLang } from '../components/Molecules/Radio';
 import type { RadioListLang } from '../components/Molecules/RadioList';
 // import type { RatingLang } from '../components/Molecules/Rating';
@@ -43,21 +45,26 @@ import type { SelectLang } from '../components/Molecules/Select';
 import type { SortByLang } from '../components/Molecules/SortBy';
 // import type { SwatchesLang } from '../components/Molecules/Swatches';
 // import type { VariantSelectionLang } from '../components/Molecules/VariantSelection';
+
+/* ORGANISMS */
 import type { FacetLang } from '../components/Organisms/Facet';
 import type { FacetsHorizontalLang } from '../components/Organisms/FacetsHorizontal';
 // import type { FacetsLang } from '../components/Organisms/Facets';
 import type { FilterSummaryLang } from '../components/Organisms/FilterSummary';
+import type { MobileSidebarLang } from '../components/Organisms/MobileSidebar';
+import type { NoResultsLang } from '../components/Organisms/NoResults';
 import type { RecommendationBundleLang } from '../components/Templates/RecommendationBundle';
 // import type { ResultsLang } from '../components/Organisms/Results';
 import type { SearchHeaderLang } from '../components/Atoms/SearchHeader';
 import type { SidebarLang } from '../components/Organisms/Sidebar';
 // import type { ToolbarLang } from '../components/Organisms/Toolbar';
+
+/* TEMPLATES */
 import type { AutocompleteLang } from '../components/Templates/Autocomplete';
+// import type { AutocompleteTermsLang } from '../components/Templates/AutocompleteTerms';
 import type { RecommendationLang } from '../components/Templates/Recommendation';
 import type { SearchLang } from '../components/Templates/Search';
 // import type { SearchHorizontalLang } from '../components/Templates/SearchHorizontal';
-import type { NoResultsLang } from '../components/Atoms/NoResults';
-import type { MobileSidebarLang } from '../components/Organisms/MobileSidebar';
 
 // type ComponentLang> = Partial<ComponentLang> & { named?: Partial<{ [named?: Partial<string]?: Partial<Partial<ComponentLang> } };
 
@@ -80,7 +87,7 @@ export type LangComponentOverrides = {
 	// price?: Partial<PriceLang>
 	// skeleton?: Partial<SkeletonLang>
 	// terms?: Partial<TermsLang>
-	toggle?: Partial<ToggleLang>;
+	// toggle?: Partial<ToggleLang>;
 
 	/* MOLECULES */
 	// calloutBadge?: Partial<CalloutBadgeLang>
@@ -101,7 +108,7 @@ export type LangComponentOverrides = {
 	loadMore?: Partial<LoadMoreLang>;
 	// overlayBadge?: Partial<OverlayBadgeLang>
 	pagination?: Partial<PaginationLang>;
-	// perPage?: Partial<PerPageLang>
+	perPage?: Partial<PerPageLang>;
 	radioList?: Partial<RadioListLang>;
 	// rating?: Partial<RatingLang>
 	// result?: Partial<ResultLang>
@@ -124,8 +131,10 @@ export type LangComponentOverrides = {
 	sidebar?: Partial<SidebarLang>;
 	mobileSidebar?: Partial<MobileSidebarLang>;
 	// toolbar?: Partial<ToolbarLang>
+
 	/* TEMPLATES */
 	autocomplete?: Partial<AutocompleteLang>;
+	// autocompleteTerms?: Partial<AutocompleteTermsLang>;
 	recommendation?: Partial<RecommendationLang>;
 	search?: Partial<SearchLang>;
 	// searchHorizontal?: Partial<SearchHorizontalLang>
@@ -149,8 +158,7 @@ export type LangComponents = {
 	// overlay: OverlayLang
 	// price: PriceLang
 	// skeleton: SkeletonLang
-	terms: TermsLang;
-	toggle: ToggleLang;
+	// toggle: ToggleLang;
 
 	/* MOLECULES */
 	// calloutBadge: CalloutBadgeLang
@@ -171,7 +179,7 @@ export type LangComponents = {
 	loadMore: LoadMoreLang;
 	// overlayBadge: OverlayBadgeLang
 	pagination: PaginationLang;
-	// perPage: PerPageLang
+	perPage: PerPageLang;
 	radioList: RadioListLang;
 	// rating: RatingLang
 	// result: ResultLang
@@ -194,8 +202,10 @@ export type LangComponents = {
 	sidebar: SidebarLang;
 	mobileSidebar: MobileSidebarLang;
 	// toolbar: ToolbarLang
+
 	/* TEMPLATES */
 	autocomplete: AutocompleteLang;
+	// autocompleteTerms: AutocompleteTermsLang;
 	recommendation: RecommendationLang;
 	search: SearchLang;
 	// searchHorizontal: SearchHorizontalLang

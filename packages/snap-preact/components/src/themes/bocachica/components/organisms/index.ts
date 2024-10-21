@@ -5,6 +5,7 @@ export { facets } from './facets';
 export { facetsHorizontal } from './facetsHorizontal';
 export { filterSummary } from './filterSummary';
 export { mobileSidebar } from './mobileSidebar';
+export { noResults } from './noResults';
 export { results } from './results';
 export { sidebar } from './sidebar';
 export { toolbar } from './toolbar';

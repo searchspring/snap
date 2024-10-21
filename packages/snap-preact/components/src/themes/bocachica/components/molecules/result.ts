@@ -10,7 +10,6 @@ const resultStyleScript = ({ theme }: ResultProps) => {
 		'&.ss__result--grid': {
 			display: 'flex',
 			flexDirection: 'column',
-			height: '100%',
 			'& .ss__result__image-wrapper': {
 				flex: '1 0 auto',
 				minHeight: '0%',
@@ -50,6 +49,7 @@ const resultStyleScript = ({ theme }: ResultProps) => {
 
 				'& .ss__result__price': {
 					fontSize: '1.2em',
+					color: variables?.colors.secondary,
 				},
 				'& .ss__price--strike': {
 					fontSize: '80%',

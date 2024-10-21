@@ -11,30 +11,40 @@ import { defined, mergeProps } from '../../../utilities';
 import { Icon, IconProps, IconType } from '../Icon';
 import { Lang, useLang } from '../../../hooks';
 import deepmerge from 'deepmerge';
+import Color from 'color';
 
 const CSS = {
-	button: ({ color, backgroundColor, borderColor, theme }: Partial<ButtonProps>) =>
-		css({
+	button: ({ color, backgroundColor, borderColor, theme }: Partial<ButtonProps>) => {
+		const lightenedPrimary = new Color(backgroundColor || color || theme?.variables?.colors?.primary).lightness(95);
+
+		return css({
 			display: 'inline-flex',
+			alignItems: 'center',
 			padding: '5px 10px',
 			position: 'relative',
 			color: color || theme?.variables?.colors?.primary,
 			outline: 0,
 			backgroundColor: backgroundColor || '#fff',
 			border: `1px solid ${borderColor || color || theme?.variables?.colors?.primary || '#333'}`,
-			'&:hover': {
+			'&:not(.ss__button--disabled):hover': {
 				cursor: 'pointer',
-				backgroundColor: theme?.variables?.colors?.hover?.background || '#f8f8f8',
+				backgroundColor: lightenedPrimary.hex() || '#f8f8f8',
 			},
 			'&.ss__button--disabled': {
-				opacity: 0.7,
-				borderColor: 'rgba(51,51,51,0.7)',
+				opacity: 0.3,
 				backgroundColor: 'initial',
 				'&:hover': {
 					cursor: 'default',
 				},
 			},
-		}),
+			'.ss__button__content': {
+				width: '100%',
+			},
+			label: {
+				cursor: 'pointer',
+			},
+		});
+	},
 	native: ({}) => css({}),
 };
 
@@ -65,6 +75,7 @@ export const Button = observer((properties: ButtonProps): JSX.Element => {
 
 	const subProps: ButtonSubProps = {
 		icon: {
+			className: 'ss__button__icon',
 			// default props
 			// global theme
 			...globalTheme?.components?.icon,
@@ -111,11 +122,12 @@ export const Button = observer((properties: ButtonProps): JSX.Element => {
 	//deep merge with props.lang
 	const langs = deepmerge(defaultLang, lang || {});
 	const mergedLang = useLang(langs as any, {});
+
 	return content || children || icon || lang?.button?.value ? (
 		<CacheProvider>
 			{native ? (
 				<button {...elementProps}>
-					<span {...mergedLang.button?.all}>
+					<span className="ss__button__content" {...mergedLang.button?.all}>
 						{content}
 						{children}
 					</span>
@@ -123,7 +135,7 @@ export const Button = observer((properties: ButtonProps): JSX.Element => {
 				</button>
 			) : (
 				<div {...(!disableA11y ? a11yProps : {})} {...elementProps} role={'button'} aria-disabled={disabled}>
-					<span {...mergedLang.button?.all}>
+					<span className="ss__button__content" {...mergedLang.button?.all}>
 						{content}
 						{children}
 					</span>
@@ -140,7 +152,7 @@ interface ButtonSubProps {
 	icon: Partial<IconProps>;
 }
 
-export interface ButtonProps extends ComponentProps {
+export interface ButtonProps extends ComponentProps<ButtonProps> {
 	backgroundColor?: string;
 	borderColor?: string;
 	color?: string;

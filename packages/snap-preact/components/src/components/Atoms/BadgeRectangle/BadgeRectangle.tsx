@@ -56,7 +56,7 @@ export const BadgeRectangle = observer((properties: BadgeRectangleProps): JSX.El
 	);
 });
 
-export interface BadgeRectangleProps extends ComponentProps {
+export interface BadgeRectangleProps extends ComponentProps<BadgeRectangleProps> {
 	value: string;
 	color?: string;
 	colorText?: string;

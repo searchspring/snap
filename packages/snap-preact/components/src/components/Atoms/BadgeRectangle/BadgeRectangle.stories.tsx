@@ -9,6 +9,7 @@ import Readme from '../BadgeRectangle/readme.md';
 export default {
 	title: 'Atoms/BadgeRectangle',
 	component: BadgeRectangle,
+	tags: ['autodocs'],
 	parameters: {
 		docs: {
 			page: () => (

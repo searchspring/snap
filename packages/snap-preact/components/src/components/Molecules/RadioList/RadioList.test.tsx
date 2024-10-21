@@ -333,6 +333,15 @@ describe('RadioList Component', () => {
 		expect(titleElem).toHaveTextContent(title);
 	});
 
+	it('can hide titleText', () => {
+		const title = 'My Title';
+		const rendered = render(<RadioList hideTitleText={true} titleText={title} options={options} />);
+
+		const titleElem = rendered.container.querySelector('.ss__radio-list__title');
+
+		expect(titleElem).not.toBeInTheDocument();
+	});
+
 	it('can disableStyles', () => {
 		const rendered = render(<RadioList disableStyles options={options} />);
 

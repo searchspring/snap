@@ -1,10 +1,10 @@
 import { StorageStore } from '@searchspring/snap-store-mobx';
 import { GLOBAL_THEME_NAME, TargetStore } from './TargetStore';
-import { TemplatesStoreDependencies, TemplatesStoreSettings, TemplateThemeTypes } from './TemplateStore';
+import { TemplatesStoreDependencies, TemplatesStoreConfigSettings, TemplateThemeTypes } from './TemplateStore';
 
 describe('TargetStore', () => {
 	let dependencies: TemplatesStoreDependencies;
-	let settings: TemplatesStoreSettings;
+	let settings: TemplatesStoreConfigSettings;
 
 	beforeEach(() => {
 		dependencies = {

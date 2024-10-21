@@ -48,6 +48,7 @@ export const FilterSummary = observer((properties: FilterSummaryProps): JSX.Elem
 		clearAllIcon,
 		separator,
 		hideFacetLabel,
+		hideTitle,
 		clearAllLabel,
 		hideClearAll,
 		onClick,
@@ -95,6 +96,9 @@ export const FilterSummary = observer((properties: FilterSummaryProps): JSX.Elem
 		title: {
 			value: title,
 		},
+		clearAllLabel: {
+			value: clearAllLabel,
+		},
 	};
 
 	//deep merge with props.lang
@@ -106,7 +110,7 @@ export const FilterSummary = observer((properties: FilterSummaryProps): JSX.Elem
 	return filters?.length ? (
 		<CacheProvider>
 			<div {...styling} className={classnames('ss__filter-summary', className)}>
-				<div className="ss__filter-summary__title" {...mergedLang.title?.all}></div>
+				{!hideTitle && <div className="ss__filter-summary__title" {...mergedLang.title?.all}></div>}
 
 				{filters.map((filter) => (
 					<Filter {...subProps.filter} filter={filter} onClick={(e) => onClick && onClick(e, filter)} />
@@ -121,6 +125,9 @@ export const FilterSummary = observer((properties: FilterSummaryProps): JSX.Elem
 						hideFacetLabel
 						valueLabel={clearAllLabel}
 						onClick={(e) => onClearAllClick && onClearAllClick(e)}
+						lang={{
+							filter: { attributes: { 'aria-label': clearAllLabel } },
+						}}
 					/>
 				)}
 			</div>
@@ -133,6 +140,7 @@ export const FilterSummary = observer((properties: FilterSummaryProps): JSX.Elem
 export interface FilterSummaryProps extends ComponentProps {
 	filters?: FilterType[];
 	title?: string;
+	hideTitle?: boolean;
 	filterIcon?: IconType | Partial<IconProps>;
 	clearAllIcon?: IconType | Partial<IconProps>;
 	separator?: string;
@@ -148,6 +156,10 @@ export interface FilterSummaryProps extends ComponentProps {
 export interface FilterSummaryLang {
 	title: Lang<{
 		filters: FilterType[];
+	}>;
+	clearAllLabel: Lang<{
+		label?: string;
+		value?: string;
 	}>;
 }
 

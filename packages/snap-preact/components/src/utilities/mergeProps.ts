@@ -92,6 +92,11 @@ export function mergeProps<GenericComponentProps = ComponentProps>(
 			},
 			treePath,
 		};
+
+		if ((props as any).lang) {
+			(mergedProps as any).lang = (props as any).lang;
+		}
+
 		if (globalTheme.variables) {
 			(mergedProps as ComponentProps).theme!.variables = globalTheme.variables;
 		}

@@ -49,6 +49,13 @@ The `titleText` prop is will render a title element
 <RadioList options={store.options} titleText={'Per Page'} />
 ```
 
+### hideTitleText
+The `hideTitleText` prop is will hide the title text.
+
+```jsx
+<RadioList options={store.options} titleText={'Per Page'} hideTitleText={true} />
+```
+
 ### disabled
 The `disabled` prop will put the inputs in a disabled state.
 

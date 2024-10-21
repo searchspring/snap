@@ -18,22 +18,23 @@ import type { ValueFacet, RangeFacet, FacetHierarchyValue, FacetValue, FacetRang
 import { defined, cloneWithProps, mergeProps } from '../../../utilities';
 import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { useA11y } from '../../../hooks/useA11y';
-import { FacetToggle, FacetToggleProps } from '../../Molecules/FacetToggle';
+// import { FacetToggle, FacetToggleProps } from '../../Molecules/FacetToggle';
 import { Lang, useLang } from '../../../hooks';
 import deepmerge from 'deepmerge';
 
 const CSS = {
-	facet: ({ color, theme }: Partial<FacetProps>) =>
+	facet: ({ color, theme, disableCollapse }: Partial<FacetProps>) =>
 		css({
 			width: '100%',
 			margin: '0 0 20px 0',
 			'& .ss__facet__header': {
+				cursor: disableCollapse ? undefined : 'pointer',
 				display: 'flex',
 				justifyContent: 'space-between',
 				alignItems: 'center',
-				color: color,
+				color: color || theme?.variables?.colors?.primary,
 				border: 'none',
-				borderBottom: `2px solid ${theme?.variables?.colors?.primary || '#ccc'}`,
+				borderBottom: `2px solid ${theme?.variables?.colors?.secondary || '#ccc'}`,
 				padding: '6px 0',
 			},
 			'& .ss__facet__options': {
@@ -164,7 +165,7 @@ export const Facet = observer((properties: FacetProps): JSX.Element => {
 				disableStyles,
 				previewOnFocus,
 				valueProps,
-				horizontal: (properties as any)?.overlay ? false : horizontal, // overlay facets should not be horizontal
+				horizontal,
 			}),
 			// component theme overrides
 			theme: props?.theme,
@@ -180,7 +181,7 @@ export const Facet = observer((properties: FacetProps): JSX.Element => {
 				disableStyles,
 				previewOnFocus,
 				valueProps,
-				horizontal: (properties as any)?.overlay ? false : horizontal, // overlay facets should not be horizontal
+				horizontal,
 			}),
 			// component theme overrides
 			theme: props?.theme,
@@ -218,19 +219,19 @@ export const Facet = observer((properties: FacetProps): JSX.Element => {
 			theme: props?.theme,
 			treePath,
 		},
-		facetToggle: {
-			// default props
-			className: 'ss__facet__facet-toggle',
-			// global theme
-			...globalTheme?.components?.facetToggle,
-			// inherited props
-			...defined({
-				disableStyles,
-			}),
-			// component theme overrides
-			theme: props?.theme,
-			treePath,
-		},
+		// facetToggle: {
+		// 	// default props
+		// 	className: 'ss__facet__facet-toggle',
+		// 	// global theme
+		// 	...globalTheme?.components?.facetToggle,
+		// 	// inherited props
+		// 	...defined({
+		// 		disableStyles,
+		// 	}),
+		// 	// component theme overrides
+		// 	theme: props?.theme,
+		// 	treePath,
+		// },
 		facetSlider: {
 			// default props
 			className: 'ss__facet__facet-slider',
@@ -385,6 +386,7 @@ const FacetContent = (props: any) => {
 		disableOverflow,
 		previewOnFocus,
 		valueProps,
+		hideShowMoreLessText,
 		treePath,
 		lang,
 	} = props;
@@ -401,8 +403,8 @@ const FacetContent = (props: any) => {
 						return cloneWithProps(optionsSlot, { facet, valueProps, limit, previewOnFocus, treePath });
 					} else {
 						switch (facet?.display) {
-							case FacetDisplay.TOGGLE:
-								return <FacetToggle {...subProps.facetToggle} facet={facet as ValueFacet} />;
+							// case FacetDisplay.TOGGLE:
+							// 	return <FacetToggle {...subProps.facetToggle} facet={facet as ValueFacet} />;
 							case FacetDisplay.SLIDER:
 								return <FacetSlider {...subProps.facetSlider} facet={facet as RangeFacet} />;
 							case FacetDisplay.GRID:
@@ -441,7 +443,9 @@ const FacetContent = (props: any) => {
 									? { ...(typeof iconOverflowMore == 'string' ? { icon: iconOverflowMore } : (iconOverflowMore as Partial<IconProps>)) }
 									: { ...(typeof iconOverflowLess == 'string' ? { icon: iconOverflowLess } : (iconOverflowLess as Partial<IconProps>)) })}
 							/>
-							<span {...(((facet as ValueFacet)?.overflow?.remaining || 0) > 0 ? lang.showMoreText?.all : lang.showLessText?.all)}></span>
+							{!hideShowMoreLessText && (
+								<span {...(((facet as ValueFacet)?.overflow?.remaining || 0) > 0 ? lang.showMoreText?.all : lang.showLessText?.all)}></span>
+							)}
 						</Fragment>
 					)}
 				</div>
@@ -456,7 +460,7 @@ interface FacetSubProps {
 	facetGridOptions: Partial<FacetGridOptionsProps>;
 	facetPaletteOptions: Partial<FacetPaletteOptionsProps>;
 	facetHierarchyOptions: Partial<FacetHierarchyOptionsProps>;
-	facetToggle: Partial<FacetToggleProps>;
+	// facetToggle: Partial<FacetToggleProps>;
 	facetSlider: Partial<FacetSliderProps>;
 	searchInput: Partial<SearchInputProps>;
 	icon: Partial<IconProps>;
@@ -479,6 +483,7 @@ interface OptionalFacetProps extends ComponentProps {
 	disableOverflow?: boolean;
 	previewOnFocus?: boolean;
 	valueProps?: any;
+	hideShowMoreLessText?: boolean;
 	showMoreText?: string;
 	showLessText?: string;
 	iconOverflowMore?: IconType | Partial<IconProps>;

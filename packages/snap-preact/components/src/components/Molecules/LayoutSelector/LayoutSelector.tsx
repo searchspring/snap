@@ -14,7 +14,13 @@ import { Lang } from '../../../hooks';
 import deepmerge from 'deepmerge';
 
 const CSS = {
-	LayoutSelector: ({}: Partial<LayoutSelectorProps>) => css({}),
+	LayoutSelector: ({}: Partial<LayoutSelectorProps>) =>
+		css({
+			'.ss__button__content': {
+				display: 'flex',
+				alignItems: 'center',
+			},
+		}),
 };
 
 export const LayoutSelector = observer((properties: LayoutSelectorProps): JSX.Element => {
@@ -29,7 +35,8 @@ export const LayoutSelector = observer((properties: LayoutSelectorProps): JSX.El
 
 	const props = mergeProps('layoutSelector', globalTheme, defaultProps, properties);
 
-	const { options, selected, type, onSelect, showSingleOption, label, disableStyles, className, style, styleScript, treePath } = props;
+	const { options, selected, type, onSelect, showSingleOption, hideLabel, disableStyles, className, style, styleScript, treePath } = props;
+	let label = props.label;
 
 	const subProps: SelectSubProps = {
 		Select: {
@@ -90,6 +97,11 @@ export const LayoutSelector = observer((properties: LayoutSelectorProps): JSX.El
 
 	//deep merge with props.lang
 	const lang = deepmerge(defaultLang, props.lang || {});
+
+	if (hideLabel) {
+		delete lang.label.value;
+		label = undefined;
+	}
 
 	// options can be an Array or ObservableArray - but should have length
 	return (options && options.length > 1) || (options?.length === 1 && showSingleOption) ? (
@@ -160,6 +172,7 @@ export interface LayoutSelectorProps extends ComponentProps {
 	options?: ListOption[];
 	selected?: ListOption;
 	label?: string;
+	hideLabel?: boolean;
 	type?: 'dropdown' | 'list' | 'radio';
 	showSingleOption?: boolean;
 	lang?: Partial<LayoutSelectorLang>;
