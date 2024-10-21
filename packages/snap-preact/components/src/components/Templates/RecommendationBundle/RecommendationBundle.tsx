@@ -44,8 +44,14 @@ const CSS = {
 
 				textAlign: 'center',
 
-				'& .ss__recommendation-bundle__wrapper__cta__subtotal__prices': {
+				'.ss__recommendation-bundle__wrapper__cta__subtotal__prices': {
 					display: 'block',
+				},
+
+				'.ss__recommendation-bundle__wrapper__cta__button--added': {
+					cursor: 'none',
+					pointerEvents: 'none',
+					opacity: '.7',
 				},
 			},
 

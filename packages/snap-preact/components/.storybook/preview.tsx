@@ -62,7 +62,7 @@ export const decorators = [
 					: snapTemplates.templates.themes.local.bocachicaSimple.theme,
 				base: templateStory ? snapTemplates.templates.themes.library.base.theme : snapTemplates.templates.themes.local.baseSimple.theme,
 			},
-			defaultTheme: 'none',
+			defaultTheme: 'base',
 			Provider: templateStory ? CustomThemeProvider : ThemeProvider,
 		});
 

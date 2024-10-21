@@ -288,15 +288,9 @@ export const Select = observer((properties: SelectProps): JSX.Element => {
 						onClick={() => setOpen((prev) => !prev)}
 						disableA11y
 						button={
-							<Button {...subProps.button} disableA11y={true}>
+							<Button {...subProps.button}>
 								{(label || lang.buttonLabel.value) && !hideLabelOnSelection && !hideLabel && (
-									<span
-										className="ss__select__label"
-										ref={(e) => useA11y(e)}
-										aria-expanded={open}
-										role="button"
-										{...mergedLang.buttonLabel.attributes}
-									>
+									<span className="ss__select__label" aria-expanded={open} {...mergedLang.buttonLabel.attributes}>
 										<label {...mergedLang.buttonLabel.value}></label>
 										{separator && selection && <span className="ss__select__label__separator">{separator}</span>}
 									</span>

@@ -248,8 +248,7 @@ export type SwatchesProps = {
 	carousel?: Partial<CarouselProps>;
 	grid?: Partial<GridProps>;
 	type?: 'carousel' | 'grid';
-} & // ) // 	  } // 			grid?: Partial<GridProps>; // 			type?: 'grid'; // 	| { // 	  } // 			carousel?: Partial<CarouselProps>; // 			type?: 'carousel'; // 	| { //  & (
-ComponentProps;
+} & ComponentProps;
 
 interface SwatchesSubProps {
 	carousel: Partial<CarouselProps>;

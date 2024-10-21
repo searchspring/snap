@@ -231,6 +231,7 @@ export const FacetsHorizontal = observer((properties: FacetsHorizontalProps): JS
 		!overlay && contentRef?.focus();
 	}, [selectedFacet]);
 
+	//todo investigate keyboard navigation here when overlay prop is true/false
 	return (facetsToShow && facetsToShow?.length > 0) || isOverflowing ? (
 		<CacheProvider>
 			<div

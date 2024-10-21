@@ -97,8 +97,8 @@ export interface ImageProps extends ComponentProps {
 	src: string;
 	fallback?: string;
 	hoverSrc?: string;
-	onMouseOver?: (e: React.MouseEvent<HTMLImageElement> | React.FocusEvent<HTMLImageElement>) => void;
-	onMouseOut?: (e: React.MouseEvent<HTMLImageElement> | React.FocusEvent<HTMLImageElement>) => void;
+	onMouseOver?: (e: React.MouseEvent<HTMLImageElement>) => void;
+	onMouseOut?: (e: React.MouseEvent<HTMLImageElement>) => void;
 	onError?: (e: React.MouseEvent<HTMLImageElement>) => void;
 	onLoad?: (e: React.MouseEvent<HTMLImageElement>) => void;
 	onClick?: (e: React.MouseEvent<HTMLImageElement>) => void;
