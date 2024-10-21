@@ -10,6 +10,7 @@ import { List, ListProps } from '../List';
 import { Swatches, SwatchesProps } from '../Swatches';
 import { Dropdown, DropdownProps } from '../../Atoms/Dropdown';
 import { Icon, IconProps } from '../../Atoms/Icon';
+import { useA11y } from '../../../hooks';
 
 const CSS = {
 	variantSelection: () =>
@@ -143,6 +144,31 @@ export const VariantSelection = observer((properties: VariantSelectionProps): JS
 		styling.css = [style];
 	}
 
+	const DropdownContent = (props: any) => {
+		const { toggleOpen } = props;
+		return (
+			<ul className="ss__variant-selection__options" ref={(e) => useA11y(e, -1, true, () => toggleOpen())}>
+				{selection.values.map((val: any) => {
+					const selected = selection.selected?.value == val.value;
+					return (
+						<li
+							className={classnames(`ss__variant-selection__option`, {
+								'ss__variant-selection__option--selected': selected,
+								'ss__variant-selection__option--disabled': val.disabled,
+								'ss__variant-selection__option--unavailable': val.available === false,
+							})}
+							onClick={() => !val.disabled && selection.select(val.value)}
+							ref={(e) => useA11y(e)}
+							aria-selected={selected}
+							aria-disabled={val.disabled || val.available === false}
+						>
+							{val.label}
+						</li>
+					);
+				})}
+			</ul>
+		);
+	};
 	return selection.values.length ? (
 		<CacheProvider>
 			<div
@@ -174,27 +200,7 @@ export const VariantSelection = observer((properties: VariantSelectionProps): JS
 											);
 										};
 
-										return (
-											<Dropdown button={<Button />} {...subProps.dropdown}>
-												<div className="ss__variant-selection__options">
-													{selection.values.map((val: any) => {
-														const selected = selection.selected?.value == val.value;
-														return (
-															<div
-																className={classnames(`ss__variant-selection__option`, {
-																	'ss__variant-selection__option--selected': selected,
-																	'ss__variant-selection__option--disabled': val.disabled,
-																	'ss__variant-selection__option--unavailable': val.available === false,
-																})}
-																onClick={() => !val.disabled && selection.select(val.value)}
-															>
-																{val.label}
-															</div>
-														);
-													})}
-												</div>
-											</Dropdown>
-										);
+										return <Dropdown button={<Button />} {...subProps.dropdown} content={<DropdownContent />} />;
 									})()}
 								</Fragment>
 							);

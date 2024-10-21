@@ -44,8 +44,14 @@ const CSS = {
 
 				textAlign: 'center',
 
-				'& .ss__recommendation-bundle__wrapper__cta__subtotal__prices': {
+				'.ss__recommendation-bundle__wrapper__cta__subtotal__prices': {
 					display: 'block',
+				},
+
+				'.ss__recommendation-bundle__wrapper__cta__button--added': {
+					cursor: 'none',
+					pointerEvents: 'none',
+					opacity: '.7',
 				},
 			},
 
@@ -444,6 +450,7 @@ export const RecommendationBundle = observer((properties: RecommendationBundlePr
 												<BundleSelector
 													seedText={seedText}
 													seed={true}
+													title={seed.display.mappings.core?.name}
 													onCheck={() => onProductSelect(seed)}
 													checked={selectedItems.findIndex((item) => item.id == seed.id) > -1}
 													icon={separatorIcon}
@@ -496,6 +503,7 @@ export const RecommendationBundle = observer((properties: RecommendationBundlePr
 																		<BundleSelector
 																			seedText={seedText}
 																			seed={true}
+																			title={result.display.mappings.core?.name}
 																			icon={separatorIcon}
 																			onCheck={() => onProductSelect(result)}
 																			checked={selected}
@@ -516,6 +524,7 @@ export const RecommendationBundle = observer((properties: RecommendationBundlePr
 																	<RecommendationResultTracker controller={controller} result={result}>
 																		<BundleSelector
 																			icon={separatorIconSeedOnly ? false : separatorIcon}
+																			title={result.display.mappings.core?.name}
 																			onCheck={() => onProductSelect(result)}
 																			checked={selected}
 																			hideCheckboxes={hideCheckboxes}
@@ -541,6 +550,7 @@ export const RecommendationBundle = observer((properties: RecommendationBundlePr
 																<RecommendationResultTracker controller={controller} result={result}>
 																	<BundleSelector
 																		icon={separatorIconSeedOnly ? false : separatorIcon}
+																		title={result.display.mappings.core?.name}
 																		onCheck={() => onProductSelect(result)}
 																		checked={selected}
 																		hideCheckboxes={hideCheckboxes}
@@ -571,6 +581,7 @@ export const RecommendationBundle = observer((properties: RecommendationBundlePr
 													<BundleSelector
 														seedText={seedText}
 														seed={true}
+														title={result.display.mappings.core?.name}
 														icon={separatorIcon}
 														onCheck={() => onProductSelect(result)}
 														checked={selected}
@@ -591,6 +602,7 @@ export const RecommendationBundle = observer((properties: RecommendationBundlePr
 												<RecommendationResultTracker controller={controller} result={result}>
 													<BundleSelector
 														icon={separatorIconSeedOnly ? false : separatorIcon}
+														title={result.display.mappings.core?.name}
 														onCheck={() => onProductSelect(result)}
 														checked={selected}
 														hideCheckboxes={hideCheckboxes}

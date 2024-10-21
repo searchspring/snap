@@ -120,7 +120,7 @@ export const FacetHierarchyOptions = observer((properties: FacetHierarchyOptions
 							attributes: {
 								'aria-label': `${
 									value.filtered
-										? `remove selected filter ${facet?.label || ''} - ${value.label}`
+										? `selected ${value.label}`
 										: facet?.label
 										? `filter by ${facet?.label} - ${value.label}`
 										: `filter by ${value.label}`

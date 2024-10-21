@@ -130,7 +130,7 @@ export const Dropdown = observer((properties: DropdownProps): JSX.Element => {
 				</div>
 
 				{(content || children) && (
-					<div className={`ss__dropdown__content ss__dropdown__content--${classId}`}>
+					<div className={`ss__dropdown__content ss__dropdown__content--${classId}`} ref={(e) => (!disableA11y ? useA11y(e) : null)}>
 						{cloneWithProps(content, { open: showContent, toggleOpen: toggleShowContent, treePath })}
 						{cloneWithProps(children, { open: showContent, toggleOpen: toggleShowContent, treePath })}
 					</div>

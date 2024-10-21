@@ -464,7 +464,6 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 
 	const reset = () => {
 		controller.setFocused();
-		controller.reset();
 	};
 
 	// TODO: move to new Autocomplete component

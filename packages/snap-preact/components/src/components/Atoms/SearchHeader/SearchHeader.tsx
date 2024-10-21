@@ -75,24 +75,15 @@ export const SearchHeader = observer((properties: SearchHeaderProps): JSX.Elemen
 	const defaultLang = {
 		titleText: {
 			value: titleText,
-			attributes: {
-				'aria-label': `Now showing ${pagination?.totalResults} items in the product grid`,
-			},
 		},
 		subtitleText: {
 			value: subtitleText,
 		},
 		correctedQueryText: {
 			value: correctedQueryText,
-			attributes: {
-				'aria-label': `No results found for ${search?.originalQuery?.string}, showing results for ${search?.query?.string} instead`,
-			},
 		},
 		noResultsText: {
 			value: noResultsText,
-			attributes: {
-				'aria-label': `No results found for ${search?.query?.string}`,
-			},
 		},
 		didYouMeanText: {
 			value: didYouMeanText,

@@ -147,12 +147,7 @@ export const Radio = observer((properties: RadioProps): JSX.Element => {
 
 	//initialize lang
 	const defaultLang = {
-		radio: {
-			attributes: {
-				'aria-label': `${disabled ? 'disabled' : ''} ${checkedState ? 'checked' : 'unchecked'} radio button`,
-				role: 'radio',
-			},
-		},
+		radio: {},
 	};
 
 	//deep merge with props.lang
@@ -173,6 +168,7 @@ export const Radio = observer((properties: RadioProps): JSX.Element => {
 						onClick={(e) => clickFunc(e)}
 						disabled={disabled}
 						checked={checkedState}
+						tabIndex={!disableA11y ? 0 : -1}
 					/>
 				</div>
 			) : (
@@ -184,6 +180,7 @@ export const Radio = observer((properties: RadioProps): JSX.Element => {
 					{...mergedLang.radio?.all}
 					role="radio"
 					aria-checked={checkedState}
+					aria-disabled={disabled}
 				>
 					{checkedState ? (
 						<Icon {...subProps.activeIcon} {...(typeof checkedIcon == 'string' ? { icon: checkedIcon } : (checkedIcon as Partial<IconProps>))} />
