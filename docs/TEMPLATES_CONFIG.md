@@ -5,6 +5,7 @@ Snap templates is entirely configuration based. The configuration defines which 
 | Configuration Key | Description |
 |----|-----------------------|
 | `config` | Global configuration options |
+| `plugins` | Plugins configuration options |
 | `components` | Custom component registration |
 | `translations` | Custom language translations |
 | `url` | URL translator configuration |
@@ -56,12 +57,11 @@ new SnapTemplates({
 | Configuration Option | Description | Type | Default | Required |
 |----------------------|-------------|------|:---------:|:---------:|
 | `config` | Global configuration options | Object | ➖ | ✔️ |
-| `config.platform` | Shopping platform for the integration | String | 'other' | ✔️ |
 | `config.siteId` | Searchspring Site ID | String | ➖ | ➖ |
 | `config.language` | Language code for localization | String | 'en' | ➖ |
 | `config.currency` | Currency code for pricing | String | 'usd' | ➖ |
 
-The `config` object defines the integration platform, Searchspring siteId and current localization to be used. 
+The `config` object defines the Searchspring siteId and current localization to be used. 
 
 If a `siteId` is not provided, the siteId found on the `bundle.js` url path will be used. For example `8uyt2m` will be used if the page contains the following script:
 
@@ -75,7 +75,7 @@ It is possible to switch language and currency at run-time using methods on the 
 
 
 ### Plugins
-Plugins provide functionality to tie into various events within the Snap controllers by adding middleware on these events. The `plugins` object allows you to use and configure various plugins that are available within Snap Templates. Plugin configuration are grouped by the integration platform, `common` (apply to all platforms), `shopify`, `bigcommerce` and `magento2`.
+Plugins provide functionality to tie into various events within the Snap controllers by adding middleware on these events. The `plugins` object allows you to use and configure various plugins that are available within Snap Templates. Plugin configuration are grouped by the integration platform, `shopify` and `common` (applies to all platforms)
 
 | Configuration Option | Description | Type | Default |
 |----------------------|-------------|------|---------|
@@ -84,105 +84,20 @@ Plugins provide functionality to tie into various events within the Snap control
 | `plugins.common.backgroundFilters` | Background filter configurations | Object | Enabled |
 | `plugins.common.scrollToTop` | Configuration for scrolling to top after search | Object | Enabled |
 
-
-#### backgroundFilters
-Allows you to set up background filters. You can configure filters for tags, collections, or other fields.
-
 > [!NOTE]
-> The common backgroundFilters plugin provides a generic manual way of setting background filters; however, when `shopify`, `bigcommerce` or `magento2` are defined in the `config.platform`, additional plugins are attached to handle platform specific functionality, for example, setting `backgroundFilters`.
+> See common plugins documentation under the [Packages > Platform](https://github.com/searchspring/snap/tree/main/packages/snap-platforms/common) section.
 
-| Configuration Option | Description | Type | Required |
-|----------------------|-------------|------|---------|
-| `plugins.common.backgroundFilters` | Background filter configurations | Object | ➖ |
-| `plugins.common.backgroundFilters.filters[]` | Background filter definitions | Array | ➖ |
-| `plugins.common.backgroundFilters.filters[].type` | Defines if filter should be 'value' or 'range' type | 'value' \| 'range' | ✔️ |
-| `plugins.common.backgroundFilters.filters[].field` | Defines filter field name | string | ✔️ |
-| `plugins.common.backgroundFilters.filters[].value` | Defines filter value. If `type` is 'value', this must be a string, otherwise if `type` is 'range', this must be an object with `low` and `high` properties | string \| { low: number, high: number } | ✔️ |
-| `plugins.common.backgroundFilters.filters[].controllerIds` | Defines which controllers the filter should apply to | (string \| regexp)[]  | ➖ |
-| `plugins.common.backgroundFilters.filters[].controllerType` | Defines which controller types the filter should apply to | (string)[] | ➖ |
 
-```jsx
-platform: {
-	common: {
-		backgroundFilters: {
-			filters: [{
-				type: 'value',
-				field: 'ss_tags',
-				value: 'instock'
-			},
-			{
-				type: 'value',
-				field: 'collection',
-				value: 'mens'
-			},
-			{
-				type: 'value',
-				field: 'custom',
-				value: '1',
-			},
-			{
-				type: 'range',
-				field: 'price',
-				value: { low: 10, high: 20 },
-			}],
-		}
-	}
-}
-```
-
-#### scrollToTop
-Configures the behavior of scrolling to the top of the page after a search has occurred.
-
-> [!NOTE]
-> This plugin only applies to search and category pages (search controllers)
-
-| Configuration Option | Description | Type | Default |
-|----------------------|-------------|------|---------|
-| `platform.common.scrollToTop` | Scroll to top plugin configuration | Object | ➖ |
-| `platform.common.scrollToTop.enabled` | Enables plugin | boolean | true |
-| `platform.common.scrollToTop.selector` | Query selector to scroll to | string | 'body' |
-| `platform.common.scrollToTop.options` | [`window.scroll` options configuration](https://developer.mozilla.org/en-US/docs/Web/API/Window/scroll#options) | Object | `{ top: 0, left: 0, behavior: 'smooth' }` |
-
-```jsx
-platform: {
-	common: {
-		scrollToTop: {
-			enabled: true,
-			selector: '#searchspring-layout',
-			options: {
-				top: 0,
-				left: 0,
-				behavior: "auto" | "instant" | "smooth"
-			}
-		}
-	}
-}
-```
-
-### Shopify Platform Plugin
-In addition when platform is `shopify`, the following plugins are available:
+### Shopify Plugins
+In addition when plugins is `shopify`, the following plugins are available:
 
 | Configuration Option | Description | Type | Default |
 |----------------------|-------------|------|---------|
 | `plugins.shopify.mutateResults` | Shopify Updating results configuration | Object | ➖ |
-| `plugins.shopify.mutateResults.collectionInUrl` | Results URL Mutation configuration | Object | ➖ |
-| `plugins.shopify.mutateResults.collectionInUrl.enabled` | Enables middleware | Object | true |
 
+> [!NOTE]
+> See shopify specific plugins documentation under the [Packages > Platform > Shopify](https://github.com/searchspring/snap/tree/main/packages/snap-platforms/shopify) section.
 
-#### mutateResults
-Enables updating the URL for products within search results; product URLs will be prefixed with their category route. The platform specific context variable `collection` must be provided for this functionality.
-
-```jsx
-platform: {
-	shopify: {
-		mutateResults: {
-			url: {
-				enabled: true
-			}
-		}
-	}
-}
-```
 
 
 ### Language Translations

@@ -79,7 +79,6 @@ export type TemplatesStoreConfigConfig = {
 		siteId?: string;
 		currency?: CurrencyCodes;
 		language?: LanguageCodes;
-		platform: IntegrationPlatforms;
 	};
 	plugins?: {
 		common?: CommonPlugins;
@@ -135,7 +134,7 @@ export class TemplatesStore {
 		const { config, settings } = params || {};
 		this.config = config;
 
-		this.platform = config.config?.platform || 'other';
+		this.platform = (Object.keys(config.plugins || {}).at(0) || 'other') as IntegrationPlatforms;
 
 		this.storage = new StorageStore({ type: StorageType.local, key: 'ss-templates' });
 
