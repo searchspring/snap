@@ -1,4 +1,5 @@
 import { SnapTemplates } from '@searchspring/snap-preact';
+// import { css } from '@searchspring/snap-preact/components';
 // import { CustomResult } from './components/Result';
 // import { globalStyles } from './styles';
 
@@ -31,6 +32,24 @@ new SnapTemplates({
 			overrides: {
 				components: {
 					// overrides here...
+					// button: {
+					// backgroundColor: 'red',
+					// styleScript: (props) => {
+					// 	return css({
+					// 		backgroundColor: `${props.backgroundColor || 'pink'}`
+					// 	});
+					// },
+					// style: {
+					// 	background: 'green',
+					// }
+					// },
+					// recommendationBundle: {
+					// 	style: {
+					// 		'& .ss__button': {
+					// 			backgroundColor: 'green',
+					// 		}
+					// 	}
+					// }
 				},
 			},
 		},

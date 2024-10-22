@@ -7,13 +7,15 @@ import { IconProps, IconType } from './components/Atoms/Icon';
 import { MutableRef } from 'preact/hooks';
 import type { Snap, SnapTemplates } from '../../src';
 import type { FunctionalComponent, RenderableProps } from 'preact';
-import type { CSSInterpolation } from '@emotion/serialize';
+import type { CSSObject } from '@emotion/serialize';
 
+export type StyleScript<Props> = (props: Props) => SerializedStyles;
 export interface ComponentProps<Props = any> {
 	className?: string;
 	disableStyles?: boolean;
-	style?: CSSInterpolation;
-	styleScript?: (props: Props) => SerializedStyles;
+	style?: CSSObject;
+	styleScript?: StyleScript<Props>;
+	themeStyleScript?: StyleScript<Props>;
 	theme?: Theme;
 	controller?: AbstractController;
 	snap?: Snap | SnapTemplates;
@@ -74,8 +76,10 @@ export type BreakpointsEntry = {
 	[property: string]: any;
 };
 
-export type StylingCSS = Array<CSSInterpolation | SerializedStyles>;
+// TODO: remove undefined once refactored
+export type StylingCSS = Array<CSSObject | SerializedStyles | undefined>;
 
+// TODO: remove optionals once refactored
 export type RootNodeProperties = {
 	css?: StylingCSS;
 	'ss-name'?: string;

@@ -5,5 +5,6 @@ export * from './sprintf';
 export { Colour } from './Colour/Colour';
 export * from './parseProps';
 export * from './mergeProps';
+export * from './mergeStyles';
 export * from './storybook';
 export * from './defaultBadgeComponentMap';
