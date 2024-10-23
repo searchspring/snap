@@ -128,6 +128,7 @@ export const PerPage = observer((properties: PerPageProps): JSX.Element => {
 					onSelect={(e: any, option: any) => {
 						store.setPageSize(+option!.value);
 					}}
+					requireSelection
 					options={store.pageSizeOptions}
 					selected={store.pageSizeOption}
 					titleText={label}

@@ -93,7 +93,7 @@ export const en: LangComponents = {
 		},
 		closeButtonText: {
 			attributes: {
-				'aria-label': `close Filters button`,
+				'aria-label': `close Filters`,
 			},
 		},
 	},

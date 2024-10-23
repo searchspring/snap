@@ -143,6 +143,7 @@ export function Grid(properties: GridProps): JSX.Element {
 		style,
 		styleScript,
 		treePath,
+		disableA11y,
 	} = props;
 
 	const subProps: GridSubProps = {
@@ -255,6 +256,8 @@ export function Grid(properties: GridProps): JSX.Element {
 					!disableOverflowAction && setLimited(!limited);
 					onOverflowButtonClick && onOverflowButtonClick(e, Boolean(limited), remainder);
 				}}
+				role={'button'}
+				ref={(e) => (!disableA11y && !disableOverflowAction ? useA11y(e) : null)}
 				{...(limited ? mergedLang.showMoreText.attributes : mergedLang.showLessText.attributes)}
 			>
 				{overflowButton ? (
@@ -295,6 +298,7 @@ export function Grid(properties: GridProps): JSX.Element {
 									title={option.label || option.value.toString()}
 									role="option"
 									aria-selected={selected}
+									aria-disabled={option.disabled}
 								>
 									{!option.background && option.backgroundImageUrl ? (
 										<Image {...subProps.image} src={option.backgroundImageUrl} alt={option.label || option.value.toString()} />
@@ -334,6 +338,7 @@ export interface GridProps extends ComponentProps {
 	overflowButtonInGrid?: boolean;
 	onOverflowButtonClick?: (e: React.MouseEvent<HTMLElement, MouseEvent>, status: boolean, remainder: number) => void;
 	lang?: Partial<GridLang>;
+	disableA11y?: boolean;
 }
 
 export interface GridLang {

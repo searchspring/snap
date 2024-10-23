@@ -22,7 +22,7 @@ export const BundleSelector = observer((properties: BundleSelectorProps): JSX.El
 
 	const props = mergeProps('bundleSelector', globalTheme, defaultProps, properties);
 
-	const { children, checked, icon, seedText, seed, hideCheckboxes, onCheck, disableStyles, className, style, styleScript, treePath } = props;
+	const { children, checked, icon, seedText, seed, hideCheckboxes, onCheck, title, disableStyles, className, style, styleScript, treePath } = props;
 
 	const subProps: BundleSelectorSubProps = {
 		icon: {
@@ -40,6 +40,13 @@ export const BundleSelector = observer((properties: BundleSelectorProps): JSX.El
 			checked: checked,
 			size: 18,
 			onClick: onCheck,
+			lang: {
+				checkbox: {
+					attributes: {
+						'aria-label': checked ? `remove product from bundle ${title}` : `add product to bundle ${title}`,
+					},
+				},
+			},
 			// global theme
 			...globalTheme?.components?.checkbox,
 			// component theme overrides
@@ -97,6 +104,7 @@ export interface BundleSelectorProps extends ComponentProps {
 	onCheck?: () => void;
 	icon?: IconType | Partial<IconProps> | boolean;
 	lang?: Partial<BundleSelectorLang>;
+	title?: string;
 }
 
 export interface BundleSelectorLang {

@@ -6,6 +6,7 @@ import classnames from 'classnames';
 import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { ComponentProps, RootNodeProperties } from '../../../types';
 import { mergeProps } from '../../../utilities';
+import { useA11y } from '../../../hooks';
 
 const CSS = {
 	overlay: ({ color, transitionSpeed }: Partial<OverlayProps>) =>
@@ -34,7 +35,7 @@ export function Overlay(properties: OverlayProps): JSX.Element {
 
 	const props = mergeProps('overlay', globalTheme, defaultProps, properties);
 
-	const { active, onClick, disableStyles, className, style, styleScript } = props;
+	const { active, onClick, disableStyles, disableA11y, className, style, styleScript } = props;
 
 	const styling: RootNodeProperties = { 'ss-name': props.name };
 	const stylingProps = props;
@@ -51,6 +52,7 @@ export function Overlay(properties: OverlayProps): JSX.Element {
 		<CacheProvider>
 			<div
 				onClick={(e: React.MouseEvent<HTMLDivElement, Event>) => onClick && active && onClick(e)}
+				ref={(e) => (!disableA11y ? useA11y(e) : null)}
 				className={classnames('ss__overlay', { 'ss__overlay--active': active }, className)}
 				{...styling}
 			/>
@@ -63,4 +65,5 @@ export interface OverlayProps extends ComponentProps {
 	color?: string;
 	transitionSpeed?: string;
 	onClick?: (e: React.MouseEvent<HTMLDivElement, Event>) => void;
+	disableA11y?: boolean;
 }

@@ -115,9 +115,9 @@ export const Filter = observer((properties: FilterProps): JSX.Element => {
 					onClick && onClick(e);
 				}}
 				href={link?.href}
-				{...mergedLang.filter?.attributes}
+				{...mergedLang.filter?.all}
 			>
-				<Button {...subProps.button} disableA11y={true}>
+				<Button {...subProps.button}>
 					<Icon {...subProps.icon} {...(typeof icon == 'string' ? { icon: icon } : (icon as Partial<IconProps>))} />
 					{!hideFacetLabel && (
 						<span className="ss__filter__label">

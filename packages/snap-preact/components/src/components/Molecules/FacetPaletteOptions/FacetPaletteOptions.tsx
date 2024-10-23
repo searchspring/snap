@@ -280,6 +280,7 @@ export const FacetPaletteOptions = observer((properties: FacetPaletteOptionsProp
 								value.url?.link?.onClick(e);
 								onClick && onClick(e);
 							}}
+							aria-atomic="false"
 							{...(previewOnFocus ? createHoverProps(() => value?.preview && value.preview()) : {})}
 							{...mergedLang.paletteOption?.all}
 						>

@@ -126,11 +126,7 @@ export const Checkbox = observer((properties: CheckboxProps): JSX.Element => {
 
 	//initialize lang
 	const defaultLang = {
-		checkbox: {
-			attributes: {
-				'aria-label': `${disabled ? 'disabled' : ''} ${checkedState ? 'checked' : 'unchecked'} checkbox`,
-			},
-		},
+		checkbox: {},
 	};
 
 	//deep merge with props.lang

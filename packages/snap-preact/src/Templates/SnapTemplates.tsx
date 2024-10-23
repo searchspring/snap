@@ -260,7 +260,7 @@ export function createAutocompleteTargeters(templateConfig: SnapTemplatesConfig,
 				await Promise.all(componentImportPromises);
 				return TemplateSelect;
 			},
-			props: { type: 'autocomplete', templatesStore, targetId },
+			props: { type: 'autocomplete', templatesStore, targetId, input: templateConfig.autocomplete?.inputSelector },
 			hideTarget: true,
 		};
 
