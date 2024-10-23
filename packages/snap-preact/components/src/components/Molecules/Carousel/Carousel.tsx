@@ -460,7 +460,8 @@ export type CarouselProps = {
 	children: JSX.Element[];
 	onResize?: () => void;
 	onTransitionEnd?: () => void;
-} & Omit<SwiperOptions, 'breakpoints'> &
+	slidesPerView?: number;
+} & Omit<SwiperOptions, 'breakpoints' | 'slidesPerView'> &
 	ComponentProps;
 
 interface CarouselSubProps {

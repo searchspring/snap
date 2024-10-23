@@ -33,22 +33,32 @@ new SnapTemplates({
 				components: {
 					// overrides here...
 					// button: {
-					// backgroundColor: 'red',
-					// styleScript: (props) => {
-					// 	return css({
-					// 		backgroundColor: `${props.backgroundColor || 'pink'}`
-					// 	});
-					// },
-					// style: {
-					// 	background: 'green',
-					// }
+					// 	backgroundColor: 'red',
+					// 	// @ts-ignore - test
+					// 	styleScript: (props) => {
+					// 		return css({
+					// 			backgroundColor: `${props.backgroundColor || 'pink'}`
+					// 		});
+					// 	},
+					// 	style: {
+					// 		backgroundColor: 'green',
+					// 	}
 					// },
 					// recommendationBundle: {
 					// 	style: {
 					// 		'& .ss__button': {
-					// 			backgroundColor: 'green',
+					// 			backgroundColor: 'blue',
 					// 		}
-					// 	}
+					// 	},
+					// 	// @ts-ignore - test
+					// 	styleScript: (props) => {
+					// 		return css({
+					// 			'& .ss__button': {
+					// 				// backgroundColor: 'orange',
+					// 				margin: '11px'
+					// 			}
+					// 		});
+					// 	},
 					// }
 				},
 			},

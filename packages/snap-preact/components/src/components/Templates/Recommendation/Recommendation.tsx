@@ -239,7 +239,8 @@ export type RecommendationProps = {
 		enabled: boolean;
 		offset?: string;
 	};
-} & Omit<SwiperOptions, 'breakpoints'> &
+	slidesPerView?: number;
+} & Omit<SwiperOptions, 'breakpoints' | 'slidesPerView'> &
 	ComponentProps;
 
 export interface RecommendationLang {
