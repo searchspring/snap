@@ -28,10 +28,10 @@ import type {
 	CommonPluginScrollToTopConfig,
 	pluginLogger,
 } from '@searchspring/snap-platforms/common';
-import type { pluginBackgroundFilters as shopifyPluginBackgroundFilters } from '@searchspring/snap-platforms/shopify';
-import { pluginMutateResults as shopifyPluginMutateResults, ShopifyPluginMutateResultsConfig } from '@searchspring/snap-platforms/shopify';
-import type { pluginBackgroundFilters as bigCommercePluginBackgroundFilters } from '@searchspring/snap-platforms/bigcommerce';
-import type { pluginBackgroundFilters as magento2PluginBackgroundFilters } from '@searchspring/snap-platforms/magento2';
+import type { pluginBackgroundFiltersShopify as shopifyPluginBackgroundFilters } from '@searchspring/snap-platforms/shopify';
+import { pluginMutateResultsShopify as shopifyPluginMutateResults, ShopifyPluginMutateResultsConfig } from '@searchspring/snap-platforms/shopify';
+import type { pluginBackgroundFiltersBigcommerce as bigCommercePluginBackgroundFilters } from '@searchspring/snap-platforms/bigcommerce';
+import type { pluginBackgroundFiltersMagento2 as magento2PluginBackgroundFilters } from '@searchspring/snap-platforms/magento2';
 
 export const THEME_EDIT_COOKIE = 'ssThemeEdit';
 
@@ -217,7 +217,7 @@ export const createSearchTargeters = (templateConfig: SnapTemplatesConfig, templ
 	const targets = templateConfig.search?.targets || [];
 	return targets.map((target) => {
 		// use theme provided resultComponent if specified
-		if (!target.resultComponent && templateConfig.themes[target.theme || GLOBAL_THEME_NAME].resultComponent) {
+		if (!target.resultComponent && templateConfig.themes[target.theme || GLOBAL_THEME_NAME]?.resultComponent) {
 			target.resultComponent = templateConfig.themes[target.theme || GLOBAL_THEME_NAME].resultComponent;
 		}
 		const targetId = templatesStore.addTarget('search', target);

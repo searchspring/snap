@@ -3,7 +3,7 @@ import type { AbstractController } from '@searchspring/snap-controller';
 import type { Next } from '@searchspring/snap-event-manager';
 import type { PluginBackgroundFilterGlobal } from '../../../common/src';
 
-export const pluginBackgroundFilters = (cntrlr: AbstractController) => {
+export function pluginBackgroundFiltersBigcommerce(cntrlr: AbstractController) {
 	// only applies to search controllers
 	if (cntrlr.type != 'search') return;
 
@@ -39,7 +39,7 @@ export const pluginBackgroundFilters = (cntrlr: AbstractController) => {
 
 		await next();
 	});
-};
+}
 
 function replaceCharacters(value: string): string {
 	if (value) {

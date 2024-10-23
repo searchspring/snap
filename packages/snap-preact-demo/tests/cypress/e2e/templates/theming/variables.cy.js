@@ -1,5 +1,5 @@
 const config = {
-	url: 'https://localhost:2222/templates', // page containing autocomplete (recommended: home/about/contact page)
+	url: 'https://localhost:2222/templates',
 	selectors: {
 		titleElem: '.ss__search-header__title',
 	},

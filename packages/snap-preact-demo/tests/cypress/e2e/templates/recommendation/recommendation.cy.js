@@ -10,7 +10,7 @@
  */
 
 const config = {
-	url: 'https://localhost:2222/templates/recommendations.html', // page containing autocomplete (recommended: home/about/contact page)
+	url: 'https://localhost:2222/templates/recommendations.html',
 	disableGA: '', // disable google analytic events (example: 'UA-123456-1')
 	integrations: [
 		{

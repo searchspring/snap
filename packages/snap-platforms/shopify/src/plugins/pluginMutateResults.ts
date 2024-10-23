@@ -14,7 +14,7 @@ export type ShopifyPluginMutateResultsConfig = {
 	};
 };
 
-export const pluginMutateResults = (cntrlr: AbstractController, config: ShopifyPluginMutateResultsConfig) => {
+export function pluginMutateResultsShopify(cntrlr: AbstractController, config: ShopifyPluginMutateResultsConfig) {
 	if (config?.collectionInUrl?.enabled && cntrlr.context.collection?.handle) {
 		if (!window.Shopify) {
 			cntrlr.log.warn('shopify/plugins/mutateResults: window.Shopify not found');
@@ -55,4 +55,4 @@ export const pluginMutateResults = (cntrlr: AbstractController, config: ShopifyP
 			});
 		}
 	}
-};
+}

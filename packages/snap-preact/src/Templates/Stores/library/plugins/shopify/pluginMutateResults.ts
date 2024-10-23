@@ -1,1 +1,1 @@
-export { pluginMutateResults } from '@searchspring/snap-platforms/shopify';
+export { pluginMutateResultsShopify as pluginMutateResults } from '@searchspring/snap-platforms/shopify';

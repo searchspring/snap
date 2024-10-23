@@ -6,7 +6,7 @@ export type CommonPluginBackgroundFilterConfig = {
 	filters: (PluginBackgroundFilter & PluginControl)[];
 };
 
-export const pluginBackgroundFilters = (cntrlr: AbstractController, config: CommonPluginBackgroundFilterConfig) => {
+export function pluginBackgroundFilters(cntrlr: AbstractController, config: CommonPluginBackgroundFilterConfig) {
 	const backgroundFilters: PluginBackgroundFilterGlobal[] = [];
 
 	let contextBackgroundFilters: CommonPluginBackgroundFilterConfig['filters'] = [];
@@ -61,4 +61,4 @@ export const pluginBackgroundFilters = (cntrlr: AbstractController, config: Comm
 
 		await next();
 	});
-};
+}

@@ -10,7 +10,7 @@ export type CommonPluginScrollToTopConfig = {
 		behavior?: ScrollBehavior;
 	};
 };
-export const pluginScrollToTop = (cntrlr: AbstractController, config: CommonPluginScrollToTopConfig) => {
+export function pluginScrollToTop(cntrlr: AbstractController, config: CommonPluginScrollToTopConfig) {
 	if (!config?.enabled || cntrlr.type !== 'search') {
 		return;
 	}
@@ -32,4 +32,4 @@ export const pluginScrollToTop = (cntrlr: AbstractController, config: CommonPlug
 
 		await next();
 	});
-};
+}
