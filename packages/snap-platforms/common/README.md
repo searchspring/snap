@@ -8,7 +8,8 @@ To use the platform library, simply import what you wish to use from `@searchspr
 ```jsx
 import { scrollToTop } from '@searchspring/snap-platforms/common';
 const scrollToTopConfig = {
-    enabled: true
+    enabled: true,
+	selector: '#searchspring-layout',
 }
 controller.plugin(scrollToTop, scrollToTopConfig);
 ```
@@ -17,11 +18,14 @@ controller.plugin(scrollToTop, scrollToTopConfig);
 To use a plugin in [SnapTemplates](https://github.com/searchspring/snap/blob/main/docs/TEMPLATES_ABOUT.md), it can be defined and configured in the `config.plugins` section.
 
 ```jsx
+const scrollToTopConfig = {
+	enabled: true,
+	selector: '#searchspring-layout',
+}
+...
 plugins: {
 	common: {
-		scrollToTop: {
-			enabled: true
-		}
+		scrollToTop: scrollToTopConfig
 	}
 }
 ```
@@ -34,39 +38,40 @@ Allows you to set up background filters. You can configure filters for tags, col
 
 | Configuration Option | Description | Type | Required |
 |----------------------|-------------|------|---------|
-| `plugins.common.backgroundFilters` | Background filter configurations | Object | ➖ |
-| `plugins.common.backgroundFilters.filters[]` | Background filter definitions | Array | ➖ |
-| `plugins.common.backgroundFilters.filters[].type` | Defines if filter should be 'value' or 'range' type | 'value' \| 'range' | ✔️ |
-| `plugins.common.backgroundFilters.filters[].field` | Defines filter field name | string | ✔️ |
-| `plugins.common.backgroundFilters.filters[].value` | Defines filter value. If `type` is 'value', this must be a string, otherwise if `type` is 'range', this must be an object with `low` and `high` properties | string \| { low: number, high: number } | ✔️ |
-| `plugins.common.backgroundFilters.filters[].controllerIds` | Defines which controllers the filter should apply to | (string \| regexp)[]  | ➖ |
-| `plugins.common.backgroundFilters.filters[].controllerType` | Defines which controller types the filter should apply to | (string)[] | ➖ |
+| `backgroundFilters` | Background filter configurations | Object | ➖ |
+| `backgroundFilters.filters[]` | Background filter definitions | Array | ➖ |
+| `backgroundFilters.filters[].type` | Defines if filter should be 'value' or 'range' type | 'value' \| 'range' | ✔️ |
+| `backgroundFilters.filters[].field` | Defines filter field name | string | ✔️ |
+| `backgroundFilters.filters[].value` | Defines filter value. If `type` is 'value', this must be a string, otherwise if `type` is 'range', this must be an object with `low` and `high` properties | string \| { low: number, high: number } | ✔️ |
+| `backgroundFilters.filters[].controllerIds` | Defines which controllers the filter should apply to | (string \| regexp)[]  | ➖ |
+| `backgroundFilters.filters[].controllerType` | Defines which controller types the filter should apply to | (string)[] | ➖ |
 
 ```jsx
+const backgroundFiltersConfig = {
+	filters: [{
+		type: 'value',
+		field: 'ss_tags',
+		value: 'instock'
+	},
+	{
+		type: 'value',
+		field: 'collection',
+		value: 'mens'
+	},
+	{
+		type: 'value',
+		field: 'custom',
+		value: '1',
+	},
+	{
+		type: 'range',
+		field: 'price',
+		value: { low: 10, high: 20 },
+	}]
+}
 plugins: {
 	common: {
-		backgroundFilters: {
-			filters: [{
-				type: 'value',
-				field: 'ss_tags',
-				value: 'instock'
-			},
-			{
-				type: 'value',
-				field: 'collection',
-				value: 'mens'
-			},
-			{
-				type: 'value',
-				field: 'custom',
-				value: '1',
-			},
-			{
-				type: 'range',
-				field: 'price',
-				value: { low: 10, high: 20 },
-			}],
-		}
+		backgroundFilters: backgroundFiltersConfig
 	}
 }
 ```
@@ -80,10 +85,10 @@ Configures the behavior of scrolling to the top of the page after a search has o
 
 | Configuration Option | Description | Type | Default |
 |----------------------|-------------|------|---------|
-| `plugins.common.scrollToTop` | Scroll to top plugin configuration | Object | ➖ |
-| `plugins.common.scrollToTop.enabled` | Enables plugin | boolean | true |
-| `plugins.common.scrollToTop.selector` | Query selector to scroll to | string | 'body' |
-| `plugins.common.scrollToTop.options` | [`window.scroll` options configuration](https://developer.mozilla.org/en-US/docs/Web/API/Window/scroll#options) | Object | `{ top: 0, left: 0, behavior: 'smooth' }` |
+| `scrollToTop` | Scroll to top plugin configuration | Object | ➖ |
+| `scrollToTop.enabled` | Enables plugin | boolean | true |
+| `scrollToTop.selector` | Query selector to scroll to | string | 'body' |
+| `scrollToTop.options` | [`window.scroll` options configuration](https://developer.mozilla.org/en-US/docs/Web/API/Window/scroll#options) | Object | `{ top: 0, left: 0, behavior: 'smooth' }` |
 
 ```jsx
 plugins: {

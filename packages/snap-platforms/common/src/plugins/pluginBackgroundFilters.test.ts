@@ -209,6 +209,7 @@ describe('common/pluginBackgroundFilters', () => {
 		pluginBackgroundFilters(controller, { filters: [] });
 		await controller.init();
 
+		expect(controller.config.globals!.filters).toEqual([]);
 		expect(warnLogMock).toHaveBeenCalledWith(expect.any(String));
 	});
 });

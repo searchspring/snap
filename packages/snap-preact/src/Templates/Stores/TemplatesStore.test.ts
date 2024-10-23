@@ -5,7 +5,9 @@ import { GLOBAL_THEME_NAME } from './TargetStore';
 describe('TemplateStore', () => {
 	it('has expected defaults', () => {
 		const config: SnapTemplatesConfig = {
-			config: {},
+			config: {
+				platform: 'other',
+			},
 			themes: {
 				global: {
 					extends: 'bocachica',
@@ -33,6 +35,7 @@ describe('TemplateStore', () => {
 			config: {
 				siteId: '8uyt2m',
 				currency: 'eur',
+				platform: 'other',
 				// language: 'fr',
 			},
 		};
@@ -73,6 +76,7 @@ describe('TemplateStore', () => {
 			},
 			config: {
 				siteId: '8uyt2m',
+				platform: 'other',
 			},
 		};
 		const store = new TemplatesStore({ config });
@@ -95,6 +99,7 @@ describe('TemplateStore', () => {
 			},
 			config: {
 				siteId: '8uyt2m',
+				platform: 'other',
 			},
 		};
 		const store = new TemplatesStore({ config });
@@ -110,7 +115,9 @@ describe('TemplateStore', () => {
 	it('can addTheme', async () => {
 		const theme = GLOBAL_THEME_NAME;
 		const config: SnapTemplatesConfig = {
-			config: {},
+			config: {
+				platform: 'other',
+			},
 			themes: {
 				[theme]: {
 					extends: 'bocachica',
@@ -163,7 +170,9 @@ describe('TemplateStore', () => {
 	it('can addTarget', async () => {
 		const theme = GLOBAL_THEME_NAME;
 		const config: SnapTemplatesConfig = {
-			config: {},
+			config: {
+				platform: 'other',
+			},
 			themes: {
 				[theme]: {
 					extends: 'bocachica',

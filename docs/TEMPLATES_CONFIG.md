@@ -57,11 +57,12 @@ new SnapTemplates({
 | Configuration Option | Description | Type | Default | Required |
 |----------------------|-------------|------|:---------:|:---------:|
 | `config` | Global configuration options | Object | ➖ | ✔️ |
+| `config.platform` | Shopping platform for the integration | String | 'other' | ✔️ |
 | `config.siteId` | Searchspring Site ID | String | ➖ | ➖ |
 | `config.language` | Language code for localization | String | 'en' | ➖ |
 | `config.currency` | Currency code for pricing | String | 'usd' | ➖ |
 
-The `config` object defines the Searchspring siteId and current localization to be used. 
+The `config` object defines the integration platform, Searchspring siteId and current localization to be used.
 
 If a `siteId` is not provided, the siteId found on the `bundle.js` url path will be used. For example `8uyt2m` will be used if the page contains the following script:
 
@@ -93,7 +94,7 @@ In addition when plugins is `shopify`, the following plugins are available:
 
 | Configuration Option | Description | Type | Default |
 |----------------------|-------------|------|---------|
-| `plugins.shopify.mutateResults` | Shopify Updating results configuration | Object | ➖ |
+| `plugins.shopify.mutateResults` | Shopify Updating results configuration | Object | Enabled |
 
 > [!NOTE]
 > See shopify specific plugins documentation under the [Packages > Platform > Shopify](https://github.com/searchspring/snap/tree/main/packages/snap-platforms/shopify) section.

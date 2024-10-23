@@ -24,13 +24,15 @@ export const AddToCart = (props) => {
 To use a plugin in [SnapTemplates](https://github.com/searchspring/snap/blob/main/docs/TEMPLATES_ABOUT.md), it can be defined and configured in the `config.plugins` section.
 
 ```jsx
+const mutateResultsConfig = {
+	collectionInUrl: {
+		enabled: true,
+	}
+}
+...
 plugins: {
 	shopify: {
-		mutateResults: {
-			collectionInUrl: {
-                enabled: true
-            }
-		}
+		mutateResults: mutateResultsConfig
 	}
 }
 ```
@@ -50,18 +52,20 @@ Enables updating the URL for products within search results; product URLs will b
 
 | Configuration Option | Description | Type | Default |
 |----------------------|-------------|------|---------|
-| `plugins.shopify.mutateResults` | Shopify Updating results configuration | Object | ➖ |
-| `plugins.shopify.mutateResults.collectionInUrl` | Results URL Mutation configuration | Object | ➖ |
-| `plugins.shopify.mutateResults.collectionInUrl.enabled` | Enables middleware | Object | true |
+| `mutateResults` | Shopify Updating results configuration | Object | ➖ |
+| `mutateResults.collectionInUrl` | Results URL Mutation configuration | Object | ➖ |
+| `mutateResults.collectionInUrl.enabled` | Enables middleware | Object | true |
 
 ```jsx
+const mutateResultsConfig = {
+	collectionInUrl: {
+		enabled: true,
+	}
+}
+...
 plugins: {
 	shopify: {
-		mutateResults: {
-			url: {
-				enabled: true
-			}
-		}
+		mutateResults: mutateResultsConfig
 	}
 }
 ```
