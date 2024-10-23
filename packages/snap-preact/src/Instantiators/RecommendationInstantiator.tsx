@@ -49,7 +49,8 @@ type ProfileSpecificProfile = {
 	options: Pick<RecommendRequestModel, 'siteId' | 'categories' | 'brands' | 'branch' | 'filters' | 'limit' | 'query' | 'dedupe'> & {
 		realtime?: boolean;
 	};
-	profile: string;
+	profile?: string;
+	tag?: string;
 	selector: string;
 };
 
@@ -202,11 +203,11 @@ export class RecommendationInstantiator {
 					new DomTargeter(
 						targetsArr,
 						async (target: ExtendedRecommendaitonProfileTarget, elem: Element | undefined, originalElem: Element | undefined) => {
-							if (target.profile?.profile) {
+							if (target.profile?.profile || target.profile?.tag) {
 								const profileRequestGlobals: RecommendRequestModel = {
 									...requestGlobals,
 									profile: target.profile?.options,
-									tag: target.profile.profile,
+									tag: target.profile.tag! || target.profile.profile!, // have to support both tag and profile due to having profile at release, but will favor tag
 								};
 								const profileContext: ContextVariables = deepmerge(this.context, { globals: scriptContextGlobals, profile: target.profile });
 								if (elemContext.custom) {
@@ -265,7 +266,7 @@ async function readyTheController(
 
 	if (!tag) {
 		// FEEDBACK: change message depending on script integration type (profile vs. legacy)
-		instance.logger.warn(`'profile' is missing from <script> tag, skipping this profile`, elem);
+		instance.logger.warn(`'tag' is missing from <script> tag, skipping this profile`, elem);
 		return;
 	}
 
