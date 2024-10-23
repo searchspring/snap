@@ -142,7 +142,7 @@ const CTASlot = observer((props: BundledCTAProps): JSX.Element => {
 						);
 					})}
 				</div>
-				<div>{`${cartStore.count} item${cartStore.count != 1 ? 's' : ''} `}</div>
+				<div className="cta__subtotal__title">{`${cartStore.count} item${cartStore.count != 1 ? 's' : ''}`}</div>
 
 				<div className="cta__inner__price">
 					<div className="cta__inner__price__title">Total Price</div>
