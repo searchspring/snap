@@ -312,6 +312,70 @@ describe('Autocomplete Controller', () => {
 		});
 	});
 
+	it('closes autocomplete via `setFocused` call when the document click events are made', async () => {
+		acConfig.selector = '.ss-ac';
+		document.body.innerHTML = '<div class="click-me"><input type="text" class="ss-ac"/></div>';
+
+		const inputEl: HTMLInputElement = document.querySelectorAll('.ss-ac')[0] as HTMLInputElement;
+
+		const controller = new AutocompleteController(acConfig, {
+			client: new MockClient(globals, {}),
+			store: new AutocompleteStore(acConfig, services),
+			urlManager,
+			eventManager: new EventManager(),
+			profiler: new Profiler(),
+			logger: new Logger(),
+			tracker: new Tracker(globals),
+		});
+
+		const setFocusedSpy = jest.spyOn(controller, 'setFocused');
+
+		await controller.bind();
+		const query = 'bumpers';
+		inputEl.value = query;
+		inputEl.dispatchEvent(new Event('input'));
+
+		document.querySelector('.click-me')?.dispatchEvent(new Event('click', { bubbles: true }));
+
+		expect(setFocusedSpy).toHaveBeenCalled();
+	});
+
+	it('disables document click (settings.disableClickOutside)', async () => {
+		acConfig.selector = '.ss-ac';
+		document.body.innerHTML = '<div class="click-me"><input type="text" class="ss-ac"/></div>';
+
+		const config = {
+			...acConfig,
+			settings: {
+				...acConfig.settings,
+				disableClickOutside: true,
+			},
+		};
+
+		const inputEl: HTMLInputElement = document.querySelectorAll('.ss-ac')[0] as HTMLInputElement;
+
+		const controller = new AutocompleteController(config, {
+			client: new MockClient(globals, {}),
+			store: new AutocompleteStore(acConfig, services),
+			urlManager,
+			eventManager: new EventManager(),
+			profiler: new Profiler(),
+			logger: new Logger(),
+			tracker: new Tracker(globals),
+		});
+
+		const setFocusedSpy = jest.spyOn(controller, 'setFocused');
+
+		await controller.bind();
+		const query = 'bumpers';
+		inputEl.value = query;
+		inputEl.dispatchEvent(new Event('input'));
+
+		document.querySelector('.click-me')?.dispatchEvent(new Event('click', { bubbles: true }));
+
+		expect(setFocusedSpy).not.toHaveBeenCalled();
+	});
+
 	it('does not serialize other form input elements normally (settings.serializeForm)', async () => {
 		document.body.innerHTML =
 			'<div><form action="/search.html"><input type="hidden" name="view" value="shop"/><input type="text" id="search_query"/></form></div>';
