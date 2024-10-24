@@ -503,7 +503,10 @@ export class AutocompleteController extends AbstractController {
 			this.searchTrending();
 		}
 
-		document.addEventListener('click', this.handlers.document.click);
+		// if we are not preventing via `disableClickOutside` setting
+		if (!this.config.settings?.disableClickOutside) {
+			document.addEventListener('click', this.handlers.document.click);
+		}
 	}
 
 	searchTrending = async (): Promise<void> => {
