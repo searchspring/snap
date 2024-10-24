@@ -91,7 +91,7 @@ describe('Theme variables work', () => {
 		cy.on('window:before:load', (win) => {
 			win.mergeSnapConfig = {
 				themes: {
-					global: {
+					custom: {
 						extends: 'bocachica',
 						variables: {
 							// default breakpoints: [767, 991, 1299],

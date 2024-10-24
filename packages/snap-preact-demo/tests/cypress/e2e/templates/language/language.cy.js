@@ -1,13 +1,8 @@
 const config = {
 	url: 'https://localhost:2222/templates',
 	selectors: {
+		sidebarElem: '.ss__sidebar__title',
 		titleElem: '.ss__search-header__title.ss__search-header__title--results',
-		subtitleElem: '.ss__search-header__title.ss__search-header__title--subtitle',
-		topToolbarElem: '.ss__search__content__toolbar--top-toolbar',
-		bottomToolbarElem: '.ss__search__content__toolbar--bottom-toolbar',
-		pagination: '.ss__pagination',
-		layoutSelector: '.ss__toolbar__layout-selector',
-		perpage: '.ss__per-page',
 	},
 };
 
@@ -32,9 +27,7 @@ describe('Templates Language settings', () => {
 			cy.visit('https://localhost:2222/templates/');
 
 			cy.snapController().then(({ store }) => {
-				cy.get(config.selectors.titleElem).should(($el) =>
-					expect($el.text().trim()).to.equal('Showing  1 - 24 of  \n                4445 \n                results')
-				);
+				cy.get(config.selectors.sidebarElem).should(($el) => expect($el.text().trim()).to.equal('Filters'));
 			});
 		});
 
@@ -51,9 +44,7 @@ describe('Templates Language settings', () => {
 			cy.visit('https://localhost:2222/templates/');
 
 			cy.snapController().then(({ store }) => {
-				cy.get(config.selectors.titleElem).should(($el) =>
-					expect($el.text().trim()).to.equal(`Montrant  1 - 24 de  \n                4445 \n                résultats`)
-				);
+				cy.get(config.selectors.sidebarElem).should(($el) => expect($el.text().trim()).to.equal(`Filtres`));
 			});
 		});
 

@@ -24,6 +24,30 @@ describe('Email Recs', () => {
 		it('has valid config', () => {
 			cy.wrap(config).its('url').should('have.length.at.least', 1);
 			cy.wrap(config).its('selectors.email.result').should('have.length.at.least', 1);
+			cy.on('window:before:load', (win) => {
+				win.mergeSnapConfig = {
+					themes: {
+						custom: {
+							extends: 'bocachica',
+							overrides: {
+								components: {
+									image: {
+										lazy: false,
+									},
+								},
+							},
+						},
+					},
+					recommendation: {
+						email: {
+							Email: {
+								theme: 'custom',
+								component: 'RecommendationEmail',
+							},
+						},
+					},
+				};
+			});
 			cy.visit(config.url);
 		});
 

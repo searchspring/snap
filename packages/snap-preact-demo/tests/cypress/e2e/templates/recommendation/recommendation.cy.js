@@ -52,6 +52,33 @@ describe('Recommendations', () => {
 	config.integrations.forEach((integration) => {
 		describe(`${integration.label}`, () => {
 			describe('Setup', () => {
+				cy.on('window:before:load', (win) => {
+					win.mergeSnapConfig = {
+						themes: {
+							custom: {
+								extends: 'bocachica',
+								overrides: {
+									components: {
+										recommendation: {
+											lazyRender: {
+												enabled: false,
+											},
+										},
+									},
+								},
+							},
+						},
+						recommendation: {
+							default: {
+								Default: {
+									component: 'Recommendation',
+									theme: 'custom',
+								},
+							},
+						},
+					};
+				});
+
 				it('has valid config', () => {
 					cy.wrap(config).its('url').should('have.length.at.least', 1);
 					cy.visit(config.url);
