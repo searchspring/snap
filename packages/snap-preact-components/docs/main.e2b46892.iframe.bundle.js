@@ -1,4 +1,4 @@
-/*! For license information please see main.40ee089c.iframe.bundle.js.LICENSE.txt */
+/*! For license information please see main.e2b46892.iframe.bundle.js.LICENSE.txt */
 (self.webpackChunk_searchspring_snap_preact_components = self.webpackChunk_searchspring_snap_preact_components || []).push([
 	[792],
 	{
@@ -14681,14 +14681,18 @@
 									'ul',
 									{ className: 'ss__list__options', role: 'listbox', 'aria-label': titleText },
 									options.map(function (option) {
-										var selected = selection.some(function (select) {
-											return select.value == option.value;
-										});
+										var _option$value,
+											selected = selection.some(function (select) {
+												return select.value == option.value;
+											});
 										return (0, _emotion_react__WEBPACK_IMPORTED_MODULE_23__.Y)(
 											'li',
 											{
 												className: classnames__WEBPACK_IMPORTED_MODULE_21___default()(
-													'ss__list__option ss__list__option--' + _searchspring_snap_toolbox__WEBPACK_IMPORTED_MODULE_27__.p(option.value.toString()),
+													'ss__list__option ss__list__option--' +
+														_searchspring_snap_toolbox__WEBPACK_IMPORTED_MODULE_27__.p(
+															null === (_option$value = option.value) || void 0 === _option$value ? void 0 : _option$value.toString()
+														),
 													{
 														'ss__list__option--selected': selected,
 														'ss__list__option--disabled': null == option ? void 0 : option.disabled,
@@ -20256,14 +20260,18 @@
 											_Carousel__WEBPACK_IMPORTED_MODULE_25__.FN,
 											Object.assign({}, subProps.carousel),
 											options.map(function (option) {
-												var label = option.label,
+												var _option$value,
+													_option$value2,
+													label = option.label,
 													selected = (null == selection ? void 0 : selection.value) == option.value;
 												return (0, _emotion_react__WEBPACK_IMPORTED_MODULE_20__.Y)(
 													'div',
 													{
 														className: classnames__WEBPACK_IMPORTED_MODULE_17___default()(
 															'ss__swatches__carousel__swatch ss__swatches__carousel__swatch--' +
-																_searchspring_snap_toolbox__WEBPACK_IMPORTED_MODULE_26__.p(option.value.toString()),
+																_searchspring_snap_toolbox__WEBPACK_IMPORTED_MODULE_26__.p(
+																	null === (_option$value = option.value) || void 0 === _option$value ? void 0 : _option$value.toString()
+																),
 															{
 																'ss__swatches__carousel__swatch--selected': selected,
 																'ss__swatches__carousel__swatch--disabled': null == option ? void 0 : option.disabled,
@@ -20284,7 +20292,12 @@
 													!option.background && option.backgroundImageUrl
 														? (0, _emotion_react__WEBPACK_IMPORTED_MODULE_20__.Y)(
 																_Atoms_Image__WEBPACK_IMPORTED_MODULE_28__._,
-																Object.assign({}, subProps.image, { src: option.backgroundImageUrl, alt: option.label || option.value.toString() })
+																Object.assign({}, subProps.image, {
+																	src: option.backgroundImageUrl,
+																	alt:
+																		option.label ||
+																		(null === (_option$value2 = option.value) || void 0 === _option$value2 ? void 0 : _option$value2.toString()),
+																})
 														  )
 														: (0, _emotion_react__WEBPACK_IMPORTED_MODULE_20__.Y)(preact__WEBPACK_IMPORTED_MODULE_16__.FK, null),
 													!hideLabels &&
@@ -38024,6 +38037,7 @@
 												_this$config$settings15,
 												_this$config$settings16,
 												_this$store$trending2,
+												_this$config$settings17,
 												_this3 = this;
 											return AutocompleteController_regeneratorRuntime().wrap(
 												function _callee10$(_context10) {
@@ -38101,7 +38115,10 @@
 																			void 0 === _this$store$trending2 ||
 																			!_this$store$trending2.length) &&
 																		this.searchTrending(),
-																	document.addEventListener('click', this.handlers.document.click);
+																	(null !== (_this$config$settings17 = this.config.settings) &&
+																		void 0 !== _this$config$settings17 &&
+																		_this$config$settings17.disableClickOutside) ||
+																		document.addEventListener('click', this.handlers.document.click);
 															case 8:
 															case 'end':
 																return _context10.stop();
@@ -49703,7 +49720,7 @@
 					(this.event = payload.event),
 					(this.id = payload.id),
 					(this.pid = payload.pid),
-					(this.meta = { initiator: { lib: 'searchspring/snap', 'lib.version': '0.60.4', 'lib.framework': config.framework } }),
+					(this.meta = { initiator: { lib: 'searchspring/snap', 'lib.version': '0.61.0', 'lib.framework': config.framework } }),
 					(this.id = (0, v4.A)());
 			});
 			function Tracker_toConsumableArray(arr) {
@@ -50259,7 +50276,7 @@
 									_this$globals$currenc.code &&
 									(this.context.currency = this.globals.currency),
 								(null !== (_window$searchspring = window.searchspring) && void 0 !== _window$searchspring && _window$searchspring.tracker) ||
-									((window.searchspring = window.searchspring || {}), (window.searchspring.tracker = this), (window.searchspring.version = '0.60.4')),
+									((window.searchspring = window.searchspring || {}), (window.searchspring.tracker = this), (window.searchspring.version = '0.61.0')),
 								setTimeout(function () {
 									_this.targeters.push(
 										new DomTargeter([{ selector: 'script[type^="searchspring/track/"]', emptyTarget: !1 }], function (target, elem) {
