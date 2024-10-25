@@ -16,7 +16,7 @@ The block below uses the `recently-viewed` profile which would typically be setu
 	};
 	profiles = [
 		{
-			profile: 'recently-viewed',
+			tag: 'recently-viewed',
 			selector: '.ss__recs__recently-viewed',
 			options: {
 				limit: 5
@@ -28,7 +28,7 @@ The block below uses the `recently-viewed` profile which would typically be setu
 <div class="ss__recs__recently-viewed" style="min-height: 100vh;"><!-- recommendations will render here --></div>
 ```
 
-The `RecommendationInstantiator` will look for these script blocks on the page and attempt to inject components based on the `selector` specified in each profile. In the example above, the profile specified is the `recently-viewed` profile, and is set to render inside the `.ss__recs__recently-viewed` element just below the script block. The targeted element could exist anywhere on the page - but it is recommended to group elements with script blocks whenever possible (for easy integration identification). The component to render into the targeted `selector` is setup within the `RecommendationInstantiator` configuration. The targeted element should be given a `min-height` inline style to prevent cumulative layout shift.
+The `RecommendationInstantiator` will look for these script blocks on the page and attempt to inject components based on the `selector` specified in each profile. In the example above, the profile specified (via tag) is the `recently-viewed` profile, and is set to render inside the `.ss__recs__recently-viewed` element just below the script block. The targeted element could exist anywhere on the page - but it is recommended to group elements with script blocks whenever possible (for easy integration identification). The component to render into the targeted `selector` is setup within the `RecommendationInstantiator` configuration. The targeted element should be given a `min-height` inline style to prevent cumulative layout shift.
 
 
 ## Recommendation Context Variables
@@ -47,7 +47,7 @@ Context variables are set within the script blocks and can be used to set either
 ### Profile Specific Variables
 | Option | Value | Placement | Description | Required
 |---|---|:---:|---|:---:|
-| profile | string | all | profile name to use | ✔️ |
+| tag | string | all | profile tag name to use | ✔️ |
 | selector | string | all | CSS selector to render component inside | ✔️ |
 | options.siteId | global siteId overwrite | all | optional global siteId overwrite |   |
 | options.categories | array of category path strings | all | optional category identifiers used in category trending recommendation profiles |   |
@@ -85,23 +85,23 @@ Here's an example that demonstrates deduping:
 ```html
 <script type="searchspring/recommendations">
 	globals = {
-		products: ['product123'];
+		products: ['product123']
 	};
 	profiles = [
 		{
-			profile: 'customers-also-bought',
+			tag: 'customers-also-bought',
 			selector: '.ss__recs__crosssell',
 			options: {
 				limit: 5
 			}
 		},
 		{
-			profile: 'customers-also-viewed',
+			tag: 'customers-also-viewed',
 			selector: '.ss__recs__similar'
 		},
 		// same batch, but dedupe false
 		{
-			profile: 'customers-also-like',
+			tag: 'customers-also-like',
 			selector: '.ss__recs__alsoliked',
 			options: {
 				dedupe: false
@@ -124,7 +124,7 @@ A typical "similar" profile that would display products similar to the product p
 	};
 	profiles = [
 		{
-			profile: 'customers-also-viewed',
+			tag: 'customers-also-viewed',
 			selector: '.ss__recs__similar'
 		}
 	];
@@ -140,7 +140,7 @@ If tracking scripts are not in place, "crosssell" profiles may require the cart 
 	};
 	profiles = [
 		{
-			profile: 'customers-also-bought',
+			tag: 'customers-also-bought',
 			selector: '.ss__recs__crosssell'
 		}
 	];
@@ -158,7 +158,7 @@ If the shopper identifier is not beeing captured by the `bundle.js` context, it 
 	};
 	profiles = [
 		{
-			profile: 'view-cart',
+			tag: 'view-cart',
 			selector: '.ss__recs__cart'
 		}
 	];
@@ -172,7 +172,7 @@ The example shown below will filter the recommendations for products matching fi
 <script type="searchspring/recommendations">
 	profiles = [
 		{
-			profile: 'customers-also-bought',
+			tag: 'customers-also-bought',
 			selector: '.ss__recs__crosssell',
 			options: {
 				filters: [

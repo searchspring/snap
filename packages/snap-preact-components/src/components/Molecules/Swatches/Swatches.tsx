@@ -194,7 +194,7 @@ export function Swatches(properties: SwatchesProps): JSX.Element {
 							return (
 								<div
 									className={classnames(
-										`ss__swatches__carousel__swatch ss__swatches__carousel__swatch--${filters.handleize(option.value.toString())}`,
+										`ss__swatches__carousel__swatch ss__swatches__carousel__swatch--${filters.handleize(option.value?.toString())}`,
 										{
 											'ss__swatches__carousel__swatch--selected': selected,
 											'ss__swatches__carousel__swatch--disabled': option?.disabled,
@@ -209,7 +209,7 @@ export function Swatches(properties: SwatchesProps): JSX.Element {
 									aria-selected={selected}
 								>
 									{!option.background && option.backgroundImageUrl ? (
-										<Image {...subProps.image} src={option.backgroundImageUrl} alt={option.label || option.value.toString()} />
+										<Image {...subProps.image} src={option.backgroundImageUrl} alt={option.label || option.value?.toString()} />
 									) : (
 										<></>
 									)}

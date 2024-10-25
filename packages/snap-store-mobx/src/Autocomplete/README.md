@@ -41,7 +41,7 @@ Sets all term suggestions to inactive
 Sets all trending term suggestions to inactive
 
 ## `meta` property
-The meta property is an object containing the meta data retrieved from the Searchspring [Meta API](https://snapi.kube.searchspring.io/api/v1/#tag/Meta)
+The meta property is an object containing the meta data retrieved from the Searchspring Meta API
 
 ## `state` property
 Contains autocomplete lock state

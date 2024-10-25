@@ -276,6 +276,19 @@ describe('RecommendationInstantiator', () => {
 		expect(clientSpy).toHaveBeenCalledTimes(4);
 	});
 
+	it('supports legacy script type', async () => {
+		document.body.innerHTML = `<script type="searchspring/personalized-recommendations" profile="legacy"></script>`;
+
+		const client = new MockClient(baseConfig.client!.globals, {});
+		const clientSpy = jest.spyOn(client, 'recommend');
+
+		const recommendationInstantiator = new RecommendationInstantiator(baseConfig, { client });
+		await wait();
+		expect(Object.keys(recommendationInstantiator.controller).length).toBe(1);
+		expect(recommendationInstantiator.controller['recommend_legacy_0']).toBeDefined();
+		expect(clientSpy).toHaveBeenCalledTimes(1);
+	});
+
 	it('makes the context found on the target available', async () => {
 		document.body.innerHTML = `<script type="searchspring/recommend" profile="${DEFAULT_PROFILE}">
 			shopper = { id: 'snapdev' };
@@ -449,7 +462,7 @@ describe('RecommendationInstantiator', () => {
 	it('can use new style script tags and context', async () => {
 		const profileContextArray = [
 			{
-				profile: 'trending',
+				profile: 'trending', // using 'profile' here to ensure compatibility
 				selector: '#tout1',
 				custom: { some: 'thing1' },
 				options: {
@@ -470,7 +483,7 @@ describe('RecommendationInstantiator', () => {
 				},
 			},
 			{
-				profile: 'similar',
+				tag: 'similar', // using 'tag' here to ensure compatibility
 				selector: '#tout2',
 				custom: { some: 'thing2' },
 				options: {
@@ -524,7 +537,7 @@ describe('RecommendationInstantiator', () => {
 						}
 					},
 					{
-						profile: 'similar',
+						tag: 'similar',
 						selector: '#tout2',
 						custom: { some: 'thing2' },
 						options: {

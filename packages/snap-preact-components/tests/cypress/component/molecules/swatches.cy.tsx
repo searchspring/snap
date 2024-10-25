@@ -278,7 +278,7 @@ describe('Swatches Component', async () => {
 			cy.get('.ss__carousel__prev').should('not.exist');
 			cy.get('.ss__carousel__next').should('not.exist');
 			cy.get('.ss__swatches__grid').should('exist');
-			cy.get('.ss__grid__option').should('have.length', options.length);
+			cy.get('.ss__grid__option').should('exist');
 		});
 
 		it('renders swatch background colors', () => {

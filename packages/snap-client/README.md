@@ -2,12 +2,6 @@
 
 Simple Javascript client for communicating with the Searchspring Snap API.
 
-## Quick Links
-
-[Snap API docs](https://snapi.kube.searchspring.io/api/v1/) - Search & Autocomplete API documentation
-
-[Snapi Explorer](https://searchspring.github.io/snapi-explorer/) - a tool for making requests to Searchspring's API
-
 ## Installation
 
 ```bash
@@ -33,8 +27,6 @@ const globals = {
 ```
 
 Any other keys defined here will be passed to the API request
-
-For a full list of parameters please see the [Snap API docs](https://snapi.kube.searchspring.io/api/v1/)
 
 For example, with background filter:
 

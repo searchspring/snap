@@ -173,7 +173,7 @@ export function List(properties: ListProps): JSX.Element {
 						const selected = selection.some((select: ListOption) => select.value == option.value);
 						return (
 							<li
-								className={classnames(`ss__list__option ss__list__option--${filters.handleize(option.value.toString())}`, {
+								className={classnames(`ss__list__option ss__list__option--${filters.handleize(option.value?.toString())}`, {
 									'ss__list__option--selected': selected,
 									'ss__list__option--disabled': option?.disabled,
 									'ss__list__option--unavailable': option?.available === false,

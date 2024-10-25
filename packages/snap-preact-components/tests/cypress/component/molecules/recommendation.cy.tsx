@@ -60,7 +60,7 @@ describe('Recommendation Component', async () => {
 		const spy = cy.spy(controller.tracker.track, 'event').as('trackfn');
 
 		mount(
-			<Recommendation controller={controller}>
+			<Recommendation controller={controller} speed={0} lazyRender={{ enabled: false }}>
 				{controller.store.results.map((result, idx) => (
 					<div className={'findMe'} key={idx}>
 						<div className="result">{result.mappings.core?.name}</div>
@@ -248,6 +248,21 @@ describe('Recommendation Component', async () => {
 		cy.get('.ss__carousel__prev').should('exist');
 		cy.get('.ss__carousel__next').should('exist');
 		cy.get('.swiper-slide:not(.swiper-slide-duplicate) .result').should('have.length', 20);
+	});
+
+	it('doesnt render with no results', () => {
+		mount(
+			<Recommendation title="hi" controller={controller} results={[]}>
+				{controller.store.results.map((result, idx) => (
+					<div className="result" key={idx}>
+						{result.mappings.core?.name}
+					</div>
+				))}
+			</Recommendation>
+		);
+
+		cy.get('.ss__recommendation').should('not.exist');
+		cy.get('.ss__recommendation .ss__recommendation__title').should('not.exist');
 	});
 
 	it('can disable styling', () => {
