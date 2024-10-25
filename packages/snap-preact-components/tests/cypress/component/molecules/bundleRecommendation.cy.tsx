@@ -320,7 +320,9 @@ describe('RecommendationBundle Component', async () => {
 
 		cy.get('.ss__recommendation-bundle').should('exist');
 		cy.get('.ss__recommendation-bundle .ss__recommendation-bundle__wrapper__selector__result-wrapper__checkbox').should('not.exist');
+	});
 
+	it('renders checkboxes by default', () => {
 		mount(<RecommendationBundle controller={controller} onAddToCart={cy.stub().as('onAddToCart')} />);
 
 		cy.get('.ss__recommendation-bundle').should('exist');

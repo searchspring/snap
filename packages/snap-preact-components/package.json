@@ -23,7 +23,7 @@
 		"storybook": "start-storybook -p 6006",
 		"cypress": "cypress open --project tests",
 		"cypress:headless": "cypress run --component --project tests",
-		"test": "jest; npm run cypress:headless",
+		"test": "jest",
 		"test:watch": "jest --watch"
 	},
 	"dependencies": {

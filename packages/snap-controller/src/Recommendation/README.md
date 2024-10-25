@@ -11,7 +11,7 @@ The `RecommendationController` is used when making queries to the API `recommend
 | realtime | update recommendations if cart contents change (requires [cart attribute tracking](https://github.com/searchspring/snap/blob/main/docs/INTEGRATION.md)) | ➖ |   |
 | batched | batch multiple recommendations into a single network request | true |   |
 | limit | maximum number of results to display, can also be set globally via globals | 20 |  |
-| globals | keys defined here will be passed to the [API request](https://snapi.kube.searchspring.io/api/v1/) (can overwrite global config)| ➖ |   |
+| globals | keys defined here will be passed to the API request (can overwrite global config)| ➖ |   |
 | settings.variants.field | used to set the field in which to grab the variant data from | ➖ |   | 
 | settings.variants.realtime.enabled | enable real time variant updates | ➖ |   | 
 | settings.variants.realtime.filters | specify which filters to use to determine which results are updated | ➖ |   | 
