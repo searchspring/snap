@@ -119,7 +119,8 @@ describe('BundledRecommendations', () => {
 				cy.snapController(config?.selectors?.recommendation.controller).then(({ store }) => {
 					cy.get(config?.selectors?.recommendation.result).should('exist');
 					let url = doc.querySelector(`${config?.selectors?.recommendation.result} a`).attributes?.href?.value;
-					cy.get(config?.selectors?.recommendation.result)
+					cy.get(`${config?.selectors?.recommendation.result} a`)
+						.first()
 						.click({ multiple: true })
 						.then(() => {
 							cy.location('pathname').should('include', url);
