@@ -234,7 +234,7 @@ export class RecommendationInstantiator {
 						}),
 					};
 
-					readyTheController(this, elem, elemContext, profileCount, originalElem, profileRequestGlobals);
+					readyTheController(this, elem, deepmerge(this.context, elemContext), profileCount, originalElem, profileRequestGlobals);
 				}
 			}
 		);
