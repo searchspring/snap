@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.61.0](https://github.com/searchspring/snap/compare/v0.60.4...v0.61.0) (2024-10-25)
+
+### Features
+
+- **controller/autocomplete:** adding new setting that prevents binding the document click event ([7aaa6ee](https://github.com/searchspring/snap/commit/7aaa6ee4fee39ae7b1a05334270b76d052ce39ca))
+
 ## [0.60.4](https://github.com/searchspring/snap/compare/v0.60.3...v0.60.4) (2024-09-25)
 
 **Note:** Version bump only for package @searchspring/snap-store-mobx
