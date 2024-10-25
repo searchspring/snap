@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.61.1](https://github.com/searchspring/snap/compare/v0.61.0...v0.61.1) (2024-10-25)
+
+### Bug Fixes
+
+- **preact/recommendationinstantiator:** legacy script blocks were not merging the context ([0076a0c](https://github.com/searchspring/snap/commit/0076a0cf58a98ae74826feea1e3608dae4fd8af6))
+
 # [0.61.0](https://github.com/searchspring/snap/compare/v0.60.4...v0.61.0) (2024-10-25)
 
 ### Bug Fixes

@@ -289,7 +289,32 @@ describe('RecommendationInstantiator', () => {
 		expect(clientSpy).toHaveBeenCalledTimes(1);
 	});
 
-	it('makes the context found on the target available', async () => {
+	it('supports legacy script type with config context', async () => {
+		const profile = 'legacy';
+		document.body.innerHTML = `<script type="searchspring/personalized-recommendations" profile="${profile}"></script>`;
+
+		const client = new MockClient(baseConfig.client!.globals, {});
+		const clientSpy = jest.spyOn(client, 'recommend');
+
+		const newConfig = {
+			...baseConfig,
+			context: {
+				testing: 'things',
+			},
+		};
+
+		const recommendationInstantiator = new RecommendationInstantiator(newConfig, { client });
+		await wait();
+		expect(Object.keys(recommendationInstantiator.controller).length).toBe(1);
+		expect(recommendationInstantiator.controller['recommend_legacy_0']).toBeDefined();
+		expect(recommendationInstantiator.controller['recommend_legacy_0'].context).toStrictEqual({
+			profile,
+			...newConfig.context,
+		});
+		expect(clientSpy).toHaveBeenCalledTimes(1);
+	});
+
+	it('makes the context found on the target and in the config available', async () => {
 		document.body.innerHTML = `<script type="searchspring/recommend" profile="${DEFAULT_PROFILE}">
 			shopper = { id: 'snapdev' };
 			product = 'sku1';
@@ -319,7 +344,14 @@ describe('RecommendationInstantiator', () => {
 		const client = new MockClient(baseConfig.client!.globals, {});
 		const clientSpy = jest.spyOn(client, 'recommend');
 
-		const recommendationInstantiator = new RecommendationInstantiator(baseConfig, { client });
+		const newConfig = {
+			...baseConfig,
+			context: {
+				testing: 'things',
+			},
+		};
+
+		const recommendationInstantiator = new RecommendationInstantiator(newConfig, { client });
 		await wait();
 		expect(Object.keys(recommendationInstantiator.controller).length).toBe(1);
 		Object.keys(recommendationInstantiator.controller).forEach((controllerId) => {
@@ -350,6 +382,7 @@ describe('RecommendationInstantiator', () => {
 					limit: 5,
 					siteId: 'abc123',
 				},
+				...newConfig.context,
 			});
 		});
 
