@@ -244,8 +244,9 @@ export class LibraryStore {
 			},
 		},
 		language: {
-			// @ts-ignore - we dont actually want an english translation, that is just our component default values
-			en: () => undefined,
+			en: async () => {
+				return this.locales.languages.en || (this.locales.languages.en = transformTranslationsToTheme((await import('./library/languages/en')).en));
+			},
 			fr: async () => {
 				return this.locales.languages.fr || (this.locales.languages.fr = transformTranslationsToTheme((await import('./library/languages/fr')).fr));
 			},
