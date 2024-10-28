@@ -170,16 +170,16 @@ export class RecommendationInstantiator {
 
 					// type the new profile specific integration context variables
 					const scriptContextProfiles = elemContext.profiles as ProfileSpecificProfile[];
-					const scriptContextGlobals = elemContext.globals as ProfileSpecificGlobals;
+					const scriptContextGlobals = elemContext.globals as ProfileSpecificGlobals | undefined;
 
 					// grab from globals
 					const requestGlobals: Partial<RecommendRequestModel> = {
 						...defined({
-							blockedItems: scriptContextGlobals.blockedItems,
-							filters: scriptContextGlobals.filters,
-							cart: scriptContextGlobals.cart && getArrayFunc(scriptContextGlobals.cart),
-							products: scriptContextGlobals.products,
-							shopper: scriptContextGlobals.shopper?.id,
+							blockedItems: scriptContextGlobals?.blockedItems,
+							filters: scriptContextGlobals?.filters,
+							cart: scriptContextGlobals?.cart && getArrayFunc(scriptContextGlobals.cart),
+							products: scriptContextGlobals?.products,
+							shopper: scriptContextGlobals?.shopper?.id,
 							batchId: Math.random(),
 						}),
 					};
@@ -209,7 +209,7 @@ export class RecommendationInstantiator {
 									profile: target.profile?.options,
 									tag: target.profile.tag! || target.profile.profile!, // have to support both tag and profile due to having profile at release, but will favor tag
 								};
-								const profileContext: ContextVariables = deepmerge(this.context, { globals: scriptContextGlobals, profile: target.profile });
+								const profileContext: ContextVariables = deepmerge(this.context, defined({ globals: scriptContextGlobals, profile: target.profile }));
 								if (elemContext.custom) {
 									profileContext.custom = elemContext.custom;
 								}
