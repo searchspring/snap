@@ -3,7 +3,7 @@ import type { AbstractController } from '@searchspring/snap-controller';
 import type { Next } from '@searchspring/snap-event-manager';
 import type { PluginBackgroundFilterGlobal } from '../../../common/src';
 
-export function pluginBackgroundFiltersShopify(cntrlr: AbstractController) {
+export const pluginBackgroundFiltersShopify = (cntrlr: AbstractController) => {
 	// only applies to search controllers
 	if (cntrlr.type != 'search') return;
 
@@ -65,4 +65,4 @@ export function pluginBackgroundFiltersShopify(cntrlr: AbstractController) {
 
 		await next();
 	});
-}
+};

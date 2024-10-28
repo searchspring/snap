@@ -1,1 +1,1 @@
-export { pluginBackgroundFiltersShopify as pluginBackgroundFilters } from '@searchspring/snap-platforms/shopify';
+export { pluginBackgroundFilters } from '@searchspring/snap-platforms/shopify';

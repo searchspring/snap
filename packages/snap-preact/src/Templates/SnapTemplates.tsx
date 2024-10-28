@@ -28,10 +28,10 @@ import type {
 	CommonPluginScrollToTopConfig,
 	pluginLogger,
 } from '@searchspring/snap-platforms/common';
-import type { pluginBackgroundFiltersShopify as shopifyPluginBackgroundFilters } from '@searchspring/snap-platforms/shopify';
-import { pluginMutateResultsShopify as shopifyPluginMutateResults, ShopifyPluginMutateResultsConfig } from '@searchspring/snap-platforms/shopify';
-import type { pluginBackgroundFiltersBigcommerce as bigCommercePluginBackgroundFilters } from '@searchspring/snap-platforms/bigcommerce';
-import type { pluginBackgroundFiltersMagento2 as magento2PluginBackgroundFilters } from '@searchspring/snap-platforms/magento2';
+import type { pluginBackgroundFilters as shopifyPluginBackgroundFilters } from '@searchspring/snap-platforms/shopify';
+import { pluginMutateResults as shopifyPluginMutateResults, ShopifyPluginMutateResultsConfig } from '@searchspring/snap-platforms/shopify';
+import type { pluginBackgroundFilters as bigCommercePluginBackgroundFilters } from '@searchspring/snap-platforms/bigcommerce';
+import type { pluginBackgroundFilters as magento2PluginBackgroundFilters } from '@searchspring/snap-platforms/magento2';
 
 export const THEME_EDIT_COOKIE = 'ssThemeEdit';
 
