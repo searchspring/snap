@@ -1,11 +1,13 @@
 import { RecommendationInstantiator, RecommendationInstantiatorConfig } from './RecommendationInstantiator';
 import type { PluginGrouping } from '@searchspring/snap-controller';
+import { cookies } from '@searchspring/snap-toolbox';
 
 import { Logger } from '@searchspring/snap-logger';
 import { MockClient } from '@searchspring/snap-shared';
 import { Next } from '@searchspring/snap-event-manager';
 
 const DEFAULT_PROFILE = 'trending';
+const CART_COOKIE = 'ssCartProducts';
 
 const Component = (props: any) => {
 	const controller = props.controller;
@@ -35,6 +37,7 @@ const baseConfig: RecommendationInstantiatorConfig = {
 describe('RecommendationInstantiator', () => {
 	beforeEach(() => {
 		delete window.searchspring;
+		cookies.unset(CART_COOKIE);
 	});
 
 	it('throws if configuration is not provided', () => {
@@ -660,6 +663,51 @@ describe('RecommendationInstantiator', () => {
 					},
 				],
 			},
+		});
+	});
+
+	it('can use new style script (without globals)', async () => {
+		const profileContextArray = [
+			{
+				tag: '404',
+				selector: '.ss__recs__404',
+			},
+		];
+
+		//good testing to build off of
+		document.body.innerHTML = `
+			<div class="ss__recs__404"></div>
+			<script type="searchspring/recommendations">
+				profiles = [
+					{
+						tag: '404',
+						selector: '.ss__recs__404',
+					},
+				];
+			</script>
+		`;
+
+		const client = new MockClient(baseConfig.client!.globals, {});
+		const clientSpy = jest.spyOn(client, 'recommend');
+
+		const recommendationInstantiator = new RecommendationInstantiator(baseConfig, { client });
+		await wait();
+		expect(Object.keys(recommendationInstantiator.controller).length).toBe(1);
+		Object.keys(recommendationInstantiator.controller).forEach((controllerId, index) => {
+			const controller = recommendationInstantiator.controller[controllerId];
+			expect(controller.context).toStrictEqual({
+				profile: profileContextArray[index],
+			});
+		});
+		const batchId = recommendationInstantiator.controller[Object.keys(recommendationInstantiator.controller)[0]].store.config.batchId;
+
+		expect(clientSpy).toHaveBeenCalledTimes(1);
+		expect(clientSpy).toHaveBeenNthCalledWith(1, {
+			tag: '404',
+			batchId,
+			siteId: baseConfig.client?.globals.siteId,
+			branch: 'production',
+			batched: true,
 		});
 	});
 

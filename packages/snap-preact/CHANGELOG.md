@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.61.2](https://github.com/searchspring/snap/compare/v0.61.1...v0.61.2) (2024-10-28)
+
+### Bug Fixes
+
+- **preact/recommendationinstantiator:** fixing error when globals was undefined ([0f479df](https://github.com/searchspring/snap/commit/0f479dfbd1a98e3668545d22c7e59a90e8f17492))
+
 ## [0.61.1](https://github.com/searchspring/snap/compare/v0.61.0...v0.61.1) (2024-10-25)
 
 ### Bug Fixes
