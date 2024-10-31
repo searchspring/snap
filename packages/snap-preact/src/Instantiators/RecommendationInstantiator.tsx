@@ -221,11 +221,12 @@ export class RecommendationInstantiator {
 				} else {
 					// using the "legacy" integration structure
 					const { profile, products, product, seed, filters, blockedItems, options, shopper, shopperId } = elemContext;
+					const combinedProducts = [].concat(products || product || seed || []);
 
 					const profileRequestGlobals: Partial<RecommendRequestModel> = {
 						tag: profile,
 						...defined({
-							products: products || (product && [product]) || (seed && [seed]),
+							products: combinedProducts.length ? combinedProducts : undefined,
 							cart: elemContext.cart && getArrayFunc(elemContext.cart),
 							shopper: shopper?.id || shopperId,
 							filters,
