@@ -8,7 +8,7 @@ To use the platform library, simply import what you wish to use from `@searchspr
 ```jsx
 import { scrollToTop } from '@searchspring/snap-platforms/common';
 const scrollToTopConfig = {
-    enabled: true,
+	enabled: true,
 	selector: '#searchspring-layout',
 }
 controller.plugin(scrollToTop, scrollToTopConfig);

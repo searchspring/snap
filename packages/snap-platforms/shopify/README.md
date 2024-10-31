@@ -9,15 +9,26 @@ To use the platform library, simply import what you wish to use from `@searchspr
 import { addToCart } from '@searchspring/snap-platforms/shopify';
 
 export const AddToCart = (props) => {
-    const { result } = props;
-    const config = {
-        idFieldName: `display.mappings.core.sku`,
-    }
+	const { result } = props;
+	const config = {
+		idFieldName: `display.mappings.core.sku`,
+	}
 
-    return (
-        <div onClick={() => addToCart([result], config)}>Add To Cart</div>
-    )
+	return (
+		<div onClick={() => addToCart([result], config)}>Add To Cart</div>
+	)
 };
+```
+
+```jsx
+import { mutateResults } from '@searchspring/snap-platforms/shopify';
+
+const mutateResultsConfig = {
+	collectionInUrl: {
+		enabled: true,
+	}
+}
+controller.plugin(scrollToTop, scrollToTopConfig);
 ```
 
 ## SnapTemplates Usage
