@@ -32,10 +32,6 @@ export const pluginBackgroundFilters = (cntrlr: AbstractController) => {
 		});
 	}
 
-	if (!backgroundFilters.length) {
-		return;
-	}
-
 	cntrlr.on('init', async ({ controller }: { controller: AbstractController }, next: Next) => {
 		controller.config = controller.config || {};
 		controller.config.globals = controller.config.globals || {};
