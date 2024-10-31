@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.61.3](https://github.com/searchspring/snap/compare/v0.61.2...v0.61.3) (2024-10-31)
+
+### Bug Fixes
+
+- **preact/recommendationinstantiator:** adding back support for legacy usage of seed and product ([93788d4](https://github.com/searchspring/snap/commit/93788d422510adc15840fac987631efe67f76d2e))
+
 ## [0.61.2](https://github.com/searchspring/snap/compare/v0.61.1...v0.61.2) (2024-10-28)
 
 ### Bug Fixes

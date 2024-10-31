@@ -292,6 +292,75 @@ describe('RecommendationInstantiator', () => {
 		expect(clientSpy).toHaveBeenCalledTimes(1);
 	});
 
+	it('supports legacy script type with array values in seed', async () => {
+		document.body.innerHTML = `<script type="searchspring/personalized-recommendations" profile="legacy">
+			seed = ['prod1234'];
+		</script>`;
+
+		const client = new MockClient(baseConfig.client!.globals, {});
+		const clientSpy = jest.spyOn(client, 'recommend');
+
+		const recommendationInstantiator = new RecommendationInstantiator(baseConfig, { client });
+		await wait();
+		expect(Object.keys(recommendationInstantiator.controller).length).toBe(1);
+		expect(recommendationInstantiator.controller['recommend_legacy_0']).toBeDefined();
+		expect(clientSpy).toHaveBeenCalledTimes(1);
+		expect(clientSpy).toHaveBeenCalledWith({
+			batchId: undefined,
+			batched: true,
+			branch: 'production',
+			products: ['prod1234'],
+			siteId: '8uyt2m',
+			tag: 'legacy',
+		});
+	});
+
+	it('supports legacy script type with array values in product', async () => {
+		document.body.innerHTML = `<script type="searchspring/personalized-recommendations" profile="legacy">
+			product = ['prod1234'];
+		</script>`;
+
+		const client = new MockClient(baseConfig.client!.globals, {});
+		const clientSpy = jest.spyOn(client, 'recommend');
+
+		const recommendationInstantiator = new RecommendationInstantiator(baseConfig, { client });
+		await wait();
+		expect(Object.keys(recommendationInstantiator.controller).length).toBe(1);
+		expect(recommendationInstantiator.controller['recommend_legacy_0']).toBeDefined();
+		expect(clientSpy).toHaveBeenCalledTimes(1);
+		expect(clientSpy).toHaveBeenCalledWith({
+			batchId: undefined,
+			batched: true,
+			branch: 'production',
+			products: ['prod1234'],
+			siteId: '8uyt2m',
+			tag: 'legacy',
+		});
+	});
+
+	it('supports legacy script type with array values in products', async () => {
+		document.body.innerHTML = `<script type="searchspring/personalized-recommendations" profile="legacy">
+			products = ['prod1234', 'prod4567'];
+		</script>`;
+
+		const client = new MockClient(baseConfig.client!.globals, {});
+		const clientSpy = jest.spyOn(client, 'recommend');
+
+		const recommendationInstantiator = new RecommendationInstantiator(baseConfig, { client });
+		await wait();
+		expect(Object.keys(recommendationInstantiator.controller).length).toBe(1);
+		expect(recommendationInstantiator.controller['recommend_legacy_0']).toBeDefined();
+		expect(clientSpy).toHaveBeenCalledTimes(1);
+		expect(clientSpy).toHaveBeenCalledWith({
+			batchId: undefined,
+			batched: true,
+			branch: 'production',
+			products: ['prod1234', 'prod4567'],
+			siteId: '8uyt2m',
+			tag: 'legacy',
+		});
+	});
+
 	it('supports legacy script type with config context', async () => {
 		const profile = 'legacy';
 		document.body.innerHTML = `<script type="searchspring/personalized-recommendations" profile="${profile}"></script>`;
