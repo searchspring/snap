@@ -26,5 +26,5 @@ const searchStyleScript = ({ theme }: SearchProps) => {
 
 // Search component props
 export const search: Partial<SearchProps> = {
-	styleScript: searchStyleScript,
+	themeStyleScript: searchStyleScript,
 };

@@ -20,7 +20,7 @@ import { BundledCTA, BundledCTAProps } from './BundleCTA';
 import { Lang } from '../../../hooks';
 import { useIntersection } from '../../../hooks';
 
-const defaultStyles: StyleScript<RecommendationBundleProps> = ({ vertical, separatorIcon, ctaInline, carousel }) => {
+const defaultStyles: StyleScript<RecommendationBundleProps> = ({ vertical, separatorIcon, carousel, ctaInline }) => {
 	return css({
 		'.ss__recommendation-bundle__wrapper': {
 			display: 'flex',
@@ -287,7 +287,7 @@ export const RecommendationBundle = observer((properties: RecommendationBundlePr
 		slidesPerView = resultsToRender.length;
 	}
 
-	const styling = mergeStyles<RecommendationBundleProps>({ ...props, carousel: mergedCarouselProps, slidesPerView }, defaultStyles);
+	const styling = mergeStyles<RecommendationBundleProps>({ ...props, carousel: { ...mergedCarouselProps, slidesPerView } }, defaultStyles);
 
 	const _preSelectedCount = typeof preselectedCount == 'number' ? preselectedCount : carouselEnabled ? slidesPerView : resultsToRender.length;
 
@@ -694,7 +694,7 @@ export interface RecommendationBundleProps extends ComponentProps {
 	ctaSlot?: JSX.Element | React.FunctionComponent<BundledCTAProps>;
 	vertical?: boolean;
 	carousel?: BundleCarouselProps;
-	// slidesPerView?: number; // TODO: remove this prop?
+	slidesPerView?: number; // TODO: remove this prop?
 	lang?: Partial<RecommendationBundleLang>;
 	lazyRender?: {
 		enabled: boolean;

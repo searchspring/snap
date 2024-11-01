@@ -4,17 +4,17 @@ import { jsx, css } from '@emotion/react';
 import { observer } from 'mobx-react-lite';
 
 import { Theme, useTheme, CacheProvider } from '../../../providers';
-import { ComponentProps, RootNodeProperties } from '../../../types';
+import { ComponentProps, StyleScript } from '../../../types';
 import type { SearchController } from '@searchspring/snap-controller';
-import { mergeProps } from '../../../utilities';
+import { mergeProps, mergeStyles } from '../../../utilities';
 import { SearchMerchandisingStore, SearchPaginationStore, SearchQueryStore } from '@searchspring/snap-store-mobx';
 import classnames from 'classnames';
 import { useLang } from '../../../hooks';
 import type { Lang } from '../../../hooks';
 import deepmerge from 'deepmerge';
 
-const CSS = {
-	searchheader: ({}: Partial<SearchHeaderProps>) => css({}),
+const defaultStyles: StyleScript<SearchHeaderProps> = () => {
+	return css({});
 };
 
 export const SearchHeader = observer((properties: SearchHeaderProps): JSX.Element => {
@@ -45,9 +45,9 @@ export const SearchHeader = observer((properties: SearchHeaderProps): JSX.Elemen
 	};
 
 	const props = mergeProps('searchHeader', globalTheme, defaultProps, properties);
-	const { disableStyles, style, styleScript, className } = props;
 
 	const {
+		className,
 		titleText,
 		subtitleText,
 		correctedQueryText,
@@ -60,16 +60,7 @@ export const SearchHeader = observer((properties: SearchHeaderProps): JSX.Elemen
 		hideDidYouMeanText,
 	} = props;
 
-	const styling: RootNodeProperties = { 'ss-name': props.name };
-	const stylingProps = props;
-
-	if (styleScript && !disableStyles) {
-		styling.css = [styleScript(stylingProps), style];
-	} else if (!disableStyles) {
-		styling.css = [CSS.searchheader(stylingProps), style];
-	} else if (style) {
-		styling.css = [style];
-	}
+	const styling = mergeStyles<SearchHeaderProps>(props, defaultStyles);
 
 	//initialize lang
 	const defaultLang = {

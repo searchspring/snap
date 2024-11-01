@@ -4,18 +4,18 @@ import classnames from 'classnames';
 import { observer } from 'mobx-react-lite';
 
 import { Theme, useTheme, CacheProvider } from '../../../providers';
-import { ComponentProps, RootNodeProperties } from '../../../types';
+import { ComponentProps, StyleScript } from '../../../types';
 import { FilterSummary, FilterSummaryProps } from '../FilterSummary';
 import { SortBy, SortByProps } from '../../Molecules/SortBy';
 import { PerPage, PerPageProps } from '../../Molecules/PerPage';
-import { defined, mergeProps } from '../../../utilities';
+import { defined, mergeProps, mergeStyles } from '../../../utilities';
 import { Facets, FacetsProps } from '../Facets';
 import { SearchController } from '@searchspring/snap-controller';
 import { Lang, useLang } from '../../../hooks';
 import deepmerge from 'deepmerge';
 
-const CSS = {
-	Sidebar: ({}: Partial<SidebarProps>) => css({}),
+const defaultStyles: StyleScript<SidebarProps> = () => {
+	return css({});
 };
 
 export const Sidebar = observer((properties: SidebarProps): JSX.Element => {
@@ -27,31 +27,9 @@ export const Sidebar = observer((properties: SidebarProps): JSX.Element => {
 
 	const props = mergeProps('sidebar', globalTheme, defaultProps, properties);
 
-	const {
-		controller,
-		hideTitle,
-		titleText,
-		hideFacets,
-		hidePerPage,
-		hideSortBy,
-		hideFilterSummary,
-		disableStyles,
-		style,
-		styleScript,
-		className,
-		treePath,
-	} = props;
+	const { controller, hideTitle, titleText, hideFacets, hidePerPage, hideSortBy, hideFilterSummary, disableStyles, className, treePath } = props;
 
-	const styling: RootNodeProperties = { 'ss-name': props.name };
-	const stylingProps = props;
-
-	if (styleScript && !disableStyles) {
-		styling.css = [styleScript(stylingProps), style];
-	} else if (!disableStyles) {
-		styling.css = [CSS.Sidebar(stylingProps), style];
-	} else if (style) {
-		styling.css = [style];
-	}
+	const styling = mergeStyles<SidebarProps>(props, defaultStyles);
 
 	const subProps: SidebarSubProps = {
 		filterSummary: {

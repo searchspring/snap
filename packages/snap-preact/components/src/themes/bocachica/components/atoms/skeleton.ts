@@ -45,5 +45,5 @@ const skeletonStyleScript = ({ width, height, round, backgroundColor, animatedCo
 
 // Skeleton component props
 export const skeleton: Partial<SkeletonProps> = {
-	styleScript: skeletonStyleScript,
+	themeStyleScript: skeletonStyleScript,
 };

@@ -38,5 +38,5 @@ const loadingBarStyleScript = ({ color, height, backgroundColor, theme }: Loadin
 
 // LoadingBar component props
 export const loadingBar: Partial<LoadingBarProps> = {
-	styleScript: loadingBarStyleScript,
+	themeStyleScript: loadingBarStyleScript,
 };

@@ -24,5 +24,9 @@ export function mergeStyles<Props>(stylingProps: Props, defaultStyles: StyleScri
 		styling.css!.push(style);
 	}
 
+	if (styling.css?.length == 0) {
+		delete styling.css;
+	}
+
 	return styling;
 }

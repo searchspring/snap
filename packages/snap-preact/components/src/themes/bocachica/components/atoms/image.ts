@@ -23,5 +23,5 @@ const imageStyleScript = ({ visibility, theme }: ImageProps & { visibility: Reac
 
 // Image component props
 export const image: Partial<ImageProps> = {
-	styleScript: imageStyleScript,
+	themeStyleScript: imageStyleScript,
 };

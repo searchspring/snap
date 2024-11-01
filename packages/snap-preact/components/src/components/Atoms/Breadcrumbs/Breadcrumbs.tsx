@@ -3,22 +3,20 @@ import { h } from 'preact';
 import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
 import { observer } from 'mobx-react';
-
-import { ComponentProps, RootNodeProperties } from '../../../types';
 import { Theme, useTheme, CacheProvider } from '../../../providers';
-import { mergeProps } from '../../../utilities';
+import { mergeProps, mergeStyles } from '../../../utilities';
+import { ComponentProps, StyleScript } from '../../../types';
 
-const CSS = {
-	breadcrumbs: ({}: Partial<BreadcrumbsProps>) =>
-		css({
-			'& .ss__breadcrumbs__crumbs': {
-				padding: '0',
-			},
-			'& .ss__breadcrumbs__crumbs__crumb, & .ss__breadcrumbs__crumbs__separator': {
-				padding: '0 5px',
-				display: 'inline-block',
-			},
-		}),
+const defaultStyles: StyleScript<BreadcrumbsProps> = () => {
+	return css({
+		'& .ss__breadcrumbs__crumbs': {
+			padding: '0',
+		},
+		'& .ss__breadcrumbs__crumbs__crumb, & .ss__breadcrumbs__crumbs__separator': {
+			padding: '0 5px',
+			display: 'inline-block',
+		},
+	});
 };
 
 export const Breadcrumbs = observer((properties: BreadcrumbsProps): JSX.Element => {
@@ -29,18 +27,9 @@ export const Breadcrumbs = observer((properties: BreadcrumbsProps): JSX.Element 
 
 	const props = mergeProps('breadcrumbs', globalTheme, defaultProps, properties);
 
-	const { data, separator, disableStyles, className, style, styleScript } = props;
+	const { data, separator, className } = props;
 
-	const styling: RootNodeProperties = { 'ss-name': props.name };
-	const stylingProps = props;
-
-	if (styleScript && !disableStyles) {
-		styling.css = [styleScript(stylingProps), style];
-	} else if (!disableStyles) {
-		styling.css = [CSS.breadcrumbs(stylingProps), style];
-	} else if (style) {
-		styling.css = [style];
-	}
+	const styling = mergeStyles<BreadcrumbsProps>(props, defaultStyles);
 
 	return (
 		<CacheProvider>

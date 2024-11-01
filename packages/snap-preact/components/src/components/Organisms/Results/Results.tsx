@@ -10,47 +10,46 @@ import type { SearchResultStore, Product, Banner } from '@searchspring/snap-stor
 import { ContentType } from '@searchspring/snap-store-mobx';
 import { InlineBanner, InlineBannerProps } from '../../Atoms/Merchandising/InlineBanner';
 import { Result, ResultProps } from '../../Molecules/Result';
-import { ComponentProps, ResultsLayout, BreakpointsProps, RootNodeProperties, ResultComponent } from '../../../types';
-import { defined, mergeProps } from '../../../utilities';
+import { ComponentProps, ResultsLayout, BreakpointsProps, ResultComponent, StyleScript } from '../../../types';
+import { defined, mergeProps, mergeStyles } from '../../../utilities';
 import { Theme, useTheme, CacheProvider, useSnap } from '../../../providers';
 import { useDisplaySettings } from '../../../hooks/useDisplaySettings';
 import { SearchResultTracker } from '../../Trackers/SearchResultTracker';
 import { SnapTemplates } from '../../../../../src';
 import { useComponent } from '../../../hooks';
 
-const CSS = {
-	results: ({ columns, gapSize }: Partial<ResultsProps>) =>
-		css({
-			display: 'flex',
-			flexFlow: 'row wrap',
-			gap: gapSize,
-			gridTemplateRows: 'auto',
-			gridTemplateColumns: `repeat(${columns}, 1fr)`,
+const defaultStyles: StyleScript<ResultsProps> = ({ gapSize, columns }) => {
+	return css({
+		display: 'flex',
+		flexFlow: 'row wrap',
+		gap: gapSize,
+		gridTemplateRows: 'auto',
+		gridTemplateColumns: `repeat(${columns}, 1fr)`,
+
+		'& .ss__result, & .ss__result-layout': {
+			boxSizing: 'border-box',
+			flex: '0 1 auto',
+			width: `calc(${100 / columns!}% - (${columns! - 1} * ${gapSize} / ${columns} ) )`,
+			marginRight: gapSize,
+			marginBottom: gapSize,
+
+			[`&:nth-of-type(${columns}n)`]: {
+				marginRight: '0',
+			},
+			[`&:nth-last-of-type(-n+${columns})`]: {
+				marginBottom: '0',
+			},
+		},
+		'@supports (display: grid)': {
+			display: 'grid',
 
 			'& .ss__result, & .ss__result-layout': {
-				boxSizing: 'border-box',
-				flex: '0 1 auto',
-				width: `calc(${100 / columns!}% - (${columns! - 1} * ${gapSize} / ${columns} ) )`,
-				marginRight: gapSize,
-				marginBottom: gapSize,
-
-				[`&:nth-of-type(${columns}n)`]: {
-					marginRight: '0',
-				},
-				[`&:nth-last-of-type(-n+${columns})`]: {
-					marginBottom: '0',
-				},
+				width: 'initial',
+				flex: undefined,
+				margin: 0,
 			},
-			'@supports (display: grid)': {
-				display: 'grid',
-
-				'& .ss__result, & .ss__result-layout': {
-					width: 'initial',
-					flex: undefined,
-					margin: 0,
-				},
-			},
-		}),
+		},
+	});
 };
 
 export const Results = observer((properties: ResultsProps): JSX.Element => {
@@ -92,7 +91,7 @@ export const Results = observer((properties: ResultsProps): JSX.Element => {
 		};
 	}
 
-	const { disableStyles, className, layout, style, theme, styleScript, controller, treePath } = props;
+	const { disableStyles, className, layout, theme, controller, treePath } = props;
 	let { resultComponent } = props;
 
 	const subProps: ResultsSubProps = {
@@ -129,16 +128,10 @@ export const Results = observer((properties: ResultsProps): JSX.Element => {
 		results = props.results?.slice(0, props.columns * props.rows);
 	}
 
-	const styling: RootNodeProperties = { 'ss-name': props.name };
-	const stylingProps = { ...props, columns: layout == ResultsLayout.list ? 1 : props.columns, gapSize: props.gapSize, theme };
-
-	if (styleScript && !disableStyles) {
-		styling.css = [styleScript(stylingProps), style];
-	} else if (!disableStyles) {
-		styling.css = [CSS.results(stylingProps), style];
-	} else if (style) {
-		styling.css = [style];
-	}
+	const styling = mergeStyles<ResultsProps>(
+		{ ...props, columns: layout == ResultsLayout.list ? 1 : props.columns, gapSize: props.gapSize, theme },
+		defaultStyles
+	);
 
 	if (typeof resultComponent === 'string') {
 		const snap = useSnap() as SnapTemplates;

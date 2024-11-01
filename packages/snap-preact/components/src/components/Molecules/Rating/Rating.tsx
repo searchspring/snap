@@ -4,40 +4,39 @@ import { observer } from 'mobx-react-lite';
 import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
 import { Theme, useTheme, CacheProvider } from '../../../providers';
-import { ComponentProps, RootNodeProperties } from '../../../types';
-import { defined, mergeProps } from '../../../utilities';
+import { ComponentProps, StyleScript } from '../../../types';
+import { defined, mergeProps, mergeStyles } from '../../../utilities';
 import { Icon, IconProps, IconType } from '../../Atoms/Icon';
 
-const CSS = {
-	rating: ({}: Partial<RatingProps>) =>
-		css({
-			display: 'flex',
-			alignItems: 'center',
+const defaultStyles: StyleScript<RatingProps> = () => {
+	return css({
+		display: 'flex',
+		alignItems: 'center',
 
-			'& .ss__rating__icons': {
+		'& .ss__rating__icons': {
+			position: 'relative',
+		},
+
+		'& .ss__rating__stars': {
+			width: '100%',
+			display: 'inline-grid',
+			gridTemplateColumns: '20% 20% 20% 20% 20%',
+
+			'&.ss__rating__stars--full': {
+				position: 'absolute',
+				top: 0,
+				left: 0,
+			},
+
+			'&.ss__rating__stars--empty': {
 				position: 'relative',
 			},
+		},
 
-			'& .ss__rating__stars': {
-				width: '100%',
-				display: 'inline-grid',
-				gridTemplateColumns: '20% 20% 20% 20% 20%',
-
-				'&.ss__rating__stars--full': {
-					position: 'absolute',
-					top: 0,
-					left: 0,
-				},
-
-				'&.ss__rating__stars--empty': {
-					position: 'relative',
-				},
-			},
-
-			'& .ss__rating__stars__star': {
-				overflow: 'hidden',
-			},
-		}),
+		'& .ss__rating__stars__star': {
+			overflow: 'hidden',
+		},
+	});
 };
 
 export const Rating = observer((properties: RatingProps): JSX.Element => {
@@ -50,7 +49,7 @@ export const Rating = observer((properties: RatingProps): JSX.Element => {
 
 	const props = mergeProps('rating', globalTheme, defaultProps, properties);
 
-	const { alwaysRender, count, text, disablePartialFill, emptyIcon, fullIcon, disableStyles, className, style, styleScript, treePath } = props;
+	const { alwaysRender, count, text, disablePartialFill, emptyIcon, fullIcon, disableStyles, className, treePath } = props;
 
 	const subProps: RatingSubProps = {
 		fullIcon: {
@@ -94,16 +93,7 @@ export const Rating = observer((properties: RatingProps): JSX.Element => {
 		value = 5;
 	}
 
-	const styling: RootNodeProperties = { 'ss-name': props.name };
-	const stylingProps = { ...props, value };
-
-	if (styleScript && !disableStyles) {
-		styling.css = [styleScript(stylingProps), style];
-	} else if (!disableStyles) {
-		styling.css = [CSS.rating(stylingProps), style];
-	} else if (style) {
-		styling.css = [style];
-	}
+	const styling = mergeStyles<RatingProps>(props, defaultStyles);
 
 	// with 'disablePartialFill' we are rounding down
 	const numStarsToShow = disablePartialFill ? Math.floor(value) : Math.ceil(value);

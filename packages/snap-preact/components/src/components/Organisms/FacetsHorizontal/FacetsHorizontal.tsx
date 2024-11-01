@@ -7,8 +7,8 @@ import deepmerge from 'deepmerge';
 
 import { Facet, FacetProps } from '../Facet';
 import { Theme, useTheme, CacheProvider } from '../../../providers';
-import { defined, mergeProps } from '../../../utilities';
-import { ComponentProps, RootNodeProperties } from '../../../types';
+import { defined, mergeProps, mergeStyles } from '../../../utilities';
+import { ComponentProps, StyleScript } from '../../../types';
 import type { SearchController, AutocompleteController } from '@searchspring/snap-controller';
 import type { ValueFacet } from '@searchspring/snap-store-mobx';
 import type { IndividualFacetType } from '../Facets/Facets';
@@ -18,62 +18,61 @@ import { Dropdown, DropdownProps } from '../../Atoms/Dropdown';
 import { Icon, IconProps, IconType } from '../../Atoms/Icon';
 import { useEffect } from 'react';
 
-const CSS = {
-	facets: ({}: Partial<FacetsHorizontalProps>) =>
-		css({
-			'& .ss__facets-horizontal__header': {
-				display: 'flex',
-				flexWrap: 'wrap',
-				gap: '10px',
+const defaultStyles: StyleScript<FacetsHorizontalProps> = ({}) => {
+	return css({
+		'& .ss__facets-horizontal__header': {
+			display: 'flex',
+			flexWrap: 'wrap',
+			gap: '10px',
 
-				'& .ss__mobile-sidebar': {
-					margin: '0 10px',
+			'& .ss__mobile-sidebar': {
+				margin: '0 10px',
+			},
+
+			'& .ss__facets-horizontal__header__dropdown': {
+				flex: '0 0 0%',
+				margin: '0 0 10px 0',
+				boxSizing: 'border-box',
+				minWidth: '100px',
+
+				'& .ss__dropdown__button__heading': {
+					display: 'flex',
+					justifyContent: 'space-between',
+					alignItems: 'center',
+					padding: '5px 10px',
 				},
 
-				'& .ss__facets-horizontal__header__dropdown': {
-					flex: '0 0 0%',
-					margin: '0 0 10px 0',
-					boxSizing: 'border-box',
-					minWidth: '100px',
-
+				'&.ss__dropdown--open': {
 					'& .ss__dropdown__button__heading': {
-						display: 'flex',
-						justifyContent: 'space-between',
-						alignItems: 'center',
-						padding: '5px 10px',
+						'& .ss__icon': {},
 					},
-
-					'&.ss__dropdown--open': {
-						'& .ss__dropdown__button__heading': {
-							'& .ss__icon': {},
-						},
-						'& .ss__dropdown__content': {
-							padding: '10px',
-							minWidth: '160px',
-							width: 'max-content',
-							maxHeight: '500px',
-							overflowY: 'auto',
-							zIndex: 1,
-						},
+					'& .ss__dropdown__content': {
+						padding: '10px',
+						minWidth: '160px',
+						width: 'max-content',
+						maxHeight: '500px',
+						overflowY: 'auto',
+						zIndex: 1,
 					},
 				},
 			},
-			'&.ss__facets-horizontal--overlay': {
-				'& .ss__facets-horizontal__header__dropdown': {
-					'&.ss__dropdown--open': {
-						'& .ss__dropdown__content': {},
-					},
+		},
+		'&.ss__facets-horizontal--overlay': {
+			'& .ss__facets-horizontal__header__dropdown': {
+				'&.ss__dropdown--open': {
+					'& .ss__dropdown__content': {},
 				},
 			},
-			'& .ss__facet__show-more-less': {
-				display: 'block',
-				margin: '8px 8px 0 8px',
-				cursor: 'pointer',
-				'& .ss__icon': {
-					marginRight: '8px',
-				},
+		},
+		'& .ss__facet__show-more-less': {
+			display: 'block',
+			margin: '8px 8px 0 8px',
+			cursor: 'pointer',
+			'& .ss__icon': {
+				marginRight: '8px',
 			},
-		}),
+		},
+	});
 };
 
 export const FacetsHorizontal = observer((properties: FacetsHorizontalProps): JSX.Element => {
@@ -99,8 +98,6 @@ export const FacetsHorizontal = observer((properties: FacetsHorizontalProps): JS
 		iconCollapse,
 		disableStyles,
 		className,
-		style,
-		styleScript,
 		controller,
 		treePath,
 	} = props;
@@ -209,16 +206,7 @@ export const FacetsHorizontal = observer((properties: FacetsHorizontalProps): JS
 		},
 	};
 
-	const styling: RootNodeProperties = { 'ss-name': props.name };
-	const stylingProps = props;
-
-	if (styleScript && !disableStyles) {
-		styling.css = [styleScript(stylingProps), style];
-	} else if (!disableStyles) {
-		styling.css = [CSS.facets(stylingProps), style];
-	} else if (style) {
-		styling.css = [style];
-	}
+	const styling = mergeStyles<FacetsHorizontalProps>(props, defaultStyles);
 
 	const [selectedFacet, setSelectedFacet] = useState<IndividualFacetType | undefined>(undefined);
 

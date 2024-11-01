@@ -11,5 +11,5 @@ const badgeImageStyleScript = () => {
 
 // BadgeImage component props
 export const badgeImage: Partial<BadgeImageProps> = {
-	styleScript: badgeImageStyleScript,
+	themeStyleScript: badgeImageStyleScript,
 };

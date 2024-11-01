@@ -5,13 +5,13 @@ import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
 
 import { Theme, useTheme, useSnap } from '../../../providers';
-import { cloneWithProps, mergeProps } from '../../../utilities';
-import { ComponentProps, RootNodeProperties } from '../../../types';
+import { cloneWithProps, mergeProps, mergeStyles } from '../../../utilities';
+import { ComponentProps } from '../../../types';
 import { filters } from '@searchspring/snap-toolbox';
 import { useComponent } from '../../../hooks/useComponent';
 import { useCreateController } from '../../../hooks/useCreateController';
 import type { RecommendationController, RecommendationControllerConfig } from '@searchspring/snap-controller';
-import type { RecommendationGridProps, RecommendationProps, ResultComponent } from '../../../';
+import type { RecommendationGridProps, RecommendationProps, ResultComponent, StyleScript } from '../../../';
 import type { FunctionalComponent } from 'preact';
 import type { SnapTemplates } from '../../../../../src';
 import type { SearchController } from '@searchspring/snap-controller';
@@ -20,8 +20,8 @@ import { useLang } from '../../../hooks';
 import type { Lang } from '../../../hooks';
 import type { LibraryImports } from '../../../../../src/Templates/Stores/LibraryStore';
 
-const CSS = {
-	noResults: () => css({}),
+const defaultStyles: StyleScript<NoResultsProps> = ({}) => {
+	return css({});
 };
 
 export const NoResults = observer((properties: NoResultsProps): JSX.Element => {
@@ -50,23 +50,11 @@ export const NoResults = observer((properties: NoResultsProps): JSX.Element => {
 		contactsList,
 		controller,
 		templates,
-		disableStyles,
 		className,
-		style,
-		styleScript,
 		treePath,
 	} = props;
 
-	const styling: RootNodeProperties = { 'ss-name': props.name };
-	const stylingProps = props;
-
-	if (styleScript && !disableStyles) {
-		styling.css = [styleScript(stylingProps), style];
-	} else if (!disableStyles) {
-		styling.css = [CSS.noResults(), style];
-	} else if (style) {
-		styling.css = [style];
-	}
+	const styling = mergeStyles<NoResultsProps>(props, defaultStyles);
 
 	const suggestionsExist = suggestionsList && Array.isArray(suggestionsList) && suggestionsList.length !== 0;
 	const contactsExist = contactsList && Array.isArray(contactsList) && contactsList.length !== 0;

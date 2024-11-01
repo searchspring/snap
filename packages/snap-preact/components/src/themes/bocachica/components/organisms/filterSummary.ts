@@ -18,6 +18,6 @@ const filterSummaryStyleScript = ({ theme }: FilterSummaryProps) => {
 
 // FilterSummary component props
 export const filterSummary: Partial<FilterSummaryProps> = {
-	styleScript: filterSummaryStyleScript,
+	themeStyleScript: filterSummaryStyleScript,
 	title: 'Applied Filters',
 };

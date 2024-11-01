@@ -94,7 +94,7 @@ describe('PerPage Component', () => {
 
 		const element = rendered.container.querySelector('.ss__per-page__select');
 
-		expect(element?.classList).toHaveLength(3);
+		expect(element?.classList).toHaveLength(4);
 	});
 
 	describe('Perpage lang works', () => {

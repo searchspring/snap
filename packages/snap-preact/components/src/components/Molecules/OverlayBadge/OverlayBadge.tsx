@@ -5,55 +5,60 @@ import classnames from 'classnames';
 import { observer } from 'mobx-react';
 
 import { Theme, useTheme, CacheProvider, useSnap } from '../../../providers';
-import { ComponentProps, RootNodeProperties, ComponentMap } from '../../../types';
-import { defaultBadgeComponentMap } from '../../../utilities';
+import { ComponentProps, ComponentMap, StyleScript } from '../../../types';
+import { defaultBadgeComponentMap, mergeStyles } from '../../../utilities';
 import { useComponent } from '../../../hooks';
 import type { AutocompleteController, RecommendationController, SearchController } from '@searchspring/snap-controller';
 import type { Product } from '@searchspring/snap-store-mobx';
 import type { SnapTemplates } from '../../../../../src/Templates';
 
-const CSS = {
-	OverlayBadge: ({ grid }: OverlayBadgeProps & { grid: string[][] }) => {
-		let gridProperties = {};
-		if (grid?.length && grid[0]?.length) {
-			const gridTemplateAreas = grid.map((row: string[]) => `"${row.join(' ')}"`).join(' ');
-			const columns = grid[0].length;
-			gridProperties = {
-				gridTemplateColumns: `repeat(${columns}, minmax(0, 1fr))`,
-				gridTemplateRows: `repeat(${grid.length}, minmax(0, 1fr))`,
-				gridTemplateAreas,
-			};
-		}
+const defaultBadgeStyles: StyleScript<OverlayBadgeProps & { index: number; top: boolean; bottom: boolean; section: string; tag: string }> = ({
+	section,
+	top,
+	bottom,
+	index,
+	tag,
+}) => {
+	return css({
+		position: 'relative',
+		display: 'flex',
+		flexDirection: 'column',
+		alignItems: section == 'right' ? 'flex-end' : 'flex-start',
+		justifyContent: !top && !bottom ? 'center' : bottom && !top ? 'flex-end' : 'flex-start',
+		gap: '0.5em',
+		gridArea: tag,
+		boxSizing: 'border-box',
+		zIndex: Math.max(100 - index, 1),
+		width: '100%',
+		height: '100%',
+	});
+};
 
-		return css({
-			position: 'relative',
+const defaultStyles: StyleScript<OverlayBadgeProps & { grid: string[][] }> = ({ grid }) => {
+	let gridProperties = {};
+	if (grid?.length && grid[0]?.length) {
+		const gridTemplateAreas = grid.map((row: string[]) => `"${row.join(' ')}"`).join(' ');
+		const columns = grid[0].length;
+		gridProperties = {
+			gridTemplateColumns: `repeat(${columns}, minmax(0, 1fr))`,
+			gridTemplateRows: `repeat(${grid.length}, minmax(0, 1fr))`,
+			gridTemplateAreas,
+		};
+	}
 
-			'& .ss__overlay-badge__grid-wrapper': {
-				display: 'grid',
-				position: 'absolute',
-				top: 0,
-				right: 0,
-				bottom: 0,
-				left: 0,
-				...gridProperties,
-			},
-		});
-	},
-	BadgePositioning: ({ index, top, bottom, section, tag }: { index: number; top: boolean; bottom: boolean; section: string; tag: string }) => {
-		return css({
-			position: 'relative',
-			display: 'flex',
-			flexDirection: 'column',
-			alignItems: section == 'right' ? 'flex-end' : 'flex-start',
-			justifyContent: !top && !bottom ? 'center' : bottom && !top ? 'flex-end' : 'flex-start',
-			gap: '0.5em',
-			gridArea: tag,
-			boxSizing: 'border-box',
-			zIndex: Math.max(100 - index, 1),
-			width: '100%',
-			height: '100%',
-		});
-	},
+	return css({
+		position: 'relative',
+
+		'& .ss__overlay-badge__grid-wrapper': {
+			display: 'grid',
+			position: 'absolute',
+			top: 0,
+			right: 0,
+			bottom: 0,
+			left: 0,
+			...gridProperties,
+		},
+	});
 };
 
 export const OverlayBadge = observer((properties: OverlayBadgeProps): JSX.Element => {
@@ -69,9 +74,7 @@ export const OverlayBadge = observer((properties: OverlayBadgeProps): JSX.Elemen
 		...properties,
 		...properties.theme?.components?.overlayBadge,
 	};
-	const { result, children, controller, renderEmpty, limit, disableStyles, className, style } = props;
-
-	const styling: RootNodeProperties = { 'ss-name': props.name };
+	const { result, children, controller, renderEmpty, limit, className } = props;
 
 	if (!children) {
 		controller?.log?.warn('OverlayBadge component must have children');
@@ -114,11 +117,7 @@ export const OverlayBadge = observer((properties: OverlayBadgeProps): JSX.Elemen
 		})
 		.filter((location) => location.slots?.length);
 
-	if (!disableStyles) {
-		styling.css = [CSS.OverlayBadge({ ...props, grid }), style];
-	} else if (style) {
-		styling.css = [style];
-	}
+	const styling = mergeStyles<OverlayBadgeProps & { grid: string[][] }>({ ...props, grid: grid }, defaultStyles);
 
 	if (renderEmpty || locations?.length) {
 		return (
@@ -127,10 +126,14 @@ export const OverlayBadge = observer((properties: OverlayBadgeProps): JSX.Elemen
 					<div className="ss__overlay-badge__grid-wrapper">
 						{locations.map((location, index) => {
 							return location.slots?.map((slot) => {
+								const badgeStyling = mergeStyles<OverlayBadgeProps & { index: number; top: boolean; bottom: boolean; section: string; tag: string }>(
+									{ ...props, index, top: slot.top, bottom: slot.bottom, section: location.section, tag: slot.tag },
+									defaultBadgeStyles
+								);
 								return (
 									<div
 										className={classnames('ss__overlay-badge__grid-wrapper__slot', `ss__overlay-badge__grid-wrapper__slot--${slot.tag}`)}
-										css={[CSS.BadgePositioning({ tag: slot.tag, section: location.section, index, top: slot.top, bottom: slot.bottom })]}
+										{...badgeStyling}
 									>
 										{slot.badges.map((badge) => {
 											const BadgeComponent = useComponent(badgeComponentMap, badge.component);

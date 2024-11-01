@@ -20,5 +20,5 @@ const searchHeaderStyleScript = ({ theme }: SearchHeaderProps) => {
 
 // SearchHeader component props
 export const searchHeader: Partial<SearchHeaderProps> = {
-	styleScript: searchHeaderStyleScript,
+	themeStyleScript: searchHeaderStyleScript,
 };

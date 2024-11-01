@@ -5,8 +5,8 @@ import classnames from 'classnames';
 import { useState } from 'preact/hooks';
 import { Icon, IconProps } from '../../Atoms/Icon/Icon';
 
-import { ComponentProps, RootNodeProperties } from '../../../types';
-import { defined, mergeProps } from '../../../utilities';
+import { ComponentProps, StyleScript } from '../../../types';
+import { defined, mergeProps, mergeStyles } from '../../../utilities';
 import { Theme, useTheme } from '../../../providers';
 
 export type BranchOverrideTheme = {
@@ -44,93 +44,92 @@ export type BranchOverrideTheme = {
 	};
 };
 
-const CSS = {
-	override: ({ componentTheme }: Partial<BranchOverrideProps> & { componentTheme: BranchOverrideTheme }) =>
-		css({
-			width: '360px',
-			height: '120px',
-			overflow: 'hidden',
-			fontSize: '14px',
-			position: 'fixed',
-			zIndex: '9999',
-			cursor: 'auto',
-			bottom: '50px',
-			right: 0,
-			background: componentTheme.main.background,
-			color: componentTheme.main.color,
-			border: componentTheme.main.border,
-			borderRight: 0,
-			borderTopLeftRadius: '5px',
-			borderBottomLeftRadius: '5px',
-			boxShadow: componentTheme.main.boxShadow,
-			transition: 'height ease 0.2s, right ease 0.5s 0.2s',
-			'&.ss__branch-override--collapsed': {
-				transition: 'height ease 0.5s 0.5s, right ease 0.5s',
-				right: '-316px',
-				height: '50px',
+const defaultStyles: StyleScript<BranchOverrideProps & { componentTheme: BranchOverrideTheme }> = ({ componentTheme }) => {
+	return css({
+		width: '360px',
+		height: '120px',
+		overflow: 'hidden',
+		fontSize: '14px',
+		position: 'fixed',
+		zIndex: '9999',
+		cursor: 'auto',
+		bottom: '50px',
+		right: 0,
+		background: componentTheme.main.background,
+		color: componentTheme.main.color,
+		border: componentTheme.main.border,
+		borderRight: 0,
+		borderTopLeftRadius: '5px',
+		borderBottomLeftRadius: '5px',
+		boxShadow: componentTheme.main.boxShadow,
+		transition: 'height ease 0.2s, right ease 0.5s 0.2s',
+		'&.ss__branch-override--collapsed': {
+			transition: 'height ease 0.5s 0.5s, right ease 0.5s',
+			right: '-316px',
+			height: '50px',
+			cursor: 'pointer',
+		},
+		'.ss__branch-override__top': {
+			padding: '10px',
+			background: componentTheme.top.background,
+			borderBottom: componentTheme.top.border,
+			'.ss__branch-override__top__logo': {
+				display: 'inline-block',
+				height: '30px',
+				maxHeight: '30px',
+				verticalAlign: 'middle',
+			},
+			'.ss__branch-override__top__collapse': {
+				display: 'inline-block',
+				float: 'right',
+				padding: '5px',
 				cursor: 'pointer',
 			},
-			'.ss__branch-override__top': {
-				padding: '10px',
-				background: componentTheme.top.background,
-				borderBottom: componentTheme.top.border,
-				'.ss__branch-override__top__logo': {
-					display: 'inline-block',
-					height: '30px',
-					maxHeight: '30px',
-					verticalAlign: 'middle',
-				},
-				'.ss__branch-override__top__collapse': {
-					display: 'inline-block',
-					float: 'right',
-					padding: '5px',
-					cursor: 'pointer',
-				},
-				'.ss__branch-override__top__button': {
-					borderRadius: '5px',
-					padding: '6px',
-					height: '100%',
-					lineHeight: '14px',
-					textAlign: 'center',
-					cursor: 'pointer',
-					fontSize: '10px',
-					border: componentTheme.top.button.border,
-					color: componentTheme.top.button.color,
-					float: 'right',
-					marginRight: '14px',
+			'.ss__branch-override__top__button': {
+				borderRadius: '5px',
+				padding: '6px',
+				height: '100%',
+				lineHeight: '14px',
+				textAlign: 'center',
+				cursor: 'pointer',
+				fontSize: '10px',
+				border: componentTheme.top.button.border,
+				color: componentTheme.top.button.color,
+				float: 'right',
+				marginRight: '14px',
+			},
+		},
+		'.ss__branch-override__bottom': {
+			padding: '10px 15px',
+			fontSize: '12px',
+			'.ss__branch-override__bottom__left': {
+				fontWeight: 'bold',
+				fontStyle: componentTheme.bottom.branch.style,
+				color: componentTheme.bottom.branch.color,
+				fontSize: '14px',
+				lineHeight: '20px',
+				display: 'inline-flex',
+				alignItems: 'center',
+				maxWidth: '180px',
+				whiteSpace: 'nowrap',
+				overflow: 'hidden',
+				textOverflow: 'ellipsis',
+				svg: {
+					marginRight: '10px',
 				},
 			},
-			'.ss__branch-override__bottom': {
-				padding: '10px 15px',
+			'.ss__branch-override__bottom__right': {
+				float: 'right',
+				fontStyle: 'italic',
+				color: componentTheme.bottom.additional.color,
 				fontSize: '12px',
-				'.ss__branch-override__bottom__left': {
-					fontWeight: 'bold',
-					fontStyle: componentTheme.bottom.branch.style,
-					color: componentTheme.bottom.branch.color,
-					fontSize: '14px',
-					lineHeight: '20px',
-					display: 'inline-flex',
-					alignItems: 'center',
-					maxWidth: '180px',
-					whiteSpace: 'nowrap',
-					overflow: 'hidden',
-					textOverflow: 'ellipsis',
-					svg: {
-						marginRight: '10px',
-					},
-				},
-				'.ss__branch-override__bottom__right': {
-					float: 'right',
-					fontStyle: 'italic',
-					color: componentTheme.bottom.additional.color,
-					fontSize: '12px',
-					lineHeight: '20px',
-				},
-				'.ss__branch-override__bottom__content': {
-					marginTop: '10px',
-				},
+				lineHeight: '20px',
 			},
-		}),
+			'.ss__branch-override__bottom__content': {
+				marginTop: '10px',
+			},
+		},
+	});
 };
 
 const darkTheme: BranchOverrideTheme = {
@@ -250,7 +249,7 @@ export const BranchOverride = (properties: BranchOverrideProps): JSX.Element => 
 
 	const props = mergeProps('branchOverride', globalTheme, defaultProps, properties);
 
-	const { branch, details, error, className, darkMode, disableStyles, style, styleScript, onRemoveClick, treePath } = props;
+	const { branch, details, error, className, darkMode, disableStyles, onRemoveClick, treePath } = props;
 
 	const subProps: BranchOverrideSubProps = {
 		icon: {
@@ -277,16 +276,10 @@ export const BranchOverride = (properties: BranchOverrideProps): JSX.Element => 
 		setThemeName('failureTheme');
 	}
 
-	const styling: RootNodeProperties = { 'ss-name': props.name };
-	const stylingProps = props;
-
-	if (styleScript && !disableStyles) {
-		styling.css = [styleScript(stylingProps), style];
-	} else if (!disableStyles) {
-		styling.css = [CSS.override({ componentTheme: componentThemes[themeName as keyof typeof componentThemes], ...stylingProps }), style];
-	} else if (style) {
-		styling.css = [style];
-	}
+	const styling = mergeStyles<BranchOverrideProps & { componentTheme: BranchOverrideTheme }>(
+		{ ...props, componentTheme: componentThemes[themeName as keyof typeof componentThemes] },
+		defaultStyles
+	);
 
 	return (details || error) && branch ? (
 		<div

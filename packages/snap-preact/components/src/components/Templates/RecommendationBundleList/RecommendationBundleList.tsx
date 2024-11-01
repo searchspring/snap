@@ -2,9 +2,9 @@ import { h } from 'preact';
 import { css } from '@emotion/react';
 import { observer } from 'mobx-react';
 
-import { defined, mergeProps } from '../../../utilities';
+import { defined, mergeProps, mergeStyles } from '../../../utilities';
 import { Theme, useTheme } from '../../../providers';
-import { ComponentProps, StylingCSS } from '../../../types';
+import { ComponentProps, StyleScript } from '../../../types';
 import { RecommendationBundle, RecommendationBundleProps } from '../RecommendationBundle';
 import { Price } from '../../Atoms/Price';
 import { Button } from '../../Atoms/Button';
@@ -13,58 +13,57 @@ import { Image } from '../../Atoms/Image';
 import { Result } from '../../Molecules/Result';
 import { BundledCTAProps } from '../RecommendationBundle/BundleCTA';
 
-const CSS = {
-	RecommendationBundleList: ({}: Partial<RecommendationBundleListProps>) =>
-		css({
-			'.ss__recommendation-bundle__wrapper__selector__result-wrapper': {
+const defaultStyles: StyleScript<RecommendationBundleListProps> = () => {
+	return css({
+		'.ss__recommendation-bundle__wrapper__selector__result-wrapper': {
+			display: 'flex',
+			'.ss__recommendation-bundle__wrapper__selector__result-wrapper__checkbox': {
+				position: 'relative',
+				minWidth: '20px',
+			},
+
+			'.ss__result__details': {
+				textAlign: 'left',
+			},
+		},
+
+		'.ss__recommendation-profile-tracker': {
+			display: 'flex',
+			flexDirection: 'column',
+		},
+
+		'.ss__recommendation-bundle__wrapper': {
+			order: '3',
+		},
+
+		'.ss__recommendation-bundle__wrapper__cta': {
+			order: '2',
+
+			'.ss__button': {
+				cursor: 'pointer',
+				border: '1px solid black',
+			},
+			'.cta__inner_images': {
 				display: 'flex',
-				'.ss__recommendation-bundle__wrapper__selector__result-wrapper__checkbox': {
-					position: 'relative',
-					minWidth: '20px',
-				},
-
-				'.ss__result__details': {
-					textAlign: 'left',
-				},
+				flexDirection: 'row',
 			},
 
-			'.ss__recommendation-profile-tracker': {
-				display: 'flex',
-				flexDirection: 'column',
+			'.cta__inner__image-wrapper .ss__icon': {
+				top: '50%',
+				position: 'absolute',
+				right: '-0.5em',
 			},
 
-			'.ss__recommendation-bundle__wrapper': {
-				order: '3',
+			'.cta__inner__image-wrapper:last-of-type .ss__icon': {
+				display: 'none',
 			},
 
-			'.ss__recommendation-bundle__wrapper__cta': {
-				order: '2',
-
-				'.ss__button': {
-					cursor: 'pointer',
-					border: '1px solid black',
-				},
-				'.cta__inner_images': {
-					display: 'flex',
-					flexDirection: 'row',
-				},
-
-				'.cta__inner__image-wrapper .ss__icon': {
-					top: '50%',
-					position: 'absolute',
-					right: '-0.5em',
-				},
-
-				'.cta__inner__image-wrapper:last-of-type .ss__icon': {
-					display: 'none',
-				},
-
-				'.cta__inner__image-wrapper': {
-					padding: '0px 15px',
-					position: 'relative',
-				},
+			'.cta__inner__image-wrapper': {
+				padding: '0px 15px',
+				position: 'relative',
 			},
-		}),
+		},
+	});
 };
 
 export const RecommendationBundleList = observer((properties: RecommendationBundleListProps): JSX.Element => {
@@ -73,6 +72,7 @@ export const RecommendationBundleList = observer((properties: RecommendationBund
 
 	const props = mergeProps('recommendationBundleList', globalTheme, defaultProps, properties);
 
+	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	const { treePath, styleScript, theme, style, disableStyles, ...additionalProps } = props;
 
 	const subProps: RecommendationBundleListSubProps = {
@@ -102,16 +102,7 @@ export const RecommendationBundleList = observer((properties: RecommendationBund
 		},
 	};
 
-	const styling: { css?: StylingCSS } = {};
-	const stylingProps = { ...props, theme };
-
-	if (styleScript && !disableStyles) {
-		styling.css = [styleScript(stylingProps), style];
-	} else if (!disableStyles) {
-		styling.css = [CSS.RecommendationBundleList(stylingProps), style];
-	} else if (style) {
-		styling.css = [style];
-	}
+	const styling = mergeStyles<RecommendationBundleListProps>(props, defaultStyles);
 
 	return <RecommendationBundle {...styling} {...subProps.recommendationBundle} {...additionalProps} />;
 });

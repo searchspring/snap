@@ -17,7 +17,7 @@ const perPageStyleScript = ({ theme }: PerPageProps) => {
 
 // PerPage component props
 export const perPage: Partial<PerPageProps> = {
-	styleScript: perPageStyleScript,
+	themeStyleScript: perPageStyleScript,
 	theme: {
 		components: {
 			icon: {

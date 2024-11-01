@@ -5,81 +5,79 @@ import classnames from 'classnames';
 import { observer } from 'mobx-react';
 
 import { Theme, useTheme, CacheProvider } from '../../../providers';
-import { mergeProps } from '../../../utilities';
+import { mergeProps, mergeStyles } from '../../../utilities';
 import { createHoverProps } from '../../../toolbox';
-import { ComponentProps, RootNodeProperties } from '../../../types';
+import { ComponentProps, StyleScript } from '../../../types';
 import type { FacetValue, ValueFacet } from '@searchspring/snap-store-mobx';
 import { Lang, useLang } from '../../../hooks';
 import deepmerge from 'deepmerge';
 import Color from 'color';
 
-const CSS = {
-	grid: ({ columns, gapSize, gridSize, theme }: Partial<FacetGridOptionsProps>) => {
-		const variables = theme?.variables;
-		const backgroundColor = new Color(variables?.colors.primary);
-		const color = backgroundColor.isDark() ? '#fff' : '#000';
+const defaultStyles: StyleScript<FacetGridOptionsProps> = ({ columns, gapSize, gridSize, theme }) => {
+	const variables = theme?.variables;
+	const backgroundColor = new Color(variables?.colors.primary);
+	const color = backgroundColor.isDark() ? '#fff' : '#000';
 
-		return css({
+	return css({
+		display: 'flex',
+		flexFlow: 'row wrap',
+		gridTemplateColumns: columns ? `repeat(${columns}, 1fr)` : `repeat(auto-fill, minmax(${gridSize}, 1fr))`,
+		gap: gapSize,
+		gridAutoRows: `1fr`,
+
+		'& .ss__facet-grid-options__option': {
 			display: 'flex',
-			flexFlow: 'row wrap',
-			gridTemplateColumns: columns ? `repeat(${columns}, 1fr)` : `repeat(auto-fill, minmax(${gridSize}, 1fr))`,
-			gap: gapSize,
-			gridAutoRows: `1fr`,
+			justifyContent: 'center',
+			alignItems: 'center',
+			flex: '0 1 auto',
+			border: `1px solid ${backgroundColor.hex() || '#333'}`,
+			textAlign: 'center',
+			wordBreak: 'break-all',
+			boxSizing: 'border-box',
+			padding: '1em 0',
+			width: `calc(100% / ${columns} - ${2 * Math.round((columns! + 2) / 2)}px)`,
+			margin: `0 ${gapSize} ${gapSize} 0`,
+
+			[`:nth-of-type(${columns}n)`]: {
+				marginRight: '0',
+			},
+			'&.ss__facet-grid-options__option--filtered': {
+				background: backgroundColor.hex() || '#ccc',
+				color: color || '#333',
+			},
+			'&:hover:not(.ss__facet-grid-options__option--filtered)': {
+				cursor: 'pointer',
+				background: backgroundColor.hex() || '#f8f8f8',
+				color: color || '#333',
+			},
+			'& .ss__facet-grid-options__option__value': {
+				'&.ss__facet-grid-options__option__value--smaller': {
+					fontSize: '70%',
+				},
+			},
+		},
+
+		'@supports (display: grid)': {
+			display: 'grid',
 
 			'& .ss__facet-grid-options__option': {
-				display: 'flex',
-				justifyContent: 'center',
-				alignItems: 'center',
-				flex: '0 1 auto',
-				border: `1px solid ${backgroundColor.hex() || '#333'}`,
-				textAlign: 'center',
-				wordBreak: 'break-all',
-				boxSizing: 'border-box',
-				padding: '1em 0',
-				width: `calc(100% / ${columns} - ${2 * Math.round((columns! + 2) / 2)}px)`,
-				margin: `0 ${gapSize} ${gapSize} 0`,
-
-				[`:nth-of-type(${columns}n)`]: {
-					marginRight: '0',
-				},
-				'&.ss__facet-grid-options__option--filtered': {
-					background: backgroundColor.hex() || '#ccc',
-					color: color || '#333',
-				},
-				'&:hover:not(.ss__facet-grid-options__option--filtered)': {
-					cursor: 'pointer',
-					background: backgroundColor.hex() || '#f8f8f8',
-					color: color || '#333',
-				},
-				'& .ss__facet-grid-options__option__value': {
-					'&.ss__facet-grid-options__option__value--smaller': {
-						fontSize: '70%',
-					},
-				},
+				padding: '0',
+				margin: '0',
+				width: 'initial',
 			},
-
-			'@supports (display: grid)': {
-				display: 'grid',
-
-				'& .ss__facet-grid-options__option': {
-					padding: '0',
-					margin: '0',
-					width: 'initial',
-				},
-				'&::before': {
-					content: '""',
-					width: 0,
-					paddingBottom: '100%',
-					gridRow: '1 / 1',
-					gridColumn: '1 / 1',
-				},
-				'&> *:first-of-type': {
-					gridRow: '1 / 1',
-					gridColumn: '1 / 1',
-				},
+			'&::before': {
+				content: '""',
+				width: 0,
+				paddingBottom: '100%',
+				gridRow: '1 / 1',
+				gridColumn: '1 / 1',
 			},
-		});
-	},
+			'&> *:first-of-type': {
+				gridRow: '1 / 1',
+				gridColumn: '1 / 1',
+			},
+		},
+	});
 };
 
 export const FacetGridOptions = observer((properties: FacetGridOptionsProps): JSX.Element => {
@@ -92,22 +90,13 @@ export const FacetGridOptions = observer((properties: FacetGridOptionsProps): JS
 
 	const props = mergeProps('facetGridOptions', globalTheme, defaultProps, properties);
 
-	const { values, onClick, previewOnFocus, valueProps, facet, horizontal, disableStyles, className, style, styleScript } = props;
+	const { values, onClick, previewOnFocus, valueProps, facet, horizontal, className } = props;
 
 	if (horizontal) {
 		props.columns = 0;
 	}
 
-	const styling: RootNodeProperties = { 'ss-name': props.name };
-	const stylingProps = props;
-
-	if (styleScript && !disableStyles) {
-		styling.css = [styleScript(stylingProps), style];
-	} else if (!disableStyles) {
-		styling.css = [CSS.grid(stylingProps), style];
-	} else if (style) {
-		styling.css = [style];
-	}
+	const styling = mergeStyles<FacetGridOptionsProps>(props, defaultStyles);
 
 	const facetValues = values || facet?.refinedValues;
 

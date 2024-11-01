@@ -4,9 +4,9 @@ import { observer } from 'mobx-react';
 import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
 
-import { defined, mergeProps } from '../../../utilities';
+import { defined, mergeProps, mergeStyles } from '../../../utilities';
 import { Theme, useTheme, CacheProvider } from '../../../providers';
-import { ComponentProps, RootNodeProperties } from '../../../types';
+import { ComponentProps, StyleScript } from '../../../types';
 import { Button, ButtonProps } from '../../Atoms/Button';
 import { Icon, IconProps, IconType } from '../../Atoms/Icon';
 import type { Filter as FilterType } from '@searchspring/snap-store-mobx';
@@ -14,22 +14,21 @@ import type { UrlManager } from '@searchspring/snap-url-manager';
 import { Lang, useLang } from '../../../hooks';
 import deepmerge from 'deepmerge';
 
-const CSS = {
-	filter: ({}: Partial<FilterProps>) =>
-		css({
-			textDecoration: 'none',
-			display: 'inline-flex',
-			'& .ss__filter__button': {
-				alignItems: 'center',
-				'& .ss__filter__button__icon': {
-					margin: '0 5px 0 0',
-				},
+const defaultStyles: StyleScript<FilterProps> = ({}) => {
+	return css({
+		textDecoration: 'none',
+		display: 'inline-flex',
+		'& .ss__filter__button': {
+			alignItems: 'center',
+			'& .ss__filter__button__icon': {
+				margin: '0 5px 0 0',
 			},
-			'& .ss__filter__label': {
-				marginRight: '5px',
-				fontWeight: 'bold',
-			},
-		}),
+		},
+		'& .ss__filter__label': {
+			marginRight: '5px',
+			fontWeight: 'bold',
+		},
+	});
 };
 
 // TODO: look into urlManager and how it connects in this case, left the href out for the time being
@@ -39,8 +38,7 @@ export const Filter = observer((properties: FilterProps): JSX.Element => {
 
 	const props = mergeProps('filter', globalTheme, defaultProps, properties);
 
-	const { filter, facetLabel, valueLabel, url, hideFacetLabel, onClick, icon, separator, disableStyles, className, style, styleScript, treePath } =
-		props;
+	const { filter, facetLabel, valueLabel, url, hideFacetLabel, onClick, icon, separator, disableStyles, className, treePath } = props;
 
 	const link = filter?.url?.link || url?.link;
 	const value = filter?.value.label || valueLabel;
@@ -78,16 +76,7 @@ export const Filter = observer((properties: FilterProps): JSX.Element => {
 		},
 	};
 
-	const styling: RootNodeProperties = { 'ss-name': props.name };
-	const stylingProps = props;
-
-	if (styleScript && !disableStyles) {
-		styling.css = [styleScript(stylingProps), style];
-	} else if (!disableStyles) {
-		styling.css = [CSS.filter(stylingProps), style];
-	} else if (style) {
-		styling.css = [style];
-	}
+	const styling = mergeStyles<FilterProps>(props, defaultStyles);
 
 	//initialize lang
 	const defaultLang = {

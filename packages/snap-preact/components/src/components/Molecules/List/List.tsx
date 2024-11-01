@@ -7,59 +7,58 @@ import deepmerge from 'deepmerge';
 import { filters } from '@searchspring/snap-toolbox';
 
 import { Theme, useTheme, CacheProvider } from '../../../providers';
-import { ComponentProps, RootNodeProperties, ListOption } from '../../../types';
-import { defined, mergeProps } from '../../../utilities';
+import { ComponentProps, ListOption, StyleScript } from '../../../types';
+import { defined, mergeProps, mergeStyles } from '../../../utilities';
 import { Checkbox, CheckboxProps } from '../Checkbox';
 import { Lang, useA11y, useLang } from '../../../hooks';
 import { Icon, IconProps } from '../../Atoms/Icon';
 
-const CSS = {
-	List: ({ horizontal }: Partial<ListProps>) =>
-		css({
+const defaultStyles: StyleScript<ListProps> = ({ horizontal }) => {
+	return css({
+		display: 'flex',
+		flexDirection: horizontal ? 'row' : 'column',
+		alignItems: horizontal ? 'center' : undefined,
+		justifyItems: 'flex-start',
+		gap: '5px',
+
+		'.ss__list__options': {
+			border: 'none',
+			listStyle: 'none',
+			padding: '0px',
+			margin: '0px',
 			display: 'flex',
 			flexDirection: horizontal ? 'row' : 'column',
 			alignItems: horizontal ? 'center' : undefined,
 			justifyItems: 'flex-start',
 			gap: '5px',
+		},
 
-			'.ss__list__options': {
-				border: 'none',
-				listStyle: 'none',
-				padding: '0px',
-				margin: '0px',
-				display: 'flex',
-				flexDirection: horizontal ? 'row' : 'column',
-				alignItems: horizontal ? 'center' : undefined,
-				justifyItems: 'flex-start',
-				gap: '5px',
-			},
+		'.ss__list__option': {
+			cursor: 'pointer',
+			display: 'flex',
+			alignItems: 'center',
+			gap: '5px',
 
-			'.ss__list__option': {
+			'.ss__list__option__label , .ss__list__option__icon': {
 				cursor: 'pointer',
-				display: 'flex',
-				alignItems: 'center',
-				gap: '5px',
-
-				'.ss__list__option__label , .ss__list__option__icon': {
-					cursor: 'pointer',
-				},
 			},
+		},
 
-			'&.ss__list--disabled, .ss__list__option--disabled': {
-				cursor: 'none',
-				pointerEvents: 'none',
-				opacity: 0.5,
-			},
+		'&.ss__list--disabled, .ss__list__option--disabled': {
+			cursor: 'none',
+			pointerEvents: 'none',
+			opacity: 0.5,
+		},
 
-			'&.ss__list--disabled, .ss__list__option--unavailable': {
-				cursor: 'pointer',
-				opacity: 0.5,
-			},
+		'&.ss__list--disabled, .ss__list__option--unavailable': {
+			cursor: 'pointer',
+			opacity: 0.5,
+		},
 
-			'.ss__list__option--selected': {
-				fontWeight: 'bold',
-			},
-		}),
+		'.ss__list__option--selected': {
+			fontWeight: 'bold',
+		},
+	});
 };
 
 export function List(properties: ListProps): JSX.Element {
@@ -89,8 +88,6 @@ export function List(properties: ListProps): JSX.Element {
 		requireSelection,
 		disableStyles,
 		className,
-		style,
-		styleScript,
 		treePath,
 	} = props;
 
@@ -122,16 +119,7 @@ export function List(properties: ListProps): JSX.Element {
 		},
 	};
 
-	const styling: RootNodeProperties = { 'ss-name': props.name };
-	const stylingProps = { ...props };
-
-	if (styleScript && !disableStyles) {
-		styling.css = [styleScript(stylingProps), style];
-	} else if (!disableStyles) {
-		styling.css = [CSS.List(stylingProps), style];
-	} else if (style) {
-		styling.css = [style];
-	}
+	const styling = mergeStyles<ListProps>(props, defaultStyles);
 
 	if (selected && !Array.isArray(selected)) {
 		selected = [selected];

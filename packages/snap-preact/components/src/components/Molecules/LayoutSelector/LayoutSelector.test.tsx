@@ -159,7 +159,7 @@ describe('LayoutSelector Component', () => {
 
 		const element = rendered.container.querySelector('.ss__layout__select');
 
-		expect(element?.classList).toHaveLength(2);
+		expect(element?.classList).toHaveLength(3);
 	});
 
 	it('is themeable with ThemeProvider', () => {

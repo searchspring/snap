@@ -3,32 +3,31 @@ import { Fragment, h } from 'preact';
 import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
 import { Theme, useTheme, CacheProvider } from '../../../../providers';
-import { ComponentProps, ResultsLayout, RootNodeProperties } from '../../../../types';
-import { mergeProps } from '../../../../utilities';
+import { mergeProps, mergeStyles } from '../../../../utilities';
 import type { Banner } from '@searchspring/snap-store-mobx';
 import { useA11y } from '../../../../hooks/useA11y';
+import { ComponentProps, StyleScript, ResultsLayout } from '../../../../types';
 
-const CSS = {
-	inlineBanner: ({ width }: Partial<InlineBannerProps>) =>
-		css({
-			height: '100%',
-			display: 'flex',
+const defaultStyles: StyleScript<InlineBannerProps> = ({ width }) => {
+	return css({
+		height: '100%',
+		display: 'flex',
+		flexDirection: 'column',
+		justifyContent: 'center',
+		alignItems: 'center',
+		width: width,
+		'&.ss__inline-banner--grid': {
 			flexDirection: 'column',
-			justifyContent: 'center',
-			alignItems: 'center',
-			width: width,
-			'&.ss__inline-banner--grid': {
-				flexDirection: 'column',
-			},
-			'&.ss__inline-banner--list': {
-				flexDirection: 'row',
-				display: 'block',
-				width: '100%',
-			},
-			'& iframe': {
-				maxWidth: '100%',
-			},
-		}),
+		},
+		'&.ss__inline-banner--list': {
+			flexDirection: 'row',
+			display: 'block',
+			width: '100%',
+		},
+		'& iframe': {
+			maxWidth: '100%',
+		},
+	});
 };
 
 export function InlineBanner(properties: InlineBannerProps): JSX.Element {
@@ -40,18 +39,9 @@ export function InlineBanner(properties: InlineBannerProps): JSX.Element {
 
 	const props = mergeProps('inlineBanner', globalTheme, defaultProps, properties);
 
-	const { banner, disableStyles, className, disableA11y, layout, onClick, style, styleScript } = props;
+	const { banner, className, disableA11y, layout, onClick } = props;
 
-	const styling: RootNodeProperties = { 'ss-name': props.name };
-	const stylingProps = props;
-
-	if (styleScript && !disableStyles) {
-		styling.css = [styleScript(stylingProps), style];
-	} else if (!disableStyles) {
-		styling.css = [CSS.inlineBanner(stylingProps), style];
-	} else if (style) {
-		styling.css = [style];
-	}
+	const styling = mergeStyles<InlineBannerProps>(props, defaultStyles);
 
 	return banner && banner.value ? (
 		<CacheProvider>

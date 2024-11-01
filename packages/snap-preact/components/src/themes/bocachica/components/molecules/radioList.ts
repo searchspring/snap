@@ -45,5 +45,5 @@ const radioListStyleScript = ({ theme }: RadioListProps) => {
 
 // RadioList component props
 export const radioList: Partial<RadioListProps> = {
-	styleScript: radioListStyleScript,
+	themeStyleScript: radioListStyleScript,
 };

@@ -12,23 +12,22 @@ import type { Product } from '@searchspring/snap-store-mobx';
 
 import { Carousel, CarouselProps, defaultCarouselBreakpoints, defaultVerticalCarouselBreakpoints } from '../../Molecules/Carousel';
 import { Result, ResultProps } from '../../Molecules/Result';
-import { defined, mergeProps } from '../../../utilities';
+import { defined, mergeProps, mergeStyles } from '../../../utilities';
 import { useIntersection } from '../../../hooks';
 import { Theme, useTheme, CacheProvider } from '../../../providers';
-import { ComponentProps, BreakpointsProps, RootNodeProperties, ResultComponent } from '../../../types';
+import { ComponentProps, BreakpointsProps, ResultComponent, StyleScript } from '../../../types';
 import { useDisplaySettings } from '../../../hooks/useDisplaySettings';
 import { RecommendationProfileTracker } from '../../Trackers/Recommendation/ProfileTracker';
 import { RecommendationResultTracker } from '../../Trackers/Recommendation/ResultTracker';
 import { Lang, useLang } from '../../../hooks';
 
-const CSS = {
-	recommendation: ({ vertical }: Partial<RecommendationProps>) =>
-		css({
-			height: vertical ? '100%' : undefined,
-			'.ss__result__image-wrapper': {
-				height: vertical ? '85%' : undefined,
-			},
-		}),
+const defaultStyles: StyleScript<RecommendationProps> = ({ vertical }) => {
+	return css({
+		height: vertical ? '100%' : undefined,
+		'.ss__result__image-wrapper': {
+			height: vertical ? '85%' : undefined,
+		},
+	});
 };
 
 export const Recommendation = observer((properties: RecommendationProps): JSX.Element => {
@@ -72,8 +71,10 @@ export const Recommendation = observer((properties: RecommendationProps): JSX.El
 		hideButtons,
 		resultComponent,
 		disableStyles,
-		style,
 		className,
+		// eslint-disable-next-line @typescript-eslint/no-unused-vars
+		style,
+		// eslint-disable-next-line @typescript-eslint/no-unused-vars
 		styleScript,
 		lazyRender,
 		vertical,
@@ -127,16 +128,7 @@ export const Recommendation = observer((properties: RecommendationProps): JSX.El
 		},
 	};
 
-	const styling: RootNodeProperties = { 'ss-name': props.name };
-	const stylingProps = props;
-
-	if (styleScript && !disableStyles) {
-		styling.css = [styleScript(stylingProps), style];
-	} else if (!disableStyles) {
-		styling.css = [CSS.recommendation(stylingProps), style];
-	} else if (style) {
-		styling.css = [style];
-	}
+	const styling = mergeStyles<RecommendationProps>(props, defaultStyles);
 
 	const [isVisible, setIsVisible] = useState(false);
 

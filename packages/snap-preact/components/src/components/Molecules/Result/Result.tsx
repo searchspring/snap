@@ -7,70 +7,69 @@ import classnames from 'classnames';
 import { Image, ImageProps } from '../../Atoms/Image';
 import { Price, PriceProps } from '../../Atoms/Price';
 import { Theme, useTheme, CacheProvider } from '../../../providers';
-import { defined, cloneWithProps, mergeProps } from '../../../utilities';
+import { defined, cloneWithProps, mergeProps, mergeStyles } from '../../../utilities';
 import { filters } from '@searchspring/snap-toolbox';
-import { ComponentProps, ResultsLayout, RootNodeProperties } from '../../../types';
+import { ComponentProps, ResultsLayout, StyleScript } from '../../../types';
 import { CalloutBadge, CalloutBadgeProps } from '../../Molecules/CalloutBadge';
 import { OverlayBadge, OverlayBadgeProps } from '../../Molecules/OverlayBadge';
 import type { SearchController, AutocompleteController, RecommendationController } from '@searchspring/snap-controller';
 import type { Product } from '@searchspring/snap-store-mobx';
 
-const CSS = {
-	result: ({}: Partial<ResultProps>) =>
-		css({
-			'&.ss__result--grid': {
-				display: 'flex',
-				flexDirection: 'column',
-				height: '100%',
-				'& .ss__result__image-wrapper': {
-					flex: '1 0 auto',
-					minHeight: '0%',
-				},
-			},
-			'&.ss__result--list': {
-				display: 'flex',
-				flexDirection: 'row',
-				'& .ss__result__image-wrapper': {
-					flex: '0 0 33%',
-				},
-				'& .ss__result__details': {
-					flex: '1 1 auto',
-					textAlign: 'left',
-					marginLeft: '20px',
-					padding: 0,
-				},
-			},
-
+const defaultStyles: StyleScript<ResultProps> = () => {
+	return css({
+		'&.ss__result--grid': {
+			display: 'flex',
+			flexDirection: 'column',
+			height: '100%',
 			'& .ss__result__image-wrapper': {
-				position: 'relative',
-				'& .ss__result__badge': {
-					background: 'rgba(255, 255, 255, 0.5)',
-					padding: '10px',
-				},
+				flex: '1 0 auto',
+				minHeight: '0%',
 			},
-
+		},
+		'&.ss__result--list': {
+			display: 'flex',
+			flexDirection: 'row',
+			'& .ss__result__image-wrapper': {
+				flex: '0 0 33%',
+			},
 			'& .ss__result__details': {
+				flex: '1 1 auto',
+				textAlign: 'left',
+				marginLeft: '20px',
+				padding: 0,
+			},
+		},
+
+		'& .ss__result__image-wrapper': {
+			position: 'relative',
+			'& .ss__result__badge': {
+				background: 'rgba(255, 255, 255, 0.5)',
 				padding: '10px',
-				textAlign: 'center',
+			},
+		},
 
-				'& .ss__result__details__title': {
-					marginBottom: '10px',
-				},
-				'& .ss__result__details__pricing': {
-					marginBottom: '10px',
+		'& .ss__result__details': {
+			padding: '10px',
+			textAlign: 'center',
 
-					'& .ss__result__price': {
-						fontSize: '1.2em',
-					},
-					'& .ss__price--strike': {
-						fontSize: '80%',
-					},
+			'& .ss__result__details__title': {
+				marginBottom: '10px',
+			},
+			'& .ss__result__details__pricing': {
+				marginBottom: '10px',
+
+				'& .ss__result__price': {
+					fontSize: '1.2em',
 				},
-				'& .ss__result__details__button': {
-					marginBottom: '10px',
+				'& .ss__price--strike': {
+					fontSize: '80%',
 				},
 			},
-		}),
+			'& .ss__result__details__button': {
+				marginBottom: '10px',
+			},
+		},
+	});
 };
 
 export const Result = observer((properties: ResultProps): JSX.Element => {
@@ -94,8 +93,6 @@ export const Result = observer((properties: ResultProps): JSX.Element => {
 		className,
 		layout,
 		onClick,
-		style,
-		styleScript,
 		controller,
 		treePath,
 	} = props;
@@ -167,16 +164,7 @@ export const Result = observer((properties: ResultProps): JSX.Element => {
 		displayName = filters.truncate(core?.name || '', props.truncateTitle.limit, props.truncateTitle.append);
 	}
 
-	const styling: RootNodeProperties = { 'ss-name': props.name };
-	const stylingProps = props;
-
-	if (styleScript && !disableStyles) {
-		styling.css = [styleScript(stylingProps), style];
-	} else if (!disableStyles) {
-		styling.css = [CSS.result(stylingProps), style];
-	} else if (style) {
-		styling.css = [style];
-	}
+	const styling = mergeStyles<ResultProps>(props, defaultStyles);
 
 	return core ? (
 		<CacheProvider>

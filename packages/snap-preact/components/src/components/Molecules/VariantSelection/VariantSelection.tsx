@@ -3,8 +3,8 @@ import { observer } from 'mobx-react';
 import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
 import { Theme, useTheme, CacheProvider } from '../../../providers';
-import { defined } from '../../../utilities';
-import { ComponentProps, RootNodeProperties } from '../../../types';
+import { defined, mergeStyles } from '../../../utilities';
+import { ComponentProps, StyleScript } from '../../../types';
 import type { VariantSelection as VariantSelectionType } from '@searchspring/snap-store-mobx';
 import { List, ListProps } from '../List';
 import { Swatches, SwatchesProps } from '../Swatches';
@@ -12,51 +12,50 @@ import { Dropdown, DropdownProps } from '../../Atoms/Dropdown';
 import { Icon, IconProps } from '../../Atoms/Icon';
 import { useA11y } from '../../../hooks';
 
-const CSS = {
-	variantSelection: () =>
-		css({
-			'.ss__variant-selection__dropdown': {
-				'.ss__dropdown__button': {
-					width: '100%',
+const defaultStyles: StyleScript<VariantSelectionProps> = () => {
+	return css({
+		'.ss__variant-selection__dropdown': {
+			'.ss__dropdown__button': {
+				width: '100%',
+				display: 'flex',
+				alignItems: 'center',
+				justifyContent: 'space-between',
+				'.ss__dropdown__button-wrapper': {
 					display: 'flex',
-					alignItems: 'center',
-					justifyContent: 'space-between',
-					'.ss__dropdown__button-wrapper': {
-						display: 'flex',
-						gap: '5px',
-					},
-				},
-
-				'.ss__dropdown__content': {
-					minWidth: 'auto',
-					left: '0',
-					right: '0',
-
-					'.ss__variant-selection__option': {
-						cursor: 'pointer',
-						position: 'relative',
-					},
-
-					'.ss__variant-selection__option:hover': {
-						fontWeight: 'bold',
-					},
-
-					'.ss__variant-selection__option--selected': {
-						fontWeight: 'bold',
-					},
-
-					'.ss__variant-selection__option--disabled': {
-						pointerEvents: 'none',
-						cursor: 'initial',
-					},
-
-					'.ss__variant-selection__option--disabled, .ss__variant-selection__option--unavailable': {
-						textDecoration: 'line-through',
-						opacity: 0.5,
-					},
+					gap: '5px',
 				},
 			},
-		}),
+
+			'.ss__dropdown__content': {
+				minWidth: 'auto',
+				left: '0',
+				right: '0',
+
+				'.ss__variant-selection__option': {
+					cursor: 'pointer',
+					position: 'relative',
+				},
+
+				'.ss__variant-selection__option:hover': {
+					fontWeight: 'bold',
+				},
+
+				'.ss__variant-selection__option--selected': {
+					fontWeight: 'bold',
+				},
+
+				'.ss__variant-selection__option--disabled': {
+					pointerEvents: 'none',
+					cursor: 'initial',
+				},
+
+				'.ss__variant-selection__option--disabled, .ss__variant-selection__option--unavailable': {
+					textDecoration: 'line-through',
+					opacity: 0.5,
+				},
+			},
+		},
+	});
 };
 
 export const VariantSelection = observer((properties: VariantSelectionProps): JSX.Element => {
@@ -72,7 +71,7 @@ export const VariantSelection = observer((properties: VariantSelectionProps): JS
 		...properties.theme?.components?.variantSelection,
 	};
 
-	const { type, selection, disableStyles, className, style, treePath } = props;
+	const { type, selection, disableStyles, className, treePath } = props;
 
 	const subProps: VariantSelectionSubProps = {
 		dropdown: {
@@ -137,12 +136,7 @@ export const VariantSelection = observer((properties: VariantSelectionProps): JS
 		},
 	};
 
-	const styling: RootNodeProperties = { 'ss-name': props.name };
-	if (!disableStyles) {
-		styling.css = [CSS.variantSelection(), style];
-	} else if (style) {
-		styling.css = [style];
-	}
+	const styling = mergeStyles<VariantSelectionProps>(props, defaultStyles);
 
 	const DropdownContent = (props: any) => {
 		const { toggleOpen } = props;

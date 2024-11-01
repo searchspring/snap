@@ -4,8 +4,8 @@ import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
 import type { SearchController } from '@searchspring/snap-controller';
 import { Results, ResultsProps } from '../../Organisms/Results';
-import { defined, mergeProps } from '../../../utilities';
-import { ComponentProps, ResultComponent, RootNodeProperties } from '../../../types';
+import { defined, mergeProps, mergeStyles } from '../../../utilities';
+import { ComponentProps, ResultComponent, StyleScript } from '../../../types';
 import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { Toolbar, ToolbarProps } from '../../Organisms/Toolbar';
 import { SearchHeader, SearchHeaderProps } from '../../Atoms/SearchHeader';
@@ -14,8 +14,8 @@ import { Banner, BannerProps } from '../../Atoms/Merchandising';
 import { ContentType } from '@searchspring/snap-store-mobx';
 import { FacetsHorizontal, FacetsHorizontalProps } from '../../Organisms/FacetsHorizontal';
 
-const CSS = {
-	SearchHorizontal: ({}: Partial<SearchHorizontalProps>) => css({}),
+const defaultStyles: StyleScript<SearchHorizontalProps> = ({}) => {
+	return css({});
 };
 
 export const SearchHorizontal = observer((properties: SearchHorizontalProps): JSX.Element => {
@@ -29,8 +29,6 @@ export const SearchHorizontal = observer((properties: SearchHorizontalProps): JS
 		disableStyles,
 		className,
 		controller,
-		style,
-		styleScript,
 		hideSearchHeader,
 		hideMerchandisingBanners,
 		hideTopToolbar,
@@ -134,16 +132,7 @@ export const SearchHorizontal = observer((properties: SearchHorizontalProps): JS
 		},
 	};
 
-	const styling: RootNodeProperties = { 'ss-name': props.name };
-	const stylingProps = props;
-
-	if (styleScript && !disableStyles) {
-		styling.css = [styleScript(stylingProps), style];
-	} else if (!disableStyles) {
-		styling.css = [CSS.SearchHorizontal(stylingProps), style];
-	} else if (style) {
-		styling.css = [style];
-	}
+	const styling = mergeStyles<SearchHorizontalProps>(props, defaultStyles);
 
 	const merchandising = controller.store.merchandising;
 

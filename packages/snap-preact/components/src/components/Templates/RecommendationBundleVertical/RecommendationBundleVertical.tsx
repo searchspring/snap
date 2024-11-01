@@ -2,21 +2,20 @@ import { h } from 'preact';
 import { css } from '@emotion/react';
 import { observer } from 'mobx-react';
 
-import { defined, mergeProps } from '../../../utilities';
+import { defined, mergeProps, mergeStyles } from '../../../utilities';
 import { Theme, useTheme } from '../../../providers';
-import { ComponentProps, StylingCSS } from '../../../types';
+import { ComponentProps, StyleScript } from '../../../types';
 import { RecommendationBundle, RecommendationBundleProps } from '../RecommendationBundle';
 
-const CSS = {
-	RecommendationBundleVertical: ({}: Partial<RecommendationBundleVerticalProps>) =>
-		css({
-			'.ss__recommendation-bundle__wrapper': {
-				flexDirection: 'column',
-			},
-			'.ss__recommendation-bundle__wrapper__cta': {
-				textAlign: 'center',
-			},
-		}),
+const defaultStyles: StyleScript<RecommendationBundleVerticalProps> = () => {
+	return css({
+		'.ss__recommendation-bundle__wrapper': {
+			flexDirection: 'column',
+		},
+		'.ss__recommendation-bundle__wrapper__cta': {
+			textAlign: 'center',
+		},
+	});
 };
 
 export const RecommendationBundleVertical = observer((properties: RecommendationBundleVerticalProps): JSX.Element => {
@@ -25,6 +24,7 @@ export const RecommendationBundleVertical = observer((properties: Recommendation
 
 	const props = mergeProps('recommendationBundleVertical', globalTheme, defaultProps, properties);
 
+	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	const { treePath, styleScript, theme, style, disableStyles, ...additionalProps } = props;
 
 	const subProps: RecommendationBundleVerticalSubProps = {
@@ -47,16 +47,7 @@ export const RecommendationBundleVertical = observer((properties: Recommendation
 		},
 	};
 
-	const styling: { css?: StylingCSS } = {};
-	const stylingProps = { ...props, theme };
-
-	if (styleScript && !disableStyles) {
-		styling.css = [styleScript(stylingProps), style];
-	} else if (!disableStyles) {
-		styling.css = [CSS.RecommendationBundleVertical(stylingProps), style];
-	} else if (style) {
-		styling.css = [style];
-	}
+	const styling = mergeStyles<RecommendationBundleVerticalProps>(props, defaultStyles);
 
 	return <RecommendationBundle {...styling} {...subProps.recommendationBundle} {...additionalProps} />;
 });

@@ -5,17 +5,17 @@ import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
 import { observer } from 'mobx-react-lite';
 
-import { ComponentProps, RootNodeProperties } from '../../../types';
-import { defined, mergeProps } from '../../../utilities';
+import { ComponentProps, StyleScript } from '../../../types';
+import { defined, mergeProps, mergeStyles } from '../../../utilities';
 import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { Icon, IconProps, IconType } from '../../Atoms/Icon';
 import { useA11y } from '../../../hooks/useA11y';
 import { Lang, useLang } from '../../../hooks';
 import deepmerge from 'deepmerge';
 
-const CSS = {
-	radio: ({ size }: Partial<RadioProps>) =>
-		css({
+const defaultStyles: StyleScript<RadioProps> = ({ size }) => {
+	return css({
+		'&.ss__radio--nonnative': {
 			display: 'inline-flex',
 			alignItems: 'center',
 			justifyContent: 'center',
@@ -27,9 +27,8 @@ const CSS = {
 				opacity: 0.5,
 				cursor: 'none',
 			},
-		}),
-	native: ({ size }: Partial<RadioProps>) =>
-		css({
+		},
+		'&.ss__radio--native': {
 			width: size,
 			height: size,
 			display: 'flex',
@@ -40,7 +39,8 @@ const CSS = {
 				width: `calc(${size} - 30%)`,
 				margin: 'auto',
 			},
-		}),
+		},
+	});
 };
 
 export const Radio = observer((properties: RadioProps): JSX.Element => {
@@ -68,8 +68,6 @@ export const Radio = observer((properties: RadioProps): JSX.Element => {
 		disableA11y,
 		disableStyles,
 		className,
-		style,
-		styleScript,
 		treePath,
 	} = props;
 
@@ -130,20 +128,7 @@ export const Radio = observer((properties: RadioProps): JSX.Element => {
 		}
 	};
 
-	const styling: RootNodeProperties = { 'ss-name': props.name };
-	const stylingProps = props;
-
-	if (styleScript && !disableStyles) {
-		styling.css = [styleScript(stylingProps), style];
-	} else if (!disableStyles) {
-		if (native) {
-			styling.css = [CSS.native(stylingProps), style];
-		} else {
-			styling.css = [CSS.radio(stylingProps), style];
-		}
-	} else if (style) {
-		styling.css = [style];
-	}
+	const styling = mergeStyles<RadioProps>(props, defaultStyles);
 
 	//initialize lang
 	const defaultLang = {
@@ -160,7 +145,7 @@ export const Radio = observer((properties: RadioProps): JSX.Element => {
 	return (
 		<CacheProvider>
 			{native ? (
-				<div className={classnames('ss__radio', { 'ss__radio--disabled': disabled }, className)} {...styling}>
+				<div className={classnames('ss__radio', 'ss__radio--native', { 'ss__radio--disabled': disabled }, className)} {...styling}>
 					<input
 						className={classnames('ss__radio__input')}
 						aria-checked={checkedState}
@@ -174,7 +159,7 @@ export const Radio = observer((properties: RadioProps): JSX.Element => {
 			) : (
 				<span
 					{...styling}
-					className={classnames('ss__radio', { 'ss__radio--disabled': disabled }, className)}
+					className={classnames('ss__radio', 'ss__radio--nonnative', { 'ss__radio--disabled': disabled }, className)}
 					onClick={(e) => clickFunc(e)}
 					ref={(e) => (!disableA11y ? useA11y(e) : null)}
 					{...mergedLang.radio?.all}

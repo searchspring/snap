@@ -15,5 +15,5 @@ const noResultsStyleScript = ({ theme }: NoResultsProps) => {
 
 // NoResults component props
 export const noResults: Partial<NoResultsProps> = {
-	styleScript: noResultsStyleScript,
+	themeStyleScript: noResultsStyleScript,
 };

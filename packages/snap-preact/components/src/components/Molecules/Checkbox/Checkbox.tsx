@@ -5,35 +5,32 @@ import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
 import { observer } from 'mobx-react';
 
-import { ComponentProps, RootNodeProperties } from '../../../types';
-import { defined, mergeProps } from '../../../utilities';
+import { ComponentProps, StyleScript } from '../../../types';
+import { defined, mergeProps, mergeStyles } from '../../../utilities';
 import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { Icon, IconProps, IconType } from '../../Atoms/Icon';
 import { useA11y } from '../../../hooks/useA11y';
 import { Lang, useLang } from '../../../hooks';
 import deepmerge from 'deepmerge';
 
-const CSS = {
-	checkbox: ({ size, color, theme }: Partial<CheckboxProps>) => {
-		const pixelSize = isNaN(Number(size)) ? size : `${size}px`;
-		return css({
-			display: 'inline-flex',
-			alignItems: 'center',
-			justifyContent: 'center',
-			height: pixelSize,
-			width: pixelSize,
-			border: `1px solid ${color || theme?.variables?.colors?.primary || '#333'}`,
-			'&.ss__checkbox--disabled': {
-				opacity: 0.7,
-			},
-			'& .ss__checkbox__empty': {
-				display: 'inline-block',
-				width: `calc(${pixelSize} - 30%)`,
-				height: `calc(${pixelSize} - 30%)`,
-			},
-		});
-	},
-	native: ({}) => css({}),
+const defaultStyles: StyleScript<CheckboxProps> = ({ size, color, theme }) => {
+	const pixelSize = isNaN(Number(size)) ? size : `${size}px`;
+	return css({
+		display: 'inline-flex',
+		alignItems: 'center',
+		justifyContent: 'center',
+		height: pixelSize,
+		width: pixelSize,
+		border: `1px solid ${color || theme?.variables?.colors?.primary || '#333'}`,
+		'&.ss__checkbox--disabled': {
+			opacity: 0.7,
+		},
+		'& .ss__checkbox__empty': {
+			display: 'inline-block',
+			width: `calc(${pixelSize} - 30%)`,
+			height: `calc(${pixelSize} - 30%)`,
+		},
+	});
 };
 
 export const Checkbox = observer((properties: CheckboxProps): JSX.Element => {
@@ -46,24 +43,8 @@ export const Checkbox = observer((properties: CheckboxProps): JSX.Element => {
 
 	const props = mergeProps('checkbox', globalTheme, defaultProps, properties);
 
-	const {
-		checked,
-		color,
-		disabled,
-		icon,
-		iconColor,
-		onClick,
-		size,
-		startChecked,
-		native,
-		disableA11y,
-		disableStyles,
-		className,
-		style,
-		styleScript,
-		theme,
-		treePath,
-	} = props;
+	const { checked, color, disabled, icon, iconColor, onClick, size, startChecked, native, disableA11y, disableStyles, className, theme, treePath } =
+		props;
 
 	const pixelSize = isNaN(Number(size)) ? size : `${size}px`;
 
@@ -109,20 +90,7 @@ export const Checkbox = observer((properties: CheckboxProps): JSX.Element => {
 		}
 	};
 
-	const styling: RootNodeProperties = { 'ss-name': props.name };
-	const stylingProps = props;
-
-	if (styleScript && !disableStyles) {
-		styling.css = [styleScript(stylingProps), style];
-	} else if (!disableStyles) {
-		if (native) {
-			styling.css = [CSS.native(stylingProps), style];
-		} else {
-			styling.css = [CSS.checkbox(stylingProps), style];
-		}
-	} else if (style) {
-		styling.css = [style];
-	}
+	const styling = mergeStyles<CheckboxProps>(props, defaultStyles);
 
 	//initialize lang
 	const defaultLang = {

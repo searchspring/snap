@@ -59,7 +59,7 @@ const facetStyleScript = ({ color, disableCollapse, theme }: FacetProps) => {
 
 // Facet component props
 export const facet: Partial<FacetProps> = {
-	styleScript: facetStyleScript,
+	themeStyleScript: facetStyleScript,
 	iconCollapse: 'angle-down',
 	iconExpand: 'angle-down',
 	iconOverflowMore: 'plus-thin',

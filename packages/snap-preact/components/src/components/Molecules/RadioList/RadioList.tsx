@@ -4,51 +4,50 @@ import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
 
 import { Theme, useTheme, CacheProvider } from '../../../providers';
-import { ComponentProps, RootNodeProperties, ListOption } from '../../../types';
-import { defined, mergeProps } from '../../../utilities';
+import { ComponentProps, ListOption, StyleScript } from '../../../types';
+import { defined, mergeProps, mergeStyles } from '../../../utilities';
 import { useState } from 'react';
 import { Radio, RadioProps } from '../Radio/Radio';
 import { Lang, useA11y, useLang } from '../../../hooks';
 import { Icon, IconProps } from '../../Atoms/Icon';
 import deepmerge from 'deepmerge';
 
-const CSS = {
-	radioList: ({}: Partial<RadioListProps>) =>
-		css({
-			'& .ss__radio-list__options-wrapper': {
-				border: 'none',
-				listStyle: 'none',
-				padding: '0px',
-				margin: '0px',
-			},
+const defaultStyles: StyleScript<RadioListProps> = () => {
+	return css({
+		'& .ss__radio-list__options-wrapper': {
+			border: 'none',
+			listStyle: 'none',
+			padding: '0px',
+			margin: '0px',
+		},
 
-			'.ss__radio-list__title': {
-				margin: '0px',
-				padding: '5px',
-			},
+		'.ss__radio-list__title': {
+			margin: '0px',
+			padding: '5px',
+		},
 
-			'.ss__radio-list__option': {
+		'.ss__radio-list__option': {
+			cursor: 'pointer',
+			display: 'flex',
+			alignItems: 'center',
+			padding: '5px',
+
+			'& .ss__radio-list__option__label, .ss__radio-list__option__icon': {
 				cursor: 'pointer',
-				display: 'flex',
-				alignItems: 'center',
-				padding: '5px',
-
-				'& .ss__radio-list__option__label, .ss__radio-list__option__icon': {
-					cursor: 'pointer',
-					padding: '0px 0px 0px 5px',
-				},
+				padding: '0px 0px 0px 5px',
 			},
+		},
 
-			'&.ss__radio-list--disabled, .ss__radio-list__option--disabled': {
-				cursor: 'none',
-				pointerEvents: 'none',
-				opacity: 0.5,
-			},
+		'&.ss__radio-list--disabled, .ss__radio-list__option--disabled': {
+			cursor: 'none',
+			pointerEvents: 'none',
+			opacity: 0.5,
+		},
 
-			'.ss__radio-list__option--selected': {
-				fontWeight: 'bold',
-			},
-		}),
+		'.ss__radio-list__option--selected': {
+			fontWeight: 'bold',
+		},
+	});
 };
 
 export function RadioList(properties: RadioListProps): JSX.Element {
@@ -70,8 +69,6 @@ export function RadioList(properties: RadioListProps): JSX.Element {
 		options,
 		disableStyles,
 		className,
-		style,
-		styleScript,
 		treePath,
 	} = props;
 
@@ -102,16 +99,7 @@ export function RadioList(properties: RadioListProps): JSX.Element {
 		},
 	};
 
-	const styling: RootNodeProperties = { 'ss-name': props.name };
-	const stylingProps = { ...props };
-
-	if (styleScript && !disableStyles) {
-		styling.css = [styleScript(stylingProps), style];
-	} else if (!disableStyles) {
-		styling.css = [CSS.radioList(stylingProps), style];
-	} else if (style) {
-		styling.css = [style];
-	}
+	const styling = mergeStyles<RadioListProps>(props, defaultStyles);
 
 	// selection state
 	const [selection, setSelection] = useState<ListOption | undefined>(selected);

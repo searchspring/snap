@@ -3,21 +3,20 @@ import { observer } from 'mobx-react-lite';
 import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
 
-import { ComponentProps, RootNodeProperties } from '../../../../types';
 import { Theme, useTheme, CacheProvider } from '../../../../providers';
-import { mergeProps } from '../../../../utilities';
+import { mergeProps, mergeStyles } from '../../../../utilities';
 
 import { BannerContent, ContentType } from '@searchspring/snap-store-mobx';
 import type { SearchController } from '@searchspring/snap-controller';
+import { ComponentProps, StyleScript } from '../../../../types';
 
-const CSS = {
-	banner: ({}: Partial<BannerProps>) =>
-		css({
-			'& iframe, img': {
-				maxWidth: '100%',
-				height: 'auto',
-			},
-		}),
+const defaultStyles: StyleScript<BannerProps> = () => {
+	return css({
+		'& iframe, img': {
+			maxWidth: '100%',
+			height: 'auto',
+		},
+	});
 };
 
 export const Banner = observer((properties: BannerProps): JSX.Element => {
@@ -26,7 +25,7 @@ export const Banner = observer((properties: BannerProps): JSX.Element => {
 
 	const props = mergeProps('banner', globalTheme, defaultProps, properties);
 
-	const { controller, type, disableStyles, className, style, styleScript } = props;
+	const { controller, type, className } = props;
 
 	const content = props.content || controller?.store?.merchandising.content;
 
@@ -34,16 +33,8 @@ export const Banner = observer((properties: BannerProps): JSX.Element => {
 		console.warn(`BannerType '${ContentType.INLINE}' is not supported in <Banner /> component`);
 		return <Fragment></Fragment>;
 	}
-	const styling: RootNodeProperties = { 'ss-name': props.name };
-	const stylingProps = props;
 
-	if (styleScript && !disableStyles) {
-		styling.css = [styleScript(stylingProps), style];
-	} else if (!disableStyles) {
-		styling.css = [CSS.banner(stylingProps), style];
-	} else if (style) {
-		styling.css = [style];
-	}
+	const styling = mergeStyles<BannerProps>(props, defaultStyles);
 
 	let bannerContent;
 	if (content && content[type]) {

@@ -5,65 +5,63 @@ import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
 
 import { Theme, useTheme, CacheProvider } from '../../../providers';
-import { ComponentProps, RootNodeProperties, SwatchOption, BreakpointsProps } from '../../../types';
+import { ComponentProps, SwatchOption, BreakpointsProps, StyleScript } from '../../../types';
 import { useA11y, useDisplaySettings } from '../../../hooks';
 import { Carousel, CarouselProps } from '../Carousel';
-import { defined } from '../../../utilities';
+import { defined, mergeStyles } from '../../../utilities';
 import { Grid, GridProps } from '../Grid';
 import { ImageProps, Image } from '../../Atoms/Image';
 import deepmerge from 'deepmerge';
 import { filters } from '@searchspring/snap-toolbox';
 
-const CSS = {
-	Swatches: ({ theme }: Partial<SwatchesProps>) =>
-		css({
-			marginTop: '10px',
-			'.ss__swatches__carousel__swatch': {
-				boxSizing: 'content-box',
-				cursor: 'pointer',
-				backgroundRepeat: 'no-repeat',
-				display: 'flex',
-				justifyContent: 'center',
-				alignItems: 'center',
-				border: `1px solid ${theme?.variables?.colors?.primary || '#333'}`,
-				aspectRatio: '1/1',
-				margin: 'auto',
-				flexDirection: 'column',
+const defaultStyles: StyleScript<SwatchesProps> = ({ theme }) => {
+	return css({
+		marginTop: '10px',
+		'.ss__swatches__carousel__swatch': {
+			boxSizing: 'content-box',
+			cursor: 'pointer',
+			backgroundRepeat: 'no-repeat',
+			display: 'flex',
+			justifyContent: 'center',
+			alignItems: 'center',
+			border: `1px solid ${theme?.variables?.colors?.primary || '#333'}`,
+			aspectRatio: '1/1',
+			margin: 'auto',
+			flexDirection: 'column',
 
-				'&.ss__swatches__carousel__swatch--selected': {
-					border: `2px solid ${theme?.variables?.colors?.primary || '#333'}`,
-				},
-
-				'&.ss__swatches__carousel__swatch--disabled:before, &.ss__swatches__carousel__swatch--unavailable:before': {
-					content: '""',
-					display: 'block',
-					position: 'absolute',
-					top: '50%',
-					width: '90%',
-					height: '1px',
-					borderTop: '3px solid #eee',
-					outline: '1px solid #ffff',
-					transform: 'rotate(-45deg)',
-				},
-
-				'&.ss__swatches__carousel__swatch--disabled': {
-					position: 'relative',
-					cursor: 'none',
-					pointerEvents: 'none',
-					opacity: 0.5,
-				},
-
-				'&.ss__swatches__carousel__swatch--unavailable': {
-					cursor: 'pointer',
-					opacity: 0.5,
-				},
+			'&.ss__swatches__carousel__swatch--selected': {
+				border: `2px solid ${theme?.variables?.colors?.primary || '#333'}`,
 			},
-		}),
+
+			'&.ss__swatches__carousel__swatch--disabled:before, &.ss__swatches__carousel__swatch--unavailable:before': {
+				content: '""',
+				display: 'block',
+				position: 'absolute',
+				top: '50%',
+				width: '90%',
+				height: '1px',
+				borderTop: '3px solid #eee',
+				outline: '1px solid #ffff',
+				transform: 'rotate(-45deg)',
+			},
+
+			'&.ss__swatches__carousel__swatch--disabled': {
+				position: 'relative',
+				cursor: 'none',
+				pointerEvents: 'none',
+				opacity: 0.5,
+			},
+
+			'&.ss__swatches__carousel__swatch--unavailable': {
+				cursor: 'pointer',
+				opacity: 0.5,
+			},
+		},
+	});
 };
 
 export function Swatches(properties: SwatchesProps): JSX.Element {
 	const globalTheme: Theme = useTheme();
-	const theme = { ...globalTheme, ...properties.theme };
 
 	const defaultCarouselBreakpoints = {
 		0: {
@@ -112,7 +110,7 @@ export function Swatches(properties: SwatchesProps): JSX.Element {
 		};
 	}
 
-	const { onSelect, disabled, options, hideLabels, disableStyles, className, style, type, carousel, grid, treePath } = props;
+	const { onSelect, disabled, options, hideLabels, disableStyles, className, type, carousel, grid, treePath } = props;
 
 	const subProps: SwatchesSubProps = {
 		carousel: {
@@ -167,12 +165,7 @@ export function Swatches(properties: SwatchesProps): JSX.Element {
 
 	const selected = props.selected;
 
-	const styling: RootNodeProperties = { 'ss-name': props.name };
-	if (!disableStyles) {
-		styling.css = [CSS.Swatches({ theme }), style];
-	} else if (style) {
-		styling.css = [style];
-	}
+	const styling = mergeStyles<SwatchesProps>(props, defaultStyles);
 
 	// selection state
 	const [selection, setSelection] = useState((selected as SwatchOption) || undefined);

@@ -64,5 +64,5 @@ const resultStyleScript = ({ theme }: ResultProps) => {
 
 // Result component props
 export const result: Partial<ResultProps> = {
-	styleScript: resultStyleScript,
+	themeStyleScript: resultStyleScript,
 };

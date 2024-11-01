@@ -4,22 +4,21 @@ import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
 import { observer } from 'mobx-react';
 import { Theme, useTheme, CacheProvider } from '../../../providers';
-import { ComponentProps, RootNodeProperties } from '../../../types';
+import { ComponentProps, StyleScript } from '../../../types';
+import { mergeStyles } from '../../../utilities';
 
-const CSS = {
-	BadgeRectangle: (props: BadgeRectangleProps) => {
-		return css({
-			display: 'inline-block',
-			boxSizing: 'border-box',
-			padding: '0.3em 0.9em',
-			background: props.color,
-			color: props.colorText,
-			textOverflow: 'ellipsis',
-			whiteSpace: 'nowrap',
-			overflow: 'hidden',
-			maxWidth: '100%',
-		});
-	},
+const defaultStyles: StyleScript<BadgeRectangleProps> = ({ color, colorText }) => {
+	return css({
+		display: 'inline-block',
+		boxSizing: 'border-box',
+		padding: '0.3em 0.9em',
+		background: color,
+		color: colorText,
+		textOverflow: 'ellipsis',
+		whiteSpace: 'nowrap',
+		overflow: 'hidden',
+		maxWidth: '100%',
+	});
 };
 
 export const BadgeRectangle = observer((properties: BadgeRectangleProps): JSX.Element => {
@@ -35,15 +34,9 @@ export const BadgeRectangle = observer((properties: BadgeRectangleProps): JSX.El
 		...properties,
 		...properties.theme?.components?.badgeRectangle,
 	};
-	const { value, disableStyles, tag, className, style } = props;
+	const { value, tag, className } = props;
 
-	const styling: RootNodeProperties = { 'ss-name': props.name };
-
-	if (!disableStyles) {
-		styling.css = [CSS.BadgeRectangle(props), style];
-	} else if (style) {
-		styling.css = [style];
-	}
+	const styling = mergeStyles<BadgeRectangleProps>(props, defaultStyles);
 
 	return value ? (
 		<CacheProvider>
