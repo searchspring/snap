@@ -218,7 +218,7 @@ export const Carousel = observer((properties: CarouselProps): JSX.Element => {
 			theme,
 		};
 	}
-	// eslint-disable-next-line @typescript-eslint/no-unused-vars
+
 	const {
 		children,
 		loop,
