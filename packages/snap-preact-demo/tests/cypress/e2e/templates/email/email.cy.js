@@ -14,7 +14,7 @@ const config = {
 	disableGA: '', // disable google analytic events (example: 'UA-123456-1')
 	selectors: {
 		email: {
-			result: '.ss-emailrec',
+			result: '.ss__recommendation-email__result-wrapper',
 		},
 	},
 };

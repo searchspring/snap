@@ -39,7 +39,7 @@ export const RecommendationEmail = observer((properties: RecommendationEmailProp
 	return resultsToRender.length > 0 ? (
 		<Fragment>
 			{resultsToRender.map((result, idx) => (
-				<div key={idx} id={`ss-emailrec${idx}`} className="ss-emailrec" style={{ display: 'block', width: resultWidth }}>
+				<div key={idx} id={`ss-emailrec${idx}`} className="ss__recommendation-email__result-wrapper" style={{ display: 'block', width: resultWidth }}>
 					{(() => {
 						if (resultComponent) {
 							const ResultComponent = resultComponent;

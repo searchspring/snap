@@ -217,7 +217,7 @@ export const createSearchTargeters = (templateConfig: SnapTemplatesConfig, templ
 	const targets = templateConfig.search?.targets || [];
 	return targets.map((target) => {
 		// use theme provided resultComponent if specified
-		if (!target.resultComponent && templateConfig.themes[target.theme || GLOBAL_THEME_NAME]?.resultComponent) {
+		if (!target.resultComponent && templateConfig.themes[target.theme || GLOBAL_THEME_NAME].resultComponent) {
 			target.resultComponent = templateConfig.themes[target.theme || GLOBAL_THEME_NAME].resultComponent;
 		}
 		const targetId = templatesStore.addTarget('search', target);

@@ -25,15 +25,15 @@ describe('plugins work based on plaform setting', () => {
 
 		cy.visit('https://localhost:2222/templates/');
 
-		cy.snapController().then((props) => {
+		cy.snapController().then((controller) => {
 			const expectedPluginList = [
 				'pluginBackgroundFilters', //common
 				'pluginScrollToTop', //common
 				'pluginLogger', //common
 			];
-			expect(props.config.plugins.length).to.equal(3);
+			expect(controller.config.plugins.length).to.equal(expectedPluginList.length);
 
-			props.config.plugins.forEach((plugin, idx) => {
+			controller.config.plugins.forEach((plugin, idx) => {
 				expect(plugin[0].name).to.equal(expectedPluginList[idx]);
 			});
 		});
@@ -61,15 +61,15 @@ describe('plugins work based on plaform setting', () => {
 
 		cy.visit('https://localhost:2222/templates/');
 
-		cy.snapController().then((props) => {
+		cy.snapController().then((controller) => {
 			const expectedPluginList = [
 				'pluginBackgroundFilters', //common
 				'pluginScrollToTop', //common
 				'pluginLogger', //common
 			];
-			expect(props.config.plugins.length).to.equal(3);
+			expect(controller.config.plugins.length).to.equal(expectedPluginList.length);
 
-			props.config.plugins.forEach((plugin, idx) => {
+			controller.config.plugins.forEach((plugin, idx) => {
 				expect(plugin[0].name).to.equal(expectedPluginList[idx]);
 			});
 		});
@@ -97,15 +97,15 @@ describe('plugins work based on plaform setting', () => {
 
 		cy.visit('https://localhost:2222/templates/');
 
-		cy.snapController().then((props) => {
+		cy.snapController().then((controller) => {
 			const expectedPluginList = [
 				'pluginBackgroundFilters', //common
 				'pluginScrollToTop', //common
 				'pluginLogger', //common
 			];
-			expect(props.config.plugins.length).to.equal(3);
+			expect(controller.config.plugins.length).to.equal(expectedPluginList.length);
 
-			props.config.plugins.forEach((plugin, idx) => {
+			controller.config.plugins.forEach((plugin, idx) => {
 				expect(plugin[0].name).to.equal(expectedPluginList[idx]);
 			});
 		});
@@ -133,7 +133,7 @@ describe('plugins work based on plaform setting', () => {
 
 		cy.visit('https://localhost:2222/templates/');
 
-		cy.snapController().then((props) => {
+		cy.snapController().then((controller) => {
 			const expectedPluginList = [
 				'pluginBackgroundFilters', //common
 				'pluginScrollToTop', //common
@@ -141,9 +141,9 @@ describe('plugins work based on plaform setting', () => {
 				'pluginBackgroundFiltersShopify',
 				'pluginMutateResultsShopify',
 			];
-			expect(props.config.plugins.length).to.equal(5);
+			expect(controller.config.plugins.length).to.equal(expectedPluginList.length);
 
-			props.config.plugins.forEach((plugin, idx) => {
+			controller.config.plugins.forEach((plugin, idx) => {
 				expect(plugin[0].name).to.equal(expectedPluginList[idx]);
 			});
 		});
@@ -171,16 +171,16 @@ describe('plugins work based on plaform setting', () => {
 
 		cy.visit('https://localhost:2222/templates/');
 
-		cy.snapController().then((props) => {
+		cy.snapController().then((controller) => {
 			const expectedPluginList = [
 				'pluginBackgroundFilters', //common
 				'pluginScrollToTop', //common
 				'pluginLogger', //common
 				'pluginBackgroundFiltersBigcommerce',
 			];
-			expect(props.config.plugins.length).to.equal(4);
+			expect(controller.config.plugins.length).to.equal(expectedPluginList.length);
 
-			props.config.plugins.forEach((plugin, idx) => {
+			controller.config.plugins.forEach((plugin, idx) => {
 				expect(plugin[0].name).to.equal(expectedPluginList[idx]);
 			});
 		});
@@ -208,16 +208,16 @@ describe('plugins work based on plaform setting', () => {
 
 		cy.visit('https://localhost:2222/templates/');
 
-		cy.snapController().then((props) => {
+		cy.snapController().then((controller) => {
 			const expectedPluginList = [
 				'pluginBackgroundFilters', //common
 				'pluginScrollToTop', //common
 				'pluginLogger', //common
 				'pluginBackgroundFiltersMagento2',
 			];
-			expect(props.config.plugins.length).to.equal(4);
+			expect(controller.config.plugins.length).to.equal(expectedPluginList.length);
 
-			props.config.plugins.forEach((plugin, idx) => {
+			controller.config.plugins.forEach((plugin, idx) => {
 				expect(plugin[0].name).to.equal(expectedPluginList[idx]);
 			});
 		});

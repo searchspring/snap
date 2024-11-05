@@ -25,16 +25,17 @@ describe('Query', () => {
 	it('does not synchronize the input when setting is disabled', () => {
 		cy.on('window:before:load', (win) => {
 			win.mergeSnapConfig = {
-				controllers: {
-					autocomplete: [
+				autocomplete: {
+					inputSelector: 'input.searchspring-ac',
+					targets: [
 						{
-							config: {
-								settings: {
-									initializeFromUrl: false,
-								},
-							},
+							selector: 'input.searchspring-ac',
+							component: 'Autocomplete',
 						},
 					],
+					settings: {
+						initializeFromUrl: false,
+					},
 				},
 			};
 		});
@@ -42,11 +43,7 @@ describe('Query', () => {
 		cy.visit(`https://localhost:2222/templates/?q=${query}`);
 
 		cy.snapController('autocomplete').then((acController) => {
-			if (acController.config.settings.initializeFromUrl) {
-				expect(acController.store.state.input).to.equal(query);
-			} else {
-				expect(acController.store.state.input).to.equal(undefined);
-			}
+			expect(acController.store.state.input).to.equal(undefined);
 		});
 	});
 });
