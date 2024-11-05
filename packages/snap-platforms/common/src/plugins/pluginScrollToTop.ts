@@ -15,7 +15,7 @@ export const pluginScrollToTop = (cntrlr: AbstractController, config: CommonPlug
 		return;
 	}
 
-	cntrlr.on('afterStore', async (_, next) => {
+	cntrlr.on('afterSearch', async (_, next) => {
 		const options = Object.assign({ top: 0, left: 0, behavior: 'smooth' }, config.options || {});
 
 		if (config.selector) {

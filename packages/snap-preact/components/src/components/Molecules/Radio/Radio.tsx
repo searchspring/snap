@@ -24,8 +24,8 @@ const CSS = {
 			cursor: 'pointer',
 
 			'&.ss__radio--disabled': {
-				opacity: 0.5,
-				cursor: 'none',
+				opacity: 0.3,
+				cursor: 'default',
 			},
 		}),
 	native: ({ size }: Partial<RadioProps>) =>
@@ -62,7 +62,6 @@ export const Radio = observer((properties: RadioProps): JSX.Element => {
 		checkedIcon,
 		unCheckedIcon,
 		onClick,
-		size,
 		startChecked,
 		native,
 		disableA11y,
@@ -77,14 +76,13 @@ export const Radio = observer((properties: RadioProps): JSX.Element => {
 		activeIcon: {
 			name: 'active',
 			// default props
-			className: 'ss__radio__icon--active',
+			className: 'ss__radio__icon',
 			// global theme
 			...globalTheme?.components?.icon,
 			// inherited props
 			...defined({
 				color: color,
 				disableStyles,
-				size: size,
 			}),
 			// component theme overrides
 			theme: props.theme,
@@ -93,14 +91,13 @@ export const Radio = observer((properties: RadioProps): JSX.Element => {
 		inactiveIcon: {
 			name: 'inactive',
 			// default props
-			className: 'ss__radio__icon--inactive',
+			className: 'ss__radio__icon',
 			// global theme
 			...globalTheme?.components?.icon,
 			// inherited props
 			...defined({
 				color: color,
 				disableStyles,
-				size: size,
 			}),
 			// component theme overrides
 			theme: props.theme,
@@ -178,7 +175,7 @@ export const Radio = observer((properties: RadioProps): JSX.Element => {
 			) : (
 				<span
 					{...styling}
-					className={classnames('ss__radio', { 'ss__radio--disabled': disabled }, className)}
+					className={classnames('ss__radio', { 'ss__radio--disabled': disabled, 'ss__radio--active': checkedState }, className)}
 					onClick={(e) => clickFunc(e)}
 					ref={(e) => (!disableA11y ? useA11y(e) : null)}
 					{...mergedLang.radio?.all}

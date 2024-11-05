@@ -68,17 +68,8 @@ The `backgroundColor` prop specifies the background color of the indicator.
 <LoadMore pagination={controller.store.pagination} backgroundColor={'#eeeeee'} />
 ```
 
-### progressIndicator
-The `progressIndicator` prop allows you to pick from two progress indicator designs: `bar` (default) or `radial`
-
-```jsx
-<LoadMore pagination={controller.store.pagination} progressIndicator={'bar'} />
-```
-
 ### progressIndicatorWidth
-The `progressIndicatorWidth` prop sets the progress indicator width. Recommended units: `px`, `rem`, `em`, `vw`. Unsupported unit: `%` not recommended. 
-
-When `progressIndicator='bar'` the default is `300px` (bar width.) When `progressIndicator='radial'` the default is `70px` (width and height.)
+The `progressIndicatorWidth` prop sets the progress indicator width. Recommended units: `px`, `rem`, `em`, `vw`.
 
 ```jsx
 <LoadMore pagination={controller.store.pagination} progressIndicatorWidth={'300px'} />
@@ -86,8 +77,6 @@ When `progressIndicator='bar'` the default is `300px` (bar width.) When `progres
 
 ### progressIndicatorSize
 The `progressIndicatorSize` prop sets the progress indicator size. Recommended units: `px`, `rem`, `em`, `vw`. Unsupported unit: `%` not recommended. 
-
-When `progressIndicator='bar'` the default is `5px` (bar height.) When `progressIndicator='radial'` the default is `10px` (thickness between inner and outer radials)
 
 ```jsx
 <LoadMore pagination={controller.store.pagination} progressIndicatorSize={'5px'} />

@@ -100,7 +100,7 @@ export const BundledCTA = observer((properties: BundledCTAProps): JSX.Element =>
 
 					<Button
 						className={classnames('ss__recommendation-bundle__wrapper__cta__button', {
-							addedToCart: 'ss__recommendation-bundle__wrapper__cta__button--added',
+							'ss__recommendation-bundle__wrapper__cta__button--added': addedToCart,
 						})}
 						onClick={(e) => onAddToCart(e)}
 						disabled={addedToCart}

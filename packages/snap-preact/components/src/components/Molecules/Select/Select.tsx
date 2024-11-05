@@ -56,6 +56,7 @@ const CSS = {
 					color: 'initial',
 					display: 'flex',
 					alignItems: 'center',
+					gap: '5px',
 
 					'&.ss__select__select__option--selected': {
 						fontWeight: 'bold',

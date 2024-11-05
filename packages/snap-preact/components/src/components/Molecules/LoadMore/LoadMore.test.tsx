@@ -185,55 +185,6 @@ describe('LoadMore Component', () => {
 		expect(progressTextElement).not.toBeInTheDocument();
 	});
 
-	it('renders with radial indicator', () => {
-		const rendered = render(<LoadMore pagination={paginationStore} progressIndicator={'radial'} />);
-		const loadMoreElement = rendered.container.querySelector('.ss__load-more');
-
-		expect(Object.values(loadMoreElement?.classList || {}).includes('ss__load-more--radial')).toBe(true);
-
-		const radialElement = rendered.container.querySelector('.ss__load-more__progress__indicator__radial');
-		expect(radialElement).toBeInTheDocument();
-		const styles = getComputedStyle(radialElement!.querySelector('.ss__load-more__progress__indicator__radial__mask__fill')!);
-		const radialAngle = Math.max(3.6, ((360 / 100) * Math.floor((paginationStore.end / paginationStore.totalResults) * 100)) / 2);
-		expect(styles.transform).toBe(`rotate(${radialAngle}deg)`);
-	});
-
-	it('can set size and width props for radial indicator', async () => {
-		const progressIndicatorWidth = 321;
-		const progressIndicatorSize = 54;
-
-		const rendered = render(
-			<LoadMore
-				pagination={paginationStore}
-				progressIndicator={'radial'}
-				progressIndicatorWidth={`${progressIndicatorWidth}px`}
-				progressIndicatorSize={`${progressIndicatorSize}px`}
-			/>
-		);
-
-		const loadMoreIndicatorElement = rendered.container.querySelector('.ss__load-more--radial .ss__load-more__progress__indicator__radial')!;
-		expect(loadMoreIndicatorElement).toBeInTheDocument();
-		const radialIndicatorStyles = getComputedStyle(loadMoreIndicatorElement);
-		expect(radialIndicatorStyles.height).toBe(`${progressIndicatorWidth}px`);
-		expect(radialIndicatorStyles.width).toBe(`${progressIndicatorWidth}px`);
-
-		const loadMoreIndicatorRadialElement = rendered.container.querySelector('.ss__load-more--radial .ss__load-more__progress__text')!;
-		expect(loadMoreIndicatorRadialElement).toBeInTheDocument();
-		const radialIndicatorBarStyles = getComputedStyle(loadMoreIndicatorRadialElement);
-		expect(radialIndicatorBarStyles.height).toBe(`calc(${progressIndicatorWidth}px - ${progressIndicatorSize}px)`);
-		expect(radialIndicatorBarStyles.width).toBe(`calc(${progressIndicatorWidth}px - ${progressIndicatorSize}px)`);
-	});
-
-	it('renders with radial indicator with hideProgressIndicator', () => {
-		// since progress text is inside the indicator, make sure that the text is still displayed if hideProgressIndicator is true
-		const rendered = render(<LoadMore pagination={paginationStore} progressIndicator={'radial'} hideProgressIndicator={true} />);
-		const radialIndicatorElement = rendered.container.querySelector('.ss__load-more__progress__indicator');
-		const radialTextElement = rendered.container.querySelector('.ss__load-more__progress__text');
-
-		expect(radialIndicatorElement).not.toBeInTheDocument();
-		expect(radialTextElement).toBeInTheDocument();
-	});
-
 	it('renders with color and backgroundColor props', () => {
 		const colorProps = {
 			color: 'red',

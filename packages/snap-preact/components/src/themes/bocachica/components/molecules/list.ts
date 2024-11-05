@@ -22,7 +22,7 @@ const listStyleScript = ({ horizontal, theme }: ListProps) => {
 			flexDirection: horizontal ? 'row' : 'column',
 			alignItems: horizontal ? 'center' : undefined,
 			justifyItems: 'flex-start',
-			gap: '8px',
+			gap: '10px',
 		},
 
 		'.ss__list__option': {

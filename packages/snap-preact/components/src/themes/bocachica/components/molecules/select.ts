@@ -33,6 +33,8 @@ const selectStyleScript = ({ color, backgroundColor, borderColor, theme }: Selec
 			'&.ss__dropdown--open': {
 				'.ss__dropdown__button': {
 					boxShadow: '0 6px 12px 1px #0000001f',
+					borderTopLeftRadius: '3px',
+					borderTopRightRadius: '3px',
 					'.ss__select__dropdown__button__icon': {
 						transform: 'rotate(180deg)',
 					},
@@ -40,6 +42,8 @@ const selectStyleScript = ({ color, backgroundColor, borderColor, theme }: Selec
 				'.ss__dropdown__content': {
 					backgroundColor: backgroundColor || '#fff',
 					boxShadow: '0 6px 12px 1px #0000001f',
+					borderBottomLeftRadius: '3px',
+					borderBottomRightRadius: '3px',
 					zIndex: '10000',
 				},
 			},
@@ -60,6 +64,9 @@ const selectStyleScript = ({ color, backgroundColor, borderColor, theme }: Selec
 				listStyle: 'none',
 				cursor: 'pointer',
 				padding: '6px 30px',
+				display: 'flex',
+				alignItems: 'center',
+				gap: '6px',
 				color: variables?.colors?.secondary,
 				'&.ss__select__select__option--selected': {
 					background: `rgba(109,113,117,.06)`,

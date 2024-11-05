@@ -10,6 +10,7 @@ const searchInputStyleScript = ({ theme }: SearchInputProps) => {
 		alignItems: 'center',
 		justifyContent: 'center',
 		border: `1px solid ${variables?.colors?.secondary || '#ccc'}`,
+		borderRadius: '3px',
 
 		'& .ss__icon': {
 			padding: '5px',

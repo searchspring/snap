@@ -33,5 +33,5 @@ const layoutSelectorStyleScript = ({ theme }: LayoutSelectorProps) => {
 export const layoutSelector: Partial<LayoutSelectorProps> = {
 	styleScript: layoutSelectorStyleScript,
 	type: 'list',
-	label: '',
+	hideLabel: true,
 };

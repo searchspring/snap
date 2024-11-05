@@ -2,7 +2,7 @@ import { css } from '@emotion/react';
 import type { RadioProps } from '../../../../components/Molecules/Radio';
 
 // CSS in JS style script for the Radio component
-const radioStyleScript = ({ size, native, theme }: RadioProps) => {
+const radioStyleScript = ({ size, native, color, theme }: RadioProps) => {
 	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	const variables = theme?.variables;
 
@@ -29,9 +29,14 @@ const radioStyleScript = ({ size, native, theme }: RadioProps) => {
 		width: size,
 		cursor: 'pointer',
 
+		'.ss__icon': {
+			fill: color || variables?.colors.primary,
+			stroke: color || variables?.colors.primary,
+		},
+
 		'&.ss__radio--disabled': {
-			opacity: 0.5,
-			cursor: 'none',
+			opacity: 0.3,
+			cursor: 'default',
 		},
 	});
 };
