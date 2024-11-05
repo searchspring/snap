@@ -239,11 +239,12 @@ export class SearchController extends AbstractController {
 				// store element position data to scrollMap
 				if (selector || storedHref || domRect) {
 					try {
-						const stringyParams = JSON.parse(this.storage.get('lastStringyParams'));
-						const storableRequestParams = getStorableRequestParams(stringyParams);
-						const storableStringyParams = JSON.stringify(storableRequestParams);
-
-						scrollMap[storableStringyParams] = { domRect, href: storedHref, selector };
+						const lastRequest = this.storage.get('lastStringyParams');
+						if (lastRequest) {
+							const storableRequestParams = getStorableRequestParams(JSON.parse(lastRequest));
+							const storableStringyParams = JSON.stringify(storableRequestParams);
+							scrollMap[storableStringyParams] = { domRect, href: storedHref, selector };
+						}
 					} catch (err) {
 						// failed to get lastStringParams
 						this.log.warn('Failed to save scollMap!', err);
