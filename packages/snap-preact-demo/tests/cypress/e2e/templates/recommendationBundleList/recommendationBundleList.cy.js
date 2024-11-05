@@ -86,7 +86,7 @@ describe('BundledRecommendations', () => {
 				cy.get(config?.selectors?.recommendation.cta).should('exist');
 
 				//title
-				cy.get(`${config?.selectors?.recommendation.cta} .cta__subtotal__title`).should('exist').should('have.text', '2 items');
+				cy.get(`${config?.selectors?.recommendation.cta} .cta__inner__subtotal__title`).should('exist').should('have.text', '2 items');
 				//price
 				cy.get(`${config?.selectors?.recommendation.cta} .cta__inner__price__msrp`).should('exist').contains(`$${store.cart.msrp}`);
 				//strike
@@ -102,7 +102,7 @@ describe('BundledRecommendations', () => {
 				.then(() => {
 					cy.snapController(config?.selectors?.recommendation.controller).then(({ store }) => {
 						//title
-						cy.get(`${config?.selectors?.recommendation.cta} .cta__subtotal__title`).should('exist').should('have.text', '1 item');
+						cy.get(`${config?.selectors?.recommendation.cta} .cta__inner__subtotal__title`).should('exist').should('have.text', '1 item');
 						//price
 						cy.get(`${config?.selectors?.recommendation.cta} .cta__inner__price__msrp`).should('exist').contains(`$${store.cart.msrp}`);
 						//strike
