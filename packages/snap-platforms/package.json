@@ -1,6 +1,6 @@
 {
 	"name": "@searchspring/snap-platforms",
-	"version": "0.61.3",
+	"version": "0.61.4",
 	"description": "Snap Platforms Library",
 	"author": "Searchspring",
 	"license": "MIT",
@@ -18,10 +18,10 @@
 		"test:watch": "jest --watch"
 	},
 	"dependencies": {
-		"@searchspring/snap-toolbox": "^0.61.3"
+		"@searchspring/snap-toolbox": "^0.61.4"
 	},
 	"devDependencies": {
-		"@searchspring/snap-store-mobx": "^0.61.3"
+		"@searchspring/snap-store-mobx": "^0.61.4"
 	},
 	"sideEffects": false,
 	"files": [
