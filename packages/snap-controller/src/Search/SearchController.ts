@@ -247,7 +247,7 @@ export class SearchController extends AbstractController {
 						}
 					} catch (err) {
 						// failed to get lastStringParams
-						this.log.warn('Failed to save scollMap!', err);
+						this.log.warn('Failed to save srcollMap!', err);
 					}
 				}
 
