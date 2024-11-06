@@ -10,7 +10,7 @@ export const pluginBackgroundFiltersShopify = (cntrlr: AbstractController) => {
 	const backgroundFilters: PluginBackgroundFilterGlobal[] = [];
 
 	if (cntrlr.context.collection?.handle) {
-		const collectionName = cntrlr.context.collection.name.replace(/\&\#39\;/, "'");
+		const collectionName = cntrlr.context.collection.name?.replace(/\&\#39\;/, "'");
 
 		if (cntrlr.context.collection.handle == 'vendors') {
 			backgroundFilters.push({

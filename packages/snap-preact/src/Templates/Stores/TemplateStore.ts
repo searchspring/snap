@@ -135,7 +135,7 @@ export class TemplatesStore {
 		const { config, settings } = params || {};
 		this.config = config;
 
-		this.platform = config.config?.platform || 'other';
+		this.platform = config.config.platform || 'other';
 
 		this.storage = new StorageStore({ type: StorageType.local, key: 'ss-templates' });
 
