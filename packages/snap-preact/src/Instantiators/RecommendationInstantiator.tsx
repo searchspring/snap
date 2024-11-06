@@ -222,13 +222,14 @@ export class RecommendationInstantiator {
 					// using the "legacy" integration structure
 					const { profile, products, product, seed, filters, blockedItems, options, shopper, shopperId } = elemContext;
 					const combinedProducts = [].concat(products || product || seed || []);
+					const shopperIdentifier = [shopper, shopper?.id, shopperId, shopperId?.id].filter((val) => val && typeof val === 'string').pop();
 
 					const profileRequestGlobals: Partial<RecommendRequestModel> = {
 						tag: profile,
 						...defined({
 							products: combinedProducts.length ? combinedProducts : undefined,
 							cart: elemContext.cart && getArrayFunc(elemContext.cart),
-							shopper: shopper?.id || shopperId,
+							shopper: shopperIdentifier,
 							filters,
 							blockedItems,
 							profile: options,
