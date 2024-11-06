@@ -40,7 +40,12 @@ export const Toolbar = observer((properties: ToolbarProps): JSX.Element => {
 		hidePagination: false,
 	};
 
+	console.log('toolbar properties', properties);
+	console.log('toolbar globalTheme', globalTheme);
+
 	const props = mergeProps('toolbar', globalTheme, defaultProps, properties);
+
+	console.log('toolbar props', props);
 
 	const {
 		controller,

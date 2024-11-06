@@ -26,4 +26,5 @@ const toolbarStyleScript = ({ theme }: ToolbarProps) => {
 // Toolbar component props
 export const toolbar: Partial<ToolbarProps> = {
 	styleScript: toolbarStyleScript,
+	// how to target named things in here???
 };

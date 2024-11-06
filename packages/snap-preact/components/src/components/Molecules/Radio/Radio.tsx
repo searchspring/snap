@@ -67,6 +67,7 @@ export const Radio = observer((properties: RadioProps): JSX.Element => {
 		disableA11y,
 		disableStyles,
 		className,
+		size,
 		style,
 		styleScript,
 		treePath,
@@ -81,7 +82,8 @@ export const Radio = observer((properties: RadioProps): JSX.Element => {
 			...globalTheme?.components?.icon,
 			// inherited props
 			...defined({
-				color: color,
+				size,
+				color,
 				disableStyles,
 			}),
 			// component theme overrides
@@ -96,7 +98,8 @@ export const Radio = observer((properties: RadioProps): JSX.Element => {
 			...globalTheme?.components?.icon,
 			// inherited props
 			...defined({
-				color: color,
+				size,
+				color,
 				disableStyles,
 			}),
 			// component theme overrides

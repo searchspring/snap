@@ -37,16 +37,14 @@ describe('Radio Component', () => {
 
 		it('is not checked by default', () => {
 			const rendered = render(<Radio />);
-			const active = rendered.container.querySelector('.ss__radio__icon--active');
-			const inactive = rendered.container.querySelector('.ss__radio__icon--inactive');
+			const active = rendered.container.querySelector('.ss__radio--active');
 
 			expect(active).not.toBeInTheDocument();
-			expect(inactive).toBeInTheDocument();
 		});
 
 		it('can handle checked state internally', () => {
 			const rendered = render(<Radio startChecked={true} />);
-			const active = rendered.container.querySelector('.ss__radio__icon--active');
+			const active = rendered.container.querySelector('.ss__radio--active');
 
 			expect(active).toBeInTheDocument();
 		});

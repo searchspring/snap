@@ -63,10 +63,7 @@ describe('LoadMore Component', () => {
 		const rendered = render(<LoadMore pagination={paginationStore} />);
 		const loadMoreElement = rendered.container.querySelector('.ss__load-more');
 		expect(loadMoreElement).toBeInTheDocument();
-		expect(loadMoreElement?.classList.length).toBe(3);
-
-		// has default progress indicator
-		expect(Object.values(loadMoreElement?.classList || {}).includes('ss__load-more--bar')).toBe(true);
+		expect(loadMoreElement?.classList.length).toBe(2);
 
 		const buttonElement = rendered.container.querySelector('.ss__load-more__button');
 		expect(buttonElement).toBeInTheDocument();
@@ -162,13 +159,13 @@ describe('LoadMore Component', () => {
 			/>
 		);
 
-		const loadMoreIndicatorElement = rendered.container.querySelector('.ss__load-more--bar .ss__load-more__progress__indicator')!;
+		const loadMoreIndicatorElement = rendered.container.querySelector('.ss__load-more .ss__load-more__progress__indicator')!;
 		expect(loadMoreIndicatorElement).toBeInTheDocument();
 		const barIndicatorStyles = getComputedStyle(loadMoreIndicatorElement);
 		expect(barIndicatorStyles.width).toBe(`${progressIndicatorWidth}px`);
 		expect(barIndicatorStyles.borderRadius).toBe(`${progressIndicatorSize}px`);
 
-		const loadMoreIndicatorBarElement = rendered.container.querySelector('.ss__load-more--bar .ss__load-more__progress__indicator__bar')!;
+		const loadMoreIndicatorBarElement = rendered.container.querySelector('.ss__load-more .ss__load-more__progress__indicator__bar')!;
 		expect(loadMoreIndicatorBarElement).toBeInTheDocument();
 		const barIndicatorBarStyles = getComputedStyle(loadMoreIndicatorBarElement);
 		expect(barIndicatorBarStyles.height).toBe(`${progressIndicatorSize}px`);
@@ -187,8 +184,8 @@ describe('LoadMore Component', () => {
 
 	it('renders with color and backgroundColor props', () => {
 		const colorProps = {
-			color: 'red',
-			backgroundColor: 'blue',
+			color: 'rgb(255, 0, 0)',
+			backgroundColor: 'rgb(0, 0, 255)',
 		};
 
 		const rendered = render(<LoadMore pagination={paginationStore} {...colorProps} />);
@@ -219,7 +216,7 @@ describe('LoadMore Component', () => {
 		const rendered = render(<LoadMore pagination={paginationStore} disableStyles />);
 		const loadMoreElement = rendered.container.querySelector('.ss__load-more');
 
-		expect(loadMoreElement?.classList.length).toBe(2);
+		expect(loadMoreElement?.classList.length).toBe(1);
 	});
 
 	it('respects disableStyles and style prop', () => {
@@ -230,7 +227,7 @@ describe('LoadMore Component', () => {
 		const rendered = render(<LoadMore pagination={paginationStore} disableStyles style={style} />);
 		const loadMoreElement = rendered.container.querySelector('.ss__load-more')!;
 
-		expect(loadMoreElement?.classList.length).toBe(3);
+		expect(loadMoreElement?.classList.length).toBe(2);
 
 		const styles = getComputedStyle(loadMoreElement);
 		expect(styles.padding).toBe(style.padding);

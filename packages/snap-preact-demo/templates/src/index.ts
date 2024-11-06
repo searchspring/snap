@@ -31,6 +31,9 @@ new SnapTemplates({
 			overrides: {
 				components: {
 					// overrides here...
+					toolbar: {
+						hidePagination: true,
+					},
 				},
 			},
 		},
