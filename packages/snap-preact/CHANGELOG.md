@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.61.4](https://github.com/searchspring/snap/compare/v0.61.3...v0.61.4) (2024-11-06)
+
+### Bug Fixes
+
+- **preact/recommendationinstantiator:** allowing for invalid shopper integration with legacy script ([66302ef](https://github.com/searchspring/snap/commit/66302ef7d3968a8dec47755cc42ca8c595a8cf52))
+
 ## [0.61.3](https://github.com/searchspring/snap/compare/v0.61.2...v0.61.3) (2024-10-31)
 
 ### Bug Fixes

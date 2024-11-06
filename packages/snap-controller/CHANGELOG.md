@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.61.4](https://github.com/searchspring/snap/compare/v0.61.3...v0.61.4) (2024-11-06)
+
+### Bug Fixes
+
+- **controller/search:** fixing typo in warning log ([8b5a2e1](https://github.com/searchspring/snap/commit/8b5a2e1b5c26045930a661d4a76245bbd4f3ee64))
+- **controller/search:** modifying logic to prevent warning when the lastRequest is not defined ([5606a22](https://github.com/searchspring/snap/commit/5606a22c6309f4f64c22726f637bddd3f19c9002))
+
 ## [0.61.3](https://github.com/searchspring/snap/compare/v0.61.2...v0.61.3) (2024-10-31)
 
 **Note:** Version bump only for package @searchspring/snap-controller
