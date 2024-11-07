@@ -1,4 +1,4 @@
-import { pluginBackgroundFilters } from './pluginBackgroundFilters';
+import { pluginBackgroundFiltersMagento2 as pluginBackgroundFilters } from './pluginBackgroundFilters';
 import { MockClient } from '@searchspring/snap-shared';
 import { SearchStore } from '@searchspring/snap-store-mobx';
 import { UrlManager, QueryStringTranslator, reactLinker } from '@searchspring/snap-url-manager';
