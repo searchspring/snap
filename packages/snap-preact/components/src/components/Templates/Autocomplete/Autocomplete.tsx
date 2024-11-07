@@ -31,6 +31,7 @@ import { Lang, useA11y, useLang } from '../../../hooks';
 const defaultStyles: StyleScript<AutocompleteProps> = ({
 	hideFacets,
 	horizontalTerms,
+	controller,
 	input,
 	contentSlot,
 	viewportMaxHeight,
@@ -49,7 +50,7 @@ const defaultStyles: StyleScript<AutocompleteProps> = ({
 		const rect = elem?.getBoundingClientRect();
 		inputViewportOffsetBottom = rect?.bottom || 0;
 	}
-
+	const noResults = Boolean(controller.store.search?.query?.string && controller.store.results.length === 0);
 	return css({
 		'&, & *, & *:before, & *:after': {
 			boxSizing: 'border-box',
@@ -168,7 +169,7 @@ const defaultStyles: StyleScript<AutocompleteProps> = ({
 			justifyContent: 'space-between',
 			order: 3,
 			overflowY: 'auto',
-			margin: undefined,
+			margin: noResults ? '0 auto' : undefined,
 			padding: vertical ? '10px 20px' : '10px',
 
 			'.ss__banner.ss__banner--header, .ss__banner.ss__banner--banner': {
@@ -182,7 +183,7 @@ const defaultStyles: StyleScript<AutocompleteProps> = ({
 			},
 			'.ss__autocomplete__content__info': {
 				padding: '10px',
-				textAlign: 'right',
+				textAlign: noResults ? 'center' : 'right',
 
 				a: {
 					fontWeight: 'bold',
@@ -191,16 +192,6 @@ const defaultStyles: StyleScript<AutocompleteProps> = ({
 					'.ss__icon': {
 						marginLeft: '5px',
 					},
-				},
-			},
-		},
-
-		'.ss__autocomplete--no-results': {
-			'.ss__autocomplete__content': {
-				margin: '0 auto',
-
-				'.ss__autocomplete__content__info': {
-					textAlign: 'center',
 				},
 			},
 		},
@@ -455,9 +446,6 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 	if ((hideTrending && trendingActive) || (hideHistory && historyActive)) {
 		showResults = false;
 	}
-
-	const noResults = Boolean(search?.query?.string && results.length === 0);
-
 	const styling = mergeStyles<AutocompleteProps>(props, defaultStyles);
 
 	const reset = () => {
@@ -529,11 +517,7 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 		<CacheProvider>
 			<div
 				{...styling}
-				className={classnames('ss__autocomplete', className, {
-					'ss__autocomplete--only-terms': onlyTerms,
-					'ss__autocomplete--vertical': vertical,
-					'ss__autocomplete--no-results': noResults,
-				})}
+				className={classnames('ss__autocomplete', className, { 'ss__autocomplete--only-terms': onlyTerms, 'ss__autocomplete--vertical': vertical })}
 				onClick={(e) => e.stopPropagation()}
 				ref={(e) => useA11y(e, 0, true, reset)}
 			>
