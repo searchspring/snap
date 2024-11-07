@@ -11,7 +11,7 @@ import { AutocompleteControllerConfig } from '@searchspring/snap-controller';
 import { createAutocompleteController } from '../../../../../src/create';
 import { waitFor } from '@testing-library/preact';
 
-describe.skip('Autocomplete Component', () => {
+describe('Autocomplete Component', () => {
 	jest.setTimeout(10000);
 	const globals = { siteId: '8uyt2m' };
 	let acConfig: AutocompleteControllerConfig;
@@ -503,7 +503,7 @@ describe.skip('Autocomplete Component', () => {
 		});
 	});
 
-	it('can se custom slots, such as termsSlot, facetsSlot, resultsSlot, linkSlot', async () => {
+	it('can set custom slots, such as termsSlot, facetsSlot, resultsSlot, linkSlot', async () => {
 		const controller = createAutocompleteController({ client: clientConfig, controller: acConfig }, { client: mockClient });
 		await controller.bind();
 
