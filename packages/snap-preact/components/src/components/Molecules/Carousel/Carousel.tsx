@@ -233,10 +233,9 @@ export const Carousel = observer((properties: CarouselProps): JSX.Element => {
 		onPrevButtonClick,
 		onClick,
 		disableStyles,
-		// eslint-disable-next-line @typescript-eslint/no-unused-vars
-		style,
-		// eslint-disable-next-line @typescript-eslint/no-unused-vars
-		styleScript,
+		style: _,
+		styleScript: __,
+		themeStyleScript: ___,
 		modules,
 		className,
 		treePath,

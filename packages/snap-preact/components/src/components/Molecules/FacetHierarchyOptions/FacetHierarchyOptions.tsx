@@ -12,46 +12,9 @@ import type { FacetHierarchyValue, ValueFacet } from '@searchspring/snap-store-m
 import { Lang, useLang } from '../../../hooks';
 import deepmerge from 'deepmerge';
 
-const defaultStyles: StyleScript<FacetHierarchyOptionsProps> = ({ theme }) => {
-	return css({
-		'&.ss__facet-hierarchy-options--vertical': {
-			'& .ss__facet-hierarchy-options__option': {
-				display: 'flex',
-				padding: '6px 0',
-				textDecoration: 'none',
-				alignItems: 'center',
-				'&:hover': {
-					cursor: 'pointer',
-				},
-				'&.ss__facet-hierarchy-options__option--filtered': {
-					fontWeight: 'bold',
-					color: theme?.variables?.colors?.primary,
-					'&:hover': {
-						cursor: 'default',
-						background: 'unset',
-					},
-					'& ~ .ss__facet-hierarchy-options__option:not(.ss__facet-hierarchy-options__option--filtered)': {
-						paddingLeft: '16px',
-					},
-				},
-				'&.ss__facet-hierarchy-options__option--return': {
-					'&:before': {
-						content: `'\\0000ab'`,
-						padding: '0 2px 0 0',
-						color: theme?.variables?.colors?.primary,
-					},
-				},
-				'& .ss__facet-hierarchy-options__option__value': {
-					marginLeft: '8px',
-					'& .ss__facet-hierarchy-options__option__value__count': {
-						fontSize: '0.8em',
-						marginLeft: '6px',
-					},
-				},
-			},
-		},
-
-		'&.ss__facet-hierarchy-options--horizontal': {
+const defaultStyles: StyleScript<FacetHierarchyOptionsProps> = ({ theme, horizontal }) => {
+	if (horizontal) {
+		return css({
 			display: 'flex',
 			flexWrap: 'wrap',
 			'& .ss__facet-hierarchy-options__option': {
@@ -86,8 +49,45 @@ const defaultStyles: StyleScript<FacetHierarchyOptionsProps> = ({ theme }) => {
 					},
 				},
 			},
-		},
-	});
+		});
+	} else {
+		return css({
+			'& .ss__facet-hierarchy-options__option': {
+				display: 'flex',
+				padding: '6px 0',
+				textDecoration: 'none',
+				alignItems: 'center',
+				'&:hover': {
+					cursor: 'pointer',
+				},
+				'&.ss__facet-hierarchy-options__option--filtered': {
+					fontWeight: 'bold',
+					color: theme?.variables?.colors?.primary,
+					'&:hover': {
+						cursor: 'default',
+						background: 'unset',
+					},
+					'& ~ .ss__facet-hierarchy-options__option:not(.ss__facet-hierarchy-options__option--filtered)': {
+						paddingLeft: '16px',
+					},
+				},
+				'&.ss__facet-hierarchy-options__option--return': {
+					'&:before': {
+						content: `'\\0000ab'`,
+						padding: '0 2px 0 0',
+						color: theme?.variables?.colors?.primary,
+					},
+				},
+				'& .ss__facet-hierarchy-options__option__value': {
+					marginLeft: '8px',
+					'& .ss__facet-hierarchy-options__option__value__count': {
+						fontSize: '0.8em',
+						marginLeft: '6px',
+					},
+				},
+			},
+		});
+	}
 };
 
 export const FacetHierarchyOptions = observer((properties: FacetHierarchyOptionsProps): JSX.Element => {
@@ -96,7 +96,7 @@ export const FacetHierarchyOptions = observer((properties: FacetHierarchyOptions
 
 	const props = mergeProps('facetHierarchyOptions', globalTheme, defaultProps, properties);
 
-	const { values, hideCount, onClick, previewOnFocus, valueProps, facet, horizontal, className } = props;
+	const { values, hideCount, onClick, previewOnFocus, valueProps, facet, className } = props;
 
 	const styling = mergeStyles<FacetHierarchyOptionsProps>(props, defaultStyles);
 
@@ -104,14 +104,7 @@ export const FacetHierarchyOptions = observer((properties: FacetHierarchyOptions
 
 	return facetValues?.length ? (
 		<CacheProvider>
-			<div
-				{...styling}
-				className={classnames(
-					'ss__facet-hierarchy-options',
-					horizontal ? 'ss__facet-hierarchy-options--horizontal' : 'ss__facet-hierarchy-options--vertical',
-					className
-				)}
-			>
+			<div {...styling} className={classnames('ss__facet-hierarchy-options', className)}>
 				{(facetValues as FacetHierarchyValue[]).map((value) => {
 					//initialize lang
 					const defaultLang = {

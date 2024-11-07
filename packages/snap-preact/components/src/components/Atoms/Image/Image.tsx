@@ -23,12 +23,6 @@ const defaultStyles: StyleScript<ImageProps> = () => {
 			maxHeight: '100%',
 		},
 
-		'&.ss__image--visible': {
-			'& img': {
-				visibility: 'visible',
-			},
-		},
-
 		'&.ss__image--hidden': {
 			'& img': {
 				visibility: 'hidden',
@@ -48,7 +42,7 @@ export function Image(properties: ImageProps): JSX.Element {
 
 	const { alt, src, fallback, hoverSrc, lazy, onMouseOver, onMouseOut, onError, onLoad, onClick, className } = props;
 
-	const [visibility, setVisibility] = useState('hidden');
+	const [visibile, setVisibile] = useState(false);
 	const [isHovering, setHover] = useState(false);
 
 	const prevSrcRef = useRef('');
@@ -56,21 +50,21 @@ export function Image(properties: ImageProps): JSX.Element {
 		prevSrcRef.current = src;
 	});
 	if (prevSrcRef.current && prevSrcRef.current != src) {
-		setVisibility('hidden');
+		setVisibile(false);
 	}
 
 	const styling = mergeStyles<ImageProps>(props, defaultStyles);
 
 	return (
 		<CacheProvider>
-			<div {...styling} className={classnames('ss__image', `ss__image--${visibility}`, className)}>
+			<div {...styling} className={classnames('ss__image', { 'ss__image--hidden': !visibile }, className)}>
 				<img
 					src={(isHovering ? hoverSrc : src) || fallback}
 					alt={alt}
 					title={alt}
 					loading={lazy ? 'lazy' : undefined}
 					onLoad={(e: React.MouseEvent<HTMLImageElement>) => {
-						setVisibility('visible');
+						setVisibile(true);
 						onLoad && onLoad(e);
 					}}
 					onClick={(e: React.MouseEvent<HTMLImageElement>) => onClick && onClick(e)}

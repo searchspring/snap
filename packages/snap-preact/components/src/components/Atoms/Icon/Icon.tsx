@@ -27,8 +27,22 @@ export function Icon(properties: IconProps): JSX.Element {
 
 	const props = mergeProps('icon', globalTheme, defaultProps, properties);
 
-	// eslint-disable-next-line @typescript-eslint/no-unused-vars
-	const { color, icon, path, children, size, width, height, viewBox, disableStyles, className, style, styleScript, name, ...otherProps } = props;
+	const {
+		color,
+		icon,
+		path,
+		children,
+		size,
+		width,
+		height,
+		viewBox,
+		disableStyles,
+		className,
+		style: _,
+		styleScript: __,
+		themeStyleScript: ___,
+		...otherProps
+	} = props;
 
 	const iconPath = iconPaths[icon as IconType] || path;
 	const pathType = typeof iconPath;

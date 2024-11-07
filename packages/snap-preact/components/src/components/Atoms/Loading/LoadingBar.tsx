@@ -70,5 +70,3 @@ export interface LoadingBarProps extends ComponentProps {
 	backgroundColor?: string;
 	height?: string;
 }
-
-///to do

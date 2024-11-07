@@ -13,24 +13,29 @@ import { useA11y } from '../../../hooks/useA11y';
 import { Lang, useLang } from '../../../hooks';
 import deepmerge from 'deepmerge';
 
-const defaultStyles: StyleScript<CheckboxProps> = ({ size, color, theme }) => {
+const defaultStyles: StyleScript<CheckboxProps> = ({ size, color, theme, native }) => {
 	const pixelSize = isNaN(Number(size)) ? size : `${size}px`;
-	return css({
-		display: 'inline-flex',
-		alignItems: 'center',
-		justifyContent: 'center',
-		height: pixelSize,
-		width: pixelSize,
-		border: `1px solid ${color || theme?.variables?.colors?.primary || '#333'}`,
-		'&.ss__checkbox--disabled': {
-			opacity: 0.7,
-		},
-		'& .ss__checkbox__empty': {
-			display: 'inline-block',
-			width: `calc(${pixelSize} - 30%)`,
-			height: `calc(${pixelSize} - 30%)`,
-		},
-	});
+
+	if (!native) {
+		return css({
+			display: 'inline-flex',
+			alignItems: 'center',
+			justifyContent: 'center',
+			height: pixelSize,
+			width: pixelSize,
+			border: `1px solid ${color || theme?.variables?.colors?.primary || '#333'}`,
+			'&.ss__checkbox--disabled': {
+				opacity: 0.7,
+			},
+			'& .ss__checkbox__empty': {
+				display: 'inline-block',
+				width: `calc(${pixelSize} - 30%)`,
+				height: `calc(${pixelSize} - 30%)`,
+			},
+		});
+	} else {
+		return css({});
+	}
 };
 
 export const Checkbox = observer((properties: CheckboxProps): JSX.Element => {

@@ -82,7 +82,7 @@ describe('FacetHierarchyOptions generic props work', () => {
 		const rendered = render(<FacetHierarchyOptions values={hierarchyFacetMock.values as FacetHierarchyValue[]} disableStyles={true} />);
 
 		const hierarchyOption = rendered.container.querySelector('.ss__facet-hierarchy-options');
-		expect(hierarchyOption?.classList.length).toBe(2);
+		expect(hierarchyOption?.classList.length).toBe(1);
 	});
 
 	it('renders with classname', () => {

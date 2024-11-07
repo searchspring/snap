@@ -111,7 +111,7 @@ describe('SortBy Component', () => {
 
 		const element = rendered.container.querySelector('.ss__sortby__select');
 
-		expect(element?.classList).toHaveLength(4);
+		expect(element?.classList).toHaveLength(3);
 	});
 
 	describe('Sortby lang works', () => {

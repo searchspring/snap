@@ -21,8 +21,7 @@ export const RecommendationBundleEasyAdd = observer((properties: RecommendationB
 
 	const props = mergeProps('recommendationBundleEasyAdd', globalTheme, defaultProps, properties);
 
-	// eslint-disable-next-line @typescript-eslint/no-unused-vars
-	const { treePath, styleScript, theme, style, disableStyles, ...additionalProps } = props;
+	const { treePath, disableStyles, style: _, styleScript: __, themeStyleScript: ___, ...additionalProps } = props;
 
 	const subProps: RecommendationBundleEasyAddSubProps = {
 		recommendationBundle: {

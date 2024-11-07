@@ -31,7 +31,7 @@ describe('Radio Component', () => {
 			const RadioElement = rendered.container.querySelector('.ss__radio');
 
 			expect(RadioElement).toBeInTheDocument();
-			expect(RadioElement?.classList.length).toBe(3);
+			expect(RadioElement?.classList.length).toBe(2);
 			expect(RadioElement?.className.match(/disabled/)).toBeFalsy();
 		});
 
@@ -158,7 +158,7 @@ describe('Radio Component', () => {
 			const RadioElement = rendered.container.querySelector('.ss__radio');
 
 			expect(rendered.container).toBeInTheDocument();
-			expect(RadioElement?.classList.length).toBe(2);
+			expect(RadioElement?.classList.length).toBe(1);
 			expect(RadioElement?.className.match(/disabled/)).toBeFalsy();
 		});
 

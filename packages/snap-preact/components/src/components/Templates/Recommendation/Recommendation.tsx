@@ -72,10 +72,9 @@ export const Recommendation = observer((properties: RecommendationProps): JSX.El
 		resultComponent,
 		disableStyles,
 		className,
-		// eslint-disable-next-line @typescript-eslint/no-unused-vars
-		style,
-		// eslint-disable-next-line @typescript-eslint/no-unused-vars
-		styleScript,
+		style: _,
+		styleScript: __,
+		themeStyleScript: ___,
 		lazyRender,
 		vertical,
 		hideTitle,

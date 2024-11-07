@@ -44,6 +44,7 @@ export type BranchOverrideTheme = {
 	};
 };
 
+// TODO: We want to avoid passing non-component props here. This may require some refactoring of this component.
 const defaultStyles: StyleScript<BranchOverrideProps & { componentTheme: BranchOverrideTheme }> = ({ componentTheme }) => {
 	return css({
 		width: '360px',

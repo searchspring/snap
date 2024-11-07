@@ -24,7 +24,7 @@ const defaultStyles: StyleScript<DropdownProps> = ({ disableOverlay }) => {
 		'.ss__dropdown__button': {
 			cursor: `${disableOverlay ? 'default' : 'pointer'}`,
 		},
-		[`.ss__dropdown__content`]: {
+		'.ss__dropdown__content': {
 			backgroundColor: '#fff',
 			position: 'absolute',
 			minWidth: '100%',
@@ -77,8 +77,6 @@ export const Dropdown = observer((properties: DropdownProps): JSX.Element => {
 				});
 		}
 	};
-
-	// const [classId] = useState((Math.random() + 1).toString(36).substring(7));
 
 	const styling = mergeStyles<DropdownProps>(props, defaultStyles);
 

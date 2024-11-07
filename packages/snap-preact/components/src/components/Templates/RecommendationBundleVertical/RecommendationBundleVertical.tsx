@@ -24,8 +24,7 @@ export const RecommendationBundleVertical = observer((properties: Recommendation
 
 	const props = mergeProps('recommendationBundleVertical', globalTheme, defaultProps, properties);
 
-	// eslint-disable-next-line @typescript-eslint/no-unused-vars
-	const { treePath, styleScript, theme, style, disableStyles, ...additionalProps } = props;
+	const { treePath, disableStyles, style: _, styleScript: __, themeStyleScript: ___, ...additionalProps } = props;
 
 	const subProps: RecommendationBundleVerticalSubProps = {
 		recommendationBundle: {
@@ -35,6 +34,7 @@ export const RecommendationBundleVertical = observer((properties: Recommendation
 			carousel: {
 				enabled: false,
 			},
+			// controller: controller as RecommendationController,
 			separatorIcon: false,
 
 			// inherited props

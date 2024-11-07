@@ -128,10 +128,7 @@ export const Results = observer((properties: ResultsProps): JSX.Element => {
 		results = props.results?.slice(0, props.columns * props.rows);
 	}
 
-	const styling = mergeStyles<ResultsProps>(
-		{ ...props, columns: layout == ResultsLayout.list ? 1 : props.columns, gapSize: props.gapSize, theme },
-		defaultStyles
-	);
+	const styling = mergeStyles<ResultsProps>({ ...props, columns: layout == ResultsLayout.list ? 1 : props.columns }, defaultStyles);
 
 	if (typeof resultComponent === 'string') {
 		const snap = useSnap() as SnapTemplates;

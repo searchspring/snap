@@ -126,14 +126,18 @@ export const OverlayBadge = observer((properties: OverlayBadgeProps): JSX.Elemen
 					<div className="ss__overlay-badge__grid-wrapper">
 						{locations.map((location, index) => {
 							return location.slots?.map((slot) => {
-								const badgeStyling = mergeStyles<OverlayBadgeProps & { index: number; top: boolean; bottom: boolean; section: string; tag: string }>(
-									{ ...props, index, top: slot.top, bottom: slot.bottom, section: location.section, tag: slot.tag },
-									defaultBadgeStyles
-								);
+								const badgeStyles = defaultBadgeStyles({
+									...props,
+									tag: slot.tag,
+									section: location.section,
+									index,
+									top: slot.top,
+									bottom: slot.bottom,
+								});
 								return (
 									<div
 										className={classnames('ss__overlay-badge__grid-wrapper__slot', `ss__overlay-badge__grid-wrapper__slot--${slot.tag}`)}
-										{...badgeStyling}
+										css={[badgeStyles]}
 									>
 										{slot.badges.map((badge) => {
 											const BadgeComponent = useComponent(badgeComponentMap, badge.component);

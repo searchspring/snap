@@ -13,9 +13,22 @@ import { useA11y } from '../../../hooks/useA11y';
 import { Lang, useLang } from '../../../hooks';
 import deepmerge from 'deepmerge';
 
-const defaultStyles: StyleScript<RadioProps> = ({ size }) => {
-	return css({
-		'&.ss__radio--nonnative': {
+const defaultStyles: StyleScript<RadioProps> = ({ size, native }) => {
+	if (native) {
+		return css({
+			width: size,
+			height: size,
+			display: 'flex',
+			justifyContent: 'center',
+
+			'.ss__radio__input': {
+				height: `calc(${size} - 30%)`,
+				width: `calc(${size} - 30%)`,
+				margin: 'auto',
+			},
+		});
+	} else {
+		return css({
 			display: 'inline-flex',
 			alignItems: 'center',
 			justifyContent: 'center',
@@ -27,20 +40,8 @@ const defaultStyles: StyleScript<RadioProps> = ({ size }) => {
 				opacity: 0.5,
 				cursor: 'none',
 			},
-		},
-		'&.ss__radio--native': {
-			width: size,
-			height: size,
-			display: 'flex',
-			justifyContent: 'center',
-
-			'.ss__radio__input': {
-				height: `calc(${size} - 30%)`,
-				width: `calc(${size} - 30%)`,
-				margin: 'auto',
-			},
-		},
-	});
+		});
+	}
 };
 
 export const Radio = observer((properties: RadioProps): JSX.Element => {
@@ -145,7 +146,7 @@ export const Radio = observer((properties: RadioProps): JSX.Element => {
 	return (
 		<CacheProvider>
 			{native ? (
-				<div className={classnames('ss__radio', 'ss__radio--native', { 'ss__radio--disabled': disabled }, className)} {...styling}>
+				<div className={classnames('ss__radio', { 'ss__radio--disabled': disabled }, className)} {...styling}>
 					<input
 						className={classnames('ss__radio__input')}
 						aria-checked={checkedState}
@@ -159,7 +160,7 @@ export const Radio = observer((properties: RadioProps): JSX.Element => {
 			) : (
 				<span
 					{...styling}
-					className={classnames('ss__radio', 'ss__radio--nonnative', { 'ss__radio--disabled': disabled }, className)}
+					className={classnames('ss__radio', { 'ss__radio--disabled': disabled }, className)}
 					onClick={(e) => clickFunc(e)}
 					ref={(e) => (!disableA11y ? useA11y(e) : null)}
 					{...mergedLang.radio?.all}

@@ -16,10 +16,10 @@ import { Lang, useLang } from '../../../hooks';
 import deepmerge from 'deepmerge';
 import Color from 'color';
 
-const defaultStyles: StyleScript<SelectProps> = ({ color, backgroundColor, borderColor, theme }) => {
+const defaultStyles: StyleScript<SelectProps> = ({ color, backgroundColor, borderColor, theme, native }) => {
 	const lightenedPrimary = new Color(backgroundColor || color || theme?.variables?.colors?.primary).lightness(95);
-	return css({
-		'&.ss__select--nonnative': {
+	if (!native) {
+		return css({
 			display: 'inline-flex',
 			color: color,
 			'&.ss__select--disabled': {
@@ -64,8 +64,10 @@ const defaultStyles: StyleScript<SelectProps> = ({ color, backgroundColor, borde
 					},
 				},
 			},
-		},
-	});
+		});
+	} else {
+		return css({});
+	}
 };
 
 export const Select = observer((properties: SelectProps): JSX.Element => {
@@ -226,10 +228,7 @@ export const Select = observer((properties: SelectProps): JSX.Element => {
 	// options can be an Array or ObservableArray - but should have length
 	return typeof options == 'object' && options?.length ? (
 		<CacheProvider>
-			<div
-				{...styling}
-				className={classnames('ss__select', native ? 'ss__select--native' : 'ss__select--nonnative', { 'ss__select--disabled': disabled }, className)}
-			>
+			<div {...styling} className={classnames('ss__select', { 'ss__select--native': native }, { 'ss__select--disabled': disabled }, className)}>
 				{native ? (
 					<>
 						{(label || lang.buttonLabel.value) && !hideLabel && !hideLabelOnSelection && (
