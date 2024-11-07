@@ -3,14 +3,14 @@ import type { AbstractController } from '@searchspring/snap-controller';
 import type { Next } from '@searchspring/snap-event-manager';
 import type { PluginBackgroundFilterGlobal } from '../../../common/src';
 
-export const pluginBackgroundFilters = (cntrlr: AbstractController) => {
+export const pluginBackgroundFiltersShopify = (cntrlr: AbstractController) => {
 	// only applies to search controllers
 	if (cntrlr.type != 'search') return;
 
 	const backgroundFilters: PluginBackgroundFilterGlobal[] = [];
 
 	if (cntrlr.context.collection?.handle) {
-		const collectionName = cntrlr.context.collection.name.replace(/\&\#39\;/, "'");
+		const collectionName = cntrlr.context.collection.name?.replace(/\&\#39\;/, "'");
 
 		if (cntrlr.context.collection.handle == 'vendors') {
 			backgroundFilters.push({

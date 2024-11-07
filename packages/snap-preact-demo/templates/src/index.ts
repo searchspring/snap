@@ -1,9 +1,10 @@
 import { SnapTemplates } from '@searchspring/snap-preact';
-// import { css } from '@searchspring/snap-preact/components';
-// import { CustomResult } from './components/Result';
-// import { globalStyles } from './styles';
+import { globalStyles } from './styles';
+import deepmerge from 'deepmerge';
+import { combineMerge } from '../../snap/src/middleware/functions';
+import { SnapTemplatesConfig } from '@searchspring/snap-preact';
 
-new SnapTemplates({
+let config: SnapTemplatesConfig = {
 	config: {
 		siteId: '8uyt2m',
 		language: 'en',
@@ -13,9 +14,6 @@ new SnapTemplates({
 	components: {
 		result: {
 			CustomResult: async () => (await import('./components/Result')).CustomResult,
-		},
-		badge: {
-			// CustomPill: async () => (await import('./components/Result')).Result,
 		},
 	},
 	themes: {
@@ -29,38 +27,93 @@ new SnapTemplates({
 					accent: '#333333',
 				},
 			},
+			style: globalStyles,
 			overrides: {
 				components: {
-					// overrides here...
-					// button: {
-					// 	backgroundColor: 'red',
-					// 	// @ts-ignore - test
-					// 	styleScript: (props) => {
-					// 		return css({
-					// 			backgroundColor: `${props.backgroundColor || 'pink'}`
-					// 		});
-					// 	},
-					// 	style: {
-					// 		backgroundColor: 'green',
-					// 	}
-					// },
-					// recommendationBundle: {
-					// 	style: {
-					// 		'& .ss__button': {
-					// 			backgroundColor: 'blue',
-					// 		}
-					// 	},
-					// 	// @ts-ignore - test
-					// 	styleScript: (props) => {
-					// 		return css({
-					// 			'& .ss__button': {
-					// 				// backgroundColor: 'orange',
-					// 				margin: '11px'
-					// 			}
-					// 		});
-					// 	},
-					// }
+					recommendation: {
+						lazyRender: {
+							enabled: false,
+						},
+					},
+					recommendationBundle: {
+						lazyRender: {
+							enabled: false,
+						},
+					},
+					noResults: {
+						templates: {
+							recommendation: {
+								enabled: true,
+								component: 'Recommendation',
+								config: {
+									tag: 'similar',
+								},
+							},
+						},
+					},
+					toolbar: {
+						hidePerPage: true,
+					},
+
+					'toolbar.top': {
+						hidePerPage: true,
+						hidePagination: true,
+					},
+
+					'search toolbar.top': {
+						hidePerPage: false,
+						hidePagination: false,
+					},
+
+					'search toolbar': {
+						hidePerPage: false,
+					},
+
+					'search toolbar.bottom': {
+						hidePerPage: false,
+						hidePagination: false,
+					},
 				},
+				layoutOptions: [
+					{
+						value: 2,
+						label: 'two',
+						overrides: {
+							components: {
+								toolbar: {
+									hideSortBy: true,
+								},
+								results: {
+									columns: 2,
+								},
+							},
+						},
+					},
+					{
+						value: 4,
+						label: 'four',
+						default: true,
+						overrides: {
+							components: {
+								results: {
+									columns: 4,
+								},
+							},
+						},
+					},
+				],
+			},
+		},
+	},
+	recommendation: {
+		email: {
+			Email: {
+				component: 'RecommendationEmail',
+			},
+		},
+		default: {
+			Default: {
+				component: 'Recommendation',
 			},
 		},
 	},
@@ -68,9 +121,7 @@ new SnapTemplates({
 		targets: [
 			{
 				selector: '#searchspring-layout',
-				// theme: 'myTheme',
 				component: 'Search',
-				// resultComponent: 'CustomResult',
 			},
 		],
 	},
@@ -79,10 +130,14 @@ new SnapTemplates({
 		targets: [
 			{
 				selector: 'input.searchspring-ac',
-				// theme: 'myTheme',
 				component: 'Autocomplete',
-				// resultComponent: 'CustomResult',
 			},
 		],
 	},
-});
+};
+
+if (window.mergeSnapConfig) {
+	config = deepmerge(config, window.mergeSnapConfig, { arrayMerge: combineMerge });
+}
+
+new SnapTemplates(config);
