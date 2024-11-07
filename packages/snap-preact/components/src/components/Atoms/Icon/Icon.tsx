@@ -41,6 +41,7 @@ export function Icon(properties: IconProps): JSX.Element {
 		style: _,
 		styleScript: __,
 		themeStyleScript: ___,
+		name: ____,
 		...otherProps
 	} = props;
 

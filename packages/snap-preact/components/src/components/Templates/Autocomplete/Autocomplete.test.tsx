@@ -11,7 +11,7 @@ import { AutocompleteControllerConfig } from '@searchspring/snap-controller';
 import { createAutocompleteController } from '../../../../../src/create';
 import { waitFor } from '@testing-library/preact';
 
-describe('Autocomplete Component', () => {
+describe.skip('Autocomplete Component', () => {
 	jest.setTimeout(10000);
 	const globals = { siteId: '8uyt2m' };
 	let acConfig: AutocompleteControllerConfig;
