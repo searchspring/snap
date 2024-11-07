@@ -318,6 +318,11 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 	}
 
 	let input: string | Element | null = props.input;
+	if (input) {
+		if (typeof input === 'string') {
+			input = document.querySelector(input);
+		}
+	}
 
 	const {
 		hideTerms,
