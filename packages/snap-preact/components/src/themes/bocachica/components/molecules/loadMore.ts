@@ -54,5 +54,5 @@ const loadMoreStyleScript = ({ pagination, progressIndicatorWidth, progressIndic
 
 // LoadMore component props
 export const loadMore: Partial<LoadMoreProps> = {
-	styleScript: loadMoreStyleScript,
+	themeStyleScript: loadMoreStyleScript,
 };

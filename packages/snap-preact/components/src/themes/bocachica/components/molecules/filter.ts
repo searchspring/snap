@@ -32,5 +32,5 @@ const filterStyleScript = ({ theme }: FilterProps) => {
 
 // Filter component props
 export const filter: Partial<FilterProps> = {
-	styleScript: filterStyleScript,
+	themeStyleScript: filterStyleScript,
 };

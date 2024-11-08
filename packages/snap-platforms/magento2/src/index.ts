@@ -1,4 +1,4 @@
 export * from './addToCart';
 export * from './getUenc';
 export * from './getFormKey';
-export * from './plugins/pluginBackgroundFilters';
+export { pluginBackgroundFiltersMagento2 as pluginBackgroundFilters } from './plugins/pluginBackgroundFilters';

@@ -4,48 +4,50 @@ import { css } from '@emotion/react';
 import classnames from 'classnames';
 import { observer } from 'mobx-react';
 
-import { ComponentProps, RootNodeProperties } from '../../../types';
+import { ComponentProps, StyleScript } from '../../../types';
 import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { useA11y } from '../../../hooks/useA11y';
-import { defined, mergeProps } from '../../../utilities';
+import { defined, mergeProps, mergeStyles } from '../../../utilities';
 import { Icon, IconProps, IconType } from '../Icon';
 import { Lang, useLang } from '../../../hooks';
 import deepmerge from 'deepmerge';
 import Color from 'color';
 
-const CSS = {
-	button: ({ color, backgroundColor, borderColor, theme }: Partial<ButtonProps>) => {
-		const lightenedPrimary = new Color(backgroundColor || color || theme?.variables?.colors?.primary).lightness(95);
+const defaultStyles: StyleScript<ButtonProps> = ({ native, color, backgroundColor, borderColor, theme }) => {
+	const lightenedPrimary = new Color(backgroundColor || color || theme?.variables?.colors?.primary).lightness(95);
 
-		return css({
-			display: 'inline-flex',
-			alignItems: 'center',
-			padding: '5px 10px',
-			position: 'relative',
-			color: color || theme?.variables?.colors?.primary,
-			outline: 0,
-			backgroundColor: backgroundColor || '#fff',
-			border: `1px solid ${borderColor || color || theme?.variables?.colors?.primary || '#333'}`,
-			'&:not(.ss__button--disabled):hover': {
-				cursor: 'pointer',
-				backgroundColor: lightenedPrimary.hex() || '#f8f8f8',
+	// no styling on native
+	if (native) {
+		return css({});
+	}
+
+	return css({
+		display: 'inline-flex',
+		alignItems: 'center',
+		padding: '5px 10px',
+		position: 'relative',
+		color: color || theme?.variables?.colors?.primary,
+		outline: 0,
+		backgroundColor: backgroundColor || '#fff',
+		border: `1px solid ${borderColor || color || theme?.variables?.colors?.primary || '#333'}`,
+		'&:not(.ss__button--disabled):hover': {
+			cursor: 'pointer',
+			backgroundColor: lightenedPrimary.hex() || '#f8f8f8',
+		},
+		'&.ss__button--disabled': {
+			opacity: 0.3,
+			backgroundColor: 'initial',
+			'&:hover': {
+				cursor: 'default',
 			},
-			'&.ss__button--disabled': {
-				opacity: 0.3,
-				backgroundColor: 'initial',
-				'&:hover': {
-					cursor: 'default',
-				},
-			},
-			'.ss__button__content': {
-				width: '100%',
-			},
-			label: {
-				cursor: 'pointer',
-			},
-		});
-	},
-	native: ({}) => css({}),
+		},
+		'.ss__button__content': {
+			width: '100%',
+		},
+		label: {
+			cursor: 'pointer',
+		},
+	});
 };
 
 export const Button = observer((properties: ButtonProps): JSX.Element => {
@@ -66,10 +68,11 @@ export const Button = observer((properties: ButtonProps): JSX.Element => {
 		disableStyles,
 		className,
 		icon,
-		style,
-		styleScript,
 		lang,
 		treePath,
+		style: _,
+		styleScript: __,
+		themeStyleScript: ___,
 		...additionalProps
 	} = props;
 
@@ -89,24 +92,11 @@ export const Button = observer((properties: ButtonProps): JSX.Element => {
 		},
 	};
 
-	const styling: RootNodeProperties = { 'ss-name': props.name };
-	const stylingProps = props;
-
-	if (styleScript && !disableStyles) {
-		styling.css = [styleScript(stylingProps), style];
-	} else if (!disableStyles) {
-		if (native) {
-			styling.css = [CSS.native(stylingProps), style];
-		} else {
-			styling.css = [CSS.button(stylingProps), style];
-		}
-	} else if (style) {
-		styling.css = [style];
-	}
+	const styling = mergeStyles<ButtonProps>(props, defaultStyles);
 
 	const elementProps = {
 		...styling,
-		className: classnames('ss__button', { 'ss__button--disabled': disabled }, className),
+		className: classnames('ss__button', { 'ss__button--native': native, 'ss__button--disabled': disabled }, className),
 		disabled,
 		onClick: (e: React.MouseEvent<HTMLElement, MouseEvent>) => !disabled && onClick && onClick(e),
 		...additionalProps,

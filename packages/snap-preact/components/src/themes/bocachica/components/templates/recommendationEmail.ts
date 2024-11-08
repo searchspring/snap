@@ -10,5 +10,5 @@ const recommendationEmailStyleScript = () => {
 
 // RecommendationGrid component props
 export const recommendationEmail: Partial<RecommendationEmailProps> = {
-	styleScript: recommendationEmailStyleScript,
+	themeStyleScript: recommendationEmailStyleScript,
 };

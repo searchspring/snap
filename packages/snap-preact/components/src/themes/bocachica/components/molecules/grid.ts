@@ -105,7 +105,7 @@ const gridStyleScript = ({ theme, columns, gapSize, disableOverflowAction }: Par
 
 // Grid component props
 export const grid: Partial<GridProps> = {
-	styleScript: gridStyleScript,
+	themeStyleScript: gridStyleScript,
 	hideShowLess: true,
 	overflowButtonInGrid: true,
 };

@@ -95,8 +95,8 @@ describe('LoadMore Component', () => {
 		expect(Object.values(loadMoreElement?.classList || {}).includes('ss__load-more--loading')).toBe(true);
 
 		const buttonElement = rendered.container.querySelector('.ss__load-more__button');
-		expect(buttonElement).toHaveAttribute('disabled');
-		expect(Object.values(buttonElement?.classList || {}).includes('ss__button--disabled')).toBe(true);
+		//disabled attribute messes with screen reader. so we just visually disabled with css.
+		expect(buttonElement).not.toHaveAttribute('disabled');
 	});
 
 	it('renders different loading icon using loadingIcon prop', () => {

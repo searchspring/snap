@@ -24,5 +24,5 @@ const overlayStyleScript = ({ color, transitionSpeed, theme }: OverlayProps) => 
 
 // Overlay component props
 export const overlay: Partial<OverlayProps> = {
-	styleScript: overlayStyleScript,
+	themeStyleScript: overlayStyleScript,
 };

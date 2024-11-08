@@ -1,3 +1,3 @@
 export * from './addToCart';
-export * from './plugins/pluginBackgroundFilters';
-export * from './plugins/pluginMutateResults';
+export { pluginBackgroundFiltersShopify as pluginBackgroundFilters } from './plugins/pluginBackgroundFilters';
+export { pluginMutateResultsShopify as pluginMutateResults, ShopifyPluginMutateResultsConfig } from './plugins/pluginMutateResults';

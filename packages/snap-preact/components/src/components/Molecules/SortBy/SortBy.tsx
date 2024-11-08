@@ -4,8 +4,8 @@ import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
 
 import { Theme, useTheme, CacheProvider } from '../../../providers';
-import { defined, mergeProps } from '../../../utilities';
-import { ComponentProps, ListOption, RootNodeProperties } from '../../../types';
+import { defined, mergeProps, mergeStyles } from '../../../utilities';
+import { ComponentProps, ListOption, StyleScript } from '../../../types';
 import { Select, SelectProps } from '../Select';
 import { SearchSortingStore } from '@searchspring/snap-store-mobx';
 import type { SearchController } from '@searchspring/snap-controller';
@@ -14,14 +14,13 @@ import { List, ListProps } from '../List';
 import { Lang } from '../../../hooks';
 import deepmerge from 'deepmerge';
 
-const CSS = {
-	sortBy: ({}: Partial<SortByProps>) =>
-		css({
-			'.ss__button__content': {
-				display: 'flex',
-				alignItems: 'center',
-			},
-		}),
+const defaultStyles: StyleScript<SortByProps> = () => {
+	return css({
+		'.ss__button__content': {
+			display: 'flex',
+			alignItems: 'center',
+		},
+	});
 };
 
 export const SortBy = observer((properties: SortByProps): JSX.Element => {
@@ -34,7 +33,7 @@ export const SortBy = observer((properties: SortByProps): JSX.Element => {
 
 	const props = mergeProps('sortBy', globalTheme, defaultProps, properties);
 
-	const { sorting, type, controller, hideLabel, disableStyles, className, style, styleScript, treePath } = props;
+	const { sorting, type, controller, hideLabel, disableStyles, className, treePath } = props;
 	let label = props.label;
 
 	const store = sorting || controller?.store?.sorting;
@@ -78,16 +77,7 @@ export const SortBy = observer((properties: SortByProps): JSX.Element => {
 		},
 	};
 
-	const styling: RootNodeProperties = { 'ss-name': props.name };
-	const stylingProps = props;
-
-	if (styleScript && !disableStyles) {
-		styling.css = [styleScript(stylingProps), style];
-	} else if (!disableStyles) {
-		styling.css = [CSS.sortBy(stylingProps), style];
-	} else if (style) {
-		styling.css = [style];
-	}
+	const styling = mergeStyles<SortByProps>(props, defaultStyles);
 
 	//initialize lang
 	const defaultLang = {

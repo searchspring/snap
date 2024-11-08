@@ -5,42 +5,41 @@ import classnames from 'classnames';
 import { observer } from 'mobx-react';
 
 import { Theme, useTheme, CacheProvider } from '../../../providers';
-import { ComponentProps, RootNodeProperties } from '../../../types';
-import { defined, mergeProps } from '../../../utilities';
+import { ComponentProps, StyleScript } from '../../../types';
+import { defined, mergeProps, mergeStyles } from '../../../utilities';
 import { Checkbox, CheckboxProps } from '../Checkbox/Checkbox';
 import { createHoverProps } from '../../../toolbox';
 import type { FacetValue, ValueFacet } from '@searchspring/snap-store-mobx';
 import { Lang, useLang } from '../../../hooks';
 import deepmerge from 'deepmerge';
 
-const CSS = {
-	list: ({ theme, horizontal, hideCheckbox }: Partial<FacetListOptionsProps>) =>
-		css({
-			display: horizontal ? 'flex' : undefined,
-			flexWrap: horizontal ? 'wrap' : undefined,
+const defaultStyles: StyleScript<FacetListOptionsProps> = ({ horizontal, theme, hideCheckbox }) => {
+	return css({
+		display: horizontal ? 'flex' : undefined,
+		flexWrap: horizontal ? 'wrap' : undefined,
 
-			'& .ss__facet-list-options__option': {
-				display: horizontal ? undefined : 'flex',
-				alignItems: horizontal ? undefined : 'center',
-				flex: horizontal ? '0 1 auto' : undefined,
-				padding: '6px',
-				textDecoration: 'none',
-				'&:hover': {
-					cursor: 'pointer',
-				},
-				'&.ss__facet-list-options__option--filtered': {
-					fontWeight: 'bold',
-					color: theme?.variables?.colors?.primary,
-				},
-				'& .ss__facet-list-options__option__value': {
-					marginLeft: hideCheckbox ? '' : '8px',
-					'& .ss__facet-list-options__option__value__count': {
-						fontSize: '0.8em',
-						marginLeft: '6px',
-					},
+		'& .ss__facet-list-options__option': {
+			display: horizontal ? undefined : 'flex',
+			alignItems: horizontal ? undefined : 'center',
+			flex: horizontal ? '0 1 auto' : undefined,
+			padding: '6px',
+			textDecoration: 'none',
+			'&:hover': {
+				cursor: 'pointer',
+			},
+			'&.ss__facet-list-options__option--filtered': {
+				fontWeight: 'bold',
+				color: theme?.variables?.colors?.primary,
+			},
+			'& .ss__facet-list-options__option__value': {
+				marginLeft: hideCheckbox ? '' : '8px',
+				'& .ss__facet-list-options__option__value__count': {
+					fontSize: '0.8em',
+					marginLeft: '6px',
 				},
 			},
-		}),
+		},
+	});
 };
 
 export const FacetListOptions = observer((properties: FacetListOptionsProps): JSX.Element => {
@@ -51,8 +50,7 @@ export const FacetListOptions = observer((properties: FacetListOptionsProps): JS
 
 	const props = mergeProps('facetListOptions', globalTheme, defaultProps, properties);
 
-	const { values, hideCheckbox, hideCount, onClick, previewOnFocus, valueProps, facet, disableStyles, className, style, styleScript, treePath } =
-		props;
+	const { values, hideCheckbox, hideCount, onClick, previewOnFocus, valueProps, facet, disableStyles, className, treePath } = props;
 
 	const subProps: FacetListOptionsSubProps = {
 		checkbox: {
@@ -70,16 +68,7 @@ export const FacetListOptions = observer((properties: FacetListOptionsProps): JS
 		},
 	};
 
-	const styling: RootNodeProperties = { 'ss-name': props.name };
-	const stylingProps = props;
-
-	if (styleScript && !disableStyles) {
-		styling.css = [styleScript(stylingProps), style];
-	} else if (!disableStyles) {
-		styling.css = [CSS.list(stylingProps), style];
-	} else if (style) {
-		styling.css = [style];
-	}
+	const styling = mergeStyles<FacetListOptionsProps>(props, defaultStyles);
 
 	const facetValues = values || facet?.refinedValues;
 

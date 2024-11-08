@@ -4,8 +4,8 @@ import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
 import type { SearchController } from '@searchspring/snap-controller';
 import { Results, ResultsProps } from '../../Organisms/Results';
-import { defined, mergeProps } from '../../../utilities';
-import { ComponentProps, ListOption, ResultComponent, RootNodeProperties } from '../../../types';
+import { defined, mergeProps, mergeStyles } from '../../../utilities';
+import { ComponentProps, ListOption, ResultComponent, StyleScript } from '../../../types';
 import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { Sidebar, SidebarProps } from '../../Organisms/Sidebar';
 import { Toolbar, ToolbarProps } from '../../Organisms/Toolbar';
@@ -18,37 +18,36 @@ import { ContentType, SearchFilterStore } from '@searchspring/snap-store-mobx';
 import { useState } from 'preact/hooks';
 import deepmerge from 'deepmerge';
 
-const CSS = {
-	Search: ({}: Partial<SearchProps>) =>
-		css({
-			'.ss__search__content-section': {
-				display: 'flex',
-				minHeight: '600px',
-				marginTop: '1.5em',
-				gap: '1.5em',
-			},
+const defaultStyles: StyleScript<SearchProps> = () => {
+	return css({
+		'.ss__search__content-section': {
+			display: 'flex',
+			minHeight: '600px',
+			marginTop: '1.5em',
+			gap: '1.5em',
+		},
 
-			'.ss__search__header-section__toolbar--top-toolbar': {
-				justifyContent: 'flex-end',
-			},
+		'.ss__search__header-section__toolbar--top-toolbar': {
+			justifyContent: 'flex-end',
+		},
 
-			'.ss__search__content__toolbar--middle-toolbar': {
-				justifyContent: 'flex-start',
-			},
+		'.ss__search__content__toolbar--middle-toolbar': {
+			justifyContent: 'flex-start',
+		},
 
-			'.ss__sidebar': {
-				flex: '0 1 auto',
-				width: '270px',
-			},
+		'.ss__sidebar': {
+			flex: '0 1 auto',
+			width: '270px',
+		},
 
-			'.ss__search__content': {
-				width: '100%',
-				boxSizing: 'border-box',
-				display: 'flex',
-				flexDirection: 'column',
-				gap: '1em',
-			},
-		}),
+		'.ss__search__content': {
+			width: '100%',
+			boxSizing: 'border-box',
+			display: 'flex',
+			flexDirection: 'column',
+			gap: '1em',
+		},
+	});
 };
 
 export const Search = observer((properties: SearchProps): JSX.Element => {
@@ -65,8 +64,6 @@ export const Search = observer((properties: SearchProps): JSX.Element => {
 		disableStyles,
 		className,
 		controller,
-		style,
-		styleScript,
 		hideSidebar,
 		hideSearchHeader,
 		hideMerchandisingBanners,
@@ -227,16 +224,7 @@ export const Search = observer((properties: SearchProps): JSX.Element => {
 		},
 	};
 
-	const styling: RootNodeProperties = { 'ss-name': props.name };
-	const stylingProps = props;
-
-	if (styleScript && !disableStyles) {
-		styling.css = [styleScript(stylingProps), style];
-	} else if (!disableStyles) {
-		styling.css = [CSS.Search(stylingProps), style];
-	} else if (style) {
-		styling.css = [style];
-	}
+	const styling = mergeStyles<SearchProps>(props, defaultStyles);
 
 	let hideLeftBanner;
 	let hideHeaderBanner;

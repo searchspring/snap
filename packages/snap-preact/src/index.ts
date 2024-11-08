@@ -6,3 +6,4 @@ export * from './create';
 
 export type { SnapConfig } from './Snap';
 export type { SnapTemplatesConfig } from './Templates';
+export type { GlobalThemeStyleScript } from './types';

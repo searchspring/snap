@@ -81,7 +81,7 @@ const selectStyleScript = ({ color, backgroundColor, borderColor, theme }: Selec
 
 // Select component props
 export const select: Partial<SelectProps> = {
-	styleScript: selectStyleScript,
+	themeStyleScript: selectStyleScript,
 	iconClose: 'angle-down',
 	iconOpen: 'angle-down',
 };

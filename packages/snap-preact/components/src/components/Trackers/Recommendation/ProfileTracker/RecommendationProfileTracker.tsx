@@ -4,15 +4,16 @@ import { useRef } from 'preact/hooks';
 import { observer } from 'mobx-react';
 import { useIntersection } from '../../../../hooks';
 import type { RecommendationController } from '@searchspring/snap-controller';
-import { ComponentProps, RootNodeProperties } from '../../../../types';
+import { ComponentProps, StyleScript } from '../../../../types';
 import classnames from 'classnames';
+import { mergeStyles } from '../../../../utilities';
 
-const CSS = {
-	RecommendationProfileTracker: ({}: Partial<RecommendationProfileTrackerProps>) => css({}),
+const defaultStyles: StyleScript<RecommendationProfileTrackerProps> = () => {
+	return css({});
 };
 
 export const RecommendationProfileTracker = observer((properties: RecommendationProfileTrackerProps): JSX.Element => {
-	const { children, controller, className, style, styleScript, disableStyles } = properties;
+	const { children, controller, className } = properties;
 
 	const childs = toChildArray(children);
 
@@ -28,16 +29,7 @@ export const RecommendationProfileTracker = observer((properties: Recommendation
 	// takes care of rendering profile
 	childs.length && controller.track.render();
 
-	const styling: RootNodeProperties = { 'ss-name': properties.name };
-	const stylingProps = properties;
-
-	if (styleScript && !disableStyles) {
-		styling.css = [styleScript(stylingProps), style];
-	} else if (!disableStyles) {
-		styling.css = [CSS.RecommendationProfileTracker(stylingProps), style];
-	} else if (style) {
-		styling.css = [style];
-	}
+	const styling = mergeStyles<RecommendationProfileTrackerProps>(properties, defaultStyles);
 
 	return childs.length ? (
 		<div

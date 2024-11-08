@@ -4,11 +4,10 @@ import { jsx, css, keyframes } from '@emotion/react';
 import classnames from 'classnames';
 import { observer } from 'mobx-react-lite';
 import deepmerge from 'deepmerge';
-import Color from 'color';
 
 import { Theme, useTheme, CacheProvider } from '../../../providers';
-import { ComponentProps, RootNodeProperties } from '../../../types';
-import { defined, mergeProps } from '../../../utilities';
+import { ComponentProps, StyleScript } from '../../../types';
+import { defined, mergeProps, mergeStyles } from '../../../utilities';
 import { Lang, useIntersection, useLang } from '../../../hooks';
 import type { SearchPaginationStore } from '@searchspring/snap-store-mobx';
 import type { SearchController } from '@searchspring/snap-controller';
@@ -16,54 +15,57 @@ import { Button, ButtonProps } from '../../Atoms/Button';
 import { Icon, IconProps, IconType } from '../../Atoms/Icon';
 import { useFuncDebounce } from '../../../hooks';
 
-const CSS = {
-	LoadMore: ({ pagination, progressIndicatorWidth, progressIndicatorSize, color, backgroundColor, theme }: Partial<LoadMoreProps>) => {
-		const barColour = new Color(color || theme?.variables?.colors.accent || '#333');
-		const backgroundColour = backgroundColor ? new Color(backgroundColor) : barColour.lightness(90);
+const defaultStyles: StyleScript<LoadMoreProps> = ({ pagination, progressIndicatorWidth, progressIndicatorSize, color, backgroundColor, theme }) => {
+	return css({
+		display: 'flex',
+		flexDirection: 'column',
+		alignItems: 'center',
+		gap: '20px',
 
-		return css({
-			display: 'flex',
-			flexDirection: 'column',
+		'& .ss__load-more__button--disabled': {
+			opacity: 0.7,
+			borderColor: 'rgba(51,51,51,0.7)',
+			backgroundColor: 'initial',
+			pointerEvents: 'none',
+			'&:hover': {
+				cursor: 'default',
+			},
+		},
+		'& .ss__load-more__button--hidden': {
+			display: 'none',
+		},
+		'& .ss__button': {
 			alignItems: 'center',
-			gap: '20px',
-			'.ss__load-more__button--hidden': {
-				display: 'none',
-			},
-			'.ss__button': {
-				'.ss__button__content': {
-					display: 'inline-flex',
-					alignItems: 'center',
-					gap: '5px',
-				},
-			},
-			'.ss__load-more__icon': {
-				animation: `${keyframes({
-					'0%': { transform: `rotate(0deg)` },
-					'100%': { transform: `rotate(360deg)` },
-				})} linear 1s infinite`,
-			},
-			'.ss__load-more__progress': {
+		},
+		'& .ss__load-more__icon': {
+			marginLeft: '5px',
+			animation: `${keyframes({
+				'0%': { transform: `rotate(0deg)` },
+				'100%': { transform: `rotate(360deg)` },
+			})} linear 1s infinite`,
+		},
+		'&.ss__load-more': {
+			'& .ss__load-more__progress': {
 				display: 'flex',
 				flexDirection: 'column',
-				alignItems: 'center',
 				gap: '5px',
-				'.ss__load-more__progress__indicator': {
+				'& .ss__load-more__progress__indicator': {
 					width: progressIndicatorWidth,
-					background: backgroundColour.hex(),
+					background: backgroundColor || theme?.variables?.colors?.secondary || '#f8f8f8',
 					borderRadius: progressIndicatorSize,
-					'.ss__load-more__progress__indicator__bar': {
+					'& .ss__load-more__progress__indicator__bar': {
 						width: pagination ? `${(pagination.end / pagination.totalResults) * 100}%` : '',
-						background: barColour.hex(),
+						background: color || theme?.variables?.colors?.primary || '#ccc',
 						borderRadius: progressIndicatorSize,
 						height: progressIndicatorSize,
 					},
 				},
-				'.ss__load-more__progress__text': {
+				'& .ss__load-more__progress__text': {
 					textAlign: 'center',
 				},
 			},
-		});
-	},
+		},
+	});
 };
 
 export const LoadMore = observer((properties: LoadMoreProps): JSX.Element => {
@@ -92,8 +94,6 @@ export const LoadMore = observer((properties: LoadMoreProps): JSX.Element => {
 		loadingIcon,
 		disableStyles,
 		className,
-		style,
-		styleScript,
 		treePath,
 	} = props;
 
@@ -109,7 +109,6 @@ export const LoadMore = observer((properties: LoadMoreProps): JSX.Element => {
 				{ 'ss__load-more__button--hidden': isLoading && loadingLocation === 'outside' },
 				{ 'ss__load-more__button--disabled': isButtonDisabled }
 			),
-			disabled: isButtonDisabled,
 			// global theme
 			...globalTheme?.components?.button,
 			// inherited props
@@ -139,16 +138,7 @@ export const LoadMore = observer((properties: LoadMoreProps): JSX.Element => {
 		return <Fragment></Fragment>;
 	}
 
-	const styling: RootNodeProperties = { 'ss-name': props.name };
-	const stylingProps = { ...props, pagination: store };
-
-	if (styleScript && !disableStyles) {
-		styling.css = [styleScript(stylingProps), style];
-	} else if (!disableStyles) {
-		styling.css = [CSS.LoadMore(stylingProps), style];
-	} else if (style) {
-		styling.css = [style];
-	}
+	const styling = mergeStyles<LoadMoreProps>({ ...props, pagination: store }, defaultStyles);
 
 	const autoProps: { ref?: MutableRef<null> } = {};
 	if (autoFetch) {
@@ -228,7 +218,9 @@ export const LoadMore = observer((properties: LoadMoreProps): JSX.Element => {
 									<div className={`ss__load-more__progress__indicator__bar`}></div>
 								</div>
 							)}
-							{!hideProgressText && <div className={'ss__load-more__progress__text'} {...mergedLang.progressText?.all}></div>}
+							{!hideProgressText && (
+								<div aria-atomic="true" aria-live="polite" className={'ss__load-more__progress__text'} {...mergedLang.progressText?.all}></div>
+							)}
 						</Fragment>
 					</div>
 				)}

@@ -6,7 +6,7 @@ import classnames from 'classnames';
 import { observer } from 'mobx-react';
 import deepmerge from 'deepmerge';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { defined, mergeProps } from '../../../utilities';
+import { defined, mergeProps, mergeStyles } from '../../../utilities';
 import { Navigation, Pagination, A11y } from 'swiper/modules';
 import { Icon, IconProps } from '../../Atoms/Icon/Icon';
 import type { Swiper as SwiperTypes } from 'swiper';
@@ -15,134 +15,133 @@ import type { PaginationOptions } from 'swiper/types/modules/pagination';
 import type { NavigationOptions } from 'swiper/types/modules/navigation';
 
 import { Theme, useTheme, CacheProvider } from '../../../providers';
-import { ComponentProps, BreakpointsProps, RootNodeProperties } from '../../../types';
+import { ComponentProps, BreakpointsProps, StyleScript } from '../../../types';
 import { useDisplaySettings } from '../../../hooks/useDisplaySettings';
 
-const CSS = {
-	carousel: ({ theme, vertical }: Partial<CarouselProps>) =>
-		css({
-			display: 'flex',
-			maxWidth: '100%',
-			maxHeight: vertical ? '100%' : undefined,
-			margin: 0,
-			padding: 0,
-			overflow: 'hidden',
+const defaultStyles: StyleScript<CarouselProps> = ({ vertical, theme }) => {
+	return css({
+		display: 'flex',
+		maxWidth: '100%',
+		maxHeight: vertical ? '100%' : undefined,
+		margin: 0,
+		padding: 0,
+		overflow: 'hidden',
 
-			'.swiper-notification': {
-				position: 'absolute',
-				left: '100000000000000px',
-			},
+		'.swiper-notification': {
+			position: 'absolute',
+			left: '100000000000000px',
+		},
 
-			'&.ss__carousel-vertical': {
-				flexDirection: 'column',
-				'.swiper-slide': {
-					/* Center slides vertically */
-					display: 'flex',
-					justifyContent: 'center',
-					alignItems: 'center',
-				},
-
-				'.swiper-container': {
-					flexDirection: 'row',
-				},
-
-				'.swiper-pagination': {
-					width: 'auto',
-					order: 0,
-					flexDirection: 'column',
-					margin: 0,
-					padding: '10px',
-				},
-
-				'.swiper-pagination-bullet': {
-					margin: '4px',
-				},
-			},
-			'.swiper-pagination-bullet-active': {
-				background: theme?.variables?.colors?.primary || 'inherit',
-			},
-			'.ss__carousel__next-wrapper, .ss__carousel__prev-wrapper': {
+		'&.ss__carousel-vertical': {
+			flexDirection: 'column',
+			'.swiper-slide': {
+				/* Center slides vertically */
 				display: 'flex',
 				justifyContent: 'center',
 				alignItems: 'center',
-				'&.ss__carousel__next-wrapper--hidden, &.ss__carousel__prev-wrapper--hidden': {
-					display: 'none',
-				},
 			},
-			'.ss__carousel__next, .ss__carousel__prev': {
-				padding: '5px',
-				cursor: 'pointer',
-				lineHeight: 0,
 
-				'&.swiper-button-disabled': {
-					opacity: '0.3',
-					cursor: 'default',
-				},
+			'.swiper-container': {
+				flexDirection: 'row',
 			},
-			'.swiper': {
-				display: 'flex',
-				flexDirection: 'column',
-				marginLeft: 'auto',
-				marginRight: 'auto',
-				position: 'relative',
-				overflow: 'hidden',
-				listStyle: 'none',
-				padding: 0,
-				zIndex: '1',
-				width: '100%',
-			},
-			'.swiper-vertical > .swiper-wrapper': {
-				flexDirection: 'column',
-			},
-			'.swiper-wrapper': {
-				order: 0,
-				position: 'relative',
-				width: '100%',
-				height: '100%',
-				zIndex: '1',
-				display: 'flex',
-				transitionProperty: 'transform',
-				boxSizing: 'content-box',
-			},
-			'.swiper-slide': {
-				flexShrink: 0,
-				width: '100%',
-				height: '100%',
-				position: 'relative',
-				transitionProperty: 'transform',
-			},
+
 			'.swiper-pagination': {
-				display: 'flex',
-				justifyContent: 'center',
-				marginTop: '10px',
-				width: '100%',
-				order: 1,
-				transition: '.3s opacity',
+				width: 'auto',
+				order: 0,
+				flexDirection: 'column',
+				margin: 0,
+				padding: '10px',
 			},
+
 			'.swiper-pagination-bullet': {
-				width: '8px',
-				height: '8px',
-				display: 'inline-block',
-				borderRadius: '50%',
-				background: '#000',
-				opacity: '.2',
-				cursor: 'pointer',
-				margin: '0 4px',
-				'&.swiper-pagination-bullet-active': {
-					opacity: '0.8',
-					background: theme?.variables?.colors?.primary || '#000',
-				},
+				margin: '4px',
 			},
-			'.swiper-slide-invisible-blank': {
-				visibility: 'hidden',
+		},
+		'.swiper-pagination-bullet-active': {
+			background: theme?.variables?.colors?.primary || 'inherit',
+		},
+		'.ss__carousel__next-wrapper, .ss__carousel__prev-wrapper': {
+			display: 'flex',
+			justifyContent: 'center',
+			alignItems: 'center',
+			'&.ss__carousel__next-wrapper--hidden, &.ss__carousel__prev-wrapper--hidden': {
+				display: 'none',
 			},
-			'.swiper-horizontal': {
-				touchAction: 'pan-y',
+		},
+		'.ss__carousel__next, .ss__carousel__prev': {
+			padding: '5px',
+			cursor: 'pointer',
+			lineHeight: 0,
+
+			'&.swiper-button-disabled': {
+				opacity: '0.3',
+				cursor: 'default',
 			},
-			'.swiper-vertical': {
-				touchAction: 'pan-x',
+		},
+		'.swiper': {
+			display: 'flex',
+			flexDirection: 'column',
+			marginLeft: 'auto',
+			marginRight: 'auto',
+			position: 'relative',
+			overflow: 'hidden',
+			listStyle: 'none',
+			padding: 0,
+			zIndex: '1',
+			width: '100%',
+		},
+		'.swiper-vertical > .swiper-wrapper': {
+			flexDirection: 'column',
+		},
+		'.swiper-wrapper': {
+			order: 0,
+			position: 'relative',
+			width: '100%',
+			height: '100%',
+			zIndex: '1',
+			display: 'flex',
+			transitionProperty: 'transform',
+			boxSizing: 'content-box',
+		},
+		'.swiper-slide': {
+			flexShrink: 0,
+			width: '100%',
+			height: '100%',
+			position: 'relative',
+			transitionProperty: 'transform',
+		},
+		'.swiper-pagination': {
+			display: 'flex',
+			justifyContent: 'center',
+			marginTop: '10px',
+			width: '100%',
+			order: 1,
+			transition: '.3s opacity',
+		},
+		'.swiper-pagination-bullet': {
+			width: '8px',
+			height: '8px',
+			display: 'inline-block',
+			borderRadius: '50%',
+			background: '#000',
+			opacity: '.2',
+			cursor: 'pointer',
+			margin: '0 4px',
+			'&.swiper-pagination-bullet-active': {
+				opacity: '0.8',
+				background: theme?.variables?.colors?.primary || '#000',
 			},
-		}),
+		},
+		'.swiper-slide-invisible-blank': {
+			visibility: 'hidden',
+		},
+		'.swiper-horizontal': {
+			touchAction: 'pan-y',
+		},
+		'.swiper-vertical': {
+			touchAction: 'pan-x',
+		},
+	});
 };
 
 export const defaultCarouselBreakpoints = {
@@ -234,8 +233,9 @@ export const Carousel = observer((properties: CarouselProps): JSX.Element => {
 		onPrevButtonClick,
 		onClick,
 		disableStyles,
-		style,
-		styleScript,
+		style: _,
+		styleScript: __,
+		themeStyleScript: ___,
 		modules,
 		className,
 		treePath,
@@ -269,16 +269,7 @@ export const Carousel = observer((properties: CarouselProps): JSX.Element => {
 	const navigationNextRef = useRef(null);
 	const rootComponentRef = useRef(null);
 
-	const styling: RootNodeProperties = { 'ss-name': props.name };
-	const stylingProps = props;
-
-	if (styleScript && !disableStyles) {
-		styling.css = [styleScript(stylingProps), style];
-	} else if (!disableStyles) {
-		styling.css = [CSS.carousel(stylingProps), style];
-	} else if (style) {
-		styling.css = [style];
-	}
+	const styling = mergeStyles<CarouselProps>(props, defaultStyles);
 
 	useEffect(() => {
 		//backwards compatability for legacy styles
@@ -460,7 +451,8 @@ export type CarouselProps = {
 	children: JSX.Element[];
 	onResize?: () => void;
 	onTransitionEnd?: () => void;
-} & Omit<SwiperOptions, 'breakpoints'> &
+	slidesPerView?: number;
+} & Omit<SwiperOptions, 'breakpoints' | 'slidesPerView'> &
 	ComponentProps;
 
 interface CarouselSubProps {

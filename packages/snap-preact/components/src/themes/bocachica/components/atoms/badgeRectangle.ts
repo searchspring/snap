@@ -21,5 +21,5 @@ const badgeRectangleStyleScript = ({ color, colorText, theme }: BadgeRectanglePr
 
 // BadgeRectangle component props
 export const badgeRectangle: Partial<BadgeRectangleProps> = {
-	styleScript: badgeRectangleStyleScript,
+	themeStyleScript: badgeRectangleStyleScript,
 };

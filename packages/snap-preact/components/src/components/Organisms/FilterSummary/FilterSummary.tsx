@@ -5,24 +5,23 @@ import classnames from 'classnames';
 import { observer } from 'mobx-react';
 
 import { Filter, FilterProps } from '../../Molecules/Filter';
-import { defined, mergeProps } from '../../../utilities';
+import { defined, mergeProps, mergeStyles } from '../../../utilities';
 import { Theme, useTheme, CacheProvider } from '../../../providers';
-import { ComponentProps, RootNodeProperties } from '../../../types';
+import { ComponentProps, StyleScript } from '../../../types';
 import type { SearchController, AutocompleteController } from '@searchspring/snap-controller';
 import type { Filter as FilterType } from '@searchspring/snap-store-mobx';
 import { IconProps, IconType } from '../../Atoms/Icon';
 import { Lang, useLang } from '../../../hooks';
 import deepmerge from 'deepmerge';
 
-const CSS = {
-	filterSummary: ({}: Partial<FilterSummaryProps>) =>
-		css({
-			display: 'flex',
-			gap: '0.5em',
-			'& .ss__filter-summary__title': {
-				fontSize: '1.2em',
-			},
-		}),
+const defaultStyles: StyleScript<FilterSummaryProps> = () => {
+	return css({
+		display: 'flex',
+		gap: '0.5em',
+		'& .ss__filter-summary__title': {
+			fontSize: '1.2em',
+		},
+	});
 };
 
 export const FilterSummary = observer((properties: FilterSummaryProps): JSX.Element => {
@@ -54,8 +53,6 @@ export const FilterSummary = observer((properties: FilterSummaryProps): JSX.Elem
 		onClearAllClick,
 		disableStyles,
 		className,
-		style,
-		styleScript,
 		treePath,
 	} = props;
 
@@ -79,16 +76,7 @@ export const FilterSummary = observer((properties: FilterSummaryProps): JSX.Elem
 		},
 	};
 
-	const styling: RootNodeProperties = { 'ss-name': props.name };
-	const stylingProps = props;
-
-	if (styleScript && !disableStyles) {
-		styling.css = [styleScript(stylingProps), style];
-	} else if (!disableStyles) {
-		styling.css = [CSS.filterSummary(stylingProps), style];
-	} else if (style) {
-		styling.css = [style];
-	}
+	const styling = mergeStyles<FilterSummaryProps>(props, defaultStyles);
 
 	//initialize lang
 	const defaultLang = {

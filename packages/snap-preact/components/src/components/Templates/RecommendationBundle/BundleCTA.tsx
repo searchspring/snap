@@ -75,7 +75,7 @@ export const BundledCTA = observer((properties: BundledCTAProps): JSX.Element =>
 				cloneWithProps(ctaSlot, props)
 			) : (
 				<Fragment>
-					<div className="ss__recommendation-bundle__wrapper__cta__subtotal">
+					<div className="ss__recommendation-bundle__wrapper__cta__subtotal" aria-atomic="false" aria-live="polite">
 						{ctaIcon ? (
 							<div className="icon">
 								<Icon {...subProps.icon} {...(typeof ctaIcon == 'string' ? { icon: ctaIcon } : (ctaIcon as Partial<IconProps>))} />
@@ -102,8 +102,8 @@ export const BundledCTA = observer((properties: BundledCTAProps): JSX.Element =>
 						className={classnames('ss__recommendation-bundle__wrapper__cta__button', {
 							'ss__recommendation-bundle__wrapper__cta__button--added': addedToCart,
 						})}
+						aria-live={addedToCart}
 						onClick={(e) => onAddToCart(e)}
-						disabled={addedToCart}
 						{...(addedToCart ? mergedLang.ctaButtonSuccessText?.all : mergedLang.ctaButtonText?.all)}
 					>
 						{addedToCart ? ctaButtonSuccessText : ctaButtonText}

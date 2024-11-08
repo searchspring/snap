@@ -11,5 +11,5 @@ const formattedNumberStyleScript = ({ theme }: FormattedNumberProps) => {
 
 // FormattedNumber component props
 export const formattedNumber: Partial<FormattedNumberProps> = {
-	styleScript: formattedNumberStyleScript,
+	themeStyleScript: formattedNumberStyleScript,
 };

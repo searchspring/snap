@@ -85,6 +85,7 @@ type RestrictedComponentProps<Props> = Partial<Omit<Props, OmittedComponentProps
 type OmittedComponentProps =
 	| 'breakpoints'
 	| 'styleScript'
+	| 'themeStyleScript'
 	| 'controller'
 	| 'results'
 	| 'facets'

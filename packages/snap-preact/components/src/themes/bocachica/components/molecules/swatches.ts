@@ -50,5 +50,5 @@ const swatchesStyleScript = ({ theme }: Partial<SwatchesProps>) => {
 
 // Swatches component props
 export const swatches: Partial<SwatchesProps> = {
-	styleScript: swatchesStyleScript,
+	themeStyleScript: swatchesStyleScript,
 };

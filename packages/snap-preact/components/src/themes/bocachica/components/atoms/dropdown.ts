@@ -34,5 +34,5 @@ const dropdownStyleScript = ({ disableOverlay, theme }: DropdownProps) => {
 
 // Dropdown component props
 export const dropdown: Partial<DropdownProps> = {
-	styleScript: dropdownStyleScript,
+	themeStyleScript: dropdownStyleScript,
 };

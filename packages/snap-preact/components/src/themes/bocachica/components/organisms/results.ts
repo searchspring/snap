@@ -41,5 +41,5 @@ const resultsStyleScript = ({ columns, gapSize, theme }: ResultsProps) => {
 
 // Results component props
 export const results: Partial<ResultsProps> = {
-	styleScript: resultsStyleScript,
+	themeStyleScript: resultsStyleScript,
 };

@@ -5,22 +5,21 @@ import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
 
 import { Theme, useTheme, CacheProvider } from '../../../providers';
-import { defined, mergeProps } from '../../../utilities';
-import { ComponentProps, ListOption, RootNodeProperties } from '../../../types';
+import { defined, mergeProps, mergeStyles } from '../../../utilities';
+import { ComponentProps, ListOption, StyleScript } from '../../../types';
 import { Select, SelectProps } from '../Select';
 import { List, ListProps } from '../List';
 import { RadioList, RadioListProps } from '../RadioList';
 import { Lang } from '../../../hooks';
 import deepmerge from 'deepmerge';
 
-const CSS = {
-	LayoutSelector: ({}: Partial<LayoutSelectorProps>) =>
-		css({
-			'.ss__button__content': {
-				display: 'flex',
-				alignItems: 'center',
-			},
-		}),
+const defaultStyles: StyleScript<LayoutSelectorProps> = ({}) => {
+	return css({
+		'.ss__button__content': {
+			display: 'flex',
+			alignItems: 'center',
+		},
+	});
 };
 
 export const LayoutSelector = observer((properties: LayoutSelectorProps): JSX.Element => {
@@ -35,7 +34,7 @@ export const LayoutSelector = observer((properties: LayoutSelectorProps): JSX.El
 
 	const props = mergeProps('layoutSelector', globalTheme, defaultProps, properties);
 
-	const { options, selected, type, onSelect, showSingleOption, hideLabel, disableStyles, className, style, styleScript, treePath } = props;
+	const { options, selected, type, onSelect, showSingleOption, hideLabel, disableStyles, className, treePath } = props;
 	let label = props.label;
 
 	const subProps: SelectSubProps = {
@@ -77,16 +76,7 @@ export const LayoutSelector = observer((properties: LayoutSelectorProps): JSX.El
 		},
 	};
 
-	const styling: RootNodeProperties = { 'ss-name': props.name };
-	const stylingProps = props;
-
-	if (styleScript && !disableStyles) {
-		styling.css = [styleScript(stylingProps), style];
-	} else if (!disableStyles) {
-		styling.css = [CSS.LayoutSelector(stylingProps), style];
-	} else if (style) {
-		styling.css = [style];
-	}
+	const styling = mergeStyles<LayoutSelectorProps>(props, defaultStyles);
 
 	//initialize lang
 	const defaultLang = {

@@ -503,7 +503,7 @@ describe('Autocomplete Component', () => {
 		});
 	});
 
-	it('can se custom slots, such as termsSlot, facetsSlot, resultsSlot, linkSlot', async () => {
+	it('can set custom slots, such as termsSlot, facetsSlot, resultsSlot, linkSlot', async () => {
 		const controller = createAutocompleteController({ client: clientConfig, controller: acConfig }, { client: mockClient });
 		await controller.bind();
 

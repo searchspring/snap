@@ -20,5 +20,5 @@ const bannerStyleScript = ({ theme }: BannerProps) => {
 
 // Banner component props
 export const banner: Partial<BannerProps> = {
-	styleScript: bannerStyleScript,
+	themeStyleScript: bannerStyleScript,
 };

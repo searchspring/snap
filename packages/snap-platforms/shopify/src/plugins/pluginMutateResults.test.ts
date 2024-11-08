@@ -1,4 +1,4 @@
-import { pluginMutateResults } from './pluginMutateResults';
+import { pluginMutateResultsShopify } from './pluginMutateResults';
 import { MockClient } from '@searchspring/snap-shared';
 import { SearchStore } from '@searchspring/snap-store-mobx';
 import { UrlManager, QueryStringTranslator, reactLinker } from '@searchspring/snap-url-manager';
@@ -69,7 +69,7 @@ describe('Shopify pluginMutateResults', () => {
 				},
 			};
 
-			pluginMutateResults(controller, config);
+			pluginMutateResultsShopify(controller, config);
 
 			expect(errMock).toHaveBeenCalledWith(
 				expect.stringContaining('window.Shopify not found'),
@@ -118,7 +118,7 @@ describe('Shopify pluginMutateResults', () => {
 				},
 			};
 
-			pluginMutateResults(controller, config);
+			pluginMutateResultsShopify(controller, config);
 			await controller.search();
 
 			expect(errMock).not.toHaveBeenCalled();
@@ -132,7 +132,7 @@ describe('Shopify pluginMutateResults', () => {
 				},
 			};
 
-			pluginMutateResults(controller, config);
+			pluginMutateResultsShopify(controller, config);
 			await controller.search();
 
 			expect(errMock).not.toHaveBeenCalled();
@@ -153,7 +153,7 @@ describe('Shopify pluginMutateResults', () => {
 				},
 			};
 
-			pluginMutateResults(controller, config);
+			pluginMutateResultsShopify(controller, config);
 
 			await controller.search();
 

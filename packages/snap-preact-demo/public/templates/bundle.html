@@ -171,8 +171,19 @@
                 </div>
             </div>
 
-            <script type="searchspring/recommend" profile="bundle">
-                product = "C-AD-W1-1869P";
+         
+            <div class="ss__recs__bundle">stuff...</div>
+
+            <script type="searchspring/recommendations">
+                    globals = {
+                        products: ['C-AD-W1-1869P'],
+                    };
+                    profiles = [
+                        {
+                            profile: 'bundle',
+                            selector: '.ss__recs__bundle'
+                        },
+                    ]
             </script>
         </div>
     </main>

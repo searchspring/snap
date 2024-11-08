@@ -7,7 +7,6 @@ import { VariantSelection, VariantSelectionProps } from './VariantSelection';
 import { componentArgs, highlightedCode } from '../../../utilities';
 import Readme from '../VariantSelection/readme.md';
 import { Snapify } from '../../../utilities/snapify';
-import { Product } from '@searchspring/snap-store-mobx';
 import { Next } from '@searchspring/snap-event-manager';
 import { SearchResponseModel } from '@searchspring/snapi-types';
 
@@ -127,9 +126,8 @@ const config: SearchControllerConfig = {
 
 const snapInstance = Snapify.search(config);
 
-export const Dropdown = (props: VariantSelectionProps, { loaded: { controller } }: { loaded: { controller: SearchController } }) => {
-	const selection = (controller.store.results[0] as Product).variants?.selections[0];
-	return <VariantSelection {...props} selection={selection!} />;
+export const Dropdown = (props: VariantSelectionProps, { loaded: {} }: { loaded: { controller: SearchController } }) => {
+	return <VariantSelection {...props} />;
 };
 
 Dropdown.loaders = [
@@ -150,6 +148,16 @@ Dropdown.loaders = [
 ];
 
 Dropdown.args = {
+	selection: {
+		select: (e: any) => {
+			console.log('selected', e);
+		},
+		previouslySelected: '',
+		field: 'color',
+		label: 'color',
+		selected: { value: 'Chambray', label: 'Chambray', available: true },
+		values: values,
+	},
 	type: 'dropdown',
 };
 

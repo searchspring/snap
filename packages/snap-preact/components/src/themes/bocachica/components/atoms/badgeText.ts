@@ -20,5 +20,5 @@ const badgeTextStyleScript = ({ colorText, theme }: BadgeTextProps) => {
 
 // BadgeText component props
 export const badgeText: Partial<BadgeTextProps> = {
-	styleScript: badgeTextStyleScript,
+	themeStyleScript: badgeTextStyleScript,
 };
