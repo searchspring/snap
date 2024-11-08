@@ -96,7 +96,7 @@ export const Button = observer((properties: ButtonProps): JSX.Element => {
 
 	const elementProps = {
 		...styling,
-		className: classnames('ss__button', { 'ss__button--disabled': disabled }, className),
+		className: classnames('ss__button', { 'ss__button--native': native, 'ss__button--disabled': disabled }, className),
 		disabled,
 		onClick: (e: React.MouseEvent<HTMLElement, MouseEvent>) => !disabled && onClick && onClick(e),
 		...additionalProps,

@@ -24,7 +24,7 @@ export const RecommendationBundleVertical = observer((properties: Recommendation
 
 	const props = mergeProps('recommendationBundleVertical', globalTheme, defaultProps, properties);
 
-	const { treePath, disableStyles, style: _, styleScript: __, themeStyleScript: ___, ...additionalProps } = props;
+	const { treePath, disableStyles, controller, style: _, styleScript: __, themeStyleScript: ___, ...additionalProps } = props;
 
 	const subProps: RecommendationBundleVerticalSubProps = {
 		recommendationBundle: {
@@ -34,7 +34,6 @@ export const RecommendationBundleVertical = observer((properties: Recommendation
 			carousel: {
 				enabled: false,
 			},
-			// controller: controller as RecommendationController,
 			separatorIcon: false,
 
 			// inherited props
@@ -49,7 +48,7 @@ export const RecommendationBundleVertical = observer((properties: Recommendation
 
 	const styling = mergeStyles<RecommendationBundleVerticalProps>(props, defaultStyles);
 
-	return <RecommendationBundle {...styling} {...subProps.recommendationBundle} {...additionalProps} />;
+	return <RecommendationBundle controller={controller} {...styling} {...subProps.recommendationBundle} {...additionalProps} />;
 });
 
 export type RecommendationBundleVerticalProps = Omit<RecommendationBundleProps, 'vertical' | 'ctaInline'> & ComponentProps;

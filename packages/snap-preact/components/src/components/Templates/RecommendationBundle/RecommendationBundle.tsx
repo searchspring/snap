@@ -667,9 +667,9 @@ type BundleCarouselProps = {
 } & Partial<CarouselProps>;
 
 export interface RecommendationBundleProps extends ComponentProps {
+	controller: RecommendationController;
 	results?: Product[];
 	limit?: number;
-	controller: RecommendationController;
 	onAddToCart: (e: MouseEvent, items: Product[]) => void;
 	title?: JSX.Element | string;
 	breakpoints?: BreakpointsProps;

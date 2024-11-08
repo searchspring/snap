@@ -140,7 +140,10 @@ export function RadioList(properties: RadioListProps): JSX.Element {
 
 	return typeof options == 'object' && options?.length ? (
 		<CacheProvider>
-			<div {...styling} className={classnames('ss__radio-list', disabled ? 'ss__radio-list--disabled' : '', className)}>
+			<div
+				{...styling}
+				className={classnames('ss__radio-list', { 'ss__radio-list--native': native, 'ss__radio-list--disabled': disabled }, className)}
+			>
 				{(titleText || lang?.title?.value) && !hideTitleText && (
 					<h5 className="ss__radio-list__title" {...mergedLang.title?.all}>
 						{titleText}

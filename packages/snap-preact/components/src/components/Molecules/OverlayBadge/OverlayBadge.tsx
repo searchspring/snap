@@ -34,7 +34,9 @@ const defaultBadgeStyles: StyleScript<OverlayBadgeProps & { index: number; top: 
 	});
 };
 
-const defaultStyles: StyleScript<OverlayBadgeProps & { grid: string[][] }> = ({ grid }) => {
+const defaultStyles: StyleScript<OverlayBadgeProps> = ({ controller }) => {
+	const group = 'overlay';
+	const grid = controller?.store?.meta?.badges?.groups?.[group]?.grid;
 	let gridProperties = {};
 	if (grid?.length && grid[0]?.length) {
 		const gridTemplateAreas = grid.map((row: string[]) => `"${row.join(' ')}"`).join(' ');
@@ -87,7 +89,7 @@ export const OverlayBadge = observer((properties: OverlayBadgeProps): JSX.Elemen
 		return <Fragment>{children}</Fragment>;
 	}
 	const group = 'overlay';
-	const grid = meta?.badges?.groups?.[group]?.grid;
+
 	const badgeComponentMap = {
 		...defaultBadgeComponentMap,
 		...((snap as SnapTemplates)?.templates?.library.import.component.badge || {}),
@@ -117,7 +119,7 @@ export const OverlayBadge = observer((properties: OverlayBadgeProps): JSX.Elemen
 		})
 		.filter((location) => location.slots?.length);
 
-	const styling = mergeStyles<OverlayBadgeProps & { grid: string[][] }>({ ...props, grid: grid }, defaultStyles);
+	const styling = mergeStyles<OverlayBadgeProps>(props, defaultStyles);
 
 	if (renderEmpty || locations?.length) {
 		return (

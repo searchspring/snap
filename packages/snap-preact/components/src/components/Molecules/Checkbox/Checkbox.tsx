@@ -114,7 +114,12 @@ export const Checkbox = observer((properties: CheckboxProps): JSX.Element => {
 			{native ? (
 				<input
 					{...styling}
-					className={classnames('ss__checkbox', { 'ss__checkbox--disabled': disabled, 'ss__checkbox--active': checkedState }, className)}
+					className={classnames(
+						'ss__checkbox',
+						'ss__checkbox--native',
+						{ 'ss__checkbox--disabled': disabled, 'ss__checkbox--active': checkedState },
+						className
+					)}
 					type="checkbox"
 					aria-checked={checkedState}
 					onClick={(e) => clickFunc(e)}

@@ -14,20 +14,7 @@ import { Lang, useLang } from '../../../hooks';
 import deepmerge from 'deepmerge';
 
 const defaultStyles: StyleScript<RadioProps> = ({ size, native }) => {
-	if (native) {
-		return css({
-			width: size,
-			height: size,
-			display: 'flex',
-			justifyContent: 'center',
-
-			'.ss__radio__input': {
-				height: `calc(${size} - 30%)`,
-				width: `calc(${size} - 30%)`,
-				margin: 'auto',
-			},
-		});
-	} else {
+	if (!native) {
 		return css({
 			display: 'inline-flex',
 			alignItems: 'center',
@@ -41,6 +28,8 @@ const defaultStyles: StyleScript<RadioProps> = ({ size, native }) => {
 				cursor: 'none',
 			},
 		});
+	} else {
+		return css({});
 	}
 };
 
@@ -146,7 +135,7 @@ export const Radio = observer((properties: RadioProps): JSX.Element => {
 	return (
 		<CacheProvider>
 			{native ? (
-				<div className={classnames('ss__radio', { 'ss__radio--disabled': disabled }, className)} {...styling}>
+				<div className={classnames('ss__radio', 'ss__radio--native', { 'ss__radio--disabled': disabled }, className)} {...styling}>
 					<input
 						className={classnames('ss__radio__input')}
 						aria-checked={checkedState}

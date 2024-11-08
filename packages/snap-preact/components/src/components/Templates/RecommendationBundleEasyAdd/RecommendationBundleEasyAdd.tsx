@@ -21,7 +21,7 @@ export const RecommendationBundleEasyAdd = observer((properties: RecommendationB
 
 	const props = mergeProps('recommendationBundleEasyAdd', globalTheme, defaultProps, properties);
 
-	const { treePath, disableStyles, style: _, styleScript: __, themeStyleScript: ___, ...additionalProps } = props;
+	const { treePath, disableStyles, controller, style: _, styleScript: __, themeStyleScript: ___, ...additionalProps } = props;
 
 	const subProps: RecommendationBundleEasyAddSubProps = {
 		recommendationBundle: {
@@ -50,14 +50,14 @@ export const RecommendationBundleEasyAdd = observer((properties: RecommendationB
 
 	const styling = mergeStyles<RecommendationBundleEasyAddProps>(props, defaultStyles);
 
-	return <RecommendationBundle {...styling} {...subProps.recommendationBundle} {...additionalProps} />;
+	return <RecommendationBundle controller={controller} {...styling} {...subProps.recommendationBundle} {...additionalProps} />;
 });
 
-export type RecommendationBundleEasyAddProps = Omit<
-	RecommendationBundleProps,
-	'hideSeed' | 'limit' | 'hideCheckboxes' | 'carousel' | 'separatorIcon' | 'separatorIconSeedOnly' | 'preselectedCount'
-> &
-	ComponentProps;
+export type RecommendationBundleEasyAddProps = ComponentProps &
+	Omit<
+		RecommendationBundleProps,
+		'hideSeed' | 'limit' | 'hideCheckboxes' | 'carousel' | 'separatorIcon' | 'separatorIconSeedOnly' | 'preselectedCount'
+	>;
 
 interface RecommendationBundleEasyAddSubProps {
 	recommendationBundle: Partial<RecommendationBundleProps>;

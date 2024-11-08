@@ -189,7 +189,7 @@ export function List(properties: ListProps): JSX.Element {
 
 	return typeof options == 'object' && options?.length ? (
 		<CacheProvider>
-			<div {...styling} className={classnames('ss__list', disabled ? 'ss__list--disabled' : '', className)}>
+			<div {...styling} className={classnames('ss__list', { 'ss__list--native': native, 'ss__list--disabled': disabled }, className)}>
 				{(titleText || lang?.title?.value) && !hideTitleText && (
 					<label className="ss__list__title" {...mergedLang.title?.all}>
 						{titleText}

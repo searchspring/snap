@@ -451,6 +451,9 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 	if ((hideTrending && trendingActive) || (hideHistory && historyActive)) {
 		showResults = false;
 	}
+
+	const noResults = Boolean(search?.query?.string && results.length === 0);
+
 	const styling = mergeStyles<AutocompleteProps>(props, defaultStyles);
 
 	const reset = () => {
@@ -522,7 +525,11 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 		<CacheProvider>
 			<div
 				{...styling}
-				className={classnames('ss__autocomplete', className, { 'ss__autocomplete--only-terms': onlyTerms, 'ss__autocomplete--vertical': vertical })}
+				className={classnames('ss__autocomplete', className, {
+					'ss__autocomplete--only-terms': onlyTerms,
+					'ss__autocomplete--vertical': vertical,
+					'ss__autocomplete--no-results': noResults,
+				})}
 				onClick={(e) => e.stopPropagation()}
 				ref={(e) => useA11y(e, 0, true, reset)}
 			>

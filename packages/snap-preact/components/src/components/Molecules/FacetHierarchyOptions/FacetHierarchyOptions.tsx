@@ -96,7 +96,7 @@ export const FacetHierarchyOptions = observer((properties: FacetHierarchyOptions
 
 	const props = mergeProps('facetHierarchyOptions', globalTheme, defaultProps, properties);
 
-	const { values, hideCount, onClick, previewOnFocus, valueProps, facet, className } = props;
+	const { values, hideCount, onClick, previewOnFocus, horizontal, valueProps, facet, className } = props;
 
 	const styling = mergeStyles<FacetHierarchyOptionsProps>(props, defaultStyles);
 
@@ -104,7 +104,7 @@ export const FacetHierarchyOptions = observer((properties: FacetHierarchyOptions
 
 	return facetValues?.length ? (
 		<CacheProvider>
-			<div {...styling} className={classnames('ss__facet-hierarchy-options', className)}>
+			<div {...styling} className={classnames('ss__facet-hierarchy-options', { 'ss__facet-hierarchy-options--horizontal': horizontal }, className)}>
 				{(facetValues as FacetHierarchyValue[]).map((value) => {
 					//initialize lang
 					const defaultLang = {

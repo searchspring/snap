@@ -72,7 +72,7 @@ export const RecommendationBundleList = observer((properties: RecommendationBund
 
 	const props = mergeProps('recommendationBundleList', globalTheme, defaultProps, properties);
 
-	const { treePath, disableStyles, style: _, styleScript: __, themeStyleScript: ___, ...additionalProps } = props;
+	const { treePath, disableStyles, controller, style: _, styleScript: __, themeStyleScript: ___, ...additionalProps } = props;
 
 	const subProps: RecommendationBundleListSubProps = {
 		recommendationBundle: {
@@ -103,7 +103,7 @@ export const RecommendationBundleList = observer((properties: RecommendationBund
 
 	const styling = mergeStyles<RecommendationBundleListProps>(props, defaultStyles);
 
-	return <RecommendationBundle {...styling} {...subProps.recommendationBundle} {...additionalProps} />;
+	return <RecommendationBundle controller={controller} {...styling} {...subProps.recommendationBundle} {...additionalProps} />;
 });
 
 export type RecommendationBundleListProps = Omit<
