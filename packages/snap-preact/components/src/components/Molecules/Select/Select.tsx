@@ -6,8 +6,8 @@ import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
 
 import { Theme, useTheme, CacheProvider } from '../../../providers';
-import { defined, mergeProps } from '../../../utilities';
-import { ComponentProps, RootNodeProperties, ListOption } from '../../../types';
+import { defined, mergeProps, mergeStyles } from '../../../utilities';
+import { ComponentProps, ListOption, StyleScript } from '../../../types';
 import { Dropdown, DropdownProps } from '../../Atoms/Dropdown';
 import { Button, ButtonProps } from '../../Atoms/Button';
 import { Icon, IconProps, IconType } from '../../Atoms/Icon';
@@ -16,10 +16,9 @@ import { Lang, useLang } from '../../../hooks';
 import deepmerge from 'deepmerge';
 import Color from 'color';
 
-const CSS = {
-	select: ({ color, backgroundColor, borderColor, theme }: Partial<SelectProps>) => {
-		const lightenedPrimary = new Color(backgroundColor || color || theme?.variables?.colors?.primary).lightness(95);
-
+const defaultStyles: StyleScript<SelectProps> = ({ color, backgroundColor, borderColor, theme, native }) => {
+	const lightenedPrimary = new Color(backgroundColor || color || theme?.variables?.colors?.primary).lightness(95);
+	if (!native) {
 		return css({
 			display: 'inline-flex',
 			color: color,
@@ -66,8 +65,9 @@ const CSS = {
 				},
 			},
 		});
-	},
-	native: ({}) => css({}),
+	} else {
+		return css({});
+	}
 };
 
 export const Select = observer((properties: SelectProps): JSX.Element => {
@@ -107,8 +107,6 @@ export const Select = observer((properties: SelectProps): JSX.Element => {
 		stayOpenOnSelection,
 		disableStyles,
 		className,
-		style,
-		styleScript,
 		treePath,
 	} = props;
 	let { options } = props;
@@ -202,20 +200,7 @@ export const Select = observer((properties: SelectProps): JSX.Element => {
 		!stayOpenOnSelection && setOpen(false);
 	};
 
-	const styling: RootNodeProperties = { 'ss-name': props.name };
-	const stylingProps = props;
-
-	if (styleScript && !disableStyles) {
-		styling.css = [styleScript(stylingProps), style];
-	} else if (!disableStyles) {
-		if (native) {
-			styling.css = [CSS.native(stylingProps), style];
-		} else {
-			styling.css = [CSS.select(stylingProps), style];
-		}
-	} else if (style) {
-		styling.css = [style];
-	}
+	const styling = mergeStyles<SelectProps>(props, defaultStyles);
 
 	const selectedOptions = options.filter((option) => selection?.value === option.value);
 
@@ -243,7 +228,7 @@ export const Select = observer((properties: SelectProps): JSX.Element => {
 	// options can be an Array or ObservableArray - but should have length
 	return typeof options == 'object' && options?.length ? (
 		<CacheProvider>
-			<div {...styling} className={classnames('ss__select', { 'ss__select--disabled': disabled }, className)}>
+			<div {...styling} className={classnames('ss__select', { 'ss__select--native': native }, { 'ss__select--disabled': disabled }, className)}>
 				{native ? (
 					<>
 						{(label || lang.buttonLabel.value) && !hideLabel && !hideLabelOnSelection && (

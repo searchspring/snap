@@ -177,7 +177,7 @@ const autocompleteStyleScript = ({
 
 // Autocomplete component props
 export const autocomplete: Partial<AutocompleteProps> = {
-	styleScript: autocompleteStyleScript,
+	themeStyleScript: autocompleteStyleScript,
 	trendingTitle: 'Popular',
 	theme: {
 		components: {

@@ -11,5 +11,5 @@ const facetsStyleScript = ({ theme }: FacetsProps) => {
 
 // Facets component props
 export const facets: Partial<FacetsProps> = {
-	styleScript: facetsStyleScript,
+	themeStyleScript: facetsStyleScript,
 };

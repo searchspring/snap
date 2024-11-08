@@ -123,6 +123,6 @@ const loadMoreStyleScript = ({
 
 // LoadMore component props
 export const loadMore: Partial<LoadMoreProps> = {
-	styleScript: loadMoreStyleScript,
+	themeStyleScript: loadMoreStyleScript,
 	progressIndicator: 'radial',
 };

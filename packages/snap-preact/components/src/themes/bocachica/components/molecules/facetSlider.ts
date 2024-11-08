@@ -126,5 +126,5 @@ const facetSliderStyleScript = ({
 
 // FacetSlider component props
 export const facetSlider: Partial<FacetSliderProps> = {
-	styleScript: facetSliderStyleScript,
+	themeStyleScript: facetSliderStyleScript,
 };

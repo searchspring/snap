@@ -19,5 +19,5 @@ const breadcrumbsStyleScript = ({ theme }: BreadcrumbsProps) => {
 
 // Breadcrumbs component props
 export const breadcrumbs: Partial<BreadcrumbsProps> = {
-	styleScript: breadcrumbsStyleScript,
+	themeStyleScript: breadcrumbsStyleScript,
 };

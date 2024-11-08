@@ -12,49 +12,48 @@ import { FacetSlider, FacetSliderProps } from '../../Molecules/FacetSlider';
 import { SearchInput, SearchInputProps } from '../../Molecules/SearchInput';
 import { Icon, IconProps, IconType } from '../../Atoms/Icon';
 import { Dropdown, DropdownProps } from '../../Atoms/Dropdown';
-import { ComponentProps, FacetDisplay, RootNodeProperties } from '../../../types';
+import { ComponentProps, FacetDisplay, StyleScript } from '../../../types';
 import type { ValueFacet, RangeFacet, FacetHierarchyValue, FacetValue, FacetRangeValue } from '@searchspring/snap-store-mobx';
 
-import { defined, cloneWithProps, mergeProps } from '../../../utilities';
+import { defined, cloneWithProps, mergeProps, mergeStyles } from '../../../utilities';
 import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { useA11y } from '../../../hooks/useA11y';
 // import { FacetToggle, FacetToggleProps } from '../../Molecules/FacetToggle';
 import { Lang, useLang } from '../../../hooks';
 import deepmerge from 'deepmerge';
 
-const CSS = {
-	facet: ({ color, theme, disableCollapse }: Partial<FacetProps>) =>
-		css({
-			width: '100%',
-			margin: '0 0 20px 0',
-			'& .ss__facet__header': {
-				cursor: disableCollapse ? undefined : 'pointer',
-				display: 'flex',
-				justifyContent: 'space-between',
-				alignItems: 'center',
-				color: color || theme?.variables?.colors?.primary,
-				border: 'none',
-				borderBottom: `2px solid ${theme?.variables?.colors?.secondary || '#ccc'}`,
-				padding: '6px 0',
+const defaultStyles: StyleScript<FacetProps> = ({ disableCollapse, color, theme }) => {
+	return css({
+		width: '100%',
+		margin: '0 0 20px 0',
+		'& .ss__facet__header': {
+			cursor: disableCollapse ? undefined : 'pointer',
+			display: 'flex',
+			justifyContent: 'space-between',
+			alignItems: 'center',
+			color: color || theme?.variables?.colors?.primary,
+			border: 'none',
+			borderBottom: `2px solid ${theme?.variables?.colors?.secondary || '#ccc'}`,
+			padding: '6px 0',
+		},
+		'& .ss__facet__options': {
+			marginTop: '8px',
+			maxHeight: '300px',
+			overflowY: 'auto',
+			overflowX: 'hidden',
+		},
+		'& .ss__facet__show-more-less': {
+			display: 'block',
+			margin: '8px',
+			cursor: 'pointer',
+			'& .ss__icon': {
+				marginRight: '8px',
 			},
-			'& .ss__facet__options': {
-				marginTop: '8px',
-				maxHeight: '300px',
-				overflowY: 'auto',
-				overflowX: 'hidden',
-			},
-			'& .ss__facet__show-more-less': {
-				display: 'block',
-				margin: '8px',
-				cursor: 'pointer',
-				'& .ss__icon': {
-					marginRight: '8px',
-				},
-			},
-			'& .ss__search-input': {
-				margin: '16px 0 0 0',
-			},
-		}),
+		},
+		'& .ss__search-input': {
+			margin: '16px 0 0 0',
+		},
+	});
 };
 
 export const Facet = observer((properties: FacetProps): JSX.Element => {
@@ -104,8 +103,6 @@ export const Facet = observer((properties: FacetProps): JSX.Element => {
 		horizontal,
 		disableStyles,
 		className,
-		style,
-		styleScript,
 		treePath,
 	} = props;
 
@@ -270,16 +267,7 @@ export const Facet = observer((properties: FacetProps): JSX.Element => {
 		limitedValues = (facet as ValueFacet)?.values;
 	}
 
-	const styling: RootNodeProperties = { 'ss-name': props.name };
-	const stylingProps = { ...props, color };
-
-	if (styleScript && !disableStyles) {
-		styling.css = [styleScript(stylingProps), style];
-	} else if (!disableStyles) {
-		styling.css = [CSS.facet(stylingProps), style];
-	} else if (style) {
-		styling.css = [style];
-	}
+	const styling = mergeStyles<FacetProps>(props, defaultStyles);
 
 	// Search within facet
 	const searchableFacet = {

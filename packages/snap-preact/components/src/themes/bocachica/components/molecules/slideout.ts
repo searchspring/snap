@@ -27,5 +27,5 @@ const slideoutStyleScript = ({ isActive, width, transitionSpeed, slideDirection,
 
 // Slideout component props
 export const slideout: Partial<SlideoutProps> = {
-	styleScript: slideoutStyleScript,
+	themeStyleScript: slideoutStyleScript,
 };

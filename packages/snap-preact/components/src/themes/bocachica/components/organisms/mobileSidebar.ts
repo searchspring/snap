@@ -47,5 +47,5 @@ const mobileSidebarStyleScript = ({ theme }: MobileSidebarProps) => {
 
 // MobileSidebar component props
 export const mobileSidebar: Partial<MobileSidebarProps> = {
-	styleScript: mobileSidebarStyleScript,
+	themeStyleScript: mobileSidebarStyleScript,
 };

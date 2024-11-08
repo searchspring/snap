@@ -8,5 +8,5 @@ const recommendationBundleEasyAddStyleScript = ({}: RecommendationBundleEasyAddP
 
 // RecommendationBundle component props
 export const recommendationBundleEasyAdd: Partial<RecommendationBundleEasyAddProps> = {
-	styleScript: recommendationBundleEasyAddStyleScript,
+	themeStyleScript: recommendationBundleEasyAddStyleScript,
 };

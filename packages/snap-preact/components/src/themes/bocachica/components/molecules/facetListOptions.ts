@@ -38,5 +38,5 @@ const facetListOptionsStyleScript = ({ hideCheckbox, horizontal, theme }: FacetL
 
 // FacetListOptions component props
 export const facetListOptions: Partial<FacetListOptionsProps> = {
-	styleScript: facetListOptionsStyleScript,
+	themeStyleScript: facetListOptionsStyleScript,
 };

@@ -5,53 +5,16 @@ import classnames from 'classnames';
 import { observer } from 'mobx-react';
 
 import { Theme, useTheme, CacheProvider } from '../../../providers';
-import { mergeProps } from '../../../utilities';
-import { ComponentProps, RootNodeProperties } from '../../../types';
+import { mergeProps, mergeStyles } from '../../../utilities';
+import { ComponentProps, StyleScript } from '../../../types';
 import { createHoverProps } from '../../../toolbox';
 import type { FacetHierarchyValue, ValueFacet } from '@searchspring/snap-store-mobx';
 import { Lang, useLang } from '../../../hooks';
 import deepmerge from 'deepmerge';
 
-const CSS = {
-	hierarchy: ({ theme }: Partial<FacetHierarchyOptionsProps>) =>
-		css({
-			'& .ss__facet-hierarchy-options__option': {
-				display: 'flex',
-				padding: '6px 0',
-				textDecoration: 'none',
-				alignItems: 'center',
-				'&:hover': {
-					cursor: 'pointer',
-				},
-				'&.ss__facet-hierarchy-options__option--filtered': {
-					fontWeight: 'bold',
-					color: theme?.variables?.colors?.primary,
-					'&:hover': {
-						cursor: 'default',
-						background: 'unset',
-					},
-					'& ~ .ss__facet-hierarchy-options__option:not(.ss__facet-hierarchy-options__option--filtered)': {
-						paddingLeft: '16px',
-					},
-				},
-				'&.ss__facet-hierarchy-options__option--return': {
-					'&:before': {
-						content: `'\\0000ab'`,
-						padding: '0 2px 0 0',
-						color: theme?.variables?.colors?.primary,
-					},
-				},
-				'& .ss__facet-hierarchy-options__option__value': {
-					marginLeft: '8px',
-					'& .ss__facet-hierarchy-options__option__value__count': {
-						fontSize: '0.8em',
-						marginLeft: '6px',
-					},
-				},
-			},
-		}),
-	hierarchyHorizontal: ({ theme }: Partial<FacetHierarchyOptionsProps>) =>
-		css({
+const defaultStyles: StyleScript<FacetHierarchyOptionsProps> = ({ theme, horizontal }) => {
+	if (horizontal) {
+		return css({
 			display: 'flex',
 			flexWrap: 'wrap',
 			'& .ss__facet-hierarchy-options__option': {
@@ -86,7 +49,45 @@ const CSS = {
 					},
 				},
 			},
-		}),
+		});
+	} else {
+		return css({
+			'& .ss__facet-hierarchy-options__option': {
+				display: 'flex',
+				padding: '6px 0',
+				textDecoration: 'none',
+				alignItems: 'center',
+				'&:hover': {
+					cursor: 'pointer',
+				},
+				'&.ss__facet-hierarchy-options__option--filtered': {
+					fontWeight: 'bold',
+					color: theme?.variables?.colors?.primary,
+					'&:hover': {
+						cursor: 'default',
+						background: 'unset',
+					},
+					'& ~ .ss__facet-hierarchy-options__option:not(.ss__facet-hierarchy-options__option--filtered)': {
+						paddingLeft: '16px',
+					},
+				},
+				'&.ss__facet-hierarchy-options__option--return': {
+					'&:before': {
+						content: `'\\0000ab'`,
+						padding: '0 2px 0 0',
+						color: theme?.variables?.colors?.primary,
+					},
+				},
+				'& .ss__facet-hierarchy-options__option__value': {
+					marginLeft: '8px',
+					'& .ss__facet-hierarchy-options__option__value__count': {
+						fontSize: '0.8em',
+						marginLeft: '6px',
+					},
+				},
+			},
+		});
+	}
 };
 
 export const FacetHierarchyOptions = observer((properties: FacetHierarchyOptionsProps): JSX.Element => {
@@ -95,24 +96,15 @@ export const FacetHierarchyOptions = observer((properties: FacetHierarchyOptions
 
 	const props = mergeProps('facetHierarchyOptions', globalTheme, defaultProps, properties);
 
-	const { values, hideCount, onClick, disableStyles, previewOnFocus, valueProps, facet, horizontal, className, style, styleScript } = props;
+	const { values, hideCount, onClick, previewOnFocus, horizontal, valueProps, facet, className } = props;
 
-	const styling: RootNodeProperties = { 'ss-name': props.name };
-	const stylingProps = props;
-
-	if (styleScript && !disableStyles) {
-		styling.css = [styleScript(stylingProps), style];
-	} else if (!disableStyles) {
-		styling.css = [horizontal ? CSS.hierarchyHorizontal(stylingProps) : CSS.hierarchy(stylingProps), style];
-	} else if (style) {
-		styling.css = [style];
-	}
+	const styling = mergeStyles<FacetHierarchyOptionsProps>(props, defaultStyles);
 
 	const facetValues = values || facet?.refinedValues;
 
 	return facetValues?.length ? (
 		<CacheProvider>
-			<div {...styling} className={classnames('ss__facet-hierarchy-options', className)}>
+			<div {...styling} className={classnames('ss__facet-hierarchy-options', { 'ss__facet-hierarchy-options--horizontal': horizontal }, className)}>
 				{(facetValues as FacetHierarchyValue[]).map((value) => {
 					//initialize lang
 					const defaultLang = {

@@ -25,5 +25,5 @@ const toolbarStyleScript = ({ theme }: ToolbarProps) => {
 
 // Toolbar component props
 export const toolbar: Partial<ToolbarProps> = {
-	styleScript: toolbarStyleScript,
+	themeStyleScript: toolbarStyleScript,
 };

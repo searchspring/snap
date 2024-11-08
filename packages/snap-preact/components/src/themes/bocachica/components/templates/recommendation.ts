@@ -20,5 +20,5 @@ const recommendationStyleScript = ({ vertical, theme }: RecommendationProps) => 
 
 // Recommendation component props
 export const recommendation: Partial<RecommendationProps> = {
-	styleScript: recommendationStyleScript,
+	themeStyleScript: recommendationStyleScript,
 };

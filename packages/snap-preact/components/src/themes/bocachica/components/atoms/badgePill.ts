@@ -22,5 +22,5 @@ const badgePillStyleScript = ({ color, colorText, theme }: BadgePillProps) => {
 
 // BadgePill component props
 export const badgePill: Partial<BadgePillProps> = {
-	styleScript: badgePillStyleScript,
+	themeStyleScript: badgePillStyleScript,
 };

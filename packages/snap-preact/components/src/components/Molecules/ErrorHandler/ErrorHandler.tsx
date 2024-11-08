@@ -6,10 +6,10 @@ import { observer } from 'mobx-react';
 
 import { Icon, IconProps } from '../../Atoms/Icon/Icon';
 import { Button, ButtonProps } from '../../Atoms/Button/Button';
-import { defined, Colour, mergeProps } from '../../../utilities';
+import { defined, Colour, mergeProps, mergeStyles } from '../../../utilities';
 
 import { Theme, useTheme, CacheProvider } from '../../../providers';
-import { ComponentProps, RootNodeProperties } from '../../../types';
+import { ComponentProps, StyleScript } from '../../../types';
 import { ErrorType } from '@searchspring/snap-store-mobx';
 
 import type { AbstractController } from '@searchspring/snap-controller';
@@ -20,103 +20,102 @@ const warnColour = new Colour('#ecaa15');
 const errorColour = new Colour('#cc1212');
 const infoColour = new Colour('#4c3ce2');
 
-const CSS = {
-	errorHandler: ({ theme }: Partial<ErrorHandlerProps>) =>
-		css({
-			borderRadius: '2px',
+const defaultStyles: StyleScript<ErrorHandlerProps> = ({ theme }) => {
+	return css({
+		borderRadius: '2px',
+		display: 'flex',
+		flexDirection: 'row',
+		alignItems: 'center',
+		justifyContent: 'space-between',
+		borderLeft: '4px solid',
+		'.ss__error-handler__message': {
+			padding: '10px',
 			display: 'flex',
-			flexDirection: 'row',
 			alignItems: 'center',
-			justifyContent: 'space-between',
-			borderLeft: '4px solid',
-			'.ss__error-handler__message': {
-				padding: '10px',
-				display: 'flex',
-				alignItems: 'center',
-				'.ss__error-handler__message__type': {
-					fontWeight: 'bold',
-					marginRight: '5px',
-				},
-
-				'.ss__icon': {
-					marginRight: '10px',
-				},
+			'.ss__error-handler__message__type': {
+				fontWeight: 'bold',
+				marginRight: '5px',
 			},
 
-			'& .ss__error-handler__button': {
+			'.ss__icon': {
+				marginRight: '10px',
+			},
+		},
+
+		'& .ss__error-handler__button': {
+			backgroundColor: 'unset',
+			color: 'inherit',
+			borderColor: theme?.variables?.colors?.primary,
+			width: ['150px', 'fit-content'],
+			margin: '5px 10px',
+			'&:hover': {
 				backgroundColor: 'unset',
-				color: 'inherit',
-				borderColor: theme?.variables?.colors?.primary,
-				width: ['150px', 'fit-content'],
-				margin: '5px 10px',
-				'&:hover': {
-					backgroundColor: 'unset',
-					borderColor: 'unset',
-					color: 'unset',
-					'.ss__icon': {
-						fill: 'unset',
-						stroke: 'unset',
-					},
-				},
-
+				borderColor: 'unset',
+				color: 'unset',
 				'.ss__icon': {
-					margin: '0 5px 0 0',
+					fill: 'unset',
+					stroke: 'unset',
 				},
 			},
 
-			'&.ss__error-handler--error': {
-				backgroundColor: errorColour.lighten(180).hex,
-				borderLeftColor: errorColour.hex,
-				'.ss__error-handler__message': {
-					'.ss__icon': {
-						fill: errorColour.hex,
-					},
+			'.ss__icon': {
+				margin: '0 5px 0 0',
+			},
+		},
+
+		'&.ss__error-handler--error': {
+			backgroundColor: errorColour.lighten(180).hex,
+			borderLeftColor: errorColour.hex,
+			'.ss__error-handler__message': {
+				'.ss__icon': {
+					fill: errorColour.hex,
 				},
 			},
-			'&.ss__error-handler--warning': {
-				backgroundColor: warnColour.lighten(180).hex,
-				borderLeftColor: warnColour.hex,
-				'.ss__icon': {
+		},
+		'&.ss__error-handler--warning': {
+			backgroundColor: warnColour.lighten(180).hex,
+			borderLeftColor: warnColour.hex,
+			'.ss__icon': {
+				fill: warnColour.hex,
+				stroke: warnColour.hex,
+			},
+			'.ss__error-handler__button': {
+				color: warnColour.hex,
+				borderColor: warnColour.hex,
+				fontWeight: 'bold',
+				textTransform: 'uppercase',
+				display: 'inline-flex',
+				alignItems: 'center',
+				'.ss__button__content': {
+					order: 2,
+				},
+				'.ss__button__icon': {
+					order: 1,
+					width: '10px',
+					height: '10px',
 					fill: warnColour.hex,
 					stroke: warnColour.hex,
 				},
-				'.ss__error-handler__button': {
-					color: warnColour.hex,
-					borderColor: warnColour.hex,
-					fontWeight: 'bold',
-					textTransform: 'uppercase',
-					display: 'inline-flex',
-					alignItems: 'center',
-					'.ss__button__content': {
-						order: 2,
-					},
+				'&:hover': {
+					color: warnColour.darken(30).hex,
+					borderColor: warnColour.darken(30).hex,
 					'.ss__button__icon': {
-						order: 1,
-						width: '10px',
-						height: '10px',
-						fill: warnColour.hex,
-						stroke: warnColour.hex,
-					},
-					'&:hover': {
-						color: warnColour.darken(30).hex,
-						borderColor: warnColour.darken(30).hex,
-						'.ss__button__icon': {
-							fill: warnColour.darken(30).hex,
-							stroke: warnColour.darken(30).hex,
-						},
+						fill: warnColour.darken(30).hex,
+						stroke: warnColour.darken(30).hex,
 					},
 				},
 			},
-			'&.ss__error-handler--info': {
-				backgroundColor: infoColour.lighten(180).hex,
-				borderLeftColor: infoColour.hex,
-				'.ss__error-handler__message': {
-					'.ss__icon': {
-						fill: infoColour.hex,
-					},
+		},
+		'&.ss__error-handler--info': {
+			backgroundColor: infoColour.lighten(180).hex,
+			borderLeftColor: infoColour.hex,
+			'.ss__error-handler__message': {
+				'.ss__icon': {
+					fill: infoColour.hex,
 				},
 			},
-		}),
+		},
+	});
 };
 
 export const ErrorHandler = observer((properties: ErrorHandlerProps): JSX.Element => {
@@ -125,7 +124,7 @@ export const ErrorHandler = observer((properties: ErrorHandlerProps): JSX.Elemen
 
 	const props = mergeProps('errorHandler', globalTheme, defaultProps, properties);
 
-	const { controller, error, disableStyles, style, styleScript, onRetryClick, className, treePath } = props;
+	const { controller, error, disableStyles, onRetryClick, className, treePath } = props;
 
 	const subProps: ErrorHandlerSubProps = {
 		icon: {
@@ -160,16 +159,7 @@ export const ErrorHandler = observer((properties: ErrorHandlerProps): JSX.Elemen
 
 	const errorObject = controller?.store?.error || error;
 
-	const styling: RootNodeProperties = { 'ss-name': props.name };
-	const stylingProps = props;
-
-	if (styleScript && !disableStyles) {
-		styling.css = [styleScript(stylingProps), style];
-	} else if (!disableStyles) {
-		styling.css = [CSS.errorHandler(stylingProps), style];
-	} else if (style) {
-		styling.css = [style];
-	}
+	const styling = mergeStyles<ErrorHandlerProps>(props, defaultStyles);
 
 	//initialize lang
 	const defaultLang = {

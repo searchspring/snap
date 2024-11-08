@@ -14,10 +14,10 @@ import { Icon, IconProps } from '../../Atoms/Icon/Icon';
 import { Results, ResultsProps } from '../../Organisms/Results';
 import { Banner, BannerProps } from '../../Atoms/Merchandising/Banner';
 import { Facets, FacetsProps } from '../../Organisms/Facets';
-import { defined, cloneWithProps, mergeProps } from '../../../utilities';
+import { defined, cloneWithProps, mergeProps, mergeStyles } from '../../../utilities';
 import { createHoverProps } from '../../../toolbox';
 import { Theme, useTheme, CacheProvider } from '../../../providers';
-import { ComponentProps, FacetDisplay, BreakpointsProps, RootNodeProperties, ResultComponent } from '../../../types';
+import { ComponentProps, FacetDisplay, BreakpointsProps, ResultComponent, StyleScript } from '../../../types';
 import { useDisplaySettings } from '../../../hooks/useDisplaySettings';
 import { Lang, useA11y, useLang } from '../../../hooks';
 
@@ -28,163 +28,174 @@ import { Lang, useA11y, useLang } from '../../../hooks';
 // import type { FunctionalComponent } from 'preact';
 // import type { SnapTemplates } from '../../../../../src';
 
-const CSS = {
-	Autocomplete: ({
-		inputViewportOffsetBottom,
-		hideFacets,
-		horizontalTerms,
-		noResults,
-		contentSlot,
-		viewportMaxHeight,
-		vertical,
-		width,
-		theme,
-	}: Partial<AutocompleteProps> & { inputViewportOffsetBottom: number; noResults: boolean }) =>
-		css({
-			'&, & *, & *:before, & *:after': {
-				boxSizing: 'border-box',
-			},
+const defaultStyles: StyleScript<AutocompleteProps> = ({
+	hideFacets,
+	horizontalTerms,
+	controller,
+	input,
+	contentSlot,
+	viewportMaxHeight,
+	vertical,
+	width,
+	theme,
+}) => {
+	let inputViewportOffsetBottom = 0;
+	if (input) {
+		let elem: Element | null;
+		if (typeof input === 'string') {
+			elem = document.querySelector(input);
+		} else {
+			elem = input;
+		}
+		const rect = elem?.getBoundingClientRect();
+		inputViewportOffsetBottom = rect?.bottom || 0;
+	}
+	const noResults = Boolean(controller.store.search?.query?.string && controller.store.results.length === 0);
+	return css({
+		'&, & *, & *:before, & *:after': {
+			boxSizing: 'border-box',
+		},
 
-			display: 'flex',
-			flexDirection: vertical ? 'column' : 'row',
-			flexWrap: horizontalTerms && !vertical ? 'wrap' : undefined,
-			position: 'absolute',
-			zIndex: '10002',
-			border: '1px solid #ebebeb',
-			background: '#ffffff',
-			width: width,
-			maxWidth: '100vw',
-			maxHeight: viewportMaxHeight && inputViewportOffsetBottom ? `calc(100vh - ${inputViewportOffsetBottom + 10}px)` : undefined,
-			overflowY: viewportMaxHeight && horizontalTerms && !vertical ? 'scroll' : undefined,
+		display: 'flex',
+		flexDirection: vertical ? 'column' : 'row',
+		flexWrap: horizontalTerms && !vertical ? 'wrap' : undefined,
+		position: 'absolute',
+		zIndex: '10002',
+		border: '1px solid #ebebeb',
+		background: '#ffffff',
+		width: width,
+		maxWidth: '100vw',
+		maxHeight: viewportMaxHeight && inputViewportOffsetBottom ? `calc(100vh - ${inputViewportOffsetBottom + 10}px)` : undefined,
+		overflowY: viewportMaxHeight && horizontalTerms && !vertical ? 'scroll' : undefined,
 
-			'.ss__autocomplete__close-button': {
-				color: '#c5c5c5',
+		'.ss__autocomplete__close-button': {
+			color: '#c5c5c5',
+			fontSize: '.8em',
+		},
+		'.ss__autocomplete__close-button:focus': {
+			top: '0px !important',
+			left: '0px !important',
+			zIndex: '1',
+		},
+
+		'&.ss__autocomplete--only-terms': {
+			width: `${vertical || horizontalTerms || Boolean(contentSlot) ? width : '150px'}`,
+		},
+
+		'.ss__autocomplete__title--trending, .ss__autocomplete__title--history, .ss__autocomplete__title--terms': {
+			fontWeight: 'normal',
+			margin: 0,
+			color: '#c5c5c5',
+			textTransform: 'uppercase',
+			padding: '10px',
+			h5: {
 				fontSize: '.8em',
-			},
-			'.ss__autocomplete__close-button:focus': {
-				top: '0px !important',
-				left: '0px !important',
-				zIndex: '1',
-			},
-
-			'&.ss__autocomplete--only-terms': {
-				width: `${vertical || horizontalTerms || Boolean(contentSlot) ? width : '150px'}`,
-			},
-
-			'.ss__autocomplete__title--trending, .ss__autocomplete__title--history, .ss__autocomplete__title--terms': {
-				fontWeight: 'normal',
 				margin: 0,
-				color: '#c5c5c5',
-				textTransform: 'uppercase',
-				padding: '10px',
-				h5: {
-					fontSize: '.8em',
-					margin: 0,
-				},
 			},
+		},
 
-			'.ss__autocomplete__title--facets': {
-				order: vertical ? 2 : undefined,
-			},
+		'.ss__autocomplete__title--facets': {
+			order: vertical ? 2 : undefined,
+		},
 
-			'.ss__autocomplete__terms': {
-				display: 'flex',
-				flexDirection: 'column',
-				flex: `1 1 auto`,
-				maxWidth: `${vertical || horizontalTerms ? 'auto' : '150px'}`,
-				minWidth: '150px',
-				order: 1,
-				background: '#f8f8f8',
+		'.ss__autocomplete__terms': {
+			display: 'flex',
+			flexDirection: 'column',
+			flex: `1 1 auto`,
+			maxWidth: `${vertical || horizontalTerms ? 'auto' : '150px'}`,
+			minWidth: '150px',
+			order: 1,
+			background: '#f8f8f8',
 
-				'.ss__autocomplete__terms__options': {
-					display: vertical || horizontalTerms ? 'flex' : undefined,
-					justifyContent: 'space-evenly',
-					flexWrap: 'wrap',
+			'.ss__autocomplete__terms__options': {
+				display: vertical || horizontalTerms ? 'flex' : undefined,
+				justifyContent: 'space-evenly',
+				flexWrap: 'wrap',
 
-					'.ss__autocomplete__terms__option': {
-						flexGrow: vertical || horizontalTerms ? '1' : undefined,
-						textAlign: vertical || horizontalTerms ? 'center' : undefined,
-						wordBreak: 'break-all',
-
-						a: {
-							display: 'block',
-							padding: vertical || horizontalTerms ? '10px 30px' : '10px',
-
-							em: {
-								fontStyle: 'normal',
-							},
-						},
-
-						'&.ss__autocomplete__terms__option--active': {
-							background: '#fff',
-
-							a: {
-								fontWeight: 'bold',
-								color: theme?.variables?.colors?.primary,
-							},
-						},
-					},
-				},
-			},
-
-			'.ss__autocomplete__facets': {
-				display: 'flex',
-				flex: `0 0 150px`,
-				flexDirection: vertical ? 'row' : 'column',
-				columnGap: '20px',
-				order: 2,
-				padding: vertical ? '10px 20px' : '10px',
-				overflowY: vertical ? undefined : 'auto',
-				'.ss__facets': {
-					display: 'flex',
-					flexDirection: vertical ? 'row' : 'column',
-					columnGap: '20px',
-				},
-				'.ss__facet-hierarchy-options__option.ss__facet-hierarchy-options__option--filtered~.ss__facet-hierarchy-options__option:not(.ss__facet-hierarchy-options__option--filtered)':
-					{
-						paddingLeft: 0,
-					},
-				'.ss__facet-hierarchy-options__option.ss__facet-hierarchy-options__option--filtered:hover': {
-					cursor: 'pointer',
-				},
-				'.ss__facet-palette-options__icon': {
-					display: 'none',
-				},
-			},
-			'.ss__autocomplete__content': {
-				display: 'flex',
-				flex: `1 1 ${hideFacets ? 'auto' : '0%'}`,
-				flexDirection: 'column',
-				justifyContent: 'space-between',
-				order: 3,
-				overflowY: 'auto',
-				margin: noResults ? '0 auto' : undefined,
-				padding: vertical ? '10px 20px' : '10px',
-
-				'.ss__banner.ss__banner--header, .ss__banner.ss__banner--banner': {
-					marginBottom: '10px',
-				},
-				'.ss__banner.ss__banner--footer': {
-					margin: '10px 0',
-				},
-				'.ss__autocomplete__content__results': {
-					minHeight: '0%',
-				},
-				'.ss__autocomplete__content__info': {
-					padding: '10px',
-					textAlign: noResults ? 'center' : 'right',
+				'.ss__autocomplete__terms__option': {
+					flexGrow: vertical || horizontalTerms ? '1' : undefined,
+					textAlign: vertical || horizontalTerms ? 'center' : undefined,
+					wordBreak: 'break-all',
 
 					a: {
-						fontWeight: 'bold',
-						color: theme?.variables?.colors?.primary,
+						display: 'block',
+						padding: vertical || horizontalTerms ? '10px 30px' : '10px',
 
-						'.ss__icon': {
-							marginLeft: '5px',
+						em: {
+							fontStyle: 'normal',
+						},
+					},
+
+					'&.ss__autocomplete__terms__option--active': {
+						background: '#fff',
+
+						a: {
+							fontWeight: 'bold',
+							color: theme?.variables?.colors?.primary,
 						},
 					},
 				},
 			},
-		}),
+		},
+
+		'.ss__autocomplete__facets': {
+			display: 'flex',
+			flex: `0 0 150px`,
+			flexDirection: vertical ? 'row' : 'column',
+			columnGap: '20px',
+			order: 2,
+			padding: vertical ? '10px 20px' : '10px',
+			overflowY: vertical ? undefined : 'auto',
+			'.ss__facets': {
+				display: 'flex',
+				flexDirection: vertical ? 'row' : 'column',
+				columnGap: '20px',
+			},
+			'.ss__facet-hierarchy-options__option.ss__facet-hierarchy-options__option--filtered~.ss__facet-hierarchy-options__option:not(.ss__facet-hierarchy-options__option--filtered)':
+				{
+					paddingLeft: 0,
+				},
+			'.ss__facet-hierarchy-options__option.ss__facet-hierarchy-options__option--filtered:hover': {
+				cursor: 'pointer',
+			},
+			'.ss__facet-palette-options__icon': {
+				display: 'none',
+			},
+		},
+		'.ss__autocomplete__content': {
+			display: 'flex',
+			flex: `1 1 ${hideFacets ? 'auto' : '0%'}`,
+			flexDirection: 'column',
+			justifyContent: 'space-between',
+			order: 3,
+			overflowY: 'auto',
+			margin: noResults ? '0 auto' : undefined,
+			padding: vertical ? '10px 20px' : '10px',
+
+			'.ss__banner.ss__banner--header, .ss__banner.ss__banner--banner': {
+				marginBottom: '10px',
+			},
+			'.ss__banner.ss__banner--footer': {
+				margin: '10px 0',
+			},
+			'.ss__autocomplete__content__results': {
+				minHeight: '0%',
+			},
+			'.ss__autocomplete__content__info': {
+				padding: '10px',
+				textAlign: noResults ? 'center' : 'right',
+
+				a: {
+					fontWeight: 'bold',
+					color: theme?.variables?.colors?.primary,
+
+					'.ss__icon': {
+						marginLeft: '5px',
+					},
+				},
+			},
+		},
+	});
 };
 
 export const Autocomplete = observer((properties: AutocompleteProps): JSX.Element => {
@@ -307,13 +318,10 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 	}
 
 	let input: string | Element | null = props.input;
-	let inputViewportOffsetBottom = 0;
 	if (input) {
 		if (typeof input === 'string') {
 			input = document.querySelector(input);
 		}
-		const rect = (input as Element)?.getBoundingClientRect();
-		inputViewportOffsetBottom = rect?.bottom || 0;
 	}
 
 	const {
@@ -343,9 +351,7 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 		// templates,
 		disableStyles,
 		className,
-		style,
 		controller,
-		styleScript,
 		treePath,
 	} = props;
 
@@ -446,21 +452,9 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 		showResults = false;
 	}
 
-	const styling: RootNodeProperties = { 'ss-name': props.name };
-	const stylingProps = {
-		...props,
-		inputViewportOffsetBottom,
-		noResults: Boolean(search?.query?.string && results.length === 0),
-	};
+	const noResults = Boolean(search?.query?.string && results.length === 0);
 
-	// add styleScript to styling
-	if (styleScript && !disableStyles) {
-		styling.css = [styleScript(stylingProps), style];
-	} else if (!disableStyles) {
-		styling.css = [CSS.Autocomplete(stylingProps), style];
-	} else if (style) {
-		styling.css = [style];
-	}
+	const styling = mergeStyles<AutocompleteProps>(props, defaultStyles);
 
 	const reset = () => {
 		controller.setFocused();
@@ -531,7 +525,11 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 		<CacheProvider>
 			<div
 				{...styling}
-				className={classnames('ss__autocomplete', className, { 'ss__autocomplete--only-terms': onlyTerms, 'ss__autocomplete--vertical': vertical })}
+				className={classnames('ss__autocomplete', className, {
+					'ss__autocomplete--only-terms': onlyTerms,
+					'ss__autocomplete--vertical': vertical,
+					'ss__autocomplete--no-results': noResults,
+				})}
 				onClick={(e) => e.stopPropagation()}
 				ref={(e) => useA11y(e, 0, true, reset)}
 			>

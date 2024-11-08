@@ -15,5 +15,5 @@ const searchHorizontalStyleScript = ({ theme }: SearchHorizontalProps) => {
 
 // SearchHorizontal component props
 export const searchHorizontal: Partial<SearchHorizontalProps> = {
-	styleScript: searchHorizontalStyleScript,
+	themeStyleScript: searchHorizontalStyleScript,
 };

@@ -109,5 +109,5 @@ const recommendationBundleStyleScript = ({ slidesPerView, spaceBetween, ctaInlin
 
 // RecommendationBundle component props
 export const recommendationBundle: Partial<RecommendationBundleProps> = {
-	styleScript: recommendationBundleStyleScript,
+	themeStyleScript: recommendationBundleStyleScript,
 };

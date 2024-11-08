@@ -5,11 +5,11 @@ import { filters } from '@searchspring/snap-toolbox';
 import classnames from 'classnames';
 
 import { Theme, useTheme, CacheProvider } from '../../../providers';
-import { ComponentProps, RootNodeProperties } from '../../../types';
-import { mergeProps } from '../../../utilities';
+import { ComponentProps, StyleScript } from '../../../types';
+import { mergeProps, mergeStyles } from '../../../utilities';
 
-const CSS = {
-	formattedNumber: ({}: Partial<FormattedNumberProps>) => css({}),
+const defaultStyles: StyleScript<FormattedNumberProps> = () => {
+	return css({});
 };
 
 export function FormattedNumber(properties: FormattedNumberProps): JSX.Element {
@@ -25,20 +25,7 @@ export function FormattedNumber(properties: FormattedNumberProps): JSX.Element {
 
 	const props = mergeProps('formattedNumber', globalTheme, defaultProps, properties);
 
-	const {
-		value,
-		symbol,
-		decimalPlaces,
-		padDecimalPlaces,
-		thousandsSeparator,
-		decimalSeparator,
-		symbolAfter,
-		disableStyles,
-		className,
-		style,
-		raw,
-		styleScript,
-	} = props;
+	const { value, symbol, decimalPlaces, padDecimalPlaces, thousandsSeparator, decimalSeparator, symbolAfter, className, raw } = props;
 
 	const formattedNumber = filters.formatNumber(value, {
 		symbol,
@@ -49,16 +36,7 @@ export function FormattedNumber(properties: FormattedNumberProps): JSX.Element {
 		symbolAfter,
 	});
 
-	const styling: RootNodeProperties = { 'ss-name': props.name };
-	const stylingProps = props;
-
-	if (styleScript && !disableStyles) {
-		styling.css = [styleScript(stylingProps), style];
-	} else if (!disableStyles) {
-		styling.css = [CSS.formattedNumber(stylingProps), style];
-	} else if (style) {
-		styling.css = [style];
-	}
+	const styling = mergeStyles<FormattedNumberProps>(props, defaultStyles);
 
 	return raw ? (
 		<Fragment>{formattedNumber}</Fragment>

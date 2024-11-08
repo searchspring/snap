@@ -16,5 +16,5 @@ const iconStyleScript = ({ color, height, width, size, theme }: IconProps) => {
 
 // Icon component props
 export const icon: Partial<IconProps> = {
-	styleScript: iconStyleScript,
+	themeStyleScript: iconStyleScript,
 };

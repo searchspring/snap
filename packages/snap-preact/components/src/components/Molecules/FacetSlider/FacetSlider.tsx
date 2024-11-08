@@ -7,145 +7,144 @@ import classnames from 'classnames';
 import { useRanger } from 'react-ranger';
 
 import { Theme, useTheme, CacheProvider } from '../../../providers';
-import { mergeProps } from '../../../utilities';
-import { ComponentProps, RootNodeProperties } from '../../../types';
+import { mergeProps, mergeStyles } from '../../../utilities';
+import { ComponentProps, StyleScript } from '../../../types';
 import { sprintf } from '../../../utilities';
 import type { RangeFacet } from '@searchspring/snap-store-mobx';
 import { Lang, useA11y, useLang } from '../../../hooks';
 import deepmerge from 'deepmerge';
 
-const CSS = {
-	facetSlider: ({
-		railColor,
-		trackColor,
-		handleColor,
-		valueTextColor,
-		handleDraggingColor,
-		showTicks,
-		stickyHandleLabel,
-		tickTextColor,
-		theme,
-	}: Partial<FacetSliderProps>) =>
-		css({
-			display: 'flex',
-			flexDirection: 'column',
-			marginTop: '5px',
-			marginBottom: showTicks && stickyHandleLabel ? '20px' : showTicks || stickyHandleLabel ? '10px' : '5px',
+const defaultStyles: StyleScript<FacetSliderProps> = ({
+	railColor,
+	trackColor,
+	handleColor,
+	valueTextColor,
+	handleDraggingColor,
+	showTicks,
+	stickyHandleLabel,
+	tickTextColor,
+	theme,
+}) => {
+	return css({
+		display: 'flex',
+		flexDirection: 'column',
+		marginTop: '5px',
+		marginBottom: showTicks && stickyHandleLabel ? '20px' : showTicks || stickyHandleLabel ? '10px' : '5px',
 
-			'& .ss__facet-slider__slider': {
-				position: 'relative',
-				display: 'inline-block',
-				height: '8px',
-				width: 'calc(100% - 2rem)',
-				margin: stickyHandleLabel ? '1rem' : '0 1rem',
-				top: '10px',
+		'& .ss__facet-slider__slider': {
+			position: 'relative',
+			display: 'inline-block',
+			height: '8px',
+			width: 'calc(100% - 2rem)',
+			margin: stickyHandleLabel ? '1rem' : '0 1rem',
+			top: '10px',
+		},
+
+		'& .ss__facet-slider__tick': {
+			'&:before': {
+				content: "''",
+				position: 'absolute',
+				left: '0',
+				background: 'rgba(0, 0, 0, 0.2)',
+				height: '5px',
+				width: '2px',
+				transform: 'translate(-50%, 0.7rem)',
 			},
-
-			'& .ss__facet-slider__tick': {
-				'&:before': {
-					content: "''",
-					position: 'absolute',
-					left: '0',
-					background: 'rgba(0, 0, 0, 0.2)',
-					height: '5px',
-					width: '2px',
-					transform: 'translate(-50%, 0.7rem)',
-				},
-				'& .ss__facet-slider__tick__label': {
-					position: 'absolute',
-					fontSize: '0.6rem',
-					color: tickTextColor,
-					top: '100%',
-					transform: 'translate(-50%, 1.2rem)',
+			'& .ss__facet-slider__tick__label': {
+				position: 'absolute',
+				fontSize: '0.6rem',
+				color: tickTextColor,
+				top: '100%',
+				transform: 'translate(-50%, 1.2rem)',
+				whiteSpace: 'nowrap',
+			},
+		},
+		'& .ss__facet-slider__rail': {
+			background: railColor || theme?.variables?.colors?.primary || '#333',
+			height: '100%',
+		},
+		'& .ss__facet-slider__segment': {
+			background: trackColor || theme?.variables?.colors?.secondary || '#ccc',
+			height: '100%',
+		},
+		'& .ss__facet-slider__handles': {
+			textAlign: 'center',
+			'& button': {
+				'& .ss__facet-slider__handle': {
+					background: handleColor || theme?.variables?.colors?.primary || '#333',
+					display: 'flex',
+					alignItems: 'center',
+					justifyContent: 'center',
+					width: '1.6rem',
+					height: '1.6rem',
+					borderRadius: '100%',
+					fontSize: '0.7rem',
 					whiteSpace: 'nowrap',
-				},
-			},
-			'& .ss__facet-slider__rail': {
-				background: railColor || theme?.variables?.colors?.primary || '#333',
-				height: '100%',
-			},
-			'& .ss__facet-slider__segment': {
-				background: trackColor || theme?.variables?.colors?.secondary || '#ccc',
-				height: '100%',
-			},
-			'& .ss__facet-slider__handles': {
-				textAlign: 'center',
-				'& button': {
-					'& .ss__facet-slider__handle': {
-						background: handleColor || theme?.variables?.colors?.primary || '#333',
-						display: 'flex',
-						alignItems: 'center',
-						justifyContent: 'center',
-						width: '1.6rem',
-						height: '1.6rem',
-						borderRadius: '100%',
-						fontSize: '0.7rem',
-						whiteSpace: 'nowrap',
-						color: valueTextColor || 'initial',
-						fontWeight: 'normal',
-						transform: 'translateY(0) scale(0.9)',
-						transition: 'all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275)',
-						position: 'relative',
-						cursor: 'pointer',
+					color: valueTextColor || 'initial',
+					fontWeight: 'normal',
+					transform: 'translateY(0) scale(0.9)',
+					transition: 'all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275)',
+					position: 'relative',
+					cursor: 'pointer',
 
-						'&:after': {
-							backgroundColor: '#ffffff',
-							width: '30%',
-							height: '30%',
-							top: '0',
-							bottom: '0',
-							left: '0',
-							content: '""',
-							position: 'absolute',
-							right: '0',
-							borderRadius: '12px',
-							margin: 'auto',
-							cursor: 'pointer',
-						},
-
-						'&.ss__facet-slider__handle--active': {
-							background: handleDraggingColor || handleColor || theme?.variables?.colors?.primary || '#000',
-							'& label.ss__facet-slider__handle__label': {
-								background: '#fff',
-								padding: '0 5px',
-							},
-						},
-
-						'& label.ss__facet-slider__handle__label': {
-							display: 'inline-block',
-							marginTop: showTicks && !stickyHandleLabel ? '35px' : '20px',
-
-							'&.ss__facet-slider__handle__label--pinleft': {
-								left: '0px',
-							},
-							'&.ss__facet-slider__handle__label--pinright': {
-								right: '0px',
-							},
-							'&.ss__facet-slider__handle__label--sticky': {
-								position: 'absolute',
-								top: '-20px',
-								fontFamily: 'Roboto, Helvetica, Arial',
-								fontSize: '14px',
-								marginTop: '0px',
-							},
-						},
-					},
-				},
-			},
-
-			'& .ss__facet-slider__labels': {
-				textAlign: 'center',
-				marginTop: showTicks && !stickyHandleLabel ? '40px' : '20px',
-				color: valueTextColor,
-
-				'& .ss__facet-slider__label--0': {
 					'&:after': {
-						content: '"-"',
-						padding: '5px',
+						backgroundColor: '#ffffff',
+						width: '30%',
+						height: '30%',
+						top: '0',
+						bottom: '0',
+						left: '0',
+						content: '""',
+						position: 'absolute',
+						right: '0',
+						borderRadius: '12px',
+						margin: 'auto',
+						cursor: 'pointer',
+					},
+
+					'&.ss__facet-slider__handle--active': {
+						background: handleDraggingColor || handleColor || theme?.variables?.colors?.primary || '#000',
+						'& label.ss__facet-slider__handle__label': {
+							background: '#fff',
+							padding: '0 5px',
+						},
+					},
+
+					'& label.ss__facet-slider__handle__label': {
+						display: 'inline-block',
+						marginTop: showTicks && !stickyHandleLabel ? '35px' : '20px',
+
+						'&.ss__facet-slider__handle__label--pinleft': {
+							left: '0px',
+						},
+						'&.ss__facet-slider__handle__label--pinright': {
+							right: '0px',
+						},
+						'&.ss__facet-slider__handle__label--sticky': {
+							position: 'absolute',
+							top: '-20px',
+							fontFamily: 'Roboto, Helvetica, Arial',
+							fontSize: '14px',
+							marginTop: '0px',
+						},
 					},
 				},
 			},
-		}),
+		},
+
+		'& .ss__facet-slider__labels': {
+			textAlign: 'center',
+			marginTop: showTicks && !stickyHandleLabel ? '40px' : '20px',
+			color: valueTextColor,
+
+			'& .ss__facet-slider__label--0': {
+				'&:after': {
+					content: '"-"',
+					padding: '5px',
+				},
+			},
+		},
+	});
 };
 
 export const FacetSlider = observer((properties: FacetSliderProps): JSX.Element => {
@@ -156,7 +155,7 @@ export const FacetSlider = observer((properties: FacetSliderProps): JSX.Element 
 
 	const props = mergeProps('facetSlider', globalTheme, defaultProps, properties);
 
-	const { showTicks, facet, stickyHandleLabel, onChange, onDrag, disableStyles, className, style, styleScript } = props;
+	const { showTicks, facet, stickyHandleLabel, onChange, onDrag, className } = props;
 
 	let { tickSize } = props;
 
@@ -198,16 +197,8 @@ export const FacetSlider = observer((properties: FacetSliderProps): JSX.Element 
 		tickSize: tickSize,
 	});
 
-	const styling: RootNodeProperties = { 'ss-name': props.name };
-	const stylingProps = props;
+	const styling = mergeStyles<FacetSliderProps>(props, defaultStyles);
 
-	if (styleScript && !disableStyles) {
-		styling.css = [styleScript(stylingProps), style];
-	} else if (!disableStyles) {
-		styling.css = [CSS.facetSlider(stylingProps), style];
-	} else if (style) {
-		styling.css = [style];
-	}
 	return facet.range && facet.active && facet.step ? (
 		<CacheProvider>
 			<div className={classnames('ss__facet-slider', className)} {...getTrackProps()} {...styling}>

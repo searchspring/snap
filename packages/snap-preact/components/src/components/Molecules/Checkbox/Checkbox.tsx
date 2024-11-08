@@ -5,17 +5,18 @@ import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
 import { observer } from 'mobx-react';
 
-import { ComponentProps, RootNodeProperties } from '../../../types';
-import { defined, mergeProps } from '../../../utilities';
+import { ComponentProps, StyleScript } from '../../../types';
+import { defined, mergeProps, mergeStyles } from '../../../utilities';
 import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { Icon, IconProps, IconType } from '../../Atoms/Icon';
 import { useA11y } from '../../../hooks/useA11y';
 import { Lang, useLang } from '../../../hooks';
 import deepmerge from 'deepmerge';
 
-const CSS = {
-	checkbox: ({ size, color, theme }: Partial<CheckboxProps>) => {
-		const pixelSize = isNaN(Number(size)) ? size : `${size}px`;
+const defaultStyles: StyleScript<CheckboxProps> = ({ size, color, theme, native }) => {
+	const pixelSize = isNaN(Number(size)) ? size : `${size}px`;
+
+	if (!native) {
 		return css({
 			display: 'inline-flex',
 			alignItems: 'center',
@@ -32,8 +33,9 @@ const CSS = {
 				height: `calc(${pixelSize} - 30%)`,
 			},
 		});
-	},
-	native: ({}) => css({}),
+	} else {
+		return css({});
+	}
 };
 
 export const Checkbox = observer((properties: CheckboxProps): JSX.Element => {
@@ -46,24 +48,8 @@ export const Checkbox = observer((properties: CheckboxProps): JSX.Element => {
 
 	const props = mergeProps('checkbox', globalTheme, defaultProps, properties);
 
-	const {
-		checked,
-		color,
-		disabled,
-		icon,
-		iconColor,
-		onClick,
-		size,
-		startChecked,
-		native,
-		disableA11y,
-		disableStyles,
-		className,
-		style,
-		styleScript,
-		theme,
-		treePath,
-	} = props;
+	const { checked, color, disabled, icon, iconColor, onClick, size, startChecked, native, disableA11y, disableStyles, className, theme, treePath } =
+		props;
 
 	const pixelSize = isNaN(Number(size)) ? size : `${size}px`;
 
@@ -109,20 +95,7 @@ export const Checkbox = observer((properties: CheckboxProps): JSX.Element => {
 		}
 	};
 
-	const styling: RootNodeProperties = { 'ss-name': props.name };
-	const stylingProps = props;
-
-	if (styleScript && !disableStyles) {
-		styling.css = [styleScript(stylingProps), style];
-	} else if (!disableStyles) {
-		if (native) {
-			styling.css = [CSS.native(stylingProps), style];
-		} else {
-			styling.css = [CSS.checkbox(stylingProps), style];
-		}
-	} else if (style) {
-		styling.css = [style];
-	}
+	const styling = mergeStyles<CheckboxProps>(props, defaultStyles);
 
 	//initialize lang
 	const defaultLang = {
@@ -141,7 +114,12 @@ export const Checkbox = observer((properties: CheckboxProps): JSX.Element => {
 			{native ? (
 				<input
 					{...styling}
-					className={classnames('ss__checkbox', { 'ss__checkbox--disabled': disabled, 'ss__checkbox--active': checkedState }, className)}
+					className={classnames(
+						'ss__checkbox',
+						'ss__checkbox--native',
+						{ 'ss__checkbox--disabled': disabled, 'ss__checkbox--active': checkedState },
+						className
+					)}
 					type="checkbox"
 					aria-checked={checkedState}
 					onClick={(e) => clickFunc(e)}
