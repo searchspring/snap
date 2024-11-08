@@ -12,10 +12,10 @@ The `controller` prop specifies a reference to the search controller.
 ```
 
 ### Store Props
-Alternatively to using the `controller` prop, you can pass each of the required stores individually as props. The `queryStore` prop specifies a reference to the SearchQueryStore, the `paginationStore` prop specifies a reference to the SearchPaginationStore, and the `merchandisingStore` prop specifies a reference to the SearchMerchandisingStore. 
+Alternatively to using the `controller` prop, you can pass each of the required stores individually as props. The `query` prop specifies a reference to the SearchQueryStore, the `pagination` prop specifies a reference to the SearchPaginationStore, and the `merchandisingStore` prop specifies a reference to the SearchMerchandisingStore. 
 
 ```jsx
-<SearchHeader queryStore={SearchQueryStore} paginationStore={SearchPaginationStore} merchandisingStore={SearchMerchandisingStore} />
+<SearchHeader query={SearchQueryStore} pagination={SearchPaginationStore} merchandising={SearchMerchandisingStore} />
 ```
 
 ### titleText
@@ -33,7 +33,7 @@ The `subtitleText` prop specifies an optional subtitle to render under the the r
 ```
 
 ### correctedQueryText
-The `correctedQueryText` prop specifies the text to show when there is an originalQuery. This can be either a string, or a function that returns a string, functions are passed the controller. 
+The `correctedQueryText` prop specifies the text to show when there is an originalQuery. This can be either a string, or a function that returns a string, functions are passed the pagination and query store for reference to build out custom text.
 
 ```jsx
 const getCorrected = (controller) => {
@@ -44,7 +44,7 @@ const getCorrected = (controller) => {
 ```
 
 ### noResultsText
-The `noResultsText` prop specifies the text to show when the totalResults count is 0. This can be either a string, or a function that returns a string, functions are passed the controller. 
+The `noResultsText` prop specifies the text to show when the totalResults count is 0. This can be either a string, or a function that returns a string, functions are passed the pagination and query store for reference to build out custom text.
 
 ```jsx
 <SearchHeader controller={controller} noResultsText={'No Results Found, Please try another term'} />
@@ -52,7 +52,7 @@ The `noResultsText` prop specifies the text to show when the totalResults count 
 
 
 ### didYouMeanText
-The `didYouMeanText` prop specifies the text to show when there is a "didYouMean" query. This can be either a string, or a function that returns a string, functions are passed the controller. 
+The `didYouMeanText` prop specifies the text to show when there is a "didYouMean" query. This can be either a string, or a function that returns a string, functions are passed the pagination and query store for reference to build out custom text.
 
 ```jsx
 const getDym = (controller) => {

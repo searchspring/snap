@@ -30,6 +30,9 @@ let controller: SearchController;
 const mockClient = new MockClient(globals, {});
 mockClient.mockData.updateConfig({ search: 'filtered' });
 
+const TopSlotComponent = () => <div className="top-slot">topSlot</div>;
+const BottomSlotComponent = () => <div className="bottom-slot">bottomSlot</div>;
+
 describe('Results Component', () => {
 	beforeEach(async () => {
 		searchConfig = { ...searchConfigDefault };
@@ -57,12 +60,19 @@ describe('Results Component', () => {
 	it('renders expected sub-components', () => {
 		const rendered = render(<Toolbar controller={controller} />);
 		const filterSummaryElement = rendered.container.querySelector('.ss__toolbar__filter-summary');
+		// TODO: Requires theme store
+		// const layoutSelectorElement = rendered.container.querySelector('.ss__toolbar__layout-selector');
 		const paginationElement = rendered.container.querySelector('.ss__toolbar__pagination');
+		const paginationInfoElement = rendered.container.querySelector('.ss__toolbar__pagination-info');
+		const mobileSidebarElement = rendered.container.querySelector('.ss__toolbar__mobile-sidebar');
 		const sortByElement = rendered.container.querySelector('.ss__toolbar__sort-by');
 		const perPageElement = rendered.container.querySelector('.ss__toolbar__per-page');
 
 		expect(filterSummaryElement).toBeInTheDocument();
+		// expect(layoutSelectorElement).toBeInTheDocument();
 		expect(paginationElement).toBeInTheDocument();
+		expect(paginationInfoElement).toBeInTheDocument();
+		expect(mobileSidebarElement).toBeInTheDocument();
 		expect(sortByElement).toBeInTheDocument();
 		expect(perPageElement).toBeInTheDocument();
 	});
@@ -93,6 +103,36 @@ describe('Results Component', () => {
 		expect(perPageElement).toBeInTheDocument();
 	});
 
+	it('can hide paginationInfo', () => {
+		const rendered = render(<Toolbar controller={controller} hidePaginationInfo />);
+		const paginationInfoElement = rendered.container.querySelector('.ss__toolbar__pagination-info');
+
+		expect(paginationInfoElement).not.toBeInTheDocument();
+	});
+
+	it('can hide mobileSidebar', () => {
+		const rendered = render(<Toolbar controller={controller} hideMobileSidebar />);
+		const mobileSidebarElement = rendered.container.querySelector('.ss__toolbar__mobile-sidebar');
+
+		expect(mobileSidebarElement).not.toBeInTheDocument();
+	});
+
+	it('can provide topSlot', () => {
+		const rendered = render(<Toolbar controller={controller} topSlot={<TopSlotComponent />} />);
+		const topSlotElement = rendered.container.querySelector('.ss__toolbar__slot--top .top-slot');
+
+		expect(topSlotElement).toBeInTheDocument();
+		expect(topSlotElement).toHaveTextContent('topSlot');
+	});
+
+	it('can provide bottomSlot', () => {
+		const rendered = render(<Toolbar controller={controller} bottomSlot={<BottomSlotComponent />} />);
+		const bottomSlotElement = rendered.container.querySelector('.ss__toolbar__slot--bottom .bottom-slot');
+
+		expect(bottomSlotElement).toBeInTheDocument();
+		expect(bottomSlotElement).toHaveTextContent('bottomSlot');
+	});
+
 	it('can hide sortBy', () => {
 		const rendered = render(<Toolbar controller={controller} hideSortBy />);
 		const filterSummaryElement = rendered.container.querySelector('.ss__toolbar__filter-summary');
@@ -120,18 +160,42 @@ describe('Results Component', () => {
 	});
 
 	it('can hide everything', () => {
-		const rendered = render(<Toolbar controller={controller} hidePerPage hidePagination hideSortBy hideFilterSummary />);
+		const rendered = render(
+			<Toolbar
+				controller={controller}
+				topSlot={<TopSlotComponent />}
+				bottomSlot={<BottomSlotComponent />}
+				hidePerPage
+				hidePagination
+				hidePaginationInfo
+				hideMobileSidebar
+				hideSortBy
+				hideFilterSummary
+				hideTopSlot
+				hideBottomSlot
+				hideLayoutSelector
+			/>
+		);
 		const filterSummaryElement = rendered.container.querySelector('.ss__toolbar__filter-summary');
+		// TODO: Requires theme store
+		// const layoutSelectorElement = rendered.container.querySelector('.ss__toolbar__layout-selector');
 		const paginationElement = rendered.container.querySelector('.ss__toolbar__pagination');
+		const paginationInfoElement = rendered.container.querySelector('.ss__toolbar__pagination-info');
+		const mobileSidebarElement = rendered.container.querySelector('.ss__toolbar__mobile-sidebar');
 		const sortByElement = rendered.container.querySelector('.ss__toolbar__sort-by');
 		const perPageElement = rendered.container.querySelector('.ss__toolbar__per-page');
+		const topSlotElement = rendered.container.querySelector('.top-slot');
+		const bottomSlotElement = rendered.container.querySelector('.bottom-slot');
 
-		const wrapper = rendered.container.querySelector('.ss__toolbar')!;
-		expect(wrapper).toBeInTheDocument();
 		expect(filterSummaryElement).not.toBeInTheDocument();
+		// expect(layoutSelectorElement).toBeInTheDocument();
 		expect(paginationElement).not.toBeInTheDocument();
+		expect(paginationInfoElement).not.toBeInTheDocument();
+		expect(mobileSidebarElement).not.toBeInTheDocument();
 		expect(sortByElement).not.toBeInTheDocument();
 		expect(perPageElement).not.toBeInTheDocument();
+		expect(topSlotElement).not.toBeInTheDocument();
+		expect(bottomSlotElement).not.toBeInTheDocument();
 	});
 
 	it('renders with classname', () => {

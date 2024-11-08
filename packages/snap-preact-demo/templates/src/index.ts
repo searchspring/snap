@@ -30,10 +30,13 @@ new SnapTemplates({
 			},
 			overrides: {
 				components: {
+					// 'button.filter-toggle': {
+					// 	icon: 'search'
+					// },
 					// overrides here...
-					toolbar: {
-						hidePagination: true,
-					},
+					// toolbar: {
+					// 	hidePagination: true,
+					// },
 				},
 			},
 		},

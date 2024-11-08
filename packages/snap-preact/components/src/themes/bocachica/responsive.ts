@@ -67,6 +67,9 @@ const mobileOverrides: ThemeResponsive = {
 		sortBy: {
 			type: 'radio',
 		},
+		'toolbar.top': {
+			hideMobileSidebar: false,
+		},
 		toolbar: {
 			hideSortBy: true,
 			hidePerPage: true,

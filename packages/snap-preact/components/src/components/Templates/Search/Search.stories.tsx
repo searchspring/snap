@@ -63,7 +63,7 @@ export default {
 			},
 			control: { type: 'boolean' },
 		},
-		mobileSidebarDisplayAt: {
+		mobileDisplayAt: {
 			defaultValue: '',
 			description: 'Media query for when to render the mobileSidebar',
 			table: {
@@ -77,17 +77,6 @@ export default {
 		hideSidebar: {
 			defaultValue: false,
 			description: 'prevents the sidebar component from rendering',
-			table: {
-				type: {
-					summary: 'boolean',
-				},
-				defaultValue: { summary: false },
-			},
-			control: { type: 'boolean' },
-		},
-		hideMobileSidebar: {
-			defaultValue: false,
-			description: 'prevents the mobileSidebar component from rendering',
 			table: {
 				type: {
 					summary: 'boolean',

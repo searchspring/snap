@@ -13,6 +13,7 @@ export { image } from './image';
 export { inlineBanner } from './inlineBanner';
 export { loadingBar } from './loadingBar';
 export { overlay } from './overlay';
+export { paginationInfo } from './paginationInfo';
 export { price } from './price';
 export { searchHeader } from './searchHeader';
 export { skeleton } from './skeleton';

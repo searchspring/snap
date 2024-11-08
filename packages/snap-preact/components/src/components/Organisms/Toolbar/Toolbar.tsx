@@ -7,7 +7,7 @@ import { observer } from 'mobx-react-lite';
 import { Theme, useTheme, useSnap, CacheProvider } from '../../../providers';
 import { ComponentProps, RootNodeProperties } from '../../../types';
 import { FilterSummary, FilterSummaryProps } from '../FilterSummary';
-import { defined, mergeProps } from '../../../utilities';
+import { cloneWithProps, defined, mergeProps } from '../../../utilities';
 import { Pagination, PaginationProps } from '../../Molecules/Pagination';
 import { LoadMore, LoadMoreProps } from '../../Molecules/LoadMore';
 import { SearchController } from '@searchspring/snap-controller';
@@ -15,13 +15,14 @@ import { SortBy, SortByProps } from '../../Molecules/SortBy';
 import { PerPage, PerPageProps } from '../../Molecules/PerPage';
 import { LayoutSelector, LayoutSelectorProps } from '../../Molecules/LayoutSelector';
 import { SnapTemplates } from '../../../../../src';
+import { MobileSidebar, MobileSidebarProps } from '../MobileSidebar';
+import { PaginationInfo, PaginationInfoProps } from '../../Atoms/PaginationInfo/PaginationInfo';
 
 const CSS = {
 	toolbar: ({}: Partial<ToolbarProps>) =>
 		css({
 			display: 'flex',
 			justifyContent: 'flex-end',
-			margin: '10px 0px',
 			gap: '10px',
 		}),
 };
@@ -40,20 +41,20 @@ export const Toolbar = observer((properties: ToolbarProps): JSX.Element => {
 		hidePagination: false,
 	};
 
-	console.log('toolbar properties', properties);
-	console.log('toolbar globalTheme', globalTheme);
-
 	const props = mergeProps('toolbar', globalTheme, defaultProps, properties);
-
-	console.log('toolbar props', props);
-
 	const {
 		controller,
+		hideMobileSidebar,
 		hideFilterSummary,
 		hidePerPage,
 		hideSortBy,
 		hideLayoutSelector,
 		hidePagination,
+		hidePaginationInfo,
+		topSlot,
+		bottomSlot,
+		hideTopSlot,
+		hideBottomSlot,
 		disableStyles,
 		className,
 		style,
@@ -73,6 +74,20 @@ export const Toolbar = observer((properties: ToolbarProps): JSX.Element => {
 	}
 
 	const subProps: ToolbarSubProps = {
+		MobileSidebar: {
+			// default props
+			controller,
+			className: 'ss__toolbar__mobile-sidebar',
+			// global theme
+			...globalTheme?.components?.mobileSidebar,
+			// inherited props
+			...defined({
+				disableStyles,
+			}),
+			// component theme overrides
+			theme: props?.theme,
+			treePath,
+		},
 		FilterSummary: {
 			// default props
 			controller,
@@ -107,6 +122,20 @@ export const Toolbar = observer((properties: ToolbarProps): JSX.Element => {
 			className: 'ss__toolbar__pagination',
 			// global theme
 			...globalTheme?.components?.pagination,
+			// inherited props
+			...defined({
+				disableStyles,
+			}),
+			// component theme overrides
+			theme: props?.theme,
+			treePath,
+		},
+		PaginationInfo: {
+			// default props
+			controller,
+			className: 'ss__toolbar__pagination-info',
+			// global theme
+			...globalTheme?.components?.paginationInfo,
 			// inherited props
 			...defined({
 				disableStyles,
@@ -162,9 +191,13 @@ export const Toolbar = observer((properties: ToolbarProps): JSX.Element => {
 	return (
 		<CacheProvider>
 			<div {...styling} className={classnames('ss__toolbar', className)}>
+				{!hideTopSlot && topSlot && <div className={classnames('ss__toolbar__slot', `ss__toolbar__slot--top`)}>{cloneWithProps(topSlot)}</div>}
+
+				{!hideMobileSidebar && controller.store.pagination.totalResults > 0 && <MobileSidebar controller={controller} {...subProps.MobileSidebar} />}
+
 				{!hideFilterSummary && <FilterSummary {...subProps.FilterSummary} />}
 
-				{!hideLayoutSelector && (
+				{!hideLayoutSelector && themeStore && props.theme?.layoutOptions?.length && (
 					<LayoutSelector
 						onSelect={(e, option) => {
 							if (option) {
@@ -176,6 +209,8 @@ export const Toolbar = observer((properties: ToolbarProps): JSX.Element => {
 						{...subProps.LayoutSelector}
 					/>
 				)}
+
+				{!hidePaginationInfo && <PaginationInfo {...subProps.PaginationInfo} />}
 
 				{!hideSortBy && <SortBy {...subProps.SortBy} />}
 
@@ -189,6 +224,10 @@ export const Toolbar = observer((properties: ToolbarProps): JSX.Element => {
 							return <Pagination {...subProps.Pagination} />;
 						}
 					})()}
+
+				{!hideBottomSlot && bottomSlot && (
+					<div className={classnames('ss__toolbar__slot', `ss__toolbar__slot--bottom`)}>{cloneWithProps(bottomSlot)}</div>
+				)}
 			</div>
 		</CacheProvider>
 	);
@@ -197,18 +236,26 @@ export const Toolbar = observer((properties: ToolbarProps): JSX.Element => {
 export interface ToolbarProps extends ComponentProps {
 	controller: SearchController;
 	hideFilterSummary?: boolean;
+	hideMobileSidebar?: boolean;
 	hideLayoutSelector?: boolean;
 	hidePerPage?: boolean;
 	hideSortBy?: boolean;
 	hidePagination?: boolean;
+	hidePaginationInfo?: boolean;
+	topSlot?: JSX.Element;
+	hideTopSlot?: boolean;
+	bottomSlot?: JSX.Element;
+	hideBottomSlot?: boolean;
 	name?: ToolbarNames;
 }
 
 export type ToolbarNames = 'top' | 'middle' | 'bottom';
 
 interface ToolbarSubProps {
+	MobileSidebar: Partial<MobileSidebarProps>;
 	FilterSummary: Partial<FilterSummaryProps>;
 	Pagination: Partial<PaginationProps>;
+	PaginationInfo: Partial<PaginationInfoProps>;
 	LoadMore: Partial<LoadMoreProps>;
 	SortBy: Partial<SortByProps>;
 	PerPage: Partial<PerPageProps>;

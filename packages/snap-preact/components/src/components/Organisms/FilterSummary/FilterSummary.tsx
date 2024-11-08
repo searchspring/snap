@@ -17,9 +17,8 @@ import deepmerge from 'deepmerge';
 const CSS = {
 	filterSummary: ({}: Partial<FilterSummaryProps>) =>
 		css({
-			'& .ss__filter-summary__filter': {
-				margin: '5px 10px 5px 0',
-			},
+			display: 'flex',
+			gap: '0.5em',
 			'& .ss__filter-summary__title': {
 				fontSize: '1.2em',
 			},

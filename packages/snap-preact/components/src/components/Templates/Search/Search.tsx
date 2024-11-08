@@ -11,22 +11,21 @@ import { Sidebar, SidebarProps } from '../../Organisms/Sidebar';
 import { Toolbar, ToolbarProps } from '../../Organisms/Toolbar';
 import { SearchHeader, SearchHeaderProps } from '../../Atoms/SearchHeader';
 import { NoResults, NoResultsProps } from '../../Organisms/NoResults';
-import { Lang, useMediaQuery } from '../../../hooks';
-import { MobileSidebar, MobileSidebarProps } from '../../Organisms/MobileSidebar';
+import { Lang, useLang, useMediaQuery } from '../../../hooks';
 import { Button, ButtonProps } from '../../Atoms/Button';
 import { Banner, BannerProps } from '../../Atoms/Merchandising';
-import { ContentType } from '@searchspring/snap-store-mobx';
+import { ContentType, SearchFilterStore } from '@searchspring/snap-store-mobx';
 import { useState } from 'preact/hooks';
 import deepmerge from 'deepmerge';
 
 const CSS = {
 	Search: ({}: Partial<SearchProps>) =>
 		css({
-			'.ss__search__header-section': {},
-
 			'.ss__search__content-section': {
 				display: 'flex',
 				minHeight: '600px',
+				marginTop: '1.5em',
+				gap: '1.5em',
 			},
 
 			'.ss__search__header-section__toolbar--top-toolbar': {
@@ -40,12 +39,14 @@ const CSS = {
 			'.ss__sidebar': {
 				flex: '0 1 auto',
 				width: '270px',
-				margin: '0 40px 0 0',
 			},
 
 			'.ss__search__content': {
 				width: '100%',
 				boxSizing: 'border-box',
+				display: 'flex',
+				flexDirection: 'column',
+				gap: '1em',
 			},
 		}),
 };
@@ -55,7 +56,7 @@ export const Search = observer((properties: SearchProps): JSX.Element => {
 
 	const defaultProps: Partial<SearchProps> = {
 		toggleSidebarButtonText: 'Filters',
-		mobileSidebarDisplayAt: globalTheme?.variables?.breakpoints?.at(0) ? `${globalTheme.variables?.breakpoints?.at(0)}px` : '991px',
+		mobileDisplayAt: globalTheme?.variables?.breakpoints?.at(0) ? `${globalTheme.variables?.breakpoints?.at(0)}px` : '991px',
 	};
 
 	const props = mergeProps('search', globalTheme, defaultProps, properties);
@@ -68,7 +69,6 @@ export const Search = observer((properties: SearchProps): JSX.Element => {
 		styleScript,
 		hideSidebar,
 		hideSearchHeader,
-		hideMobileSidebar,
 		hideMerchandisingBanners,
 		toggleSidebarButtonText,
 		hideTopToolbar,
@@ -76,31 +76,45 @@ export const Search = observer((properties: SearchProps): JSX.Element => {
 		hideBottomToolBar,
 		resultComponent,
 		hideToggleSidebarButton,
-		mobileSidebarDisplayAt,
+		mobileDisplayAt,
 		treePath,
 	} = props;
 	const store = controller.store;
 
-	const mobileMediaQuery = `(max-width: ${mobileSidebarDisplayAt})`;
+	const mobileMediaQuery = `(max-width: ${mobileDisplayAt})`;
 	const isMobile = useMediaQuery(mobileMediaQuery);
 	const merchandising = controller.store.merchandising;
 
-	console.log('props.theme', props.theme);
+	const [sidebarOpenState, setSidebarOpenState] = useState(true);
+
+	//initialize lang
+	const defaultLang: Partial<SearchLang> = {
+		toggleSidebarButtonText: {
+			value: toggleSidebarButtonText,
+		},
+	};
+
+	//deep merge with props.lang
+	const lang = deepmerge(defaultLang, props.lang || {});
+	const mergedLang = useLang(lang as any, { filters: store.filters });
+
+	const ToggleSidebar = (): JSX.Element => {
+		return !hideToggleSidebarButton && store.loaded && !isMobile && (toggleSidebarButtonText || mergedLang.toggleSidebarButtonText?.value) ? (
+			<Button
+				onClick={() => setSidebarOpenState(!sidebarOpenState)}
+				className={classnames('ss__search__sidebar-toggle', { 'ss__search__sidebar-toggle--open': sidebarOpenState })}
+				{...subProps.Button}
+			>
+				<span {...mergedLang.toggleSidebarButtonText.all}></span>
+			</Button>
+		) : (
+			<Fragment />
+		);
+	};
 
 	const subProps: SearchSubProps = {
-		MobileSidebar: {
-			// default props
-			hidePerPage: true,
-			hideSortBy: true,
-			displayAt: mobileSidebarDisplayAt,
-			// inherited props
-			...defined({
-				disableStyles,
-			}),
-			theme: props.theme,
-			treePath,
-		},
 		Button: {
+			name: 'filter-toggle',
 			// default props
 			// inherited props
 			...defined({
@@ -113,11 +127,13 @@ export const Search = observer((properties: SearchProps): JSX.Element => {
 			name: 'top',
 			className: 'ss__search__header-section__toolbar--top-toolbar',
 			// default props
+			hideMobileSidebar: true,
 			hidePagination: true,
 			hideFilterSummary: true,
 			hidePerPage: true,
 			hideLayoutSelector: true,
 			hideSortBy: true,
+			topSlot: <ToggleSidebar />,
 			// inherited props
 			...defined({
 				disableStyles,
@@ -129,6 +145,7 @@ export const Search = observer((properties: SearchProps): JSX.Element => {
 			name: 'middle',
 			className: 'ss__search__content__toolbar--middle-toolbar',
 			// default props
+			hideMobileSidebar: true,
 			hidePagination: true,
 			hideFilterSummary: true,
 			hidePerPage: true,
@@ -145,6 +162,7 @@ export const Search = observer((properties: SearchProps): JSX.Element => {
 			name: 'bottom',
 			className: 'ss__search__content__toolbar--bottom-toolbar',
 			// default props
+			hideMobileSidebar: true,
 			hidePagination: true,
 			hideFilterSummary: true,
 			hidePerPage: true,
@@ -250,18 +268,6 @@ export const Search = observer((properties: SearchProps): JSX.Element => {
 		}
 	}
 
-	const [sidebarOpenState, setSidebarOpenState] = useState(true);
-
-	//initialize lang
-	const defaultLang: Partial<SearchLang> = {
-		toggleSidebarButtonText: {
-			value: toggleSidebarButtonText,
-		},
-	};
-
-	//deep merge with props.lang
-	const lang = deepmerge(defaultLang, props.lang || {});
-
 	return (
 		<CacheProvider>
 			<div {...styling} className={classnames('ss__search', className)}>
@@ -269,29 +275,12 @@ export const Search = observer((properties: SearchProps): JSX.Element => {
 					{!hideSearchHeader && <SearchHeader {...subProps.SearchHeader} controller={controller} />}
 					{!hideHeaderBanner && <Banner content={merchandising.content} type={ContentType.HEADER} name={'header'} />}
 					{!hideTopToolbar && store.pagination.totalResults > 0 && <Toolbar {...subProps.TopToolbar} controller={controller} />}
-
-					{!hideMobileSidebar && store.pagination.totalResults > 0 && <MobileSidebar controller={controller} {...subProps.MobileSidebar} />}
-
-					{!hideToggleSidebarButton && !isMobile && (toggleSidebarButtonText || lang.toggleSidebarButtonText?.value) && (
-						<Button
-							onClick={() => setSidebarOpenState(!sidebarOpenState)}
-							className="ss__search__sidebar-toggle"
-							{...subProps.Button}
-							lang={{
-								button: lang.toggleSidebarButtonText,
-							}}
-						></Button>
-					)}
 				</div>
 				<div className="ss__search__content-section">
-					{!hideSidebar && !isMobile && (
+					{!hideSidebar && !isMobile && sidebarOpenState && (
 						<div className="ss__search__sidebar">
-							{sidebarOpenState && (
-								<Fragment>
-									<Sidebar {...subProps.Sidebar} controller={controller} />
-									{!hideLeftBanner && <Banner content={merchandising.content} type={ContentType.LEFT} name={'left'} />}
-								</Fragment>
-							)}
+							<Sidebar {...subProps.Sidebar} controller={controller} />
+							{!hideLeftBanner && <Banner content={merchandising.content} type={ContentType.LEFT} name={'left'} />}
 						</div>
 					)}
 					<div className={classnames('ss__search__content')}>
@@ -318,10 +307,9 @@ export const Search = observer((properties: SearchProps): JSX.Element => {
 //todo improve the controller spreading here..
 export interface SearchProps extends ComponentProps {
 	controller: SearchController;
-	mobileSidebarDisplayAt?: string;
+	mobileDisplayAt?: string;
 	resultComponent?: ResultComponent;
 	hideSidebar?: boolean;
-	hideMobileSidebar?: boolean;
 	hideSearchHeader?: boolean;
 	hideTopToolbar?: boolean;
 	hideMiddleToolbar?: boolean;
@@ -333,7 +321,7 @@ export interface SearchProps extends ComponentProps {
 }
 
 export interface SearchLang {
-	toggleSidebarButtonText?: Lang<never>;
+	toggleSidebarButtonText?: Lang<{ filters: SearchFilterStore }>;
 }
 
 export type layoutConfig = {
@@ -349,7 +337,6 @@ interface SearchSubProps {
 	MiddleToolbar: Partial<ToolbarProps>;
 	BottomToolbar: Partial<ToolbarProps>;
 	SearchHeader: Partial<SearchHeaderProps>;
-	MobileSidebar: Partial<MobileSidebarProps>;
 	Button: Partial<ButtonProps>;
 	Banner: Partial<BannerProps>;
 }

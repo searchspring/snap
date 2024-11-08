@@ -39,7 +39,11 @@ const searchStyleScript = ({ theme }: SearchProps) => {
 export const search: Partial<SearchProps> = {
 	styleScript: searchStyleScript,
 	hideToggleSidebarButton: false,
-
+	lang: {
+		toggleSidebarButtonText: {
+			value: ({ filters }) => (filters.length ? `Filters (${filters.length})` : 'Filter'),
+		},
+	},
 	theme: {
 		components: {
 			filterSummary: {
@@ -47,6 +51,17 @@ export const search: Partial<SearchProps> = {
 			},
 			sidebar: {
 				hideTitle: true,
+			},
+			'button.filter-toggle': {
+				icon: 'filters',
+			},
+			'toolbar.top': {
+				hideLayoutSelector: false,
+				hideSortBy: false,
+				hidePerPage: false,
+			},
+			'toolbar.middle': {
+				hideFilterSummary: false,
 			},
 			'toolbar.bottom': {
 				hidePagination: false,

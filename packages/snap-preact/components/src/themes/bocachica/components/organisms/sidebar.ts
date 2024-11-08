@@ -8,7 +8,6 @@ const sidebarStyleScript = ({ theme }: SidebarProps) => {
 	return css({
 		boxSizing: 'border-box',
 		width: '300px',
-		paddingRight: '40px',
 
 		'& .ss__sidebar__title': {
 			color: variables?.colors?.primary,

@@ -13,6 +13,9 @@ import type { SearchController } from '@searchspring/snap-controller';
 const CSS = {
 	banner: ({}: Partial<BannerProps>) =>
 		css({
+			' *': {
+				boxSizing: 'border-box',
+			},
 			'& iframe, img': {
 				maxWidth: '100%',
 				height: 'auto',

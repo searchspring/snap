@@ -12,6 +12,7 @@ export * from './components/Atoms/Image';
 export * from './components/Atoms/Loading';
 export * from './components/Atoms/Merchandising';
 export * from './components/Atoms/Overlay';
+export * from './components/Atoms/PaginationInfo';
 export * from './components/Atoms/Price';
 export * from './components/Atoms/SearchHeader';
 export * from './components/Atoms/Skeleton';

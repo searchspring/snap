@@ -7,6 +7,10 @@ const bannerStyleScript = ({ theme }: BannerProps) => {
 	const variables = theme?.variables;
 
 	return css({
+		' *': {
+			boxSizing: 'border-box',
+		},
+
 		'& iframe, img': {
 			maxWidth: '100%',
 			height: 'auto',

@@ -305,7 +305,7 @@ describe('LoadMore Component', () => {
 					langElems.forEach((elem) => {
 						if (typeof langObj.value == 'function') {
 							expect(valueMock).toHaveBeenCalledWith({
-								paginationStore: paginationStore,
+								pagination: paginationStore,
 							});
 
 							if (elem?.innerHTML == value) {

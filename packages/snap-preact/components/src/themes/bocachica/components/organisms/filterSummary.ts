@@ -5,10 +5,8 @@ import type { FilterSummaryProps } from '../../../../components/Organisms/Filter
 const filterSummaryStyleScript = ({ theme }: FilterSummaryProps) => {
 	const variables = theme?.variables;
 	return css({
-		margin: '10px 0 30px 0',
-		'& .ss__filter-summary__filter': {
-			margin: '5px 10px 5px 0',
-		},
+		display: 'flex',
+		gap: '0.5em',
 		'& .ss__filter-summary__title': {
 			fontWeight: 'bold',
 			color: variables?.colors?.secondary,

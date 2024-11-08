@@ -61,7 +61,7 @@ export function mergeProps<GenericComponentProps = ComponentProps>(
 			...props,
 		};
 
-		treePath += `${treePath ? ' ' : ''}${componentType}` + (componentName?.match(/^[A-Z,a-z]+$/) ? `.${componentName}` : '');
+		treePath += `${treePath ? ' ' : ''}${componentType}` + (componentName?.match(/^[A-Z,a-z,-]+$/) ? `.${componentName}` : '');
 
 		// add theme props if they exist
 		const themeComponent = theme?.components && theme.components[componentType as keyof typeof theme.components];

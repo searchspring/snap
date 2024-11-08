@@ -176,13 +176,19 @@ export const fr: LangComponents = {
 		},
 		last: {
 			attributes: {
-				'aria-label': (data) => `aller à la dernière page ${data?.paginationStore?.last?.number}`,
+				'aria-label': (data) => `aller à la dernière page ${data?.pagination?.last?.number}`,
 			},
 		},
 		page: {
 			attributes: {
 				'aria-label': (data) => `aller à la page ${data?.page?.number}`,
 			},
+		},
+	},
+	paginationInfo: {
+		infoText: {
+			// TODO: add begin & end range here
+			value: ({ pagination }) => `${pagination?.totalResults} produits`,
 		},
 	},
 	loadMore: {
@@ -192,7 +198,7 @@ export const fr: LangComponents = {
 			},
 		},
 		progressText: {
-			value: (data) => `Vous avez consulté ${data?.paginationStore?.end} de ${data?.paginationStore?.totalResults} produits`,
+			value: (data) => `Vous avez consulté ${data?.pagination?.end} de ${data?.pagination?.totalResults} produits`,
 		},
 	},
 	grid: {
@@ -324,7 +330,7 @@ export const fr: LangComponents = {
 				} 
                 <span class="ss__search-header__results-count-total">${data?.pagination?.totalResults}</span> 
                 résultat${data?.pagination?.totalResults == 1 ? '' : 's'} 
-                ${data?.search?.query ? `pour <span class="ss__search-header__results-query">"${data.search.query.string}"</span>` : ''}
+                ${data?.query?.query ? `pour <span class="ss__search-header__results-query">"${data.query.query.string}"</span>` : ''}
             `;
 			},
 			attributes: {
@@ -333,30 +339,30 @@ export const fr: LangComponents = {
 		},
 		correctedQueryText: {
 			value: (data) => {
-				return `Aucun résultat trouvé pour <em>"${data?.search?.originalQuery?.string}"</em>, montrant les résultats pour <em>"${data?.search?.query?.string}"</em> plutôt.`;
+				return `Aucun résultat trouvé pour <em>"${data?.query?.originalQuery?.string}"</em>, montrant les résultats pour <em>"${data?.query?.query?.string}"</em> plutôt.`;
 			},
 			attributes: {
 				'aria-label': (data) =>
-					`Aucun résultat trouvé pour ${data?.search?.originalQuery?.string}, safficher les résultats pour ${data?.search?.query?.string} à la place`,
+					`Aucun résultat trouvé pour ${data?.query?.originalQuery?.string}, safficher les résultats pour ${data?.query?.query?.string} à la place`,
 			},
 		},
 		noResultsText: {
 			value: (data) => {
 				return `${
-					data?.search?.query
+					data?.query?.query
 						? `<span>
-                    Aucun résultat pour <span class="ss__search-header__results-query">"${data.search.query.string}"</span> trouvée.
+                    Aucun résultat pour <span class="ss__search-header__results-query">"${data.query.query.string}"</span> trouvée.
                 </span>`
 						: `<span>Aucun résultat trouvé.</span>`
 				}`;
 			},
 			attributes: {
-				'aria-label': (data) => `Aucun résultat trouvé pour ${data?.search?.query?.string}`,
+				'aria-label': (data) => `Aucun résultat trouvé pour ${data?.query?.query?.string}`,
 			},
 		},
 		didYouMeanText: {
 			value: (data) => {
-				return `Vouliez-vous dire <a href=${data?.search?.didYouMean?.url.href}>${data?.search?.didYouMean?.string}</a>?`;
+				return `Vouliez-vous dire <a href=${data?.query?.didYouMean?.url.href}>${data?.query?.didYouMean?.string}</a>?`;
 			},
 		},
 	},

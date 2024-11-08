@@ -32,9 +32,19 @@ export default {
 		},
 	},
 	argTypes: {
+		controller: {
+			description: 'Search Controller reference',
+			type: { required: false },
+			table: {
+				type: {
+					summary: 'Search controller object',
+				},
+			},
+			control: { type: 'none' },
+		},
 		pagination: {
 			description: 'Pagination store reference',
-			type: { required: true },
+			type: { required: false },
 			table: {
 				type: {
 					summary: 'pagination store object',

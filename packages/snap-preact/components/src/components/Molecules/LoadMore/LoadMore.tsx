@@ -186,7 +186,7 @@ export const LoadMore = observer((properties: LoadMoreProps): JSX.Element => {
 	//deep merge with props.lang
 	const lang = deepmerge(defaultLang, props.lang || {});
 	const mergedLang = useLang(lang as any, {
-		paginationStore: store,
+		pagination: store,
 	});
 
 	return store.totalResults ? (
@@ -265,9 +265,9 @@ export interface LoadMoreProps extends ComponentProps {
 
 export interface LoadMoreLang {
 	loadMoreButton: Lang<{
-		paginationStore: SearchPaginationStore;
+		pagination: SearchPaginationStore;
 	}>;
 	progressText: Lang<{
-		paginationStore: SearchPaginationStore;
+		pagination: SearchPaginationStore;
 	}>;
 }
