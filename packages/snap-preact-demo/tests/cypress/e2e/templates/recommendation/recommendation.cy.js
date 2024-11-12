@@ -22,7 +22,7 @@ const config = {
 					carousel: `.ss__recs__similar .ss__recommendation .ss__carousel`,
 					result: '.ss__result',
 					customResult: '.ss__custom-result',
-					nextArrow: '',
+					nextArrow: '.ss__recs__similar .ss__recommendation .ss__carousel__next',
 					prevArrow: '.ss__recs__similar .ss__recommendation .ss__carousel__prev',
 					activeSlide: '.ss__recs__similar .ss__recommendation .swiper-slide-active',
 					controller: 'recommend_similar_0',
