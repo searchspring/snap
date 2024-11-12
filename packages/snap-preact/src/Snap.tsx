@@ -706,6 +706,7 @@ export class Snap {
 
 								if (target.prefetch) {
 									runSearch();
+									target.component();
 								}
 
 								cntrlr.createTargeter({ controller: cntrlr, ...target }, async (target: ExtendedTarget, elem: Element, originalElem?: Element) => {
