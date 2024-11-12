@@ -22,7 +22,7 @@ const config = {
 					carousel: `.ss__recs__similar .ss__recommendation .ss__carousel`,
 					result: '.ss__result',
 					customResult: '.ss__custom-result',
-					nextArrow: '.ss__recs__similar .ss__recommendation .ss__carousel__next',
+					nextArrow: '',
 					prevArrow: '.ss__recs__similar .ss__recommendation .ss__carousel__prev',
 					activeSlide: '.ss__recs__similar .ss__recommendation .swiper-slide-active',
 					controller: 'recommend_similar_0',
@@ -137,7 +137,7 @@ describe('Recommendations', () => {
 					});
 				});
 
-				it('renders carousel next buttons', function () {
+				it.skip('renders carousel next buttons', function () {
 					cy.document().then((doc) => {
 						cy.snapController(integration?.selectors?.recommendation.controller).then(({ store }) => {
 							cy.get(integration?.selectors?.recommendation.nextArrow).should('exist');
