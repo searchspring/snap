@@ -118,6 +118,8 @@ let config: SnapTemplatesConfig = {
 			{
 				selector: '#searchspring-layout',
 				component: 'Search',
+				// @ts-ignore - testing
+				prefetch: true,
 			},
 		],
 	},

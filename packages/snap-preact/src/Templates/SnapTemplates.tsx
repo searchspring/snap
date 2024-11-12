@@ -224,6 +224,8 @@ export const createSearchTargeters = (templateConfig: SnapTemplatesConfig, templ
 		const targeter: ExtendedTarget = {
 			selector: target.selector,
 			hideTarget: true,
+			// @ts-ignore - test
+			prefetch: target.prefetch,
 			component: async () => {
 				const componentImportPromises = [];
 				componentImportPromises.push(templatesStore.library.import.component.search[target.component]());
