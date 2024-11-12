@@ -26,3 +26,8 @@ The `addToCart` function will automatically add products to the cart and then re
 The `redirect` property can be set to `false` or supplied with an alternate redirect URL instead of the default (`/cart.php`). 
 
 The `idFieldName` property takes a stringified path in the result reference, to look for the product id to add. `display.mappings.core.sku` for example. By default it will use `display.mappings.core.uid`.
+
+
+## Variants
+The BigCommerce platform supports variants. To add variant data to your results, you can add this [groovy script](https://github.com/searchspring/snap/blob/main/packages/snap-platforms/bigcommerce/groovy/ss_variants.groovy) to the [Searchspring Management Console](https://manage.searchspring.net/management/filters). 
+

@@ -36,3 +36,6 @@ The `getUenc` function will return the uenc code from the url using the `btoa` f
 
 ## getFormKey
 The `getFormKey` function will return the form key from the `form_key` cookie.
+
+## Variants
+The Magento2 platform supports variants. To add variant data to your results, you can add this [groovy script](https://github.com/searchspring/snap/blob/main/packages/snap-platforms/magento2/groovy/ss_variants.groovy) to the [Searchspring Management Console](https://manage.searchspring.net/management/filters). 
