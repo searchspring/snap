@@ -264,7 +264,7 @@ async function readyTheController(
 	controllerGlobals: Partial<RecommendRequestModel>
 ) {
 	const { profile, batchId, cart, tag } = controllerGlobals;
-	const batched = (profile?.batched || controllerGlobals.batched) ?? true;
+	const batched = profile?.batched ?? controllerGlobals.batched ?? true;
 
 	if (!tag) {
 		// FEEDBACK: change message depending on script integration type (profile vs. legacy)
