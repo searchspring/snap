@@ -541,6 +541,10 @@ describe('Recommendation Controller', () => {
 		 */
 
 		const result = controller.store.results[0];
+
+		//this tests we send the core data and not the display data
+		result.mask.set({ id: 'custom', mappings: { core: { name: 'custom name' } } });
+
 		const productEventReturn = controller.track.product.impression(result);
 
 		expect(trackfn).toHaveBeenCalledWith({

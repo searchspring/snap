@@ -142,7 +142,7 @@ export class RecommendationController extends AbstractController {
 							product: {
 								id: result.id,
 								mappings: {
-									core: result.display.mappings.core,
+									core: result.mappings.core,
 								},
 								seed: getSeed(),
 							},
@@ -170,7 +170,7 @@ export class RecommendationController extends AbstractController {
 							product: {
 								id: result.id,
 								mappings: {
-									core: result.display.mappings.core,
+									core: result.mappings.core,
 								},
 								seed: getSeed(),
 							},
@@ -198,7 +198,7 @@ export class RecommendationController extends AbstractController {
 							product: {
 								id: result.id,
 								mappings: {
-									core: result.display.mappings.core,
+									core: result.mappings.core,
 								},
 								seed: getSeed(),
 							},
@@ -233,7 +233,7 @@ export class RecommendationController extends AbstractController {
 							product: {
 								id: result.id,
 								mappings: {
-									core: result.display.mappings.core,
+									core: result.mappings.core,
 								},
 								seed: getSeed(),
 							},
@@ -268,7 +268,7 @@ export class RecommendationController extends AbstractController {
 							product: {
 								id: result.id,
 								mappings: {
-									core: result.display.mappings.core,
+									core: result.mappings.core,
 								},
 								seed: getSeed(),
 							},
@@ -297,7 +297,7 @@ export class RecommendationController extends AbstractController {
 						products: results.map((result) => ({
 							id: result.id,
 							mappings: {
-								core: result.display.mappings.core,
+								core: result.mappings.core,
 							},
 							quantity: result.quantity,
 						})),

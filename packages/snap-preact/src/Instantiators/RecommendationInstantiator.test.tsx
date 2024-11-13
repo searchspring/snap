@@ -386,6 +386,75 @@ describe('RecommendationInstantiator', () => {
 		expect(clientSpy).toHaveBeenCalledTimes(1);
 	});
 
+	it('supports legacy scripts with batching', async () => {
+		document.body.innerHTML = `
+		
+		<script type="searchspring/personalized-recommendations" profile="legacy">
+			options = {
+				batched: true
+			};
+			products = ['prod1234', 'prod4567'];
+		</script>
+		
+		<script type="searchspring/personalized-recommendations" profile="legacy">
+			options = {
+				batched: false
+			};
+			products = ['prod0'];
+		</script>
+		
+		<script type="searchspring/personalized-recommendations" profile="legacy">
+			options = {
+				batched: true
+			};
+			products = ['prod789'];
+		</script>`;
+
+		const client = new MockClient(baseConfig.client!.globals, {});
+		const clientSpy = jest.spyOn(client, 'recommend');
+
+		const recommendationInstantiator = new RecommendationInstantiator(baseConfig, { client });
+		await wait();
+		expect(Object.keys(recommendationInstantiator.controller).length).toBe(3);
+		expect(recommendationInstantiator.controller['recommend_legacy_0']).toBeDefined();
+		expect(clientSpy).toHaveBeenCalledTimes(3);
+		expect(clientSpy).toHaveBeenNthCalledWith(1, {
+			batchId: undefined,
+			batched: true,
+			branch: 'production',
+			products: ['prod1234', 'prod4567'],
+			profile: {
+				batched: true,
+			},
+			siteId: '8uyt2m',
+			tag: 'legacy',
+		});
+
+		expect(clientSpy).toHaveBeenNthCalledWith(2, {
+			batchId: undefined,
+			batched: false,
+			branch: 'production',
+			products: ['prod0'],
+			profile: {
+				batched: false,
+			},
+			siteId: '8uyt2m',
+			tag: 'legacy',
+		});
+
+		expect(clientSpy).toHaveBeenNthCalledWith(3, {
+			batchId: undefined,
+			batched: true,
+			branch: 'production',
+			products: ['prod789'],
+			profile: {
+				batched: true,
+			},
+			siteId: '8uyt2m',
+			tag: 'legacy',
+		});
+	});
+
 	it('makes the context found on the target and in the config available', async () => {
 		document.body.innerHTML = `<script type="searchspring/recommend" profile="${DEFAULT_PROFILE}">
 			shopper = { id: 'snapdev' };
