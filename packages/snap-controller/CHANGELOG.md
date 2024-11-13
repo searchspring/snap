@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.61.5](https://github.com/searchspring/snap/compare/v0.61.4...v0.61.5) (2024-11-13)
+
+### Bug Fixes
+
+- **recommendationcontroller:** send core result data and not active display data in beacon tracking ([1c1754a](https://github.com/searchspring/snap/commit/1c1754a21a365064240cfb7c2433bab2a9b8d52a))
+
 ## [0.61.4](https://github.com/searchspring/snap/compare/v0.61.3...v0.61.4) (2024-11-06)
 
 ### Bug Fixes

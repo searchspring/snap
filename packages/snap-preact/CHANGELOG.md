@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.61.5](https://github.com/searchspring/snap/compare/v0.61.4...v0.61.5) (2024-11-13)
+
+### Bug Fixes
+
+- **preact/recommendationinstantiator:** fixing regression of batching in legacy script blocks ([85e339f](https://github.com/searchspring/snap/commit/85e339f6ddff7e0d7aa60360635fe1d7ed0b6122))
+
 ## [0.61.4](https://github.com/searchspring/snap/compare/v0.61.3...v0.61.4) (2024-11-06)
 
 ### Bug Fixes
