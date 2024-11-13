@@ -1,4 +1,4 @@
-/*! For license information please see main.462a58c0.iframe.bundle.js.LICENSE.txt */
+/*! For license information please see main.44a9f01e.iframe.bundle.js.LICENSE.txt */
 (self.webpackChunk_searchspring_snap_preact_components = self.webpackChunk_searchspring_snap_preact_components || []).push([
 	[792],
 	{
@@ -36103,7 +36103,7 @@
 																tag: _this.store.profile.tag,
 																type: 'product-recommendation',
 															},
-															product: { id: result.id, mappings: { core: result.display.mappings.core }, seed: getSeed() },
+															product: { id: result.id, mappings: { core: result.mappings.core }, seed: getSeed() },
 														},
 														pid: null === (_this$events$click = _this.events.click) || void 0 === _this$events$click ? void 0 : _this$events$click.id,
 													},
@@ -36140,7 +36140,7 @@
 															: void 0,
 													event: {
 														context: { placement: _this.store.profile.placement, tag: _this.store.profile.tag, type: 'product-recommendation' },
-														product: { id: result.id, mappings: { core: result.display.mappings.core }, seed: getSeed() },
+														product: { id: result.id, mappings: { core: result.mappings.core }, seed: getSeed() },
 													},
 													pid: _this.events.impression.id,
 												};
@@ -36177,7 +36177,7 @@
 															: void 0,
 													event: {
 														context: { placement: _this.store.profile.placement, tag: _this.store.profile.tag, type: 'product-recommendation' },
-														product: { id: result.id, mappings: { core: result.display.mappings.core }, seed: getSeed() },
+														product: { id: result.id, mappings: { core: result.mappings.core }, seed: getSeed() },
 													},
 													pid: _this.events.render.id,
 												};
@@ -36215,7 +36215,7 @@
 															: void 0,
 													event: {
 														context: { placement: _this.store.profile.placement, tag: _this.store.profile.tag, type: 'product-recommendation' },
-														product: { id: result.id, mappings: { core: result.display.mappings.core }, seed: getSeed() },
+														product: { id: result.id, mappings: { core: result.mappings.core }, seed: getSeed() },
 													},
 													pid:
 														null === (_this$events$click2 = _this.events.click) || void 0 === _this$events$click2 ? void 0 : _this$events$click2.id,
@@ -36254,7 +36254,7 @@
 															: void 0,
 													event: {
 														context: { placement: _this.store.profile.placement, tag: _this.store.profile.tag, type: 'product-recommendation' },
-														product: { id: result.id, mappings: { core: result.display.mappings.core }, seed: getSeed() },
+														product: { id: result.id, mappings: { core: result.mappings.core }, seed: getSeed() },
 													},
 													pid:
 														null === (_this$events$click3 = _this.events.click) || void 0 === _this$events$click3 ? void 0 : _this$events$click3.id,
@@ -36287,7 +36287,7 @@
 												event: {
 													context: { placement: _this.store.profile.placement, tag: _this.store.profile.tag, type: 'product-recommendation' },
 													products: results.map(function (result) {
-														return { id: result.id, mappings: { core: result.display.mappings.core }, quantity: result.quantity };
+														return { id: result.id, mappings: { core: result.mappings.core }, quantity: result.quantity };
 													}),
 													profile: {
 														tag: _this.store.profile.tag,
@@ -49723,7 +49723,7 @@
 					(this.event = payload.event),
 					(this.id = payload.id),
 					(this.pid = payload.pid),
-					(this.meta = { initiator: { lib: 'searchspring/snap', 'lib.version': '0.61.4', 'lib.framework': config.framework } }),
+					(this.meta = { initiator: { lib: 'searchspring/snap', 'lib.version': '0.61.5', 'lib.framework': config.framework } }),
 					(this.id = (0, v4.A)());
 			});
 			function Tracker_toConsumableArray(arr) {
@@ -50279,7 +50279,7 @@
 									_this$globals$currenc.code &&
 									(this.context.currency = this.globals.currency),
 								(null !== (_window$searchspring = window.searchspring) && void 0 !== _window$searchspring && _window$searchspring.tracker) ||
-									((window.searchspring = window.searchspring || {}), (window.searchspring.tracker = this), (window.searchspring.version = '0.61.4')),
+									((window.searchspring = window.searchspring || {}), (window.searchspring.tracker = this), (window.searchspring.version = '0.61.5')),
 								setTimeout(function () {
 									_this.targeters.push(
 										new DomTargeter([{ selector: 'script[type^="searchspring/track/"]', emptyTarget: !1 }], function (target, elem) {
