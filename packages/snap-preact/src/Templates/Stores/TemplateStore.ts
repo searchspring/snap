@@ -187,6 +187,7 @@ export class TemplatesStore {
 		// theme loading promise
 		this.loading = true;
 		const themePromises: Promise<void>[] = [];
+		console.time('TemplateStore themePromises promise');
 
 		// setup local themes
 		Object.keys(config.themes).map((themeKey) => {
@@ -202,8 +203,9 @@ export class TemplatesStore {
 
 			// import theme dependencies
 			const themeImports = [importCurrency, importLanguage, this.library.import.theme[themeConfig.extends]()];
-
+			console.time('TemplateStore themeImports promise (currency, lang, base)');
 			Promise.all(themeImports).then(() => {
+				console.timeEnd('TemplateStore themeImports promise (currency, lang, base)');
 				const base = this.library.themes[themeConfig.extends];
 				const overrides = themeConfig.overrides || {};
 				const variables = themeConfig.variables || {};
@@ -229,6 +231,7 @@ export class TemplatesStore {
 		});
 
 		Promise.all(themePromises).then(() => {
+			console.timeEnd('TemplateStore themePromises promise');
 			this.loading = false;
 		});
 

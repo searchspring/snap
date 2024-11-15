@@ -61,4 +61,30 @@ export const pluginBackgroundFilters = (cntrlr: AbstractController, config: Comm
 
 		await next();
 	});
+
+	cntrlr.on('afterStore', async ({ controller }: { controller: AbstractController }, next) => {
+		// @ts-ignore - store type
+		controller.store.results
+			.slice(0, 4)
+			.map((result) => result.mappings.core.imageUrl)
+			.forEach((url) => {
+				console.log('preloading image', url);
+				const img = new Image();
+				img.src = url;
+			});
+
+		await next();
+	});
+
+	// @ts-ignore - store type
+	// cntrlr.on('afterSearch', async ({ response }: { controller: AbstractController }, next) => {
+	// 	// @ts-ignore - store type
+	// 	response.search.results.slice(0,4).map(result => result.mappings.core.imageUrl).forEach(url => {
+	// 		console.log("preloading image", url);
+	// 		const img = new Image();
+	// 		img.src = url;
+	// 	})
+
+	// 	await next();
+	// });
 };

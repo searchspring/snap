@@ -1,6 +1,6 @@
 import { h, Fragment } from 'preact';
 import { jsx } from '@emotion/react';
-import { observer } from 'mobx-react';
+import { observer } from 'mobx-react-lite';
 
 import type { AbstractController, RecommendationController } from '@searchspring/snap-controller';
 import type { Product } from '@searchspring/snap-store-mobx';

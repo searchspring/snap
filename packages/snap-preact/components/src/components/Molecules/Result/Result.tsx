@@ -1,6 +1,6 @@
 import { Fragment, h } from 'preact';
 
-import { observer } from 'mobx-react';
+import { observer } from 'mobx-react-lite';
 import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
 
@@ -82,6 +82,7 @@ export const Result = observer((properties: ResultProps): JSX.Element => {
 	const props = mergeProps('result', globalTheme, defaultProps, properties);
 
 	const {
+		imgLazy,
 		result,
 		hideBadge,
 		hideTitle,
@@ -168,7 +169,7 @@ export const Result = observer((properties: ResultProps): JSX.Element => {
 
 	return core ? (
 		<CacheProvider>
-			<article {...styling} className={classnames('ss__result', `ss__result--${layout}`, className)}>
+			<article {...styling} className={classnames('ss__result', `ss__result--${layout}`, imgLazy ? 'imgLazy' : '', className)}>
 				<div className="ss__result__image-wrapper">
 					<a
 						href={core!.url}
@@ -183,7 +184,7 @@ export const Result = observer((properties: ResultProps): JSX.Element => {
 									{...subProps.overlayBadge}
 									controller={controller as SearchController | AutocompleteController | RecommendationController}
 								>
-									<Image {...subProps.image} />
+									<Image {...subProps.image} lazy={imgLazy} />
 								</OverlayBadge>
 							) : (
 								<Image {...subProps.image} />
@@ -257,5 +258,6 @@ export interface ResultProps extends ComponentProps {
 	truncateTitle?: TruncateTitleProps;
 	onClick?: (e: React.MouseEvent<HTMLAnchorElement, Event>) => void;
 	controller?: SearchController | AutocompleteController | RecommendationController;
+	imgLazy?: boolean;
 }
 export type ResultNames = 'seed';

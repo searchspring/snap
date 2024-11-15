@@ -13,6 +13,8 @@ export class LegacyAPI extends API {
 		delete cacheParameters.pageLoadId;
 		delete cacheParameters.domain;
 
+		console.log('getEndpoint making request', performance.now());
+		console.time('getEndpoint');
 		const legacyResponse = await this.request(
 			{
 				path,
@@ -22,6 +24,8 @@ export class LegacyAPI extends API {
 			},
 			JSON.stringify(cacheParameters)
 		);
+		console.timeEnd('getEndpoint');
+		console.log('getEndpoint response', performance.now());
 
 		return legacyResponse;
 	}
@@ -47,6 +51,8 @@ export class LegacyAPI extends API {
 	async getMeta(queryParameters: MetaRequestModel): Promise<MetaResponseModel> {
 		const headerParameters: HTTPHeaders = {};
 
+		console.log('getMeta making request', performance.now());
+		console.time('getMeta');
 		const response = await this.request<MetaResponseModel>(
 			{
 				path: '/api/meta/meta.json',
@@ -56,6 +62,8 @@ export class LegacyAPI extends API {
 			},
 			JSON.stringify(queryParameters)
 		);
+		console.timeEnd('getMeta');
+		console.log('getMeta response', performance.now());
 
 		return response;
 	}

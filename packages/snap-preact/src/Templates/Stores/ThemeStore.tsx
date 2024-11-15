@@ -1,16 +1,16 @@
-import { h, render } from 'preact';
+import { h } from 'preact';
 import { observable, makeObservable, toJS } from 'mobx';
 import deepmerge from 'deepmerge';
 import { isPlainObject } from 'is-plain-object';
 import { StorageStore } from '@searchspring/snap-store-mobx';
 import { TemplateThemeTypes, type TemplatesStoreConfigSettings, type TemplatesStoreDependencies } from './TemplateStore';
-import { Global, css } from '@emotion/react';
+// import { Global, css } from '@emotion/react';
 
 import { ThemeMinimal, ThemeVariablesPartial, type Theme, ThemePartial, ThemeOverrides } from '../../../components/src';
-import { CacheProvider } from '../../../components/src/providers/cache';
+// import { CacheProvider } from '../../../components/src/providers/cache';
 import type { GlobalThemeStyleScript } from '../../types';
 import type { ListOption } from '../../../components/src/types';
-import { observer } from 'mobx-react';
+// import { observer } from 'mobx-react-lite';
 
 export type ThemeStoreThemeConfig = {
 	name: string;
@@ -68,12 +68,14 @@ export class ThemeStore {
 	languageOverrides: ThemeMinimal;
 	stored: ThemePartial;
 	innerWidth?: number;
+	initialThemeBuild: Theme | undefined;
 
 	constructor(params: ThemeStoreConfig) {
+		console.log('ThemeStore constructor', performance.now());
 		const { config, dependencies, settings } = params;
 		this.dependencies = dependencies;
 
-		const { name, style, type, base, overrides, variables, currency, language, languageOverrides, innerWidth } = config;
+		const { name, type, base, overrides, variables, currency, language, languageOverrides, innerWidth } = config;
 		this.name = name;
 		this.type = type;
 		this.base = base;
@@ -95,28 +97,40 @@ export class ThemeStore {
 			innerWidth: observable,
 		});
 
+		this.initialThemeBuild = this.theme;
+		console.log('setting this.initialThemeBuild in ThemeStore constructor', this.initialThemeBuild);
+
 		// handle adding the style to the document (should only happen once per theme)
-		if (style) {
-			const GlobalStyle = observer((props: any) => {
-				const { self } = props;
-				const theme = self.theme;
-				const styles = css({
-					[`.ss__theme__${theme.name}`]: style({ name: theme.name, variables: theme.variables }),
-				});
-				return (
-					<CacheProvider>
-						<Global styles={styles} />
-					</CacheProvider>
-				);
-			});
-			const styleElem = document.createElement('style');
-			styleElem.innerHTML = `<!-- searchspring style injection point for "${this.name}" theme -->`;
-			document.head.appendChild(styleElem);
-			render(<GlobalStyle theme={this.theme} self={this} themeName={this.name} />, styleElem);
-		}
+		// if (style) {
+		// 	const GlobalStyle = observer((props: any) => {
+		// 		const { self } = props;
+		// 		const theme = self.theme;
+		// 		const styles = css({
+		// 			[`.ss__theme__${theme.name}`]: style({ name: theme.name, variables: theme.variables }),
+		// 		});
+		// 		return (
+		// 			<CacheProvider>
+		// 				<Global styles={styles} />
+		// 			</CacheProvider>
+		// 		);
+		// 	});
+		// 	const styleElem = document.createElement('style');
+		// 	styleElem.innerHTML = `<!-- searchspring style injection point for "${this.name}" theme -->`;
+		// 	document.head.appendChild(styleElem);
+		// 	render(<GlobalStyle theme={this.theme} self={this} themeName={this.name} />, styleElem);
+		// }
 	}
 
 	public get theme(): Theme {
+		console.log('theme getter', performance.now());
+		console.time('theme getter');
+		if (this.initialThemeBuild) {
+			console.log('theme getter returning this.initialThemeBuild');
+			const x = this.initialThemeBuild;
+			this.initialThemeBuild = undefined;
+			console.timeEnd('theme getter');
+			return x;
+		}
 		/*
 			Themes consist of layers which are deep merged together in order (last merge has highest priority)
 				1. base theme
@@ -179,6 +193,8 @@ export class ThemeStore {
 
 		// change the theme name to match the ThemeStore theme name
 		theme.name = this.name;
+		console.log('theme getter return', performance.now());
+		console.timeEnd('theme getter');
 		return theme;
 	}
 

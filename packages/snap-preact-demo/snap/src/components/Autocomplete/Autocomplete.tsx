@@ -1,5 +1,5 @@
 import { h, Component } from 'preact';
-import { observer } from 'mobx-react';
+import { observer } from 'mobx-react-lite';
 
 import { Autocomplete as LibraryAutocomplete } from '@searchspring/snap-preact/components';
 import type { Snap, SnapTemplates } from '@searchspring/snap-preact';

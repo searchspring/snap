@@ -1,6 +1,6 @@
 import { Fragment, h } from 'preact';
 
-import { observer } from 'mobx-react';
+import { observer } from 'mobx-react-lite';
 import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
 import deepmerge from 'deepmerge';
@@ -143,7 +143,7 @@ export const Results = observer((properties: ResultsProps): JSX.Element => {
 	return results?.length ? (
 		<CacheProvider>
 			<div {...styling} className={classnames('ss__results', `ss__results-${props.layout}`, className)}>
-				{results.map((result) =>
+				{results.map((result, idx) =>
 					(() => {
 						switch (result.type) {
 							case ContentType.BANNER:
@@ -166,6 +166,7 @@ export const Results = observer((properties: ResultsProps): JSX.Element => {
 												result={result as Product}
 												layout={props.layout}
 												controller={controller}
+												imgLazy={!Boolean(idx < 4)}
 											/>
 										</SearchResultTracker>
 									);

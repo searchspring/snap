@@ -49,6 +49,6 @@ declare global {
 	};
 }
 
-declare module 'mobx-react' {
+declare module 'mobx-react-lite' {
 	function observer(component: any): any;
 }
