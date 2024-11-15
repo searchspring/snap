@@ -80,6 +80,3 @@ plugins: {
 	}
 }
 ```
-
-## Variants
-The Shopify platform supports variants. To add variant data to your results, you can add this [groovy script](https://github.com/searchspring/snap/blob/main/packages/snap-platforms/shopify/groovy/ss_variants.groovy) to the [Searchspring Management Console](https://manage.searchspring.net/management/filters). 

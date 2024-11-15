@@ -489,6 +489,18 @@ Core product attributes object
 },
 ```
 
+`result.mask` provides a way to temporarily modify result data without changing the underlying store data. This can be used in combination with the `result.display` for simple UI effects like showing alternate product images on hover, or more complex interactions like updating displayed prices when selecting different product variants.
+
+`result.mask.merge` a function to merge new mask data with the current display state. This function accepts a single object as its only parameter.
+
+`result.mask.set` a function to set the mask data. Overwrites the current mask data. This function accepts a single object as its only parameter.
+
+`result.mask.clear` a function to clear the mask data, reverting to the original display state.
+
+`result.display` an object used for display in result components. Containing the currently set display state from the `result.mask` combined with the underlying core data for the result. 
+
+`result.variants` contains information about product variants like size and color options, as well as the variant selections data. (requires variants to be enabled and configured - see Variants Integration docs)
+
 
 ### `children` property
 Only applicable to results with `type` of `product`

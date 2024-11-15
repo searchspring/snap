@@ -223,9 +223,9 @@ Each result object contains the following notable properties:
 
 `result.mask.clear` a function to clear the mask data, reverting to the original display state.
 
-`result.display` an object containing the current display state for the result. This can be used in combination with the `result.mask` to update the result display state.
+`result.display` an object used for display in result components. Containing the currently set display state from the `result.mask` combined with the underlying core data for the result. 
 
-`result.variants` contains information about product variants like size and color options (requires variants to be enabled and configured - see Variants Info section below)
+`result.variants` contains information about product variants like size and color options, as well as the variant selections data. (requires variants to be enabled and configured)
 
 `result.custom` an empty object that is not modified by core Snap packages. This is available for you to modify and store custom data to be rendered. See [`custom` property](https://github.com/searchspring/snap/tree/main/packages/snap-store-mobx/src/Abstract)
 
@@ -277,151 +277,6 @@ class Result extends Component {
 		);
 	}
 }
-```
-
-
-### Variants
-When variants are enabled, each result (in controller.store.results) contains a variants object with the following properties:
-
-`variants.active` - The currently selected variant's data.
-
-`variants.data` - Array of all variant data.
-
-`variants.selections` - Contains variant selection data (see below).
-
-
-and the following functions:
-
-`variants.setActive` - Function to update the selected variant.
-
-`variants.update` - Updates the variant data (see below for more details).
-
-`variants.makeSelections` - For internal usage only.
-
-`variants.refineSelections` -  Updates available variant options based on current selections to prevent invalid combinations
-
-
-To enable variants:
-
-1. Get variant data from your platform. See supported platform groovy scripts [here](https://searchspring.github.io/snap/#/package-platforms).
-
-2. Configure the variant field (typically named `ss_variants`) to display in the [Searchspring Management Console](https://manage.searchspring.net/).
-
-3. Configure controllers to use the variant field by setting `controller.config.settings.variants.field`. 
-	Example -
-
-```typescript
-const config = {
-	instantiators: {
-		recommendation: {
-			components: {
-				Bundle: async () => (await import('./components/Recommendations/Bundle/Bundle')).Bundle,
-			},
-			config: {
-				settings: {
-					variants: {
-						field: 'ss_variants'
-					},
-				},
-			},
-		},
-	},
-	controllers: {
-		search: [
-			{
-				config: {
-					id: 'search',
-					settings: {
-						variants: {
-							field: 'ss_variants'
-						},
-					},
-				},
-			},
-		],
-	},
-};
-
-const snap = new Snap(config);
-```
-
-### result.variants.update
-The `variants.update` function updates variant data after store initialization. It accepts new variant data as its only parameter and is useful when you need to fetch and apply external data (like pricing, inventory, or swatch information) after the initial page load. Example -
-
-```typescript
-snap.getController('search').then((search) => {
-	search.on('afterStore', async(eventData, next) => {
-		search.store.results.forEach((result) => {
-			//fetch new variant data from external source
-			const newVariantData = await fetchVariantData(result.id);
-			//update the variant data in the result 
-			result.variants.update(newVariantData);
-		});
-		await next();
-	});
-});
-```
-
-### result.variants.selections
-The `result.variants.selections` object provides functionality for building variant option picker components to use in your result components. It contains the following properties:
-
-`selections.field` - The name of the selection field (e.g. "Color", "Size").
-
-`selections.selected` - Details about the currently selected selection value (type: VariantSelectionValue).
-
-`selections.previouslySelected` - Details about the previously selected selection value (type: VariantSelectionValue).
-
-`selections.values` - Array containing all available selection values and their details (type: VariantSelectionValue[]).
-
-
-And the following Functions:
-
-`selections.refineValues` - For Internal use only.
-
-`selections.reset` - Resets the variant selection to its default state.
-
-`selections.select` - Selects a variant option by its value (e.g. selection.select('blue')).
-
-
-```typescript
-export type VariantSelectionValue = {
-	value: string;
-	label?: string;
-	thumbnailImageUrl?: string;
-	backgroundImageUrl?: string;
-	background?: string;
-	available?: boolean;
-};
-```
-
-Here is an example of a selection component using the variants.selections object. 
-```jsx
-const selections = result.variants.selections
-
-selections.forEach(selection => (
-	<div className="ss__selection">
-		<h5 className="ss__selection_field">{selection.field}</h5>
-		<ul className="ss__selection__options">
-			{selection.values.map((option) => {
-				const selected = selection.some((select) => select.value == option.value);
-				return (
-					<li
-						className={`ss__selection__options__option `, {
-							'ss__selection__options__option--selected ': selected,
-							'ss__selection__options__option--unavailable ': option?.available === false,
-						}}
-						onClick={(e) => selection.select(option.value)}
-						title={option.label}
-						role="option"
-						aria-selected={selected}
-					>
-						<label className="ss__selection__options__option__label">{option.label || option.value}</label>
-					</li>
-				);
-			})}
-		</ul>
-	</div>
-)) 
 ```
 
 ### SearchController.store.facets
