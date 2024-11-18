@@ -225,7 +225,7 @@ Each result object contains the following notable properties:
 
 `result.display` an object used for display in result components. Containing the currently set display state from the `result.mask` combined with the underlying core data for the result. 
 
-`result.variants` contains information about product variants like size and color options, as well as the variant selections data. (requires variants to be enabled and configured)
+`result.variants` contains information about product variants like size and color options, as well as the variant selections data. (requires variants to be enabled and configured) For more variant integration information, see [Variant Integration Docs](https://github.com/searchspring/snap/blob/main/docs/INTEGRATION_VARIANTS.md)
 
 `result.custom` an empty object that is not modified by core Snap packages. This is available for you to modify and store custom data to be rendered. See [`custom` property](https://github.com/searchspring/snap/tree/main/packages/snap-store-mobx/src/Abstract)
 

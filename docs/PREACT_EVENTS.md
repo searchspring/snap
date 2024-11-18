@@ -132,6 +132,15 @@ it can also take regex for partial matches -
 ```typescript
 controllerIds: [/^recommend_/]
 ```
+Example: 
+```typescript
+const data = {
+	options: { "size" : "M" },
+	controllerIds: [/^recommend_/]
+}
+
+window.searchspring.fire('controller/selectVariantOptions', data);
+```
 
 ### controller/recommendation/update
 The `controller/recommendation/update` event takes a payload with an optional `controllerIds` similar to the `controller/selectVariantOptions` example above. If not provided then all recommendation controllers will be affected. 

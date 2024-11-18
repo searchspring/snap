@@ -109,18 +109,16 @@ const selections = result.variants.selections;
 
 selections.forEach((selection) => (
 	<div className="ss__selection">
-		<h5 className="ss__selection_field">{selection.field}</h5>
+		<h5 className="ss__selection__field">{selection.field}</h5>
 		<ul className="ss__selection__options">
 			{selection.values.map((option) => {
 				const selected = selection.some((select) => select.value == option.value);
 				return (
 					<li
 						className={
-							(`ss__selection__options__option `,
-							{
-								'ss__selection__options__option--selected ': selected,
-								'ss__selection__options__option--unavailable ': option?.available === false,
-							})
+							`ss__selection__options__option 
+							${selected ? 'ss__selection__options__option--selected' : ''} 
+							${option?.available === false ? 'ss__selection__options__option--unavailable' : ''}`
 						}
 						onClick={(e) => selection.select(option.value)}
 						title={option.label}
@@ -164,7 +162,7 @@ const config = {
 },
 ```
 
-2. Add required attributes to your product page variant selectors (see example below)
+2. On your product detail page, add the following attributes to the variant selectors for the main product. (see example below)
 
 On your product page templates, add these attributes to variant selector elements:
 - `ss-variant-option="${field}:${value}"` on each option element (e.g. "Color:Blue")
