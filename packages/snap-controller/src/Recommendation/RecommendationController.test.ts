@@ -157,6 +157,51 @@ describe('Recommendation Controller', () => {
 		});
 	});
 
+	it(`can turn off bfCacheRestore`, async function () {
+		const customConfig = {
+			...recommendConfig,
+			settings: {
+				bfCacheRestore: false,
+			},
+		};
+		const controller = new RecommendationController(customConfig, {
+			client: new MockClient(globals, {}),
+			store: new RecommendationStore(recommendConfig, services),
+			urlManager,
+			eventManager: new EventManager(),
+			profiler: new Profiler(),
+			logger: new Logger(),
+			tracker: new Tracker(globals),
+		});
+
+		await controller.search();
+
+		const searchSpy = jest.spyOn(controller, 'search');
+
+		expect(searchSpy).not.toHaveBeenCalled();
+
+		// Mock PageTransitionEvent
+		class MockPageTransitionEvent extends Event {
+			public persisted: boolean;
+
+			constructor(type: string, eventInitDict?: EventInit & { persisted?: boolean }) {
+				super(type, eventInitDict);
+				this.persisted = eventInitDict?.persisted ?? false;
+			}
+		}
+
+		const event = new MockPageTransitionEvent('pageshow', {
+			bubbles: true,
+			persisted: true,
+		});
+
+		window.dispatchEvent(event);
+
+		await waitFor(() => {
+			expect(searchSpy).not.toHaveBeenCalled();
+		});
+	});
+
 	it(`tests bfCacheRestore doesnt trigger search if persisted is false or undefined on the pageshow event`, async function () {
 		const controller = new RecommendationController(recommendConfig, {
 			client: new MockClient(globals, {}),
