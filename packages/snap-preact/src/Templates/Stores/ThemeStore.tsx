@@ -71,7 +71,6 @@ export class ThemeStore {
 	initialThemeBuild: Theme | undefined;
 
 	constructor(params: ThemeStoreConfig) {
-		console.log('ThemeStore constructor', performance.now());
 		const { config, dependencies, settings } = params;
 		this.dependencies = dependencies;
 
@@ -122,13 +121,9 @@ export class ThemeStore {
 	}
 
 	public get theme(): Theme {
-		console.log('theme getter', performance.now());
-		console.time('theme getter');
 		if (this.initialThemeBuild) {
-			console.log('theme getter returning this.initialThemeBuild');
 			const x = this.initialThemeBuild;
 			this.initialThemeBuild = undefined;
-			console.timeEnd('theme getter');
 			return x;
 		}
 		/*
@@ -193,8 +188,6 @@ export class ThemeStore {
 
 		// change the theme name to match the ThemeStore theme name
 		theme.name = this.name;
-		console.log('theme getter return', performance.now());
-		console.timeEnd('theme getter');
 		return theme;
 	}
 

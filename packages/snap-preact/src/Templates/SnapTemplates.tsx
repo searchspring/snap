@@ -128,12 +128,10 @@ export const DEFAULT_AUTOCOMPLETE_CONTROLLER_SETTINGS: AutocompleteStoreConfigSe
 export class SnapTemplates extends Snap {
 	templates: TemplatesStore;
 	constructor(config: SnapTemplatesConfig) {
-		console.log('SnapTemplates top of constructor', performance.now());
 		const urlParams = url(window.location.href);
 		const editMode = Boolean(urlParams?.params?.query?.theme || cookies.get(THEME_EDIT_COOKIE));
 
 		const templatesStore = new TemplatesStore({ config, settings: { editMode } });
-		console.log('TemplatesStore done creating', performance.now());
 
 		const snapConfig = createSnapConfig(config, templatesStore);
 
@@ -225,6 +223,8 @@ export const createSearchTargeters = (templateConfig: SnapTemplatesConfig, templ
 		const targetId = templatesStore.addTarget('search', target);
 		const targeter: ExtendedTarget = {
 			...target,
+			// @ts-ignore - add type
+			prefetch: target.prefetch ?? shouldPrefetch(templatesStore),
 			hideTarget: true,
 			component: async () => {
 				const componentImportPromises = [];

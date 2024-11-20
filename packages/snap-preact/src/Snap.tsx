@@ -7,7 +7,7 @@ import { Client } from '@searchspring/snap-client';
 import { Logger } from '@searchspring/snap-logger';
 import { Tracker } from '@searchspring/snap-tracker';
 import { AppMode, version, getContext, DomTargeter, url, cookies, featureFlags } from '@searchspring/snap-toolbox';
-import { ControllerTypes } from '@searchspring/snap-controller';
+import { ControllerTypes, type SearchController } from '@searchspring/snap-controller';
 import { EventManager } from '@searchspring/snap-event-manager';
 
 import { getInitialUrlState } from './getInitialUrlState/getInitialUrlState';
@@ -354,7 +354,6 @@ export class Snap {
 	};
 
 	constructor(config: SnapConfig, services?: SnapServices) {
-		console.log('Snap.tsx top of constructor', performance.now());
 		window.removeEventListener('error', this.handlers.error);
 		window.addEventListener('error', this.handlers.error);
 		document.removeEventListener('click', this.handlers.attributes);
@@ -630,7 +629,6 @@ export class Snap {
 			switch (type) {
 				case 'search': {
 					this.config.controllers![type]!.forEach((controller, index) => {
-						console.log('Snap.tsx start processing', controller.config.id, performance.now());
 						try {
 							if (typeof this._controllerPromises[controller.config.id] != 'undefined') {
 								this.logger.error(`Controller with id '${controller.config.id}' is already defined`);
@@ -654,7 +652,6 @@ export class Snap {
 									tracker: controller.services?.tracker || this.tracker,
 								}
 							);
-							console.log('Snap.tsx controller created', controller.config.id, performance.now());
 
 							window.searchspring.controller = window.searchspring.controller || {};
 							window.searchspring.controller[cntrlr.config.id] = this.controllers[cntrlr.config.id] = cntrlr;
@@ -663,7 +660,6 @@ export class Snap {
 							let searchPromise: Promise<void> | null = null;
 
 							const runSearch = async () => {
-								console.log('Snap.tsx runSearch called', controller.config.id, performance.now());
 								if (!searchPromise) {
 									// handle custom initial UrlManager state
 									if (controller.url?.initial) {
@@ -677,7 +673,6 @@ export class Snap {
 							};
 
 							const targetFunction = async (target: ExtendedTarget, elem: Element, originalElem: Element) => {
-								console.log('Snap.tsx targetFunction called', controller.config.id, performance.now());
 								const targetFunctionPromises: Promise<any>[] = [];
 								if (target.renderAfterSearch) {
 									targetFunctionPromises.push(runSearch());
@@ -691,15 +686,9 @@ export class Snap {
 
 								try {
 									targetFunctionPromises.push(target.component!());
-									console.time('targetFunctionComponentPromise took' + controller.config.id);
 									const [_, Component] = await Promise.all(targetFunctionPromises);
-									console.timeEnd('targetFunctionComponentPromise took' + controller.config.id);
-									console.log('Snap.tsx targetFunction about to render', controller.config.id, performance.now());
 									setTimeout(() => {
-										console.log('Snap.tsx targetFunction about to render inside setTimeout', controller.config.id, performance.now());
-										console.time('render time ' + controller.config.id);
 										render(<Component controller={this.controllers[controller.config.id]} snap={this} {...target.props} />, elem);
-										console.timeEnd('render time ' + controller.config.id);
 									});
 								} catch (err) {
 									this.logger.error(err);
@@ -715,8 +704,7 @@ export class Snap {
 									throw new Error(`Targets at index ${target_index} missing component value (Component).`);
 								}
 
-								if (target.prefetch) {
-									console.log('calling search in target prefetch', controller.config.id, performance.now());
+								if (target.prefetch ?? isSearchOrCategory(cntrlr, this.templates)) {
 									runSearch();
 									target.component();
 								}
@@ -728,9 +716,7 @@ export class Snap {
 											render(<Skeleton />, elem);
 										});
 									}
-									console.time('targetFunction took' + controller.config.id);
 									await targetFunction(target, elem, originalElem!);
-									console.timeEnd('targetFunction took' + controller.config.id);
 								});
 							});
 						} catch (err) {
@@ -1027,6 +1013,32 @@ export class Snap {
 				this.logger.error(`Failed to create Recommendations Instantiator.`, err);
 			}
 		}
-		console.log('Snap.tsx bottom of constructor', performance.now());
 	}
+}
+
+function isSearchOrCategory(cntrlr: SearchController, templatesStore?: TemplatesStore): boolean {
+	// backgroundFilter plugins require init event
+	cntrlr.init();
+
+	const { params } = cntrlr;
+
+	if (params.search?.query?.string) {
+		return true;
+	}
+
+	switch (templatesStore?.platform) {
+		case 'shopify':
+			return Boolean(params.filters?.find((filter) => ['collection_handle', 'product_type', 'vendor', 'ss_tags'].includes(filter.field || '')));
+		case 'bigCommerce':
+			return Boolean(params.filters?.find((filter) => ['categories_hierarchy', 'brand'].includes(filter.field || '')));
+		case 'magento2':
+			const hasCategory = Boolean(params.filters?.find((filter) => filter.field === 'category_hierarchy'));
+			// @ts-ignore - value dne on filter type
+			const hasSearch = Boolean(params.filters?.find((filter) => filter.field === 'visibility' && filter.value === 'Search'));
+			return hasCategory || hasSearch;
+		default:
+			break;
+	}
+
+	return false;
 }

@@ -54,7 +54,6 @@ export function Image(properties: ImageProps): JSX.Element {
 	}
 
 	const styling = mergeStyles<ImageProps>(props, defaultStyles);
-	console.time(src);
 	return (
 		<CacheProvider>
 			<div {...styling} className={classnames('ss__image', { 'ss__image--hidden': !visibile }, className)}>
@@ -63,10 +62,7 @@ export function Image(properties: ImageProps): JSX.Element {
 					alt={alt}
 					title={alt}
 					loading={lazy ? 'lazy' : undefined}
-					height={300}
-					width={250}
 					onLoad={(e: React.MouseEvent<HTMLImageElement>) => {
-						console.timeEnd(src);
 						setVisibile(true);
 						onLoad && onLoad(e);
 					}}

@@ -45,13 +45,9 @@ export const TemplateSelect = observer((properties: TemplateSelectProps): JSX.El
 		const elem = document.querySelector(targeter.selector) as HTMLElement;
 		if (elem?.style?.minHeight && controller.store.loaded) {
 			setTimeout(() => {
-				console.log('clearing minHeight');
-				console.timeEnd('rendering + clear minHeight ' + targeter.selector);
 				elem.style.minHeight = '';
 			});
 		}
-		console.log('rendering ' + targeter.selector);
-		console.time('rendering + clear minHeight ' + targeter.selector);
 	}
 
 	// ensuring that theme and component are ready to render

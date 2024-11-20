@@ -143,7 +143,7 @@ export const Results = observer((properties: ResultsProps): JSX.Element => {
 	return results?.length ? (
 		<CacheProvider>
 			<div {...styling} className={classnames('ss__results', `ss__results-${props.layout}`, className)}>
-				{results.map((result, idx) =>
+				{results.map((result) =>
 					(() => {
 						switch (result.type) {
 							case ContentType.BANNER:
@@ -166,7 +166,6 @@ export const Results = observer((properties: ResultsProps): JSX.Element => {
 												result={result as Product}
 												layout={props.layout}
 												controller={controller}
-												imgLazy={!Boolean(idx < 4)}
 											/>
 										</SearchResultTracker>
 									);

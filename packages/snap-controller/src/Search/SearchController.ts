@@ -427,10 +427,7 @@ export class SearchController extends AbstractController {
 				}
 			} else {
 				// standard request (not using infinite scroll)
-				console.time('searchAndMeta');
 				const searchResponse = await this.client.search(params);
-				console.timeEnd('searchAndMeta');
-				console.log('searchResponse', performance.now(), searchResponse);
 				meta = searchResponse.meta;
 				search = searchResponse.search;
 			}

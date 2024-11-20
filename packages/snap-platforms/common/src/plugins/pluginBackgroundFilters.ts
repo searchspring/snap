@@ -66,8 +66,8 @@ export const pluginBackgroundFilters = (cntrlr: AbstractController, config: Comm
 		// @ts-ignore - store type
 		controller.store.results
 			.slice(0, 4)
-			.map((result) => result.mappings.core.imageUrl)
-			.forEach((url) => {
+			.map((result: any) => result.mappings.core.imageUrl)
+			.forEach((url: any) => {
 				console.log('preloading image', url);
 				const img = new Image();
 				img.src = url;

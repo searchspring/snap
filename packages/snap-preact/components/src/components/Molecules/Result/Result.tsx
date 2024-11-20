@@ -82,7 +82,6 @@ export const Result = observer((properties: ResultProps): JSX.Element => {
 	const props = mergeProps('result', globalTheme, defaultProps, properties);
 
 	const {
-		imgLazy,
 		result,
 		hideBadge,
 		hideTitle,
@@ -169,7 +168,7 @@ export const Result = observer((properties: ResultProps): JSX.Element => {
 
 	return core ? (
 		<CacheProvider>
-			<article {...styling} className={classnames('ss__result', `ss__result--${layout}`, imgLazy ? 'imgLazy' : '', className)}>
+			<article {...styling} className={classnames('ss__result', `ss__result--${layout}`, className)}>
 				<div className="ss__result__image-wrapper">
 					<a
 						href={core!.url}
@@ -184,7 +183,7 @@ export const Result = observer((properties: ResultProps): JSX.Element => {
 									{...subProps.overlayBadge}
 									controller={controller as SearchController | AutocompleteController | RecommendationController}
 								>
-									<Image {...subProps.image} lazy={imgLazy} />
+									<Image {...subProps.image} />
 								</OverlayBadge>
 							) : (
 								<Image {...subProps.image} />
@@ -258,6 +257,5 @@ export interface ResultProps extends ComponentProps {
 	truncateTitle?: TruncateTitleProps;
 	onClick?: (e: React.MouseEvent<HTMLAnchorElement, Event>) => void;
 	controller?: SearchController | AutocompleteController | RecommendationController;
-	imgLazy?: boolean;
 }
 export type ResultNames = 'seed';
