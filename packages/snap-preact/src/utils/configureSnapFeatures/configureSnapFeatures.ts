@@ -7,8 +7,18 @@ export const SHOPIFY_WEBPIXEL_STORAGE_KEY = 'ssWebPixel';
 export function configureSnapFeatures(config: SnapConfig) {
 	/* configure snap features by mutating the config as needed */
 
+	configurePreconnectAPI(config);
 	configureIntegratedSpellCorrection(config);
 	configureTracking(config);
+}
+
+export function configurePreconnectAPI(config: SnapConfig) {
+	if (config.features?.preconnectAPI?.enabled && config?.client?.globals?.siteId) {
+		const link = document.createElement('link');
+		link.rel = 'preconnect';
+		link.href = `https://${config.client.globals.siteId}.a.searchspring.io`;
+		document.head.appendChild(link);
+	}
 }
 
 export function configureIntegratedSpellCorrection(config: SnapConfig) {

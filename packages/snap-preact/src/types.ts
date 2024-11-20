@@ -117,4 +117,7 @@ export type SnapFeatures = {
 	integratedSpellCorrection?: {
 		enabled?: boolean;
 	};
+	preconnectAPI?: {
+		enabled?: boolean;
+	};
 };
