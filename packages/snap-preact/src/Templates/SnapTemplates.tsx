@@ -41,6 +41,7 @@ export type SearchTargetConfig = {
 	theme?: keyof LibraryImports['theme'] | (string & NonNullable<unknown>);
 	component: keyof LibraryImports['component']['search'];
 	resultComponent?: keyof LibraryImports['component']['result'] | (string & NonNullable<unknown>);
+	unsetTargetMinHeight?: boolean;
 };
 
 export type AutocompleteTargetConfig = {
@@ -223,8 +224,6 @@ export const createSearchTargeters = (templateConfig: SnapTemplatesConfig, templ
 		const targetId = templatesStore.addTarget('search', target);
 		const targeter: ExtendedTarget = {
 			...target,
-			// @ts-ignore - add type
-			prefetch: target.prefetch ?? shouldPrefetch(templatesStore),
 			hideTarget: true,
 			component: async () => {
 				const componentImportPromises = [];
@@ -252,7 +251,7 @@ export function createAutocompleteTargeters(templateConfig: SnapTemplatesConfig,
 
 		const targetId = templatesStore.addTarget('autocomplete', target);
 		const targeter: ExtendedTarget = {
-			selector: target.selector,
+			...target,
 			component: async () => {
 				const componentImportPromises = [];
 				componentImportPromises.push(templatesStore.library.import.component.autocomplete[target.component]());

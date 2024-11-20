@@ -12,6 +12,7 @@ export class TargetStore {
 	public selector: string;
 	public component: string;
 	public resultComponent: string;
+	public unsetTargetMinHeight: boolean;
 	public theme: {
 		location: TemplateThemeTypes;
 		name: string;
@@ -25,6 +26,7 @@ export class TargetStore {
 		this.component = (settings.editMode && this.dependencies.storage.get(`templates.${this.selector}.component`)) || target.component;
 		this.resultComponent =
 			(settings.editMode && this.dependencies.storage.get(`templates.${this.selector}.resultComponent`)) || target.resultComponent;
+		this.unsetTargetMinHeight = target.unsetTargetMinHeight ?? true;
 		this.theme = (settings.editMode && this.dependencies.storage.get(`templates.${this.selector}.theme`)) || {
 			location: 'local',
 			name: target.theme || GLOBAL_THEME_NAME,

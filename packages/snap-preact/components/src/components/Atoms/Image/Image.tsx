@@ -54,6 +54,7 @@ export function Image(properties: ImageProps): JSX.Element {
 	}
 
 	const styling = mergeStyles<ImageProps>(props, defaultStyles);
+
 	return (
 		<CacheProvider>
 			<div {...styling} className={classnames('ss__image', { 'ss__image--hidden': !visibile }, className)}>

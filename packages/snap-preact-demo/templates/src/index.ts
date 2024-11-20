@@ -30,10 +30,6 @@ let config: SnapTemplatesConfig = {
 			style: globalStyles,
 			overrides: {
 				components: {
-					// image: {
-					// lazy: false,
-					// height: '300',
-					// }
 					// recommendation: {
 					// 	lazyRender: {
 					// 		enabled: false,
@@ -105,38 +101,35 @@ let config: SnapTemplatesConfig = {
 			},
 		},
 	},
-	// recommendation: {
-	// 	email: {
-	// 		Email: {
-	// 			component: 'RecommendationEmail',
-	// 		},
-	// 	},
-	// 	default: {
-	// 		Default: {
-	// 			component: 'Recommendation',
-	// 		},
-	// 	},
-	// },
+	recommendation: {
+		email: {
+			Email: {
+				component: 'RecommendationEmail',
+			},
+		},
+		default: {
+			Default: {
+				component: 'Recommendation',
+			},
+		},
+	},
 	search: {
 		targets: [
 			{
 				selector: '#searchspring-layout',
 				component: 'Search',
-				// @ts-ignore - testing
-				prefetch: true,
-				unsetTargetMinHeight: false,
 			},
 		],
 	},
-	// autocomplete: {
-	// 	inputSelector: 'input.searchspring-ac',
-	// 	targets: [
-	// 		{
-	// 			selector: 'input.searchspring-ac',
-	// 			component: 'Autocomplete',
-	// 		},
-	// 	],
-	// },
+	autocomplete: {
+		inputSelector: 'input.searchspring-ac',
+		targets: [
+			{
+				selector: 'input.searchspring-ac',
+				component: 'Autocomplete',
+			},
+		],
+	},
 };
 
 if (window.mergeSnapConfig) {

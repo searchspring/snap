@@ -37,6 +37,7 @@ export type TemplateTarget = {
 	theme?: keyof LibraryImports['theme'] | (string & NonNullable<unknown>);
 	component: ComponentLibraryType | (string & NonNullable<unknown>);
 	resultComponent?: keyof LibraryImports['component']['result'] | (string & NonNullable<unknown>);
+	unsetTargetMinHeight?: boolean;
 };
 
 export type TemplatesStoreConfigSettings = {
@@ -202,6 +203,7 @@ export class TemplatesStore {
 
 			// import theme dependencies
 			const themeImports = [importCurrency, importLanguage, this.library.import.theme[themeConfig.extends]()];
+
 			Promise.all(themeImports).then(() => {
 				const base = this.library.themes[themeConfig.extends];
 				const overrides = themeConfig.overrides || {};
