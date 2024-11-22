@@ -20,16 +20,20 @@ export const BundleSelector = observer((properties: BundleSelectorProps): JSX.El
 
 	const { children, checked, icon, seedText, seed, hideCheckboxes, onCheck, title, className, treePath } = props;
 
+	const lastPath = treePath?.lastIndexOf(' ');
+	const modifiedTreePath = treePath?.slice(0, lastPath);
+
 	const subProps: BundleSelectorSubProps = {
 		icon: {
 			// default props
+			name: 'bundle-selector-icon',
 			className: 'ss__recommendation-bundle__wrapper__selector__icon',
 			size: 15,
 			// global theme
 			...globalTheme?.components?.icon,
 			// component theme overrides
 			theme: props?.theme,
-			treePath,
+			treePath: modifiedTreePath,
 		},
 		checkbox: {
 			className: 'ss__recommendation-bundle__wrapper__selector__result-wrapper__checkbox',
@@ -47,7 +51,7 @@ export const BundleSelector = observer((properties: BundleSelectorProps): JSX.El
 			...globalTheme?.components?.checkbox,
 			// component theme overrides
 			theme: props?.theme,
-			treePath,
+			treePath: modifiedTreePath,
 		},
 	};
 

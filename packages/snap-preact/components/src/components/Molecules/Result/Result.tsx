@@ -218,7 +218,7 @@ export const Result = observer((properties: ResultProps): JSX.Element => {
 								<>
 									<Price {...subProps.price} value={core.msrp} lineThrough={true} name={'price--msrp'} />
 									&nbsp;
-									<Price {...subProps.price} value={core.price} />
+									<Price {...subProps.price} value={core.price} name={'price'} />
 								</>
 							) : (
 								<Price {...subProps.price} value={core.price!} />
