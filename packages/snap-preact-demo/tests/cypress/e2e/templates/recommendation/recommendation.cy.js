@@ -63,6 +63,7 @@ describe('Recommendations', () => {
 											lazyRender: {
 												enabled: false,
 											},
+											speed: 0,
 										},
 									},
 								},
@@ -195,11 +196,27 @@ describe('Recommendations', () => {
 
 						cy.on('window:before:load', (win) => {
 							win.mergeSnapConfig = {
+								themes: {
+									custom: {
+										extends: 'bocachica',
+										overrides: {
+											components: {
+												recommendation: {
+													lazyRender: {
+														enabled: false,
+													},
+													speed: 0,
+												},
+											},
+										},
+									},
+								},
 								recommendation: {
 									default: {
 										Default: {
 											component: 'Recommendation',
 											resultComponent: 'CustomResult',
+											theme: 'custom',
 										},
 									},
 								},
