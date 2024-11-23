@@ -174,7 +174,7 @@ var documents = [
 						hidden: true,
 					},
 					{
-						label: 'Variants',
+						label: 'Product Variants',
 						route: '/integration-variants',
 						type: 'markdown',
 						url: './docs/INTEGRATION_VARIANTS.md',

@@ -1,5 +1,14 @@
 ## Variants
 
+Product variants allow you to represent different versions of the same base product - such as different sizes, colors, styles or other attributes that distinguish product options. This helps to improve the shopping experience by making product options easily discoverable, and allow customers to switch between variants directly from search/category pages. Common examples include:
+
+- Clothing items available in multiple sizes and colors
+- Electronics with different storage capacities or features
+- Furniture pieces with different fabric or finish options
+- Beauty products in different scents or formulations
+
+Snap's variants functionality helps manage these product variations by providing tools to configure, display and interact with variant data in your components.
+
 Configure variants by setting the variant field in either:
 - Controller config: `controllers[controller].config.settings.variants.field`
 - Recommendation config: `instantiators.recommendation.config.settings.variants.field`
@@ -41,7 +50,7 @@ const config = {
 const snap = new Snap(config);
 ```
 
-Once configured, each result in `controller.store.results` includes a `variants` object with:
+Once configured, each result that has variants in `controller.store.results` should include a `variants` object with:
 
 **Properties:**
 - `active` - Currently selected variant data
@@ -52,7 +61,6 @@ Once configured, each result in `controller.store.results` includes a `variants`
 - `setActive(variant)` - Select a specific variant
 - `update(newData)` - Update variant data post-initialization
 - `refineSelections()` - Filter available options to prevent invalid combinations
-- `makeSelections()` - *Internal use only*
 
 ### Updating Variant Data
 
@@ -61,13 +69,29 @@ Use `result.variants.update(newData)` to modify variant data after initializatio
 - Inventory levels  
 - Swatch information
 
+The update function expects the new variant data to match the variantData type.
 
 ```typescript
+export type VariantData = {
+	mappings: SearchResponseModelResultMappings;
+	attributes: Record<string, unknown>;
+	options: Record<string,
+		{
+			value: string;
+			background?: string;
+			backgroundImageUrl?: string;
+			attributeId?: string;
+			optionId?: string;
+			optionValue?: string;
+		}
+	>;
+};
+
 snap.getController('search').then((search) => {
 	search.on('afterStore', async (eventData, next) => {
 		search.store.results.forEach((result) => {
 			//fetch new variant data from external source
-			const newVariantData = await fetchVariantData(result.id);
+			const newVariantData: VariantData = await fetchVariantData(result.id);
 			//update the variant data in the result
 			result.variants.update(newVariantData);
 		});
@@ -78,7 +102,10 @@ snap.getController('search').then((search) => {
 
 ### `result.variants.selections`
 
-The `result.variants.selections` object provides functionality for building variant option picker components:
+The `result.variants.selections` object helps you build variant option picker components (like size/color selectors). When a user makes a selection, it automatically:
+- Refines selection value options to update available sibling options based on current selections
+- Updates the active variant on the main result
+- Updates the `result.display` property with the selected variant's data (eg: price, image URL, name, etc..)
 
 **Properties:**
 - `field` - Selection field name (e.g. "Color", "Size")
@@ -89,7 +116,6 @@ The `result.variants.selections` object provides functionality for building vari
 **Methods:**
 - `select(value)` - Select a variant option (e.g. `selection.select('blue')`)
 - `reset()` - Reset selection to default state
-- `refineValues()` - *Internal use only*
 
 ```typescript
 export type VariantSelectionValue = {
@@ -107,31 +133,31 @@ Below is a React component demonstrating how to implement variant selections:
 ```jsx
 const selections = result.variants.selections;
 
-selections.forEach((selection) => (
-	<div className="ss__selection">
-		<h5 className="ss__selection__field">{selection.field}</h5>
-		<ul className="ss__selection__options">
-			{selection.values.map((option) => {
-				const selected = selection.some((select) => select.value == option.value);
-				return (
-					<li
-						className={
-							`ss__selection__options__option 
-							${selected ? 'ss__selection__options__option--selected' : ''} 
-							${option?.available === false ? 'ss__selection__options__option--unavailable' : ''}`
-						}
-						onClick={(e) => selection.select(option.value)}
-						title={option.label}
-						role="option"
-						aria-selected={selected}
-					>
-						<label className="ss__selection__options__option__label">{option.label || option.value}</label>
-					</li>
-				);
-			})}
-		</ul>
-	</div>
-));
+{ selections?.map((selection) => (
+    <div className="ss__selection">
+        <h5 className="ss__selection__field">{selection.field}</h5>
+        <ul className="ss__selection__options">
+            {selection.values.map((option) => {
+                const selected = selection.selected.value == option.value;
+                return (
+                    <li
+                        className={
+                            `ss__selection__options__option 
+                            ${selected ? 'ss__selection__options__option--selected' : ''} 
+                            ${option?.available === false ? 'ss__selection__options__option--unavailable' : ''}`
+                        }
+                        onClick={(e) => selection.select(option.value)}
+                        title={option.label}
+                        role="option"
+                        aria-selected={selected}
+                    >
+                        <label className="ss__selection__options__option__label">{option.label || option.value}</label>
+                    </li>
+                );
+            })}
+        </ul>
+    </div>
+)) }
 ```
 
 ### Realtime Variants
@@ -164,7 +190,7 @@ const config = {
 
 2. On your product detail page, add the following attributes to the variant selectors for the main product. (see example below)
 
-On your product page templates, add these attributes to variant selector elements:
+On your product page templates, add these attributes to the clickable variant selector elements:
 - `ss-variant-option="${field}:${value}"` on each option element (e.g. "Color:Blue")
 - `ss-variant-option-selected` on currently selected options
 
@@ -236,7 +262,7 @@ Configure individual variant fields using `controllers[controller].config.settin
 const config = {
 	settings:  {
 		variants: {
-			field: "ss__variants",
+			field: "ss_variants",
 			options: {
 				color: {
 					label: "Colour",
