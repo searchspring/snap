@@ -8,7 +8,7 @@ import { Logger } from '@searchspring/snap-logger';
 import { Tracker } from '@searchspring/snap-tracker';
 import { AppMode, version, getContext, DomTargeter, url, cookies, featureFlags } from '@searchspring/snap-toolbox';
 import { ControllerTypes, type SearchController } from '@searchspring/snap-controller';
-import { EventManager } from '@searchspring/snap-event-manager';
+import { EventManager, Next } from '@searchspring/snap-event-manager';
 
 import { getInitialUrlState } from './getInitialUrlState/getInitialUrlState';
 
@@ -34,6 +34,7 @@ import type { SnapControllerServices, SnapControllerConfig, InitialUrlConfig, Sn
 import { configureSnapFeatures } from './utils';
 import { setupEvents } from './setupEvents';
 import type { TemplatesStore } from './Templates/Stores/TemplateStore';
+import type { SearchRequestModel } from '@searchspring/snapi-types';
 
 // configure MobX
 configureMobx({ useProxies: 'never', isolateGlobalState: true, enforceActions: 'never' });
@@ -51,13 +52,24 @@ export type ExtendedTarget = Target & {
 		[propName: string]: any;
 	};
 	onTarget?: OnTarget;
-	prefetch?: boolean;
+	prefetch?: boolean | ((params: SearchRequestModel) => boolean);
 	renderAfterSearch?: boolean;
+};
+
+export type SnapConfigControllerDefinition<ControllerConfig> = {
+	config: ControllerConfig;
+	targeters?: ExtendedTarget[];
+	services?: SnapControllerServices;
+	url?: UrlTranslatorConfig & {
+		initial?: InitialUrlConfig;
+	};
+	context?: ContextVariables;
 };
 
 export type SnapConfig = {
 	features?: SnapFeatures;
 	mode?: keyof typeof AppMode | AppMode;
+	pageType?: 'search' | 'category';
 	context?: ContextVariables;
 	url?: UrlTranslatorConfig;
 	client?: {
@@ -72,36 +84,10 @@ export type SnapConfig = {
 		recommendation?: RecommendationInstantiatorConfig;
 	};
 	controllers?: {
-		search?: {
-			config: SearchControllerConfig;
-			targeters?: ExtendedTarget[];
-			services?: SnapControllerServices;
-			url?: UrlTranslatorConfig & {
-				initial?: InitialUrlConfig;
-			};
-			context?: ContextVariables;
-		}[];
-		autocomplete?: {
-			config: AutocompleteControllerConfig;
-			targeters?: ExtendedTarget[];
-			services?: SnapControllerServices;
-			url?: UrlTranslatorConfig;
-			context?: ContextVariables;
-		}[];
-		finder?: {
-			config: FinderControllerConfig;
-			targeters?: ExtendedTarget[];
-			services?: SnapControllerServices;
-			url?: UrlTranslatorConfig;
-			context?: ContextVariables;
-		}[];
-		recommendation?: {
-			config: RecommendationControllerConfig;
-			targeters?: ExtendedTarget[];
-			services?: SnapControllerServices;
-			url?: UrlTranslatorConfig;
-			context?: ContextVariables;
-		}[];
+		search?: SnapConfigControllerDefinition<SearchControllerConfig>[];
+		autocomplete?: SnapConfigControllerDefinition<AutocompleteControllerConfig>[];
+		finder?: SnapConfigControllerDefinition<FinderControllerConfig>[];
+		recommendation?: SnapConfigControllerDefinition<RecommendationControllerConfig>[];
 	};
 };
 
@@ -364,7 +350,7 @@ export class Snap {
 		let globalContext: ContextVariables = {};
 		try {
 			// get global context
-			globalContext = getContext(['shopper', 'config', 'merchandising', 'siteId', 'currency']);
+			globalContext = getContext(['shopper', 'config', 'merchandising', 'siteId', 'currency', 'template']);
 		} catch (err) {
 			console.error('Snap failed to find global context');
 		}
@@ -624,6 +610,14 @@ export class Snap {
 			}
 		}
 
+		let prefetchSearch: (() => void) | undefined;
+
+		const contextPage = this.context.template && `${this.context.template}`.toLowerCase().trim();
+		if (contextPage && ['search', 'category'].includes(contextPage) && !this.config.pageType) {
+			this.config.pageType = contextPage as 'search' | 'category';
+			performance.mark(`pageType is ${contextPage}: context contains template=${contextPage}`);
+		}
+
 		// create controllers
 		Object.keys(this.config?.controllers || {}).forEach((type) => {
 			switch (type) {
@@ -660,6 +654,7 @@ export class Snap {
 							let searchPromise: Promise<void> | null = null;
 
 							const runSearch = async () => {
+								performance.mark(`runSearch`);
 								if (!searchPromise) {
 									// handle custom initial UrlManager state
 									if (controller.url?.initial) {
@@ -671,6 +666,40 @@ export class Snap {
 
 								return searchPromise;
 							};
+							let hasPrefetched = false;
+							prefetchSearch = () => {
+								if (hasPrefetched) return;
+								hasPrefetched = true;
+								performance.mark(`prefetchSearch this.config.pageType is ${this.config.pageType}`);
+								controller?.targeters?.forEach((target) => {
+									if (!target.prefetch && ['search', 'category'].includes(this.config.pageType || '')) {
+										runSearch();
+										target.component && target.component();
+									}
+								});
+							};
+
+							cntrlr.on('init', async (data: { controller: SearchController }, next: Next) => {
+								const { params } = data.controller;
+								if (params.search?.query?.string && !this.config.pageType) {
+									this.config.pageType = 'search';
+									performance.mark(`pageType is search: search init found query param`);
+								}
+
+								const knownBackgroundFilterFields = ['collection_handle', 'vendor', 'categories_hierarchy', 'brand', 'category_hierarchy'];
+								const categoryBackgroundFilter = params.filters?.find(
+									(filter) => knownBackgroundFilterFields.includes(filter.field || '') && filter.background
+								);
+								if (categoryBackgroundFilter && !this.config.pageType) {
+									this.config.pageType = 'category';
+									performance.mark(`pageType is category: search init found known background filter param ${categoryBackgroundFilter.field}`);
+								}
+								await next();
+								if (prefetchSearch) {
+									performance.mark('invoking prefetchSearch from init after next()');
+									prefetchSearch();
+								}
+							});
 
 							const targetFunction = async (target: ExtendedTarget, elem: Element, originalElem: Element) => {
 								const targetFunctionPromises: Promise<any>[] = [];
@@ -678,6 +707,7 @@ export class Snap {
 									targetFunctionPromises.push(runSearch());
 								} else {
 									targetFunctionPromises.push(Promise.resolve());
+									performance.mark('invoking runSearch from targetFunction');
 									runSearch();
 								}
 
@@ -688,6 +718,7 @@ export class Snap {
 									targetFunctionPromises.push(target.component!());
 									const [_, Component] = await Promise.all(targetFunctionPromises);
 									setTimeout(() => {
+										performance.mark('rendering targeter component');
 										render(<Component controller={this.controllers[controller.config.id]} snap={this} {...target.props} />, elem);
 									});
 								} catch (err) {
@@ -704,7 +735,8 @@ export class Snap {
 									throw new Error(`Targets at index ${target_index} missing component value (Component).`);
 								}
 
-								if (target.prefetch ?? isSearchOrCategory(cntrlr, this.templates)) {
+								if (target.prefetch || this.config.pageType) {
+									performance.mark(`targeter prefetch`);
 									runSearch();
 									target.component();
 								}
@@ -740,7 +772,27 @@ export class Snap {
 									if (!bound) {
 										bound = true;
 										setTimeout(() => {
-											(this.controllers[controller.config.id] as AutocompleteController).bind();
+											(this.controllers[controller.config.id] as AutocompleteController).bind().then(() => {
+												try {
+													const acUrlRoot = this.controllers[controller.config.id].store.services.urlManager.getTranslatorConfig().urlRoot;
+													if (acUrlRoot) {
+														const acUrlRootUrl = new URL(acUrlRoot);
+														if (
+															!this.config.pageType &&
+															typeof window !== 'undefined' &&
+															acUrlRootUrl.pathname &&
+															acUrlRootUrl.pathname === window.location.pathname
+														) {
+															this.config.pageType = 'search';
+															performance.mark(`pageType is search: autocomplete urlRoot matched current pathname`);
+														}
+														if (prefetchSearch) {
+															performance.mark('invoking prefetchSearch from bind after urlRoot check');
+															prefetchSearch();
+														}
+													}
+												} catch (_) {}
+											});
 										});
 									}
 								};
@@ -1013,32 +1065,10 @@ export class Snap {
 				this.logger.error(`Failed to create Recommendations Instantiator.`, err);
 			}
 		}
+
+		if (prefetchSearch) {
+			performance.mark('invoking prefetchSearch bottom of constructor');
+			prefetchSearch();
+		}
 	}
-}
-
-function isSearchOrCategory(cntrlr: SearchController, templatesStore?: TemplatesStore): boolean {
-	// backgroundFilter plugins require init event
-	cntrlr.init();
-
-	const { params } = cntrlr;
-
-	if (params.search?.query?.string) {
-		return true;
-	}
-
-	switch (templatesStore?.platform) {
-		case 'shopify':
-			return Boolean(params.filters?.find((filter) => ['collection_handle', 'product_type', 'vendor', 'ss_tags'].includes(filter.field || '')));
-		case 'bigCommerce':
-			return Boolean(params.filters?.find((filter) => ['categories_hierarchy', 'brand'].includes(filter.field || '')));
-		case 'magento2':
-			const hasCategory = Boolean(params.filters?.find((filter) => filter.field === 'category_hierarchy'));
-			// @ts-ignore - value dne on filter type
-			const hasSearch = Boolean(params.filters?.find((filter) => filter.field === 'visibility' && filter.value === 'Search'));
-			return hasCategory || hasSearch;
-		default:
-			break;
-	}
-
-	return false;
 }
