@@ -41,7 +41,6 @@ export type SearchTargetConfig = {
 	theme?: keyof LibraryImports['theme'] | (string & NonNullable<unknown>);
 	component: keyof LibraryImports['component']['search'];
 	resultComponent?: keyof LibraryImports['component']['result'] | (string & NonNullable<unknown>);
-	unsetTargetMinHeight?: boolean;
 };
 
 export type AutocompleteTargetConfig = {
@@ -116,9 +115,6 @@ type TemplatePluginGrouping = TemplatePlugins[];
 
 export const DEFAULT_FEATURES: SnapFeatures = {
 	integratedSpellCorrection: {
-		enabled: true,
-	},
-	preconnectAPI: {
 		enabled: true,
 	},
 };
@@ -227,7 +223,6 @@ export const createSearchTargeters = (templateConfig: SnapTemplatesConfig, templ
 		const targetId = templatesStore.addTarget('search', target);
 		const targeter: ExtendedTarget = {
 			...target,
-			hideTarget: true,
 			component: async () => {
 				const componentImportPromises = [];
 				componentImportPromises.push(templatesStore.library.import.component.search[target.component]());
