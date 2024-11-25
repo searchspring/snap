@@ -34,7 +34,6 @@ import type { SnapControllerServices, SnapControllerConfig, InitialUrlConfig, Sn
 import { configureSnapFeatures } from './utils';
 import { setupEvents } from './setupEvents';
 import type { TemplatesStore } from './Templates/Stores/TemplateStore';
-import type { SearchRequestModel } from '@searchspring/snapi-types';
 
 // configure MobX
 configureMobx({ useProxies: 'never', isolateGlobalState: true, enforceActions: 'never' });
@@ -52,7 +51,7 @@ export type ExtendedTarget = Target & {
 		[propName: string]: any;
 	};
 	onTarget?: OnTarget;
-	prefetch?: boolean | ((params: SearchRequestModel) => boolean);
+	prefetch?: boolean;
 	renderAfterSearch?: boolean;
 };
 
