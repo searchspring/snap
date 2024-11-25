@@ -610,8 +610,6 @@ export class Snap {
 			}
 		}
 
-		let prefetchSearch: (() => void) | undefined;
-
 		const contextPage = this.context.template && `${this.context.template}`.toLowerCase().trim();
 		if (contextPage && ['search', 'category'].includes(contextPage) && !this.config.pageType) {
 			this.config.pageType = contextPage as 'search' | 'category';
@@ -665,18 +663,6 @@ export class Snap {
 								}
 
 								return searchPromise;
-							};
-							let hasPrefetched = false;
-							prefetchSearch = () => {
-								if (hasPrefetched) return;
-								hasPrefetched = true;
-								performance.mark(`prefetchSearch this.config.pageType is ${this.config.pageType}`);
-								controller?.targeters?.forEach((target) => {
-									if (!target.prefetch && ['search', 'category'].includes(this.config.pageType || '')) {
-										runSearch();
-										target.component && target.component();
-									}
-								});
 							};
 
 							const targetFunction = async (target: ExtendedTarget, elem: Element, originalElem: Element) => {
@@ -1023,11 +1009,6 @@ export class Snap {
 			} catch (err) {
 				this.logger.error(`Failed to create Recommendations Instantiator.`, err);
 			}
-		}
-
-		if (prefetchSearch) {
-			performance.mark('invoking prefetchSearch bottom of constructor');
-			prefetchSearch();
 		}
 	}
 }
