@@ -46,12 +46,19 @@ export function getContext(evaluate: string[] = [], script?: HTMLScriptElement |
 	});
 
 	const scriptVariables: ContextVariables = {};
+	const scriptInnerHTML = scriptElem.innerHTML;
+
+	// attempt to grab inner HTML variables
+	const scriptInnerVars = scriptInnerHTML.match(/([a-zA-Z_$][a-zA-Z_$0-9]*)\s?=/g)?.map((match) => match.replace(/[\s=]/g, ''));
+
+	const combinedVars = evaluate.concat(scriptInnerVars || []);
+	const evaluateVars = [...new Set(combinedVars)]; // de-dupe
 
 	// evaluate text and put into variables
 	evaluate?.forEach((name) => {
 		const fn = new Function(`
-			var ${evaluate.join(', ')};
-			${scriptElem.innerHTML}
+			var ${evaluateVars.join(', ')};
+			${scriptInnerHTML}
 			return ${name};
 		`);
 
