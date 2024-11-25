@@ -37,7 +37,6 @@ export type TemplateTarget = {
 	theme?: keyof LibraryImports['theme'] | (string & NonNullable<unknown>);
 	component: ComponentLibraryType | (string & NonNullable<unknown>);
 	resultComponent?: keyof LibraryImports['component']['result'] | (string & NonNullable<unknown>);
-	unsetTargetMinHeight?: boolean;
 };
 
 export type TemplatesStoreConfigSettings = {
