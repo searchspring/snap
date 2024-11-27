@@ -52,7 +52,11 @@ export function getContext(evaluate: string[] = [], script?: HTMLScriptElement |
 	const scriptInnerVars = scriptInnerHTML.match(/([a-zA-Z_$][a-zA-Z_$0-9]*)\s?=/g)?.map((match) => match.replace(/[\s=]/g, ''));
 
 	const combinedVars = evaluate.concat(scriptInnerVars || []);
-	const evaluateVars = [...new Set(combinedVars)]; // de-dupe
+
+	// de-dupe vars
+	const evaluateVars = combinedVars.filter((item, index) => {
+		return combinedVars.indexOf(item) === index;
+	});
 
 	// evaluate text and put into variables
 	evaluate?.forEach((name) => {
