@@ -2,7 +2,7 @@ import type { Product } from '@searchspring/snap-store-mobx';
 import { getFormKey } from './getFormKey';
 import { getUenc } from './getUenc';
 
-type Magento2AddToCartConfig = {
+export type Magento2AddToCartConfig = {
 	formKey?: string;
 	uenc?: string;
 	redirect?: boolean | string;

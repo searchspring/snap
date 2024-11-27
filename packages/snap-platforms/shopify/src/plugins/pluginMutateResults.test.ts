@@ -64,8 +64,10 @@ describe('Shopify pluginMutateResults', () => {
 			controller.context.collection = collectionContext;
 
 			const config = {
-				collectionInUrl: {
-					enabled: true,
+				mutations: {
+					collectionInUrl: {
+						enabled: true,
+					},
 				},
 			};
 
@@ -113,8 +115,10 @@ describe('Shopify pluginMutateResults', () => {
 
 		it('requires config.enabled', async () => {
 			const config = {
-				collectionInUrl: {
-					enabled: false,
+				mutations: {
+					collectionInUrl: {
+						enabled: false,
+					},
 				},
 			};
 
@@ -127,8 +131,10 @@ describe('Shopify pluginMutateResults', () => {
 
 		it('requires context.collection to be defined', async () => {
 			const config = {
-				collectionInUrl: {
-					enabled: true,
+				mutations: {
+					collectionInUrl: {
+						enabled: true,
+					},
 				},
 			};
 
@@ -148,8 +154,10 @@ describe('Shopify pluginMutateResults', () => {
 			controller.context.collection = collectionContext;
 
 			const config = {
-				collectionInUrl: {
-					enabled: true,
+				mutations: {
+					collectionInUrl: {
+						enabled: true,
+					},
 				},
 			};
 

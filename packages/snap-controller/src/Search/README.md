@@ -78,6 +78,13 @@ This will invoke a search request to Searchspring's search API and populate the 
 searchController.search();
 ```
 
+## AddToCart
+This will invoke an addToCart event. Takes an array of Products as a parameter. 
+
+```typescript
+searchController.addToCart(products);
+```
+
 ## Search History
 Search queries made by the controller are stored for later usage. This is enabled by default without providing any settings, to disable set the `max` to zero. The `config.settings.history.url` setting should be set when utilizing the history store outside of the search page in order for the URLs to direct users to the correct location. Common usage of the historical terms are on the search listing page or within autocomplete.
 

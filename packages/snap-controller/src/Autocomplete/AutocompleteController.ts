@@ -1,6 +1,6 @@
 import deepmerge from 'deepmerge';
 
-import { StorageStore, ErrorType } from '@searchspring/snap-store-mobx';
+import { StorageStore, ErrorType, Product } from '@searchspring/snap-store-mobx';
 import { AbstractController } from '../Abstract/AbstractController';
 import { getSearchParams } from '../utils/getParams';
 import { ControllerTypes } from '../types';
@@ -664,6 +664,16 @@ export class AutocompleteController extends AbstractController {
 				this.store.loading = false;
 			}
 		}
+	};
+
+	addToCart = async (products: Product[]): Promise<void> => {
+		const eventContext = {
+			products: products,
+		};
+
+		this.eventManager.fire('addToCart', eventContext);
+
+		//fire some future beacon event
 	};
 }
 

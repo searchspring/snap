@@ -18,7 +18,7 @@ import type {
 } from '../Instantiators/RecommendationInstantiator';
 import type { SnapFeatures } from '../types';
 import type { SnapConfig, ExtendedTarget } from '../Snap';
-import type { RecsTemplateTypes, TemplatesStoreConfigConfig, TemplateTypes } from './Stores/TemplateStore';
+import type { PluginsConfigs, RecsTemplateTypes, TemplatesStoreConfigConfig, TemplateTypes } from './Stores/TemplateStore';
 import { LibraryImports } from './Stores/LibraryStore';
 import { GLOBAL_THEME_NAME } from './Stores/TargetStore';
 import type {
@@ -30,6 +30,10 @@ import type {
 } from '@searchspring/snap-platforms/common';
 import type { pluginBackgroundFilters as shopifyPluginBackgroundFilters } from '@searchspring/snap-platforms/shopify';
 import { pluginMutateResults as shopifyPluginMutateResults, ShopifyPluginMutateResultsConfig } from '@searchspring/snap-platforms/shopify';
+import { pluginAddToCart as shopifyPluginAddToCart, ShopifyAddToCartPluginConfig } from '@searchspring/snap-platforms/shopify';
+import { pluginAddToCart as bigCommercePluginAddToCart, BigCommerceAddToCartConfig } from '@searchspring/snap-platforms/bigcommerce';
+import { pluginAddToCart as magento2PluginAddToCart, Magento2AddToCartConfig } from '@searchspring/snap-platforms/magento2';
+
 import type { pluginBackgroundFilters as bigCommercePluginBackgroundFilters } from '@searchspring/snap-platforms/bigcommerce';
 import type { pluginBackgroundFilters as magento2PluginBackgroundFilters } from '@searchspring/snap-platforms/magento2';
 
@@ -72,6 +76,7 @@ export type SnapTemplatesConfig = TemplatesStoreConfigConfig & {
 	search?: {
 		targets: [SearchTargetConfig, ...SearchTargetConfig[]];
 		settings?: SearchStoreConfigSettings;
+		plugins?: PluginsConfigs;
 		// breakpointSettings?: SearchStoreConfigSettings[];
 		/* controller settings breakpoints work with caveat of having settings locked to initialized breakpoint */
 	};
@@ -79,6 +84,7 @@ export type SnapTemplatesConfig = TemplatesStoreConfigConfig & {
 		inputSelector: string;
 		targets: [AutocompleteTargetConfig, ...AutocompleteTargetConfig[]];
 		settings?: AutocompleteStoreConfigSettings;
+		plugins?: PluginsConfigs;
 		// breakpointSettings?: AutocompleteStoreConfigSettings[];
 		/* controller settings breakpoints work with caveat of having settings locked to initialized breakpoint */
 	};
@@ -93,6 +99,7 @@ export type SnapTemplatesConfig = TemplatesStoreConfigConfig & {
 			[profileComponentName: string]: RecommendationBundleTargetConfig;
 		};
 		settings?: RecommendationInstantiatorConfigSettings;
+		plugins?: PluginsConfigs;
 		// breakpointSettings?: RecommendationInstantiatorConfigSettings[];
 		/* controller settings breakpoints work with caveat of having settings locked to initialized breakpoint */
 	};
@@ -106,10 +113,14 @@ type TemplatePlugins =
 	// shopify
 	| [typeof shopifyPluginBackgroundFilters]
 	| [typeof shopifyPluginMutateResults, ShopifyPluginMutateResultsConfig]
+	| [typeof shopifyPluginAddToCart, ShopifyAddToCartPluginConfig]
+
 	// bigCommerce
 	| [typeof bigCommercePluginBackgroundFilters]
+	| [typeof bigCommercePluginAddToCart, BigCommerceAddToCartConfig]
 	// magento2
-	| [typeof magento2PluginBackgroundFilters];
+	| [typeof magento2PluginBackgroundFilters]
+	| [typeof magento2PluginAddToCart, Magento2AddToCartConfig];
 
 type TemplatePluginGrouping = TemplatePlugins[];
 
@@ -350,7 +361,7 @@ export function createSnapConfig(templateConfig: SnapTemplatesConfig, templatesS
 		const searchControllerConfig = {
 			config: {
 				id: 'search',
-				plugins: createPlugins(templateConfig, templatesStore),
+				plugins: createPlugins(templateConfig, templatesStore, 'search'),
 				settings: templateConfig.search.settings || {},
 			},
 			targeters: createSearchTargeters(templateConfig, templatesStore),
@@ -376,7 +387,7 @@ export function createSnapConfig(templateConfig: SnapTemplatesConfig, templatesS
 		const autocompleteControllerConfig = {
 			config: {
 				id: 'autocomplete',
-				plugins: createPlugins(templateConfig, templatesStore),
+				plugins: createPlugins(templateConfig, templatesStore, 'autocomplete'),
 				selector: templateConfig.autocomplete.inputSelector,
 				settings: autocompleteControllerSettings,
 			},
@@ -434,7 +445,7 @@ export function createSnapConfig(templateConfig: SnapTemplatesConfig, templatesS
 		const recommendationInstantiatorConfig: RecommendationInstantiatorConfig = {
 			components: createRecommendationComponentMapping(templateConfig, templatesStore),
 			config: {
-				plugins: createPlugins(templateConfig, templatesStore),
+				plugins: createPlugins(templateConfig, templatesStore, 'recommendation'),
 				...templateConfig.recommendation?.settings!,
 			},
 		};
@@ -455,29 +466,68 @@ export function createSnapConfig(templateConfig: SnapTemplatesConfig, templatesS
 	return snapConfig;
 }
 
-function createPlugins(templateConfig: SnapTemplatesConfig, templatesStore: TemplatesStore): PluginGrouping[] {
+function createPlugins(
+	templateConfig: SnapTemplatesConfig,
+	templatesStore: TemplatesStore,
+	controllerType?: 'autocomplete' | 'search' | 'recommendation'
+): PluginGrouping[] {
 	const plugins: TemplatePluginGrouping = [];
+	let controllerConfig;
+	if (controllerType) {
+		controllerConfig = templateConfig[controllerType] || {};
+	}
 
 	plugins.push([
 		templatesStore.library.import.plugins.common.backgroundFilters,
-		templateConfig.plugins?.common?.backgroundFilters || { filters: [] },
+		deepmerge(templateConfig.plugins?.common?.backgroundFilters || { filters: [] }, controllerConfig?.plugins?.common?.backgroundFilters || {}),
 	]);
-	plugins.push([templatesStore.library.import.plugins.common.scrollToTop, templateConfig.plugins?.common?.scrollToTop || { enabled: true }]);
-	plugins.push([templatesStore.library.import.plugins.common.logger]);
+
+	plugins.push([
+		templatesStore.library.import.plugins.common.scrollToTop,
+		deepmerge(templateConfig.plugins?.common?.scrollToTop || { enabled: true }, controllerConfig?.plugins?.common?.scrollToTop || {}),
+	]);
+	plugins.push([
+		templatesStore.library.import.plugins.common.logger,
+		deepmerge(templateConfig.plugins?.common?.logger || { enabled: true }, controllerConfig?.plugins?.common?.logger || {}),
+	]);
 
 	switch (templatesStore.platform) {
 		case 'shopify':
-			plugins.push([templatesStore.library.import.plugins.shopify.backgroundFilters]);
+			plugins.push([
+				templatesStore.library.import.plugins.shopify.backgroundFilters,
+				deepmerge(templateConfig.plugins?.shopify?.backgroundFilters || {}, controllerConfig?.plugins?.shopify?.backgroundFilters || {}),
+			]);
 			plugins.push([
 				templatesStore.library.import.plugins.shopify.mutateResults,
-				templateConfig.plugins?.shopify?.mutateResults || { collectionInUrl: { enabled: true } },
+				deepmerge(
+					templateConfig.plugins?.shopify?.mutateResults || { enabled: true, mutations: { collectionInUrl: { enabled: true } } },
+					controllerConfig?.plugins?.shopify?.mutateResults || {}
+				),
+			]);
+			plugins.push([
+				templatesStore.library.import.plugins.shopify.addToCart,
+				deepmerge(templateConfig.plugins?.shopify?.addToCart || {}, controllerConfig?.plugins?.shopify?.addToCart || {}),
 			]);
 			break;
 		case 'bigCommerce':
-			plugins.push([templatesStore.library.import.plugins.bigcommerce.backgroundFilters]);
+			plugins.push([
+				templatesStore.library.import.plugins.bigcommerce.backgroundFilters,
+				deepmerge(templateConfig.plugins?.bigCommerce?.backgroundFilters || {}, controllerConfig?.plugins?.bigCommerce?.backgroundFilters || {}),
+			]);
+			plugins.push([
+				templatesStore.library.import.plugins.bigcommerce.addToCart,
+				deepmerge(templateConfig.plugins?.bigCommerce?.addToCart || {}, controllerConfig?.plugins?.bigCommerce?.addToCart || {}),
+			]);
 			break;
 		case 'magento2':
-			plugins.push([templatesStore.library.import.plugins.magento2.backgroundFilters]);
+			plugins.push([
+				templatesStore.library.import.plugins.magento2.backgroundFilters,
+				deepmerge(templateConfig.plugins?.magento2?.backgroundFilters || {}, controllerConfig?.plugins?.magento2?.backgroundFilters || {}),
+			]);
+			plugins.push([
+				templatesStore.library.import.plugins.magento2.addToCart,
+				deepmerge(templateConfig.plugins?.magento2?.addToCart || {}, controllerConfig?.plugins?.magento2?.addToCart || {}),
+			]);
 			break;
 		default:
 			break;

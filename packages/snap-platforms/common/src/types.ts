@@ -16,3 +16,7 @@ export type PluginControl = {
 	controllerIds?: (string | RegExp)[];
 	controllerTypes?: ('search' | 'autocomplete' | 'recommendation')[];
 };
+
+export type AbstractPluginConfig = {
+	enabled?: boolean;
+};

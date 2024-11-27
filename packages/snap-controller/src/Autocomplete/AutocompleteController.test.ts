@@ -1,7 +1,7 @@
 import { v4 as uuidv4 } from 'uuid';
 
 import { AutocompleteStore } from '@searchspring/snap-store-mobx';
-import type { AutocompleteStoreConfig } from '@searchspring/snap-store-mobx';
+import type { AutocompleteStoreConfig, Product } from '@searchspring/snap-store-mobx';
 import { UrlManager, QueryStringTranslator, reactLinker } from '@searchspring/snap-url-manager';
 import { Tracker } from '@searchspring/snap-tracker';
 import { EventManager } from '@searchspring/snap-event-manager';
@@ -571,6 +571,26 @@ describe('Autocomplete Controller', () => {
 		expect(controller.store.state.focusedInput).toBe(undefined);
 
 		setFocusedfn.mockClear();
+	});
+
+	it('can use addToCart', async () => {
+		const controller = new AutocompleteController(acConfig, {
+			client: new MockClient(globals, {}),
+			store: new AutocompleteStore(acConfig, services),
+			urlManager,
+			eventManager: new EventManager(),
+			profiler: new Profiler(),
+			logger: new Logger(),
+			tracker: new Tracker(globals),
+		});
+
+		await controller.search();
+
+		const eventfn = jest.spyOn(controller.eventManager, 'fire');
+
+		controller.addToCart([controller.store.results[0] as Product, controller.store.results[1] as Product]);
+
+		expect(eventfn).toHaveBeenCalledWith('addToCart', { products: [controller.store.results[0], controller.store.results[1]] });
 	});
 
 	it('can submit with form', async () => {

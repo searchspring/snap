@@ -1,6 +1,6 @@
 import type { Product } from '@searchspring/snap-store-mobx';
 
-type ShopifyAddToCartConfig = {
+export type ShopifyAddToCartConfig = {
 	redirect?: boolean | string;
 	idFieldName?: string; // display.mappings.core.id
 };

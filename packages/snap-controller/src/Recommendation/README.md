@@ -58,6 +58,13 @@ Invoking the `init` method is required to subscribe to changes that occur in the
 recommendationController.init();
 ```
 
+## AddToCart
+This will invoke an addToCart event. Takes an array of Products as a parameter. 
+
+```typescript
+recommendationController.addToCart(products);
+```
+
 ## Events
 ### init
 - Called with `eventData` = { controller }

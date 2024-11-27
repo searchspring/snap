@@ -543,4 +543,14 @@ export class RecommendationController extends AbstractController {
 			}
 		}
 	};
+
+	addToCart = async (products: Product[]): Promise<void> => {
+		const eventContext = {
+			products: products,
+		};
+
+		this.eventManager.fire('addToCart', eventContext);
+
+		//fire some future beacon event
+	};
 }

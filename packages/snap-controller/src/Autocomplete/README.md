@@ -94,6 +94,13 @@ This will invoke a search request to Searchspring's search API and populate the 
 autocompleteController.search();
 ```
 
+## AddToCart
+This will invoke an addToCart event. Takes an array of Products as a parameter. 
+
+```typescript
+autocompleteController.addToCart(products);
+```
+
 ## Events
 ### init
 - Called with `eventData` = { controller }

@@ -1,16 +1,17 @@
 import type { AbstractController } from '@searchspring/snap-controller';
+import { AbstractPluginConfig } from '../types';
 
 export type ScrollBehavior = 'auto' | 'instant' | 'smooth';
 export type CommonPluginScrollToTopConfig = {
-	enabled: boolean;
 	selector?: string;
 	options?: {
 		top?: number;
 		left?: number;
 		behavior?: ScrollBehavior;
 	};
-};
-export const pluginScrollToTop = (cntrlr: AbstractController, config: CommonPluginScrollToTopConfig) => {
+} & AbstractPluginConfig;
+
+export const pluginScrollToTop = (cntrlr: AbstractController, config?: CommonPluginScrollToTopConfig) => {
 	if (!config?.enabled || cntrlr.type !== 'search') {
 		return;
 	}

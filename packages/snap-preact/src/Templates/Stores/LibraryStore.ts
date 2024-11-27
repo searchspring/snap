@@ -6,6 +6,9 @@ import type { TemplateStoreComponentConfig } from './TemplateStore';
 import type { PluginFunction } from '@searchspring/snap-controller';
 import { pluginBackgroundFilters as shopifyPluginBackgroundFilters } from './library/plugins/shopify/pluginBackgroundFilters';
 import { pluginMutateResults as shopifyPluginMutateResults } from './library/plugins/shopify/pluginMutateResults';
+import { pluginAddToCart as shopifyPluginAddToCart } from './library/plugins/shopify/pluginAddToCart';
+import { pluginAddToCart as bigCommercePluginAddToCart } from './library/plugins/bigCommerce/pluginAddToCart';
+import { pluginAddToCart as magento2PluginAddToCart } from './library/plugins/magento2/pluginAddToCart';
 import { pluginBackgroundFilters as bigCommercePluginBackgroundFilters } from './library/plugins/bigCommerce/pluginBackgroundFilters';
 import { pluginBackgroundFilters as magento2PluginBackgroundFilters } from './library/plugins/magento2/pluginBackgroundFilters';
 import { pluginBackgroundFilters } from './library/plugins/common/pluginBackgroundFilters';
@@ -29,12 +32,15 @@ export type LibraryImports = {
 		shopify: {
 			backgroundFilters: typeof shopifyPluginBackgroundFilters;
 			mutateResults: typeof shopifyPluginMutateResults;
+			addToCart: typeof shopifyPluginAddToCart;
 		};
 		bigcommerce: {
 			backgroundFilters: PluginFunction;
+			addToCart: typeof bigCommercePluginAddToCart;
 		};
 		magento2: {
 			backgroundFilters: PluginFunction;
+			addToCart: typeof magento2PluginAddToCart;
 		};
 		common: {
 			backgroundFilters: typeof pluginBackgroundFilters;
@@ -141,12 +147,15 @@ export class LibraryStore {
 			shopify: {
 				backgroundFilters: shopifyPluginBackgroundFilters,
 				mutateResults: shopifyPluginMutateResults,
+				addToCart: shopifyPluginAddToCart,
 			},
 			bigcommerce: {
 				backgroundFilters: bigCommercePluginBackgroundFilters,
+				addToCart: bigCommercePluginAddToCart,
 			},
 			magento2: {
 				backgroundFilters: magento2PluginBackgroundFilters,
+				addToCart: magento2PluginAddToCart,
 			},
 			common: {
 				backgroundFilters: pluginBackgroundFilters,

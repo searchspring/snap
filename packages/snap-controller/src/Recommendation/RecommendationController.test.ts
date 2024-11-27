@@ -575,6 +575,26 @@ describe('Recommendation Controller', () => {
 		eventfn.mockClear();
 	});
 
+	it('can use addToCart', async () => {
+		const controller = new RecommendationController(recommendConfig, {
+			client: new MockClient(globals, {}),
+			store: new RecommendationStore(recommendConfig, services),
+			urlManager,
+			eventManager: new EventManager(),
+			profiler: new Profiler(),
+			logger: new Logger(),
+			tracker: new Tracker(globals),
+		});
+
+		await controller.search();
+
+		const eventfn = jest.spyOn(controller.eventManager, 'fire');
+
+		controller.addToCart([controller.store.results[0], controller.store.results[1]]);
+
+		expect(eventfn).toHaveBeenCalledWith('addToCart', { products: [controller.store.results[0], controller.store.results[1]] });
+	});
+
 	it('can set cart param', async () => {
 		const controller = new RecommendationController(recommendConfig, {
 			client: new MockClient(globals, {}),
