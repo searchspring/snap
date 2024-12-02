@@ -145,7 +145,7 @@ export type RecommendationStoreConfig = StoreConfig & {
 	batchId?: number;
 	settings?: {
 		variants?: VariantConfig;
-		bfCacheRestore: boolean;
+		searchOnPageShow: boolean;
 	};
 };
 

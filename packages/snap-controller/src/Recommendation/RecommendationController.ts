@@ -63,7 +63,7 @@ export class RecommendationController extends AbstractController {
 
 		// attach to bfCache restore event and re-run search on the controller
 		// enabled by default
-		if (config.settings?.bfCacheRestore !== false) {
+		if (config.settings?.searchOnPageShow !== false) {
 			window.addEventListener('pageshow', (e) => {
 				if (e.persisted && !this.store.error && this.store.loaded && !this.store.loading) {
 					this.search();

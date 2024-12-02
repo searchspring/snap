@@ -118,7 +118,7 @@ describe('Recommendation Controller', () => {
 		});
 	});
 
-	it(`tests bfCacheRestore triggers search on persisted pageshow event `, async function () {
+	it(`tests searchOnPageShow triggers search on persisted pageshow event `, async function () {
 		const controller = new RecommendationController(recommendConfig, {
 			client: new MockClient(globals, {}),
 			store: new RecommendationStore(recommendConfig, services),
@@ -157,11 +157,11 @@ describe('Recommendation Controller', () => {
 		});
 	});
 
-	it(`can turn off bfCacheRestore`, async function () {
+	it(`can turn off searchOnPageShow`, async function () {
 		const customConfig = {
 			...recommendConfig,
 			settings: {
-				bfCacheRestore: false,
+				searchOnPageShow: false,
 			},
 		};
 		const controller = new RecommendationController(customConfig, {
@@ -202,7 +202,7 @@ describe('Recommendation Controller', () => {
 		});
 	});
 
-	it(`tests bfCacheRestore doesnt trigger search if persisted is false or undefined on the pageshow event`, async function () {
+	it(`tests searchOnPageShow doesnt trigger search if persisted is false or undefined on the pageshow event`, async function () {
 		const controller = new RecommendationController(recommendConfig, {
 			client: new MockClient(globals, {}),
 			store: new RecommendationStore(recommendConfig, services),
