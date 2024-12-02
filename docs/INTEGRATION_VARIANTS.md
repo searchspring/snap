@@ -60,7 +60,6 @@ Once configured, each result that has variants in `controller.store.results` sho
 **Methods:**
 - `setActive(variant)` - Select a specific variant
 - `update(newData)` - Update variant data post-initialization
-- `refineSelections()` - Filter available options to prevent invalid combinations
 
 ### Updating Variant Data
 
