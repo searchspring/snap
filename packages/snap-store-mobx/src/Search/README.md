@@ -499,6 +499,8 @@ Core product attributes object
 
 `result.display` an object used for display in result components. Containing the currently set display state from the `result.mask` combined with the underlying core data for the result. 
 
+`result.quantity` integer used in the cart store for automatically updating the bundle pricing and quantities for add to cart functions. 
+
 `result.variants` contains information about product variants like size and color options, as well as the variant selections data. (requires variants to be enabled and configured) For more variant integration information, see [Variant Integration Docs](https://github.com/searchspring/snap/blob/main/docs/INTEGRATION_VARIANTS.md)
 
 
