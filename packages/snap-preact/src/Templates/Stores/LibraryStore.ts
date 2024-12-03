@@ -9,6 +9,7 @@ import { pluginMutateResults as shopifyPluginMutateResults } from './library/plu
 import { pluginAddToCart as shopifyPluginAddToCart } from './library/plugins/shopify/pluginAddToCart';
 import { pluginAddToCart as bigCommercePluginAddToCart } from './library/plugins/bigCommerce/pluginAddToCart';
 import { pluginAddToCart as magento2PluginAddToCart } from './library/plugins/magento2/pluginAddToCart';
+import { pluginAddToCart as commonPluginAddToCart } from './library/plugins/common/pluginAddToCart';
 import { pluginBackgroundFilters as bigCommercePluginBackgroundFilters } from './library/plugins/bigCommerce/pluginBackgroundFilters';
 import { pluginBackgroundFilters as magento2PluginBackgroundFilters } from './library/plugins/magento2/pluginBackgroundFilters';
 import { pluginBackgroundFilters } from './library/plugins/common/pluginBackgroundFilters';
@@ -46,6 +47,7 @@ export type LibraryImports = {
 			backgroundFilters: typeof pluginBackgroundFilters;
 			scrollToTop: typeof pluginScrollToTop;
 			logger: typeof pluginLogger;
+			addToCart: typeof commonPluginAddToCart;
 		};
 	};
 	component: {
@@ -161,6 +163,7 @@ export class LibraryStore {
 				backgroundFilters: pluginBackgroundFilters,
 				scrollToTop: pluginScrollToTop,
 				logger: pluginLogger,
+				addToCart: commonPluginAddToCart,
 			},
 		},
 		component: {

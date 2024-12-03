@@ -21,10 +21,12 @@ import type { SnapConfig, ExtendedTarget } from '../Snap';
 import type { PluginsConfigs, RecsTemplateTypes, TemplatesStoreConfigConfig, TemplateTypes } from './Stores/TemplateStore';
 import { LibraryImports } from './Stores/LibraryStore';
 import { GLOBAL_THEME_NAME } from './Stores/TargetStore';
-import type {
+import {
 	CommonPluginBackgroundFilterConfig,
 	pluginBackgroundFilters,
 	pluginScrollToTop,
+	pluginAddToCart,
+	CommonAddToCartPluginConfig,
 	CommonPluginScrollToTopConfig,
 	pluginLogger,
 } from '@searchspring/snap-platforms/common';
@@ -110,6 +112,7 @@ type TemplatePlugins =
 	| [typeof pluginBackgroundFilters, CommonPluginBackgroundFilterConfig]
 	| [typeof pluginScrollToTop, CommonPluginScrollToTopConfig]
 	| [typeof pluginLogger]
+	| [typeof pluginAddToCart, CommonAddToCartPluginConfig]
 	// shopify
 	| [typeof shopifyPluginBackgroundFilters]
 	| [typeof shopifyPluginMutateResults, ShopifyPluginMutateResultsConfig]
@@ -490,6 +493,12 @@ function createPlugins(
 		templatesStore.library.import.plugins.common.logger,
 		deepmerge(templateConfig.plugins?.common?.logger || { enabled: true }, controllerConfig?.plugins?.common?.logger || {}),
 	]);
+	if (templateConfig.plugins?.common?.addToCart?.function) {
+		plugins.push([
+			templatesStore.library.import.plugins.common.addToCart,
+			deepmerge(templateConfig.plugins?.common?.addToCart, controllerConfig?.plugins?.common?.addToCart || {}),
+		]);
+	}
 
 	switch (templatesStore.platform) {
 		case 'shopify':

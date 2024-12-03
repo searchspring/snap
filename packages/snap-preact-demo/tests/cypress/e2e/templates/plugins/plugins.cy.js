@@ -111,6 +111,53 @@ describe('plugins work based on plaform setting', () => {
 		});
 	});
 
+	it('adds common addToCart plugin when configured with "other" platform supplied', () => {
+		cy.on('window:before:load', (win) => {
+			win.mergeSnapConfig = {
+				config: {
+					siteId: '8uyt2m',
+					language: 'en',
+					currency: 'usd',
+					platform: 'other',
+				},
+				plugins: {
+					common: {
+						addToCart: {
+							function: () => {
+								console.log('added');
+							},
+						},
+					},
+				},
+				search: {
+					targets: [
+						{
+							selector: '#searchspring-layout',
+							component: 'Search',
+						},
+					],
+				},
+			};
+		});
+
+		cy.visit('https://localhost:2222/templates/');
+
+		cy.snapController().then((controller) => {
+			const expectedPluginList = [
+				'pluginBackgroundFilters', //common
+				'pluginScrollToTop', //common
+				'pluginLogger', //common
+				'pluginAddToCart', //common
+			];
+
+			expect(controller.config.plugins.length).to.equal(expectedPluginList.length);
+
+			controller.config.plugins.forEach((plugin, idx) => {
+				expect(plugin[0].name).to.equal(expectedPluginList[idx]);
+			});
+		});
+	});
+
 	it('has shopify plugins registered by default when platform is shopify', () => {
 		cy.on('window:before:load', (win) => {
 			win.mergeSnapConfig = {
@@ -140,7 +187,9 @@ describe('plugins work based on plaform setting', () => {
 				'pluginLogger', //common
 				'pluginBackgroundFiltersShopify',
 				'pluginMutateResultsShopify',
+				'pluginAddToCart',
 			];
+			console.log(controller.config.plugins);
 			expect(controller.config.plugins.length).to.equal(expectedPluginList.length);
 
 			controller.config.plugins.forEach((plugin, idx) => {
@@ -177,6 +226,7 @@ describe('plugins work based on plaform setting', () => {
 				'pluginScrollToTop', //common
 				'pluginLogger', //common
 				'pluginBackgroundFiltersBigcommerce',
+				'pluginAddToCart',
 			];
 			expect(controller.config.plugins.length).to.equal(expectedPluginList.length);
 
@@ -214,6 +264,7 @@ describe('plugins work based on plaform setting', () => {
 				'pluginScrollToTop', //common
 				'pluginLogger', //common
 				'pluginBackgroundFiltersMagento2',
+				'pluginAddToCart',
 			];
 			expect(controller.config.plugins.length).to.equal(expectedPluginList.length);
 
