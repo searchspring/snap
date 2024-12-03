@@ -64,7 +64,7 @@ Component file:
 
 ```jsx
 import { h } from 'preact';
-import { observer } from 'mobx-react';
+import { observer } from 'mobx-react-lite';
 
 import { Recommendation } from '@searchspring/snap-preact-components';
 
@@ -109,7 +109,7 @@ The example Bundled component below uses the `RecommendationBundle` component im
 
 ```jsx
 import { h } from 'preact';
-import { observer } from 'mobx-react';
+import { observer } from 'mobx-react-lite';
 
 import { RecommendationBundle } from '@searchspring/snap-preact-components';
 

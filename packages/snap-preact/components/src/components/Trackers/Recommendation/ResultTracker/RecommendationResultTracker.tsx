@@ -1,7 +1,7 @@
 import { h } from 'preact';
 import { jsx, css } from '@emotion/react';
 import { useRef } from 'preact/hooks';
-import { observer } from 'mobx-react';
+import { observer } from 'mobx-react-lite';
 import { useIntersection } from '../../../../hooks';
 import type { RecommendationController } from '@searchspring/snap-controller';
 import { ComponentProps, StyleScript } from '../../../../types';

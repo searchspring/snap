@@ -1,5 +1,5 @@
 import { h, Fragment } from 'preact';
-import { observer } from 'mobx-react';
+import { observer } from 'mobx-react-lite';
 
 import { SortBy } from './SortBy';
 import { PerPage } from './PerPage';

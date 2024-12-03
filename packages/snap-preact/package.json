@@ -70,7 +70,6 @@
 		"css-loader": "^6.9.0",
 		"cypress": "^13.7.1",
 		"cypress-wait-until": "^1.7.2",
-		"mobx-react": "7.6.0",
 		"preact": "10.9.0",
 		"react": "16.14.0",
 		"react-dom": "16.14.0",

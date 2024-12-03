@@ -1,7 +1,7 @@
 import { h } from 'preact';
 import { useEffect } from 'preact/hooks';
 
-import { observer } from 'mobx-react';
+import { observer } from 'mobx-react-lite';
 
 import {
 	Pagination,

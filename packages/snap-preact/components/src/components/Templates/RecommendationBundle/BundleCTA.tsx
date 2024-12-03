@@ -1,7 +1,7 @@
 import { h, Fragment } from 'preact';
 import { useState } from 'preact/hooks';
 import { jsx } from '@emotion/react';
-import { observer } from 'mobx-react';
+import { observer } from 'mobx-react-lite';
 import classnames from 'classnames';
 import { cloneWithProps } from '../../../utilities';
 import { Button } from '../../Atoms/Button';

@@ -1,6 +1,6 @@
 import { h } from 'preact';
 import { css } from '@emotion/react';
-import { observer } from 'mobx-react';
+import { observer } from 'mobx-react-lite';
 
 import { defined, mergeProps, mergeStyles } from '../../../utilities';
 import { Theme, useTheme } from '../../../providers';

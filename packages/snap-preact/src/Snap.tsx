@@ -55,6 +55,16 @@ export type ExtendedTarget = Target & {
 	renderAfterSearch?: boolean;
 };
 
+export type SnapConfigControllerDefinition<ControllerConfig> = {
+	config: ControllerConfig;
+	targeters?: ExtendedTarget[];
+	services?: SnapControllerServices;
+	url?: UrlTranslatorConfig & {
+		initial?: InitialUrlConfig;
+	};
+	context?: ContextVariables;
+};
+
 export type SnapConfig = {
 	features?: SnapFeatures;
 	mode?: keyof typeof AppMode | AppMode;
@@ -72,36 +82,10 @@ export type SnapConfig = {
 		recommendation?: RecommendationInstantiatorConfig;
 	};
 	controllers?: {
-		search?: {
-			config: SearchControllerConfig;
-			targeters?: ExtendedTarget[];
-			services?: SnapControllerServices;
-			url?: UrlTranslatorConfig & {
-				initial?: InitialUrlConfig;
-			};
-			context?: ContextVariables;
-		}[];
-		autocomplete?: {
-			config: AutocompleteControllerConfig;
-			targeters?: ExtendedTarget[];
-			services?: SnapControllerServices;
-			url?: UrlTranslatorConfig;
-			context?: ContextVariables;
-		}[];
-		finder?: {
-			config: FinderControllerConfig;
-			targeters?: ExtendedTarget[];
-			services?: SnapControllerServices;
-			url?: UrlTranslatorConfig;
-			context?: ContextVariables;
-		}[];
-		recommendation?: {
-			config: RecommendationControllerConfig;
-			targeters?: ExtendedTarget[];
-			services?: SnapControllerServices;
-			url?: UrlTranslatorConfig;
-			context?: ContextVariables;
-		}[];
+		search?: SnapConfigControllerDefinition<SearchControllerConfig>[];
+		autocomplete?: SnapConfigControllerDefinition<AutocompleteControllerConfig>[];
+		finder?: SnapConfigControllerDefinition<FinderControllerConfig>[];
+		recommendation?: SnapConfigControllerDefinition<RecommendationControllerConfig>[];
 	};
 };
 
@@ -364,7 +348,7 @@ export class Snap {
 		let globalContext: ContextVariables = {};
 		try {
 			// get global context
-			globalContext = getContext(['shopper', 'config', 'merchandising', 'siteId', 'currency']);
+			globalContext = getContext(['shopper', 'config', 'merchandising', 'siteId', 'currency', 'pageType']);
 		} catch (err) {
 			console.error('Snap failed to find global context');
 		}
@@ -704,8 +688,10 @@ export class Snap {
 									throw new Error(`Targets at index ${target_index} missing component value (Component).`);
 								}
 
-								if (target.prefetch) {
+								const contextPage = this.context.pageType && `${this.context.pageType}`.toLowerCase().trim();
+								if (target.prefetch || ['search', 'category'].includes(contextPage)) {
 									runSearch();
+									target.component();
 								}
 
 								cntrlr.createTargeter({ controller: cntrlr, ...target }, async (target: ExtendedTarget, elem: Element, originalElem?: Element) => {
