@@ -222,7 +222,8 @@ export const createSearchTargeters = (templateConfig: SnapTemplatesConfig, templ
 		}
 		const targetId = templatesStore.addTarget('search', target);
 		const targeter: ExtendedTarget = {
-			...target,
+			selector: target.selector,
+			hideTarget: true,
 			component: async () => {
 				const componentImportPromises = [];
 				componentImportPromises.push(templatesStore.library.import.component.search[target.component]());
@@ -249,7 +250,7 @@ export function createAutocompleteTargeters(templateConfig: SnapTemplatesConfig,
 
 		const targetId = templatesStore.addTarget('autocomplete', target);
 		const targeter: ExtendedTarget = {
-			...target,
+			selector: target.selector,
 			component: async () => {
 				const componentImportPromises = [];
 				componentImportPromises.push(templatesStore.library.import.component.autocomplete[target.component]());

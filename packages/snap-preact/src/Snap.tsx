@@ -68,7 +68,6 @@ export type SnapConfigControllerDefinition<ControllerConfig> = {
 export type SnapConfig = {
 	features?: SnapFeatures;
 	mode?: keyof typeof AppMode | AppMode;
-	pageType?: 'search' | 'category';
 	context?: ContextVariables;
 	url?: UrlTranslatorConfig;
 	client?: {
@@ -349,7 +348,7 @@ export class Snap {
 		let globalContext: ContextVariables = {};
 		try {
 			// get global context
-			globalContext = getContext(['shopper', 'config', 'merchandising', 'siteId', 'currency', 'template']);
+			globalContext = getContext(['shopper', 'config', 'merchandising', 'siteId', 'currency', 'pageType']);
 		} catch (err) {
 			console.error('Snap failed to find global context');
 		}
@@ -609,12 +608,6 @@ export class Snap {
 			}
 		}
 
-		const contextPage = this.context.template && `${this.context.template}`.toLowerCase().trim();
-		if (contextPage && ['search', 'category'].includes(contextPage) && !this.config.pageType) {
-			this.config.pageType = contextPage as 'search' | 'category';
-			performance.mark(`pageType is ${contextPage}: context contains template=${contextPage}`);
-		}
-
 		// create controllers
 		Object.keys(this.config?.controllers || {}).forEach((type) => {
 			switch (type) {
@@ -651,7 +644,6 @@ export class Snap {
 							let searchPromise: Promise<void> | null = null;
 
 							const runSearch = async () => {
-								performance.mark(`runSearch`);
 								if (!searchPromise) {
 									// handle custom initial UrlManager state
 									if (controller.url?.initial) {
@@ -665,13 +657,11 @@ export class Snap {
 							};
 
 							const targetFunction = async (target: ExtendedTarget, elem: Element, originalElem: Element) => {
-								performance.mark('search target found');
 								const targetFunctionPromises: Promise<any>[] = [];
 								if (target.renderAfterSearch) {
 									targetFunctionPromises.push(runSearch());
 								} else {
 									targetFunctionPromises.push(Promise.resolve());
-									performance.mark('invoking runSearch from targetFunction');
 									runSearch();
 								}
 
@@ -682,7 +672,6 @@ export class Snap {
 									targetFunctionPromises.push(target.component!());
 									const [_, Component] = await Promise.all(targetFunctionPromises);
 									setTimeout(() => {
-										performance.mark('rendering targeter component');
 										render(<Component controller={this.controllers[controller.config.id]} snap={this} {...target.props} />, elem);
 									});
 								} catch (err) {
@@ -699,8 +688,8 @@ export class Snap {
 									throw new Error(`Targets at index ${target_index} missing component value (Component).`);
 								}
 
-								if (target.prefetch || this.config.pageType) {
-									performance.mark(`targeter prefetch`);
+								const contextPage = this.context.pageType && `${this.context.pageType}`.toLowerCase().trim();
+								if (target.prefetch || ['search', 'category'].includes(contextPage)) {
 									runSearch();
 									target.component();
 								}

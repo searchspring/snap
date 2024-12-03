@@ -164,7 +164,6 @@ export abstract class AbstractController {
 	}
 
 	public async init(): Promise<void> {
-		performance.mark('search controller init');
 		if (this._initialized) {
 			this.log.warn(`'init' middleware recalled`);
 		}

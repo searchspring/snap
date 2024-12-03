@@ -322,7 +322,6 @@ export class SearchController extends AbstractController {
 	}
 
 	search = async (): Promise<void> => {
-		performance.mark('search controller search');
 		if (!this.initialized) {
 			await this.init();
 		}
