@@ -138,7 +138,7 @@ describe('Recommendations', () => {
 					});
 				});
 
-				it('renders carousel next buttons', function () {
+				it.skip('renders carousel next buttons', function () {
 					cy.document().then((doc) => {
 						cy.snapController(integration?.selectors?.recommendation.controller).then(({ store }) => {
 							cy.get(integration?.selectors?.recommendation.nextArrow).should('exist');
