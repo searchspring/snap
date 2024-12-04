@@ -215,6 +215,7 @@ describe('Recommendations', () => {
 									default: {
 										Default: {
 											component: 'Recommendation',
+											theme: 'custom',
 											resultComponent: 'CustomResult',
 											theme: 'custom',
 										},
