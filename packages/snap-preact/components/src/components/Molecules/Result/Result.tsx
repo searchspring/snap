@@ -216,7 +216,7 @@ export const Result = observer((properties: ResultProps): JSX.Element => {
 						<div className="ss__result__details__pricing">
 							{core.msrp && core.price && core.price < core.msrp ? (
 								<>
-									<Price {...subProps.price} value={core.msrp} lineThrough={true} name={'price--msrp'} />
+									<Price {...subProps.price} value={core.msrp} lineThrough={true} name={'msrp'} />
 									&nbsp;
 									<Price {...subProps.price} value={core.price} name={'price'} />
 								</>

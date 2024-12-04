@@ -26,7 +26,7 @@ export const BundleSelector = observer((properties: BundleSelectorProps): JSX.El
 	const subProps: BundleSelectorSubProps = {
 		icon: {
 			// default props
-			name: 'bundle-selector-icon',
+			name: 'bundle-selector',
 			className: 'ss__recommendation-bundle__wrapper__selector__icon',
 			size: 15,
 			// global theme

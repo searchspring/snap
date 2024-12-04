@@ -69,4 +69,5 @@ export interface PriceProps extends Omit<FormattedNumberProps, 'value'> {
 	value?: number;
 	lineThrough?: boolean;
 }
-export type PriceNames = 'price' | 'price--msrp' | 'bundle-strike-price' | 'bundle-price';
+
+export type PriceNames = 'price' | 'msrp' | 'bundle-price' | 'bundle-msrp';

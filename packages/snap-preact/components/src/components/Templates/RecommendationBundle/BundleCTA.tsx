@@ -12,18 +12,15 @@ import type { ComponentProps } from '../../../types';
 import type { CartStore } from '@searchspring/snap-store-mobx';
 import { Lang, useLang } from '../../../hooks';
 import deepmerge from 'deepmerge';
-import { mergeProps } from '../../../utilities';
 
 export const BundledCTA = observer((properties: BundledCTAProps): JSX.Element => {
 	const globalTheme: Theme = useTheme();
 
-	const defaultProps: BundledCTAProps = {
+	const props: BundledCTAProps = {
 		// default props
 		// global theme
 		...properties,
 	};
-
-	const props = mergeProps('BundledCTA', globalTheme, defaultProps, properties);
 
 	props.onAddToCart = (e: any) => {
 		setAddedToCart(true);
@@ -35,16 +32,13 @@ export const BundledCTA = observer((properties: BundledCTAProps): JSX.Element =>
 
 	const { ctaSlot, cartStore, onAddToCart, ctaIcon, ctaButtonText, ctaButtonSuccessText, treePath } = props;
 
-	const lastPath = treePath?.lastIndexOf(' ');
-	const modifiedTreePath = treePath?.slice(0, lastPath);
-
 	const [addedToCart, setAddedToCart] = useState(false);
 
 	props.addedToCart = addedToCart;
 
 	const subProps: BundleSelectorSubProps = {
 		icon: {
-			name: 'bundle-cart-icon',
+			name: 'bundle-cart',
 			// default props
 			className: 'ss__recommendation-bundle__wrapper__cta__icon',
 			size: 50,
@@ -52,16 +46,16 @@ export const BundledCTA = observer((properties: BundledCTAProps): JSX.Element =>
 			...globalTheme?.components?.icon,
 			// component theme overrides
 			theme: props?.theme,
-			treePath: modifiedTreePath,
+			treePath: treePath,
 		},
 		subtotalStrike: {
 			// default props
-			name: 'bundle-strike-price',
+			name: 'bundle-msrp',
 			// global theme
 			...globalTheme?.components?.price,
 			// component theme overrides
 			theme: props?.theme,
-			treePath: modifiedTreePath,
+			treePath: treePath,
 		},
 		subtotalPrice: {
 			// default props
@@ -70,7 +64,7 @@ export const BundledCTA = observer((properties: BundledCTAProps): JSX.Element =>
 			...globalTheme?.components?.price,
 			// component theme overrides
 			theme: props?.theme,
-			treePath: modifiedTreePath,
+			treePath: treePath,
 		},
 	};
 

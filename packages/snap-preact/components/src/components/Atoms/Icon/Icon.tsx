@@ -96,8 +96,8 @@ export interface IconProps extends ComponentProps {
 	name?: IconNames;
 }
 export type IconNames =
-	| 'bundle-cart-icon'
-	| 'bundle-selector-icon'
+	| 'bundle-cart'
+	| 'bundle-selector'
 	| 'next'
 	| 'prev'
 	| 'active'
