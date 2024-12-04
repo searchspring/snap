@@ -148,13 +148,18 @@ export class UrlTranslator implements Translator {
 			.split('&')
 			.filter((v) => v)
 			.map((kvPair) => {
-				const [key, value] = kvPair.split('=').map((v) => decodeURIComponent(v.replace(/\+/g, ' ')));
-				return { key: key.split('.'), value, type: ParamLocationType.query };
+				try {
+					const [key, value] = kvPair.split('=').map((v) => decodeURIComponent(v.replace(/\+/g, ' ')));
+					return { key: key.split('.'), value, type: ParamLocationType.query };
+				} catch (err) {
+					console.error('Uncaught URIError: URI malformed', kvPair);
+					return { key: ['ss__delete'], value: 'ss__delete', type: ParamLocationType.query };
+				}
 			})
 			.filter((param) => {
 				// remove core fields that do not contain a value
 				const isCoreField = this.reverseMapping[param.key[0]];
-				return !isCoreField || (isCoreField && param.value);
+				return param.value !== 'ss__delete' ? !isCoreField || (isCoreField && param.value) : '';
 			});
 	}
 
