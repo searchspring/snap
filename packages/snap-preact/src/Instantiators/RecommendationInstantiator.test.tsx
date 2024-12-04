@@ -5,6 +5,7 @@ import { cookies } from '@searchspring/snap-toolbox';
 import { Logger } from '@searchspring/snap-logger';
 import { MockClient } from '@searchspring/snap-shared';
 import { Next } from '@searchspring/snap-event-manager';
+import { waitFor } from '@testing-library/preact';
 
 const DEFAULT_PROFILE = 'trending';
 const CART_COOKIE = 'ssCartProducts';
@@ -934,6 +935,47 @@ describe('RecommendationInstantiator', () => {
 			expect(plugin).toHaveBeenCalledWith(controller, 'param1', { thing: 'here' });
 			expect(plugin2).toHaveBeenCalledTimes(1);
 			expect(plugin2).toHaveBeenCalledWith(controller);
+		});
+	});
+
+	it(`searchOnPageShow triggers search on persisted pageshow event `, async function () {
+		document.body.innerHTML = `<script type="searchspring/recommend" profile="${DEFAULT_PROFILE}"></script>`;
+
+		const attachmentConfig = {
+			...baseConfig,
+			config: {
+				branch: baseConfig.config.branch,
+			},
+		};
+
+		const client = new MockClient(baseConfig.client!.globals, {});
+		const recommendationInstantiator = new RecommendationInstantiator(attachmentConfig as RecommendationInstantiatorConfig, { client });
+		await wait();
+
+		Object.keys(recommendationInstantiator.controller).forEach(async (controllerId) => {
+			const controller = recommendationInstantiator.controller[controllerId];
+			const searchSpy = jest.spyOn(controller, 'search');
+			expect(searchSpy).not.toHaveBeenCalled();
+
+			// Mock PageTransitionEvent
+			class MockPageTransitionEvent extends Event {
+				public persisted: boolean;
+
+				constructor(type: string, eventInitDict?: EventInit & { persisted?: boolean }) {
+					super(type, eventInitDict);
+					this.persisted = eventInitDict?.persisted ?? false;
+				}
+			}
+			const event = new MockPageTransitionEvent('pageshow', {
+				bubbles: true,
+				persisted: true,
+			});
+
+			window.dispatchEvent(event);
+
+			await waitFor(() => {
+				expect(searchSpy).toHaveBeenCalled();
+			});
 		});
 	});
 });

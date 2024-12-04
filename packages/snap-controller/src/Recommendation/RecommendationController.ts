@@ -61,6 +61,16 @@ export class RecommendationController extends AbstractController {
 			throw new Error(`Invalid config passed to RecommendationController. The "tag" attribute is required.`);
 		}
 
+		// attach to bfCache restore event and re-run search on the controller
+		// enabled by default
+		if (config.settings?.searchOnPageShow !== false) {
+			window.addEventListener('pageshow', (e) => {
+				if (e.persisted && !this.store.error && this.store.loaded && !this.store.loading) {
+					this.search();
+				}
+			});
+		}
+
 		// deep merge config with defaults
 		this.config = deepmerge(defaultConfig, this.config);
 		this.store.setConfig(this.config);

@@ -8,7 +8,7 @@ import { EventManager } from '@searchspring/snap-event-manager';
 import { Profiler } from '@searchspring/snap-profiler';
 import { Logger } from '@searchspring/snap-logger';
 import { MockClient } from '@searchspring/snap-shared';
-
+import { waitFor } from '@testing-library/preact';
 import { RecommendationController } from './RecommendationController';
 
 const globals = { siteId: '8uyt2m' };
@@ -115,6 +115,135 @@ describe('Recommendation Controller', () => {
 
 			expect(spy).toHaveBeenCalledWith(`error in '${event}' middleware`);
 			spy.mockClear();
+		});
+	});
+
+	it(`tests searchOnPageShow triggers search on persisted pageshow event `, async function () {
+		const controller = new RecommendationController(recommendConfig, {
+			client: new MockClient(globals, {}),
+			store: new RecommendationStore(recommendConfig, services),
+			urlManager,
+			eventManager: new EventManager(),
+			profiler: new Profiler(),
+			logger: new Logger(),
+			tracker: new Tracker(globals),
+		});
+
+		await controller.search();
+
+		const searchSpy = jest.spyOn(controller, 'search');
+
+		expect(searchSpy).not.toHaveBeenCalled();
+
+		// Mock PageTransitionEvent
+		class MockPageTransitionEvent extends Event {
+			public persisted: boolean;
+
+			constructor(type: string, eventInitDict?: EventInit & { persisted?: boolean }) {
+				super(type, eventInitDict);
+				this.persisted = eventInitDict?.persisted ?? false;
+			}
+		}
+
+		const event = new MockPageTransitionEvent('pageshow', {
+			bubbles: true,
+			persisted: true,
+		});
+
+		window.dispatchEvent(event);
+
+		await waitFor(() => {
+			expect(searchSpy).toHaveBeenCalled();
+		});
+	});
+
+	it(`can turn off searchOnPageShow`, async function () {
+		const customConfig = {
+			...recommendConfig,
+			settings: {
+				searchOnPageShow: false,
+			},
+		};
+		const controller = new RecommendationController(customConfig, {
+			client: new MockClient(globals, {}),
+			store: new RecommendationStore(recommendConfig, services),
+			urlManager,
+			eventManager: new EventManager(),
+			profiler: new Profiler(),
+			logger: new Logger(),
+			tracker: new Tracker(globals),
+		});
+
+		await controller.search();
+
+		const searchSpy = jest.spyOn(controller, 'search');
+
+		expect(searchSpy).not.toHaveBeenCalled();
+
+		// Mock PageTransitionEvent
+		class MockPageTransitionEvent extends Event {
+			public persisted: boolean;
+
+			constructor(type: string, eventInitDict?: EventInit & { persisted?: boolean }) {
+				super(type, eventInitDict);
+				this.persisted = eventInitDict?.persisted ?? false;
+			}
+		}
+
+		const event = new MockPageTransitionEvent('pageshow', {
+			bubbles: true,
+			persisted: true,
+		});
+
+		window.dispatchEvent(event);
+
+		await waitFor(() => {
+			expect(searchSpy).not.toHaveBeenCalled();
+		});
+	});
+
+	it(`tests searchOnPageShow doesnt trigger search if persisted is false or undefined on the pageshow event`, async function () {
+		const controller = new RecommendationController(recommendConfig, {
+			client: new MockClient(globals, {}),
+			store: new RecommendationStore(recommendConfig, services),
+			urlManager,
+			eventManager: new EventManager(),
+			profiler: new Profiler(),
+			logger: new Logger(),
+			tracker: new Tracker(globals),
+		});
+
+		await controller.search();
+
+		const searchSpy = jest.spyOn(controller, 'search');
+
+		expect(searchSpy).not.toHaveBeenCalled();
+
+		// Mock PageTransitionEvent
+		class MockPageTransitionEvent extends Event {
+			public persisted: boolean;
+
+			constructor(type: string, eventInitDict?: EventInit & { persisted?: boolean }) {
+				super(type, eventInitDict);
+				this.persisted = eventInitDict?.persisted ?? false;
+			}
+		}
+
+		const event = new MockPageTransitionEvent('pageshow', {
+			bubbles: true,
+			persisted: false,
+		});
+
+		window.dispatchEvent(event);
+
+		const event2 = new MockPageTransitionEvent('pageshow', {
+			bubbles: true,
+		});
+
+		window.dispatchEvent(event2);
+
+		await waitFor(() => {
+			expect(searchSpy).not.toHaveBeenCalled();
 		});
 	});
 
