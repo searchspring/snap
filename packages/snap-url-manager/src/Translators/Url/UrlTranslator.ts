@@ -152,12 +152,12 @@ export class UrlTranslator implements Translator {
 					const [key, value] = kvPair.split('=').map((v) => decodeURIComponent(v.replace(/\+/g, ' ')));
 					return { key: key.split('.'), value, type: ParamLocationType.query };
 				} catch (err) {
-					console.error('Uncaught URIError: URI malformed', kvPair);
+					console.warn('Snap UrlTranslator: URI malformed - ignoring parameter', kvPair);
 					return { key: ['ss__delete'], value: 'ss__delete', type: ParamLocationType.query };
 				}
 			})
 			.filter((param) => {
-				// remove core fields that do not contain a value
+				// remove core fields that do not contain a value or had malformed data
 				const isCoreField = this.reverseMapping[param.key[0]];
 				return param.value !== 'ss__delete' ? !isCoreField || (isCoreField && param.value) : '';
 			});
@@ -170,10 +170,15 @@ export class UrlTranslator implements Translator {
 			.split('/')
 			.filter((v) => v)
 			.map((hashEntries) => {
-				return hashEntries.split(':').map((v) => decodeHashComponent(v));
+				try {
+					return hashEntries.split(':').map((v) => decodeHashComponent(v));
+				} catch (err) {
+					console.warn('Snap UrlTranslator: URI malformed - ignoring parameter', hashEntries);
+					return [];
+				}
 			})
 			.filter((param) => {
-				// remove core fields that do not contain a value
+				// remove core fields that do not contain a value or had malformed data
 				const [key, value] = param;
 				const isCoreField = this.reverseMapping[key];
 				return !isCoreField || (isCoreField && value);

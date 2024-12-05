@@ -16,6 +16,29 @@ describe('UrlTranslator', () => {
 		expect(urlTranslator.serialize({})).toBe('/');
 	});
 
+	it('gracefully fails with malformed uri in hash', () => {
+		const url = 'http://example.com#/valid:true/utm_campaign:BFCM%2020%OFF%20Perfumes%20TEST%20(28.11.24)%20(clone)/valid2:truueee';
+		const urlTranslator = new UrlTranslator();
+		// @ts-ignore
+		expect(urlTranslator.parseHashString(url)).toStrictEqual([
+			{ key: ['http'], type: 'hash', value: '' },
+			{ key: ['example.com'], type: 'hash', value: '' },
+			{ key: ['valid'], type: 'hash', value: 'true' },
+			{ key: ['valid2'], type: 'hash', value: 'truueee' },
+		]);
+	});
+
+	it('gracefully fails with malformed uri in query', () => {
+		const url = 'http://example.com?valid=true&utm_campaign=BFCM:%2020%OFF%20Perfumes%20TEST%20(28.11.24)%20(clone)&valid2=truueee';
+		const urlTranslator = new UrlTranslator();
+
+		// @ts-ignore
+		expect(urlTranslator.parseQueryString(url)).toStrictEqual([
+			{ key: ['valid'], type: 'query', value: 'true' },
+			{ key: ['valid2'], type: 'query', value: 'truueee' },
+		]);
+	});
+
 	it('prepends urlRoot when provided', () => {
 		const url = 'http://example.com?bar=baz';
 		class customTranslator extends UrlTranslator {
