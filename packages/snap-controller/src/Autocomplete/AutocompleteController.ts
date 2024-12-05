@@ -35,6 +35,10 @@ const defaultConfig: AutocompleteControllerConfig = {
 			merchandising: true,
 			singleResult: false,
 		},
+		bind: {
+			input: true,
+			submit: true,
+		},
 	},
 };
 
@@ -216,6 +220,7 @@ export class AutocompleteController extends AbstractController {
 	handlers = {
 		input: {
 			enterKey: async (e: KeyboardEvent): Promise<boolean | undefined> => {
+				console.log('enter key handler...');
 				if (e.keyCode == KEY_ENTER) {
 					const input = e.target as HTMLInputElement;
 					let actionUrl = this.store.services.urlManager;
@@ -430,6 +435,7 @@ export class AutocompleteController extends AbstractController {
 	}
 
 	async bind(): Promise<void> {
+		console.log('binding???');
 		if (!this.initialized) {
 			await this.init();
 		}
@@ -438,6 +444,7 @@ export class AutocompleteController extends AbstractController {
 
 		const inputs: NodeListOf<HTMLInputElement> = document.querySelectorAll(this.config.selector);
 		inputs.forEach((input) => {
+			console.log('binding input???', input);
 			input.setAttribute('spellcheck', 'false');
 			input.setAttribute('autocomplete', 'off');
 			input.setAttribute('autocorrect', 'off');
@@ -445,7 +452,7 @@ export class AutocompleteController extends AbstractController {
 
 			input.setAttribute(INPUT_ATTRIBUTE, '');
 
-			input.addEventListener('input', this.handlers.input.input);
+			this.config.settings?.bind?.input && input.addEventListener('input', this.handlers.input.input);
 
 			if (this.config?.settings?.initializeFromUrl && !input.value && this.store.state.input) {
 				input.value = this.store.state.input;
@@ -457,11 +464,13 @@ export class AutocompleteController extends AbstractController {
 			const form = input.form;
 			let formActionUrl: string | undefined;
 
+			console.log('binding action???', this.config.action);
 			if (this.config.action) {
-				input.addEventListener('keydown', this.handlers.input.enterKey);
+				console.log('binding action???');
+				this.config.settings?.bind?.submit && input.addEventListener('keydown', this.handlers.input.enterKey);
 				formActionUrl = this.config.action;
 			} else if (form) {
-				form.addEventListener('submit', this.handlers.input.formSubmit as unknown as EventListener);
+				this.config.settings?.bind?.submit && form.addEventListener('submit', this.handlers.input.formSubmit as unknown as EventListener);
 				formActionUrl = form.action || '';
 
 				// serializeForm will include additional form element in our urlManager as globals

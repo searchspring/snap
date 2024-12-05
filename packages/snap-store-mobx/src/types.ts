@@ -124,6 +124,10 @@ export type AutocompleteStoreConfigSettings = {
 		merchandising?: boolean;
 		singleResult?: boolean;
 	};
+	bind?: {
+		input?: boolean;
+		submit?: boolean;
+	};
 };
 
 // Autocomplete config
