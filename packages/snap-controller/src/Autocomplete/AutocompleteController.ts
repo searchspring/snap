@@ -220,7 +220,6 @@ export class AutocompleteController extends AbstractController {
 	handlers = {
 		input: {
 			enterKey: async (e: KeyboardEvent): Promise<boolean | undefined> => {
-				console.log('enter key handler...');
 				if (e.keyCode == KEY_ENTER) {
 					const input = e.target as HTMLInputElement;
 					let actionUrl = this.store.services.urlManager;
@@ -435,7 +434,6 @@ export class AutocompleteController extends AbstractController {
 	}
 
 	async bind(): Promise<void> {
-		console.log('binding???');
 		if (!this.initialized) {
 			await this.init();
 		}
@@ -444,7 +442,6 @@ export class AutocompleteController extends AbstractController {
 
 		const inputs: NodeListOf<HTMLInputElement> = document.querySelectorAll(this.config.selector);
 		inputs.forEach((input) => {
-			console.log('binding input???', input);
 			input.setAttribute('spellcheck', 'false');
 			input.setAttribute('autocomplete', 'off');
 			input.setAttribute('autocorrect', 'off');
@@ -464,9 +461,7 @@ export class AutocompleteController extends AbstractController {
 			const form = input.form;
 			let formActionUrl: string | undefined;
 
-			console.log('binding action???', this.config.action);
 			if (this.config.action) {
-				console.log('binding action???');
 				this.config.settings?.bind?.submit && input.addEventListener('keydown', this.handlers.input.enterKey);
 				formActionUrl = this.config.action;
 			} else if (form) {
