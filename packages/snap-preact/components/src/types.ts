@@ -83,6 +83,7 @@ export type StylingCSS = Array<CSSObject | SerializedStyles | undefined>;
 export type RootNodeProperties = {
 	css?: StylingCSS;
 	'ss-name'?: string;
+	'ss-path'?: string;
 };
 
 export type SwatchOption = ListOption & {

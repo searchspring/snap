@@ -1,10 +1,11 @@
 import { ComponentProps, RootNodeProperties, StyleScript } from '../types';
 
 export function mergeStyles<Props>(stylingProps: Props, defaultStyles: StyleScript<Props>): RootNodeProperties {
-	const { name, style, styleScript, themeStyleScript, disableStyles } = stylingProps as ComponentProps;
+	const { name, treePath, style, styleScript, themeStyleScript, disableStyles } = stylingProps as ComponentProps;
 
 	const styling: RootNodeProperties = {
 		'ss-name': name,
+		'ss-path': treePath,
 		css: [],
 	};
 
