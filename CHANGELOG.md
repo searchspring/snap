@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.3.0](https://github.com/searchspring/snap-1.0/compare/v1.2.2...v1.3.0) (2024-12-06)
+
+### Bug Fixes
+
+- **mergeprops.ts:** bugfixes for mergeprops using names and spreading props ([30c8f77](https://github.com/searchspring/snap-1.0/commit/30c8f77058f90af04abb755f0484856cf692fd37))
+- **snap-preact:** bugfix for duplicate tracker event listeners when using branch params ([422c551](https://github.com/searchspring/snap-1.0/commit/422c55192b1d4fb06cfc44de495a859009649ec8))
+
+### Features
+
+- **preact:** adding `custom` variable to getContext ([8112d63](https://github.com/searchspring/snap-1.0/commit/8112d63856918b5c4f1dbaec82b9d3ade75427ec))
+
 ## [1.2.2](https://github.com/searchspring/snap-1.0/compare/v1.2.1...v1.2.2) (2024-10-21)
 
 ### Bug Fixes
