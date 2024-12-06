@@ -29,5 +29,5 @@ const inlineBannerStyleScript = ({ width, theme }: InlineBannerProps) => {
 
 // InlineBanner component props
 export const inlineBanner: Partial<InlineBannerProps> = {
-	styleScript: inlineBannerStyleScript,
+	themeStyleScript: inlineBannerStyleScript,
 };

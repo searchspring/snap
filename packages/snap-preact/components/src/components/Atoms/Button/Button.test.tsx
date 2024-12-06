@@ -324,10 +324,10 @@ describe('Button Component', () => {
 			const content = 'button1';
 			const rendered = render(<Button native content={content} />);
 
-			const buttonElement = rendered.container.querySelector('.ss__button');
+			const buttonElement = rendered.container.querySelector('.ss__button.ss__button--native');
 			expect(buttonElement).toBeInTheDocument();
 
-			expect(buttonElement?.classList.length).toBe(2);
+			expect(buttonElement?.classList.length).toBe(3);
 
 			const buttonElementByContent = rendered.getByText(content);
 			expect(buttonElementByContent).toBeInTheDocument();

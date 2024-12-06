@@ -130,5 +130,5 @@ const carouselStyleScript = ({ vertical, theme }: CarouselProps) => {
 
 // Carousel component props
 export const carousel: Partial<CarouselProps> = {
-	styleScript: carouselStyleScript,
+	themeStyleScript: carouselStyleScript,
 };

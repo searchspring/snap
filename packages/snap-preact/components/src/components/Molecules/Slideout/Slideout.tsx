@@ -5,31 +5,37 @@ import { observer } from 'mobx-react-lite';
 import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
 
-import { defined, cloneWithProps, mergeProps } from '../../../utilities';
+import { defined, cloneWithProps, mergeProps, mergeStyles } from '../../../utilities';
 import { Theme, useTheme, CacheProvider } from '../../../providers';
-import { ComponentProps, RootNodeProperties } from '../../../types';
+import { ComponentProps, StyleScript } from '../../../types';
 import { useMediaQuery } from '../../../hooks';
 import { Overlay, OverlayProps } from '../../Atoms/Overlay';
 
-const CSS = {
-	slideout: ({ isActive, width, transitionSpeed, slideDirection }: Partial<SlideoutProps> & { isActive: boolean }) =>
-		css({
-			display: 'block',
-			position: 'fixed',
-			transition: `${slideDirection ? slideDirection : 'left'} ${transitionSpeed}`,
-			left: slideDirection == 'left' ? (isActive ? '0' : `-${width}`) : slideDirection != 'right' ? '0' : 'initial',
-			right: slideDirection == 'right' ? (isActive ? '0' : `-${width}`) : 'initial',
-			bottom: slideDirection == 'bottom' ? (isActive ? '0' : `-100vh`) : 'initial',
-			top: slideDirection == 'top' ? (isActive ? '0' : `-100vh`) : slideDirection == 'bottom' ? 'initial' : '0',
-			height: '100%',
-			zIndex: '10004',
-			width: width?.endsWith('%') && parseInt(width.split('%')[0]) > 90 ? width : '90%',
-			maxWidth: width,
-			padding: '10px',
-			background: '#fff',
-			boxSizing: 'border-box',
-			overflowY: 'auto',
-		}),
+const defaultStyles: StyleScript<SlideoutProps> = ({ slideDirection, transitionSpeed, width }) => {
+	return css({
+		display: 'block',
+		position: 'fixed',
+		transition: `${slideDirection ? slideDirection : 'left'} ${transitionSpeed}`,
+		left: slideDirection == 'left' ? `-${width}` : slideDirection != 'right' ? '0' : 'initial',
+		right: slideDirection == 'right' ? `-${width}` : 'initial',
+		bottom: slideDirection == 'bottom' ? `-100vh` : 'initial',
+		top: slideDirection == 'top' ? `-100vh` : slideDirection == 'bottom' ? 'initial' : '0',
+		height: '100%',
+		zIndex: '10004',
+		width: width?.endsWith('%') && parseInt(width.split('%')[0]) > 90 ? width : '90%',
+		maxWidth: width,
+		padding: '10px',
+		background: '#fff',
+		boxSizing: 'border-box',
+		overflowY: 'auto',
+
+		'&.ss__slideout--active': {
+			left: slideDirection == 'left' ? '0' : slideDirection != 'right' ? '0' : 'initial',
+			right: slideDirection == 'right' ? '0' : 'initial',
+			bottom: slideDirection == 'bottom' ? '0' : 'initial',
+			top: slideDirection == 'top' ? '0' : slideDirection == 'bottom' ? 'initial' : '0',
+		},
+	});
 };
 
 export const Slideout = observer((properties: SlideoutProps): JSX.Element => {
@@ -46,20 +52,7 @@ export const Slideout = observer((properties: SlideoutProps): JSX.Element => {
 
 	const props = mergeProps('slideout', globalTheme, defaultProps, properties);
 
-	const {
-		children,
-		active,
-		buttonContent,
-		noButtonWrapper,
-		displayAt,
-		transitionSpeed,
-		overlayColor,
-		disableStyles,
-		className,
-		style,
-		styleScript,
-		treePath,
-	} = props;
+	const { children, active, buttonContent, noButtonWrapper, displayAt, transitionSpeed, overlayColor, disableStyles, className, treePath } = props;
 
 	const subProps: SlideoutSubProps = {
 		overlay: {
@@ -102,16 +95,7 @@ export const Slideout = observer((properties: SlideoutProps): JSX.Element => {
 
 	document.body.style.overflow = isVisible && isActive ? 'hidden' : '';
 
-	const styling: RootNodeProperties = { 'ss-name': props.name };
-	const stylingProps = { ...props, isActive };
-
-	if (styleScript && !disableStyles) {
-		styling.css = [styleScript(stylingProps), style];
-	} else if (!disableStyles) {
-		styling.css = [CSS.slideout(stylingProps), style];
-	} else if (style) {
-		styling.css = [style];
-	}
+	const styling = mergeStyles<SlideoutProps>(props, defaultStyles);
 
 	return isVisible ? (
 		<CacheProvider>

@@ -7,13 +7,13 @@ import { observer } from 'mobx-react';
 
 import { Facet, FacetProps } from '../Facet';
 import { Theme, useTheme, CacheProvider } from '../../../providers';
-import { defined, mergeProps } from '../../../utilities';
-import { ComponentProps, RootNodeProperties } from '../../../types';
+import { defined, mergeProps, mergeStyles } from '../../../utilities';
+import { ComponentProps, StyleScript } from '../../../types';
 import type { SearchController, AutocompleteController } from '@searchspring/snap-controller';
 import type { ValueFacet, RangeFacet } from '@searchspring/snap-store-mobx';
 
-const CSS = {
-	facets: ({}: Partial<FacetsProps>) => css({}),
+const defaultStyles: StyleScript<FacetsProps> = () => {
+	return css({});
 };
 
 export const Facets = observer((properties: FacetsProps): JSX.Element => {
@@ -25,7 +25,7 @@ export const Facets = observer((properties: FacetsProps): JSX.Element => {
 
 	let props = mergeProps('facets', globalTheme, defaultProps, properties);
 
-	const { limit, onFacetOptionClick, disableStyles, className, style, styleScript, controller, treePath } = props;
+	const { limit, onFacetOptionClick, disableStyles, className, controller, treePath } = props;
 
 	const facetClickEvent = (e: React.MouseEvent<Element, MouseEvent>) => {
 		onFacetOptionClick && onFacetOptionClick(e);
@@ -80,16 +80,8 @@ export const Facets = observer((properties: FacetsProps): JSX.Element => {
 		},
 	};
 
-	const styling: RootNodeProperties = { 'ss-name': props.name };
-	const stylingProps = props;
+	const styling = mergeStyles<FacetsProps>(props, defaultStyles);
 
-	if (styleScript && !disableStyles) {
-		styling.css = [styleScript(stylingProps), style];
-	} else if (!disableStyles) {
-		styling.css = [CSS.facets(stylingProps), style];
-	} else if (style) {
-		styling.css = [style];
-	}
 	return facets && facets?.length > 0 ? (
 		<CacheProvider>
 			<div className={classnames('ss__facets', className)} {...styling}>

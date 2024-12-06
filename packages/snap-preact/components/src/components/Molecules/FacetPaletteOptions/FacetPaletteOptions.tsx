@@ -6,8 +6,8 @@ import { observer } from 'mobx-react-lite';
 
 import { filters } from '@searchspring/snap-toolbox';
 
-import { defined, mergeProps } from '../../../utilities';
-import { ComponentProps, RootNodeProperties } from '../../../types';
+import { defined, mergeProps, mergeStyles } from '../../../utilities';
+import { ComponentProps, StyleScript } from '../../../types';
 import { Icon, IconProps } from '../../Atoms/Icon';
 import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { createHoverProps } from '../../../toolbox';
@@ -16,141 +16,140 @@ import { Checkbox, CheckboxProps } from '../Checkbox';
 import { Lang, useLang } from '../../../hooks';
 import deepmerge from 'deepmerge';
 
-const CSS = {
-	palette: ({ columns, horizontal, gapSize, gridSize, theme }: Partial<FacetPaletteOptionsProps>) =>
-		css({
+const defaultStyles: StyleScript<FacetPaletteOptionsProps> = ({ columns, gridSize, gapSize, horizontal, theme }) => {
+	return css({
+		display: 'flex',
+		flexFlow: 'row wrap',
+		gridTemplateColumns: columns
+			? `repeat(${columns}, calc((100% - (${columns! - 1} * ${gapSize}))/ ${columns}))`
+			: `repeat(auto-fill, minmax(${gridSize}, 1fr))`,
+		gap: gapSize,
+
+		'.ss__facet-palette-options__option--list': {
 			display: 'flex',
-			flexFlow: 'row wrap',
-			gridTemplateColumns: columns
-				? `repeat(${columns}, calc((100% - (${columns! - 1} * ${gapSize}))/ ${columns}))`
-				: `repeat(auto-fill, minmax(${gridSize}, 1fr))`,
-			gap: gapSize,
+			flexDirection: 'row',
+		},
 
-			'.ss__facet-palette-options__option--list': {
-				display: 'flex',
-				flexDirection: 'row',
+		'.ss__facet-palette-options__option': {
+			width: `calc(100% / ${columns} - ${2 * Math.round((columns! + 2) / 2)}px )`,
+			marginRight: gapSize,
+			marginBottom: gapSize,
+			[`:nth-of-type(${columns}n)`]: {
+				marginRight: '0',
 			},
 
-			'.ss__facet-palette-options__option': {
-				width: `calc(100% / ${columns} - ${2 * Math.round((columns! + 2) / 2)}px )`,
-				marginRight: gapSize,
-				marginBottom: gapSize,
-				[`:nth-of-type(${columns}n)`]: {
-					marginRight: '0',
-				},
-
-				'.ss__facet-palette-options__option__wrapper': {
-					border: `2px solid transparent`,
-					borderRadius: '100%',
-					padding: '2px',
-				},
-
-				'.ss__facet-palette-options__option__palette': {
-					paddingTop: 'calc(100% - 2px)',
-					border: '1px solid #EBEBEB',
-					borderRadius: '100%',
-					position: 'relative',
-					'.ss__facet-palette-options__icon': {
-						position: 'absolute',
-						top: 0,
-						right: 0,
-						left: 0,
-						margin: 'auto',
-						bottom: 0,
-						textAlign: 'center',
-						stroke: 'black',
-						strokeWidth: '3px',
-						strokeLinejoin: 'round',
-						opacity: 0,
-					},
-				},
-				'.ss__facet-palette-options__option__value': {
-					display: 'block',
-					textAlign: 'center',
-					overflow: 'hidden',
-					textOverflow: 'ellipsis',
-					whiteSpace: 'nowrap',
-				},
-			},
-			'@supports (display: grid)': {
-				display: 'grid',
-
-				'.ss__facet-palette-options__option': {
-					margin: '0',
-					width: 'initial',
-				},
+			'.ss__facet-palette-options__option__wrapper': {
+				border: `2px solid transparent`,
+				borderRadius: '100%',
+				padding: '2px',
 			},
 
-			'&.ss__facet-palette-options--list': {
-				display: 'flex',
-				flexDirection: horizontal ? 'row' : 'column',
-
-				'.ss__facet-palette-options__option__wrapper': {
-					borderColor: 'transparent',
-					width: '16px',
-					height: 'fit-content',
-				},
-
-				'.ss__facet-palette-options__option--filtered': {
-					'.ss__facet-palette-options__option__value': {
-						fontWeight: 'bold',
-					},
-				},
-
-				'.ss__facet-palette-options__option--list': {
-					alignItems: 'center',
-				},
-
-				'.ss__facet-palette-options__option__value__count': {
-					marginLeft: '5px',
-				},
-
-				'.ss__facet-palette-options__checkbox': {
-					marginRight: '5px',
-				},
-			},
-
-			'&.ss__facet-palette-options--grid': {
-				'.ss__facet-palette-options__checkbox': {
-					display: 'flex',
-					textAlign: 'center',
-					overflow: 'hidden',
+			'.ss__facet-palette-options__option__palette': {
+				paddingTop: 'calc(100% - 2px)',
+				border: '1px solid #EBEBEB',
+				borderRadius: '100%',
+				position: 'relative',
+				'.ss__facet-palette-options__icon': {
+					position: 'absolute',
+					top: 0,
+					right: 0,
+					left: 0,
 					margin: 'auto',
-					marginBottom: '5px',
-				},
-
-				'.ss__facet-palette-options__option--filtered': {
-					'.ss__facet-palette-options__option__wrapper': {
-						borderColor: theme?.variables?.colors?.primary || '#333' + ' !important',
-						padding: '0px',
-						borderWidth: '4px',
-					},
-				},
-
-				'.ss__facet-palette-options__option': {
-					'&:hover': {
-						cursor: 'pointer',
-						'.ss__facet-palette-options__option__wrapper': {
-							borderColor: '#EBEBEB',
-						},
-						'.ss__facet-palette-options__option__palette': {
-							'.ss__facet-palette-options__icon': {
-								opacity: 1,
-							},
-						},
-					},
+					bottom: 0,
+					textAlign: 'center',
+					stroke: 'black',
+					strokeWidth: '3px',
+					strokeLinejoin: 'round',
+					opacity: 0,
 				},
 			},
-
-			'.ss__facet-palette-options__option__value__count': {
-				fontSize: '0.8em',
+			'.ss__facet-palette-options__option__value': {
 				display: 'block',
 				textAlign: 'center',
 				overflow: 'hidden',
 				textOverflow: 'ellipsis',
 				whiteSpace: 'nowrap',
 			},
-		}),
+		},
+		'@supports (display: grid)': {
+			display: 'grid',
+
+			'.ss__facet-palette-options__option': {
+				margin: '0',
+				width: 'initial',
+			},
+		},
+
+		'&.ss__facet-palette-options--list': {
+			display: 'flex',
+			flexDirection: horizontal ? 'row' : 'column',
+
+			'.ss__facet-palette-options__option__wrapper': {
+				borderColor: 'transparent',
+				width: '16px',
+				height: 'fit-content',
+			},
+
+			'.ss__facet-palette-options__option--filtered': {
+				'.ss__facet-palette-options__option__value': {
+					fontWeight: 'bold',
+				},
+			},
+
+			'.ss__facet-palette-options__option--list': {
+				alignItems: 'center',
+			},
+
+			'.ss__facet-palette-options__option__value__count': {
+				marginLeft: '5px',
+			},
+
+			'.ss__facet-palette-options__checkbox': {
+				marginRight: '5px',
+			},
+		},
+
+		'&.ss__facet-palette-options--grid': {
+			'.ss__facet-palette-options__checkbox': {
+				display: 'flex',
+				textAlign: 'center',
+				overflow: 'hidden',
+				margin: 'auto',
+				marginBottom: '5px',
+			},
+
+			'.ss__facet-palette-options__option--filtered': {
+				'.ss__facet-palette-options__option__wrapper': {
+					borderColor: theme?.variables?.colors?.primary || '#333' + ' !important',
+					padding: '0px',
+					borderWidth: '4px',
+				},
+			},
+
+			'.ss__facet-palette-options__option': {
+				'&:hover': {
+					cursor: 'pointer',
+					'.ss__facet-palette-options__option__wrapper': {
+						borderColor: '#EBEBEB',
+					},
+					'.ss__facet-palette-options__option__palette': {
+						'.ss__facet-palette-options__icon': {
+							opacity: 1,
+						},
+					},
+				},
+			},
+		},
+
+		'.ss__facet-palette-options__option__value__count': {
+			fontSize: '0.8em',
+			display: 'block',
+			textAlign: 'center',
+			overflow: 'hidden',
+			textOverflow: 'ellipsis',
+			whiteSpace: 'nowrap',
+		},
+	});
 };
 
 export const FacetPaletteOptions = observer((properties: FacetPaletteOptionsProps): JSX.Element => {
@@ -186,8 +185,6 @@ export const FacetPaletteOptions = observer((properties: FacetPaletteOptionsProp
 		horizontal,
 		disableStyles,
 		className,
-		style,
-		styleScript,
 		treePath,
 	} = props;
 
@@ -227,16 +224,7 @@ export const FacetPaletteOptions = observer((properties: FacetPaletteOptionsProp
 		},
 	};
 
-	const styling: RootNodeProperties = { 'ss-name': props.name };
-	const stylingProps = props;
-
-	if (styleScript && !disableStyles) {
-		styling.css = [styleScript(stylingProps), style];
-	} else if (!disableStyles) {
-		styling.css = [CSS.palette(stylingProps), style];
-	} else if (style) {
-		styling.css = [style];
-	}
+	const styling = mergeStyles<FacetPaletteOptionsProps>(props, defaultStyles);
 
 	const facetValues = values || facet?.values;
 
@@ -280,6 +268,7 @@ export const FacetPaletteOptions = observer((properties: FacetPaletteOptionsProp
 								value.url?.link?.onClick(e);
 								onClick && onClick(e);
 							}}
+							aria-atomic="false"
 							{...(previewOnFocus ? createHoverProps(() => value?.preview && value.preview()) : {})}
 							{...mergedLang.paletteOption?.all}
 						>

@@ -25,5 +25,5 @@ const recommendationGridStyleScript = ({ columns, gapSize }: Partial<Recommendat
 
 // RecommendationGrid component props
 export const recommendationGrid: Partial<RecommendationGridProps> = {
-	styleScript: recommendationGridStyleScript,
+	themeStyleScript: recommendationGridStyleScript,
 };

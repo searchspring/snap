@@ -18,5 +18,5 @@ const sidebarStyleScript = ({ theme }: SidebarProps) => {
 
 // Sidebar component props
 export const sidebar: Partial<SidebarProps> = {
-	styleScript: sidebarStyleScript,
+	themeStyleScript: sidebarStyleScript,
 };

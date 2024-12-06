@@ -4,21 +4,20 @@ import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
 import { observer } from 'mobx-react';
 import { Theme, useTheme, CacheProvider } from '../../../providers';
-import { ComponentProps, RootNodeProperties } from '../../../types';
+import { ComponentProps, StyleScript } from '../../../types';
+import { mergeStyles } from '../../../utilities';
 
-const CSS = {
-	BadgeText: (props: BadgeTextProps) => {
-		return css({
-			display: 'inline-block',
-			boxSizing: 'border-box',
-			padding: '0.3em 0.9em',
-			color: props.colorText,
-			textOverflow: 'ellipsis',
-			whiteSpace: 'nowrap',
-			overflow: 'hidden',
-			maxWidth: '100%',
-		});
-	},
+const defaultStyles: StyleScript<BadgeTextProps> = ({ colorText }) => {
+	return css({
+		display: 'inline-block',
+		boxSizing: 'border-box',
+		padding: '0.3em 0.9em',
+		color: colorText,
+		textOverflow: 'ellipsis',
+		whiteSpace: 'nowrap',
+		overflow: 'hidden',
+		maxWidth: '100%',
+	});
 };
 
 export const BadgeText = observer((properties: BadgeTextProps): JSX.Element => {
@@ -33,15 +32,9 @@ export const BadgeText = observer((properties: BadgeTextProps): JSX.Element => {
 		...properties,
 		...properties.theme?.components?.badgeText,
 	};
-	const { value, disableStyles, tag, className, style } = props;
+	const { value, tag, className } = props;
 
-	const styling: RootNodeProperties = { 'ss-name': props.name };
-
-	if (!disableStyles) {
-		styling.css = [CSS.BadgeText(props), style];
-	} else if (style) {
-		styling.css = [style];
-	}
+	const styling = mergeStyles<BadgeTextProps>(props, defaultStyles);
 
 	return value ? (
 		<CacheProvider>

@@ -4,8 +4,8 @@ import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
 import type { SearchController } from '@searchspring/snap-controller';
 import { Results, ResultsProps } from '../../Organisms/Results';
-import { defined, mergeProps } from '../../../utilities';
-import { ComponentProps, ListOption, ResultComponent, RootNodeProperties } from '../../../types';
+import { defined, mergeProps, mergeStyles } from '../../../utilities';
+import { ComponentProps, ListOption, ResultComponent, StyleScript } from '../../../types';
 import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { Sidebar, SidebarProps } from '../../Organisms/Sidebar';
 import { Toolbar, ToolbarProps } from '../../Organisms/Toolbar';
@@ -19,25 +19,24 @@ import { ContentType } from '@searchspring/snap-store-mobx';
 import { useState } from 'preact/hooks';
 import deepmerge from 'deepmerge';
 
-const CSS = {
-	Search: ({}: Partial<SearchProps>) =>
-		css({
-			display: 'flex',
-			minHeight: '600px',
+const defaultStyles: StyleScript<SearchProps> = () => {
+	return css({
+		display: 'flex',
+		minHeight: '600px',
 
-			'.ss__sidebar': {
-				flex: '0 1 auto',
-				width: '270px',
-				margin: '0 40px 0 0',
-			},
+		'.ss__sidebar': {
+			flex: '0 1 auto',
+			width: '270px',
+			margin: '0 40px 0 0',
+		},
 
-			'.ss__search__content': {
-				flex: '1 1 0%',
-				padding: '0px 10px',
-				width: '100%',
-				boxSizing: 'border-box',
-			},
-		}),
+		'.ss__search__content': {
+			flex: '1 1 0%',
+			padding: '0px 10px',
+			width: '100%',
+			boxSizing: 'border-box',
+		},
+	});
 };
 
 export const Search = observer((properties: SearchProps): JSX.Element => {
@@ -53,8 +52,6 @@ export const Search = observer((properties: SearchProps): JSX.Element => {
 		disableStyles,
 		className,
 		controller,
-		style,
-		styleScript,
 		hideSidebar,
 		hideSearchHeader,
 		hideMobileSidebar,
@@ -168,16 +165,7 @@ export const Search = observer((properties: SearchProps): JSX.Element => {
 		},
 	};
 
-	const styling: RootNodeProperties = { 'ss-name': props.name };
-	const stylingProps = props;
-
-	if (styleScript && !disableStyles) {
-		styling.css = [styleScript(stylingProps), style];
-	} else if (!disableStyles) {
-		styling.css = [CSS.Search(stylingProps), style];
-	} else if (style) {
-		styling.css = [style];
-	}
+	const styling = mergeStyles<SearchProps>(props, defaultStyles);
 
 	const mobileMediaQuery = `(max-width: ${mobileSidebarDisplayAt})`;
 	const isMobile = useMediaQuery(mobileMediaQuery);

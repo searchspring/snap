@@ -73,6 +73,6 @@ const facetsHorizontalStyleScript = ({ theme }: FacetsHorizontalProps) => {
 
 // Facets component props
 export const facetsHorizontal: Partial<FacetsHorizontalProps> = {
-	styleScript: facetsHorizontalStyleScript,
+	themeStyleScript: facetsHorizontalStyleScript,
 	iconCollapse: 'angle-down',
 };

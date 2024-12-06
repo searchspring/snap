@@ -2,18 +2,17 @@ import { h } from 'preact';
 import { css } from '@emotion/react';
 import { observer } from 'mobx-react';
 
-import { defined, mergeProps } from '../../../utilities';
+import { defined, mergeProps, mergeStyles } from '../../../utilities';
 import { Theme, useTheme } from '../../../providers';
-import { ComponentProps, StylingCSS } from '../../../types';
+import { ComponentProps, StyleScript } from '../../../types';
 import { RecommendationBundle, RecommendationBundleProps } from '../RecommendationBundle';
 
-const CSS = {
-	RecommendationBundleEasyAdd: ({}: Partial<RecommendationBundleEasyAddProps>) =>
-		css({
-			'.ss__recommendation-bundle__wrapper__cta': {
-				textAlign: 'center',
-			},
-		}),
+const defaultStyles: StyleScript<RecommendationBundleEasyAddProps> = () => {
+	return css({
+		'.ss__recommendation-bundle__wrapper__cta': {
+			textAlign: 'center',
+		},
+	});
 };
 
 export const RecommendationBundleEasyAdd = observer((properties: RecommendationBundleEasyAddProps): JSX.Element => {
@@ -22,7 +21,7 @@ export const RecommendationBundleEasyAdd = observer((properties: RecommendationB
 
 	const props = mergeProps('recommendationBundleEasyAdd', globalTheme, defaultProps, properties);
 
-	const { treePath, styleScript, theme, style, disableStyles, ...additionalProps } = props;
+	const { treePath, disableStyles, controller, style: _, styleScript: __, themeStyleScript: ___, ...additionalProps } = props;
 
 	const subProps: RecommendationBundleEasyAddSubProps = {
 		recommendationBundle: {
@@ -49,25 +48,16 @@ export const RecommendationBundleEasyAdd = observer((properties: RecommendationB
 		},
 	};
 
-	const styling: { css?: StylingCSS } = {};
-	const stylingProps = { ...props, theme };
+	const styling = mergeStyles<RecommendationBundleEasyAddProps>(props, defaultStyles);
 
-	if (styleScript && !disableStyles) {
-		styling.css = [styleScript(stylingProps), style];
-	} else if (!disableStyles) {
-		styling.css = [CSS.RecommendationBundleEasyAdd(stylingProps), style];
-	} else if (style) {
-		styling.css = [style];
-	}
-
-	return <RecommendationBundle {...styling} {...subProps.recommendationBundle} {...additionalProps} />;
+	return <RecommendationBundle controller={controller} {...styling} {...subProps.recommendationBundle} {...additionalProps} />;
 });
 
-export type RecommendationBundleEasyAddProps = Omit<
-	RecommendationBundleProps,
-	'hideSeed' | 'limit' | 'hideCheckboxes' | 'carousel' | 'separatorIcon' | 'separatorIconSeedOnly' | 'preselectedCount'
-> &
-	ComponentProps;
+export type RecommendationBundleEasyAddProps = ComponentProps &
+	Omit<
+		RecommendationBundleProps,
+		'hideSeed' | 'limit' | 'hideCheckboxes' | 'carousel' | 'separatorIcon' | 'separatorIconSeedOnly' | 'preselectedCount'
+	>;
 
 interface RecommendationBundleEasyAddSubProps {
 	recommendationBundle: Partial<RecommendationBundleProps>;

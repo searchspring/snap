@@ -5,15 +5,14 @@ import classnames from 'classnames';
 import { observer } from 'mobx-react';
 
 import { Theme, useTheme, CacheProvider } from '../../../providers';
-import { ComponentProps, RootNodeProperties } from '../../../types';
+import { ComponentProps, StyleScript } from '../../../types';
+import { mergeStyles } from '../../../utilities';
 
-const CSS = {
-	BadgeImage: () => {
-		return css({
-			maxHeight: '100%',
-			maxWidth: '100%',
-		});
-	},
+const defaultStyles: StyleScript<BadgeImageProps> = () => {
+	return css({
+		maxHeight: '100%',
+		maxWidth: '100%',
+	});
 };
 
 export const BadgeImage = observer((properties: BadgeImageProps): JSX.Element => {
@@ -27,15 +26,9 @@ export const BadgeImage = observer((properties: BadgeImageProps): JSX.Element =>
 		...properties,
 		...properties.theme?.components?.badgeImage,
 	};
-	const { label, url, tag, disableStyles, className, style } = props;
+	const { label, url, tag, className } = props;
 
-	const styling: RootNodeProperties = { 'ss-name': props.name };
-
-	if (!disableStyles) {
-		styling.css = [CSS.BadgeImage(), style];
-	} else if (style) {
-		styling.css = [style];
-	}
+	const styling = mergeStyles<BadgeImageProps>(props, defaultStyles);
 
 	return url ? (
 		<CacheProvider>

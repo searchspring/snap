@@ -3,7 +3,7 @@ import type { AbstractController } from '@searchspring/snap-controller';
 import type { Next } from '@searchspring/snap-event-manager';
 import type { PluginBackgroundFilterGlobal } from '../../../common/src';
 
-export const pluginBackgroundFilters = (cntrlr: AbstractController) => {
+export const pluginBackgroundFiltersMagento2 = (cntrlr: AbstractController) => {
 	// only applies to search controllers
 	if (cntrlr.type != 'search') return;
 
@@ -30,10 +30,6 @@ export const pluginBackgroundFilters = (cntrlr: AbstractController) => {
 			value: 'Search',
 			background: true,
 		});
-	}
-
-	if (!backgroundFilters.length) {
-		return;
 	}
 
 	cntrlr.on('init', async ({ controller }: { controller: AbstractController }, next: Next) => {

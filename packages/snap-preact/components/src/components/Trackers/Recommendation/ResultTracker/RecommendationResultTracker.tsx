@@ -4,12 +4,13 @@ import { useRef } from 'preact/hooks';
 import { observer } from 'mobx-react';
 import { useIntersection } from '../../../../hooks';
 import type { RecommendationController } from '@searchspring/snap-controller';
-import { ComponentProps, RootNodeProperties } from '../../../../types';
+import { ComponentProps, StyleScript } from '../../../../types';
 import type { Product } from '@searchspring/snap-store-mobx';
 import classnames from 'classnames';
+import { mergeStyles } from '../../../../utilities';
 
-const CSS = {
-	RecommendationResultTracker: ({}: Partial<RecommendationResultTrackerProps>) => css({}),
+const defaultStyles: StyleScript<RecommendationResultTrackerProps> = () => {
+	return css({});
 };
 
 export const RecommendationResultTracker = observer((properties: RecommendationResultTrackerProps): JSX.Element => {
@@ -18,7 +19,7 @@ export const RecommendationResultTracker = observer((properties: RecommendationR
 		click: true,
 	};
 
-	const { children, result, track, controller, className, disableStyles, style, styleScript } = properties;
+	const { children, result, track, controller, className } = properties;
 
 	const mergedTrack = {
 		...defaultTrack,
@@ -41,16 +42,7 @@ export const RecommendationResultTracker = observer((properties: RecommendationR
 		controller.track.product.impression(result);
 	}
 
-	const styling: RootNodeProperties = { 'ss-name': properties.name };
-	const stylingProps = properties;
-
-	if (styleScript && !disableStyles) {
-		styling.css = [styleScript(stylingProps), style];
-	} else if (!disableStyles) {
-		styling.css = [CSS.RecommendationResultTracker(stylingProps), style];
-	} else if (style) {
-		styling.css = [style];
-	}
+	const styling = mergeStyles<RecommendationResultTrackerProps>(properties, defaultStyles);
 
 	return (
 		<div

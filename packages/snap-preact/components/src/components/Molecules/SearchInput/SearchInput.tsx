@@ -5,29 +5,28 @@ import classnames from 'classnames';
 import { observer } from 'mobx-react';
 
 import { Icon, IconProps } from '../../Atoms/Icon/Icon';
-import { defined, mergeProps } from '../../../utilities';
+import { defined, mergeProps, mergeStyles } from '../../../utilities';
 import { Theme, useTheme, CacheProvider } from '../../../providers';
-import { ComponentProps, RootNodeProperties } from '../../../types';
+import { ComponentProps, StyleScript } from '../../../types';
 
-const CSS = {
-	searchInput: ({ theme }: Partial<SearchInputProps>) =>
-		css({
-			display: 'flex',
-			alignItems: 'center',
-			justifyContent: 'center',
-			border: `1px solid ${theme?.variables?.colors?.primary || '#ccc'}`,
+const defaultStyles: StyleScript<SearchInputProps> = ({ theme }) => {
+	return css({
+		display: 'flex',
+		alignItems: 'center',
+		justifyContent: 'center',
+		border: `1px solid ${theme?.variables?.colors?.primary || '#ccc'}`,
 
-			'& .ss__icon': {
-				padding: '5px',
-			},
+		'& .ss__icon': {
+			padding: '5px',
+		},
 
-			'& .ss__search-input__input': {
-				width: '100%',
-				outline: 'none',
-				border: '0',
-				boxSizing: 'border-box',
-			},
-		}),
+		'& .ss__search-input__input': {
+			width: '100%',
+			outline: 'none',
+			border: '0',
+			boxSizing: 'border-box',
+		},
+	});
 };
 
 export const SearchInput = observer((properties: SearchInputProps): JSX.Element => {
@@ -39,7 +38,7 @@ export const SearchInput = observer((properties: SearchInputProps): JSX.Element 
 
 	const props = mergeProps('searchInput', globalTheme, defaultProps, properties);
 
-	const { placeholder, onChange, hideIcon, disableStyles, style, styleScript, className, treePath } = props;
+	const { placeholder, onChange, hideIcon, disableStyles, className, treePath } = props;
 
 	const subProps: SearchInputSubProps = {
 		icon: {
@@ -57,16 +56,8 @@ export const SearchInput = observer((properties: SearchInputProps): JSX.Element 
 		},
 	};
 
-	const styling: RootNodeProperties = { 'ss-name': props.name };
-	const stylingProps = props;
+	const styling = mergeStyles<SearchInputProps>(props, defaultStyles);
 
-	if (styleScript && !disableStyles) {
-		styling.css = [styleScript(stylingProps), style];
-	} else if (!disableStyles) {
-		styling.css = [CSS.searchInput(stylingProps), style];
-	} else if (style) {
-		styling.css = [style];
-	}
 	return (
 		<CacheProvider>
 			<div {...styling} className={classnames('ss__search-input', className)}>

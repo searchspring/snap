@@ -79,5 +79,5 @@ const facetHierarchyOptionsStyleScript = ({ horizontal, theme }: FacetHierarchyO
 
 // FacetHierarchyOptions component props
 export const facetHierarchyOptions: Partial<FacetHierarchyOptionsProps> = {
-	styleScript: facetHierarchyOptionsStyleScript,
+	themeStyleScript: facetHierarchyOptionsStyleScript,
 };

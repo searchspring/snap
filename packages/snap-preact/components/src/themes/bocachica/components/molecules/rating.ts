@@ -34,5 +34,5 @@ const ratingStyleScript = ({ emptyRatingSrc, fullRatingSrc, theme }: RatingProps
 
 // Rating component props
 export const rating: Partial<RatingProps> = {
-	styleScript: ratingStyleScript,
+	themeStyleScript: ratingStyleScript,
 };

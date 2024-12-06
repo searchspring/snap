@@ -5,9 +5,9 @@ import classnames from 'classnames';
 import { observer } from 'mobx-react-lite';
 
 import { Theme, useTheme, CacheProvider } from '../../../providers';
-import { ComponentProps, RootNodeProperties } from '../../../types';
+import { ComponentProps, StyleScript } from '../../../types';
 import { Slideout, SlideoutProps } from '../../Molecules/Slideout';
-import { defined, mergeProps } from '../../../utilities';
+import { defined, mergeProps, mergeStyles } from '../../../utilities';
 import { SearchController } from '@searchspring/snap-controller';
 import { Sidebar, SidebarProps } from '../Sidebar';
 import { Button, ButtonProps } from '../../Atoms/Button';
@@ -16,39 +16,38 @@ import { MutableRef, useRef } from 'preact/hooks';
 import { IconProps, IconType } from '../../Atoms/Icon';
 import deepmerge from 'deepmerge';
 
-const CSS = {
-	toolbar: ({}: Partial<MobileSidebarProps>) =>
-		css({
-			'& .ss__mobile-sidebar__header': {
-				display: 'flex',
-				justifyContent: 'space-between',
-				alignItems: 'baseline',
+const defaultStyles: StyleScript<MobileSidebarProps> = ({}) => {
+	return css({
+		'& .ss__mobile-sidebar__header': {
+			display: 'flex',
+			justifyContent: 'space-between',
+			alignItems: 'baseline',
 
-				'& .ss__mobile-sidebar__header__close-button': {
-					cursor: 'pointer',
-				},
-			},
-			'& .ss__mobile-sidebar__title': {
-				justifyContent: 'space-between',
-				flexDirection: 'row',
-				display: 'flex',
-
-				'& .ss__icon': {
-					cursor: 'pointer',
-				},
-			},
-
-			'& .ss__mobile-sidebar__slideout__button': {
+			'& .ss__mobile-sidebar__header__close-button': {
 				cursor: 'pointer',
 			},
+		},
+		'& .ss__mobile-sidebar__title': {
+			justifyContent: 'space-between',
+			flexDirection: 'row',
+			display: 'flex',
 
-			'& .ss__mobile-sidebar__footer': {
-				display: 'flex',
-				gap: '10px',
-				justifyContent: 'center',
-				flexDirection: 'row',
+			'& .ss__icon': {
+				cursor: 'pointer',
 			},
-		}),
+		},
+
+		'& .ss__mobile-sidebar__slideout__button': {
+			cursor: 'pointer',
+		},
+
+		'& .ss__mobile-sidebar__footer': {
+			display: 'flex',
+			gap: '10px',
+			justifyContent: 'center',
+			flexDirection: 'row',
+		},
+	});
 };
 
 export const MobileSidebar = observer((properties: MobileSidebarProps): JSX.Element => {
@@ -93,21 +92,10 @@ export const MobileSidebar = observer((properties: MobileSidebarProps): JSX.Elem
 		hideClearButton,
 		disableStyles,
 		className,
-		style,
 		treePath,
-		styleScript,
 	} = props;
 
-	const styling: RootNodeProperties = { 'ss-name': props.name };
-	const stylingProps = props;
-
-	if (styleScript && !disableStyles) {
-		styling.css = [styleScript(stylingProps), style];
-	} else if (!disableStyles) {
-		styling.css = [CSS.toolbar(stylingProps), style];
-	} else if (style) {
-		styling.css = [style];
-	}
+	const styling = mergeStyles<MobileSidebarProps>(props, defaultStyles);
 
 	const subProps: MobileSidebarSubProps = {
 		slideout: {
@@ -175,7 +163,7 @@ export const MobileSidebar = observer((properties: MobileSidebarProps): JSX.Elem
 		closeButtonText: {
 			value: closeButtonText,
 			attributes: {
-				'aria-label': closeButtonText || `close ${openButtonText} button`,
+				'aria-label': closeButtonText || `close ${openButtonText}`,
 			},
 		},
 	};

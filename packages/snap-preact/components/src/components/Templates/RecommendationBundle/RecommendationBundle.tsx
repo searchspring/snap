@@ -6,9 +6,9 @@ import { observer } from 'mobx-react';
 import deepmerge from 'deepmerge';
 import { Carousel, CarouselProps as CarouselProps } from '../../Molecules/Carousel';
 import { Result, ResultProps } from '../../Molecules/Result';
-import { defined, mergeProps, cloneWithProps } from '../../../utilities';
+import { defined, mergeProps, cloneWithProps, mergeStyles } from '../../../utilities';
 import { Theme, useTheme, CacheProvider } from '../../../providers';
-import { ComponentProps, BreakpointsProps, RootNodeProperties, ResultComponent } from '../../../types';
+import { ComponentProps, BreakpointsProps, ResultComponent, StyleScript } from '../../../types';
 import { useDisplaySettings } from '../../../hooks/useDisplaySettings';
 import { RecommendationProfileTracker } from '../../Trackers/Recommendation/ProfileTracker';
 import { RecommendationResultTracker } from '../../Trackers/Recommendation/ResultTracker';
@@ -20,104 +20,109 @@ import { BundledCTA, BundledCTAProps } from './BundleCTA';
 import { Lang } from '../../../hooks';
 import { useIntersection } from '../../../hooks';
 
-const CSS = {
-	recommendationBundle: ({ slidesPerView, spaceBetween, ctaInline, vertical, separatorIcon }: any) =>
-		css({
-			'.ss__recommendation-bundle__wrapper': {
-				display: 'flex',
-				maxWidth: '100%',
-				margin: '0',
-				padding: '0',
+const defaultStyles: StyleScript<RecommendationBundleProps> = ({ vertical, separatorIcon, carousel, ctaInline }) => {
+	return css({
+		'.ss__recommendation-bundle__wrapper': {
+			display: 'flex',
+			maxWidth: '100%',
+			margin: '0',
+			padding: '0',
+		},
+
+		'.ss__recommendation-bundle__wrapper__selector--seed': {
+			width: `${vertical ? '100%' : 'auto'}`,
+			margin: `${!separatorIcon ? 'auto !important' : 'initial'}`,
+		},
+
+		'.ss__recommendation-bundle__wrapper__seed-container': {
+			width: vertical ? '100%' : `calc(100% / ${carousel?.slidesPerView! + (!ctaInline ? 0 : 1)})`,
+		},
+
+		'.ss__recommendation-bundle__wrapper__cta': {
+			width: vertical ? '100%' : `${!ctaInline ? '100%' : `calc(100% / ${carousel?.slidesPerView! + 1})`}`,
+
+			textAlign: 'center',
+
+			'.ss__recommendation-bundle__wrapper__cta__subtotal__prices': {
+				display: 'block',
 			},
 
-			'.ss__recommendation-bundle__wrapper__selector--seed': {
-				width: `${vertical ? '100%' : 'auto'}`,
-				margin: `${!separatorIcon ? 'auto !important' : 'initial'}`,
+			'.ss__recommendation-bundle__wrapper__cta__button--added': {
+				cursor: 'none',
+				pointerEvents: 'none',
+				opacity: '.7',
 			},
+		},
 
-			'.ss__recommendation-bundle__wrapper__seed-container': {
-				width: vertical ? '100%' : `calc(100% / ${slidesPerView + (!ctaInline ? 0 : 1)})`,
-			},
+		'.ss__recommendation-bundle__wrapper__carousel': {
+			boxSizing: 'border-box',
+			width: vertical ? '100%' : `calc(calc(100% / ${carousel?.slidesPerView! + (!ctaInline ? 0 : 1)}) * ${carousel?.slidesPerView! - 1})`,
+		},
 
+		'.ss__recommendation-bundle__wrapper--seed-in-carousel': {
 			'.ss__recommendation-bundle__wrapper__cta': {
-				width: vertical ? '100%' : `${!ctaInline ? '100%' : `calc(100% / ${slidesPerView + 1})`}`,
-
-				textAlign: 'center',
-
-				'& .ss__recommendation-bundle__wrapper__cta__subtotal__prices': {
-					display: 'block',
-				},
+				width: vertical ? '100%' : `calc(100% / ${carousel?.slidesPerView! + (!ctaInline ? 0 : 1)})`,
 			},
 
 			'.ss__recommendation-bundle__wrapper__carousel': {
-				boxSizing: 'border-box',
-				width: vertical ? '100%' : `calc(calc(100% / ${slidesPerView + (!ctaInline ? 0 : 1)}) * ${slidesPerView - 1})`,
+				width: vertical ? '100%' : `calc(calc(100% / ${carousel?.slidesPerView! + (!ctaInline ? 0 : 1)}) * ${carousel?.slidesPerView})`,
+				padding: '0',
 			},
+		},
 
-			'.ss__recommendation-bundle__wrapper--seed-in-carousel': {
-				'.ss__recommendation-bundle__wrapper__cta': {
-					width: vertical ? '100%' : `calc(100% / ${slidesPerView + (!ctaInline ? 0 : 1)})`,
-				},
-
-				'.ss__recommendation-bundle__wrapper__carousel': {
-					width: vertical ? '100%' : `calc(calc(100% / ${slidesPerView + (!ctaInline ? 0 : 1)}) * ${slidesPerView})`,
-					padding: '0',
-				},
+		'.swiper-slide, .swiper-slide-visible.swiper-last-visible-slide': {
+			'.ss__recommendation-bundle__wrapper__selector__icon': {
+				display: 'none',
 			},
+		},
 
-			'.swiper-slide, .swiper-slide-visible.swiper-last-visible-slide': {
-				'.ss__recommendation-bundle__wrapper__selector__icon': {
+		'.swiper-slide-visible': {
+			'.ss__recommendation-bundle__wrapper__selector__icon': {
+				display: 'block',
+			},
+		},
+
+		'.ss__recommendation-bundle__wrapper--vertical': {
+			flexDirection: 'column',
+		},
+
+		'.ss__recommendation-bundle__wrapper__selector': {
+			alignItems: 'baseline',
+			position: 'relative',
+
+			'&.ss__recommendation-bundle__wrapper__selector--last': {
+				'& .ss__recommendation-bundle__wrapper__selector__icon': {
 					display: 'none',
 				},
 			},
 
-			'.swiper-slide-visible': {
-				'.ss__recommendation-bundle__wrapper__selector__icon': {
-					display: 'block',
-				},
+			'& .ss__recommendation-bundle__wrapper__selector__result-wrapper__seed-badge': {
+				position: 'absolute',
+				top: '0',
+				left: '0',
+				zIndex: '1',
 			},
 
-			'.ss__recommendation-bundle__wrapper--vertical': {
-				flexDirection: 'column',
+			'& .ss__recommendation-bundle__wrapper__selector__icon': {
+				position: 'absolute',
+				right: '-1em',
+				top: '140px',
 			},
 
-			'.ss__recommendation-bundle__wrapper__selector': {
-				alignItems: 'baseline',
+			'& .ss__recommendation-bundle__wrapper__selector__result-wrapper': {
+				alignItems: 'center',
 				position: 'relative',
-
-				'&.ss__recommendation-bundle__wrapper__selector--last': {
-					'& .ss__recommendation-bundle__wrapper__selector__icon': {
-						display: 'none',
-					},
-				},
-
-				'& .ss__recommendation-bundle__wrapper__selector__result-wrapper__seed-badge': {
-					position: 'absolute',
-					top: '0',
-					left: '0',
-					zIndex: '1',
-				},
-
-				'& .ss__recommendation-bundle__wrapper__selector__icon': {
-					position: 'absolute',
-					right: '-1em',
-					top: '140px',
-				},
-
-				'& .ss__recommendation-bundle__wrapper__selector__result-wrapper': {
-					alignItems: 'center',
-					position: 'relative',
-					margin: `0px ${5 + (spaceBetween || 0)}px`,
-				},
-				'& .ss__recommendation-bundle__wrapper__selector__result-wrapper__checkbox': {
-					position: 'absolute',
-					top: '0',
-					right: '0',
-					zIndex: '1',
-					cursor: 'pointer',
-				},
+				margin: `0px ${5 + (Number(carousel?.spaceBetween) || 0)}px`,
 			},
-		}),
+			'& .ss__recommendation-bundle__wrapper__selector__result-wrapper__checkbox': {
+				position: 'absolute',
+				top: '0',
+				right: '0',
+				zIndex: '1',
+				cursor: 'pointer',
+			},
+		},
+	});
 };
 
 export const RecommendationBundle = observer((properties: RecommendationBundleProps): JSX.Element => {
@@ -198,10 +203,11 @@ export const RecommendationBundle = observer((properties: RecommendationBundlePr
 		ctaIcon,
 		ctaInline,
 		hideSeedText,
-		style,
 		lazyRender,
 		className,
-		styleScript,
+		style: _,
+		styleScript: __,
+		themeStyleScript: ___,
 		treePath,
 		...additionalProps
 	} = props;
@@ -281,16 +287,7 @@ export const RecommendationBundle = observer((properties: RecommendationBundlePr
 		slidesPerView = resultsToRender.length;
 	}
 
-	const styling: RootNodeProperties = { 'ss-name': props.name };
-	const stylingProps = props;
-
-	if (styleScript && !disableStyles) {
-		styling.css = [styleScript(stylingProps), style];
-	} else if (!disableStyles) {
-		styling.css = [CSS.recommendationBundle({ slidesPerView, spaceBetween, ctaInline, vertical, separatorIcon }), style];
-	} else if (style) {
-		styling.css = [style];
-	}
+	const styling = mergeStyles<RecommendationBundleProps>({ ...props, carousel: { ...mergedCarouselProps, slidesPerView } }, defaultStyles);
 
 	const _preSelectedCount = typeof preselectedCount == 'number' ? preselectedCount : carouselEnabled ? slidesPerView : resultsToRender.length;
 
@@ -444,12 +441,14 @@ export const RecommendationBundle = observer((properties: RecommendationBundlePr
 												<BundleSelector
 													seedText={seedText}
 													seed={true}
+													title={seed.display.mappings.core?.name}
 													onCheck={() => onProductSelect(seed)}
 													checked={selectedItems.findIndex((item) => item.id == seed.id) > -1}
 													icon={separatorIcon}
 													hideCheckboxes={hideCheckboxes}
 													theme={props.theme}
 													ref={seedRef}
+													treePath={treePath}
 													lang={{ seedText: lang.seedText }}
 												>
 													{resultComponent ? (
@@ -496,11 +495,13 @@ export const RecommendationBundle = observer((properties: RecommendationBundlePr
 																		<BundleSelector
 																			seedText={seedText}
 																			seed={true}
+																			title={result.display.mappings.core?.name}
 																			icon={separatorIcon}
 																			onCheck={() => onProductSelect(result)}
 																			checked={selected}
 																			hideCheckboxes={hideCheckboxes}
 																			theme={props.theme}
+																			treePath={treePath}
 																			lang={{ seedText: lang.seedText }}
 																		>
 																			{resultComponent ? (
@@ -516,10 +517,12 @@ export const RecommendationBundle = observer((properties: RecommendationBundlePr
 																	<RecommendationResultTracker controller={controller} result={result}>
 																		<BundleSelector
 																			icon={separatorIconSeedOnly ? false : separatorIcon}
+																			title={result.display.mappings.core?.name}
 																			onCheck={() => onProductSelect(result)}
 																			checked={selected}
 																			hideCheckboxes={hideCheckboxes}
 																			theme={props.theme}
+																			treePath={treePath}
 																			className={idx + 1 == resultsToRender.length ? 'ss__recommendation-bundle__wrapper__selector--last' : ''}
 																		>
 																			{resultComponent ? (
@@ -541,10 +544,12 @@ export const RecommendationBundle = observer((properties: RecommendationBundlePr
 																<RecommendationResultTracker controller={controller} result={result}>
 																	<BundleSelector
 																		icon={separatorIconSeedOnly ? false : separatorIcon}
+																		title={result.display.mappings.core?.name}
 																		onCheck={() => onProductSelect(result)}
 																		checked={selected}
 																		hideCheckboxes={hideCheckboxes}
 																		theme={props.theme}
+																		treePath={treePath}
 																		className={idx + 1 == results.length ? 'ss__recommendation-bundle__wrapper__selector--last' : ''}
 																	>
 																		{resultComponent ? (
@@ -571,11 +576,13 @@ export const RecommendationBundle = observer((properties: RecommendationBundlePr
 													<BundleSelector
 														seedText={seedText}
 														seed={true}
+														title={result.display.mappings.core?.name}
 														icon={separatorIcon}
 														onCheck={() => onProductSelect(result)}
 														checked={selected}
 														hideCheckboxes={hideCheckboxes}
 														theme={props.theme}
+														treePath={treePath}
 														lang={{ seedText: lang.seedText }}
 													>
 														{resultComponent ? (
@@ -591,10 +598,12 @@ export const RecommendationBundle = observer((properties: RecommendationBundlePr
 												<RecommendationResultTracker controller={controller} result={result}>
 													<BundleSelector
 														icon={separatorIconSeedOnly ? false : separatorIcon}
+														title={result.display.mappings.core?.name}
 														onCheck={() => onProductSelect(result)}
 														checked={selected}
 														hideCheckboxes={hideCheckboxes}
 														theme={props.theme}
+														treePath={treePath}
 														className={idx + 1 == resultsToRender.length ? 'ss__recommendation-bundle__wrapper__selector--last' : ''}
 													>
 														{resultComponent ? (
@@ -618,6 +627,7 @@ export const RecommendationBundle = observer((properties: RecommendationBundlePr
 									ctaButtonSuccessText={ctaButtonSuccessText}
 									ctaButtonSuccessTimeout={ctaButtonSuccessTimeout}
 									ctaIcon={ctaIcon}
+									treePath={treePath}
 									lang={{
 										ctaButtonSuccessText: lang.ctaButtonSuccessText,
 										ctaButtonText: lang.ctaButtonText,
@@ -634,6 +644,7 @@ export const RecommendationBundle = observer((properties: RecommendationBundlePr
 								ctaButtonSuccessText={ctaButtonSuccessText}
 								ctaButtonSuccessTimeout={ctaButtonSuccessTimeout}
 								ctaIcon={ctaIcon}
+								treePath={treePath}
 								lang={{
 									ctaButtonSuccessText: lang.ctaButtonSuccessText,
 									ctaButtonText: lang.ctaButtonText,
@@ -658,14 +669,15 @@ export const RecommendationBundle = observer((properties: RecommendationBundlePr
 });
 
 type BundleCarouselProps = {
+	controller?: RecommendationController;
 	enabled?: boolean;
 	seedInCarousel?: boolean;
 } & Partial<CarouselProps>;
 
 export interface RecommendationBundleProps extends ComponentProps {
+	controller: RecommendationController;
 	results?: Product[];
 	limit?: number;
-	controller: RecommendationController;
 	onAddToCart: (e: MouseEvent, items: Product[]) => void;
 	title?: JSX.Element | string;
 	breakpoints?: BreakpointsProps;

@@ -48,5 +48,5 @@ const buttonStyleScript = ({ color, backgroundColor, borderColor, theme }: Butto
 
 // Button component props
 export const button: Partial<ButtonProps> = {
-	styleScript: buttonStyleScript,
+	themeStyleScript: buttonStyleScript,
 };

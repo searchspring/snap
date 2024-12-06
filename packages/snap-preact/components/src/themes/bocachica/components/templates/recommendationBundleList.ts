@@ -8,5 +8,5 @@ const recommendationBundleStyleScript = ({}: RecommendationBundleListProps) => {
 
 // RecommendationBundle component props
 export const recommendationBundleList: Partial<RecommendationBundleListProps> = {
-	styleScript: recommendationBundleStyleScript,
+	themeStyleScript: recommendationBundleStyleScript,
 };

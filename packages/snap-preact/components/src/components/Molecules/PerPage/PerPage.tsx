@@ -5,8 +5,8 @@ import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
 
 import { Theme, useTheme, CacheProvider } from '../../../providers';
-import { defined, mergeProps } from '../../../utilities';
-import { ComponentProps, ListOption, RootNodeProperties } from '../../../types';
+import { defined, mergeProps, mergeStyles } from '../../../utilities';
+import { ComponentProps, ListOption, StyleScript } from '../../../types';
 import { Select, SelectProps } from '../Select';
 import { SearchPaginationStore } from '@searchspring/snap-store-mobx';
 import type { SearchController } from '@searchspring/snap-controller';
@@ -15,14 +15,13 @@ import { List, ListProps } from '../List';
 import deepmerge from 'deepmerge';
 import { Lang } from '../../../hooks';
 
-const CSS = {
-	perPage: ({}: Partial<PerPageProps>) =>
-		css({
-			'.ss__button__content': {
-				display: 'flex',
-				alignItems: 'center',
-			},
-		}),
+const defaultStyles: StyleScript<PerPageProps> = () => {
+	return css({
+		'.ss__button__content': {
+			display: 'flex',
+			alignItems: 'center',
+		},
+	});
 };
 
 export const PerPage = observer((properties: PerPageProps): JSX.Element => {
@@ -34,7 +33,7 @@ export const PerPage = observer((properties: PerPageProps): JSX.Element => {
 
 	const props = mergeProps('perPage', globalTheme, defaultProps, properties);
 
-	const { pagination, type, controller, label, disableStyles, className, style, styleScript, treePath } = props;
+	const { pagination, type, controller, label, disableStyles, className, treePath } = props;
 
 	const store = pagination || controller?.store?.pagination;
 
@@ -77,16 +76,7 @@ export const PerPage = observer((properties: PerPageProps): JSX.Element => {
 		},
 	};
 
-	const styling: RootNodeProperties = { 'ss-name': props.name };
-	const stylingProps = props;
-
-	if (styleScript && !disableStyles) {
-		styling.css = [styleScript(stylingProps), style];
-	} else if (!disableStyles) {
-		styling.css = [CSS.perPage(stylingProps), style];
-	} else if (style) {
-		styling.css = [style];
-	}
+	const styling = mergeStyles<PerPageProps>(props, defaultStyles);
 
 	const selectedOption = store && store?.pageSizeOptions?.find((option) => option.value == store?.pageSize);
 
@@ -128,6 +118,7 @@ export const PerPage = observer((properties: PerPageProps): JSX.Element => {
 					onSelect={(e: any, option: any) => {
 						store.setPageSize(+option!.value);
 					}}
+					requireSelection
 					options={store.pageSizeOptions}
 					selected={store.pageSizeOption}
 					titleText={label}

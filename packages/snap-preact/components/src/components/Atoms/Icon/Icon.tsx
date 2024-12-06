@@ -4,19 +4,18 @@ import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
 
 import { Theme, useTheme, CacheProvider } from '../../../providers';
-import { ComponentProps, RootNodeProperties } from '../../../types';
+import { ComponentProps, StyleScript } from '../../../types';
 import { iconPaths, IconType } from './paths';
-import { mergeProps } from '../../../utilities';
+import { mergeProps, mergeStyles } from '../../../utilities';
 
-const CSS = {
-	icon: ({ color, height, width, size, theme }: Partial<IconProps>) =>
-		css({
-			fill: color || theme?.variables?.colors?.primary || '#333',
-			stroke: color || theme?.variables?.colors?.primary || '#333',
-			width: isNaN(Number(width || size)) ? width || size : `${width || size}px`,
-			height: isNaN(Number(height || size)) ? height || size : `${height || size}px`,
-			position: 'relative',
-		}),
+const defaultStyles: StyleScript<IconProps> = ({ color, theme, width, height, size }) => {
+	return css({
+		fill: color || theme?.variables?.colors?.primary || '#333',
+		stroke: color || theme?.variables?.colors?.primary || '#333',
+		width: isNaN(Number(width || size)) ? width || size : `${width || size}px`,
+		height: isNaN(Number(height || size)) ? height || size : `${height || size}px`,
+		position: 'relative',
+	});
 };
 
 export function Icon(properties: IconProps): JSX.Element {
@@ -28,20 +27,28 @@ export function Icon(properties: IconProps): JSX.Element {
 
 	const props = mergeProps('icon', globalTheme, defaultProps, properties);
 
-	const { color, icon, path, children, size, width, height, viewBox, disableStyles, className, style, styleScript, name, ...otherProps } = props;
+	const {
+		color,
+		icon,
+		path,
+		children,
+		size,
+		width,
+		height,
+		viewBox,
+		disableStyles,
+		className,
+		style: _,
+		styleScript: __,
+		themeStyleScript: ___,
+		name: ____,
+		treePath: _____,
+		...otherProps
+	} = props;
 
 	const iconPath = iconPaths[icon as IconType] || path;
 	const pathType = typeof iconPath;
-	const styling: RootNodeProperties = { 'ss-name': name };
-	const stylingProps = props;
-
-	if (styleScript && !disableStyles) {
-		styling.css = [styleScript(stylingProps), style];
-	} else if (!disableStyles) {
-		styling.css = [CSS.icon(stylingProps), style];
-	} else if (style) {
-		styling.css = [style];
-	}
+	const styling = mergeStyles<IconProps>(props, defaultStyles);
 
 	return children || (iconPath && (pathType === 'string' || (pathType === 'object' && Array.isArray(iconPath)))) ? (
 		<CacheProvider>
@@ -90,6 +97,7 @@ export interface IconProps extends ComponentProps {
 }
 export type IconNames =
 	| 'bundle-cart'
+	| 'bundle-selector'
 	| 'next'
 	| 'prev'
 	| 'active'

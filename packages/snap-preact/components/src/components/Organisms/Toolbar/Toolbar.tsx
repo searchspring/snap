@@ -5,9 +5,9 @@ import classnames from 'classnames';
 import { observer } from 'mobx-react-lite';
 
 import { Theme, useTheme, useSnap, CacheProvider } from '../../../providers';
-import { ComponentProps, RootNodeProperties } from '../../../types';
+import { ComponentProps, StyleScript } from '../../../types';
 import { FilterSummary, FilterSummaryProps } from '../FilterSummary';
-import { defined, mergeProps } from '../../../utilities';
+import { defined, mergeProps, mergeStyles } from '../../../utilities';
 import { Pagination, PaginationProps } from '../../Molecules/Pagination';
 import { LoadMore, LoadMoreProps } from '../../Molecules/LoadMore';
 import { SearchController } from '@searchspring/snap-controller';
@@ -16,14 +16,13 @@ import { PerPage, PerPageProps } from '../../Molecules/PerPage';
 import { LayoutSelector, LayoutSelectorProps } from '../../Molecules/LayoutSelector';
 import { SnapTemplates } from '../../../../../src';
 
-const CSS = {
-	toolbar: ({}: Partial<ToolbarProps>) =>
-		css({
-			display: 'flex',
-			justifyContent: 'flex-end',
-			margin: '10px 0px',
-			gap: '10px',
-		}),
+const defaultStyles: StyleScript<ToolbarProps> = ({}) => {
+	return css({
+		display: 'flex',
+		justifyContent: 'flex-end',
+		margin: '10px 0px',
+		gap: '10px',
+	});
 };
 
 export const Toolbar = observer((properties: ToolbarProps): JSX.Element => {
@@ -42,30 +41,9 @@ export const Toolbar = observer((properties: ToolbarProps): JSX.Element => {
 
 	const props = mergeProps('toolbar', globalTheme, defaultProps, properties);
 
-	const {
-		controller,
-		hideFilterSummary,
-		hidePerPage,
-		hideSortBy,
-		hideLayoutSelector,
-		hidePagination,
-		disableStyles,
-		className,
-		style,
-		styleScript,
-		treePath,
-	} = props;
+	const { controller, hideFilterSummary, hidePerPage, hideSortBy, hideLayoutSelector, hidePagination, disableStyles, className, treePath } = props;
 
-	const styling: RootNodeProperties = { 'ss-name': props.name };
-	const stylingProps = props;
-
-	if (styleScript && !disableStyles) {
-		styling.css = [styleScript(stylingProps), style];
-	} else if (!disableStyles) {
-		styling.css = [CSS.toolbar(stylingProps), style];
-	} else if (style) {
-		styling.css = [style];
-	}
+	const styling = mergeStyles<ToolbarProps>(props, defaultStyles);
 
 	const subProps: ToolbarSubProps = {
 		FilterSummary: {

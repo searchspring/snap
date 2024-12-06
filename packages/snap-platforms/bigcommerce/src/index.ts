@@ -1,2 +1,2 @@
 export * from './addToCart';
-export * from './plugins/pluginBackgroundFilters';
+export { pluginBackgroundFiltersBigcommerce as pluginBackgroundFilters } from './plugins/pluginBackgroundFilters';

@@ -26,3 +26,4 @@ The `addToCart` function will automatically add products to the cart and then re
 The `redirect` property can be set to `false` or supplied with an alternate redirect URL instead of the default (`/cart.php`). 
 
 The `idFieldName` property takes a stringified path in the result reference, to look for the product id to add. `display.mappings.core.sku` for example. By default it will use `display.mappings.core.uid`.
+

@@ -76,7 +76,7 @@ const facetGridOptionsStyleScript = ({ columns, gapSize, gridSize, theme }: Face
 
 // FacetGridOptions component props
 export const facetGridOptions: Partial<FacetGridOptionsProps> = {
-	styleScript: facetGridOptionsStyleScript,
+	themeStyleScript: facetGridOptionsStyleScript,
 	gapSize: '5px',
 	columns: 5,
 };

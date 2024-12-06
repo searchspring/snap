@@ -36,6 +36,6 @@ const checkboxStyleScript = ({ size, color, theme }: CheckboxProps) => {
 
 // Checkbox component props
 export const checkbox: Partial<CheckboxProps> = {
-	styleScript: checkboxStyleScript,
+	themeStyleScript: checkboxStyleScript,
 	size: '18px',
 };

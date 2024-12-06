@@ -17,7 +17,7 @@ const sortByStyleScript = ({ theme }: SortByProps) => {
 
 // SortBy component props
 export const sortBy: Partial<SortByProps> = {
-	styleScript: sortByStyleScript,
+	themeStyleScript: sortByStyleScript,
 	theme: {
 		components: {
 			icon: {

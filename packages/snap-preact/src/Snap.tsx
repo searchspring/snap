@@ -361,12 +361,10 @@ export class Snap {
 
 		this.config = config;
 
-		this.eventManager = setupEvents();
-
 		let globalContext: ContextVariables = {};
 		try {
 			// get global context
-			globalContext = getContext(['shopper', 'config', 'merchandising', 'siteId', 'currency']);
+			globalContext = getContext(['shopper', 'config', 'custom', 'merchandising', 'siteId', 'currency']);
 		} catch (err) {
 			console.error('Snap failed to find global context');
 		}
@@ -597,6 +595,8 @@ export class Snap {
 		window.searchspring.context = this.context;
 		if (this.client) window.searchspring.client = this.client;
 		if (services?.templatesStore) window.searchspring.templates = this.templates;
+
+		this.eventManager = setupEvents();
 
 		if (this.eventManager) {
 			window.searchspring.on = (event: string, ...func: any) => {

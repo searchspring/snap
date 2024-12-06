@@ -6,18 +6,17 @@ import classnames from 'classnames';
 
 import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { FormattedNumberProps } from '../FormattedNumber/FormattedNumber';
-import { RootNodeProperties } from '../../../types';
-import { mergeProps } from '../../../utilities';
+import { StyleScript } from '../../../types';
+import { mergeProps, mergeStyles } from '../../../utilities';
 
-const CSS = {
-	price: ({ theme }: Partial<PriceProps>) =>
-		css({
-			color: theme?.variables?.colors?.primary,
-			'&.ss__price--strike': {
-				textDecoration: 'line-through',
-				color: 'initial',
-			},
-		}),
+const defaultStyles: StyleScript<PriceProps> = ({ theme }) => {
+	return css({
+		color: theme?.variables?.colors?.primary,
+		'&.ss__price--strike': {
+			textDecoration: 'line-through',
+			color: 'initial',
+		},
+	});
 };
 
 export function Price(properties: PriceProps): JSX.Element {
@@ -34,21 +33,7 @@ export function Price(properties: PriceProps): JSX.Element {
 
 	const props = mergeProps('price', globalTheme, defaultProps, properties);
 
-	const {
-		lineThrough,
-		value,
-		symbol,
-		decimalPlaces,
-		padDecimalPlaces,
-		thousandsSeparator,
-		decimalSeparator,
-		symbolAfter,
-		raw,
-		disableStyles,
-		className,
-		style,
-		styleScript,
-	} = props;
+	const { lineThrough, value, symbol, decimalPlaces, padDecimalPlaces, thousandsSeparator, decimalSeparator, symbolAfter, raw, className } = props;
 
 	let formattedPrice: string | undefined;
 	if (value) {
@@ -61,16 +46,8 @@ export function Price(properties: PriceProps): JSX.Element {
 		});
 	}
 
-	const styling: RootNodeProperties = { 'ss-name': props.name };
-	const stylingProps = props;
+	const styling = mergeStyles<PriceProps>(props, defaultStyles);
 
-	if (styleScript && !disableStyles) {
-		styling.css = [styleScript(stylingProps), style];
-	} else if (!disableStyles) {
-		styling.css = [CSS.price(stylingProps), style];
-	} else if (style) {
-		styling.css = [style];
-	}
 	if (formattedPrice) {
 		return raw ? (
 			<Fragment>{formattedPrice}</Fragment>
@@ -92,4 +69,5 @@ export interface PriceProps extends Omit<FormattedNumberProps, 'value'> {
 	value?: number;
 	lineThrough?: boolean;
 }
-export type PriceNames = 'price--msrp';
+
+export type PriceNames = 'price' | 'msrp' | 'bundle-price' | 'bundle-msrp';

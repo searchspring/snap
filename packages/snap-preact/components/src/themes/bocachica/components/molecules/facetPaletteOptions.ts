@@ -144,7 +144,7 @@ const facetPaletteStyleScript = ({ columns, horizontal, gapSize, gridSize, theme
 
 // FacetPaletteOptions component props
 export const facetPaletteOptions: Partial<FacetPaletteOptionsProps> = {
-	styleScript: facetPaletteStyleScript,
+	themeStyleScript: facetPaletteStyleScript,
 	gapSize: '3px',
 	columns: 5,
 };

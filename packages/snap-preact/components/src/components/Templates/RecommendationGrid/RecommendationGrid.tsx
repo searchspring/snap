@@ -6,8 +6,8 @@ import deepmerge from 'deepmerge';
 import type { RecommendationController } from '@searchspring/snap-controller';
 import type { Product } from '@searchspring/snap-store-mobx';
 import { Result, ResultProps } from '../../Molecules/Result';
-import { ComponentProps, BreakpointsProps, StylingCSS, ResultComponent } from '../../../types';
-import { defined, mergeProps } from '../../../utilities';
+import { ComponentProps, BreakpointsProps, ResultComponent, StyleScript } from '../../../types';
+import { defined, mergeProps, mergeStyles } from '../../../utilities';
 import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { useDisplaySettings } from '../../../hooks/useDisplaySettings';
 import { RecommendationProfileTracker } from '../../Trackers/Recommendation/ProfileTracker';
@@ -16,24 +16,23 @@ import { useState } from 'react';
 import { useRef } from 'preact/hooks';
 import { useIntersection } from '../../../hooks';
 
-const CSS = {
-	results: ({ columns, gapSize }: Partial<RecommendationGridProps>) =>
-		css({
-			overflow: 'auto',
-			maxWidth: '100%',
-			maxHeight: '100%',
-			'.ss__recommendation-grid__results': {
-				display: 'flex',
-				flexFlow: 'row wrap',
-				gap: gapSize,
-				gridTemplateRows: 'auto',
-				gridTemplateColumns: `repeat(${columns}, 1fr)`,
+const defaultStyles: StyleScript<RecommendationGridProps> = ({ gapSize, columns }) => {
+	return css({
+		overflow: 'auto',
+		maxWidth: '100%',
+		maxHeight: '100%',
+		'.ss__recommendation-grid__results': {
+			display: 'flex',
+			flexFlow: 'row wrap',
+			gap: gapSize,
+			gridTemplateRows: 'auto',
+			gridTemplateColumns: `repeat(${columns}, 1fr)`,
 
-				'@supports (display: grid)': {
-					display: 'grid',
-				},
+			'@supports (display: grid)': {
+				display: 'grid',
 			},
-		}),
+		},
+	});
 };
 
 export const RecommendationGrid = observer((properties: RecommendationGridProps): JSX.Element => {
@@ -57,7 +56,7 @@ export const RecommendationGrid = observer((properties: RecommendationGridProps)
 		};
 	}
 
-	const { disableStyles, title, resultComponent, trim, lazyRender, className, style, theme, styleScript, controller } = props;
+	const { disableStyles, title, resultComponent, trim, lazyRender, className, theme, controller } = props;
 
 	const mergedlazyRender = {
 		enabled: true,
@@ -102,16 +101,7 @@ export const RecommendationGrid = observer((properties: RecommendationGridProps)
 		results = results?.slice(0, props.columns * props.rows);
 	}
 
-	const styling: { css?: StylingCSS } = {};
-	const stylingProps = { ...props, columns: props.columns, gapSize: props.gapSize, theme };
-
-	if (styleScript && !disableStyles) {
-		styling.css = [styleScript(stylingProps), style];
-	} else if (!disableStyles) {
-		styling.css = [CSS.results(stylingProps), style];
-	} else if (style) {
-		styling.css = [style];
-	}
+	const styling = mergeStyles<RecommendationGridProps>(props, defaultStyles);
 
 	const [isVisible, setIsVisible] = useState(false);
 	const recsRef = useRef(null);

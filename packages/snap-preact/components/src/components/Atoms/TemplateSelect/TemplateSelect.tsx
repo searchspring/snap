@@ -35,12 +35,19 @@ export const TemplateSelect = observer((properties: TemplateSelectProps): JSX.El
 		throw error;
 	}
 
+	let componentProp = {};
+	if (targeter.resultComponent && ResultComponent) {
+		componentProp = {
+			resultComponent: ResultComponent,
+		};
+	}
+
 	// ensuring that theme and component are ready to render
 	return !loading && theme && Component ? (
 		<SnapProvider snap={snap}>
 			<ThemeProvider theme={theme}>
 				<div className={`ss__template-select ss__theme__${theme.name}`}>
-					<Component controller={controller} resultComponent={ResultComponent} {...otherProps} />
+					<Component controller={controller} {...componentProp} {...otherProps} />
 				</div>
 			</ThemeProvider>
 		</SnapProvider>

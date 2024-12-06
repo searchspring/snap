@@ -5,29 +5,28 @@ import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
 
 import { Theme, useTheme, CacheProvider } from '../../../providers';
-import { defined, mergeProps } from '../../../utilities';
-import { ComponentProps, RootNodeProperties } from '../../../types';
+import { defined, mergeProps, mergeStyles } from '../../../utilities';
+import { ComponentProps, StyleScript } from '../../../types';
 import { Icon, IconProps } from '../../Atoms/Icon';
 import type { SearchPaginationStore, Page } from '@searchspring/snap-store-mobx';
 import type { SearchController } from '@searchspring/snap-controller';
 import deepmerge from 'deepmerge';
 import { Lang, useLang } from '../../../hooks';
 
-const CSS = {
-	pagination: ({}: Partial<PaginationProps>) =>
-		css({
-			'& .ss__pagination__page': {
-				padding: '5px',
-				display: 'inline-block',
-				minHeight: '1em',
-				minWidth: '1em',
-				textAlign: 'center',
-				'&.ss__pagination__page--active': {
-					fontWeight: 'bold',
-				},
-				'&:hover:not(.ss__pagination__page--active)': {},
+const defaultStyles: StyleScript<PaginationProps> = () => {
+	return css({
+		'& .ss__pagination__page': {
+			padding: '5px',
+			display: 'inline-block',
+			minHeight: '1em',
+			minWidth: '1em',
+			textAlign: 'center',
+			'&.ss__pagination__page--active': {
+				fontWeight: 'bold',
 			},
-		}),
+			'&:hover:not(.ss__pagination__page--active)': {},
+		},
+	});
 };
 
 export const Pagination = observer((properties: PaginationProps): JSX.Element => {
@@ -55,8 +54,6 @@ export const Pagination = observer((properties: PaginationProps): JSX.Element =>
 		lastButton,
 		disableStyles,
 		className,
-		style,
-		styleScript,
 		treePath,
 	} = props;
 
@@ -83,16 +80,7 @@ export const Pagination = observer((properties: PaginationProps): JSX.Element =>
 	const _pages = store?.getPages(...getPagesParams);
 	const pageNumbers = _pages?.map((page) => page.number);
 
-	const styling: RootNodeProperties = { 'ss-name': props.name };
-	const stylingProps = props;
-
-	if (styleScript && !disableStyles) {
-		styling.css = [styleScript(stylingProps), style];
-	} else if (!disableStyles) {
-		styling.css = [CSS.pagination(stylingProps), style];
-	} else if (style) {
-		styling.css = [style];
-	}
+	const styling = mergeStyles<PaginationProps>(props, defaultStyles);
 
 	//initialize lang
 	const defaultLang = {
@@ -173,6 +161,7 @@ export const Pagination = observer((properties: PaginationProps): JSX.Element =>
 									className={classnames('ss__pagination__page', 'ss__pagination__page--active')}
 									{...mergedPageLang.page?.all}
 									aria-current="true"
+									aria-live="polite"
 								>
 									{page.number}
 								</span>
