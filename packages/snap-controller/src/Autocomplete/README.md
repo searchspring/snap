@@ -22,6 +22,8 @@ The `AutocompleteController` is used when making queries to the API `autocomplet
 | settings.history.showResults | if history limit is set and there is no input, the first term results will be displayed | false |   | 
 | settings.redirects.merchandising | boolean to disable merchandising redirects when ac form is submitted | true |   | 
 | settings.redirects.singleResult | enable redirect to product detail page if search yields 1 result count | false |   |
+| settings.bind.input | boolean to disable binding of the input element (selector) | true |   | 
+| settings.bind.submit | boolean to disable binding of the submit event (form submission of enter key press) | true |   |
 | settings.variants.field | used to set the field in which to grab the variant data from | ➖ |   | 
 | settings.variants.realtime.enabled | enable real time variant updates | ➖ |   | 
 | settings.variants.realtime.filters | specify which filters to use to determine which results are updated | ➖ |   | 
