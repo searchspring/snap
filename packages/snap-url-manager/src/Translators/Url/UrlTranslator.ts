@@ -165,7 +165,7 @@ export class UrlTranslator implements Translator {
 
 	protected parseHashString(hashString: string): Array<UrlParameter> {
 		const params: Array<UrlParameter> = [];
-		const justHashString = hashString.split('#').join('/') || '';
+		const justHashString = hashString.split('#').pop() || '';
 		justHashString
 			.split('/')
 			.filter((v) => v)

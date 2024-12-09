@@ -21,8 +21,6 @@ describe('UrlTranslator', () => {
 		const urlTranslator = new UrlTranslator();
 		// @ts-ignore
 		expect(urlTranslator.parseHashString(url)).toStrictEqual([
-			{ key: ['http'], type: 'hash', value: '' },
-			{ key: ['example.com'], type: 'hash', value: '' },
 			{ key: ['valid'], type: 'hash', value: 'true' },
 			{ key: ['valid2'], type: 'hash', value: 'truueee' },
 		]);
