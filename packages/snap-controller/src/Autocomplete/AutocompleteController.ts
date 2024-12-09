@@ -367,6 +367,9 @@ export class AutocompleteController extends AbstractController {
 
 				this.store.state.input = value;
 
+				// remove merch redirect to prevent race condition
+				this.store.merchandising.redirect = '';
+
 				if (this.config?.settings?.syncInputs) {
 					const inputs = document.querySelectorAll(this.config.selector);
 					inputs.forEach((input) => {
