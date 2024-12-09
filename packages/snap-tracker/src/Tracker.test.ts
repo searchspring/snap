@@ -840,8 +840,6 @@ describe('Tracker', () => {
 	});
 
 	it('stores a cookiew when invoking track.product.view', async () => {
-		// Tracker.ts itself does not use cookies.cart.set however Snap.tsx does
-
 		const tracker = new Tracker(globals, config);
 
 		// stores based on priority of :childSku, childUid, sku, uid
@@ -904,8 +902,6 @@ describe('Tracker', () => {
 	});
 
 	it('when invoking track.product.view there is a maximum number of skus', async () => {
-		// Tracker.ts itself does not use cookies.cart.set however Snap.tsx does
-
 		const tracker = new Tracker(globals, config);
 		const skus: string[] = [];
 
