@@ -727,6 +727,7 @@ describe('Autocomplete Controller', () => {
 
 		const form = inputEl!.form;
 		const beforeSubmitfn = jest.spyOn(controller.eventManager, 'fire');
+		const handlerSubmitfn = jest.spyOn(controller.handlers.input, 'formSubmit');
 
 		form?.dispatchEvent(new Event('submit', { bubbles: true }));
 		//this timeout seems to be needed. Cant replace with waitFor
@@ -736,6 +737,8 @@ describe('Autocomplete Controller', () => {
 			controller,
 			input: inputEl!,
 		});
+
+		expect(handlerSubmitfn).not.toHaveBeenCalled();
 
 		beforeSubmitfn.mockClear();
 	});
@@ -757,6 +760,7 @@ describe('Autocomplete Controller', () => {
 		(controller.client as MockClient).mockData.updateConfig({ autocomplete: 'autocomplete.query.bumpers' });
 
 		const beforeSubmitfn = jest.spyOn(controller.eventManager, 'fire');
+		const enterKeyfn = jest.spyOn(controller.handlers.input, 'enterKey');
 		const inputEl: HTMLInputElement | null = document.querySelector(controller.config.selector);
 
 		const query = 'bumpers';
@@ -771,6 +775,8 @@ describe('Autocomplete Controller', () => {
 			controller,
 			input: inputEl!,
 		});
+
+		expect(enterKeyfn).not.toHaveBeenCalled();
 
 		beforeSubmitfn.mockClear();
 	});
