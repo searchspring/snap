@@ -1,5 +1,5 @@
 import deepmerge from 'deepmerge';
-import { Tracker, BATCH_TIMEOUT } from './Tracker';
+import { Tracker, BATCH_TIMEOUT, MAX_VIEWED_COUNT } from './Tracker';
 import { TrackerConfig, BeaconCategory, BeaconType, CartViewEvent, TrackErrorEvent, OrderTransactionData } from './types';
 
 const globals = {
@@ -837,6 +837,83 @@ describe('Tracker', () => {
 
 		trackEvent.mockRestore();
 		productView.mockRestore();
+	});
+
+	it('stores a cookiew when invoking track.product.view', async () => {
+		const tracker = new Tracker(globals, config);
+
+		// stores based on priority of :childSku, childUid, sku, uid
+		const skus: string[] = [];
+
+		const addProduct1 = {
+			uid: 'uid1',
+			sku: undefined,
+			childUid: undefined,
+			childSku: undefined,
+		};
+		await tracker.track.product.view(addProduct1);
+
+		expect(global.document.cookie).toContain(`ssViewedProducts=${encodeURIComponent(skus.concat(addProduct1.uid).join(','))}`);
+
+		const addProduct2 = {
+			uid: 'uid2',
+			sku: 'sku2',
+			childUid: undefined,
+			childSku: undefined,
+		};
+		await tracker.track.product.view(addProduct2);
+
+		skus.unshift(addProduct2.sku);
+		expect(global.document.cookie).toContain(`ssViewedProducts=${encodeURIComponent(skus.join(','))}`);
+
+		const addProduct3 = {
+			uid: 'uid3',
+			sku: 'sku3',
+			childUid: 'childUid3',
+			childSku: undefined,
+		};
+		await tracker.track.product.view(addProduct3);
+
+		skus.unshift(addProduct3.childUid);
+		expect(global.document.cookie).toContain(`ssViewedProducts=${encodeURIComponent(skus.join(','))}`);
+
+		const addProduct4 = {
+			uid: 'uid4',
+			sku: 'sku4',
+			childUid: 'childUid4',
+			childSku: 'childSku4',
+		};
+		await tracker.track.product.view(addProduct4);
+
+		skus.unshift(addProduct4.childSku);
+		expect(global.document.cookie).toContain(`ssViewedProducts=${encodeURIComponent(skus.join(','))}`);
+
+		// will put a duplicate to the front
+		const addProduct2Again = {
+			sku: 'sku2',
+		};
+		await tracker.track.product.view(addProduct2Again);
+
+		// remove duplicate
+		skus.splice(skus.indexOf(addProduct2Again.sku), 1);
+
+		skus.unshift(addProduct2Again.sku);
+		expect(global.document.cookie).toContain(`ssViewedProducts=${encodeURIComponent(skus.join(','))}`);
+	});
+
+	it('when invoking track.product.view there is a maximum number of skus', async () => {
+		const tracker = new Tracker(globals, config);
+		const skus: string[] = [];
+
+		// loop through the max count
+		for (let i = 0; i <= MAX_VIEWED_COUNT; i++) {
+			skus.unshift(`sku${i}`);
+			await tracker.track.product.view({ sku: `sku${i}` });
+		}
+
+		skus.splice(MAX_VIEWED_COUNT, 1);
+
+		expect(global.document.cookie).toContain(`ssViewedProducts=${encodeURIComponent(skus.join(','))}`);
 	});
 
 	it('logs console error if no uid or sku or childUid or childSku is provided to track.product.view', async () => {
