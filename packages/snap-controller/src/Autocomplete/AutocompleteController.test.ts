@@ -158,20 +158,27 @@ describe('Autocomplete Controller', () => {
 			tracker: new Tracker(globals),
 		});
 
-		controller.init();
+		// calling init to ensure event timings line up for asserting loading and loaded states
+		await controller.init();
 
 		const query = 'wh';
 		controller.urlManager = controller.urlManager.reset().set('query', query);
 		expect(controller.urlManager.state.query).toBe(query);
 
 		(controller.client as MockClient).mockData.updateConfig({ autocomplete: 'autocomplete.query.wh' });
-		await controller.search();
+		const searchPromise = controller.search();
 
-		await waitFor(() => {
-			expect(controller.store.results.length).toBeGreaterThan(0);
-			expect(controller.store.results.length).toBe(acConfig.globals!.pagination!.pageSize);
-			expect(controller.store.terms.length).toBe(acConfig.globals!.suggestions!.count);
-		});
+		expect(controller.store.loaded).toBe(false);
+		expect(controller.store.loading).toBe(true);
+
+		await searchPromise;
+
+		expect(controller.store.loaded).toBe(true);
+		expect(controller.store.loading).toBe(false);
+
+		expect(controller.store.results.length).toBeGreaterThan(0);
+		expect(controller.store.results.length).toBe(acConfig.globals!.pagination!.pageSize);
+		expect(controller.store.terms.length).toBe(acConfig.globals!.suggestions!.count);
 	});
 
 	it('has no results if query is blank', async () => {
