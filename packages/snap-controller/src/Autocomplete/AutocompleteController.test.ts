@@ -11,6 +11,7 @@ import { AutocompleteController, INPUT_DELAY as _INPUT_DELAY } from './Autocompl
 import { waitFor } from '@testing-library/preact';
 
 import { MockClient } from '@searchspring/snap-shared';
+import deepmerge from 'deepmerge';
 
 const KEY_ENTER = 13;
 const KEY_ESCAPE = 27;
@@ -211,6 +212,35 @@ describe('Autocomplete Controller', () => {
 		await controller.bind();
 
 		controller.unbind();
+
+		let inputEl: HTMLInputElement | null;
+
+		await waitFor(() => {
+			inputEl = document.querySelector(controller.config.selector);
+			expect(inputEl).toBeDefined();
+		});
+
+		const query = 'bumpers';
+		inputEl!.value = query;
+		inputEl!.focus();
+		inputEl!.dispatchEvent(new Event('input'));
+		expect(controller.urlManager.state.query).toBe(undefined);
+	});
+
+	it('can opt out of binding input event', async () => {
+		const bindingConfig = deepmerge(acConfig, { settings: { bind: { input: false } } });
+
+		const controller = new AutocompleteController(bindingConfig, {
+			client: new MockClient(globals, {}),
+			store: new AutocompleteStore(bindingConfig, services),
+			urlManager,
+			eventManager: new EventManager(),
+			profiler: new Profiler(),
+			logger: new Logger(),
+			tracker: new Tracker(globals),
+		});
+
+		await controller.bind();
 
 		let inputEl: HTMLInputElement | null;
 
@@ -668,6 +698,85 @@ describe('Autocomplete Controller', () => {
 			controller,
 			input: inputEl!,
 		});
+
+		beforeSubmitfn.mockClear();
+	});
+
+	it('can opt out of submit event', async () => {
+		document.body.innerHTML = '<div><form action="/search.html"><input type="text" id="search_query"></form></div>';
+
+		const bindingConfig = deepmerge(acConfig, { settings: { bind: { submit: false } } });
+
+		const controller = new AutocompleteController(bindingConfig, {
+			client: new MockClient(globals, {}),
+			store: new AutocompleteStore(bindingConfig, services),
+			urlManager,
+			eventManager: new EventManager(),
+			profiler: new Profiler(),
+			logger: new Logger(),
+			tracker: new Tracker(globals),
+		});
+
+		await controller.bind();
+		(controller.client as MockClient).mockData.updateConfig({ autocomplete: 'autocomplete.query.bumpers' });
+
+		const inputEl: HTMLInputElement | null = document.querySelector(controller.config.selector);
+
+		const query = 'bumpers';
+		inputEl!.value = query;
+
+		const form = inputEl!.form;
+		const beforeSubmitfn = jest.spyOn(controller.eventManager, 'fire');
+		const handlerSubmitfn = jest.spyOn(controller.handlers.input, 'formSubmit');
+
+		form?.dispatchEvent(new Event('submit', { bubbles: true }));
+		//this timeout seems to be needed. Cant replace with waitFor
+		await new Promise((resolve) => setTimeout(resolve, INPUT_DELAY));
+
+		expect(beforeSubmitfn).not.toHaveBeenCalledWith('beforeSubmit', {
+			controller,
+			input: inputEl!,
+		});
+
+		expect(handlerSubmitfn).not.toHaveBeenCalled();
+
+		beforeSubmitfn.mockClear();
+	});
+
+	it('can opt out of submit event (with no form)', async () => {
+		const bindingConfig = deepmerge(acConfig, { action: '/search', settings: { bind: { submit: false } } });
+
+		const controller = new AutocompleteController(bindingConfig, {
+			client: new MockClient(globals, {}),
+			store: new AutocompleteStore(bindingConfig, services),
+			urlManager,
+			eventManager: new EventManager(),
+			profiler: new Profiler(),
+			logger: new Logger(),
+			tracker: new Tracker(globals),
+		});
+
+		await controller.bind();
+		(controller.client as MockClient).mockData.updateConfig({ autocomplete: 'autocomplete.query.bumpers' });
+
+		const beforeSubmitfn = jest.spyOn(controller.eventManager, 'fire');
+		const enterKeyfn = jest.spyOn(controller.handlers.input, 'enterKey');
+		const inputEl: HTMLInputElement | null = document.querySelector(controller.config.selector);
+
+		const query = 'bumpers';
+		inputEl!.value = query;
+
+		inputEl!.dispatchEvent(new KeyboardEvent('keydown', { bubbles: true, keyCode: KEY_ENTER }));
+
+		// this timeout seems to be needed. Cant replace with waitFor
+		await new Promise((resolve) => setTimeout(resolve, INPUT_DELAY));
+
+		expect(beforeSubmitfn).not.toHaveBeenCalledWith('beforeSubmit', {
+			controller,
+			input: inputEl!,
+		});
+
+		expect(enterKeyfn).not.toHaveBeenCalled();
 
 		beforeSubmitfn.mockClear();
 	});
