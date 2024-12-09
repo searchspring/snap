@@ -118,6 +118,34 @@ describe('Recommendation Controller', () => {
 		});
 	});
 
+	it(`sets proper loading states`, async function () {
+		const controller = new RecommendationController(recommendConfig, {
+			client: new MockClient(globals, {}),
+			store: new RecommendationStore(recommendConfig, services),
+			urlManager,
+			eventManager: new EventManager(),
+			profiler: new Profiler(),
+			logger: new Logger(),
+			tracker: new Tracker(globals),
+		});
+
+		// calling init to ensure event timings line up for asserting loading and loaded states
+		await controller.init();
+
+		expect(controller.store.loaded).toBe(false);
+		expect(controller.store.loading).toBe(false);
+
+		const searchPromise = controller.search();
+
+		expect(controller.store.loaded).toBe(false);
+		expect(controller.store.loading).toBe(true);
+
+		await searchPromise;
+
+		expect(controller.store.loaded).toBe(true);
+		expect(controller.store.loading).toBe(false);
+	});
+
 	it(`tests searchOnPageShow triggers search on persisted pageshow event `, async function () {
 		const controller = new RecommendationController(recommendConfig, {
 			client: new MockClient(globals, {}),
