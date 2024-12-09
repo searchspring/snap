@@ -995,6 +995,7 @@ describe('Autocomplete Controller', () => {
 		expect(inputEl).toBeDefined();
 
 		inputEl.value = query;
+		inputEl.dispatchEvent(new Event('input', { bubbles: true }));
 
 		await controller.search();
 		expect(controller.store.terms.length).toBeGreaterThan(0);
@@ -1011,6 +1012,64 @@ describe('Autocomplete Controller', () => {
 
 		await waitFor(() => {
 			expect(window.location.href).toContain('https://searchspring.com/?redirect');
+		});
+	});
+
+	it('will not redirect when the previous search included a redirect in merchandising response', async () => {
+		document.body.innerHTML = '<div><input type="text" id="search_query"></div>';
+		acConfig = {
+			...acConfig,
+			selector: '#search_query',
+			action: '/search',
+			settings: {
+				redirects: {
+					merchandising: true,
+				},
+			},
+		};
+
+		const controller = new AutocompleteController(acConfig, {
+			client: new MockClient(globals, {}),
+			store: new AutocompleteStore(acConfig, services),
+			urlManager,
+			eventManager: new EventManager(),
+			profiler: new Profiler(),
+			logger: new Logger(),
+			tracker: new Tracker(globals),
+		});
+		(controller.client as MockClient).mockData.updateConfig({ autocomplete: 'redirect', siteId: '8uyt2m' });
+
+		const query = 'rumper';
+		controller.urlManager = controller.urlManager.set('query', query);
+
+		await controller.bind();
+		const inputEl: HTMLInputElement = document.querySelector(controller.config.selector)!;
+		expect(inputEl).toBeDefined();
+
+		inputEl.value = query;
+		inputEl.dispatchEvent(new Event('input', { bubbles: true }));
+
+		await controller.search();
+		expect(controller.store.terms.length).toBeGreaterThan(0);
+
+		// @ts-ignore
+		delete window.location;
+		window.location = {
+			...window.location,
+			href: '', // jest does not support window location changes
+		};
+
+		expect(controller.store.merchandising.redirect).toBe('https://searchspring.com/?redirect');
+		// change the input to a new query
+		inputEl.value = 'dress';
+		inputEl.dispatchEvent(new Event('input', { bubbles: true }));
+		expect(controller.store.merchandising.redirect).toBe('');
+
+		inputEl.focus();
+		inputEl.dispatchEvent(new KeyboardEvent('keydown', { bubbles: true, keyCode: KEY_ENTER }));
+
+		await waitFor(() => {
+			expect(window.location.href).toContain('/search?oq=rumper&search_query=romper');
 		});
 	});
 
