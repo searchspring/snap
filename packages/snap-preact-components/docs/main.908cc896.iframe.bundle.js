@@ -1,4 +1,4 @@
-/*! For license information please see main.44a9f01e.iframe.bundle.js.LICENSE.txt */
+/*! For license information please see main.908cc896.iframe.bundle.js.LICENSE.txt */
 (self.webpackChunk_searchspring_snap_preact_components = self.webpackChunk_searchspring_snap_preact_components || []).push([
 	[792],
 	{
@@ -34839,10 +34839,10 @@
 									_this$params$search$q,
 									_this$params$search2,
 									_this$params$search2$,
-									params,
 									_this$config$settings,
 									_params$pagination,
 									_this$config$settings7,
+									params,
 									stringyParams,
 									prevStringyParams,
 									searchProfile,
@@ -34868,12 +34868,12 @@
 										for (;;)
 											switch ((_context.prev = _context.next)) {
 												case 0:
-													if (_this.initialized) {
-														_context.next = 3;
+													if (((_context.prev = 0), _this.initialized)) {
+														_context.next = 4;
 														break;
 													}
-													return (_context.next = 3), _this.init();
-												case 3:
+													return (_context.next = 4), _this.init();
+												case 4:
 													return (
 														(params = _this.params),
 														null !== (_this$params$search = _this.params.search) &&
@@ -34887,37 +34887,37 @@
 															void 0 !== _this$params$search2$ &&
 															_this$params$search2$.string.length &&
 															_this.store.history.save(_this.params.search.query.string),
-														(_context.prev = 5),
-														(_context.prev = 6),
-														(_context.next = 9),
+														(_this.store.loading = !0),
+														(_context.prev = 7),
+														(_context.next = 10),
 														_this.eventManager.fire('beforeSearch', { controller: _this, request: params })
 													);
-												case 9:
-													_context.next = 20;
+												case 10:
+													_context.next = 21;
 													break;
-												case 11:
+												case 12:
 													if (
-														((_context.prev = 11),
-														(_context.t0 = _context.catch(6)),
+														((_context.prev = 12),
+														(_context.t0 = _context.catch(7)),
 														'cancelled' != (null === _context.t0 || void 0 === _context.t0 ? void 0 : _context.t0.message))
 													) {
-														_context.next = 18;
+														_context.next = 19;
 														break;
 													}
 													return _this.log.warn("'beforeSearch' middleware cancelled"), _context.abrupt('return');
-												case 18:
+												case 19:
 													throw (_this.log.error("error in 'beforeSearch' middleware"), _context.t0);
-												case 20:
+												case 21:
 													if (
 														((stringyParams = JSON.stringify(params)),
 														(prevStringyParams = _this.storage.get('lastStringyParams')),
 														stringyParams != prevStringyParams)
 													) {
-														_context.next = 24;
+														_context.next = 25;
 														break;
 													}
 													return _context.abrupt('return');
-												case 24:
+												case 25:
 													if (
 														((searchProfile = _this.profiler.create({ type: 'event', name: 'search', context: params }).start()),
 														(meta = {}),
@@ -34932,7 +34932,7 @@
 															params.pagination.page > 1
 														))
 													) {
-														_context.next = 56;
+														_context.next = 57;
 														break;
 													}
 													if (
@@ -34950,18 +34950,18 @@
 														)),
 														!preventBackfill && !dontBackfill)
 													) {
-														_context.next = 34;
+														_context.next = 35;
 														break;
 													}
 													return _this.storage.set('scrollMap', {}), _this.urlManager.set('page', 1).go(), _context.abrupt('return');
-												case 34:
+												case 35:
 													if (
 														null === (_this$config$settings4 = _this.config.settings) ||
 														void 0 === _this$config$settings4 ||
 														!_this$config$settings4.infinite.backfill ||
 														_this.previousResults.length
 													) {
-														_context.next = 47;
+														_context.next = 48;
 														break;
 													}
 													return (
@@ -34992,10 +34992,10 @@
 																			delete _backfillParams$searc.redirectResponse));
 																return _this.client.search(backfillParams);
 															})),
-														(_context.next = 38),
+														(_context.next = 39),
 														Promise.all(backfillRequests)
 													);
-												case 38:
+												case 39:
 													(backfillResponses = _context.sent),
 														(meta = backfillResponses[0][0]),
 														(response = backfillResponses[0][1]),
@@ -35008,11 +35008,11 @@
 																? void 0
 																: _params$pagination2.page),
 														(response.results = backfillResults),
-														(_context.next = 54);
+														(_context.next = 55);
 													break;
-												case 47:
-													return (_context.next = 49), _this.client.search(params);
-												case 49:
+												case 48:
+													return (_context.next = 50), _this.client.search(params);
+												case 50:
 													(_yield$_this$client$s = _context.sent),
 														(_yield$_this$client$s2 = _slicedToArray(_yield$_this$client$s, 2)),
 														(meta = _yield$_this$client$s2[0]),
@@ -35020,42 +35020,42 @@
 															SearchController_toConsumableArray(_this.previousResults),
 															SearchController_toConsumableArray(response.results || [])
 														));
-												case 54:
-													_context.next = 62;
+												case 55:
+													_context.next = 63;
 													break;
-												case 56:
-													return (_context.next = 58), _this.client.search(params);
-												case 58:
+												case 57:
+													return (_context.next = 59), _this.client.search(params);
+												case 59:
 													(_yield$_this$client$s3 = _context.sent),
 														(_yield$_this$client$s4 = _slicedToArray(_yield$_this$client$s3, 2)),
 														(meta = _yield$_this$client$s4[0]),
 														(response = _yield$_this$client$s4[1]);
-												case 62:
+												case 63:
 													return (
 														response.meta || (response.meta = meta),
 														searchProfile.stop(),
 														_this.log.profile(searchProfile),
 														(afterSearchProfile = _this.profiler.create({ type: 'event', name: 'afterSearch', context: params }).start()),
-														(_context.prev = 66),
-														(_context.next = 69),
+														(_context.prev = 67),
+														(_context.next = 70),
 														_this.eventManager.fire('afterSearch', { controller: _this, request: params, response })
 													);
-												case 69:
-													_context.next = 81;
+												case 70:
+													_context.next = 82;
 													break;
-												case 71:
+												case 72:
 													if (
-														((_context.prev = 71),
-														(_context.t1 = _context.catch(66)),
+														((_context.prev = 72),
+														(_context.t1 = _context.catch(67)),
 														'cancelled' != (null === _context.t1 || void 0 === _context.t1 ? void 0 : _context.t1.message))
 													) {
-														_context.next = 79;
+														_context.next = 80;
 														break;
 													}
 													return _this.log.warn("'afterSearch' middleware cancelled"), afterSearchProfile.stop(), _context.abrupt('return');
-												case 79:
+												case 80:
 													throw (_this.log.error("error in 'afterSearch' middleware"), _context.t1);
-												case 81:
+												case 82:
 													return (
 														afterSearchProfile.stop(),
 														_this.log.profile(afterSearchProfile),
@@ -35065,62 +35065,62 @@
 															(_this.previousResults = JSON.parse(JSON.stringify(response.results))),
 														_this.store.update(response),
 														(afterStoreProfile = _this.profiler.create({ type: 'event', name: 'afterStore', context: params }).start()),
-														(_context.prev = 86),
-														(_context.next = 89),
+														(_context.prev = 87),
+														(_context.next = 90),
 														_this.eventManager.fire('afterStore', { controller: _this, request: params, response })
 													);
-												case 89:
-													_context.next = 101;
+												case 90:
+													_context.next = 102;
 													break;
-												case 91:
+												case 92:
 													if (
-														((_context.prev = 91),
-														(_context.t2 = _context.catch(86)),
+														((_context.prev = 92),
+														(_context.t2 = _context.catch(87)),
 														'cancelled' != (null === _context.t2 || void 0 === _context.t2 ? void 0 : _context.t2.message))
 													) {
-														_context.next = 99;
+														_context.next = 100;
 														break;
 													}
 													return _this.log.warn("'afterStore' middleware cancelled"), afterStoreProfile.stop(), _context.abrupt('return');
-												case 99:
+												case 100:
 													throw (_this.log.error("error in 'afterStore' middleware"), _context.t2);
-												case 101:
+												case 102:
 													afterStoreProfile.stop(), _this.log.profile(afterStoreProfile), (_context.next = 126);
 													break;
-												case 105:
-													if (((_context.prev = 105), (_context.t3 = _context.catch(5)), !_context.t3)) {
+												case 106:
+													if (((_context.prev = 106), (_context.t3 = _context.catch(0)), !_context.t3)) {
 														_context.next = 126;
 														break;
 													}
 													if (!_context.t3.err || !_context.t3.fetchDetails) {
-														_context.next = 122;
+														_context.next = 123;
 														break;
 													}
 													(_context.t4 = _context.t3.fetchDetails.status),
-														(_context.next = 429 === _context.t4 ? 112 : 500 === _context.t4 ? 114 : 116);
+														(_context.next = 429 === _context.t4 ? 113 : 500 === _context.t4 ? 115 : 117);
 													break;
-												case 112:
+												case 113:
 													return (
 														(_this.store.error = { code: 429, type: types.B.WARNING, message: 'Too many requests try again later' }),
-														_context.abrupt('break', 118)
+														_context.abrupt('break', 119)
 													);
-												case 114:
+												case 115:
 													return (
 														(_this.store.error = { code: 500, type: types.B.ERROR, message: 'Invalid Search Request or Service Unavailable' }),
-														_context.abrupt('break', 118)
+														_context.abrupt('break', 119)
 													);
-												case 116:
-													return (_this.store.error = { type: types.B.ERROR, message: _context.t3.err.message }), _context.abrupt('break', 118);
-												case 118:
-													_this.log.error(_this.store.error), _this.handleError(_context.t3.err, _context.t3.fetchDetails), (_context.next = 125);
+												case 117:
+													return (_this.store.error = { type: types.B.ERROR, message: _context.t3.err.message }), _context.abrupt('break', 119);
+												case 119:
+													_this.log.error(_this.store.error), _this.handleError(_context.t3.err, _context.t3.fetchDetails), (_context.next = 126);
 													break;
-												case 122:
+												case 123:
 													(_this.store.error = { type: types.B.ERROR, message: 'Something went wrong... - ' + _context.t3 }),
 														_this.log.error(_context.t3),
 														_this.handleError(_context.t3);
-												case 125:
-													_this.store.loading = !1;
 												case 126:
+													return (_context.prev = 126), (_this.store.loading = !1), _context.finish(126);
+												case 129:
 												case 'end':
 													return _context.stop();
 											}
@@ -35128,10 +35128,10 @@
 									_callee,
 									null,
 									[
-										[5, 105],
-										[6, 11],
-										[66, 71],
-										[86, 91],
+										[0, 106, 126, 129],
+										[7, 12],
+										[67, 72],
+										[87, 92],
 									]
 								);
 							})
@@ -35146,32 +35146,10 @@
 						(_this.storage = new StorageStore({ type: 'session', key: 'ss-controller-' + _this.config.id })),
 						_this.storage.set('lastStringyParams', void 0),
 						_this.eventManager.on(
-							'beforeSearch',
+							'afterSearch',
 							(function () {
 								var _ref3 = SearchController_asyncToGenerator(
 									SearchController_regeneratorRuntime().mark(function _callee2(search, next) {
-										return SearchController_regeneratorRuntime().wrap(function _callee2$(_context2) {
-											for (;;)
-												switch ((_context2.prev = _context2.next)) {
-													case 0:
-														return (search.controller.store.loading = !0), (_context2.next = 3), next();
-													case 3:
-													case 'end':
-														return _context2.stop();
-												}
-										}, _callee2);
-									})
-								);
-								return function (_x, _x2) {
-									return _ref3.apply(this, arguments);
-								};
-							})()
-						),
-						_this.eventManager.on(
-							'afterSearch',
-							(function () {
-								var _ref4 = SearchController_asyncToGenerator(
-									SearchController_regeneratorRuntime().mark(function _callee3(search, next) {
 										var _search$response,
 											_search$response$merc,
 											_config$settings,
@@ -35190,9 +35168,9 @@
 											redirectURL,
 											searchStore,
 											nonBackgroundFilters;
-										return SearchController_regeneratorRuntime().wrap(function _callee3$(_context3) {
+										return SearchController_regeneratorRuntime().wrap(function _callee2$(_context2) {
 											for (;;)
-												switch ((_context3.prev = _context3.next)) {
+												switch ((_context2.prev = _context2.next)) {
 													case 0:
 														if (
 															((config = search.controller.config),
@@ -35219,10 +35197,10 @@
 																	_search$response2$fil.length) ||
 																searchStore.loaded)
 														) {
-															_context3.next = 6;
+															_context2.next = 6;
 															break;
 														}
-														return window.location.replace(redirectURL), _context3.abrupt('return', !1);
+														return window.location.replace(redirectURL), _context2.abrupt('return', !1);
 													case 6:
 														if (
 															((nonBackgroundFilters =
@@ -35258,16 +35236,49 @@
 																(null != nonBackgroundFilters && nonBackgroundFilters.length) ||
 																search.controller.previousResults.length)
 														) {
-															_context3.next = 10;
+															_context2.next = 10;
 															break;
 														}
 														return (
 															window.location.replace(null == search ? void 0 : search.response.results[0].mappings.core.url),
-															_context3.abrupt('return', !1)
+															_context2.abrupt('return', !1)
 														);
 													case 10:
-														return (_context3.next = 12), next();
+														return (_context2.next = 12), next();
 													case 12:
+													case 'end':
+														return _context2.stop();
+												}
+										}, _callee2);
+									})
+								);
+								return function (_x, _x2) {
+									return _ref3.apply(this, arguments);
+								};
+							})()
+						),
+						_this.eventManager.on(
+							'afterStore',
+							(function () {
+								var _ref4 = SearchController_asyncToGenerator(
+									SearchController_regeneratorRuntime().mark(function _callee3(search, next) {
+										var storableRequestParams, stringyParams, scrollMap, elementPosition;
+										return SearchController_regeneratorRuntime().wrap(function _callee3$(_context3) {
+											for (;;)
+												switch ((_context3.prev = _context3.next)) {
+													case 0:
+														return (_context3.next = 2), next();
+													case 2:
+														return (
+															_this.storage.set('lastStringyParams', JSON.stringify(search.request)),
+															(storableRequestParams = getStorableRequestParams(search.request)),
+															(stringyParams = JSON.stringify(storableRequestParams)),
+															(scrollMap = _this.storage.get('scrollMap') || {}),
+															(elementPosition = scrollMap[stringyParams]) || _this.storage.set('scrollMap', {}),
+															(_context3.next = 10),
+															_this.eventManager.fire('restorePosition', { controller: _this, element: elementPosition })
+														);
+													case 10:
 													case 'end':
 														return _context3.stop();
 												}
@@ -35279,41 +35290,6 @@
 								};
 							})()
 						),
-						_this.eventManager.on(
-							'afterStore',
-							(function () {
-								var _ref5 = SearchController_asyncToGenerator(
-									SearchController_regeneratorRuntime().mark(function _callee4(search, next) {
-										var storableRequestParams, stringyParams, scrollMap, elementPosition;
-										return SearchController_regeneratorRuntime().wrap(function _callee4$(_context4) {
-											for (;;)
-												switch ((_context4.prev = _context4.next)) {
-													case 0:
-														return (_context4.next = 2), next();
-													case 2:
-														return (
-															_this.storage.set('lastStringyParams', JSON.stringify(search.request)),
-															(storableRequestParams = getStorableRequestParams(search.request)),
-															(stringyParams = JSON.stringify(storableRequestParams)),
-															(scrollMap = _this.storage.get('scrollMap') || {}),
-															(elementPosition = scrollMap[stringyParams]) || _this.storage.set('scrollMap', {}),
-															(_context4.next = 10),
-															_this.eventManager.fire('restorePosition', { controller: _this, element: elementPosition })
-														);
-													case 10:
-														search.controller.store.loading = !1;
-													case 11:
-													case 'end':
-														return _context4.stop();
-												}
-										}, _callee4);
-									})
-								);
-								return function (_x5, _x6) {
-									return _ref5.apply(this, arguments);
-								};
-							})()
-						),
 						null !== (_this$config$settings9 = _this.config.settings) &&
 							void 0 !== _this$config$settings9 &&
 							null !== (_this$config$settings10 = _this$config$settings9.restorePosition) &&
@@ -35322,16 +35298,16 @@
 							(_this.eventManager.on(
 								'restorePosition',
 								(function () {
-									var _ref7 = SearchController_asyncToGenerator(
-										SearchController_regeneratorRuntime().mark(function _callee6(_ref6, next) {
+									var _ref6 = SearchController_asyncToGenerator(
+										SearchController_regeneratorRuntime().mark(function _callee5(_ref5, next) {
 											var _element, controller, element, lastRequest, storableRequestParams, stringyParams, scrollMap, scrollToPosition;
-											return SearchController_regeneratorRuntime().wrap(function _callee6$(_context6) {
+											return SearchController_regeneratorRuntime().wrap(function _callee5$(_context5) {
 												for (;;)
-													switch ((_context6.prev = _context6.next)) {
+													switch ((_context5.prev = _context5.next)) {
 														case 0:
 															if (
-																((controller = _ref6.controller),
-																(element = _ref6.element),
+																((controller = _ref5.controller),
+																(element = _ref5.element),
 																(null !== (_element = element) && void 0 !== _element && _element.selector) ||
 																	((lastRequest = _this.storage.get('lastStringyParams')) &&
 																		((storableRequestParams = getStorableRequestParams(JSON.parse(lastRequest))),
@@ -35341,8 +35317,8 @@
 																(scrollToPosition = function scrollToPosition() {
 																	return new Promise(
 																		(function () {
-																			var _ref8 = SearchController_asyncToGenerator(
-																				SearchController_regeneratorRuntime().mark(function _callee5(resolve) {
+																			var _ref7 = SearchController_asyncToGenerator(
+																				SearchController_regeneratorRuntime().mark(function _callee4(resolve) {
 																					var checkTime,
 																						maxScrolls,
 																						maxCheckCount,
@@ -35351,9 +35327,9 @@
 																						scrolledElem,
 																						checkAndScroll,
 																						_element4;
-																					return SearchController_regeneratorRuntime().wrap(function _callee5$(_context5) {
+																					return SearchController_regeneratorRuntime().wrap(function _callee4$(_context4) {
 																						for (;;)
-																							switch ((_context5.prev = _context5.next)) {
+																							switch ((_context4.prev = _context4.next)) {
 																								case 0:
 																									500,
 																										(checkTime = 50),
@@ -35390,17 +35366,17 @@
 																										});
 																								case 8:
 																									if (!(checkAndScroll() && scrollBackCount <= maxScrolls && checkCount <= maxCheckCount)) {
-																										_context5.next = 13;
+																										_context4.next = 13;
 																										break;
 																									}
 																									return (
-																										(_context5.next = 11),
+																										(_context4.next = 11),
 																										new Promise(function (resolve) {
 																											return setTimeout(resolve, checkTime);
 																										})
 																									);
 																								case 11:
-																									_context5.next = 8;
+																									_context4.next = 8;
 																									break;
 																								case 13:
 																									scrolledElem
@@ -35412,34 +35388,34 @@
 																										resolve();
 																								case 15:
 																								case 'end':
-																									return _context5.stop();
+																									return _context4.stop();
 																							}
-																					}, _callee5);
+																					}, _callee4);
 																				})
 																			);
-																			return function (_x9) {
-																				return _ref8.apply(this, arguments);
+																			return function (_x7) {
+																				return _ref7.apply(this, arguments);
 																			};
 																		})()
 																	);
 																}),
 																!element)
 															) {
-																_context6.next = 6;
+																_context5.next = 6;
 																break;
 															}
-															return (_context6.next = 6), scrollToPosition();
+															return (_context5.next = 6), scrollToPosition();
 														case 6:
-															return (_context6.next = 8), next();
+															return (_context5.next = 8), next();
 														case 8:
 														case 'end':
-															return _context6.stop();
+															return _context5.stop();
 													}
-											}, _callee6);
+											}, _callee5);
 										})
 									);
-									return function (_x7, _x8) {
-										return _ref7.apply(this, arguments);
+									return function (_x5, _x6) {
+										return _ref6.apply(this, arguments);
 									};
 								})()
 							),
@@ -36018,7 +35994,8 @@
 			var RecommendationController_defaultConfig = { id: 'recommend', tag: '', batched: !0, realtime: !1, globals: {} },
 				RecommendationController = (function (_AbstractController) {
 					function RecommendationController(config, _ref, context) {
-						var _this,
+						var _config$settings,
+							_this,
 							getSeed,
 							client = _ref.client,
 							store = _ref.store,
@@ -36422,127 +36399,127 @@
 											for (;;)
 												switch ((_context.prev = _context.next)) {
 													case 0:
-														if (_this.initialized) {
-															_context.next = 3;
+														if (((_context.prev = 0), _this.initialized)) {
+															_context.next = 4;
 															break;
 														}
-														return (_context.next = 3), _this.init();
-													case 3:
+														return (_context.next = 4), _this.init();
+													case 4:
 														return (
 															(params = _this.params),
-															(_context.prev = 4),
-															(_context.prev = 5),
-															(_context.next = 8),
+															(_this.store.loading = !0),
+															(_context.prev = 6),
+															(_context.next = 9),
 															_this.eventManager.fire('beforeSearch', { controller: _this, request: params })
 														);
-													case 8:
-														_context.next = 19;
+													case 9:
+														_context.next = 20;
 														break;
-													case 10:
+													case 11:
 														if (
-															((_context.prev = 10),
-															(_context.t0 = _context.catch(5)),
+															((_context.prev = 11),
+															(_context.t0 = _context.catch(6)),
 															'cancelled' != (null === _context.t0 || void 0 === _context.t0 ? void 0 : _context.t0.message))
 														) {
-															_context.next = 17;
+															_context.next = 18;
 															break;
 														}
 														return _this.log.warn("'beforeSearch' middleware cancelled"), _context.abrupt('return');
-													case 17:
+													case 18:
 														throw (_this.log.error("error in 'beforeSearch' middleware"), _context.t0);
-													case 19:
+													case 20:
 														return (
 															(searchProfile = _this.profiler.create({ type: 'event', name: 'search', context: params }).start()),
-															(_context.next = 22),
+															(_context.next = 23),
 															_this.client.recommend(params)
 														);
-													case 22:
+													case 23:
 														return (
 															(response = _context.sent),
 															searchProfile.stop(),
 															_this.log.profile(searchProfile),
 															(afterSearchProfile = _this.profiler.create({ type: 'event', name: 'afterSearch', context: params }).start()),
-															(_context.prev = 26),
-															(_context.next = 29),
+															(_context.prev = 27),
+															(_context.next = 30),
 															_this.eventManager.fire('afterSearch', { controller: _this, request: params, response })
 														);
-													case 29:
-														_context.next = 41;
+													case 30:
+														_context.next = 42;
 														break;
-													case 31:
+													case 32:
 														if (
-															((_context.prev = 31),
-															(_context.t1 = _context.catch(26)),
+															((_context.prev = 32),
+															(_context.t1 = _context.catch(27)),
 															'cancelled' != (null === _context.t1 || void 0 === _context.t1 ? void 0 : _context.t1.message))
 														) {
-															_context.next = 39;
+															_context.next = 40;
 															break;
 														}
 														return _this.log.warn("'afterSearch' middleware cancelled"), afterSearchProfile.stop(), _context.abrupt('return');
-													case 39:
+													case 40:
 														throw (_this.log.error("error in 'afterSearch' middleware"), _context.t1);
-													case 41:
+													case 42:
 														return (
 															afterSearchProfile.stop(),
 															_this.log.profile(afterSearchProfile),
 															_this.store.update(response),
 															(afterStoreProfile = _this.profiler.create({ type: 'event', name: 'afterStore', context: params }).start()),
-															(_context.prev = 45),
-															(_context.next = 48),
+															(_context.prev = 46),
+															(_context.next = 49),
 															_this.eventManager.fire('afterStore', { controller: _this, request: params, response })
 														);
-													case 48:
-														_context.next = 60;
+													case 49:
+														_context.next = 61;
 														break;
-													case 50:
+													case 51:
 														if (
-															((_context.prev = 50),
-															(_context.t2 = _context.catch(45)),
+															((_context.prev = 51),
+															(_context.t2 = _context.catch(46)),
 															'cancelled' != (null === _context.t2 || void 0 === _context.t2 ? void 0 : _context.t2.message))
 														) {
-															_context.next = 58;
+															_context.next = 59;
 															break;
 														}
 														return _this.log.warn("'afterStore' middleware cancelled"), afterStoreProfile.stop(), _context.abrupt('return');
-													case 58:
+													case 59:
 														throw (_this.log.error("error in 'afterStore' middleware"), _context.t2);
-													case 60:
+													case 61:
 														afterStoreProfile.stop(), _this.log.profile(afterStoreProfile), (_context.next = 85);
 														break;
-													case 64:
-														if (((_context.prev = 64), (_context.t3 = _context.catch(4)), !_context.t3)) {
+													case 65:
+														if (((_context.prev = 65), (_context.t3 = _context.catch(0)), !_context.t3)) {
 															_context.next = 85;
 															break;
 														}
 														if (!_context.t3.err || !_context.t3.fetchDetails) {
-															_context.next = 81;
+															_context.next = 82;
 															break;
 														}
 														(_context.t4 = _context.t3.fetchDetails.status),
-															(_context.next = 429 === _context.t4 ? 71 : 500 === _context.t4 ? 73 : 75);
+															(_context.next = 429 === _context.t4 ? 72 : 500 === _context.t4 ? 74 : 76);
 														break;
-													case 71:
+													case 72:
 														return (
 															(_this.store.error = { code: 429, type: types.B.WARNING, message: 'Too many requests try again later' }),
-															_context.abrupt('break', 77)
+															_context.abrupt('break', 78)
 														);
-													case 73:
+													case 74:
 														return (
 															(_this.store.error = { code: 500, type: types.B.ERROR, message: 'Invalid Search Request or Service Unavailable' }),
-															_context.abrupt('break', 77)
+															_context.abrupt('break', 78)
 														);
-													case 75:
-														return (_this.store.error = { type: types.B.ERROR, message: _context.t3.err.message }), _context.abrupt('break', 77);
-													case 77:
-														_this.log.error(_this.store.error), _this.handleError(_context.t3.err, _context.t3.fetchDetails), (_context.next = 84);
+													case 76:
+														return (_this.store.error = { type: types.B.ERROR, message: _context.t3.err.message }), _context.abrupt('break', 78);
+													case 78:
+														_this.log.error(_this.store.error), _this.handleError(_context.t3.err, _context.t3.fetchDetails), (_context.next = 85);
 														break;
-													case 81:
+													case 82:
 														(_this.store.error = { type: types.B.ERROR, message: 'Something went wrong... - ' + _context.t3 }),
 															_this.log.error(_context.t3),
 															_this.handleError(_context.t3);
-													case 84:
-														_this.store.loading = !1;
 													case 85:
+														return (_context.prev = 85), (_this.store.loading = !1), _context.finish(85);
+													case 88:
 													case 'end':
 														return _context.stop();
 												}
@@ -36550,10 +36527,10 @@
 										_callee,
 										null,
 										[
-											[4, 64],
-											[5, 10],
-											[26, 31],
-											[45, 50],
+											[0, 65, 85, 88],
+											[6, 11],
+											[27, 32],
+											[46, 51],
 										]
 									);
 								})
@@ -36562,19 +36539,39 @@
 						)
 							throw new Error('Invalid config passed to RecommendationController. The "tag" attribute is required.');
 						return (
+							!1 !== (null === (_config$settings = config.settings) || void 0 === _config$settings ? void 0 : _config$settings.searchOnPageShow) &&
+								window.addEventListener('pageshow', function (e) {
+									e.persisted && !_this.store.error && _this.store.loaded && !_this.store.loading && _this.search();
+								}),
 							(_this.config = cjs_default()(RecommendationController_defaultConfig, _this.config)),
 							_this.store.setConfig(_this.config),
 							_this.eventManager.on(
-								'beforeSearch',
+								'afterStore',
 								(function () {
 									var _ref3 = RecommendationController_asyncToGenerator(
 										RecommendationController_regeneratorRuntime().mark(function _callee2(recommend, next) {
+											var _this$store$cart, _this$store$cart2;
 											return RecommendationController_regeneratorRuntime().wrap(function _callee2$(_context2) {
 												for (;;)
 													switch ((_context2.prev = _context2.next)) {
 														case 0:
-															return (recommend.controller.store.loading = !0), (_context2.next = 3), next();
-														case 3:
+															return (_context2.next = 2), next();
+														case 2:
+															null === (_this$store$cart = _this.store.cart) ||
+																void 0 === _this$store$cart ||
+																_this$store$cart.on('addItems', function (_ref4) {
+																	_ref4.items.forEach(function (item) {
+																		_this.track.product.addedToBundle(item);
+																	});
+																}),
+																null === (_this$store$cart2 = _this.store.cart) ||
+																	void 0 === _this$store$cart2 ||
+																	_this$store$cart2.on('removeItems', function (_ref5) {
+																		_ref5.items.forEach(function (item) {
+																			_this.track.product.removedFromBundle(item);
+																		});
+																	});
+														case 4:
 														case 'end':
 															return _context2.stop();
 													}
@@ -36583,45 +36580,6 @@
 									);
 									return function (_x, _x2) {
 										return _ref3.apply(this, arguments);
-									};
-								})()
-							),
-							_this.eventManager.on(
-								'afterStore',
-								(function () {
-									var _ref4 = RecommendationController_asyncToGenerator(
-										RecommendationController_regeneratorRuntime().mark(function _callee3(recommend, next) {
-											var _this$store$cart, _this$store$cart2;
-											return RecommendationController_regeneratorRuntime().wrap(function _callee3$(_context3) {
-												for (;;)
-													switch ((_context3.prev = _context3.next)) {
-														case 0:
-															return (_context3.next = 2), next();
-														case 2:
-															null === (_this$store$cart = _this.store.cart) ||
-																void 0 === _this$store$cart ||
-																_this$store$cart.on('addItems', function (_ref5) {
-																	_ref5.items.forEach(function (item) {
-																		_this.track.product.addedToBundle(item);
-																	});
-																}),
-																null === (_this$store$cart2 = _this.store.cart) ||
-																	void 0 === _this$store$cart2 ||
-																	_this$store$cart2.on('removeItems', function (_ref6) {
-																		_ref6.items.forEach(function (item) {
-																			_this.track.product.removedFromBundle(item);
-																		});
-																	}),
-																(recommend.controller.store.loading = !1);
-														case 5:
-														case 'end':
-															return _context3.stop();
-													}
-											}, _callee3);
-										})
-									);
-									return function (_x3, _x4) {
-										return _ref4.apply(this, arguments);
 									};
 								})()
 							),
@@ -37172,6 +37130,7 @@
 						serializeForm: !1,
 						facets: { trim: !0, pinFiltered: !0 },
 						redirects: { merchandising: !0, singleResult: !1 },
+						bind: { input: !0, submit: !0 },
 					},
 				},
 				AutocompleteController = (function (_AbstractController) {
@@ -37447,6 +37406,7 @@
 										if (((_this.store.state.input || value) && _this.store.state.input != value) || !_this.store.loaded) {
 											if (
 												((_this.store.state.input = value),
+												(_this.store.merchandising.redirect = ''),
 												null !== (_this$config = _this.config) &&
 													void 0 !== _this$config &&
 													null !== (_this$config$settings6 = _this$config.settings) &&
@@ -37574,12 +37534,18 @@
 											for (;;)
 												switch ((_context4.prev = _context4.next)) {
 													case 0:
+														if (((_context4.prev = 0), _this.initialized)) {
+															_context4.next = 4;
+															break;
+														}
+														return (_context4.next = 4), _this.init();
+													case 4:
 														if (_this.urlManager.state.query) {
-															_context4.next = 2;
+															_context4.next = 6;
 															break;
 														}
 														return _context4.abrupt('return');
-													case 2:
+													case 6:
 														if (
 															null != (params = _this.params) &&
 															null !== (_params$search = params.search) &&
@@ -37588,39 +37554,39 @@
 															void 0 !== _params$search$query &&
 															_params$search$query.string
 														) {
-															_context4.next = 5;
+															_context4.next = 9;
 															break;
 														}
 														return _context4.abrupt('return');
-													case 5:
+													case 9:
 														return (
-															(_context4.prev = 5),
-															(_context4.prev = 6),
-															(_context4.next = 9),
+															(_this.store.loading = !0),
+															(_context4.prev = 10),
+															(_context4.next = 13),
 															_this.eventManager.fire('beforeSearch', { controller: _this, request: params })
 														);
-													case 9:
-														_context4.next = 20;
+													case 13:
+														_context4.next = 24;
 														break;
-													case 11:
+													case 15:
 														if (
-															((_context4.prev = 11),
-															(_context4.t0 = _context4.catch(6)),
+															((_context4.prev = 15),
+															(_context4.t0 = _context4.catch(10)),
 															'cancelled' != (null === _context4.t0 || void 0 === _context4.t0 ? void 0 : _context4.t0.message))
 														) {
-															_context4.next = 18;
+															_context4.next = 22;
 															break;
 														}
 														return _this.log.warn("'beforeSearch' middleware cancelled"), _context4.abrupt('return');
-													case 18:
+													case 22:
 														throw (_this.log.error("error in 'beforeSearch' middleware"), _context4.t0);
-													case 20:
+													case 24:
 														return (
 															(searchProfile = _this.profiler.create({ type: 'event', name: 'search', context: params }).start()),
-															(_context4.next = 23),
+															(_context4.next = 27),
 															_this.client.autocomplete(params)
 														);
-													case 23:
+													case 27:
 														return (
 															(_yield$_this$client$a = _context4.sent),
 															(_yield$_this$client$a2 = AutocompleteController_slicedToArray(_yield$_this$client$a, 2)),
@@ -37629,87 +37595,87 @@
 															searchProfile.stop(),
 															_this.log.profile(searchProfile),
 															(afterSearchProfile = _this.profiler.create({ type: 'event', name: 'afterSearch', context: params }).start()),
-															(_context4.prev = 31),
-															(_context4.next = 34),
+															(_context4.prev = 35),
+															(_context4.next = 38),
 															_this.eventManager.fire('afterSearch', { controller: _this, request: params, response })
 														);
-													case 34:
-														_context4.next = 46;
+													case 38:
+														_context4.next = 50;
 														break;
-													case 36:
+													case 40:
 														if (
-															((_context4.prev = 36),
-															(_context4.t1 = _context4.catch(31)),
+															((_context4.prev = 40),
+															(_context4.t1 = _context4.catch(35)),
 															'cancelled' != (null === _context4.t1 || void 0 === _context4.t1 ? void 0 : _context4.t1.message))
 														) {
-															_context4.next = 44;
+															_context4.next = 48;
 															break;
 														}
 														return _this.log.warn("'afterSearch' middleware cancelled"), afterSearchProfile.stop(), _context4.abrupt('return');
-													case 44:
+													case 48:
 														throw (_this.log.error("error in 'afterSearch' middleware"), _context4.t1);
-													case 46:
+													case 50:
 														return (
 															afterSearchProfile.stop(),
 															_this.log.profile(afterSearchProfile),
 															_this.store.update(response),
 															(afterStoreProfile = _this.profiler.create({ type: 'event', name: 'afterStore', context: params }).start()),
-															(_context4.prev = 50),
-															(_context4.next = 53),
+															(_context4.prev = 54),
+															(_context4.next = 57),
 															_this.eventManager.fire('afterStore', { controller: _this, request: params, response })
 														);
-													case 53:
-														_context4.next = 65;
+													case 57:
+														_context4.next = 69;
 														break;
-													case 55:
+													case 59:
 														if (
-															((_context4.prev = 55),
-															(_context4.t2 = _context4.catch(50)),
+															((_context4.prev = 59),
+															(_context4.t2 = _context4.catch(54)),
 															'cancelled' != (null === _context4.t2 || void 0 === _context4.t2 ? void 0 : _context4.t2.message))
 														) {
-															_context4.next = 63;
+															_context4.next = 67;
 															break;
 														}
 														return _this.log.warn("'afterStore' middleware cancelled"), afterStoreProfile.stop(), _context4.abrupt('return');
-													case 63:
+													case 67:
 														throw (_this.log.error("error in 'afterStore' middleware"), _context4.t2);
-													case 65:
-														afterStoreProfile.stop(), _this.log.profile(afterStoreProfile), (_context4.next = 90);
-														break;
 													case 69:
-														if (((_context4.prev = 69), (_context4.t3 = _context4.catch(5)), !_context4.t3)) {
-															_context4.next = 90;
+														afterStoreProfile.stop(), _this.log.profile(afterStoreProfile), (_context4.next = 93);
+														break;
+													case 73:
+														if (((_context4.prev = 73), (_context4.t3 = _context4.catch(0)), !_context4.t3)) {
+															_context4.next = 93;
 															break;
 														}
 														if (!_context4.t3.err || !_context4.t3.fetchDetails) {
-															_context4.next = 86;
+															_context4.next = 90;
 															break;
 														}
 														(_context4.t4 = _context4.t3.fetchDetails.status),
-															(_context4.next = 429 === _context4.t4 ? 76 : 500 === _context4.t4 ? 78 : 80);
+															(_context4.next = 429 === _context4.t4 ? 80 : 500 === _context4.t4 ? 82 : 84);
 														break;
-													case 76:
+													case 80:
 														return (
 															(_this.store.error = { code: 429, type: types.B.WARNING, message: 'Too many requests try again later' }),
-															_context4.abrupt('break', 82)
+															_context4.abrupt('break', 86)
 														);
-													case 78:
+													case 82:
 														return (
 															(_this.store.error = { code: 500, type: types.B.ERROR, message: 'Invalid Search Request or Service Unavailable' }),
-															_context4.abrupt('break', 82)
+															_context4.abrupt('break', 86)
 														);
-													case 80:
-														return (_this.store.error = { type: types.B.ERROR, message: _context4.t3.err.message }), _context4.abrupt('break', 82);
-													case 82:
-														_this.log.error(_this.store.error), _this.handleError(_context4.t3.err, _context4.t3.fetchDetails), (_context4.next = 89);
-														break;
+													case 84:
+														return (_this.store.error = { type: types.B.ERROR, message: _context4.t3.err.message }), _context4.abrupt('break', 86);
 													case 86:
+														_this.log.error(_this.store.error), _this.handleError(_context4.t3.err, _context4.t3.fetchDetails), (_context4.next = 93);
+														break;
+													case 90:
 														(_this.store.error = { type: types.B.ERROR, message: 'Something went wrong... - ' + _context4.t3 }),
 															_this.log.error(_context4.t3),
 															_this.handleError(_context4.t3);
-													case 89:
-														_this.store.loading = !1;
-													case 90:
+													case 93:
+														return (_context4.prev = 93), (_this.store.loading = !1), _context4.finish(93);
+													case 96:
 													case 'end':
 														return _context4.stop();
 												}
@@ -37717,10 +37683,10 @@
 										_callee4,
 										null,
 										[
-											[5, 69],
-											[6, 11],
-											[31, 36],
-											[50, 55],
+											[0, 73, 93, 96],
+											[10, 15],
+											[35, 40],
+											[54, 59],
 										]
 									);
 								})
@@ -37730,7 +37696,7 @@
 							_this.config.settings.initializeFromUrl && ((_this.store.state.input = _this.urlManager.state.query), _this.urlManager.reset().go()),
 							(_this.storage = new StorageStore({ type: 'session', key: 'ss-controller-' + _this.config.id })),
 							_this.eventManager.on(
-								'beforeSearch',
+								'afterSearch',
 								(function () {
 									var _ref4 = AutocompleteController_asyncToGenerator(
 										AutocompleteController_regeneratorRuntime().mark(function _callee5(ac, next) {
@@ -37738,8 +37704,14 @@
 												for (;;)
 													switch ((_context5.prev = _context5.next)) {
 														case 0:
-															return (ac.controller.store.loading = !0), (_context5.next = 3), next();
-														case 3:
+															return (_context5.next = 2), next();
+														case 2:
+															if (ac.response.autocomplete.query == ac.controller.urlManager.state.query) {
+																_context5.next = 4;
+																break;
+															}
+															return _context5.abrupt('return', !1);
+														case 4:
 														case 'end':
 															return _context5.stop();
 													}
@@ -37752,62 +37724,10 @@
 								})()
 							),
 							_this.eventManager.on(
-								'afterSearch',
+								'beforeSubmit',
 								(function () {
 									var _ref5 = AutocompleteController_asyncToGenerator(
 										AutocompleteController_regeneratorRuntime().mark(function _callee6(ac, next) {
-											return AutocompleteController_regeneratorRuntime().wrap(function _callee6$(_context6) {
-												for (;;)
-													switch ((_context6.prev = _context6.next)) {
-														case 0:
-															return (_context6.next = 2), next();
-														case 2:
-															if (ac.response.autocomplete.query == ac.controller.urlManager.state.query) {
-																_context6.next = 5;
-																break;
-															}
-															return (ac.controller.store.loading = !1), _context6.abrupt('return', !1);
-														case 5:
-														case 'end':
-															return _context6.stop();
-													}
-											}, _callee6);
-										})
-									);
-									return function (_x5, _x6) {
-										return _ref5.apply(this, arguments);
-									};
-								})()
-							),
-							_this.eventManager.on(
-								'afterStore',
-								(function () {
-									var _ref6 = AutocompleteController_asyncToGenerator(
-										AutocompleteController_regeneratorRuntime().mark(function _callee7(ac, next) {
-											return AutocompleteController_regeneratorRuntime().wrap(function _callee7$(_context7) {
-												for (;;)
-													switch ((_context7.prev = _context7.next)) {
-														case 0:
-															return (_context7.next = 2), next();
-														case 2:
-															ac.controller.store.loading = !1;
-														case 3:
-														case 'end':
-															return _context7.stop();
-													}
-											}, _callee7);
-										})
-									);
-									return function (_x7, _x8) {
-										return _ref6.apply(this, arguments);
-									};
-								})()
-							),
-							_this.eventManager.on(
-								'beforeSubmit',
-								(function () {
-									var _ref7 = AutocompleteController_asyncToGenerator(
-										AutocompleteController_regeneratorRuntime().mark(function _callee8(ac, next) {
 											var _ac$controller$store$,
 												_this$config2,
 												_this$config2$setting,
@@ -37819,11 +37739,11 @@
 												_results$0$mappings$c,
 												results,
 												singleResultUrl;
-											return AutocompleteController_regeneratorRuntime().wrap(function _callee8$(_context8) {
+											return AutocompleteController_regeneratorRuntime().wrap(function _callee6$(_context6) {
 												for (;;)
-													switch ((_context8.prev = _context8.next)) {
+													switch ((_context6.prev = _context6.next)) {
 														case 0:
-															return (_context8.next = 2), next();
+															return (_context6.next = 2), next();
 														case 2:
 															if (
 																!(redirectURL =
@@ -37838,10 +37758,10 @@
 																void 0 === _this$config2$setting2 ||
 																!_this$config2$setting2.merchandising
 															) {
-																_context8.next = 6;
+																_context6.next = 6;
 																break;
 															}
-															return (window.location.href = redirectURL), _context8.abrupt('return', !1);
+															return (window.location.href = redirectURL), _context6.abrupt('return', !1);
 														case 6:
 															if (
 																null === (_this$config3 = _this.config) ||
@@ -37852,7 +37772,7 @@
 																void 0 === _this$config3$setting2 ||
 																!_this$config3$setting2.singleResult
 															) {
-																_context8.next = 12;
+																_context6.next = 12;
 																break;
 															}
 															if (
@@ -37864,19 +37784,19 @@
 																		? void 0
 																		: _results$0$mappings$c.url)))
 															) {
-																_context8.next = 12;
+																_context6.next = 12;
 																break;
 															}
-															return (window.location.href = singleResultUrl), _context8.abrupt('return', !1);
+															return (window.location.href = singleResultUrl), _context6.abrupt('return', !1);
 														case 12:
 														case 'end':
-															return _context8.stop();
+															return _context6.stop();
 													}
-											}, _callee8);
+											}, _callee6);
 										})
 									);
-									return function (_x9, _x10) {
-										return _ref7.apply(this, arguments);
+									return function (_x5, _x6) {
+										return _ref5.apply(this, arguments);
 									};
 								})()
 							),
@@ -37939,52 +37859,52 @@
 								key: 'setFocused',
 								value:
 									((_setFocused = AutocompleteController_asyncToGenerator(
-										AutocompleteController_regeneratorRuntime().mark(function _callee9(inputElement) {
+										AutocompleteController_regeneratorRuntime().mark(function _callee7(inputElement) {
 											return AutocompleteController_regeneratorRuntime().wrap(
-												function _callee9$(_context9) {
+												function _callee7$(_context7) {
 													for (;;)
-														switch ((_context9.prev = _context9.next)) {
+														switch ((_context7.prev = _context7.next)) {
 															case 0:
 																if (this.store.state.focusedInput === inputElement) {
-																	_context9.next = 21;
+																	_context7.next = 21;
 																	break;
 																}
 																return (
 																	(this.store.state.focusedInput = inputElement),
-																	(_context9.prev = 2),
-																	(_context9.prev = 3),
-																	(_context9.next = 6),
+																	(_context7.prev = 2),
+																	(_context7.prev = 3),
+																	(_context7.next = 6),
 																	this.eventManager.fire('focusChange', { controller: this })
 																);
 															case 6:
-																_context9.next = 16;
+																_context7.next = 16;
 																break;
 															case 8:
 																if (
-																	((_context9.prev = 8),
-																	(_context9.t0 = _context9.catch(3)),
-																	'cancelled' != (null === _context9.t0 || void 0 === _context9.t0 ? void 0 : _context9.t0.message))
+																	((_context7.prev = 8),
+																	(_context7.t0 = _context7.catch(3)),
+																	'cancelled' != (null === _context7.t0 || void 0 === _context7.t0 ? void 0 : _context7.t0.message))
 																) {
-																	_context9.next = 14;
+																	_context7.next = 14;
 																	break;
 																}
-																this.log.warn("'focusChange' middleware cancelled"), (_context9.next = 16);
+																this.log.warn("'focusChange' middleware cancelled"), (_context7.next = 16);
 																break;
 															case 14:
-																throw (this.log.error("error in 'focusChange' middleware"), _context9.t0);
+																throw (this.log.error("error in 'focusChange' middleware"), _context7.t0);
 															case 16:
-																_context9.next = 21;
+																_context7.next = 21;
 																break;
 															case 18:
-																(_context9.prev = 18), (_context9.t1 = _context9.catch(2)), _context9.t1 && console.error(_context9.t1);
+																(_context7.prev = 18), (_context7.t1 = _context7.catch(2)), _context7.t1 && console.error(_context7.t1);
 															case 21:
 																null == inputElement || inputElement.dispatchEvent(new Event('input'));
 															case 22:
 															case 'end':
-																return _context9.stop();
+																return _context7.stop();
 														}
 												},
-												_callee9,
+												_callee7,
 												this,
 												[
 													[2, 18],
@@ -37993,7 +37913,7 @@
 											);
 										})
 									)),
-									function setFocused(_x11) {
+									function setFocused(_x7) {
 										return _setFocused.apply(this, arguments);
 									}),
 							},
@@ -38034,7 +37954,7 @@
 								key: 'bind',
 								value:
 									((_bind = AutocompleteController_asyncToGenerator(
-										AutocompleteController_regeneratorRuntime().mark(function _callee10() {
+										AutocompleteController_regeneratorRuntime().mark(function _callee8() {
 											var _this$config$settings13,
 												_this$config$settings14,
 												_this$config$settings15,
@@ -38043,47 +37963,65 @@
 												_this$config$settings17,
 												_this3 = this;
 											return AutocompleteController_regeneratorRuntime().wrap(
-												function _callee10$(_context10) {
+												function _callee8$(_context8) {
 													for (;;)
-														switch ((_context10.prev = _context10.next)) {
+														switch ((_context8.prev = _context8.next)) {
 															case 0:
 																if (this.initialized) {
-																	_context10.next = 3;
+																	_context8.next = 3;
 																	break;
 																}
-																return (_context10.next = 3), this.init();
+																return (_context8.next = 3), this.init();
 															case 3:
 																this.unbind(),
 																	document.querySelectorAll(this.config.selector).forEach(function (input) {
-																		var _this3$config, _this3$config$setting;
+																		var _this3$config$setting, _this3$config$setting2, _this3$config, _this3$config$setting3;
 																		input.setAttribute('spellcheck', 'false'),
 																			input.setAttribute('autocomplete', 'off'),
 																			input.setAttribute('autocorrect', 'off'),
 																			input.setAttribute('autocapitalize', 'none'),
 																			input.setAttribute('ss-autocomplete-input', ''),
-																			input.addEventListener('input', _this3.handlers.input.input),
+																			(null === (_this3$config$setting = _this3.config.settings) ||
+																			void 0 === _this3$config$setting ||
+																			null === (_this3$config$setting2 = _this3$config$setting.bind) ||
+																			void 0 === _this3$config$setting2
+																				? void 0
+																				: _this3$config$setting2.input) && input.addEventListener('input', _this3.handlers.input.input),
 																			null !== (_this3$config = _this3.config) &&
 																				void 0 !== _this3$config &&
-																				null !== (_this3$config$setting = _this3$config.settings) &&
-																				void 0 !== _this3$config$setting &&
-																				_this3$config$setting.initializeFromUrl &&
+																				null !== (_this3$config$setting3 = _this3$config.settings) &&
+																				void 0 !== _this3$config$setting3 &&
+																				_this3$config$setting3.initializeFromUrl &&
 																				!input.value &&
 																				_this3.store.state.input &&
 																				(input.value = _this3.store.state.input),
 																			input.addEventListener('focus', _this3.handlers.input.focus),
 																			input.addEventListener('keydown', _this3.handlers.input.escKey);
 																		var formActionUrl,
+																			_this3$config$setting4,
+																			_this3$config$setting5,
 																			form = input.form;
 																		if (_this3.config.action)
-																			input.addEventListener('keydown', _this3.handlers.input.enterKey), (formActionUrl = _this3.config.action);
+																			(null === (_this3$config$setting4 = _this3.config.settings) ||
+																			void 0 === _this3$config$setting4 ||
+																			null === (_this3$config$setting5 = _this3$config$setting4.bind) ||
+																			void 0 === _this3$config$setting5
+																				? void 0
+																				: _this3$config$setting5.submit) && input.addEventListener('keydown', _this3.handlers.input.enterKey),
+																				(formActionUrl = _this3.config.action);
 																		else if (form) {
-																			var _this3$config$setting2;
+																			var _this3$config$setting6, _this3$config$setting7, _this3$config$setting8;
 																			if (
-																				(form.addEventListener('submit', _this3.handlers.input.formSubmit),
+																				((null === (_this3$config$setting6 = _this3.config.settings) ||
+																				void 0 === _this3$config$setting6 ||
+																				null === (_this3$config$setting7 = _this3$config$setting6.bind) ||
+																				void 0 === _this3$config$setting7
+																					? void 0
+																					: _this3$config$setting7.submit) && form.addEventListener('submit', _this3.handlers.input.formSubmit),
 																				(formActionUrl = form.action || ''),
-																				null !== (_this3$config$setting2 = _this3.config.settings) &&
-																					void 0 !== _this3$config$setting2 &&
-																					_this3$config$setting2.serializeForm)
+																				null !== (_this3$config$setting8 = _this3.config.settings) &&
+																					void 0 !== _this3$config$setting8 &&
+																					_this3$config$setting8.serializeForm)
 																			) {
 																				bindFormParameters(form, _this3.handlers.input.formElementChange, function (elem) {
 																					return elem != input;
@@ -38124,10 +38062,10 @@
 																		document.addEventListener('click', this.handlers.document.click);
 															case 8:
 															case 'end':
-																return _context10.stop();
+																return _context8.stop();
 														}
 												},
-												_callee10,
+												_callee8,
 												this
 											);
 										})
@@ -38151,17 +38089,17 @@
 						_form$querySelector.remove(),
 					form.append(inputElem);
 			}
-			function timeout(_x12) {
+			function timeout(_x8) {
 				return _timeout.apply(this, arguments);
 			}
 			function _timeout() {
 				return (_timeout = AutocompleteController_asyncToGenerator(
-					AutocompleteController_regeneratorRuntime().mark(function _callee11(time) {
-						return AutocompleteController_regeneratorRuntime().wrap(function _callee11$(_context11) {
+					AutocompleteController_regeneratorRuntime().mark(function _callee9(time) {
+						return AutocompleteController_regeneratorRuntime().wrap(function _callee9$(_context9) {
 							for (;;)
-								switch ((_context11.prev = _context11.next)) {
+								switch ((_context9.prev = _context9.next)) {
 									case 0:
-										return _context11.abrupt(
+										return _context9.abrupt(
 											'return',
 											new Promise(function (resolve) {
 												window.setTimeout(resolve, time);
@@ -38169,9 +38107,9 @@
 										);
 									case 1:
 									case 'end':
-										return _context11.stop();
+										return _context9.stop();
 								}
-						}, _callee11);
+						}, _callee9);
 					})
 				)).apply(this, arguments);
 			}
@@ -40993,7 +40931,7 @@
 								return -1 == CORE_FIELDS.indexOf(k);
 							})
 							.filter(function (k) {
-								return !('badges' == k && 'object' == typeof rawResult[k]);
+								return !('badges' == k && 'object' == typeof rawResult[k] && !Array.isArray(rawResult[k]));
 							})
 							.reduce(function (attributes, key) {
 								var _Object$assign2;
@@ -41017,7 +40955,7 @@
 						id: rawResult.uid,
 						mappings: { core: coreFieldValues },
 						attributes,
-						badges: 'object' == typeof rawResult.badges ? rawResult.badges : [],
+						badges: 'object' != typeof rawResult.badges || Array.isArray(rawResult.badges) ? [] : rawResult.badges,
 						children,
 					});
 				}),
@@ -48674,19 +48612,26 @@
 											return v;
 										})
 										.map(function (kvPair) {
-											var _kvPair$split$map2 = UrlTranslator_slicedToArray(
-													kvPair.split('=').map(function (v) {
-														return decodeURIComponent(v.replace(/\+/g, ' '));
-													}),
-													2
-												),
-												key = _kvPair$split$map2[0],
-												value = _kvPair$split$map2[1];
-											return { key: key.split('.'), value, type: ParamLocationType.query };
+											try {
+												var _kvPair$split$map2 = UrlTranslator_slicedToArray(
+														kvPair.split('=').map(function (v) {
+															return decodeURIComponent(v.replace(/\+/g, ' '));
+														}),
+														2
+													),
+													key = _kvPair$split$map2[0],
+													value = _kvPair$split$map2[1];
+												return { key: key.split('.'), value, type: ParamLocationType.query };
+											} catch (err) {
+												return (
+													console.warn('Snap UrlTranslator: URI malformed - ignoring parameter', kvPair),
+													{ key: ['ss__delete'], value: 'ss__delete', type: ParamLocationType.query }
+												);
+											}
 										})
 										.filter(function (param) {
 											var isCoreField = _this2.reverseMapping[param.key[0]];
-											return !isCoreField || (isCoreField && param.value);
+											return 'ss__delete' !== param.value ? !isCoreField || (isCoreField && param.value) : '';
 										});
 								},
 							},
@@ -48696,19 +48641,23 @@
 									var _this3 = this,
 										params = [];
 									return (
-										(hashString.split('#').join('/') || '')
+										(hashString.split('#').pop() || '')
 											.split('/')
 											.filter(function (v) {
 												return v;
 											})
 											.map(function (hashEntries) {
-												return hashEntries.split(':').map(function (v) {
-													return (function decodeHashComponent(string) {
-														'string' == typeof string &&
-															((string = (string = string.replace(/%2425/g, '$$25')).replace(/\$25/g, '%')), (string = decodeURIComponent(string)));
-														return string;
-													})(v);
-												});
+												try {
+													return hashEntries.split(':').map(function (v) {
+														return (function decodeHashComponent(string) {
+															'string' == typeof string &&
+																((string = (string = string.replace(/%2425/g, '$$25')).replace(/\$25/g, '%')), (string = decodeURIComponent(string)));
+															return string;
+														})(v);
+													});
+												} catch (err) {
+													return console.warn('Snap UrlTranslator: URI malformed - ignoring parameter', hashEntries), [];
+												}
 											})
 											.filter(function (param) {
 												var _param = UrlTranslator_slicedToArray(param, 2),
@@ -49723,7 +49672,7 @@
 					(this.event = payload.event),
 					(this.id = payload.id),
 					(this.pid = payload.pid),
-					(this.meta = { initiator: { lib: 'searchspring/snap', 'lib.version': '0.61.5', 'lib.framework': config.framework } }),
+					(this.meta = { initiator: { lib: 'searchspring/snap', 'lib.version': '0.62.0', 'lib.framework': config.framework } }),
 					(this.id = (0, v4.A)());
 			});
 			function Tracker_toConsumableArray(arr) {
@@ -49915,9 +49864,7 @@
 														(null == data ? void 0 : data.uid);
 													if (sku) {
 														var lastViewedProducts = _this.cookies.viewed.get(),
-															uniqueCartItems = Array.from(new Set([].concat(Tracker_toConsumableArray(lastViewedProducts), [sku]))).map(function (
-																item
-															) {
+															uniqueCartItems = Array.from(new Set([sku].concat(Tracker_toConsumableArray(lastViewedProducts)))).map(function (item) {
 																return ('' + item).trim();
 															});
 														cookies.set('ssViewedProducts', uniqueCartItems.slice(0, 20).join(','), 'Lax', 220752e6, COOKIE_DOMAIN),
@@ -50279,7 +50226,7 @@
 									_this$globals$currenc.code &&
 									(this.context.currency = this.globals.currency),
 								(null !== (_window$searchspring = window.searchspring) && void 0 !== _window$searchspring && _window$searchspring.tracker) ||
-									((window.searchspring = window.searchspring || {}), (window.searchspring.tracker = this), (window.searchspring.version = '0.61.5')),
+									((window.searchspring = window.searchspring || {}), (window.searchspring.tracker = this), (window.searchspring.version = '0.62.0')),
 								setTimeout(function () {
 									_this.targeters.push(
 										new DomTargeter([{ selector: 'script[type^="searchspring/track/"]', emptyTarget: !1 }], function (target, elem) {
@@ -50287,6 +50234,7 @@
 													var _scriptElem$getAttrib,
 														_scriptElem$id,
 														_scriptElem$src,
+														_scriptInnerHTML$matc,
 														evaluate = arguments.length > 0 && void 0 !== arguments[0] ? arguments[0] : [],
 														script = arguments.length > 1 ? arguments[1] : void 0;
 													if (
@@ -50329,11 +50277,23 @@
 														var name = attr.nodeName;
 														evaluate.includes(name) && (attributeVariables[name] = scriptElem.getAttribute(name));
 													});
-													var scriptVariables = {};
+													var scriptVariables = {},
+														scriptInnerHTML = scriptElem.innerHTML,
+														scriptInnerVars =
+															null === (_scriptInnerHTML$matc = scriptInnerHTML.match(/([a-zA-Z_$][a-zA-Z_$0-9]*)\s?=/g)) ||
+															void 0 === _scriptInnerHTML$matc
+																? void 0
+																: _scriptInnerHTML$matc.map(function (match) {
+																		return match.replace(/[\s=]/g, '');
+																  }),
+														combinedVars = evaluate.concat(scriptInnerVars || []),
+														evaluateVars = combinedVars.filter(function (item, index) {
+															return combinedVars.indexOf(item) === index;
+														});
 													null == evaluate ||
 														evaluate.forEach(function (name) {
 															var fn = new Function(
-																'\n\t\t\tvar ' + evaluate.join(', ') + ';\n\t\t\t' + scriptElem.innerHTML + '\n\t\t\treturn ' + name + ';\n\t\t'
+																'\n\t\t\tvar ' + evaluateVars.join(', ') + ';\n\t\t\t' + scriptInnerHTML + '\n\t\t\treturn ' + name + ';\n\t\t'
 															);
 															scriptVariables[name] = fn();
 														});
