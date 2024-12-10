@@ -9,7 +9,7 @@ import type { ProductViewEvent } from '@searchspring/snap-tracker';
 import type { RecommendationStore } from '@searchspring/snap-store-mobx';
 import type { Next } from '@searchspring/snap-event-manager';
 import type { RecommendRequestModel } from '@searchspring/snap-client';
-import type { RecommendationControllerConfig, BeforeSearchObj, AfterStoreObj, ControllerServices, ContextVariables } from '../types';
+import type { RecommendationControllerConfig, AfterStoreObj, ControllerServices, ContextVariables } from '../types';
 
 type RecommendationTrackMethods = {
 	product: {
@@ -61,16 +61,19 @@ export class RecommendationController extends AbstractController {
 			throw new Error(`Invalid config passed to RecommendationController. The "tag" attribute is required.`);
 		}
 
+		// attach to bfCache restore event and re-run search on the controller
+		// enabled by default
+		if (config.settings?.searchOnPageShow !== false) {
+			window.addEventListener('pageshow', (e) => {
+				if (e.persisted && !this.store.error && this.store.loaded && !this.store.loading) {
+					this.search();
+				}
+			});
+		}
+
 		// deep merge config with defaults
 		this.config = deepmerge(defaultConfig, this.config);
 		this.store.setConfig(this.config);
-
-		// add 'beforeSearch' middleware
-		this.eventManager.on('beforeSearch', async (recommend: BeforeSearchObj, next: Next): Promise<void | boolean> => {
-			recommend.controller.store.loading = true;
-
-			await next();
-		});
 
 		// add 'afterStore' middleware
 		this.eventManager.on('afterStore', async (recommend: AfterStoreObj, next: Next): Promise<void | boolean> => {
@@ -88,8 +91,6 @@ export class RecommendationController extends AbstractController {
 					this.track.product.removedFromBundle(item);
 				});
 			});
-
-			recommend.controller.store.loading = false;
 		});
 
 		// attach config plugins and event middleware
@@ -424,13 +425,15 @@ export class RecommendationController extends AbstractController {
 	}
 
 	search = async (): Promise<void> => {
-		if (!this.initialized) {
-			await this.init();
-		}
-
-		const params = this.params;
-
 		try {
+			if (!this.initialized) {
+				await this.init();
+			}
+
+			const params = this.params;
+
+			this.store.loading = true;
+
 			try {
 				await this.eventManager.fire('beforeSearch', {
 					controller: this,
@@ -539,8 +542,9 @@ export class RecommendationController extends AbstractController {
 					this.log.error(err);
 					this.handleError(err);
 				}
-				this.store.loading = false;
 			}
+		} finally {
+			this.store.loading = false;
 		}
 	};
 }

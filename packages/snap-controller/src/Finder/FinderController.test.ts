@@ -152,6 +152,34 @@ describe('Finder Controller', () => {
 				});
 			});
 
+			it(`sets proper loading states`, async function () {
+				const controller = new FinderController(config, {
+					client: new MockClient(globals, {}),
+					store: new FinderStore(config, services),
+					urlManager,
+					eventManager: new EventManager(),
+					profiler: new Profiler(),
+					logger: new Logger(),
+					tracker: new Tracker(globals),
+				});
+
+				// calling init to ensure event timings line up for asserting loading and loaded states
+				await controller.init();
+
+				expect(controller.store.loaded).toBe(false);
+				expect(controller.store.loading).toBe(false);
+
+				const searchPromise = controller.search();
+
+				expect(controller.store.loaded).toBe(false);
+				expect(controller.store.loading).toBe(true);
+
+				await searchPromise;
+
+				expect(controller.store.loaded).toBe(true);
+				expect(controller.store.loading).toBe(false);
+			});
+
 			it(`sets root URL params`, async () => {
 				config.url = '/search/accessories';
 				const controller = new FinderController(config, {

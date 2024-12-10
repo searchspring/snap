@@ -124,6 +124,10 @@ export type AutocompleteStoreConfigSettings = {
 		merchandising?: boolean;
 		singleResult?: boolean;
 	};
+	bind?: {
+		input?: boolean;
+		submit?: boolean;
+	};
 };
 
 // Autocomplete config
@@ -145,6 +149,7 @@ export type RecommendationStoreConfig = StoreConfig & {
 	batchId?: number;
 	settings?: {
 		variants?: VariantConfig;
+		searchOnPageShow: boolean;
 	};
 };
 
