@@ -6,7 +6,7 @@ import { getSearchParams } from '../utils/getParams';
 import { ControllerTypes } from '../types';
 
 import { AutocompleteStore } from '@searchspring/snap-store-mobx';
-import type { AutocompleteControllerConfig, BeforeSearchObj, AfterSearchObj, AfterStoreObj, ControllerServices, ContextVariables } from '../types';
+import type { AutocompleteControllerConfig, AfterSearchObj, AfterStoreObj, ControllerServices, ContextVariables } from '../types';
 import type { Next } from '@searchspring/snap-event-manager';
 import type { AutocompleteRequestModel } from '@searchspring/snapi-types';
 
@@ -34,6 +34,10 @@ const defaultConfig: AutocompleteControllerConfig = {
 		redirects: {
 			merchandising: true,
 			singleResult: false,
+		},
+		bind: {
+			input: true,
+			submit: true,
 		},
 	},
 };
@@ -76,29 +80,14 @@ export class AutocompleteController extends AbstractController {
 			key: `ss-controller-${this.config.id}`,
 		});
 
-		// add 'beforeSearch' middleware
-		this.eventManager.on('beforeSearch', async (ac: BeforeSearchObj, next: Next): Promise<void | boolean> => {
-			ac.controller.store.loading = true;
-
-			await next();
-		});
-
 		// add 'afterSearch' middleware
 		this.eventManager.on('afterSearch', async (ac: AfterSearchObj, next: Next): Promise<void | boolean> => {
 			await next();
 
 			// cancel search if no input or query doesn't match current urlState
 			if (ac.response.autocomplete.query != ac.controller.urlManager.state.query) {
-				ac.controller.store.loading = false;
 				return false;
 			}
-		});
-
-		// add 'afterStore' middleware
-		this.eventManager.on('afterStore', async (ac: AfterStoreObj, next: Next): Promise<void | boolean> => {
-			await next();
-
-			ac.controller.store.loading = false;
 		});
 
 		this.eventManager.on('beforeSubmit', async (ac: AfterStoreObj, next: Next): Promise<void | boolean> => {
@@ -363,6 +352,9 @@ export class AutocompleteController extends AbstractController {
 
 				this.store.state.input = value;
 
+				// remove merch redirect to prevent race condition
+				this.store.merchandising.redirect = '';
+
 				if (this.config?.settings?.syncInputs) {
 					const inputs = document.querySelectorAll(this.config.selector);
 					inputs.forEach((input) => {
@@ -445,7 +437,7 @@ export class AutocompleteController extends AbstractController {
 
 			input.setAttribute(INPUT_ATTRIBUTE, '');
 
-			input.addEventListener('input', this.handlers.input.input);
+			this.config.settings?.bind?.input && input.addEventListener('input', this.handlers.input.input);
 
 			if (this.config?.settings?.initializeFromUrl && !input.value && this.store.state.input) {
 				input.value = this.store.state.input;
@@ -458,10 +450,10 @@ export class AutocompleteController extends AbstractController {
 			let formActionUrl: string | undefined;
 
 			if (this.config.action) {
-				input.addEventListener('keydown', this.handlers.input.enterKey);
+				this.config.settings?.bind?.submit && input.addEventListener('keydown', this.handlers.input.enterKey);
 				formActionUrl = this.config.action;
 			} else if (form) {
-				form.addEventListener('submit', this.handlers.input.formSubmit as unknown as EventListener);
+				this.config.settings?.bind?.submit && form.addEventListener('submit', this.handlers.input.formSubmit as unknown as EventListener);
 				formActionUrl = form.action || '';
 
 				// serializeForm will include additional form element in our urlManager as globals
@@ -536,19 +528,25 @@ export class AutocompleteController extends AbstractController {
 	};
 
 	search = async (): Promise<void> => {
-		// if urlManager has no query, there will be no need to get params and no query
-		if (!this.urlManager.state.query) {
-			return;
-		}
-
-		const params = this.params;
-
-		// if params have no query do not search
-		if (!params?.search?.query?.string) {
-			return;
-		}
-
 		try {
+			if (!this.initialized) {
+				await this.init();
+			}
+
+			// if urlManager has no query, there will be no need to get params and no query
+			if (!this.urlManager.state.query) {
+				return;
+			}
+
+			const params = this.params;
+
+			// if params have no query do not search
+			if (!params?.search?.query?.string) {
+				return;
+			}
+
+			this.store.loading = true;
+
 			try {
 				await this.eventManager.fire('beforeSearch', {
 					controller: this,
@@ -663,8 +661,9 @@ export class AutocompleteController extends AbstractController {
 					this.log.error(err);
 					this.handleError(err);
 				}
-				this.store.loading = false;
 			}
+		} finally {
+			this.store.loading = false;
 		}
 	};
 }

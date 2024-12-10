@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.62.0](https://github.com/searchspring/snap/compare/v0.61.5...v0.62.0) (2024-12-10)
+
+### Bug Fixes
+
+- **searchresponse.ts:** dont pull out badges with typeof array ([d3b95f5](https://github.com/searchspring/snap/commit/d3b95f5b0a33d97d7bfaad3edfe5bba842dc2764))
+
 ## [0.61.5](https://github.com/searchspring/snap/compare/v0.61.4...v0.61.5) (2024-11-13)
 
 **Note:** Version bump only for package @searchspring/snap-client

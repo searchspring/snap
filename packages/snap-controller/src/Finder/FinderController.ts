@@ -7,7 +7,7 @@ import { getSearchParams } from '../utils/getParams';
 import { ControllerTypes } from '../types';
 import type { FinderStore } from '@searchspring/snap-store-mobx';
 import type { Next } from '@searchspring/snap-event-manager';
-import type { FinderControllerConfig, BeforeSearchObj, AfterSearchObj, ControllerServices, ContextVariables } from '../types';
+import type { FinderControllerConfig, AfterSearchObj, ControllerServices, ContextVariables } from '../types';
 
 const defaultConfig: FinderControllerConfig = {
 	id: 'finder',
@@ -50,13 +50,7 @@ export class FinderController extends AbstractController {
 			});
 		}
 
-		this.eventManager.on('beforeSearch', async (finder: BeforeSearchObj, next: Next): Promise<void | boolean> => {
-			finder.controller.store.loading = true;
-
-			await next();
-		});
-
-		// TODO: move this to afterStore
+		// TODO: remove this aftersearch when store interface changes
 		this.eventManager.on('afterSearch', async (finder: AfterSearchObj, next: Next): Promise<void | boolean> => {
 			await next();
 
@@ -129,17 +123,18 @@ export class FinderController extends AbstractController {
 	};
 
 	search = async (): Promise<void> => {
-		if (!this.initialized) {
-			await this.init();
-		}
-
-		if (this.store.state.persisted) {
-			return;
-		}
-
-		const params = this.params;
-
 		try {
+			if (!this.initialized) {
+				await this.init();
+			}
+
+			if (this.store.state.persisted) {
+				return;
+			}
+
+			const params = this.params;
+
+			this.store.loading = true;
 			try {
 				await this.eventManager.fire('beforeSearch', {
 					controller: this,
@@ -255,8 +250,9 @@ export class FinderController extends AbstractController {
 					this.log.error(err);
 					this.handleError(err);
 				}
-				this.store.loading = false;
 			}
+		} finally {
+			this.store.loading = false;
 		}
 	};
 }
