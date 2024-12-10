@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.62.0](https://github.com/searchspring/snap/compare/v0.61.5...v0.62.0) (2024-12-10)
+
+### Bug Fixes
+
+- **autocomplete:** merchandising redirect race condition ([65ab3e7](https://github.com/searchspring/snap/commit/65ab3e71630c30a45b4c35a0191e36f97a3dcbfa))
+
 ## [0.61.5](https://github.com/searchspring/snap/compare/v0.61.4...v0.61.5) (2024-11-13)
 
 **Note:** Version bump only for package @searchspring/snap-shared

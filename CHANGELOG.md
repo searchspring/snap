@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.62.0](https://github.com/searchspring/snap/compare/v0.61.5...v0.62.0) (2024-12-10)
+
+### Bug Fixes
+
+- **autocomplete:** merchandising redirect race condition ([65ab3e7](https://github.com/searchspring/snap/commit/65ab3e71630c30a45b4c35a0191e36f97a3dcbfa))
+- **controller:** bugfix for controller store loading / loaded states ([a342cd1](https://github.com/searchspring/snap/commit/a342cd1e84c03f9b660a533b327a2f1c12682121))
+- **recommendationcontroller:** recommendation backforward cache pageshow event listener ([ca12fd5](https://github.com/searchspring/snap/commit/ca12fd5b3dc0140037701d4d263c626562bdb651))
+- **searchresponse.ts:** dont pull out badges with typeof array ([d3b95f5](https://github.com/searchspring/snap/commit/d3b95f5b0a33d97d7bfaad3edfe5bba842dc2764))
+- **toolbox/getcontext:** auto-detect variables for evaluation list ([e293acc](https://github.com/searchspring/snap/commit/e293accd91dc72623847ef1fe710290803c6d536))
+- **tracker:** correcting issue with `ssViewedProducts` cookie storage ([15655f6](https://github.com/searchspring/snap/commit/15655f6c05bd286d296f3f983a827c46ff976335))
+- **urltranslator.ts:** gracefully catch malformed uri errors ([e32f45d](https://github.com/searchspring/snap/commit/e32f45d1a31b3ea3abc544182768e34ae33a9bdb))
+- **urltranslator.ts:** pop dont join in parseHashString ([02ea149](https://github.com/searchspring/snap/commit/02ea1497c9d0b4868e872941337445435aeeeec0))
+
+### Features
+
+- **controller:** adding setting in autocomplete to opt out of input and submit binding' ([6980fce](https://github.com/searchspring/snap/commit/6980fcee30220714fd5837770eae725355f81dcf))
+
 ## [0.61.5](https://github.com/searchspring/snap/compare/v0.61.4...v0.61.5) (2024-11-13)
 
 ### Bug Fixes
