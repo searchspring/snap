@@ -6,7 +6,7 @@ import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
 
 import { defined, cloneWithProps, mergeProps, mergeStyles } from '../../../utilities';
-import { Theme, useTheme, CacheProvider } from '../../../providers';
+import { Theme, useTheme, CacheProvider, useTreePath } from '../../../providers';
 import { ComponentProps, StyleScript } from '../../../types';
 import { useMediaQuery } from '../../../hooks';
 import { Overlay, OverlayProps } from '../../Atoms/Overlay';
@@ -40,6 +40,7 @@ const defaultStyles: StyleScript<SlideoutProps> = ({ slideDirection, transitionS
 
 export const Slideout = observer((properties: SlideoutProps): JSX.Element => {
 	const globalTheme: Theme = useTheme();
+	const globalTreePath = useTreePath();
 
 	const defaultProps: Partial<SlideoutProps> = {
 		active: false,
@@ -48,6 +49,7 @@ export const Slideout = observer((properties: SlideoutProps): JSX.Element => {
 		width: '300px',
 		overlayColor: 'rgba(0,0,0,0.8)',
 		transitionSpeed: '0.25s',
+		treePath: globalTreePath,
 	};
 
 	const props = mergeProps('slideout', globalTheme, defaultProps, properties);

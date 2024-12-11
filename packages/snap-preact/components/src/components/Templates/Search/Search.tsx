@@ -6,7 +6,7 @@ import type { SearchController } from '@searchspring/snap-controller';
 import { Results, ResultsProps } from '../../Organisms/Results';
 import { defined, mergeProps, mergeStyles } from '../../../utilities';
 import { ComponentProps, ListOption, ResultComponent, StyleScript } from '../../../types';
-import { Theme, useTheme, CacheProvider } from '../../../providers';
+import { Theme, useTheme, CacheProvider, TreePathProvider } from '../../../providers';
 import { Sidebar, SidebarProps } from '../../Organisms/Sidebar';
 import { Toolbar, ToolbarProps } from '../../Organisms/Toolbar';
 import { SearchHeader, SearchHeaderProps } from '../../Atoms/SearchHeader';
@@ -215,52 +215,54 @@ export const Search = observer((properties: SearchProps): JSX.Element => {
 
 	return (
 		<CacheProvider>
-			<div {...styling} className={classnames('ss__search', className)}>
-				{!hideSidebar && !isMobile && (
-					<div className="ss__search__sidebar-wrapper">
-						{sidebarOpenState && (
-							<Fragment>
-								<Sidebar {...subProps.Sidebar} controller={controller} />
-								{!hideLeftBanner && <Banner content={merchandising.content} type={ContentType.LEFT} name={'left'} />}
-							</Fragment>
+			<TreePathProvider path={treePath!}>
+				<div {...styling} className={classnames('ss__search', className)}>
+					{!hideSidebar && !isMobile && (
+						<div className="ss__search__sidebar-wrapper">
+							{sidebarOpenState && (
+								<Fragment>
+									<Sidebar {...subProps.Sidebar} controller={controller} />
+									{!hideLeftBanner && <Banner content={merchandising.content} type={ContentType.LEFT} name={'left'} />}
+								</Fragment>
+							)}
+						</div>
+					)}
+					<div className={classnames('ss__search__content')}>
+						{!hideSearchHeader && <SearchHeader {...subProps.SearchHeader} controller={controller} />}
+						{!hideHeaderBanner && <Banner content={merchandising.content} type={ContentType.HEADER} name={'header'} />}
+						{!hideBannerBanner && <Banner content={merchandising.content} type={ContentType.BANNER} name={'banner'} />}
+
+						{!hideToggleSidebarButton && (toggleSidebarButtonText || lang.toggleSidebarButtonText?.value) && (
+							<Button
+								onClick={() => setSidebarOpenState(!sidebarOpenState)}
+								className="ss__search__sidebar-wrapper-toggle"
+								{...subProps.Button}
+								lang={{
+									button: lang.toggleSidebarButtonText,
+								}}
+							></Button>
+						)}
+
+						{!hideTopToolbar && store.pagination.totalResults > 0 && (
+							<Toolbar {...subProps.TopToolbar} className="ss__search__content__toolbar--top-toolbar" controller={controller} />
+						)}
+
+						{!hideMobileSidebar && store.pagination.totalResults > 0 && <MobileSidebar controller={controller} {...subProps.MobileSidebar} />}
+
+						{store.pagination.totalResults ? (
+							<Results {...subProps.Results} controller={controller} />
+						) : (
+							store.pagination.totalResults === 0 && <NoResults {...subProps.NoResults} controller={controller} />
+						)}
+
+						{!hideFooterBanner && <Banner content={merchandising.content} type={ContentType.FOOTER} name={'footer'} />}
+
+						{!hideBottomToolBar && store.pagination.totalResults > 0 && (
+							<Toolbar {...subProps.BottomToolbar} className="ss__search__content__toolbar--bottom-toolbar" controller={controller} />
 						)}
 					</div>
-				)}
-				<div className={classnames('ss__search__content')}>
-					{!hideSearchHeader && <SearchHeader {...subProps.SearchHeader} controller={controller} />}
-					{!hideHeaderBanner && <Banner content={merchandising.content} type={ContentType.HEADER} name={'header'} />}
-					{!hideBannerBanner && <Banner content={merchandising.content} type={ContentType.BANNER} name={'banner'} />}
-
-					{!hideToggleSidebarButton && (toggleSidebarButtonText || lang.toggleSidebarButtonText?.value) && (
-						<Button
-							onClick={() => setSidebarOpenState(!sidebarOpenState)}
-							className="ss__search__sidebar-wrapper-toggle"
-							{...subProps.Button}
-							lang={{
-								button: lang.toggleSidebarButtonText,
-							}}
-						></Button>
-					)}
-
-					{!hideTopToolbar && store.pagination.totalResults > 0 && (
-						<Toolbar {...subProps.TopToolbar} className="ss__search__content__toolbar--top-toolbar" controller={controller} />
-					)}
-
-					{!hideMobileSidebar && store.pagination.totalResults > 0 && <MobileSidebar controller={controller} {...subProps.MobileSidebar} />}
-
-					{store.pagination.totalResults ? (
-						<Results {...subProps.Results} controller={controller} />
-					) : (
-						store.pagination.totalResults === 0 && <NoResults {...subProps.NoResults} controller={controller} />
-					)}
-
-					{!hideFooterBanner && <Banner content={merchandising.content} type={ContentType.FOOTER} name={'footer'} />}
-
-					{!hideBottomToolBar && store.pagination.totalResults > 0 && (
-						<Toolbar {...subProps.BottomToolbar} className="ss__search__content__toolbar--bottom-toolbar" controller={controller} />
-					)}
 				</div>
-			</div>
+			</TreePathProvider>
 		</CacheProvider>
 	);
 });

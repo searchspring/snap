@@ -3,9 +3,9 @@ import { Fragment, h } from 'preact';
 import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
 import { observer } from 'mobx-react';
-import { Theme, useTheme, CacheProvider } from '../../../providers';
+import { Theme, useTheme, CacheProvider, useTreePath } from '../../../providers';
 import { ComponentProps, StyleScript } from '../../../types';
-import { mergeStyles } from '../../../utilities';
+import { mergeProps, mergeStyles } from '../../../utilities';
 
 const defaultStyles: StyleScript<BadgeTextProps> = ({ colorText }) => {
 	return css({
@@ -22,16 +22,16 @@ const defaultStyles: StyleScript<BadgeTextProps> = ({ colorText }) => {
 
 export const BadgeText = observer((properties: BadgeTextProps): JSX.Element => {
 	const globalTheme: Theme = useTheme();
+	const globalTreePath = useTreePath();
 
-	const props: BadgeTextProps = {
+	const defaultProps: Partial<BadgeTextProps> = {
 		// default props
 		colorText: '#000000',
-		// global theme
-		...globalTheme?.components?.badgeText,
-		// props
-		...properties,
-		...properties.theme?.components?.badgeText,
+		treePath: globalTreePath,
 	};
+
+	const props = mergeProps('badgeText', globalTheme, defaultProps, properties);
+
 	const { value, tag, className } = props;
 
 	const styling = mergeStyles<BadgeTextProps>(props, defaultStyles);

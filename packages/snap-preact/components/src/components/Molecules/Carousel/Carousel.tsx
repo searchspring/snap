@@ -14,7 +14,7 @@ import type { SwiperOptions } from 'swiper/types';
 import type { PaginationOptions } from 'swiper/types/modules/pagination';
 import type { NavigationOptions } from 'swiper/types/modules/navigation';
 
-import { Theme, useTheme, CacheProvider } from '../../../providers';
+import { Theme, useTheme, CacheProvider, useTreePath } from '../../../providers';
 import { ComponentProps, BreakpointsProps, StyleScript } from '../../../types';
 import { useDisplaySettings } from '../../../hooks/useDisplaySettings';
 
@@ -182,6 +182,7 @@ export const defaultVerticalCarouselBreakpoints = {
 
 export const Carousel = observer((properties: CarouselProps): JSX.Element => {
 	const globalTheme: Theme = useTheme();
+	const globalTreePath = useTreePath();
 	const defaultProps: Partial<CarouselProps> = {
 		breakpoints: properties.vertical
 			? JSON.parse(JSON.stringify(defaultVerticalCarouselBreakpoints))
@@ -189,11 +190,7 @@ export const Carousel = observer((properties: CarouselProps): JSX.Element => {
 		pagination: false,
 		loop: true,
 		autoAdjustSlides: false,
-		// global theme
-		...globalTheme?.components?.carousel,
-		//props
-		...properties,
-		...properties.theme?.components?.carousel,
+		treePath: globalTreePath,
 	};
 
 	let props = mergeProps('carousel', globalTheme, defaultProps, properties);

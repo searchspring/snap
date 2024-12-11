@@ -4,7 +4,7 @@ import { jsx, css } from '@emotion/react';
 import { filters } from '@searchspring/snap-toolbox';
 import classnames from 'classnames';
 
-import { Theme, useTheme, CacheProvider } from '../../../providers';
+import { Theme, useTheme, CacheProvider, useTreePath } from '../../../providers';
 import { ComponentProps, StyleScript } from '../../../types';
 import { mergeProps, mergeStyles } from '../../../utilities';
 
@@ -14,6 +14,8 @@ const defaultStyles: StyleScript<FormattedNumberProps> = () => {
 
 export function FormattedNumber(properties: FormattedNumberProps): JSX.Element {
 	const globalTheme: Theme = useTheme();
+	const globalTreePath = useTreePath();
+
 	const defaultProps: Partial<FormattedNumberProps> = {
 		symbol: '',
 		decimalPlaces: 3,
@@ -21,6 +23,7 @@ export function FormattedNumber(properties: FormattedNumberProps): JSX.Element {
 		thousandsSeparator: '',
 		decimalSeparator: '.',
 		symbolAfter: true,
+		treePath: globalTreePath,
 	};
 
 	const props = mergeProps('formattedNumber', globalTheme, defaultProps, properties);

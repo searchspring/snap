@@ -3,7 +3,7 @@ import { observer } from 'mobx-react-lite';
 import { jsx, css, keyframes } from '@emotion/react';
 import classnames from 'classnames';
 
-import { Theme, useTheme, CacheProvider } from '../../../providers';
+import { Theme, useTheme, CacheProvider, useTreePath } from '../../../providers';
 import { ComponentProps, StyleScript } from '../../../types';
 import { mergeProps, mergeStyles } from '../../../utilities';
 
@@ -43,8 +43,11 @@ const defaultStyles: StyleScript<LoadingBarProps> = ({ color, height, background
 
 export const LoadingBar = observer((properties: LoadingBarProps): JSX.Element => {
 	const globalTheme: Theme = useTheme();
+	const globalTreePath = useTreePath();
+
 	const defaultProps: Partial<LoadingBarProps> = {
 		height: '5px',
+		treePath: globalTreePath,
 	};
 
 	const props = mergeProps('loadingBar', globalTheme, defaultProps, properties);

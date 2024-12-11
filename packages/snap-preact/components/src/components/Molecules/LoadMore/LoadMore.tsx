@@ -4,7 +4,7 @@ import { jsx, css, keyframes } from '@emotion/react';
 import classnames from 'classnames';
 import { observer } from 'mobx-react-lite';
 
-import { Theme, useTheme, CacheProvider } from '../../../providers';
+import { Theme, useTheme, CacheProvider, useTreePath } from '../../../providers';
 import { ComponentProps, StyleScript } from '../../../types';
 import { defined, mergeProps, mergeStyles } from '../../../utilities';
 import { Lang, useIntersection, useLang } from '../../../hooks';
@@ -135,6 +135,7 @@ const defaultStyles: StyleScript<LoadMoreProps> = ({
 
 export const LoadMore = observer((properties: LoadMoreProps): JSX.Element => {
 	const globalTheme: Theme = useTheme();
+	const globalTreePath = useTreePath();
 	const defaultProps: Partial<LoadMoreProps> = {
 		loadMoreText: 'Load More',
 		progressIndicator: 'bar',
@@ -142,6 +143,7 @@ export const LoadMore = observer((properties: LoadMoreProps): JSX.Element => {
 		loadingIcon: 'spinner',
 		progressIndicatorWidth: properties?.progressIndicator === 'radial' ? '70px' : '300px',
 		progressIndicatorSize: properties?.progressIndicator === 'radial' ? '10px' : '5px',
+		treePath: globalTreePath,
 	};
 
 	const props = mergeProps('loadMore', globalTheme, defaultProps, properties);
@@ -197,7 +199,7 @@ export const LoadMore = observer((properties: LoadMoreProps): JSX.Element => {
 			}),
 			// component theme overrides
 			theme: props?.theme,
-			treePath,
+			treePath: `${treePath} button`,
 		},
 	};
 

@@ -6,7 +6,7 @@ import type { SearchController } from '@searchspring/snap-controller';
 import { Results, ResultsProps } from '../../Organisms/Results';
 import { defined, mergeProps, mergeStyles } from '../../../utilities';
 import { ComponentProps, ResultComponent, StyleScript } from '../../../types';
-import { Theme, useTheme, CacheProvider } from '../../../providers';
+import { Theme, useTheme, CacheProvider, TreePathProvider } from '../../../providers';
 import { Toolbar, ToolbarProps } from '../../Organisms/Toolbar';
 import { SearchHeader, SearchHeaderProps } from '../../Atoms/SearchHeader';
 import { NoResults, NoResultsProps } from '../../Organisms/NoResults';
@@ -163,35 +163,37 @@ export const SearchHorizontal = observer((properties: SearchHorizontalProps): JS
 
 	return (
 		<CacheProvider>
-			<div {...styling} className={classnames('ss__search-horizontal', className)}>
-				{!hideSearchHeader && <SearchHeader {...subProps.SearchHeader} controller={controller} />}
+			<TreePathProvider path={treePath!}>
+				<div {...styling} className={classnames('ss__search-horizontal', className)}>
+					{!hideSearchHeader && <SearchHeader {...subProps.SearchHeader} controller={controller} />}
 
-				{!hideTopToolbar && store.pagination.totalResults > 0 && (
-					<Toolbar {...subProps.TopToolbar} className="ss__search-horizontal__content__toolbar--top-toolbar" controller={controller} />
-				)}
-				<FacetsHorizontal {...subProps.FacetsHorizontal} facets={store.facets} controller={controller} />
-
-				<div className={classnames('ss__search-horizontal__content')}>
-					{!hideHeaderBanner && <Banner {...subProps.Banner} content={merchandising.content} type={ContentType.HEADER} name={'header'} />}
-					{!hideBannerBanner && <Banner {...subProps.Banner} content={merchandising.content} type={ContentType.BANNER} name={'banner'} />}
-
-					{!hideMiddleToolbar && store.pagination.totalResults > 0 && (
-						<Toolbar {...subProps.MiddleToolbar} className="ss__search-horizontal__content__toolbar--middle-toolbar" controller={controller} />
+					{!hideTopToolbar && store.pagination.totalResults > 0 && (
+						<Toolbar {...subProps.TopToolbar} className="ss__search-horizontal__content__toolbar--top-toolbar" controller={controller} />
 					)}
+					<FacetsHorizontal {...subProps.FacetsHorizontal} facets={store.facets} controller={controller} />
 
-					{store.pagination.totalResults ? (
-						<Results {...subProps.Results} controller={controller} breakpoints={{}} />
-					) : (
-						store.pagination.totalResults === 0 && <NoResults {...subProps.NoResults} controller={controller} />
-					)}
+					<div className={classnames('ss__search-horizontal__content')}>
+						{!hideHeaderBanner && <Banner {...subProps.Banner} content={merchandising.content} type={ContentType.HEADER} name={'header'} />}
+						{!hideBannerBanner && <Banner {...subProps.Banner} content={merchandising.content} type={ContentType.BANNER} name={'banner'} />}
 
-					{!hideFooterBanner && <Banner {...subProps.Banner} content={merchandising.content} type={ContentType.FOOTER} name={'footer'} />}
+						{!hideMiddleToolbar && store.pagination.totalResults > 0 && (
+							<Toolbar {...subProps.MiddleToolbar} className="ss__search-horizontal__content__toolbar--middle-toolbar" controller={controller} />
+						)}
 
-					{!hideBottomToolBar && store.pagination.totalResults > 0 && (
-						<Toolbar {...subProps.BottomToolbar} className="ss__search-horizontal__content__toolbar--bottom-toolbar" controller={controller} />
-					)}
+						{store.pagination.totalResults ? (
+							<Results {...subProps.Results} controller={controller} breakpoints={{}} />
+						) : (
+							store.pagination.totalResults === 0 && <NoResults {...subProps.NoResults} controller={controller} />
+						)}
+
+						{!hideFooterBanner && <Banner {...subProps.Banner} content={merchandising.content} type={ContentType.FOOTER} name={'footer'} />}
+
+						{!hideBottomToolBar && store.pagination.totalResults > 0 && (
+							<Toolbar {...subProps.BottomToolbar} className="ss__search-horizontal__content__toolbar--bottom-toolbar" controller={controller} />
+						)}
+					</div>
 				</div>
-			</div>
+			</TreePathProvider>
 		</CacheProvider>
 	);
 });

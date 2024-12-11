@@ -6,7 +6,7 @@ import classnames from 'classnames';
 
 import { Image, ImageProps } from '../../Atoms/Image';
 import { Price, PriceProps } from '../../Atoms/Price';
-import { Theme, useTheme, CacheProvider } from '../../../providers';
+import { Theme, useTheme, CacheProvider, useTreePath } from '../../../providers';
 import { defined, cloneWithProps, mergeProps, mergeStyles } from '../../../utilities';
 import { filters } from '@searchspring/snap-toolbox';
 import { ComponentProps, ResultsLayout, StyleScript } from '../../../types';
@@ -74,9 +74,10 @@ const defaultStyles: StyleScript<ResultProps> = () => {
 
 export const Result = observer((properties: ResultProps): JSX.Element => {
 	const globalTheme: Theme = useTheme();
-
+	const globalTreePath = useTreePath();
 	const defaultProps: Partial<ResultProps> = {
 		layout: ResultsLayout.grid,
+		treePath: globalTreePath,
 	};
 
 	const props = mergeProps('result', globalTheme, defaultProps, properties);

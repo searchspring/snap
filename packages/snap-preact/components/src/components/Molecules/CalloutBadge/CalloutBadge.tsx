@@ -4,9 +4,9 @@ import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
 import { observer } from 'mobx-react';
 
-import { Theme, useTheme, CacheProvider, useSnap } from '../../../providers';
+import { Theme, useTheme, CacheProvider, useSnap, useTreePath } from '../../../providers';
 import { ComponentProps, ComponentMap, StyleScript } from '../../../types';
-import { defaultBadgeComponentMap, mergeStyles } from '../../../utilities';
+import { defaultBadgeComponentMap, mergeProps, mergeStyles } from '../../../utilities';
 import { useComponent } from '../../../hooks';
 import type { Product } from '@searchspring/snap-store-mobx';
 import type { SnapTemplates } from '../../../../../src/Templates';
@@ -23,17 +23,17 @@ const defaultStyles: StyleScript<CalloutBadgeProps> = () => {
 export const CalloutBadge = observer((properties: CalloutBadgeProps): JSX.Element => {
 	const globalTheme: Theme = useTheme();
 	const snap = useSnap();
+	const globalTreePath = useTreePath();
 
-	const props: CalloutBadgeProps = {
+	const defaultProps: Partial<CalloutBadgeProps> = {
 		// default props
 		tag: 'callout',
 		limit: 1,
-		// global theme
-		...globalTheme?.components?.calloutBadge,
-		// props
-		...properties,
-		...properties.theme?.components?.calloutBadge,
+		treePath: globalTreePath,
 	};
+
+	const props = mergeProps('calloutBadge', globalTheme, defaultProps, properties);
+
 	const { result, tag, renderEmpty, limit, className } = props;
 
 	const badgeComponentMap = {

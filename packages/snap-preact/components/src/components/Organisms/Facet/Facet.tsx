@@ -16,7 +16,7 @@ import { ComponentProps, FacetDisplay, StyleScript } from '../../../types';
 import type { ValueFacet, RangeFacet, FacetHierarchyValue, FacetValue, FacetRangeValue } from '@searchspring/snap-store-mobx';
 
 import { defined, cloneWithProps, mergeProps, mergeStyles } from '../../../utilities';
-import { Theme, useTheme, CacheProvider } from '../../../providers';
+import { Theme, useTheme, CacheProvider, useTreePath } from '../../../providers';
 import { useA11y } from '../../../hooks/useA11y';
 // import { FacetToggle, FacetToggleProps } from '../../Molecules/FacetToggle';
 import { Lang, useLang } from '../../../hooks';
@@ -58,6 +58,7 @@ const defaultStyles: StyleScript<FacetProps> = ({ disableCollapse, color, theme 
 
 export const Facet = observer((properties: FacetProps): JSX.Element => {
 	const globalTheme: Theme = useTheme();
+	const globalTreePath = useTreePath();
 	const defaultProps: Partial<FacetProps> = {
 		limit: 12,
 		disableOverflow: false,
@@ -68,6 +69,7 @@ export const Facet = observer((properties: FacetProps): JSX.Element => {
 		iconOverflowMore: 'plus',
 		iconOverflowLess: 'minus',
 		searchable: false,
+		treePath: globalTreePath,
 	};
 
 	let props = mergeProps('facet', globalTheme, defaultProps, properties);
@@ -135,7 +137,7 @@ export const Facet = observer((properties: FacetProps): JSX.Element => {
 			}),
 			// component theme overrides
 			theme: props?.theme,
-			treePath,
+			treePath: `${treePath} dropdown button`,
 		},
 		showMoreLessIcon: {
 			// default props
@@ -150,7 +152,7 @@ export const Facet = observer((properties: FacetProps): JSX.Element => {
 			}),
 			// component theme overrides
 			theme: props?.theme,
-			treePath,
+			treePath: `${treePath} dropdown`,
 		},
 		facetHierarchyOptions: {
 			// default props
@@ -166,7 +168,7 @@ export const Facet = observer((properties: FacetProps): JSX.Element => {
 			}),
 			// component theme overrides
 			theme: props?.theme,
-			treePath,
+			treePath: `${treePath} dropdown`,
 		},
 		facetListOptions: {
 			// default props
@@ -182,7 +184,7 @@ export const Facet = observer((properties: FacetProps): JSX.Element => {
 			}),
 			// component theme overrides
 			theme: props?.theme,
-			treePath,
+			treePath: `${treePath} dropdown`,
 		},
 		facetGridOptions: {
 			// default props
@@ -198,7 +200,7 @@ export const Facet = observer((properties: FacetProps): JSX.Element => {
 			}),
 			// component theme overrides
 			theme: props?.theme,
-			treePath,
+			treePath: `${treePath} dropdown`,
 		},
 		facetPaletteOptions: {
 			// default props
@@ -214,7 +216,7 @@ export const Facet = observer((properties: FacetProps): JSX.Element => {
 			}),
 			// component theme overrides
 			theme: props?.theme,
-			treePath,
+			treePath: `${treePath} dropdown`,
 		},
 		// facetToggle: {
 		// 	// default props
@@ -240,7 +242,7 @@ export const Facet = observer((properties: FacetProps): JSX.Element => {
 			}),
 			// component theme overrides
 			theme: props?.theme,
-			treePath,
+			treePath: `${treePath} dropdown`,
 		},
 		searchInput: {
 			// default props
@@ -253,7 +255,7 @@ export const Facet = observer((properties: FacetProps): JSX.Element => {
 			}),
 			// component theme overrides
 			theme: props?.theme,
-			treePath,
+			treePath: `${treePath} dropdown`,
 		},
 	};
 

@@ -5,7 +5,7 @@ import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
 
 import { defined, mergeProps, mergeStyles } from '../../../utilities';
-import { Theme, useTheme, CacheProvider } from '../../../providers';
+import { Theme, useTheme, CacheProvider, useTreePath } from '../../../providers';
 import { ComponentProps, StyleScript } from '../../../types';
 import { Button, ButtonProps } from '../../Atoms/Button';
 import { Icon, IconProps, IconType } from '../../Atoms/Icon';
@@ -34,7 +34,10 @@ const defaultStyles: StyleScript<FilterProps> = ({}) => {
 // TODO: look into urlManager and how it connects in this case, left the href out for the time being
 export const Filter = observer((properties: FilterProps): JSX.Element => {
 	const globalTheme: Theme = useTheme();
-	const defaultProps: Partial<FilterProps> = {};
+	const globalTreePath = useTreePath();
+	const defaultProps: Partial<FilterProps> = {
+		treePath: globalTreePath,
+	};
 
 	const props = mergeProps('filter', globalTheme, defaultProps, properties);
 
@@ -72,7 +75,7 @@ export const Filter = observer((properties: FilterProps): JSX.Element => {
 			}),
 			// component theme overrides
 			theme: props.theme,
-			treePath,
+			treePath: `${treePath} button`,
 		},
 	};
 

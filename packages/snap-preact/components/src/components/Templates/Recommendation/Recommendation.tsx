@@ -14,7 +14,7 @@ import { Carousel, CarouselProps, defaultCarouselBreakpoints, defaultVerticalCar
 import { Result, ResultProps } from '../../Molecules/Result';
 import { defined, mergeProps, mergeStyles } from '../../../utilities';
 import { useIntersection } from '../../../hooks';
-import { Theme, useTheme, CacheProvider } from '../../../providers';
+import { Theme, useTheme, CacheProvider, TreePathProvider } from '../../../providers';
 import { ComponentProps, BreakpointsProps, ResultComponent, StyleScript } from '../../../types';
 import { useDisplaySettings } from '../../../hooks/useDisplaySettings';
 import { RecommendationProfileTracker } from '../../Trackers/Recommendation/ProfileTracker';
@@ -123,7 +123,7 @@ export const Recommendation = observer((properties: RecommendationProps): JSX.El
 			}),
 			// component theme overrides
 			theme: props?.theme,
-			treePath,
+			treePath: `${treePath} carousel`,
 		},
 	};
 
@@ -150,61 +150,63 @@ export const Recommendation = observer((properties: RecommendationProps): JSX.El
 
 	return (Array.isArray(children) && children.length) || resultsToRender?.length ? (
 		<CacheProvider>
-			<div {...styling} className={classnames('ss__recommendation', className)} ref={recsRef}>
-				{isVisible ? (
-					<RecommendationProfileTracker controller={controller}>
-						{title && !hideTitle && (
-							<h3 className="ss__recommendation__title" {...mergedLang.titleText?.all}>
-								{title}
-							</h3>
-						)}
-						<Carousel
-							prevButton={prevButton}
-							nextButton={nextButton}
-							hideButtons={hideButtons}
-							loop={loop}
-							pagination={pagination}
-							breakpoints={breakpoints}
-							{...subProps.carousel}
-							{...additionalProps}
-							{...displaySettings}
-						>
+			<TreePathProvider path={treePath!}>
+				<div {...styling} className={classnames('ss__recommendation', className)} ref={recsRef}>
+					{isVisible ? (
+						<RecommendationProfileTracker controller={controller}>
+							{title && !hideTitle && (
+								<h3 className="ss__recommendation__title" {...mergedLang.titleText?.all}>
+									{title}
+								</h3>
+							)}
+							<Carousel
+								prevButton={prevButton}
+								nextButton={nextButton}
+								hideButtons={hideButtons}
+								loop={loop}
+								pagination={pagination}
+								breakpoints={breakpoints}
+								{...subProps.carousel}
+								{...additionalProps}
+								{...displaySettings}
+							>
+								{Array.isArray(children) && children.length
+									? children.map((child: any, idx: number) => (
+											<RecommendationResultTracker controller={controller} result={resultsToRender[idx]}>
+												{child}
+											</RecommendationResultTracker>
+									  ))
+									: resultsToRender.map((result) => (
+											<RecommendationResultTracker controller={controller} result={result}>
+												{(() => {
+													if (resultComponent && controller) {
+														const ResultComponent = resultComponent;
+														return <ResultComponent controller={controller} result={result} treePath={subProps.result.treePath} />;
+													} else {
+														return <Result key={result.id} {...subProps.result} controller={controller} result={result} />;
+													}
+												})()}
+											</RecommendationResultTracker>
+									  ))}
+							</Carousel>
+						</RecommendationProfileTracker>
+					) : (
+						<RecommendationProfileTracker controller={controller}>
 							{Array.isArray(children) && children.length
 								? children.map((child: any, idx: number) => (
 										<RecommendationResultTracker controller={controller} result={resultsToRender[idx]}>
-											{child}
+											<></>
 										</RecommendationResultTracker>
 								  ))
 								: resultsToRender.map((result) => (
 										<RecommendationResultTracker controller={controller} result={result}>
-											{(() => {
-												if (resultComponent && controller) {
-													const ResultComponent = resultComponent;
-													return <ResultComponent controller={controller} result={result} />;
-												} else {
-													return <Result key={result.id} {...subProps.result} controller={controller} result={result} />;
-												}
-											})()}
+											<></>
 										</RecommendationResultTracker>
 								  ))}
-						</Carousel>
-					</RecommendationProfileTracker>
-				) : (
-					<RecommendationProfileTracker controller={controller}>
-						{Array.isArray(children) && children.length
-							? children.map((child: any, idx: number) => (
-									<RecommendationResultTracker controller={controller} result={resultsToRender[idx]}>
-										<></>
-									</RecommendationResultTracker>
-							  ))
-							: resultsToRender.map((result) => (
-									<RecommendationResultTracker controller={controller} result={result}>
-										<></>
-									</RecommendationResultTracker>
-							  ))}
-					</RecommendationProfileTracker>
-				)}
-			</div>
+						</RecommendationProfileTracker>
+					)}
+				</div>
+			</TreePathProvider>
 		</CacheProvider>
 	) : (
 		<></>

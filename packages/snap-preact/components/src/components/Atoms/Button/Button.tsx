@@ -5,7 +5,7 @@ import classnames from 'classnames';
 import { observer } from 'mobx-react';
 
 import { ComponentProps, StyleScript } from '../../../types';
-import { Theme, useTheme, CacheProvider } from '../../../providers';
+import { Theme, useTheme, CacheProvider, useTreePath } from '../../../providers';
 import { useA11y } from '../../../hooks/useA11y';
 import { defined, mergeProps, mergeStyles } from '../../../utilities';
 import { Icon, IconProps, IconType } from '../Icon';
@@ -52,8 +52,11 @@ const defaultStyles: StyleScript<ButtonProps> = ({ native, color, backgroundColo
 
 export const Button = observer((properties: ButtonProps): JSX.Element => {
 	const globalTheme: Theme = useTheme();
+	const globalTreePath = useTreePath();
+
 	const defaultProps = {
 		disableA11y: false,
+		treePath: globalTreePath,
 	};
 
 	const props = mergeProps('button', globalTheme, defaultProps, properties);

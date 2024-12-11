@@ -6,7 +6,7 @@ import deepmerge from 'deepmerge';
 import { observer } from 'mobx-react';
 
 import { Facet, FacetProps } from '../Facet';
-import { Theme, useTheme, CacheProvider } from '../../../providers';
+import { Theme, useTheme, CacheProvider, useTreePath } from '../../../providers';
 import { defined, mergeProps, mergeStyles } from '../../../utilities';
 import { ComponentProps, StyleScript } from '../../../types';
 import type { SearchController, AutocompleteController } from '@searchspring/snap-controller';
@@ -18,9 +18,11 @@ const defaultStyles: StyleScript<FacetsProps> = () => {
 
 export const Facets = observer((properties: FacetsProps): JSX.Element => {
 	const globalTheme: Theme = useTheme();
+	const globalTreePath = useTreePath();
 
 	const defaultProps: Partial<FacetsProps> = {
 		facets: properties.controller?.store?.facets,
+		treePath: globalTreePath,
 	};
 
 	let props = mergeProps('facets', globalTheme, defaultProps, properties);

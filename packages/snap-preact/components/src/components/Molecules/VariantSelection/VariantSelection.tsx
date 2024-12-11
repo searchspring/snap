@@ -2,8 +2,8 @@ import { h, Fragment } from 'preact';
 import { observer } from 'mobx-react';
 import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
-import { Theme, useTheme, CacheProvider } from '../../../providers';
-import { defined, mergeStyles } from '../../../utilities';
+import { Theme, useTheme, CacheProvider, useTreePath } from '../../../providers';
+import { defined, mergeProps, mergeStyles } from '../../../utilities';
 import { ComponentProps, StyleScript } from '../../../types';
 import type { VariantSelection as VariantSelectionType } from '@searchspring/snap-store-mobx';
 import { List, ListProps } from '../List';
@@ -60,16 +60,15 @@ const defaultStyles: StyleScript<VariantSelectionProps> = () => {
 
 export const VariantSelection = observer((properties: VariantSelectionProps): JSX.Element => {
 	const globalTheme: Theme = useTheme();
+	const globalTreePath = useTreePath();
 
-	const props: VariantSelectionProps = {
+	const defaultProps: Partial<VariantSelectionProps> = {
 		// default props
 		type: 'dropdown',
-		// global theme
-		...globalTheme?.components?.variantSelection,
-		// props
-		...properties,
-		...properties.theme?.components?.variantSelection,
+		treePath: globalTreePath,
 	};
+
+	const props = mergeProps('variantSelection', globalTheme, defaultProps, properties);
 
 	const { type, selection, disableStyles, className, treePath } = props;
 
@@ -100,7 +99,7 @@ export const VariantSelection = observer((properties: VariantSelectionProps): JS
 			}),
 			// component theme overrides
 			theme: props?.theme,
-			treePath,
+			treePath: `${treePath} dropdown button`,
 		},
 		list: {
 			titleText: selection.field,
