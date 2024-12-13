@@ -5,19 +5,12 @@ import { Magento2AddToCartConfig } from '../addToCart';
 import { addToCart as addToCartFunction } from '../addToCart';
 import type { AbstractPluginConfig } from '../../../common/src/types';
 
-export type Magento2AddToCartPluginConfig = Magento2AddToCartConfig &
-	AbstractPluginConfig & {
-		functionOverride?: (products: Product[]) => void;
-	};
+export type Magento2AddToCartPluginConfig = Magento2AddToCartConfig & AbstractPluginConfig;
 
-export const pluginAddToCart = (cntrlr: AbstractController, config?: Magento2AddToCartPluginConfig) => {
+export const magento2PluginAddToCart = (cntrlr: AbstractController, config?: Magento2AddToCartPluginConfig) => {
 	const addToCart = async ({ products }: { products: Product[] }, next: Next) => {
-		if (config?.functionOverride) {
-			config.functionOverride(products);
-		} else {
-			await addToCartFunction(products, config);
-			await next();
-		}
+		await addToCartFunction(products, config);
+		await next();
 	};
 
 	if (config?.enabled !== false) {

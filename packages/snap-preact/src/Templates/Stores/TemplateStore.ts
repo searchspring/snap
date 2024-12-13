@@ -5,10 +5,14 @@ import { ThemeStore, ThemeStoreThemeConfig } from './ThemeStore';
 import { TargetStore } from './TargetStore';
 import { CurrencyCodes, LanguageCodes, LibraryImports, LibraryStore } from './LibraryStore';
 import { debounce } from '@searchspring/snap-toolbox';
-import type { ShopifyAddToCartPluginConfig, ShopifyPluginMutateResultsConfig } from '@searchspring/snap-platforms/shopify';
-import type { Magento2AddToCartPluginConfig } from '@searchspring/snap-platforms/magento2';
-import type { BigCommerceAddToCartPluginConfig } from '@searchspring/snap-platforms/bigcommerce';
-import type { AbstractPluginConfig, CommonAddToCartPluginConfig, CommonPluginBackgroundFilterConfig } from '@searchspring/snap-platforms/common';
+import type {
+	ShopifyAddToCartPluginConfig,
+	ShopifyPluginBackgroundFiltersConfig,
+	ShopifyPluginMutateResultsConfig,
+} from '@searchspring/snap-platforms/shopify';
+import type { Magento2AddToCartPluginConfig, Magento2PluginBackgroundFiltersConfig } from '@searchspring/snap-platforms/magento2';
+import type { BigCommerceAddToCartPluginConfig, BigcommercePluginBackgroundFiltersConfig } from '@searchspring/snap-platforms/bigcommerce';
+import type { CommonAddToCartPluginConfig, CommonPluginBackgroundFilterConfig, CommonPluginLoggerConfig } from '@searchspring/snap-platforms/common';
 import type { CommonPluginScrollToTopConfig } from '@searchspring/snap-platforms/common';
 import type {
 	LangComponentOverrides,
@@ -68,24 +72,24 @@ export type TemplateStoreComponentConfig = {
 };
 
 export type CommonPlugins = {
-	backgroundFilters?: CommonPluginBackgroundFilterConfig & AbstractPluginConfig;
-	scrollToTop?: CommonPluginScrollToTopConfig & AbstractPluginConfig;
-	logger?: AbstractPluginConfig;
+	backgroundFilters?: CommonPluginBackgroundFilterConfig;
+	scrollToTop?: CommonPluginScrollToTopConfig;
+	logger?: CommonPluginLoggerConfig;
 	addToCart?: CommonAddToCartPluginConfig;
 };
 export type ShopifyPlugins = {
-	backgroundFilters?: AbstractPluginConfig;
-	mutateResults?: ShopifyPluginMutateResultsConfig & AbstractPluginConfig;
+	backgroundFilters?: ShopifyPluginBackgroundFiltersConfig;
+	mutateResults?: ShopifyPluginMutateResultsConfig;
 	addToCart?: ShopifyAddToCartPluginConfig;
 };
 
 export type BigCommercePlugins = {
-	backgroundFilters?: AbstractPluginConfig;
+	backgroundFilters?: BigcommercePluginBackgroundFiltersConfig;
 	addToCart?: BigCommerceAddToCartPluginConfig;
 };
 
 export type Magento2Plugins = {
-	backgroundFilters?: AbstractPluginConfig;
+	backgroundFilters?: Magento2PluginBackgroundFiltersConfig;
 	addToCart?: Magento2AddToCartPluginConfig;
 };
 

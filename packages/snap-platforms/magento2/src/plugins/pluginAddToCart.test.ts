@@ -1,4 +1,4 @@
-import { pluginAddToCart } from './pluginAddToCart';
+import { magento2PluginAddToCart as pluginAddToCart } from './pluginAddToCart';
 import { MockClient } from '@searchspring/snap-shared';
 import { Product, SearchStore } from '@searchspring/snap-store-mobx';
 import { UrlManager, QueryStringTranslator, reactLinker } from '@searchspring/snap-url-manager';
@@ -47,7 +47,7 @@ describe('magento2/addToCart', () => {
 		expect(controller.config.globals!.filters).toEqual([]);
 	});
 
-	it('can disabled via a config to the plugin', async () => {
+	it('can be disabled via a config to the plugin', async () => {
 		const pluginConfig = {
 			enabled: false,
 		};
@@ -55,6 +55,7 @@ describe('magento2/addToCart', () => {
 		const controller = new SearchController(searchConfig, createControllerServices());
 
 		const eventSpy = jest.spyOn(controller.eventManager, 'on');
+		const fireEventSpy = jest.spyOn(controller.eventManager, 'fire');
 
 		expect(controller.addToCart).toBeDefined();
 
@@ -69,14 +70,16 @@ describe('magento2/addToCart', () => {
 
 		controller.addToCart([controller.store.results[0] as Product]);
 
-		expect(eventSpy).not.toHaveBeenCalledWith('addToCart', {
+		expect(fireEventSpy).toHaveBeenCalledWith('addToCart', {
 			products: [controller.store.results[0]],
 		});
+
+		expect(eventSpy).not.toHaveBeenCalledWith('addToCart', expect.any(Object));
 
 		eventSpy.mockClear();
 	});
 
-	it('creates a function on the controller to use in components that calls the plugin', async () => {
+	it('assigns a function to get called when addToCart function is used on the controller', async () => {
 		const controller = new SearchController(searchConfig, createControllerServices());
 
 		const onEventSpy = jest.spyOn(controller.eventManager, 'on');
@@ -94,41 +97,11 @@ describe('magento2/addToCart', () => {
 		expect(fireEventSpy).toHaveBeenCalledWith('addToCart', {
 			products: [controller.store.results[0]],
 		});
+		expect(onEventSpy).toHaveBeenCalledWith('addToCart', expect.any(Function));
 
 		// @ts-ignore
 		expect(controller.eventManager.events.addToCart.functions[0].name).toBe('addToCart');
 		fireEventSpy.mockClear();
 		onEventSpy.mockClear();
-	});
-
-	it('can pass custom add to cart function via a config to the plugin', async () => {
-		const mock = jest.fn();
-		const pluginConfig = {
-			functionOverride: mock,
-		};
-
-		const controller = new SearchController(searchConfig, createControllerServices());
-
-		const eventSpy = jest.spyOn(controller.eventManager, 'on');
-
-		expect(controller.addToCart).toBeDefined();
-
-		await controller.init();
-		await controller.search();
-
-		pluginAddToCart(controller, pluginConfig);
-
-		expect(eventSpy).not.toHaveBeenCalledWith('addToCart', {
-			products: [controller.store.results[0]],
-		});
-
-		controller.addToCart([controller.store.results[0] as Product]);
-
-		expect(mock).toHaveBeenCalledWith([controller.store.results[0]]);
-		expect(eventSpy).not.toHaveBeenCalledWith('addToCart', {
-			products: [controller.store.results[0]],
-		});
-
-		eventSpy.mockClear();
 	});
 });

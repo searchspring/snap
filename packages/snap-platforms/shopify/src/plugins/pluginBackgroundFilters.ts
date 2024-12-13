@@ -4,7 +4,9 @@ import type { Next } from '@searchspring/snap-event-manager';
 import type { PluginBackgroundFilterGlobal } from '../../../common/src';
 import { AbstractPluginConfig } from '../../../common/src/types';
 
-export const pluginBackgroundFiltersShopify = (cntrlr: AbstractController, config?: AbstractPluginConfig) => {
+export type ShopifyPluginBackgroundFiltersConfig = AbstractPluginConfig;
+
+export const pluginBackgroundFiltersShopify = (cntrlr: AbstractController, config?: ShopifyPluginBackgroundFiltersConfig) => {
 	if (config?.enabled !== false) {
 		// only applies to search controllers
 		if (cntrlr.type != 'search') return;

@@ -92,7 +92,7 @@ Plugins provide functionality to tie into various events within the Snap control
 
 
 ### Shopify Plugins
-In addition when `config.platform` is `shopify`, the following plugins are available:
+When `config.platform` is `shopify`, the following plugins are available:
 
 | Configuration Option | Description | Type | Default |
 |----------------------|-------------|------|---------|
@@ -106,7 +106,7 @@ In addition when `config.platform` is `shopify`, the following plugins are avail
 
 
 ### Magento2 Plugins
-In addition when `config.platform` is `magento2`, the following plugins are available:
+When `config.platform` is `magento2`, the following plugins are available:
 
 | Configuration Option | Description | Type | Default |
 |----------------------|-------------|------|---------|
@@ -119,7 +119,7 @@ In addition when `config.platform` is `magento2`, the following plugins are avai
 
 
 ### BigCommerce Plugins
-In addition when `config.platform` is `bigCommerce`, the following plugins are available:
+When `config.platform` is `bigCommerce`, the following plugins are available:
 
 | Configuration Option | Description | Type | Default |
 |----------------------|-------------|------|---------|

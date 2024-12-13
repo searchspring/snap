@@ -482,16 +482,16 @@ function createPlugins(
 
 	plugins.push([
 		templatesStore.library.import.plugins.common.backgroundFilters,
-		deepmerge(templateConfig.plugins?.common?.backgroundFilters || { filters: [] }, controllerConfig?.plugins?.common?.backgroundFilters || {}),
+		deepmerge(templateConfig.plugins?.common?.backgroundFilters || {}, controllerConfig?.plugins?.common?.backgroundFilters || {}),
 	]);
 
 	plugins.push([
 		templatesStore.library.import.plugins.common.scrollToTop,
-		deepmerge(templateConfig.plugins?.common?.scrollToTop || { enabled: true }, controllerConfig?.plugins?.common?.scrollToTop || {}),
+		deepmerge(templateConfig.plugins?.common?.scrollToTop || {}, controllerConfig?.plugins?.common?.scrollToTop || {}),
 	]);
 	plugins.push([
 		templatesStore.library.import.plugins.common.logger,
-		deepmerge(templateConfig.plugins?.common?.logger || { enabled: true }, controllerConfig?.plugins?.common?.logger || {}),
+		deepmerge(templateConfig.plugins?.common?.logger || {}, controllerConfig?.plugins?.common?.logger || {}),
 	]);
 	if (templateConfig.plugins?.common?.addToCart?.function) {
 		plugins.push([

@@ -12,14 +12,14 @@ export type CommonPluginScrollToTopConfig = {
 } & AbstractPluginConfig;
 
 export const pluginScrollToTop = (cntrlr: AbstractController, config?: CommonPluginScrollToTopConfig) => {
-	if (!config?.enabled || cntrlr.type !== 'search') {
+	if (config?.enabled == false || cntrlr.type !== 'search') {
 		return;
 	}
 
 	cntrlr.on('afterStore', async (_, next) => {
-		const options = Object.assign({ top: 0, left: 0, behavior: 'smooth' }, config.options || {});
+		const options = Object.assign({ top: 0, left: 0, behavior: 'smooth' }, config?.options || {});
 
-		if (config.selector) {
+		if (config?.selector) {
 			const element = document.querySelector(config.selector);
 			if (element) {
 				const { top } = element.getBoundingClientRect();

@@ -5,19 +5,12 @@ import { ShopifyAddToCartConfig } from '../addToCart';
 import { addToCart as addToCartFunction } from '../addToCart';
 import type { AbstractPluginConfig } from '../../../common/src/types';
 
-export type ShopifyAddToCartPluginConfig = ShopifyAddToCartConfig &
-	AbstractPluginConfig & {
-		functionOverride?: (products: Product[]) => void;
-	};
+export type ShopifyAddToCartPluginConfig = ShopifyAddToCartConfig & AbstractPluginConfig;
 
-export const pluginAddToCart = (cntrlr: AbstractController, config?: ShopifyAddToCartPluginConfig) => {
+export const shopifyPluginAddToCart = (cntrlr: AbstractController, config?: ShopifyAddToCartPluginConfig) => {
 	const addToCart = async ({ products }: { products: Product[] }, next: Next) => {
-		if (config?.functionOverride) {
-			config.functionOverride(products);
-		} else {
-			await addToCartFunction(products, config);
-			await next();
-		}
+		await addToCartFunction(products, config);
+		await next();
 	};
 
 	if (config?.enabled !== false) {

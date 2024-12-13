@@ -7,7 +7,7 @@ export type CommonAddToCartPluginConfig = AbstractPluginConfig & {
 	function: (products: Product[]) => void;
 };
 
-export const pluginAddToCart = (cntrlr: AbstractController, config?: CommonAddToCartPluginConfig) => {
+export const commonPluginAddToCart = (cntrlr: AbstractController, config?: CommonAddToCartPluginConfig) => {
 	const addToCart = async ({ products }: { products: Product[] }, next: Next) => {
 		await config?.function(products);
 		await next();
