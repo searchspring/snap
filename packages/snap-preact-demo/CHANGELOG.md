@@ -90,6 +90,34 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 - separate recommendation types ([4a03491](https://github.com/searchspring/snap-1.0/commit/4a03491766fd3dbd3eeddf8d91ed4572bd4ae6bf))
 - support template themes in snap-preact ([df9d905](https://github.com/searchspring/snap-1.0/commit/df9d9057a1554d7eb62830002c3db990e0f8f272))
 
+# [0.62.0](https://github.com/searchspring/snap/compare/v0.61.5...v0.62.0) (2024-12-10)
+
+**Note:** Version bump only for package @searchspring/snap-preact-demo
+
+## [0.61.5](https://github.com/searchspring/snap/compare/v0.61.4...v0.61.5) (2024-11-13)
+
+**Note:** Version bump only for package @searchspring/snap-preact-demo
+
+## [0.61.4](https://github.com/searchspring/snap/compare/v0.61.3...v0.61.4) (2024-11-06)
+
+**Note:** Version bump only for package @searchspring/snap-preact-demo
+
+## [0.61.3](https://github.com/searchspring/snap/compare/v0.61.2...v0.61.3) (2024-10-31)
+
+**Note:** Version bump only for package @searchspring/snap-preact-demo
+
+## [0.61.2](https://github.com/searchspring/snap/compare/v0.61.1...v0.61.2) (2024-10-28)
+
+**Note:** Version bump only for package @searchspring/snap-preact-demo
+
+## [0.61.1](https://github.com/searchspring/snap/compare/v0.61.0...v0.61.1) (2024-10-25)
+
+**Note:** Version bump only for package @searchspring/snap-preact-demo
+
+# [0.61.0](https://github.com/searchspring/snap/compare/v0.60.4...v0.61.0) (2024-10-25)
+
+**Note:** Version bump only for package @searchspring/snap-preact-demo
+
 ## [0.60.4](https://github.com/searchspring/snap/compare/v0.60.3...v0.60.4) (2024-09-25)
 
 **Note:** Version bump only for package @searchspring/snap-preact-demo

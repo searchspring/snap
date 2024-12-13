@@ -41,7 +41,7 @@ const SESSIONID_STORAGE_NAME = 'ssSessionIdNamespace';
 const LOCALSTORAGE_BEACON_POOL_NAME = 'ssBeaconPool';
 const CART_PRODUCTS = 'ssCartProducts';
 const VIEWED_PRODUCTS = 'ssViewedProducts';
-const MAX_VIEWED_COUNT = 20;
+export const MAX_VIEWED_COUNT = 20;
 
 const defaultConfig: TrackerConfig = {
 	id: 'track',
@@ -296,7 +296,7 @@ export class Tracker {
 					const sku = data?.childSku || data?.childUid || data?.sku || data?.uid;
 					if (sku) {
 						const lastViewedProducts = this.cookies.viewed.get();
-						const uniqueCartItems = Array.from(new Set([...lastViewedProducts, sku])).map((item) => `${item}`.trim());
+						const uniqueCartItems = Array.from(new Set([sku, ...lastViewedProducts])).map((item) => `${item}`.trim());
 						cookies.set(
 							VIEWED_PRODUCTS,
 							uniqueCartItems.slice(0, MAX_VIEWED_COUNT).join(','),
