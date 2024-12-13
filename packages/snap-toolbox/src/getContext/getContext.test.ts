@@ -1,7 +1,17 @@
 import { getContext } from './getContext';
 
 describe('getContext', () => {
-	beforeEach(() => (document.body.innerHTML = ''));
+	beforeAll(() => {
+		// used to test global variable assignment in evaluation
+		const globalScriptTag = document.createElement('script');
+		globalScriptTag.innerHTML = 'const globalVar = "constant";';
+
+		document.head.append(globalScriptTag);
+	});
+
+	beforeEach(() => {
+		document.body.innerHTML = '';
+	});
 
 	it('expects an array of strings as the first parameter', () => {
 		const scriptTag = document.createElement('script');
@@ -260,5 +270,19 @@ describe('getContext', () => {
 		expect(() => {
 			getContext(['error'], scriptTag);
 		}).toThrow();
+	});
+
+	it('does not throw an error when variables exist already, but are not in evaluation list', () => {
+		const scriptTag = document.createElement('script');
+		scriptTag.setAttribute('type', 'searchspring/recommend');
+		scriptTag.setAttribute('id', 'searchspring-recommend');
+		scriptTag.innerHTML = `
+			siteId = 'abc123';
+			globalVar = 'snap';
+		`;
+
+		expect(() => {
+			getContext(['error'], scriptTag);
+		}).not.toThrow();
 	});
 });

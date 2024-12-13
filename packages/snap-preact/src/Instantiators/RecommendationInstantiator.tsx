@@ -63,7 +63,8 @@ type ProfileSpecificProfile = {
 	options: Pick<RecommendRequestModel, 'siteId' | 'categories' | 'brands' | 'branch' | 'filters' | 'limit' | 'query' | 'dedupe'> & {
 		realtime?: boolean;
 	};
-	profile: string;
+	profile?: string;
+	tag?: string;
 	selector: string;
 };
 
@@ -183,16 +184,16 @@ export class RecommendationInstantiator {
 
 					// type the new profile specific integration context variables
 					const scriptContextProfiles = elemContext.profiles as ProfileSpecificProfile[];
-					const scriptContextGlobals = elemContext.globals as ProfileSpecificGlobals;
+					const scriptContextGlobals = elemContext.globals as ProfileSpecificGlobals | undefined;
 
 					// grab from globals
 					const requestGlobals: Partial<RecommendRequestModel> = {
 						...defined({
-							blockedItems: scriptContextGlobals.blockedItems,
-							filters: scriptContextGlobals.filters,
-							cart: scriptContextGlobals.cart && getArrayFunc(scriptContextGlobals.cart),
-							products: scriptContextGlobals.products,
-							shopper: scriptContextGlobals.shopper?.id,
+							blockedItems: scriptContextGlobals?.blockedItems,
+							filters: scriptContextGlobals?.filters,
+							cart: scriptContextGlobals?.cart && getArrayFunc(scriptContextGlobals.cart),
+							products: scriptContextGlobals?.products,
+							shopper: scriptContextGlobals?.shopper?.id,
 							batchId: Math.random(),
 						}),
 					};
@@ -216,13 +217,13 @@ export class RecommendationInstantiator {
 					new DomTargeter(
 						targetsArr,
 						async (target: ExtendedRecommendaitonProfileTarget, elem: Element | undefined, originalElem: Element | undefined) => {
-							if (target.profile?.profile) {
+							if (target.profile?.profile || target.profile?.tag) {
 								const profileRequestGlobals: RecommendRequestModel = {
 									...requestGlobals,
 									profile: target.profile?.options,
-									tag: target.profile.profile,
+									tag: target.profile.tag! || target.profile.profile!, // have to support both tag and profile due to having profile at release, but will favor tag
 								};
-								const profileContext: ContextVariables = deepmerge(this.context, { globals: scriptContextGlobals, profile: target.profile });
+								const profileContext: ContextVariables = deepmerge(this.context, defined({ globals: scriptContextGlobals, profile: target.profile }));
 								if (elemContext.custom) {
 									profileContext.custom = elemContext.custom;
 								}
@@ -234,20 +235,31 @@ export class RecommendationInstantiator {
 				} else {
 					// using the "legacy" integration structure
 					const { profile, products, product, seed, filters, blockedItems, options, shopper, shopperId } = elemContext;
+					const combinedProducts = [].concat(products || product || seed || []);
+					const shopperIdentifier = [shopper, shopper?.id, shopperId, shopperId?.id].filter((val) => val && typeof val === 'string').pop();
 
 					const profileRequestGlobals: Partial<RecommendRequestModel> = {
 						tag: profile,
 						...defined({
-							products: products || (product && [product]) || (seed && [seed]),
+							products: combinedProducts.length ? combinedProducts : undefined,
 							cart: elemContext.cart && getArrayFunc(elemContext.cart),
-							shopper: shopper?.id || shopperId,
+							shopper: shopperIdentifier,
 							filters,
 							blockedItems,
 							profile: options,
 						}),
 					};
 
-					readyTheController(this, services || {}, elem, elemContext, profileCount, originalElem, profileRequestGlobals, target);
+					readyTheController(
+						this,
+						services || {},
+						elem,
+						deepmerge(this.context, elemContext),
+						profileCount,
+						originalElem,
+						profileRequestGlobals,
+						target
+					);
 				}
 			}
 		);
@@ -277,11 +289,11 @@ async function readyTheController(
 	target: ExtendedRecommendaitonProfileTarget
 ) {
 	const { profile, batchId, cart, tag } = controllerGlobals;
-	const batched = (profile?.batched || controllerGlobals.batched) ?? true;
+	const batched = profile?.batched ?? controllerGlobals.batched ?? true;
 
 	if (!tag) {
 		// FEEDBACK: change message depending on script integration type (profile vs. legacy)
-		instance.logger.warn(`'profile' is missing from <script> tag, skipping this profile`, elem);
+		instance.logger.warn(`'tag' is missing from <script> tag, skipping this profile`, elem);
 		return;
 	}
 

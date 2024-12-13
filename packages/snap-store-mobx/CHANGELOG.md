@@ -75,6 +75,41 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 - **preact-components-ss-lang:** adding foundation for multi language support to preact components ([4dce617](https://github.com/searchspring/snap/commit/4dce617ec14fb6897d66278b90b5cc17e97665bd))
 - **preact-components/storybook:** updating storybook to latest version - build stable ([43c598d](https://github.com/searchspring/snap/commit/43c598d0e4d11d76364ff2775ecdcabe489023a8))
 - **preact-components:** making progress toward layout templating support ([92c2ce6](https://github.com/searchspring/snap/commit/92c2ce6b207dcb1e922674d55e289354b71612da))
+# [0.62.0](https://github.com/searchspring/snap/compare/v0.61.5...v0.62.0) (2024-12-10)
+
+### Bug Fixes
+
+- **recommendationcontroller:** recommendation backforward cache pageshow event listener ([ca12fd5](https://github.com/searchspring/snap/commit/ca12fd5b3dc0140037701d4d263c626562bdb651))
+
+### Features
+
+- **controller:** adding setting in autocomplete to opt out of input and submit binding' ([6980fce](https://github.com/searchspring/snap/commit/6980fcee30220714fd5837770eae725355f81dcf))
+
+## [0.61.5](https://github.com/searchspring/snap/compare/v0.61.4...v0.61.5) (2024-11-13)
+
+**Note:** Version bump only for package @searchspring/snap-store-mobx
+
+## [0.61.4](https://github.com/searchspring/snap/compare/v0.61.3...v0.61.4) (2024-11-06)
+
+**Note:** Version bump only for package @searchspring/snap-store-mobx
+
+## [0.61.3](https://github.com/searchspring/snap/compare/v0.61.2...v0.61.3) (2024-10-31)
+
+**Note:** Version bump only for package @searchspring/snap-store-mobx
+
+## [0.61.2](https://github.com/searchspring/snap/compare/v0.61.1...v0.61.2) (2024-10-28)
+
+**Note:** Version bump only for package @searchspring/snap-store-mobx
+
+## [0.61.1](https://github.com/searchspring/snap/compare/v0.61.0...v0.61.1) (2024-10-25)
+
+**Note:** Version bump only for package @searchspring/snap-store-mobx
+
+# [0.61.0](https://github.com/searchspring/snap/compare/v0.60.4...v0.61.0) (2024-10-25)
+
+### Features
+
+- **controller/autocomplete:** adding new setting that prevents binding the document click event ([7aaa6ee](https://github.com/searchspring/snap/commit/7aaa6ee4fee39ae7b1a05334270b76d052ce39ca))
 
 ## [0.60.4](https://github.com/searchspring/snap/compare/v0.60.3...v0.60.4) (2024-09-25)
 

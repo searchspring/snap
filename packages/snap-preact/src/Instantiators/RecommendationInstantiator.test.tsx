@@ -1,11 +1,14 @@
 import { RecommendationInstantiator, RecommendationInstantiatorConfig } from './RecommendationInstantiator';
 import type { PluginGrouping } from '@searchspring/snap-controller';
+import { cookies } from '@searchspring/snap-toolbox';
 
 import { Logger } from '@searchspring/snap-logger';
 import { MockClient } from '@searchspring/snap-shared';
 import { Next } from '@searchspring/snap-event-manager';
+import { waitFor } from '@testing-library/preact';
 
 const DEFAULT_PROFILE = 'trending';
+const CART_COOKIE = 'ssCartProducts';
 
 const Component = (props: any) => {
 	const controller = props.controller;
@@ -35,6 +38,7 @@ const baseConfig: RecommendationInstantiatorConfig = {
 describe('RecommendationInstantiator', () => {
 	beforeEach(() => {
 		delete window.searchspring;
+		cookies.unset(CART_COOKIE);
 	});
 
 	it('throws if configuration is not provided', () => {
@@ -276,7 +280,183 @@ describe('RecommendationInstantiator', () => {
 		expect(clientSpy).toHaveBeenCalledTimes(4);
 	});
 
-	it('makes the context found on the target available', async () => {
+	it('supports legacy script type', async () => {
+		document.body.innerHTML = `<script type="searchspring/personalized-recommendations" profile="legacy"></script>`;
+
+		const client = new MockClient(baseConfig.client!.globals, {});
+		const clientSpy = jest.spyOn(client, 'recommend');
+
+		const recommendationInstantiator = new RecommendationInstantiator(baseConfig, { client });
+		await wait();
+		expect(Object.keys(recommendationInstantiator.controller).length).toBe(1);
+		expect(recommendationInstantiator.controller['recommend_legacy_0']).toBeDefined();
+		expect(clientSpy).toHaveBeenCalledTimes(1);
+	});
+
+	it('supports legacy script type with array values in seed', async () => {
+		document.body.innerHTML = `<script type="searchspring/personalized-recommendations" profile="legacy">
+			seed = ['prod1234'];
+		</script>`;
+
+		const client = new MockClient(baseConfig.client!.globals, {});
+		const clientSpy = jest.spyOn(client, 'recommend');
+
+		const recommendationInstantiator = new RecommendationInstantiator(baseConfig, { client });
+		await wait();
+		expect(Object.keys(recommendationInstantiator.controller).length).toBe(1);
+		expect(recommendationInstantiator.controller['recommend_legacy_0']).toBeDefined();
+		expect(clientSpy).toHaveBeenCalledTimes(1);
+		expect(clientSpy).toHaveBeenCalledWith({
+			batchId: undefined,
+			batched: true,
+			branch: 'production',
+			products: ['prod1234'],
+			siteId: '8uyt2m',
+			tag: 'legacy',
+		});
+	});
+
+	it('supports legacy script type with array values in product', async () => {
+		document.body.innerHTML = `<script type="searchspring/personalized-recommendations" profile="legacy">
+			product = ['prod1234'];
+		</script>`;
+
+		const client = new MockClient(baseConfig.client!.globals, {});
+		const clientSpy = jest.spyOn(client, 'recommend');
+
+		const recommendationInstantiator = new RecommendationInstantiator(baseConfig, { client });
+		await wait();
+		expect(Object.keys(recommendationInstantiator.controller).length).toBe(1);
+		expect(recommendationInstantiator.controller['recommend_legacy_0']).toBeDefined();
+		expect(clientSpy).toHaveBeenCalledTimes(1);
+		expect(clientSpy).toHaveBeenCalledWith({
+			batchId: undefined,
+			batched: true,
+			branch: 'production',
+			products: ['prod1234'],
+			siteId: '8uyt2m',
+			tag: 'legacy',
+		});
+	});
+
+	it('supports legacy script type with array values in products', async () => {
+		document.body.innerHTML = `<script type="searchspring/personalized-recommendations" profile="legacy">
+			products = ['prod1234', 'prod4567'];
+		</script>`;
+
+		const client = new MockClient(baseConfig.client!.globals, {});
+		const clientSpy = jest.spyOn(client, 'recommend');
+
+		const recommendationInstantiator = new RecommendationInstantiator(baseConfig, { client });
+		await wait();
+		expect(Object.keys(recommendationInstantiator.controller).length).toBe(1);
+		expect(recommendationInstantiator.controller['recommend_legacy_0']).toBeDefined();
+		expect(clientSpy).toHaveBeenCalledTimes(1);
+		expect(clientSpy).toHaveBeenCalledWith({
+			batchId: undefined,
+			batched: true,
+			branch: 'production',
+			products: ['prod1234', 'prod4567'],
+			siteId: '8uyt2m',
+			tag: 'legacy',
+		});
+	});
+
+	it('supports legacy script type with config context', async () => {
+		const profile = 'legacy';
+		document.body.innerHTML = `<script type="searchspring/personalized-recommendations" profile="${profile}"></script>`;
+
+		const client = new MockClient(baseConfig.client!.globals, {});
+		const clientSpy = jest.spyOn(client, 'recommend');
+
+		const newConfig = {
+			...baseConfig,
+			context: {
+				testing: 'things',
+			},
+		};
+
+		const recommendationInstantiator = new RecommendationInstantiator(newConfig, { client });
+		await wait();
+		expect(Object.keys(recommendationInstantiator.controller).length).toBe(1);
+		expect(recommendationInstantiator.controller['recommend_legacy_0']).toBeDefined();
+		expect(recommendationInstantiator.controller['recommend_legacy_0'].context).toStrictEqual({
+			profile,
+			...newConfig.context,
+		});
+		expect(clientSpy).toHaveBeenCalledTimes(1);
+	});
+
+	it('supports legacy scripts with batching', async () => {
+		document.body.innerHTML = `
+		
+		<script type="searchspring/personalized-recommendations" profile="legacy">
+			options = {
+				batched: true
+			};
+			products = ['prod1234', 'prod4567'];
+		</script>
+		
+		<script type="searchspring/personalized-recommendations" profile="legacy">
+			options = {
+				batched: false
+			};
+			products = ['prod0'];
+		</script>
+		
+		<script type="searchspring/personalized-recommendations" profile="legacy">
+			options = {
+				batched: true
+			};
+			products = ['prod789'];
+		</script>`;
+
+		const client = new MockClient(baseConfig.client!.globals, {});
+		const clientSpy = jest.spyOn(client, 'recommend');
+
+		const recommendationInstantiator = new RecommendationInstantiator(baseConfig, { client });
+		await wait();
+		expect(Object.keys(recommendationInstantiator.controller).length).toBe(3);
+		expect(recommendationInstantiator.controller['recommend_legacy_0']).toBeDefined();
+		expect(clientSpy).toHaveBeenCalledTimes(3);
+		expect(clientSpy).toHaveBeenNthCalledWith(1, {
+			batchId: undefined,
+			batched: true,
+			branch: 'production',
+			products: ['prod1234', 'prod4567'],
+			profile: {
+				batched: true,
+			},
+			siteId: '8uyt2m',
+			tag: 'legacy',
+		});
+
+		expect(clientSpy).toHaveBeenNthCalledWith(2, {
+			batchId: undefined,
+			batched: false,
+			branch: 'production',
+			products: ['prod0'],
+			profile: {
+				batched: false,
+			},
+			siteId: '8uyt2m',
+			tag: 'legacy',
+		});
+
+		expect(clientSpy).toHaveBeenNthCalledWith(3, {
+			batchId: undefined,
+			batched: true,
+			branch: 'production',
+			products: ['prod789'],
+			profile: {
+				batched: true,
+			},
+			siteId: '8uyt2m',
+			tag: 'legacy',
+		});
+	});
+
+	it('makes the context found on the target and in the config available', async () => {
 		document.body.innerHTML = `<script type="searchspring/recommend" profile="${DEFAULT_PROFILE}">
 			shopper = { id: 'snapdev' };
 			product = 'sku1';
@@ -306,7 +486,14 @@ describe('RecommendationInstantiator', () => {
 		const client = new MockClient(baseConfig.client!.globals, {});
 		const clientSpy = jest.spyOn(client, 'recommend');
 
-		const recommendationInstantiator = new RecommendationInstantiator(baseConfig, { client });
+		const newConfig = {
+			...baseConfig,
+			context: {
+				testing: 'things',
+			},
+		};
+
+		const recommendationInstantiator = new RecommendationInstantiator(newConfig, { client });
 		await wait();
 		expect(Object.keys(recommendationInstantiator.controller).length).toBe(1);
 		Object.keys(recommendationInstantiator.controller).forEach((controllerId) => {
@@ -337,6 +524,7 @@ describe('RecommendationInstantiator', () => {
 					limit: 5,
 					siteId: 'abc123',
 				},
+				...newConfig.context,
 			});
 		});
 
@@ -449,7 +637,7 @@ describe('RecommendationInstantiator', () => {
 	it('can use new style script tags and context', async () => {
 		const profileContextArray = [
 			{
-				profile: 'trending',
+				profile: 'trending', // using 'profile' here to ensure compatibility
 				selector: '#tout1',
 				custom: { some: 'thing1' },
 				options: {
@@ -470,7 +658,7 @@ describe('RecommendationInstantiator', () => {
 				},
 			},
 			{
-				profile: 'similar',
+				tag: 'similar', // using 'tag' here to ensure compatibility
 				selector: '#tout2',
 				custom: { some: 'thing2' },
 				options: {
@@ -524,7 +712,7 @@ describe('RecommendationInstantiator', () => {
 						}
 					},
 					{
-						profile: 'similar',
+						tag: 'similar',
 						selector: '#tout2',
 						custom: { some: 'thing2' },
 						options: {
@@ -617,6 +805,51 @@ describe('RecommendationInstantiator', () => {
 		});
 	});
 
+	it('can use new style script (without globals)', async () => {
+		const profileContextArray = [
+			{
+				tag: '404',
+				selector: '.ss__recs__404',
+			},
+		];
+
+		//good testing to build off of
+		document.body.innerHTML = `
+			<div class="ss__recs__404"></div>
+			<script type="searchspring/recommendations">
+				profiles = [
+					{
+						tag: '404',
+						selector: '.ss__recs__404',
+					},
+				];
+			</script>
+		`;
+
+		const client = new MockClient(baseConfig.client!.globals, {});
+		const clientSpy = jest.spyOn(client, 'recommend');
+
+		const recommendationInstantiator = new RecommendationInstantiator(baseConfig, { client });
+		await wait();
+		expect(Object.keys(recommendationInstantiator.controller).length).toBe(1);
+		Object.keys(recommendationInstantiator.controller).forEach((controllerId, index) => {
+			const controller = recommendationInstantiator.controller[controllerId];
+			expect(controller.context).toStrictEqual({
+				profile: profileContextArray[index],
+			});
+		});
+		const batchId = recommendationInstantiator.controller[Object.keys(recommendationInstantiator.controller)[0]].store.config.batchId;
+
+		expect(clientSpy).toHaveBeenCalledTimes(1);
+		expect(clientSpy).toHaveBeenNthCalledWith(1, {
+			tag: '404',
+			batchId,
+			siteId: baseConfig.client?.globals.siteId,
+			branch: 'production',
+			batched: true,
+		});
+	});
+
 	it('will utilize attachments (plugins / middleware) added via methods upon creation of controller', async () => {
 		document.body.innerHTML = `<script type="searchspring/recommend" profile="${DEFAULT_PROFILE}"></script>`;
 
@@ -702,6 +935,47 @@ describe('RecommendationInstantiator', () => {
 			expect(plugin).toHaveBeenCalledWith(controller, 'param1', { thing: 'here' });
 			expect(plugin2).toHaveBeenCalledTimes(1);
 			expect(plugin2).toHaveBeenCalledWith(controller);
+		});
+	});
+
+	it(`searchOnPageShow triggers search on persisted pageshow event `, async function () {
+		document.body.innerHTML = `<script type="searchspring/recommend" profile="${DEFAULT_PROFILE}"></script>`;
+
+		const attachmentConfig = {
+			...baseConfig,
+			config: {
+				branch: baseConfig.config.branch,
+			},
+		};
+
+		const client = new MockClient(baseConfig.client!.globals, {});
+		const recommendationInstantiator = new RecommendationInstantiator(attachmentConfig as RecommendationInstantiatorConfig, { client });
+		await wait();
+
+		Object.keys(recommendationInstantiator.controller).forEach(async (controllerId) => {
+			const controller = recommendationInstantiator.controller[controllerId];
+			const searchSpy = jest.spyOn(controller, 'search');
+			expect(searchSpy).not.toHaveBeenCalled();
+
+			// Mock PageTransitionEvent
+			class MockPageTransitionEvent extends Event {
+				public persisted: boolean;
+
+				constructor(type: string, eventInitDict?: EventInit & { persisted?: boolean }) {
+					super(type, eventInitDict);
+					this.persisted = eventInitDict?.persisted ?? false;
+				}
+			}
+			const event = new MockPageTransitionEvent('pageshow', {
+				bubbles: true,
+				persisted: true,
+			});
+
+			window.dispatchEvent(event);
+
+			await waitFor(() => {
+				expect(searchSpy).toHaveBeenCalled();
+			});
 		});
 	});
 });
