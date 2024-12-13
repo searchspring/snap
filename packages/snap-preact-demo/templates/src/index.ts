@@ -34,6 +34,7 @@ let config: SnapTemplatesConfig = {
 						lazyRender: {
 							enabled: false,
 						},
+						speed: 0,
 					},
 					recommendationBundle: {
 						lazyRender: {
