@@ -42,6 +42,7 @@ export function Icon(properties: IconProps): JSX.Element {
 		styleScript: __,
 		themeStyleScript: ___,
 		name: ____,
+		treePath: _____,
 		...otherProps
 	} = props;
 
@@ -96,6 +97,7 @@ export interface IconProps extends ComponentProps {
 }
 export type IconNames =
 	| 'bundle-cart'
+	| 'bundle-selector'
 	| 'next'
 	| 'prev'
 	| 'active'

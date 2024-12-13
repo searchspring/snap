@@ -46,23 +46,25 @@ export const BundledCTA = observer((properties: BundledCTAProps): JSX.Element =>
 			...globalTheme?.components?.icon,
 			// component theme overrides
 			theme: props?.theme,
-			treePath,
+			treePath: treePath,
 		},
 		subtotalStrike: {
 			// default props
+			name: 'bundle-msrp',
 			// global theme
-			...globalTheme?.components?.icon,
+			...globalTheme?.components?.price,
 			// component theme overrides
 			theme: props?.theme,
-			treePath,
+			treePath: treePath,
 		},
 		subtotalPrice: {
 			// default props
+			name: 'bundle-price',
 			// global theme
-			...globalTheme?.components?.icon,
+			...globalTheme?.components?.price,
 			// component theme overrides
 			theme: props?.theme,
-			treePath,
+			treePath: treePath,
 		},
 	};
 

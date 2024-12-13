@@ -449,6 +449,7 @@ export const RecommendationBundle = observer((properties: RecommendationBundlePr
 													hideCheckboxes={hideCheckboxes}
 													theme={props.theme}
 													ref={seedRef}
+													treePath={treePath}
 													lang={{ seedText: lang.seedText }}
 												>
 													{resultComponent ? (
@@ -501,6 +502,7 @@ export const RecommendationBundle = observer((properties: RecommendationBundlePr
 																			checked={selected}
 																			hideCheckboxes={hideCheckboxes}
 																			theme={props.theme}
+																			treePath={treePath}
 																			lang={{ seedText: lang.seedText }}
 																		>
 																			{resultComponent ? (
@@ -521,6 +523,7 @@ export const RecommendationBundle = observer((properties: RecommendationBundlePr
 																			checked={selected}
 																			hideCheckboxes={hideCheckboxes}
 																			theme={props.theme}
+																			treePath={treePath}
 																			className={idx + 1 == resultsToRender.length ? 'ss__recommendation-bundle__wrapper__selector--last' : ''}
 																		>
 																			{resultComponent ? (
@@ -547,6 +550,7 @@ export const RecommendationBundle = observer((properties: RecommendationBundlePr
 																		checked={selected}
 																		hideCheckboxes={hideCheckboxes}
 																		theme={props.theme}
+																		treePath={treePath}
 																		className={idx + 1 == results.length ? 'ss__recommendation-bundle__wrapper__selector--last' : ''}
 																	>
 																		{resultComponent ? (
@@ -579,6 +583,7 @@ export const RecommendationBundle = observer((properties: RecommendationBundlePr
 														checked={selected}
 														hideCheckboxes={hideCheckboxes}
 														theme={props.theme}
+														treePath={treePath}
 														lang={{ seedText: lang.seedText }}
 													>
 														{resultComponent ? (
@@ -599,6 +604,7 @@ export const RecommendationBundle = observer((properties: RecommendationBundlePr
 														checked={selected}
 														hideCheckboxes={hideCheckboxes}
 														theme={props.theme}
+														treePath={treePath}
 														className={idx + 1 == resultsToRender.length ? 'ss__recommendation-bundle__wrapper__selector--last' : ''}
 													>
 														{resultComponent ? (
@@ -622,6 +628,7 @@ export const RecommendationBundle = observer((properties: RecommendationBundlePr
 									ctaButtonSuccessText={ctaButtonSuccessText}
 									ctaButtonSuccessTimeout={ctaButtonSuccessTimeout}
 									ctaIcon={ctaIcon}
+									treePath={treePath}
 									lang={{
 										ctaButtonSuccessText: lang.ctaButtonSuccessText,
 										ctaButtonText: lang.ctaButtonText,
@@ -638,6 +645,7 @@ export const RecommendationBundle = observer((properties: RecommendationBundlePr
 								ctaButtonSuccessText={ctaButtonSuccessText}
 								ctaButtonSuccessTimeout={ctaButtonSuccessTimeout}
 								ctaIcon={ctaIcon}
+								treePath={treePath}
 								lang={{
 									ctaButtonSuccessText: lang.ctaButtonSuccessText,
 									ctaButtonText: lang.ctaButtonText,

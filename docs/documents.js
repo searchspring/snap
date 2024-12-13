@@ -174,6 +174,13 @@ var documents = [
 						hidden: true,
 					},
 					{
+						label: 'Product Variants',
+						route: '/integration-variants',
+						type: 'markdown',
+						url: './docs/INTEGRATION_VARIANTS.md',
+						searchable: true,
+					},
+					{
 						label: 'Tracking',
 						route: '/integration-tracking',
 						type: 'markdown',
