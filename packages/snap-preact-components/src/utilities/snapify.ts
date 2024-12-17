@@ -22,7 +22,7 @@ type CreateConfig = {
 };
 
 // configure MobX
-configureMobx({ useProxies: 'never', isolateGlobalState: true, enforceActions: 'never' });
+configureMobx({ useProxies: 'always', isolateGlobalState: true, enforceActions: 'never' });
 
 const controllers: {
 	[id: string]: SearchController | AutocompleteController | RecommendationController;
