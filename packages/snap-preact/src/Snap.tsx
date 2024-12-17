@@ -35,8 +35,17 @@ import { RecommendationInstantiator, RecommendationInstantiatorConfig } from './
 import type { SnapControllerServices, SnapControllerConfig, InitialUrlConfig } from './types';
 import { setupEvents } from './setupEvents';
 
+if (!window.searchspring?.build) {
+	window.searchspring = {
+		...window.searchspring,
+		build: 'modern',
+	};
+}
+
+const useProxies = Boolean(window.searchspring.build == 'modern');
+
 // configure MobX
-configureMobx({ useProxies: 'never', isolateGlobalState: true, enforceActions: 'never' });
+configureMobx({ useProxies: useProxies ? 'always' : 'never', isolateGlobalState: true, enforceActions: 'never' });
 
 export const BRANCH_COOKIE = 'ssBranch';
 export const DEV_COOKIE = 'ssDev';
