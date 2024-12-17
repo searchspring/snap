@@ -7,7 +7,7 @@ import type { Product } from '@searchspring/snap-store-mobx';
 
 import { Result, ResultProps } from '../../Molecules/Result';
 import { defined, mergeProps } from '../../../utilities';
-import { Theme, TreePathProvider, useTheme } from '../../../providers';
+import { Theme, useTheme } from '../../../providers';
 import { ComponentProps, ResultComponent } from '../../../types';
 
 export const RecommendationEmail = observer((properties: RecommendationEmailProps): JSX.Element => {
@@ -38,41 +38,34 @@ export const RecommendationEmail = observer((properties: RecommendationEmailProp
 
 	return resultsToRender.length > 0 ? (
 		<Fragment>
-			<TreePathProvider path={treePath!}>
-				{resultsToRender.map((result, idx) => (
-					<div
-						key={idx}
-						id={`ss-emailrec${idx}`}
-						className="ss__recommendation-email__result-wrapper"
-						style={{ display: 'block', width: resultWidth }}
-					>
-						{(() => {
-							if (resultComponent) {
-								const ResultComponent = resultComponent;
-								return (
-									<ResultComponent controller={controller as AbstractController} result={result} {...resultProps} email={true} treePath={treePath} />
-								);
-							} else {
-								return (
-									<Result
-										result={result}
-										hideBadge
-										theme={{
-											components: {
-												image: {
-													lazy: false,
-												},
+			{resultsToRender.map((result, idx) => (
+				<div key={idx} id={`ss-emailrec${idx}`} className="ss__recommendation-email__result-wrapper" style={{ display: 'block', width: resultWidth }}>
+					{(() => {
+						if (resultComponent) {
+							const ResultComponent = resultComponent;
+							return (
+								<ResultComponent controller={controller as AbstractController} result={result} {...resultProps} email={true} treePath={treePath} />
+							);
+						} else {
+							return (
+								<Result
+									result={result}
+									hideBadge
+									theme={{
+										components: {
+											image: {
+												lazy: false,
 											},
-										}}
-										{...subProps.result}
-										{...resultProps}
-									/>
-								);
-							}
-						})()}
-					</div>
-				))}
-			</TreePathProvider>
+										},
+									}}
+									{...subProps.result}
+									{...resultProps}
+								/>
+							);
+						}
+					})()}
+				</div>
+			))}
 		</Fragment>
 	) : (
 		<></>

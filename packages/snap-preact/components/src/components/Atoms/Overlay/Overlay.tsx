@@ -32,7 +32,7 @@ export function Overlay(properties: OverlayProps): JSX.Element {
 	const defaultProps: Partial<OverlayProps> = {
 		color: 'rgba(0,0,0,0.8)',
 		transitionSpeed: '0.25s',
-		treePath: globalTreePath || undefined,
+		treePath: globalTreePath,
 	};
 
 	const props = mergeProps('overlay', globalTheme, defaultProps, properties);

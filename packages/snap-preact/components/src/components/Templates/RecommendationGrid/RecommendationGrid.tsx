@@ -8,7 +8,7 @@ import type { Product } from '@searchspring/snap-store-mobx';
 import { Result, ResultProps } from '../../Molecules/Result';
 import { ComponentProps, BreakpointsProps, ResultComponent, StyleScript } from '../../../types';
 import { defined, mergeProps, mergeStyles } from '../../../utilities';
-import { Theme, useTheme, CacheProvider, TreePathProvider } from '../../../providers';
+import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { useDisplaySettings } from '../../../hooks/useDisplaySettings';
 import { RecommendationProfileTracker } from '../../Trackers/Recommendation/ProfileTracker';
 import { RecommendationResultTracker } from '../../Trackers/Recommendation/ResultTracker';
@@ -112,40 +112,38 @@ export const RecommendationGrid = observer((properties: RecommendationGridProps)
 
 	return results?.length ? (
 		<CacheProvider>
-			<TreePathProvider path={treePath!}>
-				<div {...styling} ref={recsRef} className={classnames('ss__recommendation-grid', className)}>
-					{isVisible ? (
-						<RecommendationProfileTracker controller={controller}>
-							{title && <h3 className="ss__recommendation-grid__title">{title}</h3>}
+			<div {...styling} ref={recsRef} className={classnames('ss__recommendation-grid', className)}>
+				{isVisible ? (
+					<RecommendationProfileTracker controller={controller}>
+						{title && <h3 className="ss__recommendation-grid__title">{title}</h3>}
 
-							<div className="ss__recommendation-grid__results">
-								{results.map((result) =>
-									(() => {
-										if (resultComponent && controller) {
-											const ResultComponent = resultComponent;
-											return <ResultComponent controller={controller} result={result as Product} theme={theme} treePath={treePath} />;
-										} else {
-											return (
-												<RecommendationResultTracker result={result as Product} controller={controller}>
-													<Result key={(result as Product).id} {...subProps.result} result={result as Product} controller={controller} />
-												</RecommendationResultTracker>
-											);
-										}
-									})()
-								)}
-							</div>
-						</RecommendationProfileTracker>
-					) : (
-						<RecommendationProfileTracker controller={controller}>
-							{results.map((result) => (
-								<RecommendationResultTracker controller={controller} result={result}>
-									<></>
-								</RecommendationResultTracker>
-							))}
-						</RecommendationProfileTracker>
-					)}
-				</div>
-			</TreePathProvider>
+						<div className="ss__recommendation-grid__results">
+							{results.map((result) =>
+								(() => {
+									if (resultComponent && controller) {
+										const ResultComponent = resultComponent;
+										return <ResultComponent controller={controller} result={result as Product} theme={theme} treePath={treePath} />;
+									} else {
+										return (
+											<RecommendationResultTracker result={result as Product} controller={controller}>
+												<Result key={(result as Product).id} {...subProps.result} result={result as Product} controller={controller} />
+											</RecommendationResultTracker>
+										);
+									}
+								})()
+							)}
+						</div>
+					</RecommendationProfileTracker>
+				) : (
+					<RecommendationProfileTracker controller={controller}>
+						{results.map((result) => (
+							<RecommendationResultTracker controller={controller} result={result}>
+								<></>
+							</RecommendationResultTracker>
+						))}
+					</RecommendationProfileTracker>
+				)}
+			</div>
 		</CacheProvider>
 	) : (
 		<Fragment></Fragment>
