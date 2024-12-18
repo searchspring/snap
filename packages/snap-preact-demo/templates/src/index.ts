@@ -30,17 +30,6 @@ let config: SnapTemplatesConfig = {
 			style: globalStyles,
 			overrides: {
 				components: {
-					recommendation: {
-						lazyRender: {
-							enabled: false,
-						},
-						speed: 0,
-					},
-					recommendationBundle: {
-						lazyRender: {
-							enabled: false,
-						},
-					},
 					noResults: {
 						templates: {
 							recommendation: {
