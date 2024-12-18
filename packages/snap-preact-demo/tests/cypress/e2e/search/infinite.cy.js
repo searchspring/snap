@@ -27,8 +27,11 @@ describe('Infinite Setting Test', () => {
 			const resultsPerPage = store.results.length;
 			cy.get('.ss__result').should('have.length', resultsPerPage);
 
-			// click next page, results should be appended
-			cy.get('.ss__pagination__page--next').first().click({ force: true });
+			// load next page of results manually
+			cy.snapController().then(({ store }) => {
+				store.pagination.next.url.go({ history: 'replace' });
+			});
+
 			cy.snapController().then(({ store }) => {
 				expect(store.results.length).to.equal(resultsPerPage * 2);
 				expect(store.pagination.begin).to.equal(1);
@@ -71,8 +74,11 @@ describe('Infinite Setting Test', () => {
 			const resultsPerPage = store.results.length;
 			cy.get('.ss__result').should('have.length', resultsPerPage);
 
-			// click next page, results should be appended
-			cy.get('.ss__pagination__page--next').first().click({ force: true });
+			// load next page of results manually
+			cy.snapController().then(({ store }) => {
+				store.pagination.next.url.go({ history: 'replace' });
+			});
+
 			cy.waitUntil(() => cy.get('.ss__result').should('have.length', resultsPerPage * 2));
 			cy.snapController().then(({ store }) => {
 				expect(store.results.length).to.equal(resultsPerPage * 2);
@@ -86,8 +92,11 @@ describe('Infinite Setting Test', () => {
 				});
 			});
 
-			// click next page again, expect 3 pages of results
-			cy.get('.ss__pagination__page--next').first().click({ force: true });
+			// load next page of results manually
+			cy.snapController().then(({ store }) => {
+				store.pagination.next.url.go({ history: 'replace' });
+			});
+
 			cy.waitUntil(() => cy.get('.ss__result').should('have.length', resultsPerPage * 3));
 			cy.snapController().then(({ store }) => {
 				expect(store.results.length).to.equal(resultsPerPage * 3);

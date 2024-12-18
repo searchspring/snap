@@ -36,7 +36,8 @@ export class SearchResultStore extends Array<Product | Banner> {
 		resultData?: SearchResponseModelResult[],
 		paginationData?: SearchResponseModelPagination,
 		merchData?: SearchResponseModelMerchandising,
-		loaded?: boolean
+		loaded?: boolean,
+		previousResults?: (Product | Banner)[] // used for infinite scroll functionality
 	) {
 		let results: (Product | Banner)[] = (resultData || []).map((result) => {
 			return new Product(services, result, metaData, config);
@@ -88,7 +89,7 @@ export class SearchResultStore extends Array<Product | Banner> {
 				results = addBannersToResults(config, results, banners, paginationData);
 			}
 		}
-		super(...results);
+		super(...(previousResults || []).concat(results));
 	}
 }
 

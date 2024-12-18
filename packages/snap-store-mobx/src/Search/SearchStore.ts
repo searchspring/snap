@@ -105,7 +105,8 @@ export class SearchStore extends AbstractStore {
 			data?.results || [],
 			data.pagination,
 			data.merchandising,
-			this.loaded
+			this.loaded,
+			(this.config as SearchStoreConfig).settings?.infinite && this.results
 		);
 		this.pagination = new SearchPaginationStore(this.config, this.services, data.pagination, this.meta.data);
 		this.sorting = new SearchSortingStore(this.services, data?.sorting || [], data?.search || {}, this.meta.data);

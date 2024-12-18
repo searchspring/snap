@@ -408,12 +408,9 @@ export class SearchController extends AbstractController {
 				} else {
 					// infinite with no backfills.
 					[meta, response] = await this.client.search(params);
-
-					// append new results to previous results
-					response.results = [...this.previousResults, ...(response.results || [])];
 				}
 			} else {
-				// standard request (not using infinite scroll)
+				// normal request for next page
 				[meta, response] = await this.client.search(params);
 			}
 
