@@ -62,6 +62,11 @@ export class Results extends Component<ResultsProps> {
 				<div class="clear"></div>
 
 				<div class="ss-toolbar ss-toolbar-bottom">{!infiniteEnabled && pagination.totalPages > 1 && <Pagination pagination={pagination} />}</div>
+				{infiniteEnabled && (
+					<div class="ss-page-circle">
+						<span class="ss-page-circle-number">{pagination.current.number}</span>
+					</div>
+				)}
 
 				<div class="clear"></div>
 			</div>
