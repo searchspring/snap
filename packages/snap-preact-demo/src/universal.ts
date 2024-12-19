@@ -10,10 +10,9 @@ if (!('Symbol' in window) || !('flatMap' in Array.prototype) || !('includes' in 
 }
 Promise.all(promises).then(() => {
 	// @ts-ignore - types not important
-	window.searchspring = {
-		...window.searchspring,
-		build: 'universal',
-	};
+	window.searchspring = window.searchspring || {};
+	// @ts-ignore - types not important
+	window.searchspring.build = 'universal';
 
 	import('./index');
 });
