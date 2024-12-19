@@ -75,9 +75,15 @@ describe('Search Controller', () => {
 		expect(controller.store.loaded).toBe(false);
 		expect(controller.store.loading).toBe(true);
 
+		// @ts-ignore - private variable assertion
+		expect(controller.previousResponse).not.toBeDefined();
+
 		await searchPromise;
 		expect(controller.store.loaded).toBe(true);
 		expect(controller.store.loading).toBe(false);
+
+		// @ts-ignore - private variable assertion
+		expect(controller.previousResponse).toBeDefined();
 
 		expect(searchfn).toHaveBeenCalled();
 		expect(controller.store.results.length).toBeGreaterThan(0);
@@ -185,32 +191,6 @@ describe('Search Controller', () => {
 
 		// should not redirect whem redirectResponse='full'
 		expect(window.location.replace).not.toHaveBeenCalled();
-		expect(controller.store.results.length).toBeGreaterThan(0);
-	});
-
-	it('tests infinite setting', async () => {
-		searchConfig = {
-			...searchConfig,
-			settings: {
-				infinite: {
-					backfill: 5,
-				},
-			},
-		};
-
-		const controller = new SearchController(searchConfig, {
-			client: new MockClient(globals, {}),
-			store: new SearchStore(searchConfig, services),
-			urlManager,
-			eventManager: new EventManager(),
-			profiler: new Profiler(),
-			logger: new Logger(),
-			tracker: new Tracker(globals),
-		});
-
-		expect(controller.config.settings!.infinite!.backfill).toBe(searchConfig.settings!.infinite!.backfill);
-
-		await controller.search();
 		expect(controller.store.results.length).toBeGreaterThan(0);
 	});
 
@@ -358,14 +338,6 @@ describe('Search Controller', () => {
 	});
 
 	it('can invoke controller track.product.click', async () => {
-		searchConfig = {
-			...searchConfig,
-			settings: {
-				infinite: {
-					backfill: 5,
-				},
-			},
-		};
 		const controller = new SearchController(searchConfig, {
 			client: new MockClient(globals, {}),
 			store: new SearchStore(searchConfig, services),
@@ -400,6 +372,125 @@ describe('Search Controller', () => {
 		storagefn.mockClear();
 	});
 
+	it('tests that a repeated search with infinite does not duplicate results', async () => {
+		searchConfig = {
+			...searchConfig,
+			settings: {
+				infinite: {},
+			},
+		};
+
+		const controller = new SearchController(searchConfig, {
+			client: new MockClient(globals, {}),
+			store: new SearchStore(searchConfig, services),
+			urlManager,
+			eventManager: new EventManager(),
+			profiler: new Profiler(),
+			logger: new Logger(),
+			tracker: new Tracker(globals),
+		});
+
+		expect(controller.config.settings!.infinite).toBeDefined();
+
+		// set page 1 data
+		(controller.client as MockClient).mockData.updateConfig({ search: 'infinite.page1', siteId: '8uyt2m' });
+
+		await controller.search();
+		expect(controller.store.results.length).toBe(30);
+
+		await controller.search();
+		expect(controller.store.results.length).toBe(30);
+
+		await controller.search();
+		expect(controller.store.results.length).toBe(30);
+	});
+
+	it('tests infinite setting', async () => {
+		searchConfig = {
+			...searchConfig,
+			settings: {
+				infinite: {},
+			},
+		};
+
+		const controller = new SearchController(searchConfig, {
+			client: new MockClient(globals, {}),
+			store: new SearchStore(searchConfig, services),
+			urlManager,
+			eventManager: new EventManager(),
+			profiler: new Profiler(),
+			logger: new Logger(),
+			tracker: new Tracker(globals),
+		});
+
+		expect(controller.config.settings!.infinite).toBeDefined();
+
+		// set page 1 data
+		(controller.client as MockClient).mockData.updateConfig({ search: 'infinite.page1', siteId: '8uyt2m' });
+
+		await controller.search();
+		expect(controller.store.results.length).toBe(30);
+
+		// set page 2 data
+		(controller.client as MockClient).mockData.updateConfig({ search: 'infinite.page2', siteId: '8uyt2m' });
+		controller.urlManager = controller.urlManager.set('page', 2);
+
+		await controller.search();
+		expect(controller.store.results.length).toBe(60);
+
+		// set page 3 data
+		(controller.client as MockClient).mockData.updateConfig({ search: 'infinite.page3', siteId: '8uyt2m' });
+		controller.urlManager = controller.urlManager.set('page', 3);
+
+		await controller.search();
+		expect(controller.store.results.length).toBe(90);
+	});
+
+	it('when using infinite setting and applying a filter the pagination resets', async () => {
+		searchConfig = {
+			...searchConfig,
+			settings: {
+				infinite: {},
+			},
+		};
+
+		const controller = new SearchController(searchConfig, {
+			client: new MockClient(globals, {}),
+			store: new SearchStore(searchConfig, services),
+			urlManager,
+			eventManager: new EventManager(),
+			profiler: new Profiler(),
+			logger: new Logger(),
+			tracker: new Tracker(globals),
+		});
+
+		expect(controller.config.settings!.infinite).toBeDefined();
+
+		// set page 1 data
+		(controller.client as MockClient).mockData.updateConfig({ search: 'infinite.page1', siteId: '8uyt2m' });
+
+		await controller.search();
+		expect(controller.store.results.length).toBe(30);
+
+		// set page 2 data
+		(controller.client as MockClient).mockData.updateConfig({ search: 'infinite.page2', siteId: '8uyt2m' });
+
+		await controller.search();
+		expect(controller.store.results.length).toBe(60);
+
+		// simulate a filter being applied
+		controller.urlManager = controller.urlManager.merge('filter.color_family', 'Blue');
+		expect(controller.params.filters?.length).toBe(1);
+
+		// set filtered data
+		(controller.client as MockClient).mockData.updateConfig({ search: 'infinite.filtered', siteId: '8uyt2m' });
+
+		await controller.search();
+
+		// ensure that we do not keep concatenating results
+		expect(controller.store.results.length).toBe(30);
+	});
+
 	it('backfills results', async () => {
 		searchConfig = {
 			...searchConfig,
@@ -419,7 +510,7 @@ describe('Search Controller', () => {
 			tracker: new Tracker(globals),
 		});
 
-		(controller.client as MockClient).mockData.updateConfig({ search: 'infinitePage3', siteId: '8uyt2m' });
+		(controller.client as MockClient).mockData.updateConfig({ search: 'infinite.page1', siteId: '8uyt2m' });
 
 		const searchfn = jest.spyOn(controller.client, 'search');
 
@@ -432,6 +523,7 @@ describe('Search Controller', () => {
 		const { pageSize } = controller.store.pagination;
 		expect(searchfn).toHaveBeenCalledTimes(page);
 
+		// asserting that search API has been called the same number of times as the current page parameter
 		expect(searchfn).toHaveBeenNthCalledWith(1, expect.objectContaining({ pagination: {} }));
 		expect(searchfn).toHaveBeenNthCalledWith(2, expect.objectContaining({ pagination: { page: 2 }, search: { redirectResponse: 'full' } }));
 		expect(searchfn).toHaveBeenNthCalledWith(3, expect.objectContaining({ pagination: { page: 3 }, search: { redirectResponse: 'full' } }));

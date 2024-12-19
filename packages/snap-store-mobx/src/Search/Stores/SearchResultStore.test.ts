@@ -5,7 +5,7 @@ import { SearchResponseModelResultCoreMappings } from '@searchspring/snapi-types
 
 import { Banner, Product, SearchResultStore, ProductMask, Variants, Variant, VariantSelection, VariantData } from './SearchResultStore';
 import { parse } from 'uuid';
-import { StoreConfigs, VariantConfig } from '../../types';
+import type { SearchStoreConfig, StoreConfigs, VariantConfig } from '../../types';
 
 const services = {
 	urlManager: new UrlManager(new UrlTranslator()),
@@ -66,6 +66,203 @@ describe('SearchResultStore', () => {
 			// check attributes
 			Object.keys(result.attributes).forEach((key) => {
 				const attributes = searchData.results && searchData.results[index] && searchData.results[index].attributes;
+				const value = attributes && attributes[key];
+				expect(result.attributes[key]).toStrictEqual(value);
+			});
+		});
+	});
+
+	it('supports infinite scroll result concatenation with previous results', () => {
+		const infiniteConfig: SearchStoreConfig = {
+			...searchConfig,
+			settings: {
+				infinite: {},
+			},
+		};
+		const dataPage1 = mockData.searchMeta('infinite.page1');
+		const resultsPage1 = new SearchResultStore(
+			infiniteConfig,
+			services,
+			{},
+			dataPage1.results,
+			dataPage1.pagination,
+			dataPage1.merchandising,
+			false,
+			undefined,
+			undefined
+		);
+
+		expect(resultsPage1.length).toBe(dataPage1.results?.length);
+
+		const dataPage2 = mockData.searchMeta('infinite.page2');
+		const resultsPage2 = new SearchResultStore(
+			infiniteConfig,
+			services,
+			{},
+			dataPage2.results,
+			dataPage2.pagination,
+			dataPage2.merchandising,
+			true,
+			dataPage1.pagination,
+			resultsPage1
+		);
+
+		expect(resultsPage2.length).toBe(dataPage1.results!.length + dataPage2.results!.length);
+
+		const dataPage3 = mockData.searchMeta('infinite.page3');
+		const resultsPage3 = new SearchResultStore(
+			infiniteConfig,
+			services,
+			{},
+			dataPage3.results,
+			dataPage3.pagination,
+			dataPage3.merchandising,
+			true,
+			dataPage2.pagination,
+			resultsPage2
+		);
+
+		expect(resultsPage3.length).toBe(dataPage1.results!.length + dataPage2.results!.length + dataPage3.results!.length);
+
+		// results will be in the order they were fetched (page1, page2, page3)
+		const sourceResultData = [...dataPage1.results!, ...dataPage2.results!, ...dataPage3.results!];
+		resultsPage3.forEach((result, index) => {
+			// check id
+			expect(result.id).toBe(sourceResultData && sourceResultData[index].id);
+
+			// check core mappings
+			Object.keys(result.mappings.core!).forEach((key) => {
+				const core = sourceResultData && sourceResultData[index]?.mappings?.core;
+				const value = core && core[key as keyof SearchResponseModelResultCoreMappings];
+				expect(result.mappings?.core && result.mappings?.core[key as keyof SearchResponseModelResultCoreMappings]).toBe(value);
+			});
+
+			// check attributes
+			Object.keys(result.attributes).forEach((key) => {
+				const attributes = sourceResultData && sourceResultData[index] && sourceResultData[index].attributes;
+				const value = attributes && attributes[key];
+				expect(result.attributes[key]).toStrictEqual(value);
+			});
+		});
+	});
+
+	it('will not concatenate with infinite if the page is not sequential from the previous page', () => {
+		const infiniteConfig: SearchStoreConfig = {
+			...searchConfig,
+			settings: {
+				infinite: {},
+			},
+		};
+		const dataPage1 = mockData.searchMeta('infinite.page1');
+
+		const resultsPage1 = new SearchResultStore(
+			infiniteConfig,
+			services,
+			{},
+			dataPage1.results,
+			dataPage1.pagination,
+			dataPage1.merchandising,
+			false,
+			undefined,
+			undefined
+		);
+
+		expect(resultsPage1.length).toBe(dataPage1.results?.length);
+
+		const dataPage3 = mockData.searchMeta('infinite.page3');
+
+		const resultsPage3 = new SearchResultStore(
+			infiniteConfig,
+			services,
+			{},
+			dataPage3.results,
+			dataPage3.pagination,
+			dataPage3.merchandising,
+			true,
+			dataPage1.pagination,
+			resultsPage1
+		);
+
+		// only contains a singlular page of results
+		// does not concatenate results because the pagination data is out of sequence
+		expect(resultsPage3.length).toBe(dataPage3.results!.length);
+
+		// contains the result data from dataPage3
+		resultsPage3.forEach((result, index) => {
+			// check id
+			expect(result.id).toBe(dataPage3.results && dataPage3.results[index].id);
+
+			// check core mappings
+			Object.keys(result.mappings.core!).forEach((key) => {
+				const core = dataPage3.results && dataPage3.results[index]?.mappings?.core;
+				const value = core && core[key as keyof SearchResponseModelResultCoreMappings];
+				expect(result.mappings?.core && result.mappings?.core[key as keyof SearchResponseModelResultCoreMappings]).toBe(value);
+			});
+
+			// check attributes
+			Object.keys(result.attributes).forEach((key) => {
+				const attributes = dataPage3.results && dataPage3.results[index] && dataPage3.results[index].attributes;
+				const value = attributes && attributes[key];
+				expect(result.attributes[key]).toStrictEqual(value);
+			});
+		});
+	});
+
+	it('will not concatenate results if infinite is not enabled', () => {
+		const infiniteConfig: SearchStoreConfig = {
+			...searchConfig,
+			settings: {
+				infinite: undefined,
+			},
+		};
+		const dataPage1 = mockData.searchMeta('infinite.page1');
+
+		const resultsPage1 = new SearchResultStore(
+			infiniteConfig,
+			services,
+			{},
+			dataPage1.results,
+			dataPage1.pagination,
+			dataPage1.merchandising,
+			false,
+			undefined,
+			undefined
+		);
+
+		expect(resultsPage1.length).toBe(dataPage1.results?.length);
+
+		const dataPage2 = mockData.searchMeta('infinite.page2');
+
+		const resultsPage2 = new SearchResultStore(
+			infiniteConfig,
+			services,
+			{},
+			dataPage2.results,
+			dataPage2.pagination,
+			dataPage2.merchandising,
+			true,
+			dataPage1.pagination,
+			resultsPage1
+		);
+
+		// only contains a singlular page of results
+		expect(resultsPage2.length).toBe(dataPage2.results!.length);
+
+		// contains the result data from dataPage2
+		resultsPage2.forEach((result, index) => {
+			// check id
+			expect(result.id).toBe(dataPage2.results && dataPage2.results[index].id);
+
+			// check core mappings
+			Object.keys(result.mappings.core!).forEach((key) => {
+				const core = dataPage2.results && dataPage2.results[index]?.mappings?.core;
+				const value = core && core[key as keyof SearchResponseModelResultCoreMappings];
+				expect(result.mappings?.core && result.mappings?.core[key as keyof SearchResponseModelResultCoreMappings]).toBe(value);
+			});
+
+			// check attributes
+			Object.keys(result.attributes).forEach((key) => {
+				const attributes = dataPage2.results && dataPage2.results[index] && dataPage2.results[index].attributes;
 				const value = attributes && attributes[key];
 				expect(result.attributes[key]).toStrictEqual(value);
 			});
