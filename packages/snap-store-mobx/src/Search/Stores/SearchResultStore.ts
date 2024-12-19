@@ -37,6 +37,7 @@ export class SearchResultStore extends Array<Product | Banner> {
 		paginationData?: SearchResponseModelPagination,
 		merchData?: SearchResponseModelMerchandising,
 		loaded?: boolean,
+		previousPaginationData?: SearchResponseModelPagination, // used for infinite scroll functionality
 		previousResults?: (Product | Banner)[] // used for infinite scroll functionality
 	) {
 		let results: (Product | Banner)[] = (resultData || []).map((result) => {
@@ -89,7 +90,20 @@ export class SearchResultStore extends Array<Product | Banner> {
 				results = addBannersToResults(config, results, banners, paginationData);
 			}
 		}
-		super(...(previousResults || []).concat(results));
+
+		// only when infinite is enabled
+		if ((config as SearchStoreConfig)?.settings?.infinite) {
+			// logic to determine when to concatenate previous results
+			// this logic is not bullet proof, but it is highly unlikely that the current and previous pagination data would ever be sequential unless paginating
+
+			// TODO: implement "load previous" with a limit to how many total products can be displayed
+			// the limit would be enforced by unloading (trimming) results based on the direction of the new search (previous page, next page)
+			if (paginationData?.page && previousPaginationData?.page && paginationData.page == previousPaginationData.page + 1) {
+				results = (previousResults || []).concat(results);
+			}
+		}
+
+		super(...results);
 	}
 }
 
