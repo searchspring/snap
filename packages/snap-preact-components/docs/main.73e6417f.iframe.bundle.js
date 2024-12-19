@@ -1,4 +1,4 @@
-/*! For license information please see main.908cc896.iframe.bundle.js.LICENSE.txt */
+/*! For license information please see main.73e6417f.iframe.bundle.js.LICENSE.txt */
 (self.webpackChunk_searchspring_snap_preact_components = self.webpackChunk_searchspring_snap_preact_components || []).push([
 	[792],
 	{
@@ -34739,12 +34739,12 @@
 				},
 				SearchController = (function (_AbstractController) {
 					function SearchController(config, _ref, context) {
-						var _this$config$settings8,
+						var _this$config$settings7,
+							_this$config$settings8,
 							_this$config$settings9,
-							_this$config$settings10,
 							_this,
+							_this$config$settings10,
 							_this$config$settings11,
-							_this$config$settings12,
 							client = _ref.client,
 							store = _ref.store,
 							urlManager = _ref.urlManager,
@@ -34760,7 +34760,6 @@
 							{ client, store, urlManager, eventManager, profiler, logger, tracker },
 							context,
 						])).type = ControllerTypes.search),
-						(_this.previousResults = []),
 						(_this.track = {
 							product: {
 								click: function click(e, result) {
@@ -34841,7 +34840,6 @@
 									_this$params$search2$,
 									_this$config$settings,
 									_params$pagination,
-									_this$config$settings7,
 									params,
 									stringyParams,
 									prevStringyParams,
@@ -34932,7 +34930,7 @@
 															params.pagination.page > 1
 														))
 													) {
-														_context.next = 57;
+														_context.next = 56;
 														break;
 													}
 													if (
@@ -34959,7 +34957,7 @@
 														null === (_this$config$settings4 = _this.config.settings) ||
 														void 0 === _this$config$settings4 ||
 														!_this$config$settings4.infinite.backfill ||
-														_this.previousResults.length
+														_this.store.loaded
 													) {
 														_context.next = 48;
 														break;
@@ -35008,7 +35006,7 @@
 																? void 0
 																: _params$pagination2.page),
 														(response.results = backfillResults),
-														(_context.next = 55);
+														(_context.next = 54);
 													break;
 												case 48:
 													return (_context.next = 50), _this.client.search(params);
@@ -35016,111 +35014,104 @@
 													(_yield$_this$client$s = _context.sent),
 														(_yield$_this$client$s2 = _slicedToArray(_yield$_this$client$s, 2)),
 														(meta = _yield$_this$client$s2[0]),
-														((response = _yield$_this$client$s2[1]).results = [].concat(
-															SearchController_toConsumableArray(_this.previousResults),
-															SearchController_toConsumableArray(response.results || [])
-														));
-												case 55:
-													_context.next = 63;
+														(response = _yield$_this$client$s2[1]);
+												case 54:
+													_context.next = 62;
 													break;
-												case 57:
-													return (_context.next = 59), _this.client.search(params);
-												case 59:
+												case 56:
+													return (_context.next = 58), _this.client.search(params);
+												case 58:
 													(_yield$_this$client$s3 = _context.sent),
 														(_yield$_this$client$s4 = _slicedToArray(_yield$_this$client$s3, 2)),
 														(meta = _yield$_this$client$s4[0]),
 														(response = _yield$_this$client$s4[1]);
-												case 63:
+												case 62:
 													return (
 														response.meta || (response.meta = meta),
 														searchProfile.stop(),
 														_this.log.profile(searchProfile),
 														(afterSearchProfile = _this.profiler.create({ type: 'event', name: 'afterSearch', context: params }).start()),
-														(_context.prev = 67),
-														(_context.next = 70),
+														(_context.prev = 66),
+														(_context.next = 69),
 														_this.eventManager.fire('afterSearch', { controller: _this, request: params, response })
 													);
-												case 70:
-													_context.next = 82;
+												case 69:
+													_context.next = 81;
 													break;
-												case 72:
+												case 71:
 													if (
-														((_context.prev = 72),
-														(_context.t1 = _context.catch(67)),
+														((_context.prev = 71),
+														(_context.t1 = _context.catch(66)),
 														'cancelled' != (null === _context.t1 || void 0 === _context.t1 ? void 0 : _context.t1.message))
 													) {
-														_context.next = 80;
+														_context.next = 79;
 														break;
 													}
 													return _this.log.warn("'afterSearch' middleware cancelled"), afterSearchProfile.stop(), _context.abrupt('return');
-												case 80:
+												case 79:
 													throw (_this.log.error("error in 'afterSearch' middleware"), _context.t1);
-												case 82:
+												case 81:
 													return (
 														afterSearchProfile.stop(),
 														_this.log.profile(afterSearchProfile),
-														null !== (_this$config$settings7 = _this.config.settings) &&
-															void 0 !== _this$config$settings7 &&
-															_this$config$settings7.infinite &&
-															(_this.previousResults = JSON.parse(JSON.stringify(response.results))),
 														_this.store.update(response),
 														(afterStoreProfile = _this.profiler.create({ type: 'event', name: 'afterStore', context: params }).start()),
-														(_context.prev = 87),
-														(_context.next = 90),
+														(_context.prev = 85),
+														(_context.next = 88),
 														_this.eventManager.fire('afterStore', { controller: _this, request: params, response })
 													);
-												case 90:
-													_context.next = 102;
+												case 88:
+													_context.next = 100;
 													break;
-												case 92:
+												case 90:
 													if (
-														((_context.prev = 92),
-														(_context.t2 = _context.catch(87)),
+														((_context.prev = 90),
+														(_context.t2 = _context.catch(85)),
 														'cancelled' != (null === _context.t2 || void 0 === _context.t2 ? void 0 : _context.t2.message))
 													) {
-														_context.next = 100;
+														_context.next = 98;
 														break;
 													}
 													return _this.log.warn("'afterStore' middleware cancelled"), afterStoreProfile.stop(), _context.abrupt('return');
-												case 100:
+												case 98:
 													throw (_this.log.error("error in 'afterStore' middleware"), _context.t2);
-												case 102:
-													afterStoreProfile.stop(), _this.log.profile(afterStoreProfile), (_context.next = 126);
+												case 100:
+													afterStoreProfile.stop(), _this.log.profile(afterStoreProfile), (_context.next = 124);
 													break;
-												case 106:
-													if (((_context.prev = 106), (_context.t3 = _context.catch(0)), !_context.t3)) {
-														_context.next = 126;
+												case 104:
+													if (((_context.prev = 104), (_context.t3 = _context.catch(0)), !_context.t3)) {
+														_context.next = 124;
 														break;
 													}
 													if (!_context.t3.err || !_context.t3.fetchDetails) {
-														_context.next = 123;
+														_context.next = 121;
 														break;
 													}
 													(_context.t4 = _context.t3.fetchDetails.status),
-														(_context.next = 429 === _context.t4 ? 113 : 500 === _context.t4 ? 115 : 117);
+														(_context.next = 429 === _context.t4 ? 111 : 500 === _context.t4 ? 113 : 115);
 													break;
-												case 113:
+												case 111:
 													return (
 														(_this.store.error = { code: 429, type: types.B.WARNING, message: 'Too many requests try again later' }),
-														_context.abrupt('break', 119)
+														_context.abrupt('break', 117)
 													);
-												case 115:
+												case 113:
 													return (
 														(_this.store.error = { code: 500, type: types.B.ERROR, message: 'Invalid Search Request or Service Unavailable' }),
-														_context.abrupt('break', 119)
+														_context.abrupt('break', 117)
 													);
+												case 115:
+													return (_this.store.error = { type: types.B.ERROR, message: _context.t3.err.message }), _context.abrupt('break', 117);
 												case 117:
-													return (_this.store.error = { type: types.B.ERROR, message: _context.t3.err.message }), _context.abrupt('break', 119);
-												case 119:
-													_this.log.error(_this.store.error), _this.handleError(_context.t3.err, _context.t3.fetchDetails), (_context.next = 126);
+													_this.log.error(_this.store.error), _this.handleError(_context.t3.err, _context.t3.fetchDetails), (_context.next = 124);
 													break;
-												case 123:
+												case 121:
 													(_this.store.error = { type: types.B.ERROR, message: 'Something went wrong... - ' + _context.t3 }),
 														_this.log.error(_context.t3),
 														_this.handleError(_context.t3);
-												case 126:
-													return (_context.prev = 126), (_this.store.loading = !1), _context.finish(126);
-												case 129:
+												case 124:
+													return (_context.prev = 124), (_this.store.loading = !1), _context.finish(124);
+												case 127:
 												case 'end':
 													return _context.stop();
 											}
@@ -35128,18 +35119,18 @@
 									_callee,
 									null,
 									[
-										[0, 106, 126, 129],
+										[0, 104, 124, 127],
 										[7, 12],
-										[67, 72],
-										[87, 92],
+										[66, 71],
+										[85, 90],
 									]
 								);
 							})
 						)),
 						(_this.config = cjs_default()(defaultConfig, _this.config)),
-						null !== (_this$config$settings8 = _this.config.settings) &&
-							void 0 !== _this$config$settings8 &&
-							_this$config$settings8.infinite &&
+						null !== (_this$config$settings7 = _this.config.settings) &&
+							void 0 !== _this$config$settings7 &&
+							_this$config$settings7.infinite &&
 							void 0 === _this.config.settings.restorePosition &&
 							(_this.config.settings.restorePosition = { enabled: !0 }),
 						_this.store.setConfig(_this.config),
@@ -35233,8 +35224,7 @@
 																	void 0 === _search$response4$pag
 																		? void 0
 																		: _search$response4$pag.totalResults) ||
-																(null != nonBackgroundFilters && nonBackgroundFilters.length) ||
-																search.controller.previousResults.length)
+																(null != nonBackgroundFilters && nonBackgroundFilters.length))
 														) {
 															_context2.next = 10;
 															break;
@@ -35290,11 +35280,11 @@
 								};
 							})()
 						),
-						null !== (_this$config$settings9 = _this.config.settings) &&
+						null !== (_this$config$settings8 = _this.config.settings) &&
+							void 0 !== _this$config$settings8 &&
+							null !== (_this$config$settings9 = _this$config$settings8.restorePosition) &&
 							void 0 !== _this$config$settings9 &&
-							null !== (_this$config$settings10 = _this$config$settings9.restorePosition) &&
-							void 0 !== _this$config$settings10 &&
-							_this$config$settings10.enabled) &&
+							_this$config$settings9.enabled) &&
 							(_this.eventManager.on(
 								'restorePosition',
 								(function () {
@@ -35419,11 +35409,11 @@
 									};
 								})()
 							),
-							null !== (_this$config$settings11 = _this.config.settings) &&
+							null !== (_this$config$settings10 = _this.config.settings) &&
+								void 0 !== _this$config$settings10 &&
+								null !== (_this$config$settings11 = _this$config$settings10.restorePosition) &&
 								void 0 !== _this$config$settings11 &&
-								null !== (_this$config$settings12 = _this$config$settings11.restorePosition) &&
-								void 0 !== _this$config$settings12 &&
-								_this$config$settings12.onPageShow &&
+								_this$config$settings11.onPageShow &&
 								window.addEventListener('pageshow', function () {
 									_this.eventManager.fire('restorePosition', { controller: _this, element: {} });
 								}));
@@ -35449,16 +35439,16 @@
 							{
 								key: 'params',
 								get: function get() {
-									var _this$config$settings13,
-										_this$config$settings14,
+									var _this$config$settings12,
+										_this$config$settings13,
 										_this$config$globals,
 										_this$config$globals$,
 										params = cjs_default()(Object.assign({}, getSearchParams(this.urlManager.state)), this.config.globals || {});
-									(null !== (_this$config$settings13 = this.config.settings) &&
+									(null !== (_this$config$settings12 = this.config.settings) &&
+										void 0 !== _this$config$settings12 &&
+										null !== (_this$config$settings13 = _this$config$settings12.redirects) &&
 										void 0 !== _this$config$settings13 &&
-										null !== (_this$config$settings14 = _this$config$settings13.redirects) &&
-										void 0 !== _this$config$settings14 &&
-										_this$config$settings14.merchandising &&
+										_this$config$settings13.merchandising &&
 										!this.store.loaded) ||
 										((params.search = params.search || {}), (params.search.redirectResponse = 'full')),
 										(params.tracking = params.tracking || {}),
@@ -40931,7 +40921,12 @@
 								return -1 == CORE_FIELDS.indexOf(k);
 							})
 							.filter(function (k) {
-								return !('badges' == k && 'object' == typeof rawResult[k] && !Array.isArray(rawResult[k]));
+								var _rawResult$k;
+								return !(
+									'badges' == k &&
+									Array.isArray(rawResult[k]) &&
+									'object' == typeof (null === (_rawResult$k = rawResult[k]) || void 0 === _rawResult$k ? void 0 : _rawResult$k[0])
+								);
 							})
 							.reduce(function (attributes, key) {
 								var _Object$assign2;
@@ -40955,7 +40950,7 @@
 						id: rawResult.uid,
 						mappings: { core: coreFieldValues },
 						attributes,
-						badges: 'object' != typeof rawResult.badges || Array.isArray(rawResult.badges) ? [] : rawResult.badges,
+						badges: Array.isArray(rawResult.badges) && 'object' == typeof rawResult.badges[0] ? rawResult.badges : [],
 						children,
 					});
 				}),
@@ -44216,8 +44211,18 @@
 				);
 			}
 			var SearchResultStore = (function (_Array) {
-					function SearchResultStore(config, services, metaData, resultData, paginationData, merchData, loaded) {
-						var _config$settings, _variantConfig$realti, _merchData$content;
+					function SearchResultStore(
+						config,
+						services,
+						metaData,
+						resultData,
+						paginationData,
+						merchData,
+						loaded,
+						previousPaginationData,
+						previousResults
+					) {
+						var _config$settings, _variantConfig$realti, _merchData$content, _config$settings2;
 						SearchResultStore_classCallCheck(this, SearchResultStore);
 						var _variantConfig$realti3,
 							results = (resultData || []).map(function (result) {
@@ -44296,14 +44301,14 @@
 								null != paginationData &&
 								paginationData.totalResults &&
 								(results = (function addBannersToResults(config, results, banners, paginationData) {
-									var _config$settings4,
+									var _config$settings5,
 										productCount = results.length,
 										minIndex = paginationData.pageSize * (paginationData.page - 1),
 										maxIndex = minIndex + paginationData.pageSize;
 									null != config &&
-										null !== (_config$settings4 = config.settings) &&
-										void 0 !== _config$settings4 &&
-										_config$settings4.infinite &&
+										null !== (_config$settings5 = config.settings) &&
+										void 0 !== _config$settings5 &&
+										_config$settings5.infinite &&
 										(minIndex = 0);
 									return (
 										banners
@@ -44324,7 +44329,19 @@
 									);
 								})(config, results, banners, paginationData));
 						}
-						return SearchResultStore_callSuper(this, SearchResultStore, SearchResultStore_toConsumableArray(results));
+						return (
+							null != config &&
+								null !== (_config$settings2 = config.settings) &&
+								void 0 !== _config$settings2 &&
+								_config$settings2.infinite &&
+								null != paginationData &&
+								paginationData.page &&
+								null != previousPaginationData &&
+								previousPaginationData.page &&
+								paginationData.page == previousPaginationData.page + 1 &&
+								(results = (previousResults || []).concat(results)),
+							SearchResultStore_callSuper(this, SearchResultStore, SearchResultStore_toConsumableArray(results))
+						);
 					}
 					return (
 						(function SearchResultStore_inherits(subClass, superClass) {
@@ -44359,7 +44376,7 @@
 				Product = (function () {
 					return SearchResultStore_createClass(
 						function Product(services, result, metaData, config) {
-							var _config$settings2, _config$settings2$var, _result$children;
+							var _config$settings3, _config$settings3$var, _result$children;
 							SearchResultStore_classCallCheck(this, Product),
 								(this.type = 'product'),
 								(this.attributes = {}),
@@ -44374,22 +44391,22 @@
 								(this.badges = new Badges(result, metaData));
 							var variantsField =
 								null == config ||
-								null === (_config$settings2 = config.settings) ||
-								void 0 === _config$settings2 ||
-								null === (_config$settings2$var = _config$settings2.variants) ||
-								void 0 === _config$settings2$var
+								null === (_config$settings3 = config.settings) ||
+								void 0 === _config$settings3 ||
+								null === (_config$settings3$var = _config$settings3.variants) ||
+								void 0 === _config$settings3$var
 									? void 0
-									: _config$settings2$var.field;
+									: _config$settings3$var.field;
 							if (config && variantsField && this.attributes && this.attributes[variantsField])
 								try {
-									var _config$settings3,
+									var _config$settings4,
 										parsedVariants = JSON.parse(this.attributes[variantsField]);
 									this.variants = new Variants(
 										parsedVariants,
 										this.mask,
-										null == config || null === (_config$settings3 = config.settings) || void 0 === _config$settings3
+										null == config || null === (_config$settings4 = config.settings) || void 0 === _config$settings4
 											? void 0
-											: _config$settings3.variants
+											: _config$settings4.variants
 									);
 								} catch (err) {
 									console.error(err, 'Invalid variant JSON for product id: ' + result.id);
@@ -45462,7 +45479,8 @@
 						{
 							key: 'update',
 							value: function update() {
-								var data = arguments.length > 0 && void 0 !== arguments[0] ? arguments[0] : {};
+								var _this$previousData,
+									data = arguments.length > 0 && void 0 !== arguments[0] ? arguments[0] : {};
 								(this.error = void 0),
 									(this.meta = new MetaStore(data.meta)),
 									(this.merchandising = new SearchMerchandisingStore.W(this.services, (null == data ? void 0 : data.merchandising) || {})),
@@ -45484,7 +45502,9 @@
 										(null == data ? void 0 : data.results) || [],
 										data.pagination,
 										data.merchandising,
-										this.loaded
+										this.loaded,
+										null === (_this$previousData = this.previousData) || void 0 === _this$previousData ? void 0 : _this$previousData.pagination,
+										this.results
 									)),
 									(this.pagination = new SearchPaginationStore(this.config, this.services, data.pagination, this.meta.data)),
 									(this.sorting = new SearchSortingStore(
@@ -45493,7 +45513,8 @@
 										(null == data ? void 0 : data.search) || {},
 										this.meta.data
 									)),
-									(this.loaded = !!data.pagination);
+									(this.loaded = !!data.pagination),
+									(this.previousData = data);
 							},
 						},
 					])
@@ -49672,7 +49693,7 @@
 					(this.event = payload.event),
 					(this.id = payload.id),
 					(this.pid = payload.pid),
-					(this.meta = { initiator: { lib: 'searchspring/snap', 'lib.version': '0.62.0', 'lib.framework': config.framework } }),
+					(this.meta = { initiator: { lib: 'searchspring/snap', 'lib.version': '0.63.0', 'lib.framework': config.framework } }),
 					(this.id = (0, v4.A)());
 			});
 			function Tracker_toConsumableArray(arr) {
@@ -50226,7 +50247,7 @@
 									_this$globals$currenc.code &&
 									(this.context.currency = this.globals.currency),
 								(null !== (_window$searchspring = window.searchspring) && void 0 !== _window$searchspring && _window$searchspring.tracker) ||
-									((window.searchspring = window.searchspring || {}), (window.searchspring.tracker = this), (window.searchspring.version = '0.62.0')),
+									((window.searchspring = window.searchspring || {}), (window.searchspring.tracker = this), (window.searchspring.version = '0.63.0')),
 								setTimeout(function () {
 									_this.targeters.push(
 										new DomTargeter([{ selector: 'script[type^="searchspring/track/"]', emptyTarget: !1 }], function (target, elem) {
@@ -50800,7 +50821,7 @@
 				})(t, 'string');
 				return 'symbol' == typeof i ? i : i + '';
 			}
-			(0, mobx_esm.jK)({ useProxies: 'never', isolateGlobalState: !0, enforceActions: 'never' });
+			(0, mobx_esm.jK)({ useProxies: 'always', isolateGlobalState: !0, enforceActions: 'never' });
 			var controllers = {},
 				client = { globals: { siteId: '8uyt2m' } },
 				Snapify = (function () {
