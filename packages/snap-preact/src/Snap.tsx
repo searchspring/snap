@@ -36,9 +36,10 @@ import type { SnapControllerServices, SnapControllerConfig, InitialUrlConfig } f
 import { setupEvents } from './setupEvents';
 
 // configure MobX
-configureMobx({ useProxies: 'never', isolateGlobalState: true, enforceActions: 'never' });
+configureMobx({ useProxies: window?.searchspring?.build == 'universal' ? 'never' : 'always', isolateGlobalState: true, enforceActions: 'never' });
 
 export const BRANCH_COOKIE = 'ssBranch';
+export const BRANCH_PARAM = 'searchspring-preview';
 export const DEV_COOKIE = 'ssDev';
 export const STYLESHEET_CLASSNAME = 'ss-snap-bundle-styles';
 
@@ -353,7 +354,7 @@ export class Snap {
 
 		try {
 			const urlParams = url(window.location.href);
-			const branchOverride = urlParams?.params?.query?.branch || cookies.get(BRANCH_COOKIE);
+			const branchOverride = urlParams?.params?.query[BRANCH_PARAM] || cookies.get(BRANCH_COOKIE);
 			const cookieDomain =
 				(typeof window !== 'undefined' && window.location.hostname && '.' + window.location.hostname.replace(/^www\./, '')) || undefined;
 			/* app mode priority:
@@ -494,7 +495,7 @@ export class Snap {
 								onRemoveClick={() => {
 									cookies.unset(BRANCH_COOKIE, cookieDomain);
 									const urlState = url(window.location.href);
-									delete urlState?.params.query['branch'];
+									delete urlState?.params.query[BRANCH_PARAM];
 
 									const newUrl = urlState?.url();
 									if (newUrl && newUrl != window.location.href) {
@@ -534,6 +535,7 @@ export class Snap {
 
 		// bind to window global
 		window.searchspring = window.searchspring || {};
+		window.searchspring.build = window.searchspring.build || 'modern';
 		window.searchspring.context = this.context;
 		if (this.client) window.searchspring.client = this.client;
 

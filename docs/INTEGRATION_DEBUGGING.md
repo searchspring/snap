@@ -4,7 +4,7 @@
 
 This functionality is only currently possible with Searchspring managed Snap repositories (https://github.com/searchspring-implementations).
 
-While browsing a page that contains a Snap integration, appending the `?branch=[branchname]` query parameter to the URL will stop the execution of the existing script, and load the build from the `[branchname]` branch `https://snapui.searchspring.io/[siteid]/[branchname]/bundle.js`
+While browsing a page that contains a Snap integration, appending the `?searchspring-preview=[branchname]` query parameter to the URL will stop the execution of the existing script, and load the build from the `[branchname]` branch `https://snapui.searchspring.io/[siteid]/[branchname]/bundle.js`
 
 You will see an interface overlay on the bottom right of the viewport indicating if successful and details of the build.
 

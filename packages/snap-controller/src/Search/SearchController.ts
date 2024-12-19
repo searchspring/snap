@@ -54,7 +54,6 @@ export class SearchController extends AbstractController {
 	declare store: SearchStore;
 	declare config: SearchControllerConfig;
 	storage: StorageStore;
-	private previousResults: Array<SearchResponseModelResult> = [];
 
 	constructor(
 		config: SearchControllerConfig,
@@ -96,8 +95,7 @@ export class SearchController extends AbstractController {
 				config?.settings?.redirects?.singleResult &&
 				search?.response?.search?.query &&
 				search?.response?.pagination?.totalResults === 1 &&
-				!nonBackgroundFilters?.length &&
-				!(search.controller as SearchController).previousResults.length
+				!nonBackgroundFilters?.length
 			) {
 				window.location.replace(search?.response.results[0].mappings.core.url);
 				return false;
@@ -363,7 +361,7 @@ export class SearchController extends AbstractController {
 				}
 
 				// infinite backfill is enabled AND we have not yet fetched any results
-				if (this.config.settings?.infinite.backfill && !this.previousResults.length) {
+				if (this.config.settings?.infinite.backfill && !this.store.loaded) {
 					// create requests for all missing pages (using Arrray(page).fill() to populate an array to map)
 					const backfillRequests = Array(params.pagination.page)
 						.fill('backfill')
@@ -408,12 +406,9 @@ export class SearchController extends AbstractController {
 				} else {
 					// infinite with no backfills.
 					[meta, response] = await this.client.search(params);
-
-					// append new results to previous results
-					response.results = [...this.previousResults, ...(response.results || [])];
 				}
 			} else {
-				// standard request (not using infinite scroll)
+				// normal request for next page
 				[meta, response] = await this.client.search(params);
 			}
 
@@ -446,11 +441,6 @@ export class SearchController extends AbstractController {
 
 			afterSearchProfile.stop();
 			this.log.profile(afterSearchProfile);
-
-			// store previous results for infinite usage
-			if (this.config.settings?.infinite) {
-				this.previousResults = JSON.parse(JSON.stringify(response.results));
-			}
 
 			// update the store
 			this.store.update(response);
