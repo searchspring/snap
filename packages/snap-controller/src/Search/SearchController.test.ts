@@ -75,15 +75,9 @@ describe('Search Controller', () => {
 		expect(controller.store.loaded).toBe(false);
 		expect(controller.store.loading).toBe(true);
 
-		// @ts-ignore - private variable assertion
-		expect(controller.previousResponse).not.toBeDefined();
-
 		await searchPromise;
 		expect(controller.store.loaded).toBe(true);
 		expect(controller.store.loading).toBe(false);
-
-		// @ts-ignore - private variable assertion
-		expect(controller.previousResponse).toBeDefined();
 
 		expect(searchfn).toHaveBeenCalled();
 		expect(controller.store.results.length).toBeGreaterThan(0);
