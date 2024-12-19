@@ -214,7 +214,7 @@ transformSearchResponse.result = (rawResult: rawResult): SearchResponseModelResu
 	const attributes = Object.keys(rawResult)
 		.filter((k) => CORE_FIELDS.indexOf(k) == -1)
 		// remove 'badges' from attributes - but only if it is an object
-		.filter((k) => !(k == 'badges' && typeof rawResult[k] == 'object' && !Array.isArray(rawResult[k])))
+		.filter((k) => !(k == 'badges' && Array.isArray(rawResult[k]) && typeof rawResult[k]?.[0] == 'object'))
 		.reduce((attributes, key) => {
 			return {
 				...attributes,
@@ -242,7 +242,7 @@ transformSearchResponse.result = (rawResult: rawResult): SearchResponseModelResu
 			core: coreFieldValues,
 		},
 		attributes,
-		badges: typeof rawResult.badges == 'object' && !Array.isArray(rawResult.badges) ? rawResult.badges : [],
+		badges: Array.isArray(rawResult.badges) && typeof rawResult.badges[0] == 'object' ? rawResult.badges : [],
 		children,
 	});
 };
