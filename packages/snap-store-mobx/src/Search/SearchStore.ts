@@ -18,6 +18,7 @@ import { StorageStore } from '../Storage/StorageStore';
 import { MetaStore } from '../Meta/MetaStore';
 
 export class SearchStore extends AbstractStore {
+	private declare previousData: SearchResponseModel & { meta?: MetaResponseModel };
 	public services: StoreServices;
 	public meta!: MetaStore;
 	public merchandising!: SearchMerchandisingStore;
@@ -105,11 +106,15 @@ export class SearchStore extends AbstractStore {
 			data?.results || [],
 			data.pagination,
 			data.merchandising,
-			this.loaded
+			this.loaded,
+			this.previousData?.pagination,
+			this.results
 		);
 		this.pagination = new SearchPaginationStore(this.config, this.services, data.pagination, this.meta.data);
 		this.sorting = new SearchSortingStore(this.services, data?.sorting || [], data?.search || {}, this.meta.data);
 
 		this.loaded = !!data.pagination;
+
+		this.previousData = data;
 	}
 }

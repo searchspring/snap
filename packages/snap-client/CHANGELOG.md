@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.63.0](https://github.com/searchspring/snap/compare/v0.62.0...v0.63.0) (2024-12-19)
+
+### Bug Fixes
+
+- **searchresponse.ts:** bugfix in transformSearchResponse transforming badge fields ([4231094](https://github.com/searchspring/snap/commit/4231094a19932fd920f107286f40a61281d27944))
+
 # [0.62.0](https://github.com/searchspring/snap/compare/v0.61.5...v0.62.0) (2024-12-10)
 
 ### Bug Fixes
