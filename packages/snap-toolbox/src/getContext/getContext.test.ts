@@ -260,16 +260,18 @@ describe('getContext', () => {
 		});
 	});
 
-	it('supports evaluation of all valid javascript', () => {
+	it('supports evaluation of all valid javascript - errors will not throw but will be undefined', () => {
 		const scriptTag = document.createElement('script');
 		scriptTag.setAttribute('type', 'searchspring/recommend');
 		scriptTag.innerHTML = `
 			error = window.dne.property
 		`;
 
+		let vars: { [key: string]: any } = {};
 		expect(() => {
-			getContext(['error'], scriptTag);
-		}).toThrow();
+			vars = getContext(['error'], scriptTag);
+		}).not.toThrow();
+		expect(vars?.error).toBeUndefined();
 	});
 
 	it('does not throw an error when variables exist already, but are not in evaluation list', () => {
@@ -284,5 +286,156 @@ describe('getContext', () => {
 		expect(() => {
 			getContext(['error'], scriptTag);
 		}).not.toThrow();
+	});
+
+	it('does not attempt to evaluate variable assignments when they are within quotes', () => {
+		const scriptTag = document.createElement('script');
+		scriptTag.setAttribute('type', 'searchspring/recommend');
+		scriptTag.setAttribute('id', 'searchspring-recommend');
+		scriptTag.innerHTML = 'format = "<span class=money>${{amount}}</span>";';
+
+		expect(() => {
+			const vars = getContext(['format'], scriptTag);
+
+			expect(vars).toHaveProperty('format', '<span class=money>${{amount}}</span>');
+		}).not.toThrow();
+	});
+
+	it('throws an error when JavaScript keywords are provided in the evaluate array', () => {
+		const scriptTag = document.createElement('script');
+		scriptTag.setAttribute('type', 'searchspring');
+
+		// invalid param that should throw
+		expect(() => {
+			getContext(['class'], scriptTag);
+		}).toThrow('getContext: JavaScript keywords are not allowed in evaluate array');
+
+		expect(() => {
+			getContext(['const'], scriptTag);
+		}).toThrow('getContext: JavaScript keywords are not allowed in evaluate array');
+
+		expect(() => {
+			getContext(['if'], scriptTag);
+		}).toThrow('getContext: JavaScript keywords are not allowed in evaluate array');
+	});
+
+	it('throws an error when JavaScript keywords are found in script inner variables', () => {
+		const scriptTag = document.createElement('script');
+		scriptTag.setAttribute('type', 'searchspring');
+		scriptTag.innerHTML = `
+			class = "should-not-evaluate";
+			const = "should-not-evaluate";
+			if = "should-not-evaluate";
+			validVar = "should-evaluate";
+		`;
+
+		expect(() => {
+			getContext(['validVar'], scriptTag);
+		}).toThrow('getContext: JavaScript keywords cannot be used as variable names in script');
+	});
+});
+
+describe('variable name parsing', () => {
+	it('correctly identifies variable names when quotes are present', () => {
+		const scriptTag = document.createElement('script');
+		scriptTag.setAttribute('type', 'searchspring');
+		scriptTag.innerHTML = `
+			realVar = "something = 123";
+			anotherVar = 'test = value';
+			actualValue = 456;
+		`;
+
+		const vars = getContext(['realVar', 'anotherVar', 'actualValue', 'something', 'test'], scriptTag);
+		expect(Object.keys(vars)).toHaveLength(3);
+		expect(vars).toHaveProperty('realVar', 'something = 123');
+		expect(vars).toHaveProperty('anotherVar', 'test = value');
+		expect(vars).toHaveProperty('actualValue', 456);
+		expect(vars).not.toHaveProperty('something');
+		expect(vars).not.toHaveProperty('test');
+	});
+
+	it('handles template literals correctly', () => {
+		const scriptTag = document.createElement('script');
+		scriptTag.setAttribute('type', 'searchspring');
+		scriptTag.innerHTML = `
+			template = \`
+				<div>
+					\${value}
+					\${name}
+				</div>
+			\`;
+			actual = "real value";
+		`;
+
+		const vars = getContext(['template', 'actual', 'value', 'name'], scriptTag);
+		expect(Object.keys(vars)).toHaveLength(2);
+		expect(vars).toHaveProperty('template');
+		expect(vars).toHaveProperty('actual', 'real value');
+	});
+
+	it('handles HTML attributes that look like assignments', () => {
+		const scriptTag = document.createElement('script');
+		scriptTag.setAttribute('type', 'searchspring');
+		scriptTag.innerHTML = `
+			html = '<div class="test" data-value="something = 123"></div>';
+			value = 'real value';
+		`;
+
+		const vars = getContext(['html', 'value'], scriptTag);
+		expect(Object.keys(vars)).toHaveLength(2);
+		expect(vars).toHaveProperty('html');
+		expect(vars).toHaveProperty('value', 'real value');
+	});
+
+	it('handles nested quotes correctly', () => {
+		const scriptTag = document.createElement('script');
+		scriptTag.setAttribute('type', 'searchspring');
+		scriptTag.innerHTML = `
+			config = "{ \\"nested = value\\": true }";
+			actual = 123;
+		`;
+
+		const vars = getContext(['config', 'actual', 'nested'], scriptTag);
+		expect(Object.keys(vars)).toHaveLength(2);
+		expect(vars).toHaveProperty('config');
+		expect(vars).toHaveProperty('actual', 123);
+		expect(vars).not.toHaveProperty('nested');
+	});
+});
+
+describe('javascript keywords', () => {
+	it('filters out javascript keywords from evaluation', () => {
+		const scriptTag = document.createElement('script');
+		scriptTag.setAttribute('type', 'searchspring');
+		scriptTag.innerHTML = `
+			class = "should-not-evaluate";
+			const = "should-not-evaluate";
+			if = "should-not-evaluate";
+			validVar = "should-evaluate";
+		`;
+
+		expect(() => {
+			const vars = getContext(['class', 'const', 'if', 'validVar'], scriptTag);
+		}).toThrow('getContext: JavaScript keywords are not allowed in evaluate array');
+	});
+
+	it('allows javascript keywords in object properties and string values', () => {
+		const scriptTag = document.createElement('script');
+		scriptTag.setAttribute('type', 'searchspring');
+		scriptTag.innerHTML = `
+			config = {
+				class: "my-class",
+				const: "my-const",
+				if: true
+			};
+		`;
+
+		const vars = getContext(['config'], scriptTag);
+		expect(vars).toHaveProperty('config');
+		expect(vars.config).toEqual({
+			class: 'my-class',
+			const: 'my-const',
+			if: true,
+		});
 	});
 });
