@@ -126,7 +126,6 @@ let config: SnapTemplatesConfig = {
 		],
 	},
 	autocomplete: {
-		inputSelector: 'input.searchspring-ac',
 		targets: [
 			{
 				selector: 'input.searchspring-ac',

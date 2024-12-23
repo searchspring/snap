@@ -65,6 +65,37 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 # [1.1.0](https://github.com/searchspring/snap/compare/v0.60.1...v1.1.0) (2024-09-20)
 
+# [0.62.0](https://github.com/searchspring/snap/compare/v0.61.5...v0.62.0) (2024-12-10)
+
+### Bug Fixes
+
+- **urltranslator.ts:** gracefully catch malformed uri errors ([e32f45d](https://github.com/searchspring/snap/commit/e32f45d1a31b3ea3abc544182768e34ae33a9bdb))
+- **urltranslator.ts:** pop dont join in parseHashString ([02ea149](https://github.com/searchspring/snap/commit/02ea1497c9d0b4868e872941337445435aeeeec0))
+
+## [0.61.5](https://github.com/searchspring/snap/compare/v0.61.4...v0.61.5) (2024-11-13)
+
+**Note:** Version bump only for package @searchspring/snap-url-manager
+
+## [0.61.4](https://github.com/searchspring/snap/compare/v0.61.3...v0.61.4) (2024-11-06)
+
+**Note:** Version bump only for package @searchspring/snap-url-manager
+
+## [0.61.3](https://github.com/searchspring/snap/compare/v0.61.2...v0.61.3) (2024-10-31)
+
+**Note:** Version bump only for package @searchspring/snap-url-manager
+
+## [0.61.2](https://github.com/searchspring/snap/compare/v0.61.1...v0.61.2) (2024-10-28)
+
+**Note:** Version bump only for package @searchspring/snap-url-manager
+
+## [0.61.1](https://github.com/searchspring/snap/compare/v0.61.0...v0.61.1) (2024-10-25)
+
+**Note:** Version bump only for package @searchspring/snap-url-manager
+
+# [0.61.0](https://github.com/searchspring/snap/compare/v0.60.4...v0.61.0) (2024-10-25)
+
+**Note:** Version bump only for package @searchspring/snap-url-manager
+
 ## [0.60.4](https://github.com/searchspring/snap/compare/v0.60.3...v0.60.4) (2024-09-25)
 
 **Note:** Version bump only for package @searchspring/snap-url-manager

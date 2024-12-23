@@ -45,6 +45,7 @@ export type SearchTargetConfig = {
 
 export type AutocompleteTargetConfig = {
 	selector: string;
+	inputSelector?: string;
 	theme?: keyof LibraryImports['theme'] | (string & NonNullable<unknown>);
 	component: keyof LibraryImports['component']['autocomplete'];
 	resultComponent?: keyof LibraryImports['component']['result'] | (string & NonNullable<unknown>);
@@ -76,7 +77,6 @@ export type SnapTemplatesConfig = TemplatesStoreConfigConfig & {
 		/* controller settings breakpoints work with caveat of having settings locked to initialized breakpoint */
 	};
 	autocomplete?: {
-		inputSelector: string;
 		targets: [AutocompleteTargetConfig, ...AutocompleteTargetConfig[]];
 		settings?: AutocompleteStoreConfigSettings;
 		// breakpointSettings?: AutocompleteStoreConfigSettings[];
@@ -260,9 +260,11 @@ export function createAutocompleteTargeters(templateConfig: SnapTemplatesConfig,
 				await Promise.all(componentImportPromises);
 				return TemplateSelect;
 			},
-			props: { type: 'autocomplete', templatesStore, targetId, input: templateConfig.autocomplete?.inputSelector },
+			props: { type: 'autocomplete', templatesStore, targetId },
 			hideTarget: true,
 		};
+
+		if (target.inputSelector) targeter.props!.input = target.inputSelector;
 
 		return targeter;
 	});
@@ -377,7 +379,7 @@ export function createSnapConfig(templateConfig: SnapTemplatesConfig, templatesS
 			config: {
 				id: 'autocomplete',
 				plugins: createPlugins(templateConfig, templatesStore),
-				selector: templateConfig.autocomplete.inputSelector,
+				selector: templateConfig.autocomplete.targets.map((target) => target.inputSelector || target.selector).join(', '),
 				settings: autocompleteControllerSettings,
 			},
 			targeters: createAutocompleteTargeters(templateConfig, templatesStore),
