@@ -39,6 +39,7 @@ export const Recommendation = observer((properties: RecommendationProps): JSX.El
 			: JSON.parse(JSON.stringify(defaultCarouselBreakpoints)),
 		pagination: false,
 		loop: true,
+		title: properties.controller?.store?.profile?.display?.templateParameters?.title,
 	};
 
 	let props = mergeProps('recommendation', globalTheme, defaultProps, properties);

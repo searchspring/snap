@@ -93,8 +93,8 @@ export class RecommendationInstantiator {
 	public targeter: DomTargeter;
 
 	public uses: Attachments[] = [];
-	public plugins: { func: (cntrlr: AbstractController, ...args: any) => Promise<void>; args: unknown[] }[] = [];
-	public middleware: { event: string; func: Middleware<unknown>[] }[] = [];
+	public plugins: { func: (cntrlr: AbstractController, ...args: any) => void | Promise<void>; args: unknown[] }[] = [];
+	public middleware: { event: string; func: Middleware<any>[] }[] = [];
 
 	constructor(config: RecommendationInstantiatorConfig, services?: RecommendationInstantiatorServices, context?: ContextVariables) {
 		this.config = config;
@@ -225,7 +225,7 @@ export class RecommendationInstantiator {
 								};
 								const profileContext: ContextVariables = deepmerge(this.context, defined({ globals: scriptContextGlobals, profile: target.profile }));
 								if (elemContext.custom) {
-									profileContext.custom = elemContext.custom;
+									profileContext.custom = deepmerge(profileContext.custom, elemContext.custom);
 								}
 
 								readyTheController(this, services || {}, elem, profileContext, profileCount, originalElem, profileRequestGlobals, target);
@@ -265,11 +265,11 @@ export class RecommendationInstantiator {
 		);
 	}
 
-	public plugin(func: (cntrlr: AbstractController, ...args: any) => Promise<void>, ...args: unknown[]): void {
+	public plugin(func: (cntrlr: AbstractController, ...args: any) => void | Promise<void>, ...args: unknown[]): void {
 		this.plugins.push({ func, args });
 	}
 
-	public on(event: string, ...func: Middleware<unknown>[]): void {
+	public on<T>(event: string, ...func: Middleware<T>[]): void {
 		this.middleware.push({ event, func });
 	}
 
