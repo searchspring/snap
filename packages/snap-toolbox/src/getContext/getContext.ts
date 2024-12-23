@@ -49,10 +49,6 @@ const JAVASCRIPT_KEYWORDS = new Set([
 ]);
 
 export function getContext(evaluate: string[] = [], script?: HTMLScriptElement | string): ContextVariables {
-	if (evaluate?.some((name) => JAVASCRIPT_KEYWORDS.has(name))) {
-		throw new Error('getContext: JavaScript keywords are not allowed in evaluate array');
-	}
-
 	if (!script || typeof script === 'string') {
 		const scripts = Array.from(document.querySelectorAll((script as string) || 'script[id^=searchspring], script[src*="snapui.searchspring.io"]'));
 
@@ -106,15 +102,16 @@ export function getContext(evaluate: string[] = [], script?: HTMLScriptElement |
 		.match(/([a-zA-Z_$][a-zA-Z_$0-9]*)\s*=/g)
 		?.map((match) => match.replace(/[\s=]/g, ''));
 
-	if (scriptInnerVars?.some((name) => JAVASCRIPT_KEYWORDS.has(name))) {
-		throw new Error('getContext: JavaScript keywords cannot be used as variable names in script');
-	}
-
 	const combinedVars = evaluate.concat(scriptInnerVars || []);
 
 	// de-dupe vars
 	const evaluateVars = combinedVars.filter((item, index) => {
-		return combinedVars.indexOf(item) === index && !JAVASCRIPT_KEYWORDS.has(item);
+		const isKeyword = JAVASCRIPT_KEYWORDS.has(item);
+		// console error if keyword
+		if (isKeyword) {
+			console.error(`getContext: JavaScript keyword found: '${item}'! Please use a different variable name.`);
+		}
+		return combinedVars.indexOf(item) === index && !isKeyword;
 	});
 
 	// evaluate text and put into variables
@@ -126,9 +123,13 @@ export function getContext(evaluate: string[] = [], script?: HTMLScriptElement |
 				return ${name};
 			`);
 			scriptVariables[name] = fn();
-		} catch (e) {
+		} catch (err) {
 			// if evaluation fails, set to undefined
-			console.log(`getContext: error evaluating ${name}`);
+			const isKeyword = JAVASCRIPT_KEYWORDS.has(name);
+			if (!isKeyword) {
+				console.error(`getContext: error evaluating '${name}'`);
+				console.error(err);
+			}
 			scriptVariables[name] = undefined;
 		}
 	});

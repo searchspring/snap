@@ -301,25 +301,47 @@ describe('getContext', () => {
 		}).not.toThrow();
 	});
 
-	it('throws an error when JavaScript keywords are provided in the evaluate array', () => {
+	it('logs an error when there is invalid syntax in the script context', () => {
+		const scriptTag = document.createElement('script');
+		scriptTag.setAttribute('type', 'searchspring');
+		scriptTag.innerHTML = `
+			valid = 'valid';
+			invalid = syntax error;
+		`;
+
+		const consoleError = jest.spyOn(console, 'error');
+
+		expect(() => {
+			const context = getContext(['valid', 'invalid'], scriptTag);
+			expect(consoleError).toHaveBeenCalledWith("getContext: error evaluating 'valid'");
+			expect(consoleError).toHaveBeenCalledWith("getContext: error evaluating 'invalid'");
+			expect(context).toStrictEqual({});
+		}).not.toThrow();
+
+		consoleError.mockRestore();
+	});
+
+	it('does not throw an error when keywords are provided in the evaluate array, but logs an error', () => {
 		const scriptTag = document.createElement('script');
 		scriptTag.setAttribute('type', 'searchspring');
 
-		// invalid param that should throw
-		expect(() => {
-			getContext(['class'], scriptTag);
-		}).toThrow('getContext: JavaScript keywords are not allowed in evaluate array');
+		const consoleError = jest.spyOn(console, 'error');
 
 		expect(() => {
-			getContext(['const'], scriptTag);
-		}).toThrow('getContext: JavaScript keywords are not allowed in evaluate array');
+			// invalid param that should generate an error - `getContext: JavaScript keyword found: '${item}'! Please use a different variable name.`
+			getContext(['class', 'const', 'if', 'valid'], scriptTag);
+			expect(consoleError).toHaveBeenCalledWith("getContext: JavaScript keyword found: 'class'! Please use a different variable name.");
+			expect(consoleError).toHaveBeenCalledWith("getContext: JavaScript keyword found: 'const'! Please use a different variable name.");
+			expect(consoleError).toHaveBeenCalledWith("getContext: JavaScript keyword found: 'if'! Please use a different variable name.");
+			expect(consoleError).not.toHaveBeenCalledWith("getContext: JavaScript keyword found: 'valid'! Please use a different variable name.");
 
-		expect(() => {
-			getContext(['if'], scriptTag);
-		}).toThrow('getContext: JavaScript keywords are not allowed in evaluate array');
+			expect(consoleError).toHaveBeenCalledTimes(3);
+		}).not.toThrow();
+
+		consoleError.mockRestore();
 	});
 
-	it('throws an error when JavaScript keywords are found in script inner variables', () => {
+	it('does not throw when keywords are using in inner script variables but logs an error and returns an empty context', () => {
 		const scriptTag = document.createElement('script');
 		scriptTag.setAttribute('type', 'searchspring');
 		scriptTag.innerHTML = `
@@ -329,9 +351,45 @@ describe('getContext', () => {
 			validVar = "should-evaluate";
 		`;
 
+		const consoleError = jest.spyOn(console, 'error');
+
 		expect(() => {
-			getContext(['validVar'], scriptTag);
-		}).toThrow('getContext: JavaScript keywords cannot be used as variable names in script');
+			const context = getContext(['validVar'], scriptTag);
+
+			expect(consoleError).toHaveBeenCalledWith("getContext: JavaScript keyword found: 'class'! Please use a different variable name.");
+			expect(consoleError).toHaveBeenCalledWith("getContext: JavaScript keyword found: 'const'! Please use a different variable name.");
+			expect(consoleError).toHaveBeenCalledWith("getContext: JavaScript keyword found: 'if'! Please use a different variable name.");
+			expect(consoleError).not.toHaveBeenCalledWith("getContext: JavaScript keyword found: 'validVar'! Please use a different variable name.");
+
+			expect(consoleError).toHaveBeenCalledWith("getContext: error evaluating 'validVar'");
+
+			// logs above errors plus the actual error when attempting to evaluate "validVar"
+			expect(consoleError).toHaveBeenCalledTimes(5);
+
+			expect(context).toStrictEqual({});
+		}).not.toThrow();
+
+		consoleError.mockRestore();
+	});
+
+	it('allows javascript keywords in object properties and string values', () => {
+		const scriptTag = document.createElement('script');
+		scriptTag.setAttribute('type', 'searchspring');
+		scriptTag.innerHTML = `
+			config = {
+				class: "class",
+				const: "const",
+				if: true
+			};
+		`;
+
+		const vars = getContext(['config'], scriptTag);
+		expect(vars).toHaveProperty('config');
+		expect(vars.config).toEqual({
+			class: 'class',
+			const: 'const',
+			if: true,
+		});
 	});
 });
 
@@ -400,42 +458,5 @@ describe('variable name parsing', () => {
 		expect(vars).toHaveProperty('config');
 		expect(vars).toHaveProperty('actual', 123);
 		expect(vars).not.toHaveProperty('nested');
-	});
-});
-
-describe('javascript keywords', () => {
-	it('filters out javascript keywords from evaluation', () => {
-		const scriptTag = document.createElement('script');
-		scriptTag.setAttribute('type', 'searchspring');
-		scriptTag.innerHTML = `
-			class = "should-not-evaluate";
-			const = "should-not-evaluate";
-			if = "should-not-evaluate";
-			validVar = "should-evaluate";
-		`;
-
-		expect(() => {
-			const vars = getContext(['class', 'const', 'if', 'validVar'], scriptTag);
-		}).toThrow('getContext: JavaScript keywords are not allowed in evaluate array');
-	});
-
-	it('allows javascript keywords in object properties and string values', () => {
-		const scriptTag = document.createElement('script');
-		scriptTag.setAttribute('type', 'searchspring');
-		scriptTag.innerHTML = `
-			config = {
-				class: "my-class",
-				const: "my-const",
-				if: true
-			};
-		`;
-
-		const vars = getContext(['config'], scriptTag);
-		expect(vars).toHaveProperty('config');
-		expect(vars.config).toEqual({
-			class: 'my-class',
-			const: 'my-const',
-			if: true,
-		});
 	});
 });
