@@ -490,6 +490,9 @@ describe('RecommendationInstantiator', () => {
 			...baseConfig,
 			context: {
 				testing: 'things',
+				custom: {
+					testingCustom: 'custom things',
+				},
 			},
 		};
 
@@ -504,7 +507,7 @@ describe('RecommendationInstantiator', () => {
 					id: 'snapdev',
 				},
 				product: 'sku1',
-				custom: { some: 'thing' },
+				custom: { some: 'thing', testingCustom: 'custom things' },
 				options: {
 					branch: 'testing',
 					categories: ['cats', 'dogs'],
@@ -524,7 +527,7 @@ describe('RecommendationInstantiator', () => {
 					limit: 5,
 					siteId: 'abc123',
 				},
-				...newConfig.context,
+				testing: 'things',
 			});
 		});
 
@@ -681,7 +684,7 @@ describe('RecommendationInstantiator', () => {
 			<div id="tout1"></div>
 			<div id="tout2"></div>
 			<script type="searchspring/recommendations">
-				custom = { some: 'thing' };
+				custom = { other: 'thingy', some: 'thing' };
 				globals = {
 					products: ["C-AD-W1-1869P"],
 					shopper: {
@@ -733,13 +736,22 @@ describe('RecommendationInstantiator', () => {
 		const client = new MockClient(baseConfig.client!.globals, {});
 		const clientSpy = jest.spyOn(client, 'recommend');
 
-		const recommendationInstantiator = new RecommendationInstantiator(baseConfig, { client });
+		const contextConfig = {
+			...baseConfig,
+			context: {
+				custom: {
+					testingCustom: 'custom things',
+				},
+			},
+		};
+
+		const recommendationInstantiator = new RecommendationInstantiator(contextConfig, { client });
 		await wait();
 		expect(Object.keys(recommendationInstantiator.controller).length).toBe(2);
 		Object.keys(recommendationInstantiator.controller).forEach((controllerId, index) => {
 			const controller = recommendationInstantiator.controller[controllerId];
 			expect(controller.context).toStrictEqual({
-				custom: { some: 'thing' },
+				custom: { other: 'thingy', some: 'thing', testingCustom: 'custom things' },
 				globals: {
 					products: ['C-AD-W1-1869P'],
 					shopper: { id: 'snapdev' },
