@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.4.0](https://github.com/searchspring/snap/compare/v1.3.0...v1.4.0) (2024-12-23)
+
+### Bug Fixes
+
+- **recommendationcontroller:** recommendation backforward cache pageshow event listener ([ca12fd5](https://github.com/searchspring/snap/commit/ca12fd5b3dc0140037701d4d263c626562bdb651))
+
+### Features
+
+- **controller/autocomplete:** adding new setting that prevents binding the document click event ([7aaa6ee](https://github.com/searchspring/snap/commit/7aaa6ee4fee39ae7b1a05334270b76d052ce39ca))
+- **controller:** adding setting in autocomplete to opt out of input and submit binding' ([6980fce](https://github.com/searchspring/snap/commit/6980fcee30220714fd5837770eae725355f81dcf))
+
 # [1.3.0](https://github.com/searchspring/snap/compare/v1.2.2...v1.3.0) (2024-12-06)
 
 **Note:** Version bump only for package @searchspring/snap-store-mobx
@@ -75,6 +86,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 - **preact-components-ss-lang:** adding foundation for multi language support to preact components ([4dce617](https://github.com/searchspring/snap/commit/4dce617ec14fb6897d66278b90b5cc17e97665bd))
 - **preact-components/storybook:** updating storybook to latest version - build stable ([43c598d](https://github.com/searchspring/snap/commit/43c598d0e4d11d76364ff2775ecdcabe489023a8))
 - **preact-components:** making progress toward layout templating support ([92c2ce6](https://github.com/searchspring/snap/commit/92c2ce6b207dcb1e922674d55e289354b71612da))
+
 # [0.62.0](https://github.com/searchspring/snap/compare/v0.61.5...v0.62.0) (2024-12-10)
 
 ### Bug Fixes

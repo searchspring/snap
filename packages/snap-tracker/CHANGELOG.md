@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.4.0](https://github.com/searchspring/snap/compare/v1.3.0...v1.4.0) (2024-12-23)
+
+### Bug Fixes
+
+- **tracker:** correcting issue with `ssViewedProducts` cookie storage ([15655f6](https://github.com/searchspring/snap/commit/15655f6c05bd286d296f3f983a827c46ff976335))
+
 # [1.3.0](https://github.com/searchspring/snap/compare/v1.2.2...v1.3.0) (2024-12-06)
 
 **Note:** Version bump only for package @searchspring/snap-tracker
@@ -66,6 +72,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 **Note:** Version bump only for package @searchspring/snap-tracker
 
 # [1.1.0](https://github.com/searchspring/snap/compare/v0.60.1...v1.1.0) (2024-09-20)
+
 # [0.62.0](https://github.com/searchspring/snap/compare/v0.61.5...v0.62.0) (2024-12-10)
 
 ### Bug Fixes

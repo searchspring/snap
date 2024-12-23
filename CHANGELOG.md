@@ -3,6 +3,34 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.4.0](https://github.com/searchspring/snap-1.0/compare/v1.3.0...v1.4.0) (2024-12-23)
+
+### Bug Fixes
+
+- **autocomplete:** merchandising redirect race condition ([65ab3e7](https://github.com/searchspring/snap-1.0/commit/65ab3e71630c30a45b4c35a0191e36f97a3dcbfa))
+- **controller/search:** fixing typo in warning log ([8b5a2e1](https://github.com/searchspring/snap-1.0/commit/8b5a2e1b5c26045930a661d4a76245bbd4f3ee64))
+- **controller/search:** modifying logic to prevent warning when the lastRequest is not defined ([5606a22](https://github.com/searchspring/snap-1.0/commit/5606a22c6309f4f64c22726f637bddd3f19c9002))
+- **controller:** bugfix for controller store loading / loaded states ([a342cd1](https://github.com/searchspring/snap-1.0/commit/a342cd1e84c03f9b660a533b327a2f1c12682121))
+- **preact/instantiator:** adding support for both 'tag' and 'profile' keys ([eaaf668](https://github.com/searchspring/snap-1.0/commit/eaaf668973407db1d9c3b781c0f5a3f1fcf58832))
+- **preact/recommendationinstantiator:** adding back support for legacy usage of seed and product ([93788d4](https://github.com/searchspring/snap-1.0/commit/93788d422510adc15840fac987631efe67f76d2e))
+- **preact/recommendationinstantiator:** allowing for invalid shopper integration with legacy script ([66302ef](https://github.com/searchspring/snap-1.0/commit/66302ef7d3968a8dec47755cc42ca8c595a8cf52))
+- **preact/recommendationinstantiator:** fixing error when globals was undefined ([0f479df](https://github.com/searchspring/snap-1.0/commit/0f479dfbd1a98e3668545d22c7e59a90e8f17492))
+- **preact/recommendationinstantiator:** fixing regression of batching in legacy script blocks ([85e339f](https://github.com/searchspring/snap-1.0/commit/85e339f6ddff7e0d7aa60360635fe1d7ed0b6122))
+- **preact/recommendationinstantiator:** legacy script blocks were not merging the context ([0076a0c](https://github.com/searchspring/snap-1.0/commit/0076a0cf58a98ae74826feea1e3608dae4fd8af6))
+- **preact/templates:** correcting custom script context merge and combining selector/inputSelector ([fc51fb8](https://github.com/searchspring/snap-1.0/commit/fc51fb88ccc2fb10892e6ef185ef1fc9f060d65e))
+- **recommendationcontroller:** recommendation backforward cache pageshow event listener ([ca12fd5](https://github.com/searchspring/snap-1.0/commit/ca12fd5b3dc0140037701d4d263c626562bdb651))
+- **recommendationcontroller:** send core result data and not active display data in beacon tracking ([1c1754a](https://github.com/searchspring/snap-1.0/commit/1c1754a21a365064240cfb7c2433bab2a9b8d52a))
+- **searchresponse.ts:** dont pull out badges with typeof array ([d3b95f5](https://github.com/searchspring/snap-1.0/commit/d3b95f5b0a33d97d7bfaad3edfe5bba842dc2764))
+- **toolbox/getcontext:** auto-detect variables for evaluation list ([e293acc](https://github.com/searchspring/snap-1.0/commit/e293accd91dc72623847ef1fe710290803c6d536))
+- **tracker:** correcting issue with `ssViewedProducts` cookie storage ([15655f6](https://github.com/searchspring/snap-1.0/commit/15655f6c05bd286d296f3f983a827c46ff976335))
+- **urltranslator.ts:** gracefully catch malformed uri errors ([e32f45d](https://github.com/searchspring/snap-1.0/commit/e32f45d1a31b3ea3abc544182768e34ae33a9bdb))
+- **urltranslator.ts:** pop dont join in parseHashString ([02ea149](https://github.com/searchspring/snap-1.0/commit/02ea1497c9d0b4868e872941337445435aeeeec0))
+
+### Features
+
+- **controller/autocomplete:** adding new setting that prevents binding the document click event ([7aaa6ee](https://github.com/searchspring/snap-1.0/commit/7aaa6ee4fee39ae7b1a05334270b76d052ce39ca))
+- **controller:** adding setting in autocomplete to opt out of input and submit binding' ([6980fce](https://github.com/searchspring/snap-1.0/commit/6980fcee30220714fd5837770eae725355f81dcf))
+
 # [1.3.0](https://github.com/searchspring/snap-1.0/compare/v1.2.2...v1.3.0) (2024-12-06)
 
 ### Bug Fixes
@@ -166,6 +194,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 - **snap-layout/theming:** work towards theming a snap layout using styleScripts ([b6be05e](https://github.com/searchspring/snap-1.0/commit/b6be05eee8fc0a06c9e853a591aa0d380158fc0c))
 - support template themes in snap-preact ([df9d905](https://github.com/searchspring/snap-1.0/commit/df9d9057a1554d7eb62830002c3db990e0f8f272))
 - theme reactivity initial interface ([c017aad](https://github.com/searchspring/snap-1.0/commit/c017aadd4add7591bd98fcfbdb8db8985bf2d498))
+
 # [0.62.0](https://github.com/searchspring/snap/compare/v0.61.5...v0.62.0) (2024-12-10)
 
 ### Bug Fixes

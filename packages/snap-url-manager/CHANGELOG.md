@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.4.0](https://github.com/searchspring/snap/compare/v1.3.0...v1.4.0) (2024-12-23)
+
+### Bug Fixes
+
+- **urltranslator.ts:** gracefully catch malformed uri errors ([e32f45d](https://github.com/searchspring/snap/commit/e32f45d1a31b3ea3abc544182768e34ae33a9bdb))
+- **urltranslator.ts:** pop dont join in parseHashString ([02ea149](https://github.com/searchspring/snap/commit/02ea1497c9d0b4868e872941337445435aeeeec0))
+
 # [1.3.0](https://github.com/searchspring/snap/compare/v1.2.2...v1.3.0) (2024-12-06)
 
 **Note:** Version bump only for package @searchspring/snap-url-manager

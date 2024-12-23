@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.4.0](https://github.com/searchspring/snap-1.0/compare/v1.3.0...v1.4.0) (2024-12-23)
+
+### Bug Fixes
+
+- **preact/templates:** correcting custom script context merge and combining selector/inputSelector ([fc51fb8](https://github.com/searchspring/snap-1.0/commit/fc51fb88ccc2fb10892e6ef185ef1fc9f060d65e))
+
 # [1.3.0](https://github.com/searchspring/snap-1.0/compare/v1.2.2...v1.3.0) (2024-12-06)
 
 **Note:** Version bump only for package @searchspring/snap-preact-demo

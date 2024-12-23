@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.4.0](https://github.com/searchspring/snap/compare/v1.3.0...v1.4.0) (2024-12-23)
+
+### Bug Fixes
+
+- **toolbox/getcontext:** auto-detect variables for evaluation list ([e293acc](https://github.com/searchspring/snap/commit/e293accd91dc72623847ef1fe710290803c6d536))
+
 # [1.3.0](https://github.com/searchspring/snap/compare/v1.2.2...v1.3.0) (2024-12-06)
 
 **Note:** Version bump only for package @searchspring/snap-toolbox

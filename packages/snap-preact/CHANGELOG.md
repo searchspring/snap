@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.4.0](https://github.com/searchspring/snap/compare/v1.3.0...v1.4.0) (2024-12-23)
+
+### Bug Fixes
+
+- **preact/instantiator:** adding support for both 'tag' and 'profile' keys ([eaaf668](https://github.com/searchspring/snap/commit/eaaf668973407db1d9c3b781c0f5a3f1fcf58832))
+- **preact/recommendationinstantiator:** adding back support for legacy usage of seed and product ([93788d4](https://github.com/searchspring/snap/commit/93788d422510adc15840fac987631efe67f76d2e))
+- **preact/recommendationinstantiator:** allowing for invalid shopper integration with legacy script ([66302ef](https://github.com/searchspring/snap/commit/66302ef7d3968a8dec47755cc42ca8c595a8cf52))
+- **preact/recommendationinstantiator:** fixing error when globals was undefined ([0f479df](https://github.com/searchspring/snap/commit/0f479dfbd1a98e3668545d22c7e59a90e8f17492))
+- **preact/recommendationinstantiator:** fixing regression of batching in legacy script blocks ([85e339f](https://github.com/searchspring/snap/commit/85e339f6ddff7e0d7aa60360635fe1d7ed0b6122))
+- **preact/recommendationinstantiator:** legacy script blocks were not merging the context ([0076a0c](https://github.com/searchspring/snap/commit/0076a0cf58a98ae74826feea1e3608dae4fd8af6))
+- **preact/templates:** correcting custom script context merge and combining selector/inputSelector ([fc51fb8](https://github.com/searchspring/snap/commit/fc51fb88ccc2fb10892e6ef185ef1fc9f060d65e))
+
 # [1.3.0](https://github.com/searchspring/snap/compare/v1.2.2...v1.3.0) (2024-12-06)
 
 ### Bug Fixes
@@ -129,6 +141,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 - **snap-layout/theming:** work towards theming a snap layout using styleScripts ([b6be05e](https://github.com/searchspring/snap/commit/b6be05eee8fc0a06c9e853a591aa0d380158fc0c))
 - support template themes in snap-preact ([df9d905](https://github.com/searchspring/snap/commit/df9d9057a1554d7eb62830002c3db990e0f8f272))
 - theme reactivity initial interface ([c017aad](https://github.com/searchspring/snap/commit/c017aadd4add7591bd98fcfbdb8db8985bf2d498))
+
 # [0.62.0](https://github.com/searchspring/snap/compare/v0.61.5...v0.62.0) (2024-12-10)
 
 **Note:** Version bump only for package @searchspring/snap-preact
