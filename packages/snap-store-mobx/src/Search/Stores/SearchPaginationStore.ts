@@ -1,8 +1,10 @@
 import { observable, action, computed, makeObservable } from 'mobx';
 
 import type { StoreConfigs, StoreServices, SearchStoreConfig } from '../../types';
-import type { SearchResponseModelPagination, MetaResponseModel } from '@searchspring/snapi-types';
+import type { SearchResponseModel, MetaResponseModel } from '@searchspring/snapi-types';
 import type { UrlManager } from '@searchspring/snap-url-manager';
+
+type SearchResponseModelModified = SearchResponseModel & { pagination?: { begin?: number; end?: number } };
 
 export class SearchPaginationStore {
 	public services: StoreServices;
@@ -13,28 +15,81 @@ export class SearchPaginationStore {
 	public totalResults: number;
 	public totalPages: number;
 	public controllerConfig: StoreConfigs;
+	public begin: number;
+	public end: number;
+	public infiniteLoad?: 'next' | 'previous';
 
 	constructor(
 		config: StoreConfigs,
 		services: StoreServices,
-		paginationData: SearchResponseModelPagination = {
+		paginationData: SearchResponseModelModified['pagination'] = {
 			page: undefined,
 			pageSize: undefined,
 			totalResults: undefined,
 			totalPages: undefined,
 		},
-		meta: MetaResponseModel
+		meta: MetaResponseModel,
+		previousPagination?: SearchPaginationStore,
+		infiniteLoad?: boolean
 	) {
 		const paginationSettings = (config as SearchStoreConfig)?.settings?.pagination;
 
 		this.services = services;
 		this.controllerConfig = config;
 
-		this.page = paginationData.page!;
+		this.page = Math.ceil(paginationData.end! / paginationData.pageSize!);
+		console.log('which page are we on?', this.page);
 		this.pageSize = paginationData.pageSize!;
 		this.totalResults = paginationData.totalResults!;
 		this.defaultPageSize = meta?.pagination?.defaultPageSize!;
 		this.totalPages = paginationData.totalPages!;
+		this.begin = paginationData.begin!;
+		this.end = paginationData.end!;
+		this.infiniteLoad = infiniteLoad ? 'next' : undefined;
+
+		/*
+			pages:
+			1-24	(first)
+			25-48
+			49-72
+			73-96
+			97-103 (last)
+		*/
+
+		if ((this.controllerConfig as SearchStoreConfig).settings?.infinite) {
+			const unload = (this.controllerConfig as SearchStoreConfig).settings?.infinite?.unload;
+			if (this.infiniteLoad && previousPagination?.totalResults) {
+				this.infiniteLoad = this.page > previousPagination.page ? 'next' : 'previous';
+				if (this.infiniteLoad == 'next') {
+					this.begin = previousPagination.begin;
+					console.log('begin and end (initial next)', this.begin, this.end);
+				} else if (this.infiniteLoad == 'previous') {
+					// only possible when using unload functionality
+					this.begin = previousPagination.begin - previousPagination.pageSize;
+					this.end = previousPagination.end;
+					console.log('begin and end (initial previous)', this.begin, this.end);
+				}
+
+				if (unload) {
+					const maxPages = 3;
+					const currentPages = Math.ceil((this.end - this.begin) / previousPagination.pageSize);
+					console.log('current pages: ', currentPages);
+					console.log('previous pagination', previousPagination);
+					if (currentPages > maxPages) {
+						if (this.infiniteLoad == 'next') {
+							this.begin = this.begin + previousPagination.pageSize;
+							console.log('begin and end (unload next)', this.begin, this.end);
+						} else if (this.infiniteLoad == 'previous') {
+							this.end = previousPagination.end - previousPagination.pageSize;
+							console.log('begin and end (unload previous)', this.begin, this.end);
+						}
+					}
+				}
+
+				console.log('begining...', this.begin);
+				console.log('ending...', this.end);
+			}
+		}
 
 		const pageSizeOptions = paginationSettings?.pageSizeOptions || [
 			{
@@ -67,8 +122,8 @@ export class SearchPaginationStore {
 			pageSize: observable,
 			totalResults: observable,
 			totalPages: observable,
-			begin: computed,
-			end: computed,
+			begin: observable,
+			end: observable,
 			multiplePages: computed,
 			current: computed,
 			first: computed,
@@ -78,21 +133,6 @@ export class SearchPaginationStore {
 			getPages: action,
 			setPageSize: action,
 		});
-	}
-
-	public get begin(): number {
-		if ((this.controllerConfig as SearchStoreConfig).settings?.infinite) {
-			return 1;
-		}
-		return this.pageSize * (this.page - 1) + 1;
-	}
-
-	public get end(): number {
-		if (this.pageSize * this.page > this.totalResults) {
-			return this.totalResults;
-		}
-
-		return this.pageSize * this.page;
 	}
 
 	public get multiplePages(): boolean {
@@ -121,17 +161,21 @@ export class SearchPaginationStore {
 	}
 
 	public get next(): Page | undefined {
-		if (this.page < this.totalPages) {
+		if (this.end < this.totalResults) {
+			const page = Math.ceil(this.end / this.pageSize);
+			console.log('next page is', page + 1);
 			return new Page(this.services, {
-				number: this.page + 1,
+				number: page + 1,
 			});
 		}
 	}
 
 	public get previous(): Page | undefined {
-		if (this.page > 1) {
+		if (this.begin > 1) {
+			const page = Math.ceil(this.begin / this.pageSize);
+			console.log('previous page is', page - 1);
 			return new Page(this.services, {
-				number: this.page - 1,
+				number: page - 1,
 			});
 		}
 	}

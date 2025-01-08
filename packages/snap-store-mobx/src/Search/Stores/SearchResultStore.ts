@@ -20,6 +20,7 @@ import type {
 	SearchResponseModelMerchandisingContentConfig,
 	MetaResponseModel,
 } from '@searchspring/snapi-types';
+import { SearchPaginationStore } from './SearchPaginationStore';
 
 const VARIANT_ATTRIBUTE = 'ss-variant-option';
 const VARIANT_ATTRIBUTE_SELECTED = 'ss-variant-option-selected';
@@ -37,8 +38,8 @@ export class SearchResultStore extends Array<Product | Banner> {
 		paginationData?: SearchResponseModelPagination,
 		merchData?: SearchResponseModelMerchandising,
 		loaded?: boolean,
-		previousPaginationData?: SearchResponseModelPagination, // used for infinite scroll functionality
-		previousResults?: (Product | Banner)[] // used for infinite scroll functionality
+		previousResults?: (Product | Banner)[], // used for infinite scroll functionality
+		paginationStore?: SearchPaginationStore // current pagination store details (makes paginationData above redundant, TODO: remove redundancy in 1.0)
 	) {
 		let results: (Product | Banner)[] = (resultData || []).map((result) => {
 			return new Product(services, result, metaData, config);
@@ -77,7 +78,66 @@ export class SearchResultStore extends Array<Product | Banner> {
 			}
 		}
 
-		if (merchData?.content?.inline) {
+		/*
+			banners and products take up a result slot
+			the number of result slots is determined by the pagination data
+			paginatation.pageSize is how many slots there are for that page
+			pagination.totalResults is the number of results in the set
+			inline banners have an index that determines where they should be injected
+			the index is based on the current page and pageSize
+
+			Infinite backfill support with unload support requires:
+			1. previous results
+			2. previous results to know which banners have already been injected
+			3. previous pagination data
+			4. current pagination data
+			5. current results
+
+			Unloading settings:
+			infinite?: {
+				backfill?: number;
+				unload?: {
+					enabled: boolean;
+					perPage?: number; (optional per page to override default)
+					maxPages: number; (optional max pages to keep in memory, default is 3)
+				}
+			};
+
+			Unloading scenarios:
+			1. initial load on page 1
+				a. fetch first page of results
+			2. initial load on page > 1
+				a. fetch previous (page - 1) and next page (page + 1)
+			3. load next products
+				a. remove the previous page of results
+				b. concat the next page new results
+			4. load previous products
+				a. remove the last page of results
+				b. concat the previous page of results
+
+			
+			With infinite, wether unload or backfill (or neither) we need to rely upon pagination.begin and pagination.end to know the current result set
+				* with these we do not need to know if backfill was done, as these will inform us about the result set
+				* when adding badges we will remove badges allready existing in the previous results
+		*/
+
+		// only when infinite is enabled and we had previousResults
+		const infinite = (config as SearchStoreConfig)?.settings?.infinite;
+		if (previousResults && paginationStore?.infiniteLoad && infinite) {
+			// concat or prepend latest results based on the direction of load (next / previous)
+			if (paginationStore.infiniteLoad === 'next') {
+				// attach to the end (normal behavior)
+				results = previousResults.concat(results);
+			} else if (paginationStore.infiniteLoad == 'previous') {
+				// attach to the start
+				results = results.concat(previousResults);
+			}
+			console.log('infinite concat', paginationStore.infiniteLoad, paginationStore.begin, paginationStore.end, results.length);
+		}
+
+		// add banners to results
+		if (paginationStore && merchData?.content?.inline) {
+			// ensure banners are sorted by index
 			const banners = merchData.content.inline
 				.sort(function (a, b) {
 					return a.config!.position!.index! - b.config!.position!.index!;
@@ -86,21 +146,26 @@ export class SearchResultStore extends Array<Product | Banner> {
 					return new Banner(services, banner);
 				});
 
-			if (banners && paginationData?.totalResults) {
-				results = addBannersToResults(config, results, banners, paginationData);
+			if (banners && paginationStore.totalResults) {
+				results = addBannersToResults(config, results as Product[], banners, paginationStore!);
+				console.log('attached banners', paginationStore.infiniteLoad, paginationStore.begin, paginationStore.end, results.length);
 			}
 		}
 
-		// only when infinite is enabled
-		if ((config as SearchStoreConfig)?.settings?.infinite) {
-			// logic to determine when to concatenate previous results
-			// this logic is not bullet proof, but it is highly unlikely that the current and previous pagination data would ever be sequential unless paginating
-
-			// TODO: implement "load previous" with a limit to how many total products can be displayed
-			// the limit would be enforced by unloading (trimming) results based on the direction of the new search (previous page, next page)
-			if (paginationData?.page && previousPaginationData?.page && paginationData.page == previousPaginationData.page + 1) {
-				results = (previousResults || []).concat(results);
+		// when infinite unload is used we must trim results...
+		if (previousResults && paginationStore?.infiniteLoad && infinite?.unload) {
+			const maxPages = 3;
+			const maxResults = maxPages * paginationStore.pageSize;
+			if (results.length > maxResults) {
+				if (paginationStore.infiniteLoad === 'next') {
+					console.log('trimming the results!');
+					results.splice(0, paginationStore.pageSize);
+				} else if (paginationStore.infiniteLoad == 'previous') {
+					const removeCount = results.length - maxResults;
+					results.splice(results.length - removeCount, removeCount);
+				}
 			}
+			console.log('infinite splice', paginationStore.infiniteLoad, paginationStore.begin, paginationStore.end, results.length);
 		}
 
 		super(...results);
@@ -658,32 +723,33 @@ class Child {
 	}
 }
 
-function addBannersToResults(config: StoreConfigs, results: (Product | Banner)[], banners: Banner[], paginationData: SearchResponseModelPagination) {
-	const productCount = results.length;
-	let minIndex = paginationData.pageSize! * (paginationData.page! - 1);
-	const maxIndex = minIndex + paginationData.pageSize!;
+export function addBannersToResults(config: StoreConfigs, results: (Product | Banner)[], banners: Banner[], paginationStore: SearchPaginationStore) {
+	const bannersAndResults: (Product | Banner)[] = [...results];
 
-	if ((config as SearchStoreConfig)?.settings?.infinite) {
-		minIndex = 0;
-	}
+	const injectableBanners = banners.filter((banner) => !bannersAndResults.some((result) => result.id == banner.id));
+	const injectableBannersInSet = injectableBanners.filter((banner) => {
+		const index = banner.config.position!.index!;
+		return index >= paginationStore.begin - 1 && index <= paginationStore.end - 1;
+	});
+	const injectableBannersAtEnd = injectableBanners.filter((banner) => {
+		const index = banner.config.position!.index!;
+		return index > paginationStore.totalResults;
+	});
 
-	banners
-		.reduce((adding, banner) => {
-			const resultCount = productCount + adding.length;
+	// there should always be room in the set for these (if not something is very wrong)
+	injectableBannersInSet.forEach((banner) => {
+		const adjustedIndex = banner.config.position!.index! - (paginationStore.begin - 1);
+		bannersAndResults.splice(adjustedIndex, 0, banner);
+	});
 
-			if (banner.config.position!.index! >= minIndex && (banner.config.position!.index! < maxIndex || resultCount < paginationData.pageSize!)) {
-				adding.push(banner);
-			}
+	injectableBannersAtEnd.forEach((banner, index) => {
+		const resultIndex = paginationStore.totalResults - (injectableBannersAtEnd.length - index);
+		if (resultIndex >= paginationStore.begin - 1 && resultIndex <= paginationStore.end - 1) {
+			bannersAndResults.splice(resultIndex, 0, banner);
+		}
+	});
 
-			return adding;
-		}, [] as Banner[])
-		.forEach((banner) => {
-			const adjustedIndex = banner.config.position!.index! - minIndex;
-
-			results.splice(adjustedIndex, 0, banner);
-		});
-
-	return results;
+	return bannersAndResults;
 }
 
 function variantOptionClick(elem: Element, variantConfig: VariantConfig, results: (Product | Banner)[]) {

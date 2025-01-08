@@ -35,6 +35,7 @@ async function restorePosition({ controller, element }, next: Next) {
 		// prevent scroll to top when using infinite
 		if (!(controller.config.settings.infinite && controller.store.pagination.page != 1)) {
 			setTimeout(() => {
+				console.log('SCROLL TO TOP~~~~~~~~~~~');
 				window.scroll({ top: 0, left: 0, behavior: 'smooth' });
 			});
 		}

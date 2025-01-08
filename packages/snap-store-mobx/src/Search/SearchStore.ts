@@ -17,8 +17,9 @@ import { AbstractStore } from '../Abstract/AbstractStore';
 import { StorageStore } from '../Storage/StorageStore';
 import { MetaStore } from '../Meta/MetaStore';
 
+type SearchResponseModelModified = SearchResponseModel & { pagination?: { begin?: number; end?: number } };
+
 export class SearchStore extends AbstractStore {
-	private declare previousData: SearchResponseModel & { meta?: MetaResponseModel };
 	public services: StoreServices;
 	public meta!: MetaStore;
 	public merchandising!: SearchMerchandisingStore;
@@ -84,7 +85,7 @@ export class SearchStore extends AbstractStore {
 		this.update();
 	}
 
-	public update(data: SearchResponseModel & { meta?: MetaResponseModel } = {}): void {
+	public update(data: SearchResponseModelModified & { meta?: MetaResponseModel; infiniteLoad?: boolean } = {}): void {
 		this.error = undefined;
 		this.meta = new MetaStore(data.meta);
 		this.merchandising = new SearchMerchandisingStore(this.services, data?.merchandising || {});
@@ -99,6 +100,18 @@ export class SearchStore extends AbstractStore {
 			data?.merchandising || {}
 		);
 		this.filters = new SearchFilterStore(this.services, data.filters, this.meta.data);
+
+		// pagination calculation needed for infinite scroll functionality in results store
+		console.log('creating pagination store...');
+		this.pagination = new SearchPaginationStore(
+			this.config,
+			this.services,
+			data.pagination,
+			this.meta.data,
+			this.pagination, // previous pagination store data
+			data.infiniteLoad
+		);
+
 		this.results = new SearchResultStore(
 			this.config,
 			this.services,
@@ -107,14 +120,11 @@ export class SearchStore extends AbstractStore {
 			data.pagination,
 			data.merchandising,
 			this.loaded,
-			this.previousData?.pagination,
-			this.results
+			this.results, // previous results store data
+			this.pagination // current pagination store knows about current result set (begin and end)
 		);
-		this.pagination = new SearchPaginationStore(this.config, this.services, data.pagination, this.meta.data);
 		this.sorting = new SearchSortingStore(this.services, data?.sorting || [], data?.search || {}, this.meta.data);
 
 		this.loaded = !!data.pagination;
-
-		this.previousData = data;
 	}
 }

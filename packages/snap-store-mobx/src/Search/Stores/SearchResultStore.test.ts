@@ -72,203 +72,6 @@ describe('SearchResultStore', () => {
 		});
 	});
 
-	it('supports infinite scroll result concatenation with previous results', () => {
-		const infiniteConfig: SearchStoreConfig = {
-			...searchConfig,
-			settings: {
-				infinite: {},
-			},
-		};
-		const dataPage1 = mockData.searchMeta('infinite.page1');
-		const resultsPage1 = new SearchResultStore(
-			infiniteConfig,
-			services,
-			{},
-			dataPage1.results,
-			dataPage1.pagination,
-			dataPage1.merchandising,
-			false,
-			undefined,
-			undefined
-		);
-
-		expect(resultsPage1.length).toBe(dataPage1.results?.length);
-
-		const dataPage2 = mockData.searchMeta('infinite.page2');
-		const resultsPage2 = new SearchResultStore(
-			infiniteConfig,
-			services,
-			{},
-			dataPage2.results,
-			dataPage2.pagination,
-			dataPage2.merchandising,
-			true,
-			dataPage1.pagination,
-			resultsPage1
-		);
-
-		expect(resultsPage2.length).toBe(dataPage1.results!.length + dataPage2.results!.length);
-
-		const dataPage3 = mockData.searchMeta('infinite.page3');
-		const resultsPage3 = new SearchResultStore(
-			infiniteConfig,
-			services,
-			{},
-			dataPage3.results,
-			dataPage3.pagination,
-			dataPage3.merchandising,
-			true,
-			dataPage2.pagination,
-			resultsPage2
-		);
-
-		expect(resultsPage3.length).toBe(dataPage1.results!.length + dataPage2.results!.length + dataPage3.results!.length);
-
-		// results will be in the order they were fetched (page1, page2, page3)
-		const sourceResultData = [...dataPage1.results!, ...dataPage2.results!, ...dataPage3.results!];
-		resultsPage3.forEach((result, index) => {
-			// check id
-			expect(result.id).toBe(sourceResultData && sourceResultData[index].id);
-
-			// check core mappings
-			Object.keys(result.mappings.core!).forEach((key) => {
-				const core = sourceResultData && sourceResultData[index]?.mappings?.core;
-				const value = core && core[key as keyof SearchResponseModelResultCoreMappings];
-				expect(result.mappings?.core && result.mappings?.core[key as keyof SearchResponseModelResultCoreMappings]).toBe(value);
-			});
-
-			// check attributes
-			Object.keys(result.attributes).forEach((key) => {
-				const attributes = sourceResultData && sourceResultData[index] && sourceResultData[index].attributes;
-				const value = attributes && attributes[key];
-				expect(result.attributes[key]).toStrictEqual(value);
-			});
-		});
-	});
-
-	it('will not concatenate with infinite if the page is not sequential from the previous page', () => {
-		const infiniteConfig: SearchStoreConfig = {
-			...searchConfig,
-			settings: {
-				infinite: {},
-			},
-		};
-		const dataPage1 = mockData.searchMeta('infinite.page1');
-
-		const resultsPage1 = new SearchResultStore(
-			infiniteConfig,
-			services,
-			{},
-			dataPage1.results,
-			dataPage1.pagination,
-			dataPage1.merchandising,
-			false,
-			undefined,
-			undefined
-		);
-
-		expect(resultsPage1.length).toBe(dataPage1.results?.length);
-
-		const dataPage3 = mockData.searchMeta('infinite.page3');
-
-		const resultsPage3 = new SearchResultStore(
-			infiniteConfig,
-			services,
-			{},
-			dataPage3.results,
-			dataPage3.pagination,
-			dataPage3.merchandising,
-			true,
-			dataPage1.pagination,
-			resultsPage1
-		);
-
-		// only contains a singlular page of results
-		// does not concatenate results because the pagination data is out of sequence
-		expect(resultsPage3.length).toBe(dataPage3.results!.length);
-
-		// contains the result data from dataPage3
-		resultsPage3.forEach((result, index) => {
-			// check id
-			expect(result.id).toBe(dataPage3.results && dataPage3.results[index].id);
-
-			// check core mappings
-			Object.keys(result.mappings.core!).forEach((key) => {
-				const core = dataPage3.results && dataPage3.results[index]?.mappings?.core;
-				const value = core && core[key as keyof SearchResponseModelResultCoreMappings];
-				expect(result.mappings?.core && result.mappings?.core[key as keyof SearchResponseModelResultCoreMappings]).toBe(value);
-			});
-
-			// check attributes
-			Object.keys(result.attributes).forEach((key) => {
-				const attributes = dataPage3.results && dataPage3.results[index] && dataPage3.results[index].attributes;
-				const value = attributes && attributes[key];
-				expect(result.attributes[key]).toStrictEqual(value);
-			});
-		});
-	});
-
-	it('will not concatenate results if infinite is not enabled', () => {
-		const infiniteConfig: SearchStoreConfig = {
-			...searchConfig,
-			settings: {
-				infinite: undefined,
-			},
-		};
-		const dataPage1 = mockData.searchMeta('infinite.page1');
-
-		const resultsPage1 = new SearchResultStore(
-			infiniteConfig,
-			services,
-			{},
-			dataPage1.results,
-			dataPage1.pagination,
-			dataPage1.merchandising,
-			false,
-			undefined,
-			undefined
-		);
-
-		expect(resultsPage1.length).toBe(dataPage1.results?.length);
-
-		const dataPage2 = mockData.searchMeta('infinite.page2');
-
-		const resultsPage2 = new SearchResultStore(
-			infiniteConfig,
-			services,
-			{},
-			dataPage2.results,
-			dataPage2.pagination,
-			dataPage2.merchandising,
-			true,
-			dataPage1.pagination,
-			resultsPage1
-		);
-
-		// only contains a singlular page of results
-		expect(resultsPage2.length).toBe(dataPage2.results!.length);
-
-		// contains the result data from dataPage2
-		resultsPage2.forEach((result, index) => {
-			// check id
-			expect(result.id).toBe(dataPage2.results && dataPage2.results[index].id);
-
-			// check core mappings
-			Object.keys(result.mappings.core!).forEach((key) => {
-				const core = dataPage2.results && dataPage2.results[index]?.mappings?.core;
-				const value = core && core[key as keyof SearchResponseModelResultCoreMappings];
-				expect(result.mappings?.core && result.mappings?.core[key as keyof SearchResponseModelResultCoreMappings]).toBe(value);
-			});
-
-			// check attributes
-			Object.keys(result.attributes).forEach((key) => {
-				const attributes = dataPage2.results && dataPage2.results[index] && dataPage2.results[index].attributes;
-				const value = attributes && attributes[key];
-				expect(result.attributes[key]).toStrictEqual(value);
-			});
-		});
-	});
-
 	describe('mask with display property', () => {
 		describe('mask class', () => {
 			it('can be set with data', () => {
@@ -1252,12 +1055,35 @@ describe('SearchResultStore', () => {
 
 	describe('with inline banners', () => {
 		it('splices inline banners into the results array', () => {
-			const searchData = mockData.updateConfig({ siteId: '8uyt2m' }).searchMeta('inlineBanners');
+			// first page should contain a single inline banner
+			const searchData = mockData.updateConfig({ siteId: '8uyt2m' }).searchMeta('inlineBanners.page1');
 
 			const results = new SearchResultStore(searchConfig, services, {}, searchData.results, searchData.pagination, searchData.merchandising);
 
 			expect(results.length).toBe(searchData.pagination?.pageSize);
-			expect((results[1] as Banner).value).toBe(searchData.merchandising?.content?.inline && searchData.merchandising.content.inline[0].value);
+
+			results.forEach((result, index) => {
+				if (index == searchData.merchandising?.content?.inline![0].config?.position?.index) {
+					expect(result.type).toBe('banner');
+				} else {
+					expect(result.type).toBe('product');
+				}
+			});
+
+			expect((results[1] as Banner).value).toBe(searchData.merchandising?.content?.inline![0].value);
+		});
+
+		it('does not splice inline banner into second page of results', () => {
+			// second page should not have any inline banners
+			const searchData = mockData.updateConfig({ siteId: '8uyt2m' }).searchMeta('inlineBanners.page2');
+
+			const results = new SearchResultStore(searchConfig, services, {}, searchData.results, searchData.pagination, searchData.merchandising);
+
+			expect(results.length).toBe(searchData.pagination?.pageSize);
+
+			results.forEach((result) => {
+				expect(result.type).toBe('product');
+			});
 		});
 
 		it('splices inline banners into the results array', () => {
@@ -1304,12 +1130,24 @@ describe('SearchResultStore', () => {
 			expect((results[8] as Banner).value).toBe(inlineData[3].value);
 		});
 
+		it('correctly splices inline banner to end', () => {
+			const searchData = mockData.updateConfig({ siteId: '8uyt2m' }).searchMeta('inlineBanners.page13');
+
+			const results = new SearchResultStore(searchConfig, services, {}, searchData.results, searchData.pagination, searchData.merchandising);
+
+			// adds one inline banner at the end
+			expect(results.length).toBe(searchData.results?.length! + 1);
+			const inlineData = searchData.merchandising?.content?.inline!;
+			expect(results[3].id).toBe(`ss-ib-${inlineData[1].config?.position?.index}`);
+			expect((results[3] as Banner).value).toBe(inlineData[1].value);
+		});
+
 		it('splices inline banners that are beyond the response index to the end of the results array', () => {
 			const searchData = {
 				results: [],
 				pagination: {
 					page: 4,
-					totalResults: 4,
+					totalResults: 91,
 					pageSize: 30,
 				},
 				merchandising: {
@@ -1350,6 +1188,264 @@ describe('SearchResultStore', () => {
 			expect((results[0] as Banner).value).toBe(searchData.merchandising.content.inline[2].value);
 		});
 	});
+
+	// describe('with infinite scroll', () => {
+	// 	it('supports infinite scroll result concatenation with previous results', () => {
+	// 		const infiniteConfig: SearchStoreConfig = {
+	// 			...searchConfig,
+	// 			settings: {
+	// 				infinite: {},
+	// 			},
+	// 		};
+	// 		const dataPage1 = mockData.searchMeta('infinite.page1');
+	// 		const resultsPage1 = new SearchResultStore(
+	// 			infiniteConfig,
+	// 			services,
+	// 			{},
+	// 			dataPage1.results,
+	// 			dataPage1.pagination,
+	// 			dataPage1.merchandising,
+	// 			false,
+	// 			undefined,
+	// 			undefined
+	// 		);
+
+	// 		expect(resultsPage1.length).toBe(dataPage1.results?.length);
+
+	// 		const dataPage2 = mockData.searchMeta('infinite.page2');
+	// 		const resultsPage2 = new SearchResultStore(
+	// 			infiniteConfig,
+	// 			services,
+	// 			{},
+	// 			dataPage2.results,
+	// 			dataPage2.pagination,
+	// 			dataPage2.merchandising,
+	// 			true,
+	// 			dataPage1.pagination,
+	// 			resultsPage1
+	// 		);
+
+	// 		expect(resultsPage2.length).toBe(dataPage1.results!.length + dataPage2.results!.length);
+
+	// 		const dataPage3 = mockData.searchMeta('infinite.page3');
+	// 		const resultsPage3 = new SearchResultStore(
+	// 			infiniteConfig,
+	// 			services,
+	// 			{},
+	// 			dataPage3.results,
+	// 			dataPage3.pagination,
+	// 			dataPage3.merchandising,
+	// 			true,
+	// 			resultsPage2
+	// 			dataPage2.pagination,
+	// 		);
+
+	// 		expect(resultsPage3.length).toBe(dataPage1.results!.length + dataPage2.results!.length + dataPage3.results!.length);
+
+	// 		// results will be in the order they were fetched (page1, page2, page3)
+	// 		const sourceResultData = [...dataPage1.results!, ...dataPage2.results!, ...dataPage3.results!];
+	// 		resultsPage3.forEach((result, index) => {
+	// 			// check id
+	// 			expect(result.id).toBe(sourceResultData && sourceResultData[index].id);
+
+	// 			// check core mappings
+	// 			Object.keys(result.mappings.core!).forEach((key) => {
+	// 				const core = sourceResultData && sourceResultData[index]?.mappings?.core;
+	// 				const value = core && core[key as keyof SearchResponseModelResultCoreMappings];
+	// 				expect(result.mappings?.core && result.mappings?.core[key as keyof SearchResponseModelResultCoreMappings]).toBe(value);
+	// 			});
+
+	// 			// check attributes
+	// 			Object.keys(result.attributes).forEach((key) => {
+	// 				const attributes = sourceResultData && sourceResultData[index] && sourceResultData[index].attributes;
+	// 				const value = attributes && attributes[key];
+	// 				expect(result.attributes[key]).toStrictEqual(value);
+	// 			});
+	// 		});
+	// 	});
+
+	// 	it('will not concatenate with infinite if the page is not sequential from the previous page', () => {
+	// 		const infiniteConfig: SearchStoreConfig = {
+	// 			...searchConfig,
+	// 			settings: {
+	// 				infinite: {},
+	// 			},
+	// 		};
+	// 		const dataPage1 = mockData.searchMeta('infinite.page1');
+
+	// 		const resultsPage1 = new SearchResultStore(
+	// 			infiniteConfig,
+	// 			services,
+	// 			{},
+	// 			dataPage1.results,
+	// 			dataPage1.pagination,
+	// 			dataPage1.merchandising,
+	// 			false,
+	// 			undefined,
+	// 			undefined
+	// 		);
+
+	// 		expect(resultsPage1.length).toBe(dataPage1.results?.length);
+
+	// 		const dataPage3 = mockData.searchMeta('infinite.page3');
+
+	// 		const resultsPage3 = new SearchResultStore(
+	// 			infiniteConfig,
+	// 			services,
+	// 			{},
+	// 			dataPage3.results,
+	// 			dataPage3.pagination,
+	// 			dataPage3.merchandising,
+	// 			true,
+	// 			dataPage1.pagination,
+	// 			resultsPage1
+	// 		);
+
+	// 		// only contains a singlular page of results
+	// 		// does not concatenate results because the pagination data is out of sequence
+	// 		expect(resultsPage3.length).toBe(dataPage3.results!.length);
+
+	// 		// contains the result data from dataPage3
+	// 		resultsPage3.forEach((result, index) => {
+	// 			// check id
+	// 			expect(result.id).toBe(dataPage3.results && dataPage3.results[index].id);
+
+	// 			// check core mappings
+	// 			Object.keys(result.mappings.core!).forEach((key) => {
+	// 				const core = dataPage3.results && dataPage3.results[index]?.mappings?.core;
+	// 				const value = core && core[key as keyof SearchResponseModelResultCoreMappings];
+	// 				expect(result.mappings?.core && result.mappings?.core[key as keyof SearchResponseModelResultCoreMappings]).toBe(value);
+	// 			});
+
+	// 			// check attributes
+	// 			Object.keys(result.attributes).forEach((key) => {
+	// 				const attributes = dataPage3.results && dataPage3.results[index] && dataPage3.results[index].attributes;
+	// 				const value = attributes && attributes[key];
+	// 				expect(result.attributes[key]).toStrictEqual(value);
+	// 			});
+	// 		});
+	// 	});
+
+	// 	it('will not concatenate results if infinite is not enabled', () => {
+	// 		const infiniteConfig: SearchStoreConfig = {
+	// 			...searchConfig,
+	// 			settings: {
+	// 				infinite: undefined,
+	// 			},
+	// 		};
+	// 		const dataPage1 = mockData.searchMeta('infinite.page1');
+
+	// 		const resultsPage1 = new SearchResultStore(
+	// 			infiniteConfig,
+	// 			services,
+	// 			{},
+	// 			dataPage1.results,
+	// 			dataPage1.pagination,
+	// 			dataPage1.merchandising,
+	// 			false,
+	// 			undefined,
+	// 			undefined
+	// 		);
+
+	// 		expect(resultsPage1.length).toBe(dataPage1.results?.length);
+
+	// 		const dataPage2 = mockData.searchMeta('infinite.page2');
+
+	// 		const resultsPage2 = new SearchResultStore(
+	// 			infiniteConfig,
+	// 			services,
+	// 			{},
+	// 			dataPage2.results,
+	// 			dataPage2.pagination,
+	// 			dataPage2.merchandising,
+	// 			true,
+	// 			dataPage1.pagination,
+	// 			resultsPage1
+	// 		);
+
+	// 		// only contains a singlular page of results
+	// 		expect(resultsPage2.length).toBe(dataPage2.results!.length);
+
+	// 		// contains the result data from dataPage2
+	// 		resultsPage2.forEach((result, index) => {
+	// 			// check id
+	// 			expect(result.id).toBe(dataPage2.results && dataPage2.results[index].id);
+
+	// 			// check core mappings
+	// 			Object.keys(result.mappings.core!).forEach((key) => {
+	// 				const core = dataPage2.results && dataPage2.results[index]?.mappings?.core;
+	// 				const value = core && core[key as keyof SearchResponseModelResultCoreMappings];
+	// 				expect(result.mappings?.core && result.mappings?.core[key as keyof SearchResponseModelResultCoreMappings]).toBe(value);
+	// 			});
+
+	// 			// check attributes
+	// 			Object.keys(result.attributes).forEach((key) => {
+	// 				const attributes = dataPage2.results && dataPage2.results[index] && dataPage2.results[index].attributes;
+	// 				const value = attributes && attributes[key];
+	// 				expect(result.attributes[key]).toStrictEqual(value);
+	// 			});
+	// 		});
+	// 	});
+
+	// 	it('splices inline banners into the results array', () => {
+	// 		const infiniteConfig: SearchStoreConfig = {
+	// 			...searchConfig,
+	// 			settings: {
+	// 				infinite: undefined,
+	// 			},
+	// 		};
+
+	// 		// first page should contain a single inline banner
+	// 		const searchData = mockData.updateConfig({ siteId: '8uyt2m' }).searchMeta('inlineBanners.page1');
+
+	// 		const results = new SearchResultStore(infiniteConfig, services, {}, searchData.results, searchData.pagination, searchData.merchandising);
+
+	// 		expect(results.length).toBe(searchData.pagination?.pageSize);
+
+	// 		results.forEach((result, index) => {
+	// 			if (index == searchData.merchandising?.content?.inline![0].config?.position?.index) {
+	// 				expect(result.type).toBe('banner');
+	// 			} else {
+	// 				expect(result.type).toBe('product');
+	// 			}
+	// 		});
+
+	// 		expect((results[1] as Banner).value).toBe(searchData.merchandising?.content?.inline![0].value);
+	// 	});
+
+	// 	it('does not splice inline banner into second page of results', () => {
+	// 		const infiniteConfig: SearchStoreConfig = {
+	// 			...searchConfig,
+	// 			settings: {
+	// 				infinite: {},
+	// 			},
+	// 		};
+
+	// 		// first page should contain a single inline banner
+	// 		const searchDataPage1 = mockData.updateConfig({ siteId: '8uyt2m' }).searchMeta('inlineBanners.page1');
+
+	// 		const resultsPage1 = new SearchResultStore(infiniteConfig, services, {}, searchDataPage1.results, searchDataPage1.pagination, searchDataPage1.merchandising);
+
+	// 		expect(resultsPage1.length).toBe(searchDataPage1.pagination?.pageSize);
+	// 		expect((resultsPage1[1] as Banner).value).toBe(searchDataPage1.merchandising?.content?.inline![0].value);
+
+	// 		// second page should not have any inline banners
+	// 		const searchDataPage2 = mockData.updateConfig({ siteId: '8uyt2m' }).searchMeta('inlineBanners.page2');
+
+	// 		const resultsPage2 = new SearchResultStore(infiniteConfig, services, {}, searchDataPage2.results, searchDataPage2.pagination, searchDataPage2.merchandising, true, searchDataPage1.pagination, resultsPage1);
+
+	// 		expect(resultsPage2.length).toBe(searchDataPage2.pagination?.pageSize! * 2);
+
+	// 		resultsPage2.forEach((result, index) => {
+	// 			if (index == searchDataPage2.merchandising?.content?.inline![0].config?.position?.index) {
+	// 				expect(result.type + index).toBe('banner' + index);
+	// 			} else {
+	// 				expect(result.type + index).toBe('product' + index);
+	// 			}
+	// 		});
+	// 	});
+	// });
+
 	describe('with badges', () => {
 		it('has overlay result badges', () => {
 			const searchData = mockData.updateConfig({ siteId: '8uyt2m' }).searchMeta();

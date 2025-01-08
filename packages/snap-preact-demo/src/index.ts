@@ -5,6 +5,7 @@ import { StorageStore } from '@searchspring/snap-store-mobx';
 import { url } from '@searchspring/snap-toolbox';
 // import { afterSearch } from './middleware/plugins/afterSearch';
 import { afterStore } from './middleware/plugins/afterStore';
+// import { infiniteRestore } from './middleware/plugins/infiniteRestore';
 import { combineMerge } from './middleware/functions';
 import { ContentSkel } from './components/Content/Skel';
 import { SidebarSkel } from './components/Sidebar/Skel';
@@ -136,6 +137,11 @@ let config: SnapConfig = {
 				config: {
 					id: 'search',
 					plugins: [[afterStore]],
+					globals: {
+						pagination: {
+							pageSize: 12,
+						},
+					},
 					settings: {
 						redirects: {
 							merchandising: false,
@@ -147,9 +153,10 @@ let config: SnapConfig = {
 						restorePosition: {
 							enabled: true,
 						},
-						// infinite: {
-						// 	backfill: 12,
-						// },
+						infinite: {
+							// backfill: 100,
+							unload: {},
+						},
 						pagination: {
 							pageSizeOptions: [
 								{

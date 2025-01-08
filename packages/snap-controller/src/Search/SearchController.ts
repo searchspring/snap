@@ -49,6 +49,8 @@ type SearchTrackMethods = {
 	};
 };
 
+type SearchResponseModelModified = SearchResponseModel & { pagination?: { begin?: number; end?: number } };
+
 export class SearchController extends AbstractController {
 	public type = ControllerTypes.search;
 	declare store: SearchStore;
@@ -120,7 +122,7 @@ export class SearchController extends AbstractController {
 				this.storage.set('scrollMap', {});
 			}
 
-			await this.eventManager.fire('restorePosition', { controller: this, element: elementPosition });
+			this.eventManager.fire('restorePosition', { controller: this, element: elementPosition });
 		});
 
 		// restore position
@@ -159,6 +161,8 @@ export class SearchController extends AbstractController {
 								offset = 0;
 							}
 
+							console.log('check and scroll elem:', elem);
+
 							if (elem) {
 								const { y } = elem.getBoundingClientRect();
 
@@ -171,6 +175,7 @@ export class SearchController extends AbstractController {
 									// don't need to scroll - it is right where we want it
 									scrolledElem = elem;
 								}
+								console.log('+++ scrolling scrolling scrolling +++');
 							} else {
 								checkCount++;
 							}
@@ -285,6 +290,9 @@ export class SearchController extends AbstractController {
 			params.tracking.pageLoadId = pageId;
 		}
 
+		params.tracking.pageLoadId = undefined;
+		params.tracking.sessionId = undefined;
+
 		if (!this.config.globals?.personalization?.disabled) {
 			const cartItems = this.tracker.cookies.cart.get();
 			if (cartItems.length) {
@@ -346,50 +354,83 @@ export class SearchController extends AbstractController {
 			const searchProfile = this.profiler.create({ type: 'event', name: 'search', context: params }).start();
 
 			let meta: MetaResponseModel = {};
-			let response: SearchResponseModel & { meta?: MetaResponseModel } = {};
+			let response: SearchResponseModelModified & { meta?: MetaResponseModel; infiniteLoad?: boolean } = {};
+
+			// change perPage if set
+			if (this.config.settings?.infinite?.unload?.pageSize) {
+				params.pagination = params.pagination || {};
+				params.pagination.pageSize = this.config.settings?.infinite.unload?.pageSize;
+			}
 
 			// infinite scroll functionality (after page 1)
 			if (this.config.settings?.infinite && params.pagination?.page && params.pagination.page > 1) {
-				const preventBackfill =
-					this.config.settings.infinite?.backfill && !this.store.results.length && params.pagination.page > this.config.settings.infinite.backfill;
-				const dontBackfill = !this.config.settings.infinite?.backfill && !this.store.results.length;
-				// if the page is higher than the backfill setting redirect back to page 1
-				if (preventBackfill || dontBackfill) {
-					this.storage.set('scrollMap', {});
-					this.urlManager.set('page', 1).go();
-					return;
-				}
+				// for initial load when infinite backfill or unload is enabled
+				if (!this.store.loaded && (this.config.settings?.infinite.backfill || this.config.settings?.infinite?.unload)) {
+					let pagesToFetch: number[] = [];
 
-				// infinite backfill is enabled AND we have not yet fetched any results
-				if (this.config.settings?.infinite.backfill && !this.store.loaded) {
-					// create requests for all missing pages (using Arrray(page).fill() to populate an array to map)
-					const backfillRequests = Array(params.pagination.page)
-						.fill('backfill')
-						.map((v, i) => {
-							const backfillParams: SearchRequestModel = deepmerge(
-								{ ...params },
-								{ pagination: { page: i + 1 }, search: { redirectResponse: 'full' } }
-							);
-							// don't include page parameter if on page 1
-							if (i + 1 == 1) {
-								delete backfillParams?.pagination?.page;
+					if (this.config.settings?.infinite.backfill) {
+						// if the page is higher than the backfill setting redirect back to page 1
+						if (params.pagination.page > this.config.settings.infinite.backfill) {
+							this.storage.set('scrollMap', {});
+							this.urlManager.set('page', 1).go();
+							return;
+						}
 
-								if (this.config.settings?.redirects?.merchandising) {
-									// redirect setting
-									// DUPLICATED LOGIC can be found in params getter
-									delete backfillParams?.search?.redirectResponse;
+						pagesToFetch = Array.from({ length: params.pagination.page }, (_, i) => i + 1);
+					} else if (this.config.settings?.infinite?.unload) {
+						// always initially load 3 pages, two before requested page
+						let direction = 'next';
+						const directionState = this.urlManager.state[this.config.settings?.infinite?.unload?.directionParam || 'dir'];
+						if (directionState) {
+							// @ts-ignore - TODO fix typing
+							direction = directionState[0];
+							console.log('got the direction', direction);
+						}
+
+						// next: [page - 2, page - 1, page]
+						// previous: [page, page + 1, page + 2]
+
+						// POSSIBLE FIX FOR BACKFILL DIRECTION: look for url param for infinite direction...
+						if (direction == 'next') {
+							for (let p = params.pagination.page; p >= params.pagination.page - 2; p--) {
+								if (p > 0) {
+									pagesToFetch.unshift(p);
 								}
 							}
+						} else if (direction == 'previous') {
+							for (let p = params.pagination.page; p <= params.pagination.page + 2; p++) {
+								if (p > 0) {
+									pagesToFetch.push(p);
+								}
+							}
+						}
+					}
 
-							return this.client.search(backfillParams);
-						});
+					console.log('pages to fetch', pagesToFetch);
+
+					// create requests for all missing pages (using Arrray(page).fill() to populate an array to map)
+					const backfillRequests = pagesToFetch.map((p) => {
+						const backfillParams: SearchRequestModel = deepmerge({ ...params }, { pagination: { page: p }, search: { redirectResponse: 'full' } });
+						// don't include page parameter if on page 1 (needed for cache)
+						if (p == 1) {
+							delete backfillParams?.pagination?.page;
+
+							if (this.config.settings?.redirects?.merchandising) {
+								// redirect setting
+								// DUPLICATED LOGIC can be found in params getter
+								delete backfillParams?.search?.redirectResponse;
+							}
+						}
+
+						return this.client.search(backfillParams);
+					});
 
 					const backfillResponses = await Promise.all(backfillRequests);
 
 					// backfillResponses are [meta, searchResponse][]
-					// set the meta and response to the first page of backfillResponses
-					meta = backfillResponses[0][0];
-					response = backfillResponses[0][1];
+					// set the meta and response to the last page of backfillResponses
+					meta = backfillResponses[backfillRequests.length - 1][0];
+					response = backfillResponses[backfillRequests.length - 1][1];
 
 					// accumulate results from all backfill responses
 					const backfillResults: SearchResponseModelResult[] = backfillResponses.reduce((results, response) => {
@@ -398,8 +439,8 @@ export class SearchController extends AbstractController {
 					}, [] as SearchResponseModelResult[]);
 
 					// overwrite pagination params to expected state
-					response.pagination!.totalPages = Math.ceil(response.pagination!.totalResults! / response.pagination!.pageSize!);
-					response.pagination!.page = params.pagination?.page;
+					response.pagination!.begin = (pagesToFetch[0] - 1) * response.pagination?.pageSize! + 1;
+					console.log('begin!', response.pagination!.begin);
 
 					// set the response results with results from backfill responses
 					response.results = backfillResults;
@@ -407,6 +448,9 @@ export class SearchController extends AbstractController {
 					// infinite with no backfills.
 					[meta, response] = await this.client.search(params);
 				}
+
+				// mark the request as having loaded via infinite scroll
+				response.infiniteLoad = true;
 			} else {
 				// normal request for next page
 				[meta, response] = await this.client.search(params);

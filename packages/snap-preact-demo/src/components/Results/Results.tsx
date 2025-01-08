@@ -1,11 +1,11 @@
 import { h, Component } from 'preact';
-import { useRef } from 'preact/hooks';
 import { observer } from 'mobx-react';
 
-import { Pagination, Results as ResultsComponent, withStore, withController, useIntersection } from '@searchspring/snap-preact-components';
+import { Pagination, Results as ResultsComponent, withStore, withController } from '@searchspring/snap-preact-components';
 
 import { Profile } from '../Profile/Profile';
 import { Toolbar } from '../Toolbar/Toolbar';
+import { InfiniteLoadMore } from './InfiniteLoadMore';
 
 type ResultsProps = {
 	store?: SearchStore;
@@ -24,27 +24,11 @@ const resultsBreakpoints = {
 	},
 };
 
-@withStore
-@withController
-@observer
-export class Results extends Component<ResultsProps> {
-	render() {
-		const loading = this.props.store.loading;
-		const results = this.props.store.results;
-		const pagination = this.props.store.pagination;
-		const controller = this.props.controller;
-
-		const infiniteEnabled = Boolean(controller.config.settings.infinite);
-		const infiniteRef = useRef(null);
-		if (infiniteEnabled) {
-			const atBottom = useIntersection(infiniteRef, '50px');
-
-			if (atBottom && pagination.next && !loading && pagination.totalResults > 0) {
-				setTimeout(() => {
-					pagination.next.url.go({ history: 'replace' });
-				});
-			}
-		}
+export const Results = withController(
+	observer((props: ResultsProps) => {
+		const controller = props.controller;
+		const { results, pagination } = controller.store;
+		const infinite = controller.config.settings.infinite;
 
 		return (
 			<div class="ss-results">
@@ -52,27 +36,37 @@ export class Results extends Component<ResultsProps> {
 
 				<div class="clear"></div>
 
+				<InfiniteLoadMore controller={controller} autoFetch restoreScroll position="previous" />
+
 				<Profile name="results" controller={controller}>
 					<div id="ss_results">
-						<ResultsComponent breakpoints={resultsBreakpoints} controller={controller} results={results} />
+						<ResultsComponent
+							theme={{ components: { image: { lazy: true } } }}
+							breakpoints={resultsBreakpoints}
+							controller={controller}
+							results={results}
+						/>
 					</div>
-					{infiniteEnabled && <div style={{ display: loading ? 'none' : 'block' }} ref={infiniteRef}></div>}
 				</Profile>
 
 				<div class="clear"></div>
 
-				<div class="ss-toolbar ss-toolbar-bottom">{!infiniteEnabled && pagination.totalPages > 1 && <Pagination pagination={pagination} />}</div>
-				{infiniteEnabled && (
-					<div class="ss-page-circle">
-						<span class="ss-page-circle-number">{pagination.current.number}</span>
+				<div class="ss-toolbar ss-toolbar-bottom">{!infinite && pagination.totalPages > 1 && <Pagination pagination={pagination} />}</div>
+				{infinite && (
+					<div>
+						<InfiniteLoadMore controller={controller} autoFetch restoreScroll position="next" />
+
+						<div class="ss-page-circle">
+							<span class="ss-page-circle-number">{pagination.current.number}</span>
+						</div>
 					</div>
 				)}
 
 				<div class="clear"></div>
 			</div>
 		);
-	}
-}
+	})
+);
 
 type NoResultsProps = {
 	store?: SearchStore;

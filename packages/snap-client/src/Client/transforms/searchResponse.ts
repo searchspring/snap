@@ -11,6 +11,8 @@ import {
 	SearchResponseModelResultBadges,
 } from '@searchspring/snapi-types';
 
+type SearchResponseModelPaginationModified = SearchResponseModelPagination & { begin?: number; end?: number };
+
 // TODO: Add all core fields
 const CORE_FIELDS = [
 	'uid',
@@ -178,11 +180,13 @@ export function transformSearchResponse(response: searchResponseType, request: S
 	};
 }
 
-transformSearchResponse.pagination = (response: searchResponseType): { pagination: SearchResponseModelPagination } => {
+transformSearchResponse.pagination = (response: searchResponseType): { pagination: SearchResponseModelPaginationModified } => {
 	const pagination = response?.pagination;
 
 	return {
 		pagination: {
+			begin: pagination?.begin,
+			end: pagination?.end,
 			totalResults: pagination?.totalResults,
 			page: pagination?.currentPage,
 			pageSize: pagination?.perPage,

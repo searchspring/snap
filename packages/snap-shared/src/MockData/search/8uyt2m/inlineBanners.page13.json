@@ -1,0 +1,1413 @@
+{
+  "pagination": {
+    "totalResults": 364,
+    "page": 13,
+    "pageSize": 30,
+    "totalPages": 13
+  },
+  "results": [
+    {
+      "id": "176824",
+      "mappings": {
+        "core": {
+          "uid": "176824",
+          "sku": "C-ZS-V2-44034",
+          "name": "Z Supply Pocket T-Shirt",
+          "url": "/product/C-ZS-V2-44034",
+          "addToCartUrl": "/product/C-ZS-V2-44034",
+          "price": 29,
+          "msrp": 50,
+          "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/4531_copyright_reddressboutique_2017__large.jpg",
+          "secureImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/4531_copyright_reddressboutique_2017__large.jpg",
+          "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/4531_copyright_reddressboutique_2017__thumb_med.jpg",
+          "rating": "5",
+          "ratingCount": "1111",
+          "description": "Casually chic and simply classic, the Z Supply Pocket Tee In Lavender has always got your back! This burnout jersey tee features a curved V neck, slouchy raw edge pocket, short sleeves, and hi lo hem. Model is wearing an x-small. • 60% Cotton, 40% Polyester • Hand Wash Cold • Unlined • Imported",
+          "stockMessage": "In stock",
+          "brand": "Z Supply",
+          "popularity": "721",
+          "caption": "Captions!"
+        }
+      },
+      "attributes": {
+        "id": "c5e47163c6f9a35b0ba279141fbebb3c",
+        "intellisuggestData": "eJyyKK0sMcplYMjJTM8oycxLZ3DWjQrWDTPSNTExMDZhMDRmMDYzZDBgMDYzZkgvykwBBAAA__9DvQv-",
+        "intellisuggestSignature": "edfb877de8d14a35319f2534e0ebb5bc74e0d59fe9713f5963f5335606fad8d4",
+        "product_type_unigram": "tshirt",
+        "sales_rank": [
+          "721"
+        ]
+      },
+      "children": []
+    },
+    {
+      "id": "174985",
+      "mappings": {
+        "core": {
+          "uid": "174985",
+          "sku": "C-ZS-G3-44034",
+          "name": "Z Supply Pocket T-Shirt",
+          "url": "/product/C-ZS-G3-44034",
+          "addToCartUrl": "/product/C-ZS-G3-44034",
+          "price": 29,
+          "msrp": 50,
+          "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/16_12_pastel_1171_large.jpg",
+          "secureImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/16_12_pastel_1171_large.jpg",
+          "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/16_12_pastel_1171_thumb_med.jpg",
+          "rating": "5",
+          "ratingCount": "1111",
+          "description": "Casually chic and simply classic, the Z Supply Pocket Tee In Grey has always got your back! This burnout jersey tee features a curved V neck, slouchy raw edge pocket, short sleeves, and hi lo hem. Model is wearing an x-small. • 60% Cotton, 40% Polyester • Hand Wash Cold • Unlined • Imported",
+          "stockMessage": "In stock",
+          "brand": "Z Supply",
+          "popularity": "1095",
+          "caption": "Captions!"
+        }
+      },
+      "attributes": {
+        "id": "30f79053370978aca756a21f157f773f",
+        "intellisuggestData": "eJyyKK0sMcplYMjJTM8oycxLZ3DWjQrWdTfWNTExMDZhMDRmMDYzYjBgMDYzZkgvykwBBAAA__9CXAvx",
+        "intellisuggestSignature": "d51e13bf6a66bfdcd9247aedb84f69f025b67d6b3b5131ff5e46a87e77124196",
+        "product_type_unigram": "tshirt",
+        "sales_rank": [
+          "1095"
+        ]
+      },
+      "children": []
+    },
+    {
+      "id": "176776",
+      "mappings": {
+        "core": {
+          "uid": "176776",
+          "sku": "C-HYF-G2-6K584",
+          "name": "Zip Your Lips Gray Dress",
+          "url": "/product/C-HYF-G2-6K584",
+          "addToCartUrl": "/product/C-HYF-G2-6K584",
+          "price": 32,
+          "msrp": 50,
+          "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/1026__copyright_reddressboutique_large.jpg",
+          "secureImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/1026__copyright_reddressboutique_large.jpg",
+          "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/1026__copyright_reddressboutique_thumb_med.jpg",
+          "rating": "5",
+          "ratingCount": "1111",
+          "description": "Some days you want to show up and just have everyone in the room take one look at you, stop talking, and drool. Not that they don’t already do that, but this is a very special kind of ‘Zip Your Lips.’ This is the legendary silence that ends in ballads being written of your beauty, poems penned of your grace, and idiots apologizing for their idiocy … and let’s face it, that last one is kind of a miracle. Model is wearing a small. • Self: 65% Polyester, 35% Rayon • Contrast: 62% Polyester, 33% Rayon, 5% Spandex • Hand Wash Cold • Unlined • Imported",
+          "stockMessage": "In stock",
+          "brand": "Hyfve",
+          "popularity": "1024",
+          "caption": "Captions!"
+        }
+      },
+      "attributes": {
+        "id": "7b42962772f0153c7fb5cda38126be03",
+        "intellisuggestData": "eJyyKK0sMcplYMjJTM8oycxLZ3DW9Yh003U30jXzNrUwYTA0ZjA2M2YwAJPpRZkpgAAAAP__UisMTg",
+        "intellisuggestSignature": "317531d55005ad62adc483b42fa7424502f51862b75343806d41eeed7cd4be47",
+        "product_type_unigram": "dress",
+        "sales_rank": [
+          "1024"
+        ]
+      },
+      "children": []
+    }
+  ],
+  "filters": [],
+  "facets": [
+    {
+      "field": "brand",
+      "type": "value",
+      "filtered": false,
+      "values": [
+        {
+          "filtered": false,
+          "value": "4 Sienna",
+          "label": "4 Sienna",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "5th Avenue",
+          "label": "5th Avenue",
+          "count": 2
+        },
+        {
+          "filtered": false,
+          "value": "36point5",
+          "label": "36point5",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "Aakaa",
+          "label": "Aakaa",
+          "count": 5
+        },
+        {
+          "filtered": false,
+          "value": "Adrienne",
+          "label": "Adrienne",
+          "count": 14
+        },
+        {
+          "filtered": false,
+          "value": "American Bazi",
+          "label": "American Bazi",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "Anne Michelle",
+          "label": "Anne Michelle",
+          "count": 2
+        },
+        {
+          "filtered": false,
+          "value": "Aura L'atiste",
+          "label": "Aura L'atiste",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "Ayepeach",
+          "label": "Ayepeach",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "Bamboo",
+          "label": "Bamboo",
+          "count": 6
+        },
+        {
+          "filtered": false,
+          "value": "BB Dakota",
+          "label": "BB Dakota",
+          "count": 4
+        },
+        {
+          "filtered": false,
+          "value": "Blu Pepper",
+          "label": "Blu Pepper",
+          "count": 3
+        },
+        {
+          "filtered": false,
+          "value": "BLVD",
+          "label": "BLVD",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "Breckelle's",
+          "label": "Breckelle's",
+          "count": 12
+        },
+        {
+          "filtered": false,
+          "value": "Caramela",
+          "label": "Caramela",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "Caribbean Queen",
+          "label": "Caribbean Queen",
+          "count": 2
+        },
+        {
+          "filtered": false,
+          "value": "Cello Jeans",
+          "label": "Cello Jeans",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "Ces Femme",
+          "label": "Ces Femme",
+          "count": 2
+        },
+        {
+          "filtered": false,
+          "value": "Chris & Carol",
+          "label": "Chris & Carol",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "Ciffy Classified",
+          "label": "Ciffy Classified",
+          "count": 2
+        },
+        {
+          "filtered": false,
+          "value": "City Classified",
+          "label": "City Classified",
+          "count": 2
+        },
+        {
+          "filtered": false,
+          "value": "Color Thread",
+          "label": "Color Thread",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "Creative Group",
+          "label": "Creative Group",
+          "count": 4
+        },
+        {
+          "filtered": false,
+          "value": "Dance & Marvel",
+          "label": "Dance & Marvel",
+          "count": 8
+        },
+        {
+          "filtered": false,
+          "value": "Do+Be",
+          "label": "Do+Be",
+          "count": 3
+        },
+        {
+          "filtered": false,
+          "value": "Dreamers",
+          "label": "Dreamers",
+          "count": 10
+        },
+        {
+          "filtered": false,
+          "value": "Ellison",
+          "label": "Ellison",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "En Creme",
+          "label": "En Creme",
+          "count": 4
+        },
+        {
+          "filtered": false,
+          "value": "English Factory",
+          "label": "English Factory",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "Entro",
+          "label": "Entro",
+          "count": 4
+        },
+        {
+          "filtered": false,
+          "value": "Ever After",
+          "label": "Ever After",
+          "count": 3
+        },
+        {
+          "filtered": false,
+          "value": "Everly",
+          "label": "Everly",
+          "count": 2
+        },
+        {
+          "filtered": false,
+          "value": "Fable",
+          "label": "Fable",
+          "count": 2
+        },
+        {
+          "filtered": false,
+          "value": "Flying Tomato",
+          "label": "Flying Tomato",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "Fringe",
+          "label": "Fringe",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "Giovanni & Rucci",
+          "label": "Giovanni & Rucci",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "Girly Accessories",
+          "label": "Girly Accessories",
+          "count": 2
+        },
+        {
+          "filtered": false,
+          "value": "Hayden",
+          "label": "Hayden",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "HDA",
+          "label": "HDA",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "Hommage",
+          "label": "Hommage",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "Honey Punch",
+          "label": "Honey Punch",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "Hot + Delicious",
+          "label": "Hot + Delicious",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "Hyfve",
+          "label": "Hyfve",
+          "count": 3
+        },
+        {
+          "filtered": false,
+          "value": "Illa Illa",
+          "label": "Illa Illa",
+          "count": 2
+        },
+        {
+          "filtered": false,
+          "value": "Imoshion",
+          "label": "Imoshion",
+          "count": 2
+        },
+        {
+          "filtered": false,
+          "value": "Joia",
+          "label": "Joia",
+          "count": 3
+        },
+        {
+          "filtered": false,
+          "value": "Judith March",
+          "label": "Judith March",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "Just Me",
+          "label": "Just Me",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "Just USA",
+          "label": "Just USA",
+          "count": 10
+        },
+        {
+          "filtered": false,
+          "value": "Kayleen",
+          "label": "Kayleen",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "field": "color_family",
+      "type": "value",
+      "filtered": false,
+      "values": [
+        {
+          "filtered": false,
+          "value": "Pink",
+          "label": "Pink",
+          "count": 94
+        },
+        {
+          "filtered": false,
+          "value": "Beige",
+          "label": "Beige",
+          "count": 56
+        },
+        {
+          "filtered": false,
+          "value": "Blue",
+          "label": "Blue",
+          "count": 89
+        },
+        {
+          "filtered": false,
+          "value": "Gray",
+          "label": "Gray",
+          "count": 36
+        },
+        {
+          "filtered": false,
+          "value": "Brown",
+          "label": "Brown",
+          "count": 20
+        },
+        {
+          "filtered": false,
+          "value": "White",
+          "label": "White",
+          "count": 14
+        },
+        {
+          "filtered": false,
+          "value": "Green",
+          "label": "Green",
+          "count": 15
+        },
+        {
+          "filtered": false,
+          "value": "Purple",
+          "label": "Purple",
+          "count": 9
+        },
+        {
+          "filtered": false,
+          "value": "Black",
+          "label": "Black",
+          "count": 3
+        },
+        {
+          "filtered": false,
+          "value": "Yellow",
+          "label": "Yellow",
+          "count": 6
+        },
+        {
+          "filtered": false,
+          "value": "Red",
+          "label": "Red",
+          "count": 4
+        },
+        {
+          "filtered": false,
+          "value": "Orange",
+          "label": "Orange",
+          "count": 4
+        }
+      ]
+    },
+    {
+      "field": "size",
+      "type": "value",
+      "filtered": false,
+      "values": [
+        {
+          "filtered": false,
+          "value": "Medium",
+          "label": "Medium",
+          "count": 245
+        },
+        {
+          "filtered": false,
+          "value": "Large",
+          "label": "Large",
+          "count": 245
+        },
+        {
+          "filtered": false,
+          "value": "Small",
+          "label": "Small",
+          "count": 245
+        },
+        {
+          "filtered": false,
+          "value": "7",
+          "label": "7",
+          "count": 66
+        },
+        {
+          "filtered": false,
+          "value": "9",
+          "label": "9",
+          "count": 66
+        },
+        {
+          "filtered": false,
+          "value": "10",
+          "label": "10",
+          "count": 64
+        },
+        {
+          "filtered": false,
+          "value": "8",
+          "label": "8",
+          "count": 64
+        },
+        {
+          "filtered": false,
+          "value": "6",
+          "label": "6",
+          "count": 63
+        },
+        {
+          "filtered": false,
+          "value": "7.5",
+          "label": "7.5",
+          "count": 63
+        },
+        {
+          "filtered": false,
+          "value": "8.5",
+          "label": "8.5",
+          "count": 63
+        },
+        {
+          "filtered": false,
+          "value": "6.5",
+          "label": "6.5",
+          "count": 62
+        },
+        {
+          "filtered": false,
+          "value": "5.5",
+          "label": "5.5",
+          "count": 51
+        },
+        {
+          "filtered": false,
+          "value": "X-Small",
+          "label": "X-Small",
+          "count": 15
+        },
+        {
+          "filtered": false,
+          "value": "11",
+          "label": "11",
+          "count": 7
+        },
+        {
+          "filtered": false,
+          "value": "5",
+          "label": "5",
+          "count": 6
+        },
+        {
+          "filtered": false,
+          "value": "24",
+          "label": "24",
+          "count": 4
+        },
+        {
+          "filtered": false,
+          "value": "25",
+          "label": "25",
+          "count": 4
+        },
+        {
+          "filtered": false,
+          "value": "26",
+          "label": "26",
+          "count": 4
+        },
+        {
+          "filtered": false,
+          "value": "27",
+          "label": "27",
+          "count": 4
+        },
+        {
+          "filtered": false,
+          "value": "28",
+          "label": "28",
+          "count": 4
+        },
+        {
+          "filtered": false,
+          "value": "29",
+          "label": "29",
+          "count": 4
+        },
+        {
+          "filtered": false,
+          "value": "30",
+          "label": "30",
+          "count": 4
+        },
+        {
+          "filtered": false,
+          "value": "X-Large",
+          "label": "X-Large",
+          "count": 4
+        },
+        {
+          "filtered": false,
+          "value": "31",
+          "label": "31",
+          "count": 3
+        },
+        {
+          "filtered": false,
+          "value": "1",
+          "label": "1",
+          "count": 2
+        },
+        {
+          "filtered": false,
+          "value": "13",
+          "label": "13",
+          "count": 2
+        },
+        {
+          "filtered": false,
+          "value": "3",
+          "label": "3",
+          "count": 2
+        }
+      ]
+    },
+    {
+      "field": "ss_category_hierarchy",
+      "type": "value",
+      "filtered": false,
+      "values": [
+        {
+          "filtered": false,
+          "value": "Gifts for Her",
+          "label": "Gifts for Her",
+          "count": 363
+        },
+        {
+          "filtered": false,
+          "value": "Shop By Trend",
+          "label": "Shop By Trend",
+          "count": 141
+        },
+        {
+          "filtered": false,
+          "value": "All Sale",
+          "label": "All Sale",
+          "count": 62
+        },
+        {
+          "filtered": false,
+          "value": "All Dresses",
+          "label": "All Dresses",
+          "count": 45
+        },
+        {
+          "filtered": false,
+          "value": "All Tops",
+          "label": "All Tops",
+          "count": 45
+        },
+        {
+          "filtered": false,
+          "value": "All Accessories",
+          "label": "All Accessories",
+          "count": 37
+        },
+        {
+          "filtered": false,
+          "value": "What's New",
+          "label": "What's New",
+          "count": 32
+        },
+        {
+          "filtered": false,
+          "value": "All Shoes",
+          "label": "All Shoes",
+          "count": 31
+        },
+        {
+          "filtered": false,
+          "value": "Brands We Love",
+          "label": "Brands We Love",
+          "count": 26
+        },
+        {
+          "filtered": false,
+          "value": "Memorial Day Sale",
+          "label": "Memorial Day Sale",
+          "count": 19
+        },
+        {
+          "filtered": false,
+          "value": "Special Occasion",
+          "label": "Special Occasion",
+          "count": 17
+        },
+        {
+          "filtered": false,
+          "value": "All Bottoms",
+          "label": "All Bottoms",
+          "count": 15
+        },
+        {
+          "filtered": false,
+          "value": "All Jewelry",
+          "label": "All Jewelry",
+          "count": 15
+        },
+        {
+          "filtered": false,
+          "value": "Going Fast",
+          "label": "Going Fast",
+          "count": 14
+        },
+        {
+          "filtered": false,
+          "value": "Valentine's Day",
+          "label": "Valentine's Day",
+          "count": 14
+        },
+        {
+          "filtered": false,
+          "value": "Athleisure",
+          "label": "Athleisure",
+          "count": 13
+        },
+        {
+          "filtered": false,
+          "value": "Trending",
+          "label": "Trending",
+          "count": 12
+        },
+        {
+          "filtered": false,
+          "value": "Notify of Restock",
+          "label": "Notify of Restock",
+          "count": 11
+        },
+        {
+          "filtered": false,
+          "value": "Style Influencer",
+          "label": "Style Influencer",
+          "count": 11
+        },
+        {
+          "filtered": false,
+          "value": "Shop Lookbook",
+          "label": "Shop Lookbook",
+          "count": 7
+        },
+        {
+          "filtered": false,
+          "value": "All Pajamas",
+          "label": "All Pajamas",
+          "count": 4
+        },
+        {
+          "filtered": false,
+          "value": "Playsuits",
+          "label": "Playsuits",
+          "count": 4
+        },
+        {
+          "filtered": false,
+          "value": "Swimwear",
+          "label": "Swimwear",
+          "count": 3
+        },
+        {
+          "filtered": false,
+          "value": "Back in Stock",
+          "label": "Back in Stock",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "Shop By Outfit",
+          "label": "Shop By Outfit",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "field": "price",
+      "type": "range-buckets",
+      "filtered": false,
+      "values": [
+        {
+          "filtered": false,
+          "low": 20,
+          "high": 30,
+          "label": "$20 to $30",
+          "count": 59
+        },
+        {
+          "filtered": false,
+          "low": 30,
+          "high": 40,
+          "label": "$30 to $40",
+          "count": 131
+        },
+        {
+          "filtered": false,
+          "low": 40,
+          "high": 50,
+          "label": "$40 to $50",
+          "count": 107
+        },
+        {
+          "filtered": false,
+          "low": 50,
+          "high": 75,
+          "label": "$50 to $75",
+          "count": 45
+        },
+        {
+          "filtered": false,
+          "low": 75,
+          "high": 100,
+          "label": "$75 to $100",
+          "count": 8
+        }
+      ]
+    },
+    {
+      "field": "material",
+      "type": "value",
+      "filtered": false,
+      "values": [
+        {
+          "filtered": false,
+          "value": "Vegan Leather",
+          "label": "Vegan Leather",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "Spandex",
+          "label": "Spandex",
+          "count": 22
+        },
+        {
+          "filtered": false,
+          "value": "Silk",
+          "label": "Silk",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "Rubber",
+          "label": "Rubber",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "Polyester",
+          "label": "Polyester",
+          "count": 101
+        },
+        {
+          "filtered": false,
+          "value": "Leather",
+          "label": "Leather",
+          "count": 4
+        },
+        {
+          "filtered": false,
+          "value": "Faux Leather",
+          "label": "Faux Leather",
+          "count": 3
+        },
+        {
+          "filtered": false,
+          "value": "Denim",
+          "label": "Denim",
+          "count": 14
+        },
+        {
+          "filtered": false,
+          "value": "Cotton",
+          "label": "Cotton",
+          "count": 73
+        },
+        {
+          "filtered": false,
+          "value": "",
+          "label": "",
+          "count": 143
+        }
+      ]
+    },
+    {
+      "field": "on_sale",
+      "type": "value",
+      "filtered": false,
+      "values": [
+        {
+          "filtered": false,
+          "value": "Yes",
+          "label": "Yes",
+          "count": 124
+        },
+        {
+          "filtered": false,
+          "value": "No",
+          "label": "No",
+          "count": 239
+        }
+      ]
+    },
+    {
+      "field": "ss_price",
+      "type": "range",
+      "filtered": false,
+      "step": 2.5,
+      "range": {
+        "low": 5,
+        "high": 92
+      },
+      "active": {
+        "low": 5,
+        "high": 92
+      }
+    },
+    {
+      "field": "size_dress",
+      "type": "value",
+      "filtered": false,
+      "values": [
+        {
+          "filtered": false,
+          "value": "Large",
+          "label": "Large",
+          "count": 245
+        },
+        {
+          "filtered": false,
+          "value": "Medium",
+          "label": "Medium",
+          "count": 245
+        },
+        {
+          "filtered": false,
+          "value": "Small",
+          "label": "Small",
+          "count": 245
+        },
+        {
+          "filtered": false,
+          "value": "X-Large",
+          "label": "X-Large",
+          "count": 4
+        },
+        {
+          "filtered": false,
+          "value": "X-Small",
+          "label": "X-Small",
+          "count": 15
+        }
+      ]
+    },
+    {
+      "field": "season",
+      "type": "value",
+      "filtered": false,
+      "values": [
+        {
+          "filtered": false,
+          "value": "Spring",
+          "label": "Spring",
+          "count": 49
+        },
+        {
+          "filtered": false,
+          "value": "Fall",
+          "label": "Fall",
+          "count": 35
+        },
+        {
+          "filtered": false,
+          "value": "Summer",
+          "label": "Summer",
+          "count": 33
+        },
+        {
+          "filtered": false,
+          "value": "Winter",
+          "label": "Winter",
+          "count": 6
+        }
+      ]
+    },
+    {
+      "field": "size_footwear",
+      "type": "value",
+      "filtered": false,
+      "values": [
+        {
+          "filtered": false,
+          "value": "5",
+          "label": "5",
+          "count": 4
+        },
+        {
+          "filtered": false,
+          "value": "5.5",
+          "label": "5.5",
+          "count": 51
+        },
+        {
+          "filtered": false,
+          "value": "6",
+          "label": "6",
+          "count": 63
+        },
+        {
+          "filtered": false,
+          "value": "6.5",
+          "label": "6.5",
+          "count": 62
+        },
+        {
+          "filtered": false,
+          "value": "7",
+          "label": "7",
+          "count": 64
+        },
+        {
+          "filtered": false,
+          "value": "7.5",
+          "label": "7.5",
+          "count": 63
+        },
+        {
+          "filtered": false,
+          "value": "8",
+          "label": "8",
+          "count": 64
+        },
+        {
+          "filtered": false,
+          "value": "8.5",
+          "label": "8.5",
+          "count": 63
+        },
+        {
+          "filtered": false,
+          "value": "9",
+          "label": "9",
+          "count": 64
+        },
+        {
+          "filtered": false,
+          "value": "10",
+          "label": "10",
+          "count": 64
+        },
+        {
+          "filtered": false,
+          "value": "11",
+          "label": "11",
+          "count": 5
+        }
+      ]
+    },
+    {
+      "field": "dress_length_name",
+      "type": "value",
+      "filtered": false,
+      "values": [
+        {
+          "filtered": false,
+          "value": "Mini",
+          "label": "Mini",
+          "count": 14
+        },
+        {
+          "filtered": false,
+          "value": "Micro",
+          "label": "Micro",
+          "count": 4
+        },
+        {
+          "filtered": false,
+          "value": "Knee",
+          "label": "Knee",
+          "count": 3
+        },
+        {
+          "filtered": false,
+          "value": "Floor",
+          "label": "Floor",
+          "count": 7
+        },
+        {
+          "filtered": false,
+          "value": "Calf",
+          "label": "Calf",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "Below knee",
+          "label": "Below knee",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "Above knee",
+          "label": "Above knee",
+          "count": 6
+        },
+        {
+          "filtered": false,
+          "value": "Above Knee",
+          "label": "Above Knee",
+          "count": 3
+        }
+      ]
+    },
+    {
+      "field": "pattern",
+      "type": "value",
+      "filtered": false,
+      "values": [
+        {
+          "filtered": false,
+          "value": "Print",
+          "label": "Print",
+          "count": 13
+        },
+        {
+          "filtered": false,
+          "value": "Embroidered",
+          "label": "Embroidered",
+          "count": 9
+        },
+        {
+          "filtered": false,
+          "value": "Floral",
+          "label": "Floral",
+          "count": 7
+        },
+        {
+          "filtered": false,
+          "value": "Stripe",
+          "label": "Stripe",
+          "count": 7
+        },
+        {
+          "filtered": false,
+          "value": "Plaid",
+          "label": "Plaid",
+          "count": 3
+        }
+      ]
+    },
+    {
+      "field": "collection",
+      "type": "value",
+      "filtered": false,
+      "values": [
+        {
+          "filtered": false,
+          "value": "Addicted To Love",
+          "label": "Addicted To Love",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "After Midnight",
+          "label": "After Midnight",
+          "count": 2
+        },
+        {
+          "filtered": false,
+          "value": "Ahead Of The Curve",
+          "label": "Ahead Of The Curve",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "All In Favor",
+          "label": "All In Favor",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "Balancing Act",
+          "label": "Balancing Act",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "Bazaar Beauty",
+          "label": "Bazaar Beauty",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "Beauty In Believing",
+          "label": "Beauty In Believing",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "Better Than Basic",
+          "label": "Better Than Basic",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "Breaking Rules",
+          "label": "Breaking Rules",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "Can't Be Tamed",
+          "label": "Can't Be Tamed",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "City Of Stars",
+          "label": "City Of Stars",
+          "count": 2
+        },
+        {
+          "filtered": false,
+          "value": "Dream Street",
+          "label": "Dream Street",
+          "count": 2
+        },
+        {
+          "filtered": false,
+          "value": "Gossip Girl",
+          "label": "Gossip Girl",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "Great Heights",
+          "label": "Great Heights",
+          "count": 2
+        },
+        {
+          "filtered": false,
+          "value": "Hello Sun",
+          "label": "Hello Sun",
+          "count": 2
+        },
+        {
+          "filtered": false,
+          "value": "Higher Standards",
+          "label": "Higher Standards",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "Miss Ambitious",
+          "label": "Miss Ambitious",
+          "count": 2
+        }
+      ]
+    },
+    {
+      "field": "saturation",
+      "type": "value",
+      "filtered": false,
+      "values": [
+        {
+          "filtered": false,
+          "value": "high",
+          "label": "high",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "low",
+          "label": "low",
+          "count": 5
+        },
+        {
+          "filtered": false,
+          "value": "med",
+          "label": "med",
+          "count": 8
+        }
+      ]
+    },
+    {
+      "field": "size_pants",
+      "type": "range-buckets",
+      "filtered": false,
+      "values": [
+        {
+          "filtered": false,
+          "low": null,
+          "high": 1,
+          "label": "0-1",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "low": 2,
+          "high": 3,
+          "label": "2-3",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "low": 3,
+          "high": 4,
+          "label": "3-4",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "low": 4,
+          "high": 5,
+          "label": "4-5",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "low": 5,
+          "high": 7,
+          "label": "5-7",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "low": 7,
+          "high": null,
+          "label": "7 and up",
+          "count": 5
+        }
+      ]
+    }
+  ],
+  "sorting": [],
+  "merchandising": {
+    "campaigns": [],
+    "redirect": "",
+    "content": {
+      "inline": [
+        {
+          "config": {
+            "position": {
+              "index": 1
+            }
+          },
+          "value": "<script data-banner-type=\"html\" data-banner-html=\"<div\tstyle=&quot;\t\tbackground-image: url('http://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/478a0515_3_large.jpg');\t\tbackground-position: center;\t\tbackground-size: cover;\t\theight: 100%;\t\twidth: 100%;\t&quot;>\t<div\t\tstyle=&quot;\t\t\tbackground: rgba(0, 0, 0, 0.4);\t\t\tdisplay: flex;\t\t\tflex-direction: column;\t\t\tjustify-content: flex-end;\t\t\theight: 100%;\t\t&quot;\t>\t\t<div style=&quot;padding: 20px&quot;>\t\t\t<h3\t\t\t\tclass=&quot;ss-ac-hidden&quot;\t\t\t\tstyle=&quot;\t\t\t\t\tfont-size: 36px;\t\t\t\t\tfont-weight: 100;\t\t\t\t\tcolor: #fff;\t\t\t\t\tline-height: 1.2em;\t\t\t\t&quot;\t\t\t>\t\t\t\tIt's okay to be cool in Winter.\t\t\t</h3>\t\t\t<p style=&quot;color: #fff; font-size: 16px&quot;>\t\t\t\t<strong>20% off select sunglasses.</strong> <br />Limited time offer.\t\t\t</p>\t\t</div>\t</div></div>\" type=\"text/widget\"></script><div style=\"\t\tbackground-image: url('http://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/478a0515_3_large.jpg');\t\tbackground-position: center;\t\tbackground-size: cover;\t\theight: 100%;\t\twidth: 100%;\t\">\t<div style=\"\t\t\tbackground: rgba(0, 0, 0, 0.4);\t\t\tdisplay: flex;\t\t\tflex-direction: column;\t\t\tjustify-content: flex-end;\t\t\theight: 100%;\t\t\">\t\t<div style=\"padding: 20px\">\t\t\t<h3 class=\"ss-ac-hidden\" style=\"\t\t\t\t\tfont-size: 36px;\t\t\t\t\tfont-weight: 100;\t\t\t\t\tcolor: #fff;\t\t\t\t\tline-height: 1.2em;\t\t\t\t\">\t\t\t\tIt's okay to be cool in Winter.\t\t\t</h3>\t\t\t<p style=\"color: #fff; font-size: 16px\">\t\t\t\t<strong>20% off select sunglasses.</strong> <br>Limited time offer.\t\t\t</p>\t\t</div>\t</div></div>"
+        },
+        {
+          "config": {
+            "position": {
+              "index": 999998
+            }
+          },
+          "value": "<script data-banner-type=\"image\" data-banner-html=\"<div\tstyle=&quot;\t\tbackground-image: url('https://t3.ftcdn.net/jpg/02/71/11/78/240_F_271117867_aUgcLKb936BWGuPEHPFGYhf6MMD5Pklq.jpg');\t\tbackground-position: center;\t\tbackground-size: contain;\t\tbackground-repeat: no-repeat;\t\theight: 100%;\t\twidth: 100%;\t&quot;></div>\" type=\"text/widget\" data-image-url=\"https://t3.ftcdn.net/jpg/02/71/11/78/240_F_271117867_aUgcLKb936BWGuPEHPFGYhf6MMD5Pklq.jpg\"></script><img src=\"https://t3.ftcdn.net/jpg/02/71/11/78/240_F_271117867_aUgcLKb936BWGuPEHPFGYhf6MMD5Pklq.jpg\" style=\"width: 100%;\">"
+        }
+      ]
+    }
+  },
+  "search": {
+    "query": "lighting"
+  }
+}

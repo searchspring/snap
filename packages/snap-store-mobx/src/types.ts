@@ -56,6 +56,10 @@ export type SearchStoreConfig = StoreConfig & {
 		};
 		infinite?: {
 			backfill?: number;
+			unload?: {
+				directionParam?: string;
+				pageSize?: number;
+			};
 		};
 		restorePosition?: {
 			enabled: boolean;

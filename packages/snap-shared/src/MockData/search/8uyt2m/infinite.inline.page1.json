@@ -1,0 +1,2197 @@
+{
+  "pagination": {
+    "totalResults": 102,
+    "page": 1,
+    "pageSize": 40,
+    "totalPages": 3
+  },
+  "results": [
+    {
+      "id": "157997",
+      "mappings": {
+        "core": {
+          "uid": "157997",
+          "sku": "C-JU-I4-BP968",
+          "name": "C'est Chic Medium Blue High Waisted Skinny Jeans",
+          "url": "/product/C-JU-I4-BP968",
+          "addToCartUrl": "/product/C-JU-I4-BP968",
+          "price": 48,
+          "msrp": 50,
+          "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/478a9560_large.jpg",
+          "secureImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/478a9560_large.jpg",
+          "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/478a9560_thumb_med.jpg",
+          "rating": "5",
+          "ratingCount": "1111",
+          "description": "C'est Chic, these lovely Medium Blue High Waisted Skinny Jeans are as classy and cute as you. Covering up yet showcasing gorgeous gams like yours, these streamlined skinnies are made for a graceful gal like you. These high waisted skinny jeans feature 5 pocket styling and a zipper button fly. • 75% Cotton, 23% Polyester, 2% Spandex • Machine Wash Cold • Unlined • Made in the USA",
+          "stockMessage": "In stock",
+          "brand": "Just USA",
+          "popularity": "1859",
+          "caption": "Captions!"
+        }
+      },
+      "attributes": {
+        "id": "8c4626095eea26abc8df7755f0afb35d",
+        "intellisuggestData": "eJyyKK0sMcplYChPzCwuYXDW9QrV9TTRdQqwNLNgMGQwZDBgsLRkSC_KTAEEAAD__-ekCis",
+        "intellisuggestSignature": "d4705d765a004498669fb06931ffb9d9c2e263dc2470787a3bdc7a075d5a8a60",
+        "product_type_unigram": "jeans",
+        "sales_rank": [
+          "1859"
+        ]
+      },
+      "children": []
+    },
+    {
+      "id": "135918",
+      "mappings": {
+        "core": {
+          "uid": "135918",
+          "sku": "C-SLM-W2-T1437",
+          "name": "All She Wants Top",
+          "url": "/product/C-SLM-W2-T1437",
+          "addToCartUrl": "/product/C-SLM-W2-T1437",
+          "price": 34,
+          "msrp": 50,
+          "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/844a2495_1_large.jpg",
+          "secureImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/844a2495_1_large.jpg",
+          "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/844a2495_1_thumb_med.jpg",
+          "rating": "5",
+          "ratingCount": "1111",
+          "description": "“All She Wants” is a celebrity-sized wardrobe with new exquisite pieces arriving daily. Is that too much to ask?! While that may be a reality in only the best dreams, this divine top has everything you could need in a blouse. You can’t have it all, but you sure can come awfully close. Wear this lovely top and you’ll feel and look as good as that dream. Top features spaghetti straps that cross in the back, ruffles near the bottom, and crochet detail at neckline. Model is wearing a small. • Self: 100% Rayon • Contrast: 100% Polyester • Hand Wash Cold • Unlined • Semi Sheer",
+          "stockMessage": "In stock",
+          "brand": "Sole Mio",
+          "popularity": "3693",
+          "caption": "Captions!"
+        }
+      },
+      "attributes": {
+        "id": "0c823ededcc8c0e1491926388afe4e37",
+        "intellisuggestData": "eJyyKK0sMcplYChPzCwuYXDWDfbx1Q030g0xNDE2ZzBkMGIwYLC0ZEgvykwBBAAA___z_wpv",
+        "intellisuggestSignature": "50dc85629f582d6128923741e0bbb2192994df2e73274fd75d60a2abe08996fe",
+        "product_type_unigram": "top",
+        "sales_rank": [
+          "3693"
+        ]
+      },
+      "children": []
+    },
+    {
+      "id": "146792",
+      "mappings": {
+        "core": {
+          "uid": "146792",
+          "sku": "C-SNM-I7-D9023",
+          "name": "American Honey Print Maxi Dress",
+          "url": "/product/C-SNM-I7-D9023",
+          "addToCartUrl": "/product/C-SNM-I7-D9023",
+          "price": 38,
+          "msrp": 50,
+          "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/844a7850_1_large.jpg",
+          "secureImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/844a7850_1_large.jpg",
+          "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/844a7850_1_thumb_med.jpg",
+          "rating": "5",
+          "ratingCount": "1111",
+          "description": "Nothing’s sweeter than summertime and American Honey, and this pretty Print Maxi Dress is oh-so rich! Recall simpler and sweeter times in style in this lovely paisley print dress. This print maxi features a square neckline, an empire waist, and a keyhole on the back with a button loop closure. Model is wearing a small. • 95% Polyester, 5% Spandex • Machine Wash Cold • Unlined • Faintly Sheer • Made in the USA",
+          "stockMessage": "In stock",
+          "brand": "Sun N Moon",
+          "popularity": "2182",
+          "caption": "Captions!"
+        }
+      },
+      "attributes": {
+        "id": "341783f2f8ca9f5443b5d2496fe8e38c",
+        "intellisuggestData": "eJyyKK0sMcplYChPzCwuYXDWDfbz1fU013WxNDAyZjBkMGYwYLC0ZEgvykwBBAAA___yQQpY",
+        "intellisuggestSignature": "f0fdc2cc4f1184f05fb609b70338f666cfc0ff6f451167b2664e59fa1bf0a80a",
+        "product_type_unigram": "dress",
+        "sales_rank": [
+          "2182"
+        ]
+      },
+      "children": []
+    },
+    {
+      "id": "153183",
+      "mappings": {
+        "core": {
+          "uid": "153183",
+          "sku": "C-CES-W1-415F1",
+          "name": "American Love Story White Print Off-The-Shoulder Dress",
+          "url": "/product/C-CES-W1-415F1",
+          "addToCartUrl": "/product/C-CES-W1-415F1",
+          "price": 39,
+          "msrp": 50,
+          "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/844a4164_1_large.jpg",
+          "secureImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/844a4164_1_large.jpg",
+          "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/844a4164_1_thumb_med.jpg",
+          "rating": "5",
+          "ratingCount": "1111",
+          "description": "You’ll be the qualified author of an American Love Story when you’re in this wonderful White Print Off-The-Shoulder Dress. If there’s anything you love more than fashion, it’s your country, and this lovely dress impeccably combines the two! This shift dress features an elastic off-the-shoulder design with a gathered overlay, two functional pockets on the front, and a tie at the waist. Model is wearing a small. • 100% Polyester • Hand Wash Cold • Fully Lined • Imported",
+          "stockMessage": "In stock",
+          "brand": "Ces Femme",
+          "popularity": "302",
+          "caption": "Captions!"
+        }
+      },
+      "attributes": {
+        "id": "4bfce408c8232f5c0cf772046bd12d6f",
+        "intellisuggestData": "eJyyKK0sMcplYChPzCwuYXDWdXYN1g031DUxNHUzZDBkMGEwYLC0ZEgvykwBBAAA___wyApN",
+        "intellisuggestSignature": "f28949cc84235e7bbfc355b53dada58ad6d24064335622d0c81208a237a6095e",
+        "product_type_unigram": "dress",
+        "sales_rank": [
+          "302"
+        ]
+      },
+      "children": []
+    },
+    {
+      "id": "153155",
+      "mappings": {
+        "core": {
+          "uid": "153155",
+          "sku": "C-CES-R4-D6084",
+          "name": "American Summer Striped Shorts",
+          "url": "/product/C-CES-R4-D6084",
+          "addToCartUrl": "/product/C-CES-R4-D6084",
+          "price": 29,
+          "msrp": 50,
+          "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/151_8534_copyright_reddressboutique_2016_1_large.jpg",
+          "secureImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/151_8534_copyright_reddressboutique_2016_1_large.jpg",
+          "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/151_8534_copyright_reddressboutique_2016_1_thumb_med.jpg",
+          "rating": "5",
+          "ratingCount": "1111",
+          "description": "It’ll be a fun and fashionable American Summer with these Striped Shorts in the mix! Hit up a barbeque or two and stroll around with friends in these striped shorts for style that’s just as good as the time you’re having. These shorts feature a ruffled hemline and a hidden zipper on the back. Model is wearing a small. • 100% Polyester • Hand Wash Cold • Fully Lined • Made in the USA",
+          "stockMessage": "In stock",
+          "brand": "Ces Femme",
+          "popularity": "3097",
+          "caption": "Captions!"
+        }
+      },
+      "attributes": {
+        "id": "fb265cb3d9d37fb0e95231073d932937",
+        "intellisuggestData": "eJyyKK0sMcplYChPzCwuYXDWdXYN1g0y0XUxM7AwYTBkMGUwYLC0ZEgvykwBBAAA___xJgpR",
+        "intellisuggestSignature": "40f3e7879573f41df7547b554aa701a1f2d7255b933b5ca862ad5146e8fd3015",
+        "product_type_unigram": "shorts",
+        "sales_rank": [
+          "3097"
+        ]
+      },
+      "children": []
+    },
+    {
+      "id": "182096",
+      "mappings": {
+        "core": {
+          "uid": "182096",
+          "sku": "C-VJ-I6-71073",
+          "name": "Are You For Frill Denim Blue Shorts",
+          "url": "/product/C-VJ-I6-71073",
+          "addToCartUrl": "/product/C-VJ-I6-71073",
+          "price": 32,
+          "msrp": 50,
+          "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/1492_copyright_reddressboutique_2017__large.jpg",
+          "secureImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/1492_copyright_reddressboutique_2017__large.jpg",
+          "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/1492_copyright_reddressboutique_2017__thumb_med.jpg",
+          "rating": "5",
+          "ratingCount": "1111",
+          "description": "Before my very eyes ... I've searched so long for the perfect pair of white shorts, ones that are cute but not childish, comfortable but not unattractive, preppy but not proud ... Are You For Frill? These are really here, online at The Red Dress Boutique? And it's that easy to make them mine? Man, I wish I'd known that. Sure would have saved me a lot of plane tickets and dog sled rides. Geez. Model is wearing a small. • 70% Viscose 30% Linen • Hand Wash Cold • Lined • Imported",
+          "stockMessage": "In stock",
+          "brand": "Very J",
+          "popularity": "771",
+          "caption": "Captions!"
+        }
+      },
+      "attributes": {
+        "id": "8b36682e490c6a303d7c06d1e1963ea4",
+        "intellisuggestData": "eJyyKK0sMcplYChPzCwuYXDWDfPS9TTTNTc0MDdmMGQwYzBgsLRkSC_KTAEEAAD__-RWCfw",
+        "intellisuggestSignature": "da0d2323b77547b36e0aa156e9803b6d41209fc5f3b01edd13d3b047f6403cfc",
+        "product_type_unigram": "you",
+        "sales_rank": [
+          "771"
+        ]
+      },
+      "children": []
+    },
+    {
+      "id": "181488",
+      "mappings": {
+        "core": {
+          "uid": "181488",
+          "sku": "C-VJ-W1-71073",
+          "name": "Are You For Frill White Shorts",
+          "url": "/product/C-VJ-W1-71073",
+          "addToCartUrl": "/product/C-VJ-W1-71073",
+          "price": 32,
+          "msrp": 50,
+          "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/0799_copyright_reddressboutique_2017__large.jpg",
+          "secureImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/0799_copyright_reddressboutique_2017__large.jpg",
+          "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/0799_copyright_reddressboutique_2017__thumb_med.jpg",
+          "rating": "5",
+          "ratingCount": "1111",
+          "description": "Before my very eyes ... I've searched so long for the perfect pair of white shorts, ones that are cute but not childish, comfortable but not unattractive, preppy but not proud ... Are You For Frill? These are really here, online at The Red Dress Boutique? And it's that easy to make them mine? Man, I wish I'd known that. Sure would have saved me a lot of plane tickets and dog sled rides. Geez. Model is wearing a small. • 70% Viscose 30% Linen • Hand Wash Cold • Lined • Imported",
+          "stockMessage": "In stock",
+          "brand": "Very J",
+          "popularity": "4400",
+          "caption": "Captions!"
+        }
+      },
+      "attributes": {
+        "id": "9f64b9b2ea595ae36257eb71a7af5ff1",
+        "intellisuggestData": "eJyyKK0sMcplYChPzCwuYXDWDfPSDTfUNTc0MDdmMGQwZzBgsLRkSC_KTAEEAAD__-UsCgY",
+        "intellisuggestSignature": "55734748979a3e43edd919092dea79af6ce3515e23509c4277c18ec5be2d29d9",
+        "product_type_unigram": "you",
+        "sales_rank": [
+          "4400"
+        ]
+      },
+      "children": []
+    },
+    {
+      "id": "169070",
+      "mappings": {
+        "core": {
+          "uid": "169070",
+          "sku": "C-PE-E6-D4048",
+          "name": "Barre Beauty Green Suede Wrap Dress",
+          "url": "/product/C-PE-E6-D4048",
+          "addToCartUrl": "/product/C-PE-E6-D4048",
+          "price": 39,
+          "msrp": 50,
+          "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/478a3134_3_large.jpg",
+          "secureImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/478a3134_3_large.jpg",
+          "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/478a3134_3_thumb_med.jpg",
+          "rating": "5",
+          "ratingCount": "1111",
+          "description": "You may not be able to balance on your tiptoes, but you’ll look like a Barre Beauty in this lovely Green Suede Wrap Dress! At least you’ll look the part! This faux suede wrap dress features a surplice neck, short flutter sleeves, and tie at the waist. Model is wearing a small. • 92% Polyester, 8% Spandex • Hand Wash Cold • Unlined • Made in the USA",
+          "stockMessage": "In stock",
+          "brand": "Pepper",
+          "popularity": "3553",
+          "caption": "Captions!"
+        }
+      },
+      "attributes": {
+        "id": "c35b4859a119501dfff2070141e198db",
+        "intellisuggestData": "eJyyKK0sMcplYChPzCwuYXDWDXDVdTXTdTExMLFgMGSwYDBgsLRkSC_KTAEEAAD__-ROCgE",
+        "intellisuggestSignature": "ae79ac223a4a3b900e83b3501dd048d763286ab87eeb942043b3feb14ca58402",
+        "product_type_unigram": "dress",
+        "sales_rank": [
+          "3553"
+        ]
+      },
+      "children": []
+    },
+    {
+      "id": "180144",
+      "mappings": {
+        "core": {
+          "uid": "180144",
+          "sku": "C-LXL-W1-D3794",
+          "name": "Best Of Me White Print Dress",
+          "url": "/product/C-LXL-W1-D3794",
+          "addToCartUrl": "/product/C-LXL-W1-D3794",
+          "price": 49,
+          "msrp": 50,
+          "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/17_03_20_studio_26597_large.jpg",
+          "secureImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/17_03_20_studio_26597_large.jpg",
+          "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/17_03_20_studio_26597_thumb_med.jpg",
+          "rating": "5",
+          "ratingCount": "1111",
+          "description": "They say that you know you're with the right person if they bring out your best side (maybe not all the time--even the greatest spouse on earth will see you on your worst days). This old saying also happens to be true for clothes (bet you didn't know that did you?); and this lovely little white number brings out the Best Of Me (in, of, you get the idea). Perhaps it will do the same for you. You'll never know until you try it out! Flirty White Print Dress features a mock neck, lace up back, and a crochet trim. A princess seam bodice flows gently to a fitted waist and flared skirt with shirring detail. Model is wearing a small. • 97% Polyester 3% Spandex • 100% Polyester lining • Hand Wash Cold • Lined • Imported",
+          "stockMessage": "In stock",
+          "brand": "Aura L'atiste",
+          "popularity": "3774",
+          "caption": "Captions!"
+        }
+      },
+      "attributes": {
+        "id": "25bef3abc36613b5b08c0edff58afb90",
+        "intellisuggestData": "eJyyKK0sMcplYChPzCwuYXDW9Ynw0Q031HUxNrc0YTBksGQwYLC0ZEgvykwBBAAA___z7wpx",
+        "intellisuggestSignature": "3913a4e412a33fcfadfd89b947a65851a700ee1678a0626c91e2ef6e4a0c6eba",
+        "product_type_unigram": "dress",
+        "sales_rank": [
+          "3774"
+        ]
+      },
+      "children": []
+    },
+    {
+      "id": "148409",
+      "mappings": {
+        "core": {
+          "uid": "148409",
+          "sku": "C-LAT-I3-P244N",
+          "name": "Blow Your Mind Blue Two-Piece Set",
+          "url": "/product/C-LAT-I3-P244N",
+          "addToCartUrl": "/product/C-LAT-I3-P244N",
+          "price": 55,
+          "msrp": 75,
+          "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/844a1464_2_large.jpg",
+          "secureImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/844a1464_2_large.jpg",
+          "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/844a1464_2_thumb_med.jpg",
+          "rating": "5",
+          "ratingCount": "1111",
+          "description": "You may not be easily surprised, but when you put on this beautiful Blue Two-Piece Set, it will Blow Your Mind! You’ll stop limiting yourself to what you can wear when you see how amazingly well you can pull off this two piece stunner. This two piece set features a flowy off-the-shoulder top with an elastic neckline and waist and high waisted shorts with a hidden zipper and hook and eye closure. Model is wearing a small. • 100% Polyester • Hand Wash Cold • Unlined • Sheer • Imported",
+          "stockMessage": "In stock",
+          "brand": "L'Atiste",
+          "popularity": "1623",
+          "caption": "Captions!"
+        }
+      },
+      "attributes": {
+        "id": "f06e85958d42b9efc3cb984d4ae13b49",
+        "intellisuggestData": "eJyyKK0sMcplYChPzCwuYXDW9XEM0fU01g0wMjHxYzBkMDRgMGCwtGRIL8pMAQQAAP___RYKmw",
+        "intellisuggestSignature": "664ce375e72abe1631904f47db97d12734959d21459c2bc3d5f40060ede25af3",
+        "product_type_unigram": "twopiece",
+        "sales_rank": [
+          "1623"
+        ]
+      },
+      "children": []
+    },
+    {
+      "id": "140331",
+      "mappings": {
+        "core": {
+          "uid": "140331",
+          "sku": "C-PLC-W2-12801",
+          "name": "Bright And Pretty Floral Print Romper",
+          "url": "/product/C-PLC-W2-12801",
+          "addToCartUrl": "/product/C-PLC-W2-12801",
+          "price": 42,
+          "msrp": 50,
+          "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/844a1244_3_large.jpg",
+          "secureImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/844a1244_3_large.jpg",
+          "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/844a1244_3_thumb_med.jpg",
+          "rating": "5",
+          "ratingCount": "1111",
+          "description": "Be as Bright And Pretty as a summer sunset in this stunning Floral Print Romper. This lovely pink and yellow-orange floral romper features a flowy top, an elastic waist, ruffled shorts, and three buttons on the back. This outfit is as Instagram-worthy as a beach sunset. Model is wearing a small. • 100% Polyester • Hand Wash Cold • Fully Lined • Made in the USA",
+          "stockMessage": "In stock",
+          "brand": "PLC",
+          "popularity": "1171",
+          "caption": "Captions!"
+        }
+      },
+      "attributes": {
+        "id": "91bf1cc65600ec9cda37fb8079b5e945",
+        "intellisuggestData": "eJyyKK0sMcplYChPzCwuYXDWDfBx1g030jU0sjAwZDBkMDRkMGCwtGRIL8pMAQQAAP__-fYKaw",
+        "intellisuggestSignature": "df3b5e40b6823a18393c03bbfe0d485b1162de4671d1525d5b9053c9f016aee7",
+        "product_type_unigram": "romper",
+        "sales_rank": [
+          "1171"
+        ]
+      },
+      "children": []
+    },
+    {
+      "id": "142140",
+      "mappings": {
+        "core": {
+          "uid": "142140",
+          "sku": "C-PR-I4-4015P",
+          "name": "Bye Bye Baby Teal Print Flare Pants",
+          "url": "/product/C-PR-I4-4015P",
+          "addToCartUrl": "/product/C-PR-I4-4015P",
+          "price": 32,
+          "msrp": 50,
+          "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/rd_studio_7_22_16_0959_1_large.jpg",
+          "secureImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/rd_studio_7_22_16_0959_1_large.jpg",
+          "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/rd_studio_7_22_16_0959_1_thumb_med.jpg",
+          "rating": "5",
+          "ratingCount": "1111",
+          "description": "There'll be no Bye Bye Baby when you're looking as stunning as you will in these Teal Print Flare Pants. It's all hellos and no goodbyes! These knit flare pants feature an elastic waist. Model is wearing a small. • 95% Rayon, 5% Spandex • Hand Wash Cold • Unlined • Faintly Sheer • Made in the USA",
+          "stockMessage": "In stock",
+          "brand": "Promesa",
+          "popularity": "2710",
+          "caption": "Captions!"
+        }
+      },
+      "attributes": {
+        "id": "b8cd7fe5a0f910e694454bcf07cbd457",
+        "intellisuggestData": "eJyyKK0sMcplYChPzCwuYXDWDQjS9TTRNTEwNA1gMGQwNGIwYLC0ZEgvykwBBAAA___vZQpB",
+        "intellisuggestSignature": "815093862908132711338dbf7ea0d179047af754ecc709d97557dbaf7906d092",
+        "product_type_unigram": "pants",
+        "sales_rank": [
+          "2710"
+        ]
+      },
+      "children": []
+    },
+    {
+      "id": "128622",
+      "mappings": {
+        "core": {
+          "uid": "128622",
+          "sku": "C-LS-W2-90NHA",
+          "name": "Catch The Wind Maxi Dress",
+          "url": "/product/C-LS-W2-90NHA",
+          "addToCartUrl": "/product/C-LS-W2-90NHA",
+          "price": 51,
+          "msrp": 75,
+          "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/478a7094_1_large.jpg",
+          "secureImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/478a7094_1_large.jpg",
+          "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/478a7094_1_thumb_med.jpg",
+          "rating": "5",
+          "ratingCount": "1111",
+          "description": "Catch the wind in your flower crowned hair and let it take you back to childhood.... Reminiscing about the carefree days with no worries, you will truly feel just as catching and down to earth when wearing this flowy and feminine dress. Now if only that guy you’ve had your eye on could catch up!! Maxi features a triangle bodice with tie at neck and an elastic empire waist. • 100% Rayon • Hand Wash Cold • Unlined • Semi Sheer FIT: True to size BUST: Best for A-C cups-consider sizing up if you’re blessed in the bust. Size Small measures 28\\\", Medium measures 30\\\", Large measures 32\\\" LENGTH: Ankle length. Size Small measures 57\\\", Medium measures 58\\\", Large measures 59\\\" WAIST: Fitted waist consider sizing up if waist is your trouble area. Elastic, and hits at natural waist. Size Small measures 22\\\", Medium measures 24\\\", Large measures 26\\\" HIPS: Room for movement in the hips. UNDERGARMENTS: Adhesive bra works best! FABRIC: Fabric contains no stretch. Model is 5'7\\\" and measures 32\\\" bust and 25\\\"",
+          "stockMessage": "In stock",
+          "brand": "Love Stitch",
+          "popularity": "1367",
+          "caption": "Captions!"
+        }
+      },
+      "attributes": {
+        "id": "fd865f101d1056212015507a9afa7ac5",
+        "intellisuggestData": "eJyyKK0sMcplYChPzCwuYXDW9QnWDTfStTTw83BkMGQwNGYwYLC0ZEgvykwBBAAA___y-Apx",
+        "intellisuggestSignature": "e5320c2a93dbf5fa5c7cda44ecf000ed43e4875eb88951f6beabdc2f848f3a1b",
+        "product_type_unigram": "dress",
+        "sales_rank": [
+          "1367"
+        ]
+      },
+      "children": []
+    },
+    {
+      "id": "134028",
+      "mappings": {
+        "core": {
+          "uid": "134028",
+          "sku": "C-LR-I3-80451",
+          "name": "Come Into Bloom Shorts",
+          "url": "/product/C-LR-I3-80451",
+          "addToCartUrl": "/product/C-LR-I3-80451",
+          "price": 32,
+          "msrp": 50,
+          "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/844a0901_1_large.jpg",
+          "secureImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/844a0901_1_large.jpg",
+          "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/844a0901_1_thumb_med.jpg",
+          "rating": "5",
+          "ratingCount": "1111",
+          "description": "The flowers are beginning to “Come Into Bloom” and your warm weather style is doing the same. Bloom beautifully with these becoming shorts that’ll have all the compliments coming your way. Flowy shorts feature an elastic waist and hidden zipper with a hook and eye closure on the side. Model is wearing a small. • 100% Polyester • Machine Wash Cold • Fully Lined",
+          "stockMessage": "In stock",
+          "brand": "Love Riche",
+          "popularity": "4011",
+          "caption": "Captions!"
+        }
+      },
+      "attributes": {
+        "id": "df7b5da9bcf09c50365a1b67b3d50abe",
+        "intellisuggestData": "eJyyKK0sMcplYChPzCwuYXDW9QnS9TTWtTAwMTVkMGQwNGEwYLC0ZEgvykwBBAAA___tkwom",
+        "intellisuggestSignature": "f4ec68a3ab97528ca8a574b50bb73759c397975786d590288628d50906665938",
+        "product_type_unigram": "shorts",
+        "sales_rank": [
+          "4011"
+        ]
+      },
+      "children": []
+    },
+    {
+      "id": "102712",
+      "mappings": {
+        "core": {
+          "uid": "102712",
+          "sku": "C-US-I5-71302",
+          "name": "Coming Home Shorts",
+          "url": "/product/C-US-I5-71302",
+          "addToCartUrl": "/product/C-US-I5-71302",
+          "price": 39,
+          "msrp": 50,
+          "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/478a6148_large.jpg",
+          "secureImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/478a6148_large.jpg",
+          "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/478a6148_thumb_med.jpg",
+          "rating": "5",
+          "ratingCount": "1111",
+          "description": "Put the word out in the town square that you are “Coming Home” Going back to where the story began always makes a girl reflect on the great (and even not so great) times she had growing up! Soak up some of the local atmosphere and enjoy a double scoop from your favorite ice cream parlor of old times wearing these stylin’ shorts and you will know that you can always go back home! And what better way, that to go finely dressed??? Ruffled detail down the front and belt loops with a tie and an elastic back waist. Unlined. 100% Cotton. Wash by hand in cold water. Hang to dry. Made in China. *RDB stylists recommend consulting exact measurements below for the best fit* Length: X-Small measures 12\\\", Small measures 12.5\\\", Medium measures 13\\\", Large measures 13\\\" Waist: X-Small measures 29\\\", Small measures 30\\\", Medium measures 31\\\", Large measures 32\\\" Inseam: X-Small measures 2.5\\\", Small measures 2.5\\\", Medium measures 2.5\\\", Large measures 2.5\\\"",
+          "stockMessage": "In stock",
+          "brand": "Under Skies",
+          "popularity": "2269",
+          "caption": "Captions!"
+        }
+      },
+      "attributes": {
+        "id": "d60bd936980e9f94897b138f3234886b",
+        "intellisuggestData": "eJyyKK0sMcplYChPzCwuYXDWDQ3W9TTVNTc0NjBiMGQwNGUwYLC0ZEgvykwBBAAA___udQou",
+        "intellisuggestSignature": "fc17e1b71c5e4c7036e908656f63209a048c08effb7807c88a18ccea13655a91",
+        "product_type_unigram": "shorts",
+        "sales_rank": [
+          "2269"
+        ]
+      },
+      "children": []
+    },
+    {
+      "id": "161542",
+      "mappings": {
+        "core": {
+          "uid": "161542",
+          "sku": "C-EN-T3-D5517",
+          "name": "Current Crush Floral Print Dress",
+          "url": "/product/C-EN-T3-D5517",
+          "addToCartUrl": "/product/C-EN-T3-D5517",
+          "price": 40,
+          "msrp": 50,
+          "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/844a1347_2_large.jpg",
+          "secureImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/844a1347_2_large.jpg",
+          "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/844a1347_2_thumb_med.jpg",
+          "rating": "5",
+          "ratingCount": "1111",
+          "description": "You’ve always got a Current Crush to keep things interesting, and this Floral Print Dress will be the next source of your affection, but we see it becoming a little more long-term! And your affection will be returned with this fine and flattering floral number! This floral print dress features a lace-up V-neckline with grommets and tassel tie, an elastic waist, and ¾ length bell sleeves with lace detail. Model is wearing a small. • 100% Rayon • Hand Wash Cold • Lined Bottom • Faintly Sheer • Imported",
+          "stockMessage": "In stock",
+          "brand": "Entro",
+          "popularity": "1751",
+          "caption": "Captions!"
+        }
+      },
+      "attributes": {
+        "id": "7bd13ab1e55fedd6cc7c2928e557f68b",
+        "intellisuggestData": "eJyyKK0sMcplYChPzCwuYXDWdfXTDTHWdTE1NTRnMGQwNGMwYLC0ZEgvykwBBAAA___vCQo8",
+        "intellisuggestSignature": "0cdd007665b1439adfff2633441cd7bf02446a7edc907b179b7ec654cabba4c0",
+        "product_type_unigram": "dress",
+        "sales_rank": [
+          "1751"
+        ]
+      },
+      "children": []
+    },
+    {
+      "id": "126575",
+      "mappings": {
+        "core": {
+          "uid": "126575",
+          "sku": "C-LS-I1-40MXX",
+          "name": "Easy To See Chambray Shorts",
+          "url": "/product/C-LS-I1-40MXX",
+          "addToCartUrl": "/product/C-LS-I1-40MXX",
+          "price": 35,
+          "msrp": 50,
+          "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/844a7302_1_large.jpg",
+          "secureImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/844a7302_1_large.jpg",
+          "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/844a7302_1_thumb_med.jpg",
+          "rating": "5",
+          "ratingCount": "1111",
+          "description": "Even if you find yourself encountering someone who is blind, to them it’s “Easy To See” that you have it going on!!! Topping these cool and classic shorts off with your favorite tank or a classic white button down for starters, looking good and feeling comfortable never came so \\\"Easy” until you had these in your life!! Shorts with an functional side pockets and an elastic waist with adjustable drawstring. • 100% Tencel • Machine Wash Cold • Unlined",
+          "stockMessage": "In stock",
+          "brand": "Love Stitch",
+          "popularity": "4333",
+          "caption": "Captions!"
+        }
+      },
+      "attributes": {
+        "id": "73b3ff1fa842d980ce315725f804c33c",
+        "intellisuggestData": "eJyyKK0sMcplYChPzCwuYXDW9QnW9TTUNTHwjYhgMGQwNGcwYLC0ZEgvykwBBAAA___z1gqH",
+        "intellisuggestSignature": "a5c5ecf2ff205f165a63a670e3211889722edfbcb1253d60121ee22c2d0ed19f",
+        "product_type_unigram": "shorts",
+        "sales_rank": [
+          "4333"
+        ]
+      },
+      "children": []
+    },
+    {
+      "id": "137487",
+      "mappings": {
+        "core": {
+          "uid": "137487",
+          "sku": "C-LS-I7-40MXX",
+          "name": "Easy To See Vintage Wash Chambray Shorts",
+          "url": "/product/C-LS-I7-40MXX",
+          "addToCartUrl": "/product/C-LS-I7-40MXX",
+          "price": 35,
+          "msrp": 50,
+          "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/844a4218_2_large.jpg",
+          "secureImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/844a4218_2_large.jpg",
+          "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/844a4218_2_thumb_med.jpg",
+          "rating": "5",
+          "ratingCount": "1111",
+          "description": "Even if you find yourself encountering someone who is blind, to them it’s Easy To See that you have it going on when you're wearing these splendorous Vintage Wash Chambray Shorts!!! Topping these cool and classic shorts off with your favorite tank or a classic white button down for starters, looking good and feeling comfortable never came so Easy until you had these in your life!! Shorts with an functional side pockets and an elastic waist with adjustable drawstring. • 100% Tencel • Machine Wash Cold • Unlined • Imported Model is 5'3\\\" and measures 32\\\" bust and 26\\\" waist. She is wearing a size small.",
+          "stockMessage": "In stock",
+          "brand": "Love Stitch",
+          "popularity": "3115",
+          "caption": "Captions!"
+        }
+      },
+      "attributes": {
+        "id": "359bb8cd2236407bb3a74e4a5004b830",
+        "intellisuggestData": "eJyyKK0sMcplYChPzCwuYXDW9QnW9TTXNTHwjYhgMGQwtGAwYLC0ZEgvykwBBAAA___0ZQqO",
+        "intellisuggestSignature": "cfa2d69b9217b51810af2b5f1e2fc78cd2b907a46b298c370ad69bfc47c53232",
+        "product_type_unigram": "shorts",
+        "sales_rank": [
+          "3115"
+        ]
+      },
+      "children": []
+    },
+    {
+      "id": "126380",
+      "mappings": {
+        "core": {
+          "uid": "126380",
+          "sku": "C-BAN-I5-CD544",
+          "name": "Every Little Thing Dress",
+          "url": "/product/C-BAN-I5-CD544",
+          "addToCartUrl": "/product/C-BAN-I5-CD544",
+          "price": 37,
+          "msrp": 50,
+          "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/844a4401_large.jpg",
+          "secureImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/844a4401_large.jpg",
+          "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/844a4401_thumb_med.jpg",
+          "rating": "5",
+          "ratingCount": "1111",
+          "description": "“Every Little Thing” you do is sure to always get you the attention of those around you so coming out in this dress will keep you “Big” in the streets!! Dress features a scoop back and ruffled drop waist hemline. • 100% Polyester • Hand Wash Cold • Unlined FIT: True to size BUST: Works for most bust sizes! Size Small measures 36\\\", Medium measures 38\\\", Large measures 40\\\" LENGTH: Knee length to above. Size Small measures 36.5\\\", Medium measures 37\\\", Large measures 37.5\\\" WAIST: Room for movement in the waist. HIPS: Room for movement in the hips. UNDERGARMENTS: Strapless or adhesive bra work best. FABRIC: Fabric contains no stretch. Model is 5'6\\\" and measures 34\\\" bust, 25\\\" waist. She is wearing a size small.",
+          "stockMessage": "In stock",
+          "brand": "Banana",
+          "popularity": "3725",
+          "caption": "Captions!"
+        }
+      },
+      "attributes": {
+        "id": "d84489487a59854533907d53d50975f3",
+        "intellisuggestData": "eJyyKK0sMcplYChPzCwuYXDWdXL00_U01XV2MTUxYTBkMLRkMGCwtGRIL8pMAQQAAP__-sUKgg",
+        "intellisuggestSignature": "4e03ea1a1e13c9298e5c71da112c72cf504b2766bb0b137fbf8bfa8405459b3f",
+        "product_type_unigram": "dress",
+        "sales_rank": [
+          "3725"
+        ]
+      },
+      "children": []
+    },
+    {
+      "id": "130559",
+      "mappings": {
+        "core": {
+          "uid": "130559",
+          "sku": "C-EN-I7-D4381",
+          "name": "FRINGE: Just A Kiss Maxi Dress",
+          "url": "/product/C-EN-I7-D4381",
+          "addToCartUrl": "/product/C-EN-I7-D4381",
+          "price": 41,
+          "msrp": 50,
+          "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/844a5578_2_large.jpg",
+          "secureImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/844a5578_2_large.jpg",
+          "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/844a5578_2_thumb_med.jpg",
+          "rating": "5",
+          "ratingCount": "1111",
+          "description": "He says it was “Just A Kiss”, but with a charm like yours, you know he’s hooked. I mean, who wouldn’t be? So why try to play it off? You’re one-of-a-kind and anyone who takes the time to discover that isn’t going anywhere anytime soon. You can’t help how irresistible you are. It just comes naturally. Maxi features adjustable spaghetti straps, a V-neckline, elastic empire waist, and a slightly ruffled hemline. Model is wearing a small. • Self: 100% Rayon • Lining: 100% Polyester • Hand Wash Cold • Semi Lined • Faintly Sheer",
+          "stockMessage": "In stock",
+          "brand": "Entro",
+          "popularity": "1029",
+          "caption": "Captions!"
+        }
+      },
+      "attributes": {
+        "id": "273c1b255ea58612bff65abe12cec19d",
+        "intellisuggestData": "eJyyKK0sMcplYChPzCwuYXDWdfXT9TTXdTExtjBkMGQwMmAwYLC0ZEgvykwBBAAA___uDgou",
+        "intellisuggestSignature": "e081174069ab904b86cf60f303e8322c358b7427f210c11c8b936293d58fcffd",
+        "product_type_unigram": "dress",
+        "sales_rank": [
+          "1029"
+        ]
+      },
+      "children": []
+    },
+    {
+      "id": "135189",
+      "mappings": {
+        "core": {
+          "uid": "135189",
+          "sku": "C-LS-I7-65NIV",
+          "name": "FRINGE: Midnight Moon Maxi Dress",
+          "url": "/product/C-LS-I7-65NIV",
+          "addToCartUrl": "/product/C-LS-I7-65NIV",
+          "price": 46,
+          "msrp": 50,
+          "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/844a4001_large.jpg",
+          "secureImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/844a4001_large.jpg",
+          "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/844a4001_thumb_med.jpg",
+          "rating": "5",
+          "ratingCount": "1111",
+          "description": "This majestic maxi will have you looking as mesmerizing and mystical as the “Midnight Moon” that people can’t keep their gaze off of. We don’t blame them. Sleeveless maxi with adjustable spaghetti straps and functional side pockets. Model is wearing a S/M. • 100% Rayon • Hand Wash Cold • Unlined • Semi Sheer • Imported",
+          "stockMessage": "In stock",
+          "brand": "Love Stitch",
+          "popularity": "3207",
+          "caption": "Captions!"
+        }
+      },
+      "attributes": {
+        "id": "f74f0781b9a59d8650cd0d0a434dcc0a",
+        "intellisuggestData": "eJyyKK0sMcplYChPzCwuYXDW9QnW9TTXNTP18wxjMGQwMmQwYLC0ZEgvykwBBAAA___zngp_",
+        "intellisuggestSignature": "1ebb5259e45e0a706eae433647db2cba62ca74c22f6c2de8fe4e02a658990ff7",
+        "product_type_unigram": "dress",
+        "sales_rank": [
+          "3207"
+        ]
+      },
+      "children": []
+    },
+    {
+      "id": "130619",
+      "mappings": {
+        "core": {
+          "uid": "130619",
+          "sku": "C-ZL-W1-59207",
+          "name": "FRINGE: Summertime Radness Shorts",
+          "url": "/product/C-ZL-W1-59207",
+          "addToCartUrl": "/product/C-ZL-W1-59207",
+          "price": 46,
+          "msrp": 50,
+          "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/6b9a1169_large.jpg",
+          "secureImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/6b9a1169_large.jpg",
+          "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/6b9a1169_thumb_med.jpg",
+          "rating": "5",
+          "ratingCount": "1111",
+          "description": "Forget “Summertime Sadness” (though it’s a good song) and have some “Summertime Radness”! Rocking these shorts, there won’t be room for the blues. It’s all sun and fun. Ruffled shorts with embroidered detail and an elastic back waist. Model is wearing a small. • 100% Cotton • Hand Wash Cold • Fully Lined • Semi Sheer",
+          "stockMessage": "In stock",
+          "brand": "Z&L",
+          "popularity": "3935",
+          "caption": "Captions!"
+        }
+      },
+      "attributes": {
+        "id": "a9d2d233472a0de8ec32adbf515928e6",
+        "intellisuggestData": "eJyyKK0sMcplYChPzCwuYXDWjfLRDTfUNbU0MjBnMGQwMmIwYLC0ZEgvykwBBAAA___vywo-",
+        "intellisuggestSignature": "ca8973bf16dc1a3814d7756ea618ae292f3767dadfc6b3977b41e0247569152f",
+        "product_type_unigram": "shorts",
+        "sales_rank": [
+          "3935"
+        ]
+      },
+      "children": []
+    },
+    {
+      "id": "135878",
+      "mappings": {
+        "core": {
+          "uid": "135878",
+          "sku": "C-PLC-G4-10602",
+          "name": "FRINGE: Tie-Dye Dress",
+          "url": "/product/C-PLC-G4-10602",
+          "addToCartUrl": "/product/C-PLC-G4-10602",
+          "price": 47,
+          "msrp": 50,
+          "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/6b9a9929-2_large.jpg",
+          "secureImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/6b9a9929-2_large.jpg",
+          "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/6b9a9929-2_thumb_med.jpg",
+          "rating": "5",
+          "ratingCount": "1111",
+          "description": "If ever there was a dress to “Tie-Dye For,” this dip-dyed beauty is it! Go ahead and get it because it’ll add a stylish splash to your spring wardrobe. Sleeveless dip dye dress with a deep V-neckline, large keyhole on the back with a button loop closure, elastic waist, and a hi-lo hemline. Model is wearing a small. • 100% Rayon • Hand Wash Cold • Lined Skirt • Made in the USA",
+          "stockMessage": "In stock",
+          "brand": "PLC",
+          "popularity": "1882",
+          "caption": "Captions!"
+        }
+      },
+      "attributes": {
+        "id": "01aefb6fe4a25a1caed8ada5340eefd3",
+        "intellisuggestData": "eJyyKK0sMcplYChPzCwuYXDWDfBx1nU30TU0MDMwYjBkMDJmMGCwtGRIL8pMAQQAAP__-JoKXQ",
+        "intellisuggestSignature": "cc8118e17e72d772ac5d070a8b147960911df5e23968143ac76fb177b34f0916",
+        "product_type_unigram": "dress",
+        "sales_rank": [
+          "1882"
+        ]
+      },
+      "children": []
+    },
+    {
+      "id": "129800",
+      "mappings": {
+        "core": {
+          "uid": "129800",
+          "sku": "C-EN-T7-D3922",
+          "name": "FRINGE: Walk With Me Dress",
+          "url": "/product/C-EN-T7-D3922",
+          "addToCartUrl": "/product/C-EN-T7-D3922",
+          "price": 39,
+          "msrp": 50,
+          "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/844a5184_2_large.jpg",
+          "secureImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/844a5184_2_large.jpg",
+          "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/844a5184_2_thumb_med.jpg",
+          "rating": "5",
+          "ratingCount": "1111",
+          "description": "Down the street or along a path that has yet to the paved, “Walking” with you is a pleasure that few get the chance to do on a one-on-one basis!! Coming out for your springtime stroll in this dress that will show off your style and girl-like innocence is sure to appeal to many that will have a watchful eye trailing as you walk on by!! Tiered baby doll dress features a square neckline, short sleeves and a tie at back. • 100% Rayon • Hand Wash Cold • Fully Lined",
+          "stockMessage": "In stock",
+          "brand": "Entro",
+          "popularity": "1129",
+          "caption": "Captions!"
+        }
+      },
+      "attributes": {
+        "id": "0b13231eede24784e3ff35a6949e05d6",
+        "intellisuggestData": "eJyyKK0sMcplYChPzCwuYXDWdfXTDTHXdTG2NDJiMGQwMmEwYLC0ZEgvykwBBAAA___vOgo9",
+        "intellisuggestSignature": "4aebf18bddf471ab989e704742f7c30a9dd24e2ee1ae896ccd0c3c2cebead82f",
+        "product_type_unigram": "walk",
+        "sales_rank": [
+          "1129"
+        ]
+      },
+      "children": []
+    },
+    {
+      "id": "127241",
+      "mappings": {
+        "core": {
+          "uid": "127241",
+          "sku": "C-EN-G5-D3922",
+          "name": "FRINGE:Walk With Me Dress",
+          "url": "/product/C-EN-G5-D3922",
+          "addToCartUrl": "/product/C-EN-G5-D3922",
+          "price": 39,
+          "msrp": 50,
+          "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/6b9a1308_large.jpg",
+          "secureImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/6b9a1308_large.jpg",
+          "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/6b9a1308_thumb_med.jpg",
+          "rating": "5",
+          "ratingCount": "1111",
+          "description": "Down the street or along a path that has yet to the paved, “Walking” with you is a pleasure that few get the chance to do on a one-on-one basis!! Coming out for your springtime stroll in this dress that will show off your style and girl-like innocence is sure to appeal to many that will have a watchful eye trailing as you walk on by!! Tiered baby doll dress features a square neckline, short sleeves and a tie at back. • 100% Rayon • Hand Wash Cold • Lined FIT: True to size BUST: Works for most bust sizes! Size Small measures 34\\\", Medium measures 36\\\", Large measures 38\\\" LENGTH: Above the knee. Size Small measures 33\\\", Medium measures 34\\\", Large measures 35\\\" WAIST: Room for movement in the waist. HIPS: Loose fitting, plenty of room for movement. UNDERGARMENTS: Strapless or adhesive bra work best. FABRIC: Fabric contains no stretch.",
+          "stockMessage": "In stock",
+          "brand": "Entro",
+          "popularity": "2840",
+          "caption": "Captions!"
+        }
+      },
+      "attributes": {
+        "id": "4ef79706aa9104811cb6e0020dd30040",
+        "intellisuggestData": "eJyyKK0sMcplYChPzCwuYXDWdfXTdTfVdTG2NDJiMGQwMmUwYLC0ZEgvykwBBAAA___t7gov",
+        "intellisuggestSignature": "206a4ac1141493108d62eff649f19d18575e438bf044450785a5caf3cd770a58",
+        "product_type_unigram": "fringewalk",
+        "sales_rank": [
+          "2840"
+        ]
+      },
+      "children": []
+    },
+    {
+      "id": "179159",
+      "mappings": {
+        "core": {
+          "uid": "179159",
+          "sku": "C-LAT-G7-P483P",
+          "name": "Fringe Feel The Heatwave Black Embroidered Two-Piece Set",
+          "url": "/product/C-LAT-G7-P483P",
+          "addToCartUrl": "/product/C-LAT-G7-P483P",
+          "price": 56,
+          "msrp": 75,
+          "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/emptyname_65_large.jpg",
+          "secureImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/emptyname_65_large.jpg",
+          "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/emptyname_65_thumb_med.jpg",
+          "rating": "5",
+          "ratingCount": "1111",
+          "description": "Yes, we know, it's like, a thousand degrees outside. We don't doubt your sincerity a bit. But that's no excuse not to look stylish. There are a ton of ways to Feel The Heatwave, yet still remain positively cool as a cucumber. Take this sexy Embroidered Two Piece Set--halter style crop top with a lace up back and matching shorts. Hello cuteness, where have you been all of my life? You flatter me with your trendy self, and give me that added boost of confidence I've been looking for. Model is wearing a small. Halter style crop top features a padded bust and a lace up back. Matching shorts feature an invisible back zipper. • 95% Polyester 5% Spandex • Hand Wash Cold • Lined • Imported",
+          "stockMessage": "In stock",
+          "brand": "L'Atiste",
+          "popularity": "1538",
+          "caption": "Captions!"
+        }
+      },
+      "attributes": {
+        "id": "49ef6d07767bc3ed4c24063ab49a9486",
+        "intellisuggestData": "eJyyKK0sMcplYChPzCwuYXDW9XEM0XU31w0wsTAOYDBkMDJjMGCwtGRIL8pMAQQAAP___gsKqw",
+        "intellisuggestSignature": "c48f367b56bc62c67f612104b982c89c09a459341aa39c7960a2eff98b78a40d",
+        "product_type_unigram": "twopiece",
+        "sales_rank": [
+          "1538"
+        ]
+      },
+      "children": []
+    },
+    {
+      "id": "179505",
+      "mappings": {
+        "core": {
+          "uid": "179505",
+          "sku": "C-LAT-W1-P483P",
+          "name": "Fringe Feel The Heatwave White Embroidered Two-Piece Set",
+          "url": "/product/C-LAT-W1-P483P",
+          "addToCartUrl": "/product/C-LAT-W1-P483P",
+          "price": 56,
+          "msrp": 75,
+          "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/emptyname_91_2_large.jpg",
+          "secureImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/emptyname_91_2_large.jpg",
+          "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/emptyname_91_2_thumb_med.jpg",
+          "rating": "5",
+          "ratingCount": "1111",
+          "description": "Yes, we know, it's like, a thousand degrees outside. We don't doubt your sincerity a bit. But that's no excuse not to look stylish. There are a ton of ways to Feel The Heatwave, yet still remain positively cool as a cucumber. Take this sexy Embroidered Two Piece Set--halter style crop top with a lace up back and matching shorts. Hello cuteness, where have you been all of my life? You flatter me with your trendy self, and give me that added boost of confidence I've been looking for. Model is wearing a small. Halter style crop top features a padded bust and a lace up back. Matching shorts feature an invisible back zipper. • 95% Polyester 5% Spandex • Hand Wash Cold • Lined • Imported",
+          "stockMessage": "In stock",
+          "brand": "L'Atiste",
+          "popularity": "1251",
+          "caption": "Captions!"
+        }
+      },
+      "attributes": {
+        "id": "dcbc9c30e4e7fef397b072557cf760a2",
+        "intellisuggestData": "eJyyKK0sMcplYChPzCwuYXDW9XEM0Q031A0wsTAOYDBkMDJnMGCwtGRIL8pMAQQAAP___wIKtg",
+        "intellisuggestSignature": "98d25e6972505b95dda41ba226f77139c9aeeb11562e6b497306f29dd386b0fd",
+        "product_type_unigram": "twopiece",
+        "sales_rank": [
+          "1251"
+        ]
+      },
+      "children": []
+    },
+    {
+      "id": "169592",
+      "mappings": {
+        "core": {
+          "uid": "169592",
+          "sku": "C-AD-E7-859CD",
+          "name": "Fringe Handle With Flare Green Pants",
+          "url": "/product/C-AD-E7-859CD",
+          "addToCartUrl": "/product/C-AD-E7-859CD",
+          "price": 42,
+          "msrp": 50,
+          "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/478a3059_large.jpg",
+          "secureImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/478a3059_large.jpg",
+          "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/478a3059_thumb_med.jpg",
+          "rating": "5",
+          "ratingCount": "1111",
+          "description": "The Fringe Handle With Flare Green Pants are so fine they should be handled with caution! Your style is dangerously divine! These soft and stretchy flare pants are made of a baby ribbed velvet and feature a thick elastic waistband. Model is wearing a small. • 95% Polyester, 5% Spandex • Hand Wash Cold • Unlined • Made in the USA",
+          "stockMessage": "In stock",
+          "brand": "Adrienne",
+          "popularity": "813",
+          "caption": "Captions!"
+        }
+      },
+      "attributes": {
+        "id": "6c6e46b2504c695dd6718fa9f8564b42",
+        "intellisuggestData": "eJyyKK0sMcplYChPzCwuYXDWdXTRdTXXtTC1dHZhMGQwsmAwYLC0ZEgvykwBBAAA___uIgo9",
+        "intellisuggestSignature": "c9e5c2b829cfd6597c94f2dbd50626e1b457ee2b8b569ecb6dc90c27091ccb5a",
+        "product_type_unigram": "handle",
+        "sales_rank": [
+          "813"
+        ]
+      },
+      "children": []
+    },
+    {
+      "id": "147810",
+      "mappings": {
+        "core": {
+          "uid": "147810",
+          "sku": "C-DM-O5-S1225",
+          "name": "Fringe Out Of My Shell Coral Romper",
+          "url": "/product/C-DM-O5-S1225",
+          "addToCartUrl": "/product/C-DM-O5-S1225",
+          "price": 42,
+          "msrp": 50,
+          "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/844a0880_2_large.jpg",
+          "secureImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/844a0880_2_large.jpg",
+          "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/844a0880_2_thumb_med.jpg",
+          "rating": "5",
+          "ratingCount": "1111",
+          "description": "Like a turtle that was meant to stay in its shell, you normally like to do the same, but tonight, you’ve decided to come Fringe Out Of My Shell in this Coral Romper. It’s time to show ‘em what you got, and with a romper as bold as this, there won’t be any hiding. Tonight’s going to be one to remember. This romper features a deep V-neckline and a drawstring waist adorned with a shell. Model is wearing a small. • 100% Rayon • Dry Clean Only • Unlined • Imported",
+          "stockMessage": "In stock",
+          "brand": "Dance & Marvel",
+          "popularity": "3976",
+          "caption": "Captions!"
+        }
+      },
+      "attributes": {
+        "id": "d574eb77bf94754bf76ebe5f5a680c9c",
+        "intellisuggestData": "eJyyKK0sMcplYChPzCwuYXDWdfHV9TfVDTY0MjJlMGQwsmQwYLC0ZEgvykwBBAAA___vVwpC",
+        "intellisuggestSignature": "45ba8775229dd8cd409489c5ef62f100f464089d85382997cf391caafbce574b",
+        "product_type_unigram": "romper",
+        "sales_rank": [
+          "3976"
+        ]
+      },
+      "children": []
+    },
+    {
+      "id": "171146",
+      "mappings": {
+        "core": {
+          "uid": "171146",
+          "sku": "C-AD-G7-859VT",
+          "name": "Fringe Switch The Scene Black Flare Pants",
+          "url": "/product/C-AD-G7-859VT",
+          "addToCartUrl": "/product/C-AD-G7-859VT",
+          "price": 44,
+          "msrp": 50,
+          "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/353_lcp_8508_reddressboutique_large.jpg",
+          "secureImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/353_lcp_8508_reddressboutique_large.jpg",
+          "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/353_lcp_8508_reddressboutique_thumb_med.jpg",
+          "rating": "5",
+          "ratingCount": "1111",
+          "description": "Make a statement this seasons and Fringe Switch The Scene in these velvet Black Flare Pants! These soft and velvet flare pants will carry you right through the winter season! Model is wearing a small. • 90% Polyester, 10% Spandex • Hand Wash Cold • Unlined • Made in the USA",
+          "stockMessage": "In stock",
+          "brand": "Adrienne",
+          "popularity": "4148",
+          "caption": "Captions!"
+        }
+      },
+      "attributes": {
+        "id": "7706bc39192f6cc4b9f9e30006d21b75",
+        "intellisuggestData": "eJyyKK0sMcplYChPzCwuYXDWdXTRdTfXtTC1DAthMGQwNmAwYLC0ZEgvykwBBAAA___wRwpb",
+        "intellisuggestSignature": "6a47f32417be9893c53bf2fbd76e63e884045332bbf2e51c3b66244077ac1a31",
+        "product_type_unigram": "pants",
+        "sales_rank": [
+          "4148"
+        ]
+      },
+      "children": []
+    },
+    {
+      "id": "102656",
+      "mappings": {
+        "core": {
+          "uid": "102656",
+          "sku": "C-ATP-G7-PH856",
+          "name": "From Day To Play Shorts",
+          "url": "/product/C-ATP-G7-PH856",
+          "addToCartUrl": "/product/C-ATP-G7-PH856",
+          "price": 29,
+          "msrp": 50,
+          "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/478a3949_large.jpg",
+          "secureImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/478a3949_large.jpg",
+          "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/478a3949_thumb_med.jpg",
+          "rating": "5",
+          "ratingCount": "1111",
+          "description": "No matter if it is a dreary Tuesday or a celebratory Saturday, let your look be all people talk about “From Day To Play”! All the excitement and style without any of the hassle and boredom, let these shorts be all that you need in order to let each day be its most fabulous! Shorts feature an elastic waist and lace lining on the hemline. Fully Lined. Faintly Sheer. 100% Polyester. Wash by hand in cold water or dry clean. Made in the U.S.A. Model is wearing a small. *RDB stylists recommend consulting exact measurements below for the best fit* Length: Small measures 11\\\", Medium measures 12\\\", Large measures 12\\\" Waist: Small measures 28\\\", Medium measures 30\\\", Large measures 32\\\" Inseam: Small measures 3.5\\\", Medium measures 3.5\\\", Large measures 3.5\\\"",
+          "stockMessage": "In stock",
+          "brand": "Audrey 3+1",
+          "popularity": "1076",
+          "caption": "Captions!"
+        }
+      },
+      "attributes": {
+        "id": "15e6f5ab7778ef0abdb8be607028f84f",
+        "intellisuggestData": "eJyyKK0sMcplYChPzCwuYXDWdQwJ0HU31w3wsDA1YzBkMDZkMGCwtGRIL8pMAQQAAP___j8Kpw",
+        "intellisuggestSignature": "1887c173efbbd46ae245e45f12b0d75ee6f6ebc1d0aaf7bbb1456c32d9a5656f",
+        "product_type_unigram": "shorts",
+        "sales_rank": [
+          "1076"
+        ]
+      },
+      "children": []
+    },
+    {
+      "id": "105287",
+      "mappings": {
+        "core": {
+          "uid": "105287",
+          "sku": "C-HU-I5-07DYS",
+          "name": "HUDSON: Barbara High Waist Super Skinny Jeans",
+          "url": "/product/C-HU-I5-07DYS",
+          "addToCartUrl": "/product/C-HU-I5-07DYS",
+          "price": 155,
+          "msrp": 175,
+          "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/6b9a6591_large.jpg",
+          "secureImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/6b9a6591_large.jpg",
+          "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/6b9a6591_thumb_med.jpg",
+          "rating": "5",
+          "ratingCount": "1111",
+          "description": "Jeans don’t have to be super skinny to be sexy. We love our wide-legged pants just as much, but there’s something about the way the Super Skinny Jeans fit snug around the ankles that makes you feel loved, like a warm hug, but for your legs. And what’s not to love about your legs, super skinny or not? Skinny jeans feature 5 standard pockets; belt loops; button and zipper closure. Unlined. 92% Cotton, 6% Polyester, 2% Elastan. Machine wash cold. Tumble dry medium. Iron low if needed. Made in the U.S.A. Model is wearing a size 25. *RDB stylists recommend consulting exact measurements below for the best fit* Length: 25 measures 38\\\", 26 measures 39\\\", 27 measures 39\\\", 28 measures 39\\\", 29 measures 40\\\", 30 measures 40\\\" Waist: 25 measures 24\\\", 26 measures 28\\\", 27 measures 30\\\", 28 measures 32\\\", 29 measures 32\\\", 30 measures 34\\\" Hips: 25 measures 27\\\", 26 measures 28\\\", 27 measures 30\\\", 28 measures 31\\\", 29 measures 31\\\", 30 measures 33\\\" Inseam: 25 measures 29.5\\\", 26 measures 30\\\", 27 measures 30\\\", 28",
+          "stockMessage": "In stock",
+          "brand": "Hudson",
+          "popularity": "3246",
+          "caption": "Captions!"
+        }
+      },
+      "attributes": {
+        "id": "20cc7fd7db1923b00b9803593c8f3840",
+        "intellisuggestData": "eJyyKK0sMcplYChPzCwuYXDW9QjV9TTVNTB3iQxmMGQwNmIwYLC0ZEgvykwBBAAA___zLQp8",
+        "intellisuggestSignature": "1943f094019f3f516ccc249f38990841b5a1eae2fa475af3dec9b355e056eb26",
+        "product_type_unigram": "jeans",
+        "sales_rank": [
+          "3246"
+        ]
+      },
+      "children": []
+    },
+    {
+      "id": "181384",
+      "mappings": {
+        "core": {
+          "uid": "181384",
+          "sku": "C-LAT-I4-8834N",
+          "name": "Hot On The Town Blue Print Romper",
+          "url": "/product/C-LAT-I4-8834N",
+          "addToCartUrl": "/product/C-LAT-I4-8834N",
+          "price": 52,
+          "msrp": 75,
+          "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/1836_copyright_reddressboutique_2017__large.jpg",
+          "secureImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/1836_copyright_reddressboutique_2017__large.jpg",
+          "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/1836_copyright_reddressboutique_2017__thumb_med.jpg",
+          "rating": "5",
+          "ratingCount": "1111",
+          "description": "All aboard! This train is a one-way trip to Hot Town, but there are no tickets. Your entry is entirely dependent on how good you’re dressed. It may seem shallow of us, but honestly, isn’t it better than killing all those trees just to print disposable paper tickets? See, we’re being environmentally friendly; we’re positively philanthropic. And you’re positively gorgeous in that romper, so hop on board. This ride’s on the house. Let's go be, Hot On The Town, as we like to say! Model is wearing a small. • 100% Polyester • Hand Wash Cold • Lined • Imported",
+          "stockMessage": "In stock",
+          "brand": "Aura L'atiste",
+          "popularity": "3469",
+          "caption": "Captions!"
+        }
+      },
+      "attributes": {
+        "id": "73726c5940485998bd10a3d529f09eed",
+        "intellisuggestData": "eJyyKK0sMcplYChPzCwuYXDW9XEM0fU00bWwMDbxYzBkMDZmMGCwtGRIL8pMAQQAAP__--UKjg",
+        "intellisuggestSignature": "2081bea6069cfcfeaeae3b85d4b655bb58b425770e3681eb5114436be5f3ebe4",
+        "product_type_unigram": "romper",
+        "sales_rank": [
+          "3469"
+        ]
+      },
+      "children": []
+    },
+    {
+      "id": "107549",
+      "mappings": {
+        "core": {
+          "uid": "107549",
+          "sku": "C-HM-V5-77GAM",
+          "name": "If You Knew Dress",
+          "url": "/product/C-HM-V5-77GAM",
+          "addToCartUrl": "/product/C-HM-V5-77GAM",
+          "price": 40,
+          "msrp": 50,
+          "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/478a3202_large.jpg",
+          "secureImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/478a3202_large.jpg",
+          "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/478a3202_thumb_med.jpg",
+          "rating": "5",
+          "ratingCount": "1111",
+          "description": "“If You Knew” would you go down the same path again?? Taking the same twists and turns making the road traveled more exciting?? No matter if the answer is yes, no, or maybe, what you will know is that you deserve to dressed in only the best and this dress is nothing short of that! Even if you are unsure at times, this dress does more than enough to get the point across that maybe you do….. Floral dress features a split scoop neckline, V-cut back with a tie across the shoulders, and sheer open bell sleeves. Fully Lined body. Faintly Sheer. 100% Polyester. Wash by hand in cold water. Lay flat to dry, Do not bleach. Made in China. Model is wearing a small. *RDB stylists recommend consulting exact measurements below for the best fit* Length: Small measures 33\\\", Medium measures 34\\\", Large measures 35\\\" Bust: Small measures 36\\\", Medium measures 38\\\", Large measures 40\\\" Waist: Small measures 28\\\", Medium measures 30\\\", Large measures 32\\\"",
+          "stockMessage": "In stock",
+          "brand": "Hello Miss",
+          "popularity": "1277",
+          "caption": "Captions!"
+        }
+      },
+      "attributes": {
+        "id": "11f7f3d62c113b3c173c04b584da13e7",
+        "intellisuggestData": "eJyyKK0sMcplYChPzCwuYXDW9fDVDTPVNTd3d_RlMGQwNmEwYLC0ZEgvykwBBAAA___ycApv",
+        "intellisuggestSignature": "24dd8a1fc74cc9c8a84ded561ba84bf3381e15fa6e3bda7deb56cae19d9bd8c5",
+        "product_type_unigram": "dress",
+        "sales_rank": [
+          "1277"
+        ]
+      },
+      "children": []
+    },
+    {
+      "id": "147119",
+      "mappings": {
+        "core": {
+          "uid": "147119",
+          "sku": "C-SHE-O4-20055",
+          "name": "In A Flutter Flame Orange Romper",
+          "url": "/product/C-SHE-O4-20055",
+          "addToCartUrl": "/product/C-SHE-O4-20055",
+          "price": 39,
+          "msrp": 50,
+          "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/844a9485_1_large.jpg",
+          "secureImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/844a9485_1_large.jpg",
+          "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/844a9485_1_thumb_med.jpg",
+          "rating": "5",
+          "ratingCount": "1111",
+          "description": "Leave them In A Flutter over how it’s possible to look this fine in this head-turning Flame Orange Romper. You’ll be blowing minds and setting off alarms wherever you go! This ruffled romper has a deep V-neckline with a snap closure and an elastic waist with a tie. Model is wearing a small. • Self: 60% Cotton, 40% Polyester • Lining: 100% Polyester • Hand Wash Cold • Fully Lined • Imported",
+          "stockMessage": "In stock",
+          "brand": "She + Sky",
+          "popularity": "428",
+          "caption": "Captions!"
+        }
+      },
+      "attributes": {
+        "id": "63bbffe2493cca12055fbe2894664dc7",
+        "intellisuggestData": "eJyyKK0sMcplYChPzCwuYXDWDfZw1fU30TUyMDA1ZTBkMDZlMGCwtGRIL8pMAQQAAP__-bwKbA",
+        "intellisuggestSignature": "0ff8f547ff01e3d57f6c5edb0a69baf5ec7522abce17f0c9eb4273c7809be2fe",
+        "product_type_unigram": "romper",
+        "sales_rank": [
+          "428"
+        ]
+      },
+      "children": []
+    },
+    {
+      "id": "139386",
+      "mappings": {
+        "core": {
+          "uid": "139386",
+          "sku": "C-SHE-I4-20055",
+          "name": "In A Flutter Green Romper",
+          "url": "/product/C-SHE-I4-20055",
+          "addToCartUrl": "/product/C-SHE-I4-20055",
+          "price": 39,
+          "msrp": 50,
+          "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/844a1743_1_large.jpg",
+          "secureImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/844a1743_1_large.jpg",
+          "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/844a1743_1_thumb_med.jpg",
+          "rating": "5",
+          "ratingCount": "1111",
+          "description": "Leave them In A Flutter after seeing you prance around in this fine Green Romper. This ruffled romper has a deep V-neckline with a snap closure and an elastic waist with a tie. Model is wearing a small. • Self: 60% Cotton, 40% Polyester • Lining: 100% Polyester • Hand Wash Cold • Fully Lined • Imported",
+          "stockMessage": "In stock",
+          "brand": "She + Sky",
+          "popularity": "1320",
+          "caption": "Captions!"
+        }
+      },
+      "attributes": {
+        "id": "b682a1232ddb9e79c65a2e7e23717751",
+        "intellisuggestData": "eJyyKK0sMcplYChPzCwuYXDWDfZw1fU00TUyMDA1ZTBkMDZjMGCwtGRIL8pMAQQAAP__-T0KZw",
+        "intellisuggestSignature": "f888295d95b45434cf20e5ac88beb911a69020804bc55efa413595522cb90362",
+        "product_type_unigram": "romper",
+        "sales_rank": [
+          "1320"
+        ]
+      },
+      "children": []
+    },
+    {
+      "id": "172984",
+      "mappings": {
+        "core": {
+          "uid": "172984",
+          "sku": "C-EV-O5-K5864",
+          "name": "In Haute Pursuit Pleated Orange Skirt",
+          "url": "/product/C-EV-O5-K5864",
+          "addToCartUrl": "/product/C-EV-O5-K5864",
+          "price": 46,
+          "msrp": 50,
+          "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/lcp_2859_large.jpg",
+          "secureImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/lcp_2859_large.jpg",
+          "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/lcp_2859_thumb_med.jpg",
+          "rating": "5",
+          "ratingCount": "1111",
+          "description": "Wouldn't it be hilarious if the animals gathered together and decided to bait the hunter? We can see it now, deer meeting in the dead of night, hatching a plot to foil the hunter's grand plans, then setting that plot in motion and laughing maniacally as he falls for it. This skirt is kind of the same thing, in the sense that you're hunting the hunter and making him think it was his idea. Just steer clear of the kind of hunters who are looking for trophy wives (you'd make an excellent prize, but those guys aren't worth your time, just saying). Skirt features full lining and elastic waistband! Model is wearing a small. • 100% Polyester • Hand Wash Cold • Made in the USA",
+          "stockMessage": "In stock",
+          "brand": "Everly",
+          "popularity": "2770",
+          "caption": "Captions!"
+        }
+      },
+      "attributes": {
+        "id": "78c5112873139edd4af7ccb891045a2c",
+        "intellisuggestData": "eJyyKK0sMcplYChPzCwuYXDWdQ3T9TfV9Ta1MDNhMGQwNmcwYLC0ZEgvykwBBAAA___wlApQ",
+        "intellisuggestSignature": "614619515560fa828fabb696542023486b56193b27c2cf481f3bb413c5bc5c40",
+        "product_type_unigram": "skirt",
+        "sales_rank": [
+          "2770"
+        ]
+      },
+      "children": []
+    },
+    {
+      "id": "139965",
+      "mappings": {
+        "core": {
+          "uid": "139965",
+          "sku": "C-PLC-I6-03618",
+          "name": "Island Girl Tropical Print Shorts",
+          "url": "/product/C-PLC-I6-03618",
+          "addToCartUrl": "/product/C-PLC-I6-03618",
+          "price": 34,
+          "msrp": 50,
+          "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/844a2749_2_large.jpg",
+          "secureImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/844a2749_2_large.jpg",
+          "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/844a2749_2_thumb_med.jpg",
+          "rating": "5",
+          "ratingCount": "1111",
+          "description": "You can be an Island Girl even if you’ve never left the states when you’re wearing these vibrant Tropical Print Shorts. These eye-catching shorts have the most pleasing tropical print in bold blue, green, and pink, and have an elastic waist and a ruffled hemline. Grab a coconut and a straw because these sightly shorts will have you in an island state of mind. Model is wearing a small. • 100% Polyester • Hand Wash Cold • Fully Lined • Made in the USA",
+          "stockMessage": "In stock",
+          "brand": "PLC",
+          "popularity": "3682",
+          "caption": "Captions!"
+        }
+      },
+      "attributes": {
+        "id": "8bd31991a6a9f60cdbdb2250fdd02bce",
+        "intellisuggestData": "eJyyKK0sMcplYChPzCwuYXDWDfBx1vU00zUwNjO0YDBkMLZgMGCwtGRIL8pMAQQAAP__-c0KcA",
+        "intellisuggestSignature": "a18c67e6a574685c8165b672f708cea0c13bc894589af659140332a66439fc1e",
+        "product_type_unigram": "shorts",
+        "sales_rank": [
+          "3682"
+        ]
+      },
+      "children": []
+    }
+  ],
+  "filters": [],
+  "facets": [
+    {
+      "field": "brand",
+      "type": "value",
+      "filtered": false,
+      "values": [
+        {
+          "filtered": false,
+          "value": "2B Clothing",
+          "label": "2B Clothing",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "5th Avenue",
+          "label": "5th Avenue",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "Adrienne",
+          "label": "Adrienne",
+          "count": 4
+        },
+        {
+          "filtered": false,
+          "value": "After Market",
+          "label": "After Market",
+          "count": 3
+        },
+        {
+          "filtered": false,
+          "value": "Anama",
+          "label": "Anama",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "Audrey 3+1",
+          "label": "Audrey 3+1",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "Aura L'atiste",
+          "label": "Aura L'atiste",
+          "count": 2
+        },
+        {
+          "filtered": false,
+          "value": "Ayepeach",
+          "label": "Ayepeach",
+          "count": 3
+        },
+        {
+          "filtered": false,
+          "value": "Banana",
+          "label": "Banana",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "Ces Femme",
+          "label": "Ces Femme",
+          "count": 2
+        },
+        {
+          "filtered": false,
+          "value": "Dance & Marvel",
+          "label": "Dance & Marvel",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "Do+Be",
+          "label": "Do+Be",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "E2 Clothing",
+          "label": "E2 Clothing",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "English Factory",
+          "label": "English Factory",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "Entro",
+          "label": "Entro",
+          "count": 5
+        },
+        {
+          "filtered": false,
+          "value": "Everly",
+          "label": "Everly",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "Hello Miss",
+          "label": "Hello Miss",
+          "count": 3
+        },
+        {
+          "filtered": false,
+          "value": "Hudson",
+          "label": "Hudson",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "Hyfve",
+          "label": "Hyfve",
+          "count": 2
+        },
+        {
+          "filtered": false,
+          "value": "HYPR",
+          "label": "HYPR",
+          "count": 2
+        },
+        {
+          "filtered": false,
+          "value": "Just USA",
+          "label": "Just USA",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "Kingdom & State",
+          "label": "Kingdom & State",
+          "count": 3
+        },
+        {
+          "filtered": false,
+          "value": "L'Atiste",
+          "label": "L'Atiste",
+          "count": 4
+        },
+        {
+          "filtered": false,
+          "value": "Love Riche",
+          "label": "Love Riche",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "Love Stitch",
+          "label": "Love Stitch",
+          "count": 4
+        },
+        {
+          "filtered": false,
+          "value": "Moon",
+          "label": "Moon",
+          "count": 2
+        },
+        {
+          "filtered": false,
+          "value": "Mustard Seed",
+          "label": "Mustard Seed",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "Naked Zebra",
+          "label": "Naked Zebra",
+          "count": 9
+        },
+        {
+          "filtered": false,
+          "value": "Newbury Kustom",
+          "label": "Newbury Kustom",
+          "count": 9
+        },
+        {
+          "filtered": false,
+          "value": "Nymphe",
+          "label": "Nymphe",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "Paper Crane",
+          "label": "Paper Crane",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "Patrons of Peace",
+          "label": "Patrons of Peace",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "Pepper",
+          "label": "Pepper",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "PLC",
+          "label": "PLC",
+          "count": 6
+        },
+        {
+          "filtered": false,
+          "value": "Promesa",
+          "label": "Promesa",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "Sage",
+          "label": "Sage",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "She + Sky",
+          "label": "She + Sky",
+          "count": 3
+        },
+        {
+          "filtered": false,
+          "value": "Sole Mio",
+          "label": "Sole Mio",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "Sun N Moon",
+          "label": "Sun N Moon",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "Tyche",
+          "label": "Tyche",
+          "count": 4
+        },
+        {
+          "filtered": false,
+          "value": "Under Skies",
+          "label": "Under Skies",
+          "count": 3
+        },
+        {
+          "filtered": false,
+          "value": "Very J",
+          "label": "Very J",
+          "count": 2
+        },
+        {
+          "filtered": false,
+          "value": "Z&L",
+          "label": "Z&L",
+          "count": 2
+        }
+      ]
+    },
+    {
+      "field": "color_family",
+      "type": "value",
+      "filtered": false,
+      "values": [
+        {
+          "filtered": false,
+          "value": "Blue",
+          "label": "Blue",
+          "count": 26
+        },
+        {
+          "filtered": false,
+          "value": "White",
+          "label": "White",
+          "count": 14
+        },
+        {
+          "filtered": false,
+          "value": "Pink",
+          "label": "Pink",
+          "count": 13
+        },
+        {
+          "filtered": false,
+          "value": "Green",
+          "label": "Green",
+          "count": 8
+        },
+        {
+          "filtered": false,
+          "value": "Black",
+          "label": "Black",
+          "count": 8
+        },
+        {
+          "filtered": false,
+          "value": "Orange",
+          "label": "Orange",
+          "count": 5
+        },
+        {
+          "filtered": false,
+          "value": "Purple",
+          "label": "Purple",
+          "count": 5
+        },
+        {
+          "filtered": false,
+          "value": "Red",
+          "label": "Red",
+          "count": 5
+        },
+        {
+          "filtered": false,
+          "value": "Yellow",
+          "label": "Yellow",
+          "count": 4
+        },
+        {
+          "filtered": false,
+          "value": "Beige",
+          "label": "Beige",
+          "count": 2
+        },
+        {
+          "filtered": false,
+          "value": "Gray",
+          "label": "Gray",
+          "count": 2
+        },
+        {
+          "filtered": false,
+          "value": "Brown",
+          "label": "Brown",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "field": "size",
+      "type": "value",
+      "filtered": false,
+      "values": [
+        {
+          "filtered": false,
+          "value": "Medium",
+          "label": "Medium",
+          "count": 97
+        },
+        {
+          "filtered": false,
+          "value": "Large",
+          "label": "Large",
+          "count": 97
+        },
+        {
+          "filtered": false,
+          "value": "Small",
+          "label": "Small",
+          "count": 97
+        },
+        {
+          "filtered": false,
+          "value": "X-Small",
+          "label": "X-Small",
+          "count": 7
+        },
+        {
+          "filtered": false,
+          "value": "25",
+          "label": "25",
+          "count": 2
+        },
+        {
+          "filtered": false,
+          "value": "26",
+          "label": "26",
+          "count": 2
+        },
+        {
+          "filtered": false,
+          "value": "27",
+          "label": "27",
+          "count": 2
+        },
+        {
+          "filtered": false,
+          "value": "28",
+          "label": "28",
+          "count": 2
+        },
+        {
+          "filtered": false,
+          "value": "29",
+          "label": "29",
+          "count": 2
+        },
+        {
+          "filtered": false,
+          "value": "30",
+          "label": "30",
+          "count": 2
+        },
+        {
+          "filtered": false,
+          "value": "31",
+          "label": "31",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "X-Large",
+          "label": "X-Large",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "field": "ss_category_hierarchy",
+      "type": "value",
+      "filtered": false,
+      "values": [
+        {
+          "filtered": false,
+          "value": "Gifts for Her",
+          "label": "Gifts for Her",
+          "count": 99
+        },
+        {
+          "filtered": false,
+          "value": "Shop By Trend",
+          "label": "Shop By Trend",
+          "count": 26
+        },
+        {
+          "filtered": false,
+          "value": "All Bottoms",
+          "label": "All Bottoms",
+          "count": 13
+        },
+        {
+          "filtered": false,
+          "value": "What's New",
+          "label": "What's New",
+          "count": 12
+        },
+        {
+          "filtered": false,
+          "value": "All Dresses",
+          "label": "All Dresses",
+          "count": 9
+        },
+        {
+          "filtered": false,
+          "value": "Going Fast",
+          "label": "Going Fast",
+          "count": 6
+        },
+        {
+          "filtered": false,
+          "value": "Brands We Love",
+          "label": "Brands We Love",
+          "count": 4
+        },
+        {
+          "filtered": false,
+          "value": "Notify of Restock",
+          "label": "Notify of Restock",
+          "count": 4
+        },
+        {
+          "filtered": false,
+          "value": "Playsuits",
+          "label": "Playsuits",
+          "count": 4
+        },
+        {
+          "filtered": false,
+          "value": "Swimwear",
+          "label": "Swimwear",
+          "count": 4
+        },
+        {
+          "filtered": false,
+          "value": "All Sale",
+          "label": "All Sale",
+          "count": 3
+        },
+        {
+          "filtered": false,
+          "value": "All Tops",
+          "label": "All Tops",
+          "count": 3
+        },
+        {
+          "filtered": false,
+          "value": "Style Influencer",
+          "label": "Style Influencer",
+          "count": 3
+        },
+        {
+          "filtered": false,
+          "value": "Trending",
+          "label": "Trending",
+          "count": 3
+        },
+        {
+          "filtered": false,
+          "value": "Valentine's Day",
+          "label": "Valentine's Day",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "field": "price",
+      "type": "range-buckets",
+      "filtered": false,
+      "values": [
+        {
+          "filtered": false,
+          "low": 20,
+          "high": 30,
+          "label": "$20 to $30",
+          "count": 9
+        },
+        {
+          "filtered": false,
+          "low": 30,
+          "high": 40,
+          "label": "$30 to $40",
+          "count": 40
+        },
+        {
+          "filtered": false,
+          "low": 40,
+          "high": 50,
+          "label": "$40 to $50",
+          "count": 39
+        },
+        {
+          "filtered": false,
+          "low": 50,
+          "high": 75,
+          "label": "$50 to $75",
+          "count": 14
+        },
+        {
+          "filtered": false,
+          "low": 150,
+          "high": 200,
+          "label": "$150 to $200",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "field": "material",
+      "type": "value",
+      "filtered": false,
+      "values": [
+        {
+          "filtered": false,
+          "value": "Wool",
+          "label": "Wool",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "Spandex",
+          "label": "Spandex",
+          "count": 14
+        },
+        {
+          "filtered": false,
+          "value": "Polyester",
+          "label": "Polyester",
+          "count": 51
+        },
+        {
+          "filtered": false,
+          "value": "Linen",
+          "label": "Linen",
+          "count": 4
+        },
+        {
+          "filtered": false,
+          "value": "Leather",
+          "label": "Leather",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "Faux Leather",
+          "label": "Faux Leather",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "Cotton",
+          "label": "Cotton",
+          "count": 11
+        },
+        {
+          "filtered": false,
+          "value": "",
+          "label": "",
+          "count": 16
+        }
+      ]
+    },
+    {
+      "field": "on_sale",
+      "type": "value",
+      "filtered": false,
+      "values": [
+        {
+          "filtered": false,
+          "value": "Yes",
+          "label": "Yes",
+          "count": 52
+        },
+        {
+          "filtered": false,
+          "value": "No",
+          "label": "No",
+          "count": 47
+        }
+      ]
+    },
+    {
+      "field": "ss_price",
+      "type": "range",
+      "filtered": false,
+      "step": 2.5,
+      "range": {
+        "low": 22.5,
+        "high": 155
+      },
+      "active": {
+        "low": 22.5,
+        "high": 155
+      }
+    },
+    {
+      "field": "size_dress",
+      "type": "value",
+      "filtered": false,
+      "values": [
+        {
+          "filtered": false,
+          "value": "Large",
+          "label": "Large",
+          "count": 97
+        },
+        {
+          "filtered": false,
+          "value": "Medium",
+          "label": "Medium",
+          "count": 97
+        },
+        {
+          "filtered": false,
+          "value": "Small",
+          "label": "Small",
+          "count": 97
+        },
+        {
+          "filtered": false,
+          "value": "X-Large",
+          "label": "X-Large",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "X-Small",
+          "label": "X-Small",
+          "count": 7
+        }
+      ]
+    },
+    {
+      "field": "season",
+      "type": "value",
+      "filtered": false,
+      "values": [
+        {
+          "filtered": false,
+          "value": "Summer",
+          "label": "Summer",
+          "count": 32
+        },
+        {
+          "filtered": false,
+          "value": "Spring",
+          "label": "Spring",
+          "count": 9
+        },
+        {
+          "filtered": false,
+          "value": "Fall",
+          "label": "Fall",
+          "count": 8
+        }
+      ]
+    },
+    {
+      "field": "pattern",
+      "type": "value",
+      "filtered": false,
+      "values": [
+        {
+          "filtered": false,
+          "value": "Print",
+          "label": "Print",
+          "count": 17
+        },
+        {
+          "filtered": false,
+          "value": "Stripe",
+          "label": "Stripe",
+          "count": 6
+        },
+        {
+          "filtered": false,
+          "value": "Floral",
+          "label": "Floral",
+          "count": 5
+        },
+        {
+          "filtered": false,
+          "value": "Embroidered",
+          "label": "Embroidered",
+          "count": 3
+        },
+        {
+          "filtered": false,
+          "value": "Plaid",
+          "label": "Plaid",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "field": "dress_length_name",
+      "type": "value",
+      "filtered": false,
+      "values": [
+        {
+          "filtered": false,
+          "value": "Mini",
+          "label": "Mini",
+          "count": 8
+        },
+        {
+          "filtered": false,
+          "value": "Micro",
+          "label": "Micro",
+          "count": 2
+        },
+        {
+          "filtered": false,
+          "value": "Knee",
+          "label": "Knee",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "Floor",
+          "label": "Floor",
+          "count": 2
+        },
+        {
+          "filtered": false,
+          "value": "Calf",
+          "label": "Calf",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "Below Knee",
+          "label": "Below Knee",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "Ankle",
+          "label": "Ankle",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "Above Knee",
+          "label": "Above Knee",
+          "count": 2
+        }
+      ]
+    },
+    {
+      "field": "saturation",
+      "type": "value",
+      "filtered": false,
+      "values": [
+        {
+          "filtered": false,
+          "value": "low",
+          "label": "low",
+          "count": 2
+        },
+        {
+          "filtered": false,
+          "value": "med",
+          "label": "med",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "field": "size_pants",
+      "type": "range-buckets",
+      "filtered": false,
+      "values": [
+        {
+          "filtered": false,
+          "low": 7,
+          "high": null,
+          "label": "7 and up",
+          "count": 2
+        }
+      ]
+    },
+    {
+      "field": "collection",
+      "type": "value",
+      "filtered": false,
+      "values": [
+        {
+          "filtered": false,
+          "value": "C'est Chic",
+          "label": "C'est Chic",
+          "count": 1
+        }
+      ]
+    }
+  ],
+  "sorting": [],
+  "merchandising": {
+    "redirect": "",
+    "content": {
+      "inline": [
+        {
+          "value": "<script data-banner-type=\"html\" data-banner-html=\"<h3>at position 3</h3>\" type=\"text/widget\"></script><h3>at position 3</h3>",
+          "config": {
+            "position": {
+              "index": 2
+            }
+          }
+        },
+        {
+          "value": "<script data-banner-type=\"html\" data-banner-html=\"<h3>at position 33</h3>\" type=\"text/widget\"></script><h3>at position 33</h3>",
+          "config": {
+            "position": {
+              "index": 32
+            }
+          }
+        },
+        {
+          "value": "<script data-banner-type=\"html\" data-banner-html=\"<h3>at position 66</h3>\" type=\"text/widget\"></script><h3>at position 66</h3>",
+          "config": {
+            "position": {
+              "index": 65
+            }
+          }
+        }
+      ]
+    },
+    "campaigns": [
+      {
+        "id": "440926",
+        "title": "inline banner test",
+        "type": "search"
+      }
+    ]
+  },
+  "search": {
+    "query": "waist"
+  }
+}
