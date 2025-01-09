@@ -89,7 +89,7 @@ export class SearchResultStore extends Array<Product | Banner> {
 			}
 		}
 
-		// add banners to results
+		// add banners to results - banner data includes ALL banners within the entire search results (even if not on the current page)
 		if (paginationData && merchData?.content?.inline) {
 			// ensure banners are sorted by index
 			const banners = merchData.content.inline
@@ -663,7 +663,7 @@ class Child {
 function addBannersToResults(
 	config: StoreConfigs,
 	results: (Product | Banner)[],
-	banners: Banner[],
+	allBanners: Banner[],
 	paginationData: Required<SearchResponseModelPagination>
 ) {
 	const bannersAndResults: (Product | Banner)[] = [...results];
@@ -675,24 +675,31 @@ function addBannersToResults(
 	// if the end of the page is greater than the total results, adjust the end
 	if (paginationData.pageSize * paginationData.page > paginationData.totalResults) paginationEnd = paginationData.totalResults;
 
-	const injectableBanners = banners.filter((banner) => !bannersAndResults.some((result) => result.id == banner.id));
-	const injectableBannersInSet = injectableBanners.filter((banner) => {
+	// banners that have not allready been injected
+	const bannersNotInResults = allBanners.filter((banner) => !bannersAndResults.some((result) => result.id == banner.id));
+
+	// banners that have an index position within the current set of results
+	const bannersToInject = bannersNotInResults.filter((banner) => {
+		// find banners that are within the current pagination set
 		const index = banner.config.position!.index!;
 		return index >= paginationBegin - 1 && index <= paginationEnd - 1;
 	});
-	const injectableBannersAtEnd = injectableBanners.filter((banner) => {
+
+	// banners can have an index greater than the total results, these should be injected at the end
+	const bannersToInjectAtEnd = bannersNotInResults.filter((banner) => {
 		const index = banner.config.position!.index!;
 		return index > paginationData.totalResults;
 	});
 
-	// there should always be room in the set for these (if not something is very wrong)
-	injectableBannersInSet.forEach((banner) => {
+	// inject banners that have index position within current set into the results
+	bannersToInject.forEach((banner) => {
 		const adjustedIndex = banner.config.position!.index! - (paginationBegin - 1);
 		bannersAndResults.splice(adjustedIndex, 0, banner);
 	});
 
-	injectableBannersAtEnd.forEach((banner, index) => {
-		const resultIndex = paginationData.totalResults - (injectableBannersAtEnd.length - index);
+	// inject banners at the end that fall within the current pagination set (but ensure there is room based on the begin and end indexes)
+	bannersToInjectAtEnd.forEach((banner, index) => {
+		const resultIndex = paginationData.totalResults - (bannersToInjectAtEnd.length - index);
 		if (resultIndex >= paginationBegin - 1 && resultIndex <= paginationEnd - 1) {
 			bannersAndResults.splice(resultIndex, 0, banner);
 		}
