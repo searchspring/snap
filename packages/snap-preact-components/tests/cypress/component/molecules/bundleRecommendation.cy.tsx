@@ -1,6 +1,6 @@
 import 'whatwg-fetch';
 import { Fragment, h } from 'preact';
-import { RecommendationStore } from '@searchspring/snap-store-mobx';
+import { RecommendationStore, RecommendationStoreConfig } from '@searchspring/snap-store-mobx';
 import { UrlManager, QueryStringTranslator, reactLinker } from '@searchspring/snap-url-manager';
 import { Tracker } from '@searchspring/snap-tracker';
 import { EventManager } from '@searchspring/snap-event-manager';
@@ -18,7 +18,7 @@ import { observer } from 'mobx-react';
 
 const globals = { siteId: '8uyt2m' };
 
-const recommendConfig = {
+const recommendConfig: RecommendationStoreConfig = {
 	id: 'search',
 	tag: 'bundle',
 	globals: {
