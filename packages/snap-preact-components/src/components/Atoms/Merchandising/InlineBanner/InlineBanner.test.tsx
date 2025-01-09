@@ -11,7 +11,7 @@ import { MockData } from '@searchspring/snap-shared';
 import { SearchResponseModel } from '@searchspring/snapi-types';
 
 const mockData = new MockData();
-mockData.updateConfig({ search: 'inlineBanners' });
+mockData.updateConfig({ search: 'inlineBanners.page1' });
 const searchResponse: SearchResponseModel = mockData.search();
 
 describe('Merchandising Inline Banner Component', () => {

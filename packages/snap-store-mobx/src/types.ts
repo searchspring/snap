@@ -149,7 +149,7 @@ export type RecommendationStoreConfig = StoreConfig & {
 	batchId?: number;
 	settings?: {
 		variants?: VariantConfig;
-		searchOnPageShow: boolean;
+		searchOnPageShow?: boolean;
 	};
 };
 
