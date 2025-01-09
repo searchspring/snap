@@ -1252,7 +1252,7 @@ describe('SearchResultStore', () => {
 
 	describe('with inline banners', () => {
 		it('splices inline banners into the results array', () => {
-			const searchData = mockData.updateConfig({ siteId: '8uyt2m' }).searchMeta('inlineBanners');
+			const searchData = mockData.updateConfig({ siteId: '8uyt2m' }).searchMeta('inlineBanners.page1');
 
 			const results = new SearchResultStore(searchConfig, services, {}, searchData.results, searchData.pagination, searchData.merchandising);
 
@@ -1308,9 +1308,9 @@ describe('SearchResultStore', () => {
 			const searchData = {
 				results: [],
 				pagination: {
-					page: 4,
+					page: 2,
 					totalResults: 4,
-					pageSize: 30,
+					pageSize: 3,
 				},
 				merchandising: {
 					content: {

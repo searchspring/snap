@@ -2,7 +2,7 @@ import 'whatwg-fetch';
 import { h } from 'preact';
 import { VariantSelection } from '../../../../src/components/Molecules/VariantSelection';
 import { mount } from '@cypress/react';
-import { RecommendationStore, VariantSelection as VariantSelectionType } from '@searchspring/snap-store-mobx';
+import { RecommendationStore, RecommendationStoreConfig, VariantSelection as VariantSelectionType } from '@searchspring/snap-store-mobx';
 import { UrlManager, QueryStringTranslator, reactLinker } from '@searchspring/snap-url-manager';
 import { Tracker } from '@searchspring/snap-tracker';
 import { EventManager } from '@searchspring/snap-event-manager';
@@ -15,7 +15,7 @@ import profile from '../../fixtures/profile-bundle.json';
 
 const globals = { siteId: '8uyt2m' };
 
-const recommendConfig = {
+const recommendConfig: RecommendationStoreConfig = {
 	id: 'search',
 	tag: 'bundle',
 	globals: {

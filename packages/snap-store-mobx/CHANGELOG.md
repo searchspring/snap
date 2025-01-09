@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.63.1](https://github.com/searchspring/snap/compare/v0.63.0...v0.63.1) (2025-01-09)
+
+### Bug Fixes
+
+- **store-mobx/recommendationstore:** adjusting config so that `searchOnPageShow` is optional ([1cd4c7c](https://github.com/searchspring/snap/commit/1cd4c7c275b2749d51049f06126c31b2226b94a6))
+- **store-mobx/searchresultstore:** fixing issue with inline banners ([836d916](https://github.com/searchspring/snap/commit/836d9162f6679934621df01ac5c8b16f70a995eb))
+
 # [0.63.0](https://github.com/searchspring/snap/compare/v0.62.0...v0.63.0) (2024-12-19)
 
 **Note:** Version bump only for package @searchspring/snap-store-mobx

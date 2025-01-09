@@ -77,20 +77,6 @@ export class SearchResultStore extends Array<Product | Banner> {
 			}
 		}
 
-		if (merchData?.content?.inline) {
-			const banners = merchData.content.inline
-				.sort(function (a, b) {
-					return a.config!.position!.index! - b.config!.position!.index!;
-				})
-				.map((banner) => {
-					return new Banner(services, banner);
-				});
-
-			if (banners && paginationData?.totalResults) {
-				results = addBannersToResults(config, results, banners, paginationData);
-			}
-		}
-
 		// only when infinite is enabled
 		if ((config as SearchStoreConfig)?.settings?.infinite) {
 			// logic to determine when to concatenate previous results
@@ -100,6 +86,22 @@ export class SearchResultStore extends Array<Product | Banner> {
 			// the limit would be enforced by unloading (trimming) results based on the direction of the new search (previous page, next page)
 			if (paginationData?.page && previousPaginationData?.page && paginationData.page == previousPaginationData.page + 1) {
 				results = (previousResults || []).concat(results);
+			}
+		}
+
+		// add banners to results - banner data includes ALL banners within the entire search results (even if not on the current page)
+		if (paginationData && merchData?.content?.inline) {
+			// ensure banners are sorted by index
+			const banners = merchData.content.inline
+				.sort(function (a, b) {
+					return a.config!.position!.index! - b.config!.position!.index!;
+				})
+				.map((banner) => {
+					return new Banner(services, banner);
+				});
+
+			if (banners && paginationData.totalResults) {
+				results = addBannersToResults(config, results as Product[], banners, paginationData as Required<SearchResponseModelPagination>);
 			}
 		}
 
@@ -658,32 +660,52 @@ class Child {
 	}
 }
 
-function addBannersToResults(config: StoreConfigs, results: (Product | Banner)[], banners: Banner[], paginationData: SearchResponseModelPagination) {
-	const productCount = results.length;
-	let minIndex = paginationData.pageSize! * (paginationData.page! - 1);
-	const maxIndex = minIndex + paginationData.pageSize!;
+function addBannersToResults(
+	config: StoreConfigs,
+	results: (Product | Banner)[],
+	allBanners: Banner[],
+	paginationData: Required<SearchResponseModelPagination>
+) {
+	const bannersAndResults: (Product | Banner)[] = [...results];
+	let paginationBegin = paginationData.pageSize * (paginationData.page - 1) + 1;
+	let paginationEnd = paginationData.pageSize * paginationData.page;
+	// if infinite scroll is enabled, we need to adjust the begin position
+	if ((config as SearchStoreConfig)?.settings?.infinite) paginationBegin = 1;
 
-	if ((config as SearchStoreConfig)?.settings?.infinite) {
-		minIndex = 0;
-	}
+	// if the end of the page is greater than the total results, adjust the end
+	if (paginationData.pageSize * paginationData.page > paginationData.totalResults) paginationEnd = paginationData.totalResults;
 
-	banners
-		.reduce((adding, banner) => {
-			const resultCount = productCount + adding.length;
+	// banners that have not allready been injected
+	const bannersNotInResults = allBanners.filter((banner) => !bannersAndResults.some((result) => result.id == banner.id));
 
-			if (banner.config.position!.index! >= minIndex && (banner.config.position!.index! < maxIndex || resultCount < paginationData.pageSize!)) {
-				adding.push(banner);
-			}
+	// banners that have an index position within the current set of results
+	const bannersToInject = bannersNotInResults.filter((banner) => {
+		// find banners that are within the current pagination set
+		const index = banner.config.position!.index!;
+		return index >= paginationBegin - 1 && index <= paginationEnd - 1;
+	});
 
-			return adding;
-		}, [] as Banner[])
-		.forEach((banner) => {
-			const adjustedIndex = banner.config.position!.index! - minIndex;
+	// banners can have an index greater than the total results, these should be injected at the end
+	const bannersToInjectAtEnd = bannersNotInResults.filter((banner) => {
+		const index = banner.config.position!.index!;
+		return index > paginationData.totalResults;
+	});
 
-			results.splice(adjustedIndex, 0, banner);
-		});
+	// inject banners that have index position within current set into the results
+	bannersToInject.forEach((banner) => {
+		const adjustedIndex = banner.config.position!.index! - (paginationBegin - 1);
+		bannersAndResults.splice(adjustedIndex, 0, banner);
+	});
 
-	return results;
+	// inject banners at the end that fall within the current pagination set (but ensure there is room based on the begin and end indexes)
+	bannersToInjectAtEnd.forEach((banner, index) => {
+		const resultIndex = paginationData.totalResults - (bannersToInjectAtEnd.length - index);
+		if (resultIndex >= paginationBegin - 1 && resultIndex <= paginationEnd - 1) {
+			bannersAndResults.splice(resultIndex, 0, banner);
+		}
+	});
+
+	return bannersAndResults;
 }
 
 function variantOptionClick(elem: Element, variantConfig: VariantConfig, results: (Product | Banner)[]) {
