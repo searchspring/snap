@@ -1,4 +1,4 @@
-/*! For license information please see main.73e6417f.iframe.bundle.js.LICENSE.txt */
+/*! For license information please see main.1c4d0fb1.iframe.bundle.js.LICENSE.txt */
 (self.webpackChunk_searchspring_snap_preact_components = self.webpackChunk_searchspring_snap_preact_components || []).push([
 	[792],
 	{
@@ -44222,7 +44222,7 @@
 						previousPaginationData,
 						previousResults
 					) {
-						var _config$settings, _variantConfig$realti, _merchData$content, _config$settings2;
+						var _config$settings, _variantConfig$realti, _config$settings2, _merchData$content;
 						SearchResultStore_classCallCheck(this, SearchResultStore);
 						var _variantConfig$realti3,
 							results = (resultData || []).map(function (result) {
@@ -44285,52 +44285,7 @@
 								makeVariantSelections(variantConfig, options, results);
 						}
 						if (
-							null != merchData &&
-							null !== (_merchData$content = merchData.content) &&
-							void 0 !== _merchData$content &&
-							_merchData$content.inline
-						) {
-							var banners = merchData.content.inline
-								.sort(function (a, b) {
-									return a.config.position.index - b.config.position.index;
-								})
-								.map(function (banner) {
-									return new Banner(services, banner);
-								});
-							banners &&
-								null != paginationData &&
-								paginationData.totalResults &&
-								(results = (function addBannersToResults(config, results, banners, paginationData) {
-									var _config$settings5,
-										productCount = results.length,
-										minIndex = paginationData.pageSize * (paginationData.page - 1),
-										maxIndex = minIndex + paginationData.pageSize;
-									null != config &&
-										null !== (_config$settings5 = config.settings) &&
-										void 0 !== _config$settings5 &&
-										_config$settings5.infinite &&
-										(minIndex = 0);
-									return (
-										banners
-											.reduce(function (adding, banner) {
-												var resultCount = productCount + adding.length;
-												return (
-													banner.config.position.index >= minIndex &&
-														(banner.config.position.index < maxIndex || resultCount < paginationData.pageSize) &&
-														adding.push(banner),
-													adding
-												);
-											}, [])
-											.forEach(function (banner) {
-												var adjustedIndex = banner.config.position.index - minIndex;
-												results.splice(adjustedIndex, 0, banner);
-											}),
-										results
-									);
-								})(config, results, banners, paginationData));
-						}
-						return (
-							null != config &&
+							(null != config &&
 								null !== (_config$settings2 = config.settings) &&
 								void 0 !== _config$settings2 &&
 								_config$settings2.infinite &&
@@ -44340,8 +44295,58 @@
 								previousPaginationData.page &&
 								paginationData.page == previousPaginationData.page + 1 &&
 								(results = (previousResults || []).concat(results)),
-							SearchResultStore_callSuper(this, SearchResultStore, SearchResultStore_toConsumableArray(results))
-						);
+							paginationData &&
+								null != merchData &&
+								null !== (_merchData$content = merchData.content) &&
+								void 0 !== _merchData$content &&
+								_merchData$content.inline)
+						) {
+							var banners = merchData.content.inline
+								.sort(function (a, b) {
+									return a.config.position.index - b.config.position.index;
+								})
+								.map(function (banner) {
+									return new Banner(services, banner);
+								});
+							banners &&
+								paginationData.totalResults &&
+								(results = (function addBannersToResults(config, results, allBanners, paginationData) {
+									var _config$settings5,
+										bannersAndResults = SearchResultStore_toConsumableArray(results),
+										paginationBegin = paginationData.pageSize * (paginationData.page - 1) + 1,
+										paginationEnd = paginationData.pageSize * paginationData.page;
+									null != config &&
+										null !== (_config$settings5 = config.settings) &&
+										void 0 !== _config$settings5 &&
+										_config$settings5.infinite &&
+										(paginationBegin = 1);
+									paginationData.pageSize * paginationData.page > paginationData.totalResults && (paginationEnd = paginationData.totalResults);
+									var bannersNotInResults = allBanners.filter(function (banner) {
+											return !bannersAndResults.some(function (result) {
+												return result.id == banner.id;
+											});
+										}),
+										bannersToInject = bannersNotInResults.filter(function (banner) {
+											var index = banner.config.position.index;
+											return index >= paginationBegin - 1 && index <= paginationEnd - 1;
+										}),
+										bannersToInjectAtEnd = bannersNotInResults.filter(function (banner) {
+											return banner.config.position.index > paginationData.totalResults;
+										});
+									return (
+										bannersToInject.forEach(function (banner) {
+											var adjustedIndex = banner.config.position.index - (paginationBegin - 1);
+											bannersAndResults.splice(adjustedIndex, 0, banner);
+										}),
+										bannersToInjectAtEnd.forEach(function (banner, index) {
+											var resultIndex = paginationData.totalResults - (bannersToInjectAtEnd.length - index);
+											resultIndex >= paginationBegin - 1 && resultIndex <= paginationEnd - 1 && bannersAndResults.splice(resultIndex, 0, banner);
+										}),
+										bannersAndResults
+									);
+								})(config, results, banners, paginationData));
+						}
+						return SearchResultStore_callSuper(this, SearchResultStore, SearchResultStore_toConsumableArray(results));
 					}
 					return (
 						(function SearchResultStore_inherits(subClass, superClass) {
@@ -49444,6 +49449,51 @@
 						: count + keyLength;
 				}, 1);
 			}
+			var JAVASCRIPT_KEYWORDS = new Set([
+				'break',
+				'case',
+				'catch',
+				'class',
+				'const',
+				'continue',
+				'debugger',
+				'default',
+				'delete',
+				'do',
+				'else',
+				'export',
+				'extends',
+				'finally',
+				'for',
+				'function',
+				'if',
+				'import',
+				'in',
+				'instanceof',
+				'new',
+				'return',
+				'super',
+				'switch',
+				'this',
+				'throw',
+				'try',
+				'typeof',
+				'var',
+				'void',
+				'while',
+				'with',
+				'yield',
+				'let',
+				'static',
+				'enum',
+				'await',
+				'implements',
+				'package',
+				'protected',
+				'interface',
+				'private',
+				'public',
+			]);
 			function removeUndefined(variables) {
 				return (
 					Object.keys(variables).forEach(function (key) {
@@ -49693,7 +49743,7 @@
 					(this.event = payload.event),
 					(this.id = payload.id),
 					(this.pid = payload.pid),
-					(this.meta = { initiator: { lib: 'searchspring/snap', 'lib.version': '0.63.0', 'lib.framework': config.framework } }),
+					(this.meta = { initiator: { lib: 'searchspring/snap', 'lib.version': '0.63.1', 'lib.framework': config.framework } }),
 					(this.id = (0, v4.A)());
 			});
 			function Tracker_toConsumableArray(arr) {
@@ -50247,7 +50297,7 @@
 									_this$globals$currenc.code &&
 									(this.context.currency = this.globals.currency),
 								(null !== (_window$searchspring = window.searchspring) && void 0 !== _window$searchspring && _window$searchspring.tracker) ||
-									((window.searchspring = window.searchspring || {}), (window.searchspring.tracker = this), (window.searchspring.version = '0.63.0')),
+									((window.searchspring = window.searchspring || {}), (window.searchspring.tracker = this), (window.searchspring.version = '0.63.1')),
 								setTimeout(function () {
 									_this.targeters.push(
 										new DomTargeter([{ selector: 'script[type^="searchspring/track/"]', emptyTarget: !1 }], function (target, elem) {
@@ -50255,7 +50305,7 @@
 													var _scriptElem$getAttrib,
 														_scriptElem$id,
 														_scriptElem$src,
-														_scriptInnerHTML$matc,
+														_scriptInnerHTML$repl,
 														evaluate = arguments.length > 0 && void 0 !== arguments[0] ? arguments[0] : [],
 														script = arguments.length > 1 ? arguments[1] : void 0;
 													if (
@@ -50301,22 +50351,40 @@
 													var scriptVariables = {},
 														scriptInnerHTML = scriptElem.innerHTML,
 														scriptInnerVars =
-															null === (_scriptInnerHTML$matc = scriptInnerHTML.match(/([a-zA-Z_$][a-zA-Z_$0-9]*)\s?=/g)) ||
-															void 0 === _scriptInnerHTML$matc
+															null ===
+																(_scriptInnerHTML$repl = scriptInnerHTML
+																	.replace(/`(?:\\[\s\S]|[^`\\])*`|'(?:\\[\s\S]|[^'\\])*'|"(?:\\[\s\S]|[^"\\])*"/g, '')
+																	.match(/([a-zA-Z_$][a-zA-Z_$0-9]*)\s*=/g)) || void 0 === _scriptInnerHTML$repl
 																? void 0
-																: _scriptInnerHTML$matc.map(function (match) {
+																: _scriptInnerHTML$repl.map(function (match) {
 																		return match.replace(/[\s=]/g, '');
 																  }),
 														combinedVars = evaluate.concat(scriptInnerVars || []),
 														evaluateVars = combinedVars.filter(function (item, index) {
-															return combinedVars.indexOf(item) === index;
+															var isKeyword = JAVASCRIPT_KEYWORDS.has(item);
+															return (
+																isKeyword &&
+																	console.error("getContext: JavaScript keyword found: '" + item + "'! Please use a different variable name."),
+																combinedVars.indexOf(item) === index && !isKeyword
+															);
 														});
 													null == evaluate ||
 														evaluate.forEach(function (name) {
-															var fn = new Function(
-																'\n\t\t\tvar ' + evaluateVars.join(', ') + ';\n\t\t\t' + scriptInnerHTML + '\n\t\t\treturn ' + name + ';\n\t\t'
-															);
-															scriptVariables[name] = fn();
+															try {
+																var fn = new Function(
+																	'\n\t\t\t\tvar ' +
+																		evaluateVars.join(', ') +
+																		';\n\t\t\t\t' +
+																		scriptInnerHTML +
+																		'\n\t\t\t\treturn ' +
+																		name +
+																		';\n\t\t\t'
+																);
+																scriptVariables[name] = fn();
+															} catch (err) {
+																JAVASCRIPT_KEYWORDS.has(name) || (console.error("getContext: error evaluating '" + name + "'"), console.error(err)),
+																	(scriptVariables[name] = void 0);
+															}
 														});
 													var variables = Object.assign({}, removeUndefined(attributeVariables), removeUndefined(scriptVariables));
 													if (evaluate.includes('siteId') && !variables.siteId) {
