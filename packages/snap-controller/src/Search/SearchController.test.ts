@@ -49,6 +49,9 @@ describe('Search Controller', () => {
 
 		expect(initfn).not.toHaveBeenCalled();
 		controller.init();
+		expect(controller.store.loaded).toBe(false);
+		expect(controller.store.loading).toBe(false);
+
 		expect(initfn).toHaveBeenCalled();
 
 		expect(controller instanceof SearchController).toBeTruthy();
@@ -63,7 +66,19 @@ describe('Search Controller', () => {
 
 		expect(controller.store.results.length).toBe(0);
 		expect(searchfn).not.toHaveBeenCalled();
-		await controller.search();
+
+		// calling init to ensure event timings line up for asserting loading and loaded states
+		await controller.init();
+
+		const searchPromise = controller.search();
+
+		expect(controller.store.loaded).toBe(false);
+		expect(controller.store.loading).toBe(true);
+
+		await searchPromise;
+		expect(controller.store.loaded).toBe(true);
+		expect(controller.store.loading).toBe(false);
+
 		expect(searchfn).toHaveBeenCalled();
 		expect(controller.store.results.length).toBeGreaterThan(0);
 

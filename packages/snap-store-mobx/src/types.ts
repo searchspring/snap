@@ -107,6 +107,7 @@ export type AutocompleteStoreConfigSettings = {
 	initializeFromUrl?: boolean;
 	syncInputs?: boolean;
 	serializeForm?: boolean;
+	disableClickOutside?: boolean;
 	facets?: FacetStoreConfig & {
 		fields?: {
 			[field: string]: FacetStoreConfig;
@@ -124,6 +125,10 @@ export type AutocompleteStoreConfigSettings = {
 	redirects?: {
 		merchandising?: boolean;
 		singleResult?: boolean;
+	};
+	bind?: {
+		input?: boolean;
+		submit?: boolean;
 	};
 };
 
@@ -146,6 +151,7 @@ export type RecommendationStoreConfig = StoreConfig & {
 	batchId?: number;
 	settings?: {
 		variants?: VariantConfig;
+		searchOnPageShow: boolean;
 	};
 };
 

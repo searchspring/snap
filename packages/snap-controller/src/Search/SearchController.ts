@@ -10,7 +10,6 @@ import type { BeaconEvent } from '@searchspring/snap-tracker';
 import type { Product, SearchStore } from '@searchspring/snap-store-mobx';
 import type {
 	SearchControllerConfig,
-	BeforeSearchObj,
 	AfterSearchObj,
 	AfterStoreObj,
 	ControllerServices,
@@ -82,13 +81,6 @@ export class SearchController extends AbstractController {
 		// set last params to undefined for compare in search
 		this.storage.set('lastStringyParams', undefined);
 
-		// add 'beforeSearch' middleware
-		this.eventManager.on('beforeSearch', async (search: BeforeSearchObj, next: Next): Promise<void | boolean> => {
-			search.controller.store.loading = true;
-
-			await next();
-		});
-
 		// add 'afterSearch' middleware
 		this.eventManager.on('afterSearch', async (search: AfterSearchObj, next: Next): Promise<void | boolean> => {
 			const config = search.controller.config as SearchControllerConfig;
@@ -133,8 +125,6 @@ export class SearchController extends AbstractController {
 			}
 
 			await this.eventManager.fire('restorePosition', { controller: this, element: elementPosition });
-
-			search.controller.store.loading = false;
 		});
 
 		// restore position
@@ -241,14 +231,15 @@ export class SearchController extends AbstractController {
 				// store element position data to scrollMap
 				if (selector || storedHref || domRect) {
 					try {
-						const stringyParams = JSON.parse(this.storage.get('lastStringyParams'));
-						const storableRequestParams = getStorableRequestParams(stringyParams);
-						const storableStringyParams = JSON.stringify(storableRequestParams);
-
-						scrollMap[storableStringyParams] = { domRect, href: storedHref, selector };
+						const lastRequest = this.storage.get('lastStringyParams');
+						if (lastRequest) {
+							const storableRequestParams = getStorableRequestParams(JSON.parse(lastRequest));
+							const storableStringyParams = JSON.stringify(storableRequestParams);
+							scrollMap[storableStringyParams] = { domRect, href: storedHref, selector };
+						}
 					} catch (err) {
 						// failed to get lastStringParams
-						this.log.warn('Failed to save scollMap!', err);
+						this.log.warn('Failed to save srcollMap!', err);
 					}
 				}
 
@@ -322,18 +313,18 @@ export class SearchController extends AbstractController {
 	}
 
 	search = async (): Promise<void> => {
-		if (!this.initialized) {
-			await this.init();
-		}
-
-		const params = this.params;
-
-		if (this.params.search?.query?.string && this.params.search?.query?.string.length) {
-			// save it to the history store
-			this.store.history.save(this.params.search.query.string);
-		}
-
 		try {
+			if (!this.initialized) {
+				await this.init();
+			}
+			const params = this.params;
+
+			if (this.params.search?.query?.string && this.params.search?.query?.string.length) {
+				// save it to the history store
+				this.store.history.save(this.params.search.query.string);
+			}
+			this.store.loading = true;
+
 			try {
 				await this.eventManager.fire('beforeSearch', {
 					controller: this,
@@ -530,8 +521,9 @@ export class SearchController extends AbstractController {
 					this.log.error(err);
 					this.handleError(err);
 				}
-				this.store.loading = false;
 			}
+		} finally {
+			this.store.loading = false;
 		}
 	};
 

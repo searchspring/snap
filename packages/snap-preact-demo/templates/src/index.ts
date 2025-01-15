@@ -30,16 +30,6 @@ let config: SnapTemplatesConfig = {
 			style: globalStyles,
 			overrides: {
 				components: {
-					recommendation: {
-						lazyRender: {
-							enabled: false,
-						},
-					},
-					recommendationBundle: {
-						lazyRender: {
-							enabled: false,
-						},
-					},
 					noResults: {
 						templates: {
 							recommendation: {
@@ -126,7 +116,6 @@ let config: SnapTemplatesConfig = {
 		],
 	},
 	autocomplete: {
-		inputSelector: 'input.searchspring-ac',
 		targets: [
 			{
 				selector: 'input.searchspring-ac',
