@@ -33,7 +33,7 @@ export const BundleSelector = observer((properties: BundleSelectorProps): JSX.El
 		checkbox: {
 			className: 'ss__recommendation-bundle__wrapper__selector__result-wrapper__checkbox',
 			checked: checked,
-			size: 18,
+			size: '18px',
 			onClick: onCheck,
 			// global theme
 			...globalTheme?.components?.checkbox,
