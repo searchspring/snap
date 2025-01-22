@@ -79,7 +79,7 @@ searchController.search();
 ```
 
 ## AddToCart
-This will invoke an addToCart event. Takes an array of Products as a parameter. 
+This will invoke an addToCart event (see below). Takes an array of Products as a parameter. 
 
 ```typescript
 searchController.addToCart(products);
@@ -258,11 +258,14 @@ export class Content extends Component {
 - If an element position data exists, `element` data will include `domRect` (of the element with selector), `href` and `selector`
 - Invoked during final stages of `afterStore` just prior to setting loading state to false
 
+### addToCart
+- Called with `eventData` = { controller, products }
+- Invoked when addToCart method is called
+
 ### track.product.click
 - Called with `eventData` = { controller, event, result, trackEvent } 
 - Always invoked after `track.product.click()` method has been invoked
 - Allows for adding custom product click events (ie. Google Analytics)
-
 
 ## Variants
 For variant integration details, see [Variant Integration Docs](https://github.com/searchspring/snap/blob/main/docs/INTEGRATION_VARIANTS.md)

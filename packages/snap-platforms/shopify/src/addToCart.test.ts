@@ -84,189 +84,187 @@ describe('Shopify AddToCart', () => {
 		};
 	});
 
-	describe('requires shopify to exist on the dom', () => {
-		beforeEach(() => {
-			delete window.Shopify;
-		});
-
-		it('requires shopify to exist on the dom', () => {
-			const item = results[0] as Product;
-
-			addToCart([item]);
-
-			expect(fetchMock).not.toHaveBeenCalled();
-			expect(errMock).toHaveBeenCalledWith('Error: window.Shopify not found');
-		});
+	afterEach(() => {
+		errMock.mockClear();
+		fetchMock.mockClear();
 	});
 
-	describe('has shopify in the dom', () => {
-		it('requires product(s) to be passed', () => {
-			//@ts-ignore
-			addToCart();
-			expect(fetchMock).not.toHaveBeenCalled();
-			expect(errMock).toHaveBeenCalledWith('Error: no products to add');
-		});
+	it('requires shopify to exist on the dom', () => {
+		delete window.Shopify;
+		const item = results[0] as Product;
 
-		it('adds data passed', () => {
-			const item = results[0] as Product;
+		addToCart([item]);
 
-			addToCart([item]);
+		expect(fetchMock).not.toHaveBeenCalled();
+		expect(errMock).toHaveBeenCalledWith(`shopify/addToCart: Canont proceed, 'window.Shopify' not found!`);
+	});
 
-			expect(fetchMock).toHaveBeenCalled();
-			fetchMock.mockClear();
-		});
+	it('requires product(s) to be passed', () => {
+		//@ts-ignore
+		addToCart();
+		expect(fetchMock).not.toHaveBeenCalled();
+		expect(errMock).toHaveBeenCalledWith('shopify/addToCart: No products to add!');
+	});
 
-		it('can add multiple quantities', () => {
-			const config = {
-				idFieldName: 'id',
-			};
+	it('adds data passed', () => {
+		const item = results[0] as Product;
 
-			const item = results[0] as Product;
+		addToCart([item]);
 
-			item.quantity = 4;
+		expect(fetchMock).toHaveBeenCalled();
+		fetchMock.mockClear();
+	});
 
-			addToCart([item], config);
+	it('can add multiple quantities', () => {
+		const config = {
+			idFieldName: 'id',
+		};
 
+		const item = results[0] as Product;
+
+		item.quantity = 4;
+
+		addToCart([item], config);
+
+		const obj = {
+			id: +item.id,
+			quantity: 4,
+		};
+
+		const params = { body: JSON.stringify({ items: [obj] }), headers: { 'Content-Type': 'application/json' }, method: 'POST' };
+
+		const requestUrl = `${ROOT}cart/add.js`;
+
+		expect(fetchMock).toHaveBeenCalledWith(requestUrl, params);
+
+		fetchMock.mockClear();
+
+		item.quantity = 1;
+	});
+
+	it('can use alternate id column', () => {
+		const config = {
+			idFieldName: 'mappings.core.url',
+		};
+
+		const item = results[0] as Product;
+
+		addToCart([item], config);
+
+		const obj = {
+			id: item.mappings.core?.url,
+			quantity: item.quantity,
+		};
+
+		const params = { body: JSON.stringify({ items: [obj] }), headers: { 'Content-Type': 'application/json' }, method: 'POST' };
+
+		const requestUrl = `${ROOT}cart/add.js`;
+
+		expect(fetchMock).toHaveBeenCalledWith(requestUrl, params);
+
+		fetchMock.mockClear();
+	});
+
+	it('will redirect by default', async () => {
+		const item = results[0] as Product;
+
+		addToCart([item]);
+
+		const obj = {
+			id: +item.id,
+			quantity: item.quantity,
+		};
+
+		const params = { body: JSON.stringify({ items: [obj] }), headers: { 'Content-Type': 'application/json' }, method: 'POST' };
+
+		const requestUrl = `${ROOT}cart/add.js`;
+
+		expect(fetchMock).toHaveBeenCalledWith(requestUrl, params);
+
+		await wait(10);
+
+		expect(window.location.href).toEqual(CART_ROUTE);
+
+		fetchMock.mockClear();
+	});
+
+	it('will not redirect if config is false', async () => {
+		const item = results[0] as Product;
+		const config = {
+			redirect: false,
+		};
+
+		addToCart([item], config);
+
+		const obj = {
+			id: +item.id,
+			quantity: item.quantity,
+		};
+
+		const params = { body: JSON.stringify({ items: [obj] }), headers: { 'Content-Type': 'application/json' }, method: 'POST' };
+
+		const requestUrl = `${ROOT}cart/add.js`;
+
+		expect(fetchMock).toHaveBeenCalledWith(requestUrl, params);
+
+		await wait(10);
+
+		expect(window.location.href).toEqual(ORIGIN);
+
+		fetchMock.mockClear();
+	});
+
+	it('can use a custom redirect', async () => {
+		const config = {
+			redirect: 'https://redirect.localhost',
+		};
+
+		const item = results[0] as Product;
+
+		addToCart([item], config);
+
+		const obj = {
+			id: +item.id,
+			quantity: item.quantity,
+		};
+
+		const params = { body: JSON.stringify({ items: [obj] }), headers: { 'Content-Type': 'application/json' }, method: 'POST' };
+
+		const requestUrl = `${ROOT}cart/add.js`;
+
+		expect(fetchMock).toHaveBeenCalledWith(requestUrl, params);
+
+		await wait(10);
+
+		expect(window.location.href).toEqual(config.redirect);
+
+		fetchMock.mockClear();
+	});
+
+	it('can add multiple items', async () => {
+		const config = {
+			idFieldName: 'id',
+		};
+
+		const items = results.slice(0, 3) as Product[];
+		addToCart(items, config);
+
+		const itemsArray: any = [];
+		for (let i = 0; i < items.length; i++) {
 			const obj = {
-				id: +item.id,
-				quantity: 4,
+				id: +items[i].id,
+				quantity: items[i].quantity,
 			};
 
-			const params = { body: JSON.stringify({ items: [obj] }), headers: { 'Content-Type': 'application/json' }, method: 'POST' };
+			itemsArray.push(obj);
+		}
 
-			const requestUrl = `${ROOT}cart/add.js`;
+		const params = { body: JSON.stringify({ items: itemsArray }), headers: { 'Content-Type': 'application/json' }, method: 'POST' };
 
-			expect(fetchMock).toHaveBeenCalledWith(requestUrl, params);
+		const requestUrl = `${ROOT}cart/add.js`;
 
-			fetchMock.mockClear();
+		expect(fetchMock).toHaveBeenCalledWith(requestUrl, params);
 
-			item.quantity = 1;
-		});
-
-		it('can use alternate id column', () => {
-			const config = {
-				idFieldName: 'mappings.core.url',
-			};
-
-			const item = results[0] as Product;
-
-			addToCart([item], config);
-
-			const obj = {
-				id: item.mappings.core?.url,
-				quantity: item.quantity,
-			};
-
-			const params = { body: JSON.stringify({ items: [obj] }), headers: { 'Content-Type': 'application/json' }, method: 'POST' };
-
-			const requestUrl = `${ROOT}cart/add.js`;
-
-			expect(fetchMock).toHaveBeenCalledWith(requestUrl, params);
-
-			fetchMock.mockClear();
-		});
-
-		it('will redirect by default', async () => {
-			const item = results[0] as Product;
-
-			addToCart([item]);
-
-			const obj = {
-				id: +item.id,
-				quantity: item.quantity,
-			};
-
-			const params = { body: JSON.stringify({ items: [obj] }), headers: { 'Content-Type': 'application/json' }, method: 'POST' };
-
-			const requestUrl = `${ROOT}cart/add.js`;
-
-			expect(fetchMock).toHaveBeenCalledWith(requestUrl, params);
-
-			await wait(10);
-
-			expect(window.location.href).toEqual(CART_ROUTE);
-
-			fetchMock.mockClear();
-		});
-
-		it('will not redirect if config is false', async () => {
-			const item = results[0] as Product;
-			const config = {
-				redirect: false,
-			};
-
-			addToCart([item], config);
-
-			const obj = {
-				id: +item.id,
-				quantity: item.quantity,
-			};
-
-			const params = { body: JSON.stringify({ items: [obj] }), headers: { 'Content-Type': 'application/json' }, method: 'POST' };
-
-			const requestUrl = `${ROOT}cart/add.js`;
-
-			expect(fetchMock).toHaveBeenCalledWith(requestUrl, params);
-
-			await wait(10);
-
-			expect(window.location.href).toEqual(ORIGIN);
-
-			fetchMock.mockClear();
-		});
-
-		it('can use a custom redirect', async () => {
-			const config = {
-				redirect: 'https://redirect.localhost',
-			};
-
-			const item = results[0] as Product;
-
-			addToCart([item], config);
-
-			const obj = {
-				id: +item.id,
-				quantity: item.quantity,
-			};
-
-			const params = { body: JSON.stringify({ items: [obj] }), headers: { 'Content-Type': 'application/json' }, method: 'POST' };
-
-			const requestUrl = `${ROOT}cart/add.js`;
-
-			expect(fetchMock).toHaveBeenCalledWith(requestUrl, params);
-
-			await wait(10);
-
-			expect(window.location.href).toEqual(config.redirect);
-
-			fetchMock.mockClear();
-		});
-
-		it('can add multiple items', async () => {
-			const config = {
-				idFieldName: 'id',
-			};
-
-			const items = results.slice(0, 3) as Product[];
-			addToCart(items, config);
-
-			const itemsArray: any = [];
-			for (let i = 0; i < items.length; i++) {
-				const obj = {
-					id: +items[i].id,
-					quantity: items[i].quantity,
-				};
-
-				itemsArray.push(obj);
-			}
-
-			const params = { body: JSON.stringify({ items: itemsArray }), headers: { 'Content-Type': 'application/json' }, method: 'POST' };
-
-			const requestUrl = `${ROOT}cart/add.js`;
-
-			expect(fetchMock).toHaveBeenCalledWith(requestUrl, params);
-
-			fetchMock.mockClear();
-		});
+		fetchMock.mockClear();
 	});
 });

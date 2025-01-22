@@ -753,7 +753,7 @@ describe('Recommendation Controller', () => {
 
 		controller.addToCart([controller.store.results[0], controller.store.results[1]]);
 
-		expect(eventfn).toHaveBeenCalledWith('addToCart', { products: [controller.store.results[0], controller.store.results[1]] });
+		expect(eventfn).toHaveBeenCalledWith('addToCart', { controller, products: [controller.store.results[0], controller.store.results[1]] });
 	});
 
 	it('can set cart param', async () => {

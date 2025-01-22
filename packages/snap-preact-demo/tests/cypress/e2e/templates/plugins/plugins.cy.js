@@ -147,7 +147,7 @@ describe('plugins work based on plaform setting', () => {
 				'pluginBackgroundFilters', //common
 				'pluginScrollToTop', //common
 				'pluginLogger', //common
-				'commonPluginAddToCart', //common
+				'pluginAddToCart', //common
 			];
 
 			expect(controller.config.plugins.length).to.equal(expectedPluginList.length);
@@ -202,7 +202,7 @@ describe('plugins work based on plaform setting', () => {
 				'pluginBackgroundFilters', //common
 				'pluginScrollToTop', //common
 				'pluginLogger', //common
-				'commonPluginAddToCart', //common
+				'pluginAddToCart', //common
 			];
 
 			expect(controller.config.plugins.length).to.equal(expectedPluginList.length);
@@ -245,9 +245,9 @@ describe('plugins work based on plaform setting', () => {
 				'pluginBackgroundFilters', //common
 				'pluginScrollToTop', //common
 				'pluginLogger', //common
-				'pluginBackgroundFiltersShopify',
-				'pluginMutateResultsShopify',
-				'shopifyPluginAddToCart',
+				'pluginShopifyBackgroundFilters',
+				'pluginShopifyMutateResults',
+				'pluginShopifyAddToCart',
 			];
 			expect(controller.config.plugins.length).to.equal(expectedPluginList.length);
 
@@ -284,8 +284,8 @@ describe('plugins work based on plaform setting', () => {
 				'pluginBackgroundFilters', //common
 				'pluginScrollToTop', //common
 				'pluginLogger', //common
-				'pluginBackgroundFiltersBigcommerce',
-				'bigCommercePluginAddToCart',
+				'pluginBigcommerceBackgroundFilters',
+				'pluginBigcommerceAddToCart',
 			];
 			expect(controller.config.plugins.length).to.equal(expectedPluginList.length);
 
@@ -322,8 +322,8 @@ describe('plugins work based on plaform setting', () => {
 				'pluginBackgroundFilters', //common
 				'pluginScrollToTop', //common
 				'pluginLogger', //common
-				'pluginBackgroundFiltersMagento2',
-				'magento2PluginAddToCart',
+				'pluginMagento2BackgroundFilters',
+				'pluginMagento2AddToCart',
 			];
 			expect(controller.config.plugins.length).to.equal(expectedPluginList.length);
 

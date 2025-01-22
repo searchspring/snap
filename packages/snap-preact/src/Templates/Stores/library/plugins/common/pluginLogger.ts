@@ -1,1 +1,1 @@
-export { pluginLogger, CommonPluginLoggerConfig } from '@searchspring/snap-platforms/common';
+export { pluginLogger } from '@searchspring/snap-platforms/common';

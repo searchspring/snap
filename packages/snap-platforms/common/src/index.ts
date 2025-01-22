@@ -1,6 +1,4 @@
-export * from './types';
-
-export * from './plugins/pluginBackgroundFilters';
-export * from './plugins/pluginScrollToTop';
-export * from './plugins/pluginLogger';
-export { commonPluginAddToCart as pluginAddToCart, CommonAddToCartPluginConfig } from './plugins/pluginAddToCart';
+export { pluginBackgroundFilters, PluginBackgroundFiltersConfig } from './plugins/pluginBackgroundFilters';
+export { pluginScrollToTop, PluginScrollToTopConfig } from './plugins/pluginScrollToTop';
+export { pluginLogger, PluginLoggerConfig } from './plugins/pluginLogger';
+export { pluginAddToCart, PluginAddToCartConfig } from './plugins/pluginAddToCart';

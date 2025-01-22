@@ -691,7 +691,7 @@ describe('Autocomplete Controller', () => {
 
 		controller.addToCart([controller.store.results[0] as Product, controller.store.results[1] as Product]);
 
-		expect(eventfn).toHaveBeenCalledWith('addToCart', { products: [controller.store.results[0], controller.store.results[1]] });
+		expect(eventfn).toHaveBeenCalledWith('addToCart', { controller, products: [controller.store.results[0], controller.store.results[1]] });
 	});
 
 	it('can submit with form', async () => {

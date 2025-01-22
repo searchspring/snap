@@ -22,22 +22,35 @@ import type { PluginsConfigs, RecsTemplateTypes, TemplatesStoreConfigConfig, Tem
 import { LibraryImports } from './Stores/LibraryStore';
 import { GLOBAL_THEME_NAME } from './Stores/TargetStore';
 import {
-	CommonPluginBackgroundFilterConfig,
 	pluginBackgroundFilters,
+	PluginBackgroundFiltersConfig,
 	pluginScrollToTop,
+	PluginScrollToTopConfig,
 	pluginAddToCart,
-	CommonAddToCartPluginConfig,
-	CommonPluginScrollToTopConfig,
+	PluginAddToCartConfig,
 	pluginLogger,
+	PluginLoggerConfig,
 } from '@searchspring/snap-platforms/common';
-import type { pluginBackgroundFilters as shopifyPluginBackgroundFilters } from '@searchspring/snap-platforms/shopify';
-import { pluginMutateResults as shopifyPluginMutateResults, ShopifyPluginMutateResultsConfig } from '@searchspring/snap-platforms/shopify';
-import { pluginAddToCart as shopifyPluginAddToCart, ShopifyAddToCartPluginConfig } from '@searchspring/snap-platforms/shopify';
-import { pluginAddToCart as bigCommercePluginAddToCart, BigCommerceAddToCartConfig } from '@searchspring/snap-platforms/bigcommerce';
-import { pluginAddToCart as magento2PluginAddToCart, Magento2AddToCartConfig } from '@searchspring/snap-platforms/magento2';
-
-import type { pluginBackgroundFilters as bigCommercePluginBackgroundFilters } from '@searchspring/snap-platforms/bigcommerce';
-import type { pluginBackgroundFilters as magento2PluginBackgroundFilters } from '@searchspring/snap-platforms/magento2';
+import {
+	pluginBackgroundFilters as PluginShopifyBackgroundFilters,
+	PluginBackgroundFiltersConfig as PluginShopifyBackgroundFiltersConfig,
+	pluginMutateResults as pluginShopifyMutateResults,
+	PluginMutateResultsConfig as PluginShopifyMutateResultsConfig,
+	pluginAddToCart as pluginShopifyAddToCart,
+	PluginAddToCartConfig as PluginShopifyAddToCartConfig,
+} from '@searchspring/snap-platforms/shopify';
+import {
+	pluginAddToCart as pluginBigcommerceAddToCart,
+	PluginAddToCartConfig as PluginBigCommerceAddToCartConfig,
+	pluginBackgroundFilters as pluginBigcommerceBackgroundFilters,
+	PluginBackgroundFiltersConfig as PluginBigcommerceBackgroundFiltersConfig,
+} from '@searchspring/snap-platforms/bigcommerce';
+import {
+	pluginAddToCart as pluginMagento2AddToCart,
+	AddToCartConfig as PluginMagento2AddToCartConfig,
+	pluginBackgroundFilters as pluginMagento2BackgroundFilters,
+	PluginBackgroundFiltersConfig as PluginMagento2BackgroundFiltersConfig,
+} from '@searchspring/snap-platforms/magento2';
 
 export const THEME_EDIT_COOKIE = 'ssThemeEdit';
 
@@ -109,21 +122,20 @@ export type SnapTemplatesConfig = TemplatesStoreConfigConfig & {
 
 type TemplatePlugins =
 	// common
-	| [typeof pluginBackgroundFilters, CommonPluginBackgroundFilterConfig]
-	| [typeof pluginScrollToTop, CommonPluginScrollToTopConfig]
-	| [typeof pluginLogger]
-	| [typeof pluginAddToCart, CommonAddToCartPluginConfig]
+	| [typeof pluginBackgroundFilters, PluginBackgroundFiltersConfig]
+	| [typeof pluginScrollToTop, PluginScrollToTopConfig]
+	| [typeof pluginLogger, PluginLoggerConfig]
+	| [typeof pluginAddToCart, PluginAddToCartConfig]
 	// shopify
-	| [typeof shopifyPluginBackgroundFilters]
-	| [typeof shopifyPluginMutateResults, ShopifyPluginMutateResultsConfig]
-	| [typeof shopifyPluginAddToCart, ShopifyAddToCartPluginConfig]
-
+	| [typeof PluginShopifyBackgroundFilters, PluginShopifyBackgroundFiltersConfig]
+	| [typeof pluginShopifyMutateResults, PluginShopifyMutateResultsConfig]
+	| [typeof pluginShopifyAddToCart, PluginShopifyAddToCartConfig]
 	// bigCommerce
-	| [typeof bigCommercePluginBackgroundFilters]
-	| [typeof bigCommercePluginAddToCart, BigCommerceAddToCartConfig]
+	| [typeof pluginBigcommerceBackgroundFilters, PluginBigcommerceBackgroundFiltersConfig]
+	| [typeof pluginBigcommerceAddToCart, PluginBigCommerceAddToCartConfig]
 	// magento2
-	| [typeof magento2PluginBackgroundFilters]
-	| [typeof magento2PluginAddToCart, Magento2AddToCartConfig];
+	| [typeof pluginMagento2BackgroundFilters, PluginMagento2BackgroundFiltersConfig]
+	| [typeof pluginMagento2AddToCart, PluginMagento2AddToCartConfig];
 
 type TemplatePluginGrouping = TemplatePlugins[];
 
@@ -471,6 +483,7 @@ export function createSnapConfig(templateConfig: SnapTemplatesConfig, templatesS
 	return snapConfig;
 }
 
+// TODO: DRY up and support dynamic imports
 function createPlugins(
 	templateConfig: SnapTemplatesConfig,
 	templatesStore: TemplatesStore,
@@ -510,10 +523,7 @@ function createPlugins(
 			]);
 			plugins.push([
 				templatesStore.library.import.plugins.shopify.mutateResults,
-				deepmerge(
-					templateConfig.plugins?.shopify?.mutateResults || { enabled: true, mutations: { collectionInUrl: { enabled: true } } },
-					controllerConfig?.plugins?.shopify?.mutateResults || {}
-				),
+				deepmerge(templateConfig.plugins?.shopify?.mutateResults || {}, controllerConfig?.plugins?.shopify?.mutateResults || {}),
 			]);
 			plugins.push([
 				templatesStore.library.import.plugins.shopify.addToCart,

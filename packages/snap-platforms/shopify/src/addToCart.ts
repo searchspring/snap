@@ -20,12 +20,12 @@ type FormData = {
 
 export const addToCart = async (data: Product[], config?: ShopifyAddToCartConfig) => {
 	if (!window.Shopify) {
-		console.error('Error: window.Shopify not found');
+		console.error(`shopify/addToCart: Canont proceed, 'window.Shopify' not found!`);
 		return;
 	}
 
 	if (!data) {
-		console.error('Error: no products to add');
+		console.error('shopify/addToCart: No products to add!');
 		return;
 	}
 
@@ -41,7 +41,7 @@ export const addToCart = async (data: Product[], config?: ShopifyAddToCartConfig
 				if (level && level[field]) {
 					level = level[field];
 				} else {
-					console.error('Error: couldnt find column in item data. please check your idFieldName is correct in the config.');
+					console.error(`shopify/addToCart: Could not find column in item data. Please verify 'idFieldName' in the config.`);
 				}
 			});
 			if (level && level !== item) {
@@ -79,9 +79,10 @@ export const addToCart = async (data: Product[], config?: ShopifyAddToCartConfig
 				setTimeout(() => (window.location.href = typeof config?.redirect == 'string' ? config?.redirect : '/cart'));
 			}
 		} else {
-			throw new Error(`Error: addToCart responded with ${response.status}, ${response}`);
+			throw new Error(`API rejected addToCart: ${response.status}`);
 		}
 	} catch (err) {
+		console.error('shopify/addToCart: Encountered an error!');
 		console.error(err);
 	}
 };

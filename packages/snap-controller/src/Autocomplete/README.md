@@ -98,7 +98,7 @@ autocompleteController.search();
 ```
 
 ## AddToCart
-This will invoke an addToCart event. Takes an array of Products as a parameter. 
+This will invoke an addToCart event (see below). Takes an array of Products as a parameter. 
 
 ```typescript
 autocompleteController.addToCart(products);
@@ -135,6 +135,10 @@ autocompleteController.addToCart(products);
 ### beforeSubmit
 - Called with `eventData` = { controller, input }
 - Invoked prior to submission of autocomplete search
+
+### addToCart
+- Called with `eventData` = { controller, products }
+- Invoked when addToCart method is called
 
 ## Variants
 For variant integration details, see [Variant Integration Docs](https://github.com/searchspring/snap/blob/main/docs/INTEGRATION_VARIANTS.md)

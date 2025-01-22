@@ -1,4 +1,4 @@
-import { bigCommercePluginAddToCart as pluginAddToCart } from './pluginAddToCart';
+import { pluginBigcommerceAddToCart as pluginAddToCart } from './pluginBigcommerceAddToCart';
 import { MockClient } from '@searchspring/snap-shared';
 import { Product, SearchStore } from '@searchspring/snap-store-mobx';
 import { UrlManager, QueryStringTranslator, reactLinker } from '@searchspring/snap-url-manager';
@@ -7,6 +7,7 @@ import { Profiler } from '@searchspring/snap-profiler';
 import { Logger } from '@searchspring/snap-logger';
 import { Tracker } from '@searchspring/snap-tracker';
 import { SearchController } from '@searchspring/snap-controller';
+import { PluginBackgroundFilter } from '../../../common/src/types';
 
 const urlManager = new UrlManager(new QueryStringTranslator(), reactLinker);
 const services = {
@@ -24,7 +25,8 @@ const searchConfigDefault = {
 	},
 	settings: {},
 };
-let controller: any;
+
+let controller: SearchController;
 
 // function to recreate fresh services for each test (otherwise globals are shared)
 const createControllerServices = () => {
@@ -39,7 +41,7 @@ const createControllerServices = () => {
 	};
 };
 
-describe('bigcommerce/addToCart', () => {
+describe('bigcommerce/pluginAddToCart', () => {
 	beforeEach(() => {
 		searchConfig = { ...searchConfigDefault };
 		controller = new SearchController(searchConfig, createControllerServices());
@@ -59,7 +61,6 @@ describe('bigcommerce/addToCart', () => {
 
 		expect(controller.addToCart).toBeDefined();
 
-		await controller.init();
 		await controller.search();
 
 		pluginAddToCart(controller, pluginConfig);
@@ -71,6 +72,7 @@ describe('bigcommerce/addToCart', () => {
 		controller.addToCart([controller.store.results[0] as Product]);
 
 		expect(fireEventSpy).toHaveBeenCalledWith('addToCart', {
+			controller,
 			products: [controller.store.results[0]],
 		});
 		expect(eventSpy).not.toHaveBeenCalledWith('addToCart', expect.any(Object));
@@ -94,13 +96,14 @@ describe('bigcommerce/addToCart', () => {
 		controller.addToCart([controller.store.results[0] as Product]);
 
 		expect(fireEventSpy).toHaveBeenCalledWith('addToCart', {
+			controller,
 			products: [controller.store.results[0]],
 		});
 
 		expect(onEventSpy).toHaveBeenCalledWith('addToCart', expect.any(Function));
 
 		// @ts-ignore
-		expect(controller.eventManager.events.addToCart.functions[0].name).toBe('addToCart');
+		expect(controller.eventManager.events.addToCart.functions[0].name).toBe('addToCartBigcommerceEvent');
 		fireEventSpy.mockClear();
 		onEventSpy.mockClear();
 	});

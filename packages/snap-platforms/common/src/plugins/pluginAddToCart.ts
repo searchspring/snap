@@ -1,19 +1,20 @@
 import type { Product } from '@searchspring/snap-store-mobx';
-import type { AbstractController } from '@searchspring/snap-controller';
+import { AbstractController } from '@searchspring/snap-controller';
 import type { Next } from '@searchspring/snap-event-manager';
 import type { AbstractPluginConfig } from '../../../common/src/types';
 
-export type CommonAddToCartPluginConfig = AbstractPluginConfig & {
-	function: (products: Product[]) => void;
+export type PluginAddToCartConfig = AbstractPluginConfig & {
+	function: (products: Product[], controller?: AbstractController) => void | Promise<void>;
 };
 
-export const commonPluginAddToCart = (cntrlr: AbstractController, config?: CommonAddToCartPluginConfig) => {
-	const addToCart = async ({ products }: { products: Product[] }, next: Next) => {
-		await config?.function(products);
+export const pluginAddToCart = (cntrlr: AbstractController, config?: PluginAddToCartConfig) => {
+	// do nothing if plugin is disabled
+	if (config?.enabled === false) return;
+
+	const addToCartEvent = async ({ controller, products }: { controller: AbstractController; products: Product[] }, next: Next) => {
+		await (config?.function && config.function(products, controller));
 		await next();
 	};
 
-	if (config?.enabled !== false) {
-		cntrlr.on('addToCart', addToCart);
-	}
+	cntrlr.on('addToCart', addToCartEvent);
 };

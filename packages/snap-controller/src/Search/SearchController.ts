@@ -529,12 +529,13 @@ export class SearchController extends AbstractController {
 
 	addToCart = async (products: Product[]): Promise<void> => {
 		const eventContext = {
+			controller: this,
 			products: products,
 		};
 
 		this.eventManager.fire('addToCart', eventContext);
 
-		//fire some future beacon event
+		// TODO: fire some future beacon event
 	};
 }
 

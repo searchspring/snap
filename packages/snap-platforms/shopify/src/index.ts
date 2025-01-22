@@ -1,4 +1,10 @@
-export * from './addToCart';
-export { pluginBackgroundFiltersShopify as pluginBackgroundFilters, ShopifyPluginBackgroundFiltersConfig } from './plugins/pluginBackgroundFilters';
-export { pluginMutateResultsShopify as pluginMutateResults, ShopifyPluginMutateResultsConfig } from './plugins/pluginMutateResults';
-export { shopifyPluginAddToCart as pluginAddToCart, ShopifyAddToCartPluginConfig } from './plugins/pluginAddToCart';
+export { addToCart, ShopifyAddToCartConfig as AddToCartConfig } from './addToCart';
+export {
+	pluginShopifyBackgroundFilters as pluginBackgroundFilters,
+	PluginShopifyBackgroundFiltersConfig as PluginBackgroundFiltersConfig,
+} from './plugins/pluginShopifyBackgroundFilters';
+export {
+	pluginShopifyMutateResults as pluginMutateResults,
+	PluginShopifyMutateResultsConfig as PluginMutateResultsConfig,
+} from './plugins/pluginShopifyMutateResults';
+export { pluginShopifyAddToCart as pluginAddToCart, PluginShopifyAddToCartConfig as PluginAddToCartConfig } from './plugins/pluginShopifyAddToCart';

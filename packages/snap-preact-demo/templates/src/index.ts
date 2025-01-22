@@ -9,7 +9,7 @@ let config: SnapTemplatesConfig = {
 		siteId: '8uyt2m',
 		language: 'en',
 		currency: 'usd',
-		platform: 'shopify',
+		platform: 'other',
 	},
 	components: {
 		result: {

@@ -95,7 +95,7 @@ describe('Magento2', () => {
 			addToCart();
 
 			expect(fetchMock).not.toHaveBeenCalled();
-			expect(errMock).toHaveBeenCalledWith('Error: no products to add');
+			expect(errMock).toHaveBeenCalledWith('magento2/addToCart: No products to add!');
 		});
 
 		it('adds data passed', () => {

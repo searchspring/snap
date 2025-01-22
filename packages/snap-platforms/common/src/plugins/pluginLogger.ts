@@ -1,14 +1,15 @@
 import type { AbstractController } from '@searchspring/snap-controller';
 import { AbstractPluginConfig } from '../types';
 
-export type CommonPluginLoggerConfig = AbstractPluginConfig;
+export type PluginLoggerConfig = AbstractPluginConfig;
 
-export const pluginLogger = (cntrlr: AbstractController, config?: CommonPluginLoggerConfig) => {
-	if (config?.enabled !== false) {
-		cntrlr.on('afterStore', async ({ controller }: { controller: AbstractController }, next) => {
-			controller.log.debug('store', controller.store.toJSON());
+export const pluginLogger = (cntrlr: AbstractController, config?: PluginLoggerConfig) => {
+	// do nothing if plugin is disabled
+	if (config?.enabled === false) return;
 
-			await next();
-		});
-	}
+	cntrlr.on('afterStore', async ({ controller }: { controller: AbstractController }, next) => {
+		controller.log.debug('store', controller.store.toJSON());
+
+		await next();
+	});
 };

@@ -1,6 +1,9 @@
-export * from './addToCart';
+export { addToCart, BigCommerceAddToCartConfig as AddToCartConfig } from './addToCart';
 export {
-	pluginBackgroundFiltersBigcommerce as pluginBackgroundFilters,
-	BigcommercePluginBackgroundFiltersConfig,
-} from './plugins/pluginBackgroundFilters';
-export { bigCommercePluginAddToCart as pluginAddToCart, BigCommerceAddToCartPluginConfig } from './plugins/pluginAddToCart';
+	pluginBigcommerceBackgroundFilters as pluginBackgroundFilters,
+	PluginBigcommerceBackgroundFiltersConfig as PluginBackgroundFiltersConfig,
+} from './plugins/pluginBigcommerceBackgroundFilters';
+export {
+	pluginBigcommerceAddToCart as pluginAddToCart,
+	PluginBigCommerceAddToCartConfig as PluginAddToCartConfig,
+} from './plugins/pluginBigcommerceAddToCart';
