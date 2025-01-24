@@ -84,6 +84,38 @@ describe('common/pluginAddToCart', () => {
 		onEventSpy.mockClear();
 	});
 
+	it('throws an error if no function is set and addToCart is called', async () => {
+		const pluginConfig = {
+			enabled: true,
+		};
+
+		const controller = new SearchController(searchConfig, createControllerServices());
+		const onEventSpy = jest.spyOn(controller.eventManager, 'on');
+		const fireEventSpy = jest.spyOn(controller.eventManager, 'fire');
+		const loggerSpy = jest.spyOn(controller.log, 'error');
+
+		controller.plugin(pluginAddToCart, pluginConfig);
+
+		// @ts-ignore
+		expect(controller.eventManager.events.addToCart.functions[0].name).toBe('addToCartEvent');
+		expect(onEventSpy).toHaveBeenCalledWith('addToCart', expect.any(Function));
+		expect(controller.addToCart).toBeDefined();
+
+		await controller.search();
+		const products = [controller.store.results[0] as Product];
+
+		controller.addToCart(products);
+		expect(fireEventSpy).toHaveBeenCalledWith('addToCart', {
+			controller,
+			products,
+		});
+
+		expect(loggerSpy).toHaveBeenCalledWith('common/addToCart: Error - No function provided in config!');
+
+		fireEventSpy.mockClear();
+		onEventSpy.mockClear();
+	});
+
 	it('can be disabled via a config to the plugin', async () => {
 		const fn = jest.fn();
 

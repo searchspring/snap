@@ -508,12 +508,10 @@ function createPlugins(
 		templatesStore.library.import.plugins.common.logger,
 		deepmerge(templateConfig.plugins?.common?.logger || {}, controllerConfig?.plugins?.common?.logger || {}),
 	]);
-	if (templateConfig.plugins?.common?.addToCart?.function) {
-		plugins.push([
-			templatesStore.library.import.plugins.common.addToCart,
-			deepmerge(templateConfig.plugins?.common?.addToCart, controllerConfig?.plugins?.common?.addToCart || {}),
-		]);
-	}
+	plugins.push([
+		templatesStore.library.import.plugins.common.addToCart,
+		deepmerge(templateConfig.plugins?.common?.addToCart || {}, controllerConfig?.plugins?.common?.addToCart || {}),
+	]);
 
 	switch (templatesStore.platform) {
 		case 'shopify':

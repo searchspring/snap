@@ -20,7 +20,7 @@ type FormData = {
 
 export const addToCart = async (data: Product[], config?: ShopifyAddToCartConfig) => {
 	if (!window.Shopify) {
-		console.error(`shopify/addToCart: Canont proceed, 'window.Shopify' not found!`);
+		console.error(`shopify/addToCart: Cannot proceed, 'window.Shopify' not found!`);
 		return;
 	}
 

@@ -96,7 +96,7 @@ describe('Shopify AddToCart', () => {
 		addToCart([item]);
 
 		expect(fetchMock).not.toHaveBeenCalled();
-		expect(errMock).toHaveBeenCalledWith(`shopify/addToCart: Canont proceed, 'window.Shopify' not found!`);
+		expect(errMock).toHaveBeenCalledWith(`shopify/addToCart: Cannot proceed, 'window.Shopify' not found!`);
 	});
 
 	it('requires product(s) to be passed', () => {

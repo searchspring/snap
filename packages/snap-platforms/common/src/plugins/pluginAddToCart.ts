@@ -4,7 +4,7 @@ import type { Next } from '@searchspring/snap-event-manager';
 import type { AbstractPluginConfig } from '../../../common/src/types';
 
 export type PluginAddToCartConfig = AbstractPluginConfig & {
-	function: (products: Product[], controller?: AbstractController) => void | Promise<void>;
+	function?: (products: Product[], controller?: AbstractController) => void | Promise<void>;
 };
 
 export const pluginAddToCart = (cntrlr: AbstractController, config?: PluginAddToCartConfig) => {
@@ -12,7 +12,11 @@ export const pluginAddToCart = (cntrlr: AbstractController, config?: PluginAddTo
 	if (config?.enabled === false) return;
 
 	const addToCartEvent = async ({ controller, products }: { controller: AbstractController; products: Product[] }, next: Next) => {
-		await (config?.function && config.function(products, controller));
+		if (config?.function) {
+			await (config?.function && config.function(products, controller));
+		} else {
+			cntrlr.log.error('common/addToCart: Error - No function provided in config!');
+		}
 		await next();
 	};
 
