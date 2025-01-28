@@ -98,10 +98,11 @@ export class AutocompleteController extends AbstractController {
 				window.location.href = redirectURL;
 				return false;
 			}
-
 			if (this.config?.settings?.redirects?.singleResult) {
 				const { results } = (ac.controller as AutocompleteController).store;
-				const singleResultUrl = results.length === 1 && results[0].type === 'product' && results[0].mappings.core?.url;
+				//remove inline banners
+				const filteredResults = results.filter((result) => result.type == 'product');
+				const singleResultUrl = filteredResults.length === 1 && filteredResults[0].mappings.core?.url;
 				if (singleResultUrl) {
 					window.location.href = singleResultUrl;
 					return false;
