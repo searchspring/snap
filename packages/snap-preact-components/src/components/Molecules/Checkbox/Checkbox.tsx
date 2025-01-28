@@ -13,21 +13,21 @@ import { Icon, IconProps } from '../../Atoms/Icon';
 import { useA11y } from '../../../hooks/useA11y';
 
 const CSS = {
-	checkbox: ({ pixelSize, color, theme }: Partial<CheckboxProps>) => {
+	checkbox: ({ size, color, theme }: Partial<CheckboxProps>) => {
 		return css({
 			display: 'inline-flex',
 			alignItems: 'center',
 			justifyContent: 'center',
-			height: pixelSize,
-			width: pixelSize,
+			height: size,
+			width: size,
 			border: `1px solid ${color || theme?.colors?.primary || '#333'}`,
 			'&.ss__checkbox--disabled': {
 				opacity: 0.7,
 			},
 			'& .ss__checkbox__empty': {
 				display: 'inline-block',
-				width: `calc(${pixelSize} - 30%)`,
-				height: `calc(${pixelSize} - 30%)`,
+				width: `calc(${size} - 30%)`,
+				height: `calc(${size} - 30%)`,
 			},
 		});
 	},
