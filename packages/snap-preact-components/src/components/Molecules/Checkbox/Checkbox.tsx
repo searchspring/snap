@@ -100,7 +100,7 @@ export const Checkbox = observer((properties: CheckboxProps): JSX.Element => {
 		if (native) {
 			styling.css = [CSS.native(), style];
 		} else {
-			styling.css = [CSS.checkbox({ pixelSize, color, theme }), style];
+			styling.css = [CSS.checkbox({ size: pixelSize, color, theme }), style];
 		}
 	} else if (style) {
 		styling.css = [style];
