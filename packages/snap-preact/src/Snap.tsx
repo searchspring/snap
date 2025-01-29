@@ -676,13 +676,17 @@ export class Snap {
 						this._controllerPromises[controller.config.id] = new Promise(async (resolve) => {
 							try {
 								let bound = false;
-								const runBind = () => {
-									if (!bound) {
-										bound = true;
-										setTimeout(() => {
-											(this.controllers[controller.config.id] as AutocompleteController).bind();
-										});
-									}
+								const runBind = (acCntrlr: AutocompleteController) => {
+									return new Promise<void>(async (resolveBind) => {
+										if (!bound) {
+											// await binding the controller
+											await acCntrlr.bind();
+											bound = true;
+											resolveBind();
+										} else {
+											resolveBind();
+										}
+									});
 								};
 
 								const targetFunction = async (target: ExtendedTarget, elem: Element, originalElem: Element) => {
@@ -718,12 +722,11 @@ export class Snap {
 										controller.services,
 										controller.url,
 										controller.context,
-										(cntrlr) => {
+										async (cntrlr) => {
+											await runBind(cntrlr as AutocompleteController);
 											if (cntrlr) resolve(cntrlr);
 										}
 									);
-
-									runBind();
 								}
 
 								controller?.targeters?.forEach((target, target_index) => {
@@ -758,11 +761,11 @@ export class Snap {
 												controller.services,
 												controller.url,
 												controller.context,
-												(cntrlr) => {
+												async (cntrlr) => {
+													await runBind(cntrlr as AutocompleteController);
 													if (cntrlr) resolve(cntrlr);
 												}
 											);
-											runBind();
 											targetFunction({ controller: cntrlr, ...target }, elem, originalElem!);
 											cntrlr.addTargeter(targeter);
 										}
