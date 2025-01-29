@@ -1,0 +1,84 @@
+{
+  "pagination": {
+    "totalResults": 1,
+    "page": 1,
+    "pageSize": 30,
+    "totalPages": 1
+  },
+  "results": [
+    {
+      "id": "182146",
+      "mappings": {
+        "core": {
+          "uid": "182146",
+          "sku": "C-AD-W1-1869P",
+          "name": "Stripe Out White Off-The-Shoulder Dress",
+          "url": "/product/C-AD-W1-1869P",
+          "addToCartUrl": "/product/C-AD-W1-1869P",
+          "price": 48,
+          "msrp": 50,
+          "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/4468_copyright_reddressboutique_2017__large.jpg",
+          "secureImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/4468_copyright_reddressboutique_2017__large.jpg",
+          "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/4468_copyright_reddressboutique_2017__thumb_med.jpg",
+          "rating": "5",
+          "ratingCount": "1111",
+          "description": "Are you Stripe Out of ideas for what to wear this weekend on that trip you've got coming up with your friends? Afraid you'll be the odd one out and everyone else will be all cute and trendy and there you'll be ... not trendy and wearing the same old things you've been wearing on this annual getaway for years? Lucky for you, here's the dress you've been searching for. Doesn't matter what else you pack (it does, you'll want to continue to shop with us, we were just being nice) this is the piece that will set you apart from everyone else (that is absolutely true, you will be a Goddess among women). Take that, bad fashion moments of the past! Striped dress features 3/4 sleeve bell sleeves with a partially elastic/open back. Model is wearing a small. • 97% Cotton 3% Spandex • Machine Wash Cold • Lined • Made in the USA",
+          "stockMessage": "In stock",
+          "brand": "Adrienne",
+          "popularity": "4461",
+          "caption": "Captions!"
+        }
+      },
+      "attributes": {
+        "id": "b419ddfcad5f87ee49c786eb5f8621fd",
+        "intellisuggestData": "eJyyKK0sMcplYEgpSi0uZnDWdXTRDTfUNbQwswxgMGQwZDBgMDSyNGdIL8pMAQQAAP__9rsKZQ",
+        "intellisuggestSignature": "be0783431378a1700c8e0e498aa928696c08495713585d89fd975e3ba40c0c4d",
+        "product_type_unigram": "dress"
+      },
+      "children": []
+    }
+  ],
+  "filters": [],
+  "facets": [],
+  "sorting": [],
+  "merchandising": { 
+    "campaigns": [],
+    "redirect": "",
+    "content": { 
+      "inline": [
+        {
+          "value": "<script data-banner-type=\"html\" data-banner-html=\"one\" type=\"text/widget\"></script>one",
+          "config": {
+            "position": {
+              "index": 0
+            }
+          }
+        },
+        {
+          "value": "<script data-banner-type=\"html\" data-banner-html=\"\" type=\"text/widget\"></script>",
+          "config": {
+            "position": {
+              "index": 4
+            }
+          }
+        }
+      ]
+    }
+  },
+  "search": {
+    "query": "dress"
+  },
+  "autocomplete": {
+    "query": "dress",
+    "suggested": {
+      "text": "dress",
+      "type": "exact",
+      "source": "popular-query"
+    },
+    "alternatives": [
+      {
+        "text": "red dress"
+      }
+    ]
+  }
+}
