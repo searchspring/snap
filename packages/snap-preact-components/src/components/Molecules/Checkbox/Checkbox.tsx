@@ -14,21 +14,20 @@ import { useA11y } from '../../../hooks/useA11y';
 
 const CSS = {
 	checkbox: ({ size, color, theme }: Partial<CheckboxProps>) => {
-		const pixelSize = isNaN(Number(size)) ? size : `${size}px`;
 		return css({
 			display: 'inline-flex',
 			alignItems: 'center',
 			justifyContent: 'center',
-			height: pixelSize,
-			width: pixelSize,
+			height: size,
+			width: size,
 			border: `1px solid ${color || theme?.colors?.primary || '#333'}`,
 			'&.ss__checkbox--disabled': {
 				opacity: 0.7,
 			},
 			'& .ss__checkbox__empty': {
 				display: 'inline-block',
-				width: `calc(${pixelSize} - 30%)`,
-				height: `calc(${pixelSize} - 30%)`,
+				width: `calc(${size} - 30%)`,
+				height: `calc(${size} - 30%)`,
 			},
 		});
 	},
@@ -53,6 +52,8 @@ export const Checkbox = observer((properties: CheckboxProps): JSX.Element => {
 
 	const { checked, color, disabled, icon, iconColor, onClick, size, startChecked, native, disableA11y, disableStyles, className, style } = props;
 
+	const pixelSize = isNaN(Number(size)) ? size : `${size}px`;
+
 	const subProps: CheckboxSubProps = {
 		icon: {
 			// default props
@@ -65,7 +66,7 @@ export const Checkbox = observer((properties: CheckboxProps): JSX.Element => {
 				color: iconColor || color || theme?.colors?.primary,
 				disableStyles,
 				icon,
-				size: size && `calc(${size} - 30%)`,
+				size: pixelSize && `calc(${pixelSize} - 30%)`,
 			}),
 			// component theme overrides
 			theme: props.theme,
@@ -99,7 +100,7 @@ export const Checkbox = observer((properties: CheckboxProps): JSX.Element => {
 		if (native) {
 			styling.css = [CSS.native(), style];
 		} else {
-			styling.css = [CSS.checkbox({ size, color, theme }), style];
+			styling.css = [CSS.checkbox({ size: pixelSize, color, theme }), style];
 		}
 	} else if (style) {
 		styling.css = [style];
