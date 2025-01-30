@@ -508,10 +508,6 @@ function createPlugins(
 		templatesStore.library.import.plugins.common.logger,
 		deepmerge(templateConfig.plugins?.common?.logger || {}, controllerConfig?.plugins?.common?.logger || {}),
 	]);
-	plugins.push([
-		templatesStore.library.import.plugins.common.addToCart,
-		deepmerge(templateConfig.plugins?.common?.addToCart || {}, controllerConfig?.plugins?.common?.addToCart || {}),
-	]);
 
 	switch (templatesStore.platform) {
 		case 'shopify':
@@ -548,6 +544,11 @@ function createPlugins(
 				deepmerge(templateConfig.plugins?.magento2?.addToCart || {}, controllerConfig?.plugins?.magento2?.addToCart || {}),
 			]);
 			break;
+		case 'other':
+			plugins.push([
+				templatesStore.library.import.plugins.common.addToCart,
+				deepmerge(templateConfig.plugins?.common?.addToCart || {}, controllerConfig?.plugins?.common?.addToCart || {}),
+			]);
 		default:
 			break;
 	}

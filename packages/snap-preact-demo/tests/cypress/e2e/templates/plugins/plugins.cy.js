@@ -10,7 +10,7 @@ describe('plugins work based on plaform setting', () => {
 					siteId: '8uyt2m',
 					language: 'en',
 					currency: 'usd',
-					platform: undefined,
+					platform: undefined, // defaults to 'other'
 				},
 				search: {
 					targets: [
@@ -27,9 +27,10 @@ describe('plugins work based on plaform setting', () => {
 
 		cy.snapController().then((controller) => {
 			const expectedPluginList = [
-				'pluginBackgroundFilters', //common
-				'pluginScrollToTop', //common
-				'pluginLogger', //common
+				'pluginBackgroundFilters', // common
+				'pluginScrollToTop', // common
+				'pluginLogger', // common
+				'pluginAddToCart', // common (when using 'other' platform)
 			];
 			expect(controller.config.plugins.length).to.equal(expectedPluginList.length);
 
@@ -63,9 +64,9 @@ describe('plugins work based on plaform setting', () => {
 
 		cy.snapController().then((controller) => {
 			const expectedPluginList = [
-				'pluginBackgroundFilters', //common
-				'pluginScrollToTop', //common
-				'pluginLogger', //common
+				'pluginBackgroundFilters', // common
+				'pluginScrollToTop', // common
+				'pluginLogger', // common
 			];
 			expect(controller.config.plugins.length).to.equal(expectedPluginList.length);
 
@@ -99,9 +100,10 @@ describe('plugins work based on plaform setting', () => {
 
 		cy.snapController().then((controller) => {
 			const expectedPluginList = [
-				'pluginBackgroundFilters', //common
-				'pluginScrollToTop', //common
-				'pluginLogger', //common
+				'pluginBackgroundFilters', // common
+				'pluginScrollToTop', // common
+				'pluginLogger', // common
+				'pluginAddToCart', // common (when using 'other' platform)
 			];
 			expect(controller.config.plugins.length).to.equal(expectedPluginList.length);
 
@@ -168,7 +170,7 @@ describe('plugins work based on plaform setting', () => {
 					siteId: '8uyt2m',
 					language: 'en',
 					currency: 'usd',
-					platform: 'common',
+					platform: 'other',
 				},
 				plugins: {
 					common: {
@@ -199,10 +201,10 @@ describe('plugins work based on plaform setting', () => {
 
 		cy.snapController().then(async (controller) => {
 			const expectedPluginList = [
-				'pluginBackgroundFilters', //common
-				'pluginScrollToTop', //common
-				'pluginLogger', //common
-				'pluginAddToCart', //common
+				'pluginBackgroundFilters', // common
+				'pluginScrollToTop', // common
+				'pluginLogger', // common
+				'pluginAddToCart', // common
 			];
 
 			expect(controller.config.plugins.length).to.equal(expectedPluginList.length);
@@ -242,9 +244,9 @@ describe('plugins work based on plaform setting', () => {
 
 		cy.snapController().then((controller) => {
 			const expectedPluginList = [
-				'pluginBackgroundFilters', //common
-				'pluginScrollToTop', //common
-				'pluginLogger', //common
+				'pluginBackgroundFilters', // common
+				'pluginScrollToTop', // common
+				'pluginLogger', // common
 				'pluginShopifyBackgroundFilters',
 				'pluginShopifyMutateResults',
 				'pluginShopifyAddToCart',
@@ -281,9 +283,9 @@ describe('plugins work based on plaform setting', () => {
 
 		cy.snapController().then((controller) => {
 			const expectedPluginList = [
-				'pluginBackgroundFilters', //common
-				'pluginScrollToTop', //common
-				'pluginLogger', //common
+				'pluginBackgroundFilters', // common
+				'pluginScrollToTop', // common
+				'pluginLogger', // common
 				'pluginBigcommerceBackgroundFilters',
 				'pluginBigcommerceAddToCart',
 			];
@@ -319,9 +321,9 @@ describe('plugins work based on plaform setting', () => {
 
 		cy.snapController().then((controller) => {
 			const expectedPluginList = [
-				'pluginBackgroundFilters', //common
-				'pluginScrollToTop', //common
-				'pluginLogger', //common
+				'pluginBackgroundFilters', // common
+				'pluginScrollToTop', // common
+				'pluginLogger', // common
 				'pluginMagento2BackgroundFilters',
 				'pluginMagento2AddToCart',
 			];
