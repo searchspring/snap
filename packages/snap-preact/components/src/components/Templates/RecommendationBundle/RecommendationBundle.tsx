@@ -158,6 +158,7 @@ export const RecommendationBundle = observer((properties: RecommendationBundlePr
 		ctaButtonSuccessText: 'Bundle Added!',
 		ctaButtonSuccessTimeout: 2000,
 		ctaInline: true,
+		onAddToCart: (e, items) => controller?.addToCart && controller.addToCart(items),
 		// global theme
 		...globalTheme?.components?.recommendationBundle,
 		...properties,
@@ -678,7 +679,7 @@ export interface RecommendationBundleProps extends ComponentProps {
 	controller: RecommendationController;
 	results?: Product[];
 	limit?: number;
-	onAddToCart: (e: MouseEvent, items: Product[]) => void;
+	onAddToCart?: (e: MouseEvent, items: Product[]) => void;
 	title?: JSX.Element | string;
 	breakpoints?: BreakpointsProps;
 	resultComponent?: ResultComponent<{

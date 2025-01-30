@@ -76,7 +76,7 @@ It is possible to switch language and currency at run-time using methods on the 
 
 
 ### Plugins
-Plugins provide functionality to tie into various events within the Snap controllers by adding middleware on these events. The `plugins` object allows you to use and configure various plugins that are available within Snap Templates. Plugin configuration are grouped by the integration platform, `shopify` and `common` (applies to all platforms)
+Plugins provide functionality to tie into various events within the Snap controllers by adding middleware on these events. The `plugins` object allows you to use and configure various plugins that are available within Snap Templates. Plugin configuration are grouped by the integration platform, `shopify`, `magento2`, `bigCommerce` and `common` (applies to all platforms)
 
 | Configuration Option | Description | Type | Default |
 |----------------------|-------------|------|---------|
@@ -84,21 +84,51 @@ Plugins provide functionality to tie into various events within the Snap control
 | `plugins.common` | Platform-specific configurations | Object | ➖ |
 | `plugins.common.backgroundFilters` | Background filter configurations | Object | Enabled |
 | `plugins.common.scrollToTop` | Configuration for scrolling to top after search | Object | Enabled |
+| `plugins.common.addToCart` | Configuration for add to cart function | Object | Disabled |
+
 
 > [!NOTE]
 > See common plugins documentation under the [Packages > Platform](https://github.com/searchspring/snap/tree/main/packages/snap-platforms/common) section.
 
 
 ### Shopify Plugins
-In addition when plugins is `shopify`, the following plugins are available:
+When `config.platform` is `shopify`, the following plugins are available:
 
 | Configuration Option | Description | Type | Default |
 |----------------------|-------------|------|---------|
 | `plugins.shopify.mutateResults` | Shopify Updating results configuration | Object | Enabled |
+| `plugins.shopify.addToCart` | Shopify add to cart function configuration | Object | Enabled |
+| `plugins.shopify.backgroundFilters` | Background filter configurations | Object | Enabled |
+
 
 > [!NOTE]
 > See shopify specific plugins documentation under the [Packages > Platform > Shopify](https://github.com/searchspring/snap/tree/main/packages/snap-platforms/shopify) section.
 
+
+### Magento2 Plugins
+When `config.platform` is `magento2`, the following plugins are available:
+
+| Configuration Option | Description | Type | Default |
+|----------------------|-------------|------|---------|
+| `plugins.magento2.addToCart` | Magento2 add to cart function configuration | Object | Enabled |
+| `plugins.magento2.backgroundFilters` | Background filter configurations | Object | Enabled |
+
+
+> [!NOTE]
+> See Magento specific plugins documentation under the [Packages > Platform > Magento2](https://github.com/searchspring/snap/tree/main/packages/snap-platforms/magento2) section.
+
+
+### BigCommerce Plugins
+When `config.platform` is `bigCommerce`, the following plugins are available:
+
+| Configuration Option | Description | Type | Default |
+|----------------------|-------------|------|---------|
+| `plugins.bigCommerce.addToCart` | BigCommerce add to cart function configuration | Object | Enabled |
+| `plugins.bigCommerce.backgroundFilters` | Background filter configurations | Object | Enabled |
+
+
+> [!NOTE]
+> See BigCommerce specific plugins documentation under the [Packages > Platform > BigCommerce](https://github.com/searchspring/snap/tree/main/packages/snap-platforms/bigcommerce) section.
 
 
 ### Language Translations
@@ -229,6 +259,7 @@ In addition to the common target properties, the following properties apply to t
 | Configuration Option | Description | Type | Default |
 |----------------------|-------------|------|---------|
 | `search` | Search configuration | Object | ➖ |
+| `search.plugins` | Search specific plugins configurations | Object | ➖ |
 | `search.targets` | Search target configurations | Array | Required |
 | `search.targets[].selector` | CSS selector for search target | String | Required |
 | `search.targets[].component` | Component to use for search | String | Required |
@@ -246,6 +277,7 @@ In addition to the common target properties, the following properties apply to t
 | Configuration Option | Description | Type | Default |
 |----------------------|-------------|------|---------|
 | `autocomplete` | Autocomplete configuration | Object | ➖ |
+| `autocomplete.plugins` | Autocomplete specific plugins configurations | Object | ➖ |
 | `autocomplete.inputSelector` | CSS selector for autocomplete input | String | Required |
 | `autocomplete.targets` | Autocomplete target configurations | Array | Required |
 | `autocomplete.targets[].selector` | CSS selector for autocomplete target | String | Required |
@@ -261,6 +293,7 @@ In addition to the defining recommendation targets, the recommendation configura
 | Configuration Option | Description | Type | Default |
 |----------------------|-------------|------|---------|
 | `recommendation` | Recommendation configuration | Object | ➖ |
+| `recommendation.plugins` | Recommendation specific plugins configurations | Object | ➖ |
 | `recommendation.settings` | Recommendation Instantiator Config Settings | RecommendationInstantiatorConfigSettings | ➖ |
 
 

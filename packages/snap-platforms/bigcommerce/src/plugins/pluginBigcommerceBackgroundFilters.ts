@@ -1,9 +1,19 @@
 import type { ClientGlobals } from '@searchspring/snap-client';
 import type { AbstractController } from '@searchspring/snap-controller';
 import type { Next } from '@searchspring/snap-event-manager';
-import type { PluginBackgroundFilterGlobal } from '../../../common/src';
+import type { AbstractPluginConfig, PluginBackgroundFilterGlobal } from '../../../common/src/types';
 
-export const pluginBackgroundFiltersBigcommerce = (cntrlr: AbstractController) => {
+export type PluginBigcommerceBackgroundFiltersConfig = AbstractPluginConfig & {
+	fieldNames?: {
+		brand?: string;
+		category?: string;
+	};
+};
+
+export const pluginBigcommerceBackgroundFilters = (cntrlr: AbstractController, config?: PluginBigcommerceBackgroundFiltersConfig) => {
+	// do nothing if plugin is disabled
+	if (config?.enabled === false) return;
+
 	// only applies to search controllers
 	if (cntrlr.type != 'search') return;
 
@@ -13,20 +23,21 @@ export const pluginBackgroundFiltersBigcommerce = (cntrlr: AbstractController) =
 		const categoryPath = replaceCharacters(cntrlr.context.category.path);
 		backgroundFilters.push({
 			type: 'value',
-			field: 'categories_hierarchy',
+			field: config?.fieldNames?.category || 'categories_hierarchy',
 			value: categoryPath,
 			background: true,
 		});
-	} else if (cntrlr.context?.brand) {
-		const brandName = replaceCharacters(cntrlr.context.brand);
+	} else if (cntrlr.context?.brand?.name) {
+		const brandName = replaceCharacters(cntrlr.context.brand.name);
 		backgroundFilters.push({
 			type: 'value',
-			field: 'brand',
+			field: config?.fieldNames?.brand || 'brand',
 			value: brandName,
 			background: true,
 		});
 	}
 
+	// don't do anything if there are no background filters found
 	if (!backgroundFilters.length) {
 		return;
 	}

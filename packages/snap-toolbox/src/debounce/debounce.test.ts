@@ -13,15 +13,15 @@ describe('debounce', () => {
 		debouncedFunc();
 		debouncedFunc();
 		debouncedFunc();
-		expect(func).not.toBeCalled();
+		expect(func).not.toHaveBeenCalled();
 
 		await wait(100);
 
-		expect(func).not.toBeCalled();
+		expect(func).not.toHaveBeenCalled();
 
 		await wait(100);
 
-		expect(func).toBeCalled();
+		expect(func).toHaveBeenCalled();
 		expect(func).toHaveBeenCalledTimes(1);
 	});
 
@@ -32,14 +32,13 @@ describe('debounce', () => {
 		debouncedFunc();
 		debouncedFunc();
 		debouncedFunc();
-		expect(func).not.toBeCalled();
+		expect(func).not.toHaveBeenCalled();
 
-		await wait(delay - 100);
-		expect(func).not.toBeCalled();
+		await wait(delay / 2);
+		expect(func).not.toHaveBeenCalled();
+		await wait(delay / 2);
 
-		await wait(100);
-
-		expect(func).toBeCalled();
+		expect(func).toHaveBeenCalled();
 		expect(func).toHaveBeenCalledTimes(1);
 	});
 });

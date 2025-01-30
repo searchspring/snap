@@ -59,6 +59,13 @@ Invoking the `init` method is required to subscribe to changes that occur in the
 recommendationController.init();
 ```
 
+## AddToCart
+This will invoke an addToCart event (see below). Takes an array of Products as a parameter. 
+
+```typescript
+recommendationController.addToCart(products);
+```
+
 ## Events
 ### init
 - Called with `eventData` = { controller }
@@ -82,6 +89,10 @@ recommendationController.init();
 ### afterStore
 - Called with `eventData` = { controller, request, response }
 - Always invoked after data has been stored in mobx store
+
+### addToCart
+- Called with `eventData` = { controller, products }
+- Invoked when addToCart method is called
 
 ### track.product.click
 - Called with `eventData` = { controller, event, result, trackEvent } 
@@ -107,7 +118,6 @@ recommendationController.init();
 ### track.render
 - Called with `eventData` = { controller, trackEvent } 
 - Always invoked after `track.render()` method has been invoked
-
 
 ## Variants
 For variant integration details, see [Variant Integration Docs](https://github.com/searchspring/snap/blob/main/docs/INTEGRATION_VARIANTS.md)

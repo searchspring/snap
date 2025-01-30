@@ -78,7 +78,7 @@ describe('FinderSelectionStore', () => {
 			selectionValue = store[0].values[1].value; // "Bed Racks - Tool Boxes & Liners"
 			store[0].select(selectionValue); // make selection
 
-			expect(fn).toBeCalled();
+			expect(fn).toHaveBeenCalled();
 
 			// change data to simulate API call due to urlManager change via set().go() invocation
 			data = mockData.searchMeta('hierarchy_selected');
@@ -212,7 +212,7 @@ describe('FinderSelectionStore', () => {
 			selectionValue = store[0].values[1].value; // "Bed Racks - Tool Boxes & Liners"
 			store[0].select(selectionValue); // make selection
 
-			expect(fn).toBeCalled();
+			expect(fn).toHaveBeenCalled();
 
 			// change data to simulate API call due to urlManager change via set().go() invocation
 			data = mockData.searchMeta('hierarchy_selected');
@@ -319,7 +319,7 @@ describe('FinderSelectionStore', () => {
 
 			// make selection
 			store[0].select(selectionValue);
-			expect(fn).toBeCalled();
+			expect(fn).toHaveBeenCalled();
 
 			data = mockData.searchMeta('non_hierarchy_selected');
 

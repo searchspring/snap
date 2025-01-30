@@ -7,7 +7,7 @@ import { getSearchParams } from '../utils/getParams';
 import { ControllerTypes } from '../types';
 
 import type { BeaconEvent } from '@searchspring/snap-tracker';
-import type { SearchStore } from '@searchspring/snap-store-mobx';
+import type { Product, SearchStore } from '@searchspring/snap-store-mobx';
 import type {
 	SearchControllerConfig,
 	AfterSearchObj,
@@ -525,6 +525,17 @@ export class SearchController extends AbstractController {
 		} finally {
 			this.store.loading = false;
 		}
+	};
+
+	addToCart = async (products: Product[]): Promise<void> => {
+		const eventContext = {
+			controller: this,
+			products: products,
+		};
+
+		this.eventManager.fire('addToCart', eventContext);
+
+		// TODO: fire some future beacon event
 	};
 }
 

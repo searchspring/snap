@@ -1,6 +1,6 @@
 import type { Product } from '@searchspring/snap-store-mobx';
 
-type BigCommerceAddToCartConfig = {
+export type BigCommerceAddToCartConfig = {
 	redirect?: boolean | string;
 	idFieldName?: string; // display.mappings.core.id
 };
@@ -13,7 +13,7 @@ type LineItem = {
 
 export const addToCart = async (items: Product[], config?: BigCommerceAddToCartConfig) => {
 	if (!items) {
-		console.error('Error: no products to add');
+		console.error('bigcommerce/addToCart: No products to add!');
 		return;
 	}
 
@@ -29,7 +29,7 @@ export const addToCart = async (items: Product[], config?: BigCommerceAddToCartC
 				if (level && level[field]) {
 					level = level[field];
 				} else {
-					console.error(`Error: couldnt find column in item data. please verify 'idFieldName' in the config.`);
+					console.error(`bigcommerce/addToCart: Could not find column in item data. Please verify 'idFieldName' in the config.`);
 					level = undefined;
 					id = undefined;
 					return;
@@ -108,7 +108,8 @@ async function addLineItemsToCart(lineItems: LineItem[]): Promise<any> {
 			return responseData;
 		}
 	} catch (err) {
-		console.error(`Error: could not add to cart.`, err);
+		console.error('bigcommerce/addToCart: Encountered an error!');
+		console.error(err);
 	}
 }
 
