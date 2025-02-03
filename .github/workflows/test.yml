@@ -45,7 +45,7 @@ jobs:
       - name: Install packages
         run: npm ci
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.MACHINE_001 }}
+          NODE_AUTH_TOKEN: ${{ secrets.SEARCHSPRING_PUBLISH }}
 
       - name: Build
         run: npm run build
