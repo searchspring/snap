@@ -95,7 +95,7 @@ type LibraryStoreConfig = {
 };
 
 export type CurrencyCodes = 'usd' | 'eur' | 'aud';
-export type LanguageCodes = 'en' | 'fr';
+export type LanguageCodes = 'en' | 'fr' | 'es';
 
 export class LibraryStore {
 	themes: {
@@ -261,6 +261,9 @@ export class LibraryStore {
 			},
 			fr: async () => {
 				return this.locales.languages.fr || (this.locales.languages.fr = transformTranslationsToTheme((await import('./library/languages/fr')).fr));
+			},
+			es: async () => {
+				return this.locales.languages.es || (this.locales.languages.es = transformTranslationsToTheme((await import('./library/languages/es')).es));
 			},
 		},
 		currency: {
