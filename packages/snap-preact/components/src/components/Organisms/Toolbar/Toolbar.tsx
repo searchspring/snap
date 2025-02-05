@@ -185,7 +185,7 @@ export const Toolbar = observer((properties: ToolbarProps): JSX.Element => {
 
 				{!hideFilterSummary && <FilterSummary {...subProps.FilterSummary} />}
 
-				{!hideLayoutSelector && themeStore && props.theme?.layoutOptions?.length && (
+				{!hideLayoutSelector && themeStore && props.theme?.layoutOptions && props.theme.layoutOptions.length > 0 && (
 					<LayoutSelector
 						onSelect={(e, option) => {
 							if (option) {
