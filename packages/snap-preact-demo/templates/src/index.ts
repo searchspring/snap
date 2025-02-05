@@ -9,7 +9,7 @@ let config: SnapTemplatesConfig = {
 		siteId: '8uyt2m',
 		language: 'en',
 		currency: 'usd',
-		platform: 'shopify',
+		platform: 'other',
 	},
 	components: {
 		result: {
@@ -122,7 +122,6 @@ let config: SnapTemplatesConfig = {
 		],
 	},
 	autocomplete: {
-		inputSelector: 'input.searchspring-ac',
 		targets: [
 			{
 				selector: 'input.searchspring-ac',

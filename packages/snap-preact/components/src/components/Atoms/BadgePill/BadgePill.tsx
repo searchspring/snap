@@ -2,10 +2,10 @@ import { Fragment, h } from 'preact';
 
 import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
-import { observer } from 'mobx-react-lite';
-import { Theme, useTheme, CacheProvider } from '../../../providers';
+import { observer } from 'mobx-react';
+import { Theme, useTheme, CacheProvider, useTreePath } from '../../../providers';
 import { ComponentProps, StyleScript } from '../../../types';
-import { mergeStyles } from '../../../utilities';
+import { mergeProps, mergeStyles } from '../../../utilities';
 
 const defaultStyles: StyleScript<BadgePillProps> = ({ color, colorText }) => {
 	return css({
@@ -23,17 +23,17 @@ const defaultStyles: StyleScript<BadgePillProps> = ({ color, colorText }) => {
 };
 export const BadgePill = observer((properties: BadgePillProps): JSX.Element => {
 	const globalTheme: Theme = useTheme();
+	const globalTreePath = useTreePath();
 
-	const props: BadgePillProps = {
+	const defaultProps: Partial<BadgePillProps> = {
 		// default props
 		color: 'rgba(58, 35, 173, 1)',
 		colorText: '#fff',
-		// global theme
-		...globalTheme?.components?.badgePill,
-		// props
-		...properties,
-		...properties.theme?.components?.badgePill,
+		treePath: globalTreePath,
 	};
+
+	const props = mergeProps('badgePill', globalTheme, defaultProps, properties);
+
 	const { value, tag, className } = props;
 
 	const styling = mergeStyles<BadgePillProps>(props, defaultStyles);

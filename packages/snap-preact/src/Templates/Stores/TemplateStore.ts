@@ -5,9 +5,25 @@ import { ThemeStore, ThemeStoreThemeConfig } from './ThemeStore';
 import { TargetStore } from './TargetStore';
 import { CurrencyCodes, LanguageCodes, LibraryImports, LibraryStore } from './LibraryStore';
 import { debounce } from '@searchspring/snap-toolbox';
-import type { ShopifyPluginMutateResultsConfig } from '@searchspring/snap-platforms/shopify';
-import type { CommonPluginBackgroundFilterConfig } from '@searchspring/snap-platforms/common';
-import type { CommonPluginScrollToTopConfig } from '@searchspring/snap-platforms/common';
+import type {
+	PluginAddToCartConfig as PluginShopifyAddToCartConfig,
+	PluginBackgroundFiltersConfig as PluginShopifyBackgroundFiltersConfig,
+	PluginMutateResultsConfig as PluginShopifyMutateResultsConfig,
+} from '@searchspring/snap-platforms/shopify';
+import type {
+	PluginAddToCartConfig as PluginMagento2AddToCartConfig,
+	PluginBackgroundFiltersConfig as PluginMagento2BackgroundFiltersConfig,
+} from '@searchspring/snap-platforms/magento2';
+import type {
+	PluginAddToCartConfig as PluginBigCommerceAddToCartConfig,
+	PluginBackgroundFiltersConfig as PluginBigcommerceBackgroundFiltersConfig,
+} from '@searchspring/snap-platforms/bigcommerce';
+import type {
+	PluginAddToCartConfig,
+	PluginBackgroundFiltersConfig,
+	PluginLoggerConfig,
+	PluginScrollToTopConfig,
+} from '@searchspring/snap-platforms/common';
 import type {
 	LangComponentOverrides,
 	ResultComponent,
@@ -66,11 +82,32 @@ export type TemplateStoreComponentConfig = {
 };
 
 export type CommonPlugins = {
-	backgroundFilters?: CommonPluginBackgroundFilterConfig;
-	scrollToTop?: CommonPluginScrollToTopConfig;
+	backgroundFilters?: PluginBackgroundFiltersConfig;
+	scrollToTop?: PluginScrollToTopConfig;
+	logger?: PluginLoggerConfig;
+	addToCart?: PluginAddToCartConfig;
 };
 export type ShopifyPlugins = {
-	mutateResults?: ShopifyPluginMutateResultsConfig;
+	backgroundFilters?: PluginShopifyBackgroundFiltersConfig;
+	mutateResults?: PluginShopifyMutateResultsConfig;
+	addToCart?: PluginShopifyAddToCartConfig;
+};
+
+export type BigCommercePlugins = {
+	backgroundFilters?: PluginBigcommerceBackgroundFiltersConfig;
+	addToCart?: PluginBigCommerceAddToCartConfig;
+};
+
+export type Magento2Plugins = {
+	backgroundFilters?: PluginMagento2BackgroundFiltersConfig;
+	addToCart?: PluginMagento2AddToCartConfig;
+};
+
+export type PluginsConfigs = {
+	common?: CommonPlugins;
+	shopify?: ShopifyPlugins;
+	bigCommerce?: BigCommercePlugins;
+	magento2?: Magento2Plugins;
 };
 
 export type TemplatesStoreConfigConfig = {
@@ -81,10 +118,7 @@ export type TemplatesStoreConfigConfig = {
 		language?: LanguageCodes;
 		platform: IntegrationPlatforms;
 	};
-	plugins?: {
-		common?: CommonPlugins;
-		shopify?: ShopifyPlugins;
-	};
+	plugins?: PluginsConfigs;
 	translations?: {
 		[currencyName in LanguageCodes]?: LangComponentOverrides;
 	};

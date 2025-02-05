@@ -4,7 +4,7 @@ import { jsx } from '@emotion/react';
 import { observer } from 'mobx-react-lite';
 import classnames from 'classnames';
 import { cloneWithProps } from '../../../utilities';
-import { Button } from '../../Atoms/Button';
+import { Button, ButtonProps } from '../../Atoms/Button';
 import { Price, PriceProps } from '../../Atoms/Price';
 import { Theme, useTheme } from '../../../providers';
 import { Icon, IconProps, IconType } from '../../Atoms/Icon';
@@ -50,16 +50,26 @@ export const BundledCTA = observer((properties: BundledCTAProps): JSX.Element =>
 		},
 		subtotalStrike: {
 			// default props
+			name: 'bundle-msrp',
 			// global theme
-			...globalTheme?.components?.icon,
+			...globalTheme?.components?.price,
 			// component theme overrides
 			theme: props?.theme,
 			treePath,
 		},
 		subtotalPrice: {
 			// default props
+			name: 'bundle-price',
 			// global theme
-			...globalTheme?.components?.icon,
+			...globalTheme?.components?.price,
+			// component theme overrides
+			theme: props?.theme,
+			treePath,
+		},
+		button: {
+			// default props
+			// global theme
+			...globalTheme?.components?.button,
 			// component theme overrides
 			theme: props?.theme,
 			treePath,
@@ -99,6 +109,7 @@ export const BundledCTA = observer((properties: BundledCTAProps): JSX.Element =>
 					</div>
 
 					<Button
+						{...subProps.button}
 						className={classnames('ss__recommendation-bundle__wrapper__cta__button', {
 							'ss__recommendation-bundle__wrapper__cta__button--added': addedToCart,
 						})}
@@ -118,6 +129,7 @@ export interface BundleSelectorSubProps {
 	subtotalStrike: Partial<PriceProps>;
 	subtotalPrice: Partial<PriceProps>;
 	icon: Partial<IconProps>;
+	button: Partial<ButtonProps>;
 }
 
 export interface BundledCTAProps extends ComponentProps {

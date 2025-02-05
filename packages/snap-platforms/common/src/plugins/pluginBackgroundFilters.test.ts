@@ -123,7 +123,7 @@ describe('common/pluginBackgroundFilters', () => {
 				field: 'brand',
 				value: 'nike',
 				// @ts-ignore - bad controller type
-				controllerTypes: ['dne'],
+				controllerTypes: ['dne'], // should not match
 			},
 			{
 				type: 'range',
@@ -160,7 +160,51 @@ describe('common/pluginBackgroundFilters', () => {
 		expect(errorLogMock).toHaveBeenCalledWith(expect.any(String), expect.any(Object));
 	});
 
-	it('it has background filters from context and config', async () => {
+	it('can use background filters from both context and config and will de-dupe background filters', async () => {
+		const filters: (PluginBackgroundFilter & PluginControl)[] = [
+			{
+				type: 'value',
+				field: 'color',
+				value: 'red',
+			},
+			{
+				type: 'range',
+				field: 'price',
+				value: { low: 10, high: 20 },
+			},
+		];
+
+		const contextFilters: (PluginBackgroundFilter & PluginControl)[] = [
+			{
+				type: 'value',
+				field: 'size',
+				value: 'small',
+			},
+			{
+				type: 'range',
+				field: 'price',
+				value: { low: 20, high: 30 },
+			},
+		];
+
+		const contextMock = {
+			backgroundFilters: filters,
+		};
+		const controller = new SearchController(searchConfig, createControllerServices(), contextMock);
+
+		expect(controller.context.backgroundFilters).toStrictEqual(filters);
+
+		pluginBackgroundFilters(controller, { filters: contextFilters });
+		await controller.init();
+
+		expect(controller.config.globals!.filters).toStrictEqual([
+			...filters.map((filter) => ({ ...filter, background: true })),
+			...contextFilters.map((filter) => ({ ...filter, background: true })),
+		]);
+		expect(errorLogMock).not.toHaveBeenCalled();
+	});
+
+	it('can use background filters from both context and config and will de-dupe background filters', async () => {
 		const filters: (PluginBackgroundFilter & PluginControl)[] = [
 			{
 				type: 'value',
@@ -183,14 +227,11 @@ describe('common/pluginBackgroundFilters', () => {
 		pluginBackgroundFilters(controller, { filters });
 		await controller.init();
 
-		expect(controller.config.globals!.filters).toStrictEqual([
-			...filters.map((filter) => ({ ...filter, background: true })),
-			...contextMock.backgroundFilters.map((filter) => ({ ...filter, background: true })),
-		]);
+		expect(controller.config.globals!.filters).toStrictEqual([...filters.map((filter) => ({ ...filter, background: true }))]);
 		expect(errorLogMock).not.toHaveBeenCalled();
 	});
 
-	it('it has invalid background filters', async () => {
+	it('handles invalid background filters by logging warnings', async () => {
 		const filters = {
 			// not an array
 			type: 'value',

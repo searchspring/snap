@@ -40,6 +40,7 @@ export type ResultComponent<Props extends Record<string, any> = object> = React.
 		controller: AbstractController;
 		result: Product;
 		theme?: Theme;
+		treePath?: string;
 	} & Props
 >;
 
@@ -83,6 +84,7 @@ export type StylingCSS = Array<CSSObject | SerializedStyles | undefined>;
 export type RootNodeProperties = {
 	css?: StylingCSS;
 	'ss-name'?: string;
+	'ss-path'?: string;
 };
 
 export type SwatchOption = ListOption & {

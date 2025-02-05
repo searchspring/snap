@@ -4,7 +4,7 @@ import { observer } from 'mobx-react-lite';
 import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
 
-import { Theme, useTheme, CacheProvider } from '../../../providers';
+import { Theme, useTheme, CacheProvider, useTreePath } from '../../../providers';
 import { defined, mergeProps, mergeStyles } from '../../../utilities';
 import { ComponentProps, StyleScript } from '../../../types';
 import { Icon, IconProps } from '../../Atoms/Icon';
@@ -31,8 +31,10 @@ const defaultStyles: StyleScript<PaginationProps> = () => {
 
 export const Pagination = observer((properties: PaginationProps): JSX.Element => {
 	const globalTheme: Theme = useTheme();
+	const globalTreePath = useTreePath();
 	const defaultProps: Partial<PaginationProps> = {
 		pages: 5,
+		treePath: globalTreePath,
 	};
 
 	const props = mergeProps('pagination', globalTheme, defaultProps, properties);

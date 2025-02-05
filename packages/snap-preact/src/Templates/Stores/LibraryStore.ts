@@ -6,11 +6,16 @@ import type { TemplateStoreComponentConfig } from './TemplateStore';
 import type { PluginFunction } from '@searchspring/snap-controller';
 import { pluginBackgroundFilters as shopifyPluginBackgroundFilters } from './library/plugins/shopify/pluginBackgroundFilters';
 import { pluginMutateResults as shopifyPluginMutateResults } from './library/plugins/shopify/pluginMutateResults';
+import { pluginAddToCart as shopifyPluginAddToCart } from './library/plugins/shopify/pluginAddToCart';
+import { pluginAddToCart as bigCommercePluginAddToCart } from './library/plugins/bigCommerce/pluginAddToCart';
+import { pluginAddToCart as magento2PluginAddToCart } from './library/plugins/magento2/pluginAddToCart';
+import { pluginAddToCart as commonPluginAddToCart } from './library/plugins/common/pluginAddToCart';
 import { pluginBackgroundFilters as bigCommercePluginBackgroundFilters } from './library/plugins/bigCommerce/pluginBackgroundFilters';
 import { pluginBackgroundFilters as magento2PluginBackgroundFilters } from './library/plugins/magento2/pluginBackgroundFilters';
 import { pluginBackgroundFilters } from './library/plugins/common/pluginBackgroundFilters';
 import { pluginScrollToTop } from './library/plugins/common/pluginScrollToTop';
 import { pluginLogger } from './library/plugins/common/pluginLogger';
+import { CustomComponent } from './library/components/CustomComponent';
 
 type LibraryComponentImport = {
 	[componentName: string]: (args?: any) => Promise<FunctionalComponent<RenderableProps<any>>>;
@@ -29,17 +34,21 @@ export type LibraryImports = {
 		shopify: {
 			backgroundFilters: typeof shopifyPluginBackgroundFilters;
 			mutateResults: typeof shopifyPluginMutateResults;
+			addToCart: typeof shopifyPluginAddToCart;
 		};
 		bigcommerce: {
 			backgroundFilters: PluginFunction;
+			addToCart: typeof bigCommercePluginAddToCart;
 		};
 		magento2: {
 			backgroundFilters: PluginFunction;
+			addToCart: typeof magento2PluginAddToCart;
 		};
 		common: {
 			backgroundFilters: typeof pluginBackgroundFilters;
 			scrollToTop: typeof pluginScrollToTop;
 			logger: typeof pluginLogger;
+			addToCart: typeof commonPluginAddToCart;
 		};
 	};
 	component: {
@@ -87,7 +96,7 @@ type LibraryStoreConfig = {
 };
 
 export type CurrencyCodes = 'usd' | 'eur' | 'aud';
-export type LanguageCodes = 'en' | 'fr';
+export type LanguageCodes = 'en' | 'fr' | 'es';
 
 export class LibraryStore {
 	themes: {
@@ -141,17 +150,21 @@ export class LibraryStore {
 			shopify: {
 				backgroundFilters: shopifyPluginBackgroundFilters,
 				mutateResults: shopifyPluginMutateResults,
+				addToCart: shopifyPluginAddToCart,
 			},
 			bigcommerce: {
 				backgroundFilters: bigCommercePluginBackgroundFilters,
+				addToCart: bigCommercePluginAddToCart,
 			},
 			magento2: {
 				backgroundFilters: magento2PluginBackgroundFilters,
+				addToCart: magento2PluginAddToCart,
 			},
 			common: {
 				backgroundFilters: pluginBackgroundFilters,
 				scrollToTop: pluginScrollToTop,
 				logger: pluginLogger,
+				addToCart: commonPluginAddToCart,
 			},
 		},
 		component: {
@@ -250,6 +263,9 @@ export class LibraryStore {
 			fr: async () => {
 				return this.locales.languages.fr || (this.locales.languages.fr = transformTranslationsToTheme((await import('./library/languages/fr')).fr));
 			},
+			es: async () => {
+				return this.locales.languages.es || (this.locales.languages.es = transformTranslationsToTheme((await import('./library/languages/es')).es));
+			},
 		},
 		currency: {
 			usd: async () => {
@@ -300,7 +316,14 @@ export class LibraryStore {
 		// only allow certain types: 'results' and 'badges' - otherwise section components could be added (eg: 'search')
 		if (ALLOWED_CUSTOM_COMPONENT_TYPES.includes(type) && this.components[type]) {
 			this.import.component[type][name] = async () => {
-				return this.components[type][name] || (this.components[type][name] = await componentFn());
+				return (
+					this.components[type][name] ||
+					(this.components[type][name] = await CustomComponent({
+						type,
+						name,
+						componentFn,
+					}))
+				);
 			};
 		}
 	}

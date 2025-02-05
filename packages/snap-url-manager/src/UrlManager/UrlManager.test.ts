@@ -162,7 +162,7 @@ describe('UrlManager', () => {
 
 			urlManager.set({ foo: 'bar' }).merge('other', 'value wt').go();
 
-			expect(cb).toBeCalled();
+			expect(cb).toHaveBeenCalled();
 		});
 
 		it('passes in [next,prev] if value has not changed', () => {
@@ -184,7 +184,7 @@ describe('UrlManager', () => {
 
 			urlManager.go();
 
-			expect(cb).toBeCalled();
+			expect(cb).toHaveBeenCalled();
 		});
 
 		it('passes in [next,prev] if the url has updated since last state merge', () => {
@@ -201,7 +201,7 @@ describe('UrlManager', () => {
 
 			urlManager.set({ query: 'red' }).go();
 
-			expect(cb).toBeCalled();
+			expect(cb).toHaveBeenCalled();
 		});
 
 		it('auto-updates from watcher pool on URL change', () => {

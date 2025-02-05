@@ -33,6 +33,35 @@ describe('BundledRecommendations', () => {
 	describe('Setup', () => {
 		it('has valid config', () => {
 			cy.wrap(config).its('url').should('have.length.at.least', 1);
+
+			cy.on('window:before:load', (win) => {
+				win.mergeSnapConfig = {
+					themes: {
+						custom: {
+							extends: 'bocachica',
+							overrides: {
+								components: {
+									recommendationBundle: {
+										lazyRender: {
+											enabled: false,
+										},
+										speed: 0,
+									},
+								},
+							},
+						},
+					},
+					recommendation: {
+						bundle: {
+							Bundle: {
+								component: 'RecommendationBundle',
+								theme: 'custom',
+							},
+						},
+					},
+				};
+			});
+
 			cy.visit(config.url);
 			cy.scrollTo('bottom');
 			console.log(Cypress.browser);
@@ -199,11 +228,27 @@ describe('BundledRecommendations', () => {
 
 				cy.on('window:before:load', (win) => {
 					win.mergeSnapConfig = {
+						themes: {
+							custom: {
+								extends: 'bocachica',
+								overrides: {
+									components: {
+										recommendationBundle: {
+											lazyRender: {
+												enabled: false,
+											},
+											speed: 0,
+										},
+									},
+								},
+							},
+						},
 						recommendation: {
 							bundle: {
 								Bundle: {
 									component: 'RecommendationBundle',
 									resultComponent: 'CustomResult',
+									theme: 'custom',
 								},
 							},
 						},

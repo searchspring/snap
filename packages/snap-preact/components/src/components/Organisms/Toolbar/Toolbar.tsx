@@ -4,7 +4,7 @@ import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
 import { observer } from 'mobx-react-lite';
 
-import { Theme, useTheme, useSnap, CacheProvider } from '../../../providers';
+import { Theme, useTheme, useSnap, CacheProvider, useTreePath } from '../../../providers';
 import { ComponentProps, StyleScript } from '../../../types';
 import { FilterSummary, FilterSummaryProps } from '../FilterSummary';
 import { cloneWithProps, defined, mergeProps, mergeStyles } from '../../../utilities';
@@ -28,6 +28,7 @@ const defaultStyles: StyleScript<ToolbarProps> = ({}) => {
 
 export const Toolbar = observer((properties: ToolbarProps): JSX.Element => {
 	const globalTheme: Theme = useTheme();
+	const globalTreePath = useTreePath();
 
 	const snap = useSnap() as SnapTemplates;
 	const themeStore = snap?.templates?.getThemeStore(globalTheme.name);
@@ -38,6 +39,7 @@ export const Toolbar = observer((properties: ToolbarProps): JSX.Element => {
 		hidePerPage: false,
 		hideSortBy: false,
 		hidePagination: false,
+		treePath: globalTreePath,
 	};
 
 	const props = mergeProps('toolbar', globalTheme, defaultProps, properties);

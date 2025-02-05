@@ -6,7 +6,7 @@ import classnames from 'classnames';
 import { observer } from 'mobx-react-lite';
 
 import { ComponentProps, StyleScript } from '../../../types';
-import { Theme, useTheme, CacheProvider } from '../../../providers';
+import { Theme, useTheme, CacheProvider, useTreePath } from '../../../providers';
 import { useClickOutside } from '../../../hooks';
 import { cloneWithProps, mergeProps, mergeStyles } from '../../../utilities';
 import { useA11y } from '../../../hooks/useA11y';
@@ -38,9 +38,12 @@ const defaultStyles: StyleScript<DropdownProps> = ({ disableOverlay }) => {
 
 export const Dropdown = observer((properties: DropdownProps): JSX.Element => {
 	const globalTheme: Theme = useTheme();
-	const defaultProps = {
+	const globalTreePath = useTreePath();
+
+	const defaultProps: Partial<DropdownProps> = {
 		startOpen: false,
 		disableA11y: false,
+		treePath: globalTreePath,
 	};
 
 	const props = mergeProps('dropdown', globalTheme, defaultProps, properties);

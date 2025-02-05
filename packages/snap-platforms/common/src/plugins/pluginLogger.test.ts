@@ -37,7 +37,7 @@ const controllerServices: any = {
 	tracker: new Tracker(globals),
 };
 
-describe('pluginLogger', () => {
+describe('common/pluginLogger', () => {
 	beforeEach(() => {
 		searchConfig = { ...searchConfigDefault };
 		controller = new SearchController(searchConfig, controllerServices);
@@ -50,6 +50,17 @@ describe('pluginLogger', () => {
 
 	it('it logs', async () => {
 		pluginLogger(controller);
+		await controller.search();
+
+		expect(logMock).toHaveBeenCalled();
+	});
+
+	it('it can be disabled', async () => {
+		const pluginConfig = {
+			enabled: false,
+		};
+
+		pluginLogger(controller, pluginConfig);
 		await controller.search();
 
 		expect(logMock).toHaveBeenCalled();

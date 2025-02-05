@@ -16,7 +16,7 @@ import { ComponentProps, FacetDisplay, StyleScript } from '../../../types';
 import type { ValueFacet, RangeFacet, FacetHierarchyValue, FacetValue, FacetRangeValue } from '@searchspring/snap-store-mobx';
 
 import { defined, cloneWithProps, mergeProps, mergeStyles } from '../../../utilities';
-import { Theme, useTheme, CacheProvider } from '../../../providers';
+import { Theme, useTheme, CacheProvider, useTreePath } from '../../../providers';
 import { useA11y } from '../../../hooks/useA11y';
 // import { FacetToggle, FacetToggleProps } from '../../Molecules/FacetToggle';
 import { Lang, useLang } from '../../../hooks';
@@ -58,6 +58,7 @@ const defaultStyles: StyleScript<FacetProps> = ({ disableCollapse, color, theme 
 
 export const Facet = observer((properties: FacetProps): JSX.Element => {
 	const globalTheme: Theme = useTheme();
+	const globalTreePath = useTreePath();
 	const defaultProps: Partial<FacetProps> = {
 		limit: 12,
 		disableOverflow: false,
@@ -68,6 +69,7 @@ export const Facet = observer((properties: FacetProps): JSX.Element => {
 		iconOverflowMore: 'plus',
 		iconOverflowLess: 'minus',
 		searchable: false,
+		treePath: globalTreePath,
 	};
 
 	let props = mergeProps('facet', globalTheme, defaultProps, properties);
@@ -320,6 +322,28 @@ export const Facet = observer((properties: FacetProps): JSX.Element => {
 		return <FacetContent {...facetContentProps}></FacetContent>;
 	}
 
+	const DropDownButton = (props: any) => (
+		<div
+			className="ss__facet__header"
+			ref={(e) => useA11y(e, disableCollapse ? -1 : 0)}
+			role="heading"
+			aria-level={3}
+			{...mergedLang.dropdownButton.attributes}
+		>
+			<span {...mergedLang.dropdownButton.value}>{facet?.label}</span>
+			{!disableCollapse && (
+				<Icon
+					{...subProps.icon}
+					{...(facet?.collapsed
+						? { ...(typeof iconExpand == 'string' ? { icon: iconExpand } : (iconExpand as Partial<IconProps>)) }
+						: { ...(typeof iconCollapse == 'string' ? { icon: iconCollapse } : (iconCollapse as Partial<IconProps>)) })}
+					name={facet?.collapsed ? 'expand' : 'collapse'}
+					treePath={props.treePath}
+				/>
+			)}
+		</div>
+	);
+
 	return facet && renderFacet ? (
 		<CacheProvider>
 			<div {...styling} className={classnames('ss__facet', `ss__facet--${facet.display}`, `ss__facet--${facet.field}`, className)}>
@@ -328,26 +352,7 @@ export const Facet = observer((properties: FacetProps): JSX.Element => {
 					open={disableCollapse || !facet?.collapsed}
 					onClick={() => !disableCollapse && facet.toggleCollapse && facet?.toggleCollapse()}
 					disableA11y={true}
-					button={
-						<div
-							className="ss__facet__header"
-							ref={(e) => useA11y(e, disableCollapse ? -1 : 0)}
-							role="heading"
-							aria-level={3}
-							{...mergedLang.dropdownButton.attributes}
-						>
-							<span {...mergedLang.dropdownButton.value}>{facet?.label}</span>
-							{!disableCollapse && (
-								<Icon
-									{...subProps.icon}
-									{...(facet?.collapsed
-										? { ...(typeof iconExpand == 'string' ? { icon: iconExpand } : (iconExpand as Partial<IconProps>)) }
-										: { ...(typeof iconCollapse == 'string' ? { icon: iconCollapse } : (iconCollapse as Partial<IconProps>)) })}
-									name={facet?.collapsed ? 'expand' : 'collapse'}
-								/>
-							)}
-						</div>
-					}
+					button={<DropDownButton />}
 				>
 					<FacetContent {...facetContentProps}></FacetContent>
 				</Dropdown>
@@ -382,7 +387,7 @@ const FacetContent = (props: any) => {
 	return (
 		<Fragment>
 			{searchable && searchableFacet.allowableTypes.includes(facet.display) && (
-				<SearchInput {...subProps.searchInput} onChange={searchableFacet.searchFilter} placeholder={`Search ${facet.label}`} />
+				<SearchInput {...subProps.searchInput} onChange={searchableFacet.searchFilter} placeholder={`Search ${facet.label}`} treePath={treePath} />
 			)}
 			<div className={classnames('ss__facet__options', className)}>
 				{(() => {
@@ -394,21 +399,43 @@ const FacetContent = (props: any) => {
 							// case FacetDisplay.TOGGLE:
 							// 	return <FacetToggle {...subProps.facetToggle} facet={facet as ValueFacet} />;
 							case FacetDisplay.SLIDER:
-								return <FacetSlider {...subProps.facetSlider} facet={facet as RangeFacet} />;
+								return <FacetSlider {...subProps.facetSlider} facet={facet as RangeFacet} treePath={treePath} />;
 							case FacetDisplay.GRID:
-								return <FacetGridOptions {...subProps.facetGridOptions} values={limitedValues as FacetValue[]} facet={facet as ValueFacet} />;
+								return (
+									<FacetGridOptions
+										{...subProps.facetGridOptions}
+										values={limitedValues as FacetValue[]}
+										facet={facet as ValueFacet}
+										treePath={treePath}
+									/>
+								);
 							case FacetDisplay.PALETTE:
-								return <FacetPaletteOptions {...subProps.facetPaletteOptions} values={limitedValues as FacetValue[]} facet={facet as ValueFacet} />;
+								return (
+									<FacetPaletteOptions
+										{...subProps.facetPaletteOptions}
+										values={limitedValues as FacetValue[]}
+										facet={facet as ValueFacet}
+										treePath={treePath}
+									/>
+								);
 							case FacetDisplay.HIERARCHY:
 								return (
 									<FacetHierarchyOptions
 										{...subProps.facetHierarchyOptions}
 										values={limitedValues as FacetHierarchyValue[]}
 										facet={facet as ValueFacet}
+										treePath={treePath}
 									/>
 								);
 							default:
-								return <FacetListOptions {...subProps.facetListOptions} values={limitedValues as FacetValue[]} facet={facet as ValueFacet} />;
+								return (
+									<FacetListOptions
+										{...subProps.facetListOptions}
+										values={limitedValues as FacetValue[]}
+										facet={facet as ValueFacet}
+										treePath={treePath}
+									/>
+								);
 						}
 					}
 				})()}
@@ -427,6 +454,7 @@ const FacetContent = (props: any) => {
 						<Fragment>
 							<Icon
 								{...subProps.showMoreLessIcon}
+								treePath={treePath}
 								{...(((facet as ValueFacet).overflow?.remaining || 0) > 0
 									? { ...(typeof iconOverflowMore == 'string' ? { icon: iconOverflowMore } : (iconOverflowMore as Partial<IconProps>)) }
 									: { ...(typeof iconOverflowLess == 'string' ? { icon: iconOverflowLess } : (iconOverflowLess as Partial<IconProps>)) })}

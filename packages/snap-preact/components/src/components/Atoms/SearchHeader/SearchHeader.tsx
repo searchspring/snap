@@ -3,7 +3,7 @@ import { Fragment, h } from 'preact';
 import { jsx, css } from '@emotion/react';
 import { observer } from 'mobx-react-lite';
 
-import { Theme, useTheme, CacheProvider } from '../../../providers';
+import { Theme, useTheme, CacheProvider, useTreePath } from '../../../providers';
 import { ComponentProps, StyleScript } from '../../../types';
 import type { SearchController } from '@searchspring/snap-controller';
 import { mergeProps, mergeStyles } from '../../../utilities';
@@ -19,6 +19,7 @@ const defaultStyles: StyleScript<SearchHeaderProps> = () => {
 
 export const SearchHeader = observer((properties: SearchHeaderProps): JSX.Element => {
 	const globalTheme: Theme = useTheme();
+	const globalTreePath = useTreePath();
 
 	const landingPage = properties.controller?.store.merchandising.landingPage || properties.merchandising?.landingPage;
 
@@ -42,6 +43,7 @@ export const SearchHeader = observer((properties: SearchHeaderProps): JSX.Elemen
 		</span>`
 				: `<span>No results found.</span>`
 		}`,
+		treePath: globalTreePath,
 	};
 
 	const props = mergeProps('searchHeader', globalTheme, defaultProps, properties);

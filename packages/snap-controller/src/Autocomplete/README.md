@@ -9,9 +9,10 @@ The `AutocompleteController` is used when making queries to the API `autocomplet
 | id | unique identifier for this controller | ➖ | ✔️ |
 | selector | css selector for input elements that DOM events should be bound to | ➖ | ✔️ |
 | action | optional way to override the form action or provide one when it does not exist | ➖ |   |
-| globals | keys defined here will be passed to the [API request](https://snapi.kube.searchspring.io/api/v1/) (can overwrite global config)| ➖ |   |
+| globals | keys defined here will be passed to the API request (can overwrite global config)| ➖ |   |
 | settings.integratedSpellCorrection | integrated spell correction feature flag | false |   |
 | settings.initializeFromUrl | initialize the controller with query parameter from URL (pre-fill input with current search) | true |   |
+| settings.disableClickOutside | prevent the autocomplete from closing on clicks to the document | false |   |
 | settings.syncInputs | if the selector targets multiple inputs, the value of those inputs will be synced | true |   |
 | settings.serializeForm | if no action is specified in the config and a form element is found for the input, additional elements that are found will be added to the generated URLs (eg. hidden form input) | false |   |
 | settings.facets.trim | facets that do not change results will be removed | true |   |
@@ -21,6 +22,8 @@ The `AutocompleteController` is used when making queries to the API `autocomplet
 | settings.history.showResults | if history limit is set and there is no input, the first term results will be displayed | false |   | 
 | settings.redirects.merchandising | boolean to disable merchandising redirects when ac form is submitted | true |   | 
 | settings.redirects.singleResult | enable redirect to product detail page if search yields 1 result count | false |   |
+| settings.bind.input | boolean to disable binding of the input element (selector) | true |   | 
+| settings.bind.submit | boolean to disable binding of the submit event (form submission of enter key press) | true |   |
 | settings.variants.field | used to set the field in which to grab the variant data from | ➖ |   | 
 | settings.variants.realtime.enabled | enable real time variant updates | ➖ |   | 
 | settings.variants.realtime.filters | specify which filters to use to determine which results are updated | ➖ |   | 
@@ -94,6 +97,13 @@ This will invoke a search request to Searchspring's search API and populate the 
 autocompleteController.search();
 ```
 
+## AddToCart
+This will invoke an addToCart event (see below). Takes an array of Products as a parameter. 
+
+```typescript
+autocompleteController.addToCart(products);
+```
+
 ## Events
 ### init
 - Called with `eventData` = { controller }
@@ -126,64 +136,9 @@ autocompleteController.search();
 - Called with `eventData` = { controller, input }
 - Invoked prior to submission of autocomplete search
 
+### addToCart
+- Called with `eventData` = { controller, products }
+- Invoked when addToCart method is called
+
 ## Variants
-
-### Variant Options Configuration
-The `settings.variants.options` is an object keyed by individual option field name for configuration of any option settings.
-
-| option | description | default value | required | 
-|---|---|:---:|:---:|
-| label | allows for changing the label of the option - (color -> colour) | ➖ |   | 
-| preSelected | array of option values to preselect - ['red','blue'] | ➖ |   | 
-| thumbnailBackgroundImages | boolean used for setting the option background image as the variant thumbnail image  | ➖ |   | 
-| mappings | object keyed by individual optionValues for mapping value attribute overrides  | ➖ |   | 
-| mappings[optionValue].label | setting to override the value label  | ➖ |   | 
-| mappings[optionValue].background | setting to override the value background  | ➖ |   | 
-| mappings[optionValue].backgroundImageUrl | setting to override the value backgroundImageUrl  | ➖ |   | 
-
-```jsx
-const config = {
-	settings:  {
-		variants: {
-			field: "ss__variants",
-			options: {
-				color: {
-					label: "Colour",
-					preSelected: ['transparent'],
-					mappings: {
-						red: {
-							label: 'Cherry',
-							backroundImageUrl: '/images/cherry.png'
-						},
-						blue: {
-							label: "Sky",
-							background: "teal",
-						}
-					}
-				}
-			}
-		}
-	}	
-}
-```
-### Realtime Variants
-
-#### Variant Option Attributes:
-When `realtime` is enabled the attributes `ss-variant-option` and `ss-variant-option-selected` are queried for and used to determine current variant selection and to also attach click events to know when to adjust variant selections in the selection stores. These attributes are needed in order for realtime variants to work properly. 
-
-The attributes are to be added on each variant option in the platform product page main option buttons. The `ss-variant-option` attribute also expects a value of the option feild and option value seperated by a `:`. 
-
-```jsx
-<div>
-	<a href="/products/tee--red" ss-variant-option="Color:red" ss-variant-option-selected>Red</a>
-	<a href="/products/tee--blue" ss-variant-option="Color:Blue">Blue</a>
-	<a href="/products/tee--green" ss-variant-option="Color:Green">Green</a>
-	<a href="/products/tee--yellow" ss-variant-option="Color:Yellow">Yellow</a>
-</div>
-```
-
-### Variant Option filters:
-When `realtime` is enabled, by default the realtime updates will apply to all results in the store that have matching options available. However if this is not desired behaviour you may pass an array of filters to `settings.variants.realtime.filters`. 
-
-Available filters include `first` and `unaltered`. The `first` filter will only update the first result in the store. The `unaltered` filter will update any result that has not yet been altered by the user. 
-
+For variant integration details, see [Variant Integration Docs](https://github.com/searchspring/snap/blob/main/docs/INTEGRATION_VARIANTS.md)

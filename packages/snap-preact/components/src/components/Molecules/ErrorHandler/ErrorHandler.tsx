@@ -8,7 +8,7 @@ import { Icon, IconProps } from '../../Atoms/Icon/Icon';
 import { Button, ButtonProps } from '../../Atoms/Button/Button';
 import { defined, Colour, mergeProps, mergeStyles } from '../../../utilities';
 
-import { Theme, useTheme, CacheProvider } from '../../../providers';
+import { Theme, useTheme, CacheProvider, useTreePath } from '../../../providers';
 import { ComponentProps, StyleScript } from '../../../types';
 import { ErrorType } from '@searchspring/snap-store-mobx';
 
@@ -120,7 +120,11 @@ const defaultStyles: StyleScript<ErrorHandlerProps> = ({ theme }) => {
 
 export const ErrorHandler = observer((properties: ErrorHandlerProps): JSX.Element => {
 	const globalTheme: Theme = useTheme();
-	const defaultProps: Partial<ErrorHandlerProps> = {};
+	const globalTreePath = useTreePath();
+
+	const defaultProps: Partial<ErrorHandlerProps> = {
+		treePath: globalTreePath,
+	};
 
 	const props = mergeProps('errorHandler', globalTheme, defaultProps, properties);
 

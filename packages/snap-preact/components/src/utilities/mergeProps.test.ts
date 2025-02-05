@@ -20,6 +20,7 @@ describe('mergeProps function without theme name', () => {
 			iconClose: 'angle-up',
 			separator: ': ',
 			startOpen: false,
+			treePath: 'select',
 		});
 	});
 	it('merges global theme', () => {
@@ -48,6 +49,7 @@ describe('mergeProps function without theme name', () => {
 			iconClose: 'angle-up',
 			separator: ': ',
 			startOpen: true,
+			treePath: 'select',
 			unrelatedProp: 1,
 		});
 	});
@@ -82,6 +84,7 @@ describe('mergeProps function without theme name', () => {
 			startOpen: true,
 			className: 'additonal-className',
 			unrelatedProp: 1,
+			treePath: 'select',
 		});
 	});
 
@@ -128,11 +131,51 @@ describe('mergeProps function without theme name', () => {
 			startOpen: true,
 			className: 'additonal-className',
 			unrelatedProp: 1,
+			treePath: 'select',
 			theme: properties.theme,
 			...properties.theme?.components![componentType],
 		});
 	});
 });
+
+describe('filterSelectors handles names and treepath correctly', () => {
+	it('removes selectors not within the treePath', () => {
+		const treePath = `recommendationBundle result price.price-msrp`;
+
+		const selectors = {
+			//garbage
+			pagination: {},
+			icon: {},
+
+			//valid
+			price: {},
+			'price.price-msrp': {},
+			'result price.price-msrp': {},
+			'recommendationBundle result price.price-msrp': {},
+			'recommendationBundle price.price-msrp': {},
+
+			//invalid
+			'search price': {},
+			'autocomplete price': {},
+			'price.bundle-strike-price': {},
+			'recommendationBundle carousel result price': {},
+			'recommendationBundle price.bundle-strike-price': {},
+			'recommendationBundle price.bundle-price': {},
+			'recommendation price.price-msrp': {},
+			'price.bundle-strike-price-msrp': {},
+		};
+		const expected = [
+			'price',
+			'price.price-msrp',
+			'result price.price-msrp',
+			'recommendationBundle result price.price-msrp',
+			'recommendationBundle price.price-msrp',
+		];
+
+		expect(filterSelectors(selectors, treePath)).toEqual(expected);
+	});
+});
+
 describe('mergeProps function with theme name', () => {
 	it('has named theme with variables, layoutOptions, and treePath', () => {
 		const componentType = 'select';

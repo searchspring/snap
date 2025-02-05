@@ -39,6 +39,7 @@ export const Recommendation = observer((properties: RecommendationProps): JSX.El
 			: JSON.parse(JSON.stringify(defaultCarouselBreakpoints)),
 		pagination: false,
 		loop: true,
+		title: properties.controller?.store?.profile?.display?.templateParameters?.title,
 	};
 
 	let props = mergeProps('recommendation', globalTheme, defaultProps, properties);
@@ -180,7 +181,7 @@ export const Recommendation = observer((properties: RecommendationProps): JSX.El
 											{(() => {
 												if (resultComponent && controller) {
 													const ResultComponent = resultComponent;
-													return <ResultComponent controller={controller} result={result} />;
+													return <ResultComponent controller={controller} result={result} treePath={subProps.result.treePath} />;
 												} else {
 													return <Result key={result.id} {...subProps.result} controller={controller} result={result} />;
 												}

@@ -95,12 +95,16 @@ describe('addToCart', () => {
 		});
 	});
 
+	afterEach(() => {
+		errMock.mockClear();
+	});
+
 	it('requires product(s) to be passed', () => {
 		// @ts-ignore - adding with no params
 		addToCart();
 
 		expect(fetchMock).not.toHaveBeenCalled();
-		expect(errMock).toHaveBeenCalledWith('Error: no products to add');
+		expect(errMock).toHaveBeenCalledWith('bigcommerce/addToCart: No products to add!');
 	});
 
 	it('will log an error when it cannot find a custom id', async () => {
@@ -112,7 +116,7 @@ describe('addToCart', () => {
 
 		await addToCart([item], config);
 
-		expect(errMock).toHaveBeenCalledWith(`Error: couldnt find column in item data. please verify 'idFieldName' in the config.`);
+		expect(errMock).toHaveBeenCalledWith(`bigcommerce/addToCart: Could not find column in item data. Please verify 'idFieldName' in the config.`);
 		expect(fetchMock).not.toHaveBeenCalled();
 	});
 

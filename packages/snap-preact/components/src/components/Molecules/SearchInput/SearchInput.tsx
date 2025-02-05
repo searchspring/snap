@@ -6,7 +6,7 @@ import { observer } from 'mobx-react-lite';
 
 import { Icon, IconProps } from '../../Atoms/Icon/Icon';
 import { defined, mergeProps, mergeStyles } from '../../../utilities';
-import { Theme, useTheme, CacheProvider } from '../../../providers';
+import { Theme, useTheme, CacheProvider, useTreePath } from '../../../providers';
 import { ComponentProps, StyleScript } from '../../../types';
 
 const defaultStyles: StyleScript<SearchInputProps> = ({ theme }) => {
@@ -31,9 +31,11 @@ const defaultStyles: StyleScript<SearchInputProps> = ({ theme }) => {
 
 export const SearchInput = observer((properties: SearchInputProps): JSX.Element => {
 	const globalTheme: Theme = useTheme();
+	const globalTreePath = useTreePath();
 	const defaultProps: Partial<SearchInputProps> = {
 		placeholder: 'Search',
 		hideIcon: false,
+		treePath: globalTreePath,
 	};
 
 	const props = mergeProps('searchInput', globalTheme, defaultProps, properties);

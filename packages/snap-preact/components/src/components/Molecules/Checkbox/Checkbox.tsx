@@ -7,7 +7,7 @@ import { observer } from 'mobx-react-lite';
 
 import { ComponentProps, StyleScript } from '../../../types';
 import { defined, mergeProps, mergeStyles } from '../../../utilities';
-import { Theme, useTheme, CacheProvider } from '../../../providers';
+import { Theme, useTheme, CacheProvider, useTreePath } from '../../../providers';
 import { Icon, IconProps, IconType } from '../../Atoms/Icon';
 import { useA11y } from '../../../hooks/useA11y';
 import { Lang, useLang } from '../../../hooks';
@@ -40,10 +40,13 @@ const defaultStyles: StyleScript<CheckboxProps> = ({ size, color, theme, native 
 
 export const Checkbox = observer((properties: CheckboxProps): JSX.Element => {
 	const globalTheme: Theme = useTheme();
+	const globalTreePath = useTreePath();
+
 	const defaultProps: Partial<CheckboxProps> = {
 		size: '12px',
 		startChecked: false,
 		disableA11y: false,
+		treePath: globalTreePath,
 	};
 
 	const props = mergeProps('checkbox', globalTheme, defaultProps, properties);

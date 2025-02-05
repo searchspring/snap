@@ -23,12 +23,14 @@ export function mergeProps<GenericComponentProps = ComponentProps>(
 		3. spreads global theme props of component and named component
 		4. spreads component theme props of component and named component
 		5. ensure templates theme variables pass on in `theme`
+		6. if treepath contains 'custom' do 2 again
 
 	*/
 
 	const theme = (props as ComponentProps).theme;
 	const componentName = (props as any)?.name;
-	let treePath = (props as ComponentProps).treePath ?? '';
+	let treePath = (props as ComponentProps).treePath || (defaultProps as ComponentProps).treePath || '';
+	treePath += `${treePath ? ' ' : ''}${componentType}`;
 
 	// start with defaultProps
 	let mergedProps = {
@@ -47,6 +49,7 @@ export function mergeProps<GenericComponentProps = ComponentProps>(
 		mergedProps = {
 			...mergedProps,
 			...props,
+			treePath,
 		};
 
 		// add theme props if they exist
@@ -77,6 +80,8 @@ export function mergeProps<GenericComponentProps = ComponentProps>(
 				mergedProps = mergeThemeProps(componentProps, mergedProps) as Partial<GenericComponentProps>;
 			}
 		});
+
+		treePath += componentName?.match(/^[A-Z,a-z,-]+$/) ? `.${componentName}` : '';
 
 		// add globalTheme props if they exist
 		const globalComponent = globalTheme?.components && globalTheme.components[componentType as keyof typeof globalTheme.components];
@@ -113,6 +118,14 @@ export function mergeProps<GenericComponentProps = ComponentProps>(
 		if (globalTheme.layoutOptions) {
 			(mergedProps as ComponentProps).theme!.layoutOptions = globalTheme.layoutOptions;
 		}
+
+		//if custom component, re-spread props again
+		if (treePath && treePath.indexOf('customComponent') > -1) {
+			mergedProps = {
+				...mergedProps,
+				...props,
+			};
+		}
 	}
 
 	return mergedProps as GenericComponentProps;
@@ -144,8 +157,7 @@ export function sortSelectors(a: string, b: string): number {
 }
 
 export function filterSelectors(themeComponents: ThemeComponentOverrides, treePath: string): string[] {
-	const selectors = Object.keys(themeComponents);
-
+	let selectors = Object.keys(themeComponents);
 	const paths = treePath.split(' ');
 	const componentTypeAndName = paths.splice(-1).pop() ?? '';
 	const [componentType, componentName] = componentTypeAndName.split('.');
@@ -159,32 +171,41 @@ export function filterSelectors(themeComponents: ThemeComponentOverrides, treePa
 		};
 	});
 
-	return selectors
-		.filter((key) => key.endsWith(componentType) || key.endsWith(`${componentType}.${componentName}`))
-		.filter((selector) => {
-			const split = selector.split(' ').slice(0, -1);
+	if (componentName) {
+		selectors = selectors.filter((key) => {
+			const keys = key.split(' ');
+			const lastkey = keys[keys.length - 1];
+			if (lastkey == componentType || lastkey == `${componentType}.${componentName}`) {
+				return true;
+			}
+		});
+	} else {
+		selectors = selectors.filter((key) => key.endsWith(componentType));
+	}
+	return selectors.filter((selector) => {
+		const split = selector.split(' ').slice(0, -1);
 
-			if (split.length == 0) return true;
+		if (split.length == 0) return true;
 
-			for (let s = 0; s < split.length; s++) {
-				let prevIndex = -1;
-				const value = split[s];
+		for (let s = 0; s < split.length; s++) {
+			let prevIndex = -1;
+			const value = split[s];
 
-				for (let i = prevIndex == -1 ? 0 : prevIndex; i < mappedSplitTreePath.length; i++) {
-					const pathValue = mappedSplitTreePath[i];
+			for (let i = prevIndex == -1 ? 0 : prevIndex; i < mappedSplitTreePath.length; i++) {
+				const pathValue = mappedSplitTreePath[i];
 
-					if (value === pathValue.path || value === pathValue.type) {
-						prevIndex = s;
-						break;
-					}
-				}
-
-				if (prevIndex == -1) {
-					// selector path not found at all - selector is invalid
-					return false;
+				if (value === pathValue.path || value === pathValue.type) {
+					prevIndex = s;
+					break;
 				}
 			}
 
-			return true;
-		});
+			if (prevIndex == -1) {
+				// selector path not found at all - selector is invalid
+				return false;
+			}
+		}
+
+		return true;
+	});
 }

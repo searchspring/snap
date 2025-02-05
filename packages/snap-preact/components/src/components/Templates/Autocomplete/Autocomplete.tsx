@@ -773,10 +773,10 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 								{!hideBanners ? <Banner {...subProps.banner} content={merchandising.content} type={ContentType.FOOTER} name={'footer'} /> : null}
 
 								{/* {RecommendationTemplateComponent && recsController?.store?.loaded && (
-									<div className="ss__autocomplete__content__recommendations">
-										<RecommendationTemplateComponent controller={recsController} />
-									</div>
-								)} */}
+										<div className="ss__autocomplete__content__recommendations">
+											<RecommendationTemplateComponent controller={recsController} />
+										</div>
+									)} */}
 
 								{!hideLink ? (
 									linkSlot ? (

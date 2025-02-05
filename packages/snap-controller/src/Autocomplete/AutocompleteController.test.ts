@@ -1,7 +1,7 @@
 import { v4 as uuidv4 } from 'uuid';
 
 import { AutocompleteStore } from '@searchspring/snap-store-mobx';
-import type { AutocompleteStoreConfig } from '@searchspring/snap-store-mobx';
+import type { AutocompleteStoreConfig, Product } from '@searchspring/snap-store-mobx';
 import { UrlManager, QueryStringTranslator, reactLinker } from '@searchspring/snap-url-manager';
 import { Tracker } from '@searchspring/snap-tracker';
 import { EventManager } from '@searchspring/snap-event-manager';
@@ -11,6 +11,7 @@ import { AutocompleteController, INPUT_DELAY as _INPUT_DELAY } from './Autocompl
 import { waitFor } from '@testing-library/preact';
 
 import { MockClient } from '@searchspring/snap-shared';
+import deepmerge from 'deepmerge';
 
 const KEY_ENTER = 13;
 const KEY_ESCAPE = 27;
@@ -157,20 +158,27 @@ describe('Autocomplete Controller', () => {
 			tracker: new Tracker(globals),
 		});
 
-		controller.init();
+		// calling init to ensure event timings line up for asserting loading and loaded states
+		await controller.init();
 
 		const query = 'wh';
 		controller.urlManager = controller.urlManager.reset().set('query', query);
 		expect(controller.urlManager.state.query).toBe(query);
 
 		(controller.client as MockClient).mockData.updateConfig({ autocomplete: 'autocomplete.query.wh' });
-		await controller.search();
+		const searchPromise = controller.search();
 
-		await waitFor(() => {
-			expect(controller.store.results.length).toBeGreaterThan(0);
-			expect(controller.store.results.length).toBe(acConfig.globals!.pagination!.pageSize);
-			expect(controller.store.terms.length).toBe(acConfig.globals!.suggestions!.count);
-		});
+		expect(controller.store.loaded).toBe(false);
+		expect(controller.store.loading).toBe(true);
+
+		await searchPromise;
+
+		expect(controller.store.loaded).toBe(true);
+		expect(controller.store.loading).toBe(false);
+
+		expect(controller.store.results.length).toBeGreaterThan(0);
+		expect(controller.store.results.length).toBe(acConfig.globals!.pagination!.pageSize);
+		expect(controller.store.terms.length).toBe(acConfig.globals!.suggestions!.count);
 	});
 
 	it('has no results if query is blank', async () => {
@@ -211,6 +219,35 @@ describe('Autocomplete Controller', () => {
 		await controller.bind();
 
 		controller.unbind();
+
+		let inputEl: HTMLInputElement | null;
+
+		await waitFor(() => {
+			inputEl = document.querySelector(controller.config.selector);
+			expect(inputEl).toBeDefined();
+		});
+
+		const query = 'bumpers';
+		inputEl!.value = query;
+		inputEl!.focus();
+		inputEl!.dispatchEvent(new Event('input'));
+		expect(controller.urlManager.state.query).toBe(undefined);
+	});
+
+	it('can opt out of binding input event', async () => {
+		const bindingConfig = deepmerge(acConfig, { settings: { bind: { input: false } } });
+
+		const controller = new AutocompleteController(bindingConfig, {
+			client: new MockClient(globals, {}),
+			store: new AutocompleteStore(bindingConfig, services),
+			urlManager,
+			eventManager: new EventManager(),
+			profiler: new Profiler(),
+			logger: new Logger(),
+			tracker: new Tracker(globals),
+		});
+
+		await controller.bind();
 
 		let inputEl: HTMLInputElement | null;
 
@@ -310,6 +347,70 @@ describe('Autocomplete Controller', () => {
 			expect(inputEl1.value).toBe(query);
 			expect(inputEl2.value).toBe(query);
 		});
+	});
+
+	it('closes autocomplete via `setFocused` call when the document click events are made', async () => {
+		acConfig.selector = '.ss-ac';
+		document.body.innerHTML = '<div class="click-me"><input type="text" class="ss-ac"/></div>';
+
+		const inputEl: HTMLInputElement = document.querySelectorAll('.ss-ac')[0] as HTMLInputElement;
+
+		const controller = new AutocompleteController(acConfig, {
+			client: new MockClient(globals, {}),
+			store: new AutocompleteStore(acConfig, services),
+			urlManager,
+			eventManager: new EventManager(),
+			profiler: new Profiler(),
+			logger: new Logger(),
+			tracker: new Tracker(globals),
+		});
+
+		const setFocusedSpy = jest.spyOn(controller, 'setFocused');
+
+		await controller.bind();
+		const query = 'bumpers';
+		inputEl.value = query;
+		inputEl.dispatchEvent(new Event('input'));
+
+		document.querySelector('.click-me')?.dispatchEvent(new Event('click', { bubbles: true }));
+
+		expect(setFocusedSpy).toHaveBeenCalled();
+	});
+
+	it('disables document click (settings.disableClickOutside)', async () => {
+		acConfig.selector = '.ss-ac';
+		document.body.innerHTML = '<div class="click-me"><input type="text" class="ss-ac"/></div>';
+
+		const config = {
+			...acConfig,
+			settings: {
+				...acConfig.settings,
+				disableClickOutside: true,
+			},
+		};
+
+		const inputEl: HTMLInputElement = document.querySelectorAll('.ss-ac')[0] as HTMLInputElement;
+
+		const controller = new AutocompleteController(config, {
+			client: new MockClient(globals, {}),
+			store: new AutocompleteStore(acConfig, services),
+			urlManager,
+			eventManager: new EventManager(),
+			profiler: new Profiler(),
+			logger: new Logger(),
+			tracker: new Tracker(globals),
+		});
+
+		const setFocusedSpy = jest.spyOn(controller, 'setFocused');
+
+		await controller.bind();
+		const query = 'bumpers';
+		inputEl.value = query;
+		inputEl.dispatchEvent(new Event('input'));
+
+		document.querySelector('.click-me')?.dispatchEvent(new Event('click', { bubbles: true }));
+
+		expect(setFocusedSpy).not.toHaveBeenCalled();
 	});
 
 	it('does not serialize other form input elements normally (settings.serializeForm)', async () => {
@@ -573,6 +674,26 @@ describe('Autocomplete Controller', () => {
 		setFocusedfn.mockClear();
 	});
 
+	it('can use addToCart', async () => {
+		const controller = new AutocompleteController(acConfig, {
+			client: new MockClient(globals, {}),
+			store: new AutocompleteStore(acConfig, services),
+			urlManager,
+			eventManager: new EventManager(),
+			profiler: new Profiler(),
+			logger: new Logger(),
+			tracker: new Tracker(globals),
+		});
+
+		await controller.search();
+
+		const eventfn = jest.spyOn(controller.eventManager, 'fire');
+
+		controller.addToCart([controller.store.results[0] as Product, controller.store.results[1] as Product]);
+
+		expect(eventfn).toHaveBeenCalledWith('addToCart', { controller, products: [controller.store.results[0], controller.store.results[1]] });
+	});
+
 	it('can submit with form', async () => {
 		document.body.innerHTML = '<div><form action="/search.html"><input type="text" id="search_query"></form></div>';
 		const controller = new AutocompleteController(acConfig, {
@@ -604,6 +725,85 @@ describe('Autocomplete Controller', () => {
 			controller,
 			input: inputEl!,
 		});
+
+		beforeSubmitfn.mockClear();
+	});
+
+	it('can opt out of submit event', async () => {
+		document.body.innerHTML = '<div><form action="/search.html"><input type="text" id="search_query"></form></div>';
+
+		const bindingConfig = deepmerge(acConfig, { settings: { bind: { submit: false } } });
+
+		const controller = new AutocompleteController(bindingConfig, {
+			client: new MockClient(globals, {}),
+			store: new AutocompleteStore(bindingConfig, services),
+			urlManager,
+			eventManager: new EventManager(),
+			profiler: new Profiler(),
+			logger: new Logger(),
+			tracker: new Tracker(globals),
+		});
+
+		await controller.bind();
+		(controller.client as MockClient).mockData.updateConfig({ autocomplete: 'autocomplete.query.bumpers' });
+
+		const inputEl: HTMLInputElement | null = document.querySelector(controller.config.selector);
+
+		const query = 'bumpers';
+		inputEl!.value = query;
+
+		const form = inputEl!.form;
+		const beforeSubmitfn = jest.spyOn(controller.eventManager, 'fire');
+		const handlerSubmitfn = jest.spyOn(controller.handlers.input, 'formSubmit');
+
+		form?.dispatchEvent(new Event('submit', { bubbles: true }));
+		//this timeout seems to be needed. Cant replace with waitFor
+		await new Promise((resolve) => setTimeout(resolve, INPUT_DELAY));
+
+		expect(beforeSubmitfn).not.toHaveBeenCalledWith('beforeSubmit', {
+			controller,
+			input: inputEl!,
+		});
+
+		expect(handlerSubmitfn).not.toHaveBeenCalled();
+
+		beforeSubmitfn.mockClear();
+	});
+
+	it('can opt out of submit event (with no form)', async () => {
+		const bindingConfig = deepmerge(acConfig, { action: '/search', settings: { bind: { submit: false } } });
+
+		const controller = new AutocompleteController(bindingConfig, {
+			client: new MockClient(globals, {}),
+			store: new AutocompleteStore(bindingConfig, services),
+			urlManager,
+			eventManager: new EventManager(),
+			profiler: new Profiler(),
+			logger: new Logger(),
+			tracker: new Tracker(globals),
+		});
+
+		await controller.bind();
+		(controller.client as MockClient).mockData.updateConfig({ autocomplete: 'autocomplete.query.bumpers' });
+
+		const beforeSubmitfn = jest.spyOn(controller.eventManager, 'fire');
+		const enterKeyfn = jest.spyOn(controller.handlers.input, 'enterKey');
+		const inputEl: HTMLInputElement | null = document.querySelector(controller.config.selector);
+
+		const query = 'bumpers';
+		inputEl!.value = query;
+
+		inputEl!.dispatchEvent(new KeyboardEvent('keydown', { bubbles: true, keyCode: KEY_ENTER }));
+
+		// this timeout seems to be needed. Cant replace with waitFor
+		await new Promise((resolve) => setTimeout(resolve, INPUT_DELAY));
+
+		expect(beforeSubmitfn).not.toHaveBeenCalledWith('beforeSubmit', {
+			controller,
+			input: inputEl!,
+		});
+
+		expect(enterKeyfn).not.toHaveBeenCalled();
 
 		beforeSubmitfn.mockClear();
 	});
@@ -822,6 +1022,7 @@ describe('Autocomplete Controller', () => {
 		expect(inputEl).toBeDefined();
 
 		inputEl.value = query;
+		inputEl.dispatchEvent(new Event('input', { bubbles: true }));
 
 		await controller.search();
 		expect(controller.store.terms.length).toBeGreaterThan(0);
@@ -838,6 +1039,64 @@ describe('Autocomplete Controller', () => {
 
 		await waitFor(() => {
 			expect(window.location.href).toContain('https://searchspring.com/?redirect');
+		});
+	});
+
+	it('will not redirect when the previous search included a redirect in merchandising response', async () => {
+		document.body.innerHTML = '<div><input type="text" id="search_query"></div>';
+		acConfig = {
+			...acConfig,
+			selector: '#search_query',
+			action: '/search',
+			settings: {
+				redirects: {
+					merchandising: true,
+				},
+			},
+		};
+
+		const controller = new AutocompleteController(acConfig, {
+			client: new MockClient(globals, {}),
+			store: new AutocompleteStore(acConfig, services),
+			urlManager,
+			eventManager: new EventManager(),
+			profiler: new Profiler(),
+			logger: new Logger(),
+			tracker: new Tracker(globals),
+		});
+		(controller.client as MockClient).mockData.updateConfig({ autocomplete: 'redirect', siteId: '8uyt2m' });
+
+		const query = 'rumper';
+		controller.urlManager = controller.urlManager.set('query', query);
+
+		await controller.bind();
+		const inputEl: HTMLInputElement = document.querySelector(controller.config.selector)!;
+		expect(inputEl).toBeDefined();
+
+		inputEl.value = query;
+		inputEl.dispatchEvent(new Event('input', { bubbles: true }));
+
+		await controller.search();
+		expect(controller.store.terms.length).toBeGreaterThan(0);
+
+		// @ts-ignore
+		delete window.location;
+		window.location = {
+			...window.location,
+			href: '', // jest does not support window location changes
+		};
+
+		expect(controller.store.merchandising.redirect).toBe('https://searchspring.com/?redirect');
+		// change the input to a new query
+		inputEl.value = 'dress';
+		inputEl.dispatchEvent(new Event('input', { bubbles: true }));
+		expect(controller.store.merchandising.redirect).toBe('');
+
+		inputEl.focus();
+		inputEl.dispatchEvent(new KeyboardEvent('keydown', { bubbles: true, keyCode: KEY_ENTER }));
+
+		await waitFor(() => {
+			expect(window.location.href).toContain('/search?oq=rumper&search_query=romper');
 		});
 	});
 

@@ -3,7 +3,7 @@ import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
 import { observer } from 'mobx-react-lite';
 
-import { Theme, useTheme, CacheProvider } from '../../../providers';
+import { Theme, useTheme, CacheProvider, useTreePath } from '../../../providers';
 import { ComponentProps, StyleScript } from '../../../types';
 import { FilterSummary, FilterSummaryProps } from '../FilterSummary';
 import { SortBy, SortByProps } from '../../Molecules/SortBy';
@@ -20,9 +20,10 @@ const defaultStyles: StyleScript<SidebarProps> = () => {
 
 export const Sidebar = observer((properties: SidebarProps): JSX.Element => {
 	const globalTheme: Theme = useTheme();
-
+	const globalTreePath = useTreePath();
 	const defaultProps: Partial<SidebarProps> = {
 		titleText: 'Filters',
+		treePath: globalTreePath,
 	};
 
 	const props = mergeProps('sidebar', globalTheme, defaultProps, properties);

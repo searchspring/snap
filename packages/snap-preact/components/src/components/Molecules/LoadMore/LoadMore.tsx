@@ -5,7 +5,7 @@ import classnames from 'classnames';
 import { observer } from 'mobx-react-lite';
 import deepmerge from 'deepmerge';
 
-import { Theme, useTheme, CacheProvider } from '../../../providers';
+import { Theme, useTheme, CacheProvider, useTreePath } from '../../../providers';
 import { ComponentProps, StyleScript } from '../../../types';
 import { defined, mergeProps, mergeStyles } from '../../../utilities';
 import { Lang, useIntersection, useLang } from '../../../hooks';
@@ -70,12 +70,14 @@ const defaultStyles: StyleScript<LoadMoreProps> = ({ pagination, progressIndicat
 
 export const LoadMore = observer((properties: LoadMoreProps): JSX.Element => {
 	const globalTheme: Theme = useTheme();
+	const globalTreePath = useTreePath();
 	const defaultProps: Partial<LoadMoreProps> = {
 		loadMoreText: 'Load More',
 		loadingLocation: 'button',
 		loadingIcon: 'spinner',
 		progressIndicatorWidth: '300px',
 		progressIndicatorSize: '5px',
+		treePath: globalTreePath,
 	};
 
 	const props = mergeProps('loadMore', globalTheme, defaultProps, properties);

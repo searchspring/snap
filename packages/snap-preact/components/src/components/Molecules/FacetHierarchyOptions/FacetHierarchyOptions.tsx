@@ -4,7 +4,7 @@ import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
 import { observer } from 'mobx-react-lite';
 
-import { Theme, useTheme, CacheProvider } from '../../../providers';
+import { Theme, useTheme, CacheProvider, useTreePath } from '../../../providers';
 import { mergeProps, mergeStyles } from '../../../utilities';
 import { ComponentProps, StyleScript } from '../../../types';
 import { createHoverProps } from '../../../toolbox';
@@ -92,7 +92,10 @@ const defaultStyles: StyleScript<FacetHierarchyOptionsProps> = ({ theme, horizon
 
 export const FacetHierarchyOptions = observer((properties: FacetHierarchyOptionsProps): JSX.Element => {
 	const globalTheme: Theme = useTheme();
-	const defaultProps: Partial<FacetHierarchyOptionsProps> = {};
+	const globalTreePath = useTreePath();
+	const defaultProps: Partial<FacetHierarchyOptionsProps> = {
+		treePath: globalTreePath,
+	};
 
 	const props = mergeProps('facetHierarchyOptions', globalTheme, defaultProps, properties);
 

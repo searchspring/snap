@@ -3,6 +3,26 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.4.0](https://github.com/searchspring/snap/compare/v1.3.0...v1.4.0) (2024-12-23)
+
+### Bug Fixes
+
+- **autocomplete:** merchandising redirect race condition ([65ab3e7](https://github.com/searchspring/snap/commit/65ab3e71630c30a45b4c35a0191e36f97a3dcbfa))
+- **controller/search:** fixing typo in warning log ([8b5a2e1](https://github.com/searchspring/snap/commit/8b5a2e1b5c26045930a661d4a76245bbd4f3ee64))
+- **controller/search:** modifying logic to prevent warning when the lastRequest is not defined ([5606a22](https://github.com/searchspring/snap/commit/5606a22c6309f4f64c22726f637bddd3f19c9002))
+- **controller:** bugfix for controller store loading / loaded states ([a342cd1](https://github.com/searchspring/snap/commit/a342cd1e84c03f9b660a533b327a2f1c12682121))
+- **recommendationcontroller:** recommendation backforward cache pageshow event listener ([ca12fd5](https://github.com/searchspring/snap/commit/ca12fd5b3dc0140037701d4d263c626562bdb651))
+- **recommendationcontroller:** send core result data and not active display data in beacon tracking ([1c1754a](https://github.com/searchspring/snap/commit/1c1754a21a365064240cfb7c2433bab2a9b8d52a))
+
+### Features
+
+- **controller/autocomplete:** adding new setting that prevents binding the document click event ([7aaa6ee](https://github.com/searchspring/snap/commit/7aaa6ee4fee39ae7b1a05334270b76d052ce39ca))
+- **controller:** adding setting in autocomplete to opt out of input and submit binding' ([6980fce](https://github.com/searchspring/snap/commit/6980fcee30220714fd5837770eae725355f81dcf))
+
+# [1.3.0](https://github.com/searchspring/snap/compare/v1.2.2...v1.3.0) (2024-12-06)
+
+**Note:** Version bump only for package @searchspring/snap-controller
+
 ## [1.2.2](https://github.com/searchspring/snap/compare/v1.2.1...v1.2.2) (2024-10-21)
 
 **Note:** Version bump only for package @searchspring/snap-controller
@@ -66,6 +86,49 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 ### Features
 
 - **preact-components/storybook:** updating storybook to latest version - build stable ([43c598d](https://github.com/searchspring/snap/commit/43c598d0e4d11d76364ff2775ecdcabe489023a8))
+
+# [0.62.0](https://github.com/searchspring/snap/compare/v0.61.5...v0.62.0) (2024-12-10)
+
+### Bug Fixes
+
+- **autocomplete:** merchandising redirect race condition ([65ab3e7](https://github.com/searchspring/snap/commit/65ab3e71630c30a45b4c35a0191e36f97a3dcbfa))
+- **controller:** bugfix for controller store loading / loaded states ([a342cd1](https://github.com/searchspring/snap/commit/a342cd1e84c03f9b660a533b327a2f1c12682121))
+- **recommendationcontroller:** recommendation backforward cache pageshow event listener ([ca12fd5](https://github.com/searchspring/snap/commit/ca12fd5b3dc0140037701d4d263c626562bdb651))
+
+### Features
+
+- **controller:** adding setting in autocomplete to opt out of input and submit binding' ([6980fce](https://github.com/searchspring/snap/commit/6980fcee30220714fd5837770eae725355f81dcf))
+
+## [0.61.5](https://github.com/searchspring/snap/compare/v0.61.4...v0.61.5) (2024-11-13)
+
+### Bug Fixes
+
+- **recommendationcontroller:** send core result data and not active display data in beacon tracking ([1c1754a](https://github.com/searchspring/snap/commit/1c1754a21a365064240cfb7c2433bab2a9b8d52a))
+
+## [0.61.4](https://github.com/searchspring/snap/compare/v0.61.3...v0.61.4) (2024-11-06)
+
+### Bug Fixes
+
+- **controller/search:** fixing typo in warning log ([8b5a2e1](https://github.com/searchspring/snap/commit/8b5a2e1b5c26045930a661d4a76245bbd4f3ee64))
+- **controller/search:** modifying logic to prevent warning when the lastRequest is not defined ([5606a22](https://github.com/searchspring/snap/commit/5606a22c6309f4f64c22726f637bddd3f19c9002))
+
+## [0.61.3](https://github.com/searchspring/snap/compare/v0.61.2...v0.61.3) (2024-10-31)
+
+**Note:** Version bump only for package @searchspring/snap-controller
+
+## [0.61.2](https://github.com/searchspring/snap/compare/v0.61.1...v0.61.2) (2024-10-28)
+
+**Note:** Version bump only for package @searchspring/snap-controller
+
+## [0.61.1](https://github.com/searchspring/snap/compare/v0.61.0...v0.61.1) (2024-10-25)
+
+**Note:** Version bump only for package @searchspring/snap-controller
+
+# [0.61.0](https://github.com/searchspring/snap/compare/v0.60.4...v0.61.0) (2024-10-25)
+
+### Features
+
+- **controller/autocomplete:** adding new setting that prevents binding the document click event ([7aaa6ee](https://github.com/searchspring/snap/commit/7aaa6ee4fee39ae7b1a05334270b76d052ce39ca))
 
 ## [0.60.4](https://github.com/searchspring/snap/compare/v0.60.3...v0.60.4) (2024-09-25)
 

@@ -3,7 +3,7 @@ import { Fragment, h, ComponentChildren } from 'preact';
 import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
 
-import { Theme, useTheme, CacheProvider } from '../../../providers';
+import { Theme, useTheme, CacheProvider, useTreePath } from '../../../providers';
 import { ComponentProps, StyleScript } from '../../../types';
 import { iconPaths, IconType } from './paths';
 import { mergeProps, mergeStyles } from '../../../utilities';
@@ -20,9 +20,12 @@ const defaultStyles: StyleScript<IconProps> = ({ color, theme, width, height, si
 
 export function Icon(properties: IconProps): JSX.Element {
 	const globalTheme: Theme = useTheme();
+	const globalTreePath = useTreePath();
+
 	const defaultProps: Partial<IconProps> = {
 		size: '16px',
 		viewBox: '0 0 56 56',
+		treePath: globalTreePath,
 	};
 
 	const props = mergeProps('icon', globalTheme, defaultProps, properties);
@@ -42,6 +45,7 @@ export function Icon(properties: IconProps): JSX.Element {
 		styleScript: __,
 		themeStyleScript: ___,
 		name: ____,
+		treePath: _____,
 		...otherProps
 	} = props;
 
@@ -96,6 +100,7 @@ export interface IconProps extends ComponentProps {
 }
 export type IconNames =
 	| 'bundle-cart'
+	| 'bundle-selector'
 	| 'next'
 	| 'prev'
 	| 'active'

@@ -3,7 +3,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { waitFor } from '@testing-library/preact';
 
 import { Client } from '@searchspring/snap-client';
-import { SearchStore, SearchStoreConfig } from '@searchspring/snap-store-mobx';
+import { Product, SearchStore, SearchStoreConfig } from '@searchspring/snap-store-mobx';
 import { UrlManager, QueryStringTranslator, reactLinker } from '@searchspring/snap-url-manager';
 import { EventManager, Next } from '@searchspring/snap-event-manager';
 import { Profiler } from '@searchspring/snap-profiler';
@@ -49,6 +49,9 @@ describe('Search Controller', () => {
 
 		expect(initfn).not.toHaveBeenCalled();
 		controller.init();
+		expect(controller.store.loaded).toBe(false);
+		expect(controller.store.loading).toBe(false);
+
 		expect(initfn).toHaveBeenCalled();
 
 		expect(controller instanceof SearchController).toBeTruthy();
@@ -63,7 +66,19 @@ describe('Search Controller', () => {
 
 		expect(controller.store.results.length).toBe(0);
 		expect(searchfn).not.toHaveBeenCalled();
-		await controller.search();
+
+		// calling init to ensure event timings line up for asserting loading and loaded states
+		await controller.init();
+
+		const searchPromise = controller.search();
+
+		expect(controller.store.loaded).toBe(false);
+		expect(controller.store.loading).toBe(true);
+
+		await searchPromise;
+		expect(controller.store.loaded).toBe(true);
+		expect(controller.store.loading).toBe(false);
+
 		expect(searchfn).toHaveBeenCalled();
 		expect(controller.store.results.length).toBeGreaterThan(0);
 
@@ -381,6 +396,26 @@ describe('Search Controller', () => {
 		const sort = [{ field: 'price', direction: 'asc' }];
 		controller.urlManager = controller.urlManager.set('sort', sort);
 		expect(controller.params.sorts).toEqual([{ field: 'price', direction: 'asc' }]);
+	});
+
+	it('can use addToCart', async () => {
+		const controller = new SearchController(searchConfig, {
+			client: new MockClient(globals, {}),
+			store: new SearchStore(searchConfig, services),
+			urlManager,
+			eventManager: new EventManager(),
+			profiler: new Profiler(),
+			logger: new Logger(),
+			tracker: new Tracker(globals),
+		});
+
+		await controller.search();
+
+		const eventfn = jest.spyOn(controller.eventManager, 'fire');
+
+		controller.addToCart([controller.store.results[0] as Product, controller.store.results[1] as Product]);
+
+		expect(eventfn).toHaveBeenCalledWith('addToCart', { controller, products: [controller.store.results[0], controller.store.results[1]] });
 	});
 
 	it('can set filter param', async () => {

@@ -4,7 +4,7 @@ import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
 import { observer } from 'mobx-react-lite';
 
-import { Theme, useTheme, CacheProvider } from '../../../providers';
+import { Theme, useTheme, CacheProvider, useTreePath } from '../../../providers';
 import { mergeProps, mergeStyles } from '../../../utilities';
 import { createHoverProps } from '../../../toolbox';
 import { ComponentProps, StyleScript } from '../../../types';
@@ -82,10 +82,13 @@ const defaultStyles: StyleScript<FacetGridOptionsProps> = ({ columns, gapSize, g
 
 export const FacetGridOptions = observer((properties: FacetGridOptionsProps): JSX.Element => {
 	const globalTheme: Theme = useTheme();
+	const globalTreePath = useTreePath();
+
 	const defaultProps: Partial<FacetGridOptionsProps> = {
 		columns: 4,
 		gapSize: '8px',
 		gridSize: '45px',
+		treePath: globalTreePath,
 	};
 
 	const props = mergeProps('facetGridOptions', globalTheme, defaultProps, properties);

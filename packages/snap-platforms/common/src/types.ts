@@ -1,3 +1,5 @@
+import { ControllerTypes } from '@searchspring/snap-controller';
+
 type ValueBackgroundFilter = {
 	type: 'value';
 	field: string;
@@ -14,5 +16,9 @@ export type PluginBackgroundFilter = ValueBackgroundFilter | RangeBackgroundFilt
 export type PluginBackgroundFilterGlobal = PluginBackgroundFilter & { background: true };
 export type PluginControl = {
 	controllerIds?: (string | RegExp)[];
-	controllerTypes?: ('search' | 'autocomplete' | 'recommendation')[];
+	controllerTypes?: (ControllerTypes | keyof typeof ControllerTypes)[];
+};
+
+export type AbstractPluginConfig = {
+	enabled?: boolean;
 };

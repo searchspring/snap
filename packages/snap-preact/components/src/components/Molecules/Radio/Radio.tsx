@@ -7,7 +7,7 @@ import { observer } from 'mobx-react-lite';
 
 import { ComponentProps, StyleScript } from '../../../types';
 import { defined, mergeProps, mergeStyles } from '../../../utilities';
-import { Theme, useTheme, CacheProvider } from '../../../providers';
+import { Theme, useTheme, CacheProvider, useTreePath } from '../../../providers';
 import { Icon, IconProps, IconType } from '../../Atoms/Icon';
 import { useA11y } from '../../../hooks/useA11y';
 import { Lang, useLang } from '../../../hooks';
@@ -35,12 +35,15 @@ const defaultStyles: StyleScript<RadioProps> = ({ size, native }) => {
 
 export const Radio = observer((properties: RadioProps): JSX.Element => {
 	const globalTheme: Theme = useTheme();
+	const globalTreePath = useTreePath();
+
 	const defaultProps: Partial<RadioProps> = {
 		size: '20px',
 		startChecked: false,
 		disableA11y: false,
 		checkedIcon: 'bullet',
 		unCheckedIcon: 'bullet-o',
+		treePath: globalTreePath,
 	};
 
 	const props = mergeProps('radio', globalTheme, defaultProps, properties);
