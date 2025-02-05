@@ -276,7 +276,7 @@ export const RecommendationBundle = observer((properties: RecommendationBundlePr
 			}),
 			// component theme overrides
 			theme: props?.theme,
-			treePath: `${treePath} carousel`,
+			treePath,
 		},
 	};
 
@@ -448,7 +448,7 @@ export const RecommendationBundle = observer((properties: RecommendationBundlePr
 													hideCheckboxes={hideCheckboxes}
 													theme={props.theme}
 													ref={seedRef}
-													treePath={`${treePath} carousel`}
+													treePath={treePath}
 													lang={{ seedText: lang.seedText }}
 												>
 													{resultComponent ? (
@@ -457,6 +457,7 @@ export const RecommendationBundle = observer((properties: RecommendationBundlePr
 															seed: true,
 															selected: selectedItems.findIndex((item) => item.id == seed.id) > -1,
 															onProductSelect,
+															treePath,
 														})
 													) : (
 														<Result {...subProps.result} controller={controller} result={seed} />
@@ -501,11 +502,11 @@ export const RecommendationBundle = observer((properties: RecommendationBundlePr
 																			checked={selected}
 																			hideCheckboxes={hideCheckboxes}
 																			theme={props.theme}
-																			treePath={`${treePath} carousel`}
+																			treePath={treePath}
 																			lang={{ seedText: lang.seedText }}
 																		>
 																			{resultComponent ? (
-																				cloneWithProps(resultComponent, { result: result, seed: true, selected, onProductSelect })
+																				cloneWithProps(resultComponent, { result: result, seed: true, selected, onProductSelect, treePath })
 																			) : (
 																				<Result {...subProps.result} controller={controller} result={result} />
 																			)}
@@ -522,11 +523,11 @@ export const RecommendationBundle = observer((properties: RecommendationBundlePr
 																			checked={selected}
 																			hideCheckboxes={hideCheckboxes}
 																			theme={props.theme}
-																			treePath={`${treePath} carousel`}
+																			treePath={treePath}
 																			className={idx + 1 == resultsToRender.length ? 'ss__recommendation-bundle__wrapper__selector--last' : ''}
 																		>
 																			{resultComponent ? (
-																				cloneWithProps(resultComponent, { result: result, seed: false, selected, onProductSelect })
+																				cloneWithProps(resultComponent, { result: result, seed: false, selected, onProductSelect, treePath })
 																			) : (
 																				<Result {...subProps.result} controller={controller} result={result} />
 																			)}
@@ -549,11 +550,11 @@ export const RecommendationBundle = observer((properties: RecommendationBundlePr
 																		checked={selected}
 																		hideCheckboxes={hideCheckboxes}
 																		theme={props.theme}
-																		treePath={`${treePath} carousel`}
+																		treePath={treePath}
 																		className={idx + 1 == results.length ? 'ss__recommendation-bundle__wrapper__selector--last' : ''}
 																	>
 																		{resultComponent ? (
-																			cloneWithProps(resultComponent, { result: result, seed: false, selected, onProductSelect })
+																			cloneWithProps(resultComponent, { result: result, seed: false, selected, onProductSelect, treePath })
 																		) : (
 																			<Result {...subProps.result} controller={controller} result={result} />
 																		)}
@@ -582,11 +583,11 @@ export const RecommendationBundle = observer((properties: RecommendationBundlePr
 														checked={selected}
 														hideCheckboxes={hideCheckboxes}
 														theme={props.theme}
-														treePath={`${treePath} carousel`}
+														treePath={treePath}
 														lang={{ seedText: lang.seedText }}
 													>
 														{resultComponent ? (
-															cloneWithProps(resultComponent, { result: result, seed: true, selected, onProductSelect })
+															cloneWithProps(resultComponent, { result: result, seed: true, selected, onProductSelect, treePath })
 														) : (
 															<Result {...subProps.result} controller={controller} result={result} />
 														)}
@@ -603,11 +604,11 @@ export const RecommendationBundle = observer((properties: RecommendationBundlePr
 														checked={selected}
 														hideCheckboxes={hideCheckboxes}
 														theme={props.theme}
-														treePath={`${treePath} carousel`}
+														treePath={treePath}
 														className={idx + 1 == resultsToRender.length ? 'ss__recommendation-bundle__wrapper__selector--last' : ''}
 													>
 														{resultComponent ? (
-															cloneWithProps(resultComponent, { result: result, seed: false, selected, onProductSelect })
+															cloneWithProps(resultComponent, { result: result, seed: false, selected, onProductSelect, treePath })
 														) : (
 															<Result {...subProps.result} controller={controller} result={result} />
 														)}

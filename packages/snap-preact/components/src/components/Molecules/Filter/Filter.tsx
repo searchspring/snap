@@ -75,7 +75,7 @@ export const Filter = observer((properties: FilterProps): JSX.Element => {
 			}),
 			// component theme overrides
 			theme: props.theme,
-			treePath: `${treePath} button`,
+			treePath,
 		},
 	};
 

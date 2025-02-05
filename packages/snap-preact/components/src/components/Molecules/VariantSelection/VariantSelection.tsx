@@ -99,7 +99,7 @@ export const VariantSelection = observer((properties: VariantSelectionProps): JS
 			}),
 			// component theme overrides
 			theme: props?.theme,
-			treePath: `${treePath} dropdown button`,
+			treePath,
 		},
 		list: {
 			titleText: selection.field,
@@ -188,7 +188,7 @@ export const VariantSelection = observer((properties: VariantSelectionProps): JS
 															<Fragment />
 														)}
 													</div>
-													<Icon icon={open ? 'angle-up' : 'angle-down'} {...subProps.icon} />
+													<Icon icon={open ? 'angle-up' : 'angle-down'} {...subProps.icon} treePath={props.treePath} />
 												</Fragment>
 											);
 										};

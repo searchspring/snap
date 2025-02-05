@@ -75,7 +75,7 @@ export const OverlayBadge = observer((properties: OverlayBadgeProps): JSX.Elemen
 
 	const props = mergeProps('overlayBadge', globalTheme, defaultProps, properties);
 
-	const { result, children, controller, renderEmpty, limit, className } = props;
+	const { result, children, controller, renderEmpty, limit, className, treePath } = props;
 
 	if (!children) {
 		controller?.log?.warn('OverlayBadge component must have children');
@@ -146,7 +146,7 @@ export const OverlayBadge = observer((properties: OverlayBadgeProps): JSX.Elemen
 												return <Fragment />;
 											}
 
-											return <BadgeComponent {...badge} {...badge.parameters} />;
+											return <BadgeComponent {...badge} {...badge.parameters} treePath={treePath} />;
 										})}
 									</div>
 								);

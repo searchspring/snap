@@ -7,7 +7,7 @@ import { observer } from 'mobx-react';
 import { ComponentProps, StyleScript } from '../../../types';
 import { Theme, useTheme, CacheProvider, useTreePath } from '../../../providers';
 import { useA11y } from '../../../hooks/useA11y';
-import { defined, mergeProps, mergeStyles } from '../../../utilities';
+import { cloneWithProps, defined, mergeProps, mergeStyles } from '../../../utilities';
 import { Icon, IconProps, IconType } from '../Icon';
 import { Lang, useLang } from '../../../hooks';
 import deepmerge from 'deepmerge';
@@ -121,16 +121,16 @@ export const Button = observer((properties: ButtonProps): JSX.Element => {
 			{native ? (
 				<button {...elementProps}>
 					<span className="ss__button__content" {...mergedLang.button?.all}>
-						{content}
-						{children}
+						{cloneWithProps(content, { treePath })}
+						{cloneWithProps(children, { treePath })}
 					</span>
 					{icon && <Icon {...subProps.icon} {...(typeof icon == 'string' ? { icon: icon } : (icon as Partial<IconProps>))} />}
 				</button>
 			) : (
 				<div {...(!disableA11y ? a11yProps : {})} {...elementProps} role={'button'} aria-disabled={disabled}>
 					<span className="ss__button__content" {...mergedLang.button?.all}>
-						{content}
-						{children}
+						{cloneWithProps(content, { treePath })}
+						{cloneWithProps(children, { treePath })}
 					</span>
 					{icon && <Icon {...subProps.icon} {...(typeof icon == 'string' ? { icon: icon } : (icon as Partial<IconProps>))} />}
 				</div>

@@ -6,7 +6,7 @@ import classnames from 'classnames';
 import { observer } from 'mobx-react';
 import deepmerge from 'deepmerge';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { defined, mergeProps, mergeStyles } from '../../../utilities';
+import { cloneWithProps, defined, mergeProps, mergeStyles } from '../../../utilities';
 import { Navigation, Pagination, A11y } from 'swiper/modules';
 import { Icon, IconProps } from '../../Atoms/Icon/Icon';
 import type { Swiper as SwiperTypes } from 'swiper';
@@ -408,7 +408,7 @@ export const Carousel = observer((properties: CarouselProps): JSX.Element => {
 					}}
 				>
 					{children.map((child: ComponentChildren) => {
-						return <SwiperSlide>{child}</SwiperSlide>;
+						return <SwiperSlide>{cloneWithProps(child, { treePath })}</SwiperSlide>;
 					})}
 				</Swiper>
 

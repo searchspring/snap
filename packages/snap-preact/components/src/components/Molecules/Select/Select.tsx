@@ -142,7 +142,7 @@ export const Select = observer((properties: SelectProps): JSX.Element => {
 			}),
 			// component theme overrides
 			theme: props?.theme,
-			treePath: `${treePath} dropdown`,
+			treePath,
 		},
 		icon: {
 			// default props
@@ -157,6 +157,7 @@ export const Select = observer((properties: SelectProps): JSX.Element => {
 			}),
 			// component theme overrides
 			theme: props?.theme,
+			treePath,
 		},
 	};
 
@@ -290,7 +291,6 @@ export const Select = observer((properties: SelectProps): JSX.Element => {
 												{...subProps.icon}
 												className="ss__select__selection__icon"
 												name={'selection'}
-												treePath={`${treePath} dropdown button`}
 												{...(typeof selection.icon == 'string' ? { icon: selection.icon } : (selection.icon as Partial<IconProps>))}
 											/>
 										)}
@@ -301,7 +301,6 @@ export const Select = observer((properties: SelectProps): JSX.Element => {
 									<Icon
 										{...subProps.icon}
 										name={open ? 'open' : 'close'}
-										treePath={`${treePath} dropdown button`}
 										{...(open
 											? { ...(typeof iconClose == 'string' ? { icon: iconClose } : (iconClose as Partial<IconProps>)) }
 											: { ...(typeof iconOpen == 'string' ? { icon: iconOpen } : (iconOpen as Partial<IconProps>)) })}

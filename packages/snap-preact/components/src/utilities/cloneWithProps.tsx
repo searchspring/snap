@@ -11,7 +11,11 @@ export const cloneWithProps = (input: any, props?: any): any => {
 		return input.map((entry) => {
 			return cloneWithProps(entry, props);
 		});
+	} else if (typeof input?.type == 'string') {
+		// don't want to clone native elements
+		return input;
 	}
 
-	return cloneElement(input, props);
+	// clone element and it's children if it has them
+	return cloneElement(input, props, input.props?.children && cloneWithProps(input.props.children, props));
 };

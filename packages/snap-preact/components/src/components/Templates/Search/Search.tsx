@@ -221,15 +221,15 @@ export const Search = observer((properties: SearchProps): JSX.Element => {
 						{sidebarOpenState && (
 							<Fragment>
 								<Sidebar {...subProps.Sidebar} controller={controller} />
-								{!hideLeftBanner && <Banner content={merchandising.content} type={ContentType.LEFT} name={'left'} />}
+								{!hideLeftBanner && <Banner {...subProps.Banner} content={merchandising.content} type={ContentType.LEFT} name={'left'} />}
 							</Fragment>
 						)}
 					</div>
 				)}
 				<div className={classnames('ss__search__content')}>
 					{!hideSearchHeader && <SearchHeader {...subProps.SearchHeader} controller={controller} />}
-					{!hideHeaderBanner && <Banner content={merchandising.content} type={ContentType.HEADER} name={'header'} />}
-					{!hideBannerBanner && <Banner content={merchandising.content} type={ContentType.BANNER} name={'banner'} />}
+					{!hideHeaderBanner && <Banner {...subProps.Banner} content={merchandising.content} type={ContentType.HEADER} name={'header'} />}
+					{!hideBannerBanner && <Banner {...subProps.Banner} content={merchandising.content} type={ContentType.BANNER} name={'banner'} />}
 
 					{!hideToggleSidebarButton && (toggleSidebarButtonText || lang.toggleSidebarButtonText?.value) && (
 						<Button
@@ -254,7 +254,7 @@ export const Search = observer((properties: SearchProps): JSX.Element => {
 						store.pagination.totalResults === 0 && <NoResults {...subProps.NoResults} controller={controller} />
 					)}
 
-					{!hideFooterBanner && <Banner content={merchandising.content} type={ContentType.FOOTER} name={'footer'} />}
+					{!hideFooterBanner && <Banner {...subProps.Banner} content={merchandising.content} type={ContentType.FOOTER} name={'footer'} />}
 
 					{!hideBottomToolBar && store.pagination.totalResults > 0 && (
 						<Toolbar {...subProps.BottomToolbar} className="ss__search__content__toolbar--bottom-toolbar" controller={controller} />

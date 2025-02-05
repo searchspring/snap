@@ -34,7 +34,7 @@ export const CalloutBadge = observer((properties: CalloutBadgeProps): JSX.Elemen
 
 	const props = mergeProps('calloutBadge', globalTheme, defaultProps, properties);
 
-	const { result, tag, renderEmpty, limit, className } = props;
+	const { result, tag, renderEmpty, limit, className, treePath } = props;
 
 	const badgeComponentMap = {
 		...defaultBadgeComponentMap,
@@ -55,7 +55,7 @@ export const CalloutBadge = observer((properties: CalloutBadgeProps): JSX.Elemen
 						if (!BadgeComponent) {
 							return <Fragment />;
 						}
-						return <BadgeComponent {...badge} {...badge.parameters} />;
+						return <BadgeComponent {...badge} {...badge.parameters} treePath={treePath} />;
 					})}
 				</div>
 			</CacheProvider>

@@ -199,7 +199,7 @@ export const LoadMore = observer((properties: LoadMoreProps): JSX.Element => {
 			}),
 			// component theme overrides
 			theme: props?.theme,
-			treePath: `${treePath} button`,
+			treePath,
 		},
 	};
 
