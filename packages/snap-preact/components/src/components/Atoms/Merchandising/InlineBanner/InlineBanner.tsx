@@ -2,7 +2,7 @@ import { Fragment, h } from 'preact';
 
 import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
-import { Theme, useTheme, CacheProvider } from '../../../../providers';
+import { Theme, useTheme, CacheProvider, useTreePath } from '../../../../providers';
 import { mergeProps, mergeStyles } from '../../../../utilities';
 import type { Banner } from '@searchspring/snap-store-mobx';
 import { useA11y } from '../../../../hooks/useA11y';
@@ -32,9 +32,12 @@ const defaultStyles: StyleScript<InlineBannerProps> = ({ width }) => {
 
 export function InlineBanner(properties: InlineBannerProps): JSX.Element {
 	const globalTheme: Theme = useTheme();
+	const globalTreePath = useTreePath();
+
 	const defaultProps: Partial<InlineBannerProps> = {
 		layout: ResultsLayout.grid,
 		width: 'auto',
+		treePath: globalTreePath,
 	};
 
 	const props = mergeProps('inlineBanner', globalTheme, defaultProps, properties);

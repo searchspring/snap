@@ -40,6 +40,7 @@ export type ResultComponent<Props extends Record<string, any> = object> = React.
 		controller: AbstractController;
 		result: Product;
 		theme?: Theme;
+		treePath?: string;
 	} & Props
 >;
 

@@ -3,9 +3,9 @@ import { Fragment, h } from 'preact';
 import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
 import { observer } from 'mobx-react';
-import { Theme, useTheme, CacheProvider } from '../../../providers';
+import { Theme, useTheme, CacheProvider, useTreePath } from '../../../providers';
 import { ComponentProps, StyleScript } from '../../../types';
-import { mergeStyles } from '../../../utilities';
+import { mergeProps, mergeStyles } from '../../../utilities';
 
 const defaultStyles: StyleScript<BadgeRectangleProps> = ({ color, colorText }) => {
 	return css({
@@ -23,17 +23,17 @@ const defaultStyles: StyleScript<BadgeRectangleProps> = ({ color, colorText }) =
 
 export const BadgeRectangle = observer((properties: BadgeRectangleProps): JSX.Element => {
 	const globalTheme: Theme = useTheme();
+	const globalTreePath = useTreePath();
 
-	const props: BadgeRectangleProps = {
+	const defaultProps: Partial<BadgeRectangleProps> = {
 		// default props
 		color: 'rgba(58, 35, 173, 1)',
 		colorText: '#fff',
-		// global theme
-		...globalTheme?.components?.badgeRectangle,
-		// props
-		...properties,
-		...properties.theme?.components?.badgeRectangle,
+		treePath: globalTreePath,
 	};
+
+	const props = mergeProps('badgeRectangle', globalTheme, defaultProps, properties);
+
 	const { value, tag, className } = props;
 
 	const styling = mergeStyles<BadgeRectangleProps>(props, defaultStyles);

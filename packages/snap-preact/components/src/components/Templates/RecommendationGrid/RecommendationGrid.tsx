@@ -56,7 +56,7 @@ export const RecommendationGrid = observer((properties: RecommendationGridProps)
 		};
 	}
 
-	const { disableStyles, title, resultComponent, trim, lazyRender, className, theme, controller } = props;
+	const { disableStyles, title, resultComponent, trim, lazyRender, className, treePath, theme, controller } = props;
 
 	const mergedlazyRender = {
 		enabled: true,
@@ -122,7 +122,7 @@ export const RecommendationGrid = observer((properties: RecommendationGridProps)
 								(() => {
 									if (resultComponent && controller) {
 										const ResultComponent = resultComponent;
-										return <ResultComponent controller={controller} result={result as Product} theme={theme} />;
+										return <ResultComponent controller={controller} result={result as Product} theme={theme} treePath={treePath} />;
 									} else {
 										return (
 											<RecommendationResultTracker result={result as Product} controller={controller}>

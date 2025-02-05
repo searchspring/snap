@@ -4,7 +4,7 @@ import { observer } from 'mobx-react-lite';
 import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
 
-import { Theme, useTheme, useSnap } from '../../../providers';
+import { Theme, useTheme, useSnap, useTreePath } from '../../../providers';
 import { cloneWithProps, mergeProps, mergeStyles } from '../../../utilities';
 import { ComponentProps } from '../../../types';
 import { filters } from '@searchspring/snap-toolbox';
@@ -26,6 +26,7 @@ const defaultStyles: StyleScript<NoResultsProps> = ({}) => {
 
 export const NoResults = observer((properties: NoResultsProps): JSX.Element => {
 	const globalTheme: Theme = useTheme();
+	const globalTreePath = useTreePath();
 
 	const defaultProps: Partial<NoResultsProps> = {
 		suggestionsTitleText: `Suggestions`,
@@ -34,6 +35,7 @@ export const NoResults = observer((properties: NoResultsProps): JSX.Element => {
 			`Remove possible redundant keywords (ie. "products").`,
 			`Use other words to describe what you are searching for.`,
 		],
+		treePath: globalTreePath,
 	};
 
 	const props = mergeProps('noResults', globalTheme, defaultProps, properties);

@@ -43,7 +43,9 @@ export const RecommendationEmail = observer((properties: RecommendationEmailProp
 					{(() => {
 						if (resultComponent) {
 							const ResultComponent = resultComponent;
-							return <ResultComponent controller={controller as AbstractController} result={result} {...resultProps} email={true} />;
+							return (
+								<ResultComponent controller={controller as AbstractController} result={result} {...resultProps} email={true} treePath={treePath} />
+							);
 						} else {
 							return (
 								<Result

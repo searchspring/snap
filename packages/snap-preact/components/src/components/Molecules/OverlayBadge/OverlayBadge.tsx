@@ -4,9 +4,9 @@ import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
 import { observer } from 'mobx-react';
 
-import { Theme, useTheme, CacheProvider, useSnap } from '../../../providers';
+import { Theme, useTheme, CacheProvider, useSnap, useTreePath } from '../../../providers';
 import { ComponentProps, ComponentMap, StyleScript } from '../../../types';
-import { defaultBadgeComponentMap, mergeStyles } from '../../../utilities';
+import { defaultBadgeComponentMap, mergeProps, mergeStyles } from '../../../utilities';
 import { useComponent } from '../../../hooks';
 import type { AutocompleteController, RecommendationController, SearchController } from '@searchspring/snap-controller';
 import type { Product } from '@searchspring/snap-store-mobx';
@@ -66,17 +66,16 @@ const defaultStyles: StyleScript<OverlayBadgeProps> = ({ controller }) => {
 export const OverlayBadge = observer((properties: OverlayBadgeProps): JSX.Element => {
 	const globalTheme: Theme = useTheme();
 	const snap = useSnap();
+	const globalTreePath = useTreePath();
 
-	const props: OverlayBadgeProps = {
-		// default props
+	const defaultProps: Partial<OverlayBadgeProps> = {
 		limit: 1,
-		// global theme
-		...globalTheme?.components?.overlayBadge,
-		// props
-		...properties,
-		...properties.theme?.components?.overlayBadge,
+		treePath: globalTreePath,
 	};
-	const { result, children, controller, renderEmpty, limit, className } = props;
+
+	const props = mergeProps('overlayBadge', globalTheme, defaultProps, properties);
+
+	const { result, children, controller, renderEmpty, limit, className, treePath } = props;
 
 	if (!children) {
 		controller?.log?.warn('OverlayBadge component must have children');
@@ -147,7 +146,7 @@ export const OverlayBadge = observer((properties: OverlayBadgeProps): JSX.Elemen
 												return <Fragment />;
 											}
 
-											return <BadgeComponent {...badge} {...badge.parameters} />;
+											return <BadgeComponent {...badge} {...badge.parameters} treePath={treePath} />;
 										})}
 									</div>
 								);

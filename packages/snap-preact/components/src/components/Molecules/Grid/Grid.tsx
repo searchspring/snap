@@ -6,7 +6,7 @@ import classnames from 'classnames';
 import deepmerge from 'deepmerge';
 import { filters } from '@searchspring/snap-toolbox';
 
-import { Theme, useTheme, CacheProvider } from '../../../providers';
+import { Theme, useTheme, CacheProvider, useTreePath } from '../../../providers';
 import { ComponentProps, ListOption, SwatchOption, StyleScript } from '../../../types';
 import { Lang, useA11y, useLang } from '../../../hooks';
 import { Image, ImageProps } from '../../Atoms/Image';
@@ -113,12 +113,13 @@ const defaultStyles: StyleScript<GridProps> = ({ gapSize, columns, theme, disabl
 
 export function Grid(properties: GridProps): JSX.Element {
 	const globalTheme: Theme = useTheme();
-
+	const globalTreePath = useTreePath();
 	const defaultProps: Partial<GridProps> = {
 		// default props
 		multiSelect: false,
 		columns: 4,
 		gapSize: '8px',
+		treePath: globalTreePath,
 	};
 
 	const props = mergeProps('grid', globalTheme, defaultProps, properties);

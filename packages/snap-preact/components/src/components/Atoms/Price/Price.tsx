@@ -4,7 +4,7 @@ import { filters } from '@searchspring/snap-toolbox';
 import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
 
-import { Theme, useTheme, CacheProvider } from '../../../providers';
+import { Theme, useTheme, CacheProvider, useTreePath } from '../../../providers';
 import { FormattedNumberProps } from '../FormattedNumber/FormattedNumber';
 import { StyleScript } from '../../../types';
 import { mergeProps, mergeStyles } from '../../../utilities';
@@ -21,6 +21,8 @@ const defaultStyles: StyleScript<PriceProps> = ({ theme }) => {
 
 export function Price(properties: PriceProps): JSX.Element {
 	const globalTheme: Theme = useTheme();
+	const globalTreePath = useTreePath();
+
 	const defaultProps: Partial<PriceProps> = {
 		symbol: '$',
 		decimalPlaces: 2,
@@ -29,6 +31,7 @@ export function Price(properties: PriceProps): JSX.Element {
 		decimalSeparator: '.',
 		symbolAfter: false,
 		lineThrough: false,
+		treePath: globalTreePath,
 	};
 
 	const props = mergeProps('price', globalTheme, defaultProps, properties);

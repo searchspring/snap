@@ -5,7 +5,7 @@ import { observer } from 'mobx-react';
 import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
 
-import { Theme, useTheme, CacheProvider } from '../../../providers';
+import { Theme, useTheme, CacheProvider, useTreePath } from '../../../providers';
 import { defined, mergeProps, mergeStyles } from '../../../utilities';
 import { ComponentProps, ListOption, StyleScript } from '../../../types';
 import { Dropdown, DropdownProps } from '../../Atoms/Dropdown';
@@ -72,12 +72,14 @@ const defaultStyles: StyleScript<SelectProps> = ({ color, backgroundColor, borde
 
 export const Select = observer((properties: SelectProps): JSX.Element => {
 	const globalTheme: Theme = useTheme();
+	const globalTreePath = useTreePath();
 
 	const defaultProps: Partial<SelectProps> = {
 		iconOpen: 'angle-down',
 		iconClose: 'angle-up',
 		separator: ': ',
 		startOpen: false,
+		treePath: globalTreePath,
 	};
 
 	const props = mergeProps('select', globalTheme, defaultProps, properties);
@@ -330,6 +332,7 @@ export const Select = observer((properties: SelectProps): JSX.Element => {
 											{...subProps.icon}
 											name={'option'}
 											className="ss__select__select__option__icon"
+											treePath={`${treePath} dropdown`}
 											{...(typeof option.icon == 'string' ? { icon: option.icon } : (option.icon as Partial<IconProps>))}
 										/>
 									)}

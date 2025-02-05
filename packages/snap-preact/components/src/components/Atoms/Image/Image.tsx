@@ -4,7 +4,7 @@ import { useState, useEffect, useRef } from 'preact/hooks';
 import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
 
-import { Theme, useTheme, CacheProvider } from '../../../providers';
+import { Theme, useTheme, CacheProvider, useTreePath } from '../../../providers';
 import { ComponentProps, StyleScript } from '../../../types';
 import { mergeProps, mergeStyles } from '../../../utilities';
 
@@ -33,9 +33,12 @@ const defaultStyles: StyleScript<ImageProps> = () => {
 
 export function Image(properties: ImageProps): JSX.Element {
 	const globalTheme: Theme = useTheme();
+	const globalTreePath = useTreePath();
+
 	const defaultProps: Partial<ImageProps> = {
 		fallback: FALLBACK_IMAGE_URL,
 		lazy: true,
+		treePath: globalTreePath,
 	};
 
 	const props = mergeProps('image', globalTheme, defaultProps, properties);

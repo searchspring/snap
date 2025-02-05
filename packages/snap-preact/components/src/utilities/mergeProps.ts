@@ -23,12 +23,14 @@ export function mergeProps<GenericComponentProps = ComponentProps>(
 		3. spreads global theme props of component and named component
 		4. spreads component theme props of component and named component
 		5. ensure templates theme variables pass on in `theme`
+		6. if treepath contains 'custom' do 2 again
 
 	*/
 
 	const theme = (props as ComponentProps).theme;
 	const componentName = (props as any)?.name;
-	let treePath = (props as ComponentProps).treePath ?? '';
+	let treePath = (props as ComponentProps).treePath || (defaultProps as ComponentProps).treePath || '';
+	treePath += `${treePath ? ' ' : ''}${componentType}`;
 
 	// start with defaultProps
 	let mergedProps = {
@@ -47,6 +49,7 @@ export function mergeProps<GenericComponentProps = ComponentProps>(
 		mergedProps = {
 			...mergedProps,
 			...props,
+			treePath,
 		};
 
 		// add theme props if they exist
@@ -73,7 +76,7 @@ export function mergeProps<GenericComponentProps = ComponentProps>(
 			mergedProps = mergeThemeProps(themeComponent, mergedProps) as Partial<GenericComponentProps>;
 		}
 
-		treePath += `${treePath ? ' ' : ''}${componentType}` + (componentName?.match(/^[A-Z,a-z,-]+$/) ? `.${componentName}` : '');
+		treePath += componentName?.match(/^[A-Z,a-z,-]+$/) ? `.${componentName}` : '';
 
 		const applicableSelectors = filterSelectors(globalTheme?.components || {}, treePath).sort(sortSelectors);
 		applicableSelectors.forEach((selector) => {
@@ -102,6 +105,14 @@ export function mergeProps<GenericComponentProps = ComponentProps>(
 		}
 		if (globalTheme.layoutOptions) {
 			(mergedProps as ComponentProps).theme!.layoutOptions = globalTheme.layoutOptions;
+		}
+
+		//if custom component, re-spread props again
+		if (treePath && treePath.indexOf('customComponent') > -1) {
+			mergedProps = {
+				...mergedProps,
+				...props,
+			};
 		}
 	}
 

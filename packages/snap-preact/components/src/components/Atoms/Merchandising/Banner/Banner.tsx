@@ -3,7 +3,7 @@ import { observer } from 'mobx-react-lite';
 import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
 
-import { Theme, useTheme, CacheProvider } from '../../../../providers';
+import { Theme, useTheme, CacheProvider, useTreePath } from '../../../../providers';
 import { mergeProps, mergeStyles } from '../../../../utilities';
 
 import { BannerContent, ContentType } from '@searchspring/snap-store-mobx';
@@ -21,7 +21,11 @@ const defaultStyles: StyleScript<BannerProps> = () => {
 
 export const Banner = observer((properties: BannerProps): JSX.Element => {
 	const globalTheme: Theme = useTheme();
-	const defaultProps: Partial<BannerProps> = {};
+	const globalTreePath = useTreePath();
+
+	const defaultProps: Partial<BannerProps> = {
+		treePath: globalTreePath,
+	};
 
 	const props = mergeProps('banner', globalTheme, defaultProps, properties);
 

@@ -3,7 +3,7 @@ import { Fragment, h } from 'preact';
 import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
 
-import { Theme, useTheme, CacheProvider } from '../../../providers';
+import { Theme, useTheme, CacheProvider, useTreePath } from '../../../providers';
 import { ComponentProps, ListOption, StyleScript } from '../../../types';
 import { defined, mergeProps, mergeStyles } from '../../../utilities';
 import { useState } from 'react';
@@ -52,7 +52,10 @@ const defaultStyles: StyleScript<RadioListProps> = () => {
 
 export function RadioList(properties: RadioListProps): JSX.Element {
 	const globalTheme: Theme = useTheme();
-	const defaultProps: Partial<RadioListProps> = {};
+	const globalTreePath = useTreePath();
+	const defaultProps: Partial<RadioListProps> = {
+		treePath: globalTreePath,
+	};
 
 	const props = mergeProps('radioList', globalTheme, defaultProps, properties);
 

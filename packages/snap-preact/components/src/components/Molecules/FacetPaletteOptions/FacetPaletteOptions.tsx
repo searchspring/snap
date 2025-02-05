@@ -9,7 +9,7 @@ import { filters } from '@searchspring/snap-toolbox';
 import { defined, mergeProps, mergeStyles } from '../../../utilities';
 import { ComponentProps, StyleScript } from '../../../types';
 import { Icon, IconProps } from '../../Atoms/Icon';
-import { Theme, useTheme, CacheProvider } from '../../../providers';
+import { Theme, useTheme, CacheProvider, useTreePath } from '../../../providers';
 import { createHoverProps } from '../../../toolbox';
 import type { FacetValue, ValueFacet } from '@searchspring/snap-store-mobx';
 import { Checkbox, CheckboxProps } from '../Checkbox';
@@ -154,6 +154,7 @@ const defaultStyles: StyleScript<FacetPaletteOptionsProps> = ({ columns, gridSiz
 
 export const FacetPaletteOptions = observer((properties: FacetPaletteOptionsProps): JSX.Element => {
 	const globalTheme: Theme = useTheme();
+	const globalTreePath = useTreePath();
 	const defaultProps: Partial<FacetPaletteOptionsProps> = {
 		columns: 4,
 		layout: 'grid',
@@ -161,11 +162,7 @@ export const FacetPaletteOptions = observer((properties: FacetPaletteOptionsProp
 		gapSize: properties.layout == 'list' ? '2px' : '8px',
 		hideCount: true,
 		hideCheckbox: true,
-		// global theme
-		...globalTheme?.components?.facetPaletteOptions,
-		// props
-		...properties,
-		...properties.theme?.components?.facetPaletteOptions,
+		treePath: globalTreePath,
 	};
 
 	const props = mergeProps('facetPaletteOptions', globalTheme, defaultProps, properties);

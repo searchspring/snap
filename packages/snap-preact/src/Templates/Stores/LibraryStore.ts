@@ -15,6 +15,7 @@ import { pluginBackgroundFilters as magento2PluginBackgroundFilters } from './li
 import { pluginBackgroundFilters } from './library/plugins/common/pluginBackgroundFilters';
 import { pluginScrollToTop } from './library/plugins/common/pluginScrollToTop';
 import { pluginLogger } from './library/plugins/common/pluginLogger';
+import { CustomComponent } from './library/components/CustomComponent';
 
 type LibraryComponentImport = {
 	[componentName: string]: (args?: any) => Promise<FunctionalComponent<RenderableProps<any>>>;
@@ -315,7 +316,14 @@ export class LibraryStore {
 		// only allow certain types: 'results' and 'badges' - otherwise section components could be added (eg: 'search')
 		if (ALLOWED_CUSTOM_COMPONENT_TYPES.includes(type) && this.components[type]) {
 			this.import.component[type][name] = async () => {
-				return this.components[type][name] || (this.components[type][name] = await componentFn());
+				return (
+					this.components[type][name] ||
+					(this.components[type][name] = await CustomComponent({
+						type,
+						name,
+						componentFn,
+					}))
+				);
 			};
 		}
 	}

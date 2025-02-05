@@ -4,7 +4,7 @@ import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
 import { observer } from 'mobx-react';
 
-import { Theme, useTheme, CacheProvider } from '../../../providers';
+import { Theme, useTheme, CacheProvider, useTreePath } from '../../../providers';
 import { ComponentProps, StyleScript } from '../../../types';
 import { defined, mergeProps, mergeStyles } from '../../../utilities';
 import { Checkbox, CheckboxProps } from '../Checkbox/Checkbox';
@@ -44,8 +44,11 @@ const defaultStyles: StyleScript<FacetListOptionsProps> = ({ horizontal, theme, 
 
 export const FacetListOptions = observer((properties: FacetListOptionsProps): JSX.Element => {
 	const globalTheme: Theme = useTheme();
+	const globalTreePath = useTreePath();
+
 	const defaultProps: Partial<FacetListOptionsProps> = {
 		hideCheckbox: properties.horizontal ? true : false,
+		treePath: globalTreePath,
 	};
 
 	const props = mergeProps('facetListOptions', globalTheme, defaultProps, properties);

@@ -6,7 +6,7 @@ import { observer } from 'mobx-react-lite';
 import deepmerge from 'deepmerge';
 
 import { Facet, FacetProps } from '../Facet';
-import { Theme, useTheme, CacheProvider } from '../../../providers';
+import { Theme, useTheme, CacheProvider, useTreePath } from '../../../providers';
 import { defined, mergeProps, mergeStyles } from '../../../utilities';
 import { ComponentProps, StyleScript } from '../../../types';
 import type { SearchController, AutocompleteController } from '@searchspring/snap-controller';
@@ -77,6 +77,7 @@ const defaultStyles: StyleScript<FacetsHorizontalProps> = ({}) => {
 
 export const FacetsHorizontal = observer((properties: FacetsHorizontalProps): JSX.Element => {
 	const globalTheme: Theme = useTheme();
+	const globalTreePath = useTreePath();
 
 	const defaultProps: Partial<FacetsHorizontalProps> = {
 		limit: 6,
@@ -84,6 +85,7 @@ export const FacetsHorizontal = observer((properties: FacetsHorizontalProps): JS
 		iconCollapse: 'angle-up',
 		iconExpand: 'angle-down',
 		facets: properties.controller?.store?.facets,
+		treePath: globalTreePath,
 	};
 
 	let props = mergeProps('facetsHorizontal', globalTheme, defaultProps, properties);
@@ -171,7 +173,7 @@ export const FacetsHorizontal = observer((properties: FacetsHorizontalProps): JS
 			}),
 			// component theme overrides
 			theme: props?.theme,
-			treePath,
+			treePath: `${treePath} dropdown button`,
 		},
 		facet: {
 			// default props
@@ -187,7 +189,7 @@ export const FacetsHorizontal = observer((properties: FacetsHorizontalProps): JS
 			}),
 			// component theme overrides
 			theme: props?.theme,
-			treePath,
+			treePath: overlay ? `${treePath} dropdown` : treePath,
 		},
 		MobileSidebar: {
 			// default props

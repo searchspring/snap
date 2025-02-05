@@ -20,6 +20,7 @@ describe('mergeProps function without theme name', () => {
 			iconClose: 'angle-up',
 			separator: ': ',
 			startOpen: false,
+			treePath: 'select',
 		});
 	});
 	it('merges global theme', () => {
@@ -48,6 +49,7 @@ describe('mergeProps function without theme name', () => {
 			iconClose: 'angle-up',
 			separator: ': ',
 			startOpen: true,
+			treePath: 'select',
 			unrelatedProp: 1,
 		});
 	});
@@ -82,6 +84,7 @@ describe('mergeProps function without theme name', () => {
 			startOpen: true,
 			className: 'additonal-className',
 			unrelatedProp: 1,
+			treePath: 'select',
 		});
 	});
 
@@ -128,6 +131,7 @@ describe('mergeProps function without theme name', () => {
 			startOpen: true,
 			className: 'additonal-className',
 			unrelatedProp: 1,
+			treePath: 'select',
 			theme: properties.theme,
 			...properties.theme?.components![componentType],
 		});
