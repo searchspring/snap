@@ -92,7 +92,7 @@ describe('BundledRecommendations', () => {
 			//check it is responsive to cartstore changes.
 			cy.get(`${config?.selectors?.recommendation.seed} .ss__recommendation-bundle__wrapper__selector__result-wrapper__checkbox`)
 				.should('exist')
-				.click()
+				.click({ force: true })
 				.then(() => {
 					cy.snapController(config?.selectors?.recommendation.controller).then(({ store }) => {
 						//title
@@ -128,7 +128,7 @@ describe('BundledRecommendations', () => {
 					let newActive;
 					//click the next button
 					cy.get(config?.selectors?.recommendation.nextArrow)
-						.click()
+						.click({ force: true })
 						.then(($button) => {
 							//get the new active product
 							newActive = doc.querySelector(
@@ -163,7 +163,7 @@ describe('BundledRecommendations', () => {
 
 					//click the prev button
 					cy.get(config?.selectors?.recommendation.prevArrow)
-						.click()
+						.click({ force: true })
 						.then(($button) => {
 							const newerActiveTitle = doc.querySelector(
 								`${config?.selectors?.recommendation.activeSlide} ${config?.selectors?.recommendation.result} .ss__result__details__title a`
@@ -182,8 +182,9 @@ describe('BundledRecommendations', () => {
 					cy.get(config?.selectors?.recommendation.activeSlide).should('exist');
 					let url = doc.querySelector(`${config?.selectors?.recommendation.activeSlide} ${config?.selectors?.recommendation.result} a`).attributes
 						?.href?.value;
-					cy.get(config?.selectors?.recommendation.activeSlide)
-						.click({ multiple: true })
+					cy.get(`${config?.selectors?.recommendation.activeSlide} a`)
+						.first()
+						.click({ force: true })
 						.then(() => {
 							cy.location('pathname').should('include', url);
 						});

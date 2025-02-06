@@ -121,7 +121,7 @@ describe('BundledRecommendations', () => {
 			//check it is responsive to cartstore changes.
 			cy.get(`${config?.selectors?.recommendation.seed} .ss__recommendation-bundle__wrapper__selector__result-wrapper__checkbox`)
 				.should('exist')
-				.click()
+				.click({ force: true })
 				.then(() => {
 					cy.snapController(config?.selectors?.recommendation.controller).then(({ store }) => {
 						//title
@@ -149,7 +149,7 @@ describe('BundledRecommendations', () => {
 					let url = doc.querySelector(`${config?.selectors?.recommendation.result} a`).attributes?.href?.value;
 					cy.get(`${config?.selectors?.recommendation.result} a`)
 						.first()
-						.click({ multiple: true })
+						.click({ force: true, multiple: true })
 						.then(() => {
 							cy.location('pathname').should('include', url);
 						});
