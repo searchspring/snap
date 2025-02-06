@@ -64,7 +64,7 @@ export function mergeProps<GenericComponentProps = ComponentProps>(
 			...props,
 		};
 
-		treePath += `${treePath ? ' ' : ''}${componentType}` + (componentName?.match(/^[A-Z,a-z,-]+$/) ? `.${componentName}` : '');
+		treePath += componentName?.match(/^[A-Z,a-z,-]+$/) ? `.${componentName}` : '';
 
 		// add theme props if they exist
 		const themeComponent = theme?.components && theme.components[componentType as keyof typeof theme.components];
@@ -80,8 +80,6 @@ export function mergeProps<GenericComponentProps = ComponentProps>(
 				mergedProps = mergeThemeProps(componentProps, mergedProps) as Partial<GenericComponentProps>;
 			}
 		});
-
-		treePath += componentName?.match(/^[A-Z,a-z,-]+$/) ? `.${componentName}` : '';
 
 		// add globalTheme props if they exist
 		const globalComponent = globalTheme?.components && globalTheme.components[componentType as keyof typeof globalTheme.components];
