@@ -96,7 +96,6 @@ export const Button = observer((properties: ButtonProps): JSX.Element => {
 		},
 	};
 
-	console.log('got some props', props);
 	const styling = mergeStyles<ButtonProps>(props, defaultStyles);
 
 	const elementProps = {

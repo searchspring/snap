@@ -22,21 +22,9 @@ const radioStyleScript = ({ size, native, color, theme }: RadioProps) => {
 	}
 
 	return css({
-		display: 'inline-flex',
-		alignItems: 'center',
-		justifyContent: 'center',
-		height: size,
-		width: size,
-		cursor: 'pointer',
-
 		'.ss__icon': {
 			fill: color || variables?.colors.primary,
 			stroke: color || variables?.colors.primary,
-		},
-
-		'&.ss__radio--disabled': {
-			opacity: 0.3,
-			cursor: 'default',
 		},
 	});
 };

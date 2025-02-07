@@ -85,10 +85,13 @@ export const SearchHeader = observer((properties: SearchHeaderProps): JSX.Elemen
 
 	//deep merge with props.lang
 	const lang = deepmerge(defaultLang, props.lang || {});
-	const mergedLang = useLang(lang as any, {
-		pagination: pagination,
-		search: search,
-	});
+	const mergedLang = useLang(
+		lang as any,
+		{
+			pagination: pagination,
+			search: search,
+		} as SearchHeaderPropData
+	);
 
 	return (
 		<CacheProvider>
@@ -186,5 +189,5 @@ export interface SearchHeaderLang {
 
 interface SearchHeaderPropData {
 	pagination?: SearchPaginationStore;
-	query?: SearchQueryStore;
+	search?: SearchQueryStore;
 }

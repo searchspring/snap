@@ -2,12 +2,10 @@ import { css } from '@emotion/react';
 import type { FacetProps } from '../../../../components/Organisms/Facet';
 
 // CSS in JS style script for the Facet component
-const facetStyleScript = ({ color, disableCollapse, theme }: FacetProps) => {
+const facetStyleScript = ({ color, theme }: FacetProps) => {
 	const variables = theme?.variables;
 
 	return css({
-		width: '100%',
-		margin: '0 0 20px 0',
 		'& .ss__facet__dropdown': {
 			'& .ss__facet__dropdown__icon': {
 				transition: 'transform ease .5s',
@@ -19,18 +17,11 @@ const facetStyleScript = ({ color, disableCollapse, theme }: FacetProps) => {
 			},
 		},
 		'& .ss__facet__header': {
-			cursor: disableCollapse ? undefined : 'pointer',
-			display: 'flex',
-			justifyContent: 'space-between',
-			alignItems: 'center',
-			color: color || variables?.colors?.primary,
 			fontWeight: 'bold',
+			borderBottom: '0px',
 		},
 		'& .ss__facet__options': {
-			marginTop: '8px',
 			maxHeight: '400px',
-			overflowY: 'auto',
-			overflowX: 'hidden',
 
 			'&::-webkit-scrollbar': {
 				width: '8px',
@@ -43,16 +34,8 @@ const facetStyleScript = ({ color, disableCollapse, theme }: FacetProps) => {
 			},
 		},
 		'& .ss__facet__show-more-less': {
-			display: 'block',
 			margin: '8px 5px',
-			cursor: 'pointer',
 			color: color || variables?.colors?.secondary,
-			'& .ss__icon': {
-				marginRight: '8px',
-			},
-		},
-		'& .ss__search-input': {
-			margin: '16px 0 0 0',
 		},
 	});
 };

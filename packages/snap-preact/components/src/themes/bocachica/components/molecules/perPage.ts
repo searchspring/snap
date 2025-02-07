@@ -8,8 +8,6 @@ const perPageStyleScript = ({ theme }: PerPageProps) => {
 
 	return css({
 		'.ss__button__content': {
-			display: 'flex',
-			alignItems: 'center',
 			gap: '7px',
 		},
 	});

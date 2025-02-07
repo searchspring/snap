@@ -2,12 +2,8 @@ import { css } from '@emotion/react';
 import type { ToolbarProps } from '../../../../components/Organisms/Toolbar';
 
 // CSS in JS style script for the Toolbar component
-const toolbarStyleScript = ({ theme }: ToolbarProps) => {
-	// eslint-disable-next-line @typescript-eslint/no-unused-vars
-	const variables = theme?.variables;
-
+const toolbarStyleScript = () => {
 	return css({
-		display: 'flex',
 		justifyContent: 'space-between',
 		alignItems: 'center',
 

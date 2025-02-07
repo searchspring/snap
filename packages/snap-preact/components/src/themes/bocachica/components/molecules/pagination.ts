@@ -7,13 +7,7 @@ const paginationStyleScript = ({ theme }: PaginationProps) => {
 
 	return css({
 		'& .ss__pagination__page': {
-			padding: '5px',
-			display: 'inline-block',
-			minHeight: '1em',
-			minWidth: '1em',
-			textAlign: 'center',
 			color: variables?.colors?.secondary,
-
 			'&.ss__pagination__page--active': {
 				textDecoration: 'underline',
 			},

@@ -163,6 +163,7 @@ export const Search = observer((properties: SearchProps): JSX.Element => {
 			hidePagination: true,
 			hideFilterSummary: true,
 			hidePerPage: true,
+			hidePaginationInfo: true,
 			hideLayoutSelector: true,
 			hideSortBy: true,
 			// inherited props
