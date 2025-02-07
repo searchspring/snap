@@ -3,33 +3,23 @@ import type { CheckboxProps } from '../../../../components/Molecules/Checkbox';
 import Color from 'color';
 
 // CSS in JS style script for the Checkbox component
-const checkboxStyleScript = ({ size, color, theme }: CheckboxProps) => {
+const checkboxStyleScript = ({ color, theme }: CheckboxProps) => {
 	const variables = theme?.variables;
-	const backgroundColor = new Color(color || variables?.colors.primary);
-	const backgroundTextColor = backgroundColor.isDark() ? '#fff' : '#000';
+	const backgroundColorObj = new Color(color || variables?.colors.primary);
+	const backgroundTextColorObj = backgroundColorObj.isDark() ? new Color('#fff') : new Color('#000');
 
 	return css({
-		display: 'inline-flex',
-		alignItems: 'center',
-		justifyContent: 'center',
-		height: size,
-		width: size,
-		border: `1px solid ${backgroundColor.hex()}`,
+		border: `1px solid ${backgroundColorObj.hex()}`,
 		borderRadius: '3px',
 		'&.ss__checkbox--active': {
-			backgroundColor: backgroundColor.hex(),
+			backgroundColor: backgroundColorObj.hex(),
 			'.ss__icon': {
-				fill: backgroundTextColor,
-				stroke: backgroundTextColor,
+				fill: backgroundTextColorObj.hex(),
+				stroke: backgroundTextColorObj.hex(),
 			},
 		},
 		'&.ss__checkbox--disabled': {
 			opacity: 0.3,
-		},
-		'& .ss__checkbox__empty': {
-			display: 'inline-block',
-			width: `calc(${size} - 30%)`,
-			height: `calc(${size} - 30%)`,
 		},
 	});
 };

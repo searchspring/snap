@@ -2,14 +2,9 @@ import { css } from '@emotion/react';
 import type { SortByProps } from '../../../../components/Molecules/SortBy';
 
 // CSS in JS style script for the SortBy component
-const sortByStyleScript = ({ theme }: SortByProps) => {
-	// eslint-disable-next-line @typescript-eslint/no-unused-vars
-	const variables = theme?.variables;
-
+const sortByStyleScript = () => {
 	return css({
 		'.ss__button__content': {
-			display: 'flex',
-			alignItems: 'center',
 			gap: '7px',
 		},
 	});

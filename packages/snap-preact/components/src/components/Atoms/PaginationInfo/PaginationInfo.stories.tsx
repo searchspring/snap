@@ -56,11 +56,7 @@ export default {
 			description: 'Pagination info text to display',
 			table: {
 				type: {
-					summary: 'string',
-				},
-				defaultValue: {
-					summary:
-						"${pagination?.multiplePages ? `${pagination?.begin} - ${pagination?.end} of` : ''} ${`${pagination?.totalResults} result${pagination?.totalResults == 1 ? '' : 's'}`}",
+					summary: 'string, ()=>string',
 				},
 			},
 			control: { type: 'text' },

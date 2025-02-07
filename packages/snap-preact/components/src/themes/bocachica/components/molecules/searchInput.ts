@@ -6,22 +6,7 @@ const searchInputStyleScript = ({ theme }: SearchInputProps) => {
 	const variables = theme?.variables;
 
 	return css({
-		display: 'flex',
-		alignItems: 'center',
-		justifyContent: 'center',
 		border: `1px solid ${variables?.colors?.secondary || '#ccc'}`,
-		borderRadius: '3px',
-
-		'& .ss__icon': {
-			padding: '5px',
-		},
-
-		'& .ss__search-input__input': {
-			width: '100%',
-			outline: 'none',
-			border: '0',
-			boxSizing: 'border-box',
-		},
 	});
 };
 

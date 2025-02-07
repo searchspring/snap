@@ -14,7 +14,7 @@ import deepmerge from 'deepmerge';
 import Color from 'color';
 
 const defaultStyles: StyleScript<ButtonProps> = ({ native, color, backgroundColor, borderColor, theme }) => {
-	const lightenedPrimary = new Color(backgroundColor || color || theme?.variables?.colors?.primary).lightness(95);
+	const lightenedPrimaryColorObj = new Color(backgroundColor || color || theme?.variables?.colors?.primary).lightness(95);
 
 	// no styling on native
 	if (native) {
@@ -24,6 +24,7 @@ const defaultStyles: StyleScript<ButtonProps> = ({ native, color, backgroundColo
 	return css({
 		display: 'inline-flex',
 		alignItems: 'center',
+		gap: '5px',
 		padding: '5px 10px',
 		position: 'relative',
 		color: color || theme?.variables?.colors?.primary,
@@ -32,7 +33,7 @@ const defaultStyles: StyleScript<ButtonProps> = ({ native, color, backgroundColo
 		border: `1px solid ${borderColor || color || theme?.variables?.colors?.primary || '#333'}`,
 		'&:not(.ss__button--disabled):hover': {
 			cursor: 'pointer',
-			backgroundColor: lightenedPrimary.hex() || '#f8f8f8',
+			backgroundColor: lightenedPrimaryColorObj.hex() || '#f8f8f8',
 		},
 		'&.ss__button--disabled': {
 			opacity: 0.3,
@@ -95,6 +96,7 @@ export const Button = observer((properties: ButtonProps): JSX.Element => {
 		},
 	};
 
+	console.log('got some props', props);
 	const styling = mergeStyles<ButtonProps>(props, defaultStyles);
 
 	const elementProps = {

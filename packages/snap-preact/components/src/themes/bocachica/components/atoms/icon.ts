@@ -10,7 +10,6 @@ const iconStyleScript = ({ color, height, width, size, theme }: IconProps) => {
 		stroke: color || variables?.colors?.accent,
 		width: width || size,
 		height: height || size,
-		position: 'relative',
 	});
 };
 

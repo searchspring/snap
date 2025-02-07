@@ -21,15 +21,16 @@ let config: SnapTemplatesConfig = {
 			extends: 'bocachica',
 			variables: {
 				breakpoints: [768, 1024, 1280],
-				colors: {
-					primary: '#6d7175',
-					secondary: '#202223',
-					accent: '#333333',
-				},
+				// colors: {
+				// 	primary: '#6d7175',
+				// 	secondary: '#202223',
+				// 	accent: '#333333',
+				// },
 			},
 			style: globalStyles,
 			overrides: {
 				components: {
+					button: {},
 					// recommendation: {
 					// 	lazyRender: {
 					// 		enabled: false,

@@ -2,7 +2,7 @@ import { css } from '@emotion/react';
 import type { DropdownProps } from '../../../../components/Atoms/Dropdown';
 
 // CSS in JS style script for the Dropdown component
-const dropdownStyleScript = ({ disableOverlay, theme }: DropdownProps) => {
+const dropdownStyleScript = ({ theme }: DropdownProps) => {
 	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	const variables = theme?.variables;
 
@@ -11,23 +11,7 @@ const dropdownStyleScript = ({ disableOverlay, theme }: DropdownProps) => {
 		'&.ss__dropdown--open': {
 			'& .ss__dropdown__content': {
 				transition: `opacity .5s ease`,
-				position: disableOverlay ? 'relative' : undefined,
-				visibility: 'visible',
-				opacity: 1,
 			},
-		},
-		'.ss__dropdown__button': {
-			cursor: `${disableOverlay ? 'default' : 'pointer'}`,
-		},
-		'.ss__dropdown__content': {
-			boxSizing: 'border-box',
-			background: '#fff',
-			position: 'absolute',
-			minWidth: '100%',
-			visibility: 'hidden',
-			opacity: 0,
-			top: 'auto',
-			left: 0,
 		},
 	});
 };

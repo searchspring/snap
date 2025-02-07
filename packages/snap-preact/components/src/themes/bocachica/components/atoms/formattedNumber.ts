@@ -1,15 +1,15 @@
-import { css } from '@emotion/react';
+// import { css } from '@emotion/react';
 import type { FormattedNumberProps } from '../../../../components/Atoms/FormattedNumber';
 
 // CSS in JS style script for the FormattedNumber component
-const formattedNumberStyleScript = ({ theme }: FormattedNumberProps) => {
-	// eslint-disable-next-line @typescript-eslint/no-unused-vars
-	const variables = theme?.variables;
+// const formattedNumberStyleScript = ({ theme }: FormattedNumberProps) => {
+// 	// eslint-disable-next-line @typescript-eslint/no-unused-vars
+// 	const variables = theme?.variables;
 
-	return css({});
-};
+// 	return css({});
+// };
 
 // FormattedNumber component props
 export const formattedNumber: Partial<FormattedNumberProps> = {
-	themeStyleScript: formattedNumberStyleScript,
+	// themeStyleScript: formattedNumberStyleScript,
 };

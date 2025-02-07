@@ -167,7 +167,7 @@ export default {
 				type: {
 					summary: 'string',
 				},
-				defaultValue: { summary: '#333' },
+				// defaultValue: { summary: '#333' },
 			},
 			control: { type: 'color' },
 		},
@@ -177,7 +177,7 @@ export default {
 				type: {
 					summary: 'string',
 				},
-				defaultValue: { summary: '#FFF' },
+				// defaultValue: { summary: '#FFF' },
 			},
 			control: { type: 'color' },
 		},
