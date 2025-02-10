@@ -1,4 +1,4 @@
-/*! For license information please see main.1c4d0fb1.iframe.bundle.js.LICENSE.txt */
+/*! For license information please see main.09aa04b4.iframe.bundle.js.LICENSE.txt */
 (self.webpackChunk_searchspring_snap_preact_components = self.webpackChunk_searchspring_snap_preact_components || []).push([
 	[792],
 	{
@@ -7263,8 +7263,8 @@
 		'./src/components/Molecules/Checkbox/Checkbox.tsx': (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 			'use strict';
 			__webpack_require__.d(__webpack_exports__, { S: () => Checkbox });
-			__webpack_require__('../../node_modules/core-js/modules/es.number.constructor.js'),
-				__webpack_require__('../../node_modules/core-js/modules/es.object.assign.js'),
+			__webpack_require__('../../node_modules/core-js/modules/es.object.assign.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.number.constructor.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.array.is-array.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.symbol.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.symbol.description.js'),
@@ -7344,21 +7344,20 @@
 					var _theme$colors,
 						size = _ref.size,
 						color = _ref.color,
-						theme = _ref.theme,
-						pixelSize = isNaN(Number(size)) ? size : size + 'px';
+						theme = _ref.theme;
 					return (0, _emotion_react__WEBPACK_IMPORTED_MODULE_15__.AH)({
 						display: 'inline-flex',
 						alignItems: 'center',
 						justifyContent: 'center',
-						height: pixelSize,
-						width: pixelSize,
+						height: size,
+						width: size,
 						border:
 							'1px solid ' +
 							(color ||
 								(null == theme || null === (_theme$colors = theme.colors) || void 0 === _theme$colors ? void 0 : _theme$colors.primary) ||
 								'#333'),
 						'&.ss__checkbox--disabled': { opacity: 0.7 },
-						'& .ss__checkbox__empty': { display: 'inline-block', width: 'calc(' + pixelSize + ' - 30%)', height: 'calc(' + pixelSize + ' - 30%)' },
+						'& .ss__checkbox__empty': { display: 'inline-block', width: 'calc(' + size + ' - 30%)', height: 'calc(' + size + ' - 30%)' },
 					});
 				},
 				CSS_native = function native() {
@@ -7400,6 +7399,7 @@
 						disableStyles = props.disableStyles,
 						className = props.className,
 						style = props.style,
+						pixelSize = isNaN(Number(size)) ? size : size + 'px',
 						subProps = {
 							icon: Object.assign(
 								{ className: 'ss__checkbox__icon', icon: 'check-thin' },
@@ -7413,7 +7413,7 @@
 										(null == theme || null === (_theme$colors2 = theme.colors) || void 0 === _theme$colors2 ? void 0 : _theme$colors2.primary),
 									disableStyles,
 									icon,
-									size: size && 'calc(' + size + ' - 30%)',
+									size: pixelSize && 'calc(' + pixelSize + ' - 30%)',
 								}),
 								{ theme: props.theme }
 							),
@@ -7436,7 +7436,7 @@
 					return (
 						disableStyles
 							? style && (styling.css = [style])
-							: (styling.css = _native ? [CSS_native(), style] : [CSS_checkbox({ size, color, theme }), style]),
+							: (styling.css = _native ? [CSS_native(), style] : [CSS_checkbox({ size: pixelSize, color, theme }), style]),
 						(0, _emotion_react__WEBPACK_IMPORTED_MODULE_15__.Y)(
 							_providers__WEBPACK_IMPORTED_MODULE_19__._,
 							null,
@@ -27866,7 +27866,7 @@
 								{ theme: null == props ? void 0 : props.theme }
 							),
 							checkbox: Object.assign(
-								{ className: 'ss__recommendation-bundle__wrapper__selector__result-wrapper__checkbox', checked, size: 18, onClick: onCheck },
+								{ className: 'ss__recommendation-bundle__wrapper__selector__result-wrapper__checkbox', checked, size: '18px', onClick: onCheck },
 								null == globalTheme || null === (_globalTheme$componen2 = globalTheme.components) || void 0 === _globalTheme$componen2
 									? void 0
 									: _globalTheme$componen2.checkbox,
@@ -37726,8 +37726,9 @@
 												_this$config3$setting,
 												_this$config3$setting2,
 												redirectURL,
-												_results$0$mappings$c,
+												_filteredResults$0$ma,
 												results,
+												filteredResults,
 												singleResultUrl;
 											return AutocompleteController_regeneratorRuntime().wrap(function _callee6$(_context6) {
 												for (;;)
@@ -37762,23 +37763,25 @@
 																void 0 === _this$config3$setting2 ||
 																!_this$config3$setting2.singleResult
 															) {
-																_context6.next = 12;
+																_context6.next = 13;
 																break;
 															}
 															if (
 																((results = ac.controller.store.results),
+																(filteredResults = results.filter(function (result) {
+																	return 'product' == result.type;
+																})),
 																!(singleResultUrl =
-																	1 === results.length &&
-																	'product' === results[0].type &&
-																	(null === (_results$0$mappings$c = results[0].mappings.core) || void 0 === _results$0$mappings$c
+																	1 === filteredResults.length &&
+																	(null === (_filteredResults$0$ma = filteredResults[0].mappings.core) || void 0 === _filteredResults$0$ma
 																		? void 0
-																		: _results$0$mappings$c.url)))
+																		: _filteredResults$0$ma.url)))
 															) {
-																_context6.next = 12;
+																_context6.next = 13;
 																break;
 															}
 															return (window.location.href = singleResultUrl), _context6.abrupt('return', !1);
-														case 12:
+														case 13:
 														case 'end':
 															return _context6.stop();
 													}
@@ -49743,7 +49746,7 @@
 					(this.event = payload.event),
 					(this.id = payload.id),
 					(this.pid = payload.pid),
-					(this.meta = { initiator: { lib: 'searchspring/snap', 'lib.version': '0.63.1', 'lib.framework': config.framework } }),
+					(this.meta = { initiator: { lib: 'searchspring/snap', 'lib.version': '0.63.2', 'lib.framework': config.framework } }),
 					(this.id = (0, v4.A)());
 			});
 			function Tracker_toConsumableArray(arr) {
@@ -50297,7 +50300,7 @@
 									_this$globals$currenc.code &&
 									(this.context.currency = this.globals.currency),
 								(null !== (_window$searchspring = window.searchspring) && void 0 !== _window$searchspring && _window$searchspring.tracker) ||
-									((window.searchspring = window.searchspring || {}), (window.searchspring.tracker = this), (window.searchspring.version = '0.63.1')),
+									((window.searchspring = window.searchspring || {}), (window.searchspring.tracker = this), (window.searchspring.version = '0.63.2')),
 								setTimeout(function () {
 									_this.targeters.push(
 										new DomTargeter([{ selector: 'script[type^="searchspring/track/"]', emptyTarget: !1 }], function (target, elem) {
