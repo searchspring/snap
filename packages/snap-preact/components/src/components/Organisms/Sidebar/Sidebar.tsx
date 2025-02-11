@@ -13,8 +13,6 @@ import { Facets, FacetsProps } from '../Facets';
 import { SearchController } from '@searchspring/snap-controller';
 import { Lang, useLang } from '../../../hooks';
 import deepmerge from 'deepmerge';
-import { Button, ButtonProps } from '../../Atoms/Button';
-import { useState } from 'react';
 
 const defaultStyles: StyleScript<SidebarProps> = () => {
 	return css({});
@@ -25,27 +23,12 @@ export const Sidebar = observer((properties: SidebarProps): JSX.Element => {
 	const globalTreePath = useTreePath();
 	const defaultProps: Partial<SidebarProps> = {
 		titleText: 'Filters',
-		startOpen: true,
-		hideToggleButton: true,
 		treePath: globalTreePath,
 	};
 
 	const props = mergeProps('sidebar', globalTheme, defaultProps, properties);
 
-	const {
-		controller,
-		hideTitle,
-		startOpen,
-		titleText,
-		hideFacets,
-		hidePerPage,
-		hideToggleButton,
-		hideSortBy,
-		hideFilterSummary,
-		disableStyles,
-		className,
-		treePath,
-	} = props;
+	const { controller, hideTitle, titleText, hideFacets, hidePerPage, hideSortBy, hideFilterSummary, disableStyles, className, treePath } = props;
 
 	const styling = mergeStyles<SidebarProps>(props, defaultStyles);
 
@@ -102,31 +85,12 @@ export const Sidebar = observer((properties: SidebarProps): JSX.Element => {
 			theme: props?.theme,
 			treePath,
 		},
-		button: {
-			// default props
-			className: 'ss__sidebar__toggle',
-			controller,
-			// global theme
-			...globalTheme?.components?.button,
-			// inherited props
-			...defined({
-				disableStyles,
-			}),
-			// component theme overrides
-			theme: props?.theme,
-			treePath,
-		},
 	};
-
-	const [sidebarOpenState, setSidebarOpenState] = useState(startOpen);
 
 	//initialize lang
 	const defaultLang: Partial<SidebarLang> = {
 		titleText: {
 			value: titleText,
-		},
-		toggleSidebarButtonText: {
-			value: sidebarOpenState ? `Filters <` : 'Filters >',
 		},
 	};
 
@@ -137,27 +101,17 @@ export const Sidebar = observer((properties: SidebarProps): JSX.Element => {
 	return controller?.store?.loaded && controller?.store?.pagination?.totalResults > 0 ? (
 		<CacheProvider>
 			<div {...styling} className={classnames('ss__sidebar', className)}>
-				{!hideToggleButton && (
-					<Button
-						content={'hi'}
-						onClick={() => setSidebarOpenState(!sidebarOpenState)}
-						{...subProps.button}
-						lang={{ button: lang.toggleSidebarButtonText }}
-					/>
-				)}
-				{sidebarOpenState && (
-					<div className={classnames('ss__sidebar__inner')}>
-						{!hideTitle && <h4 className="ss__sidebar__title" {...mergedLang.titleText?.all}></h4>}
+				<div className={classnames('ss__sidebar__inner')}>
+					{!hideTitle && <h4 className="ss__sidebar__title" {...mergedLang.titleText?.all}></h4>}
 
-						{!hideFilterSummary && <FilterSummary {...subProps.filterSummary} />}
+					{!hideFilterSummary && <FilterSummary {...subProps.filterSummary} />}
 
-						{!hideSortBy && <SortBy {...subProps.sortBy} />}
+					{!hideSortBy && <SortBy {...subProps.sortBy} />}
 
-						{!hidePerPage && <PerPage {...subProps.perPage} />}
+					{!hidePerPage && <PerPage {...subProps.perPage} />}
 
-						{!hideFacets && <Facets {...subProps.facets} />}
-					</div>
-				)}
+					{!hideFacets && <Facets {...subProps.facets} />}
+				</div>
 			</div>
 		</CacheProvider>
 	) : (
@@ -167,8 +121,6 @@ export const Sidebar = observer((properties: SidebarProps): JSX.Element => {
 
 export interface SidebarProps extends ComponentProps {
 	controller: SearchController;
-	hideToggleButton?: boolean;
-	startOpen?: boolean;
 	hideTitle?: boolean;
 	titleText?: string;
 	hideFacets?: boolean;
@@ -192,5 +144,4 @@ interface SidebarSubProps {
 	facets: Partial<FacetsProps>;
 	sortBy: Partial<SortByProps>;
 	perPage: Partial<PerPageProps>;
-	button: Partial<ButtonProps>;
 }

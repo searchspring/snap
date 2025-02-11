@@ -18,3 +18,13 @@ export { price } from './price';
 export { searchHeader } from './searchHeader';
 export { skeleton } from './skeleton';
 // export { toggle } from './toggle';
+
+// export const defaultProps = {
+// 	badgeImage: badgeImageProps.default,
+// 	...
+// };
+
+// export const mobileProps = {
+// 	badgeImage: badgeImageProps.mobile,
+// 	...
+// };

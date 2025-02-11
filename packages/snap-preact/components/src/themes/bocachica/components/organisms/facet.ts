@@ -12,6 +12,7 @@ const facetStyleScript = ({ color, theme }: FacetProps) => {
 			},
 			'&.ss__dropdown--open': {
 				'& .ss__facet__dropdown__icon': {
+					transition: 'transform ease .5s',
 					transform: 'rotate(180deg)',
 				},
 			},

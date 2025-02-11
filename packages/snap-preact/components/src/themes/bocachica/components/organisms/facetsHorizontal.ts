@@ -7,6 +7,8 @@ const facetsHorizontalStyleScript = ({ theme }: FacetsHorizontalProps) => {
 	const variables = theme?.variables;
 
 	return css({
+		paddingBottom: '10px',
+
 		'& .ss__facets-horizontal__header': {
 			'& .ss__facets-horizontal__header__dropdown': {
 				margin: '0',
