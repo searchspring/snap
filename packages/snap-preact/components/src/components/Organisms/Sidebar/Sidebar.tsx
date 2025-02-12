@@ -134,9 +134,6 @@ export interface SidebarLang {
 	titleText: Lang<{
 		controller: SearchController;
 	}>;
-	toggleSidebarButtonText: Lang<{
-		controller: SearchController;
-	}>;
 }
 
 interface SidebarSubProps {
