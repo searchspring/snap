@@ -69,39 +69,82 @@ const autocompleteStyleScript = ({
 };
 
 // Autocomplete component props
-export const autocomplete: Partial<AutocompleteProps> = {
-	themeStyleScript: autocompleteStyleScript,
-	trendingTitle: 'Popular',
-	theme: {
-		components: {
-			facet: {
-				limit: 6,
-				disableOverflow: true,
-				disableCollapse: true,
+export const autocomplete: ThemeComponentProps<AutocompleteProps> = {
+	default: {
+		themeStyleScript: autocompleteStyleScript,
+		trendingTitle: 'Popular',
+		theme: {
+			components: {
+				facet: {
+					limit: 6,
+					disableOverflow: true,
+					disableCollapse: true,
+				},
+				facets: {
+					limit: 2,
+				},
+				facetGridOptions: {
+					columns: 3,
+				},
+				facetHierarchyOptions: {
+					hideCount: true,
+				},
+				facetListOptions: {
+					hideCheckbox: true,
+					hideCount: true,
+				},
+				facetPaletteOptions: {
+					hideLabel: true,
+					columns: 3,
+				},
+				results: {
+					columns: 2,
+					rows: 1,
+				},
+				result: {
+					hideBadge: true,
+				},
 			},
-			facets: {
-				limit: 2,
+		},
+	},
+	mobile: {
+		hideFacets: true,
+		vertical: true,
+		horizontalTerms: true,
+		theme: {
+			components: {
+				results: {
+					rows: 1,
+					columns: 2,
+				},
 			},
-			facetGridOptions: {
-				columns: 3,
+		},
+	},
+	tablet: {
+		hideFacets: true,
+		vertical: true,
+		horizontalTerms: true,
+		theme: {
+			components: {
+				results: {
+					rows: 1,
+					columns: 3,
+				},
 			},
-			facetHierarchyOptions: {
-				hideCount: true,
-			},
-			facetListOptions: {
-				hideCheckbox: true,
-				hideCount: true,
-			},
-			facetPaletteOptions: {
-				hideLabel: true,
-				columns: 3,
-			},
-			results: {
-				columns: 2,
-				rows: 1,
-			},
-			result: {
-				hideBadge: true,
+		},
+	},
+	desktop: {
+		vertical: true,
+		horizontalTerms: true,
+		theme: {
+			components: {
+				results: {
+					rows: 1,
+					columns: 3,
+				},
+				facet: {
+					limit: 4,
+				},
 			},
 		},
 	},

@@ -7,6 +7,11 @@ import type { RecommendationBundleVerticalProps } from '../../../../components/T
 // };
 
 // RecommendationBundle component props
-export const recommendationBundleVertical: Partial<RecommendationBundleVerticalProps> = {
-	// themeStyleScript: recommendationBundleStyleScript,
+export const recommendationBundleVertical: ThemeComponentProps<RecommendationBundleVerticalProps> = {
+	default: {
+		// themeStyleScript: recommendationBundleStyleScript,
+	},
+	mobile: {},
+	tablet: {},
+	desktop: {},
 };

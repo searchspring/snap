@@ -20,6 +20,13 @@ const mobileSidebarStyleScript = ({ theme }: MobileSidebarProps) => {
 };
 
 // MobileSidebar component props
-export const mobileSidebar: Partial<MobileSidebarProps> = {
-	themeStyleScript: mobileSidebarStyleScript,
+export const mobileSidebar: ThemeComponentProps<MobileSidebarProps> = {
+	default: {
+		themeStyleScript: mobileSidebarStyleScript,
+	},
+	mobile: {
+		hideSortBy: false,
+	},
+	tablet: {},
+	desktop: {},
 };

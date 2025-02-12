@@ -16,8 +16,13 @@ const gridStyleScript = ({ theme }: Partial<GridProps>) => {
 };
 
 // Grid component props
-export const grid: Partial<GridProps> = {
-	themeStyleScript: gridStyleScript,
-	hideShowLess: true,
-	overflowButtonInGrid: true,
+export const grid: ThemeComponentProps<GridProps> = {
+	default: {
+		themeStyleScript: gridStyleScript,
+		hideShowLess: true,
+		overflowButtonInGrid: true,
+	},
+	mobile: {},
+	tablet: {},
+	desktop: {},
 };

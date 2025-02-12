@@ -9,6 +9,11 @@ import type { RecommendationEmailProps } from '../../../../components/Templates/
 // };
 
 // RecommendationGrid component props
-export const recommendationEmail: Partial<RecommendationEmailProps> = {
-	// themeStyleScript: recommendationEmailStyleScript,
+export const recommendationEmail: ThemeComponentProps<RecommendationEmailProps> = {
+	default: {
+		// themeStyleScript: recommendationEmailStyleScript,
+	},
+	mobile: {},
+	tablet: {},
+	desktop: {},
 };

@@ -2,11 +2,16 @@
 import type { RecommendationBundleListProps } from '../../../../components/Templates/RecommendationBundleList';
 
 // CSS in JS style script for the RecommendationBundleList component
-// const recommendationBundleStyleScript = ({}: RecommendationBundleListProps) => {
+// const recommendationBundleListStyleScript = ({}: RecommendationBundleListProps) => {
 // 	return css({});
 // };
 
-// RecommendationBundle component props
-export const recommendationBundleList: Partial<RecommendationBundleListProps> = {
-	// themeStyleScript: recommendationBundleStyleScript,
+// RecommendationBundleList component props
+export const recommendationBundleList: ThemeComponentProps<RecommendationBundleListProps> = {
+	default: {
+		// themeStyleScript: recommendationBundleListStyleScript,
+	},
+	mobile: {},
+	tablet: {},
+	desktop: {},
 };

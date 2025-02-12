@@ -21,6 +21,11 @@ const facetListOptionsStyleScript = ({ horizontal, theme }: FacetListOptionsProp
 };
 
 // FacetListOptions component props
-export const facetListOptions: Partial<FacetListOptionsProps> = {
-	themeStyleScript: facetListOptionsStyleScript,
+export const facetListOptions: ThemeComponentProps<FacetListOptionsProps> = {
+	default: {
+		themeStyleScript: facetListOptionsStyleScript,
+	},
+	mobile: {},
+	tablet: {},
+	desktop: {},
 };

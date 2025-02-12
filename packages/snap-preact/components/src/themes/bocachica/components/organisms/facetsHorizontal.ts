@@ -46,8 +46,19 @@ const facetsHorizontalStyleScript = ({ theme }: FacetsHorizontalProps) => {
 	});
 };
 
-// Facets component props
-export const facetsHorizontal: Partial<FacetsHorizontalProps> = {
-	themeStyleScript: facetsHorizontalStyleScript,
-	iconCollapse: 'angle-down',
+// FacetsHorizontal component props
+export const facetsHorizontal: ThemeComponentProps<FacetsHorizontalProps> = {
+	default: {
+		themeStyleScript: facetsHorizontalStyleScript,
+		iconCollapse: 'angle-down',
+	},
+	mobile: {
+		limit: 0,
+	},
+	tablet: {
+		limit: 3,
+	},
+	desktop: {
+		limit: 5,
+	},
 };

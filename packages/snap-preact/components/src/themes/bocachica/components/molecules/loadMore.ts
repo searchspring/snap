@@ -30,6 +30,11 @@ const loadMoreStyleScript = ({ color, backgroundColor, theme }: LoadMoreProps) =
 };
 
 // LoadMore component props
-export const loadMore: Partial<LoadMoreProps> = {
-	themeStyleScript: loadMoreStyleScript,
+export const loadMore: ThemeComponentProps<LoadMoreProps> = {
+	default: {
+		themeStyleScript: loadMoreStyleScript,
+	},
+	mobile: {},
+	tablet: {},
+	desktop: {},
 };

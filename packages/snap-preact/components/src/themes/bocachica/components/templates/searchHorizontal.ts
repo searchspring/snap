@@ -28,65 +28,82 @@ const searchHorizontalStyleScript = () => {
 };
 
 // SearchHorizontal component props
-export const searchHorizontal: Partial<SearchHorizontalProps> = {
-	themeStyleScript: searchHorizontalStyleScript,
-	hideTopToolbar: false,
-	hideMiddleToolbar: true,
-	// lang: {
-	// 	// toggleSidebarButtonText: {
-	// 	// 	value: ({ filters }) => (filters.length ? `Filters (${filters.length})` : 'Filter'),
-	// 	// },
-	// },
-	// hideSidebarToolbar: false,
-	// hideTopToolbar: true,
-	theme: {
-		components: {
-			facetsHorizontal: {
-				limit: 9,
-			},
-			searchHeader: {
-				titleText: (data) => {
-					return data.search?.query?.string ? `Search Results For ${data.search?.query.string}` : 'Search Results';
+export const searchHorizontal: ThemeComponentProps<SearchHorizontalProps> = {
+	default: {
+		themeStyleScript: searchHorizontalStyleScript,
+		hideTopToolbar: false,
+		hideMiddleToolbar: true,
+		// lang: {
+		// 	// toggleSidebarButtonText: {
+		// 	// 	value: ({ filters }) => (filters.length ? `Filters (${filters.length})` : 'Filter'),
+		// 	// },
+		// },
+		// hideSidebarToolbar: false,
+		// hideTopToolbar: true,
+		theme: {
+			components: {
+				facetsHorizontal: {
+					limit: 9,
 				},
-			},
-			filterSummary: {
-				hideTitle: true,
-			},
-			sidebar: {
-				hideTitle: true,
-				// hideToggleButton: false,
-			},
-			'button.filter-toggle': {
-				icon: 'filters',
-			},
-			'toolbar.top': {
-				hideLayoutSelector: false,
-				hideSortBy: false,
-				hidePerPage: false,
-				hideMobileSidebar: true,
-			},
-			// 'toolbar.sidebar': {
-			// 	hideMobileSidebar: false,
-			// },
-			// 'toolbar.middle': {
-			// 	hideFilterSummary: false,
+				searchHeader: {
+					titleText: (data) => {
+						return data.search?.query?.string ? `Search Results For ${data.search?.query.string}` : 'Search Results';
+					},
+				},
+				filterSummary: {
+					hideTitle: true,
+				},
+				sidebar: {
+					hideTitle: true,
+					// hideToggleButton: false,
+				},
+				'button.filter-toggle': {
+					icon: 'filters',
+				},
+				'toolbar.top': {
+					hideLayoutSelector: false,
+					hideSortBy: false,
+					hidePerPage: false,
+					hideMobileSidebar: true,
+				},
+				// 'toolbar.sidebar': {
+				// 	hideMobileSidebar: false,
+				// },
+				// 'toolbar.middle': {
+				// 	hideFilterSummary: false,
 
-			// 	hideLayoutSelector: false,
-			// 	hideSortBy: false,
-			// 	hidePerPage: false,
-			// },
-			'toolbar.bottom': {
-				hidePagination: false,
-			},
-			mobileSidebar: {
-				theme: {
-					components: {
-						filterSummary: {
-							hideTitle: false,
+				// 	hideLayoutSelector: false,
+				// 	hideSortBy: false,
+				// 	hidePerPage: false,
+				// },
+				'toolbar.bottom': {
+					hidePagination: false,
+				},
+				mobileSidebar: {
+					theme: {
+						components: {
+							filterSummary: {
+								hideTitle: false,
+							},
 						},
 					},
 				},
 			},
 		},
 	},
+	mobile: {
+		theme: {
+			components: {
+				'toolbar.top': {
+					hideMobileSidebar: false,
+				},
+				'toolbar.middle': {
+					hidePerPage: true,
+					hideSortBy: true,
+				},
+			},
+		},
+	},
+	tablet: {},
+	desktop: {},
 };

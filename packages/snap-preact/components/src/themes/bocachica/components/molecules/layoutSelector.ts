@@ -28,8 +28,13 @@ const layoutSelectorStyleScript = ({ theme }: LayoutSelectorProps) => {
 };
 
 // LayoutSelector component props
-export const layoutSelector: Partial<LayoutSelectorProps> = {
-	themeStyleScript: layoutSelectorStyleScript,
-	type: 'list',
-	hideLabel: true,
+export const layoutSelector: ThemeComponentProps<LayoutSelectorProps> = {
+	default: {
+		themeStyleScript: layoutSelectorStyleScript,
+		type: 'list',
+		hideLabel: true,
+	},
+	mobile: {},
+	tablet: {},
+	desktop: {},
 };

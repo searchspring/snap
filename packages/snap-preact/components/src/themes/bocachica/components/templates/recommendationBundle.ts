@@ -19,6 +19,11 @@ const recommendationBundleStyleScript = ({ theme }: any) => {
 };
 
 // RecommendationBundle component props
-export const recommendationBundle: Partial<RecommendationBundleProps> = {
-	themeStyleScript: recommendationBundleStyleScript,
+export const recommendationBundle: ThemeComponentProps<RecommendationBundleProps> = {
+	default: {
+		themeStyleScript: recommendationBundleStyleScript,
+	},
+	mobile: {},
+	tablet: {},
+	desktop: {},
 };

@@ -15,6 +15,11 @@ const priceStyleScript = ({ theme }: PriceProps) => {
 };
 
 // Price component props
-export const price: Partial<PriceProps> = {
-	themeStyleScript: priceStyleScript,
+export const price: ThemeComponentProps<PriceProps> = {
+	default: {
+		themeStyleScript: priceStyleScript,
+	},
+	mobile: {},
+	tablet: {},
+	desktop: {},
 };

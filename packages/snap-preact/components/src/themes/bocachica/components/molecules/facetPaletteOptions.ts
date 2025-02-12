@@ -27,8 +27,13 @@ const facetPaletteStyleScript = ({ theme }: FacetPaletteOptionsProps) => {
 };
 
 // FacetPaletteOptions component props
-export const facetPaletteOptions: Partial<FacetPaletteOptionsProps> = {
-	themeStyleScript: facetPaletteStyleScript,
-	gapSize: '0px',
-	columns: 5,
+export const facetPaletteOptions: ThemeComponentProps<FacetPaletteOptionsProps> = {
+	default: {
+		themeStyleScript: facetPaletteStyleScript,
+		gapSize: '0px',
+		columns: 5,
+	},
+	mobile: {},
+	tablet: {},
+	desktop: {},
 };

@@ -11,13 +11,20 @@ const sortByStyleScript = () => {
 };
 
 // SortBy component props
-export const sortBy: Partial<SortByProps> = {
-	themeStyleScript: sortByStyleScript,
-	theme: {
-		components: {
-			icon: {
-				size: '12px',
+export const sortBy: ThemeComponentProps<SortByProps> = {
+	default: {
+		themeStyleScript: sortByStyleScript,
+		theme: {
+			components: {
+				icon: {
+					size: '12px',
+				},
 			},
 		},
 	},
+	mobile: {
+		type: 'radio',
+	},
+	tablet: {},
+	desktop: {},
 };

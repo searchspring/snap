@@ -15,6 +15,11 @@ const recommendationStyleScript = ({ theme }: RecommendationProps) => {
 };
 
 // Recommendation component props
-export const recommendation: Partial<RecommendationProps> = {
-	themeStyleScript: recommendationStyleScript,
+export const recommendation: ThemeComponentProps<RecommendationProps> = {
+	default: {
+		themeStyleScript: recommendationStyleScript,
+	},
+	mobile: {},
+	tablet: {},
+	desktop: {},
 };

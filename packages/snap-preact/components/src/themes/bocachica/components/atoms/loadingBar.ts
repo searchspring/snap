@@ -13,6 +13,11 @@ const loadingBarStyleScript = ({ color, backgroundColor, theme }: LoadingBarProp
 };
 
 // LoadingBar component props
-export const loadingBar: Partial<LoadingBarProps> = {
-	themeStyleScript: loadingBarStyleScript,
+export const loadingBar: ThemeComponentProps<LoadingBarProps> = {
+	default: {
+		themeStyleScript: loadingBarStyleScript,
+	},
+	mobile: {},
+	tablet: {},
+	desktop: {},
 };

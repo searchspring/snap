@@ -40,6 +40,11 @@ const facetHierarchyOptionsStyleScript = ({ horizontal, theme }: FacetHierarchyO
 };
 
 // FacetHierarchyOptions component props
-export const facetHierarchyOptions: Partial<FacetHierarchyOptionsProps> = {
-	themeStyleScript: facetHierarchyOptionsStyleScript,
+export const facetHierarchyOptions: ThemeComponentProps<FacetHierarchyOptionsProps> = {
+	default: {
+		themeStyleScript: facetHierarchyOptionsStyleScript,
+	},
+	mobile: {},
+	tablet: {},
+	desktop: {},
 };

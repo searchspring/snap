@@ -10,6 +10,11 @@ const bannerStyleScript = (props: BannerProps) => {
 */
 
 // Banner component props
-export const banner: Partial<BannerProps> = {
-	// themeStyleScript: bannerStyleScript,
+export const banner: ThemeComponentProps<BannerProps> = {
+	default: {
+		// themeStyleScript: badgeImageStyleScript,
+	},
+	mobile: {},
+	tablet: {},
+	desktop: {},
 };

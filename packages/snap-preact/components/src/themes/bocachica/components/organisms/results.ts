@@ -7,6 +7,13 @@ import type { ResultsProps } from '../../../../components/Organisms/Results';
 // };
 
 // Results component props
-export const results: Partial<ResultsProps> = {
-	// themeStyleScript: resultsStyleScript,
+export const results: ThemeComponentProps<ResultsProps> = {
+	default: {
+		// themeStyleScript: resultsStyleScript,
+	},
+	mobile: {
+		columns: 5,
+	},
+	tablet: {},
+	desktop: {},
 };

@@ -7,6 +7,11 @@ import type { RecommendationBundleEasyAddProps } from '../../../../components/Te
 // };
 
 // RecommendationBundle component props
-export const recommendationBundleEasyAdd: Partial<RecommendationBundleEasyAddProps> = {
-	// themeStyleScript: recommendationBundleEasyAddStyleScript,
+export const recommendationBundleEasyAdd: ThemeComponentProps<RecommendationBundleEasyAddProps> = {
+	default: {
+		// themeStyleScript: recommendationBundleEasyAddStyleScript,
+	},
+	mobile: {},
+	tablet: {},
+	desktop: {},
 };

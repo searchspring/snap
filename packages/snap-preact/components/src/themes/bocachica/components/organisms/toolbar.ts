@@ -39,6 +39,14 @@ const toolbarStyleScript = () => {
 };
 
 // Toolbar component props
-export const toolbar: Partial<ToolbarProps> = {
-	themeStyleScript: toolbarStyleScript,
+export const toolbar: ThemeComponentProps<ToolbarProps> = {
+	default: {
+		themeStyleScript: toolbarStyleScript,
+	},
+	mobile: {
+		hideSortBy: true,
+		hidePerPage: true,
+	},
+	tablet: {},
+	desktop: {},
 };

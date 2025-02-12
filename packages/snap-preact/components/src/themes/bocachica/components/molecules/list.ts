@@ -16,13 +16,18 @@ const listStyleScript = ({ theme }: ListProps) => {
 };
 
 // List component props
-export const list: Partial<ListProps> = {
-	themeStyleScript: listStyleScript,
-	theme: {
-		components: {
-			icon: {
-				size: '24px',
+export const list: ThemeComponentProps<ListProps> = {
+	default: {
+		themeStyleScript: listStyleScript,
+		theme: {
+			components: {
+				icon: {
+					size: '24px',
+				},
 			},
 		},
 	},
+	mobile: {},
+	tablet: {},
+	desktop: {},
 };

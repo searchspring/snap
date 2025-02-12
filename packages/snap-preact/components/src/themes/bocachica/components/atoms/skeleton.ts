@@ -5,6 +5,11 @@ import type { SkeletonProps } from '../../../../components/Atoms/Skeleton';
 // const skeletonStyleScript = () => {};
 
 // Skeleton component props
-export const skeleton: Partial<SkeletonProps> = {
-	// themeStyleScript: skeletonStyleScript,
+export const skeleton: ThemeComponentProps<SkeletonProps> = {
+	default: {
+		// themeStyleScript: skeletonStyleScript,
+	},
+	mobile: {},
+	tablet: {},
+	desktop: {},
 };

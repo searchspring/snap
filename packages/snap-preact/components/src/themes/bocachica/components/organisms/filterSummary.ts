@@ -13,7 +13,11 @@ const filterSummaryStyleScript = ({ theme }: FilterSummaryProps) => {
 };
 
 // FilterSummary component props
-export const filterSummary: Partial<FilterSummaryProps> = {
-	themeStyleScript: filterSummaryStyleScript,
-	title: 'Applied Filters',
+export const filterSummary: ThemeComponentProps<FilterSummaryProps> = {
+	default: {
+		themeStyleScript: filterSummaryStyleScript,
+	},
+	mobile: {},
+	tablet: {},
+	desktop: {},
 };

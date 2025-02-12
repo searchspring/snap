@@ -23,6 +23,11 @@ const buttonStyleScript = ({ backgroundColor, theme }: ButtonProps) => {
 };
 
 // Button component props
-export const button: Partial<ButtonProps> = {
-	themeStyleScript: buttonStyleScript,
+export const button: ThemeComponentProps<ButtonProps> = {
+	default: {
+		themeStyleScript: buttonStyleScript,
+	},
+	mobile: {},
+	tablet: {},
+	desktop: {},
 };

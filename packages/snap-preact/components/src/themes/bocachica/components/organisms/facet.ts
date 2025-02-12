@@ -42,10 +42,15 @@ const facetStyleScript = ({ color, theme }: FacetProps) => {
 };
 
 // Facet component props
-export const facet: Partial<FacetProps> = {
-	themeStyleScript: facetStyleScript,
-	iconCollapse: 'angle-down',
-	iconExpand: 'angle-down',
-	iconOverflowMore: 'plus-thin',
-	iconOverflowLess: 'minus',
+export const facet: ThemeComponentProps<FacetProps> = {
+	default: {
+		themeStyleScript: facetStyleScript,
+		iconCollapse: 'angle-down',
+		iconExpand: 'angle-down',
+		iconOverflowMore: 'plus-thin',
+		iconOverflowLess: 'minus',
+	},
+	mobile: {},
+	tablet: {},
+	desktop: {},
 };

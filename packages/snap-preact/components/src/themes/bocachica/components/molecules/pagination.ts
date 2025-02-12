@@ -16,6 +16,11 @@ const paginationStyleScript = ({ theme }: PaginationProps) => {
 };
 
 // Pagination component props
-export const pagination: Partial<PaginationProps> = {
-	themeStyleScript: paginationStyleScript,
+export const pagination: ThemeComponentProps<PaginationProps> = {
+	default: {
+		themeStyleScript: paginationStyleScript,
+	},
+	mobile: {},
+	tablet: {},
+	desktop: {},
 };

@@ -6,6 +6,11 @@ import type { FacetsProps } from '../../../../components/Organisms/Facets';
 // };
 
 // Facets component props
-export const facets: Partial<FacetsProps> = {
-	// themeStyleScript: facetsStyleScript,
+export const facets: ThemeComponentProps<FacetsProps> = {
+	default: {
+		// themeStyleScript: facetsStyleScript,
+	},
+	mobile: {},
+	tablet: {},
+	desktop: {},
 };

@@ -22,6 +22,11 @@ const imageStyleScript = ({ visibility, theme }: ImageProps & { visibility: Reac
 };
 
 // Image component props
-export const image: Partial<ImageProps> = {
-	themeStyleScript: imageStyleScript,
+export const image: ThemeComponentProps<ImageProps> = {
+	default: {
+		themeStyleScript: imageStyleScript,
+	},
+	mobile: {},
+	tablet: {},
+	desktop: {},
 };

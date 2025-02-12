@@ -30,6 +30,11 @@ const radioStyleScript = ({ size, native, color, theme }: RadioProps) => {
 };
 
 // Radio component props
-export const radio: Partial<RadioProps> = {
-	themeStyleScript: radioStyleScript,
+export const radio: ThemeComponentProps<RadioProps> = {
+	default: {
+		themeStyleScript: radioStyleScript,
+	},
+	mobile: {},
+	tablet: {},
+	desktop: {},
 };

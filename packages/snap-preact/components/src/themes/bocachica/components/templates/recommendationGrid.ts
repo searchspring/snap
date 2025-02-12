@@ -6,6 +6,11 @@ import type { RecommendationGridProps } from '../../../../components/Templates/R
 // };
 
 // RecommendationGrid component props
-export const recommendationGrid: Partial<RecommendationGridProps> = {
-	// themeStyleScript: recommendationGridStyleScript,
+export const recommendationGrid: ThemeComponentProps<RecommendationGridProps> = {
+	default: {
+		// themeStyleScript: recommendationGridStyleScript,
+	},
+	mobile: {},
+	tablet: {},
+	desktop: {},
 };
