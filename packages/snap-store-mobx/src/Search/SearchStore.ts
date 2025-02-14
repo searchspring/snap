@@ -107,8 +107,8 @@ export class SearchStore extends AbstractStore {
 			data.pagination,
 			data.merchandising,
 			this.loaded,
-			this.previousData?.pagination,
-			this.results
+			this.previousData?.pagination
+			// this.results // used with infinite scroll to append previous results
 		);
 		this.pagination = new SearchPaginationStore(this.config, this.services, data.pagination, this.meta.data);
 		this.sorting = new SearchSortingStore(this.services, data?.sorting || [], data?.search || {}, this.meta.data);
