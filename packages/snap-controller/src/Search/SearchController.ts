@@ -54,6 +54,7 @@ export class SearchController extends AbstractController {
 	declare store: SearchStore;
 	declare config: SearchControllerConfig;
 	storage: StorageStore;
+	private previousResults: Array<SearchResponseModelResult> = [];
 
 	constructor(
 		config: SearchControllerConfig,
@@ -120,7 +121,8 @@ export class SearchController extends AbstractController {
 				this.storage.set('scrollMap', {});
 			}
 
-			await this.eventManager.fire('restorePosition', { controller: this, element: elementPosition });
+			// not awaiting this event as it relies on render, and render is blocked by afterStore event
+			this.eventManager.fire('restorePosition', { controller: this, element: elementPosition });
 		});
 
 		// restore position
@@ -139,8 +141,8 @@ export class SearchController extends AbstractController {
 
 				const scrollToPosition = () => {
 					return new Promise<void>(async (resolve) => {
-						const maxCheckTime = 500;
-						const checkTime = 50;
+						const maxCheckTime = 600;
+						const checkTime = 60;
 						const maxScrolls = Math.ceil(maxCheckTime / checkTime);
 						const maxCheckCount = maxScrolls + 2;
 
@@ -406,9 +408,15 @@ export class SearchController extends AbstractController {
 				} else {
 					// infinite with no backfills.
 					[meta, response] = await this.client.search(params);
+
+					// append new results to previous results
+					response.results = [...this.previousResults, ...(response.results || [])];
 				}
 			} else {
 				// normal request for next page
+
+				// clear previousResults to prevent infinite scroll from using them
+				this.previousResults = [];
 				[meta, response] = await this.client.search(params);
 			}
 
@@ -441,6 +449,11 @@ export class SearchController extends AbstractController {
 
 			afterSearchProfile.stop();
 			this.log.profile(afterSearchProfile);
+
+			// store previous results for infinite usage
+			if (this.config.settings?.infinite) {
+				this.previousResults = JSON.parse(JSON.stringify(response.results));
+			}
 
 			// update the store
 			this.store.update(response);
