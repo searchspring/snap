@@ -1,6 +1,23 @@
 describe('Pagination', () => {
 	beforeEach(() => {
-		cy.visit('https://localhost:2222/snap/');
+		// ensure infinite is disabled
+		cy.on('window:before:load', (win) => {
+			win.mergeSnapConfig = {
+				controllers: {
+					search: [
+						{
+							config: {
+								settings: {
+									infinite: undefined,
+								},
+							},
+						},
+					],
+				},
+			};
+		});
+
+		cy.visit('https://localhost:2222/');
 	});
 
 	it('can paginate', () => {

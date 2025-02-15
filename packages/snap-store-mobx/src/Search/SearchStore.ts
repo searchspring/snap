@@ -17,6 +17,7 @@ import { StorageStore } from '../Storage/StorageStore';
 import { MetaStore } from '../Meta/MetaStore';
 
 export class SearchStore extends AbstractStore<SearchStoreConfig> {
+	private declare previousSearch: SearchResponseModel;
 	public services: StoreServices;
 	public meta?: MetaStore;
 	public merchandising!: SearchMerchandisingStore;
@@ -107,7 +108,11 @@ export class SearchStore extends AbstractStore<SearchStoreConfig> {
 			state: {
 				loaded: this.loaded,
 			},
+			stores: {
+				previousResults: this.results,
+			},
 			data: {
+				previousSearch: this.previousSearch,
 				search,
 				meta: this.meta.data,
 			},
@@ -132,5 +137,7 @@ export class SearchStore extends AbstractStore<SearchStoreConfig> {
 
 		this.error = undefined;
 		this.loaded = Boolean(search?.pagination);
+
+		this.previousSearch = search;
 	}
 }
