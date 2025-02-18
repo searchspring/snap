@@ -87,6 +87,21 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 - **preact-components/storybook:** updating storybook to latest version - build stable ([43c598d](https://github.com/searchspring/snap/commit/43c598d0e4d11d76364ff2775ecdcabe489023a8))
 - **preact-components:** making progress toward layout templating support ([92c2ce6](https://github.com/searchspring/snap/commit/92c2ce6b207dcb1e922674d55e289354b71612da))
 
+## [0.63.2](https://github.com/searchspring/snap/compare/v0.63.1...v0.63.2) (2025-02-10)
+
+**Note:** Version bump only for package @searchspring/snap-store-mobx
+
+## [0.63.1](https://github.com/searchspring/snap/compare/v0.63.0...v0.63.1) (2025-01-09)
+
+### Bug Fixes
+
+- **store-mobx/recommendationstore:** adjusting config so that `searchOnPageShow` is optional ([1cd4c7c](https://github.com/searchspring/snap/commit/1cd4c7c275b2749d51049f06126c31b2226b94a6))
+- **store-mobx/searchresultstore:** fixing issue with inline banners ([836d916](https://github.com/searchspring/snap/commit/836d9162f6679934621df01ac5c8b16f70a995eb))
+
+# [0.63.0](https://github.com/searchspring/snap/compare/v0.62.0...v0.63.0) (2024-12-19)
+
+**Note:** Version bump only for package @searchspring/snap-store-mobx
+
 # [0.62.0](https://github.com/searchspring/snap/compare/v0.61.5...v0.62.0) (2024-12-10)
 
 ### Bug Fixes

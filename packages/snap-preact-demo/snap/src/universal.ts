@@ -12,5 +12,10 @@ if (!('Symbol' in window) || !('flatMap' in Array.prototype) || !('includes' in 
 }
 promises.push(polyfills);
 Promise.all(promises).then(() => {
+	// @ts-ignore - types not important
+	window.searchspring = window.searchspring || {};
+	// @ts-ignore - types not important
+	window.searchspring.build = 'universal';
+
 	import('./index');
 });

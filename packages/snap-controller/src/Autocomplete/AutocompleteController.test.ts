@@ -1151,6 +1151,58 @@ describe('Autocomplete Controller', () => {
 		});
 	});
 
+	it('can redirect url when singleResult & banners', async () => {
+		document.body.innerHTML = '<div><input type="text" id="search_query"></div>';
+		acConfig = {
+			...acConfig,
+			selector: '#search_query',
+			action: '/search',
+			settings: {
+				redirects: {
+					singleResult: true,
+				},
+			},
+		};
+
+		const controller = new AutocompleteController(acConfig, {
+			client: new MockClient(globals, {}),
+			store: new AutocompleteStore(acConfig, services),
+			urlManager,
+			eventManager: new EventManager(),
+			profiler: new Profiler(),
+			logger: new Logger(),
+			tracker: new Tracker(globals),
+		});
+		(controller.client as MockClient).mockData.updateConfig({ autocomplete: 'singleResultWithBanner', siteId: '8uyt2m' });
+
+		const query = 'dress';
+		controller.urlManager = controller.urlManager.set('query', query);
+
+		await controller.bind();
+		const inputEl: HTMLInputElement = document.querySelector(controller.config.selector)!;
+		expect(inputEl).toBeDefined();
+
+		inputEl.value = query;
+
+		await controller.search();
+
+		// @ts-ignore
+		delete window.location;
+		window.location = {
+			...window.location,
+			href: '', // jest does not support window location changes
+		};
+
+		inputEl.focus();
+		inputEl.dispatchEvent(new KeyboardEvent('keydown', { bubbles: true, keyCode: KEY_ENTER }));
+
+		const filteredResults = controller.store.results.filter((result) => result.type == 'product');
+
+		await waitFor(() => {
+			expect(window.location.href).toContain(filteredResults[0].mappings.core!.url);
+		});
+	});
+
 	it('tests bind method without form (using config.action)', async () => {
 		acConfig = {
 			...acConfig,
