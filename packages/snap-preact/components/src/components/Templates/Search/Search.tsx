@@ -1,4 +1,4 @@
-import { Fragment, h } from 'preact';
+import { h } from 'preact';
 import { observer } from 'mobx-react-lite';
 import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
@@ -23,7 +23,6 @@ const defaultStyles: StyleScript<SearchProps> = () => {
 		'.ss__search__content-section': {
 			display: 'flex',
 			minHeight: '600px',
-			marginTop: '1.5em',
 			gap: '1.5em',
 		},
 
@@ -55,6 +54,7 @@ export const Search = observer((properties: SearchProps): JSX.Element => {
 
 	const defaultProps: Partial<SearchProps> = {
 		toggleSidebarButtonText: 'Filters',
+		hideToggleSidebarButton: true,
 		mobileDisplayAt: globalTheme?.variables?.breakpoints?.at(0) ? `${globalTheme.variables?.breakpoints?.at(0)}px` : '991px',
 	};
 
@@ -96,7 +96,7 @@ export const Search = observer((properties: SearchProps): JSX.Element => {
 	const mergedLang = useLang(lang as any, { filters: store.filters });
 
 	const ToggleSidebar = (): JSX.Element => {
-		return !hideToggleSidebarButton && store.loaded && !isMobile && (toggleSidebarButtonText || mergedLang.toggleSidebarButtonText?.value) ? (
+		return (
 			<Button
 				onClick={() => setSidebarOpenState(!sidebarOpenState)}
 				className={classnames('ss__search__sidebar-toggle', { 'ss__search__sidebar-toggle--open': sidebarOpenState })}
@@ -104,8 +104,6 @@ export const Search = observer((properties: SearchProps): JSX.Element => {
 			>
 				<span {...mergedLang.toggleSidebarButtonText.all}></span>
 			</Button>
-		) : (
-			<Fragment />
 		);
 	};
 
@@ -130,7 +128,10 @@ export const Search = observer((properties: SearchProps): JSX.Element => {
 			hidePerPage: true,
 			hideLayoutSelector: true,
 			hideSortBy: true,
-			topSlot: <ToggleSidebar />,
+			topSlot:
+				!hideToggleSidebarButton && store.loaded && !isMobile && (toggleSidebarButtonText || mergedLang.toggleSidebarButtonText?.value) ? (
+					<ToggleSidebar />
+				) : undefined,
 			// inherited props
 			...defined({
 				disableStyles,
@@ -145,9 +146,10 @@ export const Search = observer((properties: SearchProps): JSX.Element => {
 			hideMobileSidebar: true,
 			hidePagination: true,
 			hideFilterSummary: true,
-			hidePerPage: true,
-			hideLayoutSelector: true,
-			hideSortBy: true,
+			hidePaginationInfo: true,
+			hideLayoutSelector: false,
+			hideSortBy: false,
+			hidePerPage: false,
 			// inherited props
 			...defined({
 				disableStyles,
@@ -160,7 +162,7 @@ export const Search = observer((properties: SearchProps): JSX.Element => {
 			className: 'ss__search__content__toolbar--bottom-toolbar',
 			// default props
 			hideMobileSidebar: true,
-			hidePagination: true,
+			hidePagination: false,
 			hideFilterSummary: true,
 			hidePerPage: true,
 			hidePaginationInfo: true,

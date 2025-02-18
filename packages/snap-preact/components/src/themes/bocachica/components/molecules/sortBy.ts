@@ -22,9 +22,7 @@ export const sortBy: ThemeComponentProps<SortByProps> = {
 			},
 		},
 	},
-	mobile: {
-		type: 'radio',
-	},
+	mobile: {},
 	tablet: {},
 	desktop: {},
 };

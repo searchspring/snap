@@ -30,6 +30,9 @@ let config: SnapTemplatesConfig = {
 			style: globalStyles,
 			overrides: {
 				components: {
+					// "searchHorizontal toolbar.top": {
+					// 	hideLayoutSelector: false,
+					// },
 					button: {},
 					// recommendation: {
 					// 	lazyRender: {
@@ -118,9 +121,14 @@ let config: SnapTemplatesConfig = {
 		targets: [
 			{
 				selector: '#searchspring-layout',
-				component: 'Search',
+				component: 'SearchHorizontal',
 			},
 		],
+		settings: {
+			infinite: {
+				backfill: 2,
+			},
+		},
 	},
 	autocomplete: {
 		targets: [

@@ -7,7 +7,7 @@ const sidebarStyleScript = ({ theme }: SidebarProps) => {
 
 	return css({
 		boxSizing: 'border-box',
-		width: '300px',
+		width: '100%',
 		margin: '0 40px 0 0',
 
 		'& .ss__sidebar__title': {

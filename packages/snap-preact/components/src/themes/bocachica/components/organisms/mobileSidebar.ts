@@ -9,10 +9,42 @@ const mobileSidebarStyleScript = ({ theme }: MobileSidebarProps) => {
 	return css({
 		'.ss__mobile-sidebar__footer': {
 			gap: '6px',
+			padding: '10px',
+			borderTop: '1px solid black',
 			'.ss__button': {
 				width: '100%',
 				'.ss__button__content': {
 					textAlign: 'center',
+				},
+			},
+		},
+		'.ss__mobile-sidebar__slideout.ss__slideout--active': {
+			width: '80%',
+			maxWidth: '320px',
+		},
+		'.ss__mobile-sidebar__header__close-button': {
+			lineHeight: 1,
+			padding: '5px',
+		},
+
+		[`@media (max-width: ${variables?.breakpoints[2]}px)`]: {
+			'.ss__mobile-sidebar__body': {
+				//83px is the height of the footer & footer
+				height: 'calc(100vh - 100px)',
+				overflow: 'scroll',
+			},
+			'.ss__per-page, .ss__sortby': {
+				display: 'inline-flex',
+				width: '49%',
+				fontSize: '10px',
+
+				'.ss__dropdown': {
+					'.ss__select__select .ss__select__select__option': {
+						padding: '5px',
+					},
+					'.ss__select__dropdown__button': {
+						padding: '0px',
+					},
 				},
 			},
 		},

@@ -35,6 +35,10 @@ const toolbarStyleScript = () => {
 				padding: '6px 5px 6px 30px',
 			},
 		},
+
+		'.ss__toolbar__layout-selector': {
+			order: 4,
+		},
 	});
 };
 

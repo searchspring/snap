@@ -4,20 +4,21 @@ import { observer } from 'mobx-react-lite';
 import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
 
-import { Theme, useTheme, CacheProvider } from '../../../providers';
-import { mergeProps } from '../../../utilities';
-import { ComponentProps, RootNodeProperties } from '../../../types';
+import { Theme, useTheme, CacheProvider, useTreePath } from '../../../providers';
+import { mergeProps, mergeStyles } from '../../../utilities';
+import { ComponentProps, StyleScript } from '../../../types';
 import type { SearchPaginationStore } from '@searchspring/snap-store-mobx';
 import type { SearchController } from '@searchspring/snap-controller';
 import deepmerge from 'deepmerge';
 import { Lang, useLang } from '../../../hooks';
 
-const CSS = {
-	paginationInfo: ({}: Partial<PaginationInfoProps>) => css({}),
+const defaultStyles: StyleScript<PaginationInfoProps> = ({}) => {
+	return css({});
 };
 
 export const PaginationInfo = observer((properties: PaginationInfoProps): JSX.Element => {
 	const globalTheme: Theme = useTheme();
+	const globalTreePath = useTreePath();
 
 	const pagination = properties.controller?.store.pagination || properties.pagination;
 
@@ -25,24 +26,16 @@ export const PaginationInfo = observer((properties: PaginationInfoProps): JSX.El
 		infoText: `${pagination?.multiplePages ? `${pagination?.begin} - ${pagination?.end} of` : ''} ${`${pagination?.totalResults} result${
 			pagination?.totalResults == 1 ? '' : 's'
 		}`}`,
+		treePath: globalTreePath,
 	};
 
 	const props = mergeProps('paginationInfo', globalTheme, defaultProps, properties);
 
-	const { controller, infoText, disableStyles, className, style, styleScript } = props;
+	const { controller, infoText, className } = props;
 
 	const store = pagination || controller?.store?.pagination;
 
-	const styling: RootNodeProperties = { 'ss-name': props.name };
-	const stylingProps = props;
-
-	if (styleScript && !disableStyles) {
-		styling.css = [styleScript(stylingProps), style];
-	} else if (!disableStyles) {
-		styling.css = [CSS.paginationInfo(stylingProps), style];
-	} else if (style) {
-		styling.css = [style];
-	}
+	const styling = mergeStyles<PaginationInfoProps>(props, defaultStyles);
 
 	//initialize lang
 	const defaultLang = {

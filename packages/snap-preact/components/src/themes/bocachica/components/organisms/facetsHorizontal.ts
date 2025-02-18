@@ -56,9 +56,9 @@ export const facetsHorizontal: ThemeComponentProps<FacetsHorizontalProps> = {
 		limit: 0,
 	},
 	tablet: {
-		limit: 3,
+		limit: 5,
 	},
 	desktop: {
-		limit: 5,
+		limit: 7,
 	},
 };

@@ -98,8 +98,8 @@ export const autocomplete: ThemeComponentProps<AutocompleteProps> = {
 					columns: 3,
 				},
 				results: {
-					columns: 2,
-					rows: 1,
+					columns: 3,
+					rows: 2,
 				},
 				result: {
 					hideBadge: true,

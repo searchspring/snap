@@ -5,10 +5,13 @@ export const defaultLayoutOptions: ThemeComplete['layoutOptions'] = [];
 export const mobileLayoutOptions: ThemeComplete['layoutOptions'] = [
 	{
 		value: 1,
-		label: 'Uno',
+		label: '',
 		icon: 'square',
 		overrides: {
 			components: {
+				'searchHorizontal results': {
+					columns: 1,
+				},
 				'search results': {
 					columns: 1,
 				},
@@ -17,22 +20,16 @@ export const mobileLayoutOptions: ThemeComplete['layoutOptions'] = [
 	},
 	{
 		value: 2,
-		label: 'Dos',
+		label: '',
 		default: true,
 		icon: 'layout-large',
 		overrides: {
 			components: {
-				// search: {
-				// 	theme: {
-				// 		components: {
-				// 			results: {
-				// 				columns: 3,
-				// 			},
-				// 		},
-				// 	},
-				// },
+				'searchHorizontal results': {
+					columns: 2,
+				},
 				'search results': {
-					columns: 3,
+					columns: 2,
 				},
 			},
 		},
