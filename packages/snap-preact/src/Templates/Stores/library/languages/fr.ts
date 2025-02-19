@@ -330,7 +330,7 @@ export const fr: LangComponents = {
 				} 
                 <span class="ss__search-header__results-count-total">${data?.pagination?.totalResults}</span> 
                 résultat${data?.pagination?.totalResults == 1 ? '' : 's'} 
-                ${data?.query?.query ? `pour <span class="ss__search-header__results-query">"${data.query.query.string}"</span>` : ''}
+                ${data?.search?.query ? `pour <span class="ss__search-header__results-query">"${data?.search?.query.string}"</span>` : ''}
             `;
 			},
 			attributes: {
@@ -339,30 +339,30 @@ export const fr: LangComponents = {
 		},
 		correctedQueryText: {
 			value: (data) => {
-				return `Aucun résultat trouvé pour <em>"${data?.query?.originalQuery?.string}"</em>, montrant les résultats pour <em>"${data?.query?.query?.string}"</em> plutôt.`;
+				return `Aucun résultat trouvé pour <em>"${data?.search?.originalQuery?.string}"</em>, montrant les résultats pour <em>"${data?.search?.query?.string}"</em> plutôt.`;
 			},
 			attributes: {
 				'aria-label': (data) =>
-					`Aucun résultat trouvé pour ${data?.query?.originalQuery?.string}, safficher les résultats pour ${data?.query?.query?.string} à la place`,
+					`Aucun résultat trouvé pour ${data?.search?.originalQuery?.string}, safficher les résultats pour ${data?.search?.query?.string} à la place`,
 			},
 		},
 		noResultsText: {
 			value: (data) => {
 				return `${
-					data?.query?.query
+					data?.search?.query
 						? `<span>
-                    Aucun résultat pour <span class="ss__search-header__results-query">"${data.query.query.string}"</span> trouvée.
+                    Aucun résultat pour <span class="ss__search-header__results-query">"${data?.search?.query?.string}"</span> trouvée.
                 </span>`
 						: `<span>Aucun résultat trouvé.</span>`
 				}`;
 			},
 			attributes: {
-				'aria-label': (data) => `Aucun résultat trouvé pour ${data?.query?.query?.string}`,
+				'aria-label': (data) => `Aucun résultat trouvé pour ${data?.search?.query?.string}`,
 			},
 		},
 		didYouMeanText: {
 			value: (data) => {
-				return `Vouliez-vous dire <a href=${data?.query?.didYouMean?.url.href}>${data?.query?.didYouMean?.string}</a>?`;
+				return `Vouliez-vous dire <a href=${data?.search?.didYouMean?.url.href}>${data?.search?.didYouMean?.string}</a>?`;
 			},
 		},
 	},

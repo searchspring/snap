@@ -10,6 +10,11 @@ const breadcrumbsStyleScript = (props: BreadcrumbsProps) => {
 */
 
 // Breadcrumbs component props
-export const breadcrumbs: Partial<BreadcrumbsProps> = {
-	// themeStyleScript: breadcrumbsStyleScript,
+export const breadcrumbs: ThemeComponentProps<BreadcrumbsProps> = {
+	default: {
+		// themeStyleScript: badgeImageStyleScript,
+	},
+	mobile: {},
+	tablet: {},
+	desktop: {},
 };

@@ -10,27 +10,24 @@ const filterStyleScript = ({ theme }: FilterProps) => {
 	const backgroundTextColor = backgroundColor.isDark() ? '#fff' : '#000';
 
 	return css({
-		textDecoration: 'none',
-		display: 'inline-flex',
 		'& .ss__filter__button': {
-			alignItems: 'center',
 			backgroundColor: backgroundColor.hex(),
 			color: backgroundTextColor,
 
 			'& .ss__filter__button__icon': {
 				fill: backgroundTextColor,
 				stroke: backgroundTextColor,
-				margin: '0 5px 0 0',
 			},
-		},
-		'& .ss__filter__label': {
-			marginRight: '5px',
-			fontWeight: 'bold',
 		},
 	});
 };
 
 // Filter component props
-export const filter: Partial<FilterProps> = {
-	themeStyleScript: filterStyleScript,
+export const filter: ThemeComponentProps<FilterProps> = {
+	default: {
+		themeStyleScript: filterStyleScript,
+	},
+	mobile: {},
+	tablet: {},
+	desktop: {},
 };

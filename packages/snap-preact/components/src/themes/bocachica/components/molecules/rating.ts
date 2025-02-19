@@ -6,6 +6,11 @@ import type { RatingProps } from '../../../../components/Molecules/Rating';
 // };
 
 // Rating component props
-export const rating: Partial<RatingProps> = {
-	// themeStyleScript: ratingStyleScript,
+export const rating: ThemeComponentProps<RatingProps> = {
+	default: {
+		// themeStyleScript: ratingStyleScript,
+	},
+	mobile: {},
+	tablet: {},
+	desktop: {},
 };

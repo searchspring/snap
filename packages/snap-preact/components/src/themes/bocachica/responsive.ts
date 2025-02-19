@@ -1,157 +1,20 @@
 import { ThemeResponsive } from '../../providers/theme';
+import { mobileComponents, tabletComponents, desktopComponents } from './components';
+import { mobileLayoutOptions, tabletLayoutOptions, desktopLayoutOptions } from './layoutOptions';
 
 const mobileOverrides: ThemeResponsive = {
-	layoutOptions: [
-		{
-			value: 1,
-			icon: 'square',
-			overrides: {
-				components: {
-					search: {
-						theme: {
-							components: {
-								results: {
-									columns: 1,
-								},
-							},
-						},
-					},
-				},
-			},
-		},
-		{
-			value: 2,
-			default: true,
-			icon: 'layout-large',
-			overrides: {
-				components: {
-					search: {
-						theme: {
-							components: {
-								results: {
-									columns: 2,
-								},
-							},
-						},
-					},
-				},
-			},
-		},
-	],
-	components: {
-		search: {
-			theme: {
-				components: {
-					results: {
-						columns: 2,
-					},
-				},
-			},
-		},
-		facetsHorizontal: {
-			limit: 0,
-		},
-		mobileSidebar: {
-			hideSortBy: false,
-		},
-		searchHorizontal: {
-			theme: {
-				components: {
-					'toolbar.middle': {
-						hidePerPage: true,
-						hideSortBy: true,
-					},
-				},
-			},
-		},
-		sortBy: {
-			type: 'radio',
-		},
-		'toolbar.top': {
-			hideMobileSidebar: false,
-		},
-		toolbar: {
-			hideSortBy: true,
-			hidePerPage: true,
-		},
-		autocomplete: {
-			hideFacets: true,
-			vertical: true,
-			horizontalTerms: true,
-			theme: {
-				components: {
-					results: {
-						rows: 1,
-						columns: 2,
-					},
-				},
-			},
-		},
-	},
+	layoutOptions: mobileLayoutOptions,
+	components: mobileComponents,
 };
 
 const tabletOverrides: ThemeResponsive = {
-	layoutOptions: [],
-	components: {
-		search: {
-			theme: {
-				components: {
-					results: {
-						columns: 3,
-					},
-				},
-			},
-		},
-		facetsHorizontal: {
-			limit: 3,
-		},
-		autocomplete: {
-			hideFacets: true,
-			vertical: true,
-			horizontalTerms: true,
-			theme: {
-				components: {
-					results: {
-						rows: 1,
-						columns: 3,
-					},
-				},
-			},
-		},
-	},
+	layoutOptions: tabletLayoutOptions,
+	components: tabletComponents,
 };
 
 const desktopOverrides: ThemeResponsive = {
-	layoutOptions: [],
-	components: {
-		search: {
-			theme: {
-				components: {
-					results: {
-						columns: 3,
-					},
-				},
-			},
-		},
-		facetsHorizontal: {
-			limit: 5,
-		},
-		autocomplete: {
-			vertical: true,
-			horizontalTerms: true,
-			theme: {
-				components: {
-					results: {
-						rows: 1,
-						columns: 3,
-					},
-					facet: {
-						limit: 4,
-					},
-				},
-			},
-		},
-	},
+	layoutOptions: desktopLayoutOptions,
+	components: desktopComponents,
 };
 
 export const responsive: [ThemeResponsive, ThemeResponsive, ThemeResponsive] = [mobileOverrides, tabletOverrides, desktopOverrides];

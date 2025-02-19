@@ -73,6 +73,13 @@ import type { RecommendationEmailProps } from '../components/Templates/Recommend
 import type { SearchProps } from '../components/Templates/Search';
 import type { SearchHorizontalProps } from '../components/Templates/SearchHorizontal';
 
+export type ThemeComponentProps<ComponentProps> = {
+	default: Partial<ComponentProps>;
+	mobile: Partial<ComponentProps>;
+	tablet: Partial<ComponentProps>;
+	desktop: Partial<ComponentProps>;
+};
+
 type NamedThemeComponentSelectors<ComponentType extends string, ComponentNames extends string> =
 	| ComponentType
 	| `${string} ${ComponentType}`

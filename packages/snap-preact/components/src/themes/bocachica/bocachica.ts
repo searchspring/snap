@@ -1,6 +1,6 @@
 import { ThemeComplete, ThemeVariables } from '../../providers';
 import { components } from './components';
-import { layoutOptions } from './layoutOptions';
+import { defaultLayoutOptions } from './layoutOptions';
 import { responsive } from './responsive';
 
 const bocachicaVariables: ThemeVariables = {
@@ -17,6 +17,6 @@ export const bocachica: ThemeComplete = {
 	name: 'bocachica',
 	variables: bocachicaVariables,
 	components,
-	layoutOptions,
+	layoutOptions: defaultLayoutOptions,
 	responsive,
 };

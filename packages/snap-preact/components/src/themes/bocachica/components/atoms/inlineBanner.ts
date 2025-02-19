@@ -6,6 +6,11 @@ import type { InlineBannerProps } from '../../../../components/Atoms/Merchandisi
 // };
 
 // InlineBanner component props
-export const inlineBanner: Partial<InlineBannerProps> = {
-	// themeStyleScript: inlineBannerStyleScript,
+export const inlineBanner: ThemeComponentProps<InlineBannerProps> = {
+	default: {
+		// themeStyleScript: inlineBannerStyleScript,
+	},
+	mobile: {},
+	tablet: {},
+	desktop: {},
 };

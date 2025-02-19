@@ -30,16 +30,18 @@ const defaultStyles: StyleScript<FacetsHorizontalProps> = ({}) => {
 			},
 
 			'& .ss__facets-horizontal__header__dropdown': {
-				flex: '0 0 0%',
 				margin: '0 0 10px 0',
-				boxSizing: 'border-box',
-				minWidth: '100px',
+				'.ss__dropdown__button': {
+					display: 'flex',
+				},
 
 				'& .ss__dropdown__button__heading': {
 					display: 'flex',
 					justifyContent: 'space-between',
 					alignItems: 'center',
 					padding: '5px 10px',
+					flexShrink: '0',
+					gap: '10px',
 				},
 
 				'&.ss__dropdown--open': {
@@ -276,10 +278,6 @@ export const FacetsHorizontal = observer((properties: FacetsHorizontalProps): JS
 										<span {...mergedLang.dropdownButton.value}>{facet?.label}</span>
 										<Icon
 											{...subProps.icon}
-											// icon={selectedFacet?.field === facet.field ? iconExpand : iconCollapse}
-
-											// {...(typeof icon == 'string' ? { icon: icon } : (icon as Partial<IconProps>))}
-
 											{...(selectedFacet?.field === facet.field
 												? { ...(typeof iconExpand == 'string' ? { icon: iconExpand } : (iconExpand as Partial<IconProps>)) }
 												: { ...(typeof iconCollapse == 'string' ? { icon: iconCollapse } : (iconCollapse as Partial<IconProps>)) })}

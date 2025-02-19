@@ -10,6 +10,11 @@ import type { FormattedNumberProps } from '../../../../components/Atoms/Formatte
 // };
 
 // FormattedNumber component props
-export const formattedNumber: Partial<FormattedNumberProps> = {
-	// themeStyleScript: formattedNumberStyleScript,
+export const formattedNumber: ThemeComponentProps<FormattedNumberProps> = {
+	default: {
+		// themeStyleScript: formattedNumberStyleScript,
+	},
+	mobile: {},
+	tablet: {},
+	desktop: {},
 };

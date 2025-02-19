@@ -8,8 +8,6 @@ const layoutSelectorStyleScript = ({ theme }: LayoutSelectorProps) => {
 
 	return css({
 		'.ss__button__content': {
-			display: 'flex',
-			alignItems: 'center',
 			gap: '7px',
 		},
 		'.ss__list__option': {
@@ -30,8 +28,13 @@ const layoutSelectorStyleScript = ({ theme }: LayoutSelectorProps) => {
 };
 
 // LayoutSelector component props
-export const layoutSelector: Partial<LayoutSelectorProps> = {
-	themeStyleScript: layoutSelectorStyleScript,
-	type: 'list',
-	hideLabel: true,
+export const layoutSelector: ThemeComponentProps<LayoutSelectorProps> = {
+	default: {
+		themeStyleScript: layoutSelectorStyleScript,
+		type: 'list',
+		hideLabel: true,
+	},
+	mobile: {},
+	tablet: {},
+	desktop: {},
 };

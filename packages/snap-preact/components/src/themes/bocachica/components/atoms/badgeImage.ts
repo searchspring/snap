@@ -9,7 +9,11 @@ const badgeImageStyleScript = (props: BadgeImageProps) => {
 };
 */
 
-// BadgeImage component props
-export const badgeImage: Partial<BadgeImageProps> = {
-	// themeStyleScript: badgeImageStyleScript,
+export const badgeImage: ThemeComponentProps<BadgeImageProps> = {
+	default: {
+		// themeStyleScript: badgeImageStyleScript,
+	},
+	mobile: {},
+	tablet: {},
+	desktop: {},
 };

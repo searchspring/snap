@@ -18,6 +18,11 @@ const resultStyleScript = ({ theme }: ResultProps) => {
 };
 
 // Result component props
-export const result: Partial<ResultProps> = {
-	themeStyleScript: resultStyleScript,
+export const result: ThemeComponentProps<ResultProps> = {
+	default: {
+		themeStyleScript: resultStyleScript,
+	},
+	mobile: {},
+	tablet: {},
+	desktop: {},
 };

@@ -10,6 +10,11 @@ const badgeRectangleStyleScript = ({ color, colorText, theme }: BadgeRectanglePr
 */
 
 // BadgeRectangle component props
-export const badgeRectangle: Partial<BadgeRectangleProps> = {
-	// themeStyleScript: badgeRectangleStyleScript,
+export const badgeRectangle: ThemeComponentProps<BadgeRectangleProps> = {
+	default: {
+		// themeStyleScript: badgeImageStyleScript,
+	},
+	mobile: {},
+	tablet: {},
+	desktop: {},
 };

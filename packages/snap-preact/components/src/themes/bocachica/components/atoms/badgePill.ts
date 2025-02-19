@@ -13,6 +13,11 @@ const badgePillStyleScript = ({ color, colorText, theme }: BadgePillProps) => {
 */
 
 // BadgePill component props
-export const badgePill: Partial<BadgePillProps> = {
-	// themeStyleScript: badgePillStyleScript,
+export const badgePill: ThemeComponentProps<BadgePillProps> = {
+	default: {
+		// themeStyleScript: badgeImageStyleScript,
+	},
+	mobile: {},
+	tablet: {},
+	desktop: {},
 };

@@ -50,16 +50,18 @@ const selectStyleScript = ({ backgroundColor, theme }: SelectProps) => {
 
 		'.ss__select__select': {
 			border: '0px',
+			marginBottom: '0px',
+
 			'.ss__select__select__option': {
 				listStyle: 'none',
 				padding: '6px 30px',
 				gap: '6px',
 				color: variables?.colors?.secondary,
 				'&.ss__select__select__option--selected': {
-					backgroundColor: `rgba(${transparentSecondary.rgb()})` || `rgba(109,113,117,.06)`,
+					backgroundColor: `${transparentSecondary.rgb().lightness(95)}` || `rgba(109,113,117,.06)`,
 				},
 				'&:hover': {
-					backgroundColor: `rgba(${transparentSecondary.rgb()})` || `rgba(109,113,117,.06)`,
+					backgroundColor: `${transparentSecondary.rgb().lightness(95)}` || `rgba(109,113,117,.06)`,
 				},
 			},
 		},
@@ -67,8 +69,13 @@ const selectStyleScript = ({ backgroundColor, theme }: SelectProps) => {
 };
 
 // Select component props
-export const select: Partial<SelectProps> = {
-	themeStyleScript: selectStyleScript,
-	iconClose: 'angle-down',
-	iconOpen: 'angle-down',
+export const select: ThemeComponentProps<SelectProps> = {
+	default: {
+		themeStyleScript: selectStyleScript,
+		iconClose: 'angle-down',
+		iconOpen: 'angle-down',
+	},
+	mobile: {},
+	tablet: {},
+	desktop: {},
 };

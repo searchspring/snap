@@ -18,6 +18,11 @@ const carouselStyleScript = ({ theme }: CarouselProps) => {
 };
 
 // Carousel component props
-export const carousel: Partial<CarouselProps> = {
-	themeStyleScript: carouselStyleScript,
+export const carousel: ThemeComponentProps<CarouselProps> = {
+	default: {
+		themeStyleScript: carouselStyleScript,
+	},
+	mobile: {},
+	tablet: {},
+	desktop: {},
 };

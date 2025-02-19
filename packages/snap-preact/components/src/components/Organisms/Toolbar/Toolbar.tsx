@@ -34,32 +34,13 @@ export const Toolbar = observer((properties: ToolbarProps): JSX.Element => {
 	const themeStore = snap?.templates?.getThemeStore(globalTheme.name);
 
 	const defaultProps: Partial<ToolbarProps> = {
-		hideFilterSummary: false,
-		hideLayoutSelector: false,
-		hidePerPage: false,
-		hideSortBy: false,
-		hidePagination: false,
 		treePath: globalTreePath,
+
+		modules: ['MobileSidebar', 'FilterSummary', 'PaginationInfo', 'SortBy', 'PerPage', 'Pagination'],
 	};
 
 	const props = mergeProps('toolbar', globalTheme, defaultProps, properties);
-	const {
-		controller,
-		hideMobileSidebar,
-		hideFilterSummary,
-		hidePerPage,
-		hideSortBy,
-		hideLayoutSelector,
-		hidePagination,
-		hidePaginationInfo,
-		topSlot,
-		bottomSlot,
-		hideTopSlot,
-		hideBottomSlot,
-		disableStyles,
-		className,
-		treePath,
-	} = props;
+	const { controller, topSlot, bottomSlot, hideTopSlot, hideBottomSlot, disableStyles, className, treePath, modules } = props;
 
 	const styling = mergeStyles<ToolbarProps>(props, defaultStyles);
 
@@ -178,66 +159,80 @@ export const Toolbar = observer((properties: ToolbarProps): JSX.Element => {
 		},
 	};
 
-	return (
+	const hasChildrenToRender = Boolean((!hideTopSlot && topSlot) || modules?.length || (!hideBottomSlot && bottomSlot));
+
+	return hasChildrenToRender ? (
 		<CacheProvider>
 			<div {...styling} className={classnames('ss__toolbar', className)}>
 				{!hideTopSlot && topSlot && <div className={classnames('ss__toolbar__slot', `ss__toolbar__slot--top`)}>{cloneWithProps(topSlot)}</div>}
 
-				{!hideMobileSidebar && controller.store.pagination.totalResults > 0 && <MobileSidebar controller={controller} {...subProps.MobileSidebar} />}
+				{modules?.map((module) => {
+					if (module == 'MobileSidebar' && controller.store.pagination.totalResults > 0) {
+						return <MobileSidebar controller={controller} {...subProps.MobileSidebar} />;
+					}
 
-				{!hideFilterSummary && <FilterSummary {...subProps.FilterSummary} />}
+					if (module == 'FilterSummary') {
+						return <FilterSummary {...subProps.FilterSummary} />;
+					}
 
-				{!hideLayoutSelector && themeStore && props.theme?.layoutOptions && props.theme.layoutOptions.length > 0 && (
-					<LayoutSelector
-						onSelect={(e, option) => {
-							if (option) {
-								themeStore?.layout.select(option);
+					if (module == 'LayoutSelector' && themeStore && props.theme?.layoutOptions && props.theme.layoutOptions.length > 0) {
+						return (
+							<LayoutSelector
+								onSelect={(e, option) => {
+									if (option) {
+										themeStore?.layout.select(option);
+									}
+								}}
+								selected={themeStore?.layout.selected}
+								options={props.theme?.layoutOptions}
+								{...subProps.LayoutSelector}
+							/>
+						);
+					}
+					if (module == 'PaginationInfo') {
+						return <PaginationInfo {...subProps.PaginationInfo} />;
+					}
+
+					if (module == 'SortBy') {
+						return <SortBy {...subProps.SortBy} />;
+					}
+
+					if (module == 'PerPage') {
+						return <PerPage {...subProps.PerPage} />;
+					}
+
+					if (module == 'Pagination') {
+						return (() => {
+							if (controller.config.settings?.infinite) {
+								return <LoadMore {...subProps.LoadMore} />;
+							} else {
+								return <Pagination {...subProps.Pagination} />;
 							}
-						}}
-						selected={themeStore?.layout.selected}
-						options={props.theme?.layoutOptions}
-						{...subProps.LayoutSelector}
-					/>
-				)}
-
-				{!hidePaginationInfo && <PaginationInfo {...subProps.PaginationInfo} />}
-
-				{!hideSortBy && <SortBy {...subProps.SortBy} />}
-
-				{!hidePerPage && <PerPage {...subProps.PerPage} />}
-
-				{!hidePagination &&
-					(() => {
-						if (controller.config.settings?.infinite) {
-							return <LoadMore {...subProps.LoadMore} />;
-						} else {
-							return <Pagination {...subProps.Pagination} />;
-						}
-					})()}
+						})();
+					}
+				})}
 
 				{!hideBottomSlot && bottomSlot && (
 					<div className={classnames('ss__toolbar__slot', `ss__toolbar__slot--bottom`)}>{cloneWithProps(bottomSlot)}</div>
 				)}
 			</div>
 		</CacheProvider>
+	) : (
+		<></>
 	);
 });
 
 export interface ToolbarProps extends ComponentProps {
 	controller: SearchController;
-	hideFilterSummary?: boolean;
-	hideMobileSidebar?: boolean;
-	hideLayoutSelector?: boolean;
-	hidePerPage?: boolean;
-	hideSortBy?: boolean;
-	hidePagination?: boolean;
-	hidePaginationInfo?: boolean;
 	topSlot?: JSX.Element;
 	hideTopSlot?: boolean;
 	bottomSlot?: JSX.Element;
 	hideBottomSlot?: boolean;
 	name?: ToolbarNames;
+	modules?: ModuleNames[];
 }
+
+export type ModuleNames = 'FilterSummary' | 'MobileSidebar' | 'LayoutSelector' | 'PerPage' | 'SortBy' | 'Pagination' | 'PaginationInfo';
 
 export type ToolbarNames = 'top' | 'middle' | 'bottom';
 

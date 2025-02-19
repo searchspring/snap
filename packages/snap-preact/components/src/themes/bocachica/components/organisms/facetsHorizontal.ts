@@ -7,26 +7,17 @@ const facetsHorizontalStyleScript = ({ theme }: FacetsHorizontalProps) => {
 	const variables = theme?.variables;
 
 	return css({
-		'& .ss__facets-horizontal__header': {
-			display: 'flex',
-			flexWrap: 'wrap',
-			gap: '10px',
+		paddingBottom: '10px',
 
+		'& .ss__facets-horizontal__header': {
 			'& .ss__facets-horizontal__header__dropdown': {
-				flex: '0 0 0%',
 				margin: '0',
-				boxSizing: 'border-box',
-				minWidth: '100px',
 
 				'& .ss__icon': {
 					transition: 'transform ease .5s',
 				},
 
 				'& .ss__dropdown__button__heading': {
-					display: 'flex',
-					justifyContent: 'space-between',
-					alignItems: 'center',
-					padding: '5px 10px',
 					color: variables?.colors?.secondary,
 					fontWeight: 'bold',
 				},
@@ -36,14 +27,6 @@ const facetsHorizontalStyleScript = ({ theme }: FacetsHorizontalProps) => {
 						'& .ss__icon': {
 							transform: 'rotate(180deg)',
 						},
-					},
-					'& .ss__dropdown__content': {
-						padding: '10px',
-						minWidth: '160px',
-						width: 'max-content',
-						maxHeight: '500px',
-						overflowY: 'auto',
-						zIndex: 1,
 					},
 				},
 			},
@@ -60,19 +43,22 @@ const facetsHorizontalStyleScript = ({ theme }: FacetsHorizontalProps) => {
 				},
 			},
 		},
-		'& .ss__facet__show-more-less': {
-			display: 'block',
-			margin: '8px 8px 0 8px',
-			cursor: 'pointer',
-			'& .ss__icon': {
-				marginRight: '8px',
-			},
-		},
 	});
 };
 
-// Facets component props
-export const facetsHorizontal: Partial<FacetsHorizontalProps> = {
-	themeStyleScript: facetsHorizontalStyleScript,
-	iconCollapse: 'angle-down',
+// FacetsHorizontal component props
+export const facetsHorizontal: ThemeComponentProps<FacetsHorizontalProps> = {
+	default: {
+		themeStyleScript: facetsHorizontalStyleScript,
+		iconCollapse: 'angle-down',
+	},
+	mobile: {
+		limit: 0,
+	},
+	tablet: {
+		limit: 5,
+	},
+	desktop: {
+		limit: 7,
+	},
 };

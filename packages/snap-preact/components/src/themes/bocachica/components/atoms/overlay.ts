@@ -6,6 +6,11 @@ import type { OverlayProps } from '../../../../components/Atoms/Overlay';
 // };
 
 // Overlay component props
-export const overlay: Partial<OverlayProps> = {
-	// themeStyleScript: overlayStyleScript,
+export const overlay: ThemeComponentProps<OverlayProps> = {
+	default: {
+		// themeStyleScript: overlayStyleScript,
+	},
+	mobile: {},
+	tablet: {},
+	desktop: {},
 };

@@ -5,8 +5,6 @@ import type { FilterSummaryProps } from '../../../../components/Organisms/Filter
 const filterSummaryStyleScript = ({ theme }: FilterSummaryProps) => {
 	const variables = theme?.variables;
 	return css({
-		display: 'flex',
-		gap: '0.5em',
 		'& .ss__filter-summary__title': {
 			fontWeight: 'bold',
 			color: variables?.colors?.secondary,
@@ -15,7 +13,11 @@ const filterSummaryStyleScript = ({ theme }: FilterSummaryProps) => {
 };
 
 // FilterSummary component props
-export const filterSummary: Partial<FilterSummaryProps> = {
-	themeStyleScript: filterSummaryStyleScript,
-	title: 'Applied Filters',
+export const filterSummary: ThemeComponentProps<FilterSummaryProps> = {
+	default: {
+		themeStyleScript: filterSummaryStyleScript,
+	},
+	mobile: {},
+	tablet: {},
+	desktop: {},
 };

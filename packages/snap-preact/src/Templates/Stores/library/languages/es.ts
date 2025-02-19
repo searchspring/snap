@@ -341,7 +341,7 @@ export const es: LangComponents = {
 				} 
                 <span class="ss__search-header__results-count-total">${data?.pagination?.totalResults}</span> 
                 resultado${data?.pagination?.totalResults == 1 ? '' : 's'} 
-                ${data?.query ? `para <span class="ss__search-header__results-query">"${data.query.query?.string}"</span>` : ''}
+                ${data?.search?.query ? `para <span class="ss__search-header__results-query">"${data?.search?.query?.string}"</span>` : ''}
             `;
 			},
 			attributes: {
@@ -350,30 +350,30 @@ export const es: LangComponents = {
 		},
 		correctedQueryText: {
 			value: (data) => {
-				return `No se encontraron resultados para <em>"${data?.query?.originalQuery?.string}"</em>, mostrando resultados para <em>"${data?.query?.query?.string}"</em> en su lugar.`;
+				return `No se encontraron resultados para <em>"${data?.search?.originalQuery?.string}"</em>, mostrando resultados para <em>"${data?.search?.query?.string}"</em> en su lugar.`;
 			},
 			attributes: {
 				'aria-label': (data) =>
-					`No se encontraron resultados para ${data?.query?.originalQuery?.string}, mostrando resultados para ${data?.query?.query?.string} en su lugar`,
+					`No se encontraron resultados para ${data?.search?.originalQuery?.string}, mostrando resultados para ${data?.search?.query?.string} en su lugar`,
 			},
 		},
 		noResultsText: {
 			value: (data) => {
 				return `${
-					data?.query?.query
+					data?.search?.query
 						? `<span>
-                    No se encontraron resultados para <span class="ss__search-header__results-query">"${data.query?.query?.string}"</span>.
+                    No se encontraron resultados para <span class="ss__search-header__results-query">"${data?.search?.query?.string}"</span>.
                 </span>`
 						: `<span>No se encontraron resultados.</span>`
 				}`;
 			},
 			attributes: {
-				'aria-label': (data) => `No se encontraron resultados para ${data?.query?.query?.string}`,
+				'aria-label': (data) => `No se encontraron resultados para ${data?.search?.query?.string}`,
 			},
 		},
 		didYouMeanText: {
 			value: (data) => {
-				return `¿Quiso decir <a href=${data?.query?.didYouMean?.url.href}>${data?.query?.didYouMean?.string}</a>?`;
+				return `¿Quiso decir <a href=${data?.search?.didYouMean?.url.href}>${data?.search?.didYouMean?.string}</a>?`;
 			},
 		},
 	},

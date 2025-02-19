@@ -10,6 +10,11 @@ const badgeTextStyleScript = ({ colorText, theme }: BadgeTextProps) => {
 */
 
 // BadgeText component props
-export const badgeText: Partial<BadgeTextProps> = {
-	// themeStyleScript: badgeTextStyleScript,
+export const badgeText: ThemeComponentProps<BadgeTextProps> = {
+	default: {
+		// themeStyleScript: badgeImageStyleScript,
+	},
+	mobile: {},
+	tablet: {},
+	desktop: {},
 };

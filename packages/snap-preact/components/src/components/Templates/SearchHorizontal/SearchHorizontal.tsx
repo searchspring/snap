@@ -21,7 +21,9 @@ const defaultStyles: StyleScript<SearchHorizontalProps> = ({}) => {
 export const SearchHorizontal = observer((properties: SearchHorizontalProps): JSX.Element => {
 	const globalTheme: Theme = useTheme();
 
-	const defaultProps: Partial<SearchHorizontalProps> = {};
+	const defaultProps: Partial<SearchHorizontalProps> = {
+		hideMiddleToolbar: true,
+	};
 
 	const props = mergeProps('searchHorizontal', globalTheme, defaultProps, properties);
 
@@ -34,6 +36,7 @@ export const SearchHorizontal = observer((properties: SearchHorizontalProps): JS
 		hideTopToolbar,
 		hideMiddleToolbar,
 		resultComponent,
+		hideFacetsHorizontal,
 		hideBottomToolBar,
 		treePath,
 	} = props;
@@ -62,11 +65,7 @@ export const SearchHorizontal = observer((properties: SearchHorizontalProps): JS
 		TopToolbar: {
 			name: 'top',
 			// default props
-			hideFilterSummary: false,
-			hideLayoutSelector: true,
-			hideSortBy: true,
-			hidePagination: true,
-			hidePerPage: true,
+			modules: ['FilterSummary', 'LayoutSelector', 'SortBy', 'PerPage'],
 			// inherited props
 			...defined({
 				disableStyles,
@@ -77,10 +76,7 @@ export const SearchHorizontal = observer((properties: SearchHorizontalProps): JS
 		MiddleToolbar: {
 			name: 'middle',
 			// default props
-			hideFilterSummary: true,
-			hidePagination: true,
-			hideSortBy: false,
-			hidePerPage: false,
+			modules: ['PerPage', 'SortBy'],
 			// inherited props
 			...defined({
 				disableStyles,
@@ -91,9 +87,7 @@ export const SearchHorizontal = observer((properties: SearchHorizontalProps): JS
 		BottomToolbar: {
 			name: 'bottom',
 			// default props
-			hideFilterSummary: true,
-			hidePerPage: true,
-			hideSortBy: true,
+			modules: ['Pagination'],
 			// inherited props
 			...defined({
 				disableStyles,
@@ -169,7 +163,8 @@ export const SearchHorizontal = observer((properties: SearchHorizontalProps): JS
 				{!hideTopToolbar && store.pagination.totalResults > 0 && (
 					<Toolbar {...subProps.TopToolbar} className="ss__search-horizontal__content__toolbar--top-toolbar" controller={controller} />
 				)}
-				<FacetsHorizontal {...subProps.FacetsHorizontal} facets={store.facets} controller={controller} />
+
+				{!hideFacetsHorizontal && <FacetsHorizontal {...subProps.FacetsHorizontal} facets={store.facets} controller={controller} />}
 
 				<div className={classnames('ss__search-horizontal__content')}>
 					{!hideHeaderBanner && <Banner {...subProps.Banner} content={merchandising.content} type={ContentType.HEADER} name={'header'} />}
@@ -180,7 +175,7 @@ export const SearchHorizontal = observer((properties: SearchHorizontalProps): JS
 					)}
 
 					{store.pagination.totalResults ? (
-						<Results {...subProps.Results} controller={controller} breakpoints={{}} />
+						<Results {...subProps.Results} controller={controller} />
 					) : (
 						store.pagination.totalResults === 0 && <NoResults {...subProps.NoResults} controller={controller} />
 					)}
@@ -205,6 +200,7 @@ export interface SearchHorizontalProps extends ComponentProps {
 	hideMiddleToolbar?: boolean;
 	hideBottomToolBar?: boolean;
 	hideMerchandisingBanners?: boolean | string[];
+	hideFacetsHorizontal?: boolean;
 }
 
 interface SearchHorizontalSubProps {

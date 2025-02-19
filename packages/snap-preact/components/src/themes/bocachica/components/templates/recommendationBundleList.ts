@@ -1,12 +1,17 @@
-import { css } from '@emotion/react';
+// import { css } from '@emotion/react';
 import type { RecommendationBundleListProps } from '../../../../components/Templates/RecommendationBundleList';
 
 // CSS in JS style script for the RecommendationBundleList component
-const recommendationBundleStyleScript = ({}: RecommendationBundleListProps) => {
-	return css({});
-};
+// const recommendationBundleListStyleScript = ({}: RecommendationBundleListProps) => {
+// 	return css({});
+// };
 
-// RecommendationBundle component props
-export const recommendationBundleList: Partial<RecommendationBundleListProps> = {
-	themeStyleScript: recommendationBundleStyleScript,
+// RecommendationBundleList component props
+export const recommendationBundleList: ThemeComponentProps<RecommendationBundleListProps> = {
+	default: {
+		// themeStyleScript: recommendationBundleListStyleScript,
+	},
+	mobile: {},
+	tablet: {},
+	desktop: {},
 };

@@ -11,6 +11,11 @@ const searchInputStyleScript = ({ theme }: SearchInputProps) => {
 };
 
 // SearchInput component props
-export const searchInput: Partial<SearchInputProps> = {
-	themeStyleScript: searchInputStyleScript,
+export const searchInput: ThemeComponentProps<SearchInputProps> = {
+	default: {
+		themeStyleScript: searchInputStyleScript,
+	},
+	mobile: {},
+	tablet: {},
+	desktop: {},
 };

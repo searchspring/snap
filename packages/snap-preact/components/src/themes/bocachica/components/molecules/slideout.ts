@@ -16,6 +16,11 @@ const slideoutStyleScript = ({ isActive, width, slideDirection, theme }: Slideou
 };
 
 // Slideout component props
-export const slideout: Partial<SlideoutProps> = {
-	themeStyleScript: slideoutStyleScript,
+export const slideout: ThemeComponentProps<SlideoutProps> = {
+	default: {
+		themeStyleScript: slideoutStyleScript,
+	},
+	mobile: {},
+	tablet: {},
+	desktop: {},
 };

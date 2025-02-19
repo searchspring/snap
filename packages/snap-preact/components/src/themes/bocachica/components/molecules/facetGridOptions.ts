@@ -28,8 +28,13 @@ const facetGridOptionsStyleScript = ({ theme }: FacetGridOptionsProps) => {
 };
 
 // FacetGridOptions component props
-export const facetGridOptions: Partial<FacetGridOptionsProps> = {
-	themeStyleScript: facetGridOptionsStyleScript,
-	gapSize: '5px',
-	columns: 5,
+export const facetGridOptions: ThemeComponentProps<FacetGridOptionsProps> = {
+	default: {
+		themeStyleScript: facetGridOptionsStyleScript,
+		gapSize: '5px',
+		columns: 5,
+	},
+	mobile: {},
+	tablet: {},
+	desktop: {},
 };

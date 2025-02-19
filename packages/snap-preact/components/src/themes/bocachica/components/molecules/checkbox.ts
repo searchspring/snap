@@ -25,7 +25,12 @@ const checkboxStyleScript = ({ color, theme }: CheckboxProps) => {
 };
 
 // Checkbox component props
-export const checkbox: Partial<CheckboxProps> = {
-	themeStyleScript: checkboxStyleScript,
-	size: '18px',
+export const checkbox: ThemeComponentProps<CheckboxProps> = {
+	default: {
+		themeStyleScript: checkboxStyleScript,
+		size: '18px',
+	},
+	mobile: {},
+	tablet: {},
+	desktop: {},
 };
