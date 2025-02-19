@@ -10,7 +10,7 @@ import { ThemeMinimal, ThemeVariablesPartial, type Theme, ThemePartial, ThemeOve
 import { CacheProvider } from '../../../components/src/providers/cache';
 import type { GlobalThemeStyleScript } from '../../types';
 import type { ListOption } from '../../../components/src/types';
-import { observer } from 'mobx-react';
+import { observer } from 'mobx-react-lite';
 
 export type ThemeStoreThemeConfig = {
 	name: string;

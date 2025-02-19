@@ -13,7 +13,7 @@ import { ThemeProvider } from '../../../../src/providers';
 import { Result } from '../../../../src/components/Molecules/Result';
 import json from '../../fixtures/results-bundle.json';
 import profile from '../../fixtures/profile-bundle.json';
-import { observer } from 'mobx-react';
+import { observer } from 'mobx-react-lite';
 
 const globals = { siteId: '8uyt2m' };
 

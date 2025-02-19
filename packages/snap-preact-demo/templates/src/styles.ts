@@ -7,12 +7,12 @@ export const globalStyles = (theme) => {
 		},
 		[`@media (max-width: ${variables.breakpoints[2]}px)`]: {
 			'.ss__result': {
-				background: 'blue',
+				// background: 'blue',
 			},
 		},
 		[`@media (max-width: ${variables.breakpoints[1]}px)`]: {
 			'.ss__result': {
-				background: 'red',
+				// background: 'red',
 			},
 		},
 	};

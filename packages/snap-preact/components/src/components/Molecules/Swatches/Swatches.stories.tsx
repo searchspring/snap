@@ -1,5 +1,5 @@
 import { h } from 'preact';
-import { observer } from 'mobx-react';
+import { observer } from 'mobx-react-lite';
 import { ArgsTable, PRIMARY_STORY, Markdown } from '@storybook/blocks';
 import { Swatches, SwatchesProps } from './Swatches';
 import { componentArgs, highlightedCode } from '../../../utilities';

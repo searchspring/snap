@@ -85,6 +85,7 @@ describe('Recommendations', () => {
 					});
 
 					cy.visit(config.url);
+					cy.scrollTo('bottom');
 					console.log(Cypress.browser);
 				});
 
@@ -231,6 +232,7 @@ describe('Recommendations', () => {
 						});
 
 						cy.visit(config.url);
+						cy.scrollTo('bottom');
 						console.log(Cypress.browser);
 					});
 

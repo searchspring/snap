@@ -56,7 +56,7 @@ export default {
 			},
 			control: { type: 'none' },
 		},
-		queryStore: {
+		query: {
 			description: 'Search Query Store reference',
 			type: { required: false },
 			table: {
@@ -66,7 +66,7 @@ export default {
 			},
 			control: { type: 'none' },
 		},
-		paginationStore: {
+		pagination: {
 			description: 'Search Pagination Store reference',
 			type: { required: false },
 			table: {
@@ -76,7 +76,7 @@ export default {
 			},
 			control: { type: 'none' },
 		},
-		merchandisingStore: {
+		merchandising: {
 			description: 'Search Merchandising Store reference',
 			type: { required: false },
 			table: {

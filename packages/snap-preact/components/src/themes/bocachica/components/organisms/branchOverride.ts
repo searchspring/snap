@@ -1,4 +1,9 @@
 import { BranchOverrideProps } from '../../../../components/Organisms/BranchOverride';
 
 // BranchOverride component props
-export const branchOverride: Partial<BranchOverrideProps> = {};
+export const branchOverride: ThemeComponentProps<BranchOverrideProps> = {
+	default: {},
+	mobile: {},
+	tablet: {},
+	desktop: {},
+};

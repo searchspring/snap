@@ -58,6 +58,7 @@ describe('BundledRecommendations', () => {
 				};
 			});
 			cy.visit(config.url);
+			cy.scrollTo('bottom');
 			console.log(Cypress.browser);
 		});
 
@@ -164,6 +165,7 @@ describe('BundledRecommendations', () => {
 				});
 
 				cy.visit(config.url);
+				cy.scrollTo('bottom');
 				console.log(Cypress.browser);
 			});
 

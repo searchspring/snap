@@ -21,10 +21,10 @@ export const SearchHeader = observer((properties: SearchHeaderProps): JSX.Elemen
 	const globalTheme: Theme = useTheme();
 	const globalTreePath = useTreePath();
 
-	const landingPage = properties.controller?.store.merchandising.landingPage || properties.merchandisingStore?.landingPage;
+	const landingPage = properties.controller?.store.merchandising.landingPage || properties.merchandising?.landingPage;
 
-	const pagination = properties.controller?.store.pagination || properties.paginationStore;
-	const search = properties.controller?.store.search || properties.queryStore;
+	const pagination = properties.controller?.store.pagination || properties.pagination;
+	const search = properties.controller?.store.search || properties.query;
 
 	const defaultProps: Partial<SearchHeaderProps> = {
 		titleText: `Showing ${
@@ -85,10 +85,13 @@ export const SearchHeader = observer((properties: SearchHeaderProps): JSX.Elemen
 
 	//deep merge with props.lang
 	const lang = deepmerge(defaultLang, props.lang || {});
-	const mergedLang = useLang(lang as any, {
-		pagination: pagination,
-		search: search,
-	});
+	const mergedLang = useLang(
+		lang as any,
+		{
+			pagination: pagination,
+			search: search,
+		} as SearchHeaderPropData
+	);
 
 	return (
 		<CacheProvider>
@@ -158,15 +161,15 @@ export const SearchHeader = observer((properties: SearchHeaderProps): JSX.Elemen
 
 export interface SearchHeaderProps extends ComponentProps {
 	controller?: SearchController;
-	queryStore?: SearchQueryStore;
-	paginationStore?: SearchPaginationStore;
-	merchandisingStore?: SearchMerchandisingStore;
+	query?: SearchQueryStore;
+	pagination?: SearchPaginationStore;
+	merchandising?: SearchMerchandisingStore;
 
-	titleText?: string | ((data: data) => string);
-	subtitleText?: string | ((data: data) => string);
-	correctedQueryText?: string | ((data: data) => string);
-	noResultsText?: string | ((data: data) => string);
-	didYouMeanText?: string | ((data: data) => string);
+	titleText?: string | ((data: SearchHeaderPropData) => string);
+	subtitleText?: string | ((data: SearchHeaderPropData) => string);
+	correctedQueryText?: string | ((data: SearchHeaderPropData) => string);
+	noResultsText?: string | ((data: SearchHeaderPropData) => string);
+	didYouMeanText?: string | ((data: SearchHeaderPropData) => string);
 	hideTitleText?: boolean;
 	hideSubtitleText?: boolean;
 	hideCorrectedQueryText?: boolean;
@@ -177,29 +180,14 @@ export interface SearchHeaderProps extends ComponentProps {
 }
 
 export interface SearchHeaderLang {
-	titleText: Lang<{
-		pagination: SearchPaginationStore;
-		search: SearchQueryStore;
-	}>;
-	correctedQueryText: Lang<{
-		pagination: SearchPaginationStore;
-		search: SearchQueryStore;
-	}>;
-	noResultsText: Lang<{
-		pagination: SearchPaginationStore;
-		search: SearchQueryStore;
-	}>;
-	didYouMeanText: Lang<{
-		pagination: SearchPaginationStore;
-		search: SearchQueryStore;
-	}>;
-	subtitleText?: Lang<{
-		pagination: SearchPaginationStore;
-		search: SearchQueryStore;
-	}>;
+	titleText: Lang<SearchHeaderPropData>;
+	correctedQueryText: Lang<SearchHeaderPropData>;
+	noResultsText: Lang<SearchHeaderPropData>;
+	didYouMeanText: Lang<SearchHeaderPropData>;
+	subtitleText?: Lang<SearchHeaderPropData>;
 }
 
-interface data {
+interface SearchHeaderPropData {
 	pagination?: SearchPaginationStore;
 	search?: SearchQueryStore;
 }

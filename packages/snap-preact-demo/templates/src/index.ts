@@ -21,77 +21,87 @@ let config: SnapTemplatesConfig = {
 			extends: 'bocachica',
 			variables: {
 				breakpoints: [768, 1024, 1280],
-				colors: {
-					primary: '#6d7175',
-					secondary: '#202223',
-					accent: '#333333',
-				},
+				// colors: {
+				// 	primary: '#6d7175',
+				// 	secondary: '#202223',
+				// 	accent: '#333333',
+				// },
 			},
 			style: globalStyles,
 			overrides: {
 				components: {
-					noResults: {
-						templates: {
-							recommendation: {
-								enabled: true,
-								component: 'Recommendation',
-								config: {
-									tag: 'similar',
-								},
-							},
-						},
-					},
-					toolbar: {
-						hidePerPage: true,
-					},
-
-					'toolbar.top': {
-						hidePerPage: true,
-						hidePagination: true,
-					},
-
-					'search toolbar.top': {
-						hidePerPage: false,
-						hidePagination: false,
-					},
-
-					'search toolbar': {
-						hidePerPage: false,
-					},
-
-					'search toolbar.bottom': {
-						hidePerPage: false,
-						hidePagination: false,
-					},
+					// "searchHorizontal toolbar.top": {
+					// 	hideLayoutSelector: false,
+					// },
+					button: {},
+					// recommendation: {
+					// 	lazyRender: {
+					// 		enabled: false,
+					// 	},
+					// },
+					// recommendationBundle: {
+					// 	lazyRender: {
+					// 		enabled: false,
+					// 	},
+					// },
+					// noResults: {
+					// 	templates: {
+					// 		recommendation: {
+					// 			enabled: true,
+					// 			component: 'Recommendation',
+					// 			config: {
+					// 				tag: 'similar',
+					// 			},
+					// 		},
+					// 	},
+					// },
+					// toolbar: {
+					// 	hidePerPage: true,
+					// },
+					// 'toolbar.top': {
+					// 	hidePerPage: true,
+					// 	hidePagination: true,
+					// },
+					// 'search toolbar.top': {
+					// 	hidePerPage: false,
+					// 	hidePagination: false,
+					// },
+					// 'search toolbar': {
+					// 	hidePerPage: false,
+					// },
+					// 'search toolbar.bottom': {
+					// 	hidePerPage: false,
+					// 	hidePagination: false,
+					// },
 				},
-				layoutOptions: [
-					{
-						value: 2,
-						label: 'two',
-						overrides: {
-							components: {
-								toolbar: {
-									hideSortBy: true,
-								},
-								results: {
-									columns: 2,
-								},
-							},
-						},
-					},
-					{
-						value: 4,
-						label: 'four',
-						default: true,
-						overrides: {
-							components: {
-								results: {
-									columns: 4,
-								},
-							},
-						},
-					},
-				],
+				// layoutOptions: [
+				// 	{
+				// 		value: 2,
+				// 		label: 'two',
+				// 		overrides: {
+				// 			components: {
+				// 				toolbar: {
+				// 					hideSortBy: true,
+				// 				},
+				// 				results: {
+				// 					columns: 2,
+				// 				},
+				// 			},
+				// 		},
+				// 	},
+				// 	{
+				// 		value: 4,
+				// 		label: 'four',
+				// 		default: true,
+				// 		overrides: {
+				// 			components: {
+				// 				results: {
+				// 					columns: 4,
+				// 				},
+				// 			},
+				// 		},
+				// 	},
+				// ],
 			},
 		},
 	},

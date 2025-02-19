@@ -198,7 +198,7 @@ By default when using the infinite configuration, additional pages are appended 
 ```jsx
 import { h, Fragment, Component } from 'preact';
 import { useRef } from 'preact/hooks';
-import { observer } from 'mobx-react';
+import { observer } from 'mobx-react-lite';
 import { ControllerProvider, useIntersection, Results } from '@searchspring/snap-preact-components';
 
 @observer

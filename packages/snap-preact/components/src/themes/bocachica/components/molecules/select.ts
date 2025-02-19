@@ -1,17 +1,12 @@
 import { css } from '@emotion/react';
 import type { SelectProps } from '../../../../components/Molecules/Select';
+import Color from 'color';
 
 // CSS in JS style script for the Select component
-const selectStyleScript = ({ color, backgroundColor, borderColor, theme }: SelectProps) => {
+const selectStyleScript = ({ backgroundColor, theme }: SelectProps) => {
 	const variables = theme?.variables;
-
+	const transparentSecondary = new Color(theme?.variables?.colors?.secondary).opaquer(0.2);
 	return css({
-		display: 'inline-flex',
-		color: color,
-		'&.ss__select--disabled': {
-			opacity: 0.7,
-		},
-
 		'.ss__dropdown': {
 			'.ss__select__dropdown__button': {
 				border: 'none',
@@ -33,6 +28,8 @@ const selectStyleScript = ({ color, backgroundColor, borderColor, theme }: Selec
 			'&.ss__dropdown--open': {
 				'.ss__dropdown__button': {
 					boxShadow: '0 6px 12px 1px #0000001f',
+					borderTopLeftRadius: '3px',
+					borderTopRightRadius: '3px',
 					'.ss__select__dropdown__button__icon': {
 						transform: 'rotate(180deg)',
 					},
@@ -40,32 +37,31 @@ const selectStyleScript = ({ color, backgroundColor, borderColor, theme }: Selec
 				'.ss__dropdown__content': {
 					backgroundColor: backgroundColor || '#fff',
 					boxShadow: '0 6px 12px 1px #0000001f',
+					borderBottomLeftRadius: '3px',
+					borderBottomRightRadius: '3px',
 					zIndex: '10000',
 				},
 			},
 		},
 
 		'.ss__button__content': {
-			display: 'flex',
-			alignItems: 'center',
 			gap: '7px',
 		},
 
 		'.ss__select__select': {
-			position: 'relative',
-			padding: '0',
-			margin: '-1px 0 0 0',
-			border: borderColor ? `1px solid ${borderColor || color}` : '',
+			border: '0px',
+			marginBottom: '0px',
+
 			'.ss__select__select__option': {
 				listStyle: 'none',
-				cursor: 'pointer',
 				padding: '6px 30px',
+				gap: '6px',
 				color: variables?.colors?.secondary,
 				'&.ss__select__select__option--selected': {
-					background: `rgba(109,113,117,.06)`,
+					backgroundColor: `${transparentSecondary.rgb().lightness(95)}` || `rgba(109,113,117,.06)`,
 				},
 				'&:hover': {
-					background: `rgba(109,113,117,.06)`,
+					backgroundColor: `${transparentSecondary.rgb().lightness(95)}` || `rgba(109,113,117,.06)`,
 				},
 			},
 		},
@@ -73,8 +69,13 @@ const selectStyleScript = ({ color, backgroundColor, borderColor, theme }: Selec
 };
 
 // Select component props
-export const select: Partial<SelectProps> = {
-	themeStyleScript: selectStyleScript,
-	iconClose: 'angle-down',
-	iconOpen: 'angle-down',
+export const select: ThemeComponentProps<SelectProps> = {
+	default: {
+		themeStyleScript: selectStyleScript,
+		iconClose: 'angle-down',
+		iconOpen: 'angle-down',
+	},
+	mobile: {},
+	tablet: {},
+	desktop: {},
 };

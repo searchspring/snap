@@ -12,6 +12,9 @@ import { ComponentProps, StyleScript } from '../../../../types';
 
 const defaultStyles: StyleScript<BannerProps> = () => {
 	return css({
+		' *': {
+			boxSizing: 'border-box',
+		},
 		'& iframe, img': {
 			maxWidth: '100%',
 			height: 'auto',

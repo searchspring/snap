@@ -1,7 +1,7 @@
 import { h } from 'preact';
 import { useEffect } from 'preact/hooks';
 
-import { observer } from 'mobx-react';
+import { observer } from 'mobx-react-lite';
 
 import {
 	Pagination,
@@ -55,7 +55,7 @@ export const Results = withController(
 
 				<div className={`ss-toolbar ${controller.config.settings.infinite ? 'ss-toolbar-bottom-infinite' : 'ss-toolbar-bottom'}`}>
 					{controller.config.settings.infinite ? (
-						<LoadMore controller={controller} progressIndicator="radial" />
+						<LoadMore controller={controller} />
 					) : (
 						pagination.totalPages > 1 && <Pagination pagination={pagination} />
 					)}

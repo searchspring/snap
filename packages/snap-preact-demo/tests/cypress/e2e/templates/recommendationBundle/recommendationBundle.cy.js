@@ -63,6 +63,7 @@ describe('BundledRecommendations', () => {
 			});
 
 			cy.visit(config.url);
+			cy.scrollTo('bottom');
 			console.log(Cypress.browser);
 		});
 
@@ -158,7 +159,7 @@ describe('BundledRecommendations', () => {
 					let newActive;
 					//click the next button
 					cy.get(config?.selectors?.recommendation.nextArrow)
-						.click()
+						.click({ force: true })
 						.then(($button) => {
 							//get the new active product
 							newActive = doc.querySelector(
@@ -193,7 +194,7 @@ describe('BundledRecommendations', () => {
 
 					//click the prev button
 					cy.get(config?.selectors?.recommendation.prevArrow)
-						.click()
+						.click({ force: true })
 						.then(($button) => {
 							const newerActiveTitle = doc.querySelector(
 								`${config?.selectors?.recommendation.activeSlide} ${config?.selectors?.recommendation.result} .ss__result__details__title a`
@@ -212,8 +213,9 @@ describe('BundledRecommendations', () => {
 					cy.get(config?.selectors?.recommendation.activeSlide).should('exist');
 					let url = doc.querySelector(`${config?.selectors?.recommendation.activeSlide} ${config?.selectors?.recommendation.result} a`).attributes
 						?.href?.value;
-					cy.get(config?.selectors?.recommendation.activeSlide)
-						.click({ multiple: true })
+					cy.get(`${config?.selectors?.recommendation.activeSlide} a`)
+						.first()
+						.click({ force: true })
 						.then(() => {
 							cy.location('pathname').should('include', url);
 						});
@@ -255,6 +257,7 @@ describe('BundledRecommendations', () => {
 				});
 
 				cy.visit(config.url);
+				cy.scrollTo('bottom');
 				console.log(Cypress.browser);
 			});
 

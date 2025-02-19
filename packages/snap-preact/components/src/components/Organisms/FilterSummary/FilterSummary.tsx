@@ -2,7 +2,7 @@ import { Fragment, h } from 'preact';
 
 import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
-import { observer } from 'mobx-react';
+import { observer } from 'mobx-react-lite';
 
 import { Filter, FilterProps } from '../../Molecules/Filter';
 import { defined, mergeProps, mergeStyles } from '../../../utilities';
@@ -16,9 +16,8 @@ import deepmerge from 'deepmerge';
 
 const defaultStyles: StyleScript<FilterSummaryProps> = () => {
 	return css({
-		'& .ss__filter-summary__filter': {
-			margin: '5px 10px 5px 0',
-		},
+		display: 'flex',
+		gap: '0.5em',
 		'& .ss__filter-summary__title': {
 			fontSize: '1.2em',
 		},

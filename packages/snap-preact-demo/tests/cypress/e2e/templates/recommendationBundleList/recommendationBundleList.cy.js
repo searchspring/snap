@@ -61,6 +61,7 @@ describe('BundledRecommendations', () => {
 				};
 			});
 			cy.visit(config.url);
+			cy.scrollTo('bottom');
 			console.log(Cypress.browser);
 		});
 
@@ -114,7 +115,7 @@ describe('BundledRecommendations', () => {
 			//check it is responsive to cartstore changes.
 			cy.get(`${config?.selectors?.recommendation.seed} .ss__recommendation-bundle__wrapper__selector__result-wrapper__checkbox`)
 				.should('exist')
-				.click()
+				.click({ force: true })
 				.then(() => {
 					cy.snapController(config?.selectors?.recommendation.controller).then(({ store }) => {
 						//title
@@ -178,6 +179,7 @@ describe('BundledRecommendations', () => {
 				});
 
 				cy.visit(config.url);
+				cy.scrollTo('bottom');
 				console.log(Cypress.browser);
 			});
 

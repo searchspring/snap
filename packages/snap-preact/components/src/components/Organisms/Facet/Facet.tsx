@@ -2,7 +2,7 @@ import { h, Fragment } from 'preact';
 
 import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
-import { observer } from 'mobx-react';
+import { observer } from 'mobx-react-lite';
 
 import { FacetListOptions, FacetListOptionsProps } from '../../Molecules/FacetListOptions';
 import { FacetGridOptions, FacetGridOptionsProps } from '../../Molecules/FacetGridOptions';
@@ -322,28 +322,6 @@ export const Facet = observer((properties: FacetProps): JSX.Element => {
 		return <FacetContent {...facetContentProps}></FacetContent>;
 	}
 
-	const DropDownButton = (props: any) => (
-		<div
-			className="ss__facet__header"
-			ref={(e) => useA11y(e, disableCollapse ? -1 : 0)}
-			role="heading"
-			aria-level={3}
-			{...mergedLang.dropdownButton.attributes}
-		>
-			<span {...mergedLang.dropdownButton.value}>{facet?.label}</span>
-			{!disableCollapse && (
-				<Icon
-					{...subProps.icon}
-					{...(facet?.collapsed
-						? { ...(typeof iconExpand == 'string' ? { icon: iconExpand } : (iconExpand as Partial<IconProps>)) }
-						: { ...(typeof iconCollapse == 'string' ? { icon: iconCollapse } : (iconCollapse as Partial<IconProps>)) })}
-					name={facet?.collapsed ? 'expand' : 'collapse'}
-					treePath={props.treePath}
-				/>
-			)}
-		</div>
-	);
-
 	return facet && renderFacet ? (
 		<CacheProvider>
 			<div {...styling} className={classnames('ss__facet', `ss__facet--${facet.display}`, `ss__facet--${facet.field}`, className)}>
@@ -352,7 +330,27 @@ export const Facet = observer((properties: FacetProps): JSX.Element => {
 					open={disableCollapse || !facet?.collapsed}
 					onClick={() => !disableCollapse && facet.toggleCollapse && facet?.toggleCollapse()}
 					disableA11y={true}
-					button={<DropDownButton />}
+					button={
+						<div
+							className="ss__facet__header"
+							ref={(e) => useA11y(e, disableCollapse ? -1 : 0)}
+							role="heading"
+							aria-level={3}
+							{...mergedLang.dropdownButton.attributes}
+						>
+							<span {...mergedLang.dropdownButton.value}>{facet?.label}</span>
+							{!disableCollapse && (
+								<Icon
+									{...subProps.icon}
+									{...(facet?.collapsed
+										? { ...(typeof iconExpand == 'string' ? { icon: iconExpand } : (iconExpand as Partial<IconProps>)) }
+										: { ...(typeof iconCollapse == 'string' ? { icon: iconCollapse } : (iconCollapse as Partial<IconProps>)) })}
+									name={facet?.collapsed ? 'expand' : 'collapse'}
+									treePath={props.treePath}
+								/>
+							)}
+						</div>
+					}
 				>
 					<FacetContent {...facetContentProps}></FacetContent>
 				</Dropdown>

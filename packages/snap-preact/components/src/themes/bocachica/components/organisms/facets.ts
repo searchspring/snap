@@ -1,15 +1,16 @@
-import { css } from '@emotion/react';
+// import { css } from '@emotion/react';
 import type { FacetsProps } from '../../../../components/Organisms/Facets';
 
 // CSS in JS style script for the Facets component
-const facetsStyleScript = ({ theme }: FacetsProps) => {
-	// eslint-disable-next-line @typescript-eslint/no-unused-vars
-	const variables = theme?.variables;
-
-	return css({});
-};
+// const facetsStyleScript = () => {
+// };
 
 // Facets component props
-export const facets: Partial<FacetsProps> = {
-	themeStyleScript: facetsStyleScript,
+export const facets: ThemeComponentProps<FacetsProps> = {
+	default: {
+		// themeStyleScript: facetsStyleScript,
+	},
+	mobile: {},
+	tablet: {},
+	desktop: {},
 };

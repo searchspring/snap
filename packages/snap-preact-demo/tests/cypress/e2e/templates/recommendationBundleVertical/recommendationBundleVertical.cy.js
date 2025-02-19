@@ -61,6 +61,7 @@ describe('BundledRecommendations', () => {
 				};
 			});
 			cy.visit(config.url);
+			cy.scrollTo('bottom');
 			console.log(Cypress.browser);
 		});
 
@@ -148,7 +149,7 @@ describe('BundledRecommendations', () => {
 					let url = doc.querySelector(`${config?.selectors?.recommendation.result} a`).attributes?.href?.value;
 					cy.get(`${config?.selectors?.recommendation.result} a`)
 						.first()
-						.click({ multiple: true })
+						.click({ force: true, multiple: true })
 						.then(() => {
 							cy.location('pathname').should('include', url);
 						});
@@ -190,6 +191,7 @@ describe('BundledRecommendations', () => {
 				});
 
 				cy.visit(config.url);
+				cy.scrollTo('bottom');
 				console.log(Cypress.browser);
 			});
 

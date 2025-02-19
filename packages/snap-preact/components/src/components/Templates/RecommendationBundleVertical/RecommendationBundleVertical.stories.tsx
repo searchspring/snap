@@ -102,9 +102,6 @@ export default {
 				type: {
 					summary: 'number',
 				},
-				defaultValue: {
-					summary: 3,
-				},
 			},
 			control: { type: 'number' },
 		},

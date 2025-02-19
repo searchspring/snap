@@ -124,6 +124,8 @@ function generateSimpleTheme(theme: Theme): Theme {
 		simpleTheme.components![componentName as keyof typeof simpleTheme.components] = {
 			// @ts-ignore - type was removed for overrides
 			styleScript: componentProps?.styleScript,
+			// @ts-ignore - type was removed for overrides
+			themeStyleScript: componentProps?.themeStyleScript,
 		};
 	}
 

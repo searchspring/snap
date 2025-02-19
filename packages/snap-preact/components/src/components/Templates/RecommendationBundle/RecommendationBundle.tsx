@@ -2,7 +2,7 @@ import { h, Fragment } from 'preact';
 import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
 import { useRef, useEffect, useState } from 'preact/hooks';
-import { observer } from 'mobx-react';
+import { observer } from 'mobx-react-lite';
 import deepmerge from 'deepmerge';
 import { Carousel, CarouselProps as CarouselProps } from '../../Molecules/Carousel';
 import { Result, ResultProps } from '../../Molecules/Result';
@@ -118,7 +118,8 @@ const defaultStyles: StyleScript<RecommendationBundleProps> = ({ vertical, separ
 				position: 'absolute',
 				top: '0',
 				right: '0',
-				zIndex: '1',
+				//needs to be above 100 to get above badges
+				zIndex: '101',
 				cursor: 'pointer',
 			},
 		},

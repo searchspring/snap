@@ -3,7 +3,8 @@
 	"include": [
 		"src",
 		"components/src",
-		"toolbox/src"
+		"toolbox/src",
+		"./src/components/src/global.d.ts"
 	],
 	"compilerOptions": {
 		"outDir": "./dist/esm",

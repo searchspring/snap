@@ -176,12 +176,26 @@ export const es: LangComponents = {
 		},
 		last: {
 			attributes: {
-				'aria-label': (data) => `Ir a la página anterior ${data?.paginationStore.last.number}`,
+				'aria-label': (data) => `Ir a la página anterior ${data?.pagination.last.number}`,
 			},
 		},
 		page: {
 			attributes: {
 				'aria-label': (data) => `ir a la página ${data?.page.number}`,
+			},
+		},
+	},
+	paginationInfo: {
+		infoText: {
+			value: (data) =>
+				`${data?.pagination?.multiplePages ? `${data?.pagination?.begin} - ${data?.pagination?.end} de` : ''} ${
+					data?.pagination?.totalResults
+				} resultado${data?.pagination?.totalResults == 1 ? '' : 's'}`,
+			attributes: {
+				'aria-label': (data) =>
+					`mostrando ${data?.pagination?.multiplePages ? `${data?.pagination?.begin} - ${data?.pagination?.end} de` : ''} ${
+						data?.pagination?.totalResults
+					} resultado${data?.pagination?.totalResults == 1 ? '' : 's'}`,
 			},
 		},
 	},
@@ -192,7 +206,7 @@ export const es: LangComponents = {
 			},
 		},
 		progressText: {
-			value: (data) => `Has visto ${data?.paginationStore?.end} de ${data?.paginationStore?.totalResults} productos`,
+			value: (data) => `Has visto ${data?.pagination?.end} de ${data?.pagination?.totalResults} productos`,
 		},
 	},
 	grid: {
@@ -327,7 +341,7 @@ export const es: LangComponents = {
 				} 
                 <span class="ss__search-header__results-count-total">${data?.pagination?.totalResults}</span> 
                 resultado${data?.pagination?.totalResults == 1 ? '' : 's'} 
-                ${data?.search?.query ? `para <span class="ss__search-header__results-query">"${data.search.query.string}"</span>` : ''}
+                ${data?.search?.query ? `para <span class="ss__search-header__results-query">"${data?.search?.query?.string}"</span>` : ''}
             `;
 			},
 			attributes: {
@@ -348,7 +362,7 @@ export const es: LangComponents = {
 				return `${
 					data?.search?.query
 						? `<span>
-                    No se encontraron resultados para <span class="ss__search-header__results-query">"${data.search.query.string}"</span>.
+                    No se encontraron resultados para <span class="ss__search-header__results-query">"${data?.search?.query?.string}"</span>.
                 </span>`
 						: `<span>No se encontraron resultados.</span>`
 				}`;

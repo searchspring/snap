@@ -65,6 +65,7 @@ export const LayoutSelector = observer((properties: LayoutSelectorProps): JSX.El
 			multiSelect: false,
 			horizontal: true,
 			hideOptionCheckboxes: true,
+			requireSelection: true,
 			// global theme
 			...globalTheme?.components?.list,
 			// inherited props

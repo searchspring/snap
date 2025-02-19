@@ -4,6 +4,7 @@ import { ArgsTable, PRIMARY_STORY, Markdown } from '@storybook/blocks';
 
 import { LoadMore, LoadMoreProps } from './LoadMore';
 import { componentArgs, highlightedCode } from '../../../utilities';
+import { iconPaths } from '../../Atoms/Icon';
 import { Snapify } from '../../../utilities/snapify';
 import Readme from '../LoadMore/readme.md';
 import type { SearchController } from '@searchspring/snap-controller';
@@ -112,27 +113,13 @@ export default {
 			},
 			control: { type: 'color' },
 		},
-		progressIndicator: {
-			defaultValue: 'bar',
-			description: 'Type of progress indicator to show',
-			table: {
-				type: {
-					summary: 'string',
-				},
-				defaultValue: { summary: 'bar' },
-			},
-			options: ['bar', 'radial'],
-			control: {
-				type: 'select',
-			},
-		},
 		progressIndicatorWidth: {
 			description: 'Progress indicator width in pixels',
 			table: {
 				type: {
 					summary: 'string',
 				},
-				defaultValue: { summary: '300px bar | 70px radial' },
+				defaultValue: { summary: '300px' },
 			},
 			control: { type: 'text' },
 		},
@@ -142,7 +129,7 @@ export default {
 				type: {
 					summary: 'string',
 				},
-				defaultValue: { summary: '5px bar | 10px radial' },
+				defaultValue: { summary: '5px bar' },
 			},
 			control: { type: 'text' },
 		},
@@ -171,11 +158,14 @@ export default {
 			defaultValue: 'spinner',
 			table: {
 				type: {
-					summary: 'boolean',
+					summary: 'string',
 				},
 				defaultValue: { summary: 'spinner' },
 			},
-			control: { type: 'text' },
+			options: [...Object.keys(iconPaths)],
+			control: {
+				type: 'select',
+			},
 		},
 		loadingLocation: {
 			description: 'Location of loading indicator',
@@ -232,20 +222,3 @@ Default.loaders = [
 		};
 	},
 ];
-
-export const Radial = (args: LoadMoreProps, { loaded: { controller } }: { loaded: { controller: SearchController } }) => {
-	return <LoadMore {...args} controller={controller} />;
-};
-
-Radial.loaders = [
-	async () => {
-		await snapInstance.search();
-		return {
-			controller: snapInstance,
-		};
-	},
-];
-
-Radial.args = {
-	progressIndicator: 'radial',
-};

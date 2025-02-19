@@ -397,6 +397,28 @@ describe('mergeProps function with theme name', () => {
 			treePath: `button ${componentType}.first`,
 		});
 	});
+
+	it('nested treePath and named component with dash', () => {
+		const componentType = 'select';
+		const globalTheme = {
+			name: GLOBAL_THEME_NAME,
+		};
+
+		const defaultProps: Partial<SelectProps> = {};
+		const properties: Partial<SelectProps> = {
+			treePath: 'button',
+			name: 'first-button',
+		};
+		const props = mergeProps(componentType, globalTheme, defaultProps, properties);
+		expect(props).toStrictEqual({
+			...defaultProps,
+			...properties,
+			theme: {
+				name: globalTheme.name,
+			},
+			treePath: `button ${componentType}.first-button`,
+		});
+	});
 });
 describe('sortSelectors function', () => {
 	it('orders strings by spaces', () => {

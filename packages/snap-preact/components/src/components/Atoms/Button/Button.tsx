@@ -2,7 +2,7 @@ import { h, Fragment, ComponentChildren } from 'preact';
 
 import { css } from '@emotion/react';
 import classnames from 'classnames';
-import { observer } from 'mobx-react';
+import { observer } from 'mobx-react-lite';
 
 import { ComponentProps, StyleScript } from '../../../types';
 import { Theme, useTheme, CacheProvider, useTreePath } from '../../../providers';
@@ -14,7 +14,7 @@ import deepmerge from 'deepmerge';
 import Color from 'color';
 
 const defaultStyles: StyleScript<ButtonProps> = ({ native, color, backgroundColor, borderColor, theme }) => {
-	const lightenedPrimary = new Color(backgroundColor || color || theme?.variables?.colors?.primary).lightness(95);
+	const lightenedPrimaryColorObj = new Color(backgroundColor || color || theme?.variables?.colors?.primary).lightness(95);
 
 	// no styling on native
 	if (native) {
@@ -24,6 +24,7 @@ const defaultStyles: StyleScript<ButtonProps> = ({ native, color, backgroundColo
 	return css({
 		display: 'inline-flex',
 		alignItems: 'center',
+		gap: '5px',
 		padding: '5px 10px',
 		position: 'relative',
 		color: color || theme?.variables?.colors?.primary,
@@ -32,7 +33,7 @@ const defaultStyles: StyleScript<ButtonProps> = ({ native, color, backgroundColo
 		border: `1px solid ${borderColor || color || theme?.variables?.colors?.primary || '#333'}`,
 		'&:not(.ss__button--disabled):hover': {
 			cursor: 'pointer',
-			backgroundColor: lightenedPrimary.hex() || '#f8f8f8',
+			backgroundColor: lightenedPrimaryColorObj.hex() || '#f8f8f8',
 		},
 		'&.ss__button--disabled': {
 			opacity: 0.3,
@@ -163,4 +164,4 @@ export interface ButtonLang {
 	button?: Lang<never>;
 }
 
-export type ButtonNames = 'close' | 'apply' | 'clear' | 'slideout';
+export type ButtonNames = 'close' | 'apply' | 'clear' | 'slideout' | 'filter-toggle';

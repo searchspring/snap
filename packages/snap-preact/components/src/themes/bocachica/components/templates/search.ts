@@ -7,24 +7,100 @@ const searchStyleScript = ({ theme }: SearchProps) => {
 	const variables = theme?.variables;
 
 	return css({
-		display: 'flex',
-		minHeight: '600px',
+		'.ss__search__content__toolbar--middle-toolbar, .ss__search__header-section__toolbar--top-toolbar': {
+			display: 'flex',
+			justifyContent: 'initial',
+			justifyItems: 'initial',
 
-		'.ss__sidebar': {
-			flex: '0 1 auto',
-			width: '300px',
+			'.ss__toolbar__sort-by': {
+				marginLeft: 'auto',
+			},
+			'.ss__dropdown .ss__select__dropdown__button': {
+				padding: '6px 5px 6px 5px',
+			},
 		},
 
-		'.ss__search__content': {
-			flex: '1 1 0%',
-			padding: '0px 10px',
-			width: '100%',
-			boxSizing: 'border-box',
+		[`@media (max-width: ${variables?.breakpoints[0]}px)`]: {
+			'.ss__search__header-section__toolbar--top-toolbar': {
+				justifyContent: 'space-between !important',
+			},
 		},
 	});
 };
 
 // Search component props
-export const search: Partial<SearchProps> = {
-	themeStyleScript: searchStyleScript,
+export const search: ThemeComponentProps<SearchProps> = {
+	default: {
+		themeStyleScript: searchStyleScript,
+		hideToggleSidebarButton: false,
+		hideTopToolbar: false,
+		hideMiddleToolbar: false,
+		lang: {
+			// toggleSidebarButtonText: {
+			// 	value: ({ filters }) => (filters.length ? `Filters (${filters.length})` : 'Filter'),
+			// },
+		},
+		theme: {
+			components: {
+				filterSummary: {
+					hideTitle: true,
+				},
+				sidebar: {
+					hideTitle: true,
+				},
+				'button.filter-toggle': {
+					icon: 'filters',
+				},
+
+				'toolbar.top': {
+					modules: ['PaginationInfo', 'SortBy', 'PerPage'],
+				},
+				'toolbar.middle': {
+					modules: [],
+				},
+				'toolbar.bottom': {
+					modules: ['Pagination'],
+				},
+				mobileSidebar: {
+					theme: {
+						components: {
+							filterSummary: {
+								hideTitle: false,
+							},
+						},
+					},
+				},
+			},
+		},
+	},
+	mobile: {
+		theme: {
+			components: {
+				results: {
+					columns: 2,
+				},
+				'toolbar.top': {
+					modules: ['MobileSidebar', 'LayoutSelector'],
+				},
+			},
+		},
+	},
+	tablet: {
+		theme: {
+			components: {
+				results: {
+					columns: 3,
+				},
+			},
+		},
+	},
+	desktop: {
+		theme: {
+			components: {
+				results: {
+					columns: 3,
+				},
+			},
+		},
+	},
 };

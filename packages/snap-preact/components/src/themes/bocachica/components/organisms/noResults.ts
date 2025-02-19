@@ -14,6 +14,11 @@ const noResultsStyleScript = ({ theme }: NoResultsProps) => {
 };
 
 // NoResults component props
-export const noResults: Partial<NoResultsProps> = {
-	themeStyleScript: noResultsStyleScript,
+export const noResults: ThemeComponentProps<NoResultsProps> = {
+	default: {
+		themeStyleScript: noResultsStyleScript,
+	},
+	mobile: {},
+	tablet: {},
+	desktop: {},
 };

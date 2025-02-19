@@ -22,11 +22,11 @@ The required `controller` prop specifies a reference to the search controller.
 <Search controller={controller} />
 ```
 
-### mobileSidebarDisplayAt
-The `mobileSidebarDisplayAt` prop specifies a CSS media query for when the MobileSidebar component will render. By default, the component will render at "991px".
+### mobileDisplayAt
+The `mobileDisplayAt` prop specifies a CSS media query for when the MobileSidebar component will render. By default, the component will render at "991px".
 
 ```jsx
-<Search controller={controller} mobileSidebarDisplayAt={'400px'} />
+<Search controller={controller} mobileDisplayAt={'400px'} />
 ```
 
 ### hideSidebar
@@ -34,13 +34,6 @@ The `hideSidebar` prop specifies if the Sidebar component should be rendered.
 
 ```jsx
 <Search controller={controller} hideSidebar={true} />
-```
-
-### hideMobileSidebar
-The `hideMobileSidebar` prop specifies if the MobileSidebar component should be rendered.  
-
-```jsx
-<Search controller={controller} hideMobileSidebar={true} />
 ```
 
 ### hideSearchHeader
