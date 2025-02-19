@@ -121,14 +121,9 @@ let config: SnapTemplatesConfig = {
 		targets: [
 			{
 				selector: '#searchspring-layout',
-				component: 'SearchHorizontal',
+				component: 'Search',
 			},
 		],
-		settings: {
-			infinite: {
-				backfill: 2,
-			},
-		},
 	},
 	autocomplete: {
 		targets: [

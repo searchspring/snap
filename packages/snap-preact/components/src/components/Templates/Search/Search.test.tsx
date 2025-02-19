@@ -175,7 +175,7 @@ describe('Search Template Component', () => {
 	it('can set custom toggle filters button text', async () => {
 		const buttonText = 'click me to open sidebar';
 
-		const rendered = render(<Search controller={controller} toggleSidebarButtonText={buttonText} />);
+		const rendered = render(<Search controller={controller} toggleSidebarButtonText={buttonText} hideToggleSidebarButton={false} />);
 		const element = rendered.container.querySelector('.ss__search')!;
 		let button = rendered.container.querySelector('.ss__search__sidebar-toggle');
 		const sidebar = rendered.container.querySelector('.ss__sidebar');
@@ -396,7 +396,7 @@ describe('Search Template Component', () => {
 					};
 
 					// @ts-ignore
-					const rendered = render(<Search controller={controller} lang={lang} />);
+					const rendered = render(<Search controller={controller} lang={lang} hideToggleSidebarButton={false} />);
 					const element = rendered.container.querySelector(selector);
 					expect(element).toBeInTheDocument();
 					let langElem;

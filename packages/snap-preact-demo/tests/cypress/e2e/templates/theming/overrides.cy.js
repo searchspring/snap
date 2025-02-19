@@ -74,11 +74,11 @@ describe('Theme overrides work', () => {
 									},
 
 									'search toolbar.top': {
-										hidePagination: false,
+										modules: ['PaginationInfo', 'Pagination', 'SortBy', 'PerPage'],
 									},
 
 									'search toolbar.bottom': {
-										hidePagination: true,
+										modules: ['PaginationInfo', 'SortBy', 'PerPage'],
 									},
 								},
 							},
@@ -120,6 +120,10 @@ describe('Theme overrides work', () => {
 									searchHeader: {
 										titleText: 'global title text',
 										subtitleText: 'global subtitle text',
+									},
+
+									'search toolbar.top': {
+										modules: ['PaginationInfo', 'LayoutSelector', 'SortBy', 'PerPage'],
 									},
 								},
 								layoutOptions: [
@@ -212,11 +216,11 @@ describe('Theme overrides work', () => {
 													subtitleText: 'nope',
 												},
 												'search toolbar.top': {
-													hidePagination: false,
+													modules: ['LayoutSelector', 'Pagination', 'PerPage'],
 												},
 
 												'search toolbar.bottom': {
-													hidePagination: true,
+													modules: ['LayoutSelector', 'SortBy'],
 												},
 											},
 										},
@@ -237,11 +241,11 @@ describe('Theme overrides work', () => {
 												},
 
 												'search toolbar.top': {
-													hidePerPage: true,
+													modules: ['LayoutSelector', 'SortBy'],
 												},
 
 												'search toolbar.bottom': {
-													hidePerPage: false,
+													modules: ['LayoutSelector', 'Pagination', 'PerPage'],
 												},
 											},
 										},
@@ -278,7 +282,7 @@ describe('Theme overrides work', () => {
 				cy.get(`${config.selectors.bottomToolbarElem} ${config.selectors.perpage}`).should('not.exist');
 			});
 
-			cy.get(`${config.selectors.layoutSelector} .ss__list__option--2`).should('exist').click();
+			cy.get(`${config.selectors.layoutSelector} .ss__list__option--2`).should('exist').first().click();
 
 			cy.snapController().then(({ store }) => {
 				cy.get(`${config.selectors.layoutSelector} .ss__list__option--2`).should('exist').should('have.class', 'ss__list__option--selected');
@@ -409,7 +413,7 @@ describe('Theme overrides work', () => {
 												titleText: '991 - 1299',
 											},
 											'toolbar.top': {
-												hidePerPage: true,
+												modules: [],
 											},
 										},
 									},
