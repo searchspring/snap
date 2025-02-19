@@ -1,0 +1,1653 @@
+{
+  "pagination": {
+    "totalResults": 102,
+    "page": 3,
+    "pageSize": 40,
+    "totalPages": 3
+  },
+  "results": [
+    {
+      "id": "165703",
+      "mappings": {
+        "core": {
+          "uid": "165703",
+          "sku": "C-ANM-R7-16145",
+          "name": "Stop And Stare Wine Red Print Dress",
+          "url": "/product/C-ANM-R7-16145",
+          "addToCartUrl": "/product/C-ANM-R7-16145",
+          "price": 59,
+          "msrp": 75,
+          "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/844a6522_2_2_large.jpg",
+          "secureImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/844a6522_2_2_large.jpg",
+          "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/844a6522_2_2_thumb_med.jpg",
+          "rating": "5",
+          "ratingCount": "1111",
+          "description": "Stop And Stare if you dare, because in this Wine Red Print Dress, you’ll be stopping them dead in their tracks! Hopefully they can snap back to it before it gets awkward! This dress features a split round neck with button-up closure, flounced drop-waist, and long peek-a-boo sleeves with single button closure. Model is wearing a small. • 100% Viscose • Machine Wash Cold • Unlined • Imported",
+          "stockMessage": "In stock",
+          "brand": "Anama",
+          "popularity": "373",
+          "caption": "Captions!"
+        }
+      },
+      "attributes": {
+        "id": "43ee75d350478102769e2d0c60f55ac3",
+        "intellisuggestData": "eJyyKK0sMcplYChPzCwuYXDWdfTz1Q0y1zU0MzQxZTBmsDBkMGCwtGRIL8pMAQQAAP__-kwKdg",
+        "intellisuggestSignature": "07275551deb99c7c96c31c186fc17b6d7bd2212eeb316f3f6ba3914997a73d06",
+        "product_type_unigram": "dress",
+        "sales_rank": [
+          "373"
+        ]
+      },
+      "children": []
+    },
+    {
+      "id": "157871",
+      "mappings": {
+        "core": {
+          "uid": "157871",
+          "sku": "C-ETC-W1-T1604",
+          "name": "Stripe It Rich White Striped Off-The-Shoulder Midi Dress",
+          "url": "/product/C-ETC-W1-T1604",
+          "addToCartUrl": "/product/C-ETC-W1-T1604",
+          "price": 46,
+          "msrp": 50,
+          "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/198_1272_copyright_reddressboutique_2016_large.jpg",
+          "secureImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/198_1272_copyright_reddressboutique_2016_large.jpg",
+          "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/198_1272_copyright_reddressboutique_2016_thumb_med.jpg",
+          "rating": "5",
+          "ratingCount": "1111",
+          "description": "I ain’t sayin’ she’s a gold-digger, but you’re really gonna Stripe It Rich when you get this winning White Striped Off-The-Shoulder Midi Dress! Ca-ching! This off-the-shoulder midi dress features an elastic neckline, short sleeves, a drawstring waist with tassel ties, and a hi-lo hem. Model is wearing a small. • 100% Cotton • Hand Wash Cold • Unlined • Faintly Sheer • Imported",
+          "stockMessage": "In stock",
+          "brand": "E2 Clothing",
+          "popularity": "3675",
+          "caption": "Captions!"
+        }
+      },
+      "attributes": {
+        "id": "5f02cbffe472354648816917814db335",
+        "intellisuggestData": "eJyyKK0sMcplYChPzCwuYXDWdQ1x1g031A0xNDMwYTBmsDBiMGCwtGRIL8pMAQQAAP___LcKlA",
+        "intellisuggestSignature": "ba59944cf3ab29cef1ea23872bce771f1c03d2eeb8ee4bd0ccbb3f7c2958b4c6",
+        "product_type_unigram": "dress",
+        "sales_rank": [
+          "3675"
+        ]
+      },
+      "children": []
+    },
+    {
+      "id": "134637",
+      "mappings": {
+        "core": {
+          "uid": "134637",
+          "sku": "C-AP-Y2-20094",
+          "name": "Summer Fling Maxi Dress",
+          "url": "/product/C-AP-Y2-20094",
+          "addToCartUrl": "/product/C-AP-Y2-20094",
+          "price": 50,
+          "msrp": 50,
+          "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/844a1378_large.jpg",
+          "secureImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/844a1378_large.jpg",
+          "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/844a1378_thumb_med.jpg",
+          "rating": "5",
+          "ratingCount": "1111",
+          "description": "Don’t let this just be a “Summer Fling” with style, step up your game and keep it all year round. Start it off with a bang with this mesmerizing maxi dress. As good as this dress will make you look and feel, you won’t crash and burn. Maxi features a deep V-neckline with a small triangle cutout and a strappy open back. Model is wearing a small. • 100% Polyester • Hand Wash Cold • Fully Lined",
+          "stockMessage": "In stock",
+          "brand": "Ayepeach",
+          "popularity": "578",
+          "caption": "Captions!"
+        }
+      },
+      "attributes": {
+        "id": "bb9dd5137783e1fdc8076e2ae275d5fb",
+        "intellisuggestData": "eJyyKK0sMcplYChPzCwuYXDWdQzQjTTSNTIwsDRhMGawMGYwYLC0ZEgvykwBBAAA___ttgot",
+        "intellisuggestSignature": "ee67e16ffea719bd74db91b17b80fd4bc8cb8b55777004fc11a2e4f00cbbf897",
+        "product_type_unigram": "dress",
+        "sales_rank": [
+          "578"
+        ]
+      },
+      "children": []
+    },
+    {
+      "id": "129704",
+      "mappings": {
+        "core": {
+          "uid": "129704",
+          "sku": "C-AP-O6-20094",
+          "name": "Summer Fling Maxi Dress",
+          "url": "/product/C-AP-O6-20094",
+          "addToCartUrl": "/product/C-AP-O6-20094",
+          "price": 50,
+          "msrp": 50,
+          "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/844a6779_large.jpg",
+          "secureImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/844a6779_large.jpg",
+          "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/844a6779_thumb_med.jpg",
+          "rating": "5",
+          "ratingCount": "1111",
+          "description": "Don’t let this just be a “Summer Fling” with style, step up your game and keep it all year round. Start it off with a bang with this mesmerizing maxi dress. As good as this dress will make you look and feel, you won’t crash and burn. Maxi features a deep V-neckline with a small triangle cutout and a strappy open back. Model is wearing a small. • 100% Polyester • Hand Wash Cold • Fully Lined • Imported",
+          "stockMessage": "In stock",
+          "brand": "Ayepeach",
+          "popularity": "1178",
+          "caption": "Captions!"
+        }
+      },
+      "attributes": {
+        "id": "0447044a7acb9725963e8cce1b1c59fd",
+        "intellisuggestData": "eJyyKK0sMcplYChPzCwuYXDWdQzQ9TfTNTIwsDRhMGawMGEwYLC0ZEgvykwBBAAA___tMwoo",
+        "intellisuggestSignature": "63942e86965d9bf320a347dc44035a29e3cd563e53b504d5741282fa97f9d16b",
+        "product_type_unigram": "dress",
+        "sales_rank": [
+          "1178"
+        ]
+      },
+      "children": []
+    },
+    {
+      "id": "140481",
+      "mappings": {
+        "core": {
+          "uid": "140481",
+          "sku": "C-PLC-W2-03612",
+          "name": "Summer Fun Floral Print Shorts",
+          "url": "/product/C-PLC-W2-03612",
+          "addToCartUrl": "/product/C-PLC-W2-03612",
+          "price": 36,
+          "msrp": 50,
+          "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/844a1508_large.jpg",
+          "secureImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/844a1508_large.jpg",
+          "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/844a1508_thumb_med.jpg",
+          "rating": "5",
+          "ratingCount": "1111",
+          "description": "Have some Summer Fun in these fetching Floral Print Shorts. Summer activities can only be all the more fun when you look as cute as you will in these. These orange, yellow, and periwinkle floral shorts feature an elastic waist and a ruffled hemline. Model is wearing a small. • 100% Polyester • Hand Wash Cold • Fully Lined • Made in the USA",
+          "stockMessage": "In stock",
+          "brand": "PLC",
+          "popularity": "3314",
+          "caption": "Captions!"
+        }
+      },
+      "attributes": {
+        "id": "039dbb3ddc3ae85d098662fae554f2d6",
+        "intellisuggestData": "eJyyKK0sMcplYChPzCwuYXDWDfBx1g030jUwNjM0YjBmsDBlMGCwtGRIL8pMAQQAAP__-o4KeA",
+        "intellisuggestSignature": "432924441cf963bca6c373599f399b720e7eaf5c61ceb530459223608e9c60fa",
+        "product_type_unigram": "shorts",
+        "sales_rank": [
+          "3314"
+        ]
+      },
+      "children": []
+    },
+    {
+      "id": "144000",
+      "mappings": {
+        "core": {
+          "uid": "144000",
+          "sku": "C-NZ-G7-D5724",
+          "name": "Summer Girl Black Scallop Dress",
+          "url": "/product/C-NZ-G7-D5724",
+          "addToCartUrl": "/product/C-NZ-G7-D5724",
+          "price": 39,
+          "msrp": 50,
+          "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/844a6224_large.jpg",
+          "secureImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/844a6224_large.jpg",
+          "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/844a6224_thumb_med.jpg",
+          "rating": "5",
+          "ratingCount": "1111",
+          "description": "Be the window shopping and backyard twilight dinner girl that you are in our Summer Girl Dark Black Scallop Dress. As hot as you'll look in this halter dress that features a flattering tie at the waist and a scalloped arm hem, they'll see why it's your favorite season. It's got a cute keyhole on the back as well. Model is wearing a small. ** This garment contains no stretch or give. RDB Stylists recommend sizing up for a more comfortable fit! ** • 100% Polyester • Hand Wash Cold • Fully Lined • Imported",
+          "stockMessage": "In stock",
+          "brand": "Naked Zebra",
+          "popularity": "3597",
+          "caption": "Captions!"
+        }
+      },
+      "attributes": {
+        "id": "eba9160b2329978be04c7b3852831ee4",
+        "intellisuggestData": "eJyyKK0sMcplYChPzCwuYXDW9YvSdTfXdTE1NzJhMGawMGMwYLC0ZEgvykwBBAAA___wwQpR",
+        "intellisuggestSignature": "0047b3c2937dd9fe63d5bcfd7432e3a6619bf0a09197d9e38ba3a5324cd5b85c",
+        "product_type_unigram": "dress",
+        "sales_rank": [
+          "3597"
+        ]
+      },
+      "children": []
+    },
+    {
+      "id": "138969",
+      "mappings": {
+        "core": {
+          "uid": "138969",
+          "sku": "C-NZ-I6-D5724",
+          "name": "Summer Girl Blue Scallop Dress",
+          "url": "/product/C-NZ-I6-D5724",
+          "addToCartUrl": "/product/C-NZ-I6-D5724",
+          "price": 39,
+          "msrp": 50,
+          "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/844a6327_1_large.jpg",
+          "secureImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/844a6327_1_large.jpg",
+          "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/844a6327_1_thumb_med.jpg",
+          "rating": "5",
+          "ratingCount": "1111",
+          "description": "Be the backyard barbecue, hammock chilling girl that you are in our Summer Girl Blue Scallop Dress. As hot as you’ll look in this halter dress that features a flattering tie at the waist and a scalloped arm hem, they’ll see why it’s your favorite season. It’s got a cute keyhole on the back, to boost. Model is wearing a small. ** This garment contains no stretch or give. RDB Stylists recommend sizing up for a more comfortable fit! ** • 100% Polyester • Hand Wash Cold • Fully Lined • Imported",
+          "stockMessage": "In stock",
+          "brand": "Naked Zebra",
+          "popularity": "2316",
+          "caption": "Captions!"
+        }
+      },
+      "attributes": {
+        "id": "3003d2410caa41ece203bd611de82577",
+        "intellisuggestData": "eJyyKK0sMcplYChPzCwuYXDW9YvS9TTTdTE1NzJhMGawMGcwYLC0ZEgvykwBBAAA___w5ApT",
+        "intellisuggestSignature": "983cf792bc5e56eb3e4624ca8c6c1e4a71ebe407725ab032ab1e1a0d027dedf5",
+        "product_type_unigram": "dress",
+        "sales_rank": [
+          "2316"
+        ]
+      },
+      "children": []
+    },
+    {
+      "id": "142497",
+      "mappings": {
+        "core": {
+          "uid": "142497",
+          "sku": "C-NZ-P6-D5724",
+          "name": "Summer Girl Dark Pink Scallop Dress",
+          "url": "/product/C-NZ-P6-D5724",
+          "addToCartUrl": "/product/C-NZ-P6-D5724",
+          "price": 39,
+          "msrp": 50,
+          "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/844a6693_large.jpg",
+          "secureImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/844a6693_large.jpg",
+          "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/844a6693_thumb_med.jpg",
+          "rating": "5",
+          "ratingCount": "1111",
+          "description": "Be the backyard barbecue, hammock chilling girl that you are in our Summer Girl Dark Pink Scallop Dress. As hot as you’ll look in this halter dress that features a flattering tie at the waist and a scalloped arm hem, they’ll see why it’s your favorite season. It’s got a cute keyhole on the back, to boost. Model is wearing a small. ** This garment contains no stretch or give. RDB Stylists recommend sizing up for a more comfortable fit! ** • 100% Polyester • Hand Wash Cold • Fully Lined • Imported",
+          "stockMessage": "In stock",
+          "brand": "Naked Zebra",
+          "popularity": "3926",
+          "caption": "Captions!"
+        }
+      },
+      "attributes": {
+        "id": "836fe2fab2688e559ce27df80c4bedfd",
+        "intellisuggestData": "eJyyKK0sMcplYChPzCwuYXDW9YvSDTDTdTE1NzJhMGawsGAwYLC0ZEgvykwBBAAA___xkApb",
+        "intellisuggestSignature": "6b7b1ecc1938c2ae1b7d9715827ca55ad79232a06ded804e13d8dddaceee3a68",
+        "product_type_unigram": "dress",
+        "sales_rank": [
+          "3926"
+        ]
+      },
+      "children": []
+    },
+    {
+      "id": "138498",
+      "mappings": {
+        "core": {
+          "uid": "138498",
+          "sku": "C-NZ-P7-D5724",
+          "name": "Summer Girl Pink Scallop Dress",
+          "url": "/product/C-NZ-P7-D5724",
+          "addToCartUrl": "/product/C-NZ-P7-D5724",
+          "price": 39,
+          "msrp": 50,
+          "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/844a1117_1_large.jpg",
+          "secureImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/844a1117_1_large.jpg",
+          "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/844a1117_1_thumb_med.jpg",
+          "rating": "5",
+          "ratingCount": "1111",
+          "description": "Be the poolside, suntanning girl that you are in our Summer Girl Pink Scallop Dress. As hot as you’ll look in this halter dress that features a flattering tie at the waist and a scalloped arm hem, they’ll see why it’s your favorite season. It’s got a cute keyhole on the back, to boost. Model is wearing a small. ** This garment contains no stretch or give. RDB Stylists recommend sizing up for a more comfortable fit! ** • 100% Polyester • Hand Wash Cold • Fully Lined • Imported",
+          "stockMessage": "In stock",
+          "brand": "Naked Zebra",
+          "popularity": "801",
+          "caption": "Captions!"
+        }
+      },
+      "attributes": {
+        "id": "4cbe75c6f8c35fb6595e1ac048e0096f",
+        "intellisuggestData": "eJyyKK0sMcplYChPzCwuYXDW9YvSDTDXdTE1NzJhMGawsGQwYLC0ZEgvykwBBAAA___xsQpd",
+        "intellisuggestSignature": "615f10795bebf375df8417587bf82ed2d8a2822fca2cade4e8d57fa2a32ab9bc",
+        "product_type_unigram": "dress",
+        "sales_rank": [
+          "801"
+        ]
+      },
+      "children": []
+    },
+    {
+      "id": "149976",
+      "mappings": {
+        "core": {
+          "uid": "149976",
+          "sku": "C-NZ-Y9-D5724",
+          "name": "Summer Girl Yellow Scallop Dress",
+          "url": "/product/C-NZ-Y9-D5724",
+          "addToCartUrl": "/product/C-NZ-Y9-D5724",
+          "price": 39,
+          "msrp": 50,
+          "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/844a1446_2_large.jpg",
+          "secureImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/844a1446_2_large.jpg",
+          "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/844a1446_2_thumb_med.jpg",
+          "rating": "5",
+          "ratingCount": "1111",
+          "description": "Be the backyard lounging, summer getaway girl that you are in our Summer Girl Yellow Scallop Dress. As hot as you’ll look in this halter dress that features a flattering tie at the waist and a scalloped arm hem, they’ll see why it’s your favorite season. It’s got a cute keyhole on the back, to boost. Model is wearing a small. ** This garment contains no stretch or give. RDB Stylists recommend sizing up for a more comfortable fit! ** • 100% Polyester • Hand Wash Cold • Fully Lined • Imported",
+          "stockMessage": "In stock",
+          "brand": "Naked Zebra",
+          "popularity": "3239",
+          "caption": "Captions!"
+        }
+      },
+      "attributes": {
+        "id": "032546c0b6ef9dd0054d31d6031df423",
+        "intellisuggestData": "eJyyKK0sMcplYChPzCwuYXDW9YvSjbTUdTE1NzJhMGawNGAwYLC0ZEgvykwBBAAA___yVQpg",
+        "intellisuggestSignature": "34d69db67e6fbe92d4fd0d085e96fbb8b0428ff38b1ca43348b3ee800114892a",
+        "product_type_unigram": "dress",
+        "sales_rank": [
+          "3239"
+        ]
+      },
+      "children": []
+    },
+    {
+      "id": "181408",
+      "mappings": {
+        "core": {
+          "uid": "181408",
+          "sku": "C-US-I3-94386",
+          "name": "Sunday Morning Blue Striped Dress",
+          "url": "/product/C-US-I3-94386",
+          "addToCartUrl": "/product/C-US-I3-94386",
+          "price": 49,
+          "msrp": 50,
+          "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/1729_copyright_reddressboutique_2017__large.jpg",
+          "secureImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/1729_copyright_reddressboutique_2017__large.jpg",
+          "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/1729_copyright_reddressboutique_2017__thumb_med.jpg",
+          "rating": "5",
+          "ratingCount": "1111",
+          "description": "Ah, nothing beats a lazy Sunday Morning, sipping coffee on the porch, enjoying the dawn air. Well, nothing except coffee at the open air café, sipping coffee on the patio over brunch with good company. After all, there’s no point in sitting around the house when you’ve got a gorgeous new dress to showcase. Just be sure to save me a croissant. Model is wearing a small. • 56% Cotton 24% Polyester 20% Rayon • Hand Wash Cold • lined • Imported",
+          "stockMessage": "In stock",
+          "brand": "Under Skies",
+          "popularity": "401",
+          "caption": "Captions!"
+        }
+      },
+      "attributes": {
+        "id": "10afd5f655becb909aacf39347fcebdb",
+        "intellisuggestData": "eJyyKK0sMcplYChPzCwuYXDWDQ3W9TTWtTQxtjBjMGawNGQwYLC0ZEgvykwBBAAA___vwgpD",
+        "intellisuggestSignature": "87957b5943bc127c388d6e1511a830686b875c214600921dbd6836595c922036",
+        "product_type_unigram": "dress",
+        "sales_rank": [
+          "401"
+        ]
+      },
+      "children": []
+    },
+    {
+      "id": "179533",
+      "mappings": {
+        "core": {
+          "uid": "179533",
+          "sku": "C-HYP-T1-F8500",
+          "name": "Sure To Charm Blush Pink Dress",
+          "url": "/product/C-HYP-T1-F8500",
+          "addToCartUrl": "/product/C-HYP-T1-F8500",
+          "price": 49,
+          "msrp": 50,
+          "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/17_03_20_studio_26199_large.jpg",
+          "secureImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/17_03_20_studio_26199_large.jpg",
+          "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/17_03_20_studio_26199_thumb_med.jpg",
+          "rating": "5",
+          "ratingCount": "1111",
+          "description": "When you absolutely need to dazzle, buy our Sure To Charm Dress. Instead of casting a love spell, you let the dress do all the heavy lifting while you sit back and just be yourself. Enjoy the night, and if it's meant to be, it'll be. Drop waist dress features princess seams and shirring detail. A hook and loop closure at the back of the neck creates a keyhole. Model is wearing a S/M. •53% Linen 47% Cotton •Hand Wash Cold •Unlined •Imported",
+          "stockMessage": "In stock",
+          "brand": "HYPR",
+          "popularity": "1397",
+          "caption": "Captions!"
+        }
+      },
+      "attributes": {
+        "id": "398680a6541c714b28d7d50952799677",
+        "intellisuggestData": "eJyyKK0sMcplYChPzCwuYXDW9YgM0A0x1HWzMDUwYDBmsDRiMGCwtGRIL8pMAQQAAP___bEKmw",
+        "intellisuggestSignature": "6eaf98805a73f69fa4863e2d8e8b984c0dd41145b7a15a130ac37e2031532bbd",
+        "product_type_unigram": "dress",
+        "sales_rank": [
+          "1397"
+        ]
+      },
+      "children": []
+    },
+    {
+      "id": "180043",
+      "mappings": {
+        "core": {
+          "uid": "180043",
+          "sku": "C-HYP-E6-F8500",
+          "name": "Sure To Charm Green Dress",
+          "url": "/product/C-HYP-E6-F8500",
+          "addToCartUrl": "/product/C-HYP-E6-F8500",
+          "price": 49,
+          "msrp": 50,
+          "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/17_03_20_studio_26545_large.jpg",
+          "secureImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/17_03_20_studio_26545_large.jpg",
+          "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/17_03_20_studio_26545_thumb_med.jpg",
+          "rating": "5",
+          "ratingCount": "1111",
+          "description": "When you absolutely need to dazzle, buy our Sure To Charm Dress. Instead of casting a love spell, you let the dress do all the heavy lifting while you sit back and just be yourself. Enjoy the night, and if it's meant to be, it'll be. Drop waist dress features princess seams and shirring detail. A hook and loop closure at the back of the neck creates a keyhole. Model is wearing a S/M. • 53% Linen 47% Cotton • Hand Wash Cold • Unlined • Imported",
+          "stockMessage": "In stock",
+          "brand": "HYPR",
+          "popularity": "4023",
+          "caption": "Captions!"
+        }
+      },
+      "attributes": {
+        "id": "0232238a9c1e5d7ca660a7fa9c3c2b6d",
+        "intellisuggestData": "eJyyKK0sMcplYChPzCwuYXDW9YgM0HU103WzMDUwYDBmsDRmMGCwtGRIL8pMAQQAAP___NEKkg",
+        "intellisuggestSignature": "1f36f265eb1e3a2aaf26882bf743ae49d80c13c50a93673034b3c6cfee65a908",
+        "product_type_unigram": "dress",
+        "sales_rank": [
+          "4023"
+        ]
+      },
+      "children": []
+    },
+    {
+      "id": "183733",
+      "mappings": {
+        "core": {
+          "uid": "183733",
+          "sku": "C-PLC-T1-33501",
+          "name": "Surprising You Floral Print Maxi Dress",
+          "url": "/product/C-PLC-T1-33501",
+          "addToCartUrl": "/product/C-PLC-T1-33501",
+          "price": 52,
+          "msrp": 75,
+          "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/2369_copyright_reddressboutique_2017__large.jpg",
+          "secureImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/2369_copyright_reddressboutique_2017__large.jpg",
+          "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/2369_copyright_reddressboutique_2017__thumb_med.jpg",
+          "rating": "5",
+          "ratingCount": "1111",
+          "description": "So many times in your life, you've likely dressed up to surprise a man, to make his evening special, to make him smile and let him know you were thinking of him. But what about you? Don't you deserve the same treatment? What about Surprising You? And honestly, as much as you'd like your man to dress up for you, wouldn't you rather just have a new dress for yourself? Who really cares about his clothes? So here's a brand new Floral Print Maxi Dress, just for you! Because you're awesome, and we love you. Short sleeve maxi dress features a v-neckline and knotted waist. Model is wearing a small. • 96% Polyester, 4% Spandex • Hand Wash Cold • Lined to mid-thigh • Made in the USA",
+          "stockMessage": "In stock",
+          "brand": "PLC",
+          "popularity": "15",
+          "caption": "Captions!"
+        }
+      },
+      "attributes": {
+        "id": "8dab4a7418e853805356c84ec3bfcbba",
+        "intellisuggestData": "eJyyKK0sMcplYChPzCwuYXDWDfBx1g0x1DU2NjUwZDBmsDRhMGCwtGRIL8pMAQQAAP__-j0KdA",
+        "intellisuggestSignature": "be1ff8f47125ffe64ea22ca2e616f39d014ea2073f51c81ecbc1c8961f6fab70",
+        "product_type_unigram": "dress",
+        "sales_rank": [
+          "15"
+        ]
+      },
+      "children": []
+    },
+    {
+      "id": "180052",
+      "mappings": {
+        "core": {
+          "uid": "180052",
+          "sku": "C-AD-W1-1915P",
+          "name": "Sweet As Can Be White Off-The-Shoulder Top",
+          "url": "/product/C-AD-W1-1915P",
+          "addToCartUrl": "/product/C-AD-W1-1915P",
+          "price": 49,
+          "msrp": 50,
+          "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/3006_copyright_reddressboutique_2017_large.jpg",
+          "secureImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/3006_copyright_reddressboutique_2017_large.jpg",
+          "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/3006_copyright_reddressboutique_2017_thumb_med.jpg",
+          "rating": "5",
+          "ratingCount": "1111",
+          "description": "At a really great confectionary (that's basically a fancy candy place) there is always one thing in particular that will catch your sweet tooth and never let it go (which one is up to you of course). Might be the pulled taffy, or the candied apples, or possibly even the chocolate fudge. This dress is Sweet As Can Be, and totally deserves to be right there alongside those delectable delights and frankly, once you're dressed in it, you'll be just as tasty too! This peplum blouse features smocked over-the-shoulder ruffled sleeves, a smocked cinching at the natural waistline, and a functional decorative bow at the bust line. Because of the smocked details of this top, the waist will stretch up to 4\\\". Model is wearing a small. • 97% Cotton 3% Spandex • Machine Wash Cold • Unlined • Made in the USA",
+          "stockMessage": "In stock",
+          "brand": "Adrienne",
+          "popularity": "3312",
+          "caption": "Captions!"
+        }
+      },
+      "attributes": {
+        "id": "6bfdd6be9961b578ad07a4b3586b04f5",
+        "intellisuggestData": "eJyyKK0sMcplYChPzCwuYXDWdXTRDTfUNbQ0NA1gMGawNGUwYLC0ZEgvykwBBAAA___ujQpC",
+        "intellisuggestSignature": "5cb81556aabb81edbc4ad33ffce0412516580aa398180747444cddc20df1da3d",
+        "product_type_unigram": "top",
+        "sales_rank": [
+          "3312"
+        ]
+      },
+      "children": []
+    },
+    {
+      "id": "182395",
+      "mappings": {
+        "core": {
+          "uid": "182395",
+          "sku": "C-EN-Y5-D7536",
+          "name": "Sweeter Mystery Yellow Dress",
+          "url": "/product/C-EN-Y5-D7536",
+          "addToCartUrl": "/product/C-EN-Y5-D7536",
+          "price": 44,
+          "msrp": 50,
+          "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/5013_copyright_reddressboutique_2017__large.jpg",
+          "secureImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/5013_copyright_reddressboutique_2017__large.jpg",
+          "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/5013_copyright_reddressboutique_2017__thumb_med.jpg",
+          "rating": "5",
+          "ratingCount": "1111",
+          "description": "Let it be your new mantra to never let the world know everything about you (especially all that awesome stash you keep hidden in your basement). Keep 'em all guessing! Instead of being the Sweeter Mystery, wear this precious yellow dress, and be the sweetest mystery of all! Oversized swing dress features a front cutout at the neckline, peek-a-boo mid-riff and crochet detail. A single button and loop closure create a keyhole at the back. Model is wearing a small. • 100% Rayon • Dry Clean Only • Lined • Imported",
+          "stockMessage": "In stock",
+          "brand": "Entro",
+          "popularity": "2821",
+          "caption": "Captions!"
+        }
+      },
+      "attributes": {
+        "id": "9a08237337a9028d220c85a7d362858c",
+        "intellisuggestData": "eJyyKK0sMcplYChPzCwuYXDWdfXTjTTVdTE3NTZjMGawNGMwYLC0ZEgvykwBBAAA___wXApQ",
+        "intellisuggestSignature": "9792a01d280d46ffcfe60ee3dbe4353678bdc205caabacf02a9cab5a8a65381a",
+        "product_type_unigram": "dress",
+        "sales_rank": [
+          "2821"
+        ]
+      },
+      "children": []
+    },
+    {
+      "id": "124400",
+      "mappings": {
+        "core": {
+          "uid": "124400",
+          "sku": "C-US-T2-93242",
+          "name": "Swept Away Maxi Dress",
+          "url": "/product/C-US-T2-93242",
+          "addToCartUrl": "/product/C-US-T2-93242",
+          "price": 54,
+          "msrp": 75,
+          "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/844a4657_2_large.jpg",
+          "secureImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/844a4657_2_large.jpg",
+          "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/844a4657_2_thumb_med.jpg",
+          "rating": "5",
+          "ratingCount": "1111",
+          "description": "When you want to get away from it all for just a little while you need something that will not slow you down. Get “Swept Away” by this maxi dress and never look back as this takes you to a place where being carefree in the breeze is very much on trend!! Maxi dress features adjustable spaghetti straps. 100% Rayon. Wash by hand in cold water separately. Lay flat to dry. Iron low. Do not bleach. Fully lined. Made in China. Model wears x-small. FIT: True to size BUST: Fitted, adjustable straps. Size X-Small measures 32\\\", Small measures 34\\\", Medium measures 36\\\", Large measures 38\\\" LENGTH: Floor length. Size X-Small measures 58.5\\\", Small measures 58.5\\\", Medium measures 59\\\", Large measures 59\\\" WAIST: Empire waist but loose. HIPS: Loose. Size X-Small measures 40\\\", Small measures 42\\\", Medium measures 44\\\", Large measures 46\\\" UNDERGARMENTS: Can be worn with an adhesive bra FABRIC: Has no stretch Model Info: Model is 5’7” and measures 32” bust, 25” waist. She is wearing a size small.",
+          "stockMessage": "In stock",
+          "brand": "Under Skies",
+          "popularity": "1675",
+          "caption": "Captions!"
+        }
+      },
+      "attributes": {
+        "id": "8a07c7e96ee8c27155686c05fa5e1f9c",
+        "intellisuggestData": "eJyyKK0sMcplYChPzCwuYXDWDQ3WDTHStTQ2MjFiMGawNGcwYLC0ZEgvykwBBAAA___wQgpJ",
+        "intellisuggestSignature": "c6ea8e9c8b1e41d6d1ca606ac9a6e1645db98638acd639291c801e11503b05e5",
+        "product_type_unigram": "dress",
+        "sales_rank": [
+          "1675"
+        ]
+      },
+      "children": []
+    },
+    {
+      "id": "178245",
+      "mappings": {
+        "core": {
+          "uid": "178245",
+          "sku": "C-AFT-W1-7K6SA",
+          "name": "Then And Now White Lace Skirt",
+          "url": "/product/C-AFT-W1-7K6SA",
+          "addToCartUrl": "/product/C-AFT-W1-7K6SA",
+          "price": 36,
+          "msrp": 50,
+          "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/copyright_rdb_studio_2_5560_large.jpg",
+          "secureImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/copyright_rdb_studio_2_5560_large.jpg",
+          "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/copyright_rdb_studio_2_5560_thumb_med.jpg",
+          "rating": "5",
+          "ratingCount": "1111",
+          "description": "It's always nice to be able to look back on pictures of yourself and instead of seeing an uncultured, unfashionable woman, you see a force to be reckoned with who is fabulous, stylish, and ready-to-take-on-anything. Can a skirt be that powerful? Why don't you try out this beauty and see for yourself? Five years from now, when you look back on your former self, you'll give your self a nod of approval. We're sure of it! Model is wearing a small. • 100% Polyester • Hand Wash Cold • Lined • Imported",
+          "stockMessage": "In stock",
+          "brand": "After Market",
+          "popularity": "1396",
+          "caption": "Captions!"
+        }
+      },
+      "attributes": {
+        "id": "18cc39f239cb1548adc290f120a73915",
+        "intellisuggestData": "eJyyKK0sMcplYChPzCwuYXDWdXQL0Q031DX3Ngt2ZDBmsLRgMGCwtGRIL8pMAQQAAP___6MKxw",
+        "intellisuggestSignature": "0ebe7ac4ae5bd0370092ac84916f5a118ea09fb67c23798f30ef9f9e7bdcdfc6",
+        "product_type_unigram": "skirt",
+        "sales_rank": [
+          "1396"
+        ]
+      },
+      "children": []
+    },
+    {
+      "id": "151215",
+      "mappings": {
+        "core": {
+          "uid": "151215",
+          "sku": "C-NBK-O4-D7184",
+          "name": "Twice As Sweet Coral Maxi Dress",
+          "url": "/product/C-NBK-O4-D7184",
+          "addToCartUrl": "/product/C-NBK-O4-D7184",
+          "price": 46,
+          "msrp": 50,
+          "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/844a1324_3_large.jpg",
+          "secureImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/844a1324_3_large.jpg",
+          "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/844a1324_3_thumb_med.jpg",
+          "rating": "5",
+          "ratingCount": "1111",
+          "description": "Like a chocolate covered oreo, this Coral Maxi Dress is Twice As Sweet! Even if desserts aren’t your thing (what?!), you’ll have a sweet tooth for this delectable dress! This sleeveless maxi dress features a V-neck on both the front and back, with the back having a tie at the neck, and it features an elastic waist with a tie. Model is wearing a small. • 100% Polyester • Hand Wash Cold • Unlined • Faintly Sheer • Made in the USA",
+          "stockMessage": "In stock",
+          "brand": "Newbury Kustom",
+          "popularity": "2032",
+          "caption": "Captions!"
+        }
+      },
+      "attributes": {
+        "id": "ea9acf2f467318e397e70d964da26165",
+        "intellisuggestData": "eJyyKK0sMcplYChPzCwuYXDW9XPy1vU30XUxN7QwYTBmsLRkMAAR6UWZKYAAAAD___vhCo8",
+        "intellisuggestSignature": "e63e070f55cd411bab53eb33871903394728b757628ada5b4a48f17038d80024",
+        "product_type_unigram": "dress",
+        "sales_rank": [
+          "2032"
+        ]
+      },
+      "children": []
+    },
+    {
+      "id": "107588",
+      "mappings": {
+        "core": {
+          "uid": "107588",
+          "sku": "C-TBC-G7-5154M",
+          "name": "Up The Corporate Ladder Skirt",
+          "url": "/product/C-TBC-G7-5154M",
+          "addToCartUrl": "/product/C-TBC-G7-5154M",
+          "price": 28,
+          "msrp": 50,
+          "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/478a1710_2_large.jpg",
+          "secureImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/478a1710_2_large.jpg",
+          "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/478a1710_2_thumb_med.jpg",
+          "rating": "5",
+          "ratingCount": "1111",
+          "description": "Make the move from executive assistant to executive chairwoman in one swift promotion!! Climb “Up The Corporate Ladder” by showing off your style savvy with this bold skirt! No longer content of playing by the rules of the boys’ club, show them that you are all woman from the moment you step into the boardroom. This skirt is taking the top spot of the firm no matter if it is an organization doing business deals or playing CEO to the kids while looking for coupon steals!! High waisted skirt with an elastic waistband, triangle pattern on the front, and a small slit on the back. Unlined. 75% Rayon, 22% Nylon, 3% Spandex. Wash by hand in cold water. Iron low. Do not wring or bleach. Made in the U.S.A. Model is wearing a small. *RDB stylists recommend consulting exact measurements below for the best fit* Length: Small measures 22\\\", Medium measures 23\\\", Large measures 23.5\\\" Waist: Small measures 28\\\", Medium measures 30\\\", Large measures 32\\\" Hips: Small measures 34\\\", Medium measures 36\\\", Large",
+          "stockMessage": "In stock",
+          "brand": "2B Clothing",
+          "popularity": "2755",
+          "caption": "Captions!"
+        }
+      },
+      "attributes": {
+        "id": "06ac816efc6beb637d568a7c01931293",
+        "intellisuggestData": "eJyyKK0sMcplYChPzCwuYXDWDXFy1nU31zU1NDXxZTBmMDQwYDBgsLRkSC_KTAEEAAD__wTKCqs",
+        "intellisuggestSignature": "4119d338ad815cd4dabac3d7861e5163ab7b2432037302a539bee403097f5043",
+        "product_type_unigram": "skirt",
+        "sales_rank": [
+          "2755"
+        ]
+      },
+      "children": []
+    },
+    {
+      "id": "174034",
+      "mappings": {
+        "core": {
+          "uid": "174034",
+          "sku": "C-MC-R7-DCX93",
+          "name": "Whisper Of The Heart Burgundy Lace Dress",
+          "url": "/product/C-MC-R7-DCX93",
+          "addToCartUrl": "/product/C-MC-R7-DCX93",
+          "price": 58,
+          "msrp": 75,
+          "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/16_12_holiday_2_474_large.jpg",
+          "secureImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/16_12_holiday_2_474_large.jpg",
+          "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/16_12_holiday_2_474_thumb_med.jpg",
+          "rating": "5",
+          "ratingCount": "1111",
+          "description": "The heart knows what it wants, and, if you listen, you can hear its fluttering voice whispering guidance when you need it most. And when would a girl need a whisper of the heart more than when shopping for the perfect gown? I know, I know, there are a million things more dire than dress-shopping, but you try telling that to a woman when she finds the right outfit, and hears that whisper. If you’ve never experienced it, for one, shining moment, nothing else in the world matters but the thought of how you’ll look in that dress. Dress features exposed gold zipper, full nude lining on bust and skirt-small open lace band at waist. Model is wearing a small. • Self: 100% Polyester, Lining: 100% Lining • Hand Wash Cold • Made in the USA • Imported",
+          "stockMessage": "In stock",
+          "brand": "Moon",
+          "popularity": "612",
+          "caption": "Captions!"
+        }
+      },
+      "attributes": {
+        "id": "0afb36e62752ca84ff3f9ce8e5321863",
+        "intellisuggestData": "eJyyKK0sMcplYChPzCwuYXDW9XXWDTLXdXGOsDRmMGYwNDBkMGCwtGRIL8pMAQQAAP___NEKnQ",
+        "intellisuggestSignature": "58c3dae815500008bb5c0f6a308a31a268493c557578ce65942b3ad747fb24d3",
+        "product_type_unigram": "dress",
+        "sales_rank": [
+          "612"
+        ]
+      },
+      "children": []
+    },
+    {
+      "id": "177683",
+      "mappings": {
+        "core": {
+          "uid": "177683",
+          "sku": "C-MC-W1-DCX93",
+          "name": "Whisper Of The Heart White Lace Dress",
+          "url": "/product/C-MC-W1-DCX93",
+          "addToCartUrl": "/product/C-MC-W1-DCX93",
+          "price": 58,
+          "msrp": 75,
+          "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/copyright_rdb_studio_2_6602_large.jpg",
+          "secureImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/copyright_rdb_studio_2_6602_large.jpg",
+          "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/copyright_rdb_studio_2_6602_thumb_med.jpg",
+          "rating": "5",
+          "ratingCount": "1111",
+          "description": "The heart knows what it wants, and, if you listen, you can hear its fluttering voice whispering guidance when you need it most. And when would a girl need a whisper of the heart more than when shopping for the perfect gown? I know, I know, there are a million things more dire than dress-shopping, but you try telling that to a woman when she finds the right outfit, and hears that whisper. If you’ve never experienced it, for one, shining moment, nothing else in the world matters but the thought of how you’ll look in that dress. Dress features exposed gold zipper, full nude lining on bust and skirt-small open lace band at waist. Model is wearing a small. • Self: 100% Polyester, Lining: 100% Lining • Hand Wash Cold • Made in the USA • Imported",
+          "stockMessage": "In stock",
+          "brand": "Moon",
+          "popularity": "1765",
+          "caption": "Captions!"
+        }
+      },
+      "attributes": {
+        "id": "1bfef82ac9a1c6ad57bab5c1431053d0",
+        "intellisuggestData": "eJyyKK0sMcplYChPzCwuYXDW9XXWDTfUdXGOsDRmMGYwNDBiMGCwtGRIL8pMAQQAAP___MoKnQ",
+        "intellisuggestSignature": "cc451d0cd87de5ef37fef0d89b0f1e78536cbcbe34616a5f5bbd2db7eb7c4cbc",
+        "product_type_unigram": "dress",
+        "sales_rank": [
+          "1765"
+        ]
+      },
+      "children": []
+    }
+  ],
+  "filters": [],
+  "facets": [
+    {
+      "field": "brand",
+      "type": "value",
+      "filtered": false,
+      "values": [
+        {
+          "filtered": false,
+          "value": "2B Clothing",
+          "label": "2B Clothing",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "5th Avenue",
+          "label": "5th Avenue",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "Adrienne",
+          "label": "Adrienne",
+          "count": 4
+        },
+        {
+          "filtered": false,
+          "value": "After Market",
+          "label": "After Market",
+          "count": 3
+        },
+        {
+          "filtered": false,
+          "value": "Anama",
+          "label": "Anama",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "Audrey 3+1",
+          "label": "Audrey 3+1",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "Aura L'atiste",
+          "label": "Aura L'atiste",
+          "count": 2
+        },
+        {
+          "filtered": false,
+          "value": "Ayepeach",
+          "label": "Ayepeach",
+          "count": 3
+        },
+        {
+          "filtered": false,
+          "value": "Banana",
+          "label": "Banana",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "Ces Femme",
+          "label": "Ces Femme",
+          "count": 2
+        },
+        {
+          "filtered": false,
+          "value": "Dance & Marvel",
+          "label": "Dance & Marvel",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "Do+Be",
+          "label": "Do+Be",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "E2 Clothing",
+          "label": "E2 Clothing",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "English Factory",
+          "label": "English Factory",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "Entro",
+          "label": "Entro",
+          "count": 5
+        },
+        {
+          "filtered": false,
+          "value": "Everly",
+          "label": "Everly",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "Hello Miss",
+          "label": "Hello Miss",
+          "count": 3
+        },
+        {
+          "filtered": false,
+          "value": "Hudson",
+          "label": "Hudson",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "Hyfve",
+          "label": "Hyfve",
+          "count": 2
+        },
+        {
+          "filtered": false,
+          "value": "HYPR",
+          "label": "HYPR",
+          "count": 2
+        },
+        {
+          "filtered": false,
+          "value": "Just USA",
+          "label": "Just USA",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "Kingdom & State",
+          "label": "Kingdom & State",
+          "count": 3
+        },
+        {
+          "filtered": false,
+          "value": "L'Atiste",
+          "label": "L'Atiste",
+          "count": 4
+        },
+        {
+          "filtered": false,
+          "value": "Love Riche",
+          "label": "Love Riche",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "Love Stitch",
+          "label": "Love Stitch",
+          "count": 4
+        },
+        {
+          "filtered": false,
+          "value": "Moon",
+          "label": "Moon",
+          "count": 2
+        },
+        {
+          "filtered": false,
+          "value": "Mustard Seed",
+          "label": "Mustard Seed",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "Naked Zebra",
+          "label": "Naked Zebra",
+          "count": 9
+        },
+        {
+          "filtered": false,
+          "value": "Newbury Kustom",
+          "label": "Newbury Kustom",
+          "count": 9
+        },
+        {
+          "filtered": false,
+          "value": "Nymphe",
+          "label": "Nymphe",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "Paper Crane",
+          "label": "Paper Crane",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "Patrons of Peace",
+          "label": "Patrons of Peace",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "Pepper",
+          "label": "Pepper",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "PLC",
+          "label": "PLC",
+          "count": 6
+        },
+        {
+          "filtered": false,
+          "value": "Promesa",
+          "label": "Promesa",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "Sage",
+          "label": "Sage",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "She + Sky",
+          "label": "She + Sky",
+          "count": 3
+        },
+        {
+          "filtered": false,
+          "value": "Sole Mio",
+          "label": "Sole Mio",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "Sun N Moon",
+          "label": "Sun N Moon",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "Tyche",
+          "label": "Tyche",
+          "count": 4
+        },
+        {
+          "filtered": false,
+          "value": "Under Skies",
+          "label": "Under Skies",
+          "count": 3
+        },
+        {
+          "filtered": false,
+          "value": "Very J",
+          "label": "Very J",
+          "count": 2
+        },
+        {
+          "filtered": false,
+          "value": "Z&L",
+          "label": "Z&L",
+          "count": 2
+        }
+      ]
+    },
+    {
+      "field": "color_family",
+      "type": "value",
+      "filtered": false,
+      "values": [
+        {
+          "filtered": false,
+          "value": "Blue",
+          "label": "Blue",
+          "count": 26
+        },
+        {
+          "filtered": false,
+          "value": "White",
+          "label": "White",
+          "count": 14
+        },
+        {
+          "filtered": false,
+          "value": "Pink",
+          "label": "Pink",
+          "count": 13
+        },
+        {
+          "filtered": false,
+          "value": "Green",
+          "label": "Green",
+          "count": 8
+        },
+        {
+          "filtered": false,
+          "value": "Black",
+          "label": "Black",
+          "count": 8
+        },
+        {
+          "filtered": false,
+          "value": "Orange",
+          "label": "Orange",
+          "count": 5
+        },
+        {
+          "filtered": false,
+          "value": "Purple",
+          "label": "Purple",
+          "count": 5
+        },
+        {
+          "filtered": false,
+          "value": "Red",
+          "label": "Red",
+          "count": 5
+        },
+        {
+          "filtered": false,
+          "value": "Yellow",
+          "label": "Yellow",
+          "count": 4
+        },
+        {
+          "filtered": false,
+          "value": "Beige",
+          "label": "Beige",
+          "count": 2
+        },
+        {
+          "filtered": false,
+          "value": "Gray",
+          "label": "Gray",
+          "count": 2
+        },
+        {
+          "filtered": false,
+          "value": "Brown",
+          "label": "Brown",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "field": "size",
+      "type": "value",
+      "filtered": false,
+      "values": [
+        {
+          "filtered": false,
+          "value": "Medium",
+          "label": "Medium",
+          "count": 97
+        },
+        {
+          "filtered": false,
+          "value": "Large",
+          "label": "Large",
+          "count": 97
+        },
+        {
+          "filtered": false,
+          "value": "Small",
+          "label": "Small",
+          "count": 97
+        },
+        {
+          "filtered": false,
+          "value": "X-Small",
+          "label": "X-Small",
+          "count": 7
+        },
+        {
+          "filtered": false,
+          "value": "25",
+          "label": "25",
+          "count": 2
+        },
+        {
+          "filtered": false,
+          "value": "26",
+          "label": "26",
+          "count": 2
+        },
+        {
+          "filtered": false,
+          "value": "27",
+          "label": "27",
+          "count": 2
+        },
+        {
+          "filtered": false,
+          "value": "28",
+          "label": "28",
+          "count": 2
+        },
+        {
+          "filtered": false,
+          "value": "29",
+          "label": "29",
+          "count": 2
+        },
+        {
+          "filtered": false,
+          "value": "30",
+          "label": "30",
+          "count": 2
+        },
+        {
+          "filtered": false,
+          "value": "31",
+          "label": "31",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "X-Large",
+          "label": "X-Large",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "field": "ss_category_hierarchy",
+      "type": "value",
+      "filtered": false,
+      "values": [
+        {
+          "filtered": false,
+          "value": "Gifts for Her",
+          "label": "Gifts for Her",
+          "count": 99
+        },
+        {
+          "filtered": false,
+          "value": "Shop By Trend",
+          "label": "Shop By Trend",
+          "count": 26
+        },
+        {
+          "filtered": false,
+          "value": "All Bottoms",
+          "label": "All Bottoms",
+          "count": 13
+        },
+        {
+          "filtered": false,
+          "value": "What's New",
+          "label": "What's New",
+          "count": 12
+        },
+        {
+          "filtered": false,
+          "value": "All Dresses",
+          "label": "All Dresses",
+          "count": 9
+        },
+        {
+          "filtered": false,
+          "value": "Going Fast",
+          "label": "Going Fast",
+          "count": 6
+        },
+        {
+          "filtered": false,
+          "value": "Brands We Love",
+          "label": "Brands We Love",
+          "count": 4
+        },
+        {
+          "filtered": false,
+          "value": "Notify of Restock",
+          "label": "Notify of Restock",
+          "count": 4
+        },
+        {
+          "filtered": false,
+          "value": "Playsuits",
+          "label": "Playsuits",
+          "count": 4
+        },
+        {
+          "filtered": false,
+          "value": "Swimwear",
+          "label": "Swimwear",
+          "count": 4
+        },
+        {
+          "filtered": false,
+          "value": "All Sale",
+          "label": "All Sale",
+          "count": 3
+        },
+        {
+          "filtered": false,
+          "value": "All Tops",
+          "label": "All Tops",
+          "count": 3
+        },
+        {
+          "filtered": false,
+          "value": "Style Influencer",
+          "label": "Style Influencer",
+          "count": 3
+        },
+        {
+          "filtered": false,
+          "value": "Trending",
+          "label": "Trending",
+          "count": 3
+        },
+        {
+          "filtered": false,
+          "value": "Valentine's Day",
+          "label": "Valentine's Day",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "field": "price",
+      "type": "range-buckets",
+      "filtered": false,
+      "values": [
+        {
+          "filtered": false,
+          "low": 20,
+          "high": 30,
+          "label": "$20 to $30",
+          "count": 9
+        },
+        {
+          "filtered": false,
+          "low": 30,
+          "high": 40,
+          "label": "$30 to $40",
+          "count": 40
+        },
+        {
+          "filtered": false,
+          "low": 40,
+          "high": 50,
+          "label": "$40 to $50",
+          "count": 39
+        },
+        {
+          "filtered": false,
+          "low": 50,
+          "high": 75,
+          "label": "$50 to $75",
+          "count": 14
+        },
+        {
+          "filtered": false,
+          "low": 150,
+          "high": 200,
+          "label": "$150 to $200",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "field": "material",
+      "type": "value",
+      "filtered": false,
+      "values": [
+        {
+          "filtered": false,
+          "value": "Wool",
+          "label": "Wool",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "Spandex",
+          "label": "Spandex",
+          "count": 14
+        },
+        {
+          "filtered": false,
+          "value": "Polyester",
+          "label": "Polyester",
+          "count": 51
+        },
+        {
+          "filtered": false,
+          "value": "Linen",
+          "label": "Linen",
+          "count": 4
+        },
+        {
+          "filtered": false,
+          "value": "Leather",
+          "label": "Leather",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "Faux Leather",
+          "label": "Faux Leather",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "Cotton",
+          "label": "Cotton",
+          "count": 11
+        },
+        {
+          "filtered": false,
+          "value": "",
+          "label": "",
+          "count": 16
+        }
+      ]
+    },
+    {
+      "field": "on_sale",
+      "type": "value",
+      "filtered": false,
+      "values": [
+        {
+          "filtered": false,
+          "value": "Yes",
+          "label": "Yes",
+          "count": 52
+        },
+        {
+          "filtered": false,
+          "value": "No",
+          "label": "No",
+          "count": 47
+        }
+      ]
+    },
+    {
+      "field": "ss_price",
+      "type": "range",
+      "filtered": false,
+      "step": 2.5,
+      "range": {
+        "low": 22.5,
+        "high": 155
+      },
+      "active": {
+        "low": 22.5,
+        "high": 155
+      }
+    },
+    {
+      "field": "size_dress",
+      "type": "value",
+      "filtered": false,
+      "values": [
+        {
+          "filtered": false,
+          "value": "Large",
+          "label": "Large",
+          "count": 97
+        },
+        {
+          "filtered": false,
+          "value": "Medium",
+          "label": "Medium",
+          "count": 97
+        },
+        {
+          "filtered": false,
+          "value": "Small",
+          "label": "Small",
+          "count": 97
+        },
+        {
+          "filtered": false,
+          "value": "X-Large",
+          "label": "X-Large",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "X-Small",
+          "label": "X-Small",
+          "count": 7
+        }
+      ]
+    },
+    {
+      "field": "season",
+      "type": "value",
+      "filtered": false,
+      "values": [
+        {
+          "filtered": false,
+          "value": "Summer",
+          "label": "Summer",
+          "count": 32
+        },
+        {
+          "filtered": false,
+          "value": "Spring",
+          "label": "Spring",
+          "count": 9
+        },
+        {
+          "filtered": false,
+          "value": "Fall",
+          "label": "Fall",
+          "count": 8
+        }
+      ]
+    },
+    {
+      "field": "pattern",
+      "type": "value",
+      "filtered": false,
+      "values": [
+        {
+          "filtered": false,
+          "value": "Print",
+          "label": "Print",
+          "count": 17
+        },
+        {
+          "filtered": false,
+          "value": "Stripe",
+          "label": "Stripe",
+          "count": 6
+        },
+        {
+          "filtered": false,
+          "value": "Floral",
+          "label": "Floral",
+          "count": 5
+        },
+        {
+          "filtered": false,
+          "value": "Embroidered",
+          "label": "Embroidered",
+          "count": 3
+        },
+        {
+          "filtered": false,
+          "value": "Plaid",
+          "label": "Plaid",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "field": "dress_length_name",
+      "type": "value",
+      "filtered": false,
+      "values": [
+        {
+          "filtered": false,
+          "value": "Mini",
+          "label": "Mini",
+          "count": 8
+        },
+        {
+          "filtered": false,
+          "value": "Micro",
+          "label": "Micro",
+          "count": 2
+        },
+        {
+          "filtered": false,
+          "value": "Knee",
+          "label": "Knee",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "Floor",
+          "label": "Floor",
+          "count": 2
+        },
+        {
+          "filtered": false,
+          "value": "Calf",
+          "label": "Calf",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "Below Knee",
+          "label": "Below Knee",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "Ankle",
+          "label": "Ankle",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "Above Knee",
+          "label": "Above Knee",
+          "count": 2
+        }
+      ]
+    },
+    {
+      "field": "saturation",
+      "type": "value",
+      "filtered": false,
+      "values": [
+        {
+          "filtered": false,
+          "value": "low",
+          "label": "low",
+          "count": 2
+        },
+        {
+          "filtered": false,
+          "value": "med",
+          "label": "med",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "field": "size_pants",
+      "type": "range-buckets",
+      "filtered": false,
+      "values": [
+        {
+          "filtered": false,
+          "low": 7,
+          "high": null,
+          "label": "7 and up",
+          "count": 2
+        }
+      ]
+    },
+    {
+      "field": "collection",
+      "type": "value",
+      "filtered": false,
+      "values": [
+        {
+          "filtered": false,
+          "value": "C'est Chic",
+          "label": "C'est Chic",
+          "count": 1
+        }
+      ]
+    }
+  ],
+  "sorting": [],
+  "merchandising": {
+    "redirect": "",
+    "content": {
+      "inline": [
+        {
+          "value": "<script data-banner-type=\"html\" data-banner-html=\"<h3>at position 3</h3>\" type=\"text/widget\"></script><h3>at position 3</h3>",
+          "config": {
+            "position": {
+              "index": 2
+            }
+          }
+        },
+        {
+          "value": "<script data-banner-type=\"html\" data-banner-html=\"<h3>at position 33</h3>\" type=\"text/widget\"></script><h3>at position 33</h3>",
+          "config": {
+            "position": {
+              "index": 32
+            }
+          }
+        },
+        {
+          "value": "<script data-banner-type=\"html\" data-banner-html=\"<h3>at position 66</h3>\" type=\"text/widget\"></script><h3>at position 66</h3>",
+          "config": {
+            "position": {
+              "index": 65
+            }
+          }
+        }
+      ]
+    },
+    "campaigns": [
+      {
+        "id": "440926",
+        "title": "inline banner test",
+        "type": "search"
+      }
+    ]
+  },
+  "search": {
+    "query": "waist"
+  }
+}

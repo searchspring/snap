@@ -155,6 +155,9 @@ let config: SnapConfig = {
 						restorePosition: {
 							enabled: true,
 						},
+						// infinite: {
+						// 	backfill: 12,
+						// },
 						pagination: {
 							pageSizeOptions: [
 								{
