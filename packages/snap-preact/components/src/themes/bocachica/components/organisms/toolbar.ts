@@ -47,10 +47,7 @@ export const toolbar: ThemeComponentProps<ToolbarProps> = {
 	default: {
 		themeStyleScript: toolbarStyleScript,
 	},
-	mobile: {
-		hideSortBy: true,
-		hidePerPage: true,
-	},
+	mobile: {},
 	tablet: {},
 	desktop: {},
 };

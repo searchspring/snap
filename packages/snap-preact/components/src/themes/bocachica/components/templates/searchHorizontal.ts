@@ -40,8 +40,6 @@ const searchHorizontalStyleScript = ({ theme }: SearchHorizontalProps) => {
 export const searchHorizontal: ThemeComponentProps<SearchHorizontalProps> = {
 	default: {
 		themeStyleScript: searchHorizontalStyleScript,
-		hideTopToolbar: false,
-		hideMiddleToolbar: true,
 		theme: {
 			components: {
 				facetsHorizontal: {
@@ -62,18 +60,13 @@ export const searchHorizontal: ThemeComponentProps<SearchHorizontalProps> = {
 					icon: 'filters',
 				},
 				'toolbar.top': {
-					hideLayoutSelector: false,
-					hideSortBy: false,
-					hidePerPage: false,
-					hideMobileSidebar: true,
-					hidePaginationInfo: false,
+					modules: ['PaginationInfo', 'SortBy', 'PerPage'],
+				},
+				'toolbar.middle': {
+					modules: [],
 				},
 				'toolbar.bottom': {
-					hidePagination: false,
-					hidePaginationInfo: true,
-					hideLayoutSelector: true,
-					hidePerPage: true,
-					hideMobileSidebar: true,
+					modules: ['Pagination'],
 				},
 				mobileSidebar: {
 					theme: {
@@ -88,22 +81,14 @@ export const searchHorizontal: ThemeComponentProps<SearchHorizontalProps> = {
 		},
 	},
 	mobile: {
-		hideMiddleToolbar: false,
 		hideFacetsHorizontal: true,
 		theme: {
 			components: {
 				'toolbar.top': {
-					hideMobileSidebar: false,
-					hidePaginationInfo: true,
+					modules: ['MobileSidebar', 'LayoutSelector'],
 				},
 				'toolbar.middle': {
-					hidePerPage: true,
-					hideSortBy: true,
-					hideMobileSidebar: true,
-					hidePagination: true,
-					hideLayoutSelector: true,
-					hideFilterSummary: true,
-					hidePaginationInfo: false,
+					modules: ['PaginationInfo'],
 				},
 			},
 		},

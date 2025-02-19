@@ -65,14 +65,7 @@ export const SearchHorizontal = observer((properties: SearchHorizontalProps): JS
 		TopToolbar: {
 			name: 'top',
 			// default props
-			hidePagination: true,
-			hideMobileSidebar: true,
-			hidePaginationInfo: true,
-			hideFilterSummary: false,
-			hideLayoutSelector: false,
-			hideSortBy: false,
-			hidePerPage: false,
-
+			modules: ['FilterSummary', 'LayoutSelector', 'SortBy', 'PerPage'],
 			// inherited props
 			...defined({
 				disableStyles,
@@ -83,10 +76,7 @@ export const SearchHorizontal = observer((properties: SearchHorizontalProps): JS
 		MiddleToolbar: {
 			name: 'middle',
 			// default props
-			hideFilterSummary: true,
-			hidePagination: true,
-			hideSortBy: false,
-			hidePerPage: false,
+			modules: ['PerPage', 'SortBy'],
 			// inherited props
 			...defined({
 				disableStyles,
@@ -97,12 +87,7 @@ export const SearchHorizontal = observer((properties: SearchHorizontalProps): JS
 		BottomToolbar: {
 			name: 'bottom',
 			// default props
-			hideFilterSummary: true,
-			hidePerPage: true,
-			hideSortBy: true,
-			hidePaginationInfo: true,
-			hideMobileSidebar: true,
-			hideLayoutSelector: true,
+			modules: ['Pagination'],
 			// inherited props
 			...defined({
 				disableStyles,

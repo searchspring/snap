@@ -34,7 +34,7 @@ export const search: ThemeComponentProps<SearchProps> = {
 		themeStyleScript: searchStyleScript,
 		hideToggleSidebarButton: false,
 		hideTopToolbar: false,
-		hideMiddleToolbar: true,
+		hideMiddleToolbar: false,
 		lang: {
 			// toggleSidebarButtonText: {
 			// 	value: ({ filters }) => (filters.length ? `Filters (${filters.length})` : 'Filter'),
@@ -51,13 +51,15 @@ export const search: ThemeComponentProps<SearchProps> = {
 				'button.filter-toggle': {
 					icon: 'filters',
 				},
+
 				'toolbar.top': {
-					hideLayoutSelector: false,
-					hideSortBy: false,
-					hidePerPage: false,
+					modules: ['PaginationInfo', 'SortBy', 'PerPage'],
+				},
+				'toolbar.middle': {
+					modules: [],
 				},
 				'toolbar.bottom': {
-					hidePagination: false,
+					modules: ['Pagination'],
 				},
 				mobileSidebar: {
 					theme: {
@@ -78,8 +80,7 @@ export const search: ThemeComponentProps<SearchProps> = {
 					columns: 2,
 				},
 				'toolbar.top': {
-					hideMobileSidebar: false,
-					hidePaginationInfo: true,
+					modules: ['MobileSidebar', 'LayoutSelector'],
 				},
 			},
 		},

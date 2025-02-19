@@ -119,20 +119,15 @@ export const Search = observer((properties: SearchProps): JSX.Element => {
 			treePath,
 		},
 		TopToolbar: {
+			// default props
 			name: 'top',
 			className: 'ss__search__header-section__toolbar--top-toolbar',
-			// default props
-			hideMobileSidebar: true,
-			hidePagination: true,
-			hideFilterSummary: true,
-			hidePerPage: true,
-			hideLayoutSelector: true,
-			hideSortBy: true,
+			modules: ['PaginationInfo'],
 			topSlot:
 				!hideToggleSidebarButton && store.loaded && !isMobile && (toggleSidebarButtonText || mergedLang.toggleSidebarButtonText?.value) ? (
 					<ToggleSidebar />
 				) : undefined,
-			// inherited props
+
 			...defined({
 				disableStyles,
 			}),
@@ -140,16 +135,10 @@ export const Search = observer((properties: SearchProps): JSX.Element => {
 			treePath,
 		},
 		MiddleToolbar: {
+			// default props
 			name: 'middle',
 			className: 'ss__search__content__toolbar--middle-toolbar',
-			// default props
-			hideMobileSidebar: true,
-			hidePagination: true,
-			hideFilterSummary: true,
-			hidePaginationInfo: true,
-			hideLayoutSelector: false,
-			hideSortBy: false,
-			hidePerPage: false,
+			modules: ['SortBy', 'PerPage'],
 			// inherited props
 			...defined({
 				disableStyles,
@@ -158,16 +147,10 @@ export const Search = observer((properties: SearchProps): JSX.Element => {
 			treePath,
 		},
 		BottomToolbar: {
+			// default props
 			name: 'bottom',
 			className: 'ss__search__content__toolbar--bottom-toolbar',
-			// default props
-			hideMobileSidebar: true,
-			hidePagination: false,
-			hideFilterSummary: true,
-			hidePerPage: true,
-			hidePaginationInfo: true,
-			hideLayoutSelector: true,
-			hideSortBy: true,
+			modules: ['Pagination'],
 			// inherited props
 			...defined({
 				disableStyles,
