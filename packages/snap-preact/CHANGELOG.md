@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.63.4](https://github.com/searchspring/snap/compare/v0.63.3...v0.63.4) (2025-02-20)
+
+### Bug Fixes
+
+- **preact:** reverting mobx proxy change - affected too many sites using custom code ([708adb0](https://github.com/searchspring/snap/commit/708adb0055d63db866da4829effa3efa760f4a25))
+
 ## [0.63.3](https://github.com/searchspring/snap/compare/v0.63.2...v0.63.3) (2025-02-14)
 
 **Note:** Version bump only for package @searchspring/snap-preact
