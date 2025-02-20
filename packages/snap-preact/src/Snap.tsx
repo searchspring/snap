@@ -36,7 +36,7 @@ import type { SnapControllerServices, SnapControllerConfig, InitialUrlConfig } f
 import { setupEvents } from './setupEvents';
 
 // configure MobX
-configureMobx({ useProxies: window?.searchspring?.build == 'universal' ? 'never' : 'always', isolateGlobalState: true, enforceActions: 'never' });
+configureMobx({ useProxies: 'always', isolateGlobalState: true, enforceActions: 'never' });
 
 export const BRANCH_COOKIE = 'ssBranch';
 export const BRANCH_PARAM = 'searchspring-preview';
