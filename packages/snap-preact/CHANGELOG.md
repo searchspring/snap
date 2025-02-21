@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.63.5](https://github.com/searchspring/snap/compare/v0.63.4...v0.63.5) (2025-02-21)
+
+### Bug Fixes
+
+- **preact:** actually removing use of proxies ([662ad93](https://github.com/searchspring/snap/commit/662ad93082be73a89a6d1fa3bf93e37d7c2b6c01))
+
 ## [0.63.4](https://github.com/searchspring/snap/compare/v0.63.3...v0.63.4) (2025-02-20)
 
 ### Bug Fixes
