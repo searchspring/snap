@@ -92,7 +92,7 @@ export class SearchResultStore extends Array<Product | Banner> {
 		}
 
 		// only when infinite is enabled
-		if ((config as SearchStoreConfig)?.settings?.infinite) {
+		if ((config as SearchStoreConfig)?.settings?.infinite && previousResults) {
 			// logic to determine when to concatenate previous results
 			// this logic is not bullet proof, but it is highly unlikely that the current and previous pagination data would ever be sequential unless paginating
 
