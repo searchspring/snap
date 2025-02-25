@@ -72,6 +72,18 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 # [1.1.0](https://github.com/searchspring/snap/compare/v0.60.1...v1.1.0) (2024-09-20)
 
+## [0.63.5](https://github.com/searchspring/snap/compare/v0.63.4...v0.63.5) (2025-02-21)
+
+**Note:** Version bump only for package @searchspring/snap-url-manager
+
+## [0.63.4](https://github.com/searchspring/snap/compare/v0.63.3...v0.63.4) (2025-02-20)
+
+**Note:** Version bump only for package @searchspring/snap-url-manager
+
+## [0.63.3](https://github.com/searchspring/snap/compare/v0.63.2...v0.63.3) (2025-02-14)
+
+**Note:** Version bump only for package @searchspring/snap-url-manager
+
 ## [0.63.2](https://github.com/searchspring/snap/compare/v0.63.1...v0.63.2) (2025-02-10)
 
 **Note:** Version bump only for package @searchspring/snap-url-manager

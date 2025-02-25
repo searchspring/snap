@@ -36,7 +36,7 @@ import { setupEvents } from './setupEvents';
 import type { TemplatesStore } from './Templates/Stores/TemplateStore';
 
 // configure MobX
-configureMobx({ useProxies: window?.searchspring?.build == 'universal' ? 'never' : 'always', isolateGlobalState: true, enforceActions: 'never' });
+configureMobx({ useProxies: 'never', isolateGlobalState: true, enforceActions: 'never' });
 
 export const BRANCH_COOKIE = 'ssBranch';
 export const BRANCH_PARAM = 'searchspring-preview';

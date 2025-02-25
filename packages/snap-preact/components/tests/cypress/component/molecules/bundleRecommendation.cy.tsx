@@ -318,15 +318,8 @@ describe('RecommendationBundle Component', async () => {
 	// 	cy.get('.ss__recommendation-bundle .ss__recommendation-bundle__wrapper__selector--selected').its('length').should('eq', 4);
 	// });
 
-	it('can hide checkboxes with hideCheckboxes', () => {
-		mount(<RecommendationBundle controller={controller} hideCheckboxes={true} onAddToCart={cy.stub().as('onAddToCart')} />);
-
-		cy.get('.ss__recommendation-bundle').should('exist');
-		cy.get('.ss__recommendation-bundle .ss__recommendation-bundle__wrapper__selector__result-wrapper__checkbox').should('not.exist');
-	});
-
 	it('renders checkboxes by default', () => {
-		mount(<RecommendationBundle controller={controller} onAddToCart={cy.stub().as('onAddToCart')} />);
+		mount(<RecommendationBundle controller={controller} lazyRender={{ enabled: false }} onAddToCart={cy.stub().as('onAddToCart')} />);
 
 		cy.get('.ss__recommendation-bundle').should('exist');
 		cy.get('.ss__recommendation-bundle .ss__recommendation-bundle__wrapper__selector__result-wrapper__checkbox').should('exist');
@@ -340,6 +333,13 @@ describe('RecommendationBundle Component', async () => {
 			.then(() => {
 				cy.get('.ss__recommendation-bundle__wrapper__cta__subtotal__title').should('have.text', 'Subtotal for 3 items');
 			});
+	});
+
+	it('can hide checkboxes with hideCheckboxes', () => {
+		mount(<RecommendationBundle controller={controller} hideCheckboxes={true} onAddToCart={cy.stub().as('onAddToCart')} />);
+
+		cy.get('.ss__recommendation-bundle').should('exist');
+		cy.get('.ss__recommendation-bundle .ss__recommendation-bundle__wrapper__selector__result-wrapper__checkbox').should('not.exist');
 	});
 
 	it('can hide the seed with hideSeed when seed is both in/out of the carousel', () => {
