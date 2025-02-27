@@ -3,7 +3,7 @@ import { observer } from 'mobx-react-lite';
 import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
 
-import { Theme, useTheme, CacheProvider } from '../../../providers';
+import { Theme, useTheme, CacheProvider, useTreePath } from '../../../providers';
 import { defined, mergeProps, mergeStyles } from '../../../utilities';
 import { ComponentProps, ListOption, StyleScript } from '../../../types';
 import { Select, SelectProps } from '../Select';
@@ -25,10 +25,12 @@ const defaultStyles: StyleScript<SortByProps> = () => {
 
 export const SortBy = observer((properties: SortByProps): JSX.Element => {
 	const globalTheme: Theme = useTheme();
+	const globalTreePath = useTreePath();
 
 	const defaultProps: Partial<SortByProps> = {
 		label: 'Sort By',
 		type: 'dropdown',
+		treePath: globalTreePath,
 	};
 
 	const props = mergeProps('sortBy', globalTheme, defaultProps, properties);
@@ -40,8 +42,6 @@ export const SortBy = observer((properties: SortByProps): JSX.Element => {
 
 	const subProps: SelectSubProps = {
 		Select: {
-			// global theme
-			...globalTheme?.components?.select,
 			// inherited props
 			...defined({
 				disableStyles,
@@ -51,8 +51,6 @@ export const SortBy = observer((properties: SortByProps): JSX.Element => {
 			treePath,
 		},
 		RadioList: {
-			// global theme
-			...globalTheme?.components?.radioList,
 			// inherited props
 			...defined({
 				disableStyles,
@@ -65,8 +63,6 @@ export const SortBy = observer((properties: SortByProps): JSX.Element => {
 			multiSelect: false,
 			hideOptionCheckboxes: true,
 			horizontal: true,
-			// global theme
-			...globalTheme?.components?.list,
 			// inherited props
 			...defined({
 				disableStyles,

@@ -254,13 +254,13 @@ describe('Lets test the Pagination Component optional props', () => {
 						if (option == 'page') {
 							paginationStore.getPages(5).forEach((page) => {
 								expect(valueMock).toHaveBeenCalledWith({
-									paginationStore: paginationStore,
+									pagination: paginationStore,
 									page: page,
 								});
 							});
 						} else {
 							expect(valueMock).toHaveBeenCalledWith({
-								paginationStore: paginationStore,
+								pagination: paginationStore,
 							});
 						}
 					} else {

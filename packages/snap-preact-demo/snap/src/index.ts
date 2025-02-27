@@ -110,6 +110,9 @@ let config: SnapConfig = {
 				Recs: async () => {
 					return (await import('./components/Recommendations/Recs/Recs')).Recs;
 				},
+				Carousel: async () => {
+					return (await import('./components/Recommendations/Recs/Recs')).Recs;
+				},
 				Bundle: async () => {
 					return (await import('./components/Recommendations/Bundles/Bundles')).Bundles;
 				},
@@ -152,6 +155,9 @@ let config: SnapConfig = {
 						restorePosition: {
 							enabled: true,
 						},
+						// infinite: {
+						// 	backfill: 12,
+						// },
 						pagination: {
 							pageSizeOptions: [
 								{

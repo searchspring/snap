@@ -97,6 +97,13 @@ This will invoke a search request to Searchspring's search API and populate the 
 autocompleteController.search();
 ```
 
+## AddToCart
+This will invoke an addToCart event (see below). Takes an array of Products as a parameter. 
+
+```typescript
+autocompleteController.addToCart(products);
+```
+
 ## Events
 ### init
 - Called with `eventData` = { controller }
@@ -128,6 +135,10 @@ autocompleteController.search();
 ### beforeSubmit
 - Called with `eventData` = { controller, input }
 - Invoked prior to submission of autocomplete search
+
+### addToCart
+- Called with `eventData` = { controller, products }
+- Invoked when addToCart method is called
 
 ## Variants
 For variant integration details, see [Variant Integration Docs](https://github.com/searchspring/snap/blob/main/docs/INTEGRATION_VARIANTS.md)

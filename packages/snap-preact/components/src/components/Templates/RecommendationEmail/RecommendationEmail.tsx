@@ -1,6 +1,6 @@
 import { h, Fragment } from 'preact';
 import { jsx } from '@emotion/react';
-import { observer } from 'mobx-react';
+import { observer } from 'mobx-react-lite';
 
 import type { AbstractController, RecommendationController } from '@searchspring/snap-controller';
 import type { Product } from '@searchspring/snap-store-mobx';
@@ -43,7 +43,9 @@ export const RecommendationEmail = observer((properties: RecommendationEmailProp
 					{(() => {
 						if (resultComponent) {
 							const ResultComponent = resultComponent;
-							return <ResultComponent controller={controller as AbstractController} result={result} {...resultProps} email={true} />;
+							return (
+								<ResultComponent controller={controller as AbstractController} result={result} {...resultProps} email={true} treePath={treePath} />
+							);
 						} else {
 							return (
 								<Result

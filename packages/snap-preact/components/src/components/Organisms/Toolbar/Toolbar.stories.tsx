@@ -75,6 +75,17 @@ export default {
 			},
 			control: { type: 'boolean' },
 		},
+		hideMobileSidebar: {
+			defaultValue: false,
+			description: 'prevents the MobileSidebar component from rendering',
+			table: {
+				type: {
+					summary: 'boolean',
+				},
+				defaultValue: { summary: false },
+			},
+			control: { type: 'boolean' },
+		},
 		hidePerPage: {
 			defaultValue: false,
 			description: 'prevents the PerPage component from rendering',
@@ -97,9 +108,60 @@ export default {
 			},
 			control: { type: 'boolean' },
 		},
+		hidePaginationInfo: {
+			defaultValue: false,
+			description: 'prevents the PaginationInfo component from rendering',
+			table: {
+				type: {
+					summary: 'boolean',
+				},
+				defaultValue: { summary: false },
+			},
+			control: { type: 'boolean' },
+		},
 		hidePagination: {
 			defaultValue: false,
 			description: 'prevents the Pagination component from rendering',
+			table: {
+				type: {
+					summary: 'boolean',
+				},
+				defaultValue: { summary: false },
+			},
+			control: { type: 'boolean' },
+		},
+		topSlot: {
+			description: 'a slot for adding additional components into the Toolbar',
+			table: {
+				type: {
+					summary: 'string',
+				},
+			},
+			control: { type: 'text' },
+		},
+		hideTopSlot: {
+			defaultValue: false,
+			description: 'prevents the topSlot component from rendering',
+			table: {
+				type: {
+					summary: 'boolean',
+				},
+				defaultValue: { summary: false },
+			},
+			control: { type: 'boolean' },
+		},
+		bottomSlot: {
+			description: 'a slot for adding additional components into the Toolbar',
+			table: {
+				type: {
+					summary: 'string',
+				},
+			},
+			control: { type: 'text' },
+		},
+		hideBottomSlot: {
+			defaultValue: false,
+			description: 'prevents the bottomSlot component from rendering',
 			table: {
 				type: {
 					summary: 'boolean',

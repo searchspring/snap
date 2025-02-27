@@ -30,7 +30,7 @@ jobs:
           scope: '@searchspring'
 
       - name: Cache node modules
-        uses: actions/cache@v2
+        uses: actions/cache@v4
         env:
           cache-name: cache-node-modules
         with:
@@ -45,7 +45,7 @@ jobs:
       - name: Install packages
         run: npm ci
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.MACHINE_001 }}
+          NODE_AUTH_TOKEN: ${{ secrets.SEARCHSPRING_PUBLISH }}
 
       - name: Build
         run: npm run build

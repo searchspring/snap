@@ -78,6 +78,13 @@ This will invoke a search request to Searchspring's search API and populate the 
 searchController.search();
 ```
 
+## AddToCart
+This will invoke an addToCart event (see below). Takes an array of Products as a parameter. 
+
+```typescript
+searchController.addToCart(products);
+```
+
 ## Search History
 Search queries made by the controller are stored for later usage. This is enabled by default without providing any settings, to disable set the `max` to zero. The `config.settings.history.url` setting should be set when utilizing the history store outside of the search page in order for the URLs to direct users to the correct location. Common usage of the historical terms are on the search listing page or within autocomplete.
 
@@ -191,7 +198,7 @@ By default when using the infinite configuration, additional pages are appended 
 ```jsx
 import { h, Fragment, Component } from 'preact';
 import { useRef } from 'preact/hooks';
-import { observer } from 'mobx-react';
+import { observer } from 'mobx-react-lite';
 import { ControllerProvider, useIntersection, Results } from '@searchspring/snap-preact-components';
 
 @observer
@@ -251,11 +258,14 @@ export class Content extends Component {
 - If an element position data exists, `element` data will include `domRect` (of the element with selector), `href` and `selector`
 - Invoked during final stages of `afterStore` just prior to setting loading state to false
 
+### addToCart
+- Called with `eventData` = { controller, products }
+- Invoked when addToCart method is called
+
 ### track.product.click
 - Called with `eventData` = { controller, event, result, trackEvent } 
 - Always invoked after `track.product.click()` method has been invoked
 - Allows for adding custom product click events (ie. Google Analytics)
-
 
 ## Variants
 For variant integration details, see [Variant Integration Docs](https://github.com/searchspring/snap/blob/main/docs/INTEGRATION_VARIANTS.md)

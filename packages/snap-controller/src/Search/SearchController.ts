@@ -7,7 +7,7 @@ import { getSearchParams } from '../utils/getParams';
 import { ControllerTypes } from '../types';
 
 import type { BeaconEvent } from '@searchspring/snap-tracker';
-import type { SearchStore } from '@searchspring/snap-store-mobx';
+import type { Product, SearchStore } from '@searchspring/snap-store-mobx';
 import type {
 	SearchControllerConfig,
 	AfterSearchObj,
@@ -96,8 +96,7 @@ export class SearchController extends AbstractController {
 				config?.settings?.redirects?.singleResult &&
 				search?.response?.search?.search?.query &&
 				search?.response?.search?.pagination?.totalResults === 1 &&
-				!nonBackgroundFilters?.length &&
-				!(search.controller as SearchController).previousResults.length
+				!nonBackgroundFilters?.length
 			) {
 				if (search?.response?.search?.results?.[0]?.mappings?.core?.url) {
 					window.location.replace(search.response.search.results[0].mappings.core.url);
@@ -124,7 +123,8 @@ export class SearchController extends AbstractController {
 				this.storage.set('scrollMap', {});
 			}
 
-			await this.eventManager.fire('restorePosition', { controller: this, element: elementPosition });
+			// not awaiting this event as it relies on render, and render is blocked by afterStore event
+			this.eventManager.fire('restorePosition', { controller: this, element: elementPosition });
 		});
 
 		// restore position
@@ -143,8 +143,8 @@ export class SearchController extends AbstractController {
 
 				const scrollToPosition = () => {
 					return new Promise<void>(async (resolve) => {
-						const maxCheckTime = 500;
-						const checkTime = 50;
+						const maxCheckTime = 600;
+						const checkTime = 60;
 						const maxScrolls = Math.ceil(maxCheckTime / checkTime);
 						const maxCheckCount = maxScrolls + 2;
 
@@ -365,7 +365,7 @@ export class SearchController extends AbstractController {
 				}
 
 				// infinite backfill is enabled AND we have not yet fetched any results
-				if (this.config.settings?.infinite.backfill && !this.previousResults.length) {
+				if (this.config.settings?.infinite.backfill && !this.store.loaded) {
 					// create requests for all missing pages (using Arrray(page).fill() to populate an array to map)
 					const backfillRequests = Array(params.pagination.page)
 						.fill('backfill')
@@ -412,12 +412,13 @@ export class SearchController extends AbstractController {
 					const infiniteResponse = await this.client.search(params);
 					meta = infiniteResponse.meta;
 					search = infiniteResponse.search;
-
-					// append new results to previous results
-					search.results = [...this.previousResults, ...(search.results || [])];
 				}
 			} else {
 				// standard request (not using infinite scroll)
+
+				// clear previousResults to prevent infinite scroll from using them
+				this.previousResults = [];
+
 				const searchResponse = await this.client.search(params);
 				meta = searchResponse.meta;
 				search = searchResponse.search;
@@ -453,7 +454,7 @@ export class SearchController extends AbstractController {
 
 			// store previous results for infinite usage
 			if (this.config.settings?.infinite) {
-				this.previousResults = JSON.parse(JSON.stringify(search.results));
+				this.previousResults = JSON.parse(JSON.stringify(response.search.results));
 			}
 
 			// update the store
@@ -525,6 +526,17 @@ export class SearchController extends AbstractController {
 		} finally {
 			this.store.loading = false;
 		}
+	};
+
+	addToCart = async (products: Product[]): Promise<void> => {
+		const eventContext = {
+			controller: this,
+			products: products,
+		};
+
+		this.eventManager.fire('addToCart', eventContext);
+
+		// TODO: fire some future beacon event
 	};
 }
 

@@ -7,34 +7,10 @@ const mobileSidebarStyleScript = ({ theme }: MobileSidebarProps) => {
 	const variables = theme?.variables;
 
 	return css({
-		'.ss__mobile-sidebar__header': {
-			display: 'flex',
-			justifyContent: 'space-between',
-			alignItems: 'baseline',
-
-			'& .ss__mobile-sidebar__header__close-button': {
-				cursor: 'pointer',
-			},
-		},
-		'.ss__mobile-sidebar__title': {
-			justifyContent: 'space-between',
-			flexDirection: 'row',
-			display: 'flex',
-
-			'& .ss__icon': {
-				cursor: 'pointer',
-			},
-		},
-
-		'.ss__mobile-sidebar__slideout__button': {
-			cursor: 'pointer',
-		},
-
 		'.ss__mobile-sidebar__footer': {
-			display: 'flex',
 			gap: '6px',
-			justifyContent: 'center',
-			flexDirection: 'row',
+			padding: '10px',
+			borderTop: '1px solid black',
 			'.ss__button': {
 				width: '100%',
 				'.ss__button__content': {
@@ -42,10 +18,47 @@ const mobileSidebarStyleScript = ({ theme }: MobileSidebarProps) => {
 				},
 			},
 		},
+		'.ss__mobile-sidebar__slideout.ss__slideout--active': {
+			width: '80%',
+			maxWidth: '320px',
+		},
+		'.ss__mobile-sidebar__header__close-button': {
+			lineHeight: 1,
+			padding: '5px',
+		},
+
+		[`@media (max-width: ${variables?.breakpoints[2]}px)`]: {
+			'.ss__mobile-sidebar__body': {
+				//83px is the height of the footer & footer
+				height: 'calc(100vh - 100px)',
+				overflow: 'scroll',
+			},
+			'.ss__per-page, .ss__sortby': {
+				display: 'inline-flex',
+				width: '49%',
+				fontSize: '10px',
+
+				'.ss__dropdown': {
+					'.ss__select__select .ss__select__select__option': {
+						padding: '5px',
+					},
+					'.ss__select__dropdown__button': {
+						padding: '0px',
+					},
+				},
+			},
+		},
 	});
 };
 
 // MobileSidebar component props
-export const mobileSidebar: Partial<MobileSidebarProps> = {
-	themeStyleScript: mobileSidebarStyleScript,
+export const mobileSidebar: ThemeComponentProps<MobileSidebarProps> = {
+	default: {
+		themeStyleScript: mobileSidebarStyleScript,
+	},
+	mobile: {
+		hideSortBy: false,
+	},
+	tablet: {},
+	desktop: {},
 };

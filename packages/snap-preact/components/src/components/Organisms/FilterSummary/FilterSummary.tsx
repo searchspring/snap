@@ -2,11 +2,11 @@ import { Fragment, h } from 'preact';
 
 import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
-import { observer } from 'mobx-react';
+import { observer } from 'mobx-react-lite';
 
 import { Filter, FilterProps } from '../../Molecules/Filter';
 import { defined, mergeProps, mergeStyles } from '../../../utilities';
-import { Theme, useTheme, CacheProvider } from '../../../providers';
+import { Theme, useTheme, CacheProvider, useTreePath } from '../../../providers';
 import { ComponentProps, StyleScript } from '../../../types';
 import type { SearchController, AutocompleteController } from '@searchspring/snap-controller';
 import type { Filter as FilterType } from '@searchspring/snap-store-mobx';
@@ -16,9 +16,8 @@ import deepmerge from 'deepmerge';
 
 const defaultStyles: StyleScript<FilterSummaryProps> = () => {
 	return css({
-		'& .ss__filter-summary__filter': {
-			margin: '5px 10px 5px 0',
-		},
+		display: 'flex',
+		gap: '0.5em',
 		'& .ss__filter-summary__title': {
 			fontSize: '1.2em',
 		},
@@ -27,6 +26,7 @@ const defaultStyles: StyleScript<FilterSummaryProps> = () => {
 
 export const FilterSummary = observer((properties: FilterSummaryProps): JSX.Element => {
 	const globalTheme: Theme = useTheme();
+	const globalTreePath = useTreePath();
 
 	const defaultProps: Partial<FilterSummaryProps> = {
 		title: 'Current Filters',
@@ -36,6 +36,7 @@ export const FilterSummary = observer((properties: FilterSummaryProps): JSX.Elem
 		filters: properties.controller?.store?.filters,
 		onClearAllClick: () => properties.controller?.urlManager.remove('filter').remove('page').go(),
 		separator: ':',
+		treePath: globalTreePath,
 	};
 
 	const props = mergeProps('filterSummary', globalTheme, defaultProps, properties);
@@ -62,8 +63,6 @@ export const FilterSummary = observer((properties: FilterSummaryProps): JSX.Elem
 			name: 'filter',
 			// default props
 			className: 'ss__filter-summary__filter',
-			// global theme
-			...globalTheme?.components?.filter,
 			// inherited props
 			...defined({
 				disableStyles,

@@ -1,9 +1,9 @@
 import { h, Fragment } from 'preact';
-import { observer } from 'mobx-react';
+import { observer } from 'mobx-react-lite';
 import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
-import { Theme, useTheme, CacheProvider } from '../../../providers';
-import { defined, mergeStyles } from '../../../utilities';
+import { Theme, useTheme, CacheProvider, useTreePath } from '../../../providers';
+import { defined, mergeProps, mergeStyles } from '../../../utilities';
 import { ComponentProps, StyleScript } from '../../../types';
 import type { VariantSelection as VariantSelectionType } from '@searchspring/snap-store-mobx';
 import { List, ListProps } from '../List';
@@ -60,16 +60,15 @@ const defaultStyles: StyleScript<VariantSelectionProps> = () => {
 
 export const VariantSelection = observer((properties: VariantSelectionProps): JSX.Element => {
 	const globalTheme: Theme = useTheme();
+	const globalTreePath = useTreePath();
 
-	const props: VariantSelectionProps = {
+	const defaultProps: Partial<VariantSelectionProps> = {
 		// default props
 		type: 'dropdown',
-		// global theme
-		...globalTheme?.components?.variantSelection,
-		// props
-		...properties,
-		...properties.theme?.components?.variantSelection,
+		treePath: globalTreePath,
 	};
+
+	const props = mergeProps('variantSelection', globalTheme, defaultProps, properties);
 
 	const { type, selection, disableStyles, className, treePath } = props;
 
@@ -78,8 +77,6 @@ export const VariantSelection = observer((properties: VariantSelectionProps): JS
 			className: 'ss__variant-selection__dropdown',
 			// TODO: label doesnt exist on dropdown?
 			// label: selection.label || selection.field,
-			// global theme
-			...globalTheme?.components?.dropdown,
 			// inherited props
 			...defined({
 				disableStyles,
@@ -92,8 +89,6 @@ export const VariantSelection = observer((properties: VariantSelectionProps): JS
 			// default props
 			className: 'ss__variant-selection__icon',
 			size: '12px',
-			// global theme
-			...globalTheme?.components?.icon,
 			// inherited props
 			...defined({
 				disableStyles,
@@ -109,9 +104,6 @@ export const VariantSelection = observer((properties: VariantSelectionProps): JS
 			hideOptionCheckboxes: true,
 			onSelect: (e, option) => selection.select(option.value),
 			selected: selection.selected,
-
-			// global theme
-			...globalTheme?.components?.list,
 			// inherited props
 			...defined({
 				disableStyles,
@@ -124,8 +116,6 @@ export const VariantSelection = observer((properties: VariantSelectionProps): JS
 			className: 'ss__variant-selection__swatches',
 			onSelect: (e, option) => selection.select(option.value),
 			selected: selection.selected,
-			// global theme
-			...globalTheme?.components?.swatches,
 			// inherited props
 			...defined({
 				disableStyles,
@@ -189,7 +179,7 @@ export const VariantSelection = observer((properties: VariantSelectionProps): JS
 															<Fragment />
 														)}
 													</div>
-													<Icon icon={open ? 'angle-up' : 'angle-down'} {...subProps.icon} />
+													<Icon icon={open ? 'angle-up' : 'angle-down'} {...subProps.icon} treePath={props.treePath} />
 												</Fragment>
 											);
 										};

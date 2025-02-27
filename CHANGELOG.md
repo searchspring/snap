@@ -194,6 +194,50 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 - **snap-layout/theming:** work towards theming a snap layout using styleScripts ([b6be05e](https://github.com/searchspring/snap-1.0/commit/b6be05eee8fc0a06c9e853a591aa0d380158fc0c))
 - support template themes in snap-preact ([df9d905](https://github.com/searchspring/snap-1.0/commit/df9d9057a1554d7eb62830002c3db990e0f8f272))
 - theme reactivity initial interface ([c017aad](https://github.com/searchspring/snap-1.0/commit/c017aadd4add7591bd98fcfbdb8db8985bf2d498))
+## [0.63.5](https://github.com/searchspring/snap/compare/v0.63.4...v0.63.5) (2025-02-21)
+
+### Bug Fixes
+
+- **preact:** actually removing use of proxies ([662ad93](https://github.com/searchspring/snap/commit/662ad93082be73a89a6d1fa3bf93e37d7c2b6c01))
+
+## [0.63.4](https://github.com/searchspring/snap/compare/v0.63.3...v0.63.4) (2025-02-20)
+
+### Bug Fixes
+
+- **preact:** reverting mobx proxy change - affected too many sites using custom code ([708adb0](https://github.com/searchspring/snap/commit/708adb0055d63db866da4829effa3efa760f4a25))
+
+## [0.63.3](https://github.com/searchspring/snap/compare/v0.63.2...v0.63.3) (2025-02-14)
+
+### Reverts
+
+- **controller/search:** reverting change for infinite scroll and search due to breaking change ([e27a55d](https://github.com/searchspring/snap/commit/e27a55d8e84e4568b703844fb7a783a8f52d488d))
+
+## [0.63.2](https://github.com/searchspring/snap/compare/v0.63.1...v0.63.2) (2025-02-10)
+
+### Bug Fixes
+
+- **autocompletecontroller.test:** bugfix for autocomplete singleResult redirects w/ inline banners ([dcf8133](https://github.com/searchspring/snap/commit/dcf8133b0de3cfa889f427b6b0dfcf2854696b67))
+- **bundleselector.tsx:** change checkbox size from number to px ([fc071fc](https://github.com/searchspring/snap/commit/fc071fc1d7ab10269802e0489185f0b0fb794057))
+- **checkbox.tsx:** small refactor to checkbox icon size translating ([d5192bc](https://github.com/searchspring/snap/commit/d5192bc82b12ef4e0dc0e190d33b3cab4ed273f3))
+
+## [0.63.1](https://github.com/searchspring/snap/compare/v0.63.0...v0.63.1) (2025-01-09)
+
+### Bug Fixes
+
+- **store-mobx/recommendationstore:** adjusting config so that `searchOnPageShow` is optional ([1cd4c7c](https://github.com/searchspring/snap/commit/1cd4c7c275b2749d51049f06126c31b2226b94a6))
+- **store-mobx/searchresultstore:** fixing issue with inline banners ([836d916](https://github.com/searchspring/snap/commit/836d9162f6679934621df01ac5c8b16f70a995eb))
+- **toolbox/getcontext:** adding resiliency to getContext to prevent keyword usage errors ([b3cf7ce](https://github.com/searchspring/snap/commit/b3cf7ce6ba51e6d35b55d466d5fcc0a3367b6976))
+
+# [0.63.0](https://github.com/searchspring/snap/compare/v0.62.0...v0.63.0) (2024-12-19)
+
+### Bug Fixes
+
+- **searchresponse.ts:** bugfix in transformSearchResponse transforming badge fields ([4231094](https://github.com/searchspring/snap/commit/4231094a19932fd920f107286f40a61281d27944))
+
+### Features
+
+- **configuremobx:** auto determine if mobx should useProxies based on webpack build type ([dbef10a](https://github.com/searchspring/snap/commit/dbef10a8727b21d638509b2c0799712b6c1d71e6))
+- **preact:** renaming the branch override parameter to `searchspring-preview` ([eee80a0](https://github.com/searchspring/snap/commit/eee80a02608cf4947a562134cf7f5633b07b8624))
 
 # [0.62.0](https://github.com/searchspring/snap/compare/v0.61.5...v0.62.0) (2024-12-10)
 

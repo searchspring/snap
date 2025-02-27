@@ -9,7 +9,7 @@ We'll want to create a `ControllerProvider` such that any subcomponents can have
 
 ```jsx
 import { h, Fragment, Component } from 'preact';
-import { observer } from 'mobx-react';
+import { observer } from 'mobx-react-lite';
 import { ControllerProvider } from '@searchspring/snap-preact-components';
 import { Results, NoResults } from './Results';
 
@@ -35,7 +35,7 @@ Then from any subcomponent such as the `Result` component in this example, we'll
 
 ```jsx
 import { h, Fragment, Component } from 'preact';
-import { observer } from 'mobx-react';
+import { observer } from 'mobx-react-lite';
 import { withController, InlineBanner, Result } from '@searchspring/snap-preact-components';
 
 @withController
@@ -71,7 +71,7 @@ If you are creating functional components you would use this as a function wrapp
 
 ```jsx
 import { h, Fragment } from 'preact';
-import { observer } from 'mobx-react';
+import { observer } from 'mobx-react-lite';
 import { withController, InlineBanner, Result } from '@searchspring/snap-preact-components';
 
 export const Results = observer(withController((props) => {

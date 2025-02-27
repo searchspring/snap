@@ -1,10 +1,10 @@
 import { h, Fragment } from 'preact';
 
-import { observer } from 'mobx-react';
+import { observer } from 'mobx-react-lite';
 import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
 
-import { Theme, useTheme, CacheProvider } from '../../../providers';
+import { Theme, useTheme, CacheProvider, useTreePath } from '../../../providers';
 import { defined, mergeProps, mergeStyles } from '../../../utilities';
 import { ComponentProps, StyleScript } from '../../../types';
 import { Icon, IconProps } from '../../Atoms/Icon';
@@ -31,8 +31,10 @@ const defaultStyles: StyleScript<PaginationProps> = () => {
 
 export const Pagination = observer((properties: PaginationProps): JSX.Element => {
 	const globalTheme: Theme = useTheme();
+	const globalTreePath = useTreePath();
 	const defaultProps: Partial<PaginationProps> = {
 		pages: 5,
+		treePath: globalTreePath,
 	};
 
 	const props = mergeProps('pagination', globalTheme, defaultProps, properties);
@@ -62,8 +64,6 @@ export const Pagination = observer((properties: PaginationProps): JSX.Element =>
 			// default props
 			className: 'ss__pagination__icon',
 			size: '10px',
-			// global theme
-			...globalTheme?.components?.icon,
 			// inherited props
 			...defined({
 				disableStyles,
@@ -109,7 +109,7 @@ export const Pagination = observer((properties: PaginationProps): JSX.Element =>
 	//deep merge with props.lang
 	const lang = deepmerge(defaultLang, props.lang || {});
 	const mergedLang = useLang(lang as any, {
-		paginationStore: store,
+		pagination: store,
 	});
 
 	return pageNumbers && pageNumbers.length > 1 && store?.totalResults ? (
@@ -152,7 +152,7 @@ export const Pagination = observer((properties: PaginationProps): JSX.Element =>
 							//deep merge with props.lang
 							const pagelang = deepmerge(defaultPageLang, props.lang || {});
 							const mergedPageLang = useLang(pagelang as any, {
-								paginationStore: store,
+								pagination: store,
 								page: page,
 							});
 
@@ -221,19 +221,19 @@ export interface PaginationProps extends ComponentProps {
 
 export interface PaginationLang {
 	previous: Lang<{
-		paginationStore: SearchPaginationStore;
+		pagination: SearchPaginationStore;
 	}>;
 	next: Lang<{
-		paginationStore: SearchPaginationStore;
+		pagination: SearchPaginationStore;
 	}>;
 	first: Lang<{
-		paginationStore: SearchPaginationStore;
+		pagination: SearchPaginationStore;
 	}>;
 	last: Lang<{
-		paginationStore: SearchPaginationStore;
+		pagination: SearchPaginationStore;
 	}>;
 	page: Lang<{
-		paginationStore: SearchPaginationStore;
+		pagination: SearchPaginationStore;
 		page: Page;
 	}>;
 }

@@ -4,11 +4,11 @@ import { useState } from 'preact/hooks';
 import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
 
-import { Theme, useTheme, CacheProvider } from '../../../providers';
+import { Theme, useTheme, CacheProvider, useTreePath } from '../../../providers';
 import { ComponentProps, SwatchOption, BreakpointsProps, StyleScript } from '../../../types';
 import { useA11y, useDisplaySettings } from '../../../hooks';
 import { Carousel, CarouselProps } from '../Carousel';
-import { defined, mergeStyles } from '../../../utilities';
+import { defined, mergeProps, mergeStyles } from '../../../utilities';
 import { Grid, GridProps } from '../Grid';
 import { ImageProps, Image } from '../../Atoms/Image';
 import deepmerge from 'deepmerge';
@@ -62,6 +62,7 @@ const defaultStyles: StyleScript<SwatchesProps> = ({ theme }) => {
 
 export function Swatches(properties: SwatchesProps): JSX.Element {
 	const globalTheme: Theme = useTheme();
+	const globalTreePath = useTreePath();
 
 	const defaultCarouselBreakpoints = {
 		0: {
@@ -87,16 +88,14 @@ export function Swatches(properties: SwatchesProps): JSX.Element {
 		},
 	};
 
-	let props: SwatchesProps = {
+	const defaultProps: Partial<SwatchesProps> = {
 		// default props
 		type: 'carousel',
 		hideLabels: true,
-		// global theme
-		...globalTheme?.components?.swatches,
-		// props
-		...properties,
-		...properties.theme?.components?.swatches,
+		treePath: globalTreePath,
 	};
+
+	let props = mergeProps('swatches', globalTheme, defaultProps, properties);
 
 	const breakpoints = props.breakpoints || (props.type == 'carousel' ? defaultCarouselBreakpoints : {});
 
@@ -118,8 +117,6 @@ export function Swatches(properties: SwatchesProps): JSX.Element {
 			className: 'ss__swatches__carousel',
 			loop: false,
 			...carousel,
-			// global theme
-			...globalTheme?.components?.carousel,
 			// inherited props
 			...defined({
 				breakpoints,
@@ -138,8 +135,6 @@ export function Swatches(properties: SwatchesProps): JSX.Element {
 			rows: 1,
 			columns: 6,
 			...grid,
-			// global theme
-			...globalTheme?.components?.grid,
 			// inherited props
 			...defined({
 				disableStyles,
@@ -151,8 +146,6 @@ export function Swatches(properties: SwatchesProps): JSX.Element {
 		image: {
 			// default props
 			className: 'ss__swatches__image',
-			// global theme
-			...globalTheme?.components?.image,
 			// inherited props
 			...defined({
 				disableStyles,

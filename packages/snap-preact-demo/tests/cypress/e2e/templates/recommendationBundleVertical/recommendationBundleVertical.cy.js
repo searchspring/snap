@@ -35,16 +35,33 @@ describe('BundledRecommendations', () => {
 			cy.wrap(config).its('url').should('have.length.at.least', 1);
 			cy.on('window:before:load', (win) => {
 				win.mergeSnapConfig = {
+					themes: {
+						custom: {
+							extends: 'bocachica',
+							overrides: {
+								components: {
+									recommendationBundle: {
+										lazyRender: {
+											enabled: false,
+										},
+										speed: 0,
+									},
+								},
+							},
+						},
+					},
 					recommendation: {
 						bundle: {
 							Bundle: {
 								component: 'RecommendationBundleVertical',
+								theme: 'custom',
 							},
 						},
 					},
 				};
 			});
 			cy.visit(config.url);
+			cy.scrollTo('bottom');
 			console.log(Cypress.browser);
 		});
 
@@ -104,7 +121,7 @@ describe('BundledRecommendations', () => {
 			//check it is responsive to cartstore changes.
 			cy.get(`${config?.selectors?.recommendation.seed} .ss__recommendation-bundle__wrapper__selector__result-wrapper__checkbox`)
 				.should('exist')
-				.click()
+				.click({ force: true })
 				.then(() => {
 					cy.snapController(config?.selectors?.recommendation.controller).then(({ store }) => {
 						//title
@@ -132,7 +149,7 @@ describe('BundledRecommendations', () => {
 					let url = doc.querySelector(`${config?.selectors?.recommendation.result} a`).attributes?.href?.value;
 					cy.get(`${config?.selectors?.recommendation.result} a`)
 						.first()
-						.click({ multiple: true })
+						.click({ force: true, multiple: true })
 						.then(() => {
 							cy.location('pathname').should('include', url);
 						});
@@ -146,11 +163,27 @@ describe('BundledRecommendations', () => {
 
 				cy.on('window:before:load', (win) => {
 					win.mergeSnapConfig = {
+						themes: {
+							custom: {
+								extends: 'bocachica',
+								overrides: {
+									components: {
+										recommendationBundle: {
+											lazyRender: {
+												enabled: false,
+											},
+											speed: 0,
+										},
+									},
+								},
+							},
+						},
 						recommendation: {
 							bundle: {
 								Bundle: {
 									component: 'RecommendationBundleVertical',
 									resultComponent: 'CustomResult',
+									theme: 'custom',
 								},
 							},
 						},
@@ -158,6 +191,7 @@ describe('BundledRecommendations', () => {
 				});
 
 				cy.visit(config.url);
+				cy.scrollTo('bottom');
 				console.log(Cypress.browser);
 			});
 

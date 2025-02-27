@@ -12,6 +12,7 @@ import type { ImageProps } from '../components/Atoms/Image';
 import type { LoadingBarProps } from '../components/Atoms/Loading';
 import type { BannerNames, BannerProps, InlineBannerProps } from '../components/Atoms/Merchandising';
 import type { OverlayProps } from '../components/Atoms/Overlay';
+import type { PaginationInfoProps } from '../components/Atoms/PaginationInfo';
 import type { PriceNames, PriceProps } from '../components/Atoms/Price';
 import type { SkeletonProps } from '../components/Atoms/Skeleton';
 // import type { ToggleProps } from '../components/Atoms/Toggle';
@@ -71,6 +72,13 @@ import type { RecommendationGridProps } from '../components/Templates/Recommenda
 import type { RecommendationEmailProps } from '../components/Templates/RecommendationEmail';
 import type { SearchProps } from '../components/Templates/Search';
 import type { SearchHorizontalProps } from '../components/Templates/SearchHorizontal';
+
+export type ThemeComponentProps<ComponentProps> = {
+	default: Partial<ComponentProps>;
+	mobile: Partial<ComponentProps>;
+	tablet: Partial<ComponentProps>;
+	desktop: Partial<ComponentProps>;
+};
 
 type NamedThemeComponentSelectors<ComponentType extends string, ComponentNames extends string> =
 	| ComponentType
@@ -193,6 +201,7 @@ export type ThemeComponentOverrides =
 	{ [K in NamedThemeComponentSelectors<'banner', BannerNames>]?: Partial<BannerProps> } &
 	{ [K in UnNamedThemeComponentSelectors<'inlineBanner'>]?: Partial<InlineBannerProps> } &
 	{ [K in UnNamedThemeComponentSelectors<'overlay'>]?: Partial<OverlayProps> } &
+	{ [K in UnNamedThemeComponentSelectors<'paginationInfo'>]?: Partial<PaginationInfoProps> } &
 	{ [K in NamedThemeComponentSelectors<'price', PriceNames>]?: Partial<PriceProps> } &
 	{ [K in UnNamedThemeComponentSelectors<'skeleton'>]?: Partial<SkeletonProps> } &
 	// { [K in UnNamedThemeComponentSelectors<'toggle'>]?: Partial<ToggleProps> } &
@@ -270,6 +279,7 @@ export type ThemeComponentRestrictedOverrides =
 	{ [K in NamedThemeComponentSelectors<'banner', BannerNames>]?: RestrictedComponentProps<BannerProps> } &
 	{ [K in UnNamedThemeComponentSelectors<'inlineBanner'>]?: RestrictedComponentProps<InlineBannerProps> } &
 	{ [K in UnNamedThemeComponentSelectors<'overlay'>]?: RestrictedComponentProps<OverlayProps> } &
+	{ [K in UnNamedThemeComponentSelectors<'paginationInfo'>]?: RestrictedComponentProps<PaginationInfoProps> } &
 	{ [K in NamedThemeComponentSelectors<'price', PriceNames>]?: RestrictedComponentProps<PriceProps> } &
 	{ [K in UnNamedThemeComponentSelectors<'skeleton'>]?: RestrictedComponentProps<SkeletonProps> } &
 	// { [K in UnNamedThemeComponentSelectors<'toggle'>]?: RestrictedComponentProps<ToggleProps> } &

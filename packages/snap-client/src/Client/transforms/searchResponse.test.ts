@@ -420,6 +420,52 @@ describe('search response transformer result', () => {
 		// @ts-ignore
 		expect(transformSearchResponse.results({}).results instanceof Array).toEqual(true);
 	});
+
+	it('search response search transforms badges', () => {
+		const resultWithBadgeFeature = {
+			...mockSingleResult,
+			badges: [
+				{
+					tag: 'qa-badge-2910',
+					value: 'QA Badge 2910',
+				},
+				{
+					tag: 'qa-off-29',
+					value: 'QA Off 29',
+				},
+				{
+					tag: 'gift-guide',
+					value: 'Gift Guide',
+				},
+			],
+		};
+		const resultWithRandomBadgeField = {
+			...mockSingleResult,
+			badges: ['1', '2', '3'],
+		};
+		const resultWithRandomBadgeField2 = {
+			...mockSingleResult,
+			badges: {
+				name: '1',
+				name2: '2',
+				name3: '3',
+			},
+		};
+
+		const result = transformSearchResponse.result(resultWithBadgeFeature);
+		expect(result.attributes?.badges).toBeUndefined();
+		expect(result.badges).toEqual(resultWithBadgeFeature.badges);
+
+		// @ts-ignore - typings are wrong intentionally here
+		const result2 = transformSearchResponse.result(resultWithRandomBadgeField);
+		expect(result2.attributes?.badges).toEqual(resultWithRandomBadgeField.badges);
+		expect(result2.badges).toEqual([]);
+
+		// @ts-ignore - typings are wrong intentionally here
+		const result3 = transformSearchResponse.result(resultWithRandomBadgeField2);
+		expect(result3.badges).toEqual([]);
+		expect(result3.attributes?.badges).toEqual('[object Object]');
+	});
 });
 
 describe('search response facet transformer', () => {

@@ -4,7 +4,7 @@ import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
 import { observer } from 'mobx-react-lite';
 
-import { Theme, useTheme, CacheProvider } from '../../../providers';
+import { Theme, useTheme, CacheProvider, useTreePath } from '../../../providers';
 import { ComponentProps, StyleScript } from '../../../types';
 import { Slideout, SlideoutProps } from '../../Molecules/Slideout';
 import { defined, mergeProps, mergeStyles } from '../../../utilities';
@@ -52,6 +52,7 @@ const defaultStyles: StyleScript<MobileSidebarProps> = ({}) => {
 
 export const MobileSidebar = observer((properties: MobileSidebarProps): JSX.Element => {
 	const globalTheme: Theme = useTheme();
+	const globalTreePath = useTreePath();
 
 	const defaultProps: Partial<MobileSidebarProps> = {
 		openButtonText: 'Filters',
@@ -60,6 +61,7 @@ export const MobileSidebar = observer((properties: MobileSidebarProps): JSX.Elem
 		titleText: 'Filter Options',
 		displayAt: '',
 		closeButtonIcon: 'close-thin',
+		treePath: globalTreePath,
 	};
 
 	const props = mergeProps('mobileSidebar', globalTheme, defaultProps, properties);
@@ -102,8 +104,6 @@ export const MobileSidebar = observer((properties: MobileSidebarProps): JSX.Elem
 			// default props
 			controller,
 			displayAt: (displayAt && `(max-width: ${displayAt})`) || '',
-			// global theme
-			...globalTheme?.components?.slideout,
 			// inherited props
 			...defined({
 				disableStyles,
@@ -114,8 +114,6 @@ export const MobileSidebar = observer((properties: MobileSidebarProps): JSX.Elem
 		},
 		button: {
 			// default props
-			// global theme
-			...globalTheme?.components?.button,
 			// inherited props
 			...defined({
 				disableStyles,
@@ -131,8 +129,6 @@ export const MobileSidebar = observer((properties: MobileSidebarProps): JSX.Elem
 			hidePerPage: hidePerPage,
 			hideSortBy: hideSortBy,
 			hideFilterSummary: hideFilterSummary,
-			// global theme
-			...globalTheme?.components?.sidebar,
 			// inherited props
 			...defined({
 				disableStyles,

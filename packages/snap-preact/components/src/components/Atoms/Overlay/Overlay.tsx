@@ -3,7 +3,7 @@ import { h } from 'preact';
 import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
 
-import { Theme, useTheme, CacheProvider } from '../../../providers';
+import { Theme, useTheme, CacheProvider, useTreePath } from '../../../providers';
 import { ComponentProps, StyleScript } from '../../../types';
 import { mergeProps, mergeStyles } from '../../../utilities';
 import { useA11y } from '../../../hooks';
@@ -27,9 +27,12 @@ const defaultStyles: StyleScript<OverlayProps> = ({ transitionSpeed, color }) =>
 
 export function Overlay(properties: OverlayProps): JSX.Element {
 	const globalTheme: Theme = useTheme();
+	const globalTreePath = useTreePath();
+
 	const defaultProps: Partial<OverlayProps> = {
 		color: 'rgba(0,0,0,0.8)',
 		transitionSpeed: '0.25s',
+		treePath: globalTreePath,
 	};
 
 	const props = mergeProps('overlay', globalTheme, defaultProps, properties);

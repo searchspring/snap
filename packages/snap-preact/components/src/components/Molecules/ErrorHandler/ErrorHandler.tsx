@@ -2,13 +2,13 @@ import { h, Fragment } from 'preact';
 
 import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
-import { observer } from 'mobx-react';
+import { observer } from 'mobx-react-lite';
 
 import { Icon, IconProps } from '../../Atoms/Icon/Icon';
 import { Button, ButtonProps } from '../../Atoms/Button/Button';
 import { defined, Colour, mergeProps, mergeStyles } from '../../../utilities';
 
-import { Theme, useTheme, CacheProvider } from '../../../providers';
+import { Theme, useTheme, CacheProvider, useTreePath } from '../../../providers';
 import { ComponentProps, StyleScript } from '../../../types';
 import { ErrorType } from '@searchspring/snap-store-mobx';
 
@@ -120,7 +120,11 @@ const defaultStyles: StyleScript<ErrorHandlerProps> = ({ theme }) => {
 
 export const ErrorHandler = observer((properties: ErrorHandlerProps): JSX.Element => {
 	const globalTheme: Theme = useTheme();
-	const defaultProps: Partial<ErrorHandlerProps> = {};
+	const globalTreePath = useTreePath();
+
+	const defaultProps: Partial<ErrorHandlerProps> = {
+		treePath: globalTreePath,
+	};
 
 	const props = mergeProps('errorHandler', globalTheme, defaultProps, properties);
 
@@ -131,8 +135,6 @@ export const ErrorHandler = observer((properties: ErrorHandlerProps): JSX.Elemen
 			// default props
 			size: '18px',
 			className: 'ss__error-handler__icon',
-			// global theme
-			...globalTheme?.components?.icon,
 			// inherited props
 			...defined({
 				disableStyles,
@@ -145,8 +147,6 @@ export const ErrorHandler = observer((properties: ErrorHandlerProps): JSX.Elemen
 			// default props
 			className: 'ss__error-handler__button',
 			icon: 'rotate-right',
-			// global theme
-			...globalTheme?.components?.button,
 			// inherited props
 			...defined({
 				disableStyles,

@@ -6,7 +6,7 @@ import classnames from 'classnames';
 import deepmerge from 'deepmerge';
 import { filters } from '@searchspring/snap-toolbox';
 
-import { Theme, useTheme, CacheProvider } from '../../../providers';
+import { Theme, useTheme, CacheProvider, useTreePath } from '../../../providers';
 import { ComponentProps, ListOption, StyleScript } from '../../../types';
 import { defined, mergeProps, mergeStyles } from '../../../utilities';
 import { Checkbox, CheckboxProps } from '../Checkbox';
@@ -63,13 +63,10 @@ const defaultStyles: StyleScript<ListProps> = ({ horizontal }) => {
 
 export function List(properties: ListProps): JSX.Element {
 	const globalTheme: Theme = useTheme();
-	const defaultProps: ListProps = {
-		// default props
-		// global theme
-		...globalTheme?.components?.list,
-		// props
-		...properties,
-		...properties.theme?.components?.list,
+	const globalTreePath = useTreePath();
+
+	const defaultProps: Partial<ListProps> = {
+		treePath: globalTreePath,
 	};
 
 	const props = mergeProps('list', globalTheme, defaultProps, properties);

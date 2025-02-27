@@ -8,6 +8,7 @@ import type {
 	VariantConfig,
 	AutocompleteStoreConfig,
 	RecommendationStoreConfig,
+	StoreConfigs,
 } from '../../types';
 import type {
 	SearchResponseModelResult,
@@ -16,6 +17,7 @@ import type {
 	SearchResponseModelMerchandisingContentConfig,
 	SearchResponseModel,
 	MetaResponseModel,
+	SearchResponseModelPagination,
 } from '@searchspring/snapi-types';
 
 const VARIANT_ATTRIBUTE = 'ss-variant-option';
@@ -26,9 +28,13 @@ type SearchResultStoreConfig = {
 	state: {
 		loaded: boolean;
 	};
+	stores?: {
+		previousResults?: SearchResultStore;
+	};
 	data: {
 		search: SearchResponseModel;
 		meta: MetaResponseModel;
+		previousSearch?: SearchResponseModel;
 	};
 };
 
@@ -38,9 +44,11 @@ export class SearchResultStore extends Array<Product | Banner> {
 	}
 
 	constructor(params: SearchResultStoreConfig) {
-		const { config, data, state } = params || {};
-		const { search, meta } = data || {};
+		const { config, data, state, stores } = params || {};
+		const { search, meta, previousSearch } = data || {};
 		const { results, merchandising, pagination } = search || {};
+		const { previousResults } = stores || {};
+
 		const { loaded } = state || {};
 
 		let resultsArr: (Product | Banner)[] = (results || []).map((result) => {
@@ -83,7 +91,21 @@ export class SearchResultStore extends Array<Product | Banner> {
 			}
 		}
 
-		if (merchandising?.content?.inline) {
+		// only when infinite is enabled
+		if ((config as SearchStoreConfig)?.settings?.infinite && previousResults) {
+			// logic to determine when to concatenate previous results
+			// this logic is not bullet proof, but it is highly unlikely that the current and previous pagination data would ever be sequential unless paginating
+
+			// TODO: implement "load previous" with a limit to how many total products can be displayed
+			// the limit would be enforced by unloading (trimming) results based on the direction of the new search (previous page, next page)
+			if (pagination?.page && previousSearch?.pagination?.page && pagination.page == previousSearch.pagination.page + 1) {
+				resultsArr = (previousResults || []).concat(resultsArr);
+			}
+		}
+
+		// add banners to results - banner data includes ALL banners within the entire search results (even if not on the current page)
+		if (pagination && merchandising?.content?.inline) {
+			// ensure banners are sorted by index
 			const banners = merchandising.content.inline
 				.sort(function (a, b) {
 					return a.config!.position!.index! - b.config!.position!.index!;
@@ -94,10 +116,11 @@ export class SearchResultStore extends Array<Product | Banner> {
 					});
 				});
 
-			if (banners && pagination?.totalResults) {
-				resultsArr = addBannersToResults(params, resultsArr, banners);
+			if (banners && pagination.totalResults) {
+				resultsArr = addBannersToResults(config, resultsArr as Product[], banners, pagination as Required<SearchResponseModelPagination>);
 			}
 		}
+
 		super(...resultsArr);
 	}
 }
@@ -229,20 +252,11 @@ export class Product {
 		makeObservable(this, {
 			id: observable,
 			display: computed,
+			mappings: observable,
 			attributes: observable,
 			custom: observable,
 			quantity: observable,
 		});
-
-		// must set all subo
-		const coreObservables = Object.keys(this.mappings.core!).reduce((map, key) => {
-			return {
-				...map,
-				[key]: observable,
-			};
-		}, {});
-
-		makeObservable(this.mappings.core!, coreObservables);
 	}
 
 	public get display(): ProductMinimal {
@@ -731,36 +745,52 @@ class Child {
 	}
 }
 
-function addBannersToResults(params: SearchResultStoreConfig, results: (Product | Banner)[], banners: Banner[]) {
-	const { config, data } = params || {};
-	const { search } = data || {};
-	const { pagination } = search || {};
+function addBannersToResults(
+	config: StoreConfigs,
+	results: (Product | Banner)[],
+	allBanners: Banner[],
+	paginationData: Required<SearchResponseModelPagination>
+) {
+	const bannersAndResults: (Product | Banner)[] = [...results];
+	let paginationBegin = paginationData.pageSize * (paginationData.page - 1) + 1;
+	let paginationEnd = paginationData.pageSize * paginationData.page;
+	// if infinite scroll is enabled, we need to adjust the begin position
+	if ((config as SearchStoreConfig)?.settings?.infinite) paginationBegin = 1;
 
-	const productCount = results.length;
-	let minIndex = pagination?.pageSize! * (pagination?.page! - 1);
-	const maxIndex = minIndex + pagination?.pageSize!;
+	// if the end of the page is greater than the total results, adjust the end
+	if (paginationData.pageSize * paginationData.page > paginationData.totalResults) paginationEnd = paginationData.totalResults;
 
-	if ((config as SearchStoreConfig)?.settings?.infinite) {
-		minIndex = 0;
-	}
+	// banners that have not allready been injected
+	const bannersNotInResults = allBanners.filter((banner) => !bannersAndResults.some((result) => result.id == banner.id));
 
-	banners
-		.reduce((adding, banner) => {
-			const resultCount = productCount + adding.length;
+	// banners that have an index position within the current set of results
+	const bannersToInject = bannersNotInResults.filter((banner) => {
+		// find banners that are within the current pagination set
+		const index = banner.config.position!.index!;
+		return index >= paginationBegin - 1 && index <= paginationEnd - 1;
+	});
 
-			if (banner.config.position!.index! >= minIndex && (banner.config.position!.index! < maxIndex || resultCount < pagination?.pageSize!)) {
-				adding.push(banner);
-			}
+	// banners can have an index greater than the total results, these should be injected at the end
+	const bannersToInjectAtEnd = bannersNotInResults.filter((banner) => {
+		const index = banner.config.position!.index!;
+		return index > paginationData.totalResults;
+	});
 
-			return adding;
-		}, [] as Banner[])
-		.forEach((banner) => {
-			const adjustedIndex = banner.config.position!.index! - minIndex;
+	// inject banners that have index position within current set into the results
+	bannersToInject.forEach((banner) => {
+		const adjustedIndex = banner.config.position!.index! - (paginationBegin - 1);
+		bannersAndResults.splice(adjustedIndex, 0, banner);
+	});
 
-			results.splice(adjustedIndex, 0, banner);
-		});
+	// inject banners at the end that fall within the current pagination set (but ensure there is room based on the begin and end indexes)
+	bannersToInjectAtEnd.forEach((banner, index) => {
+		const resultIndex = paginationData.totalResults - (bannersToInjectAtEnd.length - index);
+		if (resultIndex >= paginationBegin - 1 && resultIndex <= paginationEnd - 1) {
+			bannersAndResults.splice(resultIndex, 0, banner);
+		}
+	});
 
-	return results;
+	return bannersAndResults;
 }
 
 function variantOptionClick(elem: Element, variantConfig: VariantConfig, results: (Product | Banner)[]) {

@@ -1,7 +1,7 @@
 import { h, Fragment } from 'preact';
 import { useEffect } from 'preact/hooks';
 
-import { observer } from 'mobx-react';
+import { observer } from 'mobx-react-lite';
 import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
 import deepmerge from 'deepmerge';
@@ -773,10 +773,10 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 								{!hideBanners ? <Banner {...subProps.banner} content={merchandising.content} type={ContentType.FOOTER} name={'footer'} /> : null}
 
 								{/* {RecommendationTemplateComponent && recsController?.store?.loaded && (
-									<div className="ss__autocomplete__content__recommendations">
-										<RecommendationTemplateComponent controller={recsController} />
-									</div>
-								)} */}
+										<div className="ss__autocomplete__content__recommendations">
+											<RecommendationTemplateComponent controller={recsController} />
+										</div>
+									)} */}
 
 								{!hideLink ? (
 									linkSlot ? (

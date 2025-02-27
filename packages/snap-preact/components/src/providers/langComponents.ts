@@ -12,6 +12,7 @@ import type { ButtonLang } from '../components/Atoms/Button';
 // import type { LoadingBarLang } from '../components/Atoms/Loading';
 // import type { BannerLang, InlineBannerLang } from '../components/Atoms/Merchandising';
 // import type { OverlayLang } from '../components/Atoms/Overlay';
+import type { PaginationInfoLang } from '../components/Atoms/PaginationInfo';
 // import type { PriceLang } from '../components/Atoms/Price';
 // import type { SkeletonLang } from '../components/Atoms/Skeleton';
 // import type { ToggleLang } from '../components/Atoms/Toggle';
@@ -84,6 +85,7 @@ export type LangComponentOverrides = {
 	// banner?: Partial<BannerLang>
 	// inlineBanner?: Partial<InlineBannerLang>
 	// overlay?: Partial<OverlayLang>
+	paginationInfo?: Partial<PaginationInfoLang>;
 	// price?: Partial<PriceLang>
 	// skeleton?: Partial<SkeletonLang>
 	// terms?: Partial<TermsLang>
@@ -156,6 +158,7 @@ export type LangComponents = {
 	// banner: BannerLang
 	// inlineBanner: InlineBannerLang
 	// overlay: OverlayLang
+	paginationInfo: PaginationInfoLang;
 	// price: PriceLang
 	// skeleton: SkeletonLang
 	// toggle: ToggleLang;

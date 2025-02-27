@@ -37,7 +37,7 @@ jobs:
           echo "current_tag=$(node .github/workflows/scripts/getTag.js --tags "$(git tag -l)")" >> $GITHUB_ENV
 
       - name: Cache node modules
-        uses: actions/cache@v2
+        uses: actions/cache@v4
         env:
           cache-name: cache-node-modules
         with:
@@ -52,7 +52,7 @@ jobs:
       - name: Install packages
         run: npm ci
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.MACHINE_001 }}
+          NODE_AUTH_TOKEN: ${{ secrets.SEARCHSPRING_PUBLISH }}
       
       - name: Build
         run: |

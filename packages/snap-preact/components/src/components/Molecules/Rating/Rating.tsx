@@ -3,7 +3,7 @@ import { Fragment, h } from 'preact';
 import { observer } from 'mobx-react-lite';
 import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
-import { Theme, useTheme, CacheProvider } from '../../../providers';
+import { Theme, useTheme, CacheProvider, useTreePath } from '../../../providers';
 import { ComponentProps, StyleScript } from '../../../types';
 import { defined, mergeProps, mergeStyles } from '../../../utilities';
 import { Icon, IconProps, IconType } from '../../Atoms/Icon';
@@ -41,10 +41,11 @@ const defaultStyles: StyleScript<RatingProps> = () => {
 
 export const Rating = observer((properties: RatingProps): JSX.Element => {
 	const globalTheme: Theme = useTheme();
-
+	const globalTreePath = useTreePath();
 	const defaultProps: Partial<RatingProps> = {
 		fullIcon: 'star',
 		emptyIcon: 'star-o',
+		treePath: globalTreePath,
 	};
 
 	const props = mergeProps('rating', globalTheme, defaultProps, properties);
@@ -55,8 +56,6 @@ export const Rating = observer((properties: RatingProps): JSX.Element => {
 		fullIcon: {
 			name: 'star--full',
 			// default props
-			// global theme
-			...globalTheme?.components?.icon,
 			// inherited props
 			...defined({
 				disableStyles,
@@ -69,8 +68,6 @@ export const Rating = observer((properties: RatingProps): JSX.Element => {
 			name: 'star--empty',
 			// default props
 			color: '#ccc',
-			// global theme
-			...globalTheme?.components?.icon,
 			// inherited props
 			...defined({
 				disableStyles,

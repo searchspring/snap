@@ -2,7 +2,7 @@ import { h, Fragment } from 'preact';
 import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
 import { useRef, useEffect, useState } from 'preact/hooks';
-import { observer } from 'mobx-react';
+import { observer } from 'mobx-react-lite';
 import deepmerge from 'deepmerge';
 import { Carousel, CarouselProps as CarouselProps } from '../../Molecules/Carousel';
 import { Result, ResultProps } from '../../Molecules/Result';
@@ -118,7 +118,8 @@ const defaultStyles: StyleScript<RecommendationBundleProps> = ({ vertical, separ
 				position: 'absolute',
 				top: '0',
 				right: '0',
-				zIndex: '1',
+				//needs to be above 100 to get above badges
+				zIndex: '101',
 				cursor: 'pointer',
 			},
 		},
@@ -158,8 +159,7 @@ export const RecommendationBundle = observer((properties: RecommendationBundlePr
 		ctaButtonSuccessText: 'Bundle Added!',
 		ctaButtonSuccessTimeout: 2000,
 		ctaInline: true,
-		// global theme
-		...globalTheme?.components?.recommendationBundle,
+		onAddToCart: (e, items) => controller?.addToCart && controller.addToCart(items),
 		...properties,
 		// props
 		...properties.theme?.components?.recommendationBundle,
@@ -255,8 +255,6 @@ export const RecommendationBundle = observer((properties: RecommendationBundlePr
 			loop: loop,
 			// default props
 			className: 'ss__recommendation__carousel',
-			// global theme
-			...globalTheme?.components?.carousel,
 			// inherited props
 			...defined({
 				disableStyles,
@@ -268,8 +266,6 @@ export const RecommendationBundle = observer((properties: RecommendationBundlePr
 		result: {
 			// default props
 			className: 'ss__recommendation__result',
-			// global theme
-			...globalTheme?.components?.result,
 			// inherited props
 			...defined({
 				disableStyles,
@@ -457,6 +453,7 @@ export const RecommendationBundle = observer((properties: RecommendationBundlePr
 															seed: true,
 															selected: selectedItems.findIndex((item) => item.id == seed.id) > -1,
 															onProductSelect,
+															treePath,
 														})
 													) : (
 														<Result {...subProps.result} controller={controller} result={seed} />
@@ -505,7 +502,7 @@ export const RecommendationBundle = observer((properties: RecommendationBundlePr
 																			lang={{ seedText: lang.seedText }}
 																		>
 																			{resultComponent ? (
-																				cloneWithProps(resultComponent, { result: result, seed: true, selected, onProductSelect })
+																				cloneWithProps(resultComponent, { result: result, seed: true, selected, onProductSelect, treePath })
 																			) : (
 																				<Result {...subProps.result} controller={controller} result={result} />
 																			)}
@@ -526,7 +523,7 @@ export const RecommendationBundle = observer((properties: RecommendationBundlePr
 																			className={idx + 1 == resultsToRender.length ? 'ss__recommendation-bundle__wrapper__selector--last' : ''}
 																		>
 																			{resultComponent ? (
-																				cloneWithProps(resultComponent, { result: result, seed: false, selected, onProductSelect })
+																				cloneWithProps(resultComponent, { result: result, seed: false, selected, onProductSelect, treePath })
 																			) : (
 																				<Result {...subProps.result} controller={controller} result={result} />
 																			)}
@@ -553,7 +550,7 @@ export const RecommendationBundle = observer((properties: RecommendationBundlePr
 																		className={idx + 1 == results.length ? 'ss__recommendation-bundle__wrapper__selector--last' : ''}
 																	>
 																		{resultComponent ? (
-																			cloneWithProps(resultComponent, { result: result, seed: false, selected, onProductSelect })
+																			cloneWithProps(resultComponent, { result: result, seed: false, selected, onProductSelect, treePath })
 																		) : (
 																			<Result {...subProps.result} controller={controller} result={result} />
 																		)}
@@ -586,7 +583,7 @@ export const RecommendationBundle = observer((properties: RecommendationBundlePr
 														lang={{ seedText: lang.seedText }}
 													>
 														{resultComponent ? (
-															cloneWithProps(resultComponent, { result: result, seed: true, selected, onProductSelect })
+															cloneWithProps(resultComponent, { result: result, seed: true, selected, onProductSelect, treePath })
 														) : (
 															<Result {...subProps.result} controller={controller} result={result} />
 														)}
@@ -607,7 +604,7 @@ export const RecommendationBundle = observer((properties: RecommendationBundlePr
 														className={idx + 1 == resultsToRender.length ? 'ss__recommendation-bundle__wrapper__selector--last' : ''}
 													>
 														{resultComponent ? (
-															cloneWithProps(resultComponent, { result: result, seed: false, selected, onProductSelect })
+															cloneWithProps(resultComponent, { result: result, seed: false, selected, onProductSelect, treePath })
 														) : (
 															<Result {...subProps.result} controller={controller} result={result} />
 														)}
@@ -678,7 +675,7 @@ export interface RecommendationBundleProps extends ComponentProps {
 	controller: RecommendationController;
 	results?: Product[];
 	limit?: number;
-	onAddToCart: (e: MouseEvent, items: Product[]) => void;
+	onAddToCart?: (e: MouseEvent, items: Product[]) => void;
 	title?: JSX.Element | string;
 	breakpoints?: BreakpointsProps;
 	resultComponent?: ResultComponent<{

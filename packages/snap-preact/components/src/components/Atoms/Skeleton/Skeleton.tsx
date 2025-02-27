@@ -2,9 +2,9 @@ import { h } from 'preact';
 
 import { jsx, css, keyframes } from '@emotion/react';
 import classnames from 'classnames';
-import { observer } from 'mobx-react';
+import { observer } from 'mobx-react-lite';
 
-import { Theme, useTheme, CacheProvider } from '../../../providers';
+import { Theme, useTheme, CacheProvider, useTreePath } from '../../../providers';
 import { ComponentProps, StyleScript } from '../../../types';
 import { mergeProps, mergeStyles } from '../../../utilities';
 
@@ -49,9 +49,12 @@ const defaultStyles: StyleScript<SkeletonProps> = ({ width, height, round, backg
 
 export const Skeleton = observer((properties: SkeletonProps): JSX.Element => {
 	const globalTheme: Theme = useTheme();
+	const globalTreePath = useTreePath();
+
 	const defaultProps: Partial<SkeletonProps> = {
 		backgroundColor: '#ebebeb',
 		animatedColor: '#f5f5f5',
+		treePath: globalTreePath,
 	};
 
 	const props = mergeProps('skeleton', globalTheme, defaultProps, properties);

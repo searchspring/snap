@@ -86,6 +86,35 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 ### Features
 
 - **preact-components/storybook:** updating storybook to latest version - build stable ([43c598d](https://github.com/searchspring/snap/commit/43c598d0e4d11d76364ff2775ecdcabe489023a8))
+## [0.63.5](https://github.com/searchspring/snap/compare/v0.63.4...v0.63.5) (2025-02-21)
+
+**Note:** Version bump only for package @searchspring/snap-controller
+
+## [0.63.4](https://github.com/searchspring/snap/compare/v0.63.3...v0.63.4) (2025-02-20)
+
+**Note:** Version bump only for package @searchspring/snap-controller
+
+## [0.63.3](https://github.com/searchspring/snap/compare/v0.63.2...v0.63.3) (2025-02-14)
+
+### Reverts
+
+- **controller/search:** reverting change for infinite scroll and search due to breaking change ([e27a55d](https://github.com/searchspring/snap/commit/e27a55d8e84e4568b703844fb7a783a8f52d488d))
+
+## [0.63.2](https://github.com/searchspring/snap/compare/v0.63.1...v0.63.2) (2025-02-10)
+
+### Bug Fixes
+
+- **autocompletecontroller.test:** bugfix for autocomplete singleResult redirects w/ inline banners ([dcf8133](https://github.com/searchspring/snap/commit/dcf8133b0de3cfa889f427b6b0dfcf2854696b67))
+
+## [0.63.1](https://github.com/searchspring/snap/compare/v0.63.0...v0.63.1) (2025-01-09)
+
+### Bug Fixes
+
+- **store-mobx/searchresultstore:** fixing issue with inline banners ([836d916](https://github.com/searchspring/snap/commit/836d9162f6679934621df01ac5c8b16f70a995eb))
+
+# [0.63.0](https://github.com/searchspring/snap/compare/v0.62.0...v0.63.0) (2024-12-19)
+
+**Note:** Version bump only for package @searchspring/snap-controller
 
 # [0.62.0](https://github.com/searchspring/snap/compare/v0.61.5...v0.62.0) (2024-12-10)
 

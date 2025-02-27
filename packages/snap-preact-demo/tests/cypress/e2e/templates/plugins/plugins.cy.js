@@ -10,7 +10,7 @@ describe('plugins work based on plaform setting', () => {
 					siteId: '8uyt2m',
 					language: 'en',
 					currency: 'usd',
-					platform: undefined,
+					platform: undefined, // defaults to 'other'
 				},
 				search: {
 					targets: [
@@ -27,9 +27,10 @@ describe('plugins work based on plaform setting', () => {
 
 		cy.snapController().then((controller) => {
 			const expectedPluginList = [
-				'pluginBackgroundFilters', //common
-				'pluginScrollToTop', //common
-				'pluginLogger', //common
+				'pluginBackgroundFilters', // common
+				'pluginScrollToTop', // common
+				'pluginLogger', // common
+				'pluginAddToCart', // common (when using 'other' platform)
 			];
 			expect(controller.config.plugins.length).to.equal(expectedPluginList.length);
 
@@ -63,9 +64,9 @@ describe('plugins work based on plaform setting', () => {
 
 		cy.snapController().then((controller) => {
 			const expectedPluginList = [
-				'pluginBackgroundFilters', //common
-				'pluginScrollToTop', //common
-				'pluginLogger', //common
+				'pluginBackgroundFilters', // common
+				'pluginScrollToTop', // common
+				'pluginLogger', // common
 			];
 			expect(controller.config.plugins.length).to.equal(expectedPluginList.length);
 
@@ -99,15 +100,123 @@ describe('plugins work based on plaform setting', () => {
 
 		cy.snapController().then((controller) => {
 			const expectedPluginList = [
-				'pluginBackgroundFilters', //common
-				'pluginScrollToTop', //common
-				'pluginLogger', //common
+				'pluginBackgroundFilters', // common
+				'pluginScrollToTop', // common
+				'pluginLogger', // common
+				'pluginAddToCart', // common (when using 'other' platform)
 			];
 			expect(controller.config.plugins.length).to.equal(expectedPluginList.length);
 
 			controller.config.plugins.forEach((plugin, idx) => {
 				expect(plugin[0].name).to.equal(expectedPluginList[idx]);
 			});
+		});
+	});
+
+	it('adds common addToCart plugin when configured with "other" platform supplied', () => {
+		cy.on('window:before:load', (win) => {
+			win.mergeSnapConfig = {
+				config: {
+					siteId: '8uyt2m',
+					language: 'en',
+					currency: 'usd',
+					platform: 'other',
+				},
+				plugins: {
+					common: {
+						addToCart: {
+							function: () => {
+								console.log('added');
+							},
+						},
+					},
+				},
+				search: {
+					targets: [
+						{
+							selector: '#searchspring-layout',
+							component: 'Search',
+						},
+					],
+				},
+			};
+		});
+
+		cy.visit('https://localhost:2222/templates/');
+
+		cy.snapController().then((controller) => {
+			const expectedPluginList = [
+				'pluginBackgroundFilters', //common
+				'pluginScrollToTop', //common
+				'pluginLogger', //common
+				'pluginAddToCart', //common
+			];
+
+			expect(controller.config.plugins.length).to.equal(expectedPluginList.length);
+
+			controller.config.plugins.forEach((plugin, idx) => {
+				expect(plugin[0].name).to.equal(expectedPluginList[idx]);
+			});
+		});
+	});
+
+	it('controller specific plugins merge and override global plugins', () => {
+		const globalfn = cy.stub().as('globalfn');
+		const controllerfn = cy.stub().as('controllerfn');
+
+		cy.on('window:before:load', (win) => {
+			win.mergeSnapConfig = {
+				config: {
+					siteId: '8uyt2m',
+					language: 'en',
+					currency: 'usd',
+					platform: 'other',
+				},
+				plugins: {
+					common: {
+						addToCart: {
+							function: globalfn,
+						},
+					},
+				},
+				search: {
+					targets: [
+						{
+							selector: '#searchspring-layout',
+							component: 'Search',
+						},
+					],
+					plugins: {
+						common: {
+							addToCart: {
+								function: controllerfn,
+							},
+						},
+					},
+				},
+			};
+		});
+
+		cy.visit('https://localhost:2222/templates/');
+
+		cy.snapController().then(async (controller) => {
+			const expectedPluginList = [
+				'pluginBackgroundFilters', // common
+				'pluginScrollToTop', // common
+				'pluginLogger', // common
+				'pluginAddToCart', // common
+			];
+
+			expect(controller.config.plugins.length).to.equal(expectedPluginList.length);
+
+			controller.config.plugins.forEach((plugin, idx) => {
+				expect(plugin[0].name).to.equal(expectedPluginList[idx]);
+			});
+
+			await controller.addToCart(controller.store.results[0]);
+
+			cy.get('@controllerfn').should('have.been.called');
+			cy.get('@globalfn').should('not.have.been.called');
 		});
 	});
 
@@ -135,11 +244,12 @@ describe('plugins work based on plaform setting', () => {
 
 		cy.snapController().then((controller) => {
 			const expectedPluginList = [
-				'pluginBackgroundFilters', //common
-				'pluginScrollToTop', //common
-				'pluginLogger', //common
-				'pluginBackgroundFiltersShopify',
-				'pluginMutateResultsShopify',
+				'pluginBackgroundFilters', // common
+				'pluginScrollToTop', // common
+				'pluginLogger', // common
+				'pluginShopifyBackgroundFilters',
+				'pluginShopifyMutateResults',
+				'pluginShopifyAddToCart',
 			];
 			expect(controller.config.plugins.length).to.equal(expectedPluginList.length);
 
@@ -173,10 +283,11 @@ describe('plugins work based on plaform setting', () => {
 
 		cy.snapController().then((controller) => {
 			const expectedPluginList = [
-				'pluginBackgroundFilters', //common
-				'pluginScrollToTop', //common
-				'pluginLogger', //common
-				'pluginBackgroundFiltersBigcommerce',
+				'pluginBackgroundFilters', // common
+				'pluginScrollToTop', // common
+				'pluginLogger', // common
+				'pluginBigcommerceBackgroundFilters',
+				'pluginBigcommerceAddToCart',
 			];
 			expect(controller.config.plugins.length).to.equal(expectedPluginList.length);
 
@@ -210,10 +321,11 @@ describe('plugins work based on plaform setting', () => {
 
 		cy.snapController().then((controller) => {
 			const expectedPluginList = [
-				'pluginBackgroundFilters', //common
-				'pluginScrollToTop', //common
-				'pluginLogger', //common
-				'pluginBackgroundFiltersMagento2',
+				'pluginBackgroundFilters', // common
+				'pluginScrollToTop', // common
+				'pluginLogger', // common
+				'pluginMagento2BackgroundFilters',
+				'pluginMagento2AddToCart',
 			];
 			expect(controller.config.plugins.length).to.equal(expectedPluginList.length);
 

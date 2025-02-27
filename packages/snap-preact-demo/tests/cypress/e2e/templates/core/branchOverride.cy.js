@@ -1,6 +1,6 @@
 describe('Branch Override Functionality', () => {
 	it('adds snap bundle to search page', () => {
-		cy.visit('https://localhost:2222/templates/?branch=override');
+		cy.visit('https://localhost:2222/templates/?searchspring-preview=override');
 
 		cy.on('uncaught:exception', (err, runnable) => {
 			// expected error due to branch override throwing
@@ -42,7 +42,7 @@ describe('Branch Override Functionality', () => {
 		});
 
 		// cy.on('uncaught:exception', (err, runnable) => false);
-		cy.visit('https://localhost:2222/snap/?branch=nope');
+		cy.visit('https://localhost:2222/snap/?searchspring-preview=nope');
 
 		// expect injected div from 'override' branch to not be on the page
 		cy.get('#override').should('not.exist');

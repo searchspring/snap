@@ -6,7 +6,7 @@ import { observer } from 'mobx-react-lite';
 import deepmerge from 'deepmerge';
 
 import { Facet, FacetProps } from '../Facet';
-import { Theme, useTheme, CacheProvider } from '../../../providers';
+import { Theme, useTheme, CacheProvider, useTreePath } from '../../../providers';
 import { defined, mergeProps, mergeStyles } from '../../../utilities';
 import { ComponentProps, StyleScript } from '../../../types';
 import type { SearchController, AutocompleteController } from '@searchspring/snap-controller';
@@ -30,16 +30,18 @@ const defaultStyles: StyleScript<FacetsHorizontalProps> = ({}) => {
 			},
 
 			'& .ss__facets-horizontal__header__dropdown': {
-				flex: '0 0 0%',
 				margin: '0 0 10px 0',
-				boxSizing: 'border-box',
-				minWidth: '100px',
+				'.ss__dropdown__button': {
+					display: 'flex',
+				},
 
 				'& .ss__dropdown__button__heading': {
 					display: 'flex',
 					justifyContent: 'space-between',
 					alignItems: 'center',
 					padding: '5px 10px',
+					flexShrink: '0',
+					gap: '10px',
 				},
 
 				'&.ss__dropdown--open': {
@@ -52,7 +54,7 @@ const defaultStyles: StyleScript<FacetsHorizontalProps> = ({}) => {
 						width: 'max-content',
 						maxHeight: '500px',
 						overflowY: 'auto',
-						zIndex: 1,
+						zIndex: 1000,
 					},
 				},
 			},
@@ -77,6 +79,7 @@ const defaultStyles: StyleScript<FacetsHorizontalProps> = ({}) => {
 
 export const FacetsHorizontal = observer((properties: FacetsHorizontalProps): JSX.Element => {
 	const globalTheme: Theme = useTheme();
+	const globalTreePath = useTreePath();
 
 	const defaultProps: Partial<FacetsHorizontalProps> = {
 		limit: 6,
@@ -84,6 +87,7 @@ export const FacetsHorizontal = observer((properties: FacetsHorizontalProps): JS
 		iconCollapse: 'angle-up',
 		iconExpand: 'angle-down',
 		facets: properties.controller?.store?.facets,
+		treePath: globalTreePath,
 	};
 
 	let props = mergeProps('facetsHorizontal', globalTheme, defaultProps, properties);
@@ -150,8 +154,6 @@ export const FacetsHorizontal = observer((properties: FacetsHorizontalProps): JS
 			disableClickOutside: true,
 			disableOverlay: true,
 			disableA11y: true,
-			// global theme
-			...globalTheme?.components?.dropdown,
 			// inherited props
 			...defined({
 				disableStyles,
@@ -163,23 +165,19 @@ export const FacetsHorizontal = observer((properties: FacetsHorizontalProps): JS
 		icon: {
 			// default props
 			className: 'ss__dropdown__button__heading__icon',
-			// global theme
-			...globalTheme?.components?.icon,
 			// inherited props
 			...defined({
 				disableStyles,
 			}),
 			// component theme overrides
 			theme: props?.theme,
-			treePath,
+			treePath: `${treePath} dropdown button`,
 		},
 		facet: {
 			// default props
 			className: `ss__facets-horizontal__content__facet`,
 			justContent: true,
 			// horizontal: true,
-			// global theme
-			...globalTheme?.components?.facet,
 			// inherited props
 			...defined({
 				disableStyles,
@@ -187,15 +185,13 @@ export const FacetsHorizontal = observer((properties: FacetsHorizontalProps): JS
 			}),
 			// component theme overrides
 			theme: props?.theme,
-			treePath,
+			treePath: overlay ? `${treePath} dropdown` : treePath,
 		},
 		MobileSidebar: {
 			// default props
 			className: 'ss__facets-horizontal__header__mobile-sidebar',
 			hidePerPage: true,
 			hideSortBy: true,
-			// global theme
-			...globalTheme?.components?.mobileSidebar,
 			// inherited props
 			...defined({
 				disableStyles,
@@ -274,10 +270,6 @@ export const FacetsHorizontal = observer((properties: FacetsHorizontalProps): JS
 										<span {...mergedLang.dropdownButton.value}>{facet?.label}</span>
 										<Icon
 											{...subProps.icon}
-											// icon={selectedFacet?.field === facet.field ? iconExpand : iconCollapse}
-
-											// {...(typeof icon == 'string' ? { icon: icon } : (icon as Partial<IconProps>))}
-
 											{...(selectedFacet?.field === facet.field
 												? { ...(typeof iconExpand == 'string' ? { icon: iconExpand } : (iconExpand as Partial<IconProps>)) }
 												: { ...(typeof iconCollapse == 'string' ? { icon: iconCollapse } : (iconCollapse as Partial<IconProps>)) })}

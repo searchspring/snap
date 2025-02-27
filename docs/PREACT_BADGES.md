@@ -51,7 +51,7 @@ This will create two files:
 
 ```jsx
 import { css } from '@emotion/react';
-import { observer } from 'mobx-react';
+import { observer } from 'mobx-react-lite';
 
 // css in js styling using dynamic template parameters
 const CSS = {

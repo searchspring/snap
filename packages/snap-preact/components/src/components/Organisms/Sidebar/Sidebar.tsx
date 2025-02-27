@@ -3,7 +3,7 @@ import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
 import { observer } from 'mobx-react-lite';
 
-import { Theme, useTheme, CacheProvider } from '../../../providers';
+import { Theme, useTheme, CacheProvider, useTreePath } from '../../../providers';
 import { ComponentProps, StyleScript } from '../../../types';
 import { FilterSummary, FilterSummaryProps } from '../FilterSummary';
 import { SortBy, SortByProps } from '../../Molecules/SortBy';
@@ -20,9 +20,10 @@ const defaultStyles: StyleScript<SidebarProps> = () => {
 
 export const Sidebar = observer((properties: SidebarProps): JSX.Element => {
 	const globalTheme: Theme = useTheme();
-
+	const globalTreePath = useTreePath();
 	const defaultProps: Partial<SidebarProps> = {
 		titleText: 'Filters',
+		treePath: globalTreePath,
 	};
 
 	const props = mergeProps('sidebar', globalTheme, defaultProps, properties);
@@ -35,8 +36,6 @@ export const Sidebar = observer((properties: SidebarProps): JSX.Element => {
 		filterSummary: {
 			// default props
 			controller,
-			// global theme
-			...globalTheme?.components?.filterSummary,
 			// inherited props
 			...defined({
 				disableStyles,
@@ -48,8 +47,6 @@ export const Sidebar = observer((properties: SidebarProps): JSX.Element => {
 		facets: {
 			// default props
 			controller,
-			// global theme
-			...globalTheme?.components?.facets,
 			// inherited props
 			...defined({
 				disableStyles,
@@ -61,8 +58,6 @@ export const Sidebar = observer((properties: SidebarProps): JSX.Element => {
 		sortBy: {
 			// default props
 			controller,
-			// global theme
-			...globalTheme?.components?.sortBy,
 			// inherited props
 			...defined({
 				disableStyles,
@@ -74,8 +69,6 @@ export const Sidebar = observer((properties: SidebarProps): JSX.Element => {
 		perPage: {
 			// default props
 			controller,
-			// global theme
-			...globalTheme?.components?.perPage,
 			// inherited props
 			...defined({
 				disableStyles,
@@ -100,15 +93,17 @@ export const Sidebar = observer((properties: SidebarProps): JSX.Element => {
 	return controller?.store?.loaded && controller?.store?.pagination?.totalResults > 0 ? (
 		<CacheProvider>
 			<div {...styling} className={classnames('ss__sidebar', className)}>
-				{!hideTitle && <h4 className="ss__sidebar__title" {...mergedLang.titleText?.all}></h4>}
+				<div className={classnames('ss__sidebar__inner')}>
+					{!hideTitle && <h4 className="ss__sidebar__title" {...mergedLang.titleText?.all}></h4>}
 
-				{!hideFilterSummary && <FilterSummary {...subProps.filterSummary} />}
+					{!hideFilterSummary && <FilterSummary {...subProps.filterSummary} />}
 
-				{!hideSortBy && <SortBy {...subProps.sortBy} />}
+					{!hideSortBy && <SortBy {...subProps.sortBy} />}
 
-				{!hidePerPage && <PerPage {...subProps.perPage} />}
+					{!hidePerPage && <PerPage {...subProps.perPage} />}
 
-				{!hideFacets && <Facets {...subProps.facets} />}
+					{!hideFacets && <Facets {...subProps.facets} />}
+				</div>
 			</div>
 		</CacheProvider>
 	) : (

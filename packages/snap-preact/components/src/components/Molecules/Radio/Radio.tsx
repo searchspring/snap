@@ -7,7 +7,7 @@ import { observer } from 'mobx-react-lite';
 
 import { ComponentProps, StyleScript } from '../../../types';
 import { defined, mergeProps, mergeStyles } from '../../../utilities';
-import { Theme, useTheme, CacheProvider } from '../../../providers';
+import { Theme, useTheme, CacheProvider, useTreePath } from '../../../providers';
 import { Icon, IconProps, IconType } from '../../Atoms/Icon';
 import { useA11y } from '../../../hooks/useA11y';
 import { Lang, useLang } from '../../../hooks';
@@ -24,8 +24,8 @@ const defaultStyles: StyleScript<RadioProps> = ({ size, native }) => {
 			cursor: 'pointer',
 
 			'&.ss__radio--disabled': {
-				opacity: 0.5,
-				cursor: 'none',
+				opacity: 0.3,
+				cursor: 'default',
 			},
 		});
 	} else {
@@ -35,12 +35,15 @@ const defaultStyles: StyleScript<RadioProps> = ({ size, native }) => {
 
 export const Radio = observer((properties: RadioProps): JSX.Element => {
 	const globalTheme: Theme = useTheme();
+	const globalTreePath = useTreePath();
+
 	const defaultProps: Partial<RadioProps> = {
 		size: '20px',
 		startChecked: false,
 		disableA11y: false,
 		checkedIcon: 'bullet',
 		unCheckedIcon: 'bullet-o',
+		treePath: globalTreePath,
 	};
 
 	const props = mergeProps('radio', globalTheme, defaultProps, properties);
@@ -52,12 +55,12 @@ export const Radio = observer((properties: RadioProps): JSX.Element => {
 		checkedIcon,
 		unCheckedIcon,
 		onClick,
-		size,
 		startChecked,
 		native,
 		disableA11y,
 		disableStyles,
 		className,
+		size,
 		treePath,
 	} = props;
 
@@ -65,14 +68,12 @@ export const Radio = observer((properties: RadioProps): JSX.Element => {
 		activeIcon: {
 			name: 'active',
 			// default props
-			className: 'ss__radio__icon--active',
-			// global theme
-			...globalTheme?.components?.icon,
+			className: 'ss__radio__icon',
 			// inherited props
 			...defined({
-				color: color,
+				size,
+				color,
 				disableStyles,
-				size: size,
 			}),
 			// component theme overrides
 			theme: props.theme,
@@ -81,14 +82,12 @@ export const Radio = observer((properties: RadioProps): JSX.Element => {
 		inactiveIcon: {
 			name: 'inactive',
 			// default props
-			className: 'ss__radio__icon--inactive',
-			// global theme
-			...globalTheme?.components?.icon,
+			className: 'ss__radio__icon',
 			// inherited props
 			...defined({
-				color: color,
+				size,
+				color,
 				disableStyles,
-				size: size,
 			}),
 			// component theme overrides
 			theme: props.theme,
@@ -149,7 +148,7 @@ export const Radio = observer((properties: RadioProps): JSX.Element => {
 			) : (
 				<span
 					{...styling}
-					className={classnames('ss__radio', { 'ss__radio--disabled': disabled }, className)}
+					className={classnames('ss__radio', { 'ss__radio--disabled': disabled, 'ss__radio--active': checkedState }, className)}
 					onClick={(e) => clickFunc(e)}
 					ref={(e) => (!disableA11y ? useA11y(e) : null)}
 					{...mergedLang.radio?.all}

@@ -8,21 +8,24 @@ const perPageStyleScript = ({ theme }: PerPageProps) => {
 
 	return css({
 		'.ss__button__content': {
-			display: 'flex',
-			alignItems: 'center',
 			gap: '7px',
 		},
 	});
 };
 
 // PerPage component props
-export const perPage: Partial<PerPageProps> = {
-	themeStyleScript: perPageStyleScript,
-	theme: {
-		components: {
-			icon: {
-				size: '12px',
+export const perPage: ThemeComponentProps<PerPageProps> = {
+	default: {
+		themeStyleScript: perPageStyleScript,
+		theme: {
+			components: {
+				icon: {
+					size: '12px',
+				},
 			},
 		},
 	},
+	mobile: {},
+	tablet: {},
+	desktop: {},
 };

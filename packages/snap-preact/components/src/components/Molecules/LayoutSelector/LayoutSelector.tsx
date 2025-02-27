@@ -4,7 +4,7 @@ import { observer } from 'mobx-react-lite';
 import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
 
-import { Theme, useTheme, CacheProvider } from '../../../providers';
+import { Theme, useTheme, CacheProvider, useTreePath } from '../../../providers';
 import { defined, mergeProps, mergeStyles } from '../../../utilities';
 import { ComponentProps, ListOption, StyleScript } from '../../../types';
 import { Select, SelectProps } from '../Select';
@@ -24,12 +24,13 @@ const defaultStyles: StyleScript<LayoutSelectorProps> = ({}) => {
 
 export const LayoutSelector = observer((properties: LayoutSelectorProps): JSX.Element => {
 	const globalTheme: Theme = useTheme();
-
+	const globalTreePath = useTreePath();
 	const defaultProps: Partial<LayoutSelectorProps> = {
 		label: 'Layout',
 		type: 'dropdown',
 		showSingleOption: false,
 		selected: properties.options && properties.options.length ? properties.options[0] : undefined,
+		treePath: globalTreePath,
 	};
 
 	const props = mergeProps('layoutSelector', globalTheme, defaultProps, properties);
@@ -39,8 +40,6 @@ export const LayoutSelector = observer((properties: LayoutSelectorProps): JSX.El
 
 	const subProps: SelectSubProps = {
 		Select: {
-			// global theme
-			...globalTheme?.components?.select,
 			// inherited props
 			...defined({
 				disableStyles,
@@ -50,8 +49,6 @@ export const LayoutSelector = observer((properties: LayoutSelectorProps): JSX.El
 			treePath,
 		},
 		RadioList: {
-			// global theme
-			...globalTheme?.components?.radioList,
 			// inherited props
 			...defined({
 				disableStyles,
@@ -64,8 +61,7 @@ export const LayoutSelector = observer((properties: LayoutSelectorProps): JSX.El
 			multiSelect: false,
 			horizontal: true,
 			hideOptionCheckboxes: true,
-			// global theme
-			...globalTheme?.components?.list,
+			requireSelection: true,
 			// inherited props
 			...defined({
 				disableStyles,

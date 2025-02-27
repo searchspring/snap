@@ -21,6 +21,17 @@ describe('Templates Language settings', () => {
 						siteId: '8uyt2m',
 						language: 'en',
 					},
+					themes: {
+						global: {
+							overrides: {
+								components: {
+									sidebar: {
+										hideTitle: false,
+									},
+								},
+							},
+						},
+					},
 				};
 			});
 
@@ -37,6 +48,17 @@ describe('Templates Language settings', () => {
 					config: {
 						language: 'fr',
 						siteId: '8uyt2m',
+					},
+					themes: {
+						global: {
+							overrides: {
+								components: {
+									sidebar: {
+										hideTitle: false,
+									},
+								},
+							},
+						},
 					},
 				};
 			});

@@ -52,3 +52,52 @@ The `hidePagination` prop specifies if the Pagination component should be render
 ```jsx
 <Toolbar hidePagination={true} />
 ```
+
+### hidePaginationInfo
+The `hidePaginationInfo` prop specifies if the PaginationInfo component should be rendered.  
+
+```jsx
+<Toolbar hidePaginationInfo={true} />
+```
+
+### hideTopSlot
+The `hideTopSlot` prop specifies if the component in the top slot should be rendered. Requires `topSlot` prop to also be set.
+
+```jsx
+<Toolbar topSlot={<CustomComponent />} hideTopSlot={true} />
+```
+
+### hideBottomSlot
+The `hideBottomSlot` prop specifies if the component in the bottom slot should be rendered. Requires `bottomSlot` prop to also be set.
+
+```jsx
+<Toolbar bottomSlot={<CustomComponent />} hideBottomSlot={true} />
+```
+
+### hideMobileSidebar
+The `hideMobileSidebar` prop specifies if the MobileSidebar component should be rendered.  
+
+```jsx
+<Toolbar hideMobileSidebar={true} />
+```
+
+### topSlot
+The `topSlot` prop specifies a component to be rendered in the top slot.
+
+```jsx
+const CustomComponent = (props) => {
+    return (<button>click me!</button>)
+}
+<Toolbar topSlot={<CustomComponent />} />
+```
+
+### bottomSlot
+The `bottomSlot` prop specifies a component to be rendered in the bottom slot.
+
+```jsx
+const CustomComponent = (props) => {
+    return (<button>click me!</button>)
+}
+<Toolbar bottomSlot={<CustomComponent />} />
+```
+

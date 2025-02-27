@@ -8,7 +8,7 @@ import { EventManager } from '@searchspring/snap-event-manager';
 import { Profiler } from '@searchspring/snap-profiler';
 import { Logger } from '@searchspring/snap-logger';
 import { Tracker } from '@searchspring/snap-tracker';
-import { SearchController } from '@searchspring/snap-controller';
+import { RecommendationController, SearchController } from '@searchspring/snap-controller';
 
 const urlManager = new UrlManager(new QueryStringTranslator(), reactLinker);
 const services = {
@@ -26,7 +26,8 @@ const searchConfigDefault = {
 	},
 	settings: {},
 };
-let controller: any;
+
+let controller: SearchController;
 let scrollMock: any;
 
 const wait = (time = 1) => {
@@ -35,41 +36,31 @@ const wait = (time = 1) => {
 	});
 };
 
-const controllerServices: any = {
-	client: new MockClient(globals, {}),
-	store: new SearchStore(searchConfig, services),
-	urlManager,
-	eventManager: new EventManager(),
-	profiler: new Profiler(),
-	logger: new Logger(),
-	tracker: new Tracker(globals),
+// function to recreate fresh services for each test (otherwise globals are shared)
+const createControllerServices = () => {
+	return {
+		client: new MockClient(globals, {}),
+		store: new SearchStore(searchConfig, services),
+		urlManager,
+		eventManager: new EventManager(),
+		profiler: new Profiler(),
+		logger: new Logger(),
+		tracker: new Tracker(globals),
+	};
 };
 
-describe('pluginScrollToTop', () => {
+describe('common/pluginScrollToTop', () => {
 	beforeAll(async () => {
 		scrollMock = jest.spyOn(global.window, 'scroll').mockImplementation(() => {});
 	});
 
 	beforeEach(() => {
 		searchConfig = { ...searchConfigDefault };
-		controller = new SearchController(searchConfig, controllerServices);
+		controller = new SearchController(searchConfig, createControllerServices());
 	});
 
 	afterEach(() => {
 		scrollMock.mockClear();
-	});
-
-	it('requires config.enabled', async () => {
-		const config = {
-			enabled: false,
-		};
-
-		pluginScrollToTop(controller, config);
-		await controller.search();
-
-		await wait(10);
-
-		expect(scrollMock).not.toHaveBeenCalled();
 	});
 
 	it('can scroll with defaults', async () => {
@@ -142,5 +133,31 @@ describe('pluginScrollToTop', () => {
 
 		expect(scrollMock).toHaveBeenCalled();
 		expect(scrollMock).toHaveBeenCalledWith({ top: 200, left: 100, behavior: 'instant' });
+	});
+
+	it('can be disabled', async () => {
+		const pluginConfig = {
+			enabled: false,
+		};
+
+		pluginScrollToTop(controller, pluginConfig);
+		await controller.search();
+
+		await wait(10);
+
+		expect(scrollMock).not.toHaveBeenCalled();
+	});
+
+	it('only applies to controllers of type=`search`', async () => {
+		const controller = new RecommendationController({ ...searchConfig, tag: 'test' }, createControllerServices());
+
+		expect(controller.type).not.toBe('search');
+
+		pluginScrollToTop(controller);
+		await controller.search();
+
+		await wait(10);
+
+		expect(scrollMock).not.toHaveBeenCalled();
 	});
 });

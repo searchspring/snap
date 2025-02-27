@@ -1,6 +1,6 @@
 import { Fragment, h } from 'preact';
 
-import { observer } from 'mobx-react';
+import { observer } from 'mobx-react-lite';
 import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
 import deepmerge from 'deepmerge';
@@ -12,7 +12,7 @@ import { InlineBanner, InlineBannerProps } from '../../Atoms/Merchandising/Inlin
 import { Result, ResultProps } from '../../Molecules/Result';
 import { ComponentProps, ResultsLayout, BreakpointsProps, ResultComponent, StyleScript } from '../../../types';
 import { defined, mergeProps, mergeStyles } from '../../../utilities';
-import { Theme, useTheme, CacheProvider, useSnap } from '../../../providers';
+import { Theme, useTheme, CacheProvider, useSnap, useTreePath } from '../../../providers';
 import { useDisplaySettings } from '../../../hooks/useDisplaySettings';
 import { SearchResultTracker } from '../../Trackers/SearchResultTracker';
 import { SnapTemplates } from '../../../../../src';
@@ -54,7 +54,7 @@ const defaultStyles: StyleScript<ResultsProps> = ({ gapSize, columns }) => {
 
 export const Results = observer((properties: ResultsProps): JSX.Element => {
 	const globalTheme: Theme = useTheme();
-
+	const globalTreePath = useTreePath();
 	const defaultBreakpointsProps = {
 		0: {
 			columns: properties.columns || 1,
@@ -76,6 +76,7 @@ export const Results = observer((properties: ResultsProps): JSX.Element => {
 		gapSize: '20px',
 		layout: ResultsLayout.grid,
 		breakpoints: defaultBreakpointsProps,
+		treePath: globalTreePath,
 	};
 
 	let props = mergeProps('results', globalTheme, defaultProps, properties);
@@ -98,8 +99,6 @@ export const Results = observer((properties: ResultsProps): JSX.Element => {
 		result: {
 			// default props
 			className: 'ss__results__result',
-			// global theme
-			...globalTheme?.components?.result,
 			// inherited props
 			...defined({
 				disableStyles,
@@ -111,8 +110,6 @@ export const Results = observer((properties: ResultsProps): JSX.Element => {
 		inlineBanner: {
 			// default props
 			className: 'ss__results__inline-banner',
-			// global theme
-			...globalTheme?.components?.inlineBanner,
 			// inherited props
 			...defined({
 				disableStyles,
@@ -154,7 +151,13 @@ export const Results = observer((properties: ResultsProps): JSX.Element => {
 									const ResultComponent = resultComponent;
 									return (
 										<SearchResultTracker result={result as Product} controller={controller as SearchController}>
-											<ResultComponent key={(result as Product).id} controller={controller} result={result as Product} theme={theme} />
+											<ResultComponent
+												key={(result as Product).id}
+												controller={controller}
+												result={result as Product}
+												theme={theme}
+												treePath={treePath}
+											/>
 										</SearchResultTracker>
 									);
 								} else {

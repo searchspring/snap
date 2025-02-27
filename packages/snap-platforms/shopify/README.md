@@ -1,9 +1,17 @@
 # Shopify Platform
-This platform library gives you helper functions to use with the Shopify platform. 
+This platform library gives you helper functions and plugins to use with the Shopify platform. 
 
+## Functions
 
-## Usage 
-To use the platform library, simply import what you wish to use from `@searchspring/snap-platforms/shopify`.
+### addToCart
+The `addToCart` function will automatically add products to the cart and then redirect to the cart page (`/cart`). The function is async, and takes an array of products (Result Store References) to add, and an optional config. The optional config can take two optional properties, `redirect` and `idFieldName`. Variants must be enabled for full functionality.
+
+The `redirect` property can be set to `false` or supplied with an alternate redirect URL instead of the default (`/cart`). 
+
+The `idFieldName` property takes a stringified path in the result reference, to look for the product id to add. `display.mappings.core.sku` for example. By default it will use `display.mappings.core.uid`.
+
+> [!IMPORTANT]
+> The `Shopify` object needs to be available on the window.
 
 ```jsx
 import { addToCart } from '@searchspring/snap-platforms/shopify';
@@ -20,52 +28,75 @@ export const AddToCart = (props) => {
 };
 ```
 
-```jsx
-import { mutateResults } from '@searchspring/snap-platforms/shopify';
+## Plugins
 
-const mutateResultsConfig = {
-	collectionInUrl: {
-		enabled: true,
-	}
-}
-controller.plugin(scrollToTop, scrollToTopConfig);
-```
+### pluginAddToCart
+Plugin to attach a custom function to the addToCart controller event.
 
-## SnapTemplates Usage
-To use a plugin in [SnapTemplates](https://github.com/searchspring/snap/blob/main/docs/TEMPLATES_ABOUT.md), it can be defined and configured in the `config.plugins` section.
+| Configuration Option | Description | Type | Default | Required |
+|----------------------|-------------|------|---------|----------|
+| enabled | configuration to allow for disabling the plugin | boolean | true | ➖ |
+| redirect | set to `false` or provide alternate redirect URL | boolean \| string | '/cart' | ➖ |
+| idFieldName | field name to use for the product identifier to use when adding product | string | 'display.mappings.core.uid' | ➖ |
+
 
 ```jsx
-const mutateResultsConfig = {
-	collectionInUrl: {
-		enabled: true,
-	}
-}
-...
-plugins: {
-	shopify: {
-		mutateResults: mutateResultsConfig
-	}
+const addToCartConfig = {
+	redirect: false,
+	idFieldName: 'display.mappings.core.sku'
 }
 ```
 
-## addToCart
-The `addToCart` function will automatically add products to the cart and then redirect to the cart page (`/cart`). The function is async, and takes an array of products (Result Store References) to add, and an optional config. The optional config can take two optional properties, `redirect` and `idFieldName`. Snap variants must be enabled for full functionality.
+### pluginBackgroundFilters
+Plugin to set up background filters for Shopify. Script context is used to automatically apply best practice Shopify background filtering. Background filtering in this plugin only applies to search controllers.
 
-The `redirect` property can be set to `false` or supplied with an alternate redirect URL instead of the default (`/cart`). 
+> [!NOTE]
+> If you need to customize background filters beyond what is available in the configuration, you will need to utilize the the common backgroundFilters plugin.
 
-The `idFieldName` property takes a stringified path in the result reference, to look for the product id to add. `display.mappings.core.sku` for example. By default it will use `display.mappings.core.uid`.
+| Configuration Option | Description | Type | Default | Required |
+|----------------------|-------------|------|---------|----------|
+| enabled | configuration to allow for disabling the plugin | boolean | true | ➖ |
+| fieldNames | object used to set custom field names for background filtering | object | ➖ | ➖ |
+| fieldNames.collection | name of the field use for collection background filter | string | 'collection_handle' | ➖ |
+| fieldNames.tags | name of the field use for tags background filter | string | 'tags' | ➖ |
+| fieldNames.vendor | name of the field use for vendor background filter | string | 'vendor' | ➖ |
+| fieldNames.type | name of the field use for product type background filter | string | 'product_type' | ➖ |
 
-Note that the `Shopify` object needs to be available on the window.
+This plugin relies on specific Shopify script context variables for creating background filters via the integration script context. Collection, types and vendor background filters are supported, in addition to tags (used for additional filtering); special characters will be automatically handled. See the examples below:
 
+Collection Page:
+```html
+<script id="searchspring-context" src="bundle.js">
+	collection = {
+		name : "Test Collection",
+		handle : "test-collection",
+	};
+</script>
+```
 
-## mutateResults
-Enables updating the URL for products within search results; product URLs will be prefixed with their category route. The platform specific context variable `collection` must be provided for this functionality.
+Collection Page with Tags:
+```html
+<script id="searchspring-context" src="bundle.js">
+	collection = {
+		name : "Test Collection",
+		handle : "test-collection",
+	};
 
-| Configuration Option | Description | Type | Default |
-|----------------------|-------------|------|---------|
-| `mutateResults` | Shopify Updating results configuration | Object | ➖ |
-| `mutateResults.collectionInUrl` | Results URL Mutation configuration | Object | ➖ |
-| `mutateResults.collectionInUrl.enabled` | Enables middleware | Object | true |
+	tags = ["test", "color:green"];
+</script>
+```
+
+### pluginMutateResults
+Enables updating the URL for products within search results; product URLs will be prefixed with their category route. The platform specific context variable `collection.handle` must be provided for this functionality.
+
+> [!IMPORTANT]
+> Requires that the `Shopify` object is available on the window.
+
+| Configuration Option | Description | Type | Default | Required |
+|----------------------|-------------|------|---------|----------|
+| mutations | Shopify results mutations configuration object | object | ➖ | ➖ |
+| mutations.collectionInUrl | collection in URL Mutation configuration object | object | ➖ | ➖ |
+| mutations.collectionInUrl.enabled | configuration to allow for disabling of the mutation | object | true | ➖ |
 
 ```jsx
 const mutateResultsConfig = {

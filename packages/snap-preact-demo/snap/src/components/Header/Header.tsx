@@ -1,5 +1,5 @@
 import { h, Fragment } from 'preact';
-import { observer } from 'mobx-react';
+import { observer } from 'mobx-react-lite';
 
 import { withController } from '@searchspring/snap-preact/components';
 

@@ -1,12 +1,12 @@
 import { Fragment, h } from 'preact';
 import { useState } from 'preact/hooks';
 
-import { observer } from 'mobx-react';
+import { observer } from 'mobx-react-lite';
 import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
 import { useRanger } from 'react-ranger';
 
-import { Theme, useTheme, CacheProvider } from '../../../providers';
+import { Theme, useTheme, CacheProvider, useTreePath } from '../../../providers';
 import { mergeProps, mergeStyles } from '../../../utilities';
 import { ComponentProps, StyleScript } from '../../../types';
 import { sprintf } from '../../../utilities';
@@ -149,8 +149,11 @@ const defaultStyles: StyleScript<FacetSliderProps> = ({
 
 export const FacetSlider = observer((properties: FacetSliderProps): JSX.Element => {
 	const globalTheme: Theme = useTheme();
+	const globalTreePath = useTreePath();
+
 	const defaultProps: Partial<FacetSliderProps> = {
 		tickSize: properties.facet?.step ? properties.facet?.step * 10 : 20,
+		treePath: globalTreePath,
 	};
 
 	const props = mergeProps('facetSlider', globalTheme, defaultProps, properties);

@@ -2,11 +2,11 @@ import { h } from 'preact';
 
 import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
-import { observer } from 'mobx-react';
+import { observer } from 'mobx-react-lite';
 
 import { Icon, IconProps } from '../../Atoms/Icon/Icon';
 import { defined, mergeProps, mergeStyles } from '../../../utilities';
-import { Theme, useTheme, CacheProvider } from '../../../providers';
+import { Theme, useTheme, CacheProvider, useTreePath } from '../../../providers';
 import { ComponentProps, StyleScript } from '../../../types';
 
 const defaultStyles: StyleScript<SearchInputProps> = ({ theme }) => {
@@ -31,9 +31,11 @@ const defaultStyles: StyleScript<SearchInputProps> = ({ theme }) => {
 
 export const SearchInput = observer((properties: SearchInputProps): JSX.Element => {
 	const globalTheme: Theme = useTheme();
+	const globalTreePath = useTreePath();
 	const defaultProps: Partial<SearchInputProps> = {
 		placeholder: 'Search',
 		hideIcon: false,
+		treePath: globalTreePath,
 	};
 
 	const props = mergeProps('searchInput', globalTheme, defaultProps, properties);
@@ -44,8 +46,6 @@ export const SearchInput = observer((properties: SearchInputProps): JSX.Element 
 		icon: {
 			// default props
 			className: 'ss__search-input__icon',
-			// global theme
-			...globalTheme?.components?.icon,
 			// inherited props
 			...defined({
 				disableStyles,

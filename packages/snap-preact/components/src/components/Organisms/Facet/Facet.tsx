@@ -2,7 +2,7 @@ import { h, Fragment } from 'preact';
 
 import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
-import { observer } from 'mobx-react';
+import { observer } from 'mobx-react-lite';
 
 import { FacetListOptions, FacetListOptionsProps } from '../../Molecules/FacetListOptions';
 import { FacetGridOptions, FacetGridOptionsProps } from '../../Molecules/FacetGridOptions';
@@ -16,7 +16,7 @@ import { ComponentProps, FacetDisplay, StyleScript } from '../../../types';
 import type { ValueFacet, RangeFacet, FacetHierarchyValue, FacetValue, FacetRangeValue } from '@searchspring/snap-store-mobx';
 
 import { defined, cloneWithProps, mergeProps, mergeStyles } from '../../../utilities';
-import { Theme, useTheme, CacheProvider } from '../../../providers';
+import { Theme, useTheme, CacheProvider, useTreePath } from '../../../providers';
 import { useA11y } from '../../../hooks/useA11y';
 // import { FacetToggle, FacetToggleProps } from '../../Molecules/FacetToggle';
 import { Lang, useLang } from '../../../hooks';
@@ -58,6 +58,7 @@ const defaultStyles: StyleScript<FacetProps> = ({ disableCollapse, color, theme 
 
 export const Facet = observer((properties: FacetProps): JSX.Element => {
 	const globalTheme: Theme = useTheme();
+	const globalTreePath = useTreePath();
 	const defaultProps: Partial<FacetProps> = {
 		limit: 12,
 		disableOverflow: false,
@@ -68,6 +69,7 @@ export const Facet = observer((properties: FacetProps): JSX.Element => {
 		iconOverflowMore: 'plus',
 		iconOverflowLess: 'minus',
 		searchable: false,
+		treePath: globalTreePath,
 	};
 
 	let props = mergeProps('facet', globalTheme, defaultProps, properties);
@@ -112,8 +114,6 @@ export const Facet = observer((properties: FacetProps): JSX.Element => {
 			className: 'ss__facet__dropdown',
 			disableClickOutside: true,
 			disableOverlay: true,
-			// global theme
-			...globalTheme?.components?.dropdown,
 			// inherited props
 			...defined({
 				disableStyles,
@@ -127,8 +127,6 @@ export const Facet = observer((properties: FacetProps): JSX.Element => {
 			className: 'ss__facet__dropdown__icon',
 			size: '12px',
 			color: iconColor || color,
-			// global theme
-			...globalTheme?.components?.icon,
 			// inherited props
 			...defined({
 				disableStyles,
@@ -142,8 +140,6 @@ export const Facet = observer((properties: FacetProps): JSX.Element => {
 			className: 'ss__facet__show-more-less__icon',
 			size: '10px',
 			color: iconColor || color,
-			// global theme
-			...globalTheme?.components?.icon,
 			// inherited props
 			...defined({
 				disableStyles,
@@ -155,8 +151,6 @@ export const Facet = observer((properties: FacetProps): JSX.Element => {
 		facetHierarchyOptions: {
 			// default props
 			className: 'ss__facet__facet-hierarchy-options',
-			// global theme
-			...globalTheme?.components?.facetHierarchyOptions,
 			// inherited props
 			...defined({
 				disableStyles,
@@ -171,8 +165,6 @@ export const Facet = observer((properties: FacetProps): JSX.Element => {
 		facetListOptions: {
 			// default props
 			className: 'ss__facet__facet-list-options',
-			// global theme
-			...globalTheme?.components?.facetListOptions,
 			// inherited props
 			...defined({
 				disableStyles,
@@ -187,8 +179,6 @@ export const Facet = observer((properties: FacetProps): JSX.Element => {
 		facetGridOptions: {
 			// default props
 			className: 'ss__facet__facet-grid-options',
-			// global theme
-			...globalTheme?.components?.facetGridOptions,
 			// inherited props
 			...defined({
 				disableStyles,
@@ -203,8 +193,6 @@ export const Facet = observer((properties: FacetProps): JSX.Element => {
 		facetPaletteOptions: {
 			// default props
 			className: 'ss__facet__facet-palette-options',
-			// global theme
-			...globalTheme?.components?.facetPaletteOptions,
 			// inherited props
 			...defined({
 				disableStyles,
@@ -219,8 +207,6 @@ export const Facet = observer((properties: FacetProps): JSX.Element => {
 		// facetToggle: {
 		// 	// default props
 		// 	className: 'ss__facet__facet-toggle',
-		// 	// global theme
-		// 	...globalTheme?.components?.facetToggle,
 		// 	// inherited props
 		// 	...defined({
 		// 		disableStyles,
@@ -232,8 +218,6 @@ export const Facet = observer((properties: FacetProps): JSX.Element => {
 		facetSlider: {
 			// default props
 			className: 'ss__facet__facet-slider',
-			// global theme
-			...globalTheme?.components?.facetSlider,
 			// inherited props
 			...defined({
 				disableStyles,
@@ -245,8 +229,6 @@ export const Facet = observer((properties: FacetProps): JSX.Element => {
 		searchInput: {
 			// default props
 			className: 'ss__facet__search-input',
-			// global theme
-			...globalTheme?.components?.searchInput,
 			// inherited props
 			...defined({
 				disableStyles,
@@ -344,6 +326,7 @@ export const Facet = observer((properties: FacetProps): JSX.Element => {
 										? { ...(typeof iconExpand == 'string' ? { icon: iconExpand } : (iconExpand as Partial<IconProps>)) }
 										: { ...(typeof iconCollapse == 'string' ? { icon: iconCollapse } : (iconCollapse as Partial<IconProps>)) })}
 									name={facet?.collapsed ? 'expand' : 'collapse'}
+									treePath={props.treePath}
 								/>
 							)}
 						</div>
@@ -382,7 +365,7 @@ const FacetContent = (props: any) => {
 	return (
 		<Fragment>
 			{searchable && searchableFacet.allowableTypes.includes(facet.display) && (
-				<SearchInput {...subProps.searchInput} onChange={searchableFacet.searchFilter} placeholder={`Search ${facet.label}`} />
+				<SearchInput {...subProps.searchInput} onChange={searchableFacet.searchFilter} placeholder={`Search ${facet.label}`} treePath={treePath} />
 			)}
 			<div className={classnames('ss__facet__options', className)}>
 				{(() => {
@@ -394,21 +377,43 @@ const FacetContent = (props: any) => {
 							// case FacetDisplay.TOGGLE:
 							// 	return <FacetToggle {...subProps.facetToggle} facet={facet as ValueFacet} />;
 							case FacetDisplay.SLIDER:
-								return <FacetSlider {...subProps.facetSlider} facet={facet as RangeFacet} />;
+								return <FacetSlider {...subProps.facetSlider} facet={facet as RangeFacet} treePath={treePath} />;
 							case FacetDisplay.GRID:
-								return <FacetGridOptions {...subProps.facetGridOptions} values={limitedValues as FacetValue[]} facet={facet as ValueFacet} />;
+								return (
+									<FacetGridOptions
+										{...subProps.facetGridOptions}
+										values={limitedValues as FacetValue[]}
+										facet={facet as ValueFacet}
+										treePath={treePath}
+									/>
+								);
 							case FacetDisplay.PALETTE:
-								return <FacetPaletteOptions {...subProps.facetPaletteOptions} values={limitedValues as FacetValue[]} facet={facet as ValueFacet} />;
+								return (
+									<FacetPaletteOptions
+										{...subProps.facetPaletteOptions}
+										values={limitedValues as FacetValue[]}
+										facet={facet as ValueFacet}
+										treePath={treePath}
+									/>
+								);
 							case FacetDisplay.HIERARCHY:
 								return (
 									<FacetHierarchyOptions
 										{...subProps.facetHierarchyOptions}
 										values={limitedValues as FacetHierarchyValue[]}
 										facet={facet as ValueFacet}
+										treePath={treePath}
 									/>
 								);
 							default:
-								return <FacetListOptions {...subProps.facetListOptions} values={limitedValues as FacetValue[]} facet={facet as ValueFacet} />;
+								return (
+									<FacetListOptions
+										{...subProps.facetListOptions}
+										values={limitedValues as FacetValue[]}
+										facet={facet as ValueFacet}
+										treePath={treePath}
+									/>
+								);
 						}
 					}
 				})()}
@@ -427,6 +432,7 @@ const FacetContent = (props: any) => {
 						<Fragment>
 							<Icon
 								{...subProps.showMoreLessIcon}
+								treePath={treePath}
 								{...(((facet as ValueFacet).overflow?.remaining || 0) > 0
 									? { ...(typeof iconOverflowMore == 'string' ? { icon: iconOverflowMore } : (iconOverflowMore as Partial<IconProps>)) }
 									: { ...(typeof iconOverflowLess == 'string' ? { icon: iconOverflowLess } : (iconOverflowLess as Partial<IconProps>)) })}

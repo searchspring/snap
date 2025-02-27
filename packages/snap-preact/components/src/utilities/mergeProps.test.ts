@@ -20,6 +20,7 @@ describe('mergeProps function without theme name', () => {
 			iconClose: 'angle-up',
 			separator: ': ',
 			startOpen: false,
+			treePath: 'select',
 		});
 	});
 	it('merges global theme', () => {
@@ -48,6 +49,7 @@ describe('mergeProps function without theme name', () => {
 			iconClose: 'angle-up',
 			separator: ': ',
 			startOpen: true,
+			treePath: 'select',
 			unrelatedProp: 1,
 		});
 	});
@@ -82,6 +84,7 @@ describe('mergeProps function without theme name', () => {
 			startOpen: true,
 			className: 'additonal-className',
 			unrelatedProp: 1,
+			treePath: 'select',
 		});
 	});
 
@@ -128,6 +131,7 @@ describe('mergeProps function without theme name', () => {
 			startOpen: true,
 			className: 'additonal-className',
 			unrelatedProp: 1,
+			treePath: 'select',
 			theme: properties.theme,
 			...properties.theme?.components![componentType],
 		});
@@ -349,7 +353,6 @@ describe('mergeProps function with theme name', () => {
 					[componentType]: {
 						// @ts-ignore - different prop value
 						startOpen: '2',
-						unrelatedProp: 2,
 					},
 					otherComponent: {
 						shouldNotExist: 2,
@@ -362,7 +365,7 @@ describe('mergeProps function with theme name', () => {
 		expect(props).toStrictEqual({
 			...defaultProps,
 			...properties,
-			startOpen: '1',
+			startOpen: '2',
 			unrelatedProp: 1,
 			theme: {
 				name: globalTheme.name,
@@ -391,6 +394,28 @@ describe('mergeProps function with theme name', () => {
 				name: globalTheme.name,
 			},
 			treePath: `button ${componentType}.first`,
+		});
+	});
+
+	it('nested treePath and named component with dash', () => {
+		const componentType = 'select';
+		const globalTheme = {
+			name: GLOBAL_THEME_NAME,
+		};
+
+		const defaultProps: Partial<SelectProps> = {};
+		const properties: Partial<SelectProps> = {
+			treePath: 'button',
+			name: 'first-button',
+		};
+		const props = mergeProps(componentType, globalTheme, defaultProps, properties);
+		expect(props).toStrictEqual({
+			...defaultProps,
+			...properties,
+			theme: {
+				name: globalTheme.name,
+			},
+			treePath: `button ${componentType}.first-button`,
 		});
 	});
 });

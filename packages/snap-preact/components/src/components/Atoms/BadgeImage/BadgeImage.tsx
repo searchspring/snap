@@ -2,11 +2,11 @@ import { Fragment, h } from 'preact';
 
 import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
-import { observer } from 'mobx-react';
+import { observer } from 'mobx-react-lite';
 
-import { Theme, useTheme, CacheProvider } from '../../../providers';
+import { Theme, useTheme, CacheProvider, useTreePath } from '../../../providers';
 import { ComponentProps, StyleScript } from '../../../types';
-import { mergeStyles } from '../../../utilities';
+import { mergeProps, mergeStyles } from '../../../utilities';
 
 const defaultStyles: StyleScript<BadgeImageProps> = () => {
 	return css({
@@ -17,15 +17,15 @@ const defaultStyles: StyleScript<BadgeImageProps> = () => {
 
 export const BadgeImage = observer((properties: BadgeImageProps): JSX.Element => {
 	const globalTheme: Theme = useTheme();
+	const globalTreePath = useTreePath();
 
-	const props: BadgeImageProps = {
+	const defaultProps: Partial<BadgeImageProps> = {
 		// default props
-		// global theme
-		...globalTheme?.components?.badgeImage,
-		// props
-		...properties,
-		...properties.theme?.components?.badgeImage,
+		treePath: globalTreePath,
 	};
+
+	const props = mergeProps('badgeImage', globalTheme, defaultProps, properties);
+
 	const { label, url, tag, className } = props;
 
 	const styling = mergeStyles<BadgeImageProps>(props, defaultStyles);

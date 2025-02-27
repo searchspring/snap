@@ -1,12 +1,11 @@
 import { h, Fragment } from 'preact';
 import { useState } from 'preact/hooks';
 import { jsx } from '@emotion/react';
-import { observer } from 'mobx-react';
+import { observer } from 'mobx-react-lite';
 import classnames from 'classnames';
 import { cloneWithProps } from '../../../utilities';
-import { Button } from '../../Atoms/Button';
+import { Button, ButtonProps } from '../../Atoms/Button';
 import { Price, PriceProps } from '../../Atoms/Price';
-import { Theme, useTheme } from '../../../providers';
 import { Icon, IconProps, IconType } from '../../Atoms/Icon';
 import type { ComponentProps } from '../../../types';
 import type { CartStore } from '@searchspring/snap-store-mobx';
@@ -14,8 +13,6 @@ import { Lang, useLang } from '../../../hooks';
 import deepmerge from 'deepmerge';
 
 export const BundledCTA = observer((properties: BundledCTAProps): JSX.Element => {
-	const globalTheme: Theme = useTheme();
-
 	const props: BundledCTAProps = {
 		// default props
 		// global theme
@@ -42,29 +39,29 @@ export const BundledCTA = observer((properties: BundledCTAProps): JSX.Element =>
 			// default props
 			className: 'ss__recommendation-bundle__wrapper__cta__icon',
 			size: 50,
-			// global theme
-			...globalTheme?.components?.icon,
 			// component theme overrides
 			theme: props?.theme,
-			treePath: treePath,
+			treePath,
 		},
 		subtotalStrike: {
 			// default props
 			name: 'bundle-msrp',
-			// global theme
-			...globalTheme?.components?.price,
 			// component theme overrides
 			theme: props?.theme,
-			treePath: treePath,
+			treePath,
 		},
 		subtotalPrice: {
 			// default props
 			name: 'bundle-price',
-			// global theme
-			...globalTheme?.components?.price,
 			// component theme overrides
 			theme: props?.theme,
-			treePath: treePath,
+			treePath,
+		},
+		button: {
+			// default props
+			// component theme overrides
+			theme: props?.theme,
+			treePath,
 		},
 	};
 
@@ -101,6 +98,7 @@ export const BundledCTA = observer((properties: BundledCTAProps): JSX.Element =>
 					</div>
 
 					<Button
+						{...subProps.button}
 						className={classnames('ss__recommendation-bundle__wrapper__cta__button', {
 							'ss__recommendation-bundle__wrapper__cta__button--added': addedToCart,
 						})}
@@ -120,6 +118,7 @@ export interface BundleSelectorSubProps {
 	subtotalStrike: Partial<PriceProps>;
 	subtotalPrice: Partial<PriceProps>;
 	icon: Partial<IconProps>;
+	button: Partial<ButtonProps>;
 }
 
 export interface BundledCTAProps extends ComponentProps {

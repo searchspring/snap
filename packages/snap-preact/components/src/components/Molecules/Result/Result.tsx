@@ -1,12 +1,12 @@
 import { Fragment, h } from 'preact';
 
-import { observer } from 'mobx-react';
+import { observer } from 'mobx-react-lite';
 import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
 
 import { Image, ImageProps } from '../../Atoms/Image';
 import { Price, PriceProps } from '../../Atoms/Price';
-import { Theme, useTheme, CacheProvider } from '../../../providers';
+import { Theme, useTheme, CacheProvider, useTreePath } from '../../../providers';
 import { defined, cloneWithProps, mergeProps, mergeStyles } from '../../../utilities';
 import { filters } from '@searchspring/snap-toolbox';
 import { ComponentProps, ResultsLayout, StyleScript } from '../../../types';
@@ -74,9 +74,10 @@ const defaultStyles: StyleScript<ResultProps> = () => {
 
 export const Result = observer((properties: ResultProps): JSX.Element => {
 	const globalTheme: Theme = useTheme();
-
+	const globalTreePath = useTreePath();
 	const defaultProps: Partial<ResultProps> = {
 		layout: ResultsLayout.grid,
+		treePath: globalTreePath,
 	};
 
 	const props = mergeProps('result', globalTheme, defaultProps, properties);
@@ -103,8 +104,6 @@ export const Result = observer((properties: ResultProps): JSX.Element => {
 		price: {
 			// global theme
 			className: 'ss__result__price',
-			...globalTheme?.components?.price,
-			// inherited props
 			...defined({
 				disableStyles,
 			}),
@@ -116,8 +115,6 @@ export const Result = observer((properties: ResultProps): JSX.Element => {
 			// default props
 			className: 'ss__result__callout-badge',
 			result,
-			// global theme
-			...globalTheme?.components?.calloutBadge,
 			// inherited props
 			...defined({
 				disableStyles,
@@ -131,8 +128,6 @@ export const Result = observer((properties: ResultProps): JSX.Element => {
 			className: 'ss__result__overlay-badge',
 			result,
 			controller: controller as SearchController | AutocompleteController | RecommendationController,
-			// global theme
-			...globalTheme?.components?.overlayBadge,
 			// inherited props
 			...defined({
 				disableStyles,
@@ -146,8 +141,6 @@ export const Result = observer((properties: ResultProps): JSX.Element => {
 			className: 'ss__result__image',
 			alt: core?.name || '',
 			src: core?.imageUrl || '',
-			// global theme
-			...globalTheme?.components?.image,
 			// inherited props
 			...defined({
 				disableStyles,

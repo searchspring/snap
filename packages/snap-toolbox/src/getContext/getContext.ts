@@ -2,6 +2,52 @@ type ContextVariables = {
 	[variable: string]: any;
 };
 
+const JAVASCRIPT_KEYWORDS = new Set([
+	'break',
+	'case',
+	'catch',
+	'class',
+	'const',
+	'continue',
+	'debugger',
+	'default',
+	'delete',
+	'do',
+	'else',
+	'export',
+	'extends',
+	'finally',
+	'for',
+	'function',
+	'if',
+	'import',
+	'in',
+	'instanceof',
+	'new',
+	'return',
+	'super',
+	'switch',
+	'this',
+	'throw',
+	'try',
+	'typeof',
+	'var',
+	'void',
+	'while',
+	'with',
+	'yield',
+	'let',
+	'static',
+	'enum',
+	'await',
+	'implements',
+	'package',
+	'protected',
+	'interface',
+	'private',
+	'public',
+]);
+
 export function getContext(evaluate: string[] = [], script?: HTMLScriptElement | string): ContextVariables {
 	if (!script || typeof script === 'string') {
 		const scripts = Array.from(document.querySelectorAll((script as string) || 'script[id^=searchspring], script[src*="snapui.searchspring.io"]'));
@@ -49,24 +95,43 @@ export function getContext(evaluate: string[] = [], script?: HTMLScriptElement |
 	const scriptInnerHTML = scriptElem.innerHTML;
 
 	// attempt to grab inner HTML variables
-	const scriptInnerVars = scriptInnerHTML.match(/([a-zA-Z_$][a-zA-Z_$0-9]*)\s?=/g)?.map((match) => match.replace(/[\s=]/g, ''));
+	const scriptInnerVars = scriptInnerHTML
+		// first remove all string literals (including template literals) to avoid false matches
+		.replace(/`(?:\\[\s\S]|[^`\\])*`|'(?:\\[\s\S]|[^'\\])*'|"(?:\\[\s\S]|[^"\\])*"/g, '')
+		// then find variable assignments
+		.match(/([a-zA-Z_$][a-zA-Z_$0-9]*)\s*=/g)
+		?.map((match) => match.replace(/[\s=]/g, ''));
 
 	const combinedVars = evaluate.concat(scriptInnerVars || []);
 
 	// de-dupe vars
 	const evaluateVars = combinedVars.filter((item, index) => {
-		return combinedVars.indexOf(item) === index;
+		const isKeyword = JAVASCRIPT_KEYWORDS.has(item);
+		// console error if keyword
+		if (isKeyword) {
+			console.error(`getContext: JavaScript keyword found: '${item}'! Please use a different variable name.`);
+		}
+		return combinedVars.indexOf(item) === index && !isKeyword;
 	});
 
 	// evaluate text and put into variables
 	evaluate?.forEach((name) => {
-		const fn = new Function(`
-			var ${evaluateVars.join(', ')};
-			${scriptInnerHTML}
-			return ${name};
-		`);
-
-		scriptVariables[name] = fn();
+		try {
+			const fn = new Function(`
+				var ${evaluateVars.join(', ')};
+				${scriptInnerHTML}
+				return ${name};
+			`);
+			scriptVariables[name] = fn();
+		} catch (err) {
+			// if evaluation fails, set to undefined
+			const isKeyword = JAVASCRIPT_KEYWORDS.has(name);
+			if (!isKeyword) {
+				console.error(`getContext: error evaluating '${name}'`);
+				console.error(err);
+			}
+			scriptVariables[name] = undefined;
+		}
 	});
 
 	const variables = {

@@ -1,5 +1,5 @@
 import { Fragment, h } from 'preact';
-import { observer } from 'mobx-react';
+import { observer } from 'mobx-react-lite';
 import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
 import deepmerge from 'deepmerge';
@@ -56,7 +56,7 @@ export const RecommendationGrid = observer((properties: RecommendationGridProps)
 		};
 	}
 
-	const { disableStyles, title, resultComponent, trim, lazyRender, className, theme, controller } = props;
+	const { disableStyles, title, resultComponent, trim, lazyRender, className, treePath, theme, controller } = props;
 
 	const mergedlazyRender = {
 		enabled: true,
@@ -68,8 +68,6 @@ export const RecommendationGrid = observer((properties: RecommendationGridProps)
 		result: {
 			// default props
 			className: 'ss__recommendation-grid__result',
-			// global theme
-			...globalTheme?.components?.result,
 			// inherited props
 			...defined({
 				disableStyles,
@@ -122,7 +120,7 @@ export const RecommendationGrid = observer((properties: RecommendationGridProps)
 								(() => {
 									if (resultComponent && controller) {
 										const ResultComponent = resultComponent;
-										return <ResultComponent controller={controller} result={result as Product} theme={theme} />;
+										return <ResultComponent controller={controller} result={result as Product} theme={theme} treePath={treePath} />;
 									} else {
 										return (
 											<RecommendationResultTracker result={result as Product} controller={controller}>

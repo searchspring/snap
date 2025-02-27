@@ -19,6 +19,11 @@ const searchHeaderStyleScript = ({ theme }: SearchHeaderProps) => {
 };
 
 // SearchHeader component props
-export const searchHeader: Partial<SearchHeaderProps> = {
-	themeStyleScript: searchHeaderStyleScript,
+export const searchHeader: ThemeComponentProps<SearchHeaderProps> = {
+	default: {
+		themeStyleScript: searchHeaderStyleScript,
+	},
+	mobile: {},
+	tablet: {},
+	desktop: {},
 };

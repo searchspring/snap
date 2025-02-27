@@ -7,7 +7,7 @@ import { Icon, IconProps } from '../../Atoms/Icon/Icon';
 
 import { ComponentProps, StyleScript } from '../../../types';
 import { defined, mergeProps, mergeStyles } from '../../../utilities';
-import { Theme, useTheme } from '../../../providers';
+import { Theme, useTheme, useTreePath } from '../../../providers';
 
 export type BranchOverrideTheme = {
 	class: string;
@@ -245,8 +245,11 @@ const componentThemes = {
 
 export const BranchOverride = (properties: BranchOverrideProps): JSX.Element => {
 	const globalTheme: Theme = useTheme();
+	const globalTreePath = useTreePath();
 
-	const defaultProps: Partial<BranchOverrideProps> = {};
+	const defaultProps: Partial<BranchOverrideProps> = {
+		treePath: globalTreePath,
+	};
 
 	const props = mergeProps('branchOverride', globalTheme, defaultProps, properties);
 
@@ -257,8 +260,6 @@ export const BranchOverride = (properties: BranchOverrideProps): JSX.Element => 
 			// default props
 			className: 'ss__branch-override__bottom__left__icon',
 			size: '12px',
-			// global theme
-			...globalTheme?.components?.icon,
 			// inherited props
 			...defined({
 				disableStyles,

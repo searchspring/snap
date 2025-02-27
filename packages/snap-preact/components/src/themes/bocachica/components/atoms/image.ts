@@ -7,21 +7,18 @@ const imageStyleScript = ({ visibility, theme }: ImageProps & { visibility: Reac
 	const variables = theme?.variables;
 
 	return css({
-		display: 'flex',
-		flexDirection: 'column',
-		justifyContent: 'center',
-		height: 'auto',
 		'& img': {
 			visibility: visibility,
-			flexShrink: '0',
-			objectFit: 'contain',
-			maxWidth: '100%',
-			maxHeight: '100%',
 		},
 	});
 };
 
 // Image component props
-export const image: Partial<ImageProps> = {
-	themeStyleScript: imageStyleScript,
+export const image: ThemeComponentProps<ImageProps> = {
+	default: {
+		themeStyleScript: imageStyleScript,
+	},
+	mobile: {},
+	tablet: {},
+	desktop: {},
 };

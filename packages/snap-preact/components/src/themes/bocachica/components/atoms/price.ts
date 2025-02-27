@@ -6,11 +6,8 @@ const priceStyleScript = ({ theme }: PriceProps) => {
 	const variables = theme?.variables;
 
 	return css({
-		color: variables?.colors?.secondary,
 		margin: '0 0.5rem 0 0',
-
 		'&.ss__price--strike': {
-			textDecoration: 'line-through',
 			color: variables?.colors?.secondary || 'inherit',
 			opacity: 0.5,
 		},
@@ -18,6 +15,11 @@ const priceStyleScript = ({ theme }: PriceProps) => {
 };
 
 // Price component props
-export const price: Partial<PriceProps> = {
-	themeStyleScript: priceStyleScript,
+export const price: ThemeComponentProps<PriceProps> = {
+	default: {
+		themeStyleScript: priceStyleScript,
+	},
+	mobile: {},
+	tablet: {},
+	desktop: {},
 };

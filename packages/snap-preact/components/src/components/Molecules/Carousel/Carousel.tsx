@@ -3,10 +3,10 @@ import { useRef, useEffect } from 'preact/hooks';
 
 import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
-import { observer } from 'mobx-react';
+import { observer } from 'mobx-react-lite';
 import deepmerge from 'deepmerge';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { defined, mergeProps, mergeStyles } from '../../../utilities';
+import { cloneWithProps, defined, mergeProps, mergeStyles } from '../../../utilities';
 import { Navigation, Pagination, A11y } from 'swiper/modules';
 import { Icon, IconProps } from '../../Atoms/Icon/Icon';
 import type { Swiper as SwiperTypes } from 'swiper';
@@ -14,7 +14,7 @@ import type { SwiperOptions } from 'swiper/types';
 import type { PaginationOptions } from 'swiper/types/modules/pagination';
 import type { NavigationOptions } from 'swiper/types/modules/navigation';
 
-import { Theme, useTheme, CacheProvider } from '../../../providers';
+import { Theme, useTheme, CacheProvider, useTreePath } from '../../../providers';
 import { ComponentProps, BreakpointsProps, StyleScript } from '../../../types';
 import { useDisplaySettings } from '../../../hooks/useDisplaySettings';
 
@@ -182,6 +182,7 @@ export const defaultVerticalCarouselBreakpoints = {
 
 export const Carousel = observer((properties: CarouselProps): JSX.Element => {
 	const globalTheme: Theme = useTheme();
+	const globalTreePath = useTreePath();
 	const defaultProps: Partial<CarouselProps> = {
 		breakpoints: properties.vertical
 			? JSON.parse(JSON.stringify(defaultVerticalCarouselBreakpoints))
@@ -189,11 +190,7 @@ export const Carousel = observer((properties: CarouselProps): JSX.Element => {
 		pagination: false,
 		loop: true,
 		autoAdjustSlides: false,
-		// global theme
-		...globalTheme?.components?.carousel,
-		//props
-		...properties,
-		...properties.theme?.components?.carousel,
+		treePath: globalTreePath,
 	};
 
 	let props = mergeProps('carousel', globalTheme, defaultProps, properties);
@@ -249,8 +246,6 @@ export const Carousel = observer((properties: CarouselProps): JSX.Element => {
 		icon: {
 			// default props
 			className: 'ss__carousel__icon',
-			// global theme
-			...globalTheme?.components?.icon,
 			// inherited props
 			...defined({
 				disableStyles,
@@ -411,7 +406,7 @@ export const Carousel = observer((properties: CarouselProps): JSX.Element => {
 					}}
 				>
 					{children.map((child: ComponentChildren) => {
-						return <SwiperSlide>{child}</SwiperSlide>;
+						return <SwiperSlide>{cloneWithProps(child, { treePath })}</SwiperSlide>;
 					})}
 				</Swiper>
 

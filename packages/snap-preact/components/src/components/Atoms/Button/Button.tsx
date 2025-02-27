@@ -2,19 +2,19 @@ import { h, Fragment, ComponentChildren } from 'preact';
 
 import { css } from '@emotion/react';
 import classnames from 'classnames';
-import { observer } from 'mobx-react';
+import { observer } from 'mobx-react-lite';
 
 import { ComponentProps, StyleScript } from '../../../types';
-import { Theme, useTheme, CacheProvider } from '../../../providers';
+import { Theme, useTheme, CacheProvider, useTreePath } from '../../../providers';
 import { useA11y } from '../../../hooks/useA11y';
-import { defined, mergeProps, mergeStyles } from '../../../utilities';
+import { cloneWithProps, defined, mergeProps, mergeStyles } from '../../../utilities';
 import { Icon, IconProps, IconType } from '../Icon';
 import { Lang, useLang } from '../../../hooks';
 import deepmerge from 'deepmerge';
 import Color from 'color';
 
 const defaultStyles: StyleScript<ButtonProps> = ({ native, color, backgroundColor, borderColor, theme }) => {
-	const lightenedPrimary = new Color(backgroundColor || color || theme?.variables?.colors?.primary).lightness(95);
+	const lightenedPrimaryColorObj = new Color(backgroundColor || color || theme?.variables?.colors?.primary).lightness(95);
 
 	// no styling on native
 	if (native) {
@@ -24,6 +24,7 @@ const defaultStyles: StyleScript<ButtonProps> = ({ native, color, backgroundColo
 	return css({
 		display: 'inline-flex',
 		alignItems: 'center',
+		gap: '5px',
 		padding: '5px 10px',
 		position: 'relative',
 		color: color || theme?.variables?.colors?.primary,
@@ -32,7 +33,7 @@ const defaultStyles: StyleScript<ButtonProps> = ({ native, color, backgroundColo
 		border: `1px solid ${borderColor || color || theme?.variables?.colors?.primary || '#333'}`,
 		'&:not(.ss__button--disabled):hover': {
 			cursor: 'pointer',
-			backgroundColor: lightenedPrimary.hex() || '#f8f8f8',
+			backgroundColor: lightenedPrimaryColorObj.hex() || '#f8f8f8',
 		},
 		'&.ss__button--disabled': {
 			opacity: 0.3,
@@ -52,8 +53,11 @@ const defaultStyles: StyleScript<ButtonProps> = ({ native, color, backgroundColo
 
 export const Button = observer((properties: ButtonProps): JSX.Element => {
 	const globalTheme: Theme = useTheme();
+	const globalTreePath = useTreePath();
+
 	const defaultProps = {
 		disableA11y: false,
+		treePath: globalTreePath,
 	};
 
 	const props = mergeProps('button', globalTheme, defaultProps, properties);
@@ -80,8 +84,6 @@ export const Button = observer((properties: ButtonProps): JSX.Element => {
 		icon: {
 			className: 'ss__button__icon',
 			// default props
-			// global theme
-			...globalTheme?.components?.icon,
 			// inherited props
 			...defined({
 				disableStyles,
@@ -118,17 +120,19 @@ export const Button = observer((properties: ButtonProps): JSX.Element => {
 			{native ? (
 				<button {...elementProps}>
 					<span className="ss__button__content" {...mergedLang.button?.all}>
-						{content}
-						{children}
+						{cloneWithProps(content, { treePath })}
+						{cloneWithProps(children, { treePath })}
 					</span>
 					{icon && <Icon {...subProps.icon} {...(typeof icon == 'string' ? { icon: icon } : (icon as Partial<IconProps>))} />}
 				</button>
 			) : (
 				<div {...(!disableA11y ? a11yProps : {})} {...elementProps} role={'button'} aria-disabled={disabled}>
-					<span className="ss__button__content" {...mergedLang.button?.all}>
-						{content}
-						{children}
-					</span>
+					{content || children || mergedLang.button.value ? (
+						<span className="ss__button__content" {...mergedLang.button?.all}>
+							{cloneWithProps(content, { treePath })}
+							{cloneWithProps(children, { treePath })}
+						</span>
+					) : undefined}
 					{icon && <Icon {...subProps.icon} {...(typeof icon == 'string' ? { icon: icon } : (icon as Partial<IconProps>))} />}
 				</div>
 			)}
@@ -160,4 +164,4 @@ export interface ButtonLang {
 	button?: Lang<never>;
 }
 
-export type ButtonNames = 'close' | 'apply' | 'clear' | 'slideout';
+export type ButtonNames = 'close' | 'apply' | 'clear' | 'slideout' | 'filter-toggle';
