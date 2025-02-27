@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.5.0](https://github.com/searchspring/snap/compare/v1.4.0...v1.5.0) (2025-02-27)
+
+### Bug Fixes
+
+- **toolbox/getcontext:** adding resiliency to getContext to prevent keyword usage errors ([b3cf7ce](https://github.com/searchspring/snap/commit/b3cf7ce6ba51e6d35b55d466d5fcc0a3367b6976))
+
 # [1.4.0](https://github.com/searchspring/snap/compare/v1.3.0...v1.4.0) (2024-12-23)
 
 ### Bug Fixes

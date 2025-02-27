@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.5.0](https://github.com/searchspring/snap/compare/v1.4.0...v1.5.0) (2025-02-27)
+
+### Bug Fixes
+
+- after merge changes for testing fixes ([ec84ca2](https://github.com/searchspring/snap/commit/ec84ca280aca085b1fe71f1b37f5c17487b98089))
+- **mergeprops:** adding support for customComponents and ccp usage and priority bugfixes ([4b6604a](https://github.com/searchspring/snap/commit/4b6604adbe8373d9d21e7153f948fa0bb958bc26))
+- **preact/components:** fixing logic in toolbar to prevent integer display ([2bd53e9](https://github.com/searchspring/snap/commit/2bd53e9995ae5c044a27a446b9e2b71de855f2f2))
+- **preact/themestore:** modification to theme store to properly merge overrides to props.theme ([4f12f5c](https://github.com/searchspring/snap/commit/4f12f5c88f6db67143b4526c65657f78c218785c))
+
+### Features
+
+- add preconnect via js ([bd30d59](https://github.com/searchspring/snap/commit/bd30d59b7abf6f7f365675cf00005d06ef0de2c5))
+- **configuremobx:** auto determine if mobx should useProxies based on webpack build type ([dbef10a](https://github.com/searchspring/snap/commit/dbef10a8727b21d638509b2c0799712b6c1d71e6))
+- **platfrom-selection-addtocart:** auto add addtocart plugins based on config platform ([632cfd1](https://github.com/searchspring/snap/commit/632cfd15f0307c756182a81e53ddbdef5c99dfc0))
+- **preact:** renaming the branch override parameter to `searchspring-preview` ([eee80a0](https://github.com/searchspring/snap/commit/eee80a02608cf4947a562134cf7f5633b07b8624))
+- **snappy theme:** adding the snappy theme ([5505999](https://github.com/searchspring/snap/commit/5505999863b6fb5248dc5a78552f1d89c7df4ad9))
+
 # [1.4.0](https://github.com/searchspring/snap/compare/v1.3.0...v1.4.0) (2024-12-23)
 
 ### Bug Fixes
@@ -141,6 +158,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 - **snap-layout/theming:** work towards theming a snap layout using styleScripts ([b6be05e](https://github.com/searchspring/snap/commit/b6be05eee8fc0a06c9e853a591aa0d380158fc0c))
 - support template themes in snap-preact ([df9d905](https://github.com/searchspring/snap/commit/df9d9057a1554d7eb62830002c3db990e0f8f272))
 - theme reactivity initial interface ([c017aad](https://github.com/searchspring/snap/commit/c017aadd4add7591bd98fcfbdb8db8985bf2d498))
+
 ## [0.63.5](https://github.com/searchspring/snap/compare/v0.63.4...v0.63.5) (2025-02-21)
 
 ### Bug Fixes

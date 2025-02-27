@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.5.0](https://github.com/searchspring/snap/compare/v1.4.0...v1.5.0) (2025-02-27)
+
+### Bug Fixes
+
+- **autocompletecontroller.test:** bugfix for autocomplete singleResult redirects w/ inline banners ([dcf8133](https://github.com/searchspring/snap/commit/dcf8133b0de3cfa889f427b6b0dfcf2854696b67))
+- **store-mobx/searchresultstore:** fixing issue with inline banners ([836d916](https://github.com/searchspring/snap/commit/836d9162f6679934621df01ac5c8b16f70a995eb))
+
+### Features
+
+- **platfrom-selection-addtocart:** auto add addtocart plugins based on config platform ([632cfd1](https://github.com/searchspring/snap/commit/632cfd15f0307c756182a81e53ddbdef5c99dfc0))
+
 # [1.4.0](https://github.com/searchspring/snap/compare/v1.3.0...v1.4.0) (2024-12-23)
 
 ### Bug Fixes
@@ -86,6 +97,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 ### Features
 
 - **preact-components/storybook:** updating storybook to latest version - build stable ([43c598d](https://github.com/searchspring/snap/commit/43c598d0e4d11d76364ff2775ecdcabe489023a8))
+
 ## [0.63.5](https://github.com/searchspring/snap/compare/v0.63.4...v0.63.5) (2025-02-21)
 
 **Note:** Version bump only for package @searchspring/snap-controller

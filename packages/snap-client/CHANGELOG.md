@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.5.0](https://github.com/searchspring/snap/compare/v1.4.0...v1.5.0) (2025-02-27)
+
+### Bug Fixes
+
+- **searchresponse.ts:** bugfix in transformSearchResponse transforming badge fields ([4231094](https://github.com/searchspring/snap/commit/4231094a19932fd920f107286f40a61281d27944))
+
 # [1.4.0](https://github.com/searchspring/snap/compare/v1.3.0...v1.4.0) (2024-12-23)
 
 ### Bug Fixes
@@ -72,6 +78,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 **Note:** Version bump only for package @searchspring/snap-client
 
 # [1.1.0](https://github.com/searchspring/snap/compare/v0.60.1...v1.1.0) (2024-09-20)
+
 ## [0.63.5](https://github.com/searchspring/snap/compare/v0.63.4...v0.63.5) (2025-02-21)
 
 **Note:** Version bump only for package @searchspring/snap-client

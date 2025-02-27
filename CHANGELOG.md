@@ -3,6 +3,30 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.5.0](https://github.com/searchspring/snap-1.0/compare/v1.4.0...v1.5.0) (2025-02-27)
+
+### Bug Fixes
+
+- after merge changes for testing fixes ([ec84ca2](https://github.com/searchspring/snap-1.0/commit/ec84ca280aca085b1fe71f1b37f5c17487b98089))
+- **autocompletecontroller.test:** bugfix for autocomplete singleResult redirects w/ inline banners ([dcf8133](https://github.com/searchspring/snap-1.0/commit/dcf8133b0de3cfa889f427b6b0dfcf2854696b67))
+- **bundleselector.tsx:** change checkbox size from number to px ([fc071fc](https://github.com/searchspring/snap-1.0/commit/fc071fc1d7ab10269802e0489185f0b0fb794057))
+- **checkbox.tsx:** small refactor to checkbox icon size translating ([d5192bc](https://github.com/searchspring/snap-1.0/commit/d5192bc82b12ef4e0dc0e190d33b3cab4ed273f3))
+- **mergeprops:** adding support for customComponents and ccp usage and priority bugfixes ([4b6604a](https://github.com/searchspring/snap-1.0/commit/4b6604adbe8373d9d21e7153f948fa0bb958bc26))
+- **preact/components:** fixing logic in toolbar to prevent integer display ([2bd53e9](https://github.com/searchspring/snap-1.0/commit/2bd53e9995ae5c044a27a446b9e2b71de855f2f2))
+- **preact/themestore:** modification to theme store to properly merge overrides to props.theme ([4f12f5c](https://github.com/searchspring/snap-1.0/commit/4f12f5c88f6db67143b4526c65657f78c218785c))
+- **searchresponse.ts:** bugfix in transformSearchResponse transforming badge fields ([4231094](https://github.com/searchspring/snap-1.0/commit/4231094a19932fd920f107286f40a61281d27944))
+- **store-mobx/recommendationstore:** adjusting config so that `searchOnPageShow` is optional ([1cd4c7c](https://github.com/searchspring/snap-1.0/commit/1cd4c7c275b2749d51049f06126c31b2226b94a6))
+- **store-mobx/searchresultstore:** fixing issue with inline banners ([836d916](https://github.com/searchspring/snap-1.0/commit/836d9162f6679934621df01ac5c8b16f70a995eb))
+- **toolbox/getcontext:** adding resiliency to getContext to prevent keyword usage errors ([b3cf7ce](https://github.com/searchspring/snap-1.0/commit/b3cf7ce6ba51e6d35b55d466d5fcc0a3367b6976))
+
+### Features
+
+- add preconnect via js ([bd30d59](https://github.com/searchspring/snap-1.0/commit/bd30d59b7abf6f7f365675cf00005d06ef0de2c5))
+- **configuremobx:** auto determine if mobx should useProxies based on webpack build type ([dbef10a](https://github.com/searchspring/snap-1.0/commit/dbef10a8727b21d638509b2c0799712b6c1d71e6))
+- **platfrom-selection-addtocart:** auto add addtocart plugins based on config platform ([632cfd1](https://github.com/searchspring/snap-1.0/commit/632cfd15f0307c756182a81e53ddbdef5c99dfc0))
+- **preact:** renaming the branch override parameter to `searchspring-preview` ([eee80a0](https://github.com/searchspring/snap-1.0/commit/eee80a02608cf4947a562134cf7f5633b07b8624))
+- **snappy theme:** adding the snappy theme ([5505999](https://github.com/searchspring/snap-1.0/commit/5505999863b6fb5248dc5a78552f1d89c7df4ad9))
+
 # [1.4.0](https://github.com/searchspring/snap-1.0/compare/v1.3.0...v1.4.0) (2024-12-23)
 
 ### Bug Fixes
@@ -194,6 +218,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 - **snap-layout/theming:** work towards theming a snap layout using styleScripts ([b6be05e](https://github.com/searchspring/snap-1.0/commit/b6be05eee8fc0a06c9e853a591aa0d380158fc0c))
 - support template themes in snap-preact ([df9d905](https://github.com/searchspring/snap-1.0/commit/df9d9057a1554d7eb62830002c3db990e0f8f272))
 - theme reactivity initial interface ([c017aad](https://github.com/searchspring/snap-1.0/commit/c017aadd4add7591bd98fcfbdb8db8985bf2d498))
+
 ## [0.63.5](https://github.com/searchspring/snap/compare/v0.63.4...v0.63.5) (2025-02-21)
 
 ### Bug Fixes

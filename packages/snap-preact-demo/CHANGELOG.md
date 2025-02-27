@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.5.0](https://github.com/searchspring/snap-1.0/compare/v1.4.0...v1.5.0) (2025-02-27)
+
+### Bug Fixes
+
+- after merge changes for testing fixes ([ec84ca2](https://github.com/searchspring/snap-1.0/commit/ec84ca280aca085b1fe71f1b37f5c17487b98089))
+
+### Features
+
+- **configuremobx:** auto determine if mobx should useProxies based on webpack build type ([dbef10a](https://github.com/searchspring/snap-1.0/commit/dbef10a8727b21d638509b2c0799712b6c1d71e6))
+- **preact:** renaming the branch override parameter to `searchspring-preview` ([eee80a0](https://github.com/searchspring/snap-1.0/commit/eee80a02608cf4947a562134cf7f5633b07b8624))
+
 # [1.4.0](https://github.com/searchspring/snap-1.0/compare/v1.3.0...v1.4.0) (2024-12-23)
 
 ### Bug Fixes
@@ -95,6 +106,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 - responsive themestore and breakpoint props ([d4faf3a](https://github.com/searchspring/snap-1.0/commit/d4faf3acdd2703b0225d4784c078ada967c64527))
 - separate recommendation types ([4a03491](https://github.com/searchspring/snap-1.0/commit/4a03491766fd3dbd3eeddf8d91ed4572bd4ae6bf))
 - support template themes in snap-preact ([df9d905](https://github.com/searchspring/snap-1.0/commit/df9d9057a1554d7eb62830002c3db990e0f8f272))
+
 ## [0.63.5](https://github.com/searchspring/snap/compare/v0.63.4...v0.63.5) (2025-02-21)
 
 **Note:** Version bump only for package @searchspring/snap-preact-demo

@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.5.0](https://github.com/searchspring/snap-1.0/compare/v1.4.0...v1.5.0) (2025-02-27)
+
+### Bug Fixes
+
+- **autocompletecontroller.test:** bugfix for autocomplete singleResult redirects w/ inline banners ([dcf8133](https://github.com/searchspring/snap-1.0/commit/dcf8133b0de3cfa889f427b6b0dfcf2854696b67))
+- **store-mobx/searchresultstore:** fixing issue with inline banners ([836d916](https://github.com/searchspring/snap-1.0/commit/836d9162f6679934621df01ac5c8b16f70a995eb))
+
 # [1.4.0](https://github.com/searchspring/snap-1.0/compare/v1.3.0...v1.4.0) (2024-12-23)
 
 ### Bug Fixes
