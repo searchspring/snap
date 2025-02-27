@@ -160,8 +160,6 @@ export const RecommendationBundle = observer((properties: RecommendationBundlePr
 		ctaButtonSuccessTimeout: 2000,
 		ctaInline: true,
 		onAddToCart: (e, items) => controller?.addToCart && controller.addToCart(items),
-		// global theme
-		...globalTheme?.components?.recommendationBundle,
 		...properties,
 		// props
 		...properties.theme?.components?.recommendationBundle,
@@ -257,8 +255,6 @@ export const RecommendationBundle = observer((properties: RecommendationBundlePr
 			loop: loop,
 			// default props
 			className: 'ss__recommendation__carousel',
-			// global theme
-			...globalTheme?.components?.carousel,
 			// inherited props
 			...defined({
 				disableStyles,
@@ -270,8 +266,6 @@ export const RecommendationBundle = observer((properties: RecommendationBundlePr
 		result: {
 			// default props
 			className: 'ss__recommendation__result',
-			// global theme
-			...globalTheme?.components?.result,
 			// inherited props
 			...defined({
 				disableStyles,

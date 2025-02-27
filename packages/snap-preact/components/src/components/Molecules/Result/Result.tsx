@@ -104,8 +104,6 @@ export const Result = observer((properties: ResultProps): JSX.Element => {
 		price: {
 			// global theme
 			className: 'ss__result__price',
-			...globalTheme?.components?.price,
-			// inherited props
 			...defined({
 				disableStyles,
 			}),
@@ -117,8 +115,6 @@ export const Result = observer((properties: ResultProps): JSX.Element => {
 			// default props
 			className: 'ss__result__callout-badge',
 			result,
-			// global theme
-			...globalTheme?.components?.calloutBadge,
 			// inherited props
 			...defined({
 				disableStyles,
@@ -132,8 +128,6 @@ export const Result = observer((properties: ResultProps): JSX.Element => {
 			className: 'ss__result__overlay-badge',
 			result,
 			controller: controller as SearchController | AutocompleteController | RecommendationController,
-			// global theme
-			...globalTheme?.components?.overlayBadge,
 			// inherited props
 			...defined({
 				disableStyles,
@@ -147,8 +141,6 @@ export const Result = observer((properties: ResultProps): JSX.Element => {
 			className: 'ss__result__image',
 			alt: core?.name || '',
 			src: core?.imageUrl || '',
-			// global theme
-			...globalTheme?.components?.image,
 			// inherited props
 			...defined({
 				disableStyles,

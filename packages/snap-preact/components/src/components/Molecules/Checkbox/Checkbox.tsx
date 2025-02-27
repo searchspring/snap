@@ -61,8 +61,6 @@ export const Checkbox = observer((properties: CheckboxProps): JSX.Element => {
 			// default props
 			className: 'ss__checkbox__icon',
 			icon: 'check-thin',
-			// global theme
-			...globalTheme?.components?.icon,
 			// inherited props
 			...defined({
 				color: iconColor || color || theme?.variables?.colors?.primary,

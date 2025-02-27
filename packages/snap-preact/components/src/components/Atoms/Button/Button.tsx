@@ -84,8 +84,6 @@ export const Button = observer((properties: ButtonProps): JSX.Element => {
 		icon: {
 			className: 'ss__button__icon',
 			// default props
-			// global theme
-			...globalTheme?.components?.icon,
 			// inherited props
 			...defined({
 				disableStyles,
@@ -129,10 +127,12 @@ export const Button = observer((properties: ButtonProps): JSX.Element => {
 				</button>
 			) : (
 				<div {...(!disableA11y ? a11yProps : {})} {...elementProps} role={'button'} aria-disabled={disabled}>
-					<span className="ss__button__content" {...mergedLang.button?.all}>
-						{cloneWithProps(content, { treePath })}
-						{cloneWithProps(children, { treePath })}
-					</span>
+					{content || children || mergedLang.button.value ? (
+						<span className="ss__button__content" {...mergedLang.button?.all}>
+							{cloneWithProps(content, { treePath })}
+							{cloneWithProps(children, { treePath })}
+						</span>
+					) : undefined}
 					{icon && <Icon {...subProps.icon} {...(typeof icon == 'string' ? { icon: icon } : (icon as Partial<IconProps>))} />}
 				</div>
 			)}

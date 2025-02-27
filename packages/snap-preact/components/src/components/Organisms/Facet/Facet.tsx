@@ -114,8 +114,6 @@ export const Facet = observer((properties: FacetProps): JSX.Element => {
 			className: 'ss__facet__dropdown',
 			disableClickOutside: true,
 			disableOverlay: true,
-			// global theme
-			...globalTheme?.components?.dropdown,
 			// inherited props
 			...defined({
 				disableStyles,
@@ -129,8 +127,6 @@ export const Facet = observer((properties: FacetProps): JSX.Element => {
 			className: 'ss__facet__dropdown__icon',
 			size: '12px',
 			color: iconColor || color,
-			// global theme
-			...globalTheme?.components?.icon,
 			// inherited props
 			...defined({
 				disableStyles,
@@ -144,8 +140,6 @@ export const Facet = observer((properties: FacetProps): JSX.Element => {
 			className: 'ss__facet__show-more-less__icon',
 			size: '10px',
 			color: iconColor || color,
-			// global theme
-			...globalTheme?.components?.icon,
 			// inherited props
 			...defined({
 				disableStyles,
@@ -157,8 +151,6 @@ export const Facet = observer((properties: FacetProps): JSX.Element => {
 		facetHierarchyOptions: {
 			// default props
 			className: 'ss__facet__facet-hierarchy-options',
-			// global theme
-			...globalTheme?.components?.facetHierarchyOptions,
 			// inherited props
 			...defined({
 				disableStyles,
@@ -173,8 +165,6 @@ export const Facet = observer((properties: FacetProps): JSX.Element => {
 		facetListOptions: {
 			// default props
 			className: 'ss__facet__facet-list-options',
-			// global theme
-			...globalTheme?.components?.facetListOptions,
 			// inherited props
 			...defined({
 				disableStyles,
@@ -189,8 +179,6 @@ export const Facet = observer((properties: FacetProps): JSX.Element => {
 		facetGridOptions: {
 			// default props
 			className: 'ss__facet__facet-grid-options',
-			// global theme
-			...globalTheme?.components?.facetGridOptions,
 			// inherited props
 			...defined({
 				disableStyles,
@@ -205,8 +193,6 @@ export const Facet = observer((properties: FacetProps): JSX.Element => {
 		facetPaletteOptions: {
 			// default props
 			className: 'ss__facet__facet-palette-options',
-			// global theme
-			...globalTheme?.components?.facetPaletteOptions,
 			// inherited props
 			...defined({
 				disableStyles,
@@ -221,8 +207,6 @@ export const Facet = observer((properties: FacetProps): JSX.Element => {
 		// facetToggle: {
 		// 	// default props
 		// 	className: 'ss__facet__facet-toggle',
-		// 	// global theme
-		// 	...globalTheme?.components?.facetToggle,
 		// 	// inherited props
 		// 	...defined({
 		// 		disableStyles,
@@ -234,8 +218,6 @@ export const Facet = observer((properties: FacetProps): JSX.Element => {
 		facetSlider: {
 			// default props
 			className: 'ss__facet__facet-slider',
-			// global theme
-			...globalTheme?.components?.facetSlider,
 			// inherited props
 			...defined({
 				disableStyles,
@@ -247,8 +229,6 @@ export const Facet = observer((properties: FacetProps): JSX.Element => {
 		searchInput: {
 			// default props
 			className: 'ss__facet__search-input',
-			// global theme
-			...globalTheme?.components?.searchInput,
 			// inherited props
 			...defined({
 				disableStyles,

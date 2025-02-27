@@ -7,16 +7,8 @@ const imageStyleScript = ({ visibility, theme }: ImageProps & { visibility: Reac
 	const variables = theme?.variables;
 
 	return css({
-		display: 'flex',
-		flexDirection: 'column',
-		justifyContent: 'center',
-		height: 'auto',
 		'& img': {
 			visibility: visibility,
-			flexShrink: '0',
-			objectFit: 'contain',
-			maxWidth: '100%',
-			maxHeight: '100%',
 		},
 	});
 };

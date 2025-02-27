@@ -260,8 +260,6 @@ export const BranchOverride = (properties: BranchOverrideProps): JSX.Element => 
 			// default props
 			className: 'ss__branch-override__bottom__left__icon',
 			size: '12px',
-			// global theme
-			...globalTheme?.components?.icon,
 			// inherited props
 			...defined({
 				disableStyles,

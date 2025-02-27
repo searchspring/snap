@@ -34,8 +34,6 @@ export const FacetToggle = observer((properties: FacetToggleProps): JSX.Element 
 	const subProps: FacetToggleSubProps = {
 		Toggle: {
 			// default props
-			// global theme
-			...globalTheme?.components?.toggle,
 			// inherited props
 			...defined({
 				disableStyles,

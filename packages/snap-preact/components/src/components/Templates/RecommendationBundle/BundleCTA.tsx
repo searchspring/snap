@@ -6,7 +6,6 @@ import classnames from 'classnames';
 import { cloneWithProps } from '../../../utilities';
 import { Button, ButtonProps } from '../../Atoms/Button';
 import { Price, PriceProps } from '../../Atoms/Price';
-import { Theme, useTheme } from '../../../providers';
 import { Icon, IconProps, IconType } from '../../Atoms/Icon';
 import type { ComponentProps } from '../../../types';
 import type { CartStore } from '@searchspring/snap-store-mobx';
@@ -14,8 +13,6 @@ import { Lang, useLang } from '../../../hooks';
 import deepmerge from 'deepmerge';
 
 export const BundledCTA = observer((properties: BundledCTAProps): JSX.Element => {
-	const globalTheme: Theme = useTheme();
-
 	const props: BundledCTAProps = {
 		// default props
 		// global theme
@@ -42,8 +39,6 @@ export const BundledCTA = observer((properties: BundledCTAProps): JSX.Element =>
 			// default props
 			className: 'ss__recommendation-bundle__wrapper__cta__icon',
 			size: 50,
-			// global theme
-			...globalTheme?.components?.icon,
 			// component theme overrides
 			theme: props?.theme,
 			treePath,
@@ -51,8 +46,6 @@ export const BundledCTA = observer((properties: BundledCTAProps): JSX.Element =>
 		subtotalStrike: {
 			// default props
 			name: 'bundle-msrp',
-			// global theme
-			...globalTheme?.components?.price,
 			// component theme overrides
 			theme: props?.theme,
 			treePath,
@@ -60,16 +53,12 @@ export const BundledCTA = observer((properties: BundledCTAProps): JSX.Element =>
 		subtotalPrice: {
 			// default props
 			name: 'bundle-price',
-			// global theme
-			...globalTheme?.components?.price,
 			// component theme overrides
 			theme: props?.theme,
 			treePath,
 		},
 		button: {
 			// default props
-			// global theme
-			...globalTheme?.components?.button,
 			// component theme overrides
 			theme: props?.theme,
 			treePath,

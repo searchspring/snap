@@ -99,8 +99,6 @@ export const Results = observer((properties: ResultsProps): JSX.Element => {
 		result: {
 			// default props
 			className: 'ss__results__result',
-			// global theme
-			...globalTheme?.components?.result,
 			// inherited props
 			...defined({
 				disableStyles,
@@ -112,8 +110,6 @@ export const Results = observer((properties: ResultsProps): JSX.Element => {
 		inlineBanner: {
 			// default props
 			className: 'ss__results__inline-banner',
-			// global theme
-			...globalTheme?.components?.inlineBanner,
 			// inherited props
 			...defined({
 				disableStyles,

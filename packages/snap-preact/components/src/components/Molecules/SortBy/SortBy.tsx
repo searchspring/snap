@@ -42,8 +42,6 @@ export const SortBy = observer((properties: SortByProps): JSX.Element => {
 
 	const subProps: SelectSubProps = {
 		Select: {
-			// global theme
-			...globalTheme?.components?.select,
 			// inherited props
 			...defined({
 				disableStyles,
@@ -53,8 +51,6 @@ export const SortBy = observer((properties: SortByProps): JSX.Element => {
 			treePath,
 		},
 		RadioList: {
-			// global theme
-			...globalTheme?.components?.radioList,
 			// inherited props
 			...defined({
 				disableStyles,
@@ -67,8 +63,6 @@ export const SortBy = observer((properties: SortByProps): JSX.Element => {
 			multiSelect: false,
 			hideOptionCheckboxes: true,
 			horizontal: true,
-			// global theme
-			...globalTheme?.components?.list,
 			// inherited props
 			...defined({
 				disableStyles,

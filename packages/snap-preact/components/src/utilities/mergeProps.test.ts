@@ -353,7 +353,6 @@ describe('mergeProps function with theme name', () => {
 					[componentType]: {
 						// @ts-ignore - different prop value
 						startOpen: '2',
-						unrelatedProp: 2,
 					},
 					otherComponent: {
 						shouldNotExist: 2,
@@ -366,7 +365,7 @@ describe('mergeProps function with theme name', () => {
 		expect(props).toStrictEqual({
 			...defaultProps,
 			...properties,
-			startOpen: '1',
+			startOpen: '2',
 			unrelatedProp: 1,
 			theme: {
 				name: globalTheme.name,

@@ -193,8 +193,6 @@ export const FacetPaletteOptions = observer((properties: FacetPaletteOptionsProp
 		icon: {
 			// default props
 			className: 'ss__facet-palette-options__icon',
-			// global theme
-			...globalTheme?.components?.icon,
 			// inherited props
 			...defined({
 				disableStyles,
@@ -209,8 +207,6 @@ export const FacetPaletteOptions = observer((properties: FacetPaletteOptionsProp
 		checkbox: {
 			// default props
 			className: 'ss__facet-palette-options__checkbox',
-			// global theme
-			...globalTheme?.components?.checkbox,
 			// inherited props
 			...defined({
 				disableStyles,
@@ -224,6 +220,8 @@ export const FacetPaletteOptions = observer((properties: FacetPaletteOptionsProp
 	const styling = mergeStyles<FacetPaletteOptionsProps>(props, defaultStyles);
 
 	const facetValues = values || facet?.values;
+
+	console.log(props.columns);
 
 	return facetValues?.length ? (
 		<CacheProvider>

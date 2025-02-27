@@ -104,8 +104,6 @@ export const MobileSidebar = observer((properties: MobileSidebarProps): JSX.Elem
 			// default props
 			controller,
 			displayAt: (displayAt && `(max-width: ${displayAt})`) || '',
-			// global theme
-			...globalTheme?.components?.slideout,
 			// inherited props
 			...defined({
 				disableStyles,
@@ -116,8 +114,6 @@ export const MobileSidebar = observer((properties: MobileSidebarProps): JSX.Elem
 		},
 		button: {
 			// default props
-			// global theme
-			...globalTheme?.components?.button,
 			// inherited props
 			...defined({
 				disableStyles,
@@ -133,8 +129,6 @@ export const MobileSidebar = observer((properties: MobileSidebarProps): JSX.Elem
 			hidePerPage: hidePerPage,
 			hideSortBy: hideSortBy,
 			hideFilterSummary: hideFilterSummary,
-			// global theme
-			...globalTheme?.components?.sidebar,
 			// inherited props
 			...defined({
 				disableStyles,

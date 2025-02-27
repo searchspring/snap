@@ -1,5 +1,6 @@
 import { h, render } from 'preact';
-import { observable, makeObservable, toJS } from 'mobx';
+import { observable, makeObservable, toJS, computed } from 'mobx';
+import { observer } from 'mobx-react-lite';
 import deepmerge from 'deepmerge';
 import { isPlainObject } from 'is-plain-object';
 import { StorageStore } from '@searchspring/snap-store-mobx';
@@ -8,9 +9,9 @@ import { Global, css } from '@emotion/react';
 
 import { ThemeMinimal, ThemeVariablesPartial, type Theme, ThemePartial, ThemeOverrides } from '../../../components/src';
 import { CacheProvider } from '../../../components/src/providers/cache';
+import { sortSelectors, filterSelectors } from '../../../components/src/utilities/mergeProps';
 import type { GlobalThemeStyleScript } from '../../types';
 import type { ListOption } from '../../../components/src/types';
-import { observer } from 'mobx-react-lite';
 
 export type ThemeStoreThemeConfig = {
 	name: string;
@@ -93,6 +94,7 @@ export class ThemeStore {
 			language: observable,
 			stored: observable,
 			innerWidth: observable,
+			theme: computed, // make theme getter a computed property (memoized)
 		});
 
 		// handle adding the style to the document (should only happen once per theme)
@@ -148,9 +150,11 @@ export class ThemeStore {
 			overrides.layoutOptions = [];
 		}
 
-		let theme: Theme = mergeThemeLayers(base, baseBreakpoint, this.currency, this.language, this.languageOverrides, overrides, overrideBreakpoint, {
+		let themeOverrides = mergeThemeLayers(overrides, overrideBreakpoint, overrides, overrideBreakpoint, {
 			variables: toJS(this.variables),
 		} as ThemePartial) as Theme;
+
+		let theme: Theme = mergeThemeLayers(base, baseBreakpoint, this.currency, this.language, this.languageOverrides, themeOverrides) as Theme;
 
 		// find layout option overrides
 		const layoutOptions = theme.layoutOptions;
@@ -161,7 +165,10 @@ export class ThemeStore {
 
 		// apply selected overrides if they exist
 		if (selectedOption?.overrides) {
-			theme = mergeThemeLayers(theme, selectedOption.overrides) as Theme;
+			if (selectedOption?.overrides) {
+				theme = mergeThemeLayers(theme, selectedOption.overrides) as Theme;
+				themeOverrides = mergeThemeLayers(themeOverrides, selectedOption.overrides) as Theme;
+			}
 
 			// if the the selectedOption differs from this.layout.selected, then select the layout (can happen at breakpoint recalculations)
 			if (
@@ -169,6 +176,35 @@ export class ThemeStore {
 				(this?.layout?.selected && selectedOption.value !== this.layout.selected.value && selectedOption.label !== this.layout.selected.label)
 			) {
 				this.layout.select(selectedOption);
+			}
+		}
+
+		/*
+			Ensure 'theme' prop has overrides applied to it
+			- separate the "base" theme from "overrides"
+			- inspect the "base" theme object for keys that have a 'theme' property
+			- if the 'theme' property exists, merge overrides for matching keys in overrides
+		*/
+
+		// loop through all components
+		for (const componentName in theme.components) {
+			const component = theme.components[componentName as keyof typeof theme.components];
+			const themeComponents = component?.theme?.components;
+			// if a component has a theme property with components
+			if (themeComponents) {
+				for (const themeComponentName in themeComponents) {
+					const themeComponentsApplicableSelectors = filterSelectors(themeOverrides.components || {}, `${componentName} ${themeComponentName}`).sort(
+						sortSelectors
+					);
+					themeComponentsApplicableSelectors.forEach((selector) => {
+						const themeComponentPropsOverrides = themeOverrides.components![selector as keyof typeof themeOverrides.components];
+						if (themeComponentPropsOverrides) {
+							const themeComponentProps = themeComponents[themeComponentName as keyof typeof themeComponents];
+							// @ts-ignore - hard to type this
+							themeComponents[themeComponentName as keyof typeof themeComponents] = { ...themeComponentProps, ...themeComponentPropsOverrides };
+						}
+					});
+				}
 			}
 		}
 
