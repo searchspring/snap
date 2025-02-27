@@ -54,7 +54,7 @@ const defaultStyles: StyleScript<FacetsHorizontalProps> = ({}) => {
 						width: 'max-content',
 						maxHeight: '500px',
 						overflowY: 'auto',
-						zIndex: 1,
+						zIndex: 1000,
 					},
 				},
 			},

@@ -225,6 +225,8 @@ export const FacetPaletteOptions = observer((properties: FacetPaletteOptionsProp
 
 	const facetValues = values || facet?.values;
 
+	console.log(props.columns);
+
 	return facetValues?.length ? (
 		<CacheProvider>
 			<div {...styling} className={classnames('ss__facet-palette-options', `ss__facet-palette-options--${layout?.toLowerCase()}`, className)}>

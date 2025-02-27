@@ -29,6 +29,7 @@ export type LibraryImports = {
 	theme: {
 		base: (args?: any) => Promise<Theme>;
 		bocachica: (args?: any) => Promise<Theme>;
+		snappy: (args?: any) => Promise<Theme>;
 	};
 	plugins: {
 		shopify: {
@@ -144,6 +145,9 @@ export class LibraryStore {
 			},
 			bocachica: async () => {
 				return this.themes.bocachica || (this.themes.bocachica = (await import('./library/themes/bocachica')).bocachica);
+			},
+			snappy: async () => {
+				return this.themes.snappy || (this.themes.snappy = (await import('./library/themes/snappy')).snappy);
 			},
 		},
 		plugins: {

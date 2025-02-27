@@ -39,9 +39,10 @@ export type Theme = {
 	responsive?: [ThemeResponsive, ThemeResponsive, ThemeResponsive];
 	components?: ThemeComponentOverrides;
 	layoutOptions?: (Omit<ListOption, 'overrides'> & { overrides: ThemeMinimal })[];
+	overrides?: ThemeOverrides;
 };
 
-export type ThemeComplete = Required<Theme> & { components: ThemeComponents };
+export type ThemeComplete = Required<Omit<Theme, 'overrides'>> & { components: ThemeComponents };
 
 export type ThemeResponsive = Pick<Theme, 'layoutOptions'> & { components?: ThemeComponentRestrictedOverrides };
 export type ThemePartial = Omit<Theme, 'variables' | 'name'> & { variables?: ThemeVariablesPartial };

@@ -93,7 +93,7 @@ export const Search = observer((properties: SearchProps): JSX.Element => {
 
 	//deep merge with props.lang
 	const lang = deepmerge(defaultLang, props.lang || {});
-	const mergedLang = useLang(lang as any, { filters: store.filters });
+	const mergedLang = useLang(lang as any, { filters: store.filters, sidebarOpenState: sidebarOpenState });
 
 	const ToggleSidebar = (): JSX.Element => {
 		return (
@@ -295,7 +295,7 @@ export interface SearchProps extends ComponentProps {
 }
 
 export interface SearchLang {
-	toggleSidebarButtonText?: Lang<{ filters: SearchFilterStore }>;
+	toggleSidebarButtonText?: Lang<{ filters: SearchFilterStore; sidebarOpenState: boolean }>;
 }
 
 export type layoutConfig = {

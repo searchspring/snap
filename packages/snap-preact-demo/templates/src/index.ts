@@ -18,7 +18,7 @@ let config: SnapTemplatesConfig = {
 	},
 	themes: {
 		global: {
-			extends: 'bocachica',
+			extends: 'snappy',
 			variables: {
 				breakpoints: [768, 1024, 1280],
 				// colors: {

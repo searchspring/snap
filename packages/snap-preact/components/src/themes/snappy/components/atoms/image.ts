@@ -7,6 +7,8 @@ const imageStyleScript = ({ visibility, theme }: ImageProps & { visibility: Reac
 	const variables = theme?.variables;
 
 	return css({
+		borderRadius: '20px',
+		overflow: 'hidden',
 		'& img': {
 			visibility: visibility,
 		},
