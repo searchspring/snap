@@ -20,10 +20,10 @@ export function mergeProps<GenericComponentProps = ComponentProps>(
 		
 		1. start with default props
 		2. spreads standard props (directly passed via JSX) - these may be provided by the integration or sub-props
-		3. spreads global theme props of component and named component
-		4. spreads component theme props of component and named component
+		3. spreads component theme props of component and named component
+		4. spreads global theme props of component and named component
 		5. ensure templates theme variables pass on in `theme`
-		6. if treepath contains 'custom' do 2 again
+		6. if treepath contains 'custom' do #2 again
 
 	*/
 
@@ -66,31 +66,19 @@ export function mergeProps<GenericComponentProps = ComponentProps>(
 
 		treePath += componentName?.match(/^[A-Z,a-z,-]+$/) ? `.${componentName}` : '';
 
-		// add theme props if they exist
-		const themeComponent = theme?.components && theme.components[componentType as keyof typeof theme.components];
-		if (themeComponent) {
-			mergedProps = mergeThemeProps(themeComponent, mergedProps) as Partial<GenericComponentProps>;
-		}
-
-		// add theme props for components with selector matches if they exist
-		const themeApplicableSelectors = filterSelectors(theme?.components || {}, treePath).sort(sortSelectors);
-		themeApplicableSelectors.forEach((selector) => {
-			const componentProps = theme?.components?.[selector as keyof typeof globalTheme.components];
+		// add globalTheme props for components with selector matches if they exist
+		const globalApplicableSelectors = filterSelectors(globalTheme?.components || {}, treePath).sort(sortSelectors);
+		globalApplicableSelectors.forEach((selector) => {
+			const componentProps = globalTheme.components?.[selector as keyof typeof globalTheme.components];
 			if (componentProps) {
 				mergedProps = mergeThemeProps(componentProps, mergedProps) as Partial<GenericComponentProps>;
 			}
 		});
 
-		// add globalTheme props if they exist
-		const globalComponent = globalTheme?.components && globalTheme.components[componentType as keyof typeof globalTheme.components];
-		if (globalComponent) {
-			mergedProps = mergeThemeProps(globalComponent, mergedProps) as Partial<GenericComponentProps>;
-		}
-
-		// add globalTheme props for components with selector matches if they exist
-		const globalApplicableSelectors = filterSelectors(globalTheme?.components || {}, treePath).sort(sortSelectors);
-		globalApplicableSelectors.forEach((selector) => {
-			const componentProps = globalTheme.components?.[selector as keyof typeof globalTheme.components];
+		// add theme props for components with selector matches if they exist
+		const themeApplicableSelectors = filterSelectors(theme?.components || {}, treePath).sort(sortSelectors);
+		themeApplicableSelectors.forEach((selector) => {
+			const componentProps = theme?.components?.[selector as keyof typeof globalTheme.components];
 			if (componentProps) {
 				mergedProps = mergeThemeProps(componentProps, mergedProps) as Partial<GenericComponentProps>;
 			}
