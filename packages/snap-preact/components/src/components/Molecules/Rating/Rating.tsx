@@ -56,8 +56,6 @@ export const Rating = observer((properties: RatingProps): JSX.Element => {
 		fullIcon: {
 			name: 'star--full',
 			// default props
-			// global theme
-			...globalTheme?.components?.icon,
 			// inherited props
 			...defined({
 				disableStyles,
@@ -70,8 +68,6 @@ export const Rating = observer((properties: RatingProps): JSX.Element => {
 			name: 'star--empty',
 			// default props
 			color: '#ccc',
-			// global theme
-			...globalTheme?.components?.icon,
 			// inherited props
 			...defined({
 				disableStyles,

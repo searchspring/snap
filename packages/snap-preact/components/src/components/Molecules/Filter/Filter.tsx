@@ -51,8 +51,6 @@ export const Filter = observer((properties: FilterProps): JSX.Element => {
 		button: {
 			// default props
 			className: 'ss__filter__button',
-			// global theme
-			...globalTheme?.components?.button,
 			// inherited props
 			...defined({
 				disableStyles,
@@ -66,8 +64,6 @@ export const Filter = observer((properties: FilterProps): JSX.Element => {
 			icon: 'close-thin',
 			className: 'ss__filter__button__icon',
 			size: '10px',
-			// global theme
-			...globalTheme?.components?.icon,
 			// inherited props
 			...defined({
 				disableStyles,

@@ -59,8 +59,6 @@ export const FacetListOptions = observer((properties: FacetListOptionsProps): JS
 		checkbox: {
 			// default props
 			className: 'ss__facet-list-options__checkbox',
-			// global theme
-			...globalTheme?.components?.checkbox,
 			// inherited props
 			...defined({
 				disableStyles,

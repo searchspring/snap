@@ -29,8 +29,6 @@ export const BundleSelector = observer((properties: BundleSelectorProps): JSX.El
 			name: 'bundle-selector',
 			className: 'ss__recommendation-bundle__wrapper__selector__icon',
 			size: 15,
-			// global theme
-			...globalTheme?.components?.icon,
 			// component theme overrides
 			theme: props?.theme,
 			treePath: modifiedTreePath,
@@ -47,8 +45,6 @@ export const BundleSelector = observer((properties: BundleSelectorProps): JSX.El
 					},
 				},
 			},
-			// global theme
-			...globalTheme?.components?.checkbox,
 			// component theme overrides
 			theme: props?.theme,
 			treePath: modifiedTreePath,

@@ -60,8 +60,6 @@ export const Slideout = observer((properties: SlideoutProps): JSX.Element => {
 		overlay: {
 			// default props
 			className: 'ss__slideout__overlay',
-			// global theme
-			...globalTheme?.components?.overlay,
 			// inherited props
 			...defined({
 				disableStyles,

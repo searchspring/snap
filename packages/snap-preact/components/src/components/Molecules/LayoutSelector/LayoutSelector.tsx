@@ -40,8 +40,6 @@ export const LayoutSelector = observer((properties: LayoutSelectorProps): JSX.El
 
 	const subProps: SelectSubProps = {
 		Select: {
-			// global theme
-			...globalTheme?.components?.select,
 			// inherited props
 			...defined({
 				disableStyles,
@@ -51,8 +49,6 @@ export const LayoutSelector = observer((properties: LayoutSelectorProps): JSX.El
 			treePath,
 		},
 		RadioList: {
-			// global theme
-			...globalTheme?.components?.radioList,
 			// inherited props
 			...defined({
 				disableStyles,
@@ -66,8 +62,6 @@ export const LayoutSelector = observer((properties: LayoutSelectorProps): JSX.El
 			horizontal: true,
 			hideOptionCheckboxes: true,
 			requireSelection: true,
-			// global theme
-			...globalTheme?.components?.list,
 			// inherited props
 			...defined({
 				disableStyles,

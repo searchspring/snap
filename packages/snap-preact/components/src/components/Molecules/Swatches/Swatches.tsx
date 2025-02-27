@@ -117,8 +117,6 @@ export function Swatches(properties: SwatchesProps): JSX.Element {
 			className: 'ss__swatches__carousel',
 			loop: false,
 			...carousel,
-			// global theme
-			...globalTheme?.components?.carousel,
 			// inherited props
 			...defined({
 				breakpoints,
@@ -137,8 +135,6 @@ export function Swatches(properties: SwatchesProps): JSX.Element {
 			rows: 1,
 			columns: 6,
 			...grid,
-			// global theme
-			...globalTheme?.components?.grid,
 			// inherited props
 			...defined({
 				disableStyles,
@@ -150,8 +146,6 @@ export function Swatches(properties: SwatchesProps): JSX.Element {
 		image: {
 			// default props
 			className: 'ss__swatches__image',
-			// global theme
-			...globalTheme?.components?.image,
 			// inherited props
 			...defined({
 				disableStyles,

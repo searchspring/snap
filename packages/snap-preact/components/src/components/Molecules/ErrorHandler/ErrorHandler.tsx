@@ -135,8 +135,6 @@ export const ErrorHandler = observer((properties: ErrorHandlerProps): JSX.Elemen
 			// default props
 			size: '18px',
 			className: 'ss__error-handler__icon',
-			// global theme
-			...globalTheme?.components?.icon,
 			// inherited props
 			...defined({
 				disableStyles,
@@ -149,8 +147,6 @@ export const ErrorHandler = observer((properties: ErrorHandlerProps): JSX.Elemen
 			// default props
 			className: 'ss__error-handler__button',
 			icon: 'rotate-right',
-			// global theme
-			...globalTheme?.components?.button,
 			// inherited props
 			...defined({
 				disableStyles,

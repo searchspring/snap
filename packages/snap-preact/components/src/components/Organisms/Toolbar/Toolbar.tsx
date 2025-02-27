@@ -49,8 +49,6 @@ export const Toolbar = observer((properties: ToolbarProps): JSX.Element => {
 			// default props
 			controller,
 			className: 'ss__toolbar__mobile-sidebar',
-			// global theme
-			...globalTheme?.components?.mobileSidebar,
 			// inherited props
 			...defined({
 				disableStyles,
@@ -63,8 +61,6 @@ export const Toolbar = observer((properties: ToolbarProps): JSX.Element => {
 			// default props
 			controller,
 			className: 'ss__toolbar__filter-summary',
-			// global theme
-			...globalTheme?.components?.filterSummary,
 			// inherited props
 			...defined({
 				disableStyles,
@@ -77,8 +73,6 @@ export const Toolbar = observer((properties: ToolbarProps): JSX.Element => {
 			// default props
 			controller,
 			className: 'ss__toolbar__layout-selector',
-			// global theme
-			...globalTheme?.components?.layoutSelector,
 			// inherited props
 			...defined({
 				disableStyles,
@@ -91,8 +85,6 @@ export const Toolbar = observer((properties: ToolbarProps): JSX.Element => {
 			// default props
 			controller,
 			className: 'ss__toolbar__pagination',
-			// global theme
-			...globalTheme?.components?.pagination,
 			// inherited props
 			...defined({
 				disableStyles,
@@ -105,8 +97,6 @@ export const Toolbar = observer((properties: ToolbarProps): JSX.Element => {
 			// default props
 			controller,
 			className: 'ss__toolbar__pagination-info',
-			// global theme
-			...globalTheme?.components?.paginationInfo,
 			// inherited props
 			...defined({
 				disableStyles,
@@ -119,8 +109,6 @@ export const Toolbar = observer((properties: ToolbarProps): JSX.Element => {
 			// default props
 			controller,
 			className: 'ss__toolbar__load-more',
-			// global theme
-			...globalTheme?.components?.loadMore,
 			// inherited props
 			...defined({
 				disableStyles,
@@ -133,8 +121,6 @@ export const Toolbar = observer((properties: ToolbarProps): JSX.Element => {
 			// default props
 			controller,
 			className: 'ss__toolbar__sort-by',
-			// global theme
-			...globalTheme?.components?.sortBy,
 			// inherited props
 			...defined({
 				disableStyles,
@@ -147,8 +133,6 @@ export const Toolbar = observer((properties: ToolbarProps): JSX.Element => {
 			// default props
 			controller,
 			className: 'ss__toolbar__per-page',
-			// global theme
-			...globalTheme?.components?.perPage,
 			// inherited props
 			...defined({
 				disableStyles,
