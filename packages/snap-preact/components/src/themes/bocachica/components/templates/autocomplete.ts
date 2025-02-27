@@ -130,7 +130,7 @@ export const autocomplete: ThemeComponentProps<AutocompleteProps> = {
 		},
 	},
 	desktop: {
-		vertical: true,
+		vertical: false,
 		horizontalTerms: true,
 		theme: {
 			components: {

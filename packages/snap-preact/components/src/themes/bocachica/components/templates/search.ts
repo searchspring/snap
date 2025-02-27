@@ -35,11 +35,6 @@ export const search: ThemeComponentProps<SearchProps> = {
 		hideToggleSidebarButton: false,
 		hideTopToolbar: false,
 		hideMiddleToolbar: false,
-		lang: {
-			// toggleSidebarButtonText: {
-			// 	value: ({ filters }) => (filters.length ? `Filters (${filters.length})` : 'Filter'),
-			// },
-		},
 		theme: {
 			components: {
 				results: {
