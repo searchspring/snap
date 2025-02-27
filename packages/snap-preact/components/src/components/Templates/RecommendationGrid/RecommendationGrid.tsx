@@ -68,8 +68,6 @@ export const RecommendationGrid = observer((properties: RecommendationGridProps)
 		result: {
 			// default props
 			className: 'ss__recommendation-grid__result',
-			// global theme
-			...globalTheme?.components?.result,
 			// inherited props
 			...defined({
 				disableStyles,

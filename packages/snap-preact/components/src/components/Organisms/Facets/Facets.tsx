@@ -70,8 +70,6 @@ export const Facets = observer((properties: FacetsProps): JSX.Element => {
 		facet: {
 			// default props
 			className: 'ss__facets__facet',
-			// global theme
-			...globalTheme?.components?.facet,
 			// inherited props
 			...defined({
 				disableStyles,

@@ -46,8 +46,6 @@ export const SearchInput = observer((properties: SearchInputProps): JSX.Element 
 		icon: {
 			// default props
 			className: 'ss__search-input__icon',
-			// global theme
-			...globalTheme?.components?.icon,
 			// inherited props
 			...defined({
 				disableStyles,

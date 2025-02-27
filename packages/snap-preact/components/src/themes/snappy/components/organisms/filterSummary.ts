@@ -5,6 +5,7 @@ import type { FilterSummaryProps } from '../../../../components/Organisms/Filter
 const filterSummaryStyleScript = ({ theme }: FilterSummaryProps) => {
 	const variables = theme?.variables;
 	return css({
+		flexWrap: 'wrap',
 		'& .ss__filter-summary__title': {
 			fontWeight: 'bold',
 			color: variables?.colors?.secondary,

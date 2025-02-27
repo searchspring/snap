@@ -64,8 +64,6 @@ export const Pagination = observer((properties: PaginationProps): JSX.Element =>
 			// default props
 			className: 'ss__pagination__icon',
 			size: '10px',
-			// global theme
-			...globalTheme?.components?.icon,
 			// inherited props
 			...defined({
 				disableStyles,

@@ -36,8 +36,6 @@ export const Sidebar = observer((properties: SidebarProps): JSX.Element => {
 		filterSummary: {
 			// default props
 			controller,
-			// global theme
-			...globalTheme?.components?.filterSummary,
 			// inherited props
 			...defined({
 				disableStyles,
@@ -49,8 +47,6 @@ export const Sidebar = observer((properties: SidebarProps): JSX.Element => {
 		facets: {
 			// default props
 			controller,
-			// global theme
-			...globalTheme?.components?.facets,
 			// inherited props
 			...defined({
 				disableStyles,
@@ -62,8 +58,6 @@ export const Sidebar = observer((properties: SidebarProps): JSX.Element => {
 		sortBy: {
 			// default props
 			controller,
-			// global theme
-			...globalTheme?.components?.sortBy,
 			// inherited props
 			...defined({
 				disableStyles,
@@ -75,8 +69,6 @@ export const Sidebar = observer((properties: SidebarProps): JSX.Element => {
 		perPage: {
 			// default props
 			controller,
-			// global theme
-			...globalTheme?.components?.perPage,
 			// inherited props
 			...defined({
 				disableStyles,

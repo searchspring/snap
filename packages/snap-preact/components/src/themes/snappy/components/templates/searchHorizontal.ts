@@ -71,15 +71,6 @@ export const searchHorizontal: ThemeComponentProps<SearchHorizontalProps> = {
 				'toolbar.bottom': {
 					modules: ['Pagination'],
 				},
-				mobileSidebar: {
-					theme: {
-						components: {
-							filterSummary: {
-								hideTitle: false,
-							},
-						},
-					},
-				},
 			},
 		},
 	},

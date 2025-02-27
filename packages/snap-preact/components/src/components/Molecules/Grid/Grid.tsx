@@ -148,8 +148,6 @@ export function Grid(properties: GridProps): JSX.Element {
 		image: {
 			// default props
 			className: 'ss__grid__image',
-			// global theme
-			...globalTheme?.components?.image,
 			// inherited props
 			...defined({
 				disableStyles,

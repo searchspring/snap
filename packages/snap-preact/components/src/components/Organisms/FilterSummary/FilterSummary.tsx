@@ -63,8 +63,6 @@ export const FilterSummary = observer((properties: FilterSummaryProps): JSX.Elem
 			name: 'filter',
 			// default props
 			className: 'ss__filter-summary__filter',
-			// global theme
-			...globalTheme?.components?.filter,
 			// inherited props
 			...defined({
 				disableStyles,

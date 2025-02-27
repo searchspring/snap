@@ -84,8 +84,6 @@ export const Button = observer((properties: ButtonProps): JSX.Element => {
 		icon: {
 			className: 'ss__button__icon',
 			// default props
-			// global theme
-			...globalTheme?.components?.icon,
 			// inherited props
 			...defined({
 				disableStyles,

@@ -46,10 +46,6 @@ const autocompleteStyleScript = ({
 				flex: vertical ? '0 1 150px' : undefined,
 			},
 
-			'.ss__facet-palette-options, .ss__facet-grid-options': {
-				gridTemplateColumns: 'repeat(auto-fill, minmax(36px, 1fr))',
-			},
-
 			'.ss__facet__options': {
 				maxHeight: '250px',
 			},
@@ -81,7 +77,7 @@ export const autocomplete: ThemeComponentProps<AutocompleteProps> = {
 					disableCollapse: true,
 				},
 				facets: {
-					limit: 2,
+					limit: 3,
 				},
 				facetGridOptions: {
 					columns: 3,

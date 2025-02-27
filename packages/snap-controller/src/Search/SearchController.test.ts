@@ -1024,16 +1024,18 @@ describe('Search Controller', () => {
 
 			// set page 2 data
 			(controller.client as MockClient).mockData.updateConfig({ search: 'infinite.page2', siteId: '8uyt2m' });
+			controller.urlManager = controller.urlManager.set('page', 2);
 
 			await controller.search();
 			expect(controller.store.results.length).toBe(60);
 
-			// simulate a filter being applied
-			controller.urlManager = controller.urlManager.merge('filter.color_family', 'Blue');
-			expect(controller.params.filters?.length).toBe(1);
-
 			// set filtered data
 			(controller.client as MockClient).mockData.updateConfig({ search: 'infinite.filtered', siteId: '8uyt2m' });
+
+			// simulate a filter being applied
+			controller.urlManager = controller.urlManager.set({ filter: { color_family: 'Blue' } });
+			expect(controller.params.filters?.length).toBe(1);
+			expect(controller.params.pagination?.page).toBeUndefined();
 
 			await controller.search();
 

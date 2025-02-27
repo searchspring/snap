@@ -42,6 +42,9 @@ export const search: ThemeComponentProps<SearchProps> = {
 		},
 		theme: {
 			components: {
+				results: {
+					columns: 5,
+				},
 				filterSummary: {
 					hideTitle: true,
 				},

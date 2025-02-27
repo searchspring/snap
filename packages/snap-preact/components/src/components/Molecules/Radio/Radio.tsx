@@ -69,8 +69,6 @@ export const Radio = observer((properties: RadioProps): JSX.Element => {
 			name: 'active',
 			// default props
 			className: 'ss__radio__icon',
-			// global theme
-			...globalTheme?.components?.icon,
 			// inherited props
 			...defined({
 				size,
@@ -85,8 +83,6 @@ export const Radio = observer((properties: RadioProps): JSX.Element => {
 			name: 'inactive',
 			// default props
 			className: 'ss__radio__icon',
-			// global theme
-			...globalTheme?.components?.icon,
 			// inherited props
 			...defined({
 				size,

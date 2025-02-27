@@ -246,8 +246,6 @@ export const Carousel = observer((properties: CarouselProps): JSX.Element => {
 		icon: {
 			// default props
 			className: 'ss__carousel__icon',
-			// global theme
-			...globalTheme?.components?.icon,
 			// inherited props
 			...defined({
 				disableStyles,

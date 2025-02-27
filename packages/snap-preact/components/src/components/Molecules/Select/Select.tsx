@@ -117,8 +117,6 @@ export const Select = observer((properties: SelectProps): JSX.Element => {
 	const subProps: SelectSubProps = {
 		dropdown: {
 			className: 'ss__select__dropdown',
-			// global theme
-			...globalTheme?.components?.dropdown,
 			// inherited props
 			...defined({
 				disableStyles,
@@ -131,8 +129,6 @@ export const Select = observer((properties: SelectProps): JSX.Element => {
 		button: {
 			// default props
 			className: 'ss__select__dropdown__button',
-			// global theme
-			...globalTheme?.components?.button,
 			// inherited props
 			...defined({
 				disableStyles,
@@ -148,8 +144,6 @@ export const Select = observer((properties: SelectProps): JSX.Element => {
 		icon: {
 			// default props
 			className: 'ss__select__dropdown__button__icon',
-			// global theme
-			...globalTheme?.components?.icon,
 			// inherited props
 			...defined({
 				disableStyles,

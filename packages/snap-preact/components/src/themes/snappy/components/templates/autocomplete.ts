@@ -103,19 +103,12 @@ export const autocomplete: ThemeComponentProps<AutocompleteProps> = {
 				facets: {
 					limit: 2,
 				},
-				facetGridOptions: {
-					columns: 3,
-				},
 				facetHierarchyOptions: {
 					hideCount: true,
 				},
 				facetListOptions: {
 					hideCheckbox: true,
 					hideCount: true,
-				},
-				facetPaletteOptions: {
-					hideLabel: false,
-					columns: 3,
 				},
 				results: {
 					columns: 3,

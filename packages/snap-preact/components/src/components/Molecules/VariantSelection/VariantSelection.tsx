@@ -77,8 +77,6 @@ export const VariantSelection = observer((properties: VariantSelectionProps): JS
 			className: 'ss__variant-selection__dropdown',
 			// TODO: label doesnt exist on dropdown?
 			// label: selection.label || selection.field,
-			// global theme
-			...globalTheme?.components?.dropdown,
 			// inherited props
 			...defined({
 				disableStyles,
@@ -91,8 +89,6 @@ export const VariantSelection = observer((properties: VariantSelectionProps): JS
 			// default props
 			className: 'ss__variant-selection__icon',
 			size: '12px',
-			// global theme
-			...globalTheme?.components?.icon,
 			// inherited props
 			...defined({
 				disableStyles,
@@ -108,9 +104,6 @@ export const VariantSelection = observer((properties: VariantSelectionProps): JS
 			hideOptionCheckboxes: true,
 			onSelect: (e, option) => selection.select(option.value),
 			selected: selection.selected,
-
-			// global theme
-			...globalTheme?.components?.list,
 			// inherited props
 			...defined({
 				disableStyles,
@@ -123,8 +116,6 @@ export const VariantSelection = observer((properties: VariantSelectionProps): JS
 			className: 'ss__variant-selection__swatches',
 			onSelect: (e, option) => selection.select(option.value),
 			selected: selection.selected,
-			// global theme
-			...globalTheme?.components?.swatches,
 			// inherited props
 			...defined({
 				disableStyles,

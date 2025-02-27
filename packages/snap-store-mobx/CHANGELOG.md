@@ -86,6 +86,19 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 - **preact-components-ss-lang:** adding foundation for multi language support to preact components ([4dce617](https://github.com/searchspring/snap/commit/4dce617ec14fb6897d66278b90b5cc17e97665bd))
 - **preact-components/storybook:** updating storybook to latest version - build stable ([43c598d](https://github.com/searchspring/snap/commit/43c598d0e4d11d76364ff2775ecdcabe489023a8))
 - **preact-components:** making progress toward layout templating support ([92c2ce6](https://github.com/searchspring/snap/commit/92c2ce6b207dcb1e922674d55e289354b71612da))
+## [0.63.5](https://github.com/searchspring/snap/compare/v0.63.4...v0.63.5) (2025-02-21)
+
+**Note:** Version bump only for package @searchspring/snap-store-mobx
+
+## [0.63.4](https://github.com/searchspring/snap/compare/v0.63.3...v0.63.4) (2025-02-20)
+
+**Note:** Version bump only for package @searchspring/snap-store-mobx
+
+## [0.63.3](https://github.com/searchspring/snap/compare/v0.63.2...v0.63.3) (2025-02-14)
+
+### Reverts
+
+- **controller/search:** reverting change for infinite scroll and search due to breaking change ([e27a55d](https://github.com/searchspring/snap/commit/e27a55d8e84e4568b703844fb7a783a8f52d488d))
 
 ## [0.63.2](https://github.com/searchspring/snap/compare/v0.63.1...v0.63.2) (2025-02-10)
 
