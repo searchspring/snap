@@ -18,7 +18,6 @@ export const sortBy: ThemeComponentProps<SortByProps> = {
 			components: {
 				icon: {
 					size: '12px',
-					color: 'black',
 				},
 			},
 		},
