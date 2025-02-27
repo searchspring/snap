@@ -408,7 +408,7 @@ describe('Search Template Component', () => {
 					expect(langElem).toBeInTheDocument();
 					if (typeof langObj.value == 'function') {
 						expect(langElem?.innerHTML).toBe(value);
-						expect(valueMock).toHaveBeenCalledWith({ filters: controller.store.filters });
+						expect(valueMock).toHaveBeenCalledWith({ filters: controller.store.filters, sidebarOpenState: true });
 					} else {
 						expect(langElem?.innerHTML).toBe(langObj.value);
 					}
