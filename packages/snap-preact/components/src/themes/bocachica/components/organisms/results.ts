@@ -8,12 +8,8 @@ import type { ResultsProps } from '../../../../components/Organisms/Results';
 
 // Results component props
 export const results: ThemeComponentProps<ResultsProps> = {
-	default: {
-		// themeStyleScript: resultsStyleScript,
-	},
-	mobile: {
-		columns: 5,
-	},
+	default: {},
+	mobile: {},
 	tablet: {},
 	desktop: {},
 };
