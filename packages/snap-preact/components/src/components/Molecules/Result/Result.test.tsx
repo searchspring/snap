@@ -174,8 +174,8 @@ describe('Result Component', () => {
 			addToCart: jest.fn(),
 		};
 
-		// @ts-ignore
 		const rendered = render(
+			// @ts-ignore
 			<Result onAddToCartClick={customFunc} controller={controller} result={mockResults[1] as Product} hideATCButton={false} />
 		);
 
