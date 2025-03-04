@@ -30,6 +30,27 @@ The `hideTitle` prop will prevent to product title from rendering.
 <Result result={controller.store.results[0]} hideTitle={true} />
 ```
 
+### hideRating
+The `hideRating` prop will prevent to product rating from rendering.
+
+```jsx
+<Result result={controller.store.results[0]} hideRating={true} />
+```
+
+### hideATCButton
+The `hideATCButton` prop will prevent to product add to cart button from rendering.
+
+```jsx
+<Result result={controller.store.results[0]} hideATCButton={true} />
+```
+
+### ATCButtonText
+The `ATCButtonText` prop will will change the text rendered in the add to cart button.
+
+```jsx
+<Result result={controller.store.results[0]} ATCButtonText={'Add To Cart'} />
+```
+
 ### hidePricing
 The `hidePricing` prop will prevent the pricing from rendering.
 
@@ -37,6 +58,13 @@ The `hidePricing` prop will prevent the pricing from rendering.
 <Result result={controller.store.results[0]} hidePricing={true} />
 ```
 
+
+### onAddToCartClick
+The `onAddToCartClick` prop is a function to be called on add to cart button click. In addition to the built in platform addToCart function on the controller. 
+
+```jsx
+<Result result={controller.store.results[0]} hidePricing={true} />
+```
 ### hideImage
 The `hideImage` prop will prevent the image from rendering.
 

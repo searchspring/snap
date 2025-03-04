@@ -14,6 +14,10 @@ import { CalloutBadge, CalloutBadgeProps } from '../../Molecules/CalloutBadge';
 import { OverlayBadge, OverlayBadgeProps } from '../../Molecules/OverlayBadge';
 import type { SearchController, AutocompleteController, RecommendationController } from '@searchspring/snap-controller';
 import type { Product } from '@searchspring/snap-store-mobx';
+import { Rating, RatingProps } from '../Rating';
+import { Button, ButtonProps } from '../../Atoms/Button';
+import deepmerge from 'deepmerge';
+import { Lang, useLang } from '../../../hooks';
 
 const defaultStyles: StyleScript<ResultProps> = () => {
 	return css({
@@ -48,6 +52,11 @@ const defaultStyles: StyleScript<ResultProps> = () => {
 			},
 		},
 
+		'& .ss__result__rating-wrapper': {
+			display: 'flex',
+			justifyContent: 'center',
+		},
+
 		'& .ss__result__details': {
 			padding: '10px',
 			textAlign: 'center',
@@ -78,6 +87,9 @@ export const Result = observer((properties: ResultProps): JSX.Element => {
 	const defaultProps: Partial<ResultProps> = {
 		layout: ResultsLayout.grid,
 		treePath: globalTreePath,
+		ATCButtonText: 'Add To Cart',
+		hideATCButton: true,
+		hideRating: true,
 	};
 
 	const props = mergeProps('result', globalTheme, defaultProps, properties);
@@ -95,6 +107,10 @@ export const Result = observer((properties: ResultProps): JSX.Element => {
 		layout,
 		onClick,
 		controller,
+		hideATCButton,
+		onAddToCartClick,
+		ATCButtonText,
+		hideRating,
 		treePath,
 	} = props;
 
@@ -150,6 +166,37 @@ export const Result = observer((properties: ResultProps): JSX.Element => {
 			theme: props.theme,
 			treePath,
 		},
+		rating: {
+			// default props
+			className: 'ss__result__rating',
+			value: core?.rating || 0,
+			count: Number(core?.ratingCount || 0),
+			// inherited props
+			...defined({
+				disableStyles,
+			}),
+			// component theme overrides
+			theme: props.theme,
+			treePath,
+		},
+		button: {
+			// default props
+			className: 'ss__result__button--addToCart',
+			onClick: (e) => {
+				if (onAddToCartClick) {
+					onAddToCartClick(e, result);
+				}
+				controller?.addToCart([result]);
+			},
+
+			// inherited props
+			...defined({
+				disableStyles,
+			}),
+			// component theme overrides
+			theme: props.theme,
+			treePath,
+		},
 	};
 
 	let displayName = core?.name;
@@ -158,6 +205,20 @@ export const Result = observer((properties: ResultProps): JSX.Element => {
 	}
 
 	const styling = mergeStyles<ResultProps>(props, defaultStyles);
+
+	//initialize lang
+	const defaultLang = {
+		addToCartButtonText: {
+			value: ATCButtonText,
+		},
+	};
+
+	//deep merge with props.lang
+	const lang = deepmerge(defaultLang, props.lang || {});
+	const mergedLang = useLang(lang as any, {
+		result: result,
+		controller: controller,
+	});
 
 	return core ? (
 		<CacheProvider>
@@ -205,6 +266,12 @@ export const Result = observer((properties: ResultProps): JSX.Element => {
 							/>
 						</div>
 					)}
+					{!hideRating && (
+						<div className="ss__result__rating-wrapper">
+							<Rating {...subProps.rating} />
+						</div>
+					)}
+
 					{!hidePricing && (
 						<div className="ss__result__details__pricing">
 							{core.msrp && core.price && core.price < core.msrp ? (
@@ -219,6 +286,12 @@ export const Result = observer((properties: ResultProps): JSX.Element => {
 						</div>
 					)}
 					{cloneWithProps(detailSlot, { result, treePath })}
+
+					{!hideATCButton && (
+						<div className="ss__result__atc-wrapper">
+							<Button {...subProps.button} content={ATCButtonText} {...mergedLang.addToCartButtonText.all} />
+						</div>
+					)}
 				</div>
 			</article>
 		</CacheProvider>
@@ -232,6 +305,8 @@ interface ResultSubProps {
 	overlayBadge: Omit<OverlayBadgeProps, 'children'>;
 	price: PriceProps;
 	image: ImageProps;
+	rating: RatingProps;
+	button: ButtonProps;
 }
 interface TruncateTitleProps {
 	limit: number;
@@ -244,11 +319,26 @@ export interface ResultProps extends ComponentProps {
 	hideTitle?: boolean;
 	hideImage?: boolean;
 	hidePricing?: boolean;
+	hideRating?: boolean;
+	hideATCButton?: boolean;
+	ATCButtonText?: string;
+	onAddToCartClick?: (e: React.MouseEvent<HTMLElement, MouseEvent>, result: Product) => void;
 	detailSlot?: JSX.Element | JSX.Element[];
 	fallback?: string;
 	layout?: keyof typeof ResultsLayout | ResultsLayout;
 	truncateTitle?: TruncateTitleProps;
 	onClick?: (e: React.MouseEvent<HTMLAnchorElement, Event>) => void;
 	controller?: SearchController | AutocompleteController | RecommendationController;
+	lang?: Partial<ResultLang>;
 }
+
+export interface ResultLang {
+	addToCartButtonText: Lang<ResultPropData>;
+}
+
+interface ResultPropData {
+	result: Product;
+	controller?: SearchController | AutocompleteController | RecommendationController;
+}
+
 export type ResultNames = 'seed';

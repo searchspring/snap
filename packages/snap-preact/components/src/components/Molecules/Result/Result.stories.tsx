@@ -100,6 +100,47 @@ export default {
 			},
 			control: { type: 'boolean' },
 		},
+		hideRating: {
+			description: 'Hide ratings',
+			table: {
+				type: {
+					summary: 'boolean',
+				},
+				defaultValue: { summary: true },
+			},
+			control: { type: 'boolean' },
+		},
+		hideATCButton: {
+			description: 'Hide add to cart button',
+			table: {
+				type: {
+					summary: 'boolean',
+				},
+				defaultValue: { summary: true },
+			},
+			control: { type: 'boolean' },
+		},
+		ATCButtonText: {
+			description: 'add to cart button text',
+			table: {
+				type: {
+					summary: 'string',
+				},
+				defaultValue: { summary: 'Add To Cart' },
+			},
+			control: { type: 'text' },
+		},
+		onAddToCartClick: {
+			description: 'function to run on add to cart button click',
+			table: {
+				type: {
+					summary: 'function',
+				},
+				defaultValue: { summary: 'Add To Cart' },
+			},
+			control: { type: 'none' },
+			action: 'onClick',
+		},
 		detailSlot: {
 			description: 'Slot for more product details (under price)',
 			table: {

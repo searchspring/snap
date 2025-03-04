@@ -20,7 +20,8 @@
           "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/16_10_christmas_part_deux_168_large.jpg",
           "name": "Play For Keeps Burgundy Velvet Bralette",
           "sku": "C-LTO-R6-L5316",
-          "brand": "Leto"
+          "brand": "Leto",
+          "rating": 4
         }
       },
       "attributes": {
@@ -104,7 +105,8 @@
           "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/110_lcp_9262_copyright_loganpotterf_2016_large.jpg",
           "name": "Freezing Point Cream Turtleneck Sweater",
           "sku": "C-MAK-T1-K8028",
-          "brand": "Mak"
+          "brand": "Mak",
+          "rating": 5
         }
       },
       "attributes": {

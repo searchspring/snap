@@ -127,6 +127,70 @@ describe('Result Component', () => {
 		expect(onClickFunc).toHaveBeenCalled();
 	});
 
+	it('does not render ratings or add to cart buttons by default', () => {
+		const rendered = render(<Result result={mockResults[1] as Product} />);
+
+		const resultElement = rendered.container.querySelector('.ss__result');
+		const ratingElement = rendered.container.querySelector('.ss__result__rating');
+		const addToCartElement = rendered.container.querySelector('.ss__result__button--addToCart');
+
+		expect(resultElement).toBeInTheDocument();
+		expect(ratingElement).not.toBeInTheDocument();
+		expect(addToCartElement).not.toBeInTheDocument();
+	});
+
+	it('can render ratings', () => {
+		const rendered = render(<Result result={mockResults[1] as Product} hideRating={false} />);
+		const resultElement = rendered.container.querySelector('.ss__result');
+		const ratingElement = rendered.container.querySelector('.ss__result__rating');
+
+		expect(resultElement).toBeInTheDocument();
+		expect(ratingElement).toBeInTheDocument();
+	});
+
+	it('can render addToCart button', () => {
+		const controller = {
+			addToCart: jest.fn(),
+		};
+
+		// @ts-ignore
+		const rendered = render(<Result controller={controller} result={mockResults[1] as Product} hideATCButton={false} />);
+
+		const resultElement = rendered.container.querySelector('.ss__result');
+		const addToCartElement = rendered.container.querySelector('.ss__result__button--addToCart');
+
+		expect(resultElement).toBeInTheDocument();
+		expect(addToCartElement).toBeInTheDocument();
+
+		userEvent.click(addToCartElement!);
+
+		expect(controller.addToCart).toHaveBeenCalledWith([mockResults[1]]);
+	});
+
+	it('can pass additional function to call on addToCart button click', () => {
+		const customFunc = jest.fn();
+
+		const controller = {
+			addToCart: jest.fn(),
+		};
+
+		// @ts-ignore
+		const rendered = render(
+			<Result onAddToCartClick={customFunc} controller={controller} result={mockResults[1] as Product} hideATCButton={false} />
+		);
+
+		const resultElement = rendered.container.querySelector('.ss__result');
+		const addToCartElement = rendered.container.querySelector('.ss__result__button--addToCart');
+
+		expect(resultElement).toBeInTheDocument();
+		expect(addToCartElement).toBeInTheDocument();
+
+		userEvent.click(addToCartElement!);
+
+		expect(controller.addToCart).toHaveBeenCalledWith([mockResults[1]]);
+		expect(customFunc).toHaveBeenCalledWith(expect.any(Object), mockResults[1]);
+	});
+
 	it('renders with classname', () => {
 		const className = 'classy';
 		const rendered = render(<Result result={mockResults[1] as Product} className={className} />);
@@ -145,6 +209,104 @@ describe('Result Component', () => {
 	});
 });
 
+describe('Result lang works', () => {
+	// need to mock `matchMedia` to ensure we are not using "mobile" experience
+	beforeAll(() => {
+		Object.defineProperty(window, 'matchMedia', {
+			writable: true,
+			value: jest.fn().mockImplementation((query) => ({
+				matches: false, // return false
+				media: query,
+				onchange: null,
+				addListener: jest.fn(), // Deprecated
+				removeListener: jest.fn(), // Deprecated
+				addEventListener: jest.fn(),
+				removeEventListener: jest.fn(),
+				dispatchEvent: jest.fn(),
+			})),
+		});
+	});
+
+	const selector = '.ss__result';
+
+	it('immediately available lang options', async () => {
+		const langOptions = ['addToCartButtonText'];
+
+		//text attributes/values
+		const value = 'custom value';
+		const altText = 'custom alt';
+		const ariaLabel = 'custom label';
+		const ariaValueText = 'custom value text';
+		const title = 'custom title';
+
+		const valueMock = jest.fn(() => value);
+		const altMock = jest.fn(() => altText);
+		const labelMock = jest.fn(() => ariaLabel);
+		const valueTextMock = jest.fn(() => ariaValueText);
+		const titleMock = jest.fn(() => title);
+
+		const langObjs = [
+			{
+				value: value,
+				attributes: {
+					alt: altText,
+					'aria-label': ariaLabel,
+					'aria-valuetext': ariaValueText,
+					title: title,
+				},
+			},
+			{
+				value: valueMock,
+				attributes: {
+					alt: altMock,
+					'aria-label': labelMock,
+					'aria-valuetext': valueTextMock,
+					title: titleMock,
+				},
+			},
+			{
+				value: `<div>${value}</div>`,
+				attributes: {
+					alt: altText,
+					'aria-label': ariaLabel,
+					'aria-valuetext': ariaValueText,
+					title: title,
+				},
+			},
+		];
+
+		langOptions.forEach((option) => {
+			langObjs.forEach((langObj) => {
+				const lang = {
+					[`${option}`]: langObj,
+				};
+				console.log(lang);
+				// @ts-ignore
+				const rendered = render(<Result result={mockResults[1] as Product} lang={lang} hideATCButton={false} />);
+				rendered.debug();
+				const element = rendered.container.querySelector(selector);
+				expect(element).toBeInTheDocument();
+				const langElem = rendered.container.querySelector(`[ss-lang=${option}]`);
+
+				expect(langElem).toBeInTheDocument();
+
+				if (typeof langObj.value == 'function') {
+					expect(langElem?.innerHTML).toBe(value);
+					expect(valueMock).toHaveBeenCalledWith({ result: mockResults[1], controller: undefined });
+				} else {
+					expect(langElem?.innerHTML).toBe(langObj.value);
+				}
+
+				expect(langElem).toHaveAttribute('alt', altText);
+				expect(langElem).toHaveAttribute('aria-label', ariaLabel);
+				expect(langElem).toHaveAttribute('aria-valuetext', ariaValueText);
+				expect(langElem).toHaveAttribute('title', title);
+
+				jest.restoreAllMocks();
+			});
+		});
+	});
+});
 describe('Result theming works', () => {
 	it('is themeable with ThemeProvider', () => {
 		const globalTheme = {
