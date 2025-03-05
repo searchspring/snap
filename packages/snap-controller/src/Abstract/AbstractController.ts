@@ -3,13 +3,13 @@ import { DomTargeter } from '@searchspring/snap-toolbox';
 import type { Client } from '@searchspring/snap-client';
 import type { AbstractStore } from '@searchspring/snap-store-mobx';
 import type { UrlManager } from '@searchspring/snap-url-manager';
-import type { EventManager, Middleware } from '@searchspring/snap-event-manager';
+import type { EventManager, Middleware, Next } from '@searchspring/snap-event-manager';
 import type { Profiler } from '@searchspring/snap-profiler';
 import type { Logger } from '@searchspring/snap-logger';
 import type { Tracker, TrackErrorEvent } from '@searchspring/snap-tracker';
 import type { Target, OnTarget } from '@searchspring/snap-toolbox';
 
-import type { ControllerServices, ControllerConfig, Attachments, ContextVariables, PluginFunction } from '../types';
+import type { ControllerServices, ControllerConfig, Attachments, ContextVariables, PluginFunction, AfterSearchObj } from '../types';
 
 export abstract class AbstractController {
 	public id: string;
@@ -148,6 +148,13 @@ export abstract class AbstractController {
 
 		// set namespaces
 		this.profiler.setNamespace(this.config.id);
+
+		// add 'afterStore' middleware
+		this.eventManager.on('afterStore', async (data: AfterSearchObj, next: Next): Promise<void | boolean> => {
+			await next();
+			// attach tracking events to cart store
+			data.controller.store.loading = false;
+		});
 	}
 
 	public createTargeter(target: Target, onTarget: OnTarget, document?: Document): DomTargeter | undefined {

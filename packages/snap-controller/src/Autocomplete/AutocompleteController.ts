@@ -662,9 +662,8 @@ export class AutocompleteController extends AbstractController {
 					this.log.error(err);
 					this.handleError(err);
 				}
+				this.store.loading = false;
 			}
-		} finally {
-			this.store.loading = false;
 		}
 	};
 }

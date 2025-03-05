@@ -91,6 +91,8 @@ export class RecommendationController extends AbstractController {
 					this.track.product.removedFromBundle(item);
 				});
 			});
+
+			recommend.controller.store.loading = false;
 		});
 
 		// attach config plugins and event middleware
@@ -542,9 +544,8 @@ export class RecommendationController extends AbstractController {
 					this.log.error(err);
 					this.handleError(err);
 				}
+				this.store.loading = false;
 			}
-		} finally {
-			this.store.loading = false;
 		}
 	};
 }
