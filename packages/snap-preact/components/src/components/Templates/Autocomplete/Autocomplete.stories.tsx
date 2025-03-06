@@ -262,6 +262,17 @@ export default {
 			},
 			control: { type: 'text' },
 		},
+		expandSearchButtonText: {
+			defaultValue: 'See ${pagination.totalResults} results for "${search.query?.string}"',
+			description: 'Text to render in the expand search button',
+			table: {
+				type: {
+					summary: 'string || function',
+				},
+				defaultValue: { summary: '' },
+			},
+			control: { type: 'text' },
+		},
 		viewportMaxHeight: {
 			defaultValue: false,
 			description: 'Autocomplete fully visible in viewport',
