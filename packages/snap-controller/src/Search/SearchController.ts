@@ -100,6 +100,8 @@ export class SearchController extends AbstractController {
 				search?.response?.pagination?.totalResults === 1 &&
 				!nonBackgroundFilters?.length
 			) {
+				//set loaded to true to prevent infinite search/reloading from happening
+				searchStore.loaded = true;
 				window.location.replace(search?.response.results[0].mappings.core.url);
 				return false;
 			}
