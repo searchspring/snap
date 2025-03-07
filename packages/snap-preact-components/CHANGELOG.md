@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.64.0](https://github.com/searchspring/snap/compare/v0.63.5...v0.64.0) (2025-03-07)
+
+### Bug Fixes
+
+- **preact-components/overlaybadge:** adding commonly used styles ([fe8bcd6](https://github.com/searchspring/snap/commit/fe8bcd6b6b8598e3fc13ea26c5f4f2d360e97117))
+
+### Features
+
+- **preact-components/dropdown:** adding hover featureset to dropdown component ([20c847b](https://github.com/searchspring/snap/commit/20c847b1ee1100c1a71892e16d22c89c632fbac8))
+
 ## [0.63.5](https://github.com/searchspring/snap/compare/v0.63.4...v0.63.5) (2025-02-21)
 
 **Note:** Version bump only for package @searchspring/snap-preact-components

@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.64.0](https://github.com/searchspring/snap/compare/v0.63.5...v0.64.0) (2025-03-07)
+
+### Bug Fixes
+
+- **controller/search:** altering logic to always store previous results for cases where needed ([d498dee](https://github.com/searchspring/snap/commit/d498dee07919acab21147b6a240608764448f7e9))
+- **searchcontroller.ts:** bugfix for infinite rerenders and researches when redirecting ([2a4d214](https://github.com/searchspring/snap/commit/2a4d2143d3c73774354bc4386e7ee6c9e9e32c66))
+
 ## [0.63.5](https://github.com/searchspring/snap/compare/v0.63.4...v0.63.5) (2025-02-21)
 
 **Note:** Version bump only for package @searchspring/snap-controller
