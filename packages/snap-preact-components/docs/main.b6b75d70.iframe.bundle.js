@@ -1,4 +1,4 @@
-/*! For license information please see main.3e5c8823.iframe.bundle.js.LICENSE.txt */
+/*! For license information please see main.b6b75d70.iframe.bundle.js.LICENSE.txt */
 (self.webpackChunk_searchspring_snap_preact_components = self.webpackChunk_searchspring_snap_preact_components || []).push([
 	[792],
 	{
@@ -1325,6 +1325,7 @@
 				__webpack_require__.d(__webpack_exports__, {
 					Default: () => Default,
 					ExternalState: () => ExternalState,
+					Hoverable: () => Hoverable,
 					JSXChildren: () => JSXChildren,
 					JSXContent: () => JSXContent,
 					StringChildren: () => StringChildren,
@@ -1395,6 +1396,23 @@
 						null,
 						(0, esm.yg)('code', { parentName: 'pre', className: 'language-jsx' }, "<Dropdown button={'click me!'}>Hello World!</Dropdown>\n")
 					),
+					(0, esm.yg)('h3', { id: 'toggleonhover' }, 'toggleOnHover'),
+					(0, esm.yg)(
+						'p',
+						null,
+						'The ',
+						(0, esm.yg)('inlineCode', { parentName: 'p' }, 'toggleOnHover'),
+						' prop controls if hover events (onMouseEnter and onMouseLeave) will toggle the dropdown. This is disabled by default.'
+					),
+					(0, esm.yg)(
+						'pre',
+						null,
+						(0, esm.yg)(
+							'code',
+							{ parentName: 'pre', className: 'language-jsx' },
+							"<Dropdown button={'click me!'} toggleOnHover>Hello World!</Dropdown>\n"
+						)
+					),
 					(0, esm.yg)('h3', { id: 'open' }, 'open'),
 					(0, esm.yg)('p', null, 'The ', (0, esm.yg)('inlineCode', { parentName: 'p' }, 'open'), ' prop sets the dropdown visibility state. '),
 					(0, esm.yg)(
@@ -1436,6 +1454,19 @@
 						'pre',
 						null,
 						(0, esm.yg)('code', { parentName: 'pre', className: 'language-jsx' }, '<Dropdown disabled>Hello World!</Dropdown>\n')
+					),
+					(0, esm.yg)('h3', { id: 'disableclick' }, 'disableClick'),
+					(0, esm.yg)(
+						'p',
+						null,
+						'The ',
+						(0, esm.yg)('inlineCode', { parentName: 'p' }, 'disableClick'),
+						' prop specifies a boolean which will disable the default click behavior; this is useful if you want to only allow for hovering to toggle the state. Be aware that this will cause the dropdown to not work as expected in mobile (where touch events are used).'
+					),
+					(0, esm.yg)(
+						'pre',
+						null,
+						(0, esm.yg)('code', { parentName: 'pre', className: 'language-jsx' }, '<Dropdown disableClick>Hello World!</Dropdown>\n')
 					),
 					(0, esm.yg)('h3', { id: 'disablea11y' }, 'disableA11y'),
 					(0, esm.yg)(
@@ -1500,6 +1531,40 @@
 							'<Dropdown onClick={(e)=>{console.log(e)}} >Hello World!</Dropdown>\n'
 						)
 					),
+					(0, esm.yg)('h4', { id: 'onmouseenter' }, 'onMouseEnter'),
+					(0, esm.yg)(
+						'p',
+						null,
+						'The ',
+						(0, esm.yg)('inlineCode', { parentName: 'p' }, 'onMouseEnter'),
+						' prop allows for a custom callback function for when the dropdown has been hovered.'
+					),
+					(0, esm.yg)(
+						'pre',
+						null,
+						(0, esm.yg)(
+							'code',
+							{ parentName: 'pre', className: 'language-jsx' },
+							'<Dropdown onMouseEnter={(e)=>{console.log(e)}} >Hello World!</Dropdown>\n'
+						)
+					),
+					(0, esm.yg)('h4', { id: 'onmouseleave' }, 'onMouseLeave'),
+					(0, esm.yg)(
+						'p',
+						null,
+						'The ',
+						(0, esm.yg)('inlineCode', { parentName: 'p' }, 'onMouseLeave'),
+						' prop allows for a custom callback function for when the dropdown has been un-hovered.'
+					),
+					(0, esm.yg)(
+						'pre',
+						null,
+						(0, esm.yg)(
+							'code',
+							{ parentName: 'pre', className: 'language-jsx' },
+							'<Dropdown onMouseLeave={(e)=>{console.log(e)}} >Hello World!</Dropdown>\n'
+						)
+					),
 					(0, esm.yg)('h4', { id: 'ontoggle' }, 'onToggle'),
 					(0, esm.yg)(
 						'p',
@@ -1552,6 +1617,11 @@
 							table: { type: { summary: 'boolean' }, defaultValue: { summary: !1 } },
 							control: { type: 'boolean' },
 						},
+						toggleOnHover: {
+							description: 'open and close dropdown on hover',
+							table: { type: { summary: 'boolean' }, defaultValue: { summary: !1 } },
+							control: { type: 'boolean' },
+						},
 						open: {
 							description: 'Pass a value here to control the state externally',
 							table: { type: { summary: 'boolean' }, defaultValue: { summary: 'undefined' } },
@@ -1568,10 +1638,25 @@
 							control: { type: 'boolean' },
 						},
 						onClick: { description: 'Dropdown click event handler', table: { type: { summary: 'function(e: Event)' } }, action: 'onClick' },
+						onMouseEnter: {
+							description: 'Dropdown mouse enter event handler',
+							table: { type: { summary: 'function(e: Event)' } },
+							action: 'onMouseEnter',
+						},
+						onMouseLeave: {
+							description: 'Dropdown mouse leave event handler',
+							table: { type: { summary: 'function(e: Event)' } },
+							action: 'onMouseLeave',
+						},
 						onToggle: {
 							description: 'Executes when the internal state changes, gets passed the event and the internal state - used with internal state only',
 							table: { type: { summary: 'function(e: Event, open: boolean)', detail: 'e is the click event' } },
 							action: 'onToggle',
+						},
+						disableClick: {
+							description: 'boolean to disable clicking of the button',
+							table: { type: { summary: 'boolean' }, defaultValue: { summary: !1 } },
+							control: { type: 'boolean' },
 						},
 						disableA11y: {
 							description: 'boolean to disable autoset ally properties',
@@ -1586,6 +1671,10 @@
 				return (0, preact_module.h)(Dropdown.m, Object.assign({}, args));
 			};
 			Default.args = { button: 'button text', content: 'content text' };
+			var Hoverable = function Hoverable(args) {
+				return (0, preact_module.h)(Dropdown.m, Object.assign({}, args));
+			};
+			Hoverable.args = { button: 'hover over me', content: 'content text', toggleOnHover: !0 };
 			var ExternalState = function ExternalState(args) {
 				return (0, preact_module.h)(Dropdown.m, Object.assign({}, args));
 			};
@@ -1613,6 +1702,7 @@
 			'use strict';
 			__webpack_require__.d(__webpack_exports__, { m: () => Dropdown });
 			__webpack_require__('../../node_modules/core-js/modules/es.object.assign.js'),
+				__webpack_require__('../../node_modules/core-js/modules/web.timers.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.array.is-array.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.symbol.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.symbol.description.js'),
@@ -1700,9 +1790,8 @@
 					var _globalTheme$componen,
 						_properties$theme,
 						_properties$theme$com,
-						showContent,
-						setShowContent,
-						innerRef,
+						dropdownOpen,
+						setDropdownOpen,
 						globalTheme = (0, emotion_element_cbed451f_browser_esm.a)(),
 						props = Object.assign(
 							{ startOpen: !1, disableA11y: !1 },
@@ -1722,6 +1811,10 @@
 						children = props.children,
 						disabled = props.disabled,
 						open = props.open,
+						toggleOnHover = props.toggleOnHover,
+						onMouseEnter = props.onMouseEnter,
+						onMouseLeave = props.onMouseLeave,
+						disableClick = props.disableClick,
 						disableOverlay = props.disableOverlay,
 						_onClick = props.onClick,
 						onToggle = props.onToggle,
@@ -1734,8 +1827,12 @@
 						stateful = void 0 === open;
 					if (stateful) {
 						var _useState2 = _slicedToArray((0, hooks_module.J0)(startOpen), 2);
-						(showContent = _useState2[0]), (setShowContent = _useState2[1]);
-					} else showContent = open;
+						(dropdownOpen = _useState2[0]), (setDropdownOpen = _useState2[1]);
+					} else dropdownOpen = open;
+					var innerRef,
+						_useState4 = _slicedToArray((0, hooks_module.J0)(!1), 2),
+						isTouchInteraction = _useState4[0],
+						setIsTouchInteraction = _useState4[1];
 					disableClickOutside ||
 						(innerRef = (function useClickOutside(callback) {
 							var callbackRef = (0, hooks_module.li)(),
@@ -1758,48 +1855,67 @@
 								innerRef
 							);
 						})(function (e) {
-							showContent && (disabled || (stateful && setShowContent && setShowContent(!1), onToggle && onToggle(e, !1)));
+							dropdownOpen && (disabled || (stateful && setDropdownOpen && setDropdownOpen(!1), onToggle && onToggle(e, !1)));
 						}));
-					var toggleShowContent = function toggleShowContent(e) {
+					var toggleOpenDropdown = function toggleOpenDropdown(e, state) {
 							stateful &&
-								setShowContent &&
-								setShowContent(function (prev) {
-									return onToggle && onToggle(e, !prev), !prev;
+								setDropdownOpen &&
+								setDropdownOpen(function (prev) {
+									var newState = null != state ? state : !prev;
+									return newState != prev && onToggle && onToggle(e, newState), newState;
 								});
 						},
 						styling = {};
-					return (
-						disableStyles ? style && (styling.css = [style]) : (styling.css = [CSS_dropdown({ disableOverlay }), style]),
+					disableStyles ? style && (styling.css = [style]) : (styling.css = [CSS_dropdown({ disableOverlay }), style]);
+					var hoverProps = {
+						onMouseEnter:
+							(toggleOnHover || onMouseEnter) &&
+							function (e) {
+								isTouchInteraction || (toggleOnHover && !disabled && toggleOpenDropdown(e, !0), onMouseEnter && onMouseEnter(e));
+							},
+						onMouseLeave:
+							(toggleOnHover || onMouseLeave) &&
+							function (e) {
+								isTouchInteraction || (toggleOnHover && !disabled && toggleOpenDropdown(e, !1), onMouseLeave && onMouseLeave(e));
+							},
+					};
+					return (0, emotion_react_browser_esm.Y)(
+						cache._,
+						null,
 						(0, emotion_react_browser_esm.Y)(
-							cache._,
-							null,
+							'div',
+							Object.assign(
+								{},
+								styling,
+								{ className: classnames_default()('ss__dropdown', { 'ss__dropdown--open': dropdownOpen }, className), ref: innerRef },
+								hoverProps
+							),
 							(0, emotion_react_browser_esm.Y)(
 								'div',
-								Object.assign({}, styling, {
-									className: classnames_default()('ss__dropdown', { 'ss__dropdown--open': showContent }, className),
-									ref: innerRef,
-								}),
-								(0, emotion_react_browser_esm.Y)(
-									'div',
-									{
-										className: 'ss__dropdown__button',
-										ref: function ref(e) {
-											return disableA11y ? null : (0, useA11y.i)(e);
-										},
-										'aria-expanded': showContent,
-										role: 'button',
-										onClick: function onClick(e) {
-											disabled || (toggleShowContent(e), _onClick && _onClick(e));
-										},
+								{
+									className: 'ss__dropdown__button',
+									ref: function ref(e) {
+										return disableA11y ? null : (0, useA11y.i)(e);
 									},
-									(0, cloneWithProps.Y)(button, { open: showContent, toggleOpen: toggleShowContent })
-								),
-								(0, emotion_react_browser_esm.Y)(
-									'div',
-									{ className: 'ss__dropdown__content' },
-									(0, cloneWithProps.Y)(content, { open: showContent, toggleOpen: toggleShowContent }),
-									(0, cloneWithProps.Y)(children, { open: showContent, toggleOpen: toggleShowContent })
-								)
+									'aria-expanded': dropdownOpen,
+									role: 'button',
+									onTouchStart: function onTouchStart() {
+										setIsTouchInteraction(!0);
+									},
+									onClick: function onClick(e) {
+										disabled || disableClick || (toggleOpenDropdown(e), _onClick && _onClick(e)),
+											setTimeout(function () {
+												setIsTouchInteraction(!1);
+											}, 300);
+									},
+								},
+								(0, cloneWithProps.Y)(button, { open: dropdownOpen, toggleOpen: toggleOpenDropdown })
+							),
+							(0, emotion_react_browser_esm.Y)(
+								'div',
+								{ className: 'ss__dropdown__content' },
+								(0, cloneWithProps.Y)(content, { open: dropdownOpen, toggleOpen: toggleOpenDropdown }),
+								(0, cloneWithProps.Y)(children, { open: dropdownOpen, toggleOpen: toggleOpenDropdown })
 							)
 						)
 					);
@@ -15494,7 +15610,7 @@
 					return (0, _emotion_react__WEBPACK_IMPORTED_MODULE_8__.AH)({
 						position: 'relative',
 						'& .ss__overlay-badge__grid-wrapper': Object.assign(
-							{ display: 'grid', position: 'absolute', top: 0, right: 0, bottom: 0, left: 0 },
+							{ pointerEvents: 'none', display: 'grid', position: 'absolute', top: 0, right: 0, bottom: 0, left: 0 },
 							gridProperties
 						),
 					});
@@ -34739,12 +34855,12 @@
 				},
 				SearchController = (function (_AbstractController) {
 					function SearchController(config, _ref, context) {
-						var _this$config$settings8,
+						var _this$config$settings7,
+							_this$config$settings8,
 							_this$config$settings9,
-							_this$config$settings10,
 							_this,
+							_this$config$settings10,
 							_this$config$settings11,
-							_this$config$settings12,
 							client = _ref.client,
 							store = _ref.store,
 							urlManager = _ref.urlManager,
@@ -34841,7 +34957,6 @@
 									_this$params$search2$,
 									_this$config$settings,
 									_params$pagination,
-									_this$config$settings7,
 									params,
 									stringyParams,
 									prevStringyParams,
@@ -35059,10 +35174,7 @@
 													return (
 														afterSearchProfile.stop(),
 														_this.log.profile(afterSearchProfile),
-														null !== (_this$config$settings7 = _this.config.settings) &&
-															void 0 !== _this$config$settings7 &&
-															_this$config$settings7.infinite &&
-															(_this.previousResults = JSON.parse(JSON.stringify(response.results))),
+														(_this.previousResults = JSON.parse(JSON.stringify(response.results))),
 														_this.store.update(response),
 														(afterStoreProfile = _this.profiler.create({ type: 'event', name: 'afterStore', context: params }).start()),
 														(_context.prev = 88),
@@ -35137,9 +35249,9 @@
 							})
 						)),
 						(_this.config = cjs_default()(defaultConfig, _this.config)),
-						null !== (_this$config$settings8 = _this.config.settings) &&
-							void 0 !== _this$config$settings8 &&
-							_this$config$settings8.infinite &&
+						null !== (_this$config$settings7 = _this.config.settings) &&
+							void 0 !== _this$config$settings7 &&
+							_this$config$settings7.infinite &&
 							void 0 === _this.config.settings.restorePosition &&
 							(_this.config.settings.restorePosition = { enabled: !0 }),
 						_this.store.setConfig(_this.config),
@@ -35197,11 +35309,11 @@
 																	_search$response2$fil.length) ||
 																searchStore.loaded)
 														) {
-															_context2.next = 6;
+															_context2.next = 7;
 															break;
 														}
-														return window.location.replace(redirectURL), _context2.abrupt('return', !1);
-													case 6:
+														return (searchStore.loaded = !0), window.location.replace(redirectURL), _context2.abrupt('return', !1);
+													case 7:
 														if (
 															((nonBackgroundFilters =
 																null == search ||
@@ -35235,16 +35347,17 @@
 																		: _search$response4$pag.totalResults) ||
 																(null != nonBackgroundFilters && nonBackgroundFilters.length))
 														) {
-															_context2.next = 10;
+															_context2.next = 12;
 															break;
 														}
 														return (
+															(searchStore.loaded = !0),
 															window.location.replace(null == search ? void 0 : search.response.results[0].mappings.core.url),
 															_context2.abrupt('return', !1)
 														);
-													case 10:
-														return (_context2.next = 12), next();
 													case 12:
+														return (_context2.next = 14), next();
+													case 14:
 													case 'end':
 														return _context2.stop();
 												}
@@ -35286,11 +35399,11 @@
 								};
 							})()
 						),
-						null !== (_this$config$settings9 = _this.config.settings) &&
+						null !== (_this$config$settings8 = _this.config.settings) &&
+							void 0 !== _this$config$settings8 &&
+							null !== (_this$config$settings9 = _this$config$settings8.restorePosition) &&
 							void 0 !== _this$config$settings9 &&
-							null !== (_this$config$settings10 = _this$config$settings9.restorePosition) &&
-							void 0 !== _this$config$settings10 &&
-							_this$config$settings10.enabled) &&
+							_this$config$settings9.enabled) &&
 							(_this.eventManager.on(
 								'restorePosition',
 								(function () {
@@ -35415,11 +35528,11 @@
 									};
 								})()
 							),
-							null !== (_this$config$settings11 = _this.config.settings) &&
+							null !== (_this$config$settings10 = _this.config.settings) &&
+								void 0 !== _this$config$settings10 &&
+								null !== (_this$config$settings11 = _this$config$settings10.restorePosition) &&
 								void 0 !== _this$config$settings11 &&
-								null !== (_this$config$settings12 = _this$config$settings11.restorePosition) &&
-								void 0 !== _this$config$settings12 &&
-								_this$config$settings12.onPageShow &&
+								_this$config$settings11.onPageShow &&
 								window.addEventListener('pageshow', function () {
 									_this.eventManager.fire('restorePosition', { controller: _this, element: {} });
 								}));
@@ -35445,16 +35558,16 @@
 							{
 								key: 'params',
 								get: function get() {
-									var _this$config$settings13,
-										_this$config$settings14,
+									var _this$config$settings12,
+										_this$config$settings13,
 										_this$config$globals,
 										_this$config$globals$,
 										params = cjs_default()(Object.assign({}, getSearchParams(this.urlManager.state)), this.config.globals || {});
-									(null !== (_this$config$settings13 = this.config.settings) &&
+									(null !== (_this$config$settings12 = this.config.settings) &&
+										void 0 !== _this$config$settings12 &&
+										null !== (_this$config$settings13 = _this$config$settings12.redirects) &&
 										void 0 !== _this$config$settings13 &&
-										null !== (_this$config$settings14 = _this$config$settings13.redirects) &&
-										void 0 !== _this$config$settings14 &&
-										_this$config$settings14.merchandising &&
+										_this$config$settings13.merchandising &&
 										!this.store.loaded) ||
 										((params.search = params.search || {}), (params.search.redirectResponse = 'full')),
 										(params.tracking = params.tracking || {}),
@@ -49752,7 +49865,7 @@
 					(this.event = payload.event),
 					(this.id = payload.id),
 					(this.pid = payload.pid),
-					(this.meta = { initiator: { lib: 'searchspring/snap', 'lib.version': '0.63.5', 'lib.framework': config.framework } }),
+					(this.meta = { initiator: { lib: 'searchspring/snap', 'lib.version': '0.64.0', 'lib.framework': config.framework } }),
 					(this.id = (0, v4.A)());
 			});
 			function Tracker_toConsumableArray(arr) {
@@ -50306,7 +50419,7 @@
 									_this$globals$currenc.code &&
 									(this.context.currency = this.globals.currency),
 								(null !== (_window$searchspring = window.searchspring) && void 0 !== _window$searchspring && _window$searchspring.tracker) ||
-									((window.searchspring = window.searchspring || {}), (window.searchspring.tracker = this), (window.searchspring.version = '0.63.5')),
+									((window.searchspring = window.searchspring || {}), (window.searchspring.tracker = this), (window.searchspring.version = '0.64.0')),
 								setTimeout(function () {
 									_this.targeters.push(
 										new DomTargeter([{ selector: 'script[type^="searchspring/track/"]', emptyTarget: !1 }], function (target, elem) {
