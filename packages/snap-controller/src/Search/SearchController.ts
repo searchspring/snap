@@ -450,10 +450,8 @@ export class SearchController extends AbstractController {
 			afterSearchProfile.stop();
 			this.log.profile(afterSearchProfile);
 
-			// store previous results for infinite usage
-			if (this.config.settings?.infinite) {
-				this.previousResults = JSON.parse(JSON.stringify(response.results));
-			}
+			// store previous results for infinite usage (need to alsways store in case switch to infinite after pagination)
+			this.previousResults = JSON.parse(JSON.stringify(response.results));
 
 			// update the store
 			this.store.update(response);
