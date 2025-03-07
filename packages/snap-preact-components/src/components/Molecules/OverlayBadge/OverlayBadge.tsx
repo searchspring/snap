@@ -29,7 +29,6 @@ const CSS = {
 			position: 'relative',
 
 			'& .ss__overlay-badge__grid-wrapper': {
-				zIndex: 1,
 				pointerEvents: 'none',
 				display: 'grid',
 				position: 'absolute',
