@@ -29,6 +29,7 @@ const CSS = {
 			position: 'relative',
 
 			'& .ss__overlay-badge__grid-wrapper': {
+				pointerEvents: 'none',
 				display: 'grid',
 				position: 'absolute',
 				top: 0,
