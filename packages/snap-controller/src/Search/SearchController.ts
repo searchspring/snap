@@ -87,6 +87,8 @@ export class SearchController extends AbstractController {
 			const redirectURL = search.response?.merchandising?.redirect;
 			const searchStore = search.controller.store as SearchStore;
 			if (redirectURL && config?.settings?.redirects?.merchandising && !search?.response?.filters?.length && !searchStore.loaded) {
+				//set loaded to true to prevent infinite search/reloading from happening
+				searchStore.loaded = true;
 				window.location.replace(redirectURL);
 				return false;
 			}
@@ -98,6 +100,8 @@ export class SearchController extends AbstractController {
 				search?.response?.pagination?.totalResults === 1 &&
 				!nonBackgroundFilters?.length
 			) {
+				//set loaded to true to prevent infinite search/reloading from happening
+				searchStore.loaded = true;
 				window.location.replace(search?.response.results[0].mappings.core.url);
 				return false;
 			}
