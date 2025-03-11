@@ -10,6 +10,12 @@ import { MockData } from '@searchspring/snap-shared';
 
 import type { Product } from '@searchspring/snap-store-mobx';
 
+const wait = (time?: number) => {
+	return new Promise((resolve) => {
+		setTimeout(resolve, time);
+	});
+};
+
 const mockData = new MockData();
 const searchResponse = mockData.searchMeta();
 
@@ -148,23 +154,70 @@ describe('Result Component', () => {
 		expect(ratingElement).toBeInTheDocument();
 	});
 
-	it('can render addToCart button', () => {
+	it('can render addToCart button', async () => {
 		const controller = {
 			addToCart: jest.fn(),
 		};
 
 		// @ts-ignore
-		const rendered = render(<Result controller={controller} result={mockResults[1] as Product} hideATCButton={false} />);
+		const rendered = render(<Result controller={controller} result={mockResults[1] as Product} hideAddToCartButton={false} />);
 
 		const resultElement = rendered.container.querySelector('.ss__result');
 		const addToCartElement = rendered.container.querySelector('.ss__result__button--addToCart');
 
 		expect(resultElement).toBeInTheDocument();
 		expect(addToCartElement).toBeInTheDocument();
+		expect(addToCartElement?.innerHTML).toContain('Add To Cart');
 
 		userEvent.click(addToCartElement!);
 
+		await wait(10);
+
 		expect(controller.addToCart).toHaveBeenCalledWith([mockResults[1]]);
+		expect(addToCartElement?.innerHTML).toContain('Added!');
+
+		await wait(2000);
+
+		expect(addToCartElement?.innerHTML).toContain('Add To Cart');
+	});
+
+	it('can render addToCart button with custom text and timeout', async () => {
+		const normalText = 'normal atc';
+		const successText = 'success atc';
+		const timeout = 3000;
+		const controller = {
+			addToCart: jest.fn(),
+		};
+
+		const rendered = render(
+			<Result
+				// @ts-ignore
+				controller={controller}
+				result={mockResults[1] as Product}
+				hideAddToCartButton={false}
+				addToCartButtonText={normalText}
+				addToCartButtonSuccessText={successText}
+				addToCartButtonSuccessTimeout={timeout}
+			/>
+		);
+
+		const resultElement = rendered.container.querySelector('.ss__result');
+		const addToCartElement = rendered.container.querySelector('.ss__result__button--addToCart');
+
+		expect(resultElement).toBeInTheDocument();
+		expect(addToCartElement).toBeInTheDocument();
+		expect(addToCartElement?.innerHTML).toContain(normalText);
+
+		userEvent.click(addToCartElement!);
+
+		await wait(10);
+
+		expect(controller.addToCart).toHaveBeenCalledWith([mockResults[1]]);
+		expect(addToCartElement?.innerHTML).toContain(successText);
+
+		await wait(timeout);
+
+		expect(addToCartElement?.innerHTML).toContain(normalText);
 	});
 
 	it('can pass additional function to call on addToCart button click', () => {
@@ -176,7 +229,7 @@ describe('Result Component', () => {
 
 		const rendered = render(
 			// @ts-ignore
-			<Result onAddToCartClick={customFunc} controller={controller} result={mockResults[1] as Product} hideATCButton={false} />
+			<Result onAddToCartClick={customFunc} controller={controller} result={mockResults[1] as Product} hideAddToCartButton={false} />
 		);
 
 		const resultElement = rendered.container.querySelector('.ss__result');
@@ -282,7 +335,7 @@ describe('Result lang works', () => {
 				};
 				console.log(lang);
 				// @ts-ignore
-				const rendered = render(<Result result={mockResults[1] as Product} lang={lang} hideATCButton={false} />);
+				const rendered = render(<Result result={mockResults[1] as Product} lang={lang} hideAddToCartButton={false} />);
 				rendered.debug();
 				const element = rendered.container.querySelector(selector);
 				expect(element).toBeInTheDocument();

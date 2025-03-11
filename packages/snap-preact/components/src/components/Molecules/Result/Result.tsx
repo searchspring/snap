@@ -18,6 +18,7 @@ import { Rating, RatingProps } from '../Rating';
 import { Button, ButtonProps } from '../../Atoms/Button';
 import deepmerge from 'deepmerge';
 import { Lang, useLang } from '../../../hooks';
+import { useState } from 'preact/hooks';
 
 const defaultStyles: StyleScript<ResultProps> = () => {
 	return css({
@@ -87,8 +88,10 @@ export const Result = observer((properties: ResultProps): JSX.Element => {
 	const defaultProps: Partial<ResultProps> = {
 		layout: ResultsLayout.grid,
 		treePath: globalTreePath,
-		ATCButtonText: 'Add To Cart',
-		hideATCButton: true,
+		addToCartButtonText: 'Add To Cart',
+		addToCartButtonSuccessText: 'Added!',
+		addToCartButtonSuccessTimeout: 2000,
+		hideAddToCartButton: true,
 		hideRating: true,
 	};
 
@@ -107,14 +110,18 @@ export const Result = observer((properties: ResultProps): JSX.Element => {
 		layout,
 		onClick,
 		controller,
-		hideATCButton,
+		hideAddToCartButton,
 		onAddToCartClick,
-		ATCButtonText,
+		addToCartButtonText,
+		addToCartButtonSuccessText,
+		addToCartButtonSuccessTimeout,
 		hideRating,
 		treePath,
 	} = props;
 
 	const core = result?.display?.mappings.core || result?.mappings?.core;
+
+	const [addedToCart, setAddedToCart] = useState(false);
 
 	const subProps: ResultSubProps = {
 		price: {
@@ -183,10 +190,14 @@ export const Result = observer((properties: ResultProps): JSX.Element => {
 			// default props
 			className: 'ss__result__button--addToCart',
 			onClick: (e) => {
+				setAddedToCart(true);
+
 				if (onAddToCartClick) {
 					onAddToCartClick(e, result);
 				}
 				controller?.addToCart([result]);
+
+				setTimeout(() => setAddedToCart(false), addToCartButtonSuccessTimeout);
 			},
 
 			// inherited props
@@ -209,7 +220,7 @@ export const Result = observer((properties: ResultProps): JSX.Element => {
 	//initialize lang
 	const defaultLang = {
 		addToCartButtonText: {
-			value: ATCButtonText,
+			value: addedToCart ? addToCartButtonSuccessText : addToCartButtonText,
 		},
 	};
 
@@ -287,9 +298,9 @@ export const Result = observer((properties: ResultProps): JSX.Element => {
 					)}
 					{cloneWithProps(detailSlot, { result, treePath })}
 
-					{!hideATCButton && (
-						<div className="ss__result__atc-wrapper">
-							<Button {...subProps.button} content={ATCButtonText} {...mergedLang.addToCartButtonText.all} />
+					{!hideAddToCartButton && (
+						<div className="ss__result__addToCart-wrapper">
+							<Button {...subProps.button} content={addToCartButtonText} {...mergedLang.addToCartButtonText.all} />
 						</div>
 					)}
 				</div>
@@ -320,9 +331,11 @@ export interface ResultProps extends ComponentProps {
 	hideImage?: boolean;
 	hidePricing?: boolean;
 	hideRating?: boolean;
-	hideATCButton?: boolean;
-	ATCButtonText?: string;
+	hideAddToCartButton?: boolean;
+	addToCartButtonText?: string;
 	onAddToCartClick?: (e: React.MouseEvent<HTMLElement, MouseEvent>, result: Product) => void;
+	addToCartButtonSuccessText?: string;
+	addToCartButtonSuccessTimeout?: number;
 	detailSlot?: JSX.Element | JSX.Element[];
 	fallback?: string;
 	layout?: keyof typeof ResultsLayout | ResultsLayout;
@@ -334,6 +347,7 @@ export interface ResultProps extends ComponentProps {
 
 export interface ResultLang {
 	addToCartButtonText: Lang<ResultPropData>;
+	addToCartButtonSuccessText: Lang<ResultPropData>;
 }
 
 interface ResultPropData {

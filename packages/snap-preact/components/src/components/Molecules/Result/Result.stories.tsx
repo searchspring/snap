@@ -110,7 +110,7 @@ export default {
 			},
 			control: { type: 'boolean' },
 		},
-		hideATCButton: {
+		hideAddToCartButton: {
 			description: 'Hide add to cart button',
 			table: {
 				type: {
@@ -120,15 +120,31 @@ export default {
 			},
 			control: { type: 'boolean' },
 		},
-		ATCButtonText: {
+		addToCartButtonText: {
 			description: 'add to cart button text',
 			table: {
 				type: {
 					summary: 'string',
 				},
-				defaultValue: { summary: 'Add To Cart' },
 			},
 			control: { type: 'text' },
+		},
+		addToCartButtonSuccessText: {
+			description: 'add to cart button text to show after adding to cart',
+			table: {
+				type: {
+					summary: 'string',
+				},
+			},
+			control: { type: 'text' },
+		},
+		addToCartButtonSuccessTimeout: {
+			table: {
+				type: {
+					summary: 'number',
+				},
+			},
+			control: { type: 'number' },
 		},
 		onAddToCartClick: {
 			description: 'function to run on add to cart button click',
