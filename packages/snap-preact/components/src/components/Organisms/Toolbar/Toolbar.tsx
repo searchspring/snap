@@ -17,6 +17,7 @@ import { LayoutSelector, LayoutSelectorProps } from '../../Molecules/LayoutSelec
 import { SnapTemplates } from '../../../../../src';
 import { MobileSidebar, MobileSidebarProps } from '../MobileSidebar';
 import { PaginationInfo, PaginationInfoProps } from '../../Atoms/PaginationInfo/PaginationInfo';
+import { SearchHeader, SearchHeaderProps } from '../../Atoms/SearchHeader';
 
 const defaultStyles: StyleScript<ToolbarProps> = ({}) => {
 	return css({
@@ -141,6 +142,18 @@ export const Toolbar = observer((properties: ToolbarProps): JSX.Element => {
 			theme: props?.theme,
 			treePath,
 		},
+		SearchHeader: {
+			// default props
+			controller,
+			className: 'ss__toolbar__search-header',
+			// inherited props
+			...defined({
+				disableStyles,
+			}),
+			// component theme overrides
+			theme: props?.theme,
+			treePath,
+		},
 	};
 
 	const hasChildrenToRender = Boolean((!hideTopSlot && topSlot) || modules?.length || (!hideBottomSlot && bottomSlot));
@@ -151,6 +164,10 @@ export const Toolbar = observer((properties: ToolbarProps): JSX.Element => {
 				{!hideTopSlot && topSlot && <div className={classnames('ss__toolbar__slot', `ss__toolbar__slot--top`)}>{cloneWithProps(topSlot)}</div>}
 
 				{modules?.map((module) => {
+					if (module == 'SearchHeader') {
+						return <SearchHeader controller={controller} {...subProps.SearchHeader} />;
+					}
+
 					if (module == 'MobileSidebar' && controller.store.pagination.totalResults > 0) {
 						return <MobileSidebar controller={controller} {...subProps.MobileSidebar} />;
 					}
@@ -216,7 +233,15 @@ export interface ToolbarProps extends ComponentProps {
 	modules?: ModuleNames[];
 }
 
-export type ModuleNames = 'FilterSummary' | 'MobileSidebar' | 'LayoutSelector' | 'PerPage' | 'SortBy' | 'Pagination' | 'PaginationInfo';
+export type ModuleNames =
+	| 'SearchHeader'
+	| 'FilterSummary'
+	| 'MobileSidebar'
+	| 'LayoutSelector'
+	| 'PerPage'
+	| 'SortBy'
+	| 'Pagination'
+	| 'PaginationInfo';
 
 export type ToolbarNames = 'top' | 'middle' | 'bottom';
 
@@ -229,4 +254,5 @@ interface ToolbarSubProps {
 	SortBy: Partial<SortByProps>;
 	PerPage: Partial<PerPageProps>;
 	LayoutSelector: Partial<LayoutSelectorProps>;
+	SearchHeader: Partial<SearchHeaderProps>;
 }

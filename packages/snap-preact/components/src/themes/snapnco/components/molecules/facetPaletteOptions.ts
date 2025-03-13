@@ -24,7 +24,7 @@ const facetPaletteStyleScript = ({ theme }: FacetPaletteOptionsProps) => {
 			},
 
 			'.ss__facet-palette-options__option__palette': {
-				border: '2px solid #e6e6e6',
+				border: '1px solid #d6d6d6',
 
 				'.ss__facet-palette-options__icon': {
 					opacity: 1,
@@ -47,7 +47,7 @@ const facetPaletteStyleScript = ({ theme }: FacetPaletteOptionsProps) => {
 export const facetPaletteOptions: ThemeComponentProps<FacetPaletteOptionsProps> = {
 	default: {
 		themeStyleScript: facetPaletteStyleScript,
-		gapSize: '3px',
+		gapSize: '8px',
 		hideLabel: true,
 		columns: 5,
 		hideIcon: false,

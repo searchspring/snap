@@ -42,9 +42,6 @@ export const searchHorizontal: ThemeComponentProps<SearchHorizontalProps> = {
 		themeStyleScript: searchHorizontalStyleScript,
 		theme: {
 			components: {
-				facetsHorizontal: {
-					limit: 9,
-				},
 				searchHeader: {
 					titleText: (data) => {
 						return data.search?.query?.string ? `Search Results For ${data.search?.query.string}` : 'Search Results';

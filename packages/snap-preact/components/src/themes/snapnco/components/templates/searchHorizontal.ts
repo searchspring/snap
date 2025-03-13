@@ -15,7 +15,7 @@ const searchHorizontalStyleScript = ({ theme }: SearchHorizontalProps) => {
 			textAlign: 'left',
 		},
 
-		'.ss__search-horizontal__content__toolbar--top-toolbar': {
+		'.ss__search-horizontal__content__toolbar--top-toolbar, .ss__search-horizontal__content__toolbar--middle-toolbar': {
 			justifyContent: 'right',
 
 			'.ss__toolbar__pagination-info': {
@@ -27,28 +27,47 @@ const searchHorizontalStyleScript = ({ theme }: SearchHorizontalProps) => {
 			marginTop: '10px',
 		},
 		[`@media (max-width: ${variables?.breakpoints[2]}px)`]: {
-			'.ss__search-horizontal__content__toolbar--top-toolbar': {
+			'.ss__search-horizontal__content__toolbar--middle-toolbar': {
 				justifyContent: 'space-between',
 			},
 		},
 		[`@media (max-width: ${variables?.breakpoints[0]}px)`]: {
-			position: 'relative',
-			'.ss__search-horizontal__content__toolbar--top-toolbar': {
-				justifyContent: 'flex-end !important',
-				position: 'absolute',
-				top: '0px',
-				right: '0px',
-			},
-			'.ss__search-horizontal__content__toolbar--middle-toolbar': {
-				justifyContent: 'space-between !important',
-				flexWrap: 'wrap',
-				'.ss__toolbar__filter-summary': {
-					flexBasis: '100%',
+			'.ss__toolbar__sort-by': {
+				width: '49%',
+				border: '1px solid #e6e6e6',
+				borderRadius: '.5em',
+				justifyContent: 'center',
+				'.ss__dropdown': {
+					width: '100%',
+					'.ss__select__dropdown__button': {
+						padding: '13px 15px',
+						background: 'none',
+						width: 'calc(100% - 30px)',
+						justifyContent: 'center',
+						textAlign: 'center',
+
+						'.ss__button__content': {
+							justifyContent: 'center',
+						},
+					},
+				},
+				'&:hover': {
+					background: '#eeee',
 				},
 			},
-			'.ss__search-horizontal__content__toolbar--middle-toolbar, .ss__search__header-section__toolbar--top-toolbar': {
-				'.ss__toolbar__sort-by': {
-					marginLeft: 'initial',
+			'.ss__toolbar__mobile-sidebar': {
+				width: '49%',
+				'& .ss__mobile-sidebar__slideout__button': {
+					display: 'flex',
+					justifyContent: 'center',
+					gap: '15px',
+					'.ss__button__content': {
+						width: 'auto',
+					},
+
+					'&:hover': {
+						background: '#eeee',
+					},
 				},
 			},
 		},
@@ -76,27 +95,32 @@ export const searchHorizontal: ThemeComponentProps<SearchHorizontalProps> = {
 					icon: 'filters',
 				},
 				'toolbar.top': {
-					modules: ['PaginationInfo', 'SortBy', 'PerPage'],
+					modules: [],
 				},
 				'toolbar.middle': {
-					modules: [],
+					modules: ['PaginationInfo', 'SortBy', 'PerPage'],
 				},
 				'toolbar.bottom': {
 					modules: ['Pagination'],
 				},
 			},
 		},
+		hideMiddleToolbar: false,
 	},
 	mobile: {
 		hideFacetsHorizontal: true,
-		hideMiddleToolbar: false,
+
 		theme: {
 			components: {
-				'toolbar.top': {
-					modules: ['MobileSidebar'],
+				mobileSidebar: {
+					openButtonText: 'Filters',
+					hideOpenButtonText: false,
 				},
 				'toolbar.middle': {
-					modules: ['FilterSummary', 'SortBy', 'LayoutSelector'],
+					modules: ['MobileSidebar', 'SortBy'],
+				},
+				'toolbar.top': {
+					modules: ['PaginationInfo'],
 				},
 			},
 		},
