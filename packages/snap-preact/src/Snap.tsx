@@ -409,16 +409,20 @@ export class Snap {
 			this.tracker = services?.tracker || new Tracker(trackerGlobals, trackerConfig);
 
 			// check for tracking attribution in URL ?ss_attribution=type:id
-			const sessionAttribution = window.sessionStorage?.getItem(SESSION_ATTRIBUTION);
-			if (urlParams?.params?.query?.ss_attribution) {
-				const attribution = urlParams.params.query.ss_attribution.split(':');
-				const [type, id] = attribution;
-				if (type && id) {
-					this.tracker.updateContext('attribution', { type, id });
+			try {
+				const decodedAttribution = decodeURIComponent(urlParams?.params?.query?.ss_attribution || '');
+
+				if (decodedAttribution) {
+					// save to session storage
+					window.sessionStorage?.setItem(SESSION_ATTRIBUTION, decodedAttribution);
 				}
-				// save to session storage
-				window.sessionStorage?.setItem(SESSION_ATTRIBUTION, urlParams.params.query.ss_attribution);
-			} else if (sessionAttribution) {
+			} catch {
+				// noop
+			}
+
+			// check for session attribution in storage
+			const sessionAttribution = window.sessionStorage?.getItem(SESSION_ATTRIBUTION);
+			if (sessionAttribution) {
 				const [type, id] = sessionAttribution.split(':');
 				if (type && id) {
 					this.tracker.updateContext('attribution', { type, id });

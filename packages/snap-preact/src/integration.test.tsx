@@ -209,6 +209,14 @@ describe('Snap Preact Integration', () => {
 		new Snap(baseConfig);
 		expect(mockStorage[key]).toBe('email:differentEmailTag');
 
+		// change attribution to email%3AencodedEmailTag (URI encoded)
+		// @ts-ignore
+		window.location = {
+			href: 'https://www.merch.com?ss_attribution=email%3AencodedEmailTag',
+		};
+		new Snap(baseConfig);
+		expect(mockStorage[key]).toBe('email:encodedEmailTag');
+
 		// clean up
 		// return our mocks to their original values
 		// 🚨 THIS IS VERY IMPORTANT to avoid polluting future tests!
