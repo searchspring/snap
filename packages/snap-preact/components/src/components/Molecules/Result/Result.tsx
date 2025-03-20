@@ -75,9 +75,6 @@ const defaultStyles: StyleScript<ResultProps> = () => {
 					fontSize: '80%',
 				},
 			},
-			'& .ss__result__details__button': {
-				marginBottom: '10px',
-			},
 		},
 	});
 };
@@ -299,7 +296,7 @@ export const Result = observer((properties: ResultProps): JSX.Element => {
 					{cloneWithProps(detailSlot, { result, treePath })}
 
 					{!hideAddToCartButton && (
-						<div className="ss__result__addToCart-wrapper">
+						<div className="ss__result__add-to-cart-wrapper">
 							<Button {...subProps.button} content={addToCartButtonText} {...mergedLang.addToCartButtonText.all} />
 						</div>
 					)}

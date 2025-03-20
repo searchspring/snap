@@ -139,6 +139,7 @@ export default {
 			control: { type: 'text' },
 		},
 		addToCartButtonSuccessTimeout: {
+			description: 'time in ms to show the success button text before reverting back to standard text',
 			table: {
 				type: {
 					summary: 'number',

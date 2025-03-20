@@ -37,18 +37,18 @@ The `hideRating` prop will prevent to product rating from rendering.
 <Result result={controller.store.results[0]} hideRating={true} />
 ```
 
-### hideATCButton
-The `hideATCButton` prop will prevent to product add to cart button from rendering.
+### hideAddToCartButton
+The `hideAddToCartButton` prop will prevent to product add to cart button from rendering.
 
 ```jsx
-<Result result={controller.store.results[0]} hideATCButton={true} />
+<Result result={controller.store.results[0]} hideAddToCartButton={true} />
 ```
 
-### ATCButtonText
-The `ATCButtonText` prop will will change the text rendered in the add to cart button.
+### addToCartButtonText
+The `addToCartButtonText` prop will will change the text rendered in the add to cart button.
 
 ```jsx
-<Result result={controller.store.results[0]} ATCButtonText={'Add To Cart'} />
+<Result result={controller.store.results[0]} addToCartButtonText={'Add To Cart'} />
 ```
 
 ### hidePricing
@@ -63,8 +63,29 @@ The `hidePricing` prop will prevent the pricing from rendering.
 The `onAddToCartClick` prop is a function to be called on add to cart button click. In addition to the built in platform addToCart function on the controller. 
 
 ```jsx
-<Result result={controller.store.results[0]} hidePricing={true} />
+
+const clickFunc = (e, result) => {
+	console.log('added!', e, result);
+}
+
+<Result result={controller.store.results[0]} onAddToCartClick={() => clickFunc} />
 ```
+
+
+### addToCartButtonSuccessText
+The `addToCartButtonSuccessText` prop will change the text rendered in the add to cart button temporarily after clicking.
+
+```jsx
+<Result result={controller.store.results[0]} addToCartButtonText={'Add To Cart'} addToCartButtonSuccessText={'added!'} />
+```
+
+### addToCartButtonSuccessTimeout
+The `addToCartButtonSuccessTimeout` prop specifies the number of ms to show the success text in the add to cart button before reverting back to normal text.
+
+```jsx
+<Result result={controller.store.results[0]} addToCartButtonText={'Add To Cart'} addToCartButtonSuccessText={'added!'} addToCartButtonSuccessTimeout={4000} />
+```
+
 ### hideImage
 The `hideImage` prop will prevent the image from rendering.
 
