@@ -30,11 +30,60 @@ The `hideTitle` prop will prevent to product title from rendering.
 <Result result={controller.store.results[0]} hideTitle={true} />
 ```
 
+### hideRating
+The `hideRating` prop will prevent to product rating from rendering.
+
+```jsx
+<Result result={controller.store.results[0]} hideRating={true} />
+```
+
+### hideAddToCartButton
+The `hideAddToCartButton` prop will prevent to product add to cart button from rendering.
+
+```jsx
+<Result result={controller.store.results[0]} hideAddToCartButton={true} />
+```
+
+### addToCartButtonText
+The `addToCartButtonText` prop will will change the text rendered in the add to cart button.
+
+```jsx
+<Result result={controller.store.results[0]} addToCartButtonText={'Add To Cart'} />
+```
+
 ### hidePricing
 The `hidePricing` prop will prevent the pricing from rendering.
 
 ```jsx
 <Result result={controller.store.results[0]} hidePricing={true} />
+```
+
+
+### onAddToCartClick
+The `onAddToCartClick` prop is a function to be called on add to cart button click. In addition to the built in platform addToCart function on the controller. 
+
+```jsx
+
+const clickFunc = (e, result) => {
+	console.log('added!', e, result);
+}
+
+<Result result={controller.store.results[0]} onAddToCartClick={() => clickFunc} />
+```
+
+
+### addToCartButtonSuccessText
+The `addToCartButtonSuccessText` prop will change the text rendered in the add to cart button temporarily after clicking.
+
+```jsx
+<Result result={controller.store.results[0]} addToCartButtonText={'Add To Cart'} addToCartButtonSuccessText={'added!'} />
+```
+
+### addToCartButtonSuccessTimeout
+The `addToCartButtonSuccessTimeout` prop specifies the number of ms to show the success text in the add to cart button before reverting back to normal text.
+
+```jsx
+<Result result={controller.store.results[0]} addToCartButtonText={'Add To Cart'} addToCartButtonSuccessText={'added!'} addToCartButtonSuccessTimeout={4000} />
 ```
 
 ### hideImage
