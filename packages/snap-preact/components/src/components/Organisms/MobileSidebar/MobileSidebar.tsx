@@ -124,6 +124,7 @@ export const MobileSidebar = observer((properties: MobileSidebarProps): JSX.Elem
 		},
 		sidebar: {
 			// default props
+			name: 'mobile',
 			hideTitle: true,
 			hideFacets: hideFacets,
 			hidePerPage: hidePerPage,

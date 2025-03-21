@@ -14,8 +14,14 @@ import { SearchController } from '@searchspring/snap-controller';
 import { Lang, useLang } from '../../../hooks';
 import deepmerge from 'deepmerge';
 
-const defaultStyles: StyleScript<SidebarProps> = () => {
-	return css({});
+const defaultStyles: StyleScript<SidebarProps> = ({ stickyOffset }) => {
+	return css({
+		// need sticky styles using new sticky prop
+		'&.ss__sidebar--sticky': {
+			position: 'sticky',
+			top: stickyOffset || 0,
+		},
+	});
 };
 
 export const Sidebar = observer((properties: SidebarProps): JSX.Element => {
@@ -28,7 +34,8 @@ export const Sidebar = observer((properties: SidebarProps): JSX.Element => {
 
 	const props = mergeProps('sidebar', globalTheme, defaultProps, properties);
 
-	const { controller, hideTitle, titleText, hideFacets, hidePerPage, hideSortBy, hideFilterSummary, disableStyles, className, treePath } = props;
+	const { controller, hideTitle, titleText, hideFacets, hidePerPage, hideSortBy, hideFilterSummary, sticky, disableStyles, className, treePath } =
+		props;
 
 	const styling = mergeStyles<SidebarProps>(props, defaultStyles);
 
@@ -92,7 +99,7 @@ export const Sidebar = observer((properties: SidebarProps): JSX.Element => {
 
 	return controller?.store?.loaded && controller?.store?.pagination?.totalResults > 0 ? (
 		<CacheProvider>
-			<div {...styling} className={classnames('ss__sidebar', className)}>
+			<div {...styling} className={classnames('ss__sidebar', className, { 'ss__sidebar--sticky': sticky })}>
 				<div className={classnames('ss__sidebar__inner')}>
 					{!hideTitle && <h4 className="ss__sidebar__title" {...mergedLang.titleText?.all}></h4>}
 
@@ -119,6 +126,8 @@ export interface SidebarProps extends ComponentProps {
 	hidePerPage?: boolean;
 	hideSortBy?: boolean;
 	hideFilterSummary?: boolean;
+	sticky?: boolean;
+	stickyOffset?: number;
 	lang?: Partial<SidebarLang>;
 }
 
@@ -134,3 +143,5 @@ interface SidebarSubProps {
 	sortBy: Partial<SortByProps>;
 	perPage: Partial<PerPageProps>;
 }
+
+export type SidebarNames = 'search' | 'mobile';

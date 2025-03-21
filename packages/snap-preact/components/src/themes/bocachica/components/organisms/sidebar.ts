@@ -8,7 +8,7 @@ const sidebarStyleScript = ({ theme }: SidebarProps) => {
 	return css({
 		boxSizing: 'border-box',
 		width: '100%',
-		margin: '0 40px 0 0',
+		margin: '0 1em 0 0',
 
 		'& .ss__sidebar__title': {
 			color: variables?.colors?.primary,
@@ -20,6 +20,7 @@ const sidebarStyleScript = ({ theme }: SidebarProps) => {
 export const sidebar: ThemeComponentProps<SidebarProps> = {
 	default: {
 		themeStyleScript: sidebarStyleScript,
+		hideFilterSummary: false,
 	},
 	mobile: {},
 	tablet: {},

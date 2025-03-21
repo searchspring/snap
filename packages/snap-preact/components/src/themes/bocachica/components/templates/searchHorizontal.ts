@@ -56,17 +56,17 @@ export const searchHorizontal: ThemeComponentProps<SearchHorizontalProps> = {
 				sidebar: {
 					hideTitle: true,
 				},
-				'button.filter-toggle': {
+				'button.sidebar-toggle': {
 					icon: 'filters',
 				},
 				'toolbar.top': {
-					modules: ['PaginationInfo', 'SortBy', 'PerPage'],
+					layout: ['PaginationInfo', 'SortBy', 'PerPage'],
 				},
 				'toolbar.middle': {
-					modules: [],
+					layout: [],
 				},
 				'toolbar.bottom': {
-					modules: ['Pagination'],
+					layout: ['Separator', 'Pagination', 'Separator'],
 				},
 				mobileSidebar: {
 					theme: {
@@ -85,10 +85,10 @@ export const searchHorizontal: ThemeComponentProps<SearchHorizontalProps> = {
 		theme: {
 			components: {
 				'toolbar.top': {
-					modules: ['MobileSidebar', 'LayoutSelector'],
+					layout: ['MobileSidebar', 'LayoutSelector'],
 				},
 				'toolbar.middle': {
-					modules: ['PaginationInfo'],
+					layout: ['PaginationInfo'],
 				},
 			},
 		},

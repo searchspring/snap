@@ -53,13 +53,12 @@ const mobileSidebarStyleScript = ({ theme }: MobileSidebarProps) => {
 export const mobileSidebar: ThemeComponentProps<MobileSidebarProps> = {
 	default: {
 		themeStyleScript: mobileSidebarStyleScript,
-		openButtonIcon: 'filters',
-	},
-	mobile: {
 		hideSortBy: true,
 		hideOpenButtonText: true,
 		hideFilterSummary: true,
+		openButtonIcon: 'filters',
 	},
+	mobile: {},
 	tablet: {},
 	desktop: {},
 };
