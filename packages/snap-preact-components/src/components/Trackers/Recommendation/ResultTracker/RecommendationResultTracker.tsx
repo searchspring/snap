@@ -39,17 +39,8 @@ export const RecommendationResultTracker = observer((properties: RecommendationR
 	const resultRef = useRef(null);
 	const resultInViewport = useIntersection(resultRef, '0px');
 
-	if (!controller.events.render) {
-		controller.log.warn('<RecommendationResultTracker> used without <RecommendationProfileTracker>');
-	}
-
 	controller.track.product.render(result);
 	if (resultInViewport && mergedTrack.impression) {
-		// intersection observer can trigger in any random order,
-		// so we need to check if profile impression has been sent and send if not.
-		if (!controller.events.impression) {
-			controller.track.impression();
-		}
 		controller.track.product.impression(result);
 	}
 

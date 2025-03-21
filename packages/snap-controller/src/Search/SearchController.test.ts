@@ -28,6 +28,9 @@ let searchConfig: SearchStoreConfig;
 const urlManager = new UrlManager(new QueryStringTranslator(), reactLinker);
 const services = { urlManager };
 
+// mocks fetch so beacon client does not make network requests
+jest.spyOn(global.window, 'fetch').mockImplementation(() => Promise.resolve({ status: 200, json: () => Promise.resolve({}) } as Response));
+
 describe('Search Controller', () => {
 	beforeEach(() => {
 		searchConfig = { ...searchConfigDefault };
@@ -341,24 +344,22 @@ describe('Search Controller', () => {
 			logger: new Logger(),
 			tracker: new Tracker(globals),
 		});
-		const clickfn = jest.spyOn(controller.tracker.track.product, 'click');
+		const clickfn = jest.spyOn(controller.tracker.beacon.events.search, 'clickThrough');
 
 		await controller.search();
 
 		const result = controller.store.results[0];
-		const { intellisuggestData, intellisuggestSignature } = result.attributes;
-		const href = result.mappings.core?.url;
-		const event = new Event('click');
+		const href = result.mappings.core?.url!;
 
 		const storagefn = jest.spyOn(controller.storage, 'set');
+		const aElem = document.createElement('a');
+		aElem.setAttribute('href', href);
+		aElem.onclick = (e) => {
+			controller.track.product.click(e, result);
+		};
+		aElem.click();
 
-		controller.track.product.click(event as any, result);
-
-		expect(clickfn).toHaveBeenCalledWith({
-			intellisuggestData,
-			intellisuggestSignature,
-			href,
-		});
+		expect(clickfn).toHaveBeenCalledTimes(1);
 
 		expect(storagefn).toHaveBeenCalledTimes(1);
 
@@ -558,11 +559,7 @@ describe('Search Controller', () => {
 
 		const linkElem = document.querySelector('.link');
 
-		controller.track.product.click({ target: linkElem } as MouseEvent, {
-			mappings: { core: { url: href } },
-			attributes: { intellisuggestData: '', intellisuggestSignature: '' },
-		});
-
+		controller.track.product.click({ target: linkElem } as MouseEvent, controller.store.results[0]);
 		const scrollMap = controller.storage.get('scrollMap');
 		expect(scrollMap).toStrictEqual({
 			[stringyParams]: {

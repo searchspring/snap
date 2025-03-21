@@ -266,6 +266,8 @@
         "left": [
           "<script data-banner-type=\"html\" data-banner-html=\"Left banner.\" type=\"text/widget\"></script>Left banner."
         ]
-      }
+      },
+      "experiments": [],
+      "personalized": false
     }
   }

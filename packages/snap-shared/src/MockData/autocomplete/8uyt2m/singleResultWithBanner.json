@@ -63,7 +63,9 @@
           }
         }
       ]
-    }
+    },
+    "experiments": [],
+    "personalized": false
   },
   "search": {
     "query": "dress"

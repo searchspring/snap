@@ -48,7 +48,7 @@ const defaultConfig: ClientConfig = {
 
 export class Client {
 	private mode = AppMode.production;
-	private globals: ClientGlobals;
+	public globals: ClientGlobals;
 	private config: ClientConfig;
 	private requesters: {
 		autocomplete: HybridAPI;

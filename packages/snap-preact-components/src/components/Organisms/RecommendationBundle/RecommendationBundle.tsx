@@ -351,7 +351,7 @@ export const RecommendationBundle = observer((properties: RecommendationBundlePr
 	};
 	const addToCart = (e: MouseEvent) => {
 		// add to cart tracking
-		controller.track.addBundle(e, selectedItems);
+		controller.addBundleToCart(selectedItems);
 
 		//call the function passed
 		onAddToCart && onAddToCart(e, selectedItems);
@@ -411,7 +411,10 @@ export const RecommendationBundle = observer((properties: RecommendationBundlePr
 												<BundleSelector
 													seedText={seedText}
 													seed={true}
-													onCheck={() => onProductSelect(seed)}
+													onCheck={(e) => {
+														e.stopPropagation();
+														onProductSelect(seed);
+													}}
 													checked={selectedItems.findIndex((item) => item.id == seed.id) > -1}
 													icon={separatorIcon}
 													hideCheckboxes={hideCheckboxes}
@@ -463,7 +466,10 @@ export const RecommendationBundle = observer((properties: RecommendationBundlePr
 																			seedText={seedText}
 																			seed={true}
 																			icon={separatorIcon}
-																			onCheck={() => onProductSelect(result)}
+																			onCheck={(e) => {
+																				e.stopPropagation();
+																				onProductSelect(result);
+																			}}
 																			checked={selected}
 																			hideCheckboxes={hideCheckboxes}
 																			theme={props.theme}
@@ -481,7 +487,10 @@ export const RecommendationBundle = observer((properties: RecommendationBundlePr
 																	<RecommendationResultTracker controller={controller} result={result}>
 																		<BundleSelector
 																			icon={separatorIconSeedOnly ? false : separatorIcon}
-																			onCheck={() => onProductSelect(result)}
+																			onCheck={(e) => {
+																				e.stopPropagation();
+																				onProductSelect(result);
+																			}}
 																			checked={selected}
 																			hideCheckboxes={hideCheckboxes}
 																			theme={props.theme}
@@ -506,7 +515,10 @@ export const RecommendationBundle = observer((properties: RecommendationBundlePr
 																<RecommendationResultTracker controller={controller} result={result}>
 																	<BundleSelector
 																		icon={separatorIconSeedOnly ? false : separatorIcon}
-																		onCheck={() => onProductSelect(result)}
+																		onCheck={(e) => {
+																			e.stopPropagation();
+																			onProductSelect(result);
+																		}}
 																		checked={selected}
 																		hideCheckboxes={hideCheckboxes}
 																		theme={props.theme}
@@ -537,7 +549,10 @@ export const RecommendationBundle = observer((properties: RecommendationBundlePr
 														seedText={seedText}
 														seed={true}
 														icon={separatorIcon}
-														onCheck={() => onProductSelect(result)}
+														onCheck={(e) => {
+															e.stopPropagation();
+															onProductSelect(result);
+														}}
 														checked={selected}
 														hideCheckboxes={hideCheckboxes}
 														theme={props.theme}
@@ -555,7 +570,10 @@ export const RecommendationBundle = observer((properties: RecommendationBundlePr
 												<RecommendationResultTracker controller={controller} result={result}>
 													<BundleSelector
 														icon={separatorIconSeedOnly ? false : separatorIcon}
-														onCheck={() => onProductSelect(result)}
+														onCheck={(e) => {
+															e.stopPropagation();
+															onProductSelect(result);
+														}}
 														checked={selected}
 														hideCheckboxes={hideCheckboxes}
 														theme={props.theme}

@@ -414,14 +414,14 @@ export class Snap {
 				const attribution = urlParams.params.query.ss_attribution.split(':');
 				const [type, id] = attribution;
 				if (type && id) {
-					this.tracker.updateContext('attribution', { type, id });
+					this.tracker.updateContext('attribution', [{ type, id }]);
 				}
 				// save to session storage
 				window.sessionStorage?.setItem(SESSION_ATTRIBUTION, urlParams.params.query.ss_attribution);
 			} else if (sessionAttribution) {
 				const [type, id] = sessionAttribution.split(':');
 				if (type && id) {
-					this.tracker.updateContext('attribution', { type, id });
+					this.tracker.updateContext('attribution', [{ type, id }]);
 				}
 			}
 

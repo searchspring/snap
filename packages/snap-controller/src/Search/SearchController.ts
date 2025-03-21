@@ -6,8 +6,7 @@ import { StorageStore, ErrorType } from '@searchspring/snap-store-mobx';
 import { getSearchParams } from '../utils/getParams';
 import { ControllerTypes } from '../types';
 
-import type { BeaconEvent } from '@searchspring/snap-tracker';
-import type { SearchStore } from '@searchspring/snap-store-mobx';
+import type { Product, Banner, SearchStore, SearchResultStore } from '@searchspring/snap-store-mobx';
 import type {
 	SearchControllerConfig,
 	AfterSearchObj,
@@ -16,6 +15,7 @@ import type {
 	ContextVariables,
 	RestorePositionObj,
 	ElementPositionObj,
+	BeforeSearchObj,
 } from '../types';
 import type { Next } from '@searchspring/snap-event-manager';
 import type {
@@ -24,7 +24,20 @@ import type {
 	SearchRequestModelSearchRedirectResponseEnum,
 	MetaResponseModel,
 	SearchResponseModel,
+	SearchRequestModelFilterRange,
+	SearchRequestModelFilterValue,
 } from '@searchspring/snapi-types';
+import type {
+	AutocompleteSchemaDataBgfilterInner,
+	AutocompleteSchemaDataFilterInner,
+	AutocompleteSchemaDataSortInnerDirEnum,
+	Item,
+	SearchRedirectSchemaData,
+	SearchSchemaData,
+} from '@searchspring/beacon';
+
+const BACKGROUND_FILTER_FIELD_MATCHES = ['collection', 'category', 'categories', 'hierarchy'];
+const BACKGROUND_FILTERS_VALUE_FLAGS = [1, 0, '1', '0', 'true', 'false', true, false];
 
 const defaultConfig: SearchControllerConfig = {
 	id: 'search',
@@ -45,7 +58,12 @@ const defaultConfig: SearchControllerConfig = {
 
 type SearchTrackMethods = {
 	product: {
-		click: (e: MouseEvent, result: any) => BeaconEvent | undefined;
+		clickThrough: (e: MouseEvent, result: Product) => void;
+		click: (e: MouseEvent, result: Product | Banner) => void;
+		render: (result: Product) => void;
+		impression: (result: Product) => void;
+		addToCart: (results: Product) => void;
+		redirect: (redirectURL: string) => void;
 	};
 };
 
@@ -55,6 +73,17 @@ export class SearchController extends AbstractController {
 	declare config: SearchControllerConfig;
 	storage: StorageStore;
 	private previousResults: Array<SearchResponseModelResult> = [];
+	private pageType: 'search' | 'category' = 'search';
+	private events: {
+		product: Record<
+			string,
+			{
+				clickThrough?: SearchSchemaData;
+				impression?: SearchSchemaData;
+				render?: SearchSchemaData;
+			}
+		>;
+	} = { product: {} };
 
 	constructor(
 		config: SearchControllerConfig,
@@ -81,6 +110,45 @@ export class SearchController extends AbstractController {
 		// set last params to undefined for compare in search
 		this.storage.set('lastStringyParams', undefined);
 
+		this.eventManager.on('beforeSearch', async ({ request }: BeforeSearchObj, next: Next): Promise<void | boolean> => {
+			// wait for other middleware to resolve
+			await next();
+
+			if (this.context?.pageType === 'category') {
+				this.pageType = 'category';
+				return;
+			}
+
+			const req = request as SearchRequestModel;
+			const query = req.search?.query;
+			if (!query) {
+				const hasCategoryBackgroundFilters = req.filters
+					?.filter((filter) => filter.background)
+					.filter((filter) => {
+						return BACKGROUND_FILTER_FIELD_MATCHES.find((bgFilter) => {
+							return filter.field?.toLowerCase().includes(bgFilter);
+						});
+					})
+					.filter((filter) => {
+						return BACKGROUND_FILTERS_VALUE_FLAGS.every((flag) => {
+							switch (filter.type) {
+								case 'range':
+									const rangeFilter = filter as SearchRequestModelFilterRange;
+									return rangeFilter.value !== flag;
+								case 'value':
+								default:
+									const valueFilter = filter as SearchRequestModelFilterValue;
+									return valueFilter.value !== flag;
+							}
+						});
+					});
+
+				if (hasCategoryBackgroundFilters?.length) {
+					this.pageType = 'category';
+				}
+			}
+		});
+
 		// add 'afterSearch' middleware
 		this.eventManager.on('afterSearch', async (search: AfterSearchObj, next: Next): Promise<void | boolean> => {
 			const config = search.controller.config as SearchControllerConfig;
@@ -89,6 +157,7 @@ export class SearchController extends AbstractController {
 			if (redirectURL && config?.settings?.redirects?.merchandising && !search?.response?.filters?.length && !searchStore.loaded) {
 				//set loaded to true to prevent infinite search/reloading from happening
 				searchStore.loaded = true;
+				this.track.product.redirect(redirectURL);
 				window.location.replace(redirectURL);
 				return false;
 			}
@@ -216,9 +285,12 @@ export class SearchController extends AbstractController {
 
 	track: SearchTrackMethods = {
 		product: {
-			click: (e: MouseEvent, result): BeaconEvent | undefined => {
+			clickThrough: (e: MouseEvent, result): void => {
+				if (this.events.product[result.id]?.clickThrough) {
+					return;
+				}
 				const target = e.target as HTMLAnchorElement;
-				const resultHref = result.display?.mappings.core?.url || result.mappings.core?.url;
+				const resultHref = result.display?.mappings.core?.url || result.mappings.core?.url || '';
 				const elemHref = target?.getAttribute('href');
 
 				// the href that should be used for restoration - if the elemHref contains the resultHref - use resultHref
@@ -247,18 +319,58 @@ export class SearchController extends AbstractController {
 
 				// store position data or empty object
 				this.storage.set('scrollMap', scrollMap);
+				const data = getSearchSchemaData({ params: this.params, store: this.store, results: [result] });
+				this.tracker.beacon.events[this.pageType].clickThrough({ data, siteId: this.client.globals.siteId });
+				this.events.product[result.id] = this.events.product[result.id] || {};
+				this.events.product[result.id].clickThrough = data;
+				this.eventManager.fire('track.product.clickThrough', { controller: this, event: e, products: [result], trackEvent: data });
+			},
+			click: (e: MouseEvent, result): void => {
+				if (result.type === 'banner') {
+					return;
+				}
+				// TODO: closest might be going too far - write own function to only go n levels up
+				const href = (e.target as Element)?.getAttribute('href') || (e.target as Element)?.closest('a')?.getAttribute('href');
+				if (href) {
+					this.track.product.clickThrough(e, result as Product);
+				} else {
+					// TODO: in future, send as an interaction event
+				}
+			},
+			render: (result: Product | Banner) => {
+				if (this.events.product[result.id]?.render) {
+					return;
+				}
 
-				// track
-				const { intellisuggestData, intellisuggestSignature } = result.attributes;
+				const data = getSearchSchemaData({ params: this.params, store: this.store, results: [result] });
+				this.tracker.beacon.events[this.pageType].render({ data, siteId: this.client.globals.siteId });
+				this.events.product[result.id] = this.events.product[result.id] || {};
+				this.events.product[result.id].render = data;
+				this.eventManager.fire('track.product.render', { controller: this, products: [result], trackEvent: data });
+			},
+			impression: (result: Product): void => {
+				if (this.events.product[result.id]?.impression) {
+					return;
+				}
 
-				const event = this.tracker.track.product.click({
-					intellisuggestData,
-					intellisuggestSignature,
-					href: elemHref || resultHref,
+				const data = getSearchSchemaData({ params: this.params, store: this.store, results: [result] });
+				this.tracker.beacon.events[this.pageType].impression({ data, siteId: this.client.globals.siteId });
+				this.events.product[result.id] = this.events.product[result.id] || {};
+				this.events.product[result.id].impression = data;
+				this.eventManager.fire('track.product.impression', { controller: this, products: [result], trackEvent: data });
+			},
+			addToCart: (result: Product): void => {
+				const data = getSearchSchemaData({ params: this.params, store: this.store, results: [result] });
+				this.tracker.beacon.events[this.pageType].addToCart({
+					data,
+					siteId: this.client.globals.siteId,
 				});
-
-				this.eventManager.fire('track.product.click', { controller: this, event: e, result, trackEvent: event });
-				return event;
+				this.eventManager.fire('track.product.addToCart', { controller: this, products: [result], trackEvent: data });
+			},
+			redirect: (redirectURL: string): void => {
+				const data = getSearchRedirectSchemaData({ redirectURL });
+				this.tracker.beacon.events.search.redirect({ data, siteId: this.client.globals.siteId });
+				this.eventManager.fire('track.product.redirect', { controller: this, redirectURL, trackEvent: data });
 			},
 		},
 	};
@@ -276,19 +388,17 @@ export class SearchController extends AbstractController {
 		params.tracking = params.tracking || {};
 		params.tracking.domain = window.location.href;
 
-		const userId = this.tracker.getUserId();
+		const { userId, sessionId, pageLoadId, shopperId } = this.tracker.getContext();
 		if (userId) {
 			params.tracking.userId = userId;
 		}
 
-		const sessionId = this.tracker.getContext().sessionId;
 		if (sessionId) {
 			params.tracking.sessionId = sessionId;
 		}
 
-		const pageId = this.tracker.getContext().pageLoadId;
-		if (pageId) {
-			params.tracking.pageLoadId = pageId;
+		if (pageLoadId) {
+			params.tracking.pageLoadId = pageLoadId;
 		}
 
 		if (!this.config.globals?.personalization?.disabled) {
@@ -304,7 +414,6 @@ export class SearchController extends AbstractController {
 				params.personalization.lastViewed = lastViewedItems.join(',');
 			}
 
-			const shopperId = this.tracker.getShopperId();
 			if (shopperId) {
 				params.personalization = params.personalization || {};
 				params.personalization.shopper = shopperId;
@@ -321,9 +430,12 @@ export class SearchController extends AbstractController {
 			}
 			const params = this.params;
 
-			if (this.params.search?.query?.string && this.params.search?.query?.string.length) {
+			// reset events for new search
+			this.events = { product: {} };
+
+			if (params.search?.query?.string && params.search?.query?.string.length) {
 				// save it to the history store
-				this.store.history.save(this.params.search.query.string);
+				this.store.history.save(params.search.query.string);
 			}
 			this.store.loading = true;
 
@@ -527,6 +639,11 @@ export class SearchController extends AbstractController {
 			this.store.loading = false;
 		}
 	};
+
+	addToCart = async (product: Product): Promise<void> => {
+		this.track.product.addToCart(product);
+		this.eventManager.fire('addToCart', { controller: this, products: [product] });
+	};
 }
 
 export function getStorableRequestParams(request: SearchRequestModel): SearchRequestModel {
@@ -580,4 +697,88 @@ export function generateHrefSelector(element: HTMLElement, href: string, levels 
 	}
 
 	return;
+}
+
+function getSearchRedirectSchemaData({ redirectURL }: { redirectURL: string }): SearchRedirectSchemaData {
+	return {
+		redirect: redirectURL,
+	};
+}
+
+function getSearchSchemaData({
+	params,
+	store,
+	results,
+}: {
+	params: SearchRequestModel;
+	store: SearchStore;
+	results?: SearchResultStore;
+}): SearchSchemaData {
+	const filters = params.filters?.reduce<{
+		bgfilter?: Array<AutocompleteSchemaDataBgfilterInner>;
+		filter?: Array<AutocompleteSchemaDataFilterInner>;
+	}>((acc, filter) => {
+		const key = filter.background ? 'bgfilter' : 'filter';
+		acc[key] = acc[key] || [];
+
+		const value =
+			filter.type === 'range' &&
+			!isNaN((filter as SearchRequestModelFilterRange).value?.low!) &&
+			!isNaN((filter as SearchRequestModelFilterRange).value?.low!)
+				? [`low=${(filter as SearchRequestModelFilterRange).value?.low}`, `high=${(filter as SearchRequestModelFilterRange).value?.high}`]
+				: [`${(filter as SearchRequestModelFilterValue).value}`];
+
+		const existing = acc[key]!.find((item) => item.field === filter.field);
+		if (existing && !existing.value!.includes(value[0])) {
+			existing.value!.push(...value);
+		} else {
+			acc[key]!.push({
+				field: filter.field,
+				value,
+			});
+		}
+
+		return acc;
+	}, {});
+	return {
+		q: params.search?.query?.string || '',
+		correctedQuery: params.search?.originalQuery,
+		...filters,
+		sort: [
+			{
+				field: store.sorting.current?.field,
+				dir: store.sorting.current?.direction as AutocompleteSchemaDataSortInnerDirEnum,
+			},
+		],
+		pagination: {
+			totalResults: store.pagination.totalResults,
+			page: store.pagination.page,
+			resultsPerPage: store.pagination.pageSize,
+		},
+		merchandising: {
+			personalized: store.merchandising.personalized,
+			redirect: store.merchandising.redirect,
+			triggeredCampaigns:
+				(store.merchandising.campaigns?.length &&
+					store.merchandising.campaigns?.map((campaign) => {
+						const experiement = store.merchandising.experiments.find((experiment) => experiment.campaignId === campaign.id);
+						return {
+							id: campaign.id,
+							experimentId: experiement?.experimentId,
+							variationId: experiement?.variationId,
+						};
+					})) ||
+				undefined,
+		},
+		results:
+			results?.map((result: Product | Banner): Item => {
+				const core = (result as Product).mappings.core!;
+				return {
+					uid: core.uid || '',
+					childUid: core.uid,
+					sku: core.sku,
+					childSku: core.sku,
+				};
+			}) || [],
+	};
 }
