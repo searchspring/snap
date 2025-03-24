@@ -1,5 +1,5 @@
 import { h } from 'preact';
-
+import 'whatwg-fetch';
 import '@testing-library/jest-dom';
 import { cleanup, waitFor } from '@testing-library/preact';
 
@@ -33,7 +33,11 @@ const xhrMock: Partial<XMLHttpRequest> = {
 
 const MODIFIED_DATE = '07 Jan 2022 22:42:39 GMT';
 
+// mock xhr so network requests do not occur
 jest.spyOn(window, 'XMLHttpRequest').mockImplementation(() => xhrMock as XMLHttpRequest);
+
+// mocks fetch so beacon client does not make network requests
+jest.spyOn(global.window, 'fetch').mockImplementation(() => Promise.resolve({ status: 200, json: () => Promise.resolve({}) } as Response));
 
 describe('Snap Preact Integration', () => {
 	beforeAll(() => {
@@ -262,11 +266,7 @@ describe('Snap Preact Integration', () => {
 		expect(snap.config.tracker?.config?.doNotTrack).toHaveLength(3);
 
 		// @ts-ignore private
-		expect(snap.tracker.doNotTrack).toStrictEqual([
-			{ category: 'searchspring.page.view', type: 'product' },
-			{ category: 'searchspring.shop.cart', type: 'cart' },
-			{ category: 'searchspring.shop.transaction', type: 'transaction' },
-		]);
+		expect(snap.tracker.doNotTrack).toStrictEqual(['product.view', 'cart.view', 'order.transaction']);
 
 		// clean up
 		// return our mocks to their original values

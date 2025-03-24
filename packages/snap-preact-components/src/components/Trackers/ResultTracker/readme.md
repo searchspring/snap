@@ -1,6 +1,8 @@
 # ResultTracker
 
-Adds impression, render and click tracking to an individual result within a controller.
+Adds impression, render and click tracking to an individual result within a controller. When using the Results component, it will already contain this component.
+
+This component is used for Beacon 2.0 tracking and replaces the need for using the `RecommendationResultTracker` as well as the `RecommendationProfileTracker`.
 
 ## Usage
 

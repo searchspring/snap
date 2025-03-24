@@ -308,16 +308,6 @@ export class RecommendationController extends AbstractController {
 			this.store.loading = false;
 		}
 	};
-
-	addToCart = async (product: Product): Promise<void> => {
-		this.track.product.addToCart(product);
-		this.eventManager.fire('addToCart', { controller: this, products: [product] });
-	};
-
-	addBundleToCart = async (products: Product[]): Promise<void> => {
-		this.track.bundle.addToCart(products);
-		this.eventManager.fire('addToCart', { controller: this, products });
-	};
 }
 function getRecommendationsSchemaData({ store, results }: { store: RecommendationStore; results?: Product[] }): RecommendationsSchemaData {
 	return {

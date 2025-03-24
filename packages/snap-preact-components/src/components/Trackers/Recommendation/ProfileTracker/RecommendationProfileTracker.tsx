@@ -1,5 +1,5 @@
 /** @jsx jsx */
-import { Fragment, h, toChildArray } from 'preact';
+import { ComponentChildren, Fragment, h, toChildArray } from 'preact';
 import { jsx, css } from '@emotion/react';
 import { observer } from 'mobx-react';
 import { Theme, useTheme } from '../../../../providers';
@@ -11,7 +11,6 @@ const CSS = {
 	RecommendationProfileTracker: () => css({}),
 };
 
-/** @deprecated RecommendationProfileTracker is deprecated */
 export const RecommendationProfileTracker = observer((properties: RecommendationProfileTrackerProps): JSX.Element => {
 	const globalTheme: Theme = useTheme();
 
@@ -45,6 +44,6 @@ export const RecommendationProfileTracker = observer((properties: Recommendation
 });
 
 export interface RecommendationProfileTrackerProps extends ComponentProps {
-	children: any;
+	children: ComponentChildren;
 	controller: RecommendationController;
 }

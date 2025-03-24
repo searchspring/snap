@@ -1,11 +1,11 @@
 /** @jsx jsx */
-import { h } from 'preact';
+import { h, ComponentChildren } from 'preact';
 import { jsx, css } from '@emotion/react';
 import { useRef, useEffect } from 'preact/hooks';
 import { observer } from 'mobx-react';
 import { Theme, useTheme } from '../../../providers';
 import { useIntersection } from '../../../hooks';
-import type { Controllers } from '@searchspring/snap-controller';
+import type { AutocompleteController, RecommendationController, SearchController } from '@searchspring/snap-controller';
 import { ComponentProps, StylingCSS } from '../../../types';
 import type { Banner, Product } from '@searchspring/snap-store-mobx';
 import classnames from 'classnames';
@@ -43,14 +43,14 @@ export const ResultTracker = observer((properties: ResultTrackerProps): JSX.Elem
 	useEffect(() => {
 		if (mergedTrack.render) {
 			if (result.type === 'product') {
-				// controller?.track?.product?.render(result);
+				controller?.track?.product?.render(result as Product);
 			}
 		}
 	}, []);
 
 	if (resultInViewport && mergedTrack.impression) {
-		if (result.type === 'product') {
-			// controller?.track?.product?.impression(result);
+		if (result.type === 'product' && controller?.track) {
+			controller?.track?.product?.impression(result as Product);
 		}
 	}
 
@@ -63,14 +63,14 @@ export const ResultTracker = observer((properties: ResultTrackerProps): JSX.Elem
 
 	return (
 		<div
-			className={classnames('ss__result-tracker', `ss__${controller.type}-result-tracker`, className)}
-			// onClick={(e: React.MouseEvent<HTMLElement, MouseEvent>) => {
-			// 	if (mergedTrack.click) {
-			// 		if (result.type === 'product') {
-			// 			controller?.track?.product?.click(e, result);
-			// 		}
-			// 	}
-			// }}
+			className={classnames('ss__result-tracker', `ss__${controller?.type}-result-tracker`, className)}
+			onClick={(e: any) => {
+				if (mergedTrack.click) {
+					if (result.type === 'product') {
+						controller?.track?.product?.click(e, result as Product);
+					}
+				}
+			}}
 			ref={resultRef}
 			{...styling}
 		>
@@ -80,9 +80,9 @@ export const ResultTracker = observer((properties: ResultTrackerProps): JSX.Elem
 });
 
 export interface ResultTrackerProps extends ComponentProps {
-	children: any;
+	children: ComponentChildren;
 	result: Product | Banner;
-	controller: Controllers;
+	controller: SearchController | AutocompleteController | RecommendationController;
 	track?: {
 		render?: boolean;
 		impression?: boolean;
