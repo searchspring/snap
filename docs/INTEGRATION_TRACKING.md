@@ -47,7 +47,7 @@ searchspring.tracker.track.product.view({
 ### Cart View 
 Tracks cart contents. Should only be installed on a cart page. If the checkout process does not contain a dedicated cart page (ie. slideout cart) then this method should be invoked when the cart comes into view. 
 
-Each item object must contain a `qty`, `price`, (`uid` and/or `sku` and/or `childSku` and/or `childUid` - provide as many of these product identifiers that are available).
+Each item object must contain a `qty`, `price`, `uid`, and (`sku` and/or `childSku` and/or `childUid` - provide as many of these product identifiers that are available).
 
 ```html
 <script type="searchspring/track/cart/view">
@@ -101,13 +101,13 @@ searchspring.tracker.track.cart.view({
 ### Order Transaction
 Tracks order transaction. Should be invoked from an order confirmation page. Expects an object with the following:
 
-`order` - (optional) object containing the following
+`order` - object containing the following
 
-`order.id` - (optional) order id
+`order.id` - order id
 
-`order.total` - (optional) transaction total of all items after tax and shipping
+`order.total` - transaction total of all items after tax and shipping
 
-`order.transactionTotal` - (optional) transaction total of all items before tax and shipping
+`order.transactionTotal` - transaction total of all items before tax and shipping
 
 `order.city` - (optional) city name
 
@@ -115,7 +115,20 @@ Tracks order transaction. Should be invoked from an order confirmation page. Exp
 
 `order.country` - (optional) 2 digit country abbreviation	(ie. 'US', 'CA', 'MX', 'PL', 'JP')
 
-`order.items` - required array of items - same object provided to `track.cart.view` event
+`items` - array of items
+
+`items.uid` - product uid
+
+`items.sku` - (optional) product sku
+
+`items.childUid` - (optional) product child uid
+
+`items.childSku` - (optional) product child sku
+
+`items.qty` - (optional) product qty
+
+`items.price` - (optional) product price
+
 
 ```html
 <script type="searchspring/track/order/transaction">

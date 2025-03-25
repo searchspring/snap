@@ -46,7 +46,7 @@ export const ResultTracker = observer((properties: ResultTrackerProps): JSX.Elem
 				controller?.track?.product?.render(result as Product);
 			}
 		}
-	}, []);
+	}, [result]);
 
 	if (resultInViewport && mergedTrack.impression) {
 		if (result.type === 'product' && controller?.track) {

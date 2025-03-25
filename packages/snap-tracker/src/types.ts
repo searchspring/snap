@@ -7,15 +7,7 @@ export type TrackerGlobals = {
 	currency?: ContextCurrency;
 };
 
-export type TrackerEvents =
-	| 'error'
-	| 'shopper.login'
-	| 'product.view'
-	| 'product.click'
-	| 'cart.add'
-	| 'cart.remove'
-	| 'cart.view'
-	| 'order.transaction';
+export type TrackerEvents = 'error' | 'shopper.login' | 'product.view' | 'product.click' | 'cart.view' | 'order.transaction';
 
 export type TrackerConfig = {
 	id?: string;
@@ -200,8 +192,6 @@ export interface TrackMethods {
 		click: (data: ProductClickEvent, siteId?: string) => BeaconEvent | undefined;
 	};
 	cart: {
-		add: (data: CartSchemaData, siteId?: string) => undefined;
-		remove: (data: CartSchemaData, siteId?: string) => undefined;
 		view: (data: CartViewEvent | CartSchemaData, siteId?: string) => undefined;
 	};
 	order: {

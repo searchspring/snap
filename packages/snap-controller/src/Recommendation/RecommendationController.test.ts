@@ -28,6 +28,9 @@ const services = {
 	urlManager,
 };
 
+// mocks fetch so beacon client does not make network requests
+jest.spyOn(global.window, 'fetch').mockImplementation(() => Promise.resolve({ status: 200, json: () => Promise.resolve({}) } as Response));
+
 describe('Recommendation Controller', () => {
 	beforeEach(() => {
 		recommendConfig.id = uuidv4().split('-').join('');
@@ -285,7 +288,7 @@ describe('Recommendation Controller', () => {
 			logger: new Logger(),
 			tracker: new Tracker(globals),
 		});
-		const trackfn = jest.spyOn(controller.tracker.beacon.events.recommendations, 'render');
+		const trackfn = jest.spyOn(controller.tracker.events.recommendations, 'render');
 
 		await controller.search();
 
@@ -308,7 +311,7 @@ describe('Recommendation Controller', () => {
 			logger: new Logger(),
 			tracker: new Tracker(globals),
 		});
-		const trackfn = jest.spyOn(controller.tracker.beacon.events.recommendations, 'impression');
+		const trackfn = jest.spyOn(controller.tracker.events.recommendations, 'impression');
 
 		await controller.search();
 
@@ -331,7 +334,7 @@ describe('Recommendation Controller', () => {
 			logger: new Logger(),
 			tracker: new Tracker(globals),
 		});
-		const trackfn = jest.spyOn(controller.tracker.beacon.events.recommendations, 'clickThrough');
+		const trackfn = jest.spyOn(controller.tracker.events.recommendations, 'clickThrough');
 
 		await controller.search();
 
@@ -353,7 +356,7 @@ describe('Recommendation Controller', () => {
 			logger: new Logger(),
 			tracker: new Tracker(globals),
 		});
-		const clickfn = jest.spyOn(controller.tracker.beacon.events.recommendations, 'clickThrough');
+		const clickfn = jest.spyOn(controller.tracker.events.recommendations, 'clickThrough');
 
 		await controller.search();
 
@@ -381,7 +384,7 @@ describe('Recommendation Controller', () => {
 			logger: new Logger(),
 			tracker: new Tracker(globals),
 		});
-		const clickfn = jest.spyOn(controller.tracker.beacon.events.recommendations, 'addToCart');
+		const clickfn = jest.spyOn(controller.tracker.events.recommendations, 'addToCart');
 
 		await controller.search();
 
@@ -403,7 +406,7 @@ describe('Recommendation Controller', () => {
 			logger: new Logger(),
 			tracker: new Tracker(globals),
 		});
-		const trackFn = jest.spyOn(controller.tracker.beacon.events.recommendations, 'addToCart');
+		const trackFn = jest.spyOn(controller.tracker.events.recommendations, 'addToCart');
 
 		await controller.search();
 

@@ -148,7 +148,7 @@ export class AutocompleteController extends AbstractController {
 					return;
 				}
 				const data = getAutocompleteSchemaData({ params: this.params, store: this.store, results: [result] });
-				this.tracker.beacon.events.autocomplete.clickThrough({ data, siteId: this.client.globals.siteId });
+				this.tracker.events.autocomplete.clickThrough({ data, siteId: this.client.globals.siteId });
 				this.events.product[result.id] = this.events.product[result.id] || {};
 				this.events.product[result.id].clickThrough = data;
 				this.eventManager.fire('track.product.clickThrough', { controller: this, event: e, products: [result], trackEvent: data });
@@ -169,7 +169,7 @@ export class AutocompleteController extends AbstractController {
 				if (this.events.product[result.id]?.render) return;
 
 				const data = getAutocompleteSchemaData({ params: this.params, store: this.store, results: [result] });
-				this.tracker.beacon.events.autocomplete.render({ data, siteId: this.client.globals.siteId });
+				this.tracker.events.autocomplete.render({ data, siteId: this.client.globals.siteId });
 				this.events.product[result.id] = this.events.product[result.id] || {};
 				this.events.product[result.id].render = data;
 				this.eventManager.fire('track.product.render', { controller: this, products: [result], trackEvent: data });
@@ -178,19 +178,19 @@ export class AutocompleteController extends AbstractController {
 				if (this.events.product[result.id]?.impression) return;
 
 				const data = getAutocompleteSchemaData({ params: this.params, store: this.store, results: [result] });
-				this.tracker.beacon.events.autocomplete.impression({ data, siteId: this.client.globals.siteId });
+				this.tracker.events.autocomplete.impression({ data, siteId: this.client.globals.siteId });
 				this.events.product[result.id] = this.events.product[result.id] || {};
 				this.events.product[result.id].impression = data;
 				this.eventManager.fire('track.product.impression', { controller: this, products: [result], trackEvent: data });
 			},
 			addToCart: (result: Product): void => {
 				const data = getAutocompleteSchemaData({ params: this.params, store: this.store, results: [result] });
-				this.tracker.beacon.events.autocomplete.addToCart({ data, siteId: this.client.globals.siteId });
+				this.tracker.events.autocomplete.addToCart({ data, siteId: this.client.globals.siteId });
 				this.eventManager.fire('track.product.addToCart', { controller: this, products: [result], trackEvent: data });
 			},
 			redirect: (redirectURL: string): void => {
 				const data = getAutocompleteRedirectSchemaData({ redirectURL });
-				this.tracker.beacon.events.autocomplete.redirect({ data, siteId: this.client.globals.siteId });
+				this.tracker.events.autocomplete.redirect({ data, siteId: this.client.globals.siteId });
 				this.eventManager.fire('track.product.redirect', { controller: this, redirectURL, trackEvent: data });
 			},
 		},

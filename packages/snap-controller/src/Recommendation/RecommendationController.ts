@@ -99,7 +99,7 @@ export class RecommendationController extends AbstractController {
 					if (this.events.product[result.id]?.clickThrough) return;
 
 					const data = getRecommendationsSchemaData({ store: this.store, results: [result] });
-					this.tracker.beacon.events.recommendations.clickThrough({ data, siteId: this.client.globals.siteId });
+					this.tracker.events.recommendations.clickThrough({ data, siteId: this.client.globals.siteId });
 					this.events.product![result.id] = this.events.product![result.id] || {};
 					this.events.product![result.id].clickThrough = data;
 					this.eventManager.fire('track.product.clickThrough', { controller: this, event: e, products: [result], trackEvent: data });
@@ -117,7 +117,7 @@ export class RecommendationController extends AbstractController {
 					if (this.events.product[result.id]?.impression) return;
 
 					const data = getRecommendationsSchemaData({ store: this.store, results: [result] });
-					this.tracker.beacon.events.recommendations.impression({ data, siteId: this.client.globals.siteId });
+					this.tracker.events.recommendations.impression({ data, siteId: this.client.globals.siteId });
 					this.events.product![result.id] = this.events.product![result.id] || {};
 					this.events.product![result.id].impression = data;
 					this.eventManager.fire('track.product.impression', { controller: this, products: [result], trackEvent: data });
@@ -127,7 +127,7 @@ export class RecommendationController extends AbstractController {
 					if (this.events.product![result.id]?.render) return;
 
 					const data = getRecommendationsSchemaData({ store: this.store, results: [result] });
-					this.tracker.beacon.events.recommendations.render({ data, siteId: this.client.globals.siteId });
+					this.tracker.events.recommendations.render({ data, siteId: this.client.globals.siteId });
 					this.events.product![result.id] = this.events.product![result.id] || {};
 					this.events.product![result.id].render = data;
 					this.eventManager.fire('track.product.render', { controller: this, products: [result], trackEvent: data });
@@ -135,7 +135,7 @@ export class RecommendationController extends AbstractController {
 				},
 				addToCart: (result: Product): RecommendationsSchemaData | undefined => {
 					const data = getRecommendationsSchemaData({ store: this.store, results: [result] });
-					this.tracker.beacon.events.recommendations.addToCart({ data, siteId: this.client.globals.siteId });
+					this.tracker.events.recommendations.addToCart({ data, siteId: this.client.globals.siteId });
 					this.eventManager.fire('track.product.addToCart', { controller: this, products: [result], trackEvent: data });
 					return data;
 				},
@@ -145,7 +145,7 @@ export class RecommendationController extends AbstractController {
 					if (this.store.profile.type != 'bundle') return;
 
 					const data = getRecommendationsSchemaData({ store: this.store, results });
-					this.tracker.beacon.events.recommendations.addToCart({ data, siteId: this.client.globals.siteId });
+					this.tracker.events.recommendations.addToCart({ data, siteId: this.client.globals.siteId });
 					this.eventManager.fire('track.bundle.addToCart', { controller: this, products: results, trackEvent: data });
 					return data;
 				},
@@ -163,14 +163,15 @@ export class RecommendationController extends AbstractController {
 		};
 
 		const { shopperId } = this.tracker.getContext();
-		const cart = this.tracker.cookies.cart.get();
-		const lastViewed = this.tracker.cookies.viewed.get();
 
 		if (shopperId) {
 			params.shopper = shopperId;
 		}
 
-		if (!params.siteId || params.siteId == this.tracker.beacon.globals.siteId) {
+		if (!params.siteId || params.siteId == this.tracker.getGlobals().siteId) {
+			const cart = this.tracker.cookies.cart.get();
+			const lastViewed = this.tracker.cookies.viewed.get();
+
 			if (cart?.length) {
 				params.cart = cart;
 			}

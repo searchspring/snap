@@ -1,10 +1,10 @@
 import deepmerge from 'deepmerge';
 
 import { StorageStore } from '@searchspring/snap-store-mobx';
-import { cookies, version, DomTargeter, getContext } from '@searchspring/snap-toolbox';
+import { version, DomTargeter, getContext } from '@searchspring/snap-toolbox';
 import { AppMode } from '@searchspring/snap-toolbox';
 import { Beacon } from '@searchspring/beacon';
-import type { Context, ContextCurrency, CartSchemaData, Item, OrderTransactionSchemaData, Product } from '@searchspring/beacon';
+import type { Context, CartSchemaData, Item, OrderTransactionSchemaData, Product, BeaconConfig } from '@searchspring/beacon';
 
 import { BeaconEvent } from './BeaconEvent';
 import {
@@ -24,12 +24,6 @@ import {
 	TrackerEvents,
 } from './types';
 
-export const BATCH_TIMEOUT = 200;
-const COOKIE_SAMESITE = 'Lax';
-const COOKIE_DOMAIN =
-	(typeof window !== 'undefined' && window.location.hostname && '.' + window.location.hostname.replace(/^www\./, '')) || undefined;
-const CART_PRODUCTS = 'ssCartProducts';
-export const MAX_VIEWED_COUNT = 20;
 const MAX_PARENT_LEVELS = 3;
 
 const defaultConfig: TrackerConfig = {
@@ -38,29 +32,29 @@ const defaultConfig: TrackerConfig = {
 	mode: AppMode.production,
 };
 
-export class Tracker {
-	private mode = AppMode.production;
-	private globals: TrackerGlobals;
+export class Tracker extends Beacon {
 	private localStorage: StorageStore;
 	private doNotTrack: TrackerEvents[];
 
-	private config: TrackerConfig;
+	public config: TrackerConfig & BeaconConfig;
 	private targeters: DomTargeter[] = [];
-	public beacon: Beacon;
 
-	constructor(globals: TrackerGlobals, config?: TrackerConfig) {
+	constructor(globals: TrackerGlobals, config?: TrackerConfig & BeaconConfig) {
+		config = deepmerge(defaultConfig, config || {});
+		config.initiator = `searchspring/${config.framework}/${version}`;
+
+		super(globals, config);
 		if (typeof globals != 'object' || typeof globals.siteId != 'string') {
 			throw new Error(`Invalid config passed to tracker. The "siteId" attribute must be provided.`);
 		}
 
-		this.config = deepmerge(defaultConfig, config || {});
+		this.config = config;
+
 		this.doNotTrack = this.config.doNotTrack || [];
 
 		if (Object.values(AppMode).includes(this.config.mode as AppMode)) {
 			this.mode = this.config.mode as AppMode;
 		}
-
-		this.globals = globals;
 
 		this.localStorage = new StorageStore({
 			type: 'local',
@@ -68,24 +62,6 @@ export class Tracker {
 		});
 
 		this.localStorage.set('siteId', this.globals.siteId);
-
-		this.beacon = new Beacon(
-			{
-				siteId: this.globals.siteId,
-				currency: this.globals.currency,
-			},
-			{
-				version,
-				framework: this.config.framework,
-				mode: this.mode,
-				apis: {
-					requesters: {
-						personalization: this.config.requesters?.personalization,
-						beacon: this.config.requesters?.beacon,
-					},
-				},
-			}
-		);
 
 		if (!window.searchspring?.tracker) {
 			window.searchspring = window.searchspring || {};
@@ -201,8 +177,8 @@ export class Tracker {
 		});
 	}
 
-	public getContext(): Context {
-		return this.beacon.getContext();
+	public getGlobals(): TrackerGlobals {
+		return JSON.parse(JSON.stringify(this.globals));
 	}
 
 	public retarget(): void {
@@ -223,14 +199,14 @@ export class Tracker {
 				return;
 			}
 			const { stack, message, details } = data;
-			const href = typeof window !== 'undefined' ? window?.location?.href || '' : '';
+			const { pageUrl } = this.getContext();
 
 			// prevent sending of errors when on localhost or CDN
-			if (message?.includes('Profile is currently paused') || href.includes('//localhost') || href.includes('//snapui.searchspring.io/')) {
+			if (message?.includes('Profile is currently paused') || pageUrl.includes('//localhost') || pageUrl.includes('//snapui.searchspring.io/')) {
 				return;
 			}
 
-			this.beacon.events.error.snap({
+			this.events.error.snap({
 				data: {
 					message: message || 'unknown',
 					stack,
@@ -239,13 +215,12 @@ export class Tracker {
 				siteId,
 			});
 		},
-
 		shopper: {
 			login: (data: ShopperLoginEvent, siteId?: string): undefined => {
 				if (this.doNotTrack?.includes('shopper.login')) {
 					return;
 				}
-				this.beacon.events.shopper.login({ data: { id: data.id }, siteId });
+				this.events.shopper.login({ data: { id: data.id }, siteId });
 			},
 		},
 		product: {
@@ -261,10 +236,10 @@ export class Tracker {
 					};
 				}
 
-				this.beacon.events.product.pageView({ data: { result: result as Item }, siteId });
+				this.events.product.pageView({ data: { result: result as Item }, siteId });
 			},
 			/**
-			 * @deprecated tracker.track.product.click() is deprecated and will be removed. Use tracker.beacon.events['search' | 'category'].clickThrough() instead
+			 * @deprecated tracker.track.product.click() is deprecated and will be removed. Use tracker.events['search' | 'category'].clickThrough() instead
 			 */
 			click: (data: ProductClickEvent, siteId?: string): BeaconEvent | undefined => {
 				// Controllers will send product click events through tracker.beacon
@@ -282,7 +257,7 @@ export class Tracker {
 					return;
 				}
 
-				const beaconContext = this.beacon.getContext();
+				const beaconContext = this.getContext();
 				const context = transformToLegacyContext(beaconContext, siteId || this.globals.siteId);
 				const event = {
 					type: BeaconType.CLICK,
@@ -301,18 +276,6 @@ export class Tracker {
 			},
 		},
 		cart: {
-			add: (data: CartSchemaData, siteId?: string): undefined => {
-				if (this.doNotTrack?.includes('cart.add')) {
-					return;
-				}
-				this.beacon.events.cart.add({ data, siteId });
-			},
-			remove: (data: CartSchemaData, siteId?: string): undefined => {
-				if (this.doNotTrack?.includes('cart.remove')) {
-					return;
-				}
-				this.beacon.events.cart.remove({ data, siteId });
-			},
 			view: (data: CartViewEvent | CartSchemaData, siteId?: string): undefined => {
 				if (this.doNotTrack?.includes('cart.view')) {
 					return;
@@ -326,13 +289,24 @@ export class Tracker {
 								...item,
 								uid: item.sku,
 							};
+						} else {
+							return item;
 						}
 					});
 				} else if ((data as CartSchemaData).results) {
 					results = (data as CartSchemaData).results;
 				}
 
-				this.beacon.events.cart.view({ data: { results: results as Product[] }, siteId });
+				// convert to Product[] - ensure qty and price are numbers
+				results = results?.map((item) => {
+					return {
+						...item,
+						qty: Number(item.qty),
+						price: Number(item.price),
+					};
+				});
+
+				this.events.cart.view({ data: { results: results as Product[] }, siteId });
 			},
 		},
 		order: {
@@ -363,94 +337,46 @@ export class Tracker {
 							};
 						}),
 					};
-					this.beacon.events.order.transaction({ data: orderTransactionData, siteId });
+					this.events.order.transaction({ data: orderTransactionData, siteId });
 				} else {
-					this.beacon.events.order.transaction({ data: data as OrderTransactionSchemaData, siteId });
+					this.events.order.transaction({ data: data as OrderTransactionSchemaData, siteId });
 				}
 			},
 		},
-	};
-
-	updateContext = (key: keyof Context, value: any) => {
-		this.beacon.updateContext(key, value);
-	};
-
-	setCurrency = (currency: ContextCurrency): void => {
-		this.beacon.setCurrency(currency);
-	};
-
-	getUserId = (): string => {
-		return this.beacon.getContext().userId;
-	};
-
-	getSessionId = (): string => {
-		return this.beacon.getContext().sessionId;
-	};
-
-	getShopperId = (): string => {
-		return this.beacon.getShopperId();
-	};
-
-	sendPreflight = (): void => {
-		this.beacon.sendPreflight();
 	};
 
 	cookies = {
 		cart: {
 			get: (): string[] => {
-				const items = cookies.get(CART_PRODUCTS);
-				if (!items) {
-					return [];
-				}
-				return items.split(',');
+				const data = this.storage.cart.get();
+				return data.map((item) => this.getProductId(item));
 			},
 			set: (items: string[]): void => {
-				if (items.length) {
-					const cartItems = items.map((item) => `${item}`.trim());
-					const uniqueCartItems = Array.from(new Set(cartItems));
-					cookies.set(CART_PRODUCTS, uniqueCartItems.join(','), COOKIE_SAMESITE, 0, COOKIE_DOMAIN);
-
-					const itemsHaveChanged = cartItems.filter((item) => items.includes(item)).length !== items.length;
-					if (itemsHaveChanged) {
-						this.beacon.sendPreflight();
-					}
-				}
+				const cartItems = items.map((item) => `${item}`.trim());
+				const uniqueCartItems: Product[] = Array.from(new Set(cartItems)).map((uid) => ({ uid, sku: uid, price: 0, qty: 1 }));
+				this.storage.cart.set(uniqueCartItems);
 			},
 			add: (items: string[]): void => {
 				if (items.length) {
-					const currentCartItems = this.cookies.cart.get();
-					const itemsToAdd = items.map((item) => `${item}`.trim());
-					const uniqueCartItems = Array.from(new Set([...currentCartItems, ...itemsToAdd]));
-					cookies.set(CART_PRODUCTS, uniqueCartItems.join(','), COOKIE_SAMESITE, 0, COOKIE_DOMAIN);
-
-					const itemsHaveChanged = currentCartItems.filter((item) => itemsToAdd.includes(item)).length !== itemsToAdd.length;
-					if (itemsHaveChanged) {
-						this.beacon.sendPreflight();
-					}
+					const itemsToAdd: Product[] = items.map((item) => `${item}`.trim()).map((uid) => ({ uid, sku: uid, price: 0, qty: 1 }));
+					this.storage.cart.add(itemsToAdd);
 				}
 			},
 			remove: (items: string[]): void => {
 				if (items.length) {
-					const currentCartItems = this.cookies.cart.get();
-					const itemsToRemove = items.map((item) => `${item}`.trim());
-					const updatedItems = currentCartItems.filter((item) => !itemsToRemove.includes(item));
-					cookies.set(CART_PRODUCTS, updatedItems.join(','), COOKIE_SAMESITE, 0, COOKIE_DOMAIN);
-
-					const itemsHaveChanged = currentCartItems.length !== updatedItems.length;
-					if (itemsHaveChanged) {
-						this.beacon.sendPreflight();
-					}
+					const itemsToRemove: Product[] = items.map((item) => `${item}`.trim()).map((uid) => ({ uid, sku: uid, price: 0, qty: 1 }));
+					this.storage.cart.remove(itemsToRemove);
 				}
 			},
 			clear: () => {
-				if (this.cookies.cart.get().length) {
-					cookies.unset(CART_PRODUCTS, COOKIE_DOMAIN);
-					this.beacon.sendPreflight();
-				}
+				this.storage.cart.clear();
 			},
 		},
 		viewed: {
-			get: (): string[] => this.beacon.storage.viewed.get(),
+			get: (): string[] => {
+				const viewedItems = this.storage.viewed.get();
+				return viewedItems.map((item) => this.getProductId(item));
+			},
 		},
 	};
 }

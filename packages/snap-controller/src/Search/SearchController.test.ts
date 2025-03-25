@@ -344,7 +344,7 @@ describe('Search Controller', () => {
 			logger: new Logger(),
 			tracker: new Tracker(globals),
 		});
-		const clickfn = jest.spyOn(controller.tracker.beacon.events.search, 'clickThrough');
+		const clickfn = jest.spyOn(controller.tracker.events.search, 'clickThrough');
 
 		await controller.search();
 
