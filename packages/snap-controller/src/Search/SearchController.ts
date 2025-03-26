@@ -63,8 +63,8 @@ type SearchTrackMethods = {
 		render: (result: Product) => void;
 		impression: (result: Product) => void;
 		addToCart: (results: Product) => void;
-		redirect: (redirectURL: string) => void;
 	};
+	redirect: (redirectURL: string) => void;
 };
 
 export class SearchController extends AbstractController {
@@ -78,9 +78,9 @@ export class SearchController extends AbstractController {
 		product: Record<
 			string,
 			{
-				clickThrough?: SearchSchemaData;
-				impression?: SearchSchemaData;
-				render?: SearchSchemaData;
+				clickThrough?: boolean;
+				impression?: boolean;
+				render?: boolean;
 			}
 		>;
 	} = { product: {} };
@@ -157,7 +157,7 @@ export class SearchController extends AbstractController {
 			if (redirectURL && config?.settings?.redirects?.merchandising && !search?.response?.filters?.length && !searchStore.loaded) {
 				//set loaded to true to prevent infinite search/reloading from happening
 				searchStore.loaded = true;
-				this.track.product.redirect(redirectURL);
+				this.track.redirect(redirectURL);
 				window.location.replace(redirectURL);
 				return false;
 			}
@@ -320,16 +320,16 @@ export class SearchController extends AbstractController {
 				// store position data or empty object
 				this.storage.set('scrollMap', scrollMap);
 				const data = getSearchSchemaData({ params: this.params, store: this.store, results: [result] });
-				this.tracker.events[this.pageType].clickThrough({ data, siteId: this.client.globals.siteId });
+				this.tracker.events[this.pageType].clickThrough({ data, siteId: this.config.globals?.siteId });
 				this.events.product[result.id] = this.events.product[result.id] || {};
-				this.events.product[result.id].clickThrough = data;
+				this.events.product[result.id].clickThrough = true;
 				this.eventManager.fire('track.product.clickThrough', { controller: this, event: e, products: [result], trackEvent: data });
 			},
 			click: (e: MouseEvent, result): void => {
 				if (result.type === 'banner') {
 					return;
 				}
-				// TODO: closest might be going too far - write own function to only go n levels up
+				// TODO: closest might be going too far - write own function to only go n levels up - additionally check that href includes result.url
 				const href = (e.target as Element)?.getAttribute('href') || (e.target as Element)?.closest('a')?.getAttribute('href');
 				if (href) {
 					this.track.product.clickThrough(e, result as Product);
@@ -343,9 +343,9 @@ export class SearchController extends AbstractController {
 				}
 
 				const data = getSearchSchemaData({ params: this.params, store: this.store, results: [result] });
-				this.tracker.events[this.pageType].render({ data, siteId: this.client.globals.siteId });
+				this.tracker.events[this.pageType].render({ data, siteId: this.config.globals?.siteId });
 				this.events.product[result.id] = this.events.product[result.id] || {};
-				this.events.product[result.id].render = data;
+				this.events.product[result.id].render = true;
 				this.eventManager.fire('track.product.render', { controller: this, products: [result], trackEvent: data });
 			},
 			impression: (result: Product): void => {
@@ -354,24 +354,24 @@ export class SearchController extends AbstractController {
 				}
 
 				const data = getSearchSchemaData({ params: this.params, store: this.store, results: [result] });
-				this.tracker.events[this.pageType].impression({ data, siteId: this.client.globals.siteId });
+				this.tracker.events[this.pageType].impression({ data, siteId: this.config.globals?.siteId });
 				this.events.product[result.id] = this.events.product[result.id] || {};
-				this.events.product[result.id].impression = data;
+				this.events.product[result.id].impression = true;
 				this.eventManager.fire('track.product.impression', { controller: this, products: [result], trackEvent: data });
 			},
 			addToCart: (result: Product): void => {
 				const data = getSearchSchemaData({ params: this.params, store: this.store, results: [result] });
 				this.tracker.events[this.pageType].addToCart({
 					data,
-					siteId: this.client.globals.siteId,
+					siteId: this.config.globals?.siteId,
 				});
 				this.eventManager.fire('track.product.addToCart', { controller: this, products: [result], trackEvent: data });
 			},
-			redirect: (redirectURL: string): void => {
-				const data = getSearchRedirectSchemaData({ redirectURL });
-				this.tracker.events.search.redirect({ data, siteId: this.client.globals.siteId });
-				this.eventManager.fire('track.product.redirect', { controller: this, redirectURL, trackEvent: data });
-			},
+		},
+		redirect: (redirectURL: string): void => {
+			const data = getSearchRedirectSchemaData({ redirectURL });
+			this.tracker.events.search.redirect({ data, siteId: this.config.globals?.siteId });
+			this.eventManager.fire('track.product.redirect', { controller: this, redirectURL, trackEvent: data });
 		},
 	};
 
@@ -775,9 +775,9 @@ function getSearchSchemaData({
 				const core = (result as Product).mappings.core!;
 				return {
 					uid: core.uid || '',
-					childUid: core.uid,
+					// childUid: core.uid,
 					sku: core.sku,
-					childSku: core.sku,
+					// childSku: core.sku,
 				};
 			}) || [],
 	};

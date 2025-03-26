@@ -4,7 +4,7 @@ import { StorageStore } from '@searchspring/snap-store-mobx';
 import { version, DomTargeter, getContext } from '@searchspring/snap-toolbox';
 import { AppMode } from '@searchspring/snap-toolbox';
 import { Beacon } from '@searchspring/beacon';
-import type { Context, CartSchemaData, Item, OrderTransactionSchemaData, Product, BeaconConfig } from '@searchspring/beacon';
+import type { Context, Item, OrderTransactionSchemaData, Product, BeaconConfig } from '@searchspring/beacon';
 
 import { BeaconEvent } from './BeaconEvent';
 import {
@@ -224,7 +224,7 @@ export class Tracker extends Beacon {
 			},
 		},
 		product: {
-			view: (data: Item | ProductViewEvent, siteId?: string): undefined => {
+			view: (data: ProductViewEvent, siteId?: string): undefined => {
 				if (this.doNotTrack?.includes('product.view')) {
 					return;
 				}
@@ -276,14 +276,14 @@ export class Tracker extends Beacon {
 			},
 		},
 		cart: {
-			view: (data: CartViewEvent | CartSchemaData, siteId?: string): undefined => {
+			view: (data: CartViewEvent, siteId?: string): undefined => {
 				if (this.doNotTrack?.includes('cart.view')) {
 					return;
 				}
-				let results;
-				if ((data as CartViewEvent).items) {
-					// uid can be optional in legacy payload but required in 2.0 spec - use sku as fallback
-					results = (data as CartViewEvent).items.map((item) => {
+
+				// uid can be optional in legacy payload but required in 2.0 spec - use sku as fallback
+				const results = (data as CartViewEvent).items
+					.map((item) => {
 						if (!item.uid && item.sku) {
 							return {
 								...item,
@@ -292,55 +292,47 @@ export class Tracker extends Beacon {
 						} else {
 							return item;
 						}
+					})
+					.map((item) => {
+						// convert to Product[] - ensure qty and price are numbers
+						return {
+							...item,
+							qty: Number(item.qty),
+							price: Number(item.price),
+						};
 					});
-				} else if ((data as CartSchemaData).results) {
-					results = (data as CartSchemaData).results;
-				}
-
-				// convert to Product[] - ensure qty and price are numbers
-				results = results?.map((item) => {
-					return {
-						...item,
-						qty: Number(item.qty),
-						price: Number(item.price),
-					};
-				});
 
 				this.events.cart.view({ data: { results: results as Product[] }, siteId });
 			},
 		},
 		order: {
-			transaction: (data: OrderTransactionData | OrderTransactionSchemaData, siteId?: string): undefined => {
+			transaction: (data: OrderTransactionData, siteId?: string): undefined => {
 				if (this.doNotTrack?.includes('order.transaction')) {
 					return;
 				}
-				if ((data as OrderTransactionData).items && !(data as OrderTransactionSchemaData).orderId) {
-					// backwards compatibility for OrderTransactionData
-					const order = (data as OrderTransactionData).order;
-					const items = (data as OrderTransactionData).items as Product[];
-					const orderTransactionData: OrderTransactionSchemaData = {
-						orderId: `${order?.id || ''}`,
-						transactionTotal: Number(order?.transactionTotal || 0),
-						total: Number(order?.total || 0),
-						city: order?.city,
-						state: order?.state,
-						country: order?.country,
-						results: items.map((item) => {
-							return {
-								// uid is required - fallback to get most relevant
-								uid: item.uid || item.sku || item.childUid || item.childSku || '', // TODO: is this correct order?
-								childUid: item.childUid,
-								sku: item.sku,
-								childSku: item.childSku,
-								qty: Number(item.qty),
-								price: Number(item.price),
-							};
-						}),
-					};
-					this.events.order.transaction({ data: orderTransactionData, siteId });
-				} else {
-					this.events.order.transaction({ data: data as OrderTransactionSchemaData, siteId });
-				}
+
+				const order = (data as OrderTransactionData).order;
+				const items = (data as OrderTransactionData).items as Product[];
+				const orderTransactionData: OrderTransactionSchemaData = {
+					orderId: `${order?.id || ''}`,
+					transactionTotal: Number(order?.transactionTotal || 0),
+					total: Number(order?.total || 0),
+					city: order?.city,
+					state: order?.state,
+					country: order?.country,
+					results: items.map((item) => {
+						return {
+							// uid is required - fallback to get most relevant
+							uid: item.uid || item.sku || '',
+							childUid: item.childUid,
+							sku: item.sku,
+							childSku: item.childSku,
+							qty: Number(item.qty),
+							price: Number(item.price),
+						};
+					}),
+				};
+				this.events.order.transaction({ data: orderTransactionData, siteId });
 			},
 		},
 	};

@@ -1,7 +1,6 @@
 import deepmerge from 'deepmerge';
 
 import { ErrorType, Product } from '@searchspring/snap-store-mobx';
-import { BeaconEvent } from '@searchspring/snap-tracker';
 import { AbstractController } from '../Abstract/AbstractController';
 import { ControllerTypes } from '../types';
 import type { RecommendationStore } from '@searchspring/snap-store-mobx';
@@ -12,14 +11,14 @@ import type { Item, RecommendationsSchemaData } from '@searchspring/beacon';
 // TODO: change return types to void
 type RecommendationTrackMethods = {
 	product: {
-		clickThrough: (e: MouseEvent, result: Product) => BeaconEvent | undefined;
-		click: (e: MouseEvent, result: Product) => BeaconEvent | undefined;
-		render: (result: Product) => BeaconEvent | undefined;
-		impression: (result: Product) => BeaconEvent | undefined;
-		addToCart: (result: Product) => BeaconEvent | undefined;
+		clickThrough: (e: MouseEvent, result: Product) => void;
+		click: (e: MouseEvent, result: Product) => void;
+		render: (result: Product) => void;
+		impression: (result: Product) => void;
+		addToCart: (result: Product) => void;
 	};
 	bundle: {
-		addToCart: (results: Product[]) => BeaconEvent | undefined;
+		addToCart: (results: Product[]) => void;
 	};
 };
 
@@ -40,9 +39,9 @@ export class RecommendationController extends AbstractController {
 		product: Record<
 			string,
 			{
-				clickThrough?: RecommendationsSchemaData;
-				impression?: RecommendationsSchemaData;
-				render?: RecommendationsSchemaData;
+				clickThrough?: boolean;
+				impression?: boolean;
+				render?: boolean;
 			}
 		>;
 	} = {
@@ -92,66 +91,64 @@ export class RecommendationController extends AbstractController {
 		this.use(this.config);
 	}
 
-	track: RecommendationTrackMethods = (() => {
-		return {
-			product: {
-				clickThrough: (e: MouseEvent, result): void => {
-					if (this.events.product[result.id]?.clickThrough) return;
+	track: RecommendationTrackMethods = {
+		product: {
+			clickThrough: (e: MouseEvent, result): void => {
+				if (this.events.product[result.id]?.clickThrough) return;
 
-					const data = getRecommendationsSchemaData({ store: this.store, results: [result] });
-					this.tracker.events.recommendations.clickThrough({ data, siteId: this.client.globals.siteId });
-					this.events.product![result.id] = this.events.product![result.id] || {};
-					this.events.product![result.id].clickThrough = data;
-					this.eventManager.fire('track.product.clickThrough', { controller: this, event: e, products: [result], trackEvent: data });
-				},
-				click: (e: MouseEvent, result): void => {
-					// TODO: closest might be going too far - write own function to only go n levels up
-					const href = (e.target as Element)?.getAttribute('href') || (e.target as Element)?.closest('a')?.getAttribute('href');
-					if (href) {
-						this.track.product.clickThrough(e, result);
-					} else {
-						// TODO: in future, send as an interaction event
-					}
-				},
-				impression: (result): RecommendationsSchemaData | undefined => {
-					if (this.events.product[result.id]?.impression) return;
-
-					const data = getRecommendationsSchemaData({ store: this.store, results: [result] });
-					this.tracker.events.recommendations.impression({ data, siteId: this.client.globals.siteId });
-					this.events.product![result.id] = this.events.product![result.id] || {};
-					this.events.product![result.id].impression = data;
-					this.eventManager.fire('track.product.impression', { controller: this, products: [result], trackEvent: data });
-					return data;
-				},
-				render: (result): RecommendationsSchemaData | undefined => {
-					if (this.events.product![result.id]?.render) return;
-
-					const data = getRecommendationsSchemaData({ store: this.store, results: [result] });
-					this.tracker.events.recommendations.render({ data, siteId: this.client.globals.siteId });
-					this.events.product![result.id] = this.events.product![result.id] || {};
-					this.events.product![result.id].render = data;
-					this.eventManager.fire('track.product.render', { controller: this, products: [result], trackEvent: data });
-					return data;
-				},
-				addToCart: (result: Product): RecommendationsSchemaData | undefined => {
-					const data = getRecommendationsSchemaData({ store: this.store, results: [result] });
-					this.tracker.events.recommendations.addToCart({ data, siteId: this.client.globals.siteId });
-					this.eventManager.fire('track.product.addToCart', { controller: this, products: [result], trackEvent: data });
-					return data;
-				},
+				const data = getRecommendationsSchemaData({ store: this.store, results: [result] });
+				this.tracker.events.recommendations.clickThrough({ data, siteId: this.config.globals?.siteId });
+				this.events.product[result.id] = this.events.product[result.id] || {};
+				this.events.product[result.id].clickThrough = true;
+				this.eventManager.fire('track.product.clickThrough', { controller: this, event: e, products: [result], trackEvent: data });
 			},
-			bundle: {
-				addToCart: (results: Product[]): RecommendationsSchemaData | undefined => {
-					if (this.store.profile.type != 'bundle') return;
-
-					const data = getRecommendationsSchemaData({ store: this.store, results });
-					this.tracker.events.recommendations.addToCart({ data, siteId: this.client.globals.siteId });
-					this.eventManager.fire('track.bundle.addToCart', { controller: this, products: results, trackEvent: data });
-					return data;
-				},
+			click: (e: MouseEvent, result): void => {
+				// TODO: closest might be going too far - write own function to only go n levels up - additionally check that href includes result.url
+				const href = (e.target as Element)?.getAttribute('href') || (e.target as Element)?.closest('a')?.getAttribute('href');
+				if (href) {
+					this.track.product.clickThrough(e, result);
+				} else {
+					// TODO: in future, send as an interaction event
+				}
 			},
-		} as RecommendationTrackMethods;
-	})();
+			impression: (result): RecommendationsSchemaData | undefined => {
+				if (this.events.product[result.id]?.impression) return;
+
+				const data = getRecommendationsSchemaData({ store: this.store, results: [result] });
+				this.tracker.events.recommendations.impression({ data, siteId: this.config.globals?.siteId });
+				this.events.product[result.id] = this.events.product[result.id] || {};
+				this.events.product[result.id].impression = true;
+				this.eventManager.fire('track.product.impression', { controller: this, products: [result], trackEvent: data });
+				return data;
+			},
+			render: (result): RecommendationsSchemaData | undefined => {
+				if (this.events.product[result.id]?.render) return;
+
+				const data = getRecommendationsSchemaData({ store: this.store, results: [result] });
+				this.tracker.events.recommendations.render({ data, siteId: this.config.globals?.siteId });
+				this.events.product[result.id] = this.events.product[result.id] || {};
+				this.events.product[result.id].render = true;
+				this.eventManager.fire('track.product.render', { controller: this, products: [result], trackEvent: data });
+				return data;
+			},
+			addToCart: (result: Product): RecommendationsSchemaData | undefined => {
+				const data = getRecommendationsSchemaData({ store: this.store, results: [result] });
+				this.tracker.events.recommendations.addToCart({ data, siteId: this.config.globals?.siteId });
+				this.eventManager.fire('track.product.addToCart', { controller: this, products: [result], trackEvent: data });
+				return data;
+			},
+		},
+		bundle: {
+			addToCart: (results: Product[]): RecommendationsSchemaData | undefined => {
+				if (this.store.profile.type != 'bundle') return;
+
+				const data = getRecommendationsSchemaData({ store: this.store, results });
+				this.tracker.events.recommendations.addToCart({ data, siteId: this.config.globals?.siteId });
+				this.eventManager.fire('track.bundle.addToCart', { controller: this, products: results, trackEvent: data });
+				return data;
+			},
+		},
+	};
 
 	get params(): RecommendRequestModel {
 		const params = {
@@ -318,9 +315,9 @@ function getRecommendationsSchemaData({ store, results }: { store: Recommendatio
 				const core = result.mappings.core!;
 				return {
 					uid: core.uid || '',
-					childUid: core.uid,
+					// childUid: core.uid,
 					sku: core.sku,
-					childSku: core.sku,
+					// childSku: core.sku,
 				};
 			}) || [],
 	};

@@ -57,8 +57,8 @@ type AutocompleteTrackMethods = {
 		render: (result: Product) => void;
 		impression: (result: Product) => void;
 		addToCart: (results: Product) => void;
-		redirect: (redirectURL: string) => void;
 	};
+	redirect: (redirectURL: string) => void;
 };
 
 export class AutocompleteController extends AbstractController {
@@ -71,9 +71,9 @@ export class AutocompleteController extends AbstractController {
 		product: Record<
 			string,
 			{
-				clickThrough?: AutocompleteSchemaData;
-				impression?: AutocompleteSchemaData;
-				render?: AutocompleteSchemaData;
+				clickThrough?: boolean;
+				impression?: boolean;
+				render?: boolean;
 			}
 		>;
 	} = {
@@ -121,7 +121,7 @@ export class AutocompleteController extends AbstractController {
 
 			const redirectURL = (ac.controller as AutocompleteController).store.merchandising?.redirect;
 			if (redirectURL && this.config?.settings?.redirects?.merchandising) {
-				this.track.product.redirect(redirectURL);
+				this.track.redirect(redirectURL);
 				window.location.href = redirectURL;
 				return false;
 			}
@@ -148,16 +148,16 @@ export class AutocompleteController extends AbstractController {
 					return;
 				}
 				const data = getAutocompleteSchemaData({ params: this.params, store: this.store, results: [result] });
-				this.tracker.events.autocomplete.clickThrough({ data, siteId: this.client.globals.siteId });
+				this.tracker.events.autocomplete.clickThrough({ data, siteId: this.config.globals?.siteId });
 				this.events.product[result.id] = this.events.product[result.id] || {};
-				this.events.product[result.id].clickThrough = data;
+				this.events.product[result.id].clickThrough = true;
 				this.eventManager.fire('track.product.clickThrough', { controller: this, event: e, products: [result], trackEvent: data });
 			},
 			click: (e: MouseEvent, result): void => {
 				if (result.type === 'banner') {
 					return;
 				}
-				// TODO: closest might be going too far - write own function to only go n levels up
+				// TODO: closest might be going too far - write own function to only go n levels up - additionally check that href includes result.url
 				const href = (e.target as Element)?.getAttribute('href') || (e.target as Element)?.closest('a')?.getAttribute('href');
 				if (href) {
 					this.track.product.clickThrough(e, result as Product);
@@ -169,30 +169,30 @@ export class AutocompleteController extends AbstractController {
 				if (this.events.product[result.id]?.render) return;
 
 				const data = getAutocompleteSchemaData({ params: this.params, store: this.store, results: [result] });
-				this.tracker.events.autocomplete.render({ data, siteId: this.client.globals.siteId });
+				this.tracker.events.autocomplete.render({ data, siteId: this.config.globals?.siteId });
 				this.events.product[result.id] = this.events.product[result.id] || {};
-				this.events.product[result.id].render = data;
+				this.events.product[result.id].render = true;
 				this.eventManager.fire('track.product.render', { controller: this, products: [result], trackEvent: data });
 			},
 			impression: (result: Product): void => {
 				if (this.events.product[result.id]?.impression) return;
 
 				const data = getAutocompleteSchemaData({ params: this.params, store: this.store, results: [result] });
-				this.tracker.events.autocomplete.impression({ data, siteId: this.client.globals.siteId });
+				this.tracker.events.autocomplete.impression({ data, siteId: this.config.globals?.siteId });
 				this.events.product[result.id] = this.events.product[result.id] || {};
-				this.events.product[result.id].impression = data;
+				this.events.product[result.id].impression = true;
 				this.eventManager.fire('track.product.impression', { controller: this, products: [result], trackEvent: data });
 			},
 			addToCart: (result: Product): void => {
 				const data = getAutocompleteSchemaData({ params: this.params, store: this.store, results: [result] });
-				this.tracker.events.autocomplete.addToCart({ data, siteId: this.client.globals.siteId });
+				this.tracker.events.autocomplete.addToCart({ data, siteId: this.config.globals?.siteId });
 				this.eventManager.fire('track.product.addToCart', { controller: this, products: [result], trackEvent: data });
 			},
-			redirect: (redirectURL: string): void => {
-				const data = getAutocompleteRedirectSchemaData({ redirectURL });
-				this.tracker.events.autocomplete.redirect({ data, siteId: this.client.globals.siteId });
-				this.eventManager.fire('track.product.redirect', { controller: this, redirectURL, trackEvent: data });
-			},
+		},
+		redirect: (redirectURL: string): void => {
+			const data = getAutocompleteRedirectSchemaData({ redirectURL });
+			this.tracker.events.autocomplete.redirect({ data, siteId: this.config.globals?.siteId });
+			this.eventManager.fire('track.product.redirect', { controller: this, redirectURL, trackEvent: data });
 		},
 	};
 
@@ -898,9 +898,9 @@ function getAutocompleteSchemaData({
 				const core = (result as Product).mappings.core!;
 				return {
 					uid: core.uid || '',
-					childUid: core.uid,
+					// childUid: core.uid,
 					sku: core.sku,
-					childSku: core.sku,
+					// childSku: core.sku,
 				};
 			}) || [],
 	};

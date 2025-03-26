@@ -1,6 +1,6 @@
 import { AppMode } from '@searchspring/snap-toolbox';
 import { BeaconEvent } from './BeaconEvent';
-import type { CartSchemaData, ContextCurrency, Item, OrderTransactionSchemaData } from '@searchspring/beacon';
+import type { ContextCurrency } from '@searchspring/beacon';
 
 export type TrackerGlobals = {
 	siteId: string;
@@ -188,14 +188,14 @@ export interface TrackMethods {
 		login: (data: ShopperLoginEvent, siteId?: string) => undefined;
 	};
 	product: {
-		view: (data: Item | ProductViewEvent, siteId?: string) => undefined;
+		view: (data: ProductViewEvent, siteId?: string) => undefined;
 		click: (data: ProductClickEvent, siteId?: string) => BeaconEvent | undefined;
 	};
 	cart: {
-		view: (data: CartViewEvent | CartSchemaData, siteId?: string) => undefined;
+		view: (data: CartViewEvent, siteId?: string) => undefined;
 	};
 	order: {
-		transaction: (data: OrderTransactionData | OrderTransactionSchemaData, siteId?: string) => undefined;
+		transaction: (data: OrderTransactionData, siteId?: string) => undefined;
 	};
 }
 

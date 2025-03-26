@@ -56,7 +56,7 @@ describe('Recommendation Component', async () => {
 		await controller.search();
 	});
 
-	it.only('tracks as expected', () => {
+	it('tracks as expected', () => {
 		cy.spy(controller.track.product, 'render').as('render');
 		cy.spy(controller.track.product, 'impression').as('impression');
 

@@ -215,7 +215,7 @@ describe('Finder Store', () => {
 				expect(finderStore2.state.persisted).toBe(true);
 
 				// should be expired now
-				await new Promise((resolve) => setTimeout(resolve, config.persist?.expiration! + 10));
+				await new Promise((resolve) => setTimeout(resolve, config.persist?.expiration! + 100));
 
 				const finderStore3 = new FinderStore(config, services);
 				const spy = jest.spyOn(finderStore3, 'reset');
