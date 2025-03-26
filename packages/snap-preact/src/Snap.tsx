@@ -118,8 +118,6 @@ type SnapServices = {
 	logger?: Logger;
 };
 
-const SESSION_ATTRIBUTION = 'ssAttribution';
-
 const COMPONENT_ERROR = `Uncaught Error - Invalid value passed as the component.
 This usually happens when you pass a JSX Element, and not a function that returns the component, in the snap config. 
 		
@@ -407,23 +405,6 @@ export class Snap {
 
 			const trackerConfig = deepmerge(this.config.tracker?.config || {}, { framework: 'preact', mode: this.mode });
 			this.tracker = services?.tracker || new Tracker(trackerGlobals, trackerConfig);
-
-			// check for tracking attribution in URL ?ss_attribution=type:id
-			const sessionAttribution = window.sessionStorage?.getItem(SESSION_ATTRIBUTION);
-			if (urlParams?.params?.query?.ss_attribution) {
-				const attribution = urlParams.params.query.ss_attribution.split(':');
-				const [type, id] = attribution;
-				if (type && id) {
-					this.tracker.updateContext('attribution', [{ type, id }]);
-				}
-				// save to session storage
-				window.sessionStorage?.setItem(SESSION_ATTRIBUTION, urlParams.params.query.ss_attribution);
-			} else if (sessionAttribution) {
-				const [type, id] = sessionAttribution.split(':');
-				if (type && id) {
-					this.tracker.updateContext('attribution', [{ type, id }]);
-				}
-			}
 
 			// log version
 			this.logger.imageText({
