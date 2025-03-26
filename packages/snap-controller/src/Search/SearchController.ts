@@ -430,9 +430,6 @@ export class SearchController extends AbstractController {
 			}
 			const params = this.params;
 
-			// reset events for new search
-			this.events = { product: {} };
-
 			if (params.search?.query?.string && params.search?.query?.string.length) {
 				// save it to the history store
 				this.store.history.save(params.search.query.string);
@@ -529,7 +526,10 @@ export class SearchController extends AbstractController {
 					response.results = [...this.previousResults, ...(response.results || [])];
 				}
 			} else {
-				// normal request for next page
+				// normal request
+
+				// reset events for new search
+				this.events = { product: {} };
 
 				// clear previousResults to prevent infinite scroll from using them
 				this.previousResults = [];
@@ -742,7 +742,7 @@ function getSearchSchemaData({
 	}, {});
 	return {
 		q: params.search?.query?.string || '',
-		correctedQuery: params.search?.originalQuery,
+		correctedQuery: store.search?.originalQuery?.string ? store.search?.query?.string : undefined,
 		...filters,
 		sort: [
 			{
