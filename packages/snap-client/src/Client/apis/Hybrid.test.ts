@@ -54,13 +54,13 @@ describe('Hybrid Api', () => {
 			headers: {},
 			method: 'GET',
 		};
-		const cacheKey = 'https://8uyt2m.a.searchspring.io/api/search/search.json?siteId=8uyt2m&ajaxCatalog=Snap&resultsFormat=native';
+		const fetchUrl = 'https://8uyt2m.a.searchspring.io/api/search/search.json?siteId=8uyt2m&noBeacon=true&ajaxCatalog=Snap&resultsFormat=native';
 
 		await api.getSearch({
 			siteId: '8uyt2m',
 		});
 
-		expect(requestMock).toHaveBeenCalledWith(cacheKey, params);
+		expect(requestMock).toHaveBeenCalledWith(fetchUrl, params);
 
 		requestMock.mockReset();
 	});

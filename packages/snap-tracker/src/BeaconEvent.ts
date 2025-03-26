@@ -18,6 +18,7 @@ export class BeaconEvent {
 		| Record<string, never>;
 	id?: string;
 	pid?: string | null;
+	private origin?: string;
 
 	constructor(payload: Types.BeaconPayload, config: Types.TrackerConfig) {
 		this.type = payload.type;
@@ -27,6 +28,7 @@ export class BeaconEvent {
 		this.event = payload.event;
 		this.id = payload.id;
 		this.pid = payload.pid;
+		this.origin = config.requesters?.beacon?.origin || 'https://beacon.searchspring.io';
 
 		this.meta = {
 			initiator: {
@@ -36,5 +38,23 @@ export class BeaconEvent {
 			},
 		};
 		this.id = uuidv4();
+	}
+
+	send(): BeaconEvent {
+		const data = { ...this };
+		const origin = data.origin;
+		delete data.origin;
+
+		if (typeof fetch !== 'undefined') {
+			fetch(`${origin}/beacon`, {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json',
+				},
+				body: JSON.stringify(data),
+				keepalive: true,
+			});
+		}
+		return data;
 	}
 }

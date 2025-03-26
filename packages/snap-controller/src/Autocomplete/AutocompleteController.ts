@@ -1,6 +1,6 @@
 import deepmerge from 'deepmerge';
 
-import { StorageStore, ErrorType } from '@searchspring/snap-store-mobx';
+import { StorageStore, ErrorType, Product, SearchResultStore, Banner } from '@searchspring/snap-store-mobx';
 import { AbstractController } from '../Abstract/AbstractController';
 import { getSearchParams } from '../utils/getParams';
 import { ControllerTypes } from '../types';
@@ -8,7 +8,15 @@ import { ControllerTypes } from '../types';
 import { AutocompleteStore } from '@searchspring/snap-store-mobx';
 import type { AutocompleteControllerConfig, AfterSearchObj, AfterStoreObj, ControllerServices, ContextVariables } from '../types';
 import type { Next } from '@searchspring/snap-event-manager';
-import type { AutocompleteRequestModel } from '@searchspring/snapi-types';
+import type { AutocompleteRequestModel, SearchRequestModelFilterRange, SearchRequestModelFilterValue } from '@searchspring/snapi-types';
+import type {
+	AutocompleteRedirectSchemaData,
+	AutocompleteSchemaData,
+	AutocompleteSchemaDataBgfilterInner,
+	AutocompleteSchemaDataFilterInner,
+	AutocompleteSchemaDataSortInnerDirEnum,
+	Item,
+} from '@searchspring/beacon';
 
 const INPUT_ATTRIBUTE = 'ss-autocomplete-input';
 export const INPUT_DELAY = 200;
@@ -44,8 +52,13 @@ const defaultConfig: AutocompleteControllerConfig = {
 
 type AutocompleteTrackMethods = {
 	product: {
-		click: (e: MouseEvent, result: any) => void;
+		clickThrough: (e: MouseEvent, result: Product) => void;
+		click: (e: MouseEvent, result: Product | Banner) => void;
+		render: (result: Product) => void;
+		impression: (result: Product) => void;
+		addToCart: (results: Product) => void;
 	};
+	redirect: (redirectURL: string) => void;
 };
 
 export class AutocompleteController extends AbstractController {
@@ -53,6 +66,19 @@ export class AutocompleteController extends AbstractController {
 	declare store: AutocompleteStore;
 	declare config: AutocompleteControllerConfig;
 	public storage: StorageStore;
+
+	events: {
+		product: Record<
+			string,
+			{
+				clickThrough?: boolean;
+				impression?: boolean;
+				render?: boolean;
+			}
+		>;
+	} = {
+		product: {},
+	};
 
 	constructor(
 		config: AutocompleteControllerConfig,
@@ -95,6 +121,7 @@ export class AutocompleteController extends AbstractController {
 
 			const redirectURL = (ac.controller as AutocompleteController).store.merchandising?.redirect;
 			if (redirectURL && this.config?.settings?.redirects?.merchandising) {
+				this.track.redirect(redirectURL);
 				window.location.href = redirectURL;
 				return false;
 			}
@@ -115,11 +142,57 @@ export class AutocompleteController extends AbstractController {
 	}
 
 	track: AutocompleteTrackMethods = {
-		// TODO: add in future when autocomplete supports result click tracking
 		product: {
-			click: (): void => {
-				this.log.warn('product.click tracking is not currently supported in this controller type');
+			clickThrough: (e: MouseEvent, result): void => {
+				if (this.events.product[result.id]?.clickThrough) {
+					return;
+				}
+				const data = getAutocompleteSchemaData({ params: this.params, store: this.store, results: [result] });
+				this.tracker.events.autocomplete.clickThrough({ data, siteId: this.config.globals?.siteId });
+				this.events.product[result.id] = this.events.product[result.id] || {};
+				this.events.product[result.id].clickThrough = true;
+				this.eventManager.fire('track.product.clickThrough', { controller: this, event: e, products: [result], trackEvent: data });
 			},
+			click: (e: MouseEvent, result): void => {
+				if (result.type === 'banner') {
+					return;
+				}
+				// TODO: closest might be going too far - write own function to only go n levels up - additionally check that href includes result.url
+				const href = (e.target as Element)?.getAttribute('href') || (e.target as Element)?.closest('a')?.getAttribute('href');
+				if (href) {
+					this.track.product.clickThrough(e, result as Product);
+				} else {
+					// TODO: in future, send as an interaction event
+				}
+			},
+			render: (result: Product) => {
+				if (this.events.product[result.id]?.render) return;
+
+				const data = getAutocompleteSchemaData({ params: this.params, store: this.store, results: [result] });
+				this.tracker.events.autocomplete.render({ data, siteId: this.config.globals?.siteId });
+				this.events.product[result.id] = this.events.product[result.id] || {};
+				this.events.product[result.id].render = true;
+				this.eventManager.fire('track.product.render', { controller: this, products: [result], trackEvent: data });
+			},
+			impression: (result: Product): void => {
+				if (this.events.product[result.id]?.impression) return;
+
+				const data = getAutocompleteSchemaData({ params: this.params, store: this.store, results: [result] });
+				this.tracker.events.autocomplete.impression({ data, siteId: this.config.globals?.siteId });
+				this.events.product[result.id] = this.events.product[result.id] || {};
+				this.events.product[result.id].impression = true;
+				this.eventManager.fire('track.product.impression', { controller: this, products: [result], trackEvent: data });
+			},
+			addToCart: (result: Product): void => {
+				const data = getAutocompleteSchemaData({ params: this.params, store: this.store, results: [result] });
+				this.tracker.events.autocomplete.addToCart({ data, siteId: this.config.globals?.siteId });
+				this.eventManager.fire('track.product.addToCart', { controller: this, products: [result], trackEvent: data });
+			},
+		},
+		redirect: (redirectURL: string): void => {
+			const data = getAutocompleteRedirectSchemaData({ redirectURL });
+			this.tracker.events.autocomplete.redirect({ data, siteId: this.config.globals?.siteId });
+			this.eventManager.fire('track.product.redirect', { controller: this, redirectURL, trackEvent: data });
 		},
 	};
 
@@ -127,9 +200,8 @@ export class AutocompleteController extends AbstractController {
 		const urlState = this.urlManager.state;
 		const params: AutocompleteRequestModel = deepmerge({ ...getSearchParams(urlState) }, this.config.globals!);
 
-		const userId = this.tracker.getUserId();
-		const sessionId = this.tracker.getContext().sessionId;
-		const pageLoadId = this.tracker.getContext().pageLoadId;
+		const { userId, sessionId, pageLoadId, shopperId } = this.tracker.getContext();
+
 		params.tracking = params.tracking || {};
 
 		params.tracking.domain = window.location.href;
@@ -157,7 +229,6 @@ export class AutocompleteController extends AbstractController {
 				params.personalization.lastViewed = lastViewedItems.join(',');
 			}
 
-			const shopperId = this.tracker.getShopperId();
 			if (shopperId) {
 				params.personalization = params.personalization || {};
 				params.personalization.shopper = shopperId;
@@ -534,6 +605,9 @@ export class AutocompleteController extends AbstractController {
 				await this.init();
 			}
 
+			// reset events for new search
+			this.events = { product: {} };
+
 			// if urlManager has no query, there will be no need to get params and no query
 			if (!this.urlManager.state.query) {
 				return;
@@ -667,6 +741,11 @@ export class AutocompleteController extends AbstractController {
 			this.store.loading = false;
 		}
 	};
+
+	addToCart = async (product: Product): Promise<void> => {
+		this.track.product.addToCart(product);
+		this.eventManager.fire('addToCart', { controller: this, products: [product] });
+	};
 }
 
 function addHiddenFormInput(form: HTMLFormElement, name: string, value: string) {
@@ -741,4 +820,88 @@ function unbindFormParameters(form: HTMLFormElement, fn: any): void {
 			}
 		}
 	}
+}
+
+function getAutocompleteRedirectSchemaData({ redirectURL }: { redirectURL: string }): AutocompleteRedirectSchemaData {
+	return {
+		redirect: redirectURL,
+	};
+}
+
+function getAutocompleteSchemaData({
+	params,
+	store,
+	results,
+}: {
+	params: AutocompleteRequestModel;
+	store: AutocompleteStore;
+	results?: SearchResultStore;
+}): AutocompleteSchemaData {
+	const filters = params.filters?.reduce<{
+		bgfilter?: Array<AutocompleteSchemaDataBgfilterInner>;
+		filter?: Array<AutocompleteSchemaDataFilterInner>;
+	}>((acc, filter) => {
+		const key = filter.background ? 'bgfilter' : 'filter';
+		acc[key] = acc[key] || [];
+
+		const value =
+			filter.type === 'range' &&
+			!isNaN((filter as SearchRequestModelFilterRange).value?.low!) &&
+			!isNaN((filter as SearchRequestModelFilterRange).value?.low!)
+				? [`low=${(filter as SearchRequestModelFilterRange).value?.low}`, `high=${(filter as SearchRequestModelFilterRange).value?.high}`]
+				: [`${(filter as SearchRequestModelFilterValue).value}`];
+
+		const existing = acc[key]!.find((item) => item.field === filter.field);
+		if (existing && !existing.value!.includes(value[0])) {
+			existing.value!.push(...value);
+		} else {
+			acc[key]!.push({
+				field: filter.field,
+				value,
+			});
+		}
+
+		return acc;
+	}, {});
+	return {
+		q: params.search?.query?.string || '',
+		correctedQuery: params.search?.originalQuery || '',
+		...filters,
+		sort: [
+			{
+				field: store.sorting.current?.field,
+				dir: store.sorting.current?.direction as AutocompleteSchemaDataSortInnerDirEnum,
+			},
+		],
+		pagination: {
+			totalResults: store.pagination.totalResults,
+			page: store.pagination.page,
+			resultsPerPage: store.pagination.pageSize,
+		},
+		merchandising: {
+			personalized: store.merchandising.personalized,
+			redirect: store.merchandising.redirect,
+			triggeredCampaigns:
+				(store.merchandising.campaigns?.length &&
+					store.merchandising.campaigns?.map((campaign) => {
+						const experiement = store.merchandising.experiments.find((experiment) => experiment.campaignId === campaign.id);
+						return {
+							id: campaign.id,
+							experimentId: experiement?.experimentId,
+							variationId: experiement?.variationId,
+						};
+					})) ||
+				undefined,
+		},
+		results:
+			results?.map((result: Product | Banner): Item => {
+				const core = (result as Product).mappings.core!;
+				return {
+					uid: core.uid || '',
+					// childUid: core.uid,
+					sku: core.sku,
+					// childSku: core.sku,
+				};
+			}) || [],
+	};
 }

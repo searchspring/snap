@@ -12,7 +12,7 @@ import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { ComponentProps, BreakpointsProps, StylingCSS } from '../../../types';
 import { useDisplaySettings } from '../../../hooks/useDisplaySettings';
 import { RecommendationProfileTracker } from '../../Trackers/Recommendation/ProfileTracker';
-import { RecommendationResultTracker } from '../../Trackers/Recommendation/ResultTracker';
+import { ResultTracker } from '../../Trackers/ResultTracker';
 import { IconProps } from '../../Atoms/Icon';
 import type { RecommendationController } from '@searchspring/snap-controller';
 import type { Product } from '@searchspring/snap-store-mobx';
@@ -351,7 +351,7 @@ export const RecommendationBundle = observer((properties: RecommendationBundlePr
 	};
 	const addToCart = (e: MouseEvent) => {
 		// add to cart tracking
-		controller.track.addBundle(e, selectedItems);
+		controller.track.bundle.addToCart(selectedItems);
 
 		//call the function passed
 		onAddToCart && onAddToCart(e, selectedItems);
@@ -407,11 +407,14 @@ export const RecommendationBundle = observer((properties: RecommendationBundlePr
 								<Fragment>
 									{!seedInCarousel && !hideSeed && (
 										<div className="ss__recommendation-bundle__wrapper__seed-container">
-											<RecommendationResultTracker controller={controller} result={seed} track={{ impression: false }}>
+											<ResultTracker controller={controller} result={seed} track={{ impression: false }}>
 												<BundleSelector
 													seedText={seedText}
 													seed={true}
-													onCheck={() => onProductSelect(seed)}
+													onCheck={(e) => {
+														e.stopPropagation();
+														onProductSelect(seed);
+													}}
 													checked={selectedItems.findIndex((item) => item.id == seed.id) > -1}
 													icon={separatorIcon}
 													hideCheckboxes={hideCheckboxes}
@@ -429,7 +432,7 @@ export const RecommendationBundle = observer((properties: RecommendationBundlePr
 														<Result {...subProps.result} controller={controller} result={seed} />
 													)}
 												</BundleSelector>
-											</RecommendationResultTracker>
+											</ResultTracker>
 										</div>
 									)}
 									<div className="ss__recommendation-bundle__wrapper__carousel">
@@ -458,12 +461,15 @@ export const RecommendationBundle = observer((properties: RecommendationBundlePr
 
 															if (idx == 0 && !hideSeed) {
 																return (
-																	<RecommendationResultTracker controller={controller} result={result} track={{ impression: false }}>
+																	<ResultTracker controller={controller} result={result} track={{ impression: false }}>
 																		<BundleSelector
 																			seedText={seedText}
 																			seed={true}
 																			icon={separatorIcon}
-																			onCheck={() => onProductSelect(result)}
+																			onCheck={(e) => {
+																				e.stopPropagation();
+																				onProductSelect(result);
+																			}}
 																			checked={selected}
 																			hideCheckboxes={hideCheckboxes}
 																			theme={props.theme}
@@ -474,14 +480,17 @@ export const RecommendationBundle = observer((properties: RecommendationBundlePr
 																				<Result {...subProps.result} controller={controller} result={result} />
 																			)}
 																		</BundleSelector>
-																	</RecommendationResultTracker>
+																	</ResultTracker>
 																);
 															} else {
 																return (
-																	<RecommendationResultTracker controller={controller} result={result}>
+																	<ResultTracker controller={controller} result={result}>
 																		<BundleSelector
 																			icon={separatorIconSeedOnly ? false : separatorIcon}
-																			onCheck={() => onProductSelect(result)}
+																			onCheck={(e) => {
+																				e.stopPropagation();
+																				onProductSelect(result);
+																			}}
 																			checked={selected}
 																			hideCheckboxes={hideCheckboxes}
 																			theme={props.theme}
@@ -493,7 +502,7 @@ export const RecommendationBundle = observer((properties: RecommendationBundlePr
 																				<Result {...subProps.result} controller={controller} result={result} />
 																			)}
 																		</BundleSelector>
-																	</RecommendationResultTracker>
+																	</ResultTracker>
 																);
 															}
 														})
@@ -503,10 +512,13 @@ export const RecommendationBundle = observer((properties: RecommendationBundlePr
 															const selected = selectedItems.findIndex((item) => item.id == result.id) > -1;
 
 															return (
-																<RecommendationResultTracker controller={controller} result={result}>
+																<ResultTracker controller={controller} result={result}>
 																	<BundleSelector
 																		icon={separatorIconSeedOnly ? false : separatorIcon}
-																		onCheck={() => onProductSelect(result)}
+																		onCheck={(e) => {
+																			e.stopPropagation();
+																			onProductSelect(result);
+																		}}
 																		checked={selected}
 																		hideCheckboxes={hideCheckboxes}
 																		theme={props.theme}
@@ -518,7 +530,7 @@ export const RecommendationBundle = observer((properties: RecommendationBundlePr
 																			<Result {...subProps.result} controller={controller} result={result} />
 																		)}
 																	</BundleSelector>
-																</RecommendationResultTracker>
+																</ResultTracker>
 															);
 														})}
 										</Carousel>
@@ -532,12 +544,15 @@ export const RecommendationBundle = observer((properties: RecommendationBundlePr
 
 										if (idx == 0 && !hideSeed) {
 											return (
-												<RecommendationResultTracker controller={controller} result={result} track={{ impression: false }}>
+												<ResultTracker controller={controller} result={result} track={{ impression: false }}>
 													<BundleSelector
 														seedText={seedText}
 														seed={true}
 														icon={separatorIcon}
-														onCheck={() => onProductSelect(result)}
+														onCheck={(e) => {
+															e.stopPropagation();
+															onProductSelect(result);
+														}}
 														checked={selected}
 														hideCheckboxes={hideCheckboxes}
 														theme={props.theme}
@@ -548,14 +563,17 @@ export const RecommendationBundle = observer((properties: RecommendationBundlePr
 															<Result {...subProps.result} controller={controller} result={result} />
 														)}
 													</BundleSelector>
-												</RecommendationResultTracker>
+												</ResultTracker>
 											);
 										} else {
 											return (
-												<RecommendationResultTracker controller={controller} result={result}>
+												<ResultTracker controller={controller} result={result}>
 													<BundleSelector
 														icon={separatorIconSeedOnly ? false : separatorIcon}
-														onCheck={() => onProductSelect(result)}
+														onCheck={(e) => {
+															e.stopPropagation();
+															onProductSelect(result);
+														}}
 														checked={selected}
 														hideCheckboxes={hideCheckboxes}
 														theme={props.theme}
@@ -567,7 +585,7 @@ export const RecommendationBundle = observer((properties: RecommendationBundlePr
 															<Result {...subProps.result} controller={controller} result={result} />
 														)}
 													</BundleSelector>
-												</RecommendationResultTracker>
+												</ResultTracker>
 											);
 										}
 									})
@@ -600,9 +618,9 @@ export const RecommendationBundle = observer((properties: RecommendationBundlePr
 				) : (
 					<RecommendationProfileTracker controller={controller}>
 						{resultsToRender.map((result) => (
-							<RecommendationResultTracker controller={controller} result={result}>
+							<ResultTracker controller={controller} result={result}>
 								<></>
-							</RecommendationResultTracker>
+							</ResultTracker>
 						))}
 					</RecommendationProfileTracker>
 				)}

@@ -15,6 +15,7 @@ import { ComponentProps, Layout, LayoutType, BreakpointsProps, StylingCSS } from
 import { defined } from '../../../utilities';
 import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { useDisplaySettings } from '../../../hooks/useDisplaySettings';
+import { ResultTracker } from '../../Trackers/ResultTracker';
 
 const CSS = {
 	results: ({ columns, gapSize }: ResultsProp) =>
@@ -29,15 +30,6 @@ const CSS = {
 				boxSizing: 'border-box',
 				flex: '0 1 auto',
 				width: `calc(${100 / columns!}% - (${columns! - 1} * ${gapSize} / ${columns} ) )`,
-				marginRight: gapSize,
-				marginBottom: gapSize,
-
-				[`&:nth-of-type(${columns}n)`]: {
-					marginRight: '0',
-				},
-				[`&:nth-last-of-type(-n+${columns})`]: {
-					marginBottom: '0',
-				},
 			},
 			'@supports (display: grid)': {
 				display: 'grid',
@@ -135,24 +127,26 @@ export const Results = observer((properties: ResultsProp): JSX.Element => {
 	return results?.length ? (
 		<CacheProvider>
 			<div {...styling} className={classnames('ss__results', `ss__results-${props.layout}`, className)}>
-				{results.map((result) =>
-					(() => {
-						switch (result.type) {
-							case ContentType.BANNER:
-								return <InlineBanner {...subProps.inlineBanner} key={result.id} banner={result as Banner} layout={props.layout} />;
-							default:
-								return (
-									<Result
-										key={(result as Product).id}
-										{...subProps.result}
-										result={result as Product}
-										layout={props.layout}
-										controller={controller}
-									/>
-								);
-						}
-					})()
-				)}
+				{results.map((result) => (
+					<ResultTracker result={result} controller={controller as SearchController | AutocompleteController | RecommendationController}>
+						{(() => {
+							switch (result.type) {
+								case ContentType.BANNER:
+									return <InlineBanner {...subProps.inlineBanner} key={result.id} banner={result as Banner} layout={props.layout} />;
+								default:
+									return (
+										<Result
+											key={(result as Product).id}
+											{...subProps.result}
+											result={result as Product}
+											layout={props.layout}
+											controller={controller}
+										/>
+									);
+							}
+						})()}
+					</ResultTracker>
+				))}
 			</div>
 		</CacheProvider>
 	) : (

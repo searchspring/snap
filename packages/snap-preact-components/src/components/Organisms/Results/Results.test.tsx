@@ -22,6 +22,28 @@ const mockResults = new SearchResultStore(
 );
 
 describe('Results Component', () => {
+	beforeEach(() => {
+		const mock = jest.fn(() => ({
+			observe: jest.fn(),
+			unobserve: jest.fn(),
+			disconnect: jest.fn(),
+		}));
+
+		//@ts-ignore
+		window.IntersectionObserver = mock;
+	});
+
+	afterEach(() => {
+		//@ts-ignore
+		window.IntersectionObserver.mockReset();
+		jest.clearAllMocks();
+	});
+
+	afterAll(() => {
+		// @ts-ignore
+		window.IntersectionObserver.mockReset();
+	});
+
 	const DetailSlot = () => {
 		return <div className="detail-slot">details...</div>;
 	};
@@ -91,13 +113,17 @@ describe('Results Component', () => {
 		const resultsElementStyles = getComputedStyle(resultsElement);
 
 		expect(resultsElementStyles.gridTemplateColumns).toBe(`repeat(${args.columns}, 1fr)`);
+		expect(resultsElementStyles.gap).toBe(args.gapSize);
 
 		const result = rendered.container.querySelector('.ss__result')!;
 
 		expect(result).toBeInTheDocument();
-		const resultStyles = getComputedStyle(result);
-		expect(resultStyles.marginRight).toBe(args.gapSize);
-		expect(resultStyles.marginBottom).toBe(args.gapSize);
+	});
+
+	it('renders result trackers', () => {
+		const rendered = render(<Results layout={Layout.GRID} results={mockResults} />);
+		const resultTrackers = rendered.container.querySelectorAll('.ss__result-tracker')!;
+		expect(resultTrackers.length).toBe(mockResults.length);
 	});
 
 	it('can use breakpoints', async () => {
