@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.65.0](https://github.com/searchspring/snap/compare/v0.64.0...v0.65.0) (2025-03-26)
+
+**Note:** Version bump only for package @searchspring/snap-logger
+
 # [0.64.0](https://github.com/searchspring/snap/compare/v0.63.5...v0.64.0) (2025-03-07)
 
 **Note:** Version bump only for package @searchspring/snap-logger

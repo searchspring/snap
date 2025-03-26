@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.65.0](https://github.com/searchspring/snap/compare/v0.64.0...v0.65.0) (2025-03-26)
+
+### Features
+
+- **preact-components:** creating new universal ResultTracker - functionally disabled for now ([dedca16](https://github.com/searchspring/snap/commit/dedca16c5192b8f9e4287201cfa9987c1c276340))
+
 # [0.64.0](https://github.com/searchspring/snap/compare/v0.63.5...v0.64.0) (2025-03-07)
 
 ### Bug Fixes
