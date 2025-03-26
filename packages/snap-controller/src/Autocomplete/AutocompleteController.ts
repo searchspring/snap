@@ -864,8 +864,8 @@ function getAutocompleteSchemaData({
 		return acc;
 	}, {});
 	return {
-		q: params.search?.query?.string || '',
-		correctedQuery: params.search?.originalQuery || '',
+		q: store.search?.originalQuery?.string || store.search?.query?.string || '',
+		correctedQuery: store.search?.originalQuery?.string ? store.search?.query?.string : undefined,
 		...filters,
 		sort: [
 			{

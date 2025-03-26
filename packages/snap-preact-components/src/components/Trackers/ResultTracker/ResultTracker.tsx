@@ -38,7 +38,7 @@ export const ResultTracker = observer((properties: ResultTrackerProps): JSX.Elem
 		...track,
 	};
 	const resultRef = useRef(null);
-	const resultInViewport = useIntersection(resultRef, '0px');
+	const resultInViewport = useIntersection(resultRef, '0px', true);
 
 	useEffect(() => {
 		if (mergedTrack.render) {
