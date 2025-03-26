@@ -1,33 +1,33 @@
 (self.webpackChunk_searchspring_snap_preact_components = self.webpackChunk_searchspring_snap_preact_components || []).push([
 	[468],
 	{
-		97468: (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+		'../../node_modules/@storybook/components/dist/esm/controls/Color.js': (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 			'use strict';
 			__webpack_require__.r(__webpack_exports__),
 				__webpack_require__.d(__webpack_exports__, { ColorControl: () => ColorControl, default: () => Color });
-			__webpack_require__(68291),
-				__webpack_require__(58070),
-				__webpack_require__(93510),
-				__webpack_require__(80630),
-				__webpack_require__(2432),
-				__webpack_require__(11011),
-				__webpack_require__(33873),
-				__webpack_require__(47010),
-				__webpack_require__(11875),
-				__webpack_require__(16411),
-				__webpack_require__(87050),
-				__webpack_require__(12353),
-				__webpack_require__(39428),
-				__webpack_require__(98376),
-				__webpack_require__(18981),
-				__webpack_require__(73185),
-				__webpack_require__(14293),
-				__webpack_require__(86741),
-				__webpack_require__(58225),
-				__webpack_require__(56569),
-				__webpack_require__(5305),
-				__webpack_require__(93277);
-			var react = __webpack_require__(14041);
+			__webpack_require__('../../node_modules/core-js/modules/es.object.keys.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.symbol.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.symbol.description.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.object.to-string.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.symbol.iterator.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.string.iterator.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.array.iterator.js'),
+				__webpack_require__('../../node_modules/core-js/modules/web.dom-collections.iterator.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.array.from.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.array.concat.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.object.assign.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.object.values.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.string.match.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.regexp.exec.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.array.map.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.number.constructor.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.string.replace.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.string.starts-with.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.string.split.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.array.slice.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.array.filter.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.function.name.js');
+			var compat_module = __webpack_require__('../../node_modules/preact/compat/dist/compat.module.js');
 			function u() {
 				return (u =
 					Object.assign ||
@@ -49,8 +49,8 @@
 				return o;
 			}
 			function i(e) {
-				var t = (0, react.useRef)(e),
-					n = (0, react.useRef)(function (e) {
+				var t = (0, compat_module.useRef)(e),
+					n = (0, compat_module.useRef)(function (e) {
 						t.current && t.current(e);
 					});
 				return (t.current = e), n.current;
@@ -77,16 +77,16 @@
 				h = function (e) {
 					!f(e) && e.preventDefault();
 				},
-				m = react.memo(function (o) {
+				m = compat_module.default.memo(function (o) {
 					var a = o.onMove,
 						l = o.onKey,
 						s = c(o, ['onMove', 'onKey']),
-						m = (0, react.useRef)(null),
+						m = (0, compat_module.useRef)(null),
 						g = i(a),
 						p = i(l),
-						b = (0, react.useRef)(null),
-						_ = (0, react.useRef)(!1),
-						x = (0, react.useMemo)(
+						b = (0, compat_module.useRef)(null),
+						_ = (0, compat_module.useRef)(!1),
+						x = (0, compat_module.useMemo)(
 							function () {
 								var e = function (e) {
 										h(e), (f(e) ? e.touches.length > 0 : e.buttons > 0) && m.current ? g(d(m.current, e, b.current)) : t(!1);
@@ -134,13 +134,13 @@
 						E = x[1],
 						H = x[2];
 					return (
-						(0, react.useEffect)(
+						(0, compat_module.useEffect)(
 							function () {
 								return H;
 							},
 							[H]
 						),
-						react.createElement(
+						compat_module.default.createElement(
 							'div',
 							u({}, s, {
 								onTouchStart: C,
@@ -163,10 +163,10 @@
 						o = r.top,
 						a = void 0 === o ? 0.5 : o,
 						l = g(['react-colorful__pointer', r.className]);
-					return react.createElement(
+					return compat_module.default.createElement(
 						'div',
 						{ className: l, style: { top: 100 * a + '%', left: 100 * n + '%' } },
-						react.createElement('div', { className: 'react-colorful__pointer-fill', style: { backgroundColor: t } })
+						compat_module.default.createElement('div', { className: 'react-colorful__pointer-fill', style: { backgroundColor: t } })
 					);
 				},
 				b = function (e, r, t) {
@@ -274,14 +274,14 @@
 						u = l ? (a === r ? (t - n) / l : a === t ? 2 + (n - r) / l : 4 + (r - t) / l) : 0;
 					return { h: b(60 * (u < 0 ? u + 6 : u)), s: b(a ? (l / a) * 100 : 0), v: b((a / 255) * 100), a: o };
 				},
-				S = react.memo(function (r) {
+				S = compat_module.default.memo(function (r) {
 					var t = r.hue,
 						n = r.onChange,
 						o = g(['react-colorful__hue', r.className]);
-					return react.createElement(
+					return compat_module.default.createElement(
 						'div',
 						{ className: o },
-						react.createElement(
+						compat_module.default.createElement(
 							m,
 							{
 								onMove: function (e) {
@@ -295,18 +295,22 @@
 								'aria-valuemax': '360',
 								'aria-valuemin': '0',
 							},
-							react.createElement(p, { className: 'react-colorful__hue-pointer', left: t / 360, color: q({ h: t, s: 100, v: 100, a: 1 }) })
+							compat_module.default.createElement(p, {
+								className: 'react-colorful__hue-pointer',
+								left: t / 360,
+								color: q({ h: t, s: 100, v: 100, a: 1 }),
+							})
 						)
 					);
 				}),
-				T = react.memo(function (r) {
+				T = compat_module.default.memo(function (r) {
 					var t = r.hsva,
 						n = r.onChange,
 						o = { backgroundColor: q({ h: t.h, s: 100, v: 100, a: 1 }) };
-					return react.createElement(
+					return compat_module.default.createElement(
 						'div',
 						{ className: 'react-colorful__saturation', style: o },
-						react.createElement(
+						compat_module.default.createElement(
 							m,
 							{
 								onMove: function (e) {
@@ -318,7 +322,12 @@
 								'aria-label': 'Color',
 								'aria-valuetext': 'Saturation ' + b(t.s) + '%, Brightness ' + b(t.v) + '%',
 							},
-							react.createElement(p, { className: 'react-colorful__saturation-pointer', top: 1 - t.v / 100, left: t.s / 100, color: q(t) })
+							compat_module.default.createElement(p, {
+								className: 'react-colorful__saturation-pointer',
+								top: 1 - t.v / 100,
+								left: t.s / 100,
+								color: q(t),
+							})
 						)
 					);
 				}),
@@ -335,13 +344,13 @@
 				};
 			function Y(e, t, l) {
 				var u = i(l),
-					c = (0, react.useState)(function () {
+					c = (0, compat_module.useState)(function () {
 						return e.toHsva(t);
 					}),
 					s = c[0],
 					f = c[1],
-					v = (0, react.useRef)({ color: t, hsva: s });
-				(0, react.useEffect)(
+					v = (0, compat_module.useRef)({ color: t, hsva: s });
+				(0, compat_module.useEffect)(
 					function () {
 						if (!e.equal(t, v.current.color)) {
 							var r = e.toHsva(t);
@@ -350,14 +359,14 @@
 					},
 					[t, e]
 				),
-					(0, react.useEffect)(
+					(0, compat_module.useEffect)(
 						function () {
 							var r;
 							F(s, v.current.hsva) || e.equal((r = e.fromHsva(s)), v.current.color) || ((v.current = { hsva: s, color: r }), u(r));
 						},
 						[s, e, u]
 					);
-				var d = (0, react.useCallback)(function (e) {
+				var d = (0, compat_module.useCallback)(function (e) {
 					f(function (r) {
 						return Object.assign({}, r, e);
 					});
@@ -365,7 +374,7 @@
 				return [s, d];
 			}
 			var R,
-				V = 'undefined' != typeof window ? react.useLayoutEffect : react.useEffect,
+				V = 'undefined' != typeof window ? compat_module.useLayoutEffect : compat_module.useEffect,
 				J = new Map(),
 				Q = function (e) {
 					V(function () {
@@ -387,17 +396,17 @@
 						l = void 0 === a ? o.defaultColor : a,
 						i = t.onChange,
 						s = c(t, ['className', 'colorModel', 'color', 'onChange']),
-						f = (0, react.useRef)(null);
+						f = (0, compat_module.useRef)(null);
 					Q(f);
 					var v = Y(o, l, i),
 						d = v[0],
 						h = v[1],
 						m = g(['react-colorful', n]);
-					return react.createElement(
+					return compat_module.default.createElement(
 						'div',
 						u({}, s, { ref: f, className: m }),
-						react.createElement(T, { hsva: d, onChange: h }),
-						react.createElement(S, { hue: d.h, onChange: h, className: 'react-colorful__last-control' })
+						compat_module.default.createElement(T, { hsva: d, onChange: h }),
+						compat_module.default.createElement(S, { hue: d.h, onChange: h, className: 'react-colorful__last-control' })
 					);
 				},
 				W = {
@@ -415,11 +424,11 @@
 						a = { backgroundImage: 'linear-gradient(90deg, ' + k(Object.assign({}, n, { a: 0 })) + ', ' + k(Object.assign({}, n, { a: 1 })) + ')' },
 						l = g(['react-colorful__alpha', t]),
 						u = b(100 * n.a);
-					return react.createElement(
+					return compat_module.default.createElement(
 						'div',
 						{ className: l },
-						react.createElement('div', { className: 'react-colorful__alpha-gradient', style: a }),
-						react.createElement(
+						compat_module.default.createElement('div', { className: 'react-colorful__alpha-gradient', style: a }),
+						compat_module.default.createElement(
 							m,
 							{
 								onMove: function (e) {
@@ -434,7 +443,7 @@
 								'aria-valuemin': '0',
 								'aria-valuemax': '100',
 							},
-							react.createElement(p, { className: 'react-colorful__alpha-pointer', left: n.a, color: k(n) })
+							compat_module.default.createElement(p, { className: 'react-colorful__alpha-pointer', left: n.a, color: k(n) })
 						)
 					);
 				},
@@ -445,18 +454,18 @@
 						l = void 0 === a ? o.defaultColor : a,
 						i = t.onChange,
 						s = c(t, ['className', 'colorModel', 'color', 'onChange']),
-						f = (0, react.useRef)(null);
+						f = (0, compat_module.useRef)(null);
 					Q(f);
 					var v = Y(o, l, i),
 						d = v[0],
 						h = v[1],
 						m = g(['react-colorful', n]);
-					return react.createElement(
+					return compat_module.default.createElement(
 						'div',
 						u({}, s, { ref: f, className: m }),
-						react.createElement(T, { hsva: d, onChange: h }),
-						react.createElement(S, { hue: d.h, onChange: h }),
-						react.createElement(ee, { hsva: d, onChange: h, className: 'react-colorful__last-control' })
+						compat_module.default.createElement(T, { hsva: d, onChange: h }),
+						compat_module.default.createElement(S, { hue: d.h, onChange: h }),
+						compat_module.default.createElement(ee, { hsva: d, onChange: h, className: 'react-colorful__last-control' })
 					);
 				},
 				le = { defaultColor: 'hsla(0, 0%, 0%, 1)', toHsva: H, fromHsva: k, equal: P },
@@ -469,12 +478,12 @@
 					},
 					equal: P,
 				},
-				color_convert = __webpack_require__(61165),
+				color_convert = __webpack_require__('../../node_modules/color-convert/index.js'),
 				color_convert_default = __webpack_require__.n(color_convert),
-				throttle = __webpack_require__(97331),
+				throttle = __webpack_require__('../../node_modules/lodash/throttle.js'),
 				throttle_default = __webpack_require__.n(throttle),
-				esm = __webpack_require__(99364);
-			__webpack_require__(94290);
+				esm = __webpack_require__('../../node_modules/@storybook/theming/dist/esm/index.js');
+			__webpack_require__('../../node_modules/core-js/modules/es.string.bold.js');
 			function _objectWithoutProperties(source, excluded) {
 				if (null == source) return {};
 				var key,
@@ -516,15 +525,15 @@
 				TooltipNote = function TooltipNote(_ref2) {
 					var note = _ref2.note,
 						props = _objectWithoutProperties(_ref2, ['note']);
-					return react.createElement(Note, props, note);
+					return compat_module.default.createElement(Note, props, note);
 				};
 			TooltipNote.displayName = 'TooltipNote';
 			var _ColorPicker,
 				_fallbackColor,
-				lazy_WithTooltip = __webpack_require__(69594),
-				esm_form = __webpack_require__(74089),
-				icon = __webpack_require__(29735),
-				helpers = __webpack_require__(75578);
+				lazy_WithTooltip = __webpack_require__('../../node_modules/@storybook/components/dist/esm/tooltip/lazy-WithTooltip.js'),
+				esm_form = __webpack_require__('../../node_modules/@storybook/components/dist/esm/form/index.js'),
+				icon = __webpack_require__('../../node_modules/@storybook/components/dist/esm/icon/icon.js'),
+				helpers = __webpack_require__('../../node_modules/@storybook/components/dist/esm/controls/helpers.js');
 			function _slicedToArray(arr, i) {
 				return (
 					(function _arrayWithHoles(arr) {
@@ -644,7 +653,10 @@
 								'url(\'data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill-opacity=".05"><path d="M8 0h8v8H8zM0 8h8v8H0z"/></svg>\')',
 								', linear-gradient(#fff, #fff)'
 							);
-					return react.createElement(SwatchColor, _extends({}, props, { active, onClick, style: Object.assign({}, style, { backgroundImage }) }));
+					return compat_module.default.createElement(
+						SwatchColor,
+						_extends({}, props, { active, onClick, style: Object.assign({}, style, { backgroundImage }) })
+					);
 				};
 			Swatch.displayName = 'Swatch';
 			var ColorSpace,
@@ -676,13 +688,13 @@
 				SHORTHEX_REGEXP = /^\s*#?([0-9a-f]{3})\s*$/i,
 				ColorPicker =
 					(_defineProperty((_ColorPicker = {}), ColorSpace.HEX, function (r) {
-						return react.createElement(U, u({}, r, { colorModel: W }));
+						return compat_module.default.createElement(U, u({}, r, { colorModel: W }));
 					}),
 					_defineProperty(_ColorPicker, ColorSpace.RGB, function (r) {
-						return react.createElement(re, u({}, r, { colorModel: Ee }));
+						return compat_module.default.createElement(re, u({}, r, { colorModel: Ee }));
 					}),
 					_defineProperty(_ColorPicker, ColorSpace.HSL, function (r) {
-						return react.createElement(re, u({}, r, { colorModel: le }));
+						return compat_module.default.createElement(re, u({}, r, { colorModel: le }));
 					}),
 					_ColorPicker),
 				fallbackColor =
@@ -773,27 +785,27 @@
 					}
 				},
 				useColorInput = function useColorInput(initialValue, onChange) {
-					var _useState2 = _slicedToArray((0, react.useState)(initialValue || ''), 2),
+					var _useState2 = _slicedToArray((0, compat_module.useState)(initialValue || ''), 2),
 						value = _useState2[0],
 						setValue = _useState2[1],
 						_useState4 = _slicedToArray(
-							(0, react.useState)(function () {
+							(0, compat_module.useState)(function () {
 								return parseValue(value);
 							}),
 							2
 						),
 						color = _useState4[0],
 						setColor = _useState4[1],
-						_useState6 = _slicedToArray((0, react.useState)((null == color ? void 0 : color.colorSpace) || ColorSpace.HEX), 2),
+						_useState6 = _slicedToArray((0, compat_module.useState)((null == color ? void 0 : color.colorSpace) || ColorSpace.HEX), 2),
 						colorSpace = _useState6[0],
 						setColorSpace = _useState6[1];
-					(0, react.useEffect)(
+					(0, compat_module.useEffect)(
 						function () {
 							void 0 === initialValue && (setValue(''), setColor(void 0), setColorSpace(ColorSpace.HEX));
 						},
 						[initialValue]
 					);
-					var realValue = (0, react.useMemo)(
+					var realValue = (0, compat_module.useMemo)(
 							function () {
 								return (function getRealValue(value, color, colorSpace) {
 									if (!value || null == color || !color.valid) return fallbackColor[colorSpace];
@@ -815,7 +827,7 @@
 							},
 							[value, color, colorSpace]
 						),
-						updateValue = (0, react.useCallback)(
+						updateValue = (0, compat_module.useCallback)(
 							function (update) {
 								var parsed = parseValue(update);
 								setValue((null == parsed ? void 0 : parsed.value) || update || ''),
@@ -823,7 +835,7 @@
 							},
 							[onChange]
 						),
-						cycleColorSpace = (0, react.useCallback)(
+						cycleColorSpace = (0, compat_module.useCallback)(
 							function () {
 								var next = COLOR_SPACES.indexOf(colorSpace) + 1;
 								next >= COLOR_SPACES.length && (next = 0), setColorSpace(COLOR_SPACES[next]);
@@ -853,16 +865,16 @@
 						colorSpace = _useColorInput.colorSpace,
 						cycleColorSpace = _useColorInput.cycleColorSpace,
 						_usePresets = (function usePresets(presetColors, currentColor, colorSpace) {
-							var _useState8 = _slicedToArray((0, react.useState)(null != currentColor && currentColor.valid ? [currentColor] : []), 2),
+							var _useState8 = _slicedToArray((0, compat_module.useState)(null != currentColor && currentColor.valid ? [currentColor] : []), 2),
 								selectedColors = _useState8[0],
 								setSelectedColors = _useState8[1];
-							(0, react.useEffect)(
+							(0, compat_module.useEffect)(
 								function () {
 									void 0 === currentColor && setSelectedColors([]);
 								},
 								[currentColor]
 							);
-							var presets = (0, react.useMemo)(
+							var presets = (0, compat_module.useMemo)(
 									function () {
 										return (presetColors || [])
 											.map(function (preset) {
@@ -878,7 +890,7 @@
 									},
 									[presetColors, selectedColors]
 								),
-								addPreset = (0, react.useCallback)(
+								addPreset = (0, compat_module.useCallback)(
 									function (color) {
 										null != color &&
 											color.valid &&
@@ -896,10 +908,10 @@
 						presets = _usePresets.presets,
 						addPreset = _usePresets.addPreset,
 						Picker = ColorPicker[colorSpace];
-					return react.createElement(
+					return compat_module.default.createElement(
 						Wrapper,
 						null,
-						react.createElement(
+						compat_module.default.createElement(
 							PickerTooltip,
 							{
 								trigger: 'click',
@@ -908,23 +920,28 @@
 								onVisibilityChange: function onVisibilityChange() {
 									return addPreset(color);
 								},
-								tooltip: react.createElement(
+								tooltip: compat_module.default.createElement(
 									TooltipContent,
 									null,
-									react.createElement(Picker, { color: 'transparent' === realValue ? '#000000' : realValue, onChange: updateValue, onFocus, onBlur }),
+									compat_module.default.createElement(Picker, {
+										color: 'transparent' === realValue ? '#000000' : realValue,
+										onChange: updateValue,
+										onFocus,
+										onBlur,
+									}),
 									presets.length > 0 &&
-										react.createElement(
+										compat_module.default.createElement(
 											Swatches,
 											null,
 											presets.map(function (preset, index) {
-												return react.createElement(
+												return compat_module.default.createElement(
 													lazy_WithTooltip.k,
 													{
 														key: ''.concat(preset.value, '-').concat(index),
 														hasChrome: !1,
-														tooltip: react.createElement(Color_Note, { note: preset.keyword || preset.value }),
+														tooltip: compat_module.default.createElement(Color_Note, { note: preset.keyword || preset.value }),
 													},
-													react.createElement(Swatch, {
+													compat_module.default.createElement(Swatch, {
 														value: preset[colorSpace],
 														active: color && id(preset[colorSpace]) === id(color[colorSpace]),
 														onClick: function onClick() {
@@ -936,9 +953,9 @@
 										)
 								),
 							},
-							react.createElement(Swatch, { value: realValue, style: { margin: 4 } })
+							compat_module.default.createElement(Swatch, { value: realValue, style: { margin: 4 } })
 						),
-						react.createElement(Input, {
+						compat_module.default.createElement(Input, {
 							id: (0, helpers.Z)(name),
 							value,
 							onChange: function onChange(e) {
@@ -949,18 +966,18 @@
 							},
 							placeholder: 'Choose color...',
 						}),
-						value ? react.createElement(ToggleIcon, { icon: 'markup', onClick: cycleColorSpace }) : null
+						value ? compat_module.default.createElement(ToggleIcon, { icon: 'markup', onClick: cycleColorSpace }) : null
 					);
 				};
 			ColorControl.displayName = 'ColorControl';
 			const Color = ColorControl;
 		},
-		37172: (module, __unused_webpack_exports, __webpack_require__) => {
-			function _slicedToArray(arr, i) {
+		'../../node_modules/color-convert/conversions.js': (module, __unused_webpack_exports, __webpack_require__) => {
+			function _slicedToArray(r, e) {
 				return (
-					(function _arrayWithHoles(arr) {
-						if (Array.isArray(arr)) return arr;
-					})(arr) ||
+					(function _arrayWithHoles(r) {
+						if (Array.isArray(r)) return r;
+					})(r) ||
 					(function _iterableToArrayLimit(r, l) {
 						var t = null == r ? null : ('undefined' != typeof Symbol && r[Symbol.iterator]) || r['@@iterator'];
 						if (null != t) {
@@ -987,15 +1004,21 @@
 							}
 							return a;
 						}
-					})(arr, i) ||
-					(function _unsupportedIterableToArray(o, minLen) {
-						if (!o) return;
-						if ('string' == typeof o) return _arrayLikeToArray(o, minLen);
-						var n = Object.prototype.toString.call(o).slice(8, -1);
-						'Object' === n && o.constructor && (n = o.constructor.name);
-						if ('Map' === n || 'Set' === n) return Array.from(o);
-						if ('Arguments' === n || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen);
-					})(arr, i) ||
+					})(r, e) ||
+					(function _unsupportedIterableToArray(r, a) {
+						if (r) {
+							if ('string' == typeof r) return _arrayLikeToArray(r, a);
+							var t = {}.toString.call(r).slice(8, -1);
+							return (
+								'Object' === t && r.constructor && (t = r.constructor.name),
+								'Map' === t || 'Set' === t
+									? Array.from(r)
+									: 'Arguments' === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t)
+									? _arrayLikeToArray(r, a)
+									: void 0
+							);
+						}
+					})(r, e) ||
 					(function _nonIterableRest() {
 						throw new TypeError(
 							'Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.'
@@ -1003,34 +1026,37 @@
 					})()
 				);
 			}
-			function _arrayLikeToArray(arr, len) {
-				(null == len || len > arr.length) && (len = arr.length);
-				for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i];
-				return arr2;
+			function _arrayLikeToArray(r, a) {
+				(null == a || a > r.length) && (a = r.length);
+				for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e];
+				return n;
 			}
-			__webpack_require__(68291),
-				__webpack_require__(75668),
-				__webpack_require__(80630),
-				__webpack_require__(10568),
-				__webpack_require__(87573),
-				__webpack_require__(39428),
-				__webpack_require__(98376),
-				__webpack_require__(34147),
-				__webpack_require__(18981),
-				__webpack_require__(58225),
-				__webpack_require__(31759),
-				__webpack_require__(29911),
-				__webpack_require__(58070),
-				__webpack_require__(93510),
-				__webpack_require__(2432),
-				__webpack_require__(11011),
-				__webpack_require__(33873),
-				__webpack_require__(47010),
-				__webpack_require__(56569),
-				__webpack_require__(93277),
-				__webpack_require__(11875);
+			__webpack_require__('../../node_modules/core-js/modules/es.object.keys.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.object.define-property.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.object.to-string.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.regexp.to-string.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.date.to-string.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.string.match.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.regexp.exec.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.array.join.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.array.map.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.string.split.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.parse-int.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.array.is-array.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.symbol.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.symbol.description.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.symbol.iterator.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.string.iterator.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.array.iterator.js'),
+				__webpack_require__('../../node_modules/core-js/modules/web.dom-collections.iterator.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.array.slice.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.function.name.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.array.from.js');
 			for (
-				var cssKeywords = __webpack_require__(76931), reverseKeywords = {}, _i = 0, _Object$keys = Object.keys(cssKeywords);
+				var cssKeywords = __webpack_require__('../../node_modules/color-name/index.js'),
+					reverseKeywords = {},
+					_i = 0,
+					_Object$keys = Object.keys(cssKeywords);
 				_i < _Object$keys.length;
 				_i++
 			) {
@@ -1493,10 +1519,13 @@
 					return [((rgb[0] + rgb[1] + rgb[2]) / 3 / 255) * 100];
 				});
 		},
-		61165: (module, __unused_webpack_exports, __webpack_require__) => {
-			__webpack_require__(68291), __webpack_require__(79620), __webpack_require__(18867), __webpack_require__(75668);
-			var conversions = __webpack_require__(37172),
-				route = __webpack_require__(93284),
+		'../../node_modules/color-convert/index.js': (module, __unused_webpack_exports, __webpack_require__) => {
+			__webpack_require__('../../node_modules/core-js/modules/es.object.keys.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.array.for-each.js'),
+				__webpack_require__('../../node_modules/core-js/modules/web.dom-collections.for-each.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.object.define-property.js');
+			var conversions = __webpack_require__('../../node_modules/color-convert/conversions.js'),
+				route = __webpack_require__('../../node_modules/color-convert/route.js'),
 				convert = {};
 			Object.keys(conversions).forEach(function (fromModel) {
 				(convert[fromModel] = {}),
@@ -1529,9 +1558,9 @@
 			}),
 				(module.exports = convert);
 		},
-		93284: (module, __unused_webpack_exports, __webpack_require__) => {
-			__webpack_require__(68291);
-			var conversions = __webpack_require__(37172);
+		'../../node_modules/color-convert/route.js': (module, __unused_webpack_exports, __webpack_require__) => {
+			__webpack_require__('../../node_modules/core-js/modules/es.object.keys.js');
+			var conversions = __webpack_require__('../../node_modules/color-convert/conversions.js');
 			function deriveBFS(fromModel) {
 				var graph = (function buildGraph() {
 						for (var graph = {}, models = Object.keys(conversions), len = models.length, i = 0; i < len; i++)
@@ -1569,7 +1598,7 @@
 				return conversion;
 			};
 		},
-		76931: (module) => {
+		'../../node_modules/color-name/index.js': (module) => {
 			'use strict';
 			module.exports = {
 				aliceblue: [240, 248, 255],
@@ -1722,38 +1751,129 @@
 				yellowgreen: [154, 205, 50],
 			};
 		},
-		49364: (module, __unused_webpack_exports, __webpack_require__) => {
-			'use strict';
-			var global = __webpack_require__(51488),
-				fails = __webpack_require__(5234),
-				uncurryThis = __webpack_require__(16881),
-				toString = __webpack_require__(92618),
-				trim = __webpack_require__(92771).trim,
-				whitespaces = __webpack_require__(39209),
-				$parseInt = global.parseInt,
-				Symbol = global.Symbol,
-				ITERATOR = Symbol && Symbol.iterator,
-				hex = /^[+-]?0x/i,
-				exec = uncurryThis(hex.exec),
-				FORCED =
-					8 !== $parseInt(whitespaces + '08') ||
-					22 !== $parseInt(whitespaces + '0x16') ||
-					(ITERATOR &&
-						!fails(function () {
-							$parseInt(Object(ITERATOR));
-						}));
-			module.exports = FORCED
-				? function parseInt(string, radix) {
-						var S = trim(toString(string));
-						return $parseInt(S, radix >>> 0 || (exec(hex, S) ? 16 : 10));
-				  }
-				: $parseInt;
+		'../../node_modules/lodash/_baseTrim.js': (module, __unused_webpack_exports, __webpack_require__) => {
+			var trimmedEndIndex = __webpack_require__('../../node_modules/lodash/_trimmedEndIndex.js'),
+				reTrimStart = /^\s+/;
+			module.exports = function baseTrim(string) {
+				return string ? string.slice(0, trimmedEndIndex(string) + 1).replace(reTrimStart, '') : string;
+			};
 		},
-		31759: (__unused_webpack_module, __unused_webpack_exports, __webpack_require__) => {
-			'use strict';
-			var $ = __webpack_require__(5613),
-				$parseInt = __webpack_require__(49364);
-			$({ global: !0, forced: parseInt !== $parseInt }, { parseInt: $parseInt });
+		'../../node_modules/lodash/_trimmedEndIndex.js': (module) => {
+			var reWhitespace = /\s/;
+			module.exports = function trimmedEndIndex(string) {
+				for (var index = string.length; index-- && reWhitespace.test(string.charAt(index)); );
+				return index;
+			};
+		},
+		'../../node_modules/lodash/debounce.js': (module, __unused_webpack_exports, __webpack_require__) => {
+			var isObject = __webpack_require__('../../node_modules/lodash/isObject.js'),
+				now = __webpack_require__('../../node_modules/lodash/now.js'),
+				toNumber = __webpack_require__('../../node_modules/lodash/toNumber.js'),
+				nativeMax = Math.max,
+				nativeMin = Math.min;
+			module.exports = function debounce(func, wait, options) {
+				var lastArgs,
+					lastThis,
+					maxWait,
+					result,
+					timerId,
+					lastCallTime,
+					lastInvokeTime = 0,
+					leading = !1,
+					maxing = !1,
+					trailing = !0;
+				if ('function' != typeof func) throw new TypeError('Expected a function');
+				function invokeFunc(time) {
+					var args = lastArgs,
+						thisArg = lastThis;
+					return (lastArgs = lastThis = void 0), (lastInvokeTime = time), (result = func.apply(thisArg, args));
+				}
+				function shouldInvoke(time) {
+					var timeSinceLastCall = time - lastCallTime;
+					return void 0 === lastCallTime || timeSinceLastCall >= wait || timeSinceLastCall < 0 || (maxing && time - lastInvokeTime >= maxWait);
+				}
+				function timerExpired() {
+					var time = now();
+					if (shouldInvoke(time)) return trailingEdge(time);
+					timerId = setTimeout(
+						timerExpired,
+						(function remainingWait(time) {
+							var timeWaiting = wait - (time - lastCallTime);
+							return maxing ? nativeMin(timeWaiting, maxWait - (time - lastInvokeTime)) : timeWaiting;
+						})(time)
+					);
+				}
+				function trailingEdge(time) {
+					return (timerId = void 0), trailing && lastArgs ? invokeFunc(time) : ((lastArgs = lastThis = void 0), result);
+				}
+				function debounced() {
+					var time = now(),
+						isInvoking = shouldInvoke(time);
+					if (((lastArgs = arguments), (lastThis = this), (lastCallTime = time), isInvoking)) {
+						if (void 0 === timerId)
+							return (function leadingEdge(time) {
+								return (lastInvokeTime = time), (timerId = setTimeout(timerExpired, wait)), leading ? invokeFunc(time) : result;
+							})(lastCallTime);
+						if (maxing) return clearTimeout(timerId), (timerId = setTimeout(timerExpired, wait)), invokeFunc(lastCallTime);
+					}
+					return void 0 === timerId && (timerId = setTimeout(timerExpired, wait)), result;
+				}
+				return (
+					(wait = toNumber(wait) || 0),
+					isObject(options) &&
+						((leading = !!options.leading),
+						(maxWait = (maxing = 'maxWait' in options) ? nativeMax(toNumber(options.maxWait) || 0, wait) : maxWait),
+						(trailing = 'trailing' in options ? !!options.trailing : trailing)),
+					(debounced.cancel = function cancel() {
+						void 0 !== timerId && clearTimeout(timerId), (lastInvokeTime = 0), (lastArgs = lastCallTime = lastThis = timerId = void 0);
+					}),
+					(debounced.flush = function flush() {
+						return void 0 === timerId ? result : trailingEdge(now());
+					}),
+					debounced
+				);
+			};
+		},
+		'../../node_modules/lodash/now.js': (module, __unused_webpack_exports, __webpack_require__) => {
+			var root = __webpack_require__('../../node_modules/lodash/_root.js');
+			module.exports = function () {
+				return root.Date.now();
+			};
+		},
+		'../../node_modules/lodash/throttle.js': (module, __unused_webpack_exports, __webpack_require__) => {
+			var debounce = __webpack_require__('../../node_modules/lodash/debounce.js'),
+				isObject = __webpack_require__('../../node_modules/lodash/isObject.js');
+			module.exports = function throttle(func, wait, options) {
+				var leading = !0,
+					trailing = !0;
+				if ('function' != typeof func) throw new TypeError('Expected a function');
+				return (
+					isObject(options) &&
+						((leading = 'leading' in options ? !!options.leading : leading), (trailing = 'trailing' in options ? !!options.trailing : trailing)),
+					debounce(func, wait, { leading, maxWait: wait, trailing })
+				);
+			};
+		},
+		'../../node_modules/lodash/toNumber.js': (module, __unused_webpack_exports, __webpack_require__) => {
+			var baseTrim = __webpack_require__('../../node_modules/lodash/_baseTrim.js'),
+				isObject = __webpack_require__('../../node_modules/lodash/isObject.js'),
+				isSymbol = __webpack_require__('../../node_modules/lodash/isSymbol.js'),
+				reIsBadHex = /^[-+]0x[0-9a-f]+$/i,
+				reIsBinary = /^0b[01]+$/i,
+				reIsOctal = /^0o[0-7]+$/i,
+				freeParseInt = parseInt;
+			module.exports = function toNumber(value) {
+				if ('number' == typeof value) return value;
+				if (isSymbol(value)) return NaN;
+				if (isObject(value)) {
+					var other = 'function' == typeof value.valueOf ? value.valueOf() : value;
+					value = isObject(other) ? other + '' : other;
+				}
+				if ('string' != typeof value) return 0 === value ? value : +value;
+				value = baseTrim(value);
+				var isBinary = reIsBinary.test(value);
+				return isBinary || reIsOctal.test(value) ? freeParseInt(value.slice(2), isBinary ? 2 : 8) : reIsBadHex.test(value) ? NaN : +value;
+			};
 		},
 	},
 ]);

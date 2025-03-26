@@ -1,8 +1,12 @@
-/*! For license information please see 777.020db1feb12d0f91ed1d.manager.bundle.js.LICENSE.txt */
+/*! For license information please see 777.546485aa.iframe.bundle.js.LICENSE.txt */
 (self.webpackChunk_searchspring_snap_preact_components = self.webpackChunk_searchspring_snap_preact_components || []).push([
 	[777],
 	{
-		61777: (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+		'../../node_modules/@storybook/components/dist/esm/syntaxhighlighter/syntaxhighlighter.js': (
+			__unused_webpack_module,
+			__webpack_exports__,
+			__webpack_require__
+		) => {
 			'use strict';
 			__webpack_require__.r(__webpack_exports__),
 				__webpack_require__.d(__webpack_exports__, {
@@ -10,72 +14,72 @@
 					createCopyToClipboardFunction: () => createCopyToClipboardFunction,
 					default: () => syntaxhighlighter,
 				});
-			__webpack_require__(32914),
-				__webpack_require__(69431),
-				__webpack_require__(87050),
-				__webpack_require__(72273),
-				__webpack_require__(80630),
-				__webpack_require__(10568),
-				__webpack_require__(58070),
-				__webpack_require__(93510),
-				__webpack_require__(2432),
-				__webpack_require__(11011),
-				__webpack_require__(33873),
-				__webpack_require__(47010),
-				__webpack_require__(56569),
-				__webpack_require__(93277),
-				__webpack_require__(11875),
-				__webpack_require__(10865),
-				__webpack_require__(68291);
-			var react = __webpack_require__(14041),
-				esm = __webpack_require__(69108),
-				dist_esm = __webpack_require__(99364),
-				global_window = __webpack_require__(82553),
+			__webpack_require__('../../node_modules/@storybook/components/node_modules/regenerator-runtime/runtime.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.object.entries.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.object.assign.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.string.trim.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.object.to-string.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.regexp.to-string.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.symbol.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.symbol.description.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.symbol.iterator.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.string.iterator.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.array.iterator.js'),
+				__webpack_require__('../../node_modules/core-js/modules/web.dom-collections.iterator.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.array.slice.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.function.name.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.array.from.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.promise.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.object.keys.js');
+			var compat_module = __webpack_require__('../../node_modules/preact/compat/dist/compat.module.js'),
+				esm = __webpack_require__('../../node_modules/@storybook/client-logger/dist/esm/index.js'),
+				dist_esm = __webpack_require__('../../node_modules/@storybook/theming/dist/esm/index.js'),
+				global_window = __webpack_require__('../../node_modules/global/window.js'),
 				window_default = __webpack_require__.n(global_window),
-				memoizerific = __webpack_require__(27430),
+				memoizerific = __webpack_require__('../../node_modules/memoizerific/memoizerific.js'),
 				memoizerific_default = __webpack_require__.n(memoizerific),
-				jsx = __webpack_require__(9136);
+				jsx = __webpack_require__('../../node_modules/refractor/lang/jsx.js');
 			const prism_jsx = __webpack_require__.n(jsx)();
-			var bash = __webpack_require__(53807);
+			var bash = __webpack_require__('../../node_modules/refractor/lang/bash.js');
 			const prism_bash = __webpack_require__.n(bash)();
-			var css = __webpack_require__(80626);
+			var css = __webpack_require__('../../node_modules/refractor/lang/css.js');
 			const prism_css = __webpack_require__.n(css)();
-			var js_extras = __webpack_require__(89024);
+			var js_extras = __webpack_require__('../../node_modules/refractor/lang/js-extras.js');
 			const prism_js_extras = __webpack_require__.n(js_extras)();
-			var json = __webpack_require__(77643);
+			var json = __webpack_require__('../../node_modules/refractor/lang/json.js');
 			const prism_json = __webpack_require__.n(json)();
-			var graphql = __webpack_require__(96356);
+			var graphql = __webpack_require__('../../node_modules/refractor/lang/graphql.js');
 			const prism_graphql = __webpack_require__.n(graphql)();
-			var markup = __webpack_require__(80929);
+			var markup = __webpack_require__('../../node_modules/refractor/lang/markup.js');
 			const prism_markup = __webpack_require__.n(markup)();
-			var markdown = __webpack_require__(78836);
+			var markdown = __webpack_require__('../../node_modules/refractor/lang/markdown.js');
 			const prism_markdown = __webpack_require__.n(markdown)();
-			var yaml = __webpack_require__(80450);
+			var yaml = __webpack_require__('../../node_modules/refractor/lang/yaml.js');
 			const prism_yaml = __webpack_require__.n(yaml)();
-			var tsx = __webpack_require__(54274);
+			var tsx = __webpack_require__('../../node_modules/refractor/lang/tsx.js');
 			const prism_tsx = __webpack_require__.n(tsx)();
-			var typescript = __webpack_require__(83410);
+			var typescript = __webpack_require__('../../node_modules/refractor/lang/typescript.js');
 			const prism_typescript = __webpack_require__.n(typescript)();
-			var objectWithoutPropertiesLoose = __webpack_require__(17502);
-			var defineProperty = __webpack_require__(98158);
-			function _objectSpread(target) {
-				for (var i = 1; i < arguments.length; i++) {
-					var source = null != arguments[i] ? Object(arguments[i]) : {},
-						ownKeys = Object.keys(source);
+			var objectWithoutPropertiesLoose = __webpack_require__('../../node_modules/@babel/runtime/helpers/esm/objectWithoutPropertiesLoose.js');
+			var defineProperty = __webpack_require__('../../node_modules/@babel/runtime/helpers/esm/defineProperty.js');
+			function _objectSpread(e) {
+				for (var r = 1; r < arguments.length; r++) {
+					var t = null != arguments[r] ? Object(arguments[r]) : {},
+						o = Object.keys(t);
 					'function' == typeof Object.getOwnPropertySymbols &&
-						ownKeys.push.apply(
-							ownKeys,
-							Object.getOwnPropertySymbols(source).filter(function (sym) {
-								return Object.getOwnPropertyDescriptor(source, sym).enumerable;
+						o.push.apply(
+							o,
+							Object.getOwnPropertySymbols(t).filter(function (e) {
+								return Object.getOwnPropertyDescriptor(t, e).enumerable;
 							})
 						),
-						ownKeys.forEach(function (key) {
-							(0, defineProperty.A)(target, key, source[key]);
+						o.forEach(function (r) {
+							(0, defineProperty.A)(e, r, t[r]);
 						});
 				}
-				return target;
+				return e;
 			}
-			var esm_extends = __webpack_require__(89575);
+			var esm_extends = __webpack_require__('../../node_modules/@babel/runtime/helpers/esm/extends.js');
 			function createStyleObject(classNames) {
 				var elementStyle = arguments.length > 1 && void 0 !== arguments[1] ? arguments[1] : {},
 					stylesheet = arguments.length > 2 ? arguments[2] : void 0;
@@ -126,12 +130,9 @@
 							  )
 							: _objectSpread({}, properties, { className: createClassNameString(properties.className) }),
 						children = childrenCreator(node.children);
-					return react.createElement(TagName, (0, esm_extends.A)({ key }, props), children);
+					return compat_module.default.createElement(TagName, (0, esm_extends.A)({ key }, props), children);
 				}
 			}
-			const checkForListedLanguage = function (astGenerator, language) {
-				return -1 !== astGenerator.listLanguages().indexOf(language);
-			};
 			var newLineRegex = /\n/g;
 			function AllLineNumbers(_ref2) {
 				var codeString = _ref2.codeString,
@@ -141,7 +142,7 @@
 					_ref2$numberStyle = _ref2.numberStyle,
 					numberStyle = void 0 === _ref2$numberStyle ? {} : _ref2$numberStyle,
 					startingLineNumber = _ref2.startingLineNumber;
-				return react.createElement(
+				return compat_module.default.createElement(
 					'code',
 					{ style: Object.assign({}, codeStyle, containerStyle) },
 					(function getAllLineNumbers(_ref) {
@@ -150,7 +151,7 @@
 							style = _ref.style;
 						return lines.map(function (_, i) {
 							var number = i + startingLineNumber;
-							return react.createElement(
+							return compat_module.default.createElement(
 								'span',
 								{
 									key: 'line-'.concat(i),
@@ -322,7 +323,7 @@
 			function isHighlightJs(astGenerator) {
 				return astGenerator && void 0 !== astGenerator.highlightAuto;
 			}
-			var core = __webpack_require__(493),
+			var core = __webpack_require__('../../node_modules/refractor/core.js'),
 				core_default = __webpack_require__.n(core),
 				SyntaxHighlighter = (function highlight(defaultAstGenerator, defaultStyle) {
 					return function SyntaxHighlighter(_ref7) {
@@ -359,18 +360,16 @@
 							_ref7$code = _ref7.code,
 							code = void 0 === _ref7$code ? (Array.isArray(children) ? children[0] : children) : _ref7$code,
 							astGenerator = _ref7.astGenerator,
-							rest = (function _objectWithoutProperties(source, excluded) {
-								if (null == source) return {};
-								var key,
-									i,
-									target = (0, objectWithoutPropertiesLoose.A)(source, excluded);
+							rest = (function _objectWithoutProperties(e, t) {
+								if (null == e) return {};
+								var o,
+									r,
+									i = (0, objectWithoutPropertiesLoose.A)(e, t);
 								if (Object.getOwnPropertySymbols) {
-									var sourceSymbolKeys = Object.getOwnPropertySymbols(source);
-									for (i = 0; i < sourceSymbolKeys.length; i++)
-										(key = sourceSymbolKeys[i]),
-											excluded.indexOf(key) >= 0 || (Object.prototype.propertyIsEnumerable.call(source, key) && (target[key] = source[key]));
+									var n = Object.getOwnPropertySymbols(e);
+									for (r = 0; r < n.length; r++) (o = n[r]), -1 === t.indexOf(o) && {}.propertyIsEnumerable.call(e, o) && (i[o] = e[o]);
 								}
-								return target;
+								return i;
 							})(_ref7, [
 								'language',
 								'children',
@@ -393,7 +392,7 @@
 							]);
 						astGenerator = astGenerator || defaultAstGenerator;
 						var allLineNumbers = showLineNumbers
-								? react.createElement(AllLineNumbers, {
+								? compat_module.default.createElement(AllLineNumbers, {
 										containerStyle: lineNumberContainerStyle,
 										codeStyle: codeTagProps.style || {},
 										numberStyle: lineNumberStyle,
@@ -409,7 +408,13 @@
 										className: rest.className ? ''.concat(generatorClassName, ' ').concat(rest.className) : generatorClassName,
 										style: Object.assign({}, customStyle),
 								  });
-						if (!astGenerator) return react.createElement(PreTag, preProps, allLineNumbers, react.createElement(CodeTag, codeTagProps, code));
+						if (!astGenerator)
+							return compat_module.default.createElement(
+								PreTag,
+								preProps,
+								allLineNumbers,
+								compat_module.default.createElement(CodeTag, codeTagProps, code)
+							);
 						(wrapLines = !(!renderer || void 0 !== wrapLines) || wrapLines), (renderer = renderer || defaultRenderer);
 						var defaultCodeValue = [{ type: 'text', value: code }],
 							codeTree = (function getCodeTree(_ref6) {
@@ -418,7 +423,9 @@
 									code = _ref6.code,
 									defaultCodeValue = _ref6.defaultCodeValue;
 								if (isHighlightJs(astGenerator)) {
-									var hasLanguage = checkForListedLanguage(astGenerator, language);
+									var hasLanguage = (function (astGenerator, language) {
+										return -1 !== astGenerator.listLanguages().indexOf(language);
+									})(astGenerator, language);
 									return 'text' === language
 										? { value: defaultCodeValue, language: 'text' }
 										: hasLanguage
@@ -442,10 +449,10 @@
 							codeTree.value.length + startingLineNumber,
 							lineNumberStyle
 						);
-						return react.createElement(
+						return compat_module.default.createElement(
 							PreTag,
 							preProps,
-							react.createElement(
+							compat_module.default.createElement(
 								CodeTag,
 								codeTagProps,
 								!showInlineLineNumbers && allLineNumbers,
@@ -458,9 +465,9 @@
 				return core_default().register(language);
 			};
 			const prism_light = SyntaxHighlighter;
-			var ActionBar = __webpack_require__(16687),
-				ScrollArea = __webpack_require__(72261),
-				ts_dedent_esm = __webpack_require__(8968),
+			var ActionBar = __webpack_require__('../../node_modules/@storybook/components/dist/esm/ActionBar/ActionBar.js'),
+				ScrollArea = __webpack_require__('../../node_modules/@storybook/components/dist/esm/ScrollArea/ScrollArea.js'),
+				ts_dedent_esm = __webpack_require__('../../node_modules/ts-dedent/esm/index.js'),
 				formatter = memoizerific_default()(2)(function (code) {
 					return (0, ts_dedent_esm.A)(code);
 				});
@@ -645,7 +652,7 @@
 				Scroller = (0, dist_esm.styled)(function (_ref6) {
 					var children = _ref6.children,
 						className = _ref6.className;
-					return react.createElement(ScrollArea.F, { horizontal: !0, vertical: !0, className }, children);
+					return compat_module.default.createElement(ScrollArea.F, { horizontal: !0, vertical: !0, className }, children);
 				})(
 					{ position: 'relative' },
 					function (_ref7) {
@@ -689,7 +696,7 @@
 						]);
 					if ('string' != typeof children || !children.trim()) return null;
 					var highlightableCode = format ? formatter(children) : children.trim(),
-						_useState2 = _slicedToArray((0, react.useState)(!1), 2),
+						_useState2 = _slicedToArray((0, compat_module.useState)(!1), 2),
 						copied = _useState2[0],
 						setCopied = _useState2[1],
 						onClick = function onClick(e) {
@@ -703,15 +710,15 @@
 											return setCopied(!1);
 										}, 1500);
 								})
-								.catch(esm.logger.error);
+								.catch(esm.vF.error);
 						};
-					return react.createElement(
+					return compat_module.default.createElement(
 						Wrapper,
 						{ bordered, padded, className, onCopyCapture: onClick },
-						react.createElement(
+						compat_module.default.createElement(
 							Scroller,
 							null,
-							react.createElement(
+							compat_module.default.createElement(
 								prism_light,
 								_extends(
 									{
@@ -729,391 +736,25 @@
 								highlightableCode
 							)
 						),
-						copyable ? react.createElement(ActionBar.E, { actionItems: [{ title: copied ? 'Copied' : 'Copy', onClick }] }) : null
+						copyable ? compat_module.default.createElement(ActionBar.E, { actionItems: [{ title: copied ? 'Copied' : 'Copy', onClick }] }) : null
 					);
 				};
 			syntaxhighlighter_SyntaxHighlighter.displayName = 'SyntaxHighlighter';
 			const syntaxhighlighter = syntaxhighlighter_SyntaxHighlighter;
 		},
-		32914: (module) => {
-			var runtime = (function (exports) {
-				'use strict';
-				var undefined,
-					Op = Object.prototype,
-					hasOwn = Op.hasOwnProperty,
-					defineProperty =
-						Object.defineProperty ||
-						function (obj, key, desc) {
-							obj[key] = desc.value;
-						},
-					$Symbol = 'function' == typeof Symbol ? Symbol : {},
-					iteratorSymbol = $Symbol.iterator || '@@iterator',
-					asyncIteratorSymbol = $Symbol.asyncIterator || '@@asyncIterator',
-					toStringTagSymbol = $Symbol.toStringTag || '@@toStringTag';
-				function define(obj, key, value) {
-					return Object.defineProperty(obj, key, { value, enumerable: !0, configurable: !0, writable: !0 }), obj[key];
-				}
-				try {
-					define({}, '');
-				} catch (err) {
-					define = function (obj, key, value) {
-						return (obj[key] = value);
-					};
-				}
-				function wrap(innerFn, outerFn, self, tryLocsList) {
-					var protoGenerator = outerFn && outerFn.prototype instanceof Generator ? outerFn : Generator,
-						generator = Object.create(protoGenerator.prototype),
-						context = new Context(tryLocsList || []);
-					return defineProperty(generator, '_invoke', { value: makeInvokeMethod(innerFn, self, context) }), generator;
-				}
-				function tryCatch(fn, obj, arg) {
-					try {
-						return { type: 'normal', arg: fn.call(obj, arg) };
-					} catch (err) {
-						return { type: 'throw', arg: err };
-					}
-				}
-				exports.wrap = wrap;
-				var GenStateSuspendedStart = 'suspendedStart',
-					GenStateSuspendedYield = 'suspendedYield',
-					GenStateExecuting = 'executing',
-					GenStateCompleted = 'completed',
-					ContinueSentinel = {};
-				function Generator() {}
-				function GeneratorFunction() {}
-				function GeneratorFunctionPrototype() {}
-				var IteratorPrototype = {};
-				define(IteratorPrototype, iteratorSymbol, function () {
-					return this;
-				});
-				var getProto = Object.getPrototypeOf,
-					NativeIteratorPrototype = getProto && getProto(getProto(values([])));
-				NativeIteratorPrototype &&
-					NativeIteratorPrototype !== Op &&
-					hasOwn.call(NativeIteratorPrototype, iteratorSymbol) &&
-					(IteratorPrototype = NativeIteratorPrototype);
-				var Gp = (GeneratorFunctionPrototype.prototype = Generator.prototype = Object.create(IteratorPrototype));
-				function defineIteratorMethods(prototype) {
-					['next', 'throw', 'return'].forEach(function (method) {
-						define(prototype, method, function (arg) {
-							return this._invoke(method, arg);
-						});
-					});
-				}
-				function AsyncIterator(generator, PromiseImpl) {
-					function invoke(method, arg, resolve, reject) {
-						var record = tryCatch(generator[method], generator, arg);
-						if ('throw' !== record.type) {
-							var result = record.arg,
-								value = result.value;
-							return value && 'object' == typeof value && hasOwn.call(value, '__await')
-								? PromiseImpl.resolve(value.__await).then(
-										function (value) {
-											invoke('next', value, resolve, reject);
-										},
-										function (err) {
-											invoke('throw', err, resolve, reject);
-										}
-								  )
-								: PromiseImpl.resolve(value).then(
-										function (unwrapped) {
-											(result.value = unwrapped), resolve(result);
-										},
-										function (error) {
-											return invoke('throw', error, resolve, reject);
-										}
-								  );
-						}
-						reject(record.arg);
-					}
-					var previousPromise;
-					defineProperty(this, '_invoke', {
-						value: function enqueue(method, arg) {
-							function callInvokeWithMethodAndArg() {
-								return new PromiseImpl(function (resolve, reject) {
-									invoke(method, arg, resolve, reject);
-								});
-							}
-							return (previousPromise = previousPromise
-								? previousPromise.then(callInvokeWithMethodAndArg, callInvokeWithMethodAndArg)
-								: callInvokeWithMethodAndArg());
-						},
-					});
-				}
-				function makeInvokeMethod(innerFn, self, context) {
-					var state = GenStateSuspendedStart;
-					return function invoke(method, arg) {
-						if (state === GenStateExecuting) throw new Error('Generator is already running');
-						if (state === GenStateCompleted) {
-							if ('throw' === method) throw arg;
-							return doneResult();
-						}
-						for (context.method = method, context.arg = arg; ; ) {
-							var delegate = context.delegate;
-							if (delegate) {
-								var delegateResult = maybeInvokeDelegate(delegate, context);
-								if (delegateResult) {
-									if (delegateResult === ContinueSentinel) continue;
-									return delegateResult;
-								}
-							}
-							if ('next' === context.method) context.sent = context._sent = context.arg;
-							else if ('throw' === context.method) {
-								if (state === GenStateSuspendedStart) throw ((state = GenStateCompleted), context.arg);
-								context.dispatchException(context.arg);
-							} else 'return' === context.method && context.abrupt('return', context.arg);
-							state = GenStateExecuting;
-							var record = tryCatch(innerFn, self, context);
-							if ('normal' === record.type) {
-								if (((state = context.done ? GenStateCompleted : GenStateSuspendedYield), record.arg === ContinueSentinel)) continue;
-								return { value: record.arg, done: context.done };
-							}
-							'throw' === record.type && ((state = GenStateCompleted), (context.method = 'throw'), (context.arg = record.arg));
-						}
-					};
-				}
-				function maybeInvokeDelegate(delegate, context) {
-					var methodName = context.method,
-						method = delegate.iterator[methodName];
-					if (method === undefined)
-						return (
-							(context.delegate = null),
-							('throw' === methodName &&
-								delegate.iterator.return &&
-								((context.method = 'return'), (context.arg = undefined), maybeInvokeDelegate(delegate, context), 'throw' === context.method)) ||
-								('return' !== methodName &&
-									((context.method = 'throw'), (context.arg = new TypeError("The iterator does not provide a '" + methodName + "' method")))),
-							ContinueSentinel
-						);
-					var record = tryCatch(method, delegate.iterator, context.arg);
-					if ('throw' === record.type) return (context.method = 'throw'), (context.arg = record.arg), (context.delegate = null), ContinueSentinel;
-					var info = record.arg;
-					return info
-						? info.done
-							? ((context[delegate.resultName] = info.value),
-							  (context.next = delegate.nextLoc),
-							  'return' !== context.method && ((context.method = 'next'), (context.arg = undefined)),
-							  (context.delegate = null),
-							  ContinueSentinel)
-							: info
-						: ((context.method = 'throw'),
-						  (context.arg = new TypeError('iterator result is not an object')),
-						  (context.delegate = null),
-						  ContinueSentinel);
-				}
-				function pushTryEntry(locs) {
-					var entry = { tryLoc: locs[0] };
-					1 in locs && (entry.catchLoc = locs[1]),
-						2 in locs && ((entry.finallyLoc = locs[2]), (entry.afterLoc = locs[3])),
-						this.tryEntries.push(entry);
-				}
-				function resetTryEntry(entry) {
-					var record = entry.completion || {};
-					(record.type = 'normal'), delete record.arg, (entry.completion = record);
-				}
-				function Context(tryLocsList) {
-					(this.tryEntries = [{ tryLoc: 'root' }]), tryLocsList.forEach(pushTryEntry, this), this.reset(!0);
-				}
-				function values(iterable) {
-					if (iterable) {
-						var iteratorMethod = iterable[iteratorSymbol];
-						if (iteratorMethod) return iteratorMethod.call(iterable);
-						if ('function' == typeof iterable.next) return iterable;
-						if (!isNaN(iterable.length)) {
-							var i = -1,
-								next = function next() {
-									for (; ++i < iterable.length; ) if (hasOwn.call(iterable, i)) return (next.value = iterable[i]), (next.done = !1), next;
-									return (next.value = undefined), (next.done = !0), next;
-								};
-							return (next.next = next);
-						}
-					}
-					return { next: doneResult };
-				}
-				function doneResult() {
-					return { value: undefined, done: !0 };
-				}
-				return (
-					(GeneratorFunction.prototype = GeneratorFunctionPrototype),
-					defineProperty(Gp, 'constructor', { value: GeneratorFunctionPrototype, configurable: !0 }),
-					defineProperty(GeneratorFunctionPrototype, 'constructor', { value: GeneratorFunction, configurable: !0 }),
-					(GeneratorFunction.displayName = define(GeneratorFunctionPrototype, toStringTagSymbol, 'GeneratorFunction')),
-					(exports.isGeneratorFunction = function (genFun) {
-						var ctor = 'function' == typeof genFun && genFun.constructor;
-						return !!ctor && (ctor === GeneratorFunction || 'GeneratorFunction' === (ctor.displayName || ctor.name));
-					}),
-					(exports.mark = function (genFun) {
-						return (
-							Object.setPrototypeOf
-								? Object.setPrototypeOf(genFun, GeneratorFunctionPrototype)
-								: ((genFun.__proto__ = GeneratorFunctionPrototype), define(genFun, toStringTagSymbol, 'GeneratorFunction')),
-							(genFun.prototype = Object.create(Gp)),
-							genFun
-						);
-					}),
-					(exports.awrap = function (arg) {
-						return { __await: arg };
-					}),
-					defineIteratorMethods(AsyncIterator.prototype),
-					define(AsyncIterator.prototype, asyncIteratorSymbol, function () {
-						return this;
-					}),
-					(exports.AsyncIterator = AsyncIterator),
-					(exports.async = function (innerFn, outerFn, self, tryLocsList, PromiseImpl) {
-						void 0 === PromiseImpl && (PromiseImpl = Promise);
-						var iter = new AsyncIterator(wrap(innerFn, outerFn, self, tryLocsList), PromiseImpl);
-						return exports.isGeneratorFunction(outerFn)
-							? iter
-							: iter.next().then(function (result) {
-									return result.done ? result.value : iter.next();
-							  });
-					}),
-					defineIteratorMethods(Gp),
-					define(Gp, toStringTagSymbol, 'Generator'),
-					define(Gp, iteratorSymbol, function () {
-						return this;
-					}),
-					define(Gp, 'toString', function () {
-						return '[object Generator]';
-					}),
-					(exports.keys = function (val) {
-						var object = Object(val),
-							keys = [];
-						for (var key in object) keys.push(key);
-						return (
-							keys.reverse(),
-							function next() {
-								for (; keys.length; ) {
-									var key = keys.pop();
-									if (key in object) return (next.value = key), (next.done = !1), next;
-								}
-								return (next.done = !0), next;
-							}
-						);
-					}),
-					(exports.values = values),
-					(Context.prototype = {
-						constructor: Context,
-						reset: function (skipTempReset) {
-							if (
-								((this.prev = 0),
-								(this.next = 0),
-								(this.sent = this._sent = undefined),
-								(this.done = !1),
-								(this.delegate = null),
-								(this.method = 'next'),
-								(this.arg = undefined),
-								this.tryEntries.forEach(resetTryEntry),
-								!skipTempReset)
-							)
-								for (var name in this) 't' === name.charAt(0) && hasOwn.call(this, name) && !isNaN(+name.slice(1)) && (this[name] = undefined);
-						},
-						stop: function () {
-							this.done = !0;
-							var rootRecord = this.tryEntries[0].completion;
-							if ('throw' === rootRecord.type) throw rootRecord.arg;
-							return this.rval;
-						},
-						dispatchException: function (exception) {
-							if (this.done) throw exception;
-							var context = this;
-							function handle(loc, caught) {
-								return (
-									(record.type = 'throw'),
-									(record.arg = exception),
-									(context.next = loc),
-									caught && ((context.method = 'next'), (context.arg = undefined)),
-									!!caught
-								);
-							}
-							for (var i = this.tryEntries.length - 1; i >= 0; --i) {
-								var entry = this.tryEntries[i],
-									record = entry.completion;
-								if ('root' === entry.tryLoc) return handle('end');
-								if (entry.tryLoc <= this.prev) {
-									var hasCatch = hasOwn.call(entry, 'catchLoc'),
-										hasFinally = hasOwn.call(entry, 'finallyLoc');
-									if (hasCatch && hasFinally) {
-										if (this.prev < entry.catchLoc) return handle(entry.catchLoc, !0);
-										if (this.prev < entry.finallyLoc) return handle(entry.finallyLoc);
-									} else if (hasCatch) {
-										if (this.prev < entry.catchLoc) return handle(entry.catchLoc, !0);
-									} else {
-										if (!hasFinally) throw new Error('try statement without catch or finally');
-										if (this.prev < entry.finallyLoc) return handle(entry.finallyLoc);
-									}
-								}
-							}
-						},
-						abrupt: function (type, arg) {
-							for (var i = this.tryEntries.length - 1; i >= 0; --i) {
-								var entry = this.tryEntries[i];
-								if (entry.tryLoc <= this.prev && hasOwn.call(entry, 'finallyLoc') && this.prev < entry.finallyLoc) {
-									var finallyEntry = entry;
-									break;
-								}
-							}
-							finallyEntry &&
-								('break' === type || 'continue' === type) &&
-								finallyEntry.tryLoc <= arg &&
-								arg <= finallyEntry.finallyLoc &&
-								(finallyEntry = null);
-							var record = finallyEntry ? finallyEntry.completion : {};
-							return (
-								(record.type = type),
-								(record.arg = arg),
-								finallyEntry ? ((this.method = 'next'), (this.next = finallyEntry.finallyLoc), ContinueSentinel) : this.complete(record)
-							);
-						},
-						complete: function (record, afterLoc) {
-							if ('throw' === record.type) throw record.arg;
-							return (
-								'break' === record.type || 'continue' === record.type
-									? (this.next = record.arg)
-									: 'return' === record.type
-									? ((this.rval = this.arg = record.arg), (this.method = 'return'), (this.next = 'end'))
-									: 'normal' === record.type && afterLoc && (this.next = afterLoc),
-								ContinueSentinel
-							);
-						},
-						finish: function (finallyLoc) {
-							for (var i = this.tryEntries.length - 1; i >= 0; --i) {
-								var entry = this.tryEntries[i];
-								if (entry.finallyLoc === finallyLoc) return this.complete(entry.completion, entry.afterLoc), resetTryEntry(entry), ContinueSentinel;
-							}
-						},
-						catch: function (tryLoc) {
-							for (var i = this.tryEntries.length - 1; i >= 0; --i) {
-								var entry = this.tryEntries[i];
-								if (entry.tryLoc === tryLoc) {
-									var record = entry.completion;
-									if ('throw' === record.type) {
-										var thrown = record.arg;
-										resetTryEntry(entry);
-									}
-									return thrown;
-								}
-							}
-							throw new Error('illegal catch attempt');
-						},
-						delegateYield: function (iterable, resultName, nextLoc) {
-							return (
-								(this.delegate = { iterator: values(iterable), resultName, nextLoc }),
-								'next' === this.method && (this.arg = undefined),
-								ContinueSentinel
-							);
-						},
-					}),
-					exports
-				);
-			})(module.exports);
-			try {
-				regeneratorRuntime = runtime;
-			} catch (accidentalStrictMode) {
-				'object' == typeof globalThis ? (globalThis.regeneratorRuntime = runtime) : Function('r', 'regeneratorRuntime = r')(runtime);
-			}
+		'../../node_modules/character-entities-legacy/index.json': (module) => {
+			'use strict';
+			module.exports = JSON.parse(
+				'{"AElig":"Æ","AMP":"&","Aacute":"Á","Acirc":"Â","Agrave":"À","Aring":"Å","Atilde":"Ã","Auml":"Ä","COPY":"©","Ccedil":"Ç","ETH":"Ð","Eacute":"É","Ecirc":"Ê","Egrave":"È","Euml":"Ë","GT":">","Iacute":"Í","Icirc":"Î","Igrave":"Ì","Iuml":"Ï","LT":"<","Ntilde":"Ñ","Oacute":"Ó","Ocirc":"Ô","Ograve":"Ò","Oslash":"Ø","Otilde":"Õ","Ouml":"Ö","QUOT":"\\"","REG":"®","THORN":"Þ","Uacute":"Ú","Ucirc":"Û","Ugrave":"Ù","Uuml":"Ü","Yacute":"Ý","aacute":"á","acirc":"â","acute":"´","aelig":"æ","agrave":"à","amp":"&","aring":"å","atilde":"ã","auml":"ä","brvbar":"¦","ccedil":"ç","cedil":"¸","cent":"¢","copy":"©","curren":"¤","deg":"°","divide":"÷","eacute":"é","ecirc":"ê","egrave":"è","eth":"ð","euml":"ë","frac12":"½","frac14":"¼","frac34":"¾","gt":">","iacute":"í","icirc":"î","iexcl":"¡","igrave":"ì","iquest":"¿","iuml":"ï","laquo":"«","lt":"<","macr":"¯","micro":"µ","middot":"·","nbsp":" ","not":"¬","ntilde":"ñ","oacute":"ó","ocirc":"ô","ograve":"ò","ordf":"ª","ordm":"º","oslash":"ø","otilde":"õ","ouml":"ö","para":"¶","plusmn":"±","pound":"£","quot":"\\"","raquo":"»","reg":"®","sect":"§","shy":"­","sup1":"¹","sup2":"²","sup3":"³","szlig":"ß","thorn":"þ","times":"×","uacute":"ú","ucirc":"û","ugrave":"ù","uml":"¨","uuml":"ü","yacute":"ý","yen":"¥","yuml":"ÿ"}'
+			);
 		},
-		70532: (__unused_webpack_module, exports) => {
+		'../../node_modules/character-reference-invalid/index.json': (module) => {
+			'use strict';
+			module.exports = JSON.parse(
+				'{"0":"�","128":"€","130":"‚","131":"ƒ","132":"„","133":"…","134":"†","135":"‡","136":"ˆ","137":"‰","138":"Š","139":"‹","140":"Œ","142":"Ž","145":"‘","146":"’","147":"“","148":"”","149":"•","150":"–","151":"—","152":"˜","153":"™","154":"š","155":"›","156":"œ","158":"ž","159":"Ÿ"}'
+			);
+		},
+		'../../node_modules/comma-separated-tokens/index.js': (__unused_webpack_module, exports) => {
 			'use strict';
 			exports.q = function parse(value) {
 				var val,
@@ -1133,7 +774,7 @@
 				space = ' ',
 				empty = '';
 		},
-		8487: (module) => {
+		'../../node_modules/hast-util-parse-selector/index.js': (module) => {
 			'use strict';
 			module.exports = function parse(selector, defaultTagName) {
 				var subvalue,
@@ -1160,13 +801,13 @@
 			};
 			var search = /[#.]/g;
 		},
-		2719: (module, __unused_webpack_exports, __webpack_require__) => {
+		'../../node_modules/hastscript/factory.js': (module, __unused_webpack_exports, __webpack_require__) => {
 			'use strict';
-			var find = __webpack_require__(24721),
-				normalize = __webpack_require__(66615),
-				parseSelector = __webpack_require__(8487),
-				spaces = __webpack_require__(53551).q,
-				commas = __webpack_require__(70532).q;
+			var find = __webpack_require__('../../node_modules/property-information/find.js'),
+				normalize = __webpack_require__('../../node_modules/property-information/normalize.js'),
+				parseSelector = __webpack_require__('../../node_modules/hast-util-parse-selector/index.js'),
+				spaces = __webpack_require__('../../node_modules/space-separated-tokens/index.js').q,
+				commas = __webpack_require__('../../node_modules/comma-separated-tokens/index.js').q;
 			module.exports = function factory(schema, defaultTagName, caseSensitive) {
 				var adjust = caseSensitive
 					? (function createAdjustMap(values) {
@@ -1257,46 +898,46 @@
 				);
 			}
 		},
-		36512: (module, __unused_webpack_exports, __webpack_require__) => {
+		'../../node_modules/hastscript/html.js': (module, __unused_webpack_exports, __webpack_require__) => {
 			'use strict';
-			var schema = __webpack_require__(50019),
-				html = __webpack_require__(2719)(schema, 'div');
+			var schema = __webpack_require__('../../node_modules/property-information/html.js'),
+				html = __webpack_require__('../../node_modules/hastscript/factory.js')(schema, 'div');
 			(html.displayName = 'html'), (module.exports = html);
 		},
-		17845: (module, __unused_webpack_exports, __webpack_require__) => {
+		'../../node_modules/hastscript/index.js': (module, __unused_webpack_exports, __webpack_require__) => {
 			'use strict';
-			module.exports = __webpack_require__(36512);
+			module.exports = __webpack_require__('../../node_modules/hastscript/html.js');
 		},
-		37295: (module) => {
+		'../../node_modules/is-alphabetical/index.js': (module) => {
 			'use strict';
 			module.exports = function alphabetical(character) {
 				var code = 'string' == typeof character ? character.charCodeAt(0) : character;
 				return (code >= 97 && code <= 122) || (code >= 65 && code <= 90);
 			};
 		},
-		43623: (module, __unused_webpack_exports, __webpack_require__) => {
+		'../../node_modules/is-alphanumerical/index.js': (module, __unused_webpack_exports, __webpack_require__) => {
 			'use strict';
-			var alphabetical = __webpack_require__(37295),
-				decimal = __webpack_require__(15364);
+			var alphabetical = __webpack_require__('../../node_modules/is-alphabetical/index.js'),
+				decimal = __webpack_require__('../../node_modules/is-decimal/index.js');
 			module.exports = function alphanumerical(character) {
 				return alphabetical(character) || decimal(character);
 			};
 		},
-		15364: (module) => {
+		'../../node_modules/is-decimal/index.js': (module) => {
 			'use strict';
 			module.exports = function decimal(character) {
 				var code = 'string' == typeof character ? character.charCodeAt(0) : character;
 				return code >= 48 && code <= 57;
 			};
 		},
-		29816: (module) => {
+		'../../node_modules/is-hexadecimal/index.js': (module) => {
 			'use strict';
 			module.exports = function hexadecimal(character) {
 				var code = 'string' == typeof character ? character.charCodeAt(0) : character;
 				return (code >= 97 && code <= 102) || (code >= 65 && code <= 70) || (code >= 48 && code <= 57);
 			};
 		},
-		29027: (module) => {
+		'../../node_modules/parse-entities/decode-entity.browser.js': (module) => {
 			'use strict';
 			var el;
 			module.exports = function decodeEntity(characters) {
@@ -1310,14 +951,14 @@
 				return char !== entity && char;
 			};
 		},
-		59835: (module, __unused_webpack_exports, __webpack_require__) => {
+		'../../node_modules/parse-entities/index.js': (module, __unused_webpack_exports, __webpack_require__) => {
 			'use strict';
-			var legacy = __webpack_require__(80414),
-				invalid = __webpack_require__(61492),
-				decimal = __webpack_require__(15364),
-				hexadecimal = __webpack_require__(29816),
-				alphanumerical = __webpack_require__(43623),
-				decodeEntity = __webpack_require__(29027);
+			var legacy = __webpack_require__('../../node_modules/character-entities-legacy/index.json'),
+				invalid = __webpack_require__('../../node_modules/character-reference-invalid/index.json'),
+				decimal = __webpack_require__('../../node_modules/is-decimal/index.js'),
+				hexadecimal = __webpack_require__('../../node_modules/is-hexadecimal/index.js'),
+				alphanumerical = __webpack_require__('../../node_modules/is-alphanumerical/index.js'),
+				decodeEntity = __webpack_require__('../../node_modules/parse-entities/decode-entity.browser.js');
 			module.exports = function parseEntities(value, options) {
 				var option,
 					key,
@@ -1518,30 +1159,29 @@
 				(messages[numericDisallowed] = 'Numeric character references cannot be disallowed'),
 				(messages[numericProhibited] = 'Numeric character references cannot be outside the permissible Unicode range');
 		},
-		24721: (module, __unused_webpack_exports, __webpack_require__) => {
+		'../../node_modules/property-information/find.js': (module, __unused_webpack_exports, __webpack_require__) => {
 			'use strict';
-			var normalize = __webpack_require__(66615),
-				DefinedInfo = __webpack_require__(3061),
-				Info = __webpack_require__(62733),
-				data = 'data';
+			var normalize = __webpack_require__('../../node_modules/property-information/normalize.js'),
+				DefinedInfo = __webpack_require__('../../node_modules/property-information/lib/util/defined-info.js'),
+				Info = __webpack_require__('../../node_modules/property-information/lib/util/info.js');
 			module.exports = function find(schema, value) {
 				var normal = normalize(value),
 					prop = value,
 					Type = Info;
 				if (normal in schema.normal) return schema.property[schema.normal[normal]];
 				normal.length > 4 &&
-					normal.slice(0, 4) === data &&
+					'data' === normal.slice(0, 4) &&
 					valid.test(value) &&
 					('-' === value.charAt(4)
 						? (prop = (function datasetToProperty(attribute) {
 								var value = attribute.slice(5).replace(dash, camelcase);
-								return data + value.charAt(0).toUpperCase() + value.slice(1);
+								return 'data' + value.charAt(0).toUpperCase() + value.slice(1);
 						  })(value))
 						: (value = (function datasetToAttribute(property) {
 								var value = property.slice(4);
 								if (dash.test(value)) return property;
 								(value = value.replace(cap, kebab)), '-' !== value.charAt(0) && (value = '-' + value);
-								return data + value;
+								return 'data' + value;
 						  })(value)),
 					(Type = DefinedInfo));
 				return new Type(prop, value);
@@ -1556,20 +1196,20 @@
 				return $0.charAt(1).toUpperCase();
 			}
 		},
-		50019: (module, __unused_webpack_exports, __webpack_require__) => {
+		'../../node_modules/property-information/html.js': (module, __unused_webpack_exports, __webpack_require__) => {
 			'use strict';
-			var merge = __webpack_require__(27341),
-				xlink = __webpack_require__(84344),
-				xml = __webpack_require__(26505),
-				xmlns = __webpack_require__(30218),
-				aria = __webpack_require__(50311),
-				html = __webpack_require__(15175);
+			var merge = __webpack_require__('../../node_modules/property-information/lib/util/merge.js'),
+				xlink = __webpack_require__('../../node_modules/property-information/lib/xlink.js'),
+				xml = __webpack_require__('../../node_modules/property-information/lib/xml.js'),
+				xmlns = __webpack_require__('../../node_modules/property-information/lib/xmlns.js'),
+				aria = __webpack_require__('../../node_modules/property-information/lib/aria.js'),
+				html = __webpack_require__('../../node_modules/property-information/lib/html.js');
 			module.exports = merge([xml, xlink, xmlns, aria, html]);
 		},
-		50311: (module, __unused_webpack_exports, __webpack_require__) => {
+		'../../node_modules/property-information/lib/aria.js': (module, __unused_webpack_exports, __webpack_require__) => {
 			'use strict';
-			var types = __webpack_require__(51496),
-				create = __webpack_require__(18481),
+			var types = __webpack_require__('../../node_modules/property-information/lib/util/types.js'),
+				create = __webpack_require__('../../node_modules/property-information/lib/util/create.js'),
 				booleanish = types.booleanish,
 				number = types.number,
 				spaceSeparated = types.spaceSeparated;
@@ -1630,11 +1270,11 @@
 				},
 			});
 		},
-		15175: (module, __unused_webpack_exports, __webpack_require__) => {
+		'../../node_modules/property-information/lib/html.js': (module, __unused_webpack_exports, __webpack_require__) => {
 			'use strict';
-			var types = __webpack_require__(51496),
-				create = __webpack_require__(18481),
-				caseInsensitiveTransform = __webpack_require__(41652),
+			var types = __webpack_require__('../../node_modules/property-information/lib/util/types.js'),
+				create = __webpack_require__('../../node_modules/property-information/lib/util/create.js'),
+				caseInsensitiveTransform = __webpack_require__('../../node_modules/property-information/lib/util/case-insensitive-transform.js'),
 				boolean = types.boolean,
 				overloadedBoolean = types.overloadedBoolean,
 				booleanish = types.booleanish,
@@ -1927,24 +1567,24 @@
 				},
 			});
 		},
-		41652: (module, __unused_webpack_exports, __webpack_require__) => {
+		'../../node_modules/property-information/lib/util/case-insensitive-transform.js': (module, __unused_webpack_exports, __webpack_require__) => {
 			'use strict';
-			var caseSensitiveTransform = __webpack_require__(5621);
+			var caseSensitiveTransform = __webpack_require__('../../node_modules/property-information/lib/util/case-sensitive-transform.js');
 			module.exports = function caseInsensitiveTransform(attributes, property) {
 				return caseSensitiveTransform(attributes, property.toLowerCase());
 			};
 		},
-		5621: (module) => {
+		'../../node_modules/property-information/lib/util/case-sensitive-transform.js': (module) => {
 			'use strict';
 			module.exports = function caseSensitiveTransform(attributes, attribute) {
 				return attribute in attributes ? attributes[attribute] : attribute;
 			};
 		},
-		18481: (module, __unused_webpack_exports, __webpack_require__) => {
+		'../../node_modules/property-information/lib/util/create.js': (module, __unused_webpack_exports, __webpack_require__) => {
 			'use strict';
-			var normalize = __webpack_require__(66615),
-				Schema = __webpack_require__(99750),
-				DefinedInfo = __webpack_require__(3061);
+			var normalize = __webpack_require__('../../node_modules/property-information/normalize.js'),
+				Schema = __webpack_require__('../../node_modules/property-information/lib/util/schema.js'),
+				DefinedInfo = __webpack_require__('../../node_modules/property-information/lib/util/defined-info.js');
 			module.exports = function create(definition) {
 				var prop,
 					info,
@@ -1964,10 +1604,10 @@
 				return new Schema(property, normal, space);
 			};
 		},
-		3061: (module, __unused_webpack_exports, __webpack_require__) => {
+		'../../node_modules/property-information/lib/util/defined-info.js': (module, __unused_webpack_exports, __webpack_require__) => {
 			'use strict';
-			var Info = __webpack_require__(62733),
-				types = __webpack_require__(51496);
+			var Info = __webpack_require__('../../node_modules/property-information/lib/util/info.js'),
+				types = __webpack_require__('../../node_modules/property-information/lib/util/types.js');
 			(module.exports = DefinedInfo), (DefinedInfo.prototype = new Info()), (DefinedInfo.prototype.defined = !0);
 			var checks = ['boolean', 'booleanish', 'overloadedBoolean', 'number', 'commaSeparated', 'spaceSeparated', 'commaOrSpaceSeparated'],
 				checksLength = checks.length;
@@ -1981,7 +1621,7 @@
 				value && (values[key] = value);
 			}
 		},
-		62733: (module) => {
+		'../../node_modules/property-information/lib/util/info.js': (module) => {
 			'use strict';
 			module.exports = Info;
 			var proto = Info.prototype;
@@ -2001,10 +1641,10 @@
 				(proto.mustUseProperty = !1),
 				(proto.defined = !1);
 		},
-		27341: (module, __unused_webpack_exports, __webpack_require__) => {
+		'../../node_modules/property-information/lib/util/merge.js': (module, __unused_webpack_exports, __webpack_require__) => {
 			'use strict';
-			var xtend = __webpack_require__(93227),
-				Schema = __webpack_require__(99750);
+			var xtend = __webpack_require__('../../node_modules/xtend/immutable.js'),
+				Schema = __webpack_require__('../../node_modules/property-information/lib/util/schema.js');
 			module.exports = function merge(definitions) {
 				var info,
 					space,
@@ -2016,7 +1656,7 @@
 				return new Schema(xtend.apply(null, property), xtend.apply(null, normal), space);
 			};
 		},
-		99750: (module) => {
+		'../../node_modules/property-information/lib/util/schema.js': (module) => {
 			'use strict';
 			module.exports = Schema;
 			var proto = Schema.prototype;
@@ -2025,7 +1665,7 @@
 			}
 			(proto.space = null), (proto.normal = {}), (proto.property = {});
 		},
-		51496: (__unused_webpack_module, exports) => {
+		'../../node_modules/property-information/lib/util/types.js': (__unused_webpack_module, exports) => {
 			'use strict';
 			var powers = 0;
 			function increment() {
@@ -2039,9 +1679,9 @@
 				(exports.commaSeparated = increment()),
 				(exports.commaOrSpaceSeparated = increment());
 		},
-		84344: (module, __unused_webpack_exports, __webpack_require__) => {
+		'../../node_modules/property-information/lib/xlink.js': (module, __unused_webpack_exports, __webpack_require__) => {
 			'use strict';
-			var create = __webpack_require__(18481);
+			var create = __webpack_require__('../../node_modules/property-information/lib/util/create.js');
 			module.exports = create({
 				space: 'xlink',
 				transform: function xlinkTransform(_, prop) {
@@ -2050,9 +1690,9 @@
 				properties: { xLinkActuate: null, xLinkArcRole: null, xLinkHref: null, xLinkRole: null, xLinkShow: null, xLinkTitle: null, xLinkType: null },
 			});
 		},
-		26505: (module, __unused_webpack_exports, __webpack_require__) => {
+		'../../node_modules/property-information/lib/xml.js': (module, __unused_webpack_exports, __webpack_require__) => {
 			'use strict';
-			var create = __webpack_require__(18481);
+			var create = __webpack_require__('../../node_modules/property-information/lib/util/create.js');
 			module.exports = create({
 				space: 'xml',
 				transform: function xmlTransform(_, prop) {
@@ -2061,10 +1701,10 @@
 				properties: { xmlLang: null, xmlBase: null, xmlSpace: null },
 			});
 		},
-		30218: (module, __unused_webpack_exports, __webpack_require__) => {
+		'../../node_modules/property-information/lib/xmlns.js': (module, __unused_webpack_exports, __webpack_require__) => {
 			'use strict';
-			var create = __webpack_require__(18481),
-				caseInsensitiveTransform = __webpack_require__(41652);
+			var create = __webpack_require__('../../node_modules/property-information/lib/util/create.js'),
+				caseInsensitiveTransform = __webpack_require__('../../node_modules/property-information/lib/util/case-insensitive-transform.js');
 			module.exports = create({
 				space: 'xmlns',
 				attributes: { xmlnsxlink: 'xmlns:xlink' },
@@ -2072,13 +1712,13 @@
 				properties: { xmlns: null, xmlnsXLink: null },
 			});
 		},
-		66615: (module) => {
+		'../../node_modules/property-information/normalize.js': (module) => {
 			'use strict';
 			module.exports = function normalize(value) {
 				return value.toLowerCase();
 			};
 		},
-		493: (module, __unused_webpack_exports, __webpack_require__) => {
+		'../../node_modules/refractor/core.js': (module, __unused_webpack_exports, __webpack_require__) => {
 			'use strict';
 			var ctx =
 					'object' == typeof globalThis
@@ -2099,13 +1739,13 @@
 					};
 				})();
 			ctx.Prism = { manual: !0, disableWorkerMessageHandler: !0 };
-			var h = __webpack_require__(17845),
-				decode = __webpack_require__(59835),
-				Prism = __webpack_require__(82016),
-				markup = __webpack_require__(80929),
-				css = __webpack_require__(80626),
-				clike = __webpack_require__(74207),
-				js = __webpack_require__(33098);
+			var h = __webpack_require__('../../node_modules/hastscript/index.js'),
+				decode = __webpack_require__('../../node_modules/parse-entities/index.js'),
+				Prism = __webpack_require__('../../node_modules/refractor/node_modules/prismjs/components/prism-core.js'),
+				markup = __webpack_require__('../../node_modules/refractor/lang/markup.js'),
+				css = __webpack_require__('../../node_modules/refractor/lang/css.js'),
+				clike = __webpack_require__('../../node_modules/refractor/lang/clike.js'),
+				js = __webpack_require__('../../node_modules/refractor/lang/javascript.js');
 			restore();
 			var own = {}.hasOwnProperty;
 			function Refractor() {}
@@ -2197,7 +1837,7 @@
 					);
 				});
 		},
-		53807: (module) => {
+		'../../node_modules/refractor/lang/bash.js': (module) => {
 			'use strict';
 			function bash(Prism) {
 				!(function (Prism) {
@@ -2318,7 +1958,7 @@
 			}
 			(module.exports = bash), (bash.displayName = 'bash'), (bash.aliases = ['shell']);
 		},
-		74207: (module) => {
+		'../../node_modules/refractor/lang/clike.js': (module) => {
 			'use strict';
 			function clike(Prism) {
 				Prism.languages.clike = {
@@ -2342,7 +1982,7 @@
 			}
 			(module.exports = clike), (clike.displayName = 'clike'), (clike.aliases = []);
 		},
-		80626: (module) => {
+		'../../node_modules/refractor/lang/css.js': (module) => {
 			'use strict';
 			function css(Prism) {
 				!(function (Prism) {
@@ -2380,7 +2020,7 @@
 			}
 			(module.exports = css), (css.displayName = 'css'), (css.aliases = []);
 		},
-		96356: (module) => {
+		'../../node_modules/refractor/lang/graphql.js': (module) => {
 			'use strict';
 			function graphql(Prism) {
 				(Prism.languages.graphql = {
@@ -2478,7 +2118,7 @@
 			}
 			(module.exports = graphql), (graphql.displayName = 'graphql'), (graphql.aliases = []);
 		},
-		33098: (module) => {
+		'../../node_modules/refractor/lang/javascript.js': (module) => {
 			'use strict';
 			function javascript(Prism) {
 				(Prism.languages.javascript = Prism.languages.extend('clike', {
@@ -2597,7 +2237,7 @@
 			}
 			(module.exports = javascript), (javascript.displayName = 'javascript'), (javascript.aliases = ['js']);
 		},
-		89024: (module) => {
+		'../../node_modules/refractor/lang/js-extras.js': (module) => {
 			'use strict';
 			function jsExtras(Prism) {
 				!(function (Prism) {
@@ -2676,7 +2316,7 @@
 			}
 			(module.exports = jsExtras), (jsExtras.displayName = 'jsExtras'), (jsExtras.aliases = []);
 		},
-		77643: (module) => {
+		'../../node_modules/refractor/lang/json.js': (module) => {
 			'use strict';
 			function json(Prism) {
 				(Prism.languages.json = {
@@ -2693,7 +2333,7 @@
 			}
 			(module.exports = json), (json.displayName = 'json'), (json.aliases = ['webmanifest']);
 		},
-		9136: (module) => {
+		'../../node_modules/refractor/lang/jsx.js': (module) => {
 			'use strict';
 			function jsx(Prism) {
 				!(function (Prism) {
@@ -2795,7 +2435,7 @@
 			}
 			(module.exports = jsx), (jsx.displayName = 'jsx'), (jsx.aliases = []);
 		},
-		78836: (module) => {
+		'../../node_modules/refractor/lang/markdown.js': (module) => {
 			'use strict';
 			function markdown(Prism) {
 				!(function (Prism) {
@@ -2984,7 +2624,7 @@
 			}
 			(module.exports = markdown), (markdown.displayName = 'markdown'), (markdown.aliases = ['md']);
 		},
-		80929: (module) => {
+		'../../node_modules/refractor/lang/markup.js': (module) => {
 			'use strict';
 			function markup(Prism) {
 				(Prism.languages.markup = {
@@ -3082,10 +2722,10 @@
 			}
 			(module.exports = markup), (markup.displayName = 'markup'), (markup.aliases = ['html', 'mathml', 'svg', 'xml', 'ssml', 'atom', 'rss']);
 		},
-		54274: (module, __unused_webpack_exports, __webpack_require__) => {
+		'../../node_modules/refractor/lang/tsx.js': (module, __unused_webpack_exports, __webpack_require__) => {
 			'use strict';
-			var refractorJsx = __webpack_require__(9136),
-				refractorTypescript = __webpack_require__(83410);
+			var refractorJsx = __webpack_require__('../../node_modules/refractor/lang/jsx.js'),
+				refractorTypescript = __webpack_require__('../../node_modules/refractor/lang/typescript.js');
 			function tsx(Prism) {
 				Prism.register(refractorJsx),
 					Prism.register(refractorTypescript),
@@ -3100,7 +2740,7 @@
 			}
 			(module.exports = tsx), (tsx.displayName = 'tsx'), (tsx.aliases = []);
 		},
-		83410: (module) => {
+		'../../node_modules/refractor/lang/typescript.js': (module) => {
 			'use strict';
 			function typescript(Prism) {
 				!(function (Prism) {
@@ -3140,7 +2780,7 @@
 			}
 			(module.exports = typescript), (typescript.displayName = 'typescript'), (typescript.aliases = ['ts']);
 		},
-		80450: (module) => {
+		'../../node_modules/refractor/lang/yaml.js': (module) => {
 			'use strict';
 			function yaml(Prism) {
 				!(function (Prism) {
@@ -3216,7 +2856,7 @@
 			}
 			(module.exports = yaml), (yaml.displayName = 'yaml'), (yaml.aliases = ['yml']);
 		},
-		82016: (module, __unused_webpack_exports, __webpack_require__) => {
+		'../../node_modules/refractor/node_modules/prismjs/components/prism-core.js': (module, __unused_webpack_exports, __webpack_require__) => {
 			var Prism = (function (_self) {
 				var lang = /(?:^|\s)lang(?:uage)?-([\w-]+)(?=\s|$)/i,
 					uniqueId = 0,
@@ -3573,7 +3213,7 @@
 			})('undefined' != typeof window ? window : 'undefined' != typeof WorkerGlobalScope && self instanceof WorkerGlobalScope ? self : {});
 			module.exports && (module.exports = Prism), void 0 !== __webpack_require__.g && (__webpack_require__.g.Prism = Prism);
 		},
-		53551: (__unused_webpack_module, exports) => {
+		'../../node_modules/space-separated-tokens/index.js': (__unused_webpack_module, exports) => {
 			'use strict';
 			exports.q = function parse(value) {
 				var input = String(value || empty).trim();
@@ -3583,7 +3223,7 @@
 				space = ' ',
 				whiteSpace = /[ \t\n\r\f]+/g;
 		},
-		93227: (module) => {
+		'../../node_modules/xtend/immutable.js': (module) => {
 			module.exports = function extend() {
 				for (var target = {}, i = 0; i < arguments.length; i++) {
 					var source = arguments[i];
@@ -3592,18 +3232,6 @@
 				return target;
 			};
 			var hasOwnProperty = Object.prototype.hasOwnProperty;
-		},
-		80414: (module) => {
-			'use strict';
-			module.exports = JSON.parse(
-				'{"AElig":"Æ","AMP":"&","Aacute":"Á","Acirc":"Â","Agrave":"À","Aring":"Å","Atilde":"Ã","Auml":"Ä","COPY":"©","Ccedil":"Ç","ETH":"Ð","Eacute":"É","Ecirc":"Ê","Egrave":"È","Euml":"Ë","GT":">","Iacute":"Í","Icirc":"Î","Igrave":"Ì","Iuml":"Ï","LT":"<","Ntilde":"Ñ","Oacute":"Ó","Ocirc":"Ô","Ograve":"Ò","Oslash":"Ø","Otilde":"Õ","Ouml":"Ö","QUOT":"\\"","REG":"®","THORN":"Þ","Uacute":"Ú","Ucirc":"Û","Ugrave":"Ù","Uuml":"Ü","Yacute":"Ý","aacute":"á","acirc":"â","acute":"´","aelig":"æ","agrave":"à","amp":"&","aring":"å","atilde":"ã","auml":"ä","brvbar":"¦","ccedil":"ç","cedil":"¸","cent":"¢","copy":"©","curren":"¤","deg":"°","divide":"÷","eacute":"é","ecirc":"ê","egrave":"è","eth":"ð","euml":"ë","frac12":"½","frac14":"¼","frac34":"¾","gt":">","iacute":"í","icirc":"î","iexcl":"¡","igrave":"ì","iquest":"¿","iuml":"ï","laquo":"«","lt":"<","macr":"¯","micro":"µ","middot":"·","nbsp":" ","not":"¬","ntilde":"ñ","oacute":"ó","ocirc":"ô","ograve":"ò","ordf":"ª","ordm":"º","oslash":"ø","otilde":"õ","ouml":"ö","para":"¶","plusmn":"±","pound":"£","quot":"\\"","raquo":"»","reg":"®","sect":"§","shy":"­","sup1":"¹","sup2":"²","sup3":"³","szlig":"ß","thorn":"þ","times":"×","uacute":"ú","ucirc":"û","ugrave":"ù","uml":"¨","uuml":"ü","yacute":"ý","yen":"¥","yuml":"ÿ"}'
-			);
-		},
-		61492: (module) => {
-			'use strict';
-			module.exports = JSON.parse(
-				'{"0":"�","128":"€","130":"‚","131":"ƒ","132":"„","133":"…","134":"†","135":"‡","136":"ˆ","137":"‰","138":"Š","139":"‹","140":"Œ","142":"Ž","145":"‘","146":"’","147":"“","148":"”","149":"•","150":"–","151":"—","152":"˜","153":"™","154":"š","155":"›","156":"œ","158":"ž","159":"Ÿ"}'
-			);
 		},
 	},
 ]);
