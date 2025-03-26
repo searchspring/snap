@@ -64,8 +64,8 @@ export * from './components/Organisms/Sidebar';
 export * from './components/Organisms/Toolbar';
 
 // TEMPLATES
-export * from './components/Templates/Autocomplete';
-// export * from './components/Templates/AutocompleteTerms';
+export * from './components/Organisms/Autocomplete';
+export * from './components/Molecules/Terms';
 export * from './components/Templates/Recommendation';
 export * from './components/Templates/RecommendationBundle';
 export * from './components/Templates/RecommendationBundleEasyAdd';

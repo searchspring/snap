@@ -9,7 +9,7 @@ import Readme from '../Autocomplete/readme.md';
 import type { AutocompleteController } from '@searchspring/snap-controller';
 
 export default {
-	title: 'Templates/Autocomplete',
+	title: 'Organisms/Autocomplete',
 	component: Autocomplete,
 	tags: ['autodocs'],
 	parameters: {

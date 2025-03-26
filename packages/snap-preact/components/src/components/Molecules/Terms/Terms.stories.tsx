@@ -3,14 +3,14 @@ import { h } from 'preact';
 import { ArgsTable, PRIMARY_STORY, Markdown } from '@storybook/blocks';
 
 import { componentArgs, highlightedCode } from '../../../utilities';
-import { AutocompleteTerms, AutocompleteTermsProps } from './AutocompleteTerms';
+import { Terms, TermsProps } from './Terms';
 import Readme from './readme.md';
 import { AutocompleteController } from '@searchspring/snap-controller';
 import { Snapify } from '../../../utilities/snapify';
 
 export default {
-	title: 'Templates/AutocompleteTerms',
-	component: AutocompleteTerms,
+	title: 'Molecules/Terms',
+	component: Terms,
 	tags: ['autodocs'],
 	parameters: {
 		docs: {
@@ -57,7 +57,7 @@ export default {
 	argTypes: {
 		controller: {
 			description: 'autocomplete controller reference',
-			type: { required: false },
+			type: { required: true },
 			table: {
 				type: {
 					summary: 'autocomplete controller object',
@@ -67,7 +67,7 @@ export default {
 		},
 		terms: {
 			description: 'autocomplete term store reference',
-			type: { required: false },
+			type: { required: true },
 			table: {
 				type: {
 					summary: 'autocomplete term store object',
@@ -123,6 +123,15 @@ export default {
 			control: { type: 'none' },
 			action: 'onTermClick',
 		},
+		vertical: {
+			description: 'boolean to adjust if each term should render in a vertically',
+			table: {
+				type: {
+					summary: 'boolean',
+				},
+			},
+			control: { type: 'boolean' },
+		},
 		...componentArgs,
 	},
 };
@@ -140,11 +149,11 @@ const snapInstance = Snapify.autocomplete({
 	},
 });
 
-export const Default = (args: AutocompleteTermsProps, { loaded: { controller } }: { loaded: { controller: AutocompleteController } }) => {
+export const Default = (args: TermsProps, { loaded: { controller } }: { loaded: { controller: AutocompleteController } }) => {
 	setTimeout(() => {
 		controller.bind();
 	});
-	return <AutocompleteTerms {...args} controller={controller} />;
+	return <Terms {...args} controller={controller} />;
 };
 
 Default.loaders = [

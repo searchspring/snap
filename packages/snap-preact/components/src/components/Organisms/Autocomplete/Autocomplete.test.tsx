@@ -5,7 +5,7 @@ import { render } from '@testing-library/preact';
 import userEvent from '@testing-library/user-event';
 
 import { ThemeProvider } from '../../../providers';
-import { Autocomplete } from '../../Templates/Autocomplete/Autocomplete';
+import { Autocomplete } from './Autocomplete';
 import { MockClient } from '@searchspring/snap-shared';
 import { AutocompleteControllerConfig } from '@searchspring/snap-controller';
 import { createAutocompleteController } from '../../../../../src/create';

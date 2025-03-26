@@ -61,7 +61,7 @@ import type { SidebarLang } from '../components/Organisms/Sidebar';
 // import type { ToolbarLang } from '../components/Organisms/Toolbar';
 
 /* TEMPLATES */
-import type { AutocompleteLang } from '../components/Templates/Autocomplete';
+import type { AutocompleteLang } from '../components/Organisms/Autocomplete';
 // import type { AutocompleteTermsLang } from '../components/Templates/AutocompleteTerms';
 import type { RecommendationLang } from '../components/Templates/Recommendation';
 import type { SearchLang } from '../components/Templates/Search';

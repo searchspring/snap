@@ -1,4 +1,4 @@
-# AutocompleteTerms
+# Terms
 
 Renders a list of terms for autocomplete. 
 
