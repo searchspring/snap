@@ -7,6 +7,8 @@ Renders a page of results utilizing `<Result />` components.
 
 - InlineBanner
 
+- ResultTracker
+
 ## Usage
 
 ### controller

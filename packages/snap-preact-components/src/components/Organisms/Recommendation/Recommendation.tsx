@@ -16,7 +16,7 @@ import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { ComponentProps, BreakpointsProps, StylingCSS } from '../../../types';
 import { useDisplaySettings } from '../../../hooks/useDisplaySettings';
 import { RecommendationProfileTracker } from '../../Trackers/Recommendation/ProfileTracker';
-import { RecommendationResultTracker } from '../../Trackers/Recommendation/ResultTracker';
+import { ResultTracker } from '../../Trackers/ResultTracker';
 
 const CSS = {
 	recommendation: ({ vertical }: Partial<RecommendationProps>) =>
@@ -155,14 +155,14 @@ export const Recommendation = observer((properties: RecommendationProps): JSX.El
 						>
 							{Array.isArray(children) && children.length
 								? children.map((child: any, idx: number) => (
-										<RecommendationResultTracker controller={controller} result={resultsToRender[idx]}>
+										<ResultTracker controller={controller} result={resultsToRender[idx]}>
 											{child}
-										</RecommendationResultTracker>
+										</ResultTracker>
 								  ))
 								: resultsToRender.map((result) => (
-										<RecommendationResultTracker controller={controller} result={result}>
+										<ResultTracker controller={controller} result={result}>
 											<Result {...subProps.result} controller={controller} result={result} />
-										</RecommendationResultTracker>
+										</ResultTracker>
 								  ))}
 						</Carousel>
 					</RecommendationProfileTracker>
@@ -170,14 +170,14 @@ export const Recommendation = observer((properties: RecommendationProps): JSX.El
 					<RecommendationProfileTracker controller={controller}>
 						{Array.isArray(children) && children.length
 							? children.map((child: any, idx: number) => (
-									<RecommendationResultTracker controller={controller} result={resultsToRender[idx]}>
+									<ResultTracker controller={controller} result={resultsToRender[idx]}>
 										<></>
-									</RecommendationResultTracker>
+									</ResultTracker>
 							  ))
 							: resultsToRender.map((result) => (
-									<RecommendationResultTracker controller={controller} result={result}>
+									<ResultTracker controller={controller} result={result}>
 										<></>
-									</RecommendationResultTracker>
+									</ResultTracker>
 							  ))}
 					</RecommendationProfileTracker>
 				)}

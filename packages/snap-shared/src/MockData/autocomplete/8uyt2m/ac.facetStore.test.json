@@ -3852,6 +3852,8 @@
         "header": [
           "<script data-banner-type=\"image\" data-banner-html=\"\" data-image-url=\"https://i.imgur.com/tsRV5Cx.png\" type=\"text/widget\"></script><img src=\"https://i.imgur.com/tsRV5Cx.png\" style=\"width: 100%;\">"
         ]
-      }
+      },
+      "experiments": [],
+      "personalized": false
     }
   }

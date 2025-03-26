@@ -2894,7 +2894,9 @@
   "merchandising": {
     "redirect": "",
     "content": {},
-    "campaigns": []
+    "campaigns": [],
+    "experiments": [],
+    "personalized": false
   },
   "search": {
     "query": ""

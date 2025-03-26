@@ -57,7 +57,8 @@ describe('Recommendation Component', async () => {
 	});
 
 	it('tracks as expected', () => {
-		const spy = cy.spy(controller.tracker.track, 'event').as('trackfn');
+		cy.spy(controller.track.product, 'render').as('render');
+		cy.spy(controller.track.product, 'impression').as('impression');
 
 		mount(
 			<Recommendation controller={controller} speed={0} lazyRender={{ enabled: false }}>
@@ -72,7 +73,8 @@ describe('Recommendation Component', async () => {
 		cy.get('.ss__recommendation')
 			.should('exist')
 			.then(() => {
-				cy.get('@trackfn').its('callCount').should('eq', 27);
+				cy.get('@render').its('callCount').should('eq', controller.store.results.length);
+				cy.get('@impression').its('callCount').should('eq', 5);
 
 				//todo - get these beacon tests working again, or move back into jest if possible.
 

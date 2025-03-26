@@ -196,6 +196,7 @@ describe('Snap Client', () => {
 					redirectResponse: 'full',
 					resultsFormat: 'native',
 					siteId: ['8uyt2m'],
+					noBeacon: true,
 				},
 			};
 			const acCacheKey = '{"siteId":["8uyt2m"],"redirectResponse":"full","ajaxCatalog":"Snap","resultsFormat":"native"}';
@@ -270,7 +271,7 @@ describe('Snap Client', () => {
 				headers: {},
 				method: 'GET',
 				path: '/api/search/search.json',
-				query: { resultsFormat: 'native', siteId: ['8uyt2m'], ajaxCatalog: 'Snap' },
+				query: { resultsFormat: 'native', siteId: ['8uyt2m'], noBeacon: true, ajaxCatalog: 'Snap' },
 			};
 
 			const searchcacheKey = '{"siteId":["8uyt2m"],"ajaxCatalog":"Snap","resultsFormat":"native"}';
@@ -451,6 +452,7 @@ describe('Snap Client', () => {
 						redirectResponse: 'full',
 						resultsFormat: 'native',
 						siteId: ['8uyt2m'],
+						noBeacon: true,
 					},
 				};
 				const acCacheKey = '{"siteId":["8uyt2m"],"redirectResponse":"full","ajaxCatalog":"Snap","resultsFormat":"native"}';
@@ -520,7 +522,7 @@ describe('Snap Client', () => {
 					headers: {},
 					method: 'GET',
 					path: '/api/search/search.json',
-					query: { resultsFormat: 'native', siteId: ['8uyt2m'], ajaxCatalog: 'Snap' },
+					query: { resultsFormat: 'native', siteId: ['8uyt2m'], noBeacon: true, ajaxCatalog: 'Snap' },
 				};
 
 				const searchcacheKey = '{"siteId":["8uyt2m"],"ajaxCatalog":"Snap","resultsFormat":"native"}';

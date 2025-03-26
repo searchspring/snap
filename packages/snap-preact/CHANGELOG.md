@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.65.0](https://github.com/searchspring/snap/compare/v0.64.0...v0.65.0) (2025-03-26)
+
+### Bug Fixes
+
+- remove attribution from Snap.tsx, update integration tests ([ac58a02](https://github.com/searchspring/snap/commit/ac58a0228e87c89f5173d7ae1f2411140c9a14d9))
+
 # [0.64.0](https://github.com/searchspring/snap/compare/v0.63.5...v0.64.0) (2025-03-07)
 
 **Note:** Version bump only for package @searchspring/snap-preact

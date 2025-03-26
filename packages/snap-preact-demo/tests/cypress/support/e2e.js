@@ -37,19 +37,20 @@ beforeEach(() => {
 	cy.intercept(/.*searchspring.io\/api\/search\/search.json/).as('search');
 	cy.intercept(/.*a.searchspring.io\/api\/track\/track.json/).as('track');
 	cy.intercept(/.*d3cgm8py10hi0z.cloudfront.net\/is.gif/).as('pixel');
-	Object.keys(BeaconType).forEach((type) => {
-		cy.intercept(/.*beacon.searchspring.io\/beacon/, (req) => setAliasForBeaconType(BeaconType[type], req));
-	});
+	// cy.intercept(/.*beacon.searchspring.io\/beacon/, (req) => setAliasForBeaconType(BeaconType[type], req));
+	cy.intercept(/beacon.searchspring.io\/beacon\/v2*./, {
+		success: true,
+	}).as('beacon2');
 });
 
-function setAliasForBeaconType(type, req) {
-	if (!Array.isArray(req.body)) {
-		req.body = [req.body];
-	}
+// function setAliasForBeaconType(type, req) {
+// 	if (!Array.isArray(req.body)) {
+// 		req.body = [req.body];
+// 	}
 
-	req.body.forEach((event) => {
-		if (event.type == type) {
-			req.alias = type;
-		}
-	});
-}
+// 	req.body.forEach((event) => {
+// 		if (event.type == type) {
+// 			req.alias = type;
+// 		}
+// 	});
+// }

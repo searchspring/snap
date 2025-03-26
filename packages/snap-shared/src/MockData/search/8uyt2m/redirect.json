@@ -14,6 +14,8 @@
   "facets": [],
   "merchandising": {
     "redirect": "https://try.searchspring.com/pages/returns",
-    "content": {}
+    "content": {},
+    "experiments": [],
+    "personalized": false
   }
 }

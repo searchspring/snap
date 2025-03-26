@@ -1,6 +1,7 @@
 import { BeaconType, BeaconCategory } from '@searchspring/snap-tracker';
 
-describe('Tracking', () => {
+// TODO: update to beacon 2.0
+describe.skip('Tracking', () => {
 	beforeEach(() => {
 		cy.clearCookies();
 

@@ -28,6 +28,9 @@ const services = {
 	urlManager,
 };
 
+// mocks fetch so beacon client does not make network requests
+jest.spyOn(global.window, 'fetch').mockImplementation(() => Promise.resolve({ status: 200, json: () => Promise.resolve({}) } as Response));
+
 describe('Recommendation Controller', () => {
 	beforeEach(() => {
 		recommendConfig.id = uuidv4().split('-').join('');
@@ -275,7 +278,7 @@ describe('Recommendation Controller', () => {
 		});
 	});
 
-	it('can invoke controller track.click and track.product.click', async () => {
+	it('can invoke controller track.product.render', async () => {
 		const controller = new RecommendationController(recommendConfig, {
 			client: new MockClient(globals, {}),
 			store: new RecommendationStore(recommendConfig, services),
@@ -285,79 +288,20 @@ describe('Recommendation Controller', () => {
 			logger: new Logger(),
 			tracker: new Tracker(globals),
 		});
-		const trackfn = jest.spyOn(controller.tracker.track, 'event');
+		const trackfn = jest.spyOn(controller.tracker.events.recommendations, 'render');
 
 		await controller.search();
 
-		const event = new Event('click');
-		const eventfn = jest.spyOn(controller.eventManager, 'fire');
-
-		const eventReturn = controller.track.click(event as any);
-
-		expect(trackfn).toHaveBeenCalledWith({
-			type: BeaconType.PROFILE_CLICK,
-			category: BeaconCategory.RECOMMENDATIONS,
-			context: controller.config.globals?.siteId ? { website: { trackingCode: controller.config.globals?.siteId } } : undefined,
-			event: {
-				context: {
-					action: 'navigate',
-					placement: controller.store.profile.placement,
-					tag: controller.store.profile.tag,
-					type: 'product-recommendation',
-				},
-				profile: {
-					tag: controller.store.profile.tag,
-					placement: controller.store.profile.placement,
-					threshold: controller.store.profile.display.threshold,
-					templateId: controller.store.profile.display.template.uuid,
-					seed: [{ sku: recommendConfig.globals?.product }],
-				},
-			},
+		controller.store.results.forEach((result) => {
+			controller.track.product.render(result);
 		});
-		expect(eventfn).toHaveBeenCalledTimes(1);
 
-		expect(controller.events.click).toBeDefined();
-		expect(controller.events.click).toBe(eventReturn);
+		expect(trackfn).toHaveBeenCalledTimes(controller.store.results.length);
 
 		trackfn.mockClear();
-		eventfn.mockClear();
-
-		/**
-		 * track.product.click requires track.click to be called first, so we reuse the same controller
-		 */
-
-		const result = controller.store.results[0];
-
-		controller.track.product.click(event as any, result);
-
-		expect(trackfn).toHaveBeenCalledWith({
-			type: BeaconType.PROFILE_PRODUCT_CLICK,
-			category: BeaconCategory.RECOMMENDATIONS,
-			context: controller.config.globals?.siteId ? { website: { trackingCode: controller.config.globals?.siteId } } : undefined,
-			event: {
-				context: {
-					action: 'navigate',
-					placement: controller.store.profile.placement,
-					tag: controller.store.profile.tag,
-					type: 'product-recommendation',
-				},
-				product: {
-					id: result.id,
-					mappings: {
-						core: result.mappings.core,
-					},
-					seed: [{ sku: recommendConfig.globals?.product }],
-				},
-			},
-			pid: controller.events.click!.id,
-		});
-		expect(eventfn).toHaveBeenCalledTimes(2);
-
-		trackfn.mockClear();
-		eventfn.mockClear();
 	});
 
-	it('can invoke controller track.click and track.product.click (placement: basket-page)', async () => {
+	it('can invoke controller track.product.impression', async () => {
 		const controller = new RecommendationController(recommendConfig, {
 			client: new MockClient(globals, {}),
 			store: new RecommendationStore(recommendConfig, services),
@@ -367,84 +311,20 @@ describe('Recommendation Controller', () => {
 			logger: new Logger(),
 			tracker: new Tracker(globals),
 		});
-
-		// use 'basket-page' mock profile response
-		(controller.client as MockClient).mockData.updateConfig({ recommend: { profile: 'placementBasket' } });
-
-		controller.tracker.cookies.cart.add(mockSkus);
-		const trackfn = jest.spyOn(controller.tracker.track, 'event');
+		const trackfn = jest.spyOn(controller.tracker.events.recommendations, 'impression');
 
 		await controller.search();
 
-		const event = new Event('click');
-		const eventfn = jest.spyOn(controller.eventManager, 'fire');
-
-		const eventReturn = controller.track.click(event as any);
-
-		expect(trackfn).toHaveBeenCalledWith({
-			type: BeaconType.PROFILE_CLICK,
-			category: BeaconCategory.RECOMMENDATIONS,
-			context: controller.config.globals?.siteId ? { website: { trackingCode: controller.config.globals?.siteId } } : undefined,
-			event: {
-				context: {
-					action: 'navigate',
-					placement: controller.store.profile.placement,
-					tag: controller.store.profile.tag,
-					type: 'product-recommendation',
-				},
-				profile: {
-					tag: controller.store.profile.tag,
-					placement: controller.store.profile.placement,
-					threshold: controller.store.profile.display.threshold,
-					templateId: controller.store.profile.display.template.uuid,
-					seed: mockSkus.map((sku) => ({ sku })),
-				},
-			},
+		controller.store.results.forEach((result) => {
+			controller.track.product.impression(result);
 		});
-		expect(eventfn).toHaveBeenCalledTimes(1);
 
-		expect(controller.events.click).toBeDefined();
-		expect(controller.events.click).toBe(eventReturn);
+		expect(trackfn).toHaveBeenCalledTimes(controller.store.results.length);
 
 		trackfn.mockClear();
-		eventfn.mockClear();
-
-		/**
-		 * track.product.click requires track.click to be called first, so we reuse the same controller
-		 */
-
-		const result = controller.store.results[0];
-
-		controller.track.product.click(event as any, result);
-
-		expect(trackfn).toHaveBeenCalledWith({
-			type: BeaconType.PROFILE_PRODUCT_CLICK,
-			category: BeaconCategory.RECOMMENDATIONS,
-			context: controller.config.globals?.siteId ? { website: { trackingCode: controller.config.globals?.siteId } } : undefined,
-			event: {
-				context: {
-					action: 'navigate',
-					placement: controller.store.profile.placement,
-					tag: controller.store.profile.tag,
-					type: 'product-recommendation',
-				},
-				product: {
-					id: result.id,
-					mappings: {
-						core: result.mappings.core,
-					},
-					seed: mockSkus.map((sku) => ({ sku })),
-				},
-			},
-			pid: controller.events.click!.id,
-		});
-		expect(eventfn).toHaveBeenCalledTimes(2);
-
-		trackfn.mockClear();
-		eventfn.mockClear();
 	});
 
-	it('can invoke controller track.click and track.product.click (placement: other)', async () => {
+	it('can invoke controller track.product.clickThrough', async () => {
 		const controller = new RecommendationController(recommendConfig, {
 			client: new MockClient(globals, {}),
 			store: new RecommendationStore(recommendConfig, services),
@@ -454,286 +334,91 @@ describe('Recommendation Controller', () => {
 			logger: new Logger(),
 			tracker: new Tracker(globals),
 		});
-
-		// use 'other' mock profile response
-		(controller.client as MockClient).mockData.updateConfig({ recommend: { profile: 'placementOther' } });
-
-		controller.tracker.cookies.cart.add(mockSkus);
-		const trackfn = jest.spyOn(controller.tracker.track, 'event');
+		const trackfn = jest.spyOn(controller.tracker.events.recommendations, 'clickThrough');
 
 		await controller.search();
 
-		const event = new Event('click');
-		const eventfn = jest.spyOn(controller.eventManager, 'fire');
+		const event = new MouseEvent('click');
+		controller.track.product.clickThrough(event, controller.store.results[0]);
 
-		const eventReturn = controller.track.click(event as any);
-
-		expect(trackfn).toHaveBeenCalledWith({
-			type: BeaconType.PROFILE_CLICK,
-			category: BeaconCategory.RECOMMENDATIONS,
-			context: controller.config.globals?.siteId ? { website: { trackingCode: controller.config.globals?.siteId } } : undefined,
-			event: {
-				context: {
-					action: 'navigate',
-					placement: controller.store.profile.placement,
-					tag: controller.store.profile.tag,
-					type: 'product-recommendation',
-				},
-				profile: {
-					tag: controller.store.profile.tag,
-					placement: controller.store.profile.placement,
-					threshold: controller.store.profile.display.threshold,
-					templateId: controller.store.profile.display.template.uuid,
-					// should not have seed when placement: other
-				},
-			},
-		});
-		expect(eventfn).toHaveBeenCalledTimes(1);
-
-		expect(controller.events.click).toBeDefined();
-		expect(controller.events.click).toBe(eventReturn);
-
-		trackfn.mockClear();
-		eventfn.mockClear();
-
-		/**
-		 * track.product.click requires track.click to be called first, so we reuse the same controller
-		 */
-
-		const result = controller.store.results[0];
-
-		controller.track.product.click(event as any, result);
-
-		expect(trackfn).toHaveBeenCalledWith({
-			type: BeaconType.PROFILE_PRODUCT_CLICK,
-			category: BeaconCategory.RECOMMENDATIONS,
-			context: controller.config.globals?.siteId ? { website: { trackingCode: controller.config.globals?.siteId } } : undefined,
-			event: {
-				context: {
-					action: 'navigate',
-					placement: controller.store.profile.placement,
-					tag: controller.store.profile.tag,
-					type: 'product-recommendation',
-				},
-				product: {
-					id: result.id,
-					mappings: {
-						core: result.mappings.core,
-					},
-					// should not have seed when placement: other
-				},
-			},
-			pid: controller.events.click!.id,
-		});
-		expect(eventfn).toHaveBeenCalledTimes(2);
-
-		trackfn.mockClear();
-		eventfn.mockClear();
-	});
-
-	it('can invoke controller track.render and track.product.render', async () => {
-		const controller = new RecommendationController(recommendConfig, {
-			client: new MockClient(globals, {}),
-			store: new RecommendationStore(recommendConfig, services),
-			urlManager,
-			eventManager: new EventManager(),
-			profiler: new Profiler(),
-			logger: new Logger(),
-			tracker: new Tracker(globals),
-		});
-		const trackfn = jest.spyOn(controller.tracker.track, 'event');
-		const productTrackfn = jest.spyOn(controller.track.product, 'render');
-
-		await controller.search();
-
-		const eventfn = jest.spyOn(controller.eventManager, 'fire');
-
-		const eventReturn = controller.track.render();
-
-		expect(trackfn).toHaveBeenCalledWith({
-			type: BeaconType.PROFILE_RENDER,
-			category: BeaconCategory.RECOMMENDATIONS,
-			context: controller.config.globals?.siteId ? { website: { trackingCode: controller.config.globals?.siteId } } : undefined,
-			event: {
-				context: {
-					placement: controller.store.profile.placement,
-					tag: controller.store.profile.tag,
-					type: 'product-recommendation',
-				},
-				profile: {
-					tag: controller.store.profile.tag,
-					placement: controller.store.profile.placement,
-					threshold: controller.store.profile.display.threshold,
-					templateId: controller.store.profile.display.template.uuid,
-					seed: [{ sku: recommendConfig.globals?.product }],
-				},
-			},
-		});
-
-		expect(controller.events.render).toBeDefined();
-		expect(controller.events.render).toBe(eventReturn);
-
-		controller.store.results.map((result) => controller.track.product.render(result));
-
-		expect(eventfn).toHaveBeenCalledTimes(controller.store.results.length + 1); // products + initial profile render
-		expect(trackfn).toHaveBeenCalledTimes(controller.store.results.length + 1);
-		expect(productTrackfn).toHaveBeenCalledTimes(controller.store.results.length);
-
-		expect(Object.keys(controller.events.product || {})).toHaveLength(controller.store.results.length);
-		expect(controller.events.product![controller.store.results[0].id as keyof BeaconEvent]).toBeDefined();
-		expect(controller.events.product![controller.store.results[0].id as keyof BeaconEvent].render).toBeDefined();
-
-		productTrackfn.mockClear();
-		trackfn.mockClear();
-		eventfn.mockClear();
-	});
-
-	it('can invoke controller track.render and track.product.render with custom result set', async () => {
-		const controller = new RecommendationController(recommendConfig, {
-			client: new MockClient(globals, {}),
-			store: new RecommendationStore(recommendConfig, services),
-			urlManager,
-			eventManager: new EventManager(),
-			profiler: new Profiler(),
-			logger: new Logger(),
-			tracker: new Tracker(globals),
-		});
-		const trackfn = jest.spyOn(controller.tracker.track, 'event');
-		const productTrackfn = jest.spyOn(controller.track.product, 'render');
-
-		await controller.search();
-
-		const reducedResults = controller.store.results.slice(0, 5);
-		const eventfn = jest.spyOn(controller.eventManager, 'fire');
-
-		const eventReturn = controller.track.render(reducedResults);
-
-		expect(trackfn).toHaveBeenCalledWith({
-			type: BeaconType.PROFILE_RENDER,
-			category: BeaconCategory.RECOMMENDATIONS,
-			context: controller.config.globals?.siteId ? { website: { trackingCode: controller.config.globals?.siteId } } : undefined,
-			event: {
-				context: {
-					placement: controller.store.profile.placement,
-					tag: controller.store.profile.tag,
-					type: 'product-recommendation',
-				},
-				profile: {
-					tag: controller.store.profile.tag,
-					placement: controller.store.profile.placement,
-					threshold: controller.store.profile.display.threshold,
-					templateId: controller.store.profile.display.template.uuid,
-					seed: [{ sku: recommendConfig.globals?.product }],
-				},
-			},
-		});
-
-		expect(controller.events.render).toBeDefined();
-		expect(controller.events.render).toBe(eventReturn);
-
-		reducedResults.map((result) => controller.track.product.render(result));
-
-		expect(eventfn).toHaveBeenCalledTimes(reducedResults.length + 1); // products + initial profile render
-		expect(trackfn).toHaveBeenCalledTimes(reducedResults.length + 1);
-		expect(productTrackfn).toHaveBeenCalledTimes(reducedResults.length);
-
-		expect(Object.keys(controller.events.product || {})).toHaveLength(reducedResults.length);
-		expect(controller.events.product![reducedResults[0].id as keyof BeaconEvent]).toBeDefined();
-		expect(controller.events.product![reducedResults[0].id as keyof BeaconEvent].render).toBeDefined();
-
-		productTrackfn.mockClear();
-		trackfn.mockClear();
-		eventfn.mockClear();
-	});
-
-	it('can invoke controller track.impression and track.product.impression', async () => {
-		const controller = new RecommendationController(recommendConfig, {
-			client: new MockClient(globals, {}),
-			store: new RecommendationStore(recommendConfig, services),
-			urlManager,
-			eventManager: new EventManager(),
-			profiler: new Profiler(),
-			logger: new Logger(),
-			tracker: new Tracker(globals),
-		});
-		const trackfn = jest.spyOn(controller.tracker.track, 'event');
-
-		await controller.search();
-
-		const eventfn = jest.spyOn(controller.eventManager, 'fire');
-
-		const eventReturn = controller.track.impression();
-
-		expect(trackfn).toHaveBeenCalledWith({
-			type: BeaconType.PROFILE_IMPRESSION,
-			category: BeaconCategory.RECOMMENDATIONS,
-			context: controller.config.globals?.siteId ? { website: { trackingCode: controller.config.globals?.siteId } } : undefined,
-			event: {
-				context: {
-					placement: controller.store.profile.placement,
-					tag: controller.store.profile.tag,
-					type: 'product-recommendation',
-				},
-				profile: {
-					tag: controller.store.profile.tag,
-					placement: controller.store.profile.placement,
-					threshold: controller.store.profile.display.threshold,
-					templateId: controller.store.profile.display.template.uuid,
-					seed: [{ sku: recommendConfig.globals?.product }],
-				},
-			},
-		});
-
-		expect(controller.events.impression).toBeDefined();
-		expect(controller.events.impression).toBe(eventReturn);
-
-		expect(eventfn).toHaveBeenCalledTimes(1);
 		expect(trackfn).toHaveBeenCalledTimes(1);
 
 		trackfn.mockClear();
-		eventfn.mockClear();
+	});
 
-		/**
-		 * track.product.impression requires track.impression to be called first, so we reuse the same controller
-		 */
+	it('can invoke controller track.product.click', async () => {
+		const controller = new RecommendationController(recommendConfig, {
+			client: new MockClient(globals, {}),
+			store: new RecommendationStore(recommendConfig, services),
+			urlManager,
+			eventManager: new EventManager(),
+			profiler: new Profiler(),
+			logger: new Logger(),
+			tracker: new Tracker(globals),
+		});
+		const clickfn = jest.spyOn(controller.tracker.events.recommendations, 'clickThrough');
+
+		await controller.search();
+
+		const result = controller.store.results[0];
+		const href = result.mappings.core?.url!;
+
+		const aElem = document.createElement('a');
+		aElem.setAttribute('href', href);
+		aElem.onclick = (e) => {
+			controller.track.product.click(e, result);
+		};
+		aElem.click();
+
+		expect(clickfn).toHaveBeenCalledTimes(1);
+		clickfn.mockClear();
+	});
+
+	it('can invoke controller track.product.addToCart', async () => {
+		const controller = new RecommendationController(recommendConfig, {
+			client: new MockClient(globals, {}),
+			store: new RecommendationStore(recommendConfig, services),
+			urlManager,
+			eventManager: new EventManager(),
+			profiler: new Profiler(),
+			logger: new Logger(),
+			tracker: new Tracker(globals),
+		});
+		const clickfn = jest.spyOn(controller.tracker.events.recommendations, 'addToCart');
+
+		await controller.search();
 
 		const result = controller.store.results[0];
 
-		//this tests we send the core data and not the display data
-		result.mask.set({ id: 'custom', mappings: { core: { name: 'custom name' } } });
+		controller.track.product.addToCart(result);
 
-		const productEventReturn = controller.track.product.impression(result);
+		expect(clickfn).toHaveBeenCalledTimes(1);
+		clickfn.mockClear();
+	});
 
-		expect(trackfn).toHaveBeenCalledWith({
-			type: BeaconType.PROFILE_PRODUCT_IMPRESSION,
-			category: BeaconCategory.RECOMMENDATIONS,
-			context: controller.config.globals?.siteId ? { website: { trackingCode: controller.config.globals?.siteId } } : undefined,
-			event: {
-				context: {
-					placement: controller.store.profile.placement,
-					tag: controller.store.profile.tag,
-					type: 'product-recommendation',
-				},
-				product: {
-					id: result.id,
-					mappings: {
-						core: result.mappings.core,
-					},
-					seed: [{ sku: recommendConfig.globals?.product }],
-				},
-			},
-			pid: controller.events.impression!.id,
+	it('can invoke controller track.bundle.addToCart', async () => {
+		const controller = new RecommendationController(recommendConfig, {
+			client: new MockClient(globals, {}),
+			store: new RecommendationStore(recommendConfig, services),
+			urlManager,
+			eventManager: new EventManager(),
+			profiler: new Profiler(),
+			logger: new Logger(),
+			tracker: new Tracker(globals),
 		});
+		const trackFn = jest.spyOn(controller.tracker.events.recommendations, 'addToCart');
 
-		expect(controller.events.product![result.id]).toBeDefined();
-		expect(controller.events.product![result.id].impression).toBeDefined();
-		expect(controller.events.product![result.id].impression).toBe(productEventReturn);
+		await controller.search();
 
-		expect(eventfn).toHaveBeenCalledTimes(1);
-		expect(trackfn).toHaveBeenCalledTimes(1);
+		const result = controller.store.results[0];
 
-		trackfn.mockClear();
-		eventfn.mockClear();
+		// modify controller profile type so that bundle methods work
+		controller.store.profile.type = 'bundle';
+
+		controller.track.bundle.addToCart([result]);
+
+		expect(trackFn).toHaveBeenCalledTimes(1);
+		trackFn.mockClear();
 	});
 
 	it('can set cart param', async () => {

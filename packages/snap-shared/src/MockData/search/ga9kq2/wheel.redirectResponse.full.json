@@ -931,6 +931,8 @@
     ],
     "merchandising": {
         "redirect": "https://www.bbwheelsonline.com/search-truck-wheels-by-vehicle/",
-        "content": {}
+        "content": {},
+        "experiments": [],
+        "personalized": false
       }
   }

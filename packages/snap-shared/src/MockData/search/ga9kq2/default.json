@@ -6894,6 +6894,8 @@
     ],
     "merchandising": {
       "redirect": "",
-      "content": {}
+      "content": {},
+      "experiments": [],
+      "personalized": false
     }
   }

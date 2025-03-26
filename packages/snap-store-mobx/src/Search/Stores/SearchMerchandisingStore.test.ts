@@ -10,7 +10,7 @@ const services = {
 const mockData = new MockData();
 
 describe('Merchandising Store', () => {
-	const emptyMerchStore = { redirect: '', content: {}, campaigns: [] };
+	const emptyMerchStore = { redirect: '', personalized: false, experiments: [], content: {}, campaigns: [] };
 
 	it('is empty when not passed valid params', () => {
 		// @ts-ignore
