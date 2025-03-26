@@ -1117,6 +1117,8 @@
           "value": "<script data-banner-type=\"image\" data-banner-html=\"\" data-image-url=\"https://cdn1.bigcommerce.com/server3000/1gfd17pa/product_images/uploaded_images/bbwheels-aboutus-image-mobile-smaller-5.jpg\" type=\"text/widget\" data-target-url=\"https://www.bbwheelsonline.com/about-us/\"></script><a href=\"https://www.bbwheelsonline.com/about-us/\"><img src=\"https://cdn1.bigcommerce.com/server3000/1gfd17pa/product_images/uploaded_images/bbwheels-aboutus-image-mobile-smaller-5.jpg\" style=\"width: 100%;\"></a>"
         }
       ]
-    }
+    },
+    "experiments": [],
+    "personalized": false
   }
 }

@@ -1795,7 +1795,9 @@
     "merchandising": {
       "redirect": "https://searchspring.com/?redirect",
       "content": {},
-      "campaigns": []
+      "campaigns": [],
+      "experiments": [],
+      "personalized": false
     },
     "search": {
       "query": "romper"

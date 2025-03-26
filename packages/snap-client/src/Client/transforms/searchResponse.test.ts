@@ -185,6 +185,7 @@ const mockMerchandising = {
 	redirect: 'https://www.thechivery.com/collections/bill-murray',
 	is_elevated: [],
 	elevated: [],
+	experiments: [],
 	removed: [
 		'5e3baeabe61f5a957b7a674f18e265d0',
 		'fff8931dc9c670a8d4268c277f10aae4',
@@ -621,6 +622,7 @@ describe('search response merch transformer', () => {
 		expect(response.merchandising).toEqual({
 			redirect: mockMerchandising.redirect,
 			content: mockMerchandising.content,
+			experiments: mockMerchandising.experiments,
 			personalized: mockMerchandising.personalized,
 			campaigns: mockMerchandising.campaigns,
 		});

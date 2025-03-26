@@ -8,8 +8,9 @@ import {
 	SearchRequestModelFilterRangeAllOfValue,
 } from '@searchspring/snapi-types';
 
+export const NO_BEACON_PARAM = 'noBeacon';
 export function transformSearchRequest(request: SearchRequestModel): any {
-	return mergeParams(
+	const data = mergeParams(
 		transformSearchRequest.sorts(request),
 		transformSearchRequest.search(request),
 		transformSearchRequest.filters(request),
@@ -20,6 +21,8 @@ export function transformSearchRequest(request: SearchRequestModel): any {
 		transformSearchRequest.tracking(request),
 		transformSearchRequest.personalization(request)
 	);
+	data[NO_BEACON_PARAM] = true;
+	return data;
 }
 
 transformSearchRequest.sorts = (request: SearchRequestModel = {}) => {

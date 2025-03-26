@@ -35,10 +35,32 @@ const baseConfig: RecommendationInstantiatorConfig = {
 	},
 };
 
+// Mock localStorage
+const localStorageMock = (() => {
+	let store: Record<string, string> = {};
+	return {
+		getItem: jest.fn((key: string) => store[key] || null),
+		setItem: jest.fn((key: string, value: string) => {
+			store[key] = value.toString();
+		}),
+		removeItem: jest.fn((key: string) => {
+			delete store[key];
+		}),
+		clear: jest.fn(() => {
+			store = {};
+		}),
+	};
+})();
+
+Object.defineProperty(window, 'localStorage', {
+	value: localStorageMock,
+});
+
 describe('RecommendationInstantiator', () => {
 	beforeEach(() => {
 		delete window.searchspring;
 		cookies.unset(CART_COOKIE);
+		localStorageMock.clear();
 	});
 
 	it('throws if configuration is not provided', () => {

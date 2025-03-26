@@ -1,3 +1,4 @@
+import 'whatwg-fetch';
 import { v4 as uuidv4 } from 'uuid';
 
 import { AutocompleteStore } from '@searchspring/snap-store-mobx';
@@ -128,6 +129,9 @@ const badArgs = [
 		tracker: new Tracker(globals),
 	},
 ];
+
+// mocks fetch so beacon client does not make network requests
+jest.spyOn(global.window, 'fetch').mockImplementation(() => Promise.resolve({ status: 200, json: () => Promise.resolve({}) } as Response));
 
 describe('Autocomplete Controller', () => {
 	beforeEach(() => {
@@ -490,37 +494,6 @@ describe('Autocomplete Controller', () => {
 		expect(controller.urlManager.state.query).toBe(query);
 		expect(controller.store.state.input).toBe(query);
 		expect(controller.store.state.url.href).toBe('http://localhost/search.html?view=shop&search_query=white');
-	});
-
-	it('can invoke controller track.product.click', async () => {
-		const controller = new AutocompleteController(acConfig, {
-			client: new MockClient(globals, {}),
-			store: new AutocompleteStore(acConfig, services),
-			urlManager,
-			eventManager: new EventManager(),
-			profiler: new Profiler(),
-			logger: new Logger(),
-			tracker: new Tracker(globals),
-		});
-		const clickfn = jest.spyOn(controller.track.product, 'click');
-
-		(controller.client as MockClient).mockData.updateConfig({ autocomplete: 'autocomplete.query.bumpers' });
-
-		await controller.search();
-
-		const event = new Event('click');
-
-		const logWarnfn = jest.spyOn(controller.log, 'warn');
-
-		controller.track.product.click(event as any, {});
-
-		await waitFor(() => {
-			expect(clickfn).toHaveBeenCalledWith(event, {});
-			expect(logWarnfn).toHaveBeenCalledWith('product.click tracking is not currently supported in this controller type');
-		});
-
-		clickfn.mockClear();
-		logWarnfn.mockClear();
 	});
 
 	it('can set personalization cart param', async () => {

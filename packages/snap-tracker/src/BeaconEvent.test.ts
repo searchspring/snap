@@ -1,3 +1,4 @@
+import 'whatwg-fetch';
 import { v4 as uuidv4 } from 'uuid';
 
 import { BeaconEvent } from './BeaconEvent';
@@ -8,143 +9,11 @@ describe('BeaconEvent', () => {
 		id: 'customTracker',
 		framework: 'test',
 	};
-	it('can create login event', async () => {
-		const data = {
-			type: BeaconType.LOGIN,
-			category: BeaconCategory.PERSONALIZATION,
-			context: {
-				userId: uuidv4(),
-				sessionId: uuidv4(),
-				shopperId: uuidv4(),
-				pageLoadId: uuidv4(),
-				website: {
-					trackingCode: '8uyt2m',
-				},
-			},
-			event: {},
-			pid: uuidv4(),
-		};
-		const event = new BeaconEvent(data, trackerConfig);
 
-		expect(event.type).toStrictEqual(data.type);
-		expect(event.category).toStrictEqual(data.category);
-		expect(event.context).toStrictEqual(data.context);
-		expect(event.event).toStrictEqual(data.event);
-		expect(event.id).toBeDefined();
-		expect(event.pid).toStrictEqual(data.pid);
-		expect(event.meta?.initiator['lib.framework']).toStrictEqual(trackerConfig.framework);
-	});
+	const fetchSpy = jest.spyOn(global, 'fetch').mockResolvedValue({} as Response);
 
-	it('can create product view event', async () => {
-		const data = {
-			type: BeaconType.PRODUCT,
-			category: BeaconCategory.PAGEVIEW,
-			context: {
-				userId: uuidv4(),
-				sessionId: uuidv4(),
-				shopperId: uuidv4(),
-				pageLoadId: uuidv4(),
-				website: {
-					trackingCode: '8uyt2m',
-				},
-			},
-			event: {
-				sku: 'product123',
-				childSku: 'product123_a',
-			},
-		};
-		const event = new BeaconEvent(data, trackerConfig);
-
-		expect(event.type).toStrictEqual(data.type);
-		expect(event.category).toStrictEqual(data.category);
-		expect(event.context).toStrictEqual(data.context);
-		expect(event.event).toStrictEqual(data.event);
-	});
-
-	it('can create cart view event', async () => {
-		const data = {
-			type: BeaconType.CART,
-			category: BeaconCategory.CARTVIEW,
-			context: {
-				userId: uuidv4(),
-				sessionId: uuidv4(),
-				shopperId: uuidv4(),
-				pageLoadId: uuidv4(),
-				website: {
-					trackingCode: '8uyt2m',
-				},
-				currency: {
-					code: 'USD',
-				},
-			},
-			event: [
-				{
-					sku: 'product123',
-					childSku: 'product123_a',
-					qty: '1',
-					price: '9.99',
-				},
-				{
-					sku: 'product456',
-					childSku: 'product456_a',
-					qty: '2',
-					price: '10.99',
-				},
-			],
-		};
-		const event = new BeaconEvent(data, trackerConfig);
-
-		expect(event.type).toStrictEqual(data.type);
-		expect(event.category).toStrictEqual(data.category);
-		expect(event.context).toStrictEqual(data.context);
-		expect(event.event).toStrictEqual(data.event);
-	});
-
-	it('can create order view event', async () => {
-		const data = {
-			type: BeaconType.ORDER,
-			category: BeaconCategory.ORDERVIEW,
-			context: {
-				userId: uuidv4(),
-				sessionId: uuidv4(),
-				shopperId: uuidv4(),
-				pageLoadId: uuidv4(),
-				website: {
-					trackingCode: '8uyt2m',
-				},
-				currency: {
-					code: 'USD',
-				},
-			},
-			event: {
-				orderId: '123456',
-				total: '34.29',
-				transactionTotal: '31.97',
-				city: 'Los Angeles',
-				state: 'CA',
-				country: 'US',
-				items: [
-					{
-						sku: 'product123',
-						childSku: 'product123_a',
-						qty: '1',
-						price: '9.99',
-					},
-					{
-						sku: 'product456',
-						childSku: 'product456_a',
-						qty: '2',
-						price: '10.99',
-					},
-				],
-			},
-		};
-		const event = new BeaconEvent(data, trackerConfig);
-
-		expect(event.type).toStrictEqual(data.type);
-		expect(event.category).toStrictEqual(data.category);
-		expect(event.context).toStrictEqual(data.context);
-		expect(event.event).toStrictEqual(data.event);
+	beforeEach(() => {
+		fetchSpy.mockClear();
 	});
 
 	it('can create product click event', async () => {
@@ -172,12 +41,35 @@ describe('BeaconEvent', () => {
 		expect(event.category).toStrictEqual(data.category);
 		expect(event.context).toStrictEqual(data.context);
 		expect(event.event).toStrictEqual(data.event);
+
+		const payload = event.send();
+		expect(payload['origin']).toBeUndefined();
+		expect(payload.type).toStrictEqual(data.type);
+		expect(payload.category).toStrictEqual(data.category);
+		expect(payload.context).toStrictEqual(data.context);
+		expect(payload.event).toStrictEqual(data.event);
+		expect(payload.meta).toStrictEqual({
+			initiator: {
+				lib: 'searchspring/snap',
+				'lib.version': expect.any(String),
+				'lib.framework': trackerConfig.framework,
+			},
+		});
+		expect(payload.id).toBeDefined();
+		expect(fetchSpy).toBeCalledWith('https://beacon.searchspring.io/beacon', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify(payload),
+			keepalive: true,
+		});
 	});
 
-	it('can create custom event object', async () => {
+	it('can provide custom beacon origin', async () => {
 		const data = {
-			type: BeaconType.CUSTOM,
-			category: BeaconCategory.CUSTOM,
+			type: BeaconType.CLICK,
+			category: BeaconCategory.INTERACTION,
 			context: {
 				userId: uuidv4(),
 				sessionId: uuidv4(),
@@ -188,14 +80,20 @@ describe('BeaconEvent', () => {
 				},
 			},
 			event: {
-				hello: 'world',
+				intellisuggestData: 'abc',
+				intellisuggestSignature: 'def',
+				href: '/hello',
 			},
 		};
-		const event = new BeaconEvent(data, trackerConfig);
 
-		expect(event.type).toStrictEqual(data.type);
-		expect(event.category).toStrictEqual(data.category);
-		expect(event.context).toStrictEqual(data.context);
-		expect(event.event).toStrictEqual(data.event);
+		const requesters = {
+			beacon: {
+				origin: 'https://custom.beacon.io',
+			},
+		};
+		const event = new BeaconEvent(data, { ...trackerConfig, requesters });
+		event.send();
+
+		expect(fetchSpy).toHaveBeenCalledWith(`${requesters.beacon.origin}/beacon`, expect.any(Object));
 	});
 });

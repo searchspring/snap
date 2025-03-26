@@ -72,6 +72,6 @@ export interface BundleSelectorProps extends ComponentProps {
 	seedText?: string;
 	seed?: boolean;
 	hideCheckboxes?: boolean;
-	onCheck?: () => void;
+	onCheck?: (e: React.MouseEvent<HTMLElement, MouseEvent>) => void;
 	icon?: string | Partial<IconProps> | boolean;
 }

@@ -14,8 +14,6 @@ export * from './components/Atoms/Merchandising';
 export * from './components/Atoms/Overlay';
 export * from './components/Atoms/Price';
 export * from './components/Atoms/Skeleton';
-export * from './components/Trackers/Recommendation/ResultTracker';
-export * from './components/Trackers/Recommendation/ProfileTracker';
 
 // MOLECULES
 export * from './components/Molecules/CalloutBadge';
@@ -47,6 +45,14 @@ export * from './components/Organisms/FilterSummary';
 export * from './components/Organisms/Recommendation';
 export * from './components/Organisms/RecommendationBundle';
 export * from './components/Organisms/Results';
+
+// TRACKERS
+export * from './components/Trackers/Recommendation/ProfileTracker';
+export * from './components/Trackers/ResultTracker';
+export {
+	ResultTracker as RecommendationResultTracker,
+	ResultTrackerProps as RecommendationResultTrackerProps,
+} from './components/Trackers/ResultTracker';
 
 // HOOKS
 export * from './hooks';

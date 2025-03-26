@@ -2189,7 +2189,9 @@
         "title": "inline banner test",
         "type": "search"
       }
-    ]
+    ],
+    "experiments": [],
+    "personalized": false
   },
   "search": {
     "query": "waist"
