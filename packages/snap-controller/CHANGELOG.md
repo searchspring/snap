@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.65.1](https://github.com/searchspring/snap/compare/v0.65.0...v0.65.1) (2025-03-26)
+
+### Bug Fixes
+
+- **tracking:** fixes around beaconjs integration - infinite renders/impressions, q, corrected q ([6a63aa5](https://github.com/searchspring/snap/commit/6a63aa5c23221bb3c7c493bda95bb787b2b827e4))
+
 # [0.65.0](https://github.com/searchspring/snap/compare/v0.64.0...v0.65.0) (2025-03-26)
 
 **Note:** Version bump only for package @searchspring/snap-controller
