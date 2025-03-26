@@ -1,4 +1,4 @@
-/*! For license information please see main.6e33f6e9.iframe.bundle.js.LICENSE.txt */
+/*! For license information please see main.8345cc66.iframe.bundle.js.LICENSE.txt */
 (self.webpackChunk_searchspring_snap_preact_components = self.webpackChunk_searchspring_snap_preact_components || []).push([
 	[792],
 	{
@@ -32166,7 +32166,7 @@
 						style = props.style,
 						mergedTrack = Object.assign({}, { render: !0, impression: !0, click: !0 }, track),
 						resultRef = (0, preact_hooks__WEBPACK_IMPORTED_MODULE_1__.li)(null),
-						resultInViewport = (0, _hooks__WEBPACK_IMPORTED_MODULE_6__.v)(resultRef, '0px');
+						resultInViewport = (0, _hooks__WEBPACK_IMPORTED_MODULE_6__.v)(resultRef, '0px', !0);
 					((0, preact_hooks__WEBPACK_IMPORTED_MODULE_1__.vJ)(
 						function () {
 							var _controller$track, _controller$track$pro;
@@ -35839,7 +35839,6 @@
 												case 4:
 													return (
 														(params = _this.params),
-														(_this.events = { product: {} }),
 														null !== (_params$search = params.search) &&
 															void 0 !== _params$search &&
 															null !== (_params$search$query = _params$search.query) &&
@@ -35852,36 +35851,36 @@
 															_params$search2$query.string.length &&
 															_this.store.history.save(params.search.query.string),
 														(_this.store.loading = !0),
-														(_context.prev = 8),
-														(_context.next = 11),
+														(_context.prev = 7),
+														(_context.next = 10),
 														_this.eventManager.fire('beforeSearch', { controller: _this, request: params })
 													);
-												case 11:
-													_context.next = 22;
+												case 10:
+													_context.next = 21;
 													break;
-												case 13:
+												case 12:
 													if (
-														((_context.prev = 13),
-														(_context.t0 = _context.catch(8)),
+														((_context.prev = 12),
+														(_context.t0 = _context.catch(7)),
 														'cancelled' != (null === _context.t0 || void 0 === _context.t0 ? void 0 : _context.t0.message))
 													) {
-														_context.next = 20;
+														_context.next = 19;
 														break;
 													}
 													return _this.log.warn("'beforeSearch' middleware cancelled"), _context.abrupt('return');
-												case 20:
+												case 19:
 													throw (_this.log.error("error in 'beforeSearch' middleware"), _context.t0);
-												case 22:
+												case 21:
 													if (
 														((stringyParams = JSON.stringify(params)),
 														(prevStringyParams = _this.storage.get('lastStringyParams')),
 														stringyParams != prevStringyParams)
 													) {
-														_context.next = 26;
+														_context.next = 25;
 														break;
 													}
 													return _context.abrupt('return');
-												case 26:
+												case 25:
 													if (
 														((searchProfile = _this.profiler.create({ type: 'event', name: 'search', context: params }).start()),
 														(meta = {}),
@@ -35896,7 +35895,7 @@
 															params.pagination.page > 1
 														))
 													) {
-														_context.next = 58;
+														_context.next = 57;
 														break;
 													}
 													if (
@@ -35914,18 +35913,18 @@
 														)),
 														!preventBackfill && !dontBackfill)
 													) {
-														_context.next = 36;
+														_context.next = 35;
 														break;
 													}
 													return _this.storage.set('scrollMap', {}), _this.urlManager.set('page', 1).go(), _context.abrupt('return');
-												case 36:
+												case 35:
 													if (
 														null === (_this$config$settings4 = _this.config.settings) ||
 														void 0 === _this$config$settings4 ||
 														!_this$config$settings4.infinite.backfill ||
 														_this.store.loaded
 													) {
-														_context.next = 49;
+														_context.next = 48;
 														break;
 													}
 													return (
@@ -35956,10 +35955,10 @@
 																			delete _backfillParams$searc.redirectResponse));
 																return _this.client.search(backfillParams);
 															})),
-														(_context.next = 40),
+														(_context.next = 39),
 														Promise.all(backfillRequests)
 													);
-												case 40:
+												case 39:
 													(backfillResponses = _context.sent),
 														(meta = backfillResponses[0][0]),
 														(response = backfillResponses[0][1]),
@@ -35972,11 +35971,11 @@
 																? void 0
 																: _params$pagination2.page),
 														(response.results = backfillResults),
-														(_context.next = 56);
+														(_context.next = 55);
 													break;
-												case 49:
-													return (_context.next = 51), _this.client.search(params);
-												case 51:
+												case 48:
+													return (_context.next = 50), _this.client.search(params);
+												case 50:
 													(_yield$_this$client$s = _context.sent),
 														(_yield$_this$client$s2 = _slicedToArray(_yield$_this$client$s, 2)),
 														(meta = _yield$_this$client$s2[0]),
@@ -35984,11 +35983,11 @@
 															SearchController_toConsumableArray(_this.previousResults),
 															SearchController_toConsumableArray(response.results || [])
 														));
-												case 56:
+												case 55:
 													_context.next = 65;
 													break;
-												case 58:
-													return (_this.previousResults = []), (_context.next = 61), _this.client.search(params);
+												case 57:
+													return (_this.events = { product: {} }), (_this.previousResults = []), (_context.next = 61), _this.client.search(params);
 												case 61:
 													(_yield$_this$client$s3 = _context.sent),
 														(_yield$_this$client$s4 = _slicedToArray(_yield$_this$client$s3, 2)),
@@ -36090,7 +36089,7 @@
 									null,
 									[
 										[0, 108, 128, 131],
-										[8, 13],
+										[7, 12],
 										[69, 74],
 										[89, 94],
 									]
@@ -36562,7 +36561,10 @@
 				var _params$filters,
 					_params$search3,
 					_params$search3$query,
-					_params$search4,
+					_store$search,
+					_store$search$origina,
+					_store$search2,
+					_store$search2$query,
 					_store$sorting$curren,
 					_store$sorting$curren2,
 					_store$merchandising$,
@@ -36607,7 +36609,19 @@
 							void 0 === _params$search3$query
 								? void 0
 								: _params$search3$query.string) || '',
-						correctedQuery: null === (_params$search4 = params.search) || void 0 === _params$search4 ? void 0 : _params$search4.originalQuery,
+						correctedQuery:
+							null !== (_store$search = store.search) &&
+							void 0 !== _store$search &&
+							null !== (_store$search$origina = _store$search.originalQuery) &&
+							void 0 !== _store$search$origina &&
+							_store$search$origina.string
+								? null === (_store$search2 = store.search) ||
+								  void 0 === _store$search2 ||
+								  null === (_store$search2$query = _store$search2.query) ||
+								  void 0 === _store$search2$query
+									? void 0
+									: _store$search2$query.string
+								: void 0,
 					},
 					filters,
 					{
@@ -39065,9 +39079,14 @@
 			}
 			function getAutocompleteSchemaData(_ref8) {
 				var _params$filters,
-					_params$search2,
-					_params$search2$query,
-					_params$search3,
+					_store$search,
+					_store$search$origina,
+					_store$search2,
+					_store$search2$query,
+					_store$search3,
+					_store$search3$origin,
+					_store$search4,
+					_store$search4$query,
 					_store$sorting$curren,
 					_store$sorting$curren2,
 					_store$merchandising$,
@@ -39106,13 +39125,32 @@
 				return Object.assign(
 					{
 						q:
-							(null === (_params$search2 = params.search) ||
-							void 0 === _params$search2 ||
-							null === (_params$search2$query = _params$search2.query) ||
-							void 0 === _params$search2$query
+							(null === (_store$search = store.search) ||
+							void 0 === _store$search ||
+							null === (_store$search$origina = _store$search.originalQuery) ||
+							void 0 === _store$search$origina
 								? void 0
-								: _params$search2$query.string) || '',
-						correctedQuery: (null === (_params$search3 = params.search) || void 0 === _params$search3 ? void 0 : _params$search3.originalQuery) || '',
+								: _store$search$origina.string) ||
+							(null === (_store$search2 = store.search) ||
+							void 0 === _store$search2 ||
+							null === (_store$search2$query = _store$search2.query) ||
+							void 0 === _store$search2$query
+								? void 0
+								: _store$search2$query.string) ||
+							'',
+						correctedQuery:
+							null !== (_store$search3 = store.search) &&
+							void 0 !== _store$search3 &&
+							null !== (_store$search3$origin = _store$search3.originalQuery) &&
+							void 0 !== _store$search3$origin &&
+							_store$search3$origin.string
+								? null === (_store$search4 = store.search) ||
+								  void 0 === _store$search4 ||
+								  null === (_store$search4$query = _store$search4.query) ||
+								  void 0 === _store$search4$query
+									? void 0
+									: _store$search4$query.string
+								: void 0,
 					},
 					filters,
 					{
@@ -50575,7 +50613,7 @@
 									void 0 === _config$requesters$be
 										? void 0
 										: _config$requesters$be.origin) || 'https://beacon.searchspring.io'),
-								(this.meta = { initiator: { lib: 'searchspring/snap', 'lib.version': '0.65.0', 'lib.framework': config.framework } }),
+								(this.meta = { initiator: { lib: 'searchspring/snap', 'lib.version': '0.65.1', 'lib.framework': config.framework } }),
 								(this.id = (0, v4.A)());
 						},
 						[
@@ -50685,7 +50723,7 @@
 							((function Tracker_classCallCheck(a, n) {
 								if (!(a instanceof n)) throw new TypeError('Cannot call a class as a function');
 							})(this, Tracker),
-							((config = cjs_default()(Tracker_defaultConfig, config || {})).initiator = 'searchspring/' + config.framework + '/0.65.0'),
+							((config = cjs_default()(Tracker_defaultConfig, config || {})).initiator = 'searchspring/' + config.framework + '/0.65.1'),
 							((_this = Tracker_callSuper(this, Tracker, [globals, config])).targeters = []),
 							(_this.track = {
 								error: function error(data, siteId) {
@@ -50881,7 +50919,7 @@
 							(_this.localStorage = new StorageStore({ type: 'local', key: 'ss-' + _this.config.id })),
 							_this.localStorage.set('siteId', _this.globals.siteId),
 							(null !== (_window$searchspring = window.searchspring) && void 0 !== _window$searchspring && _window$searchspring.tracker) ||
-								((window.searchspring = window.searchspring || {}), (window.searchspring.tracker = _this), (window.searchspring.version = '0.65.0')),
+								((window.searchspring = window.searchspring || {}), (window.searchspring.tracker = _this), (window.searchspring.version = '0.65.1')),
 							setTimeout(function () {
 								_this.targeters.push(
 									new DomTargeter([{ selector: 'script[type^="searchspring/track/"]', emptyTarget: !1 }], function (target, elem) {
