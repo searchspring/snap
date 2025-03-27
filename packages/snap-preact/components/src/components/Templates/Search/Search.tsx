@@ -7,13 +7,13 @@ import { Results, ResultsProps } from '../../Organisms/Results';
 import { defined, mergeProps, mergeStyles } from '../../../utilities';
 import { ComponentProps, ListOption, ResultComponent, StyleScript } from '../../../types';
 import { Theme, useTheme, CacheProvider } from '../../../providers';
-import { Sidebar, SidebarProps } from '../../Organisms/Sidebar';
+import { SidebarProps } from '../../Organisms/Sidebar';
 import { Toolbar, ToolbarProps } from '../../Organisms/Toolbar';
 import { NoResults, NoResultsProps } from '../../Organisms/NoResults';
 import { Lang, useLang, useMediaQuery } from '../../../hooks';
 import { Button, ButtonProps } from '../../Atoms/Button';
-import { Banner, BannerProps } from '../../Atoms/Merchandising';
-import { ContentType, SearchFilterStore } from '@searchspring/snap-store-mobx';
+import { BannerProps } from '../../Atoms/Merchandising';
+import { SearchFilterStore } from '@searchspring/snap-store-mobx';
 import { useState } from 'preact/hooks';
 import deepmerge from 'deepmerge';
 
@@ -60,7 +60,7 @@ export const Search = observer((properties: SearchProps): JSX.Element => {
 		className,
 		controller,
 		hideSidebar,
-		hideMerchandisingBanners,
+		// hideMerchandisingBanners,
 		toggleSidebarButtonText,
 		hideTopToolbar,
 		hideMiddleToolbar,
@@ -74,7 +74,7 @@ export const Search = observer((properties: SearchProps): JSX.Element => {
 	const store = controller.store;
 
 	const isMobile = useMediaQuery(`(max-width: ${mobileDisplayAt})`);
-	const merchandising = controller.store.merchandising;
+	// const merchandising = controller.store.merchandising;
 
 	const [sidebarOpenState, setSidebarOpenState] = useState(Boolean(!toggleSidebarStartClosed));
 
@@ -116,12 +116,11 @@ export const Search = observer((properties: SearchProps): JSX.Element => {
 			// default props
 			name: 'top',
 			className: 'ss__search__header-section__toolbar--top-toolbar',
-			layout: ['PaginationInfo'],
-			slot0:
+			// layout: ['toggleSideBarButton','PaginationInfo'],
+			toggleSideBarButton:
 				!hideToggleSidebarButton && store.loaded && !isMobile && (toggleSidebarButtonText || mergedLang.toggleSidebarButtonText?.value) ? (
 					<ToggleSidebar />
 				) : undefined,
-
 			...defined({
 				disableStyles,
 			}),
@@ -132,7 +131,7 @@ export const Search = observer((properties: SearchProps): JSX.Element => {
 			// default props
 			name: 'middle',
 			className: 'ss__search__content__toolbar--middle-toolbar',
-			layout: ['Separator', 'SortBy', 'PerPage'],
+			// layout: ['Separator', 'SortBy', 'PerPage'],
 			// inherited props
 			...defined({
 				disableStyles,
@@ -144,7 +143,7 @@ export const Search = observer((properties: SearchProps): JSX.Element => {
 			// default props
 			name: 'bottom',
 			className: 'ss__search__content__toolbar--bottom-toolbar',
-			layout: ['Separator', 'Pagination', 'Separator'],
+			// layout: ['Separator', 'Pagination', 'Separator'],
 			// inherited props
 			...defined({
 				disableStyles,
@@ -155,9 +154,9 @@ export const Search = observer((properties: SearchProps): JSX.Element => {
 		Sidebar: {
 			// default props
 			name: 'search',
-			hidePerPage: true,
-			hideSortBy: true,
-			hideFilterSummary: true,
+			// hidePerPage: true,
+			// hideSortBy: true,
+			// hideFilterSummary: true,
 			// inherited props
 			...defined({
 				disableStyles,
@@ -198,35 +197,35 @@ export const Search = observer((properties: SearchProps): JSX.Element => {
 
 	const styling = mergeStyles<SearchProps>(props, defaultStyles);
 
-	let hideLeftBanner;
-	let hideHeaderBanner;
-	let hideBannerBanner;
-	let hideFooterBanner;
+	// let hideLeftBanner;
+	// let hideHeaderBanner;
+	// let hideBannerBanner;
+	// let hideFooterBanner;
 
-	if (hideMerchandisingBanners) {
-		if (typeof hideMerchandisingBanners == 'boolean') {
-			//hide all
-			hideLeftBanner = true;
-			hideHeaderBanner = true;
-			hideBannerBanner = true;
-			hideFooterBanner = true;
-		} else if (typeof hideMerchandisingBanners == 'object') {
-			hideMerchandisingBanners.map((type) => {
-				if (type.toLowerCase() == 'banner') {
-					hideBannerBanner = true;
-				}
-				if (type.toLowerCase() == 'header') {
-					hideHeaderBanner = true;
-				}
-				if (type.toLowerCase() == 'footer') {
-					hideFooterBanner = true;
-				}
-				if (type.toLowerCase() == 'left') {
-					hideLeftBanner = true;
-				}
-			});
-		}
-	}
+	// if (hideMerchandisingBanners) {
+	// 	if (typeof hideMerchandisingBanners == 'boolean') {
+	// 		//hide all
+	// 		// hideLeftBanner = true;
+	// 		// hideHeaderBanner = true;
+	// 		// hideBannerBanner = true;
+	// 		// hideFooterBanner = true;
+	// 	} else if (typeof hideMerchandisingBanners == 'object') {
+	// 		hideMerchandisingBanners.map((type) => {
+	// 			if (type.toLowerCase() == 'banner') {
+	// 				hideBannerBanner = true;
+	// 			}
+	// 			if (type.toLowerCase() == 'header') {
+	// 				hideHeaderBanner = true;
+	// 			}
+	// 			if (type.toLowerCase() == 'footer') {
+	// 				hideFooterBanner = true;
+	// 			}
+	// 			if (type.toLowerCase() == 'left') {
+	// 				hideLeftBanner = true;
+	// 			}
+	// 		});
+	// 	}
+	// }
 
 	return (
 		<CacheProvider>
@@ -243,16 +242,16 @@ export const Search = observer((properties: SearchProps): JSX.Element => {
 				<div className="ss__search__main-section">
 					{!hideSidebar && !isMobile && sidebarOpenState && (
 						<div className="ss__search__sidebar">
-							<Sidebar {...subProps.Sidebar} controller={controller} />
-							{!hideLeftBanner && <Banner content={merchandising.content} type={ContentType.LEFT} name={'left'} />}
+							{/* <Sidebar {...subProps.Sidebar} controller={controller} /> */}
+							{/* {!hideLeftBanner && <Banner content={merchandising.content} type={ContentType.LEFT} name={'left'} />} */}
 						</div>
 					)}
 					<div className={classnames('ss__search__content')}>
-						{!hideHeaderBanner && <Banner content={merchandising.content} type={ContentType.HEADER} name={'header'} />}
+						{/* {!hideHeaderBanner && <Banner content={merchandising.content} type={ContentType.HEADER} name={'header'} />} */}
 
 						{!hideMiddleToolbar && store.pagination.totalResults > 0 && <Toolbar {...subProps.MiddleToolbar} controller={controller} />}
 
-						{!hideBannerBanner && <Banner content={merchandising.content} type={ContentType.BANNER} name={'banner'} />}
+						{/* {!hideBannerBanner && <Banner content={merchandising.content} type={ContentType.BANNER} name={'banner'} />} */}
 
 						{store.pagination.totalResults ? (
 							<Results {...subProps.Results} controller={controller} />
@@ -260,7 +259,7 @@ export const Search = observer((properties: SearchProps): JSX.Element => {
 							store.pagination.totalResults === 0 && <NoResults {...subProps.NoResults} controller={controller} />
 						)}
 
-						{!hideFooterBanner && <Banner content={merchandising.content} type={ContentType.FOOTER} name={'footer'} />}
+						{/* {!hideFooterBanner && <Banner content={merchandising.content} type={ContentType.FOOTER} name={'footer'} />} */}
 
 						{!hideBottomToolBar && store.pagination.totalResults > 0 && <Toolbar {...subProps.BottomToolbar} controller={controller} />}
 					</div>

@@ -28,7 +28,7 @@ export const search: ThemeComponentProps<SearchProps> = {
 					icon: 'filters',
 				},
 				'toolbar.top': {
-					layout: [['SearchHeader'], ['Slot0', 'PaginationInfo', 'Separator', 'PerPage', 'SortBy']],
+					layout: [['SearchHeader'], ['toggleSideBarButton', 'PaginationInfo', 'Separator', 'PerPage', 'SortBy']],
 				},
 				'toolbar.middle': {
 					layout: [],

@@ -18,6 +18,9 @@ import { SnapTemplates } from '../../../../../src';
 import { MobileSidebar, MobileSidebarProps } from '../MobileSidebar';
 import { PaginationInfo, PaginationInfoProps } from '../../Atoms/PaginationInfo/PaginationInfo';
 import { SearchHeader, SearchHeaderProps } from '../../Atoms/SearchHeader/SearchHeader';
+import { Button, ButtonProps } from '../../Atoms/Button';
+import { Banner, BannerProps } from '../../Atoms/Merchandising';
+import { ContentType } from '@searchspring/snap-store-mobx';
 
 const defaultStyles: StyleScript<ToolbarProps> = ({}) => {
 	return css({
@@ -47,12 +50,11 @@ export const Toolbar = observer((properties: ToolbarProps): JSX.Element => {
 
 	const defaultProps: Partial<ToolbarProps> = {
 		treePath: globalTreePath,
-
 		layout: ['MobileSidebar', 'FilterSummary', 'PaginationInfo', 'SortBy', 'PerPage', 'Pagination'],
 	};
 
 	const props = mergeProps('toolbar', globalTheme, defaultProps, properties);
-	const { controller, disableStyles, className, treePath, slot0, slot1, slot2, slot3, layout } = props;
+	const { controller, toggleSideBarButton, disableStyles, className, treePath, layout } = props;
 
 	const styling = mergeStyles<ToolbarProps>(props, defaultStyles);
 
@@ -60,6 +62,18 @@ export const Toolbar = observer((properties: ToolbarProps): JSX.Element => {
 		MobileSidebar: {
 			// default props
 			controller,
+			className: 'ss__toolbar__mobile-sidebar',
+			// inherited props
+			...defined({
+				disableStyles,
+			}),
+			// component theme overrides
+			theme: props?.theme,
+			treePath,
+		},
+		Banner: {
+			// default props
+			content: controller.store.merchandising.content,
 			className: 'ss__toolbar__mobile-sidebar',
 			// inherited props
 			...defined({
@@ -165,6 +179,18 @@ export const Toolbar = observer((properties: ToolbarProps): JSX.Element => {
 			theme: props?.theme,
 			treePath,
 		},
+		Button: {
+			// default props
+			controller,
+			className: 'ss__toolbar__button-toggleSideBarButton',
+			// inherited props
+			...defined({
+				disableStyles,
+			}),
+			// component theme overrides
+			theme: props?.theme,
+			treePath,
+		},
 	};
 
 	function renderModule(module: ModuleNames) {
@@ -207,6 +233,9 @@ export const Toolbar = observer((properties: ToolbarProps): JSX.Element => {
 			case 'PerPage':
 				return <PerPage {...subProps.PerPage} />;
 
+			case 'Button.toggleSideBar':
+				return toggleSideBarButton && <Button {...subProps.Button}>{cloneWithProps(toggleSideBarButton)}</Button>;
+
 			case 'Pagination':
 				if (controller.config.settings?.infinite) {
 					return <LoadMore {...subProps.LoadMore} />;
@@ -214,20 +243,17 @@ export const Toolbar = observer((properties: ToolbarProps): JSX.Element => {
 					return <Pagination {...subProps.Pagination} />;
 				}
 
-			case 'Separator':
+			case '_':
 				return <div className={`ss__toolbar__separator ss__toolbar__separator--${separatorIndex++}`} />;
 
-			case 'Slot0':
-				return slot0 && <div className={classnames('ss__toolbar__slot', `ss__toolbar__slot--0`)}>{cloneWithProps(slot0)}</div>;
+			case 'banner.banner':
+				return <Banner {...subProps.Banner} type={ContentType.BANNER} name={'banner'} />;
 
-			case 'Slot1':
-				return slot1 && <div className={classnames('ss__toolbar__slot', `ss__toolbar__slot--1`)}>{cloneWithProps(slot1)}</div>;
+			case 'banner.footer':
+				return <Banner {...subProps.Banner} type={ContentType.FOOTER} name={'footer'} />;
 
-			case 'Slot2':
-				return slot2 && <div className={classnames('ss__toolbar__slot', `ss__toolbar__slot--2`)}>{cloneWithProps(slot2)}</div>;
-
-			case 'Slot3':
-				return slot3 && <div className={classnames('ss__toolbar__slot', `ss__toolbar__slot--3`)}>{cloneWithProps(slot3)}</div>;
+			case 'banner.header':
+				return <Banner {...subProps.Banner} type={ContentType.HEADER} name={'header'} />;
 
 			default:
 				return null;
@@ -252,9 +278,7 @@ export const Toolbar = observer((properties: ToolbarProps): JSX.Element => {
 							</div>
 						);
 					} else {
-						{
-							return renderModule(module);
-						}
+						return renderModule(module);
 					}
 				})}
 			</div>
@@ -266,12 +290,9 @@ export const Toolbar = observer((properties: ToolbarProps): JSX.Element => {
 
 export interface ToolbarProps extends ComponentProps {
 	controller: SearchController;
-	slot0?: JSX.Element;
-	slot1?: JSX.Element;
-	slot2?: JSX.Element;
-	slot3?: JSX.Element;
 	name?: ToolbarNames;
 	layout?: (ModuleNames | ModuleNames[])[];
+	toggleSideBarButton?: JSX.Element;
 }
 
 export type ModuleNames =
@@ -283,11 +304,11 @@ export type ModuleNames =
 	| 'SortBy'
 	| 'Pagination'
 	| 'PaginationInfo'
-	| 'Separator'
-	| 'Slot0'
-	| 'Slot1'
-	| 'Slot2'
-	| 'Slot3';
+	| '_'
+	| 'Button.toggleSideBar'
+	| 'banner.header'
+	| 'banner.banner'
+	| 'banner.footer';
 
 export type ToolbarNames = 'top' | 'middle' | 'bottom';
 
@@ -301,4 +322,6 @@ interface ToolbarSubProps {
 	PerPage: Partial<PerPageProps>;
 	LayoutSelector: Partial<LayoutSelectorProps>;
 	SearchHeader: Partial<SearchHeaderProps>;
+	Banner: Partial<BannerProps>;
+	Button: Partial<ButtonProps>;
 }
