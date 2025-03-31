@@ -10,12 +10,14 @@ import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { Toolbar, ToolbarProps } from '../../Organisms/Toolbar';
 import { SearchHeader, SearchHeaderProps } from '../../Atoms/SearchHeader';
 import { NoResults, NoResultsProps } from '../../Organisms/NoResults';
-import { Banner, BannerProps } from '../../Atoms/Merchandising';
-import { ContentType } from '@searchspring/snap-store-mobx';
 import { FacetsHorizontal, FacetsHorizontalProps } from '../../Organisms/FacetsHorizontal';
 
 const defaultStyles: StyleScript<SearchHorizontalProps> = ({}) => {
-	return css({});
+	return css({
+		'& .ss__search-horizontal__content': {
+			marginTop: '10px',
+		},
+	});
 };
 
 export const SearchHorizontal = observer((properties: SearchHorizontalProps): JSX.Element => {
@@ -32,7 +34,6 @@ export const SearchHorizontal = observer((properties: SearchHorizontalProps): JS
 		className,
 		controller,
 		hideSearchHeader,
-		hideMerchandisingBanners,
 		hideTopToolbar,
 		hideMiddleToolbar,
 		resultComponent,
@@ -53,19 +54,10 @@ export const SearchHorizontal = observer((properties: SearchHorizontalProps): JS
 			theme: props.theme,
 			treePath,
 		},
-		Banner: {
-			// default props
-			// inherited props
-			...defined({
-				disableStyles,
-			}),
-			theme: props.theme,
-			treePath,
-		},
 		TopToolbar: {
 			name: 'top',
 			// default props
-			layout: ['FilterSummary', 'LayoutSelector', 'SortBy', 'PerPage'],
+			layout: [['FilterSummary'], ['LayoutSelector', '_', 'SortBy', 'PerPage']],
 			// inherited props
 			...defined({
 				disableStyles,
@@ -87,7 +79,7 @@ export const SearchHorizontal = observer((properties: SearchHorizontalProps): JS
 		BottomToolbar: {
 			name: 'bottom',
 			// default props
-			layout: ['Separator', 'Pagination', 'Separator'],
+			layout: ['_', 'Pagination'],
 			// inherited props
 			...defined({
 				disableStyles,
@@ -128,33 +120,6 @@ export const SearchHorizontal = observer((properties: SearchHorizontalProps): JS
 
 	const styling = mergeStyles<SearchHorizontalProps>(props, defaultStyles);
 
-	const merchandising = controller.store.merchandising;
-
-	let hideHeaderBanner;
-	let hideBannerBanner;
-	let hideFooterBanner;
-
-	if (hideMerchandisingBanners) {
-		if (typeof hideMerchandisingBanners == 'boolean') {
-			//hide all
-			hideHeaderBanner = true;
-			hideBannerBanner = true;
-			hideFooterBanner = true;
-		} else if (typeof hideMerchandisingBanners == 'object') {
-			hideMerchandisingBanners.map((type) => {
-				if (type.toLowerCase() == 'banner') {
-					hideBannerBanner = true;
-				}
-				if (type.toLowerCase() == 'header') {
-					hideHeaderBanner = true;
-				}
-				if (type.toLowerCase() == 'footer') {
-					hideFooterBanner = true;
-				}
-			});
-		}
-	}
-
 	return (
 		<CacheProvider>
 			<div {...styling} className={classnames('ss__search-horizontal', className)}>
@@ -167,9 +132,6 @@ export const SearchHorizontal = observer((properties: SearchHorizontalProps): JS
 				{!hideFacetsHorizontal && <FacetsHorizontal {...subProps.FacetsHorizontal} facets={store.facets} controller={controller} />}
 
 				<div className={classnames('ss__search-horizontal__content')}>
-					{!hideHeaderBanner && <Banner {...subProps.Banner} content={merchandising.content} type={ContentType.HEADER} name={'header'} />}
-					{!hideBannerBanner && <Banner {...subProps.Banner} content={merchandising.content} type={ContentType.BANNER} name={'banner'} />}
-
 					{!hideMiddleToolbar && store.pagination.totalResults > 0 && (
 						<Toolbar {...subProps.MiddleToolbar} className="ss__search-horizontal__content__toolbar--middle-toolbar" controller={controller} />
 					)}
@@ -179,8 +141,6 @@ export const SearchHorizontal = observer((properties: SearchHorizontalProps): JS
 					) : (
 						store.pagination.totalResults === 0 && <NoResults {...subProps.NoResults} controller={controller} />
 					)}
-
-					{!hideFooterBanner && <Banner {...subProps.Banner} content={merchandising.content} type={ContentType.FOOTER} name={'footer'} />}
 
 					{!hideBottomToolBar && store.pagination.totalResults > 0 && (
 						<Toolbar {...subProps.BottomToolbar} className="ss__search-horizontal__content__toolbar--bottom-toolbar" controller={controller} />
@@ -205,7 +165,6 @@ export interface SearchHorizontalProps extends ComponentProps {
 
 interface SearchHorizontalSubProps {
 	FacetsHorizontal: Partial<FacetsHorizontalProps>;
-	Banner: Partial<BannerProps>;
 	TopToolbar: Partial<ToolbarProps>;
 	MiddleToolbar: Partial<ToolbarProps>;
 	BottomToolbar: Partial<ToolbarProps>;

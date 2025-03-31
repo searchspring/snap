@@ -21,30 +21,24 @@ export const search: ThemeComponentProps<SearchProps> = {
 		},
 		theme: {
 			components: {
-				// facetPaletteOptions: {
-				// 	hideLabel: false,
-				// 	columns: 3,
-				// },
-
 				filterSummary: {
 					hideTitle: true,
 				},
 				sidebar: {
-					hideTitle: true,
-					hideFilterSummary: true,
+					layout: ['Facets', 'Banner.left'],
 				},
 				'button.sidebar-toggle': {
 					icon: 'close-thin',
 				},
 
 				'toolbar.top': {
-					layout: [['SearchHeader'], ['toggleSideBarButton', 'FilterSummary', 'Separator', 'SortBy', 'LayoutSelector']],
+					layout: [['SearchHeader'], ['Button.toggleSideBar', 'FilterSummary', '_', 'SortBy', 'LayoutSelector']],
 				},
 				'toolbar.middle': {
 					layout: [],
 				},
 				'toolbar.bottom': {
-					layout: ['Separator', 'PerPage', 'PaginationInfo', 'Pagination', 'Separator'],
+					layout: ['_', 'PerPage', 'PaginationInfo', 'Pagination', '_'],
 				},
 				mobileSidebar: {
 					theme: {
@@ -65,10 +59,10 @@ export const search: ThemeComponentProps<SearchProps> = {
 					columns: 2,
 				},
 				'toolbar.top': {
-					layout: ['SearchHeader', 'Separator', 'MobileSidebar'],
+					layout: ['SearchHeader', '_', 'MobileSidebar'],
 				},
 				'toolbar.middle': {
-					layout: [['FilterSummary'], ['SortBy', 'Separator', 'LayoutSelector']],
+					layout: [['FilterSummary'], ['SortBy', '_', 'LayoutSelector']],
 				},
 			},
 		},
@@ -80,10 +74,10 @@ export const search: ThemeComponentProps<SearchProps> = {
 					columns: 3,
 				},
 				'toolbar.top': {
-					layout: ['SearchHeader', 'Separator', 'MobileSidebar'],
+					layout: ['SearchHeader', '_', 'MobileSidebar'],
 				},
 				'toolbar.middle': {
-					layout: [['FilterSummary'], ['SortBy', 'Separator', 'LayoutSelector']],
+					layout: [['FilterSummary'], ['SortBy', '_', 'LayoutSelector']],
 				},
 			},
 		},

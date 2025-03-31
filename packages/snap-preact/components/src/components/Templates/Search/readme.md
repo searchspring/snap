@@ -11,7 +11,6 @@ Renders a Search Results Page.
 - SearchHeader
 - MobileSidebar
 - Button
-- Banner
 
 ## Usage
 
@@ -69,18 +68,6 @@ The `hideToggleSidebarButton` prop hides the Sidebar toggle button.
 
 ```jsx
 <Search controller={controller} toggleSidebarButtonText={'Toggle Facets'} hideToggleSidebarButton={true} />
-```
-
-### hideMerchandisingBanners
-The `hideMerchandisingBanners` prop specifies if merchandising banners should render. This can take a boolean to hide all banners, or an array of specific banner types you wish to hide. 
-
-```jsx
-<Search controller={controller} hideMerchandisingBanners={true} />
-```
-or
-
-```jsx
-<Search controller={controller} hideMerchandisingBanners={["Footer", "Header", "Banner", "left"]} />
 ```
 
 ### layoutConfig

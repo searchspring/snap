@@ -34,8 +34,6 @@ const mobileSidebarStyleScript = ({ theme }: MobileSidebarProps) => {
 				overflow: 'scroll',
 			},
 			'.ss__per-page, .ss__sortby': {
-				display: 'inline-flex',
-				width: '49%',
 				fontSize: '10px',
 
 				'.ss__dropdown': {
@@ -55,9 +53,16 @@ const mobileSidebarStyleScript = ({ theme }: MobileSidebarProps) => {
 export const mobileSidebar: ThemeComponentProps<MobileSidebarProps> = {
 	default: {
 		themeStyleScript: mobileSidebarStyleScript,
+		theme: {
+			components: {
+				'button.slideout': {
+					icon: 'filters',
+				},
+			},
+		},
 	},
 	mobile: {
-		hideSortBy: false,
+		layout: ['FilterSummary', 'SortBy', 'PerPage', 'Facets', 'Banner.left'],
 	},
 	tablet: {},
 	desktop: {},

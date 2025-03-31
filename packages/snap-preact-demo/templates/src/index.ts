@@ -33,10 +33,10 @@ let config: SnapTemplatesConfig = {
 					// "searchHorizontal toolbar.top": {
 					// 	hideLayoutSelector: false,
 					// },
-					'toolbar.top': {
-						// layout: [['SearchHeader'], [ 'PaginationInfo', 'Separator', 'PerPage', 'SortBy','toggleSideBarButton']],
-					},
-					button: {},
+					// 'toolbar.top': {
+					// 	// layout: [['SearchHeader'], [ 'PaginationInfo', 'Separator', 'PerPage', 'SortBy','toggleSideBarButton']],
+					// },
+					// button: {},
 					// recommendation: {
 					// 	lazyRender: {
 					// 		enabled: false,

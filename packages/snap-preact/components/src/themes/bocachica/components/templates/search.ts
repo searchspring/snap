@@ -21,29 +21,23 @@ export const search: ThemeComponentProps<SearchProps> = {
 					columns: 4,
 				},
 				'sidebar.search': {
-					hideTitle: true,
+					layout: ['FilterSummary', 'Facets', 'Banner.left'],
 					sticky: true,
 				},
 				'button.sidebar-toggle': {
 					icon: 'filters',
 				},
 				'toolbar.top': {
-					layout: [['SearchHeader'], ['toggleSideBarButton', 'PaginationInfo', 'Separator', 'PerPage', 'SortBy']],
+					layout: [
+						['_', 'SearchHeader', '_'],
+						['Button.toggleSideBar', 'PaginationInfo', '_', 'PerPage', 'SortBy'],
+					],
 				},
 				'toolbar.middle': {
 					layout: [],
 				},
 				'toolbar.bottom': {
-					layout: ['Separator', 'Pagination', 'Separator'],
-				},
-				mobileSidebar: {
-					theme: {
-						components: {
-							filterSummary: {
-								hideTitle: false,
-							},
-						},
-					},
+					layout: ['_', 'Pagination', '_'],
 				},
 			},
 		},
@@ -55,7 +49,13 @@ export const search: ThemeComponentProps<SearchProps> = {
 					columns: 2,
 				},
 				'toolbar.top': {
-					layout: [['SearchHeader'], ['MobileSidebar', 'Separator', 'PaginationInfo', 'Separator', 'LayoutSelector']],
+					layout: [
+						['_', 'SearchHeader', '_'],
+						['MobileSidebar', '_', 'PaginationInfo', '_', 'LayoutSelector'],
+					],
+				},
+				mobileSidebar: {
+					layout: [['SortBy'], ['Facets']],
 				},
 			},
 		},
@@ -67,7 +67,13 @@ export const search: ThemeComponentProps<SearchProps> = {
 					columns: 3,
 				},
 				'toolbar.top': {
-					layout: [['SearchHeader'], ['MobileSidebar', 'Separator', 'PaginationInfo', 'Separator', 'LayoutSelector']],
+					layout: [
+						['_', 'SearchHeader', '_'],
+						['MobileSidebar', '_', 'PaginationInfo', '_', 'LayoutSelector'],
+					],
+				},
+				mobileSidebar: {
+					layout: [['SortBy'], ['Facets']],
 				},
 			},
 		},
