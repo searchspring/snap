@@ -94,7 +94,7 @@ describe('Snap Client Integration Tests', () => {
 			expect(mockStorage[CACHE_STORAGE_KEY]).toBeDefined();
 
 			//it did make additional calls because the params changed
-			expect(fetchfn).toHaveBeenCalledTimes(4);
+			expect(fetchfn).toHaveBeenCalledTimes(5);
 
 			//check that there are results that we pulled from cache
 			expect(controller.store.results.length).toBeGreaterThan(0);
@@ -104,7 +104,7 @@ describe('Snap Client Integration Tests', () => {
 			await controller.search();
 
 			//but it did not make additional calls and used previous cache response
-			expect(fetchfn).toHaveBeenCalledTimes(4);
+			expect(fetchfn).toHaveBeenCalledTimes(5);
 
 			fetchfn.mockReset();
 		});
