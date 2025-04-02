@@ -26,7 +26,17 @@ import { useState } from 'react';
 import { FacetsHorizontal } from '../../Organisms/FacetsHorizontal';
 import { Button, ButtonProps } from '../../Atoms/Button';
 
-const defaultStyles: StyleScript<AutocompleteTemplateProps> = ({ controller, input, viewportMaxHeight, width, theme }) => {
+const defaultStyles: StyleScript<AutocompleteTemplateProps> = ({
+	controller,
+	input,
+	viewportMaxHeight,
+	width,
+	theme,
+	column1,
+	column2,
+	column3,
+	column4,
+}) => {
 	let inputViewportOffsetBottom = 0;
 	if (input) {
 		let elem: Element | null;
@@ -40,6 +50,23 @@ const defaultStyles: StyleScript<AutocompleteTemplateProps> = ({ controller, inp
 	}
 	const noResults = Boolean(controller.store.search?.query?.string && controller.store.results.length === 0);
 	return css({
+		'.ss__autocomplete__column.ss__autocomplete__column--c1': {
+			flex: column1?.width == 'auto' ? '1 1 auto' : `1 0 ${column1?.width}`,
+		},
+		'.ss__autocomplete__column.ss__autocomplete__column--c2': {
+			flex: column2?.width == 'auto' ? '1 1 auto' : `1 0 ${column2?.width}`,
+		},
+		'.ss__autocomplete__column.ss__autocomplete__column--c3': {
+			flex: column3?.width == 'auto' ? '1 1 auto' : `1 0 ${column3?.width}`,
+		},
+		'.ss__autocomplete__column.ss__autocomplete__column--c4': {
+			flex: column4?.width == 'auto' ? '1 1 auto' : `1 0 ${column4?.width}`,
+		},
+
+		'.ss__autocomplete__column, .ss__autocomplete__row': {
+			minWidth: 0,
+		},
+
 		'&, & *, & *:before, & *:after': {
 			boxSizing: 'border-box',
 		},
@@ -66,14 +93,15 @@ const defaultStyles: StyleScript<AutocompleteTemplateProps> = ({ controller, inp
 			display: 'flex',
 			flexDirection: 'column',
 			flexFlow: 'wrap',
-			// flexGrow: '1',
 		},
 
 		'.ss__autocomplete__column:empty, .ss__autocomplete__row:empty': {
 			display: 'none',
 		},
+
 		'.ss__autocomplete__separator': {
 			flexGrow: 1,
+			flexShrink: 1,
 		},
 
 		'.ss__autocomplete__close-button': {
@@ -84,21 +112,6 @@ const defaultStyles: StyleScript<AutocompleteTemplateProps> = ({ controller, inp
 			top: '0px !important',
 			left: '0px !important',
 			zIndex: '1',
-		},
-
-		'.ss__autocomplete__terms-wrapper': {
-			width: '150px',
-
-			'&.nested': {
-				width: '100%',
-			},
-		},
-		'.ss__autocomplete__facets-wrapper': {
-			width: '150px',
-
-			'&.nested': {
-				width: '100%',
-			},
 		},
 
 		'.ss__autocomplete__facets': {
@@ -166,9 +179,18 @@ export const AutocompleteTemplate = observer((properties: AutocompleteTemplatePr
 		facetsTitle: '',
 		contentTitle: '',
 		layout: [['C1', 'C2', 'C3']],
-		column1Layout: ['TermsList'],
-		column2Layout: ['Facets'],
-		column3Layout: [['Content'], ['_', 'Button.see-more']],
+		column1: {
+			layout: ['TermsList'],
+			width: '150px',
+		},
+		column2: {
+			layout: ['Facets'],
+			width: '150px',
+		},
+		column3: {
+			layout: [['Content'], ['_', 'Button.see-more']],
+			width: 'auto',
+		},
 		width: '100%',
 		templates: {
 			recommendation: {
@@ -272,10 +294,10 @@ export const AutocompleteTemplate = observer((properties: AutocompleteTemplatePr
 		facetsTitle,
 		contentTitle,
 		layout,
-		column1Layout,
-		column2Layout,
-		column3Layout,
-		column4Layout,
+		column1,
+		column2,
+		column3,
+		column4,
 		excludeBanners,
 		resultComponent,
 		templates,
@@ -518,46 +540,67 @@ export const AutocompleteTemplate = observer((properties: AutocompleteTemplatePr
 
 	const RecommendationTemplateResultComponent = recommendationTemplateResultComponent as ResultComponent | undefined;
 
-	const findModule = (module: ModuleNamesWithColumns, nested?: boolean) => {
+	const cleanUpEmptyCols = () => {
+		document.querySelectorAll('.ss__autocomplete__column').forEach((col) => {
+			if (!hasElemsToShow(col)) {
+				col.remove();
+			}
+		});
+	};
+
+	function hasElemsToShow(element: Element) {
+		if (!element.children.length) return true;
+
+		for (const child of element.children) {
+			if (child.tagName !== 'DIV' || child.innerHTML.trim() !== '') {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	setTimeout(() => cleanUpEmptyCols());
+
+	const findModule = (module: ModuleNamesWithColumns) => {
 		//new row
 		if (typeof module !== 'string') {
-			return <div className="ss__autocomplete__row">{module?.map((subModule) => findModule(subModule, true))}</div>;
+			return <div className="ss__autocomplete__row">{module?.map((subModule) => findModule(subModule))}</div>;
 		}
 
-		if (module == 'C1' && column1Layout?.length) {
+		if (module == 'C1' && column1?.layout?.length) {
 			return (
 				<div className="ss__autocomplete__column ss__autocomplete__column--c1">
-					{column1Layout?.map((module) => {
+					{column1?.layout?.map((module) => {
 						return findModule(module);
 					})}
 				</div>
 			);
 		}
 
-		if (module == 'C2' && column2Layout?.length) {
+		if (module == 'C2' && column2?.layout?.length) {
 			return (
 				<div className="ss__autocomplete__column ss__autocomplete__column--c2">
-					{column2Layout?.map((module) => {
+					{column2?.layout?.map((module) => {
 						return findModule(module);
 					})}
 				</div>
 			);
 		}
 
-		if (module == 'C3' && column3Layout?.length) {
+		if (module == 'C3' && column3?.layout?.length) {
 			return (
 				<div className="ss__autocomplete__column ss__autocomplete__column--c3">
-					{column3Layout?.map((module) => {
+					{column3?.layout?.map((module) => {
 						return findModule(module);
 					})}
 				</div>
 			);
 		}
 
-		if (module == 'C4' && column4Layout?.length) {
+		if (module == 'C4' && column4?.layout?.length) {
 			return (
 				<div className="ss__autocomplete__column ss__autocomplete__column--c4">
-					{column4Layout?.map((module) => {
+					{column4?.layout?.map((module) => {
 						return findModule(module);
 					})}
 				</div>
@@ -566,7 +609,7 @@ export const AutocompleteTemplate = observer((properties: AutocompleteTemplatePr
 
 		if (module == 'TermsList') {
 			return (
-				<div className={classnames('ss__autocomplete__terms-wrapper', { nested: nested })}>
+				<div className={classnames('ss__autocomplete__terms-wrapper')}>
 					<TermsList controller={controller} {...subProps.termsList} />
 				</div>
 			);
@@ -613,7 +656,7 @@ export const AutocompleteTemplate = observer((properties: AutocompleteTemplatePr
 		}
 		if (module == 'Facets') {
 			return facetsToShow.length ? (
-				<div className={classnames('ss__autocomplete__facets-wrapper', { nested: nested })}>
+				<div className={classnames('ss__autocomplete__facets-wrapper')}>
 					{facetsTitle || lang.facetsTitle.value ? (
 						<div className={classnames('ss__autocomplete__title', 'ss__autocomplete__title--facets')}>
 							<h5 {...mergedLang.facetsTitle?.all}></h5>
@@ -770,14 +813,21 @@ export type ModuleNames =
 type ColumnsNames = 'C1' | 'C2' | 'C3' | 'C4';
 type ModuleNamesWithColumns = ModuleNames | ColumnsNames | ModuleNames[] | ColumnsNames[];
 
+type Column = {
+	layout: ModuleNames[][] | ModuleNames[];
+	width: string | 'auto';
+};
+
 export interface AutocompleteTemplateProps extends ComponentProps {
 	input: Element | string;
 	controller: AutocompleteController;
 	layout?: ModuleNamesWithColumns[];
-	column1Layout?: ModuleNames[][] | ModuleNames[];
-	column2Layout?: ModuleNames[][] | ModuleNames[];
-	column3Layout?: ModuleNames[][] | ModuleNames[];
-	column4Layout?: ModuleNames[][] | ModuleNames[];
+
+	column1?: Column;
+	column2?: Column;
+	column3?: Column;
+	column4?: Column;
+
 	facetsTitle?: string;
 	contentTitle?: string;
 	excludeBanners?: boolean;
