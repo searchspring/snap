@@ -86,24 +86,24 @@ The `contentTitle` prop will display the given text above the autocomplete conte
 <Autocomplete controller={controller} input={'#searchInput'} contentTitle={'Results'} />
 ```
 
-### expandSearchButtonText
-The `expandSearchButtonText` prop will display the given text in the expand search button.
+### seeMoreButtonText
+The `seeMoreButtonText` prop will display the given text in the see more button.
 
 ```jsx
-<Autocomplete controller={controller} input={'#searchInput'} expandSearchButtonText={'See More!'} />
+<Autocomplete controller={controller} input={'#searchInput'} seeMoreButtonText={'See More!'} />
 ```
 
-The `expandSearchButtonText` prop can also take a function returning a string. The function is pased the Autocomplete controller. 
+The `seeMoreButtonText` prop can also take a function returning a string. The function is pased the Autocomplete controller. 
 
 ```jsx
 
-const expandSearchButtonText = (controller) => {
+const seeMoreButtonText = (controller) => {
     const { pagination, filters, search } = controller.store;
 
     return `See ${pagination.totalResults} ${filters.length > 0 ? 'filtered' : ''} result${pagination.totalResults == 1 ? '' : 's'} for "${search.query?.string}"`;
 }
 
-<Autocomplete controller={controller} input={'#searchInput'} expandSearchButtonText={expandSearchButtonText} />
+<Autocomplete controller={controller} input={'#searchInput'} seeMoreButtonText={seeMoreButtonText} />
 ```
 
 ### viewportMaxHeight

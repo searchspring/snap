@@ -262,9 +262,9 @@ export default {
 			},
 			control: { type: 'text' },
 		},
-		expandSearchButtonText: {
+		seeMoreButtonText: {
 			defaultValue: 'See ${pagination.totalResults} results for "${search.query?.string}"',
-			description: 'Text to render in the expand search button',
+			description: 'Text to render in the see more button',
 			table: {
 				type: {
 					summary: 'string || function',
