@@ -22,6 +22,38 @@ describe('Tracking Beacon 2.0', () => {
 			expect(context).to.have.property('timestamp').to.be.a('string');
 			expect(context).to.have.property('userAgent').to.be.a('string');
 			expect(context).to.have.property('userId').to.be.a('string');
+			expect(context).not.to.have.property('attribution');
+			expect(context).not.to.have.property('currency');
+			expect(context).not.to.have.property('dev');
+
+			expect(response.body).to.have.property('success').to.equal(true);
+		});
+	});
+
+	it('has context data with currency, attribution, dev', () => {
+		cy.on('window:before:load', (win) => {
+			win.mergeSnapConfig = {
+				mode: 'development',
+			};
+		});
+		cy.visit('https://localhost:2222/category.html?ss_attribution=email:emailTag');
+
+		cy.wait(`@beacon2/shopper/login`).then(({ request, response }) => {
+			const { context } = JSON.parse(request.body);
+			expect(context).to.have.property('shopperId').to.be.a('string');
+			expect(context).to.have.property('initiator').to.be.a('string');
+			expect(context).to.have.property('pageLoadId').to.be.a('string');
+			expect(context).to.have.property('pageUrl').to.be.a('string');
+			expect(context).to.have.property('sessionId').to.be.a('string');
+			expect(context).to.have.property('timestamp').to.be.a('string');
+			expect(context).to.have.property('userAgent').to.be.a('string');
+			expect(context).to.have.property('userId').to.be.a('string');
+			expect(context).to.have.property('attribution').to.be.an('array').length(1);
+			expect(context.attribution[0]).to.have.property('type').to.equal('email');
+			expect(context.attribution[0]).to.have.property('id').to.equal('emailTag');
+
+			expect(context).to.have.property('currency').to.be.an('object').and.to.have.property('code').to.equal('EUR');
+			expect(context).to.have.property('dev').to.be.a('boolean').and.to.equal(true);
 
 			expect(response.body).to.have.property('success').to.equal(true);
 		});
@@ -30,36 +62,123 @@ describe('Tracking Beacon 2.0', () => {
 	it('tracked search render, impression, clickthrough', () => {
 		cy.visit('https://localhost:2222');
 
-		cy.wait(`@beacon2/search/render`).then(({ request, response }) => {
-			expect(response.body).to.have.property('success').to.equal(true);
+		let initialContext;
 
-			const { context, data } = JSON.parse(request.body);
-			expect(context).to.be.an('object');
-			expect(data).to.have.property('results').to.be.an('array').length.greaterThan(0);
-			expect(data.results[0]).to.have.property('uid').to.be.a('string');
-			expect(data).to.have.property('merchandising').to.be.an('object');
-			expect(data).to.have.property('pagination').to.be.an('object');
-			expect(data).to.have.property('sort').to.be.an('array').length.greaterThan(0);
-			expect(data).to.have.property('q').to.be.a('string');
+		cy.waitForBundle().then(() => {
+			cy.window().then((win) => {
+				expect(win.searchspring).to.exist;
+				cy.waitUntil(() => win.searchspring.controller.search.store.loaded);
+
+				const results = win.searchspring.controller.search.store.results.filter((result) => result.type === 'product');
+				expect(results.length).to.be.greaterThan(0);
+
+				cy.wait(`@beacon2/search/render`).then(({ request, response }) => {
+					expect(response.body).to.have.property('success').to.equal(true);
+
+					const { context, data } = JSON.parse(request.body);
+					expect(context).to.be.an('object');
+
+					// save context values for later assertions
+					initialContext = { ...context };
+
+					expect(data).to.have.property('results').to.be.an('array').length(results.length); // all results are rendered
+					expect(data.results[0]).to.have.property('uid').to.be.a('string');
+					expect(data).to.have.property('merchandising').to.be.an('object');
+					expect(data).to.have.property('pagination').to.be.an('object');
+					expect(data).to.not.have.property('sort');
+					expect(data).to.have.property('q').to.be.a('string');
+				});
+
+				// get height of result to impress 2nd row
+				cy.get('.ss__result')
+					.first()
+					.then((el) => {
+						const height = el.height();
+						cy.scrollTo(0, height);
+					});
+
+				cy.wait(`@beacon2/search/impression`, { timeout: 10000 }).then(({ request, response }) => {
+					expect(response.body).to.have.property('success').to.equal(true);
+
+					const { context, data } = JSON.parse(request.body);
+					expect(data).to.have.property('results').to.be.an('array').length(8); // first 8 results are visible on the page
+
+					// assert context values are the same as the initial values
+					expect(context).to.be.an('object');
+					expect(context.initiator).to.equal(initialContext.initiator);
+					expect(context.pageLoadId).to.equal(initialContext.pageLoadId);
+					expect(context.pageUrl).to.equal(initialContext.pageUrl);
+					expect(context.sessionId).to.equal(initialContext.sessionId);
+					expect(context.shopperId).to.equal(initialContext.shopperId);
+					expect(context.timestamp).not.to.equal(initialContext.timestamp); // timestamp should be different
+					expect(context.userAgent).to.equal(initialContext.userAgent);
+					expect(context.userId).to.equal(initialContext.userId);
+				});
+			});
 		});
 
-		cy.scrollTo(0, 500); // Scroll down to trigger impressions
+		// reload page to generate new context
+		cy.visit('https://localhost:2222?differentPageUrl=1');
 
-		cy.wait(`@beacon2/search/impression`, { timeout: 10000 }).then(({ request, response }) => {
-			expect(response.body).to.have.property('success').to.equal(true);
+		cy.waitForBundle().then(() => {
+			cy.window().then((win) => {
+				expect(win.searchspring).to.exist;
+				cy.waitUntil(() => win.searchspring.controller.search.store.loaded);
 
-			const { data } = JSON.parse(request.body);
-			expect(data).to.have.property('results').to.be.an('array').length.greaterThan(0);
-		});
+				const firstResult = win.searchspring.controller.search.store.results.find((result) => result.type === 'product');
+				const pagination = win.searchspring.controller.search.store.pagination;
+				const merchandising = win.searchspring.controller.search.store.merchandising;
+				expect(firstResult).to.exist;
+				expect(pagination).to.exist;
+				expect(merchandising).to.exist;
 
-		// Click on first product
-		cy.get('.ss__result a').first().click({ force: true });
+				// Click on first product
+				cy.get(`.ss__result a[href='${firstResult.mappings.core.url}']`).first().click({ force: true });
 
-		cy.wait(`@beacon2/search/clickthrough`).then(({ request, response }) => {
-			expect(response.body).to.have.property('success').to.equal(true);
+				cy.wait(`@beacon2/search/clickthrough`).then(({ request, response }) => {
+					expect(response.body).to.have.property('success').to.equal(true);
 
-			const { data } = JSON.parse(request.body);
-			expect(data).to.have.property('results').to.be.an('array').length(1);
+					const { context, data } = JSON.parse(request.body);
+
+					// assert clickthrough data is correct product that was clicked
+					expect(data).to.have.property('results').to.be.an('array').length(1);
+					expect(data.results[0]).to.have.property('uid').to.be.a('string').and.to.equal(firstResult.mappings.core.uid);
+					expect(data.results[0]).to.have.property('sku').to.be.a('string').and.to.equal(firstResult.mappings.core.sku);
+
+					// assert data doesn't have other properties
+					expect(JSON.stringify(data)).to.equal(
+						JSON.stringify({
+							q: '',
+							pagination: {
+								totalResults: pagination.totalResults,
+								page: pagination.page,
+								resultsPerPage: pagination.pageSize,
+							},
+							merchandising: {
+								redirect: merchandising.redirect,
+								personalized: merchandising.personalized,
+							},
+							results: [
+								{
+									uid: firstResult.mappings.core.uid,
+									sku: firstResult.mappings.core.sku,
+								},
+							],
+						})
+					);
+
+					// assert context values are different after page reload
+					expect(context).to.be.an('object');
+					expect(context.initiator).to.equal(initialContext.initiator);
+					expect(context.pageLoadId).to.not.equal(initialContext.pageLoadId); // pageLoadId should be different
+					expect(context.pageUrl).to.not.equal(initialContext.pageUrl); // pageUrl should be different
+					expect(context.sessionId).to.equal(initialContext.sessionId);
+					expect(context.shopperId).to.equal(initialContext.shopperId);
+					expect(context.timestamp).not.to.equal(initialContext.timestamp); // timestamp should be different
+					expect(context.userAgent).to.equal(initialContext.userAgent);
+					expect(context.userId).to.equal(initialContext.userId);
+				});
+			});
 		});
 	});
 
@@ -78,7 +197,12 @@ describe('Tracking Beacon 2.0', () => {
 		});
 
 		// Wait for scroll or use a custom command to force visibility
-		cy.scrollTo(0, 500); // Scroll down to trigger impressions
+		cy.get('.ss__result')
+			.first()
+			.then((el) => {
+				const height = el.height();
+				cy.scrollTo(0, height);
+			});
 
 		cy.wait(`@beacon2/category/impression`, { timeout: 10000 }).its('response.statusCode').should('eq', 200);
 
@@ -101,7 +225,7 @@ describe('Tracking Beacon 2.0', () => {
 			expect(data.results[0]).to.have.property('uid').to.be.a('string');
 			expect(data).to.have.property('merchandising').to.be.an('object');
 			expect(data).to.have.property('pagination').to.be.an('object');
-			expect(data).to.have.property('sort').to.be.an('array').length.greaterThan(0);
+			expect(data).to.not.have.property('sort');
 		});
 
 		cy.wait(`@beacon2/autocomplete/impression`, { timeout: 10000 }).then(({ request, response }) => {

@@ -14,7 +14,7 @@ type RecommendationTrackMethods = {
 	product: {
 		clickThrough: (e: MouseEvent, result: Product) => void;
 		click: (e: MouseEvent, result: Product) => void;
-		render: (result?: Product) => void;
+		render: (result: Product) => void;
 		impression: (result: Product) => void;
 		addToCart: (result: Product) => void;
 	};
@@ -78,14 +78,15 @@ export class RecommendationController extends AbstractController {
 			await next();
 			const controller = search.controller as RecommendationController;
 			if (controller.store.loaded && !controller.store.error) {
-				if (controller.store.results.length === 0) {
-					this.track.product.render();
-				}
-				controller.store.results.forEach((result) => {
-					if (result.type === 'product') {
-						this.track.product.render(result as Product);
-					}
+				const products = controller.store.results.filter((result) => result.type === 'product') as Product[];
+				const results = products.length === 0 ? [] : products;
+				const data = getRecommendationsSchemaData({ store: this.store, results });
+				this.tracker.events.recommendations.render({ data, siteId: this.config.globals?.siteId });
+				products.forEach((result) => {
+					this.events.product[result.id] = this.events.product[result.id] || {};
+					this.events.product[result.id].render = true;
 				});
+				this.eventManager.fire('track.product.render', { controller: this, products, trackEvent: data });
 			}
 		});
 
@@ -137,14 +138,13 @@ export class RecommendationController extends AbstractController {
 				this.eventManager.fire('track.product.impression', { controller: this, products: [result], trackEvent: data });
 				return data;
 			},
-			render: (result?: Product): RecommendationsSchemaData | undefined => {
-				const key = result?.id || 'noresults';
-				if (this.events.product[key]?.render) return;
+			render: (result: Product): RecommendationsSchemaData | undefined => {
+				if (this.events.product[result.id]?.render) return;
 
-				const data = getRecommendationsSchemaData({ store: this.store, results: result ? [result] : [] });
+				const data = getRecommendationsSchemaData({ store: this.store, results: [result] });
 				this.tracker.events.recommendations.render({ data, siteId: this.config.globals?.siteId });
-				this.events.product[key] = this.events.product[key] || {};
-				this.events.product[key].render = true;
+				this.events.product[result.id] = this.events.product[result.id] || {};
+				this.events.product[result.id].render = true;
 				this.eventManager.fire('track.product.render', { controller: this, products: [result], trackEvent: data });
 				return data;
 			},

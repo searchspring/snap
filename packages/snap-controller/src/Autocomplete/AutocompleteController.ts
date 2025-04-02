@@ -56,7 +56,7 @@ type AutocompleteTrackMethods = {
 	product: {
 		clickThrough: (e: MouseEvent, result: Product) => void;
 		click: (e: MouseEvent, result: Product | Banner) => void;
-		render: (result?: Product) => void;
+		render: (result: Product) => void;
 		impression: (result: Product) => void;
 		addToCart: (results: Product) => void;
 	};
@@ -112,14 +112,15 @@ export class AutocompleteController extends AbstractController {
 			await next();
 			const controller = search.controller as AutocompleteController;
 			if (controller.store.loaded && !controller.store.error) {
-				if (controller.store.results.length === 0) {
-					this.track.product.render();
-				}
-				controller.store.results.forEach((result) => {
-					if (result.type === 'product') {
-						this.track.product.render(result as Product);
-					}
+				const products = controller.store.results.filter((result) => result.type === 'product') as Product[];
+				const results = products.length === 0 ? [] : products;
+				const data = getAutocompleteSchemaData({ params: this.params, store: this.store, results });
+				this.tracker.events.autocomplete.render({ data, siteId: this.config.globals?.siteId });
+				products.forEach((result) => {
+					this.events.product[result.id] = this.events.product[result.id] || {};
+					this.events.product[result.id].render = true;
 				});
+				this.eventManager.fire('track.product.render', { controller: this, products, trackEvent: data });
 			}
 		});
 
@@ -182,14 +183,13 @@ export class AutocompleteController extends AbstractController {
 					// TODO: in future, send as an interaction event
 				}
 			},
-			render: (result?: Product) => {
-				const key = result?.id || 'noresults';
-				if (this.events.product[key]?.render) return;
+			render: (result: Product) => {
+				if (this.events.product[result.id]?.render) return;
 
 				const data = getAutocompleteSchemaData({ params: this.params, store: this.store, results: result ? [result] : [] });
 				this.tracker.events.autocomplete.render({ data, siteId: this.config.globals?.siteId });
-				this.events.product[key] = this.events.product[key] || {};
-				this.events.product[key].render = true;
+				this.events.product[result.id] = this.events.product[result.id] || {};
+				this.events.product[result.id].render = true;
 				this.eventManager.fire('track.product.render', { controller: this, products: [result], trackEvent: data });
 			},
 			impression: (result: Product): void => {
@@ -909,14 +909,12 @@ function getAutocompleteSchemaData({
 		q: store.search?.originalQuery?.string || store.search?.query?.string || '',
 		correctedQuery: store.search?.originalQuery?.string ? store.search?.query?.string : undefined,
 		...filters,
-		sort: store.sorting.options
-			.filter((sort) => sort.active)
-			?.map((sort) => {
-				return {
-					field: sort.field,
-					dir: sort.direction as AutocompleteSchemaDataSortInnerDirEnum,
-				};
-			}),
+		sort: params.sorts?.map((sort) => {
+			return {
+				field: sort.field,
+				dir: sort.direction as AutocompleteSchemaDataSortInnerDirEnum,
+			};
+		}),
 		pagination: {
 			totalResults: store.pagination.totalResults,
 			page: store.pagination.page,

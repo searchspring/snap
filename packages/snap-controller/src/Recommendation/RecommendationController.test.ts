@@ -292,11 +292,7 @@ describe('Recommendation Controller', () => {
 
 		await controller.search();
 
-		controller.store.results.forEach((result) => {
-			controller.track.product.render(result);
-		});
-
-		expect(trackfn).toHaveBeenCalledTimes(controller.store.results.length);
+		expect(trackfn).toHaveBeenCalledTimes(1);
 
 		trackfn.mockClear();
 	});
