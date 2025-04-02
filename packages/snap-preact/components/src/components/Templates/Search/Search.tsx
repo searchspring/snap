@@ -102,7 +102,7 @@ export const Search = observer((properties: SearchProps): JSX.Element => {
 			// default props
 			name: 'top',
 			className: 'ss__search__header-section__toolbar--top-toolbar',
-			layout: ['SearchHeader', 'Button.toggleSideBar'],
+			layout: ['SearchHeader', 'Banner.header', 'Button.toggleSideBar'],
 			toggleSideBarButton:
 				!hideToggleSidebarButton && store.loaded && !isMobile && (toggleSidebarButtonText || mergedLang.toggleSidebarButtonText?.value) ? (
 					<ToggleSidebar />
@@ -118,11 +118,8 @@ export const Search = observer((properties: SearchProps): JSX.Element => {
 			name: 'middle',
 			className: 'ss__search__content__toolbar--middle-toolbar',
 			layout: isMobile
-				? [
-						['PaginationInfo', '_', 'MobileSidebar'],
-						['SortBy', 'PerPage'],
-				  ]
-				: ['SortBy', 'PerPage', '_', 'PaginationInfo'],
+				? [['PaginationInfo', '_', 'MobileSidebar'], ['SortBy', 'PerPage'], ['Banner.banner']]
+				: [['SortBy', 'PerPage', '_', 'PaginationInfo'], ['Banner.banner']],
 			// inherited props
 			...defined({
 				disableStyles,
@@ -134,7 +131,7 @@ export const Search = observer((properties: SearchProps): JSX.Element => {
 			// default props
 			name: 'bottom',
 			className: 'ss__search__content__toolbar--bottom-toolbar',
-			layout: ['_', 'Pagination'],
+			layout: [['Banner.footer'], ['_', 'Pagination']],
 			// inherited props
 			...defined({
 				disableStyles,
@@ -230,7 +227,6 @@ export interface SearchProps extends ComponentProps {
 	hideTopToolbar?: boolean;
 	hideMiddleToolbar?: boolean;
 	hideBottomToolBar?: boolean;
-	hideMerchandisingBanners?: boolean | string[];
 	toggleSidebarButtonText?: string;
 	toggleSidebarStartClosed?: boolean;
 	hideToggleSidebarButton?: boolean;

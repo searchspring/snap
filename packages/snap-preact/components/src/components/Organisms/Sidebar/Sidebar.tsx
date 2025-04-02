@@ -9,6 +9,7 @@ import { defined, mergeProps, mergeStyles } from '../../../utilities';
 import { SearchController } from '@searchspring/snap-controller';
 import { Lang } from '../../../hooks';
 import { Layout, LayoutProps } from '../Layout';
+import deepmerge from 'deepmerge';
 
 const defaultStyles: StyleScript<SidebarProps> = ({ stickyOffset }) => {
 	return css({
@@ -40,10 +41,20 @@ export const Sidebar = observer((properties: SidebarProps): JSX.Element => {
 
 	const styling = mergeStyles<SidebarProps>(props, defaultStyles);
 
+	//initialize lang
+	const defaultLang = {
+		titleText: {
+			value: titleText,
+		},
+	};
+
+	//deep merge with props.lang
+	const lang = deepmerge(defaultLang, props.lang || {});
+
 	const subProps: SidebarSubProps = {
 		Layout: {
 			// default props
-			titleText,
+			lang: lang,
 			// inherited props
 			...defined({
 				disableStyles,

@@ -22,6 +22,8 @@ import { Button, ButtonProps } from '../../Atoms/Button';
 import { Banner, BannerProps } from '../../Atoms/Merchandising';
 import { ContentType } from '@searchspring/snap-store-mobx';
 import { Facets, FacetsProps } from '../Facets';
+import { Lang, useLang } from '../../../hooks';
+import deepmerge from 'deepmerge';
 
 const defaultStyles: StyleScript<LayoutProps> = ({}) => {
 	return css({
@@ -251,6 +253,18 @@ export const Layout = observer((properties: LayoutProps): JSX.Element => {
 		},
 	};
 
+	const defaultLang = {
+		titleText: {
+			value: titleText || props.lang?.titleText?.value,
+		},
+	};
+
+	//deep merge with props.lang
+	const lang = deepmerge(defaultLang, props.lang || {});
+	const mergedLang = useLang(lang as any, {
+		controller: controller,
+	});
+
 	function renderModule(module: ModuleNames) {
 		switch (module) {
 			case 'MobileSidebar':
@@ -323,9 +337,9 @@ export const Layout = observer((properties: LayoutProps): JSX.Element => {
 				return <Banner {...subProps.Banner} type={ContentType.LEFT} name={'left'} />;
 
 			case 'Title':
-				return titleText?.length ? (
-					<h4 aria-atomic="true" aria-live="polite" className="ss__layout__title">
-						{titleText}
+				return mergedLang.titleText.value ? (
+					<h4 aria-atomic="true" aria-live="polite" className="ss__layout__title" {...mergedLang?.titleText?.all}>
+						{lang.titleText.value}
 					</h4>
 				) : undefined;
 
@@ -370,6 +384,7 @@ export interface LayoutProps extends ComponentProps {
 	layout?: (ModuleNames | ModuleNames[])[];
 	toggleSideBarButton?: JSX.Element;
 	titleText?: string;
+	lang?: Partial<LayoutLang>;
 }
 
 export type ModuleNames =
@@ -408,4 +423,10 @@ interface ToolbarSubProps {
 	CloseButton: Partial<ButtonProps>;
 	ApplyButton: Partial<ButtonProps>;
 	ClearButton: Partial<ButtonProps>;
+}
+
+export interface LayoutLang {
+	titleText: Lang<{
+		controller: SearchController;
+	}>;
 }

@@ -58,7 +58,7 @@ describe('Sidebar Component', () => {
 
 	it('renders expected subComponents', () => {
 		const rendered = render(<Sidebar controller={controller} />);
-		const title = rendered.container.querySelector('.ss__sidebar__title');
+		const title = rendered.container.querySelector('.ss__layout__title');
 		const summary = rendered.container.querySelector('.ss__filter-summary');
 		const sortby = rendered.container.querySelector('.ss__sortby__select');
 		const perpage = rendered.container.querySelector('.ss__per-page__select');
@@ -70,11 +70,10 @@ describe('Sidebar Component', () => {
 		expect(perpage).toBeInTheDocument();
 		expect(facets).toBeInTheDocument();
 	});
-
-	it('can hideTitle', () => {
-		const rendered = render(<Sidebar controller={controller} hideTitle={true} />);
+	it('can hide title', () => {
+		const rendered = render(<Sidebar controller={controller} layout={[['FilterSummary'], ['SortBy', 'PerPage'], ['Facets'], ['Banner.left']]} />);
 		const element = rendered.container.querySelector('.ss__sidebar');
-		const title = rendered.container.querySelector('.ss__sidebar__title');
+		const title = rendered.container.querySelector('.ss__layout__title');
 		expect(element).toBeInTheDocument();
 		expect(title).not.toBeInTheDocument();
 	});
@@ -82,37 +81,37 @@ describe('Sidebar Component', () => {
 	it('has expected default titleText', () => {
 		const text = 'Filters';
 		const rendered = render(<Sidebar controller={controller} />);
-		const title = rendered.container.querySelector('.ss__sidebar__title');
+		const title = rendered.container.querySelector('.ss__layout__title');
 		expect(title?.innerHTML).toBe(text);
 	});
 
 	it('can change titleText', () => {
 		const text = 'title text';
 		const rendered = render(<Sidebar controller={controller} titleText={text} />);
-		const title = rendered.container.querySelector('.ss__sidebar__title');
+		const title = rendered.container.querySelector('.ss__layout__title');
 		expect(title?.innerHTML).toBe(text);
 	});
 
-	it('can hide hideFacets', () => {
-		const rendered = render(<Sidebar controller={controller} hideFacets={true} />);
+	it('can hide hide facets', () => {
+		const rendered = render(<Sidebar controller={controller} layout={[['Title'], ['FilterSummary'], ['SortBy', 'PerPage'], ['Banner.left']]} />);
 		const facets = rendered.container.querySelector('.ss__facets');
 		expect(facets).not.toBeInTheDocument();
 	});
 
 	it('can hide perpage', () => {
-		const rendered = render(<Sidebar controller={controller} hidePerPage={true} />);
+		const rendered = render(<Sidebar controller={controller} layout={[['Title'], ['FilterSummary'], ['SortBy'], ['Facets'], ['Banner.left']]} />);
 		const perpage = rendered.container.querySelector('.ss__perpage__select');
 		expect(perpage).not.toBeInTheDocument();
 	});
 
 	it('can hide hideSortBy', () => {
-		const rendered = render(<Sidebar controller={controller} hideSortBy={true} />);
+		const rendered = render(<Sidebar controller={controller} layout={[['Title'], ['FilterSummary'], ['PerPage'], ['Facets'], ['Banner.left']]} />);
 		const sortby = rendered.container.querySelector('.ss__sortby__select');
 		expect(sortby).not.toBeInTheDocument();
 	});
 
 	it('can hide FilterSummary', () => {
-		const rendered = render(<Sidebar controller={controller} hideFilterSummary={true} />);
+		const rendered = render(<Sidebar controller={controller} layout={[['Title'], ['SortBy', 'PerPage'], ['Facets'], ['Banner.left']]} />);
 		const summary = rendered.container.querySelector('.ss__filter-summary');
 		expect(summary).not.toBeInTheDocument();
 	});

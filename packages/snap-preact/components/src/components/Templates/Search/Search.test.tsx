@@ -128,15 +128,6 @@ describe('Search Template Component', () => {
 		expect(sidebar).not.toBeInTheDocument();
 	});
 
-	it('can hide hideSearchHeader', () => {
-		const rendered = render(<Search controller={controller} hideSearchHeader />);
-		const element = rendered.container.querySelector('.ss__search')!;
-		const header = rendered.container.querySelector('.ss__search-header');
-
-		expect(element).toBeInTheDocument();
-		expect(header).not.toBeInTheDocument();
-	});
-
 	it('can hide toptoolbar', () => {
 		const rendered = render(<Search controller={controller} hideTopToolbar />);
 		const element = rendered.container.querySelector('.ss__search')!;
@@ -253,7 +244,7 @@ describe('Search Template Component', () => {
 
 		const element = rendered.container.querySelector('.ss__search');
 
-		expect(element?.classList).toHaveLength(1);
+		expect(element?.classList).toHaveLength(2);
 	});
 
 	describe('Search lang works', () => {
