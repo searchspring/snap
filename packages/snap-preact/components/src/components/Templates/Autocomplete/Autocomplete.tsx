@@ -348,7 +348,7 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 		linkSlot,
 		resultComponent,
 		onTermClick,
-		expandSearchButtonText,
+		seeMoreButtonText,
 		// templates,
 		disableStyles,
 		className,
@@ -484,10 +484,10 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 	// }
 	// const RecommendationTemplateComponent = recommendationTemplateComponent as unknown as FunctionalComponent<{ controller: RecommendationController }>;
 
-	const defaultExpandSearchButtonText = expandSearchButtonText
-		? typeof expandSearchButtonText == 'function'
-			? expandSearchButtonText(controller)
-			: expandSearchButtonText
+	const defaultSeeMoreButtonText = seeMoreButtonText
+		? typeof seeMoreButtonText == 'function'
+			? seeMoreButtonText(controller)
+			: seeMoreButtonText
 		: `See ${pagination.totalResults} ${filters.length > 0 ? 'filtered' : ''} result${pagination.totalResults == 1 ? '' : 's'} for "${
 				search.query?.string
 		  }"`;
@@ -517,8 +517,8 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 		noResultsText: {
 			value: `<p>No results found for "${search.originalQuery?.string || search.query?.string}".</p><p>Please try another search.</p>`,
 		},
-		expandSearchButton: {
-			value: defaultExpandSearchButtonText,
+		seeMoreButton: {
+			value: defaultSeeMoreButtonText,
 		},
 	};
 
@@ -792,9 +792,9 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 											<a
 												href={state.url.href}
 												onClick={() => controller?.setFocused && controller.setFocused()}
-												{...mergedLang.expandSearchButton.attributes}
+												{...mergedLang.seeMoreButton.attributes}
 											>
-												<span {...mergedLang.expandSearchButton.value}></span>
+												<span {...mergedLang.seeMoreButton.value}></span>
 												<Icon {...subProps.icon} />
 											</a>
 										</div>
@@ -865,7 +865,7 @@ export interface AutocompleteProps extends ComponentProps {
 	facetsTitle?: string;
 	contentTitle?: string;
 	viewportMaxHeight?: boolean;
-	expandSearchButtonText?: string | ((controller: AutocompleteController) => string);
+	seeMoreButtonText?: string | ((controller: AutocompleteController) => string);
 	termsSlot?: JSX.Element | JSX.Element[];
 	facetsSlot?: JSX.Element | JSX.Element[];
 	contentSlot?: JSX.Element | JSX.Element[];
@@ -925,7 +925,7 @@ export interface AutocompleteLang {
 	noResultsText: Lang<{
 		controller: AutocompleteController;
 	}>;
-	expandSearchButton: Lang<{
+	seeMoreButton: Lang<{
 		controller: AutocompleteController;
 	}>;
 }

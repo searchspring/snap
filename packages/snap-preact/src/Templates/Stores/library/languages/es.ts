@@ -45,7 +45,7 @@ export const es: LangComponents = {
 					data?.controller.store.search.originalQuery?.string || data?.controller.store.search.query?.string
 				}".</p><p>Intenta con otra búsqueda.</p>`,
 		},
-		expandSearchButton: {
+		seeMoreButton: {
 			value: (data) =>
 				`Ver ${data?.controller.store.pagination.totalResults} ${
 					data?.controller.store.filters.length && data?.controller.store.filters.length > 0 ? 'resultado(s) filtrado(s)' : 'resultado(s)'
