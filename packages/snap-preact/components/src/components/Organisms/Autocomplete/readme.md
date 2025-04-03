@@ -86,6 +86,26 @@ The `contentTitle` prop will display the given text above the autocomplete conte
 <Autocomplete controller={controller} input={'#searchInput'} contentTitle={'Results'} />
 ```
 
+### seeMoreButtonText
+The `seeMoreButtonText` prop will display the given text in the see more button.
+
+```jsx
+<Autocomplete controller={controller} input={'#searchInput'} seeMoreButtonText={'See More!'} />
+```
+
+The `seeMoreButtonText` prop can also take a function returning a string. The function is pased the Autocomplete controller. 
+
+```jsx
+
+const seeMoreButtonText = (controller) => {
+    const { pagination, filters, search } = controller.store;
+
+    return `See ${pagination.totalResults} ${filters.length > 0 ? 'filtered' : ''} result${pagination.totalResults == 1 ? '' : 's'} for "${search.query?.string}"`;
+}
+
+<Autocomplete controller={controller} input={'#searchInput'} seeMoreButtonText={seeMoreButtonText} />
+```
+
 ### viewportMaxHeight
 The `viewportMaxHeight` prop will restrict autocomplete from overflowing the viewport. The max height of autocomplete will always be visible in the viewport. 
 

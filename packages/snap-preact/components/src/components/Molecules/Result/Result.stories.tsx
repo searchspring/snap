@@ -100,6 +100,64 @@ export default {
 			},
 			control: { type: 'boolean' },
 		},
+		hideRating: {
+			description: 'Hide ratings',
+			table: {
+				type: {
+					summary: 'boolean',
+				},
+				defaultValue: { summary: true },
+			},
+			control: { type: 'boolean' },
+		},
+		hideAddToCartButton: {
+			description: 'Hide add to cart button',
+			table: {
+				type: {
+					summary: 'boolean',
+				},
+				defaultValue: { summary: true },
+			},
+			control: { type: 'boolean' },
+		},
+		addToCartButtonText: {
+			description: 'add to cart button text',
+			table: {
+				type: {
+					summary: 'string',
+				},
+			},
+			control: { type: 'text' },
+		},
+		addToCartButtonSuccessText: {
+			description: 'add to cart button text to show after adding to cart',
+			table: {
+				type: {
+					summary: 'string',
+				},
+			},
+			control: { type: 'text' },
+		},
+		addToCartButtonSuccessTimeout: {
+			description: 'time in ms to show the success button text before reverting back to standard text',
+			table: {
+				type: {
+					summary: 'number',
+				},
+			},
+			control: { type: 'number' },
+		},
+		onAddToCartClick: {
+			description: 'function to run on add to cart button click',
+			table: {
+				type: {
+					summary: 'function',
+				},
+				defaultValue: { summary: 'Add To Cart' },
+			},
+			control: { type: 'none' },
+			action: 'onClick',
+		},
 		detailSlot: {
 			description: 'Slot for more product details (under price)',
 			table: {

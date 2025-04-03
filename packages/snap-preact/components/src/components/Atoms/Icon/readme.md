@@ -11,6 +11,12 @@ The `icon` prop specifies the name of the icon to display.
 <Icon icon='cogs' />
 ```
 
+if false is passed, no Icon will render. 
+
+```jsx
+<Icon icon={false} />
+```
+
 
 ### path
 The `path` prop specifies the SVG path value for custom icons.
