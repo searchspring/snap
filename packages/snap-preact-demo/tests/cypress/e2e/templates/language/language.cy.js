@@ -1,7 +1,7 @@
 const config = {
 	url: 'https://localhost:2222/templates',
 	selectors: {
-		sidebarElem: '.ss__sidebar__title',
+		sidebarElem: '.ss__layout__title',
 		titleElem: '.ss__search-header__title.ss__search-header__title--results',
 	},
 };
@@ -22,15 +22,27 @@ describe('Templates Language settings', () => {
 						language: 'en',
 					},
 					themes: {
+						custom: {
+							extends: 'base',
+						},
 						global: {
 							overrides: {
 								components: {
-									sidebar: {
-										hideTitle: false,
+									search: {
+										toggleSidebarStartClosed: false,
 									},
 								},
 							},
 						},
+					},
+					search: {
+						targets: [
+							{
+								selector: '#searchspring-layout',
+								theme: 'custom',
+								component: 'Search',
+							},
+						],
 					},
 				};
 			});
@@ -50,15 +62,27 @@ describe('Templates Language settings', () => {
 						siteId: '8uyt2m',
 					},
 					themes: {
+						custom: {
+							extends: 'base',
+						},
 						global: {
 							overrides: {
 								components: {
-									sidebar: {
-										hideTitle: false,
+									search: {
+										toggleSidebarStartClosed: false,
 									},
 								},
 							},
 						},
+					},
+					search: {
+						targets: [
+							{
+								selector: '#searchspring-layout',
+								theme: 'custom',
+								component: 'Search',
+							},
+						],
 					},
 				};
 			});
