@@ -38,7 +38,7 @@ export const fr: LangComponents = {
 					data?.controller?.store?.search.originalQuery?.string || data?.controller?.store?.search.query?.string
 				}".</p><p>Veuillez essayer une autre recherche.</p>`,
 		},
-		contentInfo: {
+		seeMoreButton: {
 			value: (data) =>
 				`voir ${data?.controller?.store?.pagination.totalResults} ${
 					data?.controller?.store?.filters.length && data?.controller?.store?.filters.length > 0 ? 'filtré' : ''
