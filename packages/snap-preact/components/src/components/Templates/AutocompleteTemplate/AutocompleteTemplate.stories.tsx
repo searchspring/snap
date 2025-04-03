@@ -77,7 +77,6 @@ export default {
 		},
 		layout: {
 			description: 'array of modules to render in specified layout',
-			type: { required: true },
 			table: {
 				type: {
 					summary:
@@ -87,49 +86,60 @@ export default {
 			},
 			control: 'array',
 		},
-		column1Layout: {
-			description: 'array of modules to render in the "C1" layout',
-			type: { required: true },
+		column1: {
+			description: 'object containing width - the specified width of the column and layout - array of modules to render in the "C1" layout',
 			table: {
 				type: {
 					summary:
-						"['Terms' | 'HistoryTerms' | 'TrendingTerms'| 'SuggestedTerms'| 'Facets' | 'FacetsHorizontal' | 'SeeMore' | 'Content' | '_' | 'Banner.left' | 'Banner.banner' | 'Banner.footer' | 'Banner.header']",
+						"{width: '150px', layout: ['Terms' | 'HistoryTerms' | 'TrendingTerms'| 'SuggestedTerms'| 'Facets' | 'FacetsHorizontal' | 'SeeMore' | 'Content' | '_' | 'Banner.left' | 'Banner.banner' | 'Banner.footer' | 'Banner.header']}",
 				},
-				defaultValue: { summary: "['Terms']" },
+				defaultValue: {
+					summary: `{
+					layout: ['Terms'],
+					width: '150px'
+				}`,
+				},
 			},
 			control: 'array',
 		},
-		column2Layout: {
-			description: 'array of modules to render in the "C2" layout',
-			type: { required: true },
+		column2: {
+			description: 'object containing width - the specified width of the column and layout - array of modules to render in the "C2" layout',
 			table: {
 				type: {
 					summary:
-						"['Terms' | 'HistoryTerms' | 'TrendingTerms'| 'SuggestedTerms'| 'Facets' | 'FacetsHorizontal' | 'SeeMore' | 'Content' | '_' | 'Banner.left' | 'Banner.banner' | 'Banner.footer' | 'Banner.header']",
+						"{width: '150px', layout: ['Terms' | 'HistoryTerms' | 'TrendingTerms'| 'SuggestedTerms'| 'Facets' | 'FacetsHorizontal' | 'SeeMore' | 'Content' | '_' | 'Banner.left' | 'Banner.banner' | 'Banner.footer' | 'Banner.header']}",
 				},
-				defaultValue: { summary: "['Facets']" },
+				defaultValue: {
+					summary: `{
+					layout: ['Facets'],
+					width: '150px'
+				}`,
+				},
 			},
 			control: 'array',
 		},
-		column3Layout: {
-			description: 'array of modules to render in the "C3" layout',
-			type: { required: true },
+		column3: {
+			description: 'object containing width - the specified width of the column and layout - array of modules to render in the "C3" layout',
 			table: {
 				type: {
 					summary:
-						"['Terms' | 'HistoryTerms' | 'TrendingTerms'| 'SuggestedTerms'| 'Facets' | 'FacetsHorizontal' | 'SeeMore' | 'Content' | '_' | 'Banner.left' | 'Banner.banner' | 'Banner.footer' | 'Banner.header']",
+						"{width: '150px', layout: ['Terms' | 'HistoryTerms' | 'TrendingTerms'| 'SuggestedTerms'| 'Facets' | 'FacetsHorizontal' | 'SeeMore' | 'Content' | '_' | 'Banner.left' | 'Banner.banner' | 'Banner.footer' | 'Banner.header']}",
 				},
-				defaultValue: { summary: "[['Content'], ['_', 'SeeMore']]" },
+				defaultValue: {
+					summary: `{
+					layout: [['Content'], ['_', 'SeeMore']],
+					width: 'auto'
+				}`,
+				},
 			},
 			control: 'array',
 		},
-		column4Layout: {
-			description: 'array of modules to render in the "C4" layout',
-			type: { required: true },
+		column4: {
+			description: 'object containing width - the specified width of the column and layout - array of modules to render in the "C4" layout',
 			table: {
 				type: {
 					summary:
-						"['Terms' | 'HistoryTerms' | 'TrendingTerms'| 'SuggestedTerms'| 'Facets' | 'FacetsHorizontal' | 'SeeMore' | 'Content' | '_' | 'Banner.left' | 'Banner.banner' | 'Banner.footer' | 'Banner.header']",
+						"{width: '150px', layout: ['Terms' | 'HistoryTerms' | 'TrendingTerms'| 'SuggestedTerms'| 'Facets' | 'FacetsHorizontal' | 'SeeMore' | 'Content' | '_' | 'Banner.left' | 'Banner.banner' | 'Banner.footer' | 'Banner.header']}",
 				},
 			},
 			control: 'array',

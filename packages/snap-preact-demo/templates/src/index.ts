@@ -30,6 +30,20 @@ let config: SnapTemplatesConfig = {
 			style: globalStyles,
 			overrides: {
 				components: {
+					autocompleteTemplate: {
+						column1: {
+							layout: ['Facets'],
+							width: '150px',
+						},
+						column2: {
+							layout: [['Content'], ['Button.see-more', 'Button.see-more']],
+							width: 'auto',
+						},
+						column3: {
+							layout: ['TermsList'],
+							width: '150px',
+						},
+					},
 					// "searchHorizontal toolbar.top": {
 					// 	hideLayoutSelector: false,
 					// },

@@ -155,7 +155,7 @@ const defaultStyles: StyleScript<AutocompleteTemplateProps> = ({
 			'.ss__autocomplete__content__results, .ss__autocomplete__content__no-results': {
 				minHeight: '0%',
 			},
-			'.ss__autocomplete__content__info': {
+			'.ss__autocomplete__see-more': {
 				padding: '10px',
 				textAlign: noResults ? 'center' : 'right',
 
@@ -479,10 +479,22 @@ export const AutocompleteTemplate = observer((properties: AutocompleteTemplatePr
 		noResultsText: {
 			value: `<p>No results found for "${search.originalQuery?.string || search.query?.string}".</p><p>Please try another search.</p>`,
 		},
-		contentInfo: {
+		seeMoreButton: {
 			value: `See ${pagination.totalResults} ${filters.length > 0 ? 'filtered' : ''} result${pagination.totalResults == 1 ? '' : 's'} for "${
 				search.query?.string
 			}"`,
+		},
+	};
+
+	const termsLang = {
+		historyTitle: {
+			value: 'History',
+		},
+		termsTitle: {
+			value: 'Suggested',
+		},
+		trendingTitle: {
+			value: 'Trending',
 		},
 	};
 
@@ -559,7 +571,9 @@ export const AutocompleteTemplate = observer((properties: AutocompleteTemplatePr
 		return false;
 	}
 
-	setTimeout(() => cleanUpEmptyCols());
+	useEffect(() => {
+		cleanUpEmptyCols();
+	});
 
 	const findModule = (module: ModuleNamesWithColumns) => {
 		//new row
@@ -610,7 +624,7 @@ export const AutocompleteTemplate = observer((properties: AutocompleteTemplatePr
 		if (module == 'TermsList') {
 			return (
 				<div className={classnames('ss__autocomplete__terms-wrapper')}>
-					<TermsList controller={controller} {...subProps.termsList} />
+					<TermsList controller={controller} {...subProps.termsList} lang={termsLang} />
 				</div>
 			);
 		}
@@ -745,9 +759,9 @@ export const AutocompleteTemplate = observer((properties: AutocompleteTemplatePr
 		if (module == 'Button.see-more' && showResults) {
 			return (
 				<Button {...subProps.button}>
-					<div className="ss__autocomplete__content__info">
-						<a href={state.url.href} onClick={() => controller?.setFocused && controller.setFocused()} {...mergedLang.contentInfo.attributes}>
-							<span {...mergedLang.contentInfo.value}></span>
+					<div className="ss__autocomplete__see-more">
+						<a href={state.url.href} onClick={() => controller?.setFocused && controller.setFocused()} {...mergedLang.seeMoreButton.attributes}>
+							<span {...mergedLang.seeMoreButton.value}></span>
 							<Icon {...subProps.icon} />
 						</a>
 					</div>
@@ -868,7 +882,7 @@ export interface AutocompleteTemplateLang {
 	noResultsText: Lang<{
 		controller: AutocompleteController;
 	}>;
-	contentInfo: Lang<{
+	seeMoreButton: Lang<{
 		controller: AutocompleteController;
 	}>;
 }

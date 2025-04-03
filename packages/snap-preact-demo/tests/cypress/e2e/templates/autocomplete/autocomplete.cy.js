@@ -20,10 +20,10 @@ const config = {
 		autocomplete: {
 			main: '.ss__autocomplete',
 			// selector of the wrapping element. Expects child element to contain <a>
-			term: `.ss__autocomplete .ss__autocomplete__terms__option`,
+			term: `.ss__autocomplete .ss__terms__option`,
 			facet: '.ss__autocomplete .ss__facet .ss__facet__options',
 			result: '.ss__autocomplete .ss__results .ss__result',
-			seeMore: '.ss__autocomplete .ss__autocomplete__content__info',
+			seeMore: '.ss__autocomplete .ss__autocomplete__see-more',
 		},
 	},
 	startingQuery: 't', // initial query (displays terms, facets, and results)
@@ -72,7 +72,7 @@ describe('Autocomplete', () => {
 						targets: [
 							{
 								selector: 'input.searchspring-ac',
-								component: 'Autocomplete',
+								component: 'AutocompleteTemplate',
 							},
 						],
 						settings: {

@@ -107,13 +107,13 @@ describe('termsList Component', () => {
 		const terms = rendered.container.querySelectorAll('.ss__terms');
 		expect(termList).toBeInTheDocument();
 
-		expect(terms[0].classList).toContain('ss__terms--trending');
-		expect(terms[1].classList).toContain('ss__terms--suggestions');
+		expect(terms[0].classList).toContain('ss__terms--suggestions');
+		expect(terms[1].classList).toContain('ss__terms--trending');
 		expect(terms[2].classList).toContain('ss__terms--history');
 	});
 
-	it('can modify module order', async () => {
-		const rendered = render(<TermsList controller={controller} modules={['Suggestions', 'History', 'Trending']} />);
+	it('can modify layout order', async () => {
+		const rendered = render(<TermsList controller={controller} layout={['Suggestions', 'History', 'Trending']} />);
 		const termList = rendered.container.querySelector('.ss__terms-list');
 		const terms = rendered.container.querySelectorAll('.ss__terms');
 		expect(termList).toBeInTheDocument();
@@ -124,7 +124,7 @@ describe('termsList Component', () => {
 	});
 
 	it('can exclude history', async () => {
-		const rendered = render(<TermsList controller={controller} modules={['Suggestions', 'Trending']} />);
+		const rendered = render(<TermsList controller={controller} layout={['Suggestions', 'Trending']} />);
 		const termList = rendered.container.querySelector('.ss__terms-list');
 		const terms = rendered.container.querySelectorAll('.ss__terms');
 		const history = rendered.container.querySelector('.ss__terms--history');
@@ -135,7 +135,7 @@ describe('termsList Component', () => {
 	});
 
 	it('can exclude Suggestions', async () => {
-		const rendered = render(<TermsList controller={controller} modules={['History', 'Trending']} />);
+		const rendered = render(<TermsList controller={controller} layout={['History', 'Trending']} />);
 		const termList = rendered.container.querySelector('.ss__terms-list');
 		const terms = rendered.container.querySelectorAll('.ss__terms');
 		const suggested = rendered.container.querySelector('.ss__terms--suggestions');
@@ -146,7 +146,7 @@ describe('termsList Component', () => {
 	});
 
 	it('can exclude Trending', async () => {
-		const rendered = render(<TermsList controller={controller} modules={['Suggestions', 'History']} />);
+		const rendered = render(<TermsList controller={controller} layout={['Suggestions', 'History']} />);
 		const termList = rendered.container.querySelector('.ss__terms-list');
 		const terms = rendered.container.querySelectorAll('.ss__terms');
 		const trending = rendered.container.querySelector('.ss__terms--trending');
@@ -171,93 +171,98 @@ describe('termsList Component', () => {
 		expect(termsList?.classList).toHaveLength(1);
 	});
 
-	// describe('termsList lang works', () => {
-	// 	const selector = '.ss__termsList-list';
+	describe('Terms lang works', () => {
+		const selector = '.ss__terms-list';
 
-	// 	it('immediately available lang options', async () => {
-	// 		const langOptions = ['term'];
+		it('immediately available lang options', async () => {
+			const langOptions = ['termsTitle', 'trendingTitle', 'historyTitle'];
 
-	// 		//text attributes/values
-	// 		const value = 'custom value';
-	// 		const altText = 'custom alt';
-	// 		const ariaLabel = 'custom label';
-	// 		const ariaValueText = 'custom value text';
-	// 		const title = 'custom title';
+			//text attributes/values
+			const value = 'custom value';
+			const altText = 'custom alt';
+			const ariaLabel = 'custom label';
+			const ariaValueText = 'custom value text';
+			const title = 'custom title';
 
-	// 		const valueMock = jest.fn(() => value);
-	// 		const altMock = jest.fn(() => altText);
-	// 		const labelMock = jest.fn(() => ariaLabel);
-	// 		const valueTextMock = jest.fn(() => ariaValueText);
-	// 		const titleMock = jest.fn(() => title);
+			const valueMock = jest.fn(() => value);
+			const altMock = jest.fn(() => altText);
+			const labelMock = jest.fn(() => ariaLabel);
+			const valueTextMock = jest.fn(() => ariaValueText);
+			const titleMock = jest.fn(() => title);
 
-	// 		const langObjs = [
-	// 			{
-	// 				value: value,
-	// 				attributes: {
-	// 					alt: altText,
-	// 					'aria-label': ariaLabel,
-	// 					'aria-valuetext': ariaValueText,
-	// 					title: title,
-	// 				},
-	// 			},
-	// 			{
-	// 				value: valueMock,
-	// 				attributes: {
-	// 					alt: altMock,
-	// 					'aria-label': labelMock,
-	// 					'aria-valuetext': valueTextMock,
-	// 					title: titleMock,
-	// 				},
-	// 			},
-	// 			{
-	// 				value: `<div>${value}</div>`,
-	// 				attributes: {
-	// 					alt: altText,
-	// 					'aria-label': ariaLabel,
-	// 					'aria-valuetext': ariaValueText,
-	// 					title: title,
-	// 				},
-	// 			},
-	// 		];
+			const langObjs = [
+				{
+					value: value,
+					attributes: {
+						alt: altText,
+						'aria-label': ariaLabel,
+						'aria-valuetext': ariaValueText,
+						title: title,
+					},
+				},
+				{
+					value: valueMock,
+					attributes: {
+						alt: altMock,
+						'aria-label': labelMock,
+						'aria-valuetext': valueTextMock,
+						title: titleMock,
+					},
+				},
+				{
+					value: `<div>${value}</div>`,
+					attributes: {
+						alt: altText,
+						'aria-label': ariaLabel,
+						'aria-valuetext': ariaValueText,
+						title: title,
+					},
+				},
+			];
 
-	// 		langOptions.forEach((option) => {
-	// 			langObjs.forEach((langObj) => {
-	// 				const lang = {
-	// 					[`${option}`]: langObj,
-	// 				};
-	// 				// @ts-ignore
-	// 				const rendered = render(<termsList lang={lang} controller={controller}  />);
+			langOptions.forEach((option) => {
+				langObjs.forEach((langObj) => {
+					const lang = {
+						[`${option}`]: langObj,
+					};
+					// @ts-ignore
+					const rendered = render(<TermsList controller={controller} lang={lang} />);
 
-	// 				const element = rendered.container.querySelector(selector);
-	// 				expect(element).toBeInTheDocument();
-	// 				const langElem = rendered.container.querySelector(`[ss-lang=${option}]`);
+					const element = rendered.container.querySelector(selector);
+					expect(element).toBeInTheDocument();
+					let langElem;
+					if (option == 'termsTitle') {
+						langElem = rendered.container.querySelector(`.ss__terms-list__terms--suggestions [ss-lang=title]`);
+					} else if (option == 'trendingTitle') {
+						langElem = rendered.container.querySelector(`.ss__terms-list__terms--trending [ss-lang=title]`);
+					} else if (option == 'historyTitle') {
+						langElem = rendered.container.querySelector(`.ss__terms-list__terms--history [ss-lang=title]`);
+					}
 
-	// 				expect(langElem).toBeInTheDocument();
-	// 				if (typeof langObj.value == 'function') {
-	// 					expect(valueMock).toHaveBeenCalled();
-	// 					controller.store.termsList.forEach((term, idx) => {
-	// 						expect(valueMock).toHaveBeenCalledWith({
-	// 							index: idx,
-	// 							numberOftermsList: controller.store.termsList.length,
-	// 							term: term,
-	// 						});
-	// 					});
+					expect(langElem).toBeInTheDocument();
+					if (typeof langObj.value == 'function') {
+						expect(valueMock).toHaveBeenCalled();
+						controller.store.terms.forEach((term, idx) => {
+							expect(valueMock).toHaveBeenCalledWith({
+								controller: controller,
+							});
+						});
 
-	// 					expect(langElem?.innerHTML).toBe(value);
-	// 				} else {
-	// 					expect(langElem?.innerHTML).toBe(langObj.value);
-	// 				}
+						expect(langElem?.innerHTML).toBe(value);
+					} else {
+						expect(langElem?.innerHTML).toBe(langObj.value);
+					}
 
-	// 				expect(langElem).toHaveAttribute('alt', altText);
-	// 				expect(langElem).toHaveAttribute('aria-label', ariaLabel);
-	// 				expect(langElem).toHaveAttribute('aria-valuetext', ariaValueText);
-	// 				expect(langElem).toHaveAttribute('title', title);
+					expect(langElem).toHaveAttribute('alt', altText);
+					expect(langElem).toHaveAttribute('aria-label', ariaLabel);
+					expect(langElem).toHaveAttribute('aria-valuetext', ariaValueText);
+					expect(langElem).toHaveAttribute('title', title);
 
-	// 				jest.restoreAllMocks();
-	// 			});
-	// 		});
-	// 	});
-	// });
+					jest.restoreAllMocks();
+				});
+			});
+		});
+	});
 
 	it('is themeable with ThemeProvider', () => {
 		const globalTheme = {

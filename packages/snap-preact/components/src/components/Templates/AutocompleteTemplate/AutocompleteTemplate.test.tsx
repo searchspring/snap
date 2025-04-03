@@ -152,13 +152,16 @@ describe('Autocomplete Component', () => {
 		});
 	});
 
-	it('can change c1 with column1layout', async () => {
+	it('can change c1 with column1', async () => {
 		const controller = createAutocompleteController({ client: clientConfig, controller: acConfig }, { client: mockClient });
 		await controller.bind();
 		const args: AutocompleteTemplateProps = {
 			controller,
 			input: controller.config.selector,
-			column1Layout: [['Facets', 'Content']],
+			column1: {
+				width: 'auto',
+				layout: [['Facets', 'Content']],
+			},
 		};
 
 		const input = document.querySelector('.searchspring-ac') as HTMLInputElement;
@@ -174,6 +177,10 @@ describe('Autocomplete Component', () => {
 			const c1Facets = rendered.container.querySelector('.ss__autocomplete__column--c1 .ss__autocomplete__facets-wrapper');
 			const c1Content = rendered.container.querySelector('.ss__autocomplete__column--c1 .ss__autocomplete__content');
 
+			const c1 = rendered.container.querySelector('.ss__autocomplete__column--c1');
+			const styles = getComputedStyle(c1!);
+			expect(styles.flex).toBe(`1 1 auto`);
+
 			expect(c1Terms).not.toBeInTheDocument();
 			expect(c1Facets).toBeInTheDocument();
 			expect(c1Content).toBeInTheDocument();
@@ -185,13 +192,16 @@ describe('Autocomplete Component', () => {
 		});
 	});
 
-	it('can change c2 with column2layout', async () => {
+	it('can change c2 with column2', async () => {
 		const controller = createAutocompleteController({ client: clientConfig, controller: acConfig }, { client: mockClient });
 		await controller.bind();
 		const args: AutocompleteTemplateProps = {
 			controller,
 			input: controller.config.selector,
-			column2Layout: [['TermsList', 'Content']],
+			column2: {
+				width: 'auto',
+				layout: [['TermsList', 'Content']],
+			},
 		};
 
 		const input = document.querySelector('.searchspring-ac') as HTMLInputElement;
@@ -207,6 +217,10 @@ describe('Autocomplete Component', () => {
 			const c2Facets = rendered.container.querySelector('.ss__autocomplete__column--c2 .ss__autocomplete__facets-wrapper');
 			const c2Content = rendered.container.querySelector('.ss__autocomplete__column--c2 .ss__autocomplete__content');
 
+			const c2 = rendered.container.querySelector('.ss__autocomplete__column--c2');
+			const styles = getComputedStyle(c2!);
+			expect(styles.flex).toBe(`1 1 auto`);
+
 			expect(c2Terms).toBeInTheDocument();
 			expect(c2Facets).not.toBeInTheDocument();
 			expect(c2Content).toBeInTheDocument();
@@ -217,13 +231,16 @@ describe('Autocomplete Component', () => {
 		});
 	});
 
-	it('can change c3 with column3layout', async () => {
+	it('can change c3 with column3', async () => {
 		const controller = createAutocompleteController({ client: clientConfig, controller: acConfig }, { client: mockClient });
 		await controller.bind();
 		const args: AutocompleteTemplateProps = {
 			controller,
 			input: controller.config.selector,
-			column3Layout: [['Facets', 'TermsList']],
+			column3: {
+				width: 'auto',
+				layout: [['Facets', 'TermsList']],
+			},
 		};
 
 		const input = document.querySelector('.searchspring-ac') as HTMLInputElement;
@@ -239,6 +256,10 @@ describe('Autocomplete Component', () => {
 			const c3Facets = rendered.container.querySelector('.ss__autocomplete__column--c3 .ss__autocomplete__facets-wrapper');
 			const c3Content = rendered.container.querySelector('.ss__autocomplete__column--c3 .ss__autocomplete__content');
 
+			const c3 = rendered.container.querySelector('.ss__autocomplete__column--c3');
+			const styles = getComputedStyle(c3!);
+			expect(styles.flex).toBe(`1 1 auto`);
+
 			expect(c3Terms).toBeInTheDocument();
 			expect(c3Facets).toBeInTheDocument();
 			expect(c3Content).not.toBeInTheDocument();
@@ -249,14 +270,18 @@ describe('Autocomplete Component', () => {
 		});
 	});
 
-	it('can change and render c4 with column4layout', async () => {
+	it('can change and render c4 with column4', async () => {
 		const controller = createAutocompleteController({ client: clientConfig, controller: acConfig }, { client: mockClient });
 		await controller.bind();
+		const width = '150px';
 		const args: AutocompleteTemplateProps = {
 			controller,
 			input: controller.config.selector,
 			layout: ['C1', 'C2', 'C3', 'C4'],
-			column4Layout: [['Facets']],
+			column4: {
+				width: width,
+				layout: [['Facets']],
+			},
 		};
 
 		const input = document.querySelector('.searchspring-ac') as HTMLInputElement;
@@ -266,14 +291,18 @@ describe('Autocomplete Component', () => {
 		const rendered = render(<AutocompleteTemplate {...args} />, { container });
 
 		await waitFor(() => {
+			const c4 = rendered.container.querySelector('.ss__autocomplete__column--c4');
 			const c4Terms = rendered.container.querySelector('.ss__autocomplete__column--c4 .ss__autocomplete__terms-wrapper');
 			const c4Facets = rendered.container.querySelector('.ss__autocomplete__column--c4 .ss__autocomplete__facets-wrapper');
 			const c4Content = rendered.container.querySelector('.ss__autocomplete__column--c4 .ss__autocomplete__content');
 
+			const styles = getComputedStyle(c4!);
+
+			expect(styles.flex).toBe(`1 0 ${width}`);
+
 			expect(c4Terms).not.toBeInTheDocument();
 			expect(c4Facets).toBeInTheDocument();
 			expect(c4Content).not.toBeInTheDocument();
-
 			const results = rendered.container.querySelectorAll('.ss__autocomplete__content__results .ss__result');
 
 			expect(results.length).toBeGreaterThan(0);
@@ -415,7 +444,10 @@ describe('Autocomplete Component', () => {
 			input: controller.config.selector,
 			excludeBanners: true,
 			layout: ['C4', 'C1', 'C2', 'C3'],
-			column4Layout: ['Banner.banner', 'Banner.footer', 'Banner.header', 'Banner.left'],
+			column4: {
+				width: 'auto',
+				layout: ['Banner.banner', 'Banner.footer', 'Banner.header', 'Banner.left'],
+			},
 		};
 
 		const input = document.querySelector('.searchspring-ac') as HTMLInputElement;

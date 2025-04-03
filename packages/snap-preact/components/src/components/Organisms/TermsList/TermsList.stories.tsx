@@ -57,7 +57,7 @@ export default {
 	argTypes: {
 		controller: {
 			description: 'autocomplete controller reference',
-			type: { required: false },
+			type: { required: true },
 			table: {
 				type: {
 					summary: 'autocomplete controller object',
@@ -65,10 +65,18 @@ export default {
 			},
 			control: { type: 'none' },
 		},
-		modules: {},
+		layout: {
+			description: 'array of term types to render in specified order',
+			table: {
+				type: {
+					summary: "'History' | 'Trending'| 'Suggestions'",
+				},
+				defaultValue: { summary: "['Suggestions', 'Trending', 'History']" },
+			},
+			control: 'array',
+		},
 		historyTitle: {
 			description: 'history terms title',
-			type: { required: false },
 			table: {
 				type: {
 					summary: 'string',
@@ -78,7 +86,6 @@ export default {
 		},
 		suggestionTitle: {
 			description: 'suggested terms title',
-			type: { required: false },
 			table: {
 				type: {
 					summary: 'string',
@@ -88,7 +95,6 @@ export default {
 		},
 		trendingTitle: {
 			description: 'trending terms title',
-			type: { required: false },
 			table: {
 				type: {
 					summary: 'string',

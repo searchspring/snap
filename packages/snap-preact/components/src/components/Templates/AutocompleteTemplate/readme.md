@@ -51,32 +51,60 @@ available modules to use in the layout are
 <AutocompleteTemplate controller={controller} input={'#searchInput'} layout={[['C1','C2','C3']]}/>
 ```
 
-### column1Layout
-The `column1Layout` prop specifies a layout array to render in the `C1` module. Defaults to `['TermsList']`. All layout modules are available to use with the exception of the `Cx` modules. Additional arrays for new rows are also supported.
+### column1
+The `column1` prop specifies the layout to render in the `C1` module. Takes an object with two properties, 
+
+`width` which specifies how wide the the column should be. This can be a string - `150px` or `auto`. If set to auto, the column will automatically grow and shrink based on its surroundings. 
+
+`layout` which specifies an array of modules to render in the column. Defaults to `['TermsList']`. All layout modules are available to use with the exception of the `Cx` modules. Additional arrays for new rows are also supported.
 
 ```jsx
-<AutocompleteTemplate controller={controller} input={'#searchInput'} column1Layout={['Terms.history', 'Terms.trending']}/>
+<AutocompleteTemplate controller={controller} input={'#searchInput'} column1={{
+    width: '150px',
+    layout: ['Terms.history', 'Terms.trending']
+}}/>
 ```
 
-### column2Layout
-The `column2Layout` prop specifies a layout array to render in the `C2` module. Defaults to `['Facets']`. All layout modules are available to use with the exception of the `Cx` modules. Additional arrays for new rows are also supported.
+### column2
+The `column2` prop specifies a layout array to render in the `C2` module. Takes an object with two properties, 
+
+`width` which specifies how wide the the column should be. This can be a string - `150px` or `auto`. If set to auto, the column will automatically grow and shrink based on its surroundings. 
+
+`layout` which specifies an array of modules to render in the column. Defaults to `['Facets']`. All layout modules are available to use with the exception of the `Cx` modules. Additional arrays for new rows are also supported.
 
 ```jsx
-<AutocompleteTemplate controller={controller} input={'#searchInput'} column2Layout={['Facets']}/>
+<AutocompleteTemplate controller={controller} input={'#searchInput'} column2={{
+    width: '150px',
+    layout: ['Facets']
+}}/>
 ```
 
-### column3Layout
-The `column3Layout` prop specifies a layout array to render in the `C3` module. Defaults to `[['Content'], ['_', 'Button.see-more']]`. All layout modules are available to use with the exception of the `Cx` modules. Additional arrays for new rows are also supported.
+### column3
+The `column3` prop specifies a layout array to render in the `C3` module. Takes an object with two properties, 
+
+`width` which specifies how wide the the column should be. This can be a string - `150px` or `auto`. If set to auto, the column will automatically grow and shrink based on its surroundings. 
+
+`layout` which specifies an array of modules to render in the column. Defaults to `[['Content'], ['_', 'Button.see-more']]`. All layout modules are available to use with the exception of the `Cx` modules. Additional arrays for new rows are also supported.
 
 ```jsx
-<AutocompleteTemplate controller={controller} input={'#searchInput'} column3Layout={[['Content', ['_', 'Button.see-more', '_']]]}/>
+<AutocompleteTemplate controller={controller} input={'#searchInput'} column3={{
+    width: '150px',
+    layout: [['Content', ['_', 'Button.see-more', '_']]]
+}}/>
 ```
 
-### column4Layout
-The `column4Layout` prop specifies a layout array to render in the `C4` module. All layout modules are available to use with the exception of the `Cx` modules. Additional arrays for new rows are also supported.
+### column4
+The `column4` prop specifies a layout array to render in the `C4` module. Takes an object with two properties, 
+
+`width` which specifies how wide the the column should be. This can be a string - `150px` or `auto`. If set to auto, the column will automatically grow and shrink based on its surroundings. 
+
+`layout` which specifies an array of modules to render in the column. Defaults to `[['Content'], ['_', 'Button.see-more']]`. All layout modules are available to use with the exception of the `Cx` modules. Additional arrays for new rows are also supported.
 
 ```jsx
-<AutocompleteTemplate controller={controller} input={'#searchInput'} column4Layout={['Facets']}/>
+<AutocompleteTemplate controller={controller} input={'#searchInput'} column4={{
+width: '150px',
+layout: ['Facets']
+}}/>
 ```
 
 ### width

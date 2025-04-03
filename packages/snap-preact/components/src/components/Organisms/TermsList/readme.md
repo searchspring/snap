@@ -12,12 +12,12 @@ The `controller` prop specifies a reference to the autocomplete controller.
 <TermsList controller={controller} />
 ```
 
-### modules
+### layout
 
-The `modules` prop is used to determine which terms render and in what order. Options include 'Trending' | 'Suggestions' | 'History';
+The `layout` prop is used to determine which terms render and in what order. Options include 'Trending' | 'Suggestions' | 'History';
 
 ```jsx
-<TermsList controller={controller} modules={['Trending', 'Suggestions', 'History']}/>
+<TermsList controller={controller} layout={['Trending', 'Suggestions', 'History']}/>
 ```
 
 ### historyTitle
