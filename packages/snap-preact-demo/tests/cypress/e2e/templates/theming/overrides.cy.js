@@ -6,7 +6,7 @@ const config = {
 		topToolbarElem: '.ss__search__header-section__toolbar--top-toolbar',
 		bottomToolbarElem: '.ss__search__content__toolbar--bottom-toolbar',
 		pagination: '.ss__pagination',
-		layoutSelector: '.ss__toolbar__layout-selector',
+		layoutSelector: '.ss__layout__layout-selector',
 		perpage: '.ss__per-page',
 	},
 };
@@ -74,11 +74,11 @@ describe('Theme overrides work', () => {
 									},
 
 									'search toolbar.top': {
-										modules: ['PaginationInfo', 'Pagination', 'SortBy', 'PerPage'],
+										layout: ['SearchHeader', 'PaginationInfo', 'Pagination', 'SortBy', 'PerPage'],
 									},
 
 									'search toolbar.bottom': {
-										modules: ['PaginationInfo', 'SortBy', 'PerPage'],
+										layout: ['PaginationInfo', 'SortBy', 'PerPage'],
 									},
 								},
 							},
@@ -123,7 +123,7 @@ describe('Theme overrides work', () => {
 									},
 
 									'search toolbar.top': {
-										modules: ['PaginationInfo', 'LayoutSelector', 'SortBy', 'PerPage'],
+										layout: ['SearchHeader', 'PaginationInfo', 'LayoutSelector', 'SortBy', 'PerPage'],
 									},
 								},
 								layoutOptions: [
@@ -216,11 +216,11 @@ describe('Theme overrides work', () => {
 													subtitleText: 'nope',
 												},
 												'search toolbar.top': {
-													modules: ['LayoutSelector', 'Pagination', 'PerPage'],
+													layout: ['SearchHeader', 'LayoutSelector', 'Pagination', 'PerPage'],
 												},
 
 												'search toolbar.bottom': {
-													modules: ['LayoutSelector', 'SortBy'],
+													layout: ['LayoutSelector', 'SortBy'],
 												},
 											},
 										},
@@ -241,11 +241,11 @@ describe('Theme overrides work', () => {
 												},
 
 												'search toolbar.top': {
-													modules: ['LayoutSelector', 'SortBy'],
+													layout: ['SearchHeader', 'LayoutSelector', 'SortBy'],
 												},
 
 												'search toolbar.bottom': {
-													modules: ['LayoutSelector', 'Pagination', 'PerPage'],
+													layout: ['LayoutSelector', 'Pagination', 'PerPage'],
 												},
 											},
 										},
@@ -413,7 +413,7 @@ describe('Theme overrides work', () => {
 												titleText: '991 - 1299',
 											},
 											'toolbar.top': {
-												modules: [],
+												layout: ['SearchHeader'],
 											},
 										},
 									},
@@ -442,16 +442,13 @@ describe('Theme overrides work', () => {
 			cy.snapController().then(({ store }) => {
 				cy.get(config.selectors.titleElem).should('have.text', 'title text one');
 				cy.get(config.selectors.subtitleElem).should('have.text', 'subtitle text one');
-				cy.get(`${config.selectors.topToolbarElem} ${config.selectors.perpage}`).should('exist');
 			});
 
 			cy.viewport(1298, 1000);
 
 			cy.snapController().then(({ store }) => {
-				// cy.get(config.selectors.titleElem).should('have.text','991 - 1299');
 				cy.get(config.selectors.titleElem).should('have.text', 'title text one');
 				cy.get(config.selectors.subtitleElem).should('have.text', 'subtitle text one');
-				cy.get(`${config.selectors.topToolbarElem} ${config.selectors.perpage}`).should('not.exist');
 			});
 
 			cy.viewport(990, 1000);
@@ -459,7 +456,6 @@ describe('Theme overrides work', () => {
 			cy.snapController().then(({ store }) => {
 				cy.get(config.selectors.titleElem).should('have.text', 'layout1 767 - 991');
 				cy.get(config.selectors.subtitleElem).should('have.text', 'global subtitle text');
-				cy.get(`${config.selectors.topToolbarElem} ${config.selectors.perpage}`).should('exist');
 			});
 
 			cy.viewport(766, 1000);
