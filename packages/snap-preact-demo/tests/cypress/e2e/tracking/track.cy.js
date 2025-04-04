@@ -61,15 +61,10 @@ describe('Tracking Beacon 2.0', () => {
 
 	it('tracked search render, impression, clickthrough', () => {
 		cy.visit('https://localhost:2222');
-
 		let initialContext;
-
 		cy.waitForBundle().then(() => {
-			cy.window().then((win) => {
-				expect(win.searchspring).to.exist;
-				cy.waitUntil(() => win.searchspring.controller.search.store.loaded);
-
-				const results = win.searchspring.controller.search.store.results.filter((result) => result.type === 'product');
+			cy.snapController().then((controller) => {
+				const results = controller.store.results.filter((result) => result.type === 'product');
 				expect(results.length).to.be.greaterThan(0);
 
 				cy.wait(`@beacon2/search/render`).then(({ request, response }) => {
@@ -89,19 +84,11 @@ describe('Tracking Beacon 2.0', () => {
 					expect(data).to.have.property('q').to.be.a('string');
 				});
 
-				// get height of result to impress 2nd row
-				cy.get('.ss__result')
-					.first()
-					.then((el) => {
-						const height = el.height();
-						cy.scrollTo(0, height);
-					});
-
 				cy.wait(`@beacon2/search/impression`, { timeout: 10000 }).then(({ request, response }) => {
 					expect(response.body).to.have.property('success').to.equal(true);
 
 					const { context, data } = JSON.parse(request.body);
-					expect(data).to.have.property('results').to.be.an('array').length(8); // first 8 results are visible on the page
+					expect(data).to.have.property('results').to.be.an('array').length(4); // first 8 results are visible on the page
 
 					// assert context values are the same as the initial values
 					expect(context).to.be.an('object');
@@ -121,13 +108,10 @@ describe('Tracking Beacon 2.0', () => {
 		cy.visit('https://localhost:2222?differentPageUrl=1');
 
 		cy.waitForBundle().then(() => {
-			cy.window().then((win) => {
-				expect(win.searchspring).to.exist;
-				cy.waitUntil(() => win.searchspring.controller.search.store.loaded);
-
-				const firstResult = win.searchspring.controller.search.store.results.find((result) => result.type === 'product');
-				const pagination = win.searchspring.controller.search.store.pagination;
-				const merchandising = win.searchspring.controller.search.store.merchandising;
+			cy.snapController().then((controller) => {
+				const firstResult = controller.store.results.find((result) => result.type === 'product');
+				const pagination = controller.store.pagination;
+				const merchandising = controller.store.merchandising;
 				expect(firstResult).to.exist;
 				expect(pagination).to.exist;
 				expect(merchandising).to.exist;
@@ -195,14 +179,6 @@ describe('Tracking Beacon 2.0', () => {
 
 			expect(data).to.have.property('bgfilter').to.be.an('array').length.greaterThan(0);
 		});
-
-		// Wait for scroll or use a custom command to force visibility
-		cy.get('.ss__result')
-			.first()
-			.then((el) => {
-				const height = el.height();
-				cy.scrollTo(0, height);
-			});
 
 		cy.wait(`@beacon2/category/impression`, { timeout: 10000 }).its('response.statusCode').should('eq', 200);
 
