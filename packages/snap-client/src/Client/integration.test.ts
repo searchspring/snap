@@ -43,6 +43,7 @@ describe('Snap Client Integration Tests', () => {
 		beforeEach(() => {
 			// make sure the storage starts out empty for each test
 			mockStorage = {};
+			jest.clearAllMocks();
 		});
 
 		afterAll(() => {
