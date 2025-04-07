@@ -43,12 +43,12 @@ export const ResultTracker = observer((properties: ResultTrackerProps): JSX.Elem
 		rootMargin: '0px',
 		fireOnce: true,
 		threshold: 0.75,
-		startDelay: 2000,
+		startDelay: 2000, // TODO: look into dynamically setting this to a lower value for first row of products
 		minVisibleTime: 150,
 	});
 	if (resultInViewport && mergedTrack.impression) {
-		if (result.type === 'product' && controller?.track) {
-			controller?.track?.product?.impression(result as Product);
+		if (result.type === 'product') {
+			controller.track.product.impression(result as Product);
 		} else {
 			// track banner in future
 		}
@@ -64,11 +64,11 @@ export const ResultTracker = observer((properties: ResultTrackerProps): JSX.Elem
 	return (
 		<div
 			key={result.id}
-			className={classnames('ss__result-tracker', `ss__${controller?.type}-result-tracker`, className)}
+			className={classnames('ss__result-tracker', `ss__${controller.type}-result-tracker`, className)}
 			onClick={(e: any) => {
 				if (mergedTrack.click) {
 					if (result.type === 'product') {
-						controller?.track?.product?.click(e, result as Product);
+						controller.track.product.click(e, result as Product);
 					}
 				}
 			}}

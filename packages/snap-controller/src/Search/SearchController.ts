@@ -744,7 +744,7 @@ function getSearchAddtocartSchemaData({
 					uid: core.uid || '',
 					sku: core.sku,
 					price: Number(core.price),
-					qty: 1,
+					qty: result.quantity || 1,
 				};
 			}) || [],
 	};

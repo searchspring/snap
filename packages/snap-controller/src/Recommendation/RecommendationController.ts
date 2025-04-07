@@ -331,9 +331,8 @@ function getRecommendationsAddtocartSchemaData({
 	store: RecommendationStore;
 	results?: Product[];
 }): RecommendationsAddtocartSchemaData {
-	const base = getRecommendationsSchemaData({ store, results });
 	return {
-		...base,
+		tag: store.profile.tag,
 		results:
 			results?.map((result: Product): BeaconProduct => {
 				const core = (result as Product).mappings.core!;
@@ -341,7 +340,7 @@ function getRecommendationsAddtocartSchemaData({
 					uid: core.uid || '',
 					sku: core.sku,
 					price: Number(core.price),
-					qty: 1,
+					qty: result.quantity || 1,
 				};
 			}) || [],
 	};
