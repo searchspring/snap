@@ -2,11 +2,6 @@ describe('Tracking Beacon 2.0', () => {
 	beforeEach(() => {
 		cy.clearCookies();
 		cy.clearAllLocalStorage();
-		cy.on('window:before:load', (win) => {
-			win.mergeSnapConfig = {
-				mode: 'production',
-			};
-		});
 	});
 
 	it('tracked shopper login and context data', () => {
@@ -31,11 +26,6 @@ describe('Tracking Beacon 2.0', () => {
 	});
 
 	it('has context data with currency, attribution, dev', () => {
-		cy.on('window:before:load', (win) => {
-			win.mergeSnapConfig = {
-				mode: 'development',
-			};
-		});
 		cy.visit('https://localhost:2222/category.html?ss_attribution=email:emailTag');
 
 		cy.wait(`@beacon2/shopper/login`).then(({ request, response }) => {

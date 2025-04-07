@@ -77,9 +77,11 @@ describe('Snap Client Integration Tests', () => {
 
 			//make a search
 			await controller.search();
+			// wait beacon.js REQUEST_GROUPING_TIMEOUT + 100ms for render event to fire
+			await new Promise((resolve) => setTimeout(resolve, 300));
 
 			//expect meta and search calls to fire
-			expect(fetchfn).toHaveBeenCalledTimes(2);
+			expect(fetchfn).toHaveBeenCalledTimes(3);
 
 			//now we have cache
 			expect(mockStorage[CACHE_STORAGE_KEY]).toBeDefined();
@@ -88,8 +90,8 @@ describe('Snap Client Integration Tests', () => {
 			expect(global.Storage.prototype.getItem).toHaveBeenCalled();
 
 			controller.urlManager.set('query', 'dress').go();
-			//make another call
-			await controller.search();
+			// wait 1s because go is async
+			await new Promise((resolve) => setTimeout(resolve, 1000));
 
 			//cache was updated
 			expect(mockStorage[CACHE_STORAGE_KEY]).toBeDefined();
@@ -101,11 +103,11 @@ describe('Snap Client Integration Tests', () => {
 			expect(controller.store.results.length).toBeGreaterThan(0);
 
 			controller.urlManager.reset().set('query', '').go();
-			//make another call
-			await controller.search();
+			// cached search so just need to wait for render event
+			await new Promise((resolve) => setTimeout(resolve, 300));
 
 			//but it did not make additional calls and used previous cache response
-			expect(fetchfn).toHaveBeenCalledTimes(5);
+			expect(fetchfn).toHaveBeenCalledTimes(6);
 
 			fetchfn.mockReset();
 		});
