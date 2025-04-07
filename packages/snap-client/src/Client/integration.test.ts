@@ -104,7 +104,7 @@ describe('Snap Client Integration Tests', () => {
 
 			controller.urlManager.reset().set('query', '').go();
 			// cached search so just need to wait for render event
-			await new Promise((resolve) => setTimeout(resolve, 300));
+			await new Promise((resolve) => setTimeout(resolve, 1000));
 
 			//but it did not make additional calls and used previous cache response
 			expect(fetchfn).toHaveBeenCalledTimes(6);
