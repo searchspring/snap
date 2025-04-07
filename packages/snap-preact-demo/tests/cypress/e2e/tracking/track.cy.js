@@ -2,6 +2,11 @@ describe('Tracking Beacon 2.0', () => {
 	beforeEach(() => {
 		cy.clearCookies();
 		cy.clearAllLocalStorage();
+		cy.on('window:before:load', (win) => {
+			win.mergeSnapConfig = {
+				mode: 'production',
+			};
+		});
 	});
 
 	it('tracked shopper login and context data', () => {
@@ -25,7 +30,7 @@ describe('Tracking Beacon 2.0', () => {
 		});
 	});
 
-	it('has context data with currency, attribution, dev', () => {
+	it('has context data with currency, attribution', () => {
 		cy.visit('https://localhost:2222/category.html?ss_attribution=email:emailTag');
 
 		cy.wait(`@beacon2/shopper/login`).then(({ request, response }) => {
@@ -43,7 +48,6 @@ describe('Tracking Beacon 2.0', () => {
 			expect(context.attribution[0]).to.have.property('id').to.equal('emailTag');
 
 			expect(context).to.have.property('currency').to.be.an('object').and.to.have.property('code').to.equal('EUR');
-			expect(context).to.have.property('dev').to.be.a('boolean').and.to.equal(true);
 
 			expect(response.body).to.have.property('success').to.equal(true);
 		});
