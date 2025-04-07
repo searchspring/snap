@@ -58,4 +58,5 @@ beforeEach(() => {
 	cy.intercept('POST', /beacon.searchspring.io\/beacon\/v2\/.*\/cart\/view/).as('beacon2/cart/view');
 	cy.intercept('POST', /beacon.searchspring.io\/beacon\/v2\/.*\/order\/transaction/).as('beacon2/order/transaction');
 	cy.intercept('POST', /beacon.searchspring.io\/beacon\/v2\/.*\/log\/snap/).as('beacon2/log/snap');
+	cy.wait(100);
 });

@@ -20,8 +20,8 @@ describe('Tracking Beacon 2.0', () => {
 			expect(context).to.have.property('pageUrl').to.be.a('string');
 			expect(context).to.have.property('sessionId').to.be.a('string');
 			expect(context).to.have.property('timestamp').to.be.a('string');
-			expect(context).to.have.property('userAgent').to.be.a('string');
 			expect(context).to.have.property('userId').to.be.a('string');
+			expect(context).not.to.have.property('userAgent').to.be.a('string');
 			expect(context).not.to.have.property('attribution');
 			expect(context).not.to.have.property('currency');
 			expect(context).not.to.have.property('dev');
@@ -46,7 +46,7 @@ describe('Tracking Beacon 2.0', () => {
 			expect(context).to.have.property('pageUrl').to.be.a('string');
 			expect(context).to.have.property('sessionId').to.be.a('string');
 			expect(context).to.have.property('timestamp').to.be.a('string');
-			expect(context).to.have.property('userAgent').to.be.a('string');
+			expect(context).not.to.have.property('userAgent').to.be.a('string');
 			expect(context).to.have.property('userId').to.be.a('string');
 			expect(context).to.have.property('attribution').to.be.an('array').length(1);
 			expect(context.attribution[0]).to.have.property('type').to.equal('email');
