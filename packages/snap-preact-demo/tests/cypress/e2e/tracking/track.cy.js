@@ -76,24 +76,24 @@ describe('Tracking Beacon 2.0', () => {
 					expect(data).to.have.property('pagination').to.be.an('object');
 					expect(data).to.not.have.property('sort');
 					expect(data).to.have.property('q').to.be.a('string');
-				});
 
-				cy.wait(`@beacon2/search/impression`, { timeout: 10000 }).then(({ request, response }) => {
-					expect(response.body).to.have.property('success').to.equal(true);
+					cy.wait(`@beacon2/search/impression`, { timeout: 10000 }).then(({ request, response }) => {
+						expect(response.body).to.have.property('success').to.equal(true);
 
-					const { context, data } = JSON.parse(request.body);
-					expect(data).to.have.property('results').to.be.an('array').length(4); // first 8 results are visible on the page
+						const { context, data } = JSON.parse(request.body);
+						expect(data).to.have.property('results').to.be.an('array').length(4); // first 8 results are visible on the page
 
-					// assert context values are the same as the initial values
-					expect(context).to.be.an('object');
-					expect(context.initiator).to.equal(initialContext.initiator);
-					expect(context.pageLoadId).to.equal(initialContext.pageLoadId);
-					expect(context.pageUrl).to.equal(initialContext.pageUrl);
-					expect(context.sessionId).to.equal(initialContext.sessionId);
-					expect(context.shopperId).to.equal(initialContext.shopperId);
-					expect(context.timestamp).not.to.equal(initialContext.timestamp); // timestamp should be different
-					expect(context.userAgent).to.equal(initialContext.userAgent);
-					expect(context.userId).to.equal(initialContext.userId);
+						// assert context values are the same as the initial values
+						expect(context).to.be.an('object');
+						expect(context.initiator).to.equal(initialContext.initiator);
+						expect(context.pageLoadId).to.equal(initialContext.pageLoadId);
+						expect(context.pageUrl).to.equal(initialContext.pageUrl);
+						expect(context.sessionId).to.equal(initialContext.sessionId);
+						expect(context.shopperId).to.equal(initialContext.shopperId);
+						expect(context.timestamp).not.to.equal(initialContext.timestamp); // timestamp should be different
+						expect(context.userAgent).to.equal(initialContext.userAgent);
+						expect(context.userId).to.equal(initialContext.userId);
+					});
 				});
 
 				// reload page to generate new context
