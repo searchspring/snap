@@ -128,7 +128,11 @@ export const Results = observer((properties: ResultsProp): JSX.Element => {
 		<CacheProvider>
 			<div {...styling} className={classnames('ss__results', `ss__results-${props.layout}`, className)}>
 				{results.map((result) => (
-					<ResultTracker result={result} controller={controller as SearchController | AutocompleteController | RecommendationController}>
+					<ResultTracker
+						key={result.id}
+						result={result}
+						controller={controller as SearchController | AutocompleteController | RecommendationController}
+					>
 						{(() => {
 							switch (result.type) {
 								case ContentType.BANNER:

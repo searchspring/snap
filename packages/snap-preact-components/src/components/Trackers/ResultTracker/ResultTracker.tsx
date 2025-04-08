@@ -1,10 +1,10 @@
 /** @jsx jsx */
 import { h, ComponentChildren } from 'preact';
 import { jsx, css } from '@emotion/react';
-import { useRef, useEffect } from 'preact/hooks';
+import { useRef } from 'preact/hooks';
 import { observer } from 'mobx-react';
 import { Theme, useTheme } from '../../../providers';
-import { useIntersection } from '../../../hooks';
+import { useIntersectionAdvanced } from '../../../hooks';
 import type { AutocompleteController, RecommendationController, SearchController } from '@searchspring/snap-controller';
 import { ComponentProps, StylingCSS } from '../../../types';
 import type { Banner, Product } from '@searchspring/snap-store-mobx';
@@ -38,19 +38,19 @@ export const ResultTracker = observer((properties: ResultTrackerProps): JSX.Elem
 		...track,
 	};
 	const resultRef = useRef(null);
-	const resultInViewport = useIntersection(resultRef, '0px', true);
-
-	useEffect(() => {
-		if (mergedTrack.render) {
-			if (result.type === 'product') {
-				controller?.track?.product?.render(result as Product);
-			}
-		}
-	}, [result]);
-
+	const resultInViewport = useIntersectionAdvanced(resultRef, {
+		key: result.id,
+		rootMargin: '0px',
+		fireOnce: true,
+		threshold: 0.75,
+		startDelay: 2000, // TODO: look into dynamically setting this to a lower value for first row of products
+		minVisibleTime: 150,
+	});
 	if (resultInViewport && mergedTrack.impression) {
-		if (result.type === 'product' && controller?.track) {
-			controller?.track?.product?.impression(result as Product);
+		if (result.type === 'product') {
+			controller?.track.product.impression(result as Product);
+		} else {
+			// track banner in future
 		}
 	}
 
@@ -63,11 +63,12 @@ export const ResultTracker = observer((properties: ResultTrackerProps): JSX.Elem
 
 	return (
 		<div
+			key={result.id}
 			className={classnames('ss__result-tracker', `ss__${controller?.type}-result-tracker`, className)}
 			onClick={(e: any) => {
 				if (mergedTrack.click) {
 					if (result.type === 'product') {
-						controller?.track?.product?.click(e, result as Product);
+						controller?.track.product.click(e, result as Product);
 					}
 				}
 			}}

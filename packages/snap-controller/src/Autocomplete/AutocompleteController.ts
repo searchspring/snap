@@ -1,6 +1,6 @@
 import deepmerge from 'deepmerge';
 
-import { StorageStore, ErrorType, Product, SearchResultStore, Banner } from '@searchspring/snap-store-mobx';
+import { StorageStore, ErrorType, Product, Banner } from '@searchspring/snap-store-mobx';
 import { AbstractController } from '../Abstract/AbstractController';
 import { getSearchParams } from '../utils/getParams';
 import { ControllerTypes } from '../types';
@@ -10,12 +10,14 @@ import type { AutocompleteControllerConfig, AfterSearchObj, AfterStoreObj, Contr
 import type { Next } from '@searchspring/snap-event-manager';
 import type { AutocompleteRequestModel, SearchRequestModelFilterRange, SearchRequestModelFilterValue } from '@searchspring/snapi-types';
 import type {
+	AutocompleteAddtocartSchemaData,
 	AutocompleteRedirectSchemaData,
 	AutocompleteSchemaData,
 	AutocompleteSchemaDataBgfilterInner,
 	AutocompleteSchemaDataFilterInner,
 	AutocompleteSchemaDataSortInnerDirEnum,
 	Item,
+	Product as BeaconProduct,
 } from '@searchspring/beacon';
 
 const INPUT_ATTRIBUTE = 'ss-autocomplete-input';
@@ -106,6 +108,22 @@ export class AutocompleteController extends AbstractController {
 			key: `ss-controller-${this.config.id}`,
 		});
 
+		this.eventManager.on('afterStore', async (search: AfterStoreObj, next: Next): Promise<void | boolean> => {
+			await next();
+			const controller = search.controller as AutocompleteController;
+			if (controller.store.loaded && !controller.store.error) {
+				const products = controller.store.results.filter((result) => result.type === 'product') as Product[];
+				const results = products.length === 0 ? [] : products;
+				const data = getAutocompleteSchemaData({ params: this.params, store: this.store, results });
+				this.tracker.events.autocomplete.render({ data, siteId: this.config.globals?.siteId });
+				products.forEach((result) => {
+					this.events.product[result.id] = this.events.product[result.id] || {};
+					this.events.product[result.id].render = true;
+				});
+				this.eventManager.fire('track.product.render', { controller: this, products, trackEvent: data });
+			}
+		});
+
 		// add 'afterSearch' middleware
 		this.eventManager.on('afterSearch', async (ac: AfterSearchObj, next: Next): Promise<void | boolean> => {
 			await next();
@@ -168,7 +186,7 @@ export class AutocompleteController extends AbstractController {
 			render: (result: Product) => {
 				if (this.events.product[result.id]?.render) return;
 
-				const data = getAutocompleteSchemaData({ params: this.params, store: this.store, results: [result] });
+				const data = getAutocompleteSchemaData({ params: this.params, store: this.store, results: result ? [result] : [] });
 				this.tracker.events.autocomplete.render({ data, siteId: this.config.globals?.siteId });
 				this.events.product[result.id] = this.events.product[result.id] || {};
 				this.events.product[result.id].render = true;
@@ -184,7 +202,7 @@ export class AutocompleteController extends AbstractController {
 				this.eventManager.fire('track.product.impression', { controller: this, products: [result], trackEvent: data });
 			},
 			addToCart: (result: Product): void => {
-				const data = getAutocompleteSchemaData({ params: this.params, store: this.store, results: [result] });
+				const data = getAutocompleteAddtocartSchemaData({ params: this.params, store: this.store, results: [result] });
 				this.tracker.events.autocomplete.addToCart({ data, siteId: this.config.globals?.siteId });
 				this.eventManager.fire('track.product.addToCart', { controller: this, products: [result], trackEvent: data });
 			},
@@ -828,6 +846,30 @@ function getAutocompleteRedirectSchemaData({ redirectURL }: { redirectURL: strin
 	};
 }
 
+function getAutocompleteAddtocartSchemaData({
+	params,
+	store,
+	results,
+}: {
+	params: AutocompleteRequestModel;
+	store: AutocompleteStore;
+	results?: Product[];
+}): AutocompleteAddtocartSchemaData {
+	const base = getAutocompleteSchemaData({ params, store, results });
+	return {
+		...base,
+		results:
+			results?.map((result: Product): BeaconProduct => {
+				const core = (result as Product).mappings.core!;
+				return {
+					uid: core.uid || '',
+					sku: core.sku,
+					price: Number(core.price),
+					qty: result.quantity || 1,
+				};
+			}) || [],
+	};
+}
 function getAutocompleteSchemaData({
 	params,
 	store,
@@ -835,7 +877,7 @@ function getAutocompleteSchemaData({
 }: {
 	params: AutocompleteRequestModel;
 	store: AutocompleteStore;
-	results?: SearchResultStore;
+	results?: Product[];
 }): AutocompleteSchemaData {
 	const filters = params.filters?.reduce<{
 		bgfilter?: Array<AutocompleteSchemaDataBgfilterInner>;
@@ -867,12 +909,12 @@ function getAutocompleteSchemaData({
 		q: store.search?.originalQuery?.string || store.search?.query?.string || '',
 		correctedQuery: store.search?.originalQuery?.string ? store.search?.query?.string : undefined,
 		...filters,
-		sort: [
-			{
-				field: store.sorting.current?.field,
-				dir: store.sorting.current?.direction as AutocompleteSchemaDataSortInnerDirEnum,
-			},
-		],
+		sort: params.sorts?.map((sort) => {
+			return {
+				field: sort.field,
+				dir: sort.direction as AutocompleteSchemaDataSortInnerDirEnum,
+			};
+		}),
 		pagination: {
 			totalResults: store.pagination.totalResults,
 			page: store.pagination.page,
@@ -894,8 +936,8 @@ function getAutocompleteSchemaData({
 				undefined,
 		},
 		results:
-			results?.map((result: Product | Banner): Item => {
-				const core = (result as Product).mappings.core!;
+			results?.map((result: Product): Item => {
+				const core = result.mappings.core!;
 				return {
 					uid: core.uid || '',
 					// childUid: core.uid,

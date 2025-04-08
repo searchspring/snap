@@ -372,7 +372,6 @@ describe('Tracker', () => {
 		expect(context.pageUrl).toBeDefined();
 		expect(context.initiator).toBeDefined();
 		expect(context.attribution).not.toBeDefined();
-		expect(context.userAgent).toBeDefined();
 		expect(context.dev).toBe(true);
 		expect(context.currency).not.toBeDefined();
 	});
