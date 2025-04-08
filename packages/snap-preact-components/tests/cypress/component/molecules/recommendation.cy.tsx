@@ -50,15 +50,16 @@ const controller = new RecommendationController(recommendConfig, {
 
 describe('Recommendation Component', async () => {
 	before(async () => {
+		cy.spy(controller.tracker.events.recommendations, 'render').as('render');
+		cy.spy(controller.track.product, 'impression').as('impression');
 		cy.intercept('*recommend*', json);
 		cy.intercept('*profile*', profile);
-
 		await controller.search();
 	});
 
 	it('tracks as expected', () => {
-		cy.spy(controller.track.product, 'render').as('render');
-		cy.spy(controller.track.product, 'impression').as('impression');
+		expect(controller.store.loaded).to.be.true;
+		expect(controller.store.results.length).to.be.greaterThan(0);
 
 		mount(
 			<Recommendation controller={controller} speed={0} lazyRender={{ enabled: false }}>
@@ -69,171 +70,11 @@ describe('Recommendation Component', async () => {
 				))}
 			</Recommendation>
 		);
-
-		cy.get('.ss__recommendation')
-			.should('exist')
-			.then(() => {
-				cy.get('@render').its('callCount').should('eq', controller.store.results.length);
-				cy.get('@impression').its('callCount').should('eq', 5);
-
-				//todo - get these beacon tests working again, or move back into jest if possible.
-
-				// expect(spy).to.be.calledOn({
-				//     type: BeaconType.PROFILE_RENDER,
-				//     category: BeaconCategory.RECOMMENDATIONS,
-				//     context: controller.config.globals.siteId ? { website: { trackingCode: controller.config.globals.siteId } } : undefined,
-				//     event: {
-				//         context: {
-				//             placement: controller.store.profile.placement,
-				//             tag: controller.store.profile.tag,
-				//             type: 'product-recommendation',
-				//         },
-				//         profile: {
-				//             placement: controller.store.profile.placement,
-				//             tag: controller.store.profile.tag,
-				//             templateId: 'aefcf718-8514-44c3-bff6-80c15dbc42fc',
-				//             threshold: 4,
-				//         },
-				//     },
-				// },)
-				// cy.get('@trackfn').should('have.been.calledWith', ({
-				//     type: BeaconType.PROFILE_RENDER,
-				//     category: BeaconCategory.RECOMMENDATIONS,
-				//     context: controller.config.globals.siteId ? { website: { trackingCode: controller.config.globals.siteId } } : undefined,
-				//     event: {
-				//         context: {
-				//             placement: controller.store.profile.placement,
-				//             tag: controller.store.profile.tag,
-				//             type: 'product-recommendation',
-				//         },
-				//         profile: {
-				//             placement: controller.store.profile.placement,
-				//             tag: controller.store.profile.tag,
-				//             templateId: 'aefcf718-8514-44c3-bff6-80c15dbc42fc',
-				//             threshold: 4,
-				//         },
-				//     },
-				// }));
-
-				// other 20 calls are for product render
-				// controller.store.results.map((result) => {
-				//     cy.get('@trackfn').should('be.calledWith', ({
-				//         type: BeaconType.PROFILE_PRODUCT_RENDER,
-				//         category: BeaconCategory.RECOMMENDATIONS,
-				//         context: controller.config.globals.siteId ? { website: { trackingCode: controller.config.globals.siteId } } : undefined,
-				//         pid: controller.events.render!.id,
-				//         event: {
-				//             context: {
-				//                 placement: controller.store.profile.placement,
-				//                 tag: controller.store.profile.tag,
-				//                 type: 'product-recommendation',
-				//             },
-				//             product: {
-				//                 id: result.id,
-				//                 seed: undefined,
-				//                 mappings: {
-				//                     core: result.mappings.core,
-				//                 },
-				//             },
-				//         },
-				//     }));
-				// });
-			});
-
-		// // trackfn.mockClear();
-
-		// //click the next button
-		// cy.get('.ss__carousel__next').click();
-
-		// expect('@trackfn').to.be.calledWith({
-
-		// // expect(trackfn).toHaveBeenCalledWith({
-		// 	type: BeaconType.PROFILE_CLICK,
-		// 	category: BeaconCategory.RECOMMENDATIONS,
-		// 	context: controller.config.globals.siteId ? { website: { trackingCode: controller.config.globals.siteId } } : undefined,
-		// 	event: {
-		// 		context: {
-		// 			action: 'navigate',
-		// 			placement: controller.store.profile.placement,
-		// 			tag: controller.store.profile.tag,
-		// 			type: 'product-recommendation',
-		// 		},
-		// 		profile: {
-		// 			placement: controller.store.profile.placement,
-		// 			tag: controller.store.profile.tag,
-		// 			templateId: 'aefcf718-8514-44c3-bff6-80c15dbc42fc',
-		// 			threshold: 4,
-		// 		},
-		// 	},
-		// });
-
-		// cy.get('@trackfn.all').should('have.length', 22);
-
-		// // expect(trackfn).toHaveBeenCalledTimes(1);
-
-		// // trackfn.mockClear();
-
-		// for (let i = 0; i < 21; i++) {
-		// 	// @ts-ignore
-		// 	const [callback] = window.IntersectionObserver.mock.calls[i];
-
-		// 	callback([
-		// 		{
-		// 			isIntersecting: true,
-		// 			intersectionRatio: 10,
-		// 		},
-		// 	]);
-		// }
-
-		// await waitFor(() => {
-		// 	expect(trackfn).toHaveBeenCalledTimes(21);
-		// });
-
-		// // profile impression
-		// expect(trackfn).toHaveBeenNthCalledWith(1, {
-		// 	type: BeaconType.PROFILE_IMPRESSION,
-		// 	category: BeaconCategory.RECOMMENDATIONS,
-		// 	context: controller.config.globals.siteId ? { website: { trackingCode: controller.config.globals.siteId } } : undefined,
-		// 	event: {
-		// 		context: {
-		// 			placement: controller.store.profile.placement,
-		// 			tag: controller.store.profile.tag,
-		// 			type: 'product-recommendation',
-		// 		},
-		// 		profile: {
-		// 			placement: controller.store.profile.placement,
-		// 			tag: controller.store.profile.tag,
-		// 			templateId: 'aefcf718-8514-44c3-bff6-80c15dbc42fc',
-		// 			threshold: 4,
-		// 		},
-		// 	},
-		// });
-
-		// // next 4 results should have done impression tracking
-		// controller.store.results.map((result) => {
-		// 	cy.get('@trackfn').should('be.calledWith', Cypress.sinon.match.object).should('include', {
-		// 		type: BeaconType.PROFILE_PRODUCT_IMPRESSION,
-		// 		category: BeaconCategory.RECOMMENDATIONS,
-		// 		context: controller.config.globals.siteId ? { website: { trackingCode: controller.config.globals.siteId } } : undefined,
-		// 		event: {
-		// 			context: {
-		// 				placement: controller.store.profile.placement,
-		// 				tag: controller.store.profile.tag,
-		// 				type: 'product-recommendation',
-		// 			},
-		// 			product: {
-		// 				id: result.id,
-		// 				seed: undefined,
-		// 				mappings: {
-		// 					core: result.mappings.core,
-		// 				},
-		// 			},
-		// 		},
-		// 		pid: controller.events.impression?.id,
-		// 	})
-		// });
-
-		// trackfn.mockClear();
+		cy.get('.ss__recommendation').should('exist');
+		cy.get('.ss__recommendation .findMe .result').should('have.length', controller.store.results.length);
+		cy.get('@render').should('have.been.calledOnce');
+		cy.wait(3000);
+		cy.get('@impression').its('callCount').should('eq', 5);
 	});
 
 	it('renders with results', () => {
