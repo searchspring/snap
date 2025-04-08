@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.65.2](https://github.com/searchspring/snap/compare/v0.65.1...v0.65.2) (2025-04-08)
+
+### Bug Fixes
+
+- cypress test - mock beacon response ([3789c21](https://github.com/searchspring/snap/commit/3789c2189c1e99aa214346246aa5e41bac3fb992))
+- track tests, refactors ([2b522ee](https://github.com/searchspring/snap/commit/2b522ee256afd624095ab1f200108be8f1324473))
+
 ## [0.65.1](https://github.com/searchspring/snap/compare/v0.65.0...v0.65.1) (2025-03-26)
 
 **Note:** Version bump only for package @searchspring/snap-preact-demo
