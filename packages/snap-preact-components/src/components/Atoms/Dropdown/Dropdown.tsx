@@ -19,8 +19,9 @@ const CSS = {
 			'&.ss__dropdown--open': {
 				'& .ss__dropdown__content': {
 					position: disableOverlay ? 'relative' : undefined,
-					visibility: 'visible',
-					opacity: 1,
+					// visibility: 'visible',
+					// opacity: 1,
+					display: 'block',
 				},
 			},
 			'.ss__dropdown__button': {
@@ -29,8 +30,9 @@ const CSS = {
 			'.ss__dropdown__content': {
 				position: 'absolute',
 				minWidth: '100%',
-				visibility: 'hidden',
-				opacity: 0,
+				// visibility: 'hidden',
+				// opacity: 0,
+				display: 'none',
 				top: 'auto',
 				left: 0,
 			},

@@ -264,9 +264,10 @@ export const Facet = observer((properties: FacetProps): JSX.Element => {
 				<div {...styling} className={classnames('ss__facet', `ss__facet--${facet.display}`, `ss__facet--${facet.field}`, className)}>
 					<Dropdown
 						{...subProps.dropdown}
-						open={disableCollapse || !facet?.collapsed}
+						// open={disableCollapse || !facet?.collapsed}
 						onClick={() => !disableCollapse && facet.toggleCollapse && facet?.toggleCollapse()}
 						disableA11y={true}
+						toggleOnHover={true}
 						button={
 							<div
 								className="ss__facet__header"
