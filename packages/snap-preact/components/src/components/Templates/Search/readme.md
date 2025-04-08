@@ -22,6 +22,22 @@ The required `controller` prop specifies a reference to the search controller.
 <Search controller={controller} />
 ```
 
+### resultComponent
+The `resultComponent` prop specifies a custom result component to render.
+
+```jsx
+
+const CustomResult = ({
+	controller 
+	result
+	theme
+}) => {
+	return <div>{result.mappings.core?.name}</div>
+}
+
+<Search controller={controller} resultComponent={CustomResult} />
+```
+
 ### mobileDisplayAt
 The `mobileDisplayAt` prop specifies a CSS media query for when the MobileSidebar component will render. By default, the component will render at "991px".
 

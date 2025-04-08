@@ -100,8 +100,8 @@ const breakpoints = {
 <RecommendationGrid results={controller.store.results} breakpoints={breakpoints} />
 ```
 
-### ResultComponent
-The `ResultCompnent` prop specifies a custom result component to render.
+### resultComponent
+The `resultComponent` prop specifies a custom result component to render.
 
 ```jsx
 
