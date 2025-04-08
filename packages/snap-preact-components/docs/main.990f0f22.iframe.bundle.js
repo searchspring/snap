@@ -1,4 +1,4 @@
-/*! For license information please see main.8345cc66.iframe.bundle.js.LICENSE.txt */
+/*! For license information please see main.990f0f22.iframe.bundle.js.LICENSE.txt */
 (self.webpackChunk_searchspring_snap_preact_components = self.webpackChunk_searchspring_snap_preact_components || []).push([
 	[792],
 	{
@@ -31473,7 +31473,7 @@
 										}),
 										results.map(function (result) {
 											return (0,
-											_emotion_react__WEBPACK_IMPORTED_MODULE_6__.Y)(_Trackers_ResultTracker__WEBPACK_IMPORTED_MODULE_13__.o, { result, controller }, result.type === _searchspring_snap_store_mobx__WEBPACK_IMPORTED_MODULE_14__.c.BANNER ? (0, _emotion_react__WEBPACK_IMPORTED_MODULE_6__.Y)(_Atoms_Merchandising_InlineBanner__WEBPACK_IMPORTED_MODULE_15__._, Object.assign({}, subProps.inlineBanner, { key: result.id, banner: result, layout: props.layout })) : (0, _emotion_react__WEBPACK_IMPORTED_MODULE_6__.Y)(_Molecules_Result__WEBPACK_IMPORTED_MODULE_16__.Q, Object.assign({ key: result.id }, subProps.result, { result, layout: props.layout, controller })));
+											_emotion_react__WEBPACK_IMPORTED_MODULE_6__.Y)(_Trackers_ResultTracker__WEBPACK_IMPORTED_MODULE_13__.o, { key: result.id, result, controller }, result.type === _searchspring_snap_store_mobx__WEBPACK_IMPORTED_MODULE_14__.c.BANNER ? (0, _emotion_react__WEBPACK_IMPORTED_MODULE_6__.Y)(_Atoms_Merchandising_InlineBanner__WEBPACK_IMPORTED_MODULE_15__._, Object.assign({}, subProps.inlineBanner, { key: result.id, banner: result, layout: props.layout })) : (0, _emotion_react__WEBPACK_IMPORTED_MODULE_6__.Y)(_Molecules_Result__WEBPACK_IMPORTED_MODULE_16__.Q, Object.assign({ key: result.id }, subProps.result, { result, layout: props.layout, controller })));
 										})
 									)
 							  )
@@ -32125,25 +32125,92 @@
 			'use strict';
 			__webpack_require__.d(__webpack_exports__, { o: () => ResultTracker });
 			__webpack_require__('../../node_modules/core-js/modules/es.object.assign.js');
-			var _emotion_react__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__('../../node_modules/@emotion/react/dist/emotion-react.browser.esm.js'),
-				preact_hooks__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__('../../node_modules/preact/hooks/dist/hooks.module.js'),
-				mobx_react__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__('../../node_modules/mobx-react/dist/mobxreact.esm.js'),
-				_providers__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
-					'../../node_modules/@emotion/react/dist/emotion-element-cbed451f.browser.esm.js'
-				),
-				_hooks__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__('./src/hooks/useIntersection.tsx'),
-				classnames__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__('../../node_modules/classnames/index.js'),
-				classnames__WEBPACK_IMPORTED_MODULE_2___default = __webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_2__),
+			var emotion_react_browser_esm = __webpack_require__('../../node_modules/@emotion/react/dist/emotion-react.browser.esm.js'),
+				hooks_module = __webpack_require__('../../node_modules/preact/hooks/dist/hooks.module.js'),
+				mobxreact_esm = __webpack_require__('../../node_modules/mobx-react/dist/mobxreact.esm.js'),
+				emotion_element_cbed451f_browser_esm = __webpack_require__('../../node_modules/@emotion/react/dist/emotion-element-cbed451f.browser.esm.js');
+			__webpack_require__('../../node_modules/core-js/modules/es.date.now.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.date.to-string.js'),
+				__webpack_require__('../../node_modules/core-js/modules/web.timers.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.array.is-array.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.symbol.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.symbol.description.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.object.to-string.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.symbol.iterator.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.string.iterator.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.array.iterator.js'),
+				__webpack_require__('../../node_modules/core-js/modules/web.dom-collections.iterator.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.array.slice.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.function.name.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.array.from.js');
+			function _slicedToArray(r, e) {
+				return (
+					(function _arrayWithHoles(r) {
+						if (Array.isArray(r)) return r;
+					})(r) ||
+					(function _iterableToArrayLimit(r, l) {
+						var t = null == r ? null : ('undefined' != typeof Symbol && r[Symbol.iterator]) || r['@@iterator'];
+						if (null != t) {
+							var e,
+								n,
+								i,
+								u,
+								a = [],
+								f = !0,
+								o = !1;
+							try {
+								if (((i = (t = t.call(r)).next), 0 === l)) {
+									if (Object(t) !== t) return;
+									f = !1;
+								} else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0);
+							} catch (r) {
+								(o = !0), (n = r);
+							} finally {
+								try {
+									if (!f && null != t.return && ((u = t.return()), Object(u) !== u)) return;
+								} finally {
+									if (o) throw n;
+								}
+							}
+							return a;
+						}
+					})(r, e) ||
+					(function _unsupportedIterableToArray(r, a) {
+						if (r) {
+							if ('string' == typeof r) return _arrayLikeToArray(r, a);
+							var t = {}.toString.call(r).slice(8, -1);
+							return (
+								'Object' === t && r.constructor && (t = r.constructor.name),
+								'Map' === t || 'Set' === t
+									? Array.from(r)
+									: 'Arguments' === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t)
+									? _arrayLikeToArray(r, a)
+									: void 0
+							);
+						}
+					})(r, e) ||
+					(function _nonIterableRest() {
+						throw new TypeError(
+							'Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.'
+						);
+					})()
+				);
+			}
+			function _arrayLikeToArray(r, a) {
+				(null == a || a > r.length) && (a = r.length);
+				for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e];
+				return n;
+			}
+			var classnames = __webpack_require__('../../node_modules/classnames/index.js'),
+				classnames_default = __webpack_require__.n(classnames),
 				CSS_ResultTracker = function ResultTracker() {
-					return (0, _emotion_react__WEBPACK_IMPORTED_MODULE_3__.AH)({});
+					return (0, emotion_react_browser_esm.AH)({});
 				},
-				ResultTracker = (0, mobx_react__WEBPACK_IMPORTED_MODULE_4__.PA)(function (properties) {
+				ResultTracker = (0, mobxreact_esm.PA)(function (properties) {
 					var _globalTheme$componen,
 						_properties$theme,
 						_properties$theme$com,
-						_controller$track2,
-						_controller$track2$pr,
-						globalTheme = (0, _providers__WEBPACK_IMPORTED_MODULE_5__.a)(),
+						globalTheme = (0, emotion_element_cbed451f_browser_esm.a)(),
 						props = Object.assign(
 							{},
 							null == globalTheme || null === (_globalTheme$componen = globalTheme.components) || void 0 === _globalTheme$componen
@@ -32165,54 +32232,87 @@
 						disableStyles = props.disableStyles,
 						style = props.style,
 						mergedTrack = Object.assign({}, { render: !0, impression: !0, click: !0 }, track),
-						resultRef = (0, preact_hooks__WEBPACK_IMPORTED_MODULE_1__.li)(null),
-						resultInViewport = (0, _hooks__WEBPACK_IMPORTED_MODULE_6__.v)(resultRef, '0px', !0);
-					((0, preact_hooks__WEBPACK_IMPORTED_MODULE_1__.vJ)(
-						function () {
-							var _controller$track, _controller$track$pro;
-							mergedTrack.render &&
-								'product' === result.type &&
-								(null == controller ||
-									null === (_controller$track = controller.track) ||
-									void 0 === _controller$track ||
-									null === (_controller$track$pro = _controller$track.product) ||
-									void 0 === _controller$track$pro ||
-									_controller$track$pro.render(result));
-						},
-						[result]
-					),
-					resultInViewport && mergedTrack.impression) &&
+						resultRef = (0, hooks_module.li)(null),
+						resultInViewport = (function useIntersectionAdvanced(ref) {
+							var options = arguments.length > 1 && void 0 !== arguments[1] ? arguments[1] : {},
+								_options$key = options.key,
+								key = void 0 === _options$key ? '' : _options$key,
+								_options$rootMargin = options.rootMargin,
+								rootMargin = void 0 === _options$rootMargin ? '0px' : _options$rootMargin,
+								_options$fireOnce = options.fireOnce,
+								fireOnce = void 0 !== _options$fireOnce && _options$fireOnce,
+								_options$threshold = options.threshold,
+								threshold = void 0 === _options$threshold ? 0 : _options$threshold,
+								_options$startDelay = options.startDelay,
+								startDelay = void 0 === _options$startDelay ? 0 : _options$startDelay,
+								_options$minVisibleTi = options.minVisibleTime,
+								minVisibleTime = void 0 === _options$minVisibleTi ? 0 : _options$minVisibleTi,
+								_useState2 = _slicedToArray((0, hooks_module.J0)(!1), 2),
+								isIntersecting = _useState2[0],
+								setIntersecting = _useState2[1],
+								visibleTimerRef = (0, hooks_module.li)(null),
+								visibleStartRef = (0, hooks_module.li)(null);
+							return (
+								(0, hooks_module.vJ)(
+									function () {
+										setIntersecting(!1);
+										var startDelayTimeout = null,
+											observer = null,
+											startObserver = function startObserver() {
+												ref.current &&
+													((observer = new IntersectionObserver(
+														function (_ref) {
+															_slicedToArray(_ref, 1)[0].isIntersecting
+																? minVisibleTime > 0
+																	? ((visibleStartRef.current = Date.now()),
+																	  visibleTimerRef.current && window.clearTimeout(visibleTimerRef.current),
+																	  (visibleTimerRef.current = window.setTimeout(function () {
+																			setIntersecting(!0), fireOnce && ref.current && observer && observer.unobserve(ref.current);
+																	  }, minVisibleTime)))
+																	: (setIntersecting(!0), fireOnce && ref.current && observer && observer.unobserve(ref.current))
+																: (visibleTimerRef.current && window.clearTimeout(visibleTimerRef.current),
+																  (visibleTimerRef.current = null),
+																  (visibleStartRef.current = null),
+																  setIntersecting(!1));
+														},
+														{ rootMargin, threshold }
+													)),
+													ref.current && observer.observe(ref.current));
+											};
+										return (
+											startDelay > 0 ? (startDelayTimeout = setTimeout(startObserver, startDelay)) : startObserver(),
+											function () {
+												setIntersecting(!1),
+													startDelayTimeout && window.clearTimeout(startDelayTimeout),
+													visibleTimerRef.current && window.clearTimeout(visibleTimerRef.current),
+													observer && ref.current && observer.unobserve(ref.current);
+											}
+										);
+									},
+									[key]
+								),
+								isIntersecting
+							);
+						})(resultRef, { key: result.id, rootMargin: '0px', fireOnce: !0, threshold: 0.75, startDelay: 2e3, minVisibleTime: 150 });
+					resultInViewport &&
+						mergedTrack.impression &&
 						'product' === result.type &&
-						null != controller &&
-						controller.track &&
-						(null == controller ||
-							null === (_controller$track2 = controller.track) ||
-							void 0 === _controller$track2 ||
-							null === (_controller$track2$pr = _controller$track2.product) ||
-							void 0 === _controller$track2$pr ||
-							_controller$track2$pr.impression(result));
+						(null == controller || controller.track.product.impression(result));
 					var styling = {};
 					return (
 						disableStyles ? style && (styling.css = [style]) : (styling.css = [CSS_ResultTracker(), style]),
-						(0, _emotion_react__WEBPACK_IMPORTED_MODULE_3__.Y)(
+						(0, emotion_react_browser_esm.Y)(
 							'div',
 							Object.assign(
 								{
-									className: classnames__WEBPACK_IMPORTED_MODULE_2___default()(
+									key: result.id,
+									className: classnames_default()(
 										'ss__result-tracker',
 										'ss__' + (null == controller ? void 0 : controller.type) + '-result-tracker',
 										className
 									),
 									onClick: function onClick(e) {
-										var _controller$track3, _controller$track3$pr;
-										mergedTrack.click &&
-											'product' === result.type &&
-											(null == controller ||
-												null === (_controller$track3 = controller.track) ||
-												void 0 === _controller$track3 ||
-												null === (_controller$track3$pr = _controller$track3.product) ||
-												void 0 === _controller$track3$pr ||
-												_controller$track3$pr.click(e, result));
+										mergedTrack.click && 'product' === result.type && (null == controller || controller.track.product.click(e, result));
 									},
 									ref: resultRef,
 								},
@@ -35735,7 +35835,7 @@
 										void 0 === _this$events$product$2 ||
 										!_this$events$product$2.render
 									) {
-										var data = getSearchSchemaData({ params: _this.params, store: _this.store, results: [result] });
+										var data = getSearchSchemaData({ params: _this.params, store: _this.store, results: result ? [result] : [] });
 										_this.tracker.events[_this.pageType].render({
 											data,
 											siteId:
@@ -35770,7 +35870,21 @@
 								},
 								addToCart: function addToCart(result) {
 									var _this$config$globals4,
-										data = getSearchSchemaData({ params: _this.params, store: _this.store, results: [result] });
+										data = (function getSearchAddtocartSchemaData(_ref13) {
+											var params = _ref13.params,
+												store = _ref13.store,
+												results = _ref13.results,
+												base = getSearchSchemaData({ params, store, results });
+											return Object.assign({}, base, {
+												results:
+													(null == results
+														? void 0
+														: results.map(function (result) {
+																var core = result.mappings.core;
+																return { uid: core.uid || '', sku: core.sku, price: Number(core.price), qty: result.quantity || 1 };
+														  })) || [],
+											});
+										})({ params: _this.params, store: _this.store, results: [result] });
 									_this.tracker.events[_this.pageType].addToCart({
 										data,
 										siteId:
@@ -35783,8 +35897,8 @@
 							},
 							redirect: function redirect(redirectURL) {
 								var _this$config$globals5,
-									data = (function getSearchRedirectSchemaData(_ref11) {
-										var redirectURL = _ref11.redirectURL;
+									data = (function getSearchRedirectSchemaData(_ref12) {
+										var redirectURL = _ref12.redirectURL;
 										return { redirect: redirectURL };
 									})({ redirectURL });
 								_this.tracker.events.search.redirect({
@@ -36327,6 +36441,57 @@
 								};
 							})()
 						),
+						_this.eventManager.on(
+							'afterStore',
+							(function () {
+								var _ref8 = SearchController_asyncToGenerator(
+									SearchController_regeneratorRuntime().mark(function _callee6(search, next) {
+										var controller, _this$config$globals6, products, results, data;
+										return SearchController_regeneratorRuntime().wrap(function _callee6$(_context6) {
+											for (;;)
+												switch ((_context6.prev = _context6.next)) {
+													case 0:
+														return (_context6.next = 2), next();
+													case 2:
+														(controller = search.controller).store.loaded &&
+															!controller.store.error &&
+															((products = controller.store.results.filter(function (result) {
+																var _this$events$product$4;
+																return (
+																	'product' === result.type &&
+																	!(
+																		null !== (_this$events$product$4 = _this.events.product[result.id]) &&
+																		void 0 !== _this$events$product$4 &&
+																		_this$events$product$4.render
+																	)
+																);
+															})),
+															(results = 0 === products.length ? [] : products),
+															(data = getSearchSchemaData({ params: _this.params, store: _this.store, results })),
+															_this.tracker.events[_this.pageType].render({
+																data,
+																siteId:
+																	null === (_this$config$globals6 = _this.config.globals) || void 0 === _this$config$globals6
+																		? void 0
+																		: _this$config$globals6.siteId,
+															}),
+															products.forEach(function (result) {
+																(_this.events.product[result.id] = _this.events.product[result.id] || {}),
+																	(_this.events.product[result.id].render = !0);
+															}),
+															_this.eventManager.fire('track.product.render', { controller: _this, products, trackEvent: data }));
+													case 4:
+													case 'end':
+														return _context6.stop();
+												}
+										}, _callee6);
+									})
+								);
+								return function (_x8, _x9) {
+									return _ref8.apply(this, arguments);
+								};
+							})()
+						),
 						null !== (_this$config$settings8 = _this.config.settings) &&
 							void 0 !== _this$config$settings8 &&
 							null !== (_this$config$settings9 = _this$config$settings8.restorePosition) &&
@@ -36335,16 +36500,16 @@
 							(_this.eventManager.on(
 								'restorePosition',
 								(function () {
-									var _ref9 = SearchController_asyncToGenerator(
-										SearchController_regeneratorRuntime().mark(function _callee7(_ref8, next) {
+									var _ref10 = SearchController_asyncToGenerator(
+										SearchController_regeneratorRuntime().mark(function _callee8(_ref9, next) {
 											var _element, controller, element, lastRequest, storableRequestParams, stringyParams, scrollMap, scrollToPosition;
-											return SearchController_regeneratorRuntime().wrap(function _callee7$(_context7) {
+											return SearchController_regeneratorRuntime().wrap(function _callee8$(_context8) {
 												for (;;)
-													switch ((_context7.prev = _context7.next)) {
+													switch ((_context8.prev = _context8.next)) {
 														case 0:
 															if (
-																((controller = _ref8.controller),
-																(element = _ref8.element),
+																((controller = _ref9.controller),
+																(element = _ref9.element),
 																(null !== (_element = element) && void 0 !== _element && _element.selector) ||
 																	((lastRequest = _this.storage.get('lastStringyParams')) &&
 																		((storableRequestParams = getStorableRequestParams(JSON.parse(lastRequest))),
@@ -36354,8 +36519,8 @@
 																(scrollToPosition = function scrollToPosition() {
 																	return new Promise(
 																		(function () {
-																			var _ref10 = SearchController_asyncToGenerator(
-																				SearchController_regeneratorRuntime().mark(function _callee6(resolve) {
+																			var _ref11 = SearchController_asyncToGenerator(
+																				SearchController_regeneratorRuntime().mark(function _callee7(resolve) {
 																					var checkTime,
 																						maxScrolls,
 																						maxCheckCount,
@@ -36364,9 +36529,9 @@
 																						scrolledElem,
 																						checkAndScroll,
 																						_element4;
-																					return SearchController_regeneratorRuntime().wrap(function _callee6$(_context6) {
+																					return SearchController_regeneratorRuntime().wrap(function _callee7$(_context7) {
 																						for (;;)
-																							switch ((_context6.prev = _context6.next)) {
+																							switch ((_context7.prev = _context7.next)) {
 																								case 0:
 																									(checkTime = 60),
 																										(maxScrolls = Math.ceil(600 / checkTime)),
@@ -36402,17 +36567,17 @@
 																										});
 																								case 8:
 																									if (!(checkAndScroll() && scrollBackCount <= maxScrolls && checkCount <= maxCheckCount)) {
-																										_context6.next = 13;
+																										_context7.next = 13;
 																										break;
 																									}
 																									return (
-																										(_context6.next = 11),
+																										(_context7.next = 11),
 																										new Promise(function (resolve) {
 																											return setTimeout(resolve, checkTime);
 																										})
 																									);
 																								case 11:
-																									_context6.next = 8;
+																									_context7.next = 8;
 																									break;
 																								case 13:
 																									scrolledElem
@@ -36424,34 +36589,34 @@
 																										resolve();
 																								case 15:
 																								case 'end':
-																									return _context6.stop();
+																									return _context7.stop();
 																							}
-																					}, _callee6);
+																					}, _callee7);
 																				})
 																			);
-																			return function (_x10) {
-																				return _ref10.apply(this, arguments);
+																			return function (_x12) {
+																				return _ref11.apply(this, arguments);
 																			};
 																		})()
 																	);
 																}),
 																!element)
 															) {
-																_context7.next = 6;
+																_context8.next = 6;
 																break;
 															}
-															return (_context7.next = 6), scrollToPosition();
+															return (_context8.next = 6), scrollToPosition();
 														case 6:
-															return (_context7.next = 8), next();
+															return (_context8.next = 8), next();
 														case 8:
 														case 'end':
-															return _context7.stop();
+															return _context8.stop();
 													}
-											}, _callee7);
+											}, _callee8);
 										})
 									);
-									return function (_x8, _x9) {
-										return _ref9.apply(this, arguments);
+									return function (_x10, _x11) {
+										return _ref10.apply(this, arguments);
 									};
 								})()
 							),
@@ -36485,8 +36650,8 @@
 								get: function get() {
 									var _this$config$settings12,
 										_this$config$settings13,
-										_this$config$globals6,
 										_this$config$globals7,
+										_this$config$globals8,
 										params = cjs_default()(Object.assign({}, getSearchParams(this.urlManager.state)), this.config.globals || {});
 									(null !== (_this$config$settings12 = this.config.settings) &&
 										void 0 !== _this$config$settings12 &&
@@ -36506,11 +36671,11 @@
 										(userId && (params.tracking.userId = userId),
 										sessionId && (params.tracking.sessionId = sessionId),
 										pageLoadId && (params.tracking.pageLoadId = pageLoadId),
-										null === (_this$config$globals6 = this.config.globals) ||
-											void 0 === _this$config$globals6 ||
-											null === (_this$config$globals7 = _this$config$globals6.personalization) ||
+										null === (_this$config$globals7 = this.config.globals) ||
 											void 0 === _this$config$globals7 ||
-											!_this$config$globals7.disabled)
+											null === (_this$config$globals8 = _this$config$globals7.personalization) ||
+											void 0 === _this$config$globals8 ||
+											!_this$config$globals8.disabled)
 									) {
 										var cartItems = this.tracker.cookies.cart.get();
 										cartItems.length &&
@@ -36557,7 +36722,7 @@
 					},
 				};
 			}
-			function getSearchSchemaData(_ref12) {
+			function getSearchSchemaData(_ref14) {
 				var _params$filters,
 					_params$search3,
 					_params$search3$query,
@@ -36565,13 +36730,12 @@
 					_store$search$origina,
 					_store$search2,
 					_store$search2$query,
-					_store$sorting$curren,
-					_store$sorting$curren2,
+					_params$sorts,
 					_store$merchandising$,
 					_store$merchandising$2,
-					params = _ref12.params,
-					store = _ref12.store,
-					results = _ref12.results,
+					params = _ref14.params,
+					store = _ref14.store,
+					results = _ref14.results,
 					filters =
 						null === (_params$filters = params.filters) || void 0 === _params$filters
 							? void 0
@@ -36625,16 +36789,12 @@
 					},
 					filters,
 					{
-						sort: [
-							{
-								field:
-									null === (_store$sorting$curren = store.sorting.current) || void 0 === _store$sorting$curren ? void 0 : _store$sorting$curren.field,
-								dir:
-									null === (_store$sorting$curren2 = store.sorting.current) || void 0 === _store$sorting$curren2
-										? void 0
-										: _store$sorting$curren2.direction,
-							},
-						],
+						sort:
+							null === (_params$sorts = params.sorts) || void 0 === _params$sorts
+								? void 0
+								: _params$sorts.map(function (sort) {
+										return { field: sort.field, dir: sort.direction };
+								  }),
 						pagination: { totalResults: store.pagination.totalResults, page: store.pagination.page, resultsPerPage: store.pagination.pageSize },
 						merchandising: {
 							personalized: store.merchandising.personalized,
@@ -37203,7 +37363,7 @@
 									},
 									addToCart: function addToCart(result) {
 										var _this$config$globals4,
-											data = getRecommendationsSchemaData({ store: _this.store, results: [result] });
+											data = getRecommendationsAddtocartSchemaData({ store: _this.store, results: [result] });
 										return (
 											_this.tracker.events.recommendations.addToCart({
 												data,
@@ -37221,7 +37381,7 @@
 									addToCart: function addToCart(results) {
 										var _this$config$globals5;
 										if ('bundle' == _this.store.profile.type) {
-											var data = getRecommendationsSchemaData({ store: _this.store, results });
+											var data = getRecommendationsAddtocartSchemaData({ store: _this.store, results });
 											return (
 												_this.tracker.events.recommendations.addToCart({
 													data,
@@ -37392,6 +37552,49 @@
 								}),
 							(_this.config = cjs_default()(RecommendationController_defaultConfig, _this.config)),
 							_this.store.setConfig(_this.config),
+							_this.eventManager.on(
+								'afterStore',
+								(function () {
+									var _ref3 = RecommendationController_asyncToGenerator(
+										RecommendationController_regeneratorRuntime().mark(function _callee2(search, next) {
+											var controller, _this$config$globals6, products, results, data;
+											return RecommendationController_regeneratorRuntime().wrap(function _callee2$(_context2) {
+												for (;;)
+													switch ((_context2.prev = _context2.next)) {
+														case 0:
+															return (_context2.next = 2), next();
+														case 2:
+															(controller = search.controller).store.loaded &&
+																!controller.store.error &&
+																((products = controller.store.results.filter(function (result) {
+																	return 'product' === result.type;
+																})),
+																(results = 0 === products.length ? [] : products),
+																(data = getRecommendationsSchemaData({ store: _this.store, results })),
+																_this.tracker.events.recommendations.render({
+																	data,
+																	siteId:
+																		null === (_this$config$globals6 = _this.config.globals) || void 0 === _this$config$globals6
+																			? void 0
+																			: _this$config$globals6.siteId,
+																}),
+																products.forEach(function (result) {
+																	(_this.events.product[result.id] = _this.events.product[result.id] || {}),
+																		(_this.events.product[result.id].render = !0);
+																}),
+																_this.eventManager.fire('track.product.render', { controller: _this, products, trackEvent: data }));
+														case 4:
+														case 'end':
+															return _context2.stop();
+													}
+											}, _callee2);
+										})
+									);
+									return function (_x, _x2) {
+										return _ref3.apply(this, arguments);
+									};
+								})()
+							),
 							_this.use(_this.config),
 							_this
 						);
@@ -37435,9 +37638,23 @@
 						])
 					);
 				})(AbstractController);
-			function getRecommendationsSchemaData(_ref3) {
-				var store = _ref3.store,
-					results = _ref3.results;
+			function getRecommendationsAddtocartSchemaData(_ref4) {
+				var store = _ref4.store,
+					results = _ref4.results;
+				return {
+					tag: store.profile.tag,
+					results:
+						(null == results
+							? void 0
+							: results.map(function (result) {
+									var core = result.mappings.core;
+									return { uid: core.uid || '', sku: core.sku, price: Number(core.price), qty: result.quantity || 1 };
+							  })) || [],
+				};
+			}
+			function getRecommendationsSchemaData(_ref5) {
+				var store = _ref5.store,
+					results = _ref5.results;
 				return {
 					tag: store.profile.tag,
 					results:
@@ -38018,7 +38235,7 @@
 											void 0 === _this$events$product$2 ||
 											!_this$events$product$2.render
 										) {
-											var data = getAutocompleteSchemaData({ params: _this.params, store: _this.store, results: [result] });
+											var data = getAutocompleteSchemaData({ params: _this.params, store: _this.store, results: result ? [result] : [] });
 											_this.tracker.events.autocomplete.render({
 												data,
 												siteId:
@@ -38053,7 +38270,21 @@
 									},
 									addToCart: function addToCart(result) {
 										var _this$config$globals4,
-											data = getAutocompleteSchemaData({ params: _this.params, store: _this.store, results: [result] });
+											data = (function getAutocompleteAddtocartSchemaData(_ref9) {
+												var params = _ref9.params,
+													store = _ref9.store,
+													results = _ref9.results,
+													base = getAutocompleteSchemaData({ params, store, results });
+												return Object.assign({}, base, {
+													results:
+														(null == results
+															? void 0
+															: results.map(function (result) {
+																	var core = result.mappings.core;
+																	return { uid: core.uid || '', sku: core.sku, price: Number(core.price), qty: result.quantity || 1 };
+															  })) || [],
+												});
+											})({ params: _this.params, store: _this.store, results: [result] });
 										_this.tracker.events.autocomplete.addToCart({
 											data,
 											siteId:
@@ -38066,8 +38297,8 @@
 								},
 								redirect: function redirect(redirectURL) {
 									var _this$config$globals5,
-										data = (function getAutocompleteRedirectSchemaData(_ref7) {
-											var redirectURL = _ref7.redirectURL;
+										data = (function getAutocompleteRedirectSchemaData(_ref8) {
+											var redirectURL = _ref8.redirectURL;
 											return { redirect: redirectURL };
 										})({ redirectURL });
 									_this.tracker.events.autocomplete.redirect({
@@ -38634,21 +38865,36 @@
 							_this.config.settings.initializeFromUrl && ((_this.store.state.input = _this.urlManager.state.query), _this.urlManager.reset().go()),
 							(_this.storage = new StorageStore({ type: 'session', key: 'ss-controller-' + _this.config.id })),
 							_this.eventManager.on(
-								'afterSearch',
+								'afterStore',
 								(function () {
 									var _ref5 = AutocompleteController_asyncToGenerator(
-										AutocompleteController_regeneratorRuntime().mark(function _callee6(ac, next) {
+										AutocompleteController_regeneratorRuntime().mark(function _callee6(search, next) {
+											var controller, _this$config$globals12, products, results, data;
 											return AutocompleteController_regeneratorRuntime().wrap(function _callee6$(_context6) {
 												for (;;)
 													switch ((_context6.prev = _context6.next)) {
 														case 0:
 															return (_context6.next = 2), next();
 														case 2:
-															if (ac.response.autocomplete.query == ac.controller.urlManager.state.query) {
-																_context6.next = 4;
-																break;
-															}
-															return _context6.abrupt('return', !1);
+															(controller = search.controller).store.loaded &&
+																!controller.store.error &&
+																((products = controller.store.results.filter(function (result) {
+																	return 'product' === result.type;
+																})),
+																(results = 0 === products.length ? [] : products),
+																(data = getAutocompleteSchemaData({ params: _this.params, store: _this.store, results })),
+																_this.tracker.events.autocomplete.render({
+																	data,
+																	siteId:
+																		null === (_this$config$globals12 = _this.config.globals) || void 0 === _this$config$globals12
+																			? void 0
+																			: _this$config$globals12.siteId,
+																}),
+																products.forEach(function (result) {
+																	(_this.events.product[result.id] = _this.events.product[result.id] || {}),
+																		(_this.events.product[result.id].render = !0);
+																}),
+																_this.eventManager.fire('track.product.render', { controller: _this, products, trackEvent: data }));
 														case 4:
 														case 'end':
 															return _context6.stop();
@@ -38662,10 +38908,38 @@
 								})()
 							),
 							_this.eventManager.on(
-								'beforeSubmit',
+								'afterSearch',
 								(function () {
 									var _ref6 = AutocompleteController_asyncToGenerator(
 										AutocompleteController_regeneratorRuntime().mark(function _callee7(ac, next) {
+											return AutocompleteController_regeneratorRuntime().wrap(function _callee7$(_context7) {
+												for (;;)
+													switch ((_context7.prev = _context7.next)) {
+														case 0:
+															return (_context7.next = 2), next();
+														case 2:
+															if (ac.response.autocomplete.query == ac.controller.urlManager.state.query) {
+																_context7.next = 4;
+																break;
+															}
+															return _context7.abrupt('return', !1);
+														case 4:
+														case 'end':
+															return _context7.stop();
+													}
+											}, _callee7);
+										})
+									);
+									return function (_x6, _x7) {
+										return _ref6.apply(this, arguments);
+									};
+								})()
+							),
+							_this.eventManager.on(
+								'beforeSubmit',
+								(function () {
+									var _ref7 = AutocompleteController_asyncToGenerator(
+										AutocompleteController_regeneratorRuntime().mark(function _callee8(ac, next) {
 											var _ac$controller$store$,
 												_this$config2,
 												_this$config2$setting,
@@ -38678,11 +38952,11 @@
 												results,
 												filteredResults,
 												singleResultUrl;
-											return AutocompleteController_regeneratorRuntime().wrap(function _callee7$(_context7) {
+											return AutocompleteController_regeneratorRuntime().wrap(function _callee8$(_context8) {
 												for (;;)
-													switch ((_context7.prev = _context7.next)) {
+													switch ((_context8.prev = _context8.next)) {
 														case 0:
-															return (_context7.next = 2), next();
+															return (_context8.next = 2), next();
 														case 2:
 															if (
 																!(redirectURL =
@@ -38697,10 +38971,10 @@
 																void 0 === _this$config2$setting2 ||
 																!_this$config2$setting2.merchandising
 															) {
-																_context7.next = 7;
+																_context8.next = 7;
 																break;
 															}
-															return _this.track.redirect(redirectURL), (window.location.href = redirectURL), _context7.abrupt('return', !1);
+															return _this.track.redirect(redirectURL), (window.location.href = redirectURL), _context8.abrupt('return', !1);
 														case 7:
 															if (
 																null === (_this$config3 = _this.config) ||
@@ -38711,7 +38985,7 @@
 																void 0 === _this$config3$setting2 ||
 																!_this$config3$setting2.singleResult
 															) {
-																_context7.next = 14;
+																_context8.next = 14;
 																break;
 															}
 															if (
@@ -38725,19 +38999,19 @@
 																		? void 0
 																		: _filteredResults$0$ma.url)))
 															) {
-																_context7.next = 14;
+																_context8.next = 14;
 																break;
 															}
-															return (window.location.href = singleResultUrl), _context7.abrupt('return', !1);
+															return (window.location.href = singleResultUrl), _context8.abrupt('return', !1);
 														case 14:
 														case 'end':
-															return _context7.stop();
+															return _context8.stop();
 													}
-											}, _callee7);
+											}, _callee8);
 										})
 									);
-									return function (_x6, _x7) {
-										return _ref6.apply(this, arguments);
+									return function (_x8, _x9) {
+										return _ref7.apply(this, arguments);
 									};
 								})()
 							),
@@ -38763,8 +39037,8 @@
 							{
 								key: 'params',
 								get: function get() {
-									var _this$config$globals12,
-										_this$config$globals13,
+									var _this$config$globals13,
+										_this$config$globals14,
 										urlState = this.urlManager.state,
 										params = cjs_default()(Object.assign({}, getSearchParams(urlState)), this.config.globals),
 										_this$tracker$getCont = this.tracker.getContext(),
@@ -38778,11 +39052,11 @@
 										userId && (params.tracking.userId = userId),
 										sessionId && (params.tracking.sessionId = sessionId),
 										pageLoadId && (params.tracking.pageLoadId = pageLoadId),
-										null === (_this$config$globals12 = this.config.globals) ||
-											void 0 === _this$config$globals12 ||
-											null === (_this$config$globals13 = _this$config$globals12.personalization) ||
+										null === (_this$config$globals13 = this.config.globals) ||
 											void 0 === _this$config$globals13 ||
-											!_this$config$globals13.disabled)
+											null === (_this$config$globals14 = _this$config$globals13.personalization) ||
+											void 0 === _this$config$globals14 ||
+											!_this$config$globals14.disabled)
 									) {
 										var cartItems = this.tracker.cookies.cart.get();
 										cartItems.length &&
@@ -38799,52 +39073,52 @@
 								key: 'setFocused',
 								value:
 									((_setFocused = AutocompleteController_asyncToGenerator(
-										AutocompleteController_regeneratorRuntime().mark(function _callee8(inputElement) {
+										AutocompleteController_regeneratorRuntime().mark(function _callee9(inputElement) {
 											return AutocompleteController_regeneratorRuntime().wrap(
-												function _callee8$(_context8) {
+												function _callee9$(_context9) {
 													for (;;)
-														switch ((_context8.prev = _context8.next)) {
+														switch ((_context9.prev = _context9.next)) {
 															case 0:
 																if (this.store.state.focusedInput === inputElement) {
-																	_context8.next = 21;
+																	_context9.next = 21;
 																	break;
 																}
 																return (
 																	(this.store.state.focusedInput = inputElement),
-																	(_context8.prev = 2),
-																	(_context8.prev = 3),
-																	(_context8.next = 6),
+																	(_context9.prev = 2),
+																	(_context9.prev = 3),
+																	(_context9.next = 6),
 																	this.eventManager.fire('focusChange', { controller: this })
 																);
 															case 6:
-																_context8.next = 16;
+																_context9.next = 16;
 																break;
 															case 8:
 																if (
-																	((_context8.prev = 8),
-																	(_context8.t0 = _context8.catch(3)),
-																	'cancelled' != (null === _context8.t0 || void 0 === _context8.t0 ? void 0 : _context8.t0.message))
+																	((_context9.prev = 8),
+																	(_context9.t0 = _context9.catch(3)),
+																	'cancelled' != (null === _context9.t0 || void 0 === _context9.t0 ? void 0 : _context9.t0.message))
 																) {
-																	_context8.next = 14;
+																	_context9.next = 14;
 																	break;
 																}
-																this.log.warn("'focusChange' middleware cancelled"), (_context8.next = 16);
+																this.log.warn("'focusChange' middleware cancelled"), (_context9.next = 16);
 																break;
 															case 14:
-																throw (this.log.error("error in 'focusChange' middleware"), _context8.t0);
+																throw (this.log.error("error in 'focusChange' middleware"), _context9.t0);
 															case 16:
-																_context8.next = 21;
+																_context9.next = 21;
 																break;
 															case 18:
-																(_context8.prev = 18), (_context8.t1 = _context8.catch(2)), _context8.t1 && console.error(_context8.t1);
+																(_context9.prev = 18), (_context9.t1 = _context9.catch(2)), _context9.t1 && console.error(_context9.t1);
 															case 21:
 																null == inputElement || inputElement.dispatchEvent(new Event('input'));
 															case 22:
 															case 'end':
-																return _context8.stop();
+																return _context9.stop();
 														}
 												},
-												_callee8,
+												_callee9,
 												this,
 												[
 													[2, 18],
@@ -38853,7 +39127,7 @@
 											);
 										})
 									)),
-									function setFocused(_x8) {
+									function setFocused(_x10) {
 										return _setFocused.apply(this, arguments);
 									}),
 							},
@@ -38894,7 +39168,7 @@
 								key: 'bind',
 								value:
 									((_bind = AutocompleteController_asyncToGenerator(
-										AutocompleteController_regeneratorRuntime().mark(function _callee9() {
+										AutocompleteController_regeneratorRuntime().mark(function _callee10() {
 											var _this$config$settings13,
 												_this$config$settings14,
 												_this$config$settings15,
@@ -38903,15 +39177,15 @@
 												_this$config$settings17,
 												_this3 = this;
 											return AutocompleteController_regeneratorRuntime().wrap(
-												function _callee9$(_context9) {
+												function _callee10$(_context10) {
 													for (;;)
-														switch ((_context9.prev = _context9.next)) {
+														switch ((_context10.prev = _context10.next)) {
 															case 0:
 																if (this.initialized) {
-																	_context9.next = 3;
+																	_context10.next = 3;
 																	break;
 																}
-																return (_context9.next = 3), this.init();
+																return (_context10.next = 3), this.init();
 															case 3:
 																this.unbind(),
 																	document.querySelectorAll(this.config.selector).forEach(function (input) {
@@ -39002,10 +39276,10 @@
 																		document.addEventListener('click', this.handlers.document.click);
 															case 8:
 															case 'end':
-																return _context9.stop();
+																return _context10.stop();
 														}
 												},
-												_callee9,
+												_callee10,
 												this
 											);
 										})
@@ -39029,17 +39303,17 @@
 						_form$querySelector.remove(),
 					form.append(inputElem);
 			}
-			function timeout(_x9) {
+			function timeout(_x11) {
 				return _timeout.apply(this, arguments);
 			}
 			function _timeout() {
 				return (_timeout = AutocompleteController_asyncToGenerator(
-					AutocompleteController_regeneratorRuntime().mark(function _callee10(time) {
-						return AutocompleteController_regeneratorRuntime().wrap(function _callee10$(_context10) {
+					AutocompleteController_regeneratorRuntime().mark(function _callee11(time) {
+						return AutocompleteController_regeneratorRuntime().wrap(function _callee11$(_context11) {
 							for (;;)
-								switch ((_context10.prev = _context10.next)) {
+								switch ((_context11.prev = _context11.next)) {
 									case 0:
-										return _context10.abrupt(
+										return _context11.abrupt(
 											'return',
 											new Promise(function (resolve) {
 												window.setTimeout(resolve, time);
@@ -39047,9 +39321,9 @@
 										);
 									case 1:
 									case 'end':
-										return _context10.stop();
+										return _context11.stop();
 								}
-						}, _callee10);
+						}, _callee11);
 					})
 				)).apply(this, arguments);
 			}
@@ -39077,7 +39351,7 @@
 							elem.addEventListener('change', fn);
 					}
 			}
-			function getAutocompleteSchemaData(_ref8) {
+			function getAutocompleteSchemaData(_ref10) {
 				var _params$filters,
 					_store$search,
 					_store$search$origina,
@@ -39087,13 +39361,12 @@
 					_store$search3$origin,
 					_store$search4,
 					_store$search4$query,
-					_store$sorting$curren,
-					_store$sorting$curren2,
+					_params$sorts,
 					_store$merchandising$,
 					_store$merchandising$2,
-					params = _ref8.params,
-					store = _ref8.store,
-					results = _ref8.results,
+					params = _ref10.params,
+					store = _ref10.store,
+					results = _ref10.results,
 					filters =
 						null === (_params$filters = params.filters) || void 0 === _params$filters
 							? void 0
@@ -39154,16 +39427,12 @@
 					},
 					filters,
 					{
-						sort: [
-							{
-								field:
-									null === (_store$sorting$curren = store.sorting.current) || void 0 === _store$sorting$curren ? void 0 : _store$sorting$curren.field,
-								dir:
-									null === (_store$sorting$curren2 = store.sorting.current) || void 0 === _store$sorting$curren2
-										? void 0
-										: _store$sorting$curren2.direction,
-							},
-						],
+						sort:
+							null === (_params$sorts = params.sorts) || void 0 === _params$sorts
+								? void 0
+								: _params$sorts.map(function (sort) {
+										return { field: sort.field, dir: sort.direction };
+								  }),
 						pagination: { totalResults: store.pagination.totalResults, page: store.pagination.page, resultsPerPage: store.pagination.pageSize },
 						merchandising: {
 							personalized: store.merchandising.personalized,
@@ -49140,7 +49409,7 @@
 				return 'symbol' == typeof i ? i : i + '';
 			}
 			var RangeValueProperties,
-				ParamLocationType,
+				types_ParamLocationType,
 				WatcherPool = (function () {
 					return UrlManager_createClass(
 						function WatcherPool() {
@@ -49584,21 +49853,21 @@
 			})(RangeValueProperties || (RangeValueProperties = {})),
 				(function (ParamLocationType) {
 					(ParamLocationType.hash = 'hash'), (ParamLocationType.query = 'query');
-				})(ParamLocationType || (ParamLocationType = {}));
+				})(types_ParamLocationType || (types_ParamLocationType = {}));
 			var UrlTranslator_defaultConfig = {
 					urlRoot: '',
-					settings: { corePrefix: '', customType: ParamLocationType.query, serializeUrlRoot: !0 },
+					settings: { corePrefix: '', customType: types_ParamLocationType.query, serializeUrlRoot: !0 },
 					parameters: {
 						core: {
-							query: { name: 'q', type: ParamLocationType.query },
-							oq: { name: 'oq', type: ParamLocationType.query },
-							rq: { name: 'rq', type: ParamLocationType.query },
-							tag: { name: 'tag', type: ParamLocationType.query },
-							page: { name: 'page', type: ParamLocationType.query },
-							pageSize: { name: 'pageSize', type: ParamLocationType.hash },
-							sort: { name: 'sort', type: ParamLocationType.hash },
-							filter: { name: 'filter', type: ParamLocationType.hash },
-							fallbackQuery: { name: 'fallbackQuery', type: ParamLocationType.query },
+							query: { name: 'q', type: types_ParamLocationType.query },
+							oq: { name: 'oq', type: types_ParamLocationType.query },
+							rq: { name: 'rq', type: types_ParamLocationType.query },
+							tag: { name: 'tag', type: types_ParamLocationType.query },
+							page: { name: 'page', type: types_ParamLocationType.query },
+							pageSize: { name: 'pageSize', type: types_ParamLocationType.hash },
+							sort: { name: 'sort', type: types_ParamLocationType.hash },
+							filter: { name: 'filter', type: types_ParamLocationType.hash },
+							fallbackQuery: { name: 'fallbackQuery', type: types_ParamLocationType.query },
 						},
 						custom: {},
 					},
@@ -49635,7 +49904,7 @@
 												? void 0
 												: _this$config$settings.coreType;
 									paramType &&
-										Object.values(ParamLocationType).includes(paramType) &&
+										Object.values(types_ParamLocationType).includes(paramType) &&
 										(null != config &&
 										null !== (_config$parameters = config.parameters) &&
 										void 0 !== _config$parameters &&
@@ -49659,7 +49928,9 @@
 								null === (_this$config$settings2 = this.config.settings) || void 0 === _this$config$settings2
 									? void 0
 									: _this$config$settings2.customType;
-							implicit && !Object.values(ParamLocationType).includes(implicit) && (this.config.settings.customType = ParamLocationType.hash);
+							implicit &&
+								!Object.values(types_ParamLocationType).includes(implicit) &&
+								(this.config.settings.customType = types_ParamLocationType.hash);
 						},
 						[
 							{
@@ -49717,7 +49988,7 @@
 													),
 													key = _kvPair$split$map2[0],
 													value = _kvPair$split$map2[1];
-												return { key: key.split('.'), value, type: ParamLocationType.query };
+												return { key: key.split('.'), value, type: types_ParamLocationType.query };
 											} catch (err) {
 												return (
 													console.warn('Snap UrlTranslator: URI malformed - ignoring parameter', kvPair),
@@ -49763,7 +50034,8 @@
 												return !isCoreField || (isCoreField && value);
 											})
 											.forEach(function (decodedHashEntries) {
-												if (1 == decodedHashEntries.length) params.push({ key: [decodedHashEntries[0]], value: '', type: ParamLocationType.hash });
+												if (1 == decodedHashEntries.length)
+													params.push({ key: [decodedHashEntries[0]], value: '', type: types_ParamLocationType.hash });
 												else if (decodedHashEntries.length && decodedHashEntries.length >= 2) {
 													var isCoreField = _this3.reverseMapping[decodedHashEntries[0]];
 													if (isCoreField && 'filter' == isCoreField && 4 == decodedHashEntries.length) {
@@ -49772,8 +50044,8 @@
 															path1 = _decodedHashEntries[1],
 															low = _decodedHashEntries[2],
 															high = _decodedHashEntries[3];
-														params.push({ key: [path0, path1, 'low'], value: low, type: ParamLocationType.hash }),
-															params.push({ key: [path0, path1, 'high'], value: high, type: ParamLocationType.hash });
+														params.push({ key: [path0, path1, 'low'], value: low, type: types_ParamLocationType.hash }),
+															params.push({ key: [path0, path1, 'high'], value: high, type: types_ParamLocationType.hash });
 													} else {
 														var _decodedHashEntries$r2 = (function UrlTranslator_toArray(r) {
 																return (
@@ -49785,7 +50057,7 @@
 															})(decodedHashEntries.reverse()),
 															value = _decodedHashEntries$r2[0],
 															keys = _decodedHashEntries$r2.slice(1);
-														params.push({ key: keys.reverse(), value, type: ParamLocationType.hash });
+														params.push({ key: keys.reverse(), value, type: types_ParamLocationType.hash });
 													}
 												}
 											}),
@@ -49955,10 +50227,10 @@
 											: this.config.urlRoot || window.location.pathname,
 										params = this.stateToParams(state),
 										queryParams = params.filter(function (p) {
-											return p.type == ParamLocationType.query;
+											return p.type == types_ParamLocationType.query;
 										}),
 										hashParams = params.filter(function (p) {
-											return p.type == ParamLocationType.hash;
+											return p.type == types_ParamLocationType.hash;
 										});
 									return (
 										'' +
@@ -50012,7 +50284,7 @@
 														return [{ key: [filterConfig.name, key], value: '' + value, type: filterConfig.type }];
 													if ('object' == typeof value && void 0 !== value[RangeValueProperties.LOW] && void 0 !== value[RangeValueProperties.HIGH]) {
 														var _value$RangeValueProp, _value$RangeValueProp2, _value$RangeValueProp3, _value$RangeValueProp4;
-														if (filterConfig.type == ParamLocationType.query)
+														if (filterConfig.type == types_ParamLocationType.query)
 															return [
 																{
 																	key: [filterConfig.name, key, RangeValueProperties.LOW],
@@ -50033,7 +50305,7 @@
 																	type: filterConfig.type,
 																},
 															];
-														if (filterConfig.type == ParamLocationType.hash)
+														if (filterConfig.type == types_ParamLocationType.hash)
 															return [
 																{
 																	key: [
@@ -50613,7 +50885,7 @@
 									void 0 === _config$requesters$be
 										? void 0
 										: _config$requesters$be.origin) || 'https://beacon.searchspring.io'),
-								(this.meta = { initiator: { lib: 'searchspring/snap', 'lib.version': '0.65.1', 'lib.framework': config.framework } }),
+								(this.meta = { initiator: { lib: 'searchspring/snap', 'lib.version': '0.65.2', 'lib.framework': config.framework } }),
 								(this.id = (0, v4.A)());
 						},
 						[
@@ -50723,7 +50995,7 @@
 							((function Tracker_classCallCheck(a, n) {
 								if (!(a instanceof n)) throw new TypeError('Cannot call a class as a function');
 							})(this, Tracker),
-							((config = cjs_default()(Tracker_defaultConfig, config || {})).initiator = 'searchspring/' + config.framework + '/0.65.1'),
+							((config = cjs_default()(Tracker_defaultConfig, config || {})).initiator = 'searchspring/' + config.framework + '/0.65.2'),
 							((_this = Tracker_callSuper(this, Tracker, [globals, config])).targeters = []),
 							(_this.track = {
 								error: function error(data, siteId) {
@@ -50919,7 +51191,7 @@
 							(_this.localStorage = new StorageStore({ type: 'local', key: 'ss-' + _this.config.id })),
 							_this.localStorage.set('siteId', _this.globals.siteId),
 							(null !== (_window$searchspring = window.searchspring) && void 0 !== _window$searchspring && _window$searchspring.tracker) ||
-								((window.searchspring = window.searchspring || {}), (window.searchspring.tracker = _this), (window.searchspring.version = '0.65.1')),
+								((window.searchspring = window.searchspring || {}), (window.searchspring.tracker = _this), (window.searchspring.version = '0.65.2')),
 							setTimeout(function () {
 								_this.targeters.push(
 									new DomTargeter([{ selector: 'script[type^="searchspring/track/"]', emptyTarget: !1 }], function (target, elem) {
@@ -51709,7 +51981,7 @@
 		var __webpack_exec__ = (moduleId) => __webpack_require__((__webpack_require__.s = moduleId));
 		__webpack_require__.O(
 			0,
-			[763],
+			[117],
 			() => (
 				__webpack_exec__('../../node_modules/@storybook/core-client/dist/esm/globals/polyfills.js'),
 				__webpack_exec__('../../node_modules/@storybook/core-client/dist/esm/globals/globals.js'),

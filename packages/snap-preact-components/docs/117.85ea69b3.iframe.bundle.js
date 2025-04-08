@@ -1,6 +1,6 @@
-/*! For license information please see 763.1d4a444c.iframe.bundle.js.LICENSE.txt */
+/*! For license information please see 117.85ea69b3.iframe.bundle.js.LICENSE.txt */
 (self.webpackChunk_searchspring_snap_preact_components = self.webpackChunk_searchspring_snap_preact_components || []).push([
-	[763],
+	[117],
 	{
 		'../../node_modules/@babel/runtime/helpers/esm/defineProperty.js': (
 			__unused_webpack___webpack_module__,
@@ -2494,24 +2494,6 @@
 					};
 				})(json, !1);
 			}
-			function AutocompleteRedirectSchemaDataToJSON(json) {
-				return (function AutocompleteRedirectSchemaDataToJSONTyped(value, ignoreDiscriminator = !1) {
-					if (null == value) return value;
-					return { redirect: value.redirect };
-				})(json, !1);
-			}
-			function AutocompleteRedirectSchemaToJSON(json) {
-				return (function AutocompleteRedirectSchemaToJSONTyped(value, ignoreDiscriminator = !1) {
-					if (null == value) return value;
-					return { context: ContextToJSON(value.context), data: AutocompleteRedirectSchemaDataToJSON(value.data) };
-				})(json, !1);
-			}
-			function ItemToJSON(json) {
-				return (function ItemToJSONTyped(value, ignoreDiscriminator = !1) {
-					if (null == value) return value;
-					return { uid: value.uid, childUid: value.childUid, sku: value.sku, childSku: value.childSku };
-				})(json, !1);
-			}
 			function AutocompleteSchemaDataFilterInnerToJSON(json) {
 				return (function AutocompleteSchemaDataFilterInnerToJSONTyped(value, ignoreDiscriminator = !1) {
 					if (null == value) return value;
@@ -2522,6 +2504,12 @@
 				return (function AutocompleteSchemaDataPaginationToJSONTyped(value, ignoreDiscriminator = !1) {
 					if (null == value) return value;
 					return { totalResults: value.totalResults, page: value.page, resultsPerPage: value.resultsPerPage };
+				})(json, !1);
+			}
+			function ProductToJSON(json) {
+				return (function ProductToJSONTyped(value, ignoreDiscriminator = !1) {
+					if (null == value) return value;
+					return { uid: value.uid, childUid: value.childUid, sku: value.sku, childSku: value.childSku, qty: value.qty, price: value.price };
 				})(json, !1);
 			}
 			function AutocompleteSchemaDataMerchandisingTriggeredCampaignsInnerToJSON(json) {
@@ -2556,6 +2544,48 @@
 					return { field: value.field, value: value.value };
 				})(json, !1);
 			}
+			function AutocompleteAddtocartSchemaDataToJSON(json) {
+				return (function AutocompleteAddtocartSchemaDataToJSONTyped(value, ignoreDiscriminator = !1) {
+					if (null == value) return value;
+					return {
+						q: value.q,
+						correctedQuery: value.correctedQuery,
+						didYouMean: value.didYouMean,
+						rq: value.rq,
+						matchType: value.matchType,
+						bgfilter: null == value.bgfilter ? void 0 : value.bgfilter.map(AutocompleteSchemaDataBgfilterInnerToJSON),
+						filter: null == value.filter ? void 0 : value.filter.map(AutocompleteSchemaDataFilterInnerToJSON),
+						sort: null == value.sort ? void 0 : value.sort.map(AutocompleteSchemaDataSortInnerToJSON),
+						pagination: AutocompleteSchemaDataPaginationToJSON(value.pagination),
+						merchandising: AutocompleteSchemaDataMerchandisingToJSON(value.merchandising),
+						results: value.results.map(ProductToJSON),
+					};
+				})(json, !1);
+			}
+			function AutocompleteAddtocartSchemaToJSON(json) {
+				return (function AutocompleteAddtocartSchemaToJSONTyped(value, ignoreDiscriminator = !1) {
+					if (null == value) return value;
+					return { context: ContextToJSON(value.context), data: AutocompleteAddtocartSchemaDataToJSON(value.data) };
+				})(json, !1);
+			}
+			function AutocompleteRedirectSchemaDataToJSON(json) {
+				return (function AutocompleteRedirectSchemaDataToJSONTyped(value, ignoreDiscriminator = !1) {
+					if (null == value) return value;
+					return { redirect: value.redirect };
+				})(json, !1);
+			}
+			function AutocompleteRedirectSchemaToJSON(json) {
+				return (function AutocompleteRedirectSchemaToJSONTyped(value, ignoreDiscriminator = !1) {
+					if (null == value) return value;
+					return { context: ContextToJSON(value.context), data: AutocompleteRedirectSchemaDataToJSON(value.data) };
+				})(json, !1);
+			}
+			function ItemToJSON(json) {
+				return (function ItemToJSONTyped(value, ignoreDiscriminator = !1) {
+					if (null == value) return value;
+					return { uid: value.uid, childUid: value.childUid, sku: value.sku, childSku: value.childSku };
+				})(json, !1);
+			}
 			function AutocompleteSchemaDataToJSON(json) {
 				return (function AutocompleteSchemaDataToJSONTyped(value, ignoreDiscriminator = !1) {
 					if (null == value) return value;
@@ -2578,12 +2608,6 @@
 				return (function AutocompleteSchemaToJSONTyped(value, ignoreDiscriminator = !1) {
 					if (null == value) return value;
 					return { context: ContextToJSON(value.context), data: AutocompleteSchemaDataToJSON(value.data) };
-				})(json, !1);
-			}
-			function ProductToJSON(json) {
-				return (function ProductToJSONTyped(value, ignoreDiscriminator = !1) {
-					if (null == value) return value;
-					return { uid: value.uid, childUid: value.childUid, sku: value.sku, childSku: value.childSku, qty: value.qty, price: value.price };
 				})(json, !1);
 			}
 			function CartSchemaDataToJSON(json) {
@@ -2630,6 +2654,26 @@
 				return (function SearchSchemaDataPaginationToJSONTyped(value, ignoreDiscriminator = !1) {
 					if (null == value) return value;
 					return { totalResults: value.totalResults, page: value.page, resultsPerPage: value.resultsPerPage };
+				})(json, !1);
+			}
+			function CategoryAddtocartSchemaDataToJSON(json) {
+				return (function CategoryAddtocartSchemaDataToJSONTyped(value, ignoreDiscriminator = !1) {
+					if (null == value) return value;
+					return {
+						rq: value.rq,
+						bgfilter: null == value.bgfilter ? void 0 : value.bgfilter.map(AutocompleteSchemaDataBgfilterInnerToJSON),
+						filter: null == value.filter ? void 0 : value.filter.map(AutocompleteSchemaDataFilterInnerToJSON),
+						sort: null == value.sort ? void 0 : value.sort.map(AutocompleteSchemaDataSortInnerToJSON),
+						pagination: SearchSchemaDataPaginationToJSON(value.pagination),
+						merchandising: CategorySchemaDataMerchandisingToJSON(value.merchandising),
+						results: value.results.map(ProductToJSON),
+					};
+				})(json, !1);
+			}
+			function CategoryAddtocartSchemaToJSON(json) {
+				return (function CategoryAddtocartSchemaToJSONTyped(value, ignoreDiscriminator = !1) {
+					if (null == value) return value;
+					return { context: ContextToJSON(value.context), data: CategoryAddtocartSchemaDataToJSON(value.data) };
 				})(json, !1);
 			}
 			function CategorySchemaDataToJSON(json) {
@@ -2702,6 +2746,18 @@
 					return { context: ContextToJSON(value.context), data: ProductPageviewSchemaDataToJSON(value.data) };
 				})(json, !1);
 			}
+			function RecommendationsAddtocartSchemaDataToJSON(json) {
+				return (function RecommendationsAddtocartSchemaDataToJSONTyped(value, ignoreDiscriminator = !1) {
+					if (null == value) return value;
+					return { tag: value.tag, results: value.results.map(ProductToJSON) };
+				})(json, !1);
+			}
+			function RecommendationsAddtocartSchemaToJSON(json) {
+				return (function RecommendationsAddtocartSchemaToJSONTyped(value, ignoreDiscriminator = !1) {
+					if (null == value) return value;
+					return { context: ContextToJSON(value.context), data: RecommendationsAddtocartSchemaDataToJSON(value.data) };
+				})(json, !1);
+			}
 			function RecommendationsSchemaDataToJSON(json) {
 				return (function RecommendationsSchemaDataToJSONTyped(value, ignoreDiscriminator = !1) {
 					if (null == value) return value;
@@ -2714,6 +2770,41 @@
 					return { context: ContextToJSON(value.context), data: RecommendationsSchemaDataToJSON(value.data) };
 				})(json, !1);
 			}
+			function SearchSchemaDataMerchandisingToJSON(json) {
+				return (function SearchSchemaDataMerchandisingToJSONTyped(value, ignoreDiscriminator = !1) {
+					if (null == value) return value;
+					return {
+						redirect: value.redirect,
+						personalized: value.personalized,
+						triggeredCampaigns:
+							null == value.triggeredCampaigns ? void 0 : value.triggeredCampaigns.map(SearchSchemaDataMerchandisingTriggeredCampaignsInnerToJSON),
+					};
+				})(json, !1);
+			}
+			function SearchAddtocartSchemaDataToJSON(json) {
+				return (function SearchAddtocartSchemaDataToJSONTyped(value, ignoreDiscriminator = !1) {
+					if (null == value) return value;
+					return {
+						q: value.q,
+						correctedQuery: value.correctedQuery,
+						didYouMean: value.didYouMean,
+						rq: value.rq,
+						matchType: value.matchType,
+						bgfilter: null == value.bgfilter ? void 0 : value.bgfilter.map(AutocompleteSchemaDataBgfilterInnerToJSON),
+						filter: null == value.filter ? void 0 : value.filter.map(AutocompleteSchemaDataFilterInnerToJSON),
+						sort: null == value.sort ? void 0 : value.sort.map(AutocompleteSchemaDataSortInnerToJSON),
+						pagination: SearchSchemaDataPaginationToJSON(value.pagination),
+						merchandising: SearchSchemaDataMerchandisingToJSON(value.merchandising),
+						results: value.results.map(ProductToJSON),
+					};
+				})(json, !1);
+			}
+			function SearchAddtocartSchemaToJSON(json) {
+				return (function SearchAddtocartSchemaToJSONTyped(value, ignoreDiscriminator = !1) {
+					if (null == value) return value;
+					return { context: ContextToJSON(value.context), data: SearchAddtocartSchemaDataToJSON(value.data) };
+				})(json, !1);
+			}
 			function SearchRedirectSchemaDataToJSON(json) {
 				return (function SearchRedirectSchemaDataToJSONTyped(value, ignoreDiscriminator = !1) {
 					if (null == value) return value;
@@ -2724,17 +2815,6 @@
 				return (function SearchRedirectSchemaToJSONTyped(value, ignoreDiscriminator = !1) {
 					if (null == value) return value;
 					return { context: ContextToJSON(value.context), data: SearchRedirectSchemaDataToJSON(value.data) };
-				})(json, !1);
-			}
-			function SearchSchemaDataMerchandisingToJSON(json) {
-				return (function SearchSchemaDataMerchandisingToJSONTyped(value, ignoreDiscriminator = !1) {
-					if (null == value) return value;
-					return {
-						redirect: value.redirect,
-						personalized: value.personalized,
-						triggeredCampaigns:
-							null == value.triggeredCampaigns ? void 0 : value.triggeredCampaigns.map(SearchSchemaDataMerchandisingTriggeredCampaignsInnerToJSON),
-					};
 				})(json, !1);
 			}
 			function SearchSchemaDataToJSON(json) {
@@ -2779,7 +2859,6 @@
 					return { context: ContextToJSON(value.context), data: LogToJSON(value.data) };
 				})(json, !1);
 			}
-			var v4 = __webpack_require__('../../node_modules/uuid/dist/esm-browser/v4.js');
 			const BASE_PATH = 'https://beacon.searchspring.io/beacon/v2'.replace(/\/+$/, '');
 			class Configuration {
 				constructor(configuration = {}) {
@@ -2955,10 +3034,10 @@
 				async autocompleteAddtocartRaw(requestParameters, initOverrides) {
 					if (null == requestParameters.siteId)
 						throw new RequiredError('siteId', 'Required parameter "siteId" was null or undefined when calling autocompleteAddtocart().');
-					if (null == requestParameters.autocompleteSchema)
+					if (null == requestParameters.autocompleteAddtocartSchema)
 						throw new RequiredError(
-							'autocompleteSchema',
-							'Required parameter "autocompleteSchema" was null or undefined when calling autocompleteAddtocart().'
+							'autocompleteAddtocartSchema',
+							'Required parameter "autocompleteAddtocartSchema" was null or undefined when calling autocompleteAddtocart().'
 						);
 					const headerParameters = { 'Content-Type': 'text/plain' },
 						response = await this.request(
@@ -2967,7 +3046,7 @@
 								method: 'POST',
 								headers: headerParameters,
 								query: {},
-								body: AutocompleteSchemaToJSON(requestParameters.autocompleteSchema),
+								body: AutocompleteAddtocartSchemaToJSON(requestParameters.autocompleteAddtocartSchema),
 							},
 							initOverrides
 						);
@@ -3150,8 +3229,11 @@
 				async categoryAddtocartRaw(requestParameters, initOverrides) {
 					if (null == requestParameters.siteId)
 						throw new RequiredError('siteId', 'Required parameter "siteId" was null or undefined when calling categoryAddtocart().');
-					if (null == requestParameters.categorySchema)
-						throw new RequiredError('categorySchema', 'Required parameter "categorySchema" was null or undefined when calling categoryAddtocart().');
+					if (null == requestParameters.categoryAddtocartSchema)
+						throw new RequiredError(
+							'categoryAddtocartSchema',
+							'Required parameter "categoryAddtocartSchema" was null or undefined when calling categoryAddtocart().'
+						);
 					const headerParameters = { 'Content-Type': 'text/plain' },
 						response = await this.request(
 							{
@@ -3159,7 +3241,7 @@
 								method: 'POST',
 								headers: headerParameters,
 								query: {},
-								body: CategorySchemaToJSON(requestParameters.categorySchema),
+								body: CategoryAddtocartSchemaToJSON(requestParameters.categoryAddtocartSchema),
 							},
 							initOverrides
 						);
@@ -3371,10 +3453,10 @@
 				async recommendationsAddtocartRaw(requestParameters, initOverrides) {
 					if (null == requestParameters.siteId)
 						throw new RequiredError('siteId', 'Required parameter "siteId" was null or undefined when calling recommendationsAddtocart().');
-					if (null == requestParameters.recommendationsSchema)
+					if (null == requestParameters.recommendationsAddtocartSchema)
 						throw new RequiredError(
-							'recommendationsSchema',
-							'Required parameter "recommendationsSchema" was null or undefined when calling recommendationsAddtocart().'
+							'recommendationsAddtocartSchema',
+							'Required parameter "recommendationsAddtocartSchema" was null or undefined when calling recommendationsAddtocart().'
 						);
 					const headerParameters = { 'Content-Type': 'text/plain' },
 						response = await this.request(
@@ -3383,7 +3465,7 @@
 								method: 'POST',
 								headers: headerParameters,
 								query: {},
-								body: RecommendationsSchemaToJSON(requestParameters.recommendationsSchema),
+								body: RecommendationsAddtocartSchemaToJSON(requestParameters.recommendationsAddtocartSchema),
 							},
 							initOverrides
 						);
@@ -3473,8 +3555,11 @@
 				async searchAddtocartRaw(requestParameters, initOverrides) {
 					if (null == requestParameters.siteId)
 						throw new RequiredError('siteId', 'Required parameter "siteId" was null or undefined when calling searchAddtocart().');
-					if (null == requestParameters.searchSchema)
-						throw new RequiredError('searchSchema', 'Required parameter "searchSchema" was null or undefined when calling searchAddtocart().');
+					if (null == requestParameters.searchAddtocartSchema)
+						throw new RequiredError(
+							'searchAddtocartSchema',
+							'Required parameter "searchAddtocartSchema" was null or undefined when calling searchAddtocart().'
+						);
 					const headerParameters = { 'Content-Type': 'text/plain' },
 						response = await this.request(
 							{
@@ -3482,7 +3567,7 @@
 								method: 'POST',
 								headers: headerParameters,
 								query: {},
-								body: SearchSchemaToJSON(requestParameters.searchSchema),
+								body: SearchAddtocartSchemaToJSON(requestParameters.searchAddtocartSchema),
 							},
 							initOverrides
 						);
@@ -3608,7 +3693,8 @@
 					return await response.value();
 				}
 			}
-			const { rE: version } = { rE: '0.0.18' },
+			var v4 = __webpack_require__('../../node_modules/uuid/dist/esm-browser/v4.js');
+			const { rE: version } = { rE: '0.0.23' },
 				CART_KEY = 'ssCartProducts',
 				VIEWED_KEY = 'ssViewedProducts',
 				COOKIE_DOMAIN = ('undefined' != typeof window && window.location.hostname && '.' + window.location.hostname.replace(/^www\./, '')) || void 0;
@@ -3635,19 +3721,18 @@
 											.map((sku) => ({ uid: sku, sku, qty: 1, price: 0 }));
 									}
 									try {
-										return JSON.parse(storedProducts);
+										if (Array.isArray(storedProducts)) return storedProducts;
 									} catch {
-										this.setLocalStorageItem(CART_KEY, ''), this.setCookie(CART_KEY, '', 'Lax', 0, COOKIE_DOMAIN);
+										this.setLocalStorageItem(CART_KEY, []), this.setCookie(CART_KEY, '', 'Lax', 0, COOKIE_DOMAIN);
 									}
 									return [];
 								},
 								set: (products) => {
-									const currentCartProducts = this.storage.cart.get(),
-										storedProducts = JSON.stringify(products);
-									this.setLocalStorageItem(CART_KEY, storedProducts);
+									const currentCartProducts = this.storage.cart.get();
+									this.setLocalStorageItem(CART_KEY, products);
 									const storedProductsCookie = products.map((product) => this.getProductId(product)).join(',');
 									this.setCookie(CART_KEY, storedProductsCookie, 'Lax', 0, COOKIE_DOMAIN);
-									JSON.stringify(currentCartProducts) !== storedProducts && this.sendPreflight();
+									JSON.stringify(currentCartProducts) !== JSON.stringify(products) && this.sendPreflight();
 								},
 								add: (products) => {
 									if (products.length) {
@@ -3656,7 +3741,13 @@
 											.filter((product) => 'object' == typeof product && product.uid)
 											.reverse()
 											.forEach((product) => {
-												const isSkuAlreadyInCart = cartProducts.find((cartProduct) => cartProduct.uid === product.uid);
+												const isSkuAlreadyInCart = cartProducts.find(
+													(cartProduct) =>
+														cartProduct.childUid === product.childUid &&
+														cartProduct.childSku === product.childSku &&
+														cartProduct.uid === product.uid &&
+														cartProduct.sku === product.sku
+												);
 												isSkuAlreadyInCart
 													? ((isSkuAlreadyInCart.qty += product.qty), (isSkuAlreadyInCart.price = product.price || isSkuAlreadyInCart.price))
 													: cartProducts.unshift(product);
@@ -3668,7 +3759,13 @@
 									if (products.length) {
 										const cartProducts = [...this.storage.cart.get()];
 										products.forEach((product) => {
-											const isSkuAlreadyInCart = cartProducts.find((cartProduct) => cartProduct.uid === product.uid);
+											const isSkuAlreadyInCart = cartProducts.find(
+												(cartProduct) =>
+													cartProduct.childUid === product.childUid &&
+													cartProduct.childSku === product.childSku &&
+													cartProduct.uid === product.uid &&
+													cartProduct.sku === product.sku
+											);
 											isSkuAlreadyInCart && isSkuAlreadyInCart.qty > 0 && (isSkuAlreadyInCart.qty -= product.qty || 1);
 										});
 										const updatedCartProducts = cartProducts.filter((product) => product.qty > 0);
@@ -3686,10 +3783,10 @@
 										return this.getCookie(VIEWED_KEY)
 											.split(',')
 											.filter((sku) => sku)
-											.map((sku) => ({ uid: sku, sku, qty: 1, price: 0 }));
+											.map((sku) => ({ uid: sku, sku }));
 									}
 									try {
-										return JSON.parse(storedItems);
+										if (Array.isArray(storedItems)) return storedItems;
 									} catch {
 										this.setLocalStorageItem(VIEWED_KEY, ''), this.setCookie(VIEWED_KEY, '', 'Lax', 47304e6, COOKIE_DOMAIN);
 									}
@@ -3699,12 +3796,11 @@
 									const currentViewedItems = this.storage.viewed.get(),
 										normalizedItems = products
 											.map((item) => ({ sku: item.sku, uid: item.uid, childUid: item.childUid, childSku: item.childSku }))
-											.slice(0, 20),
-										storedItems = JSON.stringify(normalizedItems);
-									this.setLocalStorageItem(VIEWED_KEY, storedItems);
+											.slice(0, 20);
+									this.setLocalStorageItem(VIEWED_KEY, normalizedItems);
 									const storedProductsCookie = normalizedItems.map((item) => this.getProductId(item)).join(',');
 									this.setCookie(VIEWED_KEY, storedProductsCookie, 'Lax', 47304e6, COOKIE_DOMAIN);
-									JSON.stringify(currentViewedItems) !== storedItems && this.sendPreflight();
+									JSON.stringify(currentViewedItems) !== JSON.stringify(normalizedItems) && this.sendPreflight();
 								},
 								add: (products) => {
 									if (products.length) {
@@ -3757,9 +3853,10 @@
 									return this.queueRequest(request), payload;
 								},
 								addToCart: (event) => {
+									event.data.results && this.storage.cart.add(event.data.results);
 									const payload = {
 											siteId: event?.siteId || this.globals.siteId,
-											autocompleteSchema: { context: this.getContext(), data: event.data },
+											autocompleteAddtocartSchema: { context: this.getContext(), data: event.data },
 										},
 										request = this.createRequest('autocomplete', 'autocompleteAddtocart', payload);
 									return this.sendRequests([request]), payload;
@@ -3793,7 +3890,11 @@
 									return this.queueRequest(request), payload;
 								},
 								addToCart: (event) => {
-									const payload = { siteId: event?.siteId || this.globals.siteId, searchSchema: { context: this.getContext(), data: event.data } },
+									event.data.results && this.storage.cart.add(event.data.results);
+									const payload = {
+											siteId: event?.siteId || this.globals.siteId,
+											searchAddtocartSchema: { context: this.getContext(), data: event.data },
+										},
 										request = this.createRequest('search', 'searchAddtocart', payload);
 									return this.sendRequests([request]), payload;
 								},
@@ -3823,7 +3924,11 @@
 									return this.queueRequest(request), payload;
 								},
 								addToCart: (event) => {
-									const payload = { siteId: event?.siteId || this.globals.siteId, categorySchema: { context: this.getContext(), data: event.data } },
+									event.data.results && this.storage.cart.add(event.data.results);
+									const payload = {
+											siteId: event?.siteId || this.globals.siteId,
+											categoryAddtocartSchema: { context: this.getContext(), data: event.data },
+										},
 										request = this.createRequest('category', 'categoryAddtocart', payload);
 									return this.sendRequests([request]), payload;
 								},
@@ -3851,9 +3956,10 @@
 									return this.queueRequest(request), payload;
 								},
 								addToCart: (event) => {
+									event.data.results && this.storage.cart.add(event.data.results);
 									const payload = {
 											siteId: event?.siteId || this.globals.siteId,
-											recommendationsSchema: { context: this.getContext(), data: event.data },
+											recommendationsAddtocartSchema: { context: this.getContext(), data: event.data },
 										},
 										request = this.createRequest('recommendations', 'recommendationsAddtocart', payload);
 									return this.sendRequests([request]), payload;
@@ -3881,14 +3987,22 @@
 							},
 							cart: {
 								add: (event) => {
-									const payload = { siteId: event?.siteId || this.globals.siteId, cartSchema: { context: this.getContext(), data: event.data } },
+									const data = { ...event.data };
+									data.cart
+										? this.storage.cart.set(data.cart)
+										: (data.results && this.storage.cart.add(data.results), (data.cart = this.storage.cart.get()));
+									const payload = { siteId: event?.siteId || this.globals.siteId, cartSchema: { context: this.getContext(), data } },
 										request = this.createRequest('cart', 'cartAdd', payload);
-									return this.sendRequests([request]), this.storage.cart.add(event.data.results), payload;
+									return this.sendRequests([request]), payload;
 								},
 								remove: (event) => {
-									const payload = { siteId: event?.siteId || this.globals.siteId, cartSchema: { context: this.getContext(), data: event.data } },
+									const data = { ...event.data };
+									data.cart
+										? this.storage.cart.set(data.cart)
+										: (data.results && this.storage.cart.remove(data.results), (data.cart = this.storage.cart.get()));
+									const payload = { siteId: event?.siteId || this.globals.siteId, cartSchema: { context: this.getContext(), data } },
 										request = this.createRequest('cart', 'cartRemove', payload);
-									return this.sendRequests([request]), this.storage.cart.remove(event.data.results), payload;
+									return this.sendRequests([request]), payload;
 								},
 								view: (event) => {
 									const payload = { siteId: event?.siteId || this.globals.siteId, cartviewSchema: { context: this.getContext(), data: event.data } },
@@ -3966,35 +4080,21 @@
 						const d = new Date();
 						d.setTime(d.getTime() + expiration), (cookie += `expires=${d.toUTCString()};`);
 					}
-					domain && (cookie += `domain=${domain};`);
-					const setCookieFn = this.config.apis?.cookie?.set;
-					if (setCookieFn)
-						try {
-							return void setCookieFn(cookie);
-						} catch (e) {
-							console.error('Failed to set cookie using custom API:', e);
-						}
-					else 'undefined' != typeof window && (window.document.cookie = cookie);
+					domain && (cookie += `domain=${domain};`), 'undefined' != typeof window && (window.document.cookie = cookie);
 				}
 				getLocalStorageItem(name) {
-					let storedValue = '';
-					'undefined' != typeof window && (storedValue = window.localStorage?.getItem(name) || '');
-					try {
-						return JSON.parse(storedValue)[this.globals.siteId] || '';
-					} catch (e) {
-						return '';
+					if ('undefined' != typeof window) {
+						const rawData = window.localStorage?.getItem(name) || '';
+						try {
+							const data = JSON.parse(rawData);
+							if (data && data.value) return data.value;
+							this.setLocalStorageItem(name, '');
+						} catch (e) {}
 					}
+					return '';
 				}
 				setLocalStorageItem(name, value) {
-					const storedValue = JSON.stringify({ [this.globals.siteId]: value }),
-						setLocalStorageFn = this.config.apis?.localStorage?.setItem;
-					if (setLocalStorageFn)
-						try {
-							return void setLocalStorageFn(name, storedValue);
-						} catch (e) {
-							return void console.error('Failed to set localStorage item using custom API:', e);
-						}
-					else 'undefined' != typeof window && window.localStorage.setItem(name, storedValue);
+					'undefined' != typeof window && window.localStorage.setItem(name, JSON.stringify({ value }));
 				}
 				queueRequest(request) {
 					this.requests.push(request),
@@ -4025,7 +4125,7 @@
 				}
 				getContext() {
 					const context = {
-						userAgent: this.config.userAgent || ('undefined' != typeof navigator && navigator?.userAgent) || '',
+						userAgent: this.config.userAgent,
 						timestamp: this.getTimestamp(),
 						pageUrl: this.config.href || ('undefined' != typeof window && window.location.href) || '',
 						userId: this.userId || this.getUserId(),
@@ -4039,19 +4139,18 @@
 					return this.currency.code && (context.currency = { ...this.currency }), context;
 				}
 				getStoredId(key, expiration) {
-					const storedCookieValue = this.getCookie(key);
-					if (storedCookieValue) return this.setCookie(key, storedCookieValue, 'Lax', expiration, COOKIE_DOMAIN), storedCookieValue;
-					const storedLocalStorageValue = this.getLocalStorageItem(key);
-					let uuid;
+					let uuid = '',
+						storedCookieValue = '';
 					try {
-						const data = JSON.parse(storedLocalStorageValue);
+						storedCookieValue = this.getCookie(key);
+						const data = this.getLocalStorageItem(key);
 						data.timestamp && new Date(data.timestamp).getTime() < Date.now() - expiration
 							? ((uuid = this.generateId()), (this.attribution = void 0))
-							: (uuid = data.id);
+							: (uuid = data.value);
 					} catch (_) {
 					} finally {
-						const data = { id: uuid || this.generateId(), timestamp: this.getTimestamp() };
-						return this.setLocalStorageItem(key, JSON.stringify(data)), this.setCookie(key, data.id, 'Lax', expiration, COOKIE_DOMAIN), data.id;
+						const data = { value: storedCookieValue || uuid || this.generateId(), timestamp: this.getTimestamp() };
+						return this.setLocalStorageItem(key, data), this.setCookie(key, data.value, 'Lax', expiration, COOKIE_DOMAIN), data.value;
 					}
 				}
 				getUserId() {
@@ -4063,7 +4162,7 @@
 					}
 				}
 				getSessionId() {
-					const value = this.getStoredId('ssSessionIdNamespace', 18e5);
+					const value = this.getStoredId('ssSessionId', 18e5);
 					return (this.sessionId = value), this.sessionId;
 				}
 				getShopperId() {
@@ -4094,8 +4193,9 @@
 					const storedAttribution = this.getCookie('ssAttribution') || this.getLocalStorageItem('ssAttribution');
 					if (storedAttribution)
 						try {
-							const data = JSON.parse(storedAttribution);
-							Array.isArray(data) && (attribution = data);
+							'string' == typeof storedAttribution
+								? (attribution = JSON.parse(storedAttribution))
+								: Array.isArray(storedAttribution) && (attribution = storedAttribution);
 						} catch (e) {}
 					if (urlAttribution)
 						try {
@@ -4105,7 +4205,7 @@
 					if (attribution.length)
 						return (
 							this.setCookie('ssAttribution', JSON.stringify(attribution), 'Lax', 18e5, COOKIE_DOMAIN),
-							this.setLocalStorageItem('ssAttribution', JSON.stringify(attribution)),
+							this.setLocalStorageItem('ssAttribution', attribution),
 							(this.attribution = attribution),
 							[...attribution]
 						);
@@ -4130,7 +4230,7 @@
 				}
 				sendRequests(requests) {
 					for (const request of requests) {
-						const initOverrides = async ({ init }) => ({ keepalive: !0, body: JSON.stringify(init.body) });
+						const initOverrides = async ({ init }) => ({ keepalive: 'production' === this.mode || void 0, body: JSON.stringify(init.body) });
 						this.getApiClient(request.apiType)[request.endpoint](request.payload, initOverrides);
 					}
 				}
@@ -60974,7 +61074,7 @@
 						}
 						return compat_module.default.createElement(dist_esm.TabbedArgsTable, { tabs, sort });
 					} catch (err) {
-						return compat_module.default.createElement(dist_esm.ArgsTable, { error: err.message });
+						return React.createElement(PureArgsTable, { error: err.message });
 					}
 				},
 				ComponentsTable = function ComponentsTable(props) {
@@ -63300,4 +63400,4 @@
 		},
 	},
 ]);
-//# sourceMappingURL=763.1d4a444c.iframe.bundle.js.map
+//# sourceMappingURL=117.85ea69b3.iframe.bundle.js.map
