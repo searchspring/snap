@@ -33,7 +33,6 @@ describe('BundledRecommendations', () => {
 		it('has valid config', () => {
 			cy.wrap(config).its('url').should('have.length.at.least', 1);
 			cy.visit(config.url);
-			cy.wait(1000);
 			console.log(Cypress.browser);
 		});
 

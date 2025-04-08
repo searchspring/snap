@@ -48,7 +48,7 @@ export const ResultTracker = observer((properties: ResultTrackerProps): JSX.Elem
 	});
 	if (resultInViewport && mergedTrack.impression) {
 		if (result.type === 'product') {
-			controller.track.product.impression(result as Product);
+			controller?.track.product.impression(result as Product);
 		} else {
 			// track banner in future
 		}
@@ -64,11 +64,11 @@ export const ResultTracker = observer((properties: ResultTrackerProps): JSX.Elem
 	return (
 		<div
 			key={result.id}
-			className={classnames('ss__result-tracker', `ss__${controller.type}-result-tracker`, className)}
+			className={classnames('ss__result-tracker', `ss__${controller?.type}-result-tracker`, className)}
 			onClick={(e: any) => {
 				if (mergedTrack.click) {
 					if (result.type === 'product') {
-						controller.track.product.click(e, result as Product);
+						controller?.track.product.click(e, result as Product);
 					}
 				}
 			}}
