@@ -292,11 +292,7 @@ describe('Recommendation Controller', () => {
 
 		await controller.search();
 
-		controller.store.results.forEach((result) => {
-			controller.track.product.render(result);
-		});
-
-		expect(trackfn).toHaveBeenCalledTimes(controller.store.results.length);
+		expect(trackfn).toHaveBeenCalledTimes(1);
 
 		trackfn.mockClear();
 	});
@@ -374,6 +370,22 @@ describe('Recommendation Controller', () => {
 		clickfn.mockClear();
 	});
 
+	it('can set cart param', async () => {
+		const controller = new RecommendationController(recommendConfig, {
+			client: new MockClient(globals, {}),
+			store: new RecommendationStore(recommendConfig, services),
+			urlManager,
+			eventManager: new EventManager(),
+			profiler: new Profiler(),
+			logger: new Logger(),
+			tracker: new Tracker(globals),
+		});
+
+		const items = ['product123', 'product456'];
+		controller.tracker.cookies.cart.add(items);
+		expect(controller.params.cart).toEqual(items);
+	});
+
 	it('can invoke controller track.product.addToCart', async () => {
 		const controller = new RecommendationController(recommendConfig, {
 			client: new MockClient(globals, {}),
@@ -419,22 +431,6 @@ describe('Recommendation Controller', () => {
 
 		expect(trackFn).toHaveBeenCalledTimes(1);
 		trackFn.mockClear();
-	});
-
-	it('can set cart param', async () => {
-		const controller = new RecommendationController(recommendConfig, {
-			client: new MockClient(globals, {}),
-			store: new RecommendationStore(recommendConfig, services),
-			urlManager,
-			eventManager: new EventManager(),
-			profiler: new Profiler(),
-			logger: new Logger(),
-			tracker: new Tracker(globals),
-		});
-
-		const items = ['product123', 'product456'];
-		controller.tracker.cookies.cart.add(items);
-		expect(controller.params.cart).toEqual(items);
 	});
 
 	it('can set lastViewed param', async () => {

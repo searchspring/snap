@@ -1,3 +1,4 @@
+import 'whatwg-fetch';
 import { RecommendationInstantiator, RecommendationInstantiatorConfig } from './RecommendationInstantiator';
 import type { PluginGrouping } from '@searchspring/snap-controller';
 import { cookies } from '@searchspring/snap-toolbox';

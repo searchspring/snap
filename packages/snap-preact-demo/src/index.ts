@@ -2,7 +2,7 @@ import deepmerge from 'deepmerge';
 
 import { Snap } from '@searchspring/snap-preact';
 import { StorageStore } from '@searchspring/snap-store-mobx';
-import { url } from '@searchspring/snap-toolbox';
+import { url, getContext } from '@searchspring/snap-toolbox';
 // import { afterSearch } from './middleware/plugins/afterSearch';
 import { afterStore } from './middleware/plugins/afterStore';
 import { combineMerge } from './middleware/functions';
@@ -13,6 +13,21 @@ import './styles/custom.scss';
 
 // storage for custom configuration
 const configStore = new StorageStore({ type: 'local', key: 'ss-demo-config' });
+
+const context = getContext(['collection']);
+const backgroundFilters = [];
+
+if (context.collection?.handle) {
+	// set background filter
+	if (context.collection.handle != 'all') {
+		backgroundFilters.push({
+			field: 'ss_category_hierarchy',
+			value: context.collection.handle,
+			type: 'value',
+			background: true,
+		});
+	}
+}
 
 /*
 	configuration and instantiation
@@ -138,7 +153,6 @@ let config: SnapConfig = {
 					plugins: [[afterStore]],
 					settings: {
 						redirects: {
-							merchandising: false,
 							singleResult: false,
 						},
 						variants: {
@@ -170,6 +184,9 @@ let config: SnapConfig = {
 								},
 							],
 						},
+					},
+					globals: {
+						filters: backgroundFilters,
 					},
 				},
 				targeters: [
