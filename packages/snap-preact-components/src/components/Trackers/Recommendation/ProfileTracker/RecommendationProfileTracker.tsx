@@ -11,6 +11,9 @@ const CSS = {
 	RecommendationProfileTracker: () => css({}),
 };
 
+/**
+ * @deprecated RecommendationProfileTracker is deprecated and is no longer functional
+ */
 export const RecommendationProfileTracker = observer((properties: RecommendationProfileTrackerProps): JSX.Element => {
 	const globalTheme: Theme = useTheme();
 

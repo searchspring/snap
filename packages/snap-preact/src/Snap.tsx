@@ -308,7 +308,7 @@ export class Snap {
 		let globalContext: ContextVariables = {};
 		try {
 			// get global context
-			globalContext = getContext(['shopper', 'config', 'merchandising', 'siteId', 'currency']);
+			globalContext = getContext(['shopper', 'config', 'merchandising', 'siteId', 'currency', 'pageType']);
 		} catch (err) {
 			console.error('Snap failed to find global context');
 		}
@@ -403,7 +403,7 @@ export class Snap {
 				});
 			}
 
-			const trackerConfig = deepmerge(this.config.tracker?.config || {}, { framework: 'preact', mode: this.mode });
+			const trackerConfig = deepmerge(this.config.tracker?.config || {}, { framework: 'snap/preact', mode: this.mode });
 			this.tracker = services?.tracker || new Tracker(trackerGlobals, trackerConfig);
 
 			// log version

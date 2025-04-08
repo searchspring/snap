@@ -5,8 +5,9 @@ import { AbstractController } from '../Abstract/AbstractController';
 import { ControllerTypes } from '../types';
 import type { RecommendationStore } from '@searchspring/snap-store-mobx';
 import type { RecommendRequestModel } from '@searchspring/snap-client';
-import type { RecommendationControllerConfig, ControllerServices, ContextVariables } from '../types';
-import type { Item, RecommendationsSchemaData } from '@searchspring/beacon';
+import type { RecommendationControllerConfig, ControllerServices, ContextVariables, AfterStoreObj } from '../types';
+import type { Item, Product as BeaconProduct, RecommendationsAddtocartSchemaData, RecommendationsSchemaData } from '@searchspring/beacon';
+import type { Next } from '@searchspring/snap-event-manager';
 
 // TODO: change return types to void
 type RecommendationTrackMethods = {
@@ -73,6 +74,22 @@ export class RecommendationController extends AbstractController {
 		this.config = deepmerge(defaultConfig, this.config);
 		this.store.setConfig(this.config);
 
+		this.eventManager.on('afterStore', async (search: AfterStoreObj, next: Next): Promise<void | boolean> => {
+			await next();
+			const controller = search.controller as RecommendationController;
+			if (controller.store.loaded && !controller.store.error) {
+				const products = controller.store.results.filter((result) => result.type === 'product') as Product[];
+				const results = products.length === 0 ? [] : products;
+				const data = getRecommendationsSchemaData({ store: this.store, results });
+				this.tracker.events.recommendations.render({ data, siteId: this.config.globals?.siteId });
+				products.forEach((result) => {
+					this.events.product[result.id] = this.events.product[result.id] || {};
+					this.events.product[result.id].render = true;
+				});
+				this.eventManager.fire('track.product.render', { controller: this, products, trackEvent: data });
+			}
+		});
+
 		// add 'afterStore' middleware
 		// this.eventManager.on('afterStore', async (recommend: AfterStoreObj, next: Next): Promise<void | boolean> => {
 		// 	await next();
@@ -121,7 +138,7 @@ export class RecommendationController extends AbstractController {
 				this.eventManager.fire('track.product.impression', { controller: this, products: [result], trackEvent: data });
 				return data;
 			},
-			render: (result): RecommendationsSchemaData | undefined => {
+			render: (result: Product): RecommendationsSchemaData | undefined => {
 				if (this.events.product[result.id]?.render) return;
 
 				const data = getRecommendationsSchemaData({ store: this.store, results: [result] });
@@ -132,7 +149,7 @@ export class RecommendationController extends AbstractController {
 				return data;
 			},
 			addToCart: (result: Product): RecommendationsSchemaData | undefined => {
-				const data = getRecommendationsSchemaData({ store: this.store, results: [result] });
+				const data = getRecommendationsAddtocartSchemaData({ store: this.store, results: [result] });
 				this.tracker.events.recommendations.addToCart({ data, siteId: this.config.globals?.siteId });
 				this.eventManager.fire('track.product.addToCart', { controller: this, products: [result], trackEvent: data });
 				return data;
@@ -142,7 +159,7 @@ export class RecommendationController extends AbstractController {
 			addToCart: (results: Product[]): RecommendationsSchemaData | undefined => {
 				if (this.store.profile.type != 'bundle') return;
 
-				const data = getRecommendationsSchemaData({ store: this.store, results });
+				const data = getRecommendationsAddtocartSchemaData({ store: this.store, results });
 				this.tracker.events.recommendations.addToCart({ data, siteId: this.config.globals?.siteId });
 				this.eventManager.fire('track.bundle.addToCart', { controller: this, products: results, trackEvent: data });
 				return data;
@@ -307,6 +324,28 @@ export class RecommendationController extends AbstractController {
 		}
 	};
 }
+function getRecommendationsAddtocartSchemaData({
+	store,
+	results,
+}: {
+	store: RecommendationStore;
+	results?: Product[];
+}): RecommendationsAddtocartSchemaData {
+	return {
+		tag: store.profile.tag,
+		results:
+			results?.map((result: Product): BeaconProduct => {
+				const core = (result as Product).mappings.core!;
+				return {
+					uid: core.uid || '',
+					sku: core.sku,
+					price: Number(core.price),
+					qty: result.quantity || 1,
+				};
+			}) || [],
+	};
+}
+
 function getRecommendationsSchemaData({ store, results }: { store: RecommendationStore; results?: Product[] }): RecommendationsSchemaData {
 	return {
 		tag: store.profile.tag,
