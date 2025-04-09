@@ -36,7 +36,7 @@ const CustomResult = ({
 	return <div>{result.mappings.core?.name}</div>
 }
 
-<Results results={controller.store.results} resultComponent={CustomResult} />
+<Results results={controller.store.results} controller={controller} resultComponent={CustomResult} />
 ```
 
 ### layout
