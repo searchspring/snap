@@ -1,7 +1,7 @@
 const config = {
 	url: 'https://localhost:2222/templates',
 	selectors: {
-		sidebarElem: '.ss__layout__title',
+		sidebarTitleElem: '.ss__sidebar__title-text',
 		titleElem: '.ss__search-header__title.ss__search-header__title--results',
 	},
 };
@@ -50,7 +50,7 @@ describe('Templates Language settings', () => {
 			cy.visit('https://localhost:2222/templates/');
 
 			cy.snapController().then(({ store }) => {
-				cy.get(config.selectors.sidebarElem).should(($el) => expect($el.text().trim()).to.equal('Filters'));
+				cy.get(config.selectors.sidebarTitleElem).should(($el) => expect($el.text().trim()).to.equal('Filters'));
 			});
 		});
 
@@ -90,7 +90,7 @@ describe('Templates Language settings', () => {
 			cy.visit('https://localhost:2222/templates/');
 
 			cy.snapController().then(({ store }) => {
-				cy.get(config.selectors.sidebarElem).should(($el) => expect($el.text().trim()).to.equal(`Filtres`));
+				cy.get(config.selectors.sidebarTitleElem).should(($el) => expect($el.text().trim()).to.equal(`Filtres`));
 			});
 		});
 

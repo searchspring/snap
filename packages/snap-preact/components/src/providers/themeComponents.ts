@@ -57,7 +57,7 @@ import type { MobileSidebarProps } from '../components/Organisms/MobileSidebar';
 import type { NoResultsProps } from '../components/Organisms/NoResults';
 import type { ResultsNames, ResultsProps } from '../components/Organisms/Results';
 import type { SearchHeaderProps } from '../components/Atoms/SearchHeader';
-import type { SidebarNames, SidebarProps } from '../components/Organisms/Sidebar';
+import type { SidebarProps } from '../components/Organisms/Sidebar';
 import type { ToolbarProps, ToolbarNames } from '../components/Organisms/Toolbar';
 
 /* TEMPLATES */
@@ -105,10 +105,6 @@ type OmittedComponentProps =
 	| 'snap'
 	| 'name'
 	| 'treePath'
-	| 'slot0'
-	| 'slot1'
-	| 'slot2'
-	| 'slot3'
 	| 'disableStyles';
 
 export type ThemeComponents = {
@@ -249,7 +245,7 @@ export type ThemeComponentOverrides =
 	{ [K in UnNamedThemeComponentSelectors<'noResults'>]?: Partial<NoResultsProps> } &
 	{ [K in NamedThemeComponentSelectors<'results', ResultsNames>]?: Partial<ResultsProps> } &
 	{ [K in UnNamedThemeComponentSelectors<'searchHeader'>]?: Partial<SearchHeaderProps> } &
-	{ [K in NamedThemeComponentSelectors<'sidebar', SidebarNames>]?: Partial<SidebarProps> } &
+	{ [K in UnNamedThemeComponentSelectors<'sidebar'>]?: Partial<SidebarProps> } &
 	{ [K in UnNamedThemeComponentSelectors<'mobileSidebar'>]?: Partial<MobileSidebarProps> } &
 	{ [K in NamedThemeComponentSelectors<'toolbar', ToolbarNames>]?: Partial<ToolbarProps> } &
 

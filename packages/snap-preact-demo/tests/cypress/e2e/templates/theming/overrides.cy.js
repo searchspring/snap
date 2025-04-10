@@ -6,7 +6,7 @@ const config = {
 		topToolbarElem: '.ss__search__header-section__toolbar--top-toolbar',
 		bottomToolbarElem: '.ss__search__content__toolbar--bottom-toolbar',
 		pagination: '.ss__pagination',
-		layoutSelector: '.ss__layout__layout-selector',
+		layoutSelector: '.ss__layout__list',
 		perpage: '.ss__per-page',
 	},
 };

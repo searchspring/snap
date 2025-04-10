@@ -61,9 +61,7 @@ export const mobileSidebar: ThemeComponentProps<MobileSidebarProps> = {
 			},
 		},
 	},
-	mobile: {
-		layout: ['FilterSummary', 'SortBy', 'PerPage', 'Facets', 'Banner.left'],
-	},
+	mobile: {},
 	tablet: {},
 	desktop: {},
 };

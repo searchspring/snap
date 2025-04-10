@@ -20,7 +20,7 @@ export const search: ThemeComponentProps<SearchProps> = {
 				results: {
 					columns: 4,
 				},
-				'sidebar.search': {
+				sidebar: {
 					layout: ['FilterSummary', 'Facets', 'Banner.left'],
 					sticky: true,
 				},

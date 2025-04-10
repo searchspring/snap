@@ -11,7 +11,6 @@ import { Sidebar, SidebarProps } from '../../Organisms/Sidebar';
 import { Toolbar, ToolbarProps } from '../../Organisms/Toolbar';
 import { NoResults, NoResultsProps } from '../../Organisms/NoResults';
 import { Lang, useLang, useMediaQuery } from '../../../hooks';
-import { BannerProps } from '../../Atoms/Merchandising';
 import { SearchFilterStore } from '@searchspring/snap-store-mobx';
 import { useState } from 'preact/hooks';
 import deepmerge from 'deepmerge';
@@ -104,9 +103,9 @@ export const Search = observer((properties: SearchProps): JSX.Element => {
 			className: 'ss__search__header-section__toolbar--top-toolbar',
 			layout: ['SearchHeader', 'Banner.header', 'Button.toggleSideBar'],
 			toggleSideBarButton:
-				!hideToggleSidebarButton && store.loaded && !isMobile && (toggleSidebarButtonText || mergedLang.toggleSidebarButtonText?.value) ? (
-					<ToggleSidebar />
-				) : undefined,
+				!hideToggleSidebarButton && store.loaded && !isMobile && (toggleSidebarButtonText || mergedLang.toggleSidebarButtonText?.value)
+					? () => <ToggleSidebar />
+					: undefined,
 			...defined({
 				disableStyles,
 			}),
@@ -142,7 +141,7 @@ export const Search = observer((properties: SearchProps): JSX.Element => {
 		Sidebar: {
 			// default props
 			name: 'search',
-			layout: [['Title'], ['Facets'], ['Banner.left']],
+			layout: [['FilterSummary'], ['Facets'], ['Banner.left']],
 			// inherited props
 			...defined({
 				disableStyles,
@@ -170,15 +169,6 @@ export const Search = observer((properties: SearchProps): JSX.Element => {
 			theme: props.theme,
 			treePath,
 		},
-		Banner: {
-			// default props
-			// inherited props
-			...defined({
-				disableStyles,
-			}),
-			theme: props.theme,
-			treePath,
-		},
 	};
 
 	const styling = mergeStyles<SearchProps>(props, defaultStyles);
@@ -189,7 +179,6 @@ export const Search = observer((properties: SearchProps): JSX.Element => {
 				{...styling}
 				className={classnames('ss__search', className, {
 					'ss__search--sidebar-open': sidebarOpenState,
-					'ss__search--sidebar-closed': !sidebarOpenState,
 				})}
 			>
 				<div className="ss__search__header-section">
@@ -249,5 +238,4 @@ interface SearchSubProps {
 	TopToolbar: Partial<ToolbarProps>;
 	MiddleToolbar: Partial<ToolbarProps>;
 	BottomToolbar: Partial<ToolbarProps>;
-	Banner: Partial<BannerProps>;
 }

@@ -3,15 +3,15 @@ import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
 import { observer } from 'mobx-react-lite';
 import { Theme, useTheme, CacheProvider, useTreePath } from '../../../providers';
-import { ComponentProps, StyleScript } from '../../../types';
+import type { ComponentProps, StyleScript } from '../../../types';
 import { Slideout, SlideoutProps } from '../../Molecules/Slideout';
 import { defined, mergeProps, mergeStyles } from '../../../utilities';
-import { SearchController } from '@searchspring/snap-controller';
-import { SideBarModuleNames, SidebarProps } from '../Sidebar';
+import type { SearchController } from '@searchspring/snap-controller';
+import type { SideBarModuleNames } from '../Sidebar';
 import { Button, ButtonProps } from '../../Atoms/Button';
 import { Lang, useA11y, useLang } from '../../../hooks';
 import { MutableRef, useRef } from 'preact/hooks';
-import { IconProps, IconType } from '../../Atoms/Icon';
+import type { IconProps, IconType } from '../../Atoms/Icon';
 import deepmerge from 'deepmerge';
 import { Layout, LayoutProps } from '../Layout';
 
@@ -123,18 +123,6 @@ export const MobileSidebar = observer((properties: MobileSidebarProps): JSX.Elem
 			theme: props?.theme,
 			treePath,
 		},
-		sidebar: {
-			// default props
-			name: 'mobile',
-			layout: layout,
-			// inherited props
-			...defined({
-				disableStyles,
-			}),
-			// component theme overrides
-			theme: props?.theme,
-			treePath,
-		},
 		layout: {
 			// default props
 			// inherited props
@@ -231,7 +219,7 @@ export const MobileSidebar = observer((properties: MobileSidebarProps): JSX.Elem
 				)}
 
 				<div className={classnames('ss__mobile-sidebar__inner')}>
-					<Layout controller={controller} layout={layout} {...subProps.layout} />
+					<Layout controller={controller} layout={layout || []} {...subProps.layout} />
 				</div>
 
 				{!hideFooter && (
@@ -333,7 +321,6 @@ export interface MobileSidebarLang {
 }
 
 interface MobileSidebarSubProps {
-	sidebar: Partial<SidebarProps>;
 	slideout: Partial<SlideoutProps>;
 	button: Partial<ButtonProps>;
 	layout: Partial<LayoutProps>;

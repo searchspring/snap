@@ -1,20 +1,20 @@
 import { h } from 'preact';
 
-import { jsx, css } from '@emotion/react';
+import { css } from '@emotion/react';
 import classnames from 'classnames';
 import { observer } from 'mobx-react-lite';
 
 import { Theme, useTheme, useSnap, CacheProvider, useTreePath } from '../../../providers';
-import { ComponentProps, StyleScript } from '../../../types';
+import type { ComponentProps, StyleScript } from '../../../types';
 import { FilterSummary, FilterSummaryProps } from '../FilterSummary';
-import { cloneWithProps, defined, mergeProps, mergeStyles } from '../../../utilities';
+import { defined, mergeProps, mergeStyles } from '../../../utilities';
 import { Pagination, PaginationProps } from '../../Molecules/Pagination';
 import { LoadMore, LoadMoreProps } from '../../Molecules/LoadMore';
-import { SearchController } from '@searchspring/snap-controller';
+import type { SearchController } from '@searchspring/snap-controller';
 import { SortBy, SortByProps } from '../../Molecules/SortBy';
 import { PerPage, PerPageProps } from '../../Molecules/PerPage';
 import { LayoutSelector, LayoutSelectorProps } from '../../Molecules/LayoutSelector';
-import { SnapTemplates } from '../../../../../src';
+import type { SnapTemplates } from '../../../../../src';
 import { MobileSidebar, MobileSidebarProps } from '../MobileSidebar';
 import { PaginationInfo, PaginationInfoProps } from '../../Atoms/PaginationInfo/PaginationInfo';
 import { SearchHeader, SearchHeaderProps } from '../../Atoms/SearchHeader/SearchHeader';
@@ -22,8 +22,6 @@ import { Button, ButtonProps } from '../../Atoms/Button';
 import { Banner, BannerProps } from '../../Atoms/Merchandising';
 import { ContentType } from '@searchspring/snap-store-mobx';
 import { Facets, FacetsProps } from '../Facets';
-import { Lang, useLang } from '../../../hooks';
-import deepmerge from 'deepmerge';
 
 const defaultStyles: StyleScript<LayoutProps> = ({}) => {
 	return css({
@@ -57,19 +55,17 @@ export const Layout = observer((properties: LayoutProps): JSX.Element => {
 
 	const defaultProps: Partial<LayoutProps> = {
 		treePath: globalTreePath,
-		layout: ['MobileSidebar', 'FilterSummary', 'PaginationInfo', 'SortBy', 'PerPage', 'Pagination'],
 	};
 
 	const props = mergeProps('layout', globalTheme, defaultProps, properties);
-	const { controller, toggleSideBarButton, titleText, disableStyles, className, treePath, layout } = props;
+	const { controller, toggleSideBarButton, disableStyles, className, treePath, layout } = props;
 
 	const styling = mergeStyles<LayoutProps>(props, defaultStyles);
 
-	const subProps: ToolbarSubProps = {
+	const subProps: LayoutSubProps = {
 		MobileSidebar: {
 			// default props
 			controller,
-			className: 'ss__layout__mobile-sidebar',
 			// inherited props
 			...defined({
 				disableStyles,
@@ -81,7 +77,6 @@ export const Layout = observer((properties: LayoutProps): JSX.Element => {
 		Banner: {
 			// default props
 			content: controller.store.merchandising.content,
-			className: 'ss__layout__mobile-sidebar',
 			// inherited props
 			...defined({
 				disableStyles,
@@ -93,7 +88,6 @@ export const Layout = observer((properties: LayoutProps): JSX.Element => {
 		SearchHeader: {
 			// default props
 			controller,
-			className: 'ss__layout__search-header',
 			// inherited props
 			...defined({
 				disableStyles,
@@ -105,7 +99,6 @@ export const Layout = observer((properties: LayoutProps): JSX.Element => {
 		FilterSummary: {
 			// default props
 			controller,
-			className: 'ss__layout__filter-summary',
 			// inherited props
 			...defined({
 				disableStyles,
@@ -117,7 +110,6 @@ export const Layout = observer((properties: LayoutProps): JSX.Element => {
 		LayoutSelector: {
 			// default props
 			controller,
-			className: 'ss__layout__layout-selector',
 			// inherited props
 			...defined({
 				disableStyles,
@@ -129,7 +121,6 @@ export const Layout = observer((properties: LayoutProps): JSX.Element => {
 		Facets: {
 			// default props
 			controller,
-			className: 'ss__layout__facets',
 			// inherited props
 			...defined({
 				disableStyles,
@@ -141,7 +132,6 @@ export const Layout = observer((properties: LayoutProps): JSX.Element => {
 		Pagination: {
 			// default props
 			controller,
-			className: 'ss__layout__pagination',
 			// inherited props
 			...defined({
 				disableStyles,
@@ -153,7 +143,6 @@ export const Layout = observer((properties: LayoutProps): JSX.Element => {
 		PaginationInfo: {
 			// default props
 			controller,
-			className: 'ss__layout__pagination-info',
 			// inherited props
 			...defined({
 				disableStyles,
@@ -165,7 +154,6 @@ export const Layout = observer((properties: LayoutProps): JSX.Element => {
 		LoadMore: {
 			// default props
 			controller,
-			className: 'ss__layout__load-more',
 			// inherited props
 			...defined({
 				disableStyles,
@@ -177,7 +165,6 @@ export const Layout = observer((properties: LayoutProps): JSX.Element => {
 		SortBy: {
 			// default props
 			controller,
-			className: 'ss__layout__sort-by',
 			// inherited props
 			...defined({
 				disableStyles,
@@ -189,7 +176,6 @@ export const Layout = observer((properties: LayoutProps): JSX.Element => {
 		PerPage: {
 			// default props
 			controller,
-			className: 'ss__layout__per-page',
 			// inherited props
 			...defined({
 				disableStyles,
@@ -201,7 +187,6 @@ export const Layout = observer((properties: LayoutProps): JSX.Element => {
 		ToggleSideBarButton: {
 			// default props
 			controller,
-			className: 'ss__layout__button-toggleSideBarButton',
 			name: 'sidebar-toggle',
 			// inherited props
 			...defined({
@@ -211,59 +196,9 @@ export const Layout = observer((properties: LayoutProps): JSX.Element => {
 			theme: props?.theme,
 			treePath,
 		},
-		CloseButton: {
-			// default props
-			controller,
-			className: 'ss__layout__button-CloseButton',
-			name: 'sidebar-close',
-			// inherited props
-			...defined({
-				disableStyles,
-			}),
-			// component theme overrides
-			theme: props?.theme,
-			treePath,
-		},
-		ClearButton: {
-			// default props
-			controller,
-			className: 'ss__layout__button-clearButton',
-			name: 'close-filters',
-			// inherited props
-			...defined({
-				disableStyles,
-			}),
-			// component theme overrides
-			theme: props?.theme,
-			treePath,
-		},
-		ApplyButton: {
-			// default props
-			controller,
-			className: 'ss__layout__button-applyButton',
-			name: 'apply-filters',
-
-			// inherited props
-			...defined({
-				disableStyles,
-			}),
-			// component theme overrides
-			theme: props?.theme,
-			treePath,
-		},
 	};
 
-	const defaultLang = {
-		titleText: {
-			value: titleText || props.lang?.titleText?.value,
-		},
-	};
-
-	//deep merge with props.lang
-	const lang = deepmerge(defaultLang, props.lang || {});
-	const mergedLang = useLang(lang as any, {
-		controller: controller,
-	});
+	const ToggleSideBarButton = toggleSideBarButton;
 
 	function renderModule(module: ModuleNames) {
 		switch (module) {
@@ -307,9 +242,11 @@ export const Layout = observer((properties: LayoutProps): JSX.Element => {
 
 			case 'Button.toggleSideBar':
 				return (
-					toggleSideBarButton && (
-						<div className="ss__layout__button-toggleSideBarButtonWrapper">
-							<Button {...subProps.ToggleSideBarButton}>{cloneWithProps(toggleSideBarButton)}</Button>
+					ToggleSideBarButton && (
+						<div className="ss__button-toggleSideBarButtonWrapper">
+							<Button {...subProps.ToggleSideBarButton}>
+								<ToggleSideBarButton />
+							</Button>
 						</div>
 					)
 				);
@@ -335,13 +272,6 @@ export const Layout = observer((properties: LayoutProps): JSX.Element => {
 
 			case 'Banner.left':
 				return <Banner {...subProps.Banner} type={ContentType.LEFT} name={'left'} />;
-
-			case 'Title':
-				return mergedLang.titleText.value ? (
-					<h4 aria-atomic="true" aria-live="polite" className="ss__layout__title" {...mergedLang?.titleText?.all}>
-						{lang.titleText.value}
-					</h4>
-				) : undefined;
 
 			case 'Facets':
 				return <Facets {...subProps.Facets} />;
@@ -381,10 +311,8 @@ export const Layout = observer((properties: LayoutProps): JSX.Element => {
 
 export interface LayoutProps extends ComponentProps {
 	controller: SearchController;
-	layout?: (ModuleNames | ModuleNames[])[];
-	toggleSideBarButton?: JSX.Element;
-	titleText?: string;
-	lang?: Partial<LayoutLang>;
+	layout: (ModuleNames | ModuleNames[])[];
+	toggleSideBarButton?: React.FunctionComponent;
 }
 
 export type ModuleNames =
@@ -403,11 +331,10 @@ export type ModuleNames =
 	| 'Banner.banner'
 	| 'Banner.footer'
 	// sidebar
-	| 'Title'
 	| 'Facets'
 	| 'Banner.left';
 
-interface ToolbarSubProps {
+interface LayoutSubProps {
 	MobileSidebar: Partial<MobileSidebarProps>;
 	FilterSummary: Partial<FilterSummaryProps>;
 	Pagination: Partial<PaginationProps>;
@@ -420,13 +347,4 @@ interface ToolbarSubProps {
 	Banner: Partial<BannerProps>;
 	Facets: Partial<FacetsProps>;
 	ToggleSideBarButton: Partial<ButtonProps>;
-	CloseButton: Partial<ButtonProps>;
-	ApplyButton: Partial<ButtonProps>;
-	ClearButton: Partial<ButtonProps>;
-}
-
-export interface LayoutLang {
-	titleText: Lang<{
-		controller: SearchController;
-	}>;
 }

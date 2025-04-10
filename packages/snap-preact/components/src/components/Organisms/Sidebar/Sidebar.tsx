@@ -7,9 +7,9 @@ import { Theme, useTheme, CacheProvider, useTreePath } from '../../../providers'
 import { ComponentProps, StyleScript } from '../../../types';
 import { defined, mergeProps, mergeStyles } from '../../../utilities';
 import { SearchController } from '@searchspring/snap-controller';
-import { Lang } from '../../../hooks';
 import { Layout, LayoutProps } from '../Layout';
 import deepmerge from 'deepmerge';
+import { Lang, useLang } from '../../../hooks/useLang';
 
 const defaultStyles: StyleScript<SidebarProps> = ({ stickyOffset }) => {
 	return css({
@@ -32,12 +32,12 @@ export const Sidebar = observer((properties: SidebarProps): JSX.Element => {
 	const defaultProps: Partial<SidebarProps> = {
 		titleText: 'Filters',
 		treePath: globalTreePath,
-		layout: [['Title'], ['FilterSummary'], ['SortBy', 'PerPage'], ['Facets'], ['Banner.left']],
+		layout: [['FilterSummary'], ['SortBy', 'PerPage'], ['Facets'], ['Banner.left']],
 	};
 
 	const props = mergeProps('sidebar', globalTheme, defaultProps, properties);
 
-	const { controller, layout, titleText, sticky, disableStyles, className, treePath } = props;
+	const { controller, layout, hideTitleText, titleText, sticky, disableStyles, className, treePath } = props;
 
 	const styling = mergeStyles<SidebarProps>(props, defaultStyles);
 
@@ -50,17 +50,19 @@ export const Sidebar = observer((properties: SidebarProps): JSX.Element => {
 
 	//deep merge with props.lang
 	const lang = deepmerge(defaultLang, props.lang || {});
+	const mergedLang = useLang(lang as any, {
+		controller: controller,
+	});
 
 	const subProps: SidebarSubProps = {
 		Layout: {
 			// default props
-			lang: lang,
 			// inherited props
 			...defined({
 				disableStyles,
 			}),
 			// component theme overrides
-			theme: props?.theme,
+			theme: props.theme,
 			treePath,
 		},
 	};
@@ -69,8 +71,16 @@ export const Sidebar = observer((properties: SidebarProps): JSX.Element => {
 	return controller?.store?.loaded && controller?.store?.pagination?.totalResults > 0 && hasChildrenToRender ? (
 		<CacheProvider>
 			<div {...styling} className={classnames('ss__sidebar', className, { 'ss__sidebar--sticky': sticky })}>
+				{!hideTitleText ? (
+					<h4 className={classnames('ss__sidebar__title-text')} aria-atomic="true" aria-live="polite" {...mergedLang.titleText.all}>
+						{titleText}
+					</h4>
+				) : (
+					<></>
+				)}
+
 				<div className={classnames('ss__sidebar__inner')}>
-					<Layout {...subProps.Layout} controller={controller} layout={layout} />
+					<Layout controller={controller} layout={layout} {...subProps.Layout} />
 				</div>
 			</div>
 		</CacheProvider>
@@ -79,21 +89,13 @@ export const Sidebar = observer((properties: SidebarProps): JSX.Element => {
 	);
 });
 
-export type SideBarModuleNames =
-	| 'Title'
-	| 'FilterSummary'
-	| 'SortBy'
-	| 'PerPage'
-	| 'Facets'
-	| 'Banner.left'
-	| 'PaginationInfo'
-	| 'LayoutSelector'
-	| '_';
+export type SideBarModuleNames = 'FilterSummary' | 'SortBy' | 'PerPage' | 'Facets' | 'Banner.left' | 'PaginationInfo' | 'LayoutSelector' | '_';
 
 export interface SidebarProps extends ComponentProps {
 	controller: SearchController;
 	layout?: SideBarModuleNames[] | SideBarModuleNames[][];
 	titleText?: string;
+	hideTitleText?: boolean;
 	sticky?: boolean;
 	stickyOffset?: number;
 	lang?: Partial<SidebarLang>;
@@ -108,5 +110,3 @@ export interface SidebarLang {
 interface SidebarSubProps {
 	Layout: Partial<LayoutProps>;
 }
-
-export type SidebarNames = 'search' | 'mobile';

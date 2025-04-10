@@ -47,7 +47,7 @@ export const Toolbar = observer((properties: ToolbarProps): JSX.Element => {
 	return hasChildrenToRender ? (
 		<CacheProvider>
 			<div {...styling} className={classnames('ss__toolbar', className)}>
-				<Layout {...subProps.Layout} controller={controller} layout={layout} />
+				<Layout controller={controller} layout={layout} {...subProps.Layout} />
 			</div>
 		</CacheProvider>
 	) : (
@@ -59,7 +59,7 @@ export interface ToolbarProps extends ComponentProps {
 	controller: SearchController;
 	name?: ToolbarNames;
 	layout?: (ModuleNames | ModuleNames[])[];
-	toggleSideBarButton?: JSX.Element;
+	toggleSideBarButton?: React.FunctionComponent;
 }
 
 export type ModuleNames =
