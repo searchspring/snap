@@ -73,6 +73,14 @@ export default {
 			},
 			control: { type: 'none' },
 		},
+		resultComponent: {
+			description: 'Slot for custom result component',
+			table: {
+				type: {
+					summary: 'component',
+				},
+			},
+		},
 		columns: {
 			description: 'Number of columns in results grid',
 			table: {

@@ -21,6 +21,22 @@ The required `controller` prop specifies a reference to the search controller.
 <SearchHorizontal controller={controller} />
 ```
 
+### resultComponent
+The `resultComponent` prop specifies a custom result component to render.
+
+```jsx
+
+const CustomResult = ({
+	controller 
+	result
+	theme
+}) => {
+	return <div>{result.mappings.core?.name}</div>
+}
+
+<SearchHorizontal controller={controller} resultComponent={CustomResult} />
+```
+
 ### hideSearchHeader
 The `hideSearchHeader` prop specifies if the SearchHeader component should be rendered.  
 

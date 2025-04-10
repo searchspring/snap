@@ -329,6 +329,14 @@ export default {
 			},
 			control: { type: 'none' },
 		},
+		resultComponent: {
+			description: 'Slot for custom result component',
+			table: {
+				type: {
+					summary: 'component',
+				},
+			},
+		},
 		noResultsSlot: {
 			description: 'Slot for custom no-results component.',
 			table: {
