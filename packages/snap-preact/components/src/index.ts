@@ -50,6 +50,7 @@ export * from './components/Molecules/SortBy';
 export * from './components/Molecules/TemplatesEditor';
 export * from './components/Molecules/Swatches';
 export * from './components/Molecules/VariantSelection';
+export * from './components/Molecules/Terms';
 
 // ORGANISMS
 export * from './components/Organisms/BranchOverride';
@@ -62,10 +63,10 @@ export * from './components/Organisms/NoResults';
 export * from './components/Organisms/Results';
 export * from './components/Organisms/Sidebar';
 export * from './components/Organisms/Toolbar';
+export * from './components/Organisms/Autocomplete';
+export * from './components/Organisms/TermsList';
 
 // TEMPLATES
-export * from './components/Organisms/Autocomplete';
-export * from './components/Molecules/Terms';
 export * from './components/Templates/Recommendation';
 export * from './components/Templates/RecommendationBundle';
 export * from './components/Templates/RecommendationBundleEasyAdd';

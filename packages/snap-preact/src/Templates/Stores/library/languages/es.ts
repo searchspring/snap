@@ -17,56 +17,6 @@ export const es: LangComponents = {
 			value: 'Por Página',
 		},
 	},
-	autocomplete: {
-		trendingTitle: {
-			value: 'Búsquedas populares',
-		},
-		termsTitle: {
-			value: '',
-		},
-		contentTitle: {
-			value: '',
-		},
-		facetsTitle: {
-			value: '',
-		},
-		historyTitle: {
-			value: 'Búsquedas anteriores',
-		},
-		closeButton: {
-			value: 'Cerrar autocompletar',
-			attributes: {
-				'aria-label': 'cerrar autocompletar',
-			},
-		},
-		noResultsText: {
-			value: (data) =>
-				`<p>No se encontraron resultados para "${
-					data?.controller.store.search.originalQuery?.string || data?.controller.store.search.query?.string
-				}".</p><p>Intenta con otra búsqueda.</p>`,
-		},
-		seeMoreButton: {
-			value: (data) =>
-				`Ver ${data?.controller.store.pagination.totalResults} ${
-					data?.controller.store.filters.length && data?.controller.store.filters.length > 0 ? 'resultado(s) filtrado(s)' : 'resultado(s)'
-				} para "${data?.controller.store.search.query?.string}"`,
-		},
-		historyTerm: {
-			attributes: {
-				'aria-label': (data) => `ítem ${data?.index! + 1} de ${data?.controller.store.history.length}, ${data?.term.value}`,
-			},
-		},
-		trendingTerm: {
-			attributes: {
-				'aria-label': (data) => `ítem ${data?.index! + 1} de ${data?.controller.store.trending.length}, ${data?.term.value}`,
-			},
-		},
-		suggestionsTerm: {
-			attributes: {
-				'aria-label': (data) => `ítem ${data?.index! + 1} de ${data?.controller.store.terms.length}, ${data?.term.value}`,
-			},
-		},
-	},
 	sidebar: {
 		titleText: {
 			value: 'Filtros',

@@ -1,7 +1,7 @@
 import { h } from 'preact';
 
 import { v4 as uuidv4 } from 'uuid';
-import { render, waitFor } from '@testing-library/preact';
+import { render } from '@testing-library/preact';
 import { ThemeProvider } from '../../../providers';
 
 import { TermsList } from './TermsList';
@@ -107,9 +107,9 @@ describe('termsList Component', () => {
 		const terms = rendered.container.querySelectorAll('.ss__terms');
 		expect(termList).toBeInTheDocument();
 
-		expect(terms[0].classList).toContain('ss__terms--suggestions');
-		expect(terms[1].classList).toContain('ss__terms--trending');
-		expect(terms[2].classList).toContain('ss__terms--history');
+		expect(terms[0].classList).toContain('ss__terms-list__terms--suggestions');
+		expect(terms[1].classList).toContain('ss__terms-list__terms--trending');
+		expect(terms[2].classList).toContain('ss__terms-list__terms--history');
 	});
 
 	it('can modify layout order', async () => {
@@ -118,19 +118,19 @@ describe('termsList Component', () => {
 		const terms = rendered.container.querySelectorAll('.ss__terms');
 		expect(termList).toBeInTheDocument();
 
-		expect(terms[0].classList).toContain('ss__terms--suggestions');
-		expect(terms[1].classList).toContain('ss__terms--history');
-		expect(terms[2].classList).toContain('ss__terms--trending');
+		expect(terms[0].classList).toContain('ss__terms-list__terms--suggestions');
+		expect(terms[1].classList).toContain('ss__terms-list__terms--history');
+		expect(terms[2].classList).toContain('ss__terms-list__terms--trending');
 	});
 
 	it('can exclude history', async () => {
 		const rendered = render(<TermsList controller={controller} layout={['Suggestions', 'Trending']} />);
 		const termList = rendered.container.querySelector('.ss__terms-list');
 		const terms = rendered.container.querySelectorAll('.ss__terms');
-		const history = rendered.container.querySelector('.ss__terms--history');
+		const history = rendered.container.querySelector('.ss__terms-list__terms--history');
 		expect(termList).toBeInTheDocument();
-		expect(terms[0].classList).toContain('ss__terms--suggestions');
-		expect(terms[1].classList).toContain('ss__terms--trending');
+		expect(terms[0].classList).toContain('ss__terms-list__terms--suggestions');
+		expect(terms[1].classList).toContain('ss__terms-list__terms--trending');
 		expect(history).not.toBeInTheDocument();
 	});
 
@@ -138,10 +138,10 @@ describe('termsList Component', () => {
 		const rendered = render(<TermsList controller={controller} layout={['History', 'Trending']} />);
 		const termList = rendered.container.querySelector('.ss__terms-list');
 		const terms = rendered.container.querySelectorAll('.ss__terms');
-		const suggested = rendered.container.querySelector('.ss__terms--suggestions');
+		const suggested = rendered.container.querySelector('.ss__terms-list__terms--suggestions');
 		expect(termList).toBeInTheDocument();
-		expect(terms[0].classList).toContain('ss__terms--history');
-		expect(terms[1].classList).toContain('ss__terms--trending');
+		expect(terms[0].classList).toContain('ss__terms-list__terms--history');
+		expect(terms[1].classList).toContain('ss__terms-list__terms--trending');
 		expect(suggested).not.toBeInTheDocument();
 	});
 
@@ -149,10 +149,10 @@ describe('termsList Component', () => {
 		const rendered = render(<TermsList controller={controller} layout={['Suggestions', 'History']} />);
 		const termList = rendered.container.querySelector('.ss__terms-list');
 		const terms = rendered.container.querySelectorAll('.ss__terms');
-		const trending = rendered.container.querySelector('.ss__terms--trending');
+		const trending = rendered.container.querySelector('.ss__terms-list__terms--trending');
 		expect(termList).toBeInTheDocument();
-		expect(terms[0].classList).toContain('ss__terms--suggestions');
-		expect(terms[1].classList).toContain('ss__terms--history');
+		expect(terms[0].classList).toContain('ss__terms-list__terms--suggestions');
+		expect(terms[1].classList).toContain('ss__terms-list__terms--history');
 		expect(trending).not.toBeInTheDocument();
 	});
 

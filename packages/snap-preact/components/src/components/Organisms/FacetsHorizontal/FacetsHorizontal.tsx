@@ -96,7 +96,7 @@ export const FacetsHorizontal = observer((properties: FacetsHorizontalProps): JS
 		facets,
 		limit,
 		overlay,
-		stickyFiltersButton,
+		alwaysShowFiltersButton,
 		hideFiltersButton,
 		onFacetOptionClick,
 		iconExpand,
@@ -283,7 +283,7 @@ export const FacetsHorizontal = observer((properties: FacetsHorizontalProps): JS
 							</Dropdown>
 						);
 					})}
-					{!hideFiltersButton && (isOverflowing || stickyFiltersButton) && (
+					{!hideFiltersButton && (isOverflowing || alwaysShowFiltersButton) && (
 						<MobileSidebar controller={controller as any} {...subProps.MobileSidebar}></MobileSidebar>
 					)}
 				</div>
@@ -326,7 +326,7 @@ export interface FacetsHorizontalProps extends ComponentProps {
 	facets?: IndividualFacetType[];
 	limit?: number;
 	overlay?: boolean;
-	stickyFiltersButton?: boolean;
+	alwaysShowFiltersButton?: boolean;
 	hideFiltersButton?: boolean;
 	iconCollapse?: IconType | Partial<IconProps>;
 	iconExpand?: IconType | Partial<IconProps>;

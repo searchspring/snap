@@ -14,10 +14,12 @@ The `controller` prop specifies a reference to the autocomplete controller.
 
 ### layout
 
-The `layout` prop is used to determine which terms render and in what order. Options include 'Trending' | 'Suggestions' | 'History';
+The `layout` prop is used to determine which terms render and in what layout. The prop takes an array of specific module names, the order of these module names determines the order in which they will be rendered. Additionally you can pass arrays of modules to the array to specify new rows in the display. Options include 'Trending' | 'Suggestions' | 'History' | '_';
+
+The `_` module is used a seperator module to center|left|right justify the other elements in the layout.
 
 ```jsx
-<TermsList controller={controller} layout={['Trending', 'Suggestions', 'History']}/>
+<TermsList controller={controller} layout={[['Trending'], ['Suggestions'], ['History']]}/>
 ```
 
 ### historyTitle
@@ -59,12 +61,4 @@ The `retainTrending` prop will cause the Trending terms to always render.
 
 ```jsx
 <TermsList controller={controller} retainTrending={true}/>
-```
-
-### vertical
-
-The `vertical` prop specifies if the terms should be rendered vertical or not. 
-
-```jsx
-<TermsList controller={controller} vertical={true}/>
 ```

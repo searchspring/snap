@@ -46,7 +46,7 @@ import type { SlideoutProps } from '../components/Molecules/Slideout';
 import type { SortByProps } from '../components/Molecules/SortBy';
 import type { SwatchesProps } from '../components/Molecules/Swatches';
 import type { VariantSelectionProps } from '../components/Molecules/VariantSelection';
-import type { TermsNames, TermsProps } from '../components/Molecules/Terms';
+import type { TermsProps } from '../components/Molecules/Terms';
 
 /* ORGANISMS */
 import type { BranchOverrideProps } from '../components/Organisms/BranchOverride';
@@ -61,7 +61,6 @@ import type { SearchHeaderProps } from '../components/Atoms/SearchHeader';
 import type { SidebarProps } from '../components/Organisms/Sidebar';
 import type { ToolbarProps, ToolbarNames } from '../components/Organisms/Toolbar';
 import type { TermsListProps } from '../components/Organisms/TermsList';
-import type { AutocompleteProps } from '../components/Organisms/Autocomplete';
 
 /* TEMPLATES */
 import type { RecommendationProps } from '../components/Templates/Recommendation';
@@ -173,8 +172,6 @@ export type ThemeComponents = {
 	sidebar: Partial<SidebarProps>;
 	mobileSidebar: Partial<MobileSidebarProps>;
 	toolbar: Partial<ToolbarProps>;
-	//do we need this?
-	// autocomplete: Partial<AutocompleteProps>
 
 	/* TEMPLATES */
 	autocompleteTemplate: Partial<AutocompleteTemplateProps>;
@@ -252,7 +249,7 @@ export type ThemeComponentOverrides =
 	{ [K in UnNamedThemeComponentSelectors<'sortBy'>]?: Partial<SortByProps> } &
 	{ [K in UnNamedThemeComponentSelectors<'swatches'>]?: Partial<SwatchesProps> } &
 	{ [K in UnNamedThemeComponentSelectors<'variantSelection'>]?: Partial<VariantSelectionProps> } &
-	{ [K in NamedThemeComponentSelectors<'terms', TermsNames>]?: Partial<TermsProps> } &
+	{ [K in UnNamedThemeComponentSelectors<'terms'>]?: Partial<TermsProps> } &
 
 	/* ORGANISMS */
 	{ [K in UnNamedThemeComponentSelectors<'branchOverride'>]?: Partial<BranchOverrideProps> } &
@@ -267,7 +264,6 @@ export type ThemeComponentOverrides =
 	{ [K in UnNamedThemeComponentSelectors<'mobileSidebar'>]?: Partial<MobileSidebarProps> } &
 	{ [K in NamedThemeComponentSelectors<'toolbar', ToolbarNames>]?: Partial<ToolbarProps> } &
 	{ [K in UnNamedThemeComponentSelectors<'termsList'>]?: Partial<TermsListProps> } &
-	{ [K in UnNamedThemeComponentSelectors<'autocomplete'>]?: Partial<AutocompleteProps> } &
 
 
 	/* TEMPLATES */
@@ -333,7 +329,7 @@ export type ThemeComponentRestrictedOverrides =
 	{ [K in UnNamedThemeComponentSelectors<'sortBy'>]?: RestrictedComponentProps<SortByProps> } &
 	{ [K in UnNamedThemeComponentSelectors<'swatches'>]?: RestrictedComponentProps<SwatchesProps> } &
 	{ [K in UnNamedThemeComponentSelectors<'variantSelection'>]?: RestrictedComponentProps<VariantSelectionProps> } &
-	{ [K in NamedThemeComponentSelectors<'terms', TermsNames>]?: RestrictedComponentProps<TermsProps> } &
+	{ [K in UnNamedThemeComponentSelectors<'terms'>]?: RestrictedComponentProps<TermsProps> } &
 
 	/* ORGANISMS */
 	{ [K in UnNamedThemeComponentSelectors<'branchOverride'>]?: RestrictedComponentProps<BranchOverrideProps> } &
@@ -348,7 +344,6 @@ export type ThemeComponentRestrictedOverrides =
 	{ [K in UnNamedThemeComponentSelectors<'mobileSidebar'>]?: RestrictedComponentProps<MobileSidebarProps> } &
 	{ [K in NamedThemeComponentSelectors<'toolbar', ToolbarNames>]?: RestrictedComponentProps<ToolbarProps> } &
 	{ [K in UnNamedThemeComponentSelectors<'termsList'>]?: RestrictedComponentProps<TermsListProps> } &
-	{ [K in UnNamedThemeComponentSelectors<'autocomplete'>]?: RestrictedComponentProps<AutocompleteProps> } &
 
 
 	/* TEMPLATES */

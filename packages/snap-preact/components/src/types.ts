@@ -44,6 +44,15 @@ export type ResultComponent<Props extends Record<string, any> = object> = React.
 	} & Props
 >;
 
+export type RecommendationComponentNames =
+	| 'Recommendation'
+	| 'RecommendationGrid'
+	| 'RecommendationBundle'
+	| 'RecommendationBundleEasyAdd'
+	| 'RecommendationBundleList'
+	| 'RecommendationBundleVertical'
+	| 'RecommendationBundle';
+
 export enum ResultsLayout {
 	grid = 'grid',
 	list = 'list',

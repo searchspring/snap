@@ -14,17 +14,18 @@ import { Banner, BannerProps } from '../../Atoms/Merchandising/Banner';
 import { Facets, FacetsProps } from '../../Organisms/Facets';
 import { defined, mergeProps, mergeStyles } from '../../../utilities';
 import { createHoverProps } from '../../../toolbox';
-import { Theme, useTheme, CacheProvider, useSnap } from '../../../providers';
-import { ComponentProps, FacetDisplay, ResultComponent, StyleScript } from '../../../types';
-import { Lang, useA11y, useComponent, useCreateController, useLang } from '../../../hooks';
+import { Theme, useTheme, CacheProvider } from '../../../providers';
+import { ComponentProps, FacetDisplay, RecommendationComponentNames, ResultComponent, StyleScript } from '../../../types';
+import { Lang, useA11y, useLang } from '../../../hooks';
 import { TermsList, TermsListProps } from '../../Organisms/TermsList';
-import { SnapTemplates } from '../../../../../src';
-import { RecommendationProps } from '../Recommendation';
-import { RecommendationGridProps } from '../RecommendationGrid';
+import type { RecommendationProps } from '../Recommendation';
+import type { RecommendationGridProps } from '../RecommendationGrid';
 import { Terms, TermsProps } from '../../Molecules/Terms';
 import { useState } from 'react';
 import { FacetsHorizontal } from '../../Organisms/FacetsHorizontal';
 import { Button, ButtonProps } from '../../Atoms/Button';
+import { cleanUpEmptyDivs } from '../../../hooks/cleanUpEmptyDivs';
+import { createRecommendationTemplate } from '../../../hooks/createRecommendationTemplate';
 
 const defaultStyles: StyleScript<AutocompleteTemplateProps> = ({
 	controller,
@@ -52,15 +53,19 @@ const defaultStyles: StyleScript<AutocompleteTemplateProps> = ({
 	return css({
 		'.ss__autocomplete__column.ss__autocomplete__column--c1': {
 			flex: column1?.width == 'auto' ? '1 1 auto' : `1 0 ${column1?.width}`,
+			maxWidth: column1?.width == 'auto' ? 'auto' : column1?.width,
 		},
 		'.ss__autocomplete__column.ss__autocomplete__column--c2': {
 			flex: column2?.width == 'auto' ? '1 1 auto' : `1 0 ${column2?.width}`,
+			maxWidth: column2?.width == 'auto' ? 'auto' : column2?.width,
 		},
 		'.ss__autocomplete__column.ss__autocomplete__column--c3': {
 			flex: column3?.width == 'auto' ? '1 1 auto' : `1 0 ${column3?.width}`,
+			maxWidth: column3?.width == 'auto' ? 'auto' : column3?.width,
 		},
 		'.ss__autocomplete__column.ss__autocomplete__column--c4': {
 			flex: column4?.width == 'auto' ? '1 1 auto' : `1 0 ${column4?.width}`,
+			maxWidth: column4?.width == 'auto' ? 'auto' : column4?.width,
 		},
 
 		'.ss__autocomplete__column, .ss__autocomplete__row': {
@@ -114,6 +119,9 @@ const defaultStyles: StyleScript<AutocompleteTemplateProps> = ({
 			zIndex: '1',
 		},
 
+		'.ss__autocomplete__terms-wrapper': {
+			width: '100%',
+		},
 		'.ss__autocomplete__facets': {
 			display: 'flex',
 			width: 'auto',
@@ -504,75 +512,21 @@ export const AutocompleteTemplate = observer((properties: AutocompleteTemplatePr
 		controller,
 	});
 
-	/****** Recommendation stuff *********/
-	let recommendationTemplateComponent: FunctionalComponent<{ controller: RecommendationController; name: string }> | undefined;
-	let recommendationTemplateResultComponent: ResultComponent | undefined;
 	let recsController: RecommendationController | undefined;
+	let RecommendationTemplateComponent: FunctionalComponent<RecommendationProps | RecommendationGridProps> | undefined;
+
+	let RecommendationTemplateResultComponent: ResultComponent | undefined;
 
 	if (templates?.recommendation?.enabled) {
-		const componentName = templates?.recommendation?.component || 'Recommendation';
-		const snap = useSnap() as SnapTemplates;
+		const recs = createRecommendationTemplate(templates, properties.theme);
 
-		if (snap?.templates) {
-			const themeName = properties.theme?.name;
-			let defaultResultComponentFromTheme;
-			if (themeName) {
-				defaultResultComponentFromTheme = snap?.templates?.config.themes[themeName]?.resultComponent;
-			}
-
-			const resultComponentName = (templates?.recommendation?.resultComponent || defaultResultComponentFromTheme) as string;
-			const mergedConfig = Object.assign(
-				{
-					id: '',
-					tag: 'no-results',
-					branch: 'production',
-				},
-				templates.recommendation!.config
-			);
-			mergedConfig.id = mergedConfig.id || `search-${mergedConfig.tag}`;
-
-			recsController = useCreateController<RecommendationController>(snap, 'recommendation', mergedConfig);
-			if (!recsController?.store?.loaded && !recsController?.store?.loading && recsController?.store.error?.type !== 'error') {
-				recsController?.search();
-			}
-
-			if (resultComponentName && snap?.templates?.library.import.component.result) {
-				recommendationTemplateResultComponent = useComponent(snap?.templates?.library.import.component.result, resultComponentName);
-			}
-
-			if (componentName && snap?.templates?.library.import.component.recommendation.default) {
-				recommendationTemplateComponent = useComponent(snap?.templates?.library.import.component.recommendation.default, componentName);
-			}
-		}
-	}
-
-	const RecommendationTemplateComponent = recommendationTemplateComponent as
-		| FunctionalComponent<RecommendationProps | RecommendationGridProps>
-		| undefined;
-
-	const RecommendationTemplateResultComponent = recommendationTemplateResultComponent as ResultComponent | undefined;
-
-	const cleanUpEmptyCols = () => {
-		document.querySelectorAll('.ss__autocomplete__column').forEach((col) => {
-			if (!hasElemsToShow(col)) {
-				col.remove();
-			}
-		});
-	};
-
-	function hasElemsToShow(element: Element) {
-		if (!element.children.length) return true;
-
-		for (const child of element.children as any) {
-			if (child.tagName !== 'DIV' || child.innerHTML.trim() !== '') {
-				return true;
-			}
-		}
-		return false;
+		RecommendationTemplateComponent = recs.RecommendationTemplateComponent;
+		RecommendationTemplateResultComponent = recs.RecommendationTemplateResultComponent;
+		recsController = recs.recsController;
 	}
 
 	useEffect(() => {
-		cleanUpEmptyCols();
+		cleanUpEmptyDivs('.ss__autocomplete__column, .ss__autocomplete__terms-wrapper');
 	});
 
 	const findModule = (module: ModuleNamesWithColumns) => {
@@ -637,8 +591,8 @@ export const AutocompleteTemplate = observer((properties: AutocompleteTemplatePr
 						title: lang.historyTitle,
 					}}
 					terms={controller.store.history}
+					className={'ss__terms-list__terms--history'}
 					{...subProps.terms}
-					name={'history'}
 				/>
 			);
 		}
@@ -650,8 +604,8 @@ export const AutocompleteTemplate = observer((properties: AutocompleteTemplatePr
 						title: lang.trendingTitle,
 					}}
 					terms={controller.store.trending}
+					className={'ss__terms-list__terms--trending'}
 					{...subProps.terms}
-					name={'trending'}
 				/>
 			);
 		}
@@ -663,8 +617,8 @@ export const AutocompleteTemplate = observer((properties: AutocompleteTemplatePr
 						title: lang.termsTitle,
 					}}
 					terms={controller.store.terms}
+					className={'ss__terms-list__terms--suggestions'}
 					{...subProps.terms}
-					name={'suggestions'}
 				/>
 			);
 		}
@@ -756,7 +710,7 @@ export const AutocompleteTemplate = observer((properties: AutocompleteTemplatePr
 			return <Banner {...subProps.banner} content={merchandising.content} type={ContentType.LEFT} name={'left'} />;
 		}
 
-		if (module == 'Button.see-more' && showResults) {
+		if (module == 'Button.see-more' && showResults && search?.query?.string && results.length > 0) {
 			return (
 				<Button {...subProps.button}>
 					<div className="ss__autocomplete__see-more">
@@ -852,7 +806,7 @@ export interface AutocompleteTemplateProps extends ComponentProps {
 	templates?: {
 		recommendation?: {
 			enabled: boolean;
-			component?: 'Recommendation'; // Need a type for allowed recommendation component names (that would exist in the library)
+			component?: RecommendationComponentNames;
 			resultComponent?: string;
 			config?: Partial<RecommendationControllerConfig>;
 		};

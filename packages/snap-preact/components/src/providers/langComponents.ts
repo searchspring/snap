@@ -61,7 +61,6 @@ import type { SidebarLang } from '../components/Organisms/Sidebar';
 // import type { ToolbarLang } from '../components/Organisms/Toolbar';
 
 /* TEMPLATES */
-import type { AutocompleteLang } from '../components/Organisms/Autocomplete';
 // import type { AutocompleteTermsLang } from '../components/Templates/AutocompleteTerms';
 import type { RecommendationLang } from '../components/Templates/Recommendation';
 import type { SearchLang } from '../components/Templates/Search';
@@ -135,7 +134,6 @@ export type LangComponentOverrides = {
 	// toolbar?: Partial<ToolbarLang>
 
 	/* TEMPLATES */
-	autocomplete?: Partial<AutocompleteLang>;
 	// autocompleteTerms?: Partial<AutocompleteTermsLang>;
 	recommendation?: Partial<RecommendationLang>;
 	search?: Partial<SearchLang>;
@@ -207,7 +205,6 @@ export type LangComponents = {
 	// toolbar: ToolbarLang
 
 	/* TEMPLATES */
-	autocomplete: AutocompleteLang;
 	// autocompleteTerms: AutocompleteTermsLang;
 	recommendation: RecommendationLang;
 	search: SearchLang;

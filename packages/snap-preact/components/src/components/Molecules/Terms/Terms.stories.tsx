@@ -7,6 +7,8 @@ import { Terms, TermsProps } from './Terms';
 import Readme from './readme.md';
 import { AutocompleteController } from '@searchspring/snap-controller';
 import { Snapify } from '../../../utilities/snapify';
+import { AutocompleteTermStore } from '@searchspring/snap-store-mobx';
+import { UrlManager } from '@searchspring/snap-url-manager';
 
 export default {
 	title: 'Molecules/Terms',
@@ -101,6 +103,7 @@ export default {
 				type: {
 					summary: 'boolean',
 				},
+				defaultValue: { summary: true },
 			},
 			control: { type: 'boolean' },
 		},
@@ -129,6 +132,7 @@ export default {
 				type: {
 					summary: 'boolean',
 				},
+				defaultValue: { summary: true },
 			},
 			control: { type: 'boolean' },
 		},
@@ -150,10 +154,58 @@ const snapInstance = Snapify.autocomplete({
 });
 
 export const Default = (args: TermsProps, { loaded: { controller } }: { loaded: { controller: AutocompleteController } }) => {
-	setTimeout(() => {
-		controller.bind();
-	});
-	return <Terms {...args} controller={controller} />;
+	const mockTerms: AutocompleteTermStore = [
+		{
+			active: false,
+			preview: () => console.log(''),
+			value: 'dress',
+			url: {
+				href: 'www.dress.com',
+			} as UrlManager,
+		},
+		{
+			active: false,
+			preview: () => console.log(''),
+			value: 'drss',
+			url: {
+				href: 'www.drss.com',
+			} as UrlManager,
+		},
+		{
+			active: false,
+			preview: () => console.log(''),
+			value: 'dreees',
+			url: {
+				href: 'www.dreees.com',
+			} as UrlManager,
+		},
+		{
+			active: false,
+			preview: () => console.log(''),
+			value: 'dres',
+			url: {
+				href: 'www.dres.com',
+			} as UrlManager,
+		},
+		{
+			active: false,
+			preview: () => console.log(''),
+			value: 'dss',
+			url: {
+				href: 'www.dss.com',
+			} as UrlManager,
+		},
+		{
+			active: false,
+			preview: () => console.log(''),
+			value: 'ress',
+			url: {
+				href: 'www.ress.com',
+			} as UrlManager,
+		},
+	];
+
+	return <Terms {...args} controller={controller} terms={mockTerms} />;
 };
 
 Default.loaders = [

@@ -7,6 +7,8 @@ import { TermsList, TermsListProps } from './TermsList';
 import Readme from './readme.md';
 import { AutocompleteController } from '@searchspring/snap-controller';
 import { Snapify } from '../../../utilities/snapify';
+import type { AutocompleteTermStore } from '@searchspring/snap-store-mobx';
+import type { UrlManager } from '@searchspring/snap-url-manager';
 
 export default {
 	title: 'Organisms/TermsList',
@@ -66,12 +68,12 @@ export default {
 			control: { type: 'none' },
 		},
 		layout: {
-			description: 'array of term types to render in specified order',
+			description: 'array of modules to render in specified order',
 			table: {
 				type: {
-					summary: "'History' | 'Trending'| 'Suggestions'",
+					summary: "['History' | 'Trending' | 'Suggestions' | '_']",
 				},
-				defaultValue: { summary: "['Suggestions', 'Trending', 'History']" },
+				defaultValue: { summary: "[['Suggestions'], ['Trending'], ['History']]" },
 			},
 			control: 'array',
 		},
@@ -81,6 +83,7 @@ export default {
 				type: {
 					summary: 'string',
 				},
+				defaultValue: { summary: 'History' },
 			},
 			control: { type: 'text' },
 		},
@@ -90,6 +93,7 @@ export default {
 				type: {
 					summary: 'string',
 				},
+				defaultValue: { summary: 'Suggestions' },
 			},
 			control: { type: 'text' },
 		},
@@ -99,17 +103,9 @@ export default {
 				type: {
 					summary: 'string',
 				},
+				defaultValue: { summary: 'Trending' },
 			},
 			control: { type: 'text' },
-		},
-		vertical: {
-			description: 'boolean to adjust if each terms wrapper should render in a vertical layout',
-			table: {
-				type: {
-					summary: 'boolean',
-				},
-			},
-			control: { type: 'boolean' },
 		},
 		retainHistory: {
 			description: 'boolean to specify if the history terms should always be rendered',
@@ -117,6 +113,7 @@ export default {
 				type: {
 					summary: 'boolean',
 				},
+				defaultValue: { summary: false },
 			},
 			control: { type: 'boolean' },
 		},
@@ -126,6 +123,7 @@ export default {
 				type: {
 					summary: 'boolean',
 				},
+				defaultValue: { summary: false },
 			},
 			control: { type: 'boolean' },
 		},
@@ -147,10 +145,69 @@ const snapInstance = Snapify.autocomplete({
 });
 
 export const Default = (args: TermsListProps, { loaded: { controller } }: { loaded: { controller: AutocompleteController } }) => {
+	const mockTerms: AutocompleteTermStore = [
+		{
+			active: false,
+			preview: () => console.log(''),
+			value: 'dress',
+			url: {
+				href: 'www.dress.com',
+			} as UrlManager,
+		},
+		{
+			active: false,
+			preview: () => console.log(''),
+			value: 'drss',
+			url: {
+				href: 'www.drss.com',
+			} as UrlManager,
+		},
+		{
+			active: false,
+			preview: () => console.log(''),
+			value: 'dreees',
+			url: {
+				href: 'www.dreees.com',
+			} as UrlManager,
+		},
+		{
+			active: false,
+			preview: () => console.log(''),
+			value: 'dres',
+			url: {
+				href: 'www.dres.com',
+			} as UrlManager,
+		},
+		{
+			active: false,
+			preview: () => console.log(''),
+			value: 'dss',
+			url: {
+				href: 'www.dss.com',
+			} as UrlManager,
+		},
+		{
+			active: false,
+			preview: () => console.log(''),
+			value: 'ress',
+			url: {
+				href: 'www.ress.com',
+			} as UrlManager,
+		},
+	];
+
 	setTimeout(() => {
 		controller.bind();
 	});
+
+	controller.store.history = mockTerms;
+
 	return <TermsList {...args} controller={controller} />;
+};
+
+Default.args = {
+	retainHistory: true,
+	retainTrending: true,
 };
 
 Default.loaders = [
