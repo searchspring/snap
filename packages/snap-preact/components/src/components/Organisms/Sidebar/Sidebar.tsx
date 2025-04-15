@@ -72,7 +72,7 @@ export const Sidebar = observer((properties: SidebarProps): JSX.Element => {
 		<CacheProvider>
 			<div {...styling} className={classnames('ss__sidebar', className, { 'ss__sidebar--sticky': sticky })}>
 				{!hideTitleText ? (
-					<h4 className={classnames('ss__sidebar__title-text')} aria-atomic="true" aria-live="polite" {...mergedLang.titleText.all}>
+					<h4 className={classnames('ss__sidebar__title')} aria-atomic="true" aria-live="polite" {...mergedLang.titleText.all}>
 						{titleText}
 					</h4>
 				) : (

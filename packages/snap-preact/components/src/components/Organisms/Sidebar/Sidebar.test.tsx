@@ -58,7 +58,7 @@ describe('Sidebar Component', () => {
 
 	it('renders expected subComponents', () => {
 		const rendered = render(<Sidebar controller={controller} />);
-		const title = rendered.container.querySelector('.ss__sidebar__title-text');
+		const title = rendered.container.querySelector('.ss__sidebar__title');
 		const summary = rendered.container.querySelector('.ss__filter-summary');
 		const sortby = rendered.container.querySelector('.ss__sortby__select');
 		const perpage = rendered.container.querySelector('.ss__per-page__select');
@@ -75,7 +75,7 @@ describe('Sidebar Component', () => {
 			<Sidebar controller={controller} hideTitleText={true} layout={[['FilterSummary'], ['SortBy', 'PerPage'], ['Facets'], ['Banner.left']]} />
 		);
 		const element = rendered.container.querySelector('.ss__sidebar');
-		const title = rendered.container.querySelector('.ss__sidebar__title-text');
+		const title = rendered.container.querySelector('.ss__sidebar__title');
 		expect(element).toBeInTheDocument();
 		expect(title).not.toBeInTheDocument();
 	});
@@ -83,14 +83,14 @@ describe('Sidebar Component', () => {
 	it('has expected default titleText', () => {
 		const text = 'Filters';
 		const rendered = render(<Sidebar controller={controller} />);
-		const title = rendered.container.querySelector('.ss__sidebar__title-text');
+		const title = rendered.container.querySelector('.ss__sidebar__title');
 		expect(title?.innerHTML).toBe(text);
 	});
 
 	it('can change titleText', () => {
 		const text = 'title text';
 		const rendered = render(<Sidebar controller={controller} titleText={text} />);
-		const title = rendered.container.querySelector('.ss__sidebar__title-text');
+		const title = rendered.container.querySelector('.ss__sidebar__title');
 		expect(title?.innerHTML).toBe(text);
 	});
 

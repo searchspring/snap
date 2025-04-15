@@ -1,7 +1,7 @@
 const config = {
 	url: 'https://localhost:2222/templates',
 	selectors: {
-		sidebarTitleElem: '.ss__sidebar__title-text',
+		sidebarTitleElem: '.ss__sidebar__title',
 		titleElem: '.ss__search-header__title.ss__search-header__title--results',
 	},
 };
