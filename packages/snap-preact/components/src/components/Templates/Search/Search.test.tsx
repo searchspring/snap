@@ -306,6 +306,25 @@ describe('Search Template Component', () => {
 		expect(footerBanner).not.toBeInTheDocument();
 	});
 
+	it('renders with custom resultComponent', () => {
+		const customResultClass = 'customResult';
+		const customResultComponent = (props: any) => {
+			const { result } = props;
+			return <div className={customResultClass}>{result.id}</div>;
+		};
+
+		const rendered = render(<Search controller={controller} resultComponent={customResultComponent} />);
+
+		const element = rendered.container.querySelector('.ss__search');
+		const results = rendered.container.querySelectorAll(`.${customResultClass}`);
+
+		expect(element).toBeInTheDocument();
+		expect(results).toHaveLength(controller.store.results.length);
+		results.forEach((result, idx) => {
+			expect(result.textContent).toBe(controller.store.results[idx].id);
+		});
+	});
+
 	it('renders with classname', () => {
 		const className = 'classy';
 		const rendered = render(<Search controller={controller} className={className} />);

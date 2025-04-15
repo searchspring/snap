@@ -149,6 +149,22 @@ The following props are available to be used within your custom component: `resu
 <Autocomplete controller={controller} input={'#searchInput'} resultsSlot={<CustomResultsComponent />} />
 ```
 
+### resultComponent
+The `resultComponent` prop specifies a custom result component to render.
+
+```jsx
+
+const CustomResult = ({
+	controller 
+	result
+	theme
+}) => {
+	return <div>{result.mappings.core?.name}</div>
+}
+
+<Autocomplete controller={controller} input={'#searchInput'} resultComponent={CustomResult} />
+```
+
 ### noResultsSlot
 The `noResultsSlot` prop accepts a custom JSX element to render instead of the default no results section. 
 

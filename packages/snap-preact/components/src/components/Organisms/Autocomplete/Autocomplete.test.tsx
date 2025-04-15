@@ -435,6 +435,38 @@ describe('Autocomplete Component', () => {
 		});
 	});
 
+	it('renders with custom resultComponent', async () => {
+		const customResultClass = 'customResult';
+		const customResultComponent = (props: any) => {
+			const { result } = props;
+			return <div className={customResultClass}>{result.id}</div>;
+		};
+
+		const controller = createAutocompleteController({ client: clientConfig, controller: acConfig }, { client: mockClient });
+		await controller.bind();
+
+		const args = {
+			controller,
+			input: controller.config.selector,
+			resultComponent: customResultComponent,
+		};
+
+		const input = document.querySelector('.searchspring-ac');
+		(input as HTMLInputElement).focus();
+
+		const rendered = render(<Autocomplete {...args} />, { container });
+
+		await waitFor(() => {
+			const element = rendered.container.querySelector('.ss__autocomplete');
+			const results = rendered.container.querySelectorAll(`.${customResultClass}`);
+
+			expect(element).toBeInTheDocument();
+			expect(results).toHaveLength(controller.store.results.length);
+			results.forEach((result, idx) => {
+				expect(result.textContent).toBe(controller.store.results[idx].id);
+			});
+		});
+	});
 	it('can use retainhistory && retaintrending false', async () => {
 		const mockStorage: {
 			[key: string]: string;
