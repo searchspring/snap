@@ -94,6 +94,14 @@ export default {
 			},
 			control: { type: 'object' },
 		},
+		resultComponent: {
+			description: 'Slot for custom result component',
+			table: {
+				type: {
+					summary: 'component',
+				},
+			},
+		},
 		...componentArgs,
 	},
 };

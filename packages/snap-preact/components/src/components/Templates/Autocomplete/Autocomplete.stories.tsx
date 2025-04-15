@@ -262,6 +262,17 @@ export default {
 			},
 			control: { type: 'text' },
 		},
+		seeMoreButtonText: {
+			defaultValue: 'See ${pagination.totalResults} results for "${search.query?.string}"',
+			description: 'Text to render in the see more button',
+			table: {
+				type: {
+					summary: 'string || function',
+				},
+				defaultValue: { summary: '' },
+			},
+			control: { type: 'text' },
+		},
 		viewportMaxHeight: {
 			defaultValue: false,
 			description: 'Autocomplete fully visible in viewport',
@@ -317,6 +328,14 @@ export default {
 				},
 			},
 			control: { type: 'none' },
+		},
+		resultComponent: {
+			description: 'Slot for custom result component',
+			table: {
+				type: {
+					summary: 'component',
+				},
+			},
 		},
 		noResultsSlot: {
 			description: 'Slot for custom no-results component.',

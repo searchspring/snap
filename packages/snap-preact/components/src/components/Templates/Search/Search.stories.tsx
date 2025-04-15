@@ -129,6 +129,14 @@ export default {
 			},
 			control: { type: 'boolean' },
 		},
+		resultComponent: {
+			description: 'Slot for custom result component',
+			table: {
+				type: {
+					summary: 'component',
+				},
+			},
+		},
 		...componentArgs,
 	},
 };

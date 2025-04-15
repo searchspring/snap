@@ -107,6 +107,14 @@ export default {
 			},
 			control: { type: 'none' },
 		},
+		resultComponent: {
+			description: 'Slot for custom result component',
+			table: {
+				type: {
+					summary: 'component',
+				},
+			},
+		},
 		controller: {
 			description: 'Controller reference',
 			table: {

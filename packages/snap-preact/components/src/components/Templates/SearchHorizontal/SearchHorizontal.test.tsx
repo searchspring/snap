@@ -119,6 +119,25 @@ describe('SearchHorizontal Template Component', () => {
 		expect(bottomToolBar).not.toBeInTheDocument();
 	});
 
+	it('renders with custom resultComponent', () => {
+		const customResultClass = 'customResult';
+		const customResultComponent = (props: any) => {
+			const { result } = props;
+			return <div className={customResultClass}>{result.id}</div>;
+		};
+
+		const rendered = render(<SearchHorizontal controller={controller} resultComponent={customResultComponent} />);
+
+		const element = rendered.container.querySelector('.ss__search-horizontal');
+		const results = rendered.container.querySelectorAll(`.${customResultClass}`);
+
+		expect(element).toBeInTheDocument();
+		expect(results).toHaveLength(controller.store.results.length);
+		results.forEach((result, idx) => {
+			expect(result.textContent).toBe(controller.store.results[idx].id);
+		});
+	});
+
 	it('renders with classname', () => {
 		const className = 'classy';
 		const rendered = render(<SearchHorizontal controller={controller} className={className} />);

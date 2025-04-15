@@ -349,7 +349,7 @@ describe('Autocomplete Component', () => {
 		});
 	});
 
-	it('can set custom titles, such as termsTitle, facetsTitle, contentTitle, & historyTitle', async () => {
+	it('can set custom titles, such as termsTitle, facetsTitle, contentTitle, historyTitle & seeMoreButtonText', async () => {
 		const mockStorage: {
 			[key: string]: string;
 		} = {};
@@ -371,6 +371,7 @@ describe('Autocomplete Component', () => {
 			facetsTitle: 'custom facetsTitle',
 			contentTitle: 'custom contentTitle',
 			historyTitle: 'custom histoyTitle',
+			seeMoreButtonText: 'expand search',
 			retainHistory: true,
 			retainTrending: true,
 		};
@@ -396,9 +397,76 @@ describe('Autocomplete Component', () => {
 
 			const trendingTitle = rendered.container.querySelector('.ss__autocomplete__title--trending');
 			expect(trendingTitle).toHaveTextContent(args.trendingTitle);
+
+			const seeMoreElem = rendered.container.querySelector('.ss__autocomplete__content__info');
+			expect(seeMoreElem).toHaveTextContent(args.seeMoreButtonText);
 		});
 	});
 
+	it('seeMoreButtonText accepts a function', async () => {
+		const mockStorage: {
+			[key: string]: string;
+		} = {};
+		global.Storage.prototype.setItem = jest.fn((key, value) => {
+			mockStorage[key] = value;
+		});
+		global.Storage.prototype.getItem = jest.fn((key) => mockStorage[key]);
+		const historyData = ['dress', 'sleep', 'shirt', 'sandal', 'shoes'];
+		global.localStorage.setItem(`ss-history`, JSON.stringify({ history: JSON.stringify(historyData) }));
+
+		const controller = createAutocompleteController({ client: clientConfig, controller: acConfig }, { client: mockClient });
+		await controller.bind();
+
+		const args = {
+			controller,
+			input: controller.config.selector,
+			seeMoreButtonText: (controller: any) => `${controller.id} expand search`,
+		};
+
+		const input = document.querySelector('.searchspring-ac') as HTMLInputElement;
+		input.focus();
+		input.value = 'dress';
+
+		const rendered = render(<Autocomplete {...args} />, { container });
+
+		await waitFor(() => {
+			const seeMoreElem = rendered.container.querySelector('.ss__autocomplete__content__info');
+			expect(seeMoreElem).toHaveTextContent(`${controllerConfigId} expand search`);
+		});
+	});
+
+	it('renders with custom resultComponent', async () => {
+		const customResultClass = 'customResult';
+		const customResultComponent = (props: any) => {
+			const { result } = props;
+			return <div className={customResultClass}>{result.id}</div>;
+		};
+
+		const controller = createAutocompleteController({ client: clientConfig, controller: acConfig }, { client: mockClient });
+		await controller.bind();
+
+		const args = {
+			controller,
+			input: controller.config.selector,
+			resultComponent: customResultComponent,
+		};
+
+		const input = document.querySelector('.searchspring-ac');
+		(input as HTMLInputElement).focus();
+
+		const rendered = render(<Autocomplete {...args} />, { container });
+
+		await waitFor(() => {
+			const element = rendered.container.querySelector('.ss__autocomplete');
+			const results = rendered.container.querySelectorAll(`.${customResultClass}`);
+
+			expect(element).toBeInTheDocument();
+			expect(results).toHaveLength(controller.store.results.length);
+			results.forEach((result, idx) => {
+				expect(result.textContent).toBe(controller.store.results[idx].id);
+			});
+		});
+	});
 	it('can use retainhistory && retaintrending false', async () => {
 		const mockStorage: {
 			[key: string]: string;
@@ -749,7 +817,7 @@ describe('Autocomplete Component', () => {
 			'trendingTerm',
 			'suggestionsTerm',
 			'historyTerm',
-			'contentInfo',
+			'seeMoreButton',
 		];
 
 		//text attributes/values
