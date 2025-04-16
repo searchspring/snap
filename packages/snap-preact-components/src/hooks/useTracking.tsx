@@ -9,18 +9,15 @@ interface UseTrackingProps {
 }
 
 export function useTracking({ controller, result }: UseTrackingProps): { trackingRef: MutableRef<HTMLElement | null> } {
-	const trackingRef = useRef<HTMLElement | null>(null);
-
 	if (!controller) {
 		console.warn('Warning: No controller provided to useTracking');
-		return { trackingRef };
 	}
 
 	if (!result) {
 		console.warn('Warning: No result provided to useTracking');
-		return { trackingRef };
 	}
 
+	const trackingRef = useRef<HTMLElement | null>(null);
 	const resultInViewport = useIntersectionAdvanced(trackingRef, {
 		fireOnce: true,
 		threshold: 0.75,

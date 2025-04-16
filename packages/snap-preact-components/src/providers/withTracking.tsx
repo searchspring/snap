@@ -16,12 +16,10 @@ export function withTracking<Props extends WithTrackingProps>(WrappedComponent: 
 
 		if (!controller) {
 			console.warn('Warning: No controller provided to withTracking');
-			return null;
 		}
 
 		if (!result) {
 			console.warn('Warning: No result provided to withTracking');
-			return null;
 		}
 
 		const trackingRef = useRef<HTMLElement>(null);
@@ -33,8 +31,8 @@ export function withTracking<Props extends WithTrackingProps>(WrappedComponent: 
 
 		if (resultInViewport) {
 			// TODO: add support for disabling tracking events via config like in ResultTracker
-			if (result.type === 'product') {
-				controller?.track.product.impression(result);
+			if (result?.type === 'product') {
+				controller?.track.product.impression(result as Product);
 			} else {
 				// track banner in future
 			}
@@ -43,7 +41,7 @@ export function withTracking<Props extends WithTrackingProps>(WrappedComponent: 
 		const currentRef = trackingRef.current;
 		if (currentRef) {
 			const handleClick = (e: MouseEvent) => {
-				controller?.track.product.click(e, result);
+				controller?.track.product.click(e, result as Product);
 			};
 			currentRef.setAttribute('sstracking', 'true');
 			currentRef.removeEventListener('click', handleClick);
