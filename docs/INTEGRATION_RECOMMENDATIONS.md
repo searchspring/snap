@@ -124,7 +124,7 @@ The examples below assume the `similar` profile has been setup in the Searchspri
 	};
 	profiles = [
 		{
-			tag: 'similar',
+			tag: 'customers-also-viewed',
 			selector: '.ss__recs__similar'
 		}
 	];
