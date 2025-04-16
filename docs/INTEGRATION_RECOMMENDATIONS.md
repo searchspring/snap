@@ -115,7 +115,7 @@ Here's an example that demonstrates deduping:
 
 The examples below assume the `similar` profile has been setup in the Searchspring Management Console (SMC), and that a Snap `bundle.js` script exists on the page and has been configured with a `RecommendationInstantiator`.
 
-`similar` profiles display products similar to the product passed in via the `products` global context variable.
+A typical "similar" profile displays products similar to the product passed in via the `products` global context variable.
 
 ```html
 <script type="searchspring/recommendations">
