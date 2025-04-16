@@ -9,7 +9,6 @@ import type { RecommendationControllerConfig, ControllerServices, ContextVariabl
 import type { Item, Product as BeaconProduct, RecommendationsAddtocartSchemaData, RecommendationsSchemaData } from '@searchspring/beacon';
 import type { Next } from '@searchspring/snap-event-manager';
 
-// TODO: change return types to void
 type RecommendationTrackMethods = {
 	product: {
 		clickThrough: (e: MouseEvent, result: Product) => void;

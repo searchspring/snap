@@ -484,11 +484,13 @@ describe('Tracker', () => {
 
 		tracker.track.error(errorData);
 
+		const { message, stack, ...details } = errorData;
+
 		expect(eventsSpy).toHaveBeenCalledWith({
 			data: {
-				message: errorData.message,
-				stack: errorData.stack,
-				details: errorData.details,
+				message,
+				stack,
+				details,
 			},
 			siteId: undefined,
 		});

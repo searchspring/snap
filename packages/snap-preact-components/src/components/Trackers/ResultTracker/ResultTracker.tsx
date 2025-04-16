@@ -39,12 +39,9 @@ export const ResultTracker = observer((properties: ResultTrackerProps): JSX.Elem
 	};
 	const resultRef = useRef(null);
 	const resultInViewport = useIntersectionAdvanced(resultRef, {
-		key: result.id,
-		rootMargin: '0px',
 		fireOnce: true,
 		threshold: 0.75,
-		startDelay: 2000, // TODO: look into dynamically setting this to a lower value for first row of products
-		minVisibleTime: 150,
+		minVisibleTime: 1000,
 	});
 	if (resultInViewport && mergedTrack.impression) {
 		if (result.type === 'product') {
@@ -63,13 +60,10 @@ export const ResultTracker = observer((properties: ResultTrackerProps): JSX.Elem
 
 	return (
 		<div
-			key={result.id}
 			className={classnames('ss__result-tracker', `ss__${controller?.type}-result-tracker`, className)}
 			onClick={(e: any) => {
-				if (mergedTrack.click) {
-					if (result.type === 'product') {
-						controller?.track.product.click(e, result as Product);
-					}
+				if (result.type === 'product' && mergedTrack.click) {
+					controller?.track.product.click(e, result as Product);
 				}
 			}}
 			ref={resultRef}
