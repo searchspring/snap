@@ -221,7 +221,7 @@ export type RecommendationProps = {
 	controller: RecommendationController;
 	title?: JSX.Element | string;
 	hideTitle?: boolean;
-	breakpoints?: BreakpointsProps | false;
+	breakpoints?: BreakpointsProps;
 	prevButton?: JSX.Element | string;
 	nextButton?: JSX.Element | string;
 	hideButtons?: boolean;
