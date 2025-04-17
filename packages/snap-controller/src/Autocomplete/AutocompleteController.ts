@@ -121,6 +121,8 @@ export class AutocompleteController extends AbstractController {
 					this.events.product[result.id].render = true;
 				});
 				this.eventManager.fire('track.product.render', { controller: this, products, trackEvent: data });
+				// reset events for new search
+				this.events = { product: {} };
 			}
 		});
 
@@ -622,9 +624,6 @@ export class AutocompleteController extends AbstractController {
 			if (!this.initialized) {
 				await this.init();
 			}
-
-			// reset events for new search
-			this.events = { product: {} };
 
 			// if urlManager has no query, there will be no need to get params and no query
 			if (!this.urlManager.state.query) {

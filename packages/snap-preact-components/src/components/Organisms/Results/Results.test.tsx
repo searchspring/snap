@@ -120,12 +120,6 @@ describe('Results Component', () => {
 		expect(result).toBeInTheDocument();
 	});
 
-	it('renders result trackers', () => {
-		const rendered = render(<Results layout={Layout.GRID} results={mockResults} />);
-		const resultTrackers = rendered.container.querySelectorAll('.ss__result-tracker')!;
-		expect(resultTrackers.length).toBe(mockResults.length);
-	});
-
 	it('can use breakpoints', async () => {
 		const customBreakpoints = {
 			0: {

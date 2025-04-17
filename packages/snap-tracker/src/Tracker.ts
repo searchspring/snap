@@ -188,7 +188,6 @@ export class Tracker extends Beacon {
 	}
 
 	track: TrackMethods = {
-		// TODO: search where this is used and remove unwanted fields from type
 		error: (data: TrackErrorEvent, siteId?: string): undefined => {
 			if (this.doNotTrack?.includes('error') || this.mode === AppMode.development) {
 				return;
@@ -198,7 +197,7 @@ export class Tracker extends Beacon {
 				// no console log
 				return;
 			}
-			const { stack, message, details } = data;
+			const { stack, message, ...details } = data;
 			const { pageUrl } = this.getContext();
 
 			// prevent sending of errors when on localhost or CDN
