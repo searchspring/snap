@@ -42,10 +42,17 @@ export const Recommendation = observer((properties: RecommendationProps): JSX.El
 		title: properties.controller?.store?.profile?.display?.templateParameters?.title,
 	};
 
-	let props = mergeProps('recommendation', globalTheme, defaultProps, properties);
+	//mergeprops only uses names that are passed via properties, so this cannot be put in the defaultProps
+	const _properties = {
+		name: properties.controller?.store?.profile?.tag ? properties.controller?.store?.profile?.tag.toLowerCase() : undefined,
+		...properties,
+	};
+
+	let props = mergeProps('recommendation', globalTheme, defaultProps, _properties);
 	let displaySettings;
 
-	if (!properties.theme?.name && props.breakpoints) {
+	//no breakpoint props allowed in templates
+	if (!(properties.theme?.name || globalTheme.name) && props.breakpoints) {
 		// breakpoint settings are calculated in ThemeStore for snap templates
 
 		displaySettings = useDisplaySettings(props.breakpoints);
@@ -63,7 +70,6 @@ export const Recommendation = observer((properties: RecommendationProps): JSX.El
 		title,
 		controller,
 		children,
-		breakpoints,
 		loop,
 		results,
 		pagination,
@@ -76,6 +82,7 @@ export const Recommendation = observer((properties: RecommendationProps): JSX.El
 		style: _,
 		styleScript: __,
 		themeStyleScript: ___,
+		breakpoints: ____,
 		lazyRender,
 		vertical,
 		hideTitle,
@@ -165,10 +172,8 @@ export const Recommendation = observer((properties: RecommendationProps): JSX.El
 							hideButtons={hideButtons}
 							loop={loop}
 							pagination={pagination}
-							breakpoints={breakpoints}
 							{...subProps.carousel}
 							{...additionalProps}
-							{...displaySettings}
 						>
 							{Array.isArray(children) && children.length
 								? children.map((child: any, idx: number) => (
@@ -216,7 +221,7 @@ export type RecommendationProps = {
 	controller: RecommendationController;
 	title?: JSX.Element | string;
 	hideTitle?: boolean;
-	breakpoints?: BreakpointsProps;
+	breakpoints?: BreakpointsProps | false;
 	prevButton?: JSX.Element | string;
 	nextButton?: JSX.Element | string;
 	hideButtons?: boolean;

@@ -22,8 +22,32 @@ const recommendationBundleStyleScript = ({ theme }: any) => {
 export const recommendationBundle: ThemeComponentProps<RecommendationBundleProps> = {
 	default: {
 		themeStyleScript: recommendationBundleStyleScript,
+		carousel: {
+			slidesPerView: 4,
+			slidesPerGroup: 4,
+			spaceBetween: 10,
+		},
 	},
-	mobile: {},
-	tablet: {},
-	desktop: {},
+	mobile: {
+		carousel: {
+			slidesPerView: 2,
+			slidesPerGroup: 2,
+			spaceBetween: 10,
+		},
+		ctaInline: false,
+	},
+	tablet: {
+		carousel: {
+			slidesPerView: 3,
+			slidesPerGroup: 3,
+			spaceBetween: 10,
+		},
+	},
+	desktop: {
+		carousel: {
+			slidesPerView: 4,
+			slidesPerGroup: 4,
+			spaceBetween: 10,
+		},
+	},
 };

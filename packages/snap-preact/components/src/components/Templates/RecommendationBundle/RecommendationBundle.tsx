@@ -8,7 +8,7 @@ import { Carousel, CarouselProps as CarouselProps } from '../../Molecules/Carous
 import { Result, ResultProps } from '../../Molecules/Result';
 import { defined, mergeProps, cloneWithProps, mergeStyles } from '../../../utilities';
 import { Theme, useTheme, CacheProvider } from '../../../providers';
-import { ComponentProps, BreakpointsProps, ResultComponent, StyleScript } from '../../../types';
+import { ComponentProps, BreakpointsProps, ResultComponent, StyleScript, BreakpointsEntry } from '../../../types';
 import { useDisplaySettings } from '../../../hooks/useDisplaySettings';
 import { RecommendationProfileTracker } from '../../Trackers/Recommendation/ProfileTracker';
 import { RecommendationResultTracker } from '../../Trackers/Recommendation/ResultTracker';
@@ -165,9 +165,18 @@ export const RecommendationBundle = observer((properties: RecommendationBundlePr
 		...properties.theme?.components?.recommendationBundle,
 	};
 
-	let props = mergeProps('recommendationBundle', globalTheme, defaultProps, properties);
+	//mergeprops only uses names that are passed via properties, so this cannot be put in the defaultProps
+	const _properties = {
+		name: properties.controller?.store?.profile?.display?.template?.component
+			? properties.controller?.store?.profile?.display?.template?.component.toLowerCase()
+			: undefined,
+		...properties,
+	};
+
+	let props = mergeProps('recommendationBundle', globalTheme, defaultProps, _properties);
+
 	let displaySettings;
-	if (!properties.theme?.name) {
+	if (!(properties.theme?.name || globalTheme.name)) {
 		displaySettings = useDisplaySettings(props.breakpoints!);
 		if (displaySettings && Object.keys(displaySettings).length) {
 			const theme = deepmerge(props?.theme || {}, displaySettings?.theme || {}, { arrayMerge: (destinationArray, sourceArray) => sourceArray });
@@ -306,9 +315,7 @@ export const RecommendationBundle = observer((properties: RecommendationBundlePr
 	const modifiedBreakpoints: BreakpointsProps = { ...breakpoints };
 
 	if (carouselEnabled) {
-		Object.keys(props.breakpoints!).forEach((breakpoint: any) => {
-			const obj = props.breakpoints![breakpoint];
-
+		const adjustSlides = (obj: BreakpointsEntry) => {
 			// fallback in case slides per view/group were not provided in breakpoint...
 			const objSlidesPerView = obj.carousel?.slidesPerView || obj.slidesPerView || 2;
 			const objSlidesPerGroup = obj.carousel?.slidesPerGroup || obj.slidesPerGroup || 2;
@@ -329,12 +336,37 @@ export const RecommendationBundle = observer((properties: RecommendationBundlePr
 				}
 			}
 
-			modifiedBreakpoints[breakpoint] = {
-				...modifiedBreakpoints[breakpoint],
+			return {
 				slidesPerView: newSlidesPerView,
 				slidesPerGroup: newSlidesPerGroup,
 			};
-		});
+		};
+
+		//no breakpoint props allowed in templates
+		if (!(properties.theme?.name || globalTheme.name)) {
+			Object.keys(props.breakpoints!).forEach((breakpoint: any) => {
+				const obj = props.breakpoints![breakpoint];
+
+				const { slidesPerView: AdjustedSlidesPerView, slidesPerGroup: AdjustedSlidesPerGroup } = adjustSlides(obj);
+
+				modifiedBreakpoints[breakpoint] = {
+					...modifiedBreakpoints[breakpoint],
+					slidesPerView: AdjustedSlidesPerView,
+					slidesPerGroup: AdjustedSlidesPerGroup,
+				};
+			});
+		} else {
+			const { slidesPerView: AdjustedSlidesPerView, slidesPerGroup: AdjustedSlidesPerGroup } = adjustSlides({
+				...mergedCarouselProps,
+				slidesPerView: slidesPerView,
+			});
+
+			displaySettings = {
+				...mergedCarouselProps,
+				slidesPerView: AdjustedSlidesPerView,
+				slidesPerGroup: AdjustedSlidesPerGroup,
+			};
+		}
 	}
 
 	const onProductSelect = (product: Product) => {

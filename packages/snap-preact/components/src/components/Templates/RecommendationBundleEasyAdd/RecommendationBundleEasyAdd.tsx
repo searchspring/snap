@@ -19,7 +19,15 @@ export const RecommendationBundleEasyAdd = observer((properties: RecommendationB
 	const globalTheme: Theme = useTheme();
 	const defaultProps: Partial<RecommendationBundleEasyAddProps> = {};
 
-	const props = mergeProps('recommendationBundleEasyAdd', globalTheme, defaultProps, properties);
+	//mergeprops only uses names that are passed via properties, so this cannot be put in the defaultProps
+	const _properties = {
+		name: properties.controller?.store?.profile?.display?.template?.component
+			? properties.controller?.store?.profile?.display?.template?.component.toLowerCase()
+			: undefined,
+		...properties,
+	};
+
+	const props = mergeProps('recommendationBundleEasyAdd', globalTheme, defaultProps, _properties);
 
 	const { treePath, disableStyles, controller, style: _, styleScript: __, themeStyleScript: ___, ...additionalProps } = props;
 
