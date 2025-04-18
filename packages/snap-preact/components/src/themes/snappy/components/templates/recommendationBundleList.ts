@@ -10,6 +10,17 @@ import type { RecommendationBundleListProps } from '../../../../components/Templ
 export const recommendationBundleList: ThemeComponentProps<RecommendationBundleListProps> = {
 	default: {
 		// themeStyleScript: recommendationBundleListStyleScript,
+		theme: {
+			components: {
+				recommendationBundle: {
+					ctaInline: false,
+					carousel: {
+						enabled: false,
+						seedInCarousel: true,
+					},
+				},
+			},
+		},
 	},
 	mobile: {},
 	tablet: {},
