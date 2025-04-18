@@ -5,9 +5,11 @@ import type { FilterSummaryProps } from '../../../../components/Organisms/Filter
 const filterSummaryStyleScript = ({ theme }: FilterSummaryProps) => {
 	const variables = theme?.variables;
 	return css({
-		'& .ss__filter-summary__title': {
+		margin: '0 0 20px',
+		'.ss__filter-summary__title': {
 			fontWeight: 'bold',
-			color: variables?.colors?.secondary,
+			color: variables?.colors?.primary,
+			fontSize: 'inherit',
 		},
 	});
 };
@@ -16,6 +18,7 @@ const filterSummaryStyleScript = ({ theme }: FilterSummaryProps) => {
 export const filterSummary: ThemeComponentProps<FilterSummaryProps> = {
 	default: {
 		themeStyleScript: filterSummaryStyleScript,
+		title: 'Applied Filters',
 	},
 	mobile: {},
 	tablet: {},

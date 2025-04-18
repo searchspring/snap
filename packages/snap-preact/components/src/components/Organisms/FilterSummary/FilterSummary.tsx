@@ -16,10 +16,15 @@ import deepmerge from 'deepmerge';
 
 const defaultStyles: StyleScript<FilterSummaryProps> = () => {
 	return css({
-		display: 'flex',
-		gap: '0.5em',
-		'& .ss__filter-summary__title': {
+		'.ss__filter-summary__title': {
 			fontSize: '1.2em',
+			padding: '6px 0',
+		},
+		'.ss__filter-summary__filters': {
+			margin: '5px 0',
+			display: 'flex',
+			gap: '10px',
+			flexWrap: 'wrap',
 		},
 	});
 };
@@ -99,24 +104,26 @@ export const FilterSummary = observer((properties: FilterSummaryProps): JSX.Elem
 			<div {...styling} className={classnames('ss__filter-summary', className)}>
 				{!hideTitle && <div className="ss__filter-summary__title" {...mergedLang.title?.all}></div>}
 
-				{filters.map((filter) => (
-					<Filter {...subProps.filter} filter={filter} onClick={(e) => onClick && onClick(e, filter)} />
-				))}
+				<div className="ss__filter-summary__filters">
+					{filters.map((filter) => (
+						<Filter {...subProps.filter} filter={filter} onClick={(e) => onClick && onClick(e, filter)} />
+					))}
 
-				{!hideClearAll && (
-					<Filter
-						{...subProps.filter}
-						name={'clear-all'}
-						icon={clearAllIcon}
-						className={`${subProps?.filter?.className} ss__filter-summary__clear-all`}
-						hideFacetLabel
-						valueLabel={clearAllLabel}
-						onClick={(e) => onClearAllClick && onClearAllClick(e)}
-						lang={{
-							filter: { attributes: { 'aria-label': clearAllLabel } },
-						}}
-					/>
-				)}
+					{!hideClearAll && (
+						<Filter
+							{...subProps.filter}
+							name={'clear-all'}
+							icon={clearAllIcon}
+							className={`${subProps?.filter?.className} ss__filter-summary__clear-all`}
+							hideFacetLabel
+							valueLabel={clearAllLabel}
+							onClick={(e) => onClearAllClick && onClearAllClick(e)}
+							lang={{
+								filter: { attributes: { 'aria-label': clearAllLabel } },
+							}}
+						/>
+					)}
+				</div>
 			</div>
 		</CacheProvider>
 	) : (

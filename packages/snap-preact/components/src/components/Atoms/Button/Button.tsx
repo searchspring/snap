@@ -164,4 +164,4 @@ export interface ButtonLang {
 	button?: Lang<never>;
 }
 
-export type ButtonNames = 'close' | 'apply' | 'clear' | 'slideout' | 'filter-toggle';
+export type ButtonNames = 'close' | 'apply' | 'clear' | 'slideout' | 'sidebar-toggle' | 'sidebar-close';

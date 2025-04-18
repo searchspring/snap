@@ -20,6 +20,7 @@ const sidebarStyleScript = ({ theme }: SidebarProps) => {
 export const sidebar: ThemeComponentProps<SidebarProps> = {
 	default: {
 		themeStyleScript: sidebarStyleScript,
+		hideTitleText: true,
 	},
 	mobile: {},
 	tablet: {},

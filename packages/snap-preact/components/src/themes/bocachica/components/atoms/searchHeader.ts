@@ -22,6 +22,7 @@ const searchHeaderStyleScript = ({ theme }: SearchHeaderProps) => {
 export const searchHeader: ThemeComponentProps<SearchHeaderProps> = {
 	default: {
 		themeStyleScript: searchHeaderStyleScript,
+		titleText: (data) => `Search Results${data.search?.query?.string ? ` for "${data.search.query.string}"` : ''}`,
 	},
 	mobile: {},
 	tablet: {},

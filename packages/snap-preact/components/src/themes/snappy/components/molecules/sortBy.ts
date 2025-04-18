@@ -56,6 +56,7 @@ export const sortBy: ThemeComponentProps<SortByProps> = {
 			components: {
 				select: {
 					hideSelection: true,
+					separator: '',
 				},
 			},
 		},
