@@ -433,10 +433,10 @@ describe('Search Controller', () => {
 		expect(searchfn).toHaveBeenCalledTimes(1);
 
 		await controller.search();
-		expect(searchfn).toHaveBeenCalledTimes(1); // a 2nd search is called due to redirectResponse setting (store.loaded)
+		expect(searchfn).toHaveBeenCalledTimes(1); // a 2nd search call should not make a search. redirectResponseno is no longer part of cache key
 
 		await controller.search();
-		expect(searchfn).toHaveBeenCalledTimes(1); // should not search again
+		expect(searchfn).toHaveBeenCalledTimes(1); // additional calls should not make a search.
 		searchfn.mockClear();
 	});
 

@@ -44,7 +44,6 @@ export function withTracking<Props extends WithTrackingProps>(WrappedComponent: 
 				controller?.track.product.click(e, result as Product);
 			};
 			currentRef.setAttribute('sstracking', 'true');
-			currentRef.removeEventListener('click', handleClick);
 			currentRef.addEventListener('click', handleClick);
 		}
 
