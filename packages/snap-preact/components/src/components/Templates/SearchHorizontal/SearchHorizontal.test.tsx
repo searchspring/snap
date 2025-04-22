@@ -83,29 +83,6 @@ describe('SearchHorizontal Template Component', () => {
 		expect(dropdown).not.toBeInTheDocument();
 	});
 
-	it('renders with merchandising banners', async () => {
-		mockClient.mockData.updateConfig({ search: 'merchandising' });
-		await controller.search();
-
-		const rendered = render(<SearchHorizontal controller={controller} />);
-
-		const element = rendered.container.querySelector('.ss__search-horizontal');
-		const banners = rendered.container.querySelectorAll('.ss__banner');
-		const headerBanner = rendered.container.querySelector('.ss__banner--header');
-		const leftBanner = rendered.container.querySelector('.ss__banner--left');
-		const bannerBanner = rendered.container.querySelector('.ss__banner--banner');
-		const footerBanner = rendered.container.querySelector('.ss__banner--footer');
-
-		expect(element).toBeInTheDocument();
-		expect(banners).toHaveLength(3);
-		expect(headerBanner).toBeInTheDocument();
-		expect(bannerBanner).toBeInTheDocument();
-		expect(footerBanner).toBeInTheDocument();
-		expect(leftBanner).not.toBeInTheDocument(); // left banner is not supported in horizontal search
-
-		mockClient.mockData.updateConfig({ search: 'default' });
-	});
-
 	it('can hide hideSearchHeader', async () => {
 		mockClient.mockData.updateConfig({ search: 'merchandising' });
 		await controller.search();
@@ -140,19 +117,6 @@ describe('SearchHorizontal Template Component', () => {
 
 		expect(element).toBeInTheDocument();
 		expect(bottomToolBar).not.toBeInTheDocument();
-	});
-
-	it('can hide all merchandising banners', async () => {
-		mockClient.mockData.updateConfig({ search: 'merchandising' });
-		await controller.search();
-
-		const rendered = render(<SearchHorizontal controller={controller} hideMerchandisingBanners />);
-
-		const element = rendered.container.querySelector('.ss__search-horizontal');
-		const banners = rendered.container.querySelectorAll('.ss__banner');
-
-		expect(element).toBeInTheDocument();
-		expect(banners).toHaveLength(0);
 	});
 
 	it('renders with custom resultComponent', () => {

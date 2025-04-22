@@ -43,7 +43,13 @@ export const RecommendationGrid = observer((properties: RecommendationGridProps)
 		gapSize: '20px',
 	};
 
-	let props = mergeProps('recommendationGrid', globalTheme, defaultProps, properties);
+	//mergeprops only uses names that are passed via properties, so this cannot be put in the defaultProps
+	const _properties = {
+		name: properties.controller?.store?.profile?.display?.template?.component?.toLowerCase(),
+		...properties,
+	};
+
+	let props = mergeProps('recommendationGrid', globalTheme, defaultProps, _properties);
 
 	if (!properties.theme?.name) {
 		// breakpoint settings are calculated in ThemeStore for snap templates

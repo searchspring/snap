@@ -188,32 +188,40 @@ export const Carousel = observer((properties: CarouselProps): JSX.Element => {
 			? JSON.parse(JSON.stringify(defaultVerticalCarouselBreakpoints))
 			: JSON.parse(JSON.stringify(defaultCarouselBreakpoints)),
 		pagination: false,
+		slidesPerGroup: 5,
+		slidesPerView: 5,
+		spaceBetween: 10,
 		loop: true,
 		autoAdjustSlides: false,
 		treePath: globalTreePath,
 	};
 
 	let props = mergeProps('carousel', globalTheme, defaultProps, properties);
-	Object.keys(props.breakpoints!).forEach((breakpoint) => {
-		const breakPointProps = props.breakpoints![breakpoint as keyof typeof props.breakpoints];
-		// make certain props numbers
-		if (breakPointProps.slidesPerView) breakPointProps.slidesPerView = Number(breakPointProps.slidesPerView) || 1;
-		if (breakPointProps.slidesPerGroup) breakPointProps.slidesPerGroup = Number(breakPointProps.slidesPerGroup) || 1;
-	});
+	let displaySettings;
 
-	const displaySettings = useDisplaySettings(props.breakpoints!);
-	if (displaySettings && Object.keys(displaySettings).length) {
-		const theme = deepmerge(props?.theme || {}, displaySettings?.theme || {}, { arrayMerge: (destinationArray, sourceArray) => sourceArray });
+	//no breakpoint props allowed in templates
+	if (!(properties.theme?.name || globalTheme.name) && props.breakpoints) {
+		Object.keys(props.breakpoints!).forEach((breakpoint) => {
+			const breakPointProps = props.breakpoints![breakpoint as unknown as keyof typeof props.breakpoints];
+			// make certain props numbers
+			if (breakPointProps.slidesPerView) breakPointProps.slidesPerView = Number(breakPointProps.slidesPerView) || 1;
+			if (breakPointProps.slidesPerGroup) breakPointProps.slidesPerGroup = Number(breakPointProps.slidesPerGroup) || 1;
+		});
 
-		if (props.autoAdjustSlides && props.children.length < displaySettings.slidesPerView!) {
-			displaySettings.slidesPerView = props.children.length;
-			displaySettings.slidesPerGroup = props.children.length;
+		displaySettings = useDisplaySettings(props.breakpoints!);
+		if (displaySettings && Object.keys(displaySettings).length) {
+			const theme = deepmerge(props?.theme || {}, displaySettings?.theme || {}, { arrayMerge: (destinationArray, sourceArray) => sourceArray });
+
+			if (props.autoAdjustSlides && props.children.length < displaySettings.slidesPerView!) {
+				displaySettings.slidesPerView = props.children.length;
+				displaySettings.slidesPerGroup = props.children.length;
+			}
+			props = {
+				...props,
+				...displaySettings,
+				theme,
+			};
 		}
-		props = {
-			...props,
-			...displaySettings,
-			theme,
-		};
 	}
 
 	const {

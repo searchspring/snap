@@ -10,10 +10,15 @@ import type { ResultsProps } from '../../../../components/Organisms/Results';
 export const results: ThemeComponentProps<ResultsProps> = {
 	default: {
 		// themeStyleScript: resultsStyleScript,
+		columns: 4,
 	},
 	mobile: {
-		columns: 5,
+		columns: 2,
 	},
-	tablet: {},
-	desktop: {},
+	tablet: {
+		columns: 3,
+	},
+	desktop: {
+		columns: 4,
+	},
 };

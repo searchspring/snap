@@ -30,9 +30,6 @@ let controller: SearchController;
 const mockClient = new MockClient(globals, {});
 mockClient.mockData.updateConfig({ search: 'filtered' });
 
-// const TopSlotComponent = () => <div className="top-slot">topSlot</div>;
-// const BottomSlotComponent = () => <div className="bottom-slot">bottomSlot</div>;
-
 describe('Results Component', () => {
 	beforeEach(async () => {
 		searchConfig = { ...searchConfigDefault };

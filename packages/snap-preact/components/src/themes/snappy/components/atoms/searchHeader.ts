@@ -6,10 +6,9 @@ const searchHeaderStyleScript = ({ theme }: SearchHeaderProps) => {
 	const variables = theme?.variables;
 
 	return css({
-		paddingBottom: '10px',
 		'.ss__search-header__title': {
 			color: variables?.colors?.primary,
-			marginBottom: '5px',
+			marginBottom: 0,
 			fontWeight: 'initial',
 			fontSize: '25px',
 		},
