@@ -64,6 +64,9 @@ import type { SidebarLang } from '../components/Organisms/Sidebar';
 // import type { AutocompleteTermsLang } from '../components/Templates/AutocompleteTerms';
 import type { RecommendationLang } from '../components/Templates/Recommendation';
 import type { SearchLang } from '../components/Templates/Search';
+import { AutocompleteTemplateLang } from '../components/Templates/AutocompleteTemplate';
+import { TermsListLang } from '../components/Organisms/TermsList';
+import { TermsLang } from '../components/Molecules/Terms';
 // import type { SearchHorizontalLang } from '../components/Templates/SearchHorizontal';
 
 // type ComponentLang> = Partial<ComponentLang> & { named?: Partial<{ [named?: Partial<string]?: Partial<Partial<ComponentLang> } };
@@ -188,6 +191,7 @@ export type LangComponents = {
 	select: SelectLang;
 	// slideout: SlideoutLang;
 	sortBy: SortByLang;
+	terms: TermsLang;
 	// swatches: SwatchesLang
 	// variantSelection: VariantSelectionLang
 
@@ -201,6 +205,7 @@ export type LangComponents = {
 	// results: ResultsLang
 	searchHeader: SearchHeaderLang;
 	sidebar: SidebarLang;
+	termList: TermsListLang;
 	mobileSidebar: MobileSidebarLang;
 	// toolbar: ToolbarLang
 
@@ -208,5 +213,6 @@ export type LangComponents = {
 	// autocompleteTerms: AutocompleteTermsLang;
 	recommendation: RecommendationLang;
 	search: SearchLang;
+	autocompleteTemplate: AutocompleteTemplateLang;
 	// searchHorizontal: SearchHorizontalLang
 };

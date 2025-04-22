@@ -1,6 +1,5 @@
 // TEMPLATES
-import { autocomplete } from './autocomplete';
-// import { autocompleteTerms } from './autocompleteTerms';
+import { autocomplete } from '../organisms/autocomplete';
 import { recommendation } from './recommendation';
 import { recommendationBundle } from './recommendationBundle';
 import { recommendationBundleEasyAdd } from './recommendationBundleEasyAdd';
@@ -10,9 +9,11 @@ import { recommendationGrid } from './recommendationGrid';
 import { recommendationEmail } from './recommendationEmail';
 import { search } from './search';
 import { searchHorizontal } from './searchHorizontal';
+import { autocompleteTemplate } from './autocompleteTemplate';
 
 export const templates = {
 	default: {
+		autocompleteTemplate: autocompleteTemplate.default,
 		autocomplete: autocomplete.default,
 		recommendation: recommendation.default,
 		recommendationBundle: recommendationBundle.default,
@@ -25,6 +26,7 @@ export const templates = {
 		searchHorizontal: searchHorizontal.default,
 	},
 	mobile: {
+		autocompleteTemplate: autocompleteTemplate.mobile,
 		autocomplete: autocomplete.mobile,
 		recommendation: recommendation.mobile,
 		recommendationBundle: recommendationBundle.mobile,
@@ -37,6 +39,7 @@ export const templates = {
 		searchHorizontal: searchHorizontal.mobile,
 	},
 	tablet: {
+		autocompleteTemplate: autocompleteTemplate.tablet,
 		autocomplete: autocomplete.tablet,
 		recommendation: recommendation.tablet,
 		recommendationBundle: recommendationBundle.tablet,
@@ -49,6 +52,7 @@ export const templates = {
 		searchHorizontal: searchHorizontal.tablet,
 	},
 	desktop: {
+		autocompleteTemplate: autocompleteTemplate.desktop,
 		autocomplete: autocomplete.desktop,
 		recommendation: recommendation.desktop,
 		recommendationBundle: recommendationBundle.desktop,

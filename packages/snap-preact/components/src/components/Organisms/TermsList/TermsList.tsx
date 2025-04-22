@@ -11,8 +11,7 @@ import { defined, mergeProps } from '../../../utilities';
 import { Terms, TermsProps } from '../../Molecules/Terms/Terms';
 import { Lang } from '../../../hooks';
 import deepmerge from 'deepmerge';
-import { useEffect } from 'react';
-import { cleanUpEmptyDivs } from '../../../hooks/cleanUpEmptyDivs';
+import { useCleanUpEmptyDivs } from '../../../hooks/useCleanUpEmptyDivs';
 
 const CSS = {
 	TermsList: ({}: Partial<TermsListProps>) =>
@@ -29,7 +28,7 @@ const CSS = {
 				flexBasis: '100%',
 			},
 
-			'.ss__terms-list__column:empty, .ss__terms-list__row:empty': {
+			'.ss__terms-list__row:empty': {
 				display: 'none',
 			},
 
@@ -114,21 +113,19 @@ export const TermsList = observer((properties: TermsListProps): JSX.Element => {
 
 	const defaultLang: Partial<TermsListLang> = {
 		historyTitle: {
-			value: 'History',
+			value: historyTitle,
 		},
 		termsTitle: {
-			value: 'Suggested',
+			value: suggestionTitle,
 		},
 		trendingTitle: {
-			value: 'Trending',
+			value: trendingTitle,
 		},
 	};
 
 	const lang = deepmerge(defaultLang, props.lang || {});
 
-	useEffect(() => {
-		cleanUpEmptyDivs('.ss__terms-list__row, .ss__terms-list');
-	});
+	useCleanUpEmptyDivs('.ss__terms-list__row, .ss__terms-list');
 
 	const findModule = (module: TermsListModuleNames[] | TermsListModuleNames) => {
 		if (typeof module !== 'string') {
@@ -147,6 +144,7 @@ export const TermsList = observer((properties: TermsListProps): JSX.Element => {
 					title={historyTitle}
 					terms={history}
 					controller={controller}
+					name={'history'}
 					{...subProps.terms}
 				/>
 			);
@@ -160,6 +158,7 @@ export const TermsList = observer((properties: TermsListProps): JSX.Element => {
 					title={trendingTitle}
 					terms={trending}
 					controller={controller}
+					name={'trending'}
 					{...subProps.terms}
 				/>
 			);
@@ -173,6 +172,7 @@ export const TermsList = observer((properties: TermsListProps): JSX.Element => {
 					title={suggestionTitle}
 					terms={suggestions}
 					controller={controller}
+					name={'suggestions'}
 					{...subProps.terms}
 				/>
 			);

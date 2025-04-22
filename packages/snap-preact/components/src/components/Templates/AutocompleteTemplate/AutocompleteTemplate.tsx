@@ -15,16 +15,21 @@ import { Facets, FacetsProps } from '../../Organisms/Facets';
 import { defined, mergeProps, mergeStyles } from '../../../utilities';
 import { createHoverProps } from '../../../toolbox';
 import { Theme, useTheme, CacheProvider } from '../../../providers';
-import { ComponentProps, FacetDisplay, RecommendationComponentNames, ResultComponent, StyleScript } from '../../../types';
+import {
+	ComponentProps,
+	FacetDisplay,
+	RecommendationComponentNames,
+	RecommendationComponentProps,
+	ResultComponent,
+	StyleScript,
+} from '../../../types';
 import { Lang, useA11y, useLang } from '../../../hooks';
 import { TermsList, TermsListProps } from '../../Organisms/TermsList';
-import type { RecommendationProps } from '../Recommendation';
-import type { RecommendationGridProps } from '../RecommendationGrid';
 import { Terms, TermsProps } from '../../Molecules/Terms';
 import { useState } from 'react';
 import { FacetsHorizontal } from '../../Organisms/FacetsHorizontal';
 import { Button, ButtonProps } from '../../Atoms/Button';
-import { cleanUpEmptyDivs } from '../../../hooks/cleanUpEmptyDivs';
+import { useCleanUpEmptyDivs } from '../../../hooks/useCleanUpEmptyDivs';
 import { createRecommendationTemplate } from '../../../hooks/createRecommendationTemplate';
 
 const defaultStyles: StyleScript<AutocompleteTemplateProps> = ({
@@ -84,8 +89,8 @@ const defaultStyles: StyleScript<AutocompleteTemplateProps> = ({
 		zIndex: '10002',
 		border: '1px solid #ebebeb',
 		background: '#ffffff',
-		width: width,
-		maxWidth: '100vw',
+		// width: width,
+		maxWidth: width,
 		maxHeight: viewportMaxHeight && inputViewportOffsetBottom ? `calc(100vh - ${inputViewportOffsetBottom + 10}px)` : undefined,
 
 		'.ss__autocomplete__row': {
@@ -120,6 +125,7 @@ const defaultStyles: StyleScript<AutocompleteTemplateProps> = ({
 		},
 
 		'.ss__autocomplete__terms-wrapper': {
+			background: '#f8f8f8',
 			width: '100%',
 		},
 		'.ss__autocomplete__facets': {
@@ -145,6 +151,11 @@ const defaultStyles: StyleScript<AutocompleteTemplateProps> = ({
 				display: 'none',
 			},
 		},
+		// hmmm todo this is a bug - sometimes the facets do not grow to fill their space,
+		// however we cannot put 100% or it will grow when in the same row as other modules
+		// '.ss__autocomplete__facets-wrapper': {
+		// 	width: "100%",
+		// },
 		'.ss__autocomplete__content': {
 			display: 'flex',
 			flex: `1 1 0%`,
@@ -186,17 +197,17 @@ export const AutocompleteTemplate = observer((properties: AutocompleteTemplatePr
 	const defaultProps: Partial<AutocompleteTemplateProps> = {
 		facetsTitle: '',
 		contentTitle: '',
-		layout: [['C1', 'C2', 'C3']],
+		layout: [['c1', 'c2', 'c3']],
 		column1: {
-			layout: ['TermsList'],
+			layout: ['termsList'],
 			width: '150px',
 		},
 		column2: {
-			layout: ['Facets'],
+			layout: ['facets'],
 			width: '150px',
 		},
 		column3: {
-			layout: [['Content'], ['_', 'Button.see-more']],
+			layout: [['content'], ['_', 'button.see-more']],
 			width: 'auto',
 		},
 		width: '100%',
@@ -414,7 +425,7 @@ export const AutocompleteTemplate = observer((properties: AutocompleteTemplatePr
 		},
 	};
 
-	const { search, terms, trending, results, merchandising, pagination, filters, facets, state } = controller.store;
+	const { search, terms, trending, results, merchandising, pagination, filters, facets, state, loading } = controller.store;
 	const history = controller.store.history || [];
 
 	// you can pass in a selector or the actual input element,
@@ -439,7 +450,7 @@ export const AutocompleteTemplate = observer((properties: AutocompleteTemplatePr
 		const trendingActive = trending?.filter((term) => term.active).pop();
 		const historyActive = history?.filter((term) => term.active).pop();
 
-		if (trendingActive || historyActive || showResultsBool()) {
+		if ((trendingActive || historyActive || showResultsBool()) && !loading) {
 			setShowResults(true);
 		} else {
 			setShowResults(false);
@@ -461,6 +472,18 @@ export const AutocompleteTemplate = observer((properties: AutocompleteTemplatePr
 		controller.setFocused();
 	};
 
+	const termsLang = {
+		historyTitle: {
+			value: 'History',
+		},
+		termsTitle: {
+			value: 'Suggested',
+		},
+		trendingTitle: {
+			value: 'Trending',
+		},
+	};
+
 	//initialize lang
 	const defaultLang: Partial<AutocompleteTemplateLang> = {
 		contentTitle: {
@@ -475,15 +498,7 @@ export const AutocompleteTemplate = observer((properties: AutocompleteTemplatePr
 		facetsTitle: {
 			value: facetsTitle,
 		},
-		historyTitle: {
-			value: 'History',
-		},
-		termsTitle: {
-			value: 'Suggested',
-		},
-		trendingTitle: {
-			value: 'Trending',
-		},
+
 		noResultsText: {
 			value: `<p>No results found for "${search.originalQuery?.string || search.query?.string}".</p><p>Please try another search.</p>`,
 		},
@@ -492,18 +507,7 @@ export const AutocompleteTemplate = observer((properties: AutocompleteTemplatePr
 				search.query?.string
 			}"`,
 		},
-	};
-
-	const termsLang = {
-		historyTitle: {
-			value: 'History',
-		},
-		termsTitle: {
-			value: 'Suggested',
-		},
-		trendingTitle: {
-			value: 'Trending',
-		},
+		...termsLang,
 	};
 
 	//deep merge with props.lang
@@ -513,7 +517,7 @@ export const AutocompleteTemplate = observer((properties: AutocompleteTemplatePr
 	});
 
 	let recsController: RecommendationController | undefined;
-	let RecommendationTemplateComponent: FunctionalComponent<RecommendationProps | RecommendationGridProps> | undefined;
+	let RecommendationTemplateComponent: FunctionalComponent<RecommendationComponentProps> | undefined;
 
 	let RecommendationTemplateResultComponent: ResultComponent | undefined;
 
@@ -525,9 +529,7 @@ export const AutocompleteTemplate = observer((properties: AutocompleteTemplatePr
 		recsController = recs.recsController;
 	}
 
-	useEffect(() => {
-		cleanUpEmptyDivs('.ss__autocomplete__column, .ss__autocomplete__terms-wrapper');
-	});
+	useCleanUpEmptyDivs('.ss__autocomplete__column, .ss__autocomplete__terms-wrapper');
 
 	const findModule = (module: ModuleNamesWithColumns) => {
 		//new row
@@ -535,7 +537,7 @@ export const AutocompleteTemplate = observer((properties: AutocompleteTemplatePr
 			return <div className="ss__autocomplete__row">{module?.map((subModule) => findModule(subModule))}</div>;
 		}
 
-		if (module == 'C1' && column1?.layout?.length) {
+		if (module == 'c1' && column1?.layout?.length) {
 			return (
 				<div className="ss__autocomplete__column ss__autocomplete__column--c1">
 					{column1?.layout?.map((module) => {
@@ -544,8 +546,7 @@ export const AutocompleteTemplate = observer((properties: AutocompleteTemplatePr
 				</div>
 			);
 		}
-
-		if (module == 'C2' && column2?.layout?.length) {
+		if (module == 'c2' && column2?.layout?.length) {
 			return (
 				<div className="ss__autocomplete__column ss__autocomplete__column--c2">
 					{column2?.layout?.map((module) => {
@@ -554,8 +555,7 @@ export const AutocompleteTemplate = observer((properties: AutocompleteTemplatePr
 				</div>
 			);
 		}
-
-		if (module == 'C3' && column3?.layout?.length) {
+		if (module == 'c3' && column3?.layout?.length) {
 			return (
 				<div className="ss__autocomplete__column ss__autocomplete__column--c3">
 					{column3?.layout?.map((module) => {
@@ -564,8 +564,7 @@ export const AutocompleteTemplate = observer((properties: AutocompleteTemplatePr
 				</div>
 			);
 		}
-
-		if (module == 'C4' && column4?.layout?.length) {
+		if (module == 'c4' && column4?.layout?.length) {
 			return (
 				<div className="ss__autocomplete__column ss__autocomplete__column--c4">
 					{column4?.layout?.map((module) => {
@@ -574,16 +573,14 @@ export const AutocompleteTemplate = observer((properties: AutocompleteTemplatePr
 				</div>
 			);
 		}
-
-		if (module == 'TermsList') {
+		if (module == 'termsList') {
 			return (
 				<div className={classnames('ss__autocomplete__terms-wrapper')}>
 					<TermsList controller={controller} {...subProps.termsList} lang={termsLang} />
 				</div>
 			);
 		}
-
-		if (module == 'Terms.history') {
+		if (module == 'terms.history') {
 			return (
 				<Terms
 					controller={controller}
@@ -592,11 +589,12 @@ export const AutocompleteTemplate = observer((properties: AutocompleteTemplatePr
 					}}
 					terms={controller.store.history}
 					className={'ss__terms-list__terms--history'}
+					name={'history'}
 					{...subProps.terms}
 				/>
 			);
 		}
-		if (module == 'Terms.trending') {
+		if (module == 'terms.trending') {
 			return (
 				<Terms
 					controller={controller}
@@ -605,11 +603,12 @@ export const AutocompleteTemplate = observer((properties: AutocompleteTemplatePr
 					}}
 					terms={controller.store.trending}
 					className={'ss__terms-list__terms--trending'}
+					name={'trending'}
 					{...subProps.terms}
 				/>
 			);
 		}
-		if (module == 'Terms.suggestions') {
+		if (module == 'terms.suggestions') {
 			return (
 				<Terms
 					controller={controller}
@@ -618,11 +617,12 @@ export const AutocompleteTemplate = observer((properties: AutocompleteTemplatePr
 					}}
 					terms={controller.store.terms}
 					className={'ss__terms-list__terms--suggestions'}
+					name={'suggestions'}
 					{...subProps.terms}
 				/>
 			);
 		}
-		if (module == 'Facets') {
+		if (module == 'facets') {
 			return facetsToShow.length ? (
 				<div className={classnames('ss__autocomplete__facets-wrapper')}>
 					{facetsTitle || lang.facetsTitle.value ? (
@@ -640,7 +640,7 @@ export const AutocompleteTemplate = observer((properties: AutocompleteTemplatePr
 			);
 		}
 
-		if (module == 'FacetsHorizontal') {
+		if (module == 'facetsHorizontal') {
 			return facetsToShow.length ? (
 				<>
 					{facetsTitle || lang.facetsTitle.value ? (
@@ -658,7 +658,7 @@ export const AutocompleteTemplate = observer((properties: AutocompleteTemplatePr
 			);
 		}
 
-		if (module == 'Content' && showResults) {
+		if (module == 'content' && showResults) {
 			return (
 				<div className="ss__autocomplete__content">
 					{!excludeBanners ? <Banner {...subProps.banner} content={merchandising.content} type={ContentType.HEADER} name={'header'} /> : null}
@@ -697,20 +697,20 @@ export const AutocompleteTemplate = observer((properties: AutocompleteTemplatePr
 			return <div className="ss__autocomplete__separator"></div>;
 		}
 
-		if (module == 'Banner.banner') {
+		if (module == 'banner.banner') {
 			return <Banner {...subProps.banner} content={merchandising.content} type={ContentType.BANNER} name={'banner'} />;
 		}
-		if (module == 'Banner.footer') {
+		if (module == 'banner.footer') {
 			return <Banner {...subProps.banner} content={merchandising.content} type={ContentType.FOOTER} name={'footer'} />;
 		}
-		if (module == 'Banner.header') {
+		if (module == 'banner.header') {
 			return <Banner {...subProps.banner} content={merchandising.content} type={ContentType.HEADER} name={'header'} />;
 		}
-		if (module == 'Banner.left') {
+		if (module == 'banner.left') {
 			return <Banner {...subProps.banner} content={merchandising.content} type={ContentType.LEFT} name={'left'} />;
 		}
 
-		if (module == 'Button.see-more' && showResults && search?.query?.string && results.length > 0) {
+		if (module == 'button.see-more' && showResults && search?.query?.string && results.length > 0) {
 			return (
 				<Button {...subProps.button}>
 					<div className="ss__autocomplete__see-more">
@@ -765,20 +765,20 @@ interface AutocompleteSubProps {
 
 //can add categories here in the future
 export type ModuleNames =
-	| 'TermsList'
-	| 'Terms.history'
-	| 'Terms.trending'
-	| 'Terms.suggestions'
-	| 'Facets'
-	| 'FacetsHorizontal'
-	| 'Button.see-more'
-	| 'Content'
+	| 'termsList'
+	| 'terms.history'
+	| 'terms.trending'
+	| 'terms.suggestions'
+	| 'facets'
+	| 'facetsHorizontal'
+	| 'button.see-more'
+	| 'content'
 	| '_'
-	| 'Banner.left'
-	| 'Banner.banner'
-	| 'Banner.footer'
-	| 'Banner.header';
-type ColumnsNames = 'C1' | 'C2' | 'C3' | 'C4';
+	| 'banner.left'
+	| 'banner.banner'
+	| 'banner.footer'
+	| 'banner.header';
+type ColumnsNames = 'c1' | 'c2' | 'c3' | 'c4';
 type ModuleNamesWithColumns = ModuleNames | ColumnsNames | ModuleNames[] | ColumnsNames[];
 
 type Column = {

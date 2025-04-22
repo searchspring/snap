@@ -3,6 +3,56 @@ import type { ValueFacet } from '@searchspring/snap-store-mobx';
 
 export const es: LangComponents = {
 	recommendation: {},
+	autocompleteTemplate: {
+		facetsTitle: {},
+		contentTitle: {},
+		closeButton: {
+			value: 'Cerrar Autocompletar',
+			attributes: {
+				'aria-label': 'Cerrar Autocompletar',
+			},
+		},
+		noResultsText: {
+			value: (data) =>
+				`<p>No se encontraron resultados para "${
+					data.controller?.store?.search?.originalQuery?.string || data.controller?.store?.search?.query?.string
+				}".</p><p>Por favor intenta otra búsqueda.</p>`,
+		},
+		seeMoreButton: {
+			value: (data) =>
+				`Ver ${data?.controller?.store?.pagination.totalResults} ${data?.controller?.store?.filters.length > 0 ? 'filtrado' : ''} resultado${
+					data?.controller?.store?.pagination?.totalResults == 1 ? '' : 's'
+				} para "${data?.controller?.store?.search?.query?.string}"`,
+		},
+		termsTitle: {
+			value: 'Sugerido',
+		},
+		trendingTitle: {
+			value: 'Tendencia',
+		},
+		historyTitle: {
+			value: 'Historia',
+		},
+	},
+	termList: {
+		termsTitle: {
+			value: 'Sugerido',
+		},
+		trendingTitle: {
+			value: 'Tendencia',
+		},
+		historyTitle: {
+			value: 'Historia',
+		},
+	},
+	terms: {
+		term: {
+			value: (data) => `${data.term.value}`,
+			attributes: {
+				'aria-label': (data) => `artículo ${data.index + 1} de ${data.numberOfTerms}, ${data.term.value}`,
+			},
+		},
+	},
 	button: {},
 	search: {},
 	list: {},

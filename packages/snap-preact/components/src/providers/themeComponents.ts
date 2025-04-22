@@ -46,7 +46,7 @@ import type { SlideoutProps } from '../components/Molecules/Slideout';
 import type { SortByProps } from '../components/Molecules/SortBy';
 import type { SwatchesProps } from '../components/Molecules/Swatches';
 import type { VariantSelectionProps } from '../components/Molecules/VariantSelection';
-import type { TermsProps } from '../components/Molecules/Terms';
+import type { TermsNames, TermsProps } from '../components/Molecules/Terms';
 
 /* ORGANISMS */
 import type { BranchOverrideProps } from '../components/Organisms/BranchOverride';
@@ -249,7 +249,7 @@ export type ThemeComponentOverrides =
 	{ [K in UnNamedThemeComponentSelectors<'sortBy'>]?: Partial<SortByProps> } &
 	{ [K in UnNamedThemeComponentSelectors<'swatches'>]?: Partial<SwatchesProps> } &
 	{ [K in UnNamedThemeComponentSelectors<'variantSelection'>]?: Partial<VariantSelectionProps> } &
-	{ [K in UnNamedThemeComponentSelectors<'terms'>]?: Partial<TermsProps> } &
+	{ [K in NamedThemeComponentSelectors<'terms', TermsNames>]?: Partial<TermsProps> } &
 
 	/* ORGANISMS */
 	{ [K in UnNamedThemeComponentSelectors<'branchOverride'>]?: Partial<BranchOverrideProps> } &
@@ -268,7 +268,6 @@ export type ThemeComponentOverrides =
 
 	/* TEMPLATES */
 	{ [K in UnNamedThemeComponentSelectors<'autocompleteTemplate'>]?: Partial<AutocompleteTemplateProps> } &
-	// { [K in UnNamedThemeComponentSelectors<'autocompleteTerms'>]?: Partial<AutocompleteTermsProps> } &
 	{ [K in NamedThemeComponentSelectors<'recommendation', string>]?: Partial<RecommendationProps> } &
 	{ [K in NamedThemeComponentSelectors<'recommendationBundle', string>]?: Partial<RecommendationBundleProps> } &
 	{ [K in NamedThemeComponentSelectors<'recommendationBundleEasyAdd', string>]?: Partial<RecommendationBundleEasyAddProps> } &
@@ -330,7 +329,7 @@ export type ThemeComponentRestrictedOverrides =
 	{ [K in UnNamedThemeComponentSelectors<'sortBy'>]?: RestrictedComponentProps<SortByProps> } &
 	{ [K in UnNamedThemeComponentSelectors<'swatches'>]?: RestrictedComponentProps<SwatchesProps> } &
 	{ [K in UnNamedThemeComponentSelectors<'variantSelection'>]?: RestrictedComponentProps<VariantSelectionProps> } &
-	{ [K in UnNamedThemeComponentSelectors<'terms'>]?: RestrictedComponentProps<TermsProps> } &
+	{ [K in NamedThemeComponentSelectors<'terms', TermsNames>]?: RestrictedComponentProps<TermsProps> } &
 
 	/* ORGANISMS */
 	{ [K in UnNamedThemeComponentSelectors<'branchOverride'>]?: RestrictedComponentProps<BranchOverrideProps> } &

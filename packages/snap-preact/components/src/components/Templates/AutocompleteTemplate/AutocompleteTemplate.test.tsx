@@ -160,7 +160,7 @@ describe('Autocomplete Component', () => {
 			input: controller.config.selector,
 			column1: {
 				width: 'auto',
-				layout: [['Facets', 'Content']],
+				layout: [['facets', 'content']],
 			},
 		};
 
@@ -200,7 +200,7 @@ describe('Autocomplete Component', () => {
 			input: controller.config.selector,
 			column2: {
 				width: 'auto',
-				layout: [['TermsList', 'Content']],
+				layout: [['termsList', 'content']],
 			},
 		};
 
@@ -239,7 +239,7 @@ describe('Autocomplete Component', () => {
 			input: controller.config.selector,
 			column3: {
 				width: 'auto',
-				layout: [['Facets', 'TermsList']],
+				layout: [['facets', 'termsList']],
 			},
 		};
 
@@ -277,10 +277,10 @@ describe('Autocomplete Component', () => {
 		const args: AutocompleteTemplateProps = {
 			controller,
 			input: controller.config.selector,
-			layout: ['C1', 'C2', 'C3', 'C4'],
+			layout: ['c1', 'c2', 'c3', 'c4'],
 			column4: {
 				width: width,
-				layout: [['Facets']],
+				layout: [['facets']],
 			},
 		};
 
@@ -315,7 +315,7 @@ describe('Autocomplete Component', () => {
 		const args: AutocompleteTemplateProps = {
 			controller,
 			input: controller.config.selector,
-			layout: ['Content', ['Button.see-more']],
+			layout: ['content', ['button.see-more']],
 		};
 
 		const input = document.querySelector('.searchspring-ac') as HTMLInputElement;
@@ -380,7 +380,7 @@ describe('Autocomplete Component', () => {
 		const args: AutocompleteTemplateProps = {
 			controller,
 			input: controller.config.selector,
-			layout: ['C1', 'C2', 'C3'],
+			layout: ['c1', 'c2', 'c3'],
 		};
 
 		const input = document.querySelector('.searchspring-ac') as HTMLInputElement;
@@ -443,10 +443,10 @@ describe('Autocomplete Component', () => {
 			controller,
 			input: controller.config.selector,
 			excludeBanners: true,
-			layout: ['C4', 'C1', 'C2', 'C3'],
+			layout: ['c4', 'c1', 'c2', 'c3'],
 			column4: {
 				width: 'auto',
-				layout: ['Banner.banner', 'Banner.footer', 'Banner.header', 'Banner.left'],
+				layout: ['banner.banner', 'banner.footer', 'banner.header', 'banner.left'],
 			},
 		};
 

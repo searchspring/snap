@@ -40,18 +40,6 @@ export default {
 					position: 'relative',
 				}}
 			>
-				<input
-					type="text"
-					id="searchInput"
-					placeholder="try me!"
-					autoComplete="off"
-					style={{
-						width: '100%',
-						padding: '10px',
-						boxSizing: 'border-box',
-						border: '1px solid #3a23ad',
-					}}
-				/>
 				<Story />
 			</div>
 		),
@@ -141,8 +129,8 @@ export default {
 };
 
 const snapInstance = Snapify.autocomplete({
-	id: 'Autocomplete',
-	selector: '#searchInput',
+	id: 'Autocomplete-Terms',
+	selector: '#searchInput2',
 	globals: {
 		siteId: '8uyt2m',
 	},
@@ -204,6 +192,10 @@ export const Default = (args: TermsProps, { loaded: { controller } }: { loaded: 
 			} as UrlManager,
 		},
 	];
+
+	setTimeout(() => {
+		controller.bind();
+	});
 
 	return <Terms {...args} controller={controller} terms={mockTerms} />;
 };

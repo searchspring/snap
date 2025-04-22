@@ -3,6 +3,56 @@ import { LangComponents } from '../../../../../components/src';
 
 export const fr: LangComponents = {
 	recommendation: {},
+	autocompleteTemplate: {
+		facetsTitle: {},
+		contentTitle: {},
+		closeButton: {
+			value: 'fermer la saisie semi-automatique',
+			attributes: {
+				'aria-label': 'fermer la saisie semi-automatique',
+			},
+		},
+		noResultsText: {
+			value: (data) =>
+				`<p>Aucun résultat trouvé pour "${
+					data.controller?.store?.search?.originalQuery?.string || data.controller?.store?.search?.query?.string
+				}".</p><p>Veuillez essayer une autre recherche.</p>`,
+		},
+		seeMoreButton: {
+			value: (data) =>
+				`Voir ${data?.controller?.store?.pagination.totalResults} ${data?.controller?.store?.filters.length > 0 ? 'filtré' : ''} résultat${
+					data?.controller?.store?.pagination?.totalResults == 1 ? '' : 's'
+				} pour "${data?.controller?.store?.search?.query?.string}"`,
+		},
+		termsTitle: {
+			value: 'Suggestions',
+		},
+		trendingTitle: {
+			value: 'Tendance',
+		},
+		historyTitle: {
+			value: 'Histoire',
+		},
+	},
+	termList: {
+		termsTitle: {
+			value: 'Suggestions',
+		},
+		trendingTitle: {
+			value: 'Tendance',
+		},
+		historyTitle: {
+			value: 'Histoire',
+		},
+	},
+	terms: {
+		term: {
+			value: (data) => `${data.term.value}`,
+			attributes: {
+				'aria-label': (data) => `article ${data.index + 1} de ${data.numberOfTerms}, ${data.term.value}`,
+			},
+		},
+	},
 	button: {},
 	search: {},
 	list: {},

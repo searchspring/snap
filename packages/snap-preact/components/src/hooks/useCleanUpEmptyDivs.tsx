@@ -1,9 +1,13 @@
 import { h } from 'preact';
-export function cleanUpEmptyDivs(className: string) {
-	document.querySelectorAll(className).forEach((col) => {
-		if (!hasElemsToShow(col)) {
-			col.remove();
-		}
+import { useEffect } from 'preact/hooks';
+
+export function useCleanUpEmptyDivs(className: string) {
+	useEffect(() => {
+		document.querySelectorAll(className).forEach((col) => {
+			if (!hasElemsToShow(col)) {
+				col.remove();
+			}
+		});
 	});
 }
 

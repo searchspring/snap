@@ -3,27 +3,25 @@ import { SnapTemplates } from '../../../src';
 import { Theme, useSnap } from '../providers';
 import { useCreateController } from './useCreateController';
 import { useComponent } from './useComponent';
-import { ResultComponent, RecommendationComponentNames } from '../types';
+import { ResultComponent, RecommendationComponentNames, RecommendationComponentProps } from '../types';
 import { FunctionalComponent } from 'preact';
-import { RecommendationProps } from '../components/Templates/Recommendation';
-import { RecommendationGridProps } from '../components/Templates/RecommendationGrid';
 
-export type templatesType = {
+export type TemplatesType = {
 	recommendation?: {
 		enabled: boolean;
-		component?: RecommendationComponentNames; // Need a type for allowed recommendation component names (that would exist in the library)
+		component?: RecommendationComponentNames;
 		resultComponent?: string;
 		config?: Partial<RecommendationControllerConfig>;
 	};
 };
 
-type returnType = {
-	RecommendationTemplateComponent: FunctionalComponent<RecommendationProps | RecommendationGridProps> | undefined;
+type ReturnType = {
+	RecommendationTemplateComponent: FunctionalComponent<RecommendationComponentProps> | undefined;
 	RecommendationTemplateResultComponent: ResultComponent | undefined;
 	recsController: RecommendationController | undefined;
 };
 
-export function createRecommendationTemplate(templates: templatesType, theme?: Theme): returnType {
+export function createRecommendationTemplate(templates: TemplatesType, theme?: Theme): ReturnType {
 	let recommendationTemplateComponent: FunctionalComponent<{ controller: RecommendationController; name: string }> | undefined;
 	let recommendationTemplateResultComponent: ResultComponent | undefined;
 	let recsController: RecommendationController | undefined;
@@ -65,10 +63,8 @@ export function createRecommendationTemplate(templates: templatesType, theme?: T
 		}
 	}
 
-	const returnObj: returnType = {
-		RecommendationTemplateComponent: recommendationTemplateComponent as
-			| FunctionalComponent<RecommendationProps | RecommendationGridProps>
-			| undefined,
+	const returnObj: ReturnType = {
+		RecommendationTemplateComponent: recommendationTemplateComponent as FunctionalComponent<RecommendationComponentProps> | undefined,
 		RecommendationTemplateResultComponent: recommendationTemplateResultComponent as ResultComponent | undefined,
 		recsController: recsController,
 	};

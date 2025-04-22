@@ -132,7 +132,7 @@ export default {
 };
 
 const snapInstance = Snapify.autocomplete({
-	id: 'Autocomplete',
+	id: 'Autocomplete-TermsList',
 	selector: '#searchInput',
 	globals: {
 		siteId: '8uyt2m',

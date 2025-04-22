@@ -181,6 +181,7 @@ export interface TermsProps extends ComponentProps {
 	previewOnHover?: boolean;
 	emIfy?: boolean;
 	lang?: Partial<TermsLang>;
+	name?: TermsNames;
 }
 
 export interface TermsLang {
@@ -189,7 +190,9 @@ export interface TermsLang {
 		numberOfTerms: number;
 		term: Term;
 	}>;
-	title: Lang<{
+	title?: Lang<{
 		controller: AutocompleteController;
 	}>;
 }
+
+export type TermsNames = 'trending' | 'suggestions' | 'history';

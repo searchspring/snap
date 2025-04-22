@@ -80,22 +80,22 @@ export default {
 			table: {
 				type: {
 					summary:
-						"['C1' | 'C2' | 'C3' | 'C4' | 'Terms' | 'HistoryTerms' | 'TrendingTerms'| 'SuggestedTerms'| 'Facets' | 'FacetsHorizontal' | 'SeeMore' | 'Content' | '_' | 'Banner.left' | 'Banner.banner' | 'Banner.footer' | 'Banner.header']",
+						"['c1' | 'c2' | 'c3' | 'c4' | 'termsList' | 'terms.history' | 'terms.trending'| 'terms.suggestions'| 'facets' | 'facetsHorizontal' | 'button.see-more' | 'content' | '_' | 'banner.left' | 'banner.banner' | 'banner.footer' | 'banner.header']",
 				},
-				defaultValue: { summary: "[['C1','C2', 'C3']]" },
+				defaultValue: { summary: "[['c1','c2', 'c3']]" },
 			},
 			control: 'array',
 		},
 		column1: {
-			description: 'object containing width - the specified width of the column and layout - array of modules to render in the "C1" layout',
+			description: 'object containing width - the specified width of the column and layout - array of modules to render in the "c1" layout',
 			table: {
 				type: {
 					summary:
-						"{width: '150px', layout: ['Terms' | 'HistoryTerms' | 'TrendingTerms'| 'SuggestedTerms'| 'Facets' | 'FacetsHorizontal' | 'SeeMore' | 'Content' | '_' | 'Banner.left' | 'Banner.banner' | 'Banner.footer' | 'Banner.header']}",
+						"{width: '150px', layout: ['termsList' | 'terms.history' | 'terms.trending'| 'terms.suggestions'| 'facets' | 'facetsHorizontal' | 'button.see-more' | 'content' | '_' | 'banner.left' | 'banner.banner' | 'banner.footer' | 'banner.header']}",
 				},
 				defaultValue: {
 					summary: `{
-					layout: ['Terms'],
+					layout: ['termsList'],
 					width: '150px'
 				}`,
 				},
@@ -103,15 +103,15 @@ export default {
 			control: 'array',
 		},
 		column2: {
-			description: 'object containing width - the specified width of the column and layout - array of modules to render in the "C2" layout',
+			description: 'object containing width - the specified width of the column and layout - array of modules to render in the "c2" layout',
 			table: {
 				type: {
 					summary:
-						"{width: '150px', layout: ['Terms' | 'HistoryTerms' | 'TrendingTerms'| 'SuggestedTerms'| 'Facets' | 'FacetsHorizontal' | 'SeeMore' | 'Content' | '_' | 'Banner.left' | 'Banner.banner' | 'Banner.footer' | 'Banner.header']}",
+						"{width: '150px', layout: ['termsList' | 'terms.history' | 'terms.trending'| 'terms.suggestions'| 'facets' | 'facetsHorizontal' | 'button.see-more' | 'content' | '_' | 'banner.left' | 'banner.banner' | 'banner.footer' | 'banner.header']}",
 				},
 				defaultValue: {
 					summary: `{
-					layout: ['Facets'],
+					layout: ['facets'],
 					width: '150px'
 				}`,
 				},
@@ -119,15 +119,15 @@ export default {
 			control: 'array',
 		},
 		column3: {
-			description: 'object containing width - the specified width of the column and layout - array of modules to render in the "C3" layout',
+			description: 'object containing width - the specified width of the column and layout - array of modules to render in the "c3" layout',
 			table: {
 				type: {
 					summary:
-						"{width: '150px', layout: ['Terms' | 'HistoryTerms' | 'TrendingTerms'| 'SuggestedTerms'| 'Facets' | 'FacetsHorizontal' | 'SeeMore' | 'Content' | '_' | 'Banner.left' | 'Banner.banner' | 'Banner.footer' | 'Banner.header']}",
+						"{width: '150px', layout: ['termsList' | 'terms.history' | 'terms.trending'| 'terms.suggestions'| 'facets' | 'facetsHorizontal' | 'button.see-more' | 'content' | '_' | 'banner.left' | 'banner.banner' | 'banner.footer' | 'banner.header']}",
 				},
 				defaultValue: {
 					summary: `{
-					layout: [['Content'], ['_', 'SeeMore']],
+					layout: [['content'], ['_', 'button.see-more']],
 					width: 'auto'
 				}`,
 				},
@@ -135,11 +135,11 @@ export default {
 			control: 'array',
 		},
 		column4: {
-			description: 'object containing width - the specified width of the column and layout - array of modules to render in the "C4" layout',
+			description: 'object containing width - the specified width of the column and layout - array of modules to render in the "c4" layout',
 			table: {
 				type: {
 					summary:
-						"{width: '150px', layout: ['Terms' | 'HistoryTerms' | 'TrendingTerms'| 'SuggestedTerms'| 'Facets' | 'FacetsHorizontal' | 'SeeMore' | 'Content' | '_' | 'Banner.left' | 'Banner.banner' | 'Banner.footer' | 'Banner.header']}",
+						"{width: '150px', layout: ['termsList' | 'terms.history' | 'terms.trending'| 'terms.suggestions'| 'facets' | 'facetsHorizontal' | 'button.see-more' | 'content' | '_' | 'banner.left' | 'banner.banner' | 'banner.footer' | 'banner.header']}",
 				},
 			},
 			control: 'array',
@@ -246,7 +246,7 @@ Slim.loaders = [
 ];
 
 Slim.args = {
-	layout: [['TermsList'], ['Content'], ['_', 'Button.see-more', '_']],
+	layout: [['termsList'], ['content'], ['_', 'button.see-more', '_']],
 	width: '400px',
 	theme: {
 		components: {
