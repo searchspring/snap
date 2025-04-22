@@ -21,9 +21,7 @@ export const RecommendationBundleEasyAdd = observer((properties: RecommendationB
 
 	//mergeprops only uses names that are passed via properties, so this cannot be put in the defaultProps
 	const _properties = {
-		name: properties.controller?.store?.profile?.display?.template?.component
-			? properties.controller?.store?.profile?.display?.template?.component.toLowerCase()
-			: undefined,
+		name: properties.controller?.store?.profile?.display?.template?.component?.toLowerCase(),
 		...properties,
 	};
 

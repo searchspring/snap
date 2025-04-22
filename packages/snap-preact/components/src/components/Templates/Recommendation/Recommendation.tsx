@@ -44,7 +44,7 @@ export const Recommendation = observer((properties: RecommendationProps): JSX.El
 
 	//mergeprops only uses names that are passed via properties, so this cannot be put in the defaultProps
 	const _properties = {
-		name: properties.controller?.store?.profile?.tag ? properties.controller?.store?.profile?.tag.toLowerCase() : undefined,
+		name: properties.controller?.store?.profile?.display?.template?.component?.toLowerCase(),
 		...properties,
 	};
 

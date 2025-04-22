@@ -167,15 +167,13 @@ export const RecommendationBundle = observer((properties: RecommendationBundlePr
 
 	//mergeprops only uses names that are passed via properties, so this cannot be put in the defaultProps
 	const _properties = {
-		name: properties.controller?.store?.profile?.display?.template?.component
-			? properties.controller?.store?.profile?.display?.template?.component.toLowerCase()
-			: undefined,
+		name: properties.controller?.store?.profile?.display?.template?.component?.toLowerCase(),
 		...properties,
 	};
 
 	let props = mergeProps('recommendationBundle', globalTheme, defaultProps, _properties);
 
-	let displaySettings;
+	let displaySettings: BreakpointsEntry | undefined;
 	if (!(properties.theme?.name || globalTheme.name)) {
 		displaySettings = useDisplaySettings(props.breakpoints!);
 		if (displaySettings && Object.keys(displaySettings).length) {
@@ -344,27 +342,27 @@ export const RecommendationBundle = observer((properties: RecommendationBundlePr
 
 		//no breakpoint props allowed in templates
 		if (!(properties.theme?.name || globalTheme.name)) {
-			Object.keys(props.breakpoints!).forEach((breakpoint: any) => {
-				const obj = props.breakpoints![breakpoint];
+			Object.keys(props.breakpoints!).forEach((breakpoint) => {
+				const obj = props.breakpoints![breakpoint as keyof typeof props.breakpoints];
 
-				const { slidesPerView: AdjustedSlidesPerView, slidesPerGroup: AdjustedSlidesPerGroup } = adjustSlides(obj);
+				const { slidesPerView: adjustedSlidesPerView, slidesPerGroup: adjustedSlidesPerGroup } = adjustSlides(obj);
 
-				modifiedBreakpoints[breakpoint] = {
-					...modifiedBreakpoints[breakpoint],
-					slidesPerView: AdjustedSlidesPerView,
-					slidesPerGroup: AdjustedSlidesPerGroup,
+				modifiedBreakpoints[breakpoint as keyof typeof props.breakpoints] = {
+					...modifiedBreakpoints[breakpoint as keyof typeof props.breakpoints],
+					slidesPerView: adjustedSlidesPerView,
+					slidesPerGroup: adjustedSlidesPerGroup,
 				};
 			});
 		} else {
-			const { slidesPerView: AdjustedSlidesPerView, slidesPerGroup: AdjustedSlidesPerGroup } = adjustSlides({
+			const { slidesPerView: adjustedSlidesPerView, slidesPerGroup: adjustedSlidesPerGroup } = adjustSlides({
 				...mergedCarouselProps,
 				slidesPerView: slidesPerView,
 			});
 
 			displaySettings = {
 				...mergedCarouselProps,
-				slidesPerView: AdjustedSlidesPerView,
-				slidesPerGroup: AdjustedSlidesPerGroup,
+				slidesPerView: adjustedSlidesPerView,
+				slidesPerGroup: adjustedSlidesPerGroup,
 			};
 		}
 	}
@@ -651,7 +649,7 @@ export const RecommendationBundle = observer((properties: RecommendationBundlePr
 								<BundledCTA
 									ctaSlot={ctaSlot}
 									cartStore={cartStore}
-									onAddToCart={(e: any) => addToCart(e)}
+									onAddToCart={(e) => addToCart(e as unknown as MouseEvent)}
 									ctaButtonText={ctaButtonText}
 									ctaButtonSuccessText={ctaButtonSuccessText}
 									ctaButtonSuccessTimeout={ctaButtonSuccessTimeout}
@@ -668,7 +666,7 @@ export const RecommendationBundle = observer((properties: RecommendationBundlePr
 							<BundledCTA
 								ctaSlot={ctaSlot}
 								cartStore={cartStore}
-								onAddToCart={(e: any) => addToCart(e)}
+								onAddToCart={(e) => addToCart(e as unknown as MouseEvent)}
 								ctaButtonText={ctaButtonText}
 								ctaButtonSuccessText={ctaButtonSuccessText}
 								ctaButtonSuccessTimeout={ctaButtonSuccessTimeout}
