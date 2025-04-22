@@ -61,44 +61,40 @@ describe('Tracking Beacon 2.0', () => {
 				const results = controller.store.results.filter((result) => result.type === 'product');
 				expect(results.length).to.be.greaterThan(0);
 
-				cy.wait(`@beacon2/search/render`)
-					.then(({ request, response }) => {
+				cy.wait(`@beacon2/search/render`).then(({ request, response }) => {
+					expect(response.body).to.have.property('success').to.equal(true);
+
+					const { context, data } = JSON.parse(request.body);
+					expect(context).to.be.an('object');
+
+					// save context values for later assertions
+					initialContext = { ...context };
+
+					expect(data).to.have.property('results').to.be.an('array').length(results.length); // all results are rendered
+					expect(data.results[0]).to.have.property('uid').to.be.a('string');
+					expect(data).to.have.property('merchandising').to.be.an('object');
+					expect(data).to.have.property('pagination').to.be.an('object');
+					expect(data).to.not.have.property('sort');
+					expect(data).to.have.property('q').to.be.a('string');
+
+					cy.wait(`@beacon2/search/impression`).then(({ request, response }) => {
 						expect(response.body).to.have.property('success').to.equal(true);
 
 						const { context, data } = JSON.parse(request.body);
+						expect(data).to.have.property('results').to.be.an('array').length(4); // first 4 results are visible on the page
+
+						// assert context values are the same as the initial values
 						expect(context).to.be.an('object');
+						expect(context.initiator).to.equal(initialContext.initiator);
+						// expect(context.pageLoadId).to.equal(initialContext.pageLoadId);
+						expect(context.pageUrl).to.equal(initialContext.pageUrl);
+						expect(context.sessionId).to.equal(initialContext.sessionId);
+						expect(context.shopperId).to.equal(initialContext.shopperId);
+						expect(context.timestamp).not.to.equal(initialContext.timestamp); // timestamp should be different
+						expect(context.userAgent).to.equal(initialContext.userAgent);
+						expect(context.userId).to.equal(initialContext.userId);
+						expect(context.pageLoadId).to.equal(initialContext.pageLoadId);
 
-						// save context values for later assertions
-						initialContext = { ...context };
-
-						expect(data).to.have.property('results').to.be.an('array').length(results.length); // all results are rendered
-						expect(data.results[0]).to.have.property('uid').to.be.a('string');
-						expect(data).to.have.property('merchandising').to.be.an('object');
-						expect(data).to.have.property('pagination').to.be.an('object');
-						expect(data).to.not.have.property('sort');
-						expect(data).to.have.property('q').to.be.a('string');
-					})
-					.then(() => {
-						cy.wait(`@beacon2/search/impression`).then(({ request, response }) => {
-							expect(response.body).to.have.property('success').to.equal(true);
-
-							const { context, data } = JSON.parse(request.body);
-							expect(data).to.have.property('results').to.be.an('array').length(4); // first 4 results are visible on the page
-
-							// assert context values are the same as the initial values
-							expect(context).to.be.an('object');
-							expect(context.initiator).to.equal(initialContext.initiator);
-							// expect(context.pageLoadId).to.equal(initialContext.pageLoadId);
-							expect(context.pageUrl).to.equal(initialContext.pageUrl);
-							expect(context.sessionId).to.equal(initialContext.sessionId);
-							expect(context.shopperId).to.equal(initialContext.shopperId);
-							expect(context.timestamp).not.to.equal(initialContext.timestamp); // timestamp should be different
-							expect(context.userAgent).to.equal(initialContext.userAgent);
-							expect(context.userId).to.equal(initialContext.userId);
-							expect(context.pageLoadId).to.equal(initialContext.pageLoadId);
-						});
-					})
-					.then(() => {
 						// reload page to generate new context
 						cy.visit('https://localhost:2222?differentPageUrl=1');
 
@@ -160,6 +156,7 @@ describe('Tracking Beacon 2.0', () => {
 							});
 						});
 					});
+				});
 			});
 		});
 	});

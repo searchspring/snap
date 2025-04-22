@@ -1,8 +1,7 @@
 import { h, ComponentType, FunctionComponent } from 'preact';
-import { useRef } from 'preact/hooks';
 import type { Product } from '@searchspring/snap-store-mobx';
 import type { SearchController, AutocompleteController, RecommendationController } from '@searchspring/snap-controller';
-import { useIntersectionAdvanced } from '../hooks';
+import { createImpressionObserver } from '../utilities';
 
 interface WithTrackingProps {
 	controller?: SearchController | AutocompleteController | RecommendationController;
@@ -22,14 +21,9 @@ export function withTracking<Props extends WithTrackingProps>(WrappedComponent: 
 			console.warn('Warning: No result provided to withTracking');
 		}
 
-		const trackingRef = useRef<HTMLElement>(null);
-		const resultInViewport = useIntersectionAdvanced(trackingRef, {
-			fireOnce: true,
-			threshold: 0.75,
-			minVisibleTime: 1000,
-		});
+		const { ref, inViewport } = createImpressionObserver();
 
-		if (resultInViewport) {
+		if (inViewport) {
 			// TODO: add support for disabling tracking events via config like in ResultTracker
 			if (result?.type === 'product') {
 				controller?.track.product.impression(result as Product);
@@ -38,12 +32,13 @@ export function withTracking<Props extends WithTrackingProps>(WrappedComponent: 
 			}
 		}
 
-		const currentRef = trackingRef.current;
+		const currentRef = ref.current;
 		if (currentRef) {
 			const handleClick = (e: MouseEvent) => {
 				controller?.track.product.click(e, result as Product);
 			};
 			currentRef.setAttribute('sstracking', 'true');
+			currentRef.removeEventListener('click', handleClick);
 			currentRef.addEventListener('click', handleClick);
 		}
 
@@ -51,7 +46,7 @@ export function withTracking<Props extends WithTrackingProps>(WrappedComponent: 
 			...restProps,
 			controller,
 			result,
-			trackingRef,
+			trackingRef: ref,
 		};
 
 		return <WrappedComponent {...(trackingProps as Props)} />;

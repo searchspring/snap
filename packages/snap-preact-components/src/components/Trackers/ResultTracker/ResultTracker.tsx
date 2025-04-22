@@ -1,14 +1,14 @@
 /** @jsx jsx */
 import { h, ComponentChildren } from 'preact';
 import { jsx, css } from '@emotion/react';
-import { useRef } from 'preact/hooks';
 import { observer } from 'mobx-react';
 import { Theme, useTheme } from '../../../providers';
-import { useIntersectionAdvanced } from '../../../hooks';
 import type { AutocompleteController, RecommendationController, SearchController } from '@searchspring/snap-controller';
 import { ComponentProps, StylingCSS } from '../../../types';
 import type { Banner, Product } from '@searchspring/snap-store-mobx';
 import classnames from 'classnames';
+import { createImpressionObserver } from '../../../utilities';
+import { type Ref } from 'preact/hooks';
 
 const CSS = {
 	ResultTracker: () => css({}),
@@ -37,13 +37,9 @@ export const ResultTracker = observer((properties: ResultTrackerProps): JSX.Elem
 		...defaultTrack,
 		...track,
 	};
-	const resultRef = useRef(null);
-	const resultInViewport = useIntersectionAdvanced(resultRef, {
-		fireOnce: true,
-		threshold: 0.75,
-		minVisibleTime: 1000,
-	});
-	if (resultInViewport && mergedTrack.impression) {
+
+	const { ref, inViewport } = createImpressionObserver();
+	if (inViewport && mergedTrack.impression) {
 		if (result.type === 'product') {
 			controller?.track.product.impression(result as Product);
 		} else {
@@ -66,7 +62,7 @@ export const ResultTracker = observer((properties: ResultTrackerProps): JSX.Elem
 					controller?.track.product.click(e, result as Product);
 				}
 			}}
-			ref={resultRef}
+			ref={ref as Ref<HTMLDivElement>}
 			{...styling}
 		>
 			{children}
