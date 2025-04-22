@@ -96,6 +96,7 @@ describe('Tracking Beacon 2.0', () => {
 						expect(context.pageLoadId).to.equal(initialContext.pageLoadId);
 
 						// reload page to generate new context
+						cy.wait(5000);
 						cy.visit('https://localhost:2222?differentPageUrl=1');
 
 						cy.waitForBundle().then(() => {
