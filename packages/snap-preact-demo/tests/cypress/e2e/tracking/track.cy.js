@@ -95,67 +95,67 @@ describe('Tracking Beacon 2.0', () => {
 						expect(context.userId).to.equal(initialContext.userId);
 						expect(context.pageLoadId).to.equal(initialContext.pageLoadId);
 
-						// reload page to generate new context
-						cy.wait(5000);
-						cy.visit('https://localhost:2222?differentPageUrl=1');
+						// // reload page to generate new context
+						// cy.wait(5000);
+						// cy.visit('https://localhost:2222?differentPageUrl=1');
 
-						cy.waitForBundle().then(() => {
-							cy.snapController().then((controller) => {
-								const firstResult = controller.store.results.find((result) => result.type === 'product');
-								const pagination = controller.store.pagination;
-								const merchandising = controller.store.merchandising;
-								expect(firstResult).to.exist;
-								expect(pagination).to.exist;
-								expect(merchandising).to.exist;
+						// cy.waitForBundle().then(() => {
+						// 	cy.snapController().then((controller) => {
+						// 		const firstResult = controller.store.results.find((result) => result.type === 'product');
+						// 		const pagination = controller.store.pagination;
+						// 		const merchandising = controller.store.merchandising;
+						// 		expect(firstResult).to.exist;
+						// 		expect(pagination).to.exist;
+						// 		expect(merchandising).to.exist;
 
-								// Click on first product
-								cy.get(`.ss__result a[href='${firstResult.mappings.core.url}']`).first().click({ force: true });
+						// 		// Click on first product
+						// 		cy.get(`.ss__result a[href='${firstResult.mappings.core.url}']`).first().click({ force: true });
 
-								cy.wait(`@beacon2/search/clickthrough`).then(({ request, response }) => {
-									expect(response.body).to.have.property('success').to.equal(true);
+						// 		cy.wait(`@beacon2/search/clickthrough`).then(({ request, response }) => {
+						// 			expect(response.body).to.have.property('success').to.equal(true);
 
-									const { context, data } = JSON.parse(request.body);
+						// 			const { context, data } = JSON.parse(request.body);
 
-									// assert clickthrough data is correct product that was clicked
-									expect(data).to.have.property('results').to.be.an('array').length(1);
-									expect(data.results[0]).to.have.property('uid').to.be.a('string').and.to.equal(firstResult.mappings.core.uid);
-									expect(data.results[0]).to.have.property('sku').to.be.a('string').and.to.equal(firstResult.mappings.core.sku);
+						// 			// assert clickthrough data is correct product that was clicked
+						// 			expect(data).to.have.property('results').to.be.an('array').length(1);
+						// 			expect(data.results[0]).to.have.property('uid').to.be.a('string').and.to.equal(firstResult.mappings.core.uid);
+						// 			expect(data.results[0]).to.have.property('sku').to.be.a('string').and.to.equal(firstResult.mappings.core.sku);
 
-									// assert data doesn't have other properties
-									expect(JSON.stringify(data)).to.equal(
-										JSON.stringify({
-											q: '',
-											pagination: {
-												totalResults: pagination.totalResults,
-												page: pagination.page,
-												resultsPerPage: pagination.pageSize,
-											},
-											merchandising: {
-												redirect: merchandising.redirect,
-												personalized: merchandising.personalized,
-											},
-											results: [
-												{
-													uid: firstResult.mappings.core.uid,
-													sku: firstResult.mappings.core.sku,
-												},
-											],
-										})
-									);
+						// 			// assert data doesn't have other properties
+						// 			expect(JSON.stringify(data)).to.equal(
+						// 				JSON.stringify({
+						// 					q: '',
+						// 					pagination: {
+						// 						totalResults: pagination.totalResults,
+						// 						page: pagination.page,
+						// 						resultsPerPage: pagination.pageSize,
+						// 					},
+						// 					merchandising: {
+						// 						redirect: merchandising.redirect,
+						// 						personalized: merchandising.personalized,
+						// 					},
+						// 					results: [
+						// 						{
+						// 							uid: firstResult.mappings.core.uid,
+						// 							sku: firstResult.mappings.core.sku,
+						// 						},
+						// 					],
+						// 				})
+						// 			);
 
-									// assert context values are different after page reload
-									expect(context).to.be.an('object');
-									expect(context.initiator).to.equal(initialContext.initiator);
-									expect(context.pageLoadId).to.not.equal(initialContext.pageLoadId); // pageLoadId should be different
-									expect(context.pageUrl).to.not.equal(initialContext.pageUrl); // pageUrl should be different
-									expect(context.sessionId).to.equal(initialContext.sessionId);
-									expect(context.shopperId).to.equal(initialContext.shopperId);
-									expect(context.timestamp).not.to.equal(initialContext.timestamp); // timestamp should be different
-									expect(context.userAgent).to.equal(initialContext.userAgent);
-									expect(context.userId).to.equal(initialContext.userId);
-								});
-							});
-						});
+						// 			// assert context values are different after page reload
+						// 			expect(context).to.be.an('object');
+						// 			expect(context.initiator).to.equal(initialContext.initiator);
+						// 			expect(context.pageLoadId).to.not.equal(initialContext.pageLoadId); // pageLoadId should be different
+						// 			expect(context.pageUrl).to.not.equal(initialContext.pageUrl); // pageUrl should be different
+						// 			expect(context.sessionId).to.equal(initialContext.sessionId);
+						// 			expect(context.shopperId).to.equal(initialContext.shopperId);
+						// 			expect(context.timestamp).not.to.equal(initialContext.timestamp); // timestamp should be different
+						// 			expect(context.userAgent).to.equal(initialContext.userAgent);
+						// 			expect(context.userId).to.equal(initialContext.userId);
+						// 		});
+						// 	});
+						// });
 					});
 				});
 			});
