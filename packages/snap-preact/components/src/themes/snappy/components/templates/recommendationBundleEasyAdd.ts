@@ -10,6 +10,21 @@ import type { RecommendationBundleEasyAddProps } from '../../../../components/Te
 export const recommendationBundleEasyAdd: ThemeComponentProps<RecommendationBundleEasyAddProps> = {
 	default: {
 		// themeStyleScript: recommendationBundleEasyAddStyleScript,
+		theme: {
+			components: {
+				recommendationBundle: {
+					hideCheckboxes: true,
+					ctaInline: false,
+					hideSeed: true,
+					vertical: true,
+					limit: 1,
+					carousel: {
+						enabled: false,
+					},
+					separatorIcon: false,
+				},
+			},
+		},
 	},
 	mobile: {},
 	tablet: {},

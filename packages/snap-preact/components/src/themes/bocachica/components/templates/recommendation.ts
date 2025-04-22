@@ -18,8 +18,19 @@ const recommendationStyleScript = ({ theme }: RecommendationProps) => {
 export const recommendation: ThemeComponentProps<RecommendationProps> = {
 	default: {
 		themeStyleScript: recommendationStyleScript,
+		slidesPerView: 5,
+		slidesPerGroup: 5,
 	},
-	mobile: {},
-	tablet: {},
-	desktop: {},
+	mobile: {
+		slidesPerView: 2,
+		slidesPerGroup: 2,
+	},
+	tablet: {
+		slidesPerView: 3,
+		slidesPerGroup: 3,
+	},
+	desktop: {
+		slidesPerView: 4,
+		slidesPerGroup: 4,
+	},
 };

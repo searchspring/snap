@@ -252,12 +252,12 @@ export type ThemeComponentOverrides =
 	/* TEMPLATES */
 	{ [K in UnNamedThemeComponentSelectors<'autocomplete'>]?: Partial<AutocompleteProps> } &
 	// { [K in UnNamedThemeComponentSelectors<'autocompleteTerms'>]?: Partial<AutocompleteTermsProps> } &
-	{ [K in UnNamedThemeComponentSelectors<'recommendation'>]?: Partial<RecommendationProps> } &
-	{ [K in UnNamedThemeComponentSelectors<'recommendationBundle'>]?: Partial<RecommendationBundleProps> } &
-	{ [K in UnNamedThemeComponentSelectors<'recommendationBundleEasyAdd'>]?: Partial<RecommendationBundleEasyAddProps> } &
-	{ [K in UnNamedThemeComponentSelectors<'recommendationBundleList'>]?: Partial<RecommendationBundleListProps> } &
-	{ [K in UnNamedThemeComponentSelectors<'recommendationBundleVertical'>]?: Partial<RecommendationBundleVerticalProps> } &
-	{ [K in UnNamedThemeComponentSelectors<'recommendationGrid'>]?: Partial<RecommendationGridProps> } &
+	{ [K in NamedThemeComponentSelectors<'recommendation', string>]?: Partial<RecommendationProps> } &
+	{ [K in NamedThemeComponentSelectors<'recommendationBundle', string>]?: Partial<RecommendationBundleProps> } &
+	{ [K in NamedThemeComponentSelectors<'recommendationBundleEasyAdd', string>]?: Partial<RecommendationBundleEasyAddProps> } &
+	{ [K in NamedThemeComponentSelectors<'recommendationBundleList', string>]?: Partial<RecommendationBundleListProps> } &
+	{ [K in NamedThemeComponentSelectors<'recommendationBundleVertical', string>]?: Partial<RecommendationBundleVerticalProps> } &
+	{ [K in NamedThemeComponentSelectors<'recommendationGrid', string>]?: Partial<RecommendationGridProps> } &
 	{ [K in UnNamedThemeComponentSelectors<'recommendationEmail'>]?: Partial<RecommendationEmailProps> } & 
 	{ [K in UnNamedThemeComponentSelectors<'search'>]?: Partial<SearchProps> } &
 	{ [K in UnNamedThemeComponentSelectors<'searchHorizontal'>]?: Partial<SearchHorizontalProps> };
@@ -330,12 +330,12 @@ export type ThemeComponentRestrictedOverrides =
 	/* TEMPLATES */
 	{ [K in UnNamedThemeComponentSelectors<'autocomplete'>]?: RestrictedComponentProps<AutocompleteProps> } &
 	// { [K in UnNamedThemeComponentSelectors<'autocompleteTerms'>]?: RestrictedComponentProps<AutocompleteTermsProps> } &
-	{ [K in UnNamedThemeComponentSelectors<'recommendation'>]?: RestrictedComponentProps<RecommendationProps> } &
-	{ [K in UnNamedThemeComponentSelectors<'recommendationBundle'>]?: RestrictedComponentProps<RecommendationBundleProps> } &
-	{ [K in UnNamedThemeComponentSelectors<'recommendationBundleEasyAdd'>]?: RestrictedComponentProps<RecommendationBundleEasyAddProps> } &
-	{ [K in UnNamedThemeComponentSelectors<'recommendationBundleList'>]?: RestrictedComponentProps<RecommendationBundleListProps> } &
-	{ [K in UnNamedThemeComponentSelectors<'recommendationBundleVertical'>]?: RestrictedComponentProps<RecommendationBundleVerticalProps> } &
-	{ [K in UnNamedThemeComponentSelectors<'recommendationGrid'>]?: RestrictedComponentProps<RecommendationGridProps> } &
-	{ [K in UnNamedThemeComponentSelectors<'recommendationEmail'>]?: RestrictedComponentProps<RecommendationEmailProps> } & 
+	{ [K in NamedThemeComponentSelectors<'recommendation', string>]?: RestrictedComponentProps<RecommendationProps> } &
+	{ [K in NamedThemeComponentSelectors<'recommendationBundle', string>]?: RestrictedComponentProps<RecommendationBundleProps> } &
+	{ [K in NamedThemeComponentSelectors<'recommendationBundleEasyAdd', string>]?: RestrictedComponentProps<RecommendationBundleEasyAddProps> } &
+	{ [K in NamedThemeComponentSelectors<'recommendationBundleList', string>]?: RestrictedComponentProps<RecommendationBundleListProps> } &
+	{ [K in NamedThemeComponentSelectors<'recommendationBundleVertical', string>]?: RestrictedComponentProps<RecommendationBundleVerticalProps> } &
+	{ [K in NamedThemeComponentSelectors<'recommendationGrid', string>]?: RestrictedComponentProps<RecommendationGridProps> } &
+	{ [K in NamedThemeComponentSelectors<'recommendationEmail', string>]?: RestrictedComponentProps<RecommendationEmailProps> } & 
 	{ [K in UnNamedThemeComponentSelectors<'search'>]?: RestrictedComponentProps<SearchProps> } &
 	{ [K in UnNamedThemeComponentSelectors<'searchHorizontal'>]?: RestrictedComponentProps<SearchHorizontalProps> };
