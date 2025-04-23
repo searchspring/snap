@@ -243,7 +243,7 @@ export const Layout = observer((properties: LayoutProps): JSX.Element => {
 			case 'Button.sidebar-toggle':
 				return (
 					ToggleSideBarButton && (
-						<div className="ss__button-toggleSideBarButtonWrapper">
+						<div className="ss__button--sidebar-toggle-button-wrapper">
 							<Button {...subProps.ToggleSideBarButton}>
 								<ToggleSideBarButton />
 							</Button>

@@ -5,11 +5,9 @@ Renders a Search Results Page.
 ## Sub-components
 
 - FacetsHorizontal
-- LayoutSelector
 - Results
 - NoResults
 - Toolbar
-- SearchHeader
 
 ## Usage
 
@@ -36,18 +34,18 @@ const CustomResult = ({
 <SearchHorizontal controller={controller} resultComponent={CustomResult} />
 ```
 
-### hideSearchHeader
-The `hideSearchHeader` prop specifies if the SearchHeader component should be rendered.  
+### hideTopToolBar
+The `hideTopToolBar` prop specifies if the top ToolBar component should be rendered.  
 
 ```jsx
-<SearchHorizontal controller={controller} hideSearchHeader={true} />
+<SearchHorizontal controller={controller} hideTopToolBar={true} />
 ```
 
-### hidetopToolBar
-The `hidetopToolBar` prop specifies if the top ToolBar component should be rendered.  
+### hideMiddleToolBar
+The `hideMiddleToolBar` prop specifies if the middle ToolBar component should be rendered.  
 
 ```jsx
-<SearchHorizontal controller={controller} hidetopToolBar={true} />
+<SearchHorizontal controller={controller} hideMiddleToolBar={true} />
 ```
 
 ### hideBottomToolBar
@@ -57,69 +55,11 @@ The `hideBottomToolBar` prop specifies if the bottom ToolBar component should be
 <SearchHorizontal controller={controller} hideBottomToolBar={true} />
 ```
 
-### hideLayoutSelector
-The `hideLayoutSelector` prop specifies if the layoutSelector component should be rendered. 
+
+### hideFacetsHorizontal
+The `hideFacetsHorizontal` prop specifies if the FacetsHorizontal component should be rendered.  
 
 ```jsx
-<SearchHorizontal controller={controller} hideLayoutSelector={true} />
+<SearchHorizontal controller={controller} hideFacetsHorizontal={true} />
 ```
 
-### layoutConfig
-The `layoutConfig` prop specifies the configuration for the layoutSelector.  
-
-```jsx
-const layoutConfig = {
-    default: {
-        label: "5 wide",
-        value: {
-            columns:5,
-        }
-    },
-    options: [
-        {
-            label: "1 wide",
-            value: {
-
-                icon: "square",
-                columns:1,
-            }
-        },
-        {
-            label: "2 wide",
-            value: {
-                icon: {
-                    icon: "layout-large",
-                },
-                columns:2,
-            }
-        },
-        {
-            label: "3 wide",
-            value: {
-                icon: {
-                    icon: 'layout-grid',
-                },
-                columns:3,
-            }
-        },
-        {
-            label: "4 wide",
-            value: {
-                columns:4,
-            }
-        },
-        {
-            label: "list",
-            value: {
-                icon: {
-                    icon: 'layout-list',
-                },
-                component: (props) => <Result {...props} controller={controller} layout={ResultsLayout.list}/>,
-                columns:1,
-            }
-        },
-    ]	
-}
-
-<SearchHorizontal controller={controller} layoutConfig={layoutConfig} />
-```

@@ -29,7 +29,9 @@ export const search: ThemeComponentProps<SearchProps> = {
 				},
 				'toolbar.top': {
 					layout: [
+						['Banner.header'],
 						['_', 'SearchHeader', '_'],
+						['Banner.banner'],
 						['Button.sidebar-toggle', 'PaginationInfo', '_', 'PerPage', 'SortBy'],
 					],
 				},
@@ -37,7 +39,7 @@ export const search: ThemeComponentProps<SearchProps> = {
 					layout: [],
 				},
 				'toolbar.bottom': {
-					layout: ['_', 'Pagination', '_'],
+					layout: [['Banner.footer'], ['_', 'Pagination', '_']],
 				},
 			},
 		},
@@ -49,10 +51,7 @@ export const search: ThemeComponentProps<SearchProps> = {
 					columns: 2,
 				},
 				'toolbar.top': {
-					layout: [
-						['_', 'SearchHeader', '_'],
-						['MobileSidebar', '_', 'PaginationInfo', '_', 'LayoutSelector'],
-					],
+					layout: [['Banner.header'], ['_', 'SearchHeader', '_'], ['Banner.banner'], ['MobileSidebar', '_', 'PaginationInfo', '_', 'LayoutSelector']],
 				},
 				mobileSidebar: {
 					layout: [['SortBy'], ['Facets']],
@@ -73,7 +72,7 @@ export const search: ThemeComponentProps<SearchProps> = {
 					],
 				},
 				mobileSidebar: {
-					layout: [['SortBy'], ['Facets']],
+					layout: [['SortBy'], ['Facets'], ['Banner.left']],
 				},
 			},
 		},

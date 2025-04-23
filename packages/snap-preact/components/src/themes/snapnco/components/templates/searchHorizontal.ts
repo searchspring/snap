@@ -105,7 +105,6 @@ export const searchHorizontal: ThemeComponentProps<SearchHorizontalProps> = {
 				},
 			},
 		},
-		hideMiddleToolbar: false,
 	},
 	mobile: {
 		hideFacetsHorizontal: true,

@@ -42,24 +42,23 @@ export const searchHorizontal: ThemeComponentProps<SearchHorizontalProps> = {
 					icon: 'filters',
 				},
 				'toolbar.top': {
-					layout: ['PaginationInfo', '_', 'SortBy', 'PerPage'],
+					layout: [['Banner.header'], ['SearchHeader'], ['Banner.banner'], ['PaginationInfo', '_', 'SortBy', 'PerPage']],
 				},
 				'toolbar.middle': {
 					layout: [],
 				},
 				'toolbar.bottom': {
-					layout: ['_', 'Pagination', '_'],
+					layout: [['Banner.footer'], ['_', 'Pagination', '_']],
 				},
 			},
 		},
 	},
 	mobile: {
 		hideFacetsHorizontal: true,
-		hideMiddleToolbar: false,
 		theme: {
 			components: {
 				'toolbar.top': {
-					layout: ['MobileSidebar', '_', 'LayoutSelector'],
+					layout: [['Banner.header'], ['SearchHeader'], ['Banner.banner'], ['MobileSidebar', '_', 'LayoutSelector']],
 				},
 				'toolbar.middle': {
 					layout: ['PaginationInfo'],

@@ -5,7 +5,7 @@ import type { ToolbarProps } from '../../../../components/Organisms/Toolbar';
 const toolbarStyleScript = () => {
 	const sidebarWidth = 'calc(270px + 1.5em)';
 	return css({
-		'.ss__layout__button-toggleSideBarButtonWrapper': {
+		'.ss__button--sidebar-toggle-button-wrapper': {
 			marginRight: sidebarWidth ? 'inherit' : 'auto',
 			width: sidebarWidth ? sidebarWidth : 'inherit',
 		},

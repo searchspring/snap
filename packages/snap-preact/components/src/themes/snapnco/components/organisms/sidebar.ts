@@ -12,6 +12,7 @@ const sidebarStyleScript = ({ theme }: SidebarProps) => {
 		border: '1px solid #d6d6d6',
 		borderRadius: '1.5em',
 		padding: '15px',
+
 		'& .ss__sidebar__title': {
 			color: variables?.colors?.primary,
 			borderBottom: '1px solid #d6d6d6',
@@ -19,6 +20,12 @@ const sidebarStyleScript = ({ theme }: SidebarProps) => {
 			fontSize: '20px',
 			paddingBottom: '20px',
 			marginBottom: '20px',
+		},
+
+		'.ss__layout': {
+			margin: '0px',
+			padding: '0px',
+			border: '0px',
 		},
 	});
 };
