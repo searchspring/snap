@@ -46,6 +46,7 @@ import type { SlideoutProps } from '../components/Molecules/Slideout';
 import type { SortByProps } from '../components/Molecules/SortBy';
 import type { SwatchesProps } from '../components/Molecules/Swatches';
 import type { VariantSelectionProps } from '../components/Molecules/VariantSelection';
+import type { TermsNames, TermsProps } from '../components/Molecules/Terms';
 
 /* ORGANISMS */
 import type { BranchOverrideProps } from '../components/Organisms/BranchOverride';
@@ -59,10 +60,9 @@ import type { ResultsNames, ResultsProps } from '../components/Organisms/Results
 import type { SearchHeaderProps } from '../components/Atoms/SearchHeader';
 import type { SidebarProps } from '../components/Organisms/Sidebar';
 import type { ToolbarProps, ToolbarNames } from '../components/Organisms/Toolbar';
+import type { TermsListProps } from '../components/Organisms/TermsList';
 
 /* TEMPLATES */
-import type { AutocompleteProps } from '../components/Templates/Autocomplete';
-// import type { AutocompleteTermsProps } from '../components/Templates/AutocompleteTerms';
 import type { RecommendationProps } from '../components/Templates/Recommendation';
 import type { RecommendationBundleProps } from '../components/Templates/RecommendationBundle';
 import type { RecommendationBundleEasyAddProps } from '../components/Templates/RecommendationBundleEasyAdd';
@@ -72,6 +72,7 @@ import type { RecommendationGridProps } from '../components/Templates/Recommenda
 import type { RecommendationEmailProps } from '../components/Templates/RecommendationEmail';
 import type { SearchProps } from '../components/Templates/Search';
 import type { SearchHorizontalProps } from '../components/Templates/SearchHorizontal';
+import type { AutocompleteTemplateProps } from '../components/Templates/AutocompleteTemplate';
 
 export type ThemeComponentProps<ComponentProps> = {
 	default: Partial<ComponentProps>;
@@ -156,9 +157,11 @@ export type ThemeComponents = {
 	sortBy: Partial<SortByProps>;
 	swatches: Partial<SwatchesProps>;
 	variantSelection: Partial<VariantSelectionProps>;
+	terms: Partial<TermsProps>;
 
 	/* ORGANISMS */
 	branchOverride: Partial<BranchOverrideProps>;
+	termsList: Partial<TermsListProps>;
 	facet: Partial<FacetProps>;
 	facets: Partial<FacetsProps>;
 	facetsHorizontal: Partial<FacetsHorizontalProps>;
@@ -171,8 +174,7 @@ export type ThemeComponents = {
 	toolbar: Partial<ToolbarProps>;
 
 	/* TEMPLATES */
-	autocomplete: Partial<AutocompleteProps>;
-	// autocompleteTerms: Partial<AutocompleteTermsProps>;
+	autocompleteTemplate: Partial<AutocompleteTemplateProps>;
 	recommendation: Partial<RecommendationProps>;
 	recommendationBundle: Partial<RecommendationBundleProps>;
 	recommendationBundleEasyAdd: Partial<RecommendationBundleEasyAddProps>;
@@ -183,6 +185,18 @@ export type ThemeComponents = {
 	search: Partial<SearchProps>;
 	searchHorizontal: Partial<SearchHorizontalProps>;
 };
+
+// export type ThemeComponentsTemplates = {
+// 	recommendation: Partial<RecommendationProps>;
+// 	recommendationBundle: Partial<RecommendationBundleProps>;
+// 	recommendationBundleEasyAdd: Partial<RecommendationBundleEasyAddProps>;
+// 	recommendationBundleList: Partial<RecommendationBundleListProps>;
+// 	recommendationBundleVertical: Partial<RecommendationBundleVerticalProps>;
+// 	recommendationGrid: Partial<RecommendationGridProps>;
+// 	recommendationEmail: Partial<RecommendationEmailProps>;
+// 	search: Partial<SearchProps>;
+// 	searchHorizontal: Partial<SearchHorizontalProps>;
+// }
 
 // prettier-ignore
 export type ThemeComponentOverrides =
@@ -235,6 +249,7 @@ export type ThemeComponentOverrides =
 	{ [K in UnNamedThemeComponentSelectors<'sortBy'>]?: Partial<SortByProps> } &
 	{ [K in UnNamedThemeComponentSelectors<'swatches'>]?: Partial<SwatchesProps> } &
 	{ [K in UnNamedThemeComponentSelectors<'variantSelection'>]?: Partial<VariantSelectionProps> } &
+	{ [K in NamedThemeComponentSelectors<'terms', TermsNames>]?: Partial<TermsProps> } &
 
 	/* ORGANISMS */
 	{ [K in UnNamedThemeComponentSelectors<'branchOverride'>]?: Partial<BranchOverrideProps> } &
@@ -248,10 +263,11 @@ export type ThemeComponentOverrides =
 	{ [K in UnNamedThemeComponentSelectors<'sidebar'>]?: Partial<SidebarProps> } &
 	{ [K in UnNamedThemeComponentSelectors<'mobileSidebar'>]?: Partial<MobileSidebarProps> } &
 	{ [K in NamedThemeComponentSelectors<'toolbar', ToolbarNames>]?: Partial<ToolbarProps> } &
+	{ [K in UnNamedThemeComponentSelectors<'termsList'>]?: Partial<TermsListProps> } &
+
 
 	/* TEMPLATES */
-	{ [K in UnNamedThemeComponentSelectors<'autocomplete'>]?: Partial<AutocompleteProps> } &
-	// { [K in UnNamedThemeComponentSelectors<'autocompleteTerms'>]?: Partial<AutocompleteTermsProps> } &
+	{ [K in UnNamedThemeComponentSelectors<'autocompleteTemplate'>]?: Partial<AutocompleteTemplateProps> } &
 	{ [K in NamedThemeComponentSelectors<'recommendation', string>]?: Partial<RecommendationProps> } &
 	{ [K in NamedThemeComponentSelectors<'recommendationBundle', string>]?: Partial<RecommendationBundleProps> } &
 	{ [K in NamedThemeComponentSelectors<'recommendationBundleEasyAdd', string>]?: Partial<RecommendationBundleEasyAddProps> } &
@@ -313,6 +329,7 @@ export type ThemeComponentRestrictedOverrides =
 	{ [K in UnNamedThemeComponentSelectors<'sortBy'>]?: RestrictedComponentProps<SortByProps> } &
 	{ [K in UnNamedThemeComponentSelectors<'swatches'>]?: RestrictedComponentProps<SwatchesProps> } &
 	{ [K in UnNamedThemeComponentSelectors<'variantSelection'>]?: RestrictedComponentProps<VariantSelectionProps> } &
+	{ [K in NamedThemeComponentSelectors<'terms', TermsNames>]?: RestrictedComponentProps<TermsProps> } &
 
 	/* ORGANISMS */
 	{ [K in UnNamedThemeComponentSelectors<'branchOverride'>]?: RestrictedComponentProps<BranchOverrideProps> } &
@@ -326,10 +343,10 @@ export type ThemeComponentRestrictedOverrides =
 	{ [K in UnNamedThemeComponentSelectors<'sidebar'>]?: RestrictedComponentProps<SidebarProps> } &
 	{ [K in UnNamedThemeComponentSelectors<'mobileSidebar'>]?: RestrictedComponentProps<MobileSidebarProps> } &
 	{ [K in NamedThemeComponentSelectors<'toolbar', ToolbarNames>]?: RestrictedComponentProps<ToolbarProps> } &
+	{ [K in UnNamedThemeComponentSelectors<'termsList'>]?: RestrictedComponentProps<TermsListProps> } &
 
 	/* TEMPLATES */
-	{ [K in UnNamedThemeComponentSelectors<'autocomplete'>]?: RestrictedComponentProps<AutocompleteProps> } &
-	// { [K in UnNamedThemeComponentSelectors<'autocompleteTerms'>]?: RestrictedComponentProps<AutocompleteTermsProps> } &
+	{ [K in UnNamedThemeComponentSelectors<'autocompleteTemplate'>]?: RestrictedComponentProps<AutocompleteTemplateProps> } &
 	{ [K in NamedThemeComponentSelectors<'recommendation', string>]?: RestrictedComponentProps<RecommendationProps> } &
 	{ [K in NamedThemeComponentSelectors<'recommendationBundle', string>]?: RestrictedComponentProps<RecommendationBundleProps> } &
 	{ [K in NamedThemeComponentSelectors<'recommendationBundleEasyAdd', string>]?: RestrictedComponentProps<RecommendationBundleEasyAddProps> } &

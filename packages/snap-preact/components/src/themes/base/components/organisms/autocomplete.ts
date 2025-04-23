@@ -1,5 +1,5 @@
 // import { css } from '@emotion/react';
-import type { AutocompleteProps } from '../../../../components/Templates/Autocomplete';
+import type { AutocompleteProps } from '../../../../components/Organisms/Autocomplete';
 
 // CSS in JS style script for the Autocomplete component
 // const autocompleteStyleScript = ({}: AutocompleteProps) => {

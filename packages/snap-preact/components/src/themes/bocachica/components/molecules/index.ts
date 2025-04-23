@@ -27,6 +27,7 @@ import { rating } from './rating';
 import { sortBy } from './sortBy';
 import { swatches } from './swatches';
 import { variantSelection } from './variantSelection';
+import { terms } from './terms';
 
 export const molecules = {
 	default: {
@@ -57,6 +58,7 @@ export const molecules = {
 		sortBy: sortBy.default,
 		swatches: swatches.default,
 		variantSelection: variantSelection.default,
+		terms: terms.default,
 	},
 	mobile: {
 		calloutBadge: calloutBadge.mobile,
@@ -86,6 +88,7 @@ export const molecules = {
 		sortBy: sortBy.mobile,
 		swatches: swatches.mobile,
 		variantSelection: variantSelection.mobile,
+		terms: terms.mobile,
 	},
 	tablet: {
 		calloutBadge: calloutBadge.tablet,
@@ -115,6 +118,7 @@ export const molecules = {
 		sortBy: sortBy.tablet,
 		swatches: swatches.tablet,
 		variantSelection: variantSelection.tablet,
+		terms: terms.tablet,
 	},
 	desktop: {
 		calloutBadge: calloutBadge.desktop,
@@ -144,5 +148,6 @@ export const molecules = {
 		sortBy: sortBy.desktop,
 		swatches: swatches.desktop,
 		variantSelection: variantSelection.desktop,
+		terms: terms.desktop,
 	},
 };

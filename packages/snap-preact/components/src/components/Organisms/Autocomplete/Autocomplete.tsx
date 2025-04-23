@@ -11,9 +11,9 @@ import { ContentType } from '@searchspring/snap-store-mobx';
 import type { Term } from '@searchspring/snap-store-mobx';
 
 import { Icon, IconProps } from '../../Atoms/Icon/Icon';
-import { Results, ResultsProps } from '../../Organisms/Results';
+import { Results, ResultsProps } from '../Results';
 import { Banner, BannerProps } from '../../Atoms/Merchandising/Banner';
-import { Facets, FacetsProps } from '../../Organisms/Facets';
+import { Facets, FacetsProps } from '../Facets';
 import { defined, cloneWithProps, mergeProps, mergeStyles } from '../../../utilities';
 import { createHoverProps } from '../../../toolbox';
 import { Theme, useTheme, CacheProvider } from '../../../providers';
