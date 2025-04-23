@@ -89,19 +89,19 @@ export const searchHorizontal: ThemeComponentProps<SearchHorizontalProps> = {
 					hideTitle: true,
 				},
 				sidebar: {
-					hideTitle: true,
+					hideTitleText: true,
 				},
-				'button.filter-toggle': {
+				'button.sidebar-toggle': {
 					icon: 'filters',
 				},
 				'toolbar.top': {
-					modules: [],
+					layout: [['Banner.header'], ['SearchHeader']],
 				},
 				'toolbar.middle': {
-					modules: ['PaginationInfo', 'SortBy', 'PerPage'],
+					layout: [['Banner.banner'], ['PaginationInfo', '_', 'SortBy', 'PerPage']],
 				},
 				'toolbar.bottom': {
-					modules: ['Pagination'],
+					layout: [['Banner.footer'], ['Pagination']],
 				},
 			},
 		},
@@ -117,10 +117,10 @@ export const searchHorizontal: ThemeComponentProps<SearchHorizontalProps> = {
 					hideOpenButtonText: false,
 				},
 				'toolbar.middle': {
-					modules: ['MobileSidebar', 'SortBy'],
+					layout: [['MobileSidebar', '_', 'SortBy']],
 				},
 				'toolbar.top': {
-					modules: ['PaginationInfo'],
+					layout: [['Banner.header'], ['SearchHeader'], ['PaginationInfo'], ['Banner.banner']],
 				},
 			},
 		},

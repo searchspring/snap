@@ -27,6 +27,7 @@ import { rating } from './rating';
 import { sortBy } from './sortBy';
 import { swatches } from './swatches';
 import { variantSelection } from './variantSelection';
+import { terms } from './terms';
 
 export const molecules = {
 	default: {
@@ -52,6 +53,7 @@ export const molecules = {
 		searchInput: searchInput.default,
 		select: select.default,
 		slideout: slideout.default,
+		terms: terms.default,
 		perPage: perPage.default,
 		rating: rating.default,
 		sortBy: sortBy.default,
@@ -81,6 +83,7 @@ export const molecules = {
 		searchInput: searchInput.mobile,
 		select: select.mobile,
 		slideout: slideout.mobile,
+		terms: terms.mobile,
 		perPage: perPage.mobile,
 		rating: rating.mobile,
 		sortBy: sortBy.mobile,
@@ -110,6 +113,7 @@ export const molecules = {
 		searchInput: searchInput.tablet,
 		select: select.tablet,
 		slideout: slideout.tablet,
+		terms: terms.tablet,
 		perPage: perPage.tablet,
 		rating: rating.tablet,
 		sortBy: sortBy.tablet,
@@ -139,6 +143,7 @@ export const molecules = {
 		searchInput: searchInput.desktop,
 		select: select.desktop,
 		slideout: slideout.desktop,
+		terms: terms.desktop,
 		perPage: perPage.desktop,
 		rating: rating.desktop,
 		sortBy: sortBy.desktop,

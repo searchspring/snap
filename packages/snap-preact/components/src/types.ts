@@ -8,6 +8,12 @@ import { MutableRef } from 'preact/hooks';
 import type { Snap, SnapTemplates } from '../../src';
 import type { FunctionalComponent, RenderableProps } from 'preact';
 import type { CSSObject } from '@emotion/serialize';
+import { RecommendationProps } from './components/Templates/Recommendation';
+import { RecommendationGridProps } from './components/Templates/RecommendationGrid';
+import { RecommendationBundleProps } from './components/Templates/RecommendationBundle';
+import { RecommendationBundleEasyAddProps } from './components/Templates/RecommendationBundleEasyAdd';
+import { RecommendationBundleListProps } from './components/Templates/RecommendationBundleList';
+import { RecommendationBundleVerticalProps } from './components/Templates/RecommendationBundleVertical';
 
 export type StyleScript<Props> = (props: Props) => SerializedStyles;
 export interface ComponentProps<Props = any> {
@@ -43,6 +49,24 @@ export type ResultComponent<Props extends Record<string, any> = object> = React.
 		treePath?: string;
 	} & Props
 >;
+
+export type RecommendationBundleComponentNames =
+	| 'RecommendationBundle'
+	| 'RecommendationBundleEasyAdd'
+	| 'RecommendationBundleList'
+	| 'RecommendationBundleVertical'
+	| 'RecommendationBundle';
+
+export type RecommendationBundleComponentProps =
+	| RecommendationBundleProps
+	| RecommendationBundleEasyAddProps
+	| RecommendationBundleListProps
+	| RecommendationBundleVerticalProps
+	| RecommendationBundleProps;
+
+export type RecommendationComponentNames = 'Recommendation' | 'RecommendationGrid';
+
+export type RecommendationComponentProps = RecommendationProps | RecommendationGridProps;
 
 export enum ResultsLayout {
 	grid = 'grid',

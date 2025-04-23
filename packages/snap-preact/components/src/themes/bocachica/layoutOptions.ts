@@ -1,8 +1,6 @@
-import { ThemeComplete } from '../../providers/theme';
+import { ThemeLayoutOption } from '../../providers/theme';
 
-export const defaultLayoutOptions: ThemeComplete['layoutOptions'] = [];
-
-export const mobileLayoutOptions: ThemeComplete['layoutOptions'] = [
+const layoutOptions: ThemeLayoutOption[] = [
 	{
 		value: 1,
 		label: '',
@@ -36,6 +34,10 @@ export const mobileLayoutOptions: ThemeComplete['layoutOptions'] = [
 	},
 ];
 
-export const tabletLayoutOptions: ThemeComplete['layoutOptions'] = [];
+export const defaultLayoutOptions: ThemeLayoutOption[] = [];
 
-export const desktopLayoutOptions: ThemeComplete['layoutOptions'] = [];
+export const mobileLayoutOptions: ThemeLayoutOption[] = layoutOptions;
+
+export const tabletLayoutOptions: ThemeLayoutOption[] = layoutOptions;
+
+export const desktopLayoutOptions: ThemeLayoutOption[] = [];

@@ -10,7 +10,6 @@ Renders a Search Results Page.
 - NoResults
 - Toolbar
 - SearchHeader
-- Banner
 
 ## Usage
 
@@ -19,6 +18,22 @@ The required `controller` prop specifies a reference to the search controller.
 
 ```jsx
 <SearchHorizontal controller={controller} />
+```
+
+### resultComponent
+The `resultComponent` prop specifies a custom result component to render.
+
+```jsx
+
+const CustomResult = ({
+	controller 
+	result
+	theme
+}) => {
+	return <div>{result.mappings.core?.name}</div>
+}
+
+<SearchHorizontal controller={controller} resultComponent={CustomResult} />
 ```
 
 ### hideSearchHeader
@@ -40,19 +55,6 @@ The `hideBottomToolBar` prop specifies if the bottom ToolBar component should be
 
 ```jsx
 <SearchHorizontal controller={controller} hideBottomToolBar={true} />
-```
-
-
-### hideMerchandisingBanners
-The `hideMerchandisingBanners` prop specifies if merchandising banners should render. This can take a boolean to hide all banners, or an array of specific banner types you wish to hide. 
-
-```jsx
-<SearchHorizontal controller={controller} hideMerchandisingBanners={true} />
-```
-or
-
-```jsx
-<SearchHorizontal controller={controller} hideMerchandisingBanners={["Footer", "Header", "Banner", "left"]} />
 ```
 
 ### hideLayoutSelector

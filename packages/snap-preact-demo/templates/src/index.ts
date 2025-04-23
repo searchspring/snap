@@ -33,7 +33,10 @@ let config: SnapTemplatesConfig = {
 					// "searchHorizontal toolbar.top": {
 					// 	hideLayoutSelector: false,
 					// },
-					button: {},
+					// 'toolbar.top': {
+					// 	// layout: [['SearchHeader'], [ 'PaginationInfo', 'Separator', 'PerPage', 'SortBy','toggleSideBarButton']],
+					// },
+					// button: {},
 					// recommendation: {
 					// 	lazyRender: {
 					// 		enabled: false,
@@ -129,7 +132,7 @@ let config: SnapTemplatesConfig = {
 		targets: [
 			{
 				selector: 'input.searchspring-ac',
-				component: 'Autocomplete',
+				component: 'AutocompleteTemplate',
 			},
 		],
 	},

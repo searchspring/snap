@@ -83,29 +83,6 @@ describe('SearchHorizontal Template Component', () => {
 		expect(dropdown).not.toBeInTheDocument();
 	});
 
-	it('renders with merchandising banners', async () => {
-		mockClient.mockData.updateConfig({ search: 'merchandising' });
-		await controller.search();
-
-		const rendered = render(<SearchHorizontal controller={controller} />);
-
-		const element = rendered.container.querySelector('.ss__search-horizontal');
-		const banners = rendered.container.querySelectorAll('.ss__banner');
-		const headerBanner = rendered.container.querySelector('.ss__banner--header');
-		const leftBanner = rendered.container.querySelector('.ss__banner--left');
-		const bannerBanner = rendered.container.querySelector('.ss__banner--banner');
-		const footerBanner = rendered.container.querySelector('.ss__banner--footer');
-
-		expect(element).toBeInTheDocument();
-		expect(banners).toHaveLength(3);
-		expect(headerBanner).toBeInTheDocument();
-		expect(bannerBanner).toBeInTheDocument();
-		expect(footerBanner).toBeInTheDocument();
-		expect(leftBanner).not.toBeInTheDocument(); // left banner is not supported in horizontal search
-
-		mockClient.mockData.updateConfig({ search: 'default' });
-	});
-
 	it('can hide hideSearchHeader', async () => {
 		mockClient.mockData.updateConfig({ search: 'merchandising' });
 		await controller.search();
@@ -142,17 +119,23 @@ describe('SearchHorizontal Template Component', () => {
 		expect(bottomToolBar).not.toBeInTheDocument();
 	});
 
-	it('can hide all merchandising banners', async () => {
-		mockClient.mockData.updateConfig({ search: 'merchandising' });
-		await controller.search();
+	it('renders with custom resultComponent', () => {
+		const customResultClass = 'customResult';
+		const customResultComponent = (props: any) => {
+			const { result } = props;
+			return <div className={customResultClass}>{result.id}</div>;
+		};
 
-		const rendered = render(<SearchHorizontal controller={controller} hideMerchandisingBanners />);
+		const rendered = render(<SearchHorizontal controller={controller} resultComponent={customResultComponent} />);
 
 		const element = rendered.container.querySelector('.ss__search-horizontal');
-		const banners = rendered.container.querySelectorAll('.ss__banner');
+		const results = rendered.container.querySelectorAll(`.${customResultClass}`);
 
 		expect(element).toBeInTheDocument();
-		expect(banners).toHaveLength(0);
+		expect(results).toHaveLength(controller.store.results.length);
+		results.forEach((result, idx) => {
+			expect(result.textContent).toBe(controller.store.results[idx].id);
+		});
 	});
 
 	it('renders with classname', () => {

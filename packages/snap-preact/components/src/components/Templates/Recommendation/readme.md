@@ -38,6 +38,21 @@ If using children, the provided children elements array length and order must ma
 <Recommendation controller={controller} results={controller.store.results} />
 ```
 
+### resultComponent
+The `resultComponent` prop specifies a custom result component to render.
+
+```jsx
+
+const CustomResult = ({
+	controller 
+	result
+}) => {
+	return <div>{result.mappings.core?.name}</div>
+}
+
+<Recommendation controller={controller} resultComponent={CustomResult} />
+```
+
 ### title
 The `title` prop specifies the carousel title
 

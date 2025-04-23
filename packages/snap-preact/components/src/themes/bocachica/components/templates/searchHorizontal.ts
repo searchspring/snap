@@ -7,31 +7,12 @@ const searchHorizontalStyleScript = ({ theme }: SearchHorizontalProps) => {
 	const variables = theme?.variables;
 
 	return css({
-		//delete me
-		'.ss__banner--header': {
-			display: 'none',
-		},
-
 		'.ss__filter-summary': {
 			margin: '10px 0',
 		},
 
 		'.ss__search-header': {
 			textAlign: 'left',
-		},
-
-		'.ss__search-horizontal__content__toolbar--top-toolbar': {
-			justifyContent: 'right',
-
-			'.ss__toolbar__pagination-info': {
-				marginRight: 'auto',
-			},
-		},
-
-		[`@media (max-width: ${variables?.breakpoints[2]}px)`]: {
-			'.ss__search-horizontal__content__toolbar--top-toolbar': {
-				justifyContent: 'space-between',
-			},
 		},
 	});
 };
@@ -51,19 +32,19 @@ export const searchHorizontal: ThemeComponentProps<SearchHorizontalProps> = {
 					hideTitle: true,
 				},
 				sidebar: {
-					hideTitle: true,
+					layout: ['FilterSummary', 'SortBy', 'PerPage', 'Facets', 'Banner.left'],
 				},
-				'button.filter-toggle': {
+				'button.sidebar-toggle': {
 					icon: 'filters',
 				},
 				'toolbar.top': {
-					modules: ['PaginationInfo', 'SortBy', 'PerPage'],
+					layout: ['PaginationInfo', '_', 'SortBy', 'PerPage'],
 				},
 				'toolbar.middle': {
-					modules: [],
+					layout: [],
 				},
 				'toolbar.bottom': {
-					modules: ['Pagination'],
+					layout: ['_', 'Pagination', '_'],
 				},
 				mobileSidebar: {
 					theme: {
@@ -82,10 +63,10 @@ export const searchHorizontal: ThemeComponentProps<SearchHorizontalProps> = {
 		theme: {
 			components: {
 				'toolbar.top': {
-					modules: ['MobileSidebar', 'LayoutSelector'],
+					layout: ['MobileSidebar', '_', 'LayoutSelector'],
 				},
 				'toolbar.middle': {
-					modules: ['PaginationInfo'],
+					layout: ['PaginationInfo'],
 				},
 			},
 		},

@@ -8,6 +8,7 @@ import { mobileSidebar } from './mobileSidebar';
 import { noResults } from './noResults';
 import { results } from './results';
 import { sidebar } from './sidebar';
+import { termsList } from './termsList';
 import { toolbar } from './toolbar';
 
 export const organisms = {
@@ -21,6 +22,7 @@ export const organisms = {
 		noResults: noResults.default,
 		results: results.default,
 		sidebar: sidebar.default,
+		termsList: termsList.default,
 		toolbar: toolbar.default,
 	},
 	mobile: {
@@ -33,6 +35,7 @@ export const organisms = {
 		noResults: noResults.mobile,
 		results: results.mobile,
 		sidebar: sidebar.mobile,
+		termsList: termsList.mobile,
 		toolbar: toolbar.mobile,
 	},
 	tablet: {
@@ -45,6 +48,7 @@ export const organisms = {
 		noResults: noResults.tablet,
 		results: results.tablet,
 		sidebar: sidebar.tablet,
+		termsList: termsList.tablet,
 		toolbar: toolbar.tablet,
 	},
 	desktop: {
@@ -57,6 +61,7 @@ export const organisms = {
 		noResults: noResults.desktop,
 		results: results.desktop,
 		sidebar: sidebar.desktop,
+		termsList: termsList.desktop,
 		toolbar: toolbar.desktop,
 	},
 };

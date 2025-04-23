@@ -15,42 +15,8 @@ const searchHorizontalStyleScript = ({ theme }: SearchHorizontalProps) => {
 			textAlign: 'left',
 		},
 
-		'.ss__search-horizontal__content__toolbar--top-toolbar': {
-			justifyContent: 'right',
-
-			'.ss__toolbar__pagination-info': {
-				marginRight: 'auto',
-			},
-		},
-
 		'.ss__search-horizontal__content__toolbar--bottom-toolbar': {
 			marginTop: '10px',
-		},
-		[`@media (max-width: ${variables?.breakpoints[2]}px)`]: {
-			'.ss__search-horizontal__content__toolbar--top-toolbar': {
-				justifyContent: 'space-between',
-			},
-		},
-		[`@media (max-width: ${variables?.breakpoints[0]}px)`]: {
-			position: 'relative',
-			'.ss__search-horizontal__content__toolbar--top-toolbar': {
-				justifyContent: 'flex-end !important',
-				position: 'absolute',
-				top: '0px',
-				right: '0px',
-			},
-			'.ss__search-horizontal__content__toolbar--middle-toolbar': {
-				justifyContent: 'space-between !important',
-				flexWrap: 'wrap',
-				'.ss__toolbar__filter-summary': {
-					flexBasis: '100%',
-				},
-			},
-			'.ss__search-horizontal__content__toolbar--middle-toolbar, .ss__search__header-section__toolbar--top-toolbar': {
-				'.ss__toolbar__sort-by': {
-					marginLeft: 'initial',
-				},
-			},
 		},
 	});
 };
@@ -70,19 +36,19 @@ export const searchHorizontal: ThemeComponentProps<SearchHorizontalProps> = {
 					hideTitle: true,
 				},
 				sidebar: {
-					hideTitle: true,
+					layout: ['FilterSummary', 'Facets', 'Banner.left'],
 				},
-				'button.filter-toggle': {
+				'button.sidebar-toggle': {
 					icon: 'filters',
 				},
 				'toolbar.top': {
-					modules: ['PaginationInfo', 'SortBy', 'PerPage'],
+					layout: ['PaginationInfo', '_', 'SortBy', 'PerPage'],
 				},
 				'toolbar.middle': {
-					modules: [],
+					layout: [],
 				},
 				'toolbar.bottom': {
-					modules: ['Pagination'],
+					layout: ['_', 'Pagination', '_'],
 				},
 			},
 		},
@@ -93,10 +59,10 @@ export const searchHorizontal: ThemeComponentProps<SearchHorizontalProps> = {
 		theme: {
 			components: {
 				'toolbar.top': {
-					modules: ['MobileSidebar'],
+					layout: ['MobileSidebar', '_', 'LayoutSelector'],
 				},
 				'toolbar.middle': {
-					modules: ['FilterSummary', 'SortBy', 'LayoutSelector'],
+					layout: ['PaginationInfo'],
 				},
 			},
 		},

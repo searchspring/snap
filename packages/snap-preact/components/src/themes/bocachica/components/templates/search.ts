@@ -6,26 +6,7 @@ const searchStyleScript = ({ theme }: SearchProps) => {
 	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	const variables = theme?.variables;
 
-	return css({
-		'.ss__search__content__toolbar--middle-toolbar, .ss__search__header-section__toolbar--top-toolbar': {
-			display: 'flex',
-			justifyContent: 'initial',
-			justifyItems: 'initial',
-
-			'.ss__toolbar__sort-by': {
-				marginLeft: 'auto',
-			},
-			'.ss__dropdown .ss__select__dropdown__button': {
-				padding: '6px 5px 6px 5px',
-			},
-		},
-
-		[`@media (max-width: ${variables?.breakpoints[0]}px)`]: {
-			'.ss__search__header-section__toolbar--top-toolbar': {
-				justifyContent: 'space-between !important',
-			},
-		},
-	});
+	return css({});
 };
 
 // Search component props
@@ -33,40 +14,30 @@ export const search: ThemeComponentProps<SearchProps> = {
 	default: {
 		themeStyleScript: searchStyleScript,
 		hideToggleSidebarButton: false,
-		hideTopToolbar: false,
-		hideMiddleToolbar: false,
+		toggleSidebarStartClosed: true,
 		theme: {
 			components: {
 				results: {
-					columns: 5,
-				},
-				filterSummary: {
-					hideTitle: true,
+					columns: 4,
 				},
 				sidebar: {
-					hideTitle: true,
+					layout: ['FilterSummary', 'Facets', 'Banner.left'],
+					sticky: true,
 				},
-				'button.filter-toggle': {
+				'button.sidebar-toggle': {
 					icon: 'filters',
 				},
-
 				'toolbar.top': {
-					modules: ['PaginationInfo', 'SortBy', 'PerPage'],
+					layout: [
+						['_', 'SearchHeader', '_'],
+						['Button.sidebar-toggle', 'PaginationInfo', '_', 'PerPage', 'SortBy'],
+					],
 				},
 				'toolbar.middle': {
-					modules: [],
+					layout: [],
 				},
 				'toolbar.bottom': {
-					modules: ['Pagination'],
-				},
-				mobileSidebar: {
-					theme: {
-						components: {
-							filterSummary: {
-								hideTitle: false,
-							},
-						},
-					},
+					layout: ['_', 'Pagination', '_'],
 				},
 			},
 		},
@@ -78,7 +49,13 @@ export const search: ThemeComponentProps<SearchProps> = {
 					columns: 2,
 				},
 				'toolbar.top': {
-					modules: ['MobileSidebar', 'LayoutSelector'],
+					layout: [
+						['_', 'SearchHeader', '_'],
+						['MobileSidebar', '_', 'PaginationInfo', '_', 'LayoutSelector'],
+					],
+				},
+				mobileSidebar: {
+					layout: [['SortBy'], ['Facets']],
 				},
 			},
 		},
@@ -88,6 +65,15 @@ export const search: ThemeComponentProps<SearchProps> = {
 			components: {
 				results: {
 					columns: 3,
+				},
+				'toolbar.top': {
+					layout: [
+						['_', 'SearchHeader', '_'],
+						['MobileSidebar', '_', 'PaginationInfo', '_', 'LayoutSelector'],
+					],
+				},
+				mobileSidebar: {
+					layout: [['SortBy'], ['Facets']],
 				},
 			},
 		},

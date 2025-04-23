@@ -33,12 +33,14 @@ export type ThemeVariablesPartial = {
 	colors?: ThemeVaraibleColors;
 };
 
+export type ThemeLayoutOption = Omit<ListOption, 'overrides'> & { overrides?: ThemeMinimal };
+
 export type Theme = {
 	name?: string; // Used as a flag in components to provide backwards compatability
 	variables?: ThemeVariables;
 	responsive?: [ThemeResponsive, ThemeResponsive, ThemeResponsive];
 	components?: ThemeComponentOverrides;
-	layoutOptions?: (Omit<ListOption, 'overrides'> & { overrides: ThemeMinimal })[];
+	layoutOptions?: ThemeLayoutOption[];
 	overrides?: ThemeOverrides;
 };
 

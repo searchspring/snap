@@ -26,6 +26,16 @@ describe('Icon Component', () => {
 		expect(svg).not.toBeInTheDocument();
 	});
 
+	it('does not render if false icon ', () => {
+		const rendered = render(<Icon icon={false} />);
+		expect(rendered.container).toBeInTheDocument();
+
+		const iconElement = rendered.container.querySelector('.ss__icon');
+		const svg = rendered.container.querySelector('svg');
+		expect(svg).not.toBeInTheDocument();
+		expect(iconElement).not.toBeInTheDocument();
+	});
+
 	it('renders with icon prop', () => {
 		const icon = 'cog';
 		const rendered = render(<Icon icon={icon} />);

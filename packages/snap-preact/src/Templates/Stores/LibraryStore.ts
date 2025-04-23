@@ -59,7 +59,7 @@ export type LibraryImports = {
 			SearchHorizontal: (args?: any) => Promise<FunctionalComponent<RenderableProps<any>>>;
 		};
 		autocomplete: {
-			Autocomplete: (args?: any) => Promise<FunctionalComponent<RenderableProps<any>>>;
+			AutocompleteTemplate: (args?: any) => Promise<FunctionalComponent<RenderableProps<any>>>;
 		};
 		recommendation: {
 			bundle: {
@@ -177,10 +177,10 @@ export class LibraryStore {
 		},
 		component: {
 			autocomplete: {
-				Autocomplete: async () => {
+				AutocompleteTemplate: async () => {
 					return (
-						this.components.autocomplete.Autocomplete ||
-						(this.components.autocomplete.Autocomplete = (await import('./library/components/Autocomplete')).Autocomplete)
+						this.components.autocomplete.AutocompleteTemplate ||
+						(this.components.autocomplete.AutocompleteTemplate = (await import('./library/components/AutocompleteTemplate')).AutocompleteTemplate)
 					);
 				},
 			},

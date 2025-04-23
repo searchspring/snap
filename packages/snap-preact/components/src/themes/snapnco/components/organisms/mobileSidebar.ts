@@ -60,9 +60,8 @@ export const mobileSidebar: ThemeComponentProps<MobileSidebarProps> = {
 		openButtonIcon: 'filters',
 	},
 	mobile: {
-		hideSortBy: true,
 		hideOpenButtonText: true,
-		hideFilterSummary: true,
+		layout: [['FilterSummary'], ['Facets'], ['Banner.left']],
 	},
 	tablet: {},
 	desktop: {},

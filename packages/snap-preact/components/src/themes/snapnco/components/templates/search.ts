@@ -99,7 +99,6 @@ const searchStyleScript = ({ theme }: SearchProps) => {
 export const search: ThemeComponentProps<SearchProps> = {
 	default: {
 		themeStyleScript: searchStyleScript,
-		hideSearchHeader: true,
 		lang: {
 			toggleSidebarButtonText: {
 				value: ({ sidebarOpenState }) => (sidebarOpenState ? `Close Filters` : 'Show Filters'),
@@ -111,31 +110,31 @@ export const search: ThemeComponentProps<SearchProps> = {
 					hideTitle: true,
 				},
 				sidebar: {
-					hideFilterSummary: false,
+					layout: [['FilterSummary'], ['Facets'], ['Banner.left']],
 				},
-				'button.filter-toggle': {
-					icon: 'close-thin',
-				},
+				// 'button.sidebar-toggle': {
+				// 	icon: 'close-thin',
+				// },
 
 				'toolbar.top': {
-					modules: [],
+					layout: ['Banner.header'],
 				},
 				'toolbar.middle': {
-					modules: ['SearchHeader', 'PaginationInfo', 'SortBy'],
+					layout: [['Banner.banner'], ['SearchHeader', '_', 'PaginationInfo', 'SortBy']],
 				},
 				'toolbar.bottom': {
-					modules: ['Pagination'],
+					layout: [['Banner.footer'], ['_', 'Pagination', '_']],
 				},
-				mobileSidebar: {
-					hidePerPage: true,
-					theme: {
-						components: {
-							filterSummary: {
-								hideTitle: false,
-							},
-						},
-					},
-				},
+				// mobileSidebar: {
+				// 	hidePerPage: true,
+				// 	theme: {
+				// 		components: {
+				// 			filterSummary: {
+				// 				hideTitle: false,
+				// 			},
+				// 		},
+				// 	},
+				// },
 			},
 		},
 	},
@@ -147,10 +146,10 @@ export const search: ThemeComponentProps<SearchProps> = {
 					hideOpenButtonText: false,
 				},
 				'toolbar.middle': {
-					modules: ['MobileSidebar', 'SortBy'],
+					layout: [['MobileSidebar', '_', 'SortBy']],
 				},
 				'toolbar.top': {
-					modules: ['SearchHeader', 'PaginationInfo'],
+					layout: [['Banner.header'], ['SearchHeader'], ['PaginationInfo'], ['Banner.banner']],
 				},
 			},
 		},
@@ -159,10 +158,13 @@ export const search: ThemeComponentProps<SearchProps> = {
 		theme: {
 			components: {
 				'toolbar.top': {
-					modules: ['SearchHeader'],
+					layout: [['Banner.header'], ['SearchHeader']],
 				},
 				'toolbar.middle': {
-					modules: ['PaginationInfo', 'FilterSummary', 'SortBy', 'LayoutSelector'],
+					layout: [['Banner.banner'], ['PaginationInfo', '_', 'SortBy'], ['FilterSummary']],
+				},
+				sidebar: {
+					layout: [['Facets'], ['Banner.left']],
 				},
 			},
 		},

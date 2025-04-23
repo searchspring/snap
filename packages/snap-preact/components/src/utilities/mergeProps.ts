@@ -29,8 +29,12 @@ export function mergeProps<GenericComponentProps = ComponentProps>(
 
 	const theme = (props as ComponentProps).theme;
 	const componentName = (props as any)?.name;
+
 	let treePath = (props as ComponentProps).treePath || (defaultProps as ComponentProps).treePath || '';
-	treePath += `${treePath ? ' ' : ''}${componentType}`;
+
+	if (componentType !== 'layout') {
+		treePath += `${treePath ? ' ' : ''}${componentType}`;
+	}
 
 	// start with defaultProps
 	let mergedProps = {

@@ -23,6 +23,22 @@ The `results` prop specifies a reference to the results store array. If no resul
 <Results results={controller.store.results} />
 ```
 
+### resultComponent
+The `resultComponent` prop specifies a custom result component to render.
+
+```jsx
+
+const CustomResult = ({
+	controller 
+	result
+	theme
+}) => {
+	return <div>{result.mappings.core?.name}</div>
+}
+
+<Results results={controller.store.results} controller={controller} resultComponent={CustomResult} />
+```
+
 ### layout
 The `layout` prop specifies if this result will be rendered in a `grid` or `list` layout.
 

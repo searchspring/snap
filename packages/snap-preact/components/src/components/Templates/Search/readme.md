@@ -8,10 +8,6 @@ Renders a Search Results Page.
 - NoResults
 - Sidebar
 - Toolbar
-- SearchHeader
-- MobileSidebar
-- Button
-- Banner
 
 ## Usage
 
@@ -20,6 +16,22 @@ The required `controller` prop specifies a reference to the search controller.
 
 ```jsx
 <Search controller={controller} />
+```
+
+### resultComponent
+The `resultComponent` prop specifies a custom result component to render.
+
+```jsx
+
+const CustomResult = ({
+	controller 
+	result
+	theme
+}) => {
+	return <div>{result.mappings.core?.name}</div>
+}
+
+<Search controller={controller} resultComponent={CustomResult} />
 ```
 
 ### mobileDisplayAt
@@ -36,25 +48,25 @@ The `hideSidebar` prop specifies if the Sidebar component should be rendered.
 <Search controller={controller} hideSidebar={true} />
 ```
 
-### hideSearchHeader
-The `hideSearchHeader` prop specifies if the SearchHeader component should be rendered.  
+### hideTopToolbar
+The `hideTopToolbar` prop specifies if the top ToolBar component should be rendered.  
 
 ```jsx
-<Search controller={controller} hideSearchHeader={true} />
+<Search controller={controller} hideTopToolbar={true} />
 ```
 
-### hidetopToolBar
-The `hidetopToolBar` prop specifies if the top ToolBar component should be rendered.  
+### hideMiddleToolbar
+The `hideMiddleToolbar` prop specifies if the middle ToolBar component should be rendered.  
 
 ```jsx
-<Search controller={controller} hidetopToolBar={true} />
+<Search controller={controller} hideMiddleToolbar={true} />
 ```
 
-### hideBottomToolBar
-The `hideBottomToolBar` prop specifies if the bottom ToolBar component should be rendered.  
+### hideBottomToolbar
+The `hideBottomToolbar` prop specifies if the bottom ToolBar component should be rendered.  
 
 ```jsx
-<Search controller={controller} hideBottomToolBar={true} />
+<Search controller={controller} hideBottomToolbar={true} />
 ```
 
 ### toggleSidebarButtonText
@@ -64,82 +76,16 @@ The `toggleSidebarButtonText` prop specifies the inner text of the Sidebar toggl
 <Search controller={controller} toggleSidebarButtonText={'Toggle Facets'} />
 ```
 
+### toggleSidebarStartClosed
+The `toggleSidebarStartClosed` prop specifies if the sidebar toggle should start closed.
+
+```jsx
+<Search controller={controller} toggleSidebarStartClosed={true} />
+```
+
 ### hideToggleSidebarButton
 The `hideToggleSidebarButton` prop hides the Sidebar toggle button.
 
 ```jsx
 <Search controller={controller} toggleSidebarButtonText={'Toggle Facets'} hideToggleSidebarButton={true} />
-```
-
-### hideMerchandisingBanners
-The `hideMerchandisingBanners` prop specifies if merchandising banners should render. This can take a boolean to hide all banners, or an array of specific banner types you wish to hide. 
-
-```jsx
-<Search controller={controller} hideMerchandisingBanners={true} />
-```
-or
-
-```jsx
-<Search controller={controller} hideMerchandisingBanners={["Footer", "Header", "Banner", "left"]} />
-```
-
-### layoutConfig
-The `layoutConfig` prop specifies the configuration for the layoutSelector.  
-
-```jsx
-
-const layoutConfig = {
-    default: {
-        label: "5 wide",
-        value: {
-            columns:5,
-        }
-    },
-    options: [
-        {
-            label: "1 wide",
-            value: {
-                
-                icon: "square",
-                columns:1,
-            }
-        },
-        {
-            label: "2 wide",
-            value: {
-                icon: {
-                    icon: "layout-large",
-                },
-                columns:2,
-            }
-        },
-        {
-            label: "3 wide",
-            value: {
-                icon: {
-                    icon: 'layout-grid',
-                },
-                columns:3,
-            }
-        },
-        {
-            label: "4 wide",
-            value: {
-                columns:4,
-            }
-        },
-        {
-            label: "list",
-            value: {
-                icon: {
-                    icon: 'layout-list',
-                },
-                component: (props) => <Result {...props} controller={controller} layout={ResultsLayout.list}/>,
-                columns:1,
-            }
-        },
-    ]	
-}
-
-<Search controller={controller} layoutConfig={layoutConfig} />
 ```

@@ -10,6 +10,16 @@ import type { RecommendationBundleVerticalProps } from '../../../../components/T
 export const recommendationBundleVertical: ThemeComponentProps<RecommendationBundleVerticalProps> = {
 	default: {
 		// themeStyleScript: recommendationBundleStyleScript,
+		theme: {
+			components: {
+				recommendationBundle: {
+					ctaInline: false,
+					carousel: {
+						enabled: false,
+					},
+				},
+			},
+		},
 	},
 	mobile: {},
 	tablet: {},

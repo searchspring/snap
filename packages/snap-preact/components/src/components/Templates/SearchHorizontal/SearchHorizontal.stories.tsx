@@ -74,17 +74,6 @@ export default {
 			},
 			control: { type: 'boolean' },
 		},
-		hideMerchandisingBanners: {
-			defaultValue: false,
-			description: 'hides merchandising banners. Accepts a boolean, or array of banner ContentTypes to hide.',
-			table: {
-				type: {
-					summary: 'boolean | ContentType[]',
-				},
-				defaultValue: { summary: false },
-			},
-			control: { type: 'boolean' },
-		},
 		hideLayoutSelector: {
 			defaultValue: false,
 			description: 'prevents the layoutSelector component from rendering',
@@ -104,6 +93,14 @@ export default {
 				},
 			},
 			control: { type: 'object' },
+		},
+		resultComponent: {
+			description: 'Slot for custom result component',
+			table: {
+				type: {
+					summary: 'component',
+				},
+			},
 		},
 		...componentArgs,
 	},

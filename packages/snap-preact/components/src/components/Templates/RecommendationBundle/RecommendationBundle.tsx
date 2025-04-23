@@ -8,7 +8,7 @@ import { Carousel, CarouselProps as CarouselProps } from '../../Molecules/Carous
 import { Result, ResultProps } from '../../Molecules/Result';
 import { defined, mergeProps, cloneWithProps, mergeStyles } from '../../../utilities';
 import { Theme, useTheme, CacheProvider } from '../../../providers';
-import { ComponentProps, BreakpointsProps, ResultComponent, StyleScript } from '../../../types';
+import { ComponentProps, BreakpointsProps, ResultComponent, StyleScript, BreakpointsEntry } from '../../../types';
 import { useDisplaySettings } from '../../../hooks/useDisplaySettings';
 import { RecommendationProfileTracker } from '../../Trackers/Recommendation/ProfileTracker';
 import { RecommendationResultTracker } from '../../Trackers/Recommendation/ResultTracker';
@@ -165,9 +165,16 @@ export const RecommendationBundle = observer((properties: RecommendationBundlePr
 		...properties.theme?.components?.recommendationBundle,
 	};
 
-	let props = mergeProps('recommendationBundle', globalTheme, defaultProps, properties);
-	let displaySettings;
-	if (!properties.theme?.name) {
+	//mergeprops only uses names that are passed via properties, so this cannot be put in the defaultProps
+	const _properties = {
+		name: properties.controller?.store?.profile?.display?.template?.component?.toLowerCase(),
+		...properties,
+	};
+
+	let props = mergeProps('recommendationBundle', globalTheme, defaultProps, _properties);
+
+	let displaySettings: BreakpointsEntry | undefined;
+	if (!(properties.theme?.name || globalTheme.name)) {
 		displaySettings = useDisplaySettings(props.breakpoints!);
 		if (displaySettings && Object.keys(displaySettings).length) {
 			const theme = deepmerge(props?.theme || {}, displaySettings?.theme || {}, { arrayMerge: (destinationArray, sourceArray) => sourceArray });
@@ -306,9 +313,7 @@ export const RecommendationBundle = observer((properties: RecommendationBundlePr
 	const modifiedBreakpoints: BreakpointsProps = { ...breakpoints };
 
 	if (carouselEnabled) {
-		Object.keys(props.breakpoints!).forEach((breakpoint: any) => {
-			const obj = props.breakpoints![breakpoint];
-
+		const adjustSlides = (obj: BreakpointsEntry) => {
 			// fallback in case slides per view/group were not provided in breakpoint...
 			const objSlidesPerView = obj.carousel?.slidesPerView || obj.slidesPerView || 2;
 			const objSlidesPerGroup = obj.carousel?.slidesPerGroup || obj.slidesPerGroup || 2;
@@ -329,12 +334,37 @@ export const RecommendationBundle = observer((properties: RecommendationBundlePr
 				}
 			}
 
-			modifiedBreakpoints[breakpoint] = {
-				...modifiedBreakpoints[breakpoint],
+			return {
 				slidesPerView: newSlidesPerView,
 				slidesPerGroup: newSlidesPerGroup,
 			};
-		});
+		};
+
+		//no breakpoint props allowed in templates
+		if (!(properties.theme?.name || globalTheme.name)) {
+			Object.keys(props.breakpoints!).forEach((breakpoint) => {
+				const obj = props.breakpoints![breakpoint as keyof typeof props.breakpoints];
+
+				const { slidesPerView: adjustedSlidesPerView, slidesPerGroup: adjustedSlidesPerGroup } = adjustSlides(obj);
+
+				modifiedBreakpoints[breakpoint as keyof typeof props.breakpoints] = {
+					...modifiedBreakpoints[breakpoint as keyof typeof props.breakpoints],
+					slidesPerView: adjustedSlidesPerView,
+					slidesPerGroup: adjustedSlidesPerGroup,
+				};
+			});
+		} else {
+			const { slidesPerView: adjustedSlidesPerView, slidesPerGroup: adjustedSlidesPerGroup } = adjustSlides({
+				...mergedCarouselProps,
+				slidesPerView: slidesPerView,
+			});
+
+			displaySettings = {
+				...mergedCarouselProps,
+				slidesPerView: adjustedSlidesPerView,
+				slidesPerGroup: adjustedSlidesPerGroup,
+			};
+		}
 	}
 
 	const onProductSelect = (product: Product) => {
@@ -619,7 +649,7 @@ export const RecommendationBundle = observer((properties: RecommendationBundlePr
 								<BundledCTA
 									ctaSlot={ctaSlot}
 									cartStore={cartStore}
-									onAddToCart={(e: any) => addToCart(e)}
+									onAddToCart={(e) => addToCart(e as unknown as MouseEvent)}
 									ctaButtonText={ctaButtonText}
 									ctaButtonSuccessText={ctaButtonSuccessText}
 									ctaButtonSuccessTimeout={ctaButtonSuccessTimeout}
@@ -636,7 +666,7 @@ export const RecommendationBundle = observer((properties: RecommendationBundlePr
 							<BundledCTA
 								ctaSlot={ctaSlot}
 								cartStore={cartStore}
-								onAddToCart={(e: any) => addToCart(e)}
+								onAddToCart={(e) => addToCart(e as unknown as MouseEvent)}
 								ctaButtonText={ctaButtonText}
 								ctaButtonSuccessText={ctaButtonSuccessText}
 								ctaButtonSuccessTimeout={ctaButtonSuccessTimeout}

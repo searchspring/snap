@@ -11,6 +11,7 @@ import { Profiler } from '@searchspring/snap-profiler';
 import { Logger } from '@searchspring/snap-logger';
 import { MockClient } from '@searchspring/snap-shared';
 import { RecommendationController } from '@searchspring/snap-controller';
+import userEvent from '@testing-library/user-event';
 
 const globals = { siteId: '8uyt2m' };
 
@@ -176,6 +177,26 @@ describe('RecommendationGrid Component', () => {
 		await waitFor(() => {
 			expect(resultsElement).toHaveClass('mobile');
 			expect(resultsElement).not.toHaveClass('desktop');
+		});
+	});
+
+	it('renders with custom resultComponent', () => {
+		const customResultClass = 'customResult';
+		const customResultComponent = (props: any) => {
+			const { result } = props;
+			return <div className={customResultClass}>{result.id}</div>;
+		};
+
+		const rendered = render(<RecommendationGrid controller={controller} resultComponent={customResultComponent} lazyRender={{ enabled: false }} />);
+
+		const element = rendered.container.querySelector('.ss__recommendation-grid');
+		const results = rendered.container.querySelectorAll(`.${customResultClass}`);
+
+		expect(element).toBeInTheDocument();
+
+		expect(results).toHaveLength(controller.store.results.length);
+		results.forEach((result, idx) => {
+			expect(result.textContent).toBe(controller.store.results[idx].id);
 		});
 	});
 
