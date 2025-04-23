@@ -72,7 +72,7 @@ describe('Sidebar Component', () => {
 	});
 	it('can hide title', () => {
 		const rendered = render(
-			<Sidebar controller={controller} hideTitleText={true} layout={[['FilterSummary'], ['SortBy', 'PerPage'], ['Facets'], ['Banner.left']]} />
+			<Sidebar controller={controller} hideTitleText={true} layout={[['filterSummary'], ['sortBy', 'perPage'], ['facets'], ['banner.left']]} />
 		);
 		const element = rendered.container.querySelector('.ss__sidebar');
 		const title = rendered.container.querySelector('.ss__sidebar__title');
@@ -95,25 +95,25 @@ describe('Sidebar Component', () => {
 	});
 
 	it('can hide hide facets', () => {
-		const rendered = render(<Sidebar controller={controller} layout={[['FilterSummary'], ['SortBy', 'PerPage'], ['Banner.left']]} />);
+		const rendered = render(<Sidebar controller={controller} layout={[['filterSummary'], ['sortBy', 'perPage'], ['banner.left']]} />);
 		const facets = rendered.container.querySelector('.ss__facets');
 		expect(facets).not.toBeInTheDocument();
 	});
 
 	it('can hide perpage', () => {
-		const rendered = render(<Sidebar controller={controller} layout={[['FilterSummary'], ['SortBy'], ['Facets'], ['Banner.left']]} />);
+		const rendered = render(<Sidebar controller={controller} layout={[['filterSummary'], ['sortBy'], ['facets'], ['banner.left']]} />);
 		const perpage = rendered.container.querySelector('.ss__perpage__select');
 		expect(perpage).not.toBeInTheDocument();
 	});
 
 	it('can hide hideSortBy', () => {
-		const rendered = render(<Sidebar controller={controller} layout={[['FilterSummary'], ['PerPage'], ['Facets'], ['Banner.left']]} />);
+		const rendered = render(<Sidebar controller={controller} layout={[['filterSummary'], ['perPage'], ['facets'], ['banner.left']]} />);
 		const sortby = rendered.container.querySelector('.ss__sortby__select');
 		expect(sortby).not.toBeInTheDocument();
 	});
 
 	it('can hide FilterSummary', () => {
-		const rendered = render(<Sidebar controller={controller} layout={[['SortBy', 'PerPage'], ['Facets'], ['Banner.left']]} />);
+		const rendered = render(<Sidebar controller={controller} layout={[['sortBy', 'perPage'], ['facets'], ['banner.left']]} />);
 		const summary = rendered.container.querySelector('.ss__filter-summary');
 		expect(summary).not.toBeInTheDocument();
 	});

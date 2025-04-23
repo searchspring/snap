@@ -24,19 +24,19 @@ export const search: ThemeComponentProps<SearchProps> = {
 					hideTitle: true,
 				},
 				sidebar: {
-					layout: [['FilterSummary'], ['Facets'], ['Banner.left']],
+					layout: [['filterSummary'], ['facets'], ['banner.left']],
 				},
 				'button.sidebar-toggle': {
 					icon: 'close-thin',
 				},
 				'toolbar.top': {
-					layout: ['Banner.header'],
+					layout: ['banner.header'],
 				},
 				'toolbar.middle': {
-					layout: [['Banner.banner'], ['SearchHeader', '_', 'PaginationInfo', 'SortBy']],
+					layout: [['banner.banner'], ['searchHeader', '_', 'paginationInfo', 'sortBy']],
 				},
 				'toolbar.bottom': {
-					layout: [['Banner.footer'], ['_', 'Pagination', '_']],
+					layout: [['banner.footer'], ['_', 'pagination', '_']],
 				},
 			},
 		},
@@ -49,10 +49,10 @@ export const search: ThemeComponentProps<SearchProps> = {
 					hideOpenButtonText: false,
 				},
 				'toolbar.top': {
-					layout: [['Banner.header'], ['SearchHeader'], ['PaginationInfo'], ['Banner.banner']],
+					layout: [['banner.header'], ['searchHeader'], ['paginationInfo'], ['banner.banner']],
 				},
 				'toolbar.middle': {
-					layout: [['MobileSidebar', '_', 'SortBy']],
+					layout: [['mobileSidebar', '_', 'sortBy']],
 				},
 			},
 		},
@@ -61,49 +61,16 @@ export const search: ThemeComponentProps<SearchProps> = {
 		theme: {
 			components: {
 				'toolbar.top': {
-					layout: [['Banner.header'], ['SearchHeader']],
+					layout: [['banner.header'], ['searchHeader']],
 				},
 				'toolbar.middle': {
-					layout: [['Banner.banner'], ['PaginationInfo', '_', 'MobileSidebar'], ['FilterSummary']],
+					layout: [['banner.banner'], ['paginationInfo', '_', 'mobileSidebar'], ['filterSummary']],
 				},
 				sidebar: {
-					layout: [['Facets'], ['Banner.left']],
+					layout: [['facets'], ['banner.left']],
 				},
 			},
 		},
 	},
-	desktop: {
-		// theme: {
-		// 	components: {
-		// 		filterSummary: {
-		// 			hideTitle: true,
-		// 		},
-		// 		sidebar: {
-		// 			layout: [
-		// 				['FilterSummary'],
-		// 				['Facets'],
-		// 				['Banner.left']
-		// 			],
-		// 		},
-		// 		'button.sidebar-toggle': {
-		// 			icon: 'close-thin',
-		// 		},
-		// 		'toolbar.top': {
-		// 			layout: ['Banner.header'],
-		// 		},
-		// 		'toolbar.middle': {
-		// 			layout: [
-		// 				['Banner.banner'],
-		// 				['SearchHeader', '_', 'PaginationInfo', 'SortBy']
-		// 			],
-		// 		},
-		// 		'toolbar.bottom': {
-		// 			layout: [
-		// 				['Banner.footer'],
-		// 				['_', 'Pagination', '_']
-		// 			],
-		// 		},
-		// 	},
-		// }
-	},
+	desktop: {},
 };

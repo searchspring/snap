@@ -309,7 +309,7 @@ export const Facet = observer((properties: FacetProps): JSX.Element => {
 				className={classnames(
 					'ss__facet',
 					`ss__facet--${facet.field}`,
-					`ss__facet--${facet.collapsed ? 'collapsed' : 'expanded'}`,
+					`${facet.collapsed ? 'ss__facet--collapsed' : ''}`,
 					className,
 					`${facet.display ? `ss__facet--${facet.display}` : ''}`
 				)}

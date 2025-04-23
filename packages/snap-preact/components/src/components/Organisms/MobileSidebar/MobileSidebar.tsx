@@ -61,7 +61,7 @@ export const MobileSidebar = observer((properties: MobileSidebarProps): JSX.Elem
 		openButtonText: 'Filters',
 		clearButtonText: 'Clear All',
 		applyButtonText: 'Apply',
-		layout: ['FilterSummary', 'SortBy', 'PerPage', 'Facets', 'Banner.left'],
+		layout: ['filterSummary', 'sortBy', 'perPage', 'facets', 'banner.left'],
 		titleText: 'Filter Options',
 		displayAt: '',
 		closeButtonIcon: 'close-thin',

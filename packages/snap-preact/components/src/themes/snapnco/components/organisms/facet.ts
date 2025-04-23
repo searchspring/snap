@@ -26,14 +26,14 @@ const facetStyleScript = ({ color, theme }: FacetProps) => {
 			},
 		},
 
-		'&.ss__facet--expanded:first-of-type': {
+		'&:not(.ss__facet--collapsed):first-of-type': {
 			paddingTop: '0px',
 			'& .ss__facet__header': {
 				borderTop: '0px',
 			},
 		},
 
-		'&.ss__facet--expanded': {
+		'&:not(.ss__facet--collapsed)': {
 			paddingTop: '10px',
 			'& .ss__facet__header': {
 				fontWeight: 'bold',

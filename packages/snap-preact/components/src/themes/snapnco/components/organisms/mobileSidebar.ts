@@ -61,7 +61,7 @@ export const mobileSidebar: ThemeComponentProps<MobileSidebarProps> = {
 	},
 	mobile: {
 		hideOpenButtonText: true,
-		layout: [['FilterSummary'], ['Facets'], ['Banner.left']],
+		layout: [['filterSummary'], ['facets'], ['banner.left']],
 	},
 	tablet: {},
 	desktop: {},

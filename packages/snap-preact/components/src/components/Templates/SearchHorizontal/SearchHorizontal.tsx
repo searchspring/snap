@@ -53,7 +53,7 @@ export const SearchHorizontal = observer((properties: SearchHorizontalProps): JS
 		TopToolbar: {
 			name: 'top',
 			// default props
-			layout: [['Banner.header'], ['SearchHeader'], ['Banner.banner'], ['FilterSummary'], ['LayoutSelector', '_', 'SortBy', 'PerPage']],
+			layout: [['banner.header'], ['searchHeader'], ['banner.banner'], ['filterSummary'], ['layoutSelector', '_', 'sortBy', 'perPage']],
 			// inherited props
 			...defined({
 				disableStyles,
@@ -75,7 +75,7 @@ export const SearchHorizontal = observer((properties: SearchHorizontalProps): JS
 		BottomToolbar: {
 			name: 'bottom',
 			// default props
-			layout: [['Banner.footer'], ['_', 'Pagination']],
+			layout: [['banner.footer'], ['_', 'pagination']],
 			// inherited props
 			...defined({
 				disableStyles,

@@ -21,7 +21,7 @@ export const search: ThemeComponentProps<SearchProps> = {
 					columns: 4,
 				},
 				sidebar: {
-					layout: ['FilterSummary', 'Facets', 'Banner.left'],
+					layout: ['filterSummary', 'facets', 'banner.left'],
 					sticky: true,
 				},
 				'button.sidebar-toggle': {
@@ -29,17 +29,17 @@ export const search: ThemeComponentProps<SearchProps> = {
 				},
 				'toolbar.top': {
 					layout: [
-						['Banner.header'],
-						['_', 'SearchHeader', '_'],
-						['Banner.banner'],
-						['Button.sidebar-toggle', 'PaginationInfo', '_', 'PerPage', 'SortBy'],
+						['banner.header'],
+						['_', 'searchHeader', '_'],
+						['banner.banner'],
+						['button.sidebar-toggle', 'paginationInfo', '_', 'perPage', 'sortBy'],
 					],
 				},
 				'toolbar.middle': {
 					layout: [],
 				},
 				'toolbar.bottom': {
-					layout: [['Banner.footer'], ['_', 'Pagination', '_']],
+					layout: [['banner.footer'], ['_', 'pagination', '_']],
 				},
 			},
 		},
@@ -51,10 +51,10 @@ export const search: ThemeComponentProps<SearchProps> = {
 					columns: 2,
 				},
 				'toolbar.top': {
-					layout: [['Banner.header'], ['_', 'SearchHeader', '_'], ['Banner.banner'], ['MobileSidebar', '_', 'PaginationInfo', '_', 'LayoutSelector']],
+					layout: [['banner.header'], ['_', 'searchHeader', '_'], ['banner.banner'], ['mobileSidebar', '_', 'paginationInfo', '_', 'layoutSelector']],
 				},
 				mobileSidebar: {
-					layout: [['SortBy'], ['Facets']],
+					layout: [['sortBy'], ['facets']],
 				},
 			},
 		},
@@ -67,12 +67,12 @@ export const search: ThemeComponentProps<SearchProps> = {
 				},
 				'toolbar.top': {
 					layout: [
-						['_', 'SearchHeader', '_'],
-						['MobileSidebar', '_', 'PaginationInfo', '_', 'LayoutSelector'],
+						['_', 'searchHeader', '_'],
+						['mobileSidebar', '_', 'paginationInfo', '_', 'layoutSelector'],
 					],
 				},
 				mobileSidebar: {
-					layout: [['SortBy'], ['Facets'], ['Banner.left']],
+					layout: [['sortBy'], ['facets'], ['banner.left']],
 				},
 			},
 		},

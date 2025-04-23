@@ -135,7 +135,7 @@ describe('SearchHorizontal Template Component', () => {
 			components: {
 				toolbar: {
 					//middle toolbar is empty by default
-					layout: ['SearchHeader'],
+					layout: ['searchHeader'],
 				},
 			},
 		};
@@ -153,7 +153,7 @@ describe('SearchHorizontal Template Component', () => {
 			components: {
 				toolbar: {
 					//middle toolbar is empty by default
-					layout: ['SearchHeader'],
+					layout: ['searchHeader'],
 				},
 			},
 		};
