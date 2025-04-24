@@ -74,11 +74,11 @@ describe('Theme overrides work', () => {
 									},
 
 									'search toolbar.top': {
-										layout: ['SearchHeader', 'PaginationInfo', 'Pagination', 'SortBy', 'PerPage'],
+										layout: ['searchHeader', 'paginationInfo', 'pagination', 'sortBy', 'perPage'],
 									},
 
 									'search toolbar.bottom': {
-										layout: ['PaginationInfo', 'SortBy', 'PerPage'],
+										layout: ['paginationInfo', 'sortBy', 'perPage'],
 									},
 								},
 							},
@@ -123,7 +123,7 @@ describe('Theme overrides work', () => {
 									},
 
 									'search toolbar.top': {
-										layout: ['SearchHeader', 'PaginationInfo', 'LayoutSelector', 'SortBy', 'PerPage'],
+										layout: ['searchHeader', 'paginationInfo', 'layoutSelector', 'sortBy', 'perPage'],
 									},
 								},
 								layoutOptions: [
@@ -216,11 +216,11 @@ describe('Theme overrides work', () => {
 													subtitleText: 'nope',
 												},
 												'search toolbar.top': {
-													layout: ['SearchHeader', 'LayoutSelector', 'Pagination', 'PerPage'],
+													layout: ['searchHeader', 'layoutSelector', 'pagination', 'perPage'],
 												},
 
 												'search toolbar.bottom': {
-													layout: ['LayoutSelector', 'SortBy'],
+													layout: ['layoutSelector', 'sortBy'],
 												},
 											},
 										},
@@ -241,11 +241,11 @@ describe('Theme overrides work', () => {
 												},
 
 												'search toolbar.top': {
-													layout: ['SearchHeader', 'LayoutSelector', 'SortBy'],
+													layout: ['searchHeader', 'layoutSelector', 'sortBy'],
 												},
 
 												'search toolbar.bottom': {
-													layout: ['LayoutSelector', 'Pagination', 'PerPage'],
+													layout: ['layoutSelector', 'pagination', 'perPage'],
 												},
 											},
 										},
@@ -413,7 +413,7 @@ describe('Theme overrides work', () => {
 												titleText: '991 - 1299',
 											},
 											'toolbar.top': {
-												layout: ['SearchHeader'],
+												layout: ['searchHeader'],
 											},
 										},
 									},
