@@ -30,6 +30,7 @@ export type LibraryImports = {
 		base: (args?: any) => Promise<Theme>;
 		bocachica: (args?: any) => Promise<Theme>;
 		snappy: (args?: any) => Promise<Theme>;
+		snapnco: (args?: any) => Promise<Theme>;
 	};
 	plugins: {
 		shopify: {
@@ -148,6 +149,9 @@ export class LibraryStore {
 			},
 			snappy: async () => {
 				return this.themes.snappy || (this.themes.snappy = (await import('./library/themes/snappy')).snappy);
+			},
+			snapnco: async () => {
+				return this.themes.snapnco || (this.themes.snapnco = (await import('./library/themes/snapnco')).snapnco);
 			},
 		},
 		plugins: {

@@ -32,7 +32,7 @@ export const Sidebar = observer((properties: SidebarProps): JSX.Element => {
 	const defaultProps: Partial<SidebarProps> = {
 		titleText: 'Filters',
 		treePath: globalTreePath,
-		layout: [['FilterSummary'], ['SortBy', 'PerPage'], ['Facets'], ['Banner.left']],
+		layout: [['filterSummary'], ['sortBy', 'perPage'], ['facets'], ['banner.left']],
 	};
 
 	const props = mergeProps('sidebar', globalTheme, defaultProps, properties);
@@ -89,7 +89,7 @@ export const Sidebar = observer((properties: SidebarProps): JSX.Element => {
 	);
 });
 
-export type SideBarModuleNames = 'FilterSummary' | 'SortBy' | 'PerPage' | 'Facets' | 'Banner.left' | 'PaginationInfo' | 'LayoutSelector' | '_';
+export type SideBarModuleNames = 'filterSummary' | 'sortBy' | 'perPage' | 'facets' | 'banner.left' | 'paginationInfo' | 'layoutSelector' | '_';
 
 export interface SidebarProps extends ComponentProps {
 	controller: SearchController;

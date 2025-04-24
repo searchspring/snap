@@ -51,6 +51,7 @@ export const facetsHorizontal: ThemeComponentProps<FacetsHorizontalProps> = {
 	default: {
 		themeStyleScript: facetsHorizontalStyleScript,
 		iconCollapse: 'angle-down',
+		limit: 9,
 	},
 	mobile: {
 		limit: 0,

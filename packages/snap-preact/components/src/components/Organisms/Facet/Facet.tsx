@@ -304,7 +304,16 @@ export const Facet = observer((properties: FacetProps): JSX.Element => {
 
 	return facet && renderFacet ? (
 		<CacheProvider>
-			<div {...styling} className={classnames('ss__facet', `ss__facet--${facet.display}`, `ss__facet--${facet.field}`, className)}>
+			<div
+				{...styling}
+				className={classnames(
+					'ss__facet',
+					`ss__facet--${facet.field}`,
+					`${facet.collapsed ? 'ss__facet--collapsed' : ''}`,
+					className,
+					`${facet.display ? `ss__facet--${facet.display}` : ''}`
+				)}
+			>
 				<Dropdown
 					{...subProps.dropdown}
 					open={disableCollapse || !facet?.collapsed}

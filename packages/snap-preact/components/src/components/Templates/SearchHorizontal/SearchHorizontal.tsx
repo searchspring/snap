@@ -8,7 +8,6 @@ import { defined, mergeProps, mergeStyles } from '../../../utilities';
 import { ComponentProps, ResultComponent, StyleScript } from '../../../types';
 import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { Toolbar, ToolbarProps } from '../../Organisms/Toolbar';
-import { SearchHeader, SearchHeaderProps } from '../../Atoms/SearchHeader';
 import { NoResults, NoResultsProps } from '../../Organisms/NoResults';
 import { FacetsHorizontal, FacetsHorizontalProps } from '../../Organisms/FacetsHorizontal';
 
@@ -23,9 +22,7 @@ const defaultStyles: StyleScript<SearchHorizontalProps> = ({}) => {
 export const SearchHorizontal = observer((properties: SearchHorizontalProps): JSX.Element => {
 	const globalTheme: Theme = useTheme();
 
-	const defaultProps: Partial<SearchHorizontalProps> = {
-		hideMiddleToolbar: true,
-	};
+	const defaultProps: Partial<SearchHorizontalProps> = {};
 
 	const props = mergeProps('searchHorizontal', globalTheme, defaultProps, properties);
 
@@ -33,7 +30,6 @@ export const SearchHorizontal = observer((properties: SearchHorizontalProps): JS
 		disableStyles,
 		className,
 		controller,
-		hideSearchHeader,
 		hideTopToolbar,
 		hideMiddleToolbar,
 		resultComponent,
@@ -57,7 +53,7 @@ export const SearchHorizontal = observer((properties: SearchHorizontalProps): JS
 		TopToolbar: {
 			name: 'top',
 			// default props
-			layout: [['FilterSummary'], ['LayoutSelector', '_', 'SortBy', 'PerPage']],
+			layout: [['banner.header'], ['searchHeader'], ['banner.banner'], ['filterSummary'], ['layoutSelector', '_', 'sortBy', 'perPage']],
 			// inherited props
 			...defined({
 				disableStyles,
@@ -68,7 +64,7 @@ export const SearchHorizontal = observer((properties: SearchHorizontalProps): JS
 		MiddleToolbar: {
 			name: 'middle',
 			// default props
-			layout: ['PerPage', 'SortBy'],
+			layout: [],
 			// inherited props
 			...defined({
 				disableStyles,
@@ -79,16 +75,7 @@ export const SearchHorizontal = observer((properties: SearchHorizontalProps): JS
 		BottomToolbar: {
 			name: 'bottom',
 			// default props
-			layout: ['_', 'Pagination'],
-			// inherited props
-			...defined({
-				disableStyles,
-			}),
-			theme: props.theme,
-			treePath,
-		},
-		SearchHeader: {
-			// default props
+			layout: [['banner.footer'], ['_', 'pagination']],
 			// inherited props
 			...defined({
 				disableStyles,
@@ -123,8 +110,6 @@ export const SearchHorizontal = observer((properties: SearchHorizontalProps): JS
 	return (
 		<CacheProvider>
 			<div {...styling} className={classnames('ss__search-horizontal', className)}>
-				{!hideSearchHeader && <SearchHeader {...subProps.SearchHeader} controller={controller} />}
-
 				{!hideTopToolbar && store.pagination.totalResults > 0 && (
 					<Toolbar {...subProps.TopToolbar} className="ss__search-horizontal__content__toolbar--top-toolbar" controller={controller} />
 				)}
@@ -155,11 +140,9 @@ export const SearchHorizontal = observer((properties: SearchHorizontalProps): JS
 export interface SearchHorizontalProps extends ComponentProps {
 	controller: SearchController;
 	resultComponent?: ResultComponent;
-	hideSearchHeader?: boolean;
 	hideTopToolbar?: boolean;
 	hideMiddleToolbar?: boolean;
 	hideBottomToolBar?: boolean;
-	hideMerchandisingBanners?: boolean | string[];
 	hideFacetsHorizontal?: boolean;
 }
 
@@ -168,7 +151,6 @@ interface SearchHorizontalSubProps {
 	TopToolbar: Partial<ToolbarProps>;
 	MiddleToolbar: Partial<ToolbarProps>;
 	BottomToolbar: Partial<ToolbarProps>;
-	SearchHeader: Partial<SearchHeaderProps>;
 	Results: Partial<ResultsProps>;
 	NoResults: Partial<NoResultsProps>;
 }

@@ -41,9 +41,9 @@ export default {
 			},
 			control: { type: 'none' },
 		},
-		hideSearchHeader: {
+		hideTopToolBar: {
 			defaultValue: false,
-			description: 'prevents the SearchHeader component from rendering',
+			description: 'prevents the top Toolbar component from rendering',
 			table: {
 				type: {
 					summary: 'boolean',
@@ -52,9 +52,9 @@ export default {
 			},
 			control: { type: 'boolean' },
 		},
-		hideTopToolBar: {
+		hideMiddleToolBar: {
 			defaultValue: false,
-			description: 'prevents the top Toolbar component from rendering',
+			description: 'prevents the middle Toolbar component from rendering',
 			table: {
 				type: {
 					summary: 'boolean',
@@ -74,9 +74,9 @@ export default {
 			},
 			control: { type: 'boolean' },
 		},
-		hideLayoutSelector: {
+		hideFacetsHorizontal: {
 			defaultValue: false,
-			description: 'prevents the layoutSelector component from rendering',
+			description: 'prevents the HorizontalFacets component from rendering',
 			table: {
 				type: {
 					summary: 'boolean',
@@ -84,15 +84,6 @@ export default {
 				defaultValue: { summary: false },
 			},
 			control: { type: 'boolean' },
-		},
-		layoutConfig: {
-			description: 'object to configure the layoutSelector',
-			table: {
-				type: {
-					summary: 'object',
-				},
-			},
-			control: { type: 'object' },
 		},
 		resultComponent: {
 			description: 'Slot for custom result component',

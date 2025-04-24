@@ -202,19 +202,19 @@ export const Layout = observer((properties: LayoutProps): JSX.Element => {
 
 	function renderModule(module: ModuleNames) {
 		switch (module) {
-			case 'MobileSidebar':
+			case 'mobileSidebar':
 				if (controller.store.pagination.totalResults > 0) {
 					return <MobileSidebar controller={controller} {...subProps.MobileSidebar} />;
 				}
 				break;
 
-			case 'SearchHeader':
+			case 'searchHeader':
 				return <SearchHeader {...subProps.SearchHeader} />;
 
-			case 'FilterSummary':
+			case 'filterSummary':
 				return <FilterSummary {...subProps.FilterSummary} />;
 
-			case 'LayoutSelector':
+			case 'layoutSelector':
 				if (themeStore && props.theme?.layoutOptions && props.theme.layoutOptions.length > 0) {
 					return (
 						<LayoutSelector
@@ -231,19 +231,19 @@ export const Layout = observer((properties: LayoutProps): JSX.Element => {
 				}
 				break;
 
-			case 'PaginationInfo':
+			case 'paginationInfo':
 				return <PaginationInfo {...subProps.PaginationInfo} />;
 
-			case 'SortBy':
+			case 'sortBy':
 				return <SortBy {...subProps.SortBy} />;
 
-			case 'PerPage':
+			case 'perPage':
 				return <PerPage {...subProps.PerPage} />;
 
-			case 'Button.toggleSideBar':
+			case 'button.sidebar-toggle':
 				return (
 					ToggleSideBarButton && (
-						<div className="ss__button-toggleSideBarButtonWrapper">
+						<div className="ss__button--sidebar-toggle-button-wrapper">
 							<Button {...subProps.ToggleSideBarButton}>
 								<ToggleSideBarButton />
 							</Button>
@@ -251,7 +251,7 @@ export const Layout = observer((properties: LayoutProps): JSX.Element => {
 					)
 				);
 
-			case 'Pagination':
+			case 'pagination':
 				if (controller.config.settings?.infinite) {
 					return <LoadMore {...subProps.LoadMore} />;
 				} else {
@@ -261,19 +261,19 @@ export const Layout = observer((properties: LayoutProps): JSX.Element => {
 			case '_':
 				return <div className={`ss__layout__separator ss__layout__separator--${separatorIndex++}`} />;
 
-			case 'Banner.banner':
+			case 'banner.banner':
 				return <Banner {...subProps.Banner} type={ContentType.BANNER} name={'banner'} />;
 
-			case 'Banner.footer':
+			case 'banner.footer':
 				return <Banner {...subProps.Banner} type={ContentType.FOOTER} name={'footer'} />;
 
-			case 'Banner.header':
+			case 'banner.header':
 				return <Banner {...subProps.Banner} type={ContentType.HEADER} name={'header'} />;
 
-			case 'Banner.left':
+			case 'banner.left':
 				return <Banner {...subProps.Banner} type={ContentType.LEFT} name={'left'} />;
 
-			case 'Facets':
+			case 'facets':
 				return <Facets {...subProps.Facets} />;
 
 			default:
@@ -317,22 +317,22 @@ export interface LayoutProps extends ComponentProps {
 
 export type ModuleNames =
 	// toolbar
-	| 'SearchHeader'
-	| 'FilterSummary'
-	| 'MobileSidebar'
-	| 'LayoutSelector'
-	| 'PerPage'
-	| 'SortBy'
-	| 'Pagination'
-	| 'PaginationInfo'
+	| 'searchHeader'
+	| 'filterSummary'
+	| 'mobileSidebar'
+	| 'layoutSelector'
+	| 'perPage'
+	| 'sortBy'
+	| 'pagination'
+	| 'paginationInfo'
 	| '_'
-	| 'Button.toggleSideBar'
-	| 'Banner.header'
-	| 'Banner.banner'
-	| 'Banner.footer'
+	| 'button.sidebar-toggle'
+	| 'banner.header'
+	| 'banner.banner'
+	| 'banner.footer'
 	// sidebar
-	| 'Facets'
-	| 'Banner.left';
+	| 'facets'
+	| 'banner.left';
 
 interface LayoutSubProps {
 	MobileSidebar: Partial<MobileSidebarProps>;

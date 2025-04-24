@@ -2,7 +2,7 @@ import { h } from 'preact';
 import { render, waitFor } from '@testing-library/preact';
 import { ThemeProvider } from '../../../providers';
 import { v4 as uuidv4 } from 'uuid';
-import { ContentType, SearchStore, SearchStoreConfig } from '@searchspring/snap-store-mobx';
+import { SearchStore, SearchStoreConfig } from '@searchspring/snap-store-mobx';
 import { SearchController, SearchControllerConfig } from '@searchspring/snap-controller';
 import { EventManager } from '@searchspring/snap-event-manager';
 import { Profiler } from '@searchspring/snap-profiler';
@@ -64,10 +64,10 @@ describe('Search Template Component', () => {
 		const topToolBar = rendered.container.querySelector('.ss__search__header-section__toolbar--top-toolbar');
 		const middleToolBar = rendered.container.querySelector('.ss__search__content__toolbar--middle-toolbar');
 		const bottomToolBar = rendered.container.querySelector('.ss__search__content__toolbar--bottom-toolbar');
-		const toggleFiltersButton = rendered.container.querySelector('.ss__search__sidebar-wrapper-toggle');
+		const toggleFiltersButton = rendered.container.querySelector('.ss__search__sidebar-toggle');
 		const searchHeader = rendered.container.querySelector('.ss__search-header');
 		const mobileSidebar = rendered.container.querySelector('.ss__mobile-sidebar__slideout');
-		// const dropdown = rendered.container.querySelector('.ss__search__sidebar-wrapper-toggle');
+		// const dropdown = rendered.container.querySelector('.ss__search__sidebar-toggle');
 
 		expect(element).toBeInTheDocument();
 		expect(sidebarWrapper).toBeInTheDocument();
@@ -137,6 +137,15 @@ describe('Search Template Component', () => {
 		expect(topToolBar).not.toBeInTheDocument();
 	});
 
+	it('can hide middleToolbar', () => {
+		const rendered = render(<Search controller={controller} hideMiddleToolbar />);
+		const element = rendered.container.querySelector('.ss__search')!;
+		const middleToolBar = rendered.container.querySelector('.ss__search__content__toolbar--middleToolBar');
+
+		expect(element).toBeInTheDocument();
+		expect(middleToolBar).not.toBeInTheDocument();
+	});
+
 	it('can hide bottomToolbar', () => {
 		const rendered = render(<Search controller={controller} hideBottomToolBar />);
 		const element = rendered.container.querySelector('.ss__search')!;
@@ -198,7 +207,7 @@ describe('Search Template Component', () => {
 
 		const rendered = render(<Search controller={controller} hideToggleSidebarButton={true} toggleSidebarButtonText={buttonText} />);
 		const element = rendered.container.querySelector('.ss__search')!;
-		const button = rendered.container.querySelector('.ss__search__sidebar-wrapper-toggle');
+		const button = rendered.container.querySelector('.ss__search__sidebar-toggle');
 		const sidebar = rendered.container.querySelector('.ss__sidebar');
 
 		expect(element).toBeInTheDocument();

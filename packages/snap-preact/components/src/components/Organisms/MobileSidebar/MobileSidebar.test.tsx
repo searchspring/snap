@@ -470,7 +470,7 @@ describe('MobileSidebar Component', () => {
 		});
 	});
 	it('can hide Facets', async () => {
-		const rendered = render(<MobileSidebar controller={controller} layout={['FilterSummary', 'SortBy', 'PerPage', 'Banner.left']} />);
+		const rendered = render(<MobileSidebar controller={controller} layout={['filterSummary', 'sortBy', 'perPage', 'banner.left']} />);
 		const slideoutButton = rendered.container.querySelector('.ss__mobile-sidebar__slideout__button');
 		userEvent.click(slideoutButton!);
 
@@ -483,7 +483,7 @@ describe('MobileSidebar Component', () => {
 	});
 
 	it('can hide perpage', async () => {
-		const rendered = render(<MobileSidebar controller={controller} layout={['FilterSummary', 'SortBy', 'Facets', 'Banner.left']} />);
+		const rendered = render(<MobileSidebar controller={controller} layout={['filterSummary', 'sortBy', 'facets', 'banner.left']} />);
 		const slideoutButton = rendered.container.querySelector('.ss__mobile-sidebar__slideout__button');
 		userEvent.click(slideoutButton!);
 
@@ -496,7 +496,7 @@ describe('MobileSidebar Component', () => {
 	});
 
 	it('can hide hideSortBy', async () => {
-		const rendered = render(<MobileSidebar controller={controller} layout={['FilterSummary', 'PerPage', 'Facets', 'Banner.left']} />);
+		const rendered = render(<MobileSidebar controller={controller} layout={['filterSummary', 'perPage', 'facets', 'banner.left']} />);
 		const slideoutButton = rendered.container.querySelector('.ss__mobile-sidebar__slideout__button');
 		userEvent.click(slideoutButton!);
 
@@ -509,7 +509,7 @@ describe('MobileSidebar Component', () => {
 	});
 
 	it('can hide FilterSummary', async () => {
-		const rendered = render(<MobileSidebar controller={controller} layout={['SortBy', 'PerPage', 'Facets', 'Banner.left']} />);
+		const rendered = render(<MobileSidebar controller={controller} layout={['sortBy', 'perPage', 'facets', 'banner.left']} />);
 		const slideoutButton = rendered.container.querySelector('.ss__mobile-sidebar__slideout__button');
 		userEvent.click(slideoutButton!);
 

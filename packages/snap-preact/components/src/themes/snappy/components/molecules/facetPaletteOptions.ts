@@ -24,8 +24,8 @@ const facetPaletteStyleScript = ({ theme }: FacetPaletteOptionsProps) => {
 			},
 
 			'.ss__facet-palette-options__option__palette': {
-				borderRadius: '3px',
-				border: '0px',
+				border: '2px solid #e6e6e6',
+
 				'.ss__facet-palette-options__icon': {
 					opacity: 1,
 					stroke: 'gray',

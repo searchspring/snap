@@ -36,19 +36,19 @@ export const searchHorizontal: ThemeComponentProps<SearchHorizontalProps> = {
 					hideTitle: true,
 				},
 				sidebar: {
-					layout: ['FilterSummary', 'Facets', 'Banner.left'],
+					layout: ['filterSummary', 'facets', 'banner.left'],
 				},
 				'button.sidebar-toggle': {
 					icon: 'filters',
 				},
 				'toolbar.top': {
-					layout: ['PaginationInfo', '_', 'SortBy', 'PerPage'],
+					layout: [['banner.header'], ['searchHeader'], ['banner.banner'], ['paginationInfo', '_', 'sortBy', 'perPage']],
 				},
 				'toolbar.middle': {
 					layout: [],
 				},
 				'toolbar.bottom': {
-					layout: ['_', 'Pagination', '_'],
+					layout: [['banner.footer'], ['_', 'pagination', '_']],
 				},
 			},
 		},
@@ -58,10 +58,10 @@ export const searchHorizontal: ThemeComponentProps<SearchHorizontalProps> = {
 		theme: {
 			components: {
 				'toolbar.top': {
-					layout: ['MobileSidebar', '_', 'LayoutSelector'],
+					layout: [['banner.header'], ['searchHeader'], ['banner.banner'], ['mobileSidebar', '_', 'layoutSelector']],
 				},
 				'toolbar.middle': {
-					layout: ['PaginationInfo'],
+					layout: ['paginationInfo'],
 				},
 			},
 		},

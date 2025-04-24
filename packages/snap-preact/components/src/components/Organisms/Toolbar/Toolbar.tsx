@@ -19,7 +19,7 @@ export const Toolbar = observer((properties: ToolbarProps): JSX.Element => {
 
 	const defaultProps: Partial<ToolbarProps> = {
 		treePath: globalTreePath,
-		layout: ['MobileSidebar', 'FilterSummary', 'PaginationInfo', 'SortBy', 'PerPage', 'Pagination'],
+		layout: ['mobileSidebar', 'filterSummary', 'paginationInfo', 'sortBy', 'perPage', 'pagination'],
 	};
 
 	const props = mergeProps('toolbar', globalTheme, defaultProps, properties);
@@ -63,19 +63,19 @@ export interface ToolbarProps extends ComponentProps {
 }
 
 export type ModuleNames =
-	| 'SearchHeader'
-	| 'FilterSummary'
-	| 'MobileSidebar'
-	| 'LayoutSelector'
-	| 'PerPage'
-	| 'SortBy'
-	| 'Pagination'
-	| 'PaginationInfo'
+	| 'searchHeader'
+	| 'filterSummary'
+	| 'mobileSidebar'
+	| 'layoutSelector'
+	| 'perPage'
+	| 'sortBy'
+	| 'pagination'
+	| 'paginationInfo'
 	| '_'
-	| 'Button.toggleSideBar'
-	| 'Banner.header'
-	| 'Banner.banner'
-	| 'Banner.footer';
+	| 'button.sidebar-toggle'
+	| 'banner.header'
+	| 'banner.banner'
+	| 'banner.footer';
 
 export type ToolbarNames = 'top' | 'middle' | 'bottom';
 
