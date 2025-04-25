@@ -55,6 +55,7 @@ describe('Tracking Beacon 2.0', () => {
 
 	it('tracked search render, impression, clickthrough', () => {
 		cy.visit('https://localhost:2222');
+		cy.wait(1000);
 		cy.wait(`@beacon2/search/render`).then((render) => {
 			expect(render.response.body).to.have.property('success').to.equal(true);
 
@@ -90,6 +91,7 @@ describe('Tracking Beacon 2.0', () => {
 
 				// reload page to generate new context
 				cy.visit('https://localhost:2222?differentPageUrl=1');
+				cy.wait(1000);
 
 				cy.waitForBundle().then(() => {
 					cy.snapController().then((controller) => {
