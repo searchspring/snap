@@ -10,7 +10,8 @@ concurrency:
 
 jobs:
   Tests:
-    runs-on: ubuntu-latest
+    runs-on:
+      group: Snap Runner
     timeout-minutes: 20
     steps:
       - name: Checkout repositiory
