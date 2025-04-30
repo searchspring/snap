@@ -86,7 +86,8 @@ export class Tracker extends Beacon {
 							this.track.product.view(item, siteId);
 							break;
 						case 'searchspring/track/cart/view':
-							this.track.cart.view({ items }, siteId);
+							console.warn('searchspring/track/cart/view attribute tracking is deprecated and will be removed');
+							// TODO: add add and remove events?
 							break;
 						case 'searchspring/track/order/transaction':
 							this.track.order.transaction({ order, items }, siteId);

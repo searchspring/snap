@@ -91,31 +91,6 @@ This method will call the `retarget` method on all `DomTargeters` set in the Tra
 </script>
 ```
 
-### Cart View Script Block
-
-```html
-<script type="searchspring/track/cart/view">
-    items = [
-        {
-            uid: '123',
-            sku: 'product123',
-            childUid: '123_a',
-            childSku: 'product123_a',
-            qty: '1',
-            price: '9.99',
-        },
-        {
-            uid: '456',
-            sku: 'product456',
-            childUid: '456_a',
-            childSku: 'product456_a',
-            qty: '2',
-            price: '10.99',
-        },
-    ];
-</script>
-```
-
 ### Order Transaction Script Block
 
 ```html

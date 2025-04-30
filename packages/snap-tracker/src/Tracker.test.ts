@@ -104,23 +104,6 @@ describe('Script Block Tracking', () => {
 		trackEvent.mockRestore();
 	});
 
-	it('can target track/cart/view', async () => {
-		const items = [{ sku: 'abc123' }];
-		global.document.body.innerHTML = `<div>
-			<script type="searchspring/track/cart/view">
-				items = ${JSON.stringify(items)};
-			</script>
-		</div>`;
-
-		const tracker = new Tracker(globals, config);
-		const trackEvent = jest.spyOn(tracker.track.cart, 'view');
-
-		await new Promise((r) => setTimeout(r));
-		expect(trackEvent).toHaveBeenCalledWith({ items }, undefined);
-
-		trackEvent.mockRestore();
-	});
-
 	it('can target track/order/transaction', async () => {
 		const order = {
 			id: '123456',
@@ -575,27 +558,6 @@ describe('Tracker', () => {
 		});
 		expect(result?.type).toBe(BeaconType.CLICK);
 		expect(result?.category).toBe(BeaconCategory.INTERACTION);
-	});
-
-	it('handles cart view events with items property', () => {
-		const tracker = new Tracker(globals, config);
-
-		const cartViewData: CartViewEvent = {
-			items: [{ sku: 'product123', qty: '1', price: 10.99 }],
-		};
-
-		const eventsSpy = jest.spyOn(tracker.events.cart, 'view');
-
-		tracker.track.cart.view(cartViewData);
-
-		expect(eventsSpy).toHaveBeenCalledWith({
-			data: {
-				results: [{ sku: 'product123', uid: 'product123', qty: 1, price: 10.99 }],
-			},
-			siteId: undefined,
-		});
-
-		eventsSpy.mockRestore();
 	});
 
 	it('handles order transaction events with legacy format', () => {
