@@ -1,6 +1,5 @@
 import { ThemeComplete, ThemeVariables } from '../../providers';
 import { components } from './components';
-import { defaultLayoutOptions } from './layoutOptions';
 import { responsive } from './responsive';
 
 const snappyVariables: ThemeVariables = {
@@ -17,6 +16,5 @@ export const snappy: ThemeComplete = {
 	name: 'snappy',
 	variables: snappyVariables,
 	components,
-	layoutOptions: defaultLayoutOptions,
 	responsive,
 };

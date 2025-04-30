@@ -4,7 +4,7 @@ import { css } from '@emotion/react';
 import classnames from 'classnames';
 import { observer } from 'mobx-react-lite';
 
-import { Theme, useTheme, useSnap, CacheProvider, useTreePath } from '../../../providers';
+import { Theme, useTheme, CacheProvider, useTreePath } from '../../../providers';
 import type { ComponentProps, StyleScript } from '../../../types';
 import { FilterSummary, FilterSummaryProps } from '../FilterSummary';
 import { defined, mergeProps, mergeStyles } from '../../../utilities';
@@ -14,7 +14,6 @@ import type { SearchController } from '@searchspring/snap-controller';
 import { SortBy, SortByProps } from '../../Molecules/SortBy';
 import { PerPage, PerPageProps } from '../../Molecules/PerPage';
 import { LayoutSelector, LayoutSelectorProps } from '../../Molecules/LayoutSelector';
-import type { SnapTemplates } from '../../../../../src';
 import { MobileSidebar, MobileSidebarProps } from '../MobileSidebar';
 import { PaginationInfo, PaginationInfoProps } from '../../Atoms/PaginationInfo/PaginationInfo';
 import { SearchHeader, SearchHeaderProps } from '../../Atoms/SearchHeader/SearchHeader';
@@ -49,9 +48,6 @@ const defaultStyles: StyleScript<LayoutProps> = ({}) => {
 export const Layout = observer((properties: LayoutProps): JSX.Element => {
 	const globalTheme: Theme = useTheme();
 	const globalTreePath = useTreePath();
-
-	const snap = useSnap() as SnapTemplates;
-	const themeStore = snap?.templates?.getThemeStore(globalTheme.name);
 
 	const defaultProps: Partial<LayoutProps> = {
 		treePath: globalTreePath,
@@ -215,21 +211,7 @@ export const Layout = observer((properties: LayoutProps): JSX.Element => {
 				return <FilterSummary {...subProps.FilterSummary} />;
 
 			case 'layoutSelector':
-				if (themeStore && props.theme?.layoutOptions && props.theme.layoutOptions.length > 0) {
-					return (
-						<LayoutSelector
-							onSelect={(e, option) => {
-								if (option) {
-									themeStore?.layout.select(option);
-								}
-							}}
-							selected={themeStore?.layout.selected}
-							options={props.theme?.layoutOptions}
-							{...subProps.LayoutSelector}
-						/>
-					);
-				}
-				break;
+				return <LayoutSelector {...subProps.LayoutSelector} />;
 
 			case 'paginationInfo':
 				return <PaginationInfo {...subProps.PaginationInfo} />;

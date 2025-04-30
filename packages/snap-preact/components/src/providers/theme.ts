@@ -40,13 +40,12 @@ export type Theme = {
 	variables?: ThemeVariables;
 	responsive?: [ThemeResponsive, ThemeResponsive, ThemeResponsive];
 	components?: ThemeComponentOverrides;
-	layoutOptions?: ThemeLayoutOption[];
 	overrides?: ThemeOverrides;
 };
 
 export type ThemeComplete = Required<Omit<Theme, 'overrides'>> & { components: ThemeComponents };
 
-export type ThemeResponsive = Pick<Theme, 'layoutOptions'> & { components?: ThemeComponentRestrictedOverrides };
+export type ThemeResponsive = { components?: ThemeComponentRestrictedOverrides };
 export type ThemePartial = Omit<Theme, 'variables' | 'name'> & { variables?: ThemeVariablesPartial };
-export type ThemeOverrides = Pick<Theme, 'layoutOptions' | 'responsive'> & { components?: ThemeComponentRestrictedOverrides };
+export type ThemeOverrides = Pick<Theme, 'responsive'> & { components?: ThemeComponentRestrictedOverrides };
 export type ThemeMinimal = Pick<Theme, 'components'>;

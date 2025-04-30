@@ -88,7 +88,7 @@ export function mergeProps<GenericComponentProps = ComponentProps>(
 			}
 		});
 
-		// tacking on name, variables and layoutOptions to `theme`
+		// tacking on name and variables to `theme`
 		mergedProps = {
 			...mergedProps,
 			theme: {
@@ -104,9 +104,6 @@ export function mergeProps<GenericComponentProps = ComponentProps>(
 
 		if (globalTheme.variables) {
 			(mergedProps as ComponentProps).theme!.variables = globalTheme.variables;
-		}
-		if (globalTheme.layoutOptions) {
-			(mergedProps as ComponentProps).theme!.layoutOptions = globalTheme.layoutOptions;
 		}
 
 		//if custom component, re-spread props again

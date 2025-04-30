@@ -141,43 +141,11 @@ export class ThemeStore {
 		const base = { ...this.base };
 		const overrides = { ...this.overrides };
 
-		if (this.overrides.layoutOptions?.length) {
-			base.layoutOptions = [];
-		}
-
-		if (overrideBreakpoint.layoutOptions?.length) {
-			base.layoutOptions = [];
-			overrides.layoutOptions = [];
-		}
-
-		let themeOverrides = mergeThemeLayers(overrides, overrideBreakpoint, overrides, overrideBreakpoint, {
+		const themeOverrides = mergeThemeLayers(overrides, overrideBreakpoint, overrides, overrideBreakpoint, {
 			variables: toJS(this.variables),
 		} as ThemePartial) as Theme;
 
 		let theme: Theme = mergeThemeLayers(base, baseBreakpoint, this.currency, this.language, this.languageOverrides, themeOverrides) as Theme;
-
-		// find layout option overrides
-		const layoutOptions = theme.layoutOptions;
-		const selectedOption: ListOption | undefined =
-			layoutOptions?.find((option) => option?.value === this.layout.selected?.value) ||
-			layoutOptions?.find((option) => option?.default) ||
-			(Array.isArray(layoutOptions) ? layoutOptions[0] : undefined);
-
-		// apply selected overrides if they exist
-		if (selectedOption?.overrides) {
-			if (selectedOption?.overrides) {
-				theme = mergeThemeLayers(theme, selectedOption.overrides) as Theme;
-				themeOverrides = mergeThemeLayers(themeOverrides, selectedOption.overrides) as Theme;
-			}
-
-			// if the the selectedOption differs from this.layout.selected, then select the layout (can happen at breakpoint recalculations)
-			if (
-				!this?.layout?.selected ||
-				(this?.layout?.selected && selectedOption.value !== this.layout.selected.value && selectedOption.label !== this.layout.selected.label)
-			) {
-				this.layout.select(selectedOption);
-			}
-		}
 
 		/*
 			Ensure 'theme' prop has overrides applied to it
