@@ -55,28 +55,22 @@ describe('Tracking Beacon 2.0', () => {
 
 	it('tracked search render, impression, clickthrough', () => {
 		cy.visit('https://localhost:2222');
-		cy.wait(1000);
-		cy.wait(`@beacon2/search/render`).then((render) => {
-			expect(render.response.body).to.have.property('success').to.equal(true);
+		new Cypress.Promise.all([cy.wait(`@beacon2/search/render`), cy.wait(`@beacon2/search/impression`)])
+			.then(([render, impression]) => {
+				expect(render.response.body).to.have.property('success').to.equal(true);
+				const { context: context1, data: data1 } = JSON.parse(render.request.body);
+				expect(context1).to.be.an('object');
+				expect(data1).to.have.property('results').to.be.an('array');
+				cy.get('.ss__result').should('have.length', data1.results.length); // all results are rendered
+				expect(data1.results[0]).to.have.property('uid').to.be.a('string');
+				expect(data1).to.have.property('merchandising').to.be.an('object');
+				expect(data1).to.have.property('pagination').to.be.an('object');
+				expect(data1).to.not.have.property('sort');
+				expect(data1).to.have.property('q').to.be.a('string');
 
-			const { context: context1, data: data1 } = JSON.parse(render.request.body);
-			expect(context1).to.be.an('object');
-
-			expect(data1).to.have.property('results').to.be.an('array');
-			cy.get('.ss__result').should('have.length', data1.results.length); // all results are rendered
-			expect(data1.results[0]).to.have.property('uid').to.be.a('string');
-			expect(data1).to.have.property('merchandising').to.be.an('object');
-			expect(data1).to.have.property('pagination').to.be.an('object');
-			expect(data1).to.not.have.property('sort');
-			expect(data1).to.have.property('q').to.be.a('string');
-
-			cy.wait(`@beacon2/search/impression`).then((impression) => {
 				expect(impression.response.body).to.have.property('success').to.equal(true);
-
 				const { data: data2, context: context2 } = JSON.parse(impression.request.body);
-
 				expect(data2).to.have.property('results').to.be.an('array').length(4); // first 4 results are visible on the page
-
 				// assert context values are the same as the initial values
 				expect(context2).to.be.an('object');
 				expect(context2.initiator).to.equal(context1.initiator);
@@ -88,11 +82,11 @@ describe('Tracking Beacon 2.0', () => {
 				expect(context2.userAgent).to.equal(context1.userAgent);
 				expect(context2.userId).to.equal(context1.userId);
 				expect(context2.pageLoadId).to.equal(context1.pageLoadId);
-
+				return { context1 }; // return the context values to be used in the next test
+			})
+			.then(({ context1 }) => {
 				// reload page to generate new context
 				cy.visit('https://localhost:2222?differentPageUrl=1');
-				cy.wait(1000);
-
 				cy.waitForBundle().then(() => {
 					cy.snapController().then((controller) => {
 						const firstResult = controller.store.results.find((result) => result.type === 'product');
@@ -119,6 +113,7 @@ describe('Tracking Beacon 2.0', () => {
 							expect(JSON.stringify(data3)).to.equal(
 								JSON.stringify({
 									q: '',
+									matchType: 'primary',
 									pagination: {
 										totalResults: pagination.totalResults,
 										page: pagination.page,
@@ -151,28 +146,24 @@ describe('Tracking Beacon 2.0', () => {
 					});
 				});
 			});
-		});
 	});
 
 	it('tracked category render, impression, clickthrough', () => {
 		cy.visit('https://localhost:2222/category.html');
 
-		cy.wait(`@beacon2/category/render`).then(({ request, response }) => {
-			expect(response.body).to.have.property('success').to.equal(true);
-
-			const { context, data } = JSON.parse(request.body);
+		new Cypress.Promise.all([cy.wait(`@beacon2/category/render`), cy.wait(`@beacon2/category/impression`)]).then(([render, impression]) => {
+			expect(render.response.body).to.have.property('success').to.equal(true);
+			const { context, data } = JSON.parse(render.request.body);
 			expect(context).to.be.an('object');
 			expect(data).to.have.property('results').to.be.an('array').length.greaterThan(0);
 			expect(data).not.to.have.property('q');
-
 			expect(data).to.have.property('bgfilter').to.be.an('array').length.greaterThan(0);
-		});
 
-		cy.wait(`@beacon2/category/impression`, { timeout: 10000 }).its('response.statusCode').should('eq', 200);
+			expect(impression.response.statusCode).to.equal(200);
+		});
 
 		// Click on first product
 		cy.get('.ss__result a').first().click({ force: true });
-
 		cy.wait(`@beacon2/category/clickthrough`).its('response.statusCode').should('eq', 200);
 	});
 
@@ -180,23 +171,19 @@ describe('Tracking Beacon 2.0', () => {
 		cy.visit('https://localhost:2222');
 		cy.get('input[name="q"]').type('s');
 
-		cy.wait(`@beacon2/autocomplete/render`).then(({ request, response }) => {
-			expect(response.body).to.have.property('success').to.equal(true);
-
-			const { context, data } = JSON.parse(request.body);
+		new Cypress.Promise.all([cy.wait(`@beacon2/autocomplete/render`), cy.wait(`@beacon2/autocomplete/impression`)]).then(([render, impression]) => {
+			expect(render.response.body).to.have.property('success').to.equal(true);
+			const { context, data } = JSON.parse(render.request.body);
 			expect(context).to.be.an('object');
 			expect(data).to.have.property('results').to.be.an('array').length.greaterThan(0);
 			expect(data.results[0]).to.have.property('uid').to.be.a('string');
 			expect(data).to.have.property('merchandising').to.be.an('object');
 			expect(data).to.have.property('pagination').to.be.an('object');
 			expect(data).to.not.have.property('sort');
-		});
 
-		cy.wait(`@beacon2/autocomplete/impression`, { timeout: 10000 }).then(({ request, response }) => {
-			expect(response.body).to.have.property('success').to.equal(true);
-
-			const { data } = JSON.parse(request.body);
-			expect(data).to.have.property('results').to.be.an('array').length.greaterThan(0);
+			expect(impression.response.body).to.have.property('success').to.equal(true);
+			const { data: data2 } = JSON.parse(impression.request.body);
+			expect(data2).to.have.property('results').to.be.an('array').length.greaterThan(0);
 		});
 
 		// Click on first product

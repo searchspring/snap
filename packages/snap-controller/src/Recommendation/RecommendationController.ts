@@ -349,13 +349,12 @@ function getRecommendationsSchemaData({ store, results }: { store: Recommendatio
 	return {
 		tag: store.profile.tag,
 		results:
-			results?.map((result: Product): Item => {
+			results?.map((result: Product, idx: number): Item => {
 				const core = result.mappings.core!;
 				return {
+					position: idx + 1,
 					uid: core.uid || '',
-					// childUid: core.uid,
 					sku: core.sku,
-					// childSku: core.sku,
 				};
 			}) || [],
 	};

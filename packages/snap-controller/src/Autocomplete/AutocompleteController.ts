@@ -907,6 +907,7 @@ function getAutocompleteSchemaData({
 	return {
 		q: store.search?.originalQuery?.string || store.search?.query?.string || '',
 		correctedQuery: store.search?.originalQuery?.string ? store.search?.query?.string : undefined,
+		matchType: store.search?.matchType,
 		...filters,
 		sort: params.sorts?.map((sort) => {
 			return {
@@ -935,13 +936,12 @@ function getAutocompleteSchemaData({
 				undefined,
 		},
 		results:
-			results?.map((result: Product): Item => {
+			results?.map((result: Product, idx: number): Item => {
 				const core = result.mappings.core!;
 				return {
+					position: idx + 1,
 					uid: core.uid || '',
-					// childUid: core.uid,
 					sku: core.sku,
-					// childSku: core.sku,
 				};
 			}) || [],
 	};
