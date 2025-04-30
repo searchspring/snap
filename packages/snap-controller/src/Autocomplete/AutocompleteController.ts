@@ -13,11 +13,11 @@ import type {
 	AutocompleteAddtocartSchemaData,
 	AutocompleteRedirectSchemaData,
 	AutocompleteSchemaData,
-	AutocompleteSchemaDataBgfilterInner,
-	AutocompleteSchemaDataFilterInner,
-	AutocompleteSchemaDataSortInnerDirEnum,
 	Item,
 	Product as BeaconProduct,
+	AutocompleteAddtocartSchemaDataFilterInner,
+	AutocompleteAddtocartSchemaDataBgfilterInner,
+	AutocompleteAddtocartSchemaDataSortInnerDirEnum,
 } from '@searchspring/beacon';
 
 const INPUT_ATTRIBUTE = 'ss-autocomplete-input';
@@ -879,8 +879,8 @@ function getAutocompleteSchemaData({
 	results?: Product[];
 }): AutocompleteSchemaData {
 	const filters = params.filters?.reduce<{
-		bgfilter?: Array<AutocompleteSchemaDataBgfilterInner>;
-		filter?: Array<AutocompleteSchemaDataFilterInner>;
+		bgfilter?: Array<AutocompleteAddtocartSchemaDataBgfilterInner>;
+		filter?: Array<AutocompleteAddtocartSchemaDataFilterInner>;
 	}>((acc, filter) => {
 		const key = filter.background ? 'bgfilter' : 'filter';
 		acc[key] = acc[key] || [];
@@ -912,7 +912,7 @@ function getAutocompleteSchemaData({
 		sort: params.sorts?.map((sort) => {
 			return {
 				field: sort.field,
-				dir: sort.direction as AutocompleteSchemaDataSortInnerDirEnum,
+				dir: sort.direction as AutocompleteAddtocartSchemaDataSortInnerDirEnum,
 			};
 		}),
 		pagination: {

@@ -147,7 +147,7 @@ export class RecommendationController extends AbstractController {
 				this.eventManager.fire('track.product.render', { controller: this, products: [result], trackEvent: data });
 				return data;
 			},
-			addToCart: (result: Product): RecommendationsSchemaData | undefined => {
+			addToCart: (result: Product): RecommendationsAddtocartSchemaData | undefined => {
 				const data = getRecommendationsAddtocartSchemaData({ store: this.store, results: [result] });
 				this.tracker.events.recommendations.addToCart({ data, siteId: this.config.globals?.siteId });
 				this.eventManager.fire('track.product.addToCart', { controller: this, products: [result], trackEvent: data });
@@ -155,7 +155,7 @@ export class RecommendationController extends AbstractController {
 			},
 		},
 		bundle: {
-			addToCart: (results: Product[]): RecommendationsSchemaData | undefined => {
+			addToCart: (results: Product[]): RecommendationsAddtocartSchemaData | undefined => {
 				if (this.store.profile.type != 'bundle') return;
 
 				const data = getRecommendationsAddtocartSchemaData({ store: this.store, results });

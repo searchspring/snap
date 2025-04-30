@@ -28,9 +28,9 @@ import type {
 	SearchRequestModelFilterValue,
 } from '@searchspring/snapi-types';
 import type {
-	AutocompleteSchemaDataBgfilterInner,
-	AutocompleteSchemaDataFilterInner,
-	AutocompleteSchemaDataSortInnerDirEnum,
+	AutocompleteAddtocartSchemaDataBgfilterInner,
+	AutocompleteAddtocartSchemaDataFilterInner,
+	AutocompleteAddtocartSchemaDataSortInnerDirEnum,
 	Product as BeaconProduct,
 	Item,
 	SearchAddtocartSchemaData,
@@ -757,8 +757,8 @@ function getSearchAddtocartSchemaData({
 
 function getSearchSchemaData({ params, store, results }: { params: SearchRequestModel; store: SearchStore; results?: Product[] }): SearchSchemaData {
 	const filters = params.filters?.reduce<{
-		bgfilter?: Array<AutocompleteSchemaDataBgfilterInner>;
-		filter?: Array<AutocompleteSchemaDataFilterInner>;
+		bgfilter?: Array<AutocompleteAddtocartSchemaDataBgfilterInner>;
+		filter?: Array<AutocompleteAddtocartSchemaDataFilterInner>;
 	}>((acc, filter) => {
 		const key = filter.background ? 'bgfilter' : 'filter';
 		acc[key] = acc[key] || [];
@@ -790,7 +790,7 @@ function getSearchSchemaData({ params, store, results }: { params: SearchRequest
 		sort: params.sorts?.map((sort) => {
 			return {
 				field: sort.field,
-				dir: sort.direction as AutocompleteSchemaDataSortInnerDirEnum,
+				dir: sort.direction as AutocompleteAddtocartSchemaDataSortInnerDirEnum,
 			};
 		}),
 		pagination: {

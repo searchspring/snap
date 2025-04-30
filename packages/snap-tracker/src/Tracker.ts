@@ -15,7 +15,6 @@ import {
 	BeaconCategory,
 	BeaconContext,
 	ProductViewEvent,
-	CartViewEvent,
 	ProductClickEvent,
 	ShopperLoginEvent,
 	TrackErrorEvent,
@@ -275,33 +274,9 @@ export class Tracker extends Beacon {
 			},
 		},
 		cart: {
-			view: (data: CartViewEvent, siteId?: string): undefined => {
-				if (this.doNotTrack?.includes('cart.view')) {
-					return;
-				}
-
-				// uid can be optional in legacy payload but required in 2.0 spec - use sku as fallback
-				const results = (data as CartViewEvent).items
-					.map((item) => {
-						if (!item.uid && item.sku) {
-							return {
-								...item,
-								uid: item.sku,
-							};
-						} else {
-							return item;
-						}
-					})
-					.map((item) => {
-						// convert to Product[] - ensure qty and price are numbers
-						return {
-							...item,
-							qty: Number(item.qty),
-							price: Number(item.price),
-						};
-					});
-
-				this.events.cart.view({ data: { results: results as Product[] }, siteId });
+			view: (): undefined => {
+				console.warn('tracker.cart.view is deprecated and will be removed. Use tracker.events.cart.add() and tracker.events.cart.remove() instead');
+				return;
 			},
 		},
 		order: {
