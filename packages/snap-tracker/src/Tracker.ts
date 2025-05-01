@@ -86,8 +86,7 @@ export class Tracker extends Beacon {
 							this.track.product.view(item, siteId);
 							break;
 						case 'searchspring/track/cart/view':
-							console.warn('searchspring/track/cart/view attribute tracking is deprecated and will be removed');
-							// TODO: add add and remove events?
+							this.track.cart.view(true);
 							break;
 						case 'searchspring/track/order/transaction':
 							this.track.order.transaction({ order, items }, siteId);
@@ -275,9 +274,11 @@ export class Tracker extends Beacon {
 			},
 		},
 		cart: {
-			view: (): undefined => {
-				console.warn('tracker.cart.view is deprecated and will be removed. Use tracker.events.cart.add() and tracker.events.cart.remove() instead');
-				return;
+			view: (fromAttribute?: boolean): void => {
+				console.warn(
+					'tracker.cart.view is deprecated and no longer functional. Use tracker.events.cart.add() and tracker.events.cart.remove() instead'
+				);
+				this.events.error.snap({ data: { message: `tracker.track.cart.view was called`, details: { fromAttribute: Boolean(fromAttribute) } } });
 			},
 		},
 		order: {
