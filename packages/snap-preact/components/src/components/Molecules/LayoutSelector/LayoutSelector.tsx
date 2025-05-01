@@ -164,15 +164,6 @@ export interface LayoutSelectorProps extends ComponentProps {
 	lang?: Partial<LayoutSelectorLang>;
 }
 
-// type layoutSelectorOption = {
-// 	value: string | number;
-// 	label?: string;
-//     disabled?: boolean;
-//     default?: boolean;
-//     icon?: IconType | Partial<IconProps>;
-//     overrides?: ThemeMinimal;
-// }
-
 export interface LayoutSelectorLang {
 	label: Lang<{
 		options: ListOption[];
