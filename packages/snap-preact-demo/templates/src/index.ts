@@ -20,7 +20,11 @@ let config: SnapTemplatesConfig = {
 		global: {
 			extends: 'bocachica',
 			variables: {
-				breakpoints: [768, 1024, 1280],
+				breakpoints: {
+					mobile: 768,
+					tablet: 1024,
+					desktop: 1280,
+				},
 				// colors: {
 				// 	primary: '#6d7175',
 				// 	secondary: '#202223',
@@ -29,7 +33,63 @@ let config: SnapTemplatesConfig = {
 			},
 			style: globalStyles,
 			overrides: {
+				/*
+					default: {
+						// other things
+						components: {}
+					}
+					mobile: {
+						components: {}
+					}
+					tablet: {
+						components: {}
+					}
+					desktop: {
+						components: {}
+					}
+				*/
+
+				// defaults
 				components: {},
+
+				// mobile, tablet, desktop
+				// responsive: {
+				// 	mobile: {
+				// 		components: {
+				// 			'toolbar.top': {
+				// 				layout: ['pagination']
+				// 			},
+				// 			'searchBoca toolbar.top': {
+				// 				layout: ['perPage']
+				// 			},
+				// 			'search toolbar.top': {
+				// 				layout: ['sortBy']
+				// 			},
+				// 			'searchBoca search toolbar.top': {
+				// 				layout: ['paginationInfo']
+				// 			}
+				// 		}
+				// 	},
+				// 	tablet: {
+
+				// 	},
+				// 	desktop: {
+				// 		components: {
+				// 			'toolbar.top': {
+				// 				layout: ['pagination']
+				// 			},
+				// 			'searchBoca toolbar.top': {
+				// 				layout: ['perPage']
+				// 			},
+				// 			'search toolbar.top': {
+				// 				layout: ['facetsHorizontal']
+				// 			},
+				// 			'searchBoca search toolbar.top': {
+				// 				layout: ['sortBy']
+				// 			}
+				// 		}
+				// 	}
+				// },
 			},
 		},
 	},

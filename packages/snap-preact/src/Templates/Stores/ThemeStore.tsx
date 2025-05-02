@@ -7,7 +7,7 @@ import { StorageStore } from '@searchspring/snap-store-mobx';
 import { TemplateThemeTypes, type TemplatesStoreConfigSettings, type TemplatesStoreDependencies } from './TemplateStore';
 import { Global, css } from '@emotion/react';
 
-import { ThemeMinimal, ThemeVariablesPartial, type Theme, ThemePartial, ThemeOverrides } from '../../../components/src';
+import { ThemeMinimal, ThemeVariablesPartial, type Theme, ThemePartial, ThemeOverrides, ThemeVariableBreakpoints } from '../../../components/src';
 import { CacheProvider } from '../../../components/src/providers/cache';
 import { sortSelectors, filterSelectors } from '../../../components/src/utilities/mergeProps';
 import type { GlobalThemeStyleScript } from '../../types';
@@ -133,7 +133,7 @@ export class ThemeStore {
 				10. stored theme editor overrides
 		*/
 
-		const breakpoints = (this.variables.breakpoints || this.base.variables?.breakpoints) as number[];
+		const breakpoints = this.variables.breakpoints || this.base.variables?.breakpoints;
 
 		const baseBreakpoint = getOverridesAtWidth(this.innerWidth, breakpoints, this.base);
 		const overrideBreakpoint = getOverridesAtWidth(this.innerWidth, breakpoints, this.overrides);
@@ -235,17 +235,13 @@ export function mergeThemeLayers(...layers: ThemePartial[]): ThemePartial {
 	return deepmerge.all(layers, { arrayMerge: arrayMerge });
 }
 
-export function getOverridesAtWidth(width: number | undefined, breakpoints: number[], theme: ThemePartial): ThemePartial {
+export function getOverridesAtWidth(width: number | undefined, breakpoints: ThemeVariableBreakpoints | undefined, theme: ThemePartial): ThemePartial {
 	let overrides: ThemePartial = {};
-	if (width && Number.isInteger(width) && theme.responsive) {
-		const breakpoint = breakpoints.find((breakpoint) => width! <= breakpoint);
+	if (width && Number.isInteger(width) && theme.responsive && breakpoints) {
+		const breakpoint = Object.keys(breakpoints).find((breakpoint) => width! <= breakpoints[breakpoint as keyof typeof breakpoints]);
 
 		if (breakpoint) {
-			const breakpointIndex = breakpoints.indexOf(breakpoint);
-			overrides = (theme.responsive && (theme.responsive as any)[breakpointIndex]) || {};
-		} else if (width > breakpoints[breakpoints.length - 1]) {
-			// if innerWidth is greater than the last breakpoint, don't apply any responsive overrides
-			overrides = {};
+			overrides = (theme.responsive && (theme.responsive as any)[breakpoint]) || {};
 		}
 	}
 

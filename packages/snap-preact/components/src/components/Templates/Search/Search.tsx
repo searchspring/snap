@@ -14,6 +14,7 @@ import { NoResults, NoResultsProps } from '../../Organisms/NoResults';
 import { Lang, useLang, useMediaQuery } from '../../../hooks';
 import { SearchFilterStore } from '@searchspring/snap-store-mobx';
 import deepmerge from 'deepmerge';
+import { useLayoutOptions } from '../../../hooks/useLayoutOptions';
 
 const defaultStyles: StyleScript<SearchProps> = () => {
 	return css({
@@ -43,125 +44,10 @@ const defaultStyles: StyleScript<SearchProps> = () => {
 };
 
 export const searchThemeComponentProps: ThemeComponentProps<SearchProps> = {
-	default: {
-		layoutOptions: [
-			{
-				value: 1,
-				label: '',
-				icon: 'circle',
-				overrides: {
-					components: {
-						results: {
-							columns: 1,
-						},
-					},
-				},
-			},
-			{
-				value: 2,
-				label: '',
-				default: true,
-				icon: 'square',
-				overrides: {
-					components: {
-						results: {
-							columns: 2,
-						},
-					},
-				},
-			},
-		],
-		hideToggleSidebarButton: false,
-		toggleSidebarStartClosed: true,
-		theme: {
-			components: {
-				results: {
-					columns: 4,
-				},
-				sidebar: {
-					layout: ['filterSummary', 'facets', 'banner.left'],
-					sticky: true,
-				},
-				'button.sidebar-toggle': {
-					icon: 'filters',
-				},
-				'toolbar.top': {
-					layout: [
-						['banner.header'],
-						['_', 'searchHeader', '_'],
-						['layoutSelector'],
-						['banner.banner'],
-						['button.sidebar-toggle', 'paginationInfo', '_', 'perPage', 'sortBy'],
-					],
-				},
-				'toolbar.middle': {
-					layout: [],
-				},
-				'toolbar.bottom': {
-					layout: [['banner.footer'], ['_', 'pagination', '_']],
-				},
-			},
-		},
-	},
-	mobile: {
-		theme: {
-			components: {
-				results: {
-					columns: 2,
-				},
-				'toolbar.top': {
-					layout: [['banner.header'], ['_', 'searchHeader', '_'], ['banner.banner'], ['mobileSidebar', '_', 'paginationInfo', '_', 'layoutSelector']],
-				},
-				mobileSidebar: {
-					layout: [['sortBy'], ['facets']],
-				},
-			},
-		},
-	},
-	tablet: {
-		theme: {
-			components: {
-				results: {
-					columns: 3,
-				},
-				'toolbar.top': {
-					layout: [
-						['_', 'searchHeader', '_'],
-						['mobileSidebar', '_', 'paginationInfo', '_', 'layoutSelector'],
-					],
-				},
-				mobileSidebar: {
-					layout: [['sortBy'], ['facets'], ['banner.left']],
-				},
-			},
-		},
-	},
-	desktop: {
-		theme: {
-			components: {
-				results: {
-					columns: 3,
-				},
-			},
-		},
-	},
-};
-
-const useControllerStorage = (controller: SearchController, key: string, defaultVal?: any) => {
-	const storage = controller.storage;
-
-	const storedState = storage.get(key);
-	const initialState = storedState || defaultVal || undefined;
-
-	const [state, setState] = useState(initialState);
-
-	const setter = (newState: any) => {
-		// update storage and setState
-		storage.set(key, newState);
-		setState(newState);
-	};
-
-	return [state, setter];
+	default: {},
+	mobile: {},
+	tablet: {},
+	desktop: {},
 };
 
 export const Search = observer((properties: SearchProps): JSX.Element => {
@@ -170,7 +56,7 @@ export const Search = observer((properties: SearchProps): JSX.Element => {
 	const defaultProps: Partial<SearchProps> = {
 		toggleSidebarButtonText: 'Filters',
 		hideToggleSidebarButton: true,
-		mobileDisplayAt: globalTheme?.variables?.breakpoints?.at(1) ? `${globalTheme.variables?.breakpoints?.at(1)}px` : '991px',
+		mobileDisplayAt: globalTheme?.variables?.breakpoints?.tablet ? `${globalTheme.variables?.breakpoints?.tablet}px` : '991px',
 	};
 
 	const props = mergeProps('search', globalTheme, defaultProps, properties);
@@ -193,35 +79,7 @@ export const Search = observer((properties: SearchProps): JSX.Element => {
 
 	// handle selected layoutOptions
 	if (props.theme?.components) {
-		const layoutOptions = props?.layoutOptions || [];
-
-		// handle layoutOptions and selected option
-		const [selectedLayout, setSelectedLayout] = useControllerStorage(
-			props.controller,
-			'layoutOptions',
-			layoutOptions.filter((option: any) => option.default).pop()
-		);
-
-		// verify selectedLayout is in layoutOptions - if not set it to the default one
-		if (!layoutOptions.some((option) => option.value == selectedLayout.value)) {
-			const newSelection = layoutOptions.filter((option: any) => option.default).pop();
-			setSelectedLayout(newSelection);
-		}
-
-		props.theme.components.layoutSelector = {
-			options: layoutOptions,
-			onSelect: (e, option) => {
-				if (option) {
-					setSelectedLayout(option);
-				}
-			},
-			selected: selectedLayout,
-		};
-
-		// grab overrides out of the "selected" or default layoutOptions and merge it in
-		if (selectedLayout?.overrides) {
-			props.theme = deepmerge(props.theme, { components: selectedLayout.overrides.components });
-		}
+		useLayoutOptions(props);
 	}
 
 	const store = controller.store;

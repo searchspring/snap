@@ -73,6 +73,9 @@ import type { RecommendationEmailProps } from '../components/Templates/Recommend
 import type { SearchProps } from '../components/Templates/Search';
 import type { SearchHorizontalProps } from '../components/Templates/SearchHorizontal';
 import type { AutocompleteTemplateProps } from '../components/Templates/AutocompleteTemplate';
+import type { SearchBocaProps } from '../components/Templates/SearchBoca';
+import type { SearchSnappyProps } from '../components/Templates/SearchSnappy';
+import { SearchSnapncoProps } from '../components/Templates/SearchSnapnco';
 
 export type ThemeComponentProps<ComponentProps> = {
 	default: Partial<ComponentProps>;
@@ -183,6 +186,9 @@ export type ThemeComponents = {
 	recommendationGrid: Partial<RecommendationGridProps>;
 	recommendationEmail: Partial<RecommendationEmailProps>;
 	search: Partial<SearchProps>;
+	searchBoca: Partial<SearchBocaProps>;
+	searchSnappy: Partial<SearchSnappyProps>;
+	searchSnapnco: Partial<SearchSnapncoProps>;
 	searchHorizontal: Partial<SearchHorizontalProps>;
 };
 
@@ -276,6 +282,9 @@ export type ThemeComponentOverrides =
 	{ [K in NamedThemeComponentSelectors<'recommendationGrid', string>]?: Partial<RecommendationGridProps> } &
 	{ [K in UnNamedThemeComponentSelectors<'recommendationEmail'>]?: Partial<RecommendationEmailProps> } & 
 	{ [K in UnNamedThemeComponentSelectors<'search'>]?: Partial<SearchProps> } &
+	{ [K in UnNamedThemeComponentSelectors<'searchSnappy'>]?: Partial<SearchSnappyProps> } &
+	{ [K in UnNamedThemeComponentSelectors<'searchBoca'>]?: Partial<SearchBocaProps> } &
+	{ [K in UnNamedThemeComponentSelectors<'searchSnapnco'>]?: Partial<SearchSnapncoProps> } &
 	{ [K in UnNamedThemeComponentSelectors<'searchHorizontal'>]?: Partial<SearchHorizontalProps> };
 
 // prettier-ignore
@@ -355,4 +364,7 @@ export type ThemeComponentRestrictedOverrides =
 	{ [K in NamedThemeComponentSelectors<'recommendationGrid', string>]?: RestrictedComponentProps<RecommendationGridProps> } &
 	{ [K in NamedThemeComponentSelectors<'recommendationEmail', string>]?: RestrictedComponentProps<RecommendationEmailProps> } & 
 	{ [K in UnNamedThemeComponentSelectors<'search'>]?: RestrictedComponentProps<SearchProps> } &
+	{ [K in UnNamedThemeComponentSelectors<'searchSnappy'>]?: RestrictedComponentProps<SearchSnappyProps> } &
+	{ [K in UnNamedThemeComponentSelectors<'searchBoca'>]?: RestrictedComponentProps<SearchBocaProps> } &
+	{ [K in UnNamedThemeComponentSelectors<'searchSnapnco'>]?: RestrictedComponentProps<SearchSnapncoProps> } &
 	{ [K in UnNamedThemeComponentSelectors<'searchHorizontal'>]?: RestrictedComponentProps<SearchHorizontalProps> };

@@ -21,6 +21,8 @@ import { Button, ButtonProps } from '../../Atoms/Button';
 import { Banner, BannerProps } from '../../Atoms/Merchandising';
 import { ContentType } from '@searchspring/snap-store-mobx';
 import { Facets, FacetsProps } from '../Facets';
+import { FacetsHorizontal, FacetsHorizontalProps } from '../FacetsHorizontal';
+import { useCleanUpEmptyDivs } from '../../../hooks/useCleanUpEmptyDivs';
 
 const defaultStyles: StyleScript<LayoutProps> = ({}) => {
 	return css({
@@ -115,6 +117,17 @@ export const Layout = observer((properties: LayoutProps): JSX.Element => {
 			treePath,
 		},
 		Facets: {
+			// default props
+			controller,
+			// inherited props
+			...defined({
+				disableStyles,
+			}),
+			// component theme overrides
+			theme: props?.theme,
+			treePath,
+		},
+		FacetsHorizontal: {
 			// default props
 			controller,
 			// inherited props
@@ -258,6 +271,9 @@ export const Layout = observer((properties: LayoutProps): JSX.Element => {
 			case 'facets':
 				return <Facets {...subProps.Facets} />;
 
+			case 'facetsHorizontal':
+				return <FacetsHorizontal {...subProps.Facets} />;
+
 			default:
 				return null;
 		}
@@ -267,6 +283,8 @@ export const Layout = observer((properties: LayoutProps): JSX.Element => {
 
 	let rowIndex = 0;
 	let separatorIndex = 0;
+
+	useCleanUpEmptyDivs('.ss__layout__row');
 
 	return hasChildrenToRender ? (
 		<CacheProvider>
@@ -314,6 +332,7 @@ export type ModuleNames =
 	| 'banner.footer'
 	// sidebar
 	| 'facets'
+	| 'facetsHorizontal'
 	| 'banner.left';
 
 interface LayoutSubProps {
@@ -328,5 +347,6 @@ interface LayoutSubProps {
 	SearchHeader: Partial<SearchHeaderProps>;
 	Banner: Partial<BannerProps>;
 	Facets: Partial<FacetsProps>;
+	FacetsHorizontal: Partial<FacetsHorizontalProps>;
 	ToggleSideBarButton: Partial<ButtonProps>;
 }

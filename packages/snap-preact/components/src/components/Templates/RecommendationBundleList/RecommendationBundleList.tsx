@@ -66,6 +66,27 @@ const defaultStyles: StyleScript<RecommendationBundleListProps> = () => {
 	});
 };
 
+export const recommendationBundleListThemeComponentProps: ThemeComponentProps<RecommendationBundleProps> = {
+	default: {
+		className: 'ss__recommendation-bundle-list',
+		seedText: '',
+		ctaInline: false,
+		limit: 5,
+		preselectedCount: 2,
+		carousel: {
+			enabled: false,
+			seedInCarousel: true,
+		},
+		ctaSlot: (props) => <CTASlot {...props} />,
+		resultComponent: (props) => <Result hideImage={true} {...props} />,
+		vertical: true,
+		separatorIcon: false,
+	},
+	mobile: {},
+	tablet: {},
+	desktop: {},
+};
+
 export const RecommendationBundleList = observer((properties: RecommendationBundleListProps): JSX.Element => {
 	const globalTheme: Theme = useTheme();
 	const defaultProps: Partial<RecommendationBundleListProps> = {};

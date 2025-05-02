@@ -10,6 +10,11 @@ const searchStyleScript = ({ theme }: SearchProps) => {
 	return css({});
 };
 
-searchThemeComponentProps.default.styleScript = searchStyleScript;
 // Search component props come from Template export
-export const search: ThemeComponentProps<SearchProps> = searchThemeComponentProps;
+export const search: ThemeComponentProps<SearchProps> = {
+	...searchThemeComponentProps,
+	default: {
+		...searchThemeComponentProps.default,
+		themeStyleScript: searchStyleScript,
+	},
+};

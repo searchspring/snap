@@ -12,7 +12,7 @@ export function useCleanUpEmptyDivs(className: string) {
 }
 
 function hasElemsToShow(element: Element) {
-	if (!element.children.length) return true;
+	if (!element.children.length) return false;
 
 	for (const child of element.children as any) {
 		if (child.tagName !== 'DIV' || child.innerHTML.trim() !== '') {

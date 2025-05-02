@@ -20,7 +20,6 @@ const sidebarStyleScript = ({ theme }: SidebarProps) => {
 export const sidebar: ThemeComponentProps<SidebarProps> = {
 	default: {
 		themeStyleScript: sidebarStyleScript,
-		layout: ['filterSummary', 'sortBy', 'perPage', 'facets', 'banner.left'],
 	},
 	mobile: {},
 	tablet: {},

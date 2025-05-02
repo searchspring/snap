@@ -15,6 +15,26 @@ const defaultStyles: StyleScript<RecommendationBundleEasyAddProps> = () => {
 	});
 };
 
+export const recommendationBundleEasyAddThemeComponentProps: ThemeComponentProps<RecommendationBundleProps> = {
+	default: {
+		className: 'ss__recommendation-bundle-easy-add',
+		hideCheckboxes: true,
+		seedText: '',
+		ctaButtonText: 'Add Both',
+		ctaInline: false,
+		hideSeed: true,
+		vertical: true,
+		limit: 1,
+		carousel: {
+			enabled: false,
+		},
+		separatorIcon: false,
+	},
+	mobile: {},
+	tablet: {},
+	desktop: {},
+};
+
 export const RecommendationBundleEasyAdd = observer((properties: RecommendationBundleEasyAddProps): JSX.Element => {
 	const globalTheme: Theme = useTheme();
 	const defaultProps: Partial<RecommendationBundleEasyAddProps> = {};

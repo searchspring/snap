@@ -18,6 +18,20 @@ const defaultStyles: StyleScript<RecommendationBundleVerticalProps> = () => {
 	});
 };
 
+export const recommendationBundleVerticalThemeComponentProps: ThemeComponentProps<RecommendationBundleProps> = {
+	default: {
+		className: 'ss__recommendation-bundle-vertical',
+		ctaInline: false,
+		carousel: {
+			enabled: false,
+		},
+		separatorIcon: false,
+	},
+	mobile: {},
+	tablet: {},
+	desktop: {},
+};
+
 export const RecommendationBundleVertical = observer((properties: RecommendationBundleVerticalProps): JSX.Element => {
 	const globalTheme: Theme = useTheme();
 	const defaultProps: Partial<RecommendationBundleVerticalProps> = {};

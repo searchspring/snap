@@ -9,6 +9,9 @@ import { recommendationEmail } from './recommendationEmail';
 import { search } from './search';
 import { searchHorizontal } from './searchHorizontal';
 import { autocompleteTemplate } from './autocompleteTemplate';
+import { searchBoca } from './searchBoca';
+import { searchSnapnco } from './searchSnapnco';
+import { searchSnappy } from './searchSnappy';
 
 export const templates = {
 	default: {
@@ -21,6 +24,9 @@ export const templates = {
 		recommendationGrid: recommendationGrid.default,
 		recommendationEmail: recommendationEmail.default,
 		search: search.default,
+		searchBoca: searchBoca.default,
+		searchSnapnco: searchSnapnco.default,
+		searchSnappy: searchSnappy.default,
 		searchHorizontal: searchHorizontal.default,
 	},
 	mobile: {
@@ -33,6 +39,9 @@ export const templates = {
 		recommendationGrid: recommendationGrid.mobile,
 		recommendationEmail: recommendationEmail.mobile,
 		search: search.mobile,
+		searchBoca: searchBoca.mobile,
+		searchSnapnco: searchSnapnco.mobile,
+		searchSnappy: searchSnappy.mobile,
 		searchHorizontal: searchHorizontal.mobile,
 	},
 	tablet: {
@@ -45,6 +54,9 @@ export const templates = {
 		recommendationGrid: recommendationGrid.tablet,
 		recommendationEmail: recommendationEmail.tablet,
 		search: search.tablet,
+		searchBoca: searchBoca.tablet,
+		searchSnapnco: searchSnapnco.tablet,
+		searchSnappy: searchSnappy.tablet,
 		searchHorizontal: searchHorizontal.tablet,
 	},
 	desktop: {
@@ -57,6 +69,9 @@ export const templates = {
 		recommendationGrid: recommendationGrid.desktop,
 		recommendationEmail: recommendationEmail.desktop,
 		search: search.desktop,
+		searchBoca: searchBoca.desktop,
+		searchSnapnco: searchSnapnco.desktop,
+		searchSnappy: searchSnappy.desktop,
 		searchHorizontal: searchHorizontal.desktop,
 	},
 };

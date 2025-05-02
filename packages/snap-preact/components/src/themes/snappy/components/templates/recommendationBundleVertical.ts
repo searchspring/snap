@@ -1,27 +1,9 @@
 // import { css } from '@emotion/react';
-import type { RecommendationBundleVerticalProps } from '../../../../components/Templates/RecommendationBundleVertical';
-
-// CSS in JS style script for the RecommendationBundleVertical component
-// const recommendationBundleStyleScript = ({}: RecommendationBundleVerticalProps) => {
+// CSS in JS style script for the RecommendationBundleEasyAdd component
+// const recommendationBundleEasyAddStyleScript = ({}: RecommendationBundleEasyAddProps) => {
 // 	return css({});
 // };
+import type { RecommendationBundleVerticalProps } from '../../../../components/Templates/RecommendationBundleVertical';
+import { recommendationBundleVerticalThemeComponentProps } from '../../../../components/Templates/RecommendationBundleVertical';
 
-// RecommendationBundle component props
-export const recommendationBundleVertical: ThemeComponentProps<RecommendationBundleVerticalProps> = {
-	default: {
-		// themeStyleScript: recommendationBundleStyleScript,
-		theme: {
-			components: {
-				recommendationBundle: {
-					ctaInline: false,
-					carousel: {
-						enabled: false,
-					},
-				},
-			},
-		},
-	},
-	mobile: {},
-	tablet: {},
-	desktop: {},
-};
+export const recommendationBundleVertical: ThemeComponentProps<RecommendationBundleVerticalProps> = recommendationBundleVerticalThemeComponentProps;

@@ -13,4 +13,8 @@ const desktopOverrides: ThemeResponsive = {
 	components: desktopComponents,
 };
 
-export const responsive: [ThemeResponsive, ThemeResponsive, ThemeResponsive] = [mobileOverrides, tabletOverrides, desktopOverrides];
+export const responsive = {
+	mobile: mobileOverrides,
+	tablet: tabletOverrides,
+	desktop: desktopOverrides,
+};

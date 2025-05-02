@@ -191,6 +191,13 @@ const defaultStyles: StyleScript<AutocompleteTemplateProps> = ({
 	});
 };
 
+export const autocompleteThemeComponentProps: ThemeComponentProps<AutocompleteTemplateProps> = {
+	default: {},
+	mobile: {},
+	tablet: {},
+	desktop: {},
+};
+
 export const AutocompleteTemplate = observer((properties: AutocompleteTemplateProps): JSX.Element => {
 	const globalTheme: Theme = useTheme();
 
