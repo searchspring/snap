@@ -12,6 +12,7 @@ import { Icon, IconProps } from '../../Atoms/Icon/Icon';
 import type { Swiper as SwiperTypes } from 'swiper';
 import type { PaginationOptions } from 'swiper/types/modules/pagination';
 import type { NavigationOptions } from 'swiper/types/modules/navigation';
+import type { ScrollbarOptions } from 'swiper/types/modules/scrollbar';
 
 import { defined } from '../../../utilities';
 import { Theme, useTheme, CacheProvider } from '../../../providers';
@@ -149,6 +150,9 @@ const CSS = {
 				width: '100%',
 				height: '2px',
 				backgroundColor: '#d9d9d9',
+				'&:empty': {
+					display: 'none',
+				},
 				'.swiper-scrollbar-drag': {
 					position: 'relative',
 					height: '100%',
@@ -331,14 +335,17 @@ export const Carousel = observer((properties: CarouselProps): JSX.Element => {
 			prevEl: '.ss_carousel_DNE',
 		};
 	}
-
 	if (scrollbar) {
-		scrollbar = {
-			enabled: true,
-			el: '.swiper-scrollbar',
-			draggable: false,
-			...scrollbar,
-		};
+		if (typeof scrollbar == 'object') {
+			scrollbar = {
+				enabled: true,
+				...scrollbar,
+			};
+		} else {
+			scrollbar = {
+				enabled: true,
+			};
+		}
 	}
 
 	const attachClasstoLastVisibleSlide = () => {
@@ -424,6 +431,7 @@ export const Carousel = observer((properties: CarouselProps): JSX.Element => {
 					{...displaySettings}
 					navigation={navigation}
 					pagination={pagination}
+					scrollbar={scrollbar}
 					onResize={(swiper) => {
 						if (additionalProps.onResize) {
 							additionalProps.onResize();
@@ -469,6 +477,7 @@ export interface CarouselProps extends ComponentProps {
 	vertical?: boolean;
 	pagination?: boolean | PaginationOptions;
 	navigation?: boolean | NavigationOptions;
+	scrollbar?: boolean | ScrollbarOptions;
 	autoAdjustSlides?: boolean;
 	onClick?: (swiper: SwiperTypes, e: MouseEvent | TouchEvent | PointerEvent) => void;
 	onNextButtonClick?: (e: React.MouseEvent<HTMLElement, MouseEvent>) => void;

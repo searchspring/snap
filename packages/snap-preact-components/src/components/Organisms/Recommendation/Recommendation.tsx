@@ -71,7 +71,6 @@ export const Recommendation = observer((properties: RecommendationProps): JSX.El
 		className,
 		lazyRender,
 		vertical,
-		scrollbar,
 		...additionalProps
 	} = props;
 
@@ -148,7 +147,6 @@ export const Recommendation = observer((properties: RecommendationProps): JSX.El
 							nextButton={nextButton}
 							hideButtons={hideButtons}
 							loop={loop}
-							scrollbar={scrollbar}
 							pagination={pagination}
 							breakpoints={breakpoints}
 							{...subProps.carousel}
