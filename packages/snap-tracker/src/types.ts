@@ -192,7 +192,7 @@ export interface TrackMethods {
 		click: (data: ProductClickEvent, siteId?: string) => BeaconEvent | undefined;
 	};
 	cart: {
-		view: (data: CartViewEvent, siteId?: string) => undefined;
+		view: (...params: any[]) => void;
 	};
 	order: {
 		transaction: (data: OrderTransactionData, siteId?: string) => undefined;

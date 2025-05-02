@@ -15,7 +15,6 @@ import {
 	BeaconCategory,
 	BeaconContext,
 	ProductViewEvent,
-	CartViewEvent,
 	ProductClickEvent,
 	ShopperLoginEvent,
 	TrackErrorEvent,
@@ -87,7 +86,7 @@ export class Tracker extends Beacon {
 							this.track.product.view(item, siteId);
 							break;
 						case 'searchspring/track/cart/view':
-							this.track.cart.view({ items }, siteId);
+							this.track.cart.view(true);
 							break;
 						case 'searchspring/track/order/transaction':
 							this.track.order.transaction({ order, items }, siteId);
@@ -188,7 +187,6 @@ export class Tracker extends Beacon {
 	}
 
 	track: TrackMethods = {
-		// TODO: search where this is used and remove unwanted fields from type
 		error: (data: TrackErrorEvent, siteId?: string): undefined => {
 			if (this.doNotTrack?.includes('error') || this.mode === AppMode.development) {
 				return;
@@ -198,7 +196,7 @@ export class Tracker extends Beacon {
 				// no console log
 				return;
 			}
-			const { stack, message, details } = data;
+			const { stack, message, ...details } = data;
 			const { pageUrl } = this.getContext();
 
 			// prevent sending of errors when on localhost or CDN
@@ -276,33 +274,11 @@ export class Tracker extends Beacon {
 			},
 		},
 		cart: {
-			view: (data: CartViewEvent, siteId?: string): undefined => {
-				if (this.doNotTrack?.includes('cart.view')) {
-					return;
-				}
-
-				// uid can be optional in legacy payload but required in 2.0 spec - use sku as fallback
-				const results = (data as CartViewEvent).items
-					.map((item) => {
-						if (!item.uid && item.sku) {
-							return {
-								...item,
-								uid: item.sku,
-							};
-						} else {
-							return item;
-						}
-					})
-					.map((item) => {
-						// convert to Product[] - ensure qty and price are numbers
-						return {
-							...item,
-							qty: Number(item.qty),
-							price: Number(item.price),
-						};
-					});
-
-				this.events.cart.view({ data: { results: results as Product[] }, siteId });
+			view: (fromAttribute?: boolean): void => {
+				console.warn(
+					'tracker.cart.view is deprecated and no longer functional. Use tracker.events.cart.add() and tracker.events.cart.remove() instead'
+				);
+				this.events.error.snap({ data: { message: `tracker.track.cart.view was called`, details: { fromAttribute: Boolean(fromAttribute) } } });
 			},
 		},
 		order: {
