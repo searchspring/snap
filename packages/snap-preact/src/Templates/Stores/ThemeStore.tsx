@@ -141,7 +141,7 @@ export class ThemeStore {
 		const base = { ...this.base };
 		const overrides = { ...this.overrides };
 
-		const themeOverrides = mergeThemeLayers(overrides, overrideBreakpoint, overrides, overrideBreakpoint, {
+		const themeOverrides = mergeThemeLayers(overrides, overrideBreakpoint, {
 			variables: toJS(this.variables),
 		} as ThemePartial) as Theme;
 

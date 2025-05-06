@@ -78,8 +78,8 @@ export const Search = observer((properties: SearchProps): JSX.Element => {
 	} = props;
 
 	// handle selected layoutOptions
-	if (props.theme?.components) {
-		useLayoutOptions(props);
+	if (globalTheme?.name && props.layoutOptions) {
+		useLayoutOptions(props, globalTheme);
 	}
 
 	const store = controller.store;

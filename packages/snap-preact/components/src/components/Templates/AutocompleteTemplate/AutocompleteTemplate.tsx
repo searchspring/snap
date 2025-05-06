@@ -14,7 +14,7 @@ import { Banner, BannerProps } from '../../Atoms/Merchandising/Banner';
 import { Facets, FacetsProps } from '../../Organisms/Facets';
 import { defined, mergeProps, mergeStyles } from '../../../utilities';
 import { createHoverProps } from '../../../toolbox';
-import { Theme, useTheme, CacheProvider } from '../../../providers';
+import { Theme, useTheme, CacheProvider, ThemeTemplate } from '../../../providers';
 import {
 	ComponentProps,
 	FacetDisplay,
@@ -191,8 +191,40 @@ const defaultStyles: StyleScript<AutocompleteTemplateProps> = ({
 	});
 };
 
-export const autocompleteThemeComponentProps: ThemeComponentProps<AutocompleteTemplateProps> = {
-	default: {},
+export const autocompleteThemeComponentProps: ThemeTemplate<'autocompleteTemplate', AutocompleteTemplateProps> = {
+	default: {
+		props: {},
+		components: {
+			'*autocompleteTemplate facet': {
+				// valueProps,
+				previewOnFocus: true,
+				limit: 6,
+				disableOverflow: true,
+				disableCollapse: true,
+			},
+			'*autocompleteTemplate facetGridOptions': {
+				// onClick: facetClickEvent,
+				columns: 3,
+			},
+			'*autocompleteTemplate facetHierarchyOptions': {
+				// onClick: facetClickEvent,
+				hideCount: true,
+			},
+			'*autocompleteTemplate facetListOptions': {
+				// onClick: facetClickEvent,
+				hideCheckbox: true,
+				hideCount: true,
+			},
+			'*autocompleteTemplate facetPaletteOptions': {
+				// onClick: facetClickEvent,
+				hideLabel: true,
+				columns: 3,
+			},
+			'*autocompleteTemplate result': {
+				hideBadge: true,
+			},
+		},
+	},
 	mobile: {},
 	tablet: {},
 	desktop: {},
@@ -238,31 +270,18 @@ export const AutocompleteTemplate = observer((properties: AutocompleteTemplatePr
 		components: {
 			facet: {
 				valueProps,
-				previewOnFocus: true,
-				limit: 6,
-				disableOverflow: true,
-				disableCollapse: true,
 			},
 			facetGridOptions: {
 				onClick: facetClickEvent,
-				columns: 3,
 			},
 			facetHierarchyOptions: {
 				onClick: facetClickEvent,
-				hideCount: true,
 			},
 			facetListOptions: {
 				onClick: facetClickEvent,
-				hideCheckbox: true,
-				hideCount: true,
 			},
 			facetPaletteOptions: {
 				onClick: facetClickEvent,
-				hideLabel: true,
-				columns: 3,
-			},
-			result: {
-				hideBadge: true,
 			},
 		},
 	};

@@ -90,6 +90,20 @@ type NamedThemeComponentSelectors<ComponentType extends string, ComponentNames e
 	| `${string} ${ComponentType}.${ComponentNames}`
 	| `${ComponentType}.${ComponentNames}`;
 
+type StartsWithTemplateHavingUnNamedThemeComponentSelectors<ComponentType extends string, SubComponentType extends string> =
+	| `${ComponentType} ${SubComponentType}`
+	| `${ComponentType} ${string} ${SubComponentType}`;
+
+type StartsWithTemplateHavingNamedThemeComponentSelectors<
+	TemplateComponentType extends string,
+	SubComponentType extends string,
+	ComponentNames extends string
+> =
+	| `${TemplateComponentType} ${SubComponentType}`
+	| `${TemplateComponentType} ${string} ${SubComponentType}`
+	| `${TemplateComponentType} ${string} ${SubComponentType}.${ComponentNames}`
+	| `${TemplateComponentType} ${SubComponentType}.${ComponentNames}`;
+
 type UnNamedThemeComponentSelectors<ComponentType extends string> = ComponentType | `${string} ${ComponentType}`;
 
 type RestrictedComponentProps<Props> = Partial<Omit<Props, OmittedComponentProps>>;
@@ -368,3 +382,86 @@ export type ThemeComponentRestrictedOverrides =
 	{ [K in UnNamedThemeComponentSelectors<'searchBoca'>]?: RestrictedComponentProps<SearchBocaProps> } &
 	{ [K in UnNamedThemeComponentSelectors<'searchSnapnco'>]?: RestrictedComponentProps<SearchSnapncoProps> } &
 	{ [K in UnNamedThemeComponentSelectors<'searchHorizontal'>]?: RestrictedComponentProps<SearchHorizontalProps> };
+
+// prettier-ignore
+export type ThemeTemplateComponentOverrides<Template extends string> =
+	/* ATOMS */
+	{ [K in StartsWithTemplateHavingUnNamedThemeComponentSelectors<Template, 'badgeImage'>]?: Partial<BadgeImageProps> } &
+	{ [K in StartsWithTemplateHavingUnNamedThemeComponentSelectors<Template,'badgePill'>]?: Partial<BadgePillProps> } &
+	{ [K in StartsWithTemplateHavingUnNamedThemeComponentSelectors<Template,'badgeRectangle'>]?: Partial<BadgeRectangleProps> } &
+	{ [K in StartsWithTemplateHavingUnNamedThemeComponentSelectors<Template,'badgeText'>]?: Partial<BadgeTextProps> } &
+	{ [K in StartsWithTemplateHavingUnNamedThemeComponentSelectors<Template,'breadcrumbs'>]?: Partial<BreadcrumbsProps> } &
+	{ [K in StartsWithTemplateHavingNamedThemeComponentSelectors<Template, 'button', ButtonNames>]?: Partial<ButtonProps> } &
+	{ [K in StartsWithTemplateHavingUnNamedThemeComponentSelectors<Template,'dropdown'>]?: Partial<DropdownProps> } &
+	{ [K in StartsWithTemplateHavingUnNamedThemeComponentSelectors<Template,'formattedNumber'>]?: Partial<FormattedNumberProps> } &
+	{ [K in StartsWithTemplateHavingNamedThemeComponentSelectors<Template, 'icon', IconNames>]?: Partial<IconProps> } &
+	{ [K in StartsWithTemplateHavingUnNamedThemeComponentSelectors<Template,'image'>]?: Partial<ImageProps> } &
+	{ [K in StartsWithTemplateHavingUnNamedThemeComponentSelectors<Template,'loadingBar'>]?: Partial<LoadingBarProps> } &
+	{ [K in StartsWithTemplateHavingNamedThemeComponentSelectors<Template,'banner', BannerNames>]?: Partial<BannerProps> } &
+	{ [K in StartsWithTemplateHavingUnNamedThemeComponentSelectors<Template,'inlineBanner'>]?: Partial<InlineBannerProps> } &
+	{ [K in StartsWithTemplateHavingUnNamedThemeComponentSelectors<Template,'overlay'>]?: Partial<OverlayProps> } &
+	{ [K in StartsWithTemplateHavingUnNamedThemeComponentSelectors<Template,'paginationInfo'>]?: Partial<PaginationInfoProps> } &
+	{ [K in StartsWithTemplateHavingNamedThemeComponentSelectors<Template,'price', PriceNames>]?: Partial<PriceProps> } &
+	{ [K in StartsWithTemplateHavingUnNamedThemeComponentSelectors<Template,'skeleton'>]?: Partial<SkeletonProps> } &
+	// { [K in StartsWithTemplateHavingUnNamedThemeComponentSelectors<Template,'toggle'>]?: Partial<ToggleProps> } &
+	
+	/* MOLECULES */
+	{ [K in StartsWithTemplateHavingUnNamedThemeComponentSelectors<Template,'calloutBadge'>]?: Partial<CalloutBadgeProps> } & 
+	{ [K in StartsWithTemplateHavingUnNamedThemeComponentSelectors<Template,'carousel'>]?: Partial<CarouselProps> } &
+	{ [K in StartsWithTemplateHavingUnNamedThemeComponentSelectors<Template,'checkbox'>]?: Partial<CheckboxProps> } &
+	{ [K in StartsWithTemplateHavingUnNamedThemeComponentSelectors<Template,'grid'>]?: Partial<GridProps> } &
+	{ [K in StartsWithTemplateHavingUnNamedThemeComponentSelectors<Template,'layoutSelector'>]?: Partial<LayoutSelectorProps> } &
+	{ [K in StartsWithTemplateHavingUnNamedThemeComponentSelectors<Template,'list'>]?: Partial<ListProps> } &
+	{ [K in StartsWithTemplateHavingUnNamedThemeComponentSelectors<Template,'radio'>]?: Partial<RadioProps> } &
+	{ [K in StartsWithTemplateHavingUnNamedThemeComponentSelectors<Template,'errorHandler'>]?: Partial<ErrorHandlerProps> } &
+	{ [K in StartsWithTemplateHavingUnNamedThemeComponentSelectors<Template,'facetGridOptions'>]?: Partial<FacetGridOptionsProps> } &
+	{ [K in StartsWithTemplateHavingUnNamedThemeComponentSelectors<Template,'facetHierarchyOptions'>]?: Partial<FacetHierarchyOptionsProps> } &
+	{ [K in StartsWithTemplateHavingUnNamedThemeComponentSelectors<Template,'facetListOptions'>]?: Partial<FacetListOptionsProps> } &
+	{ [K in StartsWithTemplateHavingUnNamedThemeComponentSelectors<Template,'facetPaletteOptions'>]?: Partial<FacetPaletteOptionsProps> } &
+	{ [K in StartsWithTemplateHavingUnNamedThemeComponentSelectors<Template,'facetSlider'>]?: Partial<FacetSliderProps> } &
+	// { [K in StartsWithTemplateHavingUnNamedThemeComponentSelectors<Template,'facetToggle'>]?: Partial<FacetToggleProps> } &
+	{ [K in StartsWithTemplateHavingNamedThemeComponentSelectors<Template,'filter', FilterNames>]?: Partial<FilterProps> } &
+	{ [K in StartsWithTemplateHavingUnNamedThemeComponentSelectors<Template,'loadMore'>]?: Partial<LoadMoreProps> } &
+	{ [K in StartsWithTemplateHavingUnNamedThemeComponentSelectors<Template,'overlayBadge'>]?: Partial<OverlayBadgeProps> } &
+	{ [K in StartsWithTemplateHavingUnNamedThemeComponentSelectors<Template,'pagination'>]?: Partial<PaginationProps> } &
+	{ [K in StartsWithTemplateHavingUnNamedThemeComponentSelectors<Template,'perPage'>]?: Partial<PerPageProps> } &
+	{ [K in StartsWithTemplateHavingUnNamedThemeComponentSelectors<Template,'radioList'>]?: Partial<RadioListProps> } &
+	{ [K in StartsWithTemplateHavingUnNamedThemeComponentSelectors<Template,'rating'>]?: Partial<RatingProps> } &
+	{ [K in StartsWithTemplateHavingNamedThemeComponentSelectors<Template,'result', ResultNames>]?: Partial<ResultProps> } &
+	{ [K in StartsWithTemplateHavingUnNamedThemeComponentSelectors<Template,'searchInput'>]?: Partial<SearchInputProps> } &
+	{ [K in StartsWithTemplateHavingUnNamedThemeComponentSelectors<Template,'select'>]?: Partial<SelectProps> } &
+	{ [K in StartsWithTemplateHavingUnNamedThemeComponentSelectors<Template,'slideout'>]?: Partial<SlideoutProps> } &
+	{ [K in StartsWithTemplateHavingUnNamedThemeComponentSelectors<Template,'sortBy'>]?: Partial<SortByProps> } &
+	{ [K in StartsWithTemplateHavingUnNamedThemeComponentSelectors<Template,'swatches'>]?: Partial<SwatchesProps> } &
+	{ [K in StartsWithTemplateHavingUnNamedThemeComponentSelectors<Template,'variantSelection'>]?: Partial<VariantSelectionProps> } &
+	{ [K in StartsWithTemplateHavingNamedThemeComponentSelectors<Template,'terms', TermsNames>]?: Partial<TermsProps> } &
+
+	/* ORGANISMS */
+	{ [K in StartsWithTemplateHavingUnNamedThemeComponentSelectors<Template,'branchOverride'>]?: Partial<BranchOverrideProps> } &
+	{ [K in StartsWithTemplateHavingUnNamedThemeComponentSelectors<Template,'facet'>]?: Partial<FacetProps> } &
+	{ [K in StartsWithTemplateHavingNamedThemeComponentSelectors<Template,'facets', FacetsNames>]?: Partial<FacetsProps> } &
+	{ [K in StartsWithTemplateHavingUnNamedThemeComponentSelectors<Template,'facetsHorizontal'>]?: Partial<FacetsHorizontalProps> } &
+	{ [K in StartsWithTemplateHavingUnNamedThemeComponentSelectors<Template,'filterSummary'>]?: Partial<FilterSummaryProps> } &
+	{ [K in StartsWithTemplateHavingUnNamedThemeComponentSelectors<Template,'noResults'>]?: Partial<NoResultsProps> } &
+	{ [K in StartsWithTemplateHavingNamedThemeComponentSelectors<Template,'results', ResultsNames>]?: Partial<ResultsProps> } &
+	{ [K in StartsWithTemplateHavingUnNamedThemeComponentSelectors<Template,'searchHeader'>]?: Partial<SearchHeaderProps> } &
+	{ [K in StartsWithTemplateHavingUnNamedThemeComponentSelectors<Template,'sidebar'>]?: Partial<SidebarProps> } &
+	{ [K in StartsWithTemplateHavingUnNamedThemeComponentSelectors<Template,'mobileSidebar'>]?: Partial<MobileSidebarProps> } &
+	{ [K in StartsWithTemplateHavingNamedThemeComponentSelectors<Template,'toolbar', ToolbarNames>]?: Partial<ToolbarProps> } &
+	{ [K in StartsWithTemplateHavingUnNamedThemeComponentSelectors<Template,'termsList'>]?: Partial<TermsListProps> } &
+
+
+	/* TEMPLATES */
+	{ [K in StartsWithTemplateHavingUnNamedThemeComponentSelectors<Template,'autocompleteTemplate'>]?: Partial<AutocompleteTemplateProps> } &
+	{ [K in StartsWithTemplateHavingNamedThemeComponentSelectors<Template, 'recommendation', string>]?: Partial<RecommendationProps> } &
+	{ [K in StartsWithTemplateHavingNamedThemeComponentSelectors<Template, 'recommendationBundle', string>]?: Partial<RecommendationBundleProps> } &
+	{ [K in StartsWithTemplateHavingNamedThemeComponentSelectors<Template, 'recommendationBundleEasyAdd', string>]?: Partial<RecommendationBundleEasyAddProps> } &
+	{ [K in StartsWithTemplateHavingNamedThemeComponentSelectors<Template, 'recommendationBundleList', string>]?: Partial<RecommendationBundleListProps> } &
+	{ [K in StartsWithTemplateHavingNamedThemeComponentSelectors<Template, 'recommendationBundleVertical', string>]?: Partial<RecommendationBundleVerticalProps> } &
+	{ [K in StartsWithTemplateHavingNamedThemeComponentSelectors<Template, 'recommendationGrid', string>]?: Partial<RecommendationGridProps> } &
+	{ [K in StartsWithTemplateHavingUnNamedThemeComponentSelectors<Template,'recommendationEmail'>]?: Partial<RecommendationEmailProps> } & 
+	{ [K in StartsWithTemplateHavingUnNamedThemeComponentSelectors<Template,'search'>]?: Partial<SearchProps> } &
+	{ [K in StartsWithTemplateHavingUnNamedThemeComponentSelectors<Template,'searchSnappy'>]?: Partial<SearchSnappyProps> } &
+	{ [K in StartsWithTemplateHavingUnNamedThemeComponentSelectors<Template,'searchBoca'>]?: Partial<SearchBocaProps> } &
+	{ [K in StartsWithTemplateHavingUnNamedThemeComponentSelectors<Template,'searchSnapnco'>]?: Partial<SearchSnapncoProps> } &
+	{ [K in StartsWithTemplateHavingUnNamedThemeComponentSelectors<Template,'searchHorizontal'>]?: Partial<SearchHorizontalProps> };

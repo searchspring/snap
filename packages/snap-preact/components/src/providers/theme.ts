@@ -1,4 +1,4 @@
-import { ThemeComponentOverrides, ThemeComponentRestrictedOverrides, ThemeComponents } from './themeComponents';
+import { ThemeComponentRestrictedOverrides, ThemeComponents, ThemeTemplateComponentOverrides } from './themeComponents';
 import { ListOption } from '../types';
 
 export { css, useTheme, withTheme, ThemeProvider } from '@emotion/react';
@@ -52,8 +52,21 @@ export type Theme = {
 		tablet?: ThemeResponsive;
 		desktop?: ThemeResponsive;
 	};
-	components?: ThemeComponentOverrides;
+	// TODO: remove components
+	components?: any;
 	overrides?: ThemeOverrides;
+};
+
+export type ThemeTemplate<ComponentName extends string, ComponentProps> = {
+	default?: ThemeTemplateProperties<ComponentName, ComponentProps>;
+	mobile?: ThemeTemplateProperties<ComponentName, ComponentProps>;
+	tablet?: ThemeTemplateProperties<ComponentName, ComponentProps>;
+	desktop?: ThemeTemplateProperties<ComponentName, ComponentProps>;
+};
+
+export type ThemeTemplateProperties<ComponentName extends string, ComponentProps> = {
+	props?: Partial<ComponentProps>;
+	components?: ThemeTemplateComponentOverrides<`*${ComponentName}`>;
 };
 
 export type ThemeComplete = Required<Omit<Theme, 'overrides'>> & { components: ThemeComponents };

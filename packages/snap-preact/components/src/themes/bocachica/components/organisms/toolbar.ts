@@ -1,5 +1,6 @@
 import { css } from '@emotion/react';
-import type { ToolbarProps } from '../../../../components/Organisms/Toolbar';
+import { ThemeTemplate } from '../../../../providers';
+import { ToolbarProps } from '../../../../components/Organisms/Toolbar';
 
 // CSS in JS style script for the Toolbar component
 const toolbarStyleScript = () => {
@@ -7,11 +8,10 @@ const toolbarStyleScript = () => {
 };
 
 // Toolbar component props
-export const toolbar: ThemeComponentProps<ToolbarProps> = {
+export const toolbar: ThemeTemplate<'toolbar', ToolbarProps> = {
 	default: {
-		themeStyleScript: toolbarStyleScript,
+		props: {
+			themeStyleScript: toolbarStyleScript,
+		},
 	},
-	mobile: {},
-	tablet: {},
-	desktop: {},
 };

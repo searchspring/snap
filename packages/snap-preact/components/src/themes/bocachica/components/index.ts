@@ -3,30 +3,30 @@ import { molecules } from './molecules';
 import { organisms } from './organisms';
 import { templates } from './templates';
 
-import type { ThemeComponents } from '../../../providers';
+import type { ThemeComponentRestrictedOverrides } from '../../../providers';
 
-export const components: ThemeComponents = {
+export const components: ThemeComponentRestrictedOverrides = {
 	...atoms.default,
 	...molecules.default,
 	...organisms.default,
 	...templates.default,
 };
 
-export const mobileComponents: ThemeComponents = {
+export const mobileComponents: ThemeComponentRestrictedOverrides = {
 	...atoms.mobile,
 	...molecules.mobile,
 	...organisms.mobile,
 	...templates.mobile,
 };
 
-export const tabletComponents: ThemeComponents = {
+export const tabletComponents: ThemeComponentRestrictedOverrides = {
 	...atoms.tablet,
 	...molecules.tablet,
 	...organisms.tablet,
 	...templates.tablet,
 };
 
-export const desktopComponents: ThemeComponents = {
+export const desktopComponents: ThemeComponentRestrictedOverrides = {
 	...atoms.desktop,
 	...molecules.desktop,
 	...organisms.desktop,

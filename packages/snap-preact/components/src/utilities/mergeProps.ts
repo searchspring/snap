@@ -70,8 +70,10 @@ export function mergeProps<GenericComponentProps = ComponentProps>(
 
 		treePath += componentName?.match(/^[A-Z,a-z,-]+$/) ? `.${componentName}` : '';
 
+		// component props from the theme
 		// add globalTheme props for components with selector matches if they exist
-		const globalApplicableSelectors = filterSelectors(globalTheme?.components || {}, treePath).sort(sortSelectors);
+		const filteredGlobalApplicableSelectors = filterSelectors(globalTheme?.components || {}, treePath);
+		const globalApplicableSelectors = filteredGlobalApplicableSelectors.sort(sortSelectors);
 		globalApplicableSelectors.forEach((selector) => {
 			const componentProps = globalTheme.components?.[selector as keyof typeof globalTheme.components];
 			if (componentProps) {
@@ -79,6 +81,7 @@ export function mergeProps<GenericComponentProps = ComponentProps>(
 			}
 		});
 
+		// og theme prop in default components
 		// add theme props for components with selector matches if they exist
 		const themeApplicableSelectors = filterSelectors(theme?.components || {}, treePath).sort(sortSelectors);
 		themeApplicableSelectors.forEach((selector) => {
@@ -134,11 +137,11 @@ export function sortSelectors(a: string, b: string): number {
 	const aWeight = a
 		.split(' ')
 		.map((selector, i) => (i * 2) ** (selector.includes('.') ? 2 : 1))
-		.reduce((acc, val) => acc + val, 0);
+		.reduce((acc, val) => acc + val, a.includes('*') ? 0 : 1000);
 	const bWeight = b
 		.split(' ')
 		.map((selector, i) => (i * 2) ** (selector.includes('.') ? 2 : 1))
-		.reduce((acc, val) => acc + val, 0);
+		.reduce((acc, val) => acc + val, b.includes('*') ? 0 : 1000);
 
 	return aWeight - bWeight;
 }
@@ -170,7 +173,7 @@ export function filterSelectors(themeComponents: ThemeComponentOverrides, treePa
 		selectors = selectors.filter((key) => key.endsWith(componentType));
 	}
 	return selectors.filter((selector) => {
-		const split = selector.split(' ').slice(0, -1);
+		const split = selector.replace(/\*/g, '').split(' ').slice(0, -1);
 
 		if (split.length == 0) return true;
 
