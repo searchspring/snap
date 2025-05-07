@@ -18,16 +18,6 @@ const defaultStyles: StyleScript<RecommendationBundleVerticalProps> = () => {
 	});
 };
 
-export const recommendationBundleVerticalThemeComponentProps: ThemeComponent<
-	'recommendationBundleVerticalThemeComponentProps',
-	RecommendationBundleVerticalProps
-> = {
-	default: {},
-	mobile: {},
-	tablet: {},
-	desktop: {},
-};
-
 export const RecommendationBundleVertical = observer((properties: RecommendationBundleVerticalProps): JSX.Element => {
 	const globalTheme: Theme = useTheme();
 	const defaultProps: Partial<RecommendationBundleVerticalProps> = {};

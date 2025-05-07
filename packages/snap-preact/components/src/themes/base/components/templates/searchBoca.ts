@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import type { SearchBocaProps } from '../../../../components/Templates/SearchBoca';
-import { searchBocaThemeComponentProps } from '../../../../components/Templates/SearchBoca';
+import { searchBocaThemeComponentProps } from '../../../themeComponents/searchBoca';
 
 // CSS in JS style script for the Search component
 const searchBocaStyleScript = ({ theme }: SearchBocaProps) => {

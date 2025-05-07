@@ -35,13 +35,6 @@ const defaultStyles: StyleScript<RecommendationGridProps> = ({ gapSize, columns 
 	});
 };
 
-export const recommendationGridThemeComponentProps: ThemeComponent<'recommendationGridThemeComponentProps', RecommendationGridProps> = {
-	default: {},
-	mobile: {},
-	tablet: {},
-	desktop: {},
-};
-
 export const RecommendationGrid = observer((properties: RecommendationGridProps): JSX.Element => {
 	const globalTheme: Theme = useTheme();
 

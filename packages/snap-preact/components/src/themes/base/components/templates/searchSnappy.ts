@@ -1,6 +1,6 @@
 // import { css } from '@emotion/react';
 import type { SearchSnappyProps } from '../../../../components/Templates/SearchSnappy';
-import { searchSnappyThemeComponentProps } from '../../../../components/Templates/SearchSnappy';
+import { searchSnappyThemeComponentProps } from '../../../themeComponents/searchSnappy';
 
 // CSS in JS style script for the Search component
 // const searchSnappyStyleScript = ({ theme }: SearchSnappyProps) => {

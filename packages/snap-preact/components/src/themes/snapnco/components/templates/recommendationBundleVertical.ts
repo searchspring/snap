@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import type { RecommendationBundleVerticalProps } from '../../../../components/Templates/RecommendationBundleVertical';
-import { recommendationBundleVerticalThemeComponentProps } from '../../../../components/Templates/RecommendationBundleVertical';
+import { recommendationBundleVerticalThemeComponentProps } from '../../../themeComponents/recommendationBundleVertical';
 
 // CSS in JS style script for the RecommendationBundle component
 const recommendationBundleVerticalStyleScript = ({ theme }: RecommendationBundleVerticalProps) => {

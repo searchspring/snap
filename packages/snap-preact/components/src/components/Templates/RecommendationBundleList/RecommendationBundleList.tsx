@@ -66,16 +66,6 @@ const defaultStyles: StyleScript<RecommendationBundleListProps> = () => {
 	});
 };
 
-export const recommendationBundleListThemeComponentProps: ThemeComponent<
-	'recommendationBundleListThemeComponentProps',
-	RecommendationBundleListProps
-> = {
-	default: {},
-	mobile: {},
-	tablet: {},
-	desktop: {},
-};
-
 export const RecommendationBundleList = observer((properties: RecommendationBundleListProps): JSX.Element => {
 	const globalTheme: Theme = useTheme();
 	const defaultProps: Partial<RecommendationBundleListProps> = {};

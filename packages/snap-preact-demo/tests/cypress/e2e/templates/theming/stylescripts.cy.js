@@ -48,7 +48,7 @@ describe('Theme styling works', () => {
 			cy.get('@styleScript').should('have.been.calledWithMatch', {
 				name: 'custom',
 				variables: {
-					breakpoints: [767, 991, 1299],
+					breakpoints: { mobile: 767, tablet: 991, desktop: 1299 },
 					colors: {
 						accent: '#3a23ad',
 						primary: '#202223',
@@ -83,7 +83,7 @@ describe('Theme styling works', () => {
 						extends: 'bocachica',
 						style: obj.customStyles,
 						variables: {
-							breakpoints: [540, 767, 1200],
+							breakpoints: { mobile: 540, tablet: 767, desktop: 1200 },
 							colors: {
 								text: 'rgb(22, 22, 255)',
 								primary: 'rgb(33, 33, 255)',
@@ -113,7 +113,7 @@ describe('Theme styling works', () => {
 			cy.get('@styleScript').should('have.been.calledWithMatch', {
 				name: 'custom',
 				variables: {
-					breakpoints: [540, 767, 1200],
+					breakpoints: { mobile: 540, tablet: 767, desktop: 1200 },
 					colors: {
 						text: 'rgb(22, 22, 255)',
 						primary: 'rgb(33, 33, 255)',

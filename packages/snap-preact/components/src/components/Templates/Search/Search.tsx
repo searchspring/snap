@@ -7,7 +7,7 @@ import type { SearchController } from '@searchspring/snap-controller';
 import { Results, ResultsProps } from '../../Organisms/Results';
 import { defined, mergeProps, mergeStyles } from '../../../utilities';
 import { ComponentProps, ListOption, ResultComponent, StyleScript } from '../../../types';
-import { Theme, useTheme, CacheProvider, ThemeComponent } from '../../../providers';
+import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { Sidebar, SidebarProps } from '../../Organisms/Sidebar';
 import { Toolbar, ToolbarProps } from '../../Organisms/Toolbar';
 import { NoResults, NoResultsProps } from '../../Organisms/NoResults';
@@ -41,31 +41,6 @@ const defaultStyles: StyleScript<SearchProps> = () => {
 			gap: '1em',
 		},
 	});
-};
-
-export const searchThemeComponentProps: ThemeComponent<'search', SearchProps> = {
-	default: {
-		components: {
-			'*search results': {
-				columns: 4,
-			},
-		},
-	},
-	mobile: {
-		components: {
-			'*search results': {
-				columns: 2,
-			},
-		},
-	},
-	tablet: {
-		components: {
-			'*search results': {
-				columns: 3,
-			},
-		},
-	},
-	desktop: {},
 };
 
 export const Search = observer((properties: SearchProps): JSX.Element => {

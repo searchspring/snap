@@ -34,7 +34,11 @@ let config: SnapTemplatesConfig = {
 			style: globalStyles,
 			overrides: {
 				// defaults
-				components: {},
+				components: {
+					// "toolbar.middle": {
+					// 	// layout: ['pagination']
+					// }
+				},
 
 				// mobile, tablet, desktop
 				responsive: {
@@ -61,7 +65,7 @@ let config: SnapTemplatesConfig = {
 		targets: [
 			{
 				selector: '#searchspring-layout',
-				component: 'Search',
+				component: 'SearchSnapnco',
 			},
 		],
 	},

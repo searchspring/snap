@@ -1,7 +1,6 @@
 import { css } from '@emotion/react';
 import type { SearchSnapncoProps } from '../../../../components/Templates/SearchSnapnco';
-import { searchSnapncoThemeComponentProps } from '../../../../components/Templates/SearchSnapnco';
-import { ThemeComponent } from '../../../../providers';
+import { searchSnapncoThemeComponentProps } from '../../../themeComponents/searchSnapnco';
 
 // CSS in JS style script for the Search component
 const searchSnapncoStyleScript = ({ theme }: SearchSnapncoProps) => {

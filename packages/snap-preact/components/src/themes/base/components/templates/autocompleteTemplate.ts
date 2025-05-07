@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import type { AutocompleteTemplateProps } from '../../../../components/Templates/AutocompleteTemplate';
-import { autocompleteThemeComponentProps } from '../../../../components/Templates/AutocompleteTemplate';
+import { autocompleteThemeComponentProps } from '../../../themeComponents/autocompleteTemplate';
 
 // CSS in JS style script for the Search component
 const autocompleteTemplateStyleScript = ({ theme }: AutocompleteTemplateProps) => {

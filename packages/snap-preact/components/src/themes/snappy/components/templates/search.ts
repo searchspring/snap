@@ -1,7 +1,6 @@
 import { css } from '@emotion/react';
 import type { SearchProps } from '../../../../components/Templates/Search';
-import { searchThemeComponentProps } from '../../../../components/Templates/Search';
-import { ThemeComponent } from '../../../../providers';
+import { searchThemeComponentProps } from '../../../themeComponents/search';
 
 // CSS in JS style script for the Search component
 const searchStyleScript = ({ theme }: SearchProps) => {

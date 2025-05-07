@@ -1,0 +1,84 @@
+import { SearchBocaProps } from '../../components/Templates/SearchBoca';
+
+export const searchBocaThemeComponentProps: ThemeComponent<'searchBoca', SearchBocaProps> = {
+	default: {
+		props: {
+			layoutOptions: [
+				{
+					value: 1,
+					label: '',
+					icon: 'square',
+					overrides: {
+						// props: {},
+						components: {
+							'*searchBoca results': {
+								columns: 1,
+							},
+						},
+					},
+				},
+				{
+					value: 2,
+					label: '',
+					default: true,
+					icon: 'layout-large',
+					overrides: {
+						components: {
+							'*searchBoca results': {
+								columns: 2,
+							},
+						},
+					},
+				},
+			],
+			hideToggleSidebarButton: false,
+			toggleSidebarStartClosed: true,
+		},
+		components: {
+			'*searchBoca toolbar.top': {
+				layout: [
+					['banner.header'],
+					['_', 'searchHeader', '_'],
+					['banner.banner'],
+					['button.sidebar-toggle', 'paginationInfo', '_', 'perPage', 'sortBy'],
+				],
+			},
+
+			'*searchBoca toolbar.middle': {
+				layout: [],
+			},
+
+			'*searchBoca toolbar.bottom': {
+				layout: [['banner.footer'], ['_', 'pagination', '_']],
+			},
+
+			'*searchBoca results': {
+				columns: 4,
+			},
+		},
+	},
+	mobile: {
+		components: {
+			'*searchBoca toolbar.top': {
+				layout: [['banner.header'], ['_', 'searchHeader', '_'], ['banner.banner'], ['mobileSidebar', '_', 'paginationInfo', '_', 'layoutSelector']],
+			},
+			'*searchBoca results': {
+				columns: 2,
+			},
+		},
+	},
+	tablet: {
+		components: {
+			'*searchBoca toolbar.top': {
+				layout: [
+					['_', 'searchHeader', '_'],
+					['mobileSidebar', '_', 'paginationInfo', '_', 'layoutSelector'],
+				],
+			},
+			'*searchBoca results': {
+				columns: 3,
+			},
+		},
+	},
+	desktop: {},
+};

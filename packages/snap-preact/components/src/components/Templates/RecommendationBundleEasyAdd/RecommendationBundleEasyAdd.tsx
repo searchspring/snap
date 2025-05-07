@@ -15,16 +15,6 @@ const defaultStyles: StyleScript<RecommendationBundleEasyAddProps> = () => {
 	});
 };
 
-export const recommendationBundleEasyAddThemeComponentProps: ThemeComponent<
-	'recommendationBundleEasyAddThemeComponentProps',
-	RecommendationBundleEasyAddProps
-> = {
-	default: {},
-	mobile: {},
-	tablet: {},
-	desktop: {},
-};
-
 export const RecommendationBundleEasyAdd = observer((properties: RecommendationBundleEasyAddProps): JSX.Element => {
 	const globalTheme: Theme = useTheme();
 	const defaultProps: Partial<RecommendationBundleEasyAddProps> = {};
