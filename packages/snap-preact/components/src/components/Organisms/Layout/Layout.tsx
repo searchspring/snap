@@ -4,7 +4,7 @@ import { css } from '@emotion/react';
 import classnames from 'classnames';
 import { observer } from 'mobx-react-lite';
 
-import { Theme, useTheme, useSnap, CacheProvider, useTreePath } from '../../../providers';
+import { Theme, useTheme, CacheProvider, useTreePath } from '../../../providers';
 import type { ComponentProps, StyleScript } from '../../../types';
 import { FilterSummary, FilterSummaryProps } from '../FilterSummary';
 import { defined, mergeProps, mergeStyles } from '../../../utilities';
@@ -14,7 +14,6 @@ import type { SearchController } from '@searchspring/snap-controller';
 import { SortBy, SortByProps } from '../../Molecules/SortBy';
 import { PerPage, PerPageProps } from '../../Molecules/PerPage';
 import { LayoutSelector, LayoutSelectorProps } from '../../Molecules/LayoutSelector';
-import type { SnapTemplates } from '../../../../../src';
 import { MobileSidebar, MobileSidebarProps } from '../MobileSidebar';
 import { PaginationInfo, PaginationInfoProps } from '../../Atoms/PaginationInfo/PaginationInfo';
 import { SearchHeader, SearchHeaderProps } from '../../Atoms/SearchHeader/SearchHeader';
@@ -22,6 +21,8 @@ import { Button, ButtonProps } from '../../Atoms/Button';
 import { Banner, BannerProps } from '../../Atoms/Merchandising';
 import { ContentType } from '@searchspring/snap-store-mobx';
 import { Facets, FacetsProps } from '../Facets';
+import { FacetsHorizontal, FacetsHorizontalProps } from '../FacetsHorizontal';
+import { useCleanUpEmptyDivs } from '../../../hooks/useCleanUpEmptyDivs';
 
 const defaultStyles: StyleScript<LayoutProps> = ({}) => {
 	return css({
@@ -49,9 +50,6 @@ const defaultStyles: StyleScript<LayoutProps> = ({}) => {
 export const Layout = observer((properties: LayoutProps): JSX.Element => {
 	const globalTheme: Theme = useTheme();
 	const globalTreePath = useTreePath();
-
-	const snap = useSnap() as SnapTemplates;
-	const themeStore = snap?.templates?.getThemeStore(globalTheme.name);
 
 	const defaultProps: Partial<LayoutProps> = {
 		treePath: globalTreePath,
@@ -119,6 +117,17 @@ export const Layout = observer((properties: LayoutProps): JSX.Element => {
 			treePath,
 		},
 		Facets: {
+			// default props
+			controller,
+			// inherited props
+			...defined({
+				disableStyles,
+			}),
+			// component theme overrides
+			theme: props?.theme,
+			treePath,
+		},
+		FacetsHorizontal: {
 			// default props
 			controller,
 			// inherited props
@@ -215,21 +224,7 @@ export const Layout = observer((properties: LayoutProps): JSX.Element => {
 				return <FilterSummary {...subProps.FilterSummary} />;
 
 			case 'layoutSelector':
-				if (themeStore && props.theme?.layoutOptions && props.theme.layoutOptions.length > 0) {
-					return (
-						<LayoutSelector
-							onSelect={(e, option) => {
-								if (option) {
-									themeStore?.layout.select(option);
-								}
-							}}
-							selected={themeStore?.layout.selected}
-							options={props.theme?.layoutOptions}
-							{...subProps.LayoutSelector}
-						/>
-					);
-				}
-				break;
+				return <LayoutSelector {...subProps.LayoutSelector} />;
 
 			case 'paginationInfo':
 				return <PaginationInfo {...subProps.PaginationInfo} />;
@@ -276,6 +271,9 @@ export const Layout = observer((properties: LayoutProps): JSX.Element => {
 			case 'facets':
 				return <Facets {...subProps.Facets} />;
 
+			case 'facetsHorizontal':
+				return <FacetsHorizontal {...subProps.Facets} />;
+
 			default:
 				return null;
 		}
@@ -285,6 +283,8 @@ export const Layout = observer((properties: LayoutProps): JSX.Element => {
 
 	let rowIndex = 0;
 	let separatorIndex = 0;
+
+	useCleanUpEmptyDivs('.ss__layout__row');
 
 	return hasChildrenToRender ? (
 		<CacheProvider>
@@ -332,6 +332,7 @@ export type ModuleNames =
 	| 'banner.footer'
 	// sidebar
 	| 'facets'
+	| 'facetsHorizontal'
 	| 'banner.left';
 
 interface LayoutSubProps {
@@ -346,5 +347,6 @@ interface LayoutSubProps {
 	SearchHeader: Partial<SearchHeaderProps>;
 	Banner: Partial<BannerProps>;
 	Facets: Partial<FacetsProps>;
+	FacetsHorizontal: Partial<FacetsHorizontalProps>;
 	ToggleSideBarButton: Partial<ButtonProps>;
 }

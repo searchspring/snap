@@ -56,6 +56,9 @@ export type LibraryImports = {
 	component: {
 		search: {
 			Search: (args?: any) => Promise<FunctionalComponent<RenderableProps<any>>>;
+			SearchBoca: (args?: any) => Promise<FunctionalComponent<RenderableProps<any>>>;
+			SearchSnapnco: (args?: any) => Promise<FunctionalComponent<RenderableProps<any>>>;
+			SearchSnappy: (args?: any) => Promise<FunctionalComponent<RenderableProps<any>>>;
 			SearchHorizontal: (args?: any) => Promise<FunctionalComponent<RenderableProps<any>>>;
 		};
 		autocomplete: {
@@ -185,6 +188,23 @@ export class LibraryStore {
 				},
 			},
 			search: {
+				SearchBoca: async () => {
+					return (
+						this.components.search.SearchBoca || (this.components.search.SearchBoca = (await import('./library/components/SearchBoca')).SearchBoca)
+					);
+				},
+				SearchSnapnco: async () => {
+					return (
+						this.components.search.SearchSnapnco ||
+						(this.components.search.SearchSnapnco = (await import('./library/components/SearchSnapnco')).SearchSnapnco)
+					);
+				},
+				SearchSnappy: async () => {
+					return (
+						this.components.search.SearchSnappy ||
+						(this.components.search.SearchSnappy = (await import('./library/components/SearchSnappy')).SearchSnappy)
+					);
+				},
 				Search: async () => {
 					return this.components.search.Search || (this.components.search.Search = (await import('./library/components/Search')).Search);
 				},

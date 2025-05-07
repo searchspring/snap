@@ -1,5 +1,6 @@
 import { css } from '@emotion/react';
 import type { SearchProps } from '../../../../components/Templates/Search';
+import { searchThemeComponentProps } from '../../../themeComponents/search';
 
 // CSS in JS style script for the Search component
 const searchStyleScript = ({ theme }: SearchProps) => {
@@ -9,91 +10,16 @@ const searchStyleScript = ({ theme }: SearchProps) => {
 	return css({});
 };
 
-// Search component props
-export const search: ThemeComponentProps<SearchProps> = {
+// Search component props come from Template export
+export const search: ThemeComponent<'search', SearchProps> = {
 	default: {
-		themeStyleScript: searchStyleScript,
-		hideToggleSidebarButton: false,
-		lang: {
-			toggleSidebarButtonText: {
-				value: ({ sidebarOpenState }) => (sidebarOpenState ? `Close Filters` : 'Show Filters'),
-			},
+		props: {
+			...searchThemeComponentProps.default?.props,
+			themeStyleScript: searchStyleScript,
 		},
-		theme: {
-			components: {
-				filterSummary: {
-					hideTitle: true,
-				},
-				sidebar: {
-					layout: ['facets', 'banner.left'],
-				},
-				'button.sidebar-toggle': {
-					icon: 'close-thin',
-				},
-
-				'toolbar.top': {
-					layout: [
-						['banner.header'],
-						['searchHeader'],
-						['banner.banner'],
-						['button.sidebar-toggle', 'filterSummary', '_', 'sortBy', 'layoutSelector'],
-					],
-				},
-				'toolbar.middle': {
-					layout: [],
-				},
-				'toolbar.bottom': {
-					layout: [['banner.footer'], ['_', 'perPage', 'paginationInfo', 'pagination', '_']],
-				},
-				mobileSidebar: {
-					theme: {
-						components: {
-							filterSummary: {
-								hideTitle: false,
-							},
-						},
-					},
-				},
-			},
-		},
+		components: searchThemeComponentProps.default?.components,
 	},
-	mobile: {
-		theme: {
-			components: {
-				results: {
-					columns: 2,
-				},
-				'toolbar.top': {
-					layout: [['banner.header'], ['searchHeader', '_', 'mobileSidebar'], ['banner.banner']],
-				},
-				'toolbar.middle': {
-					layout: [['filterSummary'], ['sortBy', '_', 'layoutSelector']],
-				},
-			},
-		},
-	},
-	tablet: {
-		theme: {
-			components: {
-				results: {
-					columns: 3,
-				},
-				'toolbar.top': {
-					layout: [['banner.header'], ['searchHeader', '_', 'mobileSidebar'], ['banner.banner']],
-				},
-				'toolbar.middle': {
-					layout: [['filterSummary'], ['sortBy', '_', 'layoutSelector']],
-				},
-			},
-		},
-	},
-	desktop: {
-		theme: {
-			components: {
-				results: {
-					columns: 3,
-				},
-			},
-		},
-	},
+	mobile: searchThemeComponentProps.mobile,
+	desktop: searchThemeComponentProps.desktop,
+	tablet: searchThemeComponentProps.tablet,
 };

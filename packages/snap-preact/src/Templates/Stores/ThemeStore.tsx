@@ -7,7 +7,7 @@ import { StorageStore } from '@searchspring/snap-store-mobx';
 import { TemplateThemeTypes, type TemplatesStoreConfigSettings, type TemplatesStoreDependencies } from './TemplateStore';
 import { Global, css } from '@emotion/react';
 
-import { ThemeMinimal, ThemeVariablesPartial, type Theme, ThemePartial, ThemeOverrides } from '../../../components/src';
+import { ThemeMinimal, ThemeVariablesPartial, type Theme, ThemePartial, ThemeOverrides, ThemeVariableBreakpoints } from '../../../components/src';
 import { CacheProvider } from '../../../components/src/providers/cache';
 import { sortSelectors, filterSelectors } from '../../../components/src/utilities/mergeProps';
 import type { GlobalThemeStyleScript } from '../../types';
@@ -133,7 +133,7 @@ export class ThemeStore {
 				10. stored theme editor overrides
 		*/
 
-		const breakpoints = (this.variables.breakpoints || this.base.variables?.breakpoints) as number[];
+		const breakpoints = this.variables.breakpoints || this.base.variables?.breakpoints;
 
 		const baseBreakpoint = getOverridesAtWidth(this.innerWidth, breakpoints, this.base);
 		const overrideBreakpoint = getOverridesAtWidth(this.innerWidth, breakpoints, this.overrides);
@@ -141,43 +141,11 @@ export class ThemeStore {
 		const base = { ...this.base };
 		const overrides = { ...this.overrides };
 
-		if (this.overrides.layoutOptions?.length) {
-			base.layoutOptions = [];
-		}
-
-		if (overrideBreakpoint.layoutOptions?.length) {
-			base.layoutOptions = [];
-			overrides.layoutOptions = [];
-		}
-
-		let themeOverrides = mergeThemeLayers(overrides, overrideBreakpoint, overrides, overrideBreakpoint, {
+		const themeOverrides = mergeThemeLayers(overrides, overrideBreakpoint, {
 			variables: toJS(this.variables),
 		} as ThemePartial) as Theme;
 
 		let theme: Theme = mergeThemeLayers(base, baseBreakpoint, this.currency, this.language, this.languageOverrides, themeOverrides) as Theme;
-
-		// find layout option overrides
-		const layoutOptions = theme.layoutOptions;
-		const selectedOption: ListOption | undefined =
-			layoutOptions?.find((option) => option?.value === this.layout.selected?.value) ||
-			layoutOptions?.find((option) => option?.default) ||
-			(Array.isArray(layoutOptions) ? layoutOptions[0] : undefined);
-
-		// apply selected overrides if they exist
-		if (selectedOption?.overrides) {
-			if (selectedOption?.overrides) {
-				theme = mergeThemeLayers(theme, selectedOption.overrides) as Theme;
-				themeOverrides = mergeThemeLayers(themeOverrides, selectedOption.overrides) as Theme;
-			}
-
-			// if the the selectedOption differs from this.layout.selected, then select the layout (can happen at breakpoint recalculations)
-			if (
-				!this?.layout?.selected ||
-				(this?.layout?.selected && selectedOption.value !== this.layout.selected.value && selectedOption.label !== this.layout.selected.label)
-			) {
-				this.layout.select(selectedOption);
-			}
-		}
 
 		/*
 			Ensure 'theme' prop has overrides applied to it
@@ -267,21 +235,17 @@ export function mergeThemeLayers(...layers: ThemePartial[]): ThemePartial {
 	return deepmerge.all(layers, { arrayMerge: arrayMerge });
 }
 
-export function getOverridesAtWidth(width: number | undefined, breakpoints: number[], theme: ThemePartial): ThemePartial {
+export function getOverridesAtWidth(width: number | undefined, breakpoints: ThemeVariableBreakpoints | undefined, theme: ThemePartial): ThemePartial {
 	let overrides: ThemePartial = {};
-	if (width && Number.isInteger(width) && theme.responsive) {
-		const breakpoint = breakpoints.find((breakpoint) => width! <= breakpoint);
+	if (width && Number.isInteger(width) && theme.responsive && breakpoints) {
+		const breakpoint = Object.keys(breakpoints).find((breakpoint) => width! <= breakpoints[breakpoint as keyof typeof breakpoints]);
 
 		if (breakpoint) {
-			const breakpointIndex = breakpoints.indexOf(breakpoint);
-			overrides = (theme.responsive && (theme.responsive as any)[breakpointIndex]) || {};
-		} else if (width > breakpoints[breakpoints.length - 1]) {
-			// if innerWidth is greater than the last breakpoint, don't apply any responsive overrides
-			overrides = {};
+			overrides = (theme.responsive && (theme.responsive as any)[breakpoint]) || {};
 		}
 	}
 
-	return overrides;
+	return { components: overrides };
 }
 
 const arrayMerge = (target: any, source: any, options: any) => {

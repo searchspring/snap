@@ -182,25 +182,13 @@ describe('mergeProps function with theme name', () => {
 		const globalTheme: Theme = {
 			name: GLOBAL_THEME_NAME,
 			variables: {
-				breakpoints: [540, 767, 1200],
+				breakpoints: { mobile: 540, tablet: 767, desktop: 1200 },
 				colors: {
 					primary: '#3A23AD',
 					secondary: '#00cee1',
 					accent: '#4c3ce2',
 				},
 			},
-			layoutOptions: [
-				{
-					value: 'one',
-					overrides: {
-						components: {
-							[componentType]: {
-								startOpen: true,
-							},
-						},
-					},
-				},
-			],
 		};
 
 		const defaultProps: Partial<SelectProps> = {
@@ -215,7 +203,6 @@ describe('mergeProps function with theme name', () => {
 			...defaultProps,
 			theme: {
 				name: globalTheme.name,
-				layoutOptions: globalTheme.layoutOptions,
 				variables: globalTheme.variables,
 			},
 			treePath: componentType,

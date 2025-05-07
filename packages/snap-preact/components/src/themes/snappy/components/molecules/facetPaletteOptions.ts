@@ -44,23 +44,20 @@ const facetPaletteStyleScript = ({ theme }: FacetPaletteOptionsProps) => {
 };
 
 // FacetPaletteOptions component props
-export const facetPaletteOptions: ThemeComponentProps<FacetPaletteOptionsProps> = {
+export const facetPaletteOptions: ThemeComponent<'facetPaletteOptions', FacetPaletteOptionsProps> = {
 	default: {
-		themeStyleScript: facetPaletteStyleScript,
-		gapSize: '3px',
-		hideLabel: true,
-		columns: 5,
-		hideIcon: false,
-		theme: {
-			components: {
-				icon: {
-					size: '50%',
-					icon: 'check-thin',
-				},
+		props: {
+			themeStyleScript: facetPaletteStyleScript,
+			gapSize: '3px',
+			hideLabel: true,
+			columns: 5,
+			hideIcon: false,
+		},
+		components: {
+			'*facetPaletteOptions icon': {
+				size: '50%',
+				icon: 'check-thin',
 			},
 		},
 	},
-	mobile: {},
-	tablet: {},
-	desktop: {},
 };

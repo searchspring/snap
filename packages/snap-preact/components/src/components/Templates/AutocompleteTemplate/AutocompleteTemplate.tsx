@@ -231,31 +231,18 @@ export const AutocompleteTemplate = observer((properties: AutocompleteTemplatePr
 		components: {
 			facet: {
 				valueProps,
-				previewOnFocus: true,
-				limit: 6,
-				disableOverflow: true,
-				disableCollapse: true,
 			},
 			facetGridOptions: {
 				onClick: facetClickEvent,
-				columns: 3,
 			},
 			facetHierarchyOptions: {
 				onClick: facetClickEvent,
-				hideCount: true,
 			},
 			facetListOptions: {
 				onClick: facetClickEvent,
-				hideCheckbox: true,
-				hideCount: true,
 			},
 			facetPaletteOptions: {
 				onClick: facetClickEvent,
-				hideLabel: true,
-				columns: 3,
-			},
-			result: {
-				hideBadge: true,
 			},
 		},
 	};
@@ -682,6 +669,7 @@ export const AutocompleteTemplate = observer((properties: AutocompleteTemplatePr
 										title={recsController.store?.profile?.display?.templateParameters?.title}
 										resultComponent={RecommendationTemplateResultComponent}
 										name={'noResultsRecommendations'}
+										treePath={treePath}
 									/>
 								</div>
 							) : null}

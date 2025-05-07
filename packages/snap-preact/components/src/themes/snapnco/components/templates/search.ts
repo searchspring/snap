@@ -1,5 +1,6 @@
 import { css } from '@emotion/react';
 import type { SearchProps } from '../../../../components/Templates/Search';
+import { searchThemeComponentProps } from '../../../themeComponents/search';
 
 // CSS in JS style script for the Search component
 const searchStyleScript = ({ theme }: SearchProps) => {
@@ -9,68 +10,16 @@ const searchStyleScript = ({ theme }: SearchProps) => {
 	return css({});
 };
 
-// Search component props
-export const search: ThemeComponentProps<SearchProps> = {
+// Search component props come from Template export
+export const search: ThemeComponent<'search', SearchProps> = {
 	default: {
-		themeStyleScript: searchStyleScript,
-		lang: {
-			toggleSidebarButtonText: {
-				value: ({ sidebarOpenState }) => (sidebarOpenState ? `Close Filters` : 'Show Filters'),
-			},
+		props: {
+			...searchThemeComponentProps.default?.props,
+			themeStyleScript: searchStyleScript,
 		},
-		theme: {
-			components: {
-				filterSummary: {
-					hideTitle: true,
-				},
-				sidebar: {
-					layout: [['filterSummary'], ['facets'], ['banner.left']],
-				},
-				'button.sidebar-toggle': {
-					icon: 'close-thin',
-				},
-				'toolbar.top': {
-					layout: ['banner.header'],
-				},
-				'toolbar.middle': {
-					layout: [['banner.banner'], ['searchHeader', '_', 'paginationInfo', 'sortBy']],
-				},
-				'toolbar.bottom': {
-					layout: [['banner.footer'], ['_', 'pagination', '_']],
-				},
-			},
-		},
+		components: searchThemeComponentProps.default?.components,
 	},
-	mobile: {
-		theme: {
-			components: {
-				mobileSidebar: {
-					openButtonText: 'Filters',
-					hideOpenButtonText: false,
-				},
-				'toolbar.top': {
-					layout: [['banner.header'], ['searchHeader'], ['paginationInfo'], ['banner.banner']],
-				},
-				'toolbar.middle': {
-					layout: [['mobileSidebar', '_', 'sortBy']],
-				},
-			},
-		},
-	},
-	tablet: {
-		theme: {
-			components: {
-				'toolbar.top': {
-					layout: [['banner.header'], ['searchHeader']],
-				},
-				'toolbar.middle': {
-					layout: [['banner.banner'], ['paginationInfo', '_', 'mobileSidebar'], ['filterSummary']],
-				},
-				sidebar: {
-					layout: [['facets'], ['banner.left']],
-				},
-			},
-		},
-	},
-	desktop: {},
+	mobile: searchThemeComponentProps.mobile,
+	desktop: searchThemeComponentProps.desktop,
+	tablet: searchThemeComponentProps.tablet,
 };

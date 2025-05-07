@@ -1,5 +1,6 @@
 import { css } from '@emotion/react';
 import type { RecommendationProps } from '../../../../components/Templates/Recommendation';
+import { recommendationThemeComponentProps } from '../../../themeComponents/recommendation';
 
 // CSS in JS style script for the Recommendation component
 const recommendationStyleScript = ({ theme }: RecommendationProps) => {
@@ -14,23 +15,16 @@ const recommendationStyleScript = ({ theme }: RecommendationProps) => {
 	});
 };
 
-// Recommendation component props
-export const recommendation: ThemeComponentProps<RecommendationProps> = {
+// Recommendation component props come from Template export
+export const recommendation: ThemeComponent<'recommendation', RecommendationProps> = {
 	default: {
-		themeStyleScript: recommendationStyleScript,
-		slidesPerView: 5,
-		slidesPerGroup: 5,
+		props: {
+			...recommendationThemeComponentProps.default?.props,
+			themeStyleScript: recommendationStyleScript,
+		},
+		components: recommendationThemeComponentProps.default?.components,
 	},
-	mobile: {
-		slidesPerView: 2,
-		slidesPerGroup: 2,
-	},
-	tablet: {
-		slidesPerView: 3,
-		slidesPerGroup: 3,
-	},
-	desktop: {
-		slidesPerView: 4,
-		slidesPerGroup: 4,
-	},
+	mobile: recommendationThemeComponentProps.mobile,
+	desktop: recommendationThemeComponentProps.desktop,
+	tablet: recommendationThemeComponentProps.tablet,
 };

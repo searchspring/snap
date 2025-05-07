@@ -1,4 +1,5 @@
 import { h } from 'preact';
+import { useState } from 'preact/hooks';
 import { observer } from 'mobx-react-lite';
 import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
@@ -12,8 +13,8 @@ import { Toolbar, ToolbarProps } from '../../Organisms/Toolbar';
 import { NoResults, NoResultsProps } from '../../Organisms/NoResults';
 import { Lang, useLang, useMediaQuery } from '../../../hooks';
 import { SearchFilterStore } from '@searchspring/snap-store-mobx';
-import { useState } from 'preact/hooks';
 import deepmerge from 'deepmerge';
+import { useLayoutOptions } from '../../../hooks/useLayoutOptions';
 
 const defaultStyles: StyleScript<SearchProps> = () => {
 	return css({
@@ -48,7 +49,7 @@ export const Search = observer((properties: SearchProps): JSX.Element => {
 	const defaultProps: Partial<SearchProps> = {
 		toggleSidebarButtonText: 'Filters',
 		hideToggleSidebarButton: true,
-		mobileDisplayAt: globalTheme?.variables?.breakpoints?.at(1) ? `${globalTheme.variables?.breakpoints?.at(1)}px` : '991px',
+		mobileDisplayAt: globalTheme?.variables?.breakpoints?.tablet ? `${globalTheme.variables?.breakpoints?.tablet}px` : '991px',
 	};
 
 	const props = mergeProps('search', globalTheme, defaultProps, properties);
@@ -68,6 +69,12 @@ export const Search = observer((properties: SearchProps): JSX.Element => {
 		toggleSidebarStartClosed,
 		treePath,
 	} = props;
+
+	// handle selected layoutOptions
+	if (globalTheme?.name && props.layoutOptions) {
+		useLayoutOptions(props, globalTheme);
+	}
+
 	const store = controller.store;
 
 	const isMobile = useMediaQuery(`(max-width: ${mobileDisplayAt})`);
@@ -220,16 +227,12 @@ export interface SearchProps extends ComponentProps {
 	toggleSidebarStartClosed?: boolean;
 	hideToggleSidebarButton?: boolean;
 	lang?: Partial<SearchLang>;
+	layoutOptions?: ListOption[];
 }
 
 export interface SearchLang {
 	toggleSidebarButtonText?: Lang<{ filters: SearchFilterStore; sidebarOpenState: boolean }>;
 }
-
-export type layoutConfig = {
-	options: ListOption[];
-	default?: ListOption | string;
-};
 
 interface SearchSubProps {
 	Results: Partial<ResultsProps>;

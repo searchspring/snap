@@ -75,7 +75,8 @@ export type ModuleNames =
 	| 'button.sidebar-toggle'
 	| 'banner.header'
 	| 'banner.banner'
-	| 'banner.footer';
+	| 'banner.footer'
+	| 'facetsHorizontal';
 
 export type ToolbarNames = 'top' | 'middle' | 'bottom';
 

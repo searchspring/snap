@@ -1,17 +1,14 @@
 // import { css } from '@emotion/react';
 import type { SearchHorizontalProps } from '../../../../components/Templates/SearchHorizontal';
+import { searchHorizontalThemeComponentProps } from '../../../themeComponents/searchHorizontal';
 
-// CSS in JS style script for the SearchHorizontal component
-// const searchHorizontalStyleScript = ({}: SearchHorizontalProps) => {
+// CSS in JS style script for the Search component
+// const searchHorizontalStyleScript = ({ theme }: SearchHorizontalProps) => {
+// 	// eslint-disable-next-line @typescript-eslint/no-unused-vars
+// 	const variables = theme?.variables;
+
 // 	return css({});
 // };
 
-// SearchHorizontal component props
-export const searchHorizontal: ThemeComponentProps<SearchHorizontalProps> = {
-	default: {
-		// themeStyleScript: searchHorizontalStyleScript,
-	},
-	mobile: {},
-	tablet: {},
-	desktop: {},
-};
+// Search component props come from Template export
+export const searchHorizontal: ThemeComponent<'searchHorizontal', SearchHorizontalProps> = searchHorizontalThemeComponentProps;

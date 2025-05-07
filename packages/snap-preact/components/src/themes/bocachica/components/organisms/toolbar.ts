@@ -1,23 +1,17 @@
 import { css } from '@emotion/react';
-import type { ToolbarProps } from '../../../../components/Organisms/Toolbar';
+import { ThemeComponent } from '../../../../providers';
+import { ToolbarProps } from '../../../../components/Organisms/Toolbar';
 
 // CSS in JS style script for the Toolbar component
 const toolbarStyleScript = () => {
-	const sidebarWidth = 'calc(270px + 1.5em)';
-	return css({
-		'.ss__button--sidebar-toggle-button-wrapper': {
-			marginRight: sidebarWidth ? 'inherit' : 'auto',
-			width: sidebarWidth ? sidebarWidth : 'inherit',
-		},
-	});
+	return css({});
 };
 
 // Toolbar component props
-export const toolbar: ThemeComponentProps<ToolbarProps> = {
+export const toolbar: ThemeComponent<'toolbar', ToolbarProps> = {
 	default: {
-		themeStyleScript: toolbarStyleScript,
+		props: {
+			themeStyleScript: toolbarStyleScript,
+		},
 	},
-	mobile: {},
-	tablet: {},
-	desktop: {},
 };

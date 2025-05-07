@@ -1,18 +1,14 @@
 // import { css } from '@emotion/react';
 import type { SearchProps } from '../../../../components/Templates/Search';
+import { searchThemeComponentProps } from '../../../themeComponents/search';
 
 // CSS in JS style script for the Search component
-// const searchStyleScript = ({ }: SearchProps) => {
-// 	return css({
-// 	});
+// const searchStyleScript = ({ theme }: SearchProps) => {
+// 	// eslint-disable-next-line @typescript-eslint/no-unused-vars
+// 	const variables = theme?.variables;
+
+// 	return css({});
 // };
 
-// Search component props
-export const search: ThemeComponentProps<SearchProps> = {
-	default: {
-		// themeStyleScript: searchStyleScript,
-	},
-	mobile: {},
-	tablet: {},
-	desktop: {},
-};
+// Search component props come from Template export
+export const search: ThemeComponent<'search', SearchProps> = searchThemeComponentProps;

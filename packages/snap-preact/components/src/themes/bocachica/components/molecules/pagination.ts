@@ -1,5 +1,6 @@
 import { css } from '@emotion/react';
 import type { PaginationProps } from '../../../../components/Molecules/Pagination';
+import { ThemeComponent } from '../../../../providers';
 
 // CSS in JS style script for the Pagination component
 const paginationStyleScript = ({ theme }: PaginationProps) => {
@@ -16,11 +17,10 @@ const paginationStyleScript = ({ theme }: PaginationProps) => {
 };
 
 // Pagination component props
-export const pagination: ThemeComponentProps<PaginationProps> = {
+export const pagination: ThemeComponent<'pagination', PaginationProps> = {
 	default: {
-		themeStyleScript: paginationStyleScript,
+		props: {
+			themeStyleScript: paginationStyleScript,
+		},
 	},
-	mobile: {},
-	tablet: {},
-	desktop: {},
 };

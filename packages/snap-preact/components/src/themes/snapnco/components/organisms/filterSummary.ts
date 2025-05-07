@@ -14,14 +14,13 @@ const filterSummaryStyleScript = ({ theme }: FilterSummaryProps) => {
 };
 
 // FilterSummary component props
-export const filterSummary: ThemeComponentProps<FilterSummaryProps> = {
+export const filterSummary: ThemeComponent<'filterSummary', FilterSummaryProps> = {
 	default: {
-		themeStyleScript: filterSummaryStyleScript,
-		hideFacetLabel: true,
-		hideClearAll: true,
-		hideTitle: true,
+		props: {
+			themeStyleScript: filterSummaryStyleScript,
+			hideFacetLabel: true,
+			hideClearAll: true,
+			hideTitle: true,
+		},
 	},
-	mobile: {},
-	tablet: {},
-	desktop: {},
 };

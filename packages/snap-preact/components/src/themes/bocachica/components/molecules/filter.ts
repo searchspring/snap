@@ -23,11 +23,10 @@ const filterStyleScript = ({ theme }: FilterProps) => {
 };
 
 // Filter component props
-export const filter: ThemeComponentProps<FilterProps> = {
+export const filter: ThemeComponent<'filter', FilterProps> = {
 	default: {
-		themeStyleScript: filterStyleScript,
+		props: {
+			themeStyleScript: filterStyleScript,
+		},
 	},
-	mobile: {},
-	tablet: {},
-	desktop: {},
 };

@@ -1,11 +1,10 @@
 import type { VariantSelectionProps } from '../../../../components/Molecules/VariantSelection';
 
 // VariantSelection component props
-export const variantSelection: ThemeComponentProps<VariantSelectionProps> = {
+export const variantSelection: ThemeComponent<'variantSelection', VariantSelectionProps> = {
 	default: {
-		// themeStyleScript: swatchesStyleScript,
+		props: {
+			// themeStyleScript: variantSelectionStyleScript,
+		},
 	},
-	mobile: {},
-	tablet: {},
-	desktop: {},
 };

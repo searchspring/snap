@@ -15,12 +15,11 @@ const filterSummaryStyleScript = ({ theme }: FilterSummaryProps) => {
 };
 
 // FilterSummary component props
-export const filterSummary: ThemeComponentProps<FilterSummaryProps> = {
+export const filterSummary: ThemeComponent<'filterSummary', FilterSummaryProps> = {
 	default: {
-		themeStyleScript: filterSummaryStyleScript,
-		title: 'Applied Filters',
+		props: {
+			themeStyleScript: filterSummaryStyleScript,
+			title: 'Applied Filters',
+		},
 	},
-	mobile: {},
-	tablet: {},
-	desktop: {},
 };

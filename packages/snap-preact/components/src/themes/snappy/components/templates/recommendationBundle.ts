@@ -1,5 +1,6 @@
 import { css } from '@emotion/react';
 import type { RecommendationBundleProps } from '../../../../components/Templates/RecommendationBundle';
+import { recommendationBundleThemeComponentProps } from '../../../themeComponents/recommendationBundle';
 
 // CSS in JS style script for the RecommendationBundle component
 const recommendationBundleStyleScript = ({ theme }: any) => {
@@ -18,36 +19,16 @@ const recommendationBundleStyleScript = ({ theme }: any) => {
 	});
 };
 
-// RecommendationBundle component props
-export const recommendationBundle: ThemeComponentProps<RecommendationBundleProps> = {
+// RecommendationBundle component props come from Template export
+export const recommendationBundle: ThemeComponent<'recommendationBundle', RecommendationBundleProps> = {
 	default: {
-		themeStyleScript: recommendationBundleStyleScript,
-		carousel: {
-			slidesPerView: 4,
-			slidesPerGroup: 4,
-			spaceBetween: 10,
+		props: {
+			...recommendationBundleThemeComponentProps.default?.props,
+			themeStyleScript: recommendationBundleStyleScript,
 		},
+		components: recommendationBundleThemeComponentProps.default?.components,
 	},
-	mobile: {
-		carousel: {
-			slidesPerView: 2,
-			slidesPerGroup: 2,
-			spaceBetween: 10,
-		},
-		ctaInline: false,
-	},
-	tablet: {
-		carousel: {
-			slidesPerView: 3,
-			slidesPerGroup: 3,
-			spaceBetween: 10,
-		},
-	},
-	desktop: {
-		carousel: {
-			slidesPerView: 4,
-			slidesPerGroup: 4,
-			spaceBetween: 10,
-		},
-	},
+	mobile: recommendationBundleThemeComponentProps.mobile,
+	desktop: recommendationBundleThemeComponentProps.desktop,
+	tablet: recommendationBundleThemeComponentProps.tablet,
 };

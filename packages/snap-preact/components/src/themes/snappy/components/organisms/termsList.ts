@@ -10,11 +10,10 @@ const termsListStyleScript = ({ theme }: TermsListProps) => {
 };
 
 // Terms component props
-export const termsList: ThemeComponentProps<TermsListProps> = {
+export const termsList: ThemeComponent<'termsList', TermsListProps> = {
 	default: {
-		styleScript: termsListStyleScript,
+		props: {
+			styleScript: termsListStyleScript,
+		},
 	},
-	mobile: {},
-	tablet: {},
-	desktop: {},
 };

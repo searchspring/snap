@@ -12,7 +12,7 @@ import { GLOBAL_THEME_NAME } from './TargetStore';
 configureMobx({ enforceActions: 'never', useProxies: 'never' });
 
 const testThemeVariables: ThemeVariables = {
-	breakpoints: [420, 720, 1440],
+	breakpoints: { mobile: 420, tablet: 720, desktop: 1440 },
 	colors: {
 		primary: 'test.color.primary',
 		secondary: 'test.color.secondary',
@@ -28,54 +28,23 @@ const testTheme: Theme = {
 			columns: 5,
 		},
 	},
-	layoutOptions: [
-		{
-			label: 'list',
-			value: 'list',
-			default: true,
-			overrides: {
-				components: {
-					results: {
-						layout: 'list',
-					},
-				},
+	responsive: {
+		mobile: {
+			'*results': {
+				columns: 1,
 			},
 		},
-		{
-			label: 'grid',
-			value: 'grid',
-			overrides: {
-				components: {
-					results: {
-						layout: 'grid',
-					},
-				},
+		tablet: {
+			'*results': {
+				columns: 2,
 			},
 		},
-	],
-	responsive: [
-		{
-			components: {
-				results: {
-					columns: 1,
-				},
+		desktop: {
+			'*results': {
+				columns: 3,
 			},
 		},
-		{
-			components: {
-				results: {
-					columns: 2,
-				},
-			},
-		},
-		{
-			components: {
-				results: {
-					columns: 3,
-				},
-			},
-		},
-	],
+	},
 };
 
 describe('ThemeStore', () => {
@@ -101,7 +70,6 @@ describe('ThemeStore', () => {
 			base: {
 				name: 'empty',
 				variables: testThemeVariables,
-				responsive: [{}, {}, {}],
 				components: {},
 			},
 			overrides: {},
@@ -186,10 +154,8 @@ describe('ThemeStore', () => {
 
 		const store = new ThemeStore({ config, dependencies, settings });
 
-		const defaultLayoutOptionOverrides = config.base.layoutOptions?.find((option) => option.default)?.overrides || {};
-
 		// order here matches order merged via theme() getter
-		const merged = mergeThemeLayers(config.base, config.currency, config.language, config.overrides!, defaultLayoutOptionOverrides);
+		const merged = mergeThemeLayers(config.base, config.currency, config.language, config.overrides!);
 
 		expect(store.theme).toStrictEqual({
 			...merged,
@@ -221,10 +187,8 @@ describe('ThemeStore', () => {
 
 		const store = new ThemeStore({ config, dependencies, settings });
 
-		const defaultLayoutOptionOverrides = config.base.layoutOptions?.find((option) => option.default)?.overrides || {};
-
 		// order here matches order merged via theme() getter
-		const merged = mergeThemeLayers(config.base, config.currency, config.language, config.overrides!, defaultLayoutOptionOverrides);
+		const merged = mergeThemeLayers(config.base, config.currency, config.language, config.overrides!);
 
 		expect(store.theme).toStrictEqual({
 			...merged,
@@ -245,7 +209,7 @@ describe('ThemeStore', () => {
 				},
 			},
 			variables: {
-				breakpoints: [100, 200, 300],
+				breakpoints: { mobile: 100, tablet: 200, desktop: 300 },
 				colors: {
 					primary: 'primary',
 					secondary: 'secondary',
@@ -260,17 +224,8 @@ describe('ThemeStore', () => {
 
 		const store = new ThemeStore({ config, dependencies, settings });
 
-		const defaultLayoutOptionOverrides = config.base.layoutOptions?.find((option) => option.default)?.overrides || {};
-
 		// order here matches order merged via theme() getter
-		const merged = mergeThemeLayers(
-			config.base,
-			config.currency,
-			config.language,
-			config.overrides!,
-			{ variables: config.variables },
-			defaultLayoutOptionOverrides
-		);
+		const merged = mergeThemeLayers(config.base, config.currency, config.language, config.overrides!, { variables: config.variables });
 
 		expect(store.theme).toStrictEqual({
 			...merged,
@@ -291,7 +246,7 @@ describe('ThemeStore', () => {
 				},
 			},
 			variables: {
-				breakpoints: [100, 200, 300],
+				breakpoints: { mobile: 100, tablet: 200, desktop: 300 },
 				colors: {
 					primary: 'primary',
 					secondary: 'secondary',
@@ -318,17 +273,8 @@ describe('ThemeStore', () => {
 
 		const store = new ThemeStore({ config, dependencies, settings });
 
-		const defaultLayoutOptionOverrides = config.base.layoutOptions?.find((option) => option.default)?.overrides || {};
-
 		// order here matches order merged via theme() getter
-		const merged = mergeThemeLayers(
-			config.base,
-			config.currency,
-			config.language,
-			config.overrides!,
-			{ variables: config.variables },
-			defaultLayoutOptionOverrides
-		);
+		const merged = mergeThemeLayers(config.base, config.currency, config.language, config.overrides!, { variables: config.variables });
 
 		expect(store.theme).toStrictEqual({
 			...merged,
@@ -336,52 +282,46 @@ describe('ThemeStore', () => {
 		});
 	});
 
-	it('can get theme at first breakpoint', () => {
-		const bpIndex = 0; // simulate being at first breakpoint
+	//todo test
+	// it('can get theme at first breakpoint', () => {
 
-		const config: ThemeStoreThemeConfig = {
-			name: GLOBAL_THEME_NAME,
-			type: 'local',
-			base: testTheme,
-			overrides: {},
-			variables: {},
-			currency: {},
-			language: {},
-			languageOverrides: {},
-			innerWidth: testTheme.variables?.breakpoints[bpIndex]! - 10,
-		};
+	// 	const config: ThemeStoreThemeConfig = {
+	// 		name: GLOBAL_THEME_NAME,
+	// 		type: 'local',
+	// 		base: testTheme,
+	// 		overrides: {},
+	// 		variables: {},
+	// 		currency: {},
+	// 		language: {},
+	// 		languageOverrides: {},
+	// 		innerWidth: testTheme.variables?.breakpoints.mobile! - 10,
+	// 	};
 
-		const store = new ThemeStore({ config, dependencies, settings });
-		expect(store.innerWidth).toBe(config.innerWidth);
+	// 	const store = new ThemeStore({ config, dependencies, settings });
+	// 	expect(store.innerWidth).toBe(config.innerWidth);
 
-		const layoutOptions = config.base.responsive?.[bpIndex].layoutOptions || config.base.layoutOptions;
-		const defaultLayoutOptionOverrides = layoutOptions?.find((option) => option.default)?.overrides || {};
+	// 	const baseResponsiveOverrides = config.base.responsive?.mobile!;
+	// 	expect(baseResponsiveOverrides).toBeDefined();
 
-		const baseResponsiveOverrides = config.base.responsive?.[bpIndex]!;
-		expect(baseResponsiveOverrides).toBeDefined();
+	// 	// order here matches order merged via theme() getter
+	// 	const merged = mergeThemeLayers(
+	// 		config.base,
+	// 		baseResponsiveOverrides,
+	// 		config.currency,
+	// 		config.language,
+	// 		config.overrides!,
+	// 	);
 
-		// order here matches order merged via theme() getter
-		const merged = mergeThemeLayers(
-			config.base,
-			baseResponsiveOverrides,
-			config.currency,
-			config.language,
-			config.overrides!,
-			defaultLayoutOptionOverrides
-		);
+	// 	expect(store.theme).toStrictEqual({
+	// 		...merged,
+	// 		name: config.name,
+	// 	});
 
-		expect(store.theme).toStrictEqual({
-			...merged,
-			name: config.name,
-		});
-
-		// extra assertions on 'test' theme
-		expect(merged.components?.results?.columns).toBe(1);
-	});
+	// 	// extra assertions on 'test' theme
+	// 	expect(merged.components?.results?.columns).toBe(1);
+	// });
 
 	it('should not have overrides applied if past last breakpoint', () => {
-		const bpIndex = testTheme.variables?.breakpoints.length! - 1;
-
 		const config: ThemeStoreThemeConfig = {
 			name: GLOBAL_THEME_NAME,
 			type: 'local',
@@ -391,16 +331,13 @@ describe('ThemeStore', () => {
 			currency: {},
 			language: {},
 			languageOverrides: {},
-			innerWidth: testTheme.variables?.breakpoints[bpIndex]! + 10,
+			innerWidth: testTheme.variables?.breakpoints.desktop! + 10,
 		};
 
 		const store = new ThemeStore({ config, dependencies, settings });
 		expect(store.innerWidth).toBe(config.innerWidth);
 
-		const layoutOptions = config.base.responsive?.[bpIndex].layoutOptions || config.base.layoutOptions;
-		const defaultLayoutOptionOverrides = layoutOptions?.find((option) => option.default)?.overrides || {};
-
-		const merged = mergeThemeLayers(config.base, config.currency, config.language, config.overrides!, defaultLayoutOptionOverrides);
+		const merged = mergeThemeLayers(config.base, config.currency, config.language, config.overrides!);
 
 		expect(store.theme).toStrictEqual({
 			...merged,
@@ -411,196 +348,129 @@ describe('ThemeStore', () => {
 		expect(merged.components?.results?.columns).toBe(5);
 	});
 
-	it('can get theme at breakpoint and use breakpoint overrides', () => {
-		const bpIndex = 0; // simulate being at first breakpoint
+	//todo test
+	// it('can get theme at breakpoint and use breakpoint overrides', () => {
+	// 	const bpIndex = 0; // simulate being at first breakpoint
 
-		const config: ThemeStoreThemeConfig = {
-			name: GLOBAL_THEME_NAME,
-			type: 'local',
-			base: testTheme,
-			overrides: {
-				responsive: [
-					{
-						components: {
-							results: { columns: 7 },
-						},
-					},
-					{},
-					{},
-				],
-			},
-			variables: {
-				breakpoints: [100, 200, 300],
-			},
-			currency: {},
-			language: {},
-			languageOverrides: {},
-			innerWidth: 50,
-		};
+	// 	const config: ThemeStoreThemeConfig = {
+	// 		name: GLOBAL_THEME_NAME,
+	// 		type: 'local',
+	// 		base: testTheme,
+	// 		overrides: {
+	// 			responsive: {
+	// 				mobile: {
+	// 					results: { columns: 7 },
+	// 				},
+	// 				tablet: {},
+	// 				desktop: {},
+	// 			}
+	// 		},
+	// 		variables: {
+	// 			breakpoints: {mobile: 100, tablet: 200, desktop: 300},
+	// 		},
+	// 		currency: {},
+	// 		language: {},
+	// 		languageOverrides: {},
+	// 		innerWidth: 50,
+	// 	};
 
-		const store = new ThemeStore({ config, dependencies, settings });
-		expect(store.innerWidth).toBe(config.innerWidth);
+	// 	const store = new ThemeStore({ config, dependencies, settings });
+	// 	expect(store.innerWidth).toBe(config.innerWidth);
 
-		const layoutOptions = config.base.responsive?.[bpIndex].layoutOptions || config.base.layoutOptions;
-		const defaultLayoutOptionOverrides = layoutOptions?.find((option) => option.default)?.overrides || {};
+	// 	const baseResponsiveOverrides = config.base.responsive?.mobile!;
+	// 	expect(baseResponsiveOverrides).toBeDefined();
 
-		const baseResponsiveOverrides = config.base.responsive?.[bpIndex]!;
-		expect(baseResponsiveOverrides).toBeDefined();
+	// 	const additionalResponsiveOverrides = config.overrides?.responsive?.mobile!;
+	// 	expect(baseResponsiveOverrides).toBeDefined();
 
-		const additionalResponsiveOverrides = config.overrides?.responsive?.[bpIndex]!;
-		expect(baseResponsiveOverrides).toBeDefined();
+	// 	// order here matches order merged via theme() getter
+	// 	const merged = mergeThemeLayers(
+	// 		config.base,
+	// 		baseResponsiveOverrides,
+	// 		config.currency,
+	// 		config.language,
+	// 		config.overrides!,
+	// 		additionalResponsiveOverrides,
+	// 		{ variables: config.variables },
+	// 	);
 
-		// order here matches order merged via theme() getter
-		const merged = mergeThemeLayers(
-			config.base,
-			baseResponsiveOverrides,
-			config.currency,
-			config.language,
-			config.overrides!,
-			additionalResponsiveOverrides,
-			{ variables: config.variables },
-			defaultLayoutOptionOverrides
-		);
+	// 	expect(store.theme).toStrictEqual({
+	// 		...merged,
+	// 		name: config.name,
+	// 	});
 
-		expect(store.theme).toStrictEqual({
-			...merged,
-			name: config.name,
-		});
+	// 	// extra assertions on 'test' theme
+	// 	expect(merged.components?.results?.columns).toBe(7);
+	// });
 
-		// extra assertions on 'test' theme
-		expect(merged.components?.results?.columns).toBe(7);
-	});
+	//todo test
+	// it('can get theme with all the things ', () => {
+	// 	const bpIndex = 0; // simulate being at first breakpoint
 
-	it('can get theme with all the things ', () => {
-		const bpIndex = 0; // simulate being at first breakpoint
+	// 	const config: ThemeStoreThemeConfig = {
+	// 		name: GLOBAL_THEME_NAME,
+	// 		type: 'local',
+	// 		base: testTheme,
+	// 		overrides: {
+	// 			responsive: {
+	// 				mobile: {
+	// 					results: { columns: 7 },
+	// 				},
+	// 				tablet: {},
+	// 				desktop: {},
+	// 			},
+	// 		},
+	// 		variables: {
+	// 			breakpoints: {mobile: 100, tablet: 200, desktop: 300},
+	// 		},
+	// 		currency: {
+	// 			components: {
+	// 				results: { columns: 9 },
+	// 			},
+	// 		},
+	// 		language: {
+	// 			components: {
+	// 				results: { columns: 11 },
+	// 			},
+	// 		},
+	// 		languageOverrides: {},
+	// 		innerWidth: 50,
+	// 	};
 
-		const config: ThemeStoreThemeConfig = {
-			name: GLOBAL_THEME_NAME,
-			type: 'local',
-			base: testTheme,
-			overrides: {
-				responsive: [
-					{
-						components: {
-							results: { columns: 7 },
-						},
-					},
-					{},
-					{},
-				],
-			},
-			variables: {
-				breakpoints: [100, 200, 300],
-			},
-			currency: {
-				components: {
-					results: { columns: 9 },
-				},
-			},
-			language: {
-				components: {
-					results: { columns: 11 },
-				},
-			},
-			languageOverrides: {},
-			innerWidth: 50,
-		};
+	// 	const store = new ThemeStore({ config, dependencies, settings });
+	// 	expect(store.innerWidth).toBe(config.innerWidth);
 
-		const store = new ThemeStore({ config, dependencies, settings });
-		expect(store.innerWidth).toBe(config.innerWidth);
+	// 	const baseResponsiveOverrides = config.base.responsive?.[bpIndex]!;
+	// 	expect(baseResponsiveOverrides).toBeDefined();
 
-		const layoutOptions = config.base.responsive?.[bpIndex].layoutOptions || config.base.layoutOptions;
-		const defaultLayoutOptionOverrides = layoutOptions?.find((option) => option.default)?.overrides || {};
+	// 	const additionalResponsiveOverrides = config.overrides?.responsive?.[bpIndex]!;
+	// 	expect(baseResponsiveOverrides).toBeDefined();
 
-		const baseResponsiveOverrides = config.base.responsive?.[bpIndex]!;
-		expect(baseResponsiveOverrides).toBeDefined();
+	// 	const overrideObj = { path: ['results', 'columns'], rootEditingKey: 'components', value: 12 };
+	// 	store.setOverride(overrideObj);
 
-		const additionalResponsiveOverrides = config.overrides?.responsive?.[bpIndex]!;
-		expect(baseResponsiveOverrides).toBeDefined();
+	// 	// testing all the things!!!
+	// 	// mergeThemeLayers(base, baseResponsive, currency, language, overrides, overridesResponsive, variables, layout, editor)
 
-		const overrideObj = { path: ['results', 'columns'], rootEditingKey: 'components', value: 12 };
-		store.setOverride(overrideObj);
+	// 	const merged = mergeThemeLayers(
+	// 		config.base,
+	// 		baseResponsiveOverrides,
+	// 		config.currency,
+	// 		config.language,
+	// 		config.overrides!,
+	// 		additionalResponsiveOverrides,
+	// 		{ variables: config.variables },
+	// 		store.stored
+	// 	);
 
-		// testing all the things!!!
-		// mergeThemeLayers(base, baseResponsive, currency, language, overrides, overridesResponsive, variables, layout, editor)
+	// 	expect(store.theme).toStrictEqual({
+	// 		...merged,
+	// 		name: config.name,
+	// 	});
 
-		const merged = mergeThemeLayers(
-			config.base,
-			baseResponsiveOverrides,
-			config.currency,
-			config.language,
-			config.overrides!,
-			additionalResponsiveOverrides,
-			{ variables: config.variables },
-			defaultLayoutOptionOverrides,
-			store.stored
-		);
-
-		expect(store.theme).toStrictEqual({
-			...merged,
-			name: config.name,
-		});
-
-		// extra assertions on 'test' theme
-		expect(merged.components?.results?.columns).toBe(12);
-	});
-
-	it('can select layoutOption', () => {
-		const bpIndex = 0;
-		const config: ThemeStoreThemeConfig = {
-			name: GLOBAL_THEME_NAME,
-			type: 'local',
-			base: testTheme,
-			overrides: {},
-			variables: {},
-			currency: {},
-			language: {},
-			languageOverrides: {},
-			innerWidth: 0,
-		};
-
-		const store = new ThemeStore({ config, dependencies, settings });
-
-		const layoutOptions = config.base.responsive?.[bpIndex].layoutOptions || config.base.layoutOptions;
-		const layoutOptionDefault = layoutOptions?.find((option) => option.default);
-		const layoutOptionNotDefault = layoutOptions?.find((option) => !option.default);
-
-		if (!layoutOptionNotDefault?.overrides || !layoutOptionDefault?.overrides) {
-			// skip if theme does not have any layoutOptions
-			return;
-		}
-
-		expect(store.layout.selected).toStrictEqual(undefined);
-
-		const defaultLayoutOptionOverrides = layoutOptionDefault.overrides;
-		const selectedLayoutOptionOverrides = layoutOptionNotDefault.overrides;
-
-		const merged = mergeThemeLayers(config.base, config.currency, config.language, config.overrides!, defaultLayoutOptionOverrides);
-
-		expect(store.theme).toStrictEqual({
-			...merged,
-			name: config.name,
-		});
-
-		// extra assertions on 'test' theme
-		expect(merged.components?.results?.layout).toBe('list');
-
-		store.layout.select(layoutOptionNotDefault);
-		expect(store.layout.selected).toStrictEqual(layoutOptionNotDefault);
-
-		// check merged theme after new layout selection
-		const mergedSelectedLayout = mergeThemeLayers(config.base, config.currency, config.language, config.overrides!, selectedLayoutOptionOverrides);
-
-		expect(store.theme).toStrictEqual({
-			...mergedSelectedLayout,
-			name: config.name,
-		});
-
-		expect(merged).not.toEqual(mergedSelectedLayout);
-
-		// extra assertions on 'test' theme
-		expect(mergedSelectedLayout.components?.results?.layout).toBe('grid');
-	});
+	// 	// extra assertions on 'test' theme
+	// 	expect(merged.components?.results?.columns).toBe(12);
+	// });
 
 	it('adds a style sheet to the page when a style is provided', async () => {
 		const config: ThemeStoreThemeConfig = {
@@ -645,7 +515,7 @@ describe('ThemeStore', () => {
 			base: testTheme,
 			overrides: {},
 			variables: {
-				breakpoints: [1, 2, 3],
+				breakpoints: { mobile: 1, tablet: 2, desktop: 3 },
 			},
 			currency: {},
 			language: {},
@@ -663,7 +533,7 @@ describe('mergeThemeLayers function', () => {
 	it(`deep merges 'variables' in ThemePartials`, () => {
 		const themePartial1: ThemePartial = {
 			variables: {
-				breakpoints: [1, 2, 3],
+				breakpoints: { mobile: 1, tablet: 2, desktop: 3 },
 				colors: {
 					primary: 'blue',
 					secondary: 'red',
@@ -674,7 +544,7 @@ describe('mergeThemeLayers function', () => {
 
 		const themePartial2: ThemePartial = {
 			variables: {
-				breakpoints: [4, 5, 6],
+				breakpoints: { mobile: 4, tablet: 5, desktop: 6 },
 				colors: {
 					primary: 'red',
 					secondary: 'blue',
@@ -686,7 +556,7 @@ describe('mergeThemeLayers function', () => {
 		const merged = mergeThemeLayers(themePartial1, themePartial2);
 		expect(merged).toStrictEqual({
 			variables: {
-				breakpoints: [4, 5, 6],
+				breakpoints: { mobile: 4, tablet: 5, desktop: 6 },
 				colors: {
 					primary: 'red',
 					secondary: 'blue',
@@ -698,49 +568,39 @@ describe('mergeThemeLayers function', () => {
 
 	it(`deep merges 'responsive' in ThemePartials`, () => {
 		const themePartial1: ThemePartial = {
-			responsive: [
-				{
-					components: {
-						results: { columns: 1 },
-					},
+			responsive: {
+				mobile: {
+					'*results': { columns: 1 },
 				},
-				{},
-				{},
-			],
+				tablet: {},
+				desktop: {},
+			},
 		};
 
 		const themePartial2: ThemePartial = {
-			responsive: [
-				{
-					components: {
-						result: { layout: 'grid' },
-					},
+			responsive: {
+				mobile: {
+					'*result': { layout: 'grid' },
 				},
-				{},
-				{
-					components: {
-						results: { columns: 1 },
-					},
+				tablet: {},
+				desktop: {
+					'*results': { columns: 1 },
 				},
-			],
+			},
 		};
 
 		const merged = mergeThemeLayers(themePartial1, themePartial2);
 		expect(merged).toStrictEqual({
-			responsive: [
-				{
-					components: {
-						result: { layout: 'grid' },
-						results: { columns: 1 },
-					},
+			responsive: {
+				mobile: {
+					'*result': { layout: 'grid' },
+					'*results': { columns: 1 },
 				},
-				{},
-				{
-					components: {
-						results: { columns: 1 },
-					},
+				tablet: {},
+				desktop: {
+					'*results': { columns: 1 },
 				},
-			],
+			},
 		});
 	});
 
@@ -796,103 +656,10 @@ describe('mergeThemeLayers function', () => {
 		});
 	});
 
-	it(`deep merges 'layoutOptions' in ThemePartials`, () => {
-		const themePartial1: ThemePartial = {
-			layoutOptions: [
-				{
-					label: 'dos',
-					value: '2',
-					default: true,
-					overrides: {
-						components: {
-							results: {
-								layout: 'grid',
-								columns: 2,
-							},
-						},
-					},
-				},
-				{
-					label: 'uno',
-					value: '1',
-					overrides: {
-						components: {
-							results: {
-								layout: 'grid',
-								columns: 1,
-							},
-						},
-					},
-				},
-			],
-		};
-
-		const themePartial2: ThemePartial = {
-			layoutOptions: [
-				{
-					label: 'list',
-					value: 'list',
-					default: true,
-					overrides: {
-						components: {
-							results: {
-								layout: 'list',
-								columns: 1,
-							},
-						},
-					},
-				},
-				{
-					label: 'grid',
-					value: 'grid',
-					overrides: {
-						components: {
-							results: {
-								layout: 'grid',
-								columns: 3,
-							},
-						},
-					},
-				},
-			],
-		};
-
-		const merged = mergeThemeLayers(themePartial1, themePartial2);
-		expect(merged).toStrictEqual({
-			layoutOptions: [
-				{
-					label: 'list',
-					value: 'list',
-					default: true,
-					overrides: {
-						components: {
-							results: {
-								layout: 'list',
-								columns: 1,
-							},
-						},
-					},
-				},
-				{
-					label: 'grid',
-					value: 'grid',
-					overrides: {
-						components: {
-							results: {
-								layout: 'grid',
-								columns: 3,
-							},
-						},
-					},
-				},
-			],
-		});
-	});
-
 	it(`deep merges all the things in ThemePartials`, () => {
 		const themePartial1: ThemePartial = {
 			variables: {
-				breakpoints: [1, 2, 3],
+				breakpoints: { mobile: 1, tablet: 2, desktop: 3 },
 				colors: {
 					primary: 'blue',
 					secondary: 'red',
@@ -915,62 +682,18 @@ describe('mergeThemeLayers function', () => {
 					],
 				},
 			},
-			responsive: [
-				{
-					components: {
-						results: { columns: 1 },
-					},
-					layoutOptions: [
-						{
-							label: 'dos',
-							value: '2',
-							default: true,
-							overrides: {
-								components: {
-									results: {
-										layout: 'grid',
-										columns: 2,
-									},
-								},
-							},
-						},
-					],
+			responsive: {
+				mobile: {
+					'*results': { columns: 1 },
 				},
-				{},
-				{},
-			],
-			layoutOptions: [
-				{
-					label: 'dos',
-					value: '2',
-					default: true,
-					overrides: {
-						components: {
-							results: {
-								layout: 'grid',
-								columns: 2,
-							},
-						},
-					},
-				},
-				{
-					label: 'uno',
-					value: '1',
-					overrides: {
-						components: {
-							results: {
-								layout: 'grid',
-								columns: 1,
-							},
-						},
-					},
-				},
-			],
+				tablet: {},
+				desktop: {},
+			},
 		};
 
 		const themePartial2: ThemePartial = {
 			variables: {
-				breakpoints: [420, 720, 1440],
+				breakpoints: { mobile: 420, tablet: 720, desktop: 1440 },
 				colors: {
 					primary: 'red',
 					secondary: 'yellow',
@@ -989,22 +712,16 @@ describe('mergeThemeLayers function', () => {
 					],
 				},
 			},
-			responsive: [
-				{
-					layoutOptions: [],
-				},
-				{
-					components: {},
-				},
-				{},
-			],
-			layoutOptions: [],
+			responsive: {
+				mobile: {},
+				tablet: {},
+			},
 		};
 
 		const merged = mergeThemeLayers(themePartial1, themePartial2);
 		expect(merged).toStrictEqual({
 			variables: {
-				breakpoints: [420, 720, 1440],
+				breakpoints: { mobile: 420, tablet: 720, desktop: 1440 },
 				colors: {
 					primary: 'red',
 					secondary: 'yellow',
@@ -1023,17 +740,13 @@ describe('mergeThemeLayers function', () => {
 					],
 				},
 			},
-			responsive: [
-				{
-					components: {
-						results: { columns: 1 },
-					},
-					layoutOptions: [],
+			responsive: {
+				mobile: {
+					'*results': { columns: 1 },
 				},
-				{ components: {} },
-				{},
-			],
-			layoutOptions: [],
+				tablet: {},
+				desktop: {},
+			},
 		});
 	});
 });

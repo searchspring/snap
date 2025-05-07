@@ -1,76 +1,25 @@
 import { css } from '@emotion/react';
 import type { SearchHorizontalProps } from '../../../../components/Templates/SearchHorizontal';
+import { searchHorizontalThemeComponentProps } from '../../../themeComponents/searchHorizontal';
 
-// CSS in JS style script for the SearchHorizontal component
+// CSS in JS style script for the Search component
 const searchHorizontalStyleScript = ({ theme }: SearchHorizontalProps) => {
 	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	const variables = theme?.variables;
 
-	return css({
-		'.ss__filter-summary': {
-			margin: '10px 0',
-		},
-
-		'.ss__search-header': {
-			textAlign: 'left',
-		},
-	});
+	return css({});
 };
 
-// SearchHorizontal component props
-export const searchHorizontal: ThemeComponentProps<SearchHorizontalProps> = {
+// Search component props come from Template export
+export const searchHorizontal: ThemeComponent<'searchHorizontal', SearchHorizontalProps> = {
 	default: {
-		themeStyleScript: searchHorizontalStyleScript,
-		theme: {
-			components: {
-				searchHeader: {
-					titleText: (data) => {
-						return data.search?.query?.string ? `Search Results For ${data.search?.query.string}` : 'Search Results';
-					},
-				},
-				filterSummary: {
-					hideTitle: true,
-				},
-				sidebar: {
-					layout: ['filterSummary', 'sortBy', 'perPage', 'facets', 'banner.left'],
-				},
-				'button.sidebar-toggle': {
-					icon: 'filters',
-				},
-				'toolbar.top': {
-					layout: [['banner.header'], ['searchHeader'], ['banner.banner'], ['paginationInfo', '_', 'sortBy', 'perPage']],
-				},
-				'toolbar.middle': {
-					layout: [],
-				},
-				'toolbar.bottom': {
-					layout: [['banner.footer'], ['_', 'pagination', '_']],
-				},
-				mobileSidebar: {
-					theme: {
-						components: {
-							filterSummary: {
-								hideTitle: false,
-							},
-						},
-					},
-				},
-			},
+		props: {
+			...searchHorizontalThemeComponentProps.default?.props,
+			themeStyleScript: searchHorizontalStyleScript,
 		},
+		components: searchHorizontalThemeComponentProps.default?.components,
 	},
-	mobile: {
-		hideFacetsHorizontal: true,
-		theme: {
-			components: {
-				'toolbar.top': {
-					layout: [['banner.header'], ['searchHeader'], ['banner.banner'], ['mobileSidebar', '_', 'layoutSelector']],
-				},
-				'toolbar.middle': {
-					layout: ['paginationInfo'],
-				},
-			},
-		},
-	},
-	tablet: {},
-	desktop: {},
+	mobile: searchHorizontalThemeComponentProps.mobile,
+	desktop: searchHorizontalThemeComponentProps.desktop,
+	tablet: searchHorizontalThemeComponentProps.tablet,
 };

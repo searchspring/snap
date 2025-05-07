@@ -1,16 +1,25 @@
-// import { css } from '@emotion/react';
+import { css } from '@emotion/react';
 import type { RecommendationGridProps } from '../../../../components/Templates/RecommendationGrid';
+import { recommendationGridThemeComponentProps } from '../../../themeComponents/recommendationGrid';
 
-// CSS in JS style script for the RecommendationGrid component
-// const recommendationGridStyleScript = () => {
-// };
+// CSS in JS style script for the RecommendationBundle component
+const recommendationGridStyleScript = ({ theme }: RecommendationGridProps) => {
+	// eslint-disable-next-line @typescript-eslint/no-unused-vars
+	const variables = theme?.variables;
 
-// RecommendationGrid component props
-export const recommendationGrid: ThemeComponentProps<RecommendationGridProps> = {
+	return css({});
+};
+
+// RecommendationGrid component props come from Template export
+export const recommendationGrid: ThemeComponent<'recommendationGrid', RecommendationGridProps> = {
 	default: {
-		// themeStyleScript: recommendationGridStyleScript,
+		props: {
+			...recommendationGridThemeComponentProps.default?.props,
+			themeStyleScript: recommendationGridStyleScript,
+		},
+		components: recommendationGridThemeComponentProps.default?.components,
 	},
-	mobile: {},
-	tablet: {},
-	desktop: {},
+	mobile: recommendationGridThemeComponentProps.mobile,
+	desktop: recommendationGridThemeComponentProps.desktop,
+	tablet: recommendationGridThemeComponentProps.tablet,
 };

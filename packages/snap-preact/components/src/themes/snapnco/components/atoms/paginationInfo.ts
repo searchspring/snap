@@ -12,12 +12,11 @@ const paginationInfoStyleScript = ({ theme }: PaginationInfoProps) => {
 };
 
 // PaginationInfo component props
-export const paginationInfo: ThemeComponentProps<PaginationInfoProps> = {
+export const paginationInfo: ThemeComponent<'paginationInfo', PaginationInfoProps> = {
 	default: {
-		themeStyleScript: paginationInfoStyleScript,
-		infoText: (data) => `Showing ${data.pagination?.begin}-${data.pagination?.end} of ${data.pagination?.totalResults} Products`,
+		props: {
+			themeStyleScript: paginationInfoStyleScript,
+			infoText: (data) => `Showing ${data.pagination?.begin}-${data.pagination?.end} of ${data.pagination?.totalResults} Products`,
+		},
 	},
-	mobile: {},
-	tablet: {},
-	desktop: {},
 };

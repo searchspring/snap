@@ -16,18 +16,15 @@ const listStyleScript = ({ theme }: ListProps) => {
 };
 
 // List component props
-export const list: ThemeComponentProps<ListProps> = {
+export const list: ThemeComponent<'list', ListProps> = {
 	default: {
-		themeStyleScript: listStyleScript,
-		theme: {
-			components: {
-				icon: {
-					size: '24px',
-				},
+		props: {
+			themeStyleScript: listStyleScript,
+		},
+		components: {
+			'*list icon': {
+				size: '24px',
 			},
 		},
 	},
-	mobile: {},
-	tablet: {},
-	desktop: {},
 };
