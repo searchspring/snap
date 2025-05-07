@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.6.0](https://github.com/searchspring/snap-1.0/compare/v1.5.0...v1.6.0) (2025-05-07)
+
+### Features
+
+- **preact-components/result.tsx:** result component additions for Ratings and Add to cart buttons ([b2c81a2](https://github.com/searchspring/snap-1.0/commit/b2c81a231cfc8ab17cba21e817ac9674425de6f9))
+
 # [1.5.0](https://github.com/searchspring/snap-1.0/compare/v1.4.0...v1.5.0) (2025-02-27)
 
 ### Bug Fixes

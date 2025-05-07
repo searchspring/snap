@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.6.0](https://github.com/searchspring/snap/compare/v1.5.0...v1.6.0) (2025-05-07)
+
+### Bug Fixes
+
+- **platforms/common/pluginscrolltotop:** corrected to use `restorePosition` with check for element ([3f428b0](https://github.com/searchspring/snap/commit/3f428b0c455076348da41af9949dc6ddef27769c))
+
+### Features
+
+- **preact/components:** moving to a layout centric approach - WIP ([55f1567](https://github.com/searchspring/snap/commit/55f15678d7fa651d8e5b640c6ca8e9aa67bc05c1))
+
 # [1.5.0](https://github.com/searchspring/snap/compare/v1.4.0...v1.5.0) (2025-02-27)
 
 ### Features

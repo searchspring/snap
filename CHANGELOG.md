@@ -3,6 +3,21 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.6.0](https://github.com/searchspring/snap-1.0/compare/v1.5.0...v1.6.0) (2025-05-07)
+
+### Bug Fixes
+
+- **platforms/common/pluginscrolltotop:** corrected to use `restorePosition` with check for element ([3f428b0](https://github.com/searchspring/snap-1.0/commit/3f428b0c455076348da41af9949dc6ddef27769c))
+- **preact/components/recommendationbundle:** fix themes overwriting bundle subcomponent defaultprops ([4c5a9bc](https://github.com/searchspring/snap-1.0/commit/4c5a9bcc09062896d729e5ca783f39583ec623a8))
+- **snap/preact:** fixing import and removing phantom chunk issue ([f5d7134](https://github.com/searchspring/snap-1.0/commit/f5d7134853026a6216a9a9f2c915050f2f36fc3e))
+
+### Features
+
+- **preact-components/result.tsx:** result component additions for Ratings and Add to cart buttons ([b2c81a2](https://github.com/searchspring/snap-1.0/commit/b2c81a231cfc8ab17cba21e817ac9674425de6f9))
+- **preact/components/recommendation:** profile names, base theme, responsive templates ([5801c25](https://github.com/searchspring/snap-1.0/commit/5801c25e37ed11e5af1492718bf899a28dbef7e7))
+- **preact/components:** moving to a layout centric approach - WIP ([55f1567](https://github.com/searchspring/snap-1.0/commit/55f15678d7fa651d8e5b640c6ca8e9aa67bc05c1))
+- **templates/themes/snapnco:** adding snapnco theme ([80291f8](https://github.com/searchspring/snap-1.0/commit/80291f8429258c67016b2312c73a250ed2c7f5b2))
+
 # [1.5.0](https://github.com/searchspring/snap-1.0/compare/v1.4.0...v1.5.0) (2025-02-27)
 
 ### Bug Fixes
