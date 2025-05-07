@@ -30,6 +30,7 @@ export type LibraryImports = {
 		base: (args?: any) => Promise<Theme>;
 		bocachica: (args?: any) => Promise<Theme>;
 		snappy: (args?: any) => Promise<Theme>;
+		snapnco: (args?: any) => Promise<Theme>;
 	};
 	plugins: {
 		shopify: {
@@ -55,10 +56,13 @@ export type LibraryImports = {
 	component: {
 		search: {
 			Search: (args?: any) => Promise<FunctionalComponent<RenderableProps<any>>>;
+			SearchBoca: (args?: any) => Promise<FunctionalComponent<RenderableProps<any>>>;
+			SearchSnapnco: (args?: any) => Promise<FunctionalComponent<RenderableProps<any>>>;
+			SearchSnappy: (args?: any) => Promise<FunctionalComponent<RenderableProps<any>>>;
 			SearchHorizontal: (args?: any) => Promise<FunctionalComponent<RenderableProps<any>>>;
 		};
 		autocomplete: {
-			Autocomplete: (args?: any) => Promise<FunctionalComponent<RenderableProps<any>>>;
+			AutocompleteTemplate: (args?: any) => Promise<FunctionalComponent<RenderableProps<any>>>;
 		};
 		recommendation: {
 			bundle: {
@@ -149,6 +153,9 @@ export class LibraryStore {
 			snappy: async () => {
 				return this.themes.snappy || (this.themes.snappy = (await import('./library/themes/snappy')).snappy);
 			},
+			snapnco: async () => {
+				return this.themes.snapnco || (this.themes.snapnco = (await import('./library/themes/snapnco')).snapnco);
+			},
 		},
 		plugins: {
 			shopify: {
@@ -173,14 +180,31 @@ export class LibraryStore {
 		},
 		component: {
 			autocomplete: {
-				Autocomplete: async () => {
+				AutocompleteTemplate: async () => {
 					return (
-						this.components.autocomplete.Autocomplete ||
-						(this.components.autocomplete.Autocomplete = (await import('./library/components/Autocomplete')).Autocomplete)
+						this.components.autocomplete.AutocompleteTemplate ||
+						(this.components.autocomplete.AutocompleteTemplate = (await import('./library/components/AutocompleteTemplate')).AutocompleteTemplate)
 					);
 				},
 			},
 			search: {
+				SearchBoca: async () => {
+					return (
+						this.components.search.SearchBoca || (this.components.search.SearchBoca = (await import('./library/components/SearchBoca')).SearchBoca)
+					);
+				},
+				SearchSnapnco: async () => {
+					return (
+						this.components.search.SearchSnapnco ||
+						(this.components.search.SearchSnapnco = (await import('./library/components/SearchSnapnco')).SearchSnapnco)
+					);
+				},
+				SearchSnappy: async () => {
+					return (
+						this.components.search.SearchSnappy ||
+						(this.components.search.SearchSnappy = (await import('./library/components/SearchSnappy')).SearchSnappy)
+					);
+				},
 				Search: async () => {
 					return this.components.search.Search || (this.components.search.Search = (await import('./library/components/Search')).Search);
 				},

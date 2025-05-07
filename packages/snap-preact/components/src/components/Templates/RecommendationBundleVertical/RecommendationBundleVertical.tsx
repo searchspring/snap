@@ -22,7 +22,13 @@ export const RecommendationBundleVertical = observer((properties: Recommendation
 	const globalTheme: Theme = useTheme();
 	const defaultProps: Partial<RecommendationBundleVerticalProps> = {};
 
-	const props = mergeProps('recommendationBundleVertical', globalTheme, defaultProps, properties);
+	//mergeprops only uses names that are passed via properties, so this cannot be put in the defaultProps
+	const _properties = {
+		name: properties.controller?.store?.profile?.display?.template?.component?.toLowerCase(),
+		...properties,
+	};
+
+	const props = mergeProps('recommendationBundleVertical', globalTheme, defaultProps, _properties);
 
 	const { treePath, disableStyles, controller, style: _, styleScript: __, themeStyleScript: ___, ...additionalProps } = props;
 

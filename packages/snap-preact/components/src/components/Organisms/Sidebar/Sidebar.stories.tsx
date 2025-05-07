@@ -61,7 +61,7 @@ export default {
 			control: { type: 'text' },
 		},
 
-		hideTitle: {
+		hideTitleText: {
 			defaultValue: false,
 			description: 'hides the sidebar title component',
 			table: {

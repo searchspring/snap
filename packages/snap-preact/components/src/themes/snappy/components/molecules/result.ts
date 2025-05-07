@@ -84,7 +84,7 @@ const resultStyleScript = ({ theme }: ResultProps) => {
 			},
 		},
 
-		[`@media (max-width: ${variables?.breakpoints[0]}px)`]: {
+		[`@media (max-width: ${variables?.breakpoints.mobile}px)`]: {
 			'&.ss__result--list': {
 				'.ss__result__image-wrapper': {
 					flex: '0 0 20%',
@@ -105,11 +105,10 @@ const resultStyleScript = ({ theme }: ResultProps) => {
 };
 
 // Result component props
-export const result: ThemeComponentProps<ResultProps> = {
+export const result: ThemeComponent<'result', ResultProps> = {
 	default: {
-		themeStyleScript: resultStyleScript,
+		props: {
+			themeStyleScript: resultStyleScript,
+		},
 	},
-	mobile: {},
-	tablet: {},
-	desktop: {},
 };

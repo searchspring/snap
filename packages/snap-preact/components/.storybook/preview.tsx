@@ -4,7 +4,7 @@ import { observer } from 'mobx-react-lite';
 
 import { SnapTemplates, TemplatesStore } from '../../src';
 import { ThemeProvider } from '../src/providers/theme';
-import { base, bocachica, snappy } from '../src/themes';
+import { base, bocachica, snappy, snapnco } from '../src/themes';
 
 // custom styles for storybook
 import './styles.scss';
@@ -26,6 +26,7 @@ const snapTemplates = new SnapTemplates({
 // need to add each theme synchronously
 addTheme(snapTemplates, 'snappy', snappy);
 addTheme(snapTemplates, 'bocachica', bocachica);
+addTheme(snapTemplates, 'snapnco', snapnco);
 addTheme(snapTemplates, 'base', base);
 
 const Providers = observer(
@@ -58,6 +59,7 @@ export const decorators = [
 
 		const themeDecoratorFn = withThemeFromJSXProvider({
 			themes: {
+				snapnco: templateStory ? snapTemplates.templates.themes.library.snapnco.theme : snapTemplates.templates.themes.local.snapncoSimple.theme,
 				snappy: templateStory ? snapTemplates.templates.themes.library.snappy.theme : snapTemplates.templates.themes.local.snappySimple.theme,
 				bocachica: templateStory
 					? snapTemplates.templates.themes.library.bocachica.theme
@@ -130,6 +132,6 @@ function generateSimpleTheme(theme: Theme): Theme {
 			themeStyleScript: componentProps?.themeStyleScript,
 		};
 	}
-	return theme;
-	// return simpleTheme;
+	// return theme;
+	return simpleTheme;
 }

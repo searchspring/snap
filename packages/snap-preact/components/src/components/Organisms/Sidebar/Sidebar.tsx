@@ -5,82 +5,44 @@ import { observer } from 'mobx-react-lite';
 
 import { Theme, useTheme, CacheProvider, useTreePath } from '../../../providers';
 import { ComponentProps, StyleScript } from '../../../types';
-import { FilterSummary, FilterSummaryProps } from '../FilterSummary';
-import { SortBy, SortByProps } from '../../Molecules/SortBy';
-import { PerPage, PerPageProps } from '../../Molecules/PerPage';
 import { defined, mergeProps, mergeStyles } from '../../../utilities';
-import { Facets, FacetsProps } from '../Facets';
 import { SearchController } from '@searchspring/snap-controller';
-import { Lang, useLang } from '../../../hooks';
+import { Layout, LayoutProps } from '../Layout';
 import deepmerge from 'deepmerge';
+import { Lang, useLang } from '../../../hooks/useLang';
 
-const defaultStyles: StyleScript<SidebarProps> = () => {
-	return css({});
+const defaultStyles: StyleScript<SidebarProps> = ({ stickyOffset }) => {
+	return css({
+		// need sticky styles using new sticky prop
+		'&.ss__sidebar--sticky': {
+			position: 'sticky',
+			top: stickyOffset || 0,
+		},
+
+		'& .ss__facets': {
+			width: '100%',
+		},
+	});
 };
 
 export const Sidebar = observer((properties: SidebarProps): JSX.Element => {
 	const globalTheme: Theme = useTheme();
 	const globalTreePath = useTreePath();
+
 	const defaultProps: Partial<SidebarProps> = {
 		titleText: 'Filters',
 		treePath: globalTreePath,
+		layout: [['filterSummary'], ['sortBy', 'perPage'], ['facets'], ['banner.left']],
 	};
 
 	const props = mergeProps('sidebar', globalTheme, defaultProps, properties);
 
-	const { controller, hideTitle, titleText, hideFacets, hidePerPage, hideSortBy, hideFilterSummary, disableStyles, className, treePath } = props;
+	const { controller, layout, hideTitleText, titleText, sticky, disableStyles, className, treePath } = props;
 
 	const styling = mergeStyles<SidebarProps>(props, defaultStyles);
 
-	const subProps: SidebarSubProps = {
-		filterSummary: {
-			// default props
-			controller,
-			// inherited props
-			...defined({
-				disableStyles,
-			}),
-			// component theme overrides
-			theme: props?.theme,
-			treePath,
-		},
-		facets: {
-			// default props
-			controller,
-			// inherited props
-			...defined({
-				disableStyles,
-			}),
-			// component theme overrides
-			theme: props?.theme,
-			treePath,
-		},
-		sortBy: {
-			// default props
-			controller,
-			// inherited props
-			...defined({
-				disableStyles,
-			}),
-			// component theme overrides
-			theme: props?.theme,
-			treePath,
-		},
-		perPage: {
-			// default props
-			controller,
-			// inherited props
-			...defined({
-				disableStyles,
-			}),
-			// component theme overrides
-			theme: props?.theme,
-			treePath,
-		},
-	};
-
 	//initialize lang
-	const defaultLang: Partial<SidebarLang> = {
+	const defaultLang = {
 		titleText: {
 			value: titleText,
 		},
@@ -88,21 +50,37 @@ export const Sidebar = observer((properties: SidebarProps): JSX.Element => {
 
 	//deep merge with props.lang
 	const lang = deepmerge(defaultLang, props.lang || {});
-	const mergedLang = useLang(lang as any, { controller: controller });
+	const mergedLang = useLang(lang as any, {
+		controller: controller,
+	});
 
-	return controller?.store?.loaded && controller?.store?.pagination?.totalResults > 0 ? (
+	const subProps: SidebarSubProps = {
+		Layout: {
+			// default props
+			// inherited props
+			...defined({
+				disableStyles,
+			}),
+			// component theme overrides
+			theme: props.theme,
+			treePath,
+		},
+	};
+
+	const hasChildrenToRender = layout?.length;
+	return controller?.store?.loaded && controller?.store?.pagination?.totalResults > 0 && hasChildrenToRender ? (
 		<CacheProvider>
-			<div {...styling} className={classnames('ss__sidebar', className)}>
+			<div {...styling} className={classnames('ss__sidebar', className, { 'ss__sidebar--sticky': sticky })}>
+				{!hideTitleText ? (
+					<h4 className={classnames('ss__sidebar__title')} aria-atomic="true" aria-live="polite" {...mergedLang.titleText.all}>
+						{titleText}
+					</h4>
+				) : (
+					<></>
+				)}
+
 				<div className={classnames('ss__sidebar__inner')}>
-					{!hideTitle && <h4 className="ss__sidebar__title" {...mergedLang.titleText?.all}></h4>}
-
-					{!hideFilterSummary && <FilterSummary {...subProps.filterSummary} />}
-
-					{!hideSortBy && <SortBy {...subProps.sortBy} />}
-
-					{!hidePerPage && <PerPage {...subProps.perPage} />}
-
-					{!hideFacets && <Facets {...subProps.facets} />}
+					<Layout controller={controller} layout={layout} {...subProps.Layout} />
 				</div>
 			</div>
 		</CacheProvider>
@@ -111,14 +89,15 @@ export const Sidebar = observer((properties: SidebarProps): JSX.Element => {
 	);
 });
 
+export type SideBarModuleNames = 'filterSummary' | 'sortBy' | 'perPage' | 'facets' | 'banner.left' | 'paginationInfo' | 'layoutSelector' | '_';
+
 export interface SidebarProps extends ComponentProps {
 	controller: SearchController;
-	hideTitle?: boolean;
+	layout?: SideBarModuleNames[] | SideBarModuleNames[][];
 	titleText?: string;
-	hideFacets?: boolean;
-	hidePerPage?: boolean;
-	hideSortBy?: boolean;
-	hideFilterSummary?: boolean;
+	hideTitleText?: boolean;
+	sticky?: boolean;
+	stickyOffset?: number;
 	lang?: Partial<SidebarLang>;
 }
 
@@ -129,8 +108,5 @@ export interface SidebarLang {
 }
 
 interface SidebarSubProps {
-	filterSummary: Partial<FilterSummaryProps>;
-	facets: Partial<FacetsProps>;
-	sortBy: Partial<SortByProps>;
-	perPage: Partial<PerPageProps>;
+	Layout: Partial<LayoutProps>;
 }

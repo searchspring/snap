@@ -6,10 +6,9 @@ const searchHeaderStyleScript = ({ theme }: SearchHeaderProps) => {
 	const variables = theme?.variables;
 
 	return css({
-		paddingBottom: '10px',
 		'.ss__search-header__title': {
 			color: variables?.colors?.primary,
-			marginBottom: '5px',
+			marginBottom: 0,
 			fontWeight: 'initial',
 			fontSize: '25px',
 		},
@@ -20,12 +19,11 @@ const searchHeaderStyleScript = ({ theme }: SearchHeaderProps) => {
 };
 
 // SearchHeader component props
-export const searchHeader: ThemeComponentProps<SearchHeaderProps> = {
+export const searchHeader: ThemeComponent<'searchHeader', SearchHeaderProps> = {
 	default: {
-		themeStyleScript: searchHeaderStyleScript,
-		titleText: (data) => `Search Results` + (data.search?.query?.string ? ` for ${data.search?.query?.string}` : ``),
+		props: {
+			themeStyleScript: searchHeaderStyleScript,
+			titleText: (data) => `Search Results` + (data.search?.query?.string ? ` for ${data.search?.query?.string}` : ``),
+		},
 	},
-	mobile: {},
-	tablet: {},
-	desktop: {},
 };

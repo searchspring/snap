@@ -1,20 +1,19 @@
 import { h } from 'preact';
-
 import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
 import { observer } from 'mobx-react-lite';
-
 import { Theme, useTheme, CacheProvider, useTreePath } from '../../../providers';
-import { ComponentProps, StyleScript } from '../../../types';
+import type { ComponentProps, StyleScript } from '../../../types';
 import { Slideout, SlideoutProps } from '../../Molecules/Slideout';
 import { defined, mergeProps, mergeStyles } from '../../../utilities';
-import { SearchController } from '@searchspring/snap-controller';
-import { Sidebar, SidebarProps } from '../Sidebar';
+import type { SearchController } from '@searchspring/snap-controller';
+import type { SideBarModuleNames } from '../Sidebar';
 import { Button, ButtonProps } from '../../Atoms/Button';
 import { Lang, useA11y, useLang } from '../../../hooks';
 import { MutableRef, useRef } from 'preact/hooks';
-import { IconProps, IconType } from '../../Atoms/Icon';
+import type { IconProps, IconType } from '../../Atoms/Icon';
 import deepmerge from 'deepmerge';
+import { Layout, LayoutProps } from '../Layout';
 
 const defaultStyles: StyleScript<MobileSidebarProps> = ({}) => {
 	return css({
@@ -47,6 +46,10 @@ const defaultStyles: StyleScript<MobileSidebarProps> = ({}) => {
 			justifyContent: 'center',
 			flexDirection: 'row',
 		},
+
+		'& .ss__facets': {
+			width: '100%',
+		},
 	});
 };
 
@@ -58,6 +61,7 @@ export const MobileSidebar = observer((properties: MobileSidebarProps): JSX.Elem
 		openButtonText: 'Filters',
 		clearButtonText: 'Clear All',
 		applyButtonText: 'Apply',
+		layout: ['filterSummary', 'sortBy', 'perPage', 'facets', 'banner.left'],
 		titleText: 'Filter Options',
 		displayAt: '',
 		closeButtonIcon: 'close-thin',
@@ -68,12 +72,9 @@ export const MobileSidebar = observer((properties: MobileSidebarProps): JSX.Elem
 
 	const {
 		controller,
-		hideFacets,
-		hideFilterSummary,
-		hidePerPage,
+		layout,
 		hideHeader,
 		hideFooter,
-		hideSortBy,
 		hideApplyButton,
 		clearButtonIcon,
 		hideCloseButton,
@@ -85,11 +86,11 @@ export const MobileSidebar = observer((properties: MobileSidebarProps): JSX.Elem
 		closeButtonIcon,
 		openButtonIcon,
 		titleText,
-		hideTitleText,
 		hideCloseButtonText,
 		hideOpenButtonText,
 		hideClearButtonText,
 		hideApplyButtonText,
+		hideTitleText,
 		displayAt,
 		hideClearButton,
 		disableStyles,
@@ -122,13 +123,8 @@ export const MobileSidebar = observer((properties: MobileSidebarProps): JSX.Elem
 			theme: props?.theme,
 			treePath,
 		},
-		sidebar: {
+		layout: {
 			// default props
-			hideTitle: true,
-			hideFacets: hideFacets,
-			hidePerPage: hidePerPage,
-			hideSortBy: hideSortBy,
-			hideFilterSummary: hideFilterSummary,
 			// inherited props
 			...defined({
 				disableStyles,
@@ -222,7 +218,9 @@ export const MobileSidebar = observer((properties: MobileSidebarProps): JSX.Elem
 					</div>
 				)}
 
-				<Sidebar className="ss__mobile-sidebar__body" controller={controller} {...subProps.sidebar} />
+				<div className={classnames('ss__mobile-sidebar__inner')}>
+					<Layout controller={controller} layout={layout || []} {...subProps.layout} />
+				</div>
 
 				{!hideFooter && (
 					<div className="ss__mobile-sidebar__footer">
@@ -275,7 +273,7 @@ export const MobileSidebar = observer((properties: MobileSidebarProps): JSX.Elem
 							{...subProps.button}
 							name={'slideout'}
 							lang={{ button: lang.openButtonText }}
-						></Button>
+						/>
 					}
 					{...subProps.slideout}
 				>
@@ -288,29 +286,26 @@ export const MobileSidebar = observer((properties: MobileSidebarProps): JSX.Elem
 
 export interface MobileSidebarProps extends ComponentProps {
 	controller: SearchController;
+	layout?: SideBarModuleNames[] | SideBarModuleNames[][];
 	titleText?: string;
-	hideTitleText?: boolean;
 	hideOpenButtonText?: boolean;
 	hideClearButtonText?: boolean;
 	hideApplyButtonText?: boolean;
 	hideCloseButtonText?: boolean;
 	openButtonText?: string;
 	clearButtonText?: string;
+	applyButtonText?: string;
+	closeButtonText?: string;
 	applyButtonIcon?: IconType | Partial<IconProps>;
 	clearButtonIcon?: IconType | Partial<IconProps>;
-	applyButtonText?: string;
 	closeButtonIcon?: IconType | Partial<IconProps>;
 	openButtonIcon?: IconType | Partial<IconProps>;
+	hideTitleText?: boolean;
 	hideHeader?: boolean;
 	hideFooter?: boolean;
-	hideFacets?: boolean;
-	hidePerPage?: boolean;
-	hideSortBy?: boolean;
-	hideFilterSummary?: boolean;
 	hideApplyButton?: boolean;
 	hideClearButton?: boolean;
 	hideCloseButton?: boolean;
-	closeButtonText?: string;
 	displayAt?: string;
 	lang?: Partial<MobileSidebarLang>;
 }
@@ -326,7 +321,7 @@ export interface MobileSidebarLang {
 }
 
 interface MobileSidebarSubProps {
-	sidebar: Partial<SidebarProps>;
 	slideout: Partial<SlideoutProps>;
 	button: Partial<ButtonProps>;
+	layout: Partial<LayoutProps>;
 }

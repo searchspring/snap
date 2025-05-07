@@ -24,8 +24,8 @@ const facetPaletteStyleScript = ({ theme }: FacetPaletteOptionsProps) => {
 			},
 
 			'.ss__facet-palette-options__option__palette': {
-				borderRadius: '3px',
-				border: '0px',
+				border: '2px solid #e6e6e6',
+
 				'.ss__facet-palette-options__icon': {
 					opacity: 1,
 					stroke: 'gray',
@@ -44,23 +44,20 @@ const facetPaletteStyleScript = ({ theme }: FacetPaletteOptionsProps) => {
 };
 
 // FacetPaletteOptions component props
-export const facetPaletteOptions: ThemeComponentProps<FacetPaletteOptionsProps> = {
+export const facetPaletteOptions: ThemeComponent<'facetPaletteOptions', FacetPaletteOptionsProps> = {
 	default: {
-		themeStyleScript: facetPaletteStyleScript,
-		gapSize: '3px',
-		hideLabel: true,
-		columns: 5,
-		hideIcon: false,
-		theme: {
-			components: {
-				icon: {
-					size: '50%',
-					icon: 'check-thin',
-				},
+		props: {
+			themeStyleScript: facetPaletteStyleScript,
+			gapSize: '3px',
+			hideLabel: true,
+			columns: 5,
+			hideIcon: false,
+		},
+		components: {
+			'*facetPaletteOptions icon': {
+				size: '50%',
+				icon: 'check-thin',
 			},
 		},
 	},
-	mobile: {},
-	tablet: {},
-	desktop: {},
 };

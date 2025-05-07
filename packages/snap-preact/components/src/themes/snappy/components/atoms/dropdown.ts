@@ -17,11 +17,10 @@ const dropdownStyleScript = ({ theme }: DropdownProps) => {
 };
 
 // Dropdown component props
-export const dropdown: ThemeComponentProps<DropdownProps> = {
+export const dropdown: ThemeComponent<'dropdown', DropdownProps> = {
 	default: {
-		themeStyleScript: dropdownStyleScript,
+		props: {
+			themeStyleScript: dropdownStyleScript,
+		},
 	},
-	mobile: {},
-	tablet: {},
-	desktop: {},
 };

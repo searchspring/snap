@@ -19,11 +19,11 @@ The required `controller` prop specifies a reference to the search controller.
 <Sidebar controller={controller} />
 ```
 
-### hideTitle
-The `hideTitle` prop will disable the sidebar title from rendering.
+### hideTitleText
+The `hideTitleText` prop will disable the sidebar title from rendering.
 
 ```jsx
-<Sidebar controller={controller} hideTitle />
+<Sidebar controller={controller} hideTitleText />
 ```
 
 ### titleText

@@ -1,5 +1,6 @@
 import { css } from '@emotion/react';
 import type { RecommendationBundleProps } from '../../../../components/Templates/RecommendationBundle';
+import { recommendationBundleThemeComponentProps } from '../../../themeComponents/recommendationBundle';
 
 // CSS in JS style script for the RecommendationBundle component
 const recommendationBundleStyleScript = ({ theme }: any) => {
@@ -18,12 +19,16 @@ const recommendationBundleStyleScript = ({ theme }: any) => {
 	});
 };
 
-// RecommendationBundle component props
-export const recommendationBundle: ThemeComponentProps<RecommendationBundleProps> = {
+// RecommendationBundle component props come from Template export
+export const recommendationBundle: ThemeComponent<'recommendationBundle', RecommendationBundleProps> = {
 	default: {
-		themeStyleScript: recommendationBundleStyleScript,
+		props: {
+			...recommendationBundleThemeComponentProps.default?.props,
+			themeStyleScript: recommendationBundleStyleScript,
+		},
+		components: recommendationBundleThemeComponentProps.default?.components,
 	},
-	mobile: {},
-	tablet: {},
-	desktop: {},
+	mobile: recommendationBundleThemeComponentProps.mobile,
+	desktop: recommendationBundleThemeComponentProps.desktop,
+	tablet: recommendationBundleThemeComponentProps.tablet,
 };

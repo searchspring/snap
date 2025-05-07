@@ -14,11 +14,10 @@ const imageStyleScript = ({ visibility, theme }: ImageProps & { visibility: Reac
 };
 
 // Image component props
-export const image: ThemeComponentProps<ImageProps> = {
+export const image: ThemeComponent<'image', ImageProps> = {
 	default: {
-		themeStyleScript: imageStyleScript,
+		props: {
+			themeStyleScript: imageStyleScript,
+		},
 	},
-	mobile: {},
-	tablet: {},
-	desktop: {},
 };

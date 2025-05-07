@@ -21,6 +21,9 @@ describe('Theme variables work', () => {
 								searchHeader: {
 									titleText: 'default title text',
 								},
+								search: {
+									toggleSidebarStartClosed: false,
+								},
 							},
 							responsive: [
 								{
@@ -101,6 +104,9 @@ describe('Theme variables work', () => {
 							components: {
 								searchHeader: {
 									titleText: 'default title text',
+								},
+								search: {
+									toggleSidebarStartClosed: false,
 								},
 							},
 							responsive: [
@@ -184,6 +190,13 @@ describe('Theme variables work', () => {
 						// accent: '#3a23ad',
 						//     }
 						// },
+						overrides: {
+							components: {
+								search: {
+									toggleSidebarStartClosed: false,
+								},
+							},
+						},
 					},
 				},
 				search: {
@@ -228,6 +241,13 @@ describe('Theme variables work', () => {
 								primary: 'rgb(33, 33, 255)',
 								secondary: 'rgb(44, 44, 255)',
 								accent: 'rgb(55, 55, 255)',
+							},
+						},
+						overrides: {
+							components: {
+								search: {
+									toggleSidebarStartClosed: false,
+								},
 							},
 						},
 					},

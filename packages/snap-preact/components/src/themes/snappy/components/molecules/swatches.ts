@@ -6,11 +6,10 @@ import type { SwatchesProps } from '../../../../components/Molecules/Swatches';
 // };
 
 // Swatches component props
-export const swatches: ThemeComponentProps<SwatchesProps> = {
+export const swatches: ThemeComponent<'swatches', SwatchesProps> = {
 	default: {
-		// themeStyleScript: swatchesStyleScript,
+		props: {
+			// themeStyleScript: swatchesStyleScript,
+		},
 	},
-	mobile: {},
-	tablet: {},
-	desktop: {},
 };

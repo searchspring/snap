@@ -101,7 +101,7 @@ export const LayoutSelector = observer((properties: LayoutSelectorProps): JSX.El
 					options={options}
 					selected={selected}
 					onSelect={(e, option) => {
-						onSelect(e, option);
+						onSelect && onSelect(e, option);
 					}}
 					lang={{
 						buttonLabel: lang.label,
@@ -115,7 +115,7 @@ export const LayoutSelector = observer((properties: LayoutSelectorProps): JSX.El
 					className={classnames('ss__layout__list', className)}
 					{...subProps.List}
 					onSelect={(e, option: ListOption) => {
-						onSelect(e, option);
+						onSelect && onSelect(e, option);
 					}}
 					options={options}
 					selected={selected}
@@ -132,7 +132,7 @@ export const LayoutSelector = observer((properties: LayoutSelectorProps): JSX.El
 					className={classnames('ss__layout__radioList', className)}
 					{...subProps.RadioList}
 					onSelect={(e, option: ListOption) => {
-						onSelect(e, option);
+						onSelect && onSelect(e, option);
 					}}
 					options={options}
 					selected={selected}
@@ -154,7 +154,7 @@ interface SelectSubProps {
 }
 
 export interface LayoutSelectorProps extends ComponentProps {
-	onSelect: (e: React.MouseEvent<HTMLElement> | React.ChangeEvent<HTMLElement>, option?: ListOption) => void;
+	onSelect?: (e: React.MouseEvent<HTMLElement> | React.ChangeEvent<HTMLElement>, option?: ListOption) => void;
 	options?: ListOption[];
 	selected?: ListOption;
 	label?: string;

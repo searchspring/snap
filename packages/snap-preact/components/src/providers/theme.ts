@@ -1,11 +1,21 @@
-import { ThemeComponentOverrides, ThemeComponentRestrictedOverrides, ThemeComponents } from './themeComponents';
+import {
+	ThemeComponentRestrictedProps,
+	ThemeComponents,
+	ThemeComponentsRestricted,
+	ThemeComponentsRestrictedOverrides,
+	ThemeComponentTemplateOverrides,
+} from './themeComponents';
 import { ListOption } from '../types';
 
 export { css, useTheme, withTheme, ThemeProvider } from '@emotion/react';
 
 export const defaultTheme: Theme = {
 	variables: {
-		breakpoints: [540, 767, 1200],
+		breakpoints: {
+			mobile: 540,
+			tablet: 767,
+			desktop: 1200,
+		},
 		colors: {
 			text: '#222222',
 			primary: '#3A23AD',
@@ -15,7 +25,11 @@ export const defaultTheme: Theme = {
 	},
 };
 
-type ThemeVariableBreakpoints = [number, number, number];
+export type ThemeVariableBreakpoints = {
+	mobile: number;
+	tablet: number;
+	desktop: number;
+};
 type ThemeVaraibleColors = {
 	text?: string;
 	primary: string;
@@ -33,18 +47,44 @@ export type ThemeVariablesPartial = {
 	colors?: ThemeVaraibleColors;
 };
 
+export type ThemeLayoutOption = Omit<ListOption, 'overrides'> & { overrides?: ThemeMinimal };
+
 export type Theme = {
 	name?: string; // Used as a flag in components to provide backwards compatability
 	variables?: ThemeVariables;
-	responsive?: [ThemeResponsive, ThemeResponsive, ThemeResponsive];
-	components?: ThemeComponentOverrides;
-	layoutOptions?: (Omit<ListOption, 'overrides'> & { overrides: ThemeMinimal })[];
+	responsive?: ThemeResponsive;
+	components?: ThemeComponents;
 	overrides?: ThemeOverrides;
+};
+
+export type ThemeComponent<ComponentName extends string, ComponentProps> = {
+	default?: ThemeComponentProperties<ComponentName, ComponentProps>;
+	mobile?: ThemeComponentProperties<ComponentName, ComponentProps>;
+	tablet?: ThemeComponentProperties<ComponentName, ComponentProps>;
+	desktop?: ThemeComponentProperties<ComponentName, ComponentProps>;
+};
+
+export type ThemeComponentProperties<ComponentName extends string, ComponentProps> = {
+	props?: ThemeComponentRestrictedProps<ComponentProps>;
+	components?: ThemeComponentTemplateOverrides<ComponentName>;
 };
 
 export type ThemeComplete = Required<Omit<Theme, 'overrides'>> & { components: ThemeComponents };
 
-export type ThemeResponsive = Pick<Theme, 'layoutOptions'> & { components?: ThemeComponentRestrictedOverrides };
+export type ThemeResponsive = {
+	mobile?: ThemeComponentsRestricted;
+	tablet?: ThemeComponentsRestricted;
+	desktop?: ThemeComponentsRestricted;
+};
+
+export type ThemeResponsiveComplete = ThemeResponsive & { default?: ThemeComponentsRestricted };
+
+export type ThemeResponsiveOverrides = {
+	mobile?: ThemeComponentsRestrictedOverrides;
+	tablet?: ThemeComponentsRestrictedOverrides;
+	desktop?: ThemeComponentsRestrictedOverrides;
+};
+
 export type ThemePartial = Omit<Theme, 'variables' | 'name'> & { variables?: ThemeVariablesPartial };
-export type ThemeOverrides = Pick<Theme, 'layoutOptions' | 'responsive'> & { components?: ThemeComponentRestrictedOverrides };
-export type ThemeMinimal = Pick<Theme, 'components'>;
+export type ThemeOverrides = { components?: ThemeComponentsRestrictedOverrides; responsive?: ThemeResponsiveOverrides };
+export type ThemeMinimal = { components?: ThemeComponents };

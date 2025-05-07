@@ -11,11 +11,10 @@ const searchInputStyleScript = ({ theme }: SearchInputProps) => {
 };
 
 // SearchInput component props
-export const searchInput: ThemeComponentProps<SearchInputProps> = {
+export const searchInput: ThemeComponent<'searchInput', SearchInputProps> = {
 	default: {
-		themeStyleScript: searchInputStyleScript,
+		props: {
+			themeStyleScript: searchInputStyleScript,
+		},
 	},
-	mobile: {},
-	tablet: {},
-	desktop: {},
 };

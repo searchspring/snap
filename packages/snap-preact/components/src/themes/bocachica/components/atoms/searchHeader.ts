@@ -19,11 +19,11 @@ const searchHeaderStyleScript = ({ theme }: SearchHeaderProps) => {
 };
 
 // SearchHeader component props
-export const searchHeader: ThemeComponentProps<SearchHeaderProps> = {
+export const searchHeader: ThemeComponent<'searchHeader', SearchHeaderProps> = {
 	default: {
-		themeStyleScript: searchHeaderStyleScript,
+		props: {
+			themeStyleScript: searchHeaderStyleScript,
+			titleText: (data) => `Search Results${data.search?.query?.string ? ` for "${data.search.query.string}"` : ''}`,
+		},
 	},
-	mobile: {},
-	tablet: {},
-	desktop: {},
 };

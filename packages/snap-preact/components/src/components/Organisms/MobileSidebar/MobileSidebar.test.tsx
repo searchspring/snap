@@ -469,9 +469,8 @@ describe('MobileSidebar Component', () => {
 			expect(title).not.toBeInTheDocument();
 		});
 	});
-
-	it('can hide hideFacets', async () => {
-		const rendered = render(<MobileSidebar controller={controller} hideFacets={true} />);
+	it('can hide Facets', async () => {
+		const rendered = render(<MobileSidebar controller={controller} layout={['filterSummary', 'sortBy', 'perPage', 'banner.left']} />);
 		const slideoutButton = rendered.container.querySelector('.ss__mobile-sidebar__slideout__button');
 		userEvent.click(slideoutButton!);
 
@@ -484,7 +483,7 @@ describe('MobileSidebar Component', () => {
 	});
 
 	it('can hide perpage', async () => {
-		const rendered = render(<MobileSidebar controller={controller} hidePerPage={true} />);
+		const rendered = render(<MobileSidebar controller={controller} layout={['filterSummary', 'sortBy', 'facets', 'banner.left']} />);
 		const slideoutButton = rendered.container.querySelector('.ss__mobile-sidebar__slideout__button');
 		userEvent.click(slideoutButton!);
 
@@ -497,7 +496,7 @@ describe('MobileSidebar Component', () => {
 	});
 
 	it('can hide hideSortBy', async () => {
-		const rendered = render(<MobileSidebar controller={controller} hideSortBy={true} />);
+		const rendered = render(<MobileSidebar controller={controller} layout={['filterSummary', 'perPage', 'facets', 'banner.left']} />);
 		const slideoutButton = rendered.container.querySelector('.ss__mobile-sidebar__slideout__button');
 		userEvent.click(slideoutButton!);
 
@@ -510,7 +509,7 @@ describe('MobileSidebar Component', () => {
 	});
 
 	it('can hide FilterSummary', async () => {
-		const rendered = render(<MobileSidebar controller={controller} hideFilterSummary={true} />);
+		const rendered = render(<MobileSidebar controller={controller} layout={['sortBy', 'perPage', 'facets', 'banner.left']} />);
 		const slideoutButton = rendered.container.querySelector('.ss__mobile-sidebar__slideout__button');
 		userEvent.click(slideoutButton!);
 
@@ -522,7 +521,7 @@ describe('MobileSidebar Component', () => {
 		});
 	});
 
-	it('can hide hideApplyButton', async () => {
+	it('can hide ApplyButton', async () => {
 		const rendered = render(<MobileSidebar controller={controller} hideApplyButton={true} />);
 		const slideoutButton = rendered.container.querySelector('.ss__mobile-sidebar__slideout__button');
 		userEvent.click(slideoutButton!);

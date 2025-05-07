@@ -1,17 +1,25 @@
-// import { css } from '@emotion/react';
+import { css } from '@emotion/react';
 import type { RecommendationBundleListProps } from '../../../../components/Templates/RecommendationBundleList';
+import { recommendationBundleListThemeComponentProps } from '../../../themeComponents/recommendationBundleList';
 
-// CSS in JS style script for the RecommendationBundleList component
-// const recommendationBundleListStyleScript = ({}: RecommendationBundleListProps) => {
-// 	return css({});
-// };
+// CSS in JS style script for the RecommendationBundle component
+const recommendationBundleListStyleScript = ({ theme }: RecommendationBundleListProps) => {
+	// eslint-disable-next-line @typescript-eslint/no-unused-vars
+	const variables = theme?.variables;
 
-// RecommendationBundleList component props
-export const recommendationBundleList: ThemeComponentProps<RecommendationBundleListProps> = {
+	return css({});
+};
+
+// RecommendationBundleList component props come from Template export
+export const recommendationBundleList: ThemeComponent<'recommendationBundleList', RecommendationBundleListProps> = {
 	default: {
-		// themeStyleScript: recommendationBundleListStyleScript,
+		props: {
+			...recommendationBundleListThemeComponentProps.default?.props,
+			themeStyleScript: recommendationBundleListStyleScript,
+		},
+		components: recommendationBundleListThemeComponentProps.default?.components,
 	},
-	mobile: {},
-	tablet: {},
-	desktop: {},
+	mobile: recommendationBundleListThemeComponentProps.mobile,
+	desktop: recommendationBundleListThemeComponentProps.desktop,
+	tablet: recommendationBundleListThemeComponentProps.tablet,
 };

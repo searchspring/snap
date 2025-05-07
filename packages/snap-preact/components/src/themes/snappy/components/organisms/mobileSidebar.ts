@@ -27,7 +27,7 @@ const mobileSidebarStyleScript = ({ theme }: MobileSidebarProps) => {
 			padding: '5px',
 		},
 
-		[`@media (max-width: ${variables?.breakpoints[2]}px)`]: {
+		[`@media (max-width: ${variables?.breakpoints.desktop}px)`]: {
 			'.ss__mobile-sidebar__body': {
 				//83px is the height of the footer & footer
 				height: 'calc(100vh - 140px)',
@@ -50,16 +50,13 @@ const mobileSidebarStyleScript = ({ theme }: MobileSidebarProps) => {
 };
 
 // MobileSidebar component props
-export const mobileSidebar: ThemeComponentProps<MobileSidebarProps> = {
+export const mobileSidebar: ThemeComponent<'mobileSidebar', MobileSidebarProps> = {
 	default: {
-		themeStyleScript: mobileSidebarStyleScript,
-		openButtonIcon: 'filters',
+		props: {
+			themeStyleScript: mobileSidebarStyleScript,
+			layout: ['perPage', 'facets', 'banner.left'],
+			hideOpenButtonText: true,
+			openButtonIcon: 'filters',
+		},
 	},
-	mobile: {
-		hideSortBy: true,
-		hideOpenButtonText: true,
-		hideFilterSummary: true,
-	},
-	tablet: {},
-	desktop: {},
 };

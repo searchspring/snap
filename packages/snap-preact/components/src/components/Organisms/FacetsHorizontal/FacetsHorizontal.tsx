@@ -20,6 +20,8 @@ import { useEffect } from 'react';
 
 const defaultStyles: StyleScript<FacetsHorizontalProps> = ({}) => {
 	return css({
+		margin: '10px 0px',
+
 		'& .ss__facets-horizontal__header': {
 			display: 'flex',
 			flexWrap: 'wrap',
@@ -97,6 +99,7 @@ export const FacetsHorizontal = observer((properties: FacetsHorizontalProps): JS
 		limit,
 		overlay,
 		alwaysShowFiltersButton,
+		hideFiltersButton,
 		onFacetOptionClick,
 		iconExpand,
 		iconCollapse,
@@ -190,8 +193,6 @@ export const FacetsHorizontal = observer((properties: FacetsHorizontalProps): JS
 		MobileSidebar: {
 			// default props
 			className: 'ss__facets-horizontal__header__mobile-sidebar',
-			hidePerPage: true,
-			hideSortBy: true,
 			// inherited props
 			...defined({
 				disableStyles,
@@ -282,7 +283,9 @@ export const FacetsHorizontal = observer((properties: FacetsHorizontalProps): JS
 							</Dropdown>
 						);
 					})}
-					{(isOverflowing || alwaysShowFiltersButton) && <MobileSidebar controller={controller as any} {...subProps.MobileSidebar}></MobileSidebar>}
+					{!hideFiltersButton && (isOverflowing || alwaysShowFiltersButton) && (
+						<MobileSidebar controller={controller as any} {...subProps.MobileSidebar}></MobileSidebar>
+					)}
 				</div>
 
 				{!overlay && selectedFacet && (
@@ -324,6 +327,7 @@ export interface FacetsHorizontalProps extends ComponentProps {
 	limit?: number;
 	overlay?: boolean;
 	alwaysShowFiltersButton?: boolean;
+	hideFiltersButton?: boolean;
 	iconCollapse?: IconType | Partial<IconProps>;
 	iconExpand?: IconType | Partial<IconProps>;
 	controller?: SearchController | AutocompleteController;

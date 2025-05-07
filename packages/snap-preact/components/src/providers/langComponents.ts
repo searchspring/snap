@@ -61,10 +61,12 @@ import type { SidebarLang } from '../components/Organisms/Sidebar';
 // import type { ToolbarLang } from '../components/Organisms/Toolbar';
 
 /* TEMPLATES */
-import type { AutocompleteLang } from '../components/Templates/Autocomplete';
 // import type { AutocompleteTermsLang } from '../components/Templates/AutocompleteTerms';
 import type { RecommendationLang } from '../components/Templates/Recommendation';
 import type { SearchLang } from '../components/Templates/Search';
+import { AutocompleteTemplateLang } from '../components/Templates/AutocompleteTemplate';
+import { TermsListLang } from '../components/Organisms/TermsList';
+import { TermsLang } from '../components/Molecules/Terms';
 // import type { SearchHorizontalLang } from '../components/Templates/SearchHorizontal';
 
 // type ComponentLang> = Partial<ComponentLang> & { named?: Partial<{ [named?: Partial<string]?: Partial<Partial<ComponentLang> } };
@@ -135,7 +137,6 @@ export type LangComponentOverrides = {
 	// toolbar?: Partial<ToolbarLang>
 
 	/* TEMPLATES */
-	autocomplete?: Partial<AutocompleteLang>;
 	// autocompleteTerms?: Partial<AutocompleteTermsLang>;
 	recommendation?: Partial<RecommendationLang>;
 	search?: Partial<SearchLang>;
@@ -190,6 +191,7 @@ export type LangComponents = {
 	select: SelectLang;
 	// slideout: SlideoutLang;
 	sortBy: SortByLang;
+	terms: TermsLang;
 	// swatches: SwatchesLang
 	// variantSelection: VariantSelectionLang
 
@@ -203,13 +205,14 @@ export type LangComponents = {
 	// results: ResultsLang
 	searchHeader: SearchHeaderLang;
 	sidebar: SidebarLang;
+	termList: TermsListLang;
 	mobileSidebar: MobileSidebarLang;
 	// toolbar: ToolbarLang
 
 	/* TEMPLATES */
-	autocomplete: AutocompleteLang;
 	// autocompleteTerms: AutocompleteTermsLang;
 	recommendation: RecommendationLang;
 	search: SearchLang;
+	autocompleteTemplate: AutocompleteTemplateLang;
 	// searchHorizontal: SearchHorizontalLang
 };

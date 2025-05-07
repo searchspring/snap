@@ -52,6 +52,17 @@ export default {
 			},
 			control: { type: 'text' },
 		},
+		toggleSidebarStartClosed: {
+			defaultValue: false,
+			description: 'determines if the sidebar toggle should start closed',
+			table: {
+				type: {
+					summary: 'boolean',
+				},
+				defaultValue: { summary: false },
+			},
+			control: { type: 'boolean' },
+		},
 		hideToggleSidebarButton: {
 			defaultValue: false,
 			description: 'hide the toggle Sidebar button',
@@ -85,18 +96,7 @@ export default {
 			},
 			control: { type: 'boolean' },
 		},
-		hideSearchHeader: {
-			defaultValue: false,
-			description: 'prevents the SearchHeader component from rendering',
-			table: {
-				type: {
-					summary: 'boolean',
-				},
-				defaultValue: { summary: false },
-			},
-			control: { type: 'boolean' },
-		},
-		hideTopToolBar: {
+		hideTopToolbar: {
 			defaultValue: false,
 			description: 'prevents the top Toolbar component from rendering',
 			table: {
@@ -107,7 +107,18 @@ export default {
 			},
 			control: { type: 'boolean' },
 		},
-		hideBottomToolBar: {
+		hideMiddleToolbar: {
+			defaultValue: false,
+			description: 'prevents the middle Toolbar component from rendering',
+			table: {
+				type: {
+					summary: 'boolean',
+				},
+				defaultValue: { summary: false },
+			},
+			control: { type: 'boolean' },
+		},
+		hideBottomToolbar: {
 			defaultValue: false,
 			description: 'prevents the bottom Toolbar component from rendering',
 			table: {
@@ -118,16 +129,13 @@ export default {
 			},
 			control: { type: 'boolean' },
 		},
-		hideMerchandisingBanners: {
-			defaultValue: false,
-			description: 'hides merchandising banners. Accepts a boolean, or array of banner ContentTypes to hide.',
+		resultComponent: {
+			description: 'Slot for custom result component',
 			table: {
 				type: {
-					summary: 'boolean | ContentType[]',
+					summary: 'component',
 				},
-				defaultValue: { summary: false },
 			},
-			control: { type: 'boolean' },
 		},
 		...componentArgs,
 	},

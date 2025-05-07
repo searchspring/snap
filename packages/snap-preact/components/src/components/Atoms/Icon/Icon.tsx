@@ -89,7 +89,7 @@ export type SVGPathElement = {
 
 export interface IconProps extends ComponentProps {
 	color?: string;
-	icon?: IconType;
+	icon?: IconType | false;
 	path?: string | SVGPathElement[];
 	children?: ComponentChildren;
 	size?: string | number;

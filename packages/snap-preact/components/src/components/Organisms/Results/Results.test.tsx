@@ -3,14 +3,21 @@ import { render, waitFor } from '@testing-library/preact';
 import { Results } from './Results';
 import { ResultsLayout as Layout } from '../../../types';
 import { Theme, ThemeProvider } from '../../../providers';
+import { v4 as uuidv4 } from 'uuid';
 import userEvent from '@testing-library/user-event';
-import { SearchResultStore } from '@searchspring/snap-store-mobx';
-import { UrlManager, UrlTranslator } from '@searchspring/snap-url-manager';
+import { SearchResultStore, SearchStore, SearchStoreConfig } from '@searchspring/snap-store-mobx';
+import { QueryStringTranslator, reactLinker, UrlManager, UrlTranslator } from '@searchspring/snap-url-manager';
 
-import { MockData } from '@searchspring/snap-shared';
+import { MockClient, MockData } from '@searchspring/snap-shared';
+import { SearchController, SearchControllerConfig } from '@searchspring/snap-controller';
+import { EventManager } from '@searchspring/snap-event-manager';
+import { Logger } from '@searchspring/snap-logger';
+import { Tracker } from '@searchspring/snap-tracker';
+import { Profiler } from '@searchspring/snap-profiler';
 
 const mockData = new MockData();
 const searchResponse = mockData.searchMeta();
+const globals = { siteId: '8uyt2m' };
 
 const mockResults = new SearchResultStore({
 	config: { id: 'test' },
@@ -20,6 +27,21 @@ const mockResults = new SearchResultStore({
 		meta: searchResponse.meta,
 	},
 });
+
+const searchConfigDefault: SearchControllerConfig = {
+	id: 'search',
+	globals: {
+		filters: [],
+	},
+	settings: {},
+};
+
+let searchConfig: SearchStoreConfig;
+const urlManager = new UrlManager(new QueryStringTranslator(), reactLinker);
+const services = { urlManager };
+let controller: SearchController;
+
+const mockClient = new MockClient(globals, {});
 
 describe('Results Component', () => {
 	const DetailSlot = () => {
@@ -128,6 +150,41 @@ describe('Results Component', () => {
 		// to deal with render delay
 		await waitFor(() => {
 			expect(resultsElement).toHaveClass('ss__results-grid');
+		});
+	});
+
+	it('renders with custom resultComponent', async () => {
+		const customResultClass = 'customResult';
+		const customResultComponent = (props: any) => {
+			const { result } = props;
+			return <div className={customResultClass}>{result.id}</div>;
+		};
+
+		searchConfig = { ...searchConfigDefault };
+		searchConfig.id = uuidv4().split('-').join('');
+
+		controller = new SearchController(searchConfig, {
+			client: mockClient,
+			store: new SearchStore(searchConfig, services),
+			urlManager,
+			eventManager: new EventManager(),
+			profiler: new Profiler(),
+			logger: new Logger(),
+			tracker: new Tracker(globals),
+		});
+
+		await controller.search();
+
+		const rendered = render(<Results controller={controller} results={mockResults} resultComponent={customResultComponent} />);
+
+		const element = rendered.container.querySelector('.ss__results');
+		const results = rendered.container.querySelectorAll(`.${customResultClass}`);
+
+		expect(element).toBeInTheDocument();
+
+		expect(results).toHaveLength(mockResults.length);
+		results.forEach((result, idx) => {
+			expect(result.textContent).toBe(mockResults[idx].id);
 		});
 	});
 

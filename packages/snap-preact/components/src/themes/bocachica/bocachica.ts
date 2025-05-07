@@ -1,10 +1,13 @@
 import { ThemeComplete, ThemeVariables } from '../../providers';
 import { components } from './components';
-import { defaultLayoutOptions } from './layoutOptions';
 import { responsive } from './responsive';
 
 const bocachicaVariables: ThemeVariables = {
-	breakpoints: [767, 991, 1299],
+	breakpoints: {
+		mobile: 767,
+		tablet: 991,
+		desktop: 1299,
+	},
 	colors: {
 		text: '#222222',
 		primary: '#202223',
@@ -13,10 +16,9 @@ const bocachicaVariables: ThemeVariables = {
 	},
 };
 
-export const bocachica: ThemeComplete = {
+export const bocachica: Partial<ThemeComplete> = {
 	name: 'bocachica',
 	variables: bocachicaVariables,
 	components,
-	layoutOptions: defaultLayoutOptions,
 	responsive,
 };

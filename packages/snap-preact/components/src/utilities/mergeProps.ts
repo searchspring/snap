@@ -1,5 +1,5 @@
 import type { ComponentProps } from '../types';
-import type { Theme, ThemeComponentOverrides } from '../providers';
+import type { Theme, ThemeComponents } from '../providers';
 
 export function mergeProps<GenericComponentProps = ComponentProps>(
 	componentType: string,
@@ -29,8 +29,12 @@ export function mergeProps<GenericComponentProps = ComponentProps>(
 
 	const theme = (props as ComponentProps).theme;
 	const componentName = (props as any)?.name;
+
 	let treePath = (props as ComponentProps).treePath || (defaultProps as ComponentProps).treePath || '';
-	treePath += `${treePath ? ' ' : ''}${componentType}`;
+
+	if (componentType !== 'layout') {
+		treePath += `${treePath ? ' ' : ''}${componentType}`;
+	}
 
 	// start with defaultProps
 	let mergedProps = {
@@ -66,8 +70,10 @@ export function mergeProps<GenericComponentProps = ComponentProps>(
 
 		treePath += componentName?.match(/^[A-Z,a-z,-]+$/) ? `.${componentName}` : '';
 
+		// component props from the theme
 		// add globalTheme props for components with selector matches if they exist
-		const globalApplicableSelectors = filterSelectors(globalTheme?.components || {}, treePath).sort(sortSelectors);
+		const filteredGlobalApplicableSelectors = filterSelectors(globalTheme?.components || {}, treePath);
+		const globalApplicableSelectors = filteredGlobalApplicableSelectors.sort(sortSelectors);
 		globalApplicableSelectors.forEach((selector) => {
 			const componentProps = globalTheme.components?.[selector as keyof typeof globalTheme.components];
 			if (componentProps) {
@@ -75,6 +81,7 @@ export function mergeProps<GenericComponentProps = ComponentProps>(
 			}
 		});
 
+		// og theme prop in default components
 		// add theme props for components with selector matches if they exist
 		const themeApplicableSelectors = filterSelectors(theme?.components || {}, treePath).sort(sortSelectors);
 		themeApplicableSelectors.forEach((selector) => {
@@ -84,7 +91,7 @@ export function mergeProps<GenericComponentProps = ComponentProps>(
 			}
 		});
 
-		// tacking on name, variables and layoutOptions to `theme`
+		// tacking on name and variables to `theme`
 		mergedProps = {
 			...mergedProps,
 			theme: {
@@ -100,9 +107,6 @@ export function mergeProps<GenericComponentProps = ComponentProps>(
 
 		if (globalTheme.variables) {
 			(mergedProps as ComponentProps).theme!.variables = globalTheme.variables;
-		}
-		if (globalTheme.layoutOptions) {
-			(mergedProps as ComponentProps).theme!.layoutOptions = globalTheme.layoutOptions;
 		}
 
 		//if custom component, re-spread props again
@@ -133,16 +137,16 @@ export function sortSelectors(a: string, b: string): number {
 	const aWeight = a
 		.split(' ')
 		.map((selector, i) => (i * 2) ** (selector.includes('.') ? 2 : 1))
-		.reduce((acc, val) => acc + val, 0);
+		.reduce((acc, val) => acc + val, a.includes('*') ? 0 : 1000);
 	const bWeight = b
 		.split(' ')
 		.map((selector, i) => (i * 2) ** (selector.includes('.') ? 2 : 1))
-		.reduce((acc, val) => acc + val, 0);
+		.reduce((acc, val) => acc + val, b.includes('*') ? 0 : 1000);
 
 	return aWeight - bWeight;
 }
 
-export function filterSelectors(themeComponents: ThemeComponentOverrides, treePath: string): string[] {
+export function filterSelectors(themeComponents: ThemeComponents, treePath: string): string[] {
 	let selectors = Object.keys(themeComponents);
 	const paths = treePath.split(' ');
 	const componentTypeAndName = paths.splice(-1).pop() ?? '';
@@ -169,7 +173,7 @@ export function filterSelectors(themeComponents: ThemeComponentOverrides, treePa
 		selectors = selectors.filter((key) => key.endsWith(componentType));
 	}
 	return selectors.filter((selector) => {
-		const split = selector.split(' ').slice(0, -1);
+		const split = selector.replace(/\*/g, '').split(' ').slice(0, -1);
 
 		if (split.length == 0) return true;
 
