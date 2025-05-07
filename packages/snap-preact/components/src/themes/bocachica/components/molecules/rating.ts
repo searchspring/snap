@@ -6,11 +6,10 @@ import type { RatingProps } from '../../../../components/Molecules/Rating';
 // };
 
 // Rating component props
-export const rating: ThemeComponentProps<RatingProps> = {
+export const rating: ThemeComponent<'rating', RatingProps> = {
 	default: {
-		// themeStyleScript: ratingStyleScript,
+		props: {
+			// themeStyleScript: ratingStyleScript,
+		},
 	},
-	mobile: {},
-	tablet: {},
-	desktop: {},
 };

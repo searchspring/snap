@@ -11,16 +11,20 @@ const recommendationStyleScript = ({ theme }: RecommendationProps) => {
 		margin: '20px 0',
 		'& .ss__recommendation__title': {
 			color: variables?.colors?.primary,
-			textAlign: 'center',
 		},
 	});
 };
 
-// Search component props come from Template export
-export const recommendation: ThemeComponentProps<RecommendationProps> = {
-	...recommendationThemeComponentProps,
+// Recommendation component props come from Template export
+export const recommendation: ThemeComponent<'recommendation', RecommendationProps> = {
 	default: {
-		...recommendationThemeComponentProps.default,
-		themeStyleScript: recommendationStyleScript,
+		props: {
+			...recommendationThemeComponentProps.default?.props,
+			themeStyleScript: recommendationStyleScript,
+		},
+		components: recommendationThemeComponentProps.default?.components,
 	},
+	mobile: recommendationThemeComponentProps.mobile,
+	desktop: recommendationThemeComponentProps.desktop,
+	tablet: recommendationThemeComponentProps.tablet,
 };

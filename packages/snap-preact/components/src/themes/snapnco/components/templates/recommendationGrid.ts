@@ -10,10 +10,16 @@ const recommendationGridStyleScript = ({ theme }: RecommendationGridProps) => {
 	return css({});
 };
 
-export const recommendationGrid: ThemeComponentProps<RecommendationGridProps> = {
-	...recommendationGridThemeComponentProps,
+// RecommendationGrid component props come from Template export
+export const recommendationGrid: ThemeComponent<'recommendationGrid', RecommendationGridProps> = {
 	default: {
-		...recommendationGridThemeComponentProps.default,
-		themeStyleScript: recommendationGridStyleScript,
+		props: {
+			...recommendationGridThemeComponentProps.default?.props,
+			themeStyleScript: recommendationGridStyleScript,
+		},
+		components: recommendationGridThemeComponentProps.default?.components,
 	},
+	mobile: recommendationGridThemeComponentProps.mobile,
+	desktop: recommendationGridThemeComponentProps.desktop,
+	tablet: recommendationGridThemeComponentProps.tablet,
 };

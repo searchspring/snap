@@ -61,15 +61,14 @@ const facetSliderStyleScript = ({
 };
 
 // FacetSlider component props
-export const facetSlider: ThemeComponentProps<FacetSliderProps> = {
+export const facetSlider: ThemeComponent<'facetSlider', FacetSliderProps> = {
 	default: {
-		themeStyleScript: facetSliderStyleScript,
-		handleColor: 'black',
-		handleDraggingColor: 'black',
-		railColor: 'black',
-		stickyHandleLabel: true,
+		props: {
+			themeStyleScript: facetSliderStyleScript,
+			handleColor: 'black',
+			handleDraggingColor: 'black',
+			railColor: 'black',
+			stickyHandleLabel: true,
+		},
 	},
-	mobile: {},
-	tablet: {},
-	desktop: {},
 };

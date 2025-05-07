@@ -1,11 +1,10 @@
 import type { ErrorHandlerProps } from '../../../../components/Molecules/ErrorHandler';
 
 // ErrorHandler component props
-export const errorHandler: ThemeComponentProps<ErrorHandlerProps> = {
+export const errorHandler: ThemeComponent<'errorHandler', ErrorHandlerProps> = {
 	default: {
-		// themeStyleScript: ErrorHandlerStyleScript,
+		props: {
+			// themeStyleScript: ErrorHandlerStyleScript,
+		},
 	},
-	mobile: {},
-	tablet: {},
-	desktop: {},
 };

@@ -1,9 +1,25 @@
-// import { css } from '@emotion/react';
-// CSS in JS style script for the RecommendationBundleEasyAdd component
-// const recommendationBundleEasyAddStyleScript = ({}: RecommendationBundleEasyAddProps) => {
-// 	return css({});
-// };
+import { css } from '@emotion/react';
 import type { RecommendationBundleEasyAddProps } from '../../../../components/Templates/RecommendationBundleEasyAdd';
 import { recommendationBundleEasyAddThemeComponentProps } from '../../../../components/Templates/RecommendationBundleEasyAdd';
 
-export const recommendationBundleEasyAdd: ThemeComponentProps<RecommendationBundleEasyAddProps> = recommendationBundleEasyAddThemeComponentProps;
+// CSS in JS style script for the RecommendationBundle component
+const recommendationBundleEasyAddStyleScript = ({ theme }: RecommendationBundleEasyAddProps) => {
+	// eslint-disable-next-line @typescript-eslint/no-unused-vars
+	const variables = theme?.variables;
+
+	return css({});
+};
+
+// RecommendationBundleEasyAdd component props come from Template export
+export const recommendationBundleEasyAdd: ThemeComponent<'recommendationBundleEasyAdd', RecommendationBundleEasyAddProps> = {
+	default: {
+		props: {
+			...recommendationBundleEasyAddThemeComponentProps.default?.props,
+			themeStyleScript: recommendationBundleEasyAddStyleScript,
+		},
+		components: recommendationBundleEasyAddThemeComponentProps.default?.components,
+	},
+	mobile: recommendationBundleEasyAddThemeComponentProps.mobile,
+	desktop: recommendationBundleEasyAddThemeComponentProps.desktop,
+	tablet: recommendationBundleEasyAddThemeComponentProps.tablet,
+};

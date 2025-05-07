@@ -19,10 +19,16 @@ const recommendationBundleStyleScript = ({ theme }: any) => {
 	});
 };
 
-export const recommendationBundle: ThemeComponentProps<RecommendationBundleProps> = {
-	...recommendationBundleThemeComponentProps,
+// RecommendationBundle component props come from Template export
+export const recommendationBundle: ThemeComponent<'recommendationBundle', RecommendationBundleProps> = {
 	default: {
-		...recommendationBundleThemeComponentProps.default,
-		themeStyleScript: recommendationBundleStyleScript,
+		props: {
+			...recommendationBundleThemeComponentProps.default?.props,
+			themeStyleScript: recommendationBundleStyleScript,
+		},
+		components: recommendationBundleThemeComponentProps.default?.components,
 	},
+	mobile: recommendationBundleThemeComponentProps.mobile,
+	desktop: recommendationBundleThemeComponentProps.desktop,
+	tablet: recommendationBundleThemeComponentProps.tablet,
 };

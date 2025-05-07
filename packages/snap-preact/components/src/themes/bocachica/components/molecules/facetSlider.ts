@@ -47,11 +47,10 @@ const facetSliderStyleScript = ({
 };
 
 // FacetSlider component props
-export const facetSlider: ThemeComponentProps<FacetSliderProps> = {
+export const facetSlider: ThemeComponent<'facetSlider', FacetSliderProps> = {
 	default: {
-		themeStyleScript: facetSliderStyleScript,
+		props: {
+			themeStyleScript: facetSliderStyleScript,
+		},
 	},
-	mobile: {},
-	tablet: {},
-	desktop: {},
 };

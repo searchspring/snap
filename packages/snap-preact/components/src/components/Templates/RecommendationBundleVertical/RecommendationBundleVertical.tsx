@@ -18,15 +18,11 @@ const defaultStyles: StyleScript<RecommendationBundleVerticalProps> = () => {
 	});
 };
 
-export const recommendationBundleVerticalThemeComponentProps: ThemeComponentProps<RecommendationBundleProps> = {
-	default: {
-		className: 'ss__recommendation-bundle-vertical',
-		ctaInline: false,
-		carousel: {
-			enabled: false,
-		},
-		separatorIcon: false,
-	},
+export const recommendationBundleVerticalThemeComponentProps: ThemeComponent<
+	'recommendationBundleVerticalThemeComponentProps',
+	RecommendationBundleVerticalProps
+> = {
+	default: {},
 	mobile: {},
 	tablet: {},
 	desktop: {},

@@ -43,20 +43,17 @@ const layoutSelectorStyleScript = ({ theme }: LayoutSelectorProps) => {
 };
 
 // LayoutSelector component props
-export const layoutSelector: ThemeComponentProps<LayoutSelectorProps> = {
+export const layoutSelector: ThemeComponent<'layoutSelector', LayoutSelectorProps> = {
 	default: {
-		themeStyleScript: layoutSelectorStyleScript,
-		type: 'list',
-		hideLabel: true,
-		theme: {
-			components: {
-				icon: {
-					size: '5px',
-				},
+		props: {
+			themeStyleScript: layoutSelectorStyleScript,
+			type: 'list',
+			hideLabel: true,
+		},
+		components: {
+			'*layoutSelector icon': {
+				size: '5px',
 			},
 		},
 	},
-	mobile: {},
-	tablet: {},
-	desktop: {},
 };

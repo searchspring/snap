@@ -13,11 +13,10 @@ const loadingBarStyleScript = ({ color, backgroundColor, theme }: LoadingBarProp
 };
 
 // LoadingBar component props
-export const loadingBar: ThemeComponentProps<LoadingBarProps> = {
+export const loadingBar: ThemeComponent<'loadingBar', LoadingBarProps> = {
 	default: {
-		themeStyleScript: loadingBarStyleScript,
+		props: {
+			themeStyleScript: loadingBarStyleScript,
+		},
 	},
-	mobile: {},
-	tablet: {},
-	desktop: {},
 };

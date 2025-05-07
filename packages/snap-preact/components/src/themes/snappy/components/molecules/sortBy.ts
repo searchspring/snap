@@ -39,28 +39,24 @@ const sortByStyleScript = () => {
 };
 
 // SortBy component props
-export const sortBy: ThemeComponentProps<SortByProps> = {
+export const sortBy: ThemeComponent<'sortBy', SortByProps> = {
 	default: {
-		themeStyleScript: sortByStyleScript,
-		theme: {
-			components: {
-				icon: {
-					size: '12px',
-					icon: 'angle-down',
-				},
+		props: {
+			themeStyleScript: sortByStyleScript,
+		},
+		components: {
+			'*sortBy icon': {
+				size: '12px',
+				icon: 'angle-down',
 			},
 		},
 	},
 	mobile: {
-		theme: {
-			components: {
-				select: {
-					hideSelection: true,
-					separator: '',
-				},
+		components: {
+			'*sortBy select': {
+				hideSelection: true,
+				separator: '',
 			},
 		},
 	},
-	tablet: {},
-	desktop: {},
 };

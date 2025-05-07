@@ -3,67 +3,72 @@ import { observer } from 'mobx-react-lite';
 import type { SearchController } from '@searchspring/snap-controller';
 import { mergeProps } from '../../../utilities';
 import { ComponentProps } from '../../../types';
-import { Theme, useTheme, CacheProvider } from '../../../providers';
+import { Theme, useTheme, CacheProvider, ThemeComponent } from '../../../providers';
 import { Search, SearchProps } from '../Search/Search';
 
-export const searchSnapncoThemeComponentProps: ThemeComponentProps<SearchSnapncoProps> = {
+export const searchSnapncoThemeComponentProps: ThemeComponent<'searchSnapnco', SearchSnapncoProps> = {
 	default: {
-		lang: {
-			toggleSidebarButtonText: {
-				value: ({ sidebarOpenState }) => (sidebarOpenState ? `Close Filters` : 'Show Filters'),
+		props: {
+			lang: {
+				toggleSidebarButtonText: {
+					value: ({ sidebarOpenState }) => (sidebarOpenState ? `Close Filters` : 'Show Filters'),
+				},
 			},
 		},
-		theme: {
-			components: {
-				filterSummary: {
-					hideTitle: true,
-				},
-				sidebar: {
-					layout: [['filterSummary'], ['facets'], ['banner.left']],
-				},
-				'button.sidebar-toggle': {
-					icon: 'close-thin',
-				},
-				'toolbar.top': {
-					layout: ['banner.header'],
-				},
-				'toolbar.middle': {
-					layout: [['banner.banner'], ['searchHeader', '_', 'paginationInfo', 'sortBy']],
-				},
-				'toolbar.bottom': {
-					layout: [['banner.footer'], ['_', 'pagination', '_']],
-				},
+		components: {
+			'*searchSnapnco filterSummary': {
+				hideTitle: true,
+			},
+			'*searchSnapnco sidebar': {
+				layout: [['filterSummary'], ['facets'], ['banner.left']],
+			},
+			'*searchSnapnco button.sidebar-toggle': {
+				icon: 'close-thin',
+			},
+			'*searchSnapnco toolbar.top': {
+				layout: ['banner.header'],
+			},
+			'*searchSnapnco toolbar.middle': {
+				layout: [['banner.banner'], ['searchHeader', '_', 'paginationInfo', 'sortBy']],
+			},
+			'*searchSnapnco toolbar.bottom': {
+				layout: [['banner.footer'], ['_', 'pagination', '_']],
+			},
+			'*searchSnapnco results': {
+				columns: 4,
 			},
 		},
 	},
 	mobile: {
-		theme: {
-			components: {
-				mobileSidebar: {
-					openButtonText: 'Filters',
-					hideOpenButtonText: false,
-				},
-				'toolbar.top': {
-					layout: [['banner.header'], ['searchHeader'], ['paginationInfo'], ['banner.banner']],
-				},
-				'toolbar.middle': {
-					layout: [['mobileSidebar', '_', 'sortBy']],
-				},
+		components: {
+			'*searchSnapnco mobileSidebar': {
+				openButtonText: 'Filters',
+				hideOpenButtonText: false,
+			},
+			'*searchSnapnco toolbar.top': {
+				layout: [['banner.header'], ['searchHeader'], ['paginationInfo'], ['banner.banner']],
+			},
+			'*searchSnapnco toolbar.middle': {
+				layout: [['mobileSidebar', '_', 'sortBy']],
+			},
+			'*searchSnapnco results': {
+				columns: 2,
 			},
 		},
 	},
 	tablet: {
-		theme: {
-			components: {
-				'toolbar.top': {
-					layout: [['banner.header'], ['searchHeader']],
-				},
-				'toolbar.middle': {
-					layout: [['banner.banner'], ['paginationInfo', '_', 'mobileSidebar'], ['filterSummary']],
-				},
-				sidebar: {
-					layout: [['facets'], ['banner.left']],
-				},
+		components: {
+			'*searchSnapnco toolbar.top': {
+				layout: [['banner.header'], ['searchHeader']],
+			},
+			'*searchSnapnco toolbar.middle': {
+				layout: [['banner.banner'], ['paginationInfo', '_', 'mobileSidebar'], ['filterSummary']],
+			},
+			'*searchSnapnco sidebar': {
+				layout: [['facets'], ['banner.left']],
+			},
+			'*searchSnapnco results': {
+				columns: 3,
 			},
 		},
 	},

@@ -9,12 +9,11 @@ const termsListStyleScript = ({ theme }: TermsListProps) => {
 	return css({});
 };
 
-// Terms component props
-export const termsList: ThemeComponentProps<TermsListProps> = {
+// TermsList component props
+export const termsList: ThemeComponent<'termsList', TermsListProps> = {
 	default: {
-		styleScript: termsListStyleScript,
+		props: {
+			styleScript: termsListStyleScript,
+		},
 	},
-	mobile: {},
-	tablet: {},
-	desktop: {},
 };

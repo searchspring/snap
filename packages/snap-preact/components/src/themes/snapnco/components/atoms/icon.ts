@@ -14,11 +14,10 @@ const iconStyleScript = ({ color, height, width, size, theme }: IconProps) => {
 };
 
 // Icon component props
-export const icon: ThemeComponentProps<IconProps> = {
+export const icon: ThemeComponent<'icon', IconProps> = {
 	default: {
-		themeStyleScript: iconStyleScript,
+		props: {
+			themeStyleScript: iconStyleScript,
+		},
 	},
-	mobile: {},
-	tablet: {},
-	desktop: {},
 };

@@ -245,7 +245,7 @@ export function getOverridesAtWidth(width: number | undefined, breakpoints: Them
 		}
 	}
 
-	return overrides;
+	return { components: overrides };
 }
 
 const arrayMerge = (target: any, source: any, options: any) => {

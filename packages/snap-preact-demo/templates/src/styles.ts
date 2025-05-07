@@ -1,18 +1,22 @@
-export const globalStyles = (theme) => {
+export const globalStyles = (theme: Theme) => {
 	const { variables } = theme;
 	return {
 		'.ss__result': {
-			// background: variables.color.primary,
-			// fontSize: '200%',
+			// background: 'purple',
 		},
-		[`@media (max-width: ${variables.breakpoints[2]}px)`]: {
+		[`@media (max-width: ${variables.breakpoints.desktop}px)`]: {
 			'.ss__result': {
 				// background: 'blue',
 			},
 		},
-		[`@media (max-width: ${variables.breakpoints[1]}px)`]: {
+		[`@media (max-width: ${variables.breakpoints.tablet}px)`]: {
 			'.ss__result': {
 				// background: 'red',
+			},
+		},
+		[`@media (max-width: ${variables.breakpoints.mobile}px)`]: {
+			'.ss__result': {
+				// background: 'green',
 			},
 		},
 	};

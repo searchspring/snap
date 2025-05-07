@@ -1,84 +1,80 @@
+import { transformThemeComponent } from '../../../utils/transformThemeComponent';
+import { ThemeResponsiveComplete } from '../../../../providers';
+
 // TEMPLATES
 import { autocompleteTemplate } from './autocompleteTemplate';
-// import { recommendation } from './recommendation';
-// import { recommendationBundle } from './recommendationBundle';
-// import { recommendationBundleEasyAdd } from './recommendationBundleEasyAdd';
-// import { recommendationBundleList } from './recommendationBundleList';
-// import { recommendationBundleVertical } from './recommendationBundleVertical';
-// import { recommendationGrid } from './recommendationGrid';
-// import { recommendationEmail } from './recommendationEmail';
-// import { search } from './search';
-// import { searchHorizontal } from './searchHorizontal';
+import { recommendation } from './recommendation';
+import { recommendationBundle } from './recommendationBundle';
+import { recommendationBundleEasyAdd } from './recommendationBundleEasyAdd';
+import { recommendationBundleList } from './recommendationBundleList';
+import { recommendationBundleVertical } from './recommendationBundleVertical';
+import { recommendationGrid } from './recommendationGrid';
+import { recommendationEmail } from './recommendationEmail';
+import { search } from './search';
+import { searchHorizontal } from './searchHorizontal';
 import { searchBoca } from './searchBoca';
-// import { searchSnapnco } from './searchSnapnco';
-// import { searchSnappy } from './searchSnappy';
-// import { ThemeTemplateProperties } from '../../../../providers';
-import { getProps } from '../../../utils/getProps';
+import { searchSnapnco } from './searchSnapnco';
+import { searchSnappy } from './searchSnappy';
 
-export const templates = {
+export const templates: ThemeResponsiveComplete = {
 	default: {
-		...getProps('autocompleteTemplate', autocompleteTemplate.default),
-		// recommendation: recommendation.default,
-		// recommendationBundle: recommendationBundle.default,
-		// recommendationBundleEasyAdd: recommendationBundleEasyAdd.default,
-		// recommendationBundleList: recommendationBundleList.default,
-		// recommendationBundleVertical: recommendationBundleVertical.default,
-		// recommendationGrid: recommendationGrid.default,
-		// recommendationEmail: recommendationEmail.default,
-		// search: search.default,
-		...getProps('searchBoca', searchBoca.default),
-		// '*searchBoca': searchBoca.default?.props,
-		// ...(searchBoca.default?.components || {}),
-
-		// searchSnapnco: searchSnapnco.default,
-		// searchSnappy: searchSnappy.default,
-		// searchHorizontal: searchHorizontal.default,
+		...transformThemeComponent('autocompleteTemplate', autocompleteTemplate.default),
+		...transformThemeComponent('recommendation', recommendation.default),
+		...transformThemeComponent('recommendationBundle', recommendationBundle.default),
+		...transformThemeComponent('recommendationBundleEasyAdd', recommendationBundleEasyAdd.default),
+		...transformThemeComponent('recommendationBundleList', recommendationBundleList.default),
+		...transformThemeComponent('recommendationBundleVertical', recommendationBundleVertical.default),
+		...transformThemeComponent('recommendationGrid', recommendationGrid.default),
+		...transformThemeComponent('recommendationEmail', recommendationEmail.default),
+		...transformThemeComponent('search', search.default),
+		...transformThemeComponent('searchBoca', searchBoca.default),
+		...transformThemeComponent('searchSnapnco', searchSnapnco.default),
+		...transformThemeComponent('searchSnappy', searchSnappy.default),
+		...transformThemeComponent('searchHorizontal', searchHorizontal.default),
 	},
 	mobile: {
-		...getProps('autocompleteTemplate', autocompleteTemplate.mobile),
-		// recommendation: recommendation.mobile,
-		// recommendationBundle: recommendationBundle.mobile,
-		// recommendationBundleEasyAdd: recommendationBundleEasyAdd.mobile,
-		// recommendationBundleList: recommendationBundleList.mobile,
-		// recommendationBundleVertical: recommendationBundleVertical.mobile,
-		// recommendationGrid: recommendationGrid.mobile,
-		// recommendationEmail: recommendationEmail.mobile,
-		// search: search.mobile,
-		...getProps('searchBoca', searchBoca.mobile),
-
-		// searchSnapnco: searchSnapnco.mobile,
-		// searchSnappy: searchSnappy.mobile,
-		// searchHorizontal: searchHorizontal.mobile,
+		...transformThemeComponent('autocompleteTemplate', autocompleteTemplate.mobile),
+		...transformThemeComponent('recommendation', recommendation.mobile),
+		...transformThemeComponent('recommendationBundle', recommendationBundle.mobile),
+		...transformThemeComponent('recommendationBundleEasyAdd', recommendationBundleEasyAdd.mobile),
+		...transformThemeComponent('recommendationBundleList', recommendationBundleList.mobile),
+		...transformThemeComponent('recommendationBundleVertical', recommendationBundleVertical.mobile),
+		...transformThemeComponent('recommendationGrid', recommendationGrid.mobile),
+		...transformThemeComponent('recommendationEmail', recommendationEmail.mobile),
+		...transformThemeComponent('search', search.mobile),
+		...transformThemeComponent('searchBoca', searchBoca.mobile),
+		...transformThemeComponent('searchSnapnco', searchSnapnco.mobile),
+		...transformThemeComponent('searchSnappy', searchSnappy.mobile),
+		...transformThemeComponent('searchHorizontal', searchHorizontal.mobile),
 	},
 	tablet: {
-		...getProps('autocompleteTemplate', autocompleteTemplate.tablet),
-		// recommendation: recommendation.tablet,
-		// recommendationBundle: recommendationBundle.tablet,
-		// recommendationBundleEasyAdd: recommendationBundleEasyAdd.tablet,
-		// recommendationBundleList: recommendationBundleList.tablet,
-		// recommendationBundleVertical: recommendationBundleVertical.tablet,
-		// recommendationGrid: recommendationGrid.tablet,
-		// recommendationEmail: recommendationEmail.tablet,
-		// search: search.tablet,
-		...getProps('searchBoca', searchBoca.tablet),
-
-		// searchSnapnco: searchSnapnco.tablet,
-		// searchSnappy: searchSnappy.tablet,
-		// searchHorizontal: searchHorizontal.tablet,
+		...transformThemeComponent('autocompleteTemplate', autocompleteTemplate.tablet),
+		...transformThemeComponent('recommendation', recommendation.tablet),
+		...transformThemeComponent('recommendationBundle', recommendationBundle.tablet),
+		...transformThemeComponent('recommendationBundleEasyAdd', recommendationBundleEasyAdd.tablet),
+		...transformThemeComponent('recommendationBundleList', recommendationBundleList.tablet),
+		...transformThemeComponent('recommendationBundleVertical', recommendationBundleVertical.tablet),
+		...transformThemeComponent('recommendationGrid', recommendationGrid.tablet),
+		...transformThemeComponent('recommendationEmail', recommendationEmail.tablet),
+		...transformThemeComponent('search', search.tablet),
+		...transformThemeComponent('searchBoca', searchBoca.tablet),
+		...transformThemeComponent('searchSnapnco', searchSnapnco.tablet),
+		...transformThemeComponent('searchSnappy', searchSnappy.tablet),
+		...transformThemeComponent('searchHorizontal', searchHorizontal.tablet),
 	},
 	desktop: {
-		...getProps('autocompleteTemplate', autocompleteTemplate.desktop),
-		// recommendation: recommendation.desktop,
-		// recommendationBundle: recommendationBundle.desktop,
-		// recommendationBundleEasyAdd: recommendationBundleEasyAdd.desktop,
-		// recommendationBundleList: recommendationBundleList.desktop,
-		// recommendationBundleVertical: recommendationBundleVertical.desktop,
-		// recommendationGrid: recommendationGrid.desktop,
-		// recommendationEmail: recommendationEmail.desktop,
-		// search: search.desktop,
-		...getProps('searchBoca', searchBoca.desktop),
-		// searchSnapnco: searchSnapnco.desktop,
-		// searchSnappy: searchSnappy.desktop,
-		// searchHorizontal: searchHorizontal.desktop,
+		...transformThemeComponent('autocompleteTemplate', autocompleteTemplate.desktop),
+		...transformThemeComponent('recommendation', recommendation.desktop),
+		...transformThemeComponent('recommendationBundle', recommendationBundle.desktop),
+		...transformThemeComponent('recommendationBundleEasyAdd', recommendationBundleEasyAdd.desktop),
+		...transformThemeComponent('recommendationBundleList', recommendationBundleList.desktop),
+		...transformThemeComponent('recommendationBundleVertical', recommendationBundleVertical.desktop),
+		...transformThemeComponent('recommendationGrid', recommendationGrid.desktop),
+		...transformThemeComponent('recommendationEmail', recommendationEmail.desktop),
+		...transformThemeComponent('search', search.desktop),
+		...transformThemeComponent('searchBoca', searchBoca.desktop),
+		...transformThemeComponent('searchSnapnco', searchSnapnco.desktop),
+		...transformThemeComponent('searchSnappy', searchSnappy.desktop),
+		...transformThemeComponent('searchHorizontal', searchHorizontal.desktop),
 	},
 };

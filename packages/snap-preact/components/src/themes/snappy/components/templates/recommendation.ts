@@ -15,11 +15,16 @@ const recommendationStyleScript = ({ theme }: RecommendationProps) => {
 	});
 };
 
-// Search component props come from Template export
-export const recommendation: ThemeComponentProps<RecommendationProps> = {
-	...recommendationThemeComponentProps,
+// Recommendation component props come from Template export
+export const recommendation: ThemeComponent<'recommendation', RecommendationProps> = {
 	default: {
-		...recommendationThemeComponentProps.default,
-		themeStyleScript: recommendationStyleScript,
+		props: {
+			...recommendationThemeComponentProps.default?.props,
+			themeStyleScript: recommendationStyleScript,
+		},
+		components: recommendationThemeComponentProps.default?.components,
 	},
+	mobile: recommendationThemeComponentProps.mobile,
+	desktop: recommendationThemeComponentProps.desktop,
+	tablet: recommendationThemeComponentProps.tablet,
 };

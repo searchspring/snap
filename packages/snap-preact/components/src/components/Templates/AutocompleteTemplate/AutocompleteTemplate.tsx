@@ -14,7 +14,7 @@ import { Banner, BannerProps } from '../../Atoms/Merchandising/Banner';
 import { Facets, FacetsProps } from '../../Organisms/Facets';
 import { defined, mergeProps, mergeStyles } from '../../../utilities';
 import { createHoverProps } from '../../../toolbox';
-import { Theme, useTheme, CacheProvider, ThemeTemplate } from '../../../providers';
+import { Theme, useTheme, CacheProvider, ThemeComponent } from '../../../providers';
 import {
 	ComponentProps,
 	FacetDisplay,
@@ -191,7 +191,7 @@ const defaultStyles: StyleScript<AutocompleteTemplateProps> = ({
 	});
 };
 
-export const autocompleteThemeComponentProps: ThemeTemplate<'autocompleteTemplate', AutocompleteTemplateProps> = {
+export const autocompleteThemeComponentProps: ThemeComponent<'autocompleteTemplate', AutocompleteTemplateProps> = {
 	default: {
 		props: {},
 		components: {
@@ -223,11 +223,73 @@ export const autocompleteThemeComponentProps: ThemeTemplate<'autocompleteTemplat
 			'*autocompleteTemplate result': {
 				hideBadge: true,
 			},
+			'*autocompleteTemplate recommendationGrid': {
+				columns: 4,
+				rows: 2,
+			},
 		},
 	},
-	mobile: {},
-	tablet: {},
-	desktop: {},
+	mobile: {
+		props: {
+			layout: [['c1']],
+			column1: {
+				layout: [['termsList'], ['content'], ['_', 'button.see-more']],
+				width: '100%',
+			},
+		},
+		components: {
+			'*autocompleteTemplate results': {
+				columns: 2,
+				rows: 1,
+			},
+			'*autocompleteTemplate recommendationGrid': {
+				columns: 2,
+				rows: 1,
+			},
+		},
+	},
+	tablet: {
+		props: {
+			layout: [['c1', 'c3']],
+		},
+		components: {
+			'*autocompleteTemplate results': {
+				columns: 3,
+				rows: 1,
+			},
+			'*autocompleteTemplate recommendationGrid': {
+				columns: 3,
+				rows: 1,
+			},
+		},
+	},
+	desktop: {
+		props: {
+			// layout: [['c1', 'c2', 'c3']],
+			// column1: {
+			// 	layout: ['termsList'],
+			// 	width: '150px',
+			// },
+			// column2: {
+			// 	layout: ['facets'],
+			// 	width: '150px',
+			// },
+			// column3: {
+			// 	layout: [['content'], ['_', 'button.see-more']],
+			// 	width: 'auto',
+			// },
+		},
+		components: {
+			'*autocompleteTemplate results': {
+				columns: 2,
+				rows: 2,
+			},
+			'*autocompleteTemplate recommendationGrid': {
+				columns: 3,
+				rows: 2,
+			},
+		},
+	},
 };
 
 export const AutocompleteTemplate = observer((properties: AutocompleteTemplateProps): JSX.Element => {
@@ -708,6 +770,7 @@ export const AutocompleteTemplate = observer((properties: AutocompleteTemplatePr
 										title={recsController.store?.profile?.display?.templateParameters?.title}
 										resultComponent={RecommendationTemplateResultComponent}
 										name={'noResultsRecommendations'}
+										treePath={treePath}
 									/>
 								</div>
 							) : null}

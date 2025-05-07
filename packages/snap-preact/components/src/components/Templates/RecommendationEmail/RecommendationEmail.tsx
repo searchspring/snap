@@ -10,7 +10,7 @@ import { defined, mergeProps } from '../../../utilities';
 import { Theme, useTheme } from '../../../providers';
 import { ComponentProps, ResultComponent } from '../../../types';
 
-export const recommendationEmailThemeComponentProps: ThemeComponentProps<RecommendationEmailProps> = {
+export const recommendationEmailThemeComponentProps: ThemeComponent<'recommendationEmailThemeComponentProps', RecommendationEmailProps> = {
 	default: {},
 	mobile: {},
 	tablet: {},

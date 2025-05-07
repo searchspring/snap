@@ -11,4 +11,4 @@ import { searchHorizontalThemeComponentProps } from '../../../../components/Temp
 // };
 
 // Search component props come from Template export
-export const searchHorizontal: ThemeComponentProps<SearchHorizontalProps> = searchHorizontalThemeComponentProps;
+export const searchHorizontal: ThemeComponent<'searchHorizontal', SearchHorizontalProps> = searchHorizontalThemeComponentProps;

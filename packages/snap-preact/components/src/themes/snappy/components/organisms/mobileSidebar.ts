@@ -50,14 +50,13 @@ const mobileSidebarStyleScript = ({ theme }: MobileSidebarProps) => {
 };
 
 // MobileSidebar component props
-export const mobileSidebar: ThemeComponentProps<MobileSidebarProps> = {
+export const mobileSidebar: ThemeComponent<'mobileSidebar', MobileSidebarProps> = {
 	default: {
-		themeStyleScript: mobileSidebarStyleScript,
-		layout: ['perPage', 'facets', 'banner.left'],
-		hideOpenButtonText: true,
-		openButtonIcon: 'filters',
+		props: {
+			themeStyleScript: mobileSidebarStyleScript,
+			layout: ['perPage', 'facets', 'banner.left'],
+			hideOpenButtonText: true,
+			openButtonIcon: 'filters',
+		},
 	},
-	mobile: {},
-	tablet: {},
-	desktop: {},
 };

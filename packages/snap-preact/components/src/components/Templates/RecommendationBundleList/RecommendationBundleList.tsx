@@ -66,22 +66,11 @@ const defaultStyles: StyleScript<RecommendationBundleListProps> = () => {
 	});
 };
 
-export const recommendationBundleListThemeComponentProps: ThemeComponentProps<RecommendationBundleProps> = {
-	default: {
-		className: 'ss__recommendation-bundle-list',
-		seedText: '',
-		ctaInline: false,
-		limit: 5,
-		preselectedCount: 2,
-		carousel: {
-			enabled: false,
-			seedInCarousel: true,
-		},
-		ctaSlot: (props) => <CTASlot {...props} />,
-		resultComponent: (props) => <Result hideImage={true} {...props} />,
-		vertical: true,
-		separatorIcon: false,
-	},
+export const recommendationBundleListThemeComponentProps: ThemeComponent<
+	'recommendationBundleListThemeComponentProps',
+	RecommendationBundleListProps
+> = {
+	default: {},
 	mobile: {},
 	tablet: {},
 	desktop: {},

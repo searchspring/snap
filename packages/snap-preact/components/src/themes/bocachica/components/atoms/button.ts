@@ -23,11 +23,10 @@ const buttonStyleScript = ({ backgroundColor, theme }: ButtonProps) => {
 };
 
 // Button component props
-export const button: ThemeComponentProps<ButtonProps> = {
+export const button: ThemeComponent<'button', ButtonProps> = {
 	default: {
-		themeStyleScript: buttonStyleScript,
+		props: {
+			themeStyleScript: buttonStyleScript,
+		},
 	},
-	mobile: {},
-	tablet: {},
-	desktop: {},
 };

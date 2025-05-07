@@ -17,12 +17,11 @@ const sidebarStyleScript = ({ theme }: SidebarProps) => {
 };
 
 // Sidebar component props
-export const sidebar: ThemeComponentProps<SidebarProps> = {
+export const sidebar: ThemeComponent<'sidebar', SidebarProps> = {
 	default: {
-		themeStyleScript: sidebarStyleScript,
-		hideTitleText: true,
+		props: {
+			themeStyleScript: sidebarStyleScript,
+			hideTitleText: true,
+		},
 	},
-	mobile: {},
-	tablet: {},
-	desktop: {},
 };

@@ -27,7 +27,7 @@ export function createRecommendationTemplate(templates: TemplatesType, theme?: T
 	let recsController: RecommendationController | undefined;
 
 	if (templates?.recommendation?.enabled) {
-		const componentName = templates?.recommendation?.component || 'Recommendation';
+		const componentName = templates?.recommendation?.component || 'RecommendationGrid';
 		const snap = useSnap() as SnapTemplates;
 
 		if (snap?.templates) {

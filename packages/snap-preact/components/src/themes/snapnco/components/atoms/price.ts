@@ -15,12 +15,11 @@ const priceStyleScript = ({ theme }: PriceProps) => {
 };
 
 // Price component props
-export const price: ThemeComponentProps<PriceProps> = {
+export const price: ThemeComponent<'price', PriceProps> = {
 	default: {
-		themeStyleScript: priceStyleScript,
-		decimalPlaces: 0,
+		props: {
+			themeStyleScript: priceStyleScript,
+			decimalPlaces: 0,
+		},
 	},
-	mobile: {},
-	tablet: {},
-	desktop: {},
 };

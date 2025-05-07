@@ -11,4 +11,4 @@ import { searchThemeComponentProps } from '../../../../components/Templates/Sear
 // };
 
 // Search component props come from Template export
-export const search: ThemeComponentProps<SearchProps> = searchThemeComponentProps;
+export const search: ThemeComponent<'search', SearchProps> = searchThemeComponentProps;

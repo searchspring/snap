@@ -3,123 +3,103 @@ import { observer } from 'mobx-react-lite';
 import type { SearchController } from '@searchspring/snap-controller';
 import { mergeProps } from '../../../utilities';
 import { ComponentProps } from '../../../types';
-import { Theme, useTheme, CacheProvider } from '../../../providers';
+import { Theme, useTheme, CacheProvider, ThemeComponent } from '../../../providers';
 import { Search, SearchProps } from '../Search/Search';
 
-export const searchSnappyThemeComponentProps: ThemeComponentProps<SearchSnappyProps> = {
+export const searchSnappyThemeComponentProps: ThemeComponent<'searchSnappy', SearchSnappyProps> = {
 	default: {
-		layoutOptions: [
-			{
-				value: 1,
-				label: '',
-				default: true,
-				icon: 'layout-large',
-			},
-			{
-				value: 2,
-				label: '',
-				icon: 'layout-list',
-				overrides: {
-					components: {
-						'searchHorizontal result': {
-							layout: 'list',
-						},
-						'search result': {
-							layout: 'list',
-						},
-						'searchHorizontal results': {
-							columns: 1,
-						},
-						'search results': {
-							columns: 1,
-						},
-					},
+		props: {
+			layoutOptions: [
+				{
+					value: 1,
+					label: '',
+					default: true,
+					icon: 'layout-large',
 				},
-			},
-		],
-		hideToggleSidebarButton: false,
-		lang: {
-			toggleSidebarButtonText: {
-				value: ({ sidebarOpenState }) => (sidebarOpenState ? `Close Filters` : 'Show Filters'),
-			},
-		},
-		theme: {
-			components: {
-				filterSummary: {
-					hideTitle: true,
-				},
-				sidebar: {
-					layout: ['facets', 'banner.left'],
-				},
-				'button.sidebar-toggle': {
-					icon: 'close-thin',
-				},
-
-				'toolbar.top': {
-					layout: [
-						['banner.header'],
-						['searchHeader'],
-						['banner.banner'],
-						['button.sidebar-toggle', 'filterSummary', '_', 'sortBy', 'layoutSelector'],
-					],
-				},
-				'toolbar.middle': {
-					layout: [],
-				},
-				'toolbar.bottom': {
-					layout: [['banner.footer'], ['_', 'perPage', 'paginationInfo', 'pagination', '_']],
-				},
-				mobileSidebar: {
-					theme: {
+				{
+					value: 2,
+					label: '',
+					icon: 'layout-list',
+					overrides: {
 						components: {
-							filterSummary: {
-								hideTitle: false,
+							'*searchSnappy searchHorizontal result': {
+								layout: 'list',
+							},
+							'*searchSnappy search result': {
+								layout: 'list',
+							},
+							'*searchSnappy searchHorizontal results': {
+								columns: 1,
+							},
+							'*searchSnappy search results': {
+								columns: 1,
 							},
 						},
 					},
 				},
+			],
+			hideToggleSidebarButton: false,
+			lang: {
+				toggleSidebarButtonText: {
+					value: ({ sidebarOpenState }) => (sidebarOpenState ? `Close Filters` : 'Show Filters'),
+				},
+			},
+		},
+		components: {
+			'*searchSnappy filterSummary': {
+				hideTitle: true,
+			},
+			'*searchSnappy sidebar': {
+				layout: ['facets', 'banner.left'],
+			},
+			'*searchSnappy button.sidebar-toggle': {
+				icon: 'close-thin',
+			},
+
+			'*searchSnappy toolbar.top': {
+				layout: [['banner.header'], ['searchHeader'], ['banner.banner'], ['button.sidebar-toggle', 'filterSummary', '_', 'sortBy', 'layoutSelector']],
+			},
+			'*searchSnappy toolbar.middle': {
+				layout: [],
+			},
+			'*searchSnappy toolbar.bottom': {
+				layout: [['banner.footer'], ['_', 'perPage', 'paginationInfo', 'pagination', '_']],
+			},
+			'*searchSnappy mobileSidebar filterSummary': {
+				hideTitle: false,
+			},
+			'*searchSnappy results': {
+				columns: 4,
 			},
 		},
 	},
 	mobile: {
-		theme: {
-			components: {
-				results: {
-					columns: 2,
-				},
-				'toolbar.top': {
-					layout: [['banner.header'], ['searchHeader', '_', 'mobileSidebar'], ['banner.banner']],
-				},
-				'toolbar.middle': {
-					layout: [['filterSummary'], ['sortBy', '_', 'layoutSelector']],
-				},
+		components: {
+			'*searchSnappy results': {
+				columns: 2,
+			},
+			'*searchSnappy toolbar.top': {
+				layout: [['banner.header'], ['searchHeader', '_', 'mobileSidebar'], ['banner.banner']],
+			},
+			'*searchSnappy toolbar.middle': {
+				layout: [['filterSummary'], ['sortBy', '_', 'layoutSelector']],
 			},
 		},
 	},
 	tablet: {
-		theme: {
-			components: {
-				results: {
-					columns: 3,
-				},
-				'toolbar.top': {
-					layout: [['banner.header'], ['searchHeader', '_', 'mobileSidebar'], ['banner.banner']],
-				},
-				'toolbar.middle': {
-					layout: [['filterSummary'], ['sortBy', '_', 'layoutSelector']],
-				},
+		components: {
+			'*searchSnappy results': {
+				columns: 3,
+			},
+			'*searchSnappy toolbar.top': {
+				layout: [['banner.header'], ['searchHeader', '_', 'mobileSidebar'], ['banner.banner']],
+			},
+			'*searchSnappy toolbar.middle': {
+				layout: [['filterSummary'], ['sortBy', '_', 'layoutSelector']],
 			},
 		},
 	},
-	desktop: {
-		theme: {
-			components: {
-				results: {
-					columns: 3,
-				},
-			},
-		},
-	},
+	desktop: {},
 };
 
 export const SearchSnappy = observer((properties: SearchSnappyProps): JSX.Element => {

@@ -18,7 +18,7 @@ let config: SnapTemplatesConfig = {
 	},
 	themes: {
 		global: {
-			extends: 'bocachica',
+			extends: 'base',
 			variables: {
 				breakpoints: {
 					mobile: 768,
@@ -33,63 +33,15 @@ let config: SnapTemplatesConfig = {
 			},
 			style: globalStyles,
 			overrides: {
-				/*
-					default: {
-						// other things
-						components: {}
-					}
-					mobile: {
-						components: {}
-					}
-					tablet: {
-						components: {}
-					}
-					desktop: {
-						components: {}
-					}
-				*/
-
 				// defaults
 				components: {},
 
 				// mobile, tablet, desktop
-				// responsive: {
-				// 	mobile: {
-				// 		components: {
-				// 			'toolbar.top': {
-				// 				layout: ['pagination']
-				// 			},
-				// 			'searchBoca toolbar.top': {
-				// 				layout: ['perPage']
-				// 			},
-				// 			'search toolbar.top': {
-				// 				layout: ['sortBy']
-				// 			},
-				// 			'searchBoca search toolbar.top': {
-				// 				layout: ['paginationInfo']
-				// 			}
-				// 		}
-				// 	},
-				// 	tablet: {
-
-				// 	},
-				// 	desktop: {
-				// 		components: {
-				// 			'toolbar.top': {
-				// 				layout: ['pagination']
-				// 			},
-				// 			'searchBoca toolbar.top': {
-				// 				layout: ['perPage']
-				// 			},
-				// 			'search toolbar.top': {
-				// 				layout: ['facetsHorizontal']
-				// 			},
-				// 			'searchBoca search toolbar.top': {
-				// 				layout: ['sortBy']
-				// 			}
-				// 		}
-				// 	}
-				// },
+				responsive: {
+					mobile: {},
+					tablet: {},
+					desktop: {},
+				},
 			},
 		},
 	},
@@ -109,7 +61,7 @@ let config: SnapTemplatesConfig = {
 		targets: [
 			{
 				selector: '#searchspring-layout',
-				component: 'SearchBoca',
+				component: 'Search',
 			},
 		],
 	},

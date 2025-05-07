@@ -11,4 +11,4 @@ import { searchSnapncoThemeComponentProps } from '../../../../components/Templat
 // };
 
 // Search component props come from Template export
-export const searchSnapnco: ThemeComponentProps<SearchSnapncoProps> = searchSnapncoThemeComponentProps;
+export const searchSnapnco: ThemeComponent<'searchSnapnco', SearchSnapncoProps> = searchSnapncoThemeComponentProps;

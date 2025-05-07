@@ -1,4 +1,10 @@
-import { ThemeComponentRestrictedOverrides, ThemeComponents, ThemeTemplateComponentOverrides } from './themeComponents';
+import {
+	ThemeComponentRestrictedProps,
+	ThemeComponents,
+	ThemeComponentsRestricted,
+	ThemeComponentsRestrictedOverrides,
+	ThemeComponentTemplateOverrides,
+} from './themeComponents';
 import { ListOption } from '../types';
 
 export { css, useTheme, withTheme, ThemeProvider } from '@emotion/react';
@@ -46,32 +52,39 @@ export type ThemeLayoutOption = Omit<ListOption, 'overrides'> & { overrides?: Th
 export type Theme = {
 	name?: string; // Used as a flag in components to provide backwards compatability
 	variables?: ThemeVariables;
-	responsive?: {
-		default?: ThemeResponsive;
-		mobile?: ThemeResponsive;
-		tablet?: ThemeResponsive;
-		desktop?: ThemeResponsive;
-	};
-	// TODO: remove components
-	components?: any;
+	responsive?: ThemeResponsive;
+	components?: ThemeComponents;
 	overrides?: ThemeOverrides;
 };
 
-export type ThemeTemplate<ComponentName extends string, ComponentProps> = {
-	default?: ThemeTemplateProperties<ComponentName, ComponentProps>;
-	mobile?: ThemeTemplateProperties<ComponentName, ComponentProps>;
-	tablet?: ThemeTemplateProperties<ComponentName, ComponentProps>;
-	desktop?: ThemeTemplateProperties<ComponentName, ComponentProps>;
+export type ThemeComponent<ComponentName extends string, ComponentProps> = {
+	default?: ThemeComponentProperties<ComponentName, ComponentProps>;
+	mobile?: ThemeComponentProperties<ComponentName, ComponentProps>;
+	tablet?: ThemeComponentProperties<ComponentName, ComponentProps>;
+	desktop?: ThemeComponentProperties<ComponentName, ComponentProps>;
 };
 
-export type ThemeTemplateProperties<ComponentName extends string, ComponentProps> = {
-	props?: Partial<ComponentProps>;
-	components?: ThemeTemplateComponentOverrides<`*${ComponentName}`>;
+export type ThemeComponentProperties<ComponentName extends string, ComponentProps> = {
+	props?: ThemeComponentRestrictedProps<ComponentProps>;
+	components?: ThemeComponentTemplateOverrides<ComponentName>;
 };
 
 export type ThemeComplete = Required<Omit<Theme, 'overrides'>> & { components: ThemeComponents };
 
-export type ThemeResponsive = { components?: ThemeComponentRestrictedOverrides };
+export type ThemeResponsive = {
+	mobile?: ThemeComponentsRestricted;
+	tablet?: ThemeComponentsRestricted;
+	desktop?: ThemeComponentsRestricted;
+};
+
+export type ThemeResponsiveComplete = ThemeResponsive & { default?: ThemeComponentsRestricted };
+
+export type ThemeResponsiveOverrides = {
+	mobile?: ThemeComponentsRestrictedOverrides;
+	tablet?: ThemeComponentsRestrictedOverrides;
+	desktop?: ThemeComponentsRestrictedOverrides;
+};
+
 export type ThemePartial = Omit<Theme, 'variables' | 'name'> & { variables?: ThemeVariablesPartial };
-export type ThemeOverrides = Pick<Theme, 'responsive'> & { components?: ThemeComponentRestrictedOverrides };
-export type ThemeMinimal = Pick<Theme, 'components'>;
+export type ThemeOverrides = { components?: ThemeComponentsRestrictedOverrides; responsive?: ThemeResponsiveOverrides };
+export type ThemeMinimal = { components?: ThemeComponents };

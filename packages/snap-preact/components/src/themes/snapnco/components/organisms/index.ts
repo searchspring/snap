@@ -1,67 +1,55 @@
-// ORGANISMS
-import { branchOverride } from './branchOverride';
+import { transformThemeComponent } from '../../../utils/transformThemeComponent';
+import { ThemeResponsiveComplete } from '../../../../providers';
+
+// ORGANISMS Imports
 import { facet } from './facet';
-import { facets } from './facets';
 import { facetsHorizontal } from './facetsHorizontal';
 import { filterSummary } from './filterSummary';
 import { mobileSidebar } from './mobileSidebar';
 import { noResults } from './noResults';
-import { results } from './results';
 import { sidebar } from './sidebar';
 import { termsList } from './termsList';
 import { toolbar } from './toolbar';
 
-export const organisms = {
+export const organisms: ThemeResponsiveComplete = {
 	default: {
-		branchOverride: branchOverride.default,
-		facet: facet.default,
-		facets: facets.default,
-		facetsHorizontal: facetsHorizontal.default,
-		filterSummary: filterSummary.default,
-		mobileSidebar: mobileSidebar.default,
-		noResults: noResults.default,
-		results: results.default,
-		sidebar: sidebar.default,
-		termsList: termsList.default,
-		toolbar: toolbar.default,
+		...transformThemeComponent('facet', facet.default),
+		...transformThemeComponent('facetsHorizontal', facetsHorizontal.default),
+		...transformThemeComponent('filterSummary', filterSummary.default),
+		...transformThemeComponent('mobileSidebar', mobileSidebar.default),
+		...transformThemeComponent('noResults', noResults.default),
+		...transformThemeComponent('sidebar', sidebar.default),
+		...transformThemeComponent('toolbar', toolbar.default),
+		...transformThemeComponent('termsList', termsList.default),
 	},
 	mobile: {
-		branchOverride: branchOverride.mobile,
-		facet: facet.mobile,
-		facets: facets.mobile,
-		facetsHorizontal: facetsHorizontal.mobile,
-		filterSummary: filterSummary.mobile,
-		mobileSidebar: mobileSidebar.mobile,
-		noResults: noResults.mobile,
-		results: results.mobile,
-		sidebar: sidebar.mobile,
-		termsList: termsList.mobile,
-		toolbar: toolbar.mobile,
+		...transformThemeComponent('facet', facet.mobile),
+		...transformThemeComponent('facetsHorizontal', facetsHorizontal.mobile),
+		...transformThemeComponent('filterSummary', filterSummary.mobile),
+		...transformThemeComponent('mobileSidebar', mobileSidebar.mobile),
+		...transformThemeComponent('noResults', noResults.mobile),
+		...transformThemeComponent('sidebar', sidebar.mobile),
+		...transformThemeComponent('toolbar', toolbar.mobile),
+		...transformThemeComponent('termsList', termsList.mobile),
 	},
 	tablet: {
-		branchOverride: branchOverride.tablet,
-		facet: facet.tablet,
-		facets: facets.tablet,
-		facetsHorizontal: facetsHorizontal.tablet,
-		filterSummary: filterSummary.tablet,
-		mobileSidebar: mobileSidebar.tablet,
-		noResults: noResults.tablet,
-		results: results.tablet,
-		sidebar: sidebar.tablet,
-		termsList: termsList.tablet,
-		toolbar: toolbar.tablet,
+		...transformThemeComponent('facet', facet.tablet),
+		...transformThemeComponent('facetsHorizontal', facetsHorizontal.tablet),
+		...transformThemeComponent('filterSummary', filterSummary.tablet),
+		...transformThemeComponent('mobileSidebar', mobileSidebar.tablet),
+		...transformThemeComponent('noResults', noResults.tablet),
+		...transformThemeComponent('sidebar', sidebar.tablet),
+		...transformThemeComponent('toolbar', toolbar.tablet),
+		...transformThemeComponent('termsList', termsList.tablet),
 	},
 	desktop: {
-		branchOverride: branchOverride.desktop,
-		facet: facet.desktop,
-		facets: facets.desktop,
-		facetsHorizontal: facetsHorizontal.desktop,
-		filterSummary: filterSummary.desktop,
-		mobileSidebar: mobileSidebar.desktop,
-		noResults: noResults.desktop,
-		results: results.desktop,
-		sidebar: sidebar.desktop,
-		termsList: termsList.desktop,
-		toolbar: toolbar.desktop,
+		...transformThemeComponent('facet', facet.desktop),
+		...transformThemeComponent('facetsHorizontal', facetsHorizontal.desktop),
+		...transformThemeComponent('filterSummary', filterSummary.desktop),
+		...transformThemeComponent('mobileSidebar', mobileSidebar.desktop),
+		...transformThemeComponent('noResults', noResults.desktop),
+		...transformThemeComponent('sidebar', sidebar.desktop),
+		...transformThemeComponent('toolbar', toolbar.desktop),
+		...transformThemeComponent('termsList', termsList.desktop),
 	},
 };

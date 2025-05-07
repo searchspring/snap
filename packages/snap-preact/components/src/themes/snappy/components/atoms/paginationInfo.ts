@@ -10,11 +10,10 @@ import type { PaginationInfoProps } from '../../../../components/Atoms/Paginatio
 // };
 
 // PaginationInfo component props
-export const paginationInfo: ThemeComponentProps<PaginationInfoProps> = {
+export const paginationInfo: ThemeComponent<'paginationInfo', PaginationInfoProps> = {
 	default: {
-		// themeStyleScript: paginationInfoStyleScript,
+		props: {
+			// themeStyleScript: paginationInfoStyleScript,
+		},
 	},
-	mobile: {},
-	tablet: {},
-	desktop: {},
 };

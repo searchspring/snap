@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import type { IconProps } from '../../../../components/Atoms/Icon';
-import { ThemeTemplate } from '../../../../providers';
+import { ThemeComponent } from '../../../../providers';
 
 // CSS in JS style script for the Icon component
 const iconStyleScript = ({ color, height, width, size, theme }: IconProps) => {
@@ -15,7 +15,7 @@ const iconStyleScript = ({ color, height, width, size, theme }: IconProps) => {
 };
 
 // Icon component props
-export const icon: ThemeTemplate<'icon', IconProps> = {
+export const icon: ThemeComponent<'icon', IconProps> = {
 	default: {
 		props: {
 			themeStyleScript: iconStyleScript,

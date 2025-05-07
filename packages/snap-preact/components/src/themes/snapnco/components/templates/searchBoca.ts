@@ -1,6 +1,7 @@
 import { css } from '@emotion/react';
 import type { SearchBocaProps } from '../../../../components/Templates/SearchBoca';
 import { searchBocaThemeComponentProps } from '../../../../components/Templates/SearchBoca';
+import { ThemeComponent } from '../../../../providers';
 
 // CSS in JS style script for the Search component
 const searchBocaStyleScript = ({ theme }: SearchBocaProps) => {
@@ -17,10 +18,15 @@ const searchBocaStyleScript = ({ theme }: SearchBocaProps) => {
 };
 
 // Search component props come from Template export
-export const searchBoca: ThemeComponentProps<SearchBocaProps> = {
-	...searchBocaThemeComponentProps,
+export const searchBoca: ThemeComponent<'searchBoca', SearchBocaProps> = {
 	default: {
-		...searchBocaThemeComponentProps.default,
-		themeStyleScript: searchBocaStyleScript,
+		props: {
+			...searchBocaThemeComponentProps.default?.props,
+			themeStyleScript: searchBocaStyleScript,
+		},
+		components: searchBocaThemeComponentProps.default?.components,
 	},
+	mobile: searchBocaThemeComponentProps.mobile,
+	desktop: searchBocaThemeComponentProps.desktop,
+	tablet: searchBocaThemeComponentProps.tablet,
 };

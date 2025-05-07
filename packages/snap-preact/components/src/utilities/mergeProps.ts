@@ -1,5 +1,5 @@
 import type { ComponentProps } from '../types';
-import type { Theme, ThemeComponentOverrides } from '../providers';
+import type { Theme, ThemeComponents } from '../providers';
 
 export function mergeProps<GenericComponentProps = ComponentProps>(
 	componentType: string,
@@ -146,7 +146,7 @@ export function sortSelectors(a: string, b: string): number {
 	return aWeight - bWeight;
 }
 
-export function filterSelectors(themeComponents: ThemeComponentOverrides, treePath: string): string[] {
+export function filterSelectors(themeComponents: ThemeComponents, treePath: string): string[] {
 	let selectors = Object.keys(themeComponents);
 	const paths = treePath.split(' ');
 	const componentTypeAndName = paths.splice(-1).pop() ?? '';

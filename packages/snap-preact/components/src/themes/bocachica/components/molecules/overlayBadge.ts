@@ -14,11 +14,10 @@ const overlayBadgeStyleScript = ({ theme }: OverlayBadgeProps) => {
 };
 
 // OverlayBadge component props
-export const overlayBadge: ThemeComponentProps<OverlayBadgeProps> = {
+export const overlayBadge: ThemeComponent<'overlayBadge', OverlayBadgeProps> = {
 	default: {
-		themeStyleScript: overlayBadgeStyleScript,
+		props: {
+			themeStyleScript: overlayBadgeStyleScript,
+		},
 	},
-	mobile: {},
-	tablet: {},
-	desktop: {},
 };

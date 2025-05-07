@@ -31,12 +31,10 @@ const sidebarStyleScript = ({ theme }: SidebarProps) => {
 };
 
 // Sidebar component props
-export const sidebar: ThemeComponentProps<SidebarProps> = {
+export const sidebar: ThemeComponent<'sidebar', SidebarProps> = {
 	default: {
-		themeStyleScript: sidebarStyleScript,
-		theme: {},
+		props: {
+			themeStyleScript: sidebarStyleScript,
+		},
 	},
-	mobile: {},
-	tablet: {},
-	desktop: {},
 };

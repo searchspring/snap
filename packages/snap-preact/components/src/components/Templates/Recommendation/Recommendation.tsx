@@ -30,22 +30,30 @@ const defaultStyles: StyleScript<RecommendationProps> = ({ vertical }) => {
 	});
 };
 
-export const recommendationThemeComponentProps: ThemeComponentProps<RecommendationProps> = {
+export const recommendationThemeComponentProps: ThemeComponent<'autrecommendationThemeComponentPropsocompleteTemplate', RecommendationProps> = {
 	default: {
-		slidesPerView: 5,
-		slidesPerGroup: 5,
+		props: {
+			slidesPerView: 5,
+			slidesPerGroup: 5,
+		},
 	},
 	mobile: {
-		slidesPerView: 2,
-		slidesPerGroup: 2,
+		props: {
+			slidesPerView: 2,
+			slidesPerGroup: 2,
+		},
 	},
 	tablet: {
-		slidesPerView: 3,
-		slidesPerGroup: 3,
+		props: {
+			slidesPerView: 3,
+			slidesPerGroup: 3,
+		},
 	},
 	desktop: {
-		slidesPerView: 4,
-		slidesPerGroup: 4,
+		props: {
+			slidesPerView: 4,
+			slidesPerGroup: 4,
+		},
 	},
 };
 

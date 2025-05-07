@@ -27,11 +27,10 @@ const resultStyleScript = ({ theme }: ResultProps) => {
 };
 
 // Result component props
-export const result: ThemeComponentProps<ResultProps> = {
+export const result: ThemeComponent<'result', ResultProps> = {
 	default: {
-		themeStyleScript: resultStyleScript,
+		props: {
+			themeStyleScript: resultStyleScript,
+		},
 	},
-	mobile: {},
-	tablet: {},
-	desktop: {},
 };

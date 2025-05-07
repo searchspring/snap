@@ -11,18 +11,15 @@ const sortByStyleScript = () => {
 };
 
 // SortBy component props
-export const sortBy: ThemeComponentProps<SortByProps> = {
+export const sortBy: ThemeComponent<'sortBy', SortByProps> = {
 	default: {
-		themeStyleScript: sortByStyleScript,
-		theme: {
-			components: {
-				icon: {
-					size: '12px',
-				},
+		props: {
+			themeStyleScript: sortByStyleScript,
+		},
+		components: {
+			'*sortBy icon': {
+				size: '12px',
 			},
 		},
 	},
-	mobile: {},
-	tablet: {},
-	desktop: {},
 };

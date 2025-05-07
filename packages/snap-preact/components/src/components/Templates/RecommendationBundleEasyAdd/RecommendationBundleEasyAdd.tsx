@@ -15,21 +15,11 @@ const defaultStyles: StyleScript<RecommendationBundleEasyAddProps> = () => {
 	});
 };
 
-export const recommendationBundleEasyAddThemeComponentProps: ThemeComponentProps<RecommendationBundleProps> = {
-	default: {
-		className: 'ss__recommendation-bundle-easy-add',
-		hideCheckboxes: true,
-		seedText: '',
-		ctaButtonText: 'Add Both',
-		ctaInline: false,
-		hideSeed: true,
-		vertical: true,
-		limit: 1,
-		carousel: {
-			enabled: false,
-		},
-		separatorIcon: false,
-	},
+export const recommendationBundleEasyAddThemeComponentProps: ThemeComponent<
+	'recommendationBundleEasyAddThemeComponentProps',
+	RecommendationBundleEasyAddProps
+> = {
+	default: {},
 	mobile: {},
 	tablet: {},
 	desktop: {},

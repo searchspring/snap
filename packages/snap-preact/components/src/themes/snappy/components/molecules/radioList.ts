@@ -6,11 +6,10 @@ import type { RadioListProps } from '../../../../components/Molecules/RadioList'
 // };
 
 // RadioList component props
-export const radioList: ThemeComponentProps<RadioListProps> = {
+export const radioList: ThemeComponent<'radioList', RadioListProps> = {
 	default: {
-		// themeStyleScript: radioListStyleScript,
+		props: {
+			// themeStyleScript: radioListStyleScript,
+		},
 	},
-	mobile: {},
-	tablet: {},
-	desktop: {},
 };

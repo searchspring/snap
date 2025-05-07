@@ -1,6 +1,7 @@
 import { css } from '@emotion/react';
 import type { SearchSnappyProps } from '../../../../components/Templates/SearchSnappy';
 import { searchSnappyThemeComponentProps } from '../../../../components/Templates/SearchSnappy';
+import { ThemeComponent } from '../../../../providers';
 
 // CSS in JS style script for the Search component
 const searchSnappyStyleScript = ({ theme }: SearchSnappyProps) => {
@@ -11,10 +12,15 @@ const searchSnappyStyleScript = ({ theme }: SearchSnappyProps) => {
 };
 
 // Search component props come from Template export
-export const searchSnappy: ThemeComponentProps<SearchSnappyProps> = {
-	...searchSnappyThemeComponentProps,
+export const searchSnappy: ThemeComponent<'searchSnappy', SearchSnappyProps> = {
 	default: {
-		...searchSnappyThemeComponentProps.default,
-		themeStyleScript: searchSnappyStyleScript,
+		props: {
+			...searchSnappyThemeComponentProps.default?.props,
+			themeStyleScript: searchSnappyStyleScript,
+		},
+		components: searchSnappyThemeComponentProps.default?.components,
 	},
+	mobile: searchSnappyThemeComponentProps.mobile,
+	desktop: searchSnappyThemeComponentProps.desktop,
+	tablet: searchSnappyThemeComponentProps.tablet,
 };

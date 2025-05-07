@@ -3,7 +3,7 @@ import { observer } from 'mobx-react-lite';
 import type { SearchController } from '@searchspring/snap-controller';
 import { mergeProps } from '../../../utilities';
 import { ComponentProps } from '../../../types';
-import { Theme, useTheme, CacheProvider, ThemeTemplate } from '../../../providers';
+import { Theme, useTheme, CacheProvider, ThemeComponent } from '../../../providers';
 import { Search, SearchProps } from '../Search/Search';
 
 /*
@@ -31,9 +31,86 @@ import { Search, SearchProps } from '../Search/Search';
 		...
 	}
 
+
+	// alternative:
+
+	export const searchBocaThemeComponentProps: ThemeComponent<'searchBoca', SearchBocaProps> = {
+		default: {
+			'*searchBoca': {
+				layoutOptions: [
+					{
+						value: 1,
+						label: '',
+						icon: 'square',
+						overrides: {
+							// props: {},
+							components: {
+								'searchHorizontal results': {
+									columns: 1,
+								},
+								'search results': {
+									columns: 1,
+								},
+							},
+						},
+					},
+					{
+						value: 2,
+						label: '',
+						default: true,
+						icon: 'layout-large',
+						overrides: {
+							components: {
+								'searchHorizontal results': {
+									columns: 2,
+								},
+								'search results': {
+									columns: 2,
+								},
+							},
+						},
+					},
+				],
+				hideToggleSidebarButton: false,
+				toggleSidebarStartClosed: true,
+			},
+			'*searchBoca toolbar.top': {
+				layout: [
+					['banner.header'],
+					['_', 'searchHeader', '_'],
+					['banner.banner'],
+					['button.sidebar-toggle', 'paginationInfo', '_', 'perPage', 'sortBy'],
+				],
+			},
+
+			'*searchBoca toolbar.middle': {
+				layout: [],
+			},
+
+			'*searchBoca toolbar.bottom': {
+				layout: [['banner.footer'], ['_', 'pagination', '_']],
+			},
+		},
+		mobile: {
+			'*searchBoca toolbar.top': {
+				layout: [['banner.header'], ['_', 'searchHeader', '_'], ['banner.banner'], ['mobileSidebar', '_', 'paginationInfo', '_', 'layoutSelector']],
+			},
+		},
+		tablet: {
+			'*searchBoca toolbar.top': {
+				layout: [
+					['_', 'searchHeader', '_'],
+					['mobileSidebar', '_', 'paginationInfo', '_', 'layoutSelector'],
+				],
+			},
+		},
+		desktop: {},
+	};
+
+
 */
 
-export const searchBocaThemeComponentProps: ThemeTemplate<'searchBoca', SearchBocaProps> = {
+export const searchBocaThemeComponentProps: ThemeComponent<'searchBoca', SearchBocaProps> = {
 	default: {
 		props: {
 			layoutOptions: [
@@ -44,10 +121,7 @@ export const searchBocaThemeComponentProps: ThemeTemplate<'searchBoca', SearchBo
 					overrides: {
 						// props: {},
 						components: {
-							'searchHorizontal results': {
-								columns: 1,
-							},
-							'search results': {
+							'*searchBoca results': {
 								columns: 1,
 							},
 						},
@@ -60,10 +134,7 @@ export const searchBocaThemeComponentProps: ThemeTemplate<'searchBoca', SearchBo
 					icon: 'layout-large',
 					overrides: {
 						components: {
-							'searchHorizontal results': {
-								columns: 2,
-							},
-							'search results': {
+							'*searchBoca results': {
 								columns: 2,
 							},
 						},
@@ -90,12 +161,19 @@ export const searchBocaThemeComponentProps: ThemeTemplate<'searchBoca', SearchBo
 			'*searchBoca toolbar.bottom': {
 				layout: [['banner.footer'], ['_', 'pagination', '_']],
 			},
+
+			'*searchBoca results': {
+				columns: 4,
+			},
 		},
 	},
 	mobile: {
 		components: {
 			'*searchBoca toolbar.top': {
 				layout: [['banner.header'], ['_', 'searchHeader', '_'], ['banner.banner'], ['mobileSidebar', '_', 'paginationInfo', '_', 'layoutSelector']],
+			},
+			'*searchBoca results': {
+				columns: 2,
 			},
 		},
 	},
@@ -106,6 +184,9 @@ export const searchBocaThemeComponentProps: ThemeTemplate<'searchBoca', SearchBo
 					['_', 'searchHeader', '_'],
 					['mobileSidebar', '_', 'paginationInfo', '_', 'layoutSelector'],
 				],
+			},
+			'*searchBoca results': {
+				columns: 3,
 			},
 		},
 	},
@@ -142,123 +223,6 @@ mergeProps (componentType, globalTheme, defaultProps, props) => {
 }
 
 */
-
-export const searchBocaThemeComponentProps2: ThemeComponentProps<SearchBocaProps> = {
-	default: {
-		/*
-			can i set overrides for the searchtemplate in here?
-		*/
-		layoutOptions: [
-			{
-				value: 1,
-				label: '',
-				icon: 'square',
-				overrides: {
-					components: {
-						'searchHorizontal results': {
-							columns: 1,
-						},
-						'search results': {
-							columns: 1,
-						},
-					},
-				},
-			},
-			{
-				value: 2,
-				label: '',
-				default: true,
-				icon: 'layout-large',
-				overrides: {
-					components: {
-						'searchHorizontal results': {
-							columns: 2,
-						},
-						'search results': {
-							columns: 2,
-						},
-					},
-				},
-			},
-		],
-		hideToggleSidebarButton: false,
-		toggleSidebarStartClosed: true,
-		theme: {
-			components: {
-				results: {
-					columns: 4,
-				},
-				sidebar: {
-					layout: ['filterSummary', 'facets', 'banner.left'],
-					sticky: true,
-				},
-				'button.sidebar-toggle': {
-					icon: 'filters',
-				},
-				'toolbar.top': {
-					layout: [
-						['banner.header'],
-						['_', 'searchHeader', '_'],
-						['banner.banner'],
-						['button.sidebar-toggle', 'paginationInfo', '_', 'perPage', 'sortBy'],
-					],
-				},
-				'toolbar.middle': {
-					layout: [],
-				},
-				'toolbar.bottom': {
-					layout: [['banner.footer'], ['_', 'pagination', '_']],
-				},
-				pagination: {
-					hideFirst: true,
-					hideLast: true,
-				},
-			},
-		},
-	},
-	mobile: {
-		theme: {
-			components: {
-				results: {
-					columns: 5,
-				},
-				'toolbar.top': {
-					layout: [['banner.header'], ['_', 'searchHeader', '_'], ['banner.banner'], ['mobileSidebar', '_', 'paginationInfo', '_', 'layoutSelector']],
-				},
-				mobileSidebar: {
-					layout: [['sortBy'], ['facets']],
-				},
-			},
-		},
-	},
-	tablet: {
-		theme: {
-			components: {
-				results: {
-					columns: 3,
-				},
-				'toolbar.top': {
-					layout: [
-						['_', 'searchHeader', '_'],
-						['mobileSidebar', '_', 'paginationInfo', '_', 'layoutSelector'],
-					],
-				},
-				mobileSidebar: {
-					layout: [['sortBy'], ['facets'], ['banner.left']],
-				},
-			},
-		},
-	},
-	desktop: {
-		theme: {
-			components: {
-				results: {
-					columns: 3,
-				},
-			},
-		},
-	},
-};
 
 export const SearchBoca = observer((properties: SearchBocaProps): JSX.Element => {
 	const globalTheme: Theme = useTheme();
