@@ -13,11 +13,11 @@ import type {
 	AutocompleteAddtocartSchemaData,
 	AutocompleteRedirectSchemaData,
 	AutocompleteSchemaData,
-	AutocompleteSchemaDataBgfilterInner,
-	AutocompleteSchemaDataFilterInner,
-	AutocompleteSchemaDataSortInnerDirEnum,
 	Item,
 	Product as BeaconProduct,
+	AutocompleteAddtocartSchemaDataFilterInner,
+	AutocompleteAddtocartSchemaDataBgfilterInner,
+	AutocompleteAddtocartSchemaDataSortInnerDirEnum,
 } from '@searchspring/beacon';
 
 const INPUT_ATTRIBUTE = 'ss-autocomplete-input';
@@ -121,6 +121,8 @@ export class AutocompleteController extends AbstractController {
 					this.events.product[result.id].render = true;
 				});
 				this.eventManager.fire('track.product.render', { controller: this, products, trackEvent: data });
+				// reset events for new search
+				this.events = { product: {} };
 			}
 		});
 
@@ -623,9 +625,6 @@ export class AutocompleteController extends AbstractController {
 				await this.init();
 			}
 
-			// reset events for new search
-			this.events = { product: {} };
-
 			// if urlManager has no query, there will be no need to get params and no query
 			if (!this.urlManager.state.query) {
 				return;
@@ -880,8 +879,8 @@ function getAutocompleteSchemaData({
 	results?: Product[];
 }): AutocompleteSchemaData {
 	const filters = params.filters?.reduce<{
-		bgfilter?: Array<AutocompleteSchemaDataBgfilterInner>;
-		filter?: Array<AutocompleteSchemaDataFilterInner>;
+		bgfilter?: Array<AutocompleteAddtocartSchemaDataBgfilterInner>;
+		filter?: Array<AutocompleteAddtocartSchemaDataFilterInner>;
 	}>((acc, filter) => {
 		const key = filter.background ? 'bgfilter' : 'filter';
 		acc[key] = acc[key] || [];
@@ -908,11 +907,12 @@ function getAutocompleteSchemaData({
 	return {
 		q: store.search?.originalQuery?.string || store.search?.query?.string || '',
 		correctedQuery: store.search?.originalQuery?.string ? store.search?.query?.string : undefined,
+		matchType: store.search?.matchType,
 		...filters,
 		sort: params.sorts?.map((sort) => {
 			return {
 				field: sort.field,
-				dir: sort.direction as AutocompleteSchemaDataSortInnerDirEnum,
+				dir: sort.direction as AutocompleteAddtocartSchemaDataSortInnerDirEnum,
 			};
 		}),
 		pagination: {
@@ -936,13 +936,12 @@ function getAutocompleteSchemaData({
 				undefined,
 		},
 		results:
-			results?.map((result: Product): Item => {
+			results?.map((result: Product, idx: number): Item => {
 				const core = result.mappings.core!;
 				return {
+					position: idx + 1,
 					uid: core.uid || '',
-					// childUid: core.uid,
 					sku: core.sku,
-					// childSku: core.sku,
 				};
 			}) || [],
 	};

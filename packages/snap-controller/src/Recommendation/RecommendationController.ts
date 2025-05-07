@@ -9,7 +9,6 @@ import type { RecommendationControllerConfig, ControllerServices, ContextVariabl
 import type { Item, Product as BeaconProduct, RecommendationsAddtocartSchemaData, RecommendationsSchemaData } from '@searchspring/beacon';
 import type { Next } from '@searchspring/snap-event-manager';
 
-// TODO: change return types to void
 type RecommendationTrackMethods = {
 	product: {
 		clickThrough: (e: MouseEvent, result: Product) => void;
@@ -148,7 +147,7 @@ export class RecommendationController extends AbstractController {
 				this.eventManager.fire('track.product.render', { controller: this, products: [result], trackEvent: data });
 				return data;
 			},
-			addToCart: (result: Product): RecommendationsSchemaData | undefined => {
+			addToCart: (result: Product): RecommendationsAddtocartSchemaData | undefined => {
 				const data = getRecommendationsAddtocartSchemaData({ store: this.store, results: [result] });
 				this.tracker.events.recommendations.addToCart({ data, siteId: this.config.globals?.siteId });
 				this.eventManager.fire('track.product.addToCart', { controller: this, products: [result], trackEvent: data });
@@ -156,7 +155,7 @@ export class RecommendationController extends AbstractController {
 			},
 		},
 		bundle: {
-			addToCart: (results: Product[]): RecommendationsSchemaData | undefined => {
+			addToCart: (results: Product[]): RecommendationsAddtocartSchemaData | undefined => {
 				if (this.store.profile.type != 'bundle') return;
 
 				const data = getRecommendationsAddtocartSchemaData({ store: this.store, results });
@@ -350,13 +349,12 @@ function getRecommendationsSchemaData({ store, results }: { store: Recommendatio
 	return {
 		tag: store.profile.tag,
 		results:
-			results?.map((result: Product): Item => {
+			results?.map((result: Product, idx: number): Item => {
 				const core = result.mappings.core!;
 				return {
+					position: idx + 1,
 					uid: core.uid || '',
-					// childUid: core.uid,
 					sku: core.sku,
-					// childSku: core.sku,
 				};
 			}) || [],
 	};

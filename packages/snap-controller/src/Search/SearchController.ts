@@ -28,9 +28,9 @@ import type {
 	SearchRequestModelFilterValue,
 } from '@searchspring/snapi-types';
 import type {
-	AutocompleteSchemaDataBgfilterInner,
-	AutocompleteSchemaDataFilterInner,
-	AutocompleteSchemaDataSortInnerDirEnum,
+	AutocompleteAddtocartSchemaDataBgfilterInner,
+	AutocompleteAddtocartSchemaDataFilterInner,
+	AutocompleteAddtocartSchemaDataSortInnerDirEnum,
 	Product as BeaconProduct,
 	Item,
 	SearchAddtocartSchemaData,
@@ -40,6 +40,7 @@ import type {
 
 const BACKGROUND_FILTER_FIELD_MATCHES = ['collection', 'category', 'categories', 'hierarchy'];
 const BACKGROUND_FILTERS_VALUE_FLAGS = [1, 0, '1', '0', 'true', 'false', true, false];
+const CLICK_THROUGH_CLOSEST_MAX_LEVELS = 10;
 
 const defaultConfig: SearchControllerConfig = {
 	id: 'search',
@@ -182,13 +183,10 @@ export class SearchController extends AbstractController {
 
 		this.eventManager.on('afterStore', async (search: AfterStoreObj, next: Next): Promise<void | boolean> => {
 			await next();
-
-			// save last params
-			this.storage.set('lastStringyParams', JSON.stringify(search.request));
-
 			// get scrollTo positioning and send it to 'restorePosition' event
 			const storableRequestParams = getStorableRequestParams(search.request);
 			const stringyParams = JSON.stringify(storableRequestParams);
+			this.storage.set('lastStringyParams', stringyParams);
 			const scrollMap: { [key: string]: ElementPositionObj } = this.storage.get('scrollMap') || {};
 			const elementPosition = scrollMap[stringyParams];
 			if (!elementPosition) {
@@ -349,12 +347,19 @@ export class SearchController extends AbstractController {
 				if (result.type === 'banner') {
 					return;
 				}
-				// TODO: closest might be going too far - write own function to only go n levels up - additionally check that href includes result.url
-				const href = (e.target as Element)?.getAttribute('href') || (e.target as Element)?.closest('a')?.getAttribute('href');
-				if (href) {
-					this.track.product.clickThrough(e, result as Product);
-				} else {
-					// TODO: in future, send as an interaction event
+				let currentElement: Element | null = e.target as Element;
+				let href: string | null = null;
+				let level = 0;
+				const resultUrl = (result as Product)?.display?.mappings.core?.url || (result as Product)?.mappings.core?.url || '';
+
+				while (currentElement && level < CLICK_THROUGH_CLOSEST_MAX_LEVELS) {
+					href = currentElement.getAttribute('href');
+					if (href && resultUrl && href.includes(resultUrl)) {
+						this.track.product.clickThrough(e, result as Product);
+						return;
+					}
+					currentElement = currentElement.parentElement;
+					level++;
 				}
 			},
 			render: (result: Product) => {
@@ -471,7 +476,7 @@ export class SearchController extends AbstractController {
 				}
 			}
 
-			const stringyParams = JSON.stringify(params);
+			const stringyParams = JSON.stringify(getStorableRequestParams(params));
 			const prevStringyParams = this.storage.get('lastStringyParams');
 			if (stringyParams == prevStringyParams) {
 				// no param change - not searching
@@ -752,8 +757,8 @@ function getSearchAddtocartSchemaData({
 
 function getSearchSchemaData({ params, store, results }: { params: SearchRequestModel; store: SearchStore; results?: Product[] }): SearchSchemaData {
 	const filters = params.filters?.reduce<{
-		bgfilter?: Array<AutocompleteSchemaDataBgfilterInner>;
-		filter?: Array<AutocompleteSchemaDataFilterInner>;
+		bgfilter?: Array<AutocompleteAddtocartSchemaDataBgfilterInner>;
+		filter?: Array<AutocompleteAddtocartSchemaDataFilterInner>;
 	}>((acc, filter) => {
 		const key = filter.background ? 'bgfilter' : 'filter';
 		acc[key] = acc[key] || [];
@@ -780,11 +785,12 @@ function getSearchSchemaData({ params, store, results }: { params: SearchRequest
 	return {
 		q: params.search?.query?.string || '',
 		correctedQuery: store.search?.originalQuery?.string ? store.search?.query?.string : undefined,
+		matchType: store.search?.matchType,
 		...filters,
 		sort: params.sorts?.map((sort) => {
 			return {
 				field: sort.field,
-				dir: sort.direction as AutocompleteSchemaDataSortInnerDirEnum,
+				dir: sort.direction as AutocompleteAddtocartSchemaDataSortInnerDirEnum,
 			};
 		}),
 		pagination: {
@@ -808,13 +814,12 @@ function getSearchSchemaData({ params, store, results }: { params: SearchRequest
 				undefined,
 		},
 		results:
-			results?.map((result: Product): Item => {
+			results?.map((result: Product, idx: number): Item => {
 				const core = result.mappings.core!;
 				return {
+					position: idx + 1,
 					uid: core.uid || '',
-					// childUid: core.uid,
 					sku: core.sku,
-					// childSku: core.sku,
 				};
 			}) || [],
 	};

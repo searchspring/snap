@@ -44,60 +44,6 @@ searchspring.tracker.track.product.view({
 ```
 
 
-### Cart View 
-Tracks cart contents. Should only be installed on a cart page. If the checkout process does not contain a dedicated cart page (ie. slideout cart) then this method should be invoked when the cart comes into view. 
-
-Each item object must contain a `qty`, `price`, `uid`, and (`sku` and/or `childSku` and/or `childUid` - provide as many of these product identifiers that are available).
-
-```html
-<script type="searchspring/track/cart/view">
-	items = [
-		{
-			uid: '123',
-			sku: 'product123',
-			childUid: '123_a',
-			childSku: 'product123_a',
-			qty: '1',
-			price: '9.99',
-		},
-		{
-			uid: '456',
-			sku: 'product456',
-			childUid: '456_a',
-			childSku: 'product456_a',
-			qty: '2',
-			price: '10.99',
-		},
-	];
-</script>
-```
-
-Alternatively, this can also be integrated using the `searchspring.tracker.track.cart.view` method.
-
-```typescript
-searchspring.tracker.track.cart.view({
-	items: [
-		{
-			uid: '123',
-			sku: 'product123',
-			childUid: '123_a',
-			childSku: 'product123_a',
-			qty: '1',
-			price: '9.99',
-		},
-		{
-			uid: '456',
-			sku: 'product456',
-			childUid: '456_a',
-			childSku: 'product456_a',
-			qty: '2',
-			price: '10.99',
-		},
-	]
-});
-```
-
-
 ### Order Transaction
 Tracks order transaction. Should be invoked from an order confirmation page. Expects an object with the following:
 

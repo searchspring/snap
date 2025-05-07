@@ -433,10 +433,10 @@ describe('Search Controller', () => {
 		expect(searchfn).toHaveBeenCalledTimes(1);
 
 		await controller.search();
-		expect(searchfn).toHaveBeenCalledTimes(2); // a 2nd search is called due to redirectResponse setting (store.loaded)
+		expect(searchfn).toHaveBeenCalledTimes(1); // a 2nd search call should not make a search. redirectResponseno is no longer part of cache key
 
 		await controller.search();
-		expect(searchfn).toHaveBeenCalledTimes(2); // should not search again
+		expect(searchfn).toHaveBeenCalledTimes(1); // additional calls should not make a search.
 		searchfn.mockClear();
 	});
 
@@ -531,11 +531,6 @@ describe('Search Controller', () => {
 	});
 
 	it(`stores scroll position in 'track.product.click' call`, async () => {
-		const href = 'https://localhost:2222/product.html';
-		// set initial DOM setup
-		document.body.innerHTML = `<div class="ss__results"><div class="ss__result"><a class="link" href="${href}"></a></div></div>`;
-		const selector = `DIV.ss__result A.link[href*=\"${href}\"]`;
-
 		const controller = new SearchController(searchConfig, {
 			client: new MockClient(globals, {}),
 			store: new SearchStore(searchConfig, services),
@@ -552,10 +547,10 @@ describe('Search Controller', () => {
 		});
 
 		await controller.search();
+		const href = controller.store.results[0].mappings.core?.url;
 
-		const restorePositionFunc = jest.fn((selector?: string) => {
-			console.log(selector);
-		});
+		document.body.innerHTML = `<div class="ss__results"><div class="ss__result"><a class="link" href="${href}"></a></div></div>`;
+		const selector = `DIV.ss__result A.link[href*=\"${href}\"]`;
 
 		const linkElem = document.querySelector('.link');
 
