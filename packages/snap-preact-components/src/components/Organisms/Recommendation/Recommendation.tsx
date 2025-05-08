@@ -200,6 +200,7 @@ export interface RecommendationProps extends ComponentProps {
 	controller: RecommendationController;
 	children?: ComponentChildren;
 	vertical?: boolean;
+	scrollbar?: boolean;
 	lazyRender?: {
 		enabled: boolean;
 		offset?: string;

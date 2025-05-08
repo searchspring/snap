@@ -98,6 +98,17 @@ export default {
 			},
 			control: { type: 'boolean' },
 		},
+		scrollbar: {
+			defaultValue: false,
+			description: 'Display scrollbar',
+			table: {
+				type: {
+					summary: 'boolean',
+				},
+				defaultValue: { summary: false },
+			},
+			control: { type: 'boolean' },
+		},
 		vertical: {
 			defaultValue: false,
 			description: 'Recommendation carousel direction',
