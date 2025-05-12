@@ -1,5 +1,6 @@
 import { css } from '@emotion/react';
 import type { LoadingBarProps } from '../../../../components/Atoms/Loading';
+import { ThemeComponent } from '../../../../providers';
 
 // CSS in JS style script for the LoadingBar component
 const loadingBarStyleScript = ({ color, backgroundColor, theme }: LoadingBarProps) => {

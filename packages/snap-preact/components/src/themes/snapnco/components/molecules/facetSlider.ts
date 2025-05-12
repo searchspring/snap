@@ -1,5 +1,6 @@
 import { css } from '@emotion/react';
 import type { FacetSliderProps } from '../../../../components/Molecules/FacetSlider';
+import { ThemeComponent } from '../../../../providers';
 
 // CSS in JS style script for the FacetSlider component
 const facetSliderStyleScript = ({

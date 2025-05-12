@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
 import type { FacetGridOptionsProps } from '../../../../components/Molecules/FacetGridOptions';
 import Color from 'color';
-
+import { ThemeComponent } from '../../../../providers';
 // CSS in JS style script for the FacetGridOptions component
 const facetGridOptionsStyleScript = ({ theme }: FacetGridOptionsProps) => {
 	const variables = theme?.variables;

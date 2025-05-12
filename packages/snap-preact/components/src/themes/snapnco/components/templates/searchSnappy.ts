@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
 import type { SearchSnappyProps } from '../../../../components/Templates/SearchSnappy';
 import { searchSnappyThemeComponentProps } from '../../../themeComponents/searchSnappy';
-
+import { ThemeComponent } from '../../../../providers';
 // CSS in JS style script for the Search component
 const searchSnappyStyleScript = ({ theme }: SearchSnappyProps) => {
 	// eslint-disable-next-line @typescript-eslint/no-unused-vars
