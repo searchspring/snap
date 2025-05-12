@@ -113,7 +113,7 @@ type ThemeComponentNamedSelectorsStartingWithTemplate<
 	| `*${TemplateComponentType} ${SubComponentType}.${ComponentNames}`;
 
 export type ThemeComponentRestrictedProps<Props> = Partial<Omit<Props, ThemeComponentOmittedProps>>;
-type ThemeComponentOmittedProps = 'theme';
+type ThemeComponentOmittedProps = 'theme' | 'inherits';
 
 type ThemeComponentOverridesRestrictedProps<Props> = Partial<Omit<Props, ThemeComponentOverrideOmittedProps>>;
 type ThemeComponentOverrideOmittedProps =
@@ -133,7 +133,8 @@ type ThemeComponentOverrideOmittedProps =
 	| 'name'
 	| 'treePath'
 	| 'disableStyles'
-	| 'theme';
+	| 'theme'
+	| 'inherits';
 
 /*
 
@@ -166,9 +167,7 @@ export type ThemeComponents =
 		[K in ThemeComponentOverridesNamedSelectors<'price', PriceNames>]?: Partial<PriceProps>;
 	} & {
 		[K in ThemeComponentOverridesUnNamedSelectors<'skeleton'>]?: Partial<SkeletonProps>;
-	} & // { [K in UnNamedThemeComponentSelectors<'toggle'>]?: RestrictedThemeComponentProps<ToggleProps> } &
-
-	/* MOLECULES */
+	} & /* MOLECULES */ // { [K in UnNamedThemeComponentSelectors<'toggle'>]?: RestrictedThemeComponentProps<ToggleProps> } &
 	{ [K in ThemeComponentOverridesUnNamedSelectors<'calloutBadge'>]?: Partial<CalloutBadgeProps> } & {
 		[K in ThemeComponentOverridesUnNamedSelectors<'carousel'>]?: Partial<CarouselProps>;
 	} & { [K in ThemeComponentOverridesUnNamedSelectors<'checkbox'>]?: Partial<CheckboxProps> } & {
@@ -183,8 +182,7 @@ export type ThemeComponents =
 		[K in ThemeComponentOverridesUnNamedSelectors<'facetPaletteOptions'>]?: Partial<FacetPaletteOptionsProps>;
 	} & {
 		[K in ThemeComponentOverridesUnNamedSelectors<'facetSlider'>]?: Partial<FacetSliderProps>;
-	} & // { [K in UnNamedThemeComponentSelectors<'facetToggle'>]?: RestrictedThemeComponentProps<FacetToggleProps> } &
-	{ [K in ThemeComponentOverridesNamedSelectors<'filter', FilterNames>]?: Partial<FilterProps> } & {
+	} & { [K in ThemeComponentOverridesNamedSelectors<'filter', FilterNames>]?: Partial<FilterProps> } & { // { [K in UnNamedThemeComponentSelectors<'facetToggle'>]?: RestrictedThemeComponentProps<FacetToggleProps> } &
 		[K in ThemeComponentOverridesUnNamedSelectors<'loadMore'>]?: Partial<LoadMoreProps>;
 	} & { [K in ThemeComponentOverridesUnNamedSelectors<'overlayBadge'>]?: Partial<OverlayBadgeProps> } & {
 		[K in ThemeComponentOverridesUnNamedSelectors<'pagination'>]?: Partial<PaginationProps>;
@@ -198,8 +196,9 @@ export type ThemeComponents =
 		[K in ThemeComponentOverridesUnNamedSelectors<'sortBy'>]?: Partial<SortByProps>;
 	} & { [K in ThemeComponentOverridesUnNamedSelectors<'swatches'>]?: Partial<SwatchesProps> } & {
 		[K in ThemeComponentOverridesUnNamedSelectors<'variantSelection'>]?: Partial<VariantSelectionProps>;
-	} & { [K in ThemeComponentOverridesNamedSelectors<'terms', TermsNames>]?: Partial<TermsProps> } & /* ORGANISMS */
-	{ [K in ThemeComponentOverridesUnNamedSelectors<'branchOverride'>]?: Partial<BranchOverrideProps> } & {
+	} & { [K in ThemeComponentOverridesNamedSelectors<'terms', TermsNames>]?: Partial<TermsProps> } /* ORGANISMS */ & {
+		[K in ThemeComponentOverridesUnNamedSelectors<'branchOverride'>]?: Partial<BranchOverrideProps>;
+	} & {
 		[K in ThemeComponentOverridesUnNamedSelectors<'facet'>]?: Partial<FacetProps>;
 	} & { [K in ThemeComponentOverridesNamedSelectors<'facets', FacetsNames>]?: Partial<FacetsProps> } & {
 		[K in ThemeComponentOverridesUnNamedSelectors<'facetsHorizontal'>]?: Partial<FacetsHorizontalProps>;
@@ -211,8 +210,7 @@ export type ThemeComponents =
 		[K in ThemeComponentOverridesUnNamedSelectors<'mobileSidebar'>]?: Partial<MobileSidebarProps>;
 	} & { [K in ThemeComponentOverridesNamedSelectors<'toolbar', ToolbarNames>]?: Partial<ToolbarProps> } & {
 		[K in ThemeComponentOverridesUnNamedSelectors<'termsList'>]?: Partial<TermsListProps>;
-	} & /* TEMPLATES */
-	{ [K in ThemeComponentOverridesUnNamedSelectors<'autocompleteTemplate'>]?: Partial<AutocompleteTemplateProps> } & {
+	} /* TEMPLATES */ & { [K in ThemeComponentOverridesUnNamedSelectors<'autocompleteTemplate'>]?: Partial<AutocompleteTemplateProps> } & {
 		[K in ThemeComponentOverridesNamedSelectors<'recommendation', string>]?: Partial<RecommendationProps>;
 	} & { [K in ThemeComponentOverridesNamedSelectors<'recommendationBundle', string>]?: Partial<RecommendationBundleProps> } & {
 		[K in ThemeComponentOverridesNamedSelectors<'recommendationBundleEasyAdd', string>]?: Partial<RecommendationBundleEasyAddProps>;

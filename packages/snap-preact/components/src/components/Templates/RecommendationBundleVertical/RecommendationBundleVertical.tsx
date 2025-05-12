@@ -2,8 +2,7 @@ import { h } from 'preact';
 import { css } from '@emotion/react';
 import { observer } from 'mobx-react-lite';
 
-import { defined, mergeProps, mergeStyles } from '../../../utilities';
-import { Theme, useTheme } from '../../../providers';
+import { defined, mergeStyles } from '../../../utilities';
 import { ComponentProps, StyleScript } from '../../../types';
 import { RecommendationBundle, RecommendationBundleProps } from '../RecommendationBundle';
 
@@ -19,18 +18,13 @@ const defaultStyles: StyleScript<RecommendationBundleVerticalProps> = () => {
 };
 
 export const RecommendationBundleVertical = observer((properties: RecommendationBundleVerticalProps): JSX.Element => {
-	const globalTheme: Theme = useTheme();
-	const defaultProps: Partial<RecommendationBundleVerticalProps> = {};
-
 	//mergeprops only uses names that are passed via properties, so this cannot be put in the defaultProps
 	const _properties = {
 		name: properties.controller?.store?.profile?.display?.template?.component?.toLowerCase(),
 		...properties,
 	};
 
-	const props = mergeProps('recommendationBundleVertical', globalTheme, defaultProps, _properties);
-
-	const { treePath, disableStyles, controller, style: _, styleScript: __, themeStyleScript: ___, ...additionalProps } = props;
+	const { treePath, disableStyles, controller, style: _, styleScript: __, themeStyleScript: ___, ...additionalProps } = _properties;
 
 	const subProps: RecommendationBundleVerticalSubProps = {
 		recommendationBundle: {
@@ -41,18 +35,19 @@ export const RecommendationBundleVertical = observer((properties: Recommendation
 				enabled: false,
 			},
 			separatorIcon: false,
+			inherits: 'recommendationBundleVertical',
 
 			// inherited props
 			...defined({
 				disableStyles,
 			}),
 			// component theme overrides
-			theme: props?.theme,
+			theme: _properties?.theme,
 			treePath,
 		},
 	};
 
-	const styling = mergeStyles<RecommendationBundleVerticalProps>(props, defaultStyles);
+	const styling = mergeStyles<RecommendationBundleVerticalProps>(_properties, defaultStyles);
 
 	return <RecommendationBundle controller={controller} {...styling} {...subProps.recommendationBundle} {...additionalProps} />;
 });

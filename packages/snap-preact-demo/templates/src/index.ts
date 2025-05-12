@@ -33,19 +33,120 @@ let config: SnapTemplatesConfig = {
 			},
 			style: globalStyles,
 			overrides: {
-				// defaults
 				components: {
-					// "toolbar.middle": {
-					// 	// layout: ['pagination']
-					// }
+					// 'toolbar.top': {
+					// 	layout: ['layoutSelector', 'searchHeader'],
+					// },
+					// searchHeader: {
+					// 	titleText: 'global title text',
+					// 	subtitleText: 'global subtitle text',
+					// },
+					// search: {
+					// 	layoutOptions: [
+					// 		{
+					// 			default: true,
+					// 			value: '1',
+					// 			label: 'one',
+					// 			overrides: {
+					// 				components: {
+					// 					searchHeader: {
+					// 						titleText: 'title text one',
+					// 						subtitleText: 'subtitle text one',
+					// 					},
+					// 				},
+					// 			},
+					// 		},
+					// 		{
+					// 			default: false,
+					// 			value: '2',
+					// 			label: 'two',
+					// 			overrides: {
+					// 				components: {
+					// 					searchHeader: {
+					// 						titleText: 'title text two',
+					// 						subtitleText: 'subtitle text two',
+					// 					},
+					// 				},
+					// 			},
+					// 		},
+					// 	],
+					// },
 				},
 
-				// mobile, tablet, desktop
-				responsive: {
-					mobile: {},
-					tablet: {},
-					desktop: {},
-				},
+				// responsive: {
+				// 	mobile: {
+				// 		searchHeader: {
+				// 			titleText: '0 - 767',
+				// 		},
+				// 		search: {
+				// 			layoutOptions: [
+				// 				{
+				// 					default: true,
+				// 					value: '1',
+				// 					label: 'one',
+				// 					overrides: {
+				// 						components: {
+				// 							searchHeader: {
+				// 								titleText: 'layout1 0 - 767',
+				// 							},
+				// 						},
+				// 					},
+				// 				},
+				// 				{
+				// 					default: false,
+				// 					value: '2',
+				// 					label: 'two',
+				// 					overrides: {
+				// 						components: {
+				// 							searchHeader: {
+				// 								titleText: 'layout2 0 - 767',
+				// 							},
+				// 						},
+				// 					},
+				// 				},
+				// 			],
+				// 		},
+				// 	},
+				// 	tablet: {
+				// 		searchHeader: {
+				// 			titleText: '767 - 991',
+				// 		},
+				// 		search: {
+				// 			layoutOptions: [
+				// 				{
+				// 					default: true,
+				// 					value: '1',
+				// 					label: 'one',
+				// 					overrides: {
+				// 						components: {
+				// 							searchHeader: {
+				// 								titleText: 'layout1 767 - 991',
+				// 							},
+				// 						},
+				// 					},
+				// 				},
+				// 				{
+				// 					default: false,
+				// 					value: '2',
+				// 					label: 'two',
+				// 					overrides: {
+				// 						components: {
+				// 							searchHeader: {
+				// 								titleText: 'layout2 767 - 991',
+				// 							},
+				// 						},
+				// 					},
+				// 				},
+				// 			],
+				// 		},
+				// 	},
+				// 	desktop: {
+				// 		//only overrides when layoutoptions, if its also in a layout options
+				// 		searchHeader: {
+				// 			titleText: '991 - 1299',
+				// 		},
+				// 	},
+				// }
 			},
 		},
 	},
@@ -60,12 +161,17 @@ let config: SnapTemplatesConfig = {
 				component: 'Recommendation',
 			},
 		},
+		bundle: {
+			Bundle: {
+				component: 'RecommendationBundleVertical',
+			},
+		},
 	},
 	search: {
 		targets: [
 			{
 				selector: '#searchspring-layout',
-				component: 'SearchSnapnco',
+				component: 'Search',
 			},
 		],
 	},

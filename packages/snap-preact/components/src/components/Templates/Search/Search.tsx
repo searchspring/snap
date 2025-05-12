@@ -52,7 +52,7 @@ export const Search = observer((properties: SearchProps): JSX.Element => {
 		mobileDisplayAt: globalTheme?.variables?.breakpoints?.tablet ? `${globalTheme.variables?.breakpoints?.tablet}px` : '991px',
 	};
 
-	const props = mergeProps('search', globalTheme, defaultProps, properties);
+	const props = mergeProps(properties.inherits || 'search', globalTheme, defaultProps, properties);
 
 	const {
 		disableStyles,
@@ -69,7 +69,8 @@ export const Search = observer((properties: SearchProps): JSX.Element => {
 		toggleSidebarStartClosed,
 		treePath,
 	} = props;
-
+	console.log(props.layoutOptions);
+	// debugger
 	// handle selected layoutOptions
 	if (globalTheme?.name && props.layoutOptions) {
 		useLayoutOptions(props, globalTheme);
@@ -228,6 +229,7 @@ export interface SearchProps extends ComponentProps {
 	hideToggleSidebarButton?: boolean;
 	lang?: Partial<SearchLang>;
 	layoutOptions?: ListOption[];
+	inherits?: string;
 }
 
 export interface SearchLang {

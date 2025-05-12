@@ -4,18 +4,21 @@ const config = {
 		titleElem: '.ss__search-header__title',
 	},
 };
-//todo test
-describe.skip('Theme variables work', () => {
+
+describe('Theme variables work', () => {
 	it('has default breakpoints from extended theme', () => {
 		cy.on('window:before:load', (win) => {
 			win.mergeSnapConfig = {
 				themes: {
 					custom: {
 						extends: 'bocachica',
-						// variables: {
-						// default breakpoints: [767, 991, 1299],
-						// breakpoints: [540, 767, 1200],
-						// },
+						variables: {
+							breakpoints: {
+								mobile: 767,
+								tablet: 991,
+								desktop: 1299,
+							},
+						},
 						overrides: {
 							components: {
 								searchHeader: {
@@ -25,29 +28,23 @@ describe.skip('Theme variables work', () => {
 									toggleSidebarStartClosed: false,
 								},
 							},
-							responsive: [
-								{
-									components: {
-										searchHeader: {
-											titleText: '0 - 767',
-										},
+							responsive: {
+								mobile: {
+									searchHeader: {
+										titleText: '0 - 767',
 									},
 								},
-								{
-									components: {
-										searchHeader: {
-											titleText: '767 - 991',
-										},
+								tablet: {
+									searchHeader: {
+										titleText: '767 - 991',
 									},
 								},
-								{
-									components: {
-										searchHeader: {
-											titleText: '991 - 1299',
-										},
+								desktop: {
+									searchHeader: {
+										titleText: '991 - 1299',
 									},
 								},
-							],
+							},
 						},
 					},
 				},
@@ -97,8 +94,11 @@ describe.skip('Theme variables work', () => {
 					custom: {
 						extends: 'bocachica',
 						variables: {
-							// default breakpoints: [767, 991, 1299],
-							breakpoints: [540, 767, 1200],
+							breakpoints: {
+								mobile: 540,
+								tablet: 767,
+								desktop: 1200,
+							},
 						},
 						overrides: {
 							components: {
@@ -109,29 +109,23 @@ describe.skip('Theme variables work', () => {
 									toggleSidebarStartClosed: false,
 								},
 							},
-							responsive: [
-								{
-									components: {
-										searchHeader: {
-											titleText: '0 - 540',
-										},
+							responsive: {
+								mobile: {
+									searchHeader: {
+										titleText: '0 - 540',
 									},
 								},
-								{
-									components: {
-										searchHeader: {
-											titleText: '540 - 767',
-										},
+								tablet: {
+									searchHeader: {
+										titleText: '540 - 767',
 									},
 								},
-								{
-									components: {
-										searchHeader: {
-											titleText: '767 - 1200',
-										},
+								desktop: {
+									searchHeader: {
+										titleText: '767 - 1200',
 									},
 								},
-							],
+							},
 						},
 					},
 				},
@@ -190,6 +184,11 @@ describe.skip('Theme variables work', () => {
 						// accent: '#3a23ad',
 						//     }
 						// },
+						breakpoints: {
+							mobile: 767,
+							tablet: 991,
+							desktop: 1299,
+						},
 						overrides: {
 							components: {
 								search: {

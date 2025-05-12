@@ -29,7 +29,7 @@ const config = {
 	},
 };
 //todo test
-describe.skip('BundledRecommendations', () => {
+describe('BundledRecommendations', () => {
 	describe('Setup', () => {
 		it('has valid config', () => {
 			cy.wrap(config).its('url').should('have.length.at.least', 1);

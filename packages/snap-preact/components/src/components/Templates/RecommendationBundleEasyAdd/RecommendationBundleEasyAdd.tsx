@@ -2,8 +2,7 @@ import { h } from 'preact';
 import { css } from '@emotion/react';
 import { observer } from 'mobx-react-lite';
 
-import { defined, mergeProps, mergeStyles } from '../../../utilities';
-import { Theme, useTheme } from '../../../providers';
+import { defined, mergeStyles } from '../../../utilities';
 import { ComponentProps, StyleScript } from '../../../types';
 import { RecommendationBundle, RecommendationBundleProps } from '../RecommendationBundle';
 
@@ -16,18 +15,13 @@ const defaultStyles: StyleScript<RecommendationBundleEasyAddProps> = () => {
 };
 
 export const RecommendationBundleEasyAdd = observer((properties: RecommendationBundleEasyAddProps): JSX.Element => {
-	const globalTheme: Theme = useTheme();
-	const defaultProps: Partial<RecommendationBundleEasyAddProps> = {};
-
 	//mergeprops only uses names that are passed via properties, so this cannot be put in the defaultProps
 	const _properties = {
 		name: properties.controller?.store?.profile?.display?.template?.component?.toLowerCase(),
 		...properties,
 	};
 
-	const props = mergeProps('recommendationBundleEasyAdd', globalTheme, defaultProps, _properties);
-
-	const { treePath, disableStyles, controller, style: _, styleScript: __, themeStyleScript: ___, ...additionalProps } = props;
+	const { treePath, disableStyles, controller, style: _, styleScript: __, themeStyleScript: ___, ...additionalProps } = _properties;
 
 	const subProps: RecommendationBundleEasyAddSubProps = {
 		recommendationBundle: {
@@ -38,7 +32,8 @@ export const RecommendationBundleEasyAdd = observer((properties: RecommendationB
 			ctaButtonText: 'Add Both',
 			ctaInline: false,
 			hideSeed: true,
-			vertical: true,
+			inherits: 'recommendationBundleEasyAdd',
+			// vertical: true,
 			limit: 1,
 			carousel: {
 				enabled: false,
@@ -49,12 +44,12 @@ export const RecommendationBundleEasyAdd = observer((properties: RecommendationB
 				disableStyles,
 			}),
 			// component theme overrides
-			theme: props?.theme,
+			theme: _properties?.theme,
 			treePath,
 		},
 	};
 
-	const styling = mergeStyles<RecommendationBundleEasyAddProps>(props, defaultStyles);
+	const styling = mergeStyles<RecommendationBundleEasyAddProps>(_properties, defaultStyles);
 
 	return <RecommendationBundle controller={controller} {...styling} {...subProps.recommendationBundle} {...additionalProps} />;
 });

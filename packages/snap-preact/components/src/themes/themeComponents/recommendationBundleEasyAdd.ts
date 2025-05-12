@@ -1,9 +1,6 @@
-import { RecommendationBundleEasyAddProps } from '../../components/Templates/RecommendationBundleEasyAdd';
+import { RecommendationBundleProps } from '../../components/Templates/RecommendationBundle';
 
-export const recommendationBundleEasyAddThemeComponentProps: ThemeComponent<
-	'recommendationBundleEasyAddThemeComponentProps',
-	RecommendationBundleEasyAddProps
-> = {
+export const recommendationBundleEasyAddThemeComponentProps: ThemeComponent<'recommendationBundleEasyAdd', RecommendationBundleProps> = {
 	default: {},
 	mobile: {},
 	tablet: {},

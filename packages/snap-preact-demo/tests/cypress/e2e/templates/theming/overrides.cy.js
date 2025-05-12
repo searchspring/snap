@@ -308,14 +308,20 @@ describe('Theme overrides work', () => {
 		});
 	});
 
-	//todo test
-	describe.skip('Theme responsive layoutOptions work & override the layoutOptions && base overrides', () => {
+	describe('Theme responsive layoutOptions work & override the layoutOptions && base overrides', () => {
 		it('can set use component overrides in layoutoptions overriding the global overrides', () => {
 			cy.on('window:before:load', (win) => {
 				win.mergeSnapConfig = {
 					themes: {
 						custom: {
 							extends: 'bocachica',
+							variables: {
+								breakpoints: {
+									mobile: 768,
+									tablet: 991,
+									desktop: 1299,
+								},
+							},
 							overrides: {
 								components: {
 									'toolbar.top': {
@@ -333,7 +339,7 @@ describe('Theme overrides work', () => {
 												label: 'one',
 												overrides: {
 													components: {
-														'search searchHeader': {
+														searchHeader: {
 															titleText: 'title text one',
 															subtitleText: 'subtitle text one',
 														},
@@ -468,14 +474,14 @@ describe('Theme overrides work', () => {
 
 			cy.snapController().then(({ store }) => {
 				cy.get(config.selectors.titleElem).should('have.text', 'layout1 767 - 991');
-				cy.get(config.selectors.subtitleElem).should('have.text', 'global subtitle text');
+				cy.get(config.selectors.subtitleElem).should('have.text', 'subtitle text one');
 			});
 
 			cy.viewport(766, 1000);
 
 			cy.snapController().then(({ store }) => {
 				cy.get(config.selectors.titleElem).should('have.text', 'layout1 0 - 767');
-				cy.get(config.selectors.subtitleElem).should('have.text', 'global subtitle text');
+				cy.get(config.selectors.subtitleElem).should('have.text', 'subtitle text one');
 			});
 		});
 	});

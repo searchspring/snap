@@ -1,6 +1,6 @@
 import { RecommendationBundleProps } from '../../components/Templates/RecommendationBundle';
 
-export const recommendationBundleVerticalThemeComponentProps: ThemeComponent<'recommendationBundleVertical', RecommendationBundleProps> = {
+export const recommendationBundleListThemeComponentProps: ThemeComponent<'recommendationBundleList', RecommendationBundleProps> = {
 	default: {},
 	mobile: {},
 	tablet: {},

@@ -171,7 +171,7 @@ export const RecommendationBundle = observer((properties: RecommendationBundlePr
 		...properties,
 	};
 
-	let props = mergeProps('recommendationBundle', globalTheme, defaultProps, _properties);
+	let props = mergeProps(_properties.inherits || 'recommendationBundle', globalTheme, defaultProps, _properties);
 
 	let displaySettings: BreakpointsEntry | undefined;
 	if (!(properties.theme?.name || globalTheme.name)) {
@@ -735,6 +735,8 @@ export interface RecommendationBundleProps extends ComponentProps {
 		enabled: boolean;
 		offset?: string;
 	};
+
+	inherits?: string;
 }
 
 export interface RecommendationBundleLang {
