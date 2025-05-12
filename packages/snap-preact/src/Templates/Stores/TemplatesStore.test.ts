@@ -14,13 +14,12 @@ describe('TemplateStore', () => {
 				},
 			},
 		};
-		const store = new TemplatesStore({ config, settings: { editMode: true } });
+		const store = new TemplatesStore({ config });
 		expect(store).toBeDefined();
 		expect(store.loading).toBe(true);
 		expect(store.config).toBe(config);
 		expect(store.language).toBe('en');
 		expect(store.currency).toBe('usd');
-		expect(store.settings).toStrictEqual({ editMode: true });
 		expect(store.window.innerWidth).toBe(global.window.innerWidth);
 	});
 
