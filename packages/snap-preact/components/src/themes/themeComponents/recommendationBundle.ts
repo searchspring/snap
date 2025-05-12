@@ -1,4 +1,5 @@
 import { RecommendationBundleProps } from '../../components/Templates/RecommendationBundle';
+import { ThemeComponent } from '../../providers';
 
 export const recommendationBundleThemeComponentProps: ThemeComponent<'recommendationBundleThemeComponentProps', RecommendationBundleProps> = {
 	default: {

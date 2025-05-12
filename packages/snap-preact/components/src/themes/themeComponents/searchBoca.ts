@@ -1,4 +1,5 @@
 import { SearchBocaProps } from '../../components/Templates/SearchBoca';
+import { ThemeComponent } from '../../providers';
 
 export const searchBocaThemeComponentProps: ThemeComponent<'searchBoca', SearchBocaProps> = {
 	default: {

@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import type { SidebarProps } from '../../../../components/Organisms/Sidebar';
-
+import { ThemeComponent } from '../../../../providers';
 // CSS in JS style script for the Sidebar component
 const sidebarStyleScript = ({ theme }: SidebarProps) => {
 	const variables = theme?.variables;

@@ -1,6 +1,7 @@
 import { css } from '@emotion/react';
 import type { RecommendationBundleListProps } from '../../../../components/Templates/RecommendationBundleList';
 import { recommendationBundleListThemeComponentProps } from '../../../themeComponents/recommendationBundleList';
+import { ThemeComponent } from '../../../../providers';
 
 // CSS in JS style script for the RecommendationBundle component
 const recommendationBundleListStyleScript = ({ theme }: RecommendationBundleListProps) => {

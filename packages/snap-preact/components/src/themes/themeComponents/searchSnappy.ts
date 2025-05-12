@@ -1,4 +1,5 @@
 import { SearchSnappyProps } from '../../components/Templates/SearchSnappy';
+import { ThemeComponent } from '../../providers';
 
 export const searchSnappyThemeComponentProps: ThemeComponent<'searchSnappy', SearchSnappyProps> = {
 	default: {

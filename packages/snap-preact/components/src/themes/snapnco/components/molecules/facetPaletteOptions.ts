@@ -1,5 +1,6 @@
 import { css } from '@emotion/react';
 import type { FacetPaletteOptionsProps } from '../../../../components/Molecules/FacetPaletteOptions';
+import { ThemeComponent } from '../../../../providers';
 
 // CSS in JS style script for the FacetPaletteOptions component
 const facetPaletteStyleScript = ({ theme }: FacetPaletteOptionsProps) => {

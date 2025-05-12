@@ -1,5 +1,6 @@
 import { css } from '@emotion/react';
 import type { FacetGridOptionsProps } from '../../../../components/Molecules/FacetGridOptions';
+import { ThemeComponent } from '../../../../providers';
 import Color from 'color';
 
 // CSS in JS style script for the FacetGridOptions component

@@ -1,4 +1,5 @@
 import { SearchHorizontalProps } from '../../components/Templates/SearchHorizontal';
+import { ThemeComponent } from '../../providers';
 
 export const searchHorizontalThemeComponentProps: ThemeComponent<'searchHorizontal', SearchHorizontalProps> = {
 	default: {

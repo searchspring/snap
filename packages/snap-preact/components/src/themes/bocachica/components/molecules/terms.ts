@@ -1,5 +1,6 @@
 import { css } from '@emotion/react';
 import type { TermsProps } from '../../../../components/Molecules/Terms';
+import { ThemeComponent } from '../../../../providers';
 
 // CSS in JS style script for the Terms component
 const termsStyleScript = ({ theme }: TermsProps) => {

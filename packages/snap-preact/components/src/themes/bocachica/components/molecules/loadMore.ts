@@ -1,5 +1,6 @@
 import { css } from '@emotion/react';
 import type { LoadMoreProps } from '../../../../components/Molecules/LoadMore';
+import { ThemeComponent } from '../../../../providers';
 import Color from 'color';
 
 // CSS in JS style script for the LoadMore component

@@ -1,5 +1,6 @@
 import { css } from '@emotion/react';
 import type { GridProps } from '../../../../components/Molecules/Grid';
+import { ThemeComponent } from '../../../../providers';
 
 // CSS in JS style script for the Grid component
 const gridStyleScript = ({ theme }: Partial<GridProps>) => {

@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import type { FilterSummaryProps } from '../../../../components/Organisms/FilterSummary';
-
+import { ThemeComponent } from '../../../../providers';
 // CSS in JS style script for the FilterSummary component
 const filterSummaryStyleScript = ({ theme }: FilterSummaryProps) => {
 	const variables = theme?.variables;

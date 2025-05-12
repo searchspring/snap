@@ -1,5 +1,6 @@
 import { css } from '@emotion/react';
 import type { FacetHierarchyOptionsProps } from '../../../../components/Molecules/FacetHierarchyOptions';
+import { ThemeComponent } from '../../../../providers';
 
 // CSS in JS style script for the FacetHierarchyOptions component
 const facetHierarchyOptionsStyleScript = ({ horizontal, theme }: FacetHierarchyOptionsProps) => {
