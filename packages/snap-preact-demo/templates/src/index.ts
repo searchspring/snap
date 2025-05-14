@@ -33,19 +33,7 @@ let config: SnapTemplatesConfig = {
 			},
 			style: globalStyles,
 			overrides: {
-				// defaults
-				components: {
-					// "toolbar.middle": {
-					// 	// layout: ['pagination']
-					// }
-				},
-
-				// mobile, tablet, desktop
-				responsive: {
-					mobile: {},
-					tablet: {},
-					desktop: {},
-				},
+				components: {},
 			},
 		},
 	},
@@ -60,12 +48,17 @@ let config: SnapTemplatesConfig = {
 				component: 'Recommendation',
 			},
 		},
+		bundle: {
+			Bundle: {
+				component: 'RecommendationBundle',
+			},
+		},
 	},
 	search: {
 		targets: [
 			{
 				selector: '#searchspring-layout',
-				component: 'SearchSnapnco',
+				component: 'Search',
 			},
 		],
 	},
@@ -84,3 +77,27 @@ if (window.mergeSnapConfig) {
 }
 
 new SnapTemplates(config);
+
+/*
+
+Overrides are taking priority over the theme layouts (responsive) specified within the Search component - but they shouldn't be.
+Look into:
+			overrides: {
+				'toolbar.top': {
+					layout: [
+						['Banner.header'],
+					]
+				},
+				'toolbar.middle': {
+					layout: [
+						['_', 'Pagination'],
+						['Pagination'],
+						['Pagination'],
+						['Pagination'],
+						['Pagination'],
+						['Banner.banner']
+					]
+				},
+			},
+
+*/

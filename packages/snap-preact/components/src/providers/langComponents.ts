@@ -58,90 +58,17 @@ import type { RecommendationBundleLang } from '../components/Templates/Recommend
 // import type { ResultsLang } from '../components/Organisms/Results';
 import type { SearchHeaderLang } from '../components/Atoms/SearchHeader';
 import type { SidebarLang } from '../components/Organisms/Sidebar';
-// import type { ToolbarLang } from '../components/Organisms/Toolbar';
 
 /* TEMPLATES */
-// import type { AutocompleteTermsLang } from '../components/Templates/AutocompleteTerms';
 import type { RecommendationLang } from '../components/Templates/Recommendation';
 import type { SearchLang } from '../components/Templates/Search';
 import { AutocompleteTemplateLang } from '../components/Templates/AutocompleteTemplate';
-import { TermsListLang } from '../components/Organisms/TermsList';
 import { TermsLang } from '../components/Molecules/Terms';
-// import type { SearchHorizontalLang } from '../components/Templates/SearchHorizontal';
+import { DeepPartial } from '../../../src/types';
 
 // type ComponentLang> = Partial<ComponentLang> & { named?: Partial<{ [named?: Partial<string]?: Partial<Partial<ComponentLang> } };
 
-export type LangComponentOverrides = {
-	/* ATOMS */
-	// badgeImage?: Partial<BadgeImageLang>
-	// badgePill?: Partial<BadgePillLang>
-	// badgeRectangle?: Partial<BadgeRectangleLang>
-	// badgeText?: Partial<BadgeTextLang>
-	// breadcrumbs?: Partial<BreadcrumbsLang>
-	button?: Partial<ButtonLang>;
-	// dropdown?: Partial<DropdownLang>
-	// formattedNumber?: Partial<FormattedNumberLang>
-	// icon?: Partial<IconLang>
-	// image?: Partial<ImageLang>
-	// loadingBar?: Partial<LoadingBarLang>
-	// banner?: Partial<BannerLang>
-	// inlineBanner?: Partial<InlineBannerLang>
-	// overlay?: Partial<OverlayLang>
-	paginationInfo?: Partial<PaginationInfoLang>;
-	// price?: Partial<PriceLang>
-	// skeleton?: Partial<SkeletonLang>
-	// terms?: Partial<TermsLang>
-	// toggle?: Partial<ToggleLang>;
-
-	/* MOLECULES */
-	// calloutBadge?: Partial<CalloutBadgeLang>
-	// carousel?: Partial<CarouselLang>
-	checkbox?: Partial<CheckboxLang>;
-	grid?: Partial<GridLang>;
-	layoutSelector?: Partial<LayoutSelectorLang>;
-	list?: Partial<ListLang>;
-	radio?: Partial<RadioLang>;
-	errorHandler?: Partial<ErrorHandlerLang>;
-	facetGridOptions?: Partial<FacetGridOptionsLang>;
-	facetHierarchyOptions?: Partial<FacetHierarchyOptionsLang>;
-	facetListOptions?: Partial<FacetListOptionsLang>;
-	facetPaletteOptions?: Partial<FacetPaletteOptionsLang>;
-	facetSlider?: Partial<FacetSliderLang>;
-	// facetToggle?: Partial<FacetToggleLang>
-	filter?: Partial<FilterLang>;
-	loadMore?: Partial<LoadMoreLang>;
-	// overlayBadge?: Partial<OverlayBadgeLang>
-	pagination?: Partial<PaginationLang>;
-	perPage?: Partial<PerPageLang>;
-	radioList?: Partial<RadioListLang>;
-	// rating?: Partial<RatingLang>
-	// result?: Partial<ResultLang>
-	// searchInput?: Partial<SearchInputLang>
-	select?: Partial<SelectLang>;
-	// slideout?: Partial<SlideoutLang>;
-	sortBy?: Partial<SortByLang>;
-	// swatches?: Partial<SwatchesLang>
-	// variantSelection?: Partial<VariantSelectionLang>
-
-	/* ORGANISMS */
-	facet?: Partial<FacetLang>;
-	// facets?: Partial<FacetsLang>
-	facetsHorizontal?: Partial<FacetsHorizontalLang>;
-	filterSummary?: Partial<FilterSummaryLang>;
-	noResults?: Partial<NoResultsLang>;
-	recommendationBundle?: Partial<RecommendationBundleLang>;
-	// results?: Partial<ResultsLang>
-	searchHeader?: Partial<SearchHeaderLang>;
-	sidebar?: Partial<SidebarLang>;
-	mobileSidebar?: Partial<MobileSidebarLang>;
-	// toolbar?: Partial<ToolbarLang>
-
-	/* TEMPLATES */
-	// autocompleteTerms?: Partial<AutocompleteTermsLang>;
-	recommendation?: Partial<RecommendationLang>;
-	search?: Partial<SearchLang>;
-	// searchHorizontal?: Partial<SearchHorizontalLang>
-};
+export type LangComponentOverrides = DeepPartial<LangComponents>;
 
 export type LangComponents = {
 	/* ATOMS */
@@ -191,7 +118,9 @@ export type LangComponents = {
 	select: SelectLang;
 	// slideout: SlideoutLang;
 	sortBy: SortByLang;
-	terms: TermsLang;
+	['terms.history']: TermsLang;
+	['terms.suggestions']: TermsLang;
+	['terms.trending']: TermsLang;
 	// swatches: SwatchesLang
 	// variantSelection: VariantSelectionLang
 
@@ -205,7 +134,6 @@ export type LangComponents = {
 	// results: ResultsLang
 	searchHeader: SearchHeaderLang;
 	sidebar: SidebarLang;
-	termList: TermsListLang;
 	mobileSidebar: MobileSidebarLang;
 	// toolbar: ToolbarLang
 

@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
 import type { RecommendationBundleProps } from '../../../../components/Templates/RecommendationBundle';
 import { recommendationBundleThemeComponentProps } from '../../../themeComponents/recommendationBundle';
-
+import { ThemeComponent } from '../../../../providers';
 // CSS in JS style script for the RecommendationBundle component
 const recommendationBundleStyleScript = ({ theme }: any) => {
 	// eslint-disable-next-line @typescript-eslint/no-unused-vars

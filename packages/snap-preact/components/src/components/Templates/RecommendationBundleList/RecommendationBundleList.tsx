@@ -1,10 +1,8 @@
 import { h } from 'preact';
 import { css } from '@emotion/react';
 import { observer } from 'mobx-react-lite';
-
-import { defined, mergeProps, mergeStyles } from '../../../utilities';
-import { Theme, useTheme } from '../../../providers';
 import { ComponentProps, StyleScript } from '../../../types';
+import { defined, mergeStyles } from '../../../utilities';
 import { RecommendationBundle, RecommendationBundleProps } from '../RecommendationBundle';
 import { Price } from '../../Atoms/Price';
 import { Button } from '../../Atoms/Button';
@@ -15,9 +13,9 @@ import { BundledCTAProps } from '../RecommendationBundle/BundleCTA';
 
 const defaultStyles: StyleScript<RecommendationBundleListProps> = () => {
 	return css({
-		'.ss__recommendation-bundle__wrapper__selector__result-wrapper': {
+		'.ss__recommendation-bundle-list__wrapper__selector__result-wrapper': {
 			display: 'flex',
-			'.ss__recommendation-bundle__wrapper__selector__result-wrapper__checkbox': {
+			'.ss__recommendation-bundle-list__wrapper__selector__result-wrapper__checkbox': {
 				position: 'relative',
 				minWidth: '20px',
 			},
@@ -32,11 +30,11 @@ const defaultStyles: StyleScript<RecommendationBundleListProps> = () => {
 			flexDirection: 'column',
 		},
 
-		'.ss__recommendation-bundle__wrapper': {
+		'.ss__recommendation-bundle-list__wrapper': {
 			order: '3',
 		},
 
-		'.ss__recommendation-bundle__wrapper__cta': {
+		'.ss__recommendation-bundle-list__wrapper__cta': {
 			order: '2',
 
 			'.ss__button': {
@@ -67,23 +65,17 @@ const defaultStyles: StyleScript<RecommendationBundleListProps> = () => {
 };
 
 export const RecommendationBundleList = observer((properties: RecommendationBundleListProps): JSX.Element => {
-	const globalTheme: Theme = useTheme();
-	const defaultProps: Partial<RecommendationBundleListProps> = {};
-
 	//mergeprops only uses names that are passed via properties, so this cannot be put in the defaultProps
 	const _properties = {
-		name: properties.controller?.store?.profile?.display?.template?.component?.toLowerCase(),
+		name: properties.controller?.store?.profile?.tag?.toLowerCase(),
 		...properties,
 	};
 
-	const props = mergeProps('recommendationBundleList', globalTheme, defaultProps, _properties);
-
-	const { treePath, disableStyles, controller, style: _, styleScript: __, themeStyleScript: ___, ...additionalProps } = props;
+	const { treePath, disableStyles, controller, style: _, styleScript: __, themeStyleScript: ___, ...additionalProps } = _properties;
 
 	const subProps: RecommendationBundleListSubProps = {
 		recommendationBundle: {
 			// default props
-			className: 'ss__recommendation-bundle-list',
 			seedText: '',
 			ctaInline: false,
 			limit: 5,
@@ -96,18 +88,18 @@ export const RecommendationBundleList = observer((properties: RecommendationBund
 			resultComponent: (props) => <Result hideImage={true} {...props} />,
 			vertical: true,
 			separatorIcon: false,
+			alias: 'recommendationBundleList',
 
 			// inherited props
 			...defined({
 				disableStyles,
 			}),
 			// component theme oveRides
-			theme: props?.theme,
+			theme: _properties?.theme,
 			treePath,
 		},
 	};
-
-	const styling = mergeStyles<RecommendationBundleListProps>(props, defaultStyles);
+	const styling = mergeStyles<RecommendationBundleListProps>(_properties, defaultStyles);
 
 	return <RecommendationBundle controller={controller} {...styling} {...subProps.recommendationBundle} {...additionalProps} />;
 });
@@ -122,7 +114,7 @@ interface RecommendationBundleListSubProps {
 	recommendationBundle: Partial<RecommendationBundleProps>;
 }
 
-const CTASlot = observer((props: BundledCTAProps): JSX.Element => {
+export const CTASlot = observer((props: BundledCTAProps): JSX.Element => {
 	const cartStore = props.cartStore;
 	return (
 		<div className="cta">

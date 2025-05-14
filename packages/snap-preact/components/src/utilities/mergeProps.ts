@@ -164,7 +164,7 @@ export function filterSelectors(themeComponents: ThemeComponents, treePath: stri
 	if (componentName) {
 		selectors = selectors.filter((key) => {
 			const keys = key.split(' ');
-			const lastkey = keys[keys.length - 1];
+			const lastkey = keys[keys.length - 1].replace(/\*/g, '');
 			if (lastkey == componentType || lastkey == `${componentType}.${componentName}`) {
 				return true;
 			}

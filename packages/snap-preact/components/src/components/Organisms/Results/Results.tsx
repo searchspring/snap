@@ -198,5 +198,3 @@ interface ResultsSubProps {
 	result: Partial<ResultProps>;
 	inlineBanner: Partial<InlineBannerProps>;
 }
-
-export type ResultsNames = 'search' | 'autocomplete';

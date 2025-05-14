@@ -123,22 +123,27 @@ export class ThemeStore {
 			Themes consist of layers which are deep merged together in order (last merge has highest priority)
 				1. base theme
 				2. base theme responsive breakpoints
-				3. currency overrides
-				4. language overrides
+				3. currency
+				4. language
 				5. language translation overrides
 				6. theme overrides
 				7. theme overrides at responsive breakpoints
 				8. altered theme variables
-				9. layout option overrides
-				10. stored theme editor overrides
+				9. stored theme editor overrides
 		*/
 
 		const breakpoints = this.variables.breakpoints || this.base.variables?.breakpoints;
 
+		// currently selected theme layer for current breakpoint
 		const baseBreakpoint = getOverridesAtWidth(this.innerWidth, breakpoints, this.base);
+
+		// overrides breakpoint is index file responsive overrides that match current breakpoint
 		const overrideBreakpoint = getOverridesAtWidth(this.innerWidth, breakpoints, this.overrides);
 
+		// currently selected theme
 		const base = { ...this.base };
+
+		// overrides is index file default overrides
 		const overrides = { ...this.overrides };
 
 		const themeOverrides = mergeThemeLayers(overrides, overrideBreakpoint, {

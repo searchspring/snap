@@ -1,5 +1,6 @@
 import { css } from '@emotion/react';
 import type { FacetsHorizontalProps } from '../../../../components/Organisms/FacetsHorizontal';
+import { ThemeComponent } from '../../../../providers';
 
 // CSS in JS style script for the Facets component
 const facetsHorizontalStyleScript = ({ theme }: FacetsHorizontalProps) => {

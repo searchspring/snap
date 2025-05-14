@@ -1,5 +1,6 @@
 import { css } from '@emotion/react';
 import type { ButtonProps } from '../../../../components/Atoms/Button';
+import { ThemeComponent } from '../../../../providers';
 
 // CSS in JS style script for the Button component
 const buttonStyleScript = ({}: ButtonProps) => {

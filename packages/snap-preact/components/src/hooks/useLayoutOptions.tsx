@@ -14,9 +14,13 @@ export const useLayoutOptions = (props: any, globalTheme: Theme) => {
 	);
 
 	// verify selectedLayout is in layoutOptions - if not set it to the default one
-	if (!layoutOptions.some((option: any) => option.value == selectedLayout.value)) {
-		const newSelection = layoutOptions.filter((option: any) => option.default).pop();
-		setSelectedLayout(newSelection);
+	try {
+		if (!layoutOptions.some((option: any) => JSON.stringify(option) == JSON.stringify(selectedLayout))) {
+			const newSelection = layoutOptions.filter((option: any) => option.default).pop();
+			setSelectedLayout(newSelection);
+		}
+	} catch (err) {
+		props.controller.log('invalid layoutOptions provided to component', props.inherits ? ` '${props.inherits}'` : '');
 	}
 
 	props.theme = props.theme || {};
@@ -43,7 +47,11 @@ export const useLayoutOptions = (props: any, globalTheme: Theme) => {
 			const paths = key.split(' ');
 			const componentTypeAndName = paths.splice(-1).pop() ?? '';
 			const [componentType] = componentTypeAndName.split('.');
-			if (globalTheme.components && componentType == 'toolbar' && (paths[0] == templateComponent || paths[0] == `*${templateComponent}`)) {
+			if (
+				globalTheme.components &&
+				componentType == 'toolbar' &&
+				(paths[0] == templateComponent || paths[0] == `*${templateComponent}` || !paths.length)
+			) {
 				const toolbarConfig = globalTheme.components[key as keyof typeof globalTheme.components] as Partial<ToolbarProps>;
 				if (toolbarConfig?.layout && toolbarConfig.layout.toString().indexOf('layoutSelector') > -1) {
 					shouldUseOverrides = true;

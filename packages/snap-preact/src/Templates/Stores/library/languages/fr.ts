@@ -24,30 +24,32 @@ export const fr: LangComponents = {
 					data?.controller?.store?.pagination?.totalResults == 1 ? '' : 's'
 				} pour "${data?.controller?.store?.search?.query?.string}"`,
 		},
-		termsTitle: {
-			value: 'Suggestions',
-		},
-		trendingTitle: {
-			value: 'Tendance',
-		},
-		historyTitle: {
+	},
+	'terms.history': {
+		title: {
 			value: 'Histoire',
 		},
-	},
-	termList: {
-		termsTitle: {
-			value: 'Suggestions',
-		},
-		trendingTitle: {
-			value: 'Tendance',
-		},
-		historyTitle: {
-			value: 'Histoire',
-		},
-	},
-	terms: {
 		term: {
-			value: (data) => `${data.term.value}`,
+			attributes: {
+				'aria-label': (data) => `article ${data.index + 1} de ${data.numberOfTerms}, ${data.term.value}`,
+			},
+		},
+	},
+	'terms.suggestions': {
+		title: {
+			value: 'Suggestions',
+		},
+		term: {
+			attributes: {
+				'aria-label': (data) => `article ${data.index + 1} de ${data.numberOfTerms}, ${data.term.value}`,
+			},
+		},
+	},
+	'terms.trending': {
+		title: {
+			value: 'Tendance',
+		},
+		term: {
 			attributes: {
 				'aria-label': (data) => `article ${data.index + 1} de ${data.numberOfTerms}, ${data.term.value}`,
 			},

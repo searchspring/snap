@@ -14,16 +14,16 @@ const config = {
 	disableGA: '', // disable google analytic events (example: 'UA-123456-1')
 	selectors: {
 		recommendation: {
-			main: '.ss__recommendation-bundle',
+			main: '.ss__recommendation-bundle-list',
 			// selector of the wrapping element. Expects child element to contain <a>
-			carousel: `.ss__recommendation-bundle .ss__carousel`,
+			carousel: `.ss__recommendation-bundle-list .ss__carousel`,
 			result: '.ss__result',
 			customResult: '.ss__custom-result',
-			seed: '.ss__recommendation-bundle__wrapper__selector--seed',
-			nextArrow: '.ss__recommendation-bundle .ss__carousel__next',
-			prevArrow: '.ss__recommendation-bundle .ss__carousel__prev',
-			activeSlide: '.ss__recommendation-bundle .swiper-slide-active',
-			cta: '.ss__recommendation-bundle__wrapper__cta',
+			seed: '.ss__recommendation-bundle-list__wrapper__selector--seed',
+			nextArrow: '.ss__recommendation-bundle-list .ss__carousel__next',
+			prevArrow: '.ss__recommendation-bundle-list .ss__carousel__prev',
+			activeSlide: '.ss__recommendation-bundle-list .swiper-slide-active',
+			cta: '.ss__recommendation-bundle-list__wrapper__cta',
 			controller: 'recommend_bundle_0',
 		},
 	},
@@ -92,7 +92,7 @@ describe('BundledRecommendations', () => {
 		it('renders a seed product', function () {
 			cy.snapController(config?.selectors?.recommendation.controller).then(({ store }) => {
 				cy.get(config?.selectors?.recommendation.seed).should('exist');
-				// cy.get(`${config?.selectors?.recommendation.seed} .ss__recommendation-bundle__wrapper__selector__result-wrapper__seed-badge`)
+				// cy.get(`${config?.selectors?.recommendation.seed} .ss__recommendation-bundle-list__wrapper__selector__result-wrapper__seed-badge`)
 				// 	.should('exist')
 				// 	.should('have.text', 'This Product');
 			});
@@ -113,7 +113,7 @@ describe('BundledRecommendations', () => {
 			});
 
 			//check it is responsive to cartstore changes.
-			cy.get(`${config?.selectors?.recommendation.seed} .ss__recommendation-bundle__wrapper__selector__result-wrapper__checkbox`)
+			cy.get(`${config?.selectors?.recommendation.seed} .ss__recommendation-bundle-list__wrapper__selector__result-wrapper__checkbox`)
 				.should('exist')
 				.click({ force: true })
 				.then(() => {

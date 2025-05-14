@@ -24,28 +24,33 @@ export const es: LangComponents = {
 					data?.controller?.store?.pagination?.totalResults == 1 ? '' : 's'
 				} para "${data?.controller?.store?.search?.query?.string}"`,
 		},
-		termsTitle: {
-			value: 'Sugerido',
-		},
-		trendingTitle: {
-			value: 'Tendencia',
-		},
-		historyTitle: {
+	},
+	'terms.history': {
+		title: {
 			value: 'Historia',
 		},
+		term: {
+			value: (data) => `${data.term.value}`,
+			attributes: {
+				'aria-label': (data) => `artículo ${data.index + 1} de ${data.numberOfTerms}, ${data.term.value}`,
+			},
+		},
 	},
-	termList: {
-		termsTitle: {
+	'terms.suggestions': {
+		title: {
 			value: 'Sugerido',
 		},
-		trendingTitle: {
-			value: 'Tendencia',
-		},
-		historyTitle: {
-			value: 'Historia',
+		term: {
+			value: (data) => `${data.term.value}`,
+			attributes: {
+				'aria-label': (data) => `artículo ${data.index + 1} de ${data.numberOfTerms}, ${data.term.value}`,
+			},
 		},
 	},
-	terms: {
+	'terms.trending': {
+		title: {
+			value: 'Tendencia',
+		},
 		term: {
 			value: (data) => `${data.term.value}`,
 			attributes: {

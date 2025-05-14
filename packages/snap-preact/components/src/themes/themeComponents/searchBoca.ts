@@ -1,4 +1,5 @@
 import { SearchBocaProps } from '../../components/Templates/SearchBoca';
+import { ThemeComponent } from '../../providers';
 
 export const searchBocaThemeComponentProps: ThemeComponent<'searchBoca', SearchBocaProps> = {
 	default: {
@@ -35,6 +36,10 @@ export const searchBocaThemeComponentProps: ThemeComponent<'searchBoca', SearchB
 			toggleSidebarStartClosed: true,
 		},
 		components: {
+			'*searchBoca button.sidebar-toggle': {
+				icon: 'filters',
+			},
+
 			'*searchBoca toolbar.top': {
 				layout: [
 					['banner.header'],

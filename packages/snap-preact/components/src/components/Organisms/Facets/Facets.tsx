@@ -107,5 +107,3 @@ export interface FacetsProps extends ComponentProps {
 	controller?: SearchController | AutocompleteController;
 	onFacetOptionClick?: (e: React.MouseEvent<Element, MouseEvent>) => void;
 }
-
-export type FacetsNames = 'search' | 'autocomplete';

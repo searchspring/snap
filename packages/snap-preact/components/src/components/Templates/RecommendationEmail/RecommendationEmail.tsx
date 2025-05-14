@@ -7,7 +7,7 @@ import type { Product } from '@searchspring/snap-store-mobx';
 
 import { Result, ResultProps } from '../../Molecules/Result';
 import { defined, mergeProps } from '../../../utilities';
-import { Theme, useTheme } from '../../../providers';
+import { Theme, ThemeComponent, useTheme } from '../../../providers';
 import { ComponentProps, ResultComponent } from '../../../types';
 
 export const recommendationEmailThemeComponentProps: ThemeComponent<'recommendationEmailThemeComponentProps', RecommendationEmailProps> = {
@@ -21,6 +21,7 @@ export const RecommendationEmail = observer((properties: RecommendationEmailProp
 	const globalTheme: Theme = useTheme();
 	const defaultProps: Partial<RecommendationEmailProps> = {
 		resultWidth: '240px',
+		name: properties.controller?.store?.profile?.tag?.toLowerCase(),
 	};
 
 	const props = mergeProps('recommendationEmail', globalTheme, defaultProps, properties);

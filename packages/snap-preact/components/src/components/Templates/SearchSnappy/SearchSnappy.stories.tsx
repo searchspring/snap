@@ -4,7 +4,7 @@ import { ArgsTable, PRIMARY_STORY, Markdown } from '@storybook/blocks';
 
 import { componentArgs, highlightedCode } from '../../../utilities';
 import { Snapify } from '../../../utilities/snapify';
-import Readme from './readme.md';
+import Readme from '../Search/readme.md';
 import type { SearchController } from '@searchspring/snap-controller';
 import { SearchSnappy, SearchSnappyProps } from './SearchSnappy';
 
@@ -161,7 +161,7 @@ const noresultsInstance = Snapify.search({
 });
 
 export const Default = (args: SearchSnappyProps, { loaded: { controller } }: { loaded: { controller: SearchController } }) => {
-	return <Search {...args} controller={controller} />;
+	return <SearchSnappy {...args} controller={controller} />;
 };
 
 Default.loaders = [
@@ -173,8 +173,8 @@ Default.loaders = [
 	},
 ];
 
-export const NoResults = (args: SearchSnappyhProps, { loaded: { controller } }: { loaded: { controller: SearchController } }) => {
-	return <Search {...args} controller={controller} />;
+export const NoResults = (args: SearchSnappyProps, { loaded: { controller } }: { loaded: { controller: SearchController } }) => {
+	return <SearchSnappy {...args} controller={controller} />;
 };
 
 NoResults.loaders = [

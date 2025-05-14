@@ -358,7 +358,6 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 
 	const subProps: AutocompleteSubProps = {
 		facets: {
-			name: 'autocomplete',
 			// default props
 			limit: 3,
 			// inherited props
@@ -380,7 +379,6 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 			treePath,
 		},
 		results: {
-			name: 'autocomplete',
 			// default props
 			className: 'ss__autocomplete__results',
 			breakpoints: props.breakpoints,
