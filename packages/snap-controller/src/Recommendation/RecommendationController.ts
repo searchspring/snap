@@ -117,6 +117,7 @@ export class RecommendationController extends AbstractController {
 				this.events.product[result.id] = this.events.product[result.id] || {};
 				this.events.product[result.id].clickThrough = true;
 				this.eventManager.fire('track.product.clickThrough', { controller: this, event: e, products: [result], trackEvent: data });
+				// TODO: should we fire 'track.product.click()' here for backwards compatibility? Same in SearchController & update docs
 			},
 			click: (e: MouseEvent, result): void => {
 				// TODO: closest might be going too far - write own function to only go n levels up - additionally check that href includes result.url

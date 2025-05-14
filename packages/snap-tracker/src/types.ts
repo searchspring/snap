@@ -1,10 +1,11 @@
 import { AppMode } from '@searchspring/snap-toolbox';
 import { BeaconEvent } from './BeaconEvent';
-import type { ContextCurrency } from '@searchspring/beacon';
+import type { ContextCurrency, Product } from '@searchspring/beacon';
 
 export type TrackerGlobals = {
 	siteId: string;
 	currency?: ContextCurrency;
+	cart?: Product[];
 };
 
 export type TrackerEvents = 'error' | 'shopper.login' | 'product.view' | 'product.click' | 'cart.view' | 'order.transaction';

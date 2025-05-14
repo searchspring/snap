@@ -174,6 +174,110 @@ export class Tracker extends Beacon {
 				});
 			}
 		});
+
+		const cart = (this.globals as TrackerGlobals).cart;
+		if (Array.isArray(cart)) {
+			if (cart.length === 0) {
+				// cart is empty, clear storage and send remove event if storage had items
+				const storedCart = this.storage.cart.get();
+				if (storedCart.length) {
+					this.events.cart.remove({
+						data: {
+							results: storedCart,
+							cart: [],
+						},
+					});
+				}
+				this.storage.cart.clear();
+			} else if (cart.length) {
+				// length check here to be able to sent error event if invalid array of objects is provided
+				const currentCart: Product[] = cart
+					.filter((item) => typeof item === 'object' && (item.uid || item.sku || item.childUid || item.childSku) && item.qty && item.price)
+					.map((item): Product => {
+						return {
+							uid: item.uid,
+							childUid: item.childUid,
+							sku: item.sku,
+							childSku: item.childSku,
+							price: item.price,
+							qty: item.qty,
+						};
+					});
+
+				// beacon 2.0 requires all parameters to be present
+				// send error to keep track of integrations to be updated
+				if (!currentCart.length) {
+					this.events.error.snap({
+						data: {
+							message: 'cart globals missing properties',
+							details: { cart },
+						},
+					});
+				}
+
+				const storedCart = this.storage.cart.get();
+				const toAdd: Product[] = [];
+				const toRemove: Product[] = [];
+
+				if (!storedCart?.length && currentCart.length) {
+					// no stored cart, add all items
+					toAdd.push(...currentCart);
+				} else if (currentCart.length) {
+					currentCart.forEach((item) => {
+						const existingItem = storedCart.find((existingItem) => {
+							return (
+								existingItem.uid === item.uid &&
+								existingItem.sku === item.sku &&
+								existingItem.childUid === item.childUid &&
+								existingItem.childSku === item.childSku
+							);
+						});
+						if (!existingItem) {
+							// item does not exist in cart, add it
+							toAdd.push(item);
+						} else if (existingItem) {
+							// item already exists in cart, check if qty has changed
+							if (item.qty > existingItem.qty) {
+								toAdd.push({
+									...item,
+									qty: item.qty - existingItem.qty,
+								});
+							} else if (item.qty < existingItem.qty) {
+								toRemove.push({
+									...existingItem,
+									qty: existingItem.qty - item.qty,
+								});
+							}
+							// remove from existing cart
+							const index = storedCart.indexOf(existingItem);
+							if (index !== -1) {
+								storedCart.splice(index, 1);
+							}
+						}
+					});
+					// any remaining items in existing cart should be removed
+					if (storedCart.length) {
+						toRemove.push(...storedCart);
+					}
+				}
+				if (toAdd.length) {
+					this.events.cart.add({
+						data: {
+							results: toAdd,
+							cart: currentCart,
+						},
+					});
+				}
+				if (toRemove.length) {
+					this.events.cart.remove({
+						data: {
+							results: toRemove,
+							cart: currentCart,
+						},
+					});
+				}
+			}
+		}
 	}
 
 	public getGlobals(): TrackerGlobals {

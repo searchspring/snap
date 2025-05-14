@@ -210,9 +210,10 @@ export class AutocompleteController extends AbstractController {
 			},
 		},
 		redirect: (redirectURL: string): void => {
+			// TODO: should this be under product? To keep same as Search and Recommendations
 			const data = getAutocompleteRedirectSchemaData({ redirectURL });
 			this.tracker.events.autocomplete.redirect({ data, siteId: this.config.globals?.siteId });
-			this.eventManager.fire('track.product.redirect', { controller: this, redirectURL, trackEvent: data });
+			this.eventManager.fire('track.redirect', { controller: this, redirectURL, trackEvent: data });
 		},
 	};
 

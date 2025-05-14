@@ -199,6 +199,10 @@ snap.getController('search').then((search) => {
 - Called with `eventData` = { controller }
 - Called automatically with first `search()` of the controller or invoked by a call to the `init` controller method
 
+### error
+- Called with `eventData` = { controller, error }
+- Invoked when an error has been caught within the controller
+
 ### beforeSearch
 - Called with `eventData` = { controller, request }
 - Always invoked before an API request is made 
@@ -215,10 +219,34 @@ snap.getController('search').then((search) => {
 - Called with `eventData` = { controller, request, response }
 - Always invoked after data has been stored in Mobx store
 
-### track.product.click
-- Called with `eventData` = { controller, event, result, trackEvent } 
-- Always invoked after `track.product.click()` method has been invoked
-- Allows for adding custom product click events (ie. Google Analytics)
+### restorePosition
+- Called with `eventData` = { controller, element }
+- If an element position data exists, `element` data will include `domRect` (of the element with selector), `href` and `selector`
+- Invoked during final stages of `afterStore` just prior to setting loading state to false
+
+### track.product.render
+- Called with `eventData` = { controller, products, trackEvent } 
+- Always invoked after `track.product.render()` method has been invoked
+
+### track.product.impression
+- Called with `eventData` = { controller, products, trackEvent } 
+- Always invoked after `track.product.impression()` method has been invoked
+
+### track.product.clickThrough
+- Called with `eventData` = { controller, event, products, trackEvent } 
+- Always invoked after `track.product.clickThrough()` or `track.product.click()` method has been invoked
+
+### track.product.addToCart
+- Called with `eventData` = { controller, products, trackEvent } 
+- Always invoked after `track.product.addToCart()` method has been invoked
+
+### track.product.redirect
+- Called with `eventData` = { controller, redirectURL, trackEvent } 
+- Always invoked after `track.product.redirect()` method has been invoked
+
+### addToCart
+- Called with `eventData` = { controller, products } 
+- Always invoked after `addToCart()` method has been invoked
 
 
 ## Autocomplete Events
@@ -226,6 +254,10 @@ snap.getController('search').then((search) => {
 ### init
 - Called with `eventData` = { controller }
 - Called automatically with first `search()` of the controller or invoked by a call to the `init` controller method
+
+### error
+- Called with `eventData` = { controller, error }
+- Invoked when an error has been caught within the controller
 
 ### beforeSearch
 - Called with `eventData` = { controller, request }
@@ -246,12 +278,44 @@ snap.getController('search').then((search) => {
 - Called with `eventData` = { controller }
 - Invoked when a new input element has been focused
 
+### beforeSubmit
+- Called with `eventData` = { controller, input }
+- Invoked prior to submission of autocomplete search
+
+### track.product.render
+- Called with `eventData` = { controller, products, trackEvent } 
+- Always invoked after `track.product.render()` method has been invoked
+
+### track.product.impression
+- Called with `eventData` = { controller, products, trackEvent } 
+- Always invoked after `track.product.impression()` method has been invoked
+
+### track.product.clickThrough
+- Called with `eventData` = { controller, event, products, trackEvent } 
+- Always invoked after `track.product.clickThrough()` or `track.product.click()` method has been invoked
+
+### track.product.addToCart
+- Called with `eventData` = { controller, products, trackEvent } 
+- Always invoked after `track.product.addToCart()` method has been invoked
+
+### track.redirect
+- Called with `eventData` = { controller, redirectURL, trackEvent } 
+- Always invoked after `track.redirect()` method has been invoked
+
+### addToCart
+- Called with `eventData` = { controller, products } 
+- Always invoked after `addToCart()` method has been invoked
+
 
 ## Finder Events
 
 ### init
 - Called with `eventData` = { controller }
 - Called automatically with first `search()` of the controller or invoked by a call to the `init` controller method
+
+### error
+- Called with `eventData` = { controller, error }
+- Invoked when an error has been caught within the controller
 
 ### beforeSearch
 - Called with `eventData` = { controller, request }
@@ -278,6 +342,10 @@ snap.getController('search').then((search) => {
 - Called with `eventData` = { controller }
 - Called automatically with first `search()` of the controller or invoked by a call to the `init` controller method
 
+### error
+- Called with `eventData` = { controller, error }
+- Invoked when an error has been caught within the controller
+
 ### beforeSearch
 - Called with `eventData` = { controller, request }
 - Always invoked before an API request is made 
@@ -293,9 +361,9 @@ snap.getController('search').then((search) => {
 - Called with `eventData` = { controller, request, response }
 - Always invoked after data has been stored in Mobx store
 
-### track.product.click
+### track.product.clickThrough
 - Called with `eventData` = { controller, event, result, trackEvent } 
-- Always invoked after `track.product.click()` method has been invoked
+- Always invoked after `track.product.clickThrough()` or `track.product.click()` method has been invoked
 - Allows for adding custom product click events (ie. Google Analytics)
 
 ### track.product.impression
@@ -306,18 +374,12 @@ snap.getController('search').then((search) => {
 - Called with `eventData` = { controller, result, trackEvent } 
 - Always invoked after `track.product.render()` method has been invoked
 
-### track.click
-- Called with `eventData` = { controller, event, trackEvent } 
-- Always invoked after `track.click()` method has been invoked
+### track.bundle.addToCart
+- Called with `eventData` = { controller, products, trackEvent } 
+- Always invoked after `track.bundle.addToCart()` method has been invoked
 
-### track.impression
-- Called with `eventData` = { controller, trackEvent } 
-- Always invoked after `track.impression()` method has been invoked
-
-### track.render
-- Called with `eventData` = { controller, trackEvent } 
-- Always invoked after `track.render()` method has been invoked
-
-
+### track.product.addToCart
+- Called with `eventData` = { controller, products, trackEvent } 
+- Always invoked after `track.product.addToCart()` method has been invoked
 
 
