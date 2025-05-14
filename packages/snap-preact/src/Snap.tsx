@@ -402,6 +402,11 @@ export class Snap {
 					currency: this.context.currency,
 				});
 			}
+			if (this.context.shopper?.cart) {
+				trackerGlobals = deepmerge(trackerGlobals || {}, {
+					cart: this.context.shopper.cart,
+				});
+			}
 
 			const trackerConfig = deepmerge(this.config.tracker?.config || {}, { framework: 'snap/preact', mode: this.mode });
 			this.tracker = services?.tracker || new Tracker(trackerGlobals, trackerConfig);
@@ -535,15 +540,6 @@ export class Snap {
 			this.tracker.track.shopper.login({
 				id: this.context.shopper.id,
 			});
-		}
-
-		// auto populate cart cookie from the context
-		if (this.context?.shopper?.cart) {
-			const cart = this.context.shopper.cart;
-			if (Array.isArray(cart)) {
-				const cartItems = cart.filter((item) => item?.sku || item?.childSku).map((item) => (item?.sku || item?.childSku || '').trim());
-				this.tracker.cookies.cart.set(cartItems);
-			}
 		}
 
 		// create controllers
