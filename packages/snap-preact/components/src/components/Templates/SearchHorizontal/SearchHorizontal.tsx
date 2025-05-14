@@ -8,7 +8,7 @@ import { Search, SearchProps } from '../Search/Search';
 export const SearchHorizontal = observer((properties: SearchHorizontalProps): JSX.Element => {
 	return (
 		<CacheProvider>
-			<Search {...properties} inherits="searchHorizontal" />
+			<Search {...properties} alias="searchHorizontal" />
 		</CacheProvider>
 	);
 });

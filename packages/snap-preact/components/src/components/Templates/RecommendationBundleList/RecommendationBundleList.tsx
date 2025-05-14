@@ -13,9 +13,9 @@ import { BundledCTAProps } from '../RecommendationBundle/BundleCTA';
 
 const defaultStyles: StyleScript<RecommendationBundleListProps> = () => {
 	return css({
-		'.ss__recommendation-bundle__wrapper__selector__result-wrapper': {
+		'.ss__recommendation-bundle-list__wrapper__selector__result-wrapper': {
 			display: 'flex',
-			'.ss__recommendation-bundle__wrapper__selector__result-wrapper__checkbox': {
+			'.ss__recommendation-bundle-list__wrapper__selector__result-wrapper__checkbox': {
 				position: 'relative',
 				minWidth: '20px',
 			},
@@ -30,11 +30,11 @@ const defaultStyles: StyleScript<RecommendationBundleListProps> = () => {
 			flexDirection: 'column',
 		},
 
-		'.ss__recommendation-bundle__wrapper': {
+		'.ss__recommendation-bundle-list__wrapper': {
 			order: '3',
 		},
 
-		'.ss__recommendation-bundle__wrapper__cta': {
+		'.ss__recommendation-bundle-list__wrapper__cta': {
 			order: '2',
 
 			'.ss__button': {
@@ -67,7 +67,7 @@ const defaultStyles: StyleScript<RecommendationBundleListProps> = () => {
 export const RecommendationBundleList = observer((properties: RecommendationBundleListProps): JSX.Element => {
 	//mergeprops only uses names that are passed via properties, so this cannot be put in the defaultProps
 	const _properties = {
-		name: properties.controller?.store?.profile?.display?.template?.component?.toLowerCase(),
+		name: properties.controller?.store?.profile?.tag?.toLowerCase(),
 		...properties,
 	};
 
@@ -76,7 +76,6 @@ export const RecommendationBundleList = observer((properties: RecommendationBund
 	const subProps: RecommendationBundleListSubProps = {
 		recommendationBundle: {
 			// default props
-			className: 'ss__recommendation-bundle-list',
 			seedText: '',
 			ctaInline: false,
 			limit: 5,
@@ -89,7 +88,7 @@ export const RecommendationBundleList = observer((properties: RecommendationBund
 			resultComponent: (props) => <Result hideImage={true} {...props} />,
 			vertical: true,
 			separatorIcon: false,
-			inherits: 'recommendationBundleList',
+			alias: 'recommendationBundleList',
 
 			// inherited props
 			...defined({

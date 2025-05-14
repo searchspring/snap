@@ -8,10 +8,10 @@ import { RecommendationBundle, RecommendationBundleProps } from '../Recommendati
 
 const defaultStyles: StyleScript<RecommendationBundleVerticalProps> = () => {
 	return css({
-		'.ss__recommendation-bundle__wrapper': {
+		'.ss__recommendation-bundle-vertical__wrapper': {
 			flexDirection: 'column',
 		},
-		'.ss__recommendation-bundle__wrapper__cta': {
+		'.ss__recommendation-bundle-vertical__wrapper__cta': {
 			textAlign: 'center',
 		},
 	});
@@ -20,7 +20,7 @@ const defaultStyles: StyleScript<RecommendationBundleVerticalProps> = () => {
 export const RecommendationBundleVertical = observer((properties: RecommendationBundleVerticalProps): JSX.Element => {
 	//mergeprops only uses names that are passed via properties, so this cannot be put in the defaultProps
 	const _properties = {
-		name: properties.controller?.store?.profile?.display?.template?.component?.toLowerCase(),
+		name: properties.controller?.store?.profile?.tag?.toLowerCase(),
 		...properties,
 	};
 
@@ -29,14 +29,12 @@ export const RecommendationBundleVertical = observer((properties: Recommendation
 	const subProps: RecommendationBundleVerticalSubProps = {
 		recommendationBundle: {
 			// default props
-			className: 'ss__recommendation-bundle-vertical',
 			ctaInline: false,
 			carousel: {
 				enabled: false,
 			},
 			separatorIcon: false,
-			inherits: 'recommendationBundleVertical',
-
+			alias: 'recommendationBundleVertical',
 			// inherited props
 			...defined({
 				disableStyles,

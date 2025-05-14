@@ -8,7 +8,7 @@ import { Search, SearchProps } from '../Search/Search';
 export const SearchSnappy = observer((properties: SearchSnappyProps): JSX.Element => {
 	return (
 		<CacheProvider>
-			<Search {...properties} inherits="searchSnappy" />
+			<Search {...properties} alias="searchSnappy" />
 		</CacheProvider>
 	);
 });

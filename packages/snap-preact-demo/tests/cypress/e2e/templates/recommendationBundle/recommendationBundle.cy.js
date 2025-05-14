@@ -28,7 +28,7 @@ const config = {
 		},
 	},
 };
-//todo test
+
 describe('BundledRecommendations', () => {
 	describe('Setup', () => {
 		it('has valid config', () => {

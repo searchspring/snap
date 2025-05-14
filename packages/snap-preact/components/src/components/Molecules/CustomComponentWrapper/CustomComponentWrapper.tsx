@@ -1,10 +1,10 @@
 import { h } from 'preact';
-import { jsx, css } from '@emotion/react';
+import { css } from '@emotion/react';
 import { observer } from 'mobx-react-lite';
-import { mergeProps, mergeStyles } from '../../../utilities';
+import { cloneWithProps, mergeProps, mergeStyles } from '../../../utilities';
 import { ComponentProps, StyleScript } from '../../../types';
 import { Theme, useTheme, CacheProvider } from '../../../providers';
-import { TreePathProvider, useTreePath } from '../../../providers/treePath';
+import { useTreePath } from '../../../providers/treePath';
 
 const defaultStyles: StyleScript<CustomComponentWrapperProps> = () => {
 	return css({});
@@ -30,9 +30,7 @@ export const CustomComponentWrapper = observer((properties: CustomComponentWrapp
 
 	return (
 		<CacheProvider>
-			<div {...styling}>
-				<TreePathProvider path={path!}>{children}</TreePathProvider>
-			</div>
+			<div {...styling}>{cloneWithProps(children, { treePath: path, theme: globalTheme })}</div>
 		</CacheProvider>
 	);
 });

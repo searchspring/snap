@@ -138,6 +138,26 @@ export default {
 			},
 			control: { type: 'boolean' },
 		},
+		persistFirst: {
+			description: 'persists the first page button (when not on first page)',
+			table: {
+				type: {
+					summary: 'boolean',
+				},
+				defaultValue: { summary: false },
+			},
+			control: { type: 'boolean' },
+		},
+		persistLast: {
+			description: 'persists the last page button (when not on last page)',
+			table: {
+				type: {
+					summary: 'boolean',
+				},
+				defaultValue: { summary: false },
+			},
+			control: { type: 'boolean' },
+		},
 		hideEllipsis: {
 			description: 'Hide ellipsis',
 			table: {

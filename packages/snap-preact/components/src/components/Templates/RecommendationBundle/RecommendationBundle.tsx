@@ -19,102 +19,108 @@ import { BundleSelector } from './BundleSelector';
 import { BundledCTA, BundledCTAProps } from './BundleCTA';
 import { Lang } from '../../../hooks';
 import { useIntersection } from '../../../hooks';
+import { componentNameToClassName } from '../../../utilities/componentNameToClassName';
 
-const defaultStyles: StyleScript<RecommendationBundleProps> = ({ vertical, separatorIcon, carousel, ctaInline }) => {
+const defaultStyles: StyleScript<RecommendationBundleProps> = ({ vertical, separatorIcon, carousel, ctaInline, alias: inherits }) => {
+	let classNamePrefix = 'ss__recommendation-bundle';
+	if (inherits) {
+		classNamePrefix = `ss__${componentNameToClassName(inherits)}`;
+	}
+
 	return css({
-		'.ss__recommendation-bundle__wrapper': {
+		[`.${classNamePrefix}__wrapper`]: {
 			display: 'flex',
 			maxWidth: '100%',
 			margin: '0',
 			padding: '0',
 		},
 
-		'.ss__recommendation-bundle__wrapper__selector--seed': {
+		[`.${classNamePrefix}__wrapper__selector--seed`]: {
 			width: `${vertical ? '100%' : 'auto'}`,
 			margin: `${!separatorIcon ? 'auto !important' : 'initial'}`,
 		},
 
-		'.ss__recommendation-bundle__wrapper__seed-container': {
+		[`.${classNamePrefix}__wrapper__seed-container`]: {
 			width: vertical ? '100%' : `calc(100% / ${carousel?.slidesPerView! + (!ctaInline ? 0 : 1)})`,
 		},
 
-		'.ss__recommendation-bundle__wrapper__cta': {
+		[`.${classNamePrefix}__wrapper__cta`]: {
 			width: vertical ? '100%' : `${!ctaInline ? '100%' : `calc(100% / ${carousel?.slidesPerView! + 1})`}`,
 
 			textAlign: 'center',
 
-			'.ss__recommendation-bundle__wrapper__cta__subtotal__prices': {
+			[`.${classNamePrefix}__wrapper__cta__subtotal__prices`]: {
 				display: 'block',
 			},
 
-			'.ss__recommendation-bundle__wrapper__cta__button--added': {
+			[`.${classNamePrefix}__wrapper__cta__button--added`]: {
 				cursor: 'none',
 				pointerEvents: 'none',
 				opacity: '.7',
 			},
 		},
 
-		'.ss__recommendation-bundle__wrapper__carousel': {
+		[`.${classNamePrefix}__wrapper__carousel`]: {
 			boxSizing: 'border-box',
 			width: vertical ? '100%' : `calc(calc(100% / ${carousel?.slidesPerView! + (!ctaInline ? 0 : 1)}) * ${carousel?.slidesPerView! - 1})`,
 		},
 
-		'.ss__recommendation-bundle__wrapper--seed-in-carousel': {
-			'.ss__recommendation-bundle__wrapper__cta': {
+		[`.${classNamePrefix}__wrapper--seed-in-carousel`]: {
+			[`.${classNamePrefix}__wrapper__cta`]: {
 				width: vertical ? '100%' : `calc(100% / ${carousel?.slidesPerView! + (!ctaInline ? 0 : 1)})`,
 			},
 
-			'.ss__recommendation-bundle__wrapper__carousel': {
+			[`.${classNamePrefix}__wrapper__carousel`]: {
 				width: vertical ? '100%' : `calc(calc(100% / ${carousel?.slidesPerView! + (!ctaInline ? 0 : 1)}) * ${carousel?.slidesPerView})`,
 				padding: '0',
 			},
 		},
 
 		'.swiper-slide, .swiper-slide-visible.swiper-last-visible-slide': {
-			'.ss__recommendation-bundle__wrapper__selector__icon': {
+			[`.${classNamePrefix}__wrapper__selector__icon`]: {
 				display: 'none',
 			},
 		},
 
 		'.swiper-slide-visible': {
-			'.ss__recommendation-bundle__wrapper__selector__icon': {
+			[`.${classNamePrefix}__wrapper__selector__icon`]: {
 				display: 'block',
 			},
 		},
 
-		'.ss__recommendation-bundle__wrapper--vertical': {
+		[`.${classNamePrefix}__wrapper--vertical`]: {
 			flexDirection: 'column',
 		},
 
-		'.ss__recommendation-bundle__wrapper__selector': {
+		[`.${classNamePrefix}__wrapper__selector`]: {
 			alignItems: 'baseline',
 			position: 'relative',
 
-			'&.ss__recommendation-bundle__wrapper__selector--last': {
-				'& .ss__recommendation-bundle__wrapper__selector__icon': {
+			[`&.${classNamePrefix}__wrapper__selector--last`]: {
+				[`.${classNamePrefix}__wrapper__selector__icon`]: {
 					display: 'none',
 				},
 			},
 
-			'& .ss__recommendation-bundle__wrapper__selector__result-wrapper__seed-badge': {
+			[`.${classNamePrefix}__wrapper__selector__result-wrapper__seed-badge`]: {
 				position: 'absolute',
 				top: '0',
 				left: '0',
 				zIndex: '1',
 			},
 
-			'& .ss__recommendation-bundle__wrapper__selector__icon': {
+			[`.${classNamePrefix}__wrapper__selector__icon`]: {
 				position: 'absolute',
 				right: '-1em',
 				top: '140px',
 			},
 
-			'& .ss__recommendation-bundle__wrapper__selector__result-wrapper': {
+			[`.${classNamePrefix}__wrapper__selector__result-wrapper`]: {
 				alignItems: 'center',
 				position: 'relative',
 				margin: `0px ${5 + (Number(carousel?.spaceBetween) || 0)}px`,
 			},
-			'& .ss__recommendation-bundle__wrapper__selector__result-wrapper__checkbox': {
+			[`.${classNamePrefix}__wrapper__selector__result-wrapper__checkbox`]: {
 				position: 'absolute',
 				top: '0',
 				right: '0',
@@ -160,6 +166,7 @@ export const RecommendationBundle = observer((properties: RecommendationBundlePr
 		ctaButtonSuccessTimeout: 2000,
 		ctaInline: true,
 		onAddToCart: (e, items) => controller?.addToCart && controller.addToCart(items),
+		title: properties.controller?.store?.profile?.display?.templateParameters?.title,
 		...properties,
 		// props
 		...properties.theme?.components?.recommendationBundle,
@@ -167,11 +174,16 @@ export const RecommendationBundle = observer((properties: RecommendationBundlePr
 
 	//mergeprops only uses names that are passed via properties, so this cannot be put in the defaultProps
 	const _properties = {
-		name: properties.controller?.store?.profile?.display?.template?.component?.toLowerCase(),
+		name: properties.controller?.store?.profile?.tag?.toLowerCase(),
 		...properties,
 	};
 
-	let props = mergeProps(_properties.inherits || 'recommendationBundle', globalTheme, defaultProps, _properties);
+	let props = mergeProps(_properties.alias || 'recommendationBundle', globalTheme, defaultProps, _properties);
+
+	let classNamePrefix = 'ss__recommendation-bundle';
+	if (props.alias) {
+		classNamePrefix = `ss__${componentNameToClassName(props.alias)}`;
+	}
 
 	let displaySettings: BreakpointsEntry | undefined;
 	if (!(properties.theme?.name || globalTheme.name)) {
@@ -400,7 +412,7 @@ export const RecommendationBundle = observer((properties: RecommendationBundlePr
 			// @ts-ignore - todo can this be typed appropriatly?
 			const carouselElem: HTMLElement = carouselRef.current?.base;
 
-			const visibleSlide = carouselElem?.querySelector('.swiper-slide-visible .ss__recommendation-bundle__wrapper__selector') as HTMLElement;
+			const visibleSlide = carouselElem?.querySelector(`.swiper-slide-visible .${classNamePrefix}__wrapper__selector`) as HTMLElement;
 			const width = visibleSlide?.offsetWidth;
 
 			if (seedElem) {
@@ -440,29 +452,25 @@ export const RecommendationBundle = observer((properties: RecommendationBundlePr
 
 	return resultsToRender?.length ? (
 		<CacheProvider>
-			<div
-				{...styling}
-				ref={recsRef}
-				className={classnames('ss__recommendation-bundle', { 'ss__recommendation-bundle--stacked': !ctaInline }, className)}
-			>
+			<div {...styling} ref={recsRef} className={classnames(classNamePrefix, { [`${classNamePrefix}--stacked`]: !ctaInline }, className)}>
 				{isVisible ? (
 					<RecommendationProfileTracker controller={controller}>
 						{title && (
-							<h3 className="ss__recommendation-bundle__title">
+							<h3 className={`${classNamePrefix}__title`}>
 								<span>{title}</span>
 							</h3>
 						)}
 
 						<div
-							className={classnames('ss__recommendation-bundle__wrapper', {
-								'ss__recommendation-bundle__wrapper--seed-in-carousel': seedInCarousel,
-								'ss__recommendation-bundle__wrapper--vertical': vertical,
+							className={classnames(`${classNamePrefix}__wrapper`, {
+								[`${classNamePrefix}__wrapper--seed-in-carousel`]: seedInCarousel,
+								[`${classNamePrefix}__wrapper--vertical`]: vertical,
 							})}
 						>
 							{carouselEnabled ? (
 								<Fragment>
 									{!seedInCarousel && !hideSeed && (
-										<div className="ss__recommendation-bundle__wrapper__seed-container">
+										<div className={`${classNamePrefix}__wrapper__seed-container`}>
 											<RecommendationResultTracker controller={controller} result={seed} track={{ impression: false }}>
 												<BundleSelector
 													seedText={seedText}
@@ -475,6 +483,7 @@ export const RecommendationBundle = observer((properties: RecommendationBundlePr
 													theme={props.theme}
 													ref={seedRef}
 													treePath={treePath}
+													classNamePrefix={classNamePrefix}
 													lang={{ seedText: lang.seedText }}
 												>
 													{resultComponent ? (
@@ -492,7 +501,7 @@ export const RecommendationBundle = observer((properties: RecommendationBundlePr
 											</RecommendationResultTracker>
 										</div>
 									)}
-									<div className="ss__recommendation-bundle__wrapper__carousel">
+									<div className={`${classNamePrefix}__wrapper__carousel`}>
 										<Carousel
 											prevButton={prevButton}
 											nextButton={nextButton}
@@ -529,6 +538,7 @@ export const RecommendationBundle = observer((properties: RecommendationBundlePr
 																			hideCheckboxes={hideCheckboxes}
 																			theme={props.theme}
 																			treePath={treePath}
+																			classNamePrefix={classNamePrefix}
 																			lang={{ seedText: lang.seedText }}
 																		>
 																			{resultComponent ? (
@@ -550,7 +560,8 @@ export const RecommendationBundle = observer((properties: RecommendationBundlePr
 																			hideCheckboxes={hideCheckboxes}
 																			theme={props.theme}
 																			treePath={treePath}
-																			className={idx + 1 == resultsToRender.length ? 'ss__recommendation-bundle__wrapper__selector--last' : ''}
+																			classNamePrefix={classNamePrefix}
+																			className={idx + 1 == resultsToRender.length ? `${classNamePrefix}__wrapper__selector--last` : ''}
 																		>
 																			{resultComponent ? (
 																				cloneWithProps(resultComponent, { result: result, seed: false, selected, onProductSelect, treePath })
@@ -577,7 +588,8 @@ export const RecommendationBundle = observer((properties: RecommendationBundlePr
 																		hideCheckboxes={hideCheckboxes}
 																		theme={props.theme}
 																		treePath={treePath}
-																		className={idx + 1 == results.length ? 'ss__recommendation-bundle__wrapper__selector--last' : ''}
+																		classNamePrefix={classNamePrefix}
+																		className={idx + 1 == results.length ? `${classNamePrefix}__wrapper__selector--last` : ''}
 																	>
 																		{resultComponent ? (
 																			cloneWithProps(resultComponent, { result: result, seed: false, selected, onProductSelect, treePath })
@@ -610,6 +622,7 @@ export const RecommendationBundle = observer((properties: RecommendationBundlePr
 														hideCheckboxes={hideCheckboxes}
 														theme={props.theme}
 														treePath={treePath}
+														classNamePrefix={classNamePrefix}
 														lang={{ seedText: lang.seedText }}
 													>
 														{resultComponent ? (
@@ -631,7 +644,8 @@ export const RecommendationBundle = observer((properties: RecommendationBundlePr
 														hideCheckboxes={hideCheckboxes}
 														theme={props.theme}
 														treePath={treePath}
-														className={idx + 1 == resultsToRender.length ? 'ss__recommendation-bundle__wrapper__selector--last' : ''}
+														classNamePrefix={classNamePrefix}
+														className={idx + 1 == resultsToRender.length ? `${classNamePrefix}__wrapper__selector--last` : ''}
 													>
 														{resultComponent ? (
 															cloneWithProps(resultComponent, { result: result, seed: false, selected, onProductSelect, treePath })
@@ -655,6 +669,7 @@ export const RecommendationBundle = observer((properties: RecommendationBundlePr
 									ctaButtonSuccessTimeout={ctaButtonSuccessTimeout}
 									ctaIcon={ctaIcon}
 									treePath={treePath}
+									classNamePrefix={classNamePrefix}
 									lang={{
 										ctaButtonSuccessText: lang.ctaButtonSuccessText,
 										ctaButtonText: lang.ctaButtonText,
@@ -672,6 +687,7 @@ export const RecommendationBundle = observer((properties: RecommendationBundlePr
 								ctaButtonSuccessTimeout={ctaButtonSuccessTimeout}
 								ctaIcon={ctaIcon}
 								treePath={treePath}
+								classNamePrefix={classNamePrefix}
 								lang={{
 									ctaButtonSuccessText: lang.ctaButtonSuccessText,
 									ctaButtonText: lang.ctaButtonText,
@@ -735,8 +751,7 @@ export interface RecommendationBundleProps extends ComponentProps {
 		enabled: boolean;
 		offset?: string;
 	};
-
-	inherits?: string;
+	alias?: string;
 }
 
 export interface RecommendationBundleLang {

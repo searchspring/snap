@@ -27,7 +27,7 @@ export const BundledCTA = observer((properties: BundledCTAProps): JSX.Element =>
 		setTimeout(() => setAddedToCart(false), properties.ctaButtonSuccessTimeout);
 	};
 
-	const { ctaSlot, cartStore, onAddToCart, ctaIcon, ctaButtonText, ctaButtonSuccessText, treePath } = props;
+	const { ctaSlot, cartStore, onAddToCart, ctaIcon, ctaButtonText, ctaButtonSuccessText, treePath, classNamePrefix } = props;
 
 	const [addedToCart, setAddedToCart] = useState(false);
 
@@ -37,7 +37,7 @@ export const BundledCTA = observer((properties: BundledCTAProps): JSX.Element =>
 		icon: {
 			name: 'bundle-cart',
 			// default props
-			className: 'ss__recommendation-bundle__wrapper__cta__icon',
+			className: `${classNamePrefix}__wrapper__cta__icon`,
 			size: 50,
 			// component theme overrides
 			theme: props?.theme,
@@ -69,12 +69,12 @@ export const BundledCTA = observer((properties: BundledCTAProps): JSX.Element =>
 	const lang = deepmerge({}, props.lang || {});
 	const mergedLang = useLang(lang as any, {});
 	return (
-		<div className={`ss__recommendation-bundle__wrapper__cta`}>
+		<div className={`${classNamePrefix}__wrapper__cta`}>
 			{ctaSlot ? (
 				cloneWithProps(ctaSlot, props)
 			) : (
 				<Fragment>
-					<div className="ss__recommendation-bundle__wrapper__cta__subtotal" aria-atomic="false" aria-live="polite">
+					<div className={`${classNamePrefix}__wrapper__cta__subtotal`} aria-atomic="false" aria-live="polite">
 						{ctaIcon ? (
 							<div className="icon">
 								<Icon {...subProps.icon} {...(typeof ctaIcon == 'string' ? { icon: ctaIcon } : (ctaIcon as Partial<IconProps>))} />
@@ -82,16 +82,16 @@ export const BundledCTA = observer((properties: BundledCTAProps): JSX.Element =>
 						) : (
 							<Fragment></Fragment>
 						)}
-						<span className="ss__recommendation-bundle__wrapper__cta__subtotal__title">{`Subtotal for ${cartStore.count} items`}</span>
-						<div className="ss__recommendation-bundle__wrapper__cta__subtotal__prices">
+						<span className={`${classNamePrefix}__wrapper__cta__subtotal__title`}>{`Subtotal for ${cartStore.count} items`}</span>
+						<div className={`${classNamePrefix}__wrapper__cta__subtotal__prices`}>
 							{cartStore.msrp && cartStore.msrp !== cartStore.price ? (
-								<label className="ss__recommendation-bundle__wrapper__cta__subtotal__strike">
+								<label className={`${classNamePrefix}__wrapper__cta__subtotal__strike`}>
 									Was <Price {...subProps.subtotalStrike} lineThrough={true} value={cartStore.msrp} />
 								</label>
 							) : (
 								<Fragment></Fragment>
 							)}
-							<label className="ss__recommendation-bundle__wrapper__cta__subtotal__price">
+							<label className={`${classNamePrefix}__wrapper__cta__subtotal__price`}>
 								<Price {...subProps.subtotalPrice} value={cartStore.price} />
 							</label>
 						</div>
@@ -99,8 +99,8 @@ export const BundledCTA = observer((properties: BundledCTAProps): JSX.Element =>
 
 					<Button
 						{...subProps.button}
-						className={classnames('ss__recommendation-bundle__wrapper__cta__button', {
-							'ss__recommendation-bundle__wrapper__cta__button--added': addedToCart,
+						className={classnames(`${classNamePrefix}__wrapper__cta__button`, {
+							[`${classNamePrefix}__wrapper__cta__button--added`]: addedToCart,
 						})}
 						aria-live={addedToCart}
 						onClick={(e) => onAddToCart(e)}
@@ -130,6 +130,7 @@ export interface BundledCTAProps extends ComponentProps {
 	ctaButtonSuccessText?: string;
 	ctaButtonSuccessTimeout?: number;
 	addedToCart?: boolean;
+	classNamePrefix?: string;
 	lang?: Partial<BundledCTALang>;
 }
 

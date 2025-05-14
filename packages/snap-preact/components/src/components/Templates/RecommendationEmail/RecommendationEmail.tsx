@@ -21,6 +21,7 @@ export const RecommendationEmail = observer((properties: RecommendationEmailProp
 	const globalTheme: Theme = useTheme();
 	const defaultProps: Partial<RecommendationEmailProps> = {
 		resultWidth: '240px',
+		name: properties.controller?.store?.profile?.tag?.toLowerCase(),
 	};
 
 	const props = mergeProps('recommendationEmail', globalTheme, defaultProps, properties);

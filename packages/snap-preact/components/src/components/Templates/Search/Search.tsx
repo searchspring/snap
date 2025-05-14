@@ -15,14 +15,20 @@ import { Lang, useLang, useMediaQuery } from '../../../hooks';
 import { SearchFilterStore } from '@searchspring/snap-store-mobx';
 import deepmerge from 'deepmerge';
 import { useLayoutOptions } from '../../../hooks/useLayoutOptions';
+import { componentNameToClassName } from '../../../utilities/componentNameToClassName';
 
-const defaultStyles: StyleScript<SearchProps> = () => {
+const defaultStyles: StyleScript<SearchProps> = (props) => {
+	let classNamePrefix = 'ss__search';
+	if (props.alias) {
+		classNamePrefix = `ss__${componentNameToClassName(props.alias)}`;
+	}
+
 	return css({
-		'.ss__search__header-section': {
+		[`.${classNamePrefix}__header-section`]: {
 			marginBottom: '20px',
 		},
 
-		'.ss__search__main-section': {
+		[`.${classNamePrefix}__main-section`]: {
 			display: 'flex',
 			minHeight: '600px',
 			gap: '20px',
@@ -33,7 +39,7 @@ const defaultStyles: StyleScript<SearchProps> = () => {
 			width: '270px',
 		},
 
-		'.ss__search__content': {
+		[`.${classNamePrefix}__content`]: {
 			width: '100%',
 			boxSizing: 'border-box',
 			display: 'flex',
@@ -52,7 +58,7 @@ export const Search = observer((properties: SearchProps): JSX.Element => {
 		mobileDisplayAt: globalTheme?.variables?.breakpoints?.tablet ? `${globalTheme.variables?.breakpoints?.tablet}px` : '991px',
 	};
 
-	const props = mergeProps(properties.inherits || 'search', globalTheme, defaultProps, properties);
+	const props = mergeProps(properties.alias || 'search', globalTheme, defaultProps, properties);
 
 	const {
 		disableStyles,
@@ -69,8 +75,12 @@ export const Search = observer((properties: SearchProps): JSX.Element => {
 		toggleSidebarStartClosed,
 		treePath,
 	} = props;
-	console.log(props.layoutOptions);
-	// debugger
+
+	let classNamePrefix = 'ss__search';
+	if (props.alias) {
+		classNamePrefix = `ss__${componentNameToClassName(props.alias)}`;
+	}
+
 	// handle selected layoutOptions
 	if (globalTheme?.name && props.layoutOptions) {
 		useLayoutOptions(props, globalTheme);
@@ -95,10 +105,7 @@ export const Search = observer((properties: SearchProps): JSX.Element => {
 
 	const ToggleSidebar = (): JSX.Element => {
 		return (
-			<div
-				onClick={() => setSidebarOpenState(!sidebarOpenState)}
-				className={classnames('ss__search__sidebar-toggle', { 'ss__search__sidebar-toggle--open': sidebarOpenState })}
-			>
+			<div className={classnames(`${classNamePrefix}__sidebar-toggle`, sidebarOpenState ? `${classNamePrefix}__sidebar-toggle--open` : '')}>
 				<span {...mergedLang.toggleSidebarButtonText.all}></span>
 			</div>
 		);
@@ -108,12 +115,15 @@ export const Search = observer((properties: SearchProps): JSX.Element => {
 		TopToolbar: {
 			// default props
 			name: 'top',
-			className: 'ss__search__header-section__toolbar--top-toolbar',
+			className: `${classNamePrefix}__header-section__toolbar--top-toolbar`,
 			layout: ['searchHeader', 'banner.header', 'button.sidebar-toggle'],
-			toggleSideBarButton:
-				!hideToggleSidebarButton && store.loaded && !isMobile && (toggleSidebarButtonText || mergedLang.toggleSidebarButtonText?.value)
-					? () => <ToggleSidebar />
-					: undefined,
+			toggleSideBarButton: {
+				onClick: () => setSidebarOpenState(!sidebarOpenState),
+				children:
+					!hideToggleSidebarButton && store.loaded && !isMobile && (toggleSidebarButtonText || mergedLang.toggleSidebarButtonText?.value)
+						? ToggleSidebar
+						: undefined,
+			},
 			...defined({
 				disableStyles,
 			}),
@@ -123,7 +133,7 @@ export const Search = observer((properties: SearchProps): JSX.Element => {
 		MiddleToolbar: {
 			// default props
 			name: 'middle',
-			className: 'ss__search__content__toolbar--middle-toolbar',
+			className: `${classNamePrefix}__content__toolbar--middle-toolbar`,
 			layout: isMobile
 				? [['paginationInfo', '_', 'mobileSidebar'], ['sortBy', 'perPage'], ['banner.banner']]
 				: [['sortBy', 'perPage', '_', 'paginationInfo'], ['banner.banner']],
@@ -137,7 +147,7 @@ export const Search = observer((properties: SearchProps): JSX.Element => {
 		BottomToolbar: {
 			// default props
 			name: 'bottom',
-			className: 'ss__search__content__toolbar--bottom-toolbar',
+			className: `${classNamePrefix}__content__toolbar--bottom-toolbar`,
 			layout: [['banner.footer'], ['_', 'pagination']],
 			// inherited props
 			...defined({
@@ -148,7 +158,6 @@ export const Search = observer((properties: SearchProps): JSX.Element => {
 		},
 		Sidebar: {
 			// default props
-			name: 'search',
 			layout: [['filterSummary'], ['facets'], ['banner.left']],
 			// inherited props
 			...defined({
@@ -158,7 +167,6 @@ export const Search = observer((properties: SearchProps): JSX.Element => {
 			treePath,
 		},
 		Results: {
-			name: 'search',
 			// default props
 			resultComponent: resultComponent,
 			// inherited props
@@ -183,22 +191,17 @@ export const Search = observer((properties: SearchProps): JSX.Element => {
 
 	return (
 		<CacheProvider>
-			<div
-				{...styling}
-				className={classnames('ss__search', className, {
-					'ss__search--sidebar-open': sidebarOpenState,
-				})}
-			>
-				<div className="ss__search__header-section">
+			<div {...styling} className={classnames(classNamePrefix, className, sidebarOpenState ? `${classNamePrefix}--sidebar-open` : '')}>
+				<div className={`${classNamePrefix}__header-section`}>
 					{!hideTopToolbar && store.pagination.totalResults > 0 && <Toolbar {...subProps.TopToolbar} controller={controller} />}
 				</div>
-				<div className="ss__search__main-section">
+				<div className={`${classNamePrefix}__main-section`}>
 					{!hideSidebar && !isMobile && sidebarOpenState && (
-						<div className="ss__search__sidebar">
+						<div className={`${classNamePrefix}__sidebar`}>
 							<Sidebar {...subProps.Sidebar} controller={controller} />
 						</div>
 					)}
-					<div className={classnames('ss__search__content')}>
+					<div className={classnames(`${classNamePrefix}__content`)}>
 						{!hideMiddleToolbar && store.pagination.totalResults > 0 && <Toolbar {...subProps.MiddleToolbar} controller={controller} />}
 
 						{store.pagination.totalResults ? (
@@ -229,7 +232,7 @@ export interface SearchProps extends ComponentProps {
 	hideToggleSidebarButton?: boolean;
 	lang?: Partial<SearchLang>;
 	layoutOptions?: ListOption[];
-	inherits?: string;
+	alias?: 'searchBoca' | 'searchSnappy' | 'searchHorizontal' | 'searchSnapnco';
 }
 
 export interface SearchLang {

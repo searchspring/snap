@@ -115,7 +115,7 @@ export const Terms = observer((properties: TermsProps): JSX.Element => {
 
 	//deep merge with props.lang
 	const lang = deepmerge(defaultLang, props.lang || {});
-	const mergedLang = useLang(lang as any, {
+	const mergedTitleLang = useLang({ title: lang.title } as any, {
 		controller,
 	});
 
@@ -124,13 +124,13 @@ export const Terms = observer((properties: TermsProps): JSX.Element => {
 			<div {...styling} className={classnames('ss__terms', className)}>
 				{title ? (
 					<div className="ss__terms__title">
-						<h5 {...mergedLang.title.all}></h5>
+						<h5 {...mergedTitleLang.title.all}></h5>
 					</div>
 				) : null}
 				<ul className="ss__terms__options" aria-label={title} ref={(e) => useA11y(e, 0, true, escCallback)}>
 					{termsToShow?.map((term, idx) => {
 						//initialize lang
-						const defaultLang = {
+						const defaultTermLang = {
 							term: {
 								value: `${emIfy ? emIfyTerm(term.value, currentInput || '') : term.value}`,
 								attributes: {
@@ -138,11 +138,8 @@ export const Terms = observer((properties: TermsProps): JSX.Element => {
 								},
 							},
 						};
-
-						//deep merge with props.lang
-						const lang = deepmerge(defaultLang, props.lang || {});
-
-						const mergedLang = useLang(lang as any, {
+						const termLang = deepmerge(defaultTermLang, props.lang || {});
+						const mergedTermLang = useLang({ term: termLang.term } as any, {
 							index: idx,
 							numberOfTerms: termsToShow.length,
 							term: term,
@@ -158,7 +155,7 @@ export const Terms = observer((properties: TermsProps): JSX.Element => {
 									onClick={(e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => termClickEvent(e, term)}
 									href={term.url.href}
 									{...(previewOnHover ? createHoverProps(term.preview) : {})}
-									{...mergedLang.term?.all}
+									{...mergedTermLang.term?.all}
 								></a>
 							</li>
 						);
@@ -185,7 +182,7 @@ export interface TermsProps extends ComponentProps {
 }
 
 export interface TermsLang {
-	term: Lang<{
+	term?: Lang<{
 		index: number;
 		numberOfTerms: number;
 		term: Term;

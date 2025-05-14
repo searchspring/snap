@@ -8,7 +8,7 @@ import { Search, SearchProps } from '../Search/Search';
 export const SearchBoca = observer((properties: SearchBocaProps): JSX.Element => {
 	return (
 		<CacheProvider>
-			<Search {...properties} inherits="searchBoca" />
+			<Search {...properties} alias="searchBoca" />
 		</CacheProvider>
 	);
 });

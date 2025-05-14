@@ -8,7 +8,7 @@ import { RecommendationBundle, RecommendationBundleProps } from '../Recommendati
 
 const defaultStyles: StyleScript<RecommendationBundleEasyAddProps> = () => {
 	return css({
-		'.ss__recommendation-bundle__wrapper__cta': {
+		'.ss__recommendation-bundle-easy-add__wrapper__cta': {
 			textAlign: 'center',
 		},
 	});
@@ -17,7 +17,7 @@ const defaultStyles: StyleScript<RecommendationBundleEasyAddProps> = () => {
 export const RecommendationBundleEasyAdd = observer((properties: RecommendationBundleEasyAddProps): JSX.Element => {
 	//mergeprops only uses names that are passed via properties, so this cannot be put in the defaultProps
 	const _properties = {
-		name: properties.controller?.store?.profile?.display?.template?.component?.toLowerCase(),
+		name: properties.controller?.store?.profile?.tag?.toLowerCase(),
 		...properties,
 	};
 
@@ -26,13 +26,12 @@ export const RecommendationBundleEasyAdd = observer((properties: RecommendationB
 	const subProps: RecommendationBundleEasyAddSubProps = {
 		recommendationBundle: {
 			// default props
-			className: 'ss__recommendation-bundle-easy-add',
 			hideCheckboxes: true,
 			seedText: '',
 			ctaButtonText: 'Add Both',
 			ctaInline: false,
 			hideSeed: true,
-			inherits: 'recommendationBundleEasyAdd',
+			alias: 'recommendationBundleEasyAdd',
 			// vertical: true,
 			limit: 1,
 			carousel: {

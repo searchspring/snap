@@ -36,6 +36,10 @@ export const searchBocaThemeComponentProps: ThemeComponent<'searchBoca', SearchB
 			toggleSidebarStartClosed: true,
 		},
 		components: {
+			'*searchBoca button.sidebar-toggle': {
+				icon: 'filters',
+			},
+
 			'*searchBoca toolbar.top': {
 				layout: [
 					['banner.header'],

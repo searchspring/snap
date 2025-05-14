@@ -33,120 +33,7 @@ let config: SnapTemplatesConfig = {
 			},
 			style: globalStyles,
 			overrides: {
-				components: {
-					// 'toolbar.top': {
-					// 	layout: ['layoutSelector', 'searchHeader'],
-					// },
-					// searchHeader: {
-					// 	titleText: 'global title text',
-					// 	subtitleText: 'global subtitle text',
-					// },
-					// search: {
-					// 	layoutOptions: [
-					// 		{
-					// 			default: true,
-					// 			value: '1',
-					// 			label: 'one',
-					// 			overrides: {
-					// 				components: {
-					// 					searchHeader: {
-					// 						titleText: 'title text one',
-					// 						subtitleText: 'subtitle text one',
-					// 					},
-					// 				},
-					// 			},
-					// 		},
-					// 		{
-					// 			default: false,
-					// 			value: '2',
-					// 			label: 'two',
-					// 			overrides: {
-					// 				components: {
-					// 					searchHeader: {
-					// 						titleText: 'title text two',
-					// 						subtitleText: 'subtitle text two',
-					// 					},
-					// 				},
-					// 			},
-					// 		},
-					// 	],
-					// },
-				},
-
-				// responsive: {
-				// 	mobile: {
-				// 		searchHeader: {
-				// 			titleText: '0 - 767',
-				// 		},
-				// 		search: {
-				// 			layoutOptions: [
-				// 				{
-				// 					default: true,
-				// 					value: '1',
-				// 					label: 'one',
-				// 					overrides: {
-				// 						components: {
-				// 							searchHeader: {
-				// 								titleText: 'layout1 0 - 767',
-				// 							},
-				// 						},
-				// 					},
-				// 				},
-				// 				{
-				// 					default: false,
-				// 					value: '2',
-				// 					label: 'two',
-				// 					overrides: {
-				// 						components: {
-				// 							searchHeader: {
-				// 								titleText: 'layout2 0 - 767',
-				// 							},
-				// 						},
-				// 					},
-				// 				},
-				// 			],
-				// 		},
-				// 	},
-				// 	tablet: {
-				// 		searchHeader: {
-				// 			titleText: '767 - 991',
-				// 		},
-				// 		search: {
-				// 			layoutOptions: [
-				// 				{
-				// 					default: true,
-				// 					value: '1',
-				// 					label: 'one',
-				// 					overrides: {
-				// 						components: {
-				// 							searchHeader: {
-				// 								titleText: 'layout1 767 - 991',
-				// 							},
-				// 						},
-				// 					},
-				// 				},
-				// 				{
-				// 					default: false,
-				// 					value: '2',
-				// 					label: 'two',
-				// 					overrides: {
-				// 						components: {
-				// 							searchHeader: {
-				// 								titleText: 'layout2 767 - 991',
-				// 							},
-				// 						},
-				// 					},
-				// 				},
-				// 			],
-				// 		},
-				// 	},
-				// 	desktop: {
-				// 		//only overrides when layoutoptions, if its also in a layout options
-				// 		searchHeader: {
-				// 			titleText: '991 - 1299',
-				// 		},
-				// 	},
-				// }
+				components: {},
 			},
 		},
 	},
@@ -163,7 +50,7 @@ let config: SnapTemplatesConfig = {
 		},
 		bundle: {
 			Bundle: {
-				component: 'RecommendationBundleVertical',
+				component: 'RecommendationBundle',
 			},
 		},
 	},
@@ -190,3 +77,27 @@ if (window.mergeSnapConfig) {
 }
 
 new SnapTemplates(config);
+
+/*
+
+Overrides are taking priority over the theme layouts (responsive) specified within the Search component - but they shouldn't be.
+Look into:
+			overrides: {
+				'toolbar.top': {
+					layout: [
+						['Banner.header'],
+					]
+				},
+				'toolbar.middle': {
+					layout: [
+						['_', 'Pagination'],
+						['Pagination'],
+						['Pagination'],
+						['Pagination'],
+						['Pagination'],
+						['Banner.banner']
+					]
+				},
+			},
+
+*/
