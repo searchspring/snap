@@ -9,8 +9,6 @@ import { ComponentProps, RootNodeProperties } from '../../../types';
 import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { defined, mergeProps } from '../../../utilities';
 import { Terms, TermsProps } from '../../Molecules/Terms/Terms';
-import { Lang } from '../../../hooks';
-import deepmerge from 'deepmerge';
 import { useCleanUpEmptyDivs } from '../../../hooks/useCleanUpEmptyDivs';
 
 const CSS = {
@@ -111,20 +109,6 @@ export const TermsList = observer((properties: TermsListProps): JSX.Element => {
 		if (trending?.length) showTrending = true;
 	}
 
-	const defaultLang: Partial<TermsListLang> = {
-		historyTitle: {
-			value: historyTitle,
-		},
-		termsTitle: {
-			value: suggestionTitle,
-		},
-		trendingTitle: {
-			value: trendingTitle,
-		},
-	};
-
-	const lang = deepmerge(defaultLang, props.lang || {});
-
 	useCleanUpEmptyDivs('.ss__terms-list__row, .ss__terms-list');
 
 	const findModule = (module: TermsListModuleNames[] | TermsListModuleNames) => {
@@ -140,7 +124,6 @@ export const TermsList = observer((properties: TermsListProps): JSX.Element => {
 			return (
 				<Terms
 					className={'ss__terms-list__terms--history'}
-					lang={{ title: lang.historyTitle }}
 					title={historyTitle}
 					terms={history}
 					controller={controller}
@@ -154,7 +137,6 @@ export const TermsList = observer((properties: TermsListProps): JSX.Element => {
 			return (
 				<Terms
 					className={'ss__terms-list__terms--trending'}
-					lang={{ title: lang.trendingTitle }}
 					title={trendingTitle}
 					terms={trending}
 					controller={controller}
@@ -168,7 +150,6 @@ export const TermsList = observer((properties: TermsListProps): JSX.Element => {
 			return (
 				<Terms
 					className={'ss__terms-list__terms--suggestions'}
-					lang={{ title: lang.termsTitle }}
 					title={suggestionTitle}
 					terms={suggestions}
 					controller={controller}
@@ -206,17 +187,4 @@ export interface TermsListProps extends ComponentProps {
 	trendingTitle?: string;
 	retainHistory?: boolean;
 	retainTrending?: boolean;
-	lang?: Partial<TermsListLang>;
-}
-
-export interface TermsListLang {
-	termsTitle: Lang<{
-		controller: AutocompleteController;
-	}>;
-	trendingTitle: Lang<{
-		controller: AutocompleteController;
-	}>;
-	historyTitle: Lang<{
-		controller: AutocompleteController;
-	}>;
 }

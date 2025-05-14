@@ -1,7 +1,7 @@
 import { h, Fragment } from 'preact';
 import { observer } from 'mobx-react-lite';
 import { Controllers } from '@searchspring/snap-controller';
-import { ThemeProvider, SnapProvider, Theme } from '../../../providers';
+import { ThemeProvider, ControllerProvider, SnapProvider, Theme } from '../../../providers';
 import type { SnapTemplates } from '../../../../../src';
 import type { TemplatesStore, TemplateThemeTypes, TemplateTypes } from '../../../../../src/Templates/Stores/TemplateStore';
 import type { ResultComponent as ResultComponentType } from '../../../';
@@ -46,9 +46,11 @@ export const TemplateSelect = observer((properties: TemplateSelectProps): JSX.El
 	return !loading && theme && Component ? (
 		<SnapProvider snap={snap}>
 			<ThemeProvider theme={theme}>
-				<div className={`ss__template-select ss__theme__${theme.name}`}>
-					<Component controller={controller} {...componentProp} {...otherProps} />
-				</div>
+				<ControllerProvider controller={controller}>
+					<div className={`ss__template-select ss__theme__${theme.name}`}>
+						<Component controller={controller} {...componentProp} {...otherProps} />
+					</div>
+				</ControllerProvider>
 			</ThemeProvider>
 		</SnapProvider>
 	) : (

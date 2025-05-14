@@ -4,9 +4,9 @@ import { ArgsTable, PRIMARY_STORY, Markdown } from '@storybook/blocks';
 
 import { componentArgs, highlightedCode } from '../../../utilities';
 import { Snapify } from '../../../utilities/snapify';
-import Readme from './readme.md';
+import Readme from '../Search/readme.md';
 import type { SearchController } from '@searchspring/snap-controller';
-import { SearchBoca, SearchProps } from './SearchBoca';
+import { SearchBoca, SearchBocaProps } from './SearchBoca';
 
 export default {
 	title: 'Templates/SearchBoca',
@@ -160,8 +160,8 @@ const noresultsInstance = Snapify.search({
 	},
 });
 
-export const Default = (args: SearchProps, { loaded: { controller } }: { loaded: { controller: SearchController } }) => {
-	return <Search {...args} controller={controller} />;
+export const Default = (args: SearchBocaProps, { loaded: { controller } }: { loaded: { controller: SearchController } }) => {
+	return <SearchBoca {...args} controller={controller} />;
 };
 
 Default.loaders = [
@@ -173,8 +173,8 @@ Default.loaders = [
 	},
 ];
 
-export const NoResults = (args: SearchProps, { loaded: { controller } }: { loaded: { controller: SearchController } }) => {
-	return <Search {...args} controller={controller} />;
+export const NoResults = (args: SearchBocaProps, { loaded: { controller } }: { loaded: { controller: SearchController } }) => {
+	return <SearchBoca {...args} controller={controller} />;
 };
 
 NoResults.loaders = [

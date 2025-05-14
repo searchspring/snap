@@ -283,43 +283,36 @@ describe('ThemeStore', () => {
 	});
 
 	//todo test
-	// it('can get theme at first breakpoint', () => {
+	it.skip('can get theme at first breakpoint', () => {
+		const config: ThemeStoreThemeConfig = {
+			name: GLOBAL_THEME_NAME,
+			type: 'local',
+			base: testTheme,
+			overrides: {},
+			variables: {},
+			currency: {},
+			language: {},
+			languageOverrides: {},
+			innerWidth: testTheme.variables?.breakpoints.mobile! - 10,
+		};
 
-	// 	const config: ThemeStoreThemeConfig = {
-	// 		name: GLOBAL_THEME_NAME,
-	// 		type: 'local',
-	// 		base: testTheme,
-	// 		overrides: {},
-	// 		variables: {},
-	// 		currency: {},
-	// 		language: {},
-	// 		languageOverrides: {},
-	// 		innerWidth: testTheme.variables?.breakpoints.mobile! - 10,
-	// 	};
+		const store = new ThemeStore({ config, dependencies, settings });
+		expect(store.innerWidth).toBe(config.innerWidth);
 
-	// 	const store = new ThemeStore({ config, dependencies, settings });
-	// 	expect(store.innerWidth).toBe(config.innerWidth);
+		const baseResponsiveOverrides = config.base.responsive?.mobile!;
+		expect(baseResponsiveOverrides).toBeDefined();
 
-	// 	const baseResponsiveOverrides = config.base.responsive?.mobile!;
-	// 	expect(baseResponsiveOverrides).toBeDefined();
+		// order here matches order merged via theme() getter
+		const merged = mergeThemeLayers(config.base, baseResponsiveOverrides as ThemePartial, config.currency, config.language, config.overrides!);
 
-	// 	// order here matches order merged via theme() getter
-	// 	const merged = mergeThemeLayers(
-	// 		config.base,
-	// 		baseResponsiveOverrides,
-	// 		config.currency,
-	// 		config.language,
-	// 		config.overrides!,
-	// 	);
+		expect(store.theme).toStrictEqual({
+			...merged,
+			name: config.name,
+		});
 
-	// 	expect(store.theme).toStrictEqual({
-	// 		...merged,
-	// 		name: config.name,
-	// 	});
-
-	// 	// extra assertions on 'test' theme
-	// 	expect(merged.components?.results?.columns).toBe(1);
-	// });
+		// extra assertions on 'test' theme
+		expect(merged.components?.results?.columns).toBe(1);
+	});
 
 	it('should not have overrides applied if past last breakpoint', () => {
 		const config: ThemeStoreThemeConfig = {

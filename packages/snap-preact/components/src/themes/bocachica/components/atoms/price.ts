@@ -1,5 +1,6 @@
 import { css } from '@emotion/react';
 import type { PriceProps } from '../../../../components/Atoms/Price';
+import { ThemeComponent } from '../../../../providers';
 
 // CSS in JS style script for the Price component
 const priceStyleScript = ({ theme }: PriceProps) => {

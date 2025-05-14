@@ -64,10 +64,9 @@ describe('Search Template Component', () => {
 		const topToolBar = rendered.container.querySelector('.ss__search__header-section__toolbar--top-toolbar');
 		const middleToolBar = rendered.container.querySelector('.ss__search__content__toolbar--middle-toolbar');
 		const bottomToolBar = rendered.container.querySelector('.ss__search__content__toolbar--bottom-toolbar');
-		const toggleFiltersButton = rendered.container.querySelector('.ss__search__sidebar-toggle');
+		const toggleFiltersButton = rendered.container.querySelector('.ss__button[ss-name="sidebar-toggle"]');
 		const searchHeader = rendered.container.querySelector('.ss__search-header');
 		const mobileSidebar = rendered.container.querySelector('.ss__mobile-sidebar__slideout');
-		// const dropdown = rendered.container.querySelector('.ss__search__sidebar-toggle');
 
 		expect(element).toBeInTheDocument();
 		expect(sidebarWrapper).toBeInTheDocument();
@@ -177,7 +176,7 @@ describe('Search Template Component', () => {
 
 		const rendered = render(<Search controller={controller} toggleSidebarButtonText={buttonText} hideToggleSidebarButton={false} />);
 		const element = rendered.container.querySelector('.ss__search')!;
-		let button = rendered.container.querySelector('.ss__search__sidebar-toggle');
+		let button = rendered.container.querySelector('.ss__button[ss-name="sidebar-toggle"]');
 		const sidebar = rendered.container.querySelector('.ss__sidebar');
 
 		expect(element).toBeInTheDocument();
@@ -192,7 +191,7 @@ describe('Search Template Component', () => {
 			expect(sidebar).not.toBeInTheDocument();
 		});
 
-		button = rendered.container.querySelector('.ss__search__sidebar-toggle');
+		button = rendered.container.querySelector('.ss__button[ss-name="sidebar-toggle"]');
 		expect(button).toBeInTheDocument();
 		await userEvent.click(button!);
 
@@ -207,7 +206,7 @@ describe('Search Template Component', () => {
 
 		const rendered = render(<Search controller={controller} hideToggleSidebarButton={true} toggleSidebarButtonText={buttonText} />);
 		const element = rendered.container.querySelector('.ss__search')!;
-		const button = rendered.container.querySelector('.ss__search__sidebar-toggle');
+		const button = rendered.container.querySelector('.ss__button[ss-name="sidebar-toggle"]');
 		const sidebar = rendered.container.querySelector('.ss__sidebar');
 
 		expect(element).toBeInTheDocument();
@@ -334,7 +333,7 @@ describe('Search Template Component', () => {
 					expect(element).toBeInTheDocument();
 					let langElem;
 					if (option == 'toggleSidebarButtonText') {
-						langElem = rendered.container.querySelector(`.ss__search__sidebar-toggle [ss-lang=${option}]`);
+						langElem = rendered.container.querySelector(`.ss__button[ss-name="sidebar-toggle"] [ss-lang=${option}]`);
 					} else {
 						langElem = rendered.container.querySelector(`[ss-lang=${option}]`);
 					}

@@ -49,6 +49,20 @@ The `hideLast` prop disables the last page.
 <Pagination pagination={controller.store.pagination} hideLast={true} />
 ```
 
+### persistFirst
+The `persistFirst` prop ensures that the first page button renders, even if it is within the subset of the currently displayed 'pages'. The use case for this would be if a `firstButton` '<<' is used.
+
+```jsx
+<Pagination pagination={controller.store.pagination} persistFirst={true} />
+```
+
+### persistLast
+The `persistLast` prop ensures that the last page button renders, even if it is within the subset of the currently displayed 'pages'. The use case for this would be if a `lastButton` '>>' is used.
+
+```jsx
+<Pagination pagination={controller.store.pagination} persistLast={true} />
+```
+
 ### hideEllipsis
 The `hideEllipsis` prop disables the hideEllipsis after the first page, or the last page when applicable. 
 

@@ -8,6 +8,7 @@ import { ComponentProps, StyleScript } from '../../../types';
 import { defined, mergeProps, mergeStyles } from '../../../utilities';
 import { SearchController } from '@searchspring/snap-controller';
 import { Layout, LayoutProps } from '../Layout';
+import { ButtonProps } from '../../Atoms/Button';
 
 const defaultStyles: StyleScript<ToolbarProps> = ({}) => {
 	return css({});
@@ -59,7 +60,7 @@ export interface ToolbarProps extends ComponentProps {
 	controller: SearchController;
 	name?: ToolbarNames;
 	layout?: (ModuleNames | ModuleNames[])[];
-	toggleSideBarButton?: React.FunctionComponent;
+	toggleSideBarButton?: Partial<ButtonProps>;
 }
 
 export type ModuleNames =

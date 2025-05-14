@@ -18,7 +18,7 @@ export const BundleSelector = observer((properties: BundleSelectorProps): JSX.El
 
 	const props = mergeProps('bundleSelector', globalTheme, defaultProps, properties);
 
-	const { children, checked, icon, seedText, seed, hideCheckboxes, onCheck, title, className, treePath } = props;
+	const { children, checked, icon, seedText, seed, hideCheckboxes, onCheck, title, className, treePath, classNamePrefix } = props;
 
 	const lastPath = treePath?.lastIndexOf(' ');
 	const modifiedTreePath = treePath?.slice(0, lastPath);
@@ -27,14 +27,14 @@ export const BundleSelector = observer((properties: BundleSelectorProps): JSX.El
 		icon: {
 			// default props
 			name: 'bundle-selector',
-			className: 'ss__recommendation-bundle__wrapper__selector__icon',
+			className: `${classNamePrefix}__wrapper__selector__icon`,
 			size: 15,
 			// component theme overrides
 			theme: props?.theme,
 			treePath: modifiedTreePath,
 		},
 		checkbox: {
-			className: 'ss__recommendation-bundle__wrapper__selector__result-wrapper__checkbox',
+			className: `${classNamePrefix}__wrapper__selector__result-wrapper__checkbox`,
 			checked: checked,
 			size: '18px',
 			onClick: onCheck,
@@ -58,15 +58,15 @@ export const BundleSelector = observer((properties: BundleSelectorProps): JSX.El
 	return (
 		<div
 			className={classnames(
-				'ss__recommendation-bundle__wrapper__selector',
-				checked ? 'ss__recommendation-bundle__wrapper__selector--selected' : '',
-				seedText || seed ? 'ss__recommendation-bundle__wrapper__selector--seed' : '',
+				`${classNamePrefix}__wrapper__selector`,
+				checked ? `${classNamePrefix}__wrapper__selector--selected` : '',
+				seedText || seed ? `${classNamePrefix}__wrapper__selector--seed` : '',
 				className
 			)}
 		>
-			<div className="ss__recommendation-bundle__wrapper__selector__result-wrapper">
+			<div className={`${classNamePrefix}__wrapper__selector__result-wrapper`}>
 				{!hideCheckboxes && <Checkbox {...subProps.checkbox} />}
-				{seedText && <div className={'ss__recommendation-bundle__wrapper__selector__result-wrapper__seed-badge'} {...mergedLang.seedText?.all}></div>}
+				{seedText && <div className={`${classNamePrefix}__wrapper__selector__result-wrapper__seed-badge`} {...mergedLang.seedText?.all}></div>}
 				{children}
 			</div>
 			{icon ? <Icon {...subProps.icon} {...(typeof icon == 'string' ? { icon: icon } : (icon as Partial<IconProps>))} /> : undefined}
@@ -89,6 +89,7 @@ export interface BundleSelectorProps extends ComponentProps {
 	icon?: IconType | Partial<IconProps> | boolean;
 	lang?: Partial<BundleSelectorLang>;
 	title?: string;
+	classNamePrefix?: string;
 }
 
 export interface BundleSelectorLang {

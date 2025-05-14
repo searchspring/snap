@@ -4,7 +4,7 @@ import { ArgsTable, PRIMARY_STORY, Markdown } from '@storybook/blocks';
 
 import { componentArgs, highlightedCode } from '../../../utilities';
 import { Snapify } from '../../../utilities/snapify';
-import Readme from './readme.md';
+import Readme from '../Search/readme.md';
 import type { SearchController } from '@searchspring/snap-controller';
 import { SearchSnapnco, SearchSnapncoProps } from './SearchSnapnco';
 
@@ -173,7 +173,7 @@ Default.loaders = [
 	},
 ];
 
-export const NoResults = (args: SearchSnapncohProps, { loaded: { controller } }: { loaded: { controller: SearchController } }) => {
+export const NoResults = (args: SearchSnapncoProps, { loaded: { controller } }: { loaded: { controller: SearchController } }) => {
 	return <SearchSnapnco {...args} controller={controller} />;
 };
 

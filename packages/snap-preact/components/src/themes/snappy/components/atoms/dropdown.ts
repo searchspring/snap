@@ -1,5 +1,6 @@
 import { css } from '@emotion/react';
 import type { DropdownProps } from '../../../../components/Atoms/Dropdown';
+import { ThemeComponent } from '../../../../providers';
 
 // CSS in JS style script for the Dropdown component
 const dropdownStyleScript = ({ theme }: DropdownProps) => {

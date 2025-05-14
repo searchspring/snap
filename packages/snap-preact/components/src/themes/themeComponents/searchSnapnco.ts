@@ -1,4 +1,5 @@
 import { SearchSnapncoProps } from '../../components/Templates/SearchSnapnco';
+import { ThemeComponent } from '../../providers';
 
 export const searchSnapncoThemeComponentProps: ThemeComponent<'searchSnapnco', SearchSnapncoProps> = {
 	default: {

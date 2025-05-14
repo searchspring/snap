@@ -1,6 +1,7 @@
 import { RecommendationProps } from '../../components/Templates/Recommendation';
+import { ThemeComponent } from '../../providers';
 
-export const recommendationThemeComponentProps: ThemeComponent<'autrecommendationThemeComponentPropsocompleteTemplate', RecommendationProps> = {
+export const recommendationThemeComponentProps: ThemeComponent<'recommendationThemeComponentProps', RecommendationProps> = {
 	default: {
 		props: {
 			slidesPerView: 5,

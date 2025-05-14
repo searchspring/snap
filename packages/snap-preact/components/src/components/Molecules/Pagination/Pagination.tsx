@@ -47,6 +47,8 @@ export const Pagination = observer((properties: PaginationProps): JSX.Element =>
 		pagesRight,
 		hideFirst,
 		hideLast,
+		persistFirst,
+		persistLast,
 		hideEllipsis,
 		hideNext,
 		hidePrev,
@@ -128,7 +130,7 @@ export const Pagination = observer((properties: PaginationProps): JSX.Element =>
 					)}
 
 					{/* first */}
-					{!pageNumbers.includes(store.first.number) && !hideFirst && (
+					{(!pageNumbers.includes(store.first.number) || (persistFirst && store.page !== store.first.number)) && !hideFirst && (
 						<>
 							<a {...store.first.url.link} className={classnames('ss__pagination__page', 'ss__pagination__page--first')} {...mergedLang.first?.all}>
 								{firstButton ? firstButton : store.first.number}
@@ -173,7 +175,7 @@ export const Pagination = observer((properties: PaginationProps): JSX.Element =>
 						})}
 
 					{/* last page */}
-					{!pageNumbers.includes(store.last.number) && !hideLast && (
+					{(!pageNumbers.includes(store.last.number) || (persistLast && store.page !== store.last.number)) && !hideLast && (
 						<>
 							{!pageNumbers.includes(store.totalPages - 1) && !hideEllipsis && <span>&hellip;</span>}
 
@@ -216,6 +218,8 @@ export interface PaginationProps extends ComponentProps {
 	prevButton?: string | JSX.Element;
 	firstButton?: string | JSX.Element;
 	lastButton?: string | JSX.Element;
+	persistFirst?: boolean;
+	persistLast?: boolean;
 	lang?: Partial<PaginationLang>;
 }
 

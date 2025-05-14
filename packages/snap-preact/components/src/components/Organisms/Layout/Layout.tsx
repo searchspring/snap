@@ -195,6 +195,7 @@ export const Layout = observer((properties: LayoutProps): JSX.Element => {
 		},
 		ToggleSideBarButton: {
 			// default props
+			...toggleSideBarButton,
 			controller,
 			name: 'sidebar-toggle',
 			// inherited props
@@ -239,9 +240,7 @@ export const Layout = observer((properties: LayoutProps): JSX.Element => {
 				return (
 					ToggleSideBarButton && (
 						<div className="ss__button--sidebar-toggle-button-wrapper">
-							<Button {...subProps.ToggleSideBarButton}>
-								<ToggleSideBarButton />
-							</Button>
+							<Button {...subProps.ToggleSideBarButton}></Button>
 						</div>
 					)
 				);
@@ -312,7 +311,7 @@ export const Layout = observer((properties: LayoutProps): JSX.Element => {
 export interface LayoutProps extends ComponentProps {
 	controller: SearchController;
 	layout: (ModuleNames | ModuleNames[])[];
-	toggleSideBarButton?: React.FunctionComponent;
+	toggleSideBarButton?: Partial<ButtonProps>;
 }
 
 export type ModuleNames =

@@ -121,6 +121,124 @@ describe('Lets test the Pagination Component optional props', () => {
 		expect(last).not.toBeInTheDocument();
 	});
 
+	it('does not show first on first page even with persistsFirst and persistsLast', () => {
+		const moddedStore = new SearchPaginationStore({
+			config: searchConfig,
+			services,
+			data: {
+				search: {
+					...data.search,
+					pagination: {
+						totalResults: 4460,
+						page: 1,
+						pageSize: 30,
+						totalPages: 149,
+					},
+				},
+				meta: data.meta,
+			},
+		});
+
+		const rendered = render(<Pagination pagination={moddedStore} persistFirst={true} persistLast={true} />);
+		const paginationElement = rendered.container.querySelector('.ss__pagination');
+		expect(paginationElement).toBeInTheDocument();
+		const first = rendered.container.querySelector('.ss__pagination__page--first');
+		const last = rendered.container.querySelector('.ss__pagination__page--last');
+		expect(first).not.toBeInTheDocument();
+		expect(last).toBeInTheDocument();
+	});
+
+	it('does not show last on last page even with persistsFirst and persistsLast', () => {
+		const moddedStore = new SearchPaginationStore({
+			config: searchConfig,
+			services,
+			data: {
+				search: {
+					...data.search,
+					pagination: {
+						totalResults: 4460,
+						page: 149,
+						pageSize: 30,
+						totalPages: 149,
+					},
+				},
+				meta: data.meta,
+			},
+		});
+
+		const rendered = render(<Pagination pagination={moddedStore} persistFirst={true} persistLast={true} />);
+		const paginationElement = rendered.container.querySelector('.ss__pagination');
+		expect(paginationElement).toBeInTheDocument();
+		const first = rendered.container.querySelector('.ss__pagination__page--first');
+		const last = rendered.container.querySelector('.ss__pagination__page--last');
+		expect(first).toBeInTheDocument();
+		expect(last).not.toBeInTheDocument();
+	});
+
+	it('shows first with persists first and last', () => {
+		const rendered = render(<Pagination pagination={paginationStore} persistFirst={true} persistLast={true} />);
+		const paginationElement = rendered.container.querySelector('.ss__pagination');
+		expect(paginationElement).toBeInTheDocument();
+		const first = rendered.container.querySelector('.ss__pagination__page--first');
+		const last = rendered.container.querySelector('.ss__pagination__page--last');
+		expect(first).toBeInTheDocument();
+		expect(last).toBeInTheDocument();
+	});
+
+	it('renders the first page even when the same page is within the pages set when using persistFirst', () => {
+		const moddedStore = new SearchPaginationStore({
+			config: searchConfig,
+			services,
+			data: {
+				search: {
+					...data.search,
+					pagination: {
+						totalResults: 4460,
+						page: 2,
+						pageSize: 30,
+						totalPages: 149,
+					},
+				},
+				meta: data.meta,
+			},
+		});
+
+		const rendered = render(<Pagination pagination={moddedStore} persistFirst={true} persistLast={true} />);
+		const paginationElement = rendered.container.querySelector('.ss__pagination');
+		expect(paginationElement).toBeInTheDocument();
+		const first = rendered.container.querySelector('.ss__pagination__page--first');
+		const previous = rendered.container.querySelector('.ss__pagination__page[aria-label="go to page 1"]');
+		expect(first).toBeInTheDocument();
+		expect(previous).toBeInTheDocument();
+	});
+
+	it('renders the last page even when the same page is within the pages set when using persistLast', () => {
+		const moddedStore = new SearchPaginationStore({
+			config: searchConfig,
+			services,
+			data: {
+				search: {
+					...data.search,
+					pagination: {
+						totalResults: 4460,
+						page: 148,
+						pageSize: 30,
+						totalPages: 149,
+					},
+				},
+				meta: data.meta,
+			},
+		});
+
+		const rendered = render(<Pagination pagination={moddedStore} persistFirst={true} persistLast={true} />);
+		const paginationElement = rendered.container.querySelector('.ss__pagination');
+		expect(paginationElement).toBeInTheDocument();
+		const last = rendered.container.querySelector('.ss__pagination__page--last');
+		const next = rendered.container.querySelector('.ss__pagination__page[aria-label="go to page 149"]');
+		expect(last).toBeInTheDocument();
+		expect(next).toBeInTheDocument();
+	});
+
 	it('hides next and prev', () => {
 		const rendered = render(<Pagination pagination={paginationStore} hideNext={true} hidePrev={true} />);
 		const paginationElement = rendered.container.querySelector('.ss__pagination');
@@ -246,7 +364,6 @@ describe('Lets test the Pagination Component optional props', () => {
 					const element = rendered.container.querySelector(selector);
 					expect(element).toBeInTheDocument();
 					const langElem = rendered.container.querySelector(`[ss-lang=${option}]`);
-					console.log(option);
 					expect(langElem).toBeInTheDocument();
 					if (typeof langObj.value == 'function') {
 						expect(langElem?.innerHTML).toBe(value);

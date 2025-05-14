@@ -1,8 +1,7 @@
 import { TemplatesStore } from './TemplateStore';
 import type { SnapTemplatesConfig } from '../SnapTemplates';
 import { GLOBAL_THEME_NAME } from './TargetStore';
-
-//todo test
+//todo - these tests sometimes take over 10 seconds to run, currently unclear why.
 describe.skip('TemplateStore', () => {
 	it('has expected defaults', () => {
 		const config: SnapTemplatesConfig = {
@@ -15,18 +14,16 @@ describe.skip('TemplateStore', () => {
 				},
 			},
 		};
-		const store = new TemplatesStore({ config, settings: { editMode: true } });
+		const store = new TemplatesStore({ config });
 		expect(store).toBeDefined();
 		expect(store.loading).toBe(true);
 		expect(store.config).toBe(config);
 		expect(store.language).toBe('en');
 		expect(store.currency).toBe('usd');
-		expect(store.settings).toStrictEqual({ editMode: true });
 		expect(store.window.innerWidth).toBe(global.window.innerWidth);
 	});
 
-	// TODO: unskip and uncomment below when we have more languages
-	it.skip('can define config', () => {
+	it('can define config', () => {
 		const config: SnapTemplatesConfig = {
 			themes: {
 				global: {
@@ -37,7 +34,7 @@ describe.skip('TemplateStore', () => {
 				siteId: '8uyt2m',
 				currency: 'eur',
 				platform: 'other',
-				// language: 'fr',
+				language: 'fr',
 			},
 		};
 		const store = new TemplatesStore({ config });
@@ -67,8 +64,7 @@ describe.skip('TemplateStore', () => {
 		expect(store.currency).toBe('usd');
 	});
 
-	// TODO: unskip and uncomment below when we have more languages
-	it.skip('can change language and currency', async () => {
+	it('can change language and currency', async () => {
 		const config: SnapTemplatesConfig = {
 			themes: {
 				global: {
@@ -84,7 +80,7 @@ describe.skip('TemplateStore', () => {
 		expect(store.language).toBe('en');
 		expect(store.currency).toBe('usd');
 
-		// await store.setLanguage('fr');
+		await store.setLanguage('fr');
 		await store.setCurrency('eur');
 
 		expect(store.language).toBe('fr');

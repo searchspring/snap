@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import type { MobileSidebarProps } from '../../../../components/Organisms/MobileSidebar';
-
+import { ThemeComponent } from '../../../../providers';
 // CSS in JS style script for the MobileSidebar component
 const mobileSidebarStyleScript = ({ theme }: MobileSidebarProps) => {
 	// eslint-disable-next-line @typescript-eslint/no-unused-vars

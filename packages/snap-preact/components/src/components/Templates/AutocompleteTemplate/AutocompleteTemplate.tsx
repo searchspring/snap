@@ -59,18 +59,22 @@ const defaultStyles: StyleScript<AutocompleteTemplateProps> = ({
 		'.ss__autocomplete__column.ss__autocomplete__column--c1': {
 			flex: column1?.width == 'auto' ? '1 1 auto' : `1 0 ${column1?.width}`,
 			maxWidth: column1?.width == 'auto' ? 'auto' : column1?.width,
+			alignContent: column1?.alignContent,
 		},
 		'.ss__autocomplete__column.ss__autocomplete__column--c2': {
 			flex: column2?.width == 'auto' ? '1 1 auto' : `1 0 ${column2?.width}`,
 			maxWidth: column2?.width == 'auto' ? 'auto' : column2?.width,
+			alignContent: column2?.alignContent,
 		},
 		'.ss__autocomplete__column.ss__autocomplete__column--c3': {
 			flex: column3?.width == 'auto' ? '1 1 auto' : `1 0 ${column3?.width}`,
 			maxWidth: column3?.width == 'auto' ? 'auto' : column3?.width,
+			alignContent: column3?.alignContent,
 		},
 		'.ss__autocomplete__column.ss__autocomplete__column--c4': {
 			flex: column4?.width == 'auto' ? '1 1 auto' : `1 0 ${column4?.width}`,
 			maxWidth: column4?.width == 'auto' ? 'auto' : column4?.width,
+			alignContent: column4?.alignContent,
 		},
 
 		'.ss__autocomplete__column, .ss__autocomplete__row': {
@@ -151,11 +155,9 @@ const defaultStyles: StyleScript<AutocompleteTemplateProps> = ({
 				display: 'none',
 			},
 		},
-		// hmmm todo this is a bug - sometimes the facets do not grow to fill their space,
-		// however we cannot put 100% or it will grow when in the same row as other modules
-		// '.ss__autocomplete__facets-wrapper': {
-		// 	width: "100%",
-		// },
+		'.ss__autocomplete__facets-wrapper': {
+			width: '100%',
+		},
 		'.ss__autocomplete__content': {
 			display: 'flex',
 			flex: `1 1 0%`,
@@ -165,26 +167,27 @@ const defaultStyles: StyleScript<AutocompleteTemplateProps> = ({
 			margin: noResults ? '0 auto' : undefined,
 			padding: '10px',
 
-			'.ss__banner.ss__banner--header, .ss__banner.ss__banner--banner': {
-				marginBottom: '10px',
-			},
-			'.ss__banner.ss__banner--footer': {
-				margin: '10px 0',
-			},
 			'.ss__autocomplete__content__results, .ss__autocomplete__content__no-results': {
 				minHeight: '0%',
 			},
-			'.ss__autocomplete__see-more': {
-				padding: '10px',
-				textAlign: noResults ? 'center' : 'right',
+		},
+		'.ss__banner.ss__banner--header, .ss__banner.ss__banner--banner': {
+			marginBottom: '10px',
+		},
+		'.ss__banner.ss__banner--footer': {
+			margin: '10px 0',
+		},
+		'.ss__autocomplete__button--see-more': {
+			padding: '10px',
+			height: 'min-content',
+			textAlign: noResults ? 'center' : 'right',
 
-				a: {
-					fontWeight: 'bold',
-					color: theme?.variables?.colors?.primary,
+			a: {
+				fontWeight: 'bold',
+				color: theme?.variables?.colors?.primary,
 
-					'.ss__icon': {
-						marginLeft: '5px',
-					},
+				'.ss__icon': {
+					marginLeft: '5px',
 				},
 			},
 		},
@@ -209,6 +212,7 @@ export const AutocompleteTemplate = observer((properties: AutocompleteTemplatePr
 		column3: {
 			layout: [['content'], ['_', 'button.see-more']],
 			width: 'auto',
+			alignContent: 'space-between',
 		},
 		width: '100%',
 		templates: {
@@ -383,7 +387,6 @@ export const AutocompleteTemplate = observer((properties: AutocompleteTemplatePr
 			treePath,
 		},
 		results: {
-			name: 'autocomplete',
 			columns: 3,
 			rows: 2,
 			// default props
@@ -459,18 +462,6 @@ export const AutocompleteTemplate = observer((properties: AutocompleteTemplatePr
 		controller.setFocused();
 	};
 
-	const termsLang = {
-		historyTitle: {
-			value: 'History',
-		},
-		termsTitle: {
-			value: 'Suggested',
-		},
-		trendingTitle: {
-			value: 'Trending',
-		},
-	};
-
 	//initialize lang
 	const defaultLang: Partial<AutocompleteTemplateLang> = {
 		contentTitle: {
@@ -494,7 +485,6 @@ export const AutocompleteTemplate = observer((properties: AutocompleteTemplatePr
 				search.query?.string
 			}"`,
 		},
-		...termsLang,
 	};
 
 	//deep merge with props.lang
@@ -563,7 +553,7 @@ export const AutocompleteTemplate = observer((properties: AutocompleteTemplatePr
 		if (module == 'termsList') {
 			return (
 				<div className={classnames('ss__autocomplete__terms-wrapper')}>
-					<TermsList controller={controller} {...subProps.termsList} lang={termsLang} />
+					<TermsList controller={controller} {...subProps.termsList} />
 				</div>
 			);
 		}
@@ -571,13 +561,11 @@ export const AutocompleteTemplate = observer((properties: AutocompleteTemplatePr
 			return (
 				<Terms
 					controller={controller}
-					lang={{
-						title: lang.historyTitle,
-					}}
 					terms={controller.store.history}
 					className={'ss__terms-list__terms--history'}
 					name={'history'}
 					{...subProps.terms}
+					title="History"
 				/>
 			);
 		}
@@ -585,13 +573,11 @@ export const AutocompleteTemplate = observer((properties: AutocompleteTemplatePr
 			return (
 				<Terms
 					controller={controller}
-					lang={{
-						title: lang.trendingTitle,
-					}}
 					terms={controller.store.trending}
 					className={'ss__terms-list__terms--trending'}
 					name={'trending'}
 					{...subProps.terms}
+					title="Trending"
 				/>
 			);
 		}
@@ -599,13 +585,11 @@ export const AutocompleteTemplate = observer((properties: AutocompleteTemplatePr
 			return (
 				<Terms
 					controller={controller}
-					lang={{
-						title: lang.termsTitle,
-					}}
 					terms={controller.store.terms}
 					className={'ss__terms-list__terms--suggestions'}
 					name={'suggestions'}
 					{...subProps.terms}
+					title="Suggestions"
 				/>
 			);
 		}
@@ -772,6 +756,7 @@ type ModuleNamesWithColumns = ModuleNames | ColumnsNames | ModuleNames[] | Colum
 type Column = {
 	layout: ModuleNames[][] | ModuleNames[];
 	width: string | 'auto';
+	alignContent?: 'center' | 'flex-start' | 'flex-end' | 'space-between';
 };
 
 export interface AutocompleteTemplateProps extends ComponentProps {
@@ -803,15 +788,6 @@ export interface AutocompleteTemplateProps extends ComponentProps {
 }
 
 export interface AutocompleteTemplateLang {
-	termsTitle: Lang<{
-		controller: AutocompleteController;
-	}>;
-	trendingTitle: Lang<{
-		controller: AutocompleteController;
-	}>;
-	historyTitle: Lang<{
-		controller: AutocompleteController;
-	}>;
 	facetsTitle: Lang<{
 		controller: AutocompleteController;
 	}>;

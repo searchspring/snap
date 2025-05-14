@@ -1,4 +1,4 @@
-import { ThemeComponent as _ThemeComponent } from './providers';
+export {};
 
 declare global {
 	namespace preact {
@@ -7,6 +7,4 @@ declare global {
 			refs: Record<string, any>;
 		}
 	}
-
-	type ThemeComponent<T extends string, C> = _ThemeComponent<T, C>;
 }
