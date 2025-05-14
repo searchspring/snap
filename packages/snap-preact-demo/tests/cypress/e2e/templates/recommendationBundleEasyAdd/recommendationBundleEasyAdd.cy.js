@@ -14,13 +14,13 @@ const config = {
 	disableGA: '', // disable google analytic events (example: 'UA-123456-1')
 	selectors: {
 		recommendation: {
-			main: '.ss__recommendation-bundle',
+			main: '.ss__recommendation-bundle-easy-add',
 			// selector of the wrapping element. Expects child element to contain <a>
-			carousel: `.ss__recommendation-bundle .ss__carousel`,
+			carousel: `.ss__recommendation-bundle-easy-add .ss__carousel`,
 			result: '.ss__result',
 			customResult: '.ss__custom-result',
-			seed: '.ss__recommendation-bundle__wrapper__selector--seed',
-			cta: '.ss__recommendation-bundle__wrapper__cta',
+			seed: '.ss__recommendation-bundle-easy-add__wrapper__selector--seed',
+			cta: '.ss__recommendation-bundle-easy-add__wrapper__cta',
 			controller: 'recommend_bundle_0',
 		},
 	},
@@ -89,7 +89,7 @@ describe('BundledRecommendations', () => {
 		it('doesnt render a seed product', function () {
 			cy.snapController(config?.selectors?.recommendation.controller).then(({ store }) => {
 				cy.get(config?.selectors?.recommendation.seed).should('not.exist');
-				cy.get(`${config?.selectors?.recommendation.seed} .ss__recommendation-bundle__wrapper__selector__result-wrapper__seed-badge`).should(
+				cy.get(`${config?.selectors?.recommendation.seed} .ss__recommendation-bundle-easy-add__wrapper__selector__result-wrapper__seed-badge`).should(
 					'not.exist'
 				);
 			});
@@ -100,17 +100,17 @@ describe('BundledRecommendations', () => {
 				cy.get(config?.selectors?.recommendation.cta).should('exist');
 
 				//title
-				cy.get(`${config?.selectors?.recommendation.cta} .ss__recommendation-bundle__wrapper__cta__subtotal__title`)
+				cy.get(`${config?.selectors?.recommendation.cta} .ss__recommendation-bundle-easy-add__wrapper__cta__subtotal__title`)
 					.should('exist')
 					.should('have.text', 'Subtotal for 2 items');
 				//price
 				cy.get(`${config?.selectors?.recommendation.cta} .ss__price--strike`).should('exist').contains(`$${store.cart.msrp}`);
 				//strike
-				cy.get(`${config?.selectors?.recommendation.cta} .ss__recommendation-bundle__wrapper__cta__subtotal__price .ss__price`)
+				cy.get(`${config?.selectors?.recommendation.cta} .ss__recommendation-bundle-easy-add__wrapper__cta__subtotal__price .ss__price`)
 					.should('exist')
 					.contains(`$${store.cart.price}`);
 				//button
-				cy.get(`${config?.selectors?.recommendation.cta} .ss__recommendation-bundle__wrapper__cta__button`)
+				cy.get(`${config?.selectors?.recommendation.cta} .ss__recommendation-bundle-easy-add__wrapper__cta__button`)
 					.should('exist')
 					.should('have.text', 'Add Both');
 			});
