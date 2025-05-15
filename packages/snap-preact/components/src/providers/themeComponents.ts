@@ -84,12 +84,7 @@ export type ThemeComponentProps<ComponentProps> = {
 	desktop: Partial<ComponentProps>;
 };
 
-type ThemeComponentUnNamedSelectors<ComponentType extends string> = `*${ComponentType}` | `*${string} ${ComponentType}`;
-type ThemeComponentNamedSelectors<ComponentType extends string, ComponentNames extends string> =
-	| `*${ComponentType}`
-	| `*${string} ${ComponentType}`
-	| `*${string} ${ComponentType}.${ComponentNames}`
-	| `*${ComponentType}.${ComponentNames}`;
+type ThemeComponentTemplateUnNamedSelectors<TemplateComponentType extends string> = `${TemplateComponentType}`;
 
 type ThemeComponentOverridesUnNamedSelectors<ComponentType extends string> = `${ComponentType}` | `${string} ${ComponentType}`;
 type ThemeComponentOverridesNamedSelectors<ComponentType extends string, ComponentNames extends string> =
@@ -98,19 +93,19 @@ type ThemeComponentOverridesNamedSelectors<ComponentType extends string, Compone
 	| `${string} ${ComponentType}.${ComponentNames}`
 	| `${ComponentType}.${ComponentNames}`;
 
-type ThemeComponentUnNamedSelectorsStartingWithTemplate<TemplateComponentType extends string, SubComponentType extends string> =
-	| `*${TemplateComponentType} ${SubComponentType}`
-	| `*${TemplateComponentType} ${string} ${SubComponentType}`;
+type ThemeComponentUnNamedSelectorsStartingWithTemplate<TemplateComponentType extends string, SubComponentType extends string = ''> =
+	| `${TemplateComponentType} ${SubComponentType}`
+	| `${TemplateComponentType} ${string} ${SubComponentType}`;
 
 type ThemeComponentNamedSelectorsStartingWithTemplate<
 	TemplateComponentType extends string,
 	SubComponentType extends string,
 	ComponentNames extends string
 > =
-	| `*${TemplateComponentType} ${SubComponentType}`
-	| `*${TemplateComponentType} ${string} ${SubComponentType}`
-	| `*${TemplateComponentType} ${string} ${SubComponentType}.${ComponentNames}`
-	| `*${TemplateComponentType} ${SubComponentType}.${ComponentNames}`;
+	| `${TemplateComponentType} ${SubComponentType}`
+	| `${TemplateComponentType} ${string} ${SubComponentType}`
+	| `${TemplateComponentType} ${string} ${SubComponentType}.${ComponentNames}`
+	| `${TemplateComponentType} ${SubComponentType}.${ComponentNames}`;
 
 export type ThemeComponentRestrictedProps<Props> = Partial<Omit<Props, ThemeComponentOmittedProps>>;
 type ThemeComponentOmittedProps = 'theme' | 'inherits';
@@ -167,7 +162,8 @@ export type ThemeComponents =
 		[K in ThemeComponentOverridesNamedSelectors<'price', PriceNames>]?: Partial<PriceProps>;
 	} & {
 		[K in ThemeComponentOverridesUnNamedSelectors<'skeleton'>]?: Partial<SkeletonProps>;
-	} /* MOLECULES */ & { [K in ThemeComponentOverridesUnNamedSelectors<'calloutBadge'>]?: Partial<CalloutBadgeProps> } & { // { [K in UnNamedThemeComponentSelectors<'toggle'>]?: RestrictedThemeComponentProps<ToggleProps> } &
+	} /* MOLECULES */ & { [K in ThemeComponentOverridesUnNamedSelectors<'calloutBadge'>]?: Partial<CalloutBadgeProps> } & {
+		// { [K in UnNamedThemeComponentSelectors<'toggle'>]?: RestrictedThemeComponentProps<ToggleProps> } &
 		[K in ThemeComponentOverridesUnNamedSelectors<'carousel'>]?: Partial<CarouselProps>;
 	} & { [K in ThemeComponentOverridesUnNamedSelectors<'checkbox'>]?: Partial<CheckboxProps> } & {
 		[K in ThemeComponentOverridesUnNamedSelectors<'grid'>]?: Partial<GridProps>;
@@ -227,85 +223,85 @@ export type ThemeComponents =
 // prettier-ignore
 export type ThemeComponentsRestricted =
 	/* ATOMS */
-	{ [K in ThemeComponentUnNamedSelectors<'badgeImage'>]?: ThemeComponentRestrictedProps<BadgeImageProps> } &
-	{ [K in ThemeComponentUnNamedSelectors<'badgePill'>]?: ThemeComponentRestrictedProps<BadgePillProps> } &
-	{ [K in ThemeComponentUnNamedSelectors<'badgeRectangle'>]?: ThemeComponentRestrictedProps<BadgeRectangleProps> } &
-	{ [K in ThemeComponentUnNamedSelectors<'badgeText'>]?: ThemeComponentRestrictedProps<BadgeTextProps> } &
-	{ [K in ThemeComponentUnNamedSelectors<'breadcrumbs'>]?: ThemeComponentRestrictedProps<BreadcrumbsProps> } &
-	{ [K in ThemeComponentNamedSelectors<'button', ButtonNames>]?: ThemeComponentRestrictedProps<ButtonProps> } &
-	{ [K in ThemeComponentUnNamedSelectors<'dropdown'>]?: ThemeComponentRestrictedProps<DropdownProps> } &
-	{ [K in ThemeComponentUnNamedSelectors<'formattedNumber'>]?: ThemeComponentRestrictedProps<FormattedNumberProps> } &
-	{ [K in ThemeComponentNamedSelectors<'icon', IconNames>]?: ThemeComponentRestrictedProps<IconProps> } &
-	{ [K in ThemeComponentUnNamedSelectors<'image'>]?: ThemeComponentRestrictedProps<ImageProps> } &
-	{ [K in ThemeComponentUnNamedSelectors<'loadingBar'>]?: ThemeComponentRestrictedProps<LoadingBarProps> } &
-	{ [K in ThemeComponentNamedSelectors<'banner', BannerNames>]?: ThemeComponentRestrictedProps<BannerProps> } &
-	{ [K in ThemeComponentUnNamedSelectors<'inlineBanner'>]?: ThemeComponentRestrictedProps<InlineBannerProps> } &
-	{ [K in ThemeComponentUnNamedSelectors<'overlay'>]?: ThemeComponentRestrictedProps<OverlayProps> } &
-	{ [K in ThemeComponentUnNamedSelectors<'paginationInfo'>]?: ThemeComponentRestrictedProps<PaginationInfoProps> } &
-	{ [K in ThemeComponentNamedSelectors<'price', PriceNames>]?: ThemeComponentRestrictedProps<PriceProps> } &
-	{ [K in ThemeComponentUnNamedSelectors<'skeleton'>]?: ThemeComponentRestrictedProps<SkeletonProps> } &
+	{ [K in ThemeComponentOverridesUnNamedSelectors<'badgeImage'>]?: ThemeComponentRestrictedProps<BadgeImageProps> } &
+	{ [K in ThemeComponentOverridesUnNamedSelectors<'badgePill'>]?: ThemeComponentRestrictedProps<BadgePillProps> } &
+	{ [K in ThemeComponentOverridesUnNamedSelectors<'badgeRectangle'>]?: ThemeComponentRestrictedProps<BadgeRectangleProps> } &
+	{ [K in ThemeComponentOverridesUnNamedSelectors<'badgeText'>]?: ThemeComponentRestrictedProps<BadgeTextProps> } &
+	{ [K in ThemeComponentOverridesUnNamedSelectors<'breadcrumbs'>]?: ThemeComponentRestrictedProps<BreadcrumbsProps> } &
+	{ [K in ThemeComponentOverridesNamedSelectors<'button', ButtonNames>]?: ThemeComponentRestrictedProps<ButtonProps> } &
+	{ [K in ThemeComponentOverridesUnNamedSelectors<'dropdown'>]?: ThemeComponentRestrictedProps<DropdownProps> } &
+	{ [K in ThemeComponentOverridesUnNamedSelectors<'formattedNumber'>]?: ThemeComponentRestrictedProps<FormattedNumberProps> } &
+	{ [K in ThemeComponentOverridesNamedSelectors<'icon', IconNames>]?: ThemeComponentRestrictedProps<IconProps> } &
+	{ [K in ThemeComponentOverridesUnNamedSelectors<'image'>]?: ThemeComponentRestrictedProps<ImageProps> } &
+	{ [K in ThemeComponentOverridesUnNamedSelectors<'loadingBar'>]?: ThemeComponentRestrictedProps<LoadingBarProps> } &
+	{ [K in ThemeComponentOverridesNamedSelectors<'banner', BannerNames>]?: ThemeComponentRestrictedProps<BannerProps> } &
+	{ [K in ThemeComponentOverridesUnNamedSelectors<'inlineBanner'>]?: ThemeComponentRestrictedProps<InlineBannerProps> } &
+	{ [K in ThemeComponentOverridesUnNamedSelectors<'overlay'>]?: ThemeComponentRestrictedProps<OverlayProps> } &
+	{ [K in ThemeComponentOverridesUnNamedSelectors<'paginationInfo'>]?: ThemeComponentRestrictedProps<PaginationInfoProps> } &
+	{ [K in ThemeComponentOverridesNamedSelectors<'price', PriceNames>]?: ThemeComponentRestrictedProps<PriceProps> } &
+	{ [K in ThemeComponentOverridesUnNamedSelectors<'skeleton'>]?: ThemeComponentRestrictedProps<SkeletonProps> } &
 	// { [K in UnNamedThemeComponentSelectors<'toggle'>]?: RestrictedThemeComponentProps<ToggleProps> } &
 	
 	/* MOLECULES */
-	{ [K in ThemeComponentUnNamedSelectors<'calloutBadge'>]?: ThemeComponentRestrictedProps<CalloutBadgeProps> } & 
-	{ [K in ThemeComponentUnNamedSelectors<'carousel'>]?: ThemeComponentRestrictedProps<CarouselProps> } &
-	{ [K in ThemeComponentUnNamedSelectors<'checkbox'>]?: ThemeComponentRestrictedProps<CheckboxProps> } &
-	{ [K in ThemeComponentUnNamedSelectors<'grid'>]?: ThemeComponentRestrictedProps<GridProps> } &
-	{ [K in ThemeComponentUnNamedSelectors<'layoutSelector'>]?: ThemeComponentRestrictedProps<LayoutSelectorProps> } &
-	{ [K in ThemeComponentUnNamedSelectors<'list'>]?: ThemeComponentRestrictedProps<ListProps> } &
-	{ [K in ThemeComponentUnNamedSelectors<'radio'>]?: ThemeComponentRestrictedProps<RadioProps> } &
-	{ [K in ThemeComponentUnNamedSelectors<'errorHandler'>]?: ThemeComponentRestrictedProps<ErrorHandlerProps> } &
-	{ [K in ThemeComponentUnNamedSelectors<'facetGridOptions'>]?: ThemeComponentRestrictedProps<FacetGridOptionsProps> } &
-	{ [K in ThemeComponentUnNamedSelectors<'facetHierarchyOptions'>]?: ThemeComponentRestrictedProps<FacetHierarchyOptionsProps> } &
-	{ [K in ThemeComponentUnNamedSelectors<'facetListOptions'>]?: ThemeComponentRestrictedProps<FacetListOptionsProps> } &
-	{ [K in ThemeComponentUnNamedSelectors<'facetPaletteOptions'>]?: ThemeComponentRestrictedProps<FacetPaletteOptionsProps> } &
-	{ [K in ThemeComponentUnNamedSelectors<'facetSlider'>]?: ThemeComponentRestrictedProps<FacetSliderProps> } &
+	{ [K in ThemeComponentOverridesUnNamedSelectors<'calloutBadge'>]?: ThemeComponentRestrictedProps<CalloutBadgeProps> } & 
+	{ [K in ThemeComponentOverridesUnNamedSelectors<'carousel'>]?: ThemeComponentRestrictedProps<CarouselProps> } &
+	{ [K in ThemeComponentOverridesUnNamedSelectors<'checkbox'>]?: ThemeComponentRestrictedProps<CheckboxProps> } &
+	{ [K in ThemeComponentOverridesUnNamedSelectors<'grid'>]?: ThemeComponentRestrictedProps<GridProps> } &
+	{ [K in ThemeComponentOverridesUnNamedSelectors<'layoutSelector'>]?: ThemeComponentRestrictedProps<LayoutSelectorProps> } &
+	{ [K in ThemeComponentOverridesUnNamedSelectors<'list'>]?: ThemeComponentRestrictedProps<ListProps> } &
+	{ [K in ThemeComponentOverridesUnNamedSelectors<'radio'>]?: ThemeComponentRestrictedProps<RadioProps> } &
+	{ [K in ThemeComponentOverridesUnNamedSelectors<'errorHandler'>]?: ThemeComponentRestrictedProps<ErrorHandlerProps> } &
+	{ [K in ThemeComponentOverridesUnNamedSelectors<'facetGridOptions'>]?: ThemeComponentRestrictedProps<FacetGridOptionsProps> } &
+	{ [K in ThemeComponentOverridesUnNamedSelectors<'facetHierarchyOptions'>]?: ThemeComponentRestrictedProps<FacetHierarchyOptionsProps> } &
+	{ [K in ThemeComponentOverridesUnNamedSelectors<'facetListOptions'>]?: ThemeComponentRestrictedProps<FacetListOptionsProps> } &
+	{ [K in ThemeComponentOverridesUnNamedSelectors<'facetPaletteOptions'>]?: ThemeComponentRestrictedProps<FacetPaletteOptionsProps> } &
+	{ [K in ThemeComponentOverridesUnNamedSelectors<'facetSlider'>]?: ThemeComponentRestrictedProps<FacetSliderProps> } &
 	// { [K in UnNamedThemeComponentSelectors<'facetToggle'>]?: RestrictedThemeComponentProps<FacetToggleProps> } &
-	{ [K in ThemeComponentNamedSelectors<'filter', FilterNames>]?: ThemeComponentRestrictedProps<FilterProps> } &
-	{ [K in ThemeComponentUnNamedSelectors<'loadMore'>]?: ThemeComponentRestrictedProps<LoadMoreProps> } &
-	{ [K in ThemeComponentUnNamedSelectors<'overlayBadge'>]?: ThemeComponentRestrictedProps<OverlayBadgeProps> } &
-	{ [K in ThemeComponentUnNamedSelectors<'pagination'>]?: ThemeComponentRestrictedProps<PaginationProps> } &
-	{ [K in ThemeComponentUnNamedSelectors<'perPage'>]?: ThemeComponentRestrictedProps<PerPageProps> } &
-	{ [K in ThemeComponentUnNamedSelectors<'radioList'>]?: ThemeComponentRestrictedProps<RadioListProps> } &
-	{ [K in ThemeComponentUnNamedSelectors<'rating'>]?: ThemeComponentRestrictedProps<RatingProps> } &
-	{ [K in ThemeComponentNamedSelectors<'result', ResultNames>]?: ThemeComponentRestrictedProps<ResultProps> } &
-	{ [K in ThemeComponentUnNamedSelectors<'searchInput'>]?: ThemeComponentRestrictedProps<SearchInputProps> } &
-	{ [K in ThemeComponentUnNamedSelectors<'select'>]?: ThemeComponentRestrictedProps<SelectProps> } &
-	{ [K in ThemeComponentUnNamedSelectors<'slideout'>]?: ThemeComponentRestrictedProps<SlideoutProps> } &
-	{ [K in ThemeComponentUnNamedSelectors<'sortBy'>]?: ThemeComponentRestrictedProps<SortByProps> } &
-	{ [K in ThemeComponentUnNamedSelectors<'swatches'>]?: ThemeComponentRestrictedProps<SwatchesProps> } &
-	{ [K in ThemeComponentUnNamedSelectors<'variantSelection'>]?: ThemeComponentRestrictedProps<VariantSelectionProps> } &
-	{ [K in ThemeComponentNamedSelectors<'terms', TermsNames>]?: ThemeComponentRestrictedProps<TermsProps> } &
+	{ [K in ThemeComponentOverridesNamedSelectors<'filter', FilterNames>]?: ThemeComponentRestrictedProps<FilterProps> } &
+	{ [K in ThemeComponentOverridesUnNamedSelectors<'loadMore'>]?: ThemeComponentRestrictedProps<LoadMoreProps> } &
+	{ [K in ThemeComponentOverridesUnNamedSelectors<'overlayBadge'>]?: ThemeComponentRestrictedProps<OverlayBadgeProps> } &
+	{ [K in ThemeComponentOverridesUnNamedSelectors<'pagination'>]?: ThemeComponentRestrictedProps<PaginationProps> } &
+	{ [K in ThemeComponentOverridesUnNamedSelectors<'perPage'>]?: ThemeComponentRestrictedProps<PerPageProps> } &
+	{ [K in ThemeComponentOverridesUnNamedSelectors<'radioList'>]?: ThemeComponentRestrictedProps<RadioListProps> } &
+	{ [K in ThemeComponentOverridesUnNamedSelectors<'rating'>]?: ThemeComponentRestrictedProps<RatingProps> } &
+	{ [K in ThemeComponentOverridesNamedSelectors<'result', ResultNames>]?: ThemeComponentRestrictedProps<ResultProps> } &
+	{ [K in ThemeComponentOverridesUnNamedSelectors<'searchInput'>]?: ThemeComponentRestrictedProps<SearchInputProps> } &
+	{ [K in ThemeComponentOverridesUnNamedSelectors<'select'>]?: ThemeComponentRestrictedProps<SelectProps> } &
+	{ [K in ThemeComponentOverridesUnNamedSelectors<'slideout'>]?: ThemeComponentRestrictedProps<SlideoutProps> } &
+	{ [K in ThemeComponentOverridesUnNamedSelectors<'sortBy'>]?: ThemeComponentRestrictedProps<SortByProps> } &
+	{ [K in ThemeComponentOverridesUnNamedSelectors<'swatches'>]?: ThemeComponentRestrictedProps<SwatchesProps> } &
+	{ [K in ThemeComponentOverridesUnNamedSelectors<'variantSelection'>]?: ThemeComponentRestrictedProps<VariantSelectionProps> } &
+	{ [K in ThemeComponentOverridesNamedSelectors<'terms', TermsNames>]?: ThemeComponentRestrictedProps<TermsProps> } &
 
 	/* ORGANISMS */
-	{ [K in ThemeComponentUnNamedSelectors<'branchOverride'>]?: ThemeComponentRestrictedProps<BranchOverrideProps> } &
-	{ [K in ThemeComponentUnNamedSelectors<'facet'>]?: ThemeComponentRestrictedProps<FacetProps> } &
-	{ [K in ThemeComponentUnNamedSelectors<'facets'>]?: ThemeComponentRestrictedProps<FacetsProps> } &
-	{ [K in ThemeComponentUnNamedSelectors<'facetsHorizontal'>]?: ThemeComponentRestrictedProps<FacetsHorizontalProps> } &
-	{ [K in ThemeComponentUnNamedSelectors<'filterSummary'>]?: ThemeComponentRestrictedProps<FilterSummaryProps> } &
-	{ [K in ThemeComponentUnNamedSelectors<'noResults'>]?: ThemeComponentRestrictedProps<NoResultsProps> } &
-	{ [K in ThemeComponentUnNamedSelectors<'results'>]?: ThemeComponentRestrictedProps<ResultsProps> } &
-	{ [K in ThemeComponentUnNamedSelectors<'searchHeader'>]?: ThemeComponentRestrictedProps<SearchHeaderProps> } &
-	{ [K in ThemeComponentUnNamedSelectors<'sidebar'>]?: ThemeComponentRestrictedProps<SidebarProps> } &
-	{ [K in ThemeComponentUnNamedSelectors<'mobileSidebar'>]?: ThemeComponentRestrictedProps<MobileSidebarProps> } &
-	{ [K in ThemeComponentNamedSelectors<'toolbar', ToolbarNames>]?: ThemeComponentRestrictedProps<ToolbarProps> } &
-	{ [K in ThemeComponentUnNamedSelectors<'termsList'>]?: ThemeComponentRestrictedProps<TermsListProps> } &
+	{ [K in ThemeComponentOverridesUnNamedSelectors<'branchOverride'>]?: ThemeComponentRestrictedProps<BranchOverrideProps> } &
+	{ [K in ThemeComponentOverridesUnNamedSelectors<'facet'>]?: ThemeComponentRestrictedProps<FacetProps> } &
+	{ [K in ThemeComponentOverridesUnNamedSelectors<'facets'>]?: ThemeComponentRestrictedProps<FacetsProps> } &
+	{ [K in ThemeComponentOverridesUnNamedSelectors<'facetsHorizontal'>]?: ThemeComponentRestrictedProps<FacetsHorizontalProps> } &
+	{ [K in ThemeComponentOverridesUnNamedSelectors<'filterSummary'>]?: ThemeComponentRestrictedProps<FilterSummaryProps> } &
+	{ [K in ThemeComponentOverridesUnNamedSelectors<'noResults'>]?: ThemeComponentRestrictedProps<NoResultsProps> } &
+	{ [K in ThemeComponentOverridesUnNamedSelectors<'results'>]?: ThemeComponentRestrictedProps<ResultsProps> } &
+	{ [K in ThemeComponentOverridesUnNamedSelectors<'searchHeader'>]?: ThemeComponentRestrictedProps<SearchHeaderProps> } &
+	{ [K in ThemeComponentOverridesUnNamedSelectors<'sidebar'>]?: ThemeComponentRestrictedProps<SidebarProps> } &
+	{ [K in ThemeComponentOverridesUnNamedSelectors<'mobileSidebar'>]?: ThemeComponentRestrictedProps<MobileSidebarProps> } &
+	{ [K in ThemeComponentOverridesNamedSelectors<'toolbar', ToolbarNames>]?: ThemeComponentRestrictedProps<ToolbarProps> } &
+	{ [K in ThemeComponentOverridesUnNamedSelectors<'termsList'>]?: ThemeComponentRestrictedProps<TermsListProps> } &
 
 
 	/* TEMPLATES */
-	{ [K in ThemeComponentUnNamedSelectors<'autocompleteTemplate'>]?: ThemeComponentRestrictedProps<AutocompleteTemplateProps> } &
-	{ [K in ThemeComponentNamedSelectors<'recommendation', string>]?: ThemeComponentRestrictedProps<RecommendationProps> } &
-	{ [K in ThemeComponentNamedSelectors<'recommendationBundle', string>]?: ThemeComponentRestrictedProps<RecommendationBundleProps> } &
-	{ [K in ThemeComponentNamedSelectors<'recommendationBundleEasyAdd', string>]?: ThemeComponentRestrictedProps<RecommendationBundleEasyAddProps> } &
-	{ [K in ThemeComponentNamedSelectors<'recommendationBundleList', string>]?: ThemeComponentRestrictedProps<RecommendationBundleListProps> } &
-	{ [K in ThemeComponentNamedSelectors<'recommendationBundleVertical', string>]?: ThemeComponentRestrictedProps<RecommendationBundleVerticalProps> } &
-	{ [K in ThemeComponentNamedSelectors<'recommendationGrid', string>]?: ThemeComponentRestrictedProps<RecommendationGridProps> } &
-	{ [K in ThemeComponentUnNamedSelectors<'recommendationEmail'>]?: ThemeComponentRestrictedProps<RecommendationEmailProps> } & 
-	{ [K in ThemeComponentUnNamedSelectors<'search'>]?: ThemeComponentRestrictedProps<SearchProps> } &
-	{ [K in ThemeComponentUnNamedSelectors<'searchSnappy'>]?: ThemeComponentRestrictedProps<SearchSnappyProps> } &
-	{ [K in ThemeComponentUnNamedSelectors<'searchBoca'>]?: ThemeComponentRestrictedProps<SearchBocaProps> } &
-	{ [K in ThemeComponentUnNamedSelectors<'searchSnapnco'>]?: ThemeComponentRestrictedProps<SearchSnapncoProps> } &
-	{ [K in ThemeComponentUnNamedSelectors<'searchHorizontal'>]?: ThemeComponentRestrictedProps<SearchHorizontalProps> };
+	{ [K in ThemeComponentOverridesUnNamedSelectors<'autocompleteTemplate'>]?: ThemeComponentRestrictedProps<AutocompleteTemplateProps> } &
+	{ [K in ThemeComponentOverridesNamedSelectors<'recommendation', string>]?: ThemeComponentRestrictedProps<RecommendationProps> } &
+	{ [K in ThemeComponentOverridesNamedSelectors<'recommendationBundle', string>]?: ThemeComponentRestrictedProps<RecommendationBundleProps> } &
+	{ [K in ThemeComponentOverridesNamedSelectors<'recommendationBundleEasyAdd', string>]?: ThemeComponentRestrictedProps<RecommendationBundleEasyAddProps> } &
+	{ [K in ThemeComponentOverridesNamedSelectors<'recommendationBundleList', string>]?: ThemeComponentRestrictedProps<RecommendationBundleListProps> } &
+	{ [K in ThemeComponentOverridesNamedSelectors<'recommendationBundleVertical', string>]?: ThemeComponentRestrictedProps<RecommendationBundleVerticalProps> } &
+	{ [K in ThemeComponentOverridesNamedSelectors<'recommendationGrid', string>]?: ThemeComponentRestrictedProps<RecommendationGridProps> } &
+	{ [K in ThemeComponentOverridesUnNamedSelectors<'recommendationEmail'>]?: ThemeComponentRestrictedProps<RecommendationEmailProps> } & 
+	{ [K in ThemeComponentOverridesUnNamedSelectors<'search'>]?: ThemeComponentRestrictedProps<SearchProps> } &
+	{ [K in ThemeComponentOverridesUnNamedSelectors<'searchSnappy'>]?: ThemeComponentRestrictedProps<SearchSnappyProps> } &
+	{ [K in ThemeComponentOverridesUnNamedSelectors<'searchBoca'>]?: ThemeComponentRestrictedProps<SearchBocaProps> } &
+	{ [K in ThemeComponentOverridesUnNamedSelectors<'searchSnapnco'>]?: ThemeComponentRestrictedProps<SearchSnapncoProps> } &
+	{ [K in ThemeComponentOverridesUnNamedSelectors<'searchHorizontal'>]?: ThemeComponentRestrictedProps<SearchHorizontalProps> };
 
 // prettier-ignore
 export type ThemeComponentsRestrictedOverrides =
@@ -390,7 +386,10 @@ export type ThemeComponentsRestrictedOverrides =
 	{ [K in ThemeComponentOverridesUnNamedSelectors<'searchHorizontal'>]?: ThemeComponentOverridesRestrictedProps<SearchHorizontalProps> };
 
 // prettier-ignore
-export type ThemeComponentTemplateOverrides<Template extends string> =
+export type ThemeComponentTemplateOverrides<Template extends string, Props> =
+	/* WITH TEMPLATE */
+	{ [K in ThemeComponentTemplateUnNamedSelectors<Template>]?: ThemeComponentRestrictedProps<Props> } &
+
 	/* ATOMS */
 	{ [K in ThemeComponentUnNamedSelectorsStartingWithTemplate<Template, 'badgeImage'>]?: ThemeComponentRestrictedProps<BadgeImageProps> } &
 	{ [K in ThemeComponentUnNamedSelectorsStartingWithTemplate<Template,'badgePill'>]?: ThemeComponentRestrictedProps<BadgePillProps> } &

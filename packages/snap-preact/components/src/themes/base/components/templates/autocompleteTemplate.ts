@@ -14,11 +14,10 @@ const autocompleteTemplateStyleScript = ({ theme }: AutocompleteTemplateProps) =
 // AutocompleteTemplate component props come from Template export
 export const autocompleteTemplate: ThemeComponent<'autocompleteTemplate', AutocompleteTemplateProps> = {
 	default: {
-		props: {
-			...autocompleteThemeComponentProps.default?.props,
+		autocompleteTemplate: {
+			...(autocompleteThemeComponentProps.default?.['autocompleteTemplate'] || {}),
 			themeStyleScript: autocompleteTemplateStyleScript,
 		},
-		components: autocompleteThemeComponentProps.default?.components,
 	},
 	mobile: autocompleteThemeComponentProps.mobile,
 	desktop: autocompleteThemeComponentProps.desktop,
