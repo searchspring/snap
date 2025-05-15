@@ -62,6 +62,12 @@ const getDym = (controller) => {
 <SearchHeader controller={controller} didYouMeanText={getDym} />
 ```
 
+### expandedSearchText
+The `expandedSearchText` prop specifies the text to show when the text to show when the search matchType equals 'expanded'.
+```jsx
+<SearchHeader controller={controller} expandedSearchText={"We couldn't find an exact match for that, but heres something similar:"} />
+```
+
 ### hideTitleText
 The `hideTitleText` prop hides the title text.
 
@@ -95,4 +101,11 @@ The `hideDidYouMeanText` prop hides did you mean text.
 
 ```jsx
 <SearchHeader controller={controller} hideDidYouMeanText={true} />
+```
+
+### hideExpandedSearchText
+The `hideExpandedSearchText` prop hides the expanded search text.
+
+```jsx
+<SearchHeader controller={controller} hideExpandedSearchText={true} />
 ```

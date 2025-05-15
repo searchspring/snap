@@ -43,6 +43,7 @@ export const SearchHeader = observer((properties: SearchHeaderProps): JSX.Elemen
 		</span>`
 				: `<span>No results found.</span>`
 		}`,
+		expandedSearchText: `We couldn't find an exact match for "<span className="ss__query">${search?.query?.string}</span>", but here's something similar:`,
 		treePath: globalTreePath,
 	};
 
@@ -55,10 +56,12 @@ export const SearchHeader = observer((properties: SearchHeaderProps): JSX.Elemen
 		correctedQueryText,
 		noResultsText,
 		didYouMeanText,
+		expandedSearchText,
 		hideTitleText,
 		hideSubtitleText,
 		hideCorrectedQueryText,
 		hideNoResultsText,
+		hideExpandedSearchText,
 		hideDidYouMeanText,
 	} = props;
 
@@ -81,6 +84,9 @@ export const SearchHeader = observer((properties: SearchHeaderProps): JSX.Elemen
 		didYouMeanText: {
 			value: didYouMeanText,
 		},
+		expandedSearchText: {
+			value: expandedSearchText,
+		},
 	};
 
 	//deep merge with props.lang
@@ -102,6 +108,17 @@ export const SearchHeader = observer((properties: SearchHeaderProps): JSX.Elemen
 					<Fragment>
 						{pagination?.totalResults ? (
 							<>
+								{!hideExpandedSearchText && search?.matchType && search.matchType == 'expanded' ? (
+									<h6
+										className={classnames('ss__search-header__title', 'ss__search-header__title--expanded')}
+										aria-atomic="true"
+										aria-live="polite"
+										{...mergedLang.expandedSearchText?.all}
+									></h6>
+								) : (
+									<></>
+								)}
+
 								{!hideTitleText && (
 									<h3
 										className={classnames('ss__search-header__title', 'ss__search-header__title--results')}
@@ -170,12 +187,13 @@ export interface SearchHeaderProps extends ComponentProps {
 	correctedQueryText?: string | ((data: SearchHeaderPropData) => string);
 	noResultsText?: string | ((data: SearchHeaderPropData) => string);
 	didYouMeanText?: string | ((data: SearchHeaderPropData) => string);
+	expandedSearchText?: string | ((data: SearchHeaderPropData) => string);
 	hideTitleText?: boolean;
 	hideSubtitleText?: boolean;
 	hideCorrectedQueryText?: boolean;
 	hideNoResultsText?: boolean;
 	hideDidYouMeanText?: boolean;
-
+	hideExpandedSearchText?: boolean;
 	lang?: Partial<SearchHeaderLang>;
 }
 
@@ -184,6 +202,7 @@ export interface SearchHeaderLang {
 	correctedQueryText: Lang<SearchHeaderPropData>;
 	noResultsText: Lang<SearchHeaderPropData>;
 	didYouMeanText: Lang<SearchHeaderPropData>;
+	expandedSearchText: Lang<SearchHeaderPropData>;
 	subtitleText?: Lang<SearchHeaderPropData>;
 }
 

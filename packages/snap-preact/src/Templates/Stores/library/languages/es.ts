@@ -381,6 +381,11 @@ export const es: LangComponents = {
 				return `¿Quiso decir <a href=${data?.search?.didYouMean?.url.href}>${data?.search?.didYouMean?.string}</a>?`;
 			},
 		},
+		expandedSearchText: {
+			value: (data) => {
+				return `No pudimos encontrar una coincidencia exacta para "<span className="ss__query">${data?.search?.query?.string}</span>", pero aquí hay algo similar:`;
+			},
+		},
 	},
 	noResults: {
 		suggestionsTitleText: {

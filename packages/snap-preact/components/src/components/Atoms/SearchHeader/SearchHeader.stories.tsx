@@ -138,6 +138,19 @@ export default {
 			},
 			control: { type: 'text' },
 		},
+		expandedSearchText: {
+			description: 'Expanded search text',
+			table: {
+				type: {
+					summary: 'string',
+				},
+				defaultValue: {
+					summary:
+						'We couldn\'t find an exact match for "<span className="ss__query">${search?.query?.string}</span>", but here\'s something similar:',
+				},
+			},
+			control: { type: 'text' },
+		},
 		hideTitleText: {
 			description: 'Hide title title',
 			table: {
@@ -160,6 +173,16 @@ export default {
 		},
 		hideCorrectedQueryText: {
 			description: 'Hide CorrectedQuery Text',
+			table: {
+				type: {
+					summary: 'boolean',
+				},
+				defaultValue: { summary: false },
+			},
+			control: { type: 'boolean' },
+		},
+		hideExpandedSearchText: {
+			description: 'Hide Expanded Search Text',
 			table: {
 				type: {
 					summary: 'boolean',

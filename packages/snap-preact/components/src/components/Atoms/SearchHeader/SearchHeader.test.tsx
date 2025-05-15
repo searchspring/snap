@@ -609,6 +609,87 @@ describe('Search Header Component', () => {
 		});
 	});
 
+	describe('expanded search text', () => {
+		const expandedData = new MockData().searchMeta('expanded');
+		const expandedPaginationStore = new SearchPaginationStore({
+			config: searchConfig,
+			services,
+			data: {
+				search: expandedData.search,
+				meta: expandedData.meta,
+			},
+		});
+		const expandedQueryStore = new SearchQueryStore({
+			services,
+			data: {
+				search: expandedData.search,
+			},
+		});
+
+		it('renders the default expandedText & search title', async () => {
+			const rendered = render(<SearchHeader pagination={expandedPaginationStore} query={expandedQueryStore} />);
+			const headerElement = rendered.container.querySelector('.ss__search-header__title--results');
+			expect(headerElement).toBeInTheDocument();
+			expect(headerElement).toHaveTextContent('Showing 1 - 30 of 1298 results for "dress"');
+
+			const expandedElement = rendered.container.querySelector('.ss__search-header__title--expanded');
+			expect(expandedElement).toBeInTheDocument();
+			expect(expandedElement?.innerHTML).toBe(
+				'We couldn\'t find an exact match for "<span classname="ss__query">dress</span>", but here\'s something similar:'
+			);
+		});
+
+		it('renders a custom expandedText', async () => {
+			const customExpanded = 'Custom expanded text';
+			const rendered = render(<SearchHeader expandedSearchText={customExpanded} pagination={expandedPaginationStore} query={expandedQueryStore} />);
+
+			const headerElement = rendered.container.querySelector('.ss__search-header__title--expanded');
+			expect(headerElement).toBeInTheDocument();
+			expect(headerElement).toHaveTextContent(customExpanded);
+		});
+
+		it('can hide expandedText', async () => {
+			const customExpanded = 'Custom expanded text';
+			const rendered = render(
+				<SearchHeader
+					hideExpandedSearchText={true}
+					expandedSearchText={customExpanded}
+					pagination={expandedPaginationStore}
+					query={expandedQueryStore}
+				/>
+			);
+
+			const headerElement = rendered.container.querySelector('.ss__search-header__title--expanded');
+			expect(headerElement).not.toBeInTheDocument();
+		});
+
+		it('renders a custom expandedText using a function', async () => {
+			const expandedText = (data: any) => {
+				const query = data.search?.query?.string;
+
+				return `custom stuff and things ${query}`;
+			};
+			const rendered = render(<SearchHeader expandedSearchText={expandedText} pagination={expandedPaginationStore} query={expandedQueryStore} />);
+
+			const headerElement = rendered.container.querySelector('.ss__search-header__title--expanded');
+			expect(headerElement).toBeInTheDocument();
+			expect(headerElement).toHaveTextContent('custom stuff and things dress');
+		});
+
+		it('dangerously sets the inner html of expandedText', async () => {
+			const expandedText = (data: any) => {
+				const query = data.search?.query?.string;
+				return `<span class="findMe">custom stuff and things <label>${query}</label></span>`;
+			};
+			const rendered = render(<SearchHeader expandedSearchText={expandedText} pagination={expandedPaginationStore} query={expandedQueryStore} />);
+
+			const headerElement = rendered.container.querySelector('.ss__search-header__title--expanded .findMe');
+			expect(headerElement).toBeInTheDocument();
+			expect(headerElement).toHaveTextContent('custom stuff and things dress');
+			expect(headerElement?.innerHTML).toBe('custom stuff and things <label>dress</label>');
+		});
+	});
+
 	describe('landing page', () => {
 		const landingData = new MockData().searchMeta('landingPage');
 		const landingPaginationStore = new SearchPaginationStore({
