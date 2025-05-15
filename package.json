@@ -66,7 +66,8 @@
   "config": {
     "commitizen": {
       "path": "./node_modules/cz-conventional-changelog",
-			"messageLengthLimit": 150
+			"maxHeaderWidth": 150,
+			"maxLineWidth": 150
     }
   }
 }
