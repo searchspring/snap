@@ -21,21 +21,17 @@ const perPageStyleScript = ({ theme }: PerPageProps) => {
 // PerPage component props
 export const perPage: ThemeComponent<'perPage', PerPageProps> = {
 	default: {
-		props: {
+		perPage: {
 			themeStyleScript: perPageStyleScript,
 		},
-		components: {
-			'*perPage icon': {
-				size: '12px',
-				icon: 'angle-down',
-			},
+		'perPage icon': {
+			size: '12px',
+			icon: 'angle-down',
 		},
 	},
 	mobile: {
-		components: {
-			'*perPage select': {
-				hideSelection: true,
-			},
+		'perPage select': {
+			hideSelection: true,
 		},
 	},
 };

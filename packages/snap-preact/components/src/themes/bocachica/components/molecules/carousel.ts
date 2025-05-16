@@ -21,7 +21,7 @@ const carouselStyleScript = ({ theme }: CarouselProps) => {
 // Carousel component props
 export const carousel: ThemeComponent<'carousel', CarouselProps> = {
 	default: {
-		props: {
+		carousel: {
 			themeStyleScript: carouselStyleScript,
 		},
 	},

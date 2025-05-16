@@ -12,7 +12,7 @@ const termsStyleScript = ({ theme }: TermsProps) => {
 // Terms component props
 export const terms: ThemeComponent<'terms', TermsProps> = {
 	default: {
-		props: {
+		terms: {
 			styleScript: termsStyleScript,
 		},
 	},

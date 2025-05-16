@@ -12,7 +12,7 @@ import { ThemeComponent } from '../../../../providers';
 // Pagination component props
 export const pagination: ThemeComponent<'pagination', PaginationProps> = {
 	default: {
-		props: {
+		pagination: {
 			// themeStyleScript: paginationStyleScript,
 		},
 	},

@@ -14,7 +14,7 @@ const searchInputStyleScript = ({ theme }: SearchInputProps) => {
 // SearchInput component props
 export const searchInput: ThemeComponent<'searchInput', SearchInputProps> = {
 	default: {
-		props: {
+		searchInput: {
 			themeStyleScript: searchInputStyleScript,
 		},
 	},

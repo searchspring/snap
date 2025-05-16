@@ -14,6 +14,7 @@ const autocompleteTemplateStyleScript = ({ theme }: AutocompleteTemplateProps) =
 // AutocompleteTemplate component props come from Template export
 export const autocompleteTemplate: ThemeComponent<'autocompleteTemplate', AutocompleteTemplateProps> = {
 	default: {
+		...autocompleteThemeComponentProps.default,
 		autocompleteTemplate: {
 			...(autocompleteThemeComponentProps.default?.['autocompleteTemplate'] || {}),
 			themeStyleScript: autocompleteTemplateStyleScript,

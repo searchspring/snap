@@ -33,7 +33,7 @@ const loadMoreStyleScript = ({ color, backgroundColor, theme }: LoadMoreProps) =
 // LoadMore component props
 export const loadMore: ThemeComponent<'loadMore', LoadMoreProps> = {
 	default: {
-		props: {
+		loadMore: {
 			themeStyleScript: loadMoreStyleScript,
 		},
 	},

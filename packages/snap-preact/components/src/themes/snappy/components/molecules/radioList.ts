@@ -8,7 +8,7 @@ import { ThemeComponent } from '../../../../providers';
 // RadioList component props
 export const radioList: ThemeComponent<'radioList', RadioListProps> = {
 	default: {
-		props: {
+		radioList: {
 			// themeStyleScript: radioListStyleScript,
 		},
 	},

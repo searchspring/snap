@@ -3,7 +3,7 @@ import { ThemeComponent } from '../../providers';
 
 export const searchSnappyThemeComponentProps: ThemeComponent<'searchSnappy', SearchSnappyProps> = {
 	default: {
-		props: {
+		searchSnappy: {
 			layoutOptions: [
 				{
 					value: 1,
@@ -17,16 +17,16 @@ export const searchSnappyThemeComponentProps: ThemeComponent<'searchSnappy', Sea
 					icon: 'layout-list',
 					overrides: {
 						components: {
-							'*searchSnappy searchHorizontal result': {
+							'searchSnappy searchHorizontal result': {
 								layout: 'list',
 							},
-							'*searchSnappy search result': {
+							'searchSnappy search result': {
 								layout: 'list',
 							},
-							'*searchSnappy searchHorizontal results': {
+							'searchSnappy searchHorizontal results': {
 								columns: 1,
 							},
-							'*searchSnappy search results': {
+							'searchSnappy search results': {
 								columns: 1,
 							},
 						},
@@ -40,58 +40,53 @@ export const searchSnappyThemeComponentProps: ThemeComponent<'searchSnappy', Sea
 				},
 			},
 		},
-		components: {
-			'*searchSnappy filterSummary': {
-				hideTitle: true,
-			},
-			'*searchSnappy sidebar': {
-				layout: ['facets', 'banner.left'],
-			},
-			'*searchSnappy button.sidebar-toggle': {
-				icon: 'close-thin',
-			},
 
-			'*searchSnappy toolbar.top': {
-				layout: [['banner.header'], ['searchHeader'], ['banner.banner'], ['button.sidebar-toggle', 'filterSummary', '_', 'sortBy', 'layoutSelector']],
-			},
-			'*searchSnappy toolbar.middle': {
-				layout: [],
-			},
-			'*searchSnappy toolbar.bottom': {
-				layout: [['banner.footer'], ['_', 'perPage', 'paginationInfo', 'pagination', '_']],
-			},
-			'*searchSnappy mobileSidebar filterSummary': {
-				hideTitle: false,
-			},
-			'*searchSnappy results': {
-				columns: 4,
-			},
+		'searchSnappy filterSummary': {
+			hideTitle: true,
+		},
+		'searchSnappy sidebar': {
+			layout: ['facets', 'banner.left'],
+		},
+		'searchSnappy button.sidebar-toggle': {
+			icon: 'close-thin',
+		},
+
+		'searchSnappy toolbar.top': {
+			layout: [['banner.header'], ['searchHeader'], ['banner.banner'], ['button.sidebar-toggle', 'filterSummary', '_', 'sortBy', 'layoutSelector']],
+		},
+		'searchSnappy toolbar.middle': {
+			layout: [],
+		},
+		'searchSnappy toolbar.bottom': {
+			layout: [['banner.footer'], ['_', 'perPage', 'paginationInfo', 'pagination', '_']],
+		},
+		'searchSnappy mobileSidebar filterSummary': {
+			hideTitle: false,
+		},
+		'searchSnappy results': {
+			columns: 4,
 		},
 	},
 	mobile: {
-		components: {
-			'*searchSnappy results': {
-				columns: 2,
-			},
-			'*searchSnappy toolbar.top': {
-				layout: [['banner.header'], ['searchHeader', '_', 'mobileSidebar'], ['banner.banner']],
-			},
-			'*searchSnappy toolbar.middle': {
-				layout: [['filterSummary'], ['sortBy', '_', 'layoutSelector']],
-			},
+		'searchSnappy results': {
+			columns: 2,
+		},
+		'searchSnappy toolbar.top': {
+			layout: [['banner.header'], ['searchHeader', '_', 'mobileSidebar'], ['banner.banner']],
+		},
+		'searchSnappy toolbar.middle': {
+			layout: [['filterSummary'], ['sortBy', '_', 'layoutSelector']],
 		},
 	},
 	tablet: {
-		components: {
-			'*searchSnappy results': {
-				columns: 3,
-			},
-			'*searchSnappy toolbar.top': {
-				layout: [['banner.header'], ['searchHeader', '_', 'mobileSidebar'], ['banner.banner']],
-			},
-			'*searchSnappy toolbar.middle': {
-				layout: [['filterSummary'], ['sortBy', '_', 'layoutSelector']],
-			},
+		'searchSnappy results': {
+			columns: 3,
+		},
+		'searchSnappy toolbar.top': {
+			layout: [['banner.header'], ['searchHeader', '_', 'mobileSidebar'], ['banner.banner']],
+		},
+		'searchSnappy toolbar.middle': {
+			layout: [['filterSummary'], ['sortBy', '_', 'layoutSelector']],
 		},
 	},
 	desktop: {},

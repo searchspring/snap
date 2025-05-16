@@ -53,13 +53,11 @@ const mobileSidebarStyleScript = ({ theme }: MobileSidebarProps) => {
 // MobileSidebar component props
 export const mobileSidebar: ThemeComponent<'mobileSidebar', MobileSidebarProps> = {
 	default: {
-		props: {
+		mobileSidebar: {
 			themeStyleScript: mobileSidebarStyleScript,
 		},
-		components: {
-			'*mobileSidebar button.slideout': {
-				icon: 'filters',
-			},
+		'mobileSidebar button.slideout': {
+			icon: 'filters',
 		},
 	},
 };

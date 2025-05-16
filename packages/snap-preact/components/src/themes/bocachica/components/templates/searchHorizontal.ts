@@ -14,11 +14,11 @@ const searchHorizontalStyleScript = ({ theme }: SearchHorizontalProps) => {
 // Search component props come from Template export
 export const searchHorizontal: ThemeComponent<'searchHorizontal', SearchHorizontalProps> = {
 	default: {
-		props: {
-			...searchHorizontalThemeComponentProps.default?.props,
+		...searchHorizontalThemeComponentProps.default,
+		searchHorizontal: {
+			...(searchHorizontalThemeComponentProps.default?.['searchHorizontal'] || {}),
 			themeStyleScript: searchHorizontalStyleScript,
 		},
-		components: searchHorizontalThemeComponentProps.default?.components,
 	},
 	mobile: searchHorizontalThemeComponentProps.mobile,
 	desktop: searchHorizontalThemeComponentProps.desktop,

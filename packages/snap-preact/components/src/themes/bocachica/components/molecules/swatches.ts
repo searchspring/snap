@@ -9,7 +9,7 @@ import { ThemeComponent } from '../../../../providers';
 // Swatches component props
 export const swatches: ThemeComponent<'swatches', SwatchesProps> = {
 	default: {
-		props: {
+		swatches: {
 			// themeStyleScript: swatchesStyleScript,
 		},
 	},

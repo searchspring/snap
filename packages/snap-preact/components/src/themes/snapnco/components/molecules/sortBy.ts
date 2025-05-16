@@ -17,21 +17,17 @@ const sortByStyleScript = () => {
 // SortBy component props
 export const sortBy: ThemeComponent<'sortBy', SortByProps> = {
 	default: {
-		props: {
+		sortBy: {
 			themeStyleScript: sortByStyleScript,
 		},
-		components: {
-			'*sortBy icon': {
-				size: '12px',
-				icon: 'angle-down',
-			},
+		'sortBy icon': {
+			size: '12px',
+			icon: 'angle-down',
 		},
 	},
 	mobile: {
-		components: {
-			'*sortBy select': {
-				hideSelection: true,
-			},
+		'sortBy select': {
+			hideSelection: true,
 		},
 	},
 };
