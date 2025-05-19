@@ -2,7 +2,7 @@ import { TemplatesStore } from './TemplateStore';
 import type { SnapTemplatesConfig } from '../SnapTemplates';
 import { GLOBAL_THEME_NAME } from './TargetStore';
 //todo - these tests sometimes take over 10 seconds to run, currently unclear why.
-describe.skip('TemplateStore', () => {
+describe('TemplateStore', () => {
 	it('has expected defaults', () => {
 		const config: SnapTemplatesConfig = {
 			config: {
