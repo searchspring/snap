@@ -2,7 +2,7 @@ const config = {
 	url: 'https://localhost:2222/templates',
 	selectors: {
 		titleElem: '.ss__search-header__title.ss__search-header__title--results',
-		subtitleElem: '.ss__search-header__title.ss__search-header__title--subtitle',
+		subtitleElem: '.ss__search-header__subtitle',
 		topToolbarElem: '.ss__search__header-section__toolbar--top-toolbar',
 		bottomToolbarElem: '.ss__search__content__toolbar--bottom-toolbar',
 		pagination: '.ss__pagination',
@@ -31,6 +31,7 @@ describe('Theme overrides work', () => {
 									searchHeader: {
 										titleText: 'custom title text',
 										subtitleText: 'custom subtitle text',
+										hideExpandedSearchText: true,
 									},
 								},
 							},
@@ -67,11 +68,13 @@ describe('Theme overrides work', () => {
 									'search searchHeader': {
 										titleText: 'custom title text',
 										subtitleText: 'custom subtitle text',
+										hideExpandedSearchText: true,
 									},
 
 									'searchHorizontal searchHeader': {
 										titleText: 'dont use this title text',
 										subtitleText: 'dont use this subtitle text',
+										hideExpandedSearchText: true,
 									},
 
 									'search toolbar.top': {
@@ -121,6 +124,7 @@ describe('Theme overrides work', () => {
 									searchHeader: {
 										titleText: 'global title text',
 										subtitleText: 'global subtitle text',
+										hideExpandedSearchText: true,
 									},
 
 									'search toolbar.top': {
@@ -202,6 +206,7 @@ describe('Theme overrides work', () => {
 									searchHeader: {
 										titleText: 'global title text',
 										subtitleText: 'global subtitle text',
+										hideExpandedSearchText: true,
 									},
 									'search toolbar.top': {
 										layout: ['searchHeader', 'layoutSelector', 'pagination', 'perPage'],
@@ -330,6 +335,7 @@ describe('Theme overrides work', () => {
 									searchHeader: {
 										titleText: 'global title text',
 										subtitleText: 'global subtitle text',
+										hideExpandedSearchText: true,
 									},
 									search: {
 										layoutOptions: [
@@ -342,6 +348,7 @@ describe('Theme overrides work', () => {
 														searchHeader: {
 															titleText: 'title text one',
 															subtitleText: 'subtitle text one',
+															hideExpandedSearchText: true,
 														},
 													},
 												},
@@ -355,6 +362,7 @@ describe('Theme overrides work', () => {
 														searchHeader: {
 															titleText: 'title text two',
 															subtitleText: 'subtitle text two',
+															hideExpandedSearchText: true,
 														},
 													},
 												},
@@ -367,6 +375,7 @@ describe('Theme overrides work', () => {
 									mobile: {
 										searchHeader: {
 											titleText: '0 - 767',
+											hideExpandedSearchText: true,
 										},
 										search: {
 											layoutOptions: [
@@ -400,6 +409,7 @@ describe('Theme overrides work', () => {
 									tablet: {
 										searchHeader: {
 											titleText: '767 - 991',
+											hideExpandedSearchText: true,
 										},
 										search: {
 											layoutOptions: [
@@ -434,6 +444,7 @@ describe('Theme overrides work', () => {
 										//only overrides when layoutoptions, if its also in a layout options
 										searchHeader: {
 											titleText: '991 - 1299',
+											hideExpandedSearchText: true,
 										},
 									},
 								},

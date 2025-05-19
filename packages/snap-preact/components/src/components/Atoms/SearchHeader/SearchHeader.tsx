@@ -27,13 +27,9 @@ export const SearchHeader = observer((properties: SearchHeaderProps): JSX.Elemen
 	const search = properties.controller?.store.search || properties.query;
 
 	const defaultProps: Partial<SearchHeaderProps> = {
-		titleText: `Showing ${
-			pagination?.multiplePages ? `<span class="ss__search-header__results-count-range"> ${pagination?.begin} - ${pagination?.end} of </span>` : ''
-		} 
-		<span class="ss__search-header__results-count-total">${pagination?.totalResults}</span> 
-		result${pagination?.totalResults == 1 ? '' : 's'} 
-		${search?.query ? `for <span class="ss__search-header__results-query">"${search.query.string}"</span>` : ''}
-	`,
+		titleText: `Search result${pagination?.totalResults == 1 ? '' : 's'} ${
+			search?.query ? `for <span class="ss__search-header__results-query">"${search.query.string}"</span>` : ''
+		}`,
 		correctedQueryText: `No results found for <em>"${search?.originalQuery?.string}"</em>, showing results for <em>"${search?.query?.string}"</em> instead.`,
 		didYouMeanText: `Did you mean <a href=${search?.didYouMean?.url.href}>${search?.didYouMean?.string}</a>?`,
 		noResultsText: `${
@@ -43,6 +39,7 @@ export const SearchHeader = observer((properties: SearchHeaderProps): JSX.Elemen
 		</span>`
 				: `<span>No results found.</span>`
 		}`,
+		expandedSearchText: `We couldn't find an exact match for "<span class="ss__search-header__results-query">${search?.query?.string}</span>", but here's something similar:`,
 		treePath: globalTreePath,
 	};
 
@@ -55,10 +52,12 @@ export const SearchHeader = observer((properties: SearchHeaderProps): JSX.Elemen
 		correctedQueryText,
 		noResultsText,
 		didYouMeanText,
+		expandedSearchText,
 		hideTitleText,
 		hideSubtitleText,
 		hideCorrectedQueryText,
 		hideNoResultsText,
+		hideExpandedSearchText,
 		hideDidYouMeanText,
 	} = props;
 
@@ -81,6 +80,9 @@ export const SearchHeader = observer((properties: SearchHeaderProps): JSX.Elemen
 		didYouMeanText: {
 			value: didYouMeanText,
 		},
+		expandedSearchText: {
+			value: expandedSearchText,
+		},
 	};
 
 	//deep merge with props.lang
@@ -102,7 +104,18 @@ export const SearchHeader = observer((properties: SearchHeaderProps): JSX.Elemen
 					<Fragment>
 						{pagination?.totalResults ? (
 							<>
-								{!hideTitleText && (
+								{!hideExpandedSearchText && search?.matchType && search.matchType == 'expanded' ? (
+									<h3
+										className={classnames('ss__search-header__title', 'ss__search-header__title--expanded')}
+										aria-atomic="true"
+										aria-live="polite"
+										{...mergedLang.expandedSearchText?.all}
+									></h3>
+								) : (
+									<></>
+								)}
+
+								{!hideTitleText && (search?.matchType !== 'expanded' || hideExpandedSearchText) && (
 									<h3
 										className={classnames('ss__search-header__title', 'ss__search-header__title--results')}
 										aria-atomic="true"
@@ -113,7 +126,7 @@ export const SearchHeader = observer((properties: SearchHeaderProps): JSX.Elemen
 
 								{search?.originalQuery && !hideCorrectedQueryText && (
 									<h5
-										className={classnames('ss__search-header__title', 'ss__search-header__title--corrected')}
+										className={classnames('ss__search-header__subtitle', 'ss__search-header__subtitle--corrected')}
 										aria-atomic="true"
 										aria-live="polite"
 										{...mergedLang.correctedQueryText?.all}
@@ -133,24 +146,19 @@ export const SearchHeader = observer((properties: SearchHeaderProps): JSX.Elemen
 									)}
 
 									{search?.didYouMean && !hideDidYouMeanText && (
-										<h4
-											className={classnames('ss__search-header__title', 'ss__search-header__title--dym')}
+										<h5
+											className={classnames('ss__search-header__subtitle', 'ss__search-header__subtitle--dym')}
 											aria-atomic="true"
 											aria-live="polite"
 											{...mergedLang.didYouMeanText?.all}
-										></h4>
+										></h5>
 									)}
 								</div>
 							)
 						)}
 
 						{(subtitleText || lang.subtitleText.value) && !hideSubtitleText && (
-							<h4
-								className={classnames('ss__search-header__title', 'ss__search-header__title--subtitle')}
-								aria-atomic="true"
-								aria-live="polite"
-								{...mergedLang.subtitleText?.all}
-							></h4>
+							<h5 className={classnames('ss__search-header__subtitle')} aria-atomic="true" aria-live="polite" {...mergedLang.subtitleText?.all}></h5>
 						)}
 					</Fragment>
 				)}
@@ -170,12 +178,13 @@ export interface SearchHeaderProps extends ComponentProps {
 	correctedQueryText?: string | ((data: SearchHeaderPropData) => string);
 	noResultsText?: string | ((data: SearchHeaderPropData) => string);
 	didYouMeanText?: string | ((data: SearchHeaderPropData) => string);
+	expandedSearchText?: string | ((data: SearchHeaderPropData) => string);
 	hideTitleText?: boolean;
 	hideSubtitleText?: boolean;
 	hideCorrectedQueryText?: boolean;
 	hideNoResultsText?: boolean;
 	hideDidYouMeanText?: boolean;
-
+	hideExpandedSearchText?: boolean;
 	lang?: Partial<SearchHeaderLang>;
 }
 
@@ -184,6 +193,7 @@ export interface SearchHeaderLang {
 	correctedQueryText: Lang<SearchHeaderPropData>;
 	noResultsText: Lang<SearchHeaderPropData>;
 	didYouMeanText: Lang<SearchHeaderPropData>;
+	expandedSearchText: Lang<SearchHeaderPropData>;
 	subtitleText?: Lang<SearchHeaderPropData>;
 }
 
