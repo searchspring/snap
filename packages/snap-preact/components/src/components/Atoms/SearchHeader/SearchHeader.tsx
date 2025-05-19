@@ -27,7 +27,9 @@ export const SearchHeader = observer((properties: SearchHeaderProps): JSX.Elemen
 	const search = properties.controller?.store.search || properties.query;
 
 	const defaultProps: Partial<SearchHeaderProps> = {
-		titleText: `Search results ${search?.query ? `for <span class="ss__search-header__results-query">"${search.query.string}"</span>` : ''}`,
+		titleText: `Search result${pagination?.totalResults == 1 ? '' : 's'} ${
+			search?.query ? `for <span class="ss__search-header__results-query">"${search.query.string}"</span>` : ''
+		}`,
 		correctedQueryText: `No results found for <em>"${search?.originalQuery?.string}"</em>, showing results for <em>"${search?.query?.string}"</em> instead.`,
 		didYouMeanText: `Did you mean <a href=${search?.didYouMean?.url.href}>${search?.didYouMean?.string}</a>?`,
 		noResultsText: `${
