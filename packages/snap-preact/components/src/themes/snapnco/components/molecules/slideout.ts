@@ -18,7 +18,7 @@ const slideoutStyleScript = ({ isActive, width, slideDirection, theme }: Slideou
 // Slideout component props
 export const slideout: ThemeComponent<'slideout', SlideoutProps> = {
 	default: {
-		props: {
+		slideout: {
 			themeStyleScript: slideoutStyleScript,
 		},
 	},

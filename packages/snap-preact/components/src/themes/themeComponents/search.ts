@@ -3,24 +3,18 @@ import { ThemeComponent } from '../../providers';
 
 export const searchThemeComponentProps: ThemeComponent<'search', SearchProps> = {
 	default: {
-		components: {
-			'*search results': {
-				columns: 4,
-			},
+		'search results': {
+			columns: 4,
 		},
 	},
 	mobile: {
-		components: {
-			'*search results': {
-				columns: 2,
-			},
+		'search results': {
+			columns: 2,
 		},
 	},
 	tablet: {
-		components: {
-			'*search results': {
-				columns: 3,
-			},
+		'search results': {
+			columns: 3,
 		},
 	},
 	desktop: {},

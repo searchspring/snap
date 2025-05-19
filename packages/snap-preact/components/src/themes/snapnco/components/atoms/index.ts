@@ -1,5 +1,4 @@
 import { ThemeResponsiveComplete } from '../../../../providers';
-import { transformThemeComponent } from '../../../utils/transformThemeComponent';
 
 // ATOMS Imports
 import { button } from './button';
@@ -7,53 +6,48 @@ import { dropdown } from './dropdown';
 import { icon } from './icon';
 import { image } from './image';
 import { loadingBar } from './loadingBar';
-import { paginationInfo } from './paginationInfo';
 import { price } from './price';
 import { searchHeader } from './searchHeader';
 import { skeleton } from './skeleton';
 
 export const atoms: ThemeResponsiveComplete = {
 	default: {
-		...transformThemeComponent('button', button.default),
-		...transformThemeComponent('dropdown', dropdown.default),
-		...transformThemeComponent('icon', icon.default),
-		...transformThemeComponent('image', image.default),
-		...transformThemeComponent('loadingBar', loadingBar.default),
-		...transformThemeComponent('paginationInfo', paginationInfo.default),
-		...transformThemeComponent('price', price.default),
-		...transformThemeComponent('searchHeader', searchHeader.default),
-		...transformThemeComponent('skeleton', skeleton.default),
+		...button.default,
+		...dropdown.default,
+		...icon.default,
+		...image.default,
+		...loadingBar.default,
+		...price.default,
+		...searchHeader.default,
+		...skeleton.default,
 	},
 	mobile: {
-		...transformThemeComponent('button', button.mobile),
-		...transformThemeComponent('dropdown', dropdown.mobile),
-		...transformThemeComponent('icon', icon.mobile),
-		...transformThemeComponent('image', image.mobile),
-		...transformThemeComponent('loadingBar', loadingBar.mobile),
-		...transformThemeComponent('paginationInfo', paginationInfo.mobile),
-		...transformThemeComponent('price', price.mobile),
-		...transformThemeComponent('searchHeader', searchHeader.mobile),
-		...transformThemeComponent('skeleton', skeleton.mobile),
+		...button.mobile,
+		...dropdown.mobile,
+		...icon.mobile,
+		...image.mobile,
+		...loadingBar.mobile,
+		...price.mobile,
+		...searchHeader.mobile,
+		...skeleton.mobile,
 	},
 	tablet: {
-		...transformThemeComponent('dropdown', dropdown.tablet),
-		...transformThemeComponent('icon', icon.tablet),
-		...transformThemeComponent('image', image.tablet),
-		...transformThemeComponent('loadingBar', loadingBar.tablet),
-		...transformThemeComponent('paginationInfo', paginationInfo.tablet),
-		...transformThemeComponent('price', price.tablet),
-		...transformThemeComponent('searchHeader', searchHeader.tablet),
-		...transformThemeComponent('skeleton', skeleton.tablet),
+		...dropdown.tablet,
+		...icon.tablet,
+		...image.tablet,
+		...loadingBar.tablet,
+		...price.tablet,
+		...searchHeader.tablet,
+		...skeleton.tablet,
 	},
 	desktop: {
-		...transformThemeComponent('button', button.desktop),
-		...transformThemeComponent('dropdown', dropdown.desktop),
-		...transformThemeComponent('icon', icon.desktop),
-		...transformThemeComponent('image', image.desktop),
-		...transformThemeComponent('loadingBar', loadingBar.desktop),
-		...transformThemeComponent('paginationInfo', paginationInfo.desktop),
-		...transformThemeComponent('price', price.desktop),
-		...transformThemeComponent('searchHeader', searchHeader.desktop),
-		...transformThemeComponent('skeleton', skeleton.desktop),
+		...button.desktop,
+		...dropdown.desktop,
+		...icon.desktop,
+		...image.desktop,
+		...loadingBar.desktop,
+		...price.desktop,
+		...searchHeader.desktop,
+		...skeleton.desktop,
 	},
 };

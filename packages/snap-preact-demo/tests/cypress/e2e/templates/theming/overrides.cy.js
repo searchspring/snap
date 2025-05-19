@@ -474,14 +474,14 @@ describe('Theme overrides work', () => {
 
 			cy.snapController().then(({ store }) => {
 				cy.get(config.selectors.titleElem).should('have.text', 'layout1 767 - 991');
-				cy.get(config.selectors.subtitleElem).should('have.text', 'subtitle text one');
+				cy.get(config.selectors.subtitleElem).should('have.text', 'global subtitle text');
 			});
 
 			cy.viewport(766, 1000);
 
 			cy.snapController().then(({ store }) => {
 				cy.get(config.selectors.titleElem).should('have.text', 'layout1 0 - 767');
-				cy.get(config.selectors.subtitleElem).should('have.text', 'subtitle text one');
+				cy.get(config.selectors.subtitleElem).should('have.text', 'global subtitle text');
 			});
 		});
 	});

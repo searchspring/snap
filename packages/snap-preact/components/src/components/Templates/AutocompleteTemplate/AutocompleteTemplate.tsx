@@ -165,7 +165,10 @@ const defaultStyles: StyleScript<AutocompleteTemplateProps> = ({
 			justifyContent: 'space-between',
 			overflowY: 'auto',
 			margin: noResults ? '0 auto' : undefined,
-			padding: '10px',
+
+			'.ss__autocomplete__content-inner': {
+				padding: '10px',
+			},
 
 			'.ss__autocomplete__content__results, .ss__autocomplete__content__no-results': {
 				minHeight: '0%',
@@ -432,7 +435,7 @@ export const AutocompleteTemplate = observer((properties: AutocompleteTemplatePr
 		Boolean(input === state.focusedInput) &&
 		(terms.length > 0 || trending?.length > 0 || history?.length > 0 || (state.input && controller.store.loaded));
 
-	const showResultsBool = () => Boolean(results.length > 0 || Object.keys(merchandising.content).length > 0 || search?.query?.string);
+	const showResultsBool = () => Boolean(results.length > 0 || Object.keys(merchandising.content).length > 0 || search?.query?.string || loading);
 
 	const [showResults, setShowResults] = useState(showResultsBool());
 
@@ -440,7 +443,7 @@ export const AutocompleteTemplate = observer((properties: AutocompleteTemplatePr
 		const trendingActive = trending?.filter((term) => term.active).pop();
 		const historyActive = history?.filter((term) => term.active).pop();
 
-		if ((trendingActive || historyActive || showResultsBool()) && !loading) {
+		if (trendingActive || historyActive || showResultsBool()) {
 			setShowResults(true);
 		} else {
 			setShowResults(false);
@@ -632,35 +635,43 @@ export const AutocompleteTemplate = observer((properties: AutocompleteTemplatePr
 		if (module == 'content' && showResults) {
 			return (
 				<div className="ss__autocomplete__content">
-					{!excludeBanners ? <Banner {...subProps.banner} content={merchandising.content} type={ContentType.HEADER} name={'header'} /> : null}
-					{!excludeBanners ? <Banner {...subProps.banner} content={merchandising.content} type={ContentType.BANNER} name={'banner'} /> : null}
-					{results.length > 0 ? (
-						<div className="ss__autocomplete__content__results">
-							{(contentTitle || lang.contentTitle.value) && results.length > 0 ? (
-								<div className={classnames('ss__autocomplete__title', 'ss__autocomplete__title--content')}>
-									<h5 {...mergedLang.contentTitle?.all}></h5>
+					{results.length > 0 || !loading ? (
+						<div className="ss__autocomplete__content-inner">
+							{!excludeBanners ? <Banner {...subProps.banner} content={merchandising.content} type={ContentType.HEADER} name={'header'} /> : null}
+							{!excludeBanners ? <Banner {...subProps.banner} content={merchandising.content} type={ContentType.BANNER} name={'banner'} /> : null}
+							{results.length > 0 ? (
+								<div className="ss__autocomplete__content__results">
+									{(contentTitle || lang.contentTitle.value) && results.length > 0 ? (
+										<div className={classnames('ss__autocomplete__title', 'ss__autocomplete__title--content')}>
+											<h5 {...mergedLang.contentTitle?.all}></h5>
+										</div>
+									) : null}
+									<Results results={results} {...subProps.results} controller={controller} />
 								</div>
-							) : null}
-							<Results results={results} {...subProps.results} controller={controller} />
+							) : !loading ? (
+								<div className="ss__autocomplete__content__no-results">
+									<div {...mergedLang.noResultsText?.all}></div>
+									{RecommendationTemplateComponent && recsController?.store?.loaded ? (
+										<div className="ss__no-results__recommendations">
+											<RecommendationTemplateComponent
+												controller={recsController}
+												title={recsController.store?.profile?.display?.templateParameters?.title}
+												resultComponent={RecommendationTemplateResultComponent}
+												name={'noResultsRecommendations'}
+												treePath={treePath}
+											/>
+										</div>
+									) : null}
+								</div>
+							) : (
+								<></>
+							)}
+
+							{!excludeBanners ? <Banner {...subProps.banner} content={merchandising.content} type={ContentType.FOOTER} name={'footer'} /> : null}
 						</div>
 					) : (
-						<div className="ss__autocomplete__content__no-results">
-							<div {...mergedLang.noResultsText?.all}></div>
-							{RecommendationTemplateComponent && recsController?.store?.loaded ? (
-								<div className="ss__no-results__recommendations">
-									<RecommendationTemplateComponent
-										controller={recsController}
-										title={recsController.store?.profile?.display?.templateParameters?.title}
-										resultComponent={RecommendationTemplateResultComponent}
-										name={'noResultsRecommendations'}
-										treePath={treePath}
-									/>
-								</div>
-							) : null}
-						</div>
+						<></>
 					)}
-
-					{!excludeBanners ? <Banner {...subProps.banner} content={merchandising.content} type={ContentType.FOOTER} name={'footer'} /> : null}
 				</div>
 			);
 		}

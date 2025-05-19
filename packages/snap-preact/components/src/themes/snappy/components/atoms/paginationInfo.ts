@@ -13,7 +13,7 @@ import { ThemeComponent } from '../../../../providers';
 // PaginationInfo component props
 export const paginationInfo: ThemeComponent<'paginationInfo', PaginationInfoProps> = {
 	default: {
-		props: {
+		paginationInfo: {
 			// themeStyleScript: paginationInfoStyleScript,
 		},
 	},

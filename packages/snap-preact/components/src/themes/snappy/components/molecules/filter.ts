@@ -36,7 +36,7 @@ const filterStyleScript = ({ theme }: FilterProps) => {
 // Filter component props
 export const filter: ThemeComponent<'filter', FilterProps> = {
 	default: {
-		props: {
+		filter: {
 			themeStyleScript: filterStyleScript,
 			hideFacetLabel: true,
 		},

@@ -17,13 +17,11 @@ const perPageStyleScript = ({ theme }: PerPageProps) => {
 // PerPage component props
 export const perPage: ThemeComponent<'perPage', PerPageProps> = {
 	default: {
-		props: {
+		perPage: {
 			themeStyleScript: perPageStyleScript,
 		},
-		components: {
-			'*perPage icon': {
-				size: '12px',
-			},
+		'perPage icon': {
+			size: '12px',
 		},
 	},
 };

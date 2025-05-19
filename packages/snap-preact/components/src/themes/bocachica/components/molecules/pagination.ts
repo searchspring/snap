@@ -19,7 +19,7 @@ const paginationStyleScript = ({ theme }: PaginationProps) => {
 // Pagination component props
 export const pagination: ThemeComponent<'pagination', PaginationProps> = {
 	default: {
-		props: {
+		pagination: {
 			themeStyleScript: paginationStyleScript,
 		},
 	},

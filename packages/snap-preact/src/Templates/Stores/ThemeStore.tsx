@@ -7,7 +7,15 @@ import { StorageStore } from '@searchspring/snap-store-mobx';
 import { TemplateThemeTypes, type TemplatesStoreConfigSettings, type TemplatesStoreDependencies } from './TemplateStore';
 import { Global, css } from '@emotion/react';
 
-import { ThemeMinimal, ThemeVariablesPartial, type Theme, ThemePartial, ThemeOverrides, ThemeVariableBreakpoints } from '../../../components/src';
+import {
+	ThemeMinimal,
+	ThemeVariablesPartial,
+	type Theme,
+	ThemePartial,
+	ThemeOverrides,
+	ThemeVariableBreakpoints,
+	ThemeComponents,
+} from '../../../components/src';
 import { CacheProvider } from '../../../components/src/providers/cache';
 import { sortSelectors, filterSelectors } from '../../../components/src/utilities/mergeProps';
 import type { GlobalThemeStyleScript } from '../../types';
@@ -75,6 +83,21 @@ export class ThemeStore {
 		this.dependencies = dependencies;
 
 		const { name, style, type, base, overrides, variables, currency, language, languageOverrides, innerWidth } = config;
+
+		// add prefixes to base theme components and responsive components
+		base.components = prefixComponentKeys('*', base.components);
+		if (base.responsive) {
+			base.responsive.mobile = prefixComponentKeys('*(M)', base.responsive?.mobile);
+			base.responsive.tablet = prefixComponentKeys('*(T)', base.responsive?.tablet);
+			base.responsive.desktop = prefixComponentKeys('*(D)', base.responsive?.desktop);
+		}
+
+		if (overrides?.responsive) {
+			overrides.responsive.mobile = prefixComponentKeys('(M)', overrides.responsive?.mobile);
+			overrides.responsive.tablet = prefixComponentKeys('(T)', overrides.responsive?.tablet);
+			overrides.responsive.desktop = prefixComponentKeys('(D)', overrides.responsive?.desktop);
+		}
+
 		this.name = name;
 		this.type = type;
 		this.base = base;
@@ -269,3 +292,16 @@ const arrayMerge = (target: any, source: any, options: any) => {
 
 	return destination;
 };
+
+function prefixComponentKeys(prefix: string, components?: ThemeComponents): ThemePartial {
+	// TODO: remove any?
+	const newComponents: any = {};
+
+	if (components) {
+		Object.keys(components).forEach((key) => {
+			newComponents[`${prefix}${key}` as keyof typeof newComponents] = components![key as keyof typeof components];
+		});
+	}
+
+	return newComponents;
+}

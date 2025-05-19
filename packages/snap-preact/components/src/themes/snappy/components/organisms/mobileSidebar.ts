@@ -52,7 +52,7 @@ const mobileSidebarStyleScript = ({ theme }: MobileSidebarProps) => {
 // MobileSidebar component props
 export const mobileSidebar: ThemeComponent<'mobileSidebar', MobileSidebarProps> = {
 	default: {
-		props: {
+		mobileSidebar: {
 			themeStyleScript: mobileSidebarStyleScript,
 			layout: ['perPage', 'facets', 'banner.left'],
 			hideOpenButtonText: true,

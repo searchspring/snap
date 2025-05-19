@@ -26,7 +26,7 @@ const buttonStyleScript = ({ backgroundColor, theme }: ButtonProps) => {
 // Button component props
 export const button: ThemeComponent<'button', ButtonProps> = {
 	default: {
-		props: {
+		button: {
 			themeStyleScript: buttonStyleScript,
 		},
 	},

@@ -9,7 +9,7 @@ import { ThemeComponent } from '../../../../providers';
 // Rating component props
 export const rating: ThemeComponent<'rating', RatingProps> = {
 	default: {
-		props: {
+		rating: {
 			// themeStyleScript: ratingStyleScript,
 		},
 	},

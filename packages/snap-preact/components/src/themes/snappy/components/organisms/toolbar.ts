@@ -9,7 +9,7 @@ const toolbarStyleScript = () => {
 // Toolbar component props
 export const toolbar: ThemeComponent<'toolbar', ToolbarProps> = {
 	default: {
-		props: {
+		toolbar: {
 			themeStyleScript: toolbarStyleScript,
 		},
 	},

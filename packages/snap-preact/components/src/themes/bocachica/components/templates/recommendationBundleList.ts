@@ -13,11 +13,11 @@ import { ThemeComponent } from '../../../../providers';
 // RecommendationBundleList component props come from Template export
 export const recommendationBundleList: ThemeComponent<'recommendationBundleList', RecommendationBundleListProps> = {
 	default: {
-		props: {
-			...recommendationBundleListThemeComponentProps.default?.props,
+		...recommendationBundleListThemeComponentProps.default,
+		recommendationBundleList: {
+			...(recommendationBundleListThemeComponentProps.default?.['recommendationBundleList'] || {}),
 			// themeStyleScript: recommendationBundleListStyleScript,
 		},
-		components: recommendationBundleListThemeComponentProps.default?.components,
 	},
 	mobile: recommendationBundleListThemeComponentProps.mobile,
 	desktop: recommendationBundleListThemeComponentProps.desktop,

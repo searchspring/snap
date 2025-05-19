@@ -22,11 +22,11 @@ const recommendationBundleStyleScript = ({ theme }: any) => {
 // RecommendationBundle component props come from Template export
 export const recommendationBundle: ThemeComponent<'recommendationBundle', RecommendationBundleProps> = {
 	default: {
-		props: {
-			...recommendationBundleThemeComponentProps.default?.props,
+		...recommendationBundleThemeComponentProps.default,
+		recommendationBundle: {
+			...(recommendationBundleThemeComponentProps.default?.['recommendationBundle'] || {}),
 			themeStyleScript: recommendationBundleStyleScript,
 		},
-		components: recommendationBundleThemeComponentProps.default?.components,
 	},
 	mobile: recommendationBundleThemeComponentProps.mobile,
 	desktop: recommendationBundleThemeComponentProps.desktop,

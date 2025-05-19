@@ -33,7 +33,7 @@ const facetListOptionsStyleScript = ({ horizontal, theme }: FacetListOptionsProp
 // FacetListOptions component props
 export const facetListOptions: ThemeComponent<'facetListOptions', FacetListOptionsProps> = {
 	default: {
-		props: {
+		facetListOptions: {
 			themeStyleScript: facetListOptionsStyleScript,
 		},
 	},

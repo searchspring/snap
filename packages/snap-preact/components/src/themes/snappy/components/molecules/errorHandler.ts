@@ -3,7 +3,7 @@ import { ThemeComponent } from '../../../../providers';
 // ErrorHandler component props
 export const errorHandler: ThemeComponent<'errorHandler', ErrorHandlerProps> = {
 	default: {
-		props: {
+		errorHandler: {
 			// themeStyleScript: ErrorHandlerStyleScript,
 		},
 	},

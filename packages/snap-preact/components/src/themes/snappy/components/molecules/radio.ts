@@ -32,7 +32,7 @@ const radioStyleScript = ({ size, native, color, theme }: RadioProps) => {
 // Radio component props
 export const radio: ThemeComponent<'radio', RadioProps> = {
 	default: {
-		props: {
+		radio: {
 			themeStyleScript: radioStyleScript,
 		},
 	},

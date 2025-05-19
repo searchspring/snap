@@ -1,27 +1,27 @@
 import { RecommendationProps } from '../../components/Templates/Recommendation';
 import { ThemeComponent } from '../../providers';
 
-export const recommendationThemeComponentProps: ThemeComponent<'recommendationThemeComponentProps', RecommendationProps> = {
+export const recommendationThemeComponentProps: ThemeComponent<'recommendation', RecommendationProps> = {
 	default: {
-		props: {
+		recommendation: {
 			slidesPerView: 5,
 			slidesPerGroup: 5,
 		},
 	},
 	mobile: {
-		props: {
+		recommendation: {
 			slidesPerView: 2,
 			slidesPerGroup: 2,
 		},
 	},
 	tablet: {
-		props: {
+		recommendation: {
 			slidesPerView: 3,
 			slidesPerGroup: 3,
 		},
 	},
 	desktop: {
-		props: {
+		recommendation: {
 			slidesPerView: 4,
 			slidesPerGroup: 4,
 		},

@@ -56,13 +56,13 @@ const mobileSidebarStyleScript = ({ theme }: MobileSidebarProps) => {
 // MobileSidebar component props
 export const mobileSidebar: ThemeComponent<'mobileSidebar', MobileSidebarProps> = {
 	default: {
-		props: {
+		mobileSidebar: {
 			themeStyleScript: mobileSidebarStyleScript,
 			openButtonIcon: 'filters',
 		},
 	},
 	mobile: {
-		props: {
+		mobileSidebar: {
 			hideOpenButtonText: true,
 			layout: [['filterSummary'], ['facets'], ['banner.left']],
 		},

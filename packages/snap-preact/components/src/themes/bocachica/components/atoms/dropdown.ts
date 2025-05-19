@@ -20,7 +20,7 @@ const dropdownStyleScript = ({ theme }: DropdownProps) => {
 // Dropdown component props
 export const dropdown: ThemeComponent<'dropdown', DropdownProps> = {
 	default: {
-		props: {
+		dropdown: {
 			themeStyleScript: dropdownStyleScript,
 		},
 	},
