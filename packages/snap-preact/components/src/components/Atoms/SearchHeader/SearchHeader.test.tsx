@@ -68,7 +68,7 @@ describe('Search Header Component', () => {
 			</ThemeProvider>
 		);
 
-		const subtitle = rendered.container.querySelector('.ss__search-header__title--subtitle');
+		const subtitle = rendered.container.querySelector('.ss__search-header__subtitle');
 		expect(subtitle?.innerHTML).toBe(theme.components.searchHeader.subtitleText);
 	});
 
@@ -79,7 +79,7 @@ describe('Search Header Component', () => {
 		};
 
 		const rendered = render(<SearchHeader {...args} theme={theme} />);
-		const subtitle = rendered.container.querySelector('.ss__search-header__title--subtitle');
+		const subtitle = rendered.container.querySelector('.ss__search-header__subtitle');
 		expect(subtitle?.innerHTML).toBe(theme.components.searchHeader.subtitleText);
 	});
 
@@ -103,7 +103,7 @@ describe('Search Header Component', () => {
 			</ThemeProvider>
 		);
 
-		const subtitle = rendered.container.querySelector('.ss__search-header__title--subtitle');
+		const subtitle = rendered.container.querySelector('.ss__search-header__subtitle');
 		expect(subtitle?.innerHTML).toBe(componentTheme.components.searchHeader.subtitleText);
 	});
 
@@ -111,7 +111,7 @@ describe('Search Header Component', () => {
 		const customsubTitle = 'Custom title';
 		const rendered = render(<SearchHeader subtitleText={customsubTitle} pagination={paginationStore} query={queryStore} />);
 
-		const headerElement = rendered.container.querySelector('.ss__search-header__title--subtitle');
+		const headerElement = rendered.container.querySelector('.ss__search-header__subtitle');
 		expect(headerElement).toBeInTheDocument();
 		expect(headerElement).toHaveTextContent(customsubTitle);
 	});
@@ -120,7 +120,7 @@ describe('Search Header Component', () => {
 		const customsubTitle = 'Custom title';
 		const rendered = render(<SearchHeader hideSubtitleText={true} subtitleText={customsubTitle} pagination={paginationStore} query={queryStore} />);
 
-		const headerElement = rendered.container.querySelector('.ss__search-header__title--subtitle');
+		const headerElement = rendered.container.querySelector('.ss__search-header__subtitle');
 		expect(headerElement).not.toBeInTheDocument();
 	});
 
@@ -131,7 +131,7 @@ describe('Search Header Component', () => {
 		};
 		const rendered = render(<SearchHeader subtitleText={customsubTitle} pagination={paginationStore} query={queryStore} />);
 
-		const headerElement = rendered.container.querySelector('.ss__search-header__title--subtitle');
+		const headerElement = rendered.container.querySelector('.ss__search-header__subtitle');
 		expect(headerElement).toBeInTheDocument();
 		expect(headerElement).toHaveTextContent('1298 dress subtitle!');
 	});
@@ -143,7 +143,7 @@ describe('Search Header Component', () => {
 		};
 		const rendered = render(<SearchHeader subtitleText={customsubTitle} pagination={paginationStore} query={queryStore} />);
 
-		const Element = rendered.container.querySelector('.ss__search-header__title--subtitle .findMe');
+		const Element = rendered.container.querySelector('.ss__search-header__subtitle .findMe');
 		expect(Element).toBeInTheDocument();
 		expect(Element).toHaveTextContent('1298 dress subtitle!');
 	});
@@ -154,7 +154,7 @@ describe('Search Header Component', () => {
 
 			const headerElement = rendered.container.querySelector('.ss__search-header');
 			expect(headerElement).toBeInTheDocument();
-			expect(headerElement).toHaveTextContent('Showing 1 - 30 of 1298 results for "dress"');
+			expect(headerElement).toHaveTextContent('Search results for "dress"');
 		});
 
 		it('renders a custom title', async () => {
@@ -489,7 +489,7 @@ describe('Search Header Component', () => {
 		it('renders the default correctedQueryText', async () => {
 			const rendered = render(<SearchHeader pagination={oqPaginationStore} query={oqQueryStore} />);
 
-			const headerElement = rendered.container.querySelector('.ss__search-header__title--corrected');
+			const headerElement = rendered.container.querySelector('.ss__search-header__subtitle--corrected');
 			expect(headerElement).toBeInTheDocument();
 			expect(headerElement).toHaveTextContent('No results found for "rodd", showing results for "road" instead.');
 		});
@@ -498,7 +498,7 @@ describe('Search Header Component', () => {
 			const customoq = 'Custom oq';
 			const rendered = render(<SearchHeader correctedQueryText={customoq} pagination={oqPaginationStore} query={oqQueryStore} />);
 
-			const headerElement = rendered.container.querySelector('.ss__search-header__title--corrected');
+			const headerElement = rendered.container.querySelector('.ss__search-header__subtitle--corrected');
 			expect(headerElement).toBeInTheDocument();
 			expect(headerElement).toHaveTextContent(customoq);
 		});
@@ -509,7 +509,7 @@ describe('Search Header Component', () => {
 				<SearchHeader hideCorrectedQueryText={true} correctedQueryText={customoq} pagination={oqPaginationStore} query={oqQueryStore} />
 			);
 
-			const headerElement = rendered.container.querySelector('.ss__search-header__title--corrected');
+			const headerElement = rendered.container.querySelector('.ss__search-header__subtitle--corrected');
 			expect(headerElement).not.toBeInTheDocument();
 		});
 
@@ -520,7 +520,7 @@ describe('Search Header Component', () => {
 			};
 			const rendered = render(<SearchHeader correctedQueryText={customoq} pagination={oqPaginationStore} query={oqQueryStore} />);
 
-			const headerElement = rendered.container.querySelector('.ss__search-header__title--corrected');
+			const headerElement = rendered.container.querySelector('.ss__search-header__subtitle--corrected');
 			expect(headerElement).toBeInTheDocument();
 			expect(headerElement).toHaveTextContent('1298 road oq!');
 		});
@@ -532,7 +532,7 @@ describe('Search Header Component', () => {
 			};
 			const rendered = render(<SearchHeader correctedQueryText={customTitle} pagination={oqPaginationStore} query={oqQueryStore} />);
 
-			const headerElement = rendered.container.querySelector('.ss__search-header__title--corrected .findMe');
+			const headerElement = rendered.container.querySelector('.ss__search-header__subtitle--corrected .findMe');
 			expect(headerElement).toBeInTheDocument();
 			expect(headerElement).toHaveTextContent('1298 road oq!');
 		});
@@ -558,7 +558,7 @@ describe('Search Header Component', () => {
 		it('renders the default dymText', async () => {
 			const rendered = render(<SearchHeader pagination={dymPaginationStore} query={dymQueryStore} />);
 
-			const headerElement = rendered.container.querySelector('.ss__search-header__title--dym');
+			const headerElement = rendered.container.querySelector('.ss__search-header__subtitle--dym');
 			expect(headerElement).toBeInTheDocument();
 			expect(headerElement?.innerHTML).toBe('Did you mean <a href="/?q=dress">dress</a>?');
 		});
@@ -567,7 +567,7 @@ describe('Search Header Component', () => {
 			const customdym = 'Custom dym';
 			const rendered = render(<SearchHeader didYouMeanText={customdym} pagination={dymPaginationStore} query={dymQueryStore} />);
 
-			const headerElement = rendered.container.querySelector('.ss__search-header__title--dym');
+			const headerElement = rendered.container.querySelector('.ss__search-header__subtitle--dym');
 			expect(headerElement).toBeInTheDocument();
 			expect(headerElement).toHaveTextContent(customdym);
 		});
@@ -578,7 +578,7 @@ describe('Search Header Component', () => {
 				<SearchHeader hideDidYouMeanText={true} didYouMeanText={customdym} pagination={dymPaginationStore} query={dymQueryStore} />
 			);
 
-			const headerElement = rendered.container.querySelector('.ss__search-header__title--dym');
+			const headerElement = rendered.container.querySelector('.ss__search-header__subtitle--dym');
 			expect(headerElement).not.toBeInTheDocument();
 		});
 
@@ -590,7 +590,7 @@ describe('Search Header Component', () => {
 			};
 			const rendered = render(<SearchHeader didYouMeanText={customdym} pagination={dymPaginationStore} query={dymQueryStore} />);
 
-			const headerElement = rendered.container.querySelector('.ss__search-header__title--dym');
+			const headerElement = rendered.container.querySelector('.ss__search-header__subtitle--dym');
 			expect(headerElement).toBeInTheDocument();
 			expect(headerElement).toHaveTextContent('Ooops, did you mean dress?');
 		});
@@ -602,7 +602,7 @@ describe('Search Header Component', () => {
 			};
 			const rendered = render(<SearchHeader didYouMeanText={customdym} pagination={dymPaginationStore} query={dymQueryStore} />);
 
-			const headerElement = rendered.container.querySelector('.ss__search-header__title--dym .findMe');
+			const headerElement = rendered.container.querySelector('.ss__search-header__subtitle--dym .findMe');
 			expect(headerElement).toBeInTheDocument();
 			expect(headerElement).toHaveTextContent('Ooops, did you mean dress?');
 			expect(headerElement?.innerHTML).toBe('Ooops, did you mean <a href="/?q=dress">dress</a>?');
@@ -629,13 +629,12 @@ describe('Search Header Component', () => {
 		it('renders the default expandedText & search title', async () => {
 			const rendered = render(<SearchHeader pagination={expandedPaginationStore} query={expandedQueryStore} />);
 			const headerElement = rendered.container.querySelector('.ss__search-header__title--results');
-			expect(headerElement).toBeInTheDocument();
-			expect(headerElement).toHaveTextContent('Showing 1 - 30 of 1298 results for "dress"');
+			expect(headerElement).not.toBeInTheDocument();
 
 			const expandedElement = rendered.container.querySelector('.ss__search-header__title--expanded');
 			expect(expandedElement).toBeInTheDocument();
 			expect(expandedElement?.innerHTML).toBe(
-				'We couldn\'t find an exact match for "<span classname="ss__query">dress</span>", but here\'s something similar:'
+				'We couldn\'t find an exact match for "<span class="ss__search-header__results-query">dress</span>", but here\'s something similar:'
 			);
 		});
 

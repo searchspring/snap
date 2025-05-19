@@ -63,7 +63,7 @@ const getDym = (controller) => {
 ```
 
 ### expandedSearchText
-The `expandedSearchText` prop specifies the text to show when the text to show when the search matchType equals 'expanded'.
+The `expandedSearchText` prop specifies the text to show when the search matchType equals 'expanded'.
 ```jsx
 <SearchHeader controller={controller} expandedSearchText={"We couldn't find an exact match for that, but heres something similar:"} />
 ```

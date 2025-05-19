@@ -146,7 +146,7 @@ export default {
 				},
 				defaultValue: {
 					summary:
-						'We couldn\'t find an exact match for "<span className="ss__query">${search?.query?.string}</span>", but here\'s something similar:',
+						'We couldn\'t find an exact match for "<span className="ss__search-header__results-query">${search?.query?.string}</span>", but here\'s something similar:',
 				},
 			},
 			control: { type: 'text' },

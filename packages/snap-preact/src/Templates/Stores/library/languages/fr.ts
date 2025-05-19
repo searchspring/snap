@@ -325,15 +325,8 @@ export const fr: LangComponents = {
 	searchHeader: {
 		titleText: {
 			value: (data) => {
-				return `Montrant ${
-					data?.pagination?.multiplePages
-						? `<span class="ss__search-header__results-count-range"> ${data.pagination?.begin} - ${data.pagination?.end} de </span>`
-						: ''
-				} 
-                <span class="ss__search-header__results-count-total">${data?.pagination?.totalResults}</span> 
-                résultat${data?.pagination?.totalResults == 1 ? '' : 's'} 
-                ${data?.search?.query ? `pour <span class="ss__search-header__results-query">"${data?.search?.query.string}"</span>` : ''}
-            `;
+				return `Montrant résultat${data?.pagination?.totalResults == 1 ? '' : 's'} 
+                ${data?.search?.query ? `pour <span class="ss__search-header__results-query">"${data?.search?.query.string}"</span>` : ''}`;
 			},
 			attributes: {
 				'aria-label': (data) => `Affichage maintenant de ${data?.pagination?.totalResults} éléments dans la grille de produits`,
@@ -369,7 +362,7 @@ export const fr: LangComponents = {
 		},
 		expandedSearchText: {
 			value: (data) => {
-				return `Nous n'avons pas pu trouver de correspondance exacte pour "<span className="ss__query">${data?.search?.query?.string}</span>", mais voici quelque chose de similaire:`;
+				return `Nous n'avons pas pu trouver de correspondance exacte pour "<span className="ss__search-header__results-query">${data?.search?.query?.string}</span>", mais voici quelque chose de similaire:`;
 			},
 		},
 	},
