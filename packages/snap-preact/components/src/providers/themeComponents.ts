@@ -93,7 +93,7 @@ type ThemeComponentOverridesNamedSelectors<ComponentType extends string, Compone
 	| `${string} ${ComponentType}.${ComponentNames}`
 	| `${ComponentType}.${ComponentNames}`;
 
-type ThemeComponentUnNamedSelectorsStartingWithTemplate<TemplateComponentType extends string, SubComponentType extends string = ''> =
+type ThemeComponentUnNamedSelectorsStartingWithTemplate<TemplateComponentType extends string, SubComponentType extends string> =
 	| `${TemplateComponentType} ${SubComponentType}`
 	| `${TemplateComponentType} ${string} ${SubComponentType}`;
 
