@@ -113,7 +113,7 @@ export const SearchHeader = observer((properties: SearchHeaderProps): JSX.Elemen
 									<></>
 								)}
 
-								{!hideTitleText && search?.matchType !== 'expanded' && (
+								{!hideTitleText && (search?.matchType !== 'expanded' || hideExpandedSearchText) && (
 									<h3
 										className={classnames('ss__search-header__title', 'ss__search-header__title--results')}
 										aria-atomic="true"
