@@ -1,20 +1,24 @@
 import { h, Fragment } from 'preact';
-import { jsx } from '@emotion/react';
+import { css, jsx } from '@emotion/react';
 import { observer } from 'mobx-react-lite';
 
 import type { AbstractController, RecommendationController } from '@searchspring/snap-controller';
 import type { Product } from '@searchspring/snap-store-mobx';
 
 import { Result, ResultProps } from '../../Molecules/Result';
-import { defined, mergeProps } from '../../../utilities';
+import { defined, mergeProps, mergeStyles } from '../../../utilities';
 import { Theme, ThemeComponent, useTheme } from '../../../providers';
-import { ComponentProps, ResultComponent } from '../../../types';
+import { ComponentProps, ResultComponent, StyleScript } from '../../../types';
 
 export const recommendationEmailThemeComponentProps: ThemeComponent<'recommendationEmailThemeComponentProps', RecommendationEmailProps> = {
 	default: {},
 	mobile: {},
 	tablet: {},
 	desktop: {},
+};
+
+const defaultStyles: StyleScript<RecommendationEmailProps> = () => {
+	return css({});
 };
 
 export const RecommendationEmail = observer((properties: RecommendationEmailProps): JSX.Element => {
@@ -42,12 +46,20 @@ export const RecommendationEmail = observer((properties: RecommendationEmailProp
 		},
 	};
 
+	const styling = mergeStyles<RecommendationEmailProps>(props, defaultStyles);
+
 	const resultsToRender = results || controller?.store?.results || [];
 
 	return resultsToRender.length > 0 ? (
 		<Fragment>
 			{resultsToRender.map((result, idx) => (
-				<div key={idx} id={`ss-emailrec${idx}`} className="ss__recommendation-email__result-wrapper" style={{ display: 'block', width: resultWidth }}>
+				<div
+					key={idx}
+					id={`ss-emailrec${idx}`}
+					className="ss__recommendation-email__result-wrapper"
+					{...styling}
+					style={{ display: 'block', width: resultWidth }}
+				>
 					{(() => {
 						if (resultComponent) {
 							const ResultComponent = resultComponent;

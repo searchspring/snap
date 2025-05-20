@@ -63,6 +63,17 @@ export default {
 			},
 			control: { type: 'boolean' },
 		},
+		respectSingleSelect: {
+			defaultValue: false,
+			description: 'will render radios instead of checkboxes if facet.multiple == "single"',
+			table: {
+				type: {
+					summary: 'boolean',
+				},
+				defaultValue: { summary: false },
+			},
+			control: { type: 'boolean' },
+		},
 		hideCount: {
 			defaultValue: false,
 			description: 'Hide facet option count',

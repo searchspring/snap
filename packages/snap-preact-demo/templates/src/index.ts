@@ -18,7 +18,7 @@ let config: SnapTemplatesConfig = {
 	},
 	themes: {
 		global: {
-			extends: 'base',
+			extends: 'bocachica',
 			variables: {
 				breakpoints: {
 					mobile: 768,
@@ -33,7 +33,11 @@ let config: SnapTemplatesConfig = {
 			},
 			style: globalStyles,
 			overrides: {
-				components: {},
+				components: {
+					'facet.ss-category-hierarchy': {
+						iconCollapse: 'cog',
+					},
+				},
 			},
 		},
 	},
@@ -58,7 +62,7 @@ let config: SnapTemplatesConfig = {
 		targets: [
 			{
 				selector: '#searchspring-layout',
-				component: 'Search',
+				component: 'SearchBoca',
 			},
 		],
 	},

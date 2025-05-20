@@ -188,9 +188,9 @@ export function List(properties: ListProps): JSX.Element {
 		<CacheProvider>
 			<div {...styling} className={classnames('ss__list', { 'ss__list--native': native, 'ss__list--disabled': disabled }, className)}>
 				{(titleText || lang?.title?.value) && !hideTitleText && (
-					<label className="ss__list__title" {...mergedLang.title?.all}>
+					<h5 className="ss__list__title" {...mergedLang.title?.all}>
 						{titleText}
-					</label>
+					</h5>
 				)}
 
 				<ul className={`ss__list__options`} role="listbox" aria-label={titleText}>

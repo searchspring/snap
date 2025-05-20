@@ -67,7 +67,15 @@ const defaultStyles: StyleScript<SelectProps> = ({ color, backgroundColor, borde
 			},
 		});
 	} else {
-		return css({});
+		return css({
+			'.ss__select__select': {
+				paddingRight: '10px',
+				appearance: 'none',
+				'&::-ms-expand': {
+					display: 'none',
+				},
+			},
+		});
 	}
 };
 
@@ -261,6 +269,10 @@ export const Select = observer((properties: SelectProps): JSX.Element => {
 								</option>
 							))}
 						</select>
+
+						{!hideIcon && (
+							<Icon {...subProps.icon} name={'open'} {...(typeof iconOpen == 'string' ? { icon: iconOpen } : (iconOpen as Partial<IconProps>))} />
+						)}
 					</>
 				) : (
 					<Dropdown

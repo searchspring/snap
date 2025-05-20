@@ -35,11 +35,12 @@ export const LayoutSelector = observer((properties: LayoutSelectorProps): JSX.El
 
 	const props = mergeProps('layoutSelector', globalTheme, defaultProps, properties);
 
-	const { options, selected, type, onSelect, showSingleOption, hideLabel, disableStyles, className, treePath } = props;
+	const { options, selected, type, onSelect, showSingleOption, hideLabel, hideOptionLabels, disableStyles, className, treePath } = props;
 	let label = props.label;
 
 	const subProps: SelectSubProps = {
 		Select: {
+			hideOptionLabels,
 			// inherited props
 			...defined({
 				disableStyles,
@@ -49,6 +50,7 @@ export const LayoutSelector = observer((properties: LayoutSelectorProps): JSX.El
 			treePath,
 		},
 		RadioList: {
+			hideOptionLabels,
 			// inherited props
 			...defined({
 				disableStyles,
@@ -61,6 +63,7 @@ export const LayoutSelector = observer((properties: LayoutSelectorProps): JSX.El
 			multiSelect: false,
 			horizontal: true,
 			hideOptionCheckboxes: true,
+			hideOptionLabels,
 			requireSelection: true,
 			// inherited props
 			...defined({
@@ -159,6 +162,7 @@ export interface LayoutSelectorProps extends ComponentProps {
 	selected?: ListOption;
 	label?: string;
 	hideLabel?: boolean;
+	hideOptionLabels?: boolean;
 	type?: 'dropdown' | 'list' | 'radio';
 	showSingleOption?: boolean;
 	lang?: Partial<LayoutSelectorLang>;

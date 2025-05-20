@@ -7,12 +7,11 @@ export const searchBocaThemeComponentProps: ThemeComponent<'searchBoca', SearchB
 			layoutOptions: [
 				{
 					value: 1,
-					label: '',
+					label: 'Single Column',
 					icon: 'square',
 					overrides: {
-						// props: {},
 						components: {
-							'*searchBoca results': {
+							'searchBoca results': {
 								columns: 1,
 							},
 						},
@@ -20,12 +19,12 @@ export const searchBocaThemeComponentProps: ThemeComponent<'searchBoca', SearchB
 				},
 				{
 					value: 2,
-					label: '',
+					label: 'Two Columns',
 					default: true,
 					icon: 'layout-large',
 					overrides: {
 						components: {
-							'*searchBoca results': {
+							'searchBoca results': {
 								columns: 2,
 							},
 						},

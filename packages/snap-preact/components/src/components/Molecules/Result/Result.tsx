@@ -228,9 +228,11 @@ export const Result = observer((properties: ResultProps): JSX.Element => {
 		controller: controller,
 	});
 
+	const isOnSale = Boolean(core?.msrp && core?.price && core?.price < core?.msrp);
+
 	return core ? (
 		<CacheProvider>
-			<article {...styling} className={classnames('ss__result', `ss__result--${layout}`, className)}>
+			<article {...styling} className={classnames('ss__result', `ss__result--${layout}`, { 'ss__result--sale': isOnSale }, className)}>
 				<div className="ss__result__image-wrapper">
 					<a
 						href={core!.url}
@@ -282,7 +284,7 @@ export const Result = observer((properties: ResultProps): JSX.Element => {
 
 					{!hidePricing && (
 						<div className="ss__result__details__pricing">
-							{core.msrp && core.price && core.price < core.msrp ? (
+							{isOnSale ? (
 								<>
 									<Price {...subProps.price} value={core.msrp} lineThrough={true} name={'msrp'} />
 									&nbsp;

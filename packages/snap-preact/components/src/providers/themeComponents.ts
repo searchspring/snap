@@ -195,7 +195,7 @@ export type ThemeComponents =
 	} & { [K in ThemeComponentOverridesNamedSelectors<'terms', TermsNames>]?: Partial<TermsProps> } /* ORGANISMS */ & {
 		[K in ThemeComponentOverridesUnNamedSelectors<'branchOverride'>]?: Partial<BranchOverrideProps>;
 	} & {
-		[K in ThemeComponentOverridesUnNamedSelectors<'facet'>]?: Partial<FacetProps>;
+		[K in ThemeComponentOverridesNamedSelectors<'facet', string>]?: Partial<FacetProps>;
 	} & { [K in ThemeComponentOverridesUnNamedSelectors<'facets'>]?: Partial<FacetsProps> } & {
 		[K in ThemeComponentOverridesUnNamedSelectors<'facetsHorizontal'>]?: Partial<FacetsHorizontalProps>;
 	} & { [K in ThemeComponentOverridesUnNamedSelectors<'filterSummary'>]?: Partial<FilterSummaryProps> } & {
@@ -275,7 +275,7 @@ export type ThemeComponentsRestricted =
 
 	/* ORGANISMS */
 	{ [K in ThemeComponentOverridesUnNamedSelectors<'branchOverride'>]?: ThemeComponentRestrictedProps<BranchOverrideProps> } &
-	{ [K in ThemeComponentOverridesUnNamedSelectors<'facet'>]?: ThemeComponentRestrictedProps<FacetProps> } &
+	{ [K in ThemeComponentOverridesNamedSelectors<'facet', string>]?: ThemeComponentRestrictedProps<FacetProps> } &
 	{ [K in ThemeComponentOverridesUnNamedSelectors<'facets'>]?: ThemeComponentRestrictedProps<FacetsProps> } &
 	{ [K in ThemeComponentOverridesUnNamedSelectors<'facetsHorizontal'>]?: ThemeComponentRestrictedProps<FacetsHorizontalProps> } &
 	{ [K in ThemeComponentOverridesUnNamedSelectors<'filterSummary'>]?: ThemeComponentRestrictedProps<FilterSummaryProps> } &
@@ -358,7 +358,7 @@ export type ThemeComponentsRestrictedOverrides =
 
 	/* ORGANISMS */
 	{ [K in ThemeComponentOverridesUnNamedSelectors<'branchOverride'>]?: ThemeComponentOverridesRestrictedProps<BranchOverrideProps> } &
-	{ [K in ThemeComponentOverridesUnNamedSelectors<'facet'>]?: ThemeComponentOverridesRestrictedProps<FacetProps> } &
+	{ [K in ThemeComponentOverridesNamedSelectors<'facet', string>]?: ThemeComponentOverridesRestrictedProps<FacetProps> } &
 	{ [K in ThemeComponentOverridesUnNamedSelectors<'facets'>]?: ThemeComponentOverridesRestrictedProps<FacetsProps> } &
 	{ [K in ThemeComponentOverridesUnNamedSelectors<'facetsHorizontal'>]?: ThemeComponentOverridesRestrictedProps<FacetsHorizontalProps> } &
 	{ [K in ThemeComponentOverridesUnNamedSelectors<'filterSummary'>]?: ThemeComponentOverridesRestrictedProps<FilterSummaryProps> } &
@@ -443,7 +443,7 @@ export type ThemeComponentTemplateOverrides<Template extends string, Props> =
 
 	/* ORGANISMS */
 	{ [K in ThemeComponentUnNamedSelectorsStartingWithTemplate<Template,'branchOverride'>]?: ThemeComponentRestrictedProps<BranchOverrideProps> } &
-	{ [K in ThemeComponentUnNamedSelectorsStartingWithTemplate<Template,'facet'>]?: ThemeComponentRestrictedProps<FacetProps> } &
+	{ [K in ThemeComponentNamedSelectorsStartingWithTemplate<Template,'facet', string>]?: ThemeComponentRestrictedProps<FacetProps> } &
 	{ [K in ThemeComponentUnNamedSelectorsStartingWithTemplate<Template,'facets'>]?: ThemeComponentRestrictedProps<FacetsProps> } &
 	{ [K in ThemeComponentUnNamedSelectorsStartingWithTemplate<Template,'facetsHorizontal'>]?: ThemeComponentRestrictedProps<FacetsHorizontalProps> } &
 	{ [K in ThemeComponentUnNamedSelectorsStartingWithTemplate<Template,'filterSummary'>]?: ThemeComponentRestrictedProps<FilterSummaryProps> } &

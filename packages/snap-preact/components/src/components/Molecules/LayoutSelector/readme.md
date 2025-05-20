@@ -11,49 +11,36 @@ Renders a layout selector to be used with snap templates for changing result lay
 ## Usage
 
 ### options
-The required `options` prop specifies an array of layoutOptions to render.
+The required `options` prop specifies an array of layoutOptions to render. When using Snap Templates, overrides can be provided in each option - these overrides will be applied when the option is selected.
 
 ```jsx
-
-const layoutOptions:layoutOption[] = [
+const layoutOptions = [
 	{
-		label: "1 wide",
-		value: {
-			icon: "square",
-			columns:1,
-		}
-	},
-	{
-		label: "2 wide",
-		value: {
-			icon: {
-				icon: "layout-large",
+		value: 1,
+		label: 'Single Column',
+		icon: 'square',
+		overrides: {
+			components: {
+				'results': {
+					columns: 1,
+				},
 			},
-			columns:2,
-		}
+		},
 	},
 	{
-		label: "3 wide",
-		value: {
-			icon: {
-				icon: 'layout-grid',
+		value: 2,
+		label: 'Two Columns',
+		default: true,
+		icon: 'layout-large',
+		overrides: {
+			components: {
+				'results': {
+					columns: 2,
+				},
 			},
-			columns:3,
-		}
+		},
 	},
-	{
-		label: "4 wide",
-		value: {
-			columns:4,
-		}
-	},
-	{
-		label: "custom",
-		value: {
-			component: (props) => <div className="custom">custom</div>,
-		}
-	}	
-]
+],
 
 <LayoutSelector options={layoutOptions} />
 ```
@@ -93,6 +80,13 @@ The `hideLabel` prop hides the selector label.
 
 ```jsx
 <LayoutSelector hideLabel={true} label={"Layout"} onSelect={(e, option) => callback()} options={layoutOptions} />
+```
+
+### hideOptionLabels
+The `hideOptionLabels` prop hides the option labels.
+
+```jsx
+<LayoutSelector hideOptionLabels={true} onSelect={(e, option) => callback()} options={layoutOptions} />
 ```
 
 ### showSingleOption

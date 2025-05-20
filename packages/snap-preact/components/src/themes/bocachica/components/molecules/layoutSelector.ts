@@ -35,6 +35,7 @@ export const layoutSelector: ThemeComponent<'layoutSelector', LayoutSelectorProp
 			themeStyleScript: layoutSelectorStyleScript,
 			type: 'list',
 			hideLabel: true,
+			hideOptionLabels: true,
 		},
 	},
 };
