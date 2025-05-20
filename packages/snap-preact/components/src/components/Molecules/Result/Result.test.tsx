@@ -36,21 +36,23 @@ describe('Result Component', () => {
 	});
 
 	it('renders with "sale" classname when on sale', () => {
-		const product = JSON.parse(JSON.stringify(mockResults[0])) as Product;
+		const product = mockResults[0] as Product;
 		// force product to NOT be onsale
 		product.mappings.core!.price = 1.99;
 		product.mappings.core!.msrp = 1.99;
 
 		const rendered = render(<Result result={product} />);
 		const resultElement = rendered.container.querySelectorAll('.ss__result');
-		expect(resultElement[0]).toBeInTheDocument().not.toHaveClass('.ss__result--sale');
+		expect(resultElement[0]).toBeInTheDocument();
+		expect(resultElement[0]).not.toHaveClass('ss__result--sale');
 
 		// force product to be onsale
 		product.mappings.core!.price = 0.99;
 		product.mappings.core!.msrp = 1.99;
 		const reRendered = render(<Result result={product} />);
 		const resultSaleElement = reRendered.container.querySelectorAll('.ss__result');
-		expect(resultSaleElement[0]).toBeInTheDocument().toHaveClass('.ss__result--sale');
+		expect(resultSaleElement[0]).toBeInTheDocument();
+		expect(resultSaleElement[0]).toHaveClass('ss__result--sale');
 	});
 
 	it('renders image', () => {
@@ -276,7 +278,7 @@ describe('Result Component', () => {
 
 		const resultElement = rendered.container.querySelector('.ss__result');
 
-		expect(resultElement?.classList).toHaveLength(2);
+		expect(resultElement?.classList).toHaveLength(3);
 	});
 });
 

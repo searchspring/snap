@@ -92,6 +92,13 @@ export const LayoutSelector = observer((properties: LayoutSelectorProps): JSX.El
 		label = undefined;
 	}
 
+	if (hideOptionLabels) {
+		const optionsWithNoIcons = options?.filter((option) => !option.icon);
+		if (optionsWithNoIcons) {
+			console.warn('Warning - found layout options with no visible label or icon', optionsWithNoIcons);
+		}
+	}
+
 	// options can be an Array or ObservableArray - but should have length
 	return (options && options.length > 1) || (options?.length === 1 && showSingleOption) ? (
 		<CacheProvider>
