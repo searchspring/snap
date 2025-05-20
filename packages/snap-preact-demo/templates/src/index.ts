@@ -33,11 +33,7 @@ let config: SnapTemplatesConfig = {
 			},
 			style: globalStyles,
 			overrides: {
-				components: {
-					'facet.ss-category-hierarchy': {
-						iconCollapse: 'cog',
-					},
-				},
+				components: {},
 			},
 		},
 	},
@@ -62,7 +58,7 @@ let config: SnapTemplatesConfig = {
 		targets: [
 			{
 				selector: '#searchspring-layout',
-				component: 'SearchBoca',
+				component: 'Search',
 			},
 		],
 	},

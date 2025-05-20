@@ -35,6 +35,11 @@ export const NoResults = observer((properties: NoResultsProps): JSX.Element => {
 			`Remove possible redundant keywords (ie. "products").`,
 			`Use other words to describe what you are searching for.`,
 		],
+		templates: {
+			recommendation: {
+				enabled: true,
+			},
+		},
 		treePath: globalTreePath,
 	};
 
