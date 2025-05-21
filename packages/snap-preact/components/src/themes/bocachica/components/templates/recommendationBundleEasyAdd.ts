@@ -14,11 +14,11 @@ const recommendationBundleEasyAddStyleScript = ({ theme }: RecommendationBundleE
 // RecommendationBundleEasyAdd component props come from Template export
 export const recommendationBundleEasyAdd: ThemeComponent<'recommendationBundleEasyAdd', RecommendationBundleEasyAddProps> = {
 	default: {
-		props: {
-			...recommendationBundleEasyAddThemeComponentProps.default?.props,
+		...recommendationBundleEasyAddThemeComponentProps.default,
+		recommendationBundleEasyAdd: {
+			...(recommendationBundleEasyAddThemeComponentProps.default?.['recommendationBundleEasyAdd'] || {}),
 			themeStyleScript: recommendationBundleEasyAddStyleScript,
 		},
-		components: recommendationBundleEasyAddThemeComponentProps.default?.components,
 	},
 	mobile: recommendationBundleEasyAddThemeComponentProps.mobile,
 	desktop: recommendationBundleEasyAddThemeComponentProps.desktop,

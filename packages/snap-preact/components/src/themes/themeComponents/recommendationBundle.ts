@@ -1,9 +1,9 @@
 import { RecommendationBundleProps } from '../../components/Templates/RecommendationBundle';
 import { ThemeComponent } from '../../providers';
 
-export const recommendationBundleThemeComponentProps: ThemeComponent<'recommendationBundleThemeComponentProps', RecommendationBundleProps> = {
+export const recommendationBundleThemeComponentProps: ThemeComponent<'recommendationBundle', RecommendationBundleProps> = {
 	default: {
-		props: {
+		recommendationBundle: {
 			carousel: {
 				slidesPerView: 4,
 				slidesPerGroup: 4,
@@ -12,7 +12,7 @@ export const recommendationBundleThemeComponentProps: ThemeComponent<'recommenda
 		},
 	},
 	mobile: {
-		props: {
+		recommendationBundle: {
 			carousel: {
 				slidesPerView: 2,
 				slidesPerGroup: 2,
@@ -22,7 +22,7 @@ export const recommendationBundleThemeComponentProps: ThemeComponent<'recommenda
 		},
 	},
 	tablet: {
-		props: {
+		recommendationBundle: {
 			carousel: {
 				slidesPerView: 3,
 				slidesPerGroup: 3,
@@ -31,7 +31,7 @@ export const recommendationBundleThemeComponentProps: ThemeComponent<'recommenda
 		},
 	},
 	desktop: {
-		props: {
+		recommendationBundle: {
 			carousel: {
 				slidesPerView: 4,
 				slidesPerGroup: 4,

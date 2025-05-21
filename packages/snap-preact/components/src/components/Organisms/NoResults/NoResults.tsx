@@ -35,6 +35,11 @@ export const NoResults = observer((properties: NoResultsProps): JSX.Element => {
 			`Remove possible redundant keywords (ie. "products").`,
 			`Use other words to describe what you are searching for.`,
 		],
+		templates: {
+			recommendation: {
+				enabled: true,
+			},
+		},
 		treePath: globalTreePath,
 	};
 
@@ -73,7 +78,7 @@ export const NoResults = observer((properties: NoResultsProps): JSX.Element => {
 			const themeName = properties.theme?.name;
 			let defaultResultComponentFromTheme;
 			if (themeName) {
-				defaultResultComponentFromTheme = snap?.templates?.config.themes[themeName]?.resultComponent;
+				defaultResultComponentFromTheme = snap?.templates?.config.theme?.resultComponent;
 			}
 
 			const resultComponentName = (templates?.recommendation?.resultComponent || defaultResultComponentFromTheme) as string;

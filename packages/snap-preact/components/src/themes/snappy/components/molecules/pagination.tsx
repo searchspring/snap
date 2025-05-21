@@ -59,7 +59,7 @@ const NextButton = () => {
 // Pagination component props
 export const pagination: ThemeComponent<'pagination', PaginationProps> = {
 	default: {
-		props: {
+		pagination: {
 			themeStyleScript: paginationStyleScript,
 			hideFirst: true,
 			hideLast: true,

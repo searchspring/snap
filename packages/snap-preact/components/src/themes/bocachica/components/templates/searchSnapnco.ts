@@ -14,11 +14,11 @@ const searchSnapncoStyleScript = ({ theme }: SearchSnapncoProps) => {
 // Search component props come from Template export
 export const searchSnapnco: ThemeComponent<'searchSnapnco', SearchSnapncoProps> = {
 	default: {
-		props: {
-			...searchSnapncoThemeComponentProps.default?.props,
+		...searchSnapncoThemeComponentProps.default,
+		searchSnapnco: {
+			...(searchSnapncoThemeComponentProps.default?.['searchSnapnco'] || {}),
 			themeStyleScript: searchSnapncoStyleScript,
 		},
-		components: searchSnapncoThemeComponentProps.default?.components,
 	},
 	mobile: searchSnapncoThemeComponentProps.mobile,
 	desktop: searchSnapncoThemeComponentProps.desktop,

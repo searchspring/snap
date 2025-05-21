@@ -13,11 +13,11 @@ const searchStyleScript = ({ theme }: SearchProps) => {
 // Search component props come from Template export
 export const search: ThemeComponent<'search', SearchProps> = {
 	default: {
-		props: {
-			...searchThemeComponentProps.default?.props,
+		...searchThemeComponentProps.default,
+		search: {
+			...(searchThemeComponentProps.default?.['search'] || {}),
 			themeStyleScript: searchStyleScript,
 		},
-		components: searchThemeComponentProps.default?.components,
 	},
 	mobile: searchThemeComponentProps.mobile,
 	desktop: searchThemeComponentProps.desktop,

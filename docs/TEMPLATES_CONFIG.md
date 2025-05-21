@@ -26,10 +26,8 @@ new SnapTemplates({
 		language: 'en',
 		currency: 'usd',
 	},
-	themes: {
-		global: {
-			extends: 'bocachica',
-		},
+	theme: {
+		extends: 'bocachica',
 	},
 	search: {
 		targets: [
@@ -230,9 +228,7 @@ See [Theming](https://github.com/searchspring/snap/blob/main/docs/TEMPLATES_THEM
 
 | Configuration Option | Description | Type | Default |
 |----------------------|-------------|------|---------|
-| `themes` | Theme configurations | Object | Required |
-| `themes.global` | Global theme configuration | Object | Required |
-| `themes[customTheme]` | Custom theme configuration | Object | ➖ |
+| `theme` | Theme configurations | Object | Required |
 
 
 ### Feature Targets
@@ -246,8 +242,6 @@ Each target across all features contains the following common properties:
 `component` - The template component name to render in the target selector
 
 `resultComponent` - The result component name that will be rendered within the target template component if that template utilizes a result component. Components from the library as well as any components registered via the config can be utilized here.
-
-`theme` - The theme name that this template will use.
 
 
 #### Search
@@ -264,7 +258,6 @@ In addition to the common target properties, the following properties apply to t
 | `search.targets[].selector` | CSS selector for search target | String | Required |
 | `search.targets[].component` | Component to use for search | String | Required |
 | `search.targets[].resultComponent` | Custom result component | String | 'Result' |
-| `search.targets[].theme` | Theme to use for search | String | 'global' |
 
 #### Autocomplete
 
@@ -278,12 +271,11 @@ In addition to the common target properties, the following properties apply to t
 |----------------------|-------------|------|---------|
 | `autocomplete` | Autocomplete configuration | Object | ➖ |
 | `autocomplete.plugins` | Autocomplete specific plugins configurations | Object | ➖ |
-| `autocomplete.inputSelector` | CSS selector for autocomplete input | String | Required |
+| `autocomplete.inputSelector` | CSS selector for autocomplete input | String | ➖ |
 | `autocomplete.targets` | Autocomplete target configurations | Array | Required |
 | `autocomplete.targets[].selector` | CSS selector for autocomplete target | String | Required |
 | `autocomplete.targets[].component` | Component to use for autocomplete | String | 'Autocomplete' |
 | `autocomplete.targets[].resultComponent` | Custom result component for autocomplete | String | 'Result' |
-| `autocomplete.targets[].theme` | Theme to use for autocomplete | String | 'global' |
 
 #### Recommendation
 In addition to the defining recommendation targets, the recommendation configuration also contains the following following properties:
@@ -314,7 +306,6 @@ Standard product recommendation typically rendered in a carousel
 | `recommendation.default[profileComponentName]` | Configuration for a specific default recommendation profile | Object | ➖ |
 | `recommendation.default[profileComponentName].component` | Component to use for default recommendation | String | 'Recommendation' |
 | `recommendation.default[profileComponentName].resultComponent` | Custom result component for default recommendation | String | 'Result' |
-| `recommendation.default[profileComponentName].theme` | Theme to use for default recommendation | String | 'global' |
 
 
 #### Bundle Recommendations
@@ -327,7 +318,6 @@ Product recommendations that require and include a seed product sku.
 | `recommendation.bundle[profileComponentName]` | Configuration for a specific bundle recommendation profile | Object | ➖ |
 | `recommendation.bundle[profileComponentName].component` | Component to use for bundle recommendation | String | 'RecommendationBundle' |
 | `recommendation.bundle[profileComponentName].resultComponent` | Custom result component for bundle recommendation | String | 'Result' |
-| `recommendation.bundle[profileComponentName].theme` | Theme to use for bundle recommendation | String | 'global' |
 
 
 #### Email Recommendations
@@ -340,4 +330,3 @@ Product recommendations for external email campaigns. Email recommendations are 
 | `recommendation.email[profileComponentName]` | Configuration for a specific email recommendation profile | Object | ➖ |
 | `recommendation.email[profileComponentName].component` | Component to use for email recommendation | String | 'RecommendationEmail' |
 | `recommendation.email[profileComponentName].resultComponent` | Custom result component for email recommendation | String | 'Result' |
-| `recommendation.email[profileComponentName].theme` | Theme to use for email recommendation | String | 'global' |

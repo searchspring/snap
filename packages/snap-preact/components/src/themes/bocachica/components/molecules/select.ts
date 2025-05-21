@@ -72,7 +72,7 @@ const selectStyleScript = ({ backgroundColor, theme }: SelectProps) => {
 // Select component props
 export const select: ThemeComponent<'select', SelectProps> = {
 	default: {
-		props: {
+		select: {
 			themeStyleScript: selectStyleScript,
 			iconClose: 'angle-down',
 			iconOpen: 'angle-down',

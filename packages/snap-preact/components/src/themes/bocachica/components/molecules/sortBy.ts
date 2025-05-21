@@ -14,13 +14,11 @@ const sortByStyleScript = () => {
 // SortBy component props
 export const sortBy: ThemeComponent<'sortBy', SortByProps> = {
 	default: {
-		props: {
+		sortBy: {
 			themeStyleScript: sortByStyleScript,
 		},
-		components: {
-			'*sortBy icon': {
-				size: '12px',
-			},
+		'sortBy icon': {
+			size: '12px',
 		},
 	},
 };

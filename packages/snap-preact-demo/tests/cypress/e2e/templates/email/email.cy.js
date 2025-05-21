@@ -26,14 +26,12 @@ describe('Email Recs', () => {
 			cy.wrap(config).its('selectors.email.result').should('have.length.at.least', 1);
 			cy.on('window:before:load', (win) => {
 				win.mergeSnapConfig = {
-					themes: {
-						custom: {
-							extends: 'bocachica',
-							overrides: {
-								components: {
-									image: {
-										lazy: false,
-									},
+					theme: {
+						extends: 'bocachica',
+						overrides: {
+							default: {
+								image: {
+									lazy: false,
 								},
 							},
 						},
@@ -41,7 +39,6 @@ describe('Email Recs', () => {
 					recommendation: {
 						email: {
 							Email: {
-								theme: 'custom',
 								component: 'RecommendationEmail',
 							},
 						},

@@ -42,7 +42,7 @@
       "display": "list",
       "label": "Brand",
       "collapsed": false,
-      "multiple": "or"
+      "multiple": "single"
     },
     "collection": {
       "display": "list",

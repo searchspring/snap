@@ -2,7 +2,7 @@ const config = {
 	url: 'https://localhost:2222/templates',
 	selectors: {
 		titleElem: '.ss__search-header__title.ss__search-header__title--results',
-		subtitleElem: '.ss__search-header__title.ss__search-header__title--subtitle',
+		subtitleElem: '.ss__search-header__subtitle',
 		topToolbarElem: '.ss__search__header-section__toolbar--top-toolbar',
 		bottomToolbarElem: '.ss__search__content__toolbar--bottom-toolbar',
 		pagination: '.ss__pagination',
@@ -23,15 +23,14 @@ describe('Theme overrides work', () => {
 		it('can use component overrides', () => {
 			cy.on('window:before:load', (win) => {
 				win.mergeSnapConfig = {
-					themes: {
-						custom: {
-							extends: 'bocachica',
-							overrides: {
-								components: {
-									searchHeader: {
-										titleText: 'custom title text',
-										subtitleText: 'custom subtitle text',
-									},
+					theme: {
+						extends: 'base',
+						overrides: {
+							default: {
+								searchHeader: {
+									titleText: 'custom title text',
+									subtitleText: 'custom subtitle text',
+									hideExpandedSearchText: true,
 								},
 							},
 						},
@@ -40,7 +39,6 @@ describe('Theme overrides work', () => {
 						targets: [
 							{
 								selector: '#searchspring-layout',
-								theme: 'custom',
 								component: 'Search',
 							},
 						],
@@ -59,28 +57,28 @@ describe('Theme overrides work', () => {
 		it('can use cascading component overrides & named components', () => {
 			cy.on('window:before:load', (win) => {
 				win.mergeSnapConfig = {
-					themes: {
-						custom: {
-							extends: 'bocachica',
-							overrides: {
-								components: {
-									'search searchHeader': {
-										titleText: 'custom title text',
-										subtitleText: 'custom subtitle text',
-									},
+					theme: {
+						extends: 'base',
+						overrides: {
+							default: {
+								'search searchHeader': {
+									titleText: 'custom title text',
+									subtitleText: 'custom subtitle text',
+									hideExpandedSearchText: true,
+								},
 
-									'searchHorizontal searchHeader': {
-										titleText: 'dont use this title text',
-										subtitleText: 'dont use this subtitle text',
-									},
+								'searchHorizontal searchHeader': {
+									titleText: 'dont use this title text',
+									subtitleText: 'dont use this subtitle text',
+									hideExpandedSearchText: true,
+								},
 
-									'search toolbar.top': {
-										layout: ['searchHeader', 'paginationInfo', 'pagination', 'sortBy', 'perPage'],
-									},
+								'search toolbar.top': {
+									layout: ['searchHeader', 'paginationInfo', 'pagination', 'sortBy', 'perPage'],
+								},
 
-									'search toolbar.bottom': {
-										layout: ['paginationInfo', 'sortBy', 'perPage'],
-									},
+								'search toolbar.bottom': {
+									layout: ['paginationInfo', 'sortBy', 'perPage'],
 								},
 							},
 						},
@@ -89,7 +87,6 @@ describe('Theme overrides work', () => {
 						targets: [
 							{
 								selector: '#searchspring-layout',
-								theme: 'custom',
 								component: 'Search',
 							},
 						],
@@ -113,49 +110,50 @@ describe('Theme overrides work', () => {
 		it('can set use component overrides in layoutoptions overriding the global overrides', () => {
 			cy.on('window:before:load', (win) => {
 				win.mergeSnapConfig = {
-					themes: {
-						custom: {
-							extends: 'bocachica',
-							overrides: {
-								components: {
-									searchHeader: {
-										titleText: 'global title text',
-										subtitleText: 'global subtitle text',
-									},
-
-									'search toolbar.top': {
-										layout: ['searchHeader', 'paginationInfo', 'layoutSelector', 'sortBy', 'perPage'],
-									},
-									search: {
-										layoutOptions: [
-											{
-												default: true,
-												value: '1',
-												label: 'one',
-												overrides: {
-													components: {
-														searchHeader: {
-															titleText: 'title text one',
-															subtitleText: 'subtitle text one',
-														},
+					theme: {
+						extends: 'base',
+						overrides: {
+							default: {
+								searchHeader: {
+									titleText: 'global title text',
+									subtitleText: 'global subtitle text',
+									hideExpandedSearchText: true,
+								},
+								layoutSelector: {
+									type: 'list',
+								},
+								'search toolbar.top': {
+									layout: ['searchHeader', 'paginationInfo', 'layoutSelector', 'sortBy', 'perPage'],
+								},
+								search: {
+									layoutOptions: [
+										{
+											default: true,
+											value: '1',
+											label: 'one',
+											overrides: {
+												components: {
+													searchHeader: {
+														titleText: 'title text one',
+														subtitleText: 'subtitle text one',
 													},
 												},
 											},
-											{
-												default: false,
-												value: '2',
-												label: 'two',
-												overrides: {
-													components: {
-														searchHeader: {
-															titleText: 'title text two',
-															subtitleText: 'subtitle text two',
-														},
+										},
+										{
+											default: false,
+											value: '2',
+											label: 'two',
+											overrides: {
+												components: {
+													searchHeader: {
+														titleText: 'title text two',
+														subtitleText: 'subtitle text two',
 													},
 												},
 											},
-										],
-									},
+										},
+									],
 								},
 							},
 						},
@@ -164,7 +162,6 @@ describe('Theme overrides work', () => {
 						targets: [
 							{
 								selector: '#searchspring-layout',
-								theme: 'custom',
 								component: 'Search',
 							},
 						],
@@ -194,72 +191,74 @@ describe('Theme overrides work', () => {
 		it('can set use cascading component overrides & named components', () => {
 			cy.on('window:before:load', (win) => {
 				win.mergeSnapConfig = {
-					themes: {
-						custom: {
-							extends: 'bocachica',
-							overrides: {
-								components: {
-									searchHeader: {
-										titleText: 'global title text',
-										subtitleText: 'global subtitle text',
-									},
-									'search toolbar.top': {
-										layout: ['searchHeader', 'layoutSelector', 'pagination', 'perPage'],
-									},
-									search: {
-										layoutOptions: [
-											{
-												default: true,
-												value: '1',
-												label: 'one',
-												overrides: {
-													components: {
-														'search searchHeader': {
-															titleText: 'title text one',
-															subtitleText: 'subtitle text one',
-														},
-														'horizontalSearch searchHeader': {
-															titleText: 'nope',
-															subtitleText: 'nope',
-														},
-														'search toolbar.top': {
-															layout: ['searchHeader', 'layoutSelector', 'pagination', 'perPage'],
-														},
+					theme: {
+						extends: 'base',
+						overrides: {
+							default: {
+								searchHeader: {
+									titleText: 'global title text',
+									subtitleText: 'global subtitle text',
+									hideExpandedSearchText: true,
+								},
+								'search toolbar.top': {
+									layout: ['searchHeader', 'layoutSelector', 'pagination', 'perPage'],
+								},
+								layoutSelector: {
+									type: 'list',
+								},
+								search: {
+									layoutOptions: [
+										{
+											default: true,
+											value: '1',
+											label: 'one',
+											overrides: {
+												components: {
+													'search searchHeader': {
+														titleText: 'title text one',
+														subtitleText: 'subtitle text one',
+													},
+													'horizontalSearch searchHeader': {
+														titleText: 'nope',
+														subtitleText: 'nope',
+													},
+													'search toolbar.top': {
+														layout: ['searchHeader', 'layoutSelector', 'pagination', 'perPage'],
+													},
 
-														'search toolbar.bottom': {
-															layout: ['layoutSelector', 'sortBy'],
-														},
+													'search toolbar.bottom': {
+														layout: ['layoutSelector', 'sortBy'],
 													},
 												},
 											},
-											{
-												default: false,
-												value: '2',
-												label: 'two',
-												overrides: {
-													components: {
-														'search searchHeader': {
-															titleText: 'title text two',
-															subtitleText: 'subtitle text two',
-														},
+										},
+										{
+											default: false,
+											value: '2',
+											label: 'two',
+											overrides: {
+												components: {
+													'search searchHeader': {
+														titleText: 'title text two',
+														subtitleText: 'subtitle text two',
+													},
 
-														'horizontalSearch searchHeader': {
-															titleText: 'nope',
-															subtitleText: 'nope',
-														},
+													'horizontalSearch searchHeader': {
+														titleText: 'nope',
+														subtitleText: 'nope',
+													},
 
-														'search toolbar.top': {
-															layout: ['searchHeader', 'layoutSelector', 'sortBy'],
-														},
+													'search toolbar.top': {
+														layout: ['searchHeader', 'layoutSelector', 'sortBy'],
+													},
 
-														'search toolbar.bottom': {
-															layout: ['layoutSelector', 'pagination', 'perPage'],
-														},
+													'search toolbar.bottom': {
+														layout: ['layoutSelector', 'pagination', 'perPage'],
 													},
 												},
 											},
-										],
-									},
+										},
+									],
 								},
 							},
 						},
@@ -268,7 +267,6 @@ describe('Theme overrides work', () => {
 						targets: [
 							{
 								selector: '#searchspring-layout',
-								theme: 'custom',
 								component: 'Search',
 							},
 						],
@@ -312,130 +310,134 @@ describe('Theme overrides work', () => {
 		it('can set use component overrides in layoutoptions overriding the global overrides', () => {
 			cy.on('window:before:load', (win) => {
 				win.mergeSnapConfig = {
-					themes: {
-						custom: {
-							extends: 'bocachica',
-							variables: {
-								breakpoints: {
-									mobile: 768,
-									tablet: 991,
-									desktop: 1299,
+					theme: {
+						extends: 'base',
+						variables: {
+							breakpoints: {
+								mobile: 768,
+								tablet: 991,
+								desktop: 1299,
+							},
+						},
+						overrides: {
+							default: {
+								'toolbar.top': {
+									layout: ['layoutSelector', 'searchHeader'],
+								},
+								layoutSelector: {
+									type: 'list',
+								},
+								searchHeader: {
+									titleText: 'global title text',
+									subtitleText: 'global subtitle text',
+									hideExpandedSearchText: true,
+								},
+								search: {
+									layoutOptions: [
+										{
+											default: true,
+											value: '1',
+											label: 'one',
+											overrides: {
+												components: {
+													searchHeader: {
+														titleText: 'title text one',
+														subtitleText: 'subtitle text one',
+														hideExpandedSearchText: true,
+													},
+												},
+											},
+										},
+										{
+											default: false,
+											value: '2',
+											label: 'two',
+											overrides: {
+												components: {
+													searchHeader: {
+														titleText: 'title text two',
+														subtitleText: 'subtitle text two',
+														hideExpandedSearchText: true,
+													},
+												},
+											},
+										},
+									],
 								},
 							},
-							overrides: {
-								components: {
-									'toolbar.top': {
-										layout: ['layoutSelector', 'searchHeader'],
-									},
-									searchHeader: {
-										titleText: 'global title text',
-										subtitleText: 'global subtitle text',
-									},
-									search: {
-										layoutOptions: [
-											{
-												default: true,
-												value: '1',
-												label: 'one',
-												overrides: {
-													components: {
-														searchHeader: {
-															titleText: 'title text one',
-															subtitleText: 'subtitle text one',
-														},
-													},
-												},
-											},
-											{
-												default: false,
-												value: '2',
-												label: 'two',
-												overrides: {
-													components: {
-														searchHeader: {
-															titleText: 'title text two',
-															subtitleText: 'subtitle text two',
-														},
-													},
-												},
-											},
-										],
-									},
+							mobile: {
+								searchHeader: {
+									titleText: '0 - 767',
+									hideExpandedSearchText: true,
 								},
-
-								responsive: {
-									mobile: {
-										searchHeader: {
-											titleText: '0 - 767',
-										},
-										search: {
-											layoutOptions: [
-												{
-													default: true,
-													value: '1',
-													label: 'one',
-													overrides: {
-														components: {
-															searchHeader: {
-																titleText: 'layout1 0 - 767',
-															},
-														},
+								search: {
+									layoutOptions: [
+										{
+											default: true,
+											value: '1',
+											label: 'one',
+											overrides: {
+												components: {
+													searchHeader: {
+														titleText: 'layout1 0 - 767',
 													},
 												},
-												{
-													default: false,
-													value: '2',
-													label: 'two',
-													overrides: {
-														components: {
-															searchHeader: {
-																titleText: 'layout2 0 - 767',
-															},
-														},
+											},
+										},
+										{
+											default: false,
+											value: '2',
+											label: 'two',
+											overrides: {
+												components: {
+													searchHeader: {
+														titleText: 'layout2 0 - 767',
 													},
 												},
-											],
+											},
 										},
-									},
-									tablet: {
-										searchHeader: {
-											titleText: '767 - 991',
-										},
-										search: {
-											layoutOptions: [
-												{
-													default: true,
-													value: '1',
-													label: 'one',
-													overrides: {
-														components: {
-															searchHeader: {
-																titleText: 'layout1 767 - 991',
-															},
-														},
+									],
+								},
+							},
+							tablet: {
+								searchHeader: {
+									titleText: '767 - 991',
+									hideExpandedSearchText: true,
+								},
+								search: {
+									layoutOptions: [
+										{
+											default: true,
+											value: '1',
+											label: 'one',
+											overrides: {
+												components: {
+													searchHeader: {
+														titleText: 'layout1 767 - 991',
 													},
 												},
-												{
-													default: false,
-													value: '2',
-													label: 'two',
-													overrides: {
-														components: {
-															searchHeader: {
-																titleText: 'layout2 767 - 991',
-															},
-														},
+											},
+										},
+										{
+											default: false,
+											value: '2',
+											label: 'two',
+											overrides: {
+												components: {
+													searchHeader: {
+														titleText: 'layout2 767 - 991',
 													},
 												},
-											],
+											},
 										},
-									},
-									desktop: {
-										//only overrides when layoutoptions, if its also in a layout options
-										searchHeader: {
-											titleText: '991 - 1299',
-										},
-									},
+									],
+								},
+							},
+							desktop: {
+								//only overrides when layoutoptions, if its also in a layout options
+								searchHeader: {
+									titleText: '991 - 1299',
+									hideExpandedSearchText: true,
 								},
 							},
 						},
@@ -444,7 +446,6 @@ describe('Theme overrides work', () => {
 						targets: [
 							{
 								selector: '#searchspring-layout',
-								theme: 'custom',
 								component: 'Search',
 							},
 						],
@@ -474,14 +475,14 @@ describe('Theme overrides work', () => {
 
 			cy.snapController().then(({ store }) => {
 				cy.get(config.selectors.titleElem).should('have.text', 'layout1 767 - 991');
-				cy.get(config.selectors.subtitleElem).should('have.text', 'subtitle text one');
+				cy.get(config.selectors.subtitleElem).should('have.text', 'global subtitle text');
 			});
 
 			cy.viewport(766, 1000);
 
 			cy.snapController().then(({ store }) => {
 				cy.get(config.selectors.titleElem).should('have.text', 'layout1 0 - 767');
-				cy.get(config.selectors.subtitleElem).should('have.text', 'subtitle text one');
+				cy.get(config.selectors.subtitleElem).should('have.text', 'global subtitle text');
 			});
 		});
 	});

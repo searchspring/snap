@@ -16,7 +16,7 @@ const overlayBadgeStyleScript = ({ theme }: OverlayBadgeProps) => {
 // OverlayBadge component props
 export const overlayBadge: ThemeComponent<'overlayBadge', OverlayBadgeProps> = {
 	default: {
-		props: {
+		overlayBadge: {
 			themeStyleScript: overlayBadgeStyleScript,
 		},
 	},

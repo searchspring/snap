@@ -16,7 +16,7 @@ const loadingBarStyleScript = ({ color, backgroundColor, theme }: LoadingBarProp
 // LoadingBar component props
 export const loadingBar: ThemeComponent<'loadingBar', LoadingBarProps> = {
 	default: {
-		props: {
+		loadingBar: {
 			themeStyleScript: loadingBarStyleScript,
 		},
 	},

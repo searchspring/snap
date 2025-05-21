@@ -31,7 +31,7 @@ const facetGridOptionsStyleScript = ({ theme }: FacetGridOptionsProps) => {
 // FacetGridOptions component props
 export const facetGridOptions: ThemeComponent<'facetGridOptions', FacetGridOptionsProps> = {
 	default: {
-		props: {
+		facetGridOptions: {
 			themeStyleScript: facetGridOptionsStyleScript,
 			gapSize: '5px',
 			columns: 5,

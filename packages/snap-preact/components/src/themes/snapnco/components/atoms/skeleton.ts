@@ -8,7 +8,7 @@ import { ThemeComponent } from '../../../../providers';
 // Skeleton component props
 export const skeleton: ThemeComponent<'skeleton', SkeletonProps> = {
 	default: {
-		props: {
+		skeleton: {
 			// themeStyleScript: skeletonStyleScript,
 		},
 	},

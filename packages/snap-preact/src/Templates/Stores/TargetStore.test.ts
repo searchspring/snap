@@ -35,7 +35,6 @@ describe('TargetStore', () => {
 	it('can create a TargetStore', () => {
 		const target = {
 			selector: '.test',
-			theme: 'customTheme',
 			component: 'Search',
 			resultComponent: 'CustomResult',
 		};
@@ -46,14 +45,13 @@ describe('TargetStore', () => {
 		expect(store.resultComponent).toStrictEqual(target.resultComponent);
 		expect(store.theme).toStrictEqual({
 			location: 'local',
-			name: target.theme,
+			name: GLOBAL_THEME_NAME,
 		});
 	});
 
 	it('can setComponent, setResultComponent, setTheme', () => {
 		const target = {
 			selector: '.test',
-			theme: 'customTheme',
 			component: 'Search',
 			resultComponent: 'CustomResult',
 		};
@@ -69,7 +67,7 @@ describe('TargetStore', () => {
 
 		expect(store.theme).toStrictEqual({
 			location: 'local',
-			name: 'customTheme',
+			name: GLOBAL_THEME_NAME,
 		});
 		store.setTheme('newTheme', 'local' as TemplateThemeTypes);
 		expect(store.theme).toStrictEqual({

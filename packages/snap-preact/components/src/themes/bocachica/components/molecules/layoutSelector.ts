@@ -31,10 +31,11 @@ const layoutSelectorStyleScript = ({ theme }: LayoutSelectorProps) => {
 // LayoutSelector component props
 export const layoutSelector: ThemeComponent<'layoutSelector', LayoutSelectorProps> = {
 	default: {
-		props: {
+		layoutSelector: {
 			themeStyleScript: layoutSelectorStyleScript,
 			type: 'list',
 			hideLabel: true,
+			hideOptionLabels: true,
 		},
 	},
 };

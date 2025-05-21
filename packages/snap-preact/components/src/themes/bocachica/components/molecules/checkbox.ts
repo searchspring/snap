@@ -28,7 +28,7 @@ const checkboxStyleScript = ({ color, theme }: CheckboxProps) => {
 // Checkbox component props
 export const checkbox: ThemeComponent<'checkbox', CheckboxProps> = {
 	default: {
-		props: {
+		checkbox: {
 			themeStyleScript: checkboxStyleScript,
 			size: '18px',
 		},

@@ -35,6 +35,26 @@ describe('Result Component', () => {
 		expect(resultElement).toBeInTheDocument();
 	});
 
+	it('renders with "sale" classname when on sale', () => {
+		const product = mockResults[0] as Product;
+		// force product to NOT be onsale
+		product.mappings.core!.price = 1.99;
+		product.mappings.core!.msrp = 1.99;
+
+		const rendered = render(<Result result={product} />);
+		const resultElement = rendered.container.querySelectorAll('.ss__result');
+		expect(resultElement[0]).toBeInTheDocument();
+		expect(resultElement[0]).not.toHaveClass('ss__result--sale');
+
+		// force product to be onsale
+		product.mappings.core!.price = 0.99;
+		product.mappings.core!.msrp = 1.99;
+		const reRendered = render(<Result result={product} />);
+		const resultSaleElement = reRendered.container.querySelectorAll('.ss__result');
+		expect(resultSaleElement[0]).toBeInTheDocument();
+		expect(resultSaleElement[0]).toHaveClass('ss__result--sale');
+	});
+
 	it('renders image', () => {
 		const rendered = render(<Result result={mockResults[0] as Product} />);
 		const imageElement = rendered.container.querySelector('.ss__result .ss__result__image-wrapper .ss__image img');
@@ -102,7 +122,7 @@ describe('Result Component', () => {
 		expect(imageElement).toHaveAttribute('src', FALLBACK_IMAGE_URL);
 	});
 
-	it('should can change the layout', () => {
+	it('can change the layout', () => {
 		const rendered = render(<Result result={mockResults[1] as Product} layout={ResultsLayout.list} />);
 		const Element = rendered.container.querySelector('.ss__result');
 		expect(Element).toHaveClass(`ss__result--${ResultsLayout.list}`);
@@ -258,7 +278,7 @@ describe('Result Component', () => {
 
 		const resultElement = rendered.container.querySelector('.ss__result');
 
-		expect(resultElement?.classList).toHaveLength(2);
+		expect(resultElement?.classList).toHaveLength(3);
 	});
 });
 

@@ -339,15 +339,8 @@ export const es: LangComponents = {
 	searchHeader: {
 		titleText: {
 			value: (data) => {
-				return `Mostrando ${
-					data?.pagination?.multiplePages
-						? `<span class="ss__search-header__results-count-range"> ${data.pagination?.begin} - ${data.pagination?.end} de </span>`
-						: ''
-				} 
-                <span class="ss__search-header__results-count-total">${data?.pagination?.totalResults}</span> 
-                resultado${data?.pagination?.totalResults == 1 ? '' : 's'} 
-                ${data?.search?.query ? `para <span class="ss__search-header__results-query">"${data?.search?.query?.string}"</span>` : ''}
-            `;
+				return `Mostrando resultado${data?.pagination?.totalResults == 1 ? '' : 's'} 
+                ${data?.search?.query ? `para <span class="ss__search-header__results-query">"${data?.search?.query?.string}"</span>` : ''}`;
 			},
 			attributes: {
 				'aria-label': (data) => `Mostrando ahora ${data?.pagination?.totalResults} artículos en la cuadrícula de productos`,
@@ -379,6 +372,11 @@ export const es: LangComponents = {
 		didYouMeanText: {
 			value: (data) => {
 				return `¿Quiso decir <a href=${data?.search?.didYouMean?.url.href}>${data?.search?.didYouMean?.string}</a>?`;
+			},
+		},
+		expandedSearchText: {
+			value: (data) => {
+				return `No pudimos encontrar una coincidencia exacta para "<span className="ss__search-header__results-query">${data?.search?.query?.string}</span>", pero aquí hay algo similar:`;
 			},
 		},
 	},

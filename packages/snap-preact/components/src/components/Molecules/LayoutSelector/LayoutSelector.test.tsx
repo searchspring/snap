@@ -127,6 +127,16 @@ describe('LayoutSelector Component', () => {
 		expect(labelElem).not.toBeInTheDocument();
 	});
 
+	it('can hide option labels', () => {
+		const rendered = render(<LayoutSelector hideLabel={true} onSelect={onSelect} hideOptionLabels options={options} />);
+
+		const element = rendered.container.querySelector('.ss__layout__select');
+		const labelElem = rendered.container.querySelector('.ss__list__option__label');
+
+		expect(element).toBeInTheDocument();
+		expect(labelElem).not.toBeInTheDocument();
+	});
+
 	it('it renders as a dropdown type', () => {
 		const rendered = render(<LayoutSelector onSelect={onSelect} type={'dropdown'} options={options} />);
 		const element = rendered.container.querySelector('.ss__layout__select');

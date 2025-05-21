@@ -16,7 +16,7 @@ const filterSummaryStyleScript = ({ theme }: FilterSummaryProps) => {
 // FilterSummary component props
 export const filterSummary: ThemeComponent<'filterSummary', FilterSummaryProps> = {
 	default: {
-		props: {
+		filterSummary: {
 			themeStyleScript: filterSummaryStyleScript,
 			hideFacetLabel: true,
 			hideClearAll: true,

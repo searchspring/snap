@@ -19,7 +19,7 @@ const sidebarStyleScript = ({ theme }: SidebarProps) => {
 // Sidebar component props
 export const sidebar: ThemeComponent<'sidebar', SidebarProps> = {
 	default: {
-		props: {
+		sidebar: {
 			themeStyleScript: sidebarStyleScript,
 			hideTitleText: true,
 		},

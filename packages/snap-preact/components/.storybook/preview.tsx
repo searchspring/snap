@@ -16,10 +16,8 @@ const snapTemplates = new SnapTemplates({
 		siteId: '8uyt2m',
 		platform: 'other',
 	},
-	themes: {
-		global: {
-			extends: 'bocachica',
-		},
+	theme: {
+		extends: 'base',
 	},
 });
 

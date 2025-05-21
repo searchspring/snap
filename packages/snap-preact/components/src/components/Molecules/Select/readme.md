@@ -159,7 +159,7 @@ The `iconColor` prop sets the icon color and overwrites the `color` prop.
 ```
 
 ### iconClose
-The `iconClose` prop is the name of the icon to render when the dropdown is in its open state.
+The `iconClose` prop is the name of the icon to render when the dropdown is in its open state (non-native usage only).
 
 ```jsx
 <Select options={controller.store.sorting.options} iconClose={'angle-up'} />

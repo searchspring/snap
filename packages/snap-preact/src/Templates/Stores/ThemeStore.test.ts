@@ -20,32 +20,7 @@ const testThemeVariables: ThemeVariables = {
 	},
 };
 
-const testTheme: Theme = {
-	name: 'test',
-	variables: testThemeVariables,
-	components: {
-		results: {
-			columns: 5,
-		},
-	},
-	responsive: {
-		mobile: {
-			'*results': {
-				columns: 1,
-			},
-		},
-		tablet: {
-			'*results': {
-				columns: 2,
-			},
-		},
-		desktop: {
-			'*results': {
-				columns: 3,
-			},
-		},
-	},
-};
+let testTheme: Theme = {};
 
 describe('ThemeStore', () => {
 	let dependencies: TemplatesStoreDependencies;
@@ -61,6 +36,33 @@ describe('ThemeStore', () => {
 		};
 
 		document.body.innerHTML = `<html><head></head><body></body></html>`;
+
+		testTheme = {
+			name: 'test',
+			variables: testThemeVariables,
+			components: {
+				results: {
+					columns: 5,
+				},
+			},
+			responsive: {
+				mobile: {
+					results: {
+						columns: 1,
+					},
+				},
+				tablet: {
+					results: {
+						columns: 2,
+					},
+				},
+				desktop: {
+					results: {
+						columns: 3,
+					},
+				},
+			},
+		};
 	});
 
 	it('has expected defaults and can invoke methods', () => {
@@ -338,7 +340,8 @@ describe('ThemeStore', () => {
 		});
 
 		// extra assertions on 'test' theme
-		expect(merged.components?.results?.columns).toBe(5);
+		// @ts-ignore - its fine
+		expect(merged.components?.['*results']?.columns).toBe(5);
 	});
 
 	//todo test
@@ -563,7 +566,7 @@ describe('mergeThemeLayers function', () => {
 		const themePartial1: ThemePartial = {
 			responsive: {
 				mobile: {
-					'*results': { columns: 1 },
+					results: { columns: 1 },
 				},
 				tablet: {},
 				desktop: {},
@@ -573,11 +576,11 @@ describe('mergeThemeLayers function', () => {
 		const themePartial2: ThemePartial = {
 			responsive: {
 				mobile: {
-					'*result': { layout: 'grid' },
+					result: { layout: 'grid' },
 				},
 				tablet: {},
 				desktop: {
-					'*results': { columns: 1 },
+					results: { columns: 1 },
 				},
 			},
 		};
@@ -586,12 +589,12 @@ describe('mergeThemeLayers function', () => {
 		expect(merged).toStrictEqual({
 			responsive: {
 				mobile: {
-					'*result': { layout: 'grid' },
-					'*results': { columns: 1 },
+					result: { layout: 'grid' },
+					results: { columns: 1 },
 				},
 				tablet: {},
 				desktop: {
-					'*results': { columns: 1 },
+					results: { columns: 1 },
 				},
 			},
 		});
@@ -677,7 +680,7 @@ describe('mergeThemeLayers function', () => {
 			},
 			responsive: {
 				mobile: {
-					'*results': { columns: 1 },
+					results: { columns: 1 },
 				},
 				tablet: {},
 				desktop: {},
@@ -735,7 +738,7 @@ describe('mergeThemeLayers function', () => {
 			},
 			responsive: {
 				mobile: {
-					'*results': { columns: 1 },
+					results: { columns: 1 },
 				},
 				tablet: {},
 				desktop: {},

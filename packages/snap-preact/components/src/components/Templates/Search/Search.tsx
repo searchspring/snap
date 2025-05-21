@@ -16,6 +16,7 @@ import { SearchFilterStore } from '@searchspring/snap-store-mobx';
 import deepmerge from 'deepmerge';
 import { useLayoutOptions } from '../../../hooks/useLayoutOptions';
 import { componentNameToClassName } from '../../../utilities/componentNameToClassName';
+import { useCleanUpEmptyDivs } from '../../../hooks/useCleanUpEmptyDivs';
 
 const defaultStyles: StyleScript<SearchProps> = (props) => {
 	let classNamePrefix = 'ss__search';
@@ -37,6 +38,9 @@ const defaultStyles: StyleScript<SearchProps> = (props) => {
 		'.ss__sidebar': {
 			flex: '0 1 auto',
 			width: '270px',
+			'&:empty': {
+				display: 'none',
+			},
 		},
 
 		[`.${classNamePrefix}__content`]: {
@@ -116,7 +120,7 @@ export const Search = observer((properties: SearchProps): JSX.Element => {
 			// default props
 			name: 'top',
 			className: `${classNamePrefix}__header-section__toolbar--top-toolbar`,
-			layout: ['searchHeader', 'banner.header', 'button.sidebar-toggle'],
+			layout: [['banner.header'], ['searchHeader', '_', 'button.sidebar-toggle']],
 			toggleSideBarButton: {
 				onClick: () => setSidebarOpenState(!sidebarOpenState),
 				children:
@@ -135,7 +139,7 @@ export const Search = observer((properties: SearchProps): JSX.Element => {
 			name: 'middle',
 			className: `${classNamePrefix}__content__toolbar--middle-toolbar`,
 			layout: isMobile
-				? [['paginationInfo', '_', 'mobileSidebar'], ['sortBy', 'perPage'], ['banner.banner']]
+				? [['mobileSidebar', '_', 'paginationInfo'], ['banner.banner']]
 				: [['sortBy', 'perPage', '_', 'paginationInfo'], ['banner.banner']],
 			// inherited props
 			...defined({
@@ -189,12 +193,12 @@ export const Search = observer((properties: SearchProps): JSX.Element => {
 
 	const styling = mergeStyles<SearchProps>(props, defaultStyles);
 
+	useCleanUpEmptyDivs('.ss__search__sidebar');
+
 	return (
 		<CacheProvider>
 			<div {...styling} className={classnames(classNamePrefix, className, sidebarOpenState ? `${classNamePrefix}--sidebar-open` : '')}>
-				<div className={`${classNamePrefix}__header-section`}>
-					{!hideTopToolbar && store.pagination.totalResults > 0 && <Toolbar {...subProps.TopToolbar} controller={controller} />}
-				</div>
+				<div className={`${classNamePrefix}__header-section`}>{!hideTopToolbar && <Toolbar {...subProps.TopToolbar} controller={controller} />}</div>
 				<div className={`${classNamePrefix}__main-section`}>
 					{!hideSidebar && !isMobile && sidebarOpenState && (
 						<div className={`${classNamePrefix}__sidebar`}>
@@ -202,7 +206,7 @@ export const Search = observer((properties: SearchProps): JSX.Element => {
 						</div>
 					)}
 					<div className={classnames(`${classNamePrefix}__content`)}>
-						{!hideMiddleToolbar && store.pagination.totalResults > 0 && <Toolbar {...subProps.MiddleToolbar} controller={controller} />}
+						{!hideMiddleToolbar && <Toolbar {...subProps.MiddleToolbar} controller={controller} />}
 
 						{store.pagination.totalResults ? (
 							<Results {...subProps.Results} controller={controller} />
@@ -210,7 +214,7 @@ export const Search = observer((properties: SearchProps): JSX.Element => {
 							store.pagination.totalResults === 0 && <NoResults {...subProps.NoResults} controller={controller} />
 						)}
 
-						{!hideBottomToolBar && store.pagination.totalResults > 0 && <Toolbar {...subProps.BottomToolbar} controller={controller} />}
+						{!hideBottomToolBar && <Toolbar {...subProps.BottomToolbar} controller={controller} />}
 					</div>
 				</div>
 			</div>

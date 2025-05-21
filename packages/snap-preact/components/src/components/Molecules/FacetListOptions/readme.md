@@ -4,6 +4,7 @@ Renders a list of facet options.
 
 ## Sub-components
 - Checkbox
+- Radio
 
 ## Usage
 
@@ -26,6 +27,13 @@ The `hideCheckbox` prop will disable the facet checkbox. Typically used if the f
 
 ```jsx
 <FacetListOptions values={listFacet.values} hideCheckbox={true} />
+```
+
+### respectSingleSelect
+The `respectSingleSelect` prop will render radios instead of checkboxes if `facet.multiple == single`
+
+```jsx
+<FacetListOptions values={listFacet.values} respectSingleSelect={true} />
 ```
 
 ### hideCount

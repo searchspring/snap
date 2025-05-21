@@ -9,41 +9,37 @@ describe('Theme variables work', () => {
 	it('has default breakpoints from extended theme', () => {
 		cy.on('window:before:load', (win) => {
 			win.mergeSnapConfig = {
-				themes: {
-					custom: {
-						extends: 'bocachica',
-						variables: {
-							breakpoints: {
-								mobile: 767,
-								tablet: 991,
-								desktop: 1299,
+				theme: {
+					extends: 'bocachica',
+					variables: {
+						breakpoints: {
+							mobile: 767,
+							tablet: 991,
+							desktop: 1299,
+						},
+					},
+					overrides: {
+						default: {
+							searchHeader: {
+								titleText: 'default title text',
+							},
+							search: {
+								toggleSidebarStartClosed: false,
 							},
 						},
-						overrides: {
-							components: {
-								searchHeader: {
-									titleText: 'default title text',
-								},
-								search: {
-									toggleSidebarStartClosed: false,
-								},
+						mobile: {
+							searchHeader: {
+								titleText: '0 - 767',
 							},
-							responsive: {
-								mobile: {
-									searchHeader: {
-										titleText: '0 - 767',
-									},
-								},
-								tablet: {
-									searchHeader: {
-										titleText: '767 - 991',
-									},
-								},
-								desktop: {
-									searchHeader: {
-										titleText: '991 - 1299',
-									},
-								},
+						},
+						tablet: {
+							searchHeader: {
+								titleText: '767 - 991',
+							},
+						},
+						desktop: {
+							searchHeader: {
+								titleText: '991 - 1299',
 							},
 						},
 					},
@@ -52,7 +48,6 @@ describe('Theme variables work', () => {
 					targets: [
 						{
 							selector: '#searchspring-layout',
-							theme: 'custom',
 							component: 'Search',
 						},
 					],
@@ -90,41 +85,37 @@ describe('Theme variables work', () => {
 	it('can set custom breakpoints', () => {
 		cy.on('window:before:load', (win) => {
 			win.mergeSnapConfig = {
-				themes: {
-					custom: {
-						extends: 'bocachica',
-						variables: {
-							breakpoints: {
-								mobile: 540,
-								tablet: 767,
-								desktop: 1200,
+				theme: {
+					extends: 'bocachica',
+					variables: {
+						breakpoints: {
+							mobile: 540,
+							tablet: 767,
+							desktop: 1200,
+						},
+					},
+					overrides: {
+						default: {
+							searchHeader: {
+								titleText: 'default title text',
+							},
+							search: {
+								toggleSidebarStartClosed: false,
 							},
 						},
-						overrides: {
-							components: {
-								searchHeader: {
-									titleText: 'default title text',
-								},
-								search: {
-									toggleSidebarStartClosed: false,
-								},
+						mobile: {
+							searchHeader: {
+								titleText: '0 - 540',
 							},
-							responsive: {
-								mobile: {
-									searchHeader: {
-										titleText: '0 - 540',
-									},
-								},
-								tablet: {
-									searchHeader: {
-										titleText: '540 - 767',
-									},
-								},
-								desktop: {
-									searchHeader: {
-										titleText: '767 - 1200',
-									},
-								},
+						},
+						tablet: {
+							searchHeader: {
+								titleText: '540 - 767',
+							},
+						},
+						desktop: {
+							searchHeader: {
+								titleText: '767 - 1200',
 							},
 						},
 					},
@@ -133,7 +124,6 @@ describe('Theme variables work', () => {
 					targets: [
 						{
 							selector: '#searchspring-layout',
-							theme: 'custom',
 							component: 'Search',
 						},
 					],
@@ -173,27 +163,25 @@ describe('Theme variables work', () => {
 		// and facet grid options for text
 		cy.on('window:before:load', (win) => {
 			win.mergeSnapConfig = {
-				themes: {
-					custom: {
-						extends: 'bocachica',
-						// variables: {
-						// colors: {
-						// text: '#222222',
-						// primary: '#202223',
-						// secondary: '#6d7175',
-						// accent: '#3a23ad',
-						//     }
-						// },
-						breakpoints: {
-							mobile: 767,
-							tablet: 991,
-							desktop: 1299,
-						},
-						overrides: {
-							components: {
-								search: {
-									toggleSidebarStartClosed: false,
-								},
+				theme: {
+					extends: 'bocachica',
+					// variables: {
+					// colors: {
+					// text: '#222222',
+					// primary: '#202223',
+					// secondary: '#6d7175',
+					// accent: '#3a23ad',
+					//     }
+					// },
+					breakpoints: {
+						mobile: 767,
+						tablet: 991,
+						desktop: 1299,
+					},
+					overrides: {
+						default: {
+							search: {
+								toggleSidebarStartClosed: false,
 							},
 						},
 					},
@@ -202,7 +190,6 @@ describe('Theme variables work', () => {
 					targets: [
 						{
 							selector: '#searchspring-layout',
-							theme: 'custom',
 							component: 'Search',
 						},
 					],
@@ -231,22 +218,20 @@ describe('Theme variables work', () => {
 		// and facet grid options for text
 		cy.on('window:before:load', (win) => {
 			win.mergeSnapConfig = {
-				themes: {
-					custom: {
-						extends: 'bocachica',
-						variables: {
-							colors: {
-								text: 'rgb(22, 22, 255)',
-								primary: 'rgb(33, 33, 255)',
-								secondary: 'rgb(44, 44, 255)',
-								accent: 'rgb(55, 55, 255)',
-							},
+				theme: {
+					extends: 'bocachica',
+					variables: {
+						colors: {
+							text: 'rgb(22, 22, 255)',
+							primary: 'rgb(33, 33, 255)',
+							secondary: 'rgb(44, 44, 255)',
+							accent: 'rgb(55, 55, 255)',
 						},
-						overrides: {
-							components: {
-								search: {
-									toggleSidebarStartClosed: false,
-								},
+					},
+					overrides: {
+						default: {
+							search: {
+								toggleSidebarStartClosed: false,
 							},
 						},
 					},
@@ -255,7 +240,6 @@ describe('Theme variables work', () => {
 					targets: [
 						{
 							selector: '#searchspring-layout',
-							theme: 'custom',
 							component: 'Search',
 						},
 					],

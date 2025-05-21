@@ -45,15 +45,14 @@ const layoutSelectorStyleScript = ({ theme }: LayoutSelectorProps) => {
 // LayoutSelector component props
 export const layoutSelector: ThemeComponent<'layoutSelector', LayoutSelectorProps> = {
 	default: {
-		props: {
+		layoutSelector: {
 			themeStyleScript: layoutSelectorStyleScript,
 			type: 'list',
 			hideLabel: true,
+			hideOptionLabels: true,
 		},
-		components: {
-			'*layoutSelector icon': {
-				size: '5px',
-			},
+		'layoutSelector icon': {
+			size: '5px',
 		},
 	},
 };

@@ -50,7 +50,7 @@ const facetSliderStyleScript = ({
 // FacetSlider component props
 export const facetSlider: ThemeComponent<'facetSlider', FacetSliderProps> = {
 	default: {
-		props: {
+		facetSlider: {
 			themeStyleScript: facetSliderStyleScript,
 		},
 	},

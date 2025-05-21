@@ -133,15 +133,18 @@ function mergeThemeProps(componentThemeProps: Partial<ComponentProps>, mergedPro
 	return mergedProps;
 }
 
+// sort function is necessary in order for the user overrides to take priority over the base theme and also for responsive overrides
+// weights are used in the reduce initial value
+// priority is: Base - * < Override < Responsive - "(M)" || "(T)" || "(D)" [regex find responsive matches]
 export function sortSelectors(a: string, b: string): number {
 	const aWeight = a
 		.split(' ')
 		.map((selector, i) => (i * 2) ** (selector.includes('.') ? 2 : 1))
-		.reduce((acc, val) => acc + val, a.includes('*') ? 0 : 1000);
+		.reduce((acc, val) => acc + val, (a.includes('*') ? 0 : 1000) + (a.match(/\([MDT]\)/) ? 2000 : 0));
 	const bWeight = b
 		.split(' ')
 		.map((selector, i) => (i * 2) ** (selector.includes('.') ? 2 : 1))
-		.reduce((acc, val) => acc + val, b.includes('*') ? 0 : 1000);
+		.reduce((acc, val) => acc + val, (b.includes('*') ? 0 : 1000) + (b.match(/\([MDT]\)/) ? 2000 : 0));
 
 	return aWeight - bWeight;
 }
@@ -173,7 +176,12 @@ export function filterSelectors(themeComponents: ThemeComponents, treePath: stri
 		selectors = selectors.filter((key) => key.endsWith(componentType));
 	}
 	return selectors.filter((selector) => {
-		const split = selector.replace(/\*/g, '').split(' ').slice(0, -1);
+		// when considering matches, we do not care about the base theme prefix "*" nor the responsive prefix "(M)" || "(T)" || "(D)"
+		// these are automatically added by the ThemeStore in Snap Templates in order to preserve merge ordering of these overrides
+		const split = selector
+			.replace(/\*?(\([MDT]\))?/g, '')
+			.split(' ')
+			.slice(0, -1);
 
 		if (split.length == 0) return true;
 

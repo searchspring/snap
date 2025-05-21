@@ -27,7 +27,7 @@ export class TargetStore {
 			(settings.editMode && this.dependencies.storage.get(`templates.${this.selector}.resultComponent`)) || target.resultComponent;
 		this.theme = (settings.editMode && this.dependencies.storage.get(`templates.${this.selector}.theme`)) || {
 			location: 'local',
-			name: target.theme || GLOBAL_THEME_NAME,
+			name: GLOBAL_THEME_NAME,
 		};
 
 		makeObservable(this, {

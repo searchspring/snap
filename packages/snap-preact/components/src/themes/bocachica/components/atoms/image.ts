@@ -17,7 +17,7 @@ const imageStyleScript = ({ visibility, theme }: ImageProps & { visibility: Reac
 // Image component props
 export const image: ThemeComponent<'image', ImageProps> = {
 	default: {
-		props: {
+		image: {
 			themeStyleScript: imageStyleScript,
 		},
 	},

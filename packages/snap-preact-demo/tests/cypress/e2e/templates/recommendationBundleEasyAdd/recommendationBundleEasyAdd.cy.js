@@ -32,17 +32,15 @@ describe('BundledRecommendations', () => {
 			cy.wrap(config).its('url').should('have.length.at.least', 1);
 			cy.on('window:before:load', (win) => {
 				win.mergeSnapConfig = {
-					themes: {
-						custom: {
-							extends: 'bocachica',
-							overrides: {
-								components: {
-									recommendationBundle: {
-										lazyRender: {
-											enabled: false,
-										},
-										speed: 0,
+					theme: {
+						extends: 'bocachica',
+						overrides: {
+							default: {
+								recommendationBundle: {
+									lazyRender: {
+										enabled: false,
 									},
+									speed: 0,
 								},
 							},
 						},
@@ -50,7 +48,6 @@ describe('BundledRecommendations', () => {
 					recommendation: {
 						bundle: {
 							Bundle: {
-								theme: 'custom',
 								component: 'RecommendationBundleEasyAdd',
 							},
 						},
@@ -137,17 +134,15 @@ describe('BundledRecommendations', () => {
 
 				cy.on('window:before:load', (win) => {
 					win.mergeSnapConfig = {
-						themes: {
-							custom: {
-								extends: 'bocachica',
-								overrides: {
-									components: {
-										recommendationBundle: {
-											lazyRender: {
-												enabled: false,
-											},
-											speed: 0,
+						theme: {
+							extends: 'bocachica',
+							overrides: {
+								default: {
+									recommendationBundle: {
+										lazyRender: {
+											enabled: false,
 										},
+										speed: 0,
 									},
 								},
 							},
@@ -157,7 +152,6 @@ describe('BundledRecommendations', () => {
 								Bundle: {
 									component: 'RecommendationBundleEasyAdd',
 									resultComponent: 'CustomResult',
-									theme: 'custom',
 								},
 							},
 						},
