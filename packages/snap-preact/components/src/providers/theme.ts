@@ -76,4 +76,12 @@ export type ThemeResponsiveOverrides = {
 
 export type ThemePartial = Omit<Theme, 'variables' | 'name'> & { variables?: ThemeVariablesPartial };
 export type ThemeOverrides = { components?: ThemeComponentsRestrictedOverrides; responsive?: ThemeResponsiveOverrides };
+
+export type ConfigThemeOverrides = {
+	default?: ThemeComponentsRestrictedOverrides;
+	mobile?: ThemeComponentsRestrictedOverrides;
+	tablet?: ThemeComponentsRestrictedOverrides;
+	desktop?: ThemeComponentsRestrictedOverrides;
+};
+
 export type ThemeMinimal = { components?: ThemeComponents };

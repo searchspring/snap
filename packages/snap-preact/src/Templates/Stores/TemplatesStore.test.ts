@@ -8,10 +8,8 @@ describe('TemplateStore', () => {
 			config: {
 				platform: 'other',
 			},
-			themes: {
-				global: {
-					extends: 'bocachica',
-				},
+			theme: {
+				extends: 'bocachica',
 			},
 		};
 		const store = new TemplatesStore({ config });
@@ -25,10 +23,8 @@ describe('TemplateStore', () => {
 
 	it('can define config', () => {
 		const config: SnapTemplatesConfig = {
-			themes: {
-				global: {
-					extends: 'bocachica',
-				},
+			theme: {
+				extends: 'bocachica',
 			},
 			config: {
 				siteId: '8uyt2m',
@@ -45,10 +41,8 @@ describe('TemplateStore', () => {
 
 	it("fallsback if language and currency doesn't exist", () => {
 		const config: SnapTemplatesConfig = {
-			themes: {
-				global: {
-					extends: 'bocachica',
-				},
+			theme: {
+				extends: 'bocachica',
 			},
 			config: {
 				siteId: '8uyt2m',
@@ -66,10 +60,8 @@ describe('TemplateStore', () => {
 
 	it('can change language and currency', async () => {
 		const config: SnapTemplatesConfig = {
-			themes: {
-				global: {
-					extends: 'bocachica',
-				},
+			theme: {
+				extends: 'bocachica',
 			},
 			config: {
 				siteId: '8uyt2m',
@@ -89,10 +81,8 @@ describe('TemplateStore', () => {
 
 	it('can change innerWidth', () => {
 		const config: SnapTemplatesConfig = {
-			themes: {
-				global: {
-					extends: 'bocachica',
-				},
+			theme: {
+				extends: 'bocachica',
 			},
 			config: {
 				siteId: '8uyt2m',
@@ -115,21 +105,19 @@ describe('TemplateStore', () => {
 			config: {
 				platform: 'other',
 			},
-			themes: {
-				[theme]: {
-					extends: 'bocachica',
-				},
+			theme: {
+				extends: 'bocachica',
 			},
 		};
 		const store = new TemplatesStore({ config });
 
 		// addTheme from config
 		const spy = jest.spyOn(store, 'addTheme');
-		expect(store.library.import.theme[config.themes[theme].extends]).toBeDefined();
-		expect(store.library.themes[config.themes[theme].extends]).toBeUndefined();
+		expect(store.library.import.theme[config.theme.extends]).toBeDefined();
+		expect(store.library.themes[config.theme.extends]).toBeUndefined();
 		expect(spy).toHaveBeenCalledTimes(0);
 		await wait(100);
-		expect(store.library.themes[config.themes[theme].extends]).toBeDefined();
+		expect(store.library.themes[config.theme.extends]).toBeDefined();
 		expect(spy).toHaveBeenCalledTimes(1);
 
 		expect(store.themes.local[theme]).toBeDefined();
@@ -137,7 +125,7 @@ describe('TemplateStore', () => {
 		const storeTheme = store.getThemeStore(theme);
 		expect(storeTheme?.name).toBe(theme);
 		// @ts-ignore - private property
-		expect(storeTheme.base.name).toBe(config.themes[theme].extends);
+		expect(storeTheme.base.name).toBe(config.theme.extends);
 		spy.mockClear();
 
 		// addTheme manual call
@@ -170,10 +158,8 @@ describe('TemplateStore', () => {
 			config: {
 				platform: 'other',
 			},
-			themes: {
-				[theme]: {
-					extends: 'bocachica',
-				},
+			theme: {
+				extends: 'bocachica',
 			},
 		};
 		const store = new TemplatesStore({ config });

@@ -20,7 +20,6 @@ import type { SnapFeatures } from '../types';
 import type { SnapConfig, ExtendedTarget } from '../Snap';
 import type { PluginsConfigs, RecsTemplateTypes, TemplatesStoreConfigConfig, TemplateTypes } from './Stores/TemplateStore';
 import { LibraryImports } from './Stores/LibraryStore';
-import { GLOBAL_THEME_NAME } from './Stores/TargetStore';
 import {
 	pluginBackgroundFilters,
 	PluginBackgroundFiltersConfig,
@@ -243,8 +242,8 @@ export const createSearchTargeters = (templateConfig: SnapTemplatesConfig, templ
 	const targets = templateConfig.search?.targets || [];
 	return targets.map((target) => {
 		// use theme provided resultComponent if specified
-		if (!target.resultComponent && templateConfig.themes[target.theme || GLOBAL_THEME_NAME].resultComponent) {
-			target.resultComponent = templateConfig.themes[target.theme || GLOBAL_THEME_NAME].resultComponent;
+		if (!target.resultComponent && templateConfig.theme.resultComponent) {
+			target.resultComponent = templateConfig.theme.resultComponent;
 		}
 		const targetId = templatesStore.addTarget('search', target);
 		const targeter: ExtendedTarget = {
@@ -270,8 +269,8 @@ export function createAutocompleteTargeters(templateConfig: SnapTemplatesConfig,
 	const targets = templateConfig.autocomplete?.targets || [];
 	return targets.map((target) => {
 		// use theme provided resultComponent if specified
-		if (!target.resultComponent && templateConfig.themes[target.theme || GLOBAL_THEME_NAME].resultComponent) {
-			target.resultComponent = templateConfig.themes[target.theme || GLOBAL_THEME_NAME].resultComponent;
+		if (!target.resultComponent && templateConfig.theme.resultComponent) {
+			target.resultComponent = templateConfig.theme.resultComponent;
 		}
 
 		const targetId = templatesStore.addTarget('autocomplete', target);
@@ -311,8 +310,8 @@ export function createRecommendationComponentMapping(
 				const target = templateConfig.recommendation![recsType]![targetName] as TemplateTarget;
 
 				// use theme provided resultComponent if specified
-				if (!target.resultComponent && templateConfig.themes[target.theme || GLOBAL_THEME_NAME].resultComponent) {
-					target.resultComponent = templateConfig.themes[target.theme || GLOBAL_THEME_NAME].resultComponent;
+				if (!target.resultComponent && templateConfig.theme.resultComponent) {
+					target.resultComponent = templateConfig.theme.resultComponent;
 				}
 
 				const mappedConfig: RecommendationComponentObject = {

@@ -1,29 +1,22 @@
 ## Templates Theming
-Theming in Snap Templates is the primary method of customizing a template. 
-
-A theme configuration defines theme variables, component props, breakpoint changes, global styles, and layout behaviours. 
-
-Each feature target in Snap templates can only have a single theme applied to it at a given time. When defining a theme in `config.themes`, the key is the theme name. In the following example we define two themes: `global` and `customTheme`
-
-By default, a theme named `global` must always be defined and should be used if only a single theme is applicable to the implementation. The `global` theme is applied if a target does not explicitly define which theme to use via `target.theme`. In the following example we'll specify our autocomplete target to use `customTheme` and our search target to use the `global` theme.
+Theming in Snap Templates is the primary method of customizing a template. A theme configuration defines a theme from the library to extend, theme variables, component props and responsive changes via overrides as well as global styles and product cart component specification.
 
 ```jsx
 new SnapTemplates({
 	...
-	themes: {
-		global: {
-			extends: 'bocachica',
-		},
-		customTheme: {
-			extends: 'bocachica',
-		},
+	theme: {
+		extends: 'bocachica',
+		styles: globalStyles,
+		resultComponent: 'Result',
+		variables: { ... },
+		overrides: { ... },
+		responsive: { ... },
 	},
 	search: {
 		targets: [
 			{
 				selector: '#searchspring-templates',
 				component: 'Search',
-				theme: 'global', // can be omitted if value is 'global'
 			},
 		],
 	},
@@ -33,7 +26,6 @@ new SnapTemplates({
 			{
 				selector: 'input#search-input',
 				component: 'Autocomplete',
-				theme: 'customTheme',
 			},
 		],
 	},
@@ -41,23 +33,17 @@ new SnapTemplates({
 });
 ```
 
-### Creating a theme
-Each theme contains the following properties:
+### Customizing The Theme
+The project theme contains the following properties:
 
 | Configuration Option | Description | Type | Required |
 |----------------------|-------------|------|---------|
-| `themes` | Theme configurations | Object | ✔️ |
-| `themes.global` | Global theme configuration | Object | ✔️ |
-| `themes[customTheme]` | Custom theme configuration | Object | ✔️ |
-| `themes.global.extends` | Base theme to extend | String | ✔️ |
-| `themes.global.resultComponent` | Custom result component | String | ➖ |
-| `themes.global.variables` | Theme variables (colors, breakpoints, etc.) | Object | ➖ |
-| `themes.global.style` | Global styles | Function | ➖ |
-| `themes.global.overrides` | Component and layout overrides | Object | ➖ |
-
-
-> [!NOTE]
-> These configurations are also applicable to themes that are not the `global` theme. Ie. `themes.customTheme`
+| `theme` | Theme configurations | Object | ✔️ |
+| `theme.extends` | Base theme to extend | String | ✔️ |
+| `theme.resultComponent` | Custom result component | String | ✔️ |
+| `theme.variables` | Theme variables (colors, breakpoints, etc.) | Object | ➖ |
+| `theme.style` | Global styles | Function | ➖ |
+| `theme.overrides` | Component overrides | Object | ➖ |
 
 
 #### Theme `extends`
@@ -65,7 +51,7 @@ The `extends` property is the base theme name to start from and will already con
 
 
 #### Theme `resultComponent`
-The `resultComponent` property allows you to specify a custom component for rendering results within a theme. If not defined, the default `Result` component will be used. You can set this property at the theme level to establish a default for all features using that theme. If using a custom component, it must be declared in the `components` section of your configuration.
+The `resultComponent` property allows you to specify a which product card component to use for rendering results within the theme. If using a custom component (not from the library), it must be declared in the `components` section of your configuration.
 
 
 #### Theme `variables`
@@ -74,16 +60,14 @@ Each theme will have a common set of shared variables (ie. colors and breakpoint
 ```jsx
 new SnapTemplates({
 	...
-	themes: {
-		global: {
-			extends: 'bocachica',
-			variables: {
-				breakpoints: [768, 1024, 1280],
-				colors: {
-					primary: '#202223',
-					secondary: '#6d7175',
-					accent: '#000000',
-				},
+	theme: {
+		extends: 'bocachica',
+		variables: {
+			breakpoints: [768, 1024, 1280],
+			colors: {
+				primary: '#202223',
+				secondary: '#6d7175',
+				accent: '#000000',
 			},
 		},
 	},
@@ -111,11 +95,9 @@ const globalStyles = (theme) => {
 
 new SnapTemplates({
 	...
-	themes: {
-		global: {
-			extends: 'bocachica',
-			style: globalStyles,
-		},
+	theme: {
+		extends: 'bocachica',
+		style: globalStyles,
 	},
 	...
 });
@@ -125,8 +107,7 @@ new SnapTemplates({
 Themes and components provide prop their own default component prop configurations, the `overrides` property in a theme configuration allows you to customize these. It consists of three main sections:
 
 1. `components`: Allows you to override properties of individual components.
-2. `layoutOptions`: Enables you to define custom layout options.
-3. `responsive`: Lets you specify different overrides for various breakpoints.
+2. `responsive`: Lets you specify different overrides for various breakpoints.
 
 
 ##### Theme `overrides.components`
@@ -138,20 +119,18 @@ import { css } from '@emotion/react';
 
 new SnapTemplates({
 	...
-	themes: {
-		global: {
-			extends: 'bocachica',
-			overrides: {
-				components: {
-					image: {
-						lazy: false,
-						style: {
-							boxShadow: '2px 2px rgba(0,0,0,0.2)',
-						},
+	theme: {
+		extends: 'bocachica',
+		overrides: {
+			components: {
+				image: {
+					lazy: false,
+					style: {
+						boxShadow: '2px 2px rgba(0,0,0,0.2)',
 					},
-					button: {
-						native: true,
-					},
+				},
+				button: {
+					native: true,
 				},
 			},
 		},
@@ -173,71 +152,25 @@ Here's an example that demonstrates targeting specific subcomponents:
 ```jsx
 new SnapTemplates({
 	...
-	themes: {
-		global: {
-			extends: 'bocachica',
-			overrides: {
-				components: {
-					'carousel icon.next': {
-						icon: 'angle-right',
-					},
-					'carousel icon.prev': {
-						icon: 'angle-left',
-					},
-					'autocomplete image': {
-						lazy: false,
-						style: {
-							boxShadow: '2px 2px rgba(0,0,0,0.2)',
-						},
-					},
-					'autocomplete button': {
-						native: true,
+	theme: {
+		extends: 'bocachica',
+		overrides: {
+			components: {
+				'carousel icon.next': {
+					icon: 'angle-right',
+				},
+				'carousel icon.prev': {
+					icon: 'angle-left',
+				},
+				'autocomplete image': {
+					lazy: false,
+					style: {
+						boxShadow: '2px 2px rgba(0,0,0,0.2)',
 					},
 				},
-			},
-		},
-	},
-	...
-});
-```
-
-
-##### Theme `overrides.layoutOptions`
-
-The `layoutOptions` section in `overrides` allows you to define custom layout configurations for your theme. These options are used by the `LayoutSelector` component to provide selectable layouts, such as toggling between grid and list views on a product listing page. When a layout is selected, it applies a set of predefined component prop overrides, enabling different visual arrangements or styles for your components.
-
-```jsx
-new SnapTemplates({
-	...
-	themes: {
-		global: {
-			extends: 'bocachica',
-			overrides: {
-				layoutOptions: [
-					{
-						value: 'grid',
-						label: 'Grid',
-						default: true,
-						overrides: {
-							components: {
-								results: {
-									layout: 'grid',
-								},
-							},
-						},
-					},
-					{
-						value: 'list',
-						label: 'List',
-						overrides: {
-							components: {
-								results: {
-									layout: 'list',
-								},
-							},
-						},
-					},
-				],
+				'autocomplete button': {
+					native: true,
+				},
 			},
 		},
 	},
@@ -248,70 +181,35 @@ new SnapTemplates({
 ##### Theme `overrides.responsive`
 The `responsive` section in `overrides` allows you to define responsive configurations for your theme. These configurations are applied based on the current viewport size, enabling you to create responsive designs that adapt to different screen sizes. 
 
-The breakpoint values are defined in the theme's `variables.breakpoints`. For example, if you have `variables.breakpoints: [768, 1024, 1280]`, you would need to provide an array of 3 objects in `overrides.responsive`, corresponding to each breakpoint.
+The breakpoint values are defined in `theme.variables.breakpoints`. For example, if you have `theme.variables.breakpoints: { mobile: 768, tablet: 1024, desktop: 1280 }`, the `responsive` overrides for `mobile` would be applied from viewport `0-768`, `tablet` from `769-1024` and `desktop` from `1025-1280`. the overrides specifed outside of `responsive` are applied across all screensizes, however the currently active (based on the current browser viewport) responsive overrides will take priority. 
 
-Each object in the `responsive` array follows the same structure as the `overrides` interface. 
+Each section in the `responsive` object follows the same structure as the `overrides.components` interface. 
 
-In this example, we'll hide the `layoutOptions` for the first two breakpoints (mobile and tablet) and set various results columns.
+In this example, we'll adjust the columns for the `results` components for the first two breakpoints (mobile, tablet, & desktop).
 
 ```jsx
 new SnapTemplates({
 	...
-	themes: {
-		global: {
-			extends: 'bocachica',
-			overrides: {
-				layoutOptions: [
-					{
-						value: 'grid',
-						label: 'Grid',
-						default: true,
-						overrides: {
-							components: {
-								results: {
-									layout: 'grid',
-								},
-							},
-						},
+	theme: {
+		extends: 'bocachica',
+		overrides: {
+			responsive: {
+				mobile: {
+					results: {
+						columns: 1,
 					},
-					{
-						value: 'list',
-						label: 'List',
-						overrides: {
-							components: {
-								results: {
-									layout: 'list',
-								},
-							},
-						},
+				},
+				tablet: {
+					results: {
+						columns: 2,
 					},
-				],
-				responsive: [
-					{
-						layoutOptions: [],
-						components: {
-							results: {
-								columns: 1,
-							},
-						},
+				},
+				desktop: {
+					results: {
+						columns: 3,
 					},
-					{
-						layoutOptions: [],
-						components: {
-							results: {
-								columns: 2,
-							},
-						},
-					},
-					{
-						components: {
-							results: {
-								columns: 3,
-							},
-						},
-					},
-				]
-			},
+				},
+			}
 		},
 	},
 	...

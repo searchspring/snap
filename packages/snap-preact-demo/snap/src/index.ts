@@ -287,21 +287,3 @@ if (window.mergeSnapConfig) {
 }
 
 new Snap(config);
-
-// const templatesStore = new TemplatesStore({
-// 	themes: {
-// 		global: {
-// 			name: 'bocachica',
-// 			overrides: {
-// 				components: {
-// 					result: {
-// 						style: {
-// 							background: 'red',
-// 						},
-// 					}
-// 				}
-// 			}
-// 		},
-// 	},
-// });
-// new Snap(config, { templatesStore });

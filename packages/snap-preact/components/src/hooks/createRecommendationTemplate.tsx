@@ -34,7 +34,7 @@ export function createRecommendationTemplate(templates: TemplatesType, theme?: T
 			const themeName = theme?.name;
 			let defaultResultComponentFromTheme;
 			if (themeName) {
-				defaultResultComponentFromTheme = snap?.templates?.config.themes[themeName]?.resultComponent;
+				defaultResultComponentFromTheme = snap?.templates?.config.theme?.resultComponent;
 			}
 
 			const resultComponentName = (templates?.recommendation?.resultComponent || defaultResultComponentFromTheme) as string;

@@ -26,10 +26,8 @@ new SnapTemplates({
 		language: 'en',
 		currency: 'usd',
 	},
-	themes: {
-		global: {
-			extends: 'bocachica',
-		},
+	theme: {
+		extends: 'bocachica',
 	},
 	search: {
 		targets: [
