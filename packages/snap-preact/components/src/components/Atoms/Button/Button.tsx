@@ -127,7 +127,7 @@ export const Button = observer((properties: ButtonProps): JSX.Element => {
 				</button>
 			) : (
 				<div {...(!disableA11y ? a11yProps : {})} {...elementProps} role={'button'} aria-disabled={disabled}>
-					{content || children || mergedLang.button.value ? (
+					{content || children || mergedLang.button?.value ? (
 						<span className="ss__button__content" {...mergedLang.button?.all}>
 							{cloneWithProps(content, { treePath })}
 							{cloneWithProps(children, { treePath })}

@@ -25,7 +25,7 @@ describe('Theme overrides work', () => {
 				win.mergeSnapConfig = {
 					themes: {
 						custom: {
-							extends: 'bocachica',
+							extends: 'base',
 							overrides: {
 								components: {
 									searchHeader: {
@@ -62,7 +62,7 @@ describe('Theme overrides work', () => {
 				win.mergeSnapConfig = {
 					themes: {
 						custom: {
-							extends: 'bocachica',
+							extends: 'base',
 							overrides: {
 								components: {
 									'search searchHeader': {
@@ -118,7 +118,7 @@ describe('Theme overrides work', () => {
 				win.mergeSnapConfig = {
 					themes: {
 						custom: {
-							extends: 'bocachica',
+							extends: 'base',
 							overrides: {
 								components: {
 									searchHeader: {
@@ -126,7 +126,9 @@ describe('Theme overrides work', () => {
 										subtitleText: 'global subtitle text',
 										hideExpandedSearchText: true,
 									},
-
+									layoutSelector: {
+										type: 'list',
+									},
 									'search toolbar.top': {
 										layout: ['searchHeader', 'paginationInfo', 'layoutSelector', 'sortBy', 'perPage'],
 									},
@@ -200,7 +202,7 @@ describe('Theme overrides work', () => {
 				win.mergeSnapConfig = {
 					themes: {
 						custom: {
-							extends: 'bocachica',
+							extends: 'base',
 							overrides: {
 								components: {
 									searchHeader: {
@@ -210,6 +212,9 @@ describe('Theme overrides work', () => {
 									},
 									'search toolbar.top': {
 										layout: ['searchHeader', 'layoutSelector', 'pagination', 'perPage'],
+									},
+									layoutSelector: {
+										type: 'list',
 									},
 									search: {
 										layoutOptions: [
@@ -319,7 +324,7 @@ describe('Theme overrides work', () => {
 				win.mergeSnapConfig = {
 					themes: {
 						custom: {
-							extends: 'bocachica',
+							extends: 'base',
 							variables: {
 								breakpoints: {
 									mobile: 768,
@@ -331,6 +336,9 @@ describe('Theme overrides work', () => {
 								components: {
 									'toolbar.top': {
 										layout: ['layoutSelector', 'searchHeader'],
+									},
+									layoutSelector: {
+										type: 'list',
 									},
 									searchHeader: {
 										titleText: 'global title text',

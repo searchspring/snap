@@ -4,10 +4,11 @@ import userEvent from '@testing-library/user-event';
 import { ThemeProvider } from '../../../providers';
 
 import { FacetListOptions } from './FacetListOptions';
-import type { FacetValue } from '@searchspring/snap-store-mobx';
+import { SearchFacetStore, StorageStore, type FacetValue } from '@searchspring/snap-store-mobx';
 
 import { MockData } from '@searchspring/snap-shared';
 import { SearchResponseModelFacet, SearchResponseModelFacetValueAllOf } from '@searchspring/snapi-types';
+import { QueryStringTranslator, reactLinker, UrlManager } from '@searchspring/snap-url-manager';
 
 const mockData = new MockData();
 const listFacetMock: SearchResponseModelFacet & SearchResponseModelFacetValueAllOf = mockData
@@ -66,6 +67,44 @@ describe('ListValue Component hiding checkbox and count', () => {
 
 		expect(listOption[0]).toHaveTextContent(listFacetMock.values![0].label!);
 		expect(listOption[0]).not.toHaveTextContent(listFacetMock.values![0].count!.toString());
+	});
+});
+
+describe('can use respectSingleSelect to render radios', () => {
+	let radioComponent: RenderResult;
+	let checkboxComponent: RenderResult;
+
+	const mockTestData = mockData.searchMeta();
+	const facetStore = new SearchFacetStore({
+		config: { id: 'testing' },
+		stores: { storage: new StorageStore() },
+		services: { urlManager: new UrlManager(new QueryStringTranslator(), reactLinker) },
+		data: { search: mockTestData.search, meta: mockTestData.meta },
+	});
+
+	beforeEach(() => {
+		radioComponent = render(<FacetListOptions respectSingleSelect={true} facet={facetStore.filter((facet) => facet.multiple == 'single').pop()} />);
+		checkboxComponent = render(<FacetListOptions respectSingleSelect={true} facet={facetStore.filter((facet) => facet.multiple == 'or').pop()} />);
+	});
+
+	it('renders', () => {
+		const listValueElement = checkboxComponent.container.querySelector('.ss__facet-list-options');
+		expect(listValueElement).toBeInTheDocument();
+
+		const radioComponentElement = radioComponent.container.querySelector('.ss__facet-list-options');
+		expect(radioComponentElement).toBeInTheDocument();
+	});
+
+	it('renders checkbox or radio', () => {
+		const checkbox = checkboxComponent.container.querySelector('.ss__checkbox');
+		const noRadio = checkboxComponent.container.querySelector('.ss__radio');
+		expect(noRadio).not.toBeInTheDocument();
+		expect(checkbox).toBeInTheDocument();
+
+		const radio = radioComponent.container.querySelector('.ss__radio');
+		const noCheckbox = radioComponent.container.querySelector('.ss__checkbox');
+		expect(radio).toBeInTheDocument();
+		expect(noCheckbox).not.toBeInTheDocument();
 	});
 });
 

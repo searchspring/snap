@@ -12,6 +12,7 @@ import { createHoverProps } from '../../../toolbox';
 import type { FacetValue, ValueFacet } from '@searchspring/snap-store-mobx';
 import { Lang, useLang } from '../../../hooks';
 import deepmerge from 'deepmerge';
+import { Radio, RadioProps } from '../Radio';
 
 const defaultStyles: StyleScript<FacetListOptionsProps> = ({ horizontal, theme, hideCheckbox }) => {
 	return css({
@@ -53,12 +54,30 @@ export const FacetListOptions = observer((properties: FacetListOptionsProps): JS
 
 	const props = mergeProps('facetListOptions', globalTheme, defaultProps, properties);
 
-	const { values, hideCheckbox, hideCount, onClick, previewOnFocus, valueProps, facet, disableStyles, className, treePath } = props;
+	const { values, hideCheckbox, hideCount, onClick, previewOnFocus, respectSingleSelect, valueProps, facet, disableStyles, className, treePath } =
+		props;
+
+	let renderRadios = false;
+
+	if (respectSingleSelect && facet?.multiple == 'single') {
+		renderRadios = true;
+	}
 
 	const subProps: FacetListOptionsSubProps = {
 		checkbox: {
 			// default props
 			className: 'ss__facet-list-options__checkbox',
+			// inherited props
+			...defined({
+				disableStyles,
+			}),
+			// component theme overrides
+			theme: props?.theme,
+			treePath,
+		},
+		radio: {
+			// default props
+			className: 'ss__facet-list-options__radio',
 			// inherited props
 			...defined({
 				disableStyles,
@@ -111,7 +130,10 @@ export const FacetListOptions = observer((properties: FacetListOptionsProps): JS
 							{...(previewOnFocus ? createHoverProps(() => value?.preview && value.preview()) : {})}
 							{...mergedLang.listOption?.all}
 						>
-							{!hideCheckbox && <Checkbox {...subProps.checkbox} checked={value.filtered} disableA11y={true} />}
+							{renderRadios
+								? !hideCheckbox && <Radio {...subProps.radio} checked={value.filtered} disableA11y={true} />
+								: !hideCheckbox && <Checkbox {...subProps.checkbox} checked={value.filtered} disableA11y={true} />}
+
 							<span className="ss__facet-list-options__option__value">
 								{value.label}
 								{!hideCount && value?.count > 0 && <span className="ss__facet-list-options__option__value__count">({value.count})</span>}
@@ -135,6 +157,7 @@ export interface FacetListOptionsProps extends ComponentProps {
 	onClick?: (e: React.MouseEvent) => void;
 	previewOnFocus?: boolean;
 	valueProps?: any;
+	respectSingleSelect?: boolean;
 	lang?: Partial<FacetListOptionsLang>;
 }
 
@@ -147,4 +170,5 @@ export interface FacetListOptionsLang {
 
 interface FacetListOptionsSubProps {
 	checkbox: CheckboxProps;
+	radio: RadioProps;
 }
