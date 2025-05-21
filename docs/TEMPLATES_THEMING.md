@@ -63,7 +63,7 @@ new SnapTemplates({
 	theme: {
 		extends: 'bocachica',
 		variables: {
-			breakpoints: [768, 1024, 1280],
+			breakpoints: { mobile: 768, tablet: 1024, desktop: 1280 },
 			colors: {
 				primary: '#202223',
 				secondary: '#6d7175',
@@ -122,7 +122,7 @@ new SnapTemplates({
 	theme: {
 		extends: 'bocachica',
 		overrides: {
-			components: {
+			default: {
 				image: {
 					lazy: false,
 					style: {
@@ -155,7 +155,7 @@ new SnapTemplates({
 	theme: {
 		extends: 'bocachica',
 		overrides: {
-			components: {
+			default: {
 				'carousel icon.next': {
 					icon: 'angle-right',
 				},
@@ -178,14 +178,14 @@ new SnapTemplates({
 });
 ```
 
-##### Theme `overrides.responsive`
-The `responsive` section in `overrides` allows you to define responsive configurations for your theme. These configurations are applied based on the current viewport size, enabling you to create responsive designs that adapt to different screen sizes. 
+##### Responsive Theme Overrides
+Responsive overrides in the `overrides` property allow you to define theme configurations for different screen sizes, such as mobile, tablet, and desktop. These settings adapt your theme to various viewport sizes, enabling responsive designs.
 
-The breakpoint values are defined in `theme.variables.breakpoints`. For example, if you have `theme.variables.breakpoints: { mobile: 768, tablet: 1024, desktop: 1280 }`, the `responsive` overrides for `mobile` would be applied from viewport `0-768`, `tablet` from `769-1024` and `desktop` from `1025-1280`. the overrides specifed outside of `responsive` are applied across all screensizes, however the currently active (based on the current browser viewport) responsive overrides will take priority. 
+The breakpoints for these overrides are defined in `theme.variables.breakpoints`. For instance, if `theme.variables.breakpoints` is set to `{ mobile: 768, tablet: 1024, desktop: 1280 }`, the `mobile` overrides will apply for viewports between `0-768px`, `tablet` overrides for `769-1024px`, and `desktop` overrides for `1025-1280px`. Overrides specified in `default` apply across all screen sizes, while the active responsive overrides (based on the current viewport) take precedence.
 
-Each section in the `responsive` object follows the same structure as the `overrides.components` interface. 
+Each responsive override object can define additional prop configurations that build on top of the `default` overrides for the applicable breakpoints.
 
-In this example, we'll adjust the columns for the `results` components for the first two breakpoints (mobile, tablet, & desktop).
+In the following example, the number of columns for the `search results` component is adjusted for each breakpoint. The default configuration sets the number of columns to 4, but this is overridden for mobile (1 column), tablet (2 columns), and desktop (3 columns) based on the viewport size.
 
 ```jsx
 new SnapTemplates({
@@ -193,23 +193,26 @@ new SnapTemplates({
 	theme: {
 		extends: 'bocachica',
 		overrides: {
-			responsive: {
-				mobile: {
-					results: {
-						columns: 1,
-					},
+			default: {
+				'search results': {
+					columns: 4,
 				},
-				tablet: {
-					results: {
-						columns: 2,
-					},
+			},
+			mobile: {
+				'search results': {
+					columns: 1,
 				},
-				desktop: {
-					results: {
-						columns: 3,
-					},
+			},
+			tablet: {
+				'search results': {
+					columns: 2,
 				},
-			}
+			},
+			desktop: {
+				'search results': {
+					columns: 3,
+				},
+			},
 		},
 	},
 	...
