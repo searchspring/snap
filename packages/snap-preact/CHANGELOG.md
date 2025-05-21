@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.7.0](https://github.com/searchspring/snap/compare/v1.6.1...v1.7.0) (2025-05-21)
+
+### Bug Fixes
+
+- **preact/components/autocompletetemplates:** adding a wrapper element to autocomplete to reduce jank ([598fcf5](https://github.com/searchspring/snap/commit/598fcf5a74d93e3a37a30ce3c202a4af51d3df09))
+
+### Features
+
+- **preact-components/searchheader:** adding expanded search titles to search header ([c224da4](https://github.com/searchspring/snap/commit/c224da4244ffcf7496818b327a714e4fcef281ca))
+
 ## [1.6.1](https://github.com/searchspring/snap/compare/v1.6.0...v1.6.1) (2025-05-14)
 
 **Note:** Version bump only for package @searchspring/snap-preact
