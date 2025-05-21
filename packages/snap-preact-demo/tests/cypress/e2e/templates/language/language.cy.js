@@ -21,16 +21,12 @@ describe('Templates Language settings', () => {
 						siteId: '8uyt2m',
 						language: 'en',
 					},
-					themes: {
-						custom: {
-							extends: 'base',
-						},
-						global: {
-							overrides: {
-								components: {
-									search: {
-										toggleSidebarStartClosed: false,
-									},
+					theme: {
+						extends: 'base',
+						overrides: {
+							default: {
+								search: {
+									toggleSidebarStartClosed: false,
 								},
 							},
 						},
@@ -39,7 +35,6 @@ describe('Templates Language settings', () => {
 						targets: [
 							{
 								selector: '#searchspring-layout',
-								theme: 'custom',
 								component: 'Search',
 							},
 						],
@@ -61,16 +56,12 @@ describe('Templates Language settings', () => {
 						language: 'fr',
 						siteId: '8uyt2m',
 					},
-					themes: {
-						custom: {
-							extends: 'base',
-						},
-						global: {
-							overrides: {
-								components: {
-									search: {
-										toggleSidebarStartClosed: false,
-									},
+					theme: {
+						extends: 'base',
+						overrides: {
+							default: {
+								search: {
+									toggleSidebarStartClosed: false,
 								},
 							},
 						},
@@ -79,7 +70,6 @@ describe('Templates Language settings', () => {
 						targets: [
 							{
 								selector: '#searchspring-layout',
-								theme: 'custom',
 								component: 'Search',
 							},
 						],

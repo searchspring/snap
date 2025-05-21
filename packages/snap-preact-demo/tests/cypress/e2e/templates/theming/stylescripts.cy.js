@@ -22,17 +22,23 @@ describe('Theme styling works', () => {
 			cy.spy(obj, 'customStyles').as('styleScript');
 
 			win.mergeSnapConfig = {
-				themes: {
-					custom: {
-						extends: 'bocachica',
-						style: obj.customStyles,
+				theme: {
+					extends: 'bocachica',
+					style: obj.customStyles,
+					variables: {
+						breakpoints: { mobile: 767, tablet: 991, desktop: 1299 },
+						colors: {
+							accent: '#3a23ad',
+							primary: '#202223',
+							secondary: '#6d7175',
+							text: '#222222',
+						},
 					},
 				},
 				search: {
 					targets: [
 						{
 							selector: '#searchspring-layout',
-							theme: 'custom',
 							component: 'Search',
 						},
 					],
@@ -46,7 +52,7 @@ describe('Theme styling works', () => {
 			expect(obj.customStyles).to.be.called;
 			expect(obj.customStyles).to.be.calledWithMatch();
 			cy.get('@styleScript').should('have.been.calledWithMatch', {
-				name: 'custom',
+				name: 'global',
 				variables: {
 					breakpoints: { mobile: 767, tablet: 991, desktop: 1299 },
 					colors: {
@@ -78,18 +84,16 @@ describe('Theme styling works', () => {
 			cy.spy(obj, 'customStyles').as('styleScript');
 
 			win.mergeSnapConfig = {
-				themes: {
-					custom: {
-						extends: 'bocachica',
-						style: obj.customStyles,
-						variables: {
-							breakpoints: { mobile: 540, tablet: 767, desktop: 1200 },
-							colors: {
-								text: 'rgb(22, 22, 255)',
-								primary: 'rgb(33, 33, 255)',
-								secondary: 'rgb(44, 44, 255)',
-								accent: 'rgb(55, 55, 255)',
-							},
+				theme: {
+					extends: 'bocachica',
+					style: obj.customStyles,
+					variables: {
+						breakpoints: { mobile: 540, tablet: 767, desktop: 1200 },
+						colors: {
+							text: 'rgb(22, 22, 255)',
+							primary: 'rgb(33, 33, 255)',
+							secondary: 'rgb(44, 44, 255)',
+							accent: 'rgb(55, 55, 255)',
 						},
 					},
 				},
@@ -97,7 +101,6 @@ describe('Theme styling works', () => {
 					targets: [
 						{
 							selector: '#searchspring-layout',
-							theme: 'custom',
 							component: 'Search',
 						},
 					],
@@ -111,7 +114,7 @@ describe('Theme styling works', () => {
 			expect(obj.customStyles).to.be.called;
 			expect(obj.customStyles).to.be.calledWithMatch();
 			cy.get('@styleScript').should('have.been.calledWithMatch', {
-				name: 'custom',
+				name: 'global',
 				variables: {
 					breakpoints: { mobile: 540, tablet: 767, desktop: 1200 },
 					colors: {

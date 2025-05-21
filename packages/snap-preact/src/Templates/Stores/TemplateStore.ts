@@ -25,6 +25,7 @@ import type {
 	PluginScrollToTopConfig,
 } from '@searchspring/snap-platforms/common';
 import type {
+	ConfigThemeOverrides,
 	LangComponentOverrides,
 	ResultComponent,
 	ThemeComponents,
@@ -50,7 +51,6 @@ type ComponentLibraryType =
 
 export type TemplateTarget = {
 	selector?: string;
-	theme?: keyof LibraryImports['theme'] | (string & NonNullable<unknown>);
 	component: ComponentLibraryType | (string & NonNullable<unknown>);
 	resultComponent?: keyof LibraryImports['component']['result'] | (string & NonNullable<unknown>);
 };
@@ -72,7 +72,7 @@ type TemplateStoreThemeConfig = {
 	style?: GlobalThemeStyleScript;
 	resultComponent?: keyof LibraryImports['component']['result'] | (string & NonNullable<unknown>);
 	variables?: ThemeVariablesPartial;
-	overrides?: ThemeOverrides;
+	overrides?: ConfigThemeOverrides;
 };
 
 export type TemplateStoreComponentConfig = {
@@ -122,9 +122,7 @@ export type TemplatesStoreConfigConfig = {
 	translations?: {
 		[currencyName in LanguageCodes]?: LangComponentOverrides;
 	};
-	themes: {
-		global: TemplateStoreThemeConfig;
-	} & { [themeName: string]: TemplateStoreThemeConfig };
+	theme: TemplateStoreThemeConfig;
 };
 
 const RESIZE_DEBOUNCE = 100;
@@ -223,43 +221,50 @@ export class TemplatesStore {
 		const themePromises: Promise<void>[] = [];
 
 		// setup local themes
-		Object.keys(config.themes).map((themeKey) => {
-			const themeConfig = config.themes[themeKey];
-			// add promise
-			const themeDefer = new Deferred();
-			themePromises.push(themeDefer.promise);
+		const themeConfig = config.theme;
+		// add promise
+		const themeDefer = new Deferred();
+		themePromises.push(themeDefer.promise);
 
-			// import component if defined
-			if (themeConfig.resultComponent && this.library.import.component.result[themeConfig.resultComponent]) {
-				this.library.import.component.result[themeConfig.resultComponent]();
-			}
+		// import component if defined
+		if (themeConfig.resultComponent && this.library.import.component.result[themeConfig.resultComponent]) {
+			this.library.import.component.result[themeConfig.resultComponent]();
+		}
 
-			// import theme dependencies
-			const themeImports = [importCurrency, importLanguage, this.library.import.theme[themeConfig.extends]()];
+		// import theme dependencies
+		const themeImports = [importCurrency, importLanguage, this.library.import.theme[themeConfig.extends]()];
 
-			Promise.all(themeImports).then(() => {
-				const base = this.library.themes[themeConfig.extends];
-				const overrides = themeConfig.overrides || {};
-				const variables = themeConfig.variables || {};
-				const currency = this.library.locales.currencies[this.currency] || {};
-				const language = this.library.locales.languages[this.language] || {};
-				const languageOverrides = transformTranslationsToTheme((this.config.translations && this.config.translations[this.language]) || {});
+		Promise.all(themeImports).then(() => {
+			const base = this.library.themes[themeConfig.extends];
+			const overrides = themeConfig.overrides || {};
+			const variables = themeConfig.variables || {};
+			const currency = this.library.locales.currencies[this.currency] || {};
+			const language = this.library.locales.languages[this.language] || {};
+			const languageOverrides = transformTranslationsToTheme((this.config.translations && this.config.translations[this.language]) || {});
 
-				this.addTheme({
-					name: themeKey,
-					style: themeConfig.style,
-					type: 'local',
-					base,
-					overrides,
-					variables,
-					currency,
-					language,
-					languageOverrides,
-					innerWidth: this.window.innerWidth,
-				});
+			const translatedOverrides: ThemeOverrides = {
+				components: overrides.default,
+				responsive: {
+					mobile: overrides.mobile,
+					tablet: overrides.tablet,
+					desktop: overrides.desktop,
+				},
+			};
 
-				themeDefer.resolve();
+			this.addTheme({
+				name: 'global',
+				style: themeConfig.style,
+				type: 'local',
+				base,
+				overrides: translatedOverrides,
+				variables,
+				currency,
+				language,
+				languageOverrides,
+				innerWidth: this.window.innerWidth,
 			});
+
+			themeDefer.resolve();
 		});
 
 		Promise.all(themePromises).then(() => {
