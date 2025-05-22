@@ -311,7 +311,8 @@ export const Facet = observer((properties: FacetProps): JSX.Element => {
 					`ss__facet--${facet.field}`,
 					`${facet.collapsed ? 'ss__facet--collapsed' : ''}`,
 					className,
-					`${facet.display ? `ss__facet--${facet.display}` : ''}`
+					`${facet.display ? `ss__facet--${facet.display}` : ''}`,
+					((facet as ValueFacet)?.overflow?.remaining || 0) > 0 ? '' : 'ss__facet--showing-all'
 				)}
 			>
 				<Dropdown

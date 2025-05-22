@@ -5,14 +5,15 @@ import classnames from 'classnames';
 import { observer } from 'mobx-react-lite';
 
 import { Theme, useTheme, CacheProvider, useTreePath } from '../../../providers';
-import { mergeProps, mergeStyles } from '../../../utilities';
+import { defined, mergeProps, mergeStyles } from '../../../utilities';
 import { ComponentProps, StyleScript } from '../../../types';
 import { createHoverProps } from '../../../toolbox';
 import type { FacetHierarchyValue, ValueFacet } from '@searchspring/snap-store-mobx';
 import { Lang, useLang } from '../../../hooks';
 import deepmerge from 'deepmerge';
+import { Icon, IconProps, IconType } from '../../Atoms/Icon';
 
-const defaultStyles: StyleScript<FacetHierarchyOptionsProps> = ({ theme, horizontal }) => {
+const defaultStyles: StyleScript<FacetHierarchyOptionsProps> = ({ theme, horizontal, returnIcon }) => {
 	if (horizontal) {
 		return css({
 			display: 'flex',
@@ -37,7 +38,7 @@ const defaultStyles: StyleScript<FacetHierarchyOptionsProps> = ({ theme, horizon
 				},
 				'&.ss__facet-hierarchy-options__option--return': {
 					'&:before': {
-						content: `'\\0000ab'`,
+						content: `${returnIcon ? '""' : "'\\0000ab'"}`,
 						padding: '0 2px 0 0',
 						color: theme?.variables?.colors?.primary,
 					},
@@ -73,7 +74,7 @@ const defaultStyles: StyleScript<FacetHierarchyOptionsProps> = ({ theme, horizon
 				},
 				'&.ss__facet-hierarchy-options__option--return': {
 					'&:before': {
-						content: `'\\0000ab'`,
+						content: `${returnIcon ? '""' : "'\\0000ab'"}`,
 						padding: '0 2px 0 0',
 						color: theme?.variables?.colors?.primary,
 					},
@@ -99,7 +100,21 @@ export const FacetHierarchyOptions = observer((properties: FacetHierarchyOptions
 
 	const props = mergeProps('facetHierarchyOptions', globalTheme, defaultProps, properties);
 
-	const { values, hideCount, onClick, previewOnFocus, horizontal, valueProps, facet, className } = props;
+	const { values, hideCount, returnIcon, onClick, previewOnFocus, horizontal, valueProps, facet, disableStyles, treePath, className } = props;
+
+	const subProps: FacetHierarchySubProps = {
+		icon: {
+			className: 'ss__facet-hierarchy-options__icon',
+			// default props
+			// inherited props
+			...defined({
+				disableStyles,
+			}),
+			// component theme overrides
+			theme: props?.theme,
+			treePath,
+		},
+	};
 
 	const styling = mergeStyles<FacetHierarchyOptionsProps>(props, defaultStyles);
 
@@ -147,6 +162,10 @@ export const FacetHierarchyOptions = observer((properties: FacetHierarchyOptions
 							{...(previewOnFocus ? createHoverProps(() => value?.preview && value.preview()) : {})}
 							{...mergedLang.hierarchyOption?.all}
 						>
+							{returnIcon && value.history && !value.filtered && (
+								<Icon {...subProps.icon} {...(typeof returnIcon == 'string' ? { icon: returnIcon } : (returnIcon as Partial<IconProps>))} />
+							)}
+
 							<span className="ss__facet-hierarchy-options__option__value">
 								{value.label}
 								{!hideCount && value?.count > 0 && !value.filtered && (
@@ -170,6 +189,7 @@ export interface FacetHierarchyOptionsProps extends ComponentProps {
 	onClick?: (e: React.MouseEvent) => void;
 	previewOnFocus?: boolean;
 	valueProps?: any;
+	returnIcon?: IconType | Partial<IconProps>;
 	lang?: Partial<FacetHierarchyOptionsLang>;
 }
 
@@ -178,4 +198,8 @@ export interface FacetHierarchyOptionsLang {
 		facet: ValueFacet;
 		value: FacetHierarchyValue;
 	}>;
+}
+
+interface FacetHierarchySubProps {
+	icon: Partial<IconProps>;
 }
