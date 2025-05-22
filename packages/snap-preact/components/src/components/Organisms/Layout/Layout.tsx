@@ -58,6 +58,8 @@ export const Layout = observer((properties: LayoutProps): JSX.Element => {
 	const props = mergeProps('layout', globalTheme, defaultProps, properties);
 	const { controller, toggleSideBarButton, disableStyles, className, treePath, layout } = props;
 
+	delete props.treePath;
+
 	const styling = mergeStyles<LayoutProps>(props, defaultStyles);
 
 	const subProps: LayoutSubProps = {

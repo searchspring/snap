@@ -17,16 +17,10 @@ export const searchSnappyThemeComponentProps: ThemeComponent<'searchSnappy', Sea
 					icon: 'layout-list',
 					overrides: {
 						components: {
-							'searchSnappy searchHorizontal result': {
+							'searchSnappy result': {
 								layout: 'list',
 							},
-							'searchSnappy search result': {
-								layout: 'list',
-							},
-							'searchSnappy searchHorizontal results': {
-								columns: 1,
-							},
-							'searchSnappy search results': {
+							'searchSnappy results': {
 								columns: 1,
 							},
 						},
