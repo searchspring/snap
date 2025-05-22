@@ -2,6 +2,9 @@
 
 Renders a list of hierarchy options.
 
+## Sub-components
+- Icon
+
 ## Usage
 
 ### values

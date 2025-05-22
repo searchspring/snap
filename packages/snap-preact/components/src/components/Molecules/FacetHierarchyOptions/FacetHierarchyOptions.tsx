@@ -37,7 +37,11 @@ const defaultStyles: StyleScript<FacetHierarchyOptionsProps> = ({ theme, horizon
 					},
 				},
 				'&.ss__facet-hierarchy-options__option--return': {
-					'&:before': {
+					'.ss__icon': {
+						padding: '0 0 0 2px',
+					},
+
+					[!returnIcon ? '&:before' : '']: {
 						content: `${returnIcon ? '""' : "'\\0000ab'"}`,
 						padding: '0 2px 0 0',
 						color: theme?.variables?.colors?.primary,
@@ -73,7 +77,11 @@ const defaultStyles: StyleScript<FacetHierarchyOptionsProps> = ({ theme, horizon
 					},
 				},
 				'&.ss__facet-hierarchy-options__option--return': {
-					'&:before': {
+					'.ss__icon': {
+						padding: '0 0 0 2px',
+					},
+
+					[!returnIcon ? '&:before' : '']: {
 						content: `${returnIcon ? '""' : "'\\0000ab'"}`,
 						padding: '0 2px 0 0',
 						color: theme?.variables?.colors?.primary,
