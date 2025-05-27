@@ -33,6 +33,9 @@ const defaultStyles: StyleScript<LayoutProps> = ({}) => {
 		'.ss__layout__separator': {
 			flex: '1 1 auto',
 		},
+		'.ss__layout__row:empty': {
+			display: 'none',
+		},
 		'.ss__layout__row': {
 			display: 'flex',
 			alignItems: 'center',
