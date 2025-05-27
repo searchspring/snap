@@ -501,9 +501,10 @@ export const AutocompleteTemplate = observer((properties: AutocompleteTemplatePr
 
 	let RecommendationTemplateResultComponent: ResultComponent | undefined;
 
-	if (templates?.recommendation?.enabled) {
-		const recs = createRecommendationTemplate(templates, properties.theme);
+	const noresults = Boolean(controller.store.search?.query?.string && controller.store.results.length === 0);
 
+	if (templates?.recommendation?.enabled && noresults) {
+		const recs = createRecommendationTemplate(templates, properties.theme);
 		RecommendationTemplateComponent = recs.RecommendationTemplateComponent;
 		RecommendationTemplateResultComponent = recs.RecommendationTemplateResultComponent;
 		recsController = recs.recsController;
