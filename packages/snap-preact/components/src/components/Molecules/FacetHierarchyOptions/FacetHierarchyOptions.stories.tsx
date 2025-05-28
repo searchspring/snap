@@ -9,6 +9,7 @@ import { Snapify } from '../../../utilities/snapify';
 import { FacetDisplay } from '../../../types';
 import Readme from '../FacetHierarchyOptions/readme.md';
 import type { SearchController } from '@searchspring/snap-controller';
+import { iconPaths } from '../../Atoms/Icon';
 
 export default {
 	title: 'Molecules/FacetHierarchyOptions',
@@ -52,6 +53,18 @@ export default {
 				},
 			},
 			control: { type: 'none' },
+		},
+		returnIcon: {
+			description: 'return Icon name',
+			table: {
+				type: {
+					summary: 'string',
+				},
+			},
+			options: [...Object.keys(iconPaths)],
+			control: {
+				type: 'select',
+			},
 		},
 		hideCount: {
 			defaultValue: false,

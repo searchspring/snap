@@ -56,7 +56,6 @@ export const THEME_EDIT_COOKIE = 'ssThemeEdit';
 // TODO: tabbing, finder
 export type SearchTargetConfig = {
 	selector: string;
-	theme?: keyof LibraryImports['theme'] | (string & NonNullable<unknown>);
 	component: keyof LibraryImports['component']['search'];
 	resultComponent?: keyof LibraryImports['component']['result'] | (string & NonNullable<unknown>);
 };
@@ -64,23 +63,19 @@ export type SearchTargetConfig = {
 export type AutocompleteTargetConfig = {
 	selector: string;
 	inputSelector?: string;
-	theme?: keyof LibraryImports['theme'] | (string & NonNullable<unknown>);
 	component: keyof LibraryImports['component']['autocomplete'];
 	resultComponent?: keyof LibraryImports['component']['result'] | (string & NonNullable<unknown>);
 };
 
 export type RecommendationDefaultTargetConfig = {
-	theme?: keyof LibraryImports['theme'] | (string & NonNullable<unknown>);
 	component: keyof LibraryImports['component']['recommendation']['default'];
 	resultComponent?: keyof LibraryImports['component']['result'] | (string & NonNullable<unknown>);
 };
 export type RecommendationEmailTargetConfig = {
-	theme?: keyof LibraryImports['theme'] | (string & NonNullable<unknown>);
 	component: keyof LibraryImports['component']['recommendation']['email'];
 	resultComponent?: keyof LibraryImports['component']['result'] | (string & NonNullable<unknown>);
 };
 export type RecommendationBundleTargetConfig = {
-	theme?: keyof LibraryImports['theme'] | (string & NonNullable<unknown>);
 	component: keyof LibraryImports['component']['recommendation']['bundle'];
 	resultComponent?: keyof LibraryImports['component']['result'] | (string & NonNullable<unknown>);
 };

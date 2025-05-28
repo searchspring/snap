@@ -2,6 +2,9 @@
 
 Renders a list of hierarchy options.
 
+## Sub-components
+- Icon
+
 ## Usage
 
 ### values
@@ -23,6 +26,13 @@ The `hideCount` prop will disable the facet count values.
 
 ```jsx
 <FacetHierarchyOptions values={hierarchyFacet.values} hideCount={true} />
+```
+
+### returnIcon
+The `returnIcon` prop will set the icon to render for the return levels / options.
+
+```jsx
+<FacetHierarchyOptions values={hierarchyFacet.values} returnIcon={'angle-left'} />
 ```
 
 ### horizontal

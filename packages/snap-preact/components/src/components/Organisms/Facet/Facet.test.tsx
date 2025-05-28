@@ -4,10 +4,10 @@ import { Facet, FacetProps } from './Facet';
 import { ThemeProvider } from '../../../providers';
 
 import userEvent from '@testing-library/user-event';
-import { ValueFacet, RangeFacet } from '@searchspring/snap-store-mobx';
+import { ValueFacet, RangeFacet, SearchFacetStore, StorageStore } from '@searchspring/snap-store-mobx';
 import { SearchResponseModelFacet, SearchResponseModelFacetValueAllOf } from '@searchspring/snapi-types';
 import { MockData } from '@searchspring/snap-shared';
-import { IconType } from '../../Atoms/Icon';
+import { QueryStringTranslator, reactLinker, UrlManager } from '@searchspring/snap-url-manager';
 
 const mockData = new MockData();
 const searchResponseFacets = mockData.search().facets!;
@@ -135,21 +135,36 @@ describe('Facet Component', () => {
 		});
 
 		it('show more/less text prop', async () => {
+			const mockTestData = mockData.searchMeta();
+			const facetStore = new SearchFacetStore({
+				config: { id: 'testing' },
+				stores: { storage: new StorageStore() },
+				services: { urlManager: new UrlManager(new QueryStringTranslator(), reactLinker) },
+				data: { search: mockTestData.search, meta: mockTestData.meta },
+			});
+
 			const args = {
-				facet: facetOverflowMock as ValueFacet,
+				facet: facetStore.filter((facet) => facet.field == 'brand')!.pop()!,
 				showMoreText: 'Show More please',
 				showLessText: 'Show Less please',
 			};
-			// @ts-ignore - readonly
-			args.facet.refinedValues = args.facet.values;
+
 			const rendered = render(<Facet {...args} />);
-			const facetElement = rendered.container.querySelector('.ss__facet__show-more-less')!;
-			expect(facetElement).toBeInTheDocument();
-			expect(facetElement).toHaveTextContent(args.showMoreText);
+			const facet = rendered.container.querySelector('.ss__facet')!;
+			const showMoreElement = rendered.container.querySelector('.ss__facet__show-more-less')!;
+			expect(facet).toBeInTheDocument();
+			expect(facet.classList).toContain('ss__facet--brand');
+			expect(facet.classList).not.toContain('ss__facet--showing-all');
 
-			userEvent.click(facetElement);
+			expect(showMoreElement).toBeInTheDocument();
+			expect(showMoreElement).toHaveTextContent(args.showMoreText);
 
-			await waitFor(() => expect(facetElement).toHaveTextContent(args.showMoreText));
+			userEvent.click(showMoreElement);
+
+			await waitFor(() => {
+				expect(facet.classList).toContain('ss__facet--showing-all');
+				expect(showMoreElement).toHaveTextContent(args.showLessText);
+			});
 		});
 
 		it('can hide show more/less text prop', async () => {
@@ -285,7 +300,7 @@ describe('Facet Component', () => {
 
 		const facetElement = rendered.container.querySelector('.ss__facet');
 
-		expect(facetElement?.classList).toHaveLength(2);
+		expect(facetElement?.classList).toHaveLength(3);
 	});
 
 	describe('Facet lang works', () => {

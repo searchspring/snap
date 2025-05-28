@@ -1,13 +1,14 @@
 import { h } from 'preact';
-import { render, RenderResult } from '@testing-library/preact';
+import { render, RenderResult, waitFor } from '@testing-library/preact';
 import userEvent from '@testing-library/user-event';
 import { ThemeProvider } from '../../../providers';
 
 import { FacetHierarchyOptions } from './FacetHierarchyOptions';
-import type { FacetHierarchyValue } from '@searchspring/snap-store-mobx';
+import { SearchFacetStore, StorageStore, type FacetHierarchyValue } from '@searchspring/snap-store-mobx';
 
 import { MockData } from '@searchspring/snap-shared';
 import { SearchResponseModelFacet, SearchResponseModelFacetValueAllOf } from '@searchspring/snapi-types';
+import { QueryStringTranslator, reactLinker, UrlManager } from '@searchspring/snap-url-manager';
 
 const mockData = new MockData();
 const hierarchyFacetMock: SearchResponseModelFacet & SearchResponseModelFacetValueAllOf = mockData
@@ -92,6 +93,28 @@ describe('FacetHierarchyOptions generic props work', () => {
 		const hierarchyOption = rendered.container.querySelector('.ss__facet-hierarchy-options');
 		expect(hierarchyOption).toBeInTheDocument();
 		expect(hierarchyOption).toHaveClass(className);
+	});
+
+	it('can set custom return icon', async () => {
+		mockData.updateConfig({ search: 'filteredHierarchy' });
+		const mockTestData = mockData.searchMeta();
+		const facetStore = new SearchFacetStore({
+			config: { id: 'testing' },
+			stores: { storage: new StorageStore() },
+			services: { urlManager: new UrlManager(new QueryStringTranslator(), reactLinker) },
+			data: { search: mockTestData.search, meta: mockTestData.meta },
+		});
+
+		const rendered = render(
+			<FacetHierarchyOptions facet={facetStore.filter((facet) => facet.field == 'ss_category_hierarchy').pop()} returnIcon={'cog'} />
+		);
+		const firstOption = rendered.container.querySelector('.ss__facet-hierarchy-options__option');
+		userEvent.click(firstOption!);
+
+		await waitFor(() => {
+			const returnIcon = rendered.container.querySelector('.ss__facet-hierarchy-options__option--return .ss__icon--cog');
+			expect(returnIcon).toBeInTheDocument();
+		});
 	});
 
 	it('can set custom onClick func', async () => {

@@ -249,6 +249,7 @@ export const FacetPaletteOptions = observer((properties: FacetPaletteOptionsProp
 
 					return (
 						<a
+							key={value.value}
 							className={classnames(
 								'ss__facet-palette-options__option',
 								{ 'ss__facet-palette-options__option--filtered': value.filtered },
