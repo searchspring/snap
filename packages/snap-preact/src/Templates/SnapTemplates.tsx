@@ -202,10 +202,13 @@ export class SnapTemplates extends Snap {
 					],
 					async (target: Target, elem: Element) => {
 						const TemplateEditor = (await import('../../components/src')).TemplatesEditor;
+						const TemplateEditorStore = (await import('../Templates/Stores/TemplateEditorStore')).TemplateEditorStore;
+						const templateEditorStore = new TemplateEditorStore();
 
 						render(
 							<TemplateEditor
 								templatesStore={templatesStore}
+								editorStore={templateEditorStore}
 								onRemoveClick={() => {
 									cookies.unset(THEME_EDIT_COOKIE);
 									const urlState = url(window.location.href);

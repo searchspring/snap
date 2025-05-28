@@ -40,7 +40,7 @@ export type TemplateTypes = 'search' | 'autocomplete' | `recommendation/${RecsTe
 export type TemplateCustomComponentTypes = 'result' | 'badge';
 export type RecsTemplateTypes = 'bundle' | 'default' | 'email';
 
-type TargetMap = { [targetId: string]: TargetStore };
+export type TargetMap = { [targetId: string]: TargetStore };
 
 type ComponentLibraryType =
 	| keyof LibraryImports['component']['autocomplete']
