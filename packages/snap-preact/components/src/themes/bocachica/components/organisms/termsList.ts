@@ -14,7 +14,7 @@ const termsListStyleScript = ({ theme }: TermsListProps) => {
 export const termsList: ThemeComponent<'termsList', TermsListProps> = {
 	default: {
 		termsList: {
-			styleScript: termsListStyleScript,
+			themeStyleScript: termsListStyleScript,
 		},
 	},
 };

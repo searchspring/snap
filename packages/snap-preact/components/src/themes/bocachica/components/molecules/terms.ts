@@ -14,7 +14,7 @@ const termsStyleScript = ({ theme }: TermsProps) => {
 export const terms: ThemeComponent<'terms', TermsProps> = {
 	default: {
 		terms: {
-			styleScript: termsStyleScript,
+			themeStyleScript: termsStyleScript,
 		},
 	},
 };
