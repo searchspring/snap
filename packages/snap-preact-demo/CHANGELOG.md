@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.8.0](https://github.com/searchspring/snap-1.0/compare/v1.7.0...v1.8.0) (2025-05-28)
+
+### Features
+
+- **preact/components:** new prop for hierarchy facet returnIcon, and classname for facet when showing all options ([fe2d7c0](https://github.com/searchspring/snap-1.0/commit/fe2d7c01f29c81040cecd1b999dd9853786cdcf9))
+
 # [1.7.0](https://github.com/searchspring/snap-1.0/compare/v1.6.1...v1.7.0) (2025-05-21)
 
 **Note:** Version bump only for package @searchspring/snap-preact-demo

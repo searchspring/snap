@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.8.0](https://github.com/searchspring/snap/compare/v1.7.0...v1.8.0) (2025-05-28)
+
+### Bug Fixes
+
+- **preact/components:** bugfixes for paletteOptions, and snappy search layoutOptions ([e284b73](https://github.com/searchspring/snap/commit/e284b73ef652e8802db41b82613e4f6bdfa8343c))
+- **preact/components:** some bug fixes around ac no results component and layout components both causing rerenders and jankyness ([6ef8f69](https://github.com/searchspring/snap/commit/6ef8f69d1a3803c0720d2ad4e80d62d7a3b30a54))
+- **preact/mergeprops:** fixing bug around responsive prop merge ([d6ecf4b](https://github.com/searchspring/snap/commit/d6ecf4b08feb67040c1ac1c6822f24b8a2be9108))
+
+### Features
+
+- **preact/components:** new prop for hierarchy facet returnIcon, and classname for facet when showing all options ([fe2d7c0](https://github.com/searchspring/snap/commit/fe2d7c01f29c81040cecd1b999dd9853786cdcf9))
+
 # [1.7.0](https://github.com/searchspring/snap/compare/v1.6.1...v1.7.0) (2025-05-21)
 
 ### Bug Fixes
