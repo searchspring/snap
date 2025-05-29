@@ -261,11 +261,7 @@ describe('Attribute Click Tracking', () => {
 		const button = global.document.querySelector('[ss-track-intellisuggest][ss-track-intellisuggest-signature]');
 		button?.dispatchEvent(clickEvent);
 
-		expect(trackEvent).toHaveBeenCalledWith({
-			intellisuggestData,
-			intellisuggestSignature,
-			href,
-		});
+		expect(trackEvent).toHaveBeenCalledWith(); // deprecated, should still be called with no params
 
 		trackEvent.mockRestore();
 	});
