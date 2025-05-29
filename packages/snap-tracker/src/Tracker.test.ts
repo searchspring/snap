@@ -1,6 +1,6 @@
 import 'whatwg-fetch';
 import { Tracker } from './Tracker';
-import { TrackerConfig, BeaconCategory, BeaconType, CartViewEvent, TrackErrorEvent, OrderTransactionData } from './types';
+import { TrackerConfig, TrackErrorEvent, OrderTransactionData } from './types';
 import type { BeaconConfig, Product } from '@searchspring/beacon';
 
 // mocks fetch so beacon client does not make network requests
@@ -383,16 +383,6 @@ describe('Tracker', () => {
 		expect(devTracker.mode).toBe('development');
 	});
 
-	it('should not make preflight request when there are no shopperId, cart or viewed personalization parameters set', () => {
-		const tracker = new Tracker(globals, config);
-		const sendPreflight = jest.spyOn(tracker, 'sendPreflight');
-
-		tracker.sendPreflight();
-
-		expect(sendPreflight).toHaveBeenCalledTimes(1);
-		expect(fetchSpy).toHaveBeenCalledTimes(0);
-	});
-
 	it('will make preflight request when there are cart products set', () => {
 		const tracker = new Tracker(globals, config);
 		expect(fetchSpy).toHaveBeenCalledTimes(0);
@@ -539,27 +529,6 @@ describe('Tracker', () => {
 		eventsSpy.mockRestore();
 	});
 
-	it('can track product click events', () => {
-		const tracker = new Tracker(globals, config);
-
-		const productClickData = {
-			intellisuggestData: 'test-intellisuggest-data',
-			intellisuggestSignature: 'test-intellisuggest-signature',
-			href: '/product/123',
-		};
-
-		const result = tracker.track.product.click(productClickData);
-
-		expect(result).toBeDefined();
-		expect(result?.event).toEqual({
-			intellisuggestData: productClickData.intellisuggestData,
-			intellisuggestSignature: productClickData.intellisuggestSignature,
-			href: productClickData.href,
-		});
-		expect(result?.type).toBe(BeaconType.CLICK);
-		expect(result?.category).toBe(BeaconCategory.INTERACTION);
-	});
-
 	it('handles order transaction events with legacy format', () => {
 		const tracker = new Tracker(globals, config);
 
@@ -692,10 +661,8 @@ describe('Cart inferance from context', () => {
 		expect(mockFetchApi).not.toHaveBeenCalled();
 
 		// simulate updated cart with one item added
-		const cart2 = [
-			...cart,
-			{ uid: 'productUid3', childUid: 'productChildUid3', sku: 'productSku3', childSku: 'productChildSku3', qty: 3, price: 9.99 },
-		];
+		const newProduct = { uid: 'productUid3', childUid: 'productChildUid3', sku: 'productSku3', childSku: 'productChildSku3', qty: 3, price: 9.99 };
+		const cart2 = [...cart, newProduct];
 		tracker = new Tracker(
 			{
 				...globals,
@@ -710,7 +677,7 @@ describe('Cart inferance from context', () => {
 		mockFetchApi.mockClear();
 		expect(mockFetchApi).not.toHaveBeenCalled();
 
-		// simulate adding 1 quantity of exisiting item in cart
+		// simulate adding 1 quantity of existing item in cart
 		const cart3 = [
 			...cart,
 			{ uid: 'productUid3', childUid: 'productChildUid3', sku: 'productSku3', childSku: 'productChildSku3', qty: 4, price: 9.99 },
@@ -725,6 +692,7 @@ describe('Cart inferance from context', () => {
 		await new Promise((resolve) => setTimeout(resolve, 0));
 		expect(tracker.storage.cart.get()).toEqual(cart3);
 		expect(mockFetchApi).toHaveBeenCalledWith(expect.stringContaining('/cart/add'), expect.any(Object));
+		expect(mockFetchApi).toHaveBeenCalledWith(expect.stringContaining('/preflightCache'), expect.any(Object));
 		mockFetchApi.mockClear();
 		expect(mockFetchApi).not.toHaveBeenCalled();
 
@@ -743,6 +711,7 @@ describe('Cart inferance from context', () => {
 		await new Promise((resolve) => setTimeout(resolve, 0));
 		expect(tracker.storage.cart.get()).toEqual(cart4);
 		expect(mockFetchApi).toHaveBeenCalledWith(expect.stringContaining('/cart/remove'), expect.any(Object));
+		expect(mockFetchApi).toHaveBeenCalledWith(expect.stringContaining('/preflightCache'), expect.any(Object));
 		mockFetchApi.mockClear();
 		expect(mockFetchApi).not.toHaveBeenCalled();
 
@@ -758,6 +727,7 @@ describe('Cart inferance from context', () => {
 		await new Promise((resolve) => setTimeout(resolve, 0));
 		expect(tracker.storage.cart.get()).toEqual(cart4); // should be previous cart
 		expect(mockFetchApi).toHaveBeenCalledWith(expect.stringContaining('/log/snap'), expect.any(Object));
+		expect(mockFetchApi).not.toHaveBeenCalledWith(expect.stringContaining('/preflightCache'), expect.any(Object));
 		mockFetchApi.mockClear();
 		expect(mockFetchApi).not.toHaveBeenCalled();
 
@@ -773,9 +743,11 @@ describe('Cart inferance from context', () => {
 		await new Promise((resolve) => setTimeout(resolve, 0));
 		expect(tracker.storage.cart.get()).toEqual(cart6);
 		expect(mockFetchApi).toHaveBeenCalledWith(expect.stringContaining('/cart/remove'), expect.any(Object));
+		expect(mockFetchApi).toHaveBeenCalledWith(expect.stringContaining('/preflightCache'), expect.any(Object));
 		mockFetchApi.mockClear();
 		expect(mockFetchApi).not.toHaveBeenCalled();
 
+		expect(tracker.storage.cart.get().length).toBeGreaterThan(0);
 		// simulate removing all products from cart
 		const cart7: Product[] = [];
 		tracker = new Tracker(
@@ -788,6 +760,7 @@ describe('Cart inferance from context', () => {
 		await new Promise((resolve) => setTimeout(resolve, 0));
 		expect(tracker.storage.cart.get()).toEqual(cart7);
 		expect(mockFetchApi).toHaveBeenCalledWith(expect.stringContaining('/cart/remove'), expect.any(Object));
+		expect(mockFetchApi).toHaveBeenCalledWith(expect.stringContaining('/preflightCache'), expect.any(Object));
 		mockFetchApi.mockClear();
 		expect(mockFetchApi).not.toHaveBeenCalled();
 	});

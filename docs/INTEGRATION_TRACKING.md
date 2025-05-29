@@ -17,6 +17,20 @@ controller.store.results.map(result => {
 })
 ```
 
+### Product Add To Cart
+Tracks product add to cart events. It is recommended to invoke on each product `onClick` event via the `controller.addToCart()` method available on all controller types.
+
+```jsx
+controller.store.results.map(result => {
+	return (
+		<a href={core.url} onMouseDown={(e)=> controller.track.product.click(e, result) }>
+			{result.name}
+			<button onClick={(e)=> controller.addToCart(result)}>Add to cart</button>
+		</a>
+	)
+})
+```
+
 ## Events invoked outside of the integration code
 
 **Note**: if using Shopify and you have installed Searchspring's Shopify Pixel Tracking extension, the following events will be tracked by the extension and integrating these events is not required.

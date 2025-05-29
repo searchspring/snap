@@ -130,19 +130,19 @@ autocompleteController.search();
 - Invoked prior to submission of autocomplete search
 
 ### track.product.render
-- Called with `eventData` = { controller, products, trackEvent } 
+- Called with `eventData` = { controller, product, trackEvent } 
 - Always invoked after `track.product.render()` method has been invoked
 
 ### track.product.impression
-- Called with `eventData` = { controller, products, trackEvent } 
+- Called with `eventData` = { controller, product, trackEvent } 
 - Always invoked after `track.product.impression()` method has been invoked
 
 ### track.product.clickThrough
-- Called with `eventData` = { controller, event, products, trackEvent } 
+- Called with `eventData` = { controller, event, product, trackEvent } 
 - Always invoked after `track.product.clickThrough()` or `track.product.click()` method has been invoked
 
 ### track.product.addToCart
-- Called with `eventData` = { controller, products, trackEvent } 
+- Called with `eventData` = { controller, product, trackEvent } 
 - Always invoked after `track.product.addToCart()` method has been invoked
 
 ### track.redirect

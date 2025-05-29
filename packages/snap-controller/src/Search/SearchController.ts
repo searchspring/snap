@@ -26,6 +26,7 @@ import type {
 	SearchResponseModel,
 	SearchRequestModelFilterRange,
 	SearchRequestModelFilterValue,
+	SearchRequestModelFilter,
 } from '@searchspring/snapi-types';
 import type {
 	AutocompleteAddtocartSchemaDataBgfilterInner,
@@ -165,19 +166,6 @@ export class SearchController extends AbstractController {
 				return false;
 			}
 
-			const nonBackgroundFilters = search?.request?.filters?.filter((filter) => !filter.background);
-			if (
-				config?.settings?.redirects?.singleResult &&
-				search?.response?.search?.query &&
-				search?.response?.pagination?.totalResults === 1 &&
-				!nonBackgroundFilters?.length
-			) {
-				//set loaded to true to prevent infinite search/reloading from happening
-				searchStore.loaded = true;
-				window.location.replace(search?.response.results[0].mappings.core.url);
-				return false;
-			}
-
 			await next();
 		});
 
@@ -198,7 +186,7 @@ export class SearchController extends AbstractController {
 			this.eventManager.fire('restorePosition', { controller: this, element: elementPosition });
 		});
 
-		this.eventManager.on('afterStore', async (search: AfterStoreObj, next: Next): Promise<void> => {
+		this.eventManager.on('afterStore', async (search: AfterStoreObj, next: Next): Promise<void | boolean> => {
 			await next();
 			const controller = search.controller as SearchController;
 			if (controller.store.loaded && !controller.store.error) {
@@ -211,8 +199,20 @@ export class SearchController extends AbstractController {
 				products.forEach((result: Product) => {
 					this.events.product[result.id] = this.events.product[result.id] || {};
 					this.events.product[result.id].render = true;
+					this.eventManager.fire('track.product.render', { controller: this, product: result, trackEvent: data });
 				});
-				this.eventManager.fire('track.product.render', { controller: this, products, trackEvent: data });
+
+				const config = search.controller.config as SearchControllerConfig;
+				const nonBackgroundFilters = search?.request?.filters?.filter((filter: SearchRequestModelFilter) => !filter.background);
+				if (
+					config?.settings?.redirects?.singleResult &&
+					search?.response?.search?.query &&
+					search?.response?.pagination?.totalResults === 1 &&
+					!nonBackgroundFilters?.length
+				) {
+					window.location.replace(search?.response.results[0].mappings.core.url);
+					return false;
+				}
 			}
 		});
 
@@ -341,7 +341,7 @@ export class SearchController extends AbstractController {
 				this.tracker.events[this.pageType].clickThrough({ data, siteId: this.config.globals?.siteId });
 				this.events.product[result.id] = this.events.product[result.id] || {};
 				this.events.product[result.id].clickThrough = true;
-				this.eventManager.fire('track.product.clickThrough', { controller: this, event: e, products: [result], trackEvent: data });
+				this.eventManager.fire('track.product.clickThrough', { controller: this, event: e, product: result, trackEvent: data });
 			},
 			click: (e: MouseEvent, result): void => {
 				if (result.type === 'banner') {
@@ -371,7 +371,7 @@ export class SearchController extends AbstractController {
 				this.tracker.events[this.pageType].render({ data, siteId: this.config.globals?.siteId });
 				this.events.product[result.id] = this.events.product[result.id] || {};
 				this.events.product[result.id].render = true;
-				this.eventManager.fire('track.product.render', { controller: this, products: [result], trackEvent: data });
+				this.eventManager.fire('track.product.render', { controller: this, product: result, trackEvent: data });
 			},
 			impression: (result: Product): void => {
 				if (this.events.product[result.id]?.impression) {
@@ -382,7 +382,7 @@ export class SearchController extends AbstractController {
 				this.tracker.events[this.pageType].impression({ data, siteId: this.config.globals?.siteId });
 				this.events.product[result.id] = this.events.product[result.id] || {};
 				this.events.product[result.id].impression = true;
-				this.eventManager.fire('track.product.impression', { controller: this, products: [result], trackEvent: data });
+				this.eventManager.fire('track.product.impression', { controller: this, product: result, trackEvent: data });
 			},
 			addToCart: (result: Product): void => {
 				const data = getSearchAddtocartSchemaData({ params: this.params, store: this.store, results: [result] });
@@ -390,7 +390,7 @@ export class SearchController extends AbstractController {
 					data,
 					siteId: this.config.globals?.siteId,
 				});
-				this.eventManager.fire('track.product.addToCart', { controller: this, products: [result], trackEvent: data });
+				this.eventManager.fire('track.product.addToCart', { controller: this, product: result, trackEvent: data });
 			},
 		},
 		redirect: (redirectURL: string): void => {
@@ -667,7 +667,7 @@ export class SearchController extends AbstractController {
 
 	addToCart = async (product: Product): Promise<void> => {
 		this.track.product.addToCart(product);
-		this.eventManager.fire('addToCart', { controller: this, products: [product] });
+		this.eventManager.fire('addToCart', { controller: this, product });
 	};
 }
 
@@ -785,7 +785,7 @@ function getSearchSchemaData({ params, store, results }: { params: SearchRequest
 	return {
 		q: params.search?.query?.string || '',
 		correctedQuery: store.search?.originalQuery?.string ? store.search?.query?.string : undefined,
-		matchType: store.search?.matchType,
+		matchType: store.search.matchType,
 		...filters,
 		sort: params.sorts?.map((sort) => {
 			return {

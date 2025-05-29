@@ -119,9 +119,9 @@ export class AutocompleteController extends AbstractController {
 				products.forEach((result) => {
 					this.events.product[result.id] = this.events.product[result.id] || {};
 					this.events.product[result.id].render = true;
+					this.eventManager.fire('track.product.render', { controller: this, product: result, trackEvent: data });
 				});
-				this.eventManager.fire('track.product.render', { controller: this, products, trackEvent: data });
-				// reset events for new search
+				// reset events for new search. It's here for a reason. Ensures render happens before impressions on new input value?
 				this.events = { product: {} };
 			}
 		});
@@ -171,7 +171,7 @@ export class AutocompleteController extends AbstractController {
 				this.tracker.events.autocomplete.clickThrough({ data, siteId: this.config.globals?.siteId });
 				this.events.product[result.id] = this.events.product[result.id] || {};
 				this.events.product[result.id].clickThrough = true;
-				this.eventManager.fire('track.product.clickThrough', { controller: this, event: e, products: [result], trackEvent: data });
+				this.eventManager.fire('track.product.clickThrough', { controller: this, event: e, product: result, trackEvent: data });
 			},
 			click: (e: MouseEvent, result): void => {
 				if (result.type === 'banner') {
@@ -192,7 +192,7 @@ export class AutocompleteController extends AbstractController {
 				this.tracker.events.autocomplete.render({ data, siteId: this.config.globals?.siteId });
 				this.events.product[result.id] = this.events.product[result.id] || {};
 				this.events.product[result.id].render = true;
-				this.eventManager.fire('track.product.render', { controller: this, products: [result], trackEvent: data });
+				this.eventManager.fire('track.product.render', { controller: this, product: result, trackEvent: data });
 			},
 			impression: (result: Product): void => {
 				if (this.events.product[result.id]?.impression) return;
@@ -201,12 +201,12 @@ export class AutocompleteController extends AbstractController {
 				this.tracker.events.autocomplete.impression({ data, siteId: this.config.globals?.siteId });
 				this.events.product[result.id] = this.events.product[result.id] || {};
 				this.events.product[result.id].impression = true;
-				this.eventManager.fire('track.product.impression', { controller: this, products: [result], trackEvent: data });
+				this.eventManager.fire('track.product.impression', { controller: this, product: result, trackEvent: data });
 			},
 			addToCart: (result: Product): void => {
 				const data = getAutocompleteAddtocartSchemaData({ params: this.params, store: this.store, results: [result] });
 				this.tracker.events.autocomplete.addToCart({ data, siteId: this.config.globals?.siteId });
-				this.eventManager.fire('track.product.addToCart', { controller: this, products: [result], trackEvent: data });
+				this.eventManager.fire('track.product.addToCart', { controller: this, product: result, trackEvent: data });
 			},
 		},
 		redirect: (redirectURL: string): void => {
@@ -762,7 +762,7 @@ export class AutocompleteController extends AbstractController {
 
 	addToCart = async (product: Product): Promise<void> => {
 		this.track.product.addToCart(product);
-		this.eventManager.fire('addToCart', { controller: this, products: [product] });
+		this.eventManager.fire('addToCart', { controller: this, product });
 	};
 }
 
@@ -908,7 +908,7 @@ function getAutocompleteSchemaData({
 	return {
 		q: store.search?.originalQuery?.string || store.search?.query?.string || '',
 		correctedQuery: store.search?.originalQuery?.string ? store.search?.query?.string : undefined,
-		matchType: store.search?.matchType,
+		matchType: store.search.matchType,
 		...filters,
 		sort: params.sorts?.map((sort) => {
 			return {

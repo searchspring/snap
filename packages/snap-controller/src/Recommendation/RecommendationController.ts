@@ -84,8 +84,8 @@ export class RecommendationController extends AbstractController {
 				products.forEach((result) => {
 					this.events.product[result.id] = this.events.product[result.id] || {};
 					this.events.product[result.id].render = true;
+					this.eventManager.fire('track.product.render', { controller: this, product: result, trackEvent: data });
 				});
-				this.eventManager.fire('track.product.render', { controller: this, products, trackEvent: data });
 			}
 		});
 
@@ -116,8 +116,7 @@ export class RecommendationController extends AbstractController {
 				this.tracker.events.recommendations.clickThrough({ data, siteId: this.config.globals?.siteId });
 				this.events.product[result.id] = this.events.product[result.id] || {};
 				this.events.product[result.id].clickThrough = true;
-				this.eventManager.fire('track.product.clickThrough', { controller: this, event: e, products: [result], trackEvent: data });
-				// TODO: should we fire 'track.product.click()' here for backwards compatibility? Same in SearchController & update docs
+				this.eventManager.fire('track.product.clickThrough', { controller: this, event: e, product: result, trackEvent: data });
 			},
 			click: (e: MouseEvent, result): void => {
 				// TODO: closest might be going too far - write own function to only go n levels up - additionally check that href includes result.url
@@ -135,7 +134,7 @@ export class RecommendationController extends AbstractController {
 				this.tracker.events.recommendations.impression({ data, siteId: this.config.globals?.siteId });
 				this.events.product[result.id] = this.events.product[result.id] || {};
 				this.events.product[result.id].impression = true;
-				this.eventManager.fire('track.product.impression', { controller: this, products: [result], trackEvent: data });
+				this.eventManager.fire('track.product.impression', { controller: this, product: result, trackEvent: data });
 				return data;
 			},
 			render: (result: Product): RecommendationsSchemaData | undefined => {
@@ -145,13 +144,13 @@ export class RecommendationController extends AbstractController {
 				this.tracker.events.recommendations.render({ data, siteId: this.config.globals?.siteId });
 				this.events.product[result.id] = this.events.product[result.id] || {};
 				this.events.product[result.id].render = true;
-				this.eventManager.fire('track.product.render', { controller: this, products: [result], trackEvent: data });
+				this.eventManager.fire('track.product.render', { controller: this, product: result, trackEvent: data });
 				return data;
 			},
 			addToCart: (result: Product): RecommendationsAddtocartSchemaData | undefined => {
 				const data = getRecommendationsAddtocartSchemaData({ store: this.store, results: [result] });
 				this.tracker.events.recommendations.addToCart({ data, siteId: this.config.globals?.siteId });
-				this.eventManager.fire('track.product.addToCart', { controller: this, products: [result], trackEvent: data });
+				this.eventManager.fire('track.product.addToCart', { controller: this, product: result, trackEvent: data });
 				return data;
 			},
 		},

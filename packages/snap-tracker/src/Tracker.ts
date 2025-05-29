@@ -4,18 +4,12 @@ import { StorageStore } from '@searchspring/snap-store-mobx';
 import { version, DomTargeter, getContext } from '@searchspring/snap-toolbox';
 import { AppMode } from '@searchspring/snap-toolbox';
 import { Beacon } from '@searchspring/beacon';
-import type { Context, Item, OrderTransactionSchemaData, Product, BeaconConfig } from '@searchspring/beacon';
+import type { Item, OrderTransactionSchemaData, Product, BeaconConfig } from '@searchspring/beacon';
 
-import { BeaconEvent } from './BeaconEvent';
 import {
 	TrackerGlobals,
 	TrackMethods,
-	BeaconPayload,
-	BeaconType,
-	BeaconCategory,
-	BeaconContext,
 	ProductViewEvent,
-	ProductClickEvent,
 	ShopperLoginEvent,
 	TrackErrorEvent,
 	OrderTransactionData,
@@ -86,7 +80,7 @@ export class Tracker extends Beacon {
 							this.track.product.view(item, siteId);
 							break;
 						case 'searchspring/track/cart/view':
-							this.track.cart.view(true);
+							this.track.cart.view();
 							break;
 						case 'searchspring/track/order/transaction':
 							this.track.order.transaction({ order, items }, siteId);
@@ -163,15 +157,7 @@ export class Tracker extends Beacon {
 				// update recs
 				updateRecsControllers();
 			} else if (attributes[`ss-${this.config.id}-intellisuggest`] && attributes[`ss-${this.config.id}-intellisuggest-signature`]) {
-				// product click
-				const intellisuggestData = attributes[`ss-${this.config.id}-intellisuggest`];
-				const intellisuggestSignature = attributes[`ss-${this.config.id}-intellisuggest-signature`];
-				const href = attributes['href'];
-				this.track.product.click({
-					intellisuggestData,
-					intellisuggestSignature,
-					href,
-				});
+				this.track.product.click();
 			}
 		});
 
@@ -343,46 +329,19 @@ export class Tracker extends Beacon {
 			/**
 			 * @deprecated tracker.track.product.click() is deprecated and will be removed. Use tracker.events['search' | 'category'].clickThrough() instead
 			 */
-			click: (data: ProductClickEvent, siteId?: string): BeaconEvent | undefined => {
-				// Controllers will send product click events through tracker.beacon
-				// For legacy support if someone calls this, continute to 1.0 beacon just like is.js
-				// TODO: remove after 1.0 deprecation period
-
-				if (this.doNotTrack?.includes('product.click')) {
-					return;
-				}
-
-				if (!data?.intellisuggestData || !data?.intellisuggestSignature) {
-					console.error(
-						`track.product.click event: object parameter requires a valid intellisuggestData and intellisuggestSignature. \nExample: track.click.product({ intellisuggestData: "eJwrTs4tNM9jYCjKTM8oYXDWdQ3TDTfUDbIwMDVjMARCYwMQSi_KTAEA9IQKWA", intellisuggestSignature: "9e46f9fd3253c267fefc298704e39084a6f8b8e47abefdee57277996b77d8e70" })`
-					);
-					return;
-				}
-
-				const beaconContext = this.getContext();
-				const context = transformToLegacyContext(beaconContext, siteId || this.globals.siteId);
-				const event = {
-					type: BeaconType.CLICK,
-					category: BeaconCategory.INTERACTION,
-					context,
-					event: {
-						intellisuggestData: data.intellisuggestData,
-						intellisuggestSignature: data.intellisuggestSignature,
-						href: data?.href ? `${data.href}` : undefined,
-					},
-				};
-
-				const beaconEvent = new BeaconEvent(event as BeaconPayload, this.config);
-				const beaconEventData = beaconEvent.send();
-				return beaconEventData;
+			click: (): void => {
+				console.warn(
+					`tracker.track.product.click() is deprecated and is no longer functional. Use tracker.events['search' | 'category'].clickThrough() instead`
+				);
+				this.events.error.snap({ data: { message: `tracker.track.product.click was called` } });
 			},
 		},
 		cart: {
-			view: (fromAttribute?: boolean): void => {
+			view: (): void => {
 				console.warn(
 					'tracker.cart.view is deprecated and no longer functional. Use tracker.events.cart.add() and tracker.events.cart.remove() instead'
 				);
-				this.events.error.snap({ data: { message: `tracker.track.cart.view was called`, details: { fromAttribute: Boolean(fromAttribute) } } });
+				this.events.error.snap({ data: { message: `tracker.track.cart.view was called` } });
 			},
 		},
 		order: {
@@ -451,45 +410,4 @@ export class Tracker extends Beacon {
 			},
 		},
 	};
-}
-
-function transformToLegacyContext(_context: Context, siteId: string): BeaconContext {
-	const context = { ..._context };
-	if (context.userAgent) {
-		delete context.userAgent;
-	}
-	if (context.timestamp) {
-		// @ts-ignore - property not optional
-		delete context.timestamp;
-	}
-	if (context.initiator) {
-		// @ts-ignore - property not optional
-		delete context.initiator;
-	}
-	if (context.dev) {
-		delete context.dev;
-	}
-	let attribution:
-		| {
-				type?: string;
-				id?: string;
-		  }
-		| undefined;
-	if (context.attribution?.length) {
-		attribution = {
-			type: context.attribution[0].type,
-			id: context.attribution[0].id,
-		};
-		delete context.attribution;
-	}
-	const beaconContext: BeaconContext = {
-		...(context as unknown as BeaconContext),
-		website: {
-			trackingCode: siteId,
-		},
-	};
-	if (attribution) {
-		beaconContext.attribution = attribution;
-	}
-	return beaconContext;
 }
