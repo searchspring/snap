@@ -178,7 +178,13 @@ export class Tracker extends Beacon {
 			} else if (cart.length) {
 				// length check here to be able to sent error event if invalid array of objects is provided
 				const currentCart: Product[] = cart
-					.filter((item) => typeof item === 'object' && (item.uid || item.sku || item.childUid || item.childSku) && item.qty && item.price)
+					.filter(
+						(item) =>
+							typeof item === 'object' &&
+							(item.uid || item.sku || item.childUid || item.childSku) &&
+							item.qty !== undefined &&
+							item.price !== undefined
+					)
 					.map((item): Product => {
 						return {
 							uid: item.uid,
