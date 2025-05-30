@@ -40,8 +40,10 @@ export class SearchResultStore extends Array<Product | Banner> {
 		previousPaginationData?: SearchResponseModelPagination, // used for infinite scroll functionality
 		previousResults?: (Product | Banner)[] // used for infinite scroll functionality
 	) {
-		let results: (Product | Banner)[] = (resultData || []).map((result) => {
-			return new Product(services, result, metaData, config);
+		let results: (Product | Banner)[] = (resultData || []).map((result, idx) => {
+			const product = new Product(services, result, metaData, config);
+			product.position = idx + 1;
+			return product;
 		});
 
 		const variantConfig = (config as SearchStoreConfig | AutocompleteStoreConfig | RecommendationStoreConfig)?.settings?.variants;
@@ -160,6 +162,7 @@ type ProductMinimal = {
 export class Product {
 	public type = 'product';
 	public id: string;
+	public position: number = 0;
 	public attributes: Record<string, unknown> = {};
 	public mappings: SearchResponseModelResultMappings = {
 		core: {},

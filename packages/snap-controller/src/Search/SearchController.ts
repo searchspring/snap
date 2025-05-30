@@ -38,10 +38,10 @@ import type {
 	SearchRedirectSchemaData,
 	SearchSchemaData,
 } from '@searchspring/beacon';
+import { CLICK_DUPLICATION_TIMEOUT, isClickWithinProductLink } from '../utils/isClickWithinProductLink';
 
 const BACKGROUND_FILTER_FIELD_MATCHES = ['collection', 'category', 'categories', 'hierarchy'];
 const BACKGROUND_FILTERS_VALUE_FLAGS = [1, 0, '1', '0', 'true', 'false', true, false];
-const CLICK_THROUGH_CLOSEST_MAX_LEVELS = 10;
 
 const defaultConfig: SearchControllerConfig = {
 	id: 'search',
@@ -82,6 +82,7 @@ export class SearchController extends AbstractController {
 		product: Record<
 			string,
 			{
+				click?: boolean;
 				clickThrough?: boolean;
 				impression?: boolean;
 				render?: boolean;
@@ -194,7 +195,7 @@ export class SearchController extends AbstractController {
 					(result) => result.type === 'product' && !this.events.product[result.id]?.render
 				) as Product[];
 				const results = products.length === 0 ? [] : products;
-				const data = getSearchSchemaData({ params: this.params, store: this.store, results });
+				const data = getSearchSchemaData({ params: search.request, store: this.store, results });
 				this.tracker.events[this.pageType].render({ data, siteId: this.config.globals?.siteId });
 				products.forEach((result: Product) => {
 					this.events.product[result.id] = this.events.product[result.id] || {};
@@ -344,23 +345,21 @@ export class SearchController extends AbstractController {
 				this.eventManager.fire('track.product.clickThrough', { controller: this, event: e, product: result, trackEvent: data });
 			},
 			click: (e: MouseEvent, result): void => {
+				if (this.events.product[result.id]?.click) {
+					return;
+				}
+
 				if (result.type === 'banner') {
 					return;
 				}
-				let currentElement: Element | null = e.target as Element;
-				let href: string | null = null;
-				let level = 0;
-				const resultUrl = (result as Product)?.display?.mappings.core?.url || (result as Product)?.mappings.core?.url || '';
 
-				while (currentElement && level < CLICK_THROUGH_CLOSEST_MAX_LEVELS) {
-					href = currentElement.getAttribute('href');
-					if (href && resultUrl && href.includes(resultUrl)) {
-						this.track.product.clickThrough(e, result as Product);
-						return;
-					}
-					currentElement = currentElement.parentElement;
-					level++;
-				}
+				isClickWithinProductLink(e, result as Product) && this.track.product.clickThrough(e, result as Product);
+
+				this.events.product[result.id] = this.events.product[result.id] || {};
+				this.events.product[result.id].click = true;
+				setTimeout(() => {
+					this.events.product[result.id].click = false;
+				}, CLICK_DUPLICATION_TIMEOUT);
 			},
 			render: (result: Product) => {
 				if (this.events.product[result.id]?.render) {
@@ -665,9 +664,14 @@ export class SearchController extends AbstractController {
 		}
 	};
 
-	addToCart = async (product: Product): Promise<void> => {
-		this.track.product.addToCart(product);
-		this.eventManager.fire('addToCart', { controller: this, product });
+	addToCart = async (_products: Product[] | Product): Promise<void> => {
+		const products = typeof (_products as Product[]).slice == 'function' ? (_products as Product[]).slice() : [_products];
+		(products as Product[]).forEach((product) => {
+			this.track.product.addToCart(product);
+		});
+		if (products.length > 0) {
+			this.eventManager.fire('addToCart', { controller: this, products });
+		}
 	};
 }
 
@@ -814,10 +818,11 @@ function getSearchSchemaData({ params, store, results }: { params: SearchRequest
 				undefined,
 		},
 		results:
-			results?.map((result: Product, idx: number): Item => {
+			results?.map((result: Product): Item => {
 				const core = result.mappings.core!;
+				const position = result.position;
 				return {
-					position: idx + 1,
+					position,
 					uid: core.uid || '',
 					sku: core.sku,
 				};

@@ -272,7 +272,7 @@ export class Content extends Component {
 - Always invoked after `track.product.redirect()` method has been invoked
 
 ### addToCart
-- Called with `eventData` = { controller, product } 
+- Called with `eventData` = { controller, products } 
 - Always invoked after `addToCart()` method has been invoked
 
 ## Variants

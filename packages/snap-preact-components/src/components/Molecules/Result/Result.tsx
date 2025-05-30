@@ -182,7 +182,6 @@ const ResultComponent = (properties: ResultProps): JSX.Element => {
 						href={core!.url}
 						onClick={(e: React.MouseEvent<HTMLAnchorElement, Event>) => {
 							onClick && onClick(e);
-							controller?.track?.product?.click(e as any, result);
 						}}
 					>
 						{!hideImage &&
@@ -212,7 +211,6 @@ const ResultComponent = (properties: ResultProps): JSX.Element => {
 								href={core.url}
 								onClick={(e: React.MouseEvent<HTMLAnchorElement, Event>) => {
 									onClick && onClick(e);
-									controller?.track?.product?.click(e as any, result);
 								}}
 								dangerouslySetInnerHTML={{
 									__html: displayName || '',
