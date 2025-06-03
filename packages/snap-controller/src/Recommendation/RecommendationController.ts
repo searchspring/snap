@@ -18,9 +18,6 @@ type RecommendationTrackMethods = {
 		impression: (result: Product) => void;
 		addToCart: (result: Product) => void;
 	};
-	bundle: {
-		addToCart: (results: Product[]) => void;
-	};
 };
 
 const defaultConfig: RecommendationControllerConfig = {
@@ -161,15 +158,6 @@ export class RecommendationController extends AbstractController {
 				const data = getRecommendationsAddtocartSchemaData({ store: this.store, results: [result] });
 				this.tracker.events.recommendations.addToCart({ data, siteId: this.config.globals?.siteId });
 				this.eventManager.fire('track.product.addToCart', { controller: this, product: result, trackEvent: data });
-				return data;
-			},
-		},
-		bundle: {
-			addToCart: (results: Product[]): RecommendationsAddtocartSchemaData | undefined => {
-				if (this.store.profile.type != 'bundle') return;
-
-				const data = getRecommendationsAddtocartSchemaData({ store: this.store, results });
-				this.tracker.events.recommendations.addToCart({ data, siteId: this.config.globals?.siteId });
 				return data;
 			},
 		},

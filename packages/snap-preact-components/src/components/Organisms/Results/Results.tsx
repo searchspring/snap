@@ -41,6 +41,8 @@ const CSS = {
 		}),
 };
 
+const ResultComponent = withTracking<ResultProps>(Result);
+
 export const Results = observer((properties: ResultsProp): JSX.Element => {
 	const globalTheme: Theme = useTheme();
 
@@ -122,8 +124,6 @@ export const Results = observer((properties: ResultsProp): JSX.Element => {
 	} else if (style) {
 		styling.css = [style];
 	}
-
-	const ResultComponent = withTracking<ResultProps>(Result);
 
 	return results?.length ? (
 		<CacheProvider>

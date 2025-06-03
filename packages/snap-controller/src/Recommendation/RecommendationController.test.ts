@@ -408,31 +408,6 @@ describe('Recommendation Controller', () => {
 		clickfn.mockClear();
 	});
 
-	it('can invoke controller track.bundle.addToCart', async () => {
-		const controller = new RecommendationController(recommendConfig, {
-			client: new MockClient(globals, {}),
-			store: new RecommendationStore(recommendConfig, services),
-			urlManager,
-			eventManager: new EventManager(),
-			profiler: new Profiler(),
-			logger: new Logger(),
-			tracker: new Tracker(globals),
-		});
-		const trackFn = jest.spyOn(controller.tracker.events.recommendations, 'addToCart');
-
-		await controller.search();
-
-		const result = controller.store.results[0];
-
-		// modify controller profile type so that bundle methods work
-		controller.store.profile.type = 'bundle';
-
-		controller.track.bundle.addToCart([result]);
-
-		expect(trackFn).toHaveBeenCalledTimes(1);
-		trackFn.mockClear();
-	});
-
 	it('can set lastViewed param', async () => {
 		const controller = new RecommendationController(recommendConfig, {
 			client: new MockClient(globals, {}),
