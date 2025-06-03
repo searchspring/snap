@@ -15,7 +15,6 @@ import { CalloutBadge, CalloutBadgeProps } from '../../Molecules/CalloutBadge';
 import { OverlayBadge, OverlayBadgeProps } from '../../Molecules/OverlayBadge';
 import type { SearchController, AutocompleteController, RecommendationController } from '@searchspring/snap-controller';
 import type { Product } from '@searchspring/snap-store-mobx';
-import { withTracking } from '../../../providers';
 
 const CSS = {
 	result: () =>
@@ -75,7 +74,7 @@ const CSS = {
 		}),
 };
 
-const ResultComponent = (properties: ResultProps): JSX.Element => {
+export const Result = observer((properties: ResultProps): JSX.Element => {
 	const globalTheme: Theme = useTheme();
 
 	const props: ResultProps = {
@@ -238,8 +237,7 @@ const ResultComponent = (properties: ResultProps): JSX.Element => {
 	) : (
 		<Fragment></Fragment>
 	);
-};
-export const Result = withTracking<ResultProps>(observer(ResultComponent));
+});
 
 interface ResultSubProps {
 	calloutBadge: CalloutBadgeProps;

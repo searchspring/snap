@@ -13,7 +13,7 @@ import { InlineBanner, InlineBannerProps } from '../../Atoms/Merchandising/Inlin
 import { Result, ResultProps } from '../../Molecules/Result';
 import { ComponentProps, Layout, LayoutType, BreakpointsProps, StylingCSS } from '../../../types';
 import { defined } from '../../../utilities';
-import { Theme, useTheme, CacheProvider } from '../../../providers';
+import { Theme, useTheme, CacheProvider, withTracking } from '../../../providers';
 import { useDisplaySettings } from '../../../hooks/useDisplaySettings';
 
 const CSS = {
@@ -123,6 +123,8 @@ export const Results = observer((properties: ResultsProp): JSX.Element => {
 		styling.css = [style];
 	}
 
+	const ResultComponent = withTracking<ResultProps>(Result);
+
 	return results?.length ? (
 		<CacheProvider>
 			<div {...styling} className={classnames('ss__results', `ss__results-${props.layout}`, className)}>
@@ -133,7 +135,7 @@ export const Results = observer((properties: ResultsProp): JSX.Element => {
 								return <InlineBanner {...subProps.inlineBanner} key={result.id} banner={result as Banner} layout={props.layout} />;
 							default:
 								return (
-									<Result
+									<ResultComponent
 										key={(result as Product).id}
 										{...subProps.result}
 										result={result as Product}
