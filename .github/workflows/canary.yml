@@ -23,9 +23,7 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: 20
-          registry-url: 'https://npm.pkg.github.com'
-          scope: '@searchspring'
-          # registry-url: 'https://registry.npmjs.org'
+          registry-url: 'https://registry.npmjs.org'
 
       - name: Cache node modules
         uses: actions/cache@v4
@@ -45,10 +43,11 @@ jobs:
       - name: Build
         run: | 
           npm run build
-      # - name: Tests
-      #   env:
-      #     NODE_OPTIONS: "--max-old-space-size=4096"
-      #   run: npm run test
+      
+      - name: Tests
+        env:
+          NODE_OPTIONS: "--max-old-space-size=4096"
+        run: npm run test
 
       - name: Publish packages
         run: npm run publish:canary
