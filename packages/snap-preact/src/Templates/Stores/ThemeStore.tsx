@@ -254,6 +254,7 @@ export class ThemeStore {
 				};
 			}, {}),
 		};
+		console.log('overrides', overrides);
 		this.stored = mergeThemeLayers(this.stored, overrides);
 		this.dependencies.storage.set(`themes.${this.type}.${this.name}.variables`, this.stored);
 	}
