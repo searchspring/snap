@@ -14,17 +14,17 @@ import { useA11y } from '../../../hooks/useA11y';
 const defaultStyles: StyleScript<ModalProps> = ({ disableOverlay }) => {
 	return css({
 		position: 'relative',
-		'&.ss__dropdown--open': {
-			'& .ss__dropdown__content': {
+		'&.ss__modal--open': {
+			'& .ss__modal__content': {
 				position: disableOverlay ? 'relative' : undefined,
 				visibility: 'visible',
 				opacity: 1,
 			},
 		},
-		'.ss__dropdown__button': {
+		'.ss__modal__button': {
 			cursor: `${disableOverlay ? 'default' : 'pointer'}`,
 		},
-		'.ss__dropdown__content': {
+		'.ss__modal__content': {
 			backgroundColor: '#fff',
 			position: 'absolute',
 			minWidth: '100%',
