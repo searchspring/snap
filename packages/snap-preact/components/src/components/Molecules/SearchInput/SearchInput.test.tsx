@@ -9,7 +9,7 @@ describe('SearchInput Component', () => {
 	const theme = {
 		components: {
 			searchInput: {
-				placeholder: 'theme',
+				placeholderText: 'theme',
 			},
 		},
 	};
@@ -20,12 +20,20 @@ describe('SearchInput Component', () => {
 		expect(searchInput).toBeInTheDocument();
 	});
 
-	it('can update placeholder text', () => {
-		const placeholder = 'hello';
-		const rendered = render(<SearchInput placeholder={placeholder} />);
+	it('can update placeholderText text', () => {
+		const placeholderText = 'hello';
+		const rendered = render(<SearchInput placeholderText={placeholderText} />);
 		const searchInput: HTMLInputElement = rendered.container.querySelector('.ss__search-input__input')!;
 		expect(searchInput).toBeInTheDocument();
-		expect(searchInput.placeholder).toBe(placeholder);
+		expect(searchInput.placeholder).toBe(placeholderText);
+	});
+
+	it('can update name attribute text', () => {
+		const name = 'hello';
+		const rendered = render(<SearchInput inputName={name} />);
+		const searchInput: HTMLInputElement = rendered.container.querySelector('.ss__search-input__input')!;
+		expect(searchInput).toBeInTheDocument();
+		expect(searchInput.getAttribute('name')).toBe(name);
 	});
 
 	it('can invoke onChange callback', async () => {
@@ -40,12 +48,13 @@ describe('SearchInput Component', () => {
 		expect(onChangeFn).toHaveBeenCalled();
 	});
 
-	it('can hide icon using hideIcon prop', () => {
-		const rendered = render(<SearchInput hideIcon={true} />);
+	it('can change icon with icon prop', () => {
+		const rendered = render(<SearchInput icon={'cog'} />);
 		const searchInput = rendered.container.querySelector('.ss__search-input__input');
 		expect(searchInput).toBeInTheDocument();
 		const icon = rendered.container.querySelector('.ss__icon');
-		expect(icon).not.toBeInTheDocument();
+		expect(icon).toBeInTheDocument();
+		expect(icon?.classList).toContain('ss__icon--cog');
 	});
 
 	it('can disable styling', () => {
@@ -73,7 +82,7 @@ describe('SearchInput Component', () => {
 		const searchInput: HTMLInputElement = rendered.container.querySelector('.ss__search-input__input')!;
 		expect(searchInput).toBeInTheDocument();
 
-		expect(searchInput?.placeholder).toBe(theme.components.searchInput.placeholder);
+		expect(searchInput?.placeholder).toBe(theme.components.searchInput.placeholderText);
 	});
 
 	it('is themeable with theme prop', () => {
@@ -81,14 +90,14 @@ describe('SearchInput Component', () => {
 		const searchInput: HTMLInputElement = rendered.container.querySelector('.ss__search-input__input')!;
 		expect(searchInput).toBeInTheDocument();
 
-		expect(searchInput.placeholder).toBe(theme.components.searchInput.placeholder);
+		expect(searchInput.placeholder).toBe(theme.components.searchInput.placeholderText);
 	});
 
 	it('is themeable with theme prop overrides ThemeProvider', () => {
 		const componentTheme = {
 			components: {
 				searchInput: {
-					placeholder: 'theme 2',
+					placeholderText: 'theme 2',
 				},
 			},
 		};
@@ -100,6 +109,6 @@ describe('SearchInput Component', () => {
 		const searchInput: HTMLInputElement | null = rendered.container.querySelector('.ss__search-input__input');
 		expect(searchInput).toBeInTheDocument();
 
-		expect(searchInput?.placeholder).toBe(componentTheme.components.searchInput.placeholder);
+		expect(searchInput?.placeholder).toBe(componentTheme.components.searchInput.placeholderText);
 	});
 });

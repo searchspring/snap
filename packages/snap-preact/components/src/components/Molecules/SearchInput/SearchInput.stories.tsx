@@ -5,6 +5,7 @@ import { ArgsTable, PRIMARY_STORY, Markdown } from '@storybook/blocks';
 import { SearchInput, SearchInputProps } from './SearchInput';
 import { componentArgs, highlightedCode } from '../../../utilities';
 import Readme from './readme.md';
+import { iconPaths } from '../../Atoms/Icon';
 
 export default {
 	title: 'Molecules/SearchInput',
@@ -42,7 +43,7 @@ export default {
 	],
 	argTypes: {
 		onChange: {
-			description: 'Onchange Callback',
+			description: 'OnChange Callback',
 			table: {
 				type: {
 					summary: 'function',
@@ -51,17 +52,51 @@ export default {
 			control: { type: 'none' },
 			action: 'onChange',
 		},
-		hideIcon: {
-			description: 'Hides icon',
+		onKeyUp: {
+			description: 'OnKeyUp Callback',
 			table: {
 				type: {
-					summary: 'boolean',
+					summary: 'function',
 				},
-				defaultValue: { summary: false },
 			},
-			control: { type: 'boolean' },
+			control: { type: 'none' },
+			action: 'onChange',
 		},
-		placeholder: {
+		onKeyDown: {
+			description: 'OnKeyDown Callback',
+			table: {
+				type: {
+					summary: 'function',
+				},
+			},
+			control: { type: 'none' },
+			action: 'onChange',
+		},
+		onClick: {
+			description: 'OnClick Callback',
+			table: {
+				type: {
+					summary: 'function',
+				},
+			},
+			control: { type: 'none' },
+			action: 'onChange',
+		},
+		icon: {
+			defaultValue: 'search',
+			description: 'Icon name',
+			table: {
+				type: {
+					summary: 'string',
+				},
+				defaultValue: { summary: 'search' },
+			},
+			options: [...Object.keys(iconPaths)],
+			control: {
+				type: 'select',
+			},
+		},
+		placeholderText: {
 			defaultValue: 'Search',
 			description: 'Display placeholder text',
 			table: {
@@ -71,6 +106,25 @@ export default {
 				defaultValue: { summary: 'Search' },
 			},
 			control: { type: 'text' },
+		},
+		inputName: {
+			description: 'sets the name attribute for the input',
+			table: {
+				type: {
+					summary: 'string',
+				},
+			},
+			control: { type: 'text' },
+		},
+		disabled: {
+			description: 'boolean to set disabled attribute',
+			table: {
+				type: {
+					summary: 'boolean',
+				},
+				defaultValue: { summary: 'false' },
+			},
+			control: { type: 'boolean' },
 		},
 		...componentArgs,
 	},

@@ -1,4 +1,4 @@
-import { AutocompleteTemplateProps } from '../../components/Templates/AutocompleteTemplate';
+import { AutocompleteTemplateProps } from '../../components/Organisms/AutocompleteTemplate';
 import { ThemeComponent } from '../../providers';
 
 export const autocompleteThemeComponentProps: ThemeComponent<'autocompleteTemplate', AutocompleteTemplateProps> = {

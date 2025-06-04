@@ -116,6 +116,25 @@ export default {
 			},
 			control: { type: 'boolean' },
 		},
+		rerender: {
+			description: 'determine if the content should be re-rendered when the slideout is closed and re-opened',
+			table: {
+				type: {
+					summary: 'boolean',
+				},
+				defaultValue: { summary: false },
+			},
+			control: { type: 'boolean' },
+		},
+		buttonSelector: {
+			description: 'external Slideout button selector',
+			table: {
+				type: {
+					summary: 'string, jsx',
+				},
+			},
+			control: { type: 'text' },
+		},
 		...componentArgs,
 	},
 };

@@ -1,1 +1,1 @@
-export { AutocompleteTemplate } from '../../../../../components/src/components/Templates/AutocompleteTemplate';
+export { AutocompleteTemplate } from '../../../../../components/src/components/Organisms/AutocompleteTemplate';

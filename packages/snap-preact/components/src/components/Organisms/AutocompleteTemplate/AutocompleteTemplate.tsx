@@ -1,5 +1,5 @@
 import { h, Fragment, FunctionalComponent } from 'preact';
-import { useEffect } from 'preact/hooks';
+import { useEffect, useState } from 'preact/hooks';
 
 import { observer } from 'mobx-react-lite';
 import { css } from '@emotion/react';
@@ -9,9 +9,9 @@ import deepmerge from 'deepmerge';
 import type { AutocompleteController, RecommendationController, RecommendationControllerConfig } from '@searchspring/snap-controller';
 import { ContentType } from '@searchspring/snap-store-mobx';
 import { Icon, IconProps } from '../../Atoms/Icon/Icon';
-import { Results, ResultsProps } from '../../Organisms/Results';
+import { Results, ResultsProps } from '../Results';
 import { Banner, BannerProps } from '../../Atoms/Merchandising/Banner';
-import { Facets, FacetsProps } from '../../Organisms/Facets';
+import { Facets, FacetsProps } from '../Facets';
 import { defined, mergeProps, mergeStyles } from '../../../utilities';
 import { createHoverProps } from '../../../toolbox';
 import { Theme, useTheme, CacheProvider } from '../../../providers';
@@ -24,10 +24,9 @@ import {
 	StyleScript,
 } from '../../../types';
 import { Lang, useA11y, useLang } from '../../../hooks';
-import { TermsList, TermsListProps } from '../../Organisms/TermsList';
+import { TermsList, TermsListProps } from '../TermsList';
 import { Terms, TermsProps } from '../../Molecules/Terms';
-import { useState } from 'react';
-import { FacetsHorizontal } from '../../Organisms/FacetsHorizontal';
+import { FacetsHorizontal } from '../FacetsHorizontal';
 import { Button, ButtonProps } from '../../Atoms/Button';
 import { useCleanUpEmptyDivs } from '../../../hooks/useCleanUpEmptyDivs';
 import { createRecommendationTemplate } from '../../../hooks/createRecommendationTemplate';
@@ -93,7 +92,6 @@ const defaultStyles: StyleScript<AutocompleteTemplateProps> = ({
 		zIndex: '10002',
 		border: '1px solid #ebebeb',
 		background: '#ffffff',
-		// width: width,
 		maxWidth: width,
 		maxHeight: viewportMaxHeight && inputViewportOffsetBottom ? `calc(100vh - ${inputViewportOffsetBottom + 10}px)` : undefined,
 

@@ -2,15 +2,15 @@ import { h } from 'preact';
 
 import { ArgsTable, PRIMARY_STORY, Markdown } from '@storybook/blocks';
 
-import { AutocompleteTemplate, AutocompleteTemplateProps } from './AutocompleteTemplate';
+import { AutocompleteSlideout, AutocompleteSlideoutProps } from './AutocompleteSlideout';
 import { componentArgs, highlightedCode } from '../../../utilities';
 import { Snapify } from '../../../utilities/snapify';
 import Readme from './readme.md';
 import type { AutocompleteController } from '@searchspring/snap-controller';
 
 export default {
-	title: 'Templates/AutocompleteTemplate',
-	component: AutocompleteTemplate,
+	title: 'Templates/AutocompleteSlideout',
+	component: AutocompleteSlideout,
 	tags: ['autodocs'],
 	parameters: {
 		docs: {
@@ -55,6 +55,48 @@ export default {
 		),
 	],
 	argTypes: {
+		overlayColor: {
+			defaultValue: 'rgba(0,0,0,0.0)',
+			description: 'Slideout overlay color',
+			table: {
+				type: {
+					summary: 'string',
+				},
+				defaultValue: { summary: 'rgba(0,0,0,0.0)' },
+			},
+			control: { type: 'color' },
+		},
+		slideDirection: {
+			defaultValue: 'left',
+			description: 'Slideout slide direction',
+			table: {
+				type: {
+					summary: 'string',
+				},
+				defaultValue: { summary: 'left' },
+			},
+			control: { type: 'text' },
+		},
+		buttonSelector: {
+			description: 'Slideout button selector. (defaults to input)',
+			table: {
+				type: {
+					summary: 'string, jsx',
+				},
+			},
+			control: { type: 'text' },
+		},
+		renderInput: {
+			defaultValue: true,
+			description: 'render a second input inside autocomplete window that gets auto focused on open.',
+			table: {
+				type: {
+					summary: 'boolean',
+				},
+				defaultValue: { summary: true },
+			},
+			control: { type: 'boolean' },
+		},
 		controller: {
 			description: 'Autocomplete controller reference',
 			type: { required: true },
@@ -80,22 +122,22 @@ export default {
 			table: {
 				type: {
 					summary:
-						"['c1' | 'c2' | 'c3' | 'c4' | 'termsList' | 'terms.history' | 'terms.trending'| 'terms.suggestions'| 'facets' | 'facetsHorizontal' | 'button.see-more' | 'content' | '_' | 'banner.left' | 'banner.banner' | 'banner.footer' | 'banner.header']",
+						"['C1' | 'C2' | 'C3' | 'C4' | 'Terms' | 'HistoryTerms' | 'TrendingTerms'| 'SuggestedTerms'| 'Facets' | 'FacetsHorizontal' | 'SeeMore' | 'Content' | '_' | 'Banner.left' | 'Banner.banner' | 'Banner.footer' | 'Banner.header']",
 				},
-				defaultValue: { summary: "[['c1','c2', 'c3']]" },
+				defaultValue: { summary: "[['button.see-more'],['termsList'], ['content']]" },
 			},
 			control: 'array',
 		},
 		column1: {
-			description: 'object containing width - the specified width of the column and layout - array of modules to render in the "c1" layout',
+			description: 'object containing width - the specified width of the column and layout - array of modules to render in the "C1" layout',
 			table: {
 				type: {
 					summary:
-						"{width: '150px', layout: ['termsList' | 'terms.history' | 'terms.trending'| 'terms.suggestions'| 'facets' | 'facetsHorizontal' | 'button.see-more' | 'content' | '_' | 'banner.left' | 'banner.banner' | 'banner.footer' | 'banner.header']}",
+						"{width: '150px', layout: ['Terms' | 'HistoryTerms' | 'TrendingTerms'| 'SuggestedTerms'| 'Facets' | 'FacetsHorizontal' | 'SeeMore' | 'Content' | '_' | 'Banner.left' | 'Banner.banner' | 'Banner.footer' | 'Banner.header']}",
 				},
 				defaultValue: {
 					summary: `{
-					layout: ['termsList'],
+					layout: ['Terms'],
 					width: '150px'
 				}`,
 				},
@@ -103,15 +145,15 @@ export default {
 			control: 'array',
 		},
 		column2: {
-			description: 'object containing width - the specified width of the column and layout - array of modules to render in the "c2" layout',
+			description: 'object containing width - the specified width of the column and layout - array of modules to render in the "C2" layout',
 			table: {
 				type: {
 					summary:
-						"{width: '150px', layout: ['termsList' | 'terms.history' | 'terms.trending'| 'terms.suggestions'| 'facets' | 'facetsHorizontal' | 'button.see-more' | 'content' | '_' | 'banner.left' | 'banner.banner' | 'banner.footer' | 'banner.header']}",
+						"{width: '150px', layout: ['Terms' | 'HistoryTerms' | 'TrendingTerms'| 'SuggestedTerms'| 'Facets' | 'FacetsHorizontal' | 'SeeMore' | 'Content' | '_' | 'Banner.left' | 'Banner.banner' | 'Banner.footer' | 'Banner.header']}",
 				},
 				defaultValue: {
 					summary: `{
-					layout: ['facets'],
+					layout: ['Facets'],
 					width: '150px'
 				}`,
 				},
@@ -119,15 +161,15 @@ export default {
 			control: 'array',
 		},
 		column3: {
-			description: 'object containing width - the specified width of the column and layout - array of modules to render in the "c3" layout',
+			description: 'object containing width - the specified width of the column and layout - array of modules to render in the "C3" layout',
 			table: {
 				type: {
 					summary:
-						"{width: '150px', layout: ['termsList' | 'terms.history' | 'terms.trending'| 'terms.suggestions'| 'facets' | 'facetsHorizontal' | 'button.see-more' | 'content' | '_' | 'banner.left' | 'banner.banner' | 'banner.footer' | 'banner.header']}",
+						"{width: '150px', layout: ['Terms' | 'HistoryTerms' | 'TrendingTerms'| 'SuggestedTerms'| 'Facets' | 'FacetsHorizontal' | 'SeeMore' | 'Content' | '_' | 'Banner.left' | 'Banner.banner' | 'Banner.footer' | 'Banner.header']}",
 				},
 				defaultValue: {
 					summary: `{
-					layout: [['content'], ['_', 'button.see-more']],
+					layout: [['Content'], ['_', 'SeeMore']],
 					width: 'auto'
 				}`,
 				},
@@ -135,23 +177,23 @@ export default {
 			control: 'array',
 		},
 		column4: {
-			description: 'object containing width - the specified width of the column and layout - array of modules to render in the "c4" layout',
+			description: 'object containing width - the specified width of the column and layout - array of modules to render in the "C4" layout',
 			table: {
 				type: {
 					summary:
-						"{width: '150px', layout: ['termsList' | 'terms.history' | 'terms.trending'| 'terms.suggestions'| 'facets' | 'facetsHorizontal' | 'button.see-more' | 'content' | '_' | 'banner.left' | 'banner.banner' | 'banner.footer' | 'banner.header']}",
+						"{width: '150px', layout: ['Terms' | 'HistoryTerms' | 'TrendingTerms'| 'SuggestedTerms'| 'Facets' | 'FacetsHorizontal' | 'SeeMore' | 'Content' | '_' | 'Banner.left' | 'Banner.banner' | 'Banner.footer' | 'Banner.header']}",
 				},
 			},
 			control: 'array',
 		},
 		width: {
-			defaultValue: '100%',
+			defaultValue: '500px',
 			description: 'Change width of the component',
 			table: {
 				type: {
 					summary: 'string',
 				},
-				defaultValue: { summary: '100%' },
+				defaultValue: { summary: '500px' },
 			},
 			control: { type: 'text' },
 		},
@@ -205,7 +247,7 @@ export default {
 };
 
 const snapInstance = Snapify.autocomplete({
-	id: 'Autocomplete',
+	id: 'AutocompleteSlideout',
 	selector: '#searchInput',
 	globals: {
 		siteId: '8uyt2m',
@@ -217,12 +259,12 @@ const snapInstance = Snapify.autocomplete({
 	},
 });
 
-export const Default = (args: AutocompleteTemplateProps, { loaded: { controller } }: { loaded: { controller: AutocompleteController } }) => {
+export const Default = (args: AutocompleteSlideoutProps, { loaded: { controller } }: { loaded: { controller: AutocompleteController } }) => {
 	// bind after input exists
 	setTimeout(() => {
 		controller.bind();
 	});
-	return <AutocompleteTemplate {...args} controller={controller} input={controller?.config.selector} />;
+	return <AutocompleteSlideout {...args} controller={controller} input={controller?.config.selector} />;
 };
 
 Default.loaders = [
@@ -231,12 +273,12 @@ Default.loaders = [
 	}),
 ];
 
-export const Slim = (args: AutocompleteTemplateProps, { loaded: { controller } }: { loaded: { controller: AutocompleteController } }) => {
+export const Slim = (args: AutocompleteSlideoutProps, { loaded: { controller } }: { loaded: { controller: AutocompleteController } }) => {
 	// bind after input exists
 	setTimeout(() => {
 		controller.bind();
 	});
-	return <AutocompleteTemplate {...args} controller={controller} input={controller?.config.selector} />;
+	return <AutocompleteSlideout {...args} controller={controller} input={controller?.config.selector} />;
 };
 
 Slim.loaders = [
@@ -246,7 +288,7 @@ Slim.loaders = [
 ];
 
 Slim.args = {
-	layout: [['termsList'], ['content'], ['_', 'button.see-more', '_']],
+	layout: [['TermsList'], ['Content'], ['_', 'Button.see-more', '_']],
 	width: '400px',
 	theme: {
 		components: {

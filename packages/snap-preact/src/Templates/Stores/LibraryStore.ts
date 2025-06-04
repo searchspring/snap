@@ -62,7 +62,11 @@ export type LibraryImports = {
 			SearchHorizontal: (args?: any) => Promise<FunctionalComponent<RenderableProps<any>>>;
 		};
 		autocomplete: {
+			AutocompleteFixed: (args?: any) => Promise<FunctionalComponent<RenderableProps<any>>>;
+			//todo: delete me later
 			AutocompleteTemplate: (args?: any) => Promise<FunctionalComponent<RenderableProps<any>>>;
+			AutocompleteModal: (args?: any) => Promise<FunctionalComponent<RenderableProps<any>>>;
+			AutocompleteSlideout: (args?: any) => Promise<FunctionalComponent<RenderableProps<any>>>;
 		};
 		recommendation: {
 			bundle: {
@@ -180,10 +184,29 @@ export class LibraryStore {
 		},
 		component: {
 			autocomplete: {
+				//todo : delete me later
 				AutocompleteTemplate: async () => {
 					return (
 						this.components.autocomplete.AutocompleteTemplate ||
 						(this.components.autocomplete.AutocompleteTemplate = (await import('./library/components/AutocompleteTemplate')).AutocompleteTemplate)
+					);
+				},
+				AutocompleteFixed: async () => {
+					return (
+						this.components.autocomplete.AutocompleteFixed ||
+						(this.components.autocomplete.AutocompleteFixed = (await import('./library/components/AutocompleteFixed')).AutocompleteFixed)
+					);
+				},
+				AutocompleteSlideout: async () => {
+					return (
+						this.components.autocomplete.AutocompleteSlideout ||
+						(this.components.autocomplete.AutocompleteSlideout = (await import('./library/components/AutocompleteSlideout')).AutocompleteSlideout)
+					);
+				},
+				AutocompleteModal: async () => {
+					return (
+						this.components.autocomplete.AutocompleteModal ||
+						(this.components.autocomplete.AutocompleteModal = (await import('./library/components/AutocompleteModal')).AutocompleteModal)
 					);
 				},
 			},

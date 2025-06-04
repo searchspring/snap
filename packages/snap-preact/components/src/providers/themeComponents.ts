@@ -72,10 +72,13 @@ import type { RecommendationGridProps } from '../components/Templates/Recommenda
 import type { RecommendationEmailProps } from '../components/Templates/RecommendationEmail';
 import type { SearchProps } from '../components/Templates/Search';
 import type { SearchHorizontalProps } from '../components/Templates/SearchHorizontal';
-import type { AutocompleteTemplateProps } from '../components/Templates/AutocompleteTemplate';
+import type { AutocompleteTemplateProps } from '../components/Organisms/AutocompleteTemplate';
+import type { AutocompleteSlideoutProps } from '../components/Templates/AutocompleteSlideout';
 import type { SearchBocaProps } from '../components/Templates/SearchBoca';
 import type { SearchSnappyProps } from '../components/Templates/SearchSnappy';
 import { SearchSnapncoProps } from '../components/Templates/SearchSnapnco';
+import { AutocompleteModalProps } from '../components/Templates/AutocompleteModal';
+import { AutocompleteFixedProps } from '../components/Templates/AutocompleteFixed';
 
 export type ThemeComponentProps<ComponentProps> = {
 	default: Partial<ComponentProps>;
@@ -207,6 +210,10 @@ export type ThemeComponents =
 	} & { [K in ThemeComponentOverridesNamedSelectors<'toolbar', ToolbarNames>]?: Partial<ToolbarProps> } & {
 		[K in ThemeComponentOverridesUnNamedSelectors<'termsList'>]?: Partial<TermsListProps>;
 	} /* TEMPLATES */ & { [K in ThemeComponentOverridesUnNamedSelectors<'autocompleteTemplate'>]?: Partial<AutocompleteTemplateProps> } & {
+		[K in ThemeComponentOverridesUnNamedSelectors<'autocompleteSlideout'>]?: Partial<AutocompleteSlideoutProps>;
+	} & { [K in ThemeComponentOverridesUnNamedSelectors<'autocompleteModal'>]?: Partial<AutocompleteModalProps> } & {
+		[K in ThemeComponentOverridesUnNamedSelectors<'autocompleteFixed'>]?: Partial<AutocompleteFixedProps>;
+	} & {
 		[K in ThemeComponentOverridesNamedSelectors<'recommendation', string>]?: Partial<RecommendationProps>;
 	} & { [K in ThemeComponentOverridesNamedSelectors<'recommendationBundle', string>]?: Partial<RecommendationBundleProps> } & {
 		[K in ThemeComponentOverridesNamedSelectors<'recommendationBundleEasyAdd', string>]?: Partial<RecommendationBundleEasyAddProps>;
@@ -290,6 +297,9 @@ export type ThemeComponentsRestricted =
 
 	/* TEMPLATES */
 	{ [K in ThemeComponentOverridesUnNamedSelectors<'autocompleteTemplate'>]?: ThemeComponentRestrictedProps<AutocompleteTemplateProps> } &
+	{ [K in ThemeComponentOverridesUnNamedSelectors<'autocompleteFixed'>]?: ThemeComponentRestrictedProps<AutocompleteFixedProps> } &
+	{ [K in ThemeComponentOverridesUnNamedSelectors<'autocompleteModal'>]?: ThemeComponentRestrictedProps<AutocompleteModalProps> } &
+	{ [K in ThemeComponentOverridesUnNamedSelectors<'autocompleteSlideout'>]?: ThemeComponentRestrictedProps<AutocompleteSlideoutProps> } &
 	{ [K in ThemeComponentOverridesNamedSelectors<'recommendation', string>]?: ThemeComponentRestrictedProps<RecommendationProps> } &
 	{ [K in ThemeComponentOverridesNamedSelectors<'recommendationBundle', string>]?: ThemeComponentRestrictedProps<RecommendationBundleProps> } &
 	{ [K in ThemeComponentOverridesNamedSelectors<'recommendationBundleEasyAdd', string>]?: ThemeComponentRestrictedProps<RecommendationBundleEasyAddProps> } &
@@ -372,6 +382,9 @@ export type ThemeComponentsRestrictedOverrides =
 
 	/* TEMPLATES */
 	{ [K in ThemeComponentOverridesUnNamedSelectors<'autocompleteTemplate'>]?: ThemeComponentOverridesRestrictedProps<AutocompleteTemplateProps> } &
+	{ [K in ThemeComponentOverridesUnNamedSelectors<'autocompleteFixed'>]?: ThemeComponentOverridesRestrictedProps<AutocompleteFixedProps> } &
+	{ [K in ThemeComponentOverridesUnNamedSelectors<'autocompleteModal'>]?: ThemeComponentOverridesRestrictedProps<AutocompleteModalProps> } &
+	{ [K in ThemeComponentOverridesUnNamedSelectors<'autocompleteSlideout'>]?: ThemeComponentOverridesRestrictedProps<AutocompleteSlideoutProps> } &
 	{ [K in ThemeComponentOverridesNamedSelectors<'recommendation', string>]?: ThemeComponentOverridesRestrictedProps<RecommendationProps> } &
 	{ [K in ThemeComponentOverridesNamedSelectors<'recommendationBundle', string>]?: ThemeComponentOverridesRestrictedProps<RecommendationBundleProps> } &
 	{ [K in ThemeComponentOverridesNamedSelectors<'recommendationBundleEasyAdd', string>]?: ThemeComponentOverridesRestrictedProps<RecommendationBundleEasyAddProps> } &
@@ -458,6 +471,9 @@ export type ThemeComponentTemplateOverrides<Template extends string, Props> =
 
 	/* TEMPLATES */
 	{ [K in ThemeComponentUnNamedSelectorsStartingWithTemplate<Template,'autocompleteTemplate'>]?: ThemeComponentRestrictedProps<AutocompleteTemplateProps> } &
+	{ [K in ThemeComponentUnNamedSelectorsStartingWithTemplate<Template,'autocompleteFixed'>]?: ThemeComponentRestrictedProps<AutocompleteFixedProps> } &
+	{ [K in ThemeComponentUnNamedSelectorsStartingWithTemplate<Template,'autocompleteModal'>]?: ThemeComponentRestrictedProps<AutocompleteModalProps> } &
+	{ [K in ThemeComponentUnNamedSelectorsStartingWithTemplate<Template,'autocompleteSlideout'>]?: ThemeComponentRestrictedProps<AutocompleteSlideoutProps> } &
 	{ [K in ThemeComponentNamedSelectorsStartingWithTemplate<Template, 'recommendation', string>]?: ThemeComponentRestrictedProps<RecommendationProps> } &
 	{ [K in ThemeComponentNamedSelectorsStartingWithTemplate<Template, 'recommendationBundle', string>]?: ThemeComponentRestrictedProps<RecommendationBundleProps> } &
 	{ [K in ThemeComponentNamedSelectorsStartingWithTemplate<Template, 'recommendationBundleEasyAdd', string>]?: ThemeComponentRestrictedProps<RecommendationBundleEasyAddProps> } &
@@ -469,4 +485,4 @@ export type ThemeComponentTemplateOverrides<Template extends string, Props> =
 	{ [K in ThemeComponentUnNamedSelectorsStartingWithTemplate<Template,'searchSnappy'>]?: ThemeComponentRestrictedProps<SearchSnappyProps> } &
 	{ [K in ThemeComponentUnNamedSelectorsStartingWithTemplate<Template,'searchBoca'>]?: ThemeComponentRestrictedProps<SearchBocaProps> } &
 	{ [K in ThemeComponentUnNamedSelectorsStartingWithTemplate<Template,'searchSnapnco'>]?: ThemeComponentRestrictedProps<SearchSnapncoProps> } &
-	{ [K in ThemeComponentUnNamedSelectorsStartingWithTemplate<Template,'searchHorizontal'>]?: Partial<SearchHorizontalProps> };
+	{ [K in ThemeComponentUnNamedSelectorsStartingWithTemplate<Template,'searchHorizontal'>]?: ThemeComponentRestrictedProps<SearchHorizontalProps> };

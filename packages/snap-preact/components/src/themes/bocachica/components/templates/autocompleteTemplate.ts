@@ -1,5 +1,5 @@
 import { css } from '@emotion/react';
-import type { AutocompleteTemplateProps } from '../../../../components/Templates/AutocompleteTemplate';
+import type { AutocompleteTemplateProps } from '../../../../components/Organisms/AutocompleteTemplate';
 import { autocompleteThemeComponentProps } from '../../../themeComponents/autocompleteTemplate';
 import { ThemeComponent } from '../../../../providers';
 

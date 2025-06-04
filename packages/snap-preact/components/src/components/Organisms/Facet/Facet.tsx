@@ -375,7 +375,12 @@ const FacetContent = (props: any) => {
 	return (
 		<Fragment>
 			{searchable && searchableFacet.allowableTypes.includes(facet.display) && (
-				<SearchInput {...subProps.searchInput} onChange={searchableFacet.searchFilter} placeholder={`Search ${facet.label}`} treePath={treePath} />
+				<SearchInput
+					{...subProps.searchInput}
+					onChange={searchableFacet.searchFilter}
+					placeholderText={`Search ${facet.label}`}
+					treePath={treePath}
+				/>
 			)}
 			<div className={classnames('ss__facet__options', className)}>
 				{(() => {

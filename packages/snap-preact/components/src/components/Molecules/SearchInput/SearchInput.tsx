@@ -8,6 +8,9 @@ import { Icon, IconProps } from '../../Atoms/Icon/Icon';
 import { defined, mergeProps, mergeStyles } from '../../../utilities';
 import { Theme, useTheme, CacheProvider, useTreePath } from '../../../providers';
 import { ComponentProps, StyleScript } from '../../../types';
+import { IconType } from '../../Atoms/Icon';
+import { Lang } from '../../../hooks';
+import { MutableRef } from 'preact/hooks';
 
 const defaultStyles: StyleScript<SearchInputProps> = ({ theme }) => {
 	return css({
@@ -33,14 +36,14 @@ export const SearchInput = observer((properties: SearchInputProps): JSX.Element 
 	const globalTheme: Theme = useTheme();
 	const globalTreePath = useTreePath();
 	const defaultProps: Partial<SearchInputProps> = {
-		placeholder: 'Search',
-		hideIcon: false,
+		placeholderText: 'Search',
+		icon: 'search',
 		treePath: globalTreePath,
 	};
 
 	const props = mergeProps('searchInput', globalTheme, defaultProps, properties);
 
-	const { placeholder, onChange, hideIcon, disableStyles, className, treePath } = props;
+	const { placeholderText, inputRef, inputName, onChange, onClick, onKeyDown, onKeyUp, icon, disabled, disableStyles, className, treePath } = props;
 
 	const subProps: SearchInputSubProps = {
 		icon: {
@@ -60,27 +63,47 @@ export const SearchInput = observer((properties: SearchInputProps): JSX.Element 
 
 	return (
 		<CacheProvider>
-			<div {...styling} className={classnames('ss__search-input', className)}>
-				{!hideIcon && <Icon {...subProps.icon} icon="search" />}
+			<div
+				{...styling}
+				className={classnames('ss__search-input', { 'ss__input--disabled': disabled }, className)}
+				onClick={(e: React.MouseEvent<HTMLElement, MouseEvent>) => !disabled && onClick && onClick(e)}
+			>
 				<input
 					type="text"
 					className="ss__search-input__input"
-					onChange={(e) => {
-						onChange && onChange(e);
-					}}
-					placeholder={placeholder}
+					placeholder={placeholderText}
+					name={inputName}
+					ref={inputRef}
+					onKeyDown={(e: React.KeyboardEvent<HTMLInputElement>) => onKeyDown && onKeyDown(e)}
+					onKeyUp={(e: React.KeyboardEvent<HTMLInputElement>) => onKeyUp && onKeyUp(e)}
+					onChange={(e: React.ChangeEvent<HTMLInputElement>) => onChange && onChange(e)}
+					disabled={disabled}
 				/>
+
+				{icon && <Icon {...subProps.icon} {...(typeof icon == 'string' ? { icon: icon } : (icon as Partial<IconProps>))} />}
 			</div>
 		</CacheProvider>
 	);
 });
 
 export interface SearchInputProps extends ComponentProps {
+	icon?: IconType | Partial<IconProps>;
+	placeholderText?: string;
+	inputName?: string;
+	inputRef?: MutableRef<HTMLInputElement | null>;
+	disabled?: boolean;
 	onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
-	placeholder?: string;
-	hideIcon?: boolean;
+	onKeyUp?: (e: React.KeyboardEvent<HTMLInputElement>) => void;
+	onKeyDown?: (e: React.KeyboardEvent<HTMLInputElement>) => void;
+	onClick?: (e: React.MouseEvent<HTMLElement, MouseEvent>) => void;
+	disableA11y?: boolean;
+	lang?: Partial<SearchInputLang>;
 }
 
 interface SearchInputSubProps {
 	icon: Partial<IconProps>;
+}
+
+export interface SearchInputLang {
+	placeholderText?: Lang<never>;
 }

@@ -11,7 +11,7 @@ import { ComponentProps, StyleScript } from '../../../types';
 import { useMediaQuery } from '../../../hooks';
 import { Overlay, OverlayProps } from '../../Atoms/Overlay';
 
-const defaultStyles: StyleScript<SlideoutProps> = ({ slideDirection, transitionSpeed, width }) => {
+const defaultStyles: StyleScript<SlideoutProps & { isVisible: boolean }> = ({ slideDirection, transitionSpeed, width, rerender, isVisible }) => {
 	return css({
 		display: 'block',
 		position: 'fixed',
@@ -28,6 +28,7 @@ const defaultStyles: StyleScript<SlideoutProps> = ({ slideDirection, transitionS
 		background: '#fff',
 		boxSizing: 'border-box',
 		overflowY: 'auto',
+		visibility: !rerender ? (isVisible ? 'visible' : 'hidden') : 'visible',
 
 		'&.ss__slideout--active': {
 			left: slideDirection == 'left' ? '0' : slideDirection != 'right' ? '0' : 'initial',
@@ -50,11 +51,25 @@ export const Slideout = observer((properties: SlideoutProps): JSX.Element => {
 		overlayColor: 'rgba(0,0,0,0.8)',
 		transitionSpeed: '0.25s',
 		treePath: globalTreePath,
+		rerender: true,
 	};
 
 	const props = mergeProps('slideout', globalTheme, defaultProps, properties);
 
-	const { children, active, buttonContent, noButtonWrapper, displayAt, transitionSpeed, overlayColor, disableStyles, className, treePath } = props;
+	const {
+		children,
+		active,
+		rerender,
+		buttonContent,
+		buttonSelector,
+		noButtonWrapper,
+		displayAt,
+		transitionSpeed,
+		overlayColor,
+		disableStyles,
+		className,
+		treePath,
+	} = props;
 
 	const subProps: SlideoutSubProps = {
 		overlay: {
@@ -77,14 +92,16 @@ export const Slideout = observer((properties: SlideoutProps): JSX.Element => {
 	const [renderContent, setRenderContent] = useState(Boolean(active));
 	const toggleActive = () => {
 		if (isActive) {
-			setTimeout(() => {
-				setRenderContent(!renderContent);
-			}, 250);
+			setActive(false);
+			if (rerender) {
+				setTimeout(() => {
+					setRenderContent(false);
+				}, 250);
+			}
 		} else {
-			setRenderContent(!isActive);
+			setActive(true);
+			setRenderContent(true);
 		}
-
-		setActive(!isActive);
 
 		document.body.style.overflow = isActive ? 'hidden' : '';
 	};
@@ -95,9 +112,21 @@ export const Slideout = observer((properties: SlideoutProps): JSX.Element => {
 
 	document.body.style.overflow = isVisible && isActive ? 'hidden' : '';
 
-	const styling = mergeStyles<SlideoutProps>(props, defaultStyles);
+	const styling = mergeStyles<SlideoutProps & { isVisible: boolean }>({ ...props, isVisible: isVisible }, defaultStyles);
 
-	return isVisible ? (
+	if (buttonSelector) {
+		let button;
+		if (typeof buttonSelector == 'string') {
+			button = document.querySelector(buttonSelector);
+		} else {
+			button = buttonSelector;
+		}
+		if (button) {
+			button.addEventListener('click', () => toggleActive());
+		}
+	}
+
+	return isVisible || !rerender ? (
 		<CacheProvider>
 			{buttonContent &&
 				(noButtonWrapper ? (
@@ -119,7 +148,7 @@ export const Slideout = observer((properties: SlideoutProps): JSX.Element => {
 });
 
 export interface SlideoutProps extends ComponentProps {
-	buttonContent: string | JSX.Element;
+	buttonContent?: string | JSX.Element;
 	children?: ComponentChildren;
 	active?: boolean;
 	noButtonWrapper?: boolean;
@@ -128,6 +157,8 @@ export interface SlideoutProps extends ComponentProps {
 	transitionSpeed?: string;
 	overlayColor?: string;
 	slideDirection?: SlideDirectionType;
+	rerender?: boolean;
+	buttonSelector?: string | Element;
 }
 
 export type SlideDirectionType = 'top' | 'right' | 'bottom' | 'left';

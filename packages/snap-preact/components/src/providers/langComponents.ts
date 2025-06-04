@@ -62,7 +62,7 @@ import type { SidebarLang } from '../components/Organisms/Sidebar';
 /* TEMPLATES */
 import type { RecommendationLang } from '../components/Templates/Recommendation';
 import type { SearchLang } from '../components/Templates/Search';
-import { AutocompleteTemplateLang } from '../components/Templates/AutocompleteTemplate';
+import { AutocompleteTemplateLang } from '../components/Organisms/AutocompleteTemplate';
 import { TermsLang } from '../components/Molecules/Terms';
 import { DeepPartial } from '../../../src/types';
 

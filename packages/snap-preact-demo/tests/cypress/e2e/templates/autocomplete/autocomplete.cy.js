@@ -72,7 +72,7 @@ describe('Autocomplete', () => {
 						targets: [
 							{
 								selector: 'input.searchspring-ac',
-								component: 'AutocompleteTemplate',
+								component: 'AutocompleteFixed',
 							},
 						],
 						settings: {
@@ -91,7 +91,7 @@ describe('Autocomplete', () => {
 					cy.get(config.selectors.website.openInputButton).first().click({ force: true });
 				}
 
-				cy.get(config.selectors.website.input).first().should('exist').focus();
+				cy.get(config.selectors.website.input).first().should('exist').click().focus();
 
 				// TODO: remove - but is currently needed for cases where we are getting no trending terms back from the API
 				if (store.trending.length) {
@@ -138,7 +138,7 @@ describe('Autocomplete', () => {
 		it('can hover over term', function () {
 			cy.snapController('autocomplete').then(({ store }) => {
 				if (store.terms.length <= 1) {
-					cy.get(config.selectors.website.input).first().should('exist').focus().type(config.query, { force: true });
+					cy.get(config.selectors.website.input).first().should('exist').click().focus().type(config.query, { force: true });
 					cy.wait('@autocomplete').should('exist');
 				}
 
@@ -227,7 +227,7 @@ describe('Autocomplete', () => {
 			// set flag on window to ensure page doesn't reload
 			cy.window().then((win) => (win.ssFirstLoad = true));
 
-			cy.get(config.selectors.website.input).first().should('exist').should('have.value', config.query).focus({ force: true });
+			cy.get(config.selectors.website.input).first().should('exist').should('have.value', config.query).click().focus({ force: true });
 			cy.wait('@autocomplete').should('exist');
 
 			// autocomplete should be open
