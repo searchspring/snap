@@ -14,8 +14,8 @@ const config = {
 	disableGA: '', // disable google analytic events (example: 'UA-123456-1')
 	selectors: {
 		website: {
-			openInputButton: '', // selector for a button to click in order to make the input visible
-			input: '.searchspring-ac', // selector of <input> elements (config.controllers[].autocomplete[].config.selector)
+			openInputButton: '.searchspring-ac', // selector for a button to click in order to make the input visible
+			input: '.autocomplete-fixed__search-input input', // selector of <input> elements (config.controllers[].autocomplete[].config.selector)
 		},
 		autocomplete: {
 			main: '.ss__autocomplete',
@@ -226,6 +226,10 @@ describe('Autocomplete', () => {
 
 			// set flag on window to ensure page doesn't reload
 			cy.window().then((win) => (win.ssFirstLoad = true));
+
+			if (config.selectors.website.openInputButton) {
+				cy.get(config.selectors.website.openInputButton).first().click({ force: true });
+			}
 
 			cy.get(config.selectors.website.input).first().should('exist').should('have.value', config.query).click().focus({ force: true });
 			cy.wait('@autocomplete').should('exist');
