@@ -34,7 +34,8 @@ export function useAcRenderedInput({
 
 				setTimeout(() => {
 					if (!renderedInputInitialized) {
-						(controller.config.selector = '.ss__search-input__input'), setInput(renderedInputRef!.current);
+						controller.config.selector = '.ss__search-input__input';
+						setInput(renderedInputRef!.current);
 						controller.bind();
 						renderedInputRef?.current?.focus();
 						// if we want to reset the search input on open, uncomment the line below

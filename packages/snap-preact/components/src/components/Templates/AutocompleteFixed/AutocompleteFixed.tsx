@@ -57,18 +57,22 @@ export const AutocompleteFixed = observer((properties: AutocompleteFixedProps): 
 
 	let input: string | Element | null | undefined = props.input;
 	let buttonSelector = props.buttonSelector;
+
+	let inputName = 'query';
 	if (input) {
 		if (typeof input === 'string') {
 			input = document.querySelector(input);
+		}
+		const existingInputName = (input as HTMLInputElement)?.getAttribute('name');
+		if (existingInputName) {
+			inputName = existingInputName;
+			(input as HTMLInputElement).setAttribute('name', '');
 		}
 	}
 
 	if (!buttonSelector && input) {
 		buttonSelector = input;
 	}
-
-	const inputName = (input as HTMLInputElement).getAttribute('name') || 'query';
-	(input as HTMLInputElement).setAttribute('name', '');
 
 	const { layout, disableStyles, controller, renderInput, overlayColor, className, offset, treePath } = props;
 
@@ -126,13 +130,23 @@ export const AutocompleteFixed = observer((properties: AutocompleteFixedProps): 
 	};
 
 	const getInputBounds = (inputElem: Element): inputBounds => {
-		const elem = inputElem.getBoundingClientRect();
-		return {
-			top: elem.top + window.scrollY + (offset?.top || 0),
-			left: elem.left + window.scrollX + (offset?.left || 0),
-			width: elem.width,
-			height: elem.height,
-		};
+		if (inputElem) {
+			const elem = inputElem.getBoundingClientRect();
+			return {
+				top: elem.top + window.scrollY + (offset?.top || 0),
+				left: elem.left + window.scrollX + (offset?.left || 0),
+				width: elem.width,
+				height: elem.height,
+			};
+		} else {
+			//fallback if input element is not found
+			return {
+				top: 0,
+				left: 0,
+				width: 0,
+				height: 0,
+			};
+		}
 	};
 
 	const [inputBounds, setInputBounds] = useState<inputBounds>(getInputBounds(input as Element));
@@ -149,14 +163,17 @@ export const AutocompleteFixed = observer((properties: AutocompleteFixedProps): 
 		controller.setFocused();
 	};
 
-	const _input = useAcRenderedInput({
-		input,
-		controller,
-		renderedInputRef,
-		renderInput: Boolean(renderInput),
-		buttonSelector,
-		setActive: setActive,
-	});
+	let _input;
+	if (input) {
+		_input = useAcRenderedInput({
+			input,
+			controller,
+			renderedInputRef,
+			renderInput: Boolean(renderInput),
+			buttonSelector,
+			setActive: setActive,
+		});
+	}
 
 	return layout?.length && active ? (
 		<CacheProvider>

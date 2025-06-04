@@ -7,6 +7,7 @@ import { componentArgs, highlightedCode } from '../../../utilities';
 import { Snapify } from '../../../utilities/snapify';
 import Readme from './readme.md';
 import type { AutocompleteController } from '@searchspring/snap-controller';
+import { useEffect, useState } from 'preact/hooks';
 
 export default {
 	title: 'Templates/AutocompleteModal',
@@ -253,7 +254,15 @@ export const Default = (args: AutocompleteModalProps, { loaded: { controller } }
 	setTimeout(() => {
 		controller.bind();
 	});
-	return <AutocompleteModal {...args} controller={controller} input={controller?.config.selector} />;
+	const [inputFound, setInputFound] = useState(false);
+
+	useEffect(() => {
+		if (document.querySelector('#searchInput')) {
+			setInputFound(true);
+		}
+	}, []);
+
+	return inputFound ? <AutocompleteModal {...args} controller={controller} input={controller?.config.selector} /> : <></>;
 };
 
 Default.loaders = [
@@ -261,30 +270,3 @@ Default.loaders = [
 		controller: await snapInstance,
 	}),
 ];
-
-export const Slim = (args: AutocompleteModalProps, { loaded: { controller } }: { loaded: { controller: AutocompleteController } }) => {
-	// bind after input exists
-	setTimeout(() => {
-		controller.bind();
-	});
-	return <AutocompleteModal {...args} controller={controller} input={controller?.config.selector} />;
-};
-
-Slim.loaders = [
-	async () => ({
-		controller: await snapInstance,
-	}),
-];
-
-Slim.args = {
-	layout: [['TermsList'], ['Content'], ['_', 'Button.see-more', '_']],
-	width: '400px',
-	theme: {
-		components: {
-			results: {
-				columns: 2,
-				rows: 1,
-			},
-		},
-	},
-};

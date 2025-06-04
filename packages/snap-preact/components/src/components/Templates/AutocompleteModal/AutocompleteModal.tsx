@@ -67,18 +67,22 @@ export const AutocompleteModal = observer((properties: AutocompleteModalProps): 
 
 	let input: string | Element | null | undefined = props.input;
 	let buttonSelector = props.buttonSelector;
+
+	let inputName = 'query';
 	if (input) {
 		if (typeof input === 'string') {
 			input = document.querySelector(input);
+		}
+		const existingInputName = (input as HTMLInputElement)?.getAttribute('name');
+		if (existingInputName) {
+			inputName = existingInputName;
+			(input as HTMLInputElement).setAttribute('name', '');
 		}
 	}
 
 	if (!buttonSelector && input) {
 		buttonSelector = input;
 	}
-
-	const inputName = (input as HTMLInputElement).getAttribute('name') || 'query';
-	(input as HTMLInputElement).setAttribute('name', '');
 
 	const { layout, disableStyles, controller, renderInput, overlayColor, className, treePath } = props;
 
@@ -141,14 +145,17 @@ export const AutocompleteModal = observer((properties: AutocompleteModalProps): 
 		controller.setFocused();
 	};
 
-	const _input = useAcRenderedInput({
-		input,
-		controller,
-		renderedInputRef,
-		renderInput: Boolean(renderInput),
-		buttonSelector,
-		setActive: setActive,
-	});
+	let _input;
+	if (input) {
+		_input = useAcRenderedInput({
+			input,
+			controller,
+			renderedInputRef,
+			renderInput: Boolean(renderInput),
+			buttonSelector,
+			setActive: setActive,
+		});
+	}
 
 	return layout?.length && active ? (
 		<CacheProvider>

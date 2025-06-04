@@ -41,18 +41,21 @@ export const AutocompleteSlideout = observer((properties: AutocompleteSlideoutPr
 
 	let input: string | Element | null | undefined = props.input;
 	let buttonSelector = props.buttonSelector;
+	let inputName = 'query';
 	if (input) {
 		if (typeof input === 'string') {
 			input = document.querySelector(input);
+		}
+		const existingInputName = (input as HTMLInputElement)?.getAttribute('name');
+		if (existingInputName) {
+			inputName = existingInputName;
+			(input as HTMLInputElement).setAttribute('name', '');
 		}
 	}
 
 	if (!buttonSelector && input) {
 		buttonSelector = input;
 	}
-
-	const inputName = (input as HTMLInputElement).getAttribute('name') || 'query';
-	(input as HTMLInputElement).setAttribute('name', '');
 
 	const { layout, disableStyles, slideDirection, controller, overlayColor, renderInput, className, treePath, width } = props;
 
@@ -101,13 +104,16 @@ export const AutocompleteSlideout = observer((properties: AutocompleteSlideoutPr
 
 	const styling = mergeStyles<AutocompleteSlideoutProps>(props, defaultStyles);
 
-	const _input = useAcRenderedInput({
-		input,
-		controller,
-		renderedInputRef,
-		renderInput: Boolean(renderInput),
-		buttonSelector,
-	});
+	let _input;
+	if (input) {
+		_input = useAcRenderedInput({
+			input,
+			controller,
+			renderedInputRef,
+			renderInput: Boolean(renderInput),
+			buttonSelector,
+		});
+	}
 
 	/***************************************/
 	return layout?.length ? (
