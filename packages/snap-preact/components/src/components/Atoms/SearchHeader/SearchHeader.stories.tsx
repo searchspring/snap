@@ -94,7 +94,7 @@ export default {
 				},
 				defaultValue: {
 					summary:
-						'Showing <span class="ss-results-count-range">1-30 of</span> <span class="ss-results-count-total">8,474</span> results <span>for <span class="ss-results-query">"*"</span></span>',
+						'Showing <span class="ss-results-count-range">1-30 of</span> <span class="ss-results-count-total">8,474</span> results <span>for "<span class="ss-results-query">*</span>"</span>',
 				},
 			},
 			control: { type: 'text' },
@@ -114,7 +114,7 @@ export default {
 				type: {
 					summary: 'string',
 				},
-				defaultValue: { summary: '<div class="ss-oq">No results found for <em>"*"</em>, showing results for <em>"hat"</em> instead.</div>' },
+				defaultValue: { summary: '<div class="ss-oq">No results found for "<em>*</em>", showing results for "<em>hat</em>" instead.</div>' },
 			},
 			control: { type: 'text' },
 		},
