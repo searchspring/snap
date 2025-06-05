@@ -15,6 +15,7 @@ import {
 	ThemeOverrides,
 	ThemeVariableBreakpoints,
 	ThemeComponents,
+	responsiveKeys,
 } from '../../../components/src';
 import { CacheProvider } from '../../../components/src/providers/cache';
 import { sortSelectors, filterSelectors } from '../../../components/src/utilities/mergeProps';
@@ -265,15 +266,17 @@ export function mergeThemeLayers(...layers: ThemePartial[]): ThemePartial {
 
 export function getOverridesAtWidth(width: number | undefined, breakpoints: ThemeVariableBreakpoints | undefined, theme: ThemePartial): ThemePartial {
 	let overrides: ThemePartial = {};
+	let breakpoint: responsiveKeys;
+
 	if (width && Number.isInteger(width) && theme.responsive && breakpoints) {
-		const breakpoint = Object.keys(breakpoints).find((breakpoint) => width! <= breakpoints[breakpoint as keyof typeof breakpoints]);
+		breakpoint = Object.keys(breakpoints).find((breakpoint) => width! <= breakpoints[breakpoint as keyof typeof breakpoints]) as responsiveKeys;
 
 		if (breakpoint) {
 			overrides = (theme.responsive && (theme.responsive as any)[breakpoint]) || {};
 		}
 	}
 
-	return { components: overrides };
+	return { components: overrides, activeBreakpoint: breakpoint || 'default' };
 }
 
 const arrayMerge = (target: any, source: any, options: any) => {

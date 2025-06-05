@@ -39,6 +39,9 @@ export type ThemeVariables = {
 export type ThemeVariablesPartial = {
 	breakpoints?: ThemeVariableBreakpoints;
 	colors?: ThemeVaraibleColors;
+	custom?: {
+		[key: string]: any;
+	};
 };
 
 export type ThemeLayoutOption = Omit<ListOption, 'overrides'> & { overrides?: ThemeMinimal };
@@ -74,7 +77,9 @@ export type ThemeResponsiveOverrides = {
 	desktop?: ThemeComponentsRestrictedOverrides;
 };
 
-export type ThemePartial = Omit<Theme, 'variables' | 'name'> & { variables?: ThemeVariablesPartial };
+export type responsiveKeys = 'default' | 'desktop' | 'tablet' | 'mobile' | undefined;
+
+export type ThemePartial = Omit<Theme, 'variables' | 'name'> & { variables?: ThemeVariablesPartial; activeBreakpoint?: responsiveKeys };
 export type ThemeOverrides = { components?: ThemeComponentsRestrictedOverrides; responsive?: ThemeResponsiveOverrides };
 
 export type ConfigThemeOverrides = {
