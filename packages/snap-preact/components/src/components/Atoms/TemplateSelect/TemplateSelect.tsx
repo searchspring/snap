@@ -30,9 +30,10 @@ export const TemplateSelect = observer((properties: TemplateSelectProps): JSX.El
 	const theme = themeStore?.theme;
 
 	if (!loading && !theme) {
-		const error = `Theme "${targeter.theme.name}" not found in library for target "${targetId}"`;
-		controller.log.error(error);
-		throw error;
+		// TODO: when using the template editor, the preload is not complete yet so this throws and breaks functionality.
+		// const error = `Theme "${targeter.theme.name}" not found in library for target "${targetId}"`;
+		// controller.log.error(error);
+		// throw error;
 	}
 
 	let componentProp = {};
@@ -42,6 +43,7 @@ export const TemplateSelect = observer((properties: TemplateSelectProps): JSX.El
 		};
 	}
 
+	console.log('rendering template select', !loading && theme && Component);
 	// ensuring that theme and component are ready to render
 	return !loading && theme && Component ? (
 		<SnapProvider snap={snap}>

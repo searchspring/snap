@@ -77,10 +77,13 @@ export class ThemeStore {
 	languageOverrides: ThemeMinimal;
 	stored: ThemePartial;
 	innerWidth?: number;
+	editMode: boolean;
+	count: number;
 
 	constructor(params: ThemeStoreConfig) {
 		const { config, dependencies, settings } = params;
 		this.dependencies = dependencies;
+		this.editMode = settings.editMode;
 
 		const { name, style, type, base, overrides, variables, currency, language, languageOverrides, innerWidth } = config;
 
@@ -109,6 +112,7 @@ export class ThemeStore {
 		this.languageOverrides = languageOverrides;
 		this.stored = (settings.editMode && this.dependencies.storage.get(`themes.${this.type}.${this.name}.variables`)) || {};
 		this.innerWidth = innerWidth;
+		this.count = 0;
 
 		makeObservable(this, {
 			name: observable,
@@ -118,6 +122,7 @@ export class ThemeStore {
 			stored: observable,
 			innerWidth: observable,
 			theme: computed, // make theme getter a computed property (memoized)
+			count: observable,
 		});
 
 		// handle adding the style to the document (should only happen once per theme)
@@ -209,9 +214,21 @@ export class ThemeStore {
 			theme = mergeThemeLayers(theme, this.stored) as Theme;
 		}
 
+		// TemplateEditor variable overrides
+		if (this.editMode) {
+			const variableOverrides: ThemePartial = this.dependencies.storage.get(`variableOverrides`) || {};
+			theme = mergeThemeLayers(theme, variableOverrides) as Theme;
+		}
+
+		theme.count = this.count;
+
 		// change the theme name to match the ThemeStore theme name
 		theme.name = this.name;
 		return theme;
+	}
+
+	public forceUpdate() {
+		this.count++;
 	}
 
 	public setInnerWidth(innerWidth: number) {
@@ -241,7 +258,7 @@ export class ThemeStore {
 	// TODO: any reason the rootEditingKey cannot be in the path?
 	// maybe interface could be: setOverride(path, value);
 	public setOverride(obj: { path: string[]; rootEditingKey: string; value: unknown }) {
-		const { path, rootEditingKey, value } = obj;
+		const { path, rootEditingKey, value } = JSON.parse(JSON.stringify(obj));
 		const overrides: ThemeOverrides = {
 			[rootEditingKey]: path.reverse().reduce((res, key) => {
 				if (path.indexOf(key) === 0) {
@@ -254,7 +271,6 @@ export class ThemeStore {
 				};
 			}, {}),
 		};
-		console.log('overrides', overrides);
 		this.stored = mergeThemeLayers(this.stored, overrides);
 		this.dependencies.storage.set(`themes.${this.type}.${this.name}.variables`, this.stored);
 	}

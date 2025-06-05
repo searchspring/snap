@@ -163,7 +163,10 @@ export const TemplatesEditor = observer((properties: TemplatesEditorProps): JSX.
 	];
 
 	const rootTarget = targets[0];
-	const themeRef = templatesStore.themes[rootTarget.template.theme.location][rootTarget.template.theme.name];
+
+	const themeLocation = rootTarget.template.theme.location;
+	const themeName = rootTarget.template.theme.name;
+	const themeRef = templatesStore.themes[themeLocation][themeName];
 	const theme = themeRef.theme;
 
 	const [collapsed, setCollapsed] = useState(false);
@@ -172,8 +175,8 @@ export const TemplatesEditor = observer((properties: TemplatesEditorProps): JSX.
 		css: [CSS.TemplatesEditor({ ...properties })],
 	};
 
-	const setOverride = debounce((obj: { themeName: string; path: string[]; rootEditingKey: string; value: string }) => {
-		themeRef.setOverride(obj);
+	const setVariable = debounce((obj: { themeName: string; path: string[]; rootEditingKey: string; value: unknown }) => {
+		editorStore.setVariable(obj, themeRef);
 	}, 50);
 
 	return (
@@ -385,16 +388,12 @@ export const TemplatesEditor = observer((properties: TemplatesEditorProps): JSX.
 								>
 									<optgroup label="library">
 										{Object.keys(templatesStore.themes.library).map((libraryTheme) => (
-											<option>{libraryTheme}</option>
+											<option selected={themeLocation === 'library' && themeName === libraryTheme}>{libraryTheme}</option>
 										))}
 									</optgroup>
 									<optgroup label="local">
 										{Object.keys(templatesStore.themes.local).map((localTheme) => (
-											<option
-											// selected={templatesStore.targets.search['search'].theme.location === 'local' && templatesStore.targets.search['search'].theme.name === localTheme}
-											>
-												{localTheme}
-											</option>
+											<option selected={themeLocation === 'local' && themeName === localTheme}>{localTheme}</option>
 										))}
 									</optgroup>
 								</select>
@@ -441,7 +440,9 @@ export const TemplatesEditor = observer((properties: TemplatesEditorProps): JSX.
 								property={theme?.variables}
 								rootEditingKey={'variables'}
 								themeName={rootTarget.template.theme.name}
-								setOverride={setOverride}
+								setVariable={setVariable}
+								editorStore={editorStore}
+								themeRef={themeRef}
 							/>
 						</div>
 					) : (
@@ -465,8 +466,10 @@ const ThemeEditor = (props: any): any => {
 	const pathPrefix: any = props.pathPrefix || [];
 	const path = [...pathPrefix, props?.propertyName].filter((a) => a);
 	const themeName = props.themeName;
-	const setOverride = props.setOverride;
+	const setVariable = props.setVariable;
 	const rootEditingKey = props.rootEditingKey;
+	const editorStore = props.editorStore;
+	const themeRef = props.themeRef;
 
 	if (!props?.property || Array.isArray(props.property) || typeof props.property === 'boolean') {
 		// ignore arrays, numbers, and booleans
@@ -482,29 +485,59 @@ const ThemeEditor = (props: any): any => {
 					property={property}
 					rootEditingKey={rootEditingKey}
 					themeName={themeName}
-					setOverride={setOverride}
+					setVariable={setVariable}
 					propertyName={Object.getOwnPropertyNames(props.property)[index]}
 					pathPrefix={[...pathPrefix, props.propertyName]}
+					editorStore={editorStore}
+					themeRef={themeRef}
 				/>
 			);
 		});
 	} else if (typeof props.property === 'string') {
 		const value = props.property.toString();
 		const key = path.join('.');
+
+		function shouldShowResetButton(path: string[], val: unknown) {
+			try {
+				let obj = editorStore.variableOverrides[rootEditingKey];
+				if (!obj) {
+					// no overrides at this moment
+					return false;
+				}
+
+				path.forEach((p) => {
+					obj = obj[p];
+				});
+				return obj === val;
+			} catch (e) {
+				console.log('error', e);
+				return false;
+			}
+		}
+
 		if (path.includes('colors')) {
 			return (
 				<div className={classnames('color-picker')}>
 					<label htmlFor={key}>{key}:</label>
+					{shouldShowResetButton(path, value) && (
+						<button
+							onClick={() => {
+								editorStore.resetVariable({ path, rootEditingKey }, themeRef);
+							}}
+						>
+							reset
+						</button>
+					)}
 					<input
 						type="color"
 						value={value}
 						id={key}
 						name={key}
 						onChange={(e) => {
-							setOverride({
+							setVariable({
 								themeName,
-								path,
 								rootEditingKey,
+								path,
 								value: e.target.value,
 							});
 						}}
@@ -526,10 +559,10 @@ const ThemeEditor = (props: any): any => {
 						id={key}
 						name={key}
 						onChange={(e) => {
-							setOverride({
+							setVariable({
 								themeName,
-								path,
 								rootEditingKey,
+								path,
 								value: Number(e.target.value),
 							});
 						}}
