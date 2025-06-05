@@ -40,10 +40,8 @@ export class SearchResultStore extends Array<Product | Banner> {
 		previousPaginationData?: SearchResponseModelPagination, // used for infinite scroll functionality
 		previousResults?: (Product | Banner)[] // used for infinite scroll functionality
 	) {
-		let results: (Product | Banner)[] = (resultData || []).map((result, idx) => {
-			const product = new Product(services, result, metaData, config);
-			product.position = idx + 1;
-			return product;
+		let results: (Product | Banner)[] = (resultData || []).map((result) => {
+			return new Product(services, result, metaData, config);
 		});
 
 		const variantConfig = (config as SearchStoreConfig | AutocompleteStoreConfig | RecommendationStoreConfig)?.settings?.variants;
@@ -179,6 +177,7 @@ export class Product {
 		this.id = result.id!;
 		this.attributes = result.attributes!;
 		this.mappings = result.mappings!;
+		this.position = result.position!;
 
 		this.badges = new Badges(result, metaData);
 
