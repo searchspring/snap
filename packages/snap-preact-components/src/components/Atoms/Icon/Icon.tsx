@@ -33,7 +33,7 @@ export function Icon(properties: IconProps): JSX.Element {
 		...properties,
 		...properties.theme?.components?.icon,
 	};
-	const { color, icon, path, children, size, width, height, viewBox, disableStyles, className, style, ...otherProps } = props;
+	const { color, icon, path, children, size, width, title, height, viewBox, disableStyles, className, style, ...otherProps } = props;
 
 	const iconPath = iconPaths[icon as keyof typeof iconPaths] || path;
 	const pathType = typeof iconPath;
@@ -55,6 +55,7 @@ export function Icon(properties: IconProps): JSX.Element {
 				height={disableStyles ? height || size : undefined}
 				{...otherProps}
 			>
+				{title ? <title>{title}</title> : null}
 				{(() => {
 					if (children) {
 						return children;
@@ -83,6 +84,7 @@ export interface IconProps extends ComponentProps {
 	icon?: IconType | string;
 	path?: string | SVGPathElement[];
 	children?: ComponentChildren;
+	title?: string;
 	size?: string | number;
 	width?: string | number;
 	height?: string | number;
