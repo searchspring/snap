@@ -53,6 +53,9 @@ const defaultStyles: StyleScript<FacetProps> = ({ disableCollapse, color, theme 
 		'& .ss__search-input': {
 			margin: '16px 0 0 0',
 		},
+		'& .ss__facet__header__selected-count': {
+			margin: '0px 5px',
+		},
 	});
 };
 
@@ -101,6 +104,9 @@ export const Facet = observer((properties: FacetProps): JSX.Element => {
 		color,
 		previewOnFocus,
 		valueProps,
+		showSelectedCount,
+		clearAllIcon,
+		clearAllText,
 		justContent,
 		horizontal,
 		disableStyles,
@@ -302,6 +308,8 @@ export const Facet = observer((properties: FacetProps): JSX.Element => {
 		return <FacetContent {...facetContentProps}></FacetContent>;
 	}
 
+	const selectedCount = (facet as ValueFacet)?.values?.filter((value) => value?.filtered).length;
+
 	return facet && renderFacet ? (
 		<CacheProvider>
 			<div
@@ -328,7 +336,27 @@ export const Facet = observer((properties: FacetProps): JSX.Element => {
 							aria-level={3}
 							{...mergedLang.dropdownButton.attributes}
 						>
-							<span {...mergedLang.dropdownButton.value}>{facet?.label}</span>
+							<div>
+								<span {...mergedLang.dropdownButton.value}>{facet?.label}</span>
+								<div>
+									{facet?.label}
+									{showSelectedCount && selectedCount ? <span className="ss__facet__header__selected-count">({selectedCount})</span> : null}
+									{(clearAllText || clearAllIcon) && selectedCount ? (
+										<div className="ss__facet__header__clear-all" onClick={facet.clear.url.link.onClick}>
+											{clearAllText ? <label>{clearAllText}</label> : null}
+											{clearAllIcon ? (
+												<Icon
+													{...subProps.icon}
+													{...(typeof clearAllIcon == 'string' ? { icon: clearAllIcon } : (clearAllIcon as Partial<IconProps>))}
+													name={'clear-all'}
+												/>
+											) : null}
+										</div>
+									) : (
+										<></>
+									)}
+								</div>
+							</div>
 							{!disableCollapse && (
 								<Icon
 									{...subProps.icon}
@@ -487,6 +515,9 @@ interface OptionalFacetProps extends ComponentProps {
 	disableOverflow?: boolean;
 	previewOnFocus?: boolean;
 	valueProps?: any;
+	showSelectedCount?: boolean;
+	clearAllText?: string;
+	clearAllIcon?: IconType | Partial<IconProps>;
 	hideShowMoreLessText?: boolean;
 	showMoreText?: string;
 	showLessText?: string;
