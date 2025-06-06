@@ -86,7 +86,7 @@ export const useIntersectionAdvanced = (ref: MutableRef<HTMLElement | null>, opt
 				observer.unobserve(ref.current);
 			}
 		};
-	}, [ref.current, ...(options?.additionalEffectKeys || [])]);
+	}, [ref, ...(options?.additionalEffectKeys || [])]);
 
 	return isIntersecting;
 };
