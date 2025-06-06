@@ -2,6 +2,7 @@ import { h, ComponentType, FunctionComponent } from 'preact';
 import type { Product } from '@searchspring/snap-store-mobx';
 import type { SearchController, AutocompleteController, RecommendationController } from '@searchspring/snap-controller';
 import { createImpressionObserver } from '../utilities';
+import { useCallback } from 'preact/hooks';
 
 interface WithTrackingProps {
 	controller?: SearchController | AutocompleteController | RecommendationController;
@@ -21,7 +22,11 @@ export function withTracking<Props extends WithTrackingProps>(WrappedComponent: 
 			console.warn('Warning: No result provided to withTracking');
 		}
 
-		const { ref, inViewport } = createImpressionObserver();
+		const additionalEffectKeys: unknown[] = [];
+		if (controller?.type === 'autocomplete') {
+			additionalEffectKeys.push((controller as AutocompleteController).store.state.input);
+		}
+		const { ref, inViewport } = createImpressionObserver({ additionalEffectKeys });
 
 		if (inViewport) {
 			// TODO: add support for disabling tracking events via config like in ResultTracker
@@ -34,9 +39,9 @@ export function withTracking<Props extends WithTrackingProps>(WrappedComponent: 
 
 		const currentRef = ref.current;
 		if (currentRef) {
-			const handleClick = (e: MouseEvent) => {
+			const handleClick = useCallback((e: MouseEvent) => {
 				controller?.track.product.click(e, result as Product);
-			};
+			}, []);
 			currentRef.setAttribute('sstracking', 'true');
 			currentRef.removeEventListener('click', handleClick);
 			currentRef.addEventListener('click', handleClick);

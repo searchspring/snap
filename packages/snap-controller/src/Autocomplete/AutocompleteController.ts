@@ -19,6 +19,7 @@ import type {
 	AutocompleteAddtocartSchemaDataBgfilterInner,
 	AutocompleteAddtocartSchemaDataSortInnerDirEnum,
 } from '@searchspring/beacon';
+import { CLICK_DUPLICATION_TIMEOUT, isClickWithinProductLink } from '../utils/isClickWithinProductLink';
 
 const INPUT_ATTRIBUTE = 'ss-autocomplete-input';
 export const INPUT_DELAY = 200;
@@ -73,6 +74,7 @@ export class AutocompleteController extends AbstractController {
 		product: Record<
 			string,
 			{
+				click?: boolean;
 				clickThrough?: boolean;
 				impression?: boolean;
 				render?: boolean;
@@ -114,14 +116,14 @@ export class AutocompleteController extends AbstractController {
 			if (controller.store.loaded && !controller.store.error) {
 				const products = controller.store.results.filter((result) => result.type === 'product') as Product[];
 				const results = products.length === 0 ? [] : products;
-				const data = getAutocompleteSchemaData({ params: this.params, store: this.store, results });
+				const data = getAutocompleteSchemaData({ params: search.request, store: this.store, results });
 				this.tracker.events.autocomplete.render({ data, siteId: this.config.globals?.siteId });
 				products.forEach((result) => {
 					this.events.product[result.id] = this.events.product[result.id] || {};
 					this.events.product[result.id].render = true;
+					this.eventManager.fire('track.product.render', { controller: this, product: result, trackEvent: data });
 				});
-				this.eventManager.fire('track.product.render', { controller: this, products, trackEvent: data });
-				// reset events for new search
+				// reset events for new search. It's here for a reason. Ensures render happens before impressions on new input value?
 				this.events = { product: {} };
 			}
 		});
@@ -171,19 +173,24 @@ export class AutocompleteController extends AbstractController {
 				this.tracker.events.autocomplete.clickThrough({ data, siteId: this.config.globals?.siteId });
 				this.events.product[result.id] = this.events.product[result.id] || {};
 				this.events.product[result.id].clickThrough = true;
-				this.eventManager.fire('track.product.clickThrough', { controller: this, event: e, products: [result], trackEvent: data });
+				this.eventManager.fire('track.product.clickThrough', { controller: this, event: e, product: result, trackEvent: data });
 			},
 			click: (e: MouseEvent, result): void => {
+				if (this.events.product[result.id]?.click) {
+					return;
+				}
+
 				if (result.type === 'banner') {
 					return;
 				}
-				// TODO: closest might be going too far - write own function to only go n levels up - additionally check that href includes result.url
-				const href = (e.target as Element)?.getAttribute('href') || (e.target as Element)?.closest('a')?.getAttribute('href');
-				if (href) {
-					this.track.product.clickThrough(e, result as Product);
-				} else {
-					// TODO: in future, send as an interaction event
-				}
+
+				isClickWithinProductLink(e, result as Product) && this.track.product.clickThrough(e, result as Product);
+
+				this.events.product[result.id] = this.events.product[result.id] || {};
+				this.events.product[result.id].click = true;
+				setTimeout(() => {
+					this.events.product[result.id].click = false;
+				}, CLICK_DUPLICATION_TIMEOUT);
 			},
 			render: (result: Product) => {
 				if (this.events.product[result.id]?.render) return;
@@ -192,7 +199,7 @@ export class AutocompleteController extends AbstractController {
 				this.tracker.events.autocomplete.render({ data, siteId: this.config.globals?.siteId });
 				this.events.product[result.id] = this.events.product[result.id] || {};
 				this.events.product[result.id].render = true;
-				this.eventManager.fire('track.product.render', { controller: this, products: [result], trackEvent: data });
+				this.eventManager.fire('track.product.render', { controller: this, product: result, trackEvent: data });
 			},
 			impression: (result: Product): void => {
 				if (this.events.product[result.id]?.impression) return;
@@ -201,18 +208,18 @@ export class AutocompleteController extends AbstractController {
 				this.tracker.events.autocomplete.impression({ data, siteId: this.config.globals?.siteId });
 				this.events.product[result.id] = this.events.product[result.id] || {};
 				this.events.product[result.id].impression = true;
-				this.eventManager.fire('track.product.impression', { controller: this, products: [result], trackEvent: data });
+				this.eventManager.fire('track.product.impression', { controller: this, product: result, trackEvent: data });
 			},
 			addToCart: (result: Product): void => {
 				const data = getAutocompleteAddtocartSchemaData({ params: this.params, store: this.store, results: [result] });
 				this.tracker.events.autocomplete.addToCart({ data, siteId: this.config.globals?.siteId });
-				this.eventManager.fire('track.product.addToCart', { controller: this, products: [result], trackEvent: data });
+				this.eventManager.fire('track.product.addToCart', { controller: this, product: result, trackEvent: data });
 			},
 		},
 		redirect: (redirectURL: string): void => {
 			const data = getAutocompleteRedirectSchemaData({ redirectURL });
 			this.tracker.events.autocomplete.redirect({ data, siteId: this.config.globals?.siteId });
-			this.eventManager.fire('track.product.redirect', { controller: this, redirectURL, trackEvent: data });
+			this.eventManager.fire('track.redirect', { controller: this, redirectURL, trackEvent: data });
 		},
 	};
 
@@ -759,9 +766,14 @@ export class AutocompleteController extends AbstractController {
 		}
 	};
 
-	addToCart = async (product: Product): Promise<void> => {
-		this.track.product.addToCart(product);
-		this.eventManager.fire('addToCart', { controller: this, products: [product] });
+	addToCart = async (_products: Product[] | Product): Promise<void> => {
+		const products = typeof (_products as Product[]).slice == 'function' ? (_products as Product[]).slice() : [_products];
+		(products as Product[]).forEach((product) => {
+			this.track.product.addToCart(product);
+		});
+		if (products.length > 0) {
+			this.eventManager.fire('addToCart', { controller: this, products });
+		}
 	};
 }
 
@@ -907,7 +919,7 @@ function getAutocompleteSchemaData({
 	return {
 		q: store.search?.originalQuery?.string || store.search?.query?.string || '',
 		correctedQuery: store.search?.originalQuery?.string ? store.search?.query?.string : undefined,
-		matchType: store.search?.matchType,
+		matchType: store.search.matchType,
 		...filters,
 		sort: params.sorts?.map((sort) => {
 			return {
@@ -936,10 +948,11 @@ function getAutocompleteSchemaData({
 				undefined,
 		},
 		results:
-			results?.map((result: Product, idx: number): Item => {
+			results?.map((result: Product): Item => {
 				const core = result.mappings.core!;
+				const position = result.position;
 				return {
-					position: idx + 1,
+					position,
 					uid: core.uid || '',
 					sku: core.sku,
 				};

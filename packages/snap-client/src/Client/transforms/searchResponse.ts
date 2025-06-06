@@ -197,7 +197,7 @@ transformSearchResponse.results = (response: searchResponseType) => {
 	return { results: results.map(transformSearchResponse.result) };
 };
 
-transformSearchResponse.result = (rawResult: rawResult): SearchResponseModelResult => {
+transformSearchResponse.result = (rawResult: rawResult, idx: number): SearchResponseModelResult => {
 	const coreFieldValues: SearchResponseModelResultCoreMappings = CORE_FIELDS.reduce((coreFields, key) => {
 		if (typeof rawResult[key as keyof rawResult] != 'undefined') {
 			return {
@@ -238,6 +238,7 @@ transformSearchResponse.result = (rawResult: rawResult): SearchResponseModelResu
 
 	return new Result({
 		id: rawResult.uid,
+		position: idx + 1,
 		mappings: {
 			core: coreFieldValues,
 		},

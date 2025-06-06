@@ -1,13 +1,14 @@
-name: Publish
+name: Publish Canary
 
 on:
-  push:
-    branches:
-      - 'main'
+  workflow_dispatch
 
 jobs:
   Publish:
     runs-on: ubuntu-latest
+    permissions:
+      packages: write
+      contents: write
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
@@ -18,7 +19,6 @@ jobs:
         run: |
           git config user.name searchspring-machine
           git config user.email machine@searchspring.com
-
       - name: Setup Node
         uses: actions/setup-node@v2
         with:
@@ -37,34 +37,20 @@ jobs:
             ${{ runner.os }}-build-${{ env.cache-name }}-
             ${{ runner.os }}-build-
             ${{ runner.os }}-
-
       - name: Install packages
         run: npm ci
 
       - name: Build
         run: | 
           npm run build
-
+      
       - name: Tests
         env:
           NODE_OPTIONS: "--max-old-space-size=4096"
         run: npm run test
 
       - name: Publish packages
-        run: npm run publish
+        run: npm run publish:canary
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Configure AWS credentials
-        uses: aws-actions/configure-aws-credentials@v1
-        with:
-          aws-access-key-id: ${{ secrets.SNAPFU_AWS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.SNAPFU_AWS_SECRET_ACCESS_KEY }}
-          aws-region: us-east-1
-
-      - name: Generate Metrics Files
-        run: npm run build:metrics
-
-      - name: Upload Metrics Files to S3
-        run: aws s3 sync --region us-east-1 ./metrics/data s3://datawarehouse-stage/team-metrics-import/
+          NODE_AUTH_TOKEN: ${{ secrets.SEARCHSPRING_PUBLISH }}
+          GH_TOKEN: ${{ secrets.SEARCHSPRING_PUBLISH }}

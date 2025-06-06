@@ -188,17 +188,16 @@ describe('Snap Preact', () => {
 			context: {
 				shopper: {
 					id: 'snapdev',
-					cart: [{ sku: 'sku1' }, { sku: 'sku2' }, { sku: 'sku3' }],
+					cart: [
+						{ uid: 'sku1', qty: 1, price: 100 },
+						{ uid: 'sku2', qty: 2, price: 200 },
+						{ uid: 'sku3', qty: 3, price: 300 },
+					],
 				},
 			},
 		};
-
-		const tracker = new Tracker(contextConfig.client!.globals as TrackerGlobals);
-		const spy = jest.spyOn(tracker.cookies.cart, 'set');
-		new Snap(contextConfig, { tracker });
-		expect(spy).toHaveBeenCalledWith(['sku1', 'sku2', 'sku3']);
-
-		spy.mockClear();
+		const snap = new Snap(contextConfig);
+		expect(snap.tracker.storage.cart.get()).toEqual(contextConfig.context.shopper.cart);
 	});
 
 	it('automatically picks up the merchandising segments when provided', () => {

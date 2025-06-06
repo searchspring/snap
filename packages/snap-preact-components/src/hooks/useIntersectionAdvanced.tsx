@@ -5,6 +5,7 @@ interface UseIntersectionOptions {
 	fireOnce?: boolean;
 	threshold?: number | number[];
 	minVisibleTime?: number; // Minimum time in ms the element must be visible
+	additionalEffectKeys?: unknown[];
 }
 
 export const useIntersectionAdvanced = (ref: MutableRef<HTMLElement | null>, options: UseIntersectionOptions = {}): boolean => {
@@ -85,7 +86,7 @@ export const useIntersectionAdvanced = (ref: MutableRef<HTMLElement | null>, opt
 				observer.unobserve(ref.current);
 			}
 		};
-	}, [ref]);
+	}, [ref, ...(options?.additionalEffectKeys || [])]);
 
 	return isIntersecting;
 };
