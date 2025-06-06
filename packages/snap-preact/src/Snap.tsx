@@ -374,7 +374,12 @@ export class Snap {
 		}
 
 		if ((!services?.client || !services?.tracker) && !this.config?.client?.globals?.siteId) {
-			throw new Error(`Snap: config provided must contain a valid config.client.globals.siteId value`);
+			//error msg should change depending if this is a snap templates site or not.
+			if (services?.templatesStore) {
+				throw new Error(`SnapTemplates: config provided must contain a valid config.siteId value`);
+			} else {
+				throw new Error(`Snap: config provided must contain a valid config.client.globals.siteId value`);
+			}
 		}
 
 		// segmented merchandising context -> client globals
