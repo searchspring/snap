@@ -45,7 +45,7 @@ describe('Icon Component', () => {
 		expect(iconElement?.classList.length).toBe(3);
 	});
 
-	it('renders with classname', () => {
+	it('renders with title', () => {
 		const icon = 'cog';
 		const title = 'custom title';
 		const rendered = render(<Icon title={title} icon={icon} />);
@@ -56,7 +56,7 @@ describe('Icon Component', () => {
 		expect(titleElement).toHaveTextContent(title);
 	});
 
-	it('renders with title', () => {
+	it('renders with classname', () => {
 		const icon = 'cog';
 		const className = 'classy';
 		const rendered = render(<Icon className={className} icon={icon} />);
