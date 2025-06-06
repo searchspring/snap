@@ -51,6 +51,9 @@ const CSS = {
 			'& .ss__search-input': {
 				margin: '16px 0 0 0',
 			},
+			'& .ss__facet__header__selected-count': {
+				margin: '0px 5px',
+			},
 		}),
 };
 
@@ -98,6 +101,9 @@ export const Facet = observer((properties: FacetProps): JSX.Element => {
 		showLessText,
 		iconOverflowMore,
 		iconOverflowLess,
+		showSelectedCount,
+		clearAllIcon,
+		clearAllText,
 		overflowSlot,
 		optionsSlot,
 		disableStyles,
@@ -258,6 +264,8 @@ export const Facet = observer((properties: FacetProps): JSX.Element => {
 		},
 	};
 
+	const selectedCount = (facet as ValueFacet)?.values?.filter((value) => value?.filtered).length;
+
 	return (
 		facet && (
 			<CacheProvider>
@@ -277,7 +285,23 @@ export const Facet = observer((properties: FacetProps): JSX.Element => {
 									(facet as ValueFacet).values?.length ? (facet as ValueFacet).values?.length + ' options' : ''
 								}`}
 							>
-								{facet?.label}
+								<div>
+									{facet?.label}
+									{showSelectedCount && selectedCount ? <span className="ss__facet__header__selected-count">({selectedCount})</span> : null}
+									{(clearAllText || clearAllIcon) && selectedCount ? (
+										<div className="ss__facet__header__clear-all" onClick={facet.clear.url.link.onClick}>
+											{clearAllText ? <label>{clearAllText}</label> : null}
+											{clearAllIcon ? (
+												<Icon
+													{...subProps.icon}
+													{...(typeof clearAllIcon == 'string' ? { icon: clearAllIcon as string } : (clearAllIcon as Partial<IconProps>))}
+												/>
+											) : null}
+										</div>
+									) : (
+										<></>
+									)}
+								</div>
 								{!disableCollapse && <Icon {...subProps.icon} icon={facet?.collapsed ? iconExpand : iconCollapse} />}
 							</div>
 						}
@@ -362,6 +386,7 @@ interface OptionalFacetProps extends ComponentProps {
 	limit?: number;
 	overflowSlot?: JSX.Element;
 	optionsSlot?: JSX.Element;
+	showSelectedCount?: boolean;
 	disableOverflow?: boolean;
 	previewOnFocus?: boolean;
 	valueProps?: any;
@@ -369,6 +394,8 @@ interface OptionalFacetProps extends ComponentProps {
 	showLessText?: string;
 	iconOverflowMore?: string;
 	iconOverflowLess?: string;
+	clearAllText?: string;
+	clearAllIcon?: string | Partial<IconProps>;
 	fields?: FieldProps;
 	searchable?: boolean;
 }

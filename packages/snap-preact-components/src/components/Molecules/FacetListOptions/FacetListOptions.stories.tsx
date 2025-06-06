@@ -72,6 +72,17 @@ export default {
 			},
 			control: { type: 'boolean' },
 		},
+		hideCountParenthesis: {
+			defaultValue: false,
+			description: 'Hide facet option count parenthesis',
+			table: {
+				type: {
+					summary: 'boolean',
+				},
+				defaultValue: { summary: false },
+			},
+			control: { type: 'boolean' },
+		},
 		previewOnFocus: {
 			description: 'Invoke facet value preview upon focus',
 			table: {
