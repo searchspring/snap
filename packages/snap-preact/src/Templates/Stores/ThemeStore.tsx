@@ -26,6 +26,7 @@ export type ThemeStoreThemeConfig = {
 	type: TemplateThemeTypes;
 	base: Theme;
 	overrides?: ThemeOverrides;
+	editorOverrides?: ThemePartial;
 	variables?: ThemeVariablesPartial;
 	currency: ThemeMinimal;
 	language: ThemeMinimal;
@@ -71,6 +72,7 @@ export class ThemeStore {
 	private dependencies: TemplatesStoreDependencies;
 	private base: Theme;
 	private overrides: ThemeOverrides;
+	editorOverrides: ThemePartial;
 	variables: ThemeVariablesPartial;
 	currency: ThemeMinimal;
 	language: ThemeMinimal;
@@ -85,7 +87,7 @@ export class ThemeStore {
 		this.dependencies = dependencies;
 		this.editMode = settings.editMode;
 
-		const { name, style, type, base, overrides, variables, currency, language, languageOverrides, innerWidth } = config;
+		const { name, style, type, base, overrides, editorOverrides, variables, currency, language, languageOverrides, innerWidth } = config;
 
 		// add prefixes to base theme components and responsive components
 		base.components = prefixComponentKeys('*', base.components);
@@ -106,6 +108,7 @@ export class ThemeStore {
 		this.base = base;
 		this.layout = new SelectedLayout(this.dependencies.storage, this.name, this.type);
 		this.overrides = overrides || {};
+		this.editorOverrides = editorOverrides || {};
 		this.variables = variables || {};
 		this.currency = currency;
 		this.language = language;
@@ -119,10 +122,11 @@ export class ThemeStore {
 			variables: observable,
 			currency: observable,
 			language: observable,
+			editorOverrides: observable,
 			stored: observable,
 			innerWidth: observable,
 			theme: computed, // make theme getter a computed property (memoized)
-			count: observable,
+			count: observable, // TODO remove this if editorOverrides works
 		});
 
 		// handle adding the style to the document (should only happen once per theme)
@@ -216,11 +220,12 @@ export class ThemeStore {
 
 		// TemplateEditor variable overrides
 		if (this.editMode) {
-			const variableOverrides: ThemePartial = this.dependencies.storage.get(`variableOverrides`) || {};
-			theme = mergeThemeLayers(theme, variableOverrides) as Theme;
+			// const variableOverrides: ThemePartial = this.dependencies.storage.get(`variableOverrides`) || {};
+			// theme = mergeThemeLayers(theme, variableOverrides) as Theme;
+			theme = mergeThemeLayers(theme, this.editorOverrides) as Theme;
 		}
 
-		theme.count = this.count;
+		// theme.count = this.count;
 
 		// change the theme name to match the ThemeStore theme name
 		theme.name = this.name;
@@ -246,6 +251,7 @@ export class ThemeStore {
 	// removing a key from custom theme
 	// public removeOverride(obj: { path: string[]; rootEditingKey: string; }) {
 	// 	// TODO: remove key from stored
+
 	// }
 
 	// alternative to setOverride below...
@@ -258,21 +264,28 @@ export class ThemeStore {
 	// TODO: any reason the rootEditingKey cannot be in the path?
 	// maybe interface could be: setOverride(path, value);
 	public setOverride(obj: { path: string[]; rootEditingKey: string; value: unknown }) {
-		const { path, rootEditingKey, value } = JSON.parse(JSON.stringify(obj));
+		const { path, rootEditingKey, value } = obj;
 		const overrides: ThemeOverrides = {
-			[rootEditingKey]: path.reverse().reduce((res, key) => {
-				if (path.indexOf(key) === 0) {
+			[rootEditingKey]: path
+				.slice()
+				.reverse()
+				.reduce((res, key) => {
+					if (path.indexOf(key) === path.length - 1) {
+						return {
+							[key]: value,
+						};
+					}
 					return {
-						[key]: value,
+						[key]: res,
 					};
-				}
-				return {
-					[key]: res,
-				};
-			}, {}),
+				}, {}),
 		};
 		this.stored = mergeThemeLayers(this.stored, overrides);
 		this.dependencies.storage.set(`themes.${this.type}.${this.name}.variables`, this.stored);
+	}
+
+	public setEditorOverrides(overrides: ThemePartial) {
+		this.editorOverrides = overrides;
 	}
 }
 

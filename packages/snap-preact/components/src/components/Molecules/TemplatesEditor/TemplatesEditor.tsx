@@ -360,6 +360,10 @@ export const TemplatesEditor = observer((properties: TemplatesEditorProps): JSX.
 										const selectedTheme = selectedOption.value;
 										const type = selectedOption.closest('optgroup')?.label as TemplateThemeTypes;
 
+										// get reference to theme and update the overrides
+										const theme = templatesStore.themes[type][selectedTheme];
+										theme.setEditorOverrides(editorStore.variableOverrides);
+
 										if (type) {
 											// loop through all targets in templateStore and call setTheme on them all
 											Object.keys(templatesStore.targets).forEach((feature) => {
@@ -476,6 +480,24 @@ const ThemeEditor = (props: any): any => {
 		return null;
 	}
 
+	const shouldShowResetButton = (path: string[], val: unknown) => {
+		try {
+			let obj = editorStore.variableOverrides[rootEditingKey];
+			if (!obj) {
+				// no overrides at this moment
+				return false;
+			}
+
+			path.forEach((p) => {
+				obj = obj[p];
+			});
+			return obj === val;
+		} catch (e) {
+			console.log('error', e);
+			return false;
+		}
+	};
+
 	if (typeof props.property === 'object') {
 		// object means we need to recurse until we get to the primitives
 		return Object.values(props.property).map((property, index) => {
@@ -496,24 +518,6 @@ const ThemeEditor = (props: any): any => {
 	} else if (typeof props.property === 'string') {
 		const value = props.property.toString();
 		const key = path.join('.');
-
-		function shouldShowResetButton(path: string[], val: unknown) {
-			try {
-				let obj = editorStore.variableOverrides[rootEditingKey];
-				if (!obj) {
-					// no overrides at this moment
-					return false;
-				}
-
-				path.forEach((p) => {
-					obj = obj[p];
-				});
-				return obj === val;
-			} catch (e) {
-				console.log('error', e);
-				return false;
-			}
-		}
 
 		if (path.includes('colors')) {
 			return (
@@ -548,11 +552,20 @@ const ThemeEditor = (props: any): any => {
 		}
 	} else if (typeof props.property === 'number') {
 		if (path.includes('breakpoints')) {
-			const value = props.property.toString();
+			const value = props.property;
 			const key = path.join('.');
 			return (
 				<div className={classnames('breakpoint-picker')}>
 					<label htmlFor={key}>{key}:</label>
+					{shouldShowResetButton(path, value) && (
+						<button
+							onClick={() => {
+								editorStore.resetVariable({ path, rootEditingKey }, themeRef);
+							}}
+						>
+							reset
+						</button>
+					)}
 					<input
 						type="number"
 						value={value}

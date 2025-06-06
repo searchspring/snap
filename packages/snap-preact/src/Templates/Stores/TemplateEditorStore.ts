@@ -24,10 +24,11 @@ export class TemplateEditorStore {
 	}
 
 	resetVariable(obj: { themeName: string; path: string[]; rootEditingKey: string; value: unknown }, themeRef: ThemeStore) {
-		const { path, rootEditingKey } = JSON.parse(JSON.stringify(obj));
+		// const { path, rootEditingKey } = JSON.parse(JSON.stringify(obj));
+		const { path, rootEditingKey } = obj;
 
 		let variableOverrides = this.variableOverrides[rootEditingKey as keyof typeof this.variableOverrides];
-		console.log('variableOverrides', variableOverrides, path);
+		console.log('variableOverrides reset begin', variableOverrides, path);
 		path.forEach((p, i) => {
 			if (i === path.length - 1) {
 				delete variableOverrides[p];
@@ -36,29 +37,37 @@ export class TemplateEditorStore {
 			}
 		});
 
-		this.variableOverrides = variableOverrides;
+		// this.variableOverrides = variableOverrides;
 		this.storage.set('variableOverrides', this.variableOverrides);
 
-		themeRef.forceUpdate();
+		console.log('variableOverrides after reset', this.variableOverrides);
+		// themeRef.forceUpdate();
+		themeRef.setEditorOverrides(this.variableOverrides);
 	}
 
 	setVariable(obj: { themeName: string; path: string[]; rootEditingKey: string; value: unknown }, themeRef: ThemeStore) {
-		const { path, value } = JSON.parse(JSON.stringify(obj));
+		// const { path, value } = JSON.parse(JSON.stringify(obj));
+		const { path, value } = obj;
 		const variableOverrides = {
-			variables: path.reverse().reduce((res, key) => {
-				if (path.indexOf(key) === 0) {
+			variables: path
+				.slice()
+				.reverse()
+				.reduce((res, key) => {
+					if (path.indexOf(key) === path.length - 1) {
+						return {
+							[key]: value,
+						};
+					}
 					return {
-						[key]: value,
+						[key]: res,
 					};
-				}
-				return {
-					[key]: res,
-				};
-			}, {}),
+				}, {}),
 		};
+		console.log('variableOverrides', variableOverrides);
 		this.variableOverrides = deepmerge(this.variableOverrides, variableOverrides);
+		// themeRef.setOverride(obj); // call to re-render in real time
+		themeRef.setEditorOverrides(this.variableOverrides);
 		this.storage.set('variableOverrides', this.variableOverrides);
-		themeRef.setOverride(obj); // call to re-render in real time
 	}
 
 	switchTabs(tab: Tabs) {

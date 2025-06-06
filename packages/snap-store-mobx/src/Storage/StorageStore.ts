@@ -60,6 +60,25 @@ export class StorageStore {
 	}
 
 	public set(path: string, value: any): void {
+		// read from the backing storage first to update local state to ensure we get any changes made outside of the storageStore
+		switch (this.type) {
+			case StorageType.session: {
+				this.state = JSON.parse(window.sessionStorage.getItem(this.key) || '{}');
+				break;
+			}
+			case StorageType.local: {
+				this.state = JSON.parse(window.localStorage.getItem(this.key) || '{}');
+				break;
+			}
+			case StorageType.cookie: {
+				const data = utils.cookies.get(this.key);
+				if (data) {
+					this.state = JSON.parse(data);
+				}
+				break;
+			}
+		}
+
 		const paths = path?.split('.');
 		let location = this.state;
 		paths?.forEach((p, i) => {

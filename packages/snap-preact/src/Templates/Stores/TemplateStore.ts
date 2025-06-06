@@ -402,6 +402,7 @@ export class TemplatesStore {
 				base: theme,
 				language: this.library.locales.languages[this.language] || {},
 				languageOverrides: transformTranslationsToTheme((this.config.translations && this.config.translations[this.language]) || {}),
+				editorOverrides: this.storage.get('variableOverrides'),
 				currency: this.library.locales.currencies[this.currency] || {},
 				innerWidth: this.window.innerWidth,
 			});
