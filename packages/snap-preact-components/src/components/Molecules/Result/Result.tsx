@@ -87,8 +87,22 @@ export const Result = observer((properties: ResultProps): JSX.Element => {
 		...properties.theme?.components?.result,
 	};
 
-	const { result, hideBadge, hideTitle, hidePricing, hideImage, detailSlot, fallback, disableStyles, className, layout, onClick, style, controller } =
-		props;
+	const {
+		trackingRef,
+		result,
+		hideBadge,
+		hideTitle,
+		hidePricing,
+		hideImage,
+		detailSlot,
+		fallback,
+		disableStyles,
+		className,
+		layout,
+		onClick,
+		style,
+		controller,
+	} = props;
 
 	const core = result?.display?.mappings.core || result?.mappings?.core;
 
@@ -161,13 +175,12 @@ export const Result = observer((properties: ResultProps): JSX.Element => {
 
 	return core ? (
 		<CacheProvider>
-			<article {...styling} className={classnames('ss__result', `ss__result--${layout}`, className)}>
+			<article {...styling} ref={trackingRef} className={classnames('ss__result', `ss__result--${layout}`, className)}>
 				<div className="ss__result__image-wrapper">
 					<a
 						href={core!.url}
 						onClick={(e: React.MouseEvent<HTMLAnchorElement, Event>) => {
 							onClick && onClick(e);
-							controller?.track?.product?.click(e as any, result);
 						}}
 					>
 						{!hideImage &&
@@ -197,7 +210,6 @@ export const Result = observer((properties: ResultProps): JSX.Element => {
 								href={core.url}
 								onClick={(e: React.MouseEvent<HTMLAnchorElement, Event>) => {
 									onClick && onClick(e);
-									controller?.track?.product?.click(e as any, result);
 								}}
 								dangerouslySetInnerHTML={{
 									__html: displayName || '',

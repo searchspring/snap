@@ -34,9 +34,7 @@ beforeEach(() => {
 	cy.intercept('GET', /.*searchspring.io\/api\/search\/autocomplete.json/).as('autocomplete');
 	cy.intercept('GET', /.*searchspring.io\/api\/search\/search.json/).as('search');
 	cy.intercept('POST', /beacon.searchspring.io\/beacon\/v2\/.*\/shopper\/login/, { success: true }).as('beacon2/shopper/login');
-	cy.intercept('POST', /beacon.searchspring.io\/beacon\/v2\/.*\/autocomplete\/render/, { success: true }).as('beacon2/autocomplete/render', {
-		message: true,
-	});
+	cy.intercept('POST', /beacon.searchspring.io\/beacon\/v2\/.*\/autocomplete\/render/, { success: true }).as('beacon2/autocomplete/render');
 	cy.intercept('POST', /beacon.searchspring.io\/beacon\/v2\/.*\/autocomplete\/impression/, { success: true }).as('beacon2/autocomplete/impression');
 	cy.intercept('POST', /beacon.searchspring.io\/beacon\/v2\/.*\/autocomplete\/addtocart/, { success: true }).as('beacon2/autocomplete/addtocart');
 	cy.intercept('POST', /beacon.searchspring.io\/beacon\/v2\/.*\/autocomplete\/clickthrough/, { success: true }).as(
@@ -65,7 +63,6 @@ beforeEach(() => {
 	cy.intercept('POST', /beacon.searchspring.io\/beacon\/v2\/.*\/product\/pageview/, { success: true }).as('beacon2/product/pageview');
 	cy.intercept('POST', /beacon.searchspring.io\/beacon\/v2\/.*\/cart\/add/, { success: true }).as('beacon2/cart/add');
 	cy.intercept('POST', /beacon.searchspring.io\/beacon\/v2\/.*\/cart\/remove/, { success: true }).as('beacon2/cart/remove');
-	cy.intercept('POST', /beacon.searchspring.io\/beacon\/v2\/.*\/cart\/view/, { success: true }).as('beacon2/cart/view');
 	cy.intercept('POST', /beacon.searchspring.io\/beacon\/v2\/.*\/order\/transaction/, { success: true }).as('beacon2/order/transaction');
 	cy.intercept('POST', /beacon.searchspring.io\/beacon\/v2\/.*\/log\/snap/, { success: true }).as('beacon2/log/snap');
 });

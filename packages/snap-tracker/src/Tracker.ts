@@ -4,19 +4,12 @@ import { StorageStore } from '@searchspring/snap-store-mobx';
 import { version, DomTargeter, getContext } from '@searchspring/snap-toolbox';
 import { AppMode } from '@searchspring/snap-toolbox';
 import { Beacon } from '@searchspring/beacon';
-import type { Context, Item, OrderTransactionSchemaData, Product, BeaconConfig } from '@searchspring/beacon';
+import type { Item, OrderTransactionSchemaData, Product, BeaconConfig } from '@searchspring/beacon';
 
-import { BeaconEvent } from './BeaconEvent';
 import {
 	TrackerGlobals,
 	TrackMethods,
-	BeaconPayload,
-	BeaconType,
-	BeaconCategory,
-	BeaconContext,
 	ProductViewEvent,
-	CartViewEvent,
-	ProductClickEvent,
 	ShopperLoginEvent,
 	TrackErrorEvent,
 	OrderTransactionData,
@@ -87,7 +80,7 @@ export class Tracker extends Beacon {
 							this.track.product.view(item, siteId);
 							break;
 						case 'searchspring/track/cart/view':
-							this.track.cart.view({ items }, siteId);
+							this.track.cart.view();
 							break;
 						case 'searchspring/track/order/transaction':
 							this.track.order.transaction({ order, items }, siteId);
@@ -164,17 +157,119 @@ export class Tracker extends Beacon {
 				// update recs
 				updateRecsControllers();
 			} else if (attributes[`ss-${this.config.id}-intellisuggest`] && attributes[`ss-${this.config.id}-intellisuggest-signature`]) {
-				// product click
-				const intellisuggestData = attributes[`ss-${this.config.id}-intellisuggest`];
-				const intellisuggestSignature = attributes[`ss-${this.config.id}-intellisuggest-signature`];
-				const href = attributes['href'];
-				this.track.product.click({
-					intellisuggestData,
-					intellisuggestSignature,
-					href,
-				});
+				this.track.product.click();
 			}
 		});
+
+		const cart = (this.globals as TrackerGlobals).cart;
+		if (Array.isArray(cart)) {
+			if (cart.length === 0) {
+				// cart is empty, clear storage and send remove event if storage had items
+				const storedCart = this.storage.cart.get();
+				if (storedCart.length) {
+					this.events.cart.remove({
+						data: {
+							results: storedCart,
+							cart: [],
+						},
+					});
+				}
+				this.storage.cart.clear();
+			} else if (cart.length) {
+				// length check here to be able to sent error event if invalid array of objects is provided
+				const currentCart: Product[] = cart
+					.filter(
+						(item) =>
+							typeof item === 'object' &&
+							(item.uid || item.sku || item.childUid || item.childSku) &&
+							item.qty !== undefined &&
+							item.price !== undefined
+					)
+					.map((item): Product => {
+						return {
+							uid: item.uid,
+							childUid: item.childUid,
+							sku: item.sku,
+							childSku: item.childSku,
+							price: item.price,
+							qty: item.qty,
+						};
+					});
+
+				// beacon 2.0 requires all parameters to be present
+				// send error to keep track of integrations to be updated
+				if (!currentCart.length) {
+					this.events.error.snap({
+						data: {
+							message: 'cart globals missing properties',
+							details: { cart },
+						},
+					});
+				}
+
+				const storedCart = this.storage.cart.get();
+				const toAdd: Product[] = [];
+				const toRemove: Product[] = [];
+
+				if (!storedCart?.length && currentCart.length) {
+					// no stored cart, add all items
+					toAdd.push(...currentCart);
+				} else if (currentCart.length) {
+					currentCart.forEach((item) => {
+						const existingItem = storedCart.find((existingItem) => {
+							return (
+								existingItem.uid === item.uid &&
+								existingItem.sku === item.sku &&
+								existingItem.childUid === item.childUid &&
+								existingItem.childSku === item.childSku
+							);
+						});
+						if (!existingItem) {
+							// item does not exist in cart, add it
+							toAdd.push(item);
+						} else if (existingItem) {
+							// item already exists in cart, check if qty has changed
+							if (item.qty > existingItem.qty) {
+								toAdd.push({
+									...item,
+									qty: item.qty - existingItem.qty,
+								});
+							} else if (item.qty < existingItem.qty) {
+								toRemove.push({
+									...existingItem,
+									qty: existingItem.qty - item.qty,
+								});
+							}
+							// remove from existing cart
+							const index = storedCart.indexOf(existingItem);
+							if (index !== -1) {
+								storedCart.splice(index, 1);
+							}
+						}
+					});
+					// any remaining items in existing cart should be removed
+					if (storedCart.length) {
+						toRemove.push(...storedCart);
+					}
+				}
+				if (toAdd.length) {
+					this.events.cart.add({
+						data: {
+							results: toAdd,
+							cart: currentCart,
+						},
+					});
+				}
+				if (toRemove.length) {
+					this.events.cart.remove({
+						data: {
+							results: toRemove,
+							cart: currentCart,
+						},
+					});
+				}
+			}
+		}
 	}
 
 	public getGlobals(): TrackerGlobals {
@@ -188,7 +283,6 @@ export class Tracker extends Beacon {
 	}
 
 	track: TrackMethods = {
-		// TODO: search where this is used and remove unwanted fields from type
 		error: (data: TrackErrorEvent, siteId?: string): undefined => {
 			if (this.doNotTrack?.includes('error') || this.mode === AppMode.development) {
 				return;
@@ -198,7 +292,7 @@ export class Tracker extends Beacon {
 				// no console log
 				return;
 			}
-			const { stack, message, details } = data;
+			const { stack, message, ...details } = data;
 			const { pageUrl } = this.getContext();
 
 			// prevent sending of errors when on localhost or CDN
@@ -241,68 +335,19 @@ export class Tracker extends Beacon {
 			/**
 			 * @deprecated tracker.track.product.click() is deprecated and will be removed. Use tracker.events['search' | 'category'].clickThrough() instead
 			 */
-			click: (data: ProductClickEvent, siteId?: string): BeaconEvent | undefined => {
-				// Controllers will send product click events through tracker.beacon
-				// For legacy support if someone calls this, continute to 1.0 beacon just like is.js
-				// TODO: remove after 1.0 deprecation period
-
-				if (this.doNotTrack?.includes('product.click')) {
-					return;
-				}
-
-				if (!data?.intellisuggestData || !data?.intellisuggestSignature) {
-					console.error(
-						`track.product.click event: object parameter requires a valid intellisuggestData and intellisuggestSignature. \nExample: track.click.product({ intellisuggestData: "eJwrTs4tNM9jYCjKTM8oYXDWdQ3TDTfUDbIwMDVjMARCYwMQSi_KTAEA9IQKWA", intellisuggestSignature: "9e46f9fd3253c267fefc298704e39084a6f8b8e47abefdee57277996b77d8e70" })`
-					);
-					return;
-				}
-
-				const beaconContext = this.getContext();
-				const context = transformToLegacyContext(beaconContext, siteId || this.globals.siteId);
-				const event = {
-					type: BeaconType.CLICK,
-					category: BeaconCategory.INTERACTION,
-					context,
-					event: {
-						intellisuggestData: data.intellisuggestData,
-						intellisuggestSignature: data.intellisuggestSignature,
-						href: data?.href ? `${data.href}` : undefined,
-					},
-				};
-
-				const beaconEvent = new BeaconEvent(event as BeaconPayload, this.config);
-				const beaconEventData = beaconEvent.send();
-				return beaconEventData;
+			click: (): void => {
+				console.warn(
+					`tracker.track.product.click() is deprecated and is no longer functional. Use tracker.events['search' | 'category'].clickThrough() instead`
+				);
+				this.events.error.snap({ data: { message: `tracker.track.product.click was called` } });
 			},
 		},
 		cart: {
-			view: (data: CartViewEvent, siteId?: string): undefined => {
-				if (this.doNotTrack?.includes('cart.view')) {
-					return;
-				}
-
-				// uid can be optional in legacy payload but required in 2.0 spec - use sku as fallback
-				const results = (data as CartViewEvent).items
-					.map((item) => {
-						if (!item.uid && item.sku) {
-							return {
-								...item,
-								uid: item.sku,
-							};
-						} else {
-							return item;
-						}
-					})
-					.map((item) => {
-						// convert to Product[] - ensure qty and price are numbers
-						return {
-							...item,
-							qty: Number(item.qty),
-							price: Number(item.price),
-						};
-					});
-
-				this.events.cart.view({ data: { results: results as Product[] }, siteId });
+			view: (): void => {
+				console.warn(
+					'tracker.cart.view is deprecated and no longer functional. Use tracker.events.cart.add() and tracker.events.cart.remove() instead'
+				);
+				this.events.error.snap({ data: { message: `tracker.track.cart.view was called` } });
 			},
 		},
 		order: {
@@ -371,45 +416,4 @@ export class Tracker extends Beacon {
 			},
 		},
 	};
-}
-
-function transformToLegacyContext(_context: Context, siteId: string): BeaconContext {
-	const context = { ..._context };
-	if (context.userAgent) {
-		delete context.userAgent;
-	}
-	if (context.timestamp) {
-		// @ts-ignore - property not optional
-		delete context.timestamp;
-	}
-	if (context.initiator) {
-		// @ts-ignore - property not optional
-		delete context.initiator;
-	}
-	if (context.dev) {
-		delete context.dev;
-	}
-	let attribution:
-		| {
-				type?: string;
-				id?: string;
-		  }
-		| undefined;
-	if (context.attribution?.length) {
-		attribution = {
-			type: context.attribution[0].type,
-			id: context.attribution[0].id,
-		};
-		delete context.attribution;
-	}
-	const beaconContext: BeaconContext = {
-		...(context as unknown as BeaconContext),
-		website: {
-			trackingCode: siteId,
-		},
-	};
-	if (attribution) {
-		beaconContext.attribution = attribution;
-	}
-	return beaconContext;
 }

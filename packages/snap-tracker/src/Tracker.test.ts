@@ -1,7 +1,7 @@
 import 'whatwg-fetch';
 import { Tracker } from './Tracker';
-import { TrackerConfig, BeaconCategory, BeaconType, CartViewEvent, TrackErrorEvent, OrderTransactionData } from './types';
-import type { BeaconConfig } from '@searchspring/beacon';
+import { TrackerConfig, TrackErrorEvent, OrderTransactionData } from './types';
+import type { BeaconConfig, Product } from '@searchspring/beacon';
 
 // mocks fetch so beacon client does not make network requests
 const fetchSpy = jest
@@ -100,23 +100,6 @@ describe('Script Block Tracking', () => {
 
 		await new Promise((r) => setTimeout(r));
 		expect(trackEvent).toHaveBeenCalledWith(item, undefined);
-
-		trackEvent.mockRestore();
-	});
-
-	it('can target track/cart/view', async () => {
-		const items = [{ sku: 'abc123' }];
-		global.document.body.innerHTML = `<div>
-			<script type="searchspring/track/cart/view">
-				items = ${JSON.stringify(items)};
-			</script>
-		</div>`;
-
-		const tracker = new Tracker(globals, config);
-		const trackEvent = jest.spyOn(tracker.track.cart, 'view');
-
-		await new Promise((r) => setTimeout(r));
-		expect(trackEvent).toHaveBeenCalledWith({ items }, undefined);
 
 		trackEvent.mockRestore();
 	});
@@ -278,11 +261,7 @@ describe('Attribute Click Tracking', () => {
 		const button = global.document.querySelector('[ss-track-intellisuggest][ss-track-intellisuggest-signature]');
 		button?.dispatchEvent(clickEvent);
 
-		expect(trackEvent).toHaveBeenCalledWith({
-			intellisuggestData,
-			intellisuggestSignature,
-			href,
-		});
+		expect(trackEvent).toHaveBeenCalledWith(); // deprecated, should still be called with no params
 
 		trackEvent.mockRestore();
 	});
@@ -400,16 +379,6 @@ describe('Tracker', () => {
 		expect(devTracker.mode).toBe('development');
 	});
 
-	it('should not make preflight request when there are no shopperId, cart or viewed personalization parameters set', () => {
-		const tracker = new Tracker(globals, config);
-		const sendPreflight = jest.spyOn(tracker, 'sendPreflight');
-
-		tracker.sendPreflight();
-
-		expect(sendPreflight).toHaveBeenCalledTimes(1);
-		expect(fetchSpy).toHaveBeenCalledTimes(0);
-	});
-
 	it('will make preflight request when there are cart products set', () => {
 		const tracker = new Tracker(globals, config);
 		expect(fetchSpy).toHaveBeenCalledTimes(0);
@@ -484,11 +453,13 @@ describe('Tracker', () => {
 
 		tracker.track.error(errorData);
 
+		const { message, stack, ...details } = errorData;
+
 		expect(eventsSpy).toHaveBeenCalledWith({
 			data: {
-				message: errorData.message,
-				stack: errorData.stack,
-				details: errorData.details,
+				message,
+				stack,
+				details,
 			},
 			siteId: undefined,
 		});
@@ -547,48 +518,6 @@ describe('Tracker', () => {
 					...productData,
 					uid: 'product123',
 				},
-			},
-			siteId: undefined,
-		});
-
-		eventsSpy.mockRestore();
-	});
-
-	it('can track product click events', () => {
-		const tracker = new Tracker(globals, config);
-
-		const productClickData = {
-			intellisuggestData: 'test-intellisuggest-data',
-			intellisuggestSignature: 'test-intellisuggest-signature',
-			href: '/product/123',
-		};
-
-		const result = tracker.track.product.click(productClickData);
-
-		expect(result).toBeDefined();
-		expect(result?.event).toEqual({
-			intellisuggestData: productClickData.intellisuggestData,
-			intellisuggestSignature: productClickData.intellisuggestSignature,
-			href: productClickData.href,
-		});
-		expect(result?.type).toBe(BeaconType.CLICK);
-		expect(result?.category).toBe(BeaconCategory.INTERACTION);
-	});
-
-	it('handles cart view events with items property', () => {
-		const tracker = new Tracker(globals, config);
-
-		const cartViewData: CartViewEvent = {
-			items: [{ sku: 'product123', qty: '1', price: 10.99 }],
-		};
-
-		const eventsSpy = jest.spyOn(tracker.events.cart, 'view');
-
-		tracker.track.cart.view(cartViewData);
-
-		expect(eventsSpy).toHaveBeenCalledWith({
-			data: {
-				results: [{ sku: 'product123', uid: 'product123', qty: 1, price: 10.99 }],
 			},
 			siteId: undefined,
 		});
@@ -677,5 +606,158 @@ describe('Tracker', () => {
 		const viewedProducts = tracker.cookies.viewed.get();
 
 		expect(viewedProducts).toContain('viewed-product-123');
+	});
+});
+
+describe('Cart inferance from context', () => {
+	let tracker: Tracker;
+	const mockFetchApi = jest.fn().mockResolvedValue(Promise.resolve({ status: 200, json: () => Promise.resolve({}) }));
+	let config: TrackerConfig & BeaconConfig;
+
+	beforeEach(() => {
+		jest.clearAllMocks();
+		resetAllCookies();
+		localStorageMock.clear();
+		config = { mode: 'development', apis: { fetch: mockFetchApi } };
+		tracker = new Tracker(globals, config);
+	});
+
+	it('empty cart should not trigger any requests', async () => {
+		// empty cart should not trigger any requests
+		const cart: Product[] = [];
+		tracker = new Tracker(
+			{
+				...globals,
+				cart,
+			},
+			config
+		);
+		await new Promise((resolve) => setTimeout(resolve, 0));
+		expect(mockFetchApi).not.toHaveBeenCalled();
+	});
+	it('can set current cart from globals', async () => {
+		// set initial cart
+		const cart = [
+			{ uid: 'productUid1', childUid: 'productChildUid1', sku: 'productSku1', childSku: 'productChildSku1', qty: 1, price: 9.99 },
+			{ uid: 'productUid2', childUid: 'productChildUid2', sku: 'productSku2', childSku: 'productChildSku2', qty: 2, price: 10.99 },
+		];
+		tracker = new Tracker(
+			{
+				...globals,
+				cart,
+			},
+			config
+		);
+		await new Promise((resolve) => setTimeout(resolve, 0));
+
+		expect(tracker.storage.cart.get()).toEqual(cart);
+		expect(mockFetchApi).toHaveBeenCalledWith(expect.stringContaining('/cart/add'), expect.any(Object));
+		expect(mockFetchApi).toHaveBeenCalledWith(expect.stringContaining('/preflightCache'), expect.any(Object));
+		mockFetchApi.mockClear();
+		expect(mockFetchApi).not.toHaveBeenCalled();
+
+		// simulate updated cart with one item added
+		const newProduct = { uid: 'productUid3', childUid: 'productChildUid3', sku: 'productSku3', childSku: 'productChildSku3', qty: 3, price: 9.99 };
+		const cart2 = [...cart, newProduct];
+		tracker = new Tracker(
+			{
+				...globals,
+				cart: cart2,
+			},
+			config
+		);
+		await new Promise((resolve) => setTimeout(resolve, 0));
+		expect(tracker.storage.cart.get()).toEqual(cart2);
+		expect(mockFetchApi).toHaveBeenCalledWith(expect.stringContaining('/cart/add'), expect.any(Object));
+		expect(mockFetchApi).toHaveBeenCalledWith(expect.stringContaining('/preflightCache'), expect.any(Object));
+		mockFetchApi.mockClear();
+		expect(mockFetchApi).not.toHaveBeenCalled();
+
+		// simulate adding 1 quantity of existing item in cart
+		const cart3 = [
+			...cart,
+			{ uid: 'productUid3', childUid: 'productChildUid3', sku: 'productSku3', childSku: 'productChildSku3', qty: 4, price: 9.99 },
+		];
+		tracker = new Tracker(
+			{
+				...globals,
+				cart: cart3,
+			},
+			config
+		);
+		await new Promise((resolve) => setTimeout(resolve, 0));
+		expect(tracker.storage.cart.get()).toEqual(cart3);
+		expect(mockFetchApi).toHaveBeenCalledWith(expect.stringContaining('/cart/add'), expect.any(Object));
+		expect(mockFetchApi).toHaveBeenCalledWith(expect.stringContaining('/preflightCache'), expect.any(Object));
+		mockFetchApi.mockClear();
+		expect(mockFetchApi).not.toHaveBeenCalled();
+
+		// simulate removing 1 quantity of exisiting item in cart
+		const cart4 = [
+			...cart,
+			{ uid: 'productUid3', childUid: 'productChildUid3', sku: 'productSku3', childSku: 'productChildSku3', qty: 1, price: 9.99 },
+		];
+		tracker = new Tracker(
+			{
+				...globals,
+				cart: cart4,
+			},
+			config
+		);
+		await new Promise((resolve) => setTimeout(resolve, 0));
+		expect(tracker.storage.cart.get()).toEqual(cart4);
+		expect(mockFetchApi).toHaveBeenCalledWith(expect.stringContaining('/cart/remove'), expect.any(Object));
+		expect(mockFetchApi).toHaveBeenCalledWith(expect.stringContaining('/preflightCache'), expect.any(Object));
+		mockFetchApi.mockClear();
+		expect(mockFetchApi).not.toHaveBeenCalled();
+
+		// missing properties should not be added to cart storage, but should still send an error event
+		const cart5 = [{ uid: 'productUid3', sku: 'productSku3' }] as any;
+		tracker = new Tracker(
+			{
+				...globals,
+				cart: cart5,
+			},
+			config
+		);
+		await new Promise((resolve) => setTimeout(resolve, 0));
+		expect(tracker.storage.cart.get()).toEqual(cart4); // should be previous cart
+		expect(mockFetchApi).toHaveBeenCalledWith(expect.stringContaining('/log/snap'), expect.any(Object));
+		expect(mockFetchApi).not.toHaveBeenCalledWith(expect.stringContaining('/preflightCache'), expect.any(Object));
+		mockFetchApi.mockClear();
+		expect(mockFetchApi).not.toHaveBeenCalled();
+
+		// simulate removing product from cart
+		const cart6 = [...cart];
+		tracker = new Tracker(
+			{
+				...globals,
+				cart: cart6,
+			},
+			config
+		);
+		await new Promise((resolve) => setTimeout(resolve, 0));
+		expect(tracker.storage.cart.get()).toEqual(cart6);
+		expect(mockFetchApi).toHaveBeenCalledWith(expect.stringContaining('/cart/remove'), expect.any(Object));
+		expect(mockFetchApi).toHaveBeenCalledWith(expect.stringContaining('/preflightCache'), expect.any(Object));
+		mockFetchApi.mockClear();
+		expect(mockFetchApi).not.toHaveBeenCalled();
+
+		expect(tracker.storage.cart.get().length).toBeGreaterThan(0);
+		// simulate removing all products from cart
+		const cart7: Product[] = [];
+		tracker = new Tracker(
+			{
+				...globals,
+				cart: cart7,
+			},
+			config
+		);
+		await new Promise((resolve) => setTimeout(resolve, 0));
+		expect(tracker.storage.cart.get()).toEqual(cart7);
+		expect(mockFetchApi).toHaveBeenCalledWith(expect.stringContaining('/cart/remove'), expect.any(Object));
+		expect(mockFetchApi).toHaveBeenCalledWith(expect.stringContaining('/preflightCache'), expect.any(Object));
+		mockFetchApi.mockClear();
+		expect(mockFetchApi).not.toHaveBeenCalled();
 	});
 });

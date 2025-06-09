@@ -160,6 +160,7 @@ type ProductMinimal = {
 export class Product {
 	public type = 'product';
 	public id: string;
+	public position: number = 0;
 	public attributes: Record<string, unknown> = {};
 	public mappings: SearchResponseModelResultMappings = {
 		core: {},
@@ -176,6 +177,7 @@ export class Product {
 		this.id = result.id!;
 		this.attributes = result.attributes!;
 		this.mappings = result.mappings!;
+		this.position = result.position!;
 
 		this.badges = new Badges(result, metaData);
 
