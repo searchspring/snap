@@ -33,7 +33,6 @@ import type {
 	AutocompleteAddtocartSchemaDataFilterInner,
 	AutocompleteAddtocartSchemaDataSortInnerDirEnum,
 	Product as BeaconProduct,
-	Item,
 	SearchAddtocartSchemaData,
 	SearchRedirectSchemaData,
 	SearchSchemaData,
@@ -199,7 +198,7 @@ export class SearchController extends AbstractController {
 
 				if (products.length === 0) {
 					// handle no results
-					const data = getSearchSchemaData({ params: search.request, results: [] });
+					const data = getSearchSchemaData({ params: search.request, response: search.response });
 					this.tracker.events[this.pageType].render({ data, siteId: this.config.globals?.siteId });
 				}
 
@@ -689,7 +688,6 @@ function createResultSchemaMapping({ request, response }: { request: SearchReque
 	const [_, searchResponse] = response;
 	const schema = getSearchSchemaData({
 		params: request,
-		results: [], // results added below because this would contain all results
 		response: searchResponse,
 	});
 
@@ -788,15 +786,7 @@ function getSearchAddtocartSchemaData({
 	};
 }
 
-function getSearchSchemaData({
-	params,
-	results,
-	response,
-}: {
-	params: SearchRequestModel;
-	results?: (SearchResponseModelResult | Product)[];
-	response?: SearchResponseModel;
-}): SearchSchemaData {
+function getSearchSchemaData({ params, response }: { params: SearchRequestModel; response: SearchResponseModel }): SearchSchemaData {
 	const filters = params.filters?.reduce<{
 		bgfilter?: Array<AutocompleteAddtocartSchemaDataBgfilterInner>;
 		filter?: Array<AutocompleteAddtocartSchemaDataFilterInner>;
@@ -863,15 +853,6 @@ function getSearchSchemaData({
 					})) ||
 				undefined,
 		},
-		results:
-			results?.map((result): Item => {
-				const core = result.mappings?.core!;
-				const position = result.position!;
-				return {
-					position,
-					uid: core.uid || '',
-					sku: core.sku,
-				};
-			}) || [],
+		results: [],
 	};
 }
