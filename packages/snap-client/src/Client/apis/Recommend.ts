@@ -157,7 +157,7 @@ export class RecommendAPI extends API {
 				const response = await this.postRecommendations(batch.request as RecommendPostRequestModel);
 
 				batch.entries?.forEach((entry, index) => {
-					response[index]?.results.forEach((result, idx) => {
+					response[index]?.results?.forEach((result, idx) => {
 						result.position = idx + 1;
 					});
 					entry.deferred.resolve([response[index]]);

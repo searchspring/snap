@@ -37,6 +37,7 @@ import type {
 	SearchAddtocartSchemaData,
 	SearchRedirectSchemaData,
 	SearchSchemaData,
+	SearchSchemaDataMatchTypeEnum,
 } from '@searchspring/beacon';
 import { CLICK_DUPLICATION_TIMEOUT, isClickWithinProductLink } from '../utils/isClickWithinProductLink';
 
@@ -71,6 +72,7 @@ type SearchTrackMethods = {
 	redirect: (redirectURL: string) => void;
 };
 
+const schemaMap: Record<string, SearchSchemaData> = {};
 export class SearchController extends AbstractController {
 	public type = ControllerTypes.search;
 	declare store: SearchStore;
@@ -89,7 +91,6 @@ export class SearchController extends AbstractController {
 			}
 		>;
 	} = { product: {} };
-	private schemaMap: Record<string, SearchSchemaData> = {};
 
 	constructor(
 		config: SearchControllerConfig,
@@ -198,12 +199,12 @@ export class SearchController extends AbstractController {
 
 				if (products.length === 0) {
 					// handle no results
-					const data = getSearchSchemaData({ params: search.request, store: this.store, results: [] });
+					const data = getSearchSchemaData({ params: search.request, results: [] });
 					this.tracker.events[this.pageType].render({ data, siteId: this.config.globals?.siteId });
 				}
 
 				products.forEach((result: Product) => {
-					const data = this.schemaMap[result.id];
+					const data = schemaMap[result.id];
 					this.tracker.events[this.pageType].render({ data, siteId: this.config.globals?.siteId });
 					this.events.product[result.id] = this.events.product[result.id] || {};
 					this.events.product[result.id].render = true;
@@ -345,7 +346,7 @@ export class SearchController extends AbstractController {
 
 				// store position data or empty object
 				this.storage.set('scrollMap', scrollMap);
-				const data = this.schemaMap[result.id];
+				const data = schemaMap[result.id];
 				this.tracker.events[this.pageType].clickThrough({ data, siteId: this.config.globals?.siteId });
 				this.events.product[result.id] = this.events.product[result.id] || {};
 				this.events.product[result.id].clickThrough = true;
@@ -373,7 +374,7 @@ export class SearchController extends AbstractController {
 					return;
 				}
 
-				const data = this.schemaMap[result.id];
+				const data = schemaMap[result.id];
 				this.tracker.events[this.pageType].render({ data, siteId: this.config.globals?.siteId });
 				this.events.product[result.id] = this.events.product[result.id] || {};
 				this.events.product[result.id].render = true;
@@ -384,14 +385,14 @@ export class SearchController extends AbstractController {
 					return;
 				}
 
-				const data = this.schemaMap[result.id];
+				const data = schemaMap[result.id];
 				this.tracker.events[this.pageType].impression({ data, siteId: this.config.globals?.siteId });
 				this.events.product[result.id] = this.events.product[result.id] || {};
 				this.events.product[result.id].impression = true;
 				this.eventManager.fire('track.product.impression', { controller: this, product: result, trackEvent: data });
 			},
 			addToCart: (result: Product): void => {
-				const data = getSearchAddtocartSchemaData({ searchSchemaData: this.schemaMap[result.id], results: [result] });
+				const data = getSearchAddtocartSchemaData({ searchSchemaData: schemaMap[result.id], results: [result] });
 				this.tracker.events[this.pageType].addToCart({
 					data,
 					siteId: this.config.globals?.siteId,
@@ -453,29 +454,6 @@ export class SearchController extends AbstractController {
 
 		return params;
 	}
-
-	createResultSchemaMapping = (request: SearchRequestModel, response: [MetaResponseModel, SearchResponseModel]) => {
-		const [_, searchResponse] = response;
-		const schema = getSearchSchemaData({
-			params: request,
-			store: this.store,
-			results: [], // results added below because this would contain all results
-			response: searchResponse,
-		});
-
-		searchResponse.results?.forEach((result) => {
-			this.schemaMap[result.id!] = {
-				...schema,
-				results: [
-					{
-						position: result.position!,
-						uid: result.mappings?.core?.uid || '',
-						sku: result.mappings?.core?.sku,
-					},
-				],
-			};
-		});
-	};
 
 	search = async (): Promise<void> => {
 		try {
@@ -563,7 +541,7 @@ export class SearchController extends AbstractController {
 
 					// accumulate results from all backfill responses
 					const backfillResults: SearchResponseModelResult[] = backfillResponses.reduce((results, response, index) => {
-						this.createResultSchemaMapping(backfillRequestsParams[index], response);
+						createResultSchemaMapping({ request: backfillRequestsParams[index], response: response });
 						return results.concat(...response[1].results!);
 					}, [] as SearchResponseModelResult[]);
 
@@ -576,7 +554,7 @@ export class SearchController extends AbstractController {
 				} else {
 					// infinite with no backfills.
 					[meta, response] = await this.client.search(params);
-					this.createResultSchemaMapping(params, [meta, response]);
+					createResultSchemaMapping({ request: params, response: [meta, response] });
 					// append new results to previous results
 					response.results = [...this.previousResults, ...(response.results || [])];
 				}
@@ -589,7 +567,7 @@ export class SearchController extends AbstractController {
 				// clear previousResults to prevent infinite scroll from using them
 				this.previousResults = [];
 				[meta, response] = await this.client.search(params);
-				this.createResultSchemaMapping(params, [meta, response]);
+				createResultSchemaMapping({ request: params, response: [meta, response] });
 			}
 
 			// MockClient will overwrite the client search() method and use SearchData to return mock data which already contains meta data
@@ -707,6 +685,28 @@ export class SearchController extends AbstractController {
 	};
 }
 
+function createResultSchemaMapping({ request, response }: { request: SearchRequestModel; response: [MetaResponseModel, SearchResponseModel] }): void {
+	const [_, searchResponse] = response;
+	const schema = getSearchSchemaData({
+		params: request,
+		results: [], // results added below because this would contain all results
+		response: searchResponse,
+	});
+
+	searchResponse.results?.forEach((result) => {
+		schemaMap[result.id!] = {
+			...schema,
+			results: [
+				{
+					position: result.position!,
+					uid: result.mappings?.core?.uid || '',
+					sku: result.mappings?.core?.sku,
+				},
+			],
+		};
+	});
+}
+
 export function getStorableRequestParams(request: SearchRequestModel): SearchRequestModel {
 	return {
 		siteId: request.siteId,
@@ -790,12 +790,10 @@ function getSearchAddtocartSchemaData({
 
 function getSearchSchemaData({
 	params,
-	store,
 	results,
 	response,
 }: {
 	params: SearchRequestModel;
-	store: SearchStore;
 	results?: (SearchResponseModelResult | Product)[];
 	response?: SearchResponseModel;
 }): SearchSchemaData {
@@ -829,17 +827,15 @@ function getSearchSchemaData({
 	let correctedQuery: string | undefined;
 	if (response?.search?.originalQuery && response?.search?.query) {
 		correctedQuery = response?.search?.query;
-	} else if (store.search?.originalQuery?.string && store.search?.query?.string) {
-		correctedQuery = store.search?.query?.string;
 	}
 
-	const campaigns = response?.merchandising?.campaigns || store.merchandising.campaigns || [];
-	const experiments = response?.merchandising?.experiments || store.merchandising.experiments || [];
+	const campaigns = response?.merchandising?.campaigns || [];
+	const experiments = response?.merchandising?.experiments || [];
 
 	return {
 		q: params.search?.query?.string || '',
 		correctedQuery,
-		matchType: response?.search?.matchType || store.search.matchType,
+		matchType: response?.search?.matchType as SearchSchemaDataMatchTypeEnum,
 		...filters,
 		sort: params.sorts?.map((sort) => {
 			return {
@@ -848,13 +844,13 @@ function getSearchSchemaData({
 			};
 		}),
 		pagination: {
-			totalResults: response?.pagination?.totalResults || store.pagination.totalResults,
-			page: response?.pagination?.page || store.pagination.page,
-			resultsPerPage: response?.pagination?.pageSize || store.pagination.pageSize,
+			totalResults: response?.pagination?.totalResults!,
+			page: response?.pagination?.page!,
+			resultsPerPage: response?.pagination?.pageSize!,
 		},
 		merchandising: {
-			personalized: response?.merchandising?.personalized || store.merchandising.personalized,
-			redirect: response?.merchandising?.redirect || store.merchandising.redirect,
+			personalized: response?.merchandising?.personalized,
+			redirect: response?.merchandising?.redirect,
 			triggeredCampaigns:
 				(campaigns.length &&
 					campaigns.map((campaign) => {
