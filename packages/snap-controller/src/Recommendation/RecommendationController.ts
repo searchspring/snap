@@ -8,6 +8,7 @@ import type { RecommendRequestModel } from '@searchspring/snap-client';
 import type { RecommendationControllerConfig, ControllerServices, ContextVariables, AfterStoreObj } from '../types';
 import type { Item, Product as BeaconProduct, RecommendationsAddtocartSchemaData, RecommendationsSchemaData } from '@searchspring/beacon';
 import type { Next } from '@searchspring/snap-event-manager';
+import { CLICK_DUPLICATION_TIMEOUT, isClickWithinProductLink } from '../utils/isClickWithinProductLink';
 
 type RecommendationTrackMethods = {
 	product: {
@@ -16,9 +17,6 @@ type RecommendationTrackMethods = {
 		render: (result: Product) => void;
 		impression: (result: Product) => void;
 		addToCart: (result: Product) => void;
-	};
-	bundle: {
-		addToCart: (results: Product[]) => void;
 	};
 };
 
@@ -39,6 +37,7 @@ export class RecommendationController extends AbstractController {
 		product: Record<
 			string,
 			{
+				click?: boolean;
 				clickThrough?: boolean;
 				impression?: boolean;
 				render?: boolean;
@@ -84,8 +83,8 @@ export class RecommendationController extends AbstractController {
 				products.forEach((result) => {
 					this.events.product[result.id] = this.events.product[result.id] || {};
 					this.events.product[result.id].render = true;
+					this.eventManager.fire('track.product.render', { controller: this, product: result, trackEvent: data });
 				});
-				this.eventManager.fire('track.product.render', { controller: this, products, trackEvent: data });
 			}
 		});
 
@@ -116,16 +115,24 @@ export class RecommendationController extends AbstractController {
 				this.tracker.events.recommendations.clickThrough({ data, siteId: this.config.globals?.siteId });
 				this.events.product[result.id] = this.events.product[result.id] || {};
 				this.events.product[result.id].clickThrough = true;
-				this.eventManager.fire('track.product.clickThrough', { controller: this, event: e, products: [result], trackEvent: data });
+				this.eventManager.fire('track.product.clickThrough', { controller: this, event: e, product: result, trackEvent: data });
 			},
 			click: (e: MouseEvent, result): void => {
-				// TODO: closest might be going too far - write own function to only go n levels up - additionally check that href includes result.url
-				const href = (e.target as Element)?.getAttribute('href') || (e.target as Element)?.closest('a')?.getAttribute('href');
-				if (href) {
-					this.track.product.clickThrough(e, result);
-				} else {
-					// TODO: in future, send as an interaction event
+				if (this.events.product[result.id]?.click) {
+					return;
 				}
+
+				if (result.type === 'banner') {
+					return;
+				}
+
+				isClickWithinProductLink(e, result as Product) && this.track.product.clickThrough(e, result as Product);
+
+				this.events.product[result.id] = this.events.product[result.id] || {};
+				this.events.product[result.id].click = true;
+				setTimeout(() => {
+					this.events.product[result.id].click = false;
+				}, CLICK_DUPLICATION_TIMEOUT);
 			},
 			impression: (result): RecommendationsSchemaData | undefined => {
 				if (this.events.product[result.id]?.impression) return;
@@ -134,7 +141,7 @@ export class RecommendationController extends AbstractController {
 				this.tracker.events.recommendations.impression({ data, siteId: this.config.globals?.siteId });
 				this.events.product[result.id] = this.events.product[result.id] || {};
 				this.events.product[result.id].impression = true;
-				this.eventManager.fire('track.product.impression', { controller: this, products: [result], trackEvent: data });
+				this.eventManager.fire('track.product.impression', { controller: this, product: result, trackEvent: data });
 				return data;
 			},
 			render: (result: Product): RecommendationsSchemaData | undefined => {
@@ -144,23 +151,13 @@ export class RecommendationController extends AbstractController {
 				this.tracker.events.recommendations.render({ data, siteId: this.config.globals?.siteId });
 				this.events.product[result.id] = this.events.product[result.id] || {};
 				this.events.product[result.id].render = true;
-				this.eventManager.fire('track.product.render', { controller: this, products: [result], trackEvent: data });
+				this.eventManager.fire('track.product.render', { controller: this, product: result, trackEvent: data });
 				return data;
 			},
 			addToCart: (result: Product): RecommendationsAddtocartSchemaData | undefined => {
 				const data = getRecommendationsAddtocartSchemaData({ store: this.store, results: [result] });
 				this.tracker.events.recommendations.addToCart({ data, siteId: this.config.globals?.siteId });
-				this.eventManager.fire('track.product.addToCart', { controller: this, products: [result], trackEvent: data });
-				return data;
-			},
-		},
-		bundle: {
-			addToCart: (results: Product[]): RecommendationsAddtocartSchemaData | undefined => {
-				if (this.store.profile.type != 'bundle') return;
-
-				const data = getRecommendationsAddtocartSchemaData({ store: this.store, results });
-				this.tracker.events.recommendations.addToCart({ data, siteId: this.config.globals?.siteId });
-				this.eventManager.fire('track.bundle.addToCart', { controller: this, products: results, trackEvent: data });
+				this.eventManager.fire('track.product.addToCart', { controller: this, product: result, trackEvent: data });
 				return data;
 			},
 		},
@@ -322,6 +319,16 @@ export class RecommendationController extends AbstractController {
 			this.store.loading = false;
 		}
 	};
+
+	addToCart = async (_products: Product[] | Product): Promise<void> => {
+		const products = typeof (_products as Product[]).slice == 'function' ? (_products as Product[]).slice() : [_products];
+		(products as Product[]).forEach((product) => {
+			this.track.product.addToCart(product);
+		});
+		if (products.length > 0) {
+			this.eventManager.fire('addToCart', { controller: this, products });
+		}
+	};
 }
 function getRecommendationsAddtocartSchemaData({
 	store,
@@ -334,11 +341,11 @@ function getRecommendationsAddtocartSchemaData({
 		tag: store.profile.tag,
 		results:
 			results?.map((result: Product): BeaconProduct => {
-				const core = (result as Product).mappings.core!;
+				const core = (result as Product).mappings.core;
 				return {
-					uid: core.uid || '',
-					sku: core.sku,
-					price: Number(core.price),
+					uid: core?.uid || '',
+					sku: core?.sku,
+					price: Number(core?.price),
 					qty: result.quantity || 1,
 				};
 			}) || [],
@@ -349,10 +356,11 @@ function getRecommendationsSchemaData({ store, results }: { store: Recommendatio
 	return {
 		tag: store.profile.tag,
 		results:
-			results?.map((result: Product, idx: number): Item => {
+			results?.map((result: Product): Item => {
 				const core = result.mappings.core!;
+				const position = result.position;
 				return {
-					position: idx + 1,
+					position,
 					uid: core.uid || '',
 					sku: core.sku,
 				};

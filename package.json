@@ -25,12 +25,13 @@
     "format": "lerna exec --parallel --stream 'npm run format'",
     "storybook:preact": "npm run storybook --workspace=@searchspring/snap-preact-components",
     "publish": "lerna publish --conventional-commits --no-git-reset --no-verify-access --force-publish --yes --create-release github",
+    "publish:canary": "lerna publish --canary --pre-dist-tag alpha --conventional-commits --no-git-reset --no-verify-access --force-publish --yes",
     "prepare": "husky install"
   },
   "prettier": "@searchspring/prettier",
   "devDependencies": {
     "@searchspring/prettier": "1.0.2",
-    "@searchspring/snapi-types": "^0.1.39",
+    "@searchspring/snapi-types": "^0.1.40",
     "@testing-library/jest-dom": "6.2.0",
     "@types/jest": "29.5.12",
     "@types/jsdom": "21.1.6",

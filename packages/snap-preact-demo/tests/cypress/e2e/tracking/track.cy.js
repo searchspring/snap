@@ -96,6 +96,7 @@ describe('Tracking Beacon 2.0', () => {
 						expect(pagination).to.exist;
 						expect(merchandising).to.exist;
 
+						cy.wait(1000);
 						// Click on first product
 						cy.get(`.ss__result a[href='${firstResult.mappings.core.url}']`).first().click({ force: true });
 

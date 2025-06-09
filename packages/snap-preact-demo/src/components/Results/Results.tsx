@@ -2,7 +2,7 @@ import { h, Component } from 'preact';
 import { useRef } from 'preact/hooks';
 import { observer } from 'mobx-react';
 
-import { Pagination, Results as ResultsComponent, withStore, withController, useIntersection } from '@searchspring/snap-preact-components';
+import { Pagination, Results as ResultsComponent, withStore, withController, useIntersectionAdvanced } from '@searchspring/snap-preact-components';
 
 import { Profile } from '../Profile/Profile';
 import { Toolbar } from '../Toolbar/Toolbar';
@@ -37,7 +37,11 @@ export class Results extends Component<ResultsProps> {
 		const infiniteEnabled = Boolean(controller.config.settings.infinite);
 		const infiniteRef = useRef(null);
 		if (infiniteEnabled) {
-			const atBottom = useIntersection(infiniteRef, '50px');
+			const atBottom = useIntersectionAdvanced(infiniteRef, {
+				rootMargin: '0px',
+				threshold: 1,
+				minVisibleTime: 300,
+			});
 
 			if (atBottom && pagination.next && !loading && pagination.totalResults > 0) {
 				setTimeout(() => {
