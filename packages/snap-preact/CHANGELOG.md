@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.66.0](https://github.com/searchspring/snap/compare/v0.65.2...v0.66.0) (2025-06-09)
+
+### Features
+
+- add cart infering, update tracking documentation ([6bdef42](https://github.com/searchspring/snap/commit/6bdef423746486179bb079d78c0776ffedf79875))
+
 ## [0.65.2](https://github.com/searchspring/snap/compare/v0.65.1...v0.65.2) (2025-04-08)
 
 **Note:** Version bump only for package @searchspring/snap-preact
