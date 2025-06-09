@@ -1,4 +1,4 @@
-/*! For license information please see main.990f0f22.iframe.bundle.js.LICENSE.txt */
+/*! For license information please see main.27d6cc59.iframe.bundle.js.LICENSE.txt */
 (self.webpackChunk_searchspring_snap_preact_components = self.webpackChunk_searchspring_snap_preact_components || []).push([
 	[792],
 	{
@@ -2854,6 +2854,19 @@
 					(0, esm.yg)('h3', { id: 'color' }, 'color'),
 					(0, esm.yg)('p', null, 'The ', (0, esm.yg)('inlineCode', { parentName: 'p' }, 'color'), ' prop specifies the icon color.'),
 					(0, esm.yg)('pre', null, (0, esm.yg)('code', { parentName: 'pre', className: 'language-jsx' }, '<Icon icon=\'cogs\' color="#ffff00" />\n')),
+					(0, esm.yg)('h3', { id: 'title' }, 'title'),
+					(0, esm.yg)(
+						'p',
+						null,
+						'The ',
+						(0, esm.yg)('inlineCode', { parentName: 'p' }, 'title'),
+						' prop specifies the title to render inside the svg.'
+					),
+					(0, esm.yg)(
+						'pre',
+						null,
+						(0, esm.yg)('code', { parentName: 'pre', className: 'language-jsx' }, "<Icon icon='cogs' title={'Settings'} />\n")
+					),
 					(0, esm.yg)('h3', { id: 'size' }, 'size'),
 					(0, esm.yg)(
 						'p',
@@ -2955,6 +2968,7 @@
 						},
 						path: { description: 'SVG path', table: { type: { summary: 'string | SVGPathElement[]' } }, control: { type: 'text' } },
 						children: { description: 'SVG elements to be contained within (using children)', table: { type: { summary: 'string, JSX' } } },
+						title: { description: 'Title text to render inside the svg', table: { type: { summary: 'string' } }, control: { type: 'text' } },
 						color: {
 							description: 'Icon color',
 							table: { type: { summary: 'string' }, defaultValue: { summary: 'theme.colors.primary' } },
@@ -3027,7 +3041,7 @@
 				),
 				_providers__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__('./src/providers/cache.tsx'),
 				_paths__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__('./src/components/Atoms/Icon/paths.tsx'),
-				_excluded = ['color', 'icon', 'path', 'children', 'size', 'width', 'height', 'viewBox', 'disableStyles', 'className', 'style'];
+				_excluded = ['color', 'icon', 'path', 'children', 'size', 'width', 'title', 'height', 'viewBox', 'disableStyles', 'className', 'style'];
 			var CSS = {
 				icon: function icon(_ref) {
 					var _theme$colors,
@@ -3072,6 +3086,7 @@
 					children = props.children,
 					size = props.size,
 					width = props.width,
+					title = props.title,
 					height = props.height,
 					viewBox = props.viewBox,
 					disableStyles = props.disableStyles,
@@ -3120,6 +3135,7 @@
 										},
 										otherProps
 									),
+									title ? (0, _emotion_react__WEBPACK_IMPORTED_MODULE_8__.Y)('title', null, title) : null,
 									children ||
 										('string' === pathType
 											? (0, _emotion_react__WEBPACK_IMPORTED_MODULE_8__.Y)('path', { fill: disableStyles ? color : void 0, d: iconPath })
@@ -7273,6 +7289,7 @@
 			var CSS_carousel = function carousel(_ref) {
 					var _theme$colors,
 						_theme$colors2,
+						_theme$colors3,
 						theme = _ref.theme,
 						vertical = _ref.vertical;
 					return (0, _emotion_react__WEBPACK_IMPORTED_MODULE_17__.AH)({
@@ -7357,6 +7374,22 @@
 						'.swiper-slide-invisible-blank': { visibility: 'hidden' },
 						'.swiper-horizontal': { touchAction: 'pan-y' },
 						'.swiper-vertical': { touchAction: 'pan-x' },
+						'.swiper-scrollbar': {
+							position: 'absolute',
+							bottom: '0',
+							left: '0',
+							width: '100%',
+							height: '2px',
+							backgroundColor: '#d9d9d9',
+							'&:empty': { display: 'none' },
+							'.swiper-scrollbar-drag': {
+								position: 'relative',
+								height: '100%',
+								backgroundColor:
+									(null == theme || null === (_theme$colors3 = theme.colors) || void 0 === _theme$colors3 ? void 0 : _theme$colors3.primary) ||
+									'#000',
+							},
+						},
 					});
 				},
 				defaultCarouselBreakpoints = {
@@ -7455,6 +7488,7 @@
 						})(_props2, _excluded),
 						pagination = props.pagination,
 						navigation = props.navigation,
+						scrollbar = props.scrollbar,
 						subProps = {
 							icon: Object.assign(
 								{ className: 'ss__carousel__icon' },
@@ -7469,11 +7503,13 @@
 							? [
 									swiper_modules__WEBPACK_IMPORTED_MODULE_16__.Vx,
 									swiper_modules__WEBPACK_IMPORTED_MODULE_16__.dK,
+									swiper_modules__WEBPACK_IMPORTED_MODULE_16__.Ze,
 									swiper_modules__WEBPACK_IMPORTED_MODULE_16__.Jq,
 							  ].concat(modules)
 							: [
 									swiper_modules__WEBPACK_IMPORTED_MODULE_16__.Vx,
 									swiper_modules__WEBPACK_IMPORTED_MODULE_16__.dK,
+									swiper_modules__WEBPACK_IMPORTED_MODULE_16__.Ze,
 									swiper_modules__WEBPACK_IMPORTED_MODULE_16__.Jq,
 							  ],
 						swiperModules = swiperModulesUnfiltered.filter(function (module, pos) {
@@ -7502,7 +7538,8 @@
 						(navigation =
 							navigation && 'object' == typeof navigation
 								? Object.assign({ nextEl: '.ss_carousel_DNE', prevEl: '.ss_carousel_DNE' }, navigation)
-								: { nextEl: '.ss_carousel_DNE', prevEl: '.ss_carousel_DNE' });
+								: { nextEl: '.ss_carousel_DNE', prevEl: '.ss_carousel_DNE' }),
+						scrollbar && (scrollbar = 'object' == typeof scrollbar ? Object.assign({ enabled: !0 }, scrollbar) : { enabled: !0 });
 					var attachClasstoLastVisibleSlide = function attachClasstoLastVisibleSlide() {
 						if (rootComponentRef.current) {
 							var swiperElem = rootComponentRef.current,
@@ -7593,6 +7630,7 @@
 												{
 													navigation,
 													pagination,
+													scrollbar,
 													onResize: function onResize(swiper) {
 														additionalProps.onResize && additionalProps.onResize(), swiper.updateSlidesClasses(), attachClasstoLastVisibleSlide();
 													},
@@ -18096,6 +18134,7 @@
 								? void 0
 								: _properties$theme$com.result
 						),
+						trackingRef = props.trackingRef,
 						result = props.result,
 						hideBadge = props.hideBadge,
 						hideTitle = props.hideTitle,
@@ -18165,7 +18204,10 @@
 									null,
 									(0, emotion_react_browser_esm.Y)(
 										'article',
-										Object.assign({}, styling, { className: classnames_default()('ss__result', 'ss__result--' + layout, className) }),
+										Object.assign({}, styling, {
+											ref: trackingRef,
+											className: classnames_default()('ss__result', 'ss__result--' + layout, className),
+										}),
 										(0, emotion_react_browser_esm.Y)(
 											'div',
 											{ className: 'ss__result__image-wrapper' },
@@ -18174,14 +18216,7 @@
 												{
 													href: core.url,
 													onClick: function onClick(e) {
-														var _controller$track, _controller$track$pro;
-														_onClick && _onClick(e),
-															null == controller ||
-																null === (_controller$track = controller.track) ||
-																void 0 === _controller$track ||
-																null === (_controller$track$pro = _controller$track.product) ||
-																void 0 === _controller$track$pro ||
-																_controller$track$pro.click(e, result);
+														_onClick && _onClick(e);
 													},
 												},
 												!hideImage &&
@@ -18205,14 +18240,7 @@
 													(0, emotion_react_browser_esm.Y)('a', {
 														href: core.url,
 														onClick: function onClick(e) {
-															var _controller$track2, _controller$track2$pr;
-															_onClick && _onClick(e),
-																null == controller ||
-																	null === (_controller$track2 = controller.track) ||
-																	void 0 === _controller$track2 ||
-																	null === (_controller$track2$pr = _controller$track2.product) ||
-																	void 0 === _controller$track2$pr ||
-																	_controller$track2$pr.click(e, result);
+															_onClick && _onClick(e);
 														},
 														dangerouslySetInnerHTML: { __html: displayName || '' },
 													})
@@ -28412,6 +28440,12 @@
 							table: { type: { summary: 'boolean' }, defaultValue: { summary: !1 } },
 							control: { type: 'boolean' },
 						},
+						scrollbar: {
+							defaultValue: !1,
+							description: 'Display scrollbar',
+							table: { type: { summary: 'boolean' }, defaultValue: { summary: !1 } },
+							control: { type: 'boolean' },
+						},
 						vertical: {
 							defaultValue: !1,
 							description: 'Recommendation carousel direction',
@@ -29106,7 +29140,7 @@
 									: cartStore.addItems([product]));
 						},
 						addToCart = function addToCart(e) {
-							controller.track.bundle.addToCart(selectedItems), onAddToCart && onAddToCart(e, selectedItems);
+							controller.addToCart(selectedItems), onAddToCart && onAddToCart(e, selectedItems);
 						},
 						seedRef = (0, hooks_module.li)(),
 						carouselRef = (0, hooks_module.li)(),
@@ -31320,32 +31354,33 @@
 			__webpack_require__('../../node_modules/core-js/modules/es.object.assign.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.array.slice.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.array.map.js');
-			var preact__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__('../../node_modules/preact/dist/preact.module.js'),
-				mobx_react__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__('../../node_modules/mobx-react/dist/mobxreact.esm.js'),
-				_emotion_react__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__('../../node_modules/@emotion/react/dist/emotion-react.browser.esm.js'),
-				classnames__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__('../../node_modules/classnames/index.js'),
-				classnames__WEBPACK_IMPORTED_MODULE_4___default = __webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_4__),
-				deepmerge__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__('../../node_modules/deepmerge/dist/cjs.js'),
-				deepmerge__WEBPACK_IMPORTED_MODULE_5___default = __webpack_require__.n(deepmerge__WEBPACK_IMPORTED_MODULE_5__),
-				_searchspring_snap_store_mobx__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(
-					'../snap-store-mobx/dist/esm/Search/Stores/SearchMerchandisingStore.js'
-				),
-				_Atoms_Merchandising_InlineBanner__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(
-					'./src/components/Atoms/Merchandising/InlineBanner/InlineBanner.tsx'
-				),
-				_Molecules_Result__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__('./src/components/Molecules/Result/Result.tsx'),
-				_types__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__('./src/types.ts'),
-				_utilities__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__('./src/utilities/defined.ts'),
-				_providers__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(
+			var preact_module = __webpack_require__('../../node_modules/preact/dist/preact.module.js'),
+				mobxreact_esm = __webpack_require__('../../node_modules/mobx-react/dist/mobxreact.esm.js'),
+				emotion_react_browser_esm = __webpack_require__('../../node_modules/@emotion/react/dist/emotion-react.browser.esm.js'),
+				classnames = __webpack_require__('../../node_modules/classnames/index.js'),
+				classnames_default = __webpack_require__.n(classnames),
+				cjs = __webpack_require__('../../node_modules/deepmerge/dist/cjs.js'),
+				cjs_default = __webpack_require__.n(cjs),
+				SearchMerchandisingStore = __webpack_require__('../snap-store-mobx/dist/esm/Search/Stores/SearchMerchandisingStore.js'),
+				InlineBanner = __webpack_require__('./src/components/Atoms/Merchandising/InlineBanner/InlineBanner.tsx'),
+				Result = __webpack_require__('./src/components/Molecules/Result/Result.tsx'),
+				types = __webpack_require__('./src/types.ts'),
+				defined = __webpack_require__('./src/utilities/defined.ts'),
+				createImpressionObserver =
+					(__webpack_require__('../../node_modules/core-js/modules/es.array.index-of.js'),
+					__webpack_require__('../../node_modules/core-js/modules/es.symbol.js'),
+					__webpack_require__('./src/utilities/createImpressionObserver.ts')),
+				hooks_module = __webpack_require__('../../node_modules/preact/hooks/dist/hooks.module.js'),
+				_excluded = ['controller', 'result'];
+			var emotion_element_cbed451f_browser_esm = __webpack_require__(
 					'../../node_modules/@emotion/react/dist/emotion-element-cbed451f.browser.esm.js'
 				),
-				_providers__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__('./src/providers/cache.tsx'),
-				_hooks_useDisplaySettings__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__('./src/hooks/useDisplaySettings.tsx'),
-				_Trackers_ResultTracker__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__('./src/components/Trackers/ResultTracker/ResultTracker.tsx'),
+				cache = __webpack_require__('./src/providers/cache.tsx'),
+				useDisplaySettings = __webpack_require__('./src/hooks/useDisplaySettings.tsx'),
 				CSS_results = function results(_ref) {
 					var columns = _ref.columns,
 						gapSize = _ref.gapSize;
-					return (0, _emotion_react__WEBPACK_IMPORTED_MODULE_6__.AH)({
+					return (0, emotion_react_browser_esm.AH)({
 						display: 'flex',
 						flexFlow: 'row wrap',
 						gap: gapSize,
@@ -31359,7 +31394,53 @@
 						'@supports (display: grid)': { display: 'grid', '& .ss__result': { width: 'initial', margin: 0 } },
 					});
 				},
-				Results = (0, mobx_react__WEBPACK_IMPORTED_MODULE_7__.PA)(function (properties) {
+				ResultComponent = (function withTracking(WrappedComponent) {
+					return function WithTracking(props) {
+						var controller = props.controller,
+							result = props.result,
+							restProps = (function _objectWithoutProperties(e, t) {
+								if (null == e) return {};
+								var o,
+									r,
+									i = (function _objectWithoutPropertiesLoose(r, e) {
+										if (null == r) return {};
+										var t = {};
+										for (var n in r)
+											if ({}.hasOwnProperty.call(r, n)) {
+												if (-1 !== e.indexOf(n)) continue;
+												t[n] = r[n];
+											}
+										return t;
+									})(e, t);
+								if (Object.getOwnPropertySymbols) {
+									var n = Object.getOwnPropertySymbols(e);
+									for (r = 0; r < n.length; r++) (o = n[r]), -1 === t.indexOf(o) && {}.propertyIsEnumerable.call(e, o) && (i[o] = e[o]);
+								}
+								return i;
+							})(props, _excluded);
+						controller || console.warn('Warning: No controller provided to withTracking'),
+							result || console.warn('Warning: No result provided to withTracking');
+						var additionalEffectKeys = [];
+						'autocomplete' === (null == controller ? void 0 : controller.type) && additionalEffectKeys.push(controller.store.state.input);
+						var _createImpressionObse = (0, createImpressionObserver.Q)({ additionalEffectKeys }),
+							ref = _createImpressionObse.ref;
+						_createImpressionObse.inViewport &&
+							'product' === (null == result ? void 0 : result.type) &&
+							(null == controller || controller.track.product.impression(result));
+						var currentRef = ref.current;
+						if (currentRef) {
+							var handleClick = (0, hooks_module.hb)(function (e) {
+								null == controller || controller.track.product.click(e, result);
+							}, []);
+							currentRef.setAttribute('sstracking', 'true'),
+								currentRef.removeEventListener('click', handleClick),
+								currentRef.addEventListener('click', handleClick);
+						}
+						var trackingProps = Object.assign({}, restProps, { controller, result, trackingRef: ref });
+						return (0, preact_module.h)(WrappedComponent, Object.assign({}, trackingProps));
+					};
+				})(Result.Q),
+				Results = (0, mobxreact_esm.PA)(function (properties) {
 					var _properties$controlle,
 						_properties$controlle2,
 						_globalTheme$componen,
@@ -31375,7 +31456,7 @@
 						_props7,
 						_results,
 						_props$results,
-						globalTheme = (0, _providers__WEBPACK_IMPORTED_MODULE_8__.a)(),
+						globalTheme = (0, emotion_element_cbed451f_browser_esm.a)(),
 						defaultBreakpointsProps = {
 							0: { columns: properties.columns || 1 },
 							540: { columns: properties.columns || 2 },
@@ -31393,7 +31474,7 @@
 										: _properties$controlle2.results,
 								columns: 4,
 								gapSize: '20px',
-								layout: _types__WEBPACK_IMPORTED_MODULE_9__.PE.GRID,
+								layout: types.PE.GRID,
 								breakpoints: defaultBreakpointsProps,
 							},
 							null == globalTheme || null === (_globalTheme$componen = globalTheme.components) || void 0 === _globalTheme$componen
@@ -31407,10 +31488,8 @@
 								? void 0
 								: _properties$theme$com.results
 						),
-						displaySettings = (0, _hooks_useDisplaySettings__WEBPACK_IMPORTED_MODULE_10__.X)(
-							(null === (_props = props) || void 0 === _props ? void 0 : _props.breakpoints) || {}
-						),
-						theme = deepmerge__WEBPACK_IMPORTED_MODULE_5___default()(
+						displaySettings = (0, useDisplaySettings.X)((null === (_props = props) || void 0 === _props ? void 0 : _props.breakpoints) || {}),
+						theme = cjs_default()(
 							(null === (_props2 = props) || void 0 === _props2 ? void 0 : _props2.theme) || {},
 							(null == displaySettings ? void 0 : displaySettings.theme) || {},
 							{
@@ -31431,7 +31510,7 @@
 								null == globalTheme || null === (_globalTheme$componen2 = globalTheme.components) || void 0 === _globalTheme$componen2
 									? void 0
 									: _globalTheme$componen2.result,
-								(0, _utilities__WEBPACK_IMPORTED_MODULE_11__.s)({ disableStyles }),
+								(0, defined.s)({ disableStyles }),
 								{ theme: null === (_props4 = props) || void 0 === _props4 ? void 0 : _props4.theme }
 							),
 							inlineBanner: Object.assign(
@@ -31439,7 +31518,7 @@
 								null == globalTheme || null === (_globalTheme$componen3 = globalTheme.components) || void 0 === _globalTheme$componen3
 									? void 0
 									: _globalTheme$componen3.inlineBanner,
-								(0, _utilities__WEBPACK_IMPORTED_MODULE_11__.s)({ disableStyles }),
+								(0, defined.s)({ disableStyles }),
 								{ theme: null === (_props5 = props) || void 0 === _props5 ? void 0 : _props5.theme }
 							),
 						},
@@ -31458,26 +31537,28 @@
 					return (
 						disableStyles
 							? style && (styling.css = [style])
-							: (styling.css = [
-									CSS_results({ columns: layout == _types__WEBPACK_IMPORTED_MODULE_9__.PE.LIST ? 1 : props.columns, gapSize: props.gapSize }),
-									style,
-							  ]),
+							: (styling.css = [CSS_results({ columns: layout == types.PE.LIST ? 1 : props.columns, gapSize: props.gapSize }), style]),
 						null !== (_results = results) && void 0 !== _results && _results.length
-							? (0, _emotion_react__WEBPACK_IMPORTED_MODULE_6__.Y)(
-									_providers__WEBPACK_IMPORTED_MODULE_12__._,
+							? (0, emotion_react_browser_esm.Y)(
+									cache._,
 									null,
-									(0, _emotion_react__WEBPACK_IMPORTED_MODULE_6__.Y)(
+									(0, emotion_react_browser_esm.Y)(
 										'div',
-										Object.assign({}, styling, {
-											className: classnames__WEBPACK_IMPORTED_MODULE_4___default()('ss__results', 'ss__results-' + props.layout, className),
-										}),
+										Object.assign({}, styling, { className: classnames_default()('ss__results', 'ss__results-' + props.layout, className) }),
 										results.map(function (result) {
-											return (0,
-											_emotion_react__WEBPACK_IMPORTED_MODULE_6__.Y)(_Trackers_ResultTracker__WEBPACK_IMPORTED_MODULE_13__.o, { key: result.id, result, controller }, result.type === _searchspring_snap_store_mobx__WEBPACK_IMPORTED_MODULE_14__.c.BANNER ? (0, _emotion_react__WEBPACK_IMPORTED_MODULE_6__.Y)(_Atoms_Merchandising_InlineBanner__WEBPACK_IMPORTED_MODULE_15__._, Object.assign({}, subProps.inlineBanner, { key: result.id, banner: result, layout: props.layout })) : (0, _emotion_react__WEBPACK_IMPORTED_MODULE_6__.Y)(_Molecules_Result__WEBPACK_IMPORTED_MODULE_16__.Q, Object.assign({ key: result.id }, subProps.result, { result, layout: props.layout, controller })));
+											return result.type === SearchMerchandisingStore.c.BANNER
+												? (0, emotion_react_browser_esm.Y)(
+														InlineBanner._,
+														Object.assign({}, subProps.inlineBanner, { key: result.id, banner: result, layout: props.layout })
+												  )
+												: (0, emotion_react_browser_esm.Y)(
+														ResultComponent,
+														Object.assign({ key: result.id }, subProps.result, { result, layout: props.layout, controller })
+												  );
 										})
 									)
 							  )
-							: (0, _emotion_react__WEBPACK_IMPORTED_MODULE_6__.Y)(preact__WEBPACK_IMPORTED_MODULE_3__.FK, null)
+							: (0, emotion_react_browser_esm.Y)(preact_module.FK, null)
 					);
 				});
 		},
@@ -32125,92 +32206,22 @@
 			'use strict';
 			__webpack_require__.d(__webpack_exports__, { o: () => ResultTracker });
 			__webpack_require__('../../node_modules/core-js/modules/es.object.assign.js');
-			var emotion_react_browser_esm = __webpack_require__('../../node_modules/@emotion/react/dist/emotion-react.browser.esm.js'),
-				hooks_module = __webpack_require__('../../node_modules/preact/hooks/dist/hooks.module.js'),
-				mobxreact_esm = __webpack_require__('../../node_modules/mobx-react/dist/mobxreact.esm.js'),
-				emotion_element_cbed451f_browser_esm = __webpack_require__('../../node_modules/@emotion/react/dist/emotion-element-cbed451f.browser.esm.js');
-			__webpack_require__('../../node_modules/core-js/modules/es.date.now.js'),
-				__webpack_require__('../../node_modules/core-js/modules/es.date.to-string.js'),
-				__webpack_require__('../../node_modules/core-js/modules/web.timers.js'),
-				__webpack_require__('../../node_modules/core-js/modules/es.array.is-array.js'),
-				__webpack_require__('../../node_modules/core-js/modules/es.symbol.js'),
-				__webpack_require__('../../node_modules/core-js/modules/es.symbol.description.js'),
-				__webpack_require__('../../node_modules/core-js/modules/es.object.to-string.js'),
-				__webpack_require__('../../node_modules/core-js/modules/es.symbol.iterator.js'),
-				__webpack_require__('../../node_modules/core-js/modules/es.string.iterator.js'),
-				__webpack_require__('../../node_modules/core-js/modules/es.array.iterator.js'),
-				__webpack_require__('../../node_modules/core-js/modules/web.dom-collections.iterator.js'),
-				__webpack_require__('../../node_modules/core-js/modules/es.array.slice.js'),
-				__webpack_require__('../../node_modules/core-js/modules/es.function.name.js'),
-				__webpack_require__('../../node_modules/core-js/modules/es.array.from.js');
-			function _slicedToArray(r, e) {
-				return (
-					(function _arrayWithHoles(r) {
-						if (Array.isArray(r)) return r;
-					})(r) ||
-					(function _iterableToArrayLimit(r, l) {
-						var t = null == r ? null : ('undefined' != typeof Symbol && r[Symbol.iterator]) || r['@@iterator'];
-						if (null != t) {
-							var e,
-								n,
-								i,
-								u,
-								a = [],
-								f = !0,
-								o = !1;
-							try {
-								if (((i = (t = t.call(r)).next), 0 === l)) {
-									if (Object(t) !== t) return;
-									f = !1;
-								} else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0);
-							} catch (r) {
-								(o = !0), (n = r);
-							} finally {
-								try {
-									if (!f && null != t.return && ((u = t.return()), Object(u) !== u)) return;
-								} finally {
-									if (o) throw n;
-								}
-							}
-							return a;
-						}
-					})(r, e) ||
-					(function _unsupportedIterableToArray(r, a) {
-						if (r) {
-							if ('string' == typeof r) return _arrayLikeToArray(r, a);
-							var t = {}.toString.call(r).slice(8, -1);
-							return (
-								'Object' === t && r.constructor && (t = r.constructor.name),
-								'Map' === t || 'Set' === t
-									? Array.from(r)
-									: 'Arguments' === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t)
-									? _arrayLikeToArray(r, a)
-									: void 0
-							);
-						}
-					})(r, e) ||
-					(function _nonIterableRest() {
-						throw new TypeError(
-							'Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.'
-						);
-					})()
-				);
-			}
-			function _arrayLikeToArray(r, a) {
-				(null == a || a > r.length) && (a = r.length);
-				for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e];
-				return n;
-			}
-			var classnames = __webpack_require__('../../node_modules/classnames/index.js'),
-				classnames_default = __webpack_require__.n(classnames),
+			var _emotion_react__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__('../../node_modules/@emotion/react/dist/emotion-react.browser.esm.js'),
+				mobx_react__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__('../../node_modules/mobx-react/dist/mobxreact.esm.js'),
+				_providers__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
+					'../../node_modules/@emotion/react/dist/emotion-element-cbed451f.browser.esm.js'
+				),
+				classnames__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__('../../node_modules/classnames/index.js'),
+				classnames__WEBPACK_IMPORTED_MODULE_1___default = __webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_1__),
+				_utilities__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__('./src/utilities/createImpressionObserver.ts'),
 				CSS_ResultTracker = function ResultTracker() {
-					return (0, emotion_react_browser_esm.AH)({});
+					return (0, _emotion_react__WEBPACK_IMPORTED_MODULE_2__.AH)({});
 				},
-				ResultTracker = (0, mobxreact_esm.PA)(function (properties) {
+				ResultTracker = (0, mobx_react__WEBPACK_IMPORTED_MODULE_3__.PA)(function (properties) {
 					var _globalTheme$componen,
 						_properties$theme,
 						_properties$theme$com,
-						globalTheme = (0, emotion_element_cbed451f_browser_esm.a)(),
+						globalTheme = (0, _providers__WEBPACK_IMPORTED_MODULE_4__.a)(),
 						props = Object.assign(
 							{},
 							null == globalTheme || null === (_globalTheme$componen = globalTheme.components) || void 0 === _globalTheme$componen
@@ -32232,89 +32243,28 @@
 						disableStyles = props.disableStyles,
 						style = props.style,
 						mergedTrack = Object.assign({}, { render: !0, impression: !0, click: !0 }, track),
-						resultRef = (0, hooks_module.li)(null),
-						resultInViewport = (function useIntersectionAdvanced(ref) {
-							var options = arguments.length > 1 && void 0 !== arguments[1] ? arguments[1] : {},
-								_options$key = options.key,
-								key = void 0 === _options$key ? '' : _options$key,
-								_options$rootMargin = options.rootMargin,
-								rootMargin = void 0 === _options$rootMargin ? '0px' : _options$rootMargin,
-								_options$fireOnce = options.fireOnce,
-								fireOnce = void 0 !== _options$fireOnce && _options$fireOnce,
-								_options$threshold = options.threshold,
-								threshold = void 0 === _options$threshold ? 0 : _options$threshold,
-								_options$startDelay = options.startDelay,
-								startDelay = void 0 === _options$startDelay ? 0 : _options$startDelay,
-								_options$minVisibleTi = options.minVisibleTime,
-								minVisibleTime = void 0 === _options$minVisibleTi ? 0 : _options$minVisibleTi,
-								_useState2 = _slicedToArray((0, hooks_module.J0)(!1), 2),
-								isIntersecting = _useState2[0],
-								setIntersecting = _useState2[1],
-								visibleTimerRef = (0, hooks_module.li)(null),
-								visibleStartRef = (0, hooks_module.li)(null);
-							return (
-								(0, hooks_module.vJ)(
-									function () {
-										setIntersecting(!1);
-										var startDelayTimeout = null,
-											observer = null,
-											startObserver = function startObserver() {
-												ref.current &&
-													((observer = new IntersectionObserver(
-														function (_ref) {
-															_slicedToArray(_ref, 1)[0].isIntersecting
-																? minVisibleTime > 0
-																	? ((visibleStartRef.current = Date.now()),
-																	  visibleTimerRef.current && window.clearTimeout(visibleTimerRef.current),
-																	  (visibleTimerRef.current = window.setTimeout(function () {
-																			setIntersecting(!0), fireOnce && ref.current && observer && observer.unobserve(ref.current);
-																	  }, minVisibleTime)))
-																	: (setIntersecting(!0), fireOnce && ref.current && observer && observer.unobserve(ref.current))
-																: (visibleTimerRef.current && window.clearTimeout(visibleTimerRef.current),
-																  (visibleTimerRef.current = null),
-																  (visibleStartRef.current = null),
-																  setIntersecting(!1));
-														},
-														{ rootMargin, threshold }
-													)),
-													ref.current && observer.observe(ref.current));
-											};
-										return (
-											startDelay > 0 ? (startDelayTimeout = setTimeout(startObserver, startDelay)) : startObserver(),
-											function () {
-												setIntersecting(!1),
-													startDelayTimeout && window.clearTimeout(startDelayTimeout),
-													visibleTimerRef.current && window.clearTimeout(visibleTimerRef.current),
-													observer && ref.current && observer.unobserve(ref.current);
-											}
-										);
-									},
-									[key]
-								),
-								isIntersecting
-							);
-						})(resultRef, { key: result.id, rootMargin: '0px', fireOnce: !0, threshold: 0.75, startDelay: 2e3, minVisibleTime: 150 });
-					resultInViewport &&
+						_createImpressionObse = (0, _utilities__WEBPACK_IMPORTED_MODULE_5__.Q)(),
+						ref = _createImpressionObse.ref;
+					_createImpressionObse.inViewport &&
 						mergedTrack.impression &&
 						'product' === result.type &&
 						(null == controller || controller.track.product.impression(result));
 					var styling = {};
 					return (
 						disableStyles ? style && (styling.css = [style]) : (styling.css = [CSS_ResultTracker(), style]),
-						(0, emotion_react_browser_esm.Y)(
+						(0, _emotion_react__WEBPACK_IMPORTED_MODULE_2__.Y)(
 							'div',
 							Object.assign(
 								{
-									key: result.id,
-									className: classnames_default()(
+									className: classnames__WEBPACK_IMPORTED_MODULE_1___default()(
 										'ss__result-tracker',
 										'ss__' + (null == controller ? void 0 : controller.type) + '-result-tracker',
 										className
 									),
 									onClick: function onClick(e) {
-										mergedTrack.click && 'product' === result.type && (null == controller || controller.track.product.click(e, result));
+										'product' === result.type && mergedTrack.click && (null == controller || controller.track.product.click(e, result));
 									},
-									ref: resultRef,
+									ref,
 								},
 								styling
 							),
@@ -33419,6 +33369,162 @@
 				theme: { description: 'Specify specific sub component props', table: { type: { summary: 'object' } }, control: { type: 'object' } },
 			};
 		},
+		'./src/utilities/createImpressionObserver.ts': (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+			'use strict';
+			__webpack_require__.d(__webpack_exports__, { Q: () => createImpressionObserver });
+			var hooks_module = __webpack_require__('../../node_modules/preact/hooks/dist/hooks.module.js');
+			__webpack_require__('../../node_modules/core-js/modules/es.date.now.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.date.to-string.js'),
+				__webpack_require__('../../node_modules/core-js/modules/web.timers.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.array.concat.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.array.is-array.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.symbol.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.symbol.description.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.object.to-string.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.symbol.iterator.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.string.iterator.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.array.iterator.js'),
+				__webpack_require__('../../node_modules/core-js/modules/web.dom-collections.iterator.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.array.slice.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.function.name.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.array.from.js');
+			function _toConsumableArray(r) {
+				return (
+					(function _arrayWithoutHoles(r) {
+						if (Array.isArray(r)) return _arrayLikeToArray(r);
+					})(r) ||
+					(function _iterableToArray(r) {
+						if (('undefined' != typeof Symbol && null != r[Symbol.iterator]) || null != r['@@iterator']) return Array.from(r);
+					})(r) ||
+					_unsupportedIterableToArray(r) ||
+					(function _nonIterableSpread() {
+						throw new TypeError(
+							'Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.'
+						);
+					})()
+				);
+			}
+			function _slicedToArray(r, e) {
+				return (
+					(function _arrayWithHoles(r) {
+						if (Array.isArray(r)) return r;
+					})(r) ||
+					(function _iterableToArrayLimit(r, l) {
+						var t = null == r ? null : ('undefined' != typeof Symbol && r[Symbol.iterator]) || r['@@iterator'];
+						if (null != t) {
+							var e,
+								n,
+								i,
+								u,
+								a = [],
+								f = !0,
+								o = !1;
+							try {
+								if (((i = (t = t.call(r)).next), 0 === l)) {
+									if (Object(t) !== t) return;
+									f = !1;
+								} else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0);
+							} catch (r) {
+								(o = !0), (n = r);
+							} finally {
+								try {
+									if (!f && null != t.return && ((u = t.return()), Object(u) !== u)) return;
+								} finally {
+									if (o) throw n;
+								}
+							}
+							return a;
+						}
+					})(r, e) ||
+					_unsupportedIterableToArray(r, e) ||
+					(function _nonIterableRest() {
+						throw new TypeError(
+							'Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.'
+						);
+					})()
+				);
+			}
+			function _unsupportedIterableToArray(r, a) {
+				if (r) {
+					if ('string' == typeof r) return _arrayLikeToArray(r, a);
+					var t = {}.toString.call(r).slice(8, -1);
+					return (
+						'Object' === t && r.constructor && (t = r.constructor.name),
+						'Map' === t || 'Set' === t
+							? Array.from(r)
+							: 'Arguments' === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t)
+							? _arrayLikeToArray(r, a)
+							: void 0
+					);
+				}
+			}
+			function _arrayLikeToArray(r, a) {
+				(null == a || a > r.length) && (a = r.length);
+				for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e];
+				return n;
+			}
+			var useIntersectionAdvanced = function useIntersectionAdvanced(ref) {
+				var options = arguments.length > 1 && void 0 !== arguments[1] ? arguments[1] : {},
+					_options$rootMargin = options.rootMargin,
+					rootMargin = void 0 === _options$rootMargin ? '0px' : _options$rootMargin,
+					_options$fireOnce = options.fireOnce,
+					fireOnce = void 0 !== _options$fireOnce && _options$fireOnce,
+					_options$threshold = options.threshold,
+					threshold = void 0 === _options$threshold ? 0 : _options$threshold,
+					_options$minVisibleTi = options.minVisibleTime,
+					minVisibleTime = void 0 === _options$minVisibleTi ? 0 : _options$minVisibleTi,
+					_useState2 = _slicedToArray((0, hooks_module.J0)(!1), 2),
+					isIntersecting = _useState2[0],
+					setIntersecting = _useState2[1],
+					visibleTimerRef = (0, hooks_module.li)(null),
+					visibleStartRef = (0, hooks_module.li)(null);
+				return (
+					(0, hooks_module.vJ)(function () {
+						setIntersecting(!1);
+						var observer = null;
+						if (ref.current)
+							return (
+								(observer = new IntersectionObserver(
+									function (_ref) {
+										_slicedToArray(_ref, 1)[0].isIntersecting
+											? minVisibleTime > 0
+												? ((visibleStartRef.current = Date.now()),
+												  visibleTimerRef.current && window.clearTimeout(visibleTimerRef.current),
+												  (visibleTimerRef.current = window.setTimeout(function () {
+														setIntersecting(!0), fireOnce && ref.current && observer && observer.unobserve(ref.current);
+												  }, minVisibleTime)))
+												: (setIntersecting(!0), fireOnce && ref.current && observer && observer.unobserve(ref.current))
+											: (visibleTimerRef.current && window.clearTimeout(visibleTimerRef.current),
+											  (visibleTimerRef.current = null),
+											  (visibleStartRef.current = null),
+											  setIntersecting(!1));
+									},
+									{ rootMargin, threshold }
+								)),
+								ref.current && observer.observe(ref.current),
+								function () {
+									setIntersecting(!1),
+										visibleTimerRef.current && window.clearTimeout(visibleTimerRef.current),
+										observer && ref.current && observer.unobserve(ref.current);
+								}
+							);
+					}, [ref].concat(_toConsumableArray((null == options ? void 0 : options.additionalEffectKeys) || []))),
+					isIntersecting
+				);
+			};
+			function createImpressionObserver(options) {
+				var ref = (0, hooks_module.li)(null);
+				return {
+					ref,
+					inViewport: useIntersectionAdvanced(ref, {
+						fireOnce: !0,
+						threshold: 0.75,
+						minVisibleTime: 1e3,
+						additionalEffectKeys: (null == options ? void 0 : options.additionalEffectKeys) || [],
+					}),
+				};
+			}
+		},
 		'./src/utilities/defaultBadgeComponentMap.ts': (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 			'use strict';
 			__webpack_require__.d(__webpack_exports__, { q: () => defaultBadgeComponentMap });
@@ -33520,6 +33626,7 @@
 					(__webpack_require__('../../node_modules/core-js/modules/es.string.search.js'),
 					__webpack_require__('../../node_modules/core-js/modules/es.regexp.exec.js'),
 					__webpack_require__('../../node_modules/core-js/modules/es.array.index-of.js'),
+					__webpack_require__('../../node_modules/core-js/modules/web.timers.js'),
 					__webpack_require__('../../node_modules/core-js/modules/es.array.map.js'),
 					__webpack_require__('../../node_modules/core-js/modules/es.array.fill.js'),
 					__webpack_require__('../../node_modules/core-js/modules/es.object.assign.js'),
@@ -33531,7 +33638,6 @@
 					__webpack_require__('../../node_modules/core-js/modules/es.string.includes.js'),
 					__webpack_require__('../../node_modules/core-js/modules/es.array.every.js'),
 					__webpack_require__('../../node_modules/core-js/modules/es.string.replace.js'),
-					__webpack_require__('../../node_modules/core-js/modules/web.timers.js'),
 					__webpack_require__('../../node_modules/core-js/modules/es.array.join.js'),
 					__webpack_require__('../../node_modules/core-js/modules/es.string.split.js'),
 					__webpack_require__('../../node_modules/core-js/modules/es.string.trim.js'),
@@ -35189,6 +35295,40 @@
 					params
 				);
 			}
+			!(function (ControllerTypes) {
+				(ControllerTypes.search = 'search'),
+					(ControllerTypes.autocomplete = 'autocomplete'),
+					(ControllerTypes.finder = 'finder'),
+					(ControllerTypes.recommendation = 'recommendation');
+			})(ControllerTypes || (ControllerTypes = {}));
+			var isClickWithinProductLink = function isClickWithinProductLink(e, result) {
+				for (
+					var _result$display,
+						_result$display$mappi,
+						_result$mappings$core,
+						currentElement = e.target,
+						href = null,
+						level = 0,
+						resultUrl =
+							(null == result ||
+							null === (_result$display = result.display) ||
+							void 0 === _result$display ||
+							null === (_result$display$mappi = _result$display.mappings.core) ||
+							void 0 === _result$display$mappi
+								? void 0
+								: _result$display$mappi.url) ||
+							(null == result || null === (_result$mappings$core = result.mappings.core) || void 0 === _result$mappings$core
+								? void 0
+								: _result$mappings$core.url) ||
+							'';
+					currentElement && level < 12;
+
+				) {
+					if ((href = currentElement.getAttribute('href')) && resultUrl && href.includes(resultUrl)) return !0;
+					(currentElement = currentElement.parentElement), level++;
+				}
+				return !1;
+			};
 			function SearchController_regeneratorRuntime() {
 				SearchController_regeneratorRuntime = function _regeneratorRuntime() {
 					return e;
@@ -35692,12 +35832,6 @@
 					_setPrototypeOf(t, e)
 				);
 			}
-			!(function (ControllerTypes) {
-				(ControllerTypes.search = 'search'),
-					(ControllerTypes.autocomplete = 'autocomplete'),
-					(ControllerTypes.finder = 'finder'),
-					(ControllerTypes.recommendation = 'recommendation');
-			})(ControllerTypes || (ControllerTypes = {}));
 			var BACKGROUND_FILTER_FIELD_MATCHES = ['collection', 'category', 'categories', 'hierarchy'],
 				BACKGROUND_FILTERS_VALUE_FLAGS = [1, 0, '1', '0', 'true', 'false', !0, !1],
 				defaultConfig = {
@@ -35705,6 +35839,7 @@
 					globals: {},
 					settings: { redirects: { merchandising: !0, singleResult: !0 }, facets: { trim: !0, pinFiltered: !0, storeRange: !0, autoOpenActive: !0 } },
 				},
+				schemaMap = {},
 				SearchController = (function (_AbstractController) {
 					function SearchController(config, _ref, context) {
 						var _this$config$settings7,
@@ -35803,7 +35938,7 @@
 												_this.log.warn('Failed to save srcollMap!', err);
 											}
 										_this.storage.set('scrollMap', scrollMap);
-										var data = getSearchSchemaData({ params: _this.params, store: _this.store, results: [result] });
+										var data = schemaMap[result.id];
 										_this.tracker.events[_this.pageType].clickThrough({
 											data,
 											siteId:
@@ -35813,29 +35948,30 @@
 										}),
 											(_this.events.product[result.id] = _this.events.product[result.id] || {}),
 											(_this.events.product[result.id].clickThrough = !0),
-											_this.eventManager.fire('track.product.clickThrough', { controller: _this, event: e, products: [result], trackEvent: data });
+											_this.eventManager.fire('track.product.clickThrough', { controller: _this, event: e, product: result, trackEvent: data });
 									}
 								},
 								click: function click(e, result) {
-									var _e$target, _e$target2, _e$target2$closest;
-									'banner' !== result.type &&
-										((null === (_e$target = e.target) || void 0 === _e$target ? void 0 : _e$target.getAttribute('href')) ||
-											(null === (_e$target2 = e.target) ||
-											void 0 === _e$target2 ||
-											null === (_e$target2$closest = _e$target2.closest('a')) ||
-											void 0 === _e$target2$closest
-												? void 0
-												: _e$target2$closest.getAttribute('href'))) &&
-										_this.track.product.clickThrough(e, result);
+									var _this$events$product$2;
+									(null !== (_this$events$product$2 = _this.events.product[result.id]) &&
+										void 0 !== _this$events$product$2 &&
+										_this$events$product$2.click) ||
+										('banner' !== result.type &&
+											(isClickWithinProductLink(e, result) && _this.track.product.clickThrough(e, result),
+											(_this.events.product[result.id] = _this.events.product[result.id] || {}),
+											(_this.events.product[result.id].click = !0),
+											setTimeout(function () {
+												_this.events.product[result.id].click = !1;
+											}, 300)));
 								},
 								render: function render(result) {
-									var _this$events$product$2, _this$config$globals2;
+									var _this$events$product$3, _this$config$globals2;
 									if (
-										null === (_this$events$product$2 = _this.events.product[result.id]) ||
-										void 0 === _this$events$product$2 ||
-										!_this$events$product$2.render
+										null === (_this$events$product$3 = _this.events.product[result.id]) ||
+										void 0 === _this$events$product$3 ||
+										!_this$events$product$3.render
 									) {
-										var data = getSearchSchemaData({ params: _this.params, store: _this.store, results: result ? [result] : [] });
+										var data = schemaMap[result.id];
 										_this.tracker.events[_this.pageType].render({
 											data,
 											siteId:
@@ -35845,17 +35981,17 @@
 										}),
 											(_this.events.product[result.id] = _this.events.product[result.id] || {}),
 											(_this.events.product[result.id].render = !0),
-											_this.eventManager.fire('track.product.render', { controller: _this, products: [result], trackEvent: data });
+											_this.eventManager.fire('track.product.render', { controller: _this, product: result, trackEvent: data });
 									}
 								},
 								impression: function impression(result) {
-									var _this$events$product$3, _this$config$globals3;
+									var _this$events$product$4, _this$config$globals3;
 									if (
-										null === (_this$events$product$3 = _this.events.product[result.id]) ||
-										void 0 === _this$events$product$3 ||
-										!_this$events$product$3.impression
+										null === (_this$events$product$4 = _this.events.product[result.id]) ||
+										void 0 === _this$events$product$4 ||
+										!_this$events$product$4.impression
 									) {
-										var data = getSearchSchemaData({ params: _this.params, store: _this.store, results: [result] });
+										var data = schemaMap[result.id];
 										_this.tracker.events[_this.pageType].impression({
 											data,
 											siteId:
@@ -35865,17 +36001,15 @@
 										}),
 											(_this.events.product[result.id] = _this.events.product[result.id] || {}),
 											(_this.events.product[result.id].impression = !0),
-											_this.eventManager.fire('track.product.impression', { controller: _this, products: [result], trackEvent: data });
+											_this.eventManager.fire('track.product.impression', { controller: _this, product: result, trackEvent: data });
 									}
 								},
 								addToCart: function addToCart(result) {
 									var _this$config$globals4,
-										data = (function getSearchAddtocartSchemaData(_ref13) {
-											var params = _ref13.params,
-												store = _ref13.store,
-												results = _ref13.results,
-												base = getSearchSchemaData({ params, store, results });
-											return Object.assign({}, base, {
+										data = (function getSearchAddtocartSchemaData(_ref14) {
+											var searchSchemaData = _ref14.searchSchemaData,
+												results = _ref14.results;
+											return Object.assign({}, searchSchemaData, {
 												results:
 													(null == results
 														? void 0
@@ -35884,7 +36018,7 @@
 																return { uid: core.uid || '', sku: core.sku, price: Number(core.price), qty: result.quantity || 1 };
 														  })) || [],
 											});
-										})({ params: _this.params, store: _this.store, results: [result] });
+										})({ searchSchemaData: schemaMap[result.id], results: [result] });
 									_this.tracker.events[_this.pageType].addToCart({
 										data,
 										siteId:
@@ -35892,13 +36026,13 @@
 												? void 0
 												: _this$config$globals4.siteId,
 									}),
-										_this.eventManager.fire('track.product.addToCart', { controller: _this, products: [result], trackEvent: data });
+										_this.eventManager.fire('track.product.addToCart', { controller: _this, product: result, trackEvent: data });
 								},
 							},
 							redirect: function redirect(redirectURL) {
 								var _this$config$globals5,
-									data = (function getSearchRedirectSchemaData(_ref12) {
-										var redirectURL = _ref12.redirectURL;
+									data = (function getSearchRedirectSchemaData(_ref13) {
+										var redirectURL = _ref13.redirectURL;
 										return { redirect: redirectURL };
 									})({ redirectURL });
 								_this.tracker.events.search.redirect({
@@ -35931,6 +36065,7 @@
 									preventBackfill,
 									dontBackfill,
 									_params$pagination2,
+									backfillRequestsParams,
 									backfillRequests,
 									backfillResponses,
 									backfillResults,
@@ -35986,7 +36121,7 @@
 													throw (_this.log.error("error in 'beforeSearch' middleware"), _context.t0);
 												case 21:
 													if (
-														((stringyParams = JSON.stringify(params)),
+														((stringyParams = JSON.stringify(getStorableRequestParams(params))),
 														(prevStringyParams = _this.storage.get('lastStringyParams')),
 														stringyParams != prevStringyParams)
 													) {
@@ -36009,7 +36144,7 @@
 															params.pagination.page > 1
 														))
 													) {
-														_context.next = 57;
+														_context.next = 59;
 														break;
 													}
 													if (
@@ -36038,10 +36173,11 @@
 														!_this$config$settings4.infinite.backfill ||
 														_this.store.loaded
 													) {
-														_context.next = 48;
+														_context.next = 49;
 														break;
 													}
 													return (
+														(backfillRequestsParams = []),
 														(backfillRequests = Array(params.pagination.page)
 															.fill('backfill')
 															.map(function (v, i) {
@@ -36067,17 +36203,20 @@
 																			null === (_backfillParams$searc = backfillParams.search) ||
 																			void 0 === _backfillParams$searc ||
 																			delete _backfillParams$searc.redirectResponse));
-																return _this.client.search(backfillParams);
+																return backfillRequestsParams.push(backfillParams), _this.client.search(backfillParams);
 															})),
-														(_context.next = 39),
+														(_context.next = 40),
 														Promise.all(backfillRequests)
 													);
-												case 39:
+												case 40:
 													(backfillResponses = _context.sent),
 														(meta = backfillResponses[0][0]),
 														(response = backfillResponses[0][1]),
-														(backfillResults = backfillResponses.reduce(function (results, response) {
-															return results.concat.apply(results, SearchController_toConsumableArray(response[1].results));
+														(backfillResults = backfillResponses.reduce(function (results, response, index) {
+															return (
+																createResultSchemaMapping({ request: backfillRequestsParams[index], response }),
+																results.concat.apply(results, SearchController_toConsumableArray(response[1].results))
+															);
 														}, [])),
 														(response.pagination.totalPages = Math.ceil(response.pagination.totalResults / response.pagination.pageSize)),
 														(response.pagination.page =
@@ -36085,116 +36224,119 @@
 																? void 0
 																: _params$pagination2.page),
 														(response.results = backfillResults),
-														(_context.next = 55);
+														(_context.next = 57);
 													break;
-												case 48:
-													return (_context.next = 50), _this.client.search(params);
-												case 50:
+												case 49:
+													return (_context.next = 51), _this.client.search(params);
+												case 51:
 													(_yield$_this$client$s = _context.sent),
 														(_yield$_this$client$s2 = _slicedToArray(_yield$_this$client$s, 2)),
 														(meta = _yield$_this$client$s2[0]),
-														((response = _yield$_this$client$s2[1]).results = [].concat(
+														(response = _yield$_this$client$s2[1]),
+														createResultSchemaMapping({ request: params, response: [meta, response] }),
+														(response.results = [].concat(
 															SearchController_toConsumableArray(_this.previousResults),
 															SearchController_toConsumableArray(response.results || [])
 														));
-												case 55:
-													_context.next = 65;
-													break;
 												case 57:
-													return (_this.events = { product: {} }), (_this.previousResults = []), (_context.next = 61), _this.client.search(params);
-												case 61:
+													_context.next = 68;
+													break;
+												case 59:
+													return (_this.events = { product: {} }), (_this.previousResults = []), (_context.next = 63), _this.client.search(params);
+												case 63:
 													(_yield$_this$client$s3 = _context.sent),
 														(_yield$_this$client$s4 = _slicedToArray(_yield$_this$client$s3, 2)),
 														(meta = _yield$_this$client$s4[0]),
-														(response = _yield$_this$client$s4[1]);
-												case 65:
+														(response = _yield$_this$client$s4[1]),
+														createResultSchemaMapping({ request: params, response: [meta, response] });
+												case 68:
 													return (
 														response.meta || (response.meta = meta),
 														searchProfile.stop(),
 														_this.log.profile(searchProfile),
 														(afterSearchProfile = _this.profiler.create({ type: 'event', name: 'afterSearch', context: params }).start()),
-														(_context.prev = 69),
-														(_context.next = 72),
+														(_context.prev = 72),
+														(_context.next = 75),
 														_this.eventManager.fire('afterSearch', { controller: _this, request: params, response })
 													);
-												case 72:
-													_context.next = 84;
+												case 75:
+													_context.next = 87;
 													break;
-												case 74:
+												case 77:
 													if (
-														((_context.prev = 74),
-														(_context.t1 = _context.catch(69)),
+														((_context.prev = 77),
+														(_context.t1 = _context.catch(72)),
 														'cancelled' != (null === _context.t1 || void 0 === _context.t1 ? void 0 : _context.t1.message))
 													) {
-														_context.next = 82;
+														_context.next = 85;
 														break;
 													}
 													return _this.log.warn("'afterSearch' middleware cancelled"), afterSearchProfile.stop(), _context.abrupt('return');
-												case 82:
+												case 85:
 													throw (_this.log.error("error in 'afterSearch' middleware"), _context.t1);
-												case 84:
+												case 87:
 													return (
 														afterSearchProfile.stop(),
 														_this.log.profile(afterSearchProfile),
 														(_this.previousResults = JSON.parse(JSON.stringify(response.results))),
 														_this.store.update(response),
 														(afterStoreProfile = _this.profiler.create({ type: 'event', name: 'afterStore', context: params }).start()),
-														(_context.prev = 89),
-														(_context.next = 92),
+														(_context.prev = 92),
+														(_context.next = 95),
 														_this.eventManager.fire('afterStore', { controller: _this, request: params, response })
 													);
-												case 92:
-													_context.next = 104;
+												case 95:
+													_context.next = 107;
 													break;
-												case 94:
+												case 97:
 													if (
-														((_context.prev = 94),
-														(_context.t2 = _context.catch(89)),
+														((_context.prev = 97),
+														(_context.t2 = _context.catch(92)),
 														'cancelled' != (null === _context.t2 || void 0 === _context.t2 ? void 0 : _context.t2.message))
 													) {
-														_context.next = 102;
+														_context.next = 105;
 														break;
 													}
 													return _this.log.warn("'afterStore' middleware cancelled"), afterStoreProfile.stop(), _context.abrupt('return');
-												case 102:
+												case 105:
 													throw (_this.log.error("error in 'afterStore' middleware"), _context.t2);
-												case 104:
-													afterStoreProfile.stop(), _this.log.profile(afterStoreProfile), (_context.next = 128);
+												case 107:
+													afterStoreProfile.stop(), _this.log.profile(afterStoreProfile), (_context.next = 131);
 													break;
-												case 108:
-													if (((_context.prev = 108), (_context.t3 = _context.catch(0)), !_context.t3)) {
-														_context.next = 128;
+												case 111:
+													if (((_context.prev = 111), (_context.t3 = _context.catch(0)), !_context.t3)) {
+														_context.next = 131;
 														break;
 													}
 													if (!_context.t3.err || !_context.t3.fetchDetails) {
-														_context.next = 125;
+														_context.next = 128;
 														break;
 													}
 													(_context.t4 = _context.t3.fetchDetails.status),
-														(_context.next = 429 === _context.t4 ? 115 : 500 === _context.t4 ? 117 : 119);
+														(_context.next = 429 === _context.t4 ? 118 : 500 === _context.t4 ? 120 : 122);
 													break;
-												case 115:
+												case 118:
 													return (
 														(_this.store.error = { code: 429, type: types.B.WARNING, message: 'Too many requests try again later' }),
-														_context.abrupt('break', 121)
+														_context.abrupt('break', 124)
 													);
-												case 117:
+												case 120:
 													return (
 														(_this.store.error = { code: 500, type: types.B.ERROR, message: 'Invalid Search Request or Service Unavailable' }),
-														_context.abrupt('break', 121)
+														_context.abrupt('break', 124)
 													);
-												case 119:
-													return (_this.store.error = { type: types.B.ERROR, message: _context.t3.err.message }), _context.abrupt('break', 121);
-												case 121:
-													_this.log.error(_this.store.error), _this.handleError(_context.t3.err, _context.t3.fetchDetails), (_context.next = 128);
+												case 122:
+													return (_this.store.error = { type: types.B.ERROR, message: _context.t3.err.message }), _context.abrupt('break', 124);
+												case 124:
+													_this.log.error(_this.store.error), _this.handleError(_context.t3.err, _context.t3.fetchDetails), (_context.next = 131);
 													break;
-												case 125:
+												case 128:
 													(_this.store.error = { type: types.B.ERROR, message: 'Something went wrong... - ' + _context.t3 }),
 														_this.log.error(_context.t3),
 														_this.handleError(_context.t3);
-												case 128:
-													return (_context.prev = 128), (_this.store.loading = !1), _context.finish(128);
 												case 131:
+													return (_context.prev = 131), (_this.store.loading = !1), _context.finish(131);
+												case 134:
 												case 'end':
 													return _context.stop();
 											}
@@ -36202,23 +36344,27 @@
 									_callee,
 									null,
 									[
-										[0, 108, 128, 131],
+										[0, 111, 131, 134],
 										[7, 12],
-										[69, 74],
-										[89, 94],
+										[72, 77],
+										[92, 97],
 									]
 								);
 							})
 						)),
 						(_this.addToCart = (function () {
 							var _ref3 = SearchController_asyncToGenerator(
-								SearchController_regeneratorRuntime().mark(function _callee2(product) {
+								SearchController_regeneratorRuntime().mark(function _callee2(_products) {
+									var products;
 									return SearchController_regeneratorRuntime().wrap(function _callee2$(_context2) {
 										for (;;)
 											switch ((_context2.prev = _context2.next)) {
 												case 0:
-													_this.track.product.addToCart(product), _this.eventManager.fire('addToCart', { controller: _this, products: [product] });
-												case 2:
+													(products = 'function' == typeof _products.slice ? _products.slice() : [_products]).forEach(function (product) {
+														_this.track.product.addToCart(product);
+													}),
+														products.length > 0 && _this.eventManager.fire('addToCart', { controller: _this, products });
+												case 3:
 												case 'end':
 													return _context2.stop();
 											}
@@ -36305,18 +36451,9 @@
 											_config$settings$redi,
 											_search$response2,
 											_search$response2$fil,
-											_search$request,
-											_search$request$filte,
-											_config$settings2,
-											_config$settings2$red,
-											_search$response3,
-											_search$response3$sea,
-											_search$response4,
-											_search$response4$pag,
 											config,
 											redirectURL,
-											searchStore,
-											nonBackgroundFilters;
+											searchStore;
 										return SearchController_regeneratorRuntime().wrap(function _callee4$(_context4) {
 											for (;;)
 												switch ((_context4.prev = _context4.next)) {
@@ -36356,50 +36493,8 @@
 															_context4.abrupt('return', !1)
 														);
 													case 8:
-														if (
-															((nonBackgroundFilters =
-																null == search ||
-																null === (_search$request = search.request) ||
-																void 0 === _search$request ||
-																null === (_search$request$filte = _search$request.filters) ||
-																void 0 === _search$request$filte
-																	? void 0
-																	: _search$request$filte.filter(function (filter) {
-																			return !filter.background;
-																	  })),
-															null == config ||
-																null === (_config$settings2 = config.settings) ||
-																void 0 === _config$settings2 ||
-																null === (_config$settings2$red = _config$settings2.redirects) ||
-																void 0 === _config$settings2$red ||
-																!_config$settings2$red.singleResult ||
-																null == search ||
-																null === (_search$response3 = search.response) ||
-																void 0 === _search$response3 ||
-																null === (_search$response3$sea = _search$response3.search) ||
-																void 0 === _search$response3$sea ||
-																!_search$response3$sea.query ||
-																1 !==
-																	(null == search ||
-																	null === (_search$response4 = search.response) ||
-																	void 0 === _search$response4 ||
-																	null === (_search$response4$pag = _search$response4.pagination) ||
-																	void 0 === _search$response4$pag
-																		? void 0
-																		: _search$response4$pag.totalResults) ||
-																(null != nonBackgroundFilters && nonBackgroundFilters.length))
-														) {
-															_context4.next = 13;
-															break;
-														}
-														return (
-															(searchStore.loaded = !0),
-															window.location.replace(null == search ? void 0 : search.response.results[0].mappings.core.url),
-															_context4.abrupt('return', !1)
-														);
-													case 13:
-														return (_context4.next = 15), next();
-													case 15:
+														return (_context4.next = 10), next();
+													case 10:
 													case 'end':
 														return _context4.stop();
 												}
@@ -36423,9 +36518,9 @@
 													case 0:
 														return (_context5.next = 2), next();
 													case 2:
-														_this.storage.set('lastStringyParams', JSON.stringify(search.request)),
-															(storableRequestParams = getStorableRequestParams(search.request)),
+														(storableRequestParams = getStorableRequestParams(search.request)),
 															(stringyParams = JSON.stringify(storableRequestParams)),
+															_this.storage.set('lastStringyParams', stringyParams),
 															(scrollMap = _this.storage.get('scrollMap') || {}),
 															(elementPosition = scrollMap[stringyParams]) || _this.storage.set('scrollMap', {}),
 															_this.eventManager.fire('restorePosition', { controller: _this, element: elementPosition });
@@ -36446,41 +36541,106 @@
 							(function () {
 								var _ref8 = SearchController_asyncToGenerator(
 									SearchController_regeneratorRuntime().mark(function _callee6(search, next) {
-										var controller, _this$config$globals6, products, results, data;
+										var controller,
+											_search$request,
+											_search$request$filte,
+											_config$settings2,
+											_config$settings2$red,
+											_search$response3,
+											_search$response3$sea,
+											_search$response4,
+											_search$response4$pag,
+											products,
+											_this$config$globals6,
+											data,
+											_config,
+											nonBackgroundFilters;
 										return SearchController_regeneratorRuntime().wrap(function _callee6$(_context6) {
 											for (;;)
 												switch ((_context6.prev = _context6.next)) {
 													case 0:
 														return (_context6.next = 2), next();
 													case 2:
-														(controller = search.controller).store.loaded &&
-															!controller.store.error &&
-															((products = controller.store.results.filter(function (result) {
-																var _this$events$product$4;
-																return (
-																	'product' === result.type &&
-																	!(
-																		null !== (_this$events$product$4 = _this.events.product[result.id]) &&
-																		void 0 !== _this$events$product$4 &&
-																		_this$events$product$4.render
-																	)
-																);
-															})),
-															(results = 0 === products.length ? [] : products),
-															(data = getSearchSchemaData({ params: _this.params, store: _this.store, results })),
-															_this.tracker.events[_this.pageType].render({
-																data,
-																siteId:
-																	null === (_this$config$globals6 = _this.config.globals) || void 0 === _this$config$globals6
-																		? void 0
-																		: _this$config$globals6.siteId,
-															}),
+														if (!(controller = search.controller).store.loaded || controller.store.error) {
+															_context6.next = 12;
+															break;
+														}
+														if (
+															(0 ===
+																(products = controller.store.results.filter(function (result) {
+																	var _this$events$product$5;
+																	return (
+																		'product' === result.type &&
+																		!(
+																			null !== (_this$events$product$5 = _this.events.product[result.id]) &&
+																			void 0 !== _this$events$product$5 &&
+																			_this$events$product$5.render
+																		)
+																	);
+																})).length &&
+																((data = getSearchSchemaData({ params: search.request, results: [] })),
+																_this.tracker.events[_this.pageType].render({
+																	data,
+																	siteId:
+																		null === (_this$config$globals6 = _this.config.globals) || void 0 === _this$config$globals6
+																			? void 0
+																			: _this$config$globals6.siteId,
+																})),
 															products.forEach(function (result) {
-																(_this.events.product[result.id] = _this.events.product[result.id] || {}),
-																	(_this.events.product[result.id].render = !0);
+																var _this$config$globals7,
+																	data = schemaMap[result.id];
+																_this.tracker.events[_this.pageType].render({
+																	data,
+																	siteId:
+																		null === (_this$config$globals7 = _this.config.globals) || void 0 === _this$config$globals7
+																			? void 0
+																			: _this$config$globals7.siteId,
+																}),
+																	(_this.events.product[result.id] = _this.events.product[result.id] || {}),
+																	(_this.events.product[result.id].render = !0),
+																	_this.eventManager.fire('track.product.render', { controller: _this, product: result, trackEvent: data });
 															}),
-															_this.eventManager.fire('track.product.render', { controller: _this, products, trackEvent: data }));
-													case 4:
+															(_config = search.controller.config),
+															(nonBackgroundFilters =
+																null == search ||
+																null === (_search$request = search.request) ||
+																void 0 === _search$request ||
+																null === (_search$request$filte = _search$request.filters) ||
+																void 0 === _search$request$filte
+																	? void 0
+																	: _search$request$filte.filter(function (filter) {
+																			return !filter.background;
+																	  })),
+															null == _config ||
+																null === (_config$settings2 = _config.settings) ||
+																void 0 === _config$settings2 ||
+																null === (_config$settings2$red = _config$settings2.redirects) ||
+																void 0 === _config$settings2$red ||
+																!_config$settings2$red.singleResult ||
+																null == search ||
+																null === (_search$response3 = search.response) ||
+																void 0 === _search$response3 ||
+																null === (_search$response3$sea = _search$response3.search) ||
+																void 0 === _search$response3$sea ||
+																!_search$response3$sea.query ||
+																1 !==
+																	(null == search ||
+																	null === (_search$response4 = search.response) ||
+																	void 0 === _search$response4 ||
+																	null === (_search$response4$pag = _search$response4.pagination) ||
+																	void 0 === _search$response4$pag
+																		? void 0
+																		: _search$response4$pag.totalResults) ||
+																(null != nonBackgroundFilters && nonBackgroundFilters.length))
+														) {
+															_context6.next = 12;
+															break;
+														}
+														return (
+															window.location.replace(null == search ? void 0 : search.response.results[0].mappings.core.url),
+															_context6.abrupt('return', !1)
+														);
+													case 12:
 													case 'end':
 														return _context6.stop();
 												}
@@ -36650,8 +36810,8 @@
 								get: function get() {
 									var _this$config$settings12,
 										_this$config$settings13,
-										_this$config$globals7,
 										_this$config$globals8,
+										_this$config$globals9,
 										params = cjs_default()(Object.assign({}, getSearchParams(this.urlManager.state)), this.config.globals || {});
 									(null !== (_this$config$settings12 = this.config.settings) &&
 										void 0 !== _this$config$settings12 &&
@@ -36671,11 +36831,11 @@
 										(userId && (params.tracking.userId = userId),
 										sessionId && (params.tracking.sessionId = sessionId),
 										pageLoadId && (params.tracking.pageLoadId = pageLoadId),
-										null === (_this$config$globals7 = this.config.globals) ||
-											void 0 === _this$config$globals7 ||
-											null === (_this$config$globals8 = _this$config$globals7.personalization) ||
+										null === (_this$config$globals8 = this.config.globals) ||
 											void 0 === _this$config$globals8 ||
-											!_this$config$globals8.disabled)
+											null === (_this$config$globals9 = _this$config$globals8.personalization) ||
+											void 0 === _this$config$globals9 ||
+											!_this$config$globals9.disabled)
 									) {
 										var cartItems = this.tracker.cookies.cart.get();
 										cartItems.length &&
@@ -36691,6 +36851,39 @@
 						])
 					);
 				})(AbstractController);
+			function createResultSchemaMapping(_ref12) {
+				var _searchResponse$resul,
+					request = _ref12.request,
+					_response = _slicedToArray(_ref12.response, 2),
+					searchResponse = (_response[0], _response[1]),
+					schema = getSearchSchemaData({ params: request, results: [], response: searchResponse });
+				null === (_searchResponse$resul = searchResponse.results) ||
+					void 0 === _searchResponse$resul ||
+					_searchResponse$resul.forEach(function (result) {
+						var _result$mappings, _result$mappings$core2, _result$mappings2, _result$mappings2$cor;
+						schemaMap[result.id] = Object.assign({}, schema, {
+							results: [
+								{
+									position: result.position,
+									uid:
+										(null === (_result$mappings = result.mappings) ||
+										void 0 === _result$mappings ||
+										null === (_result$mappings$core2 = _result$mappings.core) ||
+										void 0 === _result$mappings$core2
+											? void 0
+											: _result$mappings$core2.uid) || '',
+									sku:
+										null === (_result$mappings2 = result.mappings) ||
+										void 0 === _result$mappings2 ||
+										null === (_result$mappings2$cor = _result$mappings2.core) ||
+										void 0 === _result$mappings2$cor
+											? void 0
+											: _result$mappings2$cor.sku,
+								},
+							],
+						});
+					});
+			}
 			function getStorableRequestParams(request) {
 				var _request$search, _request$search$query, _request$search2, _request$merchandisin;
 				return {
@@ -36722,20 +36915,26 @@
 					},
 				};
 			}
-			function getSearchSchemaData(_ref14) {
+			function getSearchSchemaData(_ref15) {
 				var _params$filters,
+					_response$search,
+					_response$search2,
+					_response$merchandisi,
+					_response$merchandisi2,
 					_params$search3,
 					_params$search3$query,
-					_store$search,
-					_store$search$origina,
-					_store$search2,
-					_store$search2$query,
+					_response$search4,
 					_params$sorts,
-					_store$merchandising$,
-					_store$merchandising$2,
-					params = _ref14.params,
-					store = _ref14.store,
-					results = _ref14.results,
+					_response$pagination,
+					_response$pagination2,
+					_response$pagination3,
+					_response$merchandisi3,
+					_response$merchandisi4,
+					correctedQuery,
+					_response$search3,
+					params = _ref15.params,
+					results = _ref15.results,
+					response = _ref15.response,
 					filters =
 						null === (_params$filters = params.filters) || void 0 === _params$filters
 							? void 0
@@ -36764,6 +36963,24 @@
 										: acc[key].push({ field: filter.field, value });
 									return acc;
 							  }, {});
+				null != response &&
+					null !== (_response$search = response.search) &&
+					void 0 !== _response$search &&
+					_response$search.originalQuery &&
+					null != response &&
+					null !== (_response$search2 = response.search) &&
+					void 0 !== _response$search2 &&
+					_response$search2.query &&
+					(correctedQuery =
+						null == response || null === (_response$search3 = response.search) || void 0 === _response$search3 ? void 0 : _response$search3.query);
+				var campaigns =
+						(null == response || null === (_response$merchandisi = response.merchandising) || void 0 === _response$merchandisi
+							? void 0
+							: _response$merchandisi.campaigns) || [],
+					experiments =
+						(null == response || null === (_response$merchandisi2 = response.merchandising) || void 0 === _response$merchandisi2
+							? void 0
+							: _response$merchandisi2.experiments) || [];
 				return Object.assign(
 					{
 						q:
@@ -36773,19 +36990,11 @@
 							void 0 === _params$search3$query
 								? void 0
 								: _params$search3$query.string) || '',
-						correctedQuery:
-							null !== (_store$search = store.search) &&
-							void 0 !== _store$search &&
-							null !== (_store$search$origina = _store$search.originalQuery) &&
-							void 0 !== _store$search$origina &&
-							_store$search$origina.string
-								? null === (_store$search2 = store.search) ||
-								  void 0 === _store$search2 ||
-								  null === (_store$search2$query = _store$search2.query) ||
-								  void 0 === _store$search2$query
-									? void 0
-									: _store$search2$query.string
-								: void 0,
+						correctedQuery,
+						matchType:
+							null == response || null === (_response$search4 = response.search) || void 0 === _response$search4
+								? void 0
+								: _response$search4.matchType,
 					},
 					filters,
 					{
@@ -36795,34 +37004,50 @@
 								: _params$sorts.map(function (sort) {
 										return { field: sort.field, dir: sort.direction };
 								  }),
-						pagination: { totalResults: store.pagination.totalResults, page: store.pagination.page, resultsPerPage: store.pagination.pageSize },
-						merchandising: {
-							personalized: store.merchandising.personalized,
-							redirect: store.merchandising.redirect,
-							triggeredCampaigns:
-								((null === (_store$merchandising$ = store.merchandising.campaigns) || void 0 === _store$merchandising$
+						pagination: {
+							totalResults:
+								null == response || null === (_response$pagination = response.pagination) || void 0 === _response$pagination
 									? void 0
-									: _store$merchandising$.length) &&
-									(null === (_store$merchandising$2 = store.merchandising.campaigns) || void 0 === _store$merchandising$2
-										? void 0
-										: _store$merchandising$2.map(function (campaign) {
-												var experiement = store.merchandising.experiments.find(function (experiment) {
-													return experiment.campaignId === campaign.id;
-												});
-												return {
-													id: campaign.id,
-													experimentId: null == experiement ? void 0 : experiement.experimentId,
-													variationId: null == experiement ? void 0 : experiement.variationId,
-												};
-										  }))) ||
+									: _response$pagination.totalResults,
+							page:
+								null == response || null === (_response$pagination2 = response.pagination) || void 0 === _response$pagination2
+									? void 0
+									: _response$pagination2.page,
+							resultsPerPage:
+								null == response || null === (_response$pagination3 = response.pagination) || void 0 === _response$pagination3
+									? void 0
+									: _response$pagination3.pageSize,
+						},
+						merchandising: {
+							personalized:
+								null == response || null === (_response$merchandisi3 = response.merchandising) || void 0 === _response$merchandisi3
+									? void 0
+									: _response$merchandisi3.personalized,
+							redirect:
+								null == response || null === (_response$merchandisi4 = response.merchandising) || void 0 === _response$merchandisi4
+									? void 0
+									: _response$merchandisi4.redirect,
+							triggeredCampaigns:
+								(campaigns.length &&
+									campaigns.map(function (campaign) {
+										var experiement = experiments.find(function (experiment) {
+											return experiment.campaignId === campaign.id;
+										});
+										return {
+											id: campaign.id,
+											experimentId: null == experiement ? void 0 : experiement.experimentId,
+											variationId: null == experiement ? void 0 : experiement.variationId,
+										};
+									})) ||
 								void 0,
 						},
 						results:
 							(null == results
 								? void 0
 								: results.map(function (result) {
-										var core = result.mappings.core;
-										return { uid: core.uid || '', sku: core.sku };
+										var _result$mappings3,
+											core = null === (_result$mappings3 = result.mappings) || void 0 === _result$mappings3 ? void 0 : _result$mappings3.core;
+										return { position: result.position, uid: core.uid || '', sku: core.sku };
 								  })) || [],
 					}
 				);
@@ -37301,26 +37526,28 @@
 											}),
 												(_this.events.product[result.id] = _this.events.product[result.id] || {}),
 												(_this.events.product[result.id].clickThrough = !0),
-												_this.eventManager.fire('track.product.clickThrough', { controller: _this, event: e, products: [result], trackEvent: data });
+												_this.eventManager.fire('track.product.clickThrough', { controller: _this, event: e, product: result, trackEvent: data });
 										}
 									},
 									click: function click(e, result) {
-										var _e$target, _e$target2, _e$target2$closest;
-										((null === (_e$target = e.target) || void 0 === _e$target ? void 0 : _e$target.getAttribute('href')) ||
-											(null === (_e$target2 = e.target) ||
-											void 0 === _e$target2 ||
-											null === (_e$target2$closest = _e$target2.closest('a')) ||
-											void 0 === _e$target2$closest
-												? void 0
-												: _e$target2$closest.getAttribute('href'))) &&
-											_this.track.product.clickThrough(e, result);
+										var _this$events$product$2;
+										(null !== (_this$events$product$2 = _this.events.product[result.id]) &&
+											void 0 !== _this$events$product$2 &&
+											_this$events$product$2.click) ||
+											('banner' !== result.type &&
+												(isClickWithinProductLink(e, result) && _this.track.product.clickThrough(e, result),
+												(_this.events.product[result.id] = _this.events.product[result.id] || {}),
+												(_this.events.product[result.id].click = !0),
+												setTimeout(function () {
+													_this.events.product[result.id].click = !1;
+												}, 300)));
 									},
 									impression: function impression(result) {
-										var _this$events$product$2, _this$config$globals2;
+										var _this$events$product$3, _this$config$globals2;
 										if (
-											null === (_this$events$product$2 = _this.events.product[result.id]) ||
-											void 0 === _this$events$product$2 ||
-											!_this$events$product$2.impression
+											null === (_this$events$product$3 = _this.events.product[result.id]) ||
+											void 0 === _this$events$product$3 ||
+											!_this$events$product$3.impression
 										) {
 											var data = getRecommendationsSchemaData({ store: _this.store, results: [result] });
 											return (
@@ -37333,17 +37560,17 @@
 												}),
 												(_this.events.product[result.id] = _this.events.product[result.id] || {}),
 												(_this.events.product[result.id].impression = !0),
-												_this.eventManager.fire('track.product.impression', { controller: _this, products: [result], trackEvent: data }),
+												_this.eventManager.fire('track.product.impression', { controller: _this, product: result, trackEvent: data }),
 												data
 											);
 										}
 									},
 									render: function render(result) {
-										var _this$events$product$3, _this$config$globals3;
+										var _this$events$product$4, _this$config$globals3;
 										if (
-											null === (_this$events$product$3 = _this.events.product[result.id]) ||
-											void 0 === _this$events$product$3 ||
-											!_this$events$product$3.render
+											null === (_this$events$product$4 = _this.events.product[result.id]) ||
+											void 0 === _this$events$product$4 ||
+											!_this$events$product$4.render
 										) {
 											var data = getRecommendationsSchemaData({ store: _this.store, results: [result] });
 											return (
@@ -37356,14 +37583,32 @@
 												}),
 												(_this.events.product[result.id] = _this.events.product[result.id] || {}),
 												(_this.events.product[result.id].render = !0),
-												_this.eventManager.fire('track.product.render', { controller: _this, products: [result], trackEvent: data }),
+												_this.eventManager.fire('track.product.render', { controller: _this, product: result, trackEvent: data }),
 												data
 											);
 										}
 									},
 									addToCart: function addToCart(result) {
 										var _this$config$globals4,
-											data = getRecommendationsAddtocartSchemaData({ store: _this.store, results: [result] });
+											data = (function getRecommendationsAddtocartSchemaData(_ref5) {
+												var store = _ref5.store,
+													results = _ref5.results;
+												return {
+													tag: store.profile.tag,
+													results:
+														(null == results
+															? void 0
+															: results.map(function (result) {
+																	var core = result.mappings.core;
+																	return {
+																		uid: (null == core ? void 0 : core.uid) || '',
+																		sku: null == core ? void 0 : core.sku,
+																		price: Number(null == core ? void 0 : core.price),
+																		qty: result.quantity || 1,
+																	};
+															  })) || [],
+												};
+											})({ store: _this.store, results: [result] });
 										return (
 											_this.tracker.events.recommendations.addToCart({
 												data,
@@ -37372,28 +37617,9 @@
 														? void 0
 														: _this$config$globals4.siteId,
 											}),
-											_this.eventManager.fire('track.product.addToCart', { controller: _this, products: [result], trackEvent: data }),
+											_this.eventManager.fire('track.product.addToCart', { controller: _this, product: result, trackEvent: data }),
 											data
 										);
-									},
-								},
-								bundle: {
-									addToCart: function addToCart(results) {
-										var _this$config$globals5;
-										if ('bundle' == _this.store.profile.type) {
-											var data = getRecommendationsAddtocartSchemaData({ store: _this.store, results });
-											return (
-												_this.tracker.events.recommendations.addToCart({
-													data,
-													siteId:
-														null === (_this$config$globals5 = _this.config.globals) || void 0 === _this$config$globals5
-															? void 0
-															: _this$config$globals5.siteId,
-												}),
-												_this.eventManager.fire('track.bundle.addToCart', { controller: _this, products: results, trackEvent: data }),
-												data
-											);
-										}
 									},
 								},
 							}),
@@ -37542,6 +37768,29 @@
 									);
 								})
 							)),
+							(_this.addToCart = (function () {
+								var _ref3 = RecommendationController_asyncToGenerator(
+									RecommendationController_regeneratorRuntime().mark(function _callee2(_products) {
+										var products;
+										return RecommendationController_regeneratorRuntime().wrap(function _callee2$(_context2) {
+											for (;;)
+												switch ((_context2.prev = _context2.next)) {
+													case 0:
+														(products = 'function' == typeof _products.slice ? _products.slice() : [_products]).forEach(function (product) {
+															_this.track.product.addToCart(product);
+														}),
+															products.length > 0 && _this.eventManager.fire('addToCart', { controller: _this, products });
+													case 3:
+													case 'end':
+														return _context2.stop();
+												}
+										}, _callee2);
+									})
+								);
+								return function (_x) {
+									return _ref3.apply(this, arguments);
+								};
+							})()),
 							!config.tag)
 						)
 							throw new Error('Invalid config passed to RecommendationController. The "tag" attribute is required.');
@@ -37555,14 +37804,14 @@
 							_this.eventManager.on(
 								'afterStore',
 								(function () {
-									var _ref3 = RecommendationController_asyncToGenerator(
-										RecommendationController_regeneratorRuntime().mark(function _callee2(search, next) {
-											var controller, _this$config$globals6, products, results, data;
-											return RecommendationController_regeneratorRuntime().wrap(function _callee2$(_context2) {
+									var _ref4 = RecommendationController_asyncToGenerator(
+										RecommendationController_regeneratorRuntime().mark(function _callee3(search, next) {
+											var controller, _this$config$globals5, products, results, data;
+											return RecommendationController_regeneratorRuntime().wrap(function _callee3$(_context3) {
 												for (;;)
-													switch ((_context2.prev = _context2.next)) {
+													switch ((_context3.prev = _context3.next)) {
 														case 0:
-															return (_context2.next = 2), next();
+															return (_context3.next = 2), next();
 														case 2:
 															(controller = search.controller).store.loaded &&
 																!controller.store.error &&
@@ -37574,24 +37823,24 @@
 																_this.tracker.events.recommendations.render({
 																	data,
 																	siteId:
-																		null === (_this$config$globals6 = _this.config.globals) || void 0 === _this$config$globals6
+																		null === (_this$config$globals5 = _this.config.globals) || void 0 === _this$config$globals5
 																			? void 0
-																			: _this$config$globals6.siteId,
+																			: _this$config$globals5.siteId,
 																}),
 																products.forEach(function (result) {
 																	(_this.events.product[result.id] = _this.events.product[result.id] || {}),
-																		(_this.events.product[result.id].render = !0);
-																}),
-																_this.eventManager.fire('track.product.render', { controller: _this, products, trackEvent: data }));
+																		(_this.events.product[result.id].render = !0),
+																		_this.eventManager.fire('track.product.render', { controller: _this, product: result, trackEvent: data });
+																}));
 														case 4:
 														case 'end':
-															return _context2.stop();
+															return _context3.stop();
 													}
-											}, _callee2);
+											}, _callee3);
 										})
 									);
-									return function (_x, _x2) {
-										return _ref3.apply(this, arguments);
+									return function (_x2, _x3) {
+										return _ref4.apply(this, arguments);
 									};
 								})()
 							),
@@ -37638,9 +37887,9 @@
 						])
 					);
 				})(AbstractController);
-			function getRecommendationsAddtocartSchemaData(_ref4) {
-				var store = _ref4.store,
-					results = _ref4.results;
+			function getRecommendationsSchemaData(_ref6) {
+				var store = _ref6.store,
+					results = _ref6.results;
 				return {
 					tag: store.profile.tag,
 					results:
@@ -37648,21 +37897,7 @@
 							? void 0
 							: results.map(function (result) {
 									var core = result.mappings.core;
-									return { uid: core.uid || '', sku: core.sku, price: Number(core.price), qty: result.quantity || 1 };
-							  })) || [],
-				};
-			}
-			function getRecommendationsSchemaData(_ref5) {
-				var store = _ref5.store,
-					results = _ref5.results;
-				return {
-					tag: store.profile.tag,
-					results:
-						(null == results
-							? void 0
-							: results.map(function (result) {
-									var core = result.mappings.core;
-									return { uid: core.uid || '', sku: core.sku };
+									return { position: result.position, uid: core.uid || '', sku: core.sku };
 							  })) || [],
 				};
 			}
@@ -38213,27 +38448,28 @@
 											}),
 												(_this.events.product[result.id] = _this.events.product[result.id] || {}),
 												(_this.events.product[result.id].clickThrough = !0),
-												_this.eventManager.fire('track.product.clickThrough', { controller: _this, event: e, products: [result], trackEvent: data });
+												_this.eventManager.fire('track.product.clickThrough', { controller: _this, event: e, product: result, trackEvent: data });
 										}
 									},
 									click: function click(e, result) {
-										var _e$target, _e$target2, _e$target2$closest;
-										'banner' !== result.type &&
-											((null === (_e$target = e.target) || void 0 === _e$target ? void 0 : _e$target.getAttribute('href')) ||
-												(null === (_e$target2 = e.target) ||
-												void 0 === _e$target2 ||
-												null === (_e$target2$closest = _e$target2.closest('a')) ||
-												void 0 === _e$target2$closest
-													? void 0
-													: _e$target2$closest.getAttribute('href'))) &&
-											_this.track.product.clickThrough(e, result);
+										var _this$events$product$2;
+										(null !== (_this$events$product$2 = _this.events.product[result.id]) &&
+											void 0 !== _this$events$product$2 &&
+											_this$events$product$2.click) ||
+											('banner' !== result.type &&
+												(isClickWithinProductLink(e, result) && _this.track.product.clickThrough(e, result),
+												(_this.events.product[result.id] = _this.events.product[result.id] || {}),
+												(_this.events.product[result.id].click = !0),
+												setTimeout(function () {
+													_this.events.product[result.id].click = !1;
+												}, 300)));
 									},
 									render: function render(result) {
-										var _this$events$product$2, _this$config$globals2;
+										var _this$events$product$3, _this$config$globals2;
 										if (
-											null === (_this$events$product$2 = _this.events.product[result.id]) ||
-											void 0 === _this$events$product$2 ||
-											!_this$events$product$2.render
+											null === (_this$events$product$3 = _this.events.product[result.id]) ||
+											void 0 === _this$events$product$3 ||
+											!_this$events$product$3.render
 										) {
 											var data = getAutocompleteSchemaData({ params: _this.params, store: _this.store, results: result ? [result] : [] });
 											_this.tracker.events.autocomplete.render({
@@ -38245,15 +38481,15 @@
 											}),
 												(_this.events.product[result.id] = _this.events.product[result.id] || {}),
 												(_this.events.product[result.id].render = !0),
-												_this.eventManager.fire('track.product.render', { controller: _this, products: [result], trackEvent: data });
+												_this.eventManager.fire('track.product.render', { controller: _this, product: result, trackEvent: data });
 										}
 									},
 									impression: function impression(result) {
-										var _this$events$product$3, _this$config$globals3;
+										var _this$events$product$4, _this$config$globals3;
 										if (
-											null === (_this$events$product$3 = _this.events.product[result.id]) ||
-											void 0 === _this$events$product$3 ||
-											!_this$events$product$3.impression
+											null === (_this$events$product$4 = _this.events.product[result.id]) ||
+											void 0 === _this$events$product$4 ||
+											!_this$events$product$4.impression
 										) {
 											var data = getAutocompleteSchemaData({ params: _this.params, store: _this.store, results: [result] });
 											_this.tracker.events.autocomplete.impression({
@@ -38265,7 +38501,7 @@
 											}),
 												(_this.events.product[result.id] = _this.events.product[result.id] || {}),
 												(_this.events.product[result.id].impression = !0),
-												_this.eventManager.fire('track.product.impression', { controller: _this, products: [result], trackEvent: data });
+												_this.eventManager.fire('track.product.impression', { controller: _this, product: result, trackEvent: data });
 										}
 									},
 									addToCart: function addToCart(result) {
@@ -38292,7 +38528,7 @@
 													? void 0
 													: _this$config$globals4.siteId,
 										}),
-											_this.eventManager.fire('track.product.addToCart', { controller: _this, products: [result], trackEvent: data });
+											_this.eventManager.fire('track.product.addToCart', { controller: _this, product: result, trackEvent: data });
 									},
 								},
 								redirect: function redirect(redirectURL) {
@@ -38308,7 +38544,7 @@
 												? void 0
 												: _this$config$globals5.siteId,
 									}),
-										_this.eventManager.fire('track.product.redirect', { controller: _this, redirectURL, trackEvent: data });
+										_this.eventManager.fire('track.redirect', { controller: _this, redirectURL, trackEvent: data });
 								},
 							}),
 							(_this.handlers = {
@@ -38690,12 +38926,12 @@
 														}
 														return (_context4.next = 4), _this.init();
 													case 4:
-														if (((_this.events = { product: {} }), _this.urlManager.state.query)) {
-															_context4.next = 7;
+														if (_this.urlManager.state.query) {
+															_context4.next = 6;
 															break;
 														}
 														return _context4.abrupt('return');
-													case 7:
+													case 6:
 														if (
 															null != (params = _this.params) &&
 															null !== (_params$search = params.search) &&
@@ -38704,39 +38940,39 @@
 															void 0 !== _params$search$query &&
 															_params$search$query.string
 														) {
-															_context4.next = 10;
+															_context4.next = 9;
 															break;
 														}
 														return _context4.abrupt('return');
-													case 10:
+													case 9:
 														return (
 															(_this.store.loading = !0),
-															(_context4.prev = 11),
-															(_context4.next = 14),
+															(_context4.prev = 10),
+															(_context4.next = 13),
 															_this.eventManager.fire('beforeSearch', { controller: _this, request: params })
 														);
-													case 14:
-														_context4.next = 25;
+													case 13:
+														_context4.next = 24;
 														break;
-													case 16:
+													case 15:
 														if (
-															((_context4.prev = 16),
-															(_context4.t0 = _context4.catch(11)),
+															((_context4.prev = 15),
+															(_context4.t0 = _context4.catch(10)),
 															'cancelled' != (null === _context4.t0 || void 0 === _context4.t0 ? void 0 : _context4.t0.message))
 														) {
-															_context4.next = 23;
+															_context4.next = 22;
 															break;
 														}
 														return _this.log.warn("'beforeSearch' middleware cancelled"), _context4.abrupt('return');
-													case 23:
+													case 22:
 														throw (_this.log.error("error in 'beforeSearch' middleware"), _context4.t0);
-													case 25:
+													case 24:
 														return (
 															(searchProfile = _this.profiler.create({ type: 'event', name: 'search', context: params }).start()),
-															(_context4.next = 28),
+															(_context4.next = 27),
 															_this.client.autocomplete(params)
 														);
-													case 28:
+													case 27:
 														return (
 															(_yield$_this$client$a = _context4.sent),
 															(_yield$_this$client$a2 = AutocompleteController_slicedToArray(_yield$_this$client$a, 2)),
@@ -38745,87 +38981,87 @@
 															searchProfile.stop(),
 															_this.log.profile(searchProfile),
 															(afterSearchProfile = _this.profiler.create({ type: 'event', name: 'afterSearch', context: params }).start()),
-															(_context4.prev = 36),
-															(_context4.next = 39),
+															(_context4.prev = 35),
+															(_context4.next = 38),
 															_this.eventManager.fire('afterSearch', { controller: _this, request: params, response })
 														);
-													case 39:
-														_context4.next = 51;
+													case 38:
+														_context4.next = 50;
 														break;
-													case 41:
+													case 40:
 														if (
-															((_context4.prev = 41),
-															(_context4.t1 = _context4.catch(36)),
+															((_context4.prev = 40),
+															(_context4.t1 = _context4.catch(35)),
 															'cancelled' != (null === _context4.t1 || void 0 === _context4.t1 ? void 0 : _context4.t1.message))
 														) {
-															_context4.next = 49;
+															_context4.next = 48;
 															break;
 														}
 														return _this.log.warn("'afterSearch' middleware cancelled"), afterSearchProfile.stop(), _context4.abrupt('return');
-													case 49:
+													case 48:
 														throw (_this.log.error("error in 'afterSearch' middleware"), _context4.t1);
-													case 51:
+													case 50:
 														return (
 															afterSearchProfile.stop(),
 															_this.log.profile(afterSearchProfile),
 															_this.store.update(response),
 															(afterStoreProfile = _this.profiler.create({ type: 'event', name: 'afterStore', context: params }).start()),
-															(_context4.prev = 55),
-															(_context4.next = 58),
+															(_context4.prev = 54),
+															(_context4.next = 57),
 															_this.eventManager.fire('afterStore', { controller: _this, request: params, response })
 														);
-													case 58:
-														_context4.next = 70;
+													case 57:
+														_context4.next = 69;
 														break;
-													case 60:
+													case 59:
 														if (
-															((_context4.prev = 60),
-															(_context4.t2 = _context4.catch(55)),
+															((_context4.prev = 59),
+															(_context4.t2 = _context4.catch(54)),
 															'cancelled' != (null === _context4.t2 || void 0 === _context4.t2 ? void 0 : _context4.t2.message))
 														) {
-															_context4.next = 68;
+															_context4.next = 67;
 															break;
 														}
 														return _this.log.warn("'afterStore' middleware cancelled"), afterStoreProfile.stop(), _context4.abrupt('return');
-													case 68:
+													case 67:
 														throw (_this.log.error("error in 'afterStore' middleware"), _context4.t2);
-													case 70:
-														afterStoreProfile.stop(), _this.log.profile(afterStoreProfile), (_context4.next = 94);
+													case 69:
+														afterStoreProfile.stop(), _this.log.profile(afterStoreProfile), (_context4.next = 93);
 														break;
-													case 74:
-														if (((_context4.prev = 74), (_context4.t3 = _context4.catch(0)), !_context4.t3)) {
-															_context4.next = 94;
+													case 73:
+														if (((_context4.prev = 73), (_context4.t3 = _context4.catch(0)), !_context4.t3)) {
+															_context4.next = 93;
 															break;
 														}
 														if (!_context4.t3.err || !_context4.t3.fetchDetails) {
-															_context4.next = 91;
+															_context4.next = 90;
 															break;
 														}
 														(_context4.t4 = _context4.t3.fetchDetails.status),
-															(_context4.next = 429 === _context4.t4 ? 81 : 500 === _context4.t4 ? 83 : 85);
+															(_context4.next = 429 === _context4.t4 ? 80 : 500 === _context4.t4 ? 82 : 84);
 														break;
-													case 81:
+													case 80:
 														return (
 															(_this.store.error = { code: 429, type: types.B.WARNING, message: 'Too many requests try again later' }),
-															_context4.abrupt('break', 87)
+															_context4.abrupt('break', 86)
 														);
-													case 83:
+													case 82:
 														return (
 															(_this.store.error = { code: 500, type: types.B.ERROR, message: 'Invalid Search Request or Service Unavailable' }),
-															_context4.abrupt('break', 87)
+															_context4.abrupt('break', 86)
 														);
-													case 85:
-														return (_this.store.error = { type: types.B.ERROR, message: _context4.t3.err.message }), _context4.abrupt('break', 87);
-													case 87:
-														_this.log.error(_this.store.error), _this.handleError(_context4.t3.err, _context4.t3.fetchDetails), (_context4.next = 94);
+													case 84:
+														return (_this.store.error = { type: types.B.ERROR, message: _context4.t3.err.message }), _context4.abrupt('break', 86);
+													case 86:
+														_this.log.error(_this.store.error), _this.handleError(_context4.t3.err, _context4.t3.fetchDetails), (_context4.next = 93);
 														break;
-													case 91:
+													case 90:
 														(_this.store.error = { type: types.B.ERROR, message: 'Something went wrong... - ' + _context4.t3 }),
 															_this.log.error(_context4.t3),
 															_this.handleError(_context4.t3);
-													case 94:
-														return (_context4.prev = 94), (_this.store.loading = !1), _context4.finish(94);
-													case 97:
+													case 93:
+														return (_context4.prev = 93), (_this.store.loading = !1), _context4.finish(93);
+													case 96:
 													case 'end':
 														return _context4.stop();
 												}
@@ -38833,23 +39069,27 @@
 										_callee4,
 										null,
 										[
-											[0, 74, 94, 97],
-											[11, 16],
-											[36, 41],
-											[55, 60],
+											[0, 73, 93, 96],
+											[10, 15],
+											[35, 40],
+											[54, 59],
 										]
 									);
 								})
 							)),
 							(_this.addToCart = (function () {
 								var _ref4 = AutocompleteController_asyncToGenerator(
-									AutocompleteController_regeneratorRuntime().mark(function _callee5(product) {
+									AutocompleteController_regeneratorRuntime().mark(function _callee5(_products) {
+										var products;
 										return AutocompleteController_regeneratorRuntime().wrap(function _callee5$(_context5) {
 											for (;;)
 												switch ((_context5.prev = _context5.next)) {
 													case 0:
-														_this.track.product.addToCart(product), _this.eventManager.fire('addToCart', { controller: _this, products: [product] });
-													case 2:
+														(products = 'function' == typeof _products.slice ? _products.slice() : [_products]).forEach(function (product) {
+															_this.track.product.addToCart(product);
+														}),
+															products.length > 0 && _this.eventManager.fire('addToCart', { controller: _this, products });
+													case 3:
 													case 'end':
 														return _context5.stop();
 												}
@@ -38882,7 +39122,7 @@
 																	return 'product' === result.type;
 																})),
 																(results = 0 === products.length ? [] : products),
-																(data = getAutocompleteSchemaData({ params: _this.params, store: _this.store, results })),
+																(data = getAutocompleteSchemaData({ params: search.request, store: _this.store, results })),
 																_this.tracker.events.autocomplete.render({
 																	data,
 																	siteId:
@@ -38892,9 +39132,10 @@
 																}),
 																products.forEach(function (result) {
 																	(_this.events.product[result.id] = _this.events.product[result.id] || {}),
-																		(_this.events.product[result.id].render = !0);
+																		(_this.events.product[result.id].render = !0),
+																		_this.eventManager.fire('track.product.render', { controller: _this, product: result, trackEvent: data });
 																}),
-																_this.eventManager.fire('track.product.render', { controller: _this, products, trackEvent: data }));
+																(_this.events = { product: {} }));
 														case 4:
 														case 'end':
 															return _context6.stop();
@@ -39424,6 +39665,7 @@
 									? void 0
 									: _store$search4$query.string
 								: void 0,
+						matchType: store.search.matchType,
 					},
 					filters,
 					{
@@ -39460,7 +39702,7 @@
 								? void 0
 								: results.map(function (result) {
 										var core = result.mappings.core;
-										return { uid: core.uid || '', sku: core.sku };
+										return { position: result.position, uid: core.uid || '', sku: core.sku };
 								  })) || [],
 					}
 				);
@@ -42242,7 +42484,7 @@
 				(transformSearchResponse.results = function (response) {
 					return { results: ((null == response ? void 0 : response.results) || []).map(transformSearchResponse.result) };
 				}),
-				(transformSearchResponse.result = function (rawResult) {
+				(transformSearchResponse.result = function (rawResult, idx) {
 					var _rawResult$children,
 						coreFieldValues = CORE_FIELDS.reduce(function (coreFields, key) {
 							var _Object$assign;
@@ -42284,6 +42526,7 @@
 								  })) || [];
 					return new Result({
 						id: rawResult.uid,
+						position: idx + 1,
 						mappings: { core: coreFieldValues },
 						attributes,
 						badges: Array.isArray(rawResult.badges) && 'object' == typeof rawResult.badges[0] ? rawResult.badges : [],
@@ -43415,7 +43658,15 @@
 																										null === (_batch$entries = batch.entries) ||
 																											void 0 === _batch$entries ||
 																											_batch$entries.forEach(function (entry, index) {
-																												entry.deferred.resolve([response[index]]);
+																												var _response$index, _response$index$resul;
+																												null === (_response$index = response[index]) ||
+																													void 0 === _response$index ||
+																													null === (_response$index$resul = _response$index.results) ||
+																													void 0 === _response$index$resul ||
+																													_response$index$resul.forEach(function (result, idx) {
+																														result.position = idx + 1;
+																													}),
+																													entry.deferred.resolve([response[index]]);
 																											}),
 																										(_context2.next = 14);
 																									break;
@@ -44438,7 +44689,8 @@
 						null != search &&
 							search.originalQuery &&
 							((this.originalQuery = new Query(services, search.originalQuery)), (observables.originalQuery = mobx_esm.sH)),
-						null != search && search.matchType && ((this.matchType = search.matchType), (observables.matchType = mobx_esm.sH)),
+						(this.matchType = search.matchType),
+						(observables.matchType = mobx_esm.sH),
 						(0, mobx_esm.Gn)(this, observables);
 				}),
 				Query = SearchQueryStore_createClass(function Query(services, query) {
@@ -45722,6 +45974,7 @@
 							var _config$settings3, _config$settings3$var, _result$children;
 							SearchResultStore_classCallCheck(this, Product),
 								(this.type = 'product'),
+								(this.position = 0),
 								(this.attributes = {}),
 								(this.mappings = { core: {} }),
 								(this.custom = {}),
@@ -45731,6 +45984,7 @@
 								(this.id = result.id),
 								(this.attributes = result.attributes),
 								(this.mappings = result.mappings),
+								(this.position = result.position),
 								(this.badges = new Badges(result, metaData));
 							var variantsField =
 								null == config ||
@@ -48848,7 +49102,7 @@
 							: autocomplete.query &&
 							  ((this.originalQuery = new AutocompleteQueryStore_Query(services.urlManager, autocomplete.query)),
 							  (observables.originalQuery = mobx_esm.sH)));
-					(0, mobx_esm.Gn)(this, observables);
+					(this.matchType = search.matchType), (observables.matchType = mobx_esm.sH), (0, mobx_esm.Gn)(this, observables);
 				}),
 				AutocompleteQueryStore_Query = AutocompleteQueryStore_createClass(function Query(urlManager, query) {
 					AutocompleteQueryStore_classCallCheck(this, Query),
@@ -49409,7 +49663,7 @@
 				return 'symbol' == typeof i ? i : i + '';
 			}
 			var RangeValueProperties,
-				types_ParamLocationType,
+				ParamLocationType,
 				WatcherPool = (function () {
 					return UrlManager_createClass(
 						function WatcherPool() {
@@ -49853,21 +50107,21 @@
 			})(RangeValueProperties || (RangeValueProperties = {})),
 				(function (ParamLocationType) {
 					(ParamLocationType.hash = 'hash'), (ParamLocationType.query = 'query');
-				})(types_ParamLocationType || (types_ParamLocationType = {}));
+				})(ParamLocationType || (ParamLocationType = {}));
 			var UrlTranslator_defaultConfig = {
 					urlRoot: '',
-					settings: { corePrefix: '', customType: types_ParamLocationType.query, serializeUrlRoot: !0 },
+					settings: { corePrefix: '', customType: ParamLocationType.query, serializeUrlRoot: !0 },
 					parameters: {
 						core: {
-							query: { name: 'q', type: types_ParamLocationType.query },
-							oq: { name: 'oq', type: types_ParamLocationType.query },
-							rq: { name: 'rq', type: types_ParamLocationType.query },
-							tag: { name: 'tag', type: types_ParamLocationType.query },
-							page: { name: 'page', type: types_ParamLocationType.query },
-							pageSize: { name: 'pageSize', type: types_ParamLocationType.hash },
-							sort: { name: 'sort', type: types_ParamLocationType.hash },
-							filter: { name: 'filter', type: types_ParamLocationType.hash },
-							fallbackQuery: { name: 'fallbackQuery', type: types_ParamLocationType.query },
+							query: { name: 'q', type: ParamLocationType.query },
+							oq: { name: 'oq', type: ParamLocationType.query },
+							rq: { name: 'rq', type: ParamLocationType.query },
+							tag: { name: 'tag', type: ParamLocationType.query },
+							page: { name: 'page', type: ParamLocationType.query },
+							pageSize: { name: 'pageSize', type: ParamLocationType.hash },
+							sort: { name: 'sort', type: ParamLocationType.hash },
+							filter: { name: 'filter', type: ParamLocationType.hash },
+							fallbackQuery: { name: 'fallbackQuery', type: ParamLocationType.query },
 						},
 						custom: {},
 					},
@@ -49904,7 +50158,7 @@
 												? void 0
 												: _this$config$settings.coreType;
 									paramType &&
-										Object.values(types_ParamLocationType).includes(paramType) &&
+										Object.values(ParamLocationType).includes(paramType) &&
 										(null != config &&
 										null !== (_config$parameters = config.parameters) &&
 										void 0 !== _config$parameters &&
@@ -49928,9 +50182,7 @@
 								null === (_this$config$settings2 = this.config.settings) || void 0 === _this$config$settings2
 									? void 0
 									: _this$config$settings2.customType;
-							implicit &&
-								!Object.values(types_ParamLocationType).includes(implicit) &&
-								(this.config.settings.customType = types_ParamLocationType.hash);
+							implicit && !Object.values(ParamLocationType).includes(implicit) && (this.config.settings.customType = ParamLocationType.hash);
 						},
 						[
 							{
@@ -49988,7 +50240,7 @@
 													),
 													key = _kvPair$split$map2[0],
 													value = _kvPair$split$map2[1];
-												return { key: key.split('.'), value, type: types_ParamLocationType.query };
+												return { key: key.split('.'), value, type: ParamLocationType.query };
 											} catch (err) {
 												return (
 													console.warn('Snap UrlTranslator: URI malformed - ignoring parameter', kvPair),
@@ -50034,8 +50286,7 @@
 												return !isCoreField || (isCoreField && value);
 											})
 											.forEach(function (decodedHashEntries) {
-												if (1 == decodedHashEntries.length)
-													params.push({ key: [decodedHashEntries[0]], value: '', type: types_ParamLocationType.hash });
+												if (1 == decodedHashEntries.length) params.push({ key: [decodedHashEntries[0]], value: '', type: ParamLocationType.hash });
 												else if (decodedHashEntries.length && decodedHashEntries.length >= 2) {
 													var isCoreField = _this3.reverseMapping[decodedHashEntries[0]];
 													if (isCoreField && 'filter' == isCoreField && 4 == decodedHashEntries.length) {
@@ -50044,8 +50295,8 @@
 															path1 = _decodedHashEntries[1],
 															low = _decodedHashEntries[2],
 															high = _decodedHashEntries[3];
-														params.push({ key: [path0, path1, 'low'], value: low, type: types_ParamLocationType.hash }),
-															params.push({ key: [path0, path1, 'high'], value: high, type: types_ParamLocationType.hash });
+														params.push({ key: [path0, path1, 'low'], value: low, type: ParamLocationType.hash }),
+															params.push({ key: [path0, path1, 'high'], value: high, type: ParamLocationType.hash });
 													} else {
 														var _decodedHashEntries$r2 = (function UrlTranslator_toArray(r) {
 																return (
@@ -50057,7 +50308,7 @@
 															})(decodedHashEntries.reverse()),
 															value = _decodedHashEntries$r2[0],
 															keys = _decodedHashEntries$r2.slice(1);
-														params.push({ key: keys.reverse(), value, type: types_ParamLocationType.hash });
+														params.push({ key: keys.reverse(), value, type: ParamLocationType.hash });
 													}
 												}
 											}),
@@ -50227,10 +50478,10 @@
 											: this.config.urlRoot || window.location.pathname,
 										params = this.stateToParams(state),
 										queryParams = params.filter(function (p) {
-											return p.type == types_ParamLocationType.query;
+											return p.type == ParamLocationType.query;
 										}),
 										hashParams = params.filter(function (p) {
-											return p.type == types_ParamLocationType.hash;
+											return p.type == ParamLocationType.hash;
 										});
 									return (
 										'' +
@@ -50284,7 +50535,7 @@
 														return [{ key: [filterConfig.name, key], value: '' + value, type: filterConfig.type }];
 													if ('object' == typeof value && void 0 !== value[RangeValueProperties.LOW] && void 0 !== value[RangeValueProperties.HIGH]) {
 														var _value$RangeValueProp, _value$RangeValueProp2, _value$RangeValueProp3, _value$RangeValueProp4;
-														if (filterConfig.type == types_ParamLocationType.query)
+														if (filterConfig.type == ParamLocationType.query)
 															return [
 																{
 																	key: [filterConfig.name, key, RangeValueProperties.LOW],
@@ -50305,7 +50556,7 @@
 																	type: filterConfig.type,
 																},
 															];
-														if (filterConfig.type == types_ParamLocationType.hash)
+														if (filterConfig.type == ParamLocationType.hash)
 															return [
 																{
 																	key: [
@@ -50831,85 +51082,41 @@
 				);
 			}
 			var src = __webpack_require__('../../node_modules/@searchspring/beacon/dist/esm/src/index.js'),
-				v4 = __webpack_require__('../../node_modules/uuid/dist/esm-browser/v4.js');
-			function BeaconEvent_defineProperties(e, r) {
-				for (var t = 0; t < r.length; t++) {
-					var o = r[t];
-					(o.enumerable = o.enumerable || !1),
-						(o.configurable = !0),
-						'value' in o && (o.writable = !0),
-						Object.defineProperty(e, BeaconEvent_toPropertyKey(o.key), o);
-				}
-			}
-			function BeaconEvent_toPropertyKey(t) {
-				var i = (function BeaconEvent_toPrimitive(t, r) {
-					if ('object' != typeof t || !t) return t;
-					var e = t[Symbol.toPrimitive];
-					if (void 0 !== e) {
-						var i = e.call(t, r || 'default');
-						if ('object' != typeof i) return i;
-						throw new TypeError('@@toPrimitive must return a primitive value.');
-					}
-					return ('string' === r ? String : Number)(t);
-				})(t, 'string');
-				return 'symbol' == typeof i ? i : i + '';
-			}
-			var BeaconType,
-				BeaconCategory,
-				ProfilePlacement,
-				BeaconEvent = (function () {
-					return (function BeaconEvent_createClass(e, r, t) {
-						return (
-							r && BeaconEvent_defineProperties(e.prototype, r),
-							t && BeaconEvent_defineProperties(e, t),
-							Object.defineProperty(e, 'prototype', { writable: !1 }),
-							e
+				Tracker_excluded = ['stack', 'message'];
+			function Tracker_toConsumableArray(r) {
+				return (
+					(function Tracker_arrayWithoutHoles(r) {
+						if (Array.isArray(r)) return Tracker_arrayLikeToArray(r);
+					})(r) ||
+					(function Tracker_iterableToArray(r) {
+						if (('undefined' != typeof Symbol && null != r[Symbol.iterator]) || null != r['@@iterator']) return Array.from(r);
+					})(r) ||
+					(function Tracker_unsupportedIterableToArray(r, a) {
+						if (r) {
+							if ('string' == typeof r) return Tracker_arrayLikeToArray(r, a);
+							var t = {}.toString.call(r).slice(8, -1);
+							return (
+								'Object' === t && r.constructor && (t = r.constructor.name),
+								'Map' === t || 'Set' === t
+									? Array.from(r)
+									: 'Arguments' === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t)
+									? Tracker_arrayLikeToArray(r, a)
+									: void 0
+							);
+						}
+					})(r) ||
+					(function Tracker_nonIterableSpread() {
+						throw new TypeError(
+							'Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.'
 						);
-					})(
-						function BeaconEvent(payload, config) {
-							var _config$requesters, _config$requesters$be;
-							!(function BeaconEvent_classCallCheck(a, n) {
-								if (!(a instanceof n)) throw new TypeError('Cannot call a class as a function');
-							})(this, BeaconEvent),
-								(this.type = payload.type),
-								(this.category = payload.category),
-								(this.context = payload.context),
-								(this.meta = payload.meta),
-								(this.event = payload.event),
-								(this.id = payload.id),
-								(this.pid = payload.pid),
-								(this.origin =
-									(null === (_config$requesters = config.requesters) ||
-									void 0 === _config$requesters ||
-									null === (_config$requesters$be = _config$requesters.beacon) ||
-									void 0 === _config$requesters$be
-										? void 0
-										: _config$requesters$be.origin) || 'https://beacon.searchspring.io'),
-								(this.meta = { initiator: { lib: 'searchspring/snap', 'lib.version': '0.65.2', 'lib.framework': config.framework } }),
-								(this.id = (0, v4.A)());
-						},
-						[
-							{
-								key: 'send',
-								value: function send() {
-									var data = Object.assign({}, this),
-										origin = data.origin;
-									return (
-										delete data.origin,
-										'undefined' != typeof fetch &&
-											fetch(origin + '/beacon', {
-												method: 'POST',
-												headers: { 'Content-Type': 'application/json' },
-												body: JSON.stringify(data),
-												keepalive: !0,
-											}),
-										data
-									);
-								},
-							},
-						]
-					);
-				})();
+					})()
+				);
+			}
+			function Tracker_arrayLikeToArray(r, a) {
+				(null == a || a > r.length) && (a = r.length);
+				for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e];
+				return n;
+			}
 			function Tracker_defineProperties(e, r) {
 				for (var t = 0; t < r.length; t++) {
 					var o = r[t];
@@ -50973,20 +51180,6 @@
 					Tracker_setPrototypeOf(t, e)
 				);
 			}
-			!(function (BeaconType) {
-				BeaconType.CLICK = 'click';
-			})(BeaconType || (BeaconType = {})),
-				(function (BeaconCategory) {
-					BeaconCategory.INTERACTION = 'searchspring.user-interactions';
-				})(BeaconCategory || (BeaconCategory = {})),
-				(function (ProfilePlacement) {
-					(ProfilePlacement.BASKETPAGE = 'basket-page'),
-						(ProfilePlacement.CONFIRMATIONPAGE = 'confirmation-page'),
-						(ProfilePlacement.PRODUCTPAGE = 'product-page'),
-						(ProfilePlacement.NORESULTSPAGE = 'no-results-page'),
-						(ProfilePlacement.HOMEPAGE = 'home-page'),
-						(ProfilePlacement.OTHER = 'other');
-				})(ProfilePlacement || (ProfilePlacement = {}));
 			var Tracker_defaultConfig = { id: 'track', framework: 'snap', mode: AppMode.production },
 				Tracker = (function (_Beacon) {
 					function Tracker(globals, config) {
@@ -50995,7 +51188,7 @@
 							((function Tracker_classCallCheck(a, n) {
 								if (!(a instanceof n)) throw new TypeError('Cannot call a class as a function');
 							})(this, Tracker),
-							((config = cjs_default()(Tracker_defaultConfig, config || {})).initiator = 'searchspring/' + config.framework + '/0.65.2'),
+							((config = cjs_default()(Tracker_defaultConfig, config || {})).initiator = 'searchspring/' + config.framework + '/0.66.0'),
 							((_this = Tracker_callSuper(this, Tracker, [globals, config])).targeters = []),
 							(_this.track = {
 								error: function error(data, siteId) {
@@ -51009,7 +51202,26 @@
 									) {
 										var stack = data.stack,
 											message = data.message,
-											details = data.details,
+											details = (function Tracker_objectWithoutProperties(e, t) {
+												if (null == e) return {};
+												var o,
+													r,
+													i = (function Tracker_objectWithoutPropertiesLoose(r, e) {
+														if (null == r) return {};
+														var t = {};
+														for (var n in r)
+															if ({}.hasOwnProperty.call(r, n)) {
+																if (-1 !== e.indexOf(n)) continue;
+																t[n] = r[n];
+															}
+														return t;
+													})(e, t);
+												if (Object.getOwnPropertySymbols) {
+													var n = Object.getOwnPropertySymbols(e);
+													for (r = 0; r < n.length; r++) (o = n[r]), -1 === t.indexOf(o) && {}.propertyIsEnumerable.call(e, o) && (i[o] = e[o]);
+												}
+												return i;
+											})(data, Tracker_excluded),
 											pageUrl = _this.getContext().pageUrl;
 										(null != message && message.includes('Profile is currently paused')) ||
 											pageUrl.includes('//localhost') ||
@@ -51039,70 +51251,28 @@
 												_this.events.product.pageView({ data: { result }, siteId });
 										}
 									},
-									click: function click(data, siteId) {
-										var _this$doNotTrack4;
-										if (
-											null === (_this$doNotTrack4 = _this.doNotTrack) ||
-											void 0 === _this$doNotTrack4 ||
-											!_this$doNotTrack4.includes('product.click')
-										) {
-											if (null != data && data.intellisuggestData && null != data && data.intellisuggestSignature) {
-												var context = (function transformToLegacyContext(_context, siteId) {
-														var _context$attribution,
-															attribution,
-															context = Object.assign({}, _context);
-														context.userAgent && delete context.userAgent;
-														context.timestamp && delete context.timestamp;
-														context.initiator && delete context.initiator;
-														context.dev && delete context.dev;
-														null !== (_context$attribution = context.attribution) &&
-															void 0 !== _context$attribution &&
-															_context$attribution.length &&
-															((attribution = { type: context.attribution[0].type, id: context.attribution[0].id }), delete context.attribution);
-														var beaconContext = Object.assign({}, context, { website: { trackingCode: siteId } });
-														attribution && (beaconContext.attribution = attribution);
-														return beaconContext;
-													})(_this.getContext(), siteId || _this.globals.siteId),
-													event = {
-														type: BeaconType.CLICK,
-														category: BeaconCategory.INTERACTION,
-														context,
-														event: {
-															intellisuggestData: data.intellisuggestData,
-															intellisuggestSignature: data.intellisuggestSignature,
-															href: null != data && data.href ? '' + data.href : void 0,
-														},
-													};
-												return new BeaconEvent(event, _this.config).send();
-											}
-											console.error(
-												'track.product.click event: object parameter requires a valid intellisuggestData and intellisuggestSignature. \nExample: track.click.product({ intellisuggestData: "eJwrTs4tNM9jYCjKTM8oYXDWdQ3TDTfUDbIwMDVjMARCYwMQSi_KTAEA9IQKWA", intellisuggestSignature: "9e46f9fd3253c267fefc298704e39084a6f8b8e47abefdee57277996b77d8e70" })'
-											);
-										}
+									click: function click() {
+										console.warn(
+											"tracker.track.product.click() is deprecated and is no longer functional. Use tracker.events['search' | 'category'].clickThrough() instead"
+										),
+											_this.events.error.snap({ data: { message: 'tracker.track.product.click was called' } });
 									},
 								},
 								cart: {
-									view: function view(data, siteId) {
-										var _this$doNotTrack5;
-										if (null === (_this$doNotTrack5 = _this.doNotTrack) || void 0 === _this$doNotTrack5 || !_this$doNotTrack5.includes('cart.view')) {
-											var results = data.items
-												.map(function (item) {
-													return !item.uid && item.sku ? Object.assign({}, item, { uid: item.sku }) : item;
-												})
-												.map(function (item) {
-													return Object.assign({}, item, { qty: Number(item.qty), price: Number(item.price) });
-												});
-											_this.events.cart.view({ data: { results }, siteId });
-										}
+									view: function view() {
+										console.warn(
+											'tracker.cart.view is deprecated and no longer functional. Use tracker.events.cart.add() and tracker.events.cart.remove() instead'
+										),
+											_this.events.error.snap({ data: { message: 'tracker.track.cart.view was called' } });
 									},
 								},
 								order: {
 									transaction: function transaction(data, siteId) {
-										var _this$doNotTrack6;
+										var _this$doNotTrack4;
 										if (
-											null === (_this$doNotTrack6 = _this.doNotTrack) ||
-											void 0 === _this$doNotTrack6 ||
-											!_this$doNotTrack6.includes('order.transaction')
+											null === (_this$doNotTrack4 = _this.doNotTrack) ||
+											void 0 === _this$doNotTrack4 ||
+											!_this$doNotTrack4.includes('order.transaction')
 										) {
 											var order = data.order,
 												items = data.items,
@@ -51184,14 +51354,13 @@
 							'object' != typeof globals || 'string' != typeof globals.siteId)
 						)
 							throw new Error('Invalid config passed to tracker. The "siteId" attribute must be provided.');
-						return (
-							(_this.config = config),
+						(_this.config = config),
 							(_this.doNotTrack = _this.config.doNotTrack || []),
 							Object.values(AppMode).includes(_this.config.mode) && (_this.mode = _this.config.mode),
 							(_this.localStorage = new StorageStore({ type: 'local', key: 'ss-' + _this.config.id })),
 							_this.localStorage.set('siteId', _this.globals.siteId),
 							(null !== (_window$searchspring = window.searchspring) && void 0 !== _window$searchspring && _window$searchspring.tracker) ||
-								((window.searchspring = window.searchspring || {}), (window.searchspring.tracker = _this), (window.searchspring.version = '0.65.2')),
+								((window.searchspring = window.searchspring || {}), (window.searchspring.tracker = _this), (window.searchspring.version = '0.66.0')),
 							setTimeout(function () {
 								_this.targeters.push(
 									new DomTargeter([{ selector: 'script[type^="searchspring/track/"]', emptyTarget: !1 }], function (target, elem) {
@@ -51306,7 +51475,7 @@
 												_this.track.product.view(item, siteId);
 												break;
 											case 'searchspring/track/cart/view':
-												_this.track.cart.view({ items }, siteId);
+												_this.track.cart.view();
 												break;
 											case 'searchspring/track/order/transaction':
 												_this.track.order.transaction({ order, items }, siteId);
@@ -51358,20 +51527,64 @@
 								} else if (attributes['ss-' + _this.config.id + '-cart-remove']) {
 									var _skus = attributes['ss-' + _this.config.id + '-cart-remove'].split(',');
 									_this.cookies.cart.remove(_skus), updateRecsControllers();
-								} else if ('ss-' + _this.config.id + '-cart-clear' in attributes) _this.cookies.cart.clear(), updateRecsControllers();
-								else if ('ss-' + _this.config.id + '-cart-view' in attributes) updateRecsControllers();
-								else if (
-									attributes['ss-' + _this.config.id + '-intellisuggest'] &&
-									attributes['ss-' + _this.config.id + '-intellisuggest-signature']
-								) {
-									var intellisuggestData = attributes['ss-' + _this.config.id + '-intellisuggest'],
-										intellisuggestSignature = attributes['ss-' + _this.config.id + '-intellisuggest-signature'],
-										href = attributes.href;
-									_this.track.product.click({ intellisuggestData, intellisuggestSignature, href });
-								}
-							}),
-							_this
-						);
+								} else
+									'ss-' + _this.config.id + '-cart-clear' in attributes
+										? (_this.cookies.cart.clear(), updateRecsControllers())
+										: 'ss-' + _this.config.id + '-cart-view' in attributes
+										? updateRecsControllers()
+										: attributes['ss-' + _this.config.id + '-intellisuggest'] &&
+										  attributes['ss-' + _this.config.id + '-intellisuggest-signature'] &&
+										  _this.track.product.click();
+							});
+						var cart = _this.globals.cart;
+						if (Array.isArray(cart))
+							if (0 === cart.length) {
+								var storedCart = _this.storage.cart.get();
+								storedCart.length && _this.events.cart.remove({ data: { results: storedCart, cart: [] } }), _this.storage.cart.clear();
+							} else if (cart.length) {
+								var currentCart = cart
+									.filter(function (item) {
+										return (
+											'object' == typeof item &&
+											(item.uid || item.sku || item.childUid || item.childSku) &&
+											void 0 !== item.qty &&
+											void 0 !== item.price
+										);
+									})
+									.map(function (item) {
+										return { uid: item.uid, childUid: item.childUid, sku: item.sku, childSku: item.childSku, price: item.price, qty: item.qty };
+									});
+								currentCart.length || _this.events.error.snap({ data: { message: 'cart globals missing properties', details: { cart } } });
+								var _storedCart = _this.storage.cart.get(),
+									toAdd = [],
+									toRemove = [];
+								(null != _storedCart && _storedCart.length) || !currentCart.length
+									? currentCart.length &&
+									  (currentCart.forEach(function (item) {
+											var existingItem = _storedCart.find(function (existingItem) {
+												return (
+													existingItem.uid === item.uid &&
+													existingItem.sku === item.sku &&
+													existingItem.childUid === item.childUid &&
+													existingItem.childSku === item.childSku
+												);
+											});
+											if (existingItem) {
+												if (existingItem) {
+													item.qty > existingItem.qty
+														? toAdd.push(Object.assign({}, item, { qty: item.qty - existingItem.qty }))
+														: item.qty < existingItem.qty && toRemove.push(Object.assign({}, existingItem, { qty: existingItem.qty - item.qty }));
+													var index = _storedCart.indexOf(existingItem);
+													-1 !== index && _storedCart.splice(index, 1);
+												}
+											} else toAdd.push(item);
+									  }),
+									  _storedCart.length && toRemove.push.apply(toRemove, Tracker_toConsumableArray(_storedCart)))
+									: toAdd.push.apply(toAdd, Tracker_toConsumableArray(currentCart)),
+									toAdd.length && _this.events.cart.add({ data: { results: toAdd, cart: currentCart } }),
+									toRemove.length && _this.events.cart.remove({ data: { results: toRemove, cart: currentCart } });
+							}
+						return _this;
 					}
 					return (
 						(function Tracker_inherits(t, e) {
@@ -51981,7 +52194,7 @@
 		var __webpack_exec__ = (moduleId) => __webpack_require__((__webpack_require__.s = moduleId));
 		__webpack_require__.O(
 			0,
-			[117],
+			[589],
 			() => (
 				__webpack_exec__('../../node_modules/@storybook/core-client/dist/esm/globals/polyfills.js'),
 				__webpack_exec__('../../node_modules/@storybook/core-client/dist/esm/globals/globals.js'),

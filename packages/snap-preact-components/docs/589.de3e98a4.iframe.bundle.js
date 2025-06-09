@@ -1,6 +1,6 @@
-/*! For license information please see 117.85ea69b3.iframe.bundle.js.LICENSE.txt */
+/*! For license information please see 589.de3e98a4.iframe.bundle.js.LICENSE.txt */
 (self.webpackChunk_searchspring_snap_preact_components = self.webpackChunk_searchspring_snap_preact_components || []).push([
-	[117],
+	[589],
 	{
 		'../../node_modules/@babel/runtime/helpers/esm/defineProperty.js': (
 			__unused_webpack___webpack_module__,
@@ -2494,16 +2494,42 @@
 					};
 				})(json, !1);
 			}
-			function AutocompleteSchemaDataFilterInnerToJSON(json) {
-				return (function AutocompleteSchemaDataFilterInnerToJSONTyped(value, ignoreDiscriminator = !1) {
+			function AutocompleteAddtocartSchemaDataBgfilterInnerToJSON(json) {
+				return (function AutocompleteAddtocartSchemaDataBgfilterInnerToJSONTyped(value, ignoreDiscriminator = !1) {
 					if (null == value) return value;
 					return { field: value.field, value: value.value };
 				})(json, !1);
 			}
-			function AutocompleteSchemaDataPaginationToJSON(json) {
-				return (function AutocompleteSchemaDataPaginationToJSONTyped(value, ignoreDiscriminator = !1) {
+			__webpack_require__.d(__webpack_exports__, { HFj: () => Beacon });
+			function AutocompleteAddtocartSchemaDataSortInnerToJSON(json) {
+				return (function AutocompleteAddtocartSchemaDataSortInnerToJSONTyped(value, ignoreDiscriminator = !1) {
+					if (null == value) return value;
+					return { field: value.field, dir: value.dir };
+				})(json, !1);
+			}
+			function AutocompleteAddtocartSchemaDataPaginationToJSON(json) {
+				return (function AutocompleteAddtocartSchemaDataPaginationToJSONTyped(value, ignoreDiscriminator = !1) {
 					if (null == value) return value;
 					return { totalResults: value.totalResults, page: value.page, resultsPerPage: value.resultsPerPage };
+				})(json, !1);
+			}
+			function AutocompleteAddtocartSchemaDataMerchandisingTriggeredCampaignsInnerToJSON(json) {
+				return (function AutocompleteAddtocartSchemaDataMerchandisingTriggeredCampaignsInnerToJSONTyped(value, ignoreDiscriminator = !1) {
+					if (null == value) return value;
+					return { id: value.id, experimentId: value.experimentId, variationId: value.variationId };
+				})(json, !1);
+			}
+			function AutocompleteAddtocartSchemaDataMerchandisingToJSON(json) {
+				return (function AutocompleteAddtocartSchemaDataMerchandisingToJSONTyped(value, ignoreDiscriminator = !1) {
+					if (null == value) return value;
+					return {
+						redirect: value.redirect,
+						personalized: value.personalized,
+						triggeredCampaigns:
+							null == value.triggeredCampaigns
+								? void 0
+								: value.triggeredCampaigns.map(AutocompleteAddtocartSchemaDataMerchandisingTriggeredCampaignsInnerToJSON),
+					};
 				})(json, !1);
 			}
 			function ProductToJSON(json) {
@@ -2512,34 +2538,8 @@
 					return { uid: value.uid, childUid: value.childUid, sku: value.sku, childSku: value.childSku, qty: value.qty, price: value.price };
 				})(json, !1);
 			}
-			function AutocompleteSchemaDataMerchandisingTriggeredCampaignsInnerToJSON(json) {
-				return (function AutocompleteSchemaDataMerchandisingTriggeredCampaignsInnerToJSONTyped(value, ignoreDiscriminator = !1) {
-					if (null == value) return value;
-					return { id: value.id, experimentId: value.experimentId, variationId: value.variationId };
-				})(json, !1);
-			}
-			__webpack_require__.d(__webpack_exports__, { HFj: () => Beacon });
-			function AutocompleteSchemaDataMerchandisingToJSON(json) {
-				return (function AutocompleteSchemaDataMerchandisingToJSONTyped(value, ignoreDiscriminator = !1) {
-					if (null == value) return value;
-					return {
-						redirect: value.redirect,
-						personalized: value.personalized,
-						triggeredCampaigns:
-							null == value.triggeredCampaigns
-								? void 0
-								: value.triggeredCampaigns.map(AutocompleteSchemaDataMerchandisingTriggeredCampaignsInnerToJSON),
-					};
-				})(json, !1);
-			}
-			function AutocompleteSchemaDataSortInnerToJSON(json) {
-				return (function AutocompleteSchemaDataSortInnerToJSONTyped(value, ignoreDiscriminator = !1) {
-					if (null == value) return value;
-					return { field: value.field, dir: value.dir };
-				})(json, !1);
-			}
-			function AutocompleteSchemaDataBgfilterInnerToJSON(json) {
-				return (function AutocompleteSchemaDataBgfilterInnerToJSONTyped(value, ignoreDiscriminator = !1) {
+			function AutocompleteAddtocartSchemaDataFilterInnerToJSON(json) {
+				return (function AutocompleteAddtocartSchemaDataFilterInnerToJSONTyped(value, ignoreDiscriminator = !1) {
 					if (null == value) return value;
 					return { field: value.field, value: value.value };
 				})(json, !1);
@@ -2553,11 +2553,11 @@
 						didYouMean: value.didYouMean,
 						rq: value.rq,
 						matchType: value.matchType,
-						bgfilter: null == value.bgfilter ? void 0 : value.bgfilter.map(AutocompleteSchemaDataBgfilterInnerToJSON),
-						filter: null == value.filter ? void 0 : value.filter.map(AutocompleteSchemaDataFilterInnerToJSON),
-						sort: null == value.sort ? void 0 : value.sort.map(AutocompleteSchemaDataSortInnerToJSON),
-						pagination: AutocompleteSchemaDataPaginationToJSON(value.pagination),
-						merchandising: AutocompleteSchemaDataMerchandisingToJSON(value.merchandising),
+						bgfilter: null == value.bgfilter ? void 0 : value.bgfilter.map(AutocompleteAddtocartSchemaDataBgfilterInnerToJSON),
+						filter: null == value.filter ? void 0 : value.filter.map(AutocompleteAddtocartSchemaDataFilterInnerToJSON),
+						sort: null == value.sort ? void 0 : value.sort.map(AutocompleteAddtocartSchemaDataSortInnerToJSON),
+						pagination: AutocompleteAddtocartSchemaDataPaginationToJSON(value.pagination),
+						merchandising: AutocompleteAddtocartSchemaDataMerchandisingToJSON(value.merchandising),
 						results: value.results.map(ProductToJSON),
 					};
 				})(json, !1);
@@ -2583,7 +2583,7 @@
 			function ItemToJSON(json) {
 				return (function ItemToJSONTyped(value, ignoreDiscriminator = !1) {
 					if (null == value) return value;
-					return { uid: value.uid, childUid: value.childUid, sku: value.sku, childSku: value.childSku };
+					return { position: value.position, uid: value.uid, childUid: value.childUid, sku: value.sku, childSku: value.childSku };
 				})(json, !1);
 			}
 			function AutocompleteSchemaDataToJSON(json) {
@@ -2595,11 +2595,11 @@
 						didYouMean: value.didYouMean,
 						rq: value.rq,
 						matchType: value.matchType,
-						bgfilter: null == value.bgfilter ? void 0 : value.bgfilter.map(AutocompleteSchemaDataBgfilterInnerToJSON),
-						filter: null == value.filter ? void 0 : value.filter.map(AutocompleteSchemaDataFilterInnerToJSON),
-						sort: null == value.sort ? void 0 : value.sort.map(AutocompleteSchemaDataSortInnerToJSON),
-						pagination: AutocompleteSchemaDataPaginationToJSON(value.pagination),
-						merchandising: AutocompleteSchemaDataMerchandisingToJSON(value.merchandising),
+						bgfilter: null == value.bgfilter ? void 0 : value.bgfilter.map(AutocompleteAddtocartSchemaDataBgfilterInnerToJSON),
+						filter: null == value.filter ? void 0 : value.filter.map(AutocompleteAddtocartSchemaDataFilterInnerToJSON),
+						sort: null == value.sort ? void 0 : value.sort.map(AutocompleteAddtocartSchemaDataSortInnerToJSON),
+						pagination: AutocompleteAddtocartSchemaDataPaginationToJSON(value.pagination),
+						merchandising: AutocompleteAddtocartSchemaDataMerchandisingToJSON(value.merchandising),
 						results: value.results.map(ItemToJSON),
 					};
 				})(json, !1);
@@ -2622,36 +2622,26 @@
 					return { context: ContextToJSON(value.context), data: CartSchemaDataToJSON(value.data) };
 				})(json, !1);
 			}
-			function CartviewSchemaDataToJSON(json) {
-				return (function CartviewSchemaDataToJSONTyped(value, ignoreDiscriminator = !1) {
-					if (null == value) return value;
-					return { results: value.results.map(ProductToJSON) };
-				})(json, !1);
-			}
-			function CartviewSchemaToJSON(json) {
-				return (function CartviewSchemaToJSONTyped(value, ignoreDiscriminator = !1) {
-					if (null == value) return value;
-					return { context: ContextToJSON(value.context), data: CartviewSchemaDataToJSON(value.data) };
-				})(json, !1);
-			}
-			function SearchSchemaDataMerchandisingTriggeredCampaignsInnerToJSON(json) {
-				return (function SearchSchemaDataMerchandisingTriggeredCampaignsInnerToJSONTyped(value, ignoreDiscriminator = !1) {
+			function CategoryAddtocartSchemaDataMerchandisingTriggeredCampaignsInnerToJSON(json) {
+				return (function CategoryAddtocartSchemaDataMerchandisingTriggeredCampaignsInnerToJSONTyped(value, ignoreDiscriminator = !1) {
 					if (null == value) return value;
 					return { id: value.id, experimentId: value.experimentId, variationId: value.variationId };
 				})(json, !1);
 			}
-			function CategorySchemaDataMerchandisingToJSON(json) {
-				return (function CategorySchemaDataMerchandisingToJSONTyped(value, ignoreDiscriminator = !1) {
+			function CategoryAddtocartSchemaDataMerchandisingToJSON(json) {
+				return (function CategoryAddtocartSchemaDataMerchandisingToJSONTyped(value, ignoreDiscriminator = !1) {
 					if (null == value) return value;
 					return {
 						personalized: value.personalized,
 						triggeredCampaigns:
-							null == value.triggeredCampaigns ? void 0 : value.triggeredCampaigns.map(SearchSchemaDataMerchandisingTriggeredCampaignsInnerToJSON),
+							null == value.triggeredCampaigns
+								? void 0
+								: value.triggeredCampaigns.map(CategoryAddtocartSchemaDataMerchandisingTriggeredCampaignsInnerToJSON),
 					};
 				})(json, !1);
 			}
-			function SearchSchemaDataPaginationToJSON(json) {
-				return (function SearchSchemaDataPaginationToJSONTyped(value, ignoreDiscriminator = !1) {
+			function CategoryAddtocartSchemaDataPaginationToJSON(json) {
+				return (function CategoryAddtocartSchemaDataPaginationToJSONTyped(value, ignoreDiscriminator = !1) {
 					if (null == value) return value;
 					return { totalResults: value.totalResults, page: value.page, resultsPerPage: value.resultsPerPage };
 				})(json, !1);
@@ -2661,11 +2651,12 @@
 					if (null == value) return value;
 					return {
 						rq: value.rq,
-						bgfilter: null == value.bgfilter ? void 0 : value.bgfilter.map(AutocompleteSchemaDataBgfilterInnerToJSON),
-						filter: null == value.filter ? void 0 : value.filter.map(AutocompleteSchemaDataFilterInnerToJSON),
-						sort: null == value.sort ? void 0 : value.sort.map(AutocompleteSchemaDataSortInnerToJSON),
-						pagination: SearchSchemaDataPaginationToJSON(value.pagination),
-						merchandising: CategorySchemaDataMerchandisingToJSON(value.merchandising),
+						matchType: value.matchType,
+						bgfilter: null == value.bgfilter ? void 0 : value.bgfilter.map(AutocompleteAddtocartSchemaDataBgfilterInnerToJSON),
+						filter: null == value.filter ? void 0 : value.filter.map(AutocompleteAddtocartSchemaDataFilterInnerToJSON),
+						sort: null == value.sort ? void 0 : value.sort.map(AutocompleteAddtocartSchemaDataSortInnerToJSON),
+						pagination: CategoryAddtocartSchemaDataPaginationToJSON(value.pagination),
+						merchandising: CategoryAddtocartSchemaDataMerchandisingToJSON(value.merchandising),
 						results: value.results.map(ProductToJSON),
 					};
 				})(json, !1);
@@ -2681,11 +2672,12 @@
 					if (null == value) return value;
 					return {
 						rq: value.rq,
-						bgfilter: null == value.bgfilter ? void 0 : value.bgfilter.map(AutocompleteSchemaDataBgfilterInnerToJSON),
-						filter: null == value.filter ? void 0 : value.filter.map(AutocompleteSchemaDataFilterInnerToJSON),
-						sort: null == value.sort ? void 0 : value.sort.map(AutocompleteSchemaDataSortInnerToJSON),
-						pagination: SearchSchemaDataPaginationToJSON(value.pagination),
-						merchandising: CategorySchemaDataMerchandisingToJSON(value.merchandising),
+						matchType: value.matchType,
+						bgfilter: null == value.bgfilter ? void 0 : value.bgfilter.map(AutocompleteAddtocartSchemaDataBgfilterInnerToJSON),
+						filter: null == value.filter ? void 0 : value.filter.map(AutocompleteAddtocartSchemaDataFilterInnerToJSON),
+						sort: null == value.sort ? void 0 : value.sort.map(AutocompleteAddtocartSchemaDataSortInnerToJSON),
+						pagination: CategoryAddtocartSchemaDataPaginationToJSON(value.pagination),
+						merchandising: CategoryAddtocartSchemaDataMerchandisingToJSON(value.merchandising),
 						results: value.results.map(ItemToJSON),
 					};
 				})(json, !1);
@@ -2703,6 +2695,7 @@
 						orderId: value.orderId,
 						transactionTotal: value.transactionTotal,
 						total: value.total,
+						vat: value.vat,
 						city: value.city,
 						state: value.state,
 						country: value.country,
@@ -2734,10 +2727,16 @@
 					return { context: PersonalizationLogEventContextToJSON(value.context), data: LogToJSON(value.data) };
 				})(json, !1);
 			}
+			function ProductPageviewSchemaDataResultToJSON(json) {
+				return (function ProductPageviewSchemaDataResultToJSONTyped(value, ignoreDiscriminator = !1) {
+					if (null == value) return value;
+					return { uid: value.uid, childUid: value.childUid, sku: value.sku, childSku: value.childSku };
+				})(json, !1);
+			}
 			function ProductPageviewSchemaDataToJSON(json) {
 				return (function ProductPageviewSchemaDataToJSONTyped(value, ignoreDiscriminator = !1) {
 					if (null == value) return value;
-					return { result: ItemToJSON(value.result) };
+					return { result: ProductPageviewSchemaDataResultToJSON(value.result) };
 				})(json, !1);
 			}
 			function ProductPageviewSchemaToJSON(json) {
@@ -2770,14 +2769,16 @@
 					return { context: ContextToJSON(value.context), data: RecommendationsSchemaDataToJSON(value.data) };
 				})(json, !1);
 			}
-			function SearchSchemaDataMerchandisingToJSON(json) {
-				return (function SearchSchemaDataMerchandisingToJSONTyped(value, ignoreDiscriminator = !1) {
+			function SearchAddtocartSchemaDataMerchandisingToJSON(json) {
+				return (function SearchAddtocartSchemaDataMerchandisingToJSONTyped(value, ignoreDiscriminator = !1) {
 					if (null == value) return value;
 					return {
 						redirect: value.redirect,
 						personalized: value.personalized,
 						triggeredCampaigns:
-							null == value.triggeredCampaigns ? void 0 : value.triggeredCampaigns.map(SearchSchemaDataMerchandisingTriggeredCampaignsInnerToJSON),
+							null == value.triggeredCampaigns
+								? void 0
+								: value.triggeredCampaigns.map(CategoryAddtocartSchemaDataMerchandisingTriggeredCampaignsInnerToJSON),
 					};
 				})(json, !1);
 			}
@@ -2790,11 +2791,11 @@
 						didYouMean: value.didYouMean,
 						rq: value.rq,
 						matchType: value.matchType,
-						bgfilter: null == value.bgfilter ? void 0 : value.bgfilter.map(AutocompleteSchemaDataBgfilterInnerToJSON),
-						filter: null == value.filter ? void 0 : value.filter.map(AutocompleteSchemaDataFilterInnerToJSON),
-						sort: null == value.sort ? void 0 : value.sort.map(AutocompleteSchemaDataSortInnerToJSON),
-						pagination: SearchSchemaDataPaginationToJSON(value.pagination),
-						merchandising: SearchSchemaDataMerchandisingToJSON(value.merchandising),
+						bgfilter: null == value.bgfilter ? void 0 : value.bgfilter.map(AutocompleteAddtocartSchemaDataBgfilterInnerToJSON),
+						filter: null == value.filter ? void 0 : value.filter.map(AutocompleteAddtocartSchemaDataFilterInnerToJSON),
+						sort: null == value.sort ? void 0 : value.sort.map(AutocompleteAddtocartSchemaDataSortInnerToJSON),
+						pagination: CategoryAddtocartSchemaDataPaginationToJSON(value.pagination),
+						merchandising: SearchAddtocartSchemaDataMerchandisingToJSON(value.merchandising),
 						results: value.results.map(ProductToJSON),
 					};
 				})(json, !1);
@@ -2826,11 +2827,11 @@
 						didYouMean: value.didYouMean,
 						rq: value.rq,
 						matchType: value.matchType,
-						bgfilter: null == value.bgfilter ? void 0 : value.bgfilter.map(AutocompleteSchemaDataBgfilterInnerToJSON),
-						filter: null == value.filter ? void 0 : value.filter.map(AutocompleteSchemaDataFilterInnerToJSON),
-						sort: null == value.sort ? void 0 : value.sort.map(AutocompleteSchemaDataSortInnerToJSON),
-						pagination: SearchSchemaDataPaginationToJSON(value.pagination),
-						merchandising: SearchSchemaDataMerchandisingToJSON(value.merchandising),
+						bgfilter: null == value.bgfilter ? void 0 : value.bgfilter.map(AutocompleteAddtocartSchemaDataBgfilterInnerToJSON),
+						filter: null == value.filter ? void 0 : value.filter.map(AutocompleteAddtocartSchemaDataFilterInnerToJSON),
+						sort: null == value.sort ? void 0 : value.sort.map(AutocompleteAddtocartSchemaDataSortInnerToJSON),
+						pagination: CategoryAddtocartSchemaDataPaginationToJSON(value.pagination),
+						merchandising: SearchAddtocartSchemaDataMerchandisingToJSON(value.merchandising),
 						results: value.results.map(ItemToJSON),
 					};
 				})(json, !1);
@@ -3200,28 +3201,6 @@
 				}
 				async cartRemove(requestParameters, initOverrides) {
 					const response = await this.cartRemoveRaw(requestParameters, initOverrides);
-					return await response.value();
-				}
-				async cartViewRaw(requestParameters, initOverrides) {
-					if (null == requestParameters.siteId)
-						throw new RequiredError('siteId', 'Required parameter "siteId" was null or undefined when calling cartView().');
-					if (null == requestParameters.cartviewSchema)
-						throw new RequiredError('cartviewSchema', 'Required parameter "cartviewSchema" was null or undefined when calling cartView().');
-					const headerParameters = { 'Content-Type': 'text/plain' },
-						response = await this.request(
-							{
-								path: '/{siteId}/cart/view'.replace('{siteId}', encodeURIComponent(String(requestParameters.siteId))),
-								method: 'POST',
-								headers: headerParameters,
-								query: {},
-								body: CartviewSchemaToJSON(requestParameters.cartviewSchema),
-							},
-							initOverrides
-						);
-					return new JSONApiResponse(response);
-				}
-				async cartView(requestParameters, initOverrides) {
-					const response = await this.cartViewRaw(requestParameters, initOverrides);
 					return await response.value();
 				}
 			}
@@ -3693,8 +3672,58 @@
 					return await response.value();
 				}
 			}
-			var v4 = __webpack_require__('../../node_modules/uuid/dist/esm-browser/v4.js');
-			const { rE: version } = { rE: '0.0.23' },
+			const esm_browser_native = { randomUUID: 'undefined' != typeof crypto && crypto.randomUUID && crypto.randomUUID.bind(crypto) };
+			let getRandomValues;
+			const rnds8 = new Uint8Array(16);
+			const byteToHex = [];
+			for (let i = 0; i < 256; ++i) byteToHex.push((i + 256).toString(16).slice(1));
+			function unsafeStringify(arr, offset = 0) {
+				return (
+					byteToHex[arr[offset + 0]] +
+					byteToHex[arr[offset + 1]] +
+					byteToHex[arr[offset + 2]] +
+					byteToHex[arr[offset + 3]] +
+					'-' +
+					byteToHex[arr[offset + 4]] +
+					byteToHex[arr[offset + 5]] +
+					'-' +
+					byteToHex[arr[offset + 6]] +
+					byteToHex[arr[offset + 7]] +
+					'-' +
+					byteToHex[arr[offset + 8]] +
+					byteToHex[arr[offset + 9]] +
+					'-' +
+					byteToHex[arr[offset + 10]] +
+					byteToHex[arr[offset + 11]] +
+					byteToHex[arr[offset + 12]] +
+					byteToHex[arr[offset + 13]] +
+					byteToHex[arr[offset + 14]] +
+					byteToHex[arr[offset + 15]]
+				).toLowerCase();
+			}
+			const esm_browser_v4 = function v4(options, buf, offset) {
+					if (esm_browser_native.randomUUID && !buf && !options) return esm_browser_native.randomUUID();
+					const rnds =
+						(options = options || {}).random ??
+						options.rng?.() ??
+						(function rng() {
+							if (!getRandomValues) {
+								if ('undefined' == typeof crypto || !crypto.getRandomValues)
+									throw new Error('crypto.getRandomValues() not supported. See https://github.com/uuidjs/uuid#getrandomvalues-not-supported');
+								getRandomValues = crypto.getRandomValues.bind(crypto);
+							}
+							return getRandomValues(rnds8);
+						})();
+					if (rnds.length < 16) throw new Error('Random bytes length must be >= 16');
+					if (((rnds[6] = (15 & rnds[6]) | 64), (rnds[8] = (63 & rnds[8]) | 128), buf)) {
+						if ((offset = offset || 0) < 0 || offset + 16 > buf.length)
+							throw new RangeError(`UUID byte range ${offset}:${offset + 15} is out of buffer bounds`);
+						for (let i = 0; i < 16; ++i) buf[offset + i] = rnds[i];
+						return buf;
+					}
+					return unsafeStringify(rnds);
+				},
+				{ rE: version } = { rE: '0.0.27' },
 				CART_KEY = 'ssCartProducts',
 				VIEWED_KEY = 'ssViewedProducts',
 				COOKIE_DOMAIN = ('undefined' != typeof window && window.location.hostname && '.' + window.location.hostname.replace(/^www\./, '')) || void 0;
@@ -3962,7 +3991,7 @@
 											recommendationsAddtocartSchema: { context: this.getContext(), data: event.data },
 										},
 										request = this.createRequest('recommendations', 'recommendationsAddtocart', payload);
-									return this.sendRequests([request]), payload;
+									return this.queueRequest(request), payload;
 								},
 								clickThrough: (event) => {
 									const payload = {
@@ -4004,11 +4033,6 @@
 										request = this.createRequest('cart', 'cartRemove', payload);
 									return this.sendRequests([request]), payload;
 								},
-								view: (event) => {
-									const payload = { siteId: event?.siteId || this.globals.siteId, cartviewSchema: { context: this.getContext(), data: event.data } },
-										request = this.createRequest('cart', 'cartView', payload);
-									return this.sendRequests([request]), this.storage.cart.set(event.data.results), payload;
-								},
 							},
 							order: {
 								transaction: (event) => {
@@ -4043,7 +4067,7 @@
 						this.config.mode && ['production', 'development'].includes(this.config.mode) && (this.mode = this.config.mode),
 						(this.initiator = this.config.initiator || `beaconjs/${version}`);
 					const fetchApi = this.config.apis?.fetch,
-						apiConfig = new Configuration({ fetchApi, basePath: this.config.apis?.requesters?.beacon?.origin });
+						apiConfig = new Configuration({ fetchApi, basePath: this.config.requesters?.beacon?.origin });
 					(this.apis = {
 						shopper: new ShopperApi(apiConfig),
 						autocomplete: new AutocompleteApi(apiConfig),
@@ -4056,7 +4080,7 @@
 						error: new ErrorLogsApi(apiConfig),
 					}),
 						(this.globals = globals),
-						(this.pageLoadId = this.generateId()),
+						(this.pageLoadId = this.getPageLoadId()),
 						this.globals.currency && this.setCurrency(this.globals.currency);
 				}
 				getCookie(name) {
@@ -4091,7 +4115,6 @@
 							this.setLocalStorageItem(name, '');
 						} catch (e) {}
 					}
-					return '';
 				}
 				setLocalStorageItem(name, value) {
 					'undefined' != typeof window && window.localStorage.setItem(name, JSON.stringify({ value }));
@@ -4153,6 +4176,21 @@
 						return this.setLocalStorageItem(key, data), this.setCookie(key, data.value, 'Lax', expiration, COOKIE_DOMAIN), data.value;
 					}
 				}
+				getPageLoadId() {
+					if (this.pageLoadId) return this.pageLoadId;
+					let pageLoadId = this.generateId();
+					const pageLoadData = this.getLocalStorageItem('ssPageLoadId'),
+						currentHref = this.config.href || ('undefined' != typeof window && window.location.href) || '';
+					if (pageLoadData) {
+						const { href, value, timestamp } = pageLoadData;
+						href === currentHref && value && timestamp && new Date(timestamp).getTime() > Date.now() - 1e4 && (pageLoadId = value);
+					}
+					return (
+						this.setLocalStorageItem('ssPageLoadId', { href: currentHref, value: pageLoadId, timestamp: this.getTimestamp() }),
+						(this.pageLoadId = pageLoadId),
+						pageLoadId
+					);
+				}
 				getUserId() {
 					try {
 						const value = this.getStoredId('ssUserId', 47304e6);
@@ -4211,7 +4249,7 @@
 						);
 				}
 				generateId() {
-					return (0, v4.A)();
+					return esm_browser_v4();
 				}
 				getTimestamp() {
 					return new Date().toISOString();
@@ -4231,7 +4269,9 @@
 				sendRequests(requests) {
 					for (const request of requests) {
 						const initOverrides = async ({ init }) => ({ keepalive: 'production' === this.mode || void 0, body: JSON.stringify(init.body) });
-						this.getApiClient(request.apiType)[request.endpoint](request.payload, initOverrides);
+						this.getApiClient(request.apiType)
+							[request.endpoint](request.payload, initOverrides)
+							.catch(() => {});
 					}
 				}
 				processRequests() {
@@ -4243,6 +4283,10 @@
 								case 'recommendationsImpression':
 									(key += additionalRequestKeys(key, 'recommendation', request.payload.recommendationsSchema)),
 										appendResults(acc, key, 'recommendationsSchema', request);
+									break;
+								case 'recommendationsAddtocart':
+									(key += additionalRequestKeys(key, 'recommendation', request.payload.recommendationsAddtocartSchema)),
+										appendResults(acc, key, 'recommendationsAddtocartSchema', request);
 									break;
 								case 'searchRender':
 								case 'searchImpression':
@@ -4274,13 +4318,13 @@
 						shopper = overrides?.shopper || this.getShopperId(),
 						cart = overrides?.cart || this.storage.cart.get(),
 						lastViewed = overrides?.lastViewed || this.storage.viewed.get();
-					if (userId && 'string' == typeof userId && siteId && (shopper || cart.length || lastViewed.length)) {
+					if (userId && 'string' == typeof userId && siteId) {
 						const preflightParams = { userId, siteId };
 						shopper && (preflightParams.shopper = shopper),
 							cart.length && (preflightParams.cart = cart.map((item) => this.getProductId(item))),
 							lastViewed.length && (preflightParams.lastViewed = lastViewed.map((item) => this.getProductId(item)));
 						const endpoint = `${
-							this.config.apis?.requesters?.personalization?.origin || `https://${siteId}.a.searchspring.io`
+							this.config.requesters?.personalization?.origin || `https://${siteId}.a.searchspring.io`
 						}/api/personalization/preflightCache`;
 						(this.config.apis?.fetch || 'undefined' != typeof fetch) &&
 							(this.config.apis?.fetch || fetch)(endpoint, {
@@ -4297,9 +4341,11 @@
 			}
 			function appendResults(acc, key, schemaName, request) {
 				if (acc.batches[key]) {
-					const newResults = [...acc.batches[key].payload[schemaName].data.results, ...request.payload[schemaName].data.results];
+					const newResults = [...acc.batches[key].payload[schemaName].data.results, ...request.payload[schemaName].data.results].sort(
+						(a, b) => a.position - b.position
+					);
 					acc.batches[key].payload[schemaName].data.results = newResults;
-				} else acc.batches[key] = request;
+				} else acc.batches[key] = JSON.parse(JSON.stringify(request));
 			}
 			function additionalRequestKeys(key, type, schema) {
 				let value = key;
@@ -54392,10 +54438,10 @@
 		},
 		'../../node_modules/swiper/modules/index.mjs': (__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 			'use strict';
-			__webpack_require__.d(__webpack_exports__, { Jq: () => A11y, Vx: () => Navigation, dK: () => Pagination });
-			__webpack_require__('../../node_modules/swiper/shared/ssr-window.esm.mjs');
-			var utils = __webpack_require__('../../node_modules/swiper/shared/utils.mjs');
-			function create_element_if_not_defined_createElementIfNotDefined(swiper, originalParams, params, checkProps) {
+			__webpack_require__.d(__webpack_exports__, { Jq: () => A11y, Vx: () => Navigation, dK: () => Pagination, Ze: () => Scrollbar });
+			var ssr_window_esm = __webpack_require__('../../node_modules/swiper/shared/ssr-window.esm.mjs'),
+				utils = __webpack_require__('../../node_modules/swiper/shared/utils.mjs');
+			function createElementIfNotDefined(swiper, originalParams, params, checkProps) {
 				return (
 					swiper.params.createElements &&
 						Object.keys(checkProps).forEach((key) => {
@@ -54447,12 +54493,10 @@
 				function init() {
 					const params = swiper.params.navigation;
 					if (
-						((swiper.params.navigation = create_element_if_not_defined_createElementIfNotDefined(
-							swiper,
-							swiper.originalParams.navigation,
-							swiper.params.navigation,
-							{ nextEl: 'swiper-button-next', prevEl: 'swiper-button-prev' }
-						)),
+						((swiper.params.navigation = createElementIfNotDefined(swiper, swiper.originalParams.navigation, swiper.params.navigation, {
+							nextEl: 'swiper-button-next',
+							prevEl: 'swiper-button-prev',
+						})),
 						!params.nextEl && !params.prevEl)
 					)
 						return;
@@ -54536,7 +54580,7 @@
 					destroy,
 				});
 			}
-			function classes_to_selector_classesToSelector(classes) {
+			function classesToSelector(classes) {
 				return (
 					void 0 === classes && (classes = ''),
 					`.${classes
@@ -54594,7 +54638,7 @@
 							bulletEl.classList.add(`${bulletActiveClass}-${position}-${position}`));
 				}
 				function onBulletClick(e) {
-					const bulletEl = e.target.closest(classes_to_selector_classesToSelector(swiper.params.pagination.bulletClass));
+					const bulletEl = e.target.closest(classesToSelector(swiper.params.pagination.bulletClass));
 					if (!bulletEl) return;
 					e.preventDefault();
 					const index = (0, utils.h)(bulletEl) * swiper.params.slidesPerGroup;
@@ -54688,10 +54732,10 @@
 					el.forEach((subEl, subElIndex) => {
 						if (
 							('fraction' === params.type &&
-								(subEl.querySelectorAll(classes_to_selector_classesToSelector(params.currentClass)).forEach((fractionEl) => {
+								(subEl.querySelectorAll(classesToSelector(params.currentClass)).forEach((fractionEl) => {
 									fractionEl.textContent = params.formatFractionCurrent(current + 1);
 								}),
-								subEl.querySelectorAll(classes_to_selector_classesToSelector(params.totalClass)).forEach((totalEl) => {
+								subEl.querySelectorAll(classesToSelector(params.totalClass)).forEach((totalEl) => {
 									totalEl.textContent = params.formatFractionTotal(total);
 								})),
 							'progressbar' === params.type)
@@ -54708,7 +54752,7 @@
 							let scaleX = 1,
 								scaleY = 1;
 							'horizontal' === progressbarDirection ? (scaleX = scale) : (scaleY = scale),
-								subEl.querySelectorAll(classes_to_selector_classesToSelector(params.progressbarFillClass)).forEach((progressEl) => {
+								subEl.querySelectorAll(classesToSelector(params.progressbarFillClass)).forEach((progressEl) => {
 									(progressEl.style.transform = `translate3d(0,0,0) scaleX(${scaleX}) scaleY(${scaleY})`),
 										(progressEl.style.transitionDuration = `${swiper.params.speed}ms`);
 								});
@@ -54752,18 +54796,14 @@
 						(swiper.pagination.bullets = []),
 						el.forEach((subEl) => {
 							'custom' !== params.type && (subEl.innerHTML = paginationHTML || ''),
-								'bullets' === params.type &&
-									swiper.pagination.bullets.push(...subEl.querySelectorAll(classes_to_selector_classesToSelector(params.bulletClass)));
+								'bullets' === params.type && swiper.pagination.bullets.push(...subEl.querySelectorAll(classesToSelector(params.bulletClass)));
 						}),
 						'custom' !== params.type && emit('paginationRender', el[0]);
 				}
 				function init() {
-					swiper.params.pagination = create_element_if_not_defined_createElementIfNotDefined(
-						swiper,
-						swiper.originalParams.pagination,
-						swiper.params.pagination,
-						{ el: 'swiper-pagination' }
-					);
+					swiper.params.pagination = createElementIfNotDefined(swiper, swiper.originalParams.pagination, swiper.params.pagination, {
+						el: 'swiper-pagination',
+					});
 					const params = swiper.params.pagination;
 					if (!params.el) return;
 					let el;
@@ -54886,6 +54926,233 @@
 					destroy,
 				});
 			}
+			function Scrollbar(_ref) {
+				let { swiper, extendParams, on, emit } = _ref;
+				const document = (0, ssr_window_esm.g)();
+				let dragStartPos,
+					dragSize,
+					trackSize,
+					divider,
+					isTouched = !1,
+					timeout = null,
+					dragTimeout = null;
+				function setTranslate() {
+					if (!swiper.params.scrollbar.el || !swiper.scrollbar.el) return;
+					const { scrollbar, rtlTranslate: rtl } = swiper,
+						{ dragEl, el } = scrollbar,
+						params = swiper.params.scrollbar,
+						progress = swiper.params.loop ? swiper.progressLoop : swiper.progress;
+					let newSize = dragSize,
+						newPos = (trackSize - dragSize) * progress;
+					rtl
+						? ((newPos = -newPos),
+						  newPos > 0 ? ((newSize = dragSize - newPos), (newPos = 0)) : -newPos + dragSize > trackSize && (newSize = trackSize + newPos))
+						: newPos < 0
+						? ((newSize = dragSize + newPos), (newPos = 0))
+						: newPos + dragSize > trackSize && (newSize = trackSize - newPos),
+						swiper.isHorizontal()
+							? ((dragEl.style.transform = `translate3d(${newPos}px, 0, 0)`), (dragEl.style.width = `${newSize}px`))
+							: ((dragEl.style.transform = `translate3d(0px, ${newPos}px, 0)`), (dragEl.style.height = `${newSize}px`)),
+						params.hide &&
+							(clearTimeout(timeout),
+							(el.style.opacity = 1),
+							(timeout = setTimeout(() => {
+								(el.style.opacity = 0), (el.style.transitionDuration = '400ms');
+							}, 1e3)));
+				}
+				function updateSize() {
+					if (!swiper.params.scrollbar.el || !swiper.scrollbar.el) return;
+					const { scrollbar } = swiper,
+						{ dragEl, el } = scrollbar;
+					(dragEl.style.width = ''),
+						(dragEl.style.height = ''),
+						(trackSize = swiper.isHorizontal() ? el.offsetWidth : el.offsetHeight),
+						(divider =
+							swiper.size / (swiper.virtualSize + swiper.params.slidesOffsetBefore - (swiper.params.centeredSlides ? swiper.snapGrid[0] : 0))),
+						(dragSize = 'auto' === swiper.params.scrollbar.dragSize ? trackSize * divider : parseInt(swiper.params.scrollbar.dragSize, 10)),
+						swiper.isHorizontal() ? (dragEl.style.width = `${dragSize}px`) : (dragEl.style.height = `${dragSize}px`),
+						(el.style.display = divider >= 1 ? 'none' : ''),
+						swiper.params.scrollbar.hide && (el.style.opacity = 0),
+						swiper.params.watchOverflow &&
+							swiper.enabled &&
+							scrollbar.el.classList[swiper.isLocked ? 'add' : 'remove'](swiper.params.scrollbar.lockClass);
+				}
+				function getPointerPosition(e) {
+					return swiper.isHorizontal() ? e.clientX : e.clientY;
+				}
+				function setDragPosition(e) {
+					const { scrollbar, rtlTranslate: rtl } = swiper,
+						{ el } = scrollbar;
+					let positionRatio;
+					(positionRatio =
+						(getPointerPosition(e) -
+							(0, utils.b)(el)[swiper.isHorizontal() ? 'left' : 'top'] -
+							(null !== dragStartPos ? dragStartPos : dragSize / 2)) /
+						(trackSize - dragSize)),
+						(positionRatio = Math.max(Math.min(positionRatio, 1), 0)),
+						rtl && (positionRatio = 1 - positionRatio);
+					const position = swiper.minTranslate() + (swiper.maxTranslate() - swiper.minTranslate()) * positionRatio;
+					swiper.updateProgress(position), swiper.setTranslate(position), swiper.updateActiveIndex(), swiper.updateSlidesClasses();
+				}
+				function onDragStart(e) {
+					const params = swiper.params.scrollbar,
+						{ scrollbar, wrapperEl } = swiper,
+						{ el, dragEl } = scrollbar;
+					(isTouched = !0),
+						(dragStartPos =
+							e.target === dragEl ? getPointerPosition(e) - e.target.getBoundingClientRect()[swiper.isHorizontal() ? 'left' : 'top'] : null),
+						e.preventDefault(),
+						e.stopPropagation(),
+						(wrapperEl.style.transitionDuration = '100ms'),
+						(dragEl.style.transitionDuration = '100ms'),
+						setDragPosition(e),
+						clearTimeout(dragTimeout),
+						(el.style.transitionDuration = '0ms'),
+						params.hide && (el.style.opacity = 1),
+						swiper.params.cssMode && (swiper.wrapperEl.style['scroll-snap-type'] = 'none'),
+						emit('scrollbarDragStart', e);
+				}
+				function onDragMove(e) {
+					const { scrollbar, wrapperEl } = swiper,
+						{ el, dragEl } = scrollbar;
+					isTouched &&
+						(e.preventDefault ? e.preventDefault() : (e.returnValue = !1),
+						setDragPosition(e),
+						(wrapperEl.style.transitionDuration = '0ms'),
+						(el.style.transitionDuration = '0ms'),
+						(dragEl.style.transitionDuration = '0ms'),
+						emit('scrollbarDragMove', e));
+				}
+				function onDragEnd(e) {
+					const params = swiper.params.scrollbar,
+						{ scrollbar, wrapperEl } = swiper,
+						{ el } = scrollbar;
+					isTouched &&
+						((isTouched = !1),
+						swiper.params.cssMode && ((swiper.wrapperEl.style['scroll-snap-type'] = ''), (wrapperEl.style.transitionDuration = '')),
+						params.hide &&
+							(clearTimeout(dragTimeout),
+							(dragTimeout = (0, utils.n)(() => {
+								(el.style.opacity = 0), (el.style.transitionDuration = '400ms');
+							}, 1e3))),
+						emit('scrollbarDragEnd', e),
+						params.snapOnRelease && swiper.slideToClosest());
+				}
+				function events(method) {
+					const { scrollbar, params } = swiper,
+						el = scrollbar.el;
+					if (!el) return;
+					const target = el,
+						activeListener = !!params.passiveListeners && { passive: !1, capture: !1 },
+						passiveListener = !!params.passiveListeners && { passive: !0, capture: !1 };
+					if (!target) return;
+					const eventMethod = 'on' === method ? 'addEventListener' : 'removeEventListener';
+					target[eventMethod]('pointerdown', onDragStart, activeListener),
+						document[eventMethod]('pointermove', onDragMove, activeListener),
+						document[eventMethod]('pointerup', onDragEnd, passiveListener);
+				}
+				function init() {
+					const { scrollbar, el: swiperEl } = swiper;
+					swiper.params.scrollbar = createElementIfNotDefined(swiper, swiper.originalParams.scrollbar, swiper.params.scrollbar, {
+						el: 'swiper-scrollbar',
+					});
+					const params = swiper.params.scrollbar;
+					if (!params.el) return;
+					let el, dragEl;
+					if (('string' == typeof params.el && swiper.isElement && (el = swiper.el.querySelector(params.el)), el || 'string' != typeof params.el))
+						el || (el = params.el);
+					else if (((el = document.querySelectorAll(params.el)), !el.length)) return;
+					swiper.params.uniqueNavElements &&
+						'string' == typeof params.el &&
+						el.length > 1 &&
+						1 === swiperEl.querySelectorAll(params.el).length &&
+						(el = swiperEl.querySelector(params.el)),
+						el.length > 0 && (el = el[0]),
+						el.classList.add(swiper.isHorizontal() ? params.horizontalClass : params.verticalClass),
+						el &&
+							((dragEl = el.querySelector(classesToSelector(swiper.params.scrollbar.dragClass))),
+							dragEl || ((dragEl = (0, utils.c)('div', swiper.params.scrollbar.dragClass)), el.append(dragEl))),
+						Object.assign(scrollbar, { el, dragEl }),
+						params.draggable &&
+							(function enableDraggable() {
+								swiper.params.scrollbar.el && swiper.scrollbar.el && events('on');
+							})(),
+						el && el.classList[swiper.enabled ? 'remove' : 'add'](...(0, utils.i)(swiper.params.scrollbar.lockClass));
+				}
+				function destroy() {
+					const params = swiper.params.scrollbar,
+						el = swiper.scrollbar.el;
+					el && el.classList.remove(...(0, utils.i)(swiper.isHorizontal() ? params.horizontalClass : params.verticalClass)),
+						(function disableDraggable() {
+							swiper.params.scrollbar.el && swiper.scrollbar.el && events('off');
+						})();
+				}
+				extendParams({
+					scrollbar: {
+						el: null,
+						dragSize: 'auto',
+						hide: !1,
+						draggable: !1,
+						snapOnRelease: !0,
+						lockClass: 'swiper-scrollbar-lock',
+						dragClass: 'swiper-scrollbar-drag',
+						scrollbarDisabledClass: 'swiper-scrollbar-disabled',
+						horizontalClass: 'swiper-scrollbar-horizontal',
+						verticalClass: 'swiper-scrollbar-vertical',
+					},
+				}),
+					(swiper.scrollbar = { el: null, dragEl: null }),
+					on('changeDirection', () => {
+						if (!swiper.scrollbar || !swiper.scrollbar.el) return;
+						const params = swiper.params.scrollbar;
+						let { el } = swiper.scrollbar;
+						(el = (0, utils.m)(el)),
+							el.forEach((subEl) => {
+								subEl.classList.remove(params.horizontalClass, params.verticalClass),
+									subEl.classList.add(swiper.isHorizontal() ? params.horizontalClass : params.verticalClass);
+							});
+					}),
+					on('init', () => {
+						!1 === swiper.params.scrollbar.enabled ? disable() : (init(), updateSize(), setTranslate());
+					}),
+					on('update resize observerUpdate lock unlock changeDirection', () => {
+						updateSize();
+					}),
+					on('setTranslate', () => {
+						setTranslate();
+					}),
+					on('setTransition', (_s, duration) => {
+						!(function setTransition(duration) {
+							swiper.params.scrollbar.el && swiper.scrollbar.el && (swiper.scrollbar.dragEl.style.transitionDuration = `${duration}ms`);
+						})(duration);
+					}),
+					on('enable disable', () => {
+						const { el } = swiper.scrollbar;
+						el && el.classList[swiper.enabled ? 'remove' : 'add'](...(0, utils.i)(swiper.params.scrollbar.lockClass));
+					}),
+					on('destroy', () => {
+						destroy();
+					});
+				const disable = () => {
+					swiper.el.classList.add(...(0, utils.i)(swiper.params.scrollbar.scrollbarDisabledClass)),
+						swiper.scrollbar.el && swiper.scrollbar.el.classList.add(...(0, utils.i)(swiper.params.scrollbar.scrollbarDisabledClass)),
+						destroy();
+				};
+				Object.assign(swiper.scrollbar, {
+					enable: () => {
+						swiper.el.classList.remove(...(0, utils.i)(swiper.params.scrollbar.scrollbarDisabledClass)),
+							swiper.scrollbar.el && swiper.scrollbar.el.classList.remove(...(0, utils.i)(swiper.params.scrollbar.scrollbarDisabledClass)),
+							init(),
+							updateSize(),
+							setTranslate();
+					},
+					disable,
+					updateSize,
+					setTranslate,
+					init,
+					destroy,
+				});
+			}
 			function A11y(_ref) {
 				let { swiper, extendParams, on } = _ref;
 				extendParams({
@@ -54953,7 +55220,7 @@
 					(swiper.pagination &&
 						swiper.pagination.el &&
 						(targetEl === swiper.pagination.el || swiper.pagination.el.contains(e.target)) &&
-						!e.target.matches(classes_to_selector_classesToSelector(swiper.params.pagination.bulletClass))) ||
+						!e.target.matches(classesToSelector(swiper.params.pagination.bulletClass))) ||
 						(swiper.navigation &&
 							swiper.navigation.nextEl &&
 							targetEl === swiper.navigation.nextEl &&
@@ -54964,7 +55231,7 @@
 							targetEl === swiper.navigation.prevEl &&
 							((swiper.isBeginning && !swiper.params.loop) || swiper.slidePrev(),
 							swiper.isBeginning ? notify(params.firstSlideMessage) : notify(params.prevSlideMessage)),
-						swiper.pagination && targetEl.matches(classes_to_selector_classesToSelector(swiper.params.pagination.bulletClass)) && targetEl.click());
+						swiper.pagination && targetEl.matches(classesToSelector(swiper.params.pagination.bulletClass)) && targetEl.click());
 				}
 				function hasPagination() {
 					return swiper.pagination && swiper.pagination.bullets && swiper.pagination.bullets.length;
@@ -55086,7 +55353,7 @@
 											swiper.params.pagination.renderBullet ||
 												(addElRole(bulletEl, 'button'),
 												addElLabel(bulletEl, params.paginationBulletMessage.replace(/\{\{index\}\}/, (0, utils.h)(bulletEl) + 1)))),
-											bulletEl.matches(classes_to_selector_classesToSelector(swiper.params.pagination.bulletActiveClass))
+											bulletEl.matches(classesToSelector(swiper.params.pagination.bulletActiveClass))
 												? bulletEl.setAttribute('aria-current', 'true')
 												: bulletEl.removeAttribute('aria-current');
 									});
@@ -55176,11 +55443,13 @@
 			'use strict';
 			__webpack_require__.d(__webpack_exports__, {
 				a: () => elementParents,
+				b: () => elementOffset,
 				c: () => createElement,
 				d: () => now,
 				e: () => elementChildren,
 				f: () => elementOuterSize,
 				h: () => elementIndex,
+				i: () => classesToTokens,
 				j: () => getTranslate,
 				m: () => makeElementsArray,
 				n: () => nextTick,
@@ -55194,6 +55463,15 @@
 				v: () => deleteProps,
 			});
 			var _ssr_window_esm_mjs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__('../../node_modules/swiper/shared/ssr-window.esm.mjs');
+			function classesToTokens(classes) {
+				return (
+					void 0 === classes && (classes = ''),
+					classes
+						.trim()
+						.split(' ')
+						.filter((c) => !!c.trim())
+				);
+			}
 			function deleteProps(obj) {
 				const object = obj;
 				Object.keys(object).forEach((key) => {
@@ -55330,22 +55608,18 @@
 			function createElement(tag, classes) {
 				void 0 === classes && (classes = []);
 				const el = document.createElement(tag);
-				return (
-					el.classList.add(
-						...(Array.isArray(classes)
-							? classes
-							: (function classesToTokens(classes) {
-									return (
-										void 0 === classes && (classes = ''),
-										classes
-											.trim()
-											.split(' ')
-											.filter((c) => !!c.trim())
-									);
-							  })(classes))
-					),
-					el
-				);
+				return el.classList.add(...(Array.isArray(classes) ? classes : classesToTokens(classes))), el;
+			}
+			function elementOffset(el) {
+				const window = (0, _ssr_window_esm_mjs__WEBPACK_IMPORTED_MODULE_0__.a)(),
+					document = (0, _ssr_window_esm_mjs__WEBPACK_IMPORTED_MODULE_0__.g)(),
+					box = el.getBoundingClientRect(),
+					body = document.body,
+					clientTop = el.clientTop || body.clientTop || 0,
+					clientLeft = el.clientLeft || body.clientLeft || 0,
+					scrollTop = el === window ? window.scrollY : el.scrollTop,
+					scrollLeft = el === window ? window.scrollX : el.scrollLeft;
+				return { top: box.top + scrollTop - clientTop, left: box.left + scrollLeft - clientLeft };
 			}
 			function elementPrevAll(el, selector) {
 				const prevEls = [];
@@ -59467,61 +59741,6 @@
 				return buf || bytesToUuid(rnds);
 			};
 		},
-		'../../node_modules/uuid/dist/esm-browser/v4.js': (__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
-			'use strict';
-			__webpack_require__.d(__webpack_exports__, { A: () => esm_browser_v4 });
-			const esm_browser_native = { randomUUID: 'undefined' != typeof crypto && crypto.randomUUID && crypto.randomUUID.bind(crypto) };
-			let getRandomValues;
-			const rnds8 = new Uint8Array(16);
-			const byteToHex = [];
-			for (let i = 0; i < 256; ++i) byteToHex.push((i + 256).toString(16).slice(1));
-			function unsafeStringify(arr, offset = 0) {
-				return (
-					byteToHex[arr[offset + 0]] +
-					byteToHex[arr[offset + 1]] +
-					byteToHex[arr[offset + 2]] +
-					byteToHex[arr[offset + 3]] +
-					'-' +
-					byteToHex[arr[offset + 4]] +
-					byteToHex[arr[offset + 5]] +
-					'-' +
-					byteToHex[arr[offset + 6]] +
-					byteToHex[arr[offset + 7]] +
-					'-' +
-					byteToHex[arr[offset + 8]] +
-					byteToHex[arr[offset + 9]] +
-					'-' +
-					byteToHex[arr[offset + 10]] +
-					byteToHex[arr[offset + 11]] +
-					byteToHex[arr[offset + 12]] +
-					byteToHex[arr[offset + 13]] +
-					byteToHex[arr[offset + 14]] +
-					byteToHex[arr[offset + 15]]
-				).toLowerCase();
-			}
-			const esm_browser_v4 = function v4(options, buf, offset) {
-				if (esm_browser_native.randomUUID && !buf && !options) return esm_browser_native.randomUUID();
-				const rnds =
-					(options = options || {}).random ??
-					options.rng?.() ??
-					(function rng() {
-						if (!getRandomValues) {
-							if ('undefined' == typeof crypto || !crypto.getRandomValues)
-								throw new Error('crypto.getRandomValues() not supported. See https://github.com/uuidjs/uuid#getrandomvalues-not-supported');
-							getRandomValues = crypto.getRandomValues.bind(crypto);
-						}
-						return getRandomValues(rnds8);
-					})();
-				if (rnds.length < 16) throw new Error('Random bytes length must be >= 16');
-				if (((rnds[6] = (15 & rnds[6]) | 64), (rnds[8] = (63 & rnds[8]) | 128), buf)) {
-					if ((offset = offset || 0) < 0 || offset + 16 > buf.length)
-						throw new RangeError(`UUID byte range ${offset}:${offset + 15} is out of buffer bounds`);
-					for (let i = 0; i < 16; ++i) buf[offset + i] = rnds[i];
-					return buf;
-				}
-				return unsafeStringify(rnds);
-			};
-		},
 		'./node_modules/@storybook/addon-docs/blocks.js': (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 			'use strict';
 			__webpack_require__.d(__webpack_exports__, {
@@ -61074,7 +61293,7 @@
 						}
 						return compat_module.default.createElement(dist_esm.TabbedArgsTable, { tabs, sort });
 					} catch (err) {
-						return React.createElement(PureArgsTable, { error: err.message });
+						return compat_module.default.createElement(dist_esm.ArgsTable, { error: err.message });
 					}
 				},
 				ComponentsTable = function ComponentsTable(props) {
@@ -63400,4 +63619,4 @@
 		},
 	},
 ]);
-//# sourceMappingURL=117.85ea69b3.iframe.bundle.js.map
+//# sourceMappingURL=589.de3e98a4.iframe.bundle.js.map
