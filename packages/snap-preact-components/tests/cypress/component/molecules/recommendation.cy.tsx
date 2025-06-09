@@ -3,7 +3,7 @@ import { h } from 'preact';
 
 import { RecommendationStore } from '@searchspring/snap-store-mobx';
 import { UrlManager, QueryStringTranslator, reactLinker } from '@searchspring/snap-url-manager';
-import { Tracker, BeaconType, BeaconCategory } from '@searchspring/snap-tracker';
+import { Tracker } from '@searchspring/snap-tracker';
 import { EventManager } from '@searchspring/snap-event-manager';
 import { Profiler } from '@searchspring/snap-profiler';
 import { Logger } from '@searchspring/snap-logger';

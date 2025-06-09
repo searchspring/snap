@@ -26,17 +26,20 @@ import type {
 	SearchResponseModel,
 	SearchRequestModelFilterRange,
 	SearchRequestModelFilterValue,
+	SearchRequestModelFilter,
 } from '@searchspring/snapi-types';
 import type {
-	AutocompleteSchemaDataBgfilterInner,
-	AutocompleteSchemaDataFilterInner,
-	AutocompleteSchemaDataSortInnerDirEnum,
+	AutocompleteAddtocartSchemaDataBgfilterInner,
+	AutocompleteAddtocartSchemaDataFilterInner,
+	AutocompleteAddtocartSchemaDataSortInnerDirEnum,
 	Product as BeaconProduct,
 	Item,
 	SearchAddtocartSchemaData,
 	SearchRedirectSchemaData,
 	SearchSchemaData,
+	SearchSchemaDataMatchTypeEnum,
 } from '@searchspring/beacon';
+import { CLICK_DUPLICATION_TIMEOUT, isClickWithinProductLink } from '../utils/isClickWithinProductLink';
 
 const BACKGROUND_FILTER_FIELD_MATCHES = ['collection', 'category', 'categories', 'hierarchy'];
 const BACKGROUND_FILTERS_VALUE_FLAGS = [1, 0, '1', '0', 'true', 'false', true, false];
@@ -69,6 +72,7 @@ type SearchTrackMethods = {
 	redirect: (redirectURL: string) => void;
 };
 
+const schemaMap: Record<string, SearchSchemaData> = {};
 export class SearchController extends AbstractController {
 	public type = ControllerTypes.search;
 	declare store: SearchStore;
@@ -80,6 +84,7 @@ export class SearchController extends AbstractController {
 		product: Record<
 			string,
 			{
+				click?: boolean;
 				clickThrough?: boolean;
 				impression?: boolean;
 				render?: boolean;
@@ -164,31 +169,15 @@ export class SearchController extends AbstractController {
 				return false;
 			}
 
-			const nonBackgroundFilters = search?.request?.filters?.filter((filter) => !filter.background);
-			if (
-				config?.settings?.redirects?.singleResult &&
-				search?.response?.search?.query &&
-				search?.response?.pagination?.totalResults === 1 &&
-				!nonBackgroundFilters?.length
-			) {
-				//set loaded to true to prevent infinite search/reloading from happening
-				searchStore.loaded = true;
-				window.location.replace(search?.response.results[0].mappings.core.url);
-				return false;
-			}
-
 			await next();
 		});
 
 		this.eventManager.on('afterStore', async (search: AfterStoreObj, next: Next): Promise<void | boolean> => {
 			await next();
-
-			// save last params
-			this.storage.set('lastStringyParams', JSON.stringify(search.request));
-
 			// get scrollTo positioning and send it to 'restorePosition' event
 			const storableRequestParams = getStorableRequestParams(search.request);
 			const stringyParams = JSON.stringify(storableRequestParams);
+			this.storage.set('lastStringyParams', stringyParams);
 			const scrollMap: { [key: string]: ElementPositionObj } = this.storage.get('scrollMap') || {};
 			const elementPosition = scrollMap[stringyParams];
 			if (!elementPosition) {
@@ -200,21 +189,39 @@ export class SearchController extends AbstractController {
 			this.eventManager.fire('restorePosition', { controller: this, element: elementPosition });
 		});
 
-		this.eventManager.on('afterStore', async (search: AfterStoreObj, next: Next): Promise<void> => {
+		this.eventManager.on('afterStore', async (search: AfterStoreObj, next: Next): Promise<void | boolean> => {
 			await next();
 			const controller = search.controller as SearchController;
 			if (controller.store.loaded && !controller.store.error) {
 				const products = controller.store.results.filter(
 					(result) => result.type === 'product' && !this.events.product[result.id]?.render
 				) as Product[];
-				const results = products.length === 0 ? [] : products;
-				const data = getSearchSchemaData({ params: this.params, store: this.store, results });
-				this.tracker.events[this.pageType].render({ data, siteId: this.config.globals?.siteId });
+
+				if (products.length === 0) {
+					// handle no results
+					const data = getSearchSchemaData({ params: search.request, results: [] });
+					this.tracker.events[this.pageType].render({ data, siteId: this.config.globals?.siteId });
+				}
+
 				products.forEach((result: Product) => {
+					const data = schemaMap[result.id];
+					this.tracker.events[this.pageType].render({ data, siteId: this.config.globals?.siteId });
 					this.events.product[result.id] = this.events.product[result.id] || {};
 					this.events.product[result.id].render = true;
+					this.eventManager.fire('track.product.render', { controller: this, product: result, trackEvent: data });
 				});
-				this.eventManager.fire('track.product.render', { controller: this, products, trackEvent: data });
+
+				const config = search.controller.config as SearchControllerConfig;
+				const nonBackgroundFilters = search?.request?.filters?.filter((filter: SearchRequestModelFilter) => !filter.background);
+				if (
+					config?.settings?.redirects?.singleResult &&
+					search?.response?.search?.query &&
+					search?.response?.pagination?.totalResults === 1 &&
+					!nonBackgroundFilters?.length
+				) {
+					window.location.replace(search?.response.results[0].mappings.core.url);
+					return false;
+				}
 			}
 		});
 
@@ -339,53 +346,58 @@ export class SearchController extends AbstractController {
 
 				// store position data or empty object
 				this.storage.set('scrollMap', scrollMap);
-				const data = getSearchSchemaData({ params: this.params, store: this.store, results: [result] });
+				const data = schemaMap[result.id];
 				this.tracker.events[this.pageType].clickThrough({ data, siteId: this.config.globals?.siteId });
 				this.events.product[result.id] = this.events.product[result.id] || {};
 				this.events.product[result.id].clickThrough = true;
-				this.eventManager.fire('track.product.clickThrough', { controller: this, event: e, products: [result], trackEvent: data });
+				this.eventManager.fire('track.product.clickThrough', { controller: this, event: e, product: result, trackEvent: data });
 			},
 			click: (e: MouseEvent, result): void => {
+				if (this.events.product[result.id]?.click) {
+					return;
+				}
+
 				if (result.type === 'banner') {
 					return;
 				}
-				// TODO: closest might be going too far - write own function to only go n levels up - additionally check that href includes result.url
-				const href = (e.target as Element)?.getAttribute('href') || (e.target as Element)?.closest('a')?.getAttribute('href');
-				if (href) {
-					this.track.product.clickThrough(e, result as Product);
-				} else {
-					// TODO: in future, send as an interaction event
-				}
+
+				isClickWithinProductLink(e, result as Product) && this.track.product.clickThrough(e, result as Product);
+
+				this.events.product[result.id] = this.events.product[result.id] || {};
+				this.events.product[result.id].click = true;
+				setTimeout(() => {
+					this.events.product[result.id].click = false;
+				}, CLICK_DUPLICATION_TIMEOUT);
 			},
 			render: (result: Product) => {
 				if (this.events.product[result.id]?.render) {
 					return;
 				}
 
-				const data = getSearchSchemaData({ params: this.params, store: this.store, results: result ? [result] : [] });
+				const data = schemaMap[result.id];
 				this.tracker.events[this.pageType].render({ data, siteId: this.config.globals?.siteId });
 				this.events.product[result.id] = this.events.product[result.id] || {};
 				this.events.product[result.id].render = true;
-				this.eventManager.fire('track.product.render', { controller: this, products: [result], trackEvent: data });
+				this.eventManager.fire('track.product.render', { controller: this, product: result, trackEvent: data });
 			},
 			impression: (result: Product): void => {
 				if (this.events.product[result.id]?.impression) {
 					return;
 				}
 
-				const data = getSearchSchemaData({ params: this.params, store: this.store, results: [result] });
+				const data = schemaMap[result.id];
 				this.tracker.events[this.pageType].impression({ data, siteId: this.config.globals?.siteId });
 				this.events.product[result.id] = this.events.product[result.id] || {};
 				this.events.product[result.id].impression = true;
-				this.eventManager.fire('track.product.impression', { controller: this, products: [result], trackEvent: data });
+				this.eventManager.fire('track.product.impression', { controller: this, product: result, trackEvent: data });
 			},
 			addToCart: (result: Product): void => {
-				const data = getSearchAddtocartSchemaData({ params: this.params, store: this.store, results: [result] });
+				const data = getSearchAddtocartSchemaData({ searchSchemaData: schemaMap[result.id], results: [result] });
 				this.tracker.events[this.pageType].addToCart({
 					data,
 					siteId: this.config.globals?.siteId,
 				});
-				this.eventManager.fire('track.product.addToCart', { controller: this, products: [result], trackEvent: data });
+				this.eventManager.fire('track.product.addToCart', { controller: this, product: result, trackEvent: data });
 			},
 		},
 		redirect: (redirectURL: string): void => {
@@ -471,7 +483,7 @@ export class SearchController extends AbstractController {
 				}
 			}
 
-			const stringyParams = JSON.stringify(params);
+			const stringyParams = JSON.stringify(getStorableRequestParams(params));
 			const prevStringyParams = this.storage.get('lastStringyParams');
 			if (stringyParams == prevStringyParams) {
 				// no param change - not searching
@@ -498,6 +510,7 @@ export class SearchController extends AbstractController {
 				// infinite backfill is enabled AND we have not yet fetched any results
 				if (this.config.settings?.infinite.backfill && !this.store.loaded) {
 					// create requests for all missing pages (using Arrray(page).fill() to populate an array to map)
+					const backfillRequestsParams: SearchRequestModel[] = [];
 					const backfillRequests = Array(params.pagination.page)
 						.fill('backfill')
 						.map((v, i) => {
@@ -515,7 +528,7 @@ export class SearchController extends AbstractController {
 									delete backfillParams?.search?.redirectResponse;
 								}
 							}
-
+							backfillRequestsParams.push(backfillParams);
 							return this.client.search(backfillParams);
 						});
 
@@ -527,8 +540,8 @@ export class SearchController extends AbstractController {
 					response = backfillResponses[0][1];
 
 					// accumulate results from all backfill responses
-					const backfillResults: SearchResponseModelResult[] = backfillResponses.reduce((results, response) => {
-						// response is [meta, searchResponse]
+					const backfillResults: SearchResponseModelResult[] = backfillResponses.reduce((results, response, index) => {
+						createResultSchemaMapping({ request: backfillRequestsParams[index], response: response });
 						return results.concat(...response[1].results!);
 					}, [] as SearchResponseModelResult[]);
 
@@ -541,7 +554,7 @@ export class SearchController extends AbstractController {
 				} else {
 					// infinite with no backfills.
 					[meta, response] = await this.client.search(params);
-
+					createResultSchemaMapping({ request: params, response: [meta, response] });
 					// append new results to previous results
 					response.results = [...this.previousResults, ...(response.results || [])];
 				}
@@ -554,6 +567,7 @@ export class SearchController extends AbstractController {
 				// clear previousResults to prevent infinite scroll from using them
 				this.previousResults = [];
 				[meta, response] = await this.client.search(params);
+				createResultSchemaMapping({ request: params, response: [meta, response] });
 			}
 
 			// MockClient will overwrite the client search() method and use SearchData to return mock data which already contains meta data
@@ -660,10 +674,37 @@ export class SearchController extends AbstractController {
 		}
 	};
 
-	addToCart = async (product: Product): Promise<void> => {
-		this.track.product.addToCart(product);
-		this.eventManager.fire('addToCart', { controller: this, products: [product] });
+	addToCart = async (_products: Product[] | Product): Promise<void> => {
+		const products = typeof (_products as Product[]).slice == 'function' ? (_products as Product[]).slice() : [_products];
+		(products as Product[]).forEach((product) => {
+			this.track.product.addToCart(product);
+		});
+		if (products.length > 0) {
+			this.eventManager.fire('addToCart', { controller: this, products });
+		}
 	};
+}
+
+function createResultSchemaMapping({ request, response }: { request: SearchRequestModel; response: [MetaResponseModel, SearchResponseModel] }): void {
+	const [_, searchResponse] = response;
+	const schema = getSearchSchemaData({
+		params: request,
+		results: [], // results added below because this would contain all results
+		response: searchResponse,
+	});
+
+	searchResponse.results?.forEach((result) => {
+		schemaMap[result.id!] = {
+			...schema,
+			results: [
+				{
+					position: result.position!,
+					uid: result.mappings?.core?.uid || '',
+					sku: result.mappings?.core?.sku,
+				},
+			],
+		};
+	});
 }
 
 export function getStorableRequestParams(request: SearchRequestModel): SearchRequestModel {
@@ -726,17 +767,14 @@ function getSearchRedirectSchemaData({ redirectURL }: { redirectURL: string }): 
 }
 
 function getSearchAddtocartSchemaData({
-	params,
-	store,
+	searchSchemaData,
 	results,
 }: {
-	params: SearchRequestModel;
-	store: SearchStore;
+	searchSchemaData: SearchSchemaData;
 	results?: Product[];
 }): SearchAddtocartSchemaData {
-	const base = getSearchSchemaData({ params, store, results });
 	return {
-		...base,
+		...searchSchemaData,
 		results:
 			results?.map((result: Product): BeaconProduct => {
 				const core = (result as Product).mappings.core!;
@@ -750,10 +788,18 @@ function getSearchAddtocartSchemaData({
 	};
 }
 
-function getSearchSchemaData({ params, store, results }: { params: SearchRequestModel; store: SearchStore; results?: Product[] }): SearchSchemaData {
+function getSearchSchemaData({
+	params,
+	results,
+	response,
+}: {
+	params: SearchRequestModel;
+	results?: (SearchResponseModelResult | Product)[];
+	response?: SearchResponseModel;
+}): SearchSchemaData {
 	const filters = params.filters?.reduce<{
-		bgfilter?: Array<AutocompleteSchemaDataBgfilterInner>;
-		filter?: Array<AutocompleteSchemaDataFilterInner>;
+		bgfilter?: Array<AutocompleteAddtocartSchemaDataBgfilterInner>;
+		filter?: Array<AutocompleteAddtocartSchemaDataFilterInner>;
 	}>((acc, filter) => {
 		const key = filter.background ? 'bgfilter' : 'filter';
 		acc[key] = acc[key] || [];
@@ -777,28 +823,38 @@ function getSearchSchemaData({ params, store, results }: { params: SearchRequest
 
 		return acc;
 	}, {});
+
+	let correctedQuery: string | undefined;
+	if (response?.search?.originalQuery && response?.search?.query) {
+		correctedQuery = response?.search?.query;
+	}
+
+	const campaigns = response?.merchandising?.campaigns || [];
+	const experiments = response?.merchandising?.experiments || [];
+
 	return {
 		q: params.search?.query?.string || '',
-		correctedQuery: store.search?.originalQuery?.string ? store.search?.query?.string : undefined,
+		correctedQuery,
+		matchType: response?.search?.matchType as SearchSchemaDataMatchTypeEnum,
 		...filters,
 		sort: params.sorts?.map((sort) => {
 			return {
 				field: sort.field,
-				dir: sort.direction as AutocompleteSchemaDataSortInnerDirEnum,
+				dir: sort.direction as AutocompleteAddtocartSchemaDataSortInnerDirEnum,
 			};
 		}),
 		pagination: {
-			totalResults: store.pagination.totalResults,
-			page: store.pagination.page,
-			resultsPerPage: store.pagination.pageSize,
+			totalResults: response?.pagination?.totalResults!,
+			page: response?.pagination?.page!,
+			resultsPerPage: response?.pagination?.pageSize!,
 		},
 		merchandising: {
-			personalized: store.merchandising.personalized,
-			redirect: store.merchandising.redirect,
+			personalized: response?.merchandising?.personalized,
+			redirect: response?.merchandising?.redirect,
 			triggeredCampaigns:
-				(store.merchandising.campaigns?.length &&
-					store.merchandising.campaigns?.map((campaign) => {
-						const experiement = store.merchandising.experiments.find((experiment) => experiment.campaignId === campaign.id);
+				(campaigns.length &&
+					campaigns.map((campaign) => {
+						const experiement = experiments.find((experiment) => experiment.campaignId === campaign.id);
 						return {
 							id: campaign.id,
 							experimentId: experiement?.experimentId,
@@ -808,13 +864,13 @@ function getSearchSchemaData({ params, store, results }: { params: SearchRequest
 				undefined,
 		},
 		results:
-			results?.map((result: Product): Item => {
-				const core = result.mappings.core!;
+			results?.map((result): Item => {
+				const core = result.mappings?.core!;
+				const position = result.position!;
 				return {
+					position,
 					uid: core.uid || '',
-					// childUid: core.uid,
 					sku: core.sku,
-					// childSku: core.sku,
 				};
 			}) || [],
 	};

@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.66.0](https://github.com/searchspring/snap/compare/v0.65.2...v0.66.0) (2025-06-09)
+
+### Bug Fixes
+
+- beacon improvements - fix position, refactor closest click, improve ac impressions ([3966c8b](https://github.com/searchspring/snap/commit/3966c8b8cb70506682cf4c92e07c8f02a28169c9))
+- infinite scrolling tracking to use correct beacon schema data ([25c13f2](https://github.com/searchspring/snap/commit/25c13f2a97c17734f5d3ca79e02350653952485f))
+
+### Features
+
+- add cart infering, update tracking documentation ([6bdef42](https://github.com/searchspring/snap/commit/6bdef423746486179bb079d78c0776ffedf79875))
+- add Swiper scrollbar support to Recommendations component ([00800a1](https://github.com/searchspring/snap/commit/00800a193cb88d65a36c93cc023ed03f360b8d9e))
+- add withTracking and useTracking, post beacon launch fixes ([84bab28](https://github.com/searchspring/snap/commit/84bab28c3edf0b1c632226dcb316f6132bf3f56b))
+- **preact/components/icon:** adding title to icon component ([a4c620c](https://github.com/searchspring/snap/commit/a4c620cb2497c1b8dd5e6685649c81c6d2bc04c3))
+
 ## [0.65.2](https://github.com/searchspring/snap/compare/v0.65.1...v0.65.2) (2025-04-08)
 
 ### Bug Fixes

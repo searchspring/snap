@@ -1,14 +1,14 @@
 /** @jsx jsx */
 import { h, ComponentChildren } from 'preact';
 import { jsx, css } from '@emotion/react';
-import { useRef } from 'preact/hooks';
 import { observer } from 'mobx-react';
 import { Theme, useTheme } from '../../../providers';
-import { useIntersectionAdvanced } from '../../../hooks';
 import type { AutocompleteController, RecommendationController, SearchController } from '@searchspring/snap-controller';
 import { ComponentProps, StylingCSS } from '../../../types';
 import type { Banner, Product } from '@searchspring/snap-store-mobx';
 import classnames from 'classnames';
+import { createImpressionObserver } from '../../../utilities';
+import { type Ref } from 'preact/hooks';
 
 const CSS = {
 	ResultTracker: () => css({}),
@@ -37,16 +37,9 @@ export const ResultTracker = observer((properties: ResultTrackerProps): JSX.Elem
 		...defaultTrack,
 		...track,
 	};
-	const resultRef = useRef(null);
-	const resultInViewport = useIntersectionAdvanced(resultRef, {
-		key: result.id,
-		rootMargin: '0px',
-		fireOnce: true,
-		threshold: 0.75,
-		startDelay: 2000, // TODO: look into dynamically setting this to a lower value for first row of products
-		minVisibleTime: 150,
-	});
-	if (resultInViewport && mergedTrack.impression) {
+
+	const { ref, inViewport } = createImpressionObserver();
+	if (inViewport && mergedTrack.impression) {
 		if (result.type === 'product') {
 			controller?.track.product.impression(result as Product);
 		} else {
@@ -63,16 +56,13 @@ export const ResultTracker = observer((properties: ResultTrackerProps): JSX.Elem
 
 	return (
 		<div
-			key={result.id}
 			className={classnames('ss__result-tracker', `ss__${controller?.type}-result-tracker`, className)}
 			onClick={(e: any) => {
-				if (mergedTrack.click) {
-					if (result.type === 'product') {
-						controller?.track.product.click(e, result as Product);
-					}
+				if (result.type === 'product' && mergedTrack.click) {
+					controller?.track.product.click(e, result as Product);
 				}
 			}}
-			ref={resultRef}
+			ref={ref as Ref<HTMLDivElement>}
 			{...styling}
 		>
 			{children}

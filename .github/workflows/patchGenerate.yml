@@ -12,12 +12,12 @@ jobs:
       matrix:
         framework: [preact]
     steps:
-      - name: Checkout Snap repositiory
+      - name: Checkout Snap repository
         uses: actions/checkout@v3
         with:
           ref: "main"
 
-      - name: Checkout snapfu-patches repositiory
+      - name: Checkout snapfu-patches repository
         uses: actions/checkout@v3
         with:
           repository: "searchspring/snapfu-patches"

@@ -27,7 +27,7 @@ export class Recs extends Component<RecsProps> {
 		return (
 			<div>
 				<hr style={{ margin: '20px 0' }} />
-				<Recommendation controller={controller} title={parameters.title} speed={0} lazyRender={{ enabled: false }}>
+				<Recommendation controller={controller} title={parameters.title} lazyRender={{ enabled: false }}>
 					{store.results.map((result) => (
 						<Result controller={controller} result={result}></Result>
 					))}
