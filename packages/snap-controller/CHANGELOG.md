@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.66.1](https://github.com/searchspring/snap/compare/v0.66.0...v0.66.1) (2025-06-10)
+
+### Bug Fixes
+
+- **controller/search:** adjusting code that checks product URL to ensure we check multiple values ([adb5137](https://github.com/searchspring/snap/commit/adb5137040c23bc2315fccc7e9d6779484be9317))
+- no results beacon render event ([1925c5f](https://github.com/searchspring/snap/commit/1925c5fdd5a8789702bae3a173ef329cb0bc9012))
+
 # [0.66.0](https://github.com/searchspring/snap/compare/v0.65.2...v0.66.0) (2025-06-09)
 
 ### Bug Fixes
