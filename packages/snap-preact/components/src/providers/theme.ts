@@ -78,7 +78,7 @@ export type ThemeResponsiveOverrides = {
 	desktop?: ThemeComponentsRestrictedOverrides;
 };
 
-export type ResponsiveKeys = 'default' | 'desktop' | 'tablet' | 'mobile' | undefined;
+export type ResponsiveKeys = 'default' | 'desktop' | 'tablet' | 'mobile';
 
 export type ThemePartial = Omit<Theme, 'variables' | 'name'> & { variables?: ThemeVariablesPartial };
 export type ThemeOverrides = { components?: ThemeComponentsRestrictedOverrides; responsive?: ThemeResponsiveOverrides };

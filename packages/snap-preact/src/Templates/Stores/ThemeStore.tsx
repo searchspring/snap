@@ -275,7 +275,7 @@ export function mergeThemeLayers(...layers: ThemePartial[]): ThemePartial {
 }
 
 export function setActiveBreakpoint(width: number | undefined, breakpoints: ThemeVariableBreakpoints | undefined): ThemePartial {
-	let breakpoint: ResponsiveKeys;
+	let breakpoint: ResponsiveKeys | undefined;
 
 	if (Number.isInteger(width) && breakpoints) {
 		breakpoint = Object.keys(breakpoints).find((breakpoint) => width! <= breakpoints[breakpoint as keyof typeof breakpoints]) as ResponsiveKeys;
