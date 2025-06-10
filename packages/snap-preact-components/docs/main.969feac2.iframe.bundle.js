@@ -1,4 +1,4 @@
-/*! For license information please see main.27d6cc59.iframe.bundle.js.LICENSE.txt */
+/*! For license information please see main.969feac2.iframe.bundle.js.LICENSE.txt */
 (self.webpackChunk_searchspring_snap_preact_components = self.webpackChunk_searchspring_snap_preact_components || []).push([
 	[792],
 	{
@@ -35309,22 +35309,26 @@
 						currentElement = e.target,
 						href = null,
 						level = 0,
-						resultUrl =
+						resultCoreUrl =
 							(null == result ||
 							null === (_result$display = result.display) ||
 							void 0 === _result$display ||
 							null === (_result$display$mappi = _result$display.mappings.core) ||
 							void 0 === _result$display$mappi
 								? void 0
-								: _result$display$mappi.url) ||
+								: _result$display$mappi.url) || '',
+						resultDisplayUrl =
 							(null == result || null === (_result$mappings$core = result.mappings.core) || void 0 === _result$mappings$core
 								? void 0
-								: _result$mappings$core.url) ||
-							'';
+								: _result$mappings$core.url) || '';
 					currentElement && level < 12;
 
 				) {
-					if ((href = currentElement.getAttribute('href')) && resultUrl && href.includes(resultUrl)) return !0;
+					if (
+						(href = currentElement.getAttribute('href')) &&
+						((resultCoreUrl && href.includes(resultCoreUrl)) || (resultDisplayUrl && href.includes(resultDisplayUrl)))
+					)
+						return !0;
 					(currentElement = currentElement.parentElement), level++;
 				}
 				return !1;
@@ -36578,7 +36582,7 @@
 																		)
 																	);
 																})).length &&
-																((data = getSearchSchemaData({ params: search.request, results: [] })),
+																((data = getSearchSchemaData({ params: search.request, response: search.response })),
 																_this.tracker.events[_this.pageType].render({
 																	data,
 																	siteId:
@@ -36856,7 +36860,7 @@
 					request = _ref12.request,
 					_response = _slicedToArray(_ref12.response, 2),
 					searchResponse = (_response[0], _response[1]),
-					schema = getSearchSchemaData({ params: request, results: [], response: searchResponse });
+					schema = getSearchSchemaData({ params: request, response: searchResponse });
 				null === (_searchResponse$resul = searchResponse.results) ||
 					void 0 === _searchResponse$resul ||
 					_searchResponse$resul.forEach(function (result) {
@@ -36933,7 +36937,6 @@
 					correctedQuery,
 					_response$search3,
 					params = _ref15.params,
-					results = _ref15.results,
 					response = _ref15.response,
 					filters =
 						null === (_params$filters = params.filters) || void 0 === _params$filters
@@ -37041,14 +37044,7 @@
 									})) ||
 								void 0,
 						},
-						results:
-							(null == results
-								? void 0
-								: results.map(function (result) {
-										var _result$mappings3,
-											core = null === (_result$mappings3 = result.mappings) || void 0 === _result$mappings3 ? void 0 : _result$mappings3.core;
-										return { position: result.position, uid: core.uid || '', sku: core.sku };
-								  })) || [],
+						results: [],
 					}
 				);
 			}
@@ -51188,7 +51184,7 @@
 							((function Tracker_classCallCheck(a, n) {
 								if (!(a instanceof n)) throw new TypeError('Cannot call a class as a function');
 							})(this, Tracker),
-							((config = cjs_default()(Tracker_defaultConfig, config || {})).initiator = 'searchspring/' + config.framework + '/0.66.0'),
+							((config = cjs_default()(Tracker_defaultConfig, config || {})).initiator = 'searchspring/' + config.framework + '/0.66.1'),
 							((_this = Tracker_callSuper(this, Tracker, [globals, config])).targeters = []),
 							(_this.track = {
 								error: function error(data, siteId) {
@@ -51360,7 +51356,7 @@
 							(_this.localStorage = new StorageStore({ type: 'local', key: 'ss-' + _this.config.id })),
 							_this.localStorage.set('siteId', _this.globals.siteId),
 							(null !== (_window$searchspring = window.searchspring) && void 0 !== _window$searchspring && _window$searchspring.tracker) ||
-								((window.searchspring = window.searchspring || {}), (window.searchspring.tracker = _this), (window.searchspring.version = '0.66.0')),
+								((window.searchspring = window.searchspring || {}), (window.searchspring.tracker = _this), (window.searchspring.version = '0.66.1')),
 							setTimeout(function () {
 								_this.targeters.push(
 									new DomTargeter([{ selector: 'script[type^="searchspring/track/"]', emptyTarget: !1 }], function (target, elem) {
