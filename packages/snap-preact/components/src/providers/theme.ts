@@ -52,6 +52,7 @@ export type Theme = {
 	responsive?: ThemeResponsive;
 	components?: ThemeComponents;
 	overrides?: ThemeOverrides;
+	activeBreakpoint?: ResponsiveKeys;
 };
 
 export type ThemeComponent<Template extends string, Props> = {
@@ -61,7 +62,7 @@ export type ThemeComponent<Template extends string, Props> = {
 	desktop?: ThemeComponentTemplateOverrides<Template, Props>;
 };
 
-export type ThemeComplete = Required<Omit<Theme, 'overrides'>> & { components: ThemeComponents };
+export type ThemeComplete = Required<Omit<Theme, 'overrides' | 'activeBreakpoint'>> & { components: ThemeComponents };
 
 export type ThemeResponsive = {
 	mobile?: ThemeComponentsRestricted;
@@ -77,9 +78,9 @@ export type ThemeResponsiveOverrides = {
 	desktop?: ThemeComponentsRestrictedOverrides;
 };
 
-export type responsiveKeys = 'default' | 'desktop' | 'tablet' | 'mobile' | undefined;
+export type ResponsiveKeys = 'default' | 'desktop' | 'tablet' | 'mobile' | undefined;
 
-export type ThemePartial = Omit<Theme, 'variables' | 'name'> & { variables?: ThemeVariablesPartial; activeBreakpoint?: responsiveKeys };
+export type ThemePartial = Omit<Theme, 'variables' | 'name'> & { variables?: ThemeVariablesPartial };
 export type ThemeOverrides = { components?: ThemeComponentsRestrictedOverrides; responsive?: ThemeResponsiveOverrides };
 
 export type ConfigThemeOverrides = {

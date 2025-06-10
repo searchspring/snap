@@ -111,7 +111,7 @@ describe('ThemeStore', () => {
 		expect(store.theme).toStrictEqual({
 			...config.base,
 			name: config.name,
-			activeBreakpoint: 'default',
+			activeBreakpoint: 'mobile',
 		});
 
 		store.setInnerWidth(100);
@@ -139,8 +139,48 @@ describe('ThemeStore', () => {
 		expect(store.theme).toStrictEqual({
 			...merged,
 			name: config.name,
-			activeBreakpoint: 'default',
+			activeBreakpoint: 'mobile',
 		});
+	});
+
+	it('updates activeBreakpoint correctly', () => {
+		const config: ThemeStoreThemeConfig = {
+			name: GLOBAL_THEME_NAME,
+			type: 'local',
+			base: {
+				name: 'empty',
+				variables: testThemeVariables,
+				components: {},
+			},
+			overrides: {},
+			variables: {},
+			currency: {},
+			language: {},
+			languageOverrides: {},
+			innerWidth: 0,
+		};
+
+		const store = new ThemeStore({ config, dependencies, settings });
+		expect(store).toBeDefined();
+
+		expect(store.innerWidth).toBe(config.innerWidth);
+
+		expect(store.theme.activeBreakpoint).toStrictEqual('mobile');
+
+		store.setInnerWidth(421);
+		expect(store.innerWidth).toBe(421);
+
+		expect(store.theme.activeBreakpoint).toStrictEqual('tablet');
+
+		store.setInnerWidth(721);
+		expect(store.innerWidth).toBe(721);
+
+		expect(store.theme.activeBreakpoint).toStrictEqual('desktop');
+
+		store.setInnerWidth(1441);
+		expect(store.innerWidth).toBe(1441);
+
+		expect(store.theme.activeBreakpoint).toStrictEqual('default');
 	});
 
 	it('can get theme', () => {
@@ -164,7 +204,7 @@ describe('ThemeStore', () => {
 		expect(store.theme).toStrictEqual({
 			...merged,
 			name: config.name,
-			activeBreakpoint: 'default',
+			activeBreakpoint: 'mobile',
 		});
 
 		// assertions on 'test' theme
@@ -198,7 +238,7 @@ describe('ThemeStore', () => {
 		expect(store.theme).toStrictEqual({
 			...merged,
 			name: config.name,
-			activeBreakpoint: 'default',
+			activeBreakpoint: 'mobile',
 		});
 	});
 
@@ -236,7 +276,7 @@ describe('ThemeStore', () => {
 		expect(store.theme).toStrictEqual({
 			...merged,
 			name: config.name,
-			activeBreakpoint: 'default',
+			activeBreakpoint: 'mobile',
 		});
 	});
 
@@ -286,12 +326,11 @@ describe('ThemeStore', () => {
 		expect(store.theme).toStrictEqual({
 			...merged,
 			name: config.name,
-			activeBreakpoint: 'default',
+			activeBreakpoint: 'mobile',
 		});
 	});
 
-	//todo test
-	it('can get theme at first breakpoint', () => {
+	it('can get theme at a breakpoint', () => {
 		const config: ThemeStoreThemeConfig = {
 			name: GLOBAL_THEME_NAME,
 			type: 'local',
@@ -303,11 +342,12 @@ describe('ThemeStore', () => {
 			languageOverrides: {},
 			innerWidth: testTheme.variables?.breakpoints.mobile! - 10,
 		};
-
 		const store = new ThemeStore({ config, dependencies, settings });
+
 		expect(store.innerWidth).toBe(config.innerWidth);
 
 		const baseResponsiveOverrides = config.base.responsive?.mobile!;
+
 		expect(baseResponsiveOverrides).toBeDefined();
 
 		// order here matches order merged via theme() getter
@@ -322,7 +362,7 @@ describe('ThemeStore', () => {
 		expect(store.theme).toStrictEqual({
 			...merged,
 			name: config.name,
-			activeBreakpoint: 'default',
+			activeBreakpoint: 'mobile',
 		});
 
 		// extra assertions on 'test' theme
@@ -391,7 +431,7 @@ describe('ThemeStore', () => {
 		expect(baseResponsiveOverrides).toBeDefined();
 
 		const additionalResponsiveOverrides = config.overrides?.responsive?.mobile!;
-		expect(baseResponsiveOverrides).toBeDefined();
+		expect(additionalResponsiveOverrides).toBeDefined();
 
 		// order here matches order merged via theme() getter
 		const merged = mergeThemeLayers(
@@ -457,7 +497,7 @@ describe('ThemeStore', () => {
 		expect(baseResponsiveOverrides).toBeDefined();
 
 		const additionalResponsiveOverrides = config.overrides?.responsive?.mobile!;
-		expect(baseResponsiveOverrides).toBeDefined();
+		expect(additionalResponsiveOverrides).toBeDefined();
 
 		const overrideObj = { path: ['results', 'columns'], rootEditingKey: 'components', value: 12 };
 		store.setOverride(overrideObj);
