@@ -8,6 +8,7 @@ import { ValueFacet, RangeFacet, SearchFacetStore, StorageStore } from '@searchs
 import { SearchResponseModelFacet, SearchResponseModelFacetValueAllOf } from '@searchspring/snapi-types';
 import { MockData } from '@searchspring/snap-shared';
 import { QueryStringTranslator, reactLinker, UrlManager } from '@searchspring/snap-url-manager';
+import { IconType } from '../../Atoms/Icon';
 
 const mockData = new MockData();
 const searchResponseFacets = mockData.search().facets!;
@@ -132,6 +133,49 @@ describe('Facet Component', () => {
 			expect(facetElement).toBeInTheDocument();
 			const styles = getComputedStyle(facetElement);
 			expect(styles.color).toBe(args.color);
+		});
+
+		it('showSelectedCount, clear all text & clearAllIcon props', async () => {
+			mockData.updateConfig({ search: 'filtered' });
+
+			const mockTestData = mockData.searchMeta();
+			const facetStore = new SearchFacetStore({
+				config: { id: 'testing' },
+				stores: { storage: new StorageStore() },
+				services: { urlManager: new UrlManager(new QueryStringTranslator(), reactLinker) },
+				data: { search: mockTestData.search, meta: mockTestData.meta },
+			});
+
+			const clearAllText = 'Clear All Text';
+
+			const args = {
+				facet: facetStore.filter((facet) => facet.field == 'size_dress')!.pop()!,
+				showSelectedCount: true,
+				clearAllText: clearAllText,
+				clearAllIcon: 'cog' as IconType,
+			};
+
+			const rendered = render(<Facet {...args} />);
+			rendered.debug();
+			const optionElems = rendered.container.querySelectorAll('.ss__facet-grid-options__option')!;
+			expect(optionElems.length).toBeGreaterThan(0);
+
+			const selectedCountElem = rendered.container.querySelector('.ss__facet__header__selected-count');
+			const clearAllDiv = rendered.container.querySelector('.ss__facet__header__clear-all');
+			const clearAllDivText = rendered.container.querySelector('.ss__facet__header__clear-all label');
+			const clearAllDivIcon = rendered.container.querySelector('.ss__facet__header__clear-all .ss__icon');
+
+			expect(selectedCountElem).toBeInTheDocument();
+			expect(selectedCountElem?.innerHTML).toBe('(1)');
+
+			expect(clearAllDiv).toBeInTheDocument();
+			expect(clearAllDivText).toBeInTheDocument();
+			expect(clearAllDivText?.textContent).toBe(clearAllText);
+
+			expect(clearAllDivIcon).toBeInTheDocument();
+			expect(clearAllDivIcon?.classList).toContain('ss__icon--cog');
+
+			mockData.updateConfig({ search: 'default' });
 		});
 
 		it('show more/less text prop', async () => {

@@ -339,7 +339,6 @@ export const Facet = observer((properties: FacetProps): JSX.Element => {
 							<div>
 								<span {...mergedLang.dropdownButton.value}>{facet?.label}</span>
 								<div>
-									{facet?.label}
 									{showSelectedCount && selectedCount ? <span className="ss__facet__header__selected-count">({selectedCount})</span> : null}
 									{(clearAllText || clearAllIcon) && selectedCount ? (
 										<div className="ss__facet__header__clear-all" onClick={facet.clear.url.link.onClick}>
