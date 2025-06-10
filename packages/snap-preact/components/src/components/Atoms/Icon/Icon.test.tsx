@@ -45,6 +45,17 @@ describe('Icon Component', () => {
 		expect(iconElement?.classList.length).toBe(3);
 	});
 
+	it('renders with title', () => {
+		const icon = 'cog';
+		const title = 'custom title';
+		const rendered = render(<Icon title={title} icon={icon} />);
+
+		const iconElement = rendered.container.querySelector('.ss__icon');
+		const titleElement = rendered.container.querySelector('.ss__icon title');
+		expect(iconElement).toBeInTheDocument();
+		expect(titleElement).toHaveTextContent(title);
+	});
+
 	it('renders with classname', () => {
 		const icon = 'cog';
 		const className = 'classy';
@@ -55,7 +66,6 @@ describe('Icon Component', () => {
 		expect(iconElement).toHaveClass(className);
 		expect(iconElement?.classList.length).toBe(4);
 	});
-
 	it('renders with additional style using prop', () => {
 		const icon = 'cog';
 		const style = {
