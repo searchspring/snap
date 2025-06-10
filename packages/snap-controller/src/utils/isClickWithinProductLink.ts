@@ -7,11 +7,12 @@ export const isClickWithinProductLink = (e: MouseEvent, result: Product): boolea
 	let currentElement: Element | null = e.target as Element;
 	let href: string | null = null;
 	let level = 0;
-	const resultUrl = (result as Product)?.display?.mappings.core?.url || (result as Product)?.mappings.core?.url || '';
+	const resultCoreUrl = (result as Product)?.display?.mappings.core?.url || '';
+	const resultDisplayUrl = (result as Product)?.mappings.core?.url || '';
 
 	while (currentElement && level < CLICK_THROUGH_CLOSEST_MAX_LEVELS) {
 		href = currentElement.getAttribute('href');
-		if (href && resultUrl && href.includes(resultUrl)) {
+		if (href && ((resultCoreUrl && href.includes(resultCoreUrl)) || (resultDisplayUrl && href.includes(resultDisplayUrl)))) {
 			return true;
 		}
 		currentElement = currentElement.parentElement;
