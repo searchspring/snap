@@ -363,7 +363,7 @@ export class Snap {
 			isMergeableObject: isPlainObject,
 		});
 
-		if (this.context.siteId) {
+		if (!this.config?.client?.globals?.siteId && this.context.siteId) {
 			const defaultClientConfig = {
 				globals: {
 					siteId: this.context.siteId,
