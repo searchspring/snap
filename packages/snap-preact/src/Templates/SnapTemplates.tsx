@@ -153,8 +153,10 @@ export class SnapTemplates extends Snap {
 
 		const templatesStore = new TemplatesStore({ config, settings: { editMode } });
 
+		const snapConfig = createSnapConfig(config, templatesStore);
+
 		// get more context (all the things needed for the platform of choice as well as generic backgroundFilters)
-		let contextParams = ['backgroundFilters', 'siteId'];
+		let contextParams = ['backgroundFilters'];
 		switch (templatesStore.platform) {
 			case 'shopify':
 				contextParams = contextParams.concat(['collection', 'tags']);
@@ -168,17 +170,7 @@ export class SnapTemplates extends Snap {
 			default:
 				break;
 		}
-
-		const context = getContext(contextParams);
-
-		//siteIds from the context take priority over siteIds provided via the config.
-		if (context?.siteId) {
-			config.config.siteId = context?.siteId;
-		}
-
-		const snapConfig = createSnapConfig(config, templatesStore);
-
-		snapConfig.context = context;
+		snapConfig.context = getContext(contextParams);
 
 		super(snapConfig, { templatesStore });
 
