@@ -123,8 +123,6 @@ export class AutocompleteController extends AbstractController {
 					this.events.product[result.id].render = true;
 					this.eventManager.fire('track.product.render', { controller: this, product: result, trackEvent: data });
 				});
-				// reset events for new search. It's here for a reason. Ensures render happens before impressions on new input value?
-				this.events = { product: {} };
 			}
 		});
 
@@ -202,7 +200,7 @@ export class AutocompleteController extends AbstractController {
 				this.eventManager.fire('track.product.render', { controller: this, product: result, trackEvent: data });
 			},
 			impression: (result: Product): void => {
-				if (this.events.product[result.id]?.impression) return;
+				if (this.events.product[result.id]?.impression || !this.events.product[result.id]?.render) return;
 
 				const data = getAutocompleteSchemaData({ params: this.params, store: this.store, results: [result] });
 				this.tracker.events.autocomplete.impression({ data, siteId: this.config.globals?.siteId });
@@ -663,6 +661,7 @@ export class AutocompleteController extends AbstractController {
 
 			const searchProfile = this.profiler.create({ type: 'event', name: 'search', context: params }).start();
 
+			this.events = { product: {} };
 			const [meta, response] = await this.client.autocomplete(params);
 			// @ts-ignore : MockClient will overwrite the client search() method and use SearchData to return mock data which already contains meta data
 			if (!response.meta) {
