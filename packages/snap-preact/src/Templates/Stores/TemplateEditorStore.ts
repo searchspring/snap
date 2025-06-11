@@ -10,7 +10,7 @@ export class TemplateEditorStore {
 	storage: StorageStore;
 
 	tabs: Tabs[] = ['Templates', 'Configuration'];
-	activeTab: Tabs = 'Configuration';
+	activeTab: Tabs = 'Templates';
 	variableOverrides = {};
 	templatesStore?: TemplatesStore;
 
@@ -21,6 +21,12 @@ export class TemplateEditorStore {
 		makeObservable(this, {
 			activeTab: observable,
 		});
+	}
+
+	resetAllVariables(themeRef: ThemeStore) {
+		this.variableOverrides = {};
+		this.storage.set('variableOverrides', this.variableOverrides);
+		themeRef.setEditorOverrides(this.variableOverrides);
 	}
 
 	resetVariable(obj: { themeName: string; path: string[]; rootEditingKey: string; value: unknown }, themeRef: ThemeStore) {

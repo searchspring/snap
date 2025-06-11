@@ -98,7 +98,7 @@ const CSS = {
 			},
 
 			'& input, select, option, optgroup, button, h1, h2, h3, h4, h5, h6, i': {
-				all: 'revert',
+				all: 'revert!important',
 			},
 
 			'& h1': { fontSize: '20px' },
@@ -107,6 +107,8 @@ const CSS = {
 			'& h4': { fontSize: '14px' },
 			'& h5': { fontSize: '12px' },
 			'& h6': { fontSize: '10px' },
+
+			'& input': { border: '1px solid #ccc' },
 
 			'.breakpoint-picker, .color-picker, .option': {
 				label: {
@@ -316,7 +318,16 @@ export const TemplatesEditor = observer((properties: TemplatesEditorProps): JSX.
 							);
 						})}
 					</div>
-					{editorStore.activeTab === 'Templates' ? <div>Template stuff goes here - we don't have everything to do this yet...</div> : ''}
+					{editorStore.activeTab === 'Templates' ? (
+						<div>
+							<TemplateTargetSettings feature="search" templatesStore={templatesStore} targets={searchTargets} />
+							<TemplateTargetSettings feature="autocomplete" templatesStore={templatesStore} targets={autocompleteTargets} />
+							<TemplateTargetSettings feature="recommendation/default" templatesStore={templatesStore} targets={recommendationDefaultTargets} />
+							<TemplateTargetSettings feature="recommendation/bundle" templatesStore={templatesStore} targets={recommendationBundleTargets} />
+						</div>
+					) : (
+						''
+					)}
 					{editorStore.activeTab === 'Configuration' ? (
 						<div>
 							<div className="option">
@@ -454,11 +465,29 @@ export const TemplatesEditor = observer((properties: TemplatesEditorProps): JSX.
 					)}
 				</aside>
 
-				<footer>footer content here</footer>
+				<footer>
+					<ResetAllVariablesButton editorStore={editorStore} themeRef={themeRef} />
+				</footer>
 			</div>
 		</CacheProvider>
 	);
 });
+
+const ResetAllVariablesButton = (props: any) => {
+	const { editorStore, themeRef } = props;
+	if (Object.keys(editorStore.variableOverrides).length === 0 || editorStore.activeTab !== 'Configuration') {
+		return null;
+	}
+	return (
+		<button
+			onClick={() => {
+				editorStore.resetAllVariables(themeRef);
+			}}
+		>
+			Reset All Variables
+		</button>
+	);
+};
 
 export interface TemplatesEditorProps extends ComponentProps {
 	onRemoveClick: () => void;
@@ -493,7 +522,6 @@ const ThemeEditor = (props: any): any => {
 			});
 			return obj === val;
 		} catch (e) {
-			console.log('error', e);
 			return false;
 		}
 	};
@@ -584,4 +612,75 @@ const ThemeEditor = (props: any): any => {
 			);
 		}
 	}
+};
+
+const TemplateTargetSettings = (props) => {
+	const { feature, templatesStore, targets } = props;
+	const [type, recsType = ''] = feature.split('/');
+	const idPrefix = `${type}${recsType ? `-${recsType}` : ''}`;
+	const currentTarget =
+		templatesStore.config?.[type]?.[recsType]?.[`${recsType.charAt(0).toUpperCase() + recsType.slice(1)}`] ||
+		templatesStore.config[type]?.targets?.[0];
+	const libraryTemplates = templatesStore.library.components?.[type]?.[recsType] || templatesStore.library.components?.[type];
+	const libraryResultComponents = templatesStore.library.components?.result;
+
+	return (
+		<>
+			<div className="heading">
+				<h2>
+					{type.charAt(0).toUpperCase() + type.slice(1) + (recsType ? ` (${recsType})` : '')} <button>config</button>
+				</h2>
+			</div>
+
+			{!recsType && (
+				<div className="option">
+					<label htmlFor={`${idPrefix}-target`}>Target:</label>
+					<input id={`${idPrefix}-target`} type="text" placeholder={''} value={currentTarget.selector} />
+				</div>
+			)}
+
+			<div className="option">
+				<label htmlFor={`${idPrefix}-template`}>Template:</label>
+				<select
+					id={`${idPrefix}-template`}
+					value={currentTarget?.component}
+					onChange={(e) => {
+						const target = targets.find((target) => target.selector === currentTarget.selector);
+						if (target) {
+							target.template.setComponent(e.currentTarget.value);
+						}
+					}}
+				>
+					{Object.keys(libraryTemplates).map((templateName, i) => {
+						return (
+							<option key={i} value={templateName}>
+								{templateName}
+							</option>
+						);
+					})}
+				</select>
+			</div>
+			<div className="option">
+				<label htmlFor={`${idPrefix}-result-template`}>Result Template:</label>
+				<select
+					id={`${idPrefix}-result-template`}
+					value={currentTarget.resultComponent}
+					onChange={(e) => {
+						const target = targets.find((target) => target.selector === currentTarget.selector);
+						if (target) {
+							target.template.setResultComponent(e.currentTarget.value);
+						}
+					}}
+				>
+					{Object.keys(libraryResultComponents).map((templateName, i) => {
+						return (
+							<option key={i} value={templateName}>
+								{templateName}
+							</option>
+						);
+					})}
+				</select>
+			</div>
+		</>
+	);
 };
