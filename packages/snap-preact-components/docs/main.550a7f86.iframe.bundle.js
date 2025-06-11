@@ -1,4 +1,4 @@
-/*! For license information please see main.969feac2.iframe.bundle.js.LICENSE.txt */
+/*! For license information please see main.550a7f86.iframe.bundle.js.LICENSE.txt */
 (self.webpackChunk_searchspring_snap_preact_components = self.webpackChunk_searchspring_snap_preact_components || []).push([
 	[792],
 	{
@@ -31369,6 +31369,9 @@
 				createImpressionObserver =
 					(__webpack_require__('../../node_modules/core-js/modules/es.array.index-of.js'),
 					__webpack_require__('../../node_modules/core-js/modules/es.symbol.js'),
+					__webpack_require__('../../node_modules/core-js/modules/es.array.sort.js'),
+					__webpack_require__('../../node_modules/core-js/modules/es.array.filter.js'),
+					__webpack_require__('../../node_modules/core-js/modules/es.array.join.js'),
 					__webpack_require__('./src/utilities/createImpressionObserver.ts')),
 				hooks_module = __webpack_require__('../../node_modules/preact/hooks/dist/hooks.module.js'),
 				_excluded = ['controller', 'result'];
@@ -31396,7 +31399,8 @@
 				},
 				ResultComponent = (function withTracking(WrappedComponent) {
 					return function WithTracking(props) {
-						var controller = props.controller,
+						var resetKey,
+							controller = props.controller,
 							result = props.result,
 							restProps = (function _objectWithoutProperties(e, t) {
 								if (null == e) return {};
@@ -31418,11 +31422,32 @@
 								}
 								return i;
 							})(props, _excluded);
-						controller || console.warn('Warning: No controller provided to withTracking'),
-							result || console.warn('Warning: No result provided to withTracking');
-						var additionalEffectKeys = [];
-						'autocomplete' === (null == controller ? void 0 : controller.type) && additionalEffectKeys.push(controller.store.state.input);
-						var _createImpressionObse = (0, createImpressionObserver.Q)({ additionalEffectKeys }),
+						if (
+							(controller || console.warn('Warning: No controller provided to withTracking'),
+							result || console.warn('Warning: No result provided to withTracking'),
+							'search' === (null == controller ? void 0 : controller.type) || 'autocomplete' === (null == controller ? void 0 : controller.type))
+						) {
+							var urlManager = controller.urlManager;
+							resetKey = JSON.stringify({
+								q: urlManager.state.query,
+								p: urlManager.state.page,
+								ps: urlManager.state.pageSize,
+								s: urlManager.state.sort,
+								f: urlManager.state.filter,
+							});
+						} else if ('recommendation' === (null == controller ? void 0 : controller.type)) {
+							var _recStore$profile,
+								recStore = controller.store;
+							resetKey = JSON.stringify({
+								tag: null === (_recStore$profile = recStore.profile) || void 0 === _recStore$profile ? void 0 : _recStore$profile.tag,
+								ids: recStore.results
+									.map(function (result) {
+										return result.id;
+									})
+									.join(','),
+							});
+						}
+						var _createImpressionObse = (0, createImpressionObserver.Q)({ resetKey }),
 							ref = _createImpressionObse.ref;
 						_createImpressionObse.inViewport &&
 							'product' === (null == result ? void 0 : result.type) &&
@@ -33372,11 +33397,11 @@
 		'./src/utilities/createImpressionObserver.ts': (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 			'use strict';
 			__webpack_require__.d(__webpack_exports__, { Q: () => createImpressionObserver });
+			__webpack_require__('../../node_modules/core-js/modules/es.object.assign.js');
 			var hooks_module = __webpack_require__('../../node_modules/preact/hooks/dist/hooks.module.js');
 			__webpack_require__('../../node_modules/core-js/modules/es.date.now.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.date.to-string.js'),
 				__webpack_require__('../../node_modules/core-js/modules/web.timers.js'),
-				__webpack_require__('../../node_modules/core-js/modules/es.array.concat.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.array.is-array.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.symbol.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.symbol.description.js'),
@@ -33388,22 +33413,6 @@
 				__webpack_require__('../../node_modules/core-js/modules/es.array.slice.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.function.name.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.array.from.js');
-			function _toConsumableArray(r) {
-				return (
-					(function _arrayWithoutHoles(r) {
-						if (Array.isArray(r)) return _arrayLikeToArray(r);
-					})(r) ||
-					(function _iterableToArray(r) {
-						if (('undefined' != typeof Symbol && null != r[Symbol.iterator]) || null != r['@@iterator']) return Array.from(r);
-					})(r) ||
-					_unsupportedIterableToArray(r) ||
-					(function _nonIterableSpread() {
-						throw new TypeError(
-							'Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.'
-						);
-					})()
-				);
-			}
 			function _slicedToArray(r, e) {
 				return (
 					(function _arrayWithHoles(r) {
@@ -33436,7 +33445,20 @@
 							return a;
 						}
 					})(r, e) ||
-					_unsupportedIterableToArray(r, e) ||
+					(function _unsupportedIterableToArray(r, a) {
+						if (r) {
+							if ('string' == typeof r) return _arrayLikeToArray(r, a);
+							var t = {}.toString.call(r).slice(8, -1);
+							return (
+								'Object' === t && r.constructor && (t = r.constructor.name),
+								'Map' === t || 'Set' === t
+									? Array.from(r)
+									: 'Arguments' === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t)
+									? _arrayLikeToArray(r, a)
+									: void 0
+							);
+						}
+					})(r, e) ||
 					(function _nonIterableRest() {
 						throw new TypeError(
 							'Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.'
@@ -33444,84 +33466,80 @@
 					})()
 				);
 			}
-			function _unsupportedIterableToArray(r, a) {
-				if (r) {
-					if ('string' == typeof r) return _arrayLikeToArray(r, a);
-					var t = {}.toString.call(r).slice(8, -1);
-					return (
-						'Object' === t && r.constructor && (t = r.constructor.name),
-						'Map' === t || 'Set' === t
-							? Array.from(r)
-							: 'Arguments' === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t)
-							? _arrayLikeToArray(r, a)
-							: void 0
-					);
-				}
-			}
 			function _arrayLikeToArray(r, a) {
 				(null == a || a > r.length) && (a = r.length);
 				for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e];
 				return n;
 			}
 			var useIntersectionAdvanced = function useIntersectionAdvanced(ref) {
-				var options = arguments.length > 1 && void 0 !== arguments[1] ? arguments[1] : {},
-					_options$rootMargin = options.rootMargin,
-					rootMargin = void 0 === _options$rootMargin ? '0px' : _options$rootMargin,
-					_options$fireOnce = options.fireOnce,
-					fireOnce = void 0 !== _options$fireOnce && _options$fireOnce,
-					_options$threshold = options.threshold,
-					threshold = void 0 === _options$threshold ? 0 : _options$threshold,
-					_options$minVisibleTi = options.minVisibleTime,
-					minVisibleTime = void 0 === _options$minVisibleTi ? 0 : _options$minVisibleTi,
-					_useState2 = _slicedToArray((0, hooks_module.J0)(!1), 2),
-					isIntersecting = _useState2[0],
-					setIntersecting = _useState2[1],
-					visibleTimerRef = (0, hooks_module.li)(null),
-					visibleStartRef = (0, hooks_module.li)(null);
-				return (
-					(0, hooks_module.vJ)(function () {
-						setIntersecting(!1);
-						var observer = null;
-						if (ref.current)
-							return (
-								(observer = new IntersectionObserver(
-									function (_ref) {
-										_slicedToArray(_ref, 1)[0].isIntersecting
-											? minVisibleTime > 0
-												? ((visibleStartRef.current = Date.now()),
-												  visibleTimerRef.current && window.clearTimeout(visibleTimerRef.current),
-												  (visibleTimerRef.current = window.setTimeout(function () {
-														setIntersecting(!0), fireOnce && ref.current && observer && observer.unobserve(ref.current);
-												  }, minVisibleTime)))
-												: (setIntersecting(!0), fireOnce && ref.current && observer && observer.unobserve(ref.current))
-											: (visibleTimerRef.current && window.clearTimeout(visibleTimerRef.current),
-											  (visibleTimerRef.current = null),
-											  (visibleStartRef.current = null),
-											  setIntersecting(!1));
-									},
-									{ rootMargin, threshold }
-								)),
-								ref.current && observer.observe(ref.current),
-								function () {
-									setIntersecting(!1),
-										visibleTimerRef.current && window.clearTimeout(visibleTimerRef.current),
-										observer && ref.current && observer.unobserve(ref.current);
-								}
-							);
-					}, [ref].concat(_toConsumableArray((null == options ? void 0 : options.additionalEffectKeys) || []))),
-					isIntersecting
-				);
-			};
+					var options = arguments.length > 1 && void 0 !== arguments[1] ? arguments[1] : {},
+						_options$rootMargin = options.rootMargin,
+						rootMargin = void 0 === _options$rootMargin ? '0px' : _options$rootMargin,
+						_options$fireOnce = options.fireOnce,
+						fireOnce = void 0 !== _options$fireOnce && _options$fireOnce,
+						_options$threshold = options.threshold,
+						threshold = void 0 === _options$threshold ? 0 : _options$threshold,
+						_options$minVisibleTi = options.minVisibleTime,
+						minVisibleTime = void 0 === _options$minVisibleTi ? 0 : _options$minVisibleTi,
+						resetKey = options.resetKey,
+						_useState2 = _slicedToArray((0, hooks_module.J0)(!1), 2),
+						isIntersecting = _useState2[0],
+						setIntersecting = _useState2[1],
+						visibleTimerRef = (0, hooks_module.li)(null),
+						visibleStartRef = (0, hooks_module.li)(null),
+						lastResetKeyRef = (0, hooks_module.li)(resetKey);
+					return (
+						resetKey !== lastResetKeyRef.current &&
+							(setIntersecting(!1),
+							visibleTimerRef.current && (window.clearTimeout(visibleTimerRef.current), (visibleTimerRef.current = null)),
+							(visibleStartRef.current = null),
+							(lastResetKeyRef.current = resetKey)),
+						(0, hooks_module.vJ)(
+							function () {
+								setIntersecting(!1);
+								var observer = null;
+								if (ref.current)
+									return (
+										(observer = new IntersectionObserver(
+											function (_ref) {
+												_slicedToArray(_ref, 1)[0].isIntersecting
+													? minVisibleTime > 0
+														? ((visibleStartRef.current = Date.now()),
+														  visibleTimerRef.current && window.clearTimeout(visibleTimerRef.current),
+														  (visibleTimerRef.current = window.setTimeout(function () {
+																setIntersecting(!0), fireOnce && ref.current && observer && observer.unobserve(ref.current);
+														  }, minVisibleTime)))
+														: (setIntersecting(!0), fireOnce && ref.current && observer && observer.unobserve(ref.current))
+													: (visibleTimerRef.current && window.clearTimeout(visibleTimerRef.current),
+													  (visibleTimerRef.current = null),
+													  (visibleStartRef.current = null),
+													  setIntersecting(!1));
+											},
+											{ rootMargin, threshold }
+										)),
+										ref.current && observer.observe(ref.current),
+										function () {
+											setIntersecting(!1),
+												visibleTimerRef.current && window.clearTimeout(visibleTimerRef.current),
+												observer && ref.current && observer.unobserve(ref.current);
+										}
+									);
+							},
+							[ref, resetKey]
+						),
+						isIntersecting
+					);
+				},
+				IMPRESSION_VISIBILITY_THRESHOLD = 0.7,
+				IMPRESSION_MIN_VISIBLE_TIME = 1e3;
 			function createImpressionObserver(options) {
 				var ref = (0, hooks_module.li)(null);
 				return {
 					ref,
-					inViewport: useIntersectionAdvanced(ref, {
-						fireOnce: !0,
-						threshold: 0.75,
-						minVisibleTime: 1e3,
-						additionalEffectKeys: (null == options ? void 0 : options.additionalEffectKeys) || [],
-					}),
+					inViewport: useIntersectionAdvanced(
+						ref,
+						Object.assign({}, options, { fireOnce: !0, threshold: IMPRESSION_VISIBILITY_THRESHOLD, minVisibleTime: IMPRESSION_MIN_VISIBLE_TIME })
+					),
 				};
 			}
 		},
@@ -35989,11 +36007,16 @@
 									}
 								},
 								impression: function impression(result) {
-									var _this$events$product$4, _this$config$globals3;
+									var _this$events$product$4, _this$events$product$5, _this$config$globals3;
 									if (
-										null === (_this$events$product$4 = _this.events.product[result.id]) ||
-										void 0 === _this$events$product$4 ||
-										!_this$events$product$4.impression
+										!(
+											(null !== (_this$events$product$4 = _this.events.product[result.id]) &&
+												void 0 !== _this$events$product$4 &&
+												_this$events$product$4.impression) ||
+											null === (_this$events$product$5 = _this.events.product[result.id]) ||
+											void 0 === _this$events$product$5
+										) &&
+										_this$events$product$5.render
 									) {
 										var data = schemaMap[result.id];
 										_this.tracker.events[_this.pageType].impression({
@@ -36572,13 +36595,13 @@
 														if (
 															(0 ===
 																(products = controller.store.results.filter(function (result) {
-																	var _this$events$product$5;
+																	var _this$events$product$6;
 																	return (
 																		'product' === result.type &&
 																		!(
-																			null !== (_this$events$product$5 = _this.events.product[result.id]) &&
-																			void 0 !== _this$events$product$5 &&
-																			_this$events$product$5.render
+																			null !== (_this$events$product$6 = _this.events.product[result.id]) &&
+																			void 0 !== _this$events$product$6 &&
+																			_this$events$product$6.render
 																		)
 																	);
 																})).length &&
@@ -37539,11 +37562,16 @@
 												}, 300)));
 									},
 									impression: function impression(result) {
-										var _this$events$product$3, _this$config$globals2;
+										var _this$events$product$3, _this$events$product$4, _this$config$globals2;
 										if (
-											null === (_this$events$product$3 = _this.events.product[result.id]) ||
-											void 0 === _this$events$product$3 ||
-											!_this$events$product$3.impression
+											!(
+												(null !== (_this$events$product$3 = _this.events.product[result.id]) &&
+													void 0 !== _this$events$product$3 &&
+													_this$events$product$3.impression) ||
+												null === (_this$events$product$4 = _this.events.product[result.id]) ||
+												void 0 === _this$events$product$4
+											) &&
+											_this$events$product$4.render
 										) {
 											var data = getRecommendationsSchemaData({ store: _this.store, results: [result] });
 											return (
@@ -37562,11 +37590,11 @@
 										}
 									},
 									render: function render(result) {
-										var _this$events$product$4, _this$config$globals3;
+										var _this$events$product$5, _this$config$globals3;
 										if (
-											null === (_this$events$product$4 = _this.events.product[result.id]) ||
-											void 0 === _this$events$product$4 ||
-											!_this$events$product$4.render
+											null === (_this$events$product$5 = _this.events.product[result.id]) ||
+											void 0 === _this$events$product$5 ||
+											!_this$events$product$5.render
 										) {
 											var data = getRecommendationsSchemaData({ store: _this.store, results: [result] });
 											return (
@@ -38481,11 +38509,16 @@
 										}
 									},
 									impression: function impression(result) {
-										var _this$events$product$4, _this$config$globals3;
+										var _this$events$product$4, _this$events$product$5, _this$config$globals3;
 										if (
-											null === (_this$events$product$4 = _this.events.product[result.id]) ||
-											void 0 === _this$events$product$4 ||
-											!_this$events$product$4.impression
+											!(
+												(null !== (_this$events$product$4 = _this.events.product[result.id]) &&
+													void 0 !== _this$events$product$4 &&
+													_this$events$product$4.impression) ||
+												null === (_this$events$product$5 = _this.events.product[result.id]) ||
+												void 0 === _this$events$product$5
+											) &&
+											_this$events$product$5.render
 										) {
 											var data = getAutocompleteSchemaData({ params: _this.params, store: _this.store, results: [result] });
 											_this.tracker.events.autocomplete.impression({
@@ -38965,10 +38998,11 @@
 													case 24:
 														return (
 															(searchProfile = _this.profiler.create({ type: 'event', name: 'search', context: params }).start()),
-															(_context4.next = 27),
+															(_this.events = { product: {} }),
+															(_context4.next = 28),
 															_this.client.autocomplete(params)
 														);
-													case 27:
+													case 28:
 														return (
 															(_yield$_this$client$a = _context4.sent),
 															(_yield$_this$client$a2 = AutocompleteController_slicedToArray(_yield$_this$client$a, 2)),
@@ -38977,87 +39011,87 @@
 															searchProfile.stop(),
 															_this.log.profile(searchProfile),
 															(afterSearchProfile = _this.profiler.create({ type: 'event', name: 'afterSearch', context: params }).start()),
-															(_context4.prev = 35),
-															(_context4.next = 38),
+															(_context4.prev = 36),
+															(_context4.next = 39),
 															_this.eventManager.fire('afterSearch', { controller: _this, request: params, response })
 														);
-													case 38:
-														_context4.next = 50;
+													case 39:
+														_context4.next = 51;
 														break;
-													case 40:
+													case 41:
 														if (
-															((_context4.prev = 40),
-															(_context4.t1 = _context4.catch(35)),
+															((_context4.prev = 41),
+															(_context4.t1 = _context4.catch(36)),
 															'cancelled' != (null === _context4.t1 || void 0 === _context4.t1 ? void 0 : _context4.t1.message))
 														) {
-															_context4.next = 48;
+															_context4.next = 49;
 															break;
 														}
 														return _this.log.warn("'afterSearch' middleware cancelled"), afterSearchProfile.stop(), _context4.abrupt('return');
-													case 48:
+													case 49:
 														throw (_this.log.error("error in 'afterSearch' middleware"), _context4.t1);
-													case 50:
+													case 51:
 														return (
 															afterSearchProfile.stop(),
 															_this.log.profile(afterSearchProfile),
 															_this.store.update(response),
 															(afterStoreProfile = _this.profiler.create({ type: 'event', name: 'afterStore', context: params }).start()),
-															(_context4.prev = 54),
-															(_context4.next = 57),
+															(_context4.prev = 55),
+															(_context4.next = 58),
 															_this.eventManager.fire('afterStore', { controller: _this, request: params, response })
 														);
-													case 57:
-														_context4.next = 69;
+													case 58:
+														_context4.next = 70;
 														break;
-													case 59:
+													case 60:
 														if (
-															((_context4.prev = 59),
-															(_context4.t2 = _context4.catch(54)),
+															((_context4.prev = 60),
+															(_context4.t2 = _context4.catch(55)),
 															'cancelled' != (null === _context4.t2 || void 0 === _context4.t2 ? void 0 : _context4.t2.message))
 														) {
-															_context4.next = 67;
+															_context4.next = 68;
 															break;
 														}
 														return _this.log.warn("'afterStore' middleware cancelled"), afterStoreProfile.stop(), _context4.abrupt('return');
-													case 67:
+													case 68:
 														throw (_this.log.error("error in 'afterStore' middleware"), _context4.t2);
-													case 69:
-														afterStoreProfile.stop(), _this.log.profile(afterStoreProfile), (_context4.next = 93);
+													case 70:
+														afterStoreProfile.stop(), _this.log.profile(afterStoreProfile), (_context4.next = 94);
 														break;
-													case 73:
-														if (((_context4.prev = 73), (_context4.t3 = _context4.catch(0)), !_context4.t3)) {
-															_context4.next = 93;
+													case 74:
+														if (((_context4.prev = 74), (_context4.t3 = _context4.catch(0)), !_context4.t3)) {
+															_context4.next = 94;
 															break;
 														}
 														if (!_context4.t3.err || !_context4.t3.fetchDetails) {
-															_context4.next = 90;
+															_context4.next = 91;
 															break;
 														}
 														(_context4.t4 = _context4.t3.fetchDetails.status),
-															(_context4.next = 429 === _context4.t4 ? 80 : 500 === _context4.t4 ? 82 : 84);
+															(_context4.next = 429 === _context4.t4 ? 81 : 500 === _context4.t4 ? 83 : 85);
 														break;
-													case 80:
+													case 81:
 														return (
 															(_this.store.error = { code: 429, type: types.B.WARNING, message: 'Too many requests try again later' }),
-															_context4.abrupt('break', 86)
+															_context4.abrupt('break', 87)
 														);
-													case 82:
+													case 83:
 														return (
 															(_this.store.error = { code: 500, type: types.B.ERROR, message: 'Invalid Search Request or Service Unavailable' }),
-															_context4.abrupt('break', 86)
+															_context4.abrupt('break', 87)
 														);
-													case 84:
-														return (_this.store.error = { type: types.B.ERROR, message: _context4.t3.err.message }), _context4.abrupt('break', 86);
-													case 86:
-														_this.log.error(_this.store.error), _this.handleError(_context4.t3.err, _context4.t3.fetchDetails), (_context4.next = 93);
+													case 85:
+														return (_this.store.error = { type: types.B.ERROR, message: _context4.t3.err.message }), _context4.abrupt('break', 87);
+													case 87:
+														_this.log.error(_this.store.error), _this.handleError(_context4.t3.err, _context4.t3.fetchDetails), (_context4.next = 94);
 														break;
-													case 90:
+													case 91:
 														(_this.store.error = { type: types.B.ERROR, message: 'Something went wrong... - ' + _context4.t3 }),
 															_this.log.error(_context4.t3),
 															_this.handleError(_context4.t3);
-													case 93:
-														return (_context4.prev = 93), (_this.store.loading = !1), _context4.finish(93);
-													case 96:
+													case 94:
+														return (_context4.prev = 94), (_this.store.loading = !1), _context4.finish(94);
+													case 97:
 													case 'end':
 														return _context4.stop();
 												}
@@ -39065,10 +39099,10 @@
 										_callee4,
 										null,
 										[
-											[0, 73, 93, 96],
+											[0, 74, 94, 97],
 											[10, 15],
-											[35, 40],
-											[54, 59],
+											[36, 41],
+											[55, 60],
 										]
 									);
 								})
@@ -39130,8 +39164,7 @@
 																	(_this.events.product[result.id] = _this.events.product[result.id] || {}),
 																		(_this.events.product[result.id].render = !0),
 																		_this.eventManager.fire('track.product.render', { controller: _this, product: result, trackEvent: data });
-																}),
-																(_this.events = { product: {} }));
+																}));
 														case 4:
 														case 'end':
 															return _context6.stop();
@@ -51184,7 +51217,7 @@
 							((function Tracker_classCallCheck(a, n) {
 								if (!(a instanceof n)) throw new TypeError('Cannot call a class as a function');
 							})(this, Tracker),
-							((config = cjs_default()(Tracker_defaultConfig, config || {})).initiator = 'searchspring/' + config.framework + '/0.66.1'),
+							((config = cjs_default()(Tracker_defaultConfig, config || {})).initiator = 'searchspring/' + config.framework + '/0.66.2'),
 							((_this = Tracker_callSuper(this, Tracker, [globals, config])).targeters = []),
 							(_this.track = {
 								error: function error(data, siteId) {
@@ -51356,7 +51389,7 @@
 							(_this.localStorage = new StorageStore({ type: 'local', key: 'ss-' + _this.config.id })),
 							_this.localStorage.set('siteId', _this.globals.siteId),
 							(null !== (_window$searchspring = window.searchspring) && void 0 !== _window$searchspring && _window$searchspring.tracker) ||
-								((window.searchspring = window.searchspring || {}), (window.searchspring.tracker = _this), (window.searchspring.version = '0.66.1')),
+								((window.searchspring = window.searchspring || {}), (window.searchspring.tracker = _this), (window.searchspring.version = '0.66.2')),
 							setTimeout(function () {
 								_this.targeters.push(
 									new DomTargeter([{ selector: 'script[type^="searchspring/track/"]', emptyTarget: !1 }], function (target, elem) {

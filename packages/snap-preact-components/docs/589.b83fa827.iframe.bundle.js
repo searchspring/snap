@@ -1,4 +1,4 @@
-/*! For license information please see 589.de3e98a4.iframe.bundle.js.LICENSE.txt */
+/*! For license information please see 589.b83fa827.iframe.bundle.js.LICENSE.txt */
 (self.webpackChunk_searchspring_snap_preact_components = self.webpackChunk_searchspring_snap_preact_components || []).push([
 	[589],
 	{
@@ -3723,7 +3723,7 @@
 					}
 					return unsafeStringify(rnds);
 				},
-				{ rE: version } = { rE: '0.0.27' },
+				{ rE: version } = { rE: '0.0.28' },
 				CART_KEY = 'ssCartProducts',
 				VIEWED_KEY = 'ssViewedProducts',
 				COOKIE_DOMAIN = ('undefined' != typeof window && window.location.hostname && '.' + window.location.hostname.replace(/^www\./, '')) || void 0;
@@ -4124,7 +4124,7 @@
 						clearTimeout(this.batchIntervalTimeout),
 						(this.batchIntervalTimeout = setTimeout(() => {
 							this.processRequests();
-						}, 200));
+						}, 300));
 				}
 				updateContext(key, value) {
 					if (void 0 !== value)
@@ -63619,4 +63619,4 @@
 		},
 	},
 ]);
-//# sourceMappingURL=589.de3e98a4.iframe.bundle.js.map
+//# sourceMappingURL=589.b83fa827.iframe.bundle.js.map
