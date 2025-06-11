@@ -1,6 +1,6 @@
 {
 	"name": "@searchspring/snap-tracker",
-	"version": "0.66.1",
+	"version": "0.66.2",
 	"description": "Snap Tracker",
 	"main": "dist/cjs/index.js",
 	"module": "dist/esm/index.js",
@@ -20,9 +20,9 @@
 		"test:watch": "jest --watch"
 	},
 	"dependencies": {
-		"@searchspring/beacon": "0.0.28",
-		"@searchspring/snap-store-mobx": "^0.66.1",
-		"@searchspring/snap-toolbox": "^0.66.1",
+		"@searchspring/beacon": "0.0.29",
+		"@searchspring/snap-store-mobx": "^0.66.2",
+		"@searchspring/snap-toolbox": "^0.66.2",
 		"@types/uuid": "^10.0.0",
 		"deepmerge": "4.3.1",
 		"uuid": "11.1.0"

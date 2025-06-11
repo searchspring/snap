@@ -1,15 +1,15 @@
 import { useState, useEffect, useRef, MutableRef } from 'preact/hooks';
 
-interface UseIntersectionOptions {
+export interface UseIntersectionOptions {
 	rootMargin?: string;
 	fireOnce?: boolean;
 	threshold?: number | number[];
 	minVisibleTime?: number; // Minimum time in ms the element must be visible
-	additionalEffectKeys?: unknown[];
+	resetKey?: string;
 }
 
 export const useIntersectionAdvanced = (ref: MutableRef<HTMLElement | null>, options: UseIntersectionOptions = {}): boolean => {
-	const { rootMargin = '0px', fireOnce = false, threshold = 0, minVisibleTime = 0 } = options;
+	const { rootMargin = '0px', fireOnce = false, threshold = 0, minVisibleTime = 0, resetKey } = options;
 	// State and setter for storing whether element is visible
 	const [isIntersecting, setIntersecting] = useState<boolean>(false);
 
@@ -17,6 +17,20 @@ export const useIntersectionAdvanced = (ref: MutableRef<HTMLElement | null>, opt
 	const visibleTimerRef = useRef<number | null>(null);
 	// Track when the element started being visible
 	const visibleStartRef = useRef<number | null>(null);
+
+	// Track the last reset key to detect changes
+	const lastResetKeyRef = useRef<string | undefined>(resetKey);
+
+	// Reset state if resetKey has changed
+	if (resetKey !== lastResetKeyRef.current) {
+		setIntersecting(false);
+		if (visibleTimerRef.current) {
+			window.clearTimeout(visibleTimerRef.current);
+			visibleTimerRef.current = null;
+		}
+		visibleStartRef.current = null;
+		lastResetKeyRef.current = resetKey;
+	}
 
 	useEffect(() => {
 		setIntersecting(false);
@@ -86,7 +100,7 @@ export const useIntersectionAdvanced = (ref: MutableRef<HTMLElement | null>, opt
 				observer.unobserve(ref.current);
 			}
 		};
-	}, [ref, ...(options?.additionalEffectKeys || [])]);
+	}, [ref, resetKey]);
 
 	return isIntersecting;
 };
