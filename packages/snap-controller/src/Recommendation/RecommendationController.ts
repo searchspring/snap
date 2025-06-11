@@ -135,7 +135,7 @@ export class RecommendationController extends AbstractController {
 				}, CLICK_DUPLICATION_TIMEOUT);
 			},
 			impression: (result): RecommendationsSchemaData | undefined => {
-				if (this.events.product[result.id]?.impression) return;
+				if (this.events.product[result.id]?.impression || !this.events.product[result.id]?.render) return;
 
 				const data = getRecommendationsSchemaData({ store: this.store, results: [result] });
 				this.tracker.events.recommendations.impression({ data, siteId: this.config.globals?.siteId });

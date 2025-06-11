@@ -380,7 +380,7 @@ export class SearchController extends AbstractController {
 				this.eventManager.fire('track.product.render', { controller: this, product: result, trackEvent: data });
 			},
 			impression: (result: Product): void => {
-				if (this.events.product[result.id]?.impression) {
+				if (this.events.product[result.id]?.impression || !this.events.product[result.id]?.render) {
 					return;
 				}
 
