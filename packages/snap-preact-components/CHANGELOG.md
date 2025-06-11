@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.66.2](https://github.com/searchspring/snap/compare/v0.66.1...v0.66.2) (2025-06-11)
+
+### Bug Fixes
+
+- beacon impression tracking when interacting ([b092b31](https://github.com/searchspring/snap/commit/b092b318ccfa951995225e2aebdbe9d7335fcf41))
+
 ## [0.66.1](https://github.com/searchspring/snap/compare/v0.66.0...v0.66.1) (2025-06-10)
 
 **Note:** Version bump only for package @searchspring/snap-preact-components
