@@ -38,6 +38,7 @@ const CSS = {
 			transition: 'right ease 0.5s, height ease 0.5s 0.5s',
 			boxSizing: 'border-box',
 			height: 'calc(80vh - 10px - 10px)',
+			overflowY: 'auto',
 
 			'*': {
 				boxSizing: 'border-box',
@@ -98,7 +99,7 @@ const CSS = {
 			},
 
 			'& input, select, option, optgroup, button, h1, h2, h3, h4, h5, h6, i': {
-				all: 'revert!important',
+				all: 'revert',
 			},
 
 			'& h1': { fontSize: '20px' },
@@ -108,11 +109,14 @@ const CSS = {
 			'& h5': { fontSize: '12px' },
 			'& h6': { fontSize: '10px' },
 
-			'& input': { border: '1px solid #ccc' },
+			'& input': {
+				border: '1px solid #ccc!important',
+			},
+			'& input[type="number"]': { width: '65px', textAlign: 'center', padding: '10px' },
 
 			'.breakpoint-picker, .color-picker, .option': {
 				label: {
-					width: '10em',
+					width: '13em',
 					textAlign: 'right',
 					wordBreak: 'break-all',
 				},
@@ -125,7 +129,8 @@ const CSS = {
 };
 
 export const TemplatesEditor = observer((properties: TemplatesEditorProps): JSX.Element => {
-	const { onRemoveClick, templatesStore, editorStore } = properties;
+	const { onRemoveClick, templatesStore, editorStore, snap } = properties;
+	console.log(snap);
 	const searchTargets = Object.keys(templatesStore.targets.search || {}).map((target) => ({
 		type: 'search',
 		target,
@@ -321,7 +326,9 @@ export const TemplatesEditor = observer((properties: TemplatesEditorProps): JSX.
 					{editorStore.activeTab === 'Templates' ? (
 						<div>
 							<TemplateTargetSettings feature="search" templatesStore={templatesStore} targets={searchTargets} />
+							<ControllerSettings feature="search" templatesStore={templatesStore} />
 							<TemplateTargetSettings feature="autocomplete" templatesStore={templatesStore} targets={autocompleteTargets} />
+							<ControllerSettings feature="autocomplete" templatesStore={templatesStore} />
 							<TemplateTargetSettings feature="recommendation/default" templatesStore={templatesStore} targets={recommendationDefaultTargets} />
 							<TemplateTargetSettings feature="recommendation/bundle" templatesStore={templatesStore} targets={recommendationBundleTargets} />
 						</div>
@@ -614,15 +621,180 @@ const ThemeEditor = (props: any): any => {
 	}
 };
 
-const TemplateTargetSettings = (props) => {
+const controllerSettings = {
+	search: {
+		redirects: {
+			merchandising: 'boolean',
+			singleResult: 'boolean',
+		},
+		facets: {
+			trim: 'boolean',
+			pinFiltered: 'boolean',
+			storeRange: 'boolean',
+			autoOpenActive: 'boolean',
+		},
+		infinite: {
+			backfill: 'number',
+		},
+		restorePosition: {
+			enabled: 'boolean',
+			onPageShow: 'boolean',
+		},
+		history: {
+			url: 'string',
+			max: 'number',
+		},
+	},
+	autocomplete: {
+		integratedSpellCorrection: 'boolean',
+		initializeFromUrl: 'boolean',
+		syncInputs: 'boolean',
+		serializeForm: 'boolean',
+		disableClickOutside: 'boolean',
+		facets: {
+			trim: 'boolean',
+			pinFiltered: 'boolean',
+			storeRange: 'boolean',
+			autoOpenActive: 'boolean',
+		},
+		trending: {
+			limit: 'number',
+			showResults: 'boolean',
+		},
+		history: {
+			limit: 'number',
+			showResults: 'boolean',
+		},
+		redirects: {
+			merchandising: 'boolean',
+			singleResult: 'boolean',
+		},
+		bind: {
+			input: 'boolean',
+			submit: 'boolean',
+		},
+	},
+};
+
+type ControllerSettingsType = typeof controllerSettings;
+type ControllerSettingsProps = {
+	feature: string;
+	templatesStore: TemplatesStore;
+	objRoot?: Record<string, any>;
+	parentId?: string;
+	nextPath?: string[];
+};
+
+const ControllerSettings = (props: ControllerSettingsProps) => {
+	const { feature, templatesStore, objRoot, parentId, nextPath } = props;
+	const [type, recsType = ''] = feature.split('/');
+
+	const idPrefix = `settings-${type}${recsType ? `-${recsType}` : ''}` + (parentId ? `-${parentId}` : '');
+
+	return (
+		<>
+			{Object.keys(objRoot || controllerSettings[type as keyof ControllerSettingsType]).map((settingName) => {
+				const typeSettings = controllerSettings[type as keyof ControllerSettingsType];
+				const setting = objRoot
+					? objRoot[settingName]
+					: typeSettings && typeof typeSettings === 'object'
+					? typeSettings[settingName as keyof typeof typeSettings]
+					: undefined;
+
+				console.log(settingName, setting);
+
+				const path = [...(nextPath || []), settingName];
+				const label = path.join('.');
+
+				if (typeof setting === 'object') {
+					return <ControllerSettings {...props} objRoot={setting} parentId={idPrefix} nextPath={path} />;
+				}
+
+				{
+					/* @ts-ignore - TODO: fix type later */
+				}
+				const featureConfig = templatesStore.config[type]?.settings || {};
+				let value: any = '';
+				path.forEach((p) => {
+					if (featureConfig[p]) {
+						console.log('setting value with index p ', featureConfig, p);
+						value = featureConfig[p];
+					}
+				});
+
+				{
+					/* @ts-ignore - TODO: fix type later */
+				}
+				if (value[settingName]) {
+					{
+						/* @ts-ignore - TODO: fix type later */
+					}
+					value = value[settingName];
+				}
+
+				if (setting === 'string') {
+					if (typeof value !== 'string') {
+						value = undefined;
+					}
+					return (
+						<div className="option">
+							<label htmlFor={`${idPrefix}-${setting}`}>{label}:</label>
+							<input type="text" value={value} />
+						</div>
+					);
+				} else if (setting === 'boolean') {
+					if (typeof value !== 'boolean') {
+						value = undefined;
+					}
+					return (
+						<div className="option">
+							<label htmlFor={`${idPrefix}-${setting}`}>{label}:</label>
+							<input type="checkbox" checked={value} />
+						</div>
+					);
+				} else if (setting === 'number') {
+					if (typeof value !== 'number') {
+						value = undefined;
+					}
+					return (
+						<div className="option">
+							<label htmlFor={`${idPrefix}-${setting}`}>{label}:</label>
+							<input type="number" value={value} />
+						</div>
+					);
+				}
+			})}
+		</>
+	);
+};
+
+type TargetItem = {
+	type: string;
+	target: string;
+	template: TargetStore;
+	selector?: string;
+};
+
+type TemplateTargetSettingsProps = {
+	feature: string;
+	templatesStore: TemplatesStore;
+	targets: TargetItem[];
+};
+
+const TemplateTargetSettings = (props: TemplateTargetSettingsProps) => {
 	const { feature, templatesStore, targets } = props;
 	const [type, recsType = ''] = feature.split('/');
 	const idPrefix = `${type}${recsType ? `-${recsType}` : ''}`;
+
+	// Use type assertions for safe access
+	const configSection = templatesStore.config as any;
 	const currentTarget =
-		templatesStore.config?.[type]?.[recsType]?.[`${recsType.charAt(0).toUpperCase() + recsType.slice(1)}`] ||
-		templatesStore.config[type]?.targets?.[0];
-	const libraryTemplates = templatesStore.library.components?.[type]?.[recsType] || templatesStore.library.components?.[type];
-	const libraryResultComponents = templatesStore.library.components?.result;
+		configSection[type]?.[recsType]?.[`${recsType.charAt(0).toUpperCase() + recsType.slice(1)}`] || configSection[type]?.targets?.[0];
+
+	// Use type assertions for library components
+	const libraryComponents = templatesStore.library.components as any;
+	const libraryTemplates = recsType ? libraryComponents[type]?.[recsType] : libraryComponents[type];
+	const libraryResultComponents = libraryComponents?.result;
 
 	return (
 		<>
@@ -645,7 +817,7 @@ const TemplateTargetSettings = (props) => {
 					id={`${idPrefix}-template`}
 					value={currentTarget?.component}
 					onChange={(e) => {
-						const target = targets.find((target) => target.selector === currentTarget.selector);
+						const target = targets.find((target: TargetItem) => target.selector === currentTarget.selector);
 						if (target) {
 							target.template.setComponent(e.currentTarget.value);
 						}
@@ -666,7 +838,7 @@ const TemplateTargetSettings = (props) => {
 					id={`${idPrefix}-result-template`}
 					value={currentTarget.resultComponent}
 					onChange={(e) => {
-						const target = targets.find((target) => target.selector === currentTarget.selector);
+						const target = targets.find((target: TargetItem) => target.selector === currentTarget.selector);
 						if (target) {
 							target.template.setResultComponent(e.currentTarget.value);
 						}

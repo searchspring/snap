@@ -209,6 +209,7 @@ export class SnapTemplates extends Snap {
 							<TemplateEditor
 								templatesStore={templatesStore}
 								editorStore={templateEditorStore}
+								snap={this}
 								onRemoveClick={() => {
 									cookies.unset(THEME_EDIT_COOKIE);
 									const urlState = url(window.location.href);
