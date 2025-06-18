@@ -17,9 +17,6 @@ Or alternatively as children:
 <Modal>Hello World!</Modal>
 ```
 
-Note you can only render either the content, or the children, if both are passed in, it will default to the content prop. 
-
-
 ### button
 The `button` prop specifies the Modal trigger button. This button toggles the visibility of the modal when clicked. This can be a string or a JSX element.
 
@@ -52,6 +49,13 @@ The `startOpen` prop sets the modal initial internal state. Cannot be used with 
 <Modal startOpen>Hello World!</Modal>
 ```
 
+### lockScroll
+The `lockScroll` prop will lock the scroll on the body of the page while the modal is open. 
+
+```jsx
+<Modal lockScroll={true}>Hello World!</Modal>
+```
+
 ### disabled
 The `disabled` prop will disable the button from toggling the visibility of the modal content, as well as preventing the `onClick` callback from being invoked.
 
@@ -66,12 +70,6 @@ The `disableA11y` prop specifies a boolean to disable the autoset ally propertie
 <Modal disableA11y>Hello World!</Modal>
 ```
 
-### disableOverlay
-The `disableOverlay` prop will disable the modal contents from being rendered as an overlay. If set to `true`, modal contents will instead be rendered as a block and affect the height of its parent element. Typically used if Modal is intended to act as a header (ie. Facet)
-
-```jsx
-<Modal disableOverlay>Hello World!</Modal>
-```
 
 ### disableClickOutside
 The `disableClickOutside` prop by default is `false`. Setting this to `true` will not close the modal if a click event was registered outside the modal content.
@@ -87,11 +85,4 @@ The `onClick` prop allows for a custom callback function for when the modal butt
 
 ```jsx
 <Modal onClick={(e)=>{console.log(e)}} >Hello World!</Modal>
-```
-
-#### onToggle
-The `onToggle` prop allows for a custom callback function for when the modal visibility is toggled. This only applies if using internal state. Cannot be used with the `open` prop.
-
-```jsx
-<Modal onToggle={(e)=>{console.log(e)}} >Hello World!</Modal>
 ```

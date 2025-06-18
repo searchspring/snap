@@ -31,7 +31,7 @@ import { Button, ButtonProps } from '../../Atoms/Button';
 import { useCleanUpEmptyDivs } from '../../../hooks/useCleanUpEmptyDivs';
 import { createRecommendationTemplate } from '../../../hooks/createRecommendationTemplate';
 
-const defaultStyles: StyleScript<AutocompleteTemplateProps> = ({
+const defaultStyles: StyleScript<AutocompleteLayoutProps> = ({
 	controller,
 	input,
 	viewportMaxHeight,
@@ -195,10 +195,10 @@ const defaultStyles: StyleScript<AutocompleteTemplateProps> = ({
 	});
 };
 
-export const AutocompleteTemplate = observer((properties: AutocompleteTemplateProps): JSX.Element => {
+export const AutocompleteLayout = observer((properties: AutocompleteLayoutProps): JSX.Element => {
 	const globalTheme: Theme = useTheme();
 
-	const defaultProps: Partial<AutocompleteTemplateProps> = {
+	const defaultProps: Partial<AutocompleteLayoutProps> = {
 		facetsTitle: '',
 		contentTitle: '',
 		layout: [['c1', 'c2', 'c3']],
@@ -223,7 +223,8 @@ export const AutocompleteTemplate = observer((properties: AutocompleteTemplatePr
 		},
 	};
 
-	let props = mergeProps('autocompleteTemplate', globalTheme, defaultProps, properties);
+	let props = mergeProps('autocompleteLayout', globalTheme, defaultProps, properties);
+	delete props.treePath;
 
 	const valueProps = createHoverProps();
 
@@ -457,14 +458,14 @@ export const AutocompleteTemplate = observer((properties: AutocompleteTemplatePr
 	// results logic
 	checkAndSetShowResults();
 
-	const styling = mergeStyles<AutocompleteTemplateProps>(props, defaultStyles);
+	const styling = mergeStyles<AutocompleteLayoutProps>(props, defaultStyles);
 
 	const reset = () => {
 		controller.setFocused();
 	};
 
 	//initialize lang
-	const defaultLang: Partial<AutocompleteTemplateLang> = {
+	const defaultLang: Partial<AutocompleteLayoutLang> = {
 		contentTitle: {
 			value: contentTitle,
 		},
@@ -769,7 +770,7 @@ type Column = {
 	alignContent?: 'center' | 'flex-start' | 'flex-end' | 'space-between';
 };
 
-export interface AutocompleteTemplateProps extends ComponentProps {
+export interface AutocompleteLayoutProps extends ComponentProps {
 	input: Element | string;
 	controller: AutocompleteController;
 	layout?: ModuleNamesWithColumns[];
@@ -794,10 +795,10 @@ export interface AutocompleteTemplateProps extends ComponentProps {
 			config?: Partial<RecommendationControllerConfig>;
 		};
 	};
-	lang?: Partial<AutocompleteTemplateLang>;
+	lang?: Partial<AutocompleteLayoutLang>;
 }
 
-export interface AutocompleteTemplateLang {
+export interface AutocompleteLayoutLang {
 	facetsTitle: Lang<{
 		controller: AutocompleteController;
 	}>;

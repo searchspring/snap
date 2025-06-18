@@ -1,5 +1,5 @@
 import { ComponentChildren, h } from 'preact';
-import { useState, StateUpdater, MutableRef } from 'preact/hooks';
+import { useState, StateUpdater, MutableRef, useEffect } from 'preact/hooks';
 
 import { css } from '@emotion/react';
 import classnames from 'classnames';
@@ -7,22 +7,21 @@ import { observer } from 'mobx-react-lite';
 
 import { ComponentProps, StyleScript } from '../../../types';
 import { Theme, useTheme, CacheProvider, useTreePath } from '../../../providers';
-import { useClickOutside } from '../../../hooks';
+import { useClickOutside, useMediaQuery } from '../../../hooks';
 import { cloneWithProps, mergeProps, mergeStyles } from '../../../utilities';
 import { useA11y } from '../../../hooks/useA11y';
 
-const defaultStyles: StyleScript<ModalProps> = ({ disableOverlay }) => {
+const defaultStyles: StyleScript<ModalProps> = () => {
 	return css({
 		position: 'relative',
 		'&.ss__modal--open': {
 			'& .ss__modal__content': {
-				position: disableOverlay ? 'relative' : undefined,
 				visibility: 'visible',
 				opacity: 1,
 			},
 		},
 		'.ss__modal__button': {
-			cursor: `${disableOverlay ? 'default' : 'pointer'}`,
+			cursor: 'pointer',
 		},
 		'.ss__modal__content': {
 			backgroundColor: '#fff',
@@ -43,6 +42,7 @@ export const Modal = observer((properties: ModalProps): JSX.Element => {
 	const defaultProps: Partial<ModalProps> = {
 		startOpen: false,
 		disableA11y: false,
+		lockScroll: true,
 		treePath: globalTreePath,
 	};
 
@@ -56,7 +56,7 @@ export const Modal = observer((properties: ModalProps): JSX.Element => {
 		disabled,
 		open,
 		onClick,
-		onToggle,
+		lockScroll,
 		startOpen,
 		disableClickOutside,
 		disableA11y,
@@ -75,29 +75,28 @@ export const Modal = observer((properties: ModalProps): JSX.Element => {
 
 	let innerRef: MutableRef<HTMLElement | undefined> | undefined;
 	if (!disableClickOutside) {
-		innerRef = useClickOutside((e) => {
+		innerRef = useClickOutside(() => {
 			if (showContent) {
 				if (!disabled) {
 					stateful && setShowContent && setShowContent(false);
-					onToggle && onToggle(e, false);
 				}
 			}
 		});
 	}
 
-	const toggleShowContent = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+	const toggleShowContent = () => {
 		if (stateful) {
 			setShowContent &&
 				setShowContent((prev?: boolean) => {
-					onToggle && onToggle(e, !prev);
 					return !prev;
 				});
 		}
+		document.body.style.overflow = showContent && lockScroll ? 'hidden' : '';
 	};
 
 	const styling = mergeStyles<ModalProps>(props, defaultStyles);
 
-	let existingButton;
+	let existingButton: Element | null;
 	if (buttonSelector) {
 		if (typeof buttonSelector == 'string') {
 			existingButton = document.querySelector(buttonSelector);
@@ -106,14 +105,22 @@ export const Modal = observer((properties: ModalProps): JSX.Element => {
 		}
 	}
 
-	if (existingButton) {
-		if (!disabled) {
-			existingButton.addEventListener('click', (e) => {
-				toggleShowContent(e as unknown as React.MouseEvent<HTMLDivElement, MouseEvent>);
-				onClick && onClick(e as unknown as React.MouseEvent<HTMLDivElement, MouseEvent>);
-			});
+	useEffect(() => {
+		if (existingButton) {
+			if (!disabled) {
+				existingButton.addEventListener('click', (e) => {
+					toggleShowContent();
+					onClick && onClick(e as unknown as React.MouseEvent<HTMLDivElement, MouseEvent>);
+				});
+			}
 		}
-	}
+	});
+
+	const isVisible = useMediaQuery('', () => {
+		if (lockScroll) document.body.style.overflow = '';
+	});
+
+	document.body.style.overflow = isVisible && showContent && lockScroll ? 'hidden' : '';
 
 	return (
 		<CacheProvider>
@@ -130,7 +137,7 @@ export const Modal = observer((properties: ModalProps): JSX.Element => {
 						role="button"
 						onClick={(e) => {
 							if (!disabled) {
-								toggleShowContent(e);
+								toggleShowContent();
 								onClick && onClick(e);
 							}
 						}}
@@ -152,14 +159,13 @@ export const Modal = observer((properties: ModalProps): JSX.Element => {
 
 export interface ModalProps extends ComponentProps {
 	button?: string | JSX.Element;
+	lockScroll?: boolean;
 	buttonSelector?: string | Element;
 	content?: string | JSX.Element;
 	children?: ComponentChildren;
 	disabled?: boolean;
 	open?: boolean;
-	disableOverlay?: boolean;
 	onClick?: (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
-	onToggle?: (event: React.MouseEvent<HTMLDivElement, MouseEvent>, showContent: boolean) => void;
 	startOpen?: boolean;
 	disableClickOutside?: boolean;
 	disableA11y?: boolean;

@@ -75,13 +75,13 @@ export default {
 			},
 			control: { type: 'boolean' },
 		},
-		disableOverlay: {
-			description: 'Disable modal overlay and renders as block',
+		lockScroll: {
+			description: 'Lock the Scroll on the body when the modal is open',
 			table: {
 				type: {
 					summary: 'boolean',
 				},
-				defaultValue: { summary: false },
+				defaultValue: { summary: true },
 			},
 			control: { type: 'boolean' },
 		},
@@ -124,16 +124,6 @@ export default {
 			},
 			control: { type: 'none' },
 			action: 'onClick',
-		},
-		onToggle: {
-			description: 'Executes when the internal state changes, gets passed the event and the internal state - used with internal state only',
-			table: {
-				type: {
-					summary: 'function(e: Event, open: boolean)',
-				},
-			},
-			control: { type: 'none' },
-			action: 'onToggle',
 		},
 		disableA11y: {
 			description: 'boolean to disable autoset ally properties',

@@ -63,8 +63,6 @@ export type LibraryImports = {
 		};
 		autocomplete: {
 			AutocompleteFixed: (args?: any) => Promise<FunctionalComponent<RenderableProps<any>>>;
-			//todo: delete me later
-			AutocompleteTemplate: (args?: any) => Promise<FunctionalComponent<RenderableProps<any>>>;
 			AutocompleteModal: (args?: any) => Promise<FunctionalComponent<RenderableProps<any>>>;
 			AutocompleteSlideout: (args?: any) => Promise<FunctionalComponent<RenderableProps<any>>>;
 		};
@@ -184,13 +182,6 @@ export class LibraryStore {
 		},
 		component: {
 			autocomplete: {
-				//todo : delete me later
-				AutocompleteTemplate: async () => {
-					return (
-						this.components.autocomplete.AutocompleteTemplate ||
-						(this.components.autocomplete.AutocompleteTemplate = (await import('./library/components/AutocompleteTemplate')).AutocompleteTemplate)
-					);
-				},
 				AutocompleteFixed: async () => {
 					return (
 						this.components.autocomplete.AutocompleteFixed ||

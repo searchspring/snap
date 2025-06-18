@@ -12,6 +12,7 @@ type AttType = {
 	'aria-label'?: string;
 	'aria-valuetext'?: string;
 	title?: string;
+	placeholder?: string;
 	alt?: string;
 };
 export type LangAttributesObjAttributes = {
@@ -50,6 +51,7 @@ export interface LangAttributes<T> {
 		'aria-valuetext'?: LangType<T>;
 		title?: LangType<T>;
 		alt?: LangType<T>;
+		placeholder?: LangType<T>;
 	};
 }
 
@@ -106,6 +108,13 @@ export const useLang = (lang: LangObjType, data?: any): LangAttributesObj => {
 						currentObj.attributes!['alt'] = currentLangSettings.attributes['alt'](data);
 					} else {
 						currentObj.attributes!['alt'] = currentLangSettings.attributes['alt'];
+					}
+				}
+				if (currentLangSettings?.attributes?.placeholder) {
+					if (typeof currentLangSettings.attributes?.placeholder == 'function') {
+						currentObj.attributes!['placeholder'] = currentLangSettings.attributes['placeholder'](data);
+					} else {
+						currentObj.attributes!['placeholder'] = currentLangSettings.attributes['placeholder'];
 					}
 				}
 			}

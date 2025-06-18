@@ -7,7 +7,7 @@ import type { AutocompleteController } from '@searchspring/snap-controller';
 import { defined, mergeProps, mergeStyles } from '../../../utilities';
 import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { ComponentProps, StyleScript } from '../../../types';
-import { AutocompleteTemplate, AutocompleteTemplateProps } from '../../Organisms/AutocompleteTemplate';
+import { AutocompleteLayout, AutocompleteLayoutProps } from '../../Organisms/AutocompleteLayout';
 import { Modal, ModalProps } from '../../Atoms/Modal';
 import classNames from 'classnames';
 import { SearchInput, SearchInputProps } from '../../Molecules/SearchInput';
@@ -15,12 +15,12 @@ import { Overlay, OverlayProps } from '../../Atoms/Overlay';
 import { debounce } from '@searchspring/snap-toolbox';
 import { useAcRenderedInput } from '../../../hooks';
 
-const defaultStyles: StyleScript<AutocompleteFixedProps & { inputBounds: inputBounds }> = ({ inputBounds, offset, renderInput }) => {
+const defaultStyles: StyleScript<AutocompleteFixedProps & { inputBounds: inputBounds }> = ({ inputBounds, offset, renderInput, width }) => {
 	return css({
 		position: 'absolute',
 		left: '0',
 		width: '100%',
-		hight: '100%',
+		height: '100%',
 		right: '0',
 		top: '0',
 		zIndex: 1001,
@@ -28,17 +28,29 @@ const defaultStyles: StyleScript<AutocompleteFixedProps & { inputBounds: inputBo
 		'& .ss__autocomplete-fixed__inner': {
 			position: 'absolute',
 			left: `calc(0px + ${offset?.left || 0}px)`,
-			top: `calc(0px + ${renderInput ? 0 : `${inputBounds.height}px`} + ${offset?.top || 0}px)`,
+			top: `calc(0px + ${renderInput ? '0px' : `${inputBounds.height}px`} + ${offset?.top || 0}px)`,
 			width: `calc(100% + ${offset?.width || 0}px)`,
-
-			background: '#fff',
 			zIndex: 1001,
+			maxWidth: '100vw',
+
+			'.ss__search-input': {
+				background: '#fff',
+				width: `${inputBounds.width}px`,
+				height: `${inputBounds.height}px`,
+				border: '0px',
+			},
 		},
+		'& .ss__autocomplete-fixed__inner__layout-wrapper': {
+			width: width,
+			overflowY: 'scroll',
+			maxHeight: `calc(90vh - ${inputBounds.top || 0}px - ${renderInput ? `${inputBounds.height}px` : '0px'} + ${offset?.top || 0}px)`,
+		},
+
 		'& .ss__overlay': {
 			zIndex: 1000,
 		},
-		'& .ss__autocomplete': {
-			position: 'relative',
+		'& .ss__search-input__button--close-search-icon': {
+			border: 'none',
 		},
 	});
 };
@@ -54,18 +66,18 @@ export const AutocompleteFixed = observer((properties: AutocompleteFixedProps): 
 	const props = mergeProps('autocompleteFixed', globalTheme, defaultProps, properties);
 
 	const [active, setActive] = useState(false);
+	const [inputName, setInputName] = useState('query');
 
 	let input: string | Element | null | undefined = props.input;
 	let buttonSelector = props.buttonSelector;
 
-	let inputName = 'query';
 	if (input) {
 		if (typeof input === 'string') {
 			input = document.querySelector(input);
 		}
 		const existingInputName = (input as HTMLInputElement)?.getAttribute('name');
 		if (existingInputName) {
-			inputName = existingInputName;
+			setInputName(existingInputName);
 			(input as HTMLInputElement).setAttribute('name', '');
 		}
 	}
@@ -94,6 +106,7 @@ export const AutocompleteFixed = observer((properties: AutocompleteFixedProps): 
 			// default props
 			className: 'autocomplete-fixed__modal',
 			buttonSelector: buttonSelector,
+			lockScroll: false,
 			open: active,
 			// inherited props
 			...defined({
@@ -118,6 +131,12 @@ export const AutocompleteFixed = observer((properties: AutocompleteFixedProps): 
 		searchInput: {
 			// default props
 			className: 'autocomplete-fixed__search-input',
+			onSearchIconClick: () => {
+				() => reset();
+				window.location.href = controller.store.state.url.link.href;
+			},
+			clearSearchIcon: 'close-thin',
+			onCloseSearchClick: () => reset(),
 			inputName: inputName,
 			// inherited props
 			...defined({
@@ -161,12 +180,13 @@ export const AutocompleteFixed = observer((properties: AutocompleteFixedProps): 
 
 	const reset = () => {
 		controller.setFocused();
+		setActive(false);
 	};
 
 	let _input;
 	if (input) {
 		_input = useAcRenderedInput({
-			input,
+			input: input as Element,
 			controller,
 			renderedInputRef,
 			renderInput: Boolean(renderInput),
@@ -175,14 +195,25 @@ export const AutocompleteFixed = observer((properties: AutocompleteFixedProps): 
 		});
 	}
 
+	const acProps = {
+		...props,
+	};
+	delete acProps.width;
+
 	return layout?.length && active ? (
 		<CacheProvider>
 			<div {...styling} className={classNames('ss__autocomplete-fixed', className)}>
 				<Modal {...subProps.modal}>
 					<Fragment>
 						<div className="ss__autocomplete-fixed__inner">
-							{renderInput ? <SearchInput {...subProps.searchInput} inputRef={renderedInputRef} /> : <></>}
-							<AutocompleteTemplate {...props} {...subProps.autocompleteTemplate} input={_input!} controller={controller} />
+							{renderInput ? (
+								<SearchInput {...subProps.searchInput} value={controller.store.state.input || ('' as string)} inputRef={renderedInputRef} />
+							) : (
+								<></>
+							)}
+							<div className="ss__autocomplete-fixed__inner__layout-wrapper">
+								<AutocompleteLayout {...acProps} {...subProps.autocompleteTemplate} input={_input!} controller={controller} />
+							</div>
 						</div>
 
 						<Overlay
@@ -190,7 +221,6 @@ export const AutocompleteFixed = observer((properties: AutocompleteFixedProps): 
 							active={active}
 							onClick={() => {
 								reset();
-								setActive(false);
 							}}
 						/>
 					</Fragment>
@@ -210,13 +240,13 @@ interface inputBounds {
 }
 
 interface AutocompleteFixedSubProps {
-	autocompleteTemplate: Partial<AutocompleteTemplateProps>;
+	autocompleteTemplate: Partial<AutocompleteLayoutProps>;
 	modal: Partial<ModalProps>;
 	searchInput: Partial<SearchInputProps>;
 	overlay: Partial<OverlayProps>;
 }
 
-export interface AutocompleteFixedProps extends AutocompleteTemplateProps, ComponentProps {
+export interface AutocompleteFixedProps extends AutocompleteLayoutProps, ComponentProps {
 	buttonSelector?: string | Element;
 	overlayColor?: string;
 	renderInput?: boolean;

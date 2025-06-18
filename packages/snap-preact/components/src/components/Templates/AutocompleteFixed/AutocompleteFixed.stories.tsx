@@ -59,7 +59,7 @@ export default {
 	argTypes: {
 		overlayColor: {
 			defaultValue: 'rgba(0,0,0,0.0)',
-			description: 'Slideout overlay color',
+			description: 'Autocomplete overlay color',
 			table: {
 				type: {
 					summary: 'string',
@@ -69,7 +69,7 @@ export default {
 			control: { type: 'color' },
 		},
 		buttonSelector: {
-			description: 'Slideout button selector. (defaults to input)',
+			description: 'Autocomplete button selector. (defaults to input)',
 			table: {
 				type: {
 					summary: 'string, jsx',
@@ -251,11 +251,6 @@ const snapInstance = Snapify.autocomplete({
 });
 
 export const Default = (args: AutocompleteFixedProps, { loaded: { controller } }: { loaded: { controller: AutocompleteController } }) => {
-	// bind after input exists
-	setTimeout(() => {
-		controller.bind();
-	});
-
 	const [inputFound, setInputFound] = useState(false);
 
 	useEffect(() => {

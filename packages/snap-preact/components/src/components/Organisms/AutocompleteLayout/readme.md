@@ -1,8 +1,8 @@
-# AutocompleteTemplate
+# AutocompleteLayout
 
 Renders an autocomplete popup that binds to an `<input>` element.
 
-The AutocompleteTemplate component is very similar to the Autocomplete component in functionality, however the main difference is that the autocompleteTemplate components layout is determined by the layout prop, which specifies what child components render and where.
+The AutocompleteLayout component is very similar to the Autocomplete component in functionality, however the main difference is that the AutocompleteLayout components layout is determined by the layout prop, which specifies what child components render and where.
 
 ## Components Used
 - Banner
@@ -24,14 +24,14 @@ The required `input` prop expects either:
 - an `<input>` element to bind to
 
 ```jsx
-<AutocompleteTemplate controller={controller} input={'#searchInput'} />
+<AutocompleteLayout controller={controller} input={'#searchInput'} />
 ```
 
 ### controller
 The required `controller` prop specifies a reference to the autocomplete controller.
 
 ```jsx
-<AutocompleteTemplate controller={controller} input={'#searchInput'} />
+<AutocompleteLayout controller={controller} input={'#searchInput'} />
 ```
 
 ### layout
@@ -49,7 +49,7 @@ available modules to use in the layout are
 
 
 ```jsx
-<AutocompleteTemplate controller={controller} input={'#searchInput'} layout={[['C1','C2','C3']]}/>
+<AutocompleteLayout controller={controller} input={'#searchInput'} layout={[['C1','C2','C3']]}/>
 ```
 
 ### column1
@@ -60,7 +60,7 @@ The `column1` prop specifies the layout to render in the `C1` module. Takes an o
 `layout` which specifies an array of modules to render in the column. Defaults to `['termsList']`. All layout modules are available to use with the exception of the `Cx` modules. Additional arrays for new rows are also supported.
 
 ```jsx
-<AutocompleteTemplate controller={controller} input={'#searchInput'} column1={{
+<AutocompleteLayout controller={controller} input={'#searchInput'} column1={{
     width: '150px',
     layout: ['terms.history', 'terms.trending']
 }}/>
@@ -74,7 +74,7 @@ The `column2` prop specifies a layout array to render in the `C2` module. Takes 
 `layout` which specifies an array of modules to render in the column. Defaults to `['facets']`. All layout modules are available to use with the exception of the `Cx` modules. Additional arrays for new rows are also supported.
 
 ```jsx
-<AutocompleteTemplate controller={controller} input={'#searchInput'} column2={{
+<AutocompleteLayout controller={controller} input={'#searchInput'} column2={{
     width: '150px',
     layout: ['facets']
 }}/>
@@ -88,7 +88,7 @@ The `column3` prop specifies a layout array to render in the `C3` module. Takes 
 `layout` which specifies an array of modules to render in the column. Defaults to `[['content'], ['_', 'button.see-more']]`. All layout modules are available to use with the exception of the `Cx` modules. Additional arrays for new rows are also supported.
 
 ```jsx
-<AutocompleteTemplate controller={controller} input={'#searchInput'} column3={{
+<AutocompleteLayout controller={controller} input={'#searchInput'} column3={{
     width: '150px',
     layout: [['content', ['_', 'button.see-more', '_']]]
 }}/>
@@ -102,7 +102,7 @@ The `column4` prop specifies a layout array to render in the `C4` module. Takes 
 `layout` which specifies an array of modules to render in the column. Defaults to `[['content'], ['_', 'button.see-more']]`. All layout modules are available to use with the exception of the `Cx` modules. Additional arrays for new rows are also supported.
 
 ```jsx
-<AutocompleteTemplate controller={controller} input={'#searchInput'} column4={{
+<AutocompleteLayout controller={controller} input={'#searchInput'} column4={{
 width: '150px',
 layout: ['facets']
 }}/>
@@ -112,40 +112,40 @@ layout: ['facets']
 The `width` prop specifies a width for the overall component. The default value is '100%'.
 
 ```jsx
-<AutocompleteTemplate controller={controller} input={'#searchInput'} width="800px" />
+<AutocompleteLayout controller={controller} input={'#searchInput'} width="800px" />
 ```
 
 ### excludeBanners
 The `excludeBanners` prop specifies if the Autocomplete should automatically include banners. 
 
 ```jsx
-<AutocompleteTemplate controller={controller} input={'#searchInput'} excludeBanners={true} />
+<AutocompleteLayout controller={controller} input={'#searchInput'} excludeBanners={true} />
 ```
 
 ### vertical
 The `vertical` prop will alter autocomplete's CSS to display in a vertical layout.
 
 ```jsx
-<AutocompleteTemplate controller={controller} input={'#searchInput'} vertical={true} />
+<AutocompleteLayout controller={controller} input={'#searchInput'} vertical={true} />
 ```
 
 ### facetsTitle
 The `facetsTitle` prop will display the given text above the facets area.
 
 ```jsx
-<AutocompleteTemplate controller={controller} input={'#searchInput'} facetsTitle={'Facets'} />
+<AutocompleteLayout controller={controller} input={'#searchInput'} facetsTitle={'Facets'} />
 ```
 
 ### contentTitle
 The `contentTitle` prop will display the given text above the content area.
 
 ```jsx
-<AutocompleteTemplate controller={controller} input={'#searchInput'} contentTitle={'Search Results'} />
+<AutocompleteLayout controller={controller} input={'#searchInput'} contentTitle={'Search Results'} />
 ```
 
 ### viewportMaxHeight
 The `viewportMaxHeight` prop will restrict autocomplete from overflowing the viewport. The max height of autocomplete will always be visible in the viewport. 
 
 ```jsx
-<AutocompleteTemplate controller={controller} input={'#searchInput'} viewportMaxHeight={true} />
+<AutocompleteLayout controller={controller} input={'#searchInput'} viewportMaxHeight={true} />
 ```

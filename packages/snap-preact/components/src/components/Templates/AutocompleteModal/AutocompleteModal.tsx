@@ -7,20 +7,23 @@ import type { AutocompleteController } from '@searchspring/snap-controller';
 import { defined, mergeProps, mergeStyles } from '../../../utilities';
 import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { ComponentProps, StyleScript } from '../../../types';
-import { AutocompleteTemplate, AutocompleteTemplateProps } from '../../Organisms/AutocompleteTemplate';
+import { AutocompleteLayout, AutocompleteLayoutProps } from '../../Organisms/AutocompleteLayout';
 import { Modal, ModalProps } from '../../Atoms/Modal';
 import classNames from 'classnames';
 import { SearchInput, SearchInputProps } from '../../Molecules/SearchInput';
 import { Overlay, OverlayProps } from '../../Atoms/Overlay';
 import { useAcRenderedInput } from '../../../hooks';
 
-const defaultStyles: StyleScript<AutocompleteModalProps> = ({ width }) => {
+const defaultStyles: StyleScript<AutocompleteModalProps> = ({ width, height, theme }) => {
+	// eslint-disable-next-line @typescript-eslint/no-unused-vars
+	const variables = theme?.variables;
+
 	return css({
 		border: '1px solid #eee',
 		position: 'fixed',
 		left: '0',
 		width: '100%',
-		hight: '100%',
+		height: '100%',
 		right: '0',
 		top: '0',
 		zIndex: 1001,
@@ -30,11 +33,15 @@ const defaultStyles: StyleScript<AutocompleteModalProps> = ({ width }) => {
 			left: 0,
 			right: 0,
 			top: '10vh',
+			maxHeight: '80vh',
+			overflow: 'scroll',
 			marginLeft: 'auto',
 			marginRight: 'auto',
 			background: '#fff',
 			zIndex: 1001,
 			width: width,
+			height: height,
+			maxWidth: '100vw',
 		},
 		'& .ss__overlay': {
 			zIndex: 1000,
@@ -47,6 +54,16 @@ const defaultStyles: StyleScript<AutocompleteModalProps> = ({ width }) => {
 		},
 		'& .input_wrapper input': {
 			background: '#eee',
+		},
+		'& .ss__search-input__button--close-search-icon': {
+			border: 'none',
+		},
+
+		[`@media (max-width: ${variables?.breakpoints.desktop}px)`]: {
+			'& .ss__autocomplete-modal__inner': {
+				top: '0',
+				maxHeight: '100vh',
+			},
 		},
 	});
 };
@@ -64,18 +81,18 @@ export const AutocompleteModal = observer((properties: AutocompleteModalProps): 
 	const props = mergeProps('autocompleteModal', globalTheme, defaultProps, properties);
 
 	const [active, setActive] = useState(false);
+	const [inputName, setInputName] = useState('query');
 
 	let input: string | Element | null | undefined = props.input;
 	let buttonSelector = props.buttonSelector;
 
-	let inputName = 'query';
 	if (input) {
 		if (typeof input === 'string') {
 			input = document.querySelector(input);
 		}
 		const existingInputName = (input as HTMLInputElement)?.getAttribute('name');
 		if (existingInputName) {
-			inputName = existingInputName;
+			setInputName(existingInputName);
 			(input as HTMLInputElement).setAttribute('name', '');
 		}
 	}
@@ -128,6 +145,13 @@ export const AutocompleteModal = observer((properties: AutocompleteModalProps): 
 		searchInput: {
 			// default props
 			className: 'autocomplete-modal__search-input',
+			onSearchIconClick: () => {
+				() => reset();
+				window.location.href = controller.store.state.url.link.href;
+			},
+			onCloseSearchClick: () => reset(),
+			closeSearchIcon: 'angle-left',
+			clearSearchIcon: 'close-thin',
 			inputName: inputName,
 			// inherited props
 			...defined({
@@ -143,12 +167,13 @@ export const AutocompleteModal = observer((properties: AutocompleteModalProps): 
 
 	const reset = () => {
 		controller.setFocused();
+		setActive(false);
 	};
 
 	let _input;
 	if (input) {
 		_input = useAcRenderedInput({
-			input,
+			input: input as Element,
 			controller,
 			renderedInputRef,
 			renderInput: Boolean(renderInput),
@@ -157,14 +182,23 @@ export const AutocompleteModal = observer((properties: AutocompleteModalProps): 
 		});
 	}
 
+	const acProps = {
+		...props,
+	};
+	delete acProps.width;
+
 	return layout?.length && active ? (
 		<CacheProvider>
 			<div {...styling} className={classNames('ss__autocomplete-modal', className)}>
 				<Modal {...subProps.modal}>
 					<Fragment>
 						<div className="ss__autocomplete-modal__inner">
-							{renderInput ? <SearchInput {...subProps.searchInput} inputRef={renderedInputRef} /> : <></>}
-							<AutocompleteTemplate {...props} {...subProps.autocompleteTemplate} input={_input!} controller={controller} />
+							{renderInput ? (
+								<SearchInput {...subProps.searchInput} value={controller.store.state.input || ('' as string)} inputRef={renderedInputRef} />
+							) : (
+								<></>
+							)}
+							<AutocompleteLayout {...acProps} {...subProps.autocompleteTemplate} input={_input!} controller={controller} />
 						</div>
 
 						<Overlay
@@ -172,7 +206,6 @@ export const AutocompleteModal = observer((properties: AutocompleteModalProps): 
 							active={active}
 							onClick={() => {
 								reset();
-								setActive(false);
 							}}
 						/>
 					</Fragment>
@@ -185,15 +218,16 @@ export const AutocompleteModal = observer((properties: AutocompleteModalProps): 
 });
 
 interface AutocompleteModalSubProps {
-	autocompleteTemplate: Partial<AutocompleteTemplateProps>;
+	autocompleteTemplate: Partial<AutocompleteLayoutProps>;
 	modal: Partial<ModalProps>;
 	searchInput: Partial<SearchInputProps>;
 	overlay: Partial<OverlayProps>;
 }
 
-export interface AutocompleteModalProps extends AutocompleteTemplateProps, ComponentProps {
+export interface AutocompleteModalProps extends AutocompleteLayoutProps, ComponentProps {
 	buttonSelector?: string | Element;
 	overlayColor?: string;
 	renderInput?: boolean;
+	height?: string;
 	controller: AutocompleteController;
 }

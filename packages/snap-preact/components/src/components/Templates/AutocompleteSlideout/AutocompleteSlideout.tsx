@@ -1,5 +1,5 @@
 import { h, Fragment } from 'preact';
-import { MutableRef, useRef } from 'preact/hooks';
+import { MutableRef, useEffect, useRef, useState } from 'preact/hooks';
 
 import { observer } from 'mobx-react-lite';
 import { css } from '@emotion/react';
@@ -7,7 +7,7 @@ import type { AutocompleteController } from '@searchspring/snap-controller';
 import { defined, mergeProps, mergeStyles } from '../../../utilities';
 import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { ComponentProps, StyleScript } from '../../../types';
-import { AutocompleteTemplate, AutocompleteTemplateProps } from '../../Organisms/AutocompleteTemplate';
+import { AutocompleteLayout, AutocompleteLayoutProps } from '../../Organisms/AutocompleteLayout';
 import { SlideDirectionType, Slideout, SlideoutProps } from '../../Molecules/Slideout';
 import classNames from 'classnames';
 import { SearchInput, SearchInputProps } from '../../Molecules/SearchInput';
@@ -23,6 +23,9 @@ const defaultStyles: StyleScript<AutocompleteSlideoutProps> = ({}) => {
 		'& .input_wrapper input': {
 			background: '#eee',
 		},
+		'& .ss__search-input__button--close-search-icon': {
+			border: 'none',
+		},
 	});
 };
 
@@ -31,7 +34,7 @@ export const AutocompleteSlideout = observer((properties: AutocompleteSlideoutPr
 
 	const defaultProps: Partial<AutocompleteSlideoutProps> = {
 		slideDirection: 'left',
-		overlayColor: 'rgba(0,0,0,0)',
+		overlayColor: 'rgba(0,0,0,0.8)',
 		layout: [['button.see-more'], ['termsList'], ['content']],
 		width: '500px',
 		renderInput: true,
@@ -39,16 +42,17 @@ export const AutocompleteSlideout = observer((properties: AutocompleteSlideoutPr
 
 	const props = mergeProps('autocompleteSlideout', globalTheme, defaultProps, properties);
 
+	const [inputName, setInputName] = useState('query');
+
 	let input: string | Element | null | undefined = props.input;
 	let buttonSelector = props.buttonSelector;
-	let inputName = 'query';
 	if (input) {
 		if (typeof input === 'string') {
 			input = document.querySelector(input);
 		}
 		const existingInputName = (input as HTMLInputElement)?.getAttribute('name');
 		if (existingInputName) {
-			inputName = existingInputName;
+			setInputName(existingInputName);
 			(input as HTMLInputElement).setAttribute('name', '');
 		}
 	}
@@ -92,6 +96,13 @@ export const AutocompleteSlideout = observer((properties: AutocompleteSlideoutPr
 			// default props
 			className: 'autocomplete-slideout__search-input',
 			inputName: inputName,
+			onSearchIconClick: () => {
+				() => reset();
+				window.location.href = controller.store.state.url.link.href;
+			},
+			onCloseSearchClick: () => reset(),
+			closeSearchIcon: 'angle-left',
+			clearSearchIcon: 'close-thin',
 			// inherited props
 			...defined({
 				disableStyles,
@@ -104,16 +115,32 @@ export const AutocompleteSlideout = observer((properties: AutocompleteSlideoutPr
 
 	const styling = mergeStyles<AutocompleteSlideoutProps>(props, defaultStyles);
 
+	const [active, setActive] = useState(false);
+
 	let _input;
 	if (input) {
+		useEffect(() => {
+			(input as Element).addEventListener('click', () => setActive(true));
+		});
+
 		_input = useAcRenderedInput({
-			input,
+			input: input as Element,
 			controller,
 			renderedInputRef,
 			renderInput: Boolean(renderInput),
 			buttonSelector,
 		});
 	}
+
+	const reset = () => {
+		setActive(false);
+		controller.setFocused();
+	};
+
+	const acProps = {
+		...props,
+	};
+	delete acProps.width;
 
 	/***************************************/
 	return layout?.length ? (
@@ -122,23 +149,27 @@ export const AutocompleteSlideout = observer((properties: AutocompleteSlideoutPr
 				{...styling}
 				{...subProps.slideout}
 				className={classNames('ss__autocomplete-slideout', 'ss__autocomplete-slideout__slideout', className)}
+				active={active}
 			>
-				{renderInput ? <SearchInput {...subProps.searchInput} inputRef={renderedInputRef} /> : <></>}
-				<AutocompleteTemplate {...props} {...subProps.autocompleteTemplate} input={_input!} controller={controller} />
+				{renderInput ? (
+					<SearchInput {...subProps.searchInput} value={controller.store.state.input || ('' as string)} inputRef={renderedInputRef} />
+				) : (
+					<></>
+				)}
+				<AutocompleteLayout {...acProps} {...subProps.autocompleteTemplate} input={_input!} controller={controller} />
 			</Slideout>
 		</CacheProvider>
 	) : (
 		<Fragment></Fragment>
 	);
 });
-
 interface AutocompleteSlideoutSubProps {
-	autocompleteTemplate: Partial<AutocompleteTemplateProps>;
+	autocompleteTemplate: Partial<AutocompleteLayoutProps>;
 	slideout: Partial<SlideoutProps>;
 	searchInput: Partial<SearchInputProps>;
 }
 
-export interface AutocompleteSlideoutProps extends AutocompleteTemplateProps, ComponentProps {
+export interface AutocompleteSlideoutProps extends AutocompleteLayoutProps, ComponentProps {
 	overlayColor?: string;
 	slideDirection?: SlideDirectionType;
 	buttonSelector?: string | Element;

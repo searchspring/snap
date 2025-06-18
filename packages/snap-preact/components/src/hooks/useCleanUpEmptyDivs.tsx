@@ -15,7 +15,10 @@ function hasElemsToShow(element: Element) {
 	if (!element.children.length) return false;
 
 	for (const child of element.children as any) {
-		if (child.tagName !== 'DIV' || child.innerHTML.trim() !== '') {
+		const innerHTML = child.innerHTML.trim();
+		const cleanedInner = innerHTML.replace(/\<div class=\"ss__autocomplete__separator\"><\/div\>/g, '');
+
+		if (child.tagName !== 'DIV' || cleanedInner.trim() !== '') {
 			return true;
 		}
 	}

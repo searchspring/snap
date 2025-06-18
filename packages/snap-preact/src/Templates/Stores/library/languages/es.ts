@@ -77,6 +77,28 @@ export const es: LangComponents = {
 			value: 'Filtros',
 		},
 	},
+	searchInput: {
+		placeholderText: {
+			attributes: {
+				placeholder: 'Buscar',
+			},
+		},
+		closeSearchButton: {
+			attributes: {
+				'aria-label': 'Cerrar búsqueda',
+			},
+		},
+		clearSearchButton: {
+			attributes: {
+				'aria-label': 'Borrar búsqueda',
+			},
+		},
+		searchButton: {
+			attributes: {
+				'aria-label': 'Enviar buscar',
+			},
+		},
+	},
 	recommendationBundle: {
 		seedText: {
 			value: 'Este producto',

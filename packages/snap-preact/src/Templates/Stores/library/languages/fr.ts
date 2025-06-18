@@ -67,6 +67,28 @@ export const fr: LangComponents = {
 			value: 'Filtres',
 		},
 	},
+	searchInput: {
+		placeholderText: {
+			attributes: {
+				placeholder: 'Recherche',
+			},
+		},
+		closeSearchButton: {
+			attributes: {
+				'aria-label': 'Fermer la  recherche',
+			},
+		},
+		clearSearchButton: {
+			attributes: {
+				'aria-label': 'Effacer la recherche',
+			},
+		},
+		searchButton: {
+			attributes: {
+				'aria-label': 'Soumettre Rechercher',
+			},
+		},
+	},
 	recommendationBundle: {
 		seedText: {
 			value: 'Ce produit',

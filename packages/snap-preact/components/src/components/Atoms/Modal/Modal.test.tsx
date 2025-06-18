@@ -47,9 +47,12 @@ describe('Modal Component', () => {
 		const rendered = render(<Modal buttonSelector={'#clickMe'}>{child}</Modal>);
 
 		const otherButtonElement = document.body.querySelector('#clickMe');
+		let childElement = rendered.queryByText(child);
+
+		expect(childElement).not.toBeInTheDocument();
 
 		await userEvent.click(otherButtonElement!);
-		const childElement = rendered.getByText(child);
+		childElement = rendered.queryByText(child);
 
 		expect(childElement).toBeInTheDocument();
 	});
@@ -201,47 +204,6 @@ describe('Modal Component', () => {
 		expect(contentElement).not.toBeInTheDocument();
 	});
 
-	it('fires onToggle prop when clicked outside (while opened)', () => {
-		const buttonText = 'click me';
-		const contentText = 'this is the content';
-		const clickFn = jest.fn();
-		const toggleFn = jest.fn();
-
-		const rendered = render(
-			<div>
-				<span className="outside">outside</span>
-				<Modal content={contentText} onClick={clickFn} button={buttonText} onToggle={toggleFn} />
-			</div>
-		);
-
-		const button = rendered.container.querySelector('.ss__modal__button')!;
-		const outside = rendered.container.querySelector('.outside')!;
-
-		userEvent.click(button);
-		expect(clickFn).toHaveBeenCalled();
-
-		userEvent.click(outside);
-		expect(toggleFn).toHaveBeenCalled();
-	});
-
-	it('does not fire onToggle prop when clicked outside (while opened) when disableClickOutside prop is true', () => {
-		const buttonText = 'click me';
-		const contentText = 'this is the content';
-		const toggleFn = jest.fn();
-
-		const rendered = render(
-			<div>
-				<span className="outside">outside</span>
-				<Modal disableClickOutside startOpen content={contentText} button={buttonText} onToggle={toggleFn} />
-			</div>
-		);
-
-		const outside = rendered.container.querySelector('.outside')!;
-
-		userEvent.click(outside);
-		expect(toggleFn).not.toHaveBeenCalled();
-	});
-
 	it('fires onClick prop when clicked', () => {
 		const clickFn = jest.fn();
 
@@ -336,28 +298,6 @@ describe('Modal Component', () => {
 	});
 
 	describe('internal state', () => {
-		it('fires onToggle prop when clicked', () => {
-			const toggleFn = jest.fn();
-
-			const rendered = render(<Modal button={'open me'} onToggle={toggleFn} />);
-
-			const button = rendered.container.querySelector('.ss__modal__button')!;
-
-			userEvent.click(button);
-			expect(toggleFn).toHaveBeenCalled();
-		});
-
-		it('does not fire onToggle prop when disabled', () => {
-			const toggleFn = jest.fn();
-
-			const rendered = render(<Modal button={'open me'} disabled onToggle={toggleFn} />);
-
-			const button = rendered.container.querySelector('.ss__modal__button')!;
-
-			userEvent.click(button);
-			expect(toggleFn).not.toHaveBeenCalled();
-		});
-
 		it('starts closed', () => {
 			const rendered = render(<Modal button={'open me'} />);
 
@@ -373,36 +313,9 @@ describe('Modal Component', () => {
 
 			expect(modal).toHaveClass('ss__modal--open');
 		});
-
-		it('keeps its own internal state and passes it to onToggle', async () => {
-			const toggleFn = jest.fn();
-
-			const rendered = render(<Modal button={'open me'} onToggle={toggleFn} />);
-			const modal = rendered.container.querySelector('.ss__modal');
-			const button = rendered.container.querySelector('.ss__modal__button')!;
-
-			await userEvent.click(button);
-			expect(toggleFn).toHaveBeenCalledWith(expect.anything(), true);
-			expect(modal).toHaveClass('ss__modal--open');
-
-			await userEvent.click(button);
-			expect(toggleFn).toHaveBeenCalledWith(expect.anything(), false);
-			expect(modal).not.toHaveClass('ss__modal--open');
-		});
 	});
 
 	describe('external state', () => {
-		it('does not fire onToggle prop when clicked', () => {
-			const toggleFn = jest.fn();
-
-			const rendered = render(<Modal button={'open me'} onToggle={toggleFn} open={true} />);
-
-			const button = rendered.container.querySelector('.ss__modal__button')!;
-
-			userEvent.click(button);
-			expect(toggleFn).not.toHaveBeenCalled();
-		});
-
 		it('uses prop open for state', () => {
 			const rendered = render(<Modal button={'open me'} open={true} />);
 

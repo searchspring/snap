@@ -42,6 +42,18 @@ export default {
 		),
 	],
 	argTypes: {
+		value: {
+			defaultValue: '',
+			type: { required: true },
+			description: 'sets the value for the input',
+			table: {
+				type: {
+					summary: 'string',
+				},
+				defaultValue: { summary: '' },
+			},
+			control: { type: 'text' },
+		},
 		onChange: {
 			description: 'OnChange Callback',
 			table: {
@@ -82,9 +94,9 @@ export default {
 			control: { type: 'none' },
 			action: 'onChange',
 		},
-		icon: {
+		searchIcon: {
 			defaultValue: 'search',
-			description: 'Icon name',
+			description: 'Search Icon name',
 			table: {
 				type: {
 					summary: 'string',
@@ -95,6 +107,60 @@ export default {
 			control: {
 				type: 'select',
 			},
+		},
+		onSearchIconClick: {
+			description: 'search Icon OnClick Callback',
+			table: {
+				type: {
+					summary: 'function',
+				},
+			},
+			control: { type: 'none' },
+			action: 'onChange',
+		},
+		clearSearchIcon: {
+			description: 'clear Search Icon name',
+			table: {
+				type: {
+					summary: 'string',
+				},
+			},
+			options: [...Object.keys(iconPaths)],
+			control: {
+				type: 'select',
+			},
+		},
+		onClearSearchClick: {
+			description: 'clear search Icon OnClick Callback',
+			table: {
+				type: {
+					summary: 'function',
+				},
+			},
+			control: { type: 'none' },
+			action: 'onChange',
+		},
+		closeSearchIcon: {
+			description: 'clear Search Icon name',
+			table: {
+				type: {
+					summary: 'string',
+				},
+			},
+			options: [...Object.keys(iconPaths)],
+			control: {
+				type: 'select',
+			},
+		},
+		onCloseSearchClick: {
+			description: 'close search Icon OnClick Callback',
+			table: {
+				type: {
+					summary: 'function',
+				},
+			},
+			control: { type: 'none' },
+			action: 'onChange',
 		},
 		placeholderText: {
 			defaultValue: 'Search',

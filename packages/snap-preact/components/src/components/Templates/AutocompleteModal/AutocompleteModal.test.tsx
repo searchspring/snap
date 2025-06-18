@@ -146,7 +146,6 @@ describe('AutocompleteModal Component', () => {
 		};
 
 		//note this test assumes there is a banner available on that term.. which at this time there is
-		//todo use a mock for this
 		(controller.client as MockClient).mockData.updateConfig({ autocomplete: 'ac.banners' });
 
 		const input = document.querySelector('.searchspring-ac') as HTMLInputElement;
@@ -178,7 +177,6 @@ describe('AutocompleteModal Component', () => {
 		};
 
 		//note this test assumes there is a banner available on that term.. which at this time there is
-		//todo use a mock for this
 		(controller.client as MockClient).mockData.updateConfig({ autocomplete: 'ac.banners' });
 
 		const input = document.querySelector('.searchspring-ac') as HTMLInputElement;
@@ -212,7 +210,6 @@ describe('AutocompleteModal Component', () => {
 		};
 
 		//note this test assumes there is a banner available on that term.. which at this time there is
-		//todo use a mock for this
 		(controller.client as MockClient).mockData.updateConfig({ autocomplete: 'ac.banners' });
 
 		const input = document.querySelector('.searchspring-ac') as HTMLInputElement;
@@ -251,7 +248,6 @@ describe('AutocompleteModal Component', () => {
 		};
 
 		//note this test assumes there is a banner available on that term.. which at this time there is
-		//todo use a mock for this
 		(controller.client as MockClient).mockData.updateConfig({ autocomplete: 'ac.banners' });
 
 		const input = document.querySelector('.searchspring-ac') as HTMLInputElement;

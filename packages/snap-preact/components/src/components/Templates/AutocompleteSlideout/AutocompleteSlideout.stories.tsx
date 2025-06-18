@@ -261,10 +261,6 @@ const snapInstance = Snapify.autocomplete({
 });
 
 export const Default = (args: AutocompleteSlideoutProps, { loaded: { controller } }: { loaded: { controller: AutocompleteController } }) => {
-	// bind after input exists
-	setTimeout(() => {
-		controller.bind();
-	});
 	const [inputFound, setInputFound] = useState(false);
 
 	useEffect(() => {

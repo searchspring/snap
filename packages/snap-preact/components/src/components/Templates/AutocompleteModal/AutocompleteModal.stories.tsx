@@ -58,7 +58,7 @@ export default {
 	argTypes: {
 		overlayColor: {
 			defaultValue: 'rgba(0,0,0,0.0)',
-			description: 'Slideout overlay color',
+			description: 'Modal overlay color',
 			table: {
 				type: {
 					summary: 'string',
@@ -68,7 +68,7 @@ export default {
 			control: { type: 'color' },
 		},
 		buttonSelector: {
-			description: 'Slideout button selector. (defaults to input)',
+			description: 'Modal button selector. (defaults to input)',
 			table: {
 				type: {
 					summary: 'string, jsx',
@@ -187,6 +187,15 @@ export default {
 			},
 			control: { type: 'text' },
 		},
+		height: {
+			description: 'set the height of the component',
+			table: {
+				type: {
+					summary: 'string',
+				},
+			},
+			control: { type: 'text' },
+		},
 		excludeBanners: {
 			defaultValue: false,
 			description: 'automatically add merchandising banners',
@@ -250,10 +259,6 @@ const snapInstance = Snapify.autocomplete({
 });
 
 export const Default = (args: AutocompleteModalProps, { loaded: { controller } }: { loaded: { controller: AutocompleteController } }) => {
-	// bind after input exists
-	setTimeout(() => {
-		controller.bind();
-	});
 	const [inputFound, setInputFound] = useState(false);
 
 	useEffect(() => {

@@ -153,7 +153,6 @@ describe('AutocompleteSlideout Component', () => {
 		const input = document.querySelector('.searchspring-ac') as HTMLInputElement;
 		input.focus();
 		//note this test assumes there is a banner available on that term.. which at this time there is
-		//todo use a mock for this
 		input.value = 'dress';
 		(controller.client as MockClient).mockData.updateConfig({ autocomplete: 'ac.banners' });
 
@@ -183,7 +182,6 @@ describe('AutocompleteSlideout Component', () => {
 		const input = document.querySelector('.searchspring-ac') as HTMLInputElement;
 		input.focus();
 		//note this test assumes there is a banner available on that term.. which at this time there is
-		//todo use a mock for this
 		input.value = 'dress';
 		(controller.client as MockClient).mockData.updateConfig({ autocomplete: 'ac.banners' });
 
@@ -215,7 +213,6 @@ describe('AutocompleteSlideout Component', () => {
 		const input = document.querySelector('.searchspring-ac') as HTMLInputElement;
 		input.focus();
 		//note this test assumes there is a banner available on that term.. which at this time there is
-		//todo use a mock for this
 		input.value = 'dress';
 		(controller.client as MockClient).mockData.updateConfig({ autocomplete: 'ac.banners' });
 
@@ -252,7 +249,6 @@ describe('AutocompleteSlideout Component', () => {
 		const input = document.querySelector('.searchspring-ac') as HTMLInputElement;
 		input.focus();
 		//note this test assumes there is a banner available on that term.. which at this time there is
-		//todo use a mock for this
 		input.value = 'dress';
 		(controller.client as MockClient).mockData.updateConfig({ autocomplete: 'ac.banners' });
 

@@ -1,14 +1,14 @@
 import { css } from '@emotion/react';
 import { autocompleteFixedThemeComponentProps } from '../../../themeComponents/autocompleteFixed';
 import { ThemeComponent } from '../../../../providers';
-import { AutocompleteSlideoutProps } from '../../../../components/Templates/AutocompleteSlideout';
+import { AutocompleteFixedProps } from '../../../../components/Templates/AutocompleteFixed';
 
 // CSS in JS style script for the Search component
-const autocompleteFixedStyleScript = ({}: AutocompleteSlideoutProps) => {
+const autocompleteFixedStyleScript = ({}: AutocompleteFixedProps) => {
 	return css({});
 };
 
-export const autocompleteFixed: ThemeComponent<'autocompleteFixed', AutocompleteSlideoutProps> = {
+export const autocompleteFixed: ThemeComponent<'autocompleteFixed', AutocompleteFixedProps> = {
 	default: {
 		...autocompleteFixedThemeComponentProps.default,
 		autocompleteFixed: {

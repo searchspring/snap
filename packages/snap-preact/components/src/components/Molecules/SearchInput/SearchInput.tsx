@@ -4,13 +4,14 @@ import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
 import { observer } from 'mobx-react-lite';
 
-import { Icon, IconProps } from '../../Atoms/Icon/Icon';
 import { defined, mergeProps, mergeStyles } from '../../../utilities';
 import { Theme, useTheme, CacheProvider, useTreePath } from '../../../providers';
 import { ComponentProps, StyleScript } from '../../../types';
 import { IconType } from '../../Atoms/Icon';
-import { Lang } from '../../../hooks';
 import { MutableRef } from 'preact/hooks';
+import { Button, ButtonProps } from '../../Atoms/Button';
+import deepmerge from 'deepmerge';
+import { Lang, LangAttributes, useLang } from '../../../hooks/useLang';
 
 const defaultStyles: StyleScript<SearchInputProps> = ({ theme }) => {
 	return css({
@@ -29,6 +30,15 @@ const defaultStyles: StyleScript<SearchInputProps> = ({ theme }) => {
 			border: '0',
 			boxSizing: 'border-box',
 		},
+		'& .ss__search-input__icons': {
+			display: 'flex',
+			alignItems: 'center',
+
+			'& .ss__button': {
+				padding: '0px',
+				border: '0px',
+			},
+		},
 	});
 };
 
@@ -37,18 +47,88 @@ export const SearchInput = observer((properties: SearchInputProps): JSX.Element 
 	const globalTreePath = useTreePath();
 	const defaultProps: Partial<SearchInputProps> = {
 		placeholderText: 'Search',
-		icon: 'search',
+		searchIcon: 'search',
 		treePath: globalTreePath,
 	};
 
 	const props = mergeProps('searchInput', globalTheme, defaultProps, properties);
 
-	const { placeholderText, inputRef, inputName, onChange, onClick, onKeyDown, onKeyUp, icon, disabled, disableStyles, className, treePath } = props;
+	const {
+		placeholderText,
+		value,
+		closeSearchIcon,
+		onCloseSearchClick,
+		//  onImageSearchClick, imageSearchIcon,
+		onSearchIconClick,
+		searchIcon,
+		clearSearchIcon,
+		onClearSearchClick,
+		inputRef,
+		inputName,
+		onChange,
+		onClick,
+		onKeyDown,
+		onKeyUp,
+		disabled,
+		disableStyles,
+		className,
+		treePath,
+	} = props;
 
 	const subProps: SearchInputSubProps = {
-		icon: {
+		searchIcon: {
 			// default props
-			className: 'ss__search-input__icon',
+			className: 'ss__search-input__button--search-icon',
+			name: 'search-icon',
+			onClick: onSearchIconClick,
+			// inherited props
+			...defined({
+				disableStyles,
+			}),
+			// component theme overrides
+			theme: props?.theme,
+			treePath,
+		},
+		clearSearchIcon: {
+			// default props
+			className: 'ss__search-input__button--clear-search-icon',
+			name: 'clear-search-icon',
+			onClick: () => {
+				if (inputRef?.current) {
+					//reset the input value
+					(inputRef?.current as HTMLInputElement).value = '';
+					//manually trigger the input event so our event listeners in useAcRenderedInput hook get triggered
+					//and update pre-existing search inputs with new value
+					(inputRef?.current as HTMLInputElement).dispatchEvent(new Event('input', { bubbles: true }));
+				}
+				onClearSearchClick && onClearSearchClick();
+			},
+			// inherited props
+			...defined({
+				disableStyles,
+			}),
+			// component theme overrides
+			theme: props?.theme,
+			treePath,
+		},
+		// imageSearchIcon: {
+		// 	// default props
+		// 	className: 'ss__search-input__button--image-search-icon',
+		// 	name: 'image-search-icon',
+		// 	onClick: onImageSearchClick,
+		// 	// inherited props
+		// 	...defined({
+		// 		disableStyles,
+		// 	}),
+		// 	// component theme overrides
+		// 	theme: props?.theme,
+		// 	treePath,
+		// },
+		closeSearchIcon: {
+			// default props
+			className: 'ss__search-input__button--close-search-icon',
+			name: 'close-search-icon',
+			onClick: onCloseSearchClick,
 			// inherited props
 			...defined({
 				disableStyles,
@@ -61,6 +141,34 @@ export const SearchInput = observer((properties: SearchInputProps): JSX.Element 
 
 	const styling = mergeStyles<SearchInputProps>(props, defaultStyles);
 
+	//initialize lang
+	const defaultLang: Partial<SearchInputLang> = {
+		placeholderText: {
+			attributes: {
+				placeholder: placeholderText,
+			},
+		},
+		closeSearchButton: {
+			attributes: {
+				'aria-label': 'Close Search',
+			},
+		},
+		clearSearchButton: {
+			attributes: {
+				'aria-label': 'Clear Search',
+			},
+		},
+		searchButton: {
+			attributes: {
+				'aria-label': 'Submit Search',
+			},
+		},
+	};
+
+	//deep merge with props.lang
+	const lang = deepmerge(defaultLang, props.lang || {});
+	const mergedLang = useLang(lang as any, {});
+
 	return (
 		<CacheProvider>
 			<div
@@ -68,10 +176,19 @@ export const SearchInput = observer((properties: SearchInputProps): JSX.Element 
 				className={classnames('ss__search-input', { 'ss__input--disabled': disabled }, className)}
 				onClick={(e: React.MouseEvent<HTMLElement, MouseEvent>) => !disabled && onClick && onClick(e)}
 			>
+				{closeSearchIcon && (
+					<Button
+						{...subProps.closeSearchIcon}
+						{...(typeof closeSearchIcon == 'string' ? { icon: closeSearchIcon } : closeSearchIcon)}
+						{...mergedLang.closeSearchButton.all}
+					/>
+				)}
+
 				<input
 					type="text"
 					className="ss__search-input__input"
-					placeholder={placeholderText}
+					{...mergedLang.placeholderText.attributes}
+					value={value}
 					name={inputName}
 					ref={inputRef}
 					onKeyDown={(e: React.KeyboardEvent<HTMLInputElement>) => onKeyDown && onKeyDown(e)}
@@ -80,15 +197,40 @@ export const SearchInput = observer((properties: SearchInputProps): JSX.Element 
 					disabled={disabled}
 				/>
 
-				{icon && <Icon {...subProps.icon} {...(typeof icon == 'string' ? { icon: icon } : (icon as Partial<IconProps>))} />}
+				<div className="ss__search-input__icons">
+					{/* {icons?.imageSearch?.icon && <Button {...subProps.imageSearchIcon} {...(typeof icons?.imageSearch?.icon == 'string' ? { icon: icons?.imageSearch?.icon } : (icons?.imageSearch?.icon))} />} */}
+					{clearSearchIcon && value?.length ? (
+						<Button
+							{...subProps.clearSearchIcon}
+							{...(typeof clearSearchIcon == 'string' ? { icon: clearSearchIcon } : clearSearchIcon)}
+							{...mergedLang.clearSearchButton.all}
+						/>
+					) : null}
+
+					{searchIcon && (
+						<Button
+							{...subProps.searchIcon}
+							{...(typeof searchIcon == 'string' ? { icon: searchIcon } : searchIcon)}
+							{...mergedLang.searchButton.all}
+						/>
+					)}
+				</div>
 			</div>
 		</CacheProvider>
 	);
 });
 
 export interface SearchInputProps extends ComponentProps {
-	icon?: IconType | Partial<IconProps>;
+	value: string;
 	placeholderText?: string;
+	searchIcon?: Icons;
+	clearSearchIcon?: Icons;
+	closeSearchIcon?: Icons;
+	onCloseSearchClick?: () => void;
+	onClearSearchClick?: () => void;
+	onSearchIconClick?: () => void;
+	// imageSearchIcon?:Icons;
+	// onImageSearchClick?: () => void;
 	inputName?: string;
 	inputRef?: MutableRef<HTMLInputElement | null>;
 	disabled?: boolean;
@@ -100,10 +242,18 @@ export interface SearchInputProps extends ComponentProps {
 	lang?: Partial<SearchInputLang>;
 }
 
+type Icons = IconType | Partial<ButtonProps> | false;
+
 interface SearchInputSubProps {
-	icon: Partial<IconProps>;
+	searchIcon: Partial<ButtonProps>;
+	// imageSearchIcon: Partial<ButtonProps>;
+	clearSearchIcon: Partial<ButtonProps>;
+	closeSearchIcon: Partial<ButtonProps>;
 }
 
 export interface SearchInputLang {
-	placeholderText?: Lang<never>;
+	placeholderText?: LangAttributes<never>;
+	closeSearchButton?: Lang<never>;
+	clearSearchButton?: Lang<never>;
+	searchButton?: Lang<never>;
 }

@@ -117,7 +117,7 @@ The `active` prop is an optional way to specify the initial state of the slideou
 ```
 
 ### rerender
-The `rerender` prop specifies if the content in the slideout should be rerendered when the slideout is closed and reopened. 
+The `rerender` prop determines whether the slideout content should be re-rendered each time the slideout is closed and reopened. By default, this behavior is enabled to ensure better accessibility compliance by avoiding rendering content when the slideout is closed.  
 
 ```jsx
 <Slideout rerender={true}>
