@@ -53,8 +53,8 @@ export const Results = withController(
 
 				<div className="clear"></div>
 
-				<div className={`ss-toolbar ${controller.config.settings.infinite ? 'ss-toolbar-bottom-infinite' : 'ss-toolbar-bottom'}`}>
-					{controller.config.settings.infinite ? (
+				<div className={`ss-toolbar ${controller.config.settings.infinite?.enabled ? 'ss-toolbar-bottom-infinite' : 'ss-toolbar-bottom'}`}>
+					{controller.config.settings.infinite?.enabled ? (
 						<LoadMore controller={controller} />
 					) : (
 						pagination.totalPages > 1 && <Pagination pagination={pagination} />

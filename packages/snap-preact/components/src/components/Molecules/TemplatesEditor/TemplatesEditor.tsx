@@ -13,6 +13,7 @@ import { TargetStore } from '../../../../../src/Templates/Stores/TargetStore';
 import { TemplateEditorStore } from '../../../../../src/Templates/Stores/TemplateEditorStore';
 import { RecsTemplateTypes, TargetMap, TemplatesStore, TemplateThemeTypes } from '../../../../../src/Templates/Stores/TemplateStore';
 import { CurrencyCodes, LanguageCodes } from '../../../../../src/Templates/Stores/LibraryStore';
+import { SnapTemplates } from '../../../../../src';
 
 const CSS = {
 	TemplatesEditor: ({}: Partial<TemplatesEditorProps>) =>
@@ -182,7 +183,7 @@ export const TemplatesEditor = observer((properties: TemplatesEditorProps): JSX.
 		css: [CSS.TemplatesEditor({ ...properties })],
 	};
 
-	const setVariable = debounce((obj: { themeName: string; path: string[]; rootEditingKey: string; value: unknown }) => {
+	const setVariable = debounce((obj: { path: string[]; value: unknown }) => {
 		editorStore.setVariable(obj, themeRef);
 	}, 50);
 
@@ -326,9 +327,9 @@ export const TemplatesEditor = observer((properties: TemplatesEditorProps): JSX.
 					{editorStore.activeTab === 'Templates' ? (
 						<div>
 							<TemplateTargetSettings feature="search" templatesStore={templatesStore} targets={searchTargets} />
-							<ControllerSettings feature="search" templatesStore={templatesStore} />
+							<ControllerSettings editorStore={editorStore} snap={snap} feature="search" templatesStore={templatesStore} />
 							<TemplateTargetSettings feature="autocomplete" templatesStore={templatesStore} targets={autocompleteTargets} />
-							<ControllerSettings feature="autocomplete" templatesStore={templatesStore} />
+							<ControllerSettings editorStore={editorStore} snap={snap} feature="autocomplete" templatesStore={templatesStore} />
 							<TemplateTargetSettings feature="recommendation/default" templatesStore={templatesStore} targets={recommendationDefaultTargets} />
 							<TemplateTargetSettings feature="recommendation/bundle" templatesStore={templatesStore} targets={recommendationBundleTargets} />
 						</div>
@@ -500,6 +501,7 @@ export interface TemplatesEditorProps extends ComponentProps {
 	onRemoveClick: () => void;
 	templatesStore: TemplatesStore;
 	editorStore: TemplateEditorStore;
+	snap: SnapTemplates;
 }
 
 const ThemeEditor = (props: any): any => {
@@ -574,8 +576,6 @@ const ThemeEditor = (props: any): any => {
 						name={key}
 						onChange={(e) => {
 							setVariable({
-								themeName,
-								rootEditingKey,
 								path,
 								value: e.target.value,
 							});
@@ -608,8 +608,6 @@ const ThemeEditor = (props: any): any => {
 						name={key}
 						onChange={(e) => {
 							setVariable({
-								themeName,
-								rootEditingKey,
 								path,
 								value: Number(e.target.value),
 							});
@@ -621,145 +619,236 @@ const ThemeEditor = (props: any): any => {
 	}
 };
 
-const controllerSettings = {
+/*
+
+		disableA11y: {
+			description: 'boolean to disable autoset ally properties',
+			table: {
+				type: {
+					summary: 'boolean',
+				},
+				defaultValue: { summary: false },
+			},
+			control: { type: 'boolean' },
+		},
+
+*/
+
+// const controllerSettings = [
+// 	{
+// 		path: 'search.redirects.merchandising',
+// 		type: 'boolean',
+// 		defaultValue: '',
+// 		description: '',
+// 	}
+// ];
+
+const refinedControllerSettings = {
 	search: {
-		redirects: {
-			merchandising: 'boolean',
-			singleResult: 'boolean',
+		'infinite.enabled': {
+			// TODO - support enabled usage in controller
+			description: 'boolean to enable infinite scroll',
+			link: '', // for linking to documentation?
+			defaultValue: false,
+			control: { type: 'boolean', label: 'Enabled Infinite Scroll' },
 		},
-		facets: {
-			trim: 'boolean',
-			pinFiltered: 'boolean',
-			storeRange: 'boolean',
-			autoOpenActive: 'boolean',
-		},
-		infinite: {
-			backfill: 'number',
-		},
-		restorePosition: {
-			enabled: 'boolean',
-			onPageShow: 'boolean',
-		},
-		history: {
-			url: 'string',
-			max: 'number',
+		'infinite.backfill': {
+			// TODO - support enabled usage in controller
+			description: 'number of pages to allow loading on initial load (returning to page)',
+			defaultValue: 10, // TODO - default value does not exist yet until 'enabled' usage is added
+			control: { type: 'number', label: 'Number of pages to backfill' },
 		},
 	},
 	autocomplete: {
-		integratedSpellCorrection: 'boolean',
-		initializeFromUrl: 'boolean',
-		syncInputs: 'boolean',
-		serializeForm: 'boolean',
-		disableClickOutside: 'boolean',
-		facets: {
-			trim: 'boolean',
-			pinFiltered: 'boolean',
-			storeRange: 'boolean',
-			autoOpenActive: 'boolean',
+		'history.enabled': {
+			description: 'boolean to enable autocomplete term history',
+			link: '',
+			defaultValue: false,
+			control: { type: 'boolean', label: 'Enable History Terms' },
 		},
-		trending: {
-			limit: 'number',
-			showResults: 'boolean',
+		'history.limit': {
+			description: 'number of terms to store in history',
+			defaultValue: 5,
+			control: { type: 'number', label: 'History Terms Limit' },
 		},
-		history: {
-			limit: 'number',
-			showResults: 'boolean',
+		'history.showResults': {
+			description: 'boolean to select the first history term in autocomplete',
+			defaultValue: false,
+			control: { type: 'boolean', label: 'Show History Results' },
 		},
-		redirects: {
-			merchandising: 'boolean',
-			singleResult: 'boolean',
+		'trending.enabled': {
+			description: 'boolean to enable autocomplete trending terms',
+			link: '',
+			defaultValue: false,
+			control: { type: 'boolean', label: 'Enable Trending Terms' },
 		},
-		bind: {
-			input: 'boolean',
-			submit: 'boolean',
+		'trending.limit': {
+			description: 'number of trending terms to retrieve',
+			defaultValue: 5,
+			control: { type: 'number', label: 'Trending Terms Limit' },
+		},
+		'trending.showResults': {
+			description: 'boolean to select the first trending term in autocomplete',
+			defaultValue: false,
+			control: { type: 'boolean', label: 'Show Trending Results' },
 		},
 	},
 };
 
-type ControllerSettingsType = typeof controllerSettings;
+// const controllerSettings = {
+// 	search: {
+// 		redirects: {
+// 			merchandising: 'boolean',
+// 			// merchandising: {
+// 			// 	type: 'boolean',
+// 			// 	reloadRequired: false,
+// 			// 	editable: false,
+// 			// 	description: '',
+// 			// },
+// 			singleResult: 'boolean',
+// 		},
+// 		facets: {
+// 			trim: 'boolean',
+// 			pinFiltered: 'boolean',
+// 			storeRange: 'boolean',
+// 			autoOpenActive: 'boolean',
+// 		},
+// 		infinite: {
+// 			backfill: 'number',
+// 		},
+// 		restorePosition: {
+// 			enabled: 'boolean',
+// 			onPageShow: 'boolean',
+// 		},
+// 		history: {
+// 			url: 'string',
+// 			max: 'number',
+// 		},
+// 	},
+// 	autocomplete: {
+// 		integratedSpellCorrection: 'boolean',
+// 		initializeFromUrl: 'boolean',
+// 		syncInputs: 'boolean',
+// 		serializeForm: 'boolean',
+// 		disableClickOutside: 'boolean',
+// 		facets: {
+// 			trim: 'boolean',
+// 			pinFiltered: 'boolean',
+// 			storeRange: 'boolean',
+// 			autoOpenActive: 'boolean',
+// 		},
+// 		trending: {
+// 			limit: 'number',
+// 			showResults: 'boolean',
+// 		},
+// 		history: {
+// 			// enabled: true - TODO
+// 			limit: 'number',
+// 			showResults: 'boolean',
+// 		},
+// 		redirects: {
+// 			merchandising: 'boolean',
+// 			singleResult: 'boolean',
+// 		},
+// 		bind: {
+// 			input: 'boolean',
+// 			submit: 'boolean',
+// 		},
+// 	},
+// };
+
+type ControllerSettingsType = typeof refinedControllerSettings;
 type ControllerSettingsProps = {
 	feature: string;
-	templatesStore: TemplatesStore;
-	objRoot?: Record<string, any>;
-	parentId?: string;
-	nextPath?: string[];
+	editorStore: TemplateEditorStore;
+	snap: SnapTemplates;
 };
 
 const ControllerSettings = (props: ControllerSettingsProps) => {
-	const { feature, templatesStore, objRoot, parentId, nextPath } = props;
-	const [type, recsType = ''] = feature.split('/');
-
-	const idPrefix = `settings-${type}${recsType ? `-${recsType}` : ''}` + (parentId ? `-${parentId}` : '');
+	const { feature, editorStore, snap } = props;
+	const [feat, recsType = ''] = feature.split('/');
 
 	return (
 		<>
-			{Object.keys(objRoot || controllerSettings[type as keyof ControllerSettingsType]).map((settingName) => {
-				const typeSettings = controllerSettings[type as keyof ControllerSettingsType];
-				const setting = objRoot
-					? objRoot[settingName]
-					: typeSettings && typeof typeSettings === 'object'
-					? typeSettings[settingName as keyof typeof typeSettings]
-					: undefined;
+			{Object.keys(refinedControllerSettings[feat as keyof ControllerSettingsType]).map((settingName) => {
+				const id = `settings-${feat}${recsType ? `-${recsType}` : ''}-${settingName}`;
+				const typeSettings = refinedControllerSettings[feat as keyof ControllerSettingsType];
+				const settingObj = typeSettings[settingName as keyof typeof typeSettings];
 
-				console.log(settingName, setting);
+				const { control, defaultValue, description, link } = settingObj || {};
 
-				const path = [...(nextPath || []), settingName];
-				const label = path.join('.');
+				console.log('description', description, 'link', link);
 
-				if (typeof setting === 'object') {
-					return <ControllerSettings {...props} objRoot={setting} parentId={idPrefix} nextPath={path} />;
-				}
+				const { type, label } = control || {};
 
-				{
-					/* @ts-ignore - TODO: fix type later */
-				}
-				const featureConfig = templatesStore.config[type]?.settings || {};
-				let value: any = '';
-				path.forEach((p) => {
-					if (featureConfig[p]) {
-						console.log('setting value with index p ', featureConfig, p);
-						value = featureConfig[p];
+				let value: unknown = defaultValue;
+				const controller = snap?.controllers[feat];
+				const controllerConfig = controller?.config?.settings;
+				let activeConfig = controllerConfig;
+				settingName.split('.').forEach((p: string) => {
+					// @ts-ignore - temp
+					if (p in activeConfig && typeof activeConfig[p] === 'object') {
+						// @ts-ignore - temp
+						activeConfig = activeConfig?.[p];
+						// @ts-ignore - temp
+					} else if (typeof activeConfig?.[p] !== 'undefined') {
+						// @ts-ignore - temp
+						value = activeConfig?.[p];
 					}
 				});
 
-				{
-					/* @ts-ignore - TODO: fix type later */
-				}
-				if (value[settingName]) {
-					{
-						/* @ts-ignore - TODO: fix type later */
-					}
-					value = value[settingName];
-				}
-
-				if (setting === 'string') {
-					if (typeof value !== 'string') {
-						value = undefined;
-					}
+				if (type === 'string') {
 					return (
 						<div className="option">
-							<label htmlFor={`${idPrefix}-${setting}`}>{label}:</label>
-							<input type="text" value={value} />
+							<label htmlFor={id}>{label}:</label>
+							<input
+								id={id}
+								type="text"
+								value={value as string}
+								onChange={(e) => {
+									editorStore.setControllerOverride({
+										feat,
+										path: settingName.split('.'),
+										value: e.target.value,
+									});
+								}}
+							/>
 						</div>
 					);
-				} else if (setting === 'boolean') {
-					if (typeof value !== 'boolean') {
-						value = undefined;
-					}
+				} else if (type === 'boolean') {
 					return (
 						<div className="option">
-							<label htmlFor={`${idPrefix}-${setting}`}>{label}:</label>
-							<input type="checkbox" checked={value} />
+							<label htmlFor={id}>{label}:</label>
+							<input
+								id={id}
+								type="checkbox"
+								checked={value as boolean}
+								onChange={(e) => {
+									editorStore.setControllerOverride({
+										feat,
+										path: settingName.split('.'),
+										value: e.target.checked,
+									});
+								}}
+							/>
 						</div>
 					);
-				} else if (setting === 'number') {
-					if (typeof value !== 'number') {
-						value = undefined;
-					}
+				} else if (type === 'number') {
 					return (
 						<div className="option">
-							<label htmlFor={`${idPrefix}-${setting}`}>{label}:</label>
-							<input type="number" value={value} />
+							<label htmlFor={id}>{label}:</label>
+							<input
+								id={id}
+								type="number"
+								value={value as number}
+								onChange={(e) => {
+									editorStore.setControllerOverride({
+										feat,
+										path: settingName.split('.'),
+										value: Number(e.target.value),
+									});
+								}}
+							/>
 						</div>
 					);
 				}
@@ -800,7 +889,7 @@ const TemplateTargetSettings = (props: TemplateTargetSettingsProps) => {
 		<>
 			<div className="heading">
 				<h2>
-					{type.charAt(0).toUpperCase() + type.slice(1) + (recsType ? ` (${recsType})` : '')} <button>config</button>
+					{type.charAt(0).toUpperCase() + type.slice(1) + (recsType ? ` (${recsType})` : '')} <button>controller config</button>
 				</h2>
 			</div>
 

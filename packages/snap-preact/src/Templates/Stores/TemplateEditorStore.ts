@@ -12,11 +12,13 @@ export class TemplateEditorStore {
 	tabs: Tabs[] = ['Templates', 'Configuration'];
 	activeTab: Tabs = 'Templates';
 	variableOverrides = {};
+	controllerOverrides = {};
 	templatesStore?: TemplatesStore;
 
 	constructor() {
 		this.storage = new StorageStore({ type: StorageType.local, key: 'ss-templates' });
 		this.variableOverrides = this.storage.get('variableOverrides') || {};
+		this.controllerOverrides = this.storage.get('controllerOverrides') || {};
 
 		makeObservable(this, {
 			activeTab: observable,
@@ -51,8 +53,7 @@ export class TemplateEditorStore {
 		themeRef.setEditorOverrides(this.variableOverrides);
 	}
 
-	setVariable(obj: { themeName: string; path: string[]; rootEditingKey: string; value: unknown }, themeRef: ThemeStore) {
-		// const { path, value } = JSON.parse(JSON.stringify(obj));
+	setVariable(obj: { path: string[]; value: unknown }, themeRef: ThemeStore) {
 		const { path, value } = obj;
 		const variableOverrides = {
 			variables: path
@@ -69,11 +70,31 @@ export class TemplateEditorStore {
 					};
 				}, {}),
 		};
-		console.log('variableOverrides', variableOverrides);
 		this.variableOverrides = deepmerge(this.variableOverrides, variableOverrides);
-		// themeRef.setOverride(obj); // call to re-render in real time
 		themeRef.setEditorOverrides(this.variableOverrides);
 		this.storage.set('variableOverrides', this.variableOverrides);
+	}
+
+	setControllerOverride(obj: { path: string[]; value: unknown; feat: string }) {
+		const { path, value, feat } = obj;
+		const controllerOverrides = {
+			[feat]: path
+				.slice()
+				.reverse()
+				.reduce((res, key) => {
+					if (path.indexOf(key) === path.length - 1) {
+						return {
+							[key]: value,
+						};
+					}
+					return {
+						[key]: res,
+					};
+				}, {}),
+		};
+
+		this.controllerOverrides = deepmerge(this.controllerOverrides, controllerOverrides);
+		this.storage.set('controllerOverrides', this.controllerOverrides);
 	}
 
 	switchTabs(tab: Tabs) {

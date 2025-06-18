@@ -8,7 +8,7 @@ import { DomTargeter, url, cookies, getContext } from '@searchspring/snap-toolbo
 import { TemplateTarget, TemplatesStore } from './Stores/TemplateStore';
 
 import type { Target } from '@searchspring/snap-toolbox';
-import type { SearchStoreConfigSettings, AutocompleteStoreConfigSettings } from '@searchspring/snap-store-mobx';
+import { type SearchStoreConfigSettings, type AutocompleteStoreConfigSettings, StorageStore, StorageType } from '@searchspring/snap-store-mobx';
 import type { UrlTranslatorConfig } from '@searchspring/snap-url-manager';
 import type { PluginGrouping } from '@searchspring/snap-controller';
 import type {
@@ -360,6 +360,9 @@ export function createRecommendationComponentMapping(
 }
 
 export function createSnapConfig(templateConfig: SnapTemplatesConfig, templatesStore: TemplatesStore): SnapConfig {
+	const storage = new StorageStore({ type: StorageType.local, key: 'ss-templates' });
+	const controllerOverrides = storage.get('controllerOverrides');
+
 	const snapConfig: SnapConfig = {
 		features: templateConfig.features || DEFAULT_FEATURES,
 		client: {
@@ -382,7 +385,7 @@ export function createSnapConfig(templateConfig: SnapTemplatesConfig, templatesS
 			config: {
 				id: 'search',
 				plugins: createPlugins(templateConfig, templatesStore, 'search'),
-				settings: templateConfig.search.settings || {},
+				settings: deepmerge(templateConfig.search.settings || {}, controllerOverrides?.['search'] || {}),
 			},
 			targeters: createSearchTargeters(templateConfig, templatesStore),
 		};
@@ -400,8 +403,8 @@ export function createSnapConfig(templateConfig: SnapTemplatesConfig, templatesS
 	/* AUTOCOMPLETE CONTROLLER */
 	if (templateConfig.autocomplete && snapConfig.controllers) {
 		const autocompleteControllerSettings: AutocompleteStoreConfigSettings = deepmerge(
-			DEFAULT_AUTOCOMPLETE_CONTROLLER_SETTINGS,
-			templateConfig.autocomplete.settings || {}
+			deepmerge(DEFAULT_AUTOCOMPLETE_CONTROLLER_SETTINGS, templateConfig.autocomplete.settings || {}),
+			controllerOverrides?.['autocomplete'] || {}
 		);
 
 		const autocompleteControllerConfig = {
