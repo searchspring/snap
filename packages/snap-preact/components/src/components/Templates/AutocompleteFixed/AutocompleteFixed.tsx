@@ -144,7 +144,7 @@ export const AutocompleteFixed = observer((properties: AutocompleteFixedProps): 
 			}),
 			// component theme overrides
 			theme: props?.theme,
-			treePath,
+			treePath: `${treePath} modal`,
 		},
 	};
 
@@ -212,7 +212,13 @@ export const AutocompleteFixed = observer((properties: AutocompleteFixedProps): 
 								<></>
 							)}
 							<div className="ss__autocomplete-fixed__inner__layout-wrapper">
-								<AutocompleteLayout {...acProps} {...subProps.autocompleteTemplate} input={_input!} controller={controller} />
+								<AutocompleteLayout
+									{...acProps}
+									{...subProps.autocompleteTemplate}
+									input={_input!}
+									controller={controller}
+									treePath={`${treePath} modal`}
+								/>
 							</div>
 						</div>
 

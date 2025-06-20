@@ -159,7 +159,7 @@ export const AutocompleteModal = observer((properties: AutocompleteModalProps): 
 			}),
 			// component theme overrides
 			theme: props?.theme,
-			treePath,
+			treePath: `${treePath} modal`,
 		},
 	};
 
@@ -198,7 +198,13 @@ export const AutocompleteModal = observer((properties: AutocompleteModalProps): 
 							) : (
 								<></>
 							)}
-							<AutocompleteLayout {...acProps} {...subProps.autocompleteTemplate} input={_input!} controller={controller} />
+							<AutocompleteLayout
+								{...acProps}
+								{...subProps.autocompleteTemplate}
+								input={_input!}
+								controller={controller}
+								treePath={`${treePath} modal`}
+							/>
 						</div>
 
 						<Overlay

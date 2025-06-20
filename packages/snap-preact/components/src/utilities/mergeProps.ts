@@ -32,7 +32,7 @@ export function mergeProps<GenericComponentProps = ComponentProps>(
 
 	let treePath = (props as ComponentProps).treePath || (defaultProps as ComponentProps).treePath || '';
 
-	if (componentType !== 'layout' && componentType !== 'autocompleteTemplate') {
+	if (componentType !== 'layout' && componentType !== 'autocompleteLayout') {
 		treePath += `${treePath ? ' ' : ''}${componentType}`;
 	}
 

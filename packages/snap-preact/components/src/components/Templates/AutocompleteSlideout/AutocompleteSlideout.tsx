@@ -109,7 +109,6 @@ export const AutocompleteSlideout = observer((properties: AutocompleteSlideoutPr
 			}),
 			// component theme overrides
 			theme: props?.theme,
-			treePath,
 		},
 	};
 
@@ -156,7 +155,13 @@ export const AutocompleteSlideout = observer((properties: AutocompleteSlideoutPr
 				) : (
 					<></>
 				)}
-				<AutocompleteLayout {...acProps} {...subProps.autocompleteTemplate} input={_input!} controller={controller} />
+				<AutocompleteLayout
+					{...acProps}
+					{...subProps.autocompleteTemplate}
+					input={_input!}
+					controller={controller}
+					treePath={`${treePath} slideout`}
+				/>
 			</Slideout>
 		</CacheProvider>
 	) : (

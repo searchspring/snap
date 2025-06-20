@@ -224,7 +224,6 @@ export const AutocompleteLayout = observer((properties: AutocompleteLayoutProps)
 	};
 
 	let props = mergeProps('autocompleteLayout', globalTheme, defaultProps, properties);
-	delete props.treePath;
 
 	const valueProps = createHoverProps();
 
