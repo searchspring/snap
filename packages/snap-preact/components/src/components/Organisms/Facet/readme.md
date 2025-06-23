@@ -12,6 +12,8 @@ Renders a single complete facet. This includes determining the correct options t
 - FacetSlider
 - Icon
 - SearchInput
+- Button
+
 
 ## Usage
 
@@ -114,9 +116,23 @@ The `showSelectedCount` prop shows the number of selected options within the fac
 <Facet facet={controller.store.facets[0]} showSelectedCount={true} />
 ```
 
+### hideSelectedCountParenthesis
+The `hideSelectedCountParenthesis` prop specifies if the parenthesis should render around the selected count in the facet header.
+
+```jsx
+<Facet facet={controller.store.facets[0]} hideSelectedCountParenthesis={true} />
+```
+
+### showClearAllText
+The `showClearAllText` prop specifies if the clear all text should render.
+
+```jsx
+<Facet facet={controller.store.facets[0]} showSelectedCount={true} showClearAllText={true} />
+```
+
 
 ### clearAllText
-The `clearAllText` prop specifies the text displayed in the facet header when options are selected. Clicking it clears all currently selected options.
+The `clearAllText` prop specifies the text displayed in the facet header when options are selected. Clicking it clears all currently selected options. Defaults to 'Clear All'
 
 ```jsx
 <Facet facet={controller.store.facets[0]} clearAllText={'Clear All'} />

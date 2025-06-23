@@ -113,12 +113,33 @@ export default {
 			},
 			control: { type: 'boolean' },
 		},
+		hideSelectedCountParenthesis: {
+			description: 'specifies if the parenthesis should render around the selected count',
+			table: {
+				type: {
+					summary: 'boolean',
+				},
+				defaultValue: { summary: false },
+			},
+			control: { type: 'boolean' },
+		},
+		showClearAllText: {
+			description: 'specifies if the clear all text should render',
+			table: {
+				type: {
+					summary: 'boolean',
+				},
+				defaultValue: { summary: false },
+			},
+			control: { type: 'boolean' },
+		},
 		clearAllText: {
 			description: 'text to show in the clear all link',
 			table: {
 				type: {
 					summary: 'string',
 				},
+				defaultValue: { summary: 'Clear All' },
 			},
 			control: { type: 'text' },
 		},
@@ -128,10 +149,11 @@ export default {
 				type: {
 					summary: 'string',
 				},
+				defaultValue: { summary: '' },
 			},
+			options: [...Object.keys(iconPaths)],
 			control: {
 				type: 'select',
-				options: [...Object.keys(iconPaths)],
 			},
 		},
 		disableCollapse: {

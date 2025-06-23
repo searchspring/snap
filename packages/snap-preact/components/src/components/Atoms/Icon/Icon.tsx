@@ -112,5 +112,4 @@ export type IconNames =
 	| 'close'
 	| 'option'
 	| 'expand'
-	| 'collapse'
-	| 'clear-all';
+	| 'collapse';
