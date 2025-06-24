@@ -384,6 +384,7 @@ export const Facet = observer((properties: FacetProps): JSX.Element => {
 										name={'reset-facet'}
 										onClick={() => {
 											facet?.clear.url.link.onClick();
+											facet.toggleCollapse();
 										}}
 										icon={clearAllIcon ? clearAllIcon : undefined}
 									>

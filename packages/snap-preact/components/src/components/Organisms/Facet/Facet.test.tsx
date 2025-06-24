@@ -157,7 +157,6 @@ describe('Facet Component', () => {
 			};
 
 			const rendered = render(<Facet {...args} />);
-			rendered.debug();
 			const optionElems = rendered.container.querySelectorAll('.ss__facet-grid-options__option')!;
 			expect(optionElems.length).toBeGreaterThan(0);
 
@@ -196,7 +195,6 @@ describe('Facet Component', () => {
 			};
 
 			const rendered = render(<Facet {...args} />);
-			rendered.debug();
 			const optionElems = rendered.container.querySelectorAll('.ss__facet-grid-options__option')!;
 			expect(optionElems.length).toBeGreaterThan(0);
 
@@ -234,7 +232,6 @@ describe('Facet Component', () => {
 			};
 
 			const rendered = render(<Facet {...args} />);
-			rendered.debug();
 			const optionElems = rendered.container.querySelectorAll('.ss__facet-grid-options__option')!;
 			expect(optionElems.length).toBeGreaterThan(0);
 
