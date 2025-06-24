@@ -42,6 +42,30 @@ The `limit` prop sets the number of options to display before the remaining opti
 <Facet facet={controller.store.facets[0]} limit={10} />
 ```
 
+### showSelectedCount
+The `showSelectedCount` prop shows the number of selected options within the facet in the facet header.
+
+```jsx
+<Facet facet={controller.store.facets[0]} showSelectedCount={true} />
+```
+
+
+### clearAllText
+The `clearAllText` prop specifies the text displayed in the facet header when options are selected. Clicking it clears all currently selected options.
+
+```jsx
+<Facet facet={controller.store.facets[0]} clearAllText={'Clear All'} />
+```
+
+
+### clearAllIcon
+The `clearAllIcon` prop specifies the icon displayed in the facet header when options are selected. Clicking it clears all currently selected options.
+
+```jsx
+<Facet facet={controller.store.facets[0]} clearAllIcon={'ban'} />
+```
+
+
 ### previewOnFocus
 If using within Autocomplete, the `previewOnFocus` prop will invoke the `value.preview()` method when the value has been hovered over. 
 
