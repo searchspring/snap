@@ -382,9 +382,9 @@ export const Facet = observer((properties: FacetProps): JSX.Element => {
 										{...subProps.button}
 										className="ss__facet__header__clear-all"
 										name={'reset-facet'}
-										onClick={() => {
+										onClick={(e) => {
+											e.stopPropagation();
 											facet?.clear.url.link.onClick();
-											facet.toggleCollapse();
 										}}
 										icon={clearAllIcon ? clearAllIcon : undefined}
 									>
