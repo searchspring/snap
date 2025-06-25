@@ -203,6 +203,12 @@ describe('ThemeStore', () => {
 
 		expect(store.theme).toStrictEqual({
 			...merged,
+			components: {
+				...merged.components,
+				'*(M)results': {
+					columns: 1,
+				},
+			},
 			name: config.name,
 			activeBreakpoint: 'mobile',
 		});
@@ -237,6 +243,12 @@ describe('ThemeStore', () => {
 
 		expect(store.theme).toStrictEqual({
 			...merged,
+			components: {
+				...merged.components,
+				'*(M)results': {
+					columns: 1,
+				},
+			},
 			name: config.name,
 			activeBreakpoint: 'mobile',
 		});
@@ -275,6 +287,12 @@ describe('ThemeStore', () => {
 
 		expect(store.theme).toStrictEqual({
 			...merged,
+			components: {
+				...merged.components,
+				'*(M)results': {
+					columns: 1,
+				},
+			},
 			name: config.name,
 			activeBreakpoint: 'mobile',
 		});
@@ -325,6 +343,12 @@ describe('ThemeStore', () => {
 
 		expect(store.theme).toStrictEqual({
 			...merged,
+			components: {
+				...merged.components,
+				'*(M)results': {
+					columns: 1,
+				},
+			},
 			name: config.name,
 			activeBreakpoint: 'mobile',
 		});

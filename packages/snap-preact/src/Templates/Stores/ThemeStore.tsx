@@ -161,10 +161,10 @@ export class ThemeStore {
 		const activeBreakpoint = getActiveBreakpoint(this.innerWidth, breakpoints);
 
 		// overrides breakpoint is index file responsive overrides that match current breakpoint
-		const overrideBreakpoint = getOverridesAtActiveBreakpoint(activeBreakpoint, this.innerWidth, this.overrides);
+		const overrideBreakpoint = getOverridesAtActiveBreakpoint(activeBreakpoint, this.overrides);
 
 		// currently selected theme layer for current breakpoint
-		const baseBreakpoint = getOverridesAtActiveBreakpoint(activeBreakpoint, this.innerWidth, this.base);
+		const baseBreakpoint = getOverridesAtActiveBreakpoint(activeBreakpoint, this.base);
 		// currently selected theme
 		const base = { ...this.base };
 
@@ -276,10 +276,10 @@ export function getActiveBreakpoint(width: number | undefined, breakpoints: Them
 	return breakpoint || 'default';
 }
 
-export function getOverridesAtActiveBreakpoint(activeBreakpoint: ResponsiveKeys, width: number | undefined, theme: ThemePartial): ThemePartial {
+export function getOverridesAtActiveBreakpoint(activeBreakpoint: ResponsiveKeys, theme: ThemePartial): ThemePartial {
 	let overrides: ThemePartial = {};
 
-	if (width && Number.isInteger(width) && activeBreakpoint && theme.responsive) {
+	if (activeBreakpoint && theme.responsive) {
 		overrides = (theme.responsive && (theme.responsive as any)[activeBreakpoint]) || {};
 	}
 	return { components: overrides };
