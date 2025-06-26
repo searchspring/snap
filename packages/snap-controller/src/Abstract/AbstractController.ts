@@ -263,4 +263,8 @@ export abstract class AbstractController {
 			});
 		}
 	}
+
+	setConfig(newConfig: any): void {
+		this.config = newConfig;
+	}
 }

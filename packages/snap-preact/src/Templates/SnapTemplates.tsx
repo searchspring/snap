@@ -10,7 +10,7 @@ import { TemplateTarget, TemplatesStore } from './Stores/TemplateStore';
 import type { Target } from '@searchspring/snap-toolbox';
 import { type SearchStoreConfigSettings, type AutocompleteStoreConfigSettings, StorageStore, StorageType } from '@searchspring/snap-store-mobx';
 import type { UrlTranslatorConfig } from '@searchspring/snap-url-manager';
-import type { PluginGrouping } from '@searchspring/snap-controller';
+import type { AutocompleteController, PluginGrouping, SearchController } from '@searchspring/snap-controller';
 import type {
 	RecommendationInstantiatorConfigSettings,
 	RecommendationComponentObject,
@@ -204,6 +204,24 @@ export class SnapTemplates extends Snap {
 						const TemplateEditor = (await import('../../components/src')).TemplatesEditor;
 						const TemplateEditorStore = (await import('../Templates/Stores/TemplateEditorStore')).TemplateEditorStore;
 						const templateEditorStore = new TemplateEditorStore();
+
+						const storage = new StorageStore({ type: StorageType.local, key: 'ss-templates' });
+						const controllerOverrides = storage.get('controllerOverrides');
+						if (!controllerOverrides?.['search'] || (controllerOverrides?.['search'] && Object.keys(controllerOverrides['search']).length == 0)) {
+							// this is an inital page load without overrides
+							// register the controllers config into the templateEditorStore
+							// tempalteEditorStore will need to also save that to localstorage separatly for furture reset-to values when overrides exist
+							const searchDefaultControllerConfig = (this.controllers['search'] as SearchController).config.settings!;
+							templateEditorStore.registerDefaultControllerConfig('search', searchDefaultControllerConfig);
+						}
+
+						if (
+							!controllerOverrides?.['autocomplete'] ||
+							(controllerOverrides?.['autocomplete'] && Object.keys(controllerOverrides['autocomplete']).length == 0)
+						) {
+							const autocompleteDefaultControllerConfig = (this.controllers['autocomplete'] as AutocompleteController).config.settings!;
+							templateEditorStore.registerDefaultControllerConfig('autocomplete', autocompleteDefaultControllerConfig);
+						}
 
 						render(
 							<TemplateEditor

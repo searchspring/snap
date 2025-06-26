@@ -87,7 +87,7 @@ export class ThemeStore {
 		this.dependencies = dependencies;
 		this.editMode = settings.editMode;
 
-		const { name, style, type, base, overrides, editorOverrides, variables, currency, language, languageOverrides, innerWidth } = config;
+		const { name, style, type, base, overrides, variables, currency, language, languageOverrides, innerWidth } = config;
 
 		// add prefixes to base theme components and responsive components
 		base.components = prefixComponentKeys('*', base.components);
@@ -108,7 +108,7 @@ export class ThemeStore {
 		this.base = base;
 		this.layout = new SelectedLayout(this.dependencies.storage, this.name, this.type);
 		this.overrides = overrides || {};
-		this.editorOverrides = editorOverrides || {};
+		this.editorOverrides = this.dependencies.storage.get('variableOverrides') || {};
 		this.variables = variables || {};
 		this.currency = currency;
 		this.language = language;

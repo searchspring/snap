@@ -14,6 +14,7 @@ import { TemplateEditorStore } from '../../../../../src/Templates/Stores/Templat
 import { RecsTemplateTypes, TargetMap, TemplatesStore, TemplateThemeTypes } from '../../../../../src/Templates/Stores/TemplateStore';
 import { CurrencyCodes, LanguageCodes } from '../../../../../src/Templates/Stores/LibraryStore';
 import { SnapTemplates } from '../../../../../src';
+import { AutocompleteController, SearchController } from '@searchspring/snap-controller';
 
 const CSS = {
 	TemplatesEditor: ({}: Partial<TemplatesEditorProps>) =>
@@ -125,6 +126,20 @@ const CSS = {
 				display: 'flex',
 				alignItems: 'center',
 				gap: '1em',
+				a: {
+					display: 'inline-block',
+					backgroundColor: '#6a6a6a',
+					color: 'white',
+					textDecoration: 'none',
+					fontSize: '9px',
+					fontWeight: 'bold',
+					borderRadius: '50%',
+					height: '12px',
+					width: '12px',
+					textAlign: 'center',
+					lineHeight: 1.5,
+					verticalAlign: 'middle',
+				},
 			},
 		}),
 };
@@ -327,9 +342,19 @@ export const TemplatesEditor = observer((properties: TemplatesEditorProps): JSX.
 					{editorStore.activeTab === 'Templates' ? (
 						<div>
 							<TemplateTargetSettings feature="search" templatesStore={templatesStore} targets={searchTargets} />
-							<ControllerSettings editorStore={editorStore} snap={snap} feature="search" templatesStore={templatesStore} />
+							<ControllerSettings
+								editorStore={editorStore}
+								snap={snap}
+								feature="search"
+								// templatesStore={templatesStore}
+							/>
 							<TemplateTargetSettings feature="autocomplete" templatesStore={templatesStore} targets={autocompleteTargets} />
-							<ControllerSettings editorStore={editorStore} snap={snap} feature="autocomplete" templatesStore={templatesStore} />
+							<ControllerSettings
+								editorStore={editorStore}
+								snap={snap}
+								feature="autocomplete"
+								// templatesStore={templatesStore}
+							/>
 							<TemplateTargetSettings feature="recommendation/default" templatesStore={templatesStore} targets={recommendationDefaultTargets} />
 							<TemplateTargetSettings feature="recommendation/bundle" templatesStore={templatesStore} targets={recommendationBundleTargets} />
 						</div>
@@ -475,12 +500,28 @@ export const TemplatesEditor = observer((properties: TemplatesEditorProps): JSX.
 
 				<footer>
 					<ResetAllVariablesButton editorStore={editorStore} themeRef={themeRef} />
+					<ReloadRequiredButton editorStore={editorStore} />
 				</footer>
 			</div>
 		</CacheProvider>
 	);
 });
 
+const ReloadRequiredButton = (props: any) => {
+	const { editorStore } = props;
+	if (!editorStore.reloadRequired || editorStore.activeTab !== 'Templates') {
+		return null;
+	}
+	return (
+		<button
+			onClick={() => {
+				window.location.reload();
+			}}
+		>
+			Reload Required
+		</button>
+	);
+};
 const ResetAllVariablesButton = (props: any) => {
 	const { editorStore, themeRef } = props;
 	if (Object.keys(editorStore.variableOverrides).length === 0 || editorStore.activeTab !== 'Configuration') {
@@ -529,7 +570,9 @@ const ThemeEditor = (props: any): any => {
 			path.forEach((p) => {
 				obj = obj[p];
 			});
-			return obj === val;
+			if (obj && obj === val) {
+				return true;
+			}
 		} catch (e) {
 			return false;
 		}
@@ -634,162 +677,60 @@ const ThemeEditor = (props: any): any => {
 
 */
 
-// const controllerSettings = [
-// 	{
-// 		path: 'search.redirects.merchandising',
-// 		type: 'boolean',
-// 		defaultValue: '',
-// 		description: '',
-// 	}
-// ];
-
-const refinedControllerSettings = {
-	search: {
-		'infinite.enabled': {
-			// TODO - support enabled usage in controller
-			description: 'boolean to enable infinite scroll',
-			link: '', // for linking to documentation?
-			defaultValue: false,
-			control: { type: 'boolean', label: 'Enabled Infinite Scroll' },
-		},
-		'infinite.backfill': {
-			// TODO - support enabled usage in controller
-			description: 'number of pages to allow loading on initial load (returning to page)',
-			defaultValue: 10, // TODO - default value does not exist yet until 'enabled' usage is added
-			control: { type: 'number', label: 'Number of pages to backfill' },
-		},
-	},
-	autocomplete: {
-		'history.enabled': {
-			description: 'boolean to enable autocomplete term history',
-			link: '',
-			defaultValue: false,
-			control: { type: 'boolean', label: 'Enable History Terms' },
-		},
-		'history.limit': {
-			description: 'number of terms to store in history',
-			defaultValue: 5,
-			control: { type: 'number', label: 'History Terms Limit' },
-		},
-		'history.showResults': {
-			description: 'boolean to select the first history term in autocomplete',
-			defaultValue: false,
-			control: { type: 'boolean', label: 'Show History Results' },
-		},
-		'trending.enabled': {
-			description: 'boolean to enable autocomplete trending terms',
-			link: '',
-			defaultValue: false,
-			control: { type: 'boolean', label: 'Enable Trending Terms' },
-		},
-		'trending.limit': {
-			description: 'number of trending terms to retrieve',
-			defaultValue: 5,
-			control: { type: 'number', label: 'Trending Terms Limit' },
-		},
-		'trending.showResults': {
-			description: 'boolean to select the first trending term in autocomplete',
-			defaultValue: false,
-			control: { type: 'boolean', label: 'Show Trending Results' },
-		},
-	},
-};
-
-// const controllerSettings = {
-// 	search: {
-// 		redirects: {
-// 			merchandising: 'boolean',
-// 			// merchandising: {
-// 			// 	type: 'boolean',
-// 			// 	reloadRequired: false,
-// 			// 	editable: false,
-// 			// 	description: '',
-// 			// },
-// 			singleResult: 'boolean',
-// 		},
-// 		facets: {
-// 			trim: 'boolean',
-// 			pinFiltered: 'boolean',
-// 			storeRange: 'boolean',
-// 			autoOpenActive: 'boolean',
-// 		},
-// 		infinite: {
-// 			backfill: 'number',
-// 		},
-// 		restorePosition: {
-// 			enabled: 'boolean',
-// 			onPageShow: 'boolean',
-// 		},
-// 		history: {
-// 			url: 'string',
-// 			max: 'number',
-// 		},
-// 	},
-// 	autocomplete: {
-// 		integratedSpellCorrection: 'boolean',
-// 		initializeFromUrl: 'boolean',
-// 		syncInputs: 'boolean',
-// 		serializeForm: 'boolean',
-// 		disableClickOutside: 'boolean',
-// 		facets: {
-// 			trim: 'boolean',
-// 			pinFiltered: 'boolean',
-// 			storeRange: 'boolean',
-// 			autoOpenActive: 'boolean',
-// 		},
-// 		trending: {
-// 			limit: 'number',
-// 			showResults: 'boolean',
-// 		},
-// 		history: {
-// 			// enabled: true - TODO
-// 			limit: 'number',
-// 			showResults: 'boolean',
-// 		},
-// 		redirects: {
-// 			merchandising: 'boolean',
-// 			singleResult: 'boolean',
-// 		},
-// 		bind: {
-// 			input: 'boolean',
-// 			submit: 'boolean',
-// 		},
-// 	},
-// };
-
-type ControllerSettingsType = typeof refinedControllerSettings;
+type ControllerSettingsType = TemplateEditorStore['refinedControllerSettings'];
 type ControllerSettingsProps = {
 	feature: string;
 	editorStore: TemplateEditorStore;
 	snap: SnapTemplates;
 };
 
-const ControllerSettings = (props: ControllerSettingsProps) => {
+const ControllerSettings = observer((props: ControllerSettingsProps) => {
 	const { feature, editorStore, snap } = props;
 	const [feat, recsType = ''] = feature.split('/');
 
+	const shouldShowResetButton = (path: string[], val: unknown) => {
+		try {
+			let obj = editorStore.controllerOverrides[feat as keyof typeof editorStore.controllerOverrides];
+			if (!obj) {
+				// no overrides at this moment
+				return false;
+			}
+
+			path.forEach((p) => {
+				obj = obj[p];
+			});
+			if (obj && obj === val) {
+				return true;
+			}
+		} catch (e) {
+			console.log(e);
+			return false;
+		}
+	};
+
 	return (
 		<>
-			{Object.keys(refinedControllerSettings[feat as keyof ControllerSettingsType]).map((settingName) => {
+			{Object.keys(editorStore.refinedControllerSettings[feat as keyof ControllerSettingsType]).map((settingName) => {
 				const id = `settings-${feat}${recsType ? `-${recsType}` : ''}-${settingName}`;
-				const typeSettings = refinedControllerSettings[feat as keyof ControllerSettingsType];
+				const typeSettings = editorStore.refinedControllerSettings[feat as keyof ControllerSettingsType];
 				const settingObj = typeSettings[settingName as keyof typeof typeSettings];
 
-				const { control, defaultValue, description, link } = settingObj || {};
-
-				console.log('description', description, 'link', link);
+				const { control, link } = settingObj || {};
 
 				const { type, label } = control || {};
 
-				let value: unknown = defaultValue;
-				const controller = snap?.controllers[feat];
+				let value: unknown;
+
+				// assign value based on current controller configuration
+				const controller = snap?.controllers[feat] as SearchController | AutocompleteController;
 				const controllerConfig = controller?.config?.settings;
 				let activeConfig = controllerConfig;
-				settingName.split('.').forEach((p: string) => {
+				const path = settingName.split('.');
+				path.forEach((p: string) => {
 					// @ts-ignore - temp
-					if (p in activeConfig && typeof activeConfig[p] === 'object') {
+					if (typeof activeConfig === 'object' && p in activeConfig && typeof activeConfig[p] === 'object') {
 						// @ts-ignore - temp
-						activeConfig = activeConfig?.[p];
+						activeConfig = activeConfig[p];
 						// @ts-ignore - temp
 					} else if (typeof activeConfig?.[p] !== 'undefined') {
 						// @ts-ignore - temp
@@ -800,7 +741,22 @@ const ControllerSettings = (props: ControllerSettingsProps) => {
 				if (type === 'string') {
 					return (
 						<div className="option">
-							<label htmlFor={id}>{label}:</label>
+							<label htmlFor={id}>
+								{label}{' '}
+								<a target="snapdocs" href={link}>
+									i
+								</a>
+								:
+							</label>
+							{shouldShowResetButton(path, value) && (
+								<button
+									onClick={() => {
+										editorStore.resetControllerOverride({ path, feat, controller });
+									}}
+								>
+									reset
+								</button>
+							)}
 							<input
 								id={id}
 								type="text"
@@ -808,8 +764,9 @@ const ControllerSettings = (props: ControllerSettingsProps) => {
 								onChange={(e) => {
 									editorStore.setControllerOverride({
 										feat,
-										path: settingName.split('.'),
+										path,
 										value: e.target.value,
+										controller,
 									});
 								}}
 							/>
@@ -818,7 +775,22 @@ const ControllerSettings = (props: ControllerSettingsProps) => {
 				} else if (type === 'boolean') {
 					return (
 						<div className="option">
-							<label htmlFor={id}>{label}:</label>
+							<label htmlFor={id}>
+								{label}{' '}
+								<a target="snapdocs" href={link}>
+									i
+								</a>
+								:
+							</label>
+							{shouldShowResetButton(path, value) && (
+								<button
+									onClick={() => {
+										editorStore.resetControllerOverride({ path, feat, controller });
+									}}
+								>
+									reset
+								</button>
+							)}
 							<input
 								id={id}
 								type="checkbox"
@@ -828,6 +800,7 @@ const ControllerSettings = (props: ControllerSettingsProps) => {
 										feat,
 										path: settingName.split('.'),
 										value: e.target.checked,
+										controller,
 									});
 								}}
 							/>
@@ -836,7 +809,22 @@ const ControllerSettings = (props: ControllerSettingsProps) => {
 				} else if (type === 'number') {
 					return (
 						<div className="option">
-							<label htmlFor={id}>{label}:</label>
+							<label htmlFor={id}>
+								{label}{' '}
+								<a target="snapdocs" href={link}>
+									i
+								</a>
+								:
+							</label>
+							{shouldShowResetButton(path, value) && (
+								<button
+									onClick={() => {
+										editorStore.resetControllerOverride({ path, feat, controller });
+									}}
+								>
+									reset
+								</button>
+							)}
 							<input
 								id={id}
 								type="number"
@@ -844,8 +832,9 @@ const ControllerSettings = (props: ControllerSettingsProps) => {
 								onChange={(e) => {
 									editorStore.setControllerOverride({
 										feat,
-										path: settingName.split('.'),
+										path,
 										value: Number(e.target.value),
+										controller,
 									});
 								}}
 							/>
@@ -855,7 +844,7 @@ const ControllerSettings = (props: ControllerSettingsProps) => {
 			})}
 		</>
 	);
-};
+});
 
 type TargetItem = {
 	type: string;
@@ -888,9 +877,7 @@ const TemplateTargetSettings = (props: TemplateTargetSettingsProps) => {
 	return (
 		<>
 			<div className="heading">
-				<h2>
-					{type.charAt(0).toUpperCase() + type.slice(1) + (recsType ? ` (${recsType})` : '')} <button>controller config</button>
-				</h2>
+				<h2>{type.charAt(0).toUpperCase() + type.slice(1) + (recsType ? ` (${recsType})` : '')}</h2>
 			</div>
 
 			{!recsType && (
@@ -945,3 +932,18 @@ const TemplateTargetSettings = (props: TemplateTargetSettingsProps) => {
 		</>
 	);
 };
+
+/*
+
+Next:
+1. normalize settings (enabled flag)
+2. adding default controller settings to the TemplateEditorStore
+3. adding project config controller settings to the TemplateEditorStore (set prior to construction and merging of overrides)
+4. using above changes add ability to reset controller settings to the project config initial values (or defaults as needed)
+
+Later:
+0. group some controller settings in more intuitive fashion (eg. show trending/history as radio button) - user abstraction layer
+1. agree on UI/UX for initial TemplateEditor
+2. polish (clean up styles)
+
+*/

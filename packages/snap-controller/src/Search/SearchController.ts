@@ -76,8 +76,8 @@ export class SearchController extends AbstractController {
 			this.config.settings = {
 				...this.config.settings,
 				infinite: {
-					...this.config.settings.infinite,
 					enabled: true,
+					...this.config.settings.infinite,
 				},
 			};
 		}
