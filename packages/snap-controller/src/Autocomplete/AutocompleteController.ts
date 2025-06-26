@@ -117,11 +117,15 @@ export class AutocompleteController extends AbstractController {
 				const products = controller.store.results.filter((result) => result.type === 'product') as Product[];
 				const results = products.length === 0 ? [] : products;
 				const data = getAutocompleteSchemaData({ params: search.request, store: this.store, results });
-				this.tracker.events.autocomplete.render({ data, siteId: this.config.globals?.siteId });
+				if (!search.response._cached) {
+					this.tracker.events.autocomplete.render({ data, siteId: this.config.globals?.siteId });
+				}
 				products.forEach((result) => {
 					this.events.product[result.id] = this.events.product[result.id] || {};
 					this.events.product[result.id].render = true;
-					this.eventManager.fire('track.product.render', { controller: this, product: result, trackEvent: data });
+					if (!search.response._cached) {
+						this.eventManager.fire('track.product.render', { controller: this, product: result, trackEvent: data });
+					}
 				});
 			}
 		});
