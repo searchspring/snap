@@ -15,6 +15,7 @@ import {
 	ThemeOverrides,
 	ThemeVariableBreakpoints,
 	ThemeComponents,
+	ResponsiveKeys,
 } from '../../../components/src';
 import { CacheProvider } from '../../../components/src/providers/cache';
 import { sortSelectors, filterSelectors } from '../../../components/src/utilities/mergeProps';
@@ -157,12 +158,13 @@ export class ThemeStore {
 
 		const breakpoints = this.variables.breakpoints || this.base.variables?.breakpoints;
 
-		// currently selected theme layer for current breakpoint
-		const baseBreakpoint = getOverridesAtWidth(this.innerWidth, breakpoints, this.base);
+		const activeBreakpoint = getActiveBreakpoint(this.innerWidth, breakpoints);
 
 		// overrides breakpoint is index file responsive overrides that match current breakpoint
-		const overrideBreakpoint = getOverridesAtWidth(this.innerWidth, breakpoints, this.overrides);
+		const overrideBreakpoint = getOverridesAtActiveBreakpoint(activeBreakpoint, this.overrides);
 
+		// currently selected theme layer for current breakpoint
+		const baseBreakpoint = getOverridesAtActiveBreakpoint(activeBreakpoint, this.base);
 		// currently selected theme
 		const base = { ...this.base };
 
@@ -173,7 +175,9 @@ export class ThemeStore {
 			variables: toJS(this.variables),
 		} as ThemePartial) as Theme;
 
-		let theme: Theme = mergeThemeLayers(base, baseBreakpoint, this.currency, this.language, this.languageOverrides, themeOverrides) as Theme;
+		let theme: Theme = mergeThemeLayers(base, baseBreakpoint, this.currency, this.language, this.languageOverrides, themeOverrides, {
+			activeBreakpoint: activeBreakpoint,
+		}) as Theme;
 
 		/*
 			Ensure 'theme' prop has overrides applied to it
@@ -263,16 +267,21 @@ export function mergeThemeLayers(...layers: ThemePartial[]): ThemePartial {
 	return deepmerge.all(layers, { arrayMerge: arrayMerge });
 }
 
-export function getOverridesAtWidth(width: number | undefined, breakpoints: ThemeVariableBreakpoints | undefined, theme: ThemePartial): ThemePartial {
-	let overrides: ThemePartial = {};
-	if (width && Number.isInteger(width) && theme.responsive && breakpoints) {
-		const breakpoint = Object.keys(breakpoints).find((breakpoint) => width! <= breakpoints[breakpoint as keyof typeof breakpoints]);
+export function getActiveBreakpoint(width: number | undefined, breakpoints: ThemeVariableBreakpoints | undefined): ResponsiveKeys {
+	let breakpoint: ResponsiveKeys | undefined;
 
-		if (breakpoint) {
-			overrides = (theme.responsive && (theme.responsive as any)[breakpoint]) || {};
-		}
+	if (Number.isInteger(width) && breakpoints) {
+		breakpoint = Object.keys(breakpoints).find((breakpoint) => width! <= breakpoints[breakpoint as keyof typeof breakpoints]) as ResponsiveKeys;
 	}
+	return breakpoint || 'default';
+}
 
+export function getOverridesAtActiveBreakpoint(activeBreakpoint: ResponsiveKeys, theme: ThemePartial): ThemePartial {
+	let overrides: ThemePartial = {};
+
+	if (activeBreakpoint && theme.responsive) {
+		overrides = (theme.responsive && (theme.responsive as any)[activeBreakpoint]) || {};
+	}
 	return { components: overrides };
 }
 
