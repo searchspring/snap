@@ -1,4 +1,4 @@
-/*! For license information please see main.550a7f86.iframe.bundle.js.LICENSE.txt */
+/*! For license information please see main.81bd090b.iframe.bundle.js.LICENSE.txt */
 (self.webpackChunk_searchspring_snap_preact_components = self.webpackChunk_searchspring_snap_preact_components || []).push([
 	[792],
 	{
@@ -36593,7 +36593,7 @@
 															break;
 														}
 														if (
-															(0 ===
+															(0 !==
 																(products = controller.store.results.filter(function (result) {
 																	var _this$events$product$6;
 																	return (
@@ -36604,7 +36604,8 @@
 																			_this$events$product$6.render
 																		)
 																	);
-																})).length &&
+																})).length ||
+																search.response._cached ||
 																((data = getSearchSchemaData({ params: search.request, response: search.response })),
 																_this.tracker.events[_this.pageType].render({
 																	data,
@@ -36614,18 +36615,20 @@
 																			: _this$config$globals6.siteId,
 																})),
 															products.forEach(function (result) {
-																var _this$config$globals7,
-																	data = schemaMap[result.id];
-																_this.tracker.events[_this.pageType].render({
-																	data,
-																	siteId:
-																		null === (_this$config$globals7 = _this.config.globals) || void 0 === _this$config$globals7
-																			? void 0
-																			: _this$config$globals7.siteId,
-																}),
-																	(_this.events.product[result.id] = _this.events.product[result.id] || {}),
-																	(_this.events.product[result.id].render = !0),
-																	_this.eventManager.fire('track.product.render', { controller: _this, product: result, trackEvent: data });
+																if (!search.response._cached) {
+																	var _this$config$globals7,
+																		_data = schemaMap[result.id];
+																	_this.tracker.events[_this.pageType].render({
+																		data: _data,
+																		siteId:
+																			null === (_this$config$globals7 = _this.config.globals) || void 0 === _this$config$globals7
+																				? void 0
+																				: _this$config$globals7.siteId,
+																	}),
+																		_this.eventManager.fire('track.product.render', { controller: _this, product: result, trackEvent: _data });
+																}
+																(_this.events.product[result.id] = _this.events.product[result.id] || {}),
+																	(_this.events.product[result.id].render = !0);
 															}),
 															(_config = search.controller.config),
 															(nonBackgroundFilters =
@@ -37830,7 +37833,7 @@
 								(function () {
 									var _ref4 = RecommendationController_asyncToGenerator(
 										RecommendationController_regeneratorRuntime().mark(function _callee3(search, next) {
-											var controller, _this$config$globals5, products, results, data;
+											var controller, products, results, data, _this$config$globals5;
 											return RecommendationController_regeneratorRuntime().wrap(function _callee3$(_context3) {
 												for (;;)
 													switch ((_context3.prev = _context3.next)) {
@@ -37844,17 +37847,19 @@
 																})),
 																(results = 0 === products.length ? [] : products),
 																(data = getRecommendationsSchemaData({ store: _this.store, results })),
-																_this.tracker.events.recommendations.render({
-																	data,
-																	siteId:
-																		null === (_this$config$globals5 = _this.config.globals) || void 0 === _this$config$globals5
-																			? void 0
-																			: _this$config$globals5.siteId,
-																}),
+																search.response._cached ||
+																	_this.tracker.events.recommendations.render({
+																		data,
+																		siteId:
+																			null === (_this$config$globals5 = _this.config.globals) || void 0 === _this$config$globals5
+																				? void 0
+																				: _this$config$globals5.siteId,
+																	}),
 																products.forEach(function (result) {
 																	(_this.events.product[result.id] = _this.events.product[result.id] || {}),
 																		(_this.events.product[result.id].render = !0),
-																		_this.eventManager.fire('track.product.render', { controller: _this, product: result, trackEvent: data });
+																		search.response._cached ||
+																			_this.eventManager.fire('track.product.render', { controller: _this, product: result, trackEvent: data });
 																}));
 														case 4:
 														case 'end':
@@ -39139,7 +39144,7 @@
 								(function () {
 									var _ref5 = AutocompleteController_asyncToGenerator(
 										AutocompleteController_regeneratorRuntime().mark(function _callee6(search, next) {
-											var controller, _this$config$globals12, products, results, data;
+											var controller, products, results, data, _this$config$globals12;
 											return AutocompleteController_regeneratorRuntime().wrap(function _callee6$(_context6) {
 												for (;;)
 													switch ((_context6.prev = _context6.next)) {
@@ -39153,17 +39158,19 @@
 																})),
 																(results = 0 === products.length ? [] : products),
 																(data = getAutocompleteSchemaData({ params: search.request, store: _this.store, results })),
-																_this.tracker.events.autocomplete.render({
-																	data,
-																	siteId:
-																		null === (_this$config$globals12 = _this.config.globals) || void 0 === _this$config$globals12
-																			? void 0
-																			: _this$config$globals12.siteId,
-																}),
+																search.response._cached ||
+																	_this.tracker.events.autocomplete.render({
+																		data,
+																		siteId:
+																			null === (_this$config$globals12 = _this.config.globals) || void 0 === _this$config$globals12
+																				? void 0
+																				: _this$config$globals12.siteId,
+																	}),
 																products.forEach(function (result) {
 																	(_this.events.product[result.id] = _this.events.product[result.id] || {}),
 																		(_this.events.product[result.id].render = !0),
-																		_this.eventManager.fire('track.product.render', { controller: _this, product: result, trackEvent: data });
+																		search.response._cached ||
+																			_this.eventManager.fire('track.product.render', { controller: _this, product: result, trackEvent: data });
 																}));
 														case 4:
 														case 'end':
@@ -40308,25 +40315,30 @@
 																	(init = _this$createFetchPara.init),
 																	!cacheKey)
 																) {
-																	_context.next = 7;
+																	_context.next = 8;
 																	break;
 																}
 																if (!(cachedResponse = this.cache.get(context.path + '/' + cacheKey) || this.cache.get(context.path + '/*'))) {
-																	_context.next = 7;
+																	_context.next = 8;
 																	break;
 																}
-																return (this.retryCount = 0), (this.retryDelay = 1e3), _context.abrupt('return', cachedResponse);
-															case 7:
-																return (_context.prev = 7), (_context.next = 10), this.fetchApi(url, init);
-															case 10:
+																return (
+																	(this.retryCount = 0),
+																	(this.retryDelay = 1e3),
+																	(cachedResponse._cached = !0),
+																	_context.abrupt('return', cachedResponse)
+																);
+															case 8:
+																return (_context.prev = 8), (_context.next = 11), this.fetchApi(url, init);
+															case 11:
 																return (
 																	(response = _context.sent),
-																	(_context.next = 13),
+																	(_context.next = 14),
 																	null === (_response = response) || void 0 === _response ? void 0 : _response.json()
 																);
-															case 13:
+															case 14:
 																if (((responseJSON = _context.sent), !(response.status >= 200 && response.status < 300))) {
-																	_context.next = 21;
+																	_context.next = 22;
 																	break;
 																}
 																return (
@@ -40335,35 +40347,35 @@
 																	cacheKey && this.cache.set(context.path + '/' + cacheKey, responseJSON),
 																	_context.abrupt('return', responseJSON)
 																);
-															case 21:
+															case 22:
 																if (429 != response.status) {
-																	_context.next = 33;
+																	_context.next = 34;
 																	break;
 																}
 																if (!(this.retryCount < this.configuration.maxRetry)) {
-																	_context.next = 30;
+																	_context.next = 31;
 																	break;
 																}
 																return (
-																	(_context.next = 25),
+																	(_context.next = 26),
 																	new Promise(function (resolve) {
 																		return setTimeout(resolve, _this.retryDelay);
 																	})
 																);
-															case 25:
+															case 26:
 																throw ((this.retryDelay = 1e3 * fibonacci(this.retryCount)), this.retryCount++, new Error('Rate limited.'));
-															case 30:
-																throw new Error('Retry rate limit exceeded.');
 															case 31:
-																_context.next = 35;
+																throw new Error('Retry rate limit exceeded.');
+															case 32:
+																_context.next = 36;
 																break;
-															case 33:
+															case 34:
 																if (
 																	404 != response.status ||
 																	'Profile is currently paused' !=
 																		(null === (_responseJSON = responseJSON) || void 0 === _responseJSON ? void 0 : _responseJSON.message)
 																) {
-																	_context.next = 35;
+																	_context.next = 36;
 																	break;
 																}
 																throw new Error(
@@ -40371,17 +40383,17 @@
 																		': ' +
 																		(null === (_context$query = context.query) || void 0 === _context$query ? void 0 : _context$query.tag)
 																);
-															case 35:
+															case 36:
 																throw new Error('Unexpected Response Status.');
-															case 38:
-																if (((_context.prev = 38), (_context.t0 = _context.catch(7)), 'Rate limited.' != _context.t0.message)) {
-																	_context.next = 44;
+															case 39:
+																if (((_context.prev = 39), (_context.t0 = _context.catch(8)), 'Rate limited.' != _context.t0.message)) {
+																	_context.next = 45;
 																	break;
 																}
-																return (_context.next = 43), this.request(context, cacheKey);
-															case 43:
-																return _context.abrupt('return', _context.sent);
+																return (_context.next = 44), this.request(context, cacheKey);
 															case 44:
+																return _context.abrupt('return', _context.sent);
+															case 45:
 																throw {
 																	err: _context.t0,
 																	fetchDetails: Object.assign(
@@ -40394,14 +40406,14 @@
 																		init
 																	),
 																};
-															case 45:
+															case 46:
 															case 'end':
 																return _context.stop();
 														}
 												},
 												_callee,
 												this,
-												[[7, 38]]
+												[[8, 39]]
 											);
 										})
 									)),
@@ -42044,8 +42056,9 @@
 						Object.assign(this, result);
 				});
 			function transformSearchResponse(response, request) {
+				var _response$_cached;
 				return Object.assign(
-					{},
+					{ _cached: null !== (_response$_cached = response._cached) && void 0 !== _response$_cached && _response$_cached },
 					transformSearchResponse.pagination(response),
 					transformSearchResponse.results(response),
 					transformSearchResponse.filters(response),
@@ -46258,7 +46271,7 @@
 												var availableOptions = selection.values.filter(function (value) {
 														return 0 == idx || value.available;
 													}),
-													preferedOptions = options[selection.field],
+													preferedOptions = options[selection.field.toLowerCase()],
 													preferencedOption = selection.selected || availableOptions[0];
 												if (preferedOptions) {
 													var checkIfAvailable = function checkIfAvailable(preference) {
@@ -51217,7 +51230,7 @@
 							((function Tracker_classCallCheck(a, n) {
 								if (!(a instanceof n)) throw new TypeError('Cannot call a class as a function');
 							})(this, Tracker),
-							((config = cjs_default()(Tracker_defaultConfig, config || {})).initiator = 'searchspring/' + config.framework + '/0.66.2'),
+							((config = cjs_default()(Tracker_defaultConfig, config || {})).initiator = 'searchspring/' + config.framework + '/0.66.3'),
 							((_this = Tracker_callSuper(this, Tracker, [globals, config])).targeters = []),
 							(_this.track = {
 								error: function error(data, siteId) {
@@ -51389,7 +51402,7 @@
 							(_this.localStorage = new StorageStore({ type: 'local', key: 'ss-' + _this.config.id })),
 							_this.localStorage.set('siteId', _this.globals.siteId),
 							(null !== (_window$searchspring = window.searchspring) && void 0 !== _window$searchspring && _window$searchspring.tracker) ||
-								((window.searchspring = window.searchspring || {}), (window.searchspring.tracker = _this), (window.searchspring.version = '0.66.2')),
+								((window.searchspring = window.searchspring || {}), (window.searchspring.tracker = _this), (window.searchspring.version = '0.66.3')),
 							setTimeout(function () {
 								_this.targeters.push(
 									new DomTargeter([{ selector: 'script[type^="searchspring/track/"]', emptyTarget: !1 }], function (target, elem) {
