@@ -196,18 +196,20 @@ export class SearchController extends AbstractController {
 					(result) => result.type === 'product' && !this.events.product[result.id]?.render
 				) as Product[];
 
-				if (products.length === 0) {
+				if (products.length === 0 && !search.response._cached) {
 					// handle no results
 					const data = getSearchSchemaData({ params: search.request, response: search.response });
 					this.tracker.events[this.pageType].render({ data, siteId: this.config.globals?.siteId });
 				}
 
 				products.forEach((result: Product) => {
-					const data = schemaMap[result.id];
-					this.tracker.events[this.pageType].render({ data, siteId: this.config.globals?.siteId });
+					if (!search.response._cached) {
+						const data = schemaMap[result.id];
+						this.tracker.events[this.pageType].render({ data, siteId: this.config.globals?.siteId });
+						this.eventManager.fire('track.product.render', { controller: this, product: result, trackEvent: data });
+					}
 					this.events.product[result.id] = this.events.product[result.id] || {};
 					this.events.product[result.id].render = true;
-					this.eventManager.fire('track.product.render', { controller: this, product: result, trackEvent: data });
 				});
 
 				const config = search.controller.config as SearchControllerConfig;

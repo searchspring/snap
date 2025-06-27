@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.66.3](https://github.com/searchspring/snap/compare/v0.66.2...v0.66.3) (2025-06-27)
+
+### Bug Fixes
+
+- **searchresultstore.ts:** bugfix for realtime variant selections and case sensitivity ([6641e8c](https://github.com/searchspring/snap/commit/6641e8c1293fb9335d7ded8f543c6d0bbb411c76))
+
 ## [0.66.2](https://github.com/searchspring/snap/compare/v0.66.1...v0.66.2) (2025-06-11)
 
 **Note:** Version bump only for package @searchspring/snap-store-mobx

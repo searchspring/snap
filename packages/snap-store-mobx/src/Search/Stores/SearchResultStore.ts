@@ -402,7 +402,7 @@ export class Variants {
 				// filter by first available, then by preselected option preference
 				//make all options available for first selection.
 				const availableOptions = selection.values.filter((value) => (idx == 0 ? true : value.available));
-				const preferedOptions = options[selection.field as keyof typeof options];
+				const preferedOptions = options[selection.field.toLowerCase() as keyof typeof options];
 				let preferencedOption = selection.selected || availableOptions[0];
 				// if theres a preference for that field
 				if (preferedOptions) {
