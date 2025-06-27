@@ -168,6 +168,8 @@ class Result implements SearchResponseModelResult {
 
 export function transformSearchResponse(response: searchResponseType, request: SearchRequestModel) {
 	return {
+		// @ts-ignore - temporary to be removed when auto beaconing is implemented
+		_cached: response._cached ?? false,
 		...transformSearchResponse.pagination(response),
 		...transformSearchResponse.results(response),
 		...transformSearchResponse.filters(response),
