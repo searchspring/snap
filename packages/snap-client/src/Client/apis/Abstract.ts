@@ -42,6 +42,8 @@ export class API {
 			if (cachedResponse) {
 				this.retryCount = 0; // reset count and delay incase rate limit occurs again before a page refresh
 				this.retryDelay = 1000;
+				// @ts-ignore - temporary to be removed when auto beaconing is implemented
+				cachedResponse._cached = true;
 				return cachedResponse;
 			}
 		}
