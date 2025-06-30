@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.66.4](https://github.com/searchspring/snap/compare/v0.66.3...v0.66.4) (2025-06-30)
+
+### Bug Fixes
+
+- **client/cache:** adjust logic for cached flag ([07122cb](https://github.com/searchspring/snap/commit/07122cb967a006009703cc1314b6b1aa0de75b1d))
+- **client/cache:** updating logic for array response of recommendation API for \_cached flag ([b6d454b](https://github.com/searchspring/snap/commit/b6d454bbde4fff68378662ac4a67af6243fcf2fb))
+
 ## [0.66.3](https://github.com/searchspring/snap/compare/v0.66.2...v0.66.3) (2025-06-27)
 
 ### Bug Fixes
