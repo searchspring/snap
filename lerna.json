@@ -1,10 +1,10 @@
 {
-	"version": "0.66.3",
+	"version": "0.66.4",
 	"packages": ["packages/*"],
 	"npmClient": "npm",
 	"command": {
 		"publish": {
-			"message": "chore(publish): %s",
+			"message": "chore(publish): %s [skip actions]",
 			"conventionalCommits": true
 		}
 	}

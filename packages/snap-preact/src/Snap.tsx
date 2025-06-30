@@ -371,7 +371,7 @@ export class Snap {
 				this.mode = this.config.mode as AppMode;
 			}
 
-			// query param / cookiev override
+			// query param / cookie override
 			if ((urlParams?.params?.query && 'dev' in urlParams.params.query) || !!cookies.get(DEV_COOKIE)) {
 				if (urlParams?.params.query?.dev == 'false' || urlParams?.params.query?.dev == '0') {
 					cookies.unset(DEV_COOKIE, cookieDomain);
