@@ -1,4 +1,4 @@
-/*! For license information please see main.81bd090b.iframe.bundle.js.LICENSE.txt */
+/*! For license information please see main.bbc55db3.iframe.bundle.js.LICENSE.txt */
 (self.webpackChunk_searchspring_snap_preact_components = self.webpackChunk_searchspring_snap_preact_components || []).push([
 	[792],
 	{
@@ -40325,7 +40325,11 @@
 																return (
 																	(this.retryCount = 0),
 																	(this.retryDelay = 1e3),
-																	(cachedResponse._cached = !0),
+																	Array.isArray(cachedResponse)
+																		? cachedResponse.forEach(function (response) {
+																				response._cached = !0;
+																		  })
+																		: (cachedResponse._cached = !0),
 																	_context.abrupt('return', cachedResponse)
 																);
 															case 8:
@@ -44665,7 +44669,11 @@
 																	(recommendations = _yield$Promise$all2[2]),
 																	_context6.abrupt(
 																		'return',
-																		Object.assign({}, profile, { meta, results: recommendations[0] && recommendations[0].results })
+																		Object.assign({}, profile, {
+																			meta,
+																			results: recommendations[0] && recommendations[0].results,
+																			_cached: !!profile._cached && !(!recommendations[0] || !recommendations[0]._cached),
+																		})
 																	)
 																);
 															case 14:
@@ -51230,7 +51238,7 @@
 							((function Tracker_classCallCheck(a, n) {
 								if (!(a instanceof n)) throw new TypeError('Cannot call a class as a function');
 							})(this, Tracker),
-							((config = cjs_default()(Tracker_defaultConfig, config || {})).initiator = 'searchspring/' + config.framework + '/0.66.3'),
+							((config = cjs_default()(Tracker_defaultConfig, config || {})).initiator = 'searchspring/' + config.framework + '/0.66.4'),
 							((_this = Tracker_callSuper(this, Tracker, [globals, config])).targeters = []),
 							(_this.track = {
 								error: function error(data, siteId) {
@@ -51402,7 +51410,7 @@
 							(_this.localStorage = new StorageStore({ type: 'local', key: 'ss-' + _this.config.id })),
 							_this.localStorage.set('siteId', _this.globals.siteId),
 							(null !== (_window$searchspring = window.searchspring) && void 0 !== _window$searchspring && _window$searchspring.tracker) ||
-								((window.searchspring = window.searchspring || {}), (window.searchspring.tracker = _this), (window.searchspring.version = '0.66.3')),
+								((window.searchspring = window.searchspring || {}), (window.searchspring.tracker = _this), (window.searchspring.version = '0.66.4')),
 							setTimeout(function () {
 								_this.targeters.push(
 									new DomTargeter([{ selector: 'script[type^="searchspring/track/"]', emptyTarget: !1 }], function (target, elem) {
