@@ -203,6 +203,8 @@ export class Client {
 			...profile,
 			meta,
 			results: recommendations[0] && recommendations[0].results,
+			// @ts-ignore - temporary to be removed when auto beaconing is implemented
+			_cached: !!profile._cached && !!recommendations[0]._cached,
 		};
 	}
 }
