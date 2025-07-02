@@ -106,6 +106,13 @@ The `size` prop specifies the custom icon size. This will be set to both the wid
 <Icon icon='cogs' size={'20px'} />
 ```
 
+### title
+The `title` prop specifies the title to render inside the svg.
+
+```jsx
+<Icon icon='cogs' title={'Settings'} />
+```
+
 ### width & height
 The `width` and `height` props specify custom icon dimensions and will overwrite the `size` prop.
 

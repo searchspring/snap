@@ -1,6 +1,6 @@
 {
 	"name": "@searchspring/snap-url-manager",
-	"version": "1.8.0",
+	"version": "1.8.1",
 	"description": "Snap URL Manager",
 	"main": "dist/cjs/index.js",
 	"module": "dist/esm/index.js",
@@ -29,5 +29,6 @@
 	"sideEffects": false,
 	"files": [
 		"dist/**/*"
-	]
+	],
+	"gitHead": "c31d6fae1461ef16d593321c312c94b85dad7d96"
 }

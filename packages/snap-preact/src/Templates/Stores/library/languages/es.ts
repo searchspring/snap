@@ -159,6 +159,9 @@ export const es: LangComponents = {
 		showLessText: {
 			value: 'ver menos',
 		},
+		clearAllText: {
+			value: 'borrar todo',
+		},
 		dropdownButton: {
 			attributes: {
 				'aria-label': (data) =>

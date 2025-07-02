@@ -173,4 +173,5 @@ export type ButtonNames =
 	| 'see-more'
 	| 'close-search'
 	| 'clear-search'
-	| 'submit-search';
+	| 'submit-search'
+	| 'reset-facet';
