@@ -96,13 +96,19 @@ export const AutocompleteSlideout = observer((properties: AutocompleteSlideoutPr
 			// default props
 			className: 'autocomplete-slideout__search-input',
 			inputName: inputName,
-			onSearchIconClick: () => {
-				() => reset();
-				window.location.href = controller.store.state.url.link.href;
+			submitSearchButton: {
+				onClick: () => {
+					() => reset();
+					window.location.href = controller.store.state.url.link.href;
+				},
 			},
-			onCloseSearchClick: () => reset(),
-			closeSearchIcon: 'angle-left',
-			clearSearchIcon: 'close-thin',
+			clearSearchButton: {
+				icon: 'close-thin',
+			},
+			closeSearchButton: {
+				onClick: () => reset(),
+				icon: 'angle-left',
+			},
 			// inherited props
 			...defined({
 				disableStyles,

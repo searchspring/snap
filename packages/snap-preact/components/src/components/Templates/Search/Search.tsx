@@ -193,7 +193,7 @@ export const Search = observer((properties: SearchProps): JSX.Element => {
 
 	const styling = mergeStyles<SearchProps>(props, defaultStyles);
 
-	useCleanUpEmptyDivs('.ss__search__sidebar');
+	useCleanUpEmptyDivs(['.ss__search__sidebar']);
 
 	return (
 		<CacheProvider>

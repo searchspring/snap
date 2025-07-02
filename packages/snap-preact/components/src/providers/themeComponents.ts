@@ -47,6 +47,7 @@ import type { SortByProps } from '../components/Molecules/SortBy';
 import type { SwatchesProps } from '../components/Molecules/Swatches';
 import type { VariantSelectionProps } from '../components/Molecules/VariantSelection';
 import type { TermsNames, TermsProps } from '../components/Molecules/Terms';
+import type { ModalProps } from '../components/Molecules/Modal';
 
 /* ORGANISMS */
 import type { BranchOverrideProps } from '../components/Organisms/BranchOverride';
@@ -79,7 +80,6 @@ import type { SearchSnappyProps } from '../components/Templates/SearchSnappy';
 import { SearchSnapncoProps } from '../components/Templates/SearchSnapnco';
 import { AutocompleteModalProps } from '../components/Templates/AutocompleteModal';
 import { AutocompleteFixedProps } from '../components/Templates/AutocompleteFixed';
-import { ModalProps } from '../components/Atoms/Modal';
 
 export type ThemeComponentProps<ComponentProps> = {
 	default: Partial<ComponentProps>;
@@ -166,7 +166,7 @@ export type ThemeComponents =
 		[K in ThemeComponentOverridesNamedSelectors<'price', PriceNames>]?: Partial<PriceProps>;
 	} & {
 		[K in ThemeComponentOverridesUnNamedSelectors<'skeleton'>]?: Partial<SkeletonProps>;
-	} & { [K in ThemeComponentOverridesUnNamedSelectors<'modal'>]?: Partial<ModalProps> } & /* MOLECULES */ {
+	} /* MOLECULES */ & { [K in ThemeComponentOverridesUnNamedSelectors<'modal'>]?: Partial<ModalProps> } & {
 		[K in ThemeComponentOverridesUnNamedSelectors<'calloutBadge'>]?: Partial<CalloutBadgeProps>;
 	} & {
 		// { [K in UnNamedThemeComponentSelectors<'toggle'>]?: RestrictedThemeComponentProps<ToggleProps> } &
@@ -246,7 +246,6 @@ export type ThemeComponentsRestricted =
 	{ [K in ThemeComponentOverridesUnNamedSelectors<'loadingBar'>]?: ThemeComponentRestrictedProps<LoadingBarProps> } &
 	{ [K in ThemeComponentOverridesNamedSelectors<'banner', BannerNames>]?: ThemeComponentRestrictedProps<BannerProps> } &
 	{ [K in ThemeComponentOverridesUnNamedSelectors<'inlineBanner'>]?: ThemeComponentRestrictedProps<InlineBannerProps> } &
-	{ [K in ThemeComponentOverridesUnNamedSelectors<'modal'>]?: ThemeComponentRestrictedProps<ModalProps> } &
 	{ [K in ThemeComponentOverridesUnNamedSelectors<'overlay'>]?: ThemeComponentRestrictedProps<OverlayProps> } &
 	{ [K in ThemeComponentOverridesUnNamedSelectors<'paginationInfo'>]?: ThemeComponentRestrictedProps<PaginationInfoProps> } &
 	{ [K in ThemeComponentOverridesNamedSelectors<'price', PriceNames>]?: ThemeComponentRestrictedProps<PriceProps> } &
@@ -254,6 +253,7 @@ export type ThemeComponentsRestricted =
 	// { [K in UnNamedThemeComponentSelectors<'toggle'>]?: RestrictedThemeComponentProps<ToggleProps> } &
 	
 	/* MOLECULES */
+	{ [K in ThemeComponentOverridesUnNamedSelectors<'modal'>]?: ThemeComponentRestrictedProps<ModalProps> } &
 	{ [K in ThemeComponentOverridesUnNamedSelectors<'calloutBadge'>]?: ThemeComponentRestrictedProps<CalloutBadgeProps> } & 
 	{ [K in ThemeComponentOverridesUnNamedSelectors<'carousel'>]?: ThemeComponentRestrictedProps<CarouselProps> } &
 	{ [K in ThemeComponentOverridesUnNamedSelectors<'checkbox'>]?: ThemeComponentRestrictedProps<CheckboxProps> } &
@@ -333,7 +333,6 @@ export type ThemeComponentsRestrictedOverrides =
 	{ [K in ThemeComponentOverridesUnNamedSelectors<'loadingBar'>]?: ThemeComponentOverridesRestrictedProps<LoadingBarProps> } &
 	{ [K in ThemeComponentOverridesNamedSelectors<'banner', BannerNames>]?: ThemeComponentOverridesRestrictedProps<BannerProps> } &
 	{ [K in ThemeComponentOverridesUnNamedSelectors<'inlineBanner'>]?: ThemeComponentOverridesRestrictedProps<InlineBannerProps> } &
-	{ [K in ThemeComponentOverridesUnNamedSelectors<'modal'>]?: ThemeComponentOverridesRestrictedProps<ModalProps> } &
 	{ [K in ThemeComponentOverridesUnNamedSelectors<'overlay'>]?: ThemeComponentOverridesRestrictedProps<OverlayProps> } &
 	{ [K in ThemeComponentOverridesUnNamedSelectors<'paginationInfo'>]?: ThemeComponentOverridesRestrictedProps<PaginationInfoProps> } &
 	{ [K in ThemeComponentOverridesNamedSelectors<'price', PriceNames>]?: ThemeComponentOverridesRestrictedProps<PriceProps> } &
@@ -341,6 +340,7 @@ export type ThemeComponentsRestrictedOverrides =
 	// { [K in UnNamedThemeComponentSelectors<'toggle'>]?: RestrictedComponentProps<ToggleProps> } &
 	
 	/* MOLECULES */
+	{ [K in ThemeComponentOverridesUnNamedSelectors<'modal'>]?: ThemeComponentOverridesRestrictedProps<ModalProps> } &
 	{ [K in ThemeComponentOverridesUnNamedSelectors<'calloutBadge'>]?: ThemeComponentOverridesRestrictedProps<CalloutBadgeProps> } & 
 	{ [K in ThemeComponentOverridesUnNamedSelectors<'carousel'>]?: ThemeComponentOverridesRestrictedProps<CarouselProps> } &
 	{ [K in ThemeComponentOverridesUnNamedSelectors<'checkbox'>]?: ThemeComponentOverridesRestrictedProps<CheckboxProps> } &
@@ -422,7 +422,6 @@ export type ThemeComponentTemplateOverrides<Template extends string, Props> =
 	{ [K in ThemeComponentUnNamedSelectorsStartingWithTemplate<Template,'loadingBar'>]?: ThemeComponentRestrictedProps<LoadingBarProps> } &
 	{ [K in ThemeComponentNamedSelectorsStartingWithTemplate<Template,'banner', BannerNames>]?: ThemeComponentRestrictedProps<BannerProps> } &
 	{ [K in ThemeComponentUnNamedSelectorsStartingWithTemplate<Template,'inlineBanner'>]?: ThemeComponentRestrictedProps<InlineBannerProps> } &
-	{ [K in ThemeComponentUnNamedSelectorsStartingWithTemplate<Template,'modal'>]?: ThemeComponentRestrictedProps<ModalProps> } &
 	{ [K in ThemeComponentUnNamedSelectorsStartingWithTemplate<Template,'overlay'>]?: ThemeComponentRestrictedProps<OverlayProps> } &
 	{ [K in ThemeComponentUnNamedSelectorsStartingWithTemplate<Template,'paginationInfo'>]?: ThemeComponentRestrictedProps<PaginationInfoProps> } &
 	{ [K in ThemeComponentNamedSelectorsStartingWithTemplate<Template,'price', PriceNames>]?: ThemeComponentRestrictedProps<PriceProps> } &
@@ -430,6 +429,7 @@ export type ThemeComponentTemplateOverrides<Template extends string, Props> =
 	// { [K in StartsWithTemplateHavingUnNamedThemeComponentSelectors<Template,'toggle'>]?: RestrictedThemeComponentProps<ToggleProps> } &
 	
 	/* MOLECULES */
+	{ [K in ThemeComponentUnNamedSelectorsStartingWithTemplate<Template,'modal'>]?: ThemeComponentRestrictedProps<ModalProps> } &
 	{ [K in ThemeComponentUnNamedSelectorsStartingWithTemplate<Template,'calloutBadge'>]?: ThemeComponentRestrictedProps<CalloutBadgeProps> } & 
 	{ [K in ThemeComponentUnNamedSelectorsStartingWithTemplate<Template,'carousel'>]?: ThemeComponentRestrictedProps<CarouselProps> } &
 	{ [K in ThemeComponentUnNamedSelectorsStartingWithTemplate<Template,'checkbox'>]?: ThemeComponentRestrictedProps<CheckboxProps> } &

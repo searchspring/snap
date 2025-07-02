@@ -2,6 +2,9 @@
 
 Renders a button and a modal. Clicking the button toggles modal visibility. By default any clicks outside of the modal will hide the content.
 
+## Sub-components
+- Overlay
+
 ## Usage
 
 ### content
@@ -47,6 +50,20 @@ The `startOpen` prop sets the modal initial internal state. Cannot be used with 
 
 ```jsx
 <Modal startOpen>Hello World!</Modal>
+```
+
+### overlayColor
+The `overlayColor` prop specifies the color of the overlay.
+
+```jsx
+<Modal overlayColor={'rgba(0,0,0,0.8)'} />
+```
+
+### onOverlayClick
+The `onOverlayClick` prop specifies the a function to call on clicking of the overlay.
+
+```jsx
+<Modal onOverlayClick={clickfunc} />
 ```
 
 ### lockScroll

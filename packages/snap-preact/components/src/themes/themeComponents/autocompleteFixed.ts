@@ -54,7 +54,9 @@ export const autocompleteFixedThemeComponentProps: ThemeComponent<'autocompleteF
 			rows: 1,
 		},
 		'autocompleteFixed searchInput': {
-			closeSearchIcon: 'angle-left',
+			closeSearchButton: {
+				icon: 'angle-left',
+			},
 		},
 	},
 	tablet: {

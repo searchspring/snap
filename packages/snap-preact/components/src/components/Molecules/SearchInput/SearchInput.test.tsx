@@ -48,8 +48,8 @@ describe('SearchInput Component', () => {
 		expect(onChangeFn).toHaveBeenCalled();
 	});
 
-	it('can change icon with icon prop', () => {
-		const rendered = render(<SearchInput value={''} searchIcon={'cog'} />);
+	it('can change searchButton icon with submitSearchButton prop', () => {
+		const rendered = render(<SearchInput value={''} submitSearchButton={{ icon: 'cog' }} />);
 		const searchInput = rendered.container.querySelector('.ss__search-input__input');
 		expect(searchInput).toBeInTheDocument();
 		const icon = rendered.container.querySelector('.ss__icon');
@@ -74,10 +74,9 @@ describe('SearchInput Component', () => {
 
 	it('renders with search icon by default', async () => {
 		const func = jest.fn();
-		const rendered = render(<SearchInput value={''} onSearchIconClick={func} />);
-		const searchButton = rendered.container.querySelector('.ss__search-input__button--search-icon');
-		const searchButtonIcon = rendered.container.querySelector('.ss__search-input__button--search-icon .ss__icon--search.ss__button__icon');
-
+		const rendered = render(<SearchInput value={''} submitSearchButton={{ onClick: func }} />);
+		const searchButton = rendered.container.querySelector('.ss__search-input__button--submit-search-button');
+		const searchButtonIcon = rendered.container.querySelector('.ss__search-input__button--submit-search-button .ss__icon--search');
 		expect(searchButton).toBeInTheDocument();
 		expect(searchButtonIcon).toBeInTheDocument();
 
@@ -90,18 +89,16 @@ describe('SearchInput Component', () => {
 
 	it('renders with clear icon only when value', async () => {
 		const func = jest.fn();
-		const rendered = render(<SearchInput value={''} onClearSearchClick={func} clearSearchIcon={'cog'} />);
-
+		const rendered = render(<SearchInput value={''} clearSearchButton={{ onClick: func, icon: 'cog' }} />);
 		const clearButton = rendered.container.querySelector('.ss__search-input__button--clear-search-icon');
 		const clearButtonIcon = rendered.container.querySelector('.ss__search-input__button--clear-search-icon .ss__icon--cog');
 
 		expect(clearButton).not.toBeInTheDocument();
 		expect(clearButtonIcon).not.toBeInTheDocument();
 
-		const rendered2 = render(<SearchInput value={'val'} onClearSearchClick={func} clearSearchIcon={'cog'} />);
-
-		const clearButton2 = rendered2.container.querySelector('.ss__search-input__button--clear-search-icon');
-		const clearButtonIcon2 = rendered2.container.querySelector('.ss__search-input__button--clear-search-icon .ss__icon--cog');
+		const rendered2 = render(<SearchInput value={'val'} clearSearchButton={{ onClick: func, icon: 'cog' }} />);
+		const clearButton2 = rendered2.container.querySelector('.ss__search-input__button--clear-search-button');
+		const clearButtonIcon2 = rendered2.container.querySelector('.ss__search-input__button--clear-search-button .ss__icon--cog');
 
 		expect(clearButton2).toBeInTheDocument();
 		expect(clearButtonIcon2).toBeInTheDocument();
@@ -119,11 +116,9 @@ describe('SearchInput Component', () => {
 
 	it('renders with close icon', async () => {
 		const func = jest.fn();
-		const rendered = render(<SearchInput value={''} onCloseSearchClick={func} closeSearchIcon={'cog'} />);
-		const closeButton = rendered.container.querySelector('.ss__search-input__button--close-search-icon');
-		const closeButtonIcon = rendered.container.querySelector('.ss__search-input__button--close-search-icon .ss__icon--cog');
-
-		rendered.debug();
+		const rendered = render(<SearchInput value={''} closeSearchButton={{ onClick: func, icon: 'cog' }} />);
+		const closeButton = rendered.container.querySelector('.ss__search-input__button--close-search-button');
+		const closeButtonIcon = rendered.container.querySelector('.ss__search-input__button--close-search-button .ss__icon--cog');
 
 		expect(closeButton).toBeInTheDocument();
 		expect(closeButtonIcon).toBeInTheDocument();
@@ -140,7 +135,7 @@ describe('SearchInput Component', () => {
 
 		it('immediately available lang options', async () => {
 			// placeholderText
-			const langOptions = ['searchButton', 'clearSearchButton', 'closeSearchButton'];
+			const langOptions = ['submitSearchButton', 'clearSearchButton', 'closeSearchButton'];
 
 			//text attributes/values
 			const value = 'custom value';
@@ -192,7 +187,9 @@ describe('SearchInput Component', () => {
 					};
 
 					// @ts-ignore
-					const rendered = render(<SearchInput value={'dress'} lang={lang} closeSearchIcon={'close'} clearSearchIcon={'close-thin'} />);
+					const rendered = render(
+						<SearchInput value={'dress'} lang={lang} closeSearchButton={{ icon: 'close' }} clearSearchButton={{ icon: 'close-thin' }} />
+					);
 
 					const element = rendered.container.querySelector(selector);
 					expect(element).toBeInTheDocument();

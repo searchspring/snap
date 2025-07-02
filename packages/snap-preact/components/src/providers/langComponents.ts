@@ -141,6 +141,6 @@ export type LangComponents = {
 	// autocompleteTerms: AutocompleteTermsLang;
 	recommendation: RecommendationLang;
 	search: SearchLang;
-	autocompleteTemplate: AutocompleteLayoutLang;
+	autocompleteLayout: AutocompleteLayoutLang;
 	// searchHorizontal: SearchHorizontalLang
 };

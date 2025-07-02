@@ -7,17 +7,24 @@ import { observer } from 'mobx-react-lite';
 
 import { ComponentProps, StyleScript } from '../../../types';
 import { Theme, useTheme, CacheProvider, useTreePath } from '../../../providers';
-import { useClickOutside, useMediaQuery } from '../../../hooks';
-import { cloneWithProps, mergeProps, mergeStyles } from '../../../utilities';
+import { useClickOutside } from '../../../hooks';
+import { cloneWithProps, defined, mergeProps, mergeStyles } from '../../../utilities';
 import { useA11y } from '../../../hooks/useA11y';
+import { Overlay, OverlayProps } from '../../Atoms/Overlay';
 
 const defaultStyles: StyleScript<ModalProps> = () => {
 	return css({
 		position: 'relative',
+
 		'&.ss__modal--open': {
 			'& .ss__modal__content': {
 				visibility: 'visible',
 				opacity: 1,
+			},
+		},
+		'&.ss__modal--disabled': {
+			'& .ss__modal__button': {
+				cursor: 'initial',
 			},
 		},
 		'.ss__modal__button': {
@@ -31,6 +38,7 @@ const defaultStyles: StyleScript<ModalProps> = () => {
 			opacity: 0,
 			top: 'auto',
 			left: 0,
+			zIndex: 10004,
 		},
 	});
 };
@@ -43,6 +51,7 @@ export const Modal = observer((properties: ModalProps): JSX.Element => {
 		startOpen: false,
 		disableA11y: false,
 		lockScroll: true,
+		overlayColor: 'rgba(0,0,0,0.8)',
 		treePath: globalTreePath,
 	};
 
@@ -61,8 +70,30 @@ export const Modal = observer((properties: ModalProps): JSX.Element => {
 		disableClickOutside,
 		disableA11y,
 		className,
+		disableStyles,
+		overlayColor,
+		onOverlayClick,
 		treePath,
 	} = props;
+
+	const subProps: ModalSubProps = {
+		overlay: {
+			// default props
+			className: 'ss__slideout__overlay',
+			onClick: (e) => {
+				onOverlayClick && onOverlayClick(e);
+				toggleShowContent();
+			},
+			// inherited props
+			...defined({
+				disableStyles,
+				color: overlayColor,
+			}),
+			// component theme overrides
+			theme: props?.theme,
+			treePath,
+		},
+	};
 
 	let showContent: boolean | undefined, setShowContent: undefined | StateUpdater<boolean | undefined>;
 
@@ -114,19 +145,15 @@ export const Modal = observer((properties: ModalProps): JSX.Element => {
 				});
 			}
 		}
-	});
+	}, []);
 
-	const isVisible = useMediaQuery('', () => {
-		if (lockScroll) document.body.style.overflow = '';
-	});
-
-	document.body.style.overflow = isVisible && showContent && lockScroll ? 'hidden' : '';
+	document.body.style.overflow = showContent && lockScroll ? 'hidden' : '';
 
 	return (
 		<CacheProvider>
 			<div
 				{...styling}
-				className={classnames('ss__modal', { 'ss__modal--open': showContent }, className)}
+				className={classnames('ss__modal', { 'ss__modal--open': showContent }, { 'ss__modal--disabled': disabled }, className)}
 				ref={innerRef as React.LegacyRef<HTMLDivElement>}
 			>
 				{!buttonSelector && button && (
@@ -152,6 +179,8 @@ export const Modal = observer((properties: ModalProps): JSX.Element => {
 						{cloneWithProps(children, { open: showContent, toggleOpen: toggleShowContent, treePath })}
 					</div>
 				)}
+
+				<Overlay {...subProps.overlay} active={Boolean(showContent)} />
 			</div>
 		</CacheProvider>
 	);
@@ -169,4 +198,10 @@ export interface ModalProps extends ComponentProps {
 	startOpen?: boolean;
 	disableClickOutside?: boolean;
 	disableA11y?: boolean;
+	overlayColor?: string;
+	onOverlayClick?: (event: React.MouseEvent<HTMLDivElement, Event>) => void;
+}
+
+interface ModalSubProps {
+	overlay: Partial<OverlayProps>;
 }

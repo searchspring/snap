@@ -56,17 +56,6 @@ export default {
 		),
 	],
 	argTypes: {
-		overlayColor: {
-			defaultValue: 'rgba(0,0,0,0.0)',
-			description: 'Modal overlay color',
-			table: {
-				type: {
-					summary: 'string',
-				},
-				defaultValue: { summary: 'rgba(0,0,0,0.0)' },
-			},
-			control: { type: 'color' },
-		},
 		buttonSelector: {
 			description: 'Modal button selector. (defaults to input)',
 			table: {

@@ -508,7 +508,7 @@ export const AutocompleteLayout = observer((properties: AutocompleteLayoutProps)
 		recsController = recs.recsController;
 	}
 
-	useCleanUpEmptyDivs('.ss__autocomplete__column, .ss__autocomplete__terms-wrapper');
+	useCleanUpEmptyDivs(['.ss__autocomplete__terms-wrapper, .ss__autocomplete__row', '.ss__autocomplete__column'], '.ss__autocomplete__separator');
 
 	const findModule = (module: ModuleNamesWithColumns) => {
 		//new row

@@ -7,7 +7,7 @@ import { componentArgs, highlightedCode } from '../../../utilities';
 import Readme from './readme.md';
 
 export default {
-	title: 'Atoms/Modal',
+	title: 'Molecules/Modal',
 	component: Modal,
 	tags: ['autodocs'],
 	parameters: {
@@ -46,6 +46,27 @@ export default {
 				},
 			},
 			control: { type: 'text' },
+		},
+		overlayColor: {
+			defaultValue: 'rgba(0,0,0,0.8)',
+			description: 'Modal overlay color',
+			table: {
+				type: {
+					summary: 'string',
+				},
+				defaultValue: { summary: 'rgba(0,0,0,0.0)' },
+			},
+			control: { type: 'color' },
+		},
+		onOverlayClick: {
+			description: 'Function to call when the overlay is clicked',
+			table: {
+				type: {
+					summary: 'function(e: Event)',
+				},
+			},
+			control: { type: 'none' },
+			action: 'onOverlayClick',
 		},
 		content: {
 			description: 'Content to be displayed in modal',

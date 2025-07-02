@@ -1,6 +1,6 @@
 import { h } from 'preact';
 
-import { render } from '@testing-library/preact';
+import { render, waitFor } from '@testing-library/preact';
 import userEvent from '@testing-library/user-event';
 
 import { Modal } from './Modal';
@@ -212,6 +212,26 @@ describe('Modal Component', () => {
 		const button = rendered.container.querySelector('.ss__modal__button')!;
 
 		userEvent.click(button);
+		expect(clickFn).toHaveBeenCalled();
+	});
+
+	it('fires onOverlayClick prop when overlay is clicked', async () => {
+		const clickFn = jest.fn();
+
+		const rendered = render(<Modal button={'open me'} overlayColor="rgba(0,0,0,0.4)" onOverlayClick={clickFn} />);
+
+		const button = rendered.container.querySelector('.ss__modal__button')!;
+
+		userEvent.click(button);
+		expect(clickFn).not.toHaveBeenCalled();
+
+		const overlay = rendered.container.querySelector('.ss__overlay')!;
+		await waitFor(() => {
+			const styles = getComputedStyle(overlay);
+			expect(styles.background).toBe('rgba(0, 0, 0, 0.4)');
+		});
+
+		userEvent.click(overlay!);
 		expect(clickFn).toHaveBeenCalled();
 	});
 

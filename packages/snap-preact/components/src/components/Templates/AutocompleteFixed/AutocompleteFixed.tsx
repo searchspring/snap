@@ -1,5 +1,5 @@
 import { h, Fragment } from 'preact';
-import { MutableRef, useRef, useState } from 'preact/hooks';
+import { MutableRef, useEffect, useRef, useState } from 'preact/hooks';
 
 import { observer } from 'mobx-react-lite';
 import { css } from '@emotion/react';
@@ -8,7 +8,7 @@ import { defined, mergeProps, mergeStyles } from '../../../utilities';
 import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { ComponentProps, StyleScript } from '../../../types';
 import { AutocompleteLayout, AutocompleteLayoutProps } from '../../Organisms/AutocompleteLayout';
-import { Modal, ModalProps } from '../../Atoms/Modal';
+import { Modal, ModalProps } from '../../Molecules/Modal';
 import classNames from 'classnames';
 import { SearchInput, SearchInputProps } from '../../Molecules/SearchInput';
 import { Overlay, OverlayProps } from '../../Atoms/Overlay';
@@ -70,6 +70,7 @@ export const AutocompleteFixed = observer((properties: AutocompleteFixedProps): 
 
 	let input: string | Element | null | undefined = props.input;
 	let buttonSelector = props.buttonSelector;
+	let inputPlaceholderText: string | null | undefined = undefined;
 
 	if (input) {
 		if (typeof input === 'string') {
@@ -80,6 +81,7 @@ export const AutocompleteFixed = observer((properties: AutocompleteFixedProps): 
 			setInputName(existingInputName);
 			(input as HTMLInputElement).setAttribute('name', '');
 		}
+		inputPlaceholderText = (input as HTMLInputElement)?.getAttribute('placeholder');
 	}
 
 	if (!buttonSelector && input) {
@@ -131,12 +133,19 @@ export const AutocompleteFixed = observer((properties: AutocompleteFixedProps): 
 		searchInput: {
 			// default props
 			className: 'autocomplete-fixed__search-input',
-			onSearchIconClick: () => {
-				() => reset();
-				window.location.href = controller.store.state.url.link.href;
+			placeholderText: inputPlaceholderText || undefined,
+			submitSearchButton: {
+				onClick: () => {
+					() => reset();
+					window.location.href = controller.store.state.url.link.href;
+				},
 			},
-			clearSearchIcon: 'close-thin',
-			onCloseSearchClick: () => reset(),
+			clearSearchButton: {
+				icon: 'close-thin',
+			},
+			closeSearchButton: {
+				onClick: () => reset(),
+			},
 			inputName: inputName,
 			// inherited props
 			...defined({
@@ -174,7 +183,9 @@ export const AutocompleteFixed = observer((properties: AutocompleteFixedProps): 
 		setInputBounds(getInputBounds(input as Element));
 	}, 10);
 
-	window.addEventListener('resize', debouncedHandleResize);
+	useEffect(() => {
+		window.addEventListener('resize', debouncedHandleResize);
+	}, []);
 
 	const styling = mergeStyles<AutocompleteFixedProps & { inputBounds: inputBounds }>({ ...props, inputBounds }, defaultStyles);
 

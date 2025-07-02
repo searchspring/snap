@@ -19,6 +19,24 @@ export function useAcRenderedInput({
 	const [_input, setInput] = useState<Element | null>(input);
 	const [renderedInputInitialized, setRenderedInputInitialized] = useState(false);
 
+	const onClick = () => {
+		if (setActive) {
+			setActive(true);
+		}
+
+		setTimeout(() => {
+			if (!renderedInputInitialized) {
+				controller.config.selector = '.ss__search-input__input';
+				setInput(renderedInputRef!.current);
+				controller.bind();
+				renderedInputRef?.current?.focus();
+				// if we want to reset the search input on open, uncomment the line below
+				// reset();
+			}
+			setRenderedInputInitialized(true);
+		});
+	};
+
 	useEffect(() => {
 		if (renderInput && buttonSelector) {
 			let button;
@@ -28,23 +46,8 @@ export function useAcRenderedInput({
 				button = buttonSelector;
 			}
 			if (button) {
-				button.addEventListener('click', () => {
-					if (setActive) {
-						setActive(true);
-					}
-
-					setTimeout(() => {
-						if (!renderedInputInitialized) {
-							controller.config.selector = '.ss__search-input__input';
-							setInput(renderedInputRef!.current);
-							controller.bind();
-							renderedInputRef?.current?.focus();
-							// if we want to reset the search input on open, uncomment the line below
-							// reset();
-						}
-						setRenderedInputInitialized(true);
-					});
-				});
+				button.addEventListener('select', onClick);
+				button.addEventListener('click', onClick);
 			}
 		} else {
 			if (setActive) {
@@ -59,7 +62,7 @@ export function useAcRenderedInput({
 				(input as HTMLInputElement).value = (_input as HTMLInputElement).value;
 			});
 		}
-	});
+	}, []);
 
 	return _input;
 }

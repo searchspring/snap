@@ -8,7 +8,6 @@ The AutocompleteModal component is very similar to the Autocomplete component in
 - AutocompleteTemplate
 - SearchInput
 - Modal
-- Overlay
 
 ## Usage
 
@@ -108,13 +107,6 @@ The `buttonSelector` prop defines a CSS selector for the element that triggers t
 
 ```jsx
 <AutocompleteModal controller={controller} input={'#searchInput'} buttonSelector={".openSearchButton"} />
-```
-
-### overlayColor
-The `overlayColor` prop specifies the color of the overlay.
-
-```jsx
-<AutocompleteModal controller={controller} input={'#searchInput'} overlayColor={'rgba(0,0,0,0.8)'} />
 ```
 
 ### renderInput

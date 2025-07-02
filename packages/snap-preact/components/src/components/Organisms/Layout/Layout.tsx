@@ -301,7 +301,7 @@ export const Layout = observer((properties: LayoutProps): JSX.Element => {
 	let rowIndex = 0;
 	let separatorIndex = 0;
 
-	useCleanUpEmptyDivs('.ss__layout__row');
+	useCleanUpEmptyDivs(['.ss__layout__row'], '.ss__layout__separator');
 
 	return hasChildrenToRender ? (
 		<CacheProvider>

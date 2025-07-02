@@ -5,7 +5,6 @@ import { ArgsTable, PRIMARY_STORY, Markdown } from '@storybook/blocks';
 import { SearchInput, SearchInputProps } from './SearchInput';
 import { componentArgs, highlightedCode } from '../../../utilities';
 import Readme from './readme.md';
-import { iconPaths } from '../../Atoms/Icon';
 
 export default {
 	title: 'Molecules/SearchInput',
@@ -72,7 +71,7 @@ export default {
 				},
 			},
 			control: { type: 'none' },
-			action: 'onChange',
+			action: 'onKeyUp',
 		},
 		onKeyDown: {
 			description: 'OnKeyDown Callback',
@@ -82,7 +81,7 @@ export default {
 				},
 			},
 			control: { type: 'none' },
-			action: 'onChange',
+			action: 'onKeyDown',
 		},
 		onClick: {
 			description: 'OnClick Callback',
@@ -92,75 +91,34 @@ export default {
 				},
 			},
 			control: { type: 'none' },
-			action: 'onChange',
+			action: 'onClick',
 		},
-		searchIcon: {
-			defaultValue: 'search',
-			description: 'Search Icon name',
+		submitSearchButton: {
+			description: 'Button component props for submit search button',
 			table: {
 				type: {
-					summary: 'string',
+					summary: `{ icon: 'search' }`,
 				},
-				defaultValue: { summary: 'search' },
 			},
-			options: [...Object.keys(iconPaths)],
-			control: {
-				type: 'select',
-			},
+			control: { type: 'object' },
 		},
-		onSearchIconClick: {
-			description: 'search Icon OnClick Callback',
+		clearSearchButton: {
+			description: 'Button component props for clear search button',
 			table: {
 				type: {
-					summary: 'function',
+					summary: `{ icon: 'close-thin' }`,
 				},
 			},
-			control: { type: 'none' },
-			action: 'onChange',
+			control: { type: 'object' },
 		},
-		clearSearchIcon: {
-			description: 'clear Search Icon name',
+		closeSearchButton: {
+			description: 'Button component props for close search button',
 			table: {
 				type: {
-					summary: 'string',
+					summary: `{}`,
 				},
 			},
-			options: [...Object.keys(iconPaths)],
-			control: {
-				type: 'select',
-			},
-		},
-		onClearSearchClick: {
-			description: 'clear search Icon OnClick Callback',
-			table: {
-				type: {
-					summary: 'function',
-				},
-			},
-			control: { type: 'none' },
-			action: 'onChange',
-		},
-		closeSearchIcon: {
-			description: 'clear Search Icon name',
-			table: {
-				type: {
-					summary: 'string',
-				},
-			},
-			options: [...Object.keys(iconPaths)],
-			control: {
-				type: 'select',
-			},
-		},
-		onCloseSearchClick: {
-			description: 'close search Icon OnClick Callback',
-			table: {
-				type: {
-					summary: 'function',
-				},
-			},
-			control: { type: 'none' },
-			action: 'onChange',
+			control: { type: 'object' },
 		},
 		placeholderText: {
 			defaultValue: 'Search',
@@ -196,3 +154,8 @@ export default {
 	},
 };
 export const Default = (args: SearchInputProps) => <SearchInput {...args} />;
+
+Default.args = {
+	submitSearchButton: { icon: 'search' },
+	clearSearchButton: { icon: 'close-thin' },
+};

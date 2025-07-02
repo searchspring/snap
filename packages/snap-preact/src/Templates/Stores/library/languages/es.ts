@@ -3,7 +3,7 @@ import type { ValueFacet } from '@searchspring/snap-store-mobx';
 
 export const es: LangComponents = {
 	recommendation: {},
-	autocompleteTemplate: {
+	autocompleteLayout: {
 		facetsTitle: {},
 		contentTitle: {},
 		closeButton: {
@@ -93,9 +93,9 @@ export const es: LangComponents = {
 				'aria-label': 'Borrar búsqueda',
 			},
 		},
-		searchButton: {
+		submitSearchButton: {
 			attributes: {
-				'aria-label': 'Enviar buscar',
+				'aria-label': 'Enviar búsqueda',
 			},
 		},
 	},

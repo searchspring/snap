@@ -8,10 +8,9 @@ import { defined, mergeProps, mergeStyles } from '../../../utilities';
 import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { ComponentProps, StyleScript } from '../../../types';
 import { AutocompleteLayout, AutocompleteLayoutProps } from '../../Organisms/AutocompleteLayout';
-import { Modal, ModalProps } from '../../Atoms/Modal';
+import { Modal, ModalProps } from '../../Molecules/Modal';
 import classNames from 'classnames';
 import { SearchInput, SearchInputProps } from '../../Molecules/SearchInput';
-import { Overlay, OverlayProps } from '../../Atoms/Overlay';
 import { useAcRenderedInput } from '../../../hooks';
 
 const defaultStyles: StyleScript<AutocompleteModalProps> = ({ width, height, theme }) => {
@@ -19,7 +18,6 @@ const defaultStyles: StyleScript<AutocompleteModalProps> = ({ width, height, the
 	const variables = theme?.variables;
 
 	return css({
-		border: '1px solid #eee',
 		position: 'fixed',
 		left: '0',
 		width: '100%',
@@ -101,7 +99,7 @@ export const AutocompleteModal = observer((properties: AutocompleteModalProps): 
 		buttonSelector = input;
 	}
 
-	const { layout, disableStyles, controller, renderInput, overlayColor, className, treePath } = props;
+	const { layout, disableStyles, controller, renderInput, className, treePath } = props;
 
 	const renderedInputRef: MutableRef<HTMLInputElement | null> = useRef(null);
 
@@ -121,19 +119,8 @@ export const AutocompleteModal = observer((properties: AutocompleteModalProps): 
 			// default props
 			className: 'autocomplete-modal__modal',
 			buttonSelector: buttonSelector,
+			onOverlayClick: () => reset(),
 			open: active,
-			// inherited props
-			...defined({
-				disableStyles,
-			}),
-			// component theme overrides
-			theme: props?.theme,
-			treePath,
-		},
-		overlay: {
-			// default props
-			className: 'autocomplete-modal__overlay',
-			color: overlayColor,
 			// inherited props
 			...defined({
 				disableStyles,
@@ -145,13 +132,19 @@ export const AutocompleteModal = observer((properties: AutocompleteModalProps): 
 		searchInput: {
 			// default props
 			className: 'autocomplete-modal__search-input',
-			onSearchIconClick: () => {
-				() => reset();
-				window.location.href = controller.store.state.url.link.href;
+			submitSearchButton: {
+				onClick: () => {
+					() => reset();
+					window.location.href = controller.store.state.url.link.href;
+				},
 			},
-			onCloseSearchClick: () => reset(),
-			closeSearchIcon: 'angle-left',
-			clearSearchIcon: 'close-thin',
+			clearSearchButton: {
+				icon: 'close-thin',
+			},
+			closeSearchButton: {
+				onClick: () => reset(),
+				icon: 'angle-left',
+			},
 			inputName: inputName,
 			// inherited props
 			...defined({
@@ -206,14 +199,6 @@ export const AutocompleteModal = observer((properties: AutocompleteModalProps): 
 								treePath={`${treePath} modal`}
 							/>
 						</div>
-
-						<Overlay
-							{...subProps.overlay}
-							active={active}
-							onClick={() => {
-								reset();
-							}}
-						/>
 					</Fragment>
 				</Modal>
 			</div>
@@ -227,7 +212,6 @@ interface AutocompleteModalSubProps {
 	autocompleteTemplate: Partial<AutocompleteLayoutProps>;
 	modal: Partial<ModalProps>;
 	searchInput: Partial<SearchInputProps>;
-	overlay: Partial<OverlayProps>;
 }
 
 export interface AutocompleteModalProps extends AutocompleteLayoutProps, ComponentProps {

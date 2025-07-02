@@ -150,7 +150,7 @@ export interface ButtonProps extends ComponentProps<ButtonProps> {
 	backgroundColor?: string;
 	borderColor?: string;
 	color?: string;
-	icon?: IconType | Partial<IconProps>;
+	icon?: IconType | Partial<IconProps> | boolean;
 	content?: string | JSX.Element;
 	children?: ComponentChildren;
 	disabled?: boolean;
@@ -171,6 +171,6 @@ export type ButtonNames =
 	| 'slideout'
 	| 'sidebar-toggle'
 	| 'see-more'
-	| 'close-search-icon'
-	| 'clear-search-icon'
-	| 'search-icon';
+	| 'close-search'
+	| 'clear-search'
+	| 'submit-search';

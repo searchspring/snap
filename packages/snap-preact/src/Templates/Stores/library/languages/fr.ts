@@ -3,7 +3,7 @@ import { LangComponents } from '../../../../../components/src';
 
 export const fr: LangComponents = {
 	recommendation: {},
-	autocompleteTemplate: {
+	autocompleteLayout: {
 		facetsTitle: {},
 		contentTitle: {},
 		closeButton: {
@@ -75,7 +75,7 @@ export const fr: LangComponents = {
 		},
 		closeSearchButton: {
 			attributes: {
-				'aria-label': 'Fermer la  recherche',
+				'aria-label': 'Fermer la recherche',
 			},
 		},
 		clearSearchButton: {
@@ -83,7 +83,7 @@ export const fr: LangComponents = {
 				'aria-label': 'Effacer la recherche',
 			},
 		},
-		searchButton: {
+		submitSearchButton: {
 			attributes: {
 				'aria-label': 'Soumettre Rechercher',
 			},

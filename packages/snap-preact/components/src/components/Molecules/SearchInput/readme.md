@@ -3,12 +3,19 @@
 Renders an input element
 
 ## Sub-components
-- Icon
+- Button
 
 ## Usage
 
 ```jsx
 <SearchInput onChange={handleChange} placeholderText={"placeholder text"}/>
+```
+
+### value
+The `value` prop sets the input value if externally managed.
+
+```jsx
+<SearchInput value={'dress'} placeholderText={"placeholder text"} />
 ```
 
 ### placeholderText
@@ -46,18 +53,50 @@ The `onKeyDown` prop is invoked keyDown on the input
 <SearchInput onKeyDown={handleChange} />
 ```
 
-## onClick
+### onClick
 The `onClick` prop is invoked on click of anything in the component. Wrapper, input or icon. 
 
 ```jsx
 <SearchInput onClick={handleChange} />
 ```
 
-### icon
-The `icon` prop specifies a path within the `Icon` component paths (see Icon Gallery).
+### submitSearchButton
+The `submitSearchButton` prop specifies props to pass to the submit search button component. Takes any `Button` component props. 
 
 ```jsx
-<SearchInput icon={'search'} />
+
+const buttonProps = {
+    icon: 'search',
+    onClick: () => func
+};
+
+<SearchInput submitSearchButton={buttonProps} />
+```
+
+### clearSearchButton
+The `clearSearchButton` prop specifies props to pass to the clear search button component. Takes any `Button` component props. Note this button only renders if there is a value to clear. 
+
+```jsx
+
+const buttonProps = {
+    icon: 'close-thin',
+    onClick: () => func
+};
+
+<SearchInput clearSearchButton={buttonProps} />
+```
+
+### closeSearchButton
+The `closeSearchButton` prop specifies props to pass to the close search button component. Takes any `Button` component props. 
+
+```jsx
+
+const buttonProps = {
+    icon: 'angle-left',
+    onClick: () => func
+};
+
+<SearchInput closeSearchButton={buttonProps} />
 ```
 
 ### inputRef
