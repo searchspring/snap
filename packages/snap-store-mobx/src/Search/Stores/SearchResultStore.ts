@@ -173,14 +173,14 @@ export class Product {
 	public mask = new ProductMask();
 	public variants?: Variants;
 
-	constructor(services: StoreServices, result: SearchResponseModelResult, metaData: MetaResponseModel, config?: StoreConfigs) {
+	constructor(services: StoreServices, result: SearchResponseModelResult & { variants?: any }, metaData: MetaResponseModel, config?: StoreConfigs) {
 		this.id = result.id!;
 		this.attributes = result.attributes!;
 		this.mappings = result.mappings!;
 		this.position = result.position!;
 
 		this.badges = new Badges(result, metaData);
-
+		//custom variants field?
 		const variantsField = (config as SearchStoreConfig)?.settings?.variants?.field;
 		if (config && variantsField && this.attributes && this.attributes[variantsField]) {
 			try {
@@ -192,6 +192,10 @@ export class Product {
 				// failed to parse the variant JSON
 				console.error(err, `Invalid variant JSON for product id: ${result.id}`);
 			}
+			// default variants field
+		} else if (result.variants) {
+			// if variants are already parsed, use them
+			this.variants = new Variants(result.variants.data, this.mask, (config as SearchStoreConfig)?.settings?.variants, result.variants.preferences);
 		}
 
 		if (result?.children?.length) {
@@ -321,7 +325,7 @@ export class Variants {
 	public setActive: (variant: Variant) => void;
 	private config?: VariantConfig;
 
-	constructor(variantData: VariantData[], mask: ProductMask, config?: VariantConfig) {
+	constructor(variantData: VariantData[], mask: ProductMask, config?: VariantConfig, preferences?: Record<string, string[]>) {
 		// setting function in constructor to prevent exposing mask as class property
 		this.setActive = (variant: Variant) => {
 			this.active = variant;
@@ -332,10 +336,10 @@ export class Variants {
 			this.config = config;
 		}
 
-		this.update(variantData, config);
+		this.update(variantData, config, preferences);
 	}
 
-	public update(variantData: VariantData[], config = this.config) {
+	public update(variantData: VariantData[], config = this.config, preferences?: Record<string, string[]>) {
 		try {
 			const options: string[] = [];
 
@@ -371,6 +375,15 @@ export class Variants {
 			});
 
 			const preselectedOptions: Record<string, string[]> = {};
+
+			//api preferences
+			if (preferences) {
+				Object.keys(preferences).forEach((option) => {
+					preselectedOptions[option] = preferences[option];
+				});
+			}
+
+			//user defined preferences - these override API preferences
 			if (config?.options) {
 				Object.keys(config?.options).forEach((option) => {
 					if (config.options![option].preSelected) {
