@@ -211,7 +211,7 @@ export class SnapTemplates extends Snap {
 							// this is an inital page load without overrides
 							// register the controllers config into the templateEditorStore
 							// tempalteEditorStore will need to also save that to localstorage separatly for furture reset-to values when overrides exist
-							const searchDefaultControllerConfig = (this.controllers['search'] as SearchController).config.settings!;
+							const searchDefaultControllerConfig = (this.controllers['search'] as SearchController).config;
 							templateEditorStore.registerDefaultControllerConfig('search', searchDefaultControllerConfig);
 						}
 
@@ -219,7 +219,7 @@ export class SnapTemplates extends Snap {
 							!controllerOverrides?.['autocomplete'] ||
 							(controllerOverrides?.['autocomplete'] && Object.keys(controllerOverrides['autocomplete']).length == 0)
 						) {
-							const autocompleteDefaultControllerConfig = (this.controllers['autocomplete'] as AutocompleteController).config.settings!;
+							const autocompleteDefaultControllerConfig = (this.controllers['autocomplete'] as AutocompleteController).config;
 							templateEditorStore.registerDefaultControllerConfig('autocomplete', autocompleteDefaultControllerConfig);
 						}
 

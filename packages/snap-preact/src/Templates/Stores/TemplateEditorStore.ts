@@ -4,7 +4,7 @@ import { observable, makeObservable } from 'mobx';
 import deepmerge from 'deepmerge';
 import { TemplatesStore } from './TemplateStore';
 import { ThemeStore } from './ThemeStore';
-import { AutocompleteController, SearchController } from '@searchspring/snap-controller';
+import { AutocompleteController, AutocompleteControllerConfig, SearchController, SearchControllerConfig } from '@searchspring/snap-controller';
 
 export type Tabs = 'Templates' | 'Configuration';
 
@@ -86,10 +86,11 @@ export class TemplateEditorStore {
 			reloadRequired: observable,
 			activeTab: observable,
 			controllerOverrides: observable,
+			defaultControllerConfigs: observable,
 		});
 	}
 
-	registerDefaultControllerConfig(type: keyof DefaultControllerConfigs, config: SearchStoreConfigSettings | AutocompleteStoreConfigSettings) {
+	registerDefaultControllerConfig(type: keyof DefaultControllerConfigs, config: SearchControllerConfig | AutocompleteControllerConfig) {
 		this.defaultControllerConfigs = deepmerge<DefaultControllerConfigs>(this.defaultControllerConfigs || {}, { [type]: config });
 		this.storage.set('defaultControllerConfigs', this.defaultControllerConfigs);
 	}
@@ -159,42 +160,25 @@ export class TemplateEditorStore {
 		});
 	}
 
-	resetControllerOverride(obj: { path: string[]; feat: string; controller?: SearchController | AutocompleteController }) {
-		const { path, feat } = obj;
-		let controllerOverrides = this.controllerOverrides[feat as keyof typeof this.controllerOverrides];
-		path.forEach((p, i) => {
-			if (i === path.length - 1) {
-				delete controllerOverrides[p];
-			} else {
-				controllerOverrides = controllerOverrides[p];
-			}
-		});
+	setControllerOverride(obj: { path: string[]; value?: unknown; feat: string; controller?: SearchController | AutocompleteController }) {
+		const { path, value, feat, controller } = obj;
 
-		// function to delele empty objects within this.controllerOverrides[feat]
-		const deleteEmptyObjects = (obj: any) => {
-			Object.keys(obj).forEach((key) => {
-				if (typeof obj[key] === 'object' && Object.keys(obj[key]).length === 0) {
-					delete obj[key];
-				} else if (typeof obj[key] === 'object') {
-					deleteEmptyObjects(obj[key]);
+		const getDefaultValue = (): unknown => {
+			const defaultConfig = this.defaultControllerConfigs?.[feat as keyof typeof this.controllerOverrides].settings;
+			let workingConfig = defaultConfig;
+			let value = '';
+
+			path.forEach((p) => {
+				if (typeof workingConfig === 'object' && workingConfig && typeof workingConfig[p] === 'object') {
+					workingConfig = workingConfig[p];
+				} else if (typeof workingConfig?.[p] !== 'undefined') {
+					console.log('getDefaultValue is returning', workingConfig?.[p]);
+					value = workingConfig?.[p];
 				}
 			});
+			return value;
 		};
 
-		deleteEmptyObjects(this.controllerOverrides[feat as keyof typeof this.controllerOverrides]);
-		this.storage.set('controllerOverrides', this.controllerOverrides);
-		// this.reloadRequired = true;
-		// if(controller) {
-		// 	// not applicable to Recs
-		// 	const defaultConfig = JSON.parse(JSON.stringify(this.defaultControllerConfigs?.[feat as keyof typeof this.controllerOverrides] || {}));
-		// 	const overrides = this.controllerOverrides[feat as keyof typeof this.controllerOverrides] || {};
-		// 	this.deepDelete(defaultConfig, overrides);
-		// 	controller.setConfig(defaultConfig);
-		// }
-	}
-
-	setControllerOverride(obj: { path: string[]; value: unknown; feat: string; controller?: SearchController | AutocompleteController }) {
-		const { path, value, feat } = obj;
 		const controllerOverrides = {
 			[feat]: path
 				.slice()
@@ -213,12 +197,27 @@ export class TemplateEditorStore {
 
 		this.controllerOverrides = deepmerge(this.controllerOverrides, controllerOverrides);
 		this.storage.set('controllerOverrides', this.controllerOverrides);
-		// this.reloadRequired = true;
-		// if(controller) {
-		// 	// not applicable to Recs
-		// 	const newConfig = deepmerge(this.defaultControllerConfigs?.[feat as keyof typeof this.controllerOverrides] || {}, this.controllerOverrides[feat as keyof typeof this.controllerOverrides])
-		// 	controller.setConfig(newConfig);
-		// }
+
+		const activeConfig = {
+			[feat]: path
+				.slice()
+				.reverse()
+				.reduce((res, key) => {
+					if (path.indexOf(key) === path.length - 1) {
+						return {
+							[key]: value ?? getDefaultValue(),
+						};
+					}
+					return {
+						[key]: res,
+					};
+				}, {}),
+		};
+		const newActiveConfig = deepmerge(this.defaultControllerConfigs?.[feat as keyof typeof this.controllerOverrides] || {}, {
+			settings: activeConfig[feat as keyof typeof this.controllerOverrides],
+		});
+		controller?.setConfig(newActiveConfig);
+		controller?.store.setConfig(newActiveConfig as any);
 	}
 
 	switchTabs(tab: Tabs) {

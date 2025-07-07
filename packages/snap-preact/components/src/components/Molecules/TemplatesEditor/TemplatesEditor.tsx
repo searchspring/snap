@@ -688,26 +688,6 @@ const ControllerSettings = observer((props: ControllerSettingsProps) => {
 	const { feature, editorStore, snap } = props;
 	const [feat, recsType = ''] = feature.split('/');
 
-	const shouldShowResetButton = (path: string[], val: unknown) => {
-		try {
-			let obj = editorStore.controllerOverrides[feat as keyof typeof editorStore.controllerOverrides];
-			if (!obj) {
-				// no overrides at this moment
-				return false;
-			}
-
-			path.forEach((p) => {
-				obj = obj[p];
-			});
-			if (obj && obj === val) {
-				return true;
-			}
-		} catch (e) {
-			console.log(e);
-			return false;
-		}
-	};
-
 	return (
 		<>
 			{Object.keys(editorStore.refinedControllerSettings[feat as keyof ControllerSettingsType]).map((settingName) => {
@@ -722,19 +702,28 @@ const ControllerSettings = observer((props: ControllerSettingsProps) => {
 				let value: unknown;
 
 				// assign value based on current controller configuration
-				const controller = snap?.controllers[feat] as SearchController | AutocompleteController;
+				const controller = snap.controllers?.[feat] as SearchController | AutocompleteController;
 				const controllerConfig = controller?.config?.settings;
 				let activeConfig = controllerConfig;
 				const path = settingName.split('.');
+
+				let controllerOverrides = editorStore.controllerOverrides[feat as keyof typeof editorStore.controllerOverrides];
+				let shouldShowResetButton;
+
 				path.forEach((p: string) => {
 					// @ts-ignore - temp
 					if (typeof activeConfig === 'object' && p in activeConfig && typeof activeConfig[p] === 'object') {
 						// @ts-ignore - temp
 						activeConfig = activeConfig[p];
+						if (typeof controllerOverrides === 'object' && p in controllerOverrides && typeof controllerOverrides[p] === 'object') {
+							controllerOverrides = controllerOverrides?.[p];
+						}
+
 						// @ts-ignore - temp
 					} else if (typeof activeConfig?.[p] !== 'undefined') {
 						// @ts-ignore - temp
 						value = activeConfig?.[p];
+						shouldShowResetButton = controllerOverrides?.[p] === value;
 					}
 				});
 
@@ -748,10 +737,14 @@ const ControllerSettings = observer((props: ControllerSettingsProps) => {
 								</a>
 								:
 							</label>
-							{shouldShowResetButton(path, value) && (
+							{shouldShowResetButton && (
 								<button
 									onClick={() => {
-										editorStore.resetControllerOverride({ path, feat, controller });
+										editorStore.setControllerOverride({
+											feat,
+											path,
+											controller,
+										});
 									}}
 								>
 									reset
@@ -782,10 +775,14 @@ const ControllerSettings = observer((props: ControllerSettingsProps) => {
 								</a>
 								:
 							</label>
-							{shouldShowResetButton(path, value) && (
+							{shouldShowResetButton && (
 								<button
 									onClick={() => {
-										editorStore.resetControllerOverride({ path, feat, controller });
+										editorStore.setControllerOverride({
+											feat,
+											path,
+											controller,
+										});
 									}}
 								>
 									reset
@@ -794,12 +791,12 @@ const ControllerSettings = observer((props: ControllerSettingsProps) => {
 							<input
 								id={id}
 								type="checkbox"
-								checked={value as boolean}
+								checked={Boolean(value) as boolean}
 								onChange={(e) => {
 									editorStore.setControllerOverride({
 										feat,
 										path: settingName.split('.'),
-										value: e.target.checked,
+										value: Boolean(e.target.checked),
 										controller,
 									});
 								}}
@@ -816,10 +813,14 @@ const ControllerSettings = observer((props: ControllerSettingsProps) => {
 								</a>
 								:
 							</label>
-							{shouldShowResetButton(path, value) && (
+							{shouldShowResetButton && (
 								<button
 									onClick={() => {
-										editorStore.resetControllerOverride({ path, feat, controller });
+										editorStore.setControllerOverride({
+											feat,
+											path,
+											controller,
+										});
 									}}
 								>
 									reset
@@ -934,16 +935,8 @@ const TemplateTargetSettings = (props: TemplateTargetSettingsProps) => {
 };
 
 /*
-
-Next:
-1. normalize settings (enabled flag)
-2. adding default controller settings to the TemplateEditorStore
-3. adding project config controller settings to the TemplateEditorStore (set prior to construction and merging of overrides)
-4. using above changes add ability to reset controller settings to the project config initial values (or defaults as needed)
-
 Later:
 0. group some controller settings in more intuitive fashion (eg. show trending/history as radio button) - user abstraction layer
 1. agree on UI/UX for initial TemplateEditor
 2. polish (clean up styles)
-
 */
