@@ -397,6 +397,33 @@ describe('Storage Store', () => {
 					expect(storage.get(secondPath)).toStrictEqual(secondValue);
 					storage.clear();
 				});
+
+				const itif = (condition: boolean) => (condition ? it : it.skip);
+				itif(storageType !== StorageType.cookie)('can fail gracefully if storage is full', () => {
+					const storage = new StorageStore({ type: storageType, key: 'ss-key' });
+
+					const consoleSpy = jest.spyOn(console, 'warn');
+					const maxStorage = 5 * 1000 * 1000; // typically 5MB
+					const almostFiveMB = 'a'.repeat(maxStorage - 100);
+
+					storage.set('path1', almostFiveMB);
+					expect(storage.get('path1')).toBe(almostFiveMB);
+					expect(consoleSpy).not.toHaveBeenCalled();
+
+					const data = 'a'.repeat(100); // 100 bytes of data
+					storage.set('path2', data);
+					expect(storage.get('path2')).toBe(undefined);
+					expect(consoleSpy).toHaveBeenCalledTimes(1);
+
+					consoleSpy.mockClear();
+
+					const smallData = 'a'.repeat(10); // 10 bytes of data
+					storage.set('path3', smallData);
+					expect(storage.get('path3')).toBe(smallData);
+					expect(consoleSpy).not.toHaveBeenCalled();
+
+					consoleSpy.mockRestore();
+				});
 			});
 
 			describe('get functionality', () => {

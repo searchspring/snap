@@ -71,16 +71,20 @@ export class StorageStore {
 				location = location[p] = location[p] || {};
 			}
 		});
-		switch (this.type) {
-			case StorageType.session:
-				window.sessionStorage.setItem(this.key, JSON.stringify(this.state));
-				break;
-			case StorageType.local:
-				window.localStorage.setItem(this.key, JSON.stringify(this.state));
-				break;
-			case StorageType.cookie:
-				utils.cookies.set(this.key, JSON.stringify(this.state), this.sameSite, this.expiration, this.cookieDomain);
-				break;
+		try {
+			switch (this.type) {
+				case StorageType.session:
+					window.sessionStorage.setItem(this.key, JSON.stringify(this.state));
+					break;
+				case StorageType.local:
+					window.localStorage.setItem(this.key, JSON.stringify(this.state));
+					break;
+				case StorageType.cookie:
+					utils.cookies.set(this.key, JSON.stringify(this.state), this.sameSite, this.expiration, this.cookieDomain);
+					break;
+			}
+		} catch (err) {
+			console.warn(`something went wrong setting ${this.key} to ${this.type} storage`);
 		}
 	}
 
