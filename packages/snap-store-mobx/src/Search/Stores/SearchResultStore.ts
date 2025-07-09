@@ -512,7 +512,7 @@ export class VariantSelection {
 		// loop through selectedSelections and remove products that do not match
 		for (const selectedSelection of selectedSelections) {
 			availableVariants = availableVariants.filter(
-				(variant) => selectedSelection.selected?.value == variant.options[selectedSelection.field].value && variant.available
+				(variant) => selectedSelection.selected?.value == variant.options?.[selectedSelection.field]?.value && variant.available
 			);
 		}
 
