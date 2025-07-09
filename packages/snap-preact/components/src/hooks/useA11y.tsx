@@ -1,8 +1,10 @@
 const KEYCODE_TAB = 9;
 const KEYCODE_ESC = 27;
 export const A11Y_ATTRIBUTE = 'ss-a11y';
+export const FocusableElements =
+	'a[href]:not([disabled]), button:not([disabled]), textarea:not([disabled]), input[type="text"]:not([disabled]), input[type="radio"]:not([disabled]), input[type="checkbox"]:not([disabled]), select:not([disabled]), [tabindex]';
 
-export function useA11y(elem: any, tabIndex?: number, trapFocus?: boolean, escCallback?: () => unknown) {
+export function useA11y(elem: any, tabIndex?: number, trapFocus?: boolean, escCallback?: (e: any) => unknown) {
 	const styleId = 'ssA11yFocusStyle';
 	if (!document.querySelector(`#${styleId}`)) {
 		const style = document.createElement('style');
@@ -27,21 +29,20 @@ export function useA11y(elem: any, tabIndex?: number, trapFocus?: boolean, escCa
 
 		if (trapFocus) {
 			elem.addEventListener('keydown', function (e: any) {
-				const focusableEls = elem.querySelectorAll(
-					'a[href]:not([disabled]), button:not([disabled]), textarea:not([disabled]), input[type="text"]:not([disabled]), input[type="radio"]:not([disabled]), input[type="checkbox"]:not([disabled]), select:not([disabled]), [tabindex]'
-				);
+				const focusableEls = elem.querySelectorAll(FocusableElements);
 				const firstFocusableEl = focusableEls[0];
 				const lastFocusableEl = focusableEls[focusableEls.length - 1];
 
 				//esc key
 				if (e.keyCode == KEYCODE_ESC) {
 					elem.focus();
-
 					if (escCallback) {
-						escCallback();
+						escCallback(e);
 					}
 
 					e.preventDefault();
+					//this is needed to stop the event from bubbling up to the parent elements. in case they also have the same listener. IE: mobileSidebar and sortBy
+					e.stopPropagation();
 					return;
 				}
 

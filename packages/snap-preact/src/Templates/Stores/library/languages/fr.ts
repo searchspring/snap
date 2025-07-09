@@ -281,6 +281,18 @@ export const fr: LangComponents = {
 					}`,
 			},
 		},
+		checkbox: {
+			attributes: {
+				'aria-label': (data) =>
+					`${
+						data?.value?.filtered
+							? `supprimer le filtre sélectionné ${data?.facet?.label || ''} - ${data?.value?.label}`
+							: data?.facet?.label
+							? `filtrer par ${data?.facet?.label} - ${data?.value?.label}`
+							: `filtrer par ${data?.value?.label}`
+					}`,
+			},
+		},
 	},
 	facetHierarchyOptions: {
 		hierarchyOption: {

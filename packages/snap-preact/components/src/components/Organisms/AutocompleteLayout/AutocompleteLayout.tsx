@@ -695,11 +695,9 @@ export const AutocompleteLayout = observer((properties: AutocompleteLayoutProps)
 		if (module == 'button.see-more' && showResults && search?.query?.string && results.length > 0) {
 			return (
 				<Button {...subProps.button}>
-					<div className="ss__autocomplete__see-more">
-						<a href={state.url.href} onClick={() => controller?.setFocused && controller.setFocused()} {...mergedLang.seeMoreButton.attributes}>
-							<span {...mergedLang.seeMoreButton.value}></span>
-							<Icon {...subProps.icon} />
-						</a>
+					<div className="ss__autocomplete__see-more" {...mergedLang.seeMoreButton.attributes}>
+						<span {...mergedLang.seeMoreButton.value}></span>
+						<Icon {...subProps.icon} />
 					</div>
 				</Button>
 			);
@@ -713,7 +711,7 @@ export const AutocompleteLayout = observer((properties: AutocompleteLayoutProps)
 				{...styling}
 				className={classnames('ss__autocomplete', className)}
 				onClick={(e) => e.stopPropagation()}
-				ref={(e) => useA11y(e, 0, true, reset)}
+				ref={(e) => useA11y(e, 0, false, reset)}
 			>
 				<span
 					role={'link'}

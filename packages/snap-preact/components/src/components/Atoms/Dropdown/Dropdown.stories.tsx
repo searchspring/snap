@@ -127,6 +127,16 @@ export default {
 			control: { type: 'none' },
 			action: 'onToggle',
 		},
+		focusTrapContent: {
+			description: 'boolean to enable ally focustrap',
+			table: {
+				type: {
+					summary: 'boolean',
+				},
+				defaultValue: { summary: false },
+			},
+			control: { type: 'boolean' },
+		},
 		disableA11y: {
 			description: 'boolean to disable autoset ally properties',
 			table: {

@@ -62,6 +62,12 @@ export const Radio = observer((properties: RadioProps): JSX.Element => {
 		className,
 		size,
 		treePath,
+		lang,
+		style: _,
+		styleScript: __,
+		themeStyleScript: ___,
+		name: ____,
+		...additionalProps
 	} = props;
 
 	const subProps: RadioSubProps = {
@@ -125,8 +131,8 @@ export const Radio = observer((properties: RadioProps): JSX.Element => {
 	};
 
 	//deep merge with props.lang
-	const lang = deepmerge(defaultLang, props.lang || {});
-	const mergedLang = useLang(lang as any, {
+	const _lang = deepmerge(defaultLang, lang || {});
+	const mergedLang = useLang(_lang as any, {
 		disabled,
 		checkedState,
 	});
@@ -155,6 +161,7 @@ export const Radio = observer((properties: RadioProps): JSX.Element => {
 					role="radio"
 					aria-checked={checkedState}
 					aria-disabled={disabled}
+					{...additionalProps}
 				>
 					{checkedState ? (
 						<Icon {...subProps.activeIcon} {...(typeof checkedIcon == 'string' ? { icon: checkedIcon } : (checkedIcon as Partial<IconProps>))} />

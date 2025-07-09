@@ -57,6 +57,13 @@ The `disableA11y` prop specifies a boolean to disable the autoset ally propertie
 <Dropdown disableA11y>Hello World!</Dropdown>
 ```
 
+### focusTrapContent
+The `focusTrapContent` prop specifies if the content should trap the user in a focus trap for a11y keyboard navigation.
+
+```jsx
+<Dropdown focusTrapContent={true} >Hello World!</Dropdown>
+```
+
 ### disableOverlay
 The `disableOverlay` prop will disable the dropdown contents from being rendered as an overlay. If set to `true`, dropdown contents will instead be rendered as a block and affect the height of its parent element. Typically used if Dropdown is intended to act as a header (ie. Facet)
 

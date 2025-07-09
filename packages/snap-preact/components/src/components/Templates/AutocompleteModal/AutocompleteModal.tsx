@@ -11,7 +11,7 @@ import { AutocompleteLayout, AutocompleteLayoutProps } from '../../Organisms/Aut
 import { Modal, ModalProps } from '../../Molecules/Modal';
 import classNames from 'classnames';
 import { SearchInput, SearchInputProps } from '../../Molecules/SearchInput';
-import { useAcRenderedInput } from '../../../hooks';
+import { useA11y, useAcRenderedInput } from '../../../hooks';
 
 const defaultStyles: StyleScript<AutocompleteModalProps> = ({ width, height, theme }) => {
 	// eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -104,7 +104,7 @@ export const AutocompleteModal = observer((properties: AutocompleteModalProps): 
 	const renderedInputRef: MutableRef<HTMLInputElement | null> = useRef(null);
 
 	const subProps: AutocompleteModalSubProps = {
-		autocompleteTemplate: {
+		autocompleteLayout: {
 			// default props
 			layout: layout,
 			// inherited props
@@ -185,7 +185,7 @@ export const AutocompleteModal = observer((properties: AutocompleteModalProps): 
 			<div {...styling} className={classNames('ss__autocomplete-modal', className)}>
 				<Modal {...subProps.modal}>
 					<Fragment>
-						<div className="ss__autocomplete-modal__inner">
+						<div className="ss__autocomplete-modal__inner" ref={(e) => useA11y(e, 0, true, reset)}>
 							{renderInput ? (
 								<SearchInput {...subProps.searchInput} value={controller.store.state.input || ('' as string)} inputRef={renderedInputRef} />
 							) : (
@@ -193,7 +193,7 @@ export const AutocompleteModal = observer((properties: AutocompleteModalProps): 
 							)}
 							<AutocompleteLayout
 								{...acProps}
-								{...subProps.autocompleteTemplate}
+								{...subProps.autocompleteLayout}
 								input={_input!}
 								controller={controller}
 								treePath={`${treePath} modal`}
@@ -209,7 +209,7 @@ export const AutocompleteModal = observer((properties: AutocompleteModalProps): 
 });
 
 interface AutocompleteModalSubProps {
-	autocompleteTemplate: Partial<AutocompleteLayoutProps>;
+	autocompleteLayout: Partial<AutocompleteLayoutProps>;
 	modal: Partial<ModalProps>;
 	searchInput: Partial<SearchInputProps>;
 }

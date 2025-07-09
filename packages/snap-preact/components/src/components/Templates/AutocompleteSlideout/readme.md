@@ -5,7 +5,7 @@ Renders an autocomplete popup that binds to an `<input>` element.
 The AutocompleteSlideout component is very similar to the Autocomplete component in functionality, however the main difference is that the AutocompleteSlideout components layout is determined by the layout prop, which specifies what child components render and where.
 
 ## Components Used
-- AutocompleteTemplate
+- autocompleteLayout
 - Slideout
 - SearchInput
 

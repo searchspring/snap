@@ -45,7 +45,7 @@ export function Overlay(properties: OverlayProps): JSX.Element {
 		<CacheProvider>
 			<div
 				onClick={(e: React.MouseEvent<HTMLDivElement, Event>) => onClick && active && onClick(e)}
-				ref={(e) => (!disableA11y ? useA11y(e) : null)}
+				ref={(e) => (!disableA11y ? useA11y(e, active ? 0 : -1) : null)}
 				className={classnames('ss__overlay', { 'ss__overlay--active': active }, className)}
 				{...styling}
 			/>
