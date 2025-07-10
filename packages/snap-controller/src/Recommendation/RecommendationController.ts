@@ -3,10 +3,16 @@ import deepmerge from 'deepmerge';
 import { ErrorType, Product } from '@searchspring/snap-store-mobx';
 import { AbstractController } from '../Abstract/AbstractController';
 import { ControllerTypes } from '../types';
+import {
+	type Item,
+	type Product as BeaconProduct,
+	type RecommendationsAddtocartSchemaData,
+	type RecommendationsSchemaData,
+	ItemTypeEnum,
+} from '@searchspring/beacon';
 import type { RecommendationStore } from '@searchspring/snap-store-mobx';
 import type { RecommendRequestModel } from '@searchspring/snap-client';
 import type { RecommendationControllerConfig, ControllerServices, ContextVariables, AfterStoreObj } from '../types';
-import type { Item, Product as BeaconProduct, RecommendationsAddtocartSchemaData, RecommendationsSchemaData } from '@searchspring/beacon';
 import type { Next } from '@searchspring/snap-event-manager';
 import { CLICK_DUPLICATION_TIMEOUT, isClickWithinProductLink } from '../utils/isClickWithinProductLink';
 
@@ -359,11 +365,13 @@ function getRecommendationsAddtocartSchemaData({
 function getRecommendationsSchemaData({ store, results }: { store: RecommendationStore; results?: Product[] }): RecommendationsSchemaData {
 	return {
 		tag: store.profile.tag,
+		banners: [],
 		results:
 			results?.map((result: Product): Item => {
 				const core = result.mappings.core!;
 				const position = result.position;
 				return {
+					type: ItemTypeEnum.Product,
 					position,
 					uid: core.uid || '',
 					sku: core.sku,

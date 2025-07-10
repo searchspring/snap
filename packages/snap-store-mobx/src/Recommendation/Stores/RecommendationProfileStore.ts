@@ -15,6 +15,10 @@ export class RecommendationProfileStore {
 			return;
 		}
 
+		if (!data.profile.display.template) {
+			throw new Error(`Recommendation Profile Store found a profile without a set template: ${data.profile.tag}`);
+		}
+
 		this.tag = data.profile.tag;
 		this.placement = data.profile.placement;
 		this.display = data.profile.display;
