@@ -157,6 +157,11 @@ type ProductMinimal = {
 	mappings: SearchResponseModelResultMappings;
 };
 
+type SearchResponseModelResultVariants = {
+	preferences: Record<string, string[]>;
+	data: VariantData[];
+};
+
 export class Product {
 	public type = 'product';
 	public id: string;
@@ -173,14 +178,18 @@ export class Product {
 	public mask = new ProductMask();
 	public variants?: Variants;
 
-	constructor(services: StoreServices, result: SearchResponseModelResult & { variants?: any }, metaData: MetaResponseModel, config?: StoreConfigs) {
+	constructor(
+		services: StoreServices,
+		result: SearchResponseModelResult & { variants?: SearchResponseModelResultVariants },
+		metaData: MetaResponseModel,
+		config?: StoreConfigs
+	) {
 		this.id = result.id!;
 		this.attributes = result.attributes!;
 		this.mappings = result.mappings!;
 		this.position = result.position!;
 
 		this.badges = new Badges(result, metaData);
-		//custom variants field?
 		const variantsField = (config as SearchStoreConfig)?.settings?.variants?.field;
 		if (config && variantsField && this.attributes && this.attributes[variantsField]) {
 			try {
@@ -469,7 +478,7 @@ export class Variants {
 			// loop through selectedSelections and only include available products that match current selections
 			for (const selectedSelection of selectedSelections) {
 				availableVariants = availableVariants.filter(
-					(variant) => selectedSelection.selected?.value == variant.options[selectedSelection.field].value && variant.available
+					(variant) => selectedSelection.selected?.value == variant.options[selectedSelection.field]?.value && variant.available
 				);
 			}
 
@@ -525,7 +534,7 @@ export class VariantSelection {
 		// loop through selectedSelections and remove products that do not match
 		for (const selectedSelection of selectedSelections) {
 			availableVariants = availableVariants.filter(
-				(variant) => selectedSelection.selected?.value == variant.options[selectedSelection.field].value && variant.available
+				(variant) => selectedSelection.selected?.value == variant.options?.[selectedSelection.field]?.value && variant.available
 			);
 		}
 

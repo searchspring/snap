@@ -33,7 +33,7 @@ if (context.collection?.handle) {
 	configuration and instantiation
  */
 
-let siteId = 'z7h1jh';
+let siteId = '8uyt2m';
 let customOrigin = '';
 let clientConfig = {};
 
