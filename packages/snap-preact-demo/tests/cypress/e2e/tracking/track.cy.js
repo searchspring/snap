@@ -126,11 +126,13 @@ describe('Tracking Beacon 2.0', () => {
 									},
 									results: [
 										{
+											type: 'product',
 											position: 1,
 											uid: firstResult.mappings.core.uid,
 											sku: firstResult.mappings.core.sku,
 										},
 									],
+									banners: [],
 								})
 							);
 
