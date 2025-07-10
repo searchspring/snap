@@ -801,7 +801,7 @@ function getSearchSchemaData({ params, response }: { params: SearchRequestModel;
 		const value =
 			filter.type === 'range' &&
 			!isNaN((filter as SearchRequestModelFilterRange).value?.low!) &&
-			!isNaN((filter as SearchRequestModelFilterRange).value?.low!)
+			!isNaN((filter as SearchRequestModelFilterRange).value?.high!)
 				? [`low=${(filter as SearchRequestModelFilterRange).value?.low}`, `high=${(filter as SearchRequestModelFilterRange).value?.high}`]
 				: [`${(filter as SearchRequestModelFilterValue).value}`];
 
