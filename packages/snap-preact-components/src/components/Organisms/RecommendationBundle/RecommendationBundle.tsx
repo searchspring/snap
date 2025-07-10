@@ -216,7 +216,7 @@ export const RecommendationBundle = observer((properties: RecommendationBundlePr
 	const carouselEnabled = mergedCarouselProps.enabled;
 
 	if (!controller || controller.type !== 'recommendation') {
-		throw new Error(`<BundleRecommendation> Component requires 'controller' prop with an instance of RecommendationController`);
+		throw new Error(`<RecommendationBundle> Component requires 'controller' prop with an instance of RecommendationController`);
 	}
 
 	let resultsToRender: Product[] = results || controller.store?.results;
@@ -228,11 +228,12 @@ export const RecommendationBundle = observer((properties: RecommendationBundlePr
 	const cartStore = controller.store.cart;
 
 	if (!cartStore) {
-		throw new Error(`<BundleRecommendation> Component requires 'cartStore' to exist in the recommendation store`);
+		throw new Error(`<RecommendationBundle> Component requires 'cartStore' to exist in the recommendation store`);
 	}
 
 	if (!(results && results.length) && !controller.store?.results?.length) {
-		throw new Error(`<BundleRecommendation> Component has no results to render!`);
+		controller.log.error(`<RecommendationBundle> Component has no results to render!`);
+		return <Fragment></Fragment>;
 	}
 
 	const seed = results ? results[0] : controller.store?.results[0];
