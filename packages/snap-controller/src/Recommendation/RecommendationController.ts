@@ -365,7 +365,6 @@ function getRecommendationsAddtocartSchemaData({
 function getRecommendationsSchemaData({ store, results }: { store: RecommendationStore; results?: Product[] }): RecommendationsSchemaData {
 	return {
 		tag: store.profile.tag,
-		banners: [],
 		results:
 			results?.map((result: Product): Item => {
 				const core = result.mappings.core!;
