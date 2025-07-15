@@ -1,4 +1,4 @@
-![A cute cat](../images/division-of-athos.png)
+![Logo of Searchspring, a division of Athos Commerce](../images/division-of-athos.png)
 
 # Accessibility Statement
 
