@@ -1,6 +1,6 @@
-/*! For license information please see 589.b83fa827.iframe.bundle.js.LICENSE.txt */
+/*! For license information please see 394.2d729e10.iframe.bundle.js.LICENSE.txt */
 (self.webpackChunk_searchspring_snap_preact_components = self.webpackChunk_searchspring_snap_preact_components || []).push([
-	[589],
+	[394],
 	{
 		'../../node_modules/@babel/runtime/helpers/esm/defineProperty.js': (
 			__unused_webpack___webpack_module__,
@@ -2500,7 +2500,7 @@
 					return { field: value.field, value: value.value };
 				})(json, !1);
 			}
-			__webpack_require__.d(__webpack_exports__, { HFj: () => Beacon });
+			__webpack_require__.d(__webpack_exports__, { HFj: () => Beacon, hLm: () => ItemTypeEnum });
 			function AutocompleteAddtocartSchemaDataSortInnerToJSON(json) {
 				return (function AutocompleteAddtocartSchemaDataSortInnerToJSONTyped(value, ignoreDiscriminator = !1) {
 					if (null == value) return value;
@@ -2580,10 +2580,17 @@
 					return { context: ContextToJSON(value.context), data: AutocompleteRedirectSchemaDataToJSON(value.data) };
 				})(json, !1);
 			}
+			const ItemTypeEnum = { Product: 'product', Banner: 'banner' };
 			function ItemToJSON(json) {
 				return (function ItemToJSONTyped(value, ignoreDiscriminator = !1) {
 					if (null == value) return value;
-					return { position: value.position, uid: value.uid, childUid: value.childUid, sku: value.sku, childSku: value.childSku };
+					return { type: value.type, position: value.position, uid: value.uid, childUid: value.childUid, sku: value.sku, childSku: value.childSku };
+				})(json, !1);
+			}
+			function BannersInnerToJSON(json) {
+				return (function BannersInnerToJSONTyped(value, ignoreDiscriminator = !1) {
+					if (null == value) return value;
+					return { uid: value.uid };
 				})(json, !1);
 			}
 			function AutocompleteSchemaDataToJSON(json) {
@@ -2601,6 +2608,7 @@
 						pagination: AutocompleteAddtocartSchemaDataPaginationToJSON(value.pagination),
 						merchandising: AutocompleteAddtocartSchemaDataMerchandisingToJSON(value.merchandising),
 						results: value.results.map(ItemToJSON),
+						banners: value.banners.map(BannersInnerToJSON),
 					};
 				})(json, !1);
 			}
@@ -2679,6 +2687,7 @@
 						pagination: CategoryAddtocartSchemaDataPaginationToJSON(value.pagination),
 						merchandising: CategoryAddtocartSchemaDataMerchandisingToJSON(value.merchandising),
 						results: value.results.map(ItemToJSON),
+						banners: value.banners.map(BannersInnerToJSON),
 					};
 				})(json, !1);
 			}
@@ -2833,6 +2842,7 @@
 						pagination: CategoryAddtocartSchemaDataPaginationToJSON(value.pagination),
 						merchandising: SearchAddtocartSchemaDataMerchandisingToJSON(value.merchandising),
 						results: value.results.map(ItemToJSON),
+						banners: value.banners.map(BannersInnerToJSON),
 					};
 				})(json, !1);
 			}
@@ -3675,6 +3685,14 @@
 			const esm_browser_native = { randomUUID: 'undefined' != typeof crypto && crypto.randomUUID && crypto.randomUUID.bind(crypto) };
 			let getRandomValues;
 			const rnds8 = new Uint8Array(16);
+			function rng() {
+				if (
+					!getRandomValues &&
+					((getRandomValues = 'undefined' != typeof crypto && crypto.getRandomValues && crypto.getRandomValues.bind(crypto)), !getRandomValues)
+				)
+					throw new Error('crypto.getRandomValues() not supported. See https://github.com/uuidjs/uuid#getrandomvalues-not-supported');
+				return getRandomValues(rnds8);
+			}
 			const byteToHex = [];
 			for (let i = 0; i < 256; ++i) byteToHex.push((i + 256).toString(16).slice(1));
 			function unsafeStringify(arr, offset = 0) {
@@ -3699,31 +3717,19 @@
 					byteToHex[arr[offset + 13]] +
 					byteToHex[arr[offset + 14]] +
 					byteToHex[arr[offset + 15]]
-				).toLowerCase();
+				);
 			}
 			const esm_browser_v4 = function v4(options, buf, offset) {
 					if (esm_browser_native.randomUUID && !buf && !options) return esm_browser_native.randomUUID();
-					const rnds =
-						(options = options || {}).random ??
-						options.rng?.() ??
-						(function rng() {
-							if (!getRandomValues) {
-								if ('undefined' == typeof crypto || !crypto.getRandomValues)
-									throw new Error('crypto.getRandomValues() not supported. See https://github.com/uuidjs/uuid#getrandomvalues-not-supported');
-								getRandomValues = crypto.getRandomValues.bind(crypto);
-							}
-							return getRandomValues(rnds8);
-						})();
-					if (rnds.length < 16) throw new Error('Random bytes length must be >= 16');
+					const rnds = (options = options || {}).random || (options.rng || rng)();
 					if (((rnds[6] = (15 & rnds[6]) | 64), (rnds[8] = (63 & rnds[8]) | 128), buf)) {
-						if ((offset = offset || 0) < 0 || offset + 16 > buf.length)
-							throw new RangeError(`UUID byte range ${offset}:${offset + 15} is out of buffer bounds`);
+						offset = offset || 0;
 						for (let i = 0; i < 16; ++i) buf[offset + i] = rnds[i];
 						return buf;
 					}
 					return unsafeStringify(rnds);
 				},
-				{ rE: version } = { rE: '0.0.28' },
+				{ rE: version } = { rE: '0.0.30' },
 				CART_KEY = 'ssCartProducts',
 				VIEWED_KEY = 'ssViewedProducts',
 				COOKIE_DOMAIN = ('undefined' != typeof window && window.location.hostname && '.' + window.location.hostname.replace(/^www\./, '')) || void 0;
@@ -4117,7 +4123,13 @@
 					}
 				}
 				setLocalStorageItem(name, value) {
-					'undefined' != typeof window && window.localStorage.setItem(name, JSON.stringify({ value }));
+					if ('undefined' != typeof window)
+						try {
+							window.localStorage.setItem(name, JSON.stringify({ value }));
+						} catch (e) {
+							console.warn(`something went wrong setting ${name} to local storage`),
+								'QuotaExceededError' === e.name && this.events.error.snap({ data: { message: 'QuotaExceededError', details: { key: name, value } } });
+						}
 				}
 				queueRequest(request) {
 					this.requests.push(request),
@@ -63619,4 +63631,4 @@
 		},
 	},
 ]);
-//# sourceMappingURL=589.b83fa827.iframe.bundle.js.map
+//# sourceMappingURL=394.2d729e10.iframe.bundle.js.map

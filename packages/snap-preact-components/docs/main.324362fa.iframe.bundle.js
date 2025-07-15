@@ -1,4 +1,4 @@
-/*! For license information please see main.bbc55db3.iframe.bundle.js.LICENSE.txt */
+/*! For license information please see main.324362fa.iframe.bundle.js.LICENSE.txt */
 (self.webpackChunk_searchspring_snap_preact_components = self.webpackChunk_searchspring_snap_preact_components || []).push([
 	[792],
 	{
@@ -29042,12 +29042,12 @@
 						pagination = mergedCarouselProps.pagination,
 						carouselEnabled = mergedCarouselProps.enabled;
 					if (!controller || 'recommendation' !== controller.type)
-						throw new Error("<BundleRecommendation> Component requires 'controller' prop with an instance of RecommendationController");
+						throw new Error("<RecommendationBundle> Component requires 'controller' prop with an instance of RecommendationController");
 					var resultsToRender =
 						results || (null === (_controller$store = controller.store) || void 0 === _controller$store ? void 0 : _controller$store.results);
 					limit && (resultsToRender = resultsToRender.slice(0, hideSeed ? limit + 1 : limit));
 					var cartStore = controller.store.cart;
-					if (!cartStore) throw new Error("<BundleRecommendation> Component requires 'cartStore' to exist in the recommendation store");
+					if (!cartStore) throw new Error("<RecommendationBundle> Component requires 'cartStore' to exist in the recommendation store");
 					if (
 						!(
 							(results && results.length) ||
@@ -29058,7 +29058,10 @@
 								_controller$store2$re.length)
 						)
 					)
-						throw new Error('<BundleRecommendation> Component has no results to render!');
+						return (
+							controller.log.error('<RecommendationBundle> Component has no results to render!'),
+							(0, emotion_react_browser_esm.Y)(preact_module.FK, null)
+						);
 					var seed = results
 							? results[0]
 							: null === (_controller$store3 = controller.store) || void 0 === _controller$store3
@@ -35202,21 +35205,23 @@
 								value: function set(path, value) {
 									var paths = null == path ? void 0 : path.split('.'),
 										location = this.state;
-									switch (
-										(null == paths ||
-											paths.forEach(function (p, i) {
-												i == paths.length - 1 ? (location[p] = value) : (location = location[p] = location[p] || {});
-											}),
-										this.type)
-									) {
-										case StorageType.session:
-											window.sessionStorage.setItem(this.key, JSON.stringify(this.state));
-											break;
-										case StorageType.local:
-											window.localStorage.setItem(this.key, JSON.stringify(this.state));
-											break;
-										case StorageType.cookie:
-											utils_cookies.set(this.key, JSON.stringify(this.state), this.sameSite, this.expiration, this.cookieDomain);
+									null == paths ||
+										paths.forEach(function (p, i) {
+											i == paths.length - 1 ? (location[p] = value) : (location = location[p] = location[p] || {});
+										});
+									try {
+										switch (this.type) {
+											case StorageType.session:
+												window.sessionStorage.setItem(this.key, JSON.stringify(this.state));
+												break;
+											case StorageType.local:
+												window.localStorage.setItem(this.key, JSON.stringify(this.state));
+												break;
+											case StorageType.cookie:
+												utils_cookies.set(this.key, JSON.stringify(this.state), this.sameSite, this.expiration, this.cookieDomain);
+										}
+									} catch (err) {
+										console.warn('something went wrong setting ' + this.key + ' to ' + this.type + ' storage');
 									}
 								},
 							},
@@ -35319,38 +35324,39 @@
 					(ControllerTypes.finder = 'finder'),
 					(ControllerTypes.recommendation = 'recommendation');
 			})(ControllerTypes || (ControllerTypes = {}));
-			var isClickWithinProductLink = function isClickWithinProductLink(e, result) {
-				for (
-					var _result$display,
-						_result$display$mappi,
-						_result$mappings$core,
-						currentElement = e.target,
-						href = null,
-						level = 0,
-						resultCoreUrl =
-							(null == result ||
-							null === (_result$display = result.display) ||
-							void 0 === _result$display ||
-							null === (_result$display$mappi = _result$display.mappings.core) ||
-							void 0 === _result$display$mappi
-								? void 0
-								: _result$display$mappi.url) || '',
-						resultDisplayUrl =
-							(null == result || null === (_result$mappings$core = result.mappings.core) || void 0 === _result$mappings$core
-								? void 0
-								: _result$mappings$core.url) || '';
-					currentElement && level < 12;
+			var src = __webpack_require__('../../node_modules/@searchspring/beacon/dist/esm/src/index.js'),
+				isClickWithinProductLink = function isClickWithinProductLink(e, result) {
+					for (
+						var _result$display,
+							_result$display$mappi,
+							_result$mappings$core,
+							currentElement = e.target,
+							href = null,
+							level = 0,
+							resultCoreUrl =
+								(null == result ||
+								null === (_result$display = result.display) ||
+								void 0 === _result$display ||
+								null === (_result$display$mappi = _result$display.mappings.core) ||
+								void 0 === _result$display$mappi
+									? void 0
+									: _result$display$mappi.url) || '',
+							resultDisplayUrl =
+								(null == result || null === (_result$mappings$core = result.mappings.core) || void 0 === _result$mappings$core
+									? void 0
+									: _result$mappings$core.url) || '';
+						currentElement && level < 12;
 
-				) {
-					if (
-						(href = currentElement.getAttribute('href')) &&
-						((resultCoreUrl && href.includes(resultCoreUrl)) || (resultDisplayUrl && href.includes(resultDisplayUrl)))
-					)
-						return !0;
-					(currentElement = currentElement.parentElement), level++;
-				}
-				return !1;
-			};
+					) {
+						if (
+							(href = currentElement.getAttribute('href')) &&
+							((resultCoreUrl && href.includes(resultCoreUrl)) || (resultDisplayUrl && href.includes(resultDisplayUrl)))
+						)
+							return !0;
+						(currentElement = currentElement.parentElement), level++;
+					}
+					return !1;
+				};
 			function SearchController_regeneratorRuntime() {
 				SearchController_regeneratorRuntime = function _regeneratorRuntime() {
 					return e;
@@ -36894,6 +36900,7 @@
 						schemaMap[result.id] = Object.assign({}, schema, {
 							results: [
 								{
+									type: src.hLm.Product,
 									position: result.position,
 									uid:
 										(null === (_result$mappings = result.mappings) ||
@@ -36978,7 +36985,7 @@
 										value =
 											'range' !== filter.type ||
 											isNaN(null === (_filter$value = filter.value) || void 0 === _filter$value ? void 0 : _filter$value.low) ||
-											isNaN(null === (_filter$value2 = filter.value) || void 0 === _filter$value2 ? void 0 : _filter$value2.low)
+											isNaN(null === (_filter$value2 = filter.value) || void 0 === _filter$value2 ? void 0 : _filter$value2.high)
 												? ['' + filter.value]
 												: [
 														'low=' + (null === (_filter$value3 = filter.value) || void 0 === _filter$value3 ? void 0 : _filter$value3.low),
@@ -37070,6 +37077,7 @@
 									})) ||
 								void 0,
 						},
+						banners: [],
 						results: [],
 					}
 				);
@@ -37925,8 +37933,9 @@
 						(null == results
 							? void 0
 							: results.map(function (result) {
-									var core = result.mappings.core;
-									return { position: result.position, uid: core.uid || '', sku: core.sku };
+									var core = result.mappings.core,
+										position = result.position;
+									return { type: src.hLm.Product, position, uid: core.uid || '', sku: core.sku };
 							  })) || [],
 				};
 			}
@@ -39658,7 +39667,7 @@
 										value =
 											'range' !== filter.type ||
 											isNaN(null === (_filter$value = filter.value) || void 0 === _filter$value ? void 0 : _filter$value.low) ||
-											isNaN(null === (_filter$value2 = filter.value) || void 0 === _filter$value2 ? void 0 : _filter$value2.low)
+											isNaN(null === (_filter$value2 = filter.value) || void 0 === _filter$value2 ? void 0 : _filter$value2.high)
 												? ['' + filter.value]
 												: [
 														'low=' + (null === (_filter$value3 = filter.value) || void 0 === _filter$value3 ? void 0 : _filter$value3.low),
@@ -39733,12 +39742,14 @@
 										  }))) ||
 								void 0,
 						},
+						banners: [],
 						results:
 							(null == results
 								? void 0
 								: results.map(function (result) {
-										var core = result.mappings.core;
-										return { position: result.position, uid: core.uid || '', sku: core.sku };
+										var core = result.mappings.core,
+											position = result.position;
+										return { type: src.hLm.Product, position, uid: core.uid || '', sku: core.sku };
 								  })) || [],
 					}
 				);
@@ -39817,8 +39828,8 @@
 													delete newStored[key], window.sessionStorage.setItem('ss-networkcache', JSON.stringify(newStored));
 												}
 											}
-										} catch (err) {
-											console.warn('something went wrong, browser might not have cookies enabled');
+										} catch (_unused) {
+											console.warn('something went wrong getting from cache');
 										}
 								},
 							},
@@ -39849,8 +39860,8 @@
 												}
 												size < this.config.maxSize && window.sessionStorage.setItem('ss-networkcache', JSON.stringify(newStored));
 											}
-										} catch (err) {
-											console.warn('something went wrong, browser might not have cookies enabled');
+										} catch (_unused2) {
+											console.warn('something went wrong setting to cache');
 										}
 								},
 							},
@@ -39865,8 +39876,8 @@
 												void 0 !== _window3 &&
 												_window3.sessionStorage &&
 												window.sessionStorage.setItem('ss-networkcache', '');
-									} catch (err) {
-										console.warn('something went wrong, browser might not have cookies enabled');
+									} catch (_unused3) {
+										console.warn('something went wrong clearing cache');
 									}
 								},
 							},
@@ -43795,15 +43806,19 @@
 					var _postRecommendations, _batchRecommendations, _getProfile;
 				})(API);
 			function sortBatchEntries(a, b) {
-				var one = a.request,
-					two = b.request;
-				return null == one.order && null == two.order
+				var _one$profile,
+					_two$profile,
+					one = a.request,
+					two = b.request,
+					orderOne = one.order || (null === (_one$profile = one.profile) || void 0 === _one$profile ? void 0 : _one$profile.order),
+					orderTwo = two.order || (null === (_two$profile = two.profile) || void 0 === _two$profile ? void 0 : _two$profile.order);
+				return null == orderOne && null == orderTwo
 					? 0
-					: null == one.order && null != two.order
+					: null == orderOne && null != orderTwo
 					? 1
-					: (null == two.order && null != one.order) || one.order < two.order
+					: (null == orderTwo && null != orderOne) || orderOne < orderTwo
 					? -1
-					: one.order > two.order
+					: orderOne > orderTwo
 					? 1
 					: 0;
 			}
@@ -45953,14 +45968,14 @@
 							banners &&
 								paginationData.totalResults &&
 								(results = (function addBannersToResults(config, results, allBanners, paginationData) {
-									var _config$settings5,
+									var _config$settings6,
 										bannersAndResults = SearchResultStore_toConsumableArray(results),
 										paginationBegin = paginationData.pageSize * (paginationData.page - 1) + 1,
 										paginationEnd = paginationData.pageSize * paginationData.page;
 									null != config &&
-										null !== (_config$settings5 = config.settings) &&
-										void 0 !== _config$settings5 &&
-										_config$settings5.infinite &&
+										null !== (_config$settings6 = config.settings) &&
+										void 0 !== _config$settings6 &&
+										_config$settings6.infinite &&
 										(paginationBegin = 1);
 									paginationData.pageSize * paginationData.page > paginationData.totalResults && (paginationEnd = paginationData.totalResults);
 									var bannersNotInResults = allBanners.filter(function (banner) {
@@ -46058,6 +46073,17 @@
 								} catch (err) {
 									console.error(err, 'Invalid variant JSON for product id: ' + result.id);
 								}
+							else if (result.variants) {
+								var _config$settings5;
+								this.variants = new Variants(
+									result.variants.data,
+									this.mask,
+									null == config || null === (_config$settings5 = config.settings) || void 0 === _config$settings5
+										? void 0
+										: _config$settings5.variants,
+									result.variants.preferences
+								);
+							}
 							null != result &&
 								null !== (_result$children = result.children) &&
 								void 0 !== _result$children &&
@@ -46200,7 +46226,7 @@
 				})(),
 				Variants = (function () {
 					return SearchResultStore_createClass(
-						function Variants(variantData, mask, config) {
+						function Variants(variantData, mask, config, preferences) {
 							var _this = this;
 							SearchResultStore_classCallCheck(this, Variants),
 								(this.data = []),
@@ -46209,14 +46235,15 @@
 									(_this.active = variant), mask.set({ mappings: _this.active.mappings, attributes: _this.active.attributes });
 								}),
 								config && (this.config = config),
-								this.update(variantData, config);
+								this.update(variantData, config, preferences);
 						},
 						[
 							{
 								key: 'update',
 								value: function update(variantData) {
 									var _this2 = this,
-										config = arguments.length > 1 && void 0 !== arguments[1] ? arguments[1] : this.config;
+										config = arguments.length > 1 && void 0 !== arguments[1] ? arguments[1] : this.config,
+										preferences = arguments.length > 2 ? arguments[2] : void 0;
 									try {
 										var options = [];
 										(this.data = variantData
@@ -46260,11 +46287,15 @@
 												_this2.selections.push(new VariantSelection(_this2, option, variantOptionConfig));
 											});
 										var preselectedOptions = {};
-										null != config &&
-											config.options &&
-											Object.keys(null == config ? void 0 : config.options).forEach(function (option) {
-												config.options[option].preSelected && (preselectedOptions[option] = config.options[option].preSelected);
+										preferences &&
+											Object.keys(preferences).forEach(function (option) {
+												preselectedOptions[option] = preferences[option];
 											}),
+											null != config &&
+												config.options &&
+												Object.keys(null == config ? void 0 : config.options).forEach(function (option) {
+													config.options[option].preSelected && (preselectedOptions[option] = config.options[option].preSelected);
+												}),
 											this.makeSelections(preselectedOptions);
 									} catch (err) {
 										console.error(err, 'Invalid variant JSON for: ' + variantData);
@@ -46329,11 +46360,14 @@
 											availableVariants = this.data,
 											_loop = function _loop(selectedSelection) {
 												availableVariants = availableVariants.filter(function (variant) {
-													var _selectedSelection$se;
+													var _selectedSelection$se, _variant$options$sele;
 													return (
 														(null === (_selectedSelection$se = selectedSelection.selected) || void 0 === _selectedSelection$se
 															? void 0
-															: _selectedSelection$se.value) == variant.options[selectedSelection.field].value && variant.available
+															: _selectedSelection$se.value) ==
+															(null === (_variant$options$sele = variant.options[selectedSelection.field]) || void 0 === _variant$options$sele
+																? void 0
+																: _variant$options$sele.value) && variant.available
 													);
 												});
 											},
@@ -46385,11 +46419,17 @@
 										}),
 										_loop2 = function _loop2(selectedSelection) {
 											availableVariants = availableVariants.filter(function (variant) {
-												var _selectedSelection$se2;
+												var _selectedSelection$se2, _variant$options, _variant$options$sele2;
 												return (
 													(null === (_selectedSelection$se2 = selectedSelection.selected) || void 0 === _selectedSelection$se2
 														? void 0
-														: _selectedSelection$se2.value) == variant.options[selectedSelection.field].value && variant.available
+														: _selectedSelection$se2.value) ==
+														(null === (_variant$options = variant.options) ||
+														void 0 === _variant$options ||
+														null === (_variant$options$sele2 = _variant$options[selectedSelection.field]) ||
+														void 0 === _variant$options$sele2
+															? void 0
+															: _variant$options$sele2.value) && variant.available
 												);
 											});
 										},
@@ -48357,20 +48397,22 @@
 			}
 			var RecommendationProfileStore = RecommendationProfileStore_createClass(function RecommendationProfileStore(services, data) {
 				var _data$profile;
-				!(function RecommendationProfileStore_classCallCheck(a, n) {
-					if (!(a instanceof n)) throw new TypeError('Cannot call a class as a function');
-				})(this, RecommendationProfileStore),
+				if (
+					((function RecommendationProfileStore_classCallCheck(a, n) {
+						if (!(a instanceof n)) throw new TypeError('Cannot call a class as a function');
+					})(this, RecommendationProfileStore),
 					(this.display = {}),
 					(this.type = 'default'),
-					null != data &&
-						null !== (_data$profile = data.profile) &&
-						void 0 !== _data$profile &&
-						_data$profile.tag &&
-						((this.tag = data.profile.tag),
+					null != data && null !== (_data$profile = data.profile) && void 0 !== _data$profile && _data$profile.tag)
+				) {
+					if (!data.profile.display.template)
+						throw new Error('Recommendation Profile Store found a profile without a set template: ' + data.profile.tag);
+					(this.tag = data.profile.tag),
 						(this.placement = data.profile.placement),
 						(this.display = data.profile.display),
 						(this.type = data.profile.display.template.type),
-						(0, mobx_esm.Gn)(this, { tag: mobx_esm.sH, placement: mobx_esm.sH, display: mobx_esm.sH, type: mobx_esm.sH }));
+						(0, mobx_esm.Gn)(this, { tag: mobx_esm.sH, placement: mobx_esm.sH, display: mobx_esm.sH, type: mobx_esm.sH });
+				}
 			});
 			function RecommendationStore_defineProperties(e, r) {
 				for (var t = 0; t < r.length; t++) {
@@ -51131,8 +51173,7 @@
 					variables
 				);
 			}
-			var src = __webpack_require__('../../node_modules/@searchspring/beacon/dist/esm/src/index.js'),
-				Tracker_excluded = ['stack', 'message'];
+			var Tracker_excluded = ['stack', 'message'];
 			function Tracker_toConsumableArray(r) {
 				return (
 					(function Tracker_arrayWithoutHoles(r) {
@@ -51238,7 +51279,7 @@
 							((function Tracker_classCallCheck(a, n) {
 								if (!(a instanceof n)) throw new TypeError('Cannot call a class as a function');
 							})(this, Tracker),
-							((config = cjs_default()(Tracker_defaultConfig, config || {})).initiator = 'searchspring/' + config.framework + '/0.66.4'),
+							((config = cjs_default()(Tracker_defaultConfig, config || {})).initiator = 'searchspring/' + config.framework + '/0.67.0'),
 							((_this = Tracker_callSuper(this, Tracker, [globals, config])).targeters = []),
 							(_this.track = {
 								error: function error(data, siteId) {
@@ -51410,7 +51451,7 @@
 							(_this.localStorage = new StorageStore({ type: 'local', key: 'ss-' + _this.config.id })),
 							_this.localStorage.set('siteId', _this.globals.siteId),
 							(null !== (_window$searchspring = window.searchspring) && void 0 !== _window$searchspring && _window$searchspring.tracker) ||
-								((window.searchspring = window.searchspring || {}), (window.searchspring.tracker = _this), (window.searchspring.version = '0.66.4')),
+								((window.searchspring = window.searchspring || {}), (window.searchspring.tracker = _this), (window.searchspring.version = '0.67.0')),
 							setTimeout(function () {
 								_this.targeters.push(
 									new DomTargeter([{ selector: 'script[type^="searchspring/track/"]', emptyTarget: !1 }], function (target, elem) {
@@ -52244,7 +52285,7 @@
 		var __webpack_exec__ = (moduleId) => __webpack_require__((__webpack_require__.s = moduleId));
 		__webpack_require__.O(
 			0,
-			[589],
+			[394],
 			() => (
 				__webpack_exec__('../../node_modules/@storybook/core-client/dist/esm/globals/polyfills.js'),
 				__webpack_exec__('../../node_modules/@storybook/core-client/dist/esm/globals/globals.js'),
