@@ -177,6 +177,13 @@ export default {
 			},
 			control: 'array',
 		},
+		offset: {
+			description: 'specifies the offset of the autocomplete',
+			table: {
+				type: { summary: 'object' },
+			},
+			control: { type: 'object' },
+		},
 		width: {
 			defaultValue: '500px',
 			description: 'Change width of the component',

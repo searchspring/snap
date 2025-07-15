@@ -72,7 +72,7 @@ export const Search = observer((properties: SearchProps): JSX.Element => {
 		toggleSidebarButtonText,
 		hideTopToolbar,
 		hideMiddleToolbar,
-		hideBottomToolBar,
+		hideBottomToolbar,
 		resultComponent,
 		hideToggleSidebarButton,
 		mobileDisplayAt,
@@ -214,7 +214,7 @@ export const Search = observer((properties: SearchProps): JSX.Element => {
 							store.pagination.totalResults === 0 && <NoResults {...subProps.NoResults} controller={controller} />
 						)}
 
-						{!hideBottomToolBar && <Toolbar {...subProps.BottomToolbar} controller={controller} />}
+						{!hideBottomToolbar && <Toolbar {...subProps.BottomToolbar} controller={controller} />}
 					</div>
 				</div>
 			</div>
@@ -230,7 +230,7 @@ export interface SearchProps extends ComponentProps {
 	hideSidebar?: boolean;
 	hideTopToolbar?: boolean;
 	hideMiddleToolbar?: boolean;
-	hideBottomToolBar?: boolean;
+	hideBottomToolbar?: boolean;
 	toggleSidebarButtonText?: string;
 	toggleSidebarStartClosed?: boolean;
 	hideToggleSidebarButton?: boolean;

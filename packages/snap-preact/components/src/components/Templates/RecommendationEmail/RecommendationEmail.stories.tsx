@@ -48,7 +48,6 @@ export default {
 	argTypes: {
 		controller: {
 			description: 'Controller reference',
-			type: { required: true },
 			table: {
 				type: {
 					summary: 'Controller',
@@ -58,7 +57,6 @@ export default {
 		},
 		results: {
 			description: 'Results store reference, overrides controller.store.results',
-			type: { required: false },
 			table: {
 				type: {
 					summary: 'Results store object',

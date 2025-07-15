@@ -99,7 +99,7 @@ export const AutocompleteModal = observer((properties: AutocompleteModalProps): 
 		buttonSelector = input;
 	}
 
-	const { layout, disableStyles, controller, renderInput, className, treePath } = props;
+	const { layout, disableStyles, overlayColor, controller, renderInput, className, treePath } = props;
 
 	const renderedInputRef: MutableRef<HTMLInputElement | null> = useRef(null);
 
@@ -120,6 +120,7 @@ export const AutocompleteModal = observer((properties: AutocompleteModalProps): 
 			className: 'autocomplete-modal__modal',
 			buttonSelector: buttonSelector,
 			onOverlayClick: () => reset(),
+			overlayColor: overlayColor,
 			open: active,
 			// inherited props
 			...defined({

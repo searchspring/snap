@@ -150,13 +150,6 @@ The `excludeBanners` prop specifies if the Autocomplete should automatically inc
 <AutocompleteFixed controller={controller} input={'#searchInput'} excludeBanners={true} />
 ```
 
-### vertical
-The `vertical` prop will alter autocomplete's CSS to display in a vertical layout.
-
-```jsx
-<AutocompleteFixed controller={controller} input={'#searchInput'} vertical={true} />
-```
-
 ### facetsTitle
 The `facetsTitle` prop will display the given text above the facets area.
 

@@ -130,13 +130,6 @@ The `excludeBanners` prop specifies if the Autocomplete should automatically inc
 <AutocompleteModal controller={controller} input={'#searchInput'} excludeBanners={true} />
 ```
 
-### vertical
-The `vertical` prop will alter autocomplete's CSS to display in a vertical layout.
-
-```jsx
-<AutocompleteModal controller={controller} input={'#searchInput'} vertical={true} />
-```
-
 ### facetsTitle
 The `facetsTitle` prop will display the given text above the facets area.
 
@@ -156,4 +149,11 @@ The `viewportMaxHeight` prop will restrict autocomplete from overflowing the vie
 
 ```jsx
 <AutocompleteModal controller={controller} input={'#searchInput'} viewportMaxHeight={true} />
+```
+
+### overlayColor 
+The `overlayColor` prop specifies the color of the overlay.
+
+```jsx
+<AutocompleteModal controller={controller} input={'#searchInput'} overlayColor={'rgba(0,0,0,0.8)'} />
 ```

@@ -88,7 +88,6 @@ export default {
 		},
 		onAddToCart: {
 			description: 'onClick event handler for add bundle to cart button in CTA',
-			type: { required: true },
 			table: {
 				type: {
 					summary: 'function',

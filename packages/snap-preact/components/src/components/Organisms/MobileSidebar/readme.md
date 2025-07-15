@@ -24,6 +24,20 @@ The `displayAt` prop specifies a CSS media query for when the max width the comp
 <MobileSidebar controller={controller} displayAt={'600px'}/>
 ```
 
+
+### layout
+The `layout` prop is used to specify which child components render and where. The prop takes an array of specific module names, the order of these module names determines the order in which they will be rendered. Additionally you can pass arrays of modules to the array to specify new rows in the display.
+
+The `_` module is used a seperator module to center|left|right justify the other elements in the layout.
+
+available modules to use in the layout are 
+
+`filterSummary`, `sortBy`, `perPage`, `facets`, `banner.left`, `paginationInfo`, `layoutSelector`, `_`;
+
+```jsx
+<MobileSidebar controller={controller} layout={['filterSummary', 'sortBy', 'perPage', 'facets', 'banner.left']}/>
+```
+
 ### openButtonText
 The `openButtonText` prop will change the inner text of the slideout button
 

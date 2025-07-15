@@ -137,13 +137,6 @@ The `excludeBanners` prop specifies if the Autocomplete should automatically inc
 <AutocompleteSlideout controller={controller} input={'#searchInput'} excludeBanners={true} />
 ```
 
-### vertical
-The `vertical` prop will alter autocomplete's CSS to display in a vertical layout.
-
-```jsx
-<AutocompleteSlideout controller={controller} input={'#searchInput'} vertical={true} />
-```
-
 ### facetsTitle
 The `facetsTitle` prop will display the given text above the facets area.
 
@@ -163,4 +156,11 @@ The `viewportMaxHeight` prop will restrict autocomplete from overflowing the vie
 
 ```jsx
 <AutocompleteSlideout controller={controller} input={'#searchInput'} viewportMaxHeight={true} />
+```
+
+### slideDirection
+The `slideDirection` prop sets the direction that the slideout slides in. Defaults to `left`. Available values are `left`, `right`, `top`, & `bottom`.
+
+```jsx
+<AutocompleteSlideout controller={controller} input={'#searchInput'} slideDirection={'right'} />
 ```

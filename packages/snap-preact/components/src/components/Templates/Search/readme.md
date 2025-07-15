@@ -89,3 +89,53 @@ The `hideToggleSidebarButton` prop hides the Sidebar toggle button.
 ```jsx
 <Search controller={controller} toggleSidebarButtonText={'Toggle Facets'} hideToggleSidebarButton={true} />
 ```
+
+### layoutOptions
+The `layoutOptions` prop allows you to customize the layout of the Search component by specifying an array of layout option objects. These options can be used to control which layouts are available to the user (such as grid or list view), set a default layout, and provide custom icons or labels for each layout option. 
+
+
+
+
+```jsx
+
+type ListOption = {
+    value: string | number;
+    label?: string;
+    disabled?: boolean;
+    default?: boolean;
+    icon?: IconType | Partial<IconProps>;
+    overrides?: ThemeMinimal;
+    url?: UrlManager;
+    available?: boolean;
+}
+
+const layoutOptions: ListOption[] = [
+	{
+		value: 1,
+		label: 'Single Column',
+		icon: 'square',
+		overrides: {
+			components: {
+				'search results': {
+					columns: 1,
+				},
+			},
+		},
+	},
+	{
+		value: 2,
+		label: 'Two Columns',
+		default: true,
+		icon: 'layout-large',
+		overrides: {
+			components: {
+				'search results': {
+					columns: 2,
+				},
+			},
+		},
+	},
+]
+
+<Search controller={controller} layoutOptions={layoutOptions} />
+```

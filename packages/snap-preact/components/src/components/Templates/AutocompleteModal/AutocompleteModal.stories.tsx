@@ -218,6 +218,15 @@ export default {
 			},
 			control: { type: 'text' },
 		},
+		overlayColor: {
+			description: 'specifies the color of the overlay',
+			defaultValue: 'rgba(0, 0, 0, 0.8)',
+			table: {
+				type: { summary: 'string' },
+				defaultValue: { summary: 'rgba(0, 0, 0, 0.8)' },
+			},
+			control: { type: 'text' },
+		},
 		viewportMaxHeight: {
 			defaultValue: false,
 			description: 'Autocomplete fully visible in viewport',
