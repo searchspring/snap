@@ -1,4 +1,4 @@
-![Logo of Searchspring, a division of Athos Commerce](./images/division-of-athos.png)
+![Logo of Searchspring, a division of Athos Commerce](https://github.com/searchspring/snap/blob/main/images/division-of-athos.png?raw=true)
 
 # Accessibility Statement
 
