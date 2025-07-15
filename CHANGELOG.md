@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.67.0](https://github.com/searchspring/snap/compare/v0.66.4...v0.67.0) (2025-07-15)
+
+### Bug Fixes
+
+- catch QuotaExceededError errors when setting local or session storage ([6048727](https://github.com/searchspring/snap/commit/60487278409133c5744885af9121bbac55f8cba8))
+- **client/recommend:** fixing regression in order option when using legacy script blocks ([b1ca0eb](https://github.com/searchspring/snap/commit/b1ca0eba4affb038ca61b569585f33e80d4e676c))
+- range checking incorrect property ([273062d](https://github.com/searchspring/snap/commit/273062d0f307cf17b1cf01e6087b62cfae3e01ac))
+- **store-mobx/searchresultstore:** fixing issue when no options are present (defensive) ([744b9f5](https://github.com/searchspring/snap/commit/744b9f586f990a9ff6ea52bb2032f537faf425c9))
+
+### Features
+
+- **searchresultstore:** adding support for api variants ([f2a9c26](https://github.com/searchspring/snap/commit/f2a9c2624c06c895eb2864a409072f612bae1641))
+
 ## [0.66.4](https://github.com/searchspring/snap/compare/v0.66.3...v0.66.4) (2025-06-30)
 
 ### Bug Fixes

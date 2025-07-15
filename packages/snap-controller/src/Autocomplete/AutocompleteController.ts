@@ -9,15 +9,16 @@ import { AutocompleteStore } from '@searchspring/snap-store-mobx';
 import type { AutocompleteControllerConfig, AfterSearchObj, AfterStoreObj, ControllerServices, ContextVariables } from '../types';
 import type { Next } from '@searchspring/snap-event-manager';
 import type { AutocompleteRequestModel, SearchRequestModelFilterRange, SearchRequestModelFilterValue } from '@searchspring/snapi-types';
-import type {
-	AutocompleteAddtocartSchemaData,
-	AutocompleteRedirectSchemaData,
-	AutocompleteSchemaData,
-	Item,
-	Product as BeaconProduct,
-	AutocompleteAddtocartSchemaDataFilterInner,
-	AutocompleteAddtocartSchemaDataBgfilterInner,
-	AutocompleteAddtocartSchemaDataSortInnerDirEnum,
+import {
+	type AutocompleteAddtocartSchemaData,
+	type AutocompleteRedirectSchemaData,
+	type AutocompleteSchemaData,
+	type Item,
+	type Product as BeaconProduct,
+	type AutocompleteAddtocartSchemaDataFilterInner,
+	type AutocompleteAddtocartSchemaDataBgfilterInner,
+	type AutocompleteAddtocartSchemaDataSortInnerDirEnum,
+	ItemTypeEnum,
 } from '@searchspring/beacon';
 import { CLICK_DUPLICATION_TIMEOUT, isClickWithinProductLink } from '../utils/isClickWithinProductLink';
 
@@ -903,7 +904,7 @@ function getAutocompleteSchemaData({
 		const value =
 			filter.type === 'range' &&
 			!isNaN((filter as SearchRequestModelFilterRange).value?.low!) &&
-			!isNaN((filter as SearchRequestModelFilterRange).value?.low!)
+			!isNaN((filter as SearchRequestModelFilterRange).value?.high!)
 				? [`low=${(filter as SearchRequestModelFilterRange).value?.low}`, `high=${(filter as SearchRequestModelFilterRange).value?.high}`]
 				: [`${(filter as SearchRequestModelFilterValue).value}`];
 
@@ -950,11 +951,13 @@ function getAutocompleteSchemaData({
 					})) ||
 				undefined,
 		},
+		banners: [],
 		results:
 			results?.map((result: Product): Item => {
 				const core = result.mappings.core!;
 				const position = result.position;
 				return {
+					type: ItemTypeEnum.Product,
 					position,
 					uid: core.uid || '',
 					sku: core.sku,
