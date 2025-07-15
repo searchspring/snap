@@ -458,14 +458,14 @@ describe('Recommend Api', () => {
 		});
 		//no order
 		api.batchRecommendations({
-			tag: 'crossSell',
+			tag: 'other',
 			limit: 10,
 			batched: true,
 			...batchParams,
 		});
 		//no category
 		api.batchRecommendations({
-			tag: 'crossSell',
+			tag: 'another',
 			limit: 10,
 			order: 2,
 			batched: true,
@@ -473,7 +473,7 @@ describe('Recommend Api', () => {
 		});
 		//pants category
 		api.batchRecommendations({
-			tag: 'crossSell',
+			tag: 'andanother',
 			categories: ['pants'],
 			limit: 10,
 			order: 1,
@@ -486,7 +486,7 @@ describe('Recommend Api', () => {
 			headers: {
 				'Content-Type': 'text/plain',
 			},
-			body: '{"profiles":[{"tag":"crossSell","categories":["pants"],"limit":10},{"tag":"crossSell","limit":10},{"tag":"similar","categories":["shirts"],"limit":14},{"tag":"crossSell","limit":10}],"siteId":"8uyt2m","products":["marnie-runner-2-7x10"],"lastViewed":["marnie-runner-2-7x10","ruby-runner-2-7x10","abbie-runner-2-7x10","riley-4x6","joely-5x8","helena-4x6","kwame-4x6","sadie-4x6","candice-runner-2-7x10","esmeray-4x6","camilla-230x160","candice-4x6","sahara-4x6","dayna-4x6","moema-4x6"]}',
+			body: '{"profiles":[{"tag":"andanother","categories":["pants"],"limit":10},{"tag":"another","limit":10},{"tag":"similar","categories":["shirts"],"limit":14},{"tag":"other","limit":10}],"siteId":"8uyt2m","products":["marnie-runner-2-7x10"],"lastViewed":["marnie-runner-2-7x10","ruby-runner-2-7x10","abbie-runner-2-7x10","riley-4x6","joely-5x8","helena-4x6","kwame-4x6","sadie-4x6","candice-runner-2-7x10","esmeray-4x6","camilla-230x160","candice-4x6","sahara-4x6","dayna-4x6","moema-4x6"]}',
 		};
 
 		//add delay for paramBatch.timeout
@@ -531,6 +531,57 @@ describe('Recommend Api', () => {
 				'Content-Type': 'text/plain',
 			},
 			body: '{"profiles":[{"tag":"crosssell","categories":["dress"],"limit":20},{"tag":"similar","categories":["shirts"],"limit":10}],"siteId":"8uyt2m","products":["marnie-runner-2-7x10"],"lastViewed":["marnie-runner-2-7x10","ruby-runner-2-7x10","abbie-runner-2-7x10","riley-4x6","joely-5x8","helena-4x6","kwame-4x6","sadie-4x6","candice-runner-2-7x10","esmeray-4x6","camilla-230x160","candice-4x6","sahara-4x6","dayna-4x6","moema-4x6"]}',
+		};
+
+		expect(requestMock).toHaveBeenCalledWith(RequestUrl, POSTParams);
+
+		const [response1, response2] = await Promise.all([promise1, promise2]);
+
+		expect(response1[0].results.length).toBe(response[1].results.length);
+		expect(response2[0].results.length).toBe(response[0].results.length);
+
+		requestMock.mockReset();
+	});
+
+	it('batchRecommendations resolves in right order with order prop when order is in profile', async () => {
+		const api = new RecommendAPI(new ApiConfiguration(apiConfig));
+		const response = mockData.file('recommend/results/8uyt2m/ordered.json');
+
+		const requestMock = jest
+			.spyOn(global.window, 'fetch')
+			.mockImplementation(() => Promise.resolve({ status: 200, json: () => Promise.resolve(response) } as Response));
+
+		const promise1 = api.batchRecommendations({
+			tag: 'second',
+			profile: {
+				order: 2,
+				categories: ['shirts'],
+				limit: 10,
+			},
+			batched: true,
+			...batchParams,
+		});
+
+		const promise2 = api.batchRecommendations({
+			tag: 'first',
+			profile: {
+				order: 1,
+				categories: ['dress'],
+				limit: 20,
+			},
+			batched: true,
+			...batchParams,
+		});
+
+		//add delay for paramBatch.timeout
+		await wait(250);
+
+		const POSTParams = {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'text/plain',
+			},
+			body: '{"profiles":[{"tag":"first","categories":["dress"],"limit":20},{"tag":"second","categories":["shirts"],"limit":10}],"siteId":"8uyt2m","products":["marnie-runner-2-7x10"],"lastViewed":["marnie-runner-2-7x10","ruby-runner-2-7x10","abbie-runner-2-7x10","riley-4x6","joely-5x8","helena-4x6","kwame-4x6","sadie-4x6","candice-runner-2-7x10","esmeray-4x6","camilla-230x160","candice-4x6","sahara-4x6","dayna-4x6","moema-4x6"]}',
 		};
 
 		expect(requestMock).toHaveBeenCalledWith(RequestUrl, POSTParams);

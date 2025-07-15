@@ -28,15 +28,16 @@ import type {
 	SearchRequestModelFilterValue,
 	SearchRequestModelFilter,
 } from '@searchspring/snapi-types';
-import type {
-	AutocompleteAddtocartSchemaDataBgfilterInner,
-	AutocompleteAddtocartSchemaDataFilterInner,
-	AutocompleteAddtocartSchemaDataSortInnerDirEnum,
-	Product as BeaconProduct,
-	SearchAddtocartSchemaData,
-	SearchRedirectSchemaData,
-	SearchSchemaData,
-	SearchSchemaDataMatchTypeEnum,
+import {
+	type AutocompleteAddtocartSchemaDataBgfilterInner,
+	type AutocompleteAddtocartSchemaDataFilterInner,
+	type AutocompleteAddtocartSchemaDataSortInnerDirEnum,
+	type Product as BeaconProduct,
+	type SearchAddtocartSchemaData,
+	type SearchRedirectSchemaData,
+	type SearchSchemaData,
+	type SearchSchemaDataMatchTypeEnum,
+	ItemTypeEnum,
 } from '@searchspring/beacon';
 import { CLICK_DUPLICATION_TIMEOUT, isClickWithinProductLink } from '../utils/isClickWithinProductLink';
 
@@ -698,6 +699,7 @@ function createResultSchemaMapping({ request, response }: { request: SearchReque
 			...schema,
 			results: [
 				{
+					type: ItemTypeEnum.Product,
 					position: result.position!,
 					uid: result.mappings?.core?.uid || '',
 					sku: result.mappings?.core?.sku,
@@ -799,7 +801,7 @@ function getSearchSchemaData({ params, response }: { params: SearchRequestModel;
 		const value =
 			filter.type === 'range' &&
 			!isNaN((filter as SearchRequestModelFilterRange).value?.low!) &&
-			!isNaN((filter as SearchRequestModelFilterRange).value?.low!)
+			!isNaN((filter as SearchRequestModelFilterRange).value?.high!)
 				? [`low=${(filter as SearchRequestModelFilterRange).value?.low}`, `high=${(filter as SearchRequestModelFilterRange).value?.high}`]
 				: [`${(filter as SearchRequestModelFilterValue).value}`];
 
@@ -855,6 +857,7 @@ function getSearchSchemaData({ params, response }: { params: SearchRequestModel;
 					})) ||
 				undefined,
 		},
+		banners: [],
 		results: [],
 	};
 }
