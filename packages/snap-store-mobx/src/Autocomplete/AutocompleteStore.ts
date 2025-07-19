@@ -26,6 +26,7 @@ import type { AutocompleteStoreConfig, StoreServices } from '../types';
 import { MetaStore } from '../Meta/MetaStore';
 
 export class AutocompleteStore extends AbstractStore {
+	public waiting = false;
 	public services: StoreServices;
 	public meta!: MetaStore;
 	public merchandising!: SearchMerchandisingStore;
