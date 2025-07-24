@@ -66,6 +66,7 @@ describe('Search Controller', () => {
 		expect(controller.log instanceof Logger).toBeTruthy();
 		expect(controller.search).toBeDefined();
 		expect(controller.config.id).toBe(searchConfig.id);
+		expect(controller['page'].type).toBe('search');
 
 		expect(controller.store.results.length).toBe(0);
 		expect(searchfn).not.toHaveBeenCalled();
@@ -189,6 +190,29 @@ describe('Search Controller', () => {
 		// should not redirect whem redirectResponse='full'
 		expect(window.location.replace).not.toHaveBeenCalled();
 		expect(controller.store.results.length).toBeGreaterThan(0);
+	});
+
+	it('tests page context variable', async () => {
+		const context = {
+			page: {
+				type: 'category' as const,
+			},
+		};
+		const controller = new SearchController(
+			searchConfig,
+			{
+				client: new MockClient(globals, {}),
+				store: new SearchStore(searchConfig, services),
+				urlManager,
+				eventManager: new EventManager(),
+				profiler: new Profiler(),
+				logger: new Logger(),
+				tracker: new Tracker(globals),
+			},
+			context
+		);
+
+		expect(controller['page'].type).toBe('category');
 	});
 
 	const events = ['init', 'beforeSearch', 'afterSearch', 'afterStore'];
