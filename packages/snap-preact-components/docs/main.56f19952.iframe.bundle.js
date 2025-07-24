@@ -1,4 +1,4 @@
-/*! For license information please see main.39fd05e2.iframe.bundle.js.LICENSE.txt */
+/*! For license information please see main.56f19952.iframe.bundle.js.LICENSE.txt */
 (self.webpackChunk_searchspring_snap_preact_components = self.webpackChunk_searchspring_snap_preact_components || []).push([
 	[792],
 	{
@@ -33653,9 +33653,9 @@
 					__webpack_require__('../../node_modules/core-js/modules/es.object.assign.js'),
 					__webpack_require__('../../node_modules/core-js/modules/es.array.reduce.js'),
 					__webpack_require__('../../node_modules/core-js/modules/es.array.concat.js'),
+					__webpack_require__('../../node_modules/core-js/modules/es.array.includes.js'),
 					__webpack_require__('../../node_modules/core-js/modules/es.array.filter.js'),
 					__webpack_require__('../../node_modules/core-js/modules/es.array.find.js'),
-					__webpack_require__('../../node_modules/core-js/modules/es.array.includes.js'),
 					__webpack_require__('../../node_modules/core-js/modules/es.string.includes.js'),
 					__webpack_require__('../../node_modules/core-js/modules/es.array.every.js'),
 					__webpack_require__('../../node_modules/core-js/modules/es.string.replace.js'),
@@ -35871,6 +35871,7 @@
 				SearchController = (function (_AbstractController) {
 					function SearchController(config, _ref, context) {
 						var _this$config$settings7,
+							_this$context,
 							_this$config$settings8,
 							_this$config$settings9,
 							_this,
@@ -35892,7 +35893,7 @@
 							context,
 						])).type = ControllerTypes.search),
 						(_this.previousResults = []),
-						(_this.pageType = 'search'),
+						(_this.page = { type: 'search' }),
 						(_this.events = { product: {} }),
 						(_this.track = {
 							product: {
@@ -35967,7 +35968,7 @@
 											}
 										_this.storage.set('scrollMap', scrollMap);
 										var data = schemaMap[result.id];
-										_this.tracker.events[_this.pageType].clickThrough({
+										_this.tracker.events[_this.page.type].clickThrough({
 											data,
 											siteId:
 												null === (_this$config$globals = _this.config.globals) || void 0 === _this$config$globals
@@ -36000,7 +36001,7 @@
 										!_this$events$product$3.render
 									) {
 										var data = schemaMap[result.id];
-										_this.tracker.events[_this.pageType].render({
+										_this.tracker.events[_this.page.type].render({
 											data,
 											siteId:
 												null === (_this$config$globals2 = _this.config.globals) || void 0 === _this$config$globals2
@@ -36025,7 +36026,7 @@
 										_this$events$product$5.render
 									) {
 										var data = schemaMap[result.id];
-										_this.tracker.events[_this.pageType].impression({
+										_this.tracker.events[_this.page.type].impression({
 											data,
 											siteId:
 												null === (_this$config$globals3 = _this.config.globals) || void 0 === _this$config$globals3
@@ -36052,7 +36053,7 @@
 														  })) || [],
 											});
 										})({ searchSchemaData: schemaMap[result.id], results: [result] });
-									_this.tracker.events[_this.pageType].addToCart({
+									_this.tracker.events[_this.page.type].addToCart({
 										data,
 										siteId:
 											null === (_this$config$globals4 = _this.config.globals) || void 0 === _this$config$globals4
@@ -36417,26 +36418,21 @@
 						_this.store.setConfig(_this.config),
 						(_this.storage = new StorageStore({ type: 'session', key: 'ss-controller-' + _this.config.id })),
 						_this.storage.set('lastStringyParams', void 0),
+						'object' == typeof (null === (_this$context = _this.context) || void 0 === _this$context ? void 0 : _this$context.page) &&
+							['search', 'category'].includes(_this.context.page.type) &&
+							(_this.page = cjs_default()(_this.page, _this.context.page)),
 						_this.eventManager.on(
 							'beforeSearch',
 							(function () {
 								var _ref5 = SearchController_asyncToGenerator(
 									SearchController_regeneratorRuntime().mark(function _callee3(_ref4, next) {
-										var _this$context, _req$search, request, req, _req$filters, hasCategoryBackgroundFilters;
+										var _req$search, request, req, _req$filters, hasCategoryBackgroundFilters;
 										return SearchController_regeneratorRuntime().wrap(function _callee3$(_context3) {
 											for (;;)
 												switch ((_context3.prev = _context3.next)) {
 													case 0:
 														return (request = _ref4.request), (_context3.next = 3), next();
 													case 3:
-														if (
-															'category' !== (null === (_this$context = _this.context) || void 0 === _this$context ? void 0 : _this$context.pageType)
-														) {
-															_context3.next = 6;
-															break;
-														}
-														return (_this.pageType = 'category'), _context3.abrupt('return');
-													case 6:
 														(null === (_req$search = (req = request).search) || void 0 === _req$search ? void 0 : _req$search.query) ||
 															(null !=
 																(hasCategoryBackgroundFilters =
@@ -36460,8 +36456,8 @@
 																					});
 																				})) &&
 																hasCategoryBackgroundFilters.length &&
-																(_this.pageType = 'category'));
-													case 9:
+																(_this.page = cjs_default()(_this.page, { type: 'category' })));
+													case 6:
 													case 'end':
 														return _context3.stop();
 												}
@@ -36613,7 +36609,7 @@
 																})).length ||
 																search.response._cached ||
 																((data = getSearchSchemaData({ params: search.request, response: search.response })),
-																_this.tracker.events[_this.pageType].render({
+																_this.tracker.events[_this.page.type].render({
 																	data,
 																	siteId:
 																		null === (_this$config$globals6 = _this.config.globals) || void 0 === _this$config$globals6
@@ -36624,7 +36620,7 @@
 																if (!search.response._cached) {
 																	var _this$config$globals7,
 																		_data = schemaMap[result.id];
-																	_this.tracker.events[_this.pageType].render({
+																	_this.tracker.events[_this.page.type].render({
 																		data: _data,
 																		siteId:
 																			null === (_this$config$globals7 = _this.config.globals) || void 0 === _this$config$globals7
@@ -36960,6 +36956,8 @@
 					_response$merchandisi2,
 					_params$search3,
 					_params$search3$query,
+					_params$search4,
+					_params$search5,
 					_response$search4,
 					_params$sorts,
 					_response$pagination,
@@ -37026,6 +37024,12 @@
 							void 0 === _params$search3$query
 								? void 0
 								: _params$search3$query.string) || '',
+						rq:
+							null !== (_params$search4 = params.search) && void 0 !== _params$search4 && _params$search4.subQuery
+								? null === (_params$search5 = params.search) || void 0 === _params$search5
+									? void 0
+									: _params$search5.subQuery
+								: void 0,
 						correctedQuery,
 						matchType:
 							null == response || null === (_response$search4 = response.search) || void 0 === _response$search4
@@ -39643,6 +39647,8 @@
 					_store$search$origina,
 					_store$search2,
 					_store$search2$query,
+					_params$search2,
+					_params$search3,
 					_store$search3,
 					_store$search3$origin,
 					_store$search4,
@@ -39697,6 +39703,12 @@
 								? void 0
 								: _store$search2$query.string) ||
 							'',
+						rq:
+							null !== (_params$search2 = params.search) && void 0 !== _params$search2 && _params$search2.subQuery
+								? null === (_params$search3 = params.search) || void 0 === _params$search3
+									? void 0
+									: _params$search3.subQuery
+								: void 0,
 						correctedQuery:
 							null !== (_store$search3 = store.search) &&
 							void 0 !== _store$search3 &&
@@ -51279,7 +51291,7 @@
 							((function Tracker_classCallCheck(a, n) {
 								if (!(a instanceof n)) throw new TypeError('Cannot call a class as a function');
 							})(this, Tracker),
-							((config = cjs_default()(Tracker_defaultConfig, config || {})).initiator = 'searchspring/' + config.framework + '/0.67.2'),
+							((config = cjs_default()(Tracker_defaultConfig, config || {})).initiator = 'searchspring/' + config.framework + '/0.67.3'),
 							((_this = Tracker_callSuper(this, Tracker, [globals, config])).targeters = []),
 							(_this.track = {
 								error: function error(data, siteId) {
@@ -51451,7 +51463,7 @@
 							(_this.localStorage = new StorageStore({ type: 'local', key: 'ss-' + _this.config.id })),
 							_this.localStorage.set('siteId', _this.globals.siteId),
 							(null !== (_window$searchspring = window.searchspring) && void 0 !== _window$searchspring && _window$searchspring.tracker) ||
-								((window.searchspring = window.searchspring || {}), (window.searchspring.tracker = _this), (window.searchspring.version = '0.67.2')),
+								((window.searchspring = window.searchspring || {}), (window.searchspring.tracker = _this), (window.searchspring.version = '0.67.3')),
 							setTimeout(function () {
 								_this.targeters.push(
 									new DomTargeter([{ selector: 'script[type^="searchspring/track/"]', emptyTarget: !1 }], function (target, elem) {
