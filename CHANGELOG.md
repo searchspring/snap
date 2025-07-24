@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.67.3](https://github.com/searchspring/snap/compare/v0.67.2...v0.67.3) (2025-07-24)
+
+### Bug Fixes
+
+- add rq to beacon payload ([234d9b9](https://github.com/searchspring/snap/commit/234d9b9fd4a6bf134a7d8d80a3c52f3e74c62942))
+
 ## [0.67.2](https://github.com/searchspring/snap/compare/v0.67.1...v0.67.2) (2025-07-15)
 
 **Note:** Version bump only for package @searchspring/snap
