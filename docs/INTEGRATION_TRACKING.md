@@ -1,11 +1,11 @@
 ## Tracking
 
-To ensure accurate tracking of events used for reporting, the following tracking events should be implemented.
+To ensure accurate tracking of events used for reporting, the following tracking events should be implemented across Search, Category, Autocomplete and Recommendations result components.
 
 ## Events invoked within the integration code
 
 ### Product Click
-Tracks product click events. It is recommended to invoke on each product `onmousedown` or `onClick` event via the `controller.track.product.click()` method available on all controller types.
+Tracks product click events. Not required when using `withTracking` or `ResultTracker`. It is recommended to invoke on each product `onmousedown` or `onClick` event via the `controller.track.product.click()` method available on all controller types.
 
 ```jsx
 controller.store.results.map(result => {
@@ -29,6 +29,75 @@ controller.store.results.map(result => {
 		</a>
 	)
 })
+```
+
+### Impressions
+Impression tracking occurs when products come into the viewport. It is recommended to use the `withTracking` hook within custom product result cards to track impressions. Alternatively, the `ResultTracker` component can be used to track impressions as well - be aware that this component adds an additional wrapping element. This does not need to be implemented if using the default `Result` component from @searchspring/snap-preact-components or default Autocomplete component without custom result cards.
+
+### Typical Tracking Integration Example
+```jsx
+import { withTracking } from '@searchspring/snap-preact-components';
+
+const Results = withController((props) => {
+	const { controller } = props;
+
+	return (
+		<div className="ss__results">
+		{
+			controller.store.results.map(result => {
+				return (
+					<CustomResult key={result.id} result={result}/>
+				)
+			})
+		}
+		</div>
+	)
+});
+
+
+const CustomResult = withController(withTracking((props) => {
+	const { trackingRef, controller, result } = props;
+	const { core } = result.mappings;
+
+	return (
+		<div className="ss__result" ref={trackingRef}>
+			<a href={core.url}>
+				{ core.name }
+			</a>
+			<button onClick={(e)=> controller.addToCart(result)}>Add to cart</button>
+		</div>
+	)
+}));
+```
+
+Note that a `key` is required on the custom result component to ensure that the trackingRef is properly attached to the correct element.
+
+### Alternative Tracking Integration Example using `ResultTracker`
+
+```jsx
+import { ResultTracker } from '@searchspring/snap-preact-components';
+
+const Results = withController((props) => {
+	const { controller } = props;
+
+	return (
+		<div className="ss__results">
+			{
+				controller.store.results.map(result => {
+					const { core } = result.mappings;
+					return (
+						<ResultTracker key={result.id} result={result} controller={controller}>
+							<a href={core.url}>
+								{ core.name }
+							</a>
+							<button onClick={(e)=> controller.addToCart(result)}>Add to cart</button>
+						</ResultTracker>
+					)
+				})
+			}
+		</div>
+	)
+});
 ```
 
 ## Events invoked outside of the integration code

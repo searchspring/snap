@@ -922,6 +922,7 @@ function getAutocompleteSchemaData({
 	}, {});
 	return {
 		q: store.search?.originalQuery?.string || store.search?.query?.string || '',
+		rq: params.search?.subQuery ? params.search?.subQuery : undefined,
 		correctedQuery: store.search?.originalQuery?.string ? store.search?.query?.string : undefined,
 		matchType: store.search.matchType,
 		...filters,

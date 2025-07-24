@@ -83,7 +83,12 @@ export type ContextVariables = {
 		cart?: ProductViewEvent[];
 		[variable: string]: any;
 	};
+	page?: PageContextVariable;
 	[variable: string]: any;
+};
+
+export type PageContextVariable = {
+	type: 'search' | 'category';
 };
 
 export type ControllerConfig = StoreConfig & Attachments;
