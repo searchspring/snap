@@ -4,7 +4,7 @@ import cssEscape from 'css.escape';
 import { AbstractController } from '../Abstract/AbstractController';
 import { StorageStore, ErrorType } from '@searchspring/snap-store-mobx';
 import { getSearchParams } from '../utils/getParams';
-import { ControllerTypes } from '../types';
+import { ControllerTypes, PageContextVariable } from '../types';
 
 import type { Product, Banner, SearchStore } from '@searchspring/snap-store-mobx';
 import type {
@@ -79,7 +79,9 @@ export class SearchController extends AbstractController {
 	declare config: SearchControllerConfig;
 	storage: StorageStore;
 	private previousResults: Array<SearchResponseModelResult> = [];
-	private pageType: 'search' | 'category' = 'search';
+	private page: PageContextVariable = {
+		type: 'search',
+	};
 	private events: {
 		product: Record<
 			string,
@@ -117,14 +119,13 @@ export class SearchController extends AbstractController {
 		// set last params to undefined for compare in search
 		this.storage.set('lastStringyParams', undefined);
 
+		if (typeof this.context?.page === 'object' && ['search', 'category'].includes(this.context.page.type)) {
+			this.page = deepmerge<PageContextVariable>(this.page, this.context.page);
+		}
+
 		this.eventManager.on('beforeSearch', async ({ request }: BeforeSearchObj, next: Next): Promise<void | boolean> => {
 			// wait for other middleware to resolve
 			await next();
-
-			if (this.context?.pageType === 'category') {
-				this.pageType = 'category';
-				return;
-			}
 
 			const req = request as SearchRequestModel;
 			const query = req.search?.query;
@@ -151,7 +152,7 @@ export class SearchController extends AbstractController {
 					});
 
 				if (hasCategoryBackgroundFilters?.length) {
-					this.pageType = 'category';
+					this.page = deepmerge<PageContextVariable>(this.page, { type: 'category' });
 				}
 			}
 		});
@@ -200,13 +201,13 @@ export class SearchController extends AbstractController {
 				if (products.length === 0 && !search.response._cached) {
 					// handle no results
 					const data = getSearchSchemaData({ params: search.request, response: search.response });
-					this.tracker.events[this.pageType].render({ data, siteId: this.config.globals?.siteId });
+					this.tracker.events[this.page.type].render({ data, siteId: this.config.globals?.siteId });
 				}
 
 				products.forEach((result: Product) => {
 					if (!search.response._cached) {
 						const data = schemaMap[result.id];
-						this.tracker.events[this.pageType].render({ data, siteId: this.config.globals?.siteId });
+						this.tracker.events[this.page.type].render({ data, siteId: this.config.globals?.siteId });
 						this.eventManager.fire('track.product.render', { controller: this, product: result, trackEvent: data });
 					}
 					this.events.product[result.id] = this.events.product[result.id] || {};
@@ -349,7 +350,7 @@ export class SearchController extends AbstractController {
 				// store position data or empty object
 				this.storage.set('scrollMap', scrollMap);
 				const data = schemaMap[result.id];
-				this.tracker.events[this.pageType].clickThrough({ data, siteId: this.config.globals?.siteId });
+				this.tracker.events[this.page.type].clickThrough({ data, siteId: this.config.globals?.siteId });
 				this.events.product[result.id] = this.events.product[result.id] || {};
 				this.events.product[result.id].clickThrough = true;
 				this.eventManager.fire('track.product.clickThrough', { controller: this, event: e, product: result, trackEvent: data });
@@ -377,7 +378,7 @@ export class SearchController extends AbstractController {
 				}
 
 				const data = schemaMap[result.id];
-				this.tracker.events[this.pageType].render({ data, siteId: this.config.globals?.siteId });
+				this.tracker.events[this.page.type].render({ data, siteId: this.config.globals?.siteId });
 				this.events.product[result.id] = this.events.product[result.id] || {};
 				this.events.product[result.id].render = true;
 				this.eventManager.fire('track.product.render', { controller: this, product: result, trackEvent: data });
@@ -388,14 +389,14 @@ export class SearchController extends AbstractController {
 				}
 
 				const data = schemaMap[result.id];
-				this.tracker.events[this.pageType].impression({ data, siteId: this.config.globals?.siteId });
+				this.tracker.events[this.page.type].impression({ data, siteId: this.config.globals?.siteId });
 				this.events.product[result.id] = this.events.product[result.id] || {};
 				this.events.product[result.id].impression = true;
 				this.eventManager.fire('track.product.impression', { controller: this, product: result, trackEvent: data });
 			},
 			addToCart: (result: Product): void => {
 				const data = getSearchAddtocartSchemaData({ searchSchemaData: schemaMap[result.id], results: [result] });
-				this.tracker.events[this.pageType].addToCart({
+				this.tracker.events[this.page.type].addToCart({
 					data,
 					siteId: this.config.globals?.siteId,
 				});
