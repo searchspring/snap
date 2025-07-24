@@ -13,6 +13,7 @@ There are a few core context variables utilized by Snap, `shopper`, `merchandisi
 | currency.code | currency code string, ie. 'EUR' (ISO 4217) | all | currency code of the shopper's cart contents or order confirmation. Used for beacon events containing pricing data |
 | merchandising.segments | array of strings used for merchandising | any | segmented merchandising allows for custom control over products returned on search requests and must also be setup within the Searchspring Management Console (SMC) |
 | config | object containing Snap configurations | any | advanced usage of Snap (not recommended for standard integrations) |
+| page.type | 'search' (default) or 'category' | PLP | explicitly indicate the page type (category or search). This is used to differentiate category and search beacon events. If not provided, the page type will be inferred as 'category' if a common category background filter is present. |
 
 ## Examples
 
