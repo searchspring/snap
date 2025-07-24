@@ -829,6 +829,7 @@ function getSearchSchemaData({ params, response }: { params: SearchRequestModel;
 
 	return {
 		q: params.search?.query?.string || '',
+		rq: params.search?.subQuery ? params.search?.subQuery : undefined,
 		correctedQuery,
 		matchType: response?.search?.matchType as SearchSchemaDataMatchTypeEnum,
 		...filters,
