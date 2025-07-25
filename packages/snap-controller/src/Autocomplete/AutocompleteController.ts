@@ -135,8 +135,10 @@ export class AutocompleteController extends AbstractController {
 		this.eventManager.on('afterSearch', async (ac: AfterSearchObj, next: Next): Promise<void | boolean> => {
 			await next();
 
+			const inputState = (ac.controller as AutocompleteController).store.state.input?.trim().toLowerCase() || '';
+			const searchQuery = ac.request.search?.query?.string?.trim().toLowerCase() || '';
 			// cancel search if no input or query doesn't match current urlState
-			if (ac.response.autocomplete.query != ac.controller.urlManager.state.query) {
+			if ((inputState && inputState !== searchQuery) || ac.response.autocomplete.query != ac.controller.urlManager.state.query) {
 				return false;
 			}
 		});
@@ -144,8 +146,9 @@ export class AutocompleteController extends AbstractController {
 		this.eventManager.on('beforeSubmit', async (ac: AfterStoreObj, next: Next): Promise<void | boolean> => {
 			await next();
 
+			const inputState = (ac.controller as AutocompleteController).store.state.input;
 			const redirectURL = (ac.controller as AutocompleteController).store.merchandising?.redirect;
-			if (redirectURL && this.config?.settings?.redirects?.merchandising) {
+			if (this.config?.settings?.redirects?.merchandising && inputState && redirectURL) {
 				this.track.redirect(redirectURL);
 				window.location.href = redirectURL;
 				return false;
@@ -376,46 +379,15 @@ export class AutocompleteController extends AbstractController {
 
 				e.preventDefault();
 
-				// wait until loading and input delay is complete before submission
-
-				if (this.store.waiting) {
-					const waitForReady = async () => {
-						return new Promise<void>((resolve) => {
-							const checkWaiting = () => {
-								if (!this.store.waiting) {
-									resolve();
-								} else {
-									setTimeout(checkWaiting, 50);
-								}
-							};
-							checkWaiting();
-						});
-					};
-
-					// wait until the store is no longer in waiting state
-					await waitForReady();
-				}
-
-				// wait until the store is no longer in loading state
-				if (this.store.loading) {
-					const waitForLoading = async () => {
-						return new Promise<void>((resolve) => {
-							const checkLoading = () => {
-								if (!this.store.loading) {
-									resolve();
-								} else {
-									setTimeout(checkLoading, 50);
-								}
-							};
-							checkLoading();
-						});
-					};
-
-					await waitForLoading();
-				}
+				await timeout(INPUT_DELAY + 1);
 
 				// when spellCorrection is enabled
 				if (this.config.globals?.search?.query?.spellCorrection) {
+					// wait until loading is complete before submission
+					while (this.store.loading) {
+						await timeout(INPUT_DELAY);
+					}
+
 					if (this.config.settings!.integratedSpellCorrection) {
 						//set fallbackQuery to the correctedQuery
 						if (this.store.search.correctedQuery) {
@@ -429,8 +401,6 @@ export class AutocompleteController extends AbstractController {
 						addHiddenFormInput(form, PARAM_ORIGINAL_QUERY, this.store.search.originalQuery.string);
 					}
 				}
-
-				// TODO expected spell correct behavior queryAssumption
 
 				try {
 					await this.eventManager.fire('beforeSubmit', {
@@ -502,7 +472,6 @@ export class AutocompleteController extends AbstractController {
 				const trendingResultsEnabled = this.store.trending?.length && this.config.settings?.trending?.showResults;
 				const historyResultsEnabled = this.store.history?.length && this.config.settings?.history?.showResults;
 
-				this.store.waiting = true;
 				this.handlers.input.timeoutDelay = setTimeout(() => {
 					if (!value) {
 						// there is no input value - reset state of store
@@ -523,8 +492,6 @@ export class AutocompleteController extends AbstractController {
 						this.store.state.locks.facets.unlock();
 						this.urlManager.set({ query: this.store.state.input }).go();
 					}
-
-					this.store.waiting = false;
 				}, INPUT_DELAY);
 			},
 			timeoutDelay: undefined as undefined | ReturnType<typeof setTimeout>,
