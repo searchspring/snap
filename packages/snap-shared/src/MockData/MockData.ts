@@ -57,38 +57,38 @@ export class MockData {
 	}
 
 	meta(file?: string): MetaResponseModel {
+		const metaFile = `${__dirname}/meta/${this.config.siteId}/${file || this.config.meta}.json`;
 		try {
-			const metaFile = `${__dirname}/meta/${this.config.siteId}/${file || this.config.meta}.json`;
 			return getJSON(metaFile);
 		} catch (err) {
-			throw 'Meta JSON not found.';
+			throw `Meta JSON '${metaFile}' not found.`;
 		}
 	}
 
 	search(file?: string): SearchResponseModel {
+		const searchFile = `${__dirname}/search/${this.config.siteId}/${file || this.config.search}.json`;
 		try {
-			const searchFile = `${__dirname}/search/${this.config.siteId}/${file || this.config.search}.json`;
 			return getJSON(searchFile);
 		} catch (err) {
-			throw 'Search JSON not found.';
+			throw `Search JSON '${searchFile}' not found.`;
 		}
 	}
 
 	autocomplete(file?: string): AutocompleteResponseModel {
+		const autocompleteFile = `${__dirname}/autocomplete/${this.config.siteId}/${file || this.config.autocomplete}.json`;
 		try {
-			const autocompleteFile = `${__dirname}/autocomplete/${this.config.siteId}/${file || this.config.autocomplete}.json`;
 			return getJSON(autocompleteFile);
 		} catch (err) {
-			throw 'AC JSON not found.';
+			throw `AC JSON '${autocompleteFile}' not found.`;
 		}
 	}
 
 	trending(file?: string) {
+		const trendingFile = `${__dirname}/trending/${this.config.siteId}/${file || this.config.trending}.json`;
 		try {
-			const trendingFile = `${__dirname}/trending/${this.config.siteId}/${file || this.config.trending}.json`;
 			return getJSON(trendingFile);
 		} catch (err) {
-			throw 'Trending JSON not found.';
+			throw `Trending JSON '${trendingFile}' not found.`;
 		}
 	}
 
@@ -96,7 +96,7 @@ export class MockData {
 		try {
 			return { meta: this.meta(), ...this.search(file) };
 		} catch (err) {
-			throw 'Search JSON not found.';
+			throw `SearchMeta JSON not found: ${err}`;
 		}
 	}
 
@@ -104,30 +104,30 @@ export class MockData {
 		try {
 			return { meta: this.meta(), ...this.autocomplete(file) };
 		} catch (err) {
-			throw 'Search JSON not found.';
+			throw `AutocompleteMeta JSON not found: ${err}`;
 		}
 	}
 
 	file(path?: string) {
+		const dataFile = `${__dirname}/${path}`;
 		try {
-			const dataFile = `${__dirname}/${path}`;
 			return getJSON(dataFile);
 		} catch (err) {
-			throw 'Data file not found!';
+			throw `Data file '${dataFile}' not found!`;
 		}
 	}
 
 	recommend(files?: { profileFile?: string; resultsFile?: string }) {
+		const profileFile = `${__dirname}/recommend/profile/${this.config.siteId}/${files?.profileFile || this.config.recommend?.profile}.json`;
+		const resultsFile = `${__dirname}/recommend/results/${this.config.siteId}/${files?.resultsFile || this.config.recommend?.results}.json`;
 		try {
-			const profileFile = `${__dirname}/recommend/profile/${this.config.siteId}/${files?.profileFile || this.config.recommend?.profile}.json`;
-			const resultsFile = `${__dirname}/recommend/results/${this.config.siteId}/${files?.resultsFile || this.config.recommend?.results}.json`;
 			return {
 				meta: this.meta(),
 				profile: getJSON(profileFile).profile,
 				results: getJSON(resultsFile)[0].results,
 			};
 		} catch (err) {
-			throw 'Search JSON not found.';
+			throw `Recommend JSON not found. Profile: '${profileFile}', Results: '${resultsFile}'`;
 		}
 	}
 }

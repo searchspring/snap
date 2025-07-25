@@ -1877,7 +1877,8 @@
     "query": "romper"
   },
   "autocomplete": {
-    "query": "romper",
+    "query": "rumper",
+    "correctedQuery": "romper",
     "suggested": {
       "text": "romper",
       "type": "exact",
