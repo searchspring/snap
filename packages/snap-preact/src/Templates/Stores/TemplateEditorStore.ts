@@ -6,6 +6,8 @@ import { TemplatesStore } from './TemplateStore';
 import { ThemeStore } from './ThemeStore';
 import { AutocompleteController, AutocompleteControllerConfig, SearchController, SearchControllerConfig } from '@searchspring/snap-controller';
 
+import type { AbstractionGroup } from '../../types';
+
 export type Tabs = 'Templates' | 'Configuration';
 
 type DefaultControllerConfigs = {
@@ -23,57 +25,127 @@ export class TemplateEditorStore {
 	templatesStore?: TemplatesStore;
 	defaultControllerConfigs?: DefaultControllerConfigs;
 	reloadRequired: boolean = false;
-	refinedControllerSettings: {
-		[feat: string]: {
-			[setting: string]: {
-				description: string;
-				link: string;
-				control: {
-					type: 'boolean' | 'number' | 'string';
-					label: string;
-				};
-			};
-		};
+
+	uiAbstractions: {
+		search: AbstractionGroup<SearchController>[];
+		autocomplete: AbstractionGroup<AutocompleteController>[];
 	} = {
-		search: {
-			'infinite.enabled': {
-				description: 'boolean to enable infinite scroll',
-				link: 'https://searchspring.github.io/snap/#/package-controller-search',
-				control: { type: 'boolean', label: 'Enabled Infinite Scroll' },
+		search: [
+			{
+				title: 'Infinite Scroll',
+				description: 'Determines weather or not to use infinite scroll for pagination.',
+				controls: [
+					{
+						type: 'checkbox',
+						label: 'Enabled',
+						description: 'Determines wether or not infinite be scroll be used.',
+						getValue: (controller: SearchController) => {
+							// Boolean indicating if infinite scroll is enabled.
+							return Boolean(controller.config.settings?.infinite?.enabled);
+						},
+						onValueChange: (newValue, setOverride, controller) => {
+							setOverride({ path: ['infinite', 'enabled'], value: newValue, controller });
+						},
+						// TODO: Implement reset functionality
+						// shouldShowReset: (templateEditorStore, controller) => {
+
+						// },
+						onReset: (setOverride, controller) => {
+							setOverride({ path: ['infinite', 'enabled'], controller });
+						},
+					},
+				],
 			},
-		},
-		autocomplete: {
-			'history.enabled': {
-				description: 'boolean to enable autocomplete term history',
-				link: 'https://searchspring.github.io/snap/#/package-controller-autocomplete',
-				control: { type: 'boolean', label: 'Enable History Terms' },
+		],
+		autocomplete: [
+			{
+				title: 'Term Settings',
+				description: 'Configure the behavior of autocomplete suggestions, including history and trending terms.',
+				controls: [
+					{
+						type: 'dropdown',
+						label: 'Search History',
+						description: 'Number of previously searched terms to display in history terms section',
+						options: ['Disabled', 1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+						getValue: (controller: AutocompleteController) => {
+							// If history is enabled, the value is the limit. Otherwise, it's 'Disabled'.
+							return controller.config.settings?.history?.enabled ? controller.config.settings.history.limit ?? 'Disabled' : 'Disabled';
+						},
+						onValueChange: (newValue, setOverride, controller) => {
+							if (newValue === 'Disabled') {
+								setOverride({ path: ['history'], value: { enabled: false, limit: undefined }, controller });
+							} else {
+								setOverride({ path: ['history'], value: { enabled: true, limit: Number(newValue) }, controller });
+							}
+						},
+						onReset: (setOverride, controller) => {
+							// Resetting history settings to default.
+							setOverride({ path: ['history'], controller });
+							// setOverride({ path: ['history', 'enabled'], value: false, controller });
+						},
+					},
+					{
+						type: 'dropdown',
+						label: 'Trending Searches',
+						description: 'Number of trending terms to display in trending terms section',
+						options: ['Disabled', 1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+						getValue: (controller: AutocompleteController) => {
+							// If trending is enabled, the value is the limit. Otherwise, it's 'Disabled'.
+							return controller.config.settings?.trending?.enabled ? controller.config.settings.trending.limit ?? 'Disabled' : 'Disabled';
+						},
+						onValueChange: (newValue, setOverride, controller) => {
+							if (newValue === 'Disabled') {
+								setOverride({ path: ['trending'], value: { enabled: false, limit: undefined }, controller });
+							} else {
+								setOverride({ path: ['trending'], value: { enabled: true, limit: Number(newValue) }, controller });
+							}
+						},
+						onReset: (setOverride, controller) => {
+							// Resetting trending settings to default.
+							setOverride({ path: ['trending'], controller });
+						},
+					},
+					{
+						type: 'dropdown',
+						label: 'Show Results For',
+						description: '',
+						getDisplayState: (controller: AutocompleteController) => {
+							// This control is disabled if both History and Trending are 'Disabled'.
+							const enabled = controller.config.settings?.history?.enabled || controller.config.settings?.trending?.enabled;
+							return enabled ? 'visible' : 'disabled';
+						},
+						options: (controller: AutocompleteController) => {
+							// The options depend on the values of the other controls.
+							const historyEnabled = controller.config.settings?.history?.enabled;
+							const trendingEnabled = controller.config.settings?.trending?.enabled;
+
+							const opts = ['Disabled'];
+							if (historyEnabled) opts.push('History');
+							if (trendingEnabled) opts.push('Trending');
+							return opts;
+						},
+						getValue: (controller: AutocompleteController) => {
+							if (controller.config.settings?.history?.showResults) return 'History';
+							if (controller.config.settings?.trending?.showResults) return 'Trending';
+							return 'Disabled';
+						},
+						onValueChange: (newValue, setOverride, controller) => {
+							// This single change affects two low-level settings.
+							setOverride({ path: ['history', 'showResults'], value: newValue === 'History', controller });
+							setOverride({ path: ['trending', 'showResults'], value: newValue === 'Trending', controller });
+
+							// setControllerOveride - set override storage AND update controller config at runtime
+						},
+						onReset: (setOverride, controller) => {
+							// Resetting the show results setting to default.
+							setOverride({ path: ['history', 'showResults'], controller });
+							setOverride({ path: ['trending', 'showResults'], controller });
+						},
+					},
+				],
 			},
-			'history.limit': {
-				description: 'number of terms to store in history',
-				link: 'https://searchspring.github.io/snap/#/package-controller-autocomplete',
-				control: { type: 'number', label: 'History Terms Limit' },
-			},
-			'history.showResults': {
-				description: 'boolean to select the first history term in autocomplete',
-				link: 'https://searchspring.github.io/snap/#/package-controller-autocomplete',
-				control: { type: 'boolean', label: 'Show History Results' },
-			},
-			'trending.enabled': {
-				description: 'boolean to enable autocomplete trending terms',
-				link: 'https://searchspring.github.io/snap/#/package-controller-autocomplete',
-				control: { type: 'boolean', label: 'Enable Trending Terms' },
-			},
-			'trending.limit': {
-				description: 'number of trending terms to retrieve',
-				link: 'https://searchspring.github.io/snap/#/package-controller-autocomplete',
-				control: { type: 'number', label: 'Trending Terms Limit' },
-			},
-			'trending.showResults': {
-				description: 'boolean to select the first trending term in autocomplete',
-				link: 'https://searchspring.github.io/snap/#/package-controller-autocomplete',
-				control: { type: 'boolean', label: 'Show Trending Results' },
-			},
-		},
+			// You can add other groups here in the future, for 'search' or more 'autocomplete' settings.
+		],
 	};
 
 	constructor() {
@@ -160,11 +232,14 @@ export class TemplateEditorStore {
 		});
 	}
 
-	setControllerOverride(obj: { path: string[]; value?: unknown; feat: string; controller?: SearchController | AutocompleteController }) {
-		const { path, value, feat, controller } = obj;
+	setControllerOverride(obj: { path: string[]; value?: unknown; controller: SearchController | AutocompleteController }) {
+		const { path, value, controller } = obj;
+		const feat = controller.type;
+
+		console.log('setControllerOverride called with', feat, path, value);
 
 		const getDefaultValue = (): unknown => {
-			const defaultConfig = this.defaultControllerConfigs?.[feat as keyof typeof this.controllerOverrides].settings;
+			const defaultConfig = this.defaultControllerConfigs?.[feat as keyof typeof this.controllerOverrides]['settings'];
 			let workingConfig = defaultConfig;
 			let value = '';
 
@@ -195,7 +270,12 @@ export class TemplateEditorStore {
 				}, {}),
 		};
 
+		console.log('controller config overrides set with:', controllerOverrides);
+
 		this.controllerOverrides = deepmerge(this.controllerOverrides, controllerOverrides);
+
+		console.log('controller configs after overrides merged:', this.controllerOverrides);
+
 		this.storage.set('controllerOverrides', this.controllerOverrides);
 
 		const activeConfig = {
@@ -213,9 +293,26 @@ export class TemplateEditorStore {
 					};
 				}, {}),
 		};
-		const newActiveConfig = deepmerge(this.defaultControllerConfigs?.[feat as keyof typeof this.controllerOverrides] || {}, {
-			settings: activeConfig[feat as keyof typeof this.controllerOverrides],
-		});
+
+		// merging default with active - where is current?
+
+		const newActiveConfig = deepmerge(
+			deepmerge<any>(
+				// this.defaultControllerConfigs?.[feat as keyof typeof this.controllerOverrides] || {},
+				controller.config,
+				this.controllerOverrides[feat as keyof typeof this.controllerOverrides]
+			),
+			{
+				settings: activeConfig[feat as keyof typeof this.controllerOverrides],
+			}
+		);
+
+		// const newActiveConfig = deepmerge(this.defaultControllerConfigs?.[feat as keyof typeof this.controllerOverrides] || {}, {
+		// 	settings: activeConfig[feat as keyof typeof this.controllerOverrides],
+		// });
+
+		console.log('controller config set with:', newActiveConfig);
+
 		controller?.setConfig(newActiveConfig);
 		controller?.store.setConfig(newActiveConfig as any);
 	}

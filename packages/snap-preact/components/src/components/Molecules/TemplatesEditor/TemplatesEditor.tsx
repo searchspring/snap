@@ -1,5 +1,3 @@
-import { h } from 'preact';
-
 import { css } from '@emotion/react';
 import classnames from 'classnames';
 import { useState } from 'preact/hooks';
@@ -15,6 +13,9 @@ import { RecsTemplateTypes, TargetMap, TemplatesStore, TemplateThemeTypes } from
 import { CurrencyCodes, LanguageCodes } from '../../../../../src/Templates/Stores/LibraryStore';
 import { SnapTemplates } from '../../../../../src';
 import { AutocompleteController, SearchController } from '@searchspring/snap-controller';
+import { AbstractedControl, AbstractionGroup } from '../../../../../src/types';
+import { CheckboxControl } from './Controls/Checkbox';
+import { DropdownControl } from './Controls/Dropdown';
 
 const CSS = {
 	TemplatesEditor: ({}: Partial<TemplatesEditorProps>) =>
@@ -677,7 +678,6 @@ const ThemeEditor = (props: any): any => {
 
 */
 
-type ControllerSettingsType = TemplateEditorStore['refinedControllerSettings'];
 type ControllerSettingsProps = {
 	feature: string;
 	editorStore: TemplateEditorStore;
@@ -686,162 +686,88 @@ type ControllerSettingsProps = {
 
 const ControllerSettings = observer((props: ControllerSettingsProps) => {
 	const { feature, editorStore, snap } = props;
-	const [feat, recsType = ''] = feature.split('/');
+	const [feat] = feature.split('/');
+	const controlGroups = editorStore.uiAbstractions[feat as keyof typeof editorStore.uiAbstractions] as
+		| AbstractionGroup<SearchController | AutocompleteController>[]
+		| undefined;
+
+	const controller = snap.controllers?.[feat] as SearchController | AutocompleteController;
+
+	if (!controller || !controlGroups) {
+		return null;
+	}
+
+	// Create wrapper functions with proper types
+	const setOverride = (obj: { path: string[]; value?: unknown; controller: SearchController | AutocompleteController }) => {
+		editorStore.setControllerOverride(obj);
+	};
+
+	const resetOverride = (obj: { path: string[]; value?: unknown; controller: SearchController | AutocompleteController }) => {
+		editorStore.setControllerOverride(obj);
+	};
+
+	// const defaultConfig = editorStore.defaultControllerConfigs?.[feat as keyof typeof editorStore.defaultControllerConfigs]['settings'];
+	const defaultSettings = editorStore.defaultControllerConfigs?.[feat as keyof typeof editorStore.controllerOverrides]['settings'];
+
+	console.log('defaultSettings', feat, JSON.stringify(defaultSettings, null, 2));
+
+	// const defaultSettingsKeys = Object.keys(defaultSettings);
+
+	// console.log('defaultSettingsKeys', defaultSettingsKeys)
 
 	return (
 		<>
-			{Object.keys(editorStore.refinedControllerSettings[feat as keyof ControllerSettingsType]).map((settingName) => {
-				const id = `settings-${feat}${recsType ? `-${recsType}` : ''}-${settingName}`;
-				const typeSettings = editorStore.refinedControllerSettings[feat as keyof ControllerSettingsType];
-				const settingObj = typeSettings[settingName as keyof typeof typeSettings];
+			{controlGroups.map((group) => {
+				return (
+					<div key={group.title}>
+						<h3>{group.title}</h3>
+						<p>{group.description}</p>
+						{group.controls.map((control, index) => {
+							// Type assertion to handle the union type issue
+							let value: string | number | boolean;
+							const typedControl = control as AbstractedControl<typeof controller>;
+							const display: string = typedControl?.getDisplayState ? typedControl.getDisplayState(controller) : 'visible';
 
-				const { control, link } = settingObj || {};
+							switch (control.type) {
+								case 'checkbox':
+									value = Boolean(typedControl.getValue(controller));
 
-				const { type, label } = control || {};
+									return display === 'hidden' ? null : (
+										<CheckboxControl
+											key={index}
+											label={control.label}
+											description={control.description}
+											showReset={true}
+											onReset={() => control.onReset(resetOverride, controller)}
+											disabled={display === 'disabled'}
+											value={value}
+											onChange={(value: boolean) => control.onValueChange(value, setOverride, controller)}
+										/>
+									);
+								case 'dropdown':
+									value = typedControl.getValue(controller);
 
-				let value: unknown;
-
-				// assign value based on current controller configuration
-				const controller = snap.controllers?.[feat] as SearchController | AutocompleteController;
-				const controllerConfig = controller?.config?.settings;
-				let activeConfig = controllerConfig;
-				const path = settingName.split('.');
-
-				let controllerOverrides = editorStore.controllerOverrides[feat as keyof typeof editorStore.controllerOverrides];
-				let shouldShowResetButton;
-
-				path.forEach((p: string) => {
-					// @ts-ignore - temp
-					if (typeof activeConfig === 'object' && p in activeConfig && typeof activeConfig[p] === 'object') {
-						// @ts-ignore - temp
-						activeConfig = activeConfig[p];
-						if (typeof controllerOverrides === 'object' && p in controllerOverrides && typeof controllerOverrides[p] === 'object') {
-							controllerOverrides = controllerOverrides?.[p];
-						}
-
-						// @ts-ignore - temp
-					} else if (typeof activeConfig?.[p] !== 'undefined') {
-						// @ts-ignore - temp
-						value = activeConfig?.[p];
-						shouldShowResetButton = controllerOverrides?.[p] === value;
-					}
-				});
-
-				if (type === 'string') {
-					return (
-						<div className="option">
-							<label htmlFor={id}>
-								{label}{' '}
-								<a target="snapdocs" href={link}>
-									i
-								</a>
-								:
-							</label>
-							{shouldShowResetButton && (
-								<button
-									onClick={() => {
-										editorStore.setControllerOverride({
-											feat,
-											path,
-											controller,
-										});
-									}}
-								>
-									reset
-								</button>
-							)}
-							<input
-								id={id}
-								type="text"
-								value={value as string}
-								onChange={(e) => {
-									editorStore.setControllerOverride({
-										feat,
-										path,
-										value: e.target.value,
-										controller,
-									});
-								}}
-							/>
-						</div>
-					);
-				} else if (type === 'boolean') {
-					return (
-						<div className="option">
-							<label htmlFor={id}>
-								{label}{' '}
-								<a target="snapdocs" href={link}>
-									i
-								</a>
-								:
-							</label>
-							{shouldShowResetButton && (
-								<button
-									onClick={() => {
-										editorStore.setControllerOverride({
-											feat,
-											path,
-											controller,
-										});
-									}}
-								>
-									reset
-								</button>
-							)}
-							<input
-								id={id}
-								type="checkbox"
-								checked={Boolean(value) as boolean}
-								onChange={(e) => {
-									editorStore.setControllerOverride({
-										feat,
-										path: settingName.split('.'),
-										value: Boolean(e.target.checked),
-										controller,
-									});
-								}}
-							/>
-						</div>
-					);
-				} else if (type === 'number') {
-					return (
-						<div className="option">
-							<label htmlFor={id}>
-								{label}{' '}
-								<a target="snapdocs" href={link}>
-									i
-								</a>
-								:
-							</label>
-							{shouldShowResetButton && (
-								<button
-									onClick={() => {
-										editorStore.setControllerOverride({
-											feat,
-											path,
-											controller,
-										});
-									}}
-								>
-									reset
-								</button>
-							)}
-							<input
-								id={id}
-								type="number"
-								value={value as number}
-								onChange={(e) => {
-									editorStore.setControllerOverride({
-										feat,
-										path,
-										value: Number(e.target.value),
-										controller,
-									});
-								}}
-							/>
-						</div>
-					);
-				}
+									const dropdownValue = typedControl.getValue(controller) as string | number;
+									const dropdownOptions = typeof control.options === 'function' ? control.options(controller) : control.options || [];
+									return display === 'hidden' ? null : (
+										<DropdownControl
+											key={index}
+											label={control.label}
+											description={control.description}
+											showReset={false}
+											options={dropdownOptions}
+											onReset={() => control.onReset(resetOverride, controller)}
+											disabled={display === 'disabled'}
+											value={dropdownValue}
+											onChange={(value: string | number) => control.onValueChange(value, setOverride, controller)}
+										/>
+									);
+								default:
+									return null;
+							}
+						})}
+					</div>
+				);
 			})}
 		</>
 	);
