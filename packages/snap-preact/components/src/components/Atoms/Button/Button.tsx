@@ -126,9 +126,9 @@ export const Button = observer((properties: ButtonProps): JSX.Element => {
 					{icon && <Icon {...subProps.icon} {...(typeof icon == 'string' ? { icon: icon } : (icon as Partial<IconProps>))} />}
 				</button>
 			) : (
-				<div {...(!disableA11y ? a11yProps : {})} {...elementProps} role={'button'} aria-disabled={disabled}>
+				<div {...(!disableA11y ? a11yProps : {})} role={'button'} aria-disabled={disabled} {...elementProps} {...mergedLang.button?.attributes}>
 					{content || children || mergedLang.button?.value ? (
-						<span className="ss__button__content" {...mergedLang.button?.all}>
+						<span className="ss__button__content" {...mergedLang.button?.value}>
 							{cloneWithProps(content, { treePath })}
 							{cloneWithProps(children, { treePath })}
 						</span>

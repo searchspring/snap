@@ -11,7 +11,7 @@ import { AutocompleteLayout, AutocompleteLayoutProps } from '../../Organisms/Aut
 import { SlideDirectionType, Slideout, SlideoutProps } from '../../Molecules/Slideout';
 import classNames from 'classnames';
 import { SearchInput, SearchInputProps } from '../../Molecules/SearchInput';
-import { useAcRenderedInput } from '../../../hooks';
+import { useA11y, useAcRenderedInput } from '../../../hooks';
 
 const defaultStyles: StyleScript<AutocompleteSlideoutProps> = ({}) => {
 	return css({
@@ -65,9 +65,15 @@ export const AutocompleteSlideout = observer((properties: AutocompleteSlideoutPr
 
 	const renderedInputRef: MutableRef<HTMLInputElement | null> = useRef(null);
 
+	const reset = () => {
+		setActive(false);
+		controller.setFocused();
+	};
+
 	const subProps: AutocompleteSlideoutSubProps = {
-		autocompleteTemplate: {
+		autocompleteLayout: {
 			// default props
+			onReset: () => reset(),
 			layout: layout,
 			// inherited props
 			...defined({
@@ -137,11 +143,6 @@ export const AutocompleteSlideout = observer((properties: AutocompleteSlideoutPr
 		});
 	}
 
-	const reset = () => {
-		setActive(false);
-		controller.setFocused();
-	};
-
 	const acProps = {
 		...props,
 	};
@@ -156,18 +157,20 @@ export const AutocompleteSlideout = observer((properties: AutocompleteSlideoutPr
 				className={classNames('ss__autocomplete-slideout', 'ss__autocomplete-slideout__slideout', className)}
 				active={active}
 			>
-				{renderInput ? (
-					<SearchInput {...subProps.searchInput} value={controller.store.state.input || ('' as string)} inputRef={renderedInputRef} />
-				) : (
-					<></>
-				)}
-				<AutocompleteLayout
-					{...acProps}
-					{...subProps.autocompleteTemplate}
-					input={_input!}
-					controller={controller}
-					treePath={`${treePath} slideout`}
-				/>
+				<div ref={(e) => useA11y(e, 0, true, reset)}>
+					{renderInput ? (
+						<SearchInput {...subProps.searchInput} value={controller.store.state.input || ('' as string)} inputRef={renderedInputRef} />
+					) : (
+						<></>
+					)}
+					<AutocompleteLayout
+						{...acProps}
+						{...subProps.autocompleteLayout}
+						input={_input!}
+						controller={controller}
+						treePath={`${treePath} slideout`}
+					/>
+				</div>
 			</Slideout>
 		</CacheProvider>
 	) : (
@@ -175,7 +178,7 @@ export const AutocompleteSlideout = observer((properties: AutocompleteSlideoutPr
 	);
 });
 interface AutocompleteSlideoutSubProps {
-	autocompleteTemplate: Partial<AutocompleteLayoutProps>;
+	autocompleteLayout: Partial<AutocompleteLayoutProps>;
 	slideout: Partial<SlideoutProps>;
 	searchInput: Partial<SearchInputProps>;
 }

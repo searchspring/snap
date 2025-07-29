@@ -48,7 +48,21 @@ export const Dropdown = observer((properties: DropdownProps): JSX.Element => {
 
 	const props = mergeProps('dropdown', globalTheme, defaultProps, properties);
 
-	const { button, content, children, disabled, open, onClick, onToggle, startOpen, disableClickOutside, disableA11y, className, treePath } = props;
+	const {
+		button,
+		content,
+		children,
+		disabled,
+		open,
+		onClick,
+		onToggle,
+		focusTrapContent,
+		startOpen,
+		disableClickOutside,
+		disableA11y,
+		className,
+		treePath,
+	} = props;
 
 	let showContent: boolean | undefined, setShowContent: undefined | StateUpdater<boolean | undefined>;
 
@@ -93,8 +107,6 @@ export const Dropdown = observer((properties: DropdownProps): JSX.Element => {
 				<div
 					className="ss__dropdown__button"
 					ref={(e) => (!disableA11y ? useA11y(e) : null)}
-					aria-expanded={showContent}
-					role="button"
 					onClick={(e) => {
 						if (!disabled) {
 							toggleShowContent(e);
@@ -106,7 +118,20 @@ export const Dropdown = observer((properties: DropdownProps): JSX.Element => {
 				</div>
 
 				{(content || children) && (
-					<div className={`ss__dropdown__content`} ref={(e) => (!disableA11y ? useA11y(e) : null)}>
+					<div
+						className={`ss__dropdown__content`}
+						ref={(e) =>
+							!disableA11y
+								? useA11y(e, 0, Boolean(focusTrapContent), (e) => {
+										if (stateful) {
+											toggleShowContent(e);
+										} else {
+											onClick && onClick(e);
+										}
+								  })
+								: null
+						}
+					>
 						{cloneWithProps(content, { open: showContent, toggleOpen: toggleShowContent, treePath })}
 						{cloneWithProps(children, { open: showContent, toggleOpen: toggleShowContent, treePath })}
 					</div>
@@ -127,5 +152,6 @@ export interface DropdownProps extends ComponentProps {
 	onToggle?: (event: React.MouseEvent<HTMLDivElement, MouseEvent>, showContent: boolean) => void;
 	startOpen?: boolean;
 	disableClickOutside?: boolean;
+	focusTrapContent?: boolean;
 	disableA11y?: boolean;
 }

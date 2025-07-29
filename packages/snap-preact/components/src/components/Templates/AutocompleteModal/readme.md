@@ -5,7 +5,7 @@ Renders an autocomplete modal that binds to an `<input>` element.
 The AutocompleteModal component is very similar to the Autocomplete component in functionality, however the main difference is that the AutocompleteModal components layout is determined by the layout prop, which specifies what child components render and where.
 
 ## Components Used
-- AutocompleteTemplate
+- autocompleteLayout
 - SearchInput
 - Modal
 

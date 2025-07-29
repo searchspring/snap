@@ -24,14 +24,14 @@ export function useAcRenderedInput({
 			setActive(true);
 		}
 
-		setTimeout(() => {
+		//this is needed to await the rendered input to render before binding the controller
+		setTimeout(async () => {
 			if (!renderedInputInitialized) {
-				controller.config.selector = '.ss__search-input__input';
 				setInput(renderedInputRef!.current);
-				controller.bind();
+
+				controller.config.selector = '.ss__search-input__input';
+				await controller.bind();
 				renderedInputRef?.current?.focus();
-				// if we want to reset the search input on open, uncomment the line below
-				// reset();
 			}
 			setRenderedInputInitialized(true);
 		});
@@ -46,23 +46,33 @@ export function useAcRenderedInput({
 				button = buttonSelector;
 			}
 			if (button) {
-				button.addEventListener('select', onClick);
-				button.addEventListener('click', onClick);
+				button.addEventListener('click', (e) => {
+					e.stopPropagation();
+					onClick();
+				});
+				button.addEventListener('focus', () => onClick());
+				button.addEventListener('select', () => onClick());
 			}
 		} else {
 			if (setActive) {
-				(input as Element)!.addEventListener('click', () => {
+				(input as Element)!.addEventListener('click', (e) => {
+					e.stopPropagation();
 					setActive(true);
 				});
+				(input as Element)!.addEventListener('focus', () => setActive(true));
+				(input as Element)!.addEventListener('select', () => setActive(true));
 			}
 		}
+	}, []);
+
+	// this is used to keep the values consistent between the native input and the rendered input
+	useEffect(() => {
 		if (input !== _input) {
-			//this is used to keep the values consistent between the native input and the rendered input
 			_input?.addEventListener('input', () => {
 				(input as HTMLInputElement).value = (_input as HTMLInputElement).value;
 			});
 		}
-	}, []);
+	}, [_input]);
 
 	return _input;
 }

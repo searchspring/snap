@@ -23,7 +23,7 @@ const config = {
 			term: `.ss__autocomplete .ss__terms__option`,
 			facet: '.ss__autocomplete .ss__facet .ss__facet__options',
 			result: '.ss__autocomplete .ss__results .ss__result',
-			seeMore: '.ss__autocomplete .ss__autocomplete__see-more',
+			seeMore: '.ss__autocomplete .ss__autocomplete__button--see-more',
 		},
 	},
 	startingQuery: 't', // initial query (displays terms, facets, and results)

@@ -257,8 +257,7 @@ export const es: LangComponents = {
 	facetSlider: {
 		sliderHandle: {
 			attributes: {
-				'aria-label': (data) => `Deslizador de ${data?.facet.label}`,
-				'aria-valuetext': (data) =>
+				'aria-label': (data) =>
 					`Deslizador de ${data?.facet.label}, valor actual ${data?.value}, ${
 						data?.facet.range?.low ? `valor mínimo ${data?.facet.range?.low},` : ''
 					} ${data?.facet.range?.high ? `valor máximo ${data?.facet.range?.high}` : ''}`,

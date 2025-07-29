@@ -266,7 +266,9 @@ export const FacetPaletteOptions = observer((properties: FacetPaletteOptionsProp
 							{...(previewOnFocus ? createHoverProps(() => value?.preview && value.preview()) : {})}
 							{...mergedLang.paletteOption?.all}
 						>
-							{!hideCheckbox && <Checkbox {...subProps.checkbox} checked={value.filtered} disableA11y={true} />}
+							{!hideCheckbox && (
+								<Checkbox {...subProps.checkbox} checked={value.filtered} disableA11y={true} {...mergedLang.paletteOption.attributes} />
+							)}
 							<div className="ss__facet-palette-options__option__wrapper">
 								<div
 									className={classnames(

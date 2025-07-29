@@ -156,7 +156,7 @@ export const FacetsHorizontal = observer((properties: FacetsHorizontalProps): JS
 			className: 'ss__facets-horizontal__header__dropdown',
 			disableClickOutside: true,
 			disableOverlay: true,
-			disableA11y: true,
+			focusTrapContent: true,
 			// inherited props
 			...defined({
 				disableStyles,
@@ -253,21 +253,16 @@ export const FacetsHorizontal = observer((properties: FacetsHorizontalProps): JS
 									`ss__facets-horizontal__header__dropdown--${facet.field}`
 								)}
 								open={selectedFacet?.field === facet.field}
-								onClick={() => {
-									if (selectedFacet === facet) {
+								onClick={(e) => {
+									// @ts-ignore - this is a workaround for the fact that selectedFacet is not defined when the onclick is triggered by the escape key.
+									if (selectedFacet !== facet && e.code !== 'Escape') {
+										setSelectedFacet(facet);
+									} else {
 										setSelectedFacet(undefined);
-										return;
 									}
-									setSelectedFacet(facet);
 								}}
 								button={
-									<div
-										className="ss__dropdown__button__heading"
-										ref={(e) => useA11y(e, 0)}
-										role="heading"
-										aria-level={3}
-										{...mergedLang.dropdownButton.attributes}
-									>
+									<div className="ss__dropdown__button__heading" {...mergedLang.dropdownButton.attributes}>
 										<span {...mergedLang.dropdownButton.value}>{facet?.label}</span>
 										<Icon
 											{...subProps.icon}

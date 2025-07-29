@@ -246,8 +246,7 @@ export const fr: LangComponents = {
 	facetSlider: {
 		sliderHandle: {
 			attributes: {
-				'aria-label': (data) => `${data?.facet?.label} bouton curseur`,
-				'aria-valuetext': (data) =>
+				'aria-label': (data) =>
 					`${data?.facet?.label} bouton curseur, valeur actuelle ${data?.value}, ${
 						data?.facet?.range?.low ? `valeur minimale ${data?.facet?.range?.low},` : ``
 					} ${data?.facet?.range?.high ? `valeur maximale ${data?.facet?.range?.high}` : ``}`,

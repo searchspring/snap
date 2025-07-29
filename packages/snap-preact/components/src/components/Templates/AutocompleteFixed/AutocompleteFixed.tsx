@@ -13,7 +13,7 @@ import classNames from 'classnames';
 import { SearchInput, SearchInputProps } from '../../Molecules/SearchInput';
 import { Overlay, OverlayProps } from '../../Atoms/Overlay';
 import { debounce } from '@searchspring/snap-toolbox';
-import { useAcRenderedInput } from '../../../hooks';
+import { useA11y, useAcRenderedInput } from '../../../hooks';
 
 const defaultStyles: StyleScript<AutocompleteFixedProps & { inputBounds: inputBounds }> = ({ inputBounds, offset, renderInput, width }) => {
 	return css({
@@ -92,10 +92,16 @@ export const AutocompleteFixed = observer((properties: AutocompleteFixedProps): 
 
 	const renderedInputRef: MutableRef<HTMLInputElement | null> = useRef(null);
 
+	const reset = () => {
+		controller.setFocused();
+		setActive(false);
+	};
+
 	const subProps: AutocompleteFixedSubProps = {
-		autocompleteTemplate: {
+		autocompleteLayout: {
 			// default props
 			layout: layout,
+			onReset: () => reset(),
 			// inherited props
 			...defined({
 				disableStyles,
@@ -189,11 +195,6 @@ export const AutocompleteFixed = observer((properties: AutocompleteFixedProps): 
 
 	const styling = mergeStyles<AutocompleteFixedProps & { inputBounds: inputBounds }>({ ...props, inputBounds }, defaultStyles);
 
-	const reset = () => {
-		controller.setFocused();
-		setActive(false);
-	};
-
 	let _input;
 	if (input) {
 		_input = useAcRenderedInput({
@@ -216,7 +217,7 @@ export const AutocompleteFixed = observer((properties: AutocompleteFixedProps): 
 			<div {...styling} className={classNames('ss__autocomplete-fixed', className)}>
 				<Modal {...subProps.modal}>
 					<Fragment>
-						<div className="ss__autocomplete-fixed__inner">
+						<div className="ss__autocomplete-fixed__inner" ref={(e) => useA11y(e, 0, true, reset)}>
 							{renderInput ? (
 								<SearchInput {...subProps.searchInput} value={controller.store.state.input || ('' as string)} inputRef={renderedInputRef} />
 							) : (
@@ -225,7 +226,7 @@ export const AutocompleteFixed = observer((properties: AutocompleteFixedProps): 
 							<div className="ss__autocomplete-fixed__inner__layout-wrapper">
 								<AutocompleteLayout
 									{...acProps}
-									{...subProps.autocompleteTemplate}
+									{...subProps.autocompleteLayout}
 									input={_input!}
 									controller={controller}
 									treePath={`${treePath} modal`}
@@ -257,7 +258,7 @@ interface inputBounds {
 }
 
 interface AutocompleteFixedSubProps {
-	autocompleteTemplate: Partial<AutocompleteLayoutProps>;
+	autocompleteLayout: Partial<AutocompleteLayoutProps>;
 	modal: Partial<ModalProps>;
 	searchInput: Partial<SearchInputProps>;
 	overlay: Partial<OverlayProps>;
