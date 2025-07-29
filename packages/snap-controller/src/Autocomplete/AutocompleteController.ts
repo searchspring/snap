@@ -144,8 +144,6 @@ export class AutocompleteController extends AbstractController {
 		this.eventManager.on('beforeSubmit', async (ac: AfterStoreObj, next: Next): Promise<void | boolean> => {
 			await next();
 
-			// wait for input delay, if loading is in progress, do not redirect
-			await timeout(INPUT_DELAY + 1);
 			const loading = (ac.controller as AutocompleteController).store.loading;
 			if (loading) return;
 
@@ -319,9 +317,6 @@ export class AutocompleteController extends AbstractController {
 
 					e.preventDefault();
 
-					// wait for input delay
-					await timeout(INPUT_DELAY + 1);
-
 					// when spellCorrection is enabled
 					if (this.config.globals?.search?.query?.spellCorrection) {
 						// wait until loading is complete before submission
@@ -342,6 +337,9 @@ export class AutocompleteController extends AbstractController {
 					}
 
 					actionUrl = actionUrl?.set('query', input.value);
+
+					// wait for input delay
+					await timeout(INPUT_DELAY + 1);
 
 					try {
 						await this.eventManager.fire('beforeSubmit', {
@@ -381,9 +379,6 @@ export class AutocompleteController extends AbstractController {
 
 				e.preventDefault();
 
-				// wait for input delay
-				await timeout(INPUT_DELAY + 1);
-
 				// when spellCorrection is enabled
 				if (this.config.globals?.search?.query?.spellCorrection) {
 					// wait until loading is complete before submission
@@ -404,6 +399,9 @@ export class AutocompleteController extends AbstractController {
 						addHiddenFormInput(form, PARAM_ORIGINAL_QUERY, this.store.search.originalQuery.string);
 					}
 				}
+
+				// wait for input delay
+				await timeout(INPUT_DELAY + 1);
 
 				try {
 					await this.eventManager.fire('beforeSubmit', {
@@ -652,6 +650,8 @@ export class AutocompleteController extends AbstractController {
 			}
 
 			this.store.loading = true;
+			// clear the redirect URL until proper abort functionality is implemented
+			this.store.merchandising.redirect = '';
 
 			try {
 				await this.eventManager.fire('beforeSearch', {
