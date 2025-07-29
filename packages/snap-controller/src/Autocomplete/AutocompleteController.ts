@@ -135,16 +135,19 @@ export class AutocompleteController extends AbstractController {
 		this.eventManager.on('afterSearch', async (ac: AfterSearchObj, next: Next): Promise<void | boolean> => {
 			await next();
 
-			const inputState = (ac.controller as AutocompleteController).store.state.input?.trim().toLowerCase() || '';
-			const searchQuery = ac.request.search?.query?.string?.trim().toLowerCase() || '';
 			// cancel search if no input or query doesn't match current urlState
-			if ((inputState && inputState !== searchQuery) || ac.response.autocomplete.query != ac.controller.urlManager.state.query) {
+			if (ac.response.autocomplete.query != ac.controller.urlManager.state.query) {
 				return false;
 			}
 		});
 
 		this.eventManager.on('beforeSubmit', async (ac: AfterStoreObj, next: Next): Promise<void | boolean> => {
 			await next();
+
+			// wait for input delay, if loading is in progress, do not redirect
+			await timeout(INPUT_DELAY + 1);
+			const loading = (ac.controller as AutocompleteController).store.loading;
+			if (loading) return;
 
 			const inputState = (ac.controller as AutocompleteController).store.state.input;
 			const redirectURL = (ac.controller as AutocompleteController).store.merchandising?.redirect;
@@ -316,11 +319,12 @@ export class AutocompleteController extends AbstractController {
 
 					e.preventDefault();
 
+					// wait for input delay
+					await timeout(INPUT_DELAY + 1);
+
 					// when spellCorrection is enabled
 					if (this.config.globals?.search?.query?.spellCorrection) {
 						// wait until loading is complete before submission
-						// TODO make this better
-						await timeout(INPUT_DELAY + 1);
 						while (this.store.loading) {
 							await timeout(INPUT_DELAY);
 						}
@@ -338,8 +342,6 @@ export class AutocompleteController extends AbstractController {
 					}
 
 					actionUrl = actionUrl?.set('query', input.value);
-
-					// TODO expected spell correct behavior queryAssumption
 
 					try {
 						await this.eventManager.fire('beforeSubmit', {
@@ -379,6 +381,7 @@ export class AutocompleteController extends AbstractController {
 
 				e.preventDefault();
 
+				// wait for input delay
 				await timeout(INPUT_DELAY + 1);
 
 				// when spellCorrection is enabled
