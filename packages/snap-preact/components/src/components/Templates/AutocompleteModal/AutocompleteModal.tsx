@@ -11,7 +11,8 @@ import { AutocompleteLayout, AutocompleteLayoutProps } from '../../Organisms/Aut
 import { Modal, ModalProps } from '../../Molecules/Modal';
 import classNames from 'classnames';
 import { SearchInput, SearchInputProps } from '../../Molecules/SearchInput';
-import { useA11y, useAcRenderedInput } from '../../../hooks';
+import { useA11y } from '../../../hooks';
+import { useAcRenderedInput } from '../../../hooks/useAcRenderedInput';
 
 const defaultStyles: StyleScript<AutocompleteModalProps> = ({ width, height, theme }) => {
 	// eslint-disable-next-line @typescript-eslint/no-unused-vars

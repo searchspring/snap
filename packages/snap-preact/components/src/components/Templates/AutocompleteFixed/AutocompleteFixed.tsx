@@ -13,7 +13,8 @@ import classNames from 'classnames';
 import { SearchInput, SearchInputProps } from '../../Molecules/SearchInput';
 import { Overlay, OverlayProps } from '../../Atoms/Overlay';
 import { debounce } from '@searchspring/snap-toolbox';
-import { useA11y, useAcRenderedInput } from '../../../hooks';
+import { useA11y } from '../../../hooks';
+import { useAcRenderedInput } from '../../../hooks/useAcRenderedInput';
 
 const defaultStyles: StyleScript<AutocompleteFixedProps & { inputBounds: inputBounds }> = ({ inputBounds, offset, renderInput, width }) => {
 	return css({
