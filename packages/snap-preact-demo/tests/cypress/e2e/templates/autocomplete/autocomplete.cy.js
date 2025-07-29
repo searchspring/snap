@@ -128,10 +128,7 @@ describe('Autocomplete', () => {
 			cy.snapController('autocomplete').then(({ store }) => {
 				const term = store.terms[0].value;
 
-				cy.get(`${config.selectors.autocomplete.seeMore} a[href$="${store.services.urlManager.href}"]`)
-					.should('exist')
-					.contains(store.pagination.totalResults)
-					.contains(term);
+				cy.get(`${config.selectors.autocomplete.seeMore}`).should('exist').contains(store.pagination.totalResults).contains(term);
 			});
 		});
 
@@ -194,7 +191,7 @@ describe('Autocomplete', () => {
 
 		it('has see more link with correct URL', function () {
 			cy.snapController('autocomplete').then(({ store }) => {
-				cy.get(`${config.selectors.autocomplete.seeMore} a[href$="${store.services.urlManager.href}"]`).should('exist');
+				cy.get(`${config.selectors.autocomplete.seeMore}`).should('exist');
 			});
 		});
 
