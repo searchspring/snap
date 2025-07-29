@@ -2,15 +2,15 @@ import { h } from 'preact';
 
 import { ArgsTable, PRIMARY_STORY, Markdown } from '@storybook/blocks';
 
-import { AutocompleteTemplate, AutocompleteTemplateProps } from './AutocompleteTemplate';
+import { AutocompleteLayout, AutocompleteLayoutProps } from './AutocompleteLayout';
 import { componentArgs, highlightedCode } from '../../../utilities';
 import { Snapify } from '../../../utilities/snapify';
 import Readme from './readme.md';
 import type { AutocompleteController } from '@searchspring/snap-controller';
 
 export default {
-	title: 'Templates/AutocompleteTemplate',
-	component: AutocompleteTemplate,
+	title: 'Organisms/AutocompleteLayout',
+	component: AutocompleteLayout,
 	tags: ['autodocs'],
 	parameters: {
 		docs: {
@@ -217,12 +217,12 @@ const snapInstance = Snapify.autocomplete({
 	},
 });
 
-export const Default = (args: AutocompleteTemplateProps, { loaded: { controller } }: { loaded: { controller: AutocompleteController } }) => {
+export const Default = (args: AutocompleteLayoutProps, { loaded: { controller } }: { loaded: { controller: AutocompleteController } }) => {
 	// bind after input exists
 	setTimeout(() => {
 		controller.bind();
 	});
-	return <AutocompleteTemplate {...args} controller={controller} input={controller?.config.selector} />;
+	return <AutocompleteLayout {...args} controller={controller} input={controller?.config.selector} />;
 };
 
 Default.loaders = [
@@ -231,12 +231,12 @@ Default.loaders = [
 	}),
 ];
 
-export const Slim = (args: AutocompleteTemplateProps, { loaded: { controller } }: { loaded: { controller: AutocompleteController } }) => {
+export const Slim = (args: AutocompleteLayoutProps, { loaded: { controller } }: { loaded: { controller: AutocompleteController } }) => {
 	// bind after input exists
 	setTimeout(() => {
 		controller.bind();
 	});
-	return <AutocompleteTemplate {...args} controller={controller} input={controller?.config.selector} />;
+	return <AutocompleteLayout {...args} controller={controller} input={controller?.config.selector} />;
 };
 
 Slim.loaders = [

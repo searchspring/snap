@@ -41,8 +41,20 @@ export default {
 		),
 	],
 	argTypes: {
+		value: {
+			defaultValue: '',
+			type: { required: true },
+			description: 'sets the value for the input',
+			table: {
+				type: {
+					summary: 'string',
+				},
+				defaultValue: { summary: '' },
+			},
+			control: { type: 'text' },
+		},
 		onChange: {
-			description: 'Onchange Callback',
+			description: 'OnChange Callback',
 			table: {
 				type: {
 					summary: 'function',
@@ -51,17 +63,64 @@ export default {
 			control: { type: 'none' },
 			action: 'onChange',
 		},
-		hideIcon: {
-			description: 'Hides icon',
+		onKeyUp: {
+			description: 'OnKeyUp Callback',
 			table: {
 				type: {
-					summary: 'boolean',
+					summary: 'function',
 				},
-				defaultValue: { summary: false },
 			},
-			control: { type: 'boolean' },
+			control: { type: 'none' },
+			action: 'onKeyUp',
 		},
-		placeholder: {
+		onKeyDown: {
+			description: 'OnKeyDown Callback',
+			table: {
+				type: {
+					summary: 'function',
+				},
+			},
+			control: { type: 'none' },
+			action: 'onKeyDown',
+		},
+		onClick: {
+			description: 'OnClick Callback',
+			table: {
+				type: {
+					summary: 'function',
+				},
+			},
+			control: { type: 'none' },
+			action: 'onClick',
+		},
+		submitSearchButton: {
+			description: 'Button component props for submit search button',
+			table: {
+				type: {
+					summary: `{ icon: 'search' }`,
+				},
+			},
+			control: { type: 'object' },
+		},
+		clearSearchButton: {
+			description: 'Button component props for clear search button',
+			table: {
+				type: {
+					summary: `{ icon: 'close-thin' }`,
+				},
+			},
+			control: { type: 'object' },
+		},
+		closeSearchButton: {
+			description: 'Button component props for close search button',
+			table: {
+				type: {
+					summary: `{}`,
+				},
+			},
+			control: { type: 'object' },
+		},
+		placeholderText: {
 			defaultValue: 'Search',
 			description: 'Display placeholder text',
 			table: {
@@ -72,7 +131,31 @@ export default {
 			},
 			control: { type: 'text' },
 		},
+		inputName: {
+			description: 'sets the name attribute for the input',
+			table: {
+				type: {
+					summary: 'string',
+				},
+			},
+			control: { type: 'text' },
+		},
+		disabled: {
+			description: 'boolean to set disabled attribute',
+			table: {
+				type: {
+					summary: 'boolean',
+				},
+				defaultValue: { summary: 'false' },
+			},
+			control: { type: 'boolean' },
+		},
 		...componentArgs,
 	},
 };
 export const Default = (args: SearchInputProps) => <SearchInput {...args} />;
+
+Default.args = {
+	submitSearchButton: { icon: 'search' },
+	clearSearchButton: { icon: 'close-thin' },
+};

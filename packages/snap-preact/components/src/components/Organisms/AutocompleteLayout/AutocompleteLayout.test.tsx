@@ -2,16 +2,13 @@ import 'whatwg-fetch';
 import { h } from 'preact';
 import { v4 as uuidv4 } from 'uuid';
 import { render } from '@testing-library/preact';
-import userEvent from '@testing-library/user-event';
-
-import { ThemeProvider } from '../../../providers';
-import { AutocompleteTemplate, AutocompleteTemplateProps } from '../AutocompleteTemplate/AutocompleteTemplate';
+import { AutocompleteLayout, AutocompleteLayoutProps } from './AutocompleteLayout';
 import { MockClient } from '@searchspring/snap-shared';
 import { AutocompleteControllerConfig } from '@searchspring/snap-controller';
 import { createAutocompleteController } from '../../../../../src/create';
 import { waitFor } from '@testing-library/preact';
 
-describe('Autocomplete Component', () => {
+describe('AutocompleteLayout Component', () => {
 	jest.setTimeout(10000);
 	const globals = { siteId: '8uyt2m' };
 	let acConfig: AutocompleteControllerConfig;
@@ -56,11 +53,11 @@ describe('Autocomplete Component', () => {
 		const controller = createAutocompleteController({ client: clientConfig, controller: acConfig }, { client: mockClient });
 		await controller.bind();
 
-		const args: AutocompleteTemplateProps = {
+		const args: AutocompleteLayoutProps = {
 			controller,
 			input: controller.config.selector,
 		};
-		const rendered = render(<AutocompleteTemplate {...args} />);
+		const rendered = render(<AutocompleteLayout {...args} />);
 
 		const autocomplete = rendered.container.querySelector('.ss__autocomplete');
 		expect(autocomplete).not.toBeInTheDocument();
@@ -70,7 +67,7 @@ describe('Autocomplete Component', () => {
 		const controller = createAutocompleteController({ client: clientConfig, controller: acConfig }, { client: mockClient });
 		await controller.bind();
 
-		const args: AutocompleteTemplateProps = {
+		const args: AutocompleteLayoutProps = {
 			controller,
 			input: controller.config.selector,
 		};
@@ -78,7 +75,7 @@ describe('Autocomplete Component', () => {
 		const input = document.querySelector('.searchspring-ac');
 		(input as HTMLInputElement).focus();
 
-		const rendered = render(<AutocompleteTemplate {...args} />, { container });
+		const rendered = render(<AutocompleteLayout {...args} />, { container });
 
 		await waitFor(() => {
 			const autocomplete = rendered.container.querySelector('.ss__autocomplete');
@@ -90,7 +87,7 @@ describe('Autocomplete Component', () => {
 		const controller = createAutocompleteController({ client: clientConfig, controller: acConfig }, { client: mockClient });
 		await controller.bind();
 
-		const args: AutocompleteTemplateProps = {
+		const args: AutocompleteLayoutProps = {
 			controller,
 			input: controller.config.selector,
 		};
@@ -99,7 +96,7 @@ describe('Autocomplete Component', () => {
 		input.focus();
 		input.value = 'dress';
 
-		const rendered = render(<AutocompleteTemplate {...args} />, { container });
+		const rendered = render(<AutocompleteLayout {...args} />, { container });
 
 		await waitFor(() => {
 			const c4 = rendered.container.querySelector('.ss__autocomplete__column--c4');
@@ -124,7 +121,7 @@ describe('Autocomplete Component', () => {
 		const controller = createAutocompleteController({ client: clientConfig, controller: acConfig }, { client: mockClient });
 		await controller.bind();
 
-		const args: AutocompleteTemplateProps = {
+		const args: AutocompleteLayoutProps = {
 			controller,
 			input: controller.config.selector,
 			facetsTitle: 'custom facets title',
@@ -135,7 +132,7 @@ describe('Autocomplete Component', () => {
 		input.focus();
 		input.value = 'dress';
 
-		const rendered = render(<AutocompleteTemplate {...args} />, { container });
+		const rendered = render(<AutocompleteLayout {...args} />, { container });
 
 		await waitFor(() => {
 			const c2Facetstitle = rendered.container.querySelector(
@@ -155,7 +152,7 @@ describe('Autocomplete Component', () => {
 	it('can change c1 with column1', async () => {
 		const controller = createAutocompleteController({ client: clientConfig, controller: acConfig }, { client: mockClient });
 		await controller.bind();
-		const args: AutocompleteTemplateProps = {
+		const args: AutocompleteLayoutProps = {
 			controller,
 			input: controller.config.selector,
 			column1: {
@@ -168,7 +165,7 @@ describe('Autocomplete Component', () => {
 		input.focus();
 		input.value = 'dress';
 
-		const rendered = render(<AutocompleteTemplate {...args} />, { container });
+		const rendered = render(<AutocompleteLayout {...args} />, { container });
 
 		await waitFor(() => {
 			const c4 = rendered.container.querySelector('.ss__autocomplete__column--c4');
@@ -195,7 +192,7 @@ describe('Autocomplete Component', () => {
 	it('can change c2 with column2', async () => {
 		const controller = createAutocompleteController({ client: clientConfig, controller: acConfig }, { client: mockClient });
 		await controller.bind();
-		const args: AutocompleteTemplateProps = {
+		const args: AutocompleteLayoutProps = {
 			controller,
 			input: controller.config.selector,
 			column2: {
@@ -208,7 +205,7 @@ describe('Autocomplete Component', () => {
 		input.focus();
 		input.value = 'dress';
 
-		const rendered = render(<AutocompleteTemplate {...args} />, { container });
+		const rendered = render(<AutocompleteLayout {...args} />, { container });
 
 		await waitFor(() => {
 			const c4 = rendered.container.querySelector('.ss__autocomplete__column--c4');
@@ -234,7 +231,7 @@ describe('Autocomplete Component', () => {
 	it('can change c3 with column3', async () => {
 		const controller = createAutocompleteController({ client: clientConfig, controller: acConfig }, { client: mockClient });
 		await controller.bind();
-		const args: AutocompleteTemplateProps = {
+		const args: AutocompleteLayoutProps = {
 			controller,
 			input: controller.config.selector,
 			column3: {
@@ -247,7 +244,7 @@ describe('Autocomplete Component', () => {
 		input.focus();
 		input.value = 'dress';
 
-		const rendered = render(<AutocompleteTemplate {...args} />, { container });
+		const rendered = render(<AutocompleteLayout {...args} />, { container });
 
 		await waitFor(() => {
 			const c4 = rendered.container.querySelector('.ss__autocomplete__column--c4');
@@ -274,7 +271,7 @@ describe('Autocomplete Component', () => {
 		const controller = createAutocompleteController({ client: clientConfig, controller: acConfig }, { client: mockClient });
 		await controller.bind();
 		const width = '150px';
-		const args: AutocompleteTemplateProps = {
+		const args: AutocompleteLayoutProps = {
 			controller,
 			input: controller.config.selector,
 			layout: ['c1', 'c2', 'c3', 'c4'],
@@ -288,7 +285,7 @@ describe('Autocomplete Component', () => {
 		input.focus();
 		input.value = 'dress';
 
-		const rendered = render(<AutocompleteTemplate {...args} />, { container });
+		const rendered = render(<AutocompleteLayout {...args} />, { container });
 
 		await waitFor(() => {
 			const c4 = rendered.container.querySelector('.ss__autocomplete__column--c4');
@@ -312,7 +309,7 @@ describe('Autocomplete Component', () => {
 	it('can change layout', async () => {
 		const controller = createAutocompleteController({ client: clientConfig, controller: acConfig }, { client: mockClient });
 		await controller.bind();
-		const args: AutocompleteTemplateProps = {
+		const args: AutocompleteLayoutProps = {
 			controller,
 			input: controller.config.selector,
 			layout: ['content', ['button.see-more']],
@@ -322,7 +319,7 @@ describe('Autocomplete Component', () => {
 		input.focus();
 		input.value = 'dress';
 
-		const rendered = render(<AutocompleteTemplate {...args} />, { container });
+		const rendered = render(<AutocompleteLayout {...args} />, { container });
 
 		await waitFor(() => {
 			const content = rendered.container.querySelector('.ss__autocomplete__content');
@@ -347,7 +344,7 @@ describe('Autocomplete Component', () => {
 	it('auto adds banners with no layout', async () => {
 		const controller = createAutocompleteController({ client: clientConfig, controller: acConfig }, { client: mockClient });
 		await controller.bind();
-		const args: AutocompleteTemplateProps = {
+		const args: AutocompleteLayoutProps = {
 			controller,
 			input: controller.config.selector,
 		};
@@ -355,11 +352,10 @@ describe('Autocomplete Component', () => {
 		const input = document.querySelector('.searchspring-ac') as HTMLInputElement;
 		input.focus();
 		//note this test assumes there is a banner available on that term.. which at this time there is
-		//todo use a mock for this
 		input.value = 'dress';
 		(controller.client as MockClient).mockData.updateConfig({ autocomplete: 'ac.banners' });
 
-		const rendered = render(<AutocompleteTemplate {...args} />, { container });
+		const rendered = render(<AutocompleteLayout {...args} />, { container });
 
 		await waitFor(() => {
 			const leftBanner = rendered.container.querySelector('.ss__autocomplete__facets .ss__banner--left');
@@ -377,7 +373,7 @@ describe('Autocomplete Component', () => {
 	it('auto adds banners with custom layout', async () => {
 		const controller = createAutocompleteController({ client: clientConfig, controller: acConfig }, { client: mockClient });
 		await controller.bind();
-		const args: AutocompleteTemplateProps = {
+		const args: AutocompleteLayoutProps = {
 			controller,
 			input: controller.config.selector,
 			layout: ['c1', 'c2', 'c3'],
@@ -386,11 +382,10 @@ describe('Autocomplete Component', () => {
 		const input = document.querySelector('.searchspring-ac') as HTMLInputElement;
 		input.focus();
 		//note this test assumes there is a banner available on that term.. which at this time there is
-		//todo use a mock for this
 		input.value = 'dress';
 		(controller.client as MockClient).mockData.updateConfig({ autocomplete: 'ac.banners' });
 
-		const rendered = render(<AutocompleteTemplate {...args} />, { container });
+		const rendered = render(<AutocompleteLayout {...args} />, { container });
 
 		await waitFor(() => {
 			const leftBanner = rendered.container.querySelector('.ss__autocomplete__facets .ss__banner--left');
@@ -408,7 +403,7 @@ describe('Autocomplete Component', () => {
 	it('can exclude auto banners', async () => {
 		const controller = createAutocompleteController({ client: clientConfig, controller: acConfig }, { client: mockClient });
 		await controller.bind();
-		const args: AutocompleteTemplateProps = {
+		const args: AutocompleteLayoutProps = {
 			controller,
 			input: controller.config.selector,
 			excludeBanners: true,
@@ -417,11 +412,10 @@ describe('Autocomplete Component', () => {
 		const input = document.querySelector('.searchspring-ac') as HTMLInputElement;
 		input.focus();
 		//note this test assumes there is a banner available on that term.. which at this time there is
-		//todo use a mock for this
 		input.value = 'dress';
 		(controller.client as MockClient).mockData.updateConfig({ autocomplete: 'ac.banners' });
 
-		const rendered = render(<AutocompleteTemplate {...args} />, { container });
+		const rendered = render(<AutocompleteLayout {...args} />, { container });
 
 		await waitFor(() => {
 			const leftBanner = rendered.container.querySelector('.ss__autocomplete__facets .ss__banner--left');
@@ -439,7 +433,7 @@ describe('Autocomplete Component', () => {
 	it('can manually add back banners auto banners', async () => {
 		const controller = createAutocompleteController({ client: clientConfig, controller: acConfig }, { client: mockClient });
 		await controller.bind();
-		const args: AutocompleteTemplateProps = {
+		const args: AutocompleteLayoutProps = {
 			controller,
 			input: controller.config.selector,
 			excludeBanners: true,
@@ -453,11 +447,10 @@ describe('Autocomplete Component', () => {
 		const input = document.querySelector('.searchspring-ac') as HTMLInputElement;
 		input.focus();
 		//note this test assumes there is a banner available on that term.. which at this time there is
-		//todo use a mock for this
 		input.value = 'dress';
 		(controller.client as MockClient).mockData.updateConfig({ autocomplete: 'ac.banners' });
 
-		const rendered = render(<AutocompleteTemplate {...args} />, { container });
+		const rendered = render(<AutocompleteLayout {...args} />, { container });
 
 		await waitFor(() => {
 			const leftBanner = rendered.container.querySelector('.ss__autocomplete__column--c4 .ss__banner--left');

@@ -143,8 +143,10 @@ export const FacetListOptions = observer((properties: FacetListOptionsProps): JS
 							{...mergedLang.listOption?.all}
 						>
 							{renderRadios
-								? !hideCheckbox && <Radio {...subProps.radio} checked={value.filtered} disableA11y={true} />
-								: !hideCheckbox && <Checkbox {...subProps.checkbox} checked={value.filtered} disableA11y={true} />}
+								? !hideCheckbox && <Radio {...subProps.radio} checked={value.filtered} disableA11y={true} {...mergedLang.listOption.attributes} />
+								: !hideCheckbox && (
+										<Checkbox {...subProps.checkbox} checked={value.filtered} disableA11y={true} {...mergedLang.listOption.attributes} />
+								  )}
 
 							<span className="ss__facet-list-options__option__value">
 								<span className="ss__facet-list-options__option__value__label">{value.label}</span>

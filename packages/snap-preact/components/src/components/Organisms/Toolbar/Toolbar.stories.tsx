@@ -53,6 +53,27 @@ export default {
 			},
 			control: { type: 'none' },
 		},
+		layout: {
+			description: 'array of modules to render in specified layout',
+			table: {
+				type: {
+					summary:
+						'[`searchHeader` | `filterSummary` | `mobileSidebar` | `layoutSelector` | `perPage` | `sortBy` | `pagination` | `paginationInfo` | `_` | `button.sidebar-toggle` | `banner.header` | `banner.banner` | `banner.footer` | `facetsHorizontal`]',
+				},
+				defaultValue: { summary: "['mobileSidebar', 'filterSummary', 'paginationInfo', 'sortBy', 'perPage', 'pagination']" },
+			},
+			control: 'array',
+		},
+		toggleSideBarButton: {
+			description: 'specifies an element to be used as the toggleSideBarButton',
+			table: {
+				type: {
+					summary: 'object',
+				},
+				defaultValue: { summary: '' },
+			},
+			control: { type: 'object' },
+		},
 		...componentArgs,
 	},
 };

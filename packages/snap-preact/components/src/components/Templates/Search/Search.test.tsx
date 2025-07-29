@@ -146,7 +146,7 @@ describe('Search Template Component', () => {
 	});
 
 	it('can hide bottomToolbar', () => {
-		const rendered = render(<Search controller={controller} hideBottomToolBar />);
+		const rendered = render(<Search controller={controller} hideBottomToolbar />);
 		const element = rendered.container.querySelector('.ss__search')!;
 		const bottomToolBar = rendered.container.querySelector('.ss__search__content__toolbar--bottomToolBar');
 

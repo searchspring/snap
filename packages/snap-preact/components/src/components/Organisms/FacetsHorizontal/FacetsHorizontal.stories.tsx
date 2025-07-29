@@ -65,6 +65,23 @@ export default {
 			},
 			control: { type: 'boolean' },
 		},
+		hideFiltersButton: {
+			defaultValue: false,
+			description: 'Hide the filters button',
+			table: {
+				type: { summary: 'boolean' },
+				defaultValue: { summary: false },
+			},
+			control: { type: 'boolean' },
+		},
+		onFacetOptionClick: {
+			description: 'Callback function for when a facet option is clicked',
+			type: { required: false },
+			table: {
+				type: { summary: 'function' },
+			},
+			action: 'onFacetOptionClick',
+		},
 		overlay: {
 			defaultValue: true,
 			description: 'Render facet options as a dropdown overlay',

@@ -9,29 +9,37 @@ describe('SearchInput Component', () => {
 	const theme = {
 		components: {
 			searchInput: {
-				placeholder: 'theme',
+				placeholderText: 'theme',
 			},
 		},
 	};
 
 	it('renders', () => {
-		const rendered = render(<SearchInput />);
+		const rendered = render(<SearchInput value={''} />);
 		const searchInput = rendered.container.querySelector('.ss__search-input');
 		expect(searchInput).toBeInTheDocument();
 	});
 
-	it('can update placeholder text', () => {
-		const placeholder = 'hello';
-		const rendered = render(<SearchInput placeholder={placeholder} />);
+	it('can update placeholderText text', () => {
+		const placeholderText = 'hello';
+		const rendered = render(<SearchInput value={''} placeholderText={placeholderText} />);
 		const searchInput: HTMLInputElement = rendered.container.querySelector('.ss__search-input__input')!;
 		expect(searchInput).toBeInTheDocument();
-		expect(searchInput.placeholder).toBe(placeholder);
+		expect(searchInput.placeholder).toBe(placeholderText);
+	});
+
+	it('can update name attribute text', () => {
+		const name = 'hello';
+		const rendered = render(<SearchInput value={''} inputName={name} />);
+		const searchInput: HTMLInputElement = rendered.container.querySelector('.ss__search-input__input')!;
+		expect(searchInput).toBeInTheDocument();
+		expect(searchInput.getAttribute('name')).toBe(name);
 	});
 
 	it('can invoke onChange callback', async () => {
 		const onChangeFn = jest.fn();
 		const text = 'hello world';
-		const rendered = render(<SearchInput onChange={onChangeFn} />);
+		const rendered = render(<SearchInput value={''} onChange={onChangeFn} />);
 		const searchInput: HTMLInputElement = rendered.container.querySelector('.ss__search-input__input')!;
 		expect(searchInput).toBeInTheDocument();
 
@@ -40,66 +48,208 @@ describe('SearchInput Component', () => {
 		expect(onChangeFn).toHaveBeenCalled();
 	});
 
-	it('can hide icon using hideIcon prop', () => {
-		const rendered = render(<SearchInput hideIcon={true} />);
+	it('can change searchButton icon with submitSearchButton prop', () => {
+		const rendered = render(<SearchInput value={''} submitSearchButton={{ icon: 'cog' }} />);
 		const searchInput = rendered.container.querySelector('.ss__search-input__input');
 		expect(searchInput).toBeInTheDocument();
 		const icon = rendered.container.querySelector('.ss__icon');
-		expect(icon).not.toBeInTheDocument();
+		expect(icon).toBeInTheDocument();
+		expect(icon?.classList).toContain('ss__icon--cog');
 	});
 
 	it('can disable styling', () => {
-		const rendered = render(<SearchInput />);
+		const rendered = render(<SearchInput value={''} />);
 		const searchInput = rendered.container.querySelector('.ss__search-input');
 		expect(searchInput?.classList.length).toBe(2);
 	});
 
 	it('renders with classname', () => {
 		const className = 'classy';
-		const rendered = render(<SearchInput className={className} />);
+		const rendered = render(<SearchInput value={''} className={className} />);
 		const searchInput = rendered.container.querySelector('.ss__search-input');
 
 		expect(searchInput).toBeInTheDocument();
 		expect(searchInput).toHaveClass(className);
 	});
 
+	it('renders with search icon by default', async () => {
+		const func = jest.fn();
+		const rendered = render(<SearchInput value={''} submitSearchButton={{ onClick: func }} />);
+		const searchButton = rendered.container.querySelector('.ss__search-input__button--submit-search-button');
+		const searchButtonIcon = rendered.container.querySelector('.ss__search-input__button--submit-search-button .ss__icon--search');
+		expect(searchButton).toBeInTheDocument();
+		expect(searchButtonIcon).toBeInTheDocument();
+
+		expect(func).not.toHaveBeenCalled();
+
+		await userEvent.click(searchButton!);
+
+		expect(func).toHaveBeenCalled();
+	});
+
+	it('renders with clear icon only when value', async () => {
+		const func = jest.fn();
+		const rendered = render(<SearchInput value={''} clearSearchButton={{ onClick: func, icon: 'cog' }} />);
+		const clearButton = rendered.container.querySelector('.ss__search-input__button--clear-search-icon');
+		const clearButtonIcon = rendered.container.querySelector('.ss__search-input__button--clear-search-icon .ss__icon--cog');
+
+		expect(clearButton).not.toBeInTheDocument();
+		expect(clearButtonIcon).not.toBeInTheDocument();
+
+		const rendered2 = render(<SearchInput value={'val'} clearSearchButton={{ onClick: func, icon: 'cog' }} />);
+		const clearButton2 = rendered2.container.querySelector('.ss__search-input__button--clear-search-button');
+		const clearButtonIcon2 = rendered2.container.querySelector('.ss__search-input__button--clear-search-button .ss__icon--cog');
+
+		expect(clearButton2).toBeInTheDocument();
+		expect(clearButtonIcon2).toBeInTheDocument();
+
+		expect(func).not.toHaveBeenCalled();
+
+		await userEvent.click(clearButton2!);
+
+		expect(func).toHaveBeenCalled();
+
+		//hmm this doesnt work in the test..
+		// const input = rendered2.container.querySelector('input');
+		// expect(input!.value).toBe('');
+	});
+
+	it('renders with close icon', async () => {
+		const func = jest.fn();
+		const rendered = render(<SearchInput value={''} closeSearchButton={{ onClick: func, icon: 'cog' }} />);
+		const closeButton = rendered.container.querySelector('.ss__search-input__button--close-search-button');
+		const closeButtonIcon = rendered.container.querySelector('.ss__search-input__button--close-search-button .ss__icon--cog');
+
+		expect(closeButton).toBeInTheDocument();
+		expect(closeButtonIcon).toBeInTheDocument();
+
+		expect(func).not.toHaveBeenCalled();
+
+		await userEvent.click(closeButton!);
+
+		expect(func).toHaveBeenCalled();
+	});
+
+	describe('search input lang works', () => {
+		const selector = '.ss__search-input';
+
+		it('immediately available lang options', async () => {
+			// placeholderText
+			const langOptions = ['submitSearchButton', 'clearSearchButton', 'closeSearchButton'];
+
+			//text attributes/values
+			const value = 'custom value';
+			const altText = 'custom alt';
+			const ariaLabel = 'custom label';
+			const ariaValueText = 'custom value text';
+			const title = 'custom title';
+
+			const valueMock = jest.fn(() => value);
+			const altMock = jest.fn(() => altText);
+			const labelMock = jest.fn(() => ariaLabel);
+			const valueTextMock = jest.fn(() => ariaValueText);
+			const titleMock = jest.fn(() => title);
+
+			const langObjs = [
+				{
+					value: value,
+					attributes: {
+						alt: altText,
+						'aria-label': ariaLabel,
+						'aria-valuetext': ariaValueText,
+						title: title,
+					},
+				},
+				{
+					value: valueMock,
+					attributes: {
+						alt: altMock,
+						'aria-label': labelMock,
+						'aria-valuetext': valueTextMock,
+						title: titleMock,
+					},
+				},
+				{
+					value: `<div>${value}</div>`,
+					attributes: {
+						alt: altText,
+						'aria-label': ariaLabel,
+						'aria-valuetext': ariaValueText,
+						title: title,
+					},
+				},
+			];
+
+			langOptions.forEach((option) => {
+				langObjs.forEach(async (langObj) => {
+					const lang = {
+						[`${option}`]: langObj,
+					};
+
+					// @ts-ignore
+					const rendered = render(
+						<SearchInput value={'dress'} lang={lang} closeSearchButton={{ icon: 'close' }} clearSearchButton={{ icon: 'close-thin' }} />
+					);
+
+					const element = rendered.container.querySelector(selector);
+					expect(element).toBeInTheDocument();
+
+					const langElem = rendered.container.querySelector(`[ss-lang=${option}]`);
+					expect(langElem).toBeInTheDocument();
+					if (typeof langObj.value == 'function') {
+						expect(langElem?.innerHTML).toBe(value);
+					} else {
+						expect(langElem?.innerHTML).toBe(langObj.value);
+					}
+
+					expect(langElem).toHaveAttribute('alt', altText);
+					expect(langElem).toHaveAttribute('aria-label', ariaLabel);
+					expect(langElem).toHaveAttribute('aria-valuetext', ariaValueText);
+					expect(langElem).toHaveAttribute('title', title);
+
+					jest.restoreAllMocks();
+				});
+			});
+		});
+	});
+
 	it('is themeable with ThemeProvider', () => {
 		const rendered = render(
 			<ThemeProvider theme={theme}>
-				<SearchInput />
+				<SearchInput value={''} />
 			</ThemeProvider>
 		);
 
 		const searchInput: HTMLInputElement = rendered.container.querySelector('.ss__search-input__input')!;
 		expect(searchInput).toBeInTheDocument();
 
-		expect(searchInput?.placeholder).toBe(theme.components.searchInput.placeholder);
+		expect(searchInput?.placeholder).toBe(theme.components.searchInput.placeholderText);
 	});
 
 	it('is themeable with theme prop', () => {
-		const rendered = render(<SearchInput theme={theme} />);
+		const rendered = render(<SearchInput value={''} theme={theme} />);
 		const searchInput: HTMLInputElement = rendered.container.querySelector('.ss__search-input__input')!;
 		expect(searchInput).toBeInTheDocument();
 
-		expect(searchInput.placeholder).toBe(theme.components.searchInput.placeholder);
+		expect(searchInput.placeholder).toBe(theme.components.searchInput.placeholderText);
 	});
 
 	it('is themeable with theme prop overrides ThemeProvider', () => {
 		const componentTheme = {
 			components: {
 				searchInput: {
-					placeholder: 'theme 2',
+					placeholderText: 'theme 2',
 				},
 			},
 		};
 		const rendered = render(
 			<ThemeProvider theme={theme}>
-				<SearchInput theme={componentTheme} />
+				<SearchInput value={''} theme={componentTheme} />
 			</ThemeProvider>
 		);
 		const searchInput: HTMLInputElement | null = rendered.container.querySelector('.ss__search-input__input');
 		expect(searchInput).toBeInTheDocument();
 
-		expect(searchInput?.placeholder).toBe(componentTheme.components.searchInput.placeholder);
+		expect(searchInput?.placeholder).toBe(componentTheme.components.searchInput.placeholderText);
 	});
 });

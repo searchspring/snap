@@ -11,7 +11,7 @@ import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { createHoverProps } from '../../../toolbox';
 import { mergeProps, mergeStyles } from '../../../utilities';
 import { Term } from '@searchspring/snap-store-mobx';
-import { useA11y, useLang } from '../../../hooks';
+import { useLang } from '../../../hooks';
 import type { Lang } from '../../../hooks';
 import deepmerge from 'deepmerge';
 
@@ -101,11 +101,6 @@ export const Terms = observer((properties: TermsProps): JSX.Element => {
 
 	const termsToShow = limit ? terms?.slice(0, limit) : terms;
 
-	const escCallback = () => {
-		// remove focus from input (close the autocomplete)
-		controller?.setFocused && controller?.setFocused();
-	};
-
 	//initialize lang
 	const defaultLang: Partial<TermsLang> = {
 		title: {
@@ -127,14 +122,14 @@ export const Terms = observer((properties: TermsProps): JSX.Element => {
 						<h5 {...mergedTitleLang.title.all}></h5>
 					</div>
 				) : null}
-				<ul className="ss__terms__options" aria-label={title} ref={(e) => useA11y(e, 0, true, escCallback)}>
+				<ul className="ss__terms__options" aria-label={title}>
 					{termsToShow?.map((term, idx) => {
 						//initialize lang
 						const defaultTermLang = {
 							term: {
 								value: `${emIfy ? emIfyTerm(term.value, currentInput || '') : term.value}`,
 								attributes: {
-									'aria-label': `item ${idx + 1} of ${termsToShow.length}, ${term.value}`,
+									'aria-label': `${title} item ${idx + 1} of ${termsToShow.length}, ${term.value}`,
 								},
 							},
 						};

@@ -222,7 +222,7 @@ export const FacetSlider = observer((properties: FacetSliderProps): JSX.Element 
 							const defaultLang = {
 								sliderHandle: {
 									attributes: {
-										'aria-valuetext': `${facet.label} button, current value ${value}, ${facet.range?.low ? `min value ${facet.range?.low},` : ``} ${
+										'aria-label': `${facet.label} button, current value ${value}, ${facet.range?.low ? `min value ${facet.range?.low},` : ``} ${
 											facet.range?.high ? `max value ${facet.range?.high}` : ``
 										}`,
 									},

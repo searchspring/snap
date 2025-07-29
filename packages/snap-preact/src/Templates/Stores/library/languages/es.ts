@@ -3,7 +3,7 @@ import type { ValueFacet } from '@searchspring/snap-store-mobx';
 
 export const es: LangComponents = {
 	recommendation: {},
-	autocompleteTemplate: {
+	autocompleteLayout: {
 		facetsTitle: {},
 		contentTitle: {},
 		closeButton: {
@@ -75,6 +75,28 @@ export const es: LangComponents = {
 	sidebar: {
 		titleText: {
 			value: 'Filtros',
+		},
+	},
+	searchInput: {
+		placeholderText: {
+			attributes: {
+				placeholder: 'Buscar',
+			},
+		},
+		closeSearchButton: {
+			attributes: {
+				'aria-label': 'Cerrar búsqueda',
+			},
+		},
+		clearSearchButton: {
+			attributes: {
+				'aria-label': 'Borrar búsqueda',
+			},
+		},
+		submitSearchButton: {
+			attributes: {
+				'aria-label': 'Enviar búsqueda',
+			},
 		},
 	},
 	recommendationBundle: {
@@ -235,8 +257,7 @@ export const es: LangComponents = {
 	facetSlider: {
 		sliderHandle: {
 			attributes: {
-				'aria-label': (data) => `Deslizador de ${data?.facet.label}`,
-				'aria-valuetext': (data) =>
+				'aria-label': (data) =>
 					`Deslizador de ${data?.facet.label}, valor actual ${data?.value}, ${
 						data?.facet.range?.low ? `valor mínimo ${data?.facet.range?.low},` : ''
 					} ${data?.facet.range?.high ? `valor máximo ${data?.facet.range?.high}` : ''}`,

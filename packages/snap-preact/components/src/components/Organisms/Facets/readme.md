@@ -27,3 +27,11 @@ The `limit` prop will limit the maximum number of facets to display.
 ```jsx
 <Facets controller={controller} facets={facets} limit={3}/>
 ```
+
+
+### onFacetOptionClick
+The `onFacetOptionClick` prop takes a callback function for when a facet option is clicked.
+
+```jsx
+<Facets controller={controller} facets={facets} limit={3}/>
+```

@@ -109,7 +109,7 @@ export const TermsList = observer((properties: TermsListProps): JSX.Element => {
 		if (trending?.length) showTrending = true;
 	}
 
-	useCleanUpEmptyDivs('.ss__terms-list__row, .ss__terms-list');
+	useCleanUpEmptyDivs(['.ss__terms-list', '.ss__terms-list__row'], '.ss__terms-list__separator');
 
 	const findModule = (module: TermsListModuleNames[] | TermsListModuleNames) => {
 		if (typeof module !== 'string') {

@@ -69,6 +69,14 @@ export default {
 			},
 			control: { type: 'none' },
 		},
+		onFacetOptionClick: {
+			description: 'Callback function for when a facet option is clicked',
+			table: {
+				type: { summary: 'function' },
+			},
+			control: { type: 'none' },
+			action: 'onFacetOnClick',
+		},
 		...componentArgs,
 	},
 };

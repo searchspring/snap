@@ -126,9 +126,9 @@ export const Button = observer((properties: ButtonProps): JSX.Element => {
 					{icon && <Icon {...subProps.icon} {...(typeof icon == 'string' ? { icon: icon } : (icon as Partial<IconProps>))} />}
 				</button>
 			) : (
-				<div {...(!disableA11y ? a11yProps : {})} {...elementProps} role={'button'} aria-disabled={disabled}>
+				<div {...(!disableA11y ? a11yProps : {})} role={'button'} aria-disabled={disabled} {...elementProps} {...mergedLang.button?.attributes}>
 					{content || children || mergedLang.button?.value ? (
-						<span className="ss__button__content" {...mergedLang.button?.all}>
+						<span className="ss__button__content" {...mergedLang.button?.value}>
 							{cloneWithProps(content, { treePath })}
 							{cloneWithProps(children, { treePath })}
 						</span>
@@ -150,7 +150,7 @@ export interface ButtonProps extends ComponentProps<ButtonProps> {
 	backgroundColor?: string;
 	borderColor?: string;
 	color?: string;
-	icon?: IconType | Partial<IconProps>;
+	icon?: IconType | Partial<IconProps> | boolean;
 	content?: string | JSX.Element;
 	children?: ComponentChildren;
 	disabled?: boolean;
@@ -164,4 +164,14 @@ export interface ButtonLang {
 	button?: Lang<never>;
 }
 
-export type ButtonNames = 'close' | 'apply' | 'clear' | 'slideout' | 'sidebar-toggle' | 'see-more' | 'reset-facet';
+export type ButtonNames =
+	| 'close'
+	| 'apply'
+	| 'clear'
+	| 'slideout'
+	| 'sidebar-toggle'
+	| 'see-more'
+	| 'close-search'
+	| 'clear-search'
+	| 'submit-search'
+	| 'reset-facet';

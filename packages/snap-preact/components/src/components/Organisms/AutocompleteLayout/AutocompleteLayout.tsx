@@ -1,5 +1,5 @@
 import { h, Fragment, FunctionalComponent } from 'preact';
-import { useEffect } from 'preact/hooks';
+import { useEffect, useState } from 'preact/hooks';
 
 import { observer } from 'mobx-react-lite';
 import { css } from '@emotion/react';
@@ -9,9 +9,9 @@ import deepmerge from 'deepmerge';
 import type { AutocompleteController, RecommendationController, RecommendationControllerConfig } from '@searchspring/snap-controller';
 import { ContentType } from '@searchspring/snap-store-mobx';
 import { Icon, IconProps } from '../../Atoms/Icon/Icon';
-import { Results, ResultsProps } from '../../Organisms/Results';
+import { Results, ResultsProps } from '../Results';
 import { Banner, BannerProps } from '../../Atoms/Merchandising/Banner';
-import { Facets, FacetsProps } from '../../Organisms/Facets';
+import { Facets, FacetsProps } from '../Facets';
 import { defined, mergeProps, mergeStyles } from '../../../utilities';
 import { createHoverProps } from '../../../toolbox';
 import { Theme, useTheme, CacheProvider } from '../../../providers';
@@ -24,15 +24,14 @@ import {
 	StyleScript,
 } from '../../../types';
 import { Lang, useA11y, useLang } from '../../../hooks';
-import { TermsList, TermsListProps } from '../../Organisms/TermsList';
+import { TermsList, TermsListProps } from '../TermsList';
 import { Terms, TermsProps } from '../../Molecules/Terms';
-import { useState } from 'react';
-import { FacetsHorizontal } from '../../Organisms/FacetsHorizontal';
+import { FacetsHorizontal } from '../FacetsHorizontal';
 import { Button, ButtonProps } from '../../Atoms/Button';
 import { useCleanUpEmptyDivs } from '../../../hooks/useCleanUpEmptyDivs';
 import { createRecommendationTemplate } from '../../../hooks/createRecommendationTemplate';
 
-const defaultStyles: StyleScript<AutocompleteTemplateProps> = ({
+const defaultStyles: StyleScript<AutocompleteLayoutProps> = ({
 	controller,
 	input,
 	viewportMaxHeight,
@@ -93,7 +92,6 @@ const defaultStyles: StyleScript<AutocompleteTemplateProps> = ({
 		zIndex: '10002',
 		border: '1px solid #ebebeb',
 		background: '#ffffff',
-		// width: width,
 		maxWidth: width,
 		maxHeight: viewportMaxHeight && inputViewportOffsetBottom ? `calc(100vh - ${inputViewportOffsetBottom + 10}px)` : undefined,
 
@@ -197,10 +195,10 @@ const defaultStyles: StyleScript<AutocompleteTemplateProps> = ({
 	});
 };
 
-export const AutocompleteTemplate = observer((properties: AutocompleteTemplateProps): JSX.Element => {
+export const AutocompleteLayout = observer((properties: AutocompleteLayoutProps): JSX.Element => {
 	const globalTheme: Theme = useTheme();
 
-	const defaultProps: Partial<AutocompleteTemplateProps> = {
+	const defaultProps: Partial<AutocompleteLayoutProps> = {
 		facetsTitle: '',
 		contentTitle: '',
 		layout: [['c1', 'c2', 'c3']],
@@ -225,7 +223,7 @@ export const AutocompleteTemplate = observer((properties: AutocompleteTemplatePr
 		},
 	};
 
-	let props = mergeProps('autocompleteTemplate', globalTheme, defaultProps, properties);
+	let props = mergeProps('autocompleteLayout', globalTheme, defaultProps, properties);
 
 	const valueProps = createHoverProps();
 
@@ -311,6 +309,7 @@ export const AutocompleteTemplate = observer((properties: AutocompleteTemplatePr
 		column2,
 		column3,
 		column4,
+		onReset,
 		excludeBanners,
 		resultComponent,
 		templates,
@@ -459,14 +458,15 @@ export const AutocompleteTemplate = observer((properties: AutocompleteTemplatePr
 	// results logic
 	checkAndSetShowResults();
 
-	const styling = mergeStyles<AutocompleteTemplateProps>(props, defaultStyles);
+	const styling = mergeStyles<AutocompleteLayoutProps>(props, defaultStyles);
 
 	const reset = () => {
 		controller.setFocused();
+		onReset && onReset();
 	};
 
 	//initialize lang
-	const defaultLang: Partial<AutocompleteTemplateLang> = {
+	const defaultLang: Partial<AutocompleteLayoutLang> = {
 		contentTitle: {
 			value: contentTitle,
 		},
@@ -510,7 +510,7 @@ export const AutocompleteTemplate = observer((properties: AutocompleteTemplatePr
 		recsController = recs.recsController;
 	}
 
-	useCleanUpEmptyDivs('.ss__autocomplete__column, .ss__autocomplete__terms-wrapper');
+	useCleanUpEmptyDivs(['.ss__autocomplete__terms-wrapper, .ss__autocomplete__row', '.ss__autocomplete__column'], '.ss__autocomplete__separator');
 
 	const findModule = (module: ModuleNamesWithColumns) => {
 		//new row
@@ -696,13 +696,9 @@ export const AutocompleteTemplate = observer((properties: AutocompleteTemplatePr
 
 		if (module == 'button.see-more' && showResults && search?.query?.string && results.length > 0) {
 			return (
-				<Button {...subProps.button}>
-					<div className="ss__autocomplete__see-more">
-						<a href={state.url.href} onClick={() => controller?.setFocused && controller.setFocused()} {...mergedLang.seeMoreButton.attributes}>
-							<span {...mergedLang.seeMoreButton.value}></span>
-							<Icon {...subProps.icon} />
-						</a>
-					</div>
+				<Button {...subProps.button} {...mergedLang.seeMoreButton.attributes}>
+					<span {...mergedLang.seeMoreButton.value}></span>
+					<Icon {...subProps.icon} />
 				</Button>
 			);
 		}
@@ -715,7 +711,7 @@ export const AutocompleteTemplate = observer((properties: AutocompleteTemplatePr
 				{...styling}
 				className={classnames('ss__autocomplete', className)}
 				onClick={(e) => e.stopPropagation()}
-				ref={(e) => useA11y(e, 0, true, reset)}
+				ref={(e) => useA11y(e, 0, false, reset)}
 			>
 				<span
 					role={'link'}
@@ -771,7 +767,7 @@ type Column = {
 	alignContent?: 'center' | 'flex-start' | 'flex-end' | 'space-between';
 };
 
-export interface AutocompleteTemplateProps extends ComponentProps {
+export interface AutocompleteLayoutProps extends ComponentProps {
 	input: Element | string;
 	controller: AutocompleteController;
 	layout?: ModuleNamesWithColumns[];
@@ -786,7 +782,7 @@ export interface AutocompleteTemplateProps extends ComponentProps {
 	excludeBanners?: boolean;
 	viewportMaxHeight?: boolean;
 	width?: string;
-
+	onReset?: () => void;
 	resultComponent?: ResultComponent;
 	templates?: {
 		recommendation?: {
@@ -796,10 +792,10 @@ export interface AutocompleteTemplateProps extends ComponentProps {
 			config?: Partial<RecommendationControllerConfig>;
 		};
 	};
-	lang?: Partial<AutocompleteTemplateLang>;
+	lang?: Partial<AutocompleteLayoutLang>;
 }
 
-export interface AutocompleteTemplateLang {
+export interface AutocompleteLayoutLang {
 	facetsTitle: Lang<{
 		controller: AutocompleteController;
 	}>;

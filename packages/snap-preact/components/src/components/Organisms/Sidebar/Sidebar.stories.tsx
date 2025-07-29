@@ -48,7 +48,16 @@ export default {
 			},
 			control: { type: 'none' },
 		},
-
+		layout: {
+			description: 'specifies the layout of the sidebar',
+			table: {
+				type: {
+					summary: "['filterSummary' | 'sortBy' | 'perPage' | 'facets' | 'banner.left' | 'paginationInfo' | 'layoutSelector' | '_']",
+				},
+				defaultValue: { summary: "[['filterSummary'], ['sortBy', 'perPage'], ['facets'], ['banner.left']]" },
+			},
+			control: 'array',
+		},
 		titleText: {
 			description: 'Text to render in the sidebar title',
 			type: { required: false },
@@ -60,7 +69,6 @@ export default {
 			},
 			control: { type: 'text' },
 		},
-
 		hideTitleText: {
 			defaultValue: false,
 			description: 'hides the sidebar title component',
@@ -72,51 +80,20 @@ export default {
 			},
 			control: { type: 'boolean' },
 		},
-		hideFacets: {
-			defaultValue: false,
-			description: 'hides the sidebar facets component',
+		sticky: {
+			description: 'specifies if the sidebar should be sticky',
 			table: {
-				type: {
-					summary: 'boolean',
-				},
-				defaultValue: { summary: false },
+				type: { summary: 'boolean' },
 			},
 			control: { type: 'boolean' },
 		},
-		hidePerPage: {
-			defaultValue: false,
-			description: 'hides the sidebar PerPage component',
+		stickyOffset: {
+			description: 'specifies the offset of the sidebar when sticky is true',
 			table: {
-				type: {
-					summary: 'boolean',
-				},
-				defaultValue: { summary: false },
+				type: { summary: 'number' },
 			},
-			control: { type: 'boolean' },
+			control: { type: 'number' },
 		},
-		hideSortBy: {
-			defaultValue: false,
-			description: 'hides the sidebar SortBy component',
-			table: {
-				type: {
-					summary: 'boolean',
-				},
-				defaultValue: { summary: false },
-			},
-			control: { type: 'boolean' },
-		},
-		hideFilterSummary: {
-			defaultValue: false,
-			description: 'hides the sidebar FilterSummary component',
-			table: {
-				type: {
-					summary: 'boolean',
-				},
-				defaultValue: { summary: false },
-			},
-			control: { type: 'boolean' },
-		},
-
 		...componentArgs,
 	},
 };

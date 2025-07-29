@@ -285,7 +285,7 @@ export const Select = observer((properties: SelectProps): JSX.Element => {
 						button={
 							<Button {...subProps.button}>
 								{(label || lang.buttonLabel.value) && !hideLabelOnSelection && !hideLabel && (
-									<span className="ss__select__label" aria-expanded={open} {...mergedLang.buttonLabel.attributes}>
+									<span className="ss__select__label" {...mergedLang.buttonLabel.attributes}>
 										<label {...mergedLang.buttonLabel.value}></label>
 										{separator && selection && <span className="ss__select__label__separator">{separator}</span>}
 									</span>

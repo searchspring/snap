@@ -36,6 +36,7 @@ export * from './components/Molecules/List';
 export * from './components/Molecules/LoadMore';
 export * from './components/Molecules/Grid';
 export * from './components/Molecules/List';
+export * from './components/Molecules/Modal';
 export * from './components/Molecules/OverlayBadge';
 export * from './components/Molecules/Pagination';
 export * from './components/Molecules/PerPage';

@@ -88,7 +88,6 @@ export default {
 		},
 		onAddToCart: {
 			description: 'onClick event handler for add bundle to cart button in CTA',
-			type: { required: true },
 			table: {
 				type: {
 					summary: 'function',
@@ -127,6 +126,20 @@ export default {
 					summary: 'boolean',
 				},
 				defaultValue: { summary: false },
+			},
+			control: { type: 'boolean' },
+		},
+		hideSeedText: {
+			description: 'hide the seed text',
+			table: {
+				type: { summary: 'boolean' },
+			},
+			control: { type: 'boolean' },
+		},
+		hideCheckboxes: {
+			description: 'hide the checkboxes',
+			table: {
+				type: { summary: 'boolean' },
 			},
 			control: { type: 'boolean' },
 		},

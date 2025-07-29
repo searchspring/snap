@@ -94,7 +94,7 @@ export const RecommendationBundleList = observer((properties: RecommendationBund
 			...defined({
 				disableStyles,
 			}),
-			// component theme oveRides
+			// component theme overrides
 			theme: _properties?.theme,
 			treePath,
 		},

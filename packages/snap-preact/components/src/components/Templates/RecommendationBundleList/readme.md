@@ -13,7 +13,7 @@ The required `controller` prop specifies a reference to the RecommendationContro
 ```
 
 ### onAddToCart 
-the required `onAddToCart` prop sets a the callback function for when a add to cart button is clicked. This function will be passed an array of selected item ids and their quantities. 
+the `onAddToCart` prop sets a the callback function for when a add to cart button is clicked. This function will be passed an array of selected item ids and their quantities. 
 
 ```jsx
 <RecommendationBundleList controller={controller} onAddToCart={(e, items)=>{console.log(items)}} />
@@ -82,6 +82,21 @@ The `hideSeed` prop specifies if the seed result should be rendered or not.
 <RecommendationBundle controller={controller} onAddToCart={(e, items)=>{console.log(items)}} hideSeed={true} />
 ```
 
+### hideSeedText
+The `hideSeedText` prop specifies if the seed result text should be rendered or not.  
+
+```jsx
+<RecommendationBundle controller={controller} onAddToCart={(e, items)=>{console.log(items)}} hideSeedText={true} />
+```
+
+
+### hideCheckboxes
+The `hideCheckboxes` prop specifies if the result checkboxes should be rendered or not.  
+
+```jsx
+<RecommendationBundle controller={controller} onAddToCart={(e, items)=>{console.log(items)}} hideCheckboxes={true} />
+```
+
 ### seedInCarousel
 The `seedInCarousel` prop is a sub prop under the `carousel` prop. It specifies if the seed product should be included in the carousel or not.  
 
@@ -122,6 +137,13 @@ The `ctaSlot` prop allows for a custom add to cart cta component to be rendered.
 
 ```jsx
 <RecommendationBundleList controller={controller} onAddToCart={(e, items)=>{console.log(items)}} ctaSlot={<CTASlot />} />
+```
+
+### limit
+The `limit` prop limits the number of results rendered
+
+```jsx
+<RecommendationBundle controller={controller} onAddToCart={(e, items)=>{console.log(items)}} limit={5} />
 ```
 
 ### separatorIcon

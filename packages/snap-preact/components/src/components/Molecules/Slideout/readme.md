@@ -115,3 +115,23 @@ The `active` prop is an optional way to specify the initial state of the slideou
 	<div>Hello World</div>
 </Slideout>
 ```
+
+### rerender
+The `rerender` prop determines whether the slideout content should be re-rendered each time the slideout is closed and reopened. By default, this behavior is enabled to ensure better accessibility compliance by avoiding rendering content when the slideout is closed.  
+
+```jsx
+<Slideout rerender={true}>
+	<div>Hello World</div>
+</Slideout>
+```
+
+### buttonSelector
+The `buttonSelector` prop specifies a selector of an element to query for, to listen for clicks, to trigger the slideout. This is primarily used if you want to have an external element trigger the slide out. 
+
+```jsx
+
+<button value={'click me to open'} id="my-button">
+<Slideout buttonSelector={'#my-button'}>
+	<div>Hello World</div>
+</Slideout>
+```

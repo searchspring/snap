@@ -60,6 +60,16 @@ export default {
 			},
 			control: { type: 'text' },
 		},
+		layout: {
+			description: 'specifies the layout of the mobile sidebar',
+			table: {
+				type: {
+					summary: "['filterSummary' | 'sortBy' | 'perPage' | 'facets' | 'banner.left' | 'paginationInfo' | 'layoutSelector' | '_']",
+				},
+				defaultValue: { summary: "[['filterSummary'], ['sortBy', 'perPage'], ['facets'], ['banner.left']]" },
+			},
+			control: 'array',
+		},
 		openButtonText: {
 			description: 'Text to render in the slideout button',
 			type: { required: false },
@@ -112,6 +122,41 @@ export default {
 				defaultValue: { summary: 'Filter Options' },
 			},
 			control: { type: 'text' },
+		},
+		hideTitleText: {
+			description: 'hides the title text',
+			table: {
+				type: { summary: 'boolean' },
+			},
+			control: { type: 'boolean' },
+		},
+		hideOpenButtonText: {
+			description: 'hides the open button text',
+			table: {
+				type: { summary: 'boolean' },
+			},
+			control: { type: 'boolean' },
+		},
+		hideClearButtonText: {
+			description: 'hides the clear button text',
+			table: {
+				type: { summary: 'boolean' },
+			},
+			control: { type: 'boolean' },
+		},
+		hideApplyButtonText: {
+			description: 'hides the apply button text',
+			table: {
+				type: { summary: 'boolean' },
+			},
+			control: { type: 'boolean' },
+		},
+		hideCloseButtonText: {
+			description: 'hides the close button text',
+			table: {
+				type: { summary: 'boolean' },
+			},
+			control: { type: 'boolean' },
 		},
 		hideCloseButton: {
 			description: 'hides the close sidebar button',
@@ -253,51 +298,6 @@ export default {
 			control: {
 				type: 'select',
 			},
-		},
-		hideTitleText: {
-			description: 'hides the title text',
-			table: {
-				type: {
-					summary: 'boolean',
-				},
-			},
-			control: { type: 'boolean' },
-		},
-		hideOpenButtonText: {
-			description: 'hides the open button text',
-			table: {
-				type: {
-					summary: 'boolean',
-				},
-			},
-			control: { type: 'boolean' },
-		},
-		hideClearButtonText: {
-			description: 'hides the clear all filters button text',
-			table: {
-				type: {
-					summary: 'boolean',
-				},
-			},
-			control: { type: 'boolean' },
-		},
-		hideApplyButtonText: {
-			description: 'hides the apply filters button text',
-			table: {
-				type: {
-					summary: 'boolean',
-				},
-			},
-			control: { type: 'boolean' },
-		},
-		hideCloseButtonText: {
-			description: 'hides the close button text',
-			table: {
-				type: {
-					summary: 'boolean',
-				},
-			},
-			control: { type: 'boolean' },
 		},
 		...componentArgs,
 	},

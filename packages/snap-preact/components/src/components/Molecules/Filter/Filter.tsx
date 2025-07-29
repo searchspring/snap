@@ -51,6 +51,7 @@ export const Filter = observer((properties: FilterProps): JSX.Element => {
 		button: {
 			// default props
 			className: 'ss__filter__button',
+			disableA11y: true,
 			// inherited props
 			...defined({
 				disableStyles,
@@ -103,6 +104,7 @@ export const Filter = observer((properties: FilterProps): JSX.Element => {
 					onClick && onClick(e);
 				}}
 				href={link?.href}
+				tabIndex={0}
 				{...mergedLang.filter?.all}
 			>
 				<Button {...subProps.button}>
