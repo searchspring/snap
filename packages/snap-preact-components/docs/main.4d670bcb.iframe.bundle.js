@@ -1,4 +1,4 @@
-/*! For license information please see main.56f19952.iframe.bundle.js.LICENSE.txt */
+/*! For license information please see main.4d670bcb.iframe.bundle.js.LICENSE.txt */
 (self.webpackChunk_searchspring_snap_preact_components = self.webpackChunk_searchspring_snap_preact_components || []).push([
 	[792],
 	{
@@ -38630,20 +38630,19 @@
 																			void 0 === _this$config$globals8 ||
 																			!_this$config$globals8.spellCorrection)
 																	) {
-																		_context.next = 13;
+																		_context.next = 11;
 																		break;
 																	}
-																	return (_context.next = 7), timeout(201);
-																case 7:
+																case 5:
 																	if (!_this.store.loading) {
-																		_context.next = 12;
+																		_context.next = 10;
 																		break;
 																	}
-																	return (_context.next = 10), timeout(200);
-																case 10:
-																	_context.next = 7;
+																	return (_context.next = 8), timeout(200);
+																case 8:
+																	_context.next = 5;
 																	break;
-																case 12:
+																case 10:
 																	_this.config.settings.integratedSpellCorrection
 																		? _this.store.search.correctedQuery &&
 																		  (actionUrl =
@@ -38659,13 +38658,16 @@
 																				null === (_actionUrl2 = actionUrl) || void 0 === _actionUrl2
 																					? void 0
 																					: _actionUrl2.set('oq', _this.store.search.originalQuery.string)));
-																case 13:
+																case 11:
 																	return (
 																		(actionUrl =
 																			null === (_actionUrl3 = actionUrl) || void 0 === _actionUrl3 ? void 0 : _actionUrl3.set('query', input.value)),
-																		(_context.prev = 14),
-																		(_context.next = 17),
-																		_this.eventManager.fire('beforeSubmit', { controller: _this, input })
+																		(_context.next = 14),
+																		timeout(201)
+																	);
+																case 14:
+																	return (
+																		(_context.prev = 14), (_context.next = 17), _this.eventManager.fire('beforeSubmit', { controller: _this, input })
 																	);
 																case 17:
 																	_context.next = 28;
@@ -38729,20 +38731,19 @@
 																			void 0 === _this$config$globals11 ||
 																			!_this$config$globals11.spellCorrection)
 																	) {
-																		_context2.next = 12;
+																		_context2.next = 10;
 																		break;
 																	}
-																	return (_context2.next = 6), timeout(201);
-																case 6:
+																case 4:
 																	if (!_this.store.loading) {
-																		_context2.next = 11;
+																		_context2.next = 9;
 																		break;
 																	}
-																	return (_context2.next = 9), timeout(200);
-																case 9:
-																	_context2.next = 6;
+																	return (_context2.next = 7), timeout(200);
+																case 7:
+																	_context2.next = 4;
 																	break;
-																case 11:
+																case 9:
 																	_this.config.settings.integratedSpellCorrection
 																		? _this.store.search.correctedQuery &&
 																		  addHiddenFormInput(form, 'fallbackQuery', _this.store.search.correctedQuery.string)
@@ -38753,6 +38754,8 @@
 																						? void 0
 																						: _this$store$search$qu2.string),
 																		  addHiddenFormInput(form, 'oq', _this.store.search.originalQuery.string));
+																case 10:
+																	return (_context2.next = 12), timeout(201);
 																case 12:
 																	return (
 																		(_context2.prev = 12),
@@ -38994,33 +38997,34 @@
 													case 9:
 														return (
 															(_this.store.loading = !0),
-															(_context4.prev = 10),
-															(_context4.next = 13),
+															(_this.store.merchandising.redirect = ''),
+															(_context4.prev = 11),
+															(_context4.next = 14),
 															_this.eventManager.fire('beforeSearch', { controller: _this, request: params })
 														);
-													case 13:
-														_context4.next = 24;
+													case 14:
+														_context4.next = 25;
 														break;
-													case 15:
+													case 16:
 														if (
-															((_context4.prev = 15),
-															(_context4.t0 = _context4.catch(10)),
+															((_context4.prev = 16),
+															(_context4.t0 = _context4.catch(11)),
 															'cancelled' != (null === _context4.t0 || void 0 === _context4.t0 ? void 0 : _context4.t0.message))
 														) {
-															_context4.next = 22;
+															_context4.next = 23;
 															break;
 														}
 														return _this.log.warn("'beforeSearch' middleware cancelled"), _context4.abrupt('return');
-													case 22:
+													case 23:
 														throw (_this.log.error("error in 'beforeSearch' middleware"), _context4.t0);
-													case 24:
+													case 25:
 														return (
 															(searchProfile = _this.profiler.create({ type: 'event', name: 'search', context: params }).start()),
 															(_this.events = { product: {} }),
-															(_context4.next = 28),
+															(_context4.next = 29),
 															_this.client.autocomplete(params)
 														);
-													case 28:
+													case 29:
 														return (
 															(_yield$_this$client$a = _context4.sent),
 															(_yield$_this$client$a2 = AutocompleteController_slicedToArray(_yield$_this$client$a, 2)),
@@ -39029,87 +39033,87 @@
 															searchProfile.stop(),
 															_this.log.profile(searchProfile),
 															(afterSearchProfile = _this.profiler.create({ type: 'event', name: 'afterSearch', context: params }).start()),
-															(_context4.prev = 36),
-															(_context4.next = 39),
+															(_context4.prev = 37),
+															(_context4.next = 40),
 															_this.eventManager.fire('afterSearch', { controller: _this, request: params, response })
 														);
-													case 39:
-														_context4.next = 51;
+													case 40:
+														_context4.next = 52;
 														break;
-													case 41:
+													case 42:
 														if (
-															((_context4.prev = 41),
-															(_context4.t1 = _context4.catch(36)),
+															((_context4.prev = 42),
+															(_context4.t1 = _context4.catch(37)),
 															'cancelled' != (null === _context4.t1 || void 0 === _context4.t1 ? void 0 : _context4.t1.message))
 														) {
-															_context4.next = 49;
+															_context4.next = 50;
 															break;
 														}
 														return _this.log.warn("'afterSearch' middleware cancelled"), afterSearchProfile.stop(), _context4.abrupt('return');
-													case 49:
+													case 50:
 														throw (_this.log.error("error in 'afterSearch' middleware"), _context4.t1);
-													case 51:
+													case 52:
 														return (
 															afterSearchProfile.stop(),
 															_this.log.profile(afterSearchProfile),
 															_this.store.update(response),
 															(afterStoreProfile = _this.profiler.create({ type: 'event', name: 'afterStore', context: params }).start()),
-															(_context4.prev = 55),
-															(_context4.next = 58),
+															(_context4.prev = 56),
+															(_context4.next = 59),
 															_this.eventManager.fire('afterStore', { controller: _this, request: params, response })
 														);
-													case 58:
-														_context4.next = 70;
+													case 59:
+														_context4.next = 71;
 														break;
-													case 60:
+													case 61:
 														if (
-															((_context4.prev = 60),
-															(_context4.t2 = _context4.catch(55)),
+															((_context4.prev = 61),
+															(_context4.t2 = _context4.catch(56)),
 															'cancelled' != (null === _context4.t2 || void 0 === _context4.t2 ? void 0 : _context4.t2.message))
 														) {
-															_context4.next = 68;
+															_context4.next = 69;
 															break;
 														}
 														return _this.log.warn("'afterStore' middleware cancelled"), afterStoreProfile.stop(), _context4.abrupt('return');
-													case 68:
+													case 69:
 														throw (_this.log.error("error in 'afterStore' middleware"), _context4.t2);
-													case 70:
-														afterStoreProfile.stop(), _this.log.profile(afterStoreProfile), (_context4.next = 94);
+													case 71:
+														afterStoreProfile.stop(), _this.log.profile(afterStoreProfile), (_context4.next = 95);
 														break;
-													case 74:
-														if (((_context4.prev = 74), (_context4.t3 = _context4.catch(0)), !_context4.t3)) {
-															_context4.next = 94;
+													case 75:
+														if (((_context4.prev = 75), (_context4.t3 = _context4.catch(0)), !_context4.t3)) {
+															_context4.next = 95;
 															break;
 														}
 														if (!_context4.t3.err || !_context4.t3.fetchDetails) {
-															_context4.next = 91;
+															_context4.next = 92;
 															break;
 														}
 														(_context4.t4 = _context4.t3.fetchDetails.status),
-															(_context4.next = 429 === _context4.t4 ? 81 : 500 === _context4.t4 ? 83 : 85);
+															(_context4.next = 429 === _context4.t4 ? 82 : 500 === _context4.t4 ? 84 : 86);
 														break;
-													case 81:
+													case 82:
 														return (
 															(_this.store.error = { code: 429, type: types.B.WARNING, message: 'Too many requests try again later' }),
-															_context4.abrupt('break', 87)
+															_context4.abrupt('break', 88)
 														);
-													case 83:
+													case 84:
 														return (
 															(_this.store.error = { code: 500, type: types.B.ERROR, message: 'Invalid Search Request or Service Unavailable' }),
-															_context4.abrupt('break', 87)
+															_context4.abrupt('break', 88)
 														);
-													case 85:
-														return (_this.store.error = { type: types.B.ERROR, message: _context4.t3.err.message }), _context4.abrupt('break', 87);
-													case 87:
-														_this.log.error(_this.store.error), _this.handleError(_context4.t3.err, _context4.t3.fetchDetails), (_context4.next = 94);
+													case 86:
+														return (_this.store.error = { type: types.B.ERROR, message: _context4.t3.err.message }), _context4.abrupt('break', 88);
+													case 88:
+														_this.log.error(_this.store.error), _this.handleError(_context4.t3.err, _context4.t3.fetchDetails), (_context4.next = 95);
 														break;
-													case 91:
+													case 92:
 														(_this.store.error = { type: types.B.ERROR, message: 'Something went wrong... - ' + _context4.t3 }),
 															_this.log.error(_context4.t3),
 															_this.handleError(_context4.t3);
-													case 94:
-														return (_context4.prev = 94), (_this.store.loading = !1), _context4.finish(94);
-													case 97:
+													case 95:
+														return (_context4.prev = 95), (_this.store.loading = !1), _context4.finish(95);
+													case 98:
 													case 'end':
 														return _context4.stop();
 												}
@@ -39117,10 +39121,10 @@
 										_callee4,
 										null,
 										[
-											[0, 74, 94, 97],
-											[10, 15],
-											[36, 41],
-											[55, 60],
+											[0, 75, 95, 98],
+											[11, 16],
+											[37, 42],
+											[56, 61],
 										]
 									);
 								})
@@ -39237,6 +39241,7 @@
 												_this$config3,
 												_this$config3$setting,
 												_this$config3$setting2,
+												inputState,
 												redirectURL,
 												_filteredResults$0$ma,
 												results,
@@ -39248,24 +39253,35 @@
 														case 0:
 															return (_context8.next = 2), next();
 														case 2:
+															if (!ac.controller.store.loading) {
+																_context8.next = 5;
+																break;
+															}
+															return _context8.abrupt('return');
+														case 5:
 															if (
-																!(redirectURL =
+																((inputState = ac.controller.store.state.input),
+																(redirectURL =
 																	null === (_ac$controller$store$ = ac.controller.store.merchandising) || void 0 === _ac$controller$store$
 																		? void 0
-																		: _ac$controller$store$.redirect) ||
-																null === (_this$config2 = _this.config) ||
-																void 0 === _this$config2 ||
-																null === (_this$config2$setting = _this$config2.settings) ||
-																void 0 === _this$config2$setting ||
-																null === (_this$config2$setting2 = _this$config2$setting.redirects) ||
-																void 0 === _this$config2$setting2 ||
-																!_this$config2$setting2.merchandising
+																		: _ac$controller$store$.redirect),
+																!(
+																	null !== (_this$config2 = _this.config) &&
+																	void 0 !== _this$config2 &&
+																	null !== (_this$config2$setting = _this$config2.settings) &&
+																	void 0 !== _this$config2$setting &&
+																	null !== (_this$config2$setting2 = _this$config2$setting.redirects) &&
+																	void 0 !== _this$config2$setting2 &&
+																	_this$config2$setting2.merchandising &&
+																	inputState &&
+																	redirectURL
+																))
 															) {
-																_context8.next = 7;
+																_context8.next = 11;
 																break;
 															}
 															return _this.track.redirect(redirectURL), (window.location.href = redirectURL), _context8.abrupt('return', !1);
-														case 7:
+														case 11:
 															if (
 																null === (_this$config3 = _this.config) ||
 																void 0 === _this$config3 ||
@@ -39275,7 +39291,7 @@
 																void 0 === _this$config3$setting2 ||
 																!_this$config3$setting2.singleResult
 															) {
-																_context8.next = 14;
+																_context8.next = 18;
 																break;
 															}
 															if (
@@ -39289,11 +39305,11 @@
 																		? void 0
 																		: _filteredResults$0$ma.url)))
 															) {
-																_context8.next = 14;
+																_context8.next = 18;
 																break;
 															}
 															return (window.location.href = singleResultUrl), _context8.abrupt('return', !1);
-														case 14:
+														case 18:
 														case 'end':
 															return _context8.stop();
 													}
@@ -51291,7 +51307,7 @@
 							((function Tracker_classCallCheck(a, n) {
 								if (!(a instanceof n)) throw new TypeError('Cannot call a class as a function');
 							})(this, Tracker),
-							((config = cjs_default()(Tracker_defaultConfig, config || {})).initiator = 'searchspring/' + config.framework + '/0.67.3'),
+							((config = cjs_default()(Tracker_defaultConfig, config || {})).initiator = 'searchspring/' + config.framework + '/0.67.4'),
 							((_this = Tracker_callSuper(this, Tracker, [globals, config])).targeters = []),
 							(_this.track = {
 								error: function error(data, siteId) {
@@ -51463,7 +51479,7 @@
 							(_this.localStorage = new StorageStore({ type: 'local', key: 'ss-' + _this.config.id })),
 							_this.localStorage.set('siteId', _this.globals.siteId),
 							(null !== (_window$searchspring = window.searchspring) && void 0 !== _window$searchspring && _window$searchspring.tracker) ||
-								((window.searchspring = window.searchspring || {}), (window.searchspring.tracker = _this), (window.searchspring.version = '0.67.3')),
+								((window.searchspring = window.searchspring || {}), (window.searchspring.tracker = _this), (window.searchspring.version = '0.67.4')),
 							setTimeout(function () {
 								_this.targeters.push(
 									new DomTargeter([{ selector: 'script[type^="searchspring/track/"]', emptyTarget: !1 }], function (target, elem) {
