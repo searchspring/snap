@@ -65,9 +65,15 @@ export const AutocompleteSlideout = observer((properties: AutocompleteSlideoutPr
 
 	const renderedInputRef: MutableRef<HTMLInputElement | null> = useRef(null);
 
+	const reset = () => {
+		setActive(false);
+		controller.setFocused();
+	};
+
 	const subProps: AutocompleteSlideoutSubProps = {
 		autocompleteLayout: {
 			// default props
+			onReset: () => reset(),
 			layout: layout,
 			// inherited props
 			...defined({
@@ -136,11 +142,6 @@ export const AutocompleteSlideout = observer((properties: AutocompleteSlideoutPr
 			buttonSelector,
 		});
 	}
-
-	const reset = () => {
-		setActive(false);
-		controller.setFocused();
-	};
 
 	const acProps = {
 		...props,

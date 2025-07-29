@@ -210,7 +210,7 @@ export function List(properties: ListProps): JSX.Element {
 								aria-selected={selected}
 								aria-disabled={option.disabled || option?.available === false}
 							>
-								{!hideOptionCheckboxes && <Checkbox {...subProps.checkbox} checked={selected} disableA11y={true} />}
+								{!hideOptionCheckboxes && <Checkbox {...subProps.checkbox} checked={selected} disableA11y={true} aria-label={option.label} />}
 
 								{option.icon && !hideOptionIcons && (
 									<Icon {...subProps.icon} {...(typeof option.icon == 'string' ? { icon: option.icon } : (option.icon as Partial<IconProps>))} />

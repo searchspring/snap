@@ -246,8 +246,7 @@ export const fr: LangComponents = {
 	facetSlider: {
 		sliderHandle: {
 			attributes: {
-				'aria-label': (data) => `${data?.facet?.label} bouton curseur`,
-				'aria-valuetext': (data) =>
+				'aria-label': (data) =>
 					`${data?.facet?.label} bouton curseur, valeur actuelle ${data?.value}, ${
 						data?.facet?.range?.low ? `valeur minimale ${data?.facet?.range?.low},` : ``
 					} ${data?.facet?.range?.high ? `valeur maximale ${data?.facet?.range?.high}` : ``}`,
@@ -270,18 +269,6 @@ export const fr: LangComponents = {
 	},
 	facetListOptions: {
 		listOption: {
-			attributes: {
-				'aria-label': (data) =>
-					`${
-						data?.value?.filtered
-							? `supprimer le filtre sélectionné ${data?.facet?.label || ''} - ${data?.value?.label}`
-							: data?.facet?.label
-							? `filtrer par ${data?.facet?.label} - ${data?.value?.label}`
-							: `filtrer par ${data?.value?.label}`
-					}`,
-			},
-		},
-		checkbox: {
 			attributes: {
 				'aria-label': (data) =>
 					`${

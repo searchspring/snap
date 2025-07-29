@@ -103,10 +103,16 @@ export const AutocompleteModal = observer((properties: AutocompleteModalProps): 
 
 	const renderedInputRef: MutableRef<HTMLInputElement | null> = useRef(null);
 
+	const reset = () => {
+		controller.setFocused();
+		setActive(false);
+	};
+
 	const subProps: AutocompleteModalSubProps = {
 		autocompleteLayout: {
 			// default props
 			layout: layout,
+			onReset: () => reset(),
 			// inherited props
 			...defined({
 				disableStyles,
@@ -157,11 +163,6 @@ export const AutocompleteModal = observer((properties: AutocompleteModalProps): 
 	};
 
 	const styling = mergeStyles<AutocompleteModalProps>(props, defaultStyles);
-
-	const reset = () => {
-		controller.setFocused();
-		setActive(false);
-	};
 
 	let _input;
 	if (input) {

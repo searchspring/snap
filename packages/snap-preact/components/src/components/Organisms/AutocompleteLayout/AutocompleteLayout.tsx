@@ -309,6 +309,7 @@ export const AutocompleteLayout = observer((properties: AutocompleteLayoutProps)
 		column2,
 		column3,
 		column4,
+		onReset,
 		excludeBanners,
 		resultComponent,
 		templates,
@@ -461,6 +462,7 @@ export const AutocompleteLayout = observer((properties: AutocompleteLayoutProps)
 
 	const reset = () => {
 		controller.setFocused();
+		onReset && onReset();
 	};
 
 	//initialize lang
@@ -694,11 +696,9 @@ export const AutocompleteLayout = observer((properties: AutocompleteLayoutProps)
 
 		if (module == 'button.see-more' && showResults && search?.query?.string && results.length > 0) {
 			return (
-				<Button {...subProps.button}>
-					<div className="ss__autocomplete__see-more" {...mergedLang.seeMoreButton.attributes}>
-						<span {...mergedLang.seeMoreButton.value}></span>
-						<Icon {...subProps.icon} />
-					</div>
+				<Button {...subProps.button} {...mergedLang.seeMoreButton.attributes}>
+					<span {...mergedLang.seeMoreButton.value}></span>
+					<Icon {...subProps.icon} />
 				</Button>
 			);
 		}
@@ -782,7 +782,7 @@ export interface AutocompleteLayoutProps extends ComponentProps {
 	excludeBanners?: boolean;
 	viewportMaxHeight?: boolean;
 	width?: string;
-
+	onReset?: () => void;
 	resultComponent?: ResultComponent;
 	templates?: {
 		recommendation?: {

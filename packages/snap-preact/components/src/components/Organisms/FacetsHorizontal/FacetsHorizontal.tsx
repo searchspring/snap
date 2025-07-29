@@ -254,7 +254,7 @@ export const FacetsHorizontal = observer((properties: FacetsHorizontalProps): JS
 								)}
 								open={selectedFacet?.field === facet.field}
 								onClick={(e) => {
-									// @ts-ignore - this is a workaround for the fact that selectedFacet is not defined when the onclick is triggered byt he escape key.
+									// @ts-ignore - this is a workaround for the fact that selectedFacet is not defined when the onclick is triggered by the escape key.
 									if (selectedFacet !== facet && e.code !== 'Escape') {
 										setSelectedFacet(facet);
 									} else {

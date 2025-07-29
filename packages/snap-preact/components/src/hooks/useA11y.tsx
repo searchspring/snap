@@ -1,7 +1,7 @@
 const KEYCODE_TAB = 9;
 const KEYCODE_ESC = 27;
 export const A11Y_ATTRIBUTE = 'ss-a11y';
-export const FocusableElements =
+export const FOCUSABLE_ELEMENTS =
 	'a[href]:not([disabled]), button:not([disabled]), textarea:not([disabled]), input[type="text"]:not([disabled]), input[type="radio"]:not([disabled]), input[type="checkbox"]:not([disabled]), select:not([disabled]), [tabindex]';
 
 export function useA11y(elem: any, tabIndex?: number, trapFocus?: boolean, escCallback?: (e: any) => unknown) {
@@ -29,7 +29,7 @@ export function useA11y(elem: any, tabIndex?: number, trapFocus?: boolean, escCa
 
 		if (trapFocus) {
 			elem.addEventListener('keydown', function (e: any) {
-				const focusableEls = elem.querySelectorAll(FocusableElements);
+				const focusableEls = elem.querySelectorAll(FOCUSABLE_ELEMENTS);
 				const firstFocusableEl = focusableEls[0];
 				const lastFocusableEl = focusableEls[focusableEls.length - 1];
 

@@ -12,7 +12,7 @@ import { Sidebar, SidebarProps } from '../../Organisms/Sidebar';
 import { Toolbar, ToolbarProps } from '../../Organisms/Toolbar';
 import { NoResults, NoResultsProps } from '../../Organisms/NoResults';
 import { Lang, useLang, useMediaQuery } from '../../../hooks';
-import { FocusableElements } from '../../../hooks/useA11y';
+import { FOCUSABLE_ELEMENTS } from '../../../hooks/useA11y';
 import { SearchFilterStore } from '@searchspring/snap-store-mobx';
 import deepmerge from 'deepmerge';
 import { useLayoutOptions } from '../../../hooks/useLayoutOptions';
@@ -129,7 +129,7 @@ export const Search = observer((properties: SearchProps): JSX.Element => {
 					setTimeout(() => {
 						// focus the first available elem when toggling the sidebar open.
 						if (!sidebarOpenState) {
-							const firstAvailableElemToFocus = document.querySelector('.ss__sidebar')?.querySelector(FocusableElements) as HTMLElement;
+							const firstAvailableElemToFocus = document.querySelector('.ss__sidebar')?.querySelector(FOCUSABLE_ELEMENTS) as HTMLElement;
 							if (firstAvailableElemToFocus) {
 								firstAvailableElemToFocus.focus();
 							}

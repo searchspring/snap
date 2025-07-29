@@ -92,10 +92,16 @@ export const AutocompleteFixed = observer((properties: AutocompleteFixedProps): 
 
 	const renderedInputRef: MutableRef<HTMLInputElement | null> = useRef(null);
 
+	const reset = () => {
+		controller.setFocused();
+		setActive(false);
+	};
+
 	const subProps: AutocompleteFixedSubProps = {
 		autocompleteLayout: {
 			// default props
 			layout: layout,
+			onReset: () => reset(),
 			// inherited props
 			...defined({
 				disableStyles,
@@ -188,11 +194,6 @@ export const AutocompleteFixed = observer((properties: AutocompleteFixedProps): 
 	}, []);
 
 	const styling = mergeStyles<AutocompleteFixedProps & { inputBounds: inputBounds }>({ ...props, inputBounds }, defaultStyles);
-
-	const reset = () => {
-		controller.setFocused();
-		setActive(false);
-	};
 
 	let _input;
 	if (input) {

@@ -13,7 +13,6 @@ import type { FacetValue, ValueFacet } from '@searchspring/snap-store-mobx';
 import { Lang, useLang } from '../../../hooks';
 import deepmerge from 'deepmerge';
 import { Radio, RadioProps } from '../Radio';
-import { LangAttributes } from '../../../hooks/useLang';
 
 const defaultStyles: StyleScript<FacetListOptionsProps> = ({ horizontal, theme, hideCheckbox }) => {
 	return css({
@@ -122,17 +121,6 @@ export const FacetListOptions = observer((properties: FacetListOptionsProps): JS
 								}`,
 							},
 						},
-						checkbox: {
-							attributes: {
-								'aria-label': `${
-									value.filtered
-										? `remove selected filter ${facet?.label || ''} - ${value.label}`
-										: facet?.label
-										? `filter by ${facet?.label} - ${value.label}`
-										: `filter by ${value.label}`
-								}`,
-							},
-						},
 					};
 
 					//deep merge with props.lang
@@ -155,9 +143,9 @@ export const FacetListOptions = observer((properties: FacetListOptionsProps): JS
 							{...mergedLang.listOption?.all}
 						>
 							{renderRadios
-								? !hideCheckbox && <Radio {...subProps.radio} checked={value.filtered} disableA11y={true} {...mergedLang.checkbox.attributes} />
+								? !hideCheckbox && <Radio {...subProps.radio} checked={value.filtered} disableA11y={true} {...mergedLang.listOption.attributes} />
 								: !hideCheckbox && (
-										<Checkbox {...subProps.checkbox} checked={value.filtered} disableA11y={true} {...mergedLang.checkbox.attributes} />
+										<Checkbox {...subProps.checkbox} checked={value.filtered} disableA11y={true} {...mergedLang.listOption.attributes} />
 								  )}
 
 							<span className="ss__facet-list-options__option__value">
@@ -192,10 +180,6 @@ export interface FacetListOptionsProps extends ComponentProps {
 
 export interface FacetListOptionsLang {
 	listOption: Lang<{
-		facet: ValueFacet;
-		value: FacetValue;
-	}>;
-	checkbox: LangAttributes<{
 		facet: ValueFacet;
 		value: FacetValue;
 	}>;
