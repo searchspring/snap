@@ -144,8 +144,12 @@ export class AutocompleteController extends AbstractController {
 		this.eventManager.on('beforeSubmit', async (ac: AfterStoreObj, next: Next): Promise<void | boolean> => {
 			await next();
 
+			const loading = (ac.controller as AutocompleteController).store.loading;
+			if (loading) return;
+
+			const inputState = (ac.controller as AutocompleteController).store.state.input;
 			const redirectURL = (ac.controller as AutocompleteController).store.merchandising?.redirect;
-			if (redirectURL && this.config?.settings?.redirects?.merchandising) {
+			if (this.config?.settings?.redirects?.merchandising && inputState && redirectURL) {
 				this.track.redirect(redirectURL);
 				window.location.href = redirectURL;
 				return false;
@@ -316,8 +320,6 @@ export class AutocompleteController extends AbstractController {
 					// when spellCorrection is enabled
 					if (this.config.globals?.search?.query?.spellCorrection) {
 						// wait until loading is complete before submission
-						// TODO make this better
-						await timeout(INPUT_DELAY + 1);
 						while (this.store.loading) {
 							await timeout(INPUT_DELAY);
 						}
@@ -336,7 +338,8 @@ export class AutocompleteController extends AbstractController {
 
 					actionUrl = actionUrl?.set('query', input.value);
 
-					// TODO expected spell correct behavior queryAssumption
+					// wait for input delay
+					await timeout(INPUT_DELAY + 1);
 
 					try {
 						await this.eventManager.fire('beforeSubmit', {
@@ -379,8 +382,6 @@ export class AutocompleteController extends AbstractController {
 				// when spellCorrection is enabled
 				if (this.config.globals?.search?.query?.spellCorrection) {
 					// wait until loading is complete before submission
-					// TODO make this better
-					await timeout(INPUT_DELAY + 1);
 					while (this.store.loading) {
 						await timeout(INPUT_DELAY);
 					}
@@ -399,7 +400,8 @@ export class AutocompleteController extends AbstractController {
 					}
 				}
 
-				// TODO expected spell correct behavior queryAssumption
+				// wait for input delay
+				await timeout(INPUT_DELAY + 1);
 
 				try {
 					await this.eventManager.fire('beforeSubmit', {
@@ -648,6 +650,8 @@ export class AutocompleteController extends AbstractController {
 			}
 
 			this.store.loading = true;
+			// clear the redirect URL until proper abort functionality is implemented
+			this.store.merchandising.redirect = '';
 
 			try {
 				await this.eventManager.fire('beforeSearch', {

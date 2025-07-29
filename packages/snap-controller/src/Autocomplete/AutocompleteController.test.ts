@@ -967,7 +967,7 @@ describe('Autocomplete Controller', () => {
 		});
 		(controller.client as MockClient).mockData.updateConfig({ autocomplete: 'redirect', siteId: '8uyt2m' });
 
-		const query = 'rumper';
+		const query = 'romper';
 		controller.urlManager = controller.urlManager.set('query', query);
 
 		await controller.bind();
@@ -1019,7 +1019,7 @@ describe('Autocomplete Controller', () => {
 		});
 		(controller.client as MockClient).mockData.updateConfig({ autocomplete: 'redirect', siteId: '8uyt2m' });
 
-		const query = 'rumper';
+		const query = 'romper';
 		controller.urlManager = controller.urlManager.set('query', query);
 
 		await controller.bind();
@@ -1049,7 +1049,7 @@ describe('Autocomplete Controller', () => {
 		inputEl.dispatchEvent(new KeyboardEvent('keydown', { bubbles: true, keyCode: KEY_ENTER }));
 
 		await waitFor(() => {
-			expect(window.location.href).toContain('/search?oq=rumper&search_query=romper');
+			expect(window.location.href).toContain('/search?search_query=dress');
 		});
 	});
 
