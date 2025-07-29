@@ -166,6 +166,8 @@
         }
       },
       "attributes": {
+        "badges": [
+        ],
         "id": "b7143b0f8ac3979b07e22209e10a1421",
         "intellisuggestData": "eJyyKK0sMcplYCjKzy1ILWJw1g3wcdYNN9Q1MLQ0MGIwZDBlMGAwMjBiSC_KTAEEAAD__wsBCsw",
         "intellisuggestSignature": "a6af9b23292dedee55bbf0e07e898f83cf2ffbae30b8f931ce49feede0d826c0",
@@ -200,6 +202,8 @@
         }
       },
       "attributes": {
+        "badges": [
+        ],
         "id": "c2a33d3e15f0b2e76a188e73e79ced3f",
         "intellisuggestData": "eJyyKK0sMcplYCjKzy1ILWJw1vVxDNH1NNc1MDCy9GAwZDBjMGAwMjBiSC_KTAEEAAD__wvWCt4",
         "intellisuggestSignature": "45597fa7f8ed0df873cf84a6c8f8ba5d84ce3691c7704de7eaf6279193f98fcd",
@@ -404,6 +408,8 @@
         }
       },
       "attributes": {
+        "badges": [
+        ],
         "id": "e7444a00e72ceb80ded94201478f7daf",
         "intellisuggestData": "eJyyKK0sMcplYCjKzy1ILWJw1g3wcdYNMNE1MDQ3MGQwZDA0YjBgMDIwYkgvykwBBAAA__8U7Qrz",
         "intellisuggestSignature": "759c093f2554e3dae479125ed3ef7c998af0dffc0d39e93cd5ec41710363643b",
@@ -1803,7 +1809,8 @@
     "query": "romper"
   },
   "autocomplete": {
-    "query": "romper",
+    "query": "rumper",
+    "correctedQuery": "romper",
     "suggested": {
       "text": "romper",
       "type": "exact",
