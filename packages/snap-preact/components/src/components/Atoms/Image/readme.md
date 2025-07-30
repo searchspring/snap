@@ -32,6 +32,12 @@ The `hoverSrc` prop specifiesthe URL of the alternative image to display on hove
 <Image src={searchResponse.results.mappings.core.imageUrl} hoverSrc={searchResponse.results.mappings.core.hoverImg} alt='image' />
 ```
 
+### height
+The `height` prop is used to set a height on the image. 
+
+```jsx
+<Image src={searchResponse.results.mappings.core.imageUrl} height={'250px'} alt='image' />
+```
 
 ### lazy
 The `lazy` prop is used to disable the lazy loading feature. Enabled by default. 

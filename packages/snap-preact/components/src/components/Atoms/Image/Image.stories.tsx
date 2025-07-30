@@ -73,6 +73,15 @@ export default {
 			},
 			control: { type: 'text' },
 		},
+		height: {
+			description: 'Image height',
+			table: {
+				type: {
+					summary: 'string',
+				},
+			},
+			control: { type: 'text' },
+		},
 		fallback: {
 			description: 'Fallback image url',
 			defaultValue: FALLBACK_IMAGE_URL,
