@@ -11,7 +11,7 @@ import { defined, mergeProps, mergeStyles } from '../../../utilities';
 import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { useDisplaySettings } from '../../../hooks/useDisplaySettings';
 import { RecommendationProfileTracker } from '../../Trackers/Recommendation/ProfileTracker';
-import { RecommendationResultTracker } from '../../Trackers/Recommendation/ResultTracker';
+import { ResultTracker } from '../../Trackers/ResultTracker';
 import { useState } from 'react';
 import { useRef } from 'preact/hooks';
 import { useIntersection } from '../../../hooks';
@@ -129,9 +129,9 @@ export const RecommendationGrid = observer((properties: RecommendationGridProps)
 										return <ResultComponent controller={controller} result={result as Product} theme={theme} treePath={treePath} />;
 									} else {
 										return (
-											<RecommendationResultTracker result={result as Product} controller={controller}>
+											<ResultTracker result={result as Product} controller={controller}>
 												<Result key={(result as Product).id} {...subProps.result} result={result as Product} controller={controller} />
-											</RecommendationResultTracker>
+											</ResultTracker>
 										);
 									}
 								})()
@@ -141,9 +141,9 @@ export const RecommendationGrid = observer((properties: RecommendationGridProps)
 				) : (
 					<RecommendationProfileTracker controller={controller}>
 						{results.map((result) => (
-							<RecommendationResultTracker controller={controller} result={result}>
+							<ResultTracker controller={controller} result={result}>
 								<></>
-							</RecommendationResultTracker>
+							</ResultTracker>
 						))}
 					</RecommendationProfileTracker>
 				)}

@@ -1,32 +1,23 @@
 import { h } from 'preact';
 
-import { ArgsTable, PRIMARY_STORY, Markdown } from '@storybook/blocks';
+import { ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
 
-import { SearchResultTracker, SearchResultTrackerProps } from './SearchResultTracker';
-import { componentArgs, highlightedCode } from '../../../utilities';
+import { ResultTracker, ResultTrackerProps } from './ResultTracker';
+import { componentArgs } from '../../../utilities';
 import Readme from './readme.md';
 import { Snapify } from '../../../utilities/snapify';
-import { Result } from '../../Molecules/Result';
 import type { SearchController } from '@searchspring/snap-controller';
-import type { Product } from '@searchspring/snap-store-mobx';
+import { Result } from '../../Molecules/Result';
+import { Product } from '@searchspring/snap-store-mobx';
 
 export default {
-	title: 'Trackers/Search/Result',
-	component: SearchResultTracker,
-	tags: ['autodocs'],
+	title: `Trackers/Result`,
+	component: ResultTracker,
 	parameters: {
 		docs: {
 			page: () => (
 				<div>
-					<Markdown
-						options={{
-							overrides: {
-								code: highlightedCode,
-							},
-						}}
-					>
-						{Readme}
-					</Markdown>
+					<Readme />
 					<ArgsTable story={PRIMARY_STORY} />
 				</div>
 			),
@@ -41,7 +32,7 @@ export default {
 	],
 	argTypes: {
 		controller: {
-			description: 'Recommendation Controller reference',
+			description: 'Controller reference',
 			type: { required: true },
 			table: {
 				type: {
@@ -67,12 +58,12 @@ export default {
 
 const snapInstance = Snapify.search({ id: 'SearchResultTracker', globals: { siteId: '8uyt2m', search: { query: { string: '*' } } } });
 
-export const Default = (props: SearchResultTrackerProps, { loaded: { controller } }: { loaded: { controller: SearchController } }) => {
-	const result = controller?.store?.results[0] as Product;
+export const Default = (props: ResultTrackerProps, { loaded: { controller } }: { loaded: { controller: SearchController } }) => {
+	const firstResult = controller?.store?.results[0] as Product;
 	return (
-		<SearchResultTracker {...props} controller={controller} result={result}>
-			<Result result={result} />
-		</SearchResultTracker>
+		<ResultTracker {...props} controller={controller} result={firstResult}>
+			<Result result={firstResult} />
+		</ResultTracker>
 	);
 };
 

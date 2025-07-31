@@ -12,9 +12,9 @@ import { InlineBanner, InlineBannerProps } from '../../Atoms/Merchandising/Inlin
 import { Result, ResultProps } from '../../Molecules/Result';
 import { ComponentProps, ResultsLayout, BreakpointsProps, ResultComponent, StyleScript } from '../../../types';
 import { defined, mergeProps, mergeStyles } from '../../../utilities';
-import { Theme, useTheme, CacheProvider, useSnap, useTreePath } from '../../../providers';
+import { Theme, useTheme, CacheProvider, withTracking, useSnap, useTreePath } from '../../../providers';
 import { useDisplaySettings } from '../../../hooks/useDisplaySettings';
-import { SearchResultTracker } from '../../Trackers/SearchResultTracker';
+import { ResultTracker } from '../../Trackers/ResultTracker';
 import { SnapTemplates } from '../../../../../src';
 import { useComponent } from '../../../hooks';
 
@@ -51,6 +51,8 @@ const defaultStyles: StyleScript<ResultsProps> = ({ gapSize, columns }) => {
 		},
 	});
 };
+
+const TrackedResultComponent = withTracking<ResultProps>(Result);
 
 export const Results = observer((properties: ResultsProps): JSX.Element => {
 	const globalTheme: Theme = useTheme();
@@ -146,11 +148,10 @@ export const Results = observer((properties: ResultsProps): JSX.Element => {
 							case ContentType.BANNER:
 								return <InlineBanner {...subProps.inlineBanner} key={result.id} banner={result as Banner} layout={props.layout} />;
 							default:
-								// TODO: wrap with SearchResultTracker component (need to create)
 								if (resultComponent && controller) {
 									const ResultComponent = resultComponent;
 									return (
-										<SearchResultTracker result={result as Product} controller={controller as SearchController}>
+										<ResultTracker result={result as Product} controller={controller as SearchController}>
 											<ResultComponent
 												key={(result as Product).id}
 												controller={controller}
@@ -158,19 +159,17 @@ export const Results = observer((properties: ResultsProps): JSX.Element => {
 												theme={theme}
 												treePath={treePath}
 											/>
-										</SearchResultTracker>
+										</ResultTracker>
 									);
 								} else {
 									return (
-										<SearchResultTracker result={result as Product} controller={controller as SearchController}>
-											<Result
-												key={(result as Product).id}
-												{...subProps.result}
-												result={result as Product}
-												layout={props.layout}
-												controller={controller}
-											/>
-										</SearchResultTracker>
+										<TrackedResultComponent
+											key={(result as Product).id}
+											{...subProps.result}
+											result={result as Product}
+											layout={props.layout}
+											controller={controller}
+										/>
 									);
 								}
 						}

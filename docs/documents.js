@@ -668,6 +668,13 @@ var documents = [
             },
         */
 			{
+				label: 'Accessibility Statement',
+				route: '/about-accessibility',
+				type: 'markdown',
+				url: './docs/ACCESSIBILITY_STATEMENT.md',
+				searchable: true,
+			},
+			{
 				label: 'Github Repository',
 				type: 'external',
 				url: 'https://github.com/searchspring/snap',

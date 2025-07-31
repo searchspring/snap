@@ -1,13 +1,22 @@
-import deepmerge from 'deepmerge';
-import { Tracker, BATCH_TIMEOUT, MAX_VIEWED_COUNT } from './Tracker';
-import { TrackerConfig, BeaconCategory, BeaconType, CartViewEvent, TrackErrorEvent, OrderTransactionData } from './types';
+import 'whatwg-fetch';
+import { Tracker } from './Tracker';
+import { TrackerConfig, TrackErrorEvent, OrderTransactionData } from './types';
+import type { BeaconConfig, Product } from '@searchspring/beacon';
+
+// mocks fetch so beacon client does not make network requests
+const fetchSpy = jest
+	.spyOn(global.window, 'fetch')
+	.mockImplementation(() => Promise.resolve({ status: 200, json: () => Promise.resolve({}) } as Response));
 
 const globals = {
 	siteId: 'xxxzzz',
 };
 
-const config: TrackerConfig = {
+const config: TrackerConfig & BeaconConfig = {
 	mode: 'development',
+	apis: {
+		fetch: global.window.fetch,
+	},
 };
 
 const resetAllCookies = () => {
@@ -25,28 +34,55 @@ Object.defineProperty(global.window.navigator, 'cookieEnabled', {
 	value: true,
 });
 
+// Mock localStorage
+const localStorageMock = (() => {
+	let store: Record<string, string> = {};
+	return {
+		getItem: jest.fn((key: string) => store[key] || null),
+		setItem: jest.fn((key: string, value: string) => {
+			store[key] = value.toString();
+		}),
+		removeItem: jest.fn((key: string) => {
+			delete store[key];
+		}),
+		clear: jest.fn(() => {
+			store = {};
+		}),
+	};
+})();
+
+Object.defineProperty(window, 'localStorage', {
+	value: localStorageMock,
+});
+
 describe('Script Block Tracking', () => {
 	afterEach(() => {
 		global.document.body.innerHTML = '';
 	});
 
-	afterAll(() => {
+	beforeEach(() => {
+		jest.clearAllMocks();
 		resetAllCookies();
+		localStorageMock.clear();
 	});
 
 	it('can target track/shopper/login', async () => {
 		const shopper = { id: Date.now().toString() };
 		global.document.body.innerHTML = `<div>
 			<script type="searchspring/track/shopper/login">
-				shopper = ${JSON.stringify(shopper)};
+				shopper = {
+					id: "${shopper.id}",
+				};
 			</script>
 		</div>`;
 
 		const tracker = new Tracker(globals, config);
 		const trackEvent = jest.spyOn(tracker.track.shopper, 'login');
+		const trackBeaconEvent = jest.spyOn(tracker.events.shopper, 'login');
 
 		await new Promise((r) => setTimeout(r));
 		expect(trackEvent).toHaveBeenCalledWith(shopper, undefined);
+		expect(trackBeaconEvent).toHaveBeenCalledWith({ data: shopper, siteId: undefined });
 
 		trackEvent.mockRestore();
 	});
@@ -64,23 +100,6 @@ describe('Script Block Tracking', () => {
 
 		await new Promise((r) => setTimeout(r));
 		expect(trackEvent).toHaveBeenCalledWith(item, undefined);
-
-		trackEvent.mockRestore();
-	});
-
-	it('can target track/cart/view', async () => {
-		const items = [{ sku: 'abc123' }];
-		global.document.body.innerHTML = `<div>
-			<script type="searchspring/track/cart/view">
-				items = ${JSON.stringify(items)};
-			</script>
-		</div>`;
-
-		const tracker = new Tracker(globals, config);
-		const trackEvent = jest.spyOn(tracker.track.cart, 'view');
-
-		await new Promise((r) => setTimeout(r));
-		expect(trackEvent).toHaveBeenCalledWith({ items }, undefined);
 
 		trackEvent.mockRestore();
 	});
@@ -142,33 +161,26 @@ describe('Tracker', () => {
 		(global.window as any).navigator.cookieEnabled = true;
 	});
 
-	it('can create instance', async () => {
-		const tracker = new Tracker(globals);
+	beforeEach(() => {
+		jest.clearAllMocks();
+		resetAllCookies();
+		localStorageMock.clear();
+	});
 
+	it('can do nothing', () => {
+		expect(true).toBe(true);
+	});
+
+	it('can create instance', async () => {
+		const tracker = new Tracker(globals, config);
 		// @ts-ignore - private property access
-		expect(tracker.mode).toStrictEqual('production');
+		expect(tracker.mode).toStrictEqual(tracker.config.mode);
 		// @ts-ignore - private property access
 		expect(tracker.globals).toStrictEqual(globals);
 		// @ts-ignore - private property access
 		expect(tracker.localStorage).toBeDefined();
-		// @ts-ignore - private property access
-		expect(tracker.context).toBeDefined();
-		// @ts-ignore - private property access
-		expect(tracker.context.userId).toBeDefined();
-		// @ts-ignore - private property access
-		expect(tracker.context.sessionId).toBeDefined();
-		// @ts-ignore - private property access
-		expect(tracker.context.shopperId).not.toBeDefined(); // should not be defined
-		// @ts-ignore - private property access
-		expect(tracker.context.pageLoadId).toBeDefined();
-		// @ts-ignore - private property access
-		expect(tracker.context.website).toBeDefined();
-		// @ts-ignore - private property access
-		expect(tracker.context.website.trackingCode).toBeDefined();
-		// @ts-ignore - private property access
-		expect(tracker.context.website.trackingCode).toStrictEqual(globals.siteId);
+
 		expect(tracker.track).toBeDefined();
-		expect(tracker.track.event).toBeDefined();
 		expect(tracker.track.error).toBeDefined();
 		expect(tracker.track.shopper.login).toBeDefined();
 		expect(tracker.track.product.view).toBeDefined();
@@ -185,22 +197,25 @@ describe('Tracker', () => {
 	});
 
 	it('has a method for getting the context', async () => {
-		const tracker = new Tracker(globals);
-
+		// running in dev mode
+		const tracker = new Tracker(globals, config);
 		const context = tracker.getContext();
-
 		expect(context).toBeDefined();
 		expect(context.userId).toBeDefined();
 		expect(context.sessionId).toBeDefined();
-		expect(context.shopperId).not.toBeDefined(); // should not be defined
+		expect(context.shopperId).toBeDefined(); // should not have a value
+		expect(context.shopperId).toBe('');
 		expect(context.pageLoadId).toBeDefined();
-		expect(context.website).toBeDefined();
-		expect(context.website.trackingCode).toBeDefined();
+		expect(context.timestamp).toBeDefined();
+		expect(context.pageUrl).toBeDefined();
+		expect(context.initiator).toBeDefined();
+		expect(context.attribution).not.toBeDefined();
+		expect(context.dev).toBe(true);
+		expect(context.currency).not.toBeDefined();
 	});
 
 	it('has a method for getting the globals', async () => {
-		const tracker = new Tracker(globals);
-
+		const tracker = new Tracker(globals, config);
 		const trackerGlobals = tracker.getGlobals();
 
 		expect(trackerGlobals).toBeDefined();
@@ -223,1313 +238,385 @@ describe('Tracker', () => {
 		expect(devTracker.mode).toBe('development');
 	});
 
-	it('does not send error events when payloads are from blacklisted URLs (localhost, snapui)', async () => {
-		const tracker = new Tracker(globals);
-
-		const payload: TrackErrorEvent = {
-			href: 'https://localhost/',
-			filename: 'https://snapui.searchspring.io/mockup.html',
-			stack: '',
-			message: 'something went wrong!',
-			colno: 1,
-			lineno: 1,
-			errortimestamp: 1,
-		};
-		const beaconEvent = await tracker.track.error(payload);
-
-		expect(beaconEvent).toBe(undefined);
-
-		const anotherPayload: TrackErrorEvent = {
-			href: 'https://snapui.searchspring.io/mockup.html?q=red',
-			filename: 'https://snapui.searchspring.io/bundle.js',
-			stack: '',
-			message: 'something went wrong!',
-			colno: 1,
-			lineno: 1,
-			errortimestamp: 1,
-		};
-		const anotherBeaconEvent = await tracker.track.error(anotherPayload);
-
-		expect(anotherBeaconEvent).toBe(undefined);
-	});
-
-	it('sends events when AppMode is production', async () => {
-		const tracker = new Tracker(globals, { id: `track-${Date.now().toString()}` }); // custom id to create separate localStorage pool
-
-		const xhrMock: Partial<XMLHttpRequest> = {
-			open: jest.fn(),
-			send: jest.fn(),
-			setRequestHeader: jest.fn(),
-			readyState: 4,
-			status: 200,
-			response: 'Hello World!',
-		};
-
-		const request = jest.spyOn(global.window, 'XMLHttpRequest').mockImplementation(() => xhrMock as XMLHttpRequest);
-
-		const sendEvents = jest.spyOn(tracker, 'sendEvents');
-
-		const payload: TrackErrorEvent = {
-			href: 'https://www.test.com/',
-			filename: 'https://snapui.searchspring.io/mockup.html',
-			stack: '',
-			message: 'something went wrong!',
-			colno: 1,
-			lineno: 1,
-			errortimestamp: 1,
-		};
-
-		await tracker.track.error(payload);
-
-		await new Promise((r) => setTimeout(r, BATCH_TIMEOUT + 1)); // BATCH_TIMEOUT + 1
-
-		expect(sendEvents).toHaveBeenCalledTimes(1);
-		expect(xhrMock.open).toBeCalledWith('POST', `https://beacon.searchspring.io/beacon`);
-
-		sendEvents.mockRestore();
-		request.mockRestore();
-	});
-
-	it('does NOT send events when AppMode is NOT production', async () => {
-		const tracker = new Tracker(globals, { id: `track-${Date.now().toString()}`, mode: 'development' }); // custom id to create separate localStorage pool
-
-		const xhrMock: Partial<XMLHttpRequest> = {
-			open: jest.fn(),
-			send: jest.fn(),
-			setRequestHeader: jest.fn(),
-			readyState: 4,
-			status: 200,
-			response: 'Hello World!',
-		};
-
-		const request = jest.spyOn(global.window, 'XMLHttpRequest').mockImplementation(() => xhrMock as XMLHttpRequest);
-
-		const sendEvents = jest.spyOn(tracker, 'sendEvents');
-
-		const payload: TrackErrorEvent = {
-			href: 'https://www.test.com/',
-			filename: 'https://snapui.searchspring.io/mockup.html',
-			stack: '',
-			message: 'something went wrong!',
-			colno: 1,
-			lineno: 1,
-			errortimestamp: 1,
-		};
-
-		await tracker.track.error(payload);
-
-		await new Promise((r) => setTimeout(r, BATCH_TIMEOUT + 1)); // BATCH_TIMEOUT + 1
-
-		expect(sendEvents).toHaveBeenCalledTimes(1);
-		expect(xhrMock.open).not.toBeCalledWith('POST', `https://beacon.searchspring.io/beacon`);
-
-		sendEvents.mockRestore();
-		request.mockRestore();
-	});
-
-	it('can pass config and use custom namespace', async () => {
-		const customConfig = {
-			...config,
-			id: 'customTracker',
-			framework: 'test',
-		};
-
-		const customGlobals = {
-			siteId: 'custom',
-			currency: { code: 'EUR' },
-		};
-
-		const tracker = new Tracker(globals);
-
-		// @ts-ignore - private property
-		expect(tracker.localStorage.key).toStrictEqual(`ss-${tracker.config.id}`);
-
-		// @ts-ignore - private property
-		expect(tracker.localStorage.get('siteId')).toStrictEqual(globals.siteId);
-
-		// @ts-ignore - private property
-		expect(tracker.config.id).toStrictEqual('track');
-
-		// @ts-ignore - private property
-		expect(tracker.config.framework).toStrictEqual('snap');
-
-		// @ts-ignore - private property
-		expect(tracker.context.currency).toBeUndefined();
-
-		const tracker2 = new Tracker(customGlobals, customConfig);
-
-		// @ts-ignore - private property
-		expect(tracker2.localStorage.key).toStrictEqual(`ss-${customConfig.id}`);
-
-		// @ts-ignore - private property
-		expect(tracker2.localStorage.get('siteId')).toStrictEqual(customGlobals.siteId);
-
-		// @ts-ignore - private property
-		expect(tracker2.config.id).toBe(customConfig.id);
-
-		// @ts-ignore - private property
-		expect(tracker2.config.framework).toBe(customConfig.framework);
-
-		// @ts-ignore - private property
-		expect(tracker2.context.currency).toBeDefined();
-
-		// @ts-ignore - private property
-		expect(tracker2.context.currency).toStrictEqual(customGlobals.currency);
-	});
-
-	it('can persist userId in storage if cookies are disabled', async () => {
-		resetAllCookies();
-		// @ts-ignore
-		global.window.navigator.cookieEnabled = false;
-
+	it('will make preflight request when there are cart products set', () => {
 		const tracker = new Tracker(globals, config);
+		expect(fetchSpy).toHaveBeenCalledTimes(0);
 
-		// @ts-ignore - private property access
-		expect(tracker.context.userId).toBeDefined();
-
-		expect(global.document.cookie).not.toContain(`ssUserId`);
-
-		// @ts-ignore - private property access
-		expect(tracker.context.userId).toStrictEqual(global.window.localStorage.getItem('ssUserId'));
-	});
-
-	it('can invoke sendPreflight GET', async () => {
-		const tracker = new Tracker(globals, config);
-
-		// only add 1 product to be under threshold and still generate request
-		const items = ['abc123'];
-		tracker.cookies.cart.add(items);
+		// simulate product cart tracking
+		const productData = [{ uid: 'product123', sku: 'product123', qty: 1, price: 10.99 }];
+		tracker.storage.cart.set(productData);
 
 		const sendPreflight = jest.spyOn(tracker, 'sendPreflight');
-		const xhrMock: Partial<XMLHttpRequest> = {
-			open: jest.fn(),
-			send: jest.fn(),
-			setRequestHeader: jest.fn(),
-			readyState: 4,
-			status: 200,
-			response: 'Hello World!',
-		};
-		const request = jest.spyOn(global.window, 'XMLHttpRequest').mockImplementation(() => xhrMock as XMLHttpRequest);
-
-		await tracker.sendPreflight();
+		tracker.sendPreflight();
 
 		expect(sendPreflight).toHaveBeenCalledTimes(1);
+		expect(fetchSpy).toHaveBeenCalledTimes(2);
+	});
 
-		// @ts-ignore - private property access
-		const querystring = `?userId=${encodeURIComponent(tracker.context.userId || '')}&siteId=${encodeURIComponent(
-			// @ts-ignore - private property access
-			tracker.globals.siteId
-		)}&cart=${encodeURIComponent(items[0])}`;
-		expect(xhrMock.open).toBeCalledWith(
-			'GET',
-			// @ts-ignore - private property access
-			`https://${tracker.globals.siteId}.a.searchspring.io/api/personalization/preflightCache${querystring}`
+	it('will make preflight request when there are viewed products set', () => {
+		const tracker = new Tracker(globals, config);
+		expect(fetchSpy).toHaveBeenCalledTimes(0);
+
+		// simulate product view tracking
+		const productData = { sku: 'product123' };
+		tracker.track.product.view(productData);
+
+		const sendPreflight = jest.spyOn(tracker, 'sendPreflight');
+		tracker.sendPreflight();
+
+		expect(sendPreflight).toHaveBeenCalledTimes(1);
+		expect(fetchSpy).toHaveBeenCalledTimes(2);
+	});
+
+	it('will make preflight request when there is a shopperId set', () => {
+		const tracker = new Tracker(globals, config);
+		expect(fetchSpy).toHaveBeenCalledTimes(0);
+
+		// simulate shopper login
+		const shopperData = { id: 'shopper123' };
+		tracker.track.shopper.login(shopperData);
+
+		const sendPreflight = jest.spyOn(tracker, 'sendPreflight');
+		tracker.sendPreflight();
+
+		expect(sendPreflight).toHaveBeenCalledTimes(1);
+		expect(fetchSpy).toHaveBeenCalledTimes(2);
+	});
+
+	it('can retarget DOM elements', () => {
+		const tracker = new Tracker(globals, config);
+		const retargetSpy = jest.spyOn(tracker, 'retarget');
+
+		// Add new DOM element after initialization
+		global.document.body.innerHTML = `<div>
+			<script type="searchspring/track/product/view">
+				item = ${JSON.stringify({ sku: 'abc123' })};
+			</script>
+		</div>`;
+
+		tracker.retarget();
+
+		expect(retargetSpy).toHaveBeenCalledTimes(1);
+		retargetSpy.mockRestore();
+	});
+
+	it('can track errors', () => {
+		const tracker = new Tracker(globals, { mode: 'production', href: 'http://example.com' });
+		const errorData: TrackErrorEvent = {
+			message: 'Test error',
+			stack: 'Error stack trace',
+			details: { context: 'Testing' },
+		};
+
+		const eventsSpy = jest.spyOn(tracker.events.error, 'snap');
+
+		tracker.track.error(errorData);
+
+		const { message, stack, ...details } = errorData;
+
+		expect(eventsSpy).toHaveBeenCalledWith({
+			data: {
+				message,
+				stack,
+				details,
+			},
+			siteId: undefined,
+		});
+
+		eventsSpy.mockRestore();
+	});
+
+	it('does not track errors in development mode', () => {
+		const devTracker = new Tracker(globals, { mode: 'development' });
+		const errorData: TrackErrorEvent = {
+			message: 'Test error',
+			stack: 'Error stack trace',
+		};
+
+		const eventsSpy = jest.spyOn(devTracker.events.error, 'snap');
+
+		devTracker.track.error(errorData);
+
+		expect(eventsSpy).not.toHaveBeenCalled();
+
+		eventsSpy.mockRestore();
+	});
+
+	it('does not track errors when doNotTrack includes error', () => {
+		const noTrackTracker = new Tracker(globals, {
+			mode: 'production',
+			doNotTrack: ['error'],
+		});
+
+		const errorData: TrackErrorEvent = {
+			message: 'Test error',
+			stack: 'Error stack trace',
+		};
+
+		const eventsSpy = jest.spyOn(noTrackTracker.events.error, 'snap');
+
+		noTrackTracker.track.error(errorData);
+
+		expect(eventsSpy).not.toHaveBeenCalled();
+
+		eventsSpy.mockRestore();
+	});
+
+	it('can track product view events', () => {
+		const tracker = new Tracker(globals, config);
+
+		const productData = { sku: 'product123', price: 19.99 };
+
+		const eventsSpy = jest.spyOn(tracker.events.product, 'pageView');
+
+		tracker.track.product.view(productData);
+
+		expect(eventsSpy).toHaveBeenCalledWith({
+			data: {
+				result: {
+					...productData,
+					uid: 'product123',
+				},
+			},
+			siteId: undefined,
+		});
+
+		eventsSpy.mockRestore();
+	});
+
+	it('handles order transaction events with legacy format', () => {
+		const tracker = new Tracker(globals, config);
+
+		const orderData: OrderTransactionData = {
+			order: {
+				id: '12345',
+				total: '59.99',
+				transactionTotal: '49.99',
+				city: 'New York',
+				state: 'NY',
+				country: 'US',
+			},
+			items: [
+				{
+					sku: 'product123',
+					childSku: 'product123-variant',
+					qty: '2',
+					price: '24.99',
+				},
+			],
+		};
+
+		const eventsSpy = jest.spyOn(tracker.events.order, 'transaction');
+
+		tracker.track.order.transaction(orderData);
+
+		expect(eventsSpy).toHaveBeenCalled();
+		// Check that the first argument to the spy's first call has the expected structure
+		expect(eventsSpy.mock.calls[0][0].data).toEqual({
+			orderId: '12345',
+			total: 59.99,
+			transactionTotal: 49.99,
+			city: 'New York',
+			state: 'NY',
+			country: 'US',
+			results: [
+				{
+					uid: 'product123',
+					childUid: undefined,
+					sku: 'product123',
+					childSku: 'product123-variant',
+					qty: 2,
+					price: 24.99,
+				},
+			],
+		});
+
+		eventsSpy.mockRestore();
+	});
+
+	it('can handle currency settings', () => {
+		const tracker = new Tracker({ ...globals, currency: { code: 'EUR' } }, config);
+
+		expect(tracker.getContext().currency).toStrictEqual({ code: 'EUR' });
+
+		// Test changing the currency
+		tracker.setCurrency({ code: 'USD' });
+
+		expect(tracker.getContext().currency).toStrictEqual({ code: 'USD' });
+	});
+
+	it('correctly handles product ID extraction', () => {
+		const tracker = new Tracker(globals, config);
+		const product = { uid: 'product123', sku: 'sku456' };
+
+		// @ts-ignore - Testing private method
+		const productId = tracker.getProductId(product);
+
+		expect(productId).toBe('product123'); // Expecting uid to be preferred
+	});
+
+	it('can get viewed products', () => {
+		const tracker = new Tracker(globals, config);
+		// First view a product
+		const productData = { sku: 'viewed-product-123' };
+		tracker.track.product.view(productData);
+
+		// Now check if it's in viewed products
+		const viewedProducts = tracker.cookies.viewed.get();
+
+		expect(viewedProducts).toContain('viewed-product-123');
+	});
+});
+
+describe('Cart inferance from context', () => {
+	let tracker: Tracker;
+	const mockFetchApi = jest.fn().mockResolvedValue(Promise.resolve({ status: 200, json: () => Promise.resolve({}) }));
+	let config: TrackerConfig & BeaconConfig;
+
+	beforeEach(() => {
+		jest.clearAllMocks();
+		resetAllCookies();
+		localStorageMock.clear();
+		config = { mode: 'development', apis: { fetch: mockFetchApi } };
+		tracker = new Tracker(globals, config);
+	});
+
+	it('empty cart should not trigger any requests', async () => {
+		// empty cart should not trigger any requests
+		const cart: Product[] = [];
+		tracker = new Tracker(
+			{
+				...globals,
+				cart,
+			},
+			config
 		);
-
-		sendPreflight.mockRestore();
-		request.mockRestore();
+		await new Promise((resolve) => setTimeout(resolve, 0));
+		expect(mockFetchApi).not.toHaveBeenCalled();
 	});
-
-	it('can invoke sendPreflight POST', async () => {
-		const tracker = new Tracker(globals, config);
-
-		// populate cart cookie so charsParams threshold is met for GET request
-		const items: string[] = [];
-		const minBytesThreshold = 1024;
-		const skuPrefix = 'a_very_long_product_sku_to_fill_charsParams_bytes_'; // 50 chars
-		for (let i = 0; i < Math.ceil(minBytesThreshold / skuPrefix.length); i++) {
-			// = 21 loops
-			items.push(`${skuPrefix}_${i}`);
-		}
-
-		tracker.cookies.cart.add(items); // 51 * 20 = 1050 bytes
-		expect(items.join().length).toBeGreaterThanOrEqual(minBytesThreshold);
-
-		const sendPreflight = jest.spyOn(tracker, 'sendPreflight');
-		const xhrMock: Partial<XMLHttpRequest> = {
-			open: jest.fn(),
-			send: jest.fn(),
-			setRequestHeader: jest.fn(),
-			readyState: 4,
-			status: 200,
-			response: 'Hello World!',
-		};
-		const request = jest.spyOn(global.window, 'XMLHttpRequest').mockImplementation(() => xhrMock as XMLHttpRequest);
-
-		await tracker.sendPreflight();
-
-		expect(sendPreflight).toHaveBeenCalledTimes(1);
-		// @ts-ignore - private property access
-		expect(xhrMock.open).toBeCalledWith('POST', `https://${tracker.globals.siteId}.a.searchspring.io/api/personalization/preflightCache`);
-
-		sendPreflight.mockRestore();
-		request.mockRestore();
-	});
-
-	it('can invoke sendEvents', async () => {
-		const tracker = new Tracker(globals, { id: `track-${Date.now().toString()}` }); // custom id to create separate localStorage pool
-
-		const xhrMock: Partial<XMLHttpRequest> = {
-			open: jest.fn(),
-			send: jest.fn(),
-			setRequestHeader: jest.fn(),
-			readyState: 4,
-			status: 200,
-			response: 'Hello World!',
-		};
-		const request = jest.spyOn(global.window, 'XMLHttpRequest').mockImplementation(() => xhrMock as XMLHttpRequest);
-
-		tracker.track.product.view({ sku: 'abc123' }); // ensure at least 1 beacon event is in the pool
-		const sendEvents = jest.spyOn(tracker, 'sendEvents');
-
-		await tracker.sendEvents();
-		await new Promise((r) => setTimeout(r, BATCH_TIMEOUT + 1)); // BATCH_TIMEOUT + 1
-
-		expect(sendEvents).toHaveBeenCalledTimes(1);
-		expect(xhrMock.open).toBeCalledWith('POST', `https://beacon.searchspring.io/beacon`);
-
-		sendEvents.mockRestore();
-		request.mockRestore();
-	});
-
-	it('can invoke sendEvents with events', async () => {
-		const tracker = new Tracker(globals, { id: `track-${Date.now().toString()}` }); // custom id to create separate localStorage pool
-
-		const xhrMock: Partial<XMLHttpRequest> = {
-			open: jest.fn(),
-			send: jest.fn(),
-			setRequestHeader: jest.fn(),
-			readyState: 4,
-			status: 200,
-			response: 'Hello World!',
-		};
-		const request = jest.spyOn(global.window, 'XMLHttpRequest').mockImplementation(() => xhrMock as XMLHttpRequest);
-
-		const sendEvents = jest.spyOn(tracker, 'sendEvents');
-
-		const events = [{ hello: 'world' }];
-		// @ts-ignore
-		await tracker.sendEvents(events);
-		await new Promise((r) => setTimeout(r, BATCH_TIMEOUT + 1)); // BATCH_TIMEOUT + 1
-
-		expect(sendEvents).toHaveBeenCalledTimes(1);
-		expect(xhrMock.open).toBeCalledWith('POST', `https://beacon.searchspring.io/beacon`);
-		expect(xhrMock.send).toBeCalledWith(JSON.stringify(events[0]));
-
-		sendEvents.mockRestore();
-		request.mockRestore();
-	});
-
-	it('sendEvents will automatically de-duplicate events', async () => {
-		const tracker = new Tracker(globals, { id: `track-${Date.now().toString()}` }); // custom id to create separate localStorage pool
-
-		const xhrMock: Partial<XMLHttpRequest> = {
-			open: jest.fn(),
-			send: jest.fn(),
-			setRequestHeader: jest.fn(),
-			readyState: 4,
-			status: 200,
-			response: 'Hello World!',
-		};
-		const request = jest.spyOn(global.window, 'XMLHttpRequest').mockImplementation(() => xhrMock as XMLHttpRequest);
-
-		const sendEvents = jest.spyOn(tracker, 'sendEvents');
-
-		const events = [{ hello: 'world' }];
-		// @ts-ignore
-		await tracker.sendEvents(events);
-		// @ts-ignore
-		await tracker.sendEvents(events);
-		// @ts-ignore
-		await tracker.sendEvents(events);
-		// @ts-ignore
-		await tracker.sendEvents(events);
-		// @ts-ignore
-		await tracker.sendEvents(events);
-
-		await new Promise((r) => setTimeout(r, BATCH_TIMEOUT + 1)); // BATCH_TIMEOUT + 1
-
-		expect(sendEvents).toHaveBeenCalledTimes(5);
-		expect(xhrMock.open).toBeCalledWith('POST', `https://beacon.searchspring.io/beacon`);
-		expect(xhrMock.send).toBeCalledWith(JSON.stringify(events[0]));
-
-		sendEvents.mockRestore();
-		request.mockRestore();
-	});
-
-	it('tests track.shopper.login with cookies disabled', async () => {
-		resetAllCookies();
-		// @ts-ignore
-		global.window.navigator.cookieEnabled = false;
-
-		const tracker = new Tracker(globals, config);
-		const shopperLogin = jest.spyOn(tracker.track.shopper, 'login');
-
-		const shopperId = Date.now().toString();
-
-		expect(global.document.cookie).not.toContain('ssShopperId');
-
-		const payload = { id: shopperId };
-		await tracker.track.shopper.login(payload);
-
-		expect(global.document.cookie).not.toContain('ssShopperId');
-
-		shopperLogin.mockRestore();
-	});
-
-	it('can invoke track.shopper.login', async () => {
-		const tracker = new Tracker(globals, config);
-		const shopperLogin = jest.spyOn(tracker.track.shopper, 'login');
-
-		const shopperId = Date.now().toString();
-		const payload = { id: shopperId };
-		await tracker.track.shopper.login(payload);
-
-		// @ts-ignore - private property access
-		expect(tracker.context.shopperId).toStrictEqual(shopperId);
-		expect(shopperLogin).toHaveBeenCalledWith(payload);
-
-		shopperLogin.mockRestore();
-	});
-
-	it('can invoke track.shopper.login with siteId override', async () => {
-		const tracker = new Tracker(globals, config);
-		const trackEvent = jest.spyOn(tracker.track, 'event');
-		const shopperLogin = jest.spyOn(tracker.track.shopper, 'login');
-
-		const shopperId = Date.now().toString();
-		const siteId = 'xxxxxx';
-		const payload = { id: shopperId };
-		await tracker.track.shopper.login(payload, siteId);
-
-		const trackerContext = tracker.getContext();
-
-		expect(trackEvent).toHaveBeenCalledWith({
-			type: BeaconType.LOGIN,
-			category: BeaconCategory.PERSONALIZATION,
-
-			context: deepmerge(trackerContext, {
-				context: {
-					website: {
-						trackingCode: siteId,
-					},
-				},
-			}),
-			event: {
-				shopperId,
-				userId: trackerContext.userId,
+	it('can set current cart from globals', async () => {
+		// set initial cart
+		const cart = [
+			{ uid: 'productUid1', childUid: 'productChildUid1', sku: 'productSku1', childSku: 'productChildSku1', qty: 1, price: 9.99 },
+			{ uid: 'productUid2', childUid: 'productChildUid2', sku: 'productSku2', childSku: 'productChildSku2', qty: 2, price: 10.99 },
+		];
+		tracker = new Tracker(
+			{
+				...globals,
+				cart,
 			},
-		});
-		expect(shopperLogin).toHaveBeenCalledWith(payload, siteId);
-
-		trackEvent.mockRestore();
-		shopperLogin.mockRestore();
-	});
-
-	it('logs console error if no id provided to track.shopper.login', async () => {
-		const tracker = new Tracker(globals, config);
-		const shopperLogin = jest.spyOn(tracker.track.shopper, 'login');
-		const consoleError = jest.spyOn(console, 'error');
-
-		const shopperId = '';
-		const payload = { id: shopperId };
-		await tracker.track.shopper.login(payload);
-
-		expect(shopperLogin).toHaveBeenCalledWith(payload);
-		expect(consoleError).toHaveBeenCalled();
-
-		shopperLogin.mockRestore();
-		consoleError.mockRestore();
-	});
-
-	it('can invoke track.product.view event method', async () => {
-		const tracker = new Tracker(globals, config);
-		const eventFn = jest.spyOn(tracker.track.product, 'view');
-
-		const payload = {
-			uid: undefined,
-			sku: 'abc123',
-			childUid: undefined,
-			childSku: 'abc123_a',
-		};
-		const beaconEvent = await tracker.track.product.view(payload);
-
-		expect(beaconEvent?.type).toStrictEqual(BeaconType.PRODUCT);
-		expect(beaconEvent?.category).toStrictEqual(BeaconCategory.PAGEVIEW);
-		expect(beaconEvent?.event).toEqual(payload);
-
-		expect(eventFn).toHaveBeenCalledTimes(1);
-		expect(eventFn).toHaveBeenCalledWith(payload);
-
-		eventFn.mockRestore();
-	});
-
-	it('can invoke track.product.view with siteId override', async () => {
-		const tracker = new Tracker(globals, config);
-		const trackEvent = jest.spyOn(tracker.track, 'event');
-		const productView = jest.spyOn(tracker.track.product, 'view');
-
-		const siteId = 'xxxxxx';
-		const payload = {
-			sku: 'abc123',
-			childSku: 'abc123_a',
-		};
-		await tracker.track.product.view(payload, siteId);
-
-		expect(trackEvent).toHaveBeenCalledWith({
-			type: BeaconType.PRODUCT,
-			category: BeaconCategory.PAGEVIEW,
-			// @ts-ignore - private property access
-			context: deepmerge(tracker.context, {
-				context: {
-					website: {
-						trackingCode: siteId,
-					},
-				},
-			}),
-			event: { ...payload },
-		});
-		expect(productView).toHaveBeenCalledWith(payload, siteId);
-
-		trackEvent.mockRestore();
-		productView.mockRestore();
-	});
-
-	it('stores a cookiew when invoking track.product.view', async () => {
-		const tracker = new Tracker(globals, config);
-
-		// stores based on priority of :childSku, childUid, sku, uid
-		const skus: string[] = [];
-
-		const addProduct1 = {
-			uid: 'uid1',
-			sku: undefined,
-			childUid: undefined,
-			childSku: undefined,
-		};
-		await tracker.track.product.view(addProduct1);
-
-		expect(global.document.cookie).toContain(`ssViewedProducts=${encodeURIComponent(skus.concat(addProduct1.uid).join(','))}`);
-
-		const addProduct2 = {
-			uid: 'uid2',
-			sku: 'sku2',
-			childUid: undefined,
-			childSku: undefined,
-		};
-		await tracker.track.product.view(addProduct2);
-
-		skus.unshift(addProduct2.sku);
-		expect(global.document.cookie).toContain(`ssViewedProducts=${encodeURIComponent(skus.join(','))}`);
-
-		const addProduct3 = {
-			uid: 'uid3',
-			sku: 'sku3',
-			childUid: 'childUid3',
-			childSku: undefined,
-		};
-		await tracker.track.product.view(addProduct3);
-
-		skus.unshift(addProduct3.childUid);
-		expect(global.document.cookie).toContain(`ssViewedProducts=${encodeURIComponent(skus.join(','))}`);
-
-		const addProduct4 = {
-			uid: 'uid4',
-			sku: 'sku4',
-			childUid: 'childUid4',
-			childSku: 'childSku4',
-		};
-		await tracker.track.product.view(addProduct4);
-
-		skus.unshift(addProduct4.childSku);
-		expect(global.document.cookie).toContain(`ssViewedProducts=${encodeURIComponent(skus.join(','))}`);
-
-		// will put a duplicate to the front
-		const addProduct2Again = {
-			sku: 'sku2',
-		};
-		await tracker.track.product.view(addProduct2Again);
-
-		// remove duplicate
-		skus.splice(skus.indexOf(addProduct2Again.sku), 1);
-
-		skus.unshift(addProduct2Again.sku);
-		expect(global.document.cookie).toContain(`ssViewedProducts=${encodeURIComponent(skus.join(','))}`);
-	});
-
-	it('when invoking track.product.view there is a maximum number of skus', async () => {
-		const tracker = new Tracker(globals, config);
-		const skus: string[] = [];
-
-		// loop through the max count
-		for (let i = 0; i <= MAX_VIEWED_COUNT; i++) {
-			skus.unshift(`sku${i}`);
-			await tracker.track.product.view({ sku: `sku${i}` });
-		}
-
-		skus.splice(MAX_VIEWED_COUNT, 1);
-
-		expect(global.document.cookie).toContain(`ssViewedProducts=${encodeURIComponent(skus.join(','))}`);
-	});
-
-	it('logs console error if no uid or sku or childUid or childSku is provided to track.product.view', async () => {
-		const tracker = new Tracker(globals, config);
-		const eventFn = jest.spyOn(tracker.track.product, 'view');
-		const consoleError = jest.spyOn(console, 'error');
-
-		const payload = {};
-		await tracker.track.product.view(payload);
-
-		expect(eventFn).toHaveBeenCalledWith(payload);
-		expect(consoleError).toHaveBeenCalled();
-
-		consoleError.mockRestore();
-		eventFn.mockRestore();
-	});
-
-	it('can invoke track.product.click event method', async () => {
-		const tracker = new Tracker(globals, config);
-
-		const eventFn = jest.spyOn(tracker.track.product, 'click');
-
-		const payload = {
-			intellisuggestData: 'abc123',
-			intellisuggestSignature: 'def456',
-			href: '/test',
-		};
-		const beaconEvent = await tracker.track.product.click(payload);
-
-		expect(beaconEvent?.type).toStrictEqual(BeaconType.CLICK);
-		expect(beaconEvent?.category).toStrictEqual(BeaconCategory.INTERACTION);
-		expect(beaconEvent?.event).toStrictEqual(payload);
-
-		expect(eventFn).toHaveBeenCalledTimes(1);
-		expect(eventFn).toHaveBeenCalledWith(payload);
-		eventFn.mockRestore();
-	});
-
-	it('logs console error if no intellisuggestData or intellisuggestSignature is provided to track.product.click', async () => {
-		const tracker = new Tracker(globals, config);
-		const productClick = jest.spyOn(tracker.track.product, 'click');
-		const consoleError = jest.spyOn(console, 'error');
-
-		let payload = {
-			// intellisuggestData: 'abc123',
-			// intellisuggestSignature: 'def456',
-		};
-		// @ts-ignore
-		await tracker.track.product.click(payload);
-
-		expect(productClick).toHaveBeenCalledWith(payload);
-		expect(consoleError).toHaveBeenCalledTimes(1);
-
-		payload = {
-			intellisuggestData: 'abc123',
-			// intellisuggestSignature: 'def456',
-		};
-		// @ts-ignore
-		await tracker.track.product.click(payload);
-
-		expect(productClick).toHaveBeenCalledWith(payload);
-		expect(consoleError).toHaveBeenCalledTimes(2);
-
-		payload = {
-			// intellisuggestData: 'abc123',
-			intellisuggestSignature: 'def456',
-		};
-		// @ts-ignore
-		await tracker.track.product.click(payload);
-
-		expect(productClick).toHaveBeenCalledWith(payload);
-		expect(consoleError).toHaveBeenCalledTimes(3);
-
-		consoleError.mockRestore();
-		productClick.mockRestore();
-	});
-
-	it('can invoke track.product.click with siteId override', async () => {
-		const tracker = new Tracker(globals, config);
-		const trackEvent = jest.spyOn(tracker.track, 'event');
-		const productClick = jest.spyOn(tracker.track.product, 'click');
-
-		const siteId = 'xxxxxx';
-		const payload = {
-			intellisuggestData: 'abc123',
-			intellisuggestSignature: 'def456',
-		};
-		await tracker.track.product.click(payload, siteId);
-
-		expect(trackEvent).toHaveBeenCalledWith({
-			type: BeaconType.CLICK,
-			category: BeaconCategory.INTERACTION,
-			// @ts-ignore - private property access
-			context: deepmerge(tracker.context, {
-				context: {
-					website: {
-						trackingCode: siteId,
-					},
-				},
-			}),
-			event: { ...payload },
-		});
-		expect(productClick).toHaveBeenCalledWith(payload, siteId);
-		productClick.mockRestore();
-		trackEvent.mockRestore();
-	});
-
-	it('can invoke track.cart.view event method', async () => {
-		const tracker = new Tracker(globals, config);
-
-		const eventFn = jest.spyOn(tracker.track.cart, 'view');
-
-		const payload = {
-			items: [
-				{
-					sku: 'abc123',
-					childSku: 'abc123_a',
-					qty: '1',
-					price: '9.99',
-				},
-				{
-					sku: 'def456',
-					childSku: 'def456_a',
-					qty: '2',
-					price: '10.99',
-				},
-			],
-		};
-		const beaconEvent = await tracker.track.cart.view(payload);
-
-		expect(beaconEvent?.type).toStrictEqual(BeaconType.CART);
-		expect(beaconEvent?.category).toStrictEqual(BeaconCategory.CARTVIEW);
-		expect(beaconEvent?.event).toStrictEqual(payload);
-
-		expect(eventFn).toHaveBeenCalledTimes(1);
-		expect(eventFn).toHaveBeenCalledWith(payload);
-
-		eventFn.mockRestore();
-	});
-
-	it('can invoke track.cart.view event method without item skus', async () => {
-		const tracker = new Tracker(globals, config);
-
-		const eventFn = jest.spyOn(tracker.track.cart, 'view');
-
-		const payload = {
-			items: [
-				{
-					childSku: 'abc123_a',
-					qty: '1',
-					price: '9.99',
-				},
-				{
-					childSku: 'def456_a',
-					qty: '2',
-					price: '10.99',
-				},
-			],
-		};
-		const beaconEvent = await tracker.track.cart.view(payload);
-
-		expect(beaconEvent?.type).toStrictEqual(BeaconType.CART);
-		expect(beaconEvent?.category).toStrictEqual(BeaconCategory.CARTVIEW);
-		expect(beaconEvent?.event).toStrictEqual(payload);
-
-		expect(eventFn).toHaveBeenCalledTimes(1);
-		expect(eventFn).toHaveBeenCalledWith(payload);
-
-		eventFn.mockRestore();
-	});
-
-	it('can invoke track.cart.view event method without childSku', async () => {
-		const tracker = new Tracker(globals, config);
-
-		const eventFn = jest.spyOn(tracker.track.cart, 'view');
-
-		const payload = {
-			items: [
-				{
-					sku: 'abc123_a',
-					qty: '1',
-					price: '9.99',
-				},
-				{
-					sku: 'def456_a',
-					qty: '2',
-					price: '10.99',
-				},
-			],
-		};
-		const beaconEvent = await tracker.track.cart.view(payload);
-
-		expect(beaconEvent?.type).toStrictEqual(BeaconType.CART);
-		expect(beaconEvent?.category).toStrictEqual(BeaconCategory.CARTVIEW);
-		expect(beaconEvent?.event).toStrictEqual(payload);
-
-		expect(eventFn).toHaveBeenCalledTimes(1);
-		expect(eventFn).toHaveBeenCalledWith(payload);
-
-		eventFn.mockRestore();
-	});
-
-	it('can invoke track.cart.view event method with uid', async () => {
-		const tracker = new Tracker(globals, config);
-
-		const eventFn = jest.spyOn(tracker.track.cart, 'view');
-
-		const payload = {
-			items: [
-				{
-					uid: 'id_1',
-					qty: '1',
-					price: '9.99',
-				},
-				{
-					uid: 'id_2',
-					qty: '2',
-					price: '10.99',
-				},
-			],
-		};
-		const beaconEvent = await tracker.track.cart.view(payload);
-
-		expect(beaconEvent?.type).toStrictEqual(BeaconType.CART);
-		expect(beaconEvent?.category).toStrictEqual(BeaconCategory.CARTVIEW);
-		expect(beaconEvent?.event).toStrictEqual(payload);
-
-		expect(eventFn).toHaveBeenCalledTimes(1);
-		expect(eventFn).toHaveBeenCalledWith(payload);
-
-		eventFn.mockRestore();
-	});
-
-	it('can invoke track.cart.view event method with childUid', async () => {
-		const tracker = new Tracker(globals, config);
-
-		const eventFn = jest.spyOn(tracker.track.cart, 'view');
-
-		const payload = {
-			items: [
-				{
-					childUid: 'id_c1',
-					qty: '1',
-					price: '9.99',
-				},
-				{
-					childUid: 'id_c2',
-					qty: '2',
-					price: '10.99',
-				},
-			],
-		};
-		const beaconEvent = await tracker.track.cart.view(payload);
-
-		expect(beaconEvent?.type).toStrictEqual(BeaconType.CART);
-		expect(beaconEvent?.category).toStrictEqual(BeaconCategory.CARTVIEW);
-		expect(beaconEvent?.event).toStrictEqual(payload);
-
-		expect(eventFn).toHaveBeenCalledTimes(1);
-		expect(eventFn).toHaveBeenCalledWith(payload);
-
-		eventFn.mockRestore();
-	});
-
-	it('can invoke track.cart.view with siteId override', async () => {
-		const tracker = new Tracker(globals, config);
-		const trackEvent = jest.spyOn(tracker.track, 'event');
-		const cartView = jest.spyOn(tracker.track.cart, 'view');
-
-		const siteId = 'xxxxxx';
-		const payload = {
-			items: [
-				{
-					childSku: 'abc123_a',
-					qty: '1',
-					price: '9.99',
-				},
-				{
-					childSku: 'def456_a',
-					qty: '2',
-					price: '10.99',
-				},
-			],
-		};
-		await tracker.track.cart.view(payload, siteId);
-
-		expect(trackEvent).toHaveBeenCalledWith({
-			type: BeaconType.CART,
-			category: BeaconCategory.CARTVIEW,
-			// @ts-ignore - private property access
-			context: deepmerge(tracker.context, {
-				context: {
-					website: {
-						trackingCode: siteId,
-					},
-				},
-			}),
-			event: { ...payload },
-		});
-		expect(cartView).toHaveBeenCalledWith(payload, siteId);
-
-		cartView.mockRestore();
-		trackEvent.mockRestore();
-	});
-
-	it('logs console error if no valid items are provided to track.cart.view', async () => {
-		const tracker = new Tracker(globals, config);
-		const eventFn = jest.spyOn(tracker.track.cart, 'view');
-		const consoleError = jest.spyOn(console, 'error');
-
-		let consoleCount = 0;
-		let payload: CartViewEvent = {
-			items: [],
-		};
-		await tracker.track.cart.view(payload);
-		consoleCount++;
-
-		expect(eventFn).toHaveBeenCalledWith(payload);
-		expect(consoleError).toHaveBeenCalledTimes(consoleCount);
-
-		// without qty, price, childSku or sku
-		payload = {
-			items: [
-				// @ts-ignore
-				{
-					childSku: 'abc123_a',
-					// qty: '1',
-					price: '9.99',
-				},
-				// @ts-ignore
-				{
-					childSku: 'def456_a',
-					qty: '2',
-					// price: '10.99',
-				},
-				// @ts-ignore
-				{
-					childUid: '456_a',
-					// qty: '2',
-					price: '10.99',
-				},
-				// @ts-ignore
-				{
-					uid: '456',
-					// qty: '3',
-					price: '10.99',
-				},
-				{
-					// childSku: 'def456_a',
-					qty: '2',
-					price: '10.99',
-				},
-			],
-		};
-		await tracker.track.cart.view(payload);
-		consoleCount += payload.items.length;
-
-		expect(eventFn).toHaveBeenCalledWith(payload);
-		expect(consoleError).toHaveBeenCalledTimes(consoleCount);
-
-		consoleError.mockRestore();
-		eventFn.mockRestore();
-	});
-
-	it('can invoke track.order.transaction event method', async () => {
-		const tracker = new Tracker(globals, config);
-
-		const eventFn = jest.spyOn(tracker.track.order, 'transaction');
-
-		const payload = {
-			order: {
-				id: '123456',
-				total: '10.71',
-				transactionTotal: '9.99',
-				city: 'Los Angeles',
-				state: 'CA',
-				country: 'US',
+			config
+		);
+		await new Promise((resolve) => setTimeout(resolve, 0));
+
+		expect(tracker.storage.cart.get()).toEqual(cart);
+		expect(mockFetchApi).toHaveBeenCalledWith(expect.stringContaining('/cart/add'), expect.any(Object));
+		expect(mockFetchApi).toHaveBeenCalledWith(expect.stringContaining('/preflightCache'), expect.any(Object));
+		mockFetchApi.mockClear();
+		expect(mockFetchApi).not.toHaveBeenCalled();
+
+		// simulate updated cart with one item added
+		const newProduct = { uid: 'productUid3', childUid: 'productChildUid3', sku: 'productSku3', childSku: 'productChildSku3', qty: 3, price: 9.99 };
+		const cart2 = [...cart, newProduct];
+		tracker = new Tracker(
+			{
+				...globals,
+				cart: cart2,
 			},
-			items: [
-				{
-					uid: 'abc123',
-					sku: 'productabc123',
-					childSku: 'abc123_a',
-					qty: '1',
-					price: '9.99',
-				},
-			],
-		};
-		const beaconEvent = await tracker.track.order.transaction(payload);
+			config
+		);
+		await new Promise((resolve) => setTimeout(resolve, 0));
+		expect(tracker.storage.cart.get()).toEqual(cart2);
+		expect(mockFetchApi).toHaveBeenCalledWith(expect.stringContaining('/cart/add'), expect.any(Object));
+		expect(mockFetchApi).toHaveBeenCalledWith(expect.stringContaining('/preflightCache'), expect.any(Object));
+		mockFetchApi.mockClear();
+		expect(mockFetchApi).not.toHaveBeenCalled();
 
-		expect(beaconEvent?.type).toStrictEqual(BeaconType.ORDER);
-		expect(beaconEvent?.category).toStrictEqual(BeaconCategory.ORDERVIEW);
-		expect(beaconEvent?.event).toStrictEqual({
-			orderId: payload.order.id,
-			total: payload.order.total,
-			transactionTotal: payload.order.transactionTotal,
-			city: payload.order.city,
-			state: payload.order.state,
-			country: payload.order.country,
-			items: payload.items,
-		});
-
-		expect(eventFn).toHaveBeenCalledTimes(1);
-		expect(eventFn).toHaveBeenCalledWith(payload);
-
-		eventFn.mockRestore();
-	});
-
-	it('can invoke track.order.transaction event method with item skus', async () => {
-		const tracker = new Tracker(globals, config);
-
-		const eventFn = jest.spyOn(tracker.track.order, 'transaction');
-
-		const payload = {
-			order: {
-				id: '123456',
-				total: '10.71',
-				transactionTotal: '9.99',
-				city: 'Los Angeles',
-				state: 'CA',
-				country: 'US',
+		// simulate adding 1 quantity of existing item in cart
+		const cart3 = [
+			...cart,
+			{ uid: 'productUid3', childUid: 'productChildUid3', sku: 'productSku3', childSku: 'productChildSku3', qty: 4, price: 9.99 },
+		];
+		tracker = new Tracker(
+			{
+				...globals,
+				cart: cart3,
 			},
-			items: [
-				{
-					sku: 'abc123',
-					childSku: 'abc123_a',
-					qty: '1',
-					price: '9.99',
-				},
-			],
-		};
-		const beaconEvent = await tracker.track.order.transaction(payload);
+			config
+		);
+		await new Promise((resolve) => setTimeout(resolve, 0));
+		expect(tracker.storage.cart.get()).toEqual(cart3);
+		expect(mockFetchApi).toHaveBeenCalledWith(expect.stringContaining('/cart/add'), expect.any(Object));
+		expect(mockFetchApi).toHaveBeenCalledWith(expect.stringContaining('/preflightCache'), expect.any(Object));
+		mockFetchApi.mockClear();
+		expect(mockFetchApi).not.toHaveBeenCalled();
 
-		expect(beaconEvent?.type).toStrictEqual(BeaconType.ORDER);
-		expect(beaconEvent?.category).toStrictEqual(BeaconCategory.ORDERVIEW);
-		expect(beaconEvent?.event).toStrictEqual({
-			orderId: payload.order.id,
-			total: payload.order.total,
-			transactionTotal: payload.order.transactionTotal,
-			city: payload.order.city,
-			state: payload.order.state,
-			country: payload.order.country,
-			items: payload.items,
-		});
-
-		expect(eventFn).toHaveBeenCalledTimes(1);
-		expect(eventFn).toHaveBeenCalledWith(payload);
-
-		eventFn.mockRestore();
-	});
-
-	it('can invoke track.order.transaction event method with ONLY item uid', async () => {
-		const tracker = new Tracker(globals, config);
-
-		const eventFn = jest.spyOn(tracker.track.order, 'transaction');
-
-		const payload = {
-			order: {
-				id: '123456',
-				total: '10.71',
-				transactionTotal: '9.99',
-				city: 'Los Angeles',
-				state: 'CA',
-				country: 'US',
+		// simulate removing 1 quantity of exisiting item in cart
+		const cart4 = [
+			...cart,
+			{ uid: 'productUid3', childUid: 'productChildUid3', sku: 'productSku3', childSku: 'productChildSku3', qty: 1, price: 9.99 },
+		];
+		tracker = new Tracker(
+			{
+				...globals,
+				cart: cart4,
 			},
-			items: [
-				{
-					uid: 'abc123_id',
-					qty: '1',
-					price: '9.99',
-				},
-			],
-		};
-		const beaconEvent = await tracker.track.order.transaction(payload);
+			config
+		);
+		await new Promise((resolve) => setTimeout(resolve, 0));
+		expect(tracker.storage.cart.get()).toEqual(cart4);
+		expect(mockFetchApi).toHaveBeenCalledWith(expect.stringContaining('/cart/remove'), expect.any(Object));
+		expect(mockFetchApi).toHaveBeenCalledWith(expect.stringContaining('/preflightCache'), expect.any(Object));
+		mockFetchApi.mockClear();
+		expect(mockFetchApi).not.toHaveBeenCalled();
 
-		expect(beaconEvent?.type).toStrictEqual(BeaconType.ORDER);
-		expect(beaconEvent?.category).toStrictEqual(BeaconCategory.ORDERVIEW);
-		expect(beaconEvent?.event).toStrictEqual({
-			orderId: payload.order.id,
-			total: payload.order.total,
-			transactionTotal: payload.order.transactionTotal,
-			city: payload.order.city,
-			state: payload.order.state,
-			country: payload.order.country,
-			items: payload.items,
-		});
-
-		expect(eventFn).toHaveBeenCalledTimes(1);
-		expect(eventFn).toHaveBeenCalledWith(payload);
-
-		eventFn.mockRestore();
-	});
-
-	it('can invoke track.order.transaction event method with ONLY item childUid', async () => {
-		const tracker = new Tracker(globals, config);
-
-		const eventFn = jest.spyOn(tracker.track.order, 'transaction');
-
-		const payload = {
-			order: {
-				id: '123456',
-				total: '10.71',
-				transactionTotal: '9.99',
-				city: 'Los Angeles',
-				state: 'CA',
-				country: 'US',
+		// missing properties should not be added to cart storage, but should still send an error event
+		const cart5 = [{ uid: 'productUid3', sku: 'productSku3' }] as any;
+		tracker = new Tracker(
+			{
+				...globals,
+				cart: cart5,
 			},
-			items: [
-				{
-					childUid: 'abc123_cid',
-					qty: '1',
-					price: '9.99',
-				},
-			],
-		};
-		const beaconEvent = await tracker.track.order.transaction(payload);
+			config
+		);
+		await new Promise((resolve) => setTimeout(resolve, 0));
+		expect(tracker.storage.cart.get()).toEqual(cart4); // should be previous cart
+		expect(mockFetchApi).toHaveBeenCalledWith(expect.stringContaining('/log/snap'), expect.any(Object));
+		expect(mockFetchApi).not.toHaveBeenCalledWith(expect.stringContaining('/preflightCache'), expect.any(Object));
+		mockFetchApi.mockClear();
+		expect(mockFetchApi).not.toHaveBeenCalled();
 
-		expect(beaconEvent?.type).toStrictEqual(BeaconType.ORDER);
-		expect(beaconEvent?.category).toStrictEqual(BeaconCategory.ORDERVIEW);
-		expect(beaconEvent?.event).toStrictEqual({
-			orderId: payload.order.id,
-			total: payload.order.total,
-			transactionTotal: payload.order.transactionTotal,
-			city: payload.order.city,
-			state: payload.order.state,
-			country: payload.order.country,
-			items: payload.items,
-		});
-
-		expect(eventFn).toHaveBeenCalledTimes(1);
-		expect(eventFn).toHaveBeenCalledWith(payload);
-
-		eventFn.mockRestore();
-	});
-
-	it('logs console error if no items is provided to track.order.transaction', async () => {
-		const tracker = new Tracker(globals, config);
-		const eventFn = jest.spyOn(tracker.track.order, 'transaction');
-		const consoleError = jest.spyOn(console, 'error');
-
-		let consoleCount = 0;
-		let payload: OrderTransactionData = {
-			order: {
-				id: '123456',
-				total: '10.71',
-				transactionTotal: '9.99',
-				city: 'Los Angeles',
-				state: 'CA',
-				country: 'US',
+		// simulate removing product from cart
+		const cart6 = [...cart];
+		tracker = new Tracker(
+			{
+				...globals,
+				cart: cart6,
 			},
-			items: [],
-		};
-		// @ts-ignore
-		await tracker.track.order.transaction(payload);
-		consoleCount++;
+			config
+		);
+		await new Promise((resolve) => setTimeout(resolve, 0));
+		expect(tracker.storage.cart.get()).toEqual(cart6);
+		expect(mockFetchApi).toHaveBeenCalledWith(expect.stringContaining('/cart/remove'), expect.any(Object));
+		expect(mockFetchApi).toHaveBeenCalledWith(expect.stringContaining('/preflightCache'), expect.any(Object));
+		mockFetchApi.mockClear();
+		expect(mockFetchApi).not.toHaveBeenCalled();
 
-		expect(eventFn).toHaveBeenCalledWith(payload);
-		expect(consoleError).toHaveBeenCalledTimes(consoleCount);
-
-		// invalid items (no qty, no price, no sku or childSku)
-		payload = {
-			order: {
-				id: '123456',
-				total: '10.71',
-				transactionTotal: '9.99',
-				city: 'Los Angeles',
-				state: 'CA',
-				country: 'US',
+		expect(tracker.storage.cart.get().length).toBeGreaterThan(0);
+		// simulate removing all products from cart
+		const cart7: Product[] = [];
+		tracker = new Tracker(
+			{
+				...globals,
+				cart: cart7,
 			},
-			items: [
-				//@ts-ignore
-				{
-					sku: 'abc123',
-					childSku: 'abc123_a',
-					// qty: '1',
-					price: '9.99',
-				},
-				//@ts-ignore
-				{
-					sku: 'abc123',
-					childSku: 'abc123_a',
-					qty: '1',
-					// price: '9.99',
-				},
-				{
-					// sku: 'abc123',
-					// childSku: 'abc123_a',
-					qty: '1',
-					price: '9.99',
-				},
-			],
-		};
-		// @ts-ignore
-		await tracker.track.order.transaction(payload);
-		consoleCount += payload.items.length;
-
-		expect(eventFn).toHaveBeenCalledWith(payload);
-		expect(consoleError).toHaveBeenCalledTimes(consoleCount);
-
-		consoleError.mockRestore();
-		eventFn.mockRestore();
-	});
-
-	it('can invoke track.order.transaction with siteId override', async () => {
-		const tracker = new Tracker(globals, config);
-		const trackEvent = jest.spyOn(tracker.track, 'event');
-		const orderTransaction = jest.spyOn(tracker.track.order, 'transaction');
-
-		const siteId = 'xxxxxx';
-		const currency = 'EUR';
-		const payload = {
-			order: {
-				id: '123456',
-				total: '10.71',
-				transactionTotal: '9.99',
-				city: 'Los Angeles',
-				state: 'CA',
-				country: 'US',
-			},
-			items: [
-				{
-					sku: 'abc123',
-					childSku: 'abc123_a',
-					qty: '1',
-					price: '9.99',
-				},
-			],
-		};
-		await tracker.track.order.transaction(payload, siteId);
-
-		expect(trackEvent).toHaveBeenCalledWith({
-			type: BeaconType.ORDER,
-			category: BeaconCategory.ORDERVIEW,
-			// @ts-ignore - private property access
-			context: deepmerge(tracker.context, {
-				context: {
-					website: {
-						trackingCode: siteId,
-					},
-				},
-			}),
-			event: {
-				orderId: payload.order.id,
-				total: payload.order.total,
-				transactionTotal: payload.order.transactionTotal,
-				city: payload.order.city,
-				state: payload.order.state,
-				country: payload.order.country,
-				items: payload.items,
-			},
-		});
-		expect(orderTransaction).toHaveBeenCalledWith(payload, siteId);
-
-		orderTransaction.mockRestore();
-		trackEvent.mockRestore();
-	});
-
-	it('can invoke generic track.event method', async () => {
-		const tracker = new Tracker(globals, config);
-
-		const eventFn = jest.spyOn(tracker.track, 'event');
-
-		const payload = {
-			type: BeaconType.CUSTOM,
-			category: BeaconCategory.CUSTOM,
-			event: {
-				custom: '123',
-			},
-		};
-		const beaconEvent = await tracker.track.event(payload);
-
-		expect(beaconEvent?.type).toStrictEqual(BeaconType.CUSTOM);
-		expect(beaconEvent?.category).toStrictEqual(BeaconCategory.CUSTOM);
-		expect(beaconEvent?.event).toStrictEqual(payload.event);
-
-		expect(eventFn).toHaveBeenCalledTimes(1);
-		expect(eventFn).toHaveBeenCalledWith(payload);
-
-		eventFn.mockRestore();
-	});
-
-	it('can invoke track.error method', async () => {
-		const tracker = new Tracker(globals, config);
-
-		const eventFn = jest.spyOn(tracker.track, 'error');
-
-		const payload: TrackErrorEvent = {
-			href: 'https://www.test.com/',
-			filename: 'https://snapui.searchspring.io/test.js',
-			stack: '',
-			message: 'something went wrong!',
-			colno: 1,
-			lineno: 1,
-			errortimestamp: 1,
-		};
-		const beaconEvent = await tracker.track.error(payload);
-
-		expect(beaconEvent?.type).toStrictEqual(BeaconType.ERROR);
-		expect(beaconEvent?.category).toStrictEqual(BeaconCategory.RUNTIME);
-		expect(beaconEvent?.event).toEqual(payload);
-
-		expect(eventFn).toHaveBeenCalledTimes(1);
-		expect(eventFn).toHaveBeenCalledWith(payload);
-
-		eventFn.mockRestore();
-	});
-
-	it('can invoke cookies.cart.set', async () => {
-		// Tracker.ts itself does not use cookies.cart.set however Snap.tsx does
-
-		const tracker = new Tracker(globals, config);
-		const trackEvent = jest.spyOn(tracker.cookies.cart, 'set');
-
-		// first add products to cart
-		const skus = ['abc123', 'def456', 'ghi789'];
-		tracker.cookies.cart.set(skus);
-		expect(global.document.cookie).toContain(`ssCartProducts=${encodeURIComponent(skus.join(','))}`);
-
-		expect(trackEvent).toHaveBeenCalledTimes(1);
-		expect(global.document.cookie).toContain(`${skus[0]}`);
-		expect(global.document.cookie).toContain(`${skus[1]}`);
-		expect(global.document.cookie).toContain(`${skus[2]}`);
-
-		trackEvent.mockRestore();
-	});
-
-	it('can use updateContext to add attribution to context', async () => {
-		const tracker = new Tracker(globals, config);
-
-		// @ts-ignore - private property access
-		expect(tracker.context).not.toHaveProperty('attribution');
-
-		const attribution = {
-			type: 'email',
-			id: 'emailTag',
-		};
-
-		tracker.updateContext('attribution', attribution);
-
-		// @ts-ignore - private property access
-		expect(tracker.context).toHaveProperty('attribution', attribution);
-	});
-
-	it('can use doNotTrack to exclude certain events', async () => {
-		const modifiedConfig = {
-			...config,
-			doNotTrack: [
-				{
-					type: BeaconType.PRODUCT,
-					category: BeaconCategory.PAGEVIEW,
-				},
-			],
-		};
-
-		const tracker = new Tracker(globals, modifiedConfig);
-		const trackEvent = jest.spyOn(tracker.track, 'event');
-
-		tracker.track.product.view({ sku: 'abc123' });
-
-		expect(trackEvent).toHaveBeenCalled();
-		expect(trackEvent).toHaveReturnedWith(undefined);
+			config
+		);
+		await new Promise((resolve) => setTimeout(resolve, 0));
+		expect(tracker.storage.cart.get()).toEqual(cart7);
+		expect(mockFetchApi).toHaveBeenCalledWith(expect.stringContaining('/cart/remove'), expect.any(Object));
+		expect(mockFetchApi).toHaveBeenCalledWith(expect.stringContaining('/preflightCache'), expect.any(Object));
+		mockFetchApi.mockClear();
+		expect(mockFetchApi).not.toHaveBeenCalled();
 	});
 });

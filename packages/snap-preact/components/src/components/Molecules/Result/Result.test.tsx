@@ -29,6 +29,17 @@ const mockResults = new SearchResultStore({
 });
 
 describe('Result Component', () => {
+	beforeEach(() => {
+		// IntersectionObserver isn't available in test environment
+		const mockIntersectionObserver = jest.fn();
+		mockIntersectionObserver.mockReturnValue({
+			observe: () => null,
+			unobserve: () => null,
+			disconnect: () => null,
+		});
+		window.IntersectionObserver = mockIntersectionObserver;
+	});
+
 	it('renders', () => {
 		const rendered = render(<Result result={mockResults[0] as Product} />);
 		const resultElement = rendered.container.querySelector('.ss__result');

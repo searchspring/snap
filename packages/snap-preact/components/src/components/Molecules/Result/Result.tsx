@@ -1,5 +1,5 @@
 import { Fragment, h } from 'preact';
-
+import { Ref, useState } from 'preact/hooks';
 import { observer } from 'mobx-react-lite';
 import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
@@ -18,7 +18,6 @@ import { Rating, RatingProps } from '../Rating';
 import { Button, ButtonProps } from '../../Atoms/Button';
 import deepmerge from 'deepmerge';
 import { Lang, useLang } from '../../../hooks';
-import { useState } from 'preact/hooks';
 
 const defaultStyles: StyleScript<ResultProps> = () => {
 	return css({
@@ -113,6 +112,7 @@ export const Result = observer((properties: ResultProps): JSX.Element => {
 		addToCartButtonSuccessText,
 		addToCartButtonSuccessTimeout,
 		hideRating,
+		trackingRef,
 		treePath,
 	} = props;
 
@@ -232,13 +232,16 @@ export const Result = observer((properties: ResultProps): JSX.Element => {
 
 	return core ? (
 		<CacheProvider>
-			<article {...styling} className={classnames('ss__result', `ss__result--${layout}`, { 'ss__result--sale': isOnSale }, className)}>
+			<article
+				{...styling}
+				className={classnames('ss__result', `ss__result--${layout}`, { 'ss__result--sale': isOnSale }, className)}
+				ref={trackingRef}
+			>
 				<div className="ss__result__image-wrapper">
 					<a
 						href={core!.url}
 						onClick={(e: React.MouseEvent<HTMLAnchorElement, Event>) => {
 							onClick && onClick(e);
-							controller?.track?.product?.click(e as any, result);
 						}}
 					>
 						{!hideImage &&
@@ -268,7 +271,6 @@ export const Result = observer((properties: ResultProps): JSX.Element => {
 								href={core.url}
 								onClick={(e: React.MouseEvent<HTMLAnchorElement, Event>) => {
 									onClick && onClick(e);
-									controller?.track?.product?.click(e as any, result);
 								}}
 								dangerouslySetInnerHTML={{
 									__html: displayName || '',
@@ -342,6 +344,7 @@ export interface ResultProps extends ComponentProps {
 	onClick?: (e: React.MouseEvent<HTMLAnchorElement, Event>) => void;
 	controller?: SearchController | AutocompleteController | RecommendationController;
 	lang?: Partial<ResultLang>;
+	trackingRef?: Ref<HTMLElement | null>;
 }
 
 export interface ResultLang {

@@ -16,8 +16,6 @@ export * from './components/Atoms/PaginationInfo';
 export * from './components/Atoms/Price';
 export * from './components/Atoms/SearchHeader';
 export * from './components/Atoms/Skeleton';
-export * from './components/Atoms/TemplateSelect';
-// export * from './components/Atoms/Toggle';
 
 // MOLECULES
 export * from './components/Molecules/CalloutBadge';
@@ -36,7 +34,6 @@ export * from './components/Molecules/List';
 export * from './components/Molecules/LoadMore';
 export * from './components/Molecules/Grid';
 export * from './components/Molecules/List';
-export * from './components/Molecules/Modal';
 export * from './components/Molecules/OverlayBadge';
 export * from './components/Molecules/Pagination';
 export * from './components/Molecules/PerPage';
@@ -78,12 +75,16 @@ export * from './components/Templates/RecommendationEmail';
 export * from './components/Templates/Search';
 export * from './components/Templates/SearchHorizontal';
 
-// TRACKERS
-export * from './components/Trackers/Recommendation/ProfileTracker';
-export * from './components/Trackers/Recommendation/ResultTracker';
-
 // TYPES
 export * from './types';
+
+// TRACKERS
+export * from './components/Trackers/Recommendation/ProfileTracker';
+export * from './components/Trackers/ResultTracker';
+export {
+	ResultTracker as RecommendationResultTracker,
+	ResultTrackerProps as RecommendationResultTrackerProps,
+} from './components/Trackers/ResultTracker';
 
 // HOOKS
 export * from './hooks';

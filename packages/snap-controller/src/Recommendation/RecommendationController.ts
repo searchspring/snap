@@ -1,28 +1,29 @@
 import deepmerge from 'deepmerge';
 
-import { BeaconType, BeaconCategory, BeaconPayload, ProfilePlacement } from '@searchspring/snap-tracker';
 import { ErrorType, Product } from '@searchspring/snap-store-mobx';
-import { BeaconEvent } from '@searchspring/snap-tracker';
 import { AbstractController } from '../Abstract/AbstractController';
 import { ControllerTypes } from '../types';
-import type { ProductViewEvent } from '@searchspring/snap-tracker';
+import {
+	type Item,
+	type Product as BeaconProduct,
+	type RecommendationsAddtocartSchemaData,
+	type RecommendationsSchemaData,
+	ItemTypeEnum,
+} from '@searchspring/beacon';
 import type { RecommendationStore } from '@searchspring/snap-store-mobx';
-import type { Next } from '@searchspring/snap-event-manager';
 import type { RecommendRequestModel } from '@searchspring/snap-client';
-import type { RecommendationControllerConfig, AfterStoreObj, ControllerServices, ContextVariables } from '../types';
+import type { RecommendationControllerConfig, ControllerServices, ContextVariables, AfterStoreObj } from '../types';
+import type { Next } from '@searchspring/snap-event-manager';
+import { CLICK_DUPLICATION_TIMEOUT, isClickWithinProductLink } from '../utils/isClickWithinProductLink';
 
 type RecommendationTrackMethods = {
 	product: {
-		click: (e: MouseEvent, result: Product) => BeaconEvent | undefined;
-		render: (result: Product) => BeaconEvent | undefined;
-		impression: (result: Product) => BeaconEvent | undefined;
-		removedFromBundle: (result: Product) => BeaconEvent | undefined;
-		addedToBundle: (result: Product) => BeaconEvent | undefined;
+		clickThrough: (e: MouseEvent, result: Product) => void;
+		click: (e: MouseEvent, result: Product) => void;
+		render: (result: Product) => void;
+		impression: (result: Product) => void;
+		addToCart: (result: Product) => void;
 	};
-	click: (e: MouseEvent) => BeaconEvent | undefined;
-	addBundle: (e: MouseEvent, results: Product[]) => BeaconEvent | undefined;
-	impression: () => BeaconEvent | undefined;
-	render: (results?: Product[]) => BeaconEvent | undefined;
 };
 
 const defaultConfig: RecommendationControllerConfig = {
@@ -39,14 +40,16 @@ export class RecommendationController extends AbstractController {
 	declare config: RecommendationControllerConfig;
 
 	events: {
-		click?: BeaconEvent;
-		impression?: BeaconEvent;
-		render?: BeaconEvent;
-		product?: Record<string, { impression?: BeaconEvent; render?: BeaconEvent }>;
+		product: Record<
+			string,
+			{
+				click?: boolean;
+				clickThrough?: boolean;
+				impression?: boolean;
+				render?: boolean;
+			}
+		>;
 	} = {
-		click: undefined,
-		impression: undefined,
-		render: undefined,
 		product: {},
 	};
 
@@ -75,325 +78,100 @@ export class RecommendationController extends AbstractController {
 		this.config = deepmerge(defaultConfig, this.config);
 		this.store.setConfig(this.config);
 
-		// add 'afterStore' middleware
-		this.eventManager.on('afterStore', async (recommend: AfterStoreObj, next: Next): Promise<void | boolean> => {
+		this.eventManager.on('afterStore', async (search: AfterStoreObj, next: Next): Promise<void | boolean> => {
 			await next();
-
-			// attach tracking events to cart store
-			this.store.cart?.on('addItems', ({ items }: { items: Product[] }) => {
-				items.forEach((item) => {
-					this.track.product.addedToBundle(item);
+			const controller = search.controller as RecommendationController;
+			if (controller.store.loaded && !controller.store.error) {
+				const products = controller.store.results.filter((result) => result.type === 'product') as Product[];
+				const results = products.length === 0 ? [] : products;
+				const data = getRecommendationsSchemaData({ store: this.store, results });
+				if (!search.response._cached) {
+					this.tracker.events.recommendations.render({ data, siteId: this.config.globals?.siteId });
+				}
+				products.forEach((result) => {
+					this.events.product[result.id] = this.events.product[result.id] || {};
+					this.events.product[result.id].render = true;
+					if (!search.response._cached) {
+						this.eventManager.fire('track.product.render', { controller: this, product: result, trackEvent: data });
+					}
 				});
-			});
-
-			this.store.cart?.on('removeItems', ({ items }: { items: Product[] }) => {
-				items.forEach((item) => {
-					this.track.product.removedFromBundle(item);
-				});
-			});
+			}
 		});
+
+		// add 'afterStore' middleware
+		// this.eventManager.on('afterStore', async (recommend: AfterStoreObj, next: Next): Promise<void | boolean> => {
+		// 	await next();
+
+		// 	// attach tracking events to cart store
+		// 	this.store.cart?.on('addItems', ({ items }: { items: Product[] }) => {
+		// 		// add to bundle
+		// 	});
+
+		// 	this.store.cart?.on('removeItems', ({ items }: { items: Product[] }) => {
+		// 		// remove from bundle
+		// 	});
+		// });
 
 		// attach config plugins and event middleware
 		this.use(this.config);
 	}
 
-	track: RecommendationTrackMethods = (() => {
-		const getSeed = (): Array<ProductViewEvent> | undefined => {
-			let skus: Array<string> = [];
-			switch (this.store.profile.placement) {
-				case ProfilePlacement.PRODUCTPAGE:
-					if (this.config.globals?.product) {
-						skus = [this.config.globals?.product];
-					} else if (this.config.globals?.products) {
-						skus = this.config.globals?.products;
-					}
-					break;
-				case ProfilePlacement.BASKETPAGE:
-					skus = this.tracker.cookies.cart.get(); // this is an array
-					break;
-				default:
+	track: RecommendationTrackMethods = {
+		product: {
+			clickThrough: (e: MouseEvent, result): void => {
+				if (this.events.product[result.id]?.clickThrough) return;
+
+				const data = getRecommendationsSchemaData({ store: this.store, results: [result] });
+				this.tracker.events.recommendations.clickThrough({ data, siteId: this.config.globals?.siteId });
+				this.events.product[result.id] = this.events.product[result.id] || {};
+				this.events.product[result.id].clickThrough = true;
+				this.eventManager.fire('track.product.clickThrough', { controller: this, event: e, product: result, trackEvent: data });
+			},
+			click: (e: MouseEvent, result): void => {
+				if (this.events.product[result.id]?.click) {
 					return;
-			}
-			if (skus.length) {
-				return skus.map((sku: string) => ({
-					sku,
-				}));
-			}
-		};
+				}
 
-		return {
-			product: {
-				click: (e: MouseEvent, result): BeaconEvent | undefined => {
-					if (!this.store.profile.tag || !result) return;
+				if (result.type === 'banner') {
+					return;
+				}
 
-					//set the profile click every time
-					this.track.click(e);
+				isClickWithinProductLink(e, result as Product) && this.track.product.clickThrough(e, result as Product);
 
-					const payload: BeaconPayload = {
-						type: BeaconType.PROFILE_PRODUCT_CLICK,
-						category: BeaconCategory.RECOMMENDATIONS,
-						context: this.config.globals?.siteId ? { website: { trackingCode: this.config.globals?.siteId } } : undefined,
-						event: {
-							context: {
-								action: 'navigate',
-								placement: this.store.profile.placement,
-								tag: this.store.profile.tag,
-								type: 'product-recommendation',
-							},
-							product: {
-								id: result.id,
-								mappings: {
-									core: result.mappings.core,
-								},
-								seed: getSeed(),
-							},
-						},
-						pid: this.events.click?.id,
-					};
-
-					const event = this.tracker.track.event(payload);
-					this.eventManager.fire('track.product.click', { controller: this, event: e, result, trackEvent: event });
-					return event;
-				},
-				impression: (result): BeaconEvent | undefined => {
-					if (!this.store.profile.tag || !result || !this.events.impression || (this.events.product && this.events.product[result.id]?.impression))
-						return;
-					const payload: BeaconPayload = {
-						type: BeaconType.PROFILE_PRODUCT_IMPRESSION,
-						category: BeaconCategory.RECOMMENDATIONS,
-						context: this.config.globals?.siteId ? { website: { trackingCode: this.config.globals?.siteId } } : undefined,
-						event: {
-							context: {
-								placement: this.store.profile.placement,
-								tag: this.store.profile.tag,
-								type: 'product-recommendation',
-							},
-							product: {
-								id: result.id,
-								mappings: {
-									core: result.mappings.core,
-								},
-								seed: getSeed(),
-							},
-						},
-						pid: this.events.impression.id,
-					};
-
-					this.events.product![result.id] = this.events.product![result.id] || {};
-					const event = (this.events.product![result.id].impression = this.tracker.track.event(payload));
-					this.eventManager.fire('track.product.impression', { controller: this, result, trackEvent: event });
-					return event;
-				},
-				render: (result): BeaconEvent | undefined => {
-					if (!this.store.profile.tag || !result || !this.events.render || this.events.product![result.id]?.render) return;
-					const payload: BeaconPayload = {
-						type: BeaconType.PROFILE_PRODUCT_RENDER,
-						category: BeaconCategory.RECOMMENDATIONS,
-						context: this.config.globals?.siteId ? { website: { trackingCode: this.config.globals?.siteId } } : undefined,
-						event: {
-							context: {
-								placement: this.store.profile.placement,
-								tag: this.store.profile.tag,
-								type: 'product-recommendation',
-							},
-							product: {
-								id: result.id,
-								mappings: {
-									core: result.mappings.core,
-								},
-								seed: getSeed(),
-							},
-						},
-						pid: this.events.render.id,
-					};
-
-					this.events.product![result.id] = this.events.product![result.id] || {};
-					const event = (this.events.product![result.id].render = this.tracker.track.event(payload));
-					this.eventManager.fire('track.product.render', { controller: this, result, trackEvent: event });
-					return event;
-				},
-				removedFromBundle: (result): BeaconEvent | undefined => {
-					if (
-						!this.store.profile.tag ||
-						!result ||
-						!this.events.render ||
-						!this.events.product![result.id]?.render ||
-						this.store.profile.type != 'bundle'
-					)
-						return;
-					const payload: BeaconPayload = {
-						type: BeaconType.PROFILE_PRODUCT_REMOVEDFROMBUNDLE,
-						category: BeaconCategory.RECOMMENDATIONS,
-						context: this.config.globals?.siteId ? { website: { trackingCode: this.config.globals?.siteId } } : undefined,
-						event: {
-							context: {
-								placement: this.store.profile.placement,
-								tag: this.store.profile.tag,
-								type: 'product-recommendation',
-							},
-							product: {
-								id: result.id,
-								mappings: {
-									core: result.mappings.core,
-								},
-								seed: getSeed(),
-							},
-						},
-						pid: this.events.click?.id,
-					};
-
-					this.events.product![result.id] = this.events.product![result.id] || {};
-					const event = (this.events.product![result.id].render = this.tracker.track.event(payload));
-					this.eventManager.fire('track.product.removedFromBundle', { controller: this, result, trackEvent: event });
-					return event;
-				},
-				addedToBundle: (result): BeaconEvent | undefined => {
-					if (
-						!this.store.profile.tag ||
-						!result ||
-						!this.events.render ||
-						!this.events.product![result.id]?.render ||
-						this.store.profile.type != 'bundle'
-					)
-						return;
-					const payload: BeaconPayload = {
-						type: BeaconType.PROFILE_PRODUCT_ADDEDTOBUNDLE,
-						category: BeaconCategory.RECOMMENDATIONS,
-						context: this.config.globals?.siteId ? { website: { trackingCode: this.config.globals?.siteId } } : undefined,
-						event: {
-							context: {
-								placement: this.store.profile.placement,
-								tag: this.store.profile.tag,
-								type: 'product-recommendation',
-							},
-							product: {
-								id: result.id,
-								mappings: {
-									core: result.mappings.core,
-								},
-								seed: getSeed(),
-							},
-						},
-						pid: this.events.click?.id,
-					};
-
-					this.events.product![result.id] = this.events.product![result.id] || {};
-					const event = (this.events.product![result.id].render = this.tracker.track.event(payload));
-					this.eventManager.fire('track.product.addedToBundle', { controller: this, result, trackEvent: event });
-					return event;
-				},
+				this.events.product[result.id] = this.events.product[result.id] || {};
+				this.events.product[result.id].click = true;
+				setTimeout(() => {
+					this.events.product[result.id].click = false;
+				}, CLICK_DUPLICATION_TIMEOUT);
 			},
-			addBundle: (e: MouseEvent, results: Product[]): BeaconEvent | undefined => {
-				if (!results.length || !this.store.profile.tag || this.store.profile.type != 'bundle') return;
-				const event: BeaconEvent | undefined = this.tracker.track.event({
-					type: BeaconType.PROFILE_ADDBUNDLE,
-					category: BeaconCategory.RECOMMENDATIONS,
-					context: this.config.globals?.siteId ? { website: { trackingCode: this.config.globals?.siteId } } : undefined,
-					event: {
-						context: {
-							placement: this.store.profile.placement,
-							tag: this.store.profile.tag,
-							type: 'product-recommendation',
-						},
-						products: results.map((result) => ({
-							id: result.id,
-							mappings: {
-								core: result.mappings.core,
-							},
-							quantity: result.quantity,
-						})),
-						profile: {
-							tag: this.store.profile.tag,
-							placement: this.store.profile.placement,
-							threshold: this.store.profile.display.threshold,
-							templateId: this.store.profile.display.template.uuid,
-							seed: getSeed(),
-						},
-					},
-				});
-				this.eventManager.fire('track.addBundle', { controller: this, event: e, trackEvent: event });
-				return event;
-			},
-			click: (e: MouseEvent): BeaconEvent | undefined => {
-				if (!this.store.profile.tag) return;
-				const event: BeaconEvent | undefined = this.tracker.track.event({
-					type: BeaconType.PROFILE_CLICK,
-					category: BeaconCategory.RECOMMENDATIONS,
-					context: this.config.globals?.siteId ? { website: { trackingCode: this.config.globals?.siteId } } : undefined,
-					event: {
-						context: {
-							action: 'navigate',
-							placement: this.store.profile.placement,
-							tag: this.store.profile.tag,
-							type: 'product-recommendation',
-						},
-						profile: {
-							tag: this.store.profile.tag,
-							placement: this.store.profile.placement,
-							threshold: this.store.profile.display.threshold,
-							templateId: this.store.profile.display.template.uuid,
-							seed: getSeed(),
-						},
-					},
-				});
-				this.events.click = event;
-				this.eventManager.fire('track.click', { controller: this, event: e, trackEvent: event });
-				return event;
-			},
-			impression: (): BeaconEvent | undefined => {
-				if (!this.store.profile.tag || this.events.impression) return;
-				const event: BeaconEvent | undefined = this.tracker.track.event({
-					type: BeaconType.PROFILE_IMPRESSION,
-					category: BeaconCategory.RECOMMENDATIONS,
-					context: this.config.globals?.siteId ? { website: { trackingCode: this.config.globals?.siteId } } : undefined,
-					event: {
-						context: {
-							placement: this.store.profile.placement,
-							tag: this.store.profile.tag,
-							type: 'product-recommendation',
-						},
-						profile: {
-							tag: this.store.profile.tag,
-							placement: this.store.profile.placement,
-							threshold: this.store.profile.display.threshold,
-							templateId: this.store.profile.display.template.uuid,
-							seed: getSeed(),
-						},
-					},
-				});
-				this.events.impression = event;
-				this.eventManager.fire('track.impression', { controller: this, trackEvent: event });
-				return event;
-			},
-			render: (): BeaconEvent | undefined => {
-				if (!this.store.profile.tag || this.events.render) return;
-				const event: BeaconEvent | undefined = this.tracker.track.event({
-					type: BeaconType.PROFILE_RENDER,
-					category: BeaconCategory.RECOMMENDATIONS,
-					context: this.config.globals?.siteId ? { website: { trackingCode: this.config.globals?.siteId } } : undefined,
-					event: {
-						context: {
-							placement: this.store.profile.placement,
-							tag: this.store.profile.tag,
-							type: 'product-recommendation',
-						},
-						profile: {
-							tag: this.store.profile.tag,
-							placement: this.store.profile.placement,
-							threshold: this.store.profile.display.threshold,
-							templateId: this.store.profile.display.template.uuid,
-							seed: getSeed(),
-						},
-					},
-				});
+			impression: (result): RecommendationsSchemaData | undefined => {
+				if (this.events.product[result.id]?.impression || !this.events.product[result.id]?.render) return;
 
-				this.events.render = event;
-
-				this.eventManager.fire('track.render', { controller: this, trackEvent: event });
-				return event;
+				const data = getRecommendationsSchemaData({ store: this.store, results: [result] });
+				this.tracker.events.recommendations.impression({ data, siteId: this.config.globals?.siteId });
+				this.events.product[result.id] = this.events.product[result.id] || {};
+				this.events.product[result.id].impression = true;
+				this.eventManager.fire('track.product.impression', { controller: this, product: result, trackEvent: data });
+				return data;
 			},
-		} as RecommendationTrackMethods;
-	})();
+			render: (result: Product): RecommendationsSchemaData | undefined => {
+				if (this.events.product[result.id]?.render) return;
+
+				const data = getRecommendationsSchemaData({ store: this.store, results: [result] });
+				this.tracker.events.recommendations.render({ data, siteId: this.config.globals?.siteId });
+				this.events.product[result.id] = this.events.product[result.id] || {};
+				this.events.product[result.id].render = true;
+				this.eventManager.fire('track.product.render', { controller: this, product: result, trackEvent: data });
+				return data;
+			},
+			addToCart: (result: Product): RecommendationsAddtocartSchemaData | undefined => {
+				const data = getRecommendationsAddtocartSchemaData({ store: this.store, results: [result] });
+				this.tracker.events.recommendations.addToCart({ data, siteId: this.config.globals?.siteId });
+				this.eventManager.fire('track.product.addToCart', { controller: this, product: result, trackEvent: data });
+				return data;
+			},
+		},
+	};
 
 	get params(): RecommendRequestModel {
 		const params = {
@@ -404,15 +182,16 @@ export class RecommendationController extends AbstractController {
 			...this.config.globals,
 		};
 
-		const shopperId = this.tracker.getContext().shopperId;
-		const cart = this.tracker.cookies.cart.get();
-		const lastViewed = this.tracker.cookies.viewed.get();
+		const { shopperId } = this.tracker.getContext();
 
 		if (shopperId) {
 			params.shopper = shopperId;
 		}
 
 		if (!params.siteId || params.siteId == this.tracker.getGlobals().siteId) {
+			const cart = this.tracker.cookies.cart.get();
+			const lastViewed = this.tracker.cookies.viewed.get();
+
 			if (cart?.length) {
 				params.cart = cart;
 			}
@@ -431,6 +210,9 @@ export class RecommendationController extends AbstractController {
 			}
 
 			const params = this.params;
+
+			// reset events for new search
+			this.events = { product: {} };
 
 			this.store.loading = true;
 
@@ -548,14 +330,51 @@ export class RecommendationController extends AbstractController {
 		}
 	};
 
-	addToCart = async (products: Product[]): Promise<void> => {
-		const eventContext = {
-			controller: this,
-			products: products,
-		};
+	addToCart = async (_products: Product[] | Product): Promise<void> => {
+		const products = typeof (_products as Product[]).slice == 'function' ? (_products as Product[]).slice() : [_products];
+		(products as Product[]).forEach((product) => {
+			this.track.product.addToCart(product);
+		});
+		if (products.length > 0) {
+			this.eventManager.fire('addToCart', { controller: this, products });
+		}
+	};
+}
+function getRecommendationsAddtocartSchemaData({
+	store,
+	results,
+}: {
+	store: RecommendationStore;
+	results?: Product[];
+}): RecommendationsAddtocartSchemaData {
+	return {
+		tag: store.profile.tag,
+		results:
+			results?.map((result: Product): BeaconProduct => {
+				const core = (result as Product).mappings.core;
+				return {
+					uid: core?.uid || '',
+					sku: core?.sku,
+					price: Number(core?.price),
+					qty: result.quantity || 1,
+				};
+			}) || [],
+	};
+}
 
-		this.eventManager.fire('addToCart', eventContext);
-
-		// TODO: fire some future beacon event
+function getRecommendationsSchemaData({ store, results }: { store: RecommendationStore; results?: Product[] }): RecommendationsSchemaData {
+	return {
+		tag: store.profile.tag,
+		results:
+			results?.map((result: Product): Item => {
+				const core = result.mappings.core!;
+				const position = result.position;
+				return {
+					type: ItemTypeEnum.Product,
+					position,
+					uid: core.uid || '',
+					sku: core.sku,
+				};
+			}) || [],
 	};
 }

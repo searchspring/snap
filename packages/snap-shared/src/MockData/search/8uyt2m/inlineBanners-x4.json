@@ -516,7 +516,9 @@
         "title": "inline banners",
         "type": "landing-page"
       }
-    ]
+    ],
+    "experiments": [],
+    "personalized": false
   },
   "search": {
     "query": ""

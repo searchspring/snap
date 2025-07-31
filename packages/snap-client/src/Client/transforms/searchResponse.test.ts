@@ -185,6 +185,7 @@ const mockMerchandising = {
 	redirect: 'https://www.thechivery.com/collections/bill-murray',
 	is_elevated: [],
 	elevated: [],
+	experiments: [],
 	removed: [
 		'5e3baeabe61f5a957b7a674f18e265d0',
 		'fff8931dc9c670a8d4268c277f10aae4',
@@ -358,17 +359,19 @@ describe('search response transformer pagination', () => {
 
 describe('search response transformer result', () => {
 	it('builds response format', () => {
-		const result = transformSearchResponse.result(mockSingleResult);
+		const resultIndex = 123;
+		const result = transformSearchResponse.result(mockSingleResult, resultIndex);
 
 		expect(result.id).toEqual(mockSingleResult.uid);
 
 		expect(typeof result.mappings).toEqual('object');
 		expect(typeof result.mappings?.core).toEqual('object');
 		expect(typeof result.attributes).toEqual('object');
+		expect(result.position).toEqual(resultIndex + 1);
 	});
 
 	it('builds core fields', () => {
-		const result = transformSearchResponse.result(mockSingleResult);
+		const result = transformSearchResponse.result(mockSingleResult, 0);
 
 		// TODO: Add all core fields
 
@@ -383,7 +386,7 @@ describe('search response transformer result', () => {
 	});
 
 	it('leaves core fields out of attributes', () => {
-		const result = transformSearchResponse.result(mockSingleResult);
+		const result = transformSearchResponse.result(mockSingleResult, 0);
 
 		// TODO: Add all core fields
 
@@ -398,7 +401,7 @@ describe('search response transformer result', () => {
 	});
 
 	it('builds attributes', () => {
-		const result = transformSearchResponse.result(mockSingleResult);
+		const result = transformSearchResponse.result(mockSingleResult, 0);
 
 		expect(result.attributes?.ss_in_stock).toEqual('In Stock');
 		expect(result.attributes?.handle).toEqual('over-this-shit-face-mask');
@@ -452,17 +455,17 @@ describe('search response transformer result', () => {
 			},
 		};
 
-		const result = transformSearchResponse.result(resultWithBadgeFeature);
+		const result = transformSearchResponse.result(resultWithBadgeFeature, 0);
 		expect(result.attributes?.badges).toBeUndefined();
 		expect(result.badges).toEqual(resultWithBadgeFeature.badges);
 
 		// @ts-ignore - typings are wrong intentionally here
-		const result2 = transformSearchResponse.result(resultWithRandomBadgeField);
+		const result2 = transformSearchResponse.result(resultWithRandomBadgeField, 0);
 		expect(result2.attributes?.badges).toEqual(resultWithRandomBadgeField.badges);
 		expect(result2.badges).toEqual([]);
 
 		// @ts-ignore - typings are wrong intentionally here
-		const result3 = transformSearchResponse.result(resultWithRandomBadgeField2);
+		const result3 = transformSearchResponse.result(resultWithRandomBadgeField2, 0);
 		expect(result3.badges).toEqual([]);
 		expect(result3.attributes?.badges).toEqual('[object Object]');
 	});
@@ -621,6 +624,7 @@ describe('search response merch transformer', () => {
 		expect(response.merchandising).toEqual({
 			redirect: mockMerchandising.redirect,
 			content: mockMerchandising.content,
+			experiments: mockMerchandising.experiments,
 			personalized: mockMerchandising.personalized,
 			campaigns: mockMerchandising.campaigns,
 		});

@@ -379,6 +379,11 @@ describe('MobileSidebar Component', () => {
 	});
 
 	it('clear button clears filters', async () => {
+		controller.urlManager
+			.reset()
+			.set('filter', { color: ['blue'], price: { low: 20, high: 30 } })
+			.go();
+
 		const rendered = render(<MobileSidebar controller={controller} />);
 		const slideoutButton = rendered.container.querySelector('.ss__mobile-sidebar__slideout__button');
 		userEvent.click(slideoutButton!);
@@ -393,8 +398,6 @@ describe('MobileSidebar Component', () => {
 		mockClient.mockData.updateConfig({ search: 'default' });
 
 		userEvent.click(clearButton!);
-
-		await controller.search();
 
 		await waitFor(() => {
 			expect(controller.store.filters.length).toBe(0);

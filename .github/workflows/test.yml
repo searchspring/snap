@@ -14,7 +14,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 20
     steps:
-      - name: Checkout repositiory
+      - name: Checkout repository
         uses: actions/checkout@v2
 
       - name: Set Github Credentials

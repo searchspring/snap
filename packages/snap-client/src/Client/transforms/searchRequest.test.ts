@@ -1,6 +1,6 @@
 import { SearchRequestModelFilterValue, SearchRequestModelFilterRange, SearchRequestModelFilter } from '@searchspring/snapi-types';
 
-import { transformSearchRequest } from './searchRequest';
+import { NO_BEACON_PARAM, transformSearchRequest } from './searchRequest';
 
 const mockRequest = {
 	sorts: [{ field: 'name', direction: 'asc' as any }],
@@ -15,7 +15,7 @@ describe('search request transformer', () => {
 	it('returns search params merged from transformed request', () => {
 		const searchRequest = transformSearchRequest(mockRequest);
 
-		expect(Object.keys(searchRequest)).toEqual(['q', 'sort.name']);
+		expect(Object.keys(searchRequest)).toEqual(['q', 'sort.name', NO_BEACON_PARAM]);
 	});
 });
 
