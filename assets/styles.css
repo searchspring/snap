@@ -17,7 +17,7 @@ body {
 }
 
 #search-container {
-	color: hsl(247deg 67% 33%);
+	color: #1D4990;
     padding: 0px 20px 0px 20px;
     margin: 0;
 	margin-bottom: 20px;
@@ -25,7 +25,7 @@ body {
 
 a {
 	text-decoration: none;
-	color: #4c3ce2;
+	color: #00AEEF;
 }
 
 a:hover {
@@ -45,7 +45,7 @@ table {
 }
 
 table thead {
-	background-color: #00cee1;
+	background-color: #00AEEF;
 	color: #ffffff;
 	text-transform: uppercase;
 	font-size: 0.9em;
@@ -127,15 +127,15 @@ table td {
 
 #navigation ul li a.active {
 	font-weight: bold;
-	color: #4937d7;
+	color: #00AEEF;
 }
 
 #navigation .sublinks li a.active {
-	color: hsl(185deg 97% 35%);
+	color: #00AEEF;
 }
 
 #navigation h3 {
-	color: hsl(247deg 67% 33%);
+	color: #1D4990;
 	padding: 0px 20px 0px 20px;
 	margin: 0;
 }
@@ -158,15 +158,15 @@ table td {
 }
 
 #markdown h2 {
-	color: #4937d7;
+	color: #1D4990;
 	font-size: 1.5em;
 	margin-top: 2em;
 }
 
 #markdown h2:first-of-type:not(h1 ~ h2),
 #markdown h1 {
-	color: #4937d7;
-	border-bottom: 3px solid #4937d7;
+	color: #1D4990;
+	border-bottom: 3px solid #1D4990;
     padding-bottom: 5px;
 	font-size: 2em;
 	margin-top: 0px;
