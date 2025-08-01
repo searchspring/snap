@@ -136,9 +136,29 @@ autocompleteController.addToCart(products);
 - Called with `eventData` = { controller, input }
 - Invoked prior to submission of autocomplete search
 
+### track.product.render
+- Called with `eventData` = { controller, product, trackEvent } 
+- Always invoked after `track.product.render()` method has been invoked
+
+### track.product.impression
+- Called with `eventData` = { controller, product, trackEvent } 
+- Always invoked after `track.product.impression()` method has been invoked
+
+### track.product.clickThrough
+- Called with `eventData` = { controller, event, product, trackEvent } 
+- Always invoked after `track.product.clickThrough()` or `track.product.click()` method has been invoked
+
+### track.product.addToCart
+- Called with `eventData` = { controller, product, trackEvent } 
+- Always invoked after `track.product.addToCart()` method has been invoked
+
+### track.redirect
+- Called with `eventData` = { controller, redirectURL, trackEvent } 
+- Always invoked after `track.redirect()` method has been invoked
+
 ### addToCart
-- Called with `eventData` = { controller, products }
-- Invoked when addToCart method is called
+- Called with `eventData` = { controller, products } 
+- Always invoked after `addToCart()` method has been invoked
 
 ## Variants
 For variant integration details, see [Variant Integration Docs](https://github.com/searchspring/snap/blob/main/docs/INTEGRATION_VARIANTS.md)

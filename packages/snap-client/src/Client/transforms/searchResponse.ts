@@ -141,7 +141,7 @@ export type searchResponseType = {
 		content: object;
 		facets: any[];
 		facetsHide: any[];
-		experiments?: [];
+		experiments?: any[];
 		variants?: [];
 		personalized?: boolean;
 		triggeredCampaigns?: {
@@ -168,6 +168,8 @@ class Result implements SearchResponseModelResult {
 
 export function transformSearchResponse(response: searchResponseType, request: SearchRequestModel) {
 	return {
+		// @ts-ignore - temporary to be removed when auto beaconing is implemented
+		_cached: response._cached ?? false,
 		...transformSearchResponse.pagination(response),
 		...transformSearchResponse.results(response),
 		...transformSearchResponse.filters(response),
@@ -197,7 +199,7 @@ transformSearchResponse.results = (response: searchResponseType) => {
 	return { results: results.map(transformSearchResponse.result) };
 };
 
-transformSearchResponse.result = (rawResult: rawResult): SearchResponseModelResult => {
+transformSearchResponse.result = (rawResult: rawResult, idx: number): SearchResponseModelResult => {
 	const coreFieldValues: SearchResponseModelResultCoreMappings = CORE_FIELDS.reduce((coreFields, key) => {
 		if (typeof rawResult[key as keyof rawResult] != 'undefined') {
 			return {
@@ -238,6 +240,7 @@ transformSearchResponse.result = (rawResult: rawResult): SearchResponseModelResu
 
 	return new Result({
 		id: rawResult.uid,
+		position: idx + 1,
 		mappings: {
 			core: coreFieldValues,
 		},
@@ -422,6 +425,7 @@ transformSearchResponse.merchandising = (response: searchResponseType) => {
 		content: merchandising?.content || {},
 		campaigns: merchandising?.triggeredCampaigns || [],
 		personalized: merchandising?.personalized,
+		experiments: merchandising?.experiments || [],
 	};
 
 	return {

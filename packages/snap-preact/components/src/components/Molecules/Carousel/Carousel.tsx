@@ -7,12 +7,13 @@ import { observer } from 'mobx-react-lite';
 import deepmerge from 'deepmerge';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { cloneWithProps, defined, mergeProps, mergeStyles } from '../../../utilities';
-import { Navigation, Pagination, A11y } from 'swiper/modules';
+import { Navigation, Pagination, Scrollbar, A11y } from 'swiper/modules';
 import { Icon, IconProps } from '../../Atoms/Icon/Icon';
 import type { Swiper as SwiperTypes } from 'swiper';
 import type { SwiperOptions } from 'swiper/types';
 import type { PaginationOptions } from 'swiper/types/modules/pagination';
 import type { NavigationOptions } from 'swiper/types/modules/navigation';
+import type { ScrollbarOptions } from 'swiper/types/modules/scrollbar';
 
 import { Theme, useTheme, CacheProvider, useTreePath } from '../../../providers';
 import { ComponentProps, BreakpointsProps, StyleScript } from '../../../types';
@@ -141,6 +142,22 @@ const defaultStyles: StyleScript<CarouselProps> = ({ vertical, theme }) => {
 		'.swiper-vertical': {
 			touchAction: 'pan-x',
 		},
+		'.swiper-scrollbar': {
+			position: 'absolute',
+			bottom: '0',
+			left: '0',
+			width: '100%',
+			height: '2px',
+			backgroundColor: '#d9d9d9',
+			'&:empty': {
+				display: 'none',
+			},
+			'.swiper-scrollbar-drag': {
+				position: 'relative',
+				height: '100%',
+				backgroundColor: theme?.variables?.colors?.primary || '#000',
+			},
+		},
 	});
 };
 
@@ -249,6 +266,7 @@ export const Carousel = observer((properties: CarouselProps): JSX.Element => {
 
 	let pagination = props.pagination;
 	let navigation = props.navigation;
+	let scrollbar = props.scrollbar;
 
 	const subProps: CarouselSubProps = {
 		icon: {
@@ -264,7 +282,9 @@ export const Carousel = observer((properties: CarouselProps): JSX.Element => {
 		},
 	};
 
-	const swiperModulesUnfiltered = Array.isArray(modules) ? [Navigation, Pagination, A11y].concat(modules) : [Navigation, Pagination, A11y];
+	const swiperModulesUnfiltered = Array.isArray(modules)
+		? [Navigation, Pagination, Scrollbar, A11y].concat(modules)
+		: [Navigation, Pagination, Scrollbar, A11y];
 	//remove any duplicates, in case user passes in Navigation or Pagination
 	const swiperModules = swiperModulesUnfiltered.filter((module, pos) => swiperModulesUnfiltered.indexOf(module) === pos);
 
@@ -313,6 +333,18 @@ export const Carousel = observer((properties: CarouselProps): JSX.Element => {
 			nextEl: '.ss_carousel_DNE',
 			prevEl: '.ss_carousel_DNE',
 		};
+	}
+	if (scrollbar) {
+		if (typeof scrollbar == 'object') {
+			scrollbar = {
+				enabled: true,
+				...scrollbar,
+			};
+		} else {
+			scrollbar = {
+				enabled: true,
+			};
+		}
 	}
 
 	const attachClasstoLastVisibleSlide = () => {
@@ -399,6 +431,7 @@ export const Carousel = observer((properties: CarouselProps): JSX.Element => {
 					controller={undefined} // prevent passing controller in additionalProps (causes unnecessary swiper updates and errors)
 					navigation={navigation}
 					pagination={pagination}
+					scrollbar={scrollbar}
 					onResize={(swiper) => {
 						if (additionalProps.onResize) {
 							additionalProps.onResize();
@@ -443,6 +476,7 @@ export type CarouselProps = {
 	vertical?: boolean;
 	pagination?: boolean | PaginationOptions;
 	navigation?: boolean | NavigationOptions;
+	scrollbar?: boolean | ScrollbarOptions;
 	autoAdjustSlides?: boolean;
 	onClick?: (swiper: SwiperTypes, e: MouseEvent | TouchEvent | PointerEvent) => void;
 	onNextButtonClick?: (e: React.MouseEvent<HTMLElement, MouseEvent>) => void;

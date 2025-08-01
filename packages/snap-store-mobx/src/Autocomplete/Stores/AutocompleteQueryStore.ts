@@ -1,5 +1,6 @@
 import { observable, makeObservable } from 'mobx';
 import type { UrlManager } from '@searchspring/snap-url-manager';
+import type { SearchResponseModelSearchMatchTypeEnum } from '@searchspring/snapi-types';
 import type { AutocompleteStoreConfig, StoreServices } from '../../types';
 import { AutocompleteResponseModel } from '@searchspring/snapi-types';
 
@@ -15,6 +16,7 @@ export class AutocompleteQueryStore {
 	public query?: Query;
 	public originalQuery?: Query;
 	public correctedQuery?: Query;
+	public matchType: SearchResponseModelSearchMatchTypeEnum;
 
 	constructor(params: AutocompleteQueryStoreConfig) {
 		const { services, data, config } = params || {};
@@ -36,6 +38,9 @@ export class AutocompleteQueryStore {
 			}
 		}
 
+		this.matchType = search?.matchType as SearchResponseModelSearchMatchTypeEnum;
+		observables.matchType = observable;
+
 		makeObservable(this, observables);
 	}
 }
@@ -44,6 +49,7 @@ type Observables = {
 	originalQuery?: typeof observable;
 	query?: typeof observable;
 	correctedQuery?: typeof observable;
+	matchType?: typeof observable;
 };
 
 class Query {

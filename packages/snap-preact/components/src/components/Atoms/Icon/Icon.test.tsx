@@ -117,6 +117,17 @@ describe('Icon Component', () => {
 		expect(path).toHaveAttribute('d', iconPaths[icon]);
 	});
 
+	it('renders with title', () => {
+		const icon = 'cog';
+		const title = 'custom title';
+		const rendered = render(<Icon title={title} icon={icon} />);
+
+		const iconElement = rendered.container.querySelector('.ss__icon');
+		const titleElement = rendered.container.querySelector('.ss__icon title');
+		expect(iconElement).toBeInTheDocument();
+		expect(titleElement).toHaveTextContent(title);
+	});
+
 	it('renders cog icon with custom props', () => {
 		const icon = 'cog';
 		const color = '#ff0000';

@@ -90,13 +90,9 @@ recommendationController.addToCart(products);
 - Called with `eventData` = { controller, request, response }
 - Always invoked after data has been stored in mobx store
 
-### addToCart
-- Called with `eventData` = { controller, products }
-- Invoked when addToCart method is called
-
-### track.product.click
+### track.product.clickThrough
 - Called with `eventData` = { controller, event, result, trackEvent } 
-- Always invoked after `track.product.click()` method has been invoked
+- Always invoked after `track.product.clickThrough()` or `track.product.click()` method has been invoked
 - Allows for adding custom product click events (ie. Google Analytics)
 
 ### track.product.impression
@@ -107,17 +103,13 @@ recommendationController.addToCart(products);
 - Called with `eventData` = { controller, result, trackEvent } 
 - Always invoked after `track.product.render()` method has been invoked
 
-### track.click
-- Called with `eventData` = { controller, event, trackEvent } 
-- Always invoked after `track.click()` method has been invoked
+### track.product.addToCart
+- Called with `eventData` = { controller, product, trackEvent } 
+- Always invoked after `track.product.addToCart()` method has been invoked
 
-### track.impression
-- Called with `eventData` = { controller, trackEvent } 
-- Always invoked after `track.impression()` method has been invoked
-
-### track.render
-- Called with `eventData` = { controller, trackEvent } 
-- Always invoked after `track.render()` method has been invoked
+### addToCart
+- Called with `eventData` = { controller, products } 
+- Always invoked after `controller.addToCart()` method has been invoked
 
 ## Variants
 For variant integration details, see [Variant Integration Docs](https://github.com/searchspring/snap/blob/main/docs/INTEGRATION_VARIANTS.md)

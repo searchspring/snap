@@ -10,7 +10,7 @@ jobs:
       packages: write
       contents: write
     steps:
-      - name: Checkout repositiory
+      - name: Checkout repository
         uses: actions/checkout@v2
         with:
           fetch-depth: "0"
@@ -19,7 +19,6 @@ jobs:
         run: |
           git config user.name searchspring-machine
           git config user.email machine@searchspring.com
-
       - name: Setup Node
         uses: actions/setup-node@v2
         with:
@@ -40,18 +39,17 @@ jobs:
             ${{ runner.os }}-build-${{ env.cache-name }}-
             ${{ runner.os }}-build-
             ${{ runner.os }}-
-
       - name: Install packages
         run: npm ci
 
       - name: Build
         run: | 
           npm run build
-
-      # - name: Tests
-      #   env:
-      #     NODE_OPTIONS: "--max-old-space-size=4096"
-      #   run: npm run test
+      
+      - name: Tests
+        env:
+          NODE_OPTIONS: "--max-old-space-size=4096"
+        run: npm run test
 
       - name: Publish packages
         run: npm run publish:canary

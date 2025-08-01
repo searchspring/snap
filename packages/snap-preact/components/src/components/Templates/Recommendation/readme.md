@@ -9,6 +9,7 @@ Any modification to the results array and data are recommended to be made using 
 
 ## Sub-components
 - Carousel
+- ResultTracker
 - Result (default)
 
 ## Usage

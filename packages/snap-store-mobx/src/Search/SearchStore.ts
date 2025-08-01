@@ -109,7 +109,7 @@ export class SearchStore extends AbstractStore<SearchStoreConfig> {
 				loaded: this.loaded,
 			},
 			stores: {
-				previousResults: this.results,
+				// previousResults: this.results,
 			},
 			data: {
 				previousSearch: this.previousSearch,

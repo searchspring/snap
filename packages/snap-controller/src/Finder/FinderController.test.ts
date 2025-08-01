@@ -1,3 +1,4 @@
+import 'whatwg-fetch';
 import { v4 as uuidv4 } from 'uuid';
 
 import { FinderStore, StoreServices } from '@searchspring/snap-store-mobx';
@@ -35,6 +36,9 @@ const configs = [
 		fields: [{ field: 'custom_tire_size_1' }, { field: 'custom_tire_size_2' }, { field: 'custom_wheel_size' }],
 	},
 ];
+
+// mocks fetch so beacon client does not make network requests
+jest.spyOn(global.window, 'fetch').mockImplementation(() => Promise.resolve({ status: 200, json: () => Promise.resolve({}) } as Response));
 
 describe('Finder Controller', () => {
 	configs.forEach((baseConfig) => {

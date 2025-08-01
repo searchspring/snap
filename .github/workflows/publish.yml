@@ -12,10 +12,11 @@ jobs:
       packages: write
       contents: write
     steps:
-      - name: Checkout repositiory
+      - name: Checkout repository
         uses: actions/checkout@v2
         with:
           fetch-depth: "0"
+          token: ${{ secrets.MACHINE_PAT }}
 
       - name: Set Github credentials
         run: |

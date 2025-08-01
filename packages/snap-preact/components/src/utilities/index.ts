@@ -8,3 +8,4 @@ export * from './mergeProps';
 export * from './mergeStyles';
 export * from './storybook';
 export * from './defaultBadgeComponentMap';
+export * from './createImpressionObserver';

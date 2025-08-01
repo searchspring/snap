@@ -2,7 +2,7 @@ import { h, render } from 'preact';
 import deepmerge from 'deepmerge';
 
 import { Snap } from '../Snap';
-import { TemplateSelect } from '../../components/src';
+import { TemplateSelect } from '../../components/src/components/Atoms/TemplateSelect';
 
 import { DomTargeter, url, cookies, getContext } from '@searchspring/snap-toolbox';
 import { TemplateTarget, TemplatesStore } from './Stores/TemplateStore';

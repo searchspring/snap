@@ -44,7 +44,9 @@
   "merchandising": { 
     "campaigns": [],
     "redirect": "",
-    "content": {}
+    "content": {},
+    "experiments": [],
+    "personalized": false
   },
   "search": {
     "query": "dress"

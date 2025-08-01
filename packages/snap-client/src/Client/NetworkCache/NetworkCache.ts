@@ -54,8 +54,8 @@ export class NetworkCache {
 						}
 					}
 				}
-			} catch (err) {
-				console.warn('something went wrong, browser might not have cookies enabled');
+			} catch {
+				console.warn('something went wrong getting from cache');
 			}
 		}
 	}
@@ -97,8 +97,8 @@ export class NetworkCache {
 						window.sessionStorage.setItem(CACHE_STORAGE_KEY, JSON.stringify(newStored));
 					}
 				}
-			} catch (err) {
-				console.warn('something went wrong, browser might not have cookies enabled');
+			} catch {
+				console.warn('something went wrong setting to cache');
 			}
 		}
 	}
@@ -109,8 +109,8 @@ export class NetworkCache {
 			if (typeof window !== 'undefined' && window?.sessionStorage) {
 				window.sessionStorage.setItem(CACHE_STORAGE_KEY, '');
 			}
-		} catch (err) {
-			console.warn('something went wrong, browser might not have cookies enabled');
+		} catch {
+			console.warn('something went wrong clearing cache');
 		}
 	}
 }

@@ -113,13 +113,11 @@ describe('Results Component', () => {
 		const resultsElementStyles = getComputedStyle(resultsElement);
 
 		expect(resultsElementStyles.gridTemplateColumns).toBe(`repeat(${args.columns}, 1fr)`);
+		expect(resultsElementStyles.gap).toBe(args.gapSize);
 
 		const result = rendered.container.querySelector('.ss__result')!;
 
 		expect(result).toBeInTheDocument();
-		const resultStyles = getComputedStyle(result);
-		expect(resultStyles.marginRight).toBe(args.gapSize);
-		expect(resultStyles.marginBottom).toBe(args.gapSize);
 	});
 
 	it('can use breakpoints', async () => {

@@ -258,14 +258,29 @@ export class Content extends Component {
 - If an element position data exists, `element` data will include `domRect` (of the element with selector), `href` and `selector`
 - Invoked during final stages of `afterStore` just prior to setting loading state to false
 
-### addToCart
-- Called with `eventData` = { controller, products }
-- Invoked when addToCart method is called
+### track.product.render
+- Called with `eventData` = { controller, product, trackEvent } 
+- Always invoked after `track.product.render()` method has been invoked
 
-### track.product.click
-- Called with `eventData` = { controller, event, result, trackEvent } 
-- Always invoked after `track.product.click()` method has been invoked
-- Allows for adding custom product click events (ie. Google Analytics)
+### track.product.impression
+- Called with `eventData` = { controller, product, trackEvent } 
+- Always invoked after `track.product.impression()` method has been invoked
+
+### track.product.clickThrough
+- Called with `eventData` = { controller, event, product, trackEvent } 
+- Always invoked after `track.product.clickThrough()` or `track.product.click()` method has been invoked
+
+### track.product.addToCart
+- Called with `eventData` = { controller, product, trackEvent } 
+- Always invoked after `track.product.addToCart()` method has been invoked
+
+### track.product.redirect
+- Called with `eventData` = { controller, redirectURL, trackEvent } 
+- Always invoked after `track.product.redirect()` method has been invoked
+
+### addToCart
+- Called with `eventData` = { controller, products } 
+- Always invoked after `addToCart()` method has been invoked
 
 ## Variants
 For variant integration details, see [Variant Integration Docs](https://github.com/searchspring/snap/blob/main/docs/INTEGRATION_VARIANTS.md)

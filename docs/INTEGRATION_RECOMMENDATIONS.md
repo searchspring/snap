@@ -68,7 +68,7 @@ While batching all profiles together is generally the most efficient approach, t
 
 ## Deduping
 
-Deduping is a process that prevents the same product from appearing in multiple recommendation profiles within a single batch. This is particularly useful when you have several recommendation profiles on a page and want to ensure a diverse range of products is shown to the user.
+Deduping prevents the same product from appearing in multiple recommendation profiles within a single batch. This is useful when you have several recommendation profiles on a page and want to ensure a diverse range of products is shown to the shopper.
 
 Here's how deduping works:
 
@@ -113,9 +113,9 @@ Here's an example that demonstrates deduping:
 
 ## Additional Examples
 
-The examples below assume that the `similar` profile has been setup in the Searchspring Management Console (SMC), and that a Snap `bundle.js` script exists on the page and has been configured with a `RecommendationInstantiator`.
+The examples below assume the `similar` profile has been setup in the Searchspring Management Console (SMC), and that a Snap `bundle.js` script exists on the page and has been configured with a `RecommendationInstantiator`.
 
-A typical "similar" profile that would display products similar to the product passed in via the `products` global context variable.
+A typical "similar" profile displays products similar to the product passed in via the `products` global context variable.
 
 ```html
 <script type="searchspring/recommendations">
@@ -131,7 +131,7 @@ A typical "similar" profile that would display products similar to the product p
 </script>
 ```
 
-If tracking scripts are not in place, "crosssell" profiles may require the cart contents to be provided.
+If tracking scripts are not in place, `cross-sell` profiles may require the cart contents to be provided.
 
 ```html
 <script type="searchspring/recommendations">
@@ -147,7 +147,7 @@ If tracking scripts are not in place, "crosssell" profiles may require the cart 
 </script>
 ```
 
-If the shopper identifier is not beeing captured by the `bundle.js` context, it must be provided for proper personalization.
+If the shopper identifier is not being captured by the `bundle.js` context, it must be provided for proper personalization.
 
 ```html
 <script type="searchspring/recommendations">
@@ -166,7 +166,7 @@ If the shopper identifier is not beeing captured by the `bundle.js` context, it 
 ```
 
 ### Filters
-The example shown below will filter the recommendations for products matching field `color` with a value `blue` and `red`, as well as a field `price` with a range from `0` to `20`.
+The example below filters the recommendations for products matching field `color` with a value `blue` and `red`, as well as a field `price` with a range from `0` to `20`.
 
 ```html
 <script type="searchspring/recommendations">

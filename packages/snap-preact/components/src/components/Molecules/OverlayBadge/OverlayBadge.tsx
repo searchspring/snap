@@ -52,6 +52,7 @@ const defaultStyles: StyleScript<OverlayBadgeProps> = ({ controller }) => {
 		position: 'relative',
 
 		'& .ss__overlay-badge__grid-wrapper': {
+			pointerEvents: 'none',
 			display: 'grid',
 			position: 'absolute',
 			top: 0,
