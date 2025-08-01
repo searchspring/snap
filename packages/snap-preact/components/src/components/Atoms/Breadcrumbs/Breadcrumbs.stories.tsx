@@ -34,7 +34,7 @@ export default {
 			type: { required: true },
 			table: {
 				type: {
-					summary: 'object',
+					summary: 'object | function',
 				},
 			},
 			control: { type: 'object' },

@@ -201,6 +201,7 @@ export const Layout = observer((properties: LayoutProps): JSX.Element => {
 		},
 		Breadcrumbs: {
 			// default props
+			controller,
 			// inherited props
 			...defined({
 				disableStyles,

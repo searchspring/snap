@@ -6,6 +6,7 @@ import { observer } from 'mobx-react';
 import { Theme, useTheme, CacheProvider, useTreePath } from '../../../providers';
 import { mergeProps, mergeStyles } from '../../../utilities';
 import { ComponentProps, StyleScript } from '../../../types';
+import { AbstractController } from '@searchspring/snap-controller';
 
 const defaultStyles: StyleScript<BreadcrumbsProps> = () => {
 	return css({
@@ -30,15 +31,21 @@ export const Breadcrumbs = observer((properties: BreadcrumbsProps): JSX.Element 
 
 	const props = mergeProps('breadcrumbs', globalTheme, defaultProps, properties);
 
-	const { data, separator, className } = props;
+	const { data, separator, className, controller } = props;
 
 	const styling = mergeStyles<BreadcrumbsProps>(props, defaultStyles);
 
-	return (
+	let _data;
+	if (typeof data == 'function') {
+		_data = data(controller);
+	} else {
+		_data = data;
+	}
+	return _data ? (
 		<CacheProvider>
 			<div {...styling} className={classnames('ss__breadcrumbs', className)}>
 				<ul className="ss__breadcrumbs__crumbs">
-					{data
+					{_data
 						.map<React.ReactNode>((crumb: any) => (
 							<li className="ss__breadcrumbs__crumbs__crumb">{crumb.url ? <a href={crumb.url}>{crumb.label}</a> : crumb.label}</li>
 						))
@@ -46,13 +53,21 @@ export const Breadcrumbs = observer((properties: BreadcrumbsProps): JSX.Element 
 				</ul>
 			</div>
 		</CacheProvider>
+	) : (
+		<></>
 	);
 });
 
 export interface BreadcrumbsProps extends ComponentProps<BreadcrumbsProps> {
-	data: {
-		label: string;
-		url?: string;
-	}[];
+	data:
+		| {
+				label: string;
+				url?: string;
+		  }[]
+		| ((controller?: AbstractController) => {
+				label: string;
+				url?: string;
+		  }[]);
 	separator?: string | JSX.Element;
+	controller?: AbstractController;
 }
