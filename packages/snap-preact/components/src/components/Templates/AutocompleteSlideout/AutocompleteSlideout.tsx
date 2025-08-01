@@ -121,6 +121,7 @@ export const AutocompleteSlideout = observer((properties: AutocompleteSlideoutPr
 				disableStyles,
 			}),
 			// component theme overrides
+			treePath: `${treePath} slideout`,
 			theme: props?.theme,
 		},
 	};
@@ -148,6 +149,10 @@ export const AutocompleteSlideout = observer((properties: AutocompleteSlideoutPr
 		...props,
 	};
 	delete acProps.width;
+	delete acProps.className;
+	delete acProps.style;
+	delete acProps.styleScript;
+	delete acProps.themeStyleScript;
 
 	/***************************************/
 	return layout?.length ? (

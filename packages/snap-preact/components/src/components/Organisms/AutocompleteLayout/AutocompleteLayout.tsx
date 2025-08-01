@@ -224,6 +224,7 @@ export const AutocompleteLayout = observer((properties: AutocompleteLayoutProps)
 	};
 
 	let props = mergeProps('autocompleteLayout', globalTheme, defaultProps, properties);
+	delete props.treePath;
 
 	const valueProps = createHoverProps();
 
@@ -332,7 +333,7 @@ export const AutocompleteLayout = observer((properties: AutocompleteLayoutProps)
 				disableStyles,
 			}),
 			theme: props.theme,
-			treePath,
+			treePath: properties.treePath,
 		},
 		termsList: {
 			className: 'ss__autocomplete__terms-list',
@@ -343,7 +344,7 @@ export const AutocompleteLayout = observer((properties: AutocompleteLayoutProps)
 				disableStyles,
 			}),
 			theme: props.theme,
-			treePath,
+			treePath: properties.treePath,
 		},
 		terms: {
 			className: 'ss__autocomplete__terms',
@@ -354,7 +355,7 @@ export const AutocompleteLayout = observer((properties: AutocompleteLayoutProps)
 				disableStyles,
 			}),
 			theme: props.theme,
-			treePath,
+			treePath: properties.treePath,
 		},
 		facets: {
 			name: 'autocomplete',
@@ -365,7 +366,7 @@ export const AutocompleteLayout = observer((properties: AutocompleteLayoutProps)
 				disableStyles,
 			}),
 			theme: props.theme,
-			treePath,
+			treePath: properties.treePath,
 		},
 		facetsHorizontal: {
 			name: 'autocomplete',
@@ -375,7 +376,7 @@ export const AutocompleteLayout = observer((properties: AutocompleteLayoutProps)
 				disableStyles,
 			}),
 			theme: props.theme,
-			treePath,
+			treePath: properties.treePath,
 		},
 		banner: {
 			// default props
@@ -386,7 +387,7 @@ export const AutocompleteLayout = observer((properties: AutocompleteLayoutProps)
 			}),
 			// component theme overrides
 			theme: props.theme,
-			treePath,
+			treePath: properties.treePath,
 		},
 		results: {
 			columns: 3,
@@ -400,7 +401,7 @@ export const AutocompleteLayout = observer((properties: AutocompleteLayoutProps)
 			}),
 			// component theme overrides
 			theme: props.theme,
-			treePath,
+			treePath: properties.treePath,
 		},
 		icon: {
 			// default props
@@ -413,7 +414,7 @@ export const AutocompleteLayout = observer((properties: AutocompleteLayoutProps)
 			}),
 			// component theme overrides
 			theme: props.theme,
-			treePath,
+			treePath: properties.treePath,
 		},
 	};
 
