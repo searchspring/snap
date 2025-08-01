@@ -12,6 +12,7 @@ import { Sidebar, SidebarProps } from '../../Organisms/Sidebar';
 import { Toolbar, ToolbarProps } from '../../Organisms/Toolbar';
 import { NoResults, NoResultsProps } from '../../Organisms/NoResults';
 import { Lang, useLang, useMediaQuery } from '../../../hooks';
+import { FOCUSABLE_ELEMENTS } from '../../../hooks/useA11y';
 import { SearchFilterStore } from '@searchspring/snap-store-mobx';
 import deepmerge from 'deepmerge';
 import { useLayoutOptions } from '../../../hooks/useLayoutOptions';
@@ -72,7 +73,7 @@ export const Search = observer((properties: SearchProps): JSX.Element => {
 		toggleSidebarButtonText,
 		hideTopToolbar,
 		hideMiddleToolbar,
-		hideBottomToolBar,
+		hideBottomToolbar,
 		resultComponent,
 		hideToggleSidebarButton,
 		mobileDisplayAt,
@@ -122,7 +123,19 @@ export const Search = observer((properties: SearchProps): JSX.Element => {
 			className: `${classNamePrefix}__header-section__toolbar--top-toolbar`,
 			layout: [['banner.header'], ['searchHeader', '_', 'button.sidebar-toggle']],
 			toggleSideBarButton: {
-				onClick: () => setSidebarOpenState(!sidebarOpenState),
+				onClick: () => {
+					setSidebarOpenState(!sidebarOpenState);
+					// need the timeout to allow the sidebar to open before focusing the first available element.
+					setTimeout(() => {
+						// focus the first available elem when toggling the sidebar open.
+						if (!sidebarOpenState) {
+							const firstAvailableElemToFocus = document.querySelector('.ss__sidebar')?.querySelector(FOCUSABLE_ELEMENTS) as HTMLElement;
+							if (firstAvailableElemToFocus) {
+								firstAvailableElemToFocus.focus();
+							}
+						}
+					});
+				},
 				children:
 					!hideToggleSidebarButton && store.loaded && !isMobile && (toggleSidebarButtonText || mergedLang.toggleSidebarButtonText?.value)
 						? ToggleSidebar
@@ -193,7 +206,7 @@ export const Search = observer((properties: SearchProps): JSX.Element => {
 
 	const styling = mergeStyles<SearchProps>(props, defaultStyles);
 
-	useCleanUpEmptyDivs('.ss__search__sidebar');
+	useCleanUpEmptyDivs(['.ss__search__sidebar']);
 
 	return (
 		<CacheProvider>
@@ -214,7 +227,7 @@ export const Search = observer((properties: SearchProps): JSX.Element => {
 							store.pagination.totalResults === 0 && <NoResults {...subProps.NoResults} controller={controller} />
 						)}
 
-						{!hideBottomToolBar && <Toolbar {...subProps.BottomToolbar} controller={controller} />}
+						{!hideBottomToolbar && <Toolbar {...subProps.BottomToolbar} controller={controller} />}
 					</div>
 				</div>
 			</div>
@@ -230,7 +243,7 @@ export interface SearchProps extends ComponentProps {
 	hideSidebar?: boolean;
 	hideTopToolbar?: boolean;
 	hideMiddleToolbar?: boolean;
-	hideBottomToolBar?: boolean;
+	hideBottomToolbar?: boolean;
 	toggleSidebarButtonText?: string;
 	toggleSidebarStartClosed?: boolean;
 	hideToggleSidebarButton?: boolean;

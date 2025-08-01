@@ -4245,6 +4245,8 @@
   ],
   "merchandising": {
     "campaigns": [],
+    "personalized": false, 
+    "experiments": [],
     "redirect": "",
     "content": {}
   }

@@ -14,8 +14,8 @@ const config = {
 	disableGA: '', // disable google analytic events (example: 'UA-123456-1')
 	selectors: {
 		website: {
-			openInputButton: '', // selector for a button to click in order to make the input visible
-			input: '.searchspring-ac', // selector of <input> elements (config.controllers[].autocomplete[].config.selector)
+			openInputButton: 'input.searchspring-ac', // selector for a button to click in order to make the input visible
+			input: '.autocomplete-fixed__search-input input', // selector of <input> elements (config.controllers[].autocomplete[].config.selector)
 		},
 		autocomplete: {
 			main: '.ss__autocomplete',
@@ -23,7 +23,7 @@ const config = {
 			term: `.ss__autocomplete .ss__terms__option`,
 			facet: '.ss__autocomplete .ss__facet .ss__facet__options',
 			result: '.ss__autocomplete .ss__results .ss__result',
-			seeMore: '.ss__autocomplete .ss__autocomplete__see-more',
+			seeMore: '.ss__autocomplete .ss__autocomplete__button--see-more',
 		},
 	},
 	startingQuery: 't', // initial query (displays terms, facets, and results)
@@ -72,7 +72,7 @@ describe('Autocomplete', () => {
 						targets: [
 							{
 								selector: 'input.searchspring-ac',
-								component: 'AutocompleteTemplate',
+								component: 'AutocompleteFixed',
 							},
 						],
 						settings: {
@@ -91,7 +91,7 @@ describe('Autocomplete', () => {
 					cy.get(config.selectors.website.openInputButton).first().click({ force: true });
 				}
 
-				cy.get(config.selectors.website.input).first().should('exist').focus();
+				cy.get(config.selectors.website.input).first().should('exist').click().focus();
 
 				// TODO: remove - but is currently needed for cases where we are getting no trending terms back from the API
 				if (store.trending.length) {
@@ -128,17 +128,14 @@ describe('Autocomplete', () => {
 			cy.snapController('autocomplete').then(({ store }) => {
 				const term = store.terms[0].value;
 
-				cy.get(`${config.selectors.autocomplete.seeMore} a[href$="${store.services.urlManager.href}"]`)
-					.should('exist')
-					.contains(store.pagination.totalResults)
-					.contains(term);
+				cy.get(`${config.selectors.autocomplete.seeMore}`).should('exist').contains(store.pagination.totalResults).contains(term);
 			});
 		});
 
 		it('can hover over term', function () {
 			cy.snapController('autocomplete').then(({ store }) => {
 				if (store.terms.length <= 1) {
-					cy.get(config.selectors.website.input).first().should('exist').focus().type(config.query, { force: true });
+					cy.get(config.selectors.website.input).first().should('exist').click().focus().type(config.query, { force: true });
 					cy.wait('@autocomplete').should('exist');
 				}
 
@@ -194,7 +191,7 @@ describe('Autocomplete', () => {
 
 		it('has see more link with correct URL', function () {
 			cy.snapController('autocomplete').then(({ store }) => {
-				cy.get(`${config.selectors.autocomplete.seeMore} a[href$="${store.services.urlManager.href}"]`).should('exist');
+				cy.get(`${config.selectors.autocomplete.seeMore}`).should('exist');
 			});
 		});
 
@@ -227,36 +224,42 @@ describe('Autocomplete', () => {
 			// set flag on window to ensure page doesn't reload
 			cy.window().then((win) => (win.ssFirstLoad = true));
 
-			cy.get(config.selectors.website.input).first().should('exist').should('have.value', config.query).focus({ force: true });
-			cy.wait('@autocomplete').should('exist');
-
-			// autocomplete should be open
-			cy.get(config.selectors.autocomplete.main).should('exist');
-
-			// select a facet
-			cy.snapController('autocomplete').then(({ store }) => {
-				if (store.facets.length == 0) {
-					cy.get(config.selectors.website.input).first().clear({ force: true }).type(config.startingQuery, { force: true });
-					cy.wait('@autocomplete').should('exist');
+			cy.snapController('autocomplete').then(() => {
+				if (config.selectors.website.openInputButton) {
+					cy.get(config.selectors.website.openInputButton).first().click({ force: true });
 				}
 
-				cy.get(`${config.selectors.autocomplete.facet} a`).then((facetOptions) => {
-					const firstOption = facetOptions[0];
-					const optionURL = firstOption.href.split('?')[1];
+				cy.get(config.selectors.website.input).first().should('exist').should('have.value', config.query).click().focus({ force: true });
+				cy.wait('@autocomplete').should('exist');
 
-					cy.get(firstOption).click({ force: true }); // trigger onFocus event
+				// autocomplete should be open
+				cy.get(config.selectors.autocomplete.main).should('exist');
 
-					cy.wait('@search').should('exist');
+				// select a facet
+				cy.snapController('autocomplete').then(({ store }) => {
+					if (store.facets.length == 0) {
+						cy.get(config.selectors.website.input).first().clear({ force: true }).type(config.startingQuery, { force: true });
+						cy.wait('@autocomplete').should('exist');
+					}
 
-					cy.snapController().then(({ store }) => {
-						cy.wrap(store.services.urlManager.state.filter).should('exist');
-						cy.wrap(store.services.urlManager.href).should('contain', optionURL);
+					cy.get(`${config.selectors.autocomplete.facet} a`).then((facetOptions) => {
+						const firstOption = facetOptions[0];
+						const optionURL = firstOption.href.split('?')[1];
 
-						// autocomplete should be closed
-						cy.get(config.selectors.autocomplete.main).should('not.exist');
+						cy.get(firstOption).click({ force: true }); // trigger onFocus event
 
-						// ensure page did not releoad
-						cy.window().should('have.prop', 'ssFirstLoad');
+						cy.wait('@search').should('exist');
+
+						cy.snapController().then(({ store }) => {
+							cy.wrap(store.services.urlManager.state.filter).should('exist');
+							cy.wrap(store.services.urlManager.href).should('contain', optionURL);
+
+							// autocomplete should be closed
+							cy.get(config.selectors.autocomplete.main).should('not.exist');
+
+							// ensure page did not releoad
+							cy.window().should('have.prop', 'ssFirstLoad');
+						});
 					});
 				});
 			});

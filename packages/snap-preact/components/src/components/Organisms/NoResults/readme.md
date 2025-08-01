@@ -68,6 +68,28 @@ The `contactsTitleText` prop allows you to set the inner text contacts title.
 <NoResults contactsTitleText={'contacts'} />
 ```
 
+### templates
+The `templates` prop allows you to configure and display product recommendations when no search results are found. This prop accepts an object with a recommendation key, which can enable or customize the recommendation module.
+
+Example usage:
+
+
+```jsx
+const templatesConfig = {
+    recommendation: {
+      enabled: true,
+      component: 'Recommendation', // (optional) custom recommendation component name
+      resultComponent: 'Result',   // (optional) custom result component name
+      config: {                    // (optional) additional configuration for recommendations
+        id: 'my-recs-id',
+        tag: 'no-results',
+      },
+    },
+  }
+
+<NoResults templates={templatesConfig} />
+```
+
 ### contactsList
 The `contactsList` prop takes an array of contact objects to render in the contact section. each object takes a title, and content.
 

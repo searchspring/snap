@@ -262,4 +262,63 @@ describe('Theme variables work', () => {
 			cy.get('.ss__facet-grid-options a').should('have.css', 'color', 'rgb(22, 22, 255)');
 		});
 	});
+
+	const CustomResult = (props) => {
+		return JSON.stringify(props?.theme?.variables?.custom);
+	};
+
+	it('used custom variables from theme', () => {
+		//use select for primary, secondary, and accent coloring
+		// and facet grid options for text
+		cy.on('window:before:load', (win) => {
+			win.mergeSnapConfig = {
+				theme: {
+					extends: 'bocachica',
+					variables: {
+						custom: {
+							text: 'custom stuff',
+							numbers: 33,
+							arrays: ['hi', 'mom'],
+							obj: {
+								test: true,
+							},
+							bool: true,
+						},
+					},
+					overrides: {
+						default: {
+							search: {
+								toggleSidebarStartClosed: false,
+							},
+							result: {
+								detailSlot: () => <div>'jjjj'</div>,
+							},
+						},
+					},
+				},
+				components: {
+					result: {
+						CustomResult: async () => CustomResult,
+					},
+				},
+				search: {
+					targets: [
+						{
+							selector: '#searchspring-layout',
+							component: 'Search',
+							resultComponent: 'CustomResult',
+						},
+					],
+				},
+			};
+		});
+
+		cy.visit('https://localhost:2222/templates/');
+
+		cy.snapController().then(({ store }) => {
+			cy.get('.ss__result-tracker div')
+				.first()
+				.should('have.text', '{"text":"custom stuff","numbers":33,"arrays":["hi","mom"],"obj":{"test":true},"bool":true}');
+		});
+	});
 });

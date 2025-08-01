@@ -40,7 +40,7 @@ import type { RadioLang } from '../components/Molecules/Radio';
 import type { RadioListLang } from '../components/Molecules/RadioList';
 // import type { RatingLang } from '../components/Molecules/Rating';
 // import type { ResultLang } from '../components/Molecules/Result';
-// import type { SearchInputLang } from '../components/Molecules/SearchInput';
+import type { SearchInputLang } from '../components/Molecules/SearchInput';
 import type { SelectLang } from '../components/Molecules/Select';
 // import type { SlideoutLang } from '../components/Molecules/Slideout';
 import type { SortByLang } from '../components/Molecules/SortBy';
@@ -62,7 +62,7 @@ import type { SidebarLang } from '../components/Organisms/Sidebar';
 /* TEMPLATES */
 import type { RecommendationLang } from '../components/Templates/Recommendation';
 import type { SearchLang } from '../components/Templates/Search';
-import { AutocompleteTemplateLang } from '../components/Templates/AutocompleteTemplate';
+import { AutocompleteLayoutLang } from '../components/Organisms/AutocompleteLayout';
 import { TermsLang } from '../components/Molecules/Terms';
 import { DeepPartial } from '../../../src/types';
 
@@ -114,7 +114,7 @@ export type LangComponents = {
 	radioList: RadioListLang;
 	// rating: RatingLang
 	// result: ResultLang
-	// searchInput: SearchInputLang
+	searchInput: SearchInputLang;
 	select: SelectLang;
 	// slideout: SlideoutLang;
 	sortBy: SortByLang;
@@ -141,6 +141,6 @@ export type LangComponents = {
 	// autocompleteTerms: AutocompleteTermsLang;
 	recommendation: RecommendationLang;
 	search: SearchLang;
-	autocompleteTemplate: AutocompleteTemplateLang;
+	autocompleteLayout: AutocompleteLayoutLang;
 	// searchHorizontal: SearchHorizontalLang
 };

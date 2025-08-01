@@ -97,7 +97,6 @@ type SnapServices = {
 	templatesStore?: TemplatesStore;
 };
 
-const SESSION_ATTRIBUTION = 'ssAttribution';
 const MAX_PARENT_LEVELS = 3;
 const COMPONENT_ERROR = `Uncaught Error - Invalid value passed as the component.
 This usually happens when you pass a JSX Element, and not a function that returns the component, in the snap config. 
@@ -297,15 +296,8 @@ export class Snap {
 				// update recs
 				this.eventManager.fire('controller/recommendation/update');
 			} else if (attributes[`ss-${trackerId}-intellisuggest`] && attributes[`ss-${trackerId}-intellisuggest-signature`]) {
-				// product click
-				const intellisuggestData = attributes[`ss-${trackerId}-intellisuggest`];
-				const intellisuggestSignature = attributes[`ss-${trackerId}-intellisuggest-signature`];
-				const href = attributes['href'];
-				this.tracker.track.product.click({
-					intellisuggestData,
-					intellisuggestSignature,
-					href,
-				});
+				// product click is deprecated
+				this.tracker.track.product.click();
 			}
 		},
 		error: (event: ErrorEvent): void => {
@@ -349,7 +341,7 @@ export class Snap {
 		let globalContext: ContextVariables = {};
 		try {
 			// get global context
-			globalContext = getContext(['shopper', 'config', 'custom', 'merchandising', 'siteId', 'currency', 'pageType']);
+			globalContext = getContext(['shopper', 'config', 'custom', 'merchandising', 'siteId', 'currency', 'page']);
 		} catch (err) {
 			console.error('Snap failed to find global context');
 		}
@@ -374,7 +366,12 @@ export class Snap {
 		}
 
 		if ((!services?.client || !services?.tracker) && !this.config?.client?.globals?.siteId) {
-			throw new Error(`Snap: config provided must contain a valid config.client.globals.siteId value`);
+			//error msg should change depending if this is a snap templates site or not.
+			if (services?.templatesStore) {
+				throw new Error(`SnapTemplates: config provided must contain a valid config.siteId value`);
+			} else {
+				throw new Error(`Snap: config provided must contain a valid config.client.globals.siteId value`);
+			}
 		}
 
 		// segmented merchandising context -> client globals
@@ -415,7 +412,7 @@ export class Snap {
 				this.mode = this.config.mode as AppMode;
 			}
 
-			// query param / cookiev override
+			// query param / cookie override
 			if ((urlParams?.params?.query && 'dev' in urlParams.params.query) || !!cookies.get(DEV_COOKIE)) {
 				if (urlParams?.params.query?.dev == 'false' || urlParams?.params.query?.dev == '0') {
 					cookies.unset(DEV_COOKIE, cookieDomain);
@@ -446,26 +443,14 @@ export class Snap {
 					currency: this.context.currency,
 				});
 			}
-
-			const trackerConfig = deepmerge(this.config.tracker?.config || {}, { framework: 'preact', mode: this.mode });
-			this.tracker = services?.tracker || new Tracker(trackerGlobals, trackerConfig);
-
-			// check for tracking attribution in URL ?ss_attribution=type:id
-			const sessionAttribution = window.sessionStorage?.getItem(SESSION_ATTRIBUTION);
-			if (urlParams?.params?.query?.ss_attribution) {
-				const attribution = urlParams.params.query.ss_attribution.split(':');
-				const [type, id] = attribution;
-				if (type && id) {
-					this.tracker.updateContext('attribution', { type, id });
-				}
-				// save to session storage
-				window.sessionStorage?.setItem(SESSION_ATTRIBUTION, urlParams.params.query.ss_attribution);
-			} else if (sessionAttribution) {
-				const [type, id] = sessionAttribution.split(':');
-				if (type && id) {
-					this.tracker.updateContext('attribution', { type, id });
-				}
+			if (this.context.shopper?.cart) {
+				trackerGlobals = deepmerge(trackerGlobals || {}, {
+					cart: this.context.shopper.cart,
+				});
 			}
+
+			const trackerConfig = deepmerge(this.config.tracker?.config || {}, { framework: 'snap/preact', mode: this.mode });
+			this.tracker = services?.tracker || new Tracker(trackerGlobals, trackerConfig);
 
 			// log version
 			this.logger.imageText({
@@ -599,15 +584,6 @@ export class Snap {
 			this.tracker.track.shopper.login({
 				id: this.context.shopper.id,
 			});
-		}
-
-		// auto populate cart cookie from the context
-		if (this.context?.shopper?.cart) {
-			const cart = this.context.shopper.cart;
-			if (Array.isArray(cart)) {
-				const cartItems = cart.filter((item) => item?.sku || item?.childSku).map((item) => (item?.sku || item?.childSku || '').trim());
-				this.tracker.cookies.cart.set(cartItems);
-			}
 		}
 
 		// create controllers

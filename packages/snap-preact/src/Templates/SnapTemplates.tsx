@@ -2,7 +2,7 @@ import { h, render } from 'preact';
 import deepmerge from 'deepmerge';
 
 import { Snap } from '../Snap';
-import { TemplateSelect } from '../../components/src';
+import { TemplateSelect } from '../../components/src/components/Atoms/TemplateSelect';
 
 import { DomTargeter, url, cookies, getContext } from '@searchspring/snap-toolbox';
 import { TemplateTarget, TemplatesStore } from './Stores/TemplateStore';
@@ -57,7 +57,6 @@ const TEMPLATE_EDITOR_PARAM = 'searchspring-editor';
 // TODO: tabbing, finder
 export type SearchTargetConfig = {
 	selector: string;
-	theme?: keyof LibraryImports['theme'] | (string & NonNullable<unknown>);
 	component: keyof LibraryImports['component']['search'];
 	resultComponent?: keyof LibraryImports['component']['result'] | (string & NonNullable<unknown>);
 };
@@ -65,23 +64,19 @@ export type SearchTargetConfig = {
 export type AutocompleteTargetConfig = {
 	selector: string;
 	inputSelector?: string;
-	theme?: keyof LibraryImports['theme'] | (string & NonNullable<unknown>);
 	component: keyof LibraryImports['component']['autocomplete'];
 	resultComponent?: keyof LibraryImports['component']['result'] | (string & NonNullable<unknown>);
 };
 
 export type RecommendationDefaultTargetConfig = {
-	theme?: keyof LibraryImports['theme'] | (string & NonNullable<unknown>);
 	component: keyof LibraryImports['component']['recommendation']['default'];
 	resultComponent?: keyof LibraryImports['component']['result'] | (string & NonNullable<unknown>);
 };
 export type RecommendationEmailTargetConfig = {
-	theme?: keyof LibraryImports['theme'] | (string & NonNullable<unknown>);
 	component: keyof LibraryImports['component']['recommendation']['email'];
 	resultComponent?: keyof LibraryImports['component']['result'] | (string & NonNullable<unknown>);
 };
 export type RecommendationBundleTargetConfig = {
-	theme?: keyof LibraryImports['theme'] | (string & NonNullable<unknown>);
 	component: keyof LibraryImports['component']['recommendation']['bundle'];
 	resultComponent?: keyof LibraryImports['component']['result'] | (string & NonNullable<unknown>);
 };

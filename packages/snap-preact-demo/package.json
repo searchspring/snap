@@ -1,7 +1,7 @@
 {
 	"name": "@searchspring/snap-preact-demo",
 	"private": true,
-	"version": "1.7.0",
+	"version": "1.8.1",
 	"description": "demo store for development and testing",
 	"author": "Searchspring",
 	"license": "MIT",
@@ -13,10 +13,11 @@
 		"build": "rm -rf ./dist && webpack --config webpack.build.js",
 		"build:docs": "echo 'no docs for snap-preact-demo'",
 		"cypress": "cypress open --project tests",
-		"dev": "kill $(lsof -ti:2222,8888); webpack serve --config webpack.dev.js",
+		"cypress:headless": "cypress run --project tests",
+		"dev": "webpack serve --config webpack.dev.js",
 		"format": "prettier --write '{snap,templates}/src/**/*.{js,jsx,ts,tsx}'",
 		"lint": "eslint '{snap,templates}/src/**/*.{js,jsx,ts,tsx}'",
-		"test": "(kill $(lsof -ti:2222,8888); webpack serve --config webpack.dev.js & cypress run --project tests; r=$?; kill $(lsof -ti:2222,8888); [ \"$r\" -gt 0 ] && exit 1; exit 0)",
+		"test": "START_SERVER_AND_TEST_INSECURE=1 start-server-and-test dev https-get://localhost:2222 cypress:headless",
 		"lighthouse": "lhci --config ./tests/lighthouse/lighthouserc.js autorun"
 	},
 	"searchspring": {
@@ -33,7 +34,7 @@
 		"scaffold": "snapfu-core"
 	},
 	"dependencies": {
-		"@searchspring/snap-preact": "^1.7.0",
+		"@searchspring/snap-preact": "^1.8.0",
 		"deepmerge": "4.3.1",
 		"mobx-react": "7.6.0",
 		"preact": "10.9.0"
@@ -53,11 +54,12 @@
 		"babel-loader": "^9.1.2",
 		"core-js": "^3.35.0",
 		"css-loader": "^6.7.3",
-		"cypress": "^13.7.1",
+		"cypress": "^14.2.1",
 		"cypress-wait-until": "^3.0.1",
 		"file-loader": "^6.2.0",
 		"sass": "^1.69.7",
 		"sass-loader": "^13.3.3",
+		"start-server-and-test": "^2.0.12",
 		"style-loader": "^3.3.3",
 		"ts-loader": "9.5.1",
 		"webpack": "^5.89.0",

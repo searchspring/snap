@@ -1,10 +1,11 @@
 import { h } from 'preact';
 
-import { render } from '@testing-library/preact';
+import { render, waitFor } from '@testing-library/preact';
 import userEvent from '@testing-library/user-event';
 
 import { Slideout, SlideDirectionType } from './Slideout';
 import { ThemeProvider } from '../../../providers';
+import { wait } from '@testing-library/user-event/dist/utils';
 
 describe('Slideout Component', () => {
 	beforeEach(() => {
@@ -201,6 +202,34 @@ describe('Slideout Component', () => {
 		expect(containerElement).toHaveClass('ss__slideout--active');
 	});
 
+	it('toggles the "ss__slideout--active" class when the button is clicked', async () => {
+		const args = {
+			buttonContent: 'click me',
+		};
+		const rendered = render(
+			<Slideout {...args}>
+				<div id="findme">findme</div>
+			</Slideout>
+		);
+
+		const buttonElement = rendered.container.querySelector('.ss__slideout__button');
+		const containerElement = rendered.container.querySelector('.ss__slideout');
+		const findMeDiv = rendered.container.querySelector('#findme');
+
+		expect(containerElement).not.toHaveClass('ss__slideout--active');
+		expect(findMeDiv).not.toBeInTheDocument();
+
+		// click the button
+		userEvent.click(buttonElement!);
+
+		await waitFor(() => {
+			const containerElement = rendered.container.querySelector('.ss__slideout');
+			const findMeDiv = rendered.container.querySelector('#findme');
+			expect(containerElement).toHaveClass('ss__slideout--active');
+			expect(findMeDiv).toBeInTheDocument();
+		});
+	});
+
 	it('toggles the "ss__slideout--active" class when using clonedElement props', async () => {
 		const ButtonComponent = (props: any) => {
 			return (
@@ -226,6 +255,36 @@ describe('Slideout Component', () => {
 		if (buttonElement) await userEvent.click(buttonElement);
 		expect(containerElement).toHaveClass('ss__slideout--active');
 		expect(buttonElement).toHaveTextContent('active');
+	});
+
+	it('toggles the "ss__slideout--active" class when the buttonSelector elem is clicked', async () => {
+		const args = {
+			buttonSelector: '#clickMe',
+		};
+		const rendered = render(
+			<>
+				<div id="clickMe">click me</div>
+				<Slideout {...args}>
+					<div id="findme">findme</div>
+				</Slideout>
+			</>
+		);
+
+		const buttonElement = rendered.container.querySelector('#clickMe');
+		const containerElement = rendered.container.querySelector('.ss__slideout');
+		const findMeDiv = rendered.container.querySelector('#findme');
+
+		expect(containerElement).not.toHaveClass('ss__slideout--active');
+		expect(findMeDiv).not.toBeInTheDocument();
+
+		// click the button
+		userEvent.click(buttonElement!);
+		await waitFor(() => {
+			const containerElement = rendered.container.querySelector('.ss__slideout');
+			const findMeDiv = rendered.container.querySelector('#findme');
+			expect(containerElement).toHaveClass('ss__slideout--active');
+			expect(findMeDiv).toBeInTheDocument();
+		});
 	});
 
 	it('can disable styles', () => {

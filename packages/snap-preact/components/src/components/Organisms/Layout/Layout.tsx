@@ -33,6 +33,9 @@ const defaultStyles: StyleScript<LayoutProps> = ({}) => {
 		'.ss__layout__separator': {
 			flex: '1 1 auto',
 		},
+		'.ss__layout__row:empty': {
+			display: 'none',
+		},
 		'.ss__layout__row': {
 			display: 'flex',
 			alignItems: 'center',
@@ -57,6 +60,8 @@ export const Layout = observer((properties: LayoutProps): JSX.Element => {
 
 	const props = mergeProps('layout', globalTheme, defaultProps, properties);
 	const { controller, toggleSideBarButton, disableStyles, className, treePath, layout } = props;
+
+	delete props.treePath;
 
 	const styling = mergeStyles<LayoutProps>(props, defaultStyles);
 
@@ -296,7 +301,7 @@ export const Layout = observer((properties: LayoutProps): JSX.Element => {
 	let rowIndex = 0;
 	let separatorIndex = 0;
 
-	useCleanUpEmptyDivs('.ss__layout__row');
+	useCleanUpEmptyDivs(['.ss__layout__row'], '.ss__layout__separator');
 
 	return hasChildrenToRender ? (
 		<CacheProvider>

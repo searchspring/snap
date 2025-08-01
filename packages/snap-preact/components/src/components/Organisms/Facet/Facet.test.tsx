@@ -4,9 +4,10 @@ import { Facet, FacetProps } from './Facet';
 import { ThemeProvider } from '../../../providers';
 
 import userEvent from '@testing-library/user-event';
-import { ValueFacet, RangeFacet } from '@searchspring/snap-store-mobx';
+import { ValueFacet, RangeFacet, SearchFacetStore, StorageStore } from '@searchspring/snap-store-mobx';
 import { SearchResponseModelFacet, SearchResponseModelFacetValueAllOf } from '@searchspring/snapi-types';
 import { MockData } from '@searchspring/snap-shared';
+import { QueryStringTranslator, reactLinker, UrlManager } from '@searchspring/snap-url-manager';
 import { IconType } from '../../Atoms/Icon';
 
 const mockData = new MockData();
@@ -134,22 +135,150 @@ describe('Facet Component', () => {
 			expect(styles.color).toBe(args.color);
 		});
 
-		it('show more/less text prop', async () => {
+		it('showSelectedCount, clear all text & clearAllIcon props', async () => {
+			mockData.updateConfig({ search: 'filtered' });
+
+			const mockTestData = mockData.searchMeta();
+			const facetStore = new SearchFacetStore({
+				config: { id: 'testing' },
+				stores: { storage: new StorageStore() },
+				services: { urlManager: new UrlManager(new QueryStringTranslator(), reactLinker) },
+				data: { search: mockTestData.search, meta: mockTestData.meta },
+			});
+
+			const clearAllText = 'Clear All Text';
+
 			const args = {
-				facet: facetOverflowMock as ValueFacet,
+				facet: facetStore.filter((facet) => facet.field == 'size_dress')!.pop()!,
+				showSelectedCount: true,
+				clearAllText: clearAllText,
+				showClearAllText: true,
+				clearAllIcon: 'cog' as IconType,
+			};
+
+			const rendered = render(<Facet {...args} />);
+			const optionElems = rendered.container.querySelectorAll('.ss__facet-grid-options__option')!;
+			expect(optionElems.length).toBeGreaterThan(0);
+
+			const selectedCountElem = rendered.container.querySelector('.ss__facet__header__selected-count');
+			const clearAllDiv = rendered.container.querySelector('.ss__facet__header__clear-all');
+			const clearAllDivText = rendered.container.querySelector('.ss__facet__header__clear-all label');
+			const clearAllDivIcon = rendered.container.querySelector('.ss__facet__header__clear-all .ss__icon');
+
+			expect(selectedCountElem).toBeInTheDocument();
+			expect(selectedCountElem?.innerHTML).toBe('(1)');
+
+			expect(clearAllDiv).toBeInTheDocument();
+			expect(clearAllDivText).toBeInTheDocument();
+			expect(clearAllDivText?.textContent).toBe(clearAllText);
+
+			expect(clearAllDivIcon).toBeInTheDocument();
+			expect(clearAllDivIcon?.classList).toContain('ss__icon--cog');
+
+			mockData.updateConfig({ search: 'default' });
+		});
+
+		it('has expected default clear all text', async () => {
+			mockData.updateConfig({ search: 'filtered' });
+
+			const mockTestData = mockData.searchMeta();
+			const facetStore = new SearchFacetStore({
+				config: { id: 'testing' },
+				stores: { storage: new StorageStore() },
+				services: { urlManager: new UrlManager(new QueryStringTranslator(), reactLinker) },
+				data: { search: mockTestData.search, meta: mockTestData.meta },
+			});
+
+			const args = {
+				facet: facetStore.filter((facet) => facet.field == 'size_dress')!.pop()!,
+				showClearAllText: true,
+			};
+
+			const rendered = render(<Facet {...args} />);
+			const optionElems = rendered.container.querySelectorAll('.ss__facet-grid-options__option')!;
+			expect(optionElems.length).toBeGreaterThan(0);
+
+			const clearAllDiv = rendered.container.querySelector('.ss__facet__header__clear-all');
+			const clearAllDivText = rendered.container.querySelector('.ss__facet__header__clear-all label');
+			const clearAllDivIcon = rendered.container.querySelector('.ss__facet__header__clear-all .ss__icon');
+
+			expect(clearAllDiv).toBeInTheDocument();
+			expect(clearAllDivText).toBeInTheDocument();
+			expect(clearAllDivText?.textContent).toBe('Clear All');
+
+			expect(clearAllDivIcon).not.toBeInTheDocument();
+
+			mockData.updateConfig({ search: 'default' });
+		});
+
+		it('does not render clear all text if no showClearAllText provided', async () => {
+			mockData.updateConfig({ search: 'filtered' });
+
+			const mockTestData = mockData.searchMeta();
+			const facetStore = new SearchFacetStore({
+				config: { id: 'testing' },
+				stores: { storage: new StorageStore() },
+				services: { urlManager: new UrlManager(new QueryStringTranslator(), reactLinker) },
+				data: { search: mockTestData.search, meta: mockTestData.meta },
+			});
+
+			const clearAllText = 'Clear All Text';
+
+			const args = {
+				facet: facetStore.filter((facet) => facet.field == 'size_dress')!.pop()!,
+				clearAllText: clearAllText,
+				// showClearAllText: false,
+				clearAllIcon: 'cog' as IconType,
+			};
+
+			const rendered = render(<Facet {...args} />);
+			const optionElems = rendered.container.querySelectorAll('.ss__facet-grid-options__option')!;
+			expect(optionElems.length).toBeGreaterThan(0);
+
+			const clearAllDiv = rendered.container.querySelector('.ss__facet__header__clear-all');
+			const clearAllDivText = rendered.container.querySelector('.ss__facet__header__clear-all label');
+			const clearAllDivIcon = rendered.container.querySelector('.ss__facet__header__clear-all .ss__icon');
+
+			expect(clearAllDiv).toBeInTheDocument();
+			expect(clearAllDivText).not.toBeInTheDocument();
+
+			expect(clearAllDivIcon).toBeInTheDocument();
+			expect(clearAllDivIcon?.classList).toContain('ss__icon--cog');
+
+			mockData.updateConfig({ search: 'default' });
+		});
+
+		it('show more/less text prop', async () => {
+			const mockTestData = mockData.searchMeta();
+			const facetStore = new SearchFacetStore({
+				config: { id: 'testing' },
+				stores: { storage: new StorageStore() },
+				services: { urlManager: new UrlManager(new QueryStringTranslator(), reactLinker) },
+				data: { search: mockTestData.search, meta: mockTestData.meta },
+			});
+
+			const args = {
+				facet: facetStore.filter((facet) => facet.field == 'brand')!.pop()!,
 				showMoreText: 'Show More please',
 				showLessText: 'Show Less please',
 			};
-			// @ts-ignore - readonly
-			args.facet.refinedValues = args.facet.values;
+
 			const rendered = render(<Facet {...args} />);
-			const facetElement = rendered.container.querySelector('.ss__facet__show-more-less')!;
-			expect(facetElement).toBeInTheDocument();
-			expect(facetElement).toHaveTextContent(args.showMoreText);
+			const facet = rendered.container.querySelector('.ss__facet')!;
+			const showMoreElement = rendered.container.querySelector('.ss__facet__show-more-less')!;
+			expect(facet).toBeInTheDocument();
+			expect(facet.classList).toContain('ss__facet--brand');
+			expect(facet.classList).not.toContain('ss__facet--showing-all');
 
-			userEvent.click(facetElement);
+			expect(showMoreElement).toBeInTheDocument();
+			expect(showMoreElement).toHaveTextContent(args.showMoreText);
 
-			await waitFor(() => expect(facetElement).toHaveTextContent(args.showMoreText));
+			userEvent.click(showMoreElement);
+
+			await waitFor(() => {
+				expect(facet.classList).toContain('ss__facet--showing-all');
+				expect(showMoreElement).toHaveTextContent(args.showLessText);
+			});
 		});
 
 		it('can hide show more/less text prop', async () => {
@@ -285,7 +414,7 @@ describe('Facet Component', () => {
 
 		const facetElement = rendered.container.querySelector('.ss__facet');
 
-		expect(facetElement?.classList).toHaveLength(2);
+		expect(facetElement?.classList).toHaveLength(3);
 	});
 
 	describe('Facet lang works', () => {

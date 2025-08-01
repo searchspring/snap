@@ -127,6 +127,13 @@ export default {
 			},
 			control: { type: 'object' },
 		},
+		templates: {
+			description: 'templates to render',
+			table: {
+				type: { summary: 'object' },
+			},
+			control: { type: 'object' },
+		},
 		...componentArgs,
 	},
 };

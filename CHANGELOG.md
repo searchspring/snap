@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.8.1](https://github.com/searchspring/snap-1.0/compare/v1.8.0...v1.8.1) (2025-06-02)
+
+**Note:** Version bump only for package @searchspring/snap
+
+# [1.8.0](https://github.com/searchspring/snap-1.0/compare/v1.7.0...v1.8.0) (2025-05-28)
+
+### Bug Fixes
+
+- **preact/components:** bugfixes for paletteOptions, and snappy search layoutOptions ([e284b73](https://github.com/searchspring/snap-1.0/commit/e284b73ef652e8802db41b82613e4f6bdfa8343c))
+- **preact/components:** some bug fixes around ac no results component and layout components both causing rerenders and jankyness ([6ef8f69](https://github.com/searchspring/snap-1.0/commit/6ef8f69d1a3803c0720d2ad4e80d62d7a3b30a54))
+- **preact/mergeprops:** fixing bug around responsive prop merge ([d6ecf4b](https://github.com/searchspring/snap-1.0/commit/d6ecf4b08feb67040c1ac1c6822f24b8a2be9108))
+
+### Features
+
+- **preact/components:** new prop for hierarchy facet returnIcon, and classname for facet when showing all options ([fe2d7c0](https://github.com/searchspring/snap-1.0/commit/fe2d7c01f29c81040cecd1b999dd9853786cdcf9))
+
 # [1.7.0](https://github.com/searchspring/snap-1.0/compare/v1.6.1...v1.7.0) (2025-05-21)
 
 ### Bug Fixes
@@ -247,6 +263,115 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 - **snap-layout/theming:** work towards theming a snap layout using styleScripts ([b6be05e](https://github.com/searchspring/snap-1.0/commit/b6be05eee8fc0a06c9e853a591aa0d380158fc0c))
 - support template themes in snap-preact ([df9d905](https://github.com/searchspring/snap-1.0/commit/df9d9057a1554d7eb62830002c3db990e0f8f272))
 - theme reactivity initial interface ([c017aad](https://github.com/searchspring/snap-1.0/commit/c017aadd4add7591bd98fcfbdb8db8985bf2d498))
+## [0.67.4](https://github.com/searchspring/snap/compare/v0.67.3...v0.67.4) (2025-07-29)
+
+### Bug Fixes
+
+- **controller/autocomplete:** adding a routine to ensure we do not submit incorrect redirection ([6053233](https://github.com/searchspring/snap/commit/6053233c630a29f1b71249399875947a63e0af33))
+- **controller/autocomplete:** adjusting logic around redirect to prevent issues with "showResults" ([416ce9d](https://github.com/searchspring/snap/commit/416ce9da1220111f1e00bb351c1589b7847cfdf6))
+
+## [0.67.3](https://github.com/searchspring/snap/compare/v0.67.2...v0.67.3) (2025-07-24)
+
+### Bug Fixes
+
+- add rq to beacon payload ([234d9b9](https://github.com/searchspring/snap/commit/234d9b9fd4a6bf134a7d8d80a3c52f3e74c62942))
+
+## [0.67.2](https://github.com/searchspring/snap/compare/v0.67.1...v0.67.2) (2025-07-15)
+
+**Note:** Version bump only for package @searchspring/snap
+
+## [0.67.1](https://github.com/searchspring/snap/compare/v0.67.0...v0.67.1) (2025-07-15)
+
+**Note:** Version bump only for package @searchspring/snap
+
+# [0.67.0](https://github.com/searchspring/snap/compare/v0.66.4...v0.67.0) (2025-07-15)
+
+### Bug Fixes
+
+- catch QuotaExceededError errors when setting local or session storage ([6048727](https://github.com/searchspring/snap/commit/60487278409133c5744885af9121bbac55f8cba8))
+- **client/recommend:** fixing regression in order option when using legacy script blocks ([b1ca0eb](https://github.com/searchspring/snap/commit/b1ca0eba4affb038ca61b569585f33e80d4e676c))
+- range checking incorrect property ([273062d](https://github.com/searchspring/snap/commit/273062d0f307cf17b1cf01e6087b62cfae3e01ac))
+- **store-mobx/searchresultstore:** fixing issue when no options are present (defensive) ([744b9f5](https://github.com/searchspring/snap/commit/744b9f586f990a9ff6ea52bb2032f537faf425c9))
+
+### Features
+
+- **searchresultstore:** adding support for api variants ([f2a9c26](https://github.com/searchspring/snap/commit/f2a9c2624c06c895eb2864a409072f612bae1641))
+
+## [0.66.4](https://github.com/searchspring/snap/compare/v0.66.3...v0.66.4) (2025-06-30)
+
+### Bug Fixes
+
+- **client/cache:** adjust logic for cached flag ([07122cb](https://github.com/searchspring/snap/commit/07122cb967a006009703cc1314b6b1aa0de75b1d))
+- **client/cache:** updating logic for array response of recommendation API for \_cached flag ([b6d454b](https://github.com/searchspring/snap/commit/b6d454bbde4fff68378662ac4a67af6243fcf2fb))
+
+## [0.66.3](https://github.com/searchspring/snap/compare/v0.66.2...v0.66.3) (2025-06-27)
+
+### Bug Fixes
+
+- prevent beacon render events upon cached api response ([cca9a83](https://github.com/searchspring/snap/commit/cca9a83b6772548ac5b213ccbbaa666d4284a8dd))
+- **searchresultstore.ts:** bugfix for realtime variant selections and case sensitivity ([6641e8c](https://github.com/searchspring/snap/commit/6641e8c1293fb9335d7ded8f543c6d0bbb411c76))
+
+## [0.66.2](https://github.com/searchspring/snap/compare/v0.66.1...v0.66.2) (2025-06-11)
+
+### Bug Fixes
+
+- beacon impression tracking when interacting ([b092b31](https://github.com/searchspring/snap/commit/b092b318ccfa951995225e2aebdbe9d7335fcf41))
+
+## [0.66.1](https://github.com/searchspring/snap/compare/v0.66.0...v0.66.1) (2025-06-10)
+
+### Bug Fixes
+
+- **controller/search:** adjusting code that checks product URL to ensure we check multiple values ([adb5137](https://github.com/searchspring/snap/commit/adb5137040c23bc2315fccc7e9d6779484be9317))
+- no results beacon render event ([1925c5f](https://github.com/searchspring/snap/commit/1925c5fdd5a8789702bae3a173ef329cb0bc9012))
+
+# [0.66.0](https://github.com/searchspring/snap/compare/v0.65.2...v0.66.0) (2025-06-09)
+
+### Bug Fixes
+
+- beacon improvements - fix position, refactor closest click, improve ac impressions ([3966c8b](https://github.com/searchspring/snap/commit/3966c8b8cb70506682cf4c92e07c8f02a28169c9))
+- infinite scrolling tracking to use correct beacon schema data ([25c13f2](https://github.com/searchspring/snap/commit/25c13f2a97c17734f5d3ca79e02350653952485f))
+
+### Features
+
+- add cart infering, update tracking documentation ([6bdef42](https://github.com/searchspring/snap/commit/6bdef423746486179bb079d78c0776ffedf79875))
+- add Swiper scrollbar support to Recommendations component ([00800a1](https://github.com/searchspring/snap/commit/00800a193cb88d65a36c93cc023ed03f360b8d9e))
+- add withTracking and useTracking, post beacon launch fixes ([84bab28](https://github.com/searchspring/snap/commit/84bab28c3edf0b1c632226dcb316f6132bf3f56b))
+- **preact/components/icon:** adding title to icon component ([a4c620c](https://github.com/searchspring/snap/commit/a4c620cb2497c1b8dd5e6685649c81c6d2bc04c3))
+
+## [0.65.2](https://github.com/searchspring/snap/compare/v0.65.1...v0.65.2) (2025-04-08)
+
+### Bug Fixes
+
+- cypress test - mock beacon response ([3789c21](https://github.com/searchspring/snap/commit/3789c2189c1e99aa214346246aa5e41bac3fb992))
+- track tests, refactors ([2b522ee](https://github.com/searchspring/snap/commit/2b522ee256afd624095ab1f200108be8f1324473))
+
+## [0.65.1](https://github.com/searchspring/snap/compare/v0.65.0...v0.65.1) (2025-03-26)
+
+### Bug Fixes
+
+- **tracking:** fixes around beaconjs integration - infinite renders/impressions, q, corrected q ([6a63aa5](https://github.com/searchspring/snap/commit/6a63aa5c23221bb3c7c493bda95bb787b2b827e4))
+
+# [0.65.0](https://github.com/searchspring/snap/compare/v0.64.0...v0.65.0) (2025-03-26)
+
+### Bug Fixes
+
+- remove attribution from Snap.tsx, update integration tests ([ac58a02](https://github.com/searchspring/snap/commit/ac58a0228e87c89f5173d7ae1f2411140c9a14d9))
+
+### Features
+
+- **preact-components:** creating new universal ResultTracker - functionally disabled for now ([dedca16](https://github.com/searchspring/snap/commit/dedca16c5192b8f9e4287201cfa9987c1c276340))
+
+# [0.64.0](https://github.com/searchspring/snap/compare/v0.63.5...v0.64.0) (2025-03-07)
+
+### Bug Fixes
+
+- **controller/search:** altering logic to always store previous results for cases where needed ([d498dee](https://github.com/searchspring/snap/commit/d498dee07919acab21147b6a240608764448f7e9))
+- **preact-components/overlaybadge:** adding commonly used styles ([fe8bcd6](https://github.com/searchspring/snap/commit/fe8bcd6b6b8598e3fc13ea26c5f4f2d360e97117))
+- **searchcontroller.ts:** bugfix for infinite rerenders and researches when redirecting ([2a4d214](https://github.com/searchspring/snap/commit/2a4d2143d3c73774354bc4386e7ee6c9e9e32c66))
+
+### Features
+
+- **preact-components/dropdown:** adding hover featureset to dropdown component ([20c847b](https://github.com/searchspring/snap/commit/20c847b1ee1100c1a71892e16d22c89c632fbac8))
 
 ## [0.63.5](https://github.com/searchspring/snap/compare/v0.63.4...v0.63.5) (2025-02-21)
 

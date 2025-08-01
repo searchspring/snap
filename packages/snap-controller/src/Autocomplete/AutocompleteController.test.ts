@@ -1,3 +1,4 @@
+import 'whatwg-fetch';
 import { v4 as uuidv4 } from 'uuid';
 
 import { AutocompleteStore } from '@searchspring/snap-store-mobx';
@@ -128,6 +129,9 @@ const badArgs = [
 		tracker: new Tracker(globals),
 	},
 ];
+
+// mocks fetch so beacon client does not make network requests
+jest.spyOn(global.window, 'fetch').mockImplementation(() => Promise.resolve({ status: 200, json: () => Promise.resolve({}) } as Response));
 
 describe('Autocomplete Controller', () => {
 	beforeEach(() => {
@@ -492,37 +496,6 @@ describe('Autocomplete Controller', () => {
 		expect(controller.store.state.url.href).toBe('http://localhost/search.html?view=shop&search_query=white');
 	});
 
-	it('can invoke controller track.product.click', async () => {
-		const controller = new AutocompleteController(acConfig, {
-			client: new MockClient(globals, {}),
-			store: new AutocompleteStore(acConfig, services),
-			urlManager,
-			eventManager: new EventManager(),
-			profiler: new Profiler(),
-			logger: new Logger(),
-			tracker: new Tracker(globals),
-		});
-		const clickfn = jest.spyOn(controller.track.product, 'click');
-
-		(controller.client as MockClient).mockData.updateConfig({ autocomplete: 'autocomplete.query.bumpers' });
-
-		await controller.search();
-
-		const event = new Event('click');
-
-		const logWarnfn = jest.spyOn(controller.log, 'warn');
-
-		controller.track.product.click(event as any, {});
-
-		await waitFor(() => {
-			expect(clickfn).toHaveBeenCalledWith(event, {});
-			expect(logWarnfn).toHaveBeenCalledWith('product.click tracking is not currently supported in this controller type');
-		});
-
-		clickfn.mockClear();
-		logWarnfn.mockClear();
-	});
-
 	it('can set personalization cart param', async () => {
 		const controller = new AutocompleteController(acConfig, {
 			client: new MockClient(globals, {}),
@@ -685,6 +658,11 @@ describe('Autocomplete Controller', () => {
 			tracker: new Tracker(globals),
 		});
 
+		const query = 'bumpers';
+		controller.urlManager = controller.urlManager.reset().set('query', query);
+		expect(controller.urlManager.state.query).toBe(query);
+
+		(controller.client as MockClient).mockData.updateConfig({ autocomplete: 'autocomplete.query.bumpers' });
 		await controller.search();
 
 		const eventfn = jest.spyOn(controller.eventManager, 'fire');
@@ -1014,7 +992,7 @@ describe('Autocomplete Controller', () => {
 		});
 		(controller.client as MockClient).mockData.updateConfig({ autocomplete: 'redirect', siteId: '8uyt2m' });
 
-		const query = 'rumper';
+		const query = 'romper';
 		controller.urlManager = controller.urlManager.set('query', query);
 
 		await controller.bind();
@@ -1066,7 +1044,7 @@ describe('Autocomplete Controller', () => {
 		});
 		(controller.client as MockClient).mockData.updateConfig({ autocomplete: 'redirect', siteId: '8uyt2m' });
 
-		const query = 'rumper';
+		const query = 'romper';
 		controller.urlManager = controller.urlManager.set('query', query);
 
 		await controller.bind();
@@ -1096,7 +1074,7 @@ describe('Autocomplete Controller', () => {
 		inputEl.dispatchEvent(new KeyboardEvent('keydown', { bubbles: true, keyCode: KEY_ENTER }));
 
 		await waitFor(() => {
-			expect(window.location.href).toContain('/search?oq=rumper&search_query=romper');
+			expect(window.location.href).toContain('/search?search_query=dress');
 		});
 	});
 

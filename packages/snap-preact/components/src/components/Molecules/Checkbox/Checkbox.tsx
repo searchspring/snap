@@ -51,8 +51,28 @@ export const Checkbox = observer((properties: CheckboxProps): JSX.Element => {
 
 	const props = mergeProps('checkbox', globalTheme, defaultProps, properties);
 
-	const { checked, color, disabled, icon, iconColor, onClick, size, startChecked, native, disableA11y, disableStyles, className, theme, treePath } =
-		props;
+	const {
+		checked,
+		color,
+		disabled,
+		icon,
+		iconColor,
+		onClick,
+		size,
+		startChecked,
+		native,
+		disableA11y,
+		disableStyles,
+		className,
+		theme,
+		treePath,
+		lang,
+		style: _,
+		styleScript: __,
+		themeStyleScript: ___,
+		name: ____,
+		...additionalProps
+	} = props;
 
 	const pixelSize = isNaN(Number(size)) ? size : `${size}px`;
 
@@ -104,8 +124,8 @@ export const Checkbox = observer((properties: CheckboxProps): JSX.Element => {
 	};
 
 	//deep merge with props.lang
-	const lang = deepmerge(defaultLang, props.lang || {});
-	const mergedLang = useLang(lang as any, {
+	const _lang = deepmerge(defaultLang, lang || {});
+	const mergedLang = useLang(_lang as any, {
 		checkedState,
 		disabled,
 	});
@@ -136,6 +156,7 @@ export const Checkbox = observer((properties: CheckboxProps): JSX.Element => {
 					aria-disabled={disabled}
 					role="checkbox"
 					aria-checked={checkedState}
+					{...additionalProps}
 					{...mergedLang.checkbox.all}
 				>
 					{checkedState ? (

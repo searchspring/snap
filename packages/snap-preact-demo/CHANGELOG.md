@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.8.1](https://github.com/searchspring/snap-1.0/compare/v1.8.0...v1.8.1) (2025-06-02)
+
+**Note:** Version bump only for package @searchspring/snap-preact-demo
+
+# [1.8.0](https://github.com/searchspring/snap-1.0/compare/v1.7.0...v1.8.0) (2025-05-28)
+
+### Features
+
+- **preact/components:** new prop for hierarchy facet returnIcon, and classname for facet when showing all options ([fe2d7c0](https://github.com/searchspring/snap-1.0/commit/fe2d7c01f29c81040cecd1b999dd9853786cdcf9))
+
 # [1.7.0](https://github.com/searchspring/snap-1.0/compare/v1.6.1...v1.7.0) (2025-05-21)
 
 **Note:** Version bump only for package @searchspring/snap-preact-demo
@@ -118,6 +128,67 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 - responsive themestore and breakpoint props ([d4faf3a](https://github.com/searchspring/snap-1.0/commit/d4faf3acdd2703b0225d4784c078ada967c64527))
 - separate recommendation types ([4a03491](https://github.com/searchspring/snap-1.0/commit/4a03491766fd3dbd3eeddf8d91ed4572bd4ae6bf))
 - support template themes in snap-preact ([df9d905](https://github.com/searchspring/snap-1.0/commit/df9d9057a1554d7eb62830002c3db990e0f8f272))
+
+## [0.67.4](https://github.com/searchspring/snap/compare/v0.67.3...v0.67.4) (2025-07-29)
+
+**Note:** Version bump only for package @searchspring/snap-preact-demo
+
+## [0.67.3](https://github.com/searchspring/snap/compare/v0.67.2...v0.67.3) (2025-07-24)
+
+**Note:** Version bump only for package @searchspring/snap-preact-demo
+
+## [0.67.2](https://github.com/searchspring/snap/compare/v0.67.1...v0.67.2) (2025-07-15)
+
+**Note:** Version bump only for package @searchspring/snap-preact-demo
+
+## [0.67.1](https://github.com/searchspring/snap/compare/v0.67.0...v0.67.1) (2025-07-15)
+
+**Note:** Version bump only for package @searchspring/snap-preact-demo
+
+# [0.67.0](https://github.com/searchspring/snap/compare/v0.66.4...v0.67.0) (2025-07-15)
+
+**Note:** Version bump only for package @searchspring/snap-preact-demo
+
+## [0.66.4](https://github.com/searchspring/snap/compare/v0.66.3...v0.66.4) (2025-06-30)
+
+**Note:** Version bump only for package @searchspring/snap-preact-demo
+
+## [0.66.3](https://github.com/searchspring/snap/compare/v0.66.2...v0.66.3) (2025-06-27)
+
+**Note:** Version bump only for package @searchspring/snap-preact-demo
+
+## [0.66.2](https://github.com/searchspring/snap/compare/v0.66.1...v0.66.2) (2025-06-11)
+
+**Note:** Version bump only for package @searchspring/snap-preact-demo
+
+## [0.66.1](https://github.com/searchspring/snap/compare/v0.66.0...v0.66.1) (2025-06-10)
+
+**Note:** Version bump only for package @searchspring/snap-preact-demo
+
+# [0.66.0](https://github.com/searchspring/snap/compare/v0.65.2...v0.66.0) (2025-06-09)
+
+### Bug Fixes
+
+- beacon improvements - fix position, refactor closest click, improve ac impressions ([3966c8b](https://github.com/searchspring/snap/commit/3966c8b8cb70506682cf4c92e07c8f02a28169c9))
+
+## [0.65.2](https://github.com/searchspring/snap/compare/v0.65.1...v0.65.2) (2025-04-08)
+
+### Bug Fixes
+
+- cypress test - mock beacon response ([3789c21](https://github.com/searchspring/snap/commit/3789c2189c1e99aa214346246aa5e41bac3fb992))
+- track tests, refactors ([2b522ee](https://github.com/searchspring/snap/commit/2b522ee256afd624095ab1f200108be8f1324473))
+
+## [0.65.1](https://github.com/searchspring/snap/compare/v0.65.0...v0.65.1) (2025-03-26)
+
+**Note:** Version bump only for package @searchspring/snap-preact-demo
+
+# [0.65.0](https://github.com/searchspring/snap/compare/v0.64.0...v0.65.0) (2025-03-26)
+
+**Note:** Version bump only for package @searchspring/snap-preact-demo
+
+# [0.64.0](https://github.com/searchspring/snap/compare/v0.63.5...v0.64.0) (2025-03-07)
+
+**Note:** Version bump only for package @searchspring/snap-preact-demo
 
 ## [0.63.5](https://github.com/searchspring/snap/compare/v0.63.4...v0.63.5) (2025-02-21)
 

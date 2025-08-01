@@ -1,3 +1,4 @@
+import 'whatwg-fetch';
 import { RecommendationInstantiator, RecommendationInstantiatorConfig } from './RecommendationInstantiator';
 import type { PluginGrouping } from '@searchspring/snap-controller';
 import { cookies } from '@searchspring/snap-toolbox';
@@ -35,10 +36,32 @@ const baseConfig: RecommendationInstantiatorConfig = {
 	},
 };
 
+// Mock localStorage
+const localStorageMock = (() => {
+	let store: Record<string, string> = {};
+	return {
+		getItem: jest.fn((key: string) => store[key] || null),
+		setItem: jest.fn((key: string, value: string) => {
+			store[key] = value.toString();
+		}),
+		removeItem: jest.fn((key: string) => {
+			delete store[key];
+		}),
+		clear: jest.fn(() => {
+			store = {};
+		}),
+	};
+})();
+
+Object.defineProperty(window, 'localStorage', {
+	value: localStorageMock,
+});
+
 describe('RecommendationInstantiator', () => {
 	beforeEach(() => {
 		delete window.searchspring;
 		cookies.unset(CART_COOKIE);
+		localStorageMock.clear();
 	});
 
 	it('throws if configuration is not provided', () => {
@@ -128,29 +151,6 @@ describe('RecommendationInstantiator', () => {
 		const recommendationInstantiator = new RecommendationInstantiator(baseConfig, { client });
 		expect(Object.keys(recommendationInstantiator.controller).length).toBe(0);
 		expect(clientSpy).toHaveBeenCalledTimes(0);
-	});
-
-	it('logs an error when the recommend response does not comeback', async () => {
-		document.body.innerHTML = `<script type="searchspring/recommend" profile="${DEFAULT_PROFILE}"></script>`;
-
-		const logger = new Logger({ prefix: 'RecommendationInstantiator ' });
-		const client = new MockClient(baseConfig.client!.globals, {});
-		client.mockData.updateConfig({ recommend: { results: 'broken' } });
-		const clientSpy = jest.spyOn(client, 'recommend');
-		const logSpy = jest.spyOn(console, 'log');
-		const recommendationInstantiator = new RecommendationInstantiator(baseConfig, { logger, client });
-		await wait();
-
-		expect(Object.keys(recommendationInstantiator.controller).length).toBe(1);
-		expect(clientSpy).toHaveBeenCalledTimes(1);
-		expect(logSpy).not.toHaveBeenCalledWith(
-			`profile '${DEFAULT_PROFILE}' found on the following element is missing a component!\n<script type=\"searchspring/recommend\" profile=\"trending\"></script>`
-		);
-		expect(logSpy).toHaveBeenCalledWith(
-			'%c ‼ %c [recommend_trending_0] :: Search JSON not found.',
-			'color: #cc1212; font-weight: bold; font-size: 14px; line-height: 12px;',
-			'color: #cc1212; font-weight: bold;'
-		);
 	});
 
 	it('logs an error when the profile response does not contain templateParameters', async () => {

@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.8.1](https://github.com/searchspring/snap/compare/v1.8.0...v1.8.1) (2025-06-02)
+
+**Note:** Version bump only for package @searchspring/snap-client
+
+# [1.8.0](https://github.com/searchspring/snap/compare/v1.7.0...v1.8.0) (2025-05-28)
+
+**Note:** Version bump only for package @searchspring/snap-client
+
 # [1.7.0](https://github.com/searchspring/snap/compare/v1.6.1...v1.7.0) (2025-05-21)
 
 **Note:** Version bump only for package @searchspring/snap-client
@@ -90,6 +98,72 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 **Note:** Version bump only for package @searchspring/snap-client
 
 # [1.1.0](https://github.com/searchspring/snap/compare/v0.60.1...v1.1.0) (2024-09-20)
+
+## [0.67.4](https://github.com/searchspring/snap/compare/v0.67.3...v0.67.4) (2025-07-29)
+
+**Note:** Version bump only for package @searchspring/snap-client
+
+## [0.67.3](https://github.com/searchspring/snap/compare/v0.67.2...v0.67.3) (2025-07-24)
+
+**Note:** Version bump only for package @searchspring/snap-client
+
+## [0.67.2](https://github.com/searchspring/snap/compare/v0.67.1...v0.67.2) (2025-07-15)
+
+**Note:** Version bump only for package @searchspring/snap-client
+
+## [0.67.1](https://github.com/searchspring/snap/compare/v0.67.0...v0.67.1) (2025-07-15)
+
+**Note:** Version bump only for package @searchspring/snap-client
+
+# [0.67.0](https://github.com/searchspring/snap/compare/v0.66.4...v0.67.0) (2025-07-15)
+
+### Bug Fixes
+
+- catch QuotaExceededError errors when setting local or session storage ([6048727](https://github.com/searchspring/snap/commit/60487278409133c5744885af9121bbac55f8cba8))
+- **client/recommend:** fixing regression in order option when using legacy script blocks ([b1ca0eb](https://github.com/searchspring/snap/commit/b1ca0eba4affb038ca61b569585f33e80d4e676c))
+
+## [0.66.4](https://github.com/searchspring/snap/compare/v0.66.3...v0.66.4) (2025-06-30)
+
+### Bug Fixes
+
+- **client/cache:** adjust logic for cached flag ([07122cb](https://github.com/searchspring/snap/commit/07122cb967a006009703cc1314b6b1aa0de75b1d))
+- **client/cache:** updating logic for array response of recommendation API for \_cached flag ([b6d454b](https://github.com/searchspring/snap/commit/b6d454bbde4fff68378662ac4a67af6243fcf2fb))
+
+## [0.66.3](https://github.com/searchspring/snap/compare/v0.66.2...v0.66.3) (2025-06-27)
+
+### Bug Fixes
+
+- prevent beacon render events upon cached api response ([cca9a83](https://github.com/searchspring/snap/commit/cca9a83b6772548ac5b213ccbbaa666d4284a8dd))
+
+## [0.66.2](https://github.com/searchspring/snap/compare/v0.66.1...v0.66.2) (2025-06-11)
+
+**Note:** Version bump only for package @searchspring/snap-client
+
+## [0.66.1](https://github.com/searchspring/snap/compare/v0.66.0...v0.66.1) (2025-06-10)
+
+**Note:** Version bump only for package @searchspring/snap-client
+
+# [0.66.0](https://github.com/searchspring/snap/compare/v0.65.2...v0.66.0) (2025-06-09)
+
+### Bug Fixes
+
+- infinite scrolling tracking to use correct beacon schema data ([25c13f2](https://github.com/searchspring/snap/commit/25c13f2a97c17734f5d3ca79e02350653952485f))
+
+## [0.65.2](https://github.com/searchspring/snap/compare/v0.65.1...v0.65.2) (2025-04-08)
+
+**Note:** Version bump only for package @searchspring/snap-client
+
+## [0.65.1](https://github.com/searchspring/snap/compare/v0.65.0...v0.65.1) (2025-03-26)
+
+**Note:** Version bump only for package @searchspring/snap-client
+
+# [0.65.0](https://github.com/searchspring/snap/compare/v0.64.0...v0.65.0) (2025-03-26)
+
+**Note:** Version bump only for package @searchspring/snap-client
+
+# [0.64.0](https://github.com/searchspring/snap/compare/v0.63.5...v0.64.0) (2025-03-07)
+
+**Note:** Version bump only for package @searchspring/snap-client
 
 ## [0.63.5](https://github.com/searchspring/snap/compare/v0.63.4...v0.63.5) (2025-02-21)
 

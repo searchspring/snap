@@ -27,6 +27,13 @@ The `button` prop specifies the dropdown button. This button toggles the visibil
 <Dropdown button={'click me!'}>Hello World!</Dropdown>
 ```
 
+### toggleOnHover
+The `toggleOnHover` prop controls if hover events (onMouseEnter and onMouseLeave) will toggle the dropdown. This is disabled by default.
+
+```jsx
+<Dropdown button={'click me!'} toggleOnHover>Hello World!</Dropdown>
+```
+
 ### open
 The `open` prop sets the dropdown visibility state. 
 
@@ -50,11 +57,25 @@ The `disabled` prop will disable the button from toggling the visibility of the 
 <Dropdown disabled>Hello World!</Dropdown>
 ```
 
+### disableClick
+The `disableClick` prop specifies a boolean which will disable the default click behavior; this is useful if you want to only allow for hovering to toggle the state. Be aware that this will cause the dropdown to not work as expected in mobile (where touch events are used).
+
+```jsx
+<Dropdown disableClick>Hello World!</Dropdown>
+```
+
 ### disableA11y
 The `disableA11y` prop specifies a boolean to disable the autoset ally properties.
 
 ```jsx
 <Dropdown disableA11y>Hello World!</Dropdown>
+```
+
+### focusTrapContent
+The `focusTrapContent` prop specifies if the content should trap the user in a focus trap for a11y keyboard navigation.
+
+```jsx
+<Dropdown focusTrapContent={true} >Hello World!</Dropdown>
 ```
 
 ### disableOverlay
@@ -78,6 +99,20 @@ The `onClick` prop allows for a custom callback function for when the dropdown b
 
 ```jsx
 <Dropdown onClick={(e)=>{console.log(e)}} >Hello World!</Dropdown>
+```
+
+#### onMouseEnter
+The `onMouseEnter` prop allows for a custom callback function for when the dropdown has been hovered.
+
+```jsx
+<Dropdown onMouseEnter={(e)=>{console.log(e)}} >Hello World!</Dropdown>
+```
+
+#### onMouseLeave
+The `onMouseLeave` prop allows for a custom callback function for when the dropdown has been un-hovered.
+
+```jsx
+<Dropdown onMouseLeave={(e)=>{console.log(e)}} >Hello World!</Dropdown>
 ```
 
 #### onToggle

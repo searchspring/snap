@@ -32,7 +32,7 @@ export function mergeProps<GenericComponentProps = ComponentProps>(
 
 	let treePath = (props as ComponentProps).treePath || (defaultProps as ComponentProps).treePath || '';
 
-	if (componentType !== 'layout') {
+	if (componentType !== 'layout' && componentType !== 'autocompleteLayout') {
 		treePath += `${treePath ? ' ' : ''}${componentType}`;
 	}
 
@@ -152,7 +152,7 @@ export function sortSelectors(a: string, b: string): number {
 export function filterSelectors(themeComponents: ThemeComponents, treePath: string): string[] {
 	let selectors = Object.keys(themeComponents);
 	const paths = treePath.split(' ');
-	const componentTypeAndName = paths.splice(-1).pop() ?? '';
+	const componentTypeAndName = paths.slice(-1).pop() ?? '';
 	const [componentType, componentName] = componentTypeAndName.split('.');
 
 	const mappedSplitTreePath = paths.map((path) => {
@@ -167,7 +167,7 @@ export function filterSelectors(themeComponents: ThemeComponents, treePath: stri
 	if (componentName) {
 		selectors = selectors.filter((key) => {
 			const keys = key.split(' ');
-			const lastkey = keys[keys.length - 1].replace(/\*/g, '');
+			const lastkey = keys[keys.length - 1].replace(/\*?(\([MDT]\))?/g, '');
 			if (lastkey == componentType || lastkey == `${componentType}.${componentName}`) {
 				return true;
 			}

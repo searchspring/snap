@@ -4048,6 +4048,8 @@
   "merchandising": {
     "campaigns": [],
     "redirect": "",
-    "content": {}
+    "content": {},
+    "experiments": [],
+    "personalized": false
   }
 }

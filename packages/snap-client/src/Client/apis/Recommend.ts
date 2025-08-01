@@ -157,6 +157,9 @@ export class RecommendAPI extends API {
 				const response = await this.postRecommendations(batch.request as RecommendPostRequestModel);
 
 				batch.entries?.forEach((entry, index) => {
+					response[index]?.results?.forEach((result, idx) => {
+						result.position = idx + 1;
+					});
 					entry.deferred.resolve(response[index]);
 				});
 			} catch (err) {
@@ -193,21 +196,23 @@ export class RecommendAPI extends API {
 function sortBatchEntries(a: BatchEntry, b: BatchEntry) {
 	const one = a.request as RecommendRequestModel;
 	const two = b.request as RecommendRequestModel;
+	const orderOne = one.order || one.profile?.order;
+	const orderTwo = two.order || two.profile?.order;
 
 	// undefined order goes last
-	if (one.order == undefined && two.order == undefined) {
+	if (orderOne == undefined && orderTwo == undefined) {
 		return 0;
 	}
-	if (one.order == undefined && two.order != undefined) {
+	if (orderOne == undefined && orderTwo != undefined) {
 		return 1;
 	}
-	if (two.order == undefined && one.order != undefined) {
+	if (orderTwo == undefined && orderOne != undefined) {
 		return -1;
 	}
-	if (one.order! < two.order!) {
+	if (orderOne! < orderTwo!) {
 		return -1;
 	}
-	if (one.order! > two.order!) {
+	if (orderOne! > orderTwo!) {
 		return 1;
 	}
 	return 0;

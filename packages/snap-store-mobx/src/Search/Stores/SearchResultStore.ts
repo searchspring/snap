@@ -183,13 +183,20 @@ type ProductMinimal = {
 type ProductData = {
 	config: SearchStoreConfig | AutocompleteStoreConfig | RecommendationStoreConfig;
 	data: {
-		result: SearchResponseModelResult;
+		result: SearchResponseModelResult & { variants?: SearchResponseModelResultVariants };
 		meta: MetaResponseModel;
 	};
 };
+
+type SearchResponseModelResultVariants = {
+	preferences: Record<string, string[]>;
+	data: VariantData[];
+};
+
 export class Product {
 	public type = 'product';
 	public id: string;
+	public position: number = 0;
 	public attributes: Record<string, unknown> = {};
 	public mappings: SearchResponseModelResultMappings = {
 		core: {},
@@ -209,6 +216,7 @@ export class Product {
 		this.attributes = result.attributes!;
 
 		this.mappings = result.mappings!;
+		this.position = result.position!;
 
 		this.badges = new Badges({
 			data: {
@@ -218,6 +226,7 @@ export class Product {
 		});
 
 		const variantsField = config?.settings?.variants?.field;
+
 		if (config && variantsField && this.attributes && this.attributes[variantsField]) {
 			try {
 				// parse the field (JSON)
@@ -234,6 +243,17 @@ export class Product {
 				// failed to parse the variant JSON
 				console.error(err, `Invalid variant JSON for product id: ${result.id}`);
 			}
+			// default variants field
+		} else if (result.variants) {
+			// if variants are already parsed, use them
+			this.variants = new Variants({
+				data: {
+					mask: this.mask,
+					variants: result.variants.data,
+					preferences: result.variants.preferences,
+				},
+				config: (config as SearchStoreConfig)?.settings?.variants,
+			});
 		}
 
 		if (result.children?.length) {
@@ -365,6 +385,7 @@ type VariantsData = {
 	data: {
 		mask: ProductMask;
 		variants: VariantData[];
+		preferences?: Record<string, string[]>;
 	};
 };
 
@@ -378,6 +399,7 @@ export class Variants {
 	constructor(variantData: VariantsData) {
 		const { config, data } = variantData || {};
 		const { variants, mask } = data || {};
+		const preferences = variantData?.data?.preferences || {};
 		// setting function in constructor to prevent exposing mask as class property
 		this.setActive = (variant: Variant) => {
 			this.active = variant;
@@ -388,10 +410,10 @@ export class Variants {
 			this.config = config;
 		}
 
-		this.update(variants, config);
+		this.update(variants, config, preferences);
 	}
 
-	public update(variantData: VariantData[], config = this.config) {
+	public update(variantData: VariantData[], config = this.config, preferences?: Record<string, string[]>) {
 		try {
 			const options: string[] = [];
 
@@ -437,6 +459,15 @@ export class Variants {
 			});
 
 			const preselectedOptions: Record<string, string[]> = {};
+
+			//api preferences
+			if (preferences) {
+				Object.keys(preferences).forEach((option) => {
+					preselectedOptions[option] = preferences[option];
+				});
+			}
+
+			//user defined preferences - these override API preferences
 			if (config?.options) {
 				Object.keys(config?.options).forEach((option) => {
 					if (config.options![option].preSelected) {
@@ -468,7 +499,7 @@ export class Variants {
 				// filter by first available, then by preselected option preference
 				//make all options available for first selection.
 				const availableOptions = selection.values.filter((value) => (idx == 0 ? true : value.available));
-				const preferedOptions = options[selection.field as keyof typeof options];
+				const preferedOptions = options[selection.field.toLowerCase() as keyof typeof options];
 				let preferencedOption = selection.selected || availableOptions[0];
 				// if theres a preference for that field
 				if (preferedOptions) {
@@ -522,7 +553,7 @@ export class Variants {
 			// loop through selectedSelections and only include available products that match current selections
 			for (const selectedSelection of selectedSelections) {
 				availableVariants = availableVariants.filter(
-					(variant) => selectedSelection.selected?.value == variant.options[selectedSelection.field].value && variant.available
+					(variant) => selectedSelection.selected?.value == variant.options[selectedSelection.field]?.value && variant.available
 				);
 			}
 
@@ -587,7 +618,7 @@ export class VariantSelection {
 		// loop through selectedSelections and remove products that do not match
 		for (const selectedSelection of selectedSelections) {
 			availableVariants = availableVariants.filter(
-				(variant) => selectedSelection.selected?.value == variant.options[selectedSelection.field].value && variant.available
+				(variant) => selectedSelection.selected?.value == variant.options?.[selectedSelection.field]?.value && variant.available
 			);
 		}
 

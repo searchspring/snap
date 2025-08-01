@@ -11,7 +11,7 @@ import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { ComponentProps, BreakpointsProps, ResultComponent, StyleScript, BreakpointsEntry } from '../../../types';
 import { useDisplaySettings } from '../../../hooks/useDisplaySettings';
 import { RecommendationProfileTracker } from '../../Trackers/Recommendation/ProfileTracker';
-import { RecommendationResultTracker } from '../../Trackers/Recommendation/ResultTracker';
+import { ResultTracker } from '../../Trackers/ResultTracker';
 import { IconProps, IconType } from '../../Atoms/Icon';
 import type { RecommendationController } from '@searchspring/snap-controller';
 import type { Product } from '@searchspring/snap-store-mobx';
@@ -248,7 +248,7 @@ export const RecommendationBundle = observer((properties: RecommendationBundlePr
 	const carouselEnabled = mergedCarouselProps.enabled;
 
 	if (!controller || controller.type !== 'recommendation') {
-		throw new Error(`<BundleRecommendation> Component requires 'controller' prop with an instance of RecommendationController`);
+		throw new Error(`<RecommendationBundle> Component requires 'controller' prop with an instance of RecommendationController`);
 	}
 
 	let resultsToRender: Product[] = results || controller.store?.results;
@@ -260,11 +260,12 @@ export const RecommendationBundle = observer((properties: RecommendationBundlePr
 	const cartStore = controller.store.cart;
 
 	if (!cartStore) {
-		throw new Error(`<BundleRecommendation> Component requires 'cartStore' to exist in the recommendation store`);
+		throw new Error(`<RecommendationBundle> Component requires 'cartStore' to exist in the recommendation store`);
 	}
 
 	if (!(results && results.length) && !controller.store?.results?.length) {
-		throw new Error(`<BundleRecommendation> Component has no results to render!`);
+		controller.log.error(`<RecommendationBundle> Component has no results to render!`);
+		return <Fragment></Fragment>;
 	}
 
 	const seed = results ? results[0] : controller.store?.results[0];
@@ -399,7 +400,7 @@ export const RecommendationBundle = observer((properties: RecommendationBundlePr
 	};
 	const addToCart = (e: MouseEvent) => {
 		// add to cart tracking
-		controller.track.addBundle(e, selectedItems);
+		controller.addToCart(selectedItems);
 
 		//call the function passed
 		onAddToCart && onAddToCart(e, selectedItems);
@@ -471,12 +472,15 @@ export const RecommendationBundle = observer((properties: RecommendationBundlePr
 								<Fragment>
 									{!seedInCarousel && !hideSeed && (
 										<div className={`${classNamePrefix}__wrapper__seed-container`}>
-											<RecommendationResultTracker controller={controller} result={seed} track={{ impression: false }}>
+											<ResultTracker controller={controller} result={seed} track={{ impression: false }}>
 												<BundleSelector
 													seedText={seedText}
 													seed={true}
 													title={seed.display.mappings.core?.name}
-													onCheck={() => onProductSelect(seed)}
+													onCheck={(e) => {
+														e.stopPropagation();
+														onProductSelect(seed);
+													}}
 													checked={selectedItems.findIndex((item) => item.id == seed.id) > -1}
 													icon={separatorIcon}
 													hideCheckboxes={hideCheckboxes}
@@ -504,7 +508,7 @@ export const RecommendationBundle = observer((properties: RecommendationBundlePr
 														}
 													})()}
 												</BundleSelector>
-											</RecommendationResultTracker>
+											</ResultTracker>
 										</div>
 									)}
 									<div className={`${classNamePrefix}__wrapper__carousel`}>
@@ -533,13 +537,16 @@ export const RecommendationBundle = observer((properties: RecommendationBundlePr
 
 															if (idx == 0 && !hideSeed) {
 																return (
-																	<RecommendationResultTracker controller={controller} result={result} track={{ impression: false }}>
+																	<ResultTracker controller={controller} result={result} track={{ impression: false }}>
 																		<BundleSelector
 																			seedText={seedText}
 																			seed={true}
 																			title={result.display.mappings.core?.name}
 																			icon={separatorIcon}
-																			onCheck={() => onProductSelect(result)}
+																			onCheck={(e) => {
+																				e.stopPropagation();
+																				onProductSelect(result);
+																			}}
 																			checked={selected}
 																			hideCheckboxes={hideCheckboxes}
 																			theme={props.theme}
@@ -565,15 +572,18 @@ export const RecommendationBundle = observer((properties: RecommendationBundlePr
 																				}
 																			})()}
 																		</BundleSelector>
-																	</RecommendationResultTracker>
+																	</ResultTracker>
 																);
 															} else {
 																return (
-																	<RecommendationResultTracker controller={controller} result={result}>
+																	<ResultTracker controller={controller} result={result}>
 																		<BundleSelector
 																			icon={separatorIconSeedOnly ? false : separatorIcon}
 																			title={result.display.mappings.core?.name}
-																			onCheck={() => onProductSelect(result)}
+																			onCheck={(e) => {
+																				e.stopPropagation();
+																				onProductSelect(result);
+																			}}
 																			checked={selected}
 																			hideCheckboxes={hideCheckboxes}
 																			theme={props.theme}
@@ -599,7 +609,7 @@ export const RecommendationBundle = observer((properties: RecommendationBundlePr
 																				}
 																			})()}
 																		</BundleSelector>
-																	</RecommendationResultTracker>
+																	</ResultTracker>
 																);
 															}
 														})
@@ -609,11 +619,14 @@ export const RecommendationBundle = observer((properties: RecommendationBundlePr
 															const selected = selectedItems.findIndex((item) => item.id == result.id) > -1;
 
 															return (
-																<RecommendationResultTracker controller={controller} result={result}>
+																<ResultTracker controller={controller} result={result}>
 																	<BundleSelector
 																		icon={separatorIconSeedOnly ? false : separatorIcon}
 																		title={result.display.mappings.core?.name}
-																		onCheck={() => onProductSelect(result)}
+																		onCheck={(e) => {
+																			e.stopPropagation();
+																			onProductSelect(result);
+																		}}
 																		checked={selected}
 																		hideCheckboxes={hideCheckboxes}
 																		theme={props.theme}
@@ -639,7 +652,7 @@ export const RecommendationBundle = observer((properties: RecommendationBundlePr
 																			}
 																		})()}
 																	</BundleSelector>
-																</RecommendationResultTracker>
+																</ResultTracker>
 															);
 														})}
 										</Carousel>
@@ -653,13 +666,16 @@ export const RecommendationBundle = observer((properties: RecommendationBundlePr
 
 										if (idx == 0 && !hideSeed) {
 											return (
-												<RecommendationResultTracker controller={controller} result={result} track={{ impression: false }}>
+												<ResultTracker controller={controller} result={result} track={{ impression: false }}>
 													<BundleSelector
 														seedText={seedText}
 														seed={true}
 														title={result.display.mappings.core?.name}
 														icon={separatorIcon}
-														onCheck={() => onProductSelect(result)}
+														onCheck={(e) => {
+															e.stopPropagation();
+															onProductSelect(result);
+														}}
 														checked={selected}
 														hideCheckboxes={hideCheckboxes}
 														theme={props.theme}
@@ -685,15 +701,18 @@ export const RecommendationBundle = observer((properties: RecommendationBundlePr
 															}
 														})()}
 													</BundleSelector>
-												</RecommendationResultTracker>
+												</ResultTracker>
 											);
 										} else {
 											return (
-												<RecommendationResultTracker controller={controller} result={result}>
+												<ResultTracker controller={controller} result={result}>
 													<BundleSelector
 														icon={separatorIconSeedOnly ? false : separatorIcon}
 														title={result.display.mappings.core?.name}
-														onCheck={() => onProductSelect(result)}
+														onCheck={(e) => {
+															e.stopPropagation();
+															onProductSelect(result);
+														}}
 														checked={selected}
 														hideCheckboxes={hideCheckboxes}
 														theme={props.theme}
@@ -719,7 +738,7 @@ export const RecommendationBundle = observer((properties: RecommendationBundlePr
 															}
 														})()}
 													</BundleSelector>
-												</RecommendationResultTracker>
+												</ResultTracker>
 											);
 										}
 									})
@@ -764,9 +783,9 @@ export const RecommendationBundle = observer((properties: RecommendationBundlePr
 				) : (
 					<RecommendationProfileTracker controller={controller}>
 						{resultsToRender.map((result) => (
-							<RecommendationResultTracker controller={controller} result={result}>
+							<ResultTracker controller={controller} result={result}>
 								<></>
-							</RecommendationResultTracker>
+							</ResultTracker>
 						))}
 					</RecommendationProfileTracker>
 				)}

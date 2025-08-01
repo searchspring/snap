@@ -54,6 +54,15 @@ export default {
 			},
 			control: { type: 'text' },
 		},
+		title: {
+			description: 'Title text to render inside the svg',
+			table: {
+				type: {
+					summary: 'string',
+				},
+			},
+			control: { type: 'text' },
+		},
 		children: {
 			description: 'SVG elements to be contained within (using children)',
 			table: {
@@ -62,6 +71,15 @@ export default {
 				},
 			},
 			control: { type: 'none' },
+		},
+		title: {
+			description: 'Title text to render inside the svg',
+			table: {
+				type: {
+					summary: 'string',
+				},
+			},
+			control: { type: 'text' },
 		},
 		color: {
 			description: 'Icon color',
