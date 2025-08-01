@@ -52,6 +52,7 @@ import {
 } from '@searchspring/snap-platforms/magento2';
 
 export const THEME_EDIT_COOKIE = 'ssThemeEdit';
+const TEMPLATE_EDITOR_PARAM = 'searchspring-editor';
 
 // TODO: tabbing, finder
 export type SearchTargetConfig = {
@@ -154,7 +155,7 @@ export class SnapTemplates extends Snap {
 	templates: TemplatesStore;
 	constructor(config: SnapTemplatesConfig) {
 		const urlParams = url(window.location.href);
-		const editMode = Boolean(urlParams?.params?.query?.theme || cookies.get(THEME_EDIT_COOKIE));
+		const editMode = Boolean(urlParams?.params?.query?.[TEMPLATE_EDITOR_PARAM] || cookies.get(THEME_EDIT_COOKIE));
 
 		const templatesStore = new TemplatesStore({ config, settings: { editMode } });
 

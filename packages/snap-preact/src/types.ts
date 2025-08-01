@@ -119,10 +119,6 @@ export type SnapFeatures = {
 	};
 };
 
-// This would be wired to `TemplateEditorStore.setControllerOverride`.
-export type SetOverrideFn<Controller> = (obj: { path: string[]; value?: unknown; controller: Controller }) => void;
-export type ResetOverrideFn<Controller> = (obj: { path: string[]; value?: unknown; controller: Controller }) => void;
-
 // The state of a UI control, which determines how it's rendered.
 export type ControlDisplayState = 'visible' | 'disabled' | 'hidden';
 
@@ -149,10 +145,12 @@ export interface AbstractedControl<Controller> {
 
 	// A function that's called when the UI control's value changes. It's responsible
 	// for updating the necessary low-level settings.
-	onValueChange: (newValue: any, setOverride: SetOverrideFn<Controller>, controller: Controller) => void;
+	onValueChange: ({ value, controller }: { value: any; controller: Controller }) => void;
 
 	// A function that's called when the UI control's value is reset. It's responsible
-	onReset: (resetOverride: ResetOverrideFn<Controller>, controller: Controller) => void;
+	onReset: ({ controller }: { controller: Controller }) => void;
+
+	shouldShowReset: () => boolean;
 }
 
 // Defines a group of related UI controls that appear together.

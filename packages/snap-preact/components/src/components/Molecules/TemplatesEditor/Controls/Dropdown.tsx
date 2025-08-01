@@ -1,29 +1,32 @@
-// import { AbstractedControl } from "../../../../../../src/Templates/Stores/ui-abstractions";
+import { Reset } from '../Assets';
 
 export const DropdownControl = (props: DropdownControlProps) => {
 	const { label, description, onReset, disabled, showReset, value, options, onChange } = props;
 	return (
-		<div className="checkbox">
-			<label>
-				{label} <a target="snapdocs">i</a>:
-			</label>
-			{showReset && (
-				<button
-					onClick={() => {
-						onReset();
-					}}
-				>
-					reset
-				</button>
-			)}
-			<select onChange={(e) => onChange(e.target.value)} disabled={disabled} value={value}>
-				{options.map((option, index) => (
-					<option value={option} key={index}>
-						{option}
-					</option>
-				))}
-			</select>
-			<span>{description}</span>
+		<div className="option dropdown">
+			<label>{label}</label>
+			<div className="reset">
+				{showReset ? (
+					<button
+						title="Reset"
+						onClick={() => {
+							onReset();
+						}}
+					>
+						<Reset />
+					</button>
+				) : null}
+			</div>
+			<div className="value">
+				<select onChange={(e) => onChange(e.target.value)} disabled={disabled} value={value}>
+					{options.map((option, index) => (
+						<option value={option} key={index}>
+							{option}
+						</option>
+					))}
+				</select>
+				<span>{description}</span>
+			</div>
 		</div>
 	);
 };
@@ -33,10 +36,8 @@ type DropdownControlProps = {
 	description: string;
 	options: (string | number)[];
 	onReset: () => void;
-	// visible: boolean;
 	disabled: boolean;
 	showReset?: boolean;
-
-	value: string | number;
+	value?: string | number;
 	onChange: (value: string | number) => void;
 };

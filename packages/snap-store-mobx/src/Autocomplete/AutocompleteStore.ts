@@ -73,6 +73,7 @@ export class AutocompleteStore extends AbstractStore<AutocompleteStoreConfig> {
 			pagination: observable,
 			sorting: observable,
 			history: observable,
+			trending: observable,
 		});
 	}
 
