@@ -107,7 +107,7 @@ export class SearchController extends AbstractController {
 		if (
 			this.config.settings?.infinite &&
 			typeof this.config.settings?.infinite == 'object' &&
-			(Object.keys(this.config.settings?.infinite).length == 0 || this.config.settings?.infinite?.backfill)
+			(Object.keys(this.config.settings?.infinite).length == 0 || typeof this.config.settings?.infinite?.backfill != 'undefined')
 		) {
 			// infinite is enabled by setting config.infinite={} (old method)
 			// set config.infinite.enabled=true

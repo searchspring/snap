@@ -99,7 +99,9 @@ describe('SearchResultStore', () => {
 		const infiniteConfig: SearchStoreConfig = {
 			...searchConfig,
 			settings: {
-				infinite: {},
+				infinite: {
+					enabled: true,
+				},
 			},
 		};
 		const dataPage1 = mockData.searchMeta('infinite.page1');
