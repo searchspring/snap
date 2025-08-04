@@ -34,6 +34,7 @@ import type {
 	ThemeVariablesPartial,
 } from '../../../components/src';
 import type { GlobalThemeStyleScript, IntegrationPlatforms } from '../../types';
+import { TemplateEditorStore } from './TemplateEditorStore';
 
 export type TemplateThemeTypes = 'library' | 'local';
 export type TemplateTypes = 'search' | 'autocomplete' | `recommendation/${RecsTemplateTypes}`;
@@ -141,6 +142,7 @@ export class TemplatesStore {
 	platform: IntegrationPlatforms;
 	settings: TemplatesStoreConfigSettings;
 	dependencies: TemplatesStoreDependencies;
+	editor: TemplateEditorStore | undefined;
 
 	targets: {
 		search: TargetMap;

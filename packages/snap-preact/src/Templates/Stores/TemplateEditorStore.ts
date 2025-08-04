@@ -10,7 +10,7 @@ import type { AbstractionGroup } from '../../types';
 
 export type Tabs = 'Templates' | 'Configuration';
 
-type DefaultControllerConfigs = {
+type ControllerConfigsObject = {
 	search: SearchStoreConfigSettings;
 	autocomplete: AutocompleteStoreConfigSettings;
 };
@@ -26,7 +26,7 @@ export class TemplateEditorStore {
 		autocomplete?: AutocompleteStoreConfigSettings;
 	} = {};
 	templatesStore?: TemplatesStore;
-	defaultControllerConfigs?: DefaultControllerConfigs;
+	initialControllerConfigs?: ControllerConfigsObject;
 	reloadRequired: boolean = false;
 
 	uiAbstractions: {
@@ -197,20 +197,22 @@ export class TemplateEditorStore {
 		this.storage = new StorageStore({ type: StorageType.local, key: 'ss-templates' });
 		this.variableOverrides = this.storage.get('variableOverrides') || {};
 		this.controllerOverrides = this.storage.get('controllerOverrides') || {};
-		this.defaultControllerConfigs = this.storage.get('defaultControllerConfigs') || {};
+		this.initialControllerConfigs = this.storage.get('initialControllerConfigs') || {};
 
 		makeObservable(this, {
 			reloadRequired: observable,
 			activeTab: observable,
 			controllerOverrides: observable,
-			defaultControllerConfigs: observable,
+			initialControllerConfigs: observable,
 			uiAbstractions: observable,
 		});
 	}
 
-	registerDefaultControllerConfig(type: keyof DefaultControllerConfigs, config: SearchControllerConfig | AutocompleteControllerConfig) {
-		this.defaultControllerConfigs = deepmerge<DefaultControllerConfigs>(this.defaultControllerConfigs || {}, { [type]: config });
-		this.storage.set('defaultControllerConfigs', this.defaultControllerConfigs);
+	registerInitialControllerConfig(type: keyof ControllerConfigsObject, config: SearchControllerConfig | AutocompleteControllerConfig) {
+		const configCopy = JSON.parse(JSON.stringify(config));
+		delete configCopy.plugins; // remove plugins from config as they are not needed for initial config
+		this.initialControllerConfigs = deepmerge<ControllerConfigsObject>(this.initialControllerConfigs || {}, { [type]: configCopy });
+		this.storage.set('initialControllerConfigs', this.initialControllerConfigs);
 	}
 
 	resetAllVariables(themeRef: ThemeStore) {
@@ -286,7 +288,7 @@ export class TemplateEditorStore {
 
 		const getDefaultValue = (): unknown => {
 			// @ts-ignore - // TODO: fix typing
-			const defaultConfig = this.defaultControllerConfigs?.[feat as keyof typeof this.controllerOverrides]['settings'];
+			const defaultConfig = this.initialControllerConfigs?.[feat as keyof typeof this.controllerOverrides]['settings'];
 			let workingConfig = defaultConfig;
 			let value;
 

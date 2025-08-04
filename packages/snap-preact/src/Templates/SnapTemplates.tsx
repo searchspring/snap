@@ -150,7 +150,7 @@ export class SnapTemplates extends Snap {
 	templates: TemplatesStore;
 	constructor(config: SnapTemplatesConfig) {
 		const urlParams = url(window.location.href);
-		const editMode = Boolean(urlParams?.params?.query?.[TEMPLATE_EDITOR_PARAM] || cookies.get(THEME_EDIT_COOKIE));
+		const editMode = Boolean((urlParams?.params?.query && TEMPLATE_EDITOR_PARAM in urlParams.params.query) || cookies.get(THEME_EDIT_COOKIE));
 
 		const templatesStore = new TemplatesStore({ config, settings: { editMode } });
 
@@ -200,6 +200,7 @@ export class SnapTemplates extends Snap {
 						const TemplateEditor = (await import('../../components/src')).TemplatesEditor;
 						const TemplateEditorStore = (await import('../Templates/Stores/TemplateEditorStore')).TemplateEditorStore;
 						const templateEditorStore = new TemplateEditorStore();
+						this.templates.editor = templateEditorStore;
 
 						const storage = new StorageStore({ type: StorageType.local, key: 'ss-templates' });
 						const controllerOverrides = storage.get('controllerOverrides');
@@ -208,7 +209,7 @@ export class SnapTemplates extends Snap {
 							// register the controllers config into the templateEditorStore
 							// tempalteEditorStore will need to also save that to localstorage separatly for furture reset-to values when overrides exist
 							const searchDefaultControllerConfig = (this.controllers['search'] as SearchController).config;
-							templateEditorStore.registerDefaultControllerConfig('search', searchDefaultControllerConfig);
+							templateEditorStore.registerInitialControllerConfig('search', searchDefaultControllerConfig);
 						}
 
 						if (
@@ -216,7 +217,7 @@ export class SnapTemplates extends Snap {
 							(controllerOverrides?.['autocomplete'] && Object.keys(controllerOverrides['autocomplete']).length == 0)
 						) {
 							const autocompleteDefaultControllerConfig = (this.controllers['autocomplete'] as AutocompleteController).config;
-							templateEditorStore.registerDefaultControllerConfig('autocomplete', autocompleteDefaultControllerConfig);
+							templateEditorStore.registerInitialControllerConfig('autocomplete', autocompleteDefaultControllerConfig);
 						}
 
 						render(
@@ -227,7 +228,7 @@ export class SnapTemplates extends Snap {
 								onRemoveClick={() => {
 									cookies.unset(THEME_EDIT_COOKIE);
 									const urlState = url(window.location.href);
-									delete urlState?.params.query['searchspring-editor'];
+									delete urlState?.params.query[TEMPLATE_EDITOR_PARAM];
 
 									const newUrl = urlState?.url();
 									if (newUrl && newUrl != window.location.href) {

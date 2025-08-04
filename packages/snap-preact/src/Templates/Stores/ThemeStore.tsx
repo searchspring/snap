@@ -164,11 +164,11 @@ export class ThemeStore {
 		*/
 
 		// const breakpoints = this.variables.breakpoints || this.base.variables?.breakpoints;
-		const breakpoints: ThemeVariableBreakpoints = deepmerge.all([
+		const breakpoints: ThemeVariableBreakpoints = deepmerge.all<ThemeVariableBreakpoints>([
 			this.base.variables.breakpoints,
 			this.variables.breakpoints || {},
 			(this.editMode && this.editorOverrides?.variables?.breakpoints) || {},
-		]) as ThemeVariableBreakpoints;
+		]);
 
 		const activeBreakpoint = getActiveBreakpoint(this.innerWidth, breakpoints);
 

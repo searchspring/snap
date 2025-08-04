@@ -1,6 +1,6 @@
 import { FunctionalComponent, RenderableProps } from 'preact';
 
-import type { Theme, ThemeMinimal } from '../../../components/src';
+import type { Theme, ThemeComplete, ThemeMinimal } from '../../../components/src';
 import { transformTranslationsToTheme, type TemplateCustomComponentTypes, type TemplateTypes } from './TemplateStore';
 import type { TemplateStoreComponentConfig } from './TemplateStore';
 import type { PluginFunction } from '@searchspring/snap-controller';
@@ -27,10 +27,10 @@ type LibraryComponentMap = {
 
 export type LibraryImports = {
 	theme: {
-		base: (args?: any) => Promise<Theme>;
-		bocachica: (args?: any) => Promise<Theme>;
-		snappy: (args?: any) => Promise<Theme>;
-		snapnco: (args?: any) => Promise<Theme>;
+		base: (args?: any) => Promise<ThemeComplete>;
+		bocachica: (args?: any) => Promise<ThemeComplete>;
+		snappy: (args?: any) => Promise<ThemeComplete>;
+		snapnco: (args?: any) => Promise<ThemeComplete>;
 	};
 	plugins: {
 		shopify: {
@@ -107,7 +107,7 @@ export type LanguageCodes = 'en' | 'fr' | 'es';
 
 export class LibraryStore {
 	themes: {
-		[themeName: string]: Theme;
+		[themeName: string]: ThemeComplete;
 	} = {};
 
 	components: {
