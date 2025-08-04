@@ -167,7 +167,7 @@ export class ThemeStore {
 		const breakpoints: ThemeVariableBreakpoints = deepmerge.all([
 			this.base.variables.breakpoints,
 			this.variables.breakpoints || {},
-			(this.editMode && this.editorOverrides.variables?.breakpoints) || {},
+			(this.editMode && this.editorOverrides?.variables?.breakpoints) || {},
 		]) as ThemeVariableBreakpoints;
 
 		const activeBreakpoint = getActiveBreakpoint(this.innerWidth, breakpoints);
@@ -286,7 +286,7 @@ export class ThemeStore {
 	}
 
 	public updateEditorOverrides() {
-		const storedOverrides = this.dependencies.storage.get('variableOverrides');
+		const storedOverrides = this.dependencies.storage.get('variableOverrides') || {};
 		this.editorOverrides = storedOverrides;
 	}
 }
