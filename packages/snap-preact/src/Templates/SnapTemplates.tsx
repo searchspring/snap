@@ -227,7 +227,7 @@ export class SnapTemplates extends Snap {
 								onRemoveClick={() => {
 									cookies.unset(THEME_EDIT_COOKIE);
 									const urlState = url(window.location.href);
-									delete urlState?.params.query['theme'];
+									delete urlState?.params.query['searchspring-editor'];
 
 									const newUrl = urlState?.url();
 									if (newUrl && newUrl != window.location.href) {

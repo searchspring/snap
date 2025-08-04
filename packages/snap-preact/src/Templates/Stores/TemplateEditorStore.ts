@@ -216,7 +216,7 @@ export class TemplateEditorStore {
 	resetAllVariables(themeRef: ThemeStore) {
 		this.variableOverrides = {};
 		this.storage.set('variableOverrides', this.variableOverrides);
-		themeRef.setEditorOverrides(this.variableOverrides);
+		themeRef.updateEditorOverrides();
 	}
 
 	resetVariable(obj: { themeName: string; path: string[]; rootEditingKey: string; value: unknown }, themeRef: ThemeStore) {
@@ -235,7 +235,7 @@ export class TemplateEditorStore {
 		this.storage.set('variableOverrides', this.variableOverrides);
 
 		console.log('variableOverrides after reset', this.variableOverrides);
-		themeRef.setEditorOverrides(this.variableOverrides);
+		themeRef.updateEditorOverrides();
 	}
 
 	setVariable(obj: { path: string[]; value: unknown }, themeRef: ThemeStore) {
@@ -256,8 +256,8 @@ export class TemplateEditorStore {
 				}, {}),
 		};
 		this.variableOverrides = deepmerge(this.variableOverrides, variableOverrides);
-		themeRef.setEditorOverrides(this.variableOverrides);
 		this.storage.set('variableOverrides', this.variableOverrides);
+		themeRef.updateEditorOverrides();
 	}
 
 	// Helper function to deeply delete properties from an object based on a mask

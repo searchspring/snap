@@ -49,7 +49,6 @@ const CSS = {
 			},
 
 			'>header': {
-				height: '50px',
 				display: 'flex',
 				alignItems: 'center',
 				justifyContent: 'space-between',
@@ -81,8 +80,10 @@ const CSS = {
 					borderBottom: '2px solid #eee',
 					gap: '3px',
 					'.tab': {
+						position: 'relative',
+						top: '1px',
 						fontWeight: 'bold',
-						border: '1px solid #ccc',
+						border: '1px solid #eee',
 						borderBottom: 'none',
 						padding: '5px 10px',
 						height: '100%',
@@ -91,6 +92,8 @@ const CSS = {
 						'&.active': {
 							backgroundColor: '#fff',
 							color: '#000',
+							paddingBottom: '7px',
+							top: '2px',
 						},
 					},
 				},
@@ -100,7 +103,6 @@ const CSS = {
 				},
 			},
 			'>footer': {
-				borderTop: '1px solid #ccc',
 				marginTop: '10px',
 			},
 
@@ -146,6 +148,7 @@ const CSS = {
 				cursor: 'pointer',
 				'&:hover': {
 					color: 'white',
+					borderColor: '#1d4990',
 					background: '#1d4990',
 				},
 			},
@@ -299,7 +302,7 @@ export const TemplatesEditor = observer((properties: TemplatesEditorProps): JSX.
 						<button
 							onClick={(e) => {
 								e.stopPropagation();
-								if (confirm('Are you sure you want to close the editor? All changes will be lost.')) {
+								if (confirm('Exiting the editor will disable modified configurations.')) {
 									onRemoveClick();
 								}
 							}}
@@ -398,7 +401,7 @@ export const TemplatesEditor = observer((properties: TemplatesEditorProps): JSX.
 
 											// get reference to theme and update the overrides
 											const theme = templatesStore.themes[type][selectedTheme];
-											theme.setEditorOverrides(editorStore.variableOverrides);
+											theme.updateEditorOverrides();
 
 											if (type) {
 												// loop through all targets in templateStore and call setTheme on them all
@@ -553,15 +556,15 @@ const ThemeEditor = (props: any): any => {
 	const editorStore = props.editorStore;
 	const themeRef = props.themeRef;
 
-	if (!props?.property || Array.isArray(props.property) || typeof props.property === 'boolean') {
-		// ignore arrays, numbers, and booleans
+	if (typeof props?.property === 'undefined' || Array.isArray(props.property) || typeof props.property === 'boolean') {
+		// ignore undefined, arrays, and booleans
 		return null;
 	}
 
-	const shouldShowResetButton = (path: string[], val: unknown) => {
+	const shouldShowResetButton = (path: string[], val: unknown): boolean => {
 		try {
 			let obj = editorStore.variableOverrides[rootEditingKey];
-			if (!obj) {
+			if (typeof obj === 'undefined') {
 				// no overrides at this moment
 				return false;
 			}
@@ -569,12 +572,14 @@ const ThemeEditor = (props: any): any => {
 			path.forEach((p) => {
 				obj = obj[p];
 			});
-			if (obj && obj === val) {
+			if (obj === val) {
 				return true;
 			}
 		} catch (e) {
 			return false;
 		}
+
+		return false;
 	};
 
 	if (typeof props.property === 'object') {
@@ -636,6 +641,7 @@ const ThemeEditor = (props: any): any => {
 		if (path.includes('breakpoints')) {
 			const value = props.property;
 			const key = path.join('.');
+
 			return (
 				<div className={classnames('breakpoint-picker', 'option')}>
 					<label htmlFor={key}>{key}</label>

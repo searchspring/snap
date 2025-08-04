@@ -16,6 +16,7 @@ import {
 	ThemeVariableBreakpoints,
 	ThemeComponents,
 	ResponsiveKeys,
+	ThemeComplete,
 } from '../../../components/src';
 import { CacheProvider } from '../../../components/src/providers/cache';
 import { sortSelectors, filterSelectors } from '../../../components/src/utilities/mergeProps';
@@ -25,7 +26,7 @@ import type { ListOption } from '../../../components/src/types';
 export type ThemeStoreThemeConfig = {
 	name: string;
 	type: TemplateThemeTypes;
-	base: Theme;
+	base: ThemeComplete;
 	overrides?: ThemeOverrides;
 	editorOverrides?: ThemePartial;
 	variables?: ThemeVariablesPartial;
@@ -71,7 +72,7 @@ export class ThemeStore {
 	public layout: SelectedLayout;
 
 	private dependencies: TemplatesStoreDependencies;
-	private base: Theme;
+	private base: ThemeComplete;
 	private overrides: ThemeOverrides;
 	editorOverrides: ThemePartial;
 	variables: ThemeVariablesPartial;
@@ -81,7 +82,6 @@ export class ThemeStore {
 	stored: ThemePartial;
 	innerWidth?: number;
 	editMode: boolean;
-	count: number;
 
 	constructor(params: ThemeStoreConfig) {
 		const { config, dependencies, settings } = params;
@@ -116,7 +116,6 @@ export class ThemeStore {
 		this.languageOverrides = languageOverrides;
 		this.stored = (settings.editMode && this.dependencies.storage.get(`themes.${this.type}.${this.name}.variables`)) || {};
 		this.innerWidth = innerWidth;
-		this.count = 0;
 
 		makeObservable(this, {
 			name: observable,
@@ -127,7 +126,6 @@ export class ThemeStore {
 			stored: observable,
 			innerWidth: observable,
 			theme: computed, // make theme getter a computed property (memoized)
-			count: observable, // TODO remove this if editorOverrides works
 		});
 
 		// handle adding the style to the document (should only happen once per theme)
@@ -165,7 +163,12 @@ export class ThemeStore {
 				9. stored theme editor overrides
 		*/
 
-		const breakpoints = this.variables.breakpoints || this.base.variables?.breakpoints;
+		// const breakpoints = this.variables.breakpoints || this.base.variables?.breakpoints;
+		const breakpoints: ThemeVariableBreakpoints = deepmerge.all([
+			this.base.variables.breakpoints,
+			this.variables.breakpoints || {},
+			(this.editMode && this.editorOverrides.variables?.breakpoints) || {},
+		]) as ThemeVariableBreakpoints;
 
 		const activeBreakpoint = getActiveBreakpoint(this.innerWidth, breakpoints);
 
@@ -229,15 +232,9 @@ export class ThemeStore {
 			theme = mergeThemeLayers(theme, this.editorOverrides) as Theme;
 		}
 
-		// theme.count = this.count;
-
 		// change the theme name to match the ThemeStore theme name
 		theme.name = this.name;
 		return theme;
-	}
-
-	public forceUpdate() {
-		this.count++;
 	}
 
 	public setInnerWidth(innerWidth: number) {
@@ -288,8 +285,9 @@ export class ThemeStore {
 		this.dependencies.storage.set(`themes.${this.type}.${this.name}.variables`, this.stored);
 	}
 
-	public setEditorOverrides(overrides: ThemePartial) {
-		this.editorOverrides = overrides;
+	public updateEditorOverrides() {
+		const storedOverrides = this.dependencies.storage.get('variableOverrides');
+		this.editorOverrides = storedOverrides;
 	}
 }
 
@@ -301,7 +299,13 @@ export function getActiveBreakpoint(width: number | undefined, breakpoints: Them
 	let breakpoint: ResponsiveKeys | undefined;
 
 	if (Number.isInteger(width) && breakpoints) {
-		breakpoint = Object.keys(breakpoints).find((breakpoint) => width! <= breakpoints[breakpoint as keyof typeof breakpoints]) as ResponsiveKeys;
+		Object.keys(breakpoints).forEach((bp) => {
+			if (width! <= breakpoints[bp as keyof typeof breakpoints]) {
+				if (!breakpoint || breakpoints[breakpoint as keyof typeof breakpoints] > breakpoints[bp as keyof typeof breakpoints]) {
+					breakpoint = bp as ResponsiveKeys;
+				}
+			}
+		});
 	}
 	return breakpoint || 'default';
 }
