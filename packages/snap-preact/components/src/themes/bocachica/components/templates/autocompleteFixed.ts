@@ -5,7 +5,11 @@ import { AutocompleteFixedProps } from '../../../../components/Templates/Autocom
 
 // CSS in JS style script for the Search component
 const autocompleteFixedStyleScript = ({}: AutocompleteFixedProps) => {
-	return css({});
+	return css({
+		'.ss__autocomplete__button--see-more': {
+			margin: '10px',
+		},
+	});
 };
 
 export const autocompleteFixed: ThemeComponent<'autocompleteFixed', AutocompleteFixedProps> = {
