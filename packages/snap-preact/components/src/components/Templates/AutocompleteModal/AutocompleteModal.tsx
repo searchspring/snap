@@ -182,6 +182,10 @@ export const AutocompleteModal = observer((properties: AutocompleteModalProps): 
 		...props,
 	};
 	delete acProps.width;
+	delete acProps.className;
+	delete acProps.style;
+	delete acProps.styleScript;
+	delete acProps.themeStyleScript;
 
 	return layout?.length && active ? (
 		<CacheProvider>
