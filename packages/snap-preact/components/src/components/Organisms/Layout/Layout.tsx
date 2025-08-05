@@ -59,7 +59,7 @@ export const Layout = observer((properties: LayoutProps): JSX.Element => {
 	};
 
 	const props = mergeProps('layout', globalTheme, defaultProps, properties);
-	const { controller, toggleSideBarButton, disableStyles, className, treePath, layout } = props;
+	const { controller, toggleSideBarButton, disableStyles, className, layout } = props;
 
 	delete props.treePath;
 
@@ -75,7 +75,7 @@ export const Layout = observer((properties: LayoutProps): JSX.Element => {
 			}),
 			// component theme overrides
 			theme: props?.theme,
-			treePath,
+			treePath: properties.treePath,
 		},
 		Banner: {
 			// default props
@@ -86,7 +86,7 @@ export const Layout = observer((properties: LayoutProps): JSX.Element => {
 			}),
 			// component theme overrides
 			theme: props?.theme,
-			treePath,
+			treePath: properties.treePath,
 		},
 		SearchHeader: {
 			// default props
@@ -97,7 +97,7 @@ export const Layout = observer((properties: LayoutProps): JSX.Element => {
 			}),
 			// component theme overrides
 			theme: props?.theme,
-			treePath,
+			treePath: properties.treePath,
 		},
 		FilterSummary: {
 			// default props
@@ -108,7 +108,7 @@ export const Layout = observer((properties: LayoutProps): JSX.Element => {
 			}),
 			// component theme overrides
 			theme: props?.theme,
-			treePath,
+			treePath: properties.treePath,
 		},
 		LayoutSelector: {
 			// default props
@@ -119,7 +119,7 @@ export const Layout = observer((properties: LayoutProps): JSX.Element => {
 			}),
 			// component theme overrides
 			theme: props?.theme,
-			treePath,
+			treePath: properties.treePath,
 		},
 		Facets: {
 			// default props
@@ -130,7 +130,7 @@ export const Layout = observer((properties: LayoutProps): JSX.Element => {
 			}),
 			// component theme overrides
 			theme: props?.theme,
-			treePath,
+			treePath: properties.treePath,
 		},
 		FacetsHorizontal: {
 			// default props
@@ -141,7 +141,7 @@ export const Layout = observer((properties: LayoutProps): JSX.Element => {
 			}),
 			// component theme overrides
 			theme: props?.theme,
-			treePath,
+			treePath: properties.treePath,
 		},
 		Pagination: {
 			// default props
@@ -152,7 +152,7 @@ export const Layout = observer((properties: LayoutProps): JSX.Element => {
 			}),
 			// component theme overrides
 			theme: props?.theme,
-			treePath,
+			treePath: properties.treePath,
 		},
 		PaginationInfo: {
 			// default props
@@ -163,7 +163,7 @@ export const Layout = observer((properties: LayoutProps): JSX.Element => {
 			}),
 			// component theme overrides
 			theme: props?.theme,
-			treePath,
+			treePath: properties.treePath,
 		},
 		LoadMore: {
 			// default props
@@ -174,7 +174,7 @@ export const Layout = observer((properties: LayoutProps): JSX.Element => {
 			}),
 			// component theme overrides
 			theme: props?.theme,
-			treePath,
+			treePath: properties.treePath,
 		},
 		SortBy: {
 			// default props
@@ -185,7 +185,7 @@ export const Layout = observer((properties: LayoutProps): JSX.Element => {
 			}),
 			// component theme overrides
 			theme: props?.theme,
-			treePath,
+			treePath: properties.treePath,
 		},
 		PerPage: {
 			// default props
@@ -196,7 +196,7 @@ export const Layout = observer((properties: LayoutProps): JSX.Element => {
 			}),
 			// component theme overrides
 			theme: props?.theme,
-			treePath,
+			treePath: properties.treePath,
 		},
 		ToggleSideBarButton: {
 			// default props
@@ -209,7 +209,7 @@ export const Layout = observer((properties: LayoutProps): JSX.Element => {
 			}),
 			// component theme overrides
 			theme: props?.theme,
-			treePath,
+			treePath: properties.treePath,
 		},
 	};
 
