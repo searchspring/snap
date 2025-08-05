@@ -1,13 +1,11 @@
 import { css } from '@emotion/react';
 import classnames from 'classnames';
-import { useState } from 'preact/hooks';
 import { ComponentProps, RootNodeProperties } from '../../../types';
 import { observer } from 'mobx-react-lite';
 import { debounce } from '@searchspring/snap-toolbox';
 import { CacheProvider } from '../../../providers';
-import { TargetStore } from '../../../../../src/Templates/Stores/TargetStore';
-import { TemplateEditorStore } from '../../../../../src/Templates/Stores/TemplateEditorStore';
-import { RecsTemplateTypes, TargetMap, TemplatesStore, TemplateThemeTypes, TemplateTypes } from '../../../../../src/Templates/Stores/TemplateStore';
+import { TemplateEditorStore } from '../../../../../src/Templates/Stores/TemplateEditor/TemplateEditorStore';
+import { TemplatesStore, TemplateThemeTypes, TemplateTypes } from '../../../../../src/Templates/Stores/TemplateStore';
 import { CurrencyCodes, LanguageCodes } from '../../../../../src/Templates/Stores/LibraryStore';
 import { SnapTemplates } from '../../../../../src';
 import { AutocompleteController, SearchController } from '@searchspring/snap-controller';
@@ -15,6 +13,7 @@ import { AbstractedControl, AbstractionGroup } from '../../../../../src/types';
 import { CheckboxControl } from './Controls/Checkbox';
 import { DropdownControl } from './Controls/Dropdown';
 import { AthosCommerceLogo, Reset } from './Assets';
+import type { ThemeStore } from '../../../../../src/Templates/Stores/ThemeStore';
 
 const CSS = {
 	TemplatesEditor: ({}: Partial<TemplatesEditorProps>) =>
@@ -40,7 +39,6 @@ const CSS = {
 			boxSizing: 'border-box',
 			height: '65em',
 			maxHeight: 'calc(90vh - 20px)',
-			overflowY: 'auto',
 			width: '400px',
 			maxWidth: '90vw',
 
@@ -73,6 +71,7 @@ const CSS = {
 				},
 			},
 			'>aside': {
+				overflowY: 'auto',
 				flexGrow: 1,
 				'.tab-selection': {
 					display: 'flex',
@@ -81,6 +80,7 @@ const CSS = {
 					gap: '3px',
 					'.tab': {
 						position: 'relative',
+						textDecoration: 'capitalize',
 						top: '1px',
 						fontWeight: 'bold',
 						border: '1px solid #eee',
@@ -111,6 +111,7 @@ const CSS = {
 				transition: 'right ease 0.5s 0.5s, height ease 0.5s',
 				height: '50px',
 				cursor: 'pointer',
+				overflow: 'hidden',
 			},
 
 			'& input, select, option, optgroup, button, h1, h2, h3, h4, h5, h6, i': {
@@ -178,6 +179,14 @@ const CSS = {
 				},
 			},
 
+			textarea: {
+				width: '100%',
+				height: '200px',
+				border: '1px solid #ccc',
+				color: '#777',
+				padding: '10px',
+			},
+
 			'.option': {
 				display: 'flex',
 				alignItems: 'baseline',
@@ -221,43 +230,7 @@ const CSS = {
 
 export const TemplatesEditor = observer((properties: TemplatesEditorProps): JSX.Element => {
 	const { onRemoveClick, templatesStore, editorStore, snap } = properties;
-	const searchTargets = Object.keys(templatesStore.targets.search || {}).map((target) => ({
-		type: 'search',
-		target,
-		template: templatesStore.targets.search[target],
-		selector: templatesStore.targets.search[target].selector,
-	}));
-	const autocompleteTargets = Object.keys(templatesStore.targets.autocomplete || {}).map((target) => ({
-		type: 'autocomplete',
-		target,
-		template: templatesStore.targets.autocomplete[target],
-		selector: templatesStore.targets.autocomplete[target].selector,
-	}));
-	const recommendationBundleTargets = Object.keys(templatesStore.targets.recommendation.bundle || {}).map((target) => ({
-		type: 'recommendation/bundle',
-		target,
-		template: templatesStore.targets.recommendation.bundle[target],
-		selector: templatesStore.targets.recommendation.bundle[target].selector,
-	}));
-	const recommendationDefaultTargets = Object.keys(templatesStore.targets.recommendation.default || {}).map((target) => ({
-		type: 'recommendation/default',
-		target,
-		template: templatesStore.targets.recommendation.default[target],
-		selector: templatesStore.targets.recommendation.default[target].selector,
-	}));
-	const recommendationEmailTargets = Object.keys(templatesStore.targets.recommendation.email || {}).map((target) => ({
-		type: 'recommendation/email',
-		target,
-		template: templatesStore.targets.recommendation.email[target],
-		selector: templatesStore.targets.recommendation.email[target].selector,
-	}));
-	const targets = [
-		...searchTargets,
-		...autocompleteTargets,
-		...recommendationBundleTargets,
-		...recommendationDefaultTargets,
-		...recommendationEmailTargets,
-	];
+	const targets = editorStore.getTargets();
 
 	const rootTarget = targets[0];
 
@@ -266,24 +239,22 @@ export const TemplatesEditor = observer((properties: TemplatesEditorProps): JSX.
 	const themeRef = templatesStore.themes[themeLocation][themeName];
 	const theme = themeRef.theme;
 
-	const [collapsed, setCollapsed] = useState(false);
-
 	const styling: RootNodeProperties = {
 		css: [CSS.TemplatesEditor({ ...properties })],
 	};
 
 	const setVariable = debounce((obj: { path: string[]; value: unknown }) => {
-		editorStore.setVariable(obj, themeRef);
+		editorStore.setThemeConfigPath(obj, themeRef);
 	}, 50);
 
 	return (
 		<CacheProvider>
 			<div
-				className={classnames('ss__template-editor', { 'ss__template-editor--collapsed': collapsed })}
+				className={classnames('ss__template-editor', { 'ss__template-editor--collapsed': editorStore.state.hidden })}
 				{...styling}
 				onClick={(e) => {
 					e.stopPropagation();
-					setCollapsed(false);
+					editorStore.toggleHide(false);
 				}}
 			>
 				<header>
@@ -296,7 +267,7 @@ export const TemplatesEditor = observer((properties: TemplatesEditorProps): JSX.
 						onClick={(e) => {
 							e.preventDefault();
 							e.stopPropagation();
-							setCollapsed(true);
+							editorStore.toggleHide(true);
 						}}
 					>
 						<button
@@ -311,7 +282,7 @@ export const TemplatesEditor = observer((properties: TemplatesEditorProps): JSX.
 						</button>
 						<button
 							onClick={() => {
-								setCollapsed(true);
+								editorStore.toggleHide(true);
 							}}
 						>
 							Hide
@@ -325,7 +296,7 @@ export const TemplatesEditor = observer((properties: TemplatesEditorProps): JSX.
 							return (
 								<div
 									key={i}
-									className={classnames('tab', { active: editorStore.activeTab === tab })}
+									className={classnames('tab', { active: editorStore.state.activeTab === tab })}
 									onClick={() => {
 										editorStore.switchTabs(tab);
 									}}
@@ -335,7 +306,7 @@ export const TemplatesEditor = observer((properties: TemplatesEditorProps): JSX.
 							);
 						})}
 					</div>
-					{editorStore.activeTab === 'Templates' ? (
+					{editorStore.state.activeTab === 'templates' ? (
 						<div className="tab-view">
 							<TemplateTargetSettings feature="search" templatesStore={templatesStore} />
 							<ControllerSettings editorStore={editorStore} snap={snap} feature="search" />
@@ -347,7 +318,7 @@ export const TemplatesEditor = observer((properties: TemplatesEditorProps): JSX.
 					) : (
 						''
 					)}
-					{editorStore.activeTab === 'Configuration' ? (
+					{editorStore.state.activeTab === 'configuration' ? (
 						<div className="tab-view">
 							<h2>Project Configuration</h2>
 							<div className="option">
@@ -398,35 +369,7 @@ export const TemplatesEditor = observer((properties: TemplatesEditorProps): JSX.
 											const selectedOption = options[selectedIndex];
 											const selectedTheme = selectedOption.value;
 											const type = selectedOption.closest('optgroup')?.label as TemplateThemeTypes;
-
-											// get reference to theme and update the overrides
-											const theme = templatesStore.themes[type][selectedTheme];
-											theme.updateEditorOverrides();
-
-											if (type) {
-												// loop through all targets in templateStore and call setTheme on them all
-												Object.keys(templatesStore.targets).forEach((feature) => {
-													// loop through all the features (search, autocomplete, recommendations)
-													if (feature == 'recommendation') {
-														const recommendationObj = templatesStore.targets[feature as keyof typeof templatesStore.targets] as {
-															[key in RecsTemplateTypes]: TargetMap;
-														};
-														Object.keys(recommendationObj).forEach((recType) => {
-															const targetMap = recommendationObj[recType as keyof typeof recommendationObj];
-															Object.keys(targetMap).forEach((target) => {
-																const targetStore = targetMap[target as keyof typeof targetMap] as TargetStore;
-																targetStore.setTheme(selectedTheme, type);
-															});
-														});
-													} else {
-														const targetMap = templatesStore.targets[feature as keyof typeof templatesStore.targets] as TargetMap;
-														Object.keys(targetMap).forEach((target) => {
-															const targetStore = targetMap[target as keyof typeof targetMap] as TargetStore;
-															targetStore.setTheme(selectedTheme, type);
-														});
-													}
-												});
-											}
+											editorStore.setTheme(type, selectedTheme);
 										}}
 									>
 										<optgroup label="library">
@@ -494,6 +437,7 @@ export const TemplatesEditor = observer((properties: TemplatesEditorProps): JSX.
 								editorStore={editorStore}
 								themeRef={themeRef}
 							/>
+							<TemplateConfig editorStore={editorStore} />
 						</div>
 					) : (
 						''
@@ -502,37 +446,32 @@ export const TemplatesEditor = observer((properties: TemplatesEditorProps): JSX.
 
 				<footer>
 					<ResetAllVariablesButton editorStore={editorStore} themeRef={themeRef} />
-					<ReloadRequiredButton editorStore={editorStore} />
 				</footer>
 			</div>
 		</CacheProvider>
 	);
 });
 
-const ReloadRequiredButton = (props: any) => {
+const TemplateConfig = (props: { editorStore: TemplateEditorStore }) => {
 	const { editorStore } = props;
-	if (!editorStore.reloadRequired || editorStore.activeTab !== 'Templates') {
-		return null;
-	}
+	const config = editorStore.generateTemplatesConfig() || {};
 	return (
-		<button
-			onClick={() => {
-				window.location.reload();
-			}}
-		>
-			Reload Required
-		</button>
+		<div style={{ marginBottom: '10px}' }}>
+			<h2>Project Code</h2>
+			<textarea readOnly>{JSON.stringify(config, null, 4)}</textarea>
+		</div>
 	);
 };
-const ResetAllVariablesButton = (props: any) => {
+
+const ResetAllVariablesButton = (props: { editorStore: TemplateEditorStore; themeRef: ThemeStore }) => {
 	const { editorStore, themeRef } = props;
-	if (Object.keys(editorStore.variableOverrides).length === 0 || editorStore.activeTab !== 'Configuration') {
+	if (Object.keys(editorStore.overrides.theme || {}).length === 0 || editorStore.state.activeTab !== 'configuration') {
 		return null;
 	}
 	return (
 		<button
 			onClick={() => {
-				editorStore.resetAllVariables(themeRef);
+				editorStore.resetThemeConfig(themeRef);
 			}}
 		>
 			Reset All Variables
@@ -547,7 +486,16 @@ export interface TemplatesEditorProps extends ComponentProps {
 	snap: SnapTemplates;
 }
 
-const ThemeEditor = (props: any): any => {
+const ThemeEditor = (props: {
+	property: any;
+	pathPrefix?: string[];
+	propertyName?: string;
+	themeName?: string;
+	setVariable: (args: { path: string[]; value: unknown }) => void;
+	rootEditingKey: string;
+	editorStore: TemplateEditorStore;
+	themeRef: ThemeStore;
+}) => {
 	const pathPrefix: any = props.pathPrefix || [];
 	const path = [...pathPrefix, props?.propertyName].filter((a) => a);
 	const themeName = props.themeName;
@@ -563,14 +511,15 @@ const ThemeEditor = (props: any): any => {
 
 	const shouldShowResetButton = (path: string[], val: unknown): boolean => {
 		try {
-			let obj = editorStore.variableOverrides[rootEditingKey];
+			let obj = editorStore.overrides.theme[rootEditingKey as keyof typeof editorStore.overrides.theme];
+
 			if (typeof obj === 'undefined') {
 				// no overrides at this moment
 				return false;
 			}
 
 			path.forEach((p) => {
-				obj = obj[p];
+				obj = obj && (obj[p as keyof typeof obj] as any);
 			});
 			if (obj === val) {
 				return true;
@@ -584,21 +533,25 @@ const ThemeEditor = (props: any): any => {
 
 	if (typeof props.property === 'object') {
 		// object means we need to recurse until we get to the primitives
-		return Object.values(props.property).map((property, index) => {
-			return (
-				<ThemeEditor
-					key={index}
-					property={property}
-					rootEditingKey={rootEditingKey}
-					themeName={themeName}
-					setVariable={setVariable}
-					propertyName={Object.getOwnPropertyNames(props.property)[index]}
-					pathPrefix={[...pathPrefix, props.propertyName]}
-					editorStore={editorStore}
-					themeRef={themeRef}
-				/>
-			);
-		});
+		return (
+			<>
+				{Object.values(props.property).map((property, index) => {
+					return (
+						<ThemeEditor
+							key={index}
+							property={property}
+							rootEditingKey={rootEditingKey}
+							themeName={themeName}
+							setVariable={setVariable}
+							propertyName={Object.getOwnPropertyNames(props.property)[index]}
+							pathPrefix={[...pathPrefix, props.propertyName]}
+							editorStore={editorStore}
+							themeRef={themeRef}
+						/>
+					);
+				})}
+			</>
+		);
 	} else if (typeof props.property === 'string') {
 		const value = props.property.toString();
 		const key = path.join('.');
@@ -612,7 +565,7 @@ const ThemeEditor = (props: any): any => {
 							<button
 								title="Reset"
 								onClick={() => {
-									editorStore.resetVariable({ path, rootEditingKey }, themeRef);
+									editorStore.resetThemeConfigPath({ path, rootEditingKey }, themeRef);
 								}}
 							>
 								<Reset />
@@ -650,7 +603,7 @@ const ThemeEditor = (props: any): any => {
 							<button
 								title="Reset"
 								onClick={() => {
-									editorStore.resetVariable({ path, rootEditingKey }, themeRef);
+									editorStore.resetThemeConfigPath({ path, rootEditingKey }, themeRef);
 								}}
 							>
 								<Reset />
@@ -675,6 +628,8 @@ const ThemeEditor = (props: any): any => {
 			);
 		}
 	}
+
+	return null;
 };
 
 /*
@@ -701,7 +656,7 @@ type ControllerSettingsProps = {
 const ControllerSettings = observer((props: ControllerSettingsProps) => {
 	const { feature, editorStore, snap } = props;
 	const [feat] = feature.split('/');
-	const controlGroups = editorStore.uiAbstractions[feat as keyof typeof editorStore.uiAbstractions] as
+	const controlGroups = editorStore.uiAbstractions.controllers[feat as keyof typeof editorStore.uiAbstractions.controllers] as
 		| AbstractionGroup<SearchController | AutocompleteController>[]
 		| undefined;
 
@@ -734,10 +689,10 @@ const ControllerSettings = observer((props: ControllerSettingsProps) => {
 											label={control.label}
 											description={control.description}
 											showReset={control.shouldShowReset()}
-											onReset={() => control.onReset({ controller })}
+											onReset={() => control.onReset(controller)}
 											disabled={display === 'disabled'}
 											value={value}
-											onChange={(value: boolean) => control.onValueChange({ value, controller })}
+											onChange={(value: boolean) => control.onValueChange(value, controller)}
 										/>
 									);
 								case 'dropdown':
@@ -752,10 +707,10 @@ const ControllerSettings = observer((props: ControllerSettingsProps) => {
 											description={control.description}
 											showReset={control.shouldShowReset()}
 											options={dropdownOptions}
-											onReset={() => control.onReset({ controller })}
+											onReset={() => control.onReset(controller)}
 											disabled={display === 'disabled'}
 											value={dropdownValue}
-											onChange={(value: string | number) => control.onValueChange({ value, controller })}
+											onChange={(value: string | number) => control.onValueChange(value, controller)}
 										/>
 									);
 								default:
@@ -832,10 +787,3 @@ const TemplateTargetSettings = observer((props: TemplateTargetSettingsProps) => 
 		</div>
 	);
 });
-
-/*
-Later:
-0. group some controller settings in more intuitive fashion (eg. show trending/history as radio button) - user abstraction layer
-1. agree on UI/UX for initial TemplateEditor
-2. polish (clean up styles)
-*/

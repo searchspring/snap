@@ -8,7 +8,7 @@ import { DomTargeter, url, cookies, getContext } from '@searchspring/snap-toolbo
 import { TemplateTarget, TemplatesStore } from './Stores/TemplateStore';
 
 import type { Target } from '@searchspring/snap-toolbox';
-import { type SearchStoreConfigSettings, type AutocompleteStoreConfigSettings, StorageStore, StorageType } from '@searchspring/snap-store-mobx';
+import { type SearchStoreConfigSettings, type AutocompleteStoreConfigSettings } from '@searchspring/snap-store-mobx';
 import type { UrlTranslatorConfig } from '@searchspring/snap-url-manager';
 import type { AutocompleteController, PluginGrouping, SearchController } from '@searchspring/snap-controller';
 import type {
@@ -18,7 +18,7 @@ import type {
 } from '../Instantiators/RecommendationInstantiator';
 import type { SnapFeatures } from '../types';
 import type { SnapConfig, ExtendedTarget } from '../Snap';
-import type { PluginsConfigs, RecsTemplateTypes, TemplatesStoreConfigConfig, TemplateTypes } from './Stores/TemplateStore';
+import type { PluginsConfigs, RecsTemplateTypes, TemplateStoreConfigConfig, TemplateTypes } from './Stores/TemplateStore';
 import { LibraryImports } from './Stores/LibraryStore';
 import {
 	pluginBackgroundFilters,
@@ -51,7 +51,7 @@ import {
 	PluginBackgroundFiltersConfig as PluginMagento2BackgroundFiltersConfig,
 } from '@searchspring/snap-platforms/magento2';
 
-export const THEME_EDIT_COOKIE = 'ssThemeEdit';
+export const TEMPLATE_EDIT_COOKIE = 'ssEditor';
 const TEMPLATE_EDITOR_PARAM = 'searchspring-editor';
 
 // TODO: tabbing, finder
@@ -81,18 +81,18 @@ export type RecommendationBundleTargetConfig = {
 	resultComponent?: keyof LibraryImports['component']['result'] | (string & NonNullable<unknown>);
 };
 
-export type SnapTemplatesConfig = TemplatesStoreConfigConfig & {
+export type SnapTemplatesConfig = TemplateStoreConfigConfig & {
 	url?: UrlTranslatorConfig;
 	features?: SnapFeatures;
 	search?: {
-		targets: [SearchTargetConfig, ...SearchTargetConfig[]];
+		targets: SearchTargetConfig[];
 		settings?: SearchStoreConfigSettings;
 		plugins?: PluginsConfigs;
 		// breakpointSettings?: SearchStoreConfigSettings[];
 		/* controller settings breakpoints work with caveat of having settings locked to initialized breakpoint */
 	};
 	autocomplete?: {
-		targets: [AutocompleteTargetConfig, ...AutocompleteTargetConfig[]];
+		targets: AutocompleteTargetConfig[];
 		settings?: AutocompleteStoreConfigSettings;
 		plugins?: PluginsConfigs;
 		// breakpointSettings?: AutocompleteStoreConfigSettings[];
@@ -150,7 +150,7 @@ export class SnapTemplates extends Snap {
 	templates: TemplatesStore;
 	constructor(config: SnapTemplatesConfig) {
 		const urlParams = url(window.location.href);
-		const editMode = Boolean((urlParams?.params?.query && TEMPLATE_EDITOR_PARAM in urlParams.params.query) || cookies.get(THEME_EDIT_COOKIE));
+		const editMode = Boolean((urlParams?.params?.query && TEMPLATE_EDITOR_PARAM in urlParams.params.query) || cookies.get(TEMPLATE_EDIT_COOKIE));
 
 		const templatesStore = new TemplatesStore({ config, settings: { editMode } });
 
@@ -178,6 +178,7 @@ export class SnapTemplates extends Snap {
 		this.templates = templatesStore;
 
 		if (editMode) {
+			cookies.set(TEMPLATE_EDIT_COOKIE, 'true');
 			setTimeout(async () => {
 				// preload the library
 				await templatesStore.preLoad();
@@ -198,26 +199,18 @@ export class SnapTemplates extends Snap {
 					],
 					async (target: Target, elem: Element) => {
 						const TemplateEditor = (await import('../../components/src')).TemplatesEditor;
-						const TemplateEditorStore = (await import('../Templates/Stores/TemplateEditorStore')).TemplateEditorStore;
-						const templateEditorStore = new TemplateEditorStore();
-						this.templates.editor = templateEditorStore;
+						const TemplateEditorStore = (await import('./Stores/TemplateEditor/TemplateEditorStore')).TemplateEditorStore;
+						const templateEditorStore = new TemplateEditorStore({ templatesStore });
 
-						const storage = new StorageStore({ type: StorageType.local, key: 'ss-templates' });
-						const controllerOverrides = storage.get('controllerOverrides');
-						if (!controllerOverrides?.['search'] || (controllerOverrides?.['search'] && Object.keys(controllerOverrides['search']).length == 0)) {
-							// this is an inital page load without overrides
-							// register the controllers config into the templateEditorStore
-							// tempalteEditorStore will need to also save that to localstorage separatly for furture reset-to values when overrides exist
-							const searchDefaultControllerConfig = (this.controllers['search'] as SearchController).config;
-							templateEditorStore.registerInitialControllerConfig('search', searchDefaultControllerConfig);
+						const searchController = this.controllers['search'] as SearchController | undefined;
+						const autocompleteController = this.controllers['autocomplete'] as AutocompleteController | undefined;
+
+						if (searchController) {
+							templateEditorStore.registerController(searchController);
 						}
 
-						if (
-							!controllerOverrides?.['autocomplete'] ||
-							(controllerOverrides?.['autocomplete'] && Object.keys(controllerOverrides['autocomplete']).length == 0)
-						) {
-							const autocompleteDefaultControllerConfig = (this.controllers['autocomplete'] as AutocompleteController).config;
-							templateEditorStore.registerInitialControllerConfig('autocomplete', autocompleteDefaultControllerConfig);
+						if (autocompleteController) {
+							templateEditorStore.registerController(autocompleteController);
 						}
 
 						render(
@@ -226,7 +219,7 @@ export class SnapTemplates extends Snap {
 								editorStore={templateEditorStore}
 								snap={this}
 								onRemoveClick={() => {
-									cookies.unset(THEME_EDIT_COOKIE);
+									cookies.unset(TEMPLATE_EDIT_COOKIE);
 									const urlState = url(window.location.href);
 									delete urlState?.params.query[TEMPLATE_EDITOR_PARAM];
 
@@ -375,9 +368,6 @@ export function createRecommendationComponentMapping(
 }
 
 export function createSnapConfig(templateConfig: SnapTemplatesConfig, templatesStore: TemplatesStore): SnapConfig {
-	const storage = new StorageStore({ type: StorageType.local, key: 'ss-templates' });
-	const controllerOverrides = storage.get('controllerOverrides');
-
 	const snapConfig: SnapConfig = {
 		features: templateConfig.features || DEFAULT_FEATURES,
 		client: {
@@ -400,7 +390,7 @@ export function createSnapConfig(templateConfig: SnapTemplatesConfig, templatesS
 			config: {
 				id: 'search',
 				plugins: createPlugins(templateConfig, templatesStore, 'search'),
-				settings: deepmerge(templateConfig.search.settings || {}, controllerOverrides?.['search'] || {}),
+				settings: templateConfig.search.settings || {},
 			},
 			targeters: createSearchTargeters(templateConfig, templatesStore),
 		};
@@ -418,8 +408,8 @@ export function createSnapConfig(templateConfig: SnapTemplatesConfig, templatesS
 	/* AUTOCOMPLETE CONTROLLER */
 	if (templateConfig.autocomplete && snapConfig.controllers) {
 		const autocompleteControllerSettings: AutocompleteStoreConfigSettings = deepmerge(
-			deepmerge(DEFAULT_AUTOCOMPLETE_CONTROLLER_SETTINGS, templateConfig.autocomplete.settings || {}),
-			controllerOverrides?.['autocomplete'] || {}
+			DEFAULT_AUTOCOMPLETE_CONTROLLER_SETTINGS,
+			templateConfig.autocomplete.settings || {}
 		);
 
 		const autocompleteControllerConfig = {

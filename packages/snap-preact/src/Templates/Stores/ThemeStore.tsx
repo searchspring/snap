@@ -3,7 +3,6 @@ import { observable, makeObservable, toJS, computed } from 'mobx';
 import { observer } from 'mobx-react-lite';
 import deepmerge from 'deepmerge';
 import { isPlainObject } from 'is-plain-object';
-import { StorageStore } from '@searchspring/snap-store-mobx';
 import { TemplateThemeTypes, type TemplatesStoreConfigSettings, type TemplatesStoreDependencies } from './TemplateStore';
 import { Global, css } from '@emotion/react';
 
@@ -21,7 +20,6 @@ import {
 import { CacheProvider } from '../../../components/src/providers/cache';
 import { sortSelectors, filterSelectors } from '../../../components/src/utilities/mergeProps';
 import type { GlobalThemeStyleScript } from '../../types';
-import type { ListOption } from '../../../components/src/types';
 
 export type ThemeStoreThemeConfig = {
 	name: string;
@@ -37,29 +35,6 @@ export type ThemeStoreThemeConfig = {
 	style?: GlobalThemeStyleScript;
 };
 
-class SelectedLayout {
-	public selected?: ListOption;
-	private storage: StorageStore;
-	private name: string;
-	private type: string;
-
-	public select(layout: ListOption) {
-		this.selected = layout;
-		this.storage.set(`themes.${this.type}.${this.name}.layout`, this.selected);
-	}
-
-	constructor(storageStore: StorageStore, name: string, type: string) {
-		this.storage = storageStore;
-		this.name = name;
-		this.type = type;
-		this.selected = this.storage.get(`themes.${this.type}.${this.name}.layout`);
-
-		makeObservable(this, {
-			selected: observable,
-		});
-	}
-}
-
 type ThemeStoreConfig = {
 	config: ThemeStoreThemeConfig;
 	dependencies: TemplatesStoreDependencies;
@@ -69,7 +44,6 @@ type ThemeStoreConfig = {
 export class ThemeStore {
 	public name: string;
 	public type: string;
-	public layout: SelectedLayout;
 
 	private dependencies: TemplatesStoreDependencies;
 	private base: ThemeComplete;
@@ -88,7 +62,7 @@ export class ThemeStore {
 		this.dependencies = dependencies;
 		this.editMode = settings.editMode;
 
-		const { name, style, type, base, overrides, variables, currency, language, languageOverrides, innerWidth } = config;
+		const { name, style, type, base, overrides, editorOverrides, variables, currency, language, languageOverrides, innerWidth } = config;
 
 		// add prefixes to base theme components and responsive components
 		base.components = prefixComponentKeys('*', base.components);
@@ -107,9 +81,8 @@ export class ThemeStore {
 		this.name = name;
 		this.type = type;
 		this.base = base;
-		this.layout = new SelectedLayout(this.dependencies.storage, this.name, this.type);
 		this.overrides = overrides || {};
-		this.editorOverrides = this.dependencies.storage.get('variableOverrides') || {};
+		this.editorOverrides = editorOverrides || {};
 		this.variables = variables || {};
 		this.currency = currency;
 		this.language = language;
@@ -227,8 +200,6 @@ export class ThemeStore {
 
 		// TemplateEditor variable overrides
 		if (this.editMode) {
-			// const variableOverrides: ThemePartial = this.dependencies.storage.get(`variableOverrides`) || {};
-			// theme = mergeThemeLayers(theme, variableOverrides) as Theme;
 			theme = mergeThemeLayers(theme, this.editorOverrides) as Theme;
 		}
 
@@ -249,21 +220,6 @@ export class ThemeStore {
 		this.language = language;
 	}
 
-	// removing a key from custom theme
-	// public removeOverride(obj: { path: string[]; rootEditingKey: string; }) {
-	// 	// TODO: remove key from stored
-
-	// }
-
-	// alternative to setOverride below...
-	// public setOverrides(overrides: ThemeOverrides) {
-	// 	this.stored = mergeThemeLayers(this.stored, overrides);
-	// 	this.dependencies.storage.set(`themes.${this.type}.${this.name}.variables`, this.stored);
-	// }
-
-	// setting a key custom theme
-	// TODO: any reason the rootEditingKey cannot be in the path?
-	// maybe interface could be: setOverride(path, value);
 	public setOverride(obj: { path: string[]; rootEditingKey: string; value: unknown }) {
 		const { path, rootEditingKey, value } = obj;
 		const overrides: ThemeOverrides = {
@@ -285,9 +241,8 @@ export class ThemeStore {
 		this.dependencies.storage.set(`themes.${this.type}.${this.name}.variables`, this.stored);
 	}
 
-	public updateEditorOverrides() {
-		const storedOverrides = this.dependencies.storage.get('variableOverrides') || {};
-		this.editorOverrides = storedOverrides;
+	public setEditorOverrides(overrides: ThemePartial) {
+		this.editorOverrides = overrides;
 	}
 }
 

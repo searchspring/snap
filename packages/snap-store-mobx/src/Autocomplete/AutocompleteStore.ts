@@ -112,6 +112,8 @@ export class AutocompleteStore extends AbstractStore<AutocompleteStoreConfig> {
 					queries: historyStore.getStoredData(limit),
 				},
 			});
+		} else {
+			this.history = [];
 		}
 	}
 

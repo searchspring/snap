@@ -50,7 +50,12 @@ export const useLayoutOptions = (props: any, globalTheme: Theme) => {
 			if (
 				globalTheme.components &&
 				componentType == 'toolbar' &&
-				(paths[0] == templateComponent || paths[0] == `*${templateComponent}` || !paths.length)
+				(paths[0] == templateComponent ||
+					paths[0] == `*${templateComponent}` ||
+					paths[0] == `*(M)${templateComponent}` ||
+					paths[0] == `*(T)${templateComponent}` ||
+					paths[0] == `*(D)${templateComponent}` ||
+					!paths.length)
 			) {
 				const toolbarConfig = globalTheme.components[key as keyof typeof globalTheme.components] as Partial<ToolbarProps>;
 				if (toolbarConfig?.layout && toolbarConfig.layout.toString().indexOf('layoutSelector') > -1) {

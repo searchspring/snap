@@ -40,12 +40,13 @@ export class TargetStore {
 
 	public setComponent(componentName: string) {
 		this.component = componentName;
-		this.dependencies.storage.set(`templates.${this.selector}.component`, this.component);
+		this.dependencies.storage.set(['templates', this.selector, 'component'], this.component);
+		this.dependencies.storage.set(['templates', this.selector, 'component'], this.component);
 	}
 
 	public setResultComponent(resultComponentName: string) {
 		this.resultComponent = resultComponentName;
-		this.dependencies.storage.set(`templates.${this.selector}.resultComponent`, this.resultComponent);
+		this.dependencies.storage.set(['templates', this.selector, 'resultComponent'], this.resultComponent);
 	}
 
 	public setTheme(themeName: string, location: TemplateThemeTypes) {
@@ -53,6 +54,6 @@ export class TargetStore {
 			location,
 			name: themeName,
 		};
-		this.dependencies.storage.set(`templates.${this.selector}.theme`, this.theme);
+		this.dependencies.storage.set(['templates', this.selector, 'theme'], this.theme);
 	}
 }

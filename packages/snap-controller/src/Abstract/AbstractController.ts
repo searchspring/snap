@@ -266,5 +266,6 @@ export abstract class AbstractController {
 
 	setConfig(newConfig: any): void {
 		this.config = newConfig;
+		this.store.setConfig(newConfig);
 	}
 }

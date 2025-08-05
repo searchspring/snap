@@ -123,7 +123,7 @@ export type SnapFeatures = {
 export type ControlDisplayState = 'visible' | 'disabled' | 'hidden';
 
 // Defines a single abstracted UI control (e.g., a dropdown).
-export interface AbstractedControl<Controller> {
+export interface AbstractedControl<Params> {
 	// The type of UI control to render.
 	type: 'dropdown' | 'checkbox' | 'number' | 'text' | 'color' | 'layout';
 
@@ -134,27 +134,27 @@ export interface AbstractedControl<Controller> {
 	description: string;
 
 	// For 'dropdown' type: a static list of options or a function to dynamically generate them.
-	options?: (string | number)[] | ((controller: Controller) => (string | number)[]);
+	options?: (string | number)[] | ((params: Params) => (string | number)[]);
 
 	// A function to determine the display state of the control (visible, disabled, or hidden).
 	// If not provided, the control defaults to 'visible'.
-	getDisplayState?: (controller: Controller) => ControlDisplayState;
+	getDisplayState?: (params: Params) => ControlDisplayState;
 
 	// A function to read the low-level settings and return the current value for this UI control.
-	getValue: (controller: Controller) => string | number | boolean;
+	getValue: (params: Params) => string | number | boolean;
 
 	// A function that's called when the UI control's value changes. It's responsible
 	// for updating the necessary low-level settings.
-	onValueChange: ({ value, controller }: { value: any; controller: Controller }) => void;
+	onValueChange: (value: any, params: Params) => void;
 
 	// A function that's called when the UI control's value is reset. It's responsible
-	onReset: ({ controller }: { controller: Controller }) => void;
+	onReset: (params: Params) => void;
 
 	shouldShowReset: () => boolean;
 }
 
 // Defines a group of related UI controls that appear together.
-export interface AbstractionGroup<Controller> {
+export interface AbstractionGroup<Params> {
 	// A title for the group to be displayed in the UI.
 	title: string;
 
@@ -162,5 +162,5 @@ export interface AbstractionGroup<Controller> {
 	description: string;
 
 	// A map of the controls in this group, where the key is a unique ID for the control.
-	controls: AbstractedControl<Controller>[];
+	controls: AbstractedControl<Params>[];
 }

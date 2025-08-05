@@ -255,7 +255,7 @@ export class AutocompleteController extends AbstractController {
 
 	get params(): AutocompleteRequestModel {
 		const urlState = this.urlManager.state;
-		const params: AutocompleteRequestModel = deepmerge({ ...getSearchParams(urlState) }, this.config.globals!);
+		const params: AutocompleteRequestModel = deepmerge({ ...getSearchParams(urlState) }, this.config.globals || {});
 
 		const { userId, sessionId, pageLoadId, shopperId } = this.tracker.getContext();
 
@@ -459,7 +459,7 @@ export class AutocompleteController extends AbstractController {
 					this.store.reset();
 
 					// rebuild trending terms with new UrlManager settings
-					if (this.config.settings?.trending?.limit && this.config.settings?.trending?.limit > 0) {
+					if (this.config.settings?.trending?.enabled && this.config.settings?.trending?.limit && this.config.settings?.trending?.limit > 0) {
 						this.searchTrending();
 					}
 				}
@@ -624,7 +624,12 @@ export class AutocompleteController extends AbstractController {
 		});
 
 		// get trending terms - this is at the bottom because urlManager changes need to be in place before creating the store
-		if (this.config.settings?.trending?.limit && this.config.settings?.trending?.limit > 0 && !this.store.trending?.length) {
+		if (
+			this.config.settings?.trending?.enabled &&
+			this.config.settings?.trending?.limit &&
+			this.config.settings?.trending?.limit > 0 &&
+			!this.store.trending?.length
+		) {
 			this.searchTrending();
 		}
 
@@ -634,16 +639,16 @@ export class AutocompleteController extends AbstractController {
 		}
 	}
 
-	searchTrending = async (): Promise<void> => {
+	searchTrending = async (options?: { limit?: number }): Promise<void> => {
 		let trending;
 		const storedTerms = this.storage.get('terms');
-		if (storedTerms) {
+		if (storedTerms && !options?.limit) {
 			// terms exist in storage, update store
 			trending = JSON.parse(storedTerms);
 		} else {
 			// query for trending terms, save to storage, update store
 			const trendingParams = {
-				limit: this.config.settings?.trending?.limit || 5,
+				limit: options?.limit || this.config.settings?.trending?.limit || 5,
 			};
 
 			const trendingProfile = this.profiler.create({ type: 'event', name: 'trending', context: trendingParams }).start();
