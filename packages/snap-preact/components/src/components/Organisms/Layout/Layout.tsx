@@ -244,22 +244,27 @@ export const Layout = observer((properties: LayoutProps): JSX.Element => {
 				if (hasResults) {
 					return <FilterSummary {...subProps.FilterSummary} />;
 				}
+				break;
 			case 'layoutSelector':
 				if (hasResults) {
 					return <LayoutSelector {...subProps.LayoutSelector} />;
 				}
+				break;
 			case 'paginationInfo':
 				if (hasResults) {
 					return <PaginationInfo {...subProps.PaginationInfo} />;
 				}
+				break;
 			case 'sortBy':
 				if (hasResults) {
 					return <SortBy {...subProps.SortBy} />;
 				}
+				break;
 			case 'perPage':
 				if (hasResults) {
 					return <PerPage {...subProps.PerPage} />;
 				}
+				break;
 			case 'button.sidebar-toggle':
 				if (hasResults) {
 					return (
@@ -270,7 +275,7 @@ export const Layout = observer((properties: LayoutProps): JSX.Element => {
 						)
 					);
 				}
-
+				break;
 			case 'pagination':
 				if (hasResults) {
 					if (controller.config.settings?.infinite) {
@@ -279,9 +284,12 @@ export const Layout = observer((properties: LayoutProps): JSX.Element => {
 						return <Pagination {...subProps.Pagination} />;
 					}
 				}
-
+				break;
 			case 'breadcrumbs':
-				return <Breadcrumbs data={[{ label: 'search' }]} {...subProps.Breadcrumbs} />;
+				if (hasResults) {
+					return <Breadcrumbs {...subProps.Breadcrumbs} />;
+				}
+				break;
 			case '_':
 				return <div className={`ss__layout__separator ss__layout__separator--${separatorIndex++}`} />;
 
@@ -301,10 +309,12 @@ export const Layout = observer((properties: LayoutProps): JSX.Element => {
 				if (hasResults) {
 					return <Facets {...subProps.Facets} />;
 				}
+				break;
 			case 'facetsHorizontal':
 				if (hasResults) {
 					return <FacetsHorizontal {...subProps.Facets} />;
 				}
+				break;
 			default:
 				return null;
 		}

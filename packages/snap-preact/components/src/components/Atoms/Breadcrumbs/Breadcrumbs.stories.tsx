@@ -31,7 +31,6 @@ export default {
 	argTypes: {
 		data: {
 			description: 'Breadcrumb data object',
-			type: { required: true },
 			table: {
 				type: {
 					summary: 'object | function',

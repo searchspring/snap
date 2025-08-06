@@ -6,7 +6,7 @@ import { observer } from 'mobx-react';
 import { Theme, useTheme, CacheProvider, useTreePath } from '../../../providers';
 import { mergeProps, mergeStyles } from '../../../utilities';
 import { ComponentProps, StyleScript } from '../../../types';
-import { AbstractController } from '@searchspring/snap-controller';
+import { SearchController } from '@searchspring/snap-controller';
 
 const defaultStyles: StyleScript<BreadcrumbsProps> = () => {
 	return css({
@@ -27,6 +27,14 @@ export const Breadcrumbs = observer((properties: BreadcrumbsProps): JSX.Element 
 	const defaultProps: Partial<BreadcrumbsProps> = {
 		separator: '>',
 		treePath: globalTreePath,
+		data: properties.controller
+			? (controller) => {
+					return [
+						{ label: 'Search' },
+						{ label: `Results ${controller?.store.search?.query?.string ? `for "${controller?.store.search?.query?.string}"` : ''}` },
+					];
+			  }
+			: [{ label: 'Search' }],
 	};
 
 	const props = mergeProps('breadcrumbs', globalTheme, defaultProps, properties);
@@ -41,6 +49,7 @@ export const Breadcrumbs = observer((properties: BreadcrumbsProps): JSX.Element 
 	} else {
 		_data = data;
 	}
+
 	return _data ? (
 		<CacheProvider>
 			<div {...styling} className={classnames('ss__breadcrumbs', className)}>
@@ -59,15 +68,15 @@ export const Breadcrumbs = observer((properties: BreadcrumbsProps): JSX.Element 
 });
 
 export interface BreadcrumbsProps extends ComponentProps<BreadcrumbsProps> {
-	data:
+	data?:
 		| {
 				label: string;
 				url?: string;
 		  }[]
-		| ((controller?: AbstractController) => {
+		| ((controller?: SearchController) => {
 				label: string;
 				url?: string;
 		  }[]);
 	separator?: string | JSX.Element;
-	controller?: AbstractController;
+	controller?: SearchController;
 }
