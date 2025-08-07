@@ -5,36 +5,35 @@ import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
 
 import type { AutocompleteController } from '@searchspring/snap-controller';
-import { ComponentProps, RootNodeProperties } from '../../../types';
+import { ComponentProps, StyleScript } from '../../../types';
 import { Theme, useTheme, CacheProvider } from '../../../providers';
-import { defined, mergeProps } from '../../../utilities';
+import { defined, mergeProps, mergeStyles } from '../../../utilities';
 import { Terms, TermsProps } from '../../Molecules/Terms/Terms';
 import { useCleanUpEmptyDivs } from '../../../hooks/useCleanUpEmptyDivs';
 
-const CSS = {
-	TermsList: ({}: Partial<TermsListProps>) =>
-		css({
+const defaultStyles: StyleScript<TermsListProps> = ({}) => {
+	return css({
+		display: 'flex',
+		flexDirection: 'row',
+		background: '#f8f8f8',
+		width: 'auto',
+		flexWrap: 'wrap',
+
+		'.ss__terms-list__row': {
 			display: 'flex',
 			flexDirection: 'row',
-			background: '#f8f8f8',
-			width: 'auto',
-			flexWrap: 'wrap',
+			flexBasis: '100%',
+		},
 
-			'.ss__terms-list__row': {
-				display: 'flex',
-				flexDirection: 'row',
-				flexBasis: '100%',
-			},
+		'.ss__terms-list__row:empty': {
+			display: 'none',
+		},
 
-			'.ss__terms-list__row:empty': {
-				display: 'none',
-			},
-
-			'.ss__terms-list__separator': {
-				flexGrow: 1,
-				flexShrink: 1,
-			},
-		}),
+		'.ss__terms-list__separator': {
+			flexGrow: 1,
+			flexShrink: 1,
+		},
+	});
 };
 
 export const TermsList = observer((properties: TermsListProps): JSX.Element => {
@@ -47,20 +46,8 @@ export const TermsList = observer((properties: TermsListProps): JSX.Element => {
 	};
 
 	const props = mergeProps('termsList', globalTheme, defaultProps, properties);
-	const {
-		layout,
-		historyTitle,
-		trendingTitle,
-		suggestionTitle,
-		retainHistory,
-		retainTrending,
-		treePath,
-		disableStyles,
-		style,
-		className,
-		controller,
-		styleScript,
-	} = props;
+	const { layout, historyTitle, trendingTitle, suggestionTitle, retainHistory, retainTrending, treePath, disableStyles, className, controller } =
+		props;
 
 	const subProps: TermsListSubProps = {
 		terms: {
@@ -74,16 +61,7 @@ export const TermsList = observer((properties: TermsListProps): JSX.Element => {
 		},
 	};
 
-	const styling: RootNodeProperties = { 'ss-name': props.name };
-	const stylingProps = props;
-
-	if (styleScript && !disableStyles) {
-		styling.css = [styleScript(stylingProps), style];
-	} else if (!disableStyles) {
-		styling.css = [CSS.TermsList(stylingProps), style];
-	} else if (style) {
-		styling.css = [style];
-	}
+	const styling = mergeStyles<TermsListProps>(props, defaultStyles);
 
 	const history = controller?.store.history || [];
 	const suggestions = controller?.store.terms || [];

@@ -1,23 +1,32 @@
 import { h } from 'preact';
 
-import { ArgsTable, PRIMARY_STORY } from '@storybook/addon-docs/blocks';
+import { ArgsTable, PRIMARY_STORY, Markdown } from '@storybook/blocks';
 
 import { ResultTracker, ResultTrackerProps } from './ResultTracker';
-import { componentArgs } from '../../../utilities';
-import Readme from './readme.md';
+import { componentArgs, highlightedCode } from '../../../utilities';
+import Readme from '../ResultTracker/readme.md';
 import { Snapify } from '../../../utilities/snapify';
 import type { SearchController } from '@searchspring/snap-controller';
 import { Result } from '../../Molecules/Result';
 import { Product } from '@searchspring/snap-store-mobx';
 
 export default {
-	title: `Trackers/Result`,
+	title: 'Trackers/Result',
 	component: ResultTracker,
+	tags: ['autodocs'],
 	parameters: {
 		docs: {
 			page: () => (
 				<div>
-					<Readme />
+					<Markdown
+						options={{
+							overrides: {
+								code: highlightedCode,
+							},
+						}}
+					>
+						{Readme}
+					</Markdown>
 					<ArgsTable story={PRIMARY_STORY} />
 				</div>
 			),
