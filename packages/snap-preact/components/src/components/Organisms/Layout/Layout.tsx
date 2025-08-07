@@ -131,7 +131,7 @@ export const Layout = observer((properties: LayoutProps): JSX.Element => {
 			}),
 			// component theme overrides
 			theme: props?.theme,
-			treePath,
+			treePath: treePath,
 		},
 		Facets: {
 			// default props
