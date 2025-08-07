@@ -199,17 +199,17 @@ export const Layout = observer((properties: LayoutProps): JSX.Element => {
 			theme: props?.theme,
 			treePath,
 		},
-		Breadcrumbs: {
-			// default props
-			controller,
-			// inherited props
-			...defined({
-				disableStyles,
-			}),
-			// component theme overrides
-			theme: props?.theme,
-			treePath,
-		},
+		// Breadcrumbs: {
+		// 	// default props
+		// 	controller,
+		// 	// inherited props
+		// 	...defined({
+		// 		disableStyles,
+		// 	}),
+		// 	// component theme overrides
+		// 	theme: props?.theme,
+		// 	treePath,
+		// },
 		ToggleSideBarButton: {
 			// default props
 			...toggleSideBarButton,
@@ -287,7 +287,7 @@ export const Layout = observer((properties: LayoutProps): JSX.Element => {
 				break;
 			case 'breadcrumbs':
 				if (hasResults) {
-					return <Breadcrumbs {...subProps.Breadcrumbs} />;
+					return <Breadcrumbs />;
 				}
 				break;
 			case '_':
