@@ -23,7 +23,7 @@ import { ContentType } from '@searchspring/snap-store-mobx';
 import { Facets, FacetsProps } from '../Facets';
 import { FacetsHorizontal, FacetsHorizontalProps } from '../FacetsHorizontal';
 import { useCleanUpEmptyDivs } from '../../../hooks/useCleanUpEmptyDivs';
-import { Breadcrumbs } from '../../Atoms/Breadcrumbs';
+import { Breadcrumbs, BreadcrumbsProps } from '../../Atoms/Breadcrumbs';
 
 const defaultStyles: StyleScript<LayoutProps> = ({}) => {
 	return css({
@@ -122,6 +122,17 @@ export const Layout = observer((properties: LayoutProps): JSX.Element => {
 			theme: props?.theme,
 			treePath,
 		},
+		Breadcrumbs: {
+			// default props
+			controller,
+			// inherited props
+			...defined({
+				disableStyles,
+			}),
+			// component theme overrides
+			theme: props?.theme,
+			treePath,
+		},
 		Facets: {
 			// default props
 			controller,
@@ -199,17 +210,6 @@ export const Layout = observer((properties: LayoutProps): JSX.Element => {
 			theme: props?.theme,
 			treePath,
 		},
-		// Breadcrumbs: {
-		// 	// default props
-		// 	controller,
-		// 	// inherited props
-		// 	...defined({
-		// 		disableStyles,
-		// 	}),
-		// 	// component theme overrides
-		// 	theme: props?.theme,
-		// 	treePath,
-		// },
 		ToggleSideBarButton: {
 			// default props
 			...toggleSideBarButton,
@@ -287,7 +287,7 @@ export const Layout = observer((properties: LayoutProps): JSX.Element => {
 				break;
 			case 'breadcrumbs':
 				if (hasResults) {
-					return <Breadcrumbs />;
+					return <Breadcrumbs {...subProps.Breadcrumbs} />;
 				}
 				break;
 			case '_':
@@ -391,5 +391,5 @@ interface LayoutSubProps {
 	Facets: Partial<FacetsProps>;
 	FacetsHorizontal: Partial<FacetsHorizontalProps>;
 	ToggleSideBarButton: Partial<ButtonProps>;
-	// Breadcrumbs: Partial<BreadcrumbsProps>;
+	Breadcrumbs: Partial<BreadcrumbsProps>;
 }
