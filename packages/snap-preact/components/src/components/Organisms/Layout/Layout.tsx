@@ -23,7 +23,7 @@ import { ContentType } from '@searchspring/snap-store-mobx';
 import { Facets, FacetsProps } from '../Facets';
 import { FacetsHorizontal, FacetsHorizontalProps } from '../FacetsHorizontal';
 import { useCleanUpEmptyDivs } from '../../../hooks/useCleanUpEmptyDivs';
-import { Breadcrumbs, BreadcrumbsProps } from '../../Atoms/Breadcrumbs';
+import { Breadcrumbs } from '../../Atoms/Breadcrumbs';
 
 const defaultStyles: StyleScript<LayoutProps> = ({}) => {
 	return css({
@@ -391,5 +391,5 @@ interface LayoutSubProps {
 	Facets: Partial<FacetsProps>;
 	FacetsHorizontal: Partial<FacetsHorizontalProps>;
 	ToggleSideBarButton: Partial<ButtonProps>;
-	Breadcrumbs: Partial<BreadcrumbsProps>;
+	// Breadcrumbs: Partial<BreadcrumbsProps>;
 }
