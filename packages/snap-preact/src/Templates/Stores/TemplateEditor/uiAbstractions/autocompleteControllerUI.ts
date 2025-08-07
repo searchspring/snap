@@ -12,9 +12,25 @@ export function autocompleteControllerUI(store: TemplateEditorStore): Abstractio
 					type: 'dropdown',
 					label: 'History Terms',
 					description: '',
-					options: ['Disabled', 1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
-					getValue: (controller: AutocompleteController) => {
-						return controller.store.config.settings?.history?.enabled ? controller.store.config.settings.history.limit ?? 'Disabled' : 'Disabled';
+					getOptions: () => [
+						{
+							options: [
+								{ value: 'Disabled' },
+								{ value: 1 },
+								{ value: 2 },
+								{ value: 3 },
+								{ value: 4 },
+								{ value: 5 },
+								{ value: 6 },
+								{ value: 7 },
+								{ value: 8 },
+								{ value: 9 },
+								{ value: 10 },
+							],
+						},
+					],
+					getValue: (controller) => {
+						return controller?.store.config.settings?.history?.enabled ? controller.store.config.settings.history.limit ?? 'Disabled' : 'Disabled';
 					},
 					shouldShowReset: () => {
 						const initialConfig = store.initial.controller.autocomplete?.history;
@@ -27,6 +43,8 @@ export function autocompleteControllerUI(store: TemplateEditorStore): Abstractio
 						return (overrideEnabled && initialEnabled !== overrideEnabled) || initialConfig?.limit !== overrideConfig?.limit;
 					},
 					onValueChange: (value, controller) => {
+						if (typeof value === 'undefined' || !controller) return;
+
 						const initialConfig = store.initial.controller.autocomplete?.history;
 						const initialValue = initialConfig?.enabled ? initialConfig?.limit : 'Disabled';
 
@@ -45,6 +63,8 @@ export function autocompleteControllerUI(store: TemplateEditorStore): Abstractio
 						updateAutocompleteControllerState(controller);
 					},
 					onReset: (controller) => {
+						if (!controller) return;
+
 						const resetValues = { enabled: undefined, limit: undefined, showResults: undefined };
 						if (store.initial.controller.autocomplete?.history?.enabled) {
 							delete resetValues.showResults;
@@ -57,9 +77,25 @@ export function autocompleteControllerUI(store: TemplateEditorStore): Abstractio
 					type: 'dropdown',
 					label: 'Trending Terms',
 					description: '',
-					options: ['Disabled', 1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
-					getValue: (controller: AutocompleteController) => {
-						return controller.store.config.settings?.trending?.enabled ? controller.store.config.settings.trending.limit ?? 'Disabled' : 'Disabled';
+					getOptions: () => [
+						{
+							options: [
+								{ value: 'Disabled' },
+								{ value: 1 },
+								{ value: 2 },
+								{ value: 3 },
+								{ value: 4 },
+								{ value: 5 },
+								{ value: 6 },
+								{ value: 7 },
+								{ value: 8 },
+								{ value: 9 },
+								{ value: 10 },
+							],
+						},
+					],
+					getValue: (controller) => {
+						return controller?.store.config.settings?.trending?.enabled ? controller.store.config.settings.trending.limit ?? 'Disabled' : 'Disabled';
 					},
 					shouldShowReset: () => {
 						const initialConfig = store.initial.controller.autocomplete?.trending;
@@ -72,6 +108,8 @@ export function autocompleteControllerUI(store: TemplateEditorStore): Abstractio
 						return overrideEnabled && (initialEnabled !== overrideEnabled || initialConfig?.limit !== overrideConfig?.limit);
 					},
 					onValueChange: async (value, controller) => {
+						if (typeof value === 'undefined' || !controller) return;
+
 						const initialConfig = store.initial.controller.autocomplete?.trending;
 						const initialValue = initialConfig?.enabled ? initialConfig?.limit : 'Disabled';
 
@@ -92,6 +130,8 @@ export function autocompleteControllerUI(store: TemplateEditorStore): Abstractio
 						updateAutocompleteControllerState(controller);
 					},
 					onReset: (controller) => {
+						if (!controller) return;
+
 						const resetValues = { enabled: undefined, limit: undefined, showResults: undefined };
 						if (store.initial.controller.autocomplete?.trending?.enabled) {
 							delete resetValues.showResults;
@@ -104,22 +144,22 @@ export function autocompleteControllerUI(store: TemplateEditorStore): Abstractio
 					type: 'dropdown',
 					label: 'Initial Results',
 					description: '',
-					getDisplayState: (controller: AutocompleteController) => {
-						const enabled = controller.store.config.settings?.history?.enabled || controller.store.config.settings?.trending?.enabled;
+					getDisplayState: (controller) => {
+						const enabled = controller?.store.config.settings?.history?.enabled || controller?.store.config.settings?.trending?.enabled;
 						return enabled ? 'visible' : 'disabled';
 					},
-					options: (controller: AutocompleteController) => {
-						const historyEnabled = controller.store.config.settings?.history?.enabled;
-						const trendingEnabled = controller.store.config.settings?.trending?.enabled;
+					getOptions: (controller) => {
+						const historyEnabled = controller?.store.config.settings?.history?.enabled;
+						const trendingEnabled = controller?.store.config.settings?.trending?.enabled;
 
-						const opts = ['Disabled'];
-						if (historyEnabled) opts.push('History');
-						if (trendingEnabled) opts.push('Trending');
-						return opts;
+						const opts = [{ value: 'Disabled' }];
+						if (historyEnabled) opts.push({ value: 'History' });
+						if (trendingEnabled) opts.push({ value: 'Trending' });
+						return [{ options: opts }];
 					},
-					getValue: (controller: AutocompleteController) => {
-						if (controller.store.config.settings?.trending?.showResults) return 'Trending';
-						if (controller.store.config.settings?.history?.showResults) return 'History';
+					getValue: (controller) => {
+						if (controller?.store.config.settings?.trending?.showResults) return 'Trending';
+						if (controller?.store.config.settings?.history?.showResults) return 'History';
 						return 'Disabled';
 					},
 					shouldShowReset: () => {
@@ -144,6 +184,8 @@ export function autocompleteControllerUI(store: TemplateEditorStore): Abstractio
 						return initialValue !== overrideValue;
 					},
 					onValueChange: (value, controller) => {
+						if (typeof value === 'undefined' || !controller) return;
+
 						if (value === 'Disabled') {
 							store.setControllerOverride({ path: ['history', 'showResults'], controller });
 							store.setControllerOverride({ path: ['trending', 'showResults'], controller });
@@ -158,6 +200,8 @@ export function autocompleteControllerUI(store: TemplateEditorStore): Abstractio
 						updateAutocompleteControllerState(controller);
 					},
 					onReset: (controller) => {
+						if (!controller) return;
+
 						store.setControllerOverride({ path: ['history', 'showResults'], controller });
 						store.setControllerOverride({ path: ['trending', 'showResults'], controller });
 						updateAutocompleteControllerState(controller);

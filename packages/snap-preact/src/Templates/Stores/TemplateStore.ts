@@ -195,11 +195,11 @@ export class TemplatesStore {
 		this.library = new LibraryStore({ components: config.components });
 
 		this.language =
-			(this.settings.editMode && this.storage.get('config.language')) ||
+			(this.settings.editMode && this.storage.get('overrides.config.language')) ||
 			(this.config.config?.language && this.config.config.language in this.library.import.language && this.config.config.language) ||
 			'en';
 		this.currency =
-			(this.settings.editMode && this.storage.get('config.currency')) ||
+			(this.settings.editMode && this.storage.get('overrides.config.currency')) ||
 			(this.config.config?.currency && this.config.config.currency in this.library.import.currency && this.config.config.currency) ||
 			'usd';
 
@@ -362,7 +362,7 @@ export class TemplatesStore {
 
 			if (currency) {
 				this.currency = currencyCode;
-				this.storage.set('config.currency', this.currency);
+				this.storage.set('overrides.config.currency', this.currency);
 				for (const themeName in this.themes.local) {
 					const theme = this.themes.local[themeName];
 					theme.setCurrency(currency);
@@ -382,7 +382,7 @@ export class TemplatesStore {
 
 			if (language) {
 				this.language = languageCode;
-				this.storage.set('config.language', this.language);
+				this.storage.set('overrides.config.language', this.language);
 				for (const themeName in this.themes.local) {
 					const theme = this.themes.local[themeName];
 					theme.setLanguage(language);

@@ -12,9 +12,9 @@ export function searchControllerUI(store: TemplateEditorStore): AbstractionGroup
 					type: 'checkbox',
 					label: 'Infinite Scroll',
 					description: 'Enable infinite scroll',
-					getValue: (controller: SearchController) => {
+					getValue: (controller) => {
 						// need to support both infinite without "enabled" (object simply exists) and with "enabled" in settings
-						if (controller.store.config.settings?.infinite) {
+						if (controller?.store.config.settings?.infinite) {
 							if (controller.store.config.settings?.infinite?.enabled !== undefined) {
 								return controller.store.config.settings.infinite.enabled;
 							}
@@ -30,9 +30,13 @@ export function searchControllerUI(store: TemplateEditorStore): AbstractionGroup
 						return overrideEnabled && initialEnabled !== store.overrides.controller.search?.infinite?.enabled;
 					},
 					onValueChange: (value, controller) => {
+						if (typeof value === 'undefined' || !controller) return;
+
 						store.setControllerOverride({ path: ['infinite', 'enabled'], value: Boolean(value), controller });
 					},
 					onReset: (controller) => {
+						if (!controller) return;
+
 						store.setControllerOverride({ path: ['infinite'], controller });
 					},
 				},

@@ -121,11 +121,22 @@ export type SnapFeatures = {
 
 // The state of a UI control, which determines how it's rendered.
 export type ControlDisplayState = 'visible' | 'disabled' | 'hidden';
+export type ControlValueTypes = 'dropdown' | 'checkbox' | 'number' | 'text' | 'color' | 'layout';
+export type ControlValues = string | number | boolean;
+
+type ControlOption = {
+	label?: string;
+	value: ControlValues;
+};
+export type ControlOptions = {
+	group?: string;
+	options: ControlOption[];
+}[];
 
 // Defines a single abstracted UI control (e.g., a dropdown).
-export interface AbstractedControl<Params> {
+export interface AbstractedControl<Params, Value = ControlValues> {
 	// The type of UI control to render.
-	type: 'dropdown' | 'checkbox' | 'number' | 'text' | 'color' | 'layout';
+	type: ControlValueTypes;
 
 	// The label to display next to the control.
 	label: string;
@@ -134,27 +145,27 @@ export interface AbstractedControl<Params> {
 	description: string;
 
 	// For 'dropdown' type: a static list of options or a function to dynamically generate them.
-	options?: (string | number)[] | ((params: Params) => (string | number)[]);
+	getOptions?: (params?: Params) => ControlOptions;
 
 	// A function to determine the display state of the control (visible, disabled, or hidden).
 	// If not provided, the control defaults to 'visible'.
-	getDisplayState?: (params: Params) => ControlDisplayState;
+	getDisplayState?: (params?: Params) => ControlDisplayState;
 
 	// A function to read the low-level settings and return the current value for this UI control.
-	getValue: (params: Params) => string | number | boolean;
+	getValue: (params?: Params) => Value;
 
 	// A function that's called when the UI control's value changes. It's responsible
 	// for updating the necessary low-level settings.
-	onValueChange: (value: any, params: Params) => void;
+	onValueChange: (value: Value, params?: Params) => void;
 
 	// A function that's called when the UI control's value is reset. It's responsible
-	onReset: (params: Params) => void;
+	onReset: (params?: Params) => void;
 
 	shouldShowReset: () => boolean;
 }
 
 // Defines a group of related UI controls that appear together.
-export interface AbstractionGroup<Params> {
+export interface AbstractionGroup<Params = object> {
 	// A title for the group to be displayed in the UI.
 	title: string;
 

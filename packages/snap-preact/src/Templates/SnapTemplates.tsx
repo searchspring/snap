@@ -198,41 +198,45 @@ export class SnapTemplates extends Snap {
 						},
 					],
 					async (target: Target, elem: Element) => {
-						const TemplateEditor = (await import('../../components/src')).TemplatesEditor;
-						const TemplateEditorStore = (await import('./Stores/TemplateEditor/TemplateEditorStore')).TemplateEditorStore;
-						const templateEditorStore = new TemplateEditorStore({ templatesStore });
+						try {
+							const TemplateEditor = (await import('../../components/src')).TemplatesEditor;
+							const TemplateEditorStore = (await import('./Stores/TemplateEditor/TemplateEditorStore')).TemplateEditorStore;
+							const templateEditorStore = new TemplateEditorStore({ templatesStore });
 
-						const searchController = this.controllers['search'] as SearchController | undefined;
-						const autocompleteController = this.controllers['autocomplete'] as AutocompleteController | undefined;
+							const searchController = this.controllers['search'] as SearchController | undefined;
+							const autocompleteController = this.controllers['autocomplete'] as AutocompleteController | undefined;
 
-						if (searchController) {
-							templateEditorStore.registerController(searchController);
+							if (searchController) {
+								templateEditorStore.registerController(searchController);
+							}
+
+							if (autocompleteController) {
+								templateEditorStore.registerController(autocompleteController);
+							}
+
+							render(
+								<TemplateEditor
+									templatesStore={templatesStore}
+									editorStore={templateEditorStore}
+									snap={this}
+									onRemoveClick={() => {
+										cookies.unset(TEMPLATE_EDIT_COOKIE);
+										const urlState = url(window.location.href);
+										delete urlState?.params.query[TEMPLATE_EDITOR_PARAM];
+
+										const newUrl = urlState?.url();
+										if (newUrl && newUrl != window.location.href) {
+											window.location.href = newUrl;
+										} else {
+											window.location.reload();
+										}
+									}}
+								/>,
+								elem
+							);
+						} catch (error) {
+							console.error('Error rendering TemplateEditor:', error);
 						}
-
-						if (autocompleteController) {
-							templateEditorStore.registerController(autocompleteController);
-						}
-
-						render(
-							<TemplateEditor
-								templatesStore={templatesStore}
-								editorStore={templateEditorStore}
-								snap={this}
-								onRemoveClick={() => {
-									cookies.unset(TEMPLATE_EDIT_COOKIE);
-									const urlState = url(window.location.href);
-									delete urlState?.params.query[TEMPLATE_EDITOR_PARAM];
-
-									const newUrl = urlState?.url();
-									if (newUrl && newUrl != window.location.href) {
-										window.location.href = newUrl;
-									} else {
-										window.location.reload();
-									}
-								}}
-							/>,
-							elem
-						);
 					}
 				);
 			});

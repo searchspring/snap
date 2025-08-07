@@ -2,18 +2,15 @@ import { css } from '@emotion/react';
 import classnames from 'classnames';
 import { ComponentProps, RootNodeProperties } from '../../../types';
 import { observer } from 'mobx-react-lite';
-import { debounce } from '@searchspring/snap-toolbox';
 import { CacheProvider } from '../../../providers';
 import { TemplateEditorStore } from '../../../../../src/Templates/Stores/TemplateEditor/TemplateEditorStore';
-import { TemplatesStore, TemplateThemeTypes, TemplateTypes } from '../../../../../src/Templates/Stores/TemplateStore';
-import { CurrencyCodes, LanguageCodes } from '../../../../../src/Templates/Stores/LibraryStore';
-import { SnapTemplates } from '../../../../../src';
+import { TemplatesStore, TemplateTypes } from '../../../../../src/Templates/Stores/TemplateStore';
+import { SnapTemplates, SnapTemplatesConfig } from '../../../../../src';
 import { AutocompleteController, SearchController } from '@searchspring/snap-controller';
-import { AbstractedControl, AbstractionGroup } from '../../../../../src/types';
-import { CheckboxControl } from './Controls/Checkbox';
-import { DropdownControl } from './Controls/Dropdown';
-import { AthosCommerceLogo, Reset } from './Assets';
+import { AthosCommerceLogo } from './Assets';
 import type { ThemeStore } from '../../../../../src/Templates/Stores/ThemeStore';
+import { AbstractedControls } from './Components/AbstractedControls';
+import { DropdownControl } from './Controls/Dropdown';
 
 const CSS = {
 	TemplatesEditor: ({}: Partial<TemplatesEditorProps>) =>
@@ -99,7 +96,6 @@ const CSS = {
 				},
 				'.tab-view': {
 					padding: '0 10px',
-					'.template-target-settings, .controller-settings': {},
 				},
 			},
 			'>footer': {
@@ -237,15 +233,10 @@ export const TemplatesEditor = observer((properties: TemplatesEditorProps): JSX.
 	const themeLocation = rootTarget.template.theme.location;
 	const themeName = rootTarget.template.theme.name;
 	const themeRef = templatesStore.themes[themeLocation][themeName];
-	const theme = themeRef.theme;
 
 	const styling: RootNodeProperties = {
 		css: [CSS.TemplatesEditor({ ...properties })],
 	};
-
-	const setVariable = debounce((obj: { path: string[]; value: unknown }) => {
-		editorStore.setThemeConfigPath(obj, themeRef);
-	}, 50);
 
 	return (
 		<CacheProvider>
@@ -273,7 +264,7 @@ export const TemplatesEditor = observer((properties: TemplatesEditorProps): JSX.
 						<button
 							onClick={(e) => {
 								e.stopPropagation();
-								if (confirm('Exiting the editor will disable modified configurations.')) {
+								if (confirm('Closing the editor will disable modification.')) {
 									onRemoveClick();
 								}
 							}}
@@ -309,9 +300,13 @@ export const TemplatesEditor = observer((properties: TemplatesEditorProps): JSX.
 					{editorStore.state.activeTab === 'templates' ? (
 						<div className="tab-view">
 							<TemplateTargetSettings feature="search" templatesStore={templatesStore} />
-							<ControllerSettings editorStore={editorStore} snap={snap} feature="search" />
+							<AbstractedControls editorStore={editorStore} data={snap.controllers.search as SearchController} feature="controllers/search" />
 							<TemplateTargetSettings feature="autocomplete" templatesStore={templatesStore} />
-							<ControllerSettings editorStore={editorStore} snap={snap} feature="autocomplete" />
+							<AbstractedControls
+								editorStore={editorStore}
+								data={snap.controllers.autocomplete as AutocompleteController}
+								feature="controllers/autocomplete"
+							/>
 							<TemplateTargetSettings feature="recommendation/default" templatesStore={templatesStore} />
 							<TemplateTargetSettings feature="recommendation/bundle" templatesStore={templatesStore} />
 						</div>
@@ -320,124 +315,9 @@ export const TemplatesEditor = observer((properties: TemplatesEditorProps): JSX.
 					)}
 					{editorStore.state.activeTab === 'configuration' ? (
 						<div className="tab-view">
-							<h2>Project Configuration</h2>
-							<div className="option">
-								<label htmlFor="siteId">SiteId</label>
-								<div className="reset"></div>
-								<div className="value">
-									<input
-										id="siteId"
-										type="text"
-										placeholder={'Enter the siteId from the Athos Console'}
-										value={templatesStore.config.config.siteId}
-										disabled
-									/>
-								</div>
-							</div>
-							<div className="option">
-								<label htmlFor="platform">Platform</label>
-								<div className="reset"></div>
-								<div className="value">
-									<select
-										id="platform"
-										value={templatesStore.config.config.platform}
-										// onChange={(e) => { }}
-										disabled
-									>
-										{/* TODO: need better platform or get it from other place instead of library.plugins */}
-										{Object.keys(templatesStore.library.import.plugins)
-											.map((plugin) => (plugin == 'common' ? 'other' : plugin))
-											.map((plugin, i) => {
-												return (
-													<option key={i} value={plugin}>
-														{plugin}
-													</option>
-												);
-											})}
-									</select>
-								</div>
-							</div>
-
-							<div className="option">
-								<label htmlFor="theme-select">Theme</label>
-								<div className="reset"></div>
-								<div className="value">
-									<select
-										id="theme-select"
-										onChange={(e) => {
-											const { selectedIndex, options } = e.currentTarget;
-											const selectedOption = options[selectedIndex];
-											const selectedTheme = selectedOption.value;
-											const type = selectedOption.closest('optgroup')?.label as TemplateThemeTypes;
-											editorStore.setTheme(type, selectedTheme);
-										}}
-									>
-										<optgroup label="library">
-											{Object.keys(templatesStore.themes.library).map((libraryTheme) => (
-												<option selected={themeLocation === 'library' && themeName === libraryTheme}>{libraryTheme}</option>
-											))}
-										</optgroup>
-										<optgroup label="local">
-											{Object.keys(templatesStore.themes.local).map((localTheme) => (
-												<option selected={themeLocation === 'local' && themeName === localTheme}>{localTheme}</option>
-											))}
-										</optgroup>
-									</select>
-								</div>
-							</div>
-
-							<div className="option">
-								<label htmlFor="language">Language</label>
-								<div className="reset"></div>
-								<div className="value">
-									<select
-										id="language"
-										value={templatesStore.language}
-										onChange={(e) => {
-											templatesStore.setLanguage(e.target.value as LanguageCodes);
-										}}
-									>
-										{Object.keys(templatesStore.library.locales.languages).map((option, i) => {
-											return (
-												<option key={i} value={option}>
-													{option}
-												</option>
-											);
-										})}
-									</select>
-								</div>
-							</div>
-							<div className="option">
-								<label htmlFor="currency">Currency</label>
-								<div className="reset"></div>
-								<div className="value">
-									<select
-										id="currency"
-										value={templatesStore.currency}
-										onChange={(e) => {
-											templatesStore.setCurrency(e.target.value as CurrencyCodes);
-										}}
-									>
-										{Object.keys(templatesStore.library.locales.currencies).map((option, i) => {
-											return (
-												<option key={i} value={option}>
-													{option}
-												</option>
-											);
-										})}
-									</select>
-								</div>
-							</div>
-
-							<ThemeEditor
-								property={theme?.variables}
-								rootEditingKey={'variables'}
-								themeName={rootTarget.template.theme.name}
-								setVariable={setVariable}
-								editorStore={editorStore}
-								themeRef={themeRef}
-							/>
-							<TemplateConfig editorStore={editorStore} />
+							<AbstractedControls editorStore={editorStore} feature="templates/config" />
+							<AbstractedControls editorStore={editorStore} feature="templates/theme" />
+							<TemplateConfig config={editorStore.generateTemplatesConfig()} />
 						</div>
 					) : (
 						''
@@ -452,26 +332,25 @@ export const TemplatesEditor = observer((properties: TemplatesEditorProps): JSX.
 	);
 });
 
-const TemplateConfig = (props: { editorStore: TemplateEditorStore }) => {
-	const { editorStore } = props;
-	const config = editorStore.generateTemplatesConfig() || {};
+const TemplateConfig = observer((props: { config: SnapTemplatesConfig }) => {
+	const { config } = props;
 	return (
-		<div style={{ marginBottom: '10px}' }}>
+		<div className="template-config">
 			<h2>Project Code</h2>
 			<textarea readOnly>{JSON.stringify(config, null, 4)}</textarea>
 		</div>
 	);
-};
+});
 
 const ResetAllVariablesButton = (props: { editorStore: TemplateEditorStore; themeRef: ThemeStore }) => {
-	const { editorStore, themeRef } = props;
+	const { editorStore } = props;
 	if (Object.keys(editorStore.overrides.theme || {}).length === 0 || editorStore.state.activeTab !== 'configuration') {
 		return null;
 	}
 	return (
 		<button
 			onClick={() => {
-				editorStore.resetThemeConfig(themeRef);
+				// TODO: Implement reset logic variables (should be separate for theme vs. controller configs)
 			}}
 		>
 			Reset All Variables
@@ -485,244 +364,6 @@ export interface TemplatesEditorProps extends ComponentProps {
 	editorStore: TemplateEditorStore;
 	snap: SnapTemplates;
 }
-
-const ThemeEditor = (props: {
-	property: any;
-	pathPrefix?: string[];
-	propertyName?: string;
-	themeName?: string;
-	setVariable: (args: { path: string[]; value: unknown }) => void;
-	rootEditingKey: string;
-	editorStore: TemplateEditorStore;
-	themeRef: ThemeStore;
-}) => {
-	const pathPrefix: any = props.pathPrefix || [];
-	const path = [...pathPrefix, props?.propertyName].filter((a) => a);
-	const themeName = props.themeName;
-	const setVariable = props.setVariable;
-	const rootEditingKey = props.rootEditingKey;
-	const editorStore = props.editorStore;
-	const themeRef = props.themeRef;
-
-	if (typeof props?.property === 'undefined' || Array.isArray(props.property) || typeof props.property === 'boolean') {
-		// ignore undefined, arrays, and booleans
-		return null;
-	}
-
-	const shouldShowResetButton = (path: string[], val: unknown): boolean => {
-		try {
-			let obj = editorStore.overrides.theme[rootEditingKey as keyof typeof editorStore.overrides.theme];
-
-			if (typeof obj === 'undefined') {
-				// no overrides at this moment
-				return false;
-			}
-
-			path.forEach((p) => {
-				obj = obj && (obj[p as keyof typeof obj] as any);
-			});
-			if (obj === val) {
-				return true;
-			}
-		} catch (e) {
-			return false;
-		}
-
-		return false;
-	};
-
-	if (typeof props.property === 'object') {
-		// object means we need to recurse until we get to the primitives
-		return (
-			<>
-				{Object.values(props.property).map((property, index) => {
-					return (
-						<ThemeEditor
-							key={index}
-							property={property}
-							rootEditingKey={rootEditingKey}
-							themeName={themeName}
-							setVariable={setVariable}
-							propertyName={Object.getOwnPropertyNames(props.property)[index]}
-							pathPrefix={[...pathPrefix, props.propertyName]}
-							editorStore={editorStore}
-							themeRef={themeRef}
-						/>
-					);
-				})}
-			</>
-		);
-	} else if (typeof props.property === 'string') {
-		const value = props.property.toString();
-		const key = path.join('.');
-
-		if (path.includes('colors')) {
-			return (
-				<div className={classnames('color-picker', 'option')}>
-					<label htmlFor={key}>{key}</label>
-					<div className="reset">
-						{shouldShowResetButton(path, value) && (
-							<button
-								title="Reset"
-								onClick={() => {
-									editorStore.resetThemeConfigPath({ path, rootEditingKey }, themeRef);
-								}}
-							>
-								<Reset />
-							</button>
-						)}
-					</div>
-					<div className="value">
-						<input
-							type="color"
-							value={value}
-							id={key}
-							name={key}
-							onChange={(e) => {
-								setVariable({
-									path,
-									value: e.target.value,
-								});
-							}}
-						/>
-						<span>{value}</span>
-					</div>
-				</div>
-			);
-		}
-	} else if (typeof props.property === 'number') {
-		if (path.includes('breakpoints')) {
-			const value = props.property;
-			const key = path.join('.');
-
-			return (
-				<div className={classnames('breakpoint-picker', 'option')}>
-					<label htmlFor={key}>{key}</label>
-					<div className="reset">
-						{shouldShowResetButton(path, value) && (
-							<button
-								title="Reset"
-								onClick={() => {
-									editorStore.resetThemeConfigPath({ path, rootEditingKey }, themeRef);
-								}}
-							>
-								<Reset />
-							</button>
-						)}
-					</div>
-					<div className="value">
-						<input
-							type="number"
-							value={value}
-							id={key}
-							name={key}
-							onChange={(e) => {
-								setVariable({
-									path,
-									value: Number(e.target.value),
-								});
-							}}
-						/>
-					</div>
-				</div>
-			);
-		}
-	}
-
-	return null;
-};
-
-/*
-
-		disableA11y: {
-			description: 'boolean to disable autoset ally properties',
-			table: {
-				type: {
-					summary: 'boolean',
-				},
-				defaultValue: { summary: false },
-			},
-			control: { type: 'boolean' },
-		},
-
-*/
-
-type ControllerSettingsProps = {
-	feature: string;
-	editorStore: TemplateEditorStore;
-	snap: SnapTemplates;
-};
-
-const ControllerSettings = observer((props: ControllerSettingsProps) => {
-	const { feature, editorStore, snap } = props;
-	const [feat] = feature.split('/');
-	const controlGroups = editorStore.uiAbstractions.controllers[feat as keyof typeof editorStore.uiAbstractions.controllers] as
-		| AbstractionGroup<SearchController | AutocompleteController>[]
-		| undefined;
-
-	const controller = snap.controllers?.[feat] as SearchController | AutocompleteController;
-
-	if (!controller || !controlGroups) {
-		return null;
-	}
-
-	return (
-		<div className="controller-settings">
-			{controlGroups.map((group) => {
-				return (
-					<div className="group" key={group.title}>
-						<h3>{group.title}</h3>
-						<p>{group.description}</p>
-						{group.controls.map((control, index) => {
-							// Type assertion to handle the union type issue
-							let value: string | number | boolean;
-							const typedControl = control as AbstractedControl<typeof controller>;
-							const display: string = typedControl?.getDisplayState ? typedControl.getDisplayState(controller) : 'visible';
-
-							switch (control.type) {
-								case 'checkbox':
-									value = Boolean(typedControl.getValue(controller));
-
-									return display === 'hidden' ? null : (
-										<CheckboxControl
-											key={index}
-											label={control.label}
-											description={control.description}
-											showReset={control.shouldShowReset()}
-											onReset={() => control.onReset(controller)}
-											disabled={display === 'disabled'}
-											value={value}
-											onChange={(value: boolean) => control.onValueChange(value, controller)}
-										/>
-									);
-								case 'dropdown':
-									value = typedControl.getValue(controller);
-
-									const dropdownValue = typedControl.getValue(controller) as string | number;
-									const dropdownOptions = typeof control.options === 'function' ? control.options(controller) : control.options || [];
-									return display === 'hidden' ? null : (
-										<DropdownControl
-											key={index}
-											label={control.label}
-											description={control.description}
-											showReset={control.shouldShowReset()}
-											options={dropdownOptions}
-											onReset={() => control.onReset(controller)}
-											disabled={display === 'disabled'}
-											value={dropdownValue}
-											onChange={(value: string | number) => control.onValueChange(value, controller)}
-										/>
-									);
-								default:
-									return null;
-							}
-						})}
-					</div>
-				);
-			})}
-		</div>
-	);
-});
 
 type TemplateTargetSettingsProps = {
 	feature: TemplateTypes;
