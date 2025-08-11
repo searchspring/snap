@@ -1,17 +1,17 @@
 import { create } from '@storybook/theming/create';
 
-import searchspringLogo from '../src/assets/searchspring-logo.svg';
+import athosLogo from '../src/assets/athos_logo.svg';
 
 export default create({
 	base: 'light',
 
-	colorPrimary: '#3a23ad',
-	colorSecondary: '#00cee1',
+	colorPrimary: '#1D4990',
+	colorSecondary: '#00AEEF',
 
 	appBg: '#fafafa',
 	// Toolbar default and active colors
-	barSelectedColor: '#3a23ad',
+	barSelectedColor: '#1D4990',
 
 	brandTitle: 'Searchspring Snap Preact',
-	brandImage: searchspringLogo,
+	brandImage: athosLogo,
 });
