@@ -1,6 +1,6 @@
 import { create } from '@storybook/theming/create';
 
-import searchspringLogo from '../src/assets/searchspring-logo.svg';
+import athosLogo from '../src/assets/athos_logo.svg';
 
 export default create({
 	base: 'light',
@@ -13,5 +13,5 @@ export default create({
 	barSelectedColor: '#3a23ad',
 
 	brandTitle: 'Searchspring Snap Preact',
-	brandImage: searchspringLogo,
+	brandImage: athosLogo,
 });
