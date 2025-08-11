@@ -1,19 +1,19 @@
 (self.webpackChunk_searchspring_snap_preact_components = self.webpackChunk_searchspring_snap_preact_components || []).push([
 	[792],
 	{
-		56733: (__unused_webpack_module, __unused_webpack___webpack_exports__, __webpack_require__) => {
+		16503: (__unused_webpack_module, __unused_webpack___webpack_exports__, __webpack_require__) => {
 			'use strict';
 			var esm = __webpack_require__(27893),
 				create = __webpack_require__(22013);
-			const searchspring_logo_namespaceObject = __webpack_require__.p + 'static/media/searchspring-logo.fb3e0170.svg',
+			const athos_logo_namespaceObject = __webpack_require__.p + 'static/media/athos_logo.9c0e241a.svg',
 				searchspringTheme = (0, create.vt)({
 					base: 'light',
-					colorPrimary: '#3a23ad',
-					colorSecondary: '#00cee1',
+					colorPrimary: '#1D4990',
+					colorSecondary: '#00AEEF',
 					appBg: '#fafafa',
-					barSelectedColor: '#3a23ad',
+					barSelectedColor: '#1D4990',
 					brandTitle: 'Searchspring Snap Preact',
-					brandImage: searchspring_logo_namespaceObject,
+					brandImage: athos_logo_namespaceObject,
 				});
 			esm.MC.setConfig({ theme: searchspringTheme });
 		},
@@ -26,7 +26,7 @@
 			[518],
 			() => (
 				__webpack_exec__(90354),
-				__webpack_exec__(56733),
+				__webpack_exec__(16503),
 				__webpack_exec__(68682),
 				__webpack_exec__(97954),
 				__webpack_exec__(8900),
