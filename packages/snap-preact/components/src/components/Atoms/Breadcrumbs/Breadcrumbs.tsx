@@ -4,14 +4,16 @@ import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
 import { observer } from 'mobx-react';
 import { Theme, useTheme, CacheProvider, useTreePath } from '../../../providers';
-import { mergeProps, mergeStyles } from '../../../utilities';
+import { defined, mergeProps, mergeStyles } from '../../../utilities';
 import { ComponentProps, StyleScript } from '../../../types';
 import { SearchController } from '@searchspring/snap-controller';
+import { Icon, IconProps, IconType } from '../Icon';
 
 const defaultStyles: StyleScript<BreadcrumbsProps> = () => {
 	return css({
 		'& .ss__breadcrumbs__crumbs': {
 			padding: '0',
+			display: 'flex',
 		},
 		'& .ss__breadcrumbs__crumbs__crumb, & .ss__breadcrumbs__crumbs__separator': {
 			padding: '0 5px',
@@ -39,7 +41,21 @@ export const Breadcrumbs = observer((properties: BreadcrumbsProps): JSX.Element 
 
 	const props = mergeProps('breadcrumbs', globalTheme, defaultProps, properties);
 
-	const { data, separator, className, controller } = props;
+	const { data, separator, separatorIcon, className, controller, disableStyles, treePath } = props;
+
+	const subProps: BreadcrumbsSubProps = {
+		icon: {
+			className: 'ss__breadcrumbs__separator__icon',
+			// default props
+			// inherited props
+			...defined({
+				disableStyles,
+			}),
+			// component theme overrides
+			theme: props?.theme,
+			treePath,
+		},
+	};
 
 	const styling = mergeStyles<BreadcrumbsProps>(props, defaultStyles);
 
@@ -58,7 +74,19 @@ export const Breadcrumbs = observer((properties: BreadcrumbsProps): JSX.Element 
 						.map<React.ReactNode>((crumb: any) => (
 							<li className="ss__breadcrumbs__crumbs__crumb">{crumb.url ? <a href={crumb.url}>{crumb.label}</a> : crumb.label}</li>
 						))
-						.reduce((prev: any, curr: any) => [prev, <li className="ss__breadcrumbs__crumbs__separator">{separator}</li>, curr])}
+						.reduce((prev: any, curr: any) => [
+							prev,
+							<li className="ss__breadcrumbs__crumbs__separator">
+								{separator !== false ? separator : <></>}
+								{separatorIcon && (
+									<Icon
+										{...subProps.icon}
+										{...(typeof separatorIcon == 'string' ? { icon: separatorIcon } : (separatorIcon as Partial<IconProps>))}
+									/>
+								)}
+							</li>,
+							curr,
+						])}
 				</ul>
 			</div>
 		</CacheProvider>
@@ -77,6 +105,11 @@ export interface BreadcrumbsProps extends ComponentProps<BreadcrumbsProps> {
 				label: string;
 				url?: string;
 		  }[]);
-	separator?: string | JSX.Element;
+	separator?: string | JSX.Element | false;
+	separatorIcon?: IconType | Partial<IconProps> | false;
 	controller?: SearchController;
+}
+
+interface BreadcrumbsSubProps {
+	icon: Partial<IconProps>;
 }

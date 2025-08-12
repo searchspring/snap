@@ -101,6 +101,13 @@ describe('Breadcrumbs Component', () => {
 		expect(breadcrumbSeparatorElements[0].textContent).toEqual('|');
 	});
 
+	it('can use icon separator', () => {
+		const rendered = render(<Breadcrumbs {...args} separatorIcon={'cog'} />);
+		const breadcrumbSeparatorElements = rendered.container.querySelectorAll('.ss__breadcrumbs li:nth-child(even) .ss__icon');
+		expect(breadcrumbSeparatorElements.length).toEqual(args.data.length - 1);
+		expect(breadcrumbSeparatorElements[0].classList).toContain('ss__icon--cog');
+	});
+
 	it('renders with additional style using prop', () => {
 		const style = {
 			padding: '20px',

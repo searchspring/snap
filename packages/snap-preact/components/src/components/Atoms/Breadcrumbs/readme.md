@@ -44,3 +44,11 @@ The `separator` prop spcifies a custom delimiter between each breadcrumb. The de
 ```jsx
 <Breadcrumbs separator={'>'} data={breadcrumbs} />
 ```
+
+
+### separatorIcon
+The `separatorIcon` prop spcifies an icon to render between each breadcrumb. 
+
+```jsx
+<Breadcrumbs separatorIcon={'angle-right'} data={breadcrumbs} />
+```
