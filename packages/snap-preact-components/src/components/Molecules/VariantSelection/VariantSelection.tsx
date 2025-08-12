@@ -74,10 +74,11 @@ export const VariantSelection = observer((properties: VariantSelectionProps): JS
 
 	const { type, selection, onSelect, disableStyles, className, style } = props;
 
-	const onSelectHandler = (value: string) => {
+	const onSelectHandler = (e: React.MouseEvent<HTMLElement, MouseEvent>, value: string) => {
 		if (onSelect) {
-			onSelect(value);
+			onSelect(e, value);
 		}
+
 		selection.select(value);
 	};
 	const subProps: VariantSelectionSubProps = {
@@ -114,7 +115,7 @@ export const VariantSelection = observer((properties: VariantSelectionProps): JS
 			className: 'ss__variant-selection__list',
 			multiSelect: false,
 			hideOptionCheckboxes: true,
-			onSelect: (e, option) => onSelectHandler(option.value as string),
+			onSelect: (e, option) => onSelectHandler(e, option.value as string),
 			selected: selection.selected,
 
 			// global theme
@@ -129,7 +130,7 @@ export const VariantSelection = observer((properties: VariantSelectionProps): JS
 		swatches: {
 			name: `ss__variant-selection__swatches--${selection.field}`,
 			className: 'ss__variant-selection__swatches',
-			onSelect: (e, option) => onSelectHandler(option.value as string),
+			onSelect: (e, option) => onSelectHandler(e, option.value as string),
 			selected: selection.selected,
 			// global theme
 			...globalTheme?.components?.swatches,
@@ -192,7 +193,7 @@ export const VariantSelection = observer((properties: VariantSelectionProps): JS
 																	'ss__variant-selection__option--disabled': val.disabled,
 																	'ss__variant-selection__option--unavailable': val.available === false,
 																})}
-																onClick={() => !val.disabled && onSelectHandler(val.value)}
+																onClick={(e) => !val.disabled && onSelectHandler(e, val.value)}
 															>
 																{val.label}
 															</div>
@@ -239,5 +240,5 @@ interface VariantSelectionSubProps {
 export interface VariantSelectionProps extends ComponentProps {
 	selection: VariantSelectionType;
 	type?: 'dropdown' | 'swatches' | 'list';
-	onSelect?: (value: string) => void;
+	onSelect?: (e: React.MouseEvent<HTMLElement, MouseEvent>, value: string) => void;
 }
