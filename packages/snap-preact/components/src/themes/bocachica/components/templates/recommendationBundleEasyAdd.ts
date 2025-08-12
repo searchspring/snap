@@ -8,7 +8,19 @@ const recommendationBundleEasyAddStyleScript = ({ theme }: RecommendationBundleE
 	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	const variables = theme?.variables;
 
-	return css({});
+	return css({
+		border: `1px solid ${variables?.colors.accent}`,
+		padding: '20px',
+
+		'.ss__recommendation-bundle-easy-add__wrapper': {
+			justifyContent: 'center',
+		},
+
+		'.ss__recommendation-bundle-easy-add__title': {
+			textAlign: 'center',
+			marginBottom: '20px',
+		},
+	});
 };
 
 // RecommendationBundleEasyAdd component props come from Template export
@@ -17,6 +29,7 @@ export const recommendationBundleEasyAdd: ThemeComponent<'recommendationBundleEa
 		...recommendationBundleEasyAddThemeComponentProps.default,
 		recommendationBundleEasyAdd: {
 			...(recommendationBundleEasyAddThemeComponentProps.default?.['recommendationBundleEasyAdd'] || {}),
+			ctaIcon: false,
 			themeStyleScript: recommendationBundleEasyAddStyleScript,
 		},
 	},
