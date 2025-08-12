@@ -1,5 +1,5 @@
 import deepmerge from 'deepmerge';
-import { AppMode } from '@searchspring/snap-toolbox';
+import { AppMode, version } from '@searchspring/snap-toolbox';
 
 import { fibonacci } from '../utils/fibonacci';
 import { NetworkCache } from '../NetworkCache/NetworkCache';
@@ -144,6 +144,7 @@ export type FetchAPI = WindowOrWorkerGlobalScope['fetch'];
 
 export interface ApiConfigurationParameters {
 	mode?: keyof typeof AppMode | AppMode;
+	initiator?: string;
 	origin?: string; // override url origin
 	fetchApi?: FetchAPI; // override for fetch implementation
 	queryParamsStringify?: (params: HTTPQuery) => string; // stringify function for query strings
@@ -177,6 +178,10 @@ export class ApiConfiguration {
 
 	get origin(): string {
 		return this.config.origin || '';
+	}
+
+	get initiator(): string {
+		return this.config.initiator || `snap/client/${version}`;
 	}
 
 	get fetchApi(): FetchAPI {

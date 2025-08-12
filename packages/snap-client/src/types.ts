@@ -18,6 +18,7 @@ type RequesterConfig<T> = {
 
 export type ClientConfig = {
 	mode?: keyof typeof AppMode | AppMode;
+	initiator?: string;
 	fetchApi?: WindowOrWorkerGlobalScope['fetch'];
 	meta?: RequesterConfig<MetaRequestModel>;
 	search?: RequesterConfig<SearchRequestModel>;

@@ -1,6 +1,7 @@
 import 'whatwg-fetch';
 import { ApiConfiguration } from './Abstract';
 import { LegacyAPI } from './Legacy';
+import { version } from '@searchspring/snap-toolbox';
 
 describe('Legacy Api', () => {
 	it('has expected default functions', () => {
@@ -47,7 +48,7 @@ describe('Legacy Api', () => {
 			headers: {},
 			method: 'GET',
 		};
-		const requestUrl = 'https://8uyt2m.a.searchspring.io/api/search/search.json?siteId=8uyt2m&q=dress&ajaxCatalog=Snap&resultsFormat=native';
+		const requestUrl = `https://8uyt2m.a.searchspring.io/api/search/search.json?siteId=8uyt2m&q=dress&ajaxCatalog=snap%2Fclient%2F${version}&resultsFormat=native`;
 
 		await api.getSearch({
 			siteId: '8uyt2m',
@@ -89,7 +90,7 @@ describe('Legacy Api', () => {
 			headers: {},
 			method: 'GET',
 		};
-		const requestUrl = 'https://8uyt2m.a.searchspring.io/api/search/search.json?siteId=8uyt2m&q=dress&ajaxCatalog=Snap&resultsFormat=native';
+		const requestUrl = `https://8uyt2m.a.searchspring.io/api/search/search.json?siteId=8uyt2m&q=dress&ajaxCatalog=snap%2Fclient%2F${version}&resultsFormat=native`;
 
 		await api.getAutocomplete({
 			siteId: '8uyt2m',
@@ -109,7 +110,7 @@ describe('Legacy Api', () => {
 			headers: {},
 			method: 'GET',
 		};
-		const requestUrl = 'https://8uyt2m.a.searchspring.io/api/search/search.json?siteId=8uyt2m&q=dress&ajaxCatalog=Snap&resultsFormat=native';
+		const requestUrl = `https://8uyt2m.a.searchspring.io/api/search/search.json?siteId=8uyt2m&q=dress&ajaxCatalog=snap%2Fclient%2F${version}&resultsFormat=native`;
 
 		await api.getFinder({
 			siteId: '8uyt2m',

@@ -26,6 +26,7 @@ export class HybridAPI extends API {
 		const legacyConfig: ApiConfigurationParameters = deepmerge(
 			{
 				mode: this.configuration.mode,
+				initiator: this.configuration.initiator,
 				origin: this.configuration.origin,
 				cache: this.configuration.cache,
 				fetchApi: this.configuration.fetchApi,
@@ -40,6 +41,7 @@ export class HybridAPI extends API {
 		const suggestConfig: ApiConfigurationParameters = deepmerge(
 			{
 				mode: this.configuration.mode,
+				initiator: this.configuration.initiator,
 				origin: this.configuration.origin,
 				cache: this.configuration.cache,
 				fetchApi: this.configuration.fetchApi,
