@@ -55,6 +55,15 @@ export default {
 			// 	options: ['dropdown', 'list', 'swatches'],
 			// },
 		},
+		onSelect: {
+			description: 'onSelect callback',
+			table: {
+				type: {
+					summary: 'function(value: string)',
+				},
+			},
+			action: 'onSelect',
+		},
 		...componentArgs,
 	},
 };

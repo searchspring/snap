@@ -24,3 +24,10 @@ The optional `type` prop specifies what type of selection you wish to render. Op
 ```jsx
 <VariantSelection selection={VariantSelection} type={'swatches'} />
 ```
+
+### onSelect
+The `onSelect` prop allows you to provide a callback function that is triggered when a variant option is selected. The selected option's value will be passed as an argument to this function.
+
+```jsx
+<VariantSelection selection={VariantSelection} type={'swatches'} onSelect={(val) => console.log(val)}/>
+```

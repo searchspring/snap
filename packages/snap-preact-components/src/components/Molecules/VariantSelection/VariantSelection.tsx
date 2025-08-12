@@ -72,8 +72,14 @@ export const VariantSelection = observer((properties: VariantSelectionProps): JS
 		...properties.theme?.components?.variantSelection,
 	};
 
-	const { type, selection, disableStyles, className, style } = props;
+	const { type, selection, onSelect, disableStyles, className, style } = props;
 
+	const onSelectHandler = (value: string) => {
+		if (onSelect) {
+			onSelect(value);
+		}
+		selection.select(value);
+	};
 	const subProps: VariantSelectionSubProps = {
 		dropdown: {
 			name: `ss__variant-selection__dropdown--${selection.field}`,
@@ -108,7 +114,7 @@ export const VariantSelection = observer((properties: VariantSelectionProps): JS
 			className: 'ss__variant-selection__list',
 			multiSelect: false,
 			hideOptionCheckboxes: true,
-			onSelect: (e, option) => selection.select(option.value as string),
+			onSelect: (e, option) => onSelectHandler(option.value as string),
 			selected: selection.selected,
 
 			// global theme
@@ -123,7 +129,7 @@ export const VariantSelection = observer((properties: VariantSelectionProps): JS
 		swatches: {
 			name: `ss__variant-selection__swatches--${selection.field}`,
 			className: 'ss__variant-selection__swatches',
-			onSelect: (e, option) => selection.select(option.value as string),
+			onSelect: (e, option) => onSelectHandler(option.value as string),
 			selected: selection.selected,
 			// global theme
 			...globalTheme?.components?.swatches,
@@ -186,7 +192,7 @@ export const VariantSelection = observer((properties: VariantSelectionProps): JS
 																	'ss__variant-selection__option--disabled': val.disabled,
 																	'ss__variant-selection__option--unavailable': val.available === false,
 																})}
-																onClick={() => !val.disabled && selection.select(val.value)}
+																onClick={() => !val.disabled && onSelectHandler(val.value)}
 															>
 																{val.label}
 															</div>
@@ -233,4 +239,5 @@ interface VariantSelectionSubProps {
 export interface VariantSelectionProps extends ComponentProps {
 	selection: VariantSelectionType;
 	type?: 'dropdown' | 'swatches' | 'list';
+	onSelect?: (value: string) => void;
 }
