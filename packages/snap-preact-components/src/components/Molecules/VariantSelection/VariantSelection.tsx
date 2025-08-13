@@ -5,7 +5,7 @@ import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
 import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { defined } from '../../../utilities';
-import { ComponentProps, StylingCSS } from '../../../types';
+import { ComponentProps, ListOption, StylingCSS } from '../../../types';
 import type { VariantSelection as VariantSelectionType } from '@searchspring/snap-store-mobx';
 import { List, ListProps } from '../List';
 import { Swatches, SwatchesProps } from '../Swatches';
@@ -74,12 +74,12 @@ export const VariantSelection = observer((properties: VariantSelectionProps): JS
 
 	const { type, selection, onSelect, disableStyles, className, style } = props;
 
-	const onSelectHandler = (e: React.MouseEvent<HTMLElement, MouseEvent>, value: string) => {
+	const onSelectHandler = (e: React.MouseEvent<HTMLElement, MouseEvent>, option: ListOption) => {
 		if (onSelect) {
-			onSelect(e, value);
+			onSelect(e, option);
 		}
 
-		selection.select(value);
+		selection.select(option.value as string);
 	};
 	const subProps: VariantSelectionSubProps = {
 		dropdown: {
@@ -115,7 +115,7 @@ export const VariantSelection = observer((properties: VariantSelectionProps): JS
 			className: 'ss__variant-selection__list',
 			multiSelect: false,
 			hideOptionCheckboxes: true,
-			onSelect: (e, option) => onSelectHandler(e, option.value as string),
+			onSelect: (e, option) => onSelectHandler(e, option),
 			selected: selection.selected,
 
 			// global theme
@@ -130,7 +130,7 @@ export const VariantSelection = observer((properties: VariantSelectionProps): JS
 		swatches: {
 			name: `ss__variant-selection__swatches--${selection.field}`,
 			className: 'ss__variant-selection__swatches',
-			onSelect: (e, option) => onSelectHandler(e, option.value as string),
+			onSelect: (e, option) => onSelectHandler(e, option),
 			selected: selection.selected,
 			// global theme
 			...globalTheme?.components?.swatches,
@@ -193,7 +193,7 @@ export const VariantSelection = observer((properties: VariantSelectionProps): JS
 																	'ss__variant-selection__option--disabled': val.disabled,
 																	'ss__variant-selection__option--unavailable': val.available === false,
 																})}
-																onClick={(e) => !val.disabled && onSelectHandler(e, val.value)}
+																onClick={(e) => !val.disabled && onSelectHandler(e, val)}
 															>
 																{val.label}
 															</div>
@@ -240,5 +240,5 @@ interface VariantSelectionSubProps {
 export interface VariantSelectionProps extends ComponentProps {
 	selection: VariantSelectionType;
 	type?: 'dropdown' | 'swatches' | 'list';
-	onSelect?: (e: React.MouseEvent<HTMLElement, MouseEvent>, value: string) => void;
+	onSelect?: (e: React.MouseEvent<HTMLElement, MouseEvent>, option: ListOption) => void;
 }
