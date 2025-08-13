@@ -59,7 +59,7 @@ export default {
 			description: 'onSelect callback',
 			table: {
 				type: {
-					summary: 'function(e: React.MouseEvent<HTMLElement, MouseEvent>, optons: ListOption)',
+					summary: 'function(e: React.MouseEvent<HTMLElement, MouseEvent>, opton: ListOption)',
 				},
 			},
 			action: 'onSelect',
