@@ -152,7 +152,7 @@ export const Search = observer((properties: SearchProps): JSX.Element => {
 			name: 'middle',
 			className: `${classNamePrefix}__content__toolbar--middle-toolbar`,
 			layout: isMobile
-				? [['mobileSidebar', '_', 'paginationInfo'], ['banner.banner']]
+				? [['mobileSidebar', '_', 'paginationInfo'], ['filterSummary'], ['banner.banner']]
 				: [['sortBy', 'perPage', '_', 'paginationInfo'], ['banner.banner']],
 			// inherited props
 			...defined({

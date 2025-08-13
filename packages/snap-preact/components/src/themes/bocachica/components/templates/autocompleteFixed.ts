@@ -15,6 +15,10 @@ export const autocompleteFixed: ThemeComponent<'autocompleteFixed', Autocomplete
 			...(autocompleteFixedThemeComponentProps.default?.['autocompleteFixed'] || {}),
 			themeStyleScript: autocompleteFixedStyleScript,
 		},
+		'autocompleteFixed recommendationGrid': {
+			columns: 4,
+			rows: 1,
+		},
 	},
 	mobile: autocompleteFixedThemeComponentProps.mobile,
 	desktop: autocompleteFixedThemeComponentProps.desktop,

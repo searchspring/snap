@@ -6,6 +6,14 @@ const facetStyleScript = ({ color, theme }: FacetProps) => {
 	const variables = theme?.variables;
 
 	return css({
+		[`@media (min-width: ${variables?.breakpoints.tablet}px)`]: {
+			'&.ss__facet--showing-all': {
+				'& .ss__facet__options': {
+					maxHeight: '800px',
+				},
+			},
+		},
+
 		'& .ss__facet__dropdown': {
 			background: ' #f8f8f8',
 			padding: '20px',

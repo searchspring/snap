@@ -317,7 +317,6 @@ export const AutocompleteLayout = observer((properties: AutocompleteLayoutProps)
 		disableStyles,
 		className,
 		controller,
-		treePath,
 	} = props;
 	const subProps: AutocompleteSubProps = {
 		button: {
@@ -660,7 +659,7 @@ export const AutocompleteLayout = observer((properties: AutocompleteLayoutProps)
 												title={recsController.store?.profile?.display?.templateParameters?.title}
 												resultComponent={RecommendationTemplateResultComponent}
 												name={'noResultsRecommendations'}
-												treePath={treePath}
+												treePath={properties.treePath}
 											/>
 										</div>
 									) : null}

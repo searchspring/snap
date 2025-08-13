@@ -15,6 +15,10 @@ export const autocompleteModal: ThemeComponent<'autocompleteModal', Autocomplete
 			...(autocompleteModalThemeComponentProps.default?.['autocompleteModal'] || {}),
 			themeStyleScript: autocompleteModalStyleScript,
 		},
+		'autocompleteModal recommendationGrid': {
+			columns: 4,
+			rows: 1,
+		},
 	},
 	mobile: autocompleteModalThemeComponentProps.mobile,
 	desktop: autocompleteModalThemeComponentProps.desktop,

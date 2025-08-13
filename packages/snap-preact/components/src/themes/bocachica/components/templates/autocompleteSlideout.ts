@@ -15,6 +15,10 @@ export const autocompleteSlideout: ThemeComponent<'autocompleteSlideout', Autoco
 			...(autocompleteSlideoutThemeComponentProps.default?.['autocompleteSlideout'] || {}),
 			themeStyleScript: autocompleteSlideoutStyleScript,
 		},
+		'autocompleteSlideout recommendationGrid': {
+			columns: 2,
+			rows: 2,
+		},
 	},
 	mobile: autocompleteSlideoutThemeComponentProps.mobile,
 	desktop: autocompleteSlideoutThemeComponentProps.desktop,

@@ -2,7 +2,9 @@ import { css } from '@emotion/react';
 import type { SortByProps } from '../../../../components/Molecules/SortBy';
 import { ThemeComponent } from '../../../../providers';
 // CSS in JS style script for the SortBy component
-const sortByStyleScript = () => {
+const sortByStyleScript = ({ theme }: SortByProps) => {
+	const variables = theme?.variables;
+
 	return css({
 		'.ss__button__content': {
 			gap: '7px',
@@ -35,6 +37,12 @@ const sortByStyleScript = () => {
 				},
 			},
 		},
+
+		[`@media (max-width: ${variables?.breakpoints.tablet}px)`]: {
+			'.ss__button__content': {
+				padding: '5px 10px',
+			},
+		},
 	});
 };
 
@@ -48,6 +56,11 @@ export const sortBy: ThemeComponent<'sortBy', SortByProps> = {
 		'sortBy icon': {
 			size: '12px',
 			icon: 'angle-down',
+		},
+	},
+	tablet: {
+		'sortBy select': {
+			hideSelection: true,
 		},
 	},
 	mobile: {

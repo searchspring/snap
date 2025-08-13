@@ -54,7 +54,10 @@ export const mobileSidebar: ThemeComponent<'mobileSidebar', MobileSidebarProps> 
 	default: {
 		mobileSidebar: {
 			themeStyleScript: mobileSidebarStyleScript,
-			layout: ['perPage', 'facets', 'banner.left'],
+			layout: [
+				['_', 'perPage', 'sortBy', '_'],
+				['facets', 'banner.left'],
+			],
 			hideOpenButtonText: true,
 			openButtonIcon: 'filters',
 		},

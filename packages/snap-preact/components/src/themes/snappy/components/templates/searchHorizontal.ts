@@ -18,8 +18,26 @@ export const searchHorizontal: ThemeComponent<'searchHorizontal', SearchHorizont
 			...(searchHorizontalThemeComponentProps.default?.['searchHorizontal'] || {}),
 			themeStyleScript: searchHorizontalStyleScript,
 		},
+		'searchHorizontal results': {
+			columns: 5,
+		},
 	},
-	mobile: searchHorizontalThemeComponentProps.mobile,
-	desktop: searchHorizontalThemeComponentProps.desktop,
-	tablet: searchHorizontalThemeComponentProps.tablet,
+	mobile: {
+		...searchHorizontalThemeComponentProps.mobile,
+		'searchHorizontal results': {
+			columns: 2,
+		},
+	},
+	tablet: {
+		...searchHorizontalThemeComponentProps.tablet,
+		'searchHorizontal results': {
+			columns: 3,
+		},
+	},
+	desktop: {
+		...searchHorizontalThemeComponentProps.desktop,
+		'searchHorizontal results': {
+			columns: 4,
+		},
+	},
 };

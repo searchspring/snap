@@ -5,7 +5,16 @@ import { AutocompleteSlideoutProps } from '../../../../components/Templates/Auto
 
 // CSS in JS style script for the Search component
 const autocompleteSlideoutStyleScript = ({}: AutocompleteSlideoutProps) => {
-	return css({});
+	return css({
+		'.ss__autocomplete__button--see-more': {
+			margin: '10px 0px',
+			border: '0px',
+		},
+
+		'& .ss__autocomplete__content__results .ss__result .ss__image': {
+			minHeight: '250px',
+		},
+	});
 };
 
 export const autocompleteSlideout: ThemeComponent<'autocompleteSlideout', AutocompleteSlideoutProps> = {
@@ -14,6 +23,10 @@ export const autocompleteSlideout: ThemeComponent<'autocompleteSlideout', Autoco
 		autocompleteSlideout: {
 			...(autocompleteSlideoutThemeComponentProps.default?.['autocompleteSlideout'] || {}),
 			themeStyleScript: autocompleteSlideoutStyleScript,
+		},
+		'autocompleteSlideout recommendationGrid': {
+			columns: 2,
+			rows: 2,
 		},
 	},
 	mobile: autocompleteSlideoutThemeComponentProps.mobile,

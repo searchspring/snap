@@ -9,6 +9,7 @@ import { loadingBar } from './loadingBar';
 import { price } from './price';
 import { searchHeader } from './searchHeader';
 import { skeleton } from './skeleton';
+import { calloutBadge } from './calloutBadge';
 
 export const atoms: ThemeResponsiveComplete = {
 	default: {
@@ -20,6 +21,7 @@ export const atoms: ThemeResponsiveComplete = {
 		...price.default,
 		...searchHeader.default,
 		...skeleton.default,
+		...calloutBadge.default,
 	},
 	mobile: {
 		...button.mobile,
@@ -30,6 +32,7 @@ export const atoms: ThemeResponsiveComplete = {
 		...price.mobile,
 		...searchHeader.mobile,
 		...skeleton.mobile,
+		...calloutBadge.mobile,
 	},
 	tablet: {
 		...dropdown.tablet,
@@ -39,6 +42,7 @@ export const atoms: ThemeResponsiveComplete = {
 		...price.tablet,
 		...searchHeader.tablet,
 		...skeleton.tablet,
+		...calloutBadge.tablet,
 	},
 	desktop: {
 		...button.desktop,
@@ -49,5 +53,6 @@ export const atoms: ThemeResponsiveComplete = {
 		...price.desktop,
 		...searchHeader.desktop,
 		...skeleton.desktop,
+		...calloutBadge.desktop,
 	},
 };
