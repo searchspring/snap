@@ -11,6 +11,7 @@ import { ComponentProps, ListOption, SwatchOption, StyleScript } from '../../../
 import { Lang, useA11y, useLang } from '../../../hooks';
 import { Image, ImageProps } from '../../Atoms/Image';
 import { cloneWithProps, defined, mergeProps, mergeStyles } from '../../../utilities';
+import Color from 'color';
 
 const defaultStyles: StyleScript<GridProps> = ({ gapSize, columns, theme, disableOverflowAction }) => {
 	return css({
@@ -71,6 +72,10 @@ const defaultStyles: StyleScript<GridProps> = ({ gapSize, columns, theme, disabl
 					borderTop: '3px solid #eee',
 					outline: '1px solid #ffff',
 					transform: 'rotate(-45deg)',
+				},
+
+				'&.ss__grid__option--dark': {
+					color: '#fff',
 				},
 
 				'&:hover:not(.ss__grid__option--selected)': {
@@ -271,6 +276,14 @@ export function Grid(properties: GridProps): JSX.Element {
 					{options.map((option, idx) => {
 						const selected = selection.some((select: ListOption) => select.value == option.value);
 
+						let isDark = false;
+						try {
+							const color = new Color(
+								option.background ? option.background.toLowerCase() : option.backgroundImageUrl ? `` : option.value.toString().toLowerCase()
+							);
+							isDark = color.isDark();
+						} catch (err) {}
+
 						if (!limited || options.length == limit || idx < limit - (overflowButtonInGrid ? 1 : 0)) {
 							return (
 								<div
@@ -278,6 +291,7 @@ export function Grid(properties: GridProps): JSX.Element {
 										'ss__grid__option--selected': selected,
 										'ss__grid__option--disabled': option?.disabled,
 										'ss__grid__option--unavailable': option?.available === false,
+										'ss__grid__option--dark': isDark,
 									})}
 									style={{ background: option.background ? option.background : option.backgroundImageUrl ? undefined : option.value }}
 									onClick={(e) => !disabled && !option?.disabled && makeSelection(e as any, option)}
