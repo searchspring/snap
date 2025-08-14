@@ -68,6 +68,7 @@ export const Search = observer((properties: SearchProps): JSX.Element => {
 	const {
 		disableStyles,
 		className,
+		internalClassName,
 		controller,
 		hideSidebar,
 		toggleSidebarButtonText,
@@ -120,7 +121,7 @@ export const Search = observer((properties: SearchProps): JSX.Element => {
 		TopToolbar: {
 			// default props
 			name: 'top',
-			className: `${classNamePrefix}__header-section__toolbar--top-toolbar`,
+			internalClassName: `${classNamePrefix}__header-section__toolbar--top-toolbar`,
 			layout: [['banner.header'], ['searchHeader', '_', 'button.sidebar-toggle']],
 			toggleSideBarButton: {
 				onClick: () => {
@@ -150,7 +151,7 @@ export const Search = observer((properties: SearchProps): JSX.Element => {
 		MiddleToolbar: {
 			// default props
 			name: 'middle',
-			className: `${classNamePrefix}__content__toolbar--middle-toolbar`,
+			internalClassName: `${classNamePrefix}__content__toolbar--middle-toolbar`,
 			layout: isMobile
 				? [['mobileSidebar', '_', 'paginationInfo'], ['banner.banner']]
 				: [['sortBy', 'perPage', '_', 'paginationInfo'], ['banner.banner']],
@@ -164,7 +165,7 @@ export const Search = observer((properties: SearchProps): JSX.Element => {
 		BottomToolbar: {
 			// default props
 			name: 'bottom',
-			className: `${classNamePrefix}__content__toolbar--bottom-toolbar`,
+			internalClassName: `${classNamePrefix}__content__toolbar--bottom-toolbar`,
 			layout: [['banner.footer'], ['_', 'pagination']],
 			// inherited props
 			...defined({
@@ -210,7 +211,10 @@ export const Search = observer((properties: SearchProps): JSX.Element => {
 
 	return (
 		<CacheProvider>
-			<div {...styling} className={classnames(classNamePrefix, className, sidebarOpenState ? `${classNamePrefix}--sidebar-open` : '')}>
+			<div
+				{...styling}
+				className={classnames(classNamePrefix, className, internalClassName, sidebarOpenState ? `${classNamePrefix}--sidebar-open` : '')}
+			>
 				<div className={`${classNamePrefix}__header-section`}>{!hideTopToolbar && <Toolbar {...subProps.TopToolbar} controller={controller} />}</div>
 				<div className={`${classNamePrefix}__main-section`}>
 					{!hideSidebar && !isMobile && sidebarOpenState && (

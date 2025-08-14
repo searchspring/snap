@@ -14,14 +14,14 @@ const defaultStyles: StyleScript<RecommendationProfileTrackerProps> = () => {
  * @deprecated RecommendationProfileTracker is deprecated and is no longer functional
  */
 export const RecommendationProfileTracker = observer((properties: RecommendationProfileTrackerProps): JSX.Element => {
-	const { children, className } = properties;
+	const { children, className, internalClassName } = properties;
 
 	const childs = toChildArray(children);
 
 	const styling = mergeStyles<RecommendationProfileTrackerProps>(properties, defaultStyles);
 
 	return childs.length ? (
-		<div className={classnames('ss__recommendation-profile-tracker', className)} {...styling}>
+		<div className={classnames('ss__recommendation-profile-tracker', className, internalClassName)} {...styling}>
 			{children}
 		</div>
 	) : (

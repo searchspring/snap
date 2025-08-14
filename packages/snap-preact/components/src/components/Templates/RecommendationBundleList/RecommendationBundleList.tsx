@@ -152,7 +152,7 @@ export const CTASlot = observer((props: BundledCTAProps): JSX.Element => {
 				<Button
 					disabled={cartStore.items.length == 0}
 					disableStyles
-					className={`cta__add-button ${props.addedToCart ? 'cta__add-button--thanks' : ''}`}
+					internalClassName={`cta__add-button ${props.addedToCart ? 'cta__add-button--thanks' : ''}`}
 					onClick={(e) => props.onAddToCart(e)}
 				>
 					{props.addedToCart ? props.ctaButtonSuccessText : props.ctaButtonText}

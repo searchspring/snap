@@ -36,7 +36,7 @@ export const PerPage = observer((properties: PerPageProps): JSX.Element => {
 
 	const props = mergeProps('perPage', globalTheme, defaultProps, properties);
 
-	const { pagination, type, controller, label, disableStyles, className, treePath } = props;
+	const { pagination, type, controller, label, disableStyles, className, internalClassName, treePath } = props;
 
 	const store = pagination || controller?.store?.pagination;
 
@@ -93,7 +93,7 @@ export const PerPage = observer((properties: PerPageProps): JSX.Element => {
 			{type?.toLowerCase() == 'dropdown' && (
 				<Select
 					{...styling}
-					className={classnames('ss__per-page', 'ss__per-page__select', className)}
+					className={classnames('ss__per-page', 'ss__per-page__select', className, internalClassName)}
 					{...subProps.select}
 					label={label}
 					options={store.pageSizeOptions}
@@ -110,7 +110,7 @@ export const PerPage = observer((properties: PerPageProps): JSX.Element => {
 			{type?.toLowerCase() == 'list' && (
 				<List
 					{...styling}
-					className={classnames('ss__per-page', 'ss__per-page__list', className)}
+					className={classnames('ss__per-page', 'ss__per-page__list', className, internalClassName)}
 					{...subProps.List}
 					onSelect={(e: any, option: any) => {
 						store.setPageSize(+option!.value);
@@ -128,7 +128,7 @@ export const PerPage = observer((properties: PerPageProps): JSX.Element => {
 			{type?.toLowerCase() == 'radio' && (
 				<RadioList
 					{...styling}
-					className={classnames('ss__per-page', 'ss__per-page__radioList', className)}
+					className={classnames('ss__per-page', 'ss__per-page__radioList', className, internalClassName)}
 					{...subProps.RadioList}
 					onSelect={(e: any, option: any) => {
 						store.setPageSize(+option!.value);

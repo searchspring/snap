@@ -71,6 +71,7 @@ export const Button = observer((properties: ButtonProps): JSX.Element => {
 		disableA11y,
 		disableStyles,
 		className,
+		internalClassName,
 		icon,
 		lang,
 		treePath,
@@ -82,7 +83,7 @@ export const Button = observer((properties: ButtonProps): JSX.Element => {
 
 	const subProps: ButtonSubProps = {
 		icon: {
-			className: 'ss__button__icon',
+			internalClassName: 'ss__button__icon',
 			// default props
 			// inherited props
 			...defined({
@@ -98,7 +99,7 @@ export const Button = observer((properties: ButtonProps): JSX.Element => {
 
 	const elementProps = {
 		...styling,
-		className: classnames('ss__button', { 'ss__button--native': native, 'ss__button--disabled': disabled }, className),
+		className: classnames('ss__button', { 'ss__button--native': native, 'ss__button--disabled': disabled }, className, internalClassName),
 		disabled,
 		onClick: (e: React.MouseEvent<HTMLElement, MouseEvent>) => !disabled && onClick && onClick(e),
 		...additionalProps,

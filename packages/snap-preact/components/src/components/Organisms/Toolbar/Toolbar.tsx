@@ -24,7 +24,7 @@ export const Toolbar = observer((properties: ToolbarProps): JSX.Element => {
 	};
 
 	const props = mergeProps('toolbar', globalTheme, defaultProps, properties);
-	const { controller, toggleSideBarButton, disableStyles, className, treePath, layout } = props;
+	const { controller, toggleSideBarButton, disableStyles, className, internalClassName, treePath, layout } = props;
 
 	const styling = mergeStyles<ToolbarProps>(props, defaultStyles);
 
@@ -32,7 +32,7 @@ export const Toolbar = observer((properties: ToolbarProps): JSX.Element => {
 		Layout: {
 			// default props
 			toggleSideBarButton,
-			className: 'ss__toolbar__layout',
+			internalClassName: 'ss__toolbar__layout',
 			// inherited props
 			...defined({
 				disableStyles,
@@ -47,7 +47,7 @@ export const Toolbar = observer((properties: ToolbarProps): JSX.Element => {
 
 	return hasChildrenToRender ? (
 		<CacheProvider>
-			<div {...styling} className={classnames('ss__toolbar', className)}>
+			<div {...styling} className={classnames('ss__toolbar', className, internalClassName)}>
 				<Layout controller={controller} layout={layout} {...subProps.Layout} />
 			</div>
 		</CacheProvider>

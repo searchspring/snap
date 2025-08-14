@@ -135,13 +135,14 @@ export const Facet = observer((properties: FacetProps): JSX.Element => {
 		horizontal,
 		disableStyles,
 		className,
+		internalClassName,
 		treePath,
 	} = props;
 
 	const subProps: FacetSubProps = {
 		dropdown: {
 			// default props
-			className: 'ss__facet__dropdown',
+			internalClassName: 'ss__facet__dropdown',
 			disableClickOutside: true,
 			disableOverlay: true,
 			// inherited props
@@ -154,7 +155,7 @@ export const Facet = observer((properties: FacetProps): JSX.Element => {
 		},
 		icon: {
 			// default props
-			className: 'ss__facet__dropdown__icon',
+			internalClassName: 'ss__facet__dropdown__icon',
 			size: '12px',
 			color: iconColor || color,
 			// inherited props
@@ -176,7 +177,7 @@ export const Facet = observer((properties: FacetProps): JSX.Element => {
 		},
 		showMoreLessIcon: {
 			// default props
-			className: 'ss__facet__show-more-less__icon',
+			internalClassName: 'ss__facet__show-more-less__icon',
 			size: '10px',
 			color: iconColor || color,
 			// inherited props
@@ -189,7 +190,7 @@ export const Facet = observer((properties: FacetProps): JSX.Element => {
 		},
 		facetHierarchyOptions: {
 			// default props
-			className: 'ss__facet__facet-hierarchy-options',
+			internalClassName: 'ss__facet__facet-hierarchy-options',
 			// inherited props
 			...defined({
 				disableStyles,
@@ -203,7 +204,7 @@ export const Facet = observer((properties: FacetProps): JSX.Element => {
 		},
 		facetListOptions: {
 			// default props
-			className: 'ss__facet__facet-list-options',
+			internalClassName: 'ss__facet__facet-list-options',
 			// inherited props
 			...defined({
 				disableStyles,
@@ -217,7 +218,7 @@ export const Facet = observer((properties: FacetProps): JSX.Element => {
 		},
 		facetGridOptions: {
 			// default props
-			className: 'ss__facet__facet-grid-options',
+			internalClassName: 'ss__facet__facet-grid-options',
 			// inherited props
 			...defined({
 				disableStyles,
@@ -231,7 +232,7 @@ export const Facet = observer((properties: FacetProps): JSX.Element => {
 		},
 		facetPaletteOptions: {
 			// default props
-			className: 'ss__facet__facet-palette-options',
+			internalClassName: 'ss__facet__facet-palette-options',
 			// inherited props
 			...defined({
 				disableStyles,
@@ -256,7 +257,7 @@ export const Facet = observer((properties: FacetProps): JSX.Element => {
 		// },
 		facetSlider: {
 			// default props
-			className: 'ss__facet__facet-slider',
+			internalClassName: 'ss__facet__facet-slider',
 			// inherited props
 			...defined({
 				disableStyles,
@@ -267,7 +268,7 @@ export const Facet = observer((properties: FacetProps): JSX.Element => {
 		},
 		searchInput: {
 			// default props
-			className: 'ss__facet__search-input',
+			internalClassName: 'ss__facet__search-input',
 			// inherited props
 			...defined({
 				disableStyles,
@@ -310,6 +311,7 @@ export const Facet = observer((properties: FacetProps): JSX.Element => {
 		searchableFacet,
 		subProps,
 		className,
+		internalClassName,
 		...props,
 	};
 
@@ -355,6 +357,7 @@ export const Facet = observer((properties: FacetProps): JSX.Element => {
 					`ss__facet--${facet.field}`,
 					`${facet.collapsed ? 'ss__facet--collapsed' : ''}`,
 					className,
+					internalClassName,
 					`${facet.display ? `ss__facet--${facet.display}` : ''}`,
 					((facet as ValueFacet)?.overflow?.remaining || 0) > 0 || facet?.display == 'slider' ? '' : 'ss__facet--showing-all'
 				)}
@@ -380,7 +383,7 @@ export const Facet = observer((properties: FacetProps): JSX.Element => {
 								{(mergedLang.clearAllText.value || clearAllIcon) && selectedCount ? (
 									<Button
 										{...subProps.button}
-										className="ss__facet__header__clear-all"
+										internalClassName="ss__facet__header__clear-all"
 										name={'reset-facet'}
 										onClick={(e) => {
 											e.stopPropagation();
@@ -421,6 +424,7 @@ const FacetContent = (props: any) => {
 		searchableFacet,
 		subProps,
 		className,
+		internalClassName,
 		limitedValues,
 		facet,
 		limit,
@@ -447,7 +451,7 @@ const FacetContent = (props: any) => {
 					treePath={treePath}
 				/>
 			)}
-			<div className={classnames('ss__facet__options', className)}>
+			<div className={classnames('ss__facet__options', className, internalClassName)}>
 				{(() => {
 					//manual options component
 					if (optionsSlot) {

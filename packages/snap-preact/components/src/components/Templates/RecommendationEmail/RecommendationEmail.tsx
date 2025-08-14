@@ -4,7 +4,7 @@ import { observer } from 'mobx-react-lite';
 
 import type { AbstractController, RecommendationController } from '@searchspring/snap-controller';
 import type { Product } from '@searchspring/snap-store-mobx';
-
+import classnames from 'classnames';
 import { Result, ResultProps } from '../../Molecules/Result';
 import { defined, mergeProps, mergeStyles } from '../../../utilities';
 import { Theme, ThemeComponent, useTheme } from '../../../providers';
@@ -30,12 +30,12 @@ export const RecommendationEmail = observer((properties: RecommendationEmailProp
 
 	const props = mergeProps('recommendationEmail', globalTheme, defaultProps, properties);
 
-	const { controller, results, resultComponent, resultProps, resultWidth, treePath, disableStyles } = props;
+	const { controller, results, resultComponent, resultProps, resultWidth, treePath, disableStyles, internalClassName, className } = props;
 
 	const subProps: RecommendationEmailSubProps = {
 		result: {
 			// default props
-			className: 'ss__recommendation-email__result',
+			internalClassName: 'ss__recommendation-email__result',
 			// inherited props
 			...defined({
 				disableStyles,
@@ -56,7 +56,7 @@ export const RecommendationEmail = observer((properties: RecommendationEmailProp
 				<div
 					key={idx}
 					id={`ss-emailrec${idx}`}
-					className="ss__recommendation-email__result-wrapper"
+					className={classnames('ss__recommendation-email__result-wrapper', className, internalClassName)}
 					{...styling}
 					style={{ display: 'block', width: resultWidth }}
 				>

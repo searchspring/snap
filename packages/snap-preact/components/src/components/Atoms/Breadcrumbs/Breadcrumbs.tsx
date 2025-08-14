@@ -30,13 +30,13 @@ export const Breadcrumbs = observer((properties: BreadcrumbsProps): JSX.Element 
 
 	const props = mergeProps('breadcrumbs', globalTheme, defaultProps, properties);
 
-	const { data, separator, className } = props;
+	const { data, separator, className, internalClassName } = props;
 
 	const styling = mergeStyles<BreadcrumbsProps>(props, defaultStyles);
 
 	return (
 		<CacheProvider>
-			<div {...styling} className={classnames('ss__breadcrumbs', className)}>
+			<div {...styling} className={classnames('ss__breadcrumbs', className, internalClassName)}>
 				<ul className="ss__breadcrumbs__crumbs">
 					{data
 						.map<React.ReactNode>((crumb: any) => (

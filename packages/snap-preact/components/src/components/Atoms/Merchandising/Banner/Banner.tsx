@@ -32,7 +32,7 @@ export const Banner = observer((properties: BannerProps): JSX.Element => {
 
 	const props = mergeProps('banner', globalTheme, defaultProps, properties);
 
-	const { controller, type, className } = props;
+	const { controller, type, className, internalClassName } = props;
 
 	const content = props.content || controller?.store?.merchandising.content;
 
@@ -51,7 +51,7 @@ export const Banner = observer((properties: BannerProps): JSX.Element => {
 	return bannerContent && bannerContent.length ? (
 		<CacheProvider>
 			<div
-				className={classnames('ss__banner', `ss__banner--${type}`, className)}
+				className={classnames('ss__banner', `ss__banner--${type}`, className, internalClassName)}
 				{...styling}
 				dangerouslySetInnerHTML={{
 					__html: bannerContent.join(''),

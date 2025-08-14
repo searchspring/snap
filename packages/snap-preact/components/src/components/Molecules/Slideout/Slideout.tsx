@@ -67,13 +67,14 @@ export const Slideout = observer((properties: SlideoutProps): JSX.Element => {
 		overlayColor,
 		disableStyles,
 		className,
+		internalClassName,
 		treePath,
 	} = props;
 
 	const subProps: SlideoutSubProps = {
 		overlay: {
 			// default props
-			className: 'ss__slideout__overlay',
+			internalClassName: 'ss__slideout__overlay',
 			// inherited props
 			...defined({
 				disableStyles,
@@ -148,7 +149,7 @@ export const Slideout = observer((properties: SlideoutProps): JSX.Element => {
 				))}
 
 			<div
-				className={classnames('ss__slideout', className, { 'ss__slideout--active': isActive })}
+				className={classnames('ss__slideout', className, internalClassName, { 'ss__slideout--active': isActive })}
 				style={{ visibility: !rerender ? (isVisible ? 'visible' : 'hidden') : 'visible' }}
 				{...styling}
 			>

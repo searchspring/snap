@@ -31,7 +31,7 @@ export const PaginationInfo = observer((properties: PaginationInfoProps): JSX.El
 
 	const props = mergeProps('paginationInfo', globalTheme, defaultProps, properties);
 
-	const { controller, infoText, className } = props;
+	const { controller, infoText, className, internalClassName } = props;
 
 	const store = pagination || controller?.store?.pagination;
 
@@ -63,7 +63,7 @@ export const PaginationInfo = observer((properties: PaginationInfoProps): JSX.El
 				{...styling}
 				aria-atomic={true}
 				aria-live="assertive"
-				className={classnames('ss__pagination-info', className)}
+				className={classnames('ss__pagination-info', className, internalClassName)}
 				{...mergedLang.infoText?.all}
 			></div>
 		</CacheProvider>

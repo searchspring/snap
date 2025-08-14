@@ -224,6 +224,7 @@ export const RecommendationBundle = observer((properties: RecommendationBundlePr
 		hideSeedText,
 		lazyRender,
 		className,
+		internalClassName,
 		style: _,
 		styleScript: __,
 		themeStyleScript: ___,
@@ -274,7 +275,7 @@ export const RecommendationBundle = observer((properties: RecommendationBundlePr
 		carousel: {
 			loop: loop,
 			// default props
-			className: 'ss__recommendation__carousel',
+			internalClassName: 'ss__recommendation__carousel',
 			// inherited props
 			...defined({
 				disableStyles,
@@ -285,7 +286,7 @@ export const RecommendationBundle = observer((properties: RecommendationBundlePr
 		},
 		result: {
 			// default props
-			className: 'ss__recommendation__result',
+			internalClassName: 'ss__recommendation__result',
 			// inherited props
 			...defined({
 				disableStyles,
@@ -453,7 +454,11 @@ export const RecommendationBundle = observer((properties: RecommendationBundlePr
 
 	return resultsToRender?.length ? (
 		<CacheProvider>
-			<div {...styling} ref={recsRef} className={classnames(classNamePrefix, { [`${classNamePrefix}--stacked`]: !ctaInline }, className)}>
+			<div
+				{...styling}
+				ref={recsRef}
+				className={classnames(classNamePrefix, { [`${classNamePrefix}--stacked`]: !ctaInline }, className, internalClassName)}
+			>
 				{isVisible ? (
 					<RecommendationProfileTracker controller={controller}>
 						{title && (
@@ -571,7 +576,7 @@ export const RecommendationBundle = observer((properties: RecommendationBundlePr
 																			theme={props.theme}
 																			treePath={treePath}
 																			classNamePrefix={classNamePrefix}
-																			className={idx + 1 == resultsToRender.length ? `${classNamePrefix}__wrapper__selector--last` : ''}
+																			internalClassName={idx + 1 == resultsToRender.length ? `${classNamePrefix}__wrapper__selector--last` : ''}
 																		>
 																			{resultComponent ? (
 																				cloneWithProps(resultComponent, { result: result, seed: false, selected, onProductSelect, treePath })
@@ -602,7 +607,7 @@ export const RecommendationBundle = observer((properties: RecommendationBundlePr
 																		theme={props.theme}
 																		treePath={treePath}
 																		classNamePrefix={classNamePrefix}
-																		className={idx + 1 == results.length ? `${classNamePrefix}__wrapper__selector--last` : ''}
+																		internalClassName={idx + 1 == results.length ? `${classNamePrefix}__wrapper__selector--last` : ''}
 																	>
 																		{resultComponent ? (
 																			cloneWithProps(resultComponent, { result: result, seed: false, selected, onProductSelect, treePath })
@@ -664,7 +669,7 @@ export const RecommendationBundle = observer((properties: RecommendationBundlePr
 														theme={props.theme}
 														treePath={treePath}
 														classNamePrefix={classNamePrefix}
-														className={idx + 1 == resultsToRender.length ? `${classNamePrefix}__wrapper__selector--last` : ''}
+														internalClassName={idx + 1 == resultsToRender.length ? `${classNamePrefix}__wrapper__selector--last` : ''}
 													>
 														{resultComponent ? (
 															cloneWithProps(resultComponent, { result: result, seed: false, selected, onProductSelect, treePath })
