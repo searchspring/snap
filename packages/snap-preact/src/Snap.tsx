@@ -362,7 +362,7 @@ export class Snap {
 				},
 			};
 
-			this.config.client = deepmerge(this.config.client || {}, defaultClientConfig);
+			this.config.client = deepmerge(defaultClientConfig, this.config.client || {});
 		}
 
 		if ((!services?.client || !services?.tracker) && !this.config?.client?.globals?.siteId) {
@@ -391,6 +391,7 @@ export class Snap {
 		if (services?.templatesStore) {
 			this.templates = services.templatesStore;
 		}
+
 		try {
 			const urlParams = url(window.location.href);
 			const branchOverride = urlParams?.params?.query[BRANCH_PARAM] || cookies.get(BRANCH_COOKIE);
@@ -426,6 +427,7 @@ export class Snap {
 			// client mode uses client config over snap config
 			if (this.config.client) {
 				this.config.client.config = this.config.client.config || {};
+				this.config.client.config.initiator = `snap/preact/${version}`;
 				this.config.client.config.mode = this.config.client.config.mode || this.mode;
 			}
 
@@ -449,7 +451,7 @@ export class Snap {
 				});
 			}
 
-			const trackerConfig = deepmerge(this.config.tracker?.config || {}, { framework: 'snap/preact', mode: this.mode });
+			const trackerConfig = deepmerge({ framework: 'snap/preact', mode: this.mode }, this.config.tracker?.config || {});
 			this.tracker = services?.tracker || new Tracker(trackerGlobals, trackerConfig);
 
 			// log version
