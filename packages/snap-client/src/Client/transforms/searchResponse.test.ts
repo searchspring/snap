@@ -359,8 +359,7 @@ describe('search response transformer pagination', () => {
 
 describe('search response transformer result', () => {
 	it('builds response format', () => {
-		const resultIndex = 123;
-		const result = transformSearchResponse.result(mockSingleResult, resultIndex);
+		const result = transformSearchResponse.result(mockSingleResult);
 
 		expect(result.id).toEqual(mockSingleResult.uid);
 
@@ -370,7 +369,7 @@ describe('search response transformer result', () => {
 	});
 
 	it('builds core fields', () => {
-		const result = transformSearchResponse.result(mockSingleResult, 0);
+		const result = transformSearchResponse.result(mockSingleResult);
 
 		// TODO: Add all core fields
 
@@ -385,7 +384,7 @@ describe('search response transformer result', () => {
 	});
 
 	it('leaves core fields out of attributes', () => {
-		const result = transformSearchResponse.result(mockSingleResult, 0);
+		const result = transformSearchResponse.result(mockSingleResult);
 
 		// TODO: Add all core fields
 
@@ -400,7 +399,7 @@ describe('search response transformer result', () => {
 	});
 
 	it('builds attributes', () => {
-		const result = transformSearchResponse.result(mockSingleResult, 0);
+		const result = transformSearchResponse.result(mockSingleResult);
 
 		expect(result.attributes?.ss_in_stock).toEqual('In Stock');
 		expect(result.attributes?.handle).toEqual('over-this-shit-face-mask');
@@ -454,17 +453,17 @@ describe('search response transformer result', () => {
 			},
 		};
 
-		const result = transformSearchResponse.result(resultWithBadgeFeature, 0);
+		const result = transformSearchResponse.result(resultWithBadgeFeature);
 		expect(result.attributes?.badges).toBeUndefined();
 		expect(result.badges).toEqual(resultWithBadgeFeature.badges);
 
 		// @ts-ignore - typings are wrong intentionally here
-		const result2 = transformSearchResponse.result(resultWithRandomBadgeField, 0);
+		const result2 = transformSearchResponse.result(resultWithRandomBadgeField);
 		expect(result2.attributes?.badges).toEqual(resultWithRandomBadgeField.badges);
 		expect(result2.badges).toEqual([]);
 
 		// @ts-ignore - typings are wrong intentionally here
-		const result3 = transformSearchResponse.result(resultWithRandomBadgeField2, 0);
+		const result3 = transformSearchResponse.result(resultWithRandomBadgeField2);
 		expect(result3.badges).toEqual([]);
 		expect(result3.attributes?.badges).toEqual('[object Object]');
 	});
