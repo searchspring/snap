@@ -58,7 +58,7 @@ const defaultStyles: StyleScript<SwatchesProps> = ({ theme }) => {
 				opacity: 0.5,
 			},
 
-			'&.ss__swatches__carousel__swatch--dark': {
+			'&.ss__swatches__carousel__swatch--dark-mode': {
 				color: '#fff',
 			},
 		},
@@ -199,7 +199,7 @@ export function Swatches(properties: SwatchesProps): JSX.Element {
 											'ss__swatches__carousel__swatch--selected': selected,
 											'ss__swatches__carousel__swatch--disabled': option?.disabled,
 											'ss__swatches__carousel__swatch--unavailable': option?.available === false,
-											'ss__swatches__carousel__swatch--dark': isDark,
+											'ss__swatches__carousel__swatch--dark-mode': isDark,
 										}
 									)}
 									title={label}
