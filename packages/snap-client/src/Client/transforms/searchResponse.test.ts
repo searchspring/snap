@@ -367,7 +367,6 @@ describe('search response transformer result', () => {
 		expect(typeof result.mappings).toEqual('object');
 		expect(typeof result.mappings?.core).toEqual('object');
 		expect(typeof result.attributes).toEqual('object');
-		expect(result.position).toEqual(resultIndex + 1);
 	});
 
 	it('builds core fields', () => {

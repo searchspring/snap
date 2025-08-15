@@ -3,6 +3,7 @@ import { Client } from './Client';
 import type { ClientConfig } from '../types';
 import { MockData } from '@searchspring/snap-shared';
 import { AppMode } from '@searchspring/snap-toolbox';
+import { NO_BEACON_PARAM } from './transforms';
 
 const mockData = new MockData();
 
@@ -365,10 +366,11 @@ describe('Snap Client', () => {
 					],
 					test: true,
 					siteId: '8uyt2m',
+					[NO_BEACON_PARAM]: true,
 				},
 			};
 
-			const recommendCacheKey = '{"profiles":[{"tag":"dress"}],"siteId":"8uyt2m","test":true}';
+			const recommendCacheKey = `{"profiles":[{"tag":"dress"}],"siteId":"8uyt2m","${NO_BEACON_PARAM}":true,"test":true}`;
 
 			expect(recommendRequesterSpy).toHaveBeenCalledTimes(2);
 			expect(recommendRequesterSpy.mock.calls).toEqual([
@@ -612,10 +614,11 @@ describe('Snap Client', () => {
 						],
 						test: true,
 						siteId: '8uyt2m',
+						[NO_BEACON_PARAM]: true,
 					},
 				};
 
-				const recommendCacheKey = '{"profiles":[{"tag":"dress"}],"siteId":"8uyt2m","test":true}';
+				const recommendCacheKey = `{"profiles":[{"tag":"dress"}],"siteId":"8uyt2m","${NO_BEACON_PARAM}":true,"test":true}`;
 
 				expect(recommendRequesterSpy).toHaveBeenCalledTimes(2);
 				expect(recommendRequesterSpy.mock.calls).toEqual([
