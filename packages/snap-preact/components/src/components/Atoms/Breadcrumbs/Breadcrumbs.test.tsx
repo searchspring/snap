@@ -60,6 +60,23 @@ describe('Breadcrumbs Component', () => {
 		expect(breadcrumbElement).toHaveTextContent(args.data[args.data.length - 1].label);
 	});
 
+	it('can use a function to render breadcrumbs', () => {
+		const rendered = render(<Breadcrumbs data={() => args.data} />);
+		const breadcrumbElements = rendered.container.querySelectorAll('.ss__breadcrumbs li');
+		expect(breadcrumbElements.length).toEqual(args.data.length * 2 - 1);
+	});
+
+	it('function is passed controller obj', () => {
+		const controller = {
+			hi: 'mom',
+		};
+		// @ts-ignore - typing wants a real controller, but not needed for testing purposes
+		const rendered = render(<Breadcrumbs controller={controller} data={(controller) => [{ label: controller.hi }]} />);
+
+		const breadcrumbElements = rendered.container.querySelector('.ss__breadcrumbs li');
+		expect(breadcrumbElements?.textContent).toBe(controller.hi);
+	});
+
 	it('has all crumbs and separators', () => {
 		const rendered = render(<Breadcrumbs {...args} />);
 		const breadcrumbElements = rendered.container.querySelectorAll('.ss__breadcrumbs li');
@@ -82,6 +99,13 @@ describe('Breadcrumbs Component', () => {
 		const breadcrumbSeparatorElements = rendered.container.querySelectorAll('.ss__breadcrumbs li:nth-child(even)');
 		expect(breadcrumbSeparatorElements.length).toEqual(args.data.length - 1);
 		expect(breadcrumbSeparatorElements[0].textContent).toEqual('|');
+	});
+
+	it('can use icon separator', () => {
+		const rendered = render(<Breadcrumbs {...args} separatorIcon={'cog'} />);
+		const breadcrumbSeparatorElements = rendered.container.querySelectorAll('.ss__breadcrumbs li:nth-child(even) .ss__icon');
+		expect(breadcrumbSeparatorElements.length).toEqual(args.data.length - 1);
+		expect(breadcrumbSeparatorElements[0].classList).toContain('ss__icon--cog');
 	});
 
 	it('renders with additional style using prop', () => {
