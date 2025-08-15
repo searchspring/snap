@@ -1,14 +1,13 @@
 import { css } from '@emotion/react';
 import classnames from 'classnames';
-import { ComponentProps, RootNodeProperties } from '../../../types';
 import { observer } from 'mobx-react-lite';
+import { RootNodeProperties } from '../../../types';
 import { CacheProvider } from '../../../providers';
 import { TemplateEditorStore } from '../../../../../src/Templates/Stores/TemplateEditor/TemplateEditorStore';
 import { TemplatesStore, TemplateTypes } from '../../../../../src/Templates/Stores/TemplateStore';
 import { SnapTemplates, SnapTemplatesConfig } from '../../../../../src';
 import { AutocompleteController, SearchController } from '@searchspring/snap-controller';
 import { AthosCommerceLogo } from './Assets';
-import type { ThemeStore } from '../../../../../src/Templates/Stores/ThemeStore';
 import { AbstractedControls } from './Components/AbstractedControls';
 import { DropdownControl } from './Controls/Dropdown';
 
@@ -25,29 +24,28 @@ const CSS = {
 			cursor: 'auto',
 			top: '10px',
 			right: 0,
-			background: 'white',
-			padding: '10px',
 			color: '#333',
 			borderRight: 0,
 			borderTopLeftRadius: '5px',
 			borderBottomLeftRadius: '5px',
 			boxShadow: 'rgba(81, 81, 81, 0.5) -1px 0px 3px 0px',
+			border: '1px solid #D0E0F3',
+			background: '#F2F6FC',
 			transition: 'right ease 0.5s, height ease 0.5s 0.5s',
 			boxSizing: 'border-box',
-			height: '65em',
-			maxHeight: 'calc(90vh - 20px)',
 			width: '400px',
 			maxWidth: '90vw',
+			height: 'calc(100vh - 20px)',
 
 			'*': {
 				boxSizing: 'border-box',
 			},
 
-			'>header': {
+			'.ss__template-editor__header': {
 				display: 'flex',
 				alignItems: 'center',
 				justifyContent: 'space-between',
-				marginBottom: '10px',
+				padding: '8px 8px 4px 8px',
 				'.athos-logo': {
 					maxWidth: '100%',
 					width: '200px',
@@ -68,66 +66,104 @@ const CSS = {
 				},
 			},
 			'>aside': {
-				overflowY: 'auto',
+				overflow: 'hidden',
 				flexGrow: 1,
 				'.tab-selection': {
 					display: 'flex',
 					alignItems: 'center',
-					borderBottom: '2px solid #eee',
-					gap: '3px',
+					padding: '0 5px',
+					gap: '4px',
+					height: '33px',
 					'.tab': {
+						fontSize: '12px',
 						position: 'relative',
-						textDecoration: 'capitalize',
-						top: '1px',
+						boxShadow: 'rgb(110 110 110 / 50%) 0px -1px 2px -1px',
+						textTransform: 'capitalize',
+						top: '6px',
 						fontWeight: 'bold',
-						border: '1px solid #eee',
+						border: '1px solid #D0E0F3',
 						borderBottom: 'none',
-						padding: '5px 10px',
+						padding: '5px 10px 4px 10px',
 						height: '100%',
-						color: '#999',
+						color: '#9eaab8',
+						backgroundColor: '#dce3eb',
+						borderTopLeftRadius: '5px',
+						borderTopRightRadius: '5px',
 						cursor: 'pointer',
+						transition: 'font-size 0.2s cubic-bezier(0.4, 0, 0.2, 1)',
+						'&:hover': {
+							backgroundColor: '#d2deed',
+							color: '#7a838e',
+						},
 						'&.active': {
+							fontSize: '14px',
 							backgroundColor: '#fff',
-							color: '#000',
-							paddingBottom: '7px',
+							color: '#283E57',
+							paddingTop: '7px',
 							top: '2px',
+							zIndex: 4,
 						},
 					},
 				},
 				'.tab-view': {
-					padding: '0 10px',
+					position: 'relative',
+					zIndex: 3,
+					borderTop: '2px solid #D0E0F3',
+					background: '#fff',
+					height: '100%',
+					'.tab-view-shadow': {
+						position: 'absolute',
+						top: 0,
+						left: 0,
+						right: 0,
+						bottom: 0,
+						boxShadow: 'inset 0 12px 6px 0px #fff',
+						pointerEvents: 'none',
+					},
+					'.tab-view-content': {
+						padding: '0 10px',
+						maxHeight: 'calc(90vh - 40px)',
+						overflowY: 'auto',
+						'&::-webkit-scrollbar': {
+							width: '8px',
+						},
+						'&::-webkit-scrollbar-track': {
+							background: '#f5f5f5',
+						},
+						'&::-webkit-scrollbar-thumb': {
+							background: '#96aabe',
+						},
+					},
 				},
-			},
-			'>footer': {
-				marginTop: '10px',
 			},
 
 			'&.ss__template-editor--collapsed': {
 				right: '-354px',
 				transition: 'right ease 0.5s 0.5s, height ease 0.5s',
-				height: '50px',
+				height: '48px',
 				cursor: 'pointer',
 				overflow: 'hidden',
 			},
 
-			'& input, select, option, optgroup, button, h1, h2, h3, h4, h5, h6, i': {
+			'input, select, option, optgroup, button, h1, h2, h3, h4, h5, h6, i': {
 				all: 'revert',
+				color: '#283E57',
 			},
 
-			'& h1': { fontSize: '20px' },
-			'& h2': { fontSize: '18px' },
-			'& h3': { fontSize: '16px' },
-			'& h4': { fontSize: '14px' },
-			'& h5': { fontSize: '12px' },
-			'& h6': { fontSize: '10px' },
+			h1: { fontSize: '20px' },
+			h2: { fontSize: '18px' },
+			h3: { fontSize: '16px' },
+			h4: { fontSize: '14px' },
+			h5: { fontSize: '12px' },
+			h6: { fontSize: '10px' },
 
-			'& input[type="text"], & input[type="number"], & select, & button': {
+			'input[type="text"], input[type="number"], select, button': {
 				border: '1px solid #ccc',
 				height: '30px',
 				minHeight: '30px',
 				padding: '0 10px',
 				borderRadius: '5px',
-				fontSize: '14px',
+				fontSize: '12px',
 				color: '#333',
 				backgroundColor: '#fff',
 				boxShadow: 'inset 0 1px 3px rgba(0, 0, 0, 0.1)',
@@ -137,21 +173,36 @@ const CSS = {
 					background: 'unset',
 				},
 				'&:disabled': {
-					opacity: 0.5,
+					borderColor: '#ddd',
+					boxShadow: 'none',
+					opacity: 1,
+					color: '#999',
 					cursor: 'default',
 				},
 			},
-			'& button': {
+
+			'input[type="checkbox"]': {
+				height: '18px',
+				width: '18px',
+				margin: '6px 0',
+				border: '1px solid #ccc',
+			},
+
+			button: {
+				border: 0,
+				outline: 0,
 				cursor: 'pointer',
+				borderRadius: '4px',
+				color: '#fff',
+				backgroundColor: '#283e57',
 				'&:hover': {
-					color: 'white',
-					borderColor: '#1d4990',
-					background: '#1d4990',
+					color: '#fff',
+					backgroundColor: '#0e1f33ff',
 				},
 			},
 
-			'& input[type="number"]': { width: '50px' },
-			'& input[type="color"]': {
+			'input[type="number"]': { width: '50px' },
+			'input[type="color"]': {
 				width: '70px',
 				height: '30px',
 				border: '1px solid #ccc',
@@ -183,40 +234,69 @@ const CSS = {
 				padding: '10px',
 			},
 
-			'.option': {
+			'.reset': {
+				flex: '0 0 30px',
 				display: 'flex',
-				alignItems: 'baseline',
-				marginBottom: '10px',
-
-				'& label': {
-					textAlign: 'right',
-					flex: '0 0 9.5em',
-				},
-				'& .reset': {
-					flex: '0 0 2em',
-					display: 'flex',
-					justifyContent: 'flex-end',
-					'& button': {
-						'&:hover': {
-							background: 'unset',
-						},
-						margin: '0 0.5em',
-						padding: 0,
+				justifyContent: 'flex-end',
+				button: {
+					'&:hover': {
 						background: 'unset',
-						border: 'unset',
-						cursor: 'pointer',
-						boxShadow: 'unset',
-						height: 'unset',
+					},
+					margin: '0 0.5em',
+					padding: 0,
+					background: 'unset',
+					border: 'unset',
+					cursor: 'pointer',
+					boxShadow: 'unset',
+					height: 'unset',
+					svg: {
+						fill: '#1c71bf',
+						height: '15px',
 					},
 				},
-				'& .value': {
+			},
+
+			'.control-title': {
+				display: 'flex',
+				alignItems: 'center',
+				margin: '5px 0',
+				height: '30px',
+				h4: {
+					margin: 0,
+				},
+			},
+
+			'.group-title': {
+				display: 'flex',
+				alignItems: 'center',
+				margin: '5px 0',
+				height: '30px',
+				h4: {
+					margin: 0,
+				},
+			},
+
+			'.option': {
+				display: 'flex',
+				alignItems: 'center',
+				marginBottom: '5px',
+				fontSize: '12px',
+
+				label: {
+					flex: '0 0 12em',
+				},
+				'.value': {
 					flex: '1 1 auto',
 					display: 'flex',
-					alignItems: 'baseline',
+					alignItems: 'center',
+					'.invalid': {
+						border: '1px solid #cc0000',
+						outline: '1px solid #cc0000',
+					},
 				},
 				'&.color-picker': {
 					alignItems: 'center',
-					'& .value': {
+					'.value': {
 						alignItems: 'center',
 					},
 				},
@@ -226,13 +306,6 @@ const CSS = {
 
 export const TemplatesEditor = observer((properties: TemplatesEditorProps): JSX.Element => {
 	const { onRemoveClick, templatesStore, editorStore, snap } = properties;
-	const targets = editorStore.getTargets();
-
-	const rootTarget = targets[0];
-
-	const themeLocation = rootTarget.template.theme.location;
-	const themeName = rootTarget.template.theme.name;
-	const themeRef = templatesStore.themes[themeLocation][themeName];
 
 	const styling: RootNodeProperties = {
 		css: [CSS.TemplatesEditor({ ...properties })],
@@ -248,7 +321,7 @@ export const TemplatesEditor = observer((properties: TemplatesEditorProps): JSX.
 					editorStore.toggleHide(false);
 				}}
 			>
-				<header>
+				<div className="ss__template-editor__header">
 					<div className={'logo'}>
 						<AthosCommerceLogo />
 					</div>
@@ -279,7 +352,7 @@ export const TemplatesEditor = observer((properties: TemplatesEditorProps): JSX.
 							Hide
 						</button>
 					</div>
-				</header>
+				</div>
 
 				<aside>
 					<div className="tab-selection">
@@ -297,36 +370,39 @@ export const TemplatesEditor = observer((properties: TemplatesEditorProps): JSX.
 							);
 						})}
 					</div>
-					{editorStore.state.activeTab === 'templates' ? (
-						<div className="tab-view">
-							<TemplateTargetSettings feature="search" templatesStore={templatesStore} />
-							<AbstractedControls editorStore={editorStore} data={snap.controllers.search as SearchController} feature="controllers/search" />
-							<TemplateTargetSettings feature="autocomplete" templatesStore={templatesStore} />
-							<AbstractedControls
-								editorStore={editorStore}
-								data={snap.controllers.autocomplete as AutocompleteController}
-								feature="controllers/autocomplete"
-							/>
-							<TemplateTargetSettings feature="recommendation/default" templatesStore={templatesStore} />
-							<TemplateTargetSettings feature="recommendation/bundle" templatesStore={templatesStore} />
+					<div className="tab-view">
+						<div className="tab-view-shadow"></div>
+						<div className="tab-view-content">
+							{editorStore.state.activeTab === 'templates' ? (
+								<>
+									<TemplateTargetSettings feature="search" templatesStore={templatesStore} />
+									<AbstractedControls editorStore={editorStore} data={snap.controllers.search as SearchController} feature="controllers/search" />
+									<TemplateTargetSettings feature="autocomplete" templatesStore={templatesStore} />
+									<AbstractedControls
+										editorStore={editorStore}
+										data={snap.controllers.autocomplete as AutocompleteController}
+										feature="controllers/autocomplete"
+									/>
+									<TemplateTargetSettings feature="recommendation/default" templatesStore={templatesStore} />
+									<TemplateTargetSettings feature="recommendation/bundle" templatesStore={templatesStore} />
+								</>
+							) : (
+								''
+							)}
+							{editorStore.state.activeTab === 'configuration' ? (
+								<>
+									<AbstractedControls title="Project Configuration" editorStore={editorStore} feature="templates/config" />
+									<AbstractedControls title="Theme Configuration" editorStore={editorStore} feature="templates/theme" />
+									<TemplateConfig config={editorStore.generateTemplatesConfig()} />
+								</>
+							) : (
+								''
+							)}
 						</div>
-					) : (
-						''
-					)}
-					{editorStore.state.activeTab === 'configuration' ? (
-						<div className="tab-view">
-							<AbstractedControls editorStore={editorStore} feature="templates/config" />
-							<AbstractedControls editorStore={editorStore} feature="templates/theme" />
-							<TemplateConfig config={editorStore.generateTemplatesConfig()} />
-						</div>
-					) : (
-						''
-					)}
+					</div>
 				</aside>
 
-				<footer>
-					<ResetAllVariablesButton editorStore={editorStore} themeRef={themeRef} />
-				</footer>
+				<footer></footer>
 			</div>
 		</CacheProvider>
 	);
@@ -342,23 +418,7 @@ const TemplateConfig = observer((props: { config: SnapTemplatesConfig }) => {
 	);
 });
 
-const ResetAllVariablesButton = (props: { editorStore: TemplateEditorStore; themeRef: ThemeStore }) => {
-	const { editorStore } = props;
-	if (Object.keys(editorStore.overrides.theme || {}).length === 0 || editorStore.state.activeTab !== 'configuration') {
-		return null;
-	}
-	return (
-		<button
-			onClick={() => {
-				// TODO: Implement reset logic variables (should be separate for theme vs. controller configs)
-			}}
-		>
-			Reset All Variables
-		</button>
-	);
-};
-
-export interface TemplatesEditorProps extends ComponentProps {
+export interface TemplatesEditorProps {
 	onRemoveClick: () => void;
 	templatesStore: TemplatesStore;
 	editorStore: TemplateEditorStore;

@@ -1,9 +1,16 @@
 import { observer } from 'mobx-react-lite';
+import { useState, useEffect } from 'preact/hooks';
 import { ControlDisplayState, ControlOptions, ControlValues, ControlValueTypes } from '../../../../../../src/types';
 import { Reset } from '../Assets';
 
 export const Control = observer((props: ControlProps) => {
 	const { type, label, description, onReset, display, showReset, value, options, onChange } = props;
+
+	const [inputValue, setInputValue] = useState(value);
+
+	useEffect(() => {
+		setInputValue(value);
+	}, [value]);
 
 	return display === 'hidden' ? null : (
 		<div className="option checkbox">
@@ -60,7 +67,30 @@ export const Control = observer((props: ControlProps) => {
 							);
 						}
 						case 'color': {
-							return <input type="color" value={value as string} onChange={(e) => onChange(e.target.value)} disabled={display === 'disabled'} />;
+							return (
+								<>
+									<input
+										type="color"
+										value={value as string}
+										onChange={(e) => {
+											setInputValue(e.target.value);
+											onChange(e.target.value);
+										}}
+										disabled={display === 'disabled'}
+									/>
+									{/* <span className="color-value">{ value as string }</span> */}
+									<input
+										type="text"
+										className={isValidHexColor(inputValue as string) ? '' : 'invalid'}
+										value={inputValue as string}
+										onChange={(e) => {
+											setInputValue(e.target.value);
+											isValidHexColor(e.target.value) && onChange(e.target.value);
+										}}
+										disabled={display === 'disabled'}
+									/>
+								</>
+							);
 						}
 
 						default: {
@@ -76,11 +106,19 @@ export const Control = observer((props: ControlProps) => {
 type ControlProps = {
 	type: ControlValueTypes;
 	label: string;
-	description: string;
+	description?: string;
 	onReset: () => void;
 	display: ControlDisplayState;
 	showReset: boolean;
 	value: ControlValues;
 	options?: ControlOptions;
 	onChange: (value: ControlValues) => void;
+};
+
+// function to validate hex color values of the type: #333333
+const isValidHexColor = (color: string): boolean => {
+	if (!/^#[0-9A-F]{6}$/i.test(color)) {
+		return false;
+	}
+	return true;
 };

@@ -5,8 +5,9 @@ import { TemplateEditorStore } from '../TemplateEditorStore';
 export function searchControllerUI(store: TemplateEditorStore): AbstractionGroup<SearchController>[] {
 	return [
 		{
-			title: '',
+			title: 'Result Display Options',
 			description: '',
+			collapsible: true,
 			controls: [
 				{
 					type: 'checkbox',

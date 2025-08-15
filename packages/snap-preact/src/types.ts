@@ -142,7 +142,7 @@ export interface AbstractedControl<Params, Value = ControlValues> {
 	label: string;
 
 	// A description of what this control is for.
-	description: string;
+	description?: string;
 
 	// For 'dropdown' type: a static list of options or a function to dynamically generate them.
 	getOptions?: (params?: Params) => ControlOptions;
@@ -167,10 +167,16 @@ export interface AbstractedControl<Params, Value = ControlValues> {
 // Defines a group of related UI controls that appear together.
 export interface AbstractionGroup<Params = object> {
 	// A title for the group to be displayed in the UI.
-	title: string;
+	title?: string;
 
 	// A description of what this group of settings controls.
-	description: string;
+	description?: string;
+
+	// Whether the control group is collapsible.
+	collapsible?: boolean;
+
+	// Reset Group
+	showReset?: boolean;
 
 	// A map of the controls in this group, where the key is a unique ID for the control.
 	controls: AbstractedControl<Params>[];

@@ -4,7 +4,6 @@ import { TemplateEditorStore } from '../TemplateEditorStore';
 export const configUI = (store: TemplateEditorStore): AbstractionGroup[] => {
 	return [
 		{
-			title: 'Project Configuration',
 			description: '',
 			controls: [
 				{

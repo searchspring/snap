@@ -11,7 +11,6 @@ import { ThemeVariables, ThemeVariablesPartial } from '../../../../components/sr
 import { TargetStore } from '../TargetStore';
 import { AutocompleteTargetConfig, SearchTargetConfig, SnapTemplatesConfig } from '../../SnapTemplates';
 import { configUI, themeUI, searchControllerUI, autocompleteControllerUI, updateAutocompleteControllerState } from './uiAbstractions';
-import { debounce } from '../../../../toolbox/src';
 import { CurrencyCodes, LanguageCodes } from '../LibraryStore';
 
 const THEME_VARIABLE_DEFAULTS: ThemeVariables = {
@@ -54,7 +53,7 @@ export class TemplateEditorStore {
 	storage: StorageStore;
 	state: EditorState = {
 		hidden: false,
-		activeTab: 'templates',
+		activeTab: 'configuration',
 	};
 	overrides: {
 		config: SnapTemplatesConfig['config'];
@@ -76,7 +75,7 @@ export class TemplateEditorStore {
 		},
 		controller: {},
 		theme: {
-			extends: 'bocachica',
+			extends: 'base',
 			variables: THEME_VARIABLE_DEFAULTS,
 		},
 	};
@@ -131,7 +130,7 @@ export class TemplateEditorStore {
 		});
 
 		// switch to the theme set in the initial config if no override is set
-		this.setTheme(this.initial.theme.extends);
+		this.setTheme(this.overrides.theme.extends ?? this.initial.theme.extends);
 		// initialize themes with overrides
 		this.setThemeOverride({ path: [], value: undefined });
 
@@ -220,7 +219,7 @@ export class TemplateEditorStore {
 		});
 	}
 
-	setThemeOverride = debounce((obj: { path: string[]; value: unknown }) => {
+	setThemeOverride = (obj: { path: string[]; value: unknown }) => {
 		const { path, value } = obj;
 
 		// grab the initial config value using the path provided
@@ -240,7 +239,7 @@ export class TemplateEditorStore {
 			const themeStore = this.templatesStore.themes.library[themeName];
 			themeStore.setEditorOverrides({ variables: mergedOverrides.variables || {} });
 		});
-	}, 50);
+	};
 
 	setControllerOverride<ControllerType extends SearchController | AutocompleteController>(obj: {
 		path: string[];

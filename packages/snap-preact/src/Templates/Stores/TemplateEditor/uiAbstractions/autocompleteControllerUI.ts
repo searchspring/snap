@@ -5,7 +5,7 @@ import { TemplateEditorStore } from '../TemplateEditorStore';
 export function autocompleteControllerUI(store: TemplateEditorStore): AbstractionGroup<AutocompleteController>[] {
 	return [
 		{
-			title: '',
+			title: 'Terms',
 			description: '',
 			controls: [
 				{
