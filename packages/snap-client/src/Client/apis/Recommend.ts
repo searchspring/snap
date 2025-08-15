@@ -1,7 +1,7 @@
 import { API, ApiConfiguration } from './Abstract';
 import { HTTPHeaders, RecommendPostRequestProfileModel } from '../../types';
 import { AppMode } from '@searchspring/snap-toolbox';
-import { transformRecommendationFiltersPost } from '../transforms';
+import { NO_BEACON_PARAM, transformRecommendationFiltersPost } from '../transforms';
 import { ProfileRequestModel, ProfileResponseModel, RecommendResponseModel, RecommendRequestModel, RecommendPostRequestModel } from '../../types';
 
 class Deferred {
@@ -146,6 +146,7 @@ export class RecommendAPI extends API {
 						lastViewed,
 						shopper,
 					}),
+					[NO_BEACON_PARAM]: true,
 				};
 			});
 
@@ -154,12 +155,9 @@ export class RecommendAPI extends API {
 					batch.request.test = true;
 				}
 
-				const response = await this.postRecommendations(batch.request as RecommendPostRequestModel);
+				const response = await this.postRecommendations(batch.request);
 
 				batch.entries?.forEach((entry, index) => {
-					response[index]?.results?.forEach((result, idx) => {
-						result.position = idx + 1;
-					});
 					entry.deferred.resolve([response[index]]);
 				});
 			} catch (err) {
