@@ -695,13 +695,13 @@ function createResultSchemaMapping({ request, response }: { request: SearchReque
 		response: searchResponse,
 	});
 
-	searchResponse.results?.forEach((result) => {
+	searchResponse.results?.forEach((result, idx) => {
 		schemaMap[result.id!] = {
 			...schema,
 			results: [
 				{
 					type: ItemTypeEnum.Product,
-					position: result.position!,
+					position: idx + 1,
 					uid: result.mappings?.core?.uid || '',
 					sku: result.mappings?.core?.sku,
 				},

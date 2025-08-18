@@ -1349,6 +1349,60 @@ describe('SearchResultStore', () => {
 			expect(results[0].id).toBe(`ss-ib-${searchData.merchandising.content.inline[2].config.position.index}`);
 			expect((results[0] as Banner).value).toBe(searchData.merchandising.content.inline[2].value);
 		});
+
+		it('adds inline banners with index equal to totalResults to the end of the results array', () => {
+			// Special case where an inline banner index is equal to the totalResults but the api
+			// returned (totalResults - 1) results due to a bgFilter outside of the merchandising
+			// trigger that would reduce the results by 1
+			const searchData = {
+				results: [
+					{
+						id: 'product-1',
+						mappings: {
+							core: {},
+						},
+					},
+					{
+						id: 'product-2',
+						mappings: {
+							core: {},
+						},
+					},
+					{
+						id: 'product-3',
+						mappings: {
+							core: {},
+						},
+					},
+				],
+				pagination: {
+					page: 1,
+					totalResults: 4,
+					pageSize: 24,
+				},
+				merchandising: {
+					content: {
+						inline: [
+							{
+								value: 'engine',
+								config: {
+									position: {
+										index: 4,
+									},
+								},
+							},
+						],
+					},
+				},
+			};
+			const results = new SearchResultStore(searchConfig, services, {}, searchData.results, searchData.pagination, searchData.merchandising);
+
+			expect(results.length).toBe(4);
+			expect(results[0].id).toBe(`product-1`);
+			expect(results[1].id).toBe(`product-2`);
+			expect(results[2].id).toBe(`product-3`);
+			expect(results[3].id).toBe(`ss-ib-${searchData.merchandising.content.inline[0].config.position.index}`);
+		});
 	});
 	describe('with badges', () => {
 		it('has overlay result badges', () => {
