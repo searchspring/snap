@@ -40,8 +40,8 @@ export class SearchResultStore extends Array<Product | Banner> {
 		previousPaginationData?: SearchResponseModelPagination, // used for infinite scroll functionality
 		previousResults?: (Product | Banner)[] // used for infinite scroll functionality
 	) {
-		let results: (Product | Banner)[] = (resultData || []).map((result) => {
-			return new Product(services, result, metaData, config);
+		let results: (Product | Banner)[] = (resultData || []).map((result, idx) => {
+			return new Product(services, result, metaData, idx + 1, config);
 		});
 
 		const variantConfig = (config as SearchStoreConfig | AutocompleteStoreConfig | RecommendationStoreConfig)?.settings?.variants;
@@ -165,7 +165,7 @@ type SearchResponseModelResultVariants = {
 export class Product {
 	public type = 'product';
 	public id: string;
-	public position: number = 0;
+	public position: number;
 	public attributes: Record<string, unknown> = {};
 	public mappings: SearchResponseModelResultMappings = {
 		core: {},
@@ -182,13 +182,13 @@ export class Product {
 		services: StoreServices,
 		result: SearchResponseModelResult & { variants?: SearchResponseModelResultVariants },
 		metaData: MetaResponseModel,
+		position: number,
 		config?: StoreConfigs
 	) {
 		this.id = result.id!;
 		this.attributes = result.attributes!;
 		this.mappings = result.mappings!;
-		this.position = result.position!;
-
+		this.position = position;
 		this.badges = new Badges(result, metaData);
 		const variantsField = (config as SearchStoreConfig)?.settings?.variants?.field;
 		if (config && variantsField && this.attributes && this.attributes[variantsField]) {
@@ -712,7 +712,7 @@ function addBannersToResults(
 	// banners can have an index greater than the total results, these should be injected at the end
 	const bannersToInjectAtEnd = bannersNotInResults.filter((banner) => {
 		const index = banner.config.position!.index!;
-		return index > paginationData.totalResults;
+		return index >= paginationData.totalResults;
 	});
 
 	// inject banners that have index position within current set into the results
