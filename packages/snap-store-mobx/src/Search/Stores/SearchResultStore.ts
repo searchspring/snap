@@ -712,7 +712,7 @@ function addBannersToResults(
 	// banners can have an index greater than the total results, these should be injected at the end
 	const bannersToInjectAtEnd = bannersNotInResults.filter((banner) => {
 		const index = banner.config.position!.index!;
-		return index > paginationData.totalResults;
+		return index >= paginationData.totalResults;
 	});
 
 	// inject banners that have index position within current set into the results
