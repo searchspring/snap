@@ -1,4 +1,4 @@
-/*! For license information please see main.fdb58e3c.iframe.bundle.js.LICENSE.txt */
+/*! For license information please see main.625a5c48.iframe.bundle.js.LICENSE.txt */
 (self.webpackChunk_searchspring_snap_preact_components = self.webpackChunk_searchspring_snap_preact_components || []).push([
 	[792],
 	{
@@ -21143,9 +21143,13 @@
 						),
 						type = props.type,
 						selection = props.selection,
+						onSelect = props.onSelect,
 						disableStyles = props.disableStyles,
 						className = props.className,
 						style = props.style,
+						onSelectHandler = function onSelectHandler(e, option) {
+							onSelect && onSelect(e, option), selection.select(option.value);
+						},
 						subProps = {
 							dropdown: Object.assign(
 								{
@@ -21175,7 +21179,7 @@
 									multiSelect: !1,
 									hideOptionCheckboxes: !0,
 									onSelect: function onSelect(e, option) {
-										return selection.select(option.value);
+										return onSelectHandler(e, option);
 									},
 									selected: selection.selected,
 								},
@@ -21190,7 +21194,7 @@
 									name: 'ss__variant-selection__swatches--' + selection.field,
 									className: 'ss__variant-selection__swatches',
 									onSelect: function onSelect(e, option) {
-										return selection.select(option.value);
+										return onSelectHandler(e, option);
 									},
 									selected: selection.selected,
 								},
@@ -21253,8 +21257,8 @@
 																				'ss__variant-selection__option--disabled': val.disabled,
 																				'ss__variant-selection__option--unavailable': !1 === val.available,
 																			}),
-																			onClick: function onClick() {
-																				return !val.disabled && selection.select(val.value);
+																			onClick: function onClick(e) {
+																				return !val.disabled && onSelectHandler(e, val);
 																			},
 																		},
 																		val.label
@@ -21353,6 +21357,23 @@
 							'code',
 							{ parentName: 'pre', className: 'language-jsx' },
 							"<VariantSelection selection={VariantSelection} type={'swatches'} />\n"
+						)
+					),
+					(0, esm.yg)('h3', { id: 'onselect' }, 'onSelect'),
+					(0, esm.yg)(
+						'p',
+						null,
+						'The ',
+						(0, esm.yg)('inlineCode', { parentName: 'p' }, 'onSelect'),
+						' prop allows you to provide a callback function that is triggered when a variant option is selected. The selected option will be passed as an argument to this function, as well as the event.'
+					),
+					(0, esm.yg)(
+						'pre',
+						null,
+						(0, esm.yg)(
+							'code',
+							{ parentName: 'pre', className: 'language-jsx' },
+							"<VariantSelection selection={VariantSelection} type={'swatches'} onSelect={(e, val) => console.log(e, val)}/>\n"
 						)
 					)
 				);
@@ -21748,6 +21769,11 @@
 							control: { type: 'object' },
 						},
 						type: { description: 'selection type', table: { type: { summary: 'selection type' }, defaultValue: { summary: 'dropdown' } } },
+						onSelect: {
+							description: 'onSelect callback',
+							table: { type: { summary: 'function(e: React.MouseEvent<HTMLElement, MouseEvent>, option: ListOption)' } },
+							action: 'onSelect',
+						},
 					},
 					componentArgs.F
 				),
@@ -36891,13 +36917,13 @@
 					schema = getSearchSchemaData({ params: request, response: searchResponse });
 				null === (_searchResponse$resul = searchResponse.results) ||
 					void 0 === _searchResponse$resul ||
-					_searchResponse$resul.forEach(function (result) {
+					_searchResponse$resul.forEach(function (result, idx) {
 						var _result$mappings, _result$mappings$core2, _result$mappings2, _result$mappings2$cor;
 						schemaMap[result.id] = Object.assign({}, schema, {
 							results: [
 								{
 									type: src.hLm.Product,
-									position: result.position,
+									position: idx + 1,
 									uid:
 										(null === (_result$mappings = result.mappings) ||
 										void 0 === _result$mappings ||
@@ -42569,7 +42595,7 @@
 				(transformSearchResponse.results = function (response) {
 					return { results: ((null == response ? void 0 : response.results) || []).map(transformSearchResponse.result) };
 				}),
-				(transformSearchResponse.result = function (rawResult, idx) {
+				(transformSearchResponse.result = function (rawResult) {
 					var _rawResult$children,
 						coreFieldValues = CORE_FIELDS.reduce(function (coreFields, key) {
 							var _Object$assign;
@@ -42611,7 +42637,6 @@
 								  })) || [];
 					return new Result({
 						id: rawResult.uid,
-						position: idx + 1,
 						mappings: { core: coreFieldValues },
 						attributes,
 						badges: Array.isArray(rawResult.badges) && 'object' == typeof rawResult.badges[0] ? rawResult.badges : [],
@@ -43633,7 +43658,7 @@
 																										delete _this3.batches[key],
 																										batch.entries.sort(sortBatchEntries),
 																										batch.entries.map(function (entry) {
-																											var _entry$request$profil2;
+																											var _entry$request$profil2, _Object$assign;
 																											if (
 																												(entry.request.product &&
 																													(Array.isArray(entry.request.products) &&
@@ -43730,7 +43755,8 @@
 																													cart,
 																													lastViewed,
 																													shopper,
-																												})
+																												}),
+																												(((_Object$assign = {}).noBeacon = !0), _Object$assign)
 																											);
 																										}),
 																										(_context2.prev = 3),
@@ -43743,15 +43769,7 @@
 																										null === (_batch$entries = batch.entries) ||
 																											void 0 === _batch$entries ||
 																											_batch$entries.forEach(function (entry, index) {
-																												var _response$index, _response$index$resul;
-																												null === (_response$index = response[index]) ||
-																													void 0 === _response$index ||
-																													null === (_response$index$resul = _response$index.results) ||
-																													void 0 === _response$index$resul ||
-																													_response$index$resul.forEach(function (result, idx) {
-																														result.position = idx + 1;
-																													}),
-																													entry.deferred.resolve([response[index]]);
+																												entry.deferred.resolve([response[index]]);
 																											}),
 																										(_context2.next = 14);
 																									break;
@@ -45909,8 +45927,8 @@
 						var _config$settings, _variantConfig$realti, _config$settings2, _merchData$content;
 						SearchResultStore_classCallCheck(this, SearchResultStore);
 						var _variantConfig$realti3,
-							results = (resultData || []).map(function (result) {
-								return new Product(services, result, metaData, config);
+							results = (resultData || []).map(function (result, idx) {
+								return new Product(services, result, metaData, idx + 1, config);
 							}),
 							variantConfig =
 								null == config || null === (_config$settings = config.settings) || void 0 === _config$settings ? void 0 : _config$settings.variants;
@@ -46016,7 +46034,7 @@
 											return index >= paginationBegin - 1 && index <= paginationEnd - 1;
 										}),
 										bannersToInjectAtEnd = bannersNotInResults.filter(function (banner) {
-											return banner.config.position.index > paginationData.totalResults;
+											return banner.config.position.index >= paginationData.totalResults;
 										});
 									return (
 										bannersToInject.forEach(function (banner) {
@@ -46063,11 +46081,10 @@
 				}),
 				Product = (function () {
 					return SearchResultStore_createClass(
-						function Product(services, result, metaData, config) {
+						function Product(services, result, metaData, position, config) {
 							var _config$settings3, _config$settings3$var, _result$children;
 							SearchResultStore_classCallCheck(this, Product),
 								(this.type = 'product'),
-								(this.position = 0),
 								(this.attributes = {}),
 								(this.mappings = { core: {} }),
 								(this.custom = {}),
@@ -46077,7 +46094,7 @@
 								(this.id = result.id),
 								(this.attributes = result.attributes),
 								(this.mappings = result.mappings),
-								(this.position = result.position),
+								(this.position = position),
 								(this.badges = new Badges(result, metaData));
 							var variantsField =
 								null == config ||
@@ -51307,7 +51324,7 @@
 							((function Tracker_classCallCheck(a, n) {
 								if (!(a instanceof n)) throw new TypeError('Cannot call a class as a function');
 							})(this, Tracker),
-							((config = cjs_default()(Tracker_defaultConfig, config || {})).initiator = 'searchspring/' + config.framework + '/0.67.5'),
+							((config = cjs_default()(Tracker_defaultConfig, config || {})).initiator = 'searchspring/' + config.framework + '/0.68.0'),
 							((_this = Tracker_callSuper(this, Tracker, [globals, config])).targeters = []),
 							(_this.track = {
 								error: function error(data, siteId) {
@@ -51479,7 +51496,7 @@
 							(_this.localStorage = new StorageStore({ type: 'local', key: 'ss-' + _this.config.id })),
 							_this.localStorage.set('siteId', _this.globals.siteId),
 							(null !== (_window$searchspring = window.searchspring) && void 0 !== _window$searchspring && _window$searchspring.tracker) ||
-								((window.searchspring = window.searchspring || {}), (window.searchspring.tracker = _this), (window.searchspring.version = '0.67.5')),
+								((window.searchspring = window.searchspring || {}), (window.searchspring.tracker = _this), (window.searchspring.version = '0.68.0')),
 							setTimeout(function () {
 								_this.targeters.push(
 									new DomTargeter([{ selector: 'script[type^="searchspring/track/"]', emptyTarget: !1 }], function (target, elem) {

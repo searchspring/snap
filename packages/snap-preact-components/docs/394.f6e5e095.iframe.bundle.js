@@ -1,4 +1,4 @@
-/*! For license information please see 394.2d729e10.iframe.bundle.js.LICENSE.txt */
+/*! For license information please see 394.f6e5e095.iframe.bundle.js.LICENSE.txt */
 (self.webpackChunk_searchspring_snap_preact_components = self.webpackChunk_searchspring_snap_preact_components || []).push([
 	[394],
 	{
@@ -3729,7 +3729,7 @@
 					}
 					return unsafeStringify(rnds);
 				},
-				{ rE: version } = { rE: '0.0.30' },
+				{ rE: version } = { rE: '0.0.34' },
 				CART_KEY = 'ssCartProducts',
 				VIEWED_KEY = 'ssViewedProducts',
 				COOKIE_DOMAIN = ('undefined' != typeof window && window.location.hostname && '.' + window.location.hostname.replace(/^www\./, '')) || void 0;
@@ -4348,7 +4348,7 @@
 					}
 				}
 				getProductId(product) {
-					return `${product.childUid || product.childSku || product.uid || product.sku || ''}`.trim();
+					return `${product.childSku || product.childUid || product.sku || product.uid || ''}`.trim();
 				}
 			}
 			function appendResults(acc, key, schemaName, request) {
@@ -63631,4 +63631,4 @@
 		},
 	},
 ]);
-//# sourceMappingURL=394.2d729e10.iframe.bundle.js.map
+//# sourceMappingURL=394.f6e5e095.iframe.bundle.js.map
