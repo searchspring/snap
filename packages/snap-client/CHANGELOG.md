@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.68.0](https://github.com/searchspring/snap/compare/v0.67.5...v0.68.0) (2025-08-18)
+
+### Bug Fixes
+
+- add noBeacon param to recommend api, update beacon and snapi-types version ([89e185c](https://github.com/searchspring/snap/commit/89e185c1b06a49274103c50d3bf410e2effa1e3a))
+
 ## [0.67.5](https://github.com/searchspring/snap/compare/v0.67.4...v0.67.5) (2025-08-11)
 
 **Note:** Version bump only for package @searchspring/snap-client

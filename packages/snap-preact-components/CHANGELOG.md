@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.68.0](https://github.com/searchspring/snap/compare/v0.67.5...v0.68.0) (2025-08-18)
+
+### Features
+
+- **preact/components/variantselection:** adding new onSelect prop to variantSelection ([8bf77c7](https://github.com/searchspring/snap/commit/8bf77c7b898c6f6d8e2addcd3b5f6d053841170d))
+
 ## [0.67.5](https://github.com/searchspring/snap/compare/v0.67.4...v0.67.5) (2025-08-11)
 
 **Note:** Version bump only for package @searchspring/snap-preact-components
