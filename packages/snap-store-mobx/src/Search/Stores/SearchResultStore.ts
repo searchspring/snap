@@ -165,7 +165,7 @@ type SearchResponseModelResultVariants = {
 export class Product {
 	public type = 'product';
 	public id: string;
-	public position: number = 0;
+	public position: number;
 	public attributes: Record<string, unknown> = {};
 	public mappings: SearchResponseModelResultMappings = {
 		core: {},
