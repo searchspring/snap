@@ -435,6 +435,7 @@ const FacetContent = (props: any) => {
 		iconOverflowLess,
 		disableOverflow,
 		previewOnFocus,
+		justContent,
 		valueProps,
 		hideShowMoreLessText,
 		treePath,
@@ -451,7 +452,7 @@ const FacetContent = (props: any) => {
 					treePath={treePath}
 				/>
 			)}
-			<div className={classnames('ss__facet__options', className, internalClassName)}>
+			<div className={classnames('ss__facet__options', justContent ? className : '', justContent ? internalClassName : '')}>
 				{(() => {
 					//manual options component
 					if (optionsSlot) {

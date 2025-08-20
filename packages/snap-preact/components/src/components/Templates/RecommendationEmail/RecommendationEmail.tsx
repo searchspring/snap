@@ -1,5 +1,5 @@
-import { h, Fragment } from 'preact';
-import { css, jsx } from '@emotion/react';
+import { h } from 'preact';
+import { css } from '@emotion/react';
 import { observer } from 'mobx-react-lite';
 
 import type { AbstractController, RecommendationController } from '@searchspring/snap-controller';
@@ -51,13 +51,12 @@ export const RecommendationEmail = observer((properties: RecommendationEmailProp
 	const resultsToRender = results || controller?.store?.results || [];
 
 	return resultsToRender.length > 0 ? (
-		<Fragment>
+		<div className={classnames('ss__recommendation-email', className, internalClassName)} {...styling}>
 			{resultsToRender.map((result, idx) => (
 				<div
 					key={idx}
 					id={`ss-emailrec${idx}`}
-					className={classnames('ss__recommendation-email__result-wrapper', className, internalClassName)}
-					{...styling}
+					className={classnames('ss__recommendation-email__result-wrapper')}
 					style={{ display: 'block', width: resultWidth }}
 				>
 					{(() => {
@@ -86,7 +85,7 @@ export const RecommendationEmail = observer((properties: RecommendationEmailProp
 					})()}
 				</div>
 			))}
-		</Fragment>
+		</div>
 	) : (
 		<></>
 	);
