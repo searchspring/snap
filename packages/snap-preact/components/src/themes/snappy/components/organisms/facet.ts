@@ -9,7 +9,7 @@ const facetStyleScript = ({ color, theme }: FacetProps) => {
 		[`@media (min-width: ${variables?.breakpoints.tablet}px)`]: {
 			'&.ss__facet--showing-all': {
 				'& .ss__facet__options': {
-					maxHeight: '800px',
+					maxHeight: '600px',
 				},
 			},
 		},

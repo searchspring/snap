@@ -2,7 +2,7 @@ import { css } from '@emotion/react';
 import { ThemeComponent } from '../../../../providers';
 import { CalloutBadgeProps } from '../../../../components/Molecules/CalloutBadge';
 
-// CSS in JS style script for the Button component
+// CSS in JS style script for the CalloutBadge component
 const calloutBadgeStyleScript = ({}: CalloutBadgeProps) => {
 	return css({
 		'& .ss__badge-text': {
@@ -11,7 +11,7 @@ const calloutBadgeStyleScript = ({}: CalloutBadgeProps) => {
 	});
 };
 
-// Button component props
+// CalloutBadge component props
 export const calloutBadge: ThemeComponent<'calloutBadge', CalloutBadgeProps> = {
 	default: {
 		calloutBadge: {

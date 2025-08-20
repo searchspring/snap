@@ -27,6 +27,13 @@ const mobileSidebarStyleScript = ({ theme }: MobileSidebarProps) => {
 			padding: '5px',
 		},
 
+		'.ss__mobile-sidebar__header__title': {
+			color: '#202223',
+			marginBottom: '0',
+			fontSize: '25px',
+			fontWeight: '400',
+		},
+
 		[`@media (max-width: ${variables?.breakpoints.desktop}px)`]: {
 			'.ss__mobile-sidebar__body': {
 				//83px is the height of the footer & footer

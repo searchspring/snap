@@ -7,7 +7,11 @@ const searchHorizontalStyleScript = ({ theme }: SearchHorizontalProps) => {
 	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	const variables = theme?.variables;
 
-	return css({});
+	return css({
+		'& .ss__search-horizontal__header-section': {
+			marginBottom: '0px',
+		},
+	});
 };
 
 // Search component props come from Template export

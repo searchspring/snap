@@ -13,10 +13,14 @@ const autocompleteFixedStyleScript = ({}: AutocompleteSlideoutProps) => {
 			padding: '5px',
 			borderRadius: '12px',
 		},
-		'.ss__autocomplete__facets-wrapper .ss__facet-grid-options__option .ss__facet-grid-options__option__value.ss__facet-grid-options__option__value--smaller':
-			{
-				fontSize: '60%',
+
+		'.ss__autocomplete__facets-wrapper': {
+			'.ss__facet-grid-options__option': {
+				'.ss__facet-grid-options__option__value.ss__facet-grid-options__option__value--smaller': {
+					fontSize: '60%',
+				},
 			},
+		},
 		'.ss__autocomplete__button--see-more': {
 			margin: '10px',
 		},

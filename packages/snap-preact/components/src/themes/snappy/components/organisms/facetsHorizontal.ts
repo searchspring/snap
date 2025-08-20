@@ -55,6 +55,10 @@ export const facetsHorizontal: ThemeComponent<'facetsHorizontal', FacetsHorizont
 			iconCollapse: 'angle-down',
 			limit: 9,
 		},
+
+		'facetsHorizontal mobileSidebar': {
+			layout: ['facets'],
+		},
 	},
 	mobile: {
 		facetsHorizontal: {

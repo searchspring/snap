@@ -2,9 +2,7 @@ import { css } from '@emotion/react';
 import type { SortByProps } from '../../../../components/Molecules/SortBy';
 import { ThemeComponent } from '../../../../providers';
 // CSS in JS style script for the SortBy component
-const sortByStyleScript = ({ theme }: SortByProps) => {
-	const variables = theme?.variables;
-
+const sortByStyleScript = ({}: SortByProps) => {
 	return css({
 		'.ss__button__content': {
 			gap: '7px',
@@ -35,12 +33,6 @@ const sortByStyleScript = ({ theme }: SortByProps) => {
 					borderRadius: '50%',
 					marginLeft: '15px',
 				},
-			},
-		},
-
-		[`@media (max-width: ${variables?.breakpoints.tablet}px)`]: {
-			'.ss__button__content': {
-				padding: '5px 10px',
 			},
 		},
 	});
