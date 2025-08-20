@@ -58,7 +58,7 @@ export default {
 			table: {
 				type: {
 					summary:
-						'[`searchHeader` | `filterSummary` | `mobileSidebar` | `layoutSelector` | `perPage` | `sortBy` | `pagination` | `paginationInfo` | `_` | `button.sidebar-toggle` | `banner.header` | `banner.banner` | `banner.footer` | `facetsHorizontal`]',
+						'[`searchHeader` | `breadcrumbs` | `filterSummary` | `mobileSidebar` | `layoutSelector` | `perPage` | `sortBy` | `pagination` | `paginationInfo` | `_` | `button.sidebar-toggle` | `banner.header` | `banner.banner` | `banner.footer` | `facetsHorizontal`]',
 				},
 				defaultValue: { summary: "['mobileSidebar', 'filterSummary', 'paginationInfo', 'sortBy', 'perPage', 'pagination']" },
 			},

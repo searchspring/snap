@@ -72,6 +72,7 @@ export type ModuleNames =
 	| 'sortBy'
 	| 'pagination'
 	| 'paginationInfo'
+	| 'breadcrumbs'
 	| '_'
 	| 'button.sidebar-toggle'
 	| 'banner.header'
