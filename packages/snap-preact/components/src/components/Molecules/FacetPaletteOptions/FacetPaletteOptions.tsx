@@ -247,6 +247,11 @@ export const FacetPaletteOptions = observer((properties: FacetPaletteOptionsProp
 						value,
 					});
 
+					let lowerCaseColorMapping;
+					if (colorMapping) {
+						lowerCaseColorMapping = Object.fromEntries(Object.entries(colorMapping).map(([key, value]) => [key.toLowerCase(), value]));
+					}
+
 					return (
 						<a
 							key={value.value}
@@ -277,8 +282,10 @@ export const FacetPaletteOptions = observer((properties: FacetPaletteOptionsProp
 									)}
 									style={{
 										background:
-											colorMapping && colorMapping[value.label] && colorMapping[value.label].background
-												? colorMapping[value.label].background
+											lowerCaseColorMapping &&
+											lowerCaseColorMapping[value.label.toLowerCase()] &&
+											lowerCaseColorMapping[value.label.toLowerCase()].background
+												? lowerCaseColorMapping[value.label.toLowerCase()].background
 												: value.value,
 									}}
 								>
@@ -287,7 +294,9 @@ export const FacetPaletteOptions = observer((properties: FacetPaletteOptionsProp
 							</div>
 							{!hideLabel && (
 								<span className="ss__facet-palette-options__option__value">
-									{colorMapping && colorMapping[value.label] && colorMapping[value.label].label ? colorMapping[value.label].label : value.label}
+									{lowerCaseColorMapping && lowerCaseColorMapping[value.label.toLowerCase()] && lowerCaseColorMapping[value.label.toLowerCase()].label
+										? lowerCaseColorMapping[value.label.toLowerCase()].label
+										: value.label}
 								</span>
 							)}
 							{!hideCount && value?.count > 0 && <span className="ss__facet-palette-options__option__value__count">({value.count})</span>}

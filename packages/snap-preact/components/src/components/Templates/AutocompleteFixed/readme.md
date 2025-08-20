@@ -33,26 +33,26 @@ The required `controller` prop specifies a reference to the autocomplete control
 ### layout
 The `layout` prop is used to specify which child components render and where. The prop takes an array of specific module names, the order of these module names determines the order in which they will be rendered. Additionally you can pass arrays of modules to the array to specify new rows in the display.
 
-There are also a few special module names - `C1`, `C2`, `C3`, `C4`, & `_` 
+There are also a few special module names - `c1`, `c2`, `c3`, `c4`, & `_` 
 
-All of the `Cx` modules represent Columns which also have their own layout array by default, and can be overwrote via their own layout props. IE - `C1` module can be overwrote via the `column1` prop. 
+All of the `Cx` modules represent Columns which also have their own layout array by default, and can be overwrote via their own layout props. IE - `c1` module can be overwrote via the `column1` prop. 
 
 The `_` module is used a seperator module to center|left|right justify the other elements in the layout.
 
 available modules to use in the layout are 
 
-`C1`, `C2`, `C3`, `C4`,`TermsList`, `Terms.history`, `Terms.trending`, `Terms.suggestions`, `Facets`, `FacetsHorizontal`, `Button.see-more`, `Content`, `_`, `Banner.left`, `Banner.banner`, `Banner.footer`, `Banner.header`.
+`c1`, `c2`, `c3`, `c4`,`TermsList`, `Terms.history`, `Terms.trending`, `Terms.suggestions`, `Facets`, `FacetsHorizontal`, `Button.see-more`, `Content`, `_`, `Banner.left`, `Banner.banner`, `Banner.footer`, `Banner.header`.
 
 ```jsx
-<AutocompleteFixed controller={controller} input={'#searchInput'} layout={[['C1','C2','C3']]}/>
+<AutocompleteFixed controller={controller} input={'#searchInput'} layout={[['c1','c2','c3']]}/>
 ```
 
 ### column1
-The `column1` prop specifies the layout to render in the `C1` module. Takes an object with two properties, 
+The `column1` prop specifies the layout to render in the `c1` module. Takes an object with two properties, 
 
 `width` which specifies how wide the the column should be. This can be a string - `150px` or `auto`. If set to auto, the column will automatically grow and shrink based on its surroundings. 
 
-`layout` which specifies an array of modules to render in the column. Defaults to `['TermsList']`. All layout modules are available to use with the exception of the `Cx` modules. Additional arrays for new rows are also supported.
+`layout` which specifies an array of modules to render in the column. Defaults to `['TermsList']`. All layout modules are available to use with the exception of the `cx` modules. Additional arrays for new rows are also supported.
 
 ```jsx
 <AutocompleteFixed controller={controller} input={'#searchInput'} column1={{
@@ -62,11 +62,11 @@ The `column1` prop specifies the layout to render in the `C1` module. Takes an o
 ```
 
 ### column2
-The `column2` prop specifies a layout array to render in the `C2` module. Takes an object with two properties, 
+The `column2` prop specifies a layout array to render in the `c2` module. Takes an object with two properties, 
 
 `width` which specifies how wide the the column should be. This can be a string - `150px` or `auto`. If set to auto, the column will automatically grow and shrink based on its surroundings. 
 
-`layout` which specifies an array of modules to render in the column. Defaults to `['Facets']`. All layout modules are available to use with the exception of the `Cx` modules. Additional arrays for new rows are also supported.
+`layout` which specifies an array of modules to render in the column. Defaults to `['Facets']`. All layout modules are available to use with the exception of the `cx` modules. Additional arrays for new rows are also supported.
 
 ```jsx
 <AutocompleteFixed controller={controller} input={'#searchInput'} column2={{
@@ -76,11 +76,11 @@ The `column2` prop specifies a layout array to render in the `C2` module. Takes 
 ```
 
 ### column3
-The `column3` prop specifies a layout array to render in the `C3` module. Takes an object with two properties, 
+The `column3` prop specifies a layout array to render in the `c3` module. Takes an object with two properties, 
 
 `width` which specifies how wide the the column should be. This can be a string - `150px` or `auto`. If set to auto, the column will automatically grow and shrink based on its surroundings. 
 
-`layout` which specifies an array of modules to render in the column. Defaults to `[['Content'], ['_', 'Button.see-more']]`. All layout modules are available to use with the exception of the `Cx` modules. Additional arrays for new rows are also supported.
+`layout` which specifies an array of modules to render in the column. Defaults to `[['Content'], ['_', 'Button.see-more']]`. All layout modules are available to use with the exception of the `cx` modules. Additional arrays for new rows are also supported.
 
 ```jsx
 <AutocompleteFixed controller={controller} input={'#searchInput'} column3={{
@@ -90,11 +90,11 @@ The `column3` prop specifies a layout array to render in the `C3` module. Takes 
 ```
 
 ### column4
-The `column4` prop specifies a layout array to render in the `C4` module. Takes an object with two properties, 
+The `column4` prop specifies a layout array to render in the `c4` module. Takes an object with two properties, 
 
 `width` which specifies how wide the the column should be. This can be a string - `150px` or `auto`. If set to auto, the column will automatically grow and shrink based on its surroundings. 
 
-`layout` which specifies an array of modules to render in the column. Defaults to `[['Content'], ['_', 'Button.see-more']]`. All layout modules are available to use with the exception of the `Cx` modules. Additional arrays for new rows are also supported.
+`layout` which specifies an array of modules to render in the column. Defaults to `[['Content'], ['_', 'Button.see-more']]`. All layout modules are available to use with the exception of the `cx` modules. Additional arrays for new rows are also supported.
 
 ```jsx
 <AutocompleteFixed controller={controller} input={'#searchInput'} column4={{

@@ -56,7 +56,7 @@ export const RecommendationBundleEasyAdd = observer((properties: RecommendationB
 export type RecommendationBundleEasyAddProps = ComponentProps &
 	Omit<
 		RecommendationBundleProps,
-		'hideSeed' | 'limit' | 'hideCheckboxes' | 'carousel' | 'separatorIcon' | 'separatorIconSeedOnly' | 'preselectedCount'
+		'hideSeed' | 'limit' | 'hideCheckboxes' | 'carousel' | 'separatorIcon' | 'separatorIconSeedOnly' | 'preselectedCount' | 'breakpoints'
 	>;
 
 interface RecommendationBundleEasyAddSubProps {

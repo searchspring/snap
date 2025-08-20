@@ -9,6 +9,7 @@ export const autocompleteFixedThemeComponentProps: ThemeComponent<'autocompleteF
 			limit: 6,
 			disableOverflow: true,
 			disableCollapse: true,
+			searchable: false,
 		},
 		'autocompleteFixed facetGridOptions': {
 			// onClick: facetClickEvent,
@@ -34,6 +35,9 @@ export const autocompleteFixedThemeComponentProps: ThemeComponent<'autocompleteF
 		'autocompleteFixed recommendationGrid': {
 			columns: 4,
 			rows: 2,
+		},
+		'autocompleteFixed modal': {
+			overlayColor: '',
 		},
 	},
 	mobile: {

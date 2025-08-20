@@ -11,6 +11,7 @@ import { useClickOutside } from '../../../hooks';
 import { cloneWithProps, defined, mergeProps, mergeStyles } from '../../../utilities';
 import { useA11y } from '../../../hooks/useA11y';
 import { Overlay, OverlayProps } from '../../Atoms/Overlay';
+import { debounce } from '@searchspring/snap-toolbox';
 
 const defaultStyles: StyleScript<ModalProps> = () => {
 	return css({
@@ -122,7 +123,7 @@ export const Modal = observer((properties: ModalProps): JSX.Element => {
 					return !prev;
 				});
 		}
-		document.body.style.overflow = showContent && lockScroll ? 'hidden' : '';
+		document.body.style.overflow = !showContent && lockScroll ? 'hidden' : '';
 	};
 
 	const styling = mergeStyles<ModalProps>(props, defaultStyles);
@@ -136,6 +137,11 @@ export const Modal = observer((properties: ModalProps): JSX.Element => {
 		}
 	}
 
+	const debouncedHandleResize = debounce(() => {
+		// console.log('window resized', showContent, lockScroll);
+		setTimeout(() => (document.body.style.overflow = showContent && lockScroll ? 'hidden' : ''), 100);
+	}, 10);
+
 	useEffect(() => {
 		if (existingButton) {
 			if (!disabled) {
@@ -145,9 +151,8 @@ export const Modal = observer((properties: ModalProps): JSX.Element => {
 				});
 			}
 		}
+		window.addEventListener('resize', debouncedHandleResize);
 	}, []);
-
-	document.body.style.overflow = showContent && lockScroll ? 'hidden' : '';
 
 	return (
 		<CacheProvider>

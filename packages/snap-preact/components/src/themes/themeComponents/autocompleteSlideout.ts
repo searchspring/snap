@@ -13,6 +13,7 @@ export const autocompleteSlideoutThemeComponentProps: ThemeComponent<'autocomple
 			limit: 6,
 			disableOverflow: true,
 			disableCollapse: true,
+			searchable: false,
 		},
 		'autocompleteSlideout facetGridOptions': {
 			// onClick: facetClickEvent,

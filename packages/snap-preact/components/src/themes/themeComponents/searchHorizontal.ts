@@ -28,10 +28,16 @@ export const searchHorizontalThemeComponentProps: ThemeComponent<'searchHorizont
 		'searchHorizontal facetsHorizontal': {
 			limit: 4,
 		},
+		'searchHorizontal results': {
+			columns: 2,
+		},
 	},
 	tablet: {
 		'searchHorizontal facetsHorizontal': {
 			limit: 5,
+		},
+		'searchHorizontal results': {
+			columns: 3,
 		},
 	},
 

@@ -18,7 +18,6 @@ import { useIntersection } from '../../../hooks';
 
 const defaultStyles: StyleScript<RecommendationGridProps> = ({ gapSize, columns }) => {
 	return css({
-		overflow: 'auto',
 		maxWidth: '100%',
 		maxHeight: '100%',
 		'.ss__recommendation-grid__results': {
@@ -27,6 +26,7 @@ const defaultStyles: StyleScript<RecommendationGridProps> = ({ gapSize, columns 
 			gap: gapSize,
 			gridTemplateRows: 'auto',
 			gridTemplateColumns: `repeat(${columns}, 1fr)`,
+			overflow: 'auto',
 
 			'@supports (display: grid)': {
 				display: 'grid',
@@ -41,6 +41,7 @@ export const RecommendationGrid = observer((properties: RecommendationGridProps)
 	const defaultProps: Partial<RecommendationGridProps> = {
 		results: properties.controller?.store?.results,
 		gapSize: '20px',
+		title: properties.controller?.store?.profile?.display?.templateParameters?.title,
 	};
 
 	//mergeprops only uses names that are passed via properties, so this cannot be put in the defaultProps

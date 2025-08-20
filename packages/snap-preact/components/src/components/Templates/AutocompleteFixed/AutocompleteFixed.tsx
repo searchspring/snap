@@ -220,7 +220,7 @@ export const AutocompleteFixed = observer((properties: AutocompleteFixedProps): 
 	return layout?.length && active ? (
 		<CacheProvider>
 			<div {...styling} className={classNames('ss__autocomplete-fixed', className)}>
-				<Modal {...subProps.modal}>
+				<Modal {...subProps.modal} overlayColor="">
 					<Fragment>
 						<div className="ss__autocomplete-fixed__inner" ref={(e) => useA11y(e, 0, true, reset)}>
 							{renderInput ? (
