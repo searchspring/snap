@@ -45,7 +45,7 @@ export const Breadcrumbs = observer((properties: BreadcrumbsProps): JSX.Element 
 
 	const subProps: BreadcrumbsSubProps = {
 		icon: {
-			className: 'ss__breadcrumbs__separator__icon',
+			internalClassName: 'ss__breadcrumbs__separator__icon',
 			// default props
 			// inherited props
 			...defined({
