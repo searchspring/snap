@@ -17,40 +17,7 @@ The `RecommendationController` is used when making queries to the API `recommend
 | settings.variants.realtime.enabled | enable real time variant updates | ➖ |   | 
 | settings.variants.realtime.filters | specify which filters to use to determine which results are updated | ➖ |   | 
 | settings.variants.options | object keyed by option individual option field values for configuration of any option settings  | ➖ |   | 
-<br>
 
-```typescript
-const recommendationConfig = {
-	id: 'recommend',
-	tag: 'trending',
-};
-```
-
-## Instantiate
-`RecommendationController` requires an `RecommendationControllerConfig` and `ControllerServices` object and is paired with an `RecommendationStore`. The `RecommendationStore` takes the same config, and shares the `UrlManager` service with the controller.
-
-```typescript
-import { RecommendationController } from '@searchspring/snap-controller';
-import { Client } from '@searchspring/snap-client';
-import { RecommendationStore } from '@searchspring/snap-store-mobx';
-import { UrlManager, UrlTranslator, reactLinker } from '@searchspring/snap-url-manager';
-import { EventManager } from '@searchspring/snap-event-manager';
-import { Profiler } from '@searchspring/snap-profiler';
-import { Logger } from '@searchspring/snap-logger';
-import { Tracker } from '@searchspring/snap-tracker';
-
-const recommendationUrlManager = new UrlManager(new UrlTranslator(), reactLinker).detach(0);
-const recommendationController = new RecommendationController(recommendationConfig, {
-		client: new Client(globals, clientConfig),
-		store: new RecommendationsStore(recommendationConfig, { urlManager: recommendationUrlManager }),
-		urlManager: recommendationUrlManager,
-		eventManager: new EventManager(),
-		profiler: new Profiler(),
-		logger: new Logger(),
-		tracker: new Tracker(),
-	}
-));
-```
 
 ## Initialize
 Invoking the `init` method is required to subscribe to changes that occur in the UrlManager. This is typically done automatically prior to calling the first `search`.

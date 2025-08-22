@@ -1,15 +1,12 @@
 ## What is Snap?
 
-Snap is not an acronym! Snap is Searchspring's open source SDK for integrating into front end web apps. It replaces the previous version - v3.
+Snap is not an acronym! Snap is an open source SDK for building e-commerce experiences powered by Athos Commerce.
 
-Snap supports Searchspring's latest features and API release for lightning fast performance.
-
-Snap also supports integration with modern front end frameworks such as React and Vue. In addition, we've also released a full [React component library](https://searchspring.github.io/snap/#/components-preact) to get you up and running quickly. 
-
+The SDK includes multiple core packages published to npm that in combination with each other, provide the complete front-end tooling for building e-commerce experiences with Athos Commerce. However to simplify usage, the `@searchspring/snap-preact` package is an abstraction that combines all core packages into a single dependency in combination with Preact to render the UI. This documentation is primarily focused on the usage of this package.
 
 ## Getting Started
 
-Check out the [Getting Started](https://searchspring.github.io/snap/#/start-setup) guide to jump right in!
+Check out the [Getting Started](https://searchspring.github.io/snap/#/getting-started) guide to jump right in!
 
 ## Contributing
 

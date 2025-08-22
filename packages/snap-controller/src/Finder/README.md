@@ -19,66 +19,6 @@ The `FinderController` should be used for building product finders. It makes que
 | persist.lockSelections | boolean to lock selections upon loading persisted selections | true |   |
 | persist.expiration | number of milliseconds before persisted selections are expired | 0 (don't expire) |   |
 
-<br>
-
-<h3 id="HierarchyConfig">Hierarchy Config</h3>
-Specifying `levels` will display a dropdown for each hierarchy level. Finders that use hierarchy fields will enforce selecting dropdowns in order by disabling the following dropdowns
-
-```typescript
-const finderConfig = {
-	id: 'finder',
-	url: '/search',
-	fields: [
-		{
-			field: 'ss_tire',
-			label: 'Wheel Finder',
-			levels: ['Year', 'Make', 'Model', 'Wheel Size']
-		},
-	]
-};
-```
-
-Optionally if `levels` are not defined, a single dropdown will be displayed on the initial load. Each selection will dynamically append additional dropdowns until there are no more available selections
-
-```typescript
-const finderConfig = {
-	id: 'finder',
-	url: '/search',
-	fields: [
-		{
-			field: 'ss_tire'
-		}
-	]
-};
-```
-
-<h3 id="NonHierarchyConfig">Non-Hierarchy Config</h3>
-If using fields that are not of hierarchy type, `levels` are not required
-
-```typescript
-const finderConfig = {
-	id: 'finder',
-	url: '/search',
-	fields: [
-		{ 
-			field: 'custom_wheel_size' 
-			label: 'Size'
-		}, 
-		{ 
-			field: 'custom_wheel_width' 
-			label: 'Width'
-		}, 
-		{ 
-			field: 'custom_wheel_bolt_pattern' 
-			label: 'Bolt Pattern'
-		}, 
-		{ 
-			field: 'custom_color'
-			label: 'Color'
-		}
-	]
-};
-```
 
 ### Persisting Selections
 Persisting selections allow for finder selections to be persisted across page navigation. If enabled, selections are saved to the browser's local storage upon invoking the controller's `find` method. Selections are then populated automatically upon the next instantiation. (Default: `false`)
@@ -125,31 +65,6 @@ const finderConfig = {
 ```
 
 
-## Instantiate
-`FinderController` requires a `FinderControllerConfig` and `ControllerServices` object and is paired with a `FinderStore`. The `FinderStore` takes the same config, and shares the `UrlManager` service with the controller.
-
-```typescript
-import { FinderController } from '@searchspring/snap-controller';
-import { Client } from '@searchspring/snap-client';
-import { FinderStore } from '@searchspring/snap-store-mobx';
-import { UrlManager, UrlTranslator, reactLinker } from '@searchspring/snap-url-manager';
-import { EventManager } from '@searchspring/snap-event-manager';
-import { Profiler } from '@searchspring/snap-profiler';
-import { Logger } from '@searchspring/snap-logger';
-import { Tracker } from '@searchspring/snap-tracker';
-
-const finderUrlManager = new UrlManager(new UrlTranslator(), reactLinker).detach(0);
-const finderController = new FinderController(finderConfig, {
-		client: new Client(globals, clientConfig),
-		store: new FinderStore(finderConfig, { urlManager: finderUrlManager }),
-		urlManager: finderUrlManager,
-		eventManager: new EventManager(),
-		profiler: new Profiler(),
-		logger: new Logger(),
-		tracker: new Tracker(),
-	}
-));
-```
 ## Initialize
 Invoking the `init` method is required to subscribe to changes that occur in the UrlManager. This is typically done automatically prior to calling the first `search`.
 

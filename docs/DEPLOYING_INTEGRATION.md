@@ -1,3 +1,36 @@
+# Integration
+
+After building the project and uploading the build files to your CDN or hosting provider, you will need to add a script tag to your storefront.
+
+
+```html
+<script src="https://snapui.searchspring.io/[your_site_id]/bundle.js" id="searchspring-context">
+    // contexet variables go here
+</script>
+```
+
+The bundle should be included in the <head> tag, ideally near the top of the node, and should not have a 'defer' or 'async' attribute. This location is important in order to start fetching results and as soon as possible. This placement prior to any body elements also serves to allow for the hiding of targeted elements that contain content - this preventing a flash when the contents change upon injection.
+
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Snap Integration Example</title>
+
+    <script src="https://snapui.searchspring.io/[your_site_id]/bundle.js" id="searchspring-context">
+        // contexet variables go here
+    </script>
+</head>
+<body>
+    <div id="searchspring-content"><!-- an element that will be injected into --></div>
+</body>
+</html>
+```
+
 ## Context Variables
 
 Context variables are conditionally rendered within the `bundle.js` script's innerHTML via server side code or template logic. They provide various context variables that can be utilized by the Snap integration. Typically these variables are used to specify category page details (for [background filtering](https://github.com/searchspring/snap/blob/main/docs/INTEGRATION_BACKGROUND_FILTERS.md)), shopper details (for personalization), merchandising segmentation, or any other custom variables needed for the integration.

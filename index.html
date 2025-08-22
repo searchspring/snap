@@ -26,74 +26,47 @@
 	<script src="https://cdn.jsdelivr.net/npm/vue-router@4"></script>
 
 	<script>
-		function modifyLinks(markdown) {
-			var replaces = [
-				{ a: "(https://searchspring.github.io/snap/#/start-setup)", b: "(#/start-setup)"},
-				{ a: "(https://searchspring.github.io/snapi-explorer/)", b: "(#/api-explorer)"},	
-				
-				{ a: "(https://github.com/searchspring/snap/blob/main/docs/SEARCH.md)", b: "(#/advanced-search)"},
-				{ a: "(https://github.com/searchspring/snap/blob/main/docs/PREACT_DISPLAYING_DATA.md)", b: "(#/start-preact-events)"},
-				{ a: "(https://github.com/searchspring/snap/blob/main/docs/PREACT_BADGES.md)", b: "(#/start-preact-badges)"},
-				{ a: "(https://github.com/searchspring/snap/blob/main/docs/INTEGRATION.md)", b: "(#/integration)"},
-				{ a: "(https://github.com/searchspring/snap/blob/main/docs/INTEGRATION_BACKGROUND_FILTERS.md)", b: "(#/integration-backgroundFilters)"},
-				{ a: "(https://github.com/searchspring/snap/blob/main/docs/INTEGRATION_CONTEXT.md)", b: "(#/integration-context)"},
-				{ a: "(https://github.com/searchspring/snap/blob/main/docs/INTEGRATION_DEBUGGING.md)", b: "(#/integration-debugging)"},
-				{ a: "(https://github.com/searchspring/snap/blob/main/docs/INTEGRATION_TRACKING.md)", b: "(#/integration-tracking)"},
-				{ a: "(https://github.com/searchspring/snap/blob/main/docs/INTEGRATION_RECOMMENDATIONS.md)", b: "(#/integration-recommendations)"},
-				{ a: "(https://github.com/searchspring/snap/blob/main/docs/INTEGRATION_LEGACY_RECOMMENDATIONS.md)", b: "(#/integration-legacy-recommendations)"},
-
-
-				{ a: "(https://github.com/searchspring/snap/tree/main/packages/snap-client)", b: "(#/package-client)"},
-				{ a: "(https://github.com/searchspring/snap/tree/main/packages/snap-store-mobx)", b: "(#/package-storeMobx)"},
-				{ a: "(https://github.com/searchspring/snap/tree/main/packages/snap-url-manager)", b: "(#/package-urlManager)"},
-				{ a: "(https://github.com/searchspring/snap/tree/main/packages/snap-url-manager/src/Translators/Url)", b: "(#/package-urlManager-translators-url)"},
-				{ a: "(https://github.com/searchspring/snap/tree/main/packages/snap-event-manager)", b: "(#/package-eventManager)"},
-				{ a: "(https://github.com/searchspring/snap/tree/main/packages/snap-profiler)", b: "(#/package-profiler)"},
-				{ a: "(https://github.com/searchspring/snap/tree/main/packages/snap-platforms)", b: "(#/package-platforms)"},
-				{ a: "(https://github.com/searchspring/snap/tree/main/packages/snap-logger)", b: "(#/package-logger)"},
-				{ a: "(https://github.com/searchspring/snap/tree/main/packages/snap-controller)", b: "(#/package-controller)"},
-				{ a: "(https://github.com/searchspring/snap/tree/main/packages/snap-toolbox)", b: "(#/package-toolbox)"},
-				{ a: "(https://github.com/searchspring/snap/tree/main/packages/snap-tracker)", b: "(#/package-tracker)"},
-				{ a: "(https://github.com/searchspring/snap/tree/main/packages/snap-preact-components)", b: "(#/components-preact)"},
-				{ a: "(https://github.com/searchspring/snap/tree/main/packages/snap-preact)", b: "(#/start-preact)"},
-				{ a: "(https://github.com/searchspring/snap/blob/main/packages/snap-preact/src/Instantiators/README.md)", b: "(#/package-preact-instantiator)"},
-				
-				{ a: "(https://github.com/searchspring/snap/tree/main/packages/snap-toolbox/src/DomTargeter)", b: "(#/package-toolbox-domTargeter)"},
-				{ a: "(https://github.com/searchspring/snap/tree/main/packages/snap-toolbox/src/getContext)", b: "(#/package-toolbox-getContext)"},
-				
-				{ a: "(https://github.com/searchspring/snap/tree/main/packages/snap-store-mobx/src/Storage)", b: "(#/package-storeMobx-storage)"},
-				{ a: "(https://github.com/searchspring/snap/tree/main/packages/snap-store-mobx/src/Search)", b: "(#/package-storeMobx-search)"},
-				{ a: "(https://github.com/searchspring/snap/tree/main/packages/snap-store-mobx/src/Autocomplete)", b: "(#/package-storeMobx-autocomplete)"},
-				{ a: "(https://github.com/searchspring/snap/tree/main/packages/snap-store-mobx/src/Recommendation)", b: "(#/package-storeMobx-recommendation)"},
-				{ a: "(https://github.com/searchspring/snap/tree/main/packages/snap-store-mobx/src/Finder)", b: "(#/package-storeMobx-finder)"},
-				{ a: "(https://github.com/searchspring/snap/tree/main/packages/snap-store-mobx/src/Abstract)", b: "(#/package-storeMobx-abstract)"},
-
-				{ a: "(https://github.com/searchspring/snap/tree/main/packages/snap-controller/src/Abstract)", b: "(#/package-controller-abstract)" },
-				{ a: "(https://github.com/searchspring/snap/tree/main/packages/snap-controller/src/Search)", b: "(#/package-controller-search)" },
-				{ a: "(https://github.com/searchspring/snap/tree/main/packages/snap-controller/src/Autocomplete)", b: "(#/package-controller-autocomplete)" },
-				{ a: "(https://github.com/searchspring/snap/tree/main/packages/snap-controller/src/Recommendation)", b: "(#/package-controller-recommendation)" },
-				{ a: "(https://github.com/searchspring/snap/tree/main/packages/snap-controller/src/Finder)", b: "(#/package-controller-finder)" },
-
-				{ a: "(https://github.com/searchspring/snap/tree/main/packages/snap-platforms/bigcommerce)", b: "(#/package-platforms-bigcommerce)" },
-				{ a: "(https://github.com/searchspring/snap/tree/main/packages/snap-platforms/magento2)", b: "(#/package-platforms-magento2)" },
-				{ a: "(https://github.com/searchspring/snap/tree/main/packages/snap-platforms/shopify)", b: "(#/package-platforms-shopify)" },
-
-				{ a: "(https://github.com/searchspring/snap/tree/main/packages/snap-url-manager/src/Translators)", b: "(#/package-urlManager-translators)" },
-				{ a: "(https://github.com/searchspring/snap/tree/main/packages/snap-url-manager/src/linkers)", b: "(#/package-urlManager-linkers)" },
-				{ a: "(https://github.com/searchspring/snap/tree/main/packages/snap-url-manager/src/Translators/Url)", b: "(#/package-urlManager-translators-url)"},
-				{ a: "(https://github.com/searchspring/snap/tree/main/packages/snap-url-manager/src/Translators/QueryString)", b: "(#/package-urlManager-translators-queryString)"},
-				{ a: "(https://github.com/searchspring/snap/tree/main/packages/snap-url-manager/src/linkers/react)", b: "(#/package-urlManager-linkers-react)"},
-
-				{ a: "(https://searchspring.github.io/snap/)", b: "(#/)"},
-			];
-			replaces.forEach(function(replace) {
-				markdown = markdown.replaceAll(replace.a, replace.b);
+		function flattenDocumentLinks(docs) {
+			const flattened = [];
+			function traverse(links) {
+				if (!Array.isArray(links)) return;
+				links.forEach(link => {
+					flattened.push(link);
+					if (link.links && Array.isArray(link.links)) {
+						traverse(link.links);
+					}
+				});
+			}
+			docs.forEach(doc => {
+				if (doc.links && Array.isArray(doc.links)) {
+					traverse(doc.links);
+				}
 			});
-			return markdown
+			return flattened;
 		}
 		
 		import('./docs/documents.js').then(function (_) {
 			const documents = _.default;
+			const replaces = flattenDocumentLinks(documents)
+				.filter(link => link.type === 'markdown')
+				.map(link => {
+					const urls = Array.isArray(link.url) ? link.url : [link.url];
+					return urls.map(url => {
+						const transformedUrl = url.replace('./', 'https://github.com/searchspring/snap/blob/main/')
+						return { a: `(${transformedUrl})`, b: `(#${link.route})` }
+					})
+				})
+				.flat()
+				.concat([
+					// other links
+				]);
+			
+			const modifyLinks = (markdown) => {
+				replaces.forEach(function(replace) {
+					markdown = markdown.replaceAll(replace.a, replace.b);
+				});
+				return markdown
+			}
 			const App = {
 				data() {
 					return {
@@ -111,6 +84,13 @@
 								link?.links?.forEach((sublink) => {
 									if (sublink.route) {
 										acc[sublink.route] = sublink;
+									}
+									if (sublink?.links) {
+										sublink.links.forEach((subsublink) => {
+											if (subsublink.route) {
+												acc[subsublink.route] = subsublink;
+											}
+										})
 									}
 								})
 							});
@@ -224,11 +204,20 @@
 				},
 				methods: {
 					async getMarkdown(file) {
-						this.markdown = '';
-						const response = await fetch(file);
-						let text = await response.text()
-						this.iframe = "";
-						this.markdown = modifyLinks(text);
+						if (Array.isArray(file)) {
+							this.markdown = '';
+							file.forEach(async (file) => {
+								const response = await fetch(file);
+								let text = await response.text()
+								this.markdown += '\n' + modifyLinks(text);
+							});
+						} else {
+							this.markdown = '';
+							const response = await fetch(file);
+							let text = await response.text()
+							this.iframe = "";
+							this.markdown = modifyLinks(text);
+						}
 					}
 				}
 			});
@@ -268,7 +257,12 @@
 						if (link?.route) {
 							const includedRoutes = [link.route];
 
-							link.links?.forEach(sublink => includedRoutes.push(sublink.route));
+							link.links?.forEach(sublink => {
+								includedRoutes.push(sublink.route);
+								if (sublink?.links) {
+									sublink.links.forEach(subsublink => includedRoutes.push(subsublink.route));
+								}
+							});
 
 							return includedRoutes.includes(this.currentRoute);
 						}
@@ -296,6 +290,11 @@
 										<ul v-if="link.links && inRoute(link)" class="sublinks">
 											<li v-for="sublink in link.links">
 												<Link :link="sublink" :active="inRoute(sublink)"/>
+												<ul v-if="sublink?.links && inRoute(sublink)" class="sublinks">
+													<li v-for="subsublink in sublink.links">
+														<Link :link="subsublink" :active="inRoute(subsublink)"/>
+													</li>
+												</ul>
 											</li>
 										</ul>
 									</li>
