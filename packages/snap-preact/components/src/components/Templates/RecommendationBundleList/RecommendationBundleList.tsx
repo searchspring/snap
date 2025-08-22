@@ -247,7 +247,7 @@ export const CTASlot = observer((props: BundledCTAProps): JSX.Element => {
 					{...subProps.button}
 					disabled={cartStore.items.length == 0}
 					disableStyles
-					className={classNames(`${classNamePrefix}__wrapper__cta__button`, {
+					internalClassName={classNames(`${classNamePrefix}__wrapper__cta__button`, {
 						[`${classNamePrefix}__wrapper__cta__button--added`]: addedToCart,
 					})}
 					aria-live={addedToCart}

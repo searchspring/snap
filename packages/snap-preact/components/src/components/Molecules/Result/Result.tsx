@@ -103,6 +103,7 @@ export const Result = observer((properties: ResultProps): JSX.Element => {
 		fallback,
 		disableStyles,
 		className,
+		internalClassName,
 		layout,
 		onClick,
 		controller,
@@ -123,7 +124,7 @@ export const Result = observer((properties: ResultProps): JSX.Element => {
 	const subProps: ResultSubProps = {
 		price: {
 			// global theme
-			className: 'ss__result__price',
+			internalClassName: 'ss__result__price',
 			...defined({
 				disableStyles,
 			}),
@@ -133,7 +134,7 @@ export const Result = observer((properties: ResultProps): JSX.Element => {
 		},
 		calloutBadge: {
 			// default props
-			className: 'ss__result__callout-badge',
+			internalClassName: 'ss__result__callout-badge',
 			result,
 			// inherited props
 			...defined({
@@ -145,7 +146,7 @@ export const Result = observer((properties: ResultProps): JSX.Element => {
 		},
 		overlayBadge: {
 			// default props
-			className: 'ss__result__overlay-badge',
+			internalClassName: 'ss__result__overlay-badge',
 			result,
 			controller: controller as SearchController | AutocompleteController | RecommendationController,
 			// inherited props
@@ -158,7 +159,7 @@ export const Result = observer((properties: ResultProps): JSX.Element => {
 		},
 		image: {
 			// default props
-			className: 'ss__result__image',
+			internalClassName: 'ss__result__image',
 			alt: core?.name || '',
 			src: core?.imageUrl || '',
 			// inherited props
@@ -172,7 +173,7 @@ export const Result = observer((properties: ResultProps): JSX.Element => {
 		},
 		rating: {
 			// default props
-			className: 'ss__result__rating',
+			internalClassName: 'ss__result__rating',
 			value: core?.rating || 0,
 			count: Number(core?.ratingCount || 0),
 			// inherited props
@@ -185,7 +186,7 @@ export const Result = observer((properties: ResultProps): JSX.Element => {
 		},
 		button: {
 			// default props
-			className: 'ss__result__button--addToCart',
+			internalClassName: 'ss__result__button--addToCart',
 			onClick: (e) => {
 				setAddedToCart(true);
 
@@ -234,7 +235,7 @@ export const Result = observer((properties: ResultProps): JSX.Element => {
 		<CacheProvider>
 			<article
 				{...styling}
-				className={classnames('ss__result', `ss__result--${layout}`, { 'ss__result--sale': isOnSale }, className)}
+				className={classnames('ss__result', `ss__result--${layout}`, { 'ss__result--sale': isOnSale }, className, internalClassName)}
 				ref={trackingRef}
 			>
 				{!hideImage || !hideBadge ? (

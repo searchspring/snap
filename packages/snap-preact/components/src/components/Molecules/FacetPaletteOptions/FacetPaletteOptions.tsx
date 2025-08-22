@@ -182,6 +182,7 @@ export const FacetPaletteOptions = observer((properties: FacetPaletteOptionsProp
 		horizontal,
 		disableStyles,
 		className,
+		internalClassName,
 		treePath,
 	} = props;
 
@@ -192,7 +193,7 @@ export const FacetPaletteOptions = observer((properties: FacetPaletteOptionsProp
 	const subProps: FacetPaletteOptionsSubProps = {
 		icon: {
 			// default props
-			className: 'ss__facet-palette-options__icon',
+			internalClassName: 'ss__facet-palette-options__icon',
 			// inherited props
 			...defined({
 				disableStyles,
@@ -206,7 +207,7 @@ export const FacetPaletteOptions = observer((properties: FacetPaletteOptionsProp
 		},
 		checkbox: {
 			// default props
-			className: 'ss__facet-palette-options__checkbox',
+			internalClassName: 'ss__facet-palette-options__checkbox',
 			// inherited props
 			...defined({
 				disableStyles,
@@ -223,7 +224,10 @@ export const FacetPaletteOptions = observer((properties: FacetPaletteOptionsProp
 
 	return facetValues?.length ? (
 		<CacheProvider>
-			<div {...styling} className={classnames('ss__facet-palette-options', `ss__facet-palette-options--${layout?.toLowerCase()}`, className)}>
+			<div
+				{...styling}
+				className={classnames('ss__facet-palette-options', `ss__facet-palette-options--${layout?.toLowerCase()}`, className, internalClassName)}
+			>
 				{(facetValues as FacetValue[]).map((value) => {
 					//initialize lang
 					const defaultLang = {

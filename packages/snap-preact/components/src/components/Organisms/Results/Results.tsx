@@ -94,13 +94,13 @@ export const Results = observer((properties: ResultsProps): JSX.Element => {
 		};
 	}
 
-	const { disableStyles, className, layout, theme, controller, treePath } = props;
+	const { disableStyles, className, internalClassName, layout, theme, controller, treePath } = props;
 	let { resultComponent } = props;
 
 	const subProps: ResultsSubProps = {
 		result: {
 			// default props
-			className: 'ss__results__result',
+			internalClassName: 'ss__results__result',
 			// inherited props
 			...defined({
 				disableStyles,
@@ -111,7 +111,7 @@ export const Results = observer((properties: ResultsProps): JSX.Element => {
 		},
 		inlineBanner: {
 			// default props
-			className: 'ss__results__inline-banner',
+			internalClassName: 'ss__results__inline-banner',
 			// inherited props
 			...defined({
 				disableStyles,
@@ -141,7 +141,7 @@ export const Results = observer((properties: ResultsProps): JSX.Element => {
 
 	return results?.length ? (
 		<CacheProvider>
-			<div {...styling} className={classnames('ss__results', `ss__results-${props.layout}`, className)}>
+			<div {...styling} className={classnames('ss__results', `ss__results-${props.layout}`, className, internalClassName)}>
 				{results.map((result) =>
 					(() => {
 						switch (result.type) {

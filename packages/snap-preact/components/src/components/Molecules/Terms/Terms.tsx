@@ -86,7 +86,7 @@ export const Terms = observer((properties: TermsProps): JSX.Element => {
 	};
 
 	const props = mergeProps('terms', globalTheme, defaultProps, properties);
-	const { title, onTermClick, limit, previewOnHover, emIfy, className, controller } = props;
+	const { title, onTermClick, limit, previewOnHover, emIfy, className, internalClassName, controller } = props;
 	const currentInput = controller?.store?.state?.input;
 	const terms = props.terms;
 
@@ -116,7 +116,7 @@ export const Terms = observer((properties: TermsProps): JSX.Element => {
 
 	return termsToShow?.length ? (
 		<CacheProvider>
-			<div {...styling} className={classnames('ss__terms', className)}>
+			<div {...styling} className={classnames('ss__terms', className, internalClassName)}>
 				{title ? (
 					<div className="ss__terms__title">
 						<h5 {...mergedTitleLang.title.all}></h5>

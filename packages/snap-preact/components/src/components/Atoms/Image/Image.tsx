@@ -43,7 +43,7 @@ export function Image(properties: ImageProps): JSX.Element {
 
 	const props = mergeProps('image', globalTheme, defaultProps, properties);
 
-	const { alt, src, fallback, hoverSrc, lazy, onMouseOver, onMouseOut, onError, onLoad, onClick, className } = props;
+	const { alt, src, fallback, hoverSrc, lazy, onMouseOver, onMouseOut, onError, onLoad, onClick, className, internalClassName } = props;
 
 	const [visibile, setVisibile] = useState(false);
 	const [isHovering, setHover] = useState(false);
@@ -60,7 +60,7 @@ export function Image(properties: ImageProps): JSX.Element {
 
 	return (
 		<CacheProvider>
-			<div {...styling} className={classnames('ss__image', { 'ss__image--hidden': !visibile }, className)}>
+			<div {...styling} className={classnames('ss__image', { 'ss__image--hidden': !visibile }, className, internalClassName)}>
 				<img
 					src={(isHovering ? hoverSrc : src) || fallback}
 					alt={alt}

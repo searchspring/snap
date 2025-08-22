@@ -34,13 +34,13 @@ export const BadgeRectangle = observer((properties: BadgeRectangleProps): JSX.El
 
 	const props = mergeProps('badgeRectangle', globalTheme, defaultProps, properties);
 
-	const { value, tag, className } = props;
+	const { value, tag, className, internalClassName } = props;
 
 	const styling = mergeStyles<BadgeRectangleProps>(props, defaultStyles);
 
 	return value ? (
 		<CacheProvider>
-			<div {...styling} className={classnames('ss__badge-rectangle', `ss__badge-rectangle--${tag}`, className)}>
+			<div {...styling} className={classnames('ss__badge-rectangle', `ss__badge-rectangle--${tag}`, className, internalClassName)}>
 				<span className="ss__badge-rectangle__value">{value}</span>
 			</div>
 		</CacheProvider>

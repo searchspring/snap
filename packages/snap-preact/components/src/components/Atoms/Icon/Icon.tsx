@@ -42,6 +42,7 @@ export function Icon(properties: IconProps): JSX.Element {
 		viewBox,
 		disableStyles,
 		className,
+		internalClassName,
 		style: _,
 		styleScript: __,
 		themeStyleScript: ___,
@@ -58,7 +59,7 @@ export function Icon(properties: IconProps): JSX.Element {
 		<CacheProvider>
 			<svg
 				{...styling}
-				className={classnames('ss__icon', icon ? `ss__icon--${icon}` : null, className)}
+				className={classnames('ss__icon', icon ? `ss__icon--${icon}` : null, className, internalClassName)}
 				viewBox={viewBox}
 				xmlns="http://www.w3.org/2000/svg"
 				width={disableStyles ? width || size : undefined}

@@ -253,12 +253,12 @@ export const BranchOverride = (properties: BranchOverrideProps): JSX.Element => 
 
 	const props = mergeProps('branchOverride', globalTheme, defaultProps, properties);
 
-	const { branch, details, error, className, darkMode, disableStyles, onRemoveClick, treePath } = props;
+	const { branch, details, error, className, internalClassName, darkMode, disableStyles, onRemoveClick, treePath } = props;
 
 	const subProps: BranchOverrideSubProps = {
 		icon: {
 			// default props
-			className: 'ss__branch-override__bottom__left__icon',
+			internalClassName: 'ss__branch-override__bottom__left__icon',
 			size: '12px',
 			// inherited props
 			...defined({
@@ -289,7 +289,8 @@ export const BranchOverride = (properties: BranchOverrideProps): JSX.Element => 
 				'ss__branch-override',
 				componentThemes[themeName as keyof typeof componentThemes].class,
 				{ 'ss__branch-override--collapsed': collapsed },
-				className
+				className,
+				internalClassName
 			)}
 			{...styling}
 			onClick={(e) => {

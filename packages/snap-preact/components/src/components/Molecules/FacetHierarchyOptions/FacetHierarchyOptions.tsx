@@ -108,11 +108,24 @@ export const FacetHierarchyOptions = observer((properties: FacetHierarchyOptions
 
 	const props = mergeProps('facetHierarchyOptions', globalTheme, defaultProps, properties);
 
-	const { values, hideCount, returnIcon, onClick, previewOnFocus, horizontal, valueProps, facet, disableStyles, treePath, className } = props;
+	const {
+		values,
+		hideCount,
+		returnIcon,
+		onClick,
+		previewOnFocus,
+		horizontal,
+		valueProps,
+		facet,
+		disableStyles,
+		treePath,
+		className,
+		internalClassName,
+	} = props;
 
 	const subProps: FacetHierarchySubProps = {
 		icon: {
-			className: 'ss__facet-hierarchy-options__icon',
+			internalClassName: 'ss__facet-hierarchy-options__icon',
 			// default props
 			// inherited props
 			...defined({
@@ -130,7 +143,10 @@ export const FacetHierarchyOptions = observer((properties: FacetHierarchyOptions
 
 	return facetValues?.length ? (
 		<CacheProvider>
-			<div {...styling} className={classnames('ss__facet-hierarchy-options', { 'ss__facet-hierarchy-options--horizontal': horizontal }, className)}>
+			<div
+				{...styling}
+				className={classnames('ss__facet-hierarchy-options', { 'ss__facet-hierarchy-options--horizontal': horizontal }, className, internalClassName)}
+			>
 				{(facetValues as FacetHierarchyValue[]).map((value) => {
 					//initialize lang
 					const defaultLang = {

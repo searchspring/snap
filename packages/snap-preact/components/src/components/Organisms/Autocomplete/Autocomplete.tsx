@@ -352,6 +352,7 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 		// templates,
 		disableStyles,
 		className,
+		internalClassName,
 		controller,
 		treePath,
 	} = props;
@@ -369,7 +370,7 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 		},
 		banner: {
 			// default props
-			className: 'ss__autocomplete__banner',
+			internalClassName: 'ss__autocomplete__banner',
 			// inherited props
 			...defined({
 				disableStyles,
@@ -380,7 +381,7 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 		},
 		results: {
 			// default props
-			className: 'ss__autocomplete__results',
+			internalClassName: 'ss__autocomplete__results',
 			breakpoints: props.breakpoints,
 			resultComponent: resultComponent,
 			// inherited props
@@ -393,7 +394,7 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 		},
 		icon: {
 			// default props
-			className: 'ss__autocomplete__icon',
+			internalClassName: 'ss__autocomplete__icon',
 			icon: 'angle-right',
 			size: '10px',
 			// inherited props
@@ -529,7 +530,7 @@ export const Autocomplete = observer((properties: AutocompleteProps): JSX.Elemen
 		<CacheProvider>
 			<div
 				{...styling}
-				className={classnames('ss__autocomplete', className, {
+				className={classnames('ss__autocomplete', className, internalClassName, {
 					'ss__autocomplete--only-terms': onlyTerms,
 					'ss__autocomplete--vertical': vertical,
 					'ss__autocomplete--no-results': noResults,

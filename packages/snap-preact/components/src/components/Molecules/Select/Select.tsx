@@ -118,13 +118,14 @@ export const Select = observer((properties: SelectProps): JSX.Element => {
 		stayOpenOnSelection,
 		disableStyles,
 		className,
+		internalClassName,
 		treePath,
 	} = props;
 	let { options } = props;
 
 	const subProps: SelectSubProps = {
 		dropdown: {
-			className: 'ss__select__dropdown',
+			internalClassName: 'ss__select__dropdown',
 			// inherited props
 			...defined({
 				disableStyles,
@@ -136,7 +137,7 @@ export const Select = observer((properties: SelectProps): JSX.Element => {
 		},
 		button: {
 			// default props
-			className: 'ss__select__dropdown__button',
+			internalClassName: 'ss__select__dropdown__button',
 			// inherited props
 			...defined({
 				disableStyles,
@@ -151,7 +152,7 @@ export const Select = observer((properties: SelectProps): JSX.Element => {
 		},
 		icon: {
 			// default props
-			className: 'ss__select__dropdown__button__icon',
+			internalClassName: 'ss__select__dropdown__button__icon',
 			// inherited props
 			...defined({
 				disableStyles,
@@ -234,7 +235,10 @@ export const Select = observer((properties: SelectProps): JSX.Element => {
 	// options can be an Array or ObservableArray - but should have length
 	return typeof options == 'object' && options?.length ? (
 		<CacheProvider>
-			<div {...styling} className={classnames('ss__select', { 'ss__select--native': native }, { 'ss__select--disabled': disabled }, className)}>
+			<div
+				{...styling}
+				className={classnames('ss__select', { 'ss__select--native': native }, { 'ss__select--disabled': disabled }, className, internalClassName)}
+			>
 				{native ? (
 					<>
 						{(label || lang.buttonLabel.value) && !hideLabel && !hideLabelOnSelection && (

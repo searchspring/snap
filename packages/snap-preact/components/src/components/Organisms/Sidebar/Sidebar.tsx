@@ -37,7 +37,7 @@ export const Sidebar = observer((properties: SidebarProps): JSX.Element => {
 
 	const props = mergeProps('sidebar', globalTheme, defaultProps, properties);
 
-	const { controller, layout, hideTitleText, titleText, sticky, disableStyles, className, treePath } = props;
+	const { controller, layout, hideTitleText, titleText, sticky, disableStyles, className, internalClassName, treePath } = props;
 
 	const styling = mergeStyles<SidebarProps>(props, defaultStyles);
 
@@ -70,7 +70,7 @@ export const Sidebar = observer((properties: SidebarProps): JSX.Element => {
 	const hasChildrenToRender = layout?.length;
 	return controller?.store?.loaded && controller?.store?.pagination?.totalResults > 0 && hasChildrenToRender ? (
 		<CacheProvider>
-			<div {...styling} className={classnames('ss__sidebar', className, { 'ss__sidebar--sticky': sticky })}>
+			<div {...styling} className={classnames('ss__sidebar', className, internalClassName, { 'ss__sidebar--sticky': sticky })}>
 				{!hideTitleText ? (
 					<h4 className={classnames('ss__sidebar__title')} aria-atomic="true" aria-live="polite" {...mergedLang.titleText.all}>
 						{titleText}

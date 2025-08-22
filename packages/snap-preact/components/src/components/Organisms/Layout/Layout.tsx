@@ -60,7 +60,7 @@ export const Layout = observer((properties: LayoutProps): JSX.Element => {
 	};
 
 	const props = mergeProps('layout', globalTheme, defaultProps, properties);
-	const { controller, toggleSideBarButton, disableStyles, className, layout } = props;
+	const { controller, toggleSideBarButton, disableStyles, className, internalClassName, layout } = props;
 
 	delete props.treePath;
 
@@ -329,7 +329,7 @@ export const Layout = observer((properties: LayoutProps): JSX.Element => {
 
 	return hasChildrenToRender ? (
 		<CacheProvider>
-			<div {...styling} className={classnames('ss__layout', className)}>
+			<div {...styling} className={classnames('ss__layout', className, internalClassName)}>
 				{layout?.map((module) => {
 					if (Array.isArray(module)) {
 						return (

@@ -29,7 +29,7 @@ export const FacetToggle = observer((properties: FacetToggleProps): JSX.Element 
 
 	const props = mergeProps('facetToggle', globalTheme, defaultProps, properties);
 
-	const { label, onClick, disableStyles, className, style, styleScript, treePath } = props;
+	const { label, onClick, disableStyles, className, internalClassName, style, styleScript, treePath } = props;
 
 	const subProps: FacetToggleSubProps = {
 		Toggle: {
@@ -62,7 +62,7 @@ export const FacetToggle = observer((properties: FacetToggleProps): JSX.Element 
 
 	return value ? (
 		<CacheProvider>
-			<div {...styling} className={classnames('ss__facet-toggle', className)}>
+			<div {...styling} className={classnames('ss__facet-toggle', className, internalClassName)}>
 				<Toggle
 					{...subProps.Toggle}
 					label={label}

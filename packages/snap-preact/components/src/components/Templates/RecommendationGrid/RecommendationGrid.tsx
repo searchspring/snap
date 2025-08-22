@@ -63,7 +63,7 @@ export const RecommendationGrid = observer((properties: RecommendationGridProps)
 		};
 	}
 
-	const { disableStyles, title, resultComponent, trim, lazyRender, className, treePath, theme, controller } = props;
+	const { disableStyles, title, resultComponent, trim, lazyRender, className, internalClassName, treePath, theme, controller } = props;
 
 	const mergedlazyRender = {
 		enabled: true,
@@ -74,7 +74,7 @@ export const RecommendationGrid = observer((properties: RecommendationGridProps)
 	const subProps: RecommendationGridSubProps = {
 		result: {
 			// default props
-			className: 'ss__recommendation-grid__result',
+			internalClassName: 'ss__recommendation-grid__result',
 			// inherited props
 			...defined({
 				disableStyles,
@@ -117,7 +117,7 @@ export const RecommendationGrid = observer((properties: RecommendationGridProps)
 
 	return results?.length ? (
 		<CacheProvider>
-			<div {...styling} ref={recsRef} className={classnames('ss__recommendation-grid', className)}>
+			<div {...styling} ref={recsRef} className={classnames('ss__recommendation-grid', className, internalClassName)}>
 				{isVisible ? (
 					<RecommendationProfileTracker controller={controller}>
 						{title && <h3 className="ss__recommendation-grid__title">{title}</h3>}
