@@ -29,43 +29,6 @@ The `AutocompleteController` is used when making queries to the API `autocomplet
 | settings.variants.realtime.filters | specify which filters to use to determine which results are updated | ➖ |   | 
 | settings.variants.options | object keyed by individual option field values for configuration of any option settings  | ➖ |   | 
 
-<br>
-
-```typescript
-const autocompleteConfig = {
-	id: 'autocomplete',
-	selector: '#searchInput',
-	settings: {
-		syncInputs: true
-	},
-};
-```
-
-## Instantiate
-`AutocompleteController` requires an `AutocompleteControllerConfig` and `ControllerServices` object and is paired with an `AutocompleteStore`. The `AutocompleteStore` takes the same config, and shares the `UrlManager` service with the controller.
-
-```typescript
-import { AutocompleteController } from '@searchspring/snap-controller';
-import { Client } from '@searchspring/snap-client';
-import { AutocompleteStore } from '@searchspring/snap-store-mobx';
-import { UrlManager, UrlTranslator, reactLinker } from '@searchspring/snap-url-manager';
-import { EventManager } from '@searchspring/snap-event-manager';
-import { Profiler } from '@searchspring/snap-profiler';
-import { Logger } from '@searchspring/snap-logger';
-import { Tracker } from '@searchspring/snap-tracker';
-
-const autocompleteUrlManager = new UrlManager(new UrlTranslator(), reactLinker).detach();
-const autocompleteController = new AutocompleteController(autocompleteConfig, {
-		client: new Client(globals, clientConfig),
-		store: new AutocompleteStore(autocompleteConfig, { urlManager: autocompleteUrlManager }),
-		urlManager: autocompleteUrlManager,
-		eventManager: new EventManager(),
-		profiler: new Profiler(),
-		logger: new Logger(),
-		tracker: new Tracker(),
-	}
-));
-```
 
 ## Initialize
 Invoking the `init` method is required to subscribe to changes that occur in the UrlManager. This is typically done automatically prior to calling the first `search`.

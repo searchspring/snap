@@ -27,42 +27,6 @@ The `SearchController` is used when making queries to the API `search` endpoint.
 | settings.restorePosition.enabled | boolean to enable/disable using `restorePosition` event middleware to restore the window scroll position when navigating back to previous page (when using infinite this is automatically set to true) | false |   |
 | settings.restorePosition.onPageShow | boolean to enable/disable having restorePosition occur on the 'pageshow' window event (requires `restorePosition.enable`) | false |   |
 
-<br>
-
-```typescript
-const searchConfig = {
-	id: 'search',
-	globals: {
-		pagination: {
-			pageSize: 12
-		}
-	}
-};
-```
-## Instantiate
-`SearchController` requires a `SearchControllerConfig` and `ControllerServices` object and is paired with a `SearchStore`. The `SearchStore` takes the same config, and shares the `UrlManager` service with the controller.
-
-```typescript
-import { SearchController } from '@searchspring/snap-controller';
-import { Client } from '@searchspring/snap-client';
-import { SearchStore } from '@searchspring/snap-store-mobx';
-import { UrlManager, UrlTranslator, reactLinker } from '@searchspring/snap-url-manager';
-import { EventManager } from '@searchspring/snap-event-manager';
-import { Profiler } from '@searchspring/snap-profiler';
-import { Logger } from '@searchspring/snap-logger';
-import { Tracker } from '@searchspring/snap-tracker';
-
-const searchUrlManager = new UrlManager(new UrlTranslator(), reactLinker);
-const searchController = new SearchController(searchConfig, {
-	client: new Client({ siteId: 'abc123' }),
-	store: new SearchStore(searchConfig, { urlManager: searchUrlManager }),
-	urlManager: searchUrlManager,
-	eventManager: new EventManager(),
-	profiler: new Profiler(),
-	logger: new Logger(),
-	tracker: new Tracker(),
-});
-```
 
 ## Initialize
 Invoking the `init` method is required to subscribe to changes that occur in the UrlManager. This is typically done automatically prior to calling the first `search`.

@@ -1,22 +1,68 @@
-## Displaying Data
+# Search
 
-At this point you are ready to start building components that render data from the controller's store. Here are a few common store properties and suggested usage in components. If you have used Snapfu to start with a template, these component examples will already be included.
+To set up Search using Snap, we'll need to define a search controller in our Snap configuration. See SearchController section for all available configuration options.
 
-## All Stores
 
-All of the following properties are available on all stores (Search, Autocomplete, Finder, & Recommendations)
+```ts
+// src/index.ts
 
-### controller.store.loaded
+const snap = new Snap({
+    client: {
+		globals: {
+			siteId: 'abc123',
+		},
+	},
+    controllers: {
+        search: [
+            {
+                config: {
+                    id: 'search',
+                },
+                targeters: [
+                    {
+                        selector: '#searchspring-content',
+                        component: async () => {
+                            return (await import('./components/Content/Content')).Content;
+                        },
+                    },
+                ],
+            },
+        ],
+    },
+});
+```
 
-The `loaded` property will be true when the store has been loaded with data and is available to be consumed. This property is recommended to conditionally render a component.
+### Category Pages / Background Filters
+Optionally, apply filters from the page's content to the SearchControllerConfig `globals.filters` property. The controller globals are similar to the client globals in that all search requests will include the parameters specified. This can be used to configure category/brand pages, or other special filtering to apply to the current page's search requests.
 
-### controller.store.loading
+For example, if a global variable `snapConfig` exists on the page (must be defined prior to our Snap script):
 
-The `loading` property will be true is a network request is in progress. This property is recommended to conditionally render a loading status (ie. spinning icon or loading bar)
+```html
+<script>
+	const snapConfig = {
+		shopper: {
+			id: 'shopper@emailprovider.com'
+		},
+		category: {
+			name: 'Shirts',
+			value: 'Clothing/Shirts'
+		}
+	}
+</script>
+```
 
-### controller.store.custom
+```typescript
+// src/index.ts
 
-See [`custom` property](https://github.com/searchspring/snap/tree/main/packages/snap-store-mobx/src/Abstract)
+if (snapConfig?.category) {
+	searchConfig.globals.filters.push({
+		type: 'value',
+		background: true,
+		field: 'categories_hierarchy',
+		value: snapConfig.category.value,
+	});
+}
+```
 
 ## Search Store
 
@@ -413,55 +459,4 @@ export class FilterSummary extends Component {
 	}
 }
 ```
-
-
-## Autocomplete Store
-
-It is recommended to utlizing the `<Autocomplete/>` component from `@searchspring/snap-preact-components` to display Autocomplete.
-
-The following properties are specific to an Autocomplete Store via an Autocomplete Controller.
-
-### AutocompleteController.store.merchandising
-
-See `SearchController.store.merchandising` section above.
-
-### AutocompleteController.store.search
-
-The `search` property contains information about the current query. However unlike SearchController.store.search, AutocompleteController.store.search does not contain a `didYouMean` query. 
-
-
-### AutocompleteController.store.facets
-
-See `SearchController.store.facets` section above.
-
-In addition, each facet value will contain a `preview` method that should be invoked on the `onFocus` event of a facet value. This method will lock the current facets such that when the store is updated with the filtered results, the original facets do not get replaced with the new facets from the filtered query. 
-
-### AutocompleteController.store.filters
-
-See `SearchController.store.filters` section above.
-
-### AutocompleteController.store.results
-
-See `SearchController.store.results` section above.
-
-### AutocompleteController.store.terms
-
-The `terms` property contains an array of autocomplete terms that are relevant to the query. Each term contains a `preview` method that should be invoked on the `onFocus` event of a term value. This method will lock the current terms and unlock the previous facets (if changing terms with a facet filter applied) such that when the store is updated with the results for the new term, the original terms do not change.
-
-### AutocompleteController.store.trending
-
-The `trending` property contains an array of trending `terms`. Trending terms are not relevant to the current query and are generated from collected reporting data. It is recommended to display trending terms as a starting point when the `<input/>` is focused and does not yet contain a value. Trending terms must be enabled via settings in the AutocompleteController config.
-
-
-### AutocompleteController.store.pagination
-
-See `SearchController.store.pagination` section above.
-
-### AutocompleteController.store.sorting
-
-See `SearchController.store.sorting` section above.
-
-### AutocompleteController.store.history
-
-The `history` property contains an array of previously searched `terms`. Historical terms are not relevant to the current query and are stored in localstorage. Historical terms can be displayed in the Autocomplete component in place of or in addition to trending and suggested terms. Historical terms must be enabled via settings in the AutocompleteController config.
 
