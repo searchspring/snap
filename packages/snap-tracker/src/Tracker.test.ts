@@ -593,7 +593,17 @@ describe('Tracker', () => {
 		// @ts-ignore - Testing private method
 		const productId = tracker.getProductId(product);
 
-		expect(productId).toBe('product123'); // Expecting uid to be preferred
+		expect(productId).toBe(product.sku); // Expecting sku to be preferred
+	});
+
+	it('correctly handles product ID extraction with childUid and childSku', () => {
+		const tracker = new Tracker(globals, config);
+		const product = { uid: 'product123', childUid: 'child123', sku: 'sku456', childSku: 'child456' };
+
+		// @ts-ignore - Testing private method
+		const productId = tracker.getProductId(product);
+
+		expect(productId).toBe(product.childSku); // Expecting sku to be preferred
 	});
 
 	it('can get viewed products', () => {
