@@ -65,6 +65,7 @@ export const Dropdown = observer((properties: DropdownProps): JSX.Element => {
 		disableClickOutside,
 		disableA11y,
 		className,
+		internalClassName,
 		treePath,
 	} = props;
 
@@ -139,7 +140,7 @@ export const Dropdown = observer((properties: DropdownProps): JSX.Element => {
 		<CacheProvider>
 			<div
 				{...styling}
-				className={classnames('ss__dropdown', { 'ss__dropdown--open': dropdownOpen }, className)}
+				className={classnames('ss__dropdown', { 'ss__dropdown--open': dropdownOpen }, className, internalClassName)}
 				ref={innerRef as React.LegacyRef<HTMLDivElement>}
 				{...hoverProps}
 			>

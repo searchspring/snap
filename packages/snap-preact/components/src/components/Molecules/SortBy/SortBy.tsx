@@ -35,7 +35,7 @@ export const SortBy = observer((properties: SortByProps): JSX.Element => {
 
 	const props = mergeProps('sortBy', globalTheme, defaultProps, properties);
 
-	const { sorting, type, controller, hideLabel, disableStyles, className, treePath } = props;
+	const { sorting, type, controller, hideLabel, disableStyles, className, internalClassName, treePath } = props;
 	let label = props.label;
 
 	const store = sorting || controller?.store?.sorting;
@@ -96,7 +96,7 @@ export const SortBy = observer((properties: SortByProps): JSX.Element => {
 			{type?.toLowerCase() == 'dropdown' && (
 				<Select
 					{...styling}
-					className={classnames('ss__sortby', 'ss__sortby__select', className)}
+					className={classnames('ss__sortby', 'ss__sortby__select', className, internalClassName)}
 					{...subProps.Select}
 					label={label}
 					options={store.options}
@@ -113,7 +113,7 @@ export const SortBy = observer((properties: SortByProps): JSX.Element => {
 			{type?.toLowerCase() == 'list' && (
 				<List
 					{...styling}
-					className={classnames('ss__sortby', 'ss__sortby__list', className)}
+					className={classnames('ss__sortby', 'ss__sortby__list', className, internalClassName)}
 					{...subProps.List}
 					options={store.options}
 					selected={store.current}
@@ -130,7 +130,7 @@ export const SortBy = observer((properties: SortByProps): JSX.Element => {
 			{type?.toLowerCase() == 'radio' && (
 				<RadioList
 					{...styling}
-					className={classnames('ss__sortby', 'ss__sortby__radioList', className)}
+					className={classnames('ss__sortby', 'ss__sortby__radioList', className, internalClassName)}
 					{...subProps.RadioList}
 					options={store.options}
 					selected={store.current}

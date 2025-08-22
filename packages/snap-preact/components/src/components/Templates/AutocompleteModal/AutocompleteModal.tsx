@@ -100,7 +100,7 @@ export const AutocompleteModal = observer((properties: AutocompleteModalProps): 
 		buttonSelector = input;
 	}
 
-	const { layout, disableStyles, overlayColor, controller, renderInput, className, treePath } = props;
+	const { layout, disableStyles, overlayColor, controller, renderInput, className, internalClassName, treePath } = props;
 
 	const renderedInputRef: MutableRef<HTMLInputElement | null> = useRef(null);
 
@@ -124,7 +124,7 @@ export const AutocompleteModal = observer((properties: AutocompleteModalProps): 
 		},
 		modal: {
 			// default props
-			className: 'autocomplete-modal__modal',
+			internalClassName: 'autocomplete-modal__modal',
 			buttonSelector: buttonSelector,
 			onOverlayClick: () => reset(),
 			overlayColor: overlayColor,
@@ -139,7 +139,7 @@ export const AutocompleteModal = observer((properties: AutocompleteModalProps): 
 		},
 		searchInput: {
 			// default props
-			className: 'autocomplete-modal__search-input',
+			internalClassName: 'autocomplete-modal__search-input',
 			submitSearchButton: {
 				onClick: () => {
 					() => reset();
@@ -183,13 +183,14 @@ export const AutocompleteModal = observer((properties: AutocompleteModalProps): 
 	};
 	delete acProps.width;
 	delete acProps.className;
+	delete acProps.internalClassName;
 	delete acProps.style;
 	delete acProps.styleScript;
 	delete acProps.themeStyleScript;
 
 	return layout?.length && active ? (
 		<CacheProvider>
-			<div {...styling} className={classNames('ss__autocomplete-modal', className)}>
+			<div {...styling} className={classNames('ss__autocomplete-modal', className, internalClassName)}>
 				<Modal {...subProps.modal}>
 					<Fragment>
 						<div className="ss__autocomplete-modal__inner" ref={(e) => useA11y(e, 0, true, reset)}>

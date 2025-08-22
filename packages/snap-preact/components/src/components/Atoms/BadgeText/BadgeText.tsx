@@ -32,13 +32,13 @@ export const BadgeText = observer((properties: BadgeTextProps): JSX.Element => {
 
 	const props = mergeProps('badgeText', globalTheme, defaultProps, properties);
 
-	const { value, tag, className } = props;
+	const { value, tag, className, internalClassName } = props;
 
 	const styling = mergeStyles<BadgeTextProps>(props, defaultStyles);
 
 	return value ? (
 		<CacheProvider>
-			<div {...styling} className={classnames('ss__badge-text', `ss__badge-text--${tag}`, className)}>
+			<div {...styling} className={classnames('ss__badge-text', `ss__badge-text--${tag}`, className, internalClassName)}>
 				<span className="ss__badge-text__value">{value}</span>
 			</div>
 		</CacheProvider>

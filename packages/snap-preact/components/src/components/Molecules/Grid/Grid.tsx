@@ -140,6 +140,7 @@ export function Grid(properties: GridProps): JSX.Element {
 		disableStyles,
 		onOverflowButtonClick,
 		className,
+		internalClassName,
 		treePath,
 		disableA11y,
 	} = props;
@@ -147,7 +148,7 @@ export function Grid(properties: GridProps): JSX.Element {
 	const subProps: GridSubProps = {
 		image: {
 			// default props
-			className: 'ss__grid__image',
+			internalClassName: 'ss__grid__image',
 			// inherited props
 			...defined({
 				disableStyles,
@@ -264,7 +265,7 @@ export function Grid(properties: GridProps): JSX.Element {
 
 	return typeof options == 'object' && options?.length ? (
 		<CacheProvider>
-			<div {...styling} className={classnames('ss__grid', disabled ? 'ss__grid--disabled' : '', className)}>
+			<div {...styling} className={classnames('ss__grid', disabled ? 'ss__grid--disabled' : '', className, internalClassName)}>
 				{titleText && <h5 className="ss__grid__title">{titleText}</h5>}
 
 				<div className="ss__grid__options">

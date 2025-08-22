@@ -41,11 +41,11 @@ export const Breadcrumbs = observer((properties: BreadcrumbsProps): JSX.Element 
 
 	const props = mergeProps('breadcrumbs', globalTheme, defaultProps, properties);
 
-	const { data, separator, separatorIcon, className, controller, disableStyles, treePath } = props;
+	const { data, separator, separatorIcon, className, internalClassName, controller, disableStyles, treePath } = props;
 
 	const subProps: BreadcrumbsSubProps = {
 		icon: {
-			className: 'ss__breadcrumbs__separator__icon',
+			internalClassName: 'ss__breadcrumbs__separator__icon',
 			// default props
 			// inherited props
 			...defined({
@@ -68,7 +68,7 @@ export const Breadcrumbs = observer((properties: BreadcrumbsProps): JSX.Element 
 
 	return _data ? (
 		<CacheProvider>
-			<div {...styling} className={classnames('ss__breadcrumbs', className)}>
+			<div {...styling} className={classnames('ss__breadcrumbs', className, internalClassName)}>
 				<ul className="ss__breadcrumbs__crumbs">
 					{_data
 						.map<React.ReactNode>((crumb: any) => (

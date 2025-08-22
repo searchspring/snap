@@ -1,10 +1,10 @@
-import { h, Fragment } from 'preact';
-import { css, jsx } from '@emotion/react';
+import { h } from 'preact';
+import { css } from '@emotion/react';
 import { observer } from 'mobx-react-lite';
 
 import type { AbstractController, RecommendationController } from '@searchspring/snap-controller';
 import type { Product } from '@searchspring/snap-store-mobx';
-
+import classnames from 'classnames';
 import { Result, ResultProps } from '../../Molecules/Result';
 import { defined, mergeProps, mergeStyles } from '../../../utilities';
 import { Theme, ThemeComponent, useTheme } from '../../../providers';
@@ -30,12 +30,12 @@ export const RecommendationEmail = observer((properties: RecommendationEmailProp
 
 	const props = mergeProps('recommendationEmail', globalTheme, defaultProps, properties);
 
-	const { controller, results, resultComponent, resultProps, resultWidth, treePath, disableStyles } = props;
+	const { controller, results, resultComponent, resultProps, resultWidth, treePath, disableStyles, internalClassName, className } = props;
 
 	const subProps: RecommendationEmailSubProps = {
 		result: {
 			// default props
-			className: 'ss__recommendation-email__result',
+			internalClassName: 'ss__recommendation-email__result',
 			// inherited props
 			...defined({
 				disableStyles,
@@ -51,13 +51,12 @@ export const RecommendationEmail = observer((properties: RecommendationEmailProp
 	const resultsToRender = results || controller?.store?.results || [];
 
 	return resultsToRender.length > 0 ? (
-		<Fragment>
+		<div className={classnames('ss__recommendation-email', className, internalClassName)} {...styling}>
 			{resultsToRender.map((result, idx) => (
 				<div
 					key={idx}
 					id={`ss-emailrec${idx}`}
-					className="ss__recommendation-email__result-wrapper"
-					{...styling}
+					className={classnames('ss__recommendation-email__result-wrapper')}
 					style={{ display: 'block', width: resultWidth }}
 				>
 					{(() => {
@@ -86,7 +85,7 @@ export const RecommendationEmail = observer((properties: RecommendationEmailProp
 					})()}
 				</div>
 			))}
-		</Fragment>
+		</div>
 	) : (
 		<></>
 	);

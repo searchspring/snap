@@ -70,11 +70,11 @@ export const VariantSelection = observer((properties: VariantSelectionProps): JS
 
 	const props = mergeProps('variantSelection', globalTheme, defaultProps, properties);
 
-	const { type, selection, disableStyles, className, treePath } = props;
+	const { type, selection, disableStyles, className, internalClassName, treePath } = props;
 
 	const subProps: VariantSelectionSubProps = {
 		dropdown: {
-			className: 'ss__variant-selection__dropdown',
+			internalClassName: 'ss__variant-selection__dropdown',
 			// TODO: label doesnt exist on dropdown?
 			// label: selection.label || selection.field,
 			// inherited props
@@ -87,7 +87,7 @@ export const VariantSelection = observer((properties: VariantSelectionProps): JS
 		},
 		icon: {
 			// default props
-			className: 'ss__variant-selection__icon',
+			internalClassName: 'ss__variant-selection__icon',
 			size: '12px',
 			// inherited props
 			...defined({
@@ -99,7 +99,7 @@ export const VariantSelection = observer((properties: VariantSelectionProps): JS
 		},
 		list: {
 			titleText: selection.field,
-			className: 'ss__variant-selection__list',
+			internalClassName: 'ss__variant-selection__list',
 			multiSelect: false,
 			hideOptionCheckboxes: true,
 			onSelect: (e, option) => selection.select(option.value),
@@ -113,7 +113,7 @@ export const VariantSelection = observer((properties: VariantSelectionProps): JS
 			treePath,
 		},
 		swatches: {
-			className: 'ss__variant-selection__swatches',
+			internalClassName: 'ss__variant-selection__swatches',
 			onSelect: (e, option) => selection.select(option.value),
 			selected: selection.selected,
 			// inherited props
@@ -157,7 +157,13 @@ export const VariantSelection = observer((properties: VariantSelectionProps): JS
 		<CacheProvider>
 			<div
 				{...styling}
-				className={classnames('ss__variant-selection', `ss__variant-selection--${type}`, `ss__variant-selection--${selection.field}`, className)}
+				className={classnames(
+					'ss__variant-selection',
+					`ss__variant-selection--${type}`,
+					`ss__variant-selection--${selection.field}`,
+					className,
+					internalClassName
+				)}
 			>
 				{(() => {
 					switch (type) {

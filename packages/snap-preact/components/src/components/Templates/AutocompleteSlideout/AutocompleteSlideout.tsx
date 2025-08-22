@@ -62,7 +62,7 @@ export const AutocompleteSlideout = observer((properties: AutocompleteSlideoutPr
 		buttonSelector = input;
 	}
 
-	const { layout, disableStyles, slideDirection, controller, overlayColor, renderInput, className, treePath, width } = props;
+	const { layout, disableStyles, slideDirection, controller, overlayColor, renderInput, className, internalClassName, treePath, width } = props;
 
 	const renderedInputRef: MutableRef<HTMLInputElement | null> = useRef(null);
 
@@ -101,7 +101,7 @@ export const AutocompleteSlideout = observer((properties: AutocompleteSlideoutPr
 		},
 		searchInput: {
 			// default props
-			className: 'autocomplete-slideout__search-input',
+			internalClassName: 'autocomplete-slideout__search-input',
 			inputName: inputName,
 			submitSearchButton: {
 				onClick: () => {
@@ -150,6 +150,7 @@ export const AutocompleteSlideout = observer((properties: AutocompleteSlideoutPr
 	};
 	delete acProps.width;
 	delete acProps.className;
+	delete acProps.internalClassName;
 	delete acProps.style;
 	delete acProps.styleScript;
 	delete acProps.themeStyleScript;
@@ -160,7 +161,7 @@ export const AutocompleteSlideout = observer((properties: AutocompleteSlideoutPr
 			<Slideout
 				{...styling}
 				{...subProps.slideout}
-				className={classNames('ss__autocomplete-slideout', 'ss__autocomplete-slideout__slideout', className)}
+				className={classNames('ss__autocomplete-slideout', 'ss__autocomplete-slideout__slideout', className, internalClassName)}
 				active={active}
 			>
 				<div ref={(e) => useA11y(e, 0, true, reset)}>

@@ -316,12 +316,13 @@ export const AutocompleteLayout = observer((properties: AutocompleteLayoutProps)
 		templates,
 		disableStyles,
 		className,
+		internalClassName,
 		controller,
 		treePath,
 	} = props;
 	const subProps: AutocompleteSubProps = {
 		button: {
-			className: 'ss__autocomplete__button--see-more',
+			internalClassName: 'ss__autocomplete__button--see-more',
 			// default props
 			onClick: () => {
 				controller?.setFocused && controller.setFocused();
@@ -336,7 +337,7 @@ export const AutocompleteLayout = observer((properties: AutocompleteLayoutProps)
 			treePath: properties.treePath,
 		},
 		termsList: {
-			className: 'ss__autocomplete__terms-list',
+			internalClassName: 'ss__autocomplete__terms-list',
 			// default props
 			controller: controller,
 			// inherited props
@@ -347,7 +348,7 @@ export const AutocompleteLayout = observer((properties: AutocompleteLayoutProps)
 			treePath: properties.treePath,
 		},
 		terms: {
-			className: 'ss__autocomplete__terms',
+			internalClassName: 'ss__autocomplete__terms',
 			// default props
 			controller: controller,
 			// inherited props
@@ -380,7 +381,7 @@ export const AutocompleteLayout = observer((properties: AutocompleteLayoutProps)
 		},
 		banner: {
 			// default props
-			className: 'ss__autocomplete__banner',
+			internalClassName: 'ss__autocomplete__banner',
 			// inherited props
 			...defined({
 				disableStyles,
@@ -393,7 +394,7 @@ export const AutocompleteLayout = observer((properties: AutocompleteLayoutProps)
 			columns: 3,
 			rows: 2,
 			// default props
-			className: 'ss__autocomplete__results',
+			internalClassName: 'ss__autocomplete__results',
 			resultComponent: resultComponent,
 			// inherited props
 			...defined({
@@ -405,7 +406,7 @@ export const AutocompleteLayout = observer((properties: AutocompleteLayoutProps)
 		},
 		icon: {
 			// default props
-			className: 'ss__autocomplete__icon',
+			internalClassName: 'ss__autocomplete__icon',
 			icon: 'angle-right',
 			size: '10px',
 			// inherited props
@@ -710,7 +711,7 @@ export const AutocompleteLayout = observer((properties: AutocompleteLayoutProps)
 		<CacheProvider>
 			<div
 				{...styling}
-				className={classnames('ss__autocomplete', className)}
+				className={classnames('ss__autocomplete', className, internalClassName)}
 				onClick={(e) => e.stopPropagation()}
 				ref={(e) => useA11y(e, 0, false, reset)}
 			>

@@ -58,13 +58,14 @@ export const Pagination = observer((properties: PaginationProps): JSX.Element =>
 		lastButton,
 		disableStyles,
 		className,
+		internalClassName,
 		treePath,
 	} = props;
 
 	const subProps: PaginationSubProps = {
 		icon: {
 			// default props
-			className: 'ss__pagination__icon',
+			internalClassName: 'ss__pagination__icon',
 			size: '10px',
 			// inherited props
 			...defined({
@@ -116,7 +117,7 @@ export const Pagination = observer((properties: PaginationProps): JSX.Element =>
 
 	return pageNumbers && pageNumbers.length > 1 && store?.totalResults ? (
 		<CacheProvider>
-			<div {...styling} className={classnames('ss__pagination', className)}>
+			<div {...styling} className={classnames('ss__pagination', className, internalClassName)}>
 				<nav role="navigation" aria-label="Pagination">
 					{/* Prev */}
 					{store.previous && !hidePrev && (

@@ -126,7 +126,7 @@ type ThemeComponentOverrideOmittedProps =
 	| 'result'
 	| 'filter'
 	| 'lang'
-	| 'className'
+	| 'internalClassName'
 	| 'ref'
 	| 'snap'
 	| 'name'

@@ -128,13 +128,13 @@ export const ErrorHandler = observer((properties: ErrorHandlerProps): JSX.Elemen
 
 	const props = mergeProps('errorHandler', globalTheme, defaultProps, properties);
 
-	const { controller, error, disableStyles, onRetryClick, className, treePath } = props;
+	const { controller, error, disableStyles, onRetryClick, className, internalClassName, treePath } = props;
 
 	const subProps: ErrorHandlerSubProps = {
 		icon: {
 			// default props
 			size: '18px',
-			className: 'ss__error-handler__icon',
+			internalClassName: 'ss__error-handler__icon',
 			// inherited props
 			...defined({
 				disableStyles,
@@ -145,7 +145,7 @@ export const ErrorHandler = observer((properties: ErrorHandlerProps): JSX.Elemen
 		},
 		buttonRetry: {
 			// default props
-			className: 'ss__error-handler__button',
+			internalClassName: 'ss__error-handler__button',
 			icon: 'rotate-right',
 			// inherited props
 			...defined({
@@ -185,7 +185,7 @@ export const ErrorHandler = observer((properties: ErrorHandlerProps): JSX.Elemen
 
 	return Object.values(ErrorType).includes(errorObject?.type!) && errorObject?.message ? (
 		<CacheProvider>
-			<div className={classnames('ss__error-handler', `ss__error-handler--${errorObject.type}`, className)} {...styling}>
+			<div className={classnames('ss__error-handler', `ss__error-handler--${errorObject.type}`, className, internalClassName)} {...styling}>
 				{(() => {
 					switch (errorObject.type) {
 						case ErrorType.WARNING:

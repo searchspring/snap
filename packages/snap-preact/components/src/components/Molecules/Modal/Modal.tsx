@@ -70,6 +70,7 @@ export const Modal = observer((properties: ModalProps): JSX.Element => {
 		disableClickOutside,
 		disableA11y,
 		className,
+		internalClassName,
 		disableStyles,
 		overlayColor,
 		onOverlayClick,
@@ -79,7 +80,7 @@ export const Modal = observer((properties: ModalProps): JSX.Element => {
 	const subProps: ModalSubProps = {
 		overlay: {
 			// default props
-			className: 'ss__slideout__overlay',
+			internalClassName: 'ss__slideout__overlay',
 			onClick: (e) => {
 				onOverlayClick && onOverlayClick(e);
 				toggleShowContent();
@@ -153,7 +154,7 @@ export const Modal = observer((properties: ModalProps): JSX.Element => {
 		<CacheProvider>
 			<div
 				{...styling}
-				className={classnames('ss__modal', { 'ss__modal--open': showContent }, { 'ss__modal--disabled': disabled }, className)}
+				className={classnames('ss__modal', { 'ss__modal--open': showContent }, { 'ss__modal--disabled': disabled }, className, internalClassName)}
 				ref={innerRef as React.LegacyRef<HTMLDivElement>}
 			>
 				{!buttonSelector && button && (

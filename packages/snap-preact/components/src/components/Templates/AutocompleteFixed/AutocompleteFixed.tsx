@@ -89,7 +89,7 @@ export const AutocompleteFixed = observer((properties: AutocompleteFixedProps): 
 		buttonSelector = input;
 	}
 
-	const { layout, disableStyles, controller, renderInput, overlayColor, className, offset, treePath } = props;
+	const { layout, disableStyles, controller, renderInput, overlayColor, className, internalClassName, offset, treePath } = props;
 
 	const renderedInputRef: MutableRef<HTMLInputElement | null> = useRef(null);
 
@@ -113,7 +113,7 @@ export const AutocompleteFixed = observer((properties: AutocompleteFixedProps): 
 		},
 		modal: {
 			// default props
-			className: 'autocomplete-fixed__modal',
+			internalClassName: 'autocomplete-fixed__modal',
 			buttonSelector: buttonSelector,
 			lockScroll: false,
 			open: active,
@@ -127,7 +127,7 @@ export const AutocompleteFixed = observer((properties: AutocompleteFixedProps): 
 		},
 		overlay: {
 			// default props
-			className: 'autocomplete-fixed__overlay',
+			internalClassName: 'autocomplete-fixed__overlay',
 			color: overlayColor,
 			// inherited props
 			...defined({
@@ -139,7 +139,7 @@ export const AutocompleteFixed = observer((properties: AutocompleteFixedProps): 
 		},
 		searchInput: {
 			// default props
-			className: 'autocomplete-fixed__search-input',
+			internalClassName: 'autocomplete-fixed__search-input',
 			placeholderText: inputPlaceholderText || undefined,
 			submitSearchButton: {
 				onClick: () => {
@@ -213,13 +213,14 @@ export const AutocompleteFixed = observer((properties: AutocompleteFixedProps): 
 	};
 	delete acProps.width;
 	delete acProps.className;
+	delete acProps.internalClassName;
 	delete acProps.style;
 	delete acProps.styleScript;
 	delete acProps.themeStyleScript;
 
 	return layout?.length && active ? (
 		<CacheProvider>
-			<div {...styling} className={classNames('ss__autocomplete-fixed', className)}>
+			<div {...styling} className={classNames('ss__autocomplete-fixed', className, internalClassName)}>
 				<Modal {...subProps.modal}>
 					<Fragment>
 						<div className="ss__autocomplete-fixed__inner" ref={(e) => useA11y(e, 0, true, reset)}>
