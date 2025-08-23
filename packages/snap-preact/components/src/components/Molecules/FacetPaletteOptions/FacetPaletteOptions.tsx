@@ -285,12 +285,7 @@ export const FacetPaletteOptions = observer((properties: FacetPaletteOptionsProp
 										`ss__facet-palette-options__option__palette--${filters.handleize(value.value)}`
 									)}
 									style={{
-										background:
-											lowerCaseColorMapping &&
-											lowerCaseColorMapping[value.label.toLowerCase()] &&
-											lowerCaseColorMapping[value.label.toLowerCase()].background
-												? lowerCaseColorMapping[value.label.toLowerCase()].background
-												: value.value,
+										background: lowerCaseColorMapping?.[value.label.toLowerCase()]?.background ?? value.value,
 									}}
 								>
 									{!hideIcon && value.filtered && layout?.toLowerCase() == 'grid' && <Icon {...subProps.icon} />}
@@ -298,9 +293,7 @@ export const FacetPaletteOptions = observer((properties: FacetPaletteOptionsProp
 							</div>
 							{!hideLabel && (
 								<span className="ss__facet-palette-options__option__value">
-									{lowerCaseColorMapping && lowerCaseColorMapping[value.label.toLowerCase()] && lowerCaseColorMapping[value.label.toLowerCase()].label
-										? lowerCaseColorMapping[value.label.toLowerCase()].label
-										: value.label}
+									{lowerCaseColorMapping?.[value.label.toLowerCase()]?.label ?? value.label}
 								</span>
 							)}
 							{!hideCount && value?.count > 0 && <span className="ss__facet-palette-options__option__value__count">({value.count})</span>}

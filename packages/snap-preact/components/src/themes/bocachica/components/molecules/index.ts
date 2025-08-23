@@ -28,7 +28,6 @@ import { sortBy } from './sortBy';
 import { swatches } from './swatches';
 import { variantSelection } from './variantSelection';
 import { terms } from './terms';
-import { modal } from './modal';
 
 export const molecules: ThemeResponsiveComplete = {
 	default: {
@@ -59,7 +58,6 @@ export const molecules: ThemeResponsiveComplete = {
 		...swatches.default,
 		...variantSelection.default,
 		...terms.default,
-		...modal.default,
 	},
 	mobile: {
 		...carousel.mobile,
@@ -89,7 +87,6 @@ export const molecules: ThemeResponsiveComplete = {
 		...swatches.mobile,
 		...variantSelection.mobile,
 		...terms.mobile,
-		...modal.mobile,
 	},
 	tablet: {
 		...carousel.tablet,
@@ -119,7 +116,6 @@ export const molecules: ThemeResponsiveComplete = {
 		...swatches.tablet,
 		...variantSelection.tablet,
 		...terms.tablet,
-		...modal.tablet,
 	},
 	desktop: {
 		...carousel.desktop,
@@ -149,6 +145,5 @@ export const molecules: ThemeResponsiveComplete = {
 		...swatches.desktop,
 		...variantSelection.desktop,
 		...terms.desktop,
-		...modal.desktop,
 	},
 };

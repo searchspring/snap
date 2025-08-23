@@ -36,9 +36,6 @@ export const autocompleteFixedThemeComponentProps: ThemeComponent<'autocompleteF
 			columns: 4,
 			rows: 2,
 		},
-		'autocompleteFixed modal': {
-			overlayColor: '',
-		},
 	},
 	mobile: {
 		autocompleteFixed: {

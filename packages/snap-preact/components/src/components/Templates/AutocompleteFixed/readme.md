@@ -35,7 +35,7 @@ The `layout` prop is used to specify which child components render and where. Th
 
 There are also a few special module names - `c1`, `c2`, `c3`, `c4`, & `_` 
 
-All of the `Cx` modules represent Columns which also have their own layout array by default, and can be overwrote via their own layout props. IE - `c1` module can be overwrote via the `column1` prop. 
+All of the `cx` modules represent Columns which also have their own layout array by default, and can be overwrote via their own layout props. IE - `c1` module can be overwrote via the `column1` prop. 
 
 The `_` module is used a seperator module to center|left|right justify the other elements in the layout.
 
