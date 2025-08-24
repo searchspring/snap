@@ -117,31 +117,32 @@ export const Search = observer((properties: SearchProps): JSX.Element => {
 		);
 	};
 
+	const toggleSidebarButtonProps = {
+		onClick: () => {
+			setSidebarOpenState(!sidebarOpenState);
+			// need the timeout to allow the sidebar to open before focusing the first available element.
+			setTimeout(() => {
+				// focus the first available elem when toggling the sidebar open.
+				if (!sidebarOpenState) {
+					const firstAvailableElemToFocus = document.querySelector('.ss__sidebar')?.querySelector(FOCUSABLE_ELEMENTS) as HTMLElement;
+					if (firstAvailableElemToFocus) {
+						firstAvailableElemToFocus.focus();
+					}
+				}
+			});
+		},
+		children:
+			!hideToggleSidebarButton && store.loaded && !isMobile && (toggleSidebarButtonText || mergedLang.toggleSidebarButtonText?.value)
+				? ToggleSidebar
+				: undefined,
+	};
 	const subProps: SearchSubProps = {
 		TopToolbar: {
 			// default props
 			name: 'top',
 			internalClassName: `${classNamePrefix}__header-section__toolbar--top-toolbar`,
 			layout: [['banner.header'], ['searchHeader', '_', 'button.sidebar-toggle']],
-			toggleSideBarButton: {
-				onClick: () => {
-					setSidebarOpenState(!sidebarOpenState);
-					// need the timeout to allow the sidebar to open before focusing the first available element.
-					setTimeout(() => {
-						// focus the first available elem when toggling the sidebar open.
-						if (!sidebarOpenState) {
-							const firstAvailableElemToFocus = document.querySelector('.ss__sidebar')?.querySelector(FOCUSABLE_ELEMENTS) as HTMLElement;
-							if (firstAvailableElemToFocus) {
-								firstAvailableElemToFocus.focus();
-							}
-						}
-					});
-				},
-				children:
-					!hideToggleSidebarButton && store.loaded && !isMobile && (toggleSidebarButtonText || mergedLang.toggleSidebarButtonText?.value)
-						? ToggleSidebar
-						: undefined,
-			},
+			toggleSideBarButton: { ...toggleSidebarButtonProps },
 			...defined({
 				disableStyles,
 			}),
@@ -155,6 +156,7 @@ export const Search = observer((properties: SearchProps): JSX.Element => {
 			layout: isMobile
 				? [['mobileSidebar', '_', 'paginationInfo'], ['banner.banner']]
 				: [['sortBy', 'perPage', '_', 'paginationInfo'], ['banner.banner']],
+			toggleSideBarButton: { ...toggleSidebarButtonProps },
 			// inherited props
 			...defined({
 				disableStyles,
@@ -167,6 +169,7 @@ export const Search = observer((properties: SearchProps): JSX.Element => {
 			name: 'bottom',
 			internalClassName: `${classNamePrefix}__content__toolbar--bottom-toolbar`,
 			layout: [['banner.footer'], ['_', 'pagination']],
+			toggleSideBarButton: { ...toggleSidebarButtonProps },
 			// inherited props
 			...defined({
 				disableStyles,

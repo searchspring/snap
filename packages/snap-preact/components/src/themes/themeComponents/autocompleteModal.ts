@@ -9,6 +9,7 @@ export const autocompleteModalThemeComponentProps: ThemeComponent<'autocompleteM
 			limit: 6,
 			disableOverflow: true,
 			disableCollapse: true,
+			searchable: false,
 		},
 		'autocompleteModal facetGridOptions': {
 			// onClick: facetClickEvent,

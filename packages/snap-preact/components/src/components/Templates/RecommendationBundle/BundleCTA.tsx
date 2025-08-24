@@ -76,7 +76,7 @@ export const BundledCTA = observer((properties: BundledCTAProps): JSX.Element =>
 				<Fragment>
 					<div className={`${classNamePrefix}__wrapper__cta__subtotal`} aria-atomic="false" aria-live="polite">
 						{ctaIcon ? (
-							<div className="icon">
+							<div className={`${classNamePrefix}__wrapper__cta__subtotal__icon__wrapper`}>
 								<Icon {...subProps.icon} {...(typeof ctaIcon == 'string' ? { icon: ctaIcon } : (ctaIcon as Partial<IconProps>))} />
 							</div>
 						) : (

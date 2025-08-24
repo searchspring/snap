@@ -11,7 +11,6 @@ import { AutocompleteLayout, AutocompleteLayoutProps } from '../../Organisms/Aut
 import { Modal, ModalProps } from '../../Molecules/Modal';
 import classNames from 'classnames';
 import { SearchInput, SearchInputProps } from '../../Molecules/SearchInput';
-import { Overlay, OverlayProps } from '../../Atoms/Overlay';
 import { debounce } from '@searchspring/snap-toolbox';
 import { useA11y } from '../../../hooks';
 import { useAcRenderedInput } from '../../../hooks/useAcRenderedInput';
@@ -26,7 +25,7 @@ const defaultStyles: StyleScript<AutocompleteFixedProps & { inputBounds: inputBo
 		top: '0',
 		zIndex: 1001,
 
-		'& .ss__autocomplete-fixed__inner': {
+		'.ss__autocomplete-fixed__inner': {
 			position: 'absolute',
 			left: `calc(0px + ${offset?.left || 0}px)`,
 			top: `calc(0px + ${renderInput ? '0px' : `${inputBounds.height}px`} + ${offset?.top || 0}px)`,
@@ -41,16 +40,14 @@ const defaultStyles: StyleScript<AutocompleteFixedProps & { inputBounds: inputBo
 				border: '0px',
 			},
 		},
-		'& .ss__autocomplete-fixed__inner__layout-wrapper': {
+
+		'.ss__autocomplete-fixed__inner__layout-wrapper': {
 			width: width,
 			overflowY: 'scroll',
 			maxHeight: `calc(90vh - ${inputBounds.top || 0}px - ${renderInput ? `${inputBounds.height}px` : '0px'} + ${offset?.top || 0}px)`,
 		},
 
-		'& .ss__overlay': {
-			zIndex: 1000,
-		},
-		'& .ss__search-input__button--close-search-icon': {
+		'.ss__search-input__button--close-search-icon': {
 			border: 'none',
 		},
 	});
@@ -62,6 +59,7 @@ export const AutocompleteFixed = observer((properties: AutocompleteFixedProps): 
 	const defaultProps: Partial<AutocompleteFixedProps> = {
 		layout: [['c1', 'c2', 'c3']],
 		renderInput: true,
+		overlayColor: '',
 	};
 
 	const props = mergeProps('autocompleteFixed', globalTheme, defaultProps, properties);
@@ -116,21 +114,11 @@ export const AutocompleteFixed = observer((properties: AutocompleteFixedProps): 
 			internalClassName: 'autocomplete-fixed__modal',
 			buttonSelector: buttonSelector,
 			lockScroll: false,
+			onOverlayClick: reset,
 			open: active,
 			// inherited props
 			...defined({
-				disableStyles,
-			}),
-			// component theme overrides
-			theme: props?.theme,
-			treePath,
-		},
-		overlay: {
-			// default props
-			internalClassName: 'autocomplete-fixed__overlay',
-			color: overlayColor,
-			// inherited props
-			...defined({
+				overlayColor,
 				disableStyles,
 			}),
 			// component theme overrides
@@ -239,14 +227,6 @@ export const AutocompleteFixed = observer((properties: AutocompleteFixedProps): 
 								/>
 							</div>
 						</div>
-
-						<Overlay
-							{...subProps.overlay}
-							active={active}
-							onClick={() => {
-								reset();
-							}}
-						/>
 					</Fragment>
 				</Modal>
 			</div>
@@ -267,7 +247,6 @@ interface AutocompleteFixedSubProps {
 	autocompleteLayout: Partial<AutocompleteLayoutProps>;
 	modal: Partial<ModalProps>;
 	searchInput: Partial<SearchInputProps>;
-	overlay: Partial<OverlayProps>;
 }
 
 export interface AutocompleteFixedProps extends AutocompleteLayoutProps, ComponentProps {

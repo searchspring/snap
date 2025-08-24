@@ -342,10 +342,6 @@ export const Facet = observer((properties: FacetProps): JSX.Element => {
 	});
 	facetContentProps.lang = mergedLang;
 
-	if (justContent) {
-		return <FacetContent {...facetContentProps}></FacetContent>;
-	}
-
 	const selectedCount = (facet as ValueFacet)?.values?.filter((value) => value?.filtered).length;
 
 	return facet && renderFacet ? (
@@ -362,56 +358,60 @@ export const Facet = observer((properties: FacetProps): JSX.Element => {
 					((facet as ValueFacet)?.overflow?.remaining || 0) > 0 || facet?.display == 'slider' ? '' : 'ss__facet--showing-all'
 				)}
 			>
-				<Dropdown
-					{...subProps.dropdown}
-					open={disableCollapse || !facet?.collapsed}
-					onClick={() => !disableCollapse && facet.toggleCollapse && facet?.toggleCollapse()}
-					disableA11y={true}
-					button={
-						<div
-							className="ss__facet__header"
-							ref={(e) => useA11y(e, disableCollapse ? -1 : 0)}
-							role="heading"
-							aria-level={3}
-							{...mergedLang.dropdownButton.attributes}
-						>
-							<div className="ss__facet__header__inner">
-								<span {...mergedLang.dropdownButton.value}>{facet?.label}</span>
-								{showSelectedCount && selectedCount ? (
-									<span className="ss__facet__header__selected-count">{hideSelectedCountParenthesis ? selectedCount : `(${selectedCount})`}</span>
-								) : null}
-								{(mergedLang.clearAllText.value || clearAllIcon) && selectedCount ? (
-									<Button
-										{...subProps.button}
-										internalClassName="ss__facet__header__clear-all"
-										name={'reset-facet'}
-										onClick={(e) => {
-											e.stopPropagation();
-											facet?.clear.url.link.onClick();
-										}}
-										icon={clearAllIcon ? clearAllIcon : undefined}
-									>
-										{mergedLang.clearAllText.value && showClearAllText ? <label {...mergedLang.clearAllText.all}></label> : null}
-									</Button>
-								) : (
-									<></>
+				{justContent ? (
+					<FacetContent {...facetContentProps}></FacetContent>
+				) : (
+					<Dropdown
+						{...subProps.dropdown}
+						open={disableCollapse || !facet?.collapsed}
+						onClick={() => !disableCollapse && facet.toggleCollapse && facet?.toggleCollapse()}
+						disableA11y={true}
+						button={
+							<div
+								className="ss__facet__header"
+								ref={(e) => useA11y(e, disableCollapse ? -1 : 0)}
+								role="heading"
+								aria-level={3}
+								{...mergedLang.dropdownButton.attributes}
+							>
+								<div className="ss__facet__header__inner">
+									<span {...mergedLang.dropdownButton.value}>{facet?.label}</span>
+									{showSelectedCount && selectedCount ? (
+										<span className="ss__facet__header__selected-count">{hideSelectedCountParenthesis ? selectedCount : `(${selectedCount})`}</span>
+									) : null}
+									{(mergedLang.clearAllText.value || clearAllIcon) && selectedCount ? (
+										<Button
+											{...subProps.button}
+											internalClassName="ss__facet__header__clear-all"
+											name={'reset-facet'}
+											onClick={(e) => {
+												e.stopPropagation();
+												facet?.clear.url.link.onClick();
+											}}
+											icon={clearAllIcon ? clearAllIcon : undefined}
+										>
+											{mergedLang.clearAllText.value && showClearAllText ? <label {...mergedLang.clearAllText.all}></label> : null}
+										</Button>
+									) : (
+										<></>
+									)}
+								</div>
+								{!disableCollapse && (
+									<Icon
+										{...subProps.icon}
+										{...(facet?.collapsed
+											? { ...(typeof iconExpand == 'string' ? { icon: iconExpand } : (iconExpand as Partial<IconProps>)) }
+											: { ...(typeof iconCollapse == 'string' ? { icon: iconCollapse } : (iconCollapse as Partial<IconProps>)) })}
+										name={facet?.collapsed ? 'expand' : 'collapse'}
+										treePath={props.treePath}
+									/>
 								)}
 							</div>
-							{!disableCollapse && (
-								<Icon
-									{...subProps.icon}
-									{...(facet?.collapsed
-										? { ...(typeof iconExpand == 'string' ? { icon: iconExpand } : (iconExpand as Partial<IconProps>)) }
-										: { ...(typeof iconCollapse == 'string' ? { icon: iconCollapse } : (iconCollapse as Partial<IconProps>)) })}
-									name={facet?.collapsed ? 'expand' : 'collapse'}
-									treePath={props.treePath}
-								/>
-							)}
-						</div>
-					}
-				>
-					<FacetContent {...facetContentProps}></FacetContent>
-				</Dropdown>
+						}
+					>
+						<FacetContent {...facetContentProps}></FacetContent>
+					</Dropdown>
+				)}
 			</div>
 		</CacheProvider>
 	) : (

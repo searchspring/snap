@@ -739,7 +739,8 @@ type BundleCarouselProps = {
 	controller?: RecommendationController;
 	enabled?: boolean;
 	seedInCarousel?: boolean;
-} & Partial<CarouselProps>;
+	slidesPerView?: number;
+} & Partial<Omit<CarouselProps, 'slidesPerView'>>;
 
 export interface RecommendationBundleProps extends ComponentProps {
 	controller: RecommendationController;

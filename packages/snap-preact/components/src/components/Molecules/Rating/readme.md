@@ -18,40 +18,40 @@ The `value` prop is required and expects a number between 0 and 5.
 The `count` prop specifies the number of ratings for the product, this number will show after the rating icons.
 
 ```jsx
-<Rating rating={5} count={70} />
+<Rating value={5} count={70} />
 ```
 
 ### text
 An optional `text` prop specifies any additional text to display next to the rating icons (shows after the count if used)
 
 ```jsx
-<Rating rating={5} text="Product Rating" />
+<Rating value={5} text="Product Rating" />
 ```
 
 ### alwaysRender
 The `alwaysRender` prop will allow a product with no rating, or a zero rating to render.
 
 ```jsx
-<Rating rating={0} alwaysRender />
+<Rating value={0} alwaysRender />
 ```
 
 ### disablePartialFill
 The `disablePartialFill` prop will specify wether or not to show a partial star rating (eg. 3.3). When using this prop stars will round down. For example, a `value` of 3.3 would display as 3, and a `value` of 4.9 would round down to 4.
 
 ```jsx
-<Rating rating={3.3} disablePartialFill />
+<Rating value={3.3} disablePartialFill />
 ```
 
 ### fullIcon
 The `fullIcon` prop specifies a path within the `Icon` component to use for the "full icons". The default value is `star`.
 
 ```jsx
-<Rating rating={4} fullIcon="heart" />
+<Rating value={4} fullIcon="heart" />
 ```
 
 ### emptyIcon
 The `emptyIcon` prop specifies a path within the `Icon` component to use for the "full icons". The default value is `star-o`.
 
 ```jsx
-<Rating rating={4} emptyIcon="heart-o" />
+<Rating value={4} emptyIcon="heart-o" />
 ```

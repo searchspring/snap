@@ -129,7 +129,7 @@ export default {
 				type: {
 					summary: 'string',
 				},
-				defaultValue: { summary: '5px bar' },
+				defaultValue: { summary: '5px' },
 			},
 			control: { type: 'text' },
 		},

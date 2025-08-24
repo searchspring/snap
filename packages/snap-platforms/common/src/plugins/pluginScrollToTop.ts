@@ -1,4 +1,4 @@
-import type { AbstractController, ElementPositionObj } from '@searchspring/snap-controller';
+import type { AbstractController, ElementPositionObj, SearchController } from '@searchspring/snap-controller';
 import { AbstractPluginConfig } from '../types';
 
 export type ScrollBehavior = 'auto' | 'instant' | 'smooth';
@@ -22,7 +22,7 @@ export const pluginScrollToTop = (cntrlr: AbstractController, config?: PluginScr
 		controller: AbstractController;
 		element?: ElementPositionObj;
 	}>('restorePosition', async ({ element }, next) => {
-		if (!element) {
+		if (!element && !(cntrlr as SearchController).config.settings?.infinite) {
 			const options = Object.assign({ top: 0, left: 0, behavior: 'smooth' }, config?.options || {});
 
 			if (config?.selector) {

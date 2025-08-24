@@ -11,6 +11,7 @@ import { useClickOutside } from '../../../hooks';
 import { cloneWithProps, defined, mergeProps, mergeStyles } from '../../../utilities';
 import { useA11y } from '../../../hooks/useA11y';
 import { Overlay, OverlayProps } from '../../Atoms/Overlay';
+import { debounce } from '@searchspring/snap-toolbox';
 
 const defaultStyles: StyleScript<ModalProps> = () => {
 	return css({
@@ -80,7 +81,7 @@ export const Modal = observer((properties: ModalProps): JSX.Element => {
 	const subProps: ModalSubProps = {
 		overlay: {
 			// default props
-			internalClassName: 'ss__slideout__overlay',
+			internalClassName: 'ss__modal__overlay',
 			onClick: (e) => {
 				onOverlayClick && onOverlayClick(e);
 				toggleShowContent();
@@ -123,32 +124,55 @@ export const Modal = observer((properties: ModalProps): JSX.Element => {
 					return !prev;
 				});
 		}
-		document.body.style.overflow = showContent && lockScroll ? 'hidden' : '';
+		// overflow will be handled by useEffect below
 	};
 
 	const styling = mergeStyles<ModalProps>(props, defaultStyles);
 
-	let existingButton: Element | null;
-	if (buttonSelector) {
-		if (typeof buttonSelector == 'string') {
-			existingButton = document.querySelector(buttonSelector);
+	// Effect to lock/unlock scroll when modal opens/closes
+	useEffect(() => {
+		if (showContent && lockScroll) {
+			document.body.style.overflow = 'hidden';
 		} else {
-			existingButton = buttonSelector;
+			document.body.style.overflow = '';
 		}
-	}
+		return () => {
+			document.body.style.overflow = '';
+		};
+	}, [showContent, lockScroll]);
 
 	useEffect(() => {
+		const existingButton = buttonSelector ? (typeof buttonSelector === 'string' ? document.querySelector(buttonSelector) : buttonSelector) : null;
+
+		const debouncedHandleResize = debounce(() => {
+			setTimeout(() => {
+				if (showContent && lockScroll) {
+					document.body.style.overflow = 'hidden';
+				} else {
+					document.body.style.overflow = '';
+				}
+			}, 100);
+		}, 10);
+
+		const clickListener = (e: Event) => {
+			toggleShowContent();
+			onClick && onClick(e as unknown as React.MouseEvent<HTMLDivElement, MouseEvent>);
+		};
+
 		if (existingButton) {
 			if (!disabled) {
-				existingButton.addEventListener('click', (e) => {
-					toggleShowContent();
-					onClick && onClick(e as unknown as React.MouseEvent<HTMLDivElement, MouseEvent>);
-				});
+				existingButton.addEventListener('click', clickListener);
 			}
 		}
-	}, []);
+		window.addEventListener('resize', debouncedHandleResize);
 
-	document.body.style.overflow = showContent && lockScroll ? 'hidden' : '';
+		return () => {
+			window.removeEventListener('resize', debouncedHandleResize);
+			if (existingButton) {
+				existingButton.removeEventListener('click', clickListener);
+			}
+		};
+	}, []);
 
 	return (
 		<CacheProvider>

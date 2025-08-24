@@ -190,7 +190,7 @@ interface AutocompleteSlideoutSubProps {
 	searchInput: Partial<SearchInputProps>;
 }
 
-export interface AutocompleteSlideoutProps extends AutocompleteLayoutProps, ComponentProps {
+export interface AutocompleteSlideoutProps extends Omit<AutocompleteLayoutProps, 'viewportMaxHeight'>, ComponentProps {
 	overlayColor?: string;
 	slideDirection?: SlideDirectionType;
 	buttonSelector?: string | Element;

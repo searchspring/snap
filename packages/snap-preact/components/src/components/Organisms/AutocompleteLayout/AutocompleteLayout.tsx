@@ -94,6 +94,7 @@ const defaultStyles: StyleScript<AutocompleteLayoutProps> = ({
 		background: '#ffffff',
 		maxWidth: width,
 		maxHeight: viewportMaxHeight && inputViewportOffsetBottom ? `calc(100vh - ${inputViewportOffsetBottom + 10}px)` : undefined,
+		overflowY: 'scroll',
 
 		'.ss__autocomplete__row': {
 			display: 'flex',
@@ -653,9 +654,9 @@ export const AutocompleteLayout = observer((properties: AutocompleteLayoutProps)
 								</div>
 							) : !loading ? (
 								<div className="ss__autocomplete__content__no-results">
-									<div {...mergedLang.noResultsText?.all}></div>
+									<div className="ss__autocomplete__content__no-results__text" {...mergedLang.noResultsText?.all}></div>
 									{RecommendationTemplateComponent && recsController?.store?.loaded ? (
-										<div className="ss__no-results__recommendations">
+										<div className="ss__autocomplete__content__no-results__recommendations">
 											<RecommendationTemplateComponent
 												controller={recsController}
 												title={recsController.store?.profile?.display?.templateParameters?.title}

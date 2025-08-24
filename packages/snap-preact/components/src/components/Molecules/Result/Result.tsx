@@ -238,15 +238,15 @@ export const Result = observer((properties: ResultProps): JSX.Element => {
 				className={classnames('ss__result', `ss__result--${layout}`, { 'ss__result--sale': isOnSale }, className, internalClassName)}
 				ref={trackingRef}
 			>
-				<div className="ss__result__image-wrapper">
-					<a
-						href={core!.url}
-						onClick={(e: React.MouseEvent<HTMLAnchorElement, Event>) => {
-							onClick && onClick(e);
-						}}
-					>
-						{!hideImage &&
-							(!hideBadge ? (
+				{!hideImage && (
+					<div className="ss__result__image-wrapper">
+						<a
+							href={core!.url}
+							onClick={(e: React.MouseEvent<HTMLAnchorElement, Event>) => {
+								onClick && onClick(e);
+							}}
+						>
+							{!hideBadge ? (
 								<OverlayBadge
 									{...subProps.overlayBadge}
 									controller={controller as SearchController | AutocompleteController | RecommendationController}
@@ -255,9 +255,10 @@ export const Result = observer((properties: ResultProps): JSX.Element => {
 								</OverlayBadge>
 							) : (
 								<Image {...subProps.image} />
-							))}
-					</a>
-				</div>
+							)}
+						</a>
+					</div>
+				)}
 
 				<div className="ss__result__details">
 					{!hideBadge && (

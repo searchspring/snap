@@ -17,7 +17,7 @@ const config = {
 			main: '.ss__recommendation-bundle-list',
 			// selector of the wrapping element. Expects child element to contain <a>
 			carousel: `.ss__recommendation-bundle-list .ss__carousel`,
-			result: '.ss__result',
+			result: '.ss__recommendation-bundle-list__wrapper__selector__result-wrapper',
 			customResult: '.ss__custom-result',
 			seed: '.ss__recommendation-bundle-list__wrapper__selector--seed',
 			nextArrow: '.ss__recommendation-bundle-list .ss__carousel__next',
@@ -100,13 +100,21 @@ describe('BundledRecommendations', () => {
 				cy.get(config?.selectors?.recommendation.cta).should('exist');
 
 				//title
-				cy.get(`${config?.selectors?.recommendation.cta} .cta__inner__subtotal__title`).should('exist').should('have.text', '2 items');
+				cy.get(`${config?.selectors?.recommendation.cta} .ss__recommendation-bundle-list__wrapper__cta__subtotal__title`)
+					.should('exist')
+					.should('contain', 'Subtotal for');
+				//msrp
+				cy.get(`${config?.selectors?.recommendation.cta} .ss__recommendation-bundle-list__wrapper__cta__subtotal__strike`)
+					.should('exist')
+					.contains(`$${store.cart.msrp}`);
 				//price
-				cy.get(`${config?.selectors?.recommendation.cta} .cta__inner__price__msrp`).should('exist').contains(`$${store.cart.msrp}`);
-				//strike
-				cy.get(`${config?.selectors?.recommendation.cta} .cta__inner__price`).should('exist').contains(`$${store.cart.price}`);
+				cy.get(`${config?.selectors?.recommendation.cta} .ss__recommendation-bundle-list__wrapper__cta__subtotal__price`)
+					.should('exist')
+					.contains(`$${store.cart.price}`);
 				//button
-				cy.get(`${config?.selectors?.recommendation.cta} .cta__add-button`).should('exist').should('have.text', 'Add All To Cart');
+				cy.get(`${config?.selectors?.recommendation.cta} .ss__recommendation-bundle-list__wrapper__cta__button`)
+					.should('exist')
+					.should('have.text', 'Add All To Cart');
 			});
 
 			//check it is responsive to cartstore changes.
@@ -116,13 +124,21 @@ describe('BundledRecommendations', () => {
 				.then(() => {
 					cy.snapController(config?.selectors?.recommendation.controller).then(({ store }) => {
 						//title
-						cy.get(`${config?.selectors?.recommendation.cta} .cta__inner__subtotal__title`).should('exist').should('have.text', '1 item');
+						cy.get(`${config?.selectors?.recommendation.cta} .ss__recommendation-bundle-list__wrapper__cta__subtotal__title`)
+							.should('exist')
+							.should('contain', 'Subtotal for');
 						//price
-						cy.get(`${config?.selectors?.recommendation.cta} .cta__inner__price__msrp`).should('exist').contains(`$${store.cart.msrp}`);
+						cy.get(`${config?.selectors?.recommendation.cta} .ss__recommendation-bundle-list__wrapper__cta__subtotal__strike`)
+							.should('exist')
+							.contains(`$${store.cart.msrp}`);
 						//strike
-						cy.get(`${config?.selectors?.recommendation.cta} .cta__inner__price`).should('exist').contains(`$${store.cart.price}`);
+						cy.get(`${config?.selectors?.recommendation.cta} .ss__recommendation-bundle-list__wrapper__cta__subtotal__price`)
+							.should('exist')
+							.contains(`$${store.cart.price}`);
 						//button
-						cy.get(`${config?.selectors?.recommendation.cta} .cta__add-button`).should('exist').should('have.text', 'Add All To Cart');
+						cy.get(`${config?.selectors?.recommendation.cta} .ss__recommendation-bundle-list__wrapper__cta__button`)
+							.should('exist')
+							.should('have.text', 'Add All To Cart');
 					});
 				});
 		});

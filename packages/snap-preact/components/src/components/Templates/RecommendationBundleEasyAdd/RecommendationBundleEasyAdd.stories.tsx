@@ -190,17 +190,6 @@ export default {
 			},
 			control: { type: 'object' },
 		},
-		breakpoints: {
-			defaultValue: undefined,
-			description: 'Recommendation title',
-			table: {
-				type: {
-					summary: 'object',
-				},
-				defaultValue: { summary: 'Breakpoint object' },
-			},
-			control: { type: 'object' },
-		},
 		...componentArgs,
 	},
 };

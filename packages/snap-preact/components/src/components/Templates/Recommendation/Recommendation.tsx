@@ -238,7 +238,7 @@ export type RecommendationProps = {
 		enabled: boolean;
 		offset?: string;
 	};
-	slidesPerView?: number;
+	slidesPerView?: number | 'auto';
 } & Omit<SwiperOptions, 'breakpoints' | 'slidesPerView'> &
 	ComponentProps;
 
