@@ -100,6 +100,21 @@ describe('FacetPaletteOptions Component', () => {
 		expect(paletteOptionsSwatch?.parentElement?.nextSibling).toHaveTextContent(colorMapping['Camo'].label);
 	});
 
+	it('can use lowercase or uppercase color mapping', () => {
+		const colorMapping = {
+			camo: {
+				label: 'brown',
+			},
+		};
+		const rendered = render(<FacetPaletteOptions values={paletteFacetMock.values as FacetValue[]} colorMapping={colorMapping} />);
+		const options = rendered.container.querySelectorAll('.ss__facet-palette-options__option');
+		expect(options).toHaveLength(paletteFacetMock.values!.length);
+		const paletteOptionsSwatch = rendered.container.querySelector('.ss__facet-palette-options__option__palette--camo');
+		const styles = getComputedStyle(paletteOptionsSwatch!);
+		expect(styles.background).not.toEqual(colorMapping['camo'].label);
+		expect(paletteOptionsSwatch?.parentElement?.nextSibling).toHaveTextContent(colorMapping['camo'].label);
+	});
+
 	it('can use the color mapping as img', () => {
 		const colorMapping = {
 			Camo: {

@@ -38,7 +38,7 @@ The `correctedQueryText` prop specifies the text to show when there is an origin
 ```jsx
 const getCorrected = (controller) => {
 	const { pagination, search } = controller.store;
-	return `<div class="ss__search-header__corrected">No results found for <em>"${search?.originalQuery?.string}"</em>, showing results for <em>"${search?.query?.string}"</em> instead.</div>`
+	return `<div class="ss__search-header__corrected">No results found for "<em>${search?.originalQuery?.string}</em>", showing results for "<em>${search?.query?.string}</em>" instead.</div>`
 }
 <SearchHeader controller={controller} correctedQueryText={getCorrected} />
 ```
@@ -57,7 +57,7 @@ The `didYouMeanText` prop specifies the text to show when there is a "didYouMean
 ```jsx
 const getDym = (controller) => {
 	const { search } = controller.store;
-	return `<div class="ss__search-header__dym">Sorry, but did you mean <em>"<a href=${search?.didYouMean?.url.href}>${search?.didYouMean?.string}</a>"</em></div>`
+	return `<div class="ss__search-header__dym">Sorry, but did you mean "<em><a href=${search?.didYouMean?.url.href}>${search?.didYouMean?.string}</a></em>"</div>`
 }
 <SearchHeader controller={controller} didYouMeanText={getDym} />
 ```

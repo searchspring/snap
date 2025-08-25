@@ -103,6 +103,59 @@ export default {
 			},
 			control: { type: 'color' },
 		},
+		showSelectedCount: {
+			description: 'shows the number of selected options within this facet in the facet header',
+			table: {
+				type: {
+					summary: 'boolean',
+				},
+				defaultValue: { summary: false },
+			},
+			control: { type: 'boolean' },
+		},
+		hideSelectedCountParenthesis: {
+			description: 'specifies if the parenthesis should render around the selected count',
+			table: {
+				type: {
+					summary: 'boolean',
+				},
+				defaultValue: { summary: false },
+			},
+			control: { type: 'boolean' },
+		},
+		showClearAllText: {
+			description: 'specifies if the clear all text should render',
+			table: {
+				type: {
+					summary: 'boolean',
+				},
+				defaultValue: { summary: false },
+			},
+			control: { type: 'boolean' },
+		},
+		clearAllText: {
+			description: 'text to show in the clear all link',
+			table: {
+				type: {
+					summary: 'string',
+				},
+				defaultValue: { summary: 'Clear All' },
+			},
+			control: { type: 'text' },
+		},
+		clearAllIcon: {
+			description: 'Icon to show in the clear all link',
+			table: {
+				type: {
+					summary: 'string',
+				},
+				defaultValue: { summary: '' },
+			},
+			options: [...Object.keys(iconPaths)],
+			control: {
+				type: 'select',
+			},
+		},
 		disableCollapse: {
 			description: 'Disable collapse - used with internal state only',
 			table: {

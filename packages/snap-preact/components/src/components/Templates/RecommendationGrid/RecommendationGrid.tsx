@@ -11,14 +11,13 @@ import { defined, mergeProps, mergeStyles } from '../../../utilities';
 import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { useDisplaySettings } from '../../../hooks/useDisplaySettings';
 import { RecommendationProfileTracker } from '../../Trackers/Recommendation/ProfileTracker';
-import { RecommendationResultTracker } from '../../Trackers/Recommendation/ResultTracker';
+import { ResultTracker } from '../../Trackers/ResultTracker';
 import { useState } from 'react';
 import { useRef } from 'preact/hooks';
 import { useIntersection } from '../../../hooks';
 
 const defaultStyles: StyleScript<RecommendationGridProps> = ({ gapSize, columns }) => {
 	return css({
-		overflow: 'auto',
 		maxWidth: '100%',
 		maxHeight: '100%',
 		'.ss__recommendation-grid__results': {
@@ -27,6 +26,7 @@ const defaultStyles: StyleScript<RecommendationGridProps> = ({ gapSize, columns 
 			gap: gapSize,
 			gridTemplateRows: 'auto',
 			gridTemplateColumns: `repeat(${columns}, 1fr)`,
+			overflow: 'auto',
 
 			'@supports (display: grid)': {
 				display: 'grid',
@@ -41,6 +41,7 @@ export const RecommendationGrid = observer((properties: RecommendationGridProps)
 	const defaultProps: Partial<RecommendationGridProps> = {
 		results: properties.controller?.store?.results,
 		gapSize: '20px',
+		title: properties.controller?.store?.profile?.display?.templateParameters?.title,
 	};
 
 	//mergeprops only uses names that are passed via properties, so this cannot be put in the defaultProps
@@ -62,7 +63,7 @@ export const RecommendationGrid = observer((properties: RecommendationGridProps)
 		};
 	}
 
-	const { disableStyles, title, resultComponent, trim, lazyRender, className, treePath, theme, controller } = props;
+	const { disableStyles, title, resultComponent, trim, lazyRender, className, internalClassName, treePath, theme, controller } = props;
 
 	const mergedlazyRender = {
 		enabled: true,
@@ -73,7 +74,7 @@ export const RecommendationGrid = observer((properties: RecommendationGridProps)
 	const subProps: RecommendationGridSubProps = {
 		result: {
 			// default props
-			className: 'ss__recommendation-grid__result',
+			internalClassName: 'ss__recommendation-grid__result',
 			// inherited props
 			...defined({
 				disableStyles,
@@ -116,7 +117,7 @@ export const RecommendationGrid = observer((properties: RecommendationGridProps)
 
 	return results?.length ? (
 		<CacheProvider>
-			<div {...styling} ref={recsRef} className={classnames('ss__recommendation-grid', className)}>
+			<div {...styling} ref={recsRef} className={classnames('ss__recommendation-grid', className, internalClassName)}>
 				{isVisible ? (
 					<RecommendationProfileTracker controller={controller}>
 						{title && <h3 className="ss__recommendation-grid__title">{title}</h3>}
@@ -129,9 +130,9 @@ export const RecommendationGrid = observer((properties: RecommendationGridProps)
 										return <ResultComponent controller={controller} result={result as Product} theme={theme} treePath={treePath} />;
 									} else {
 										return (
-											<RecommendationResultTracker result={result as Product} controller={controller}>
+											<ResultTracker result={result as Product} controller={controller}>
 												<Result key={(result as Product).id} {...subProps.result} result={result as Product} controller={controller} />
-											</RecommendationResultTracker>
+											</ResultTracker>
 										);
 									}
 								})()
@@ -141,9 +142,9 @@ export const RecommendationGrid = observer((properties: RecommendationGridProps)
 				) : (
 					<RecommendationProfileTracker controller={controller}>
 						{results.map((result) => (
-							<RecommendationResultTracker controller={controller} result={result}>
+							<ResultTracker controller={controller} result={result}>
 								<></>
-							</RecommendationResultTracker>
+							</ResultTracker>
 						))}
 					</RecommendationProfileTracker>
 				)}

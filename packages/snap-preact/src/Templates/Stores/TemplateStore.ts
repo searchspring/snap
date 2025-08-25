@@ -40,7 +40,7 @@ export type TemplateTypes = 'search' | 'autocomplete' | `recommendation/${RecsTe
 export type TemplateCustomComponentTypes = 'result' | 'badge';
 export type RecsTemplateTypes = 'bundle' | 'default' | 'email';
 
-type TargetMap = { [targetId: string]: TargetStore };
+export type TargetMap = { [targetId: string]: TargetStore };
 
 type ComponentLibraryType =
 	| keyof LibraryImports['component']['autocomplete']
@@ -110,13 +110,13 @@ export type PluginsConfigs = {
 	magento2?: Magento2Plugins;
 };
 
-export type TemplatesStoreConfigConfig = {
+export type TemplateStoreConfigConfig = {
 	components?: TemplateStoreComponentConfig;
 	config: {
 		siteId?: string;
 		currency?: CurrencyCodes;
 		language?: LanguageCodes;
-		platform: IntegrationPlatforms;
+		platform?: IntegrationPlatforms;
 	};
 	plugins?: PluginsConfigs;
 	translations?: {
@@ -126,9 +126,10 @@ export type TemplatesStoreConfigConfig = {
 };
 
 const RESIZE_DEBOUNCE = 100;
+export const TEMPLATE_STORE_KEY = 'ss-templates';
 
-export type TemplatesStoreConfig = {
-	config: TemplatesStoreConfigConfig;
+export type TemplateStoreConfig = {
+	config: TemplateStoreConfigConfig;
 	settings?: TemplatesStoreConfigSettings;
 };
 
@@ -163,13 +164,13 @@ export class TemplatesStore {
 
 	window: WindowProperties = { innerWidth: 0 };
 
-	constructor(params: TemplatesStoreConfig) {
+	constructor(params: TemplateStoreConfig) {
 		const { config, settings } = params || {};
 		this.config = config;
 
 		this.platform = config.config.platform || 'other';
 
-		this.storage = new StorageStore({ type: StorageType.local, key: 'ss-templates' });
+		this.storage = new StorageStore({ type: StorageType.local, key: TEMPLATE_STORE_KEY });
 
 		this.dependencies = {
 			storage: this.storage,
@@ -194,11 +195,11 @@ export class TemplatesStore {
 		this.library = new LibraryStore({ components: config.components });
 
 		this.language =
-			(this.settings.editMode && this.storage.get('language')) ||
+			(this.settings.editMode && this.storage.get('overrides.config.language')) ||
 			(this.config.config?.language && this.config.config.language in this.library.import.language && this.config.config.language) ||
 			'en';
 		this.currency =
-			(this.settings.editMode && this.storage.get('currency')) ||
+			(this.settings.editMode && this.storage.get('overrides.config.currency')) ||
 			(this.config.config?.currency && this.config.config.currency in this.library.import.currency && this.config.config.currency) ||
 			'usd';
 
@@ -221,23 +222,23 @@ export class TemplatesStore {
 		const themePromises: Promise<void>[] = [];
 
 		// setup local themes
-		const themeConfig = config.theme;
+		const themeConfiguration = config.theme;
 		// add promise
 		const themeDefer = new Deferred();
 		themePromises.push(themeDefer.promise);
 
 		// import component if defined
-		if (themeConfig.resultComponent && this.library.import.component.result[themeConfig.resultComponent]) {
-			this.library.import.component.result[themeConfig.resultComponent]();
+		if (themeConfiguration.resultComponent && this.library.import.component.result[themeConfiguration.resultComponent]) {
+			this.library.import.component.result[themeConfiguration.resultComponent]();
 		}
 
 		// import theme dependencies
-		const themeImports = [importCurrency, importLanguage, this.library.import.theme[themeConfig.extends]()];
+		const themeImports = [importCurrency, importLanguage, this.library.import.theme[themeConfiguration.extends]()];
 
 		Promise.all(themeImports).then(() => {
-			const base = this.library.themes[themeConfig.extends];
-			const overrides = themeConfig.overrides || {};
-			const variables = themeConfig.variables || {};
+			const base = this.library.themes[themeConfiguration.extends];
+			const overrides = themeConfiguration.overrides || {};
+			const variables = themeConfiguration.variables || {};
 			const currency = this.library.locales.currencies[this.currency] || {};
 			const language = this.library.locales.languages[this.language] || {};
 			const languageOverrides = transformTranslationsToTheme((this.config.translations && this.config.translations[this.language]) || {});
@@ -251,9 +252,9 @@ export class TemplatesStore {
 				},
 			};
 
-			this.addTheme({
+			const themeConfig: ThemeStoreThemeConfig = {
 				name: 'global',
-				style: themeConfig.style,
+				style: themeConfiguration.style,
 				type: 'local',
 				base,
 				overrides: translatedOverrides,
@@ -262,7 +263,14 @@ export class TemplatesStore {
 				language,
 				languageOverrides,
 				innerWidth: this.window.innerWidth,
-			});
+			};
+
+			if (this.settings.editMode) {
+				const themeOverrides: ThemeVariablesPartial = this.storage.get('overrides.theme.variables') || {};
+				themeConfig.editorOverrides = { variables: themeOverrides || {} };
+			}
+
+			this.addTheme(themeConfig);
 
 			themeDefer.resolve();
 		});
@@ -354,7 +362,7 @@ export class TemplatesStore {
 
 			if (currency) {
 				this.currency = currencyCode;
-				this.storage.set('currency', this.currency);
+				this.storage.set('overrides.config.currency', this.currency);
 				for (const themeName in this.themes.local) {
 					const theme = this.themes.local[themeName];
 					theme.setCurrency(currency);
@@ -374,7 +382,7 @@ export class TemplatesStore {
 
 			if (language) {
 				this.language = languageCode;
-				this.storage.set('language', this.language);
+				this.storage.set('overrides.config.language', this.language);
 				for (const themeName in this.themes.local) {
 					const theme = this.themes.local[themeName];
 					theme.setLanguage(language);
@@ -396,7 +404,7 @@ export class TemplatesStore {
 		this.themes.library = {};
 		for (const themeName in this.library.themes) {
 			const theme = this.library.themes[themeName];
-			this.addTheme({
+			const themeConfig: ThemeStoreThemeConfig = {
 				name: themeName,
 				type: 'library',
 				base: theme,
@@ -404,7 +412,12 @@ export class TemplatesStore {
 				languageOverrides: transformTranslationsToTheme((this.config.translations && this.config.translations[this.language]) || {}),
 				currency: this.library.locales.currencies[this.currency] || {},
 				innerWidth: this.window.innerWidth,
-			});
+			};
+			if (this.settings.editMode) {
+				const themeOverrides: ThemeVariablesPartial = this.storage.get('overrides.theme.variables') || {};
+				themeConfig.editorOverrides = { variables: themeOverrides || {} };
+			}
+			this.addTheme(themeConfig);
 		}
 		this.loading = false;
 	}

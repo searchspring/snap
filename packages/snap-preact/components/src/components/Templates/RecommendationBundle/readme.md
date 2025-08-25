@@ -19,7 +19,7 @@ The required `controller` prop specifies a reference to the RecommendationContro
 ```
 
 ### onAddToCart 
-the required `onAddToCart` prop sets a the callback function for when a add to cart button is clicked. This function will be passed an array of selected item ids and their quantities. 
+the `onAddToCart` prop sets a the callback function for when a add to cart button is clicked. This function will be passed an array of selected item ids and their quantities. 
 
 ```jsx
 <RecommendationBundle controller={controller} onAddToCart={(e, items)=>{console.log(items)}} />
@@ -212,6 +212,21 @@ The `vertical` prop sets the carousel scroll direction to vertical.
 
 ```jsx
 <RecommendationBundle controller={controller} onAddToCart={(e, items)=>{console.log(items)}} vertical={true} />
+```
+
+### hideSeedText
+The `hideSeedText` prop sets determines if the seed text should render.
+
+```jsx
+<RecommendationBundle controller={controller} onAddToCart={(e, items)=>{console.log(items)}} hideSeedText={true} />
+```
+
+
+### limit
+The `limit` prop limits the number of products rendered.
+
+```jsx
+<RecommendationBundle controller={controller} onAddToCart={(e, items)=>{console.log(items)}} vertical={true} limit={5} />
 ```
 
 ### modules

@@ -58,6 +58,7 @@ export const NoResults = observer((properties: NoResultsProps): JSX.Element => {
 		controller,
 		templates,
 		className,
+		internalClassName,
 		treePath,
 	} = props;
 
@@ -153,7 +154,7 @@ export const NoResults = observer((properties: NoResultsProps): JSX.Element => {
 	});
 
 	return (
-		<div className={classnames('ss__no-results', className)} {...styling}>
+		<div className={classnames('ss__no-results', className, internalClassName)} {...styling}>
 			{contentSlot &&
 				(typeof contentSlot == 'string' ? (
 					<div className="ss__no-results__slot" dangerouslySetInnerHTML={{ __html: contentSlot }}></div>

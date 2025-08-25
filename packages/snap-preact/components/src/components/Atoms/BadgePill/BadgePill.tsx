@@ -34,13 +34,13 @@ export const BadgePill = observer((properties: BadgePillProps): JSX.Element => {
 
 	const props = mergeProps('badgePill', globalTheme, defaultProps, properties);
 
-	const { value, tag, className } = props;
+	const { value, tag, className, internalClassName } = props;
 
 	const styling = mergeStyles<BadgePillProps>(props, defaultStyles);
 
 	return value ? (
 		<CacheProvider>
-			<div {...styling} className={classnames('ss__badge-pill', `ss__badge-pill--${tag}`, className)}>
+			<div {...styling} className={classnames('ss__badge-pill', `ss__badge-pill--${tag}`, className, internalClassName)}>
 				<span className="ss__badge-pill__value">{value}</span>
 			</div>
 		</CacheProvider>

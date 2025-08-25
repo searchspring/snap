@@ -41,7 +41,7 @@ export default {
 			},
 			control: { type: 'none' },
 		},
-		hideTopToolBar: {
+		hideTopToolbar: {
 			defaultValue: false,
 			description: 'prevents the top Toolbar component from rendering',
 			table: {
@@ -52,7 +52,7 @@ export default {
 			},
 			control: { type: 'boolean' },
 		},
-		hideMiddleToolBar: {
+		hideMiddleToolbar: {
 			defaultValue: false,
 			description: 'prevents the middle Toolbar component from rendering',
 			table: {
@@ -63,20 +63,9 @@ export default {
 			},
 			control: { type: 'boolean' },
 		},
-		hideBottomToolBar: {
+		hideBottomToolbar: {
 			defaultValue: false,
 			description: 'prevents the bottom Toolbar component from rendering',
-			table: {
-				type: {
-					summary: 'boolean',
-				},
-				defaultValue: { summary: false },
-			},
-			control: { type: 'boolean' },
-		},
-		hideFacetsHorizontal: {
-			defaultValue: false,
-			description: 'prevents the HorizontalFacets component from rendering',
 			table: {
 				type: {
 					summary: 'boolean',

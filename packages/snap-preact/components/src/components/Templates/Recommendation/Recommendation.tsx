@@ -18,8 +18,8 @@ import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { ComponentProps, BreakpointsProps, ResultComponent, StyleScript } from '../../../types';
 import { useDisplaySettings } from '../../../hooks/useDisplaySettings';
 import { RecommendationProfileTracker } from '../../Trackers/Recommendation/ProfileTracker';
-import { RecommendationResultTracker } from '../../Trackers/Recommendation/ResultTracker';
 import { Lang, useLang } from '../../../hooks';
+import { ResultTracker } from '../../Trackers/ResultTracker';
 
 const defaultStyles: StyleScript<RecommendationProps> = ({ vertical }) => {
 	return css({
@@ -79,6 +79,7 @@ export const Recommendation = observer((properties: RecommendationProps): JSX.El
 		resultComponent,
 		disableStyles,
 		className,
+		internalClassName,
 		style: _,
 		styleScript: __,
 		themeStyleScript: ___,
@@ -112,7 +113,7 @@ export const Recommendation = observer((properties: RecommendationProps): JSX.El
 	const subProps: RecommendationSubProps = {
 		carousel: {
 			// default props
-			className: 'ss__recommendation__Carousel',
+			internalClassName: 'ss__recommendation__Carousel',
 			// inherited props
 			...defined({
 				disableStyles,
@@ -124,7 +125,7 @@ export const Recommendation = observer((properties: RecommendationProps): JSX.El
 		},
 		result: {
 			// default props
-			className: 'ss__recommendation__result',
+			internalClassName: 'ss__recommendation__result',
 			// inherited props
 			...defined({
 				disableStyles,
@@ -158,7 +159,7 @@ export const Recommendation = observer((properties: RecommendationProps): JSX.El
 
 	return (Array.isArray(children) && children.length) || resultsToRender?.length ? (
 		<CacheProvider>
-			<div {...styling} className={classnames('ss__recommendation', className)} ref={recsRef}>
+			<div {...styling} className={classnames('ss__recommendation', className, internalClassName)} ref={recsRef}>
 				{isVisible ? (
 					<RecommendationProfileTracker controller={controller}>
 						{title && !hideTitle && (
@@ -177,12 +178,12 @@ export const Recommendation = observer((properties: RecommendationProps): JSX.El
 						>
 							{Array.isArray(children) && children.length
 								? children.map((child: any, idx: number) => (
-										<RecommendationResultTracker controller={controller} result={resultsToRender[idx]}>
+										<ResultTracker controller={controller} result={resultsToRender[idx]}>
 											{child}
-										</RecommendationResultTracker>
+										</ResultTracker>
 								  ))
 								: resultsToRender.map((result) => (
-										<RecommendationResultTracker controller={controller} result={result}>
+										<ResultTracker controller={controller} result={result}>
 											{(() => {
 												if (resultComponent && controller) {
 													const ResultComponent = resultComponent;
@@ -191,7 +192,7 @@ export const Recommendation = observer((properties: RecommendationProps): JSX.El
 													return <Result key={result.id} {...subProps.result} controller={controller} result={result} />;
 												}
 											})()}
-										</RecommendationResultTracker>
+										</ResultTracker>
 								  ))}
 						</Carousel>
 					</RecommendationProfileTracker>
@@ -199,14 +200,14 @@ export const Recommendation = observer((properties: RecommendationProps): JSX.El
 					<RecommendationProfileTracker controller={controller}>
 						{Array.isArray(children) && children.length
 							? children.map((child: any, idx: number) => (
-									<RecommendationResultTracker controller={controller} result={resultsToRender[idx]}>
+									<ResultTracker controller={controller} result={resultsToRender[idx]}>
 										<></>
-									</RecommendationResultTracker>
+									</ResultTracker>
 							  ))
 							: resultsToRender.map((result) => (
-									<RecommendationResultTracker controller={controller} result={result}>
+									<ResultTracker controller={controller} result={result}>
 										<></>
-									</RecommendationResultTracker>
+									</ResultTracker>
 							  ))}
 					</RecommendationProfileTracker>
 				)}
@@ -232,11 +233,12 @@ export type RecommendationProps = {
 	vertical?: boolean;
 	resultComponent?: ResultComponent;
 	lang?: Partial<RecommendationLang>;
+	scrollbar?: boolean;
 	lazyRender?: {
 		enabled: boolean;
 		offset?: string;
 	};
-	slidesPerView?: number;
+	slidesPerView?: number | 'auto';
 } & Omit<SwiperOptions, 'breakpoints' | 'slidesPerView'> &
 	ComponentProps;
 

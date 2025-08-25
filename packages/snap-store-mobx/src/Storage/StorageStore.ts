@@ -59,8 +59,33 @@ export class StorageStore {
 		}
 	}
 
-	public set(path: string, value: any): void {
-		const paths = path?.split('.');
+	public set(path: string | string[], value: any): void {
+		// read from the backing storage first to update local state to ensure we get any changes made outside of the storageStore
+		switch (this.type) {
+			case StorageType.session: {
+				this.state = JSON.parse(window.sessionStorage.getItem(this.key) || '{}');
+				break;
+			}
+			case StorageType.local: {
+				this.state = JSON.parse(window.localStorage.getItem(this.key) || '{}');
+				break;
+			}
+			case StorageType.cookie: {
+				const data = utils.cookies.get(this.key);
+				if (data) {
+					this.state = JSON.parse(data);
+				}
+				break;
+			}
+		}
+
+		let paths: string[];
+		if (typeof path == 'string') {
+			paths = path?.split('.');
+		} else {
+			paths = path;
+		}
+
 		let location = this.state;
 		paths?.forEach((p, i) => {
 			const leaf = i == paths.length - 1;
@@ -71,21 +96,25 @@ export class StorageStore {
 				location = location[p] = location[p] || {};
 			}
 		});
-		switch (this.type) {
-			case StorageType.session:
-				window.sessionStorage.setItem(this.key, JSON.stringify(this.state));
-				break;
-			case StorageType.local:
-				window.localStorage.setItem(this.key, JSON.stringify(this.state));
-				break;
-			case StorageType.cookie:
-				utils.cookies.set(this.key, JSON.stringify(this.state), this.sameSite, this.expiration, this.cookieDomain);
-				break;
+		try {
+			switch (this.type) {
+				case StorageType.session:
+					window.sessionStorage.setItem(this.key, JSON.stringify(this.state));
+					break;
+				case StorageType.local:
+					window.localStorage.setItem(this.key, JSON.stringify(this.state));
+					break;
+				case StorageType.cookie:
+					utils.cookies.set(this.key, JSON.stringify(this.state), this.sameSite, this.expiration, this.cookieDomain);
+					break;
+			}
+		} catch (err) {
+			console.warn(`something went wrong setting ${this.key} to ${this.type} storage`);
 		}
 	}
 
 	// TODO: change any to unknown and refactor
-	public get(path: string): any | undefined {
+	public get(path: string | string[]): any | undefined {
 		switch (this.type) {
 			case StorageType.session:
 				const sessionData = window.sessionStorage.getItem(this.key);
@@ -102,7 +131,13 @@ export class StorageStore {
 				}
 				break;
 		}
-		const paths = path?.split('.');
+
+		let paths: string[];
+		if (typeof path == 'string') {
+			paths = path?.split('.');
+		} else {
+			paths = path;
+		}
 
 		if (!paths?.length) return undefined;
 

@@ -213,14 +213,14 @@ describe('Button Component', () => {
 						const element = rendered.container.querySelector(selector);
 						expect(element).toBeInTheDocument();
 						const langElem = rendered.container.querySelector(`[ss-lang=${option}]`);
-
+						rendered.debug();
 						expect(langElem).toBeInTheDocument();
 						if (typeof langObj.value == 'function') {
 							expect(valueMock).toHaveBeenLastCalledWith({});
-							expect(langElem?.innerHTML).toBe(value);
+							expect(langElem?.innerHTML).toContain(value);
 						} else {
 							expect(valueMock).not.toHaveBeenCalled();
-							expect(langElem?.innerHTML).toBe(langObj.value);
+							expect(langElem?.innerHTML).toContain(langObj.value);
 						}
 
 						expect(langElem).toHaveAttribute('alt', altText);

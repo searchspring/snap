@@ -88,7 +88,6 @@ export default {
 		},
 		onAddToCart: {
 			description: 'onClick event handler for add bundle to cart button in CTA',
-			type: { required: true },
 			table: {
 				type: {
 					summary: 'function',
@@ -105,20 +104,6 @@ export default {
 			},
 			control: { type: 'number' },
 		},
-		carousel: {
-			description: 'Carousel settings object',
-			defaultValue: {
-				enabled: true,
-				loop: false,
-			},
-			table: {
-				type: {
-					summary: 'object',
-				},
-				defaultValue: { summary: 'Carousel settings object' },
-			},
-			control: { type: 'object' },
-		},
 		hideSeed: {
 			description: 'Hide/show seed result',
 			defaultValue: false,
@@ -127,6 +112,20 @@ export default {
 					summary: 'boolean',
 				},
 				defaultValue: { summary: false },
+			},
+			control: { type: 'boolean' },
+		},
+		hideSeedText: {
+			description: 'hide the seed text',
+			table: {
+				type: { summary: 'boolean' },
+			},
+			control: { type: 'boolean' },
+		},
+		hideCheckboxes: {
+			description: 'hide the checkboxes',
+			table: {
+				type: { summary: 'boolean' },
 			},
 			control: { type: 'boolean' },
 		},
@@ -212,17 +211,6 @@ export default {
 					summary: 'object',
 				},
 				defaultValue: { summary: 'Lazy render settings object' },
-			},
-			control: { type: 'object' },
-		},
-		breakpoints: {
-			defaultValue: undefined,
-			description: 'Recommendation title',
-			table: {
-				type: {
-					summary: 'object',
-				},
-				defaultValue: { summary: 'Breakpoint object' },
 			},
 			control: { type: 'object' },
 		},

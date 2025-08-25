@@ -36,7 +36,19 @@ export function Price(properties: PriceProps): JSX.Element {
 
 	const props = mergeProps('price', globalTheme, defaultProps, properties);
 
-	const { lineThrough, value, symbol, decimalPlaces, padDecimalPlaces, thousandsSeparator, decimalSeparator, symbolAfter, raw, className } = props;
+	const {
+		lineThrough,
+		value,
+		symbol,
+		decimalPlaces,
+		padDecimalPlaces,
+		thousandsSeparator,
+		decimalSeparator,
+		symbolAfter,
+		raw,
+		className,
+		internalClassName,
+	} = props;
 
 	let formattedPrice: string | undefined;
 	if (value) {
@@ -56,7 +68,7 @@ export function Price(properties: PriceProps): JSX.Element {
 			<Fragment>{formattedPrice}</Fragment>
 		) : (
 			<CacheProvider>
-				<span {...styling} className={classnames('ss__price', { 'ss__price--strike': lineThrough }, className)}>
+				<span {...styling} className={classnames('ss__price', { 'ss__price--strike': lineThrough }, className, internalClassName)}>
 					{symbol && !symbolAfter ? <span className={'ss__price__symbol'}>{symbol}</span> : <></>}
 					<span className={'ss__price__value'}>{formattedPrice}</span>
 					{symbol && symbolAfter ? <span className={'ss__price__symbol'}>{symbol}</span> : <></>}

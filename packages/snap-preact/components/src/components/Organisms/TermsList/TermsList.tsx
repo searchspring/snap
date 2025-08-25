@@ -5,36 +5,35 @@ import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
 
 import type { AutocompleteController } from '@searchspring/snap-controller';
-import { ComponentProps, RootNodeProperties } from '../../../types';
+import { ComponentProps, StyleScript } from '../../../types';
 import { Theme, useTheme, CacheProvider } from '../../../providers';
-import { defined, mergeProps } from '../../../utilities';
+import { defined, mergeProps, mergeStyles } from '../../../utilities';
 import { Terms, TermsProps } from '../../Molecules/Terms/Terms';
 import { useCleanUpEmptyDivs } from '../../../hooks/useCleanUpEmptyDivs';
 
-const CSS = {
-	TermsList: ({}: Partial<TermsListProps>) =>
-		css({
+const defaultStyles: StyleScript<TermsListProps> = ({}) => {
+	return css({
+		display: 'flex',
+		flexDirection: 'row',
+		background: '#f8f8f8',
+		width: 'auto',
+		flexWrap: 'wrap',
+
+		'.ss__terms-list__row': {
 			display: 'flex',
 			flexDirection: 'row',
-			background: '#f8f8f8',
-			width: 'auto',
-			flexWrap: 'wrap',
+			flexBasis: '100%',
+		},
 
-			'.ss__terms-list__row': {
-				display: 'flex',
-				flexDirection: 'row',
-				flexBasis: '100%',
-			},
+		'.ss__terms-list__row:empty': {
+			display: 'none',
+		},
 
-			'.ss__terms-list__row:empty': {
-				display: 'none',
-			},
-
-			'.ss__terms-list__separator': {
-				flexGrow: 1,
-				flexShrink: 1,
-			},
-		}),
+		'.ss__terms-list__separator': {
+			flexGrow: 1,
+			flexShrink: 1,
+		},
+	});
 };
 
 export const TermsList = observer((properties: TermsListProps): JSX.Element => {
@@ -56,10 +55,9 @@ export const TermsList = observer((properties: TermsListProps): JSX.Element => {
 		retainTrending,
 		treePath,
 		disableStyles,
-		style,
 		className,
+		internalClassName,
 		controller,
-		styleScript,
 	} = props;
 
 	const subProps: TermsListSubProps = {
@@ -74,16 +72,7 @@ export const TermsList = observer((properties: TermsListProps): JSX.Element => {
 		},
 	};
 
-	const styling: RootNodeProperties = { 'ss-name': props.name };
-	const stylingProps = props;
-
-	if (styleScript && !disableStyles) {
-		styling.css = [styleScript(stylingProps), style];
-	} else if (!disableStyles) {
-		styling.css = [CSS.TermsList(stylingProps), style];
-	} else if (style) {
-		styling.css = [style];
-	}
+	const styling = mergeStyles<TermsListProps>(props, defaultStyles);
 
 	const history = controller?.store.history || [];
 	const suggestions = controller?.store.terms || [];
@@ -109,7 +98,7 @@ export const TermsList = observer((properties: TermsListProps): JSX.Element => {
 		if (trending?.length) showTrending = true;
 	}
 
-	useCleanUpEmptyDivs('.ss__terms-list__row, .ss__terms-list');
+	useCleanUpEmptyDivs(['.ss__terms-list', '.ss__terms-list__row'], '.ss__terms-list__separator');
 
 	const findModule = (module: TermsListModuleNames[] | TermsListModuleNames) => {
 		if (typeof module !== 'string') {
@@ -123,11 +112,12 @@ export const TermsList = observer((properties: TermsListProps): JSX.Element => {
 		if (module == 'History' && showHistory) {
 			return (
 				<Terms
-					className={'ss__terms-list__terms--history'}
+					internalClassName={'ss__terms-list__terms--history'}
 					title={historyTitle}
 					terms={history}
 					controller={controller}
 					name={'history'}
+					limit={controller.config.settings?.history?.limit}
 					{...subProps.terms}
 				/>
 			);
@@ -136,11 +126,12 @@ export const TermsList = observer((properties: TermsListProps): JSX.Element => {
 		if (module == 'Trending' && showTrending) {
 			return (
 				<Terms
-					className={'ss__terms-list__terms--trending'}
+					internalClassName={'ss__terms-list__terms--trending'}
 					title={trendingTitle}
 					terms={trending}
 					controller={controller}
 					name={'trending'}
+					limit={controller.config.settings?.trending?.limit}
 					{...subProps.terms}
 				/>
 			);
@@ -149,7 +140,7 @@ export const TermsList = observer((properties: TermsListProps): JSX.Element => {
 		if (module == 'Suggestions') {
 			return (
 				<Terms
-					className={'ss__terms-list__terms--suggestions'}
+					internalClassName={'ss__terms-list__terms--suggestions'}
 					title={suggestionTitle}
 					terms={suggestions}
 					controller={controller}
@@ -162,7 +153,7 @@ export const TermsList = observer((properties: TermsListProps): JSX.Element => {
 
 	return layout?.length ? (
 		<CacheProvider>
-			<div {...styling} className={classnames('ss__terms-list', className)}>
+			<div {...styling} className={classnames('ss__terms-list', className, internalClassName)}>
 				{layout?.map((module) => {
 					return findModule(module as TermsListModuleNames);
 				})}

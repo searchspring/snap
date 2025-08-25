@@ -88,7 +88,6 @@ export default {
 		},
 		onAddToCart: {
 			description: 'onClick event handler for add bundle to cart button in CTA',
-			type: { required: true },
 			table: {
 				type: {
 					summary: 'function',
@@ -292,6 +291,14 @@ export default {
 			},
 			control: { type: 'object' },
 		},
+		modules: {
+			description: 'additional swiper modules to use',
+			table: {
+				type: { summary: 'object' },
+			},
+			control: { type: 'object' },
+		},
+
 		...componentArgs,
 	},
 };

@@ -50,6 +50,17 @@ describe('image Component', () => {
 			expect(imageElement).toBeInTheDocument();
 			expect(imageElement).toHaveAttribute('src', result?.thumbnailImageUrl);
 		});
+
+		it('can set a custom height on the image', () => {
+			const height = '300px';
+			const rendered = render(<Image alt={result?.name!} src={result?.thumbnailImageUrl!} height={height} />);
+			const imageWrapperElement = rendered.container.querySelector('.ss__image');
+			const imageElement = rendered.container.querySelector('.ss__image img');
+			expect(imageWrapperElement).toBeInTheDocument();
+			expect(imageElement).toHaveAttribute('src', result?.thumbnailImageUrl);
+			const styles = getComputedStyle(imageWrapperElement!);
+			expect(styles.height).toBe(height);
+		});
 	});
 
 	describe('Broken Image', () => {

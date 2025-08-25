@@ -13,7 +13,7 @@ The required `controller` prop specifies a reference to the RecommendationContro
 ```
 
 ### onAddToCart 
-the required `onAddToCart` prop sets a the callback function for when a add to cart button is clicked. This function will be passed an array of selected item ids and their quantities. 
+the `onAddToCart` prop sets a the callback function for when a add to cart button is clicked. This function will be passed an array of selected item ids and their quantities. 
 
 ```jsx
 <RecommendationBundleList controller={controller} onAddToCart={(e, items)=>{console.log(items)}} />
@@ -50,43 +50,26 @@ The `resultComponent` prop allows for a custom result component to be rendered. 
 ```
 
 
-### carousel 
-The `carousel` prop specifies an object of carousel settings. These settings will be merged with the default settings (listed below). All valid Carousel component props (and any non-documented SwiperJS props) can be used here. The below example uses the `prevButton`, `nextButton` and `loop` props from the Carousel:
-
-```jsx
-type BundleCarouselProps = {
-	enabled: boolean;
-	seedInCarousel?: boolean;
-} & CarouselProps
-
-const customCarouselProps = {
-	enabled: true,
-	loop: false,
-	prevButton: 'Previous',
-	nextButton: 'Next'
-}
-<RecommendationBundle controller={controller} onAddToCart={(e, items)=>{console.log(items)}} carousel={ customCarouselProps } />
-```
-
-### enabled
-The `enabled` prop is a sub prop under the `carousel` prop. It specifies weather the bundle should render as a carousel or not.
-
-```jsx
-<RecommendationBundle controller={controller} onAddToCart={(e, items)=>{console.log(items)}} carousel={ enabled:false } />
-```
-
 ### hideSeed
 The `hideSeed` prop specifies if the seed result should be rendered or not.  
 
 ```jsx
-<RecommendationBundle controller={controller} onAddToCart={(e, items)=>{console.log(items)}} hideSeed={true} />
+<RecommendationBundleList controller={controller} onAddToCart={(e, items)=>{console.log(items)}} hideSeed={true} />
 ```
 
-### seedInCarousel
-The `seedInCarousel` prop is a sub prop under the `carousel` prop. It specifies if the seed product should be included in the carousel or not.  
+### hideSeedText
+The `hideSeedText` prop specifies if the seed result text should be rendered or not.  
 
 ```jsx
-<RecommendationBundle controller={controller} onAddToCart={(e, items)=>{console.log(items)}} carousel={ seedInCarousel:true } />
+<RecommendationBundleList controller={controller} onAddToCart={(e, items)=>{console.log(items)}} hideSeedText={true} />
+```
+
+
+### hideCheckboxes
+The `hideCheckboxes` prop specifies if the result checkboxes should be rendered or not.  
+
+```jsx
+<RecommendationBundleList controller={controller} onAddToCart={(e, items)=>{console.log(items)}} hideCheckboxes={true} />
 ```
 
 ### ctaButtonText
@@ -124,18 +107,25 @@ The `ctaSlot` prop allows for a custom add to cart cta component to be rendered.
 <RecommendationBundleList controller={controller} onAddToCart={(e, items)=>{console.log(items)}} ctaSlot={<CTASlot />} />
 ```
 
+### limit
+The `limit` prop limits the number of results rendered
+
+```jsx
+<RecommendationBundleList controller={controller} onAddToCart={(e, items)=>{console.log(items)}} limit={5} />
+```
+
 ### separatorIcon
 The `separatorIcon` prop specifies the icon to render between products. Takes an object with `Icon` component props or a string.     
 
 ```jsx
-<RecommendationBundle controller={controller} onAddToCart={(e, items)=>{console.log(items)}} separatorIcon={'cog'} />
+<RecommendationBundleList controller={controller} onAddToCart={(e, items)=>{console.log(items)}} separatorIcon={'cog'} />
 ```
 
 ### separatorIconSeedOnly
 The `separatorIconSeedOnly` prop specifies if the seperator Icon should only be rendered after the seed or after every product.     
 
 ```jsx
-<RecommendationBundle controller={controller} onAddToCart={(e, items)=>{console.log(items)}} separatorIconSeedOnly={true} />
+<RecommendationBundleList controller={controller} onAddToCart={(e, items)=>{console.log(items)}} separatorIconSeedOnly={true} />
 ```
 
 ### preselectedCount
@@ -155,48 +145,5 @@ const customLazyRenderProps = {
 }
 
 <RecommendationBundleList controller={controller} lazyRender={ customLazyRenderProps } onAddToCart={(e, items)=>{console.log(items)}} />
-```
-
-### breakpoints
-An object that modifies the responsive behavior of the carousel at various viewports. 
-
-The object key specified the viewport for when the parameters will be applied. 
-
-The default configuration contains the following properties, however **`any BundleRecommendation props`**, or [Swiper API parameters](https://swiperjs.com/react#swiper-props) can also be specified. 
-
-`slidesPerView` - number of products to display per page
-
-`slidesPerGroup` - number of products to scroll by when next/previous button is clicked
-
-`spaceBetween` - spacing between each product
-
-```typescript
-const defaultRecommendationBreakpoints = {
-	0: {
-		carousel: {
-			enabled: false,
-		},
-		limit: 2
-	},
-	768: {
-		slidesPerView: 3,
-		slidesPerGroup: 3,
-		spaceBetween: 10,
-	},
-	1024: {
-		slidesPerView: 3,
-		slidesPerGroup: 3,
-		spaceBetween: 10,
-	},
-	1200: {
-		slidesPerView: 4,
-		slidesPerGroup: 4,
-		spaceBetween: 10,
-	},
-};
-```
-
-```jsx
-<RecommendationBundleList controller={controller} onAddToCart={(e, items)=>{console.log(items)}} breakpoints={defaultRecommendationBreakpoints} />
 ```
 

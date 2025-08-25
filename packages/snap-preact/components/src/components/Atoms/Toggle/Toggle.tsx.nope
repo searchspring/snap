@@ -91,7 +91,7 @@ export const Toggle = observer((properties: ToggleProps): JSX.Element => {
 
 	const props = mergeProps('toggle', globalTheme, defaultProps, properties);
 
-	const { toggled, round, onClick, label, disabled, disableStyles, className, style, styleScript } = props;
+	const { toggled, round, onClick, label, disabled, disableStyles, className, internalClassName, style, styleScript } = props;
 
 	const styling: RootNodeProperties = { 'ss-name': props.name };
 	const stylingProps = props;
@@ -129,7 +129,7 @@ export const Toggle = observer((properties: ToggleProps): JSX.Element => {
 
 	return (
 		<CacheProvider>
-			<div {...styling} className={classnames('ss__toggle', disabled ? 'ss__toggle--disabled' : '', className)}>
+			<div {...styling} className={classnames('ss__toggle', disabled ? 'ss__toggle--disabled' : '', className, internalClassName)}>
 				{label && <label className="ss__toggle__label">{label}</label>}
 
 				<div

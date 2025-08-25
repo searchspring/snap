@@ -1,22 +1,29 @@
 import { h } from 'preact';
 import { useEffect } from 'preact/hooks';
 
-export function useCleanUpEmptyDivs(className: string) {
+export function useCleanUpEmptyDivs(selectorsToClean: string[], selectorToIgnore?: string) {
 	useEffect(() => {
-		document.querySelectorAll(className).forEach((col) => {
-			if (!hasElemsToShow(col)) {
-				col.remove();
-			}
+		selectorsToClean.forEach((selectorToClean) => {
+			document.querySelectorAll(selectorToClean).forEach((col) => {
+				if (!hasElemsToShow(col, selectorToIgnore)) {
+					col.remove();
+				}
+			});
 		});
 	});
 }
 
-function hasElemsToShow(element: Element) {
+function hasElemsToShow(element: Element, selectorToIgnore?: string): boolean {
 	if (!element.children.length) return false;
 
 	for (const child of element.children as any) {
-		if (child.tagName !== 'DIV' || child.innerHTML.trim() !== '') {
-			return true;
+		if (child.matches(selectorToIgnore)) {
+			continue;
+		} else {
+			const innerHTML = child.innerHTML.trim();
+			if (child.tagName !== 'DIV' || innerHTML.trim() !== '') {
+				return true;
+			}
 		}
 	}
 	return false;

@@ -51,15 +51,36 @@ export const Checkbox = observer((properties: CheckboxProps): JSX.Element => {
 
 	const props = mergeProps('checkbox', globalTheme, defaultProps, properties);
 
-	const { checked, color, disabled, icon, iconColor, onClick, size, startChecked, native, disableA11y, disableStyles, className, theme, treePath } =
-		props;
+	const {
+		checked,
+		color,
+		disabled,
+		icon,
+		iconColor,
+		onClick,
+		size,
+		startChecked,
+		native,
+		disableA11y,
+		disableStyles,
+		className,
+		internalClassName,
+		theme,
+		treePath,
+		lang,
+		style: _,
+		styleScript: __,
+		themeStyleScript: ___,
+		name: ____,
+		...additionalProps
+	} = props;
 
 	const pixelSize = isNaN(Number(size)) ? size : `${size}px`;
 
 	const subProps: CheckboxSubProps = {
 		icon: {
 			// default props
-			className: 'ss__checkbox__icon',
+			internalClassName: 'ss__checkbox__icon',
 			icon: 'check-thin',
 			// inherited props
 			...defined({
@@ -104,8 +125,8 @@ export const Checkbox = observer((properties: CheckboxProps): JSX.Element => {
 	};
 
 	//deep merge with props.lang
-	const lang = deepmerge(defaultLang, props.lang || {});
-	const mergedLang = useLang(lang as any, {
+	const _lang = deepmerge(defaultLang, lang || {});
+	const mergedLang = useLang(_lang as any, {
 		checkedState,
 		disabled,
 	});
@@ -119,7 +140,8 @@ export const Checkbox = observer((properties: CheckboxProps): JSX.Element => {
 						'ss__checkbox',
 						'ss__checkbox--native',
 						{ 'ss__checkbox--disabled': disabled, 'ss__checkbox--active': checkedState },
-						className
+						className,
+						internalClassName
 					)}
 					type="checkbox"
 					aria-checked={checkedState}
@@ -130,12 +152,18 @@ export const Checkbox = observer((properties: CheckboxProps): JSX.Element => {
 			) : (
 				<span
 					{...styling}
-					className={classnames('ss__checkbox', { 'ss__checkbox--disabled': disabled, 'ss__checkbox--active': checkedState }, className)}
+					className={classnames(
+						'ss__checkbox',
+						{ 'ss__checkbox--disabled': disabled, 'ss__checkbox--active': checkedState },
+						className,
+						internalClassName
+					)}
 					onClick={(e) => clickFunc(e)}
 					ref={(e) => (!disableA11y ? useA11y(e) : null)}
 					aria-disabled={disabled}
 					role="checkbox"
 					aria-checked={checkedState}
+					{...additionalProps}
 					{...mergedLang.checkbox.all}
 				>
 					{checkedState ? (

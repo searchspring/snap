@@ -28,6 +28,9 @@ let searchConfig: SearchStoreConfig;
 const urlManager = new UrlManager(new QueryStringTranslator(), reactLinker);
 const services = { urlManager };
 
+// mocks fetch so beacon client does not make network requests
+jest.spyOn(global.window, 'fetch').mockImplementation(() => Promise.resolve({ status: 200, json: () => Promise.resolve({}) } as Response));
+
 describe('Search Controller', () => {
 	beforeEach(() => {
 		searchConfig = { ...searchConfigDefault };
@@ -63,6 +66,7 @@ describe('Search Controller', () => {
 		expect(controller.log instanceof Logger).toBeTruthy();
 		expect(controller.search).toBeDefined();
 		expect(controller.config.id).toBe(searchConfig.id);
+		expect(controller['page'].type).toBe('search');
 
 		expect(controller.store.results.length).toBe(0);
 		expect(searchfn).not.toHaveBeenCalled();
@@ -137,6 +141,7 @@ describe('Search Controller', () => {
 
 		//@ts-ignore
 		delete window.location;
+		//@ts-ignore
 		window.location = {
 			...window.location,
 			replace: jest.fn(),
@@ -186,6 +191,29 @@ describe('Search Controller', () => {
 		// should not redirect whem redirectResponse='full'
 		expect(window.location.replace).not.toHaveBeenCalled();
 		expect(controller.store.results.length).toBeGreaterThan(0);
+	});
+
+	it('tests page context variable', async () => {
+		const context = {
+			page: {
+				type: 'category' as const,
+			},
+		};
+		const controller = new SearchController(
+			searchConfig,
+			{
+				client: new MockClient(globals, {}),
+				store: new SearchStore(searchConfig, services),
+				urlManager,
+				eventManager: new EventManager(),
+				profiler: new Profiler(),
+				logger: new Logger(),
+				tracker: new Tracker(globals),
+			},
+			context
+		);
+
+		expect(controller['page'].type).toBe('category');
 	});
 
 	const events = ['init', 'beforeSearch', 'afterSearch', 'afterStore'];
@@ -390,6 +418,7 @@ describe('Search Controller', () => {
 		controller.addToCart([controller.store.results[0] as Product, controller.store.results[1] as Product]);
 
 		expect(eventfn).toHaveBeenCalledWith('addToCart', { controller, products: [controller.store.results[0], controller.store.results[1]] });
+		controller.tracker.cookies.cart.clear();
 	});
 
 	it('can set filter param', async () => {
@@ -417,24 +446,22 @@ describe('Search Controller', () => {
 			logger: new Logger(),
 			tracker: new Tracker(globals),
 		});
-		const clickfn = jest.spyOn(controller.tracker.track.product, 'click');
+		const clickfn = jest.spyOn(controller.tracker.events.search, 'clickThrough');
 
 		await controller.search();
 
 		const result = controller.store.results[0];
-		const { intellisuggestData, intellisuggestSignature } = result.attributes;
-		const href = result.mappings.core?.url;
-		const event = new Event('click');
+		const href = result.mappings.core?.url!;
 
 		const storagefn = jest.spyOn(controller.storage, 'set');
+		const aElem = document.createElement('a');
+		aElem.setAttribute('href', href);
+		aElem.onclick = (e) => {
+			controller.track.product.click(e, result);
+		};
+		aElem.click();
 
-		controller.track.product.click(event as any, result);
-
-		expect(clickfn).toHaveBeenCalledWith({
-			intellisuggestData,
-			intellisuggestSignature,
-			href,
-		});
+		expect(clickfn).toHaveBeenCalledTimes(1);
 
 		expect(storagefn).toHaveBeenCalledTimes(1);
 
@@ -456,6 +483,8 @@ describe('Search Controller', () => {
 		const items = ['product123', 'product456'];
 		controller.tracker.cookies.cart.add(items);
 		expect(controller.params.personalization!.cart).toEqual(items.join(','));
+
+		controller.tracker.cookies.cart.clear();
 	});
 
 	it('can set personalization lastViewed param', async () => {
@@ -508,10 +537,10 @@ describe('Search Controller', () => {
 		expect(searchfn).toHaveBeenCalledTimes(1);
 
 		await controller.search();
-		expect(searchfn).toHaveBeenCalledTimes(2); // a 2nd search is called due to redirectResponse setting (store.loaded)
+		expect(searchfn).toHaveBeenCalledTimes(1); // a 2nd search call should not make a search. redirectResponseno is no longer part of cache key
 
 		await controller.search();
-		expect(searchfn).toHaveBeenCalledTimes(2); // should not search again
+		expect(searchfn).toHaveBeenCalledTimes(1); // additional calls should not make a search.
 		searchfn.mockClear();
 	});
 
@@ -606,11 +635,6 @@ describe('Search Controller', () => {
 	});
 
 	it(`stores scroll position in 'track.product.click' call`, async () => {
-		const href = 'https://localhost:2222/product.html';
-		// set initial DOM setup
-		document.body.innerHTML = `<div class="ss__results"><div class="ss__result"><a class="link" href="${href}"></a></div></div>`;
-		const selector = `DIV.ss__result A.link[href*=\"${href}\"]`;
-
 		const controller = new SearchController(searchConfig, {
 			client: new MockClient(globals, {}),
 			store: new SearchStore(searchConfig, services),
@@ -627,18 +651,14 @@ describe('Search Controller', () => {
 		});
 
 		await controller.search();
+		const href = controller.store.results[0].mappings.core?.url;
 
-		const restorePositionFunc = jest.fn((selector?: string) => {
-			console.log(selector);
-		});
+		document.body.innerHTML = `<div class="ss__results"><div class="ss__result"><a class="link" href="${href}"></a></div></div>`;
+		const selector = `DIV.ss__result A.link[href*=\"${href}\"]`;
 
 		const linkElem = document.querySelector('.link');
 
-		controller.track.product.click({ target: linkElem } as MouseEvent, {
-			mappings: { core: { url: href } },
-			attributes: { intellisuggestData: '', intellisuggestSignature: '' },
-		});
-
+		controller.track.product.click({ target: linkElem } as MouseEvent, controller.store.results[0]);
 		const scrollMap = controller.storage.get('scrollMap');
 		expect(scrollMap).toStrictEqual({
 			[stringyParams]: {
@@ -761,7 +781,7 @@ describe('Search Controller', () => {
 				tracker: new Tracker(globals),
 			});
 
-			expect(controller.config.settings!.infinite).toBeDefined();
+			expect(controller.config.settings!.infinite?.enabled).toBeDefined();
 
 			// set page 1 data
 			(controller.client as MockClient).mockData.updateConfig({ search: 'infinite.page1', siteId: '8uyt2m' });
@@ -794,7 +814,7 @@ describe('Search Controller', () => {
 				tracker: new Tracker(globals),
 			});
 
-			expect(controller.config.settings!.infinite).toBeDefined();
+			expect(controller.config.settings!.infinite?.enabled).toBeDefined();
 
 			// set page 1 data
 			(controller.client as MockClient).mockData.updateConfig({ search: 'infinite.page1', siteId: '8uyt2m' });
@@ -835,7 +855,7 @@ describe('Search Controller', () => {
 				tracker: new Tracker(globals),
 			});
 
-			expect(controller.config.settings!.infinite).toBeDefined();
+			expect(controller.config.settings!.infinite?.enabled).toBeDefined();
 
 			// set page 1 data
 			(controller.client as MockClient).mockData.updateConfig({ search: 'inlineBanners.page1', siteId: '8uyt2m' });
@@ -886,7 +906,7 @@ describe('Search Controller', () => {
 				tracker: new Tracker(globals),
 			});
 
-			expect(controller.config.settings!.infinite).toBeDefined();
+			expect(controller.config.settings!.infinite?.enabled).toBeDefined();
 
 			// set page 1 data
 			(controller.client as MockClient).mockData.updateConfig({ search: 'infinite.inline.page1', siteId: '8uyt2m' });
@@ -1014,7 +1034,7 @@ describe('Search Controller', () => {
 				tracker: new Tracker(globals),
 			});
 
-			expect(controller.config.settings!.infinite).toBeDefined();
+			expect(controller.config.settings!.infinite?.enabled).toBeDefined();
 
 			// set page 1 data
 			(controller.client as MockClient).mockData.updateConfig({ search: 'infinite.page1', siteId: '8uyt2m' });

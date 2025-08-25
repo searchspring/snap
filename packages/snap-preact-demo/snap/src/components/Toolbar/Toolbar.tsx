@@ -38,7 +38,7 @@ export const Toolbar = withController(
 						<PerPage />
 					</div>
 					<div className="ss-toolbar-col pagination">
-						{pagination.totalPages > 1 && !isMobile && !controller.config?.settings?.infinite && <Pagination pagination={pagination} />}
+						{pagination.totalPages > 1 && !isMobile && !controller.config?.settings?.infinite?.enabled && <Pagination pagination={pagination} />}
 					</div>
 				</div>
 			</div>

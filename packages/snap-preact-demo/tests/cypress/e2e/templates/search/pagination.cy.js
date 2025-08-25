@@ -5,7 +5,7 @@ describe('Pagination', () => {
 
 	it('can paginate', () => {
 		cy.snapController().then(({ store, config }) => {
-			if (config.settings.infinite) {
+			if (config.settings.infinite?.enabled) {
 				cy.get('.ss__load-more').should('exist');
 				cy.get('.ss__load-more__progress__text').should('contain', store.pagination.end).should('contain', store.pagination.totalResults);
 			} else {

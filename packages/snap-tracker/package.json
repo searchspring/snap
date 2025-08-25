@@ -20,6 +20,7 @@
 		"test:watch": "jest --watch"
 	},
 	"dependencies": {
+		"@searchspring/beacon": "0.0.31",
 		"@searchspring/snap-store-mobx": "^1.8.1",
 		"@searchspring/snap-toolbox": "^1.8.1",
 		"@types/uuid": "8.3.4",

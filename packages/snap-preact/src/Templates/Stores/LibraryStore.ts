@@ -1,6 +1,6 @@
 import { FunctionalComponent, RenderableProps } from 'preact';
 
-import type { Theme, ThemeMinimal } from '../../../components/src';
+import type { Theme, ThemeComplete, ThemeMinimal } from '../../../components/src';
 import { transformTranslationsToTheme, type TemplateCustomComponentTypes, type TemplateTypes } from './TemplateStore';
 import type { TemplateStoreComponentConfig } from './TemplateStore';
 import type { PluginFunction } from '@searchspring/snap-controller';
@@ -27,10 +27,10 @@ type LibraryComponentMap = {
 
 export type LibraryImports = {
 	theme: {
-		base: (args?: any) => Promise<Theme>;
-		bocachica: (args?: any) => Promise<Theme>;
-		snappy: (args?: any) => Promise<Theme>;
-		snapnco: (args?: any) => Promise<Theme>;
+		base: (args?: any) => Promise<ThemeComplete>;
+		bocachica: (args?: any) => Promise<ThemeComplete>;
+		snappy: (args?: any) => Promise<ThemeComplete>;
+		snapnco: (args?: any) => Promise<ThemeComplete>;
 	};
 	plugins: {
 		shopify: {
@@ -62,7 +62,9 @@ export type LibraryImports = {
 			SearchHorizontal: (args?: any) => Promise<FunctionalComponent<RenderableProps<any>>>;
 		};
 		autocomplete: {
-			AutocompleteTemplate: (args?: any) => Promise<FunctionalComponent<RenderableProps<any>>>;
+			AutocompleteFixed: (args?: any) => Promise<FunctionalComponent<RenderableProps<any>>>;
+			AutocompleteModal: (args?: any) => Promise<FunctionalComponent<RenderableProps<any>>>;
+			AutocompleteSlideout: (args?: any) => Promise<FunctionalComponent<RenderableProps<any>>>;
 		};
 		recommendation: {
 			bundle: {
@@ -105,7 +107,7 @@ export type LanguageCodes = 'en' | 'fr' | 'es';
 
 export class LibraryStore {
 	themes: {
-		[themeName: string]: Theme;
+		[themeName: string]: ThemeComplete;
 	} = {};
 
 	components: {
@@ -180,10 +182,22 @@ export class LibraryStore {
 		},
 		component: {
 			autocomplete: {
-				AutocompleteTemplate: async () => {
+				AutocompleteFixed: async () => {
 					return (
-						this.components.autocomplete.AutocompleteTemplate ||
-						(this.components.autocomplete.AutocompleteTemplate = (await import('./library/components/AutocompleteTemplate')).AutocompleteTemplate)
+						this.components.autocomplete.AutocompleteFixed ||
+						(this.components.autocomplete.AutocompleteFixed = (await import('./library/components/AutocompleteFixed')).AutocompleteFixed)
+					);
+				},
+				AutocompleteSlideout: async () => {
+					return (
+						this.components.autocomplete.AutocompleteSlideout ||
+						(this.components.autocomplete.AutocompleteSlideout = (await import('./library/components/AutocompleteSlideout')).AutocompleteSlideout)
+					);
+				},
+				AutocompleteModal: async () => {
+					return (
+						this.components.autocomplete.AutocompleteModal ||
+						(this.components.autocomplete.AutocompleteModal = (await import('./library/components/AutocompleteModal')).AutocompleteModal)
 					);
 				},
 			},

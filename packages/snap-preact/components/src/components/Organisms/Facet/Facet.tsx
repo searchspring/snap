@@ -21,6 +21,7 @@ import { useA11y } from '../../../hooks/useA11y';
 // import { FacetToggle, FacetToggleProps } from '../../Molecules/FacetToggle';
 import { Lang, useLang } from '../../../hooks';
 import deepmerge from 'deepmerge';
+import { Button, ButtonProps } from '../../Atoms/Button';
 
 const defaultStyles: StyleScript<FacetProps> = ({ disableCollapse, color, theme }) => {
 	return css({
@@ -35,7 +36,28 @@ const defaultStyles: StyleScript<FacetProps> = ({ disableCollapse, color, theme 
 			border: 'none',
 			borderBottom: `2px solid ${theme?.variables?.colors?.secondary || '#ccc'}`,
 			padding: '6px 0',
+
+			'& .ss__facet__header__inner': {
+				display: 'flex',
+			},
 		},
+
+		'& .ss__facet__header__clear-all': {
+			cursor: 'pointer',
+			display: 'flex',
+			alignItems: 'center',
+			marginLeft: '10px',
+			border: 'none',
+			padding: '0',
+			color: color || theme?.variables?.colors?.primary,
+			'&:hover': {
+				textDecoration: 'underline',
+			},
+			'& .ss__icon': {
+				marginLeft: '5px',
+			},
+		},
+
 		'& .ss__facet__options': {
 			marginTop: '8px',
 			maxHeight: '300px',
@@ -53,6 +75,9 @@ const defaultStyles: StyleScript<FacetProps> = ({ disableCollapse, color, theme 
 		'& .ss__search-input': {
 			margin: '16px 0 0 0',
 		},
+		'& .ss__facet__header__selected-count': {
+			margin: '0px 5px',
+		},
 	});
 };
 
@@ -68,6 +93,7 @@ export const Facet = observer((properties: FacetProps): JSX.Element => {
 		showLessText: 'Show Less',
 		iconOverflowMore: 'plus',
 		iconOverflowLess: 'minus',
+		clearAllText: 'Clear All',
 		searchable: false,
 		treePath: globalTreePath,
 	};
@@ -101,17 +127,22 @@ export const Facet = observer((properties: FacetProps): JSX.Element => {
 		color,
 		previewOnFocus,
 		valueProps,
+		showSelectedCount,
+		hideSelectedCountParenthesis,
+		clearAllIcon,
+		showClearAllText,
 		justContent,
 		horizontal,
 		disableStyles,
 		className,
+		internalClassName,
 		treePath,
 	} = props;
 
 	const subProps: FacetSubProps = {
 		dropdown: {
 			// default props
-			className: 'ss__facet__dropdown',
+			internalClassName: 'ss__facet__dropdown',
 			disableClickOutside: true,
 			disableOverlay: true,
 			// inherited props
@@ -124,7 +155,7 @@ export const Facet = observer((properties: FacetProps): JSX.Element => {
 		},
 		icon: {
 			// default props
-			className: 'ss__facet__dropdown__icon',
+			internalClassName: 'ss__facet__dropdown__icon',
 			size: '12px',
 			color: iconColor || color,
 			// inherited props
@@ -135,9 +166,18 @@ export const Facet = observer((properties: FacetProps): JSX.Element => {
 			theme: props?.theme,
 			treePath,
 		},
+		button: {
+			// inherited props
+			...defined({
+				disableStyles,
+			}),
+			// component theme overrides
+			theme: props?.theme,
+			treePath,
+		},
 		showMoreLessIcon: {
 			// default props
-			className: 'ss__facet__show-more-less__icon',
+			internalClassName: 'ss__facet__show-more-less__icon',
 			size: '10px',
 			color: iconColor || color,
 			// inherited props
@@ -150,7 +190,7 @@ export const Facet = observer((properties: FacetProps): JSX.Element => {
 		},
 		facetHierarchyOptions: {
 			// default props
-			className: 'ss__facet__facet-hierarchy-options',
+			internalClassName: 'ss__facet__facet-hierarchy-options',
 			// inherited props
 			...defined({
 				disableStyles,
@@ -164,7 +204,7 @@ export const Facet = observer((properties: FacetProps): JSX.Element => {
 		},
 		facetListOptions: {
 			// default props
-			className: 'ss__facet__facet-list-options',
+			internalClassName: 'ss__facet__facet-list-options',
 			// inherited props
 			...defined({
 				disableStyles,
@@ -178,7 +218,7 @@ export const Facet = observer((properties: FacetProps): JSX.Element => {
 		},
 		facetGridOptions: {
 			// default props
-			className: 'ss__facet__facet-grid-options',
+			internalClassName: 'ss__facet__facet-grid-options',
 			// inherited props
 			...defined({
 				disableStyles,
@@ -192,7 +232,7 @@ export const Facet = observer((properties: FacetProps): JSX.Element => {
 		},
 		facetPaletteOptions: {
 			// default props
-			className: 'ss__facet__facet-palette-options',
+			internalClassName: 'ss__facet__facet-palette-options',
 			// inherited props
 			...defined({
 				disableStyles,
@@ -217,7 +257,7 @@ export const Facet = observer((properties: FacetProps): JSX.Element => {
 		// },
 		facetSlider: {
 			// default props
-			className: 'ss__facet__facet-slider',
+			internalClassName: 'ss__facet__facet-slider',
 			// inherited props
 			...defined({
 				disableStyles,
@@ -228,7 +268,7 @@ export const Facet = observer((properties: FacetProps): JSX.Element => {
 		},
 		searchInput: {
 			// default props
-			className: 'ss__facet__search-input',
+			internalClassName: 'ss__facet__search-input',
 			// inherited props
 			...defined({
 				disableStyles,
@@ -271,6 +311,7 @@ export const Facet = observer((properties: FacetProps): JSX.Element => {
 		searchableFacet,
 		subProps,
 		className,
+		internalClassName,
 		...props,
 	};
 
@@ -289,6 +330,9 @@ export const Facet = observer((properties: FacetProps): JSX.Element => {
 				}`,
 			},
 		},
+		clearAllText: {
+			value: facetContentProps.clearAllText,
+		},
 	};
 
 	//deep merge with props.lang
@@ -298,9 +342,7 @@ export const Facet = observer((properties: FacetProps): JSX.Element => {
 	});
 	facetContentProps.lang = mergedLang;
 
-	if (justContent) {
-		return <FacetContent {...facetContentProps}></FacetContent>;
-	}
+	const selectedCount = (facet as ValueFacet)?.values?.filter((value) => value?.filtered).length;
 
 	return facet && renderFacet ? (
 		<CacheProvider>
@@ -311,39 +353,65 @@ export const Facet = observer((properties: FacetProps): JSX.Element => {
 					`ss__facet--${facet.field}`,
 					`${facet.collapsed ? 'ss__facet--collapsed' : ''}`,
 					className,
+					internalClassName,
 					`${facet.display ? `ss__facet--${facet.display}` : ''}`,
 					((facet as ValueFacet)?.overflow?.remaining || 0) > 0 || facet?.display == 'slider' ? '' : 'ss__facet--showing-all'
 				)}
 			>
-				<Dropdown
-					{...subProps.dropdown}
-					open={disableCollapse || !facet?.collapsed}
-					onClick={() => !disableCollapse && facet.toggleCollapse && facet?.toggleCollapse()}
-					disableA11y={true}
-					button={
-						<div
-							className="ss__facet__header"
-							ref={(e) => useA11y(e, disableCollapse ? -1 : 0)}
-							role="heading"
-							aria-level={3}
-							{...mergedLang.dropdownButton.attributes}
-						>
-							<span {...mergedLang.dropdownButton.value}>{facet?.label}</span>
-							{!disableCollapse && (
-								<Icon
-									{...subProps.icon}
-									{...(facet?.collapsed
-										? { ...(typeof iconExpand == 'string' ? { icon: iconExpand } : (iconExpand as Partial<IconProps>)) }
-										: { ...(typeof iconCollapse == 'string' ? { icon: iconCollapse } : (iconCollapse as Partial<IconProps>)) })}
-									name={facet?.collapsed ? 'expand' : 'collapse'}
-									treePath={props.treePath}
-								/>
-							)}
-						</div>
-					}
-				>
+				{justContent ? (
 					<FacetContent {...facetContentProps}></FacetContent>
-				</Dropdown>
+				) : (
+					<Dropdown
+						{...subProps.dropdown}
+						open={disableCollapse || !facet?.collapsed}
+						onClick={() => !disableCollapse && facet.toggleCollapse && facet?.toggleCollapse()}
+						disableA11y={true}
+						button={
+							<div
+								className="ss__facet__header"
+								ref={(e) => useA11y(e, disableCollapse ? -1 : 0)}
+								role="heading"
+								aria-level={3}
+								{...mergedLang.dropdownButton.attributes}
+							>
+								<div className="ss__facet__header__inner">
+									<span {...mergedLang.dropdownButton.value}>{facet?.label}</span>
+									{showSelectedCount && selectedCount ? (
+										<span className="ss__facet__header__selected-count">{hideSelectedCountParenthesis ? selectedCount : `(${selectedCount})`}</span>
+									) : null}
+									{(mergedLang.clearAllText.value || clearAllIcon) && selectedCount ? (
+										<Button
+											{...subProps.button}
+											internalClassName="ss__facet__header__clear-all"
+											name={'reset-facet'}
+											onClick={(e) => {
+												e.stopPropagation();
+												facet?.clear.url.link.onClick();
+											}}
+											icon={clearAllIcon ? clearAllIcon : undefined}
+										>
+											{mergedLang.clearAllText.value && showClearAllText ? <label {...mergedLang.clearAllText.all}></label> : null}
+										</Button>
+									) : (
+										<></>
+									)}
+								</div>
+								{!disableCollapse && (
+									<Icon
+										{...subProps.icon}
+										{...(facet?.collapsed
+											? { ...(typeof iconExpand == 'string' ? { icon: iconExpand } : (iconExpand as Partial<IconProps>)) }
+											: { ...(typeof iconCollapse == 'string' ? { icon: iconCollapse } : (iconCollapse as Partial<IconProps>)) })}
+										name={facet?.collapsed ? 'expand' : 'collapse'}
+										treePath={props.treePath}
+									/>
+								)}
+							</div>
+						}
+					>
+						<FacetContent {...facetContentProps}></FacetContent>
+					</Dropdown>
+				)}
 			</div>
 		</CacheProvider>
 	) : (
@@ -356,6 +424,7 @@ const FacetContent = (props: any) => {
 		searchableFacet,
 		subProps,
 		className,
+		internalClassName,
 		limitedValues,
 		facet,
 		limit,
@@ -366,6 +435,7 @@ const FacetContent = (props: any) => {
 		iconOverflowLess,
 		disableOverflow,
 		previewOnFocus,
+		justContent,
 		valueProps,
 		hideShowMoreLessText,
 		treePath,
@@ -375,9 +445,14 @@ const FacetContent = (props: any) => {
 	return (
 		<Fragment>
 			{searchable && searchableFacet.allowableTypes.includes(facet.display) && (
-				<SearchInput {...subProps.searchInput} onChange={searchableFacet.searchFilter} placeholder={`Search ${facet.label}`} treePath={treePath} />
+				<SearchInput
+					{...subProps.searchInput}
+					onChange={searchableFacet.searchFilter}
+					placeholderText={`Search ${facet.label}`}
+					treePath={treePath}
+				/>
 			)}
-			<div className={classnames('ss__facet__options', className)}>
+			<div className={classnames('ss__facet__options', justContent ? className : '', justContent ? internalClassName : '')}>
 				{(() => {
 					//manual options component
 					if (optionsSlot) {
@@ -468,6 +543,7 @@ interface FacetSubProps {
 	facetSlider: Partial<FacetSliderProps>;
 	searchInput: Partial<SearchInputProps>;
 	icon: Partial<IconProps>;
+	button: Partial<ButtonProps>;
 	showMoreLessIcon: Partial<IconProps>;
 }
 
@@ -487,6 +563,11 @@ interface OptionalFacetProps extends ComponentProps {
 	disableOverflow?: boolean;
 	previewOnFocus?: boolean;
 	valueProps?: any;
+	showSelectedCount?: boolean;
+	hideSelectedCountParenthesis?: boolean;
+	showClearAllText?: boolean;
+	clearAllText?: string;
+	clearAllIcon?: IconType | Partial<IconProps>;
 	hideShowMoreLessText?: boolean;
 	showMoreText?: string;
 	showLessText?: string;
@@ -508,6 +589,9 @@ export interface FacetLang {
 		facet: ValueFacet | RangeFacet;
 	}>;
 	dropdownButton: Lang<{
+		facet: ValueFacet | RangeFacet;
+	}>;
+	clearAllText: Lang<{
 		facet: ValueFacet | RangeFacet;
 	}>;
 }

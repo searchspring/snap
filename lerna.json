@@ -4,7 +4,7 @@
 	"npmClient": "npm",
 	"command": {
 		"publish": {
-			"message": "chore(publish): %s",
+			"message": "chore(publish): %s [skip actions]",
 			"conventionalCommits": true
 		}
 	}

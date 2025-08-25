@@ -88,7 +88,6 @@ export default {
 		},
 		onAddToCart: {
 			description: 'onClick event handler for add bundle to cart button in CTA',
-			type: { required: true },
 			table: {
 				type: {
 					summary: 'function',
@@ -188,17 +187,6 @@ export default {
 					summary: 'object',
 				},
 				defaultValue: { summary: 'Lazy render settings object' },
-			},
-			control: { type: 'object' },
-		},
-		breakpoints: {
-			defaultValue: undefined,
-			description: 'Recommendation title',
-			table: {
-				type: {
-					summary: 'object',
-				},
-				defaultValue: { summary: 'Breakpoint object' },
 			},
 			control: { type: 'object' },
 		},

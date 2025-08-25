@@ -4,12 +4,17 @@ import { observer } from 'mobx-react-lite';
 import { ComponentProps, StyleScript } from '../../../types';
 import { defined, mergeStyles } from '../../../utilities';
 import { RecommendationBundle, RecommendationBundleProps } from '../RecommendationBundle';
-import { Price } from '../../Atoms/Price';
-import { Button } from '../../Atoms/Button';
-import { Icon } from '../../Atoms/Icon';
-import { Image } from '../../Atoms/Image';
+import { Price, PriceProps } from '../../Atoms/Price';
+import { Button, ButtonProps } from '../../Atoms/Button';
+import { Icon, IconProps } from '../../Atoms/Icon';
+import { Image, ImageProps } from '../../Atoms/Image';
 import { Result } from '../../Molecules/Result';
 import { BundledCTAProps } from '../RecommendationBundle/BundleCTA';
+import { componentNameToClassName } from '../../../utilities/componentNameToClassName';
+import classNames from 'classnames';
+import { useState } from 'preact/hooks';
+import deepmerge from 'deepmerge';
+import { useLang } from '../../../hooks';
 
 const defaultStyles: StyleScript<RecommendationBundleListProps> = () => {
 	return css({
@@ -41,28 +46,29 @@ const defaultStyles: StyleScript<RecommendationBundleListProps> = () => {
 				cursor: 'pointer',
 				border: '1px solid black',
 			},
-			'.cta__inner_images': {
+			'.ss__recommendation-bundle-list__wrapper__cta__inner__images': {
 				display: 'flex',
 				flexDirection: 'row',
 			},
-
-			'.cta__inner__image-wrapper .ss__icon': {
+			'.ss__recommendation-bundle-list__wrapper__cta__inner__image-wrapper .ss__icon': {
 				top: '50%',
 				position: 'absolute',
 				right: '-0.5em',
 			},
 
-			'.cta__inner__image-wrapper:last-of-type .ss__icon': {
+			'.ss__recommendation-bundle-list__wrapper__cta__inner__image-wrapper:last-of-type .ss__icon': {
 				display: 'none',
 			},
 
-			'.cta__inner__image-wrapper': {
+			'.ss__recommendation-bundle-list__wrapper__cta__inner__image-wrapper': {
 				padding: '0px 15px',
 				position: 'relative',
 			},
 		},
 	});
 };
+
+const alias = 'recommendationBundleList';
 
 export const RecommendationBundleList = observer((properties: RecommendationBundleListProps): JSX.Element => {
 	//mergeprops only uses names that are passed via properties, so this cannot be put in the defaultProps
@@ -85,16 +91,16 @@ export const RecommendationBundleList = observer((properties: RecommendationBund
 				seedInCarousel: true,
 			},
 			ctaSlot: (props) => <CTASlot {...props} />,
-			resultComponent: (props) => <Result hideImage={true} {...props} />,
+			resultComponent: (props) => <Result hideImage={true} hideBadge={true} {...props} />,
 			vertical: true,
 			separatorIcon: false,
-			alias: 'recommendationBundleList',
+			alias: alias,
 
 			// inherited props
 			...defined({
 				disableStyles,
 			}),
-			// component theme oveRides
+			// component theme overrides
 			theme: _properties?.theme,
 			treePath,
 		},
@@ -106,7 +112,7 @@ export const RecommendationBundleList = observer((properties: RecommendationBund
 
 export type RecommendationBundleListProps = Omit<
 	RecommendationBundleProps,
-	'seedText' | 'vertical' | 'ctaInline' | 'ctaIcon' | 'vertical' | 'slidesPerView'
+	'seedText' | 'vertical' | 'ctaInline' | 'ctaIcon' | 'vertical' | 'slidesPerView' | 'carousel' | 'breakpoints'
 > &
 	ComponentProps;
 
@@ -114,46 +120,139 @@ interface RecommendationBundleListSubProps {
 	recommendationBundle: Partial<RecommendationBundleProps>;
 }
 
+interface BundleCTASubProps {
+	image: Partial<ImageProps>;
+	icon: Partial<IconProps>;
+	separatorIcon: Partial<IconProps>;
+	subtotalStrike: Partial<PriceProps>;
+	subtotalPrice: Partial<PriceProps>;
+	button: Partial<ButtonProps>;
+}
 export const CTASlot = observer((props: BundledCTAProps): JSX.Element => {
 	const cartStore = props.cartStore;
+
+	const classNamePrefix = `ss__${componentNameToClassName(alias)}`;
+
+	props.onAddToCart = (e: any) => {
+		setAddedToCart(true);
+
+		props.onAddToCart(e);
+
+		setTimeout(() => setAddedToCart(false), props.ctaButtonSuccessTimeout);
+	};
+
+	const [addedToCart, setAddedToCart] = useState(false);
+
+	props.addedToCart = addedToCart;
+
+	const subProps: BundleCTASubProps = {
+		image: {
+			// default props
+			className: `${classNamePrefix}__wrapper__cta__image`,
+			// component theme overrides
+			theme: props?.theme,
+			treePath: props.treePath,
+		},
+		separatorIcon: {
+			name: 'bundle-cart-separator',
+			// default props
+			className: `${classNamePrefix}__wrapper__cta__icon--separator`,
+			icon: 'plus',
+			size: 12,
+			// component theme overrides
+			theme: props?.theme,
+			treePath: props.treePath,
+		},
+		icon: {
+			name: 'bundle-cart',
+			// default props
+			className: `${classNamePrefix}__wrapper__cta__icon`,
+			size: 50,
+			// component theme overrides
+			theme: props?.theme,
+			treePath: props.treePath,
+		},
+		subtotalStrike: {
+			// default props
+			name: 'bundle-msrp',
+			className: `${classNamePrefix}__wrapper__cta__price--strike`,
+			// component theme overrides
+			theme: props?.theme,
+			treePath: props.treePath,
+		},
+		subtotalPrice: {
+			// default props
+			className: `${classNamePrefix}__wrapper__cta__price`,
+			name: 'bundle-price',
+			// component theme overrides
+			theme: props?.theme,
+			treePath: props.treePath,
+		},
+		button: {
+			// default props
+			className: `${classNamePrefix}__wrapper__cta__button`,
+			// component theme overrides
+			theme: props?.theme,
+			treePath: props.treePath,
+		},
+	};
+
+	//deep merge with props.lang
+	const lang = deepmerge({}, props.lang || {});
+	const mergedLang = useLang(lang as any, {});
+
 	return (
-		<div className="cta">
-			<div className="cta__inner">
-				<div className="cta__inner_images">
+		<div className={`${classNamePrefix}__wrapper__cta`}>
+			<div className={`${classNamePrefix}__wrapper__cta__inner`}>
+				<div className={`${classNamePrefix}__wrapper__cta__inner__images`}>
 					{cartStore.items.map((item: any) => {
 						const core = item.display.mappings.core;
 						return (
-							<div className="cta__inner__image-wrapper">
-								<Image src={core.thumbnailImageUrl} alt={core.name} lazy={false} />
-								<Icon icon={'plus'} size={12} />
+							<div className={`${classNamePrefix}__wrapper__cta__inner__image-wrapper`}>
+								<a href={core!.url}>
+									<Image src={core.thumbnailImageUrl} alt={core.name} lazy={false} />
+								</a>
+								<Icon {...subProps.separatorIcon} />
 							</div>
 						);
 					})}
 				</div>
-				<div className="cta__inner__subtotal__title">{`${cartStore.count} item${cartStore.count != 1 ? 's' : ''}`}</div>
 
-				<div className="cta__inner__price">
-					<div className="cta__inner__price__title">Total Price</div>
-					<div className="cta__inner__price__wrapper">
-						{cartStore.msrp > cartStore.price && (
-							<span className="cta__inner__price__msrp">
-								<s>
-									<Price value={cartStore.msrp} /> USD
-								</s>
-							</span>
+				<div className={`${classNamePrefix}__wrapper__cta__subtotal`} aria-atomic="false" aria-live="polite">
+					{props.ctaIcon ? (
+						<div className={`${classNamePrefix}__wrapper__cta__subtotal__icon__wrapper`}>
+							<Icon {...subProps.icon} {...(typeof props.ctaIcon == 'string' ? { icon: props.ctaIcon } : (props.ctaIcon as Partial<IconProps>))} />
+						</div>
+					) : (
+						<></>
+					)}
+
+					<span className={`${classNamePrefix}__wrapper__cta__subtotal__title`}>{`Subtotal for ${cartStore.count} items`}</span>
+					<div className={`${classNamePrefix}__wrapper__cta__subtotal__prices`}>
+						{cartStore.msrp && cartStore.msrp !== cartStore.price ? (
+							<label className={`${classNamePrefix}__wrapper__cta__subtotal__strike`}>
+								Was <Price {...subProps.subtotalStrike} lineThrough={true} value={cartStore.msrp} />
+							</label>
+						) : (
+							<></>
 						)}
-						<span className="cta__inner__price__msrp">
-							<Price value={cartStore.price} /> USD
-						</span>
+						<label className={`${classNamePrefix}__wrapper__cta__subtotal__price`}>
+							<Price {...subProps.subtotalPrice} value={cartStore.price} />
+						</label>
 					</div>
 				</div>
 			</div>
 			<div>
 				<Button
+					{...subProps.button}
 					disabled={cartStore.items.length == 0}
 					disableStyles
-					className={`cta__add-button ${props.addedToCart ? 'cta__add-button--thanks' : ''}`}
+					internalClassName={classNames(`${classNamePrefix}__wrapper__cta__button`, {
+						[`${classNamePrefix}__wrapper__cta__button--added`]: addedToCart,
+					})}
+					aria-live={addedToCart}
 					onClick={(e) => props.onAddToCart(e)}
+					{...(addedToCart ? mergedLang.ctaButtonSuccessText?.all : mergedLang.ctaButtonText?.all)}
 				>
 					{props.addedToCart ? props.ctaButtonSuccessText : props.ctaButtonText}
 				</Button>

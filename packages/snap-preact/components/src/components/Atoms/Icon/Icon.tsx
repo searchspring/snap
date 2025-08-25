@@ -37,10 +37,12 @@ export function Icon(properties: IconProps): JSX.Element {
 		children,
 		size,
 		width,
+		title,
 		height,
 		viewBox,
 		disableStyles,
 		className,
+		internalClassName,
 		style: _,
 		styleScript: __,
 		themeStyleScript: ___,
@@ -57,13 +59,14 @@ export function Icon(properties: IconProps): JSX.Element {
 		<CacheProvider>
 			<svg
 				{...styling}
-				className={classnames('ss__icon', icon ? `ss__icon--${icon}` : null, className)}
+				className={classnames('ss__icon', icon ? `ss__icon--${icon}` : null, className, internalClassName)}
 				viewBox={viewBox}
 				xmlns="http://www.w3.org/2000/svg"
 				width={disableStyles ? width || size : undefined}
 				height={disableStyles ? height || size : undefined}
 				{...otherProps}
 			>
+				{title ? <title>{title}</title> : null}
 				{(() => {
 					if (children) {
 						return children;
@@ -90,6 +93,7 @@ export type SVGPathElement = {
 export interface IconProps extends ComponentProps {
 	color?: string;
 	icon?: IconType | false;
+	title?: string;
 	path?: string | SVGPathElement[];
 	children?: ComponentChildren;
 	size?: string | number;
@@ -101,6 +105,7 @@ export interface IconProps extends ComponentProps {
 export type IconNames =
 	| 'bundle-cart'
 	| 'bundle-selector'
+	| 'bundle-cart-separator'
 	| 'next'
 	| 'prev'
 	| 'active'

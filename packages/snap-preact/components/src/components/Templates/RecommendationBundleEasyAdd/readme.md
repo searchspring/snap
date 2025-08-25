@@ -14,7 +14,7 @@ The required `controller` prop specifies a reference to the RecommendationContro
 ```
 
 ### onAddToCart 
-the required `onAddToCart` prop sets a the callback function for when a add to cart button is clicked. This function will be passed an array of selected item ids and their quantities. 
+the `onAddToCart` prop sets a the callback function for when a add to cart button is clicked. This function will be passed an array of selected item ids and their quantities. 
 
 ```jsx
 <RecommendationBundleEasyAdd controller={controller} onAddToCart={(e, items)=>{console.log(items)}} />
@@ -28,7 +28,7 @@ The `results` prop specifies a reference to the results store array to use inste
 ```
 
 ### title
-The `title` prop specifies the carousel title
+The `title` prop specifies the bundle title
 
 ```jsx
 <RecommendationBundleEasyAdd controller={controller} onAddToCart={(e, items)=>{console.log(items)}} title={'Recommended Bundle'} />
@@ -71,6 +71,7 @@ The `ctaButtonSuccessTimeout` prop specifies number of ms to show success text i
 <RecommendationBundleEasyAdd controller={controller} onAddToCart={(e, items)=>{console.log(items)}} ctaButtonSuccessTimeout={1500} />
 ```
 
+
 ### ctaIcon
 The `ctaIcon` prop specifies the icon to render in the CTA. Takes an object with `Icon` component props or a string.     
 
@@ -79,7 +80,7 @@ The `ctaIcon` prop specifies the icon to render in the CTA. Takes an object with
 ```
 
 ### ctaInline
-The `ctaInline` prop specifies if the add to cart display should be block or inline witht the carousel.
+The `ctaInline` prop specifies if the add to cart display should be block or inline with the bundle.
 
 ```jsx
 <RecommendationBundleEasyAdd controller={controller} onAddToCart={(e, items)=>{console.log(items)}} ctaInline={true} />
@@ -123,48 +124,5 @@ const customLazyRenderProps = {
 }
 
 <RecommendationBundleEasyAdd controller={controller} lazyRender={ customLazyRenderProps } onAddToCart={(e, items)=>{console.log(items)}} />
-```
-
-### breakpoints
-An object that modifies the responsive behavior of the carousel at various viewports. 
-
-The object key specified the viewport for when the parameters will be applied. 
-
-The default configuration contains the following properties, however **`any BundleRecommendation props`**, or [Swiper API parameters](https://swiperjs.com/react#swiper-props) can also be specified. 
-
-`slidesPerView` - number of products to display per page
-
-`slidesPerGroup` - number of products to scroll by when next/previous button is clicked
-
-`spaceBetween` - spacing between each product
-
-```typescript
-const defaultRecommendationBreakpoints = {
-	0: {
-		carousel: {
-			enabled: false,
-		},
-		limit: 2
-	},
-	768: {
-		slidesPerView: 3,
-		slidesPerGroup: 3,
-		spaceBetween: 10,
-	},
-	1024: {
-		slidesPerView: 3,
-		slidesPerGroup: 3,
-		spaceBetween: 10,
-	},
-	1200: {
-		slidesPerView: 4,
-		slidesPerGroup: 4,
-		spaceBetween: 10,
-	},
-};
-```
-
-```jsx
-<RecommendationBundleEasyAdd controller={controller} onAddToCart={(e, items)=>{console.log(items)}} breakpoints={defaultRecommendationBreakpoints} />
 ```
 

@@ -146,7 +146,7 @@ describe('Search Template Component', () => {
 	});
 
 	it('can hide bottomToolbar', () => {
-		const rendered = render(<Search controller={controller} hideBottomToolBar />);
+		const rendered = render(<Search controller={controller} hideBottomToolbar />);
 		const element = rendered.container.querySelector('.ss__search')!;
 		const bottomToolBar = rendered.container.querySelector('.ss__search__content__toolbar--bottomToolBar');
 
@@ -155,8 +155,12 @@ describe('Search Template Component', () => {
 	});
 
 	it('renders no results when needed', async () => {
-		mockClient.mockData.updateConfig({ search: 'noResults' });
+		// change the search term so that search method returns no results
+		const query = 'blah';
+		controller.urlManager = controller.urlManager.reset().set('query', query);
+		expect(controller.urlManager.state.query).toBe(query);
 
+		(controller.client as MockClient).mockData.updateConfig({ search: 'noResults' });
 		await controller.search();
 
 		const rendered = render(<Search controller={controller} />);

@@ -33,7 +33,7 @@ async function restorePosition({ controller, element }, next: Next) {
 	// scroll to top only if we are not going to be scrolling to stored element
 	if (!element) {
 		// prevent scroll to top when using infinite
-		if (!(controller.config.settings.infinite && controller.store.pagination.page != 1)) {
+		if (!(controller.config.settings.infinite?.enabled && controller.store.pagination.page != 1)) {
 			setTimeout(() => {
 				window.scroll({ top: 0, left: 0, behavior: 'smooth' });
 			});

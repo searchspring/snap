@@ -52,6 +52,7 @@ const defaultStyles: StyleScript<OverlayBadgeProps> = ({ controller }) => {
 		position: 'relative',
 
 		'& .ss__overlay-badge__grid-wrapper': {
+			pointerEvents: 'none',
 			display: 'grid',
 			position: 'absolute',
 			top: 0,
@@ -75,7 +76,7 @@ export const OverlayBadge = observer((properties: OverlayBadgeProps): JSX.Elemen
 
 	const props = mergeProps('overlayBadge', globalTheme, defaultProps, properties);
 
-	const { result, children, controller, renderEmpty, limit, className, treePath } = props;
+	const { result, children, controller, renderEmpty, limit, className, internalClassName, treePath } = props;
 
 	if (!children) {
 		controller?.log?.warn('OverlayBadge component must have children');
@@ -123,7 +124,7 @@ export const OverlayBadge = observer((properties: OverlayBadgeProps): JSX.Elemen
 	if (renderEmpty || locations?.length) {
 		return (
 			<CacheProvider>
-				<div {...styling} className={classnames('ss__overlay-badge', className)}>
+				<div {...styling} className={classnames('ss__overlay-badge', className, internalClassName)}>
 					<div className="ss__overlay-badge__grid-wrapper">
 						{locations.map((location, index) => {
 							return location.slots?.map((slot) => {

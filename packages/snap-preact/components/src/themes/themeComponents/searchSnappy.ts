@@ -7,13 +7,13 @@ export const searchSnappyThemeComponentProps: ThemeComponent<'searchSnappy', Sea
 			layoutOptions: [
 				{
 					value: 1,
-					label: 'One Columns',
+					label: 'Grid',
 					default: true,
 					icon: 'layout-large',
 				},
 				{
 					value: 2,
-					label: 'Two Columns',
+					label: 'List',
 					icon: 'layout-list',
 					overrides: {
 						components: {

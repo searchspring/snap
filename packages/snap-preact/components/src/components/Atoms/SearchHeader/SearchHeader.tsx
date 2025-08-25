@@ -28,14 +28,14 @@ export const SearchHeader = observer((properties: SearchHeaderProps): JSX.Elemen
 
 	const defaultProps: Partial<SearchHeaderProps> = {
 		titleText: `Search result${pagination?.totalResults == 1 ? '' : 's'} ${
-			search?.query ? `for <span class="ss__search-header__results-query">"${search.query.string}"</span>` : ''
+			search?.query ? `for "<span class="ss__search-header__results-query">${search.query.string}</span>"` : ''
 		}`,
-		correctedQueryText: `No results found for <em>"${search?.originalQuery?.string}"</em>, showing results for <em>"${search?.query?.string}"</em> instead.`,
+		correctedQueryText: `No results found for "<em>${search?.originalQuery?.string}</em>", showing results for "<em>${search?.query?.string}</em>" instead.`,
 		didYouMeanText: `Did you mean <a href=${search?.didYouMean?.url.href}>${search?.didYouMean?.string}</a>?`,
 		noResultsText: `${
 			search?.query
 				? `<span>
-			No results for <span class="ss__search-header__results-query">"${search.query.string}"</span> found.
+			No results for "<span class="ss__search-header__results-query">${search.query.string}</span>" found.
 		</span>`
 				: `<span>No results found.</span>`
 		}`,
@@ -47,6 +47,7 @@ export const SearchHeader = observer((properties: SearchHeaderProps): JSX.Elemen
 
 	const {
 		className,
+		internalClassName,
 		titleText,
 		subtitleText,
 		correctedQueryText,
@@ -97,7 +98,7 @@ export const SearchHeader = observer((properties: SearchHeaderProps): JSX.Elemen
 
 	return (
 		<CacheProvider>
-			<header {...styling} className={classnames('ss__search-header', className)}>
+			<header {...styling} className={classnames('ss__search-header', className, internalClassName)}>
 				{landingPage ? (
 					<h3 className={classnames('ss__search-header__title', 'ss__search-header__title--landing-page')}>{landingPage.title}</h3>
 				) : (

@@ -16,7 +16,7 @@ const bocachicaVariables: ThemeVariables = {
 	},
 };
 
-export const bocachica: Partial<ThemeComplete> = {
+export const bocachica: ThemeComplete = {
 	name: 'bocachica',
 	variables: bocachicaVariables,
 	components,

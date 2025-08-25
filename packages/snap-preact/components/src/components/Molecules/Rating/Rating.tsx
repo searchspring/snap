@@ -50,7 +50,7 @@ export const Rating = observer((properties: RatingProps): JSX.Element => {
 
 	const props = mergeProps('rating', globalTheme, defaultProps, properties);
 
-	const { alwaysRender, count, text, disablePartialFill, emptyIcon, fullIcon, disableStyles, className, treePath } = props;
+	const { alwaysRender, count, text, disablePartialFill, emptyIcon, fullIcon, disableStyles, className, internalClassName, treePath } = props;
 
 	const subProps: RatingSubProps = {
 		fullIcon: {
@@ -97,7 +97,7 @@ export const Rating = observer((properties: RatingProps): JSX.Element => {
 
 	return alwaysRender || value || count ? (
 		<CacheProvider>
-			<div className={classnames('ss__rating', className)} {...styling}>
+			<div className={classnames('ss__rating', className, internalClassName)} {...styling}>
 				<div className="ss__rating__icons">
 					<div className="ss__rating__stars ss__rating__stars--empty">
 						{[...Array(5)].map(() => (

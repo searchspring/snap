@@ -54,8 +54,21 @@ export const FacetListOptions = observer((properties: FacetListOptionsProps): JS
 
 	const props = mergeProps('facetListOptions', globalTheme, defaultProps, properties);
 
-	const { values, hideCheckbox, hideCount, onClick, previewOnFocus, respectSingleSelect, valueProps, facet, disableStyles, className, treePath } =
-		props;
+	const {
+		values,
+		hideCheckbox,
+		hideCount,
+		onClick,
+		previewOnFocus,
+		hideCountParenthesis,
+		respectSingleSelect,
+		valueProps,
+		facet,
+		disableStyles,
+		className,
+		internalClassName,
+		treePath,
+	} = props;
 
 	let renderRadios = false;
 
@@ -66,7 +79,7 @@ export const FacetListOptions = observer((properties: FacetListOptionsProps): JS
 	const subProps: FacetListOptionsSubProps = {
 		checkbox: {
 			// default props
-			className: 'ss__facet-list-options__checkbox',
+			internalClassName: 'ss__facet-list-options__checkbox',
 			// inherited props
 			...defined({
 				disableStyles,
@@ -77,7 +90,7 @@ export const FacetListOptions = observer((properties: FacetListOptionsProps): JS
 		},
 		radio: {
 			// default props
-			className: 'ss__facet-list-options__radio',
+			internalClassName: 'ss__facet-list-options__radio',
 			// inherited props
 			...defined({
 				disableStyles,
@@ -94,7 +107,7 @@ export const FacetListOptions = observer((properties: FacetListOptionsProps): JS
 
 	return facetValues?.length ? (
 		<CacheProvider>
-			<div {...styling} className={classnames('ss__facet-list-options', className)}>
+			<div {...styling} className={classnames('ss__facet-list-options', className, internalClassName)}>
 				{(facetValues as FacetValue[]).map((value) => {
 					//initialize lang
 					const defaultLang = {
@@ -131,12 +144,16 @@ export const FacetListOptions = observer((properties: FacetListOptionsProps): JS
 							{...mergedLang.listOption?.all}
 						>
 							{renderRadios
-								? !hideCheckbox && <Radio {...subProps.radio} checked={value.filtered} disableA11y={true} />
-								: !hideCheckbox && <Checkbox {...subProps.checkbox} checked={value.filtered} disableA11y={true} />}
+								? !hideCheckbox && <Radio {...subProps.radio} checked={value.filtered} disableA11y={true} {...mergedLang.listOption.attributes} />
+								: !hideCheckbox && (
+										<Checkbox {...subProps.checkbox} checked={value.filtered} disableA11y={true} {...mergedLang.listOption.attributes} />
+								  )}
 
 							<span className="ss__facet-list-options__option__value">
-								{value.label}
-								{!hideCount && value?.count > 0 && <span className="ss__facet-list-options__option__value__count">({value.count})</span>}
+								<span className="ss__facet-list-options__option__value__label">{value.label}</span>
+								{!hideCount && value?.count > 0 && (
+									<span className="ss__facet-list-options__option__value__count">{hideCountParenthesis ? `${value.count}` : `(${value.count})`}</span>
+								)}
 							</span>
 						</a>
 					);
@@ -152,6 +169,7 @@ export interface FacetListOptionsProps extends ComponentProps {
 	values?: FacetValue[];
 	hideCheckbox?: boolean;
 	hideCount?: boolean;
+	hideCountParenthesis?: boolean;
 	facet?: ValueFacet;
 	horizontal?: boolean;
 	onClick?: (e: React.MouseEvent) => void;

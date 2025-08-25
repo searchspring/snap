@@ -37,7 +37,7 @@ export function Overlay(properties: OverlayProps): JSX.Element {
 
 	const props = mergeProps('overlay', globalTheme, defaultProps, properties);
 
-	const { active, onClick, disableA11y, className } = props;
+	const { active, onClick, disableA11y, className, internalClassName } = props;
 
 	const styling = mergeStyles<OverlayProps>(props, defaultStyles);
 
@@ -45,8 +45,8 @@ export function Overlay(properties: OverlayProps): JSX.Element {
 		<CacheProvider>
 			<div
 				onClick={(e: React.MouseEvent<HTMLDivElement, Event>) => onClick && active && onClick(e)}
-				ref={(e) => (!disableA11y ? useA11y(e) : null)}
-				className={classnames('ss__overlay', { 'ss__overlay--active': active }, className)}
+				ref={(e) => (!disableA11y ? useA11y(e, active ? 0 : -1) : null)}
+				className={classnames('ss__overlay', { 'ss__overlay--active': active }, className, internalClassName)}
 				{...styling}
 			/>
 		</CacheProvider>

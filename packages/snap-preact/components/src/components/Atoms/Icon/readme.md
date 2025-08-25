@@ -99,11 +99,25 @@ The `color` prop specifies the icon color.
 <Icon icon='cogs' color="#ffff00" />
 ```
 
+### title
+The `title` prop specifies the title to render inside the svg.
+
+```jsx
+<Icon icon='cogs' title={'Settings'} />
+```
+
 ### size
 The `size` prop specifies the custom icon size. This will be set to both the width and height.
 
 ```jsx
 <Icon icon='cogs' size={'20px'} />
+```
+
+### title
+The `title` prop specifies the title to render inside the svg.
+
+```jsx
+<Icon icon='cogs' title={'Settings'} />
 ```
 
 ### width & height

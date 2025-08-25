@@ -1,5 +1,5 @@
 import { Fragment, h } from 'preact';
-
+import { Ref, useState } from 'preact/hooks';
 import { observer } from 'mobx-react-lite';
 import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
@@ -18,7 +18,6 @@ import { Rating, RatingProps } from '../Rating';
 import { Button, ButtonProps } from '../../Atoms/Button';
 import deepmerge from 'deepmerge';
 import { Lang, useLang } from '../../../hooks';
-import { useState } from 'preact/hooks';
 
 const defaultStyles: StyleScript<ResultProps> = () => {
 	return css({
@@ -104,6 +103,7 @@ export const Result = observer((properties: ResultProps): JSX.Element => {
 		fallback,
 		disableStyles,
 		className,
+		internalClassName,
 		layout,
 		onClick,
 		controller,
@@ -113,6 +113,7 @@ export const Result = observer((properties: ResultProps): JSX.Element => {
 		addToCartButtonSuccessText,
 		addToCartButtonSuccessTimeout,
 		hideRating,
+		trackingRef,
 		treePath,
 	} = props;
 
@@ -123,7 +124,7 @@ export const Result = observer((properties: ResultProps): JSX.Element => {
 	const subProps: ResultSubProps = {
 		price: {
 			// global theme
-			className: 'ss__result__price',
+			internalClassName: 'ss__result__price',
 			...defined({
 				disableStyles,
 			}),
@@ -133,7 +134,7 @@ export const Result = observer((properties: ResultProps): JSX.Element => {
 		},
 		calloutBadge: {
 			// default props
-			className: 'ss__result__callout-badge',
+			internalClassName: 'ss__result__callout-badge',
 			result,
 			// inherited props
 			...defined({
@@ -145,7 +146,7 @@ export const Result = observer((properties: ResultProps): JSX.Element => {
 		},
 		overlayBadge: {
 			// default props
-			className: 'ss__result__overlay-badge',
+			internalClassName: 'ss__result__overlay-badge',
 			result,
 			controller: controller as SearchController | AutocompleteController | RecommendationController,
 			// inherited props
@@ -158,7 +159,7 @@ export const Result = observer((properties: ResultProps): JSX.Element => {
 		},
 		image: {
 			// default props
-			className: 'ss__result__image',
+			internalClassName: 'ss__result__image',
 			alt: core?.name || '',
 			src: core?.imageUrl || '',
 			// inherited props
@@ -172,7 +173,7 @@ export const Result = observer((properties: ResultProps): JSX.Element => {
 		},
 		rating: {
 			// default props
-			className: 'ss__result__rating',
+			internalClassName: 'ss__result__rating',
 			value: core?.rating || 0,
 			count: Number(core?.ratingCount || 0),
 			// inherited props
@@ -185,7 +186,7 @@ export const Result = observer((properties: ResultProps): JSX.Element => {
 		},
 		button: {
 			// default props
-			className: 'ss__result__button--addToCart',
+			internalClassName: 'ss__result__button--addToCart',
 			onClick: (e) => {
 				setAddedToCart(true);
 
@@ -232,17 +233,20 @@ export const Result = observer((properties: ResultProps): JSX.Element => {
 
 	return core ? (
 		<CacheProvider>
-			<article {...styling} className={classnames('ss__result', `ss__result--${layout}`, { 'ss__result--sale': isOnSale }, className)}>
-				<div className="ss__result__image-wrapper">
-					<a
-						href={core!.url}
-						onClick={(e: React.MouseEvent<HTMLAnchorElement, Event>) => {
-							onClick && onClick(e);
-							controller?.track?.product?.click(e as any, result);
-						}}
-					>
-						{!hideImage &&
-							(!hideBadge ? (
+			<article
+				{...styling}
+				className={classnames('ss__result', `ss__result--${layout}`, { 'ss__result--sale': isOnSale }, className, internalClassName)}
+				ref={trackingRef}
+			>
+				{!hideImage && (
+					<div className="ss__result__image-wrapper">
+						<a
+							href={core!.url}
+							onClick={(e: React.MouseEvent<HTMLAnchorElement, Event>) => {
+								onClick && onClick(e);
+							}}
+						>
+							{!hideBadge ? (
 								<OverlayBadge
 									{...subProps.overlayBadge}
 									controller={controller as SearchController | AutocompleteController | RecommendationController}
@@ -251,9 +255,10 @@ export const Result = observer((properties: ResultProps): JSX.Element => {
 								</OverlayBadge>
 							) : (
 								<Image {...subProps.image} />
-							))}
-					</a>
-				</div>
+							)}
+						</a>
+					</div>
+				)}
 
 				<div className="ss__result__details">
 					{!hideBadge && (
@@ -268,7 +273,6 @@ export const Result = observer((properties: ResultProps): JSX.Element => {
 								href={core.url}
 								onClick={(e: React.MouseEvent<HTMLAnchorElement, Event>) => {
 									onClick && onClick(e);
-									controller?.track?.product?.click(e as any, result);
 								}}
 								dangerouslySetInnerHTML={{
 									__html: displayName || '',
@@ -342,6 +346,7 @@ export interface ResultProps extends ComponentProps {
 	onClick?: (e: React.MouseEvent<HTMLAnchorElement, Event>) => void;
 	controller?: SearchController | AutocompleteController | RecommendationController;
 	lang?: Partial<ResultLang>;
+	trackingRef?: Ref<HTMLElement | null>;
 }
 
 export interface ResultLang {

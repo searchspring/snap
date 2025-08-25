@@ -3,7 +3,7 @@ import { LangComponents } from '../../../../../components/src';
 
 export const fr: LangComponents = {
 	recommendation: {},
-	autocompleteTemplate: {
+	autocompleteLayout: {
 		facetsTitle: {},
 		contentTitle: {},
 		closeButton: {
@@ -67,6 +67,28 @@ export const fr: LangComponents = {
 			value: 'Filtres',
 		},
 	},
+	searchInput: {
+		placeholderText: {
+			attributes: {
+				placeholder: 'Recherche',
+			},
+		},
+		closeSearchButton: {
+			attributes: {
+				'aria-label': 'Fermer la recherche',
+			},
+		},
+		clearSearchButton: {
+			attributes: {
+				'aria-label': 'Effacer la recherche',
+			},
+		},
+		submitSearchButton: {
+			attributes: {
+				'aria-label': 'Soumettre Rechercher',
+			},
+		},
+	},
 	recommendationBundle: {
 		seedText: {
 			value: 'Ce produit',
@@ -104,7 +126,7 @@ export const fr: LangComponents = {
 	},
 	perPage: {
 		label: {
-			value: 'par page',
+			value: 'Par page',
 		},
 	},
 	facetsHorizontal: {
@@ -133,6 +155,9 @@ export const fr: LangComponents = {
 		},
 		showLessText: {
 			value: 'Montrer Moins',
+		},
+		clearAllText: {
+			value: 'Tout Effacer',
 		},
 		dropdownButton: {
 			attributes: {
@@ -221,8 +246,7 @@ export const fr: LangComponents = {
 	facetSlider: {
 		sliderHandle: {
 			attributes: {
-				'aria-label': (data) => `${data?.facet?.label} bouton curseur`,
-				'aria-valuetext': (data) =>
+				'aria-label': (data) =>
 					`${data?.facet?.label} bouton curseur, valeur actuelle ${data?.value}, ${
 						data?.facet?.range?.low ? `valeur minimale ${data?.facet?.range?.low},` : ``
 					} ${data?.facet?.range?.high ? `valeur maximale ${data?.facet?.range?.high}` : ``}`,

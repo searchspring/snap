@@ -85,6 +85,7 @@ export function List(properties: ListProps): JSX.Element {
 		requireSelection,
 		disableStyles,
 		className,
+		internalClassName,
 		treePath,
 	} = props;
 
@@ -104,7 +105,7 @@ export function List(properties: ListProps): JSX.Element {
 		},
 		icon: {
 			// default props
-			className: 'ss__list__option__icon',
+			internalClassName: 'ss__list__option__icon',
 			size: '16px',
 			// inherited props
 			...defined({
@@ -186,7 +187,10 @@ export function List(properties: ListProps): JSX.Element {
 
 	return typeof options == 'object' && options?.length ? (
 		<CacheProvider>
-			<div {...styling} className={classnames('ss__list', { 'ss__list--native': native, 'ss__list--disabled': disabled }, className)}>
+			<div
+				{...styling}
+				className={classnames('ss__list', { 'ss__list--native': native, 'ss__list--disabled': disabled }, className, internalClassName)}
+			>
 				{(titleText || lang?.title?.value) && !hideTitleText && (
 					<h5 className="ss__list__title" {...mergedLang.title?.all}>
 						{titleText}
@@ -210,7 +214,7 @@ export function List(properties: ListProps): JSX.Element {
 								aria-selected={selected}
 								aria-disabled={option.disabled || option?.available === false}
 							>
-								{!hideOptionCheckboxes && <Checkbox {...subProps.checkbox} checked={selected} disableA11y={true} />}
+								{!hideOptionCheckboxes && <Checkbox {...subProps.checkbox} checked={selected} disableA11y={true} aria-label={option.label} />}
 
 								{option.icon && !hideOptionIcons && (
 									<Icon {...subProps.icon} {...(typeof option.icon == 'string' ? { icon: option.icon } : (option.icon as Partial<IconProps>))} />

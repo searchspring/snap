@@ -2,15 +2,15 @@ import { h, render } from 'preact';
 import deepmerge from 'deepmerge';
 
 import { Snap } from '../Snap';
-import { TemplateSelect } from '../../components/src';
+import { TemplateSelect } from '../../components/src/components/Atoms/TemplateSelect';
 
-import { DomTargeter, url, cookies, getContext } from '@searchspring/snap-toolbox';
+import { DomTargeter, url, cookies, getContext, version } from '@searchspring/snap-toolbox';
 import { TemplateTarget, TemplatesStore } from './Stores/TemplateStore';
 
 import type { Target } from '@searchspring/snap-toolbox';
-import type { SearchStoreConfigSettings, AutocompleteStoreConfigSettings } from '@searchspring/snap-store-mobx';
+import { type SearchStoreConfigSettings, type AutocompleteStoreConfigSettings } from '@searchspring/snap-store-mobx';
 import type { UrlTranslatorConfig } from '@searchspring/snap-url-manager';
-import type { PluginGrouping } from '@searchspring/snap-controller';
+import type { AutocompleteController, PluginGrouping, SearchController } from '@searchspring/snap-controller';
 import type {
 	RecommendationInstantiatorConfigSettings,
 	RecommendationComponentObject,
@@ -18,7 +18,7 @@ import type {
 } from '../Instantiators/RecommendationInstantiator';
 import type { SnapFeatures } from '../types';
 import type { SnapConfig, ExtendedTarget } from '../Snap';
-import type { PluginsConfigs, RecsTemplateTypes, TemplatesStoreConfigConfig, TemplateTypes } from './Stores/TemplateStore';
+import type { PluginsConfigs, RecsTemplateTypes, TemplateStoreConfigConfig, TemplateTypes } from './Stores/TemplateStore';
 import { LibraryImports } from './Stores/LibraryStore';
 import {
 	pluginBackgroundFilters,
@@ -51,7 +51,8 @@ import {
 	PluginBackgroundFiltersConfig as PluginMagento2BackgroundFiltersConfig,
 } from '@searchspring/snap-platforms/magento2';
 
-export const THEME_EDIT_COOKIE = 'ssThemeEdit';
+export const TEMPLATE_EDIT_COOKIE = 'ssEditor';
+const TEMPLATE_EDITOR_PARAM = 'searchspring-editor';
 
 // TODO: tabbing, finder
 export type SearchTargetConfig = {
@@ -80,18 +81,18 @@ export type RecommendationBundleTargetConfig = {
 	resultComponent?: keyof LibraryImports['component']['result'] | (string & NonNullable<unknown>);
 };
 
-export type SnapTemplatesConfig = TemplatesStoreConfigConfig & {
+export type SnapTemplatesConfig = TemplateStoreConfigConfig & {
 	url?: UrlTranslatorConfig;
 	features?: SnapFeatures;
 	search?: {
-		targets: [SearchTargetConfig, ...SearchTargetConfig[]];
+		targets: SearchTargetConfig[];
 		settings?: SearchStoreConfigSettings;
 		plugins?: PluginsConfigs;
 		// breakpointSettings?: SearchStoreConfigSettings[];
 		/* controller settings breakpoints work with caveat of having settings locked to initialized breakpoint */
 	};
 	autocomplete?: {
-		targets: [AutocompleteTargetConfig, ...AutocompleteTargetConfig[]];
+		targets: AutocompleteTargetConfig[];
 		settings?: AutocompleteStoreConfigSettings;
 		plugins?: PluginsConfigs;
 		// breakpointSettings?: AutocompleteStoreConfigSettings[];
@@ -149,7 +150,7 @@ export class SnapTemplates extends Snap {
 	templates: TemplatesStore;
 	constructor(config: SnapTemplatesConfig) {
 		const urlParams = url(window.location.href);
-		const editMode = Boolean(urlParams?.params?.query?.theme || cookies.get(THEME_EDIT_COOKIE));
+		const editMode = Boolean((urlParams?.params?.query && TEMPLATE_EDITOR_PARAM in urlParams.params.query) || cookies.get(TEMPLATE_EDIT_COOKIE));
 
 		const templatesStore = new TemplatesStore({ config, settings: { editMode } });
 
@@ -177,6 +178,7 @@ export class SnapTemplates extends Snap {
 		this.templates = templatesStore;
 
 		if (editMode) {
+			cookies.set(TEMPLATE_EDIT_COOKIE, 'true');
 			setTimeout(async () => {
 				// preload the library
 				await templatesStore.preLoad();
@@ -196,26 +198,45 @@ export class SnapTemplates extends Snap {
 						},
 					],
 					async (target: Target, elem: Element) => {
-						const TemplateEditor = (await import('../../components/src')).TemplatesEditor;
+						try {
+							const TemplateEditor = (await import('../../components/src')).TemplatesEditor;
+							const TemplateEditorStore = (await import('./Stores/TemplateEditor/TemplateEditorStore')).TemplateEditorStore;
+							const templateEditorStore = new TemplateEditorStore({ templatesStore });
 
-						render(
-							<TemplateEditor
-								templatesStore={templatesStore}
-								onRemoveClick={() => {
-									cookies.unset(THEME_EDIT_COOKIE);
-									const urlState = url(window.location.href);
-									delete urlState?.params.query['theme'];
+							const searchController = this.controllers['search'] as SearchController | undefined;
+							const autocompleteController = this.controllers['autocomplete'] as AutocompleteController | undefined;
 
-									const newUrl = urlState?.url();
-									if (newUrl && newUrl != window.location.href) {
-										window.location.href = newUrl;
-									} else {
-										window.location.reload();
-									}
-								}}
-							/>,
-							elem
-						);
+							if (searchController) {
+								templateEditorStore.registerController(searchController);
+							}
+
+							if (autocompleteController) {
+								templateEditorStore.registerController(autocompleteController);
+							}
+
+							render(
+								<TemplateEditor
+									templatesStore={templatesStore}
+									editorStore={templateEditorStore}
+									snap={this}
+									onRemoveClick={() => {
+										cookies.unset(TEMPLATE_EDIT_COOKIE);
+										const urlState = url(window.location.href);
+										delete urlState?.params.query[TEMPLATE_EDITOR_PARAM];
+
+										const newUrl = urlState?.url();
+										if (newUrl && newUrl != window.location.href) {
+											window.location.href = newUrl;
+										} else {
+											window.location.reload();
+										}
+									}}
+								/>,
+								elem
+							);
+						} catch (error) {
+							console.error('Error rendering TemplateEditor:', error);
+						}
 					}
 				);
 			});
@@ -356,6 +377,14 @@ export function createSnapConfig(templateConfig: SnapTemplatesConfig, templatesS
 		client: {
 			globals: {
 				siteId: templateConfig.config?.siteId,
+			},
+			config: {
+				initiator: `snap/templates/${version}`,
+			},
+		},
+		tracker: {
+			config: {
+				framework: 'snap/templates',
 			},
 		},
 		instantiators: {},

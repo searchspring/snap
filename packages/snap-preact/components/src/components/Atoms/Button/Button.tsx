@@ -71,6 +71,7 @@ export const Button = observer((properties: ButtonProps): JSX.Element => {
 		disableA11y,
 		disableStyles,
 		className,
+		internalClassName,
 		icon,
 		lang,
 		treePath,
@@ -82,7 +83,7 @@ export const Button = observer((properties: ButtonProps): JSX.Element => {
 
 	const subProps: ButtonSubProps = {
 		icon: {
-			className: 'ss__button__icon',
+			internalClassName: 'ss__button__icon',
 			// default props
 			// inherited props
 			...defined({
@@ -98,7 +99,7 @@ export const Button = observer((properties: ButtonProps): JSX.Element => {
 
 	const elementProps = {
 		...styling,
-		className: classnames('ss__button', { 'ss__button--native': native, 'ss__button--disabled': disabled }, className),
+		className: classnames('ss__button', { 'ss__button--native': native, 'ss__button--disabled': disabled }, className, internalClassName),
 		disabled,
 		onClick: (e: React.MouseEvent<HTMLElement, MouseEvent>) => !disabled && onClick && onClick(e),
 		...additionalProps,
@@ -126,9 +127,9 @@ export const Button = observer((properties: ButtonProps): JSX.Element => {
 					{icon && <Icon {...subProps.icon} {...(typeof icon == 'string' ? { icon: icon } : (icon as Partial<IconProps>))} />}
 				</button>
 			) : (
-				<div {...(!disableA11y ? a11yProps : {})} {...elementProps} role={'button'} aria-disabled={disabled}>
+				<div {...(!disableA11y ? a11yProps : {})} role={'button'} aria-disabled={disabled} {...elementProps} {...mergedLang.button?.attributes}>
 					{content || children || mergedLang.button?.value ? (
-						<span className="ss__button__content" {...mergedLang.button?.all}>
+						<span className="ss__button__content" {...mergedLang.button?.value}>
 							{cloneWithProps(content, { treePath })}
 							{cloneWithProps(children, { treePath })}
 						</span>
@@ -150,7 +151,7 @@ export interface ButtonProps extends ComponentProps<ButtonProps> {
 	backgroundColor?: string;
 	borderColor?: string;
 	color?: string;
-	icon?: IconType | Partial<IconProps>;
+	icon?: IconType | Partial<IconProps> | boolean;
 	content?: string | JSX.Element;
 	children?: ComponentChildren;
 	disabled?: boolean;
@@ -164,4 +165,14 @@ export interface ButtonLang {
 	button?: Lang<never>;
 }
 
-export type ButtonNames = 'close' | 'apply' | 'clear' | 'slideout' | 'sidebar-toggle' | 'see-more';
+export type ButtonNames =
+	| 'close'
+	| 'apply'
+	| 'clear'
+	| 'slideout'
+	| 'sidebar-toggle'
+	| 'see-more'
+	| 'close-search'
+	| 'clear-search'
+	| 'submit-search'
+	| 'reset-facet';

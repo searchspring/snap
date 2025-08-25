@@ -31,7 +31,7 @@ export const PaginationInfo = observer((properties: PaginationInfoProps): JSX.El
 
 	const props = mergeProps('paginationInfo', globalTheme, defaultProps, properties);
 
-	const { controller, infoText, className } = props;
+	const { controller, infoText, className, internalClassName } = props;
 
 	const store = pagination || controller?.store?.pagination;
 
@@ -44,7 +44,9 @@ export const PaginationInfo = observer((properties: PaginationInfoProps): JSX.El
 			attributes: {
 				'aria-label': `displaying ${pagination?.multiplePages ? `${pagination?.begin} - ${pagination?.end} of` : ''} ${
 					pagination?.totalResults
-				} result${pagination?.totalResults == 1 ? '' : 's'}`,
+				} result${pagination?.totalResults == 1 ? '' : 's'} ${
+					controller?.store?.search.query ? `for "${controller?.store?.search.query.string}"` : ''
+				}`,
 			},
 		},
 	};
@@ -57,7 +59,13 @@ export const PaginationInfo = observer((properties: PaginationInfoProps): JSX.El
 
 	return store?.totalResults ? (
 		<CacheProvider>
-			<div {...styling} className={classnames('ss__pagination-info', className)} {...mergedLang.infoText?.all}></div>
+			<div
+				{...styling}
+				aria-atomic={true}
+				aria-live="assertive"
+				className={classnames('ss__pagination-info', className, internalClassName)}
+				{...mergedLang.infoText?.all}
+			></div>
 		</CacheProvider>
 	) : (
 		<Fragment></Fragment>

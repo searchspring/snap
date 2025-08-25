@@ -1,6 +1,6 @@
 import { h } from 'preact';
 
-import { render } from '@testing-library/preact';
+import { render, waitFor } from '@testing-library/preact';
 import userEvent from '@testing-library/user-event';
 
 import { Dropdown } from './Dropdown';
@@ -237,6 +237,128 @@ describe('Dropdown Component', () => {
 
 		userEvent.click(button);
 		expect(clickFn).not.toHaveBeenCalled();
+	});
+
+	it('does not fire onClick prop when disableClick prop is true', () => {
+		const clickFn = jest.fn();
+
+		const rendered = render(<Dropdown button={'open me'} disableClick onClick={clickFn} />);
+
+		const dropdown = rendered.container.querySelector('.ss__dropdown')!;
+		const button = rendered.container.querySelector('.ss__dropdown__button')!;
+
+		userEvent.click(button);
+		expect(clickFn).not.toHaveBeenCalled();
+		expect(dropdown).not.toHaveClass('ss__dropdown--open');
+	});
+
+	it('fires onMouseEnter prop when mouse enters', () => {
+		const mouseEnterFn = jest.fn();
+
+		const rendered = render(<Dropdown button={'open me'} onMouseEnter={mouseEnterFn} />);
+
+		const dropdown = rendered.container.querySelector('.ss__dropdown')!;
+		userEvent.hover(dropdown);
+
+		expect(mouseEnterFn).toHaveBeenCalled();
+	});
+
+	it('fires onMouseLeave prop when mouse leaves', async () => {
+		const mouseLeaveFn = jest.fn();
+
+		const rendered = render(<Dropdown button={'open me'} onMouseLeave={mouseLeaveFn} />);
+
+		const dropdown = rendered.container.querySelector('.ss__dropdown')!;
+		userEvent.hover(dropdown);
+		userEvent.unhover(dropdown);
+
+		expect(mouseLeaveFn).toHaveBeenCalled();
+	});
+
+	it('opens dropdown when toggleOnHover is true and mouse enters', async () => {
+		const rendered = render(<Dropdown button={'open me'} toggleOnHover />);
+
+		const dropdown = rendered.container.querySelector('.ss__dropdown')!;
+
+		expect(dropdown).not.toHaveClass('ss__dropdown--open');
+
+		await userEvent.hover(dropdown);
+
+		expect(dropdown).toHaveClass('ss__dropdown--open');
+
+		await userEvent.unhover(dropdown);
+
+		expect(dropdown).not.toHaveClass('ss__dropdown--open');
+	});
+
+	it('does not open dropdown on hover when disabled', async () => {
+		const rendered = render(<Dropdown button={'open me'} toggleOnHover disabled />);
+
+		const dropdown = rendered.container.querySelector('.ss__dropdown')!;
+
+		expect(dropdown).not.toHaveClass('ss__dropdown--open');
+
+		await userEvent.hover(dropdown);
+
+		expect(dropdown).not.toHaveClass('ss__dropdown--open');
+	});
+
+	it('handles touch interactions properly', async () => {
+		const clickFn = jest.fn();
+
+		const rendered = render(<Dropdown button={'open me'} onClick={clickFn} />);
+
+		const button = rendered.container.querySelector('.ss__dropdown__button')!;
+		const dropdown = rendered.container.querySelector('.ss__dropdown')!;
+
+		const touchStartEvent = new Event('touchstart', { bubbles: true });
+		button.dispatchEvent(touchStartEvent);
+
+		await userEvent.click(button);
+
+		expect(clickFn).toHaveBeenCalled();
+		expect(dropdown).toHaveClass('ss__dropdown--open');
+	});
+
+	it('correctly handles touch events with toggleOnHover enabled', async () => {
+		const toggleFn = jest.fn();
+
+		const rendered = render(<Dropdown button={'open me'} onToggle={toggleFn} toggleOnHover />);
+
+		const button = rendered.container.querySelector('.ss__dropdown__button')!;
+		const dropdown = rendered.container.querySelector('.ss__dropdown')!;
+
+		expect(dropdown).not.toHaveClass('ss__dropdown--open');
+
+		const touchStartEvent = new Event('touchstart', { bubbles: true });
+		button.dispatchEvent(touchStartEvent);
+
+		await userEvent.click(button);
+
+		// dropdown is opened
+		waitFor(() => {
+			expect(dropdown).toHaveClass('ss__dropdown--open');
+		});
+		expect(toggleFn).toHaveBeenCalled();
+
+		await userEvent.click(button);
+
+		// dropdown is closed
+		waitFor(() => {
+			expect(dropdown).not.toHaveClass('ss__dropdown--open');
+		});
+		expect(toggleFn).toHaveBeenCalled();
+
+		await userEvent.hover(dropdown);
+
+		// expect that hover will not have changed the class
+		waitFor(() => {
+			expect(dropdown).not.toHaveClass('ss__dropdown--open');
+		});
+
+		// hovering again will work after touchevents are reset
+		await userEvent.hover(dropdown);
+		expect(dropdown).toHaveClass('ss__dropdown--open');
 	});
 
 	it('disables styles', () => {

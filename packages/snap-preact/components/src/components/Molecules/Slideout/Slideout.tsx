@@ -1,5 +1,5 @@
 import { h, Fragment, ComponentChildren } from 'preact';
-import { useState } from 'preact/hooks';
+import { useState, useEffect } from 'preact/hooks';
 import { observer } from 'mobx-react-lite';
 
 import { jsx, css } from '@emotion/react';
@@ -50,16 +50,31 @@ export const Slideout = observer((properties: SlideoutProps): JSX.Element => {
 		overlayColor: 'rgba(0,0,0,0.8)',
 		transitionSpeed: '0.25s',
 		treePath: globalTreePath,
+		rerender: true,
 	};
 
 	const props = mergeProps('slideout', globalTheme, defaultProps, properties);
 
-	const { children, active, buttonContent, noButtonWrapper, displayAt, transitionSpeed, overlayColor, disableStyles, className, treePath } = props;
+	const {
+		children,
+		active,
+		rerender,
+		buttonContent,
+		buttonSelector,
+		noButtonWrapper,
+		displayAt,
+		transitionSpeed,
+		overlayColor,
+		disableStyles,
+		className,
+		internalClassName,
+		treePath,
+	} = props;
 
 	const subProps: SlideoutSubProps = {
 		overlay: {
 			// default props
-			className: 'ss__slideout__overlay',
+			internalClassName: 'ss__slideout__overlay',
 			// inherited props
 			...defined({
 				disableStyles,
@@ -75,19 +90,30 @@ export const Slideout = observer((properties: SlideoutProps): JSX.Element => {
 	// state
 	const [isActive, setActive] = useState(Boolean(active));
 	const [renderContent, setRenderContent] = useState(Boolean(active));
+
 	const toggleActive = () => {
 		if (isActive) {
-			setTimeout(() => {
-				setRenderContent(!renderContent);
-			}, 250);
+			setActive(false);
+			if (rerender) {
+				setTimeout(() => {
+					setRenderContent(false);
+				}, 250);
+			}
 		} else {
-			setRenderContent(!isActive);
+			setActive(true);
+			setRenderContent(true);
 		}
-
-		setActive(!isActive);
 
 		document.body.style.overflow = isActive ? 'hidden' : '';
 	};
+
+	//this is used to update active state if active prop is changed from parent component.
+	useEffect(() => {
+		setRenderContent(Boolean(active));
+		if (isActive !== active) {
+			setActive(Boolean(active));
+		}
+	}, [active]);
 
 	const isVisible = useMediaQuery(displayAt!, () => {
 		document.body.style.overflow = '';
@@ -97,7 +123,21 @@ export const Slideout = observer((properties: SlideoutProps): JSX.Element => {
 
 	const styling = mergeStyles<SlideoutProps>(props, defaultStyles);
 
-	return isVisible ? (
+	useEffect(() => {
+		if (buttonSelector) {
+			let button;
+			if (typeof buttonSelector == 'string') {
+				button = document.querySelector(buttonSelector);
+			} else {
+				button = buttonSelector;
+			}
+			if (button) {
+				button.addEventListener('click', () => toggleActive());
+			}
+		}
+	}, []);
+
+	return isVisible || !rerender ? (
 		<CacheProvider>
 			{buttonContent &&
 				(noButtonWrapper ? (
@@ -108,7 +148,11 @@ export const Slideout = observer((properties: SlideoutProps): JSX.Element => {
 					</div>
 				))}
 
-			<div className={classnames('ss__slideout', className, { 'ss__slideout--active': isActive })} {...styling}>
+			<div
+				className={classnames('ss__slideout', className, internalClassName, { 'ss__slideout--active': isActive })}
+				style={{ visibility: !rerender ? (isVisible ? 'visible' : 'hidden') : 'visible' }}
+				{...styling}
+			>
 				{renderContent && cloneWithProps(children, { toggleActive, active: isActive, treePath })}
 			</div>
 			<Overlay {...subProps.overlay} active={isActive} onClick={toggleActive} />
@@ -119,7 +163,7 @@ export const Slideout = observer((properties: SlideoutProps): JSX.Element => {
 });
 
 export interface SlideoutProps extends ComponentProps {
-	buttonContent: string | JSX.Element;
+	buttonContent?: string | JSX.Element;
 	children?: ComponentChildren;
 	active?: boolean;
 	noButtonWrapper?: boolean;
@@ -128,6 +172,8 @@ export interface SlideoutProps extends ComponentProps {
 	transitionSpeed?: string;
 	overlayColor?: string;
 	slideDirection?: SlideDirectionType;
+	rerender?: boolean;
+	buttonSelector?: string | Element;
 }
 
 export type SlideDirectionType = 'top' | 'right' | 'bottom' | 'left';

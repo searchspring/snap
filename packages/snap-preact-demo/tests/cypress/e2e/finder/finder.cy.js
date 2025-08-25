@@ -213,17 +213,18 @@ config?.pages?.forEach((page, _i) => {
 									.find('select')
 									.eq(index)
 									.then((select) => {
+										// value with the most options
+										const options = controller.store.selections[index].data.sort((a, b) => b.count - a.count);
+										const valueToSelect = options[0]?.value;
+										expect(valueToSelect).to.exist;
+
+										cy.get(select).as('selection');
+
+										cy.get('@selection').select(valueToSelect, { force: true });
+										cy.get('@selection').should('have.value', valueToSelect);
+
 										cy.snapController(id).then(({ store }) => {
-											// value with the most options
-											const options = store.selections[index].data.sort((a, b) => b.count - a.count);
-											const valueToSelect = options[0]?.value;
-											expect(valueToSelect).to.exist;
-
-											cy.get(select).select(valueToSelect, { force: true }).should('have.value', valueToSelect);
-
-											cy.snapController(id).then(({ store }) => {
-												expect(store.selections[index].selected).to.equal(valueToSelect);
-											});
+											expect(store.selections[index].selected).to.equal(valueToSelect);
 										});
 									});
 							});

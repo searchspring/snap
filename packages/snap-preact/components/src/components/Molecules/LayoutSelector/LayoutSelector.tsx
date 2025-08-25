@@ -35,7 +35,8 @@ export const LayoutSelector = observer((properties: LayoutSelectorProps): JSX.El
 
 	const props = mergeProps('layoutSelector', globalTheme, defaultProps, properties);
 
-	const { options, selected, type, onSelect, showSingleOption, hideLabel, hideOptionLabels, disableStyles, className, treePath } = props;
+	const { options, selected, type, onSelect, showSingleOption, hideLabel, hideOptionLabels, disableStyles, className, internalClassName, treePath } =
+		props;
 	let label = props.label;
 
 	const subProps: SelectSubProps = {
@@ -94,7 +95,7 @@ export const LayoutSelector = observer((properties: LayoutSelectorProps): JSX.El
 
 	if (hideOptionLabels) {
 		const optionsWithNoIcons = options?.filter((option) => !option.icon);
-		if (optionsWithNoIcons) {
+		if (optionsWithNoIcons?.length) {
 			console.warn('Warning - found layout options with no visible label or icon', optionsWithNoIcons);
 		}
 	}
@@ -105,7 +106,7 @@ export const LayoutSelector = observer((properties: LayoutSelectorProps): JSX.El
 			{type?.toLowerCase() == 'dropdown' && (
 				<Select
 					{...styling}
-					className={classnames('ss__layout__select', className)}
+					className={classnames('ss__layout__select', className, internalClassName)}
 					{...subProps.Select}
 					label={label}
 					options={options}
@@ -122,7 +123,7 @@ export const LayoutSelector = observer((properties: LayoutSelectorProps): JSX.El
 			{type?.toLowerCase() == 'list' && (
 				<List
 					{...styling}
-					className={classnames('ss__layout__list', className)}
+					className={classnames('ss__layout__list', className, internalClassName)}
 					{...subProps.List}
 					onSelect={(e, option: ListOption) => {
 						onSelect && onSelect(e, option);
@@ -139,7 +140,7 @@ export const LayoutSelector = observer((properties: LayoutSelectorProps): JSX.El
 			{type?.toLowerCase() == 'radio' && (
 				<RadioList
 					{...styling}
-					className={classnames('ss__layout__radioList', className)}
+					className={classnames('ss__layout__radioList', className, internalClassName)}
 					{...subProps.RadioList}
 					onSelect={(e, option: ListOption) => {
 						onSelect && onSelect(e, option);

@@ -77,6 +77,16 @@ export default {
 			},
 			control: { type: 'boolean' },
 		},
+		toggleOnHover: {
+			description: 'open and close dropdown on hover',
+			table: {
+				type: {
+					summary: 'boolean',
+				},
+				defaultValue: { summary: false },
+			},
+			control: { type: 'boolean' },
+		},
 		open: {
 			description: 'Pass a value here to control the state externally',
 			table: {
@@ -117,6 +127,24 @@ export default {
 			control: { type: 'none' },
 			action: 'onClick',
 		},
+		onMouseEnter: {
+			description: 'Dropdown mouse enter event handler',
+			table: {
+				type: {
+					summary: 'function(e: Event)',
+				},
+			},
+			action: 'onMouseEnter',
+		},
+		onMouseLeave: {
+			description: 'Dropdown mouse leave event handler',
+			table: {
+				type: {
+					summary: 'function(e: Event)',
+				},
+			},
+			action: 'onMouseLeave',
+		},
 		onToggle: {
 			description: 'Executes when the internal state changes, gets passed the event and the internal state - used with internal state only',
 			table: {
@@ -127,17 +155,30 @@ export default {
 			control: { type: 'none' },
 			action: 'onToggle',
 		},
-		disableA11y: {
-			description: 'boolean to disable autoset ally properties',
-			table: {
-				type: {
-					summary: 'boolean',
+		focusTrapContent: {
+			description: 'boolean to enable ally focustrap',
+			disableClick: {
+				description: 'boolean to disable clicking of the button',
+				table: {
+					type: {
+						summary: 'boolean',
+					},
+					defaultValue: { summary: false },
 				},
-				defaultValue: { summary: false },
+				control: { type: 'boolean' },
 			},
-			control: { type: 'boolean' },
+			disableA11y: {
+				description: 'boolean to disable autoset ally properties',
+				table: {
+					type: {
+						summary: 'boolean',
+					},
+					defaultValue: { summary: false },
+				},
+				control: { type: 'boolean' },
+			},
+			...componentArgs,
 		},
-		...componentArgs,
 	},
 };
 
@@ -145,6 +186,13 @@ export const Default = (args: DropdownProps) => <Dropdown {...args} />;
 Default.args = {
 	button: 'button text',
 	content: 'content text',
+};
+
+export const Hoverable = (args: DropdownProps) => <Dropdown {...args} />;
+Hoverable.args = {
+	button: 'hover over me',
+	content: 'content text',
+	toggleOnHover: true,
 };
 
 export const ExternalState = (args: DropdownProps) => <Dropdown {...args} />;

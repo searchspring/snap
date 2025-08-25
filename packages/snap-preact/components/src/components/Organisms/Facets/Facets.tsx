@@ -27,7 +27,7 @@ export const Facets = observer((properties: FacetsProps): JSX.Element => {
 
 	let props = mergeProps('facets', globalTheme, defaultProps, properties);
 
-	const { limit, onFacetOptionClick, disableStyles, className, controller, treePath } = props;
+	const { limit, onFacetOptionClick, disableStyles, className, internalClassName, controller, treePath } = props;
 
 	const facetClickEvent = (e: React.MouseEvent<Element, MouseEvent>) => {
 		onFacetOptionClick && onFacetOptionClick(e);
@@ -69,7 +69,7 @@ export const Facets = observer((properties: FacetsProps): JSX.Element => {
 	const subProps: FacetsSubProps = {
 		facet: {
 			// default props
-			className: 'ss__facets__facet',
+			internalClassName: 'ss__facets__facet',
 			// inherited props
 			...defined({
 				disableStyles,
@@ -89,7 +89,7 @@ export const Facets = observer((properties: FacetsProps): JSX.Element => {
 
 	return facets && facets?.length > 0 ? (
 		<CacheProvider>
-			<div className={classnames('ss__facets', className)} {...styling}>
+			<div className={classnames('ss__facets', className, internalClassName)} {...styling}>
 				{facets.map((facet) => (
 					<Facet key={facet.field} {...subProps.facet} facet={facet} name={fieldNameToComponentName(facet.field)} />
 				))}

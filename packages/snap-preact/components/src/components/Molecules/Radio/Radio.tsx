@@ -60,15 +60,22 @@ export const Radio = observer((properties: RadioProps): JSX.Element => {
 		disableA11y,
 		disableStyles,
 		className,
+		internalClassName,
 		size,
 		treePath,
+		lang,
+		style: _,
+		styleScript: __,
+		themeStyleScript: ___,
+		name: ____,
+		...additionalProps
 	} = props;
 
 	const subProps: RadioSubProps = {
 		activeIcon: {
 			name: 'active',
 			// default props
-			className: 'ss__radio__icon',
+			internalClassName: 'ss__radio__icon',
 			// inherited props
 			...defined({
 				size,
@@ -82,7 +89,7 @@ export const Radio = observer((properties: RadioProps): JSX.Element => {
 		inactiveIcon: {
 			name: 'inactive',
 			// default props
-			className: 'ss__radio__icon',
+			internalClassName: 'ss__radio__icon',
 			// inherited props
 			...defined({
 				size,
@@ -125,8 +132,8 @@ export const Radio = observer((properties: RadioProps): JSX.Element => {
 	};
 
 	//deep merge with props.lang
-	const lang = deepmerge(defaultLang, props.lang || {});
-	const mergedLang = useLang(lang as any, {
+	const _lang = deepmerge(defaultLang, lang || {});
+	const mergedLang = useLang(_lang as any, {
 		disabled,
 		checkedState,
 	});
@@ -134,7 +141,7 @@ export const Radio = observer((properties: RadioProps): JSX.Element => {
 	return (
 		<CacheProvider>
 			{native ? (
-				<div className={classnames('ss__radio', 'ss__radio--native', { 'ss__radio--disabled': disabled }, className)} {...styling}>
+				<div className={classnames('ss__radio', 'ss__radio--native', { 'ss__radio--disabled': disabled }, className, internalClassName)} {...styling}>
 					<input
 						className={classnames('ss__radio__input')}
 						aria-checked={checkedState}
@@ -148,13 +155,14 @@ export const Radio = observer((properties: RadioProps): JSX.Element => {
 			) : (
 				<span
 					{...styling}
-					className={classnames('ss__radio', { 'ss__radio--disabled': disabled, 'ss__radio--active': checkedState }, className)}
+					className={classnames('ss__radio', { 'ss__radio--disabled': disabled, 'ss__radio--active': checkedState }, className, internalClassName)}
 					onClick={(e) => clickFunc(e)}
 					ref={(e) => (!disableA11y ? useA11y(e) : null)}
 					{...mergedLang.radio?.all}
 					role="radio"
 					aria-checked={checkedState}
 					aria-disabled={disabled}
+					{...additionalProps}
 				>
 					{checkedState ? (
 						<Icon {...subProps.activeIcon} {...(typeof checkedIcon == 'string' ? { icon: checkedIcon } : (checkedIcon as Partial<IconProps>))} />

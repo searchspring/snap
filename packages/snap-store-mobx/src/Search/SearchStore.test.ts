@@ -30,7 +30,7 @@ describe('Search Store', () => {
 		expect(searchStore.meta?.data).toStrictEqual({});
 
 		expect(searchStore.merchandising).toBeDefined();
-		expect(searchStore.merchandising).toEqual({ redirect: '', content: {}, campaigns: [] });
+		expect(searchStore.merchandising).toEqual({ redirect: '', personalized: false, experiments: [], content: {}, campaigns: [] });
 
 		expect(searchStore.search).toBeDefined();
 		expect(searchStore.search).toEqual({ query: undefined });

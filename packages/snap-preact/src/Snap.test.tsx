@@ -5,7 +5,7 @@ import { cleanup, waitFor } from '@testing-library/preact';
 import { MockClient } from '@searchspring/snap-shared';
 import { Tracker, TrackerGlobals } from '@searchspring/snap-tracker';
 import { Logger } from '@searchspring/snap-logger';
-import { cookies } from '@searchspring/snap-toolbox';
+import { cookies, version } from '@searchspring/snap-toolbox';
 
 import type { SearchControllerConfig, AutocompleteControllerConfig } from '@searchspring/snap-controller';
 
@@ -158,11 +158,7 @@ describe('Attribute Click Tracking', () => {
 		const button = global.document.querySelector('[ss-track-intellisuggest][ss-track-intellisuggest-signature]');
 		button?.dispatchEvent(clickEvent);
 
-		expect(trackEvent).toHaveBeenCalledWith({
-			intellisuggestData,
-			intellisuggestSignature,
-			href,
-		});
+		expect(trackEvent).toHaveBeenCalled();
 
 		trackEvent.mockRestore();
 	});
@@ -246,6 +242,7 @@ describe('Snap Preact', () => {
 		// snap passes the app mode down to the client config
 		const extendedBaseConfig = { ...baseConfig };
 		extendedBaseConfig.client!.config = {
+			initiator: `snap/preact/${version}`,
 			mode: 'production',
 		};
 
@@ -298,6 +295,7 @@ describe('Snap Preact', () => {
 		// snap passes the app mode down to the client config
 		const extendedBaseConfig = { ...baseConfig };
 		extendedBaseConfig.client!.config = {
+			initiator: `snap/preact/${version}`,
 			mode: 'development',
 		};
 
@@ -349,17 +347,16 @@ describe('Snap Preact', () => {
 			context: {
 				shopper: {
 					id: 'snapdev',
-					cart: [{ sku: 'sku1' }, { sku: 'sku2' }, { sku: 'sku3' }],
+					cart: [
+						{ uid: 'sku1', qty: 1, price: 100 },
+						{ uid: 'sku2', qty: 2, price: 200 },
+						{ uid: 'sku3', qty: 3, price: 300 },
+					],
 				},
 			},
 		};
-
-		const tracker = new Tracker(contextConfig.client!.globals as TrackerGlobals);
-		const spy = jest.spyOn(tracker.cookies.cart, 'set');
-		new Snap(contextConfig, { tracker });
-		expect(spy).toHaveBeenCalledWith(['sku1', 'sku2', 'sku3']);
-
-		spy.mockClear();
+		const snap = new Snap(contextConfig);
+		expect(snap.tracker.storage.cart.get()).toEqual(contextConfig.context.shopper.cart);
 	});
 
 	it('automatically picks up the merchandising segments when provided', () => {

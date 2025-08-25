@@ -25,6 +25,7 @@ export type SearchStoreConfigSettings = {
 		};
 	};
 	infinite?: {
+		enabled?: boolean;
 		backfill?: number;
 	};
 	restorePosition?: {
@@ -114,12 +115,14 @@ export type AutocompleteStoreConfigSettings = {
 		};
 	};
 	trending?: {
-		limit: number;
+		enabled?: boolean;
+		limit?: number;
 		showResults?: boolean;
 	};
 	variants?: VariantConfig;
 	history?: {
-		limit: number;
+		enabled?: boolean;
+		limit?: number;
 		showResults?: boolean;
 	};
 	redirects?: {

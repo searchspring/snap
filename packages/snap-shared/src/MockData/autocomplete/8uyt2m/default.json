@@ -2407,6 +2407,8 @@
   "sorting": [],
   "merchandising": { 
     "campaigns": [],
+    "experiments": [],
+    "personalized": false, 
     "redirect": "",
     "content": {}
   },

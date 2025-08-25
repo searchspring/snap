@@ -18,7 +18,7 @@ export const BundleSelector = observer((properties: BundleSelectorProps): JSX.El
 
 	const props = mergeProps('bundleSelector', globalTheme, defaultProps, properties);
 
-	const { children, checked, icon, seedText, seed, hideCheckboxes, onCheck, title, className, treePath, classNamePrefix } = props;
+	const { children, checked, icon, seedText, seed, hideCheckboxes, onCheck, title, className, internalClassName, treePath, classNamePrefix } = props;
 
 	const lastPath = treePath?.lastIndexOf(' ');
 	const modifiedTreePath = treePath?.slice(0, lastPath);
@@ -27,14 +27,14 @@ export const BundleSelector = observer((properties: BundleSelectorProps): JSX.El
 		icon: {
 			// default props
 			name: 'bundle-selector',
-			className: `${classNamePrefix}__wrapper__selector__icon`,
+			internalClassName: `${classNamePrefix}__wrapper__selector__icon`,
 			size: 15,
 			// component theme overrides
 			theme: props?.theme,
 			treePath: modifiedTreePath,
 		},
 		checkbox: {
-			className: `${classNamePrefix}__wrapper__selector__result-wrapper__checkbox`,
+			internalClassName: `${classNamePrefix}__wrapper__selector__result-wrapper__checkbox`,
 			checked: checked,
 			size: '18px',
 			onClick: onCheck,
@@ -61,7 +61,8 @@ export const BundleSelector = observer((properties: BundleSelectorProps): JSX.El
 				`${classNamePrefix}__wrapper__selector`,
 				checked ? `${classNamePrefix}__wrapper__selector--selected` : '',
 				seedText || seed ? `${classNamePrefix}__wrapper__selector--seed` : '',
-				className
+				className,
+				internalClassName
 			)}
 		>
 			<div className={`${classNamePrefix}__wrapper__selector__result-wrapper`}>
@@ -85,7 +86,7 @@ export interface BundleSelectorProps extends ComponentProps {
 	seedText?: string;
 	seed?: boolean;
 	hideCheckboxes?: boolean;
-	onCheck?: () => void;
+	onCheck?: (e: React.MouseEvent<HTMLElement, MouseEvent>) => void;
 	icon?: IconType | Partial<IconProps> | boolean;
 	lang?: Partial<BundleSelectorLang>;
 	title?: string;

@@ -11,7 +11,7 @@ import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { createHoverProps } from '../../../toolbox';
 import { mergeProps, mergeStyles } from '../../../utilities';
 import { Term } from '@searchspring/snap-store-mobx';
-import { useA11y, useLang } from '../../../hooks';
+import { useLang } from '../../../hooks';
 import type { Lang } from '../../../hooks';
 import deepmerge from 'deepmerge';
 
@@ -86,7 +86,7 @@ export const Terms = observer((properties: TermsProps): JSX.Element => {
 	};
 
 	const props = mergeProps('terms', globalTheme, defaultProps, properties);
-	const { title, onTermClick, limit, previewOnHover, emIfy, className, controller } = props;
+	const { title, onTermClick, limit, previewOnHover, emIfy, className, internalClassName, controller } = props;
 	const currentInput = controller?.store?.state?.input;
 	const terms = props.terms;
 
@@ -100,11 +100,6 @@ export const Terms = observer((properties: TermsProps): JSX.Element => {
 	};
 
 	const termsToShow = limit ? terms?.slice(0, limit) : terms;
-
-	const escCallback = () => {
-		// remove focus from input (close the autocomplete)
-		controller?.setFocused && controller?.setFocused();
-	};
 
 	//initialize lang
 	const defaultLang: Partial<TermsLang> = {
@@ -121,20 +116,20 @@ export const Terms = observer((properties: TermsProps): JSX.Element => {
 
 	return termsToShow?.length ? (
 		<CacheProvider>
-			<div {...styling} className={classnames('ss__terms', className)}>
+			<div {...styling} className={classnames('ss__terms', className, internalClassName)}>
 				{title ? (
 					<div className="ss__terms__title">
 						<h5 {...mergedTitleLang.title.all}></h5>
 					</div>
 				) : null}
-				<ul className="ss__terms__options" aria-label={title} ref={(e) => useA11y(e, 0, true, escCallback)}>
+				<ul className="ss__terms__options" aria-label={title}>
 					{termsToShow?.map((term, idx) => {
 						//initialize lang
 						const defaultTermLang = {
 							term: {
 								value: `${emIfy ? emIfyTerm(term.value, currentInput || '') : term.value}`,
 								attributes: {
-									'aria-label': `item ${idx + 1} of ${termsToShow.length}, ${term.value}`,
+									'aria-label': `${title} item ${idx + 1} of ${termsToShow.length}, ${term.value}`,
 								},
 							},
 						};

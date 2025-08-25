@@ -348,7 +348,9 @@
         "title": "Global Boost Rules (Cutouts and 1-3/4\" Cube and Coffins and 12x12x1/4 plywood)",
         "type": "global"
       }
-    ]
+    ],
+    "experiments": [],
+    "personalized": false
   },
   "search": {
     "query": "easter egg boho"

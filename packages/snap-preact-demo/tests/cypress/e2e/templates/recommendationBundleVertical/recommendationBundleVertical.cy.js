@@ -36,7 +36,7 @@ describe('BundledRecommendations', () => {
 			cy.on('window:before:load', (win) => {
 				win.mergeSnapConfig = {
 					theme: {
-						extends: 'bocachica',
+						extends: 'base',
 						overrides: {
 							default: {
 								recommendationBundle: {
@@ -161,7 +161,7 @@ describe('BundledRecommendations', () => {
 				cy.on('window:before:load', (win) => {
 					win.mergeSnapConfig = {
 						theme: {
-							extends: 'bocachica',
+							extends: 'base',
 							overrides: {
 								default: {
 									recommendationBundle: {

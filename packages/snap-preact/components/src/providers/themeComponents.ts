@@ -47,6 +47,7 @@ import type { SortByProps } from '../components/Molecules/SortBy';
 import type { SwatchesProps } from '../components/Molecules/Swatches';
 import type { VariantSelectionProps } from '../components/Molecules/VariantSelection';
 import type { TermsNames, TermsProps } from '../components/Molecules/Terms';
+import type { ModalProps } from '../components/Molecules/Modal';
 
 /* ORGANISMS */
 import type { BranchOverrideProps } from '../components/Organisms/BranchOverride';
@@ -72,10 +73,13 @@ import type { RecommendationGridProps } from '../components/Templates/Recommenda
 import type { RecommendationEmailProps } from '../components/Templates/RecommendationEmail';
 import type { SearchProps } from '../components/Templates/Search';
 import type { SearchHorizontalProps } from '../components/Templates/SearchHorizontal';
-import type { AutocompleteTemplateProps } from '../components/Templates/AutocompleteTemplate';
+import type { AutocompleteLayoutProps } from '../components/Organisms/AutocompleteLayout';
+import type { AutocompleteSlideoutProps } from '../components/Templates/AutocompleteSlideout';
 import type { SearchBocaProps } from '../components/Templates/SearchBoca';
 import type { SearchSnappyProps } from '../components/Templates/SearchSnappy';
 import { SearchSnapncoProps } from '../components/Templates/SearchSnapnco';
+import { AutocompleteModalProps } from '../components/Templates/AutocompleteModal';
+import { AutocompleteFixedProps } from '../components/Templates/AutocompleteFixed';
 
 export type ThemeComponentProps<ComponentProps> = {
 	default: Partial<ComponentProps>;
@@ -122,7 +126,7 @@ type ThemeComponentOverrideOmittedProps =
 	| 'result'
 	| 'filter'
 	| 'lang'
-	| 'className'
+	| 'internalClassName'
 	| 'ref'
 	| 'snap'
 	| 'name'
@@ -162,7 +166,9 @@ export type ThemeComponents =
 		[K in ThemeComponentOverridesNamedSelectors<'price', PriceNames>]?: Partial<PriceProps>;
 	} & {
 		[K in ThemeComponentOverridesUnNamedSelectors<'skeleton'>]?: Partial<SkeletonProps>;
-	} /* MOLECULES */ & { [K in ThemeComponentOverridesUnNamedSelectors<'calloutBadge'>]?: Partial<CalloutBadgeProps> } & {
+	} /* MOLECULES */ & { [K in ThemeComponentOverridesUnNamedSelectors<'modal'>]?: Partial<ModalProps> } & {
+		[K in ThemeComponentOverridesUnNamedSelectors<'calloutBadge'>]?: Partial<CalloutBadgeProps>;
+	} & {
 		// { [K in UnNamedThemeComponentSelectors<'toggle'>]?: RestrictedThemeComponentProps<ToggleProps> } &
 		[K in ThemeComponentOverridesUnNamedSelectors<'carousel'>]?: Partial<CarouselProps>;
 	} & { [K in ThemeComponentOverridesUnNamedSelectors<'checkbox'>]?: Partial<CheckboxProps> } & {
@@ -206,7 +212,11 @@ export type ThemeComponents =
 		[K in ThemeComponentOverridesUnNamedSelectors<'mobileSidebar'>]?: Partial<MobileSidebarProps>;
 	} & { [K in ThemeComponentOverridesNamedSelectors<'toolbar', ToolbarNames>]?: Partial<ToolbarProps> } & {
 		[K in ThemeComponentOverridesUnNamedSelectors<'termsList'>]?: Partial<TermsListProps>;
-	} /* TEMPLATES */ & { [K in ThemeComponentOverridesUnNamedSelectors<'autocompleteTemplate'>]?: Partial<AutocompleteTemplateProps> } & {
+	} /* TEMPLATES */ & { [K in ThemeComponentOverridesUnNamedSelectors<'autocompleteTemplate'>]?: Partial<AutocompleteLayoutProps> } & {
+		[K in ThemeComponentOverridesUnNamedSelectors<'autocompleteSlideout'>]?: Partial<AutocompleteSlideoutProps>;
+	} & { [K in ThemeComponentOverridesUnNamedSelectors<'autocompleteModal'>]?: Partial<AutocompleteModalProps> } & {
+		[K in ThemeComponentOverridesUnNamedSelectors<'autocompleteFixed'>]?: Partial<AutocompleteFixedProps>;
+	} & {
 		[K in ThemeComponentOverridesNamedSelectors<'recommendation', string>]?: Partial<RecommendationProps>;
 	} & { [K in ThemeComponentOverridesNamedSelectors<'recommendationBundle', string>]?: Partial<RecommendationBundleProps> } & {
 		[K in ThemeComponentOverridesNamedSelectors<'recommendationBundleEasyAdd', string>]?: Partial<RecommendationBundleEasyAddProps>;
@@ -243,6 +253,7 @@ export type ThemeComponentsRestricted =
 	// { [K in UnNamedThemeComponentSelectors<'toggle'>]?: RestrictedThemeComponentProps<ToggleProps> } &
 	
 	/* MOLECULES */
+	{ [K in ThemeComponentOverridesUnNamedSelectors<'modal'>]?: ThemeComponentRestrictedProps<ModalProps> } &
 	{ [K in ThemeComponentOverridesUnNamedSelectors<'calloutBadge'>]?: ThemeComponentRestrictedProps<CalloutBadgeProps> } & 
 	{ [K in ThemeComponentOverridesUnNamedSelectors<'carousel'>]?: ThemeComponentRestrictedProps<CarouselProps> } &
 	{ [K in ThemeComponentOverridesUnNamedSelectors<'checkbox'>]?: ThemeComponentRestrictedProps<CheckboxProps> } &
@@ -289,7 +300,10 @@ export type ThemeComponentsRestricted =
 
 
 	/* TEMPLATES */
-	{ [K in ThemeComponentOverridesUnNamedSelectors<'autocompleteTemplate'>]?: ThemeComponentRestrictedProps<AutocompleteTemplateProps> } &
+	{ [K in ThemeComponentOverridesUnNamedSelectors<'autocompleteTemplate'>]?: ThemeComponentRestrictedProps<AutocompleteLayoutProps> } &
+	{ [K in ThemeComponentOverridesUnNamedSelectors<'autocompleteFixed'>]?: ThemeComponentRestrictedProps<AutocompleteFixedProps> } &
+	{ [K in ThemeComponentOverridesUnNamedSelectors<'autocompleteModal'>]?: ThemeComponentRestrictedProps<AutocompleteModalProps> } &
+	{ [K in ThemeComponentOverridesUnNamedSelectors<'autocompleteSlideout'>]?: ThemeComponentRestrictedProps<AutocompleteSlideoutProps> } &
 	{ [K in ThemeComponentOverridesNamedSelectors<'recommendation', string>]?: ThemeComponentRestrictedProps<RecommendationProps> } &
 	{ [K in ThemeComponentOverridesNamedSelectors<'recommendationBundle', string>]?: ThemeComponentRestrictedProps<RecommendationBundleProps> } &
 	{ [K in ThemeComponentOverridesNamedSelectors<'recommendationBundleEasyAdd', string>]?: ThemeComponentRestrictedProps<RecommendationBundleEasyAddProps> } &
@@ -326,6 +340,7 @@ export type ThemeComponentsRestrictedOverrides =
 	// { [K in UnNamedThemeComponentSelectors<'toggle'>]?: RestrictedComponentProps<ToggleProps> } &
 	
 	/* MOLECULES */
+	{ [K in ThemeComponentOverridesUnNamedSelectors<'modal'>]?: ThemeComponentOverridesRestrictedProps<ModalProps> } &
 	{ [K in ThemeComponentOverridesUnNamedSelectors<'calloutBadge'>]?: ThemeComponentOverridesRestrictedProps<CalloutBadgeProps> } & 
 	{ [K in ThemeComponentOverridesUnNamedSelectors<'carousel'>]?: ThemeComponentOverridesRestrictedProps<CarouselProps> } &
 	{ [K in ThemeComponentOverridesUnNamedSelectors<'checkbox'>]?: ThemeComponentOverridesRestrictedProps<CheckboxProps> } &
@@ -371,7 +386,10 @@ export type ThemeComponentsRestrictedOverrides =
 	{ [K in ThemeComponentOverridesUnNamedSelectors<'termsList'>]?: ThemeComponentOverridesRestrictedProps<TermsListProps> } &
 
 	/* TEMPLATES */
-	{ [K in ThemeComponentOverridesUnNamedSelectors<'autocompleteTemplate'>]?: ThemeComponentOverridesRestrictedProps<AutocompleteTemplateProps> } &
+	{ [K in ThemeComponentOverridesUnNamedSelectors<'autocompleteTemplate'>]?: ThemeComponentOverridesRestrictedProps<AutocompleteLayoutProps> } &
+	{ [K in ThemeComponentOverridesUnNamedSelectors<'autocompleteFixed'>]?: ThemeComponentOverridesRestrictedProps<AutocompleteFixedProps> } &
+	{ [K in ThemeComponentOverridesUnNamedSelectors<'autocompleteModal'>]?: ThemeComponentOverridesRestrictedProps<AutocompleteModalProps> } &
+	{ [K in ThemeComponentOverridesUnNamedSelectors<'autocompleteSlideout'>]?: ThemeComponentOverridesRestrictedProps<AutocompleteSlideoutProps> } &
 	{ [K in ThemeComponentOverridesNamedSelectors<'recommendation', string>]?: ThemeComponentOverridesRestrictedProps<RecommendationProps> } &
 	{ [K in ThemeComponentOverridesNamedSelectors<'recommendationBundle', string>]?: ThemeComponentOverridesRestrictedProps<RecommendationBundleProps> } &
 	{ [K in ThemeComponentOverridesNamedSelectors<'recommendationBundleEasyAdd', string>]?: ThemeComponentOverridesRestrictedProps<RecommendationBundleEasyAddProps> } &
@@ -411,6 +429,7 @@ export type ThemeComponentTemplateOverrides<Template extends string, Props> =
 	// { [K in StartsWithTemplateHavingUnNamedThemeComponentSelectors<Template,'toggle'>]?: RestrictedThemeComponentProps<ToggleProps> } &
 	
 	/* MOLECULES */
+	{ [K in ThemeComponentUnNamedSelectorsStartingWithTemplate<Template,'modal'>]?: ThemeComponentRestrictedProps<ModalProps> } &
 	{ [K in ThemeComponentUnNamedSelectorsStartingWithTemplate<Template,'calloutBadge'>]?: ThemeComponentRestrictedProps<CalloutBadgeProps> } & 
 	{ [K in ThemeComponentUnNamedSelectorsStartingWithTemplate<Template,'carousel'>]?: ThemeComponentRestrictedProps<CarouselProps> } &
 	{ [K in ThemeComponentUnNamedSelectorsStartingWithTemplate<Template,'checkbox'>]?: ThemeComponentRestrictedProps<CheckboxProps> } &
@@ -457,7 +476,10 @@ export type ThemeComponentTemplateOverrides<Template extends string, Props> =
 
 
 	/* TEMPLATES */
-	{ [K in ThemeComponentUnNamedSelectorsStartingWithTemplate<Template,'autocompleteTemplate'>]?: ThemeComponentRestrictedProps<AutocompleteTemplateProps> } &
+	{ [K in ThemeComponentUnNamedSelectorsStartingWithTemplate<Template,'autocompleteTemplate'>]?: ThemeComponentRestrictedProps<AutocompleteLayoutProps> } &
+	{ [K in ThemeComponentUnNamedSelectorsStartingWithTemplate<Template,'autocompleteFixed'>]?: ThemeComponentRestrictedProps<AutocompleteFixedProps> } &
+	{ [K in ThemeComponentUnNamedSelectorsStartingWithTemplate<Template,'autocompleteModal'>]?: ThemeComponentRestrictedProps<AutocompleteModalProps> } &
+	{ [K in ThemeComponentUnNamedSelectorsStartingWithTemplate<Template,'autocompleteSlideout'>]?: ThemeComponentRestrictedProps<AutocompleteSlideoutProps> } &
 	{ [K in ThemeComponentNamedSelectorsStartingWithTemplate<Template, 'recommendation', string>]?: ThemeComponentRestrictedProps<RecommendationProps> } &
 	{ [K in ThemeComponentNamedSelectorsStartingWithTemplate<Template, 'recommendationBundle', string>]?: ThemeComponentRestrictedProps<RecommendationBundleProps> } &
 	{ [K in ThemeComponentNamedSelectorsStartingWithTemplate<Template, 'recommendationBundleEasyAdd', string>]?: ThemeComponentRestrictedProps<RecommendationBundleEasyAddProps> } &
@@ -469,4 +491,4 @@ export type ThemeComponentTemplateOverrides<Template extends string, Props> =
 	{ [K in ThemeComponentUnNamedSelectorsStartingWithTemplate<Template,'searchSnappy'>]?: ThemeComponentRestrictedProps<SearchSnappyProps> } &
 	{ [K in ThemeComponentUnNamedSelectorsStartingWithTemplate<Template,'searchBoca'>]?: ThemeComponentRestrictedProps<SearchBocaProps> } &
 	{ [K in ThemeComponentUnNamedSelectorsStartingWithTemplate<Template,'searchSnapnco'>]?: ThemeComponentRestrictedProps<SearchSnapncoProps> } &
-	{ [K in ThemeComponentUnNamedSelectorsStartingWithTemplate<Template,'searchHorizontal'>]?: Partial<SearchHorizontalProps> };
+	{ [K in ThemeComponentUnNamedSelectorsStartingWithTemplate<Template,'searchHorizontal'>]?: ThemeComponentRestrictedProps<SearchHorizontalProps> };

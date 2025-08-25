@@ -105,6 +105,7 @@ export const FacetsHorizontal = observer((properties: FacetsHorizontalProps): JS
 		iconCollapse,
 		disableStyles,
 		className,
+		internalClassName,
 		controller,
 		treePath,
 	} = props;
@@ -153,10 +154,10 @@ export const FacetsHorizontal = observer((properties: FacetsHorizontalProps): JS
 	const subProps: FacetsHorizontalSubProps = {
 		dropdown: {
 			// default props
-			className: 'ss__facets-horizontal__header__dropdown',
+			internalClassName: 'ss__facets-horizontal__header__dropdown',
 			disableClickOutside: true,
 			disableOverlay: true,
-			disableA11y: true,
+			focusTrapContent: true,
 			// inherited props
 			...defined({
 				disableStyles,
@@ -167,7 +168,7 @@ export const FacetsHorizontal = observer((properties: FacetsHorizontalProps): JS
 		},
 		icon: {
 			// default props
-			className: 'ss__dropdown__button__heading__icon',
+			internalClassName: 'ss__dropdown__button__heading__icon',
 			// inherited props
 			...defined({
 				disableStyles,
@@ -178,7 +179,7 @@ export const FacetsHorizontal = observer((properties: FacetsHorizontalProps): JS
 		},
 		facet: {
 			// default props
-			className: `ss__facets-horizontal__content__facet`,
+			internalClassName: `ss__facets-horizontal__content__facet`,
 			justContent: true,
 			// horizontal: true,
 			// inherited props
@@ -192,7 +193,7 @@ export const FacetsHorizontal = observer((properties: FacetsHorizontalProps): JS
 		},
 		MobileSidebar: {
 			// default props
-			className: 'ss__facets-horizontal__header__mobile-sidebar',
+			internalClassName: 'ss__facets-horizontal__header__mobile-sidebar',
 			// inherited props
 			...defined({
 				disableStyles,
@@ -220,7 +221,7 @@ export const FacetsHorizontal = observer((properties: FacetsHorizontalProps): JS
 	return (facetsToShow && facetsToShow?.length > 0) || isOverflowing ? (
 		<CacheProvider>
 			<div
-				className={classnames('ss__facets-horizontal', { 'ss__facets-horizontal--overlay': overlay }, className)}
+				className={classnames('ss__facets-horizontal', { 'ss__facets-horizontal--overlay': overlay }, className, internalClassName)}
 				ref={innerRef as React.LegacyRef<HTMLDivElement>}
 				{...styling}
 			>
@@ -247,27 +248,22 @@ export const FacetsHorizontal = observer((properties: FacetsHorizontalProps): JS
 						return (
 							<Dropdown
 								{...subProps.dropdown}
-								className={classnames(
-									subProps.dropdown.className,
+								internalClassName={classnames(
+									subProps.dropdown.internalClassName,
 									`ss__facets-horizontal__header__dropdown--${facet.display}`,
 									`ss__facets-horizontal__header__dropdown--${facet.field}`
 								)}
 								open={selectedFacet?.field === facet.field}
-								onClick={() => {
-									if (selectedFacet === facet) {
+								onClick={(e) => {
+									// @ts-ignore - this is a workaround for the fact that selectedFacet is not defined when the onclick is triggered by the escape key.
+									if (selectedFacet !== facet && e.code !== 'Escape') {
+										setSelectedFacet(facet);
+									} else {
 										setSelectedFacet(undefined);
-										return;
 									}
-									setSelectedFacet(facet);
 								}}
 								button={
-									<div
-										className="ss__dropdown__button__heading"
-										ref={(e) => useA11y(e, 0)}
-										role="heading"
-										aria-level={3}
-										{...mergedLang.dropdownButton.attributes}
-									>
+									<div className="ss__dropdown__button__heading" {...mergedLang.dropdownButton.attributes}>
 										<span {...mergedLang.dropdownButton.value}>{facet?.label}</span>
 										<Icon
 											{...subProps.icon}
