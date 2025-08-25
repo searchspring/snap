@@ -25,7 +25,7 @@ export const ResultTracker = observer((properties: ResultTrackerProps): JSX.Elem
 		click: true,
 	};
 
-	const { children, result, track, controller, className, disableStyles, style } = props;
+	const { children, result, track, controller, className, internalClassName, disableStyles, style } = props;
 
 	const mergedTrack = {
 		...defaultTrack,
@@ -50,7 +50,7 @@ export const ResultTracker = observer((properties: ResultTrackerProps): JSX.Elem
 
 	return (
 		<div
-			className={classnames('ss__result-tracker', `ss__${controller?.type}-result-tracker`, className)}
+			className={classnames('ss__result-tracker', `ss__${controller?.type}-result-tracker`, className, internalClassName)}
 			onClick={(e: any) => {
 				if (result.type === 'product' && mergedTrack.click) {
 					controller?.track.product.click(e, result as Product);

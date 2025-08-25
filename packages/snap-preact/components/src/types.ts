@@ -18,6 +18,7 @@ import { RecommendationBundleVerticalProps } from './components/Templates/Recomm
 export type StyleScript<Props> = (props: Props) => SerializedStyles;
 export interface ComponentProps<Props = any> {
 	className?: string;
+	internalClassName?: string;
 	disableStyles?: boolean;
 	style?: CSSObject;
 	styleScript?: StyleScript<Props>;

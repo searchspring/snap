@@ -72,15 +72,6 @@ export default {
 			},
 			control: { type: 'none' },
 		},
-		title: {
-			description: 'Title text to render inside the svg',
-			table: {
-				type: {
-					summary: 'string',
-				},
-			},
-			control: { type: 'text' },
-		},
 		color: {
 			description: 'Icon color',
 			table: {

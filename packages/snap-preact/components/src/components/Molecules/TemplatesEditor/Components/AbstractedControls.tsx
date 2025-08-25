@@ -11,6 +11,7 @@ type AbstractedControlsProps<Params> = {
 	feature: string;
 	editorStore: TemplateEditorStore;
 	data?: Params;
+	enableGroupReset?: boolean;
 };
 
 const CSS = {
@@ -22,7 +23,7 @@ export const AbstractedControls = observer(<Params,>(properties: AbstractedContr
 		css: [CSS.AbstractedControls({ ...properties })],
 	};
 
-	const { title, feature, editorStore, data } = properties;
+	const { title, enableGroupReset, feature, editorStore, data } = properties;
 	const [section, feat] = feature.split('/');
 	const controlSection = editorStore.uiAbstractions[section as keyof typeof editorStore.uiAbstractions];
 	const controlGroups = controlSection?.[feat as keyof typeof controlSection] as AbstractionGroup<Params>[] | undefined;
@@ -32,7 +33,7 @@ export const AbstractedControls = observer(<Params,>(properties: AbstractedContr
 		return null;
 	}
 
-	const showGroupReset = controlGroups.some((group) => group.controls.some((control) => control.shouldShowReset()));
+	const showGroupReset = enableGroupReset && controlGroups.some((group) => group.controls.some((control) => control.shouldShowReset()));
 
 	const resetAll = () => {
 		controlGroups.forEach((group) => {

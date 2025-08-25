@@ -23,6 +23,7 @@ import { ContentType } from '@searchspring/snap-store-mobx';
 import { Facets, FacetsProps } from '../Facets';
 import { FacetsHorizontal, FacetsHorizontalProps } from '../FacetsHorizontal';
 import { useCleanUpEmptyDivs } from '../../../hooks/useCleanUpEmptyDivs';
+import { Breadcrumbs, BreadcrumbsProps } from '../../Atoms/Breadcrumbs';
 
 const defaultStyles: StyleScript<LayoutProps> = ({}) => {
 	return css({
@@ -59,7 +60,7 @@ export const Layout = observer((properties: LayoutProps): JSX.Element => {
 	};
 
 	const props = mergeProps('layout', globalTheme, defaultProps, properties);
-	const { controller, toggleSideBarButton, disableStyles, className, treePath, layout } = props;
+	const { controller, toggleSideBarButton, disableStyles, className, internalClassName, layout } = props;
 
 	delete props.treePath;
 
@@ -75,7 +76,7 @@ export const Layout = observer((properties: LayoutProps): JSX.Element => {
 			}),
 			// component theme overrides
 			theme: props?.theme,
-			treePath,
+			treePath: properties.treePath,
 		},
 		Banner: {
 			// default props
@@ -86,7 +87,7 @@ export const Layout = observer((properties: LayoutProps): JSX.Element => {
 			}),
 			// component theme overrides
 			theme: props?.theme,
-			treePath,
+			treePath: properties.treePath,
 		},
 		SearchHeader: {
 			// default props
@@ -97,7 +98,7 @@ export const Layout = observer((properties: LayoutProps): JSX.Element => {
 			}),
 			// component theme overrides
 			theme: props?.theme,
-			treePath,
+			treePath: properties.treePath,
 		},
 		FilterSummary: {
 			// default props
@@ -108,7 +109,7 @@ export const Layout = observer((properties: LayoutProps): JSX.Element => {
 			}),
 			// component theme overrides
 			theme: props?.theme,
-			treePath,
+			treePath: properties.treePath,
 		},
 		LayoutSelector: {
 			// default props
@@ -119,7 +120,18 @@ export const Layout = observer((properties: LayoutProps): JSX.Element => {
 			}),
 			// component theme overrides
 			theme: props?.theme,
-			treePath,
+			treePath: properties.treePath,
+		},
+		Breadcrumbs: {
+			// default props
+			controller,
+			// inherited props
+			...defined({
+				disableStyles,
+			}),
+			// component theme overrides
+			theme: props?.theme,
+			treePath: properties.treePath,
 		},
 		Facets: {
 			// default props
@@ -130,7 +142,7 @@ export const Layout = observer((properties: LayoutProps): JSX.Element => {
 			}),
 			// component theme overrides
 			theme: props?.theme,
-			treePath,
+			treePath: properties.treePath,
 		},
 		FacetsHorizontal: {
 			// default props
@@ -141,7 +153,7 @@ export const Layout = observer((properties: LayoutProps): JSX.Element => {
 			}),
 			// component theme overrides
 			theme: props?.theme,
-			treePath,
+			treePath: properties.treePath,
 		},
 		Pagination: {
 			// default props
@@ -152,7 +164,7 @@ export const Layout = observer((properties: LayoutProps): JSX.Element => {
 			}),
 			// component theme overrides
 			theme: props?.theme,
-			treePath,
+			treePath: properties.treePath,
 		},
 		PaginationInfo: {
 			// default props
@@ -163,7 +175,7 @@ export const Layout = observer((properties: LayoutProps): JSX.Element => {
 			}),
 			// component theme overrides
 			theme: props?.theme,
-			treePath,
+			treePath: properties.treePath,
 		},
 		LoadMore: {
 			// default props
@@ -174,7 +186,7 @@ export const Layout = observer((properties: LayoutProps): JSX.Element => {
 			}),
 			// component theme overrides
 			theme: props?.theme,
-			treePath,
+			treePath: properties.treePath,
 		},
 		SortBy: {
 			// default props
@@ -185,7 +197,7 @@ export const Layout = observer((properties: LayoutProps): JSX.Element => {
 			}),
 			// component theme overrides
 			theme: props?.theme,
-			treePath,
+			treePath: properties.treePath,
 		},
 		PerPage: {
 			// default props
@@ -196,7 +208,7 @@ export const Layout = observer((properties: LayoutProps): JSX.Element => {
 			}),
 			// component theme overrides
 			theme: props?.theme,
-			treePath,
+			treePath: properties.treePath,
 		},
 		ToggleSideBarButton: {
 			// default props
@@ -209,7 +221,7 @@ export const Layout = observer((properties: LayoutProps): JSX.Element => {
 			}),
 			// component theme overrides
 			theme: props?.theme,
-			treePath,
+			treePath: properties.treePath,
 		},
 	};
 
@@ -232,22 +244,27 @@ export const Layout = observer((properties: LayoutProps): JSX.Element => {
 				if (hasResults) {
 					return <FilterSummary {...subProps.FilterSummary} />;
 				}
+				break;
 			case 'layoutSelector':
 				if (hasResults) {
 					return <LayoutSelector {...subProps.LayoutSelector} />;
 				}
+				break;
 			case 'paginationInfo':
 				if (hasResults) {
 					return <PaginationInfo {...subProps.PaginationInfo} />;
 				}
+				break;
 			case 'sortBy':
 				if (hasResults) {
 					return <SortBy {...subProps.SortBy} />;
 				}
+				break;
 			case 'perPage':
 				if (hasResults) {
 					return <PerPage {...subProps.PerPage} />;
 				}
+				break;
 			case 'button.sidebar-toggle':
 				if (hasResults) {
 					return (
@@ -258,7 +275,7 @@ export const Layout = observer((properties: LayoutProps): JSX.Element => {
 						)
 					);
 				}
-
+				break;
 			case 'pagination':
 				if (hasResults) {
 					if (controller.store.config.settings?.infinite?.enabled) {
@@ -267,7 +284,12 @@ export const Layout = observer((properties: LayoutProps): JSX.Element => {
 						return <Pagination {...subProps.Pagination} />;
 					}
 				}
-
+				break;
+			case 'breadcrumbs':
+				if (hasResults) {
+					return <Breadcrumbs {...subProps.Breadcrumbs} />;
+				}
+				break;
 			case '_':
 				return <div className={`ss__layout__separator ss__layout__separator--${separatorIndex++}`} />;
 
@@ -287,10 +309,12 @@ export const Layout = observer((properties: LayoutProps): JSX.Element => {
 				if (hasResults) {
 					return <Facets {...subProps.Facets} />;
 				}
+				break;
 			case 'facetsHorizontal':
 				if (hasResults) {
 					return <FacetsHorizontal {...subProps.Facets} />;
 				}
+				break;
 			default:
 				return null;
 		}
@@ -305,7 +329,7 @@ export const Layout = observer((properties: LayoutProps): JSX.Element => {
 
 	return hasChildrenToRender ? (
 		<CacheProvider>
-			<div {...styling} className={classnames('ss__layout', className)}>
+			<div {...styling} className={classnames('ss__layout', className, internalClassName)}>
 				{layout?.map((module) => {
 					if (Array.isArray(module)) {
 						return (
@@ -342,6 +366,7 @@ export type ModuleNames =
 	| 'sortBy'
 	| 'pagination'
 	| 'paginationInfo'
+	| 'breadcrumbs'
 	| '_'
 	| 'button.sidebar-toggle'
 	| 'banner.header'
@@ -366,4 +391,5 @@ interface LayoutSubProps {
 	Facets: Partial<FacetsProps>;
 	FacetsHorizontal: Partial<FacetsHorizontalProps>;
 	ToggleSideBarButton: Partial<ButtonProps>;
+	Breadcrumbs: Partial<BreadcrumbsProps>;
 }

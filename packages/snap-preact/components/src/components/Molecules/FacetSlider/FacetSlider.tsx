@@ -158,7 +158,7 @@ export const FacetSlider = observer((properties: FacetSliderProps): JSX.Element 
 
 	const props = mergeProps('facetSlider', globalTheme, defaultProps, properties);
 
-	const { showTicks, facet, stickyHandleLabel, onChange, onDrag, className } = props;
+	const { showTicks, facet, stickyHandleLabel, onChange, onDrag, className, internalClassName } = props;
 
 	let { tickSize } = props;
 
@@ -204,7 +204,7 @@ export const FacetSlider = observer((properties: FacetSliderProps): JSX.Element 
 
 	return facet.range && facet.active && facet.step ? (
 		<CacheProvider>
-			<div className={classnames('ss__facet-slider', className)} {...getTrackProps()} {...styling}>
+			<div className={classnames('ss__facet-slider', className, internalClassName)} {...getTrackProps()} {...styling}>
 				<div className="ss__facet-slider__slider">
 					{showTicks &&
 						ticks.map(({ value, getTickProps }) => (

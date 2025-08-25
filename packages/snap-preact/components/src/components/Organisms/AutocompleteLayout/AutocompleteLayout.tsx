@@ -94,6 +94,7 @@ const defaultStyles: StyleScript<AutocompleteLayoutProps> = ({
 		background: '#ffffff',
 		maxWidth: width,
 		maxHeight: viewportMaxHeight && inputViewportOffsetBottom ? `calc(100vh - ${inputViewportOffsetBottom + 10}px)` : undefined,
+		overflowY: 'scroll',
 
 		'.ss__autocomplete__row': {
 			display: 'flex',
@@ -224,6 +225,7 @@ export const AutocompleteLayout = observer((properties: AutocompleteLayoutProps)
 	};
 
 	let props = mergeProps('autocompleteLayout', globalTheme, defaultProps, properties);
+	delete props.treePath;
 
 	const valueProps = createHoverProps();
 
@@ -315,12 +317,13 @@ export const AutocompleteLayout = observer((properties: AutocompleteLayoutProps)
 		templates,
 		disableStyles,
 		className,
+		internalClassName,
 		controller,
 		treePath,
 	} = props;
 	const subProps: AutocompleteSubProps = {
 		button: {
-			className: 'ss__autocomplete__button--see-more',
+			internalClassName: 'ss__autocomplete__button--see-more',
 			// default props
 			onClick: () => {
 				controller?.setFocused && controller.setFocused();
@@ -332,10 +335,10 @@ export const AutocompleteLayout = observer((properties: AutocompleteLayoutProps)
 				disableStyles,
 			}),
 			theme: props.theme,
-			treePath,
+			treePath: properties.treePath,
 		},
 		termsList: {
-			className: 'ss__autocomplete__terms-list',
+			internalClassName: 'ss__autocomplete__terms-list',
 			// default props
 			controller: controller,
 			// inherited props
@@ -343,10 +346,10 @@ export const AutocompleteLayout = observer((properties: AutocompleteLayoutProps)
 				disableStyles,
 			}),
 			theme: props.theme,
-			treePath,
+			treePath: properties.treePath,
 		},
 		terms: {
-			className: 'ss__autocomplete__terms',
+			internalClassName: 'ss__autocomplete__terms',
 			// default props
 			controller: controller,
 			// inherited props
@@ -354,7 +357,7 @@ export const AutocompleteLayout = observer((properties: AutocompleteLayoutProps)
 				disableStyles,
 			}),
 			theme: props.theme,
-			treePath,
+			treePath: properties.treePath,
 		},
 		facets: {
 			name: 'autocomplete',
@@ -365,7 +368,7 @@ export const AutocompleteLayout = observer((properties: AutocompleteLayoutProps)
 				disableStyles,
 			}),
 			theme: props.theme,
-			treePath,
+			treePath: properties.treePath,
 		},
 		facetsHorizontal: {
 			name: 'autocomplete',
@@ -375,24 +378,24 @@ export const AutocompleteLayout = observer((properties: AutocompleteLayoutProps)
 				disableStyles,
 			}),
 			theme: props.theme,
-			treePath,
+			treePath: properties.treePath,
 		},
 		banner: {
 			// default props
-			className: 'ss__autocomplete__banner',
+			internalClassName: 'ss__autocomplete__banner',
 			// inherited props
 			...defined({
 				disableStyles,
 			}),
 			// component theme overrides
 			theme: props.theme,
-			treePath,
+			treePath: properties.treePath,
 		},
 		results: {
 			columns: 3,
 			rows: 2,
 			// default props
-			className: 'ss__autocomplete__results',
+			internalClassName: 'ss__autocomplete__results',
 			resultComponent: resultComponent,
 			// inherited props
 			...defined({
@@ -400,11 +403,11 @@ export const AutocompleteLayout = observer((properties: AutocompleteLayoutProps)
 			}),
 			// component theme overrides
 			theme: props.theme,
-			treePath,
+			treePath: properties.treePath,
 		},
 		icon: {
 			// default props
-			className: 'ss__autocomplete__icon',
+			internalClassName: 'ss__autocomplete__icon',
 			icon: 'angle-right',
 			size: '10px',
 			// inherited props
@@ -413,7 +416,7 @@ export const AutocompleteLayout = observer((properties: AutocompleteLayoutProps)
 			}),
 			// component theme overrides
 			theme: props.theme,
-			treePath,
+			treePath: properties.treePath,
 		},
 	};
 
@@ -653,9 +656,9 @@ export const AutocompleteLayout = observer((properties: AutocompleteLayoutProps)
 								</div>
 							) : !loading ? (
 								<div className="ss__autocomplete__content__no-results">
-									<div {...mergedLang.noResultsText?.all}></div>
+									<div className="ss__autocomplete__content__no-results__text" {...mergedLang.noResultsText?.all}></div>
 									{RecommendationTemplateComponent && recsController?.store?.loaded ? (
-										<div className="ss__no-results__recommendations">
+										<div className="ss__autocomplete__content__no-results__recommendations">
 											<RecommendationTemplateComponent
 												controller={recsController}
 												title={recsController.store?.profile?.display?.templateParameters?.title}
@@ -711,7 +714,7 @@ export const AutocompleteLayout = observer((properties: AutocompleteLayoutProps)
 		<CacheProvider>
 			<div
 				{...styling}
-				className={classnames('ss__autocomplete', className)}
+				className={classnames('ss__autocomplete', className, internalClassName)}
 				onClick={(e) => e.stopPropagation()}
 				ref={(e) => useA11y(e, 0, false, reset)}
 			>

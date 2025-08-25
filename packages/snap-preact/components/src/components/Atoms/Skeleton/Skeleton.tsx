@@ -59,13 +59,13 @@ export const Skeleton = observer((properties: SkeletonProps): JSX.Element => {
 
 	const props = mergeProps('skeleton', globalTheme, defaultProps, properties);
 
-	const { className } = props;
+	const { className, internalClassName } = props;
 
 	const styling = mergeStyles<SkeletonProps>(props, defaultStyles);
 
 	return (
 		<CacheProvider>
-			<div {...styling} className={classnames('ss__skeleton', className)}></div>
+			<div {...styling} className={classnames('ss__skeleton', className, internalClassName)}></div>
 		</CacheProvider>
 	);
 });

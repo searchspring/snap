@@ -12,6 +12,7 @@ const recommendationStyleScript = ({ theme }: RecommendationProps) => {
 		margin: '20px 0',
 		'& .ss__recommendation__title': {
 			color: variables?.colors?.primary,
+			textAlign: 'center',
 		},
 	});
 };

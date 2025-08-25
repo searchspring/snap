@@ -5,7 +5,7 @@ import { RootNodeProperties } from '../../../types';
 import { CacheProvider } from '../../../providers';
 import { TemplateEditorStore } from '../../../../../src/Templates/Stores/TemplateEditor/TemplateEditorStore';
 import { TemplatesStore, TemplateTypes } from '../../../../../src/Templates/Stores/TemplateStore';
-import { SnapTemplates, SnapTemplatesConfig } from '../../../../../src';
+import { SnapTemplates } from '../../../../../src';
 import { AutocompleteController, SearchController } from '@searchspring/snap-controller';
 import { AthosCommerceLogo } from './Assets';
 import { AbstractedControls } from './Components/AbstractedControls';
@@ -31,11 +31,11 @@ const CSS = {
 			boxShadow: 'rgba(81, 81, 81, 0.5) -1px 0px 3px 0px',
 			border: '1px solid #D0E0F3',
 			background: '#F2F6FC',
-			transition: 'right ease 0.5s, height ease 0.5s 0.5s',
+			transition: 'right ease 0.2s, height ease 0.3s 0.3s, max-height ease 0.3s 0.3s',
 			boxSizing: 'border-box',
 			width: '400px',
 			maxWidth: '90vw',
-			height: 'calc(100vh - 20px)',
+			maxHeight: 'calc(100vh - 20px)',
 
 			'*': {
 				boxSizing: 'border-box',
@@ -68,12 +68,15 @@ const CSS = {
 			'>aside': {
 				overflow: 'hidden',
 				flexGrow: 1,
+				display: 'flex',
+				flexDirection: 'column',
 				'.tab-selection': {
 					display: 'flex',
 					alignItems: 'center',
 					padding: '0 5px',
 					gap: '4px',
 					height: '33px',
+					flexShrink: 0,
 					'.tab': {
 						fontSize: '12px',
 						position: 'relative',
@@ -110,20 +113,27 @@ const CSS = {
 					zIndex: 3,
 					borderTop: '2px solid #D0E0F3',
 					background: '#fff',
-					height: '100%',
+					flexGrow: 1,
+					display: 'flex',
+					flexDirection: 'column',
+					minHeight: 0,
 					'.tab-view-shadow': {
 						position: 'absolute',
 						top: 0,
 						left: 0,
-						right: 0,
+						right: '10px',
 						bottom: 0,
-						boxShadow: 'inset 0 12px 6px 0px #fff',
+						boxShadow: 'inset 5px 12px 6px 0px #fff',
 						pointerEvents: 'none',
+						'&.bottom': {
+							boxShadow: 'inset 0 -12px 6px 0px #fff',
+						},
 					},
 					'.tab-view-content': {
-						padding: '0 10px',
-						maxHeight: 'calc(90vh - 40px)',
+						padding: '0 10px 10px',
+						flexGrow: 1,
 						overflowY: 'auto',
+						minHeight: 0,
 						'&::-webkit-scrollbar': {
 							width: '8px',
 						},
@@ -139,8 +149,9 @@ const CSS = {
 
 			'&.ss__template-editor--collapsed': {
 				right: '-354px',
-				transition: 'right ease 0.5s 0.5s, height ease 0.5s',
+				transition: 'right ease 0.5s, height ease 0.3s 0.3s, max-height ease 0.3s 0.3s',
 				height: '48px',
+				maxHeight: '48px',
 				cursor: 'pointer',
 				overflow: 'hidden',
 			},
@@ -393,12 +404,13 @@ export const TemplatesEditor = observer((properties: TemplatesEditorProps): JSX.
 								<>
 									<AbstractedControls title="Project Configuration" editorStore={editorStore} feature="templates/config" />
 									<AbstractedControls title="Theme Configuration" editorStore={editorStore} feature="templates/theme" />
-									<TemplateConfig config={editorStore.generateTemplatesConfig()} />
+									{/* <TemplateConfig config={editorStore.generateTemplatesConfig()} /> */}
 								</>
 							) : (
 								''
 							)}
 						</div>
+						<div className="tab-view-shadow bottom"></div>
 					</div>
 				</aside>
 
@@ -408,15 +420,15 @@ export const TemplatesEditor = observer((properties: TemplatesEditorProps): JSX.
 	);
 });
 
-const TemplateConfig = observer((props: { config: SnapTemplatesConfig }) => {
-	const { config } = props;
-	return (
-		<div className="template-config">
-			<h2>Project Code</h2>
-			<textarea readOnly>{JSON.stringify(config, null, 4)}</textarea>
-		</div>
-	);
-});
+// const TemplateConfig = observer((props: { config: SnapTemplatesConfig }) => {
+// 	const { config } = props;
+// 	return (
+// 		<div className="template-config">
+// 			<h2>Project Code</h2>
+// 			<textarea readOnly>{JSON.stringify(config, null, 4)}</textarea>
+// 		</div>
+// 	);
+// });
 
 export interface TemplatesEditorProps {
 	onRemoveClick: () => void;
@@ -450,7 +462,7 @@ const TemplateTargetSettings = observer((props: TemplateTargetSettingsProps) => 
 
 	return (
 		<div className="template-target-settings">
-			<h2>{type.charAt(0).toUpperCase() + type.slice(1) + (recsType ? ` (${recsType})` : '')}</h2>
+			<h3>{type.charAt(0).toUpperCase() + type.slice(1) + (recsType ? ` (${recsType})` : '')}</h3>
 
 			{!recsType && (
 				<div className="option">

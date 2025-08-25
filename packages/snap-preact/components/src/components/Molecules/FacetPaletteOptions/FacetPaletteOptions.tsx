@@ -182,6 +182,7 @@ export const FacetPaletteOptions = observer((properties: FacetPaletteOptionsProp
 		horizontal,
 		disableStyles,
 		className,
+		internalClassName,
 		treePath,
 	} = props;
 
@@ -192,7 +193,7 @@ export const FacetPaletteOptions = observer((properties: FacetPaletteOptionsProp
 	const subProps: FacetPaletteOptionsSubProps = {
 		icon: {
 			// default props
-			className: 'ss__facet-palette-options__icon',
+			internalClassName: 'ss__facet-palette-options__icon',
 			// inherited props
 			...defined({
 				disableStyles,
@@ -206,7 +207,7 @@ export const FacetPaletteOptions = observer((properties: FacetPaletteOptionsProp
 		},
 		checkbox: {
 			// default props
-			className: 'ss__facet-palette-options__checkbox',
+			internalClassName: 'ss__facet-palette-options__checkbox',
 			// inherited props
 			...defined({
 				disableStyles,
@@ -223,7 +224,10 @@ export const FacetPaletteOptions = observer((properties: FacetPaletteOptionsProp
 
 	return facetValues?.length ? (
 		<CacheProvider>
-			<div {...styling} className={classnames('ss__facet-palette-options', `ss__facet-palette-options--${layout?.toLowerCase()}`, className)}>
+			<div
+				{...styling}
+				className={classnames('ss__facet-palette-options', `ss__facet-palette-options--${layout?.toLowerCase()}`, className, internalClassName)}
+			>
 				{(facetValues as FacetValue[]).map((value) => {
 					//initialize lang
 					const defaultLang = {
@@ -246,6 +250,11 @@ export const FacetPaletteOptions = observer((properties: FacetPaletteOptionsProp
 						facet,
 						value,
 					});
+
+					let lowerCaseColorMapping;
+					if (colorMapping) {
+						lowerCaseColorMapping = Object.fromEntries(Object.entries(colorMapping).map(([key, value]) => [key.toLowerCase(), value]));
+					}
 
 					return (
 						<a
@@ -276,10 +285,7 @@ export const FacetPaletteOptions = observer((properties: FacetPaletteOptionsProp
 										`ss__facet-palette-options__option__palette--${filters.handleize(value.value)}`
 									)}
 									style={{
-										background:
-											colorMapping && colorMapping[value.label] && colorMapping[value.label].background
-												? colorMapping[value.label].background
-												: value.value,
+										background: lowerCaseColorMapping?.[value.label.toLowerCase()]?.background ?? value.value,
 									}}
 								>
 									{!hideIcon && value.filtered && layout?.toLowerCase() == 'grid' && <Icon {...subProps.icon} />}
@@ -287,7 +293,7 @@ export const FacetPaletteOptions = observer((properties: FacetPaletteOptionsProp
 							</div>
 							{!hideLabel && (
 								<span className="ss__facet-palette-options__option__value">
-									{colorMapping && colorMapping[value.label] && colorMapping[value.label].label ? colorMapping[value.label].label : value.label}
+									{lowerCaseColorMapping?.[value.label.toLowerCase()]?.label ?? value.label}
 								</span>
 							)}
 							{!hideCount && value?.count > 0 && <span className="ss__facet-palette-options__option__value__count">({value.count})</span>}

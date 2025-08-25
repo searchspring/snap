@@ -5,7 +5,12 @@ import { AutocompleteSlideoutProps } from '../../../../components/Templates/Auto
 
 // CSS in JS style script for the Search component
 const autocompleteSlideoutStyleScript = ({}: AutocompleteSlideoutProps) => {
-	return css({});
+	return css({
+		'.ss__autocomplete__button--see-more': {
+			margin: '10px 0px',
+			border: '0px',
+		},
+	});
 };
 
 export const autocompleteSlideout: ThemeComponent<'autocompleteSlideout', AutocompleteSlideoutProps> = {

@@ -18,7 +18,6 @@ import { useIntersection } from '../../../hooks';
 
 const defaultStyles: StyleScript<RecommendationGridProps> = ({ gapSize, columns }) => {
 	return css({
-		overflow: 'auto',
 		maxWidth: '100%',
 		maxHeight: '100%',
 		'.ss__recommendation-grid__results': {
@@ -27,6 +26,7 @@ const defaultStyles: StyleScript<RecommendationGridProps> = ({ gapSize, columns 
 			gap: gapSize,
 			gridTemplateRows: 'auto',
 			gridTemplateColumns: `repeat(${columns}, 1fr)`,
+			overflow: 'auto',
 
 			'@supports (display: grid)': {
 				display: 'grid',
@@ -41,6 +41,7 @@ export const RecommendationGrid = observer((properties: RecommendationGridProps)
 	const defaultProps: Partial<RecommendationGridProps> = {
 		results: properties.controller?.store?.results,
 		gapSize: '20px',
+		title: properties.controller?.store?.profile?.display?.templateParameters?.title,
 	};
 
 	//mergeprops only uses names that are passed via properties, so this cannot be put in the defaultProps
@@ -62,7 +63,7 @@ export const RecommendationGrid = observer((properties: RecommendationGridProps)
 		};
 	}
 
-	const { disableStyles, title, resultComponent, trim, lazyRender, className, treePath, theme, controller } = props;
+	const { disableStyles, title, resultComponent, trim, lazyRender, className, internalClassName, treePath, theme, controller } = props;
 
 	const mergedlazyRender = {
 		enabled: true,
@@ -73,7 +74,7 @@ export const RecommendationGrid = observer((properties: RecommendationGridProps)
 	const subProps: RecommendationGridSubProps = {
 		result: {
 			// default props
-			className: 'ss__recommendation-grid__result',
+			internalClassName: 'ss__recommendation-grid__result',
 			// inherited props
 			...defined({
 				disableStyles,
@@ -116,7 +117,7 @@ export const RecommendationGrid = observer((properties: RecommendationGridProps)
 
 	return results?.length ? (
 		<CacheProvider>
-			<div {...styling} ref={recsRef} className={classnames('ss__recommendation-grid', className)}>
+			<div {...styling} ref={recsRef} className={classnames('ss__recommendation-grid', className, internalClassName)}>
 				{isVisible ? (
 					<RecommendationProfileTracker controller={controller}>
 						{title && <h3 className="ss__recommendation-grid__title">{title}</h3>}

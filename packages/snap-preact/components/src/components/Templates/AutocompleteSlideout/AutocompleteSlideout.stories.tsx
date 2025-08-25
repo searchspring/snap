@@ -123,14 +123,14 @@ export default {
 			table: {
 				type: {
 					summary:
-						"['C1' | 'C2' | 'C3' | 'C4' | 'Terms' | 'HistoryTerms' | 'TrendingTerms'| 'SuggestedTerms'| 'Facets' | 'FacetsHorizontal' | 'SeeMore' | 'Content' | '_' | 'Banner.left' | 'Banner.banner' | 'Banner.footer' | 'Banner.header']",
+						"['c1' | 'c2' | 'c3' | 'c4' | 'Terms' | 'HistoryTerms' | 'TrendingTerms'| 'SuggestedTerms'| 'Facets' | 'FacetsHorizontal' | 'SeeMore' | 'Content' | '_' | 'Banner.left' | 'Banner.banner' | 'Banner.footer' | 'Banner.header']",
 				},
 				defaultValue: { summary: "[['button.see-more'],['termsList'], ['content']]" },
 			},
 			control: 'array',
 		},
 		column1: {
-			description: 'object containing width - the specified width of the column and layout - array of modules to render in the "C1" layout',
+			description: 'object containing width - the specified width of the column and layout - array of modules to render in the "c1" layout',
 			table: {
 				type: {
 					summary:
@@ -146,7 +146,7 @@ export default {
 			control: 'array',
 		},
 		column2: {
-			description: 'object containing width - the specified width of the column and layout - array of modules to render in the "C2" layout',
+			description: 'object containing width - the specified width of the column and layout - array of modules to render in the "c2" layout',
 			table: {
 				type: {
 					summary:
@@ -162,7 +162,7 @@ export default {
 			control: 'array',
 		},
 		column3: {
-			description: 'object containing width - the specified width of the column and layout - array of modules to render in the "C3" layout',
+			description: 'object containing width - the specified width of the column and layout - array of modules to render in the "c3" layout',
 			table: {
 				type: {
 					summary:
@@ -178,7 +178,7 @@ export default {
 			control: 'array',
 		},
 		column4: {
-			description: 'object containing width - the specified width of the column and layout - array of modules to render in the "C4" layout',
+			description: 'object containing width - the specified width of the column and layout - array of modules to render in the "c4" layout',
 			table: {
 				type: {
 					summary:
@@ -231,18 +231,6 @@ export default {
 			},
 			control: { type: 'text' },
 		},
-		viewportMaxHeight: {
-			defaultValue: false,
-			description: 'Autocomplete fully visible in viewport',
-			table: {
-				type: {
-					summary: 'boolean',
-				},
-				defaultValue: { summary: false },
-			},
-			control: { type: 'boolean' },
-		},
-
 		...componentArgs,
 	},
 };

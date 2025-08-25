@@ -95,6 +95,7 @@ export const MobileSidebar = observer((properties: MobileSidebarProps): JSX.Elem
 		hideClearButton,
 		disableStyles,
 		className,
+		internalClassName,
 		treePath,
 	} = props;
 
@@ -201,7 +202,7 @@ export const MobileSidebar = observer((properties: MobileSidebarProps): JSX.Elem
 
 						{!hideCloseButton && (
 							<Button
-								className="ss__mobile-sidebar__header__close-button"
+								internalClassName="ss__mobile-sidebar__header__close-button"
 								disableStyles={true}
 								onClick={() => toggleActive()}
 								ref={(e: any) => {
@@ -226,7 +227,7 @@ export const MobileSidebar = observer((properties: MobileSidebarProps): JSX.Elem
 					<div className="ss__mobile-sidebar__footer">
 						{!hideApplyButton && (
 							<Button
-								className="ss__mobile-sidebar__footer__apply-button"
+								internalClassName="ss__mobile-sidebar__footer__apply-button"
 								icon={applyButtonIcon}
 								onClick={() => toggleActive()}
 								lang={{ button: lang.applyButtonText }}
@@ -236,7 +237,7 @@ export const MobileSidebar = observer((properties: MobileSidebarProps): JSX.Elem
 						)}
 						{!hideClearButton && (
 							<Button
-								className="ss__mobile-sidebar__footer__clear-button"
+								internalClassName="ss__mobile-sidebar__footer__clear-button"
 								icon={clearButtonIcon}
 								onClick={() => {
 									controller?.urlManager.remove('filter').remove('page').go();
@@ -257,12 +258,12 @@ export const MobileSidebar = observer((properties: MobileSidebarProps): JSX.Elem
 
 	return (
 		<CacheProvider>
-			<div {...styling} className={classnames('ss__mobile-sidebar', className)}>
+			<div {...styling} className={classnames('ss__mobile-sidebar', className, internalClassName)}>
 				<Slideout
-					className="ss__mobile-sidebar__slideout"
+					internalClassName="ss__mobile-sidebar__slideout"
 					buttonContent={
 						<Button
-							className="ss__mobile-sidebar__slideout__button"
+							internalClassName="ss__mobile-sidebar__slideout__button"
 							icon={openButtonIcon}
 							ref={openButtonRef}
 							onClick={() => {

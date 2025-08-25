@@ -33,7 +33,7 @@ The `_` module is used a seperator module to center,left,right justify the other
 
 available modules to use in the layout are 
 
-`searchHeader`, `filterSummary`, `mobileSidebar`, `layoutSelector`, `perPage`, `sortBy`, `pagination`, `paginationInfo`, `_`, `button.sidebar-toggle`, `banner.header`, `banner.banner`, `banner.footer`, `facetsHorizontal`;
+`searchHeader`, `filterSummary`,  `breadcrumbs`, `mobileSidebar`, `layoutSelector`, `perPage`, `sortBy`, `pagination`, `paginationInfo`, `_`, `button.sidebar-toggle`, `banner.header`, `banner.banner`, `banner.footer`, `facetsHorizontal`;
 
 
 ```jsx

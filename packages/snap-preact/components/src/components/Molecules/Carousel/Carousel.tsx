@@ -260,6 +260,7 @@ export const Carousel = observer((properties: CarouselProps): JSX.Element => {
 		themeStyleScript: ___,
 		modules,
 		className,
+		internalClassName,
 		treePath,
 		...additionalProps
 	} = props;
@@ -271,7 +272,7 @@ export const Carousel = observer((properties: CarouselProps): JSX.Element => {
 	const subProps: CarouselSubProps = {
 		icon: {
 			// default props
-			className: 'ss__carousel__icon',
+			internalClassName: 'ss__carousel__icon',
 			// inherited props
 			...defined({
 				disableStyles,
@@ -368,7 +369,7 @@ export const Carousel = observer((properties: CarouselProps): JSX.Element => {
 			<div
 				ref={rootComponentRef as React.RefObject<HTMLDivElement>}
 				{...styling}
-				className={classnames('ss__carousel', vertical ? 'ss__carousel-vertical' : '', className)}
+				className={classnames('ss__carousel', vertical ? 'ss__carousel-vertical' : '', className, internalClassName)}
 			>
 				<div className={classnames('ss__carousel__prev-wrapper', { 'ss__carousel__prev-wrapper--hidden': hideButtons })}>
 					<div
@@ -488,7 +489,7 @@ export type CarouselProps = {
 	children: JSX.Element[];
 	onResize?: () => void;
 	onTransitionEnd?: () => void;
-	slidesPerView?: number;
+	slidesPerView?: number | 'auto';
 } & Omit<SwiperOptions, 'breakpoints' | 'slidesPerView'> &
 	ComponentProps;
 

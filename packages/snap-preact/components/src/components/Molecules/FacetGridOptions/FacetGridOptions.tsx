@@ -93,7 +93,7 @@ export const FacetGridOptions = observer((properties: FacetGridOptionsProps): JS
 
 	const props = mergeProps('facetGridOptions', globalTheme, defaultProps, properties);
 
-	const { values, onClick, previewOnFocus, valueProps, facet, horizontal, className } = props;
+	const { values, onClick, previewOnFocus, valueProps, facet, horizontal, className, internalClassName } = props;
 
 	if (horizontal) {
 		props.columns = 0;
@@ -105,7 +105,7 @@ export const FacetGridOptions = observer((properties: FacetGridOptionsProps): JS
 
 	return facetValues?.length ? (
 		<CacheProvider>
-			<div {...styling} className={classnames('ss__facet-grid-options', className)}>
+			<div {...styling} className={classnames('ss__facet-grid-options', className, internalClassName)}>
 				{(facetValues as FacetValue[]).map((value) => {
 					//initialize lang
 					const defaultLang = {

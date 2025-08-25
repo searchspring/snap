@@ -2,6 +2,7 @@ import 'whatwg-fetch';
 import { ApiConfiguration } from './Abstract';
 import { HybridAPI } from './Hybrid';
 import { MockData } from '@searchspring/snap-shared';
+import { version } from '@searchspring/snap-toolbox';
 
 const mockData = new MockData();
 
@@ -54,7 +55,7 @@ describe('Hybrid Api', () => {
 			headers: {},
 			method: 'GET',
 		};
-		const fetchUrl = 'https://8uyt2m.a.searchspring.io/api/search/search.json?siteId=8uyt2m&noBeacon=true&ajaxCatalog=Snap&resultsFormat=native';
+		const fetchUrl = `https://8uyt2m.a.searchspring.io/api/search/search.json?siteId=8uyt2m&noBeacon=true&ajaxCatalog=snap%2Fclient%2F${version}&resultsFormat=native`;
 
 		await api.getSearch({
 			siteId: '8uyt2m',

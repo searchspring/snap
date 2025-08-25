@@ -60,6 +60,7 @@ export const FilterSummary = observer((properties: FilterSummaryProps): JSX.Elem
 		onClearAllClick,
 		disableStyles,
 		className,
+		internalClassName,
 		treePath,
 	} = props;
 
@@ -67,7 +68,7 @@ export const FilterSummary = observer((properties: FilterSummaryProps): JSX.Elem
 		filter: {
 			name: 'filter',
 			// default props
-			className: 'ss__filter-summary__filter',
+			internalClassName: 'ss__filter-summary__filter',
 			// inherited props
 			...defined({
 				disableStyles,
@@ -101,7 +102,7 @@ export const FilterSummary = observer((properties: FilterSummaryProps): JSX.Elem
 
 	return filters?.length ? (
 		<CacheProvider>
-			<div {...styling} className={classnames('ss__filter-summary', className)}>
+			<div {...styling} className={classnames('ss__filter-summary', className, internalClassName)}>
 				{!hideTitle && <div className="ss__filter-summary__title" {...mergedLang.title?.all}></div>}
 
 				<div className="ss__filter-summary__filters">
@@ -114,7 +115,7 @@ export const FilterSummary = observer((properties: FilterSummaryProps): JSX.Elem
 							{...subProps.filter}
 							name={'clear-all'}
 							icon={clearAllIcon}
-							className={`${subProps?.filter?.className} ss__filter-summary__clear-all`}
+							internalClassName={`${subProps?.filter?.internalClassName} ss__filter-summary__clear-all`}
 							hideFacetLabel
 							valueLabel={clearAllLabel}
 							onClick={(e) => onClearAllClick && onClearAllClick(e)}

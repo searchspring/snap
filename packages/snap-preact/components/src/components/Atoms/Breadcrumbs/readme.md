@@ -5,7 +5,7 @@ Renders a list of breadcrumbs.
 ## Usage
 
 ### data
-The `data` prop specifies an array of breadcrumb objects. 
+The `data` prop specifies an array of breadcrumb objects, or a function that returns an array of breadcrumb objects. The function is passed the controller if available.
 
 #### breadcrumb object 
 
@@ -20,6 +20,18 @@ const breadcrumbs = [
 	{ url: '/', label: 'Appliances' },
 	{ label: 'Fridge' }
 ]
+
+or 
+
+const breadcrumbsFunction = (controller) => {
+	const term = (controller as SearchController).store?.search?.query?.string;
+	return [
+		{ url: '/', label: 'Home' },
+		{ url: '/', label: 'Search' },
+		{ label: term }
+	]
+}
+
 ```
 
 ```jsx
@@ -31,4 +43,12 @@ The `separator` prop spcifies a custom delimiter between each breadcrumb. The de
 
 ```jsx
 <Breadcrumbs separator={'>'} data={breadcrumbs} />
+```
+
+
+### separatorIcon
+The `separatorIcon` prop spcifies an icon to render between each breadcrumb. 
+
+```jsx
+<Breadcrumbs separatorIcon={'angle-right'} data={breadcrumbs} />
 ```

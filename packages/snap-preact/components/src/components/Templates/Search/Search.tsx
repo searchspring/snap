@@ -68,6 +68,7 @@ export const Search = observer((properties: SearchProps): JSX.Element => {
 	const {
 		disableStyles,
 		className,
+		internalClassName,
 		controller,
 		hideSidebar,
 		toggleSidebarButtonText,
@@ -116,31 +117,32 @@ export const Search = observer((properties: SearchProps): JSX.Element => {
 		);
 	};
 
+	const toggleSidebarButtonProps = {
+		onClick: () => {
+			setSidebarOpenState(!sidebarOpenState);
+			// need the timeout to allow the sidebar to open before focusing the first available element.
+			setTimeout(() => {
+				// focus the first available elem when toggling the sidebar open.
+				if (!sidebarOpenState) {
+					const firstAvailableElemToFocus = document.querySelector('.ss__sidebar')?.querySelector(FOCUSABLE_ELEMENTS) as HTMLElement;
+					if (firstAvailableElemToFocus) {
+						firstAvailableElemToFocus.focus();
+					}
+				}
+			});
+		},
+		children:
+			!hideToggleSidebarButton && store.loaded && !isMobile && (toggleSidebarButtonText || mergedLang.toggleSidebarButtonText?.value)
+				? ToggleSidebar
+				: undefined,
+	};
 	const subProps: SearchSubProps = {
 		TopToolbar: {
 			// default props
 			name: 'top',
-			className: `${classNamePrefix}__header-section__toolbar--top-toolbar`,
+			internalClassName: `${classNamePrefix}__header-section__toolbar--top-toolbar`,
 			layout: [['banner.header'], ['searchHeader', '_', 'button.sidebar-toggle']],
-			toggleSideBarButton: {
-				onClick: () => {
-					setSidebarOpenState(!sidebarOpenState);
-					// need the timeout to allow the sidebar to open before focusing the first available element.
-					setTimeout(() => {
-						// focus the first available elem when toggling the sidebar open.
-						if (!sidebarOpenState) {
-							const firstAvailableElemToFocus = document.querySelector('.ss__sidebar')?.querySelector(FOCUSABLE_ELEMENTS) as HTMLElement;
-							if (firstAvailableElemToFocus) {
-								firstAvailableElemToFocus.focus();
-							}
-						}
-					});
-				},
-				children:
-					!hideToggleSidebarButton && store.loaded && !isMobile && (toggleSidebarButtonText || mergedLang.toggleSidebarButtonText?.value)
-						? ToggleSidebar
-						: undefined,
-			},
+			toggleSideBarButton: { ...toggleSidebarButtonProps },
 			...defined({
 				disableStyles,
 			}),
@@ -150,10 +152,11 @@ export const Search = observer((properties: SearchProps): JSX.Element => {
 		MiddleToolbar: {
 			// default props
 			name: 'middle',
-			className: `${classNamePrefix}__content__toolbar--middle-toolbar`,
+			internalClassName: `${classNamePrefix}__content__toolbar--middle-toolbar`,
 			layout: isMobile
 				? [['mobileSidebar', '_', 'paginationInfo'], ['banner.banner']]
 				: [['sortBy', 'perPage', '_', 'paginationInfo'], ['banner.banner']],
+			toggleSideBarButton: { ...toggleSidebarButtonProps },
 			// inherited props
 			...defined({
 				disableStyles,
@@ -164,8 +167,9 @@ export const Search = observer((properties: SearchProps): JSX.Element => {
 		BottomToolbar: {
 			// default props
 			name: 'bottom',
-			className: `${classNamePrefix}__content__toolbar--bottom-toolbar`,
+			internalClassName: `${classNamePrefix}__content__toolbar--bottom-toolbar`,
 			layout: [['banner.footer'], ['_', 'pagination']],
+			toggleSideBarButton: { ...toggleSidebarButtonProps },
 			// inherited props
 			...defined({
 				disableStyles,
@@ -210,7 +214,10 @@ export const Search = observer((properties: SearchProps): JSX.Element => {
 
 	return (
 		<CacheProvider>
-			<div {...styling} className={classnames(classNamePrefix, className, sidebarOpenState ? `${classNamePrefix}--sidebar-open` : '')}>
+			<div
+				{...styling}
+				className={classnames(classNamePrefix, className, internalClassName, sidebarOpenState ? `${classNamePrefix}--sidebar-open` : '')}
+			>
 				<div className={`${classNamePrefix}__header-section`}>{!hideTopToolbar && <Toolbar {...subProps.TopToolbar} controller={controller} />}</div>
 				<div className={`${classNamePrefix}__main-section`}>
 					{!hideSidebar && !isMobile && sidebarOpenState && (

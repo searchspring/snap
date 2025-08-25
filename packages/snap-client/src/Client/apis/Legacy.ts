@@ -63,17 +63,17 @@ export class LegacyAPI extends API {
 	}
 
 	async getSearch(queryParameters: any): Promise<any> {
-		queryParameters.ajaxCatalog = 'Snap';
+		queryParameters.ajaxCatalog = this.configuration.initiator;
 		return this.getEndpoint(queryParameters, '/api/search/search.json');
 	}
 
 	async getAutocomplete(queryParameters: any): Promise<any> {
-		queryParameters.ajaxCatalog = 'Snap';
+		queryParameters.ajaxCatalog = this.configuration.initiator;
 		return this.getEndpoint(queryParameters, '/api/search/autocomplete.json');
 	}
 
 	async getFinder(queryParameters: any): Promise<any> {
-		queryParameters.ajaxCatalog = 'Snap';
+		queryParameters.ajaxCatalog = this.configuration.initiator;
 		return this.getEndpoint(queryParameters, '/api/search/finder.json');
 	}
 }

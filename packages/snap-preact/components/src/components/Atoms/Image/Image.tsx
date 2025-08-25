@@ -10,12 +10,12 @@ import { mergeProps, mergeStyles } from '../../../utilities';
 
 export const FALLBACK_IMAGE_URL = '//cdn.searchspring.net/ajax_search/img/default_image.png';
 
-const defaultStyles: StyleScript<ImageProps> = () => {
+const defaultStyles: StyleScript<ImageProps> = ({ height }) => {
 	return css({
 		display: 'flex',
 		flexDirection: 'column',
 		justifyContent: 'center',
-		height: 'auto',
+		height: height ? height : 'auto',
 		'& img': {
 			flexShrink: '0',
 			objectFit: 'contain',
@@ -43,7 +43,7 @@ export function Image(properties: ImageProps): JSX.Element {
 
 	const props = mergeProps('image', globalTheme, defaultProps, properties);
 
-	const { alt, src, fallback, hoverSrc, lazy, onMouseOver, onMouseOut, onError, onLoad, onClick, className } = props;
+	const { alt, src, fallback, hoverSrc, lazy, onMouseOver, onMouseOut, onError, onLoad, onClick, className, internalClassName } = props;
 
 	const [visibile, setVisibile] = useState(false);
 	const [isHovering, setHover] = useState(false);
@@ -60,7 +60,7 @@ export function Image(properties: ImageProps): JSX.Element {
 
 	return (
 		<CacheProvider>
-			<div {...styling} className={classnames('ss__image', { 'ss__image--hidden': !visibile }, className)}>
+			<div {...styling} className={classnames('ss__image', { 'ss__image--hidden': !visibile }, className, internalClassName)}>
 				<img
 					src={(isHovering ? hoverSrc : src) || fallback}
 					alt={alt}
@@ -93,6 +93,7 @@ export interface ImageProps extends ComponentProps {
 	alt: string;
 	src: string;
 	fallback?: string;
+	height?: string;
 	hoverSrc?: string;
 	onMouseOver?: (e: React.MouseEvent<HTMLImageElement>) => void;
 	onMouseOut?: (e: React.MouseEvent<HTMLImageElement>) => void;

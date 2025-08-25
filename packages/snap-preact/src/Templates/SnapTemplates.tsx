@@ -4,7 +4,7 @@ import deepmerge from 'deepmerge';
 import { Snap } from '../Snap';
 import { TemplateSelect } from '../../components/src/components/Atoms/TemplateSelect';
 
-import { DomTargeter, url, cookies, getContext } from '@searchspring/snap-toolbox';
+import { DomTargeter, url, cookies, getContext, version } from '@searchspring/snap-toolbox';
 import { TemplateTarget, TemplatesStore } from './Stores/TemplateStore';
 
 import type { Target } from '@searchspring/snap-toolbox';
@@ -377,6 +377,14 @@ export function createSnapConfig(templateConfig: SnapTemplatesConfig, templatesS
 		client: {
 			globals: {
 				siteId: templateConfig.config?.siteId,
+			},
+			config: {
+				initiator: `snap/templates/${version}`,
+			},
+		},
+		tracker: {
+			config: {
+				framework: 'snap/templates',
 			},
 		},
 		instantiators: {},

@@ -28,7 +28,8 @@ export function FormattedNumber(properties: FormattedNumberProps): JSX.Element {
 
 	const props = mergeProps('formattedNumber', globalTheme, defaultProps, properties);
 
-	const { value, symbol, decimalPlaces, padDecimalPlaces, thousandsSeparator, decimalSeparator, symbolAfter, className, raw } = props;
+	const { value, symbol, decimalPlaces, padDecimalPlaces, thousandsSeparator, decimalSeparator, symbolAfter, className, internalClassName, raw } =
+		props;
 
 	const formattedNumber = filters.formatNumber(value, {
 		symbol,
@@ -45,7 +46,7 @@ export function FormattedNumber(properties: FormattedNumberProps): JSX.Element {
 		<Fragment>{formattedNumber}</Fragment>
 	) : (
 		<CacheProvider>
-			<span className={classnames('ss__formatted-number', className)} {...styling}>
+			<span className={classnames('ss__formatted-number', className, internalClassName)} {...styling}>
 				{formattedNumber}
 			</span>
 		</CacheProvider>
