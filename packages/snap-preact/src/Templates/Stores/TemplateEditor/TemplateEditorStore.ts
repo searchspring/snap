@@ -440,8 +440,8 @@ function generateObject(path: string[], value: unknown): Record<string, unknown>
 	return path
 		.slice()
 		.reverse()
-		.reduce((res, key) => {
-			if (path.indexOf(key) === path.length - 1) {
+		.reduce((res, key, index) => {
+			if (index === 0) {
 				return {
 					[key]: value,
 				};

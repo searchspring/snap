@@ -41,7 +41,6 @@ export class TargetStore {
 	public setComponent(componentName: string) {
 		this.component = componentName;
 		this.dependencies.storage.set(['templates', this.selector, 'component'], this.component);
-		this.dependencies.storage.set(['templates', this.selector, 'component'], this.component);
 	}
 
 	public setResultComponent(resultComponentName: string) {
