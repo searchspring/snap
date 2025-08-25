@@ -7,8 +7,7 @@ import { componentArgs, highlightedCode } from '../../../utilities';
 import { Snapify } from '../../../utilities/snapify';
 import Readme from './readme.md';
 import type { AutocompleteController } from '@searchspring/snap-controller';
-import { useState } from 'react';
-import { useEffect } from 'preact/hooks';
+import { useEffect, useState } from 'preact/hooks';
 
 export default {
 	title: 'Templates/AutocompleteFixed',
