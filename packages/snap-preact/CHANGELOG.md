@@ -3,6 +3,32 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.9.0](https://github.com/searchspring/snap/compare/v1.8.1...v1.9.0) (2025-08-25)
+
+### Bug Fixes
+
+- **autocomplete-templates:** fixing issue with prop merging in ac templates ([e6edbf6](https://github.com/searchspring/snap/commit/e6edbf67e53d78820e3ab65678693317453181dd))
+- **client/cache:** adjust logic for cached flag ([07122cb](https://github.com/searchspring/snap/commit/07122cb967a006009703cc1314b6b1aa0de75b1d))
+- **preact/components/layout:** bugfix in layout renderModule func not breaking the switch when it should ([be5fec3](https://github.com/searchspring/snap/commit/be5fec3f6085a4c1510756102db37e9d40ea94bf))
+- **preact/components/layout:** treepath passing bugfix ([2578690](https://github.com/searchspring/snap/commit/25786908c6803147fe40abb37fe69d591872d941))
+- **preact:** actually removing use of proxies ([662ad93](https://github.com/searchspring/snap/commit/662ad93082be73a89a6d1fa3bf93e37d7c2b6c01))
+- **preact:** reverting mobx proxy change - affected too many sites using custom code ([708adb0](https://github.com/searchspring/snap/commit/708adb0055d63db866da4829effa3efa760f4a25))
+- remove attribution from Snap.tsx, update integration tests ([ac58a02](https://github.com/searchspring/snap/commit/ac58a0228e87c89f5173d7ae1f2411140c9a14d9))
+- **storybook:** fix storybook ([5b90fa9](https://github.com/searchspring/snap/commit/5b90fa90b37245a480346e72e9dd721e1d5dbcd7))
+- **templates/editor:** bug fixes for empty storage case ([eea9c0d](https://github.com/searchspring/snap/commit/eea9c0dd5dc74bc3e7e7d851ebdc6b25c01031df))
+- **templates/editor:** various fixes and refactors around editor functionality ([4074850](https://github.com/searchspring/snap/commit/4074850f4d9fa5f2282c3386db64b304377c03cb))
+
+### Features
+
+- add cart infering, update tracking documentation ([6bdef42](https://github.com/searchspring/snap/commit/6bdef423746486179bb079d78c0776ffedf79875))
+- **api/requests:** altering tracker and search API to send specific initiator values ([020e5a6](https://github.com/searchspring/snap/commit/020e5a61b7146f136feb99bbd87648926510e5c7))
+- **preact/components/autocomplete-templates:** adding autocompleteModal, autocompleteSlideout, & autocompleteFixed templates ([900d549](https://github.com/searchspring/snap/commit/900d54994a6c6fbe0b7a2b887a012a502dc7f584))
+- **preact/components/facet:** facet improvements & new props for count and icons ([ce667d7](https://github.com/searchspring/snap/commit/ce667d78acd19922b1a14de3d32bcf7e9e89b747))
+- **preact/components/icon:** adding title prop to icon component ([cefe58e](https://github.com/searchspring/snap/commit/cefe58ed1cd3cc8b55eaca98df25b362468333ba))
+- **preact/components/image:** adding new prop for setting the image height ([18db47b](https://github.com/searchspring/snap/commit/18db47b8a67d52f39875db9525805033916bf658))
+- **preact/components/layout:** adding breadcrumbs to layout and toolbar ([2fcddcc](https://github.com/searchspring/snap/commit/2fcddccdf98be59097c801e37ddd027c9d4852a3))
+- **preact/templates/themestore:** adding support for custom variables and adding activeBreakpoint to the themestore ([af36319](https://github.com/searchspring/snap/commit/af36319db8f15be0671fe258dd9d1fc6d171b3eb))
+
 ## [1.8.1](https://github.com/searchspring/snap/compare/v1.8.0...v1.8.1) (2025-06-02)
 
 **Note:** Version bump only for package @searchspring/snap-preact

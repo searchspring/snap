@@ -3,6 +3,21 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.9.0](https://github.com/searchspring/snap/compare/v1.8.1...v1.9.0) (2025-08-25)
+
+### Bug Fixes
+
+- catch QuotaExceededError errors when setting local or session storage ([6048727](https://github.com/searchspring/snap/commit/60487278409133c5744885af9121bbac55f8cba8))
+- **client/cache:** adjust logic for cached flag ([07122cb](https://github.com/searchspring/snap/commit/07122cb967a006009703cc1314b6b1aa0de75b1d))
+- **client/cache:** updating logic for array response of recommendation API for \_cached flag ([b6d454b](https://github.com/searchspring/snap/commit/b6d454bbde4fff68378662ac4a67af6243fcf2fb))
+- **client/recommend:** fixing regression in order option when using legacy script blocks ([b1ca0eb](https://github.com/searchspring/snap/commit/b1ca0eba4affb038ca61b569585f33e80d4e676c))
+- infinite scrolling tracking to use correct beacon schema data ([25c13f2](https://github.com/searchspring/snap/commit/25c13f2a97c17734f5d3ca79e02350653952485f))
+- prevent beacon render events upon cached api response ([cca9a83](https://github.com/searchspring/snap/commit/cca9a83b6772548ac5b213ccbbaa666d4284a8dd))
+
+### Features
+
+- **api/requests:** altering tracker and search API to send specific initiator values ([020e5a6](https://github.com/searchspring/snap/commit/020e5a61b7146f136feb99bbd87648926510e5c7))
+
 ## [1.8.1](https://github.com/searchspring/snap/compare/v1.8.0...v1.8.1) (2025-06-02)
 
 **Note:** Version bump only for package @searchspring/snap-client

@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.9.0](https://github.com/searchspring/snap/compare/v1.8.1...v1.9.0) (2025-08-25)
+
+### Bug Fixes
+
+- beacon impression tracking when interacting ([b092b31](https://github.com/searchspring/snap/commit/b092b318ccfa951995225e2aebdbe9d7335fcf41))
+- beacon improvements - fix position, refactor closest click, improve ac impressions ([3966c8b](https://github.com/searchspring/snap/commit/3966c8b8cb70506682cf4c92e07c8f02a28169c9))
+- infinite scrolling tracking to use correct beacon schema data ([25c13f2](https://github.com/searchspring/snap/commit/25c13f2a97c17734f5d3ca79e02350653952485f))
+
+### Features
+
+- add cart infering, update tracking documentation ([6bdef42](https://github.com/searchspring/snap/commit/6bdef423746486179bb079d78c0776ffedf79875))
+- add withTracking and useTracking, post beacon launch fixes ([84bab28](https://github.com/searchspring/snap/commit/84bab28c3edf0b1c632226dcb316f6132bf3f56b))
+
 ## [1.8.1](https://github.com/searchspring/snap/compare/v1.8.0...v1.8.1) (2025-06-02)
 
 **Note:** Version bump only for package @searchspring/snap-tracker

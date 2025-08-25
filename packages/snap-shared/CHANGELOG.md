@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.9.0](https://github.com/searchspring/snap-1.0/compare/v1.8.1...v1.9.0) (2025-08-25)
+
+### Bug Fixes
+
+- **controller/autocomplete:** adjusting logic around redirect to prevent issues with "showResults" ([416ce9d](https://github.com/searchspring/snap-1.0/commit/416ce9da1220111f1e00bb351c1589b7847cfdf6))
+
 ## [1.8.1](https://github.com/searchspring/snap-1.0/compare/v1.8.0...v1.8.1) (2025-06-02)
 
 **Note:** Version bump only for package @searchspring/snap-shared

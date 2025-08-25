@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.9.0](https://github.com/searchspring/snap-1.0/compare/v1.8.1...v1.9.0) (2025-08-25)
+
+### Bug Fixes
+
+- beacon improvements - fix position, refactor closest click, improve ac impressions ([3966c8b](https://github.com/searchspring/snap-1.0/commit/3966c8b8cb70506682cf4c92e07c8f02a28169c9))
+- cypress test - mock beacon response ([3789c21](https://github.com/searchspring/snap-1.0/commit/3789c2189c1e99aa214346246aa5e41bac3fb992))
+- track tests, refactors ([2b522ee](https://github.com/searchspring/snap-1.0/commit/2b522ee256afd624095ab1f200108be8f1324473))
+
+### Features
+
+- **preact/components/autocomplete-templates:** adding autocompleteModal, autocompleteSlideout, & autocompleteFixed templates ([900d549](https://github.com/searchspring/snap-1.0/commit/900d54994a6c6fbe0b7a2b887a012a502dc7f584))
+- **preact/templates/themestore:** adding support for custom variables and adding activeBreakpoint to the themestore ([af36319](https://github.com/searchspring/snap-1.0/commit/af36319db8f15be0671fe258dd9d1fc6d171b3eb))
+
 ## [1.8.1](https://github.com/searchspring/snap-1.0/compare/v1.8.0...v1.8.1) (2025-06-02)
 
 **Note:** Version bump only for package @searchspring/snap-preact-demo
