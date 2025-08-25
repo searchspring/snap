@@ -6,7 +6,7 @@ import { observer } from 'mobx-react-lite';
 import deepmerge from 'deepmerge';
 import { Carousel, CarouselProps as CarouselProps } from '../../Molecules/Carousel';
 import { Result, ResultProps } from '../../Molecules/Result';
-import { defined, mergeProps, cloneWithProps, mergeStyles } from '../../../utilities';
+import { defined, mergeProps, mergeStyles } from '../../../utilities';
 import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { ComponentProps, BreakpointsProps, ResultComponent, StyleScript, BreakpointsEntry } from '../../../types';
 import { useDisplaySettings } from '../../../hooks/useDisplaySettings';
@@ -495,17 +495,23 @@ export const RecommendationBundle = observer((properties: RecommendationBundlePr
 													classNamePrefix={classNamePrefix}
 													lang={{ seedText: lang.seedText }}
 												>
-													{resultComponent ? (
-														cloneWithProps(resultComponent, {
-															result: seed,
-															seed: true,
-															selected: selectedItems.findIndex((item) => item.id == seed.id) > -1,
-															onProductSelect,
-															treePath,
-														})
-													) : (
-														<Result {...subProps.result} controller={controller} result={seed} />
-													)}
+													{(() => {
+														if (resultComponent && controller) {
+															const ResultComponent = resultComponent;
+															return (
+																<ResultComponent
+																	controller={controller}
+																	seed={true}
+																	selected={selectedItems.findIndex((item) => item.id == seed.id) > -1}
+																	onProductSelect={onProductSelect}
+																	result={seed}
+																	treePath={treePath}
+																/>
+															);
+														} else {
+															return <Result {...subProps.result} controller={controller} result={seed} />;
+														}
+													})()}
 												</BundleSelector>
 											</ResultTracker>
 										</div>
@@ -553,11 +559,23 @@ export const RecommendationBundle = observer((properties: RecommendationBundlePr
 																			classNamePrefix={classNamePrefix}
 																			lang={{ seedText: lang.seedText }}
 																		>
-																			{resultComponent ? (
-																				cloneWithProps(resultComponent, { result: result, seed: true, selected, onProductSelect, treePath })
-																			) : (
-																				<Result {...subProps.result} controller={controller} result={result} />
-																			)}
+																			{(() => {
+																				if (resultComponent && controller) {
+																					const ResultComponent = resultComponent;
+																					return (
+																						<ResultComponent
+																							controller={controller}
+																							seed={true}
+																							selected={selected}
+																							onProductSelect={onProductSelect}
+																							result={result}
+																							treePath={treePath}
+																						/>
+																					);
+																				} else {
+																					return <Result {...subProps.result} controller={controller} result={result} />;
+																				}
+																			})()}
 																		</BundleSelector>
 																	</ResultTracker>
 																);
@@ -578,11 +596,23 @@ export const RecommendationBundle = observer((properties: RecommendationBundlePr
 																			classNamePrefix={classNamePrefix}
 																			internalClassName={idx + 1 == resultsToRender.length ? `${classNamePrefix}__wrapper__selector--last` : ''}
 																		>
-																			{resultComponent ? (
-																				cloneWithProps(resultComponent, { result: result, seed: false, selected, onProductSelect, treePath })
-																			) : (
-																				<Result {...subProps.result} controller={controller} result={result} />
-																			)}
+																			{(() => {
+																				if (resultComponent && controller) {
+																					const ResultComponent = resultComponent;
+																					return (
+																						<ResultComponent
+																							controller={controller}
+																							seed={false}
+																							selected={selected}
+																							onProductSelect={onProductSelect}
+																							result={result}
+																							treePath={treePath}
+																						/>
+																					);
+																				} else {
+																					return <Result {...subProps.result} controller={controller} result={result} />;
+																				}
+																			})()}
 																		</BundleSelector>
 																	</ResultTracker>
 																);
@@ -609,11 +639,23 @@ export const RecommendationBundle = observer((properties: RecommendationBundlePr
 																		classNamePrefix={classNamePrefix}
 																		internalClassName={idx + 1 == results.length ? `${classNamePrefix}__wrapper__selector--last` : ''}
 																	>
-																		{resultComponent ? (
-																			cloneWithProps(resultComponent, { result: result, seed: false, selected, onProductSelect, treePath })
-																		) : (
-																			<Result {...subProps.result} controller={controller} result={result} />
-																		)}
+																		{(() => {
+																			if (resultComponent && controller) {
+																				const ResultComponent = resultComponent;
+																				return (
+																					<ResultComponent
+																						controller={controller}
+																						seed={false}
+																						selected={selected}
+																						onProductSelect={onProductSelect}
+																						result={result}
+																						treePath={treePath}
+																					/>
+																				);
+																			} else {
+																				return <Result {...subProps.result} controller={controller} result={result} />;
+																			}
+																		})()}
 																	</BundleSelector>
 																</ResultTracker>
 															);
@@ -646,11 +688,23 @@ export const RecommendationBundle = observer((properties: RecommendationBundlePr
 														classNamePrefix={classNamePrefix}
 														lang={{ seedText: lang.seedText }}
 													>
-														{resultComponent ? (
-															cloneWithProps(resultComponent, { result: result, seed: true, selected, onProductSelect, treePath })
-														) : (
-															<Result {...subProps.result} controller={controller} result={result} />
-														)}
+														{(() => {
+															if (resultComponent && controller) {
+																const ResultComponent = resultComponent;
+																return (
+																	<ResultComponent
+																		controller={controller}
+																		seed={true}
+																		selected={selected}
+																		onProductSelect={onProductSelect}
+																		result={result}
+																		treePath={treePath}
+																	/>
+																);
+															} else {
+																return <Result {...subProps.result} controller={controller} result={result} />;
+															}
+														})()}
 													</BundleSelector>
 												</ResultTracker>
 											);
@@ -671,11 +725,23 @@ export const RecommendationBundle = observer((properties: RecommendationBundlePr
 														classNamePrefix={classNamePrefix}
 														internalClassName={idx + 1 == resultsToRender.length ? `${classNamePrefix}__wrapper__selector--last` : ''}
 													>
-														{resultComponent ? (
-															cloneWithProps(resultComponent, { result: result, seed: false, selected, onProductSelect, treePath })
-														) : (
-															<Result {...subProps.result} controller={controller} result={result} />
-														)}
+														{(() => {
+															if (resultComponent && controller) {
+																const ResultComponent = resultComponent;
+																return (
+																	<ResultComponent
+																		controller={controller}
+																		seed={false}
+																		selected={selected}
+																		onProductSelect={onProductSelect}
+																		result={result}
+																		treePath={treePath}
+																	/>
+																);
+															} else {
+																return <Result {...subProps.result} controller={controller} result={result} />;
+															}
+														})()}
 													</BundleSelector>
 												</ResultTracker>
 											);

@@ -19,20 +19,18 @@ export const TemplateSelect = observer((properties: TemplateSelectProps): JSX.El
 	let ResultComponent: ResultComponentType | undefined = undefined;
 	if (targeter.resultComponent) {
 		ResultComponent = templatesStore.library.components.result[targeter.resultComponent];
-		if (!loading && !ResultComponent) {
+		if (!loading && !ResultComponent && !templatesStore.settings?.editMode) {
 			const error = `Result component "${targeter.resultComponent}" not found in library for target "${targetId}"`;
 			controller.log.error(error);
-			throw error;
 		}
 	}
 	const themeLocation = templatesStore?.themes?.[targeter.theme.location as TemplateThemeTypes];
 	const themeStore = themeLocation && themeLocation[targeter.theme.name];
 	const theme = themeStore?.theme;
 
-	if (!loading && !theme) {
+	if (!loading && !theme && !templatesStore.settings?.editMode) {
 		const error = `Theme "${targeter.theme.name}" not found in library for target "${targetId}"`;
 		controller.log.error(error);
-		throw error;
 	}
 
 	let componentProp = {};

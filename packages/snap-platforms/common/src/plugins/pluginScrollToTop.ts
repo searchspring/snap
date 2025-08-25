@@ -22,7 +22,7 @@ export const pluginScrollToTop = (cntrlr: AbstractController, config?: PluginScr
 		controller: AbstractController;
 		element?: ElementPositionObj;
 	}>('restorePosition', async ({ element }, next) => {
-		if (!element && !(cntrlr as SearchController).config.settings?.infinite) {
+		if (!element && !(cntrlr as SearchController).config.settings?.infinite?.enabled) {
 			const options = Object.assign({ top: 0, left: 0, behavior: 'smooth' }, config?.options || {});
 
 			if (config?.selector) {

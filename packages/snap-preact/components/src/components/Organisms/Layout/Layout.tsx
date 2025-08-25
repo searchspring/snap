@@ -278,7 +278,7 @@ export const Layout = observer((properties: LayoutProps): JSX.Element => {
 				break;
 			case 'pagination':
 				if (hasResults) {
-					if (controller.config.settings?.infinite) {
+					if (controller.store.config.settings?.infinite?.enabled) {
 						return <LoadMore {...subProps.LoadMore} />;
 					} else {
 						return <Pagination {...subProps.Pagination} />;

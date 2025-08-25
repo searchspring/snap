@@ -5,7 +5,7 @@ import { waitFor } from '@testing-library/preact';
 import { ThemeStore, ThemeStoreThemeConfig, mergeThemeLayers } from './ThemeStore';
 import { StorageStore } from '@searchspring/snap-store-mobx';
 import type { TemplatesStoreDependencies, TemplateThemeTypes, TemplatesStoreConfigSettings } from './TemplateStore';
-import type { Theme, ThemeVariables, ThemePartial } from '../../../components/src/providers/theme';
+import type { ThemeComplete, ThemeVariables, ThemePartial } from '../../../components/src/providers/theme';
 import { GLOBAL_THEME_NAME } from './TargetStore';
 
 // configure MobX - useProxies: 'never' matches what we are doing for browser support (IE 11)
@@ -20,7 +20,12 @@ const testThemeVariables: ThemeVariables = {
 	},
 };
 
-let testTheme: Theme = {};
+let testTheme: ThemeComplete = {
+	name: 'test',
+	variables: testThemeVariables,
+	components: {},
+	responsive: {},
+};
 
 describe('ThemeStore', () => {
 	let dependencies: TemplatesStoreDependencies;
@@ -73,6 +78,7 @@ describe('ThemeStore', () => {
 				name: 'empty',
 				variables: testThemeVariables,
 				components: {},
+				responsive: {},
 			},
 			overrides: {},
 			variables: {},
@@ -86,15 +92,6 @@ describe('ThemeStore', () => {
 		expect(store).toBeDefined();
 		expect(store.name).toBe(config.name);
 		expect(store.type).toBe(config.type);
-
-		expect(store.layout).toBeDefined();
-		// @ts-ignore - private property
-		expect(store.layout.name).toBe(config.name);
-		// @ts-ignore - private property
-		expect(store.layout.type).toBe(config.type);
-		// @ts-ignore - private property
-		expect(store.layout.storage).toBe(dependencies.storage);
-		expect(store.layout.selected).toBeUndefined();
 
 		// @ts-ignore - private property
 		expect(store.dependencies).toBe(dependencies);
@@ -151,6 +148,7 @@ describe('ThemeStore', () => {
 				name: 'empty',
 				variables: testThemeVariables,
 				components: {},
+				responsive: {},
 			},
 			overrides: {},
 			variables: {},

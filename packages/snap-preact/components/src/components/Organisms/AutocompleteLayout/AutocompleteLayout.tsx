@@ -571,6 +571,7 @@ export const AutocompleteLayout = observer((properties: AutocompleteLayoutProps)
 					terms={controller.store.history}
 					className={'ss__terms-list__terms--history'}
 					name={'history'}
+					limit={controller.config.settings?.history?.limit}
 					{...subProps.terms}
 					title="History"
 				/>
@@ -583,6 +584,7 @@ export const AutocompleteLayout = observer((properties: AutocompleteLayoutProps)
 					terms={controller.store.trending}
 					className={'ss__terms-list__terms--trending'}
 					name={'trending'}
+					limit={controller.config.settings?.trending?.limit}
 					{...subProps.terms}
 					title="Trending"
 				/>

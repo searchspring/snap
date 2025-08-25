@@ -117,6 +117,7 @@ export const TermsList = observer((properties: TermsListProps): JSX.Element => {
 					terms={history}
 					controller={controller}
 					name={'history'}
+					limit={controller.config.settings?.history?.limit}
 					{...subProps.terms}
 				/>
 			);
@@ -130,6 +131,7 @@ export const TermsList = observer((properties: TermsListProps): JSX.Element => {
 					terms={trending}
 					controller={controller}
 					name={'trending'}
+					limit={controller.config.settings?.trending?.limit}
 					{...subProps.terms}
 				/>
 			);

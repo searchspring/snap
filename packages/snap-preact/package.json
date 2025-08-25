@@ -44,7 +44,6 @@
 		"intersection-observer": "0.12.2",
 		"is-plain-object": "5.0.0",
 		"mobx-react-lite": "3.4.0",
-		"react-color": "2.19.3",
 		"react-ranger": "2.1.0",
 		"swiper": "11.0.7"
 	},
@@ -63,7 +62,6 @@
 		"@testing-library/user-event": "13.5.0",
 		"@types/color": "^3.0.6",
 		"@types/react": "16.14.28",
-		"@types/react-color": "3.0.12",
 		"@types/react-ranger": "2.0.4",
 		"@types/scheduler": "0.16.8",
 		"babel-loader": "9.1.3",

@@ -781,7 +781,7 @@ describe('Search Controller', () => {
 				tracker: new Tracker(globals),
 			});
 
-			expect(controller.config.settings!.infinite).toBeDefined();
+			expect(controller.config.settings!.infinite?.enabled).toBeDefined();
 
 			// set page 1 data
 			(controller.client as MockClient).mockData.updateConfig({ search: 'infinite.page1', siteId: '8uyt2m' });
@@ -814,7 +814,7 @@ describe('Search Controller', () => {
 				tracker: new Tracker(globals),
 			});
 
-			expect(controller.config.settings!.infinite).toBeDefined();
+			expect(controller.config.settings!.infinite?.enabled).toBeDefined();
 
 			// set page 1 data
 			(controller.client as MockClient).mockData.updateConfig({ search: 'infinite.page1', siteId: '8uyt2m' });
@@ -855,7 +855,7 @@ describe('Search Controller', () => {
 				tracker: new Tracker(globals),
 			});
 
-			expect(controller.config.settings!.infinite).toBeDefined();
+			expect(controller.config.settings!.infinite?.enabled).toBeDefined();
 
 			// set page 1 data
 			(controller.client as MockClient).mockData.updateConfig({ search: 'inlineBanners.page1', siteId: '8uyt2m' });
@@ -906,7 +906,7 @@ describe('Search Controller', () => {
 				tracker: new Tracker(globals),
 			});
 
-			expect(controller.config.settings!.infinite).toBeDefined();
+			expect(controller.config.settings!.infinite?.enabled).toBeDefined();
 
 			// set page 1 data
 			(controller.client as MockClient).mockData.updateConfig({ search: 'infinite.inline.page1', siteId: '8uyt2m' });
@@ -1034,7 +1034,7 @@ describe('Search Controller', () => {
 				tracker: new Tracker(globals),
 			});
 
-			expect(controller.config.settings!.infinite).toBeDefined();
+			expect(controller.config.settings!.infinite?.enabled).toBeDefined();
 
 			// set page 1 data
 			(controller.client as MockClient).mockData.updateConfig({ search: 'infinite.page1', siteId: '8uyt2m' });
