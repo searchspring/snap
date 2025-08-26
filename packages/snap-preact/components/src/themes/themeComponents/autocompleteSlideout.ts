@@ -48,27 +48,13 @@ export const autocompleteSlideoutThemeComponentProps: ThemeComponent<'autocomple
 				width: '100%',
 			},
 		},
-		'autocompleteSlideout results': {
-			columns: 2,
-			rows: 1,
-		},
-
 		'autocompleteSlideout recommendationGrid': {
 			columns: 2,
 			rows: 1,
 		},
 	},
-	tablet: {
-		'autocompleteSlideout results': {
-			columns: 3,
-			rows: 1,
-		},
-	},
+	tablet: {},
 	desktop: {
-		'autocompleteSlideout results': {
-			columns: 2,
-			rows: 2,
-		},
 		'autocompleteSlideout recommendationGrid': {
 			columns: 3,
 			rows: 2,

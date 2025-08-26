@@ -6,7 +6,14 @@ const termsListStyleScript = ({ theme }: TermsListProps) => {
 	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	const variables = theme?.variables;
 
-	return css({});
+	return css({
+		[`@media (max-width: ${variables?.breakpoints.mobile}px)`]: {
+			'&.ss__terms-list .ss__terms__options': {
+				margin: '10px',
+				marginTop: '0px',
+			},
+		},
+	});
 };
 
 // Terms component props

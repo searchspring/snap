@@ -12,7 +12,7 @@ const filterSummaryStyleScript = ({ theme }: FilterSummaryProps) => {
 		},
 
 		'& .ss__filter-summary__filters': {
-			marginTop: '0px',
+			margin: '0px',
 		},
 	});
 };
