@@ -45,34 +45,17 @@ export const autocompleteSlideoutThemeComponentProps: ThemeComponent<'autocomple
 		autocompleteSlideout: {
 			layout: [['c1']],
 			column1: {
-				layout: [['termsList'], ['content'], ['_', 'button.see-more']],
+				layout: [['button.see-more'], ['termsList'], ['content']],
 				width: '100%',
 			},
 		},
-		'autocompleteSlideout results': {
-			columns: 2,
-			rows: 1,
-		},
-
 		'autocompleteSlideout recommendationGrid': {
 			columns: 2,
 			rows: 1,
 		},
 	},
-	tablet: {
-		autocompleteSlideout: {
-			layout: [['c1', 'c3']],
-		},
-		'autocompleteSlideout results': {
-			columns: 3,
-			rows: 1,
-		},
-	},
+	tablet: {},
 	desktop: {
-		'autocompleteSlideout results': {
-			columns: 2,
-			rows: 2,
-		},
 		'autocompleteSlideout recommendationGrid': {
 			columns: 3,
 			rows: 2,
