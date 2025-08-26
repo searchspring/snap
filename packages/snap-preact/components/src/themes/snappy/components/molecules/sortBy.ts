@@ -10,11 +10,21 @@ const sortByStyleScript = ({}: SortByProps) => {
 		'.ss__dropdown.ss__dropdown--open': {
 			'.ss__dropdown__button': {
 				boxShadow: 'none',
+				zIndex: '10001',
+				position: 'relative',
+			},
+			'.ss__dropdown__content': {
+				backgroundColor: '#e6e6e6',
 			},
 		},
 		'.ss__dropdown': {
 			'.ss__dropdown__content': {
 				width: 'max-content',
+				backgroundColor: '#e6e6e6',
+				top: '0px',
+				paddingTop: '44px',
+				zIndex: '105',
+				borderRadius: '25px',
 			},
 			'.ss__select__dropdown__button': {
 				background: '#e6e6e6',

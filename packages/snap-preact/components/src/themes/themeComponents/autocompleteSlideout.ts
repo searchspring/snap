@@ -44,7 +44,7 @@ export const autocompleteSlideoutThemeComponentProps: ThemeComponent<'autocomple
 		autocompleteSlideout: {
 			layout: [['c1']],
 			column1: {
-				layout: [['termsList'], ['content'], ['_', 'button.see-more']],
+				layout: [['button.see-more'], ['termsList'], ['content']],
 				width: '100%',
 			},
 		},
@@ -59,9 +59,6 @@ export const autocompleteSlideoutThemeComponentProps: ThemeComponent<'autocomple
 		},
 	},
 	tablet: {
-		autocompleteSlideout: {
-			layout: [['c1', 'c3']],
-		},
 		'autocompleteSlideout results': {
 			columns: 3,
 			rows: 1,
