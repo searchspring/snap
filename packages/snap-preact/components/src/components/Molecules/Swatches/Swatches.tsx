@@ -67,7 +67,7 @@ const defaultStyles: StyleScript<SwatchesProps> = ({ theme }) => {
 				opacity: 0.5,
 			},
 
-			'&.ss__swatches__carousel__swatch--dark-mode': {
+			'&.ss__swatches__carousel__swatch--dark': {
 				color: '#fff',
 			},
 		},
@@ -206,7 +206,7 @@ export function Swatches(properties: SwatchesProps): JSX.Element {
 										'ss__swatches__carousel__swatch--selected': selected,
 										'ss__swatches__carousel__swatch--disabled': option?.disabled,
 										'ss__swatches__carousel__swatch--unavailable': option?.available === false,
-										'ss__swatches__carousel__swatch--dark-mode': isDark,
+										'ss__swatches__carousel__swatch--dark': isDark,
 									})}
 									title={label}
 									onClick={(e) => !disabled && !option?.disabled && makeSelection(e as any, option)}

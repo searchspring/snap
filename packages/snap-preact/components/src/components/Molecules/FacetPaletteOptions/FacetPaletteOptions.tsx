@@ -276,7 +276,7 @@ export const FacetPaletteOptions = observer((properties: FacetPaletteOptionsProp
 							className={classnames(
 								'ss__facet-palette-options__option',
 								{ 'ss__facet-palette-options__option--filtered': value.filtered },
-								{ 'ss__facet-palette-options__option--dark-mode': isDark },
+								{ 'ss__facet-palette-options__option--dark': isDark },
 								`ss__facet-palette-options__option--${layout?.toLowerCase()}`
 							)}
 							href={value.url?.link?.href}

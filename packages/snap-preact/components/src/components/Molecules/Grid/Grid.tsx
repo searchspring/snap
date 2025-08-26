@@ -87,7 +87,7 @@ const defaultStyles: StyleScript<GridProps> = ({ gapSize, columns, theme, disabl
 					transform: 'rotate(-45deg)',
 				},
 
-				'&.ss__grid__option--dark-mode': {
+				'&.ss__grid__option--dark': {
 					color: '#fff',
 				},
 
@@ -305,7 +305,7 @@ export function Grid(properties: GridProps): JSX.Element {
 										'ss__grid__option--selected': selected,
 										'ss__grid__option--disabled': option?.disabled,
 										'ss__grid__option--unavailable': option?.available === false,
-										'ss__grid__option--dark-mode': isDark,
+										'ss__grid__option--dark': isDark,
 									})}
 									style={{ background: option.background ? option.background : option.backgroundImageUrl ? undefined : option.value }}
 									onClick={(e) => !disabled && !option?.disabled && makeSelection(e as any, option)}
