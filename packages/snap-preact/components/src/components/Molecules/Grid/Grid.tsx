@@ -39,6 +39,19 @@ const defaultStyles: StyleScript<GridProps> = ({ gapSize, columns, theme, disabl
 				width: `calc(100% / ${columns} - ${2 * Math.round((columns! + 2) / 2)}px)`,
 				margin: `0 ${gapSize} ${gapSize} 0`,
 
+				'.ss__grid__option__inner': {
+					aspectRatio: '1/1',
+					display: 'flex',
+					justifyContent: 'center',
+					alignItems: 'center',
+					margin: 'auto',
+					height: '100%',
+
+					'.ss__image': {
+						aspectRatio: '1/1',
+					},
+				},
+
 				'.ss__grid__option__label': {
 					cursor: 'pointer',
 				},
@@ -287,7 +300,7 @@ export function Grid(properties: GridProps): JSX.Element {
 						if (!limited || options.length == limit || idx < limit - (overflowButtonInGrid ? 1 : 0)) {
 							return (
 								<div
-									className={classnames(`ss__grid__option ss__grid__option--${filters.handleize(option.value.toString())}`, {
+									className={classnames(`ss__grid__option`, {
 										'ss__grid__option--selected': selected,
 										'ss__grid__option--disabled': option?.disabled,
 										'ss__grid__option--unavailable': option?.available === false,
@@ -301,12 +314,14 @@ export function Grid(properties: GridProps): JSX.Element {
 									aria-selected={selected}
 									aria-disabled={option.disabled}
 								>
-									{!option.background && option.backgroundImageUrl ? (
-										<Image {...subProps.image} src={option.backgroundImageUrl} alt={option.label || option.value.toString()} />
-									) : (
-										<Fragment />
-									)}
-									{!hideLabels ? <label className="ss__grid__option__label">{option.label || option.value}</label> : <Fragment />}
+									<div className={classnames(`ss__grid__option__inner`, `ss__grid__option__inner--${filters.handleize(option.value.toString())}`)}>
+										{!option.background && option.backgroundImageUrl ? (
+											<Image {...subProps.image} src={option.backgroundImageUrl} alt={option.label || option.value.toString()} />
+										) : (
+											<Fragment />
+										)}
+										{!hideLabels ? <label className="ss__grid__option__label">{option.label || option.value}</label> : <Fragment />}
+									</div>
 								</div>
 							);
 						}

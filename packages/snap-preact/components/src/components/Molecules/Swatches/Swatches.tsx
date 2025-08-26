@@ -30,6 +30,15 @@ const defaultStyles: StyleScript<SwatchesProps> = ({ theme }) => {
 			margin: 'auto',
 			flexDirection: 'column',
 
+			'.ss__swatches__carousel__swatch__inner': {
+				aspectRatio: '1/1',
+				display: 'flex',
+				justifyContent: 'center',
+				alignItems: 'center',
+				margin: 'auto',
+				height: '100%',
+			},
+
 			'&.ss__swatches__carousel__swatch--selected': {
 				border: `2px solid ${theme?.variables?.colors?.primary || '#333'}`,
 			},
@@ -193,29 +202,33 @@ export function Swatches(properties: SwatchesProps): JSX.Element {
 
 							return (
 								<div
-									className={classnames(
-										`ss__swatches__carousel__swatch ss__swatches__carousel__swatch--${filters.handleize(option.value?.toString())}`,
-										{
-											'ss__swatches__carousel__swatch--selected': selected,
-											'ss__swatches__carousel__swatch--disabled': option?.disabled,
-											'ss__swatches__carousel__swatch--unavailable': option?.available === false,
-											'ss__swatches__carousel__swatch--dark-mode': isDark,
-										}
-									)}
+									className={classnames(`ss__swatches__carousel__swatch`, {
+										'ss__swatches__carousel__swatch--selected': selected,
+										'ss__swatches__carousel__swatch--disabled': option?.disabled,
+										'ss__swatches__carousel__swatch--unavailable': option?.available === false,
+										'ss__swatches__carousel__swatch--dark-mode': isDark,
+									})}
 									title={label}
-									style={{ background: option.background ? option.background : option.backgroundImageUrl ? `` : option.value }}
 									onClick={(e) => !disabled && !option?.disabled && makeSelection(e as any, option)}
 									ref={(e) => useA11y(e)}
 									aria-disabled={option.disabled || option?.available === false}
 									role="option"
 									aria-selected={selected}
 								>
-									{!option.background && option.backgroundImageUrl ? (
-										<Image {...subProps.image} src={option.backgroundImageUrl} alt={option.label || option.value?.toString()} />
-									) : (
-										<Fragment />
-									)}
-									{!hideLabels && <span className="ss__swatches__carousel__swatch__value">{label || option.value}</span>}
+									<div
+										className={classnames(
+											`ss__swatches__carousel__swatch__inner`,
+											`ss__swatches__carousel__swatch__inner--${filters.handleize(option.value?.toString())}`
+										)}
+										style={{ background: option.background ? option.background : option.backgroundImageUrl ? `` : option.value }}
+									>
+										{!option.background && option.backgroundImageUrl ? (
+											<Image {...subProps.image} src={option.backgroundImageUrl} alt={option.label || option.value?.toString()} />
+										) : (
+											<Fragment />
+										)}
+										{!hideLabels && <span className="ss__swatches__carousel__swatch__value">{label || option.value}</span>}
+									</div>
 								</div>
 							);
 						})}
