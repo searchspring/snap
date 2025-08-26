@@ -15,6 +15,7 @@ import type { FacetValue, ValueFacet } from '@searchspring/snap-store-mobx';
 import { Checkbox, CheckboxProps } from '../Checkbox';
 import { Lang, useLang } from '../../../hooks';
 import deepmerge from 'deepmerge';
+import Color from 'color';
 
 const defaultStyles: StyleScript<FacetPaletteOptionsProps> = ({ columns, gridSize, gapSize, horizontal, theme }) => {
 	return css({
@@ -256,12 +257,26 @@ export const FacetPaletteOptions = observer((properties: FacetPaletteOptionsProp
 						lowerCaseColorMapping = Object.fromEntries(Object.entries(colorMapping).map(([key, value]) => [key.toLowerCase(), value]));
 					}
 
+					const background =
+						lowerCaseColorMapping && lowerCaseColorMapping[value.label.toLowerCase()] && lowerCaseColorMapping[value.label.toLowerCase()].background
+							? lowerCaseColorMapping[value.label.toLowerCase()].background
+							: value.value;
+
+					let isDark = false;
+					if (background) {
+						try {
+							const color = new Color(background.toLowerCase());
+							isDark = color.isDark();
+						} catch (err) {}
+					}
+
 					return (
 						<a
 							key={value.value}
 							className={classnames(
 								'ss__facet-palette-options__option',
 								{ 'ss__facet-palette-options__option--filtered': value.filtered },
+								{ 'ss__facet-palette-options__option--dark': isDark },
 								`ss__facet-palette-options__option--${layout?.toLowerCase()}`
 							)}
 							href={value.url?.link?.href}
@@ -285,7 +300,7 @@ export const FacetPaletteOptions = observer((properties: FacetPaletteOptionsProp
 										`ss__facet-palette-options__option__palette--${filters.handleize(value.value)}`
 									)}
 									style={{
-										background: lowerCaseColorMapping?.[value.label.toLowerCase()]?.background ?? value.value,
+										background: background,
 									}}
 								>
 									{!hideIcon && value.filtered && layout?.toLowerCase() == 'grid' && <Icon {...subProps.icon} />}
