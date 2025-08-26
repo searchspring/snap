@@ -52,13 +52,13 @@ export const LoadingBar = observer((properties: LoadingBarProps): JSX.Element =>
 
 	const props = mergeProps('loadingBar', globalTheme, defaultProps, properties);
 
-	const { active, className } = props;
+	const { active, className, internalClassName } = props;
 
 	const styling = mergeStyles<LoadingBarProps>(props, defaultStyles);
 
 	return active ? (
 		<CacheProvider>
-			<div {...styling} className={classnames('ss__loading-bar', className)}>
+			<div {...styling} className={classnames('ss__loading-bar', className, internalClassName)}>
 				<div className="ss__loading-bar__bar"></div>
 			</div>
 		</CacheProvider>

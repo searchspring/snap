@@ -92,7 +92,7 @@ export class SearchResultStore extends Array<Product | Banner> {
 		}
 
 		// only when infinite is enabled
-		if ((config as SearchStoreConfig)?.settings?.infinite && previousResults) {
+		if ((config as SearchStoreConfig)?.settings?.infinite?.enabled && previousResults) {
 			// logic to determine when to concatenate previous results
 			// this logic is not bullet proof, but it is highly unlikely that the current and previous pagination data would ever be sequential unless paginating
 
@@ -786,7 +786,7 @@ function addBannersToResults(
 	let paginationBegin = paginationData.pageSize * (paginationData.page - 1) + 1;
 	let paginationEnd = paginationData.pageSize * paginationData.page;
 	// if infinite scroll is enabled, we need to adjust the begin position
-	if ((config as SearchStoreConfig)?.settings?.infinite) paginationBegin = 1;
+	if ((config as SearchStoreConfig)?.settings?.infinite?.enabled) paginationBegin = 1;
 
 	// if the end of the page is greater than the total results, adjust the end
 	if (paginationData.pageSize * paginationData.page > paginationData.totalResults) paginationEnd = paginationData.totalResults;

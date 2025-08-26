@@ -34,7 +34,7 @@ export const CalloutBadge = observer((properties: CalloutBadgeProps): JSX.Elemen
 
 	const props = mergeProps('calloutBadge', globalTheme, defaultProps, properties);
 
-	const { result, tag, renderEmpty, limit, className, treePath } = props;
+	const { result, tag, renderEmpty, limit, className, internalClassName, treePath } = props;
 
 	const badgeComponentMap = {
 		...defaultBadgeComponentMap,
@@ -49,7 +49,7 @@ export const CalloutBadge = observer((properties: CalloutBadgeProps): JSX.Elemen
 	if (renderEmpty || badges?.length) {
 		return (
 			<CacheProvider>
-				<div {...styling} className={classnames('ss__callout-badge', `ss__callout-badge--${tag?.replace('/', '-')}`, className)}>
+				<div {...styling} className={classnames('ss__callout-badge', `ss__callout-badge--${tag?.replace('/', '-')}`, className, internalClassName)}>
 					{badges.map((badge) => {
 						const BadgeComponent = useComponent(badgeComponentMap, badge.component);
 						if (!BadgeComponent) {

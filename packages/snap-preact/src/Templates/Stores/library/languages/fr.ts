@@ -126,7 +126,7 @@ export const fr: LangComponents = {
 	},
 	perPage: {
 		label: {
-			value: 'par page',
+			value: 'Par page',
 		},
 	},
 	facetsHorizontal: {

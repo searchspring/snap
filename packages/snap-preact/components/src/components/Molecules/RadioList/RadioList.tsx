@@ -72,12 +72,13 @@ export function RadioList(properties: RadioListProps): JSX.Element {
 		options,
 		disableStyles,
 		className,
+		internalClassName,
 		treePath,
 	} = props;
 
 	const subProps: RadioListSubProps = {
 		Radio: {
-			className: 'ss__radio-list__option__radio',
+			internalClassName: 'ss__radio-list__option__radio',
 			native: native,
 			disableA11y: true,
 			disabled: disabled,
@@ -90,7 +91,7 @@ export function RadioList(properties: RadioListProps): JSX.Element {
 			treePath,
 		},
 		Icon: {
-			className: 'ss__radio-list__option__icon',
+			internalClassName: 'ss__radio-list__option__icon',
 			size: '16px',
 			// inherited props
 			...defined({
@@ -145,7 +146,12 @@ export function RadioList(properties: RadioListProps): JSX.Element {
 		<CacheProvider>
 			<div
 				{...styling}
-				className={classnames('ss__radio-list', { 'ss__radio-list--native': native, 'ss__radio-list--disabled': disabled }, className)}
+				className={classnames(
+					'ss__radio-list',
+					{ 'ss__radio-list--native': native, 'ss__radio-list--disabled': disabled },
+					className,
+					internalClassName
+				)}
 			>
 				{(titleText || lang?.title?.value) && !hideTitleText && (
 					<h5 className="ss__radio-list__title" {...mergedLang.title?.all}>

@@ -104,8 +104,24 @@ export class SearchController extends AbstractController {
 		// deep merge config with defaults
 		this.config = deepmerge(defaultConfig, this.config);
 
+		if (
+			this.config.settings?.infinite &&
+			typeof this.config.settings?.infinite == 'object' &&
+			(Object.keys(this.config.settings?.infinite).length == 0 || typeof this.config.settings?.infinite?.backfill != 'undefined')
+		) {
+			// infinite is enabled by setting config.infinite={} (old method)
+			// set config.infinite.enabled=true
+			this.config.settings = {
+				...this.config.settings,
+				infinite: {
+					enabled: true,
+					...this.config.settings.infinite,
+				},
+			};
+		}
+
 		// set restorePosition to be enabled by default when using infinite (if not provided)
-		if (this.config.settings?.infinite && typeof this.config.settings.restorePosition == 'undefined') {
+		if (this.config.settings?.infinite?.enabled && typeof this.config.settings.restorePosition == 'undefined') {
 			this.config.settings.restorePosition = { enabled: true };
 		}
 
@@ -502,7 +518,7 @@ export class SearchController extends AbstractController {
 			let search: SearchResponseModel = {};
 
 			// infinite scroll functionality (after page 1)
-			if (this.config.settings?.infinite && params.pagination?.page && params.pagination.page > 1) {
+			if (this.config.settings?.infinite?.enabled && params.pagination?.page && params.pagination.page > 1) {
 				const preventBackfill =
 					this.config.settings.infinite?.backfill && !this.store.results.length && params.pagination.page > this.config.settings.infinite.backfill;
 				const dontBackfill = !this.config.settings.infinite?.backfill && !this.store.results.length;

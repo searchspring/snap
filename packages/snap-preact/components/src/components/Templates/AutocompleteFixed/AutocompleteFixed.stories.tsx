@@ -7,8 +7,7 @@ import { componentArgs, highlightedCode } from '../../../utilities';
 import { Snapify } from '../../../utilities/snapify';
 import Readme from './readme.md';
 import type { AutocompleteController } from '@searchspring/snap-controller';
-import { useState } from 'react';
-import { useEffect } from 'preact/hooks';
+import { useEffect, useState } from 'preact/hooks';
 
 export default {
 	title: 'Templates/AutocompleteFixed',
@@ -78,13 +77,13 @@ export default {
 			control: { type: 'text' },
 		},
 		renderInput: {
-			defaultValue: false,
+			defaultValue: true,
 			description: 'render a second input inside autocomplete window that gets auto focused on open.',
 			table: {
 				type: {
 					summary: 'boolean',
 				},
-				defaultValue: { summary: false },
+				defaultValue: { summary: true },
 			},
 			control: { type: 'boolean' },
 		},
@@ -113,14 +112,14 @@ export default {
 			table: {
 				type: {
 					summary:
-						"['C1' | 'C2' | 'C3' | 'C4' | 'Terms' | 'HistoryTerms' | 'TrendingTerms'| 'SuggestedTerms'| 'Facets' | 'FacetsHorizontal' | 'SeeMore' | 'Content' | '_' | 'Banner.left' | 'Banner.banner' | 'Banner.footer' | 'Banner.header']",
+						"['c1' | 'c2' | 'c3' | 'c4' | 'Terms' | 'HistoryTerms' | 'TrendingTerms'| 'SuggestedTerms'| 'Facets' | 'FacetsHorizontal' | 'SeeMore' | 'Content' | '_' | 'Banner.left' | 'Banner.banner' | 'Banner.footer' | 'Banner.header']",
 				},
 				defaultValue: { summary: "[['button.see-more'],['termsList'], ['content']]" },
 			},
 			control: 'array',
 		},
 		column1: {
-			description: 'object containing width - the specified width of the column and layout - array of modules to render in the "C1" layout',
+			description: 'object containing width - the specified width of the column and layout - array of modules to render in the "c1" layout',
 			table: {
 				type: {
 					summary:
@@ -136,7 +135,7 @@ export default {
 			control: 'array',
 		},
 		column2: {
-			description: 'object containing width - the specified width of the column and layout - array of modules to render in the "C2" layout',
+			description: 'object containing width - the specified width of the column and layout - array of modules to render in the "c2" layout',
 			table: {
 				type: {
 					summary:
@@ -152,7 +151,7 @@ export default {
 			control: 'array',
 		},
 		column3: {
-			description: 'object containing width - the specified width of the column and layout - array of modules to render in the "C3" layout',
+			description: 'object containing width - the specified width of the column and layout - array of modules to render in the "c3" layout',
 			table: {
 				type: {
 					summary:
@@ -168,7 +167,7 @@ export default {
 			control: 'array',
 		},
 		column4: {
-			description: 'object containing width - the specified width of the column and layout - array of modules to render in the "C4" layout',
+			description: 'object containing width - the specified width of the column and layout - array of modules to render in the "c4" layout',
 			table: {
 				type: {
 					summary:

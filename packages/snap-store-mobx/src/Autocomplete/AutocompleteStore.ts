@@ -73,6 +73,7 @@ export class AutocompleteStore extends AbstractStore<AutocompleteStoreConfig> {
 			pagination: observable,
 			sorting: observable,
 			history: observable,
+			trending: observable,
 		});
 	}
 
@@ -111,6 +112,8 @@ export class AutocompleteStore extends AbstractStore<AutocompleteStoreConfig> {
 					queries: historyStore.getStoredData(limit),
 				},
 			});
+		} else {
+			this.history = [];
 		}
 	}
 

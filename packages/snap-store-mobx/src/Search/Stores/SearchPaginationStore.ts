@@ -87,7 +87,7 @@ export class SearchPaginationStore {
 	}
 
 	public get begin(): number {
-		if (this.controllerConfig?.settings?.infinite) {
+		if (this.controllerConfig?.settings?.infinite?.enabled) {
 			return 1;
 		}
 		return this.pageSize * (this.page - 1) + 1;

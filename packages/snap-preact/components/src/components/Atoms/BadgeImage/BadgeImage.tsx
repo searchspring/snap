@@ -26,13 +26,18 @@ export const BadgeImage = observer((properties: BadgeImageProps): JSX.Element =>
 
 	const props = mergeProps('badgeImage', globalTheme, defaultProps, properties);
 
-	const { label, url, tag, className } = props;
+	const { label, url, tag, className, internalClassName } = props;
 
 	const styling = mergeStyles<BadgeImageProps>(props, defaultStyles);
 
 	return url ? (
 		<CacheProvider>
-			<img {...styling} className={classnames('ss__badge-image', `ss__badge-image--${tag}`, className)} alt={label || `${tag} badge`} src={url} />
+			<img
+				{...styling}
+				className={classnames('ss__badge-image', `ss__badge-image--${tag}`, className, internalClassName)}
+				alt={label || `${tag} badge`}
+				src={url}
+			/>
 		</CacheProvider>
 	) : (
 		<Fragment />

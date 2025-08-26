@@ -37,7 +37,7 @@ export const BundledCTA = observer((properties: BundledCTAProps): JSX.Element =>
 		icon: {
 			name: 'bundle-cart',
 			// default props
-			className: `${classNamePrefix}__wrapper__cta__icon`,
+			internalClassName: `${classNamePrefix}__wrapper__cta__icon`,
 			size: 50,
 			// component theme overrides
 			theme: props?.theme,
@@ -76,7 +76,7 @@ export const BundledCTA = observer((properties: BundledCTAProps): JSX.Element =>
 				<Fragment>
 					<div className={`${classNamePrefix}__wrapper__cta__subtotal`} aria-atomic="false" aria-live="polite">
 						{ctaIcon ? (
-							<div className="icon">
+							<div className={`${classNamePrefix}__wrapper__cta__subtotal__icon__wrapper`}>
 								<Icon {...subProps.icon} {...(typeof ctaIcon == 'string' ? { icon: ctaIcon } : (ctaIcon as Partial<IconProps>))} />
 							</div>
 						) : (
@@ -99,7 +99,7 @@ export const BundledCTA = observer((properties: BundledCTAProps): JSX.Element =>
 
 					<Button
 						{...subProps.button}
-						className={classnames(`${classNamePrefix}__wrapper__cta__button`, {
+						internalClassName={classnames(`${classNamePrefix}__wrapper__cta__button`, {
 							[`${classNamePrefix}__wrapper__cta__button--added`]: addedToCart,
 						})}
 						aria-live={addedToCart}

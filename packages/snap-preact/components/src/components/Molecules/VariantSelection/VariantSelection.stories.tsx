@@ -13,6 +13,7 @@ import { SearchResponseModel } from '@searchspring/snapi-types';
 export default {
 	title: 'Molecules/VariantSelection',
 	component: VariantSelection,
+	tags: ['autodocs'],
 	parameters: {
 		docs: {
 			page: () => (

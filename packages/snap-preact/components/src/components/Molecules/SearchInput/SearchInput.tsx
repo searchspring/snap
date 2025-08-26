@@ -101,6 +101,7 @@ export const SearchInput = observer((properties: SearchInputProps): JSX.Element 
 		disabled,
 		disableStyles,
 		className,
+		internalClassName,
 		treePath,
 	} = props;
 
@@ -119,7 +120,7 @@ export const SearchInput = observer((properties: SearchInputProps): JSX.Element 
 		submitSearchButton: {
 			// default props
 			...submitSearchButton,
-			className: 'ss__search-input__button--submit-search-button',
+			internalClassName: 'ss__search-input__button--submit-search-button',
 			name: 'submit-search',
 
 			// inherited props
@@ -133,7 +134,7 @@ export const SearchInput = observer((properties: SearchInputProps): JSX.Element 
 		clearSearchButton: {
 			// default props
 			...clearSearchButton,
-			className: 'ss__search-input__button--clear-search-button',
+			internalClassName: 'ss__search-input__button--clear-search-button',
 			name: 'clear-search',
 
 			onClick: () => {
@@ -161,7 +162,7 @@ export const SearchInput = observer((properties: SearchInputProps): JSX.Element 
 		closeSearchButton: {
 			// default props
 			...closeSearchButton,
-			className: 'ss__search-input__button--close-search-button',
+			internalClassName: 'ss__search-input__button--close-search-button',
 			name: 'close-search',
 			// inherited props
 			...defined({
@@ -207,7 +208,7 @@ export const SearchInput = observer((properties: SearchInputProps): JSX.Element 
 		<CacheProvider>
 			<div
 				{...styling}
-				className={classnames('ss__search-input', { 'ss__input--disabled': disabled }, className)}
+				className={classnames('ss__search-input', { 'ss__input--disabled': disabled }, className, internalClassName)}
 				onClick={(e: React.MouseEvent<HTMLElement, MouseEvent>) => !disabled && onClick && onClick(e)}
 			>
 				{closeSearchButton && <Button {...subProps.closeSearchButton} {...mergedLang.closeSearchButton.all} />}

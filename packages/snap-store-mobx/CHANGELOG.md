@@ -3,6 +3,29 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.9.1](https://github.com/searchspring/snap/compare/v1.9.0...v1.9.1) (2025-08-25)
+
+**Note:** Version bump only for package @searchspring/snap-store-mobx
+
+# [1.9.0](https://github.com/searchspring/snap/compare/v1.8.1...v1.9.0) (2025-08-25)
+
+### Bug Fixes
+
+- beacon improvements - fix position, refactor closest click, improve ac impressions ([3966c8b](https://github.com/searchspring/snap/commit/3966c8b8cb70506682cf4c92e07c8f02a28169c9))
+- catch QuotaExceededError errors when setting local or session storage ([6048727](https://github.com/searchspring/snap/commit/60487278409133c5744885af9121bbac55f8cba8))
+- infinite scrolling tracking to use correct beacon schema data ([25c13f2](https://github.com/searchspring/snap/commit/25c13f2a97c17734f5d3ca79e02350653952485f))
+- **searchresultstore.ts:** bugfix for realtime variant selections and case sensitivity ([6641e8c](https://github.com/searchspring/snap/commit/6641e8c1293fb9335d7ded8f543c6d0bbb411c76))
+- **store-mobx/searchresultstore:** fixing issue when no options are present (defensive) ([744b9f5](https://github.com/searchspring/snap/commit/744b9f586f990a9ff6ea52bb2032f537faf425c9))
+- **templates/editor:** various fixes and refactors around editor functionality ([4074850](https://github.com/searchspring/snap/commit/4074850f4d9fa5f2282c3386db64b304377c03cb))
+
+### Features
+
+- **searchresultstore:** adding support for api variants ([f2a9c26](https://github.com/searchspring/snap/commit/f2a9c2624c06c895eb2864a409072f612bae1641))
+
+### Reverts
+
+- **controller/search:** reverting change for infinite scroll and search due to breaking change ([e27a55d](https://github.com/searchspring/snap/commit/e27a55d8e84e4568b703844fb7a783a8f52d488d))
+
 ## [1.8.1](https://github.com/searchspring/snap/compare/v1.8.0...v1.8.1) (2025-06-02)
 
 **Note:** Version bump only for package @searchspring/snap-store-mobx
@@ -113,6 +136,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 - **preact-components-ss-lang:** adding foundation for multi language support to preact components ([4dce617](https://github.com/searchspring/snap/commit/4dce617ec14fb6897d66278b90b5cc17e97665bd))
 - **preact-components/storybook:** updating storybook to latest version - build stable ([43c598d](https://github.com/searchspring/snap/commit/43c598d0e4d11d76364ff2775ecdcabe489023a8))
 - **preact-components:** making progress toward layout templating support ([92c2ce6](https://github.com/searchspring/snap/commit/92c2ce6b207dcb1e922674d55e289354b71612da))
+
 ## [0.67.4](https://github.com/searchspring/snap/compare/v0.67.3...v0.67.4) (2025-07-29)
 
 **Note:** Version bump only for package @searchspring/snap-store-mobx

@@ -20,6 +20,7 @@ export abstract class AbstractStore<Type = StoreConfig> {
 			custom: observable,
 			loading: observable,
 			loaded: observable,
+			config: observable,
 		});
 	}
 

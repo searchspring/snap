@@ -46,8 +46,19 @@ export const TermsList = observer((properties: TermsListProps): JSX.Element => {
 	};
 
 	const props = mergeProps('termsList', globalTheme, defaultProps, properties);
-	const { layout, historyTitle, trendingTitle, suggestionTitle, retainHistory, retainTrending, treePath, disableStyles, className, controller } =
-		props;
+	const {
+		layout,
+		historyTitle,
+		trendingTitle,
+		suggestionTitle,
+		retainHistory,
+		retainTrending,
+		treePath,
+		disableStyles,
+		className,
+		internalClassName,
+		controller,
+	} = props;
 
 	const subProps: TermsListSubProps = {
 		terms: {
@@ -101,11 +112,12 @@ export const TermsList = observer((properties: TermsListProps): JSX.Element => {
 		if (module == 'History' && showHistory) {
 			return (
 				<Terms
-					className={'ss__terms-list__terms--history'}
+					internalClassName={'ss__terms-list__terms--history'}
 					title={historyTitle}
 					terms={history}
 					controller={controller}
 					name={'history'}
+					limit={controller.config.settings?.history?.limit}
 					{...subProps.terms}
 				/>
 			);
@@ -114,11 +126,12 @@ export const TermsList = observer((properties: TermsListProps): JSX.Element => {
 		if (module == 'Trending' && showTrending) {
 			return (
 				<Terms
-					className={'ss__terms-list__terms--trending'}
+					internalClassName={'ss__terms-list__terms--trending'}
 					title={trendingTitle}
 					terms={trending}
 					controller={controller}
 					name={'trending'}
+					limit={controller.config.settings?.trending?.limit}
 					{...subProps.terms}
 				/>
 			);
@@ -127,7 +140,7 @@ export const TermsList = observer((properties: TermsListProps): JSX.Element => {
 		if (module == 'Suggestions') {
 			return (
 				<Terms
-					className={'ss__terms-list__terms--suggestions'}
+					internalClassName={'ss__terms-list__terms--suggestions'}
 					title={suggestionTitle}
 					terms={suggestions}
 					controller={controller}
@@ -140,7 +153,7 @@ export const TermsList = observer((properties: TermsListProps): JSX.Element => {
 
 	return layout?.length ? (
 		<CacheProvider>
-			<div {...styling} className={classnames('ss__terms-list', className)}>
+			<div {...styling} className={classnames('ss__terms-list', className, internalClassName)}>
 				{layout?.map((module) => {
 					return findModule(module as TermsListModuleNames);
 				})}

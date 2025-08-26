@@ -96,6 +96,7 @@ export const LoadMore = observer((properties: LoadMoreProps): JSX.Element => {
 		loadingIcon,
 		disableStyles,
 		className,
+		internalClassName,
 		treePath,
 	} = props;
 
@@ -106,7 +107,7 @@ export const LoadMore = observer((properties: LoadMoreProps): JSX.Element => {
 	const subProps: LoadMoreSubProps = {
 		button: {
 			// default props
-			className: classnames(
+			internalClassName: classnames(
 				'ss__load-more__button',
 				{ 'ss__load-more__button--hidden': isLoading && loadingLocation === 'outside' },
 				{ 'ss__load-more__button--disabled': isButtonDisabled }
@@ -121,7 +122,7 @@ export const LoadMore = observer((properties: LoadMoreProps): JSX.Element => {
 		},
 		icon: {
 			// default props
-			className: 'ss__load-more__icon',
+			internalClassName: 'ss__load-more__icon',
 			// inherited props
 			...defined({
 				disableStyles,
@@ -182,7 +183,13 @@ export const LoadMore = observer((properties: LoadMoreProps): JSX.Element => {
 			<div
 				{...styling}
 				{...autoProps}
-				className={classnames('ss__load-more', { 'ss__load-more--loading': isLoading }, { 'ss__load-more--autoFetch': autoFetch }, className)}
+				className={classnames(
+					'ss__load-more',
+					{ 'ss__load-more--loading': isLoading },
+					{ 'ss__load-more--autoFetch': autoFetch },
+					className,
+					internalClassName
+				)}
 			>
 				{!autoFetch && (
 					<Fragment>

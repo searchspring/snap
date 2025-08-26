@@ -41,7 +41,8 @@ export const Filter = observer((properties: FilterProps): JSX.Element => {
 
 	const props = mergeProps('filter', globalTheme, defaultProps, properties);
 
-	const { filter, facetLabel, valueLabel, url, hideFacetLabel, onClick, icon, separator, disableStyles, className, treePath } = props;
+	const { filter, facetLabel, valueLabel, url, hideFacetLabel, onClick, icon, separator, disableStyles, className, internalClassName, treePath } =
+		props;
 
 	const link = filter?.url?.link || url?.link;
 	const value = filter?.value.label || valueLabel;
@@ -50,7 +51,7 @@ export const Filter = observer((properties: FilterProps): JSX.Element => {
 	const subProps: FilterSubProps = {
 		button: {
 			// default props
-			className: 'ss__filter__button',
+			internalClassName: 'ss__filter__button',
 			disableA11y: true,
 			// inherited props
 			...defined({
@@ -63,7 +64,7 @@ export const Filter = observer((properties: FilterProps): JSX.Element => {
 		icon: {
 			// default props
 			icon: 'close-thin',
-			className: 'ss__filter__button__icon',
+			internalClassName: 'ss__filter__button__icon',
 			size: '10px',
 			// inherited props
 			...defined({
@@ -98,7 +99,7 @@ export const Filter = observer((properties: FilterProps): JSX.Element => {
 		<CacheProvider>
 			<a
 				{...styling}
-				className={classnames('ss__filter', className)}
+				className={classnames('ss__filter', className, internalClassName)}
 				onClick={(e) => {
 					link?.onClick && link.onClick(e);
 					onClick && onClick(e);

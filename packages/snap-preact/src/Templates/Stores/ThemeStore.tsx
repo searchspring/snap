@@ -3,7 +3,6 @@ import { observable, makeObservable, toJS, computed } from 'mobx';
 import { observer } from 'mobx-react-lite';
 import deepmerge from 'deepmerge';
 import { isPlainObject } from 'is-plain-object';
-import { StorageStore } from '@searchspring/snap-store-mobx';
 import { TemplateThemeTypes, type TemplatesStoreConfigSettings, type TemplatesStoreDependencies } from './TemplateStore';
 import { Global, css } from '@emotion/react';
 
@@ -16,17 +15,18 @@ import {
 	ThemeVariableBreakpoints,
 	ThemeComponents,
 	ResponsiveKeys,
+	ThemeComplete,
 } from '../../../components/src';
 import { CacheProvider } from '../../../components/src/providers/cache';
 import { sortSelectors, filterSelectors } from '../../../components/src/utilities/mergeProps';
 import type { GlobalThemeStyleScript } from '../../types';
-import type { ListOption } from '../../../components/src/types';
 
 export type ThemeStoreThemeConfig = {
 	name: string;
 	type: TemplateThemeTypes;
-	base: Theme;
+	base: ThemeComplete;
 	overrides?: ThemeOverrides;
+	editorOverrides?: ThemePartial;
 	variables?: ThemeVariablesPartial;
 	currency: ThemeMinimal;
 	language: ThemeMinimal;
@@ -34,29 +34,6 @@ export type ThemeStoreThemeConfig = {
 	innerWidth?: number;
 	style?: GlobalThemeStyleScript;
 };
-
-class SelectedLayout {
-	public selected?: ListOption;
-	private storage: StorageStore;
-	private name: string;
-	private type: string;
-
-	public select(layout: ListOption) {
-		this.selected = layout;
-		this.storage.set(`themes.${this.type}.${this.name}.layout`, this.selected);
-	}
-
-	constructor(storageStore: StorageStore, name: string, type: string) {
-		this.storage = storageStore;
-		this.name = name;
-		this.type = type;
-		this.selected = this.storage.get(`themes.${this.type}.${this.name}.layout`);
-
-		makeObservable(this, {
-			selected: observable,
-		});
-	}
-}
 
 type ThemeStoreConfig = {
 	config: ThemeStoreThemeConfig;
@@ -67,23 +44,25 @@ type ThemeStoreConfig = {
 export class ThemeStore {
 	public name: string;
 	public type: string;
-	public layout: SelectedLayout;
 
 	private dependencies: TemplatesStoreDependencies;
-	private base: Theme;
+	private base: ThemeComplete;
 	private overrides: ThemeOverrides;
+	editorOverrides: ThemePartial;
 	variables: ThemeVariablesPartial;
 	currency: ThemeMinimal;
 	language: ThemeMinimal;
 	languageOverrides: ThemeMinimal;
 	stored: ThemePartial;
 	innerWidth?: number;
+	editMode: boolean;
 
 	constructor(params: ThemeStoreConfig) {
 		const { config, dependencies, settings } = params;
 		this.dependencies = dependencies;
+		this.editMode = settings.editMode;
 
-		const { name, style, type, base, overrides, variables, currency, language, languageOverrides, innerWidth } = config;
+		const { name, style, type, base, overrides, editorOverrides, variables, currency, language, languageOverrides, innerWidth } = config;
 
 		// add prefixes to base theme components and responsive components
 		base.components = prefixComponentKeys('*', base.components);
@@ -102,8 +81,8 @@ export class ThemeStore {
 		this.name = name;
 		this.type = type;
 		this.base = base;
-		this.layout = new SelectedLayout(this.dependencies.storage, this.name, this.type);
 		this.overrides = overrides || {};
+		this.editorOverrides = editorOverrides || {};
 		this.variables = variables || {};
 		this.currency = currency;
 		this.language = language;
@@ -116,6 +95,7 @@ export class ThemeStore {
 			variables: observable,
 			currency: observable,
 			language: observable,
+			editorOverrides: observable,
 			stored: observable,
 			innerWidth: observable,
 			theme: computed, // make theme getter a computed property (memoized)
@@ -156,7 +136,12 @@ export class ThemeStore {
 				9. stored theme editor overrides
 		*/
 
-		const breakpoints = this.variables.breakpoints || this.base.variables?.breakpoints;
+		// const breakpoints = this.variables.breakpoints || this.base.variables?.breakpoints;
+		const breakpoints: ThemeVariableBreakpoints = deepmerge.all<ThemeVariableBreakpoints>([
+			this.base.variables.breakpoints,
+			this.variables.breakpoints || {},
+			(this.editMode && this.editorOverrides?.variables?.breakpoints) || {},
+		]);
 
 		const activeBreakpoint = getActiveBreakpoint(this.innerWidth, breakpoints);
 
@@ -213,6 +198,11 @@ export class ThemeStore {
 			theme = mergeThemeLayers(theme, this.stored) as Theme;
 		}
 
+		// TemplateEditor variable overrides
+		if (this.editMode) {
+			theme = mergeThemeLayers(theme, this.editorOverrides) as Theme;
+		}
+
 		// change the theme name to match the ThemeStore theme name
 		theme.name = this.name;
 		return theme;
@@ -230,36 +220,29 @@ export class ThemeStore {
 		this.language = language;
 	}
 
-	// removing a key from custom theme
-	// public removeOverride(obj: { path: string[]; rootEditingKey: string; }) {
-	// 	// TODO: remove key from stored
-	// }
-
-	// alternative to setOverride below...
-	// public setOverrides(overrides: ThemeOverrides) {
-	// 	this.stored = mergeThemeLayers(this.stored, overrides);
-	// 	this.dependencies.storage.set(`themes.${this.type}.${this.name}.variables`, this.stored);
-	// }
-
-	// setting a key custom theme
-	// TODO: any reason the rootEditingKey cannot be in the path?
-	// maybe interface could be: setOverride(path, value);
 	public setOverride(obj: { path: string[]; rootEditingKey: string; value: unknown }) {
 		const { path, rootEditingKey, value } = obj;
 		const overrides: ThemeOverrides = {
-			[rootEditingKey]: path.reverse().reduce((res, key) => {
-				if (path.indexOf(key) === 0) {
+			[rootEditingKey]: path
+				.slice()
+				.reverse()
+				.reduce((res, key) => {
+					if (path.indexOf(key) === path.length - 1) {
+						return {
+							[key]: value,
+						};
+					}
 					return {
-						[key]: value,
+						[key]: res,
 					};
-				}
-				return {
-					[key]: res,
-				};
-			}, {}),
+				}, {}),
 		};
 		this.stored = mergeThemeLayers(this.stored, overrides);
 		this.dependencies.storage.set(`themes.${this.type}.${this.name}.variables`, this.stored);
+	}
+
+	public setEditorOverrides(overrides: ThemePartial) {
+		this.editorOverrides = overrides;
 	}
 }
 
@@ -271,7 +254,13 @@ export function getActiveBreakpoint(width: number | undefined, breakpoints: Them
 	let breakpoint: ResponsiveKeys | undefined;
 
 	if (Number.isInteger(width) && breakpoints) {
-		breakpoint = Object.keys(breakpoints).find((breakpoint) => width! <= breakpoints[breakpoint as keyof typeof breakpoints]) as ResponsiveKeys;
+		Object.keys(breakpoints).forEach((bp) => {
+			if (width! <= breakpoints[bp as keyof typeof breakpoints]) {
+				if (!breakpoint || breakpoints[breakpoint as keyof typeof breakpoints] > breakpoints[bp as keyof typeof breakpoints]) {
+					breakpoint = bp as ResponsiveKeys;
+				}
+			}
+		});
 	}
 	return breakpoint || 'default';
 }

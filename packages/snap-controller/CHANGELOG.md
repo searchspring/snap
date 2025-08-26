@@ -3,6 +3,39 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.9.1](https://github.com/searchspring/snap/compare/v1.9.0...v1.9.1) (2025-08-25)
+
+**Note:** Version bump only for package @searchspring/snap-controller
+
+# [1.9.0](https://github.com/searchspring/snap/compare/v1.8.1...v1.9.0) (2025-08-25)
+
+### Bug Fixes
+
+- add rq to beacon payload ([234d9b9](https://github.com/searchspring/snap/commit/234d9b9fd4a6bf134a7d8d80a3c52f3e74c62942))
+- beacon impression tracking when interacting ([b092b31](https://github.com/searchspring/snap/commit/b092b318ccfa951995225e2aebdbe9d7335fcf41))
+- beacon improvements - fix position, refactor closest click, improve ac impressions ([3966c8b](https://github.com/searchspring/snap/commit/3966c8b8cb70506682cf4c92e07c8f02a28169c9))
+- **controller/autocomplete:** adding a routine to ensure we do not submit incorrect redirection ([6053233](https://github.com/searchspring/snap/commit/6053233c630a29f1b71249399875947a63e0af33))
+- **controller/autocomplete:** adjusting logic around redirect to prevent issues with "showResults" ([416ce9d](https://github.com/searchspring/snap/commit/416ce9da1220111f1e00bb351c1589b7847cfdf6))
+- **controller/search:** adjusting code that checks product URL to ensure we check multiple values ([adb5137](https://github.com/searchspring/snap/commit/adb5137040c23bc2315fccc7e9d6779484be9317))
+- **controller/search:** altering logic to always store previous results for cases where needed ([d498dee](https://github.com/searchspring/snap/commit/d498dee07919acab21147b6a240608764448f7e9))
+- infinite scrolling tracking to use correct beacon schema data ([25c13f2](https://github.com/searchspring/snap/commit/25c13f2a97c17734f5d3ca79e02350653952485f))
+- no results beacon render event ([1925c5f](https://github.com/searchspring/snap/commit/1925c5fdd5a8789702bae3a173ef329cb0bc9012))
+- prevent beacon render events upon cached api response ([cca9a83](https://github.com/searchspring/snap/commit/cca9a83b6772548ac5b213ccbbaa666d4284a8dd))
+- range checking incorrect property ([273062d](https://github.com/searchspring/snap/commit/273062d0f307cf17b1cf01e6087b62cfae3e01ac))
+- **searchcontroller.ts:** bugfix for infinite rerenders and researches when redirecting ([2a4d214](https://github.com/searchspring/snap/commit/2a4d2143d3c73774354bc4386e7ee6c9e9e32c66))
+- **templates/editor:** various fixes and refactors around editor functionality ([4074850](https://github.com/searchspring/snap/commit/4074850f4d9fa5f2282c3386db64b304377c03cb))
+- track tests, refactors ([2b522ee](https://github.com/searchspring/snap/commit/2b522ee256afd624095ab1f200108be8f1324473))
+- **tracking:** fixes around beaconjs integration - infinite renders/impressions, q, corrected q ([6a63aa5](https://github.com/searchspring/snap/commit/6a63aa5c23221bb3c7c493bda95bb787b2b827e4))
+
+### Features
+
+- add cart infering, update tracking documentation ([6bdef42](https://github.com/searchspring/snap/commit/6bdef423746486179bb079d78c0776ffedf79875))
+- add withTracking and useTracking, post beacon launch fixes ([84bab28](https://github.com/searchspring/snap/commit/84bab28c3edf0b1c632226dcb316f6132bf3f56b))
+
+### Reverts
+
+- **controller/search:** reverting change for infinite scroll and search due to breaking change ([e27a55d](https://github.com/searchspring/snap/commit/e27a55d8e84e4568b703844fb7a783a8f52d488d))
+
 ## [1.8.1](https://github.com/searchspring/snap/compare/v1.8.0...v1.8.1) (2025-06-02)
 
 **Note:** Version bump only for package @searchspring/snap-controller
@@ -117,6 +150,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 ### Features
 
 - **preact-components/storybook:** updating storybook to latest version - build stable ([43c598d](https://github.com/searchspring/snap/commit/43c598d0e4d11d76364ff2775ecdcabe489023a8))
+
 ## [0.67.4](https://github.com/searchspring/snap/compare/v0.67.3...v0.67.4) (2025-07-29)
 
 ### Bug Fixes

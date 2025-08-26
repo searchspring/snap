@@ -42,7 +42,7 @@ export function InlineBanner(properties: InlineBannerProps): JSX.Element {
 
 	const props = mergeProps('inlineBanner', globalTheme, defaultProps, properties);
 
-	const { banner, className, disableA11y, layout, onClick } = props;
+	const { banner, className, internalClassName, disableA11y, layout, onClick } = props;
 
 	const styling = mergeStyles<InlineBannerProps>(props, defaultStyles);
 
@@ -54,7 +54,7 @@ export function InlineBanner(properties: InlineBannerProps): JSX.Element {
 				}}
 				role={'article'}
 				ref={(e) => (!disableA11y ? useA11y(e) : null)}
-				className={classnames('ss__inline-banner', `ss__inline-banner--${layout}`, className)}
+				className={classnames('ss__inline-banner', `ss__inline-banner--${layout}`, className, internalClassName)}
 				{...styling}
 				dangerouslySetInnerHTML={{
 					__html: banner.value,

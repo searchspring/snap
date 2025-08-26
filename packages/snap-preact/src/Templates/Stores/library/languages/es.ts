@@ -131,7 +131,7 @@ export const es: LangComponents = {
 	},
 	sortBy: {
 		label: {
-			value: (data) => `${data}`,
+			value: 'Clasificar por',
 		},
 	},
 	facetsHorizontal: {
@@ -211,7 +211,7 @@ export const es: LangComponents = {
 		},
 		page: {
 			attributes: {
-				'aria-label': (data) => `ir a la página ${data?.page.number}`,
+				'aria-label': (data) => `ir a la página ${data?.page?.number}`,
 			},
 		},
 	},

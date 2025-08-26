@@ -79,6 +79,7 @@ export const Recommendation = observer((properties: RecommendationProps): JSX.El
 		resultComponent,
 		disableStyles,
 		className,
+		internalClassName,
 		style: _,
 		styleScript: __,
 		themeStyleScript: ___,
@@ -112,7 +113,7 @@ export const Recommendation = observer((properties: RecommendationProps): JSX.El
 	const subProps: RecommendationSubProps = {
 		carousel: {
 			// default props
-			className: 'ss__recommendation__Carousel',
+			internalClassName: 'ss__recommendation__Carousel',
 			// inherited props
 			...defined({
 				disableStyles,
@@ -124,7 +125,7 @@ export const Recommendation = observer((properties: RecommendationProps): JSX.El
 		},
 		result: {
 			// default props
-			className: 'ss__recommendation__result',
+			internalClassName: 'ss__recommendation__result',
 			// inherited props
 			...defined({
 				disableStyles,
@@ -158,7 +159,7 @@ export const Recommendation = observer((properties: RecommendationProps): JSX.El
 
 	return (Array.isArray(children) && children.length) || resultsToRender?.length ? (
 		<CacheProvider>
-			<div {...styling} className={classnames('ss__recommendation', className)} ref={recsRef}>
+			<div {...styling} className={classnames('ss__recommendation', className, internalClassName)} ref={recsRef}>
 				{isVisible ? (
 					<RecommendationProfileTracker controller={controller}>
 						{title && !hideTitle && (
@@ -237,7 +238,7 @@ export type RecommendationProps = {
 		enabled: boolean;
 		offset?: string;
 	};
-	slidesPerView?: number;
+	slidesPerView?: number | 'auto';
 } & Omit<SwiperOptions, 'breakpoints' | 'slidesPerView'> &
 	ComponentProps;
 

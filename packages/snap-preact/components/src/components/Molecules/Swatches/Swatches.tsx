@@ -123,12 +123,12 @@ export function Swatches(properties: SwatchesProps): JSX.Element {
 		};
 	}
 
-	const { onSelect, disabled, options, hideLabels, disableStyles, className, type, carousel, grid, treePath } = props;
+	const { onSelect, disabled, options, hideLabels, disableStyles, className, internalClassName, type, carousel, grid, treePath } = props;
 
 	const subProps: SwatchesSubProps = {
 		carousel: {
 			// default props
-			className: 'ss__swatches__carousel',
+			internalClassName: 'ss__swatches__carousel',
 			loop: false,
 			...carousel,
 			// inherited props
@@ -142,7 +142,7 @@ export function Swatches(properties: SwatchesProps): JSX.Element {
 		},
 		grid: {
 			// default props
-			className: 'ss__swatches__grid',
+			internalClassName: 'ss__swatches__grid',
 			hideLabels: hideLabels,
 			overflowButtonInGrid: true,
 			disableOverflowAction: true,
@@ -159,7 +159,7 @@ export function Swatches(properties: SwatchesProps): JSX.Element {
 		},
 		image: {
 			// default props
-			className: 'ss__swatches__image',
+			internalClassName: 'ss__swatches__image',
 			// inherited props
 			...defined({
 				disableStyles,
@@ -186,7 +186,7 @@ export function Swatches(properties: SwatchesProps): JSX.Element {
 
 	return typeof options == 'object' && options?.length ? (
 		<CacheProvider>
-			<div {...styling} className={classnames('ss__swatches', className)}>
+			<div {...styling} className={classnames('ss__swatches', className, internalClassName)}>
 				{type == 'carousel' ? (
 					<Carousel {...subProps.carousel}>
 						{options.map((option) => {
