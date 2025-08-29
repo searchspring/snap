@@ -450,6 +450,8 @@ export const Carousel = observer((properties: CarouselProps): JSX.Element => {
 					{children.map((child) => {
 						if (child && (child.type !== React.Fragment || child?.props?.children?.length)) {
 							return <SwiperSlide>{child}</SwiperSlide>;
+						} else {
+							return null;
 						}
 					})}
 				</Swiper>
