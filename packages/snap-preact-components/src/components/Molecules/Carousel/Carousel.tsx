@@ -18,7 +18,6 @@ import { defined } from '../../../utilities';
 import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { ComponentProps, BreakpointsProps, StylingCSS } from '../../../types';
 import { useDisplaySettings } from '../../../hooks/useDisplaySettings';
-import React from 'react';
 
 const CSS = {
 	carousel: ({ theme, vertical }: Partial<CarouselProps>) =>
