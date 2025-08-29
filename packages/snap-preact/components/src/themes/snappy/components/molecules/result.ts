@@ -48,13 +48,15 @@ const resultStyleScript = ({ theme }: ResultProps) => {
 		'&.ss__result--grid': {
 			position: 'relative',
 
+			'& .ss__image': {
+				minHeight: '300px',
+			},
+
 			'& .ss__result__details': {
-				// width: 'calc(100% - 20px)',
 				width: '100%',
 				boxSizing: 'border-box',
 				height: '-webkit-fill-available',
 				textAlign: 'left',
-				// background: 'linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.65) 100%)',
 				background: ' linear-gradient(to bottom,  rgba(0,0,0,0) 51%,rgba(0,0,0,0.65) 100%)',
 				cursor: 'pointer',
 				position: 'absolute',
@@ -66,12 +68,15 @@ const resultStyleScript = ({ theme }: ResultProps) => {
 				justifyContent: 'flex-end',
 
 				'& .ss__result__details__title': {
+					marginBottom: '0px',
 					a: {
 						color: 'inherit',
 						textDecoration: 'none',
 					},
 				},
 				'& .ss__result__details__pricing': {
+					marginBottom: '0px',
+
 					'& .ss__result__price': {
 						color: 'white',
 						fontSize: '1.5em',
@@ -100,6 +105,10 @@ const resultStyleScript = ({ theme }: ResultProps) => {
 					},
 				},
 			},
+		},
+
+		'& .ss__result__image': {
+			justifyContent: 'flex-start',
 		},
 	});
 };

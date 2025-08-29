@@ -10,6 +10,10 @@ const filterSummaryStyleScript = ({ theme }: FilterSummaryProps) => {
 			fontWeight: 'bold',
 			color: variables?.colors?.secondary,
 		},
+
+		'& .ss__filter-summary__filters': {
+			margin: '0px',
+		},
 	});
 };
 

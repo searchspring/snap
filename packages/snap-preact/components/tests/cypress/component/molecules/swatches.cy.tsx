@@ -38,7 +38,7 @@ describe('Swatches Component', async () => {
 			cy.get('.ss__carousel__next').should('exist');
 			cy.get('.ss__swatches__carousel__swatch').should('have.length', options.length);
 
-			cy.get('.ss__swatches__carousel__swatch').should('satisfy', ($el) => {
+			cy.get('.ss__swatches__carousel__swatch__inner').should('satisfy', ($el) => {
 				for (let i = 0; i < $el.length; i++) {
 					const backgroundStyle = $el[i].style.background;
 					return backgroundStyle == options[i].value.toLowerCase();
@@ -83,7 +83,7 @@ describe('Swatches Component', async () => {
 			cy.get('.ss__carousel__next').should('exist');
 			cy.get('.ss__swatches__carousel__swatch').should('have.length', optionsWithGradient.length);
 
-			cy.get('.ss__swatches__carousel__swatch:first').should('satisfy', ($el) => {
+			cy.get('.ss__swatches__carousel__swatch__inner:first').should('satisfy', ($el) => {
 				const backgroundStyle = $el[0].style.background;
 				return backgroundStyle.startsWith('linear-gradient');
 			});
@@ -137,7 +137,7 @@ describe('Swatches Component', async () => {
 			cy.get('.ss__carousel__prev').should('exist');
 			cy.get('.ss__carousel__next').should('exist');
 			cy.get('.ss__swatches__carousel__swatch').should('have.length', options.length);
-			cy.get('.ss__swatches__carousel__swatch--selected')
+			cy.get('.ss__swatches__carousel__swatch--selected .ss__swatches__carousel__swatch__inner')
 				.should('exist')
 				.should('satisfy', ($el) => {
 					const backgroundStyle = $el[0].style.background;

@@ -25,7 +25,6 @@ const facetPaletteStyleScript = ({ theme }: FacetPaletteOptionsProps) => {
 
 			'.ss__facet-palette-options__option__palette': {
 				border: '2px solid #e6e6e6',
-
 				'.ss__facet-palette-options__icon': {
 					opacity: 1,
 					stroke: 'gray',
@@ -33,10 +32,26 @@ const facetPaletteStyleScript = ({ theme }: FacetPaletteOptionsProps) => {
 				},
 			},
 		},
+
 		'&.ss__facet-palette-options--grid': {
+			'.ss__facet-palette-options__option__wrapper': {
+				aspectRatio: '1 / 1',
+
+				'.ss__facet-palette-options__option__palette': {
+					aspectRatio: '1 / 1',
+					paddingTop: 'initial',
+				},
+			},
+
 			'.ss__facet-palette-options__option--filtered': {
 				'.ss__facet-palette-options__option__wrapper': {
 					border: '0px',
+					aspectRatio: '1 / 1',
+
+					'.ss__facet-palette-options__option__palette': {
+						border: '2px solid #e6e6e6',
+						aspectRatio: '1 / 1',
+					},
 				},
 			},
 		},

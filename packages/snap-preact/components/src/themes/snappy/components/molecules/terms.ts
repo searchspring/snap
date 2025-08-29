@@ -6,7 +6,19 @@ const termsStyleScript = ({ theme }: TermsProps) => {
 	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	const variables = theme?.variables;
 
-	return css({});
+	return css({
+		'& .ss__terms__options .ss__terms__option': {
+			border: '1px solid black',
+			borderRadius: '28px',
+			textAlign: 'center',
+			padding: '5px 15px',
+		},
+		'& .ss__terms__options': {
+			gap: '5px',
+			flexDirection: 'row',
+			justifyContent: 'space-evenly',
+		},
+	});
 };
 
 // Terms component props

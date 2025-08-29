@@ -27,6 +27,17 @@ const mobileSidebarStyleScript = ({ theme }: MobileSidebarProps) => {
 			padding: '5px',
 		},
 
+		'.ss__mobile-sidebar__header__title': {
+			color: '#202223',
+			marginBottom: '0',
+			fontSize: '25px',
+			fontWeight: '400',
+		},
+
+		'.ss__mobile-sidebar__header': {
+			marginBottom: '10px',
+		},
+
 		[`@media (max-width: ${variables?.breakpoints.desktop}px)`]: {
 			'.ss__mobile-sidebar__body': {
 				//83px is the height of the footer & footer
@@ -41,7 +52,7 @@ const mobileSidebarStyleScript = ({ theme }: MobileSidebarProps) => {
 						padding: '5px',
 					},
 					'.ss__select__dropdown__button': {
-						padding: '0px',
+						padding: '7px 5px 7px 5px',
 					},
 				},
 			},
@@ -54,7 +65,10 @@ export const mobileSidebar: ThemeComponent<'mobileSidebar', MobileSidebarProps> 
 	default: {
 		mobileSidebar: {
 			themeStyleScript: mobileSidebarStyleScript,
-			layout: ['perPage', 'facets', 'banner.left'],
+			layout: [
+				['perPage', 'sortBy', '_'],
+				['facets', 'banner.left'],
+			],
 			hideOpenButtonText: true,
 			openButtonIcon: 'filters',
 		},
