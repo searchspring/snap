@@ -47,22 +47,24 @@ const theme = {
 	},
 };
 
-const client = new Client(globals, {});
-
-const controller = new RecommendationController(recommendConfig, {
-	client: client,
-	store: new RecommendationStore(recommendConfig, services),
-	urlManager,
-	eventManager: new EventManager(),
-	profiler: new Profiler(),
-	logger: new Logger(),
-	tracker: new Tracker(globals, { mode: 'development' }),
-});
+let controller: RecommendationController;
 
 describe('RecommendationBundle Component', async () => {
 	before(async () => {
 		cy.intercept('*recommend*', json);
 		cy.intercept('*profile*', profile);
+
+		const client = new Client(globals, {});
+
+		controller = new RecommendationController(recommendConfig, {
+			client: client,
+			store: new RecommendationStore(recommendConfig, services),
+			urlManager,
+			eventManager: new EventManager(),
+			profiler: new Profiler(),
+			logger: new Logger(),
+			tracker: new Tracker(globals, { mode: 'development' }),
+		});
 		await controller.search();
 	});
 
@@ -83,7 +85,10 @@ describe('RecommendationBundle Component', async () => {
 		cy.get('.ss__carousel__next').should('exist');
 		cy.get('.ss__recommendation-bundle .ss__result').should('have.length', 5);
 		cy.get('.ss__recommendation-bundle__wrapper__selector--seed').should('exist');
-		cy.get('.ss__recommendation-bundle .ss__result:first .ss__result__details__title a').should('have.text', results[0].mappings.core?.name);
+		cy.get('.ss__recommendation-bundle .ss__result:first .ss__result__details__title a').should(
+			'have.text',
+			results.filter((r) => r.bundleSeed).pop()!.mappings.core?.name
+		);
 	});
 
 	it('can use onAddToCart prop', () => {

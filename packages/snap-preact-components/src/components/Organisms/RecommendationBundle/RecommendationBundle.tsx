@@ -16,7 +16,7 @@ import { ResultTracker } from '../../Trackers/ResultTracker';
 import { IconProps } from '../../Atoms/Icon';
 import type { RecommendationController } from '@searchspring/snap-controller';
 import type { Product } from '@searchspring/snap-store-mobx';
-import { BundleSelector } from './BundleSelector';
+import { BundleSelector, BundleSelectorProps } from './BundleSelector';
 import { BundledCTA } from './BundleCTA';
 import { useIntersection } from '../../../hooks';
 
@@ -236,7 +236,9 @@ export const RecommendationBundle = observer((properties: RecommendationBundlePr
 		return <Fragment></Fragment>;
 	}
 
-	const seed = results ? results[0] : controller.store?.results[0];
+	const seed = results
+		? results.filter((result) => result.bundleSeed == true).pop()
+		: controller.store?.results?.filter((result) => result.bundleSeed == true).pop();
 
 	const subProps: RecommendationBundleSubProps = {
 		carousel: {
@@ -340,7 +342,7 @@ export const RecommendationBundle = observer((properties: RecommendationBundlePr
 				//already selected, deselect it now
 				cartStore.removeItems([product]);
 
-				if (cartStore.items.length == 0) {
+				if (cartStore.items.length == 0 && seed) {
 					//we dont call addItems here to prevent tracking
 					cartStore.items.push(seed);
 				}
@@ -383,6 +385,48 @@ export const RecommendationBundle = observer((properties: RecommendationBundlePr
 		setIsVisible(true);
 	}
 
+	const GetResults = () => {
+		return resultsToRender.map((result, idx) => {
+			const isSeed = Boolean(result.bundleSeed);
+			const selected = selectedItems.findIndex((item) => item.id == result.id) > -1;
+
+			let attributes: BundleSelectorProps = {
+				onCheck: (e: any) => {
+					e.stopPropagation();
+					onProductSelect(result);
+				},
+				checked: selected,
+				hideCheckboxes: hideCheckboxes,
+				theme: props.theme,
+				icon: separatorIconSeedOnly ? false : separatorIcon,
+				className: idx + 1 == resultsToRender.length ? 'ss__recommendation-bundle__wrapper__selector--last' : '',
+			};
+
+			if (isSeed) {
+				attributes = {
+					...attributes,
+					seedText: seedText,
+					seed: true,
+					icon: separatorIcon,
+				};
+			}
+
+			return !isSeed || ((seedInCarousel || carousel?.enabled == false) && isSeed && !hideSeed) ? (
+				<ResultTracker controller={controller} result={result} track={{ impression: Boolean(isSeed) }}>
+					<BundleSelector {...attributes}>
+						{resultComponent ? (
+							cloneWithProps(resultComponent, { result: result, seed: isSeed, selected, onProductSelect })
+						) : (
+							<Result {...subProps.result} controller={controller} result={result} />
+						)}
+					</BundleSelector>
+				</ResultTracker>
+			) : (
+				<></>
+			);
+		});
+	};
+
 	return resultsToRender?.length ? (
 		<CacheProvider>
 			<div
@@ -406,7 +450,7 @@ export const RecommendationBundle = observer((properties: RecommendationBundlePr
 						>
 							{carouselEnabled ? (
 								<Fragment>
-									{!seedInCarousel && !hideSeed && (
+									{!seedInCarousel && !hideSeed && seed && (
 										<div className="ss__recommendation-bundle__wrapper__seed-container">
 											<ResultTracker controller={controller} result={seed} track={{ impression: false }}>
 												<BundleSelector
@@ -453,143 +497,12 @@ export const RecommendationBundle = observer((properties: RecommendationBundlePr
 											{...additionalProps}
 											{...displaySettings}
 											ref={carouselRef}
-										>
-											{seedInCarousel
-												? resultsToRender
-														.filter((result, idx) => (hideSeed && idx == 0 ? false : true))
-														.map((result, idx) => {
-															const selected = selectedItems.findIndex((item) => item.id == result.id) > -1;
-
-															if (idx == 0 && !hideSeed) {
-																return (
-																	<ResultTracker controller={controller} result={result} track={{ impression: false }}>
-																		<BundleSelector
-																			seedText={seedText}
-																			seed={true}
-																			icon={separatorIcon}
-																			onCheck={(e) => {
-																				e.stopPropagation();
-																				onProductSelect(result);
-																			}}
-																			checked={selected}
-																			hideCheckboxes={hideCheckboxes}
-																			theme={props.theme}
-																		>
-																			{resultComponent ? (
-																				cloneWithProps(resultComponent, { result: result, seed: true, selected, onProductSelect })
-																			) : (
-																				<Result {...subProps.result} controller={controller} result={result} />
-																			)}
-																		</BundleSelector>
-																	</ResultTracker>
-																);
-															} else {
-																return (
-																	<ResultTracker controller={controller} result={result}>
-																		<BundleSelector
-																			icon={separatorIconSeedOnly ? false : separatorIcon}
-																			onCheck={(e) => {
-																				e.stopPropagation();
-																				onProductSelect(result);
-																			}}
-																			checked={selected}
-																			hideCheckboxes={hideCheckboxes}
-																			theme={props.theme}
-																			className={idx + 1 == resultsToRender.length ? 'ss__recommendation-bundle__wrapper__selector--last' : ''}
-																		>
-																			{resultComponent ? (
-																				cloneWithProps(resultComponent, { result: result, seed: false, selected, onProductSelect })
-																			) : (
-																				<Result {...subProps.result} controller={controller} result={result} />
-																			)}
-																		</BundleSelector>
-																	</ResultTracker>
-																);
-															}
-														})
-												: resultsToRender
-														.filter((result, idx) => idx !== 0)
-														.map((result, idx, results) => {
-															const selected = selectedItems.findIndex((item) => item.id == result.id) > -1;
-
-															return (
-																<ResultTracker controller={controller} result={result}>
-																	<BundleSelector
-																		icon={separatorIconSeedOnly ? false : separatorIcon}
-																		onCheck={(e) => {
-																			e.stopPropagation();
-																			onProductSelect(result);
-																		}}
-																		checked={selected}
-																		hideCheckboxes={hideCheckboxes}
-																		theme={props.theme}
-																		className={idx + 1 == results.length ? 'ss__recommendation-bundle__wrapper__selector--last' : ''}
-																	>
-																		{resultComponent ? (
-																			cloneWithProps(resultComponent, { result: result, seed: false, selected, onProductSelect })
-																		) : (
-																			<Result {...subProps.result} controller={controller} result={result} />
-																		)}
-																	</BundleSelector>
-																</ResultTracker>
-															);
-														})}
-										</Carousel>
+											children={GetResults()}
+										/>
 									</div>
 								</Fragment>
 							) : (
-								resultsToRender
-									.filter((result, idx) => (hideSeed && idx == 0 ? false : true))
-									.map((result, idx) => {
-										const selected = selectedItems.findIndex((item) => item.id == result.id) > -1;
-
-										if (idx == 0 && !hideSeed) {
-											return (
-												<ResultTracker controller={controller} result={result} track={{ impression: false }}>
-													<BundleSelector
-														seedText={seedText}
-														seed={true}
-														icon={separatorIcon}
-														onCheck={(e) => {
-															e.stopPropagation();
-															onProductSelect(result);
-														}}
-														checked={selected}
-														hideCheckboxes={hideCheckboxes}
-														theme={props.theme}
-													>
-														{resultComponent ? (
-															cloneWithProps(resultComponent, { result: result, seed: true, selected, onProductSelect })
-														) : (
-															<Result {...subProps.result} controller={controller} result={result} />
-														)}
-													</BundleSelector>
-												</ResultTracker>
-											);
-										} else {
-											return (
-												<ResultTracker controller={controller} result={result}>
-													<BundleSelector
-														icon={separatorIconSeedOnly ? false : separatorIcon}
-														onCheck={(e) => {
-															e.stopPropagation();
-															onProductSelect(result);
-														}}
-														checked={selected}
-														hideCheckboxes={hideCheckboxes}
-														theme={props.theme}
-														className={idx + 1 == resultsToRender.length ? 'ss__recommendation-bundle__wrapper__selector--last' : ''}
-													>
-														{resultComponent ? (
-															cloneWithProps(resultComponent, { result: result, seed: false, selected, onProductSelect })
-														) : (
-															<Result {...subProps.result} controller={controller} result={result} />
-														)}
-													</BundleSelector>
-												</ResultTracker>
-											);
-										}
-									})
+								<>{...GetResults()}</>
 							)}
 
 							{ctaInline && (

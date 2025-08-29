@@ -18,6 +18,7 @@ import { defined } from '../../../utilities';
 import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { ComponentProps, BreakpointsProps, StylingCSS } from '../../../types';
 import { useDisplaySettings } from '../../../hooks/useDisplaySettings';
+import React from 'react';
 
 const CSS = {
 	carousel: ({ theme, vertical }: Partial<CarouselProps>) =>
@@ -447,7 +448,9 @@ export const Carousel = observer((properties: CarouselProps): JSX.Element => {
 					}}
 				>
 					{children.map((child) => {
-						return <SwiperSlide>{child}</SwiperSlide>;
+						if (child && (child.type !== React.Fragment || child?.props?.children?.length)) {
+							return <SwiperSlide>{child}</SwiperSlide>;
+						}
 					})}
 				</Swiper>
 
