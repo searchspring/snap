@@ -421,9 +421,7 @@ export const RecommendationBundle = observer((properties: RecommendationBundlePr
 						)}
 					</BundleSelector>
 				</ResultTracker>
-			) : (
-				<></>
-			);
+			) : null;
 		});
 	};
 
