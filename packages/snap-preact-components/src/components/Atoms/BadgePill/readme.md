@@ -4,6 +4,10 @@ Renders a text badge in the shape of a pill. It is expected to be used with `Cal
 
 ## Usage
 
+```jsx
+import { BadgePill } from '@searchspring/snap-preact-components';
+```
+
 ### value
 The required `value` prop specifies the badge text contents.
 

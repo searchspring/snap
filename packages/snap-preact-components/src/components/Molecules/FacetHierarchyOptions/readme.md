@@ -3,6 +3,9 @@
 Renders a list of hierarchy options.
 
 ## Usage
+```jsx
+import { FacetHierarchyOptions } from '@searchspring/snap-preact-components';
+```
 
 ### values
 The `values` prop specifies all facet values where the facet type is 'hierarchy'. Overrides values passed via the facet prop. 

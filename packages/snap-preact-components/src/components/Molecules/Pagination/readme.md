@@ -6,6 +6,9 @@ Renders pagination page links for the given search response.
 - Icon
 
 ## Usage
+```jsx
+import { Pagination } from '@searchspring/snap-preact-components';
+```
 
 ### pagination
 The required `pagination` prop specifies a reference to the pagination store object.

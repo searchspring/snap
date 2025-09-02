@@ -8,6 +8,9 @@ Renders a native or custom select dropdown.
 - Icon
 
 ## Usage
+```jsx
+import { Select } from '@searchspring/snap-preact-components';
+```
 
 ### options
 The required `options` prop specifies an array of Option Objects to be rendered.

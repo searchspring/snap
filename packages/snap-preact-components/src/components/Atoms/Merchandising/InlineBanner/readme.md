@@ -1,6 +1,9 @@
 # Inline Banner
 
 ## Usage
+```jsx
+import { InlineBanner } from '@searchspring/snap-preact-components';
+```
 
 ### banner
 The `banner` prop specifies a reference to an inline banner object from the `content` object.

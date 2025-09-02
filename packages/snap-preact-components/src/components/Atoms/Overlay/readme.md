@@ -3,6 +3,9 @@
 Renders an Overlay. Typically used to blur the background with a foreground element such as a modal or slideout menu.
 
 ## Usage
+```jsx
+import { Overlay } from '@searchspring/snap-preact-components';
+```
 
 ### active
 The required `active` prop specifies when to render the component.

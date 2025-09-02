@@ -6,6 +6,9 @@ Renders a slideout with a background overlay. Typically used for a mobile menu s
 - Overlay
 
 ## Usage
+```jsx
+import { Slideout } from '@searchspring/snap-preact-components';
+```
 
 ### buttonContent
 The `buttonContent` prop accepts a string or JSX element to render a clickable button that toggles the slideout visibility. 

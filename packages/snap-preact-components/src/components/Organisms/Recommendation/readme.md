@@ -13,6 +13,9 @@ Any modification to the results array and data are recommended to be made using 
 - Result (default)
 
 ## Usage
+```jsx
+import { Recommendation } from '@searchspring/snap-preact-components';
+```
 
 Additional [Swiper Component Props](https://swiperjs.com/react#swiper-props) can be specified, but may need to be camelCased where appropriate.
 Additional [Swiper Modules](https://swiperjs.com/swiper-api#modules) can be provided via the `modules` prop; these may need additional props and or stylesheets.

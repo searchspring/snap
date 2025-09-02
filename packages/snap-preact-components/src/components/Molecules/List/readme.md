@@ -6,6 +6,9 @@ Renders a list of options.
 - Checkbox
 
 ## Usage
+```jsx
+import { List } from '@searchspring/snap-preact-components';
+```
 
 ### options
 The required `options` prop specifies an array of Option Objects to be rendered.

@@ -7,6 +7,9 @@ Renders a facet filter.
 - Button
 
 ## Usage
+```jsx
+import { Filter } from '@searchspring/snap-preact-components';
+```
 
 ### facetLabel
 The `facetLabel` prop specifies the filter label. Typically set to the facet label.

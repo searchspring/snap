@@ -3,6 +3,9 @@
 Renders a grid of facet options.
 
 ## Usage
+```jsx
+import { FacetGridOptions } from '@searchspring/snap-preact-components';
+```
 
 ### values
 The `values` prop specifies all facet values where the facet type is 'grid'. Overrides values passed via the facet prop. 

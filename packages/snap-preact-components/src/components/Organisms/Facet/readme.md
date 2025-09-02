@@ -13,6 +13,9 @@ Renders a single complete facet. This includes determining the correct options t
 - SearchInput
 
 ## Usage
+```jsx
+import { Facet } from '@searchspring/snap-preact-components';
+```
 
 ### facet
 The required `facet` prop specifies a reference to any single facet object within the facets store array. 
