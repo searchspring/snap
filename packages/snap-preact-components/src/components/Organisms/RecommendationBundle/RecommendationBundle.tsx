@@ -410,9 +410,8 @@ export const RecommendationBundle = observer((properties: RecommendationBundlePr
 					icon: separatorIcon,
 				};
 			}
-
 			return !isSeed || ((seedInCarousel || carousel?.enabled == false) && isSeed && !hideSeed) ? (
-				<ResultTracker controller={controller} result={result} track={{ impression: Boolean(isSeed) }}>
+				<ResultTracker controller={controller} result={result} track={{ impression: Boolean(!isSeed) }}>
 					<BundleSelector {...attributes}>
 						{resultComponent ? (
 							cloneWithProps(resultComponent, { result: result, seed: isSeed, selected, onProductSelect })
