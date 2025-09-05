@@ -3,6 +3,9 @@
 Renders overlay badges configured in the Searchspring Management Console and returned from the API. This component is intended to be used within a `Result` component to wrap elements (children) that should have overlay badges.
 
 ## Usage
+```jsx
+import { OverlayBadge } from '@searchspring/snap-preact-components';
+```
 
 ### children
 The required children provided to the component will be wrapped and rendered in a relative div to allow badges to be positioned absolutely. 

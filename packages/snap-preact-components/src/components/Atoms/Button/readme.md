@@ -3,6 +3,9 @@
 Renders a native or custom button.
 
 ## Usage
+```jsx
+import { Button } from '@searchspring/snap-preact-components';
+```
 
 ### content
 The `content` prop specifies the button text. This can be a string or a JSX element.

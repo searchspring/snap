@@ -5,6 +5,9 @@ Renders a merchandising banner. Banner Types include `header`, `footer`, `left`,
 This `Banner` component does not support inline banners. See `InlineBanner` component below.
 
 ## Usage
+```jsx
+import { Banner } from '@searchspring/snap-preact-components';
+```
 
 ### content
 The required `content` prop specifies an object of banners returned from the Searchspring API.

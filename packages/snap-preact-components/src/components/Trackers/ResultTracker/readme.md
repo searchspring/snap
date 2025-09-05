@@ -5,6 +5,9 @@ Adds impression, render and click tracking to an individual result within a cont
 This component is used for Beacon 2.0 tracking and replaces the need for using the `RecommendationResultTracker` as well as the `RecommendationProfileTracker`.
 
 ## Usage
+```jsx
+import { ResultTracker } from '@searchspring/snap-preact-components';
+```
 
 ### controller
 The required `controller` prop specifies a reference to a Controller object.

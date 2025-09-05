@@ -8,6 +8,9 @@ Renders a swatch component.
 - image
 
 ## Usage
+```jsx
+import { Swatches } from '@searchspring/snap-preact-components';
+```
 
 ### options
 The required `options` prop specifies an array of options to render. Each option requires a value, but can optionally provide label, background, backgroundImageUrl, and disabled properties. 

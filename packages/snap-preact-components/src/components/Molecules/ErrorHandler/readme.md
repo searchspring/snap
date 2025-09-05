@@ -7,6 +7,9 @@ Renders error messages.
 - Button
 
 ## Usage
+```jsx
+import { ErrorHandler } from '@searchspring/snap-preact-components';
+```
 
 ### controller
 The `controller` prop specifies a reference to a Snap controller. This is the standard usage.

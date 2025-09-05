@@ -8,6 +8,9 @@ Renders a single product card.
 - Image
 
 ## Usage
+```jsx
+import { Result } from '@searchspring/snap-preact-components';
+```
 
 ### result
 The required `result` prop specifies a reference to a product object from the `results` store array.

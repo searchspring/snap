@@ -3,6 +3,9 @@
 Renders a slider to be used with any slider facet. Built using [react-ranger](https://github.com/tannerlinsley/react-ranger).
 
 ## Usage
+```jsx
+import { FacetSlider } from '@searchspring/snap-preact-components';
+```
 
 ### facet
 The required `facet` prop specifies a reference to a facet within the facets store array. The facet must be a range facet (`display` type of `'slider'`).

@@ -6,6 +6,9 @@ Renders a carousel of slides using children, built with [Swiper v11](https://swi
 - Icon
 
 ## Usage
+```jsx
+import { Carousel } from '@searchspring/snap-preact-components';
+```
 
 Additional [Swiper Component Props](https://swiperjs.com/react#swiper-props) can be specified, but may need to be camelCased where appropriate.
 Additional [Swiper Modules](https://swiperjs.com/swiper-api#modules) can be provided via the `modules` prop; these may need additional props and or stylesheets.

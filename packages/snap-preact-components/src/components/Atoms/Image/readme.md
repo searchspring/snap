@@ -3,6 +3,9 @@
 Renders an Image with fallback and rollover functionality. 
 
 ## Usage
+```jsx
+import { Image } from '@searchspring/snap-preact-components';
+```
 
 ### src
 The required `src` prop specifies the URL of the image to render.

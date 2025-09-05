@@ -3,6 +3,9 @@
 Renders a button and content. Clicking the button toggles content visibility. Typically used as an alternative to a `<select>` dropdown or to collapse content. By default any clicks outside of the element will hide the content.
 
 ## Usage
+```jsx
+import { Dropdown } from '@searchspring/snap-preact-components';
+```
 
 ### content
 The `content` prop specifies the dropdown contents. This can be a string or a JSX element. The Dropdown component also passes the current open state to the JSX component under the prop showContent: boolean. 

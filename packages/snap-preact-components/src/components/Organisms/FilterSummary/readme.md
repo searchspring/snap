@@ -5,7 +5,9 @@ Renders all selected filters including a wrapper with a title and a 'clear all' 
 ## Components Used
 - Filter
 ## Usage
-
+```jsx
+import { FilterSummary } from '@searchspring/snap-preact-components';
+```
 
 ### controller
 The `controller` prop specifies a reference to the search controller.

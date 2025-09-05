@@ -6,6 +6,9 @@ Renders a grid of facet palette options.
 - Icon
 
 ## Usage
+```jsx
+import { FacetPaletteOptions } from '@searchspring/snap-preact-components';
+```
 
 ### values
 The `values` prop specifies all facet values where the facet type is 'palette'. Overrides values passed via the facet prop. 

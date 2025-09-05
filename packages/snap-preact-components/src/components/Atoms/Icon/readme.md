@@ -3,6 +3,9 @@
 Renders an Icon either from our list of available icons or from a custom path. 
 
 ## Usage
+```jsx
+import { Icon } from '@searchspring/snap-preact-components';
+```
 
 ### icon
 The `icon` prop specifies the name of the icon to display. 
