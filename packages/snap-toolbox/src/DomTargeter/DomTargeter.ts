@@ -12,7 +12,7 @@ export type Target = {
 	[any: string]: unknown;
 };
 
-export type OnTarget = (target: Target, elem: Element, originalElem?: Element) => void;
+export type OnTarget = (target: Target, elem: Element, originalElem?: Element) => void | Promise<void>;
 
 let globallyTargetedElems: Array<Element> = [];
 export class DomTargeter {
@@ -84,7 +84,7 @@ export class DomTargeter {
 		return this.targets;
 	}
 
-	async retarget(): Promise<void> {
+	retarget(): void {
 		const targetElemPairs = this.targets.flatMap((target) => {
 			// hide targets before found
 			target.hideTarget && this.hideTarget(target.selector);
@@ -106,26 +106,48 @@ export class DomTargeter {
 		});
 
 		for (const { target, elem } of targetElemPairs) {
-			if (target.inject) {
-				const injectedElem = this.inject(elem, target);
-				this.targetedElems = this.targetedElems.concat(elem);
+			try {
+				if (target.inject) {
+					const injectedElem = this.inject(elem, target);
+					this.targetedElems = this.targetedElems.concat(elem);
 
-				await this.onTarget(target, injectedElem, elem);
-			} else {
-				// empty target selector by default
-				target.emptyTarget = target.emptyTarget ?? true;
-				if (target.emptyTarget) while (elem.firstChild && elem.removeChild(elem.firstChild));
+					// handle both sync and async onTarget functions
+					const result = this.onTarget(target, injectedElem, elem);
+					if (result && typeof result.then === 'function') {
+						// async function - handle promise
+						result.catch((error) => {
+							console.error('DomTargeter onTarget async failure:', error);
+						});
+					}
+				} else {
+					// empty target selector by default
+					target.emptyTarget = target.emptyTarget ?? true;
+					if (target.emptyTarget) while (elem.firstChild && elem.removeChild(elem.firstChild));
 
-				await this.onTarget(target, elem);
-			}
+					// handle both sync and async onTarget functions
+					const result = this.onTarget(target, elem);
+					if (result && typeof result.then === 'function') {
+						// async function - handle promise
+						result.catch((error) => {
+							console.error('DomTargeter onTarget async failure:', error);
+						});
+					}
+				}
 
-			// unhide target
-			target.hideTarget && this.unhideTarget(target.selector);
+				// unhide target
+				target.hideTarget && this.unhideTarget(target.selector);
 
-			// remove styles by default
-			target.unsetTargetMinHeight = target.unsetTargetMinHeight ?? true;
-			if (target.unsetTargetMinHeight && (elem as HTMLElement).style.minHeight) {
-				(elem as HTMLElement).style.minHeight = '';
+				// remove styles by default
+				target.unsetTargetMinHeight = target.unsetTargetMinHeight ?? true;
+				if (target.unsetTargetMinHeight && (elem as HTMLElement).style.minHeight) {
+					(elem as HTMLElement).style.minHeight = '';
+				}
+			} catch (err) {
+				// Log the retarget failure but continue with other elements
+				console.error('DomTargeter retarget failure:', err);
+
+				// Still unhide target on failure
+				target.hideTarget && this.unhideTarget(target.selector);
 			}
 		}
 	}
