@@ -5,7 +5,7 @@ After building the project and uploading the build files to your CDN or hosting 
 
 ```html
 <script src="https://snapui.searchspring.io/[your_site_id]/bundle.js" id="searchspring-context">
-    // contexet variables go here
+    // context variables go here
 </script>
 ```
 
@@ -22,7 +22,7 @@ The bundle should be included in the <head> tag, ideally near the top of the nod
     <title>Snap Integration Example</title>
 
     <script src="https://snapui.searchspring.io/[your_site_id]/bundle.js" id="searchspring-context">
-        // contexet variables go here
+        // context variables go here
     </script>
 </head>
 <body>
@@ -107,3 +107,8 @@ Example using multiple context variables together.
 	};
 </script>
 ```
+
+## Content Security Policy
+
+If your site requires a strict [Content Security Policy (CSP)](https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/CSP), an entry of `https://*.searchspring.io` should be added to your CSP configuration to ensure Searchspring is functional. 
+

@@ -1,6 +1,6 @@
 # Snap Client
 
-The `@searchspring/snap-client` package is a client for the Athos Commerce API. It is a wrapper around the Athos Commerce API that provides a simple interface for fetching data from the API.
+The `@searchspring/snap-client` package is a client for the Searchspring API. It is a wrapper around the Searchspring API that provides a simple interface for fetching data from the API.
 
 
 ## ClientGlobals

@@ -2,7 +2,7 @@
 
 Snap is built using the Model View Controller (MVC) pattern internally. When constructing an instance of the `Snap` class, the configuration object that is provided contains all the controllers that the project will use and where they will be rendered on the page. Each controller can be configured with various settings and custom functionallity can be implemented via middleware to tie into the search lifecycle.
 
-Each controller contains a `controller.search()` method that is used to trigger a search to Athos Commerce's API with parameters derived from the `controller.urlManager` state. A urlManager contains the state of the url (query and hash paramters), or in the case of Autocomplete, Recommendations, and Finder, is detached from the url and contains it's own state.
+Each controller contains a `controller.search()` method that is used to trigger a search to Searchspring API with parameters derived from the `controller.urlManager` state. A urlManager contains the state of the url (query and hash paramters), or in the case of Autocomplete, Recommendations, and Finder, is detached from the url and contains it's own state.
 
 Data that is returned from the API is then stored in each controller's `controller.store`. The data schema is unique to each controller type (Search, Autocomplete, Recommendations, Finder) 
 

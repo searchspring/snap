@@ -54,9 +54,9 @@ To host your own build files follow the below steps in your project.
 <!-- TODO: Link to playform specific install docs and update here -->
 
 
-## Deploying to Athos Commerce CDN
+## Deploying to Searchspring CDN
 
-Deploying to Athos Commerce CDN is only possible if the repository is managed by Athos Commerce's [Github organization](https://github.com/searchspring-implementations). Repositories in this organization are typically managed by Athos Commerce's professional services team and deployed via a CI/CD pipeline using the [snap-action](https://github.com/searchspring/snap-action) Github Action. An invitation can be requested for collaboration.
+Deploying to Searchspring CDN is only possible if the repository is managed by the Searchspring [Github organization](https://github.com/searchspring-implementations). Repositories in this organization are typically managed by the Searchspring professional services team and deployed via a CI/CD pipeline using the [snap-action](https://github.com/searchspring/snap-action) Github Action. An invitation can be requested for collaboration.
 
 Github action runs triggered on the default branch `production` will build and deploy bundle files to this URL:
 
@@ -68,7 +68,7 @@ Builds on different branch names will be deployed to:
 
 ### Github Repository Requirements
 
-- Repository must be managed by Athos Commerce's [Github organization](https://github.com/searchspring-implementations)
+- Repository must be managed by the Searchspring [Github organization](https://github.com/searchspring-implementations)
 - Repository must have a default branch named `production`
 - Repository must have repository secrets for each siteId in the repository. Found at `https://github.com/[owner]/[repository]/settings/secrets/actions`
   - Secret Key Name: `WEBSITE_SECRET_KEY_[SITEID]` where `[SITEID]` is the siteId found in the [Searchspring Management Console](https://manage.searchspring.net). For example: `WEBSITE_SECRET_KEY_ABC123`
@@ -148,3 +148,28 @@ You will see an interface overlay on the bottom right of the viewport indicating
 <img src="https://github.com/searchspring/snap/blob/main/images/branch-override.png?raw=true" />
 
 This will also be persisted across page navigation. To stop previewing a branch build, you must click the `Stop Preview` button in the interface or clear the `ssBranch` cookie. The interface can also be minimized. 
+
+
+## Build Tools
+
+Webpack is the default choice of build tooling that all Snapfu templates include and will be preconfigured.
+
+If you are integrating `@searchspring/snap-preact` using other build tools, you may require certain plugins to ensure preact compatibility. 
+
+We hope to maintain this page with the most common build tools and their respective plugins as we discover them. 
+
+
+### Vite
+
+[@preact/preset-vite](https://github.com/preactjs/presets/tree/main/packages/preset-vite) is a plugin for Vite that allows you to use Preact in your Vite project.
+
+```js
+// vite.config.js
+import { defineConfig } from 'vite'
+import preact from '@preact/preset-vite'
+
+// https://vite.dev/config/
+export default defineConfig({
+  plugins: [preact()],
+})
+```

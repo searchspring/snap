@@ -1,4 +1,4 @@
-# Creating a new project
+# Setup
 
 
 To create a new project, we recommend using the [Snapfu CLI](https://www.npmjs.com/package/snapfu) to initialize a new project from a preconfigured scaffold. 
@@ -75,7 +75,7 @@ A minimal mockup file (shown below) contains only the necessary script and targe
 		<div id="searchspring-sidebar"></div>
 	</body>
 
-	<script src="dist/bundle.js" id="searchspring-context"></script>
+	<script src="bundle.js" id="searchspring-context"></script>
 </html>
 ```
 

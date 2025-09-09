@@ -4,7 +4,7 @@ This configuration refers to the object passed to the `new Snap()` constructor.
 
 ## Client
 
-Required. Config object that is passed to the core [@searchspring/snap-client](https://github.com/searchspring/snap/tree/main/packages/snap-client) package. This service handles the network requests to Athos Commerce APIs to retrieve data to be displayed.
+Required. Config object that is passed to the core [@searchspring/snap-client](https://github.com/searchspring/snap/tree/main/packages/snap-client) package. This service handles the network requests to Searchspring APIs to retrieve data to be displayed.
 
 
 | Option | Type | Description |

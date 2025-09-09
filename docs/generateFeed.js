@@ -51,30 +51,37 @@ const OUTPUT_FILE = 'snap-docs.json';
 
 	function generateLinks(links, catRoot) {
 		links.forEach((link) => {
+			// Process the current link if it's searchable
 			if (link.searchable) {
-				if (link.url) {
-					try {
-						const markdown = fs.readFileSync(`${link.url}`, 'utf8');
-						if (markdown) {
-							docEntries.push({
-								name: link.label,
-								route: link.route,
-								price: 0,
-								description: markdown,
-								image: '',
-								sku: `sku${link.route}`,
-								id: link.route,
-								categoryHierarchy: `${catRoot} > ${link.hierarchyLabel || link.label}`,
-							});
-						}
-					} catch (err) {
-						console.error(err);
-					}
-				}
+				// Handle single URL or array of URLs
+				const urls = Array.isArray(link.url) ? link.url : [link.url];
 
-				if (link.links) {
-					generateLinks(link.links, `${catRoot} > ${link.label}`);
-				}
+				urls.forEach((url) => {
+					if (url) {
+						try {
+							const markdown = fs.readFileSync(`${url}`, 'utf8');
+							if (markdown) {
+								docEntries.push({
+									name: link.label,
+									route: link.route,
+									price: 0,
+									description: markdown,
+									image: '',
+									sku: `sku${link.route}`,
+									id: link.route,
+									categoryHierarchy: `${catRoot} > ${link.hierarchyLabel || link.label}`,
+								});
+							}
+						} catch (err) {
+							console.error(`Error reading file ${url}:`, err);
+						}
+					}
+				});
+			}
+
+			// Recursively process nested links
+			if (link.links && Array.isArray(link.links)) {
+				generateLinks(link.links, `${catRoot} > ${link.label}`);
 			}
 		});
 	}

@@ -40,7 +40,7 @@ const snap = new Snap({
                         selector: 'header input[type="search"]',
                         hideTarget: true,
                         component: async () => {
-                            return (await import('./components/Autocomplete/Autocomplete')).Autocomplete;
+                            return (await import('@searchspring/snap-preact-components')).Autocomplete;
                         },
                     },
                 ],

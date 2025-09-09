@@ -151,6 +151,48 @@ table td {
 	float: right;
 }
 
+#content .permalink {
+	all: initial;
+    position: absolute;
+    top: -1em;
+	color: green;
+}
+#content .scrolled-to {
+	background: var(--athos-secondary);
+}
+
+#content h2, 
+#content h3, 
+#content h4, 
+#content h5, 
+#content h6 {
+	cursor: pointer;
+	position: relative;
+	background: transparent;
+	transition: background 0.5s ease;
+}
+
+#content h2::before,
+#content h3::before,
+#content h4::before,
+#content h5::before,
+#content h6::before {
+	content: '🔗' / 'copy permalink';
+	position: absolute;
+	left: -1.2em;
+	opacity: 0;
+	transition: opacity 0.25s ease;
+}
+
+#content h2:hover::before,
+#content h3:hover::before,
+#content h4:hover::before,
+#content h5:hover::before,
+#content h6:hover::before {
+	opacity: 0.5;
+	transition: opacity 0.25s ease;
+}
+
 #markdown {
 	padding: 50px 100px;
 	max-width: 1500px;
@@ -181,6 +223,12 @@ table td {
 	width: 100%;
 	height: 100vh;
 	border: none;
+}
+
+.section:last-child {
+	position: absolute;
+    bottom: 0;
+    width: 100%;
 }
 
 .section .links {
@@ -270,4 +318,11 @@ code:not([class]) {
 	#markdown {
 		padding: 10px 30px;
 	}
+
+	.section:last-child {
+		position: unset;
+		bottom: unset;
+		width: unset;
+	}
+	
 }
