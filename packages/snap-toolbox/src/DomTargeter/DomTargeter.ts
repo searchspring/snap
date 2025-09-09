@@ -143,11 +143,8 @@ export class DomTargeter {
 					(elem as HTMLElement).style.minHeight = '';
 				}
 			} catch (err) {
-				// Log the retarget failure but continue with other elements
+				// log the retarget failure but continue with other elements
 				console.error('DomTargeter retarget failure:', err);
-
-				// Still unhide target on failure
-				target.hideTarget && this.unhideTarget(target.selector);
 			}
 		}
 	}
