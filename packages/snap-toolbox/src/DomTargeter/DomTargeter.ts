@@ -84,7 +84,7 @@ export class DomTargeter {
 		return this.targets;
 	}
 
-	retarget(): void {
+	async retarget(): Promise<void> {
 		const targetElemPairs = this.targets.flatMap((target) => {
 			// hide targets before found
 			target.hideTarget && this.hideTarget(target.selector);
@@ -105,18 +105,12 @@ export class DomTargeter {
 			return elems.map((elem) => ({ target, elem }));
 		});
 
-		const errors: string[] = [];
-
 		targetElemPairs.forEach(async ({ target, elem }) => {
 			if (target.inject) {
-				try {
-					const injectedElem = this.inject(elem, target);
-					this.targetedElems = this.targetedElems.concat(elem);
+				const injectedElem = this.inject(elem, target);
+				this.targetedElems = this.targetedElems.concat(elem);
 
-					await this.onTarget(target, injectedElem, elem);
-				} catch (e) {
-					errors.push(String(e));
-				}
+				await this.onTarget(target, injectedElem, elem);
 			} else {
 				// empty target selector by default
 				target.emptyTarget = target.emptyTarget ?? true;
@@ -134,10 +128,6 @@ export class DomTargeter {
 				(elem as HTMLElement).style.minHeight = '';
 			}
 		});
-
-		if (errors.length) {
-			throw new Error(errors.reduce((acc, err) => (acc += err + '\n'), '\n'));
-		}
 	}
 
 	unhideTarget = (selector: string): void => {
