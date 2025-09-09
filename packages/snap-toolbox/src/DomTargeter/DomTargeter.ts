@@ -105,7 +105,7 @@ export class DomTargeter {
 			return elems.map((elem) => ({ target, elem }));
 		});
 
-		targetElemPairs.forEach(async ({ target, elem }) => {
+		for (const { target, elem } of targetElemPairs) {
 			if (target.inject) {
 				const injectedElem = this.inject(elem, target);
 				this.targetedElems = this.targetedElems.concat(elem);
@@ -127,7 +127,7 @@ export class DomTargeter {
 			if (target.unsetTargetMinHeight && (elem as HTMLElement).style.minHeight) {
 				(elem as HTMLElement).style.minHeight = '';
 			}
-		});
+		}
 	}
 
 	unhideTarget = (selector: string): void => {
