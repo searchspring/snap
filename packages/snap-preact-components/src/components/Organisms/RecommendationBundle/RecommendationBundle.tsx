@@ -21,7 +21,7 @@ import { BundledCTA } from './BundleCTA';
 import { useIntersection } from '../../../hooks';
 
 const CSS = {
-	recommendationBundle: ({ slidesPerView, spaceBetween, ctaInline, vertical, separatorIcon }: any) =>
+	recommendationBundle: ({ slidesPerView, spaceBetween, ctaInline, vertical, separatorIcon, hasSeed, hideSeed, carouselEnabled, limit }: any) =>
 		css({
 			'.ss__recommendation-bundle__wrapper': {
 				display: 'flex',
@@ -40,8 +40,8 @@ const CSS = {
 			},
 
 			'.ss__recommendation-bundle__wrapper__cta': {
-				width: vertical ? '100%' : `${!ctaInline ? '100%' : `calc(100% / ${slidesPerView + 1})`}`,
-
+				width: vertical ? '100%' : `${!ctaInline ? '100%' : `calc(100% / ${(carouselEnabled ? slidesPerView : limit) + 1})`}`,
+				flexShrink: 0,
 				textAlign: 'center',
 
 				'& .ss__recommendation-bundle__wrapper__cta__subtotal__prices': {
@@ -51,7 +51,7 @@ const CSS = {
 
 			'.ss__recommendation-bundle__wrapper__carousel': {
 				boxSizing: 'border-box',
-				width: vertical ? '100%' : `calc(calc(100% / ${slidesPerView + (!ctaInline ? 0 : 1)}) * ${slidesPerView - 1})`,
+				width: vertical ? '100%' : `calc(calc(100% / ${slidesPerView + (!ctaInline ? 0 : 1)}) * ${slidesPerView - (hasSeed && !hideSeed ? 1 : 0)})`,
 			},
 
 			'.ss__recommendation-bundle__wrapper--seed-in-carousel': {
@@ -279,9 +279,14 @@ export const RecommendationBundle = observer((properties: RecommendationBundlePr
 		slidesPerView = resultsToRender.length;
 	}
 
+	const hasSeed = Boolean(resultsToRender.filter((result) => result.bundleSeed == true).length);
+
 	const styling: { css?: StylingCSS } = {};
 	if (!disableStyles) {
-		styling.css = [CSS.recommendationBundle({ slidesPerView, spaceBetween, ctaInline, vertical, separatorIcon }), style];
+		styling.css = [
+			CSS.recommendationBundle({ slidesPerView, spaceBetween, ctaInline, vertical, separatorIcon, hasSeed, hideSeed, carouselEnabled, limit }),
+			style,
+		];
 	} else if (style) {
 		styling.css = [style];
 	}
@@ -308,22 +313,22 @@ export const RecommendationBundle = observer((properties: RecommendationBundlePr
 
 	if (carouselEnabled) {
 		Object.keys(props.breakpoints!).forEach((breakpoint: any) => {
-			const obj = props.breakpoints![breakpoint];
+			const currentBreakpoint = props.breakpoints![breakpoint];
 
 			// fallback in case slides per view/group were not provided in breakpoint...
-			const objSlidesPerView = obj.carousel?.slidesPerView || obj.slidesPerView || 2;
-			const objSlidesPerGroup = obj.carousel?.slidesPerGroup || obj.slidesPerGroup || 2;
+			const currentBreakpointSlidesPerView = currentBreakpoint.carousel?.slidesPerView || currentBreakpoint.slidesPerView || 2;
+			const currentBreakpointSlidesPerGroup = currentBreakpoint.carousel?.slidesPerGroup || currentBreakpoint.slidesPerGroup || 2;
 
-			let newSlidesPerView = objSlidesPerView;
-			let newSlidesPerGroup = objSlidesPerGroup;
+			let newSlidesPerView = currentBreakpointSlidesPerView;
+			let newSlidesPerGroup = currentBreakpointSlidesPerGroup;
 
-			const resultCount = seedInCarousel ? resultsToRender.length : resultsToRender.length - 1;
+			const resultCount = !hasSeed || seedInCarousel ? resultsToRender.length : resultsToRender.length - 1;
 
 			if (resultCount) {
-				if (resultCount >= objSlidesPerView) {
-					newSlidesPerView = objSlidesPerView - (!seedInCarousel ? 1 : 0);
+				if (resultCount >= currentBreakpointSlidesPerView) {
+					newSlidesPerView = currentBreakpointSlidesPerView - (!seedInCarousel && hasSeed ? 1 : 0);
 					if (!seedInCarousel) {
-						newSlidesPerGroup = objSlidesPerGroup! - 1 || 1;
+						newSlidesPerGroup = currentBreakpointSlidesPerGroup! - 1 || 1;
 					}
 				} else {
 					(newSlidesPerView = resultCount), (newSlidesPerGroup = resultCount);
