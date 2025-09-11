@@ -68,7 +68,17 @@ export default {
 			},
 		},
 		title: {
-			description: 'recommendation title',
+			description: 'recommendation bundle title',
+			table: {
+				type: {
+					summary: 'string | JSX Element',
+				},
+				defaultValue: { summary: '' },
+			},
+			control: { type: 'text' },
+		},
+		description: {
+			description: 'recommendation bundle description',
 			table: {
 				type: {
 					summary: 'string | JSX Element',

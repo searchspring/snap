@@ -153,6 +153,9 @@ export const RecommendationBundle = observer((properties: RecommendationBundlePr
 		ctaButtonSuccessText: 'Bundle Added!',
 		ctaButtonSuccessTimeout: 2000,
 		ctaInline: true,
+		title: properties.controller?.store?.profile?.display?.templateParameters?.title,
+		description: properties.controller?.store?.profile?.display?.templateParameters?.description,
+
 		// global theme
 		...globalTheme?.components?.recommendationBundle,
 		...properties,
@@ -172,6 +175,7 @@ export const RecommendationBundle = observer((properties: RecommendationBundlePr
 
 	const {
 		title,
+		description,
 		controller,
 		breakpoints,
 		results,
@@ -438,7 +442,11 @@ export const RecommendationBundle = observer((properties: RecommendationBundlePr
 								<span>{title}</span>
 							</h3>
 						)}
-
+						{description && (
+							<h4 className="ss__recommendation-bundle__description">
+								<span>{description}</span>
+							</h4>
+						)}
 						<div
 							className={classnames('ss__recommendation-bundle__wrapper', {
 								'ss__recommendation-bundle__wrapper--seed-in-carousel': seedInCarousel,
@@ -554,6 +562,7 @@ export interface RecommendationBundleProps extends ComponentProps {
 	controller: RecommendationController;
 	onAddToCart: (e: MouseEvent, items: Product[]) => void;
 	title?: JSX.Element | string;
+	description?: JSX.Element | string;
 	breakpoints?: BreakpointsProps;
 	resultComponent?: JSX.Element;
 	preselectedCount?: number;

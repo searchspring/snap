@@ -100,10 +100,17 @@ The `nextButton` prop  is a sub prop under the `carousel` prop. It specifies the
 ```
 
 ### title
-The `title` prop specifies the carousel title
+The `title` prop specifies the bundle title
 
 ```jsx
 <RecommendationBundle controller={controller} onAddToCart={(e, items)=>{console.log(items)}} title={'Recommended Bundle'} />
+```
+
+### description
+The `description` prop specifies the bundle description
+
+```jsx
+<RecommendationBundle controller={controller} onAddToCart={(e, items)=>{console.log(items)}} description={'Recommended Bundle products are so awesome!'} />
 ```
 
 ### resultComponent

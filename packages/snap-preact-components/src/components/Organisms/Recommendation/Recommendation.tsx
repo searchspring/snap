@@ -38,6 +38,9 @@ export const Recommendation = observer((properties: RecommendationProps): JSX.El
 			: JSON.parse(JSON.stringify(defaultCarouselBreakpoints)),
 		pagination: false,
 		loop: true,
+		title: properties.controller?.store?.profile?.display?.templateParameters?.title,
+		description: properties.controller?.store?.profile?.display?.templateParameters?.description,
+
 		// global theme
 		...globalTheme?.components?.recommendation,
 		...properties,
@@ -57,6 +60,7 @@ export const Recommendation = observer((properties: RecommendationProps): JSX.El
 
 	const {
 		title,
+		description,
 		controller,
 		children,
 		breakpoints,
@@ -142,6 +146,8 @@ export const Recommendation = observer((properties: RecommendationProps): JSX.El
 				{isVisible ? (
 					<RecommendationProfileTracker controller={controller}>
 						{title && <h3 className="ss__recommendation__title">{title}</h3>}
+						{description && <h4 className="ss__recommendation__description">{description}</h4>}
+
 						<Carousel
 							prevButton={prevButton}
 							nextButton={nextButton}

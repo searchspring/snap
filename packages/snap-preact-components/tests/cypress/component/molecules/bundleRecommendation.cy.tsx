@@ -147,12 +147,14 @@ describe('RecommendationBundle Component', async () => {
 			});
 	});
 
-	it('can use title prop', () => {
+	it('can use title & description prop', () => {
 		const title = 'some custom title';
-		mount(<RecommendationBundle controller={controller} title={title} onAddToCart={cy.stub().as('onAddToCart')} />);
+		const description = 'some custom description';
+		mount(<RecommendationBundle controller={controller} title={title} description={description} onAddToCart={cy.stub().as('onAddToCart')} />);
 
 		cy.get('.ss__recommendation-bundle').should('exist');
 		cy.get('.ss__recommendation-bundle__title').should('exist').should('have.text', title);
+		cy.get('.ss__recommendation-bundle__description').should('exist').should('have.text', description);
 	});
 
 	it('can use vertical prop', () => {
