@@ -222,7 +222,7 @@ export const RecommendationBundle = observer((properties: RecommendationBundlePr
 	let resultsToRender: Product[] = results || controller.store?.results;
 
 	if (limit) {
-		resultsToRender = resultsToRender.slice(0, hideSeed ? limit + 1 : limit);
+		resultsToRender = resultsToRender.slice(0, hideSeed && resultsToRender.filter((result) => result.bundleSeed == true).length ? limit + 1 : limit);
 	}
 
 	const cartStore = controller.store.cart;

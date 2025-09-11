@@ -50,7 +50,7 @@ const theme = {
 let controller: RecommendationController;
 
 describe('RecommendationBundle Component', async () => {
-	before(async () => {
+	beforeEach(async () => {
 		cy.intercept('*recommend*', json);
 		cy.intercept('*profile*', profile);
 
@@ -89,6 +89,19 @@ describe('RecommendationBundle Component', async () => {
 			'have.text',
 			results.filter((r) => r.bundleSeed).pop()!.mappings.core?.name
 		);
+	});
+
+	it('ensure the limit is correct, when the seed is hidden', () => {
+		const carouselProps = {
+			enabled: false,
+		};
+		mount(
+			<RecommendationBundle controller={controller} hideSeed={true} carousel={carouselProps} limit={3} onAddToCart={cy.stub().as('onAddToCart')} />
+		);
+
+		cy.get('.ss__recommendation-bundle').should('exist');
+		cy.get('.ss__recommendation-bundle .ss__recommendation-bundle__wrapper__selector--seed').should('not.exist');
+		cy.get('.ss__recommendation-bundle .ss__result').should('have.length', 3);
 	});
 
 	it('can use onAddToCart prop', () => {
