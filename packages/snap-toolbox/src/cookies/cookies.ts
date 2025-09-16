@@ -1,4 +1,4 @@
-import { featureFlags } from '@searchspring/snap-toolbox';
+import { featureFlags } from '../featureFlags/featureFlags';
 export const cookies: Cookies = {
 	set: (name: string, val: string, sameSite?: string, expires?: number, domain?: string): void => {
 		if (featureFlags.cookies) {
