@@ -63,7 +63,11 @@ function configureIntegratedSpellCorrection(config: SnapConfig) {
 
 function configureTracking(config: SnapConfig) {
 	// Searchspring's Shopify Web Pixel App compatibility
-	const webPixel = window.sessionStorage?.getItem(SHOPIFY_WEBPIXEL_STORAGE_KEY);
+	let webPixel;
+	try {
+		webPixel = window.sessionStorage?.getItem(SHOPIFY_WEBPIXEL_STORAGE_KEY);
+	} catch (e) {}
+
 	if (webPixel) {
 		try {
 			const webPixelData = JSON.parse(webPixel);
