@@ -298,7 +298,7 @@ const config: RecommendationControllerConfig = {
 const snapInstance = Snapify.recommendation(config);
 
 export const Default = (props: RecommendationBundleProps, { loaded: { controller } }: { loaded: { controller: RecommendationController } }) => {
-	return <RecommendationBundle {...props} controller={controller} results={controller.store.results.reverse()} />;
+	return <RecommendationBundle {...props} controller={controller} results={controller.store.results} />;
 };
 
 Default.loaders = [
