@@ -742,4 +742,305 @@ describe('DomTargeter', () => {
 
 		expect(document.querySelector('#findMe')?.innerHTML).toBe('<div id="lastThing">tada</div><div id="newThing">tada</div>');
 	});
+
+	it('handles sync onTarget function errors without stopping other elements', () => {
+		const consoleSpy = jest.spyOn(console, 'error').mockImplementation(() => {});
+		const successfulOnTarget = jest.fn();
+
+		const dom = createDocument(`
+			<div id="content">
+				<div class="first"></div>
+				<div class="second"></div>
+				<div class="third"></div>
+			</div>
+		`);
+
+		const document = dom.window.document;
+
+		new DomTargeter(
+			[
+				{
+					selector: '.first',
+				},
+				{
+					selector: '.second',
+				},
+				{
+					selector: '.third',
+				},
+			],
+			(target: Target, elem: Element) => {
+				if (elem.className === 'second') {
+					// This should throw an error
+					throw new Error('Sync onTarget error for second element');
+				}
+				// This should succeed for first and third elements
+				successfulOnTarget(elem.className);
+			},
+			document
+		);
+
+		// Should have been called twice (first and third elements)
+		expect(successfulOnTarget).toHaveBeenCalledTimes(2);
+		expect(successfulOnTarget).toHaveBeenCalledWith('first');
+		expect(successfulOnTarget).toHaveBeenCalledWith('third');
+
+		// Should have logged the error for the second element
+		expect(consoleSpy).toHaveBeenCalledWith('DomTargeter retarget failure:', expect.any(Error));
+		expect(consoleSpy).toHaveBeenCalledTimes(1);
+
+		consoleSpy.mockRestore();
+	});
+
+	it('handles async onTarget function errors without stopping other elements', async () => {
+		const consoleSpy = jest.spyOn(console, 'error').mockImplementation(() => {});
+		const successfulOnTarget = jest.fn();
+
+		const dom = createDocument(`
+			<div id="content">
+				<div class="first"></div>
+				<div class="second"></div>
+				<div class="third"></div>
+			</div>
+		`);
+
+		const document = dom.window.document;
+
+		new DomTargeter(
+			[
+				{
+					selector: '.first',
+				},
+				{
+					selector: '.second',
+				},
+				{
+					selector: '.third',
+				},
+			],
+			async (target: Target, elem: Element) => {
+				if (elem.className === 'second') {
+					// This should throw an async error
+					throw new Error('Async onTarget error for second element');
+				}
+				// This should succeed for first and third elements
+				successfulOnTarget(elem.className);
+			},
+			document
+		);
+
+		// Wait for async operations to complete
+		await wait(100);
+
+		// Should have been called twice (first and third elements)
+		expect(successfulOnTarget).toHaveBeenCalledTimes(2);
+		expect(successfulOnTarget).toHaveBeenCalledWith('first');
+		expect(successfulOnTarget).toHaveBeenCalledWith('third');
+
+		// Should have logged the async error for the second element
+		expect(consoleSpy).toHaveBeenCalledWith('DomTargeter onTarget async failure:', expect.any(Error));
+		expect(consoleSpy).toHaveBeenCalledTimes(1);
+
+		consoleSpy.mockRestore();
+	});
+
+	it('handles sync onTarget function errors with injection', () => {
+		const consoleSpy = jest.spyOn(console, 'error').mockImplementation(() => {});
+		const successfulOnTarget = jest.fn();
+
+		const dom = createDocument(`
+			<div id="content">
+				<div class="first"></div>
+				<div class="second"></div>
+			</div>
+		`);
+
+		const document = dom.window.document;
+
+		new DomTargeter(
+			[
+				{
+					selector: '.first',
+					inject: {
+						action: 'append',
+						element: () => {
+							const div = document.createElement('div');
+							div.className = 'injected-first';
+							return div;
+						},
+					},
+				},
+				{
+					selector: '.second',
+					inject: {
+						action: 'append',
+						element: () => {
+							const div = document.createElement('div');
+							div.className = 'injected-second';
+							return div;
+						},
+					},
+				},
+			],
+			(target: Target, elem: Element, originalElem?: Element) => {
+				if (elem.className === 'injected-second') {
+					// This should throw an error for the injected second element
+					throw new Error('Sync onTarget error for injected second element');
+				}
+				// This should succeed for the injected first element
+				successfulOnTarget(elem.className, originalElem?.className);
+			},
+			document
+		);
+
+		// Should have been called once (first element)
+		expect(successfulOnTarget).toHaveBeenCalledTimes(1);
+		expect(successfulOnTarget).toHaveBeenCalledWith('injected-first', 'first');
+
+		// Should have logged the error for the second element
+		expect(consoleSpy).toHaveBeenCalledWith('DomTargeter retarget failure:', expect.any(Error));
+		expect(consoleSpy).toHaveBeenCalledTimes(1);
+
+		// Both elements should still be injected despite the error
+		expect(document.querySelector('.injected-first')).not.toBeNull();
+		expect(document.querySelector('.injected-second')).not.toBeNull();
+
+		consoleSpy.mockRestore();
+	});
+
+	it('handles async onTarget function errors with injection', async () => {
+		const consoleSpy = jest.spyOn(console, 'error').mockImplementation(() => {});
+		const successfulOnTarget = jest.fn();
+
+		const dom = createDocument(`
+			<div id="content">
+				<div class="first"></div>
+				<div class="second"></div>
+			</div>
+		`);
+
+		const document = dom.window.document;
+
+		new DomTargeter(
+			[
+				{
+					selector: '.first',
+					inject: {
+						action: 'append',
+						element: () => {
+							const div = document.createElement('div');
+							div.className = 'injected-first';
+							return div;
+						},
+					},
+				},
+				{
+					selector: '.second',
+					inject: {
+						action: 'append',
+						element: () => {
+							const div = document.createElement('div');
+							div.className = 'injected-second';
+							return div;
+						},
+					},
+				},
+			],
+			async (target: Target, elem: Element, originalElem?: Element) => {
+				if (elem.className === 'injected-second') {
+					// This should throw an async error for the injected second element
+					throw new Error('Async onTarget error for injected second element');
+				}
+				// This should succeed for the injected first element
+				successfulOnTarget(elem.className, originalElem?.className);
+			},
+			document
+		);
+
+		// Wait for async operations to complete
+		await wait(100);
+
+		// Should have been called once (first element)
+		expect(successfulOnTarget).toHaveBeenCalledTimes(1);
+		expect(successfulOnTarget).toHaveBeenCalledWith('injected-first', 'first');
+
+		// Should have logged the async error for the second element
+		expect(consoleSpy).toHaveBeenCalledWith('DomTargeter onTarget async failure:', expect.any(Error));
+		expect(consoleSpy).toHaveBeenCalledTimes(1);
+
+		// Both elements should still be injected despite the error
+		expect(document.querySelector('.injected-first')).not.toBeNull();
+		expect(document.querySelector('.injected-second')).not.toBeNull();
+
+		consoleSpy.mockRestore();
+	});
+
+	it('handles mixed sync and async onTarget function errors', async () => {
+		const consoleSpy = jest.spyOn(console, 'error').mockImplementation(() => {});
+		const successfulOnTarget = jest.fn();
+
+		const dom = createDocument(`
+			<div id="content">
+				<div class="sync-success"></div>
+				<div class="sync-error"></div>
+				<div class="async-success"></div>
+				<div class="async-error"></div>
+			</div>
+		`);
+
+		const document = dom.window.document;
+
+		new DomTargeter(
+			[
+				{
+					selector: '.sync-success',
+				},
+				{
+					selector: '.sync-error',
+				},
+				{
+					selector: '.async-success',
+				},
+				{
+					selector: '.async-error',
+				},
+			],
+			(target: Target, elem: Element) => {
+				const className = elem.className;
+
+				if (className === 'sync-error') {
+					throw new Error('Sync error');
+				}
+
+				if (className === 'async-error') {
+					return Promise.reject(new Error('Async error'));
+				}
+
+				if (className === 'async-success') {
+					return Promise.resolve().then(() => {
+						successfulOnTarget(className);
+					});
+				}
+
+				// sync-success
+				successfulOnTarget(className);
+			},
+			document
+		);
+
+		// Wait for async operations to complete
+		await wait(100);
+
+		// Should have been called twice (sync-success and async-success)
+		expect(successfulOnTarget).toHaveBeenCalledTimes(2);
+		expect(successfulOnTarget).toHaveBeenCalledWith('sync-success');
+		expect(successfulOnTarget).toHaveBeenCalledWith('async-success');
+
+		// Should have logged both sync and async errors
+		expect(consoleSpy).toHaveBeenCalledWith('DomTargeter retarget failure:', expect.any(Error));
+		expect(consoleSpy).toHaveBeenCalledWith('DomTargeter onTarget async failure:', expect.any(Error));
+		expect(consoleSpy).toHaveBeenCalledTimes(2);
+
+		consoleSpy.mockRestore();
+	});
 });
