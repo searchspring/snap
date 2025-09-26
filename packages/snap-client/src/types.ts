@@ -11,6 +11,7 @@ export type HTTPHeaders = { [key: string]: string };
 
 type RequesterConfig<T> = {
 	origin?: string;
+	alternateOrigin?: string;
 	headers?: HTTPHeaders;
 	cache?: CacheConfig;
 	globals?: Partial<T>;
