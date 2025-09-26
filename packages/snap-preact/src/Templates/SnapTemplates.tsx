@@ -455,29 +455,29 @@ export function createSnapConfig(templateConfig: SnapTemplatesConfig, templatesS
 				branch: 'production',
 			},
 			bundle: {
-				SnapTemplates_Default: {
+				SnapTemplatesBundleDefault: {
 					component: 'RecommendationBundle',
 				},
-				SnapTemplates_EasyAdd: {
+				SnapTemplatesBundleEasyAdd: {
 					component: 'RecommendationBundleEasyAdd',
 				},
-				SnapTemplates_List: {
+				SnapTemplatesBundleList: {
 					component: 'RecommendationBundleList',
 				},
-				SnapTemplates_Vertical: {
+				SnapTemplatesBundleVertical: {
 					component: 'RecommendationBundleVertical',
 				},
 			},
 			default: {
-				SnapTemplates_Carousel: {
+				SnapTemplatesDefaultCarousel: {
 					component: 'Recommendation',
 				},
-				SnapTemplates_Grid: {
+				SnapTemplatesDefaultGrid: {
 					component: 'RecommendationGrid',
 				},
 			},
 			email: {
-				Email: {
+				SnapTemplatesEmailDefault: {
 					component: 'RecommendationEmail',
 				},
 			},
