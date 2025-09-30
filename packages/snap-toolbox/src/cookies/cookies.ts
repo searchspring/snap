@@ -1,7 +1,7 @@
-import { featureFlags } from '../featureFlags/featureFlags';
+import { getFlags } from '../featureFlags/featureFlags';
 export const cookies: Cookies = {
 	set: (name: string, val: string, sameSite?: string, expires?: number, domain?: string): void => {
-		if (featureFlags.cookies) {
+		if (getFlags().cookies()) {
 			sameSite = sameSite || 'Lax';
 
 			let cookie = name + '=' + encodeURIComponent(val) + ';' + 'SameSite=' + sameSite + ';path=/;';
@@ -24,7 +24,7 @@ export const cookies: Cookies = {
 		}
 	},
 	get: (name: string): string => {
-		if (featureFlags.cookies) {
+		if (getFlags().cookies()) {
 			name = name + '=';
 			const ca = window.document.cookie.split(';');
 
@@ -44,7 +44,7 @@ export const cookies: Cookies = {
 		return '';
 	},
 	unset: (name: string, domain?: string): void => {
-		if (!featureFlags.cookies) {
+		if (!getFlags().cookies()) {
 			return;
 		}
 

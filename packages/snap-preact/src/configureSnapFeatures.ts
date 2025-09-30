@@ -80,6 +80,8 @@ function configureTracking(config: SnapConfig) {
 				config.tracker.config = config.tracker.config || {};
 				config.tracker.config.doNotTrack = (config.tracker.config.doNotTrack || []).concat(doNotTrack);
 			}
-		} catch (e) {}
+		} catch {
+			// storage not enabled
+		}
 	}
 }

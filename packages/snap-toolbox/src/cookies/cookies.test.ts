@@ -1,4 +1,10 @@
+import { getFlags } from '../featureFlags/featureFlags';
 import { cookies } from './cookies';
+
+Object.defineProperty(global.window.navigator, 'cookieEnabled', {
+	writable: true,
+	value: true,
+});
 
 describe('cookies', () => {
 	afterEach(() => {
@@ -45,5 +51,18 @@ describe('cookies', () => {
 		const valueWithSpecialChars = '?key=value&something=other;stuff=here';
 		document.cookie = `testCookie=${encodeURIComponent(valueWithSpecialChars)}`;
 		expect(cookies.get('testCookie')).toBe(valueWithSpecialChars);
+	});
+
+	it('cant do anything if cookies feature flag is off', () => {
+		(global.window as any).navigator.cookieEnabled = false;
+
+		expect(getFlags().cookies()).toEqual(false);
+
+		expect(cookies.get('testCookie')).toBe('');
+
+		expect(() => cookies.set('testCookie', 'testValue')).not.toThrow();
+		expect(cookies.get('testCookie')).toBe('');
+
+		expect(() => cookies.unset('testCookie')).not.toThrow();
 	});
 });
