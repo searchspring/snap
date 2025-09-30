@@ -66,7 +66,9 @@ function configureTracking(config: SnapConfig) {
 	let webPixel;
 	try {
 		webPixel = window.sessionStorage?.getItem(SHOPIFY_WEBPIXEL_STORAGE_KEY);
-	} catch (e) {}
+	} catch {
+		// storage not enabled
+	}
 
 	if (webPixel) {
 		try {
