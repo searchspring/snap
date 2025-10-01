@@ -147,7 +147,7 @@ export interface ApiConfigurationParameters {
 	mode?: keyof typeof AppMode | AppMode;
 	initiator?: string;
 	origin?: string; // override url origin
-	alternateOrigin?: string; // override url origin
+	secondaryOrigin?: string; // override url origin
 	fetchApi?: FetchAPI; // override for fetch implementation
 	queryParamsStringify?: (params: HTTPQuery) => string; // stringify function for query strings
 	headers?: HTTPHeaders; //header params we want to use on every request
@@ -182,8 +182,8 @@ export class ApiConfiguration {
 		return this.config.origin || '';
 	}
 
-	get alternateOrigin(): string {
-		return this.config.alternateOrigin || '';
+	get secondaryOrigin(): string {
+		return this.config.secondaryOrigin || '';
 	}
 
 	get initiator(): string {

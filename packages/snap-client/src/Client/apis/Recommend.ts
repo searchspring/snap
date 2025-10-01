@@ -43,7 +43,7 @@ export class RecommendAPI extends API {
 		const response = await this.request<ProfileResponseModel>(
 			{
 				path: '/api/personalized-recommendations/profile.json',
-				origin: this.configuration.alternateOrigin || undefined, // use alternate origin for profile requests
+				origin: this.configuration.secondaryOrigin || undefined, // use alternate origin for profile requests
 				method: 'GET',
 				headers: headerParameters,
 				query: queryParameters,
