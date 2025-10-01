@@ -11,7 +11,7 @@ html {
 body {
 	margin: 0;
 	background: #fafafa;
-	font-family: 'Ubuntu', sans-serif;
+	font-family: 'Inter', sans-serif;
 	-webkit-font-smoothing: antialiased;
 }
 
@@ -35,10 +35,6 @@ a {
 
 a:hover {
 	text-decoration: underline;
-}
-
-p, table {
-	font-family: 'Roboto', sans-serif;
 }
 
 table {
@@ -108,6 +104,9 @@ table td {
 #navigation {
 	overflow-y: auto;
     max-height: calc(100% - 170px);
+	display: flex;
+	flex-direction: column;
+	height: inherit;
 }
 
 #navigation ul {
@@ -120,7 +119,7 @@ table td {
 	color: inherit;
 	display: inline-block;
 	width: calc(100% - 20px);
-	padding: 5px 10px;
+	padding: 3px 10px;
 	font-size: 0.9em;
 }
 
@@ -226,9 +225,7 @@ table td {
 }
 
 .section:last-child {
-	position: absolute;
-    bottom: 0;
-    width: 100%;
+	margin-top: auto;
 }
 
 .section .links {
@@ -237,14 +234,10 @@ table td {
 
 .section .links .sublinks {
 	font-size: 90%;
-	margin: 0 10px;
 }
 
 pre {
-	font-family: "SFMono-Regular",Consolas,"Liberation Mono",Menlo,Courier,monospace;
-	padding: 16px;
 	overflow: auto;
-	line-height: 1.2;
 	background-color: #fafafa;
 	border-radius: 0px;
 	border: 1px solid #eee;

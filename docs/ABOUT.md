@@ -1,4 +1,4 @@
-## What is Snap?
+# Snap Documentation
 
 Snap is not an acronym! Snap is an open source SDK for building e-commerce experiences powered by Searchspring.
 
@@ -6,7 +6,7 @@ The SDK includes multiple core packages published to npm that in combination wit
 
 ## Getting Started
 
-Check out the [Getting Started](https://searchspring.github.io/snap/#/getting-started) guide to jump right in!
+Check out the [Setup](https://searchspring.github.io/snap/setup) and [Getting Started](https://searchspring.github.io/snap/getting-started) guides to jump right in!
 
 ## Contributing
 
@@ -15,8 +15,3 @@ Snap is open source! The repository can be found on [Github](https://github.com/
 We invite your participation through Github issues, discussions and pull requests! 
 
 Please reference Searchspring's [Community Contribution Guidelines](https://github.com/searchspring/community/blob/main/CONTRIBUTING.md) before contributing.
-
-
-## Documentation
-
-For all Snap documentation, see the [Snap Docs](https://searchspring.github.io/snap/).

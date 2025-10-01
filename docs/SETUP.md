@@ -5,7 +5,6 @@ To create a new project, we recommend using the [Snapfu CLI](https://www.npmjs.c
 
 Snapfu is a CLI interface for creating a Snap project from a template. You do not need to utilize Snapfu to develop using Snap, but it does simplify the process and provides additional features. 
 
-<!-- TODO: Add Snapfu docs, mention and link here -->
 
 ## Install
 

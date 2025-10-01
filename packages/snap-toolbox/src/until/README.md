@@ -1,4 +1,4 @@
-## until
+# until
 This utility function resolves the provided parameter when it becomes truthy.
 
 The function takes a single required parameter containing any function, object, or primative you are awaiting to resolve. 

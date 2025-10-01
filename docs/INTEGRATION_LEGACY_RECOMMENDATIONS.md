@@ -1,9 +1,9 @@
 ## Recommendations Integration (Legacy)
 
-For integrations using Snap `v0.60.0` and newer, please reference the updated [`integration docs`](https://github.com/searchspring/snap/blob/main/docs/INTEGRATION_RECOMMENDATIONS.md).
+For integrations using Snap `v0.60.0` and newer, please reference the updated [`integration docs`](https://searchspring.github.io/snap/snap-recommendations).
 
 
-It is recommended to utilize the [`RecommendationInstantiator`](https://github.com/searchspring/snap/blob/main/packages/snap-preact/src/Instantiators/README.md) for integration of product recommendations. This method allows recommendations to be placed anywhere on the site with a single script block (requires the `bundle.js` script also).
+It is recommended to utilize the [`RecommendationInstantiator`](https://searchspring.github.io/snap/reference-snap-preact-instantiators) for integration of product recommendations. This method allows recommendations to be placed anywhere on the site with a single script block (requires the `bundle.js` script also).
 
 ```html
 <script type="searchspring/personalized-recommendations" profile="recently-viewed">
@@ -30,12 +30,12 @@ Profile configurations are applied to recommendation via script context variable
 | options.branch | template branch overwrite | all | optional branch overwrite for recommendations template (advanced usage) |
 | options.filters | array of filters | all | optional recommendation filters |
 | options.query | string | all | query to search |
-| options.realtime | boolean | all | optional update recommendations if cart contents change (requires [cart attribute tracking](https://github.com/searchspring/snap/blob/main/docs/INTEGRATION_TRACKING.md)) |
+| options.realtime | boolean | all | optional update recommendations if cart contents change (requires [cart attribute tracking](https://searchspring.github.io/snap/snap-tracking#cart-attribute-tracking)) |
 | options.blockedItems | array of strings | all | SKU values to identify which products to exclude from the response |
-| options.batched | boolean (default: `true`)| all | only applies to recommendation context, optional disable profile from being batched in a single request, can also be set globally [via config](https://github.com/searchspring/snap/tree/main/packages/snap-controller/src/Recommendation) | 
+| options.batched | boolean (default: `true`)| all | only applies to recommendation context, optional disable profile from being batched in a single request, can also be set globally [via config](https://searchspring.github.io/snap/reference-controller-recommendation#recommendationcontrollerconfig) | 
 | options.dedupe | boolean (default: `true`) | all | specify wether or not the profile should deduplicate products when in a batch |
 | options.order | number | all | optional order number for recommendation params to be added to the batched request. Profiles that do not specify an order will be placed at the end, in the occurrence they appear in the DOM.
-| options.limit | number (default: 20, max: 20) | all | optional maximum number of results to display, can also be set globally [via config globals](https://github.com/searchspring/snap/tree/main/packages/snap-controller/src/Recommendation) |
+| options.limit | number (default: 20, max: 20) | all | optional maximum number of results to display, can also be set globally [via config globals](https://searchspring.github.io/snap/reference-controller-recommendation#recommendationcontrollerconfig) |
 
 ## Batching and Ordering
 By default, recommendation profile results are fetched in the same API request (batch), this is done in an effort to prevent the display of duplicate products across multiple profiles. The order of the profiles in the DOM determines the priority of results for de-duplication (best recommendations). If you wish to change the order, an `order` value can be provided (lowest value has highest priority). For some profiles (like product bundles) it is important that they receive the best suggested products prior to de-duplication, for these, the `order` should be set manually so that de-duplication does not occur.

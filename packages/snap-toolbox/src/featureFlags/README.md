@@ -1,4 +1,4 @@
-## Feature Flags
+# Feature Flags
 This utility provides a way to check for browser feature support.
 
 ```typescript

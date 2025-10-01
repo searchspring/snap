@@ -29,7 +29,7 @@ Therefore you will require a method for switching the front-end script src to po
 - Front-end checking the userAgent and serving the appropriate version of the build files.
 - Lambda function serving the appropriate version of the build files based on the userAgent.
 
-The following is an example of a regex that would match the versions of the browserlist-config-snap@1.0.7 rules:
+The following is an example of a regex that would match the versions of the `browserlist-config-snap@1.0.7` rules:
 
 ```js
 module.exports = /((CPU[ +]OS|iPhone[ +]OS|CPU[ +]iPhone|CPU IPhone OS)[ +]+(14|(1[5-9]|[2-9]\d|\d{3,})|15|(1[6-9]|[2-9]\d|\d{3,}))[_.]\d+(?:[_.]\d+)?)|((?:Chrome).*OPR\/(77|(7[8-9]|[8-9]\d|\d{3,}))\.\d+\.\d+)|(Edge\/(91|(9[2-9]|\d{3,}))(?:\.\d+)?)|((Chromium|Chrome)\/(91|(9[2-9]|\d{3,}))\.\d+(?:\.\d+)?)|(Version\/(14|(1[5-9]|[2-9]\d|\d{3,})|15|(1[6-9]|[2-9]\d|\d{3,}))\.\d+(?:\.\d+)? Safari\/)|(Firefox\/(74|(7[5-9]|[8-9]\d|\d{3,}))\.\d+\.\d+)|(Firefox\/(74|(7[5-9]|[8-9]\d|\d{3,}))\.\d+(pre|[ab]\d+[a-z]*)?)/;
@@ -49,7 +49,7 @@ To host your own build files follow the below steps in your project.
 2. In your terminal run the command `npm run build`, will output build files to `./dist` 
 3. Navigate to `./dist` and copy the generated build files 
 4. Go to the codebase of your E-commerce platform (Shopify, Bigcommerce, Magento, etc.) and copy/paste the generated build files in a directory (most platforms have an ***assets*** directory) 
-5. On the frontend of the site, add a script block as outlined in the [integration](https://github.com/searchspring/snap/blob/main/docs/INTEGRATION.md) section - be sure to change the `src` attribute to point to the `bundle.js` file and align the URL with your self-hosted build files (eg: /assets/bundle.js)
+5. On the frontend of the site, add a script block as outlined in the [integration](https://searchspring.github.io/snap/build-deploy-integration) section - be sure to change the `src` attribute to point to the `bundle.js` file and align the URL with your self-hosted build files (eg: /assets/bundle.js)
 
 <!-- TODO: Link to playform specific install docs and update here -->
 

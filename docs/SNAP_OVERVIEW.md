@@ -15,6 +15,7 @@ Let's create the bare minimum configuration to create a search controller and re
 
 ```ts
 // src/index.ts
+import { Snap } from '@searchspring/snap-preact';
 
 const snap = new Snap({
     client: {
@@ -44,13 +45,13 @@ const snap = new Snap({
 
 Let's go over our `Content` component. This is considered a root level component since it is being rendered onto the page using a targeter.
 
-We'll want to create a `ControllerProvider` such that any subcomponents can have a reference to the controller via its props. The [@searchspring/snap-preact-components](https://github.com/searchspring/snap/tree/main/packages/snap-preact-components) package contains a `ControllerProvider` that we can utilize.
+We'll want to create a provider such that any subcomponents can have a reference to the controller via its props. The `@searchspring/snap-preact-components` package contains a `ControllerProvider` that we can utilize.
 
 ```tsx
 // src/components/Content/Content.tsx
 
 import { observer } from 'mobx-react';
-import { withController, InlineBanner, Result } from '@searchspring/snap-preact-components';
+import { ControllerProvider } from '@searchspring/snap-preact-components';
 
 export const Content = observer((props: { controller: SearchController }) => {
     const { controller } = props;
@@ -70,6 +71,8 @@ Finally, we'll want to add the `observer` higher order component to make it reac
 ```tsx
 // src/components/Content/Content.tsx
 
+import { withController, InlineBanner, Result } from '@searchspring/snap-preact-components';
+
 const Results = withController(observer((props) => {
     const { controller } = props;
 
@@ -86,3 +89,7 @@ const Results = withController(observer((props) => {
     );
 }));
 ```
+
+## Preact Component Library
+
+Snap provides an extensive [library of Preact components](https://searchspring.github.io/snap/preact-components) that can be used exclusively or in combination with custom components throughout your project. 

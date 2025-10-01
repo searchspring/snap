@@ -1,6 +1,6 @@
 # Search
 
-To set up Search using Snap, we'll need to define a search controller in our Snap configuration. See SearchController section for all available configuration options.
+To set up Search using Snap, we'll need to define a search controller in our Snap configuration. See [SearchController reference](https://searchspring.github.io/snap/reference-controller-search) for all available configuration options.
 
 
 ```ts
@@ -167,7 +167,7 @@ export class SearchHeader extends Component {
 
 ### SearchController.store.pagination
 
-The `pagination` property is not only used for information about the current query, but also contains everything needed for handling pagination of a query that yields multiple pages. Invoking the `getPages` method will retrieve the specified number of page objects. For more about the pagination store, checkout the [Search Controller docs](#/package-controller-search).
+The `pagination` property is not only used for information about the current query, but also contains everything needed for handling pagination of a query that yields multiple pages. Invoking the `getPages` method will retrieve the specified number of page objects. For more about the pagination store, checkout the [Search Controller reference](https://searchspring.github.io/snap/reference-controller-search).
 
 ```jsx
 @withController

@@ -1,4 +1,4 @@
-## Filters
+# Filters
 Contains a collection of methods used to transform strings or numbers into common variations.
 
 ```typescript

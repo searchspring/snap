@@ -1,4 +1,4 @@
-## Chars Params
+# Chars Params
 This utility function returns the length (in bytes) of a given object. 
 
 ```typescript

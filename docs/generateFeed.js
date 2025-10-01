@@ -18,7 +18,7 @@ const OUTPUT_FILE = 'snap-docs.json';
 		const componentLibraries = [
 			{
 				name: 'Preact',
-				route: '/components-preact',
+				route: '/preact-components',
 				path: './packages/snap-preact-components/src/',
 			},
 		];
@@ -61,15 +61,22 @@ const OUTPUT_FILE = 'snap-docs.json';
 						try {
 							const markdown = fs.readFileSync(`${url}`, 'utf8');
 							if (markdown) {
-								docEntries.push({
-									name: link.label,
-									route: link.route,
-									price: 0,
-									description: markdown,
-									image: '',
-									sku: `sku${link.route}`,
-									id: link.route,
-									categoryHierarchy: `${catRoot} > ${link.hierarchyLabel || link.label}`,
+								// Parse markdown into sections
+								const sections = parseMarkdownSections(markdown, link.label, link.route);
+
+								sections.forEach((section) => {
+									docEntries.push({
+										name: section.title,
+										route: link.route + (section.anchor ? `#${section.anchor}` : ''),
+										price: 0,
+										description: section.content,
+										image: '',
+										sku: `sku${link.route}${section.anchor ? `-${section.anchor}` : ''}`,
+										id: link.route + (section.anchor ? `-${section.anchor}` : ''),
+										categoryHierarchy: `${catRoot} > ${link.hierarchyLabel || link.label}${
+											section.title !== link.label ? ` > ${section.title}` : ''
+										}`,
+									});
 								});
 							}
 						} catch (err) {
@@ -84,6 +91,86 @@ const OUTPUT_FILE = 'snap-docs.json';
 				generateLinks(link.links, `${catRoot} > ${link.label}`);
 			}
 		});
+	}
+
+	function parseMarkdownSections(markdown, fileTitle, fileRoute) {
+		const sections = [];
+		const lines = markdown.split('\n');
+		let currentSection = null;
+		let currentContent = [];
+		let sectionLevel = 0;
+
+		// Helper function to create anchor from title
+		function createAnchor(title) {
+			return title
+				.toLowerCase()
+				.replace(/[^a-z0-9\s-]/g, '')
+				.replace(/\s+/g, '-')
+				.replace(/-+/g, '-')
+				.replace(/^-|-$/g, '');
+		}
+
+		// Helper function to save current section
+		function saveCurrentSection() {
+			if (currentSection && currentContent.length > 0) {
+				sections.push({
+					title: currentSection,
+					content: currentContent.join('\n').trim(),
+					anchor: createAnchor(currentSection),
+				});
+			}
+		}
+
+		for (let i = 0; i < lines.length; i++) {
+			const line = lines[i];
+			const headingMatch = line.match(/^(#{1,6})\s+(.+)$/);
+
+			if (headingMatch) {
+				// Save previous section if it exists
+				saveCurrentSection();
+
+				// Start new section
+				const level = headingMatch[1].length;
+				const title = headingMatch[2].trim();
+
+				// Only process h1-h3 headings as main sections
+				if (level <= 3) {
+					currentSection = title;
+					currentContent = [line];
+					sectionLevel = level;
+				} else {
+					// For deeper headings, add to current section content
+					if (currentSection) {
+						currentContent.push(line);
+					}
+				}
+			} else {
+				// Add line to current section content
+				if (currentSection) {
+					currentContent.push(line);
+				} else {
+					// If we haven't found a heading yet, treat the whole file as one section
+					if (i === 0) {
+						currentSection = fileTitle;
+						currentContent = [line];
+					}
+				}
+			}
+		}
+
+		// Save the last section
+		saveCurrentSection();
+
+		// If no sections were found, treat the entire content as one section
+		if (sections.length === 0) {
+			sections.push({
+				title: fileTitle,
+				content: markdown.trim(),
+				anchor: null,
+			});
+		}
+
+		return sections;
 	}
 
 	async function findMarkdownFiles(dir) {
@@ -127,7 +214,17 @@ const OUTPUT_FILE = 'snap-docs.json';
 	async function buildComponentLibraryLinks(details) {
 		const paths = await findMarkdownFiles(details.path);
 		const links = paths.map((path) => {
-			const packagePath = path.split('/snap/packages/')[1];
+			// Handle both absolute and relative paths
+			let packagePath;
+			if (path.includes('/snap/packages/')) {
+				packagePath = path.split('/snap/packages/')[1];
+			} else if (path.includes('/packages/')) {
+				packagePath = path.split('/packages/')[1];
+			} else {
+				console.warn(`Path does not contain expected package structure: ${path}`);
+				return null;
+			}
+
 			// const [libraryDir, _, directory, type, componentName, markdownFile] = packagePath.split('/');
 			const [libraryDir, _, grouping, ...remainingPaths] = packagePath.split('/');
 			const [markdownFile, componentName, next, extra] = remainingPaths.reverse();
@@ -184,7 +281,7 @@ const OUTPUT_FILE = 'snap-docs.json';
 			label: details.name,
 			route: details.route,
 			searchable: true,
-			links,
+			links: links.filter((link) => link !== null),
 		};
 
 		return componentLibrary;

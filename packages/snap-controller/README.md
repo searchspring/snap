@@ -1,69 +1,9 @@
 # Snap Controller
 
-<a href="https://www.npmjs.com/package/@searchspring/snap-controller"><img alt="NPM Status" src="https://img.shields.io/npm/v/@searchspring/snap-controller.svg?style=flat"></a>
-
 The heart of controlling Search, Autocomplete, & Finder functionality. The Controller is responsible for tying various Snap services together.
 
+Although `@searchspring/snap-controller` is published as a standalone package, it is not intended to be used directly. Internally it is a depdancy of the `@searchspring/snap-preact` package.
 
-## Dependencies
-
-Snap Controller is a top-level package that requires the following dependencies as services:
-
-<a href="https://www.npmjs.com/package/@searchspring/snap-client"><img alt="NPM Status" src="https://img.shields.io/npm/v/@searchspring/snap-client.svg?style=flat"></a> [@searchspring/snap-client](https://github.com/searchspring/snap/tree/main/packages/snap-client)
-
-<a href="https://www.npmjs.com/package/@searchspring/snap-store-mobx"><img alt="NPM Status" src="https://img.shields.io/npm/v/@searchspring/snap-store-mobx.svg?style=flat"></a> [@searchspring/snap-store-mobx](https://github.com/searchspring/snap/tree/main/packages/snap-store-mobx)
-
-<a href="https://www.npmjs.com/package/@searchspring/snap-url-manager"><img alt="NPM Status" src="https://img.shields.io/npm/v/@searchspring/snap-url-manager.svg?style=flat"></a> [@searchspring/snap-url-manager](https://github.com/searchspring/snap/tree/main/packages/snap-url-manager)
-
-<a href="https://www.npmjs.com/package/@searchspring/snap-event-manager"><img alt="NPM Status" src="https://img.shields.io/npm/v/@searchspring/snap-event-manager.svg?style=flat"></a> [@searchspring/snap-event-manager](https://github.com/searchspring/snap/tree/main/packages/snap-event-manager)
-
-<a href="https://www.npmjs.com/package/@searchspring/snap-profiler"><img alt="NPM Status" src="https://img.shields.io/npm/v/@searchspring/snap-profiler.svg?style=flat"></a> [@searchspring/snap-profiler](https://github.com/searchspring/snap/tree/main/packages/snap-profiler)
-
-<a href="https://www.npmjs.com/package/@searchspring/snap-logger"><img alt="NPM Status" src="https://img.shields.io/npm/v/@searchspring/snap-logger.svg?style=flat"></a> [@searchspring/snap-logger](https://github.com/searchspring/snap/tree/main/packages/snap-logger)
-
-## Installation
-
-To install the `snap-controller` package and it's services:
-
-```bash
-npm install --save @searchspring/snap-controller @searchspring/snap-client @searchspring/snap-store-mobx @searchspring/snap-url-manager @searchspring/snap-event-manager @searchspring/snap-profiler @searchspring/snap-logger
-```
-
-
-## Instantiation
-Each `Controller` must be passed a configuration object as the first parameter to the constructor, and a services object (dependencies) as the second. The contents of these objects will depend on which type of `Controller` is being instantiated. For example, a `SearchController` would usually be paired with a `SearchStore` service, and would take a `SearchControllerConfig` configuration object.
-
-The complete example below shows how a `SearchController` could be instatiated, initialized and searched:
-
-```typescript
-import { Client } from '@searchspring/snap-client';
-import { SearchStore } from '@searchspring/snap-store-mobx';
-import { UrlManager, UrlTranslator } from '@searchspring/snap-url-manager';
-import { EventManager } from '@searchspring/snap-event-manager';
-import { Profiler } from '@searchspring/snap-profiler';
-import { Logger } from '@searchspring/snap-logger';
-import { Tracker } from '@searchspring/snap-tracker';
-import { SearchController } from '@searchspring/snap-controller';
-
-const configuration = {
-	id: 'search'
-};
-
-const urlManager = new UrlManager(new UrlTranslator());
-const services = {
-	client: new Client({ siteId: 'abc123' }),
-	store: new SearchStore(configuration, { urlManager }),
-	urlManager,
-	eventManager: new EventManager(),
-	profiler: new Profiler(),
-	logger: new Logger(),
-	tracker: new Tracker(),
-}
-
-const controller = new SearchController(configuration, services);
-controller.init();
-controller.search();
-```
 
 ## Configuration
 The configuration object provided during instantiation provides a way of configuring the controller for different behavior. Each controller type (`SearchController`, `AutocompleteController`, `FinderController`, etc...) has default configurations that can be modified with the instantiation configuration object. At minimum an `id` attribute is required for identifying controllers. The `id` should be unique to each *instance* of a controller.

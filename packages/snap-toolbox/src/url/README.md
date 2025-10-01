@@ -1,4 +1,4 @@
-## url
+# url
 This utility function parses a given url.
 
 ```typescript

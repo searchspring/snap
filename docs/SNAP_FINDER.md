@@ -1,6 +1,6 @@
 # Finder
 
-To set up a product Finder using Snap, we'll need to define a finder controller in our Snap configuration. See FinderController section for all available configuration options. 
+To set up a product Finder using Snap, we'll need to define a finder controller in our Snap configuration. See [FinderController reference](https://searchspring.github.io/snap/reference-controller-finder) for all available configuration options. 
 
 ## Configuration
 There are two types of Finder configurations, a Hierarchy and Non-Hierarchy. The difference is the type of field being used and how it is configured in the Searchspring Management Console.

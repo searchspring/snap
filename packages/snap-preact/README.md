@@ -1,7 +1,5 @@
 # Snap Preact
 
-<a href="https://www.npmjs.com/package/@searchspring/snap-preact"><img alt="NPM Status" src="https://img.shields.io/npm/v/@searchspring/snap-preact.svg?style=flat"></a>
-
 Snap Preact is an abstraction layer that provides a config based interface for creating a Searchspring integration quickly.
 
 

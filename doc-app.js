@@ -22,15 +22,52 @@ import('./docs/documents.js').then(function (_) {
 	const replaces = flattenDocumentLinks(documents)
 		.filter((link) => link.type === 'markdown')
 		.map((link) => {
-			const urls = Array.isArray(link.url) ? link.url : [link.url];
-			return urls.map((url) => {
-				const transformedUrl = url.replace('./', 'https://github.com/searchspring/snap/blob/main/');
-				return { a: `(${transformedUrl})`, b: `(${link.route})` };
-			});
+			return { a: `(https://searchspring.github.io/snap${link.route}`, b: `(.${link.route}` };
 		})
 		.flat()
 		.concat([
 			// other links
+			{ a: `<a `, b: `<a target="_blank"` },
+			{ a: '(https://github.com/searchspring/snap/tree/main/packages/snap-store-mobx/src/Search)', b: '(./reference-store-search)' },
+			{ a: '(https://github.com/searchspring/snap/tree/main/packages/snap-store-mobx/src/Autocomplete)', b: '(./reference-store-autocomplete)' },
+			{ a: '(https://github.com/searchspring/snap/tree/main/packages/snap-store-mobx/src/Recommendation)', b: '(./reference-store-recommendation)' },
+			{ a: '(https://github.com/searchspring/snap/tree/main/packages/snap-store-mobx/src/Finder)', b: '(./reference-store-finder)' },
+			{ a: '(https://github.com/searchspring/snap/tree/main/packages/snap-store-mobx/src/Storage)', b: '(./reference-store-storage)' },
+			{ a: '(https://github.com/searchspring/snap/tree/main/packages/snap-store-mobx/src/Abstract)', b: '(./reference-store-abstract)' },
+			{ a: '(https://github.com/searchspring/snap/tree/main/packages/snap-store-mobx/src/Cart)', b: '(./reference-store-cart)' },
+			{ a: '(https://github.com/searchspring/snap/tree/main/packages/snap-store-mobx/src/Meta)', b: '(./reference-store-meta)' },
+			{ a: '(https://github.com/searchspring/snap/tree/main/packages/snap-controller/src/Search)', b: '(./reference-controller-search)' },
+			{ a: '(https://github.com/searchspring/snap/tree/main/packages/snap-controller/src/Autocomplete)', b: '(./reference-controller-autocomplete)' },
+			{ a: '(https://github.com/searchspring/snap/tree/main/packages/snap-controller/src/Finder)', b: '(./reference-controller-finder)' },
+			{
+				a: '(https://github.com/searchspring/snap/tree/main/packages/snap-controller/src/Recommendation)',
+				b: '(./reference-controller-recommendation)',
+			},
+			{ a: '(https://github.com/searchspring/snap/tree/main/packages/snap-url-manager)', b: '(./reference-url-manager)' },
+			{ a: '(https://github.com/searchspring/snap/tree/main/packages/snap-event-manager)', b: '(./reference-event-manager)' },
+			{ a: '(https://github.com/searchspring/snap/tree/main/packages/snap-logger)', b: '(./reference-logger)' },
+			{ a: '(https://github.com/searchspring/snap/tree/main/packages/snap-tracker)', b: '(./reference-tracker)' },
+			{ a: '(https://github.com/searchspring/snap/tree/main/docs/SNAP_TRACKING.md)', b: '(./snap-tracking)' },
+			{
+				a: '(https://github.com/searchspring/snap/tree/main/docs/SNAP_TRACKING.md#cart-attribute-tracking)',
+				b: '(./snap-tracking#cart-attribute-tracking)',
+			},
+			{ a: '(https://github.com/searchspring/snap/tree/main/packages/snap-client)', b: '(./snap-client)' },
+			{
+				a: '(https://github.com/searchspring/snap/tree/main/packages/snap-url-manager/src/Translators/Url)',
+				b: '(./reference-snap-preact-url-translator)',
+			},
+			{
+				a: '(https://github.com/searchspring/snap/tree/main/packages/snap-url-manager/src/Translators/QueryString)',
+				b: '(./reference-url-manager-query-string-translator)',
+			},
+			{
+				a: '(https://github.com/searchspring/snap/tree/main/packages/snap-url-manager/src/linkers/react)',
+				b: '(./reference-url-manager-react-linker)',
+			},
+			{ a: '(https://github.com/searchspring/snap/tree/main/docs/REFERENCE_CONFIGURATION_MIDDLEWARE.md)', b: '(./reference-snap-preact-middleware)' },
+			{ a: '(https://searchspring.github.io/snap/preact-components)', b: '(./preact-components)' },
+			{ a: '(https://searchspring.github.io/snap/preact-components?params=', b: '(./preact-components?params=' },
 		]);
 
 	const modifyLinks = (markdown) => {
@@ -162,15 +199,17 @@ import('./docs/documents.js').then(function (_) {
 		},
 		computed: {
 			markedHTML() {
-				return marked(this.markdown);
+				return marked(this.markdown).replace(/<a\s+href=['"]https:\/\/[^'"]*['"]/g, (match) => {
+					// external links should open in a new tab
+					return match.replace('<a ', '<a target="_blank" ');
+				});
 			},
 		},
 		created() {
 			this.getMarkdown(this.src);
 		},
 		updated() {
-			window.highlight();
-			window.createHeadings();
+			window.postRenderModifications();
 		},
 		methods: {
 			async getMarkdown(file) {
@@ -293,17 +332,20 @@ import('./docs/documents.js').then(function (_) {
 
 	app.mount('#app');
 
-	window.highlight = function () {
+	window.postRenderModifications = function () {
+		// highlight code blocks
 		document.querySelectorAll('pre code').forEach((block) => {
 			hljs.highlightBlock(block);
 		});
-	};
-	window.createHeadings = function () {
+
+		function createHeadingId(heading) {
+			return heading.id || 'id-' + heading.textContent.toLowerCase().replace(/ /g, '-');
+		}
+		// add permalinks to headings and handle clicks to copy to clipboard
 		document.querySelectorAll('#content h2, #content h3, #content h4, #content h5, #content h6').forEach((heading) => {
-			const id = heading.id || 'id-' + heading.textContent.toLowerCase().replace(/ /g, '-');
-			console.log('id', id);
+			heading.role = 'link';
+			const id = createHeadingId(heading);
 			if (id) {
-				// on click, copy to clipboard
 				heading.addEventListener('click', () => {
 					const url = window.location.origin + window.location.pathname + '#' + id;
 					navigator.clipboard.writeText(url);
@@ -318,32 +360,39 @@ import('./docs/documents.js').then(function (_) {
 				});
 			}
 		});
+
+		// scroll to heading if it exists in the url
 		const id = window.location.hash.split('#')[1];
 		if (id) {
-			console.log('id found in url', id);
 			const heading = document.getElementById(id);
-			if (heading && heading.id === id) {
-				console.log('scrolling to');
+			if (heading && createHeadingId(heading) === id) {
 				heading.scrollIntoView({ behavior: 'smooth' });
 				heading.classList.add('scrolled-to');
 				window.setTimeout(function () {
 					heading.classList.remove('scrolled-to');
 				}, 1000);
-				// remove from hash
-				// window.history.replaceState({}, '', window.location.pathname);
+			} else {
+				// handle redirects of old routes
+				if (id === '/') {
+					router.replace('/');
+				} else if (id.match(/^\/components-preact/)) {
+					router.replace(id.replace(/^\/components-preact/, '/preact-components'));
+				} else if (id.match(/^\/integration-recommendations/)) {
+					router.replace('/snap-recommendations');
+				} else if (id.match(/^\/integration-legacy-recommendations/)) {
+					router.replace('/integration-legacy-recommendations');
+				} else if (id.match(/^\/start-preact/)) {
+					router.replace('/getting-started');
+				} else if (id.match(/^\/start-preact-events/)) {
+					router.replace('/reference-snap-preact-middleware');
+				} else if (id.match(/^\/start-github/)) {
+					router.replace('/build-deploy');
+				} else if (id.match(/^\/start-setup/)) {
+					router.replace('/setup');
+				}
+
+				// integration tracking
 			}
 		}
 	};
-
-	// window.setTimeout(function() {
-	//     const id = window.location.hash.split('#')[1];
-	//     if(id) {
-	//         console.log("id found in url", id)
-	//         const heading = document.getElementById(id);
-	//         if(heading && heading.id === id) {
-	//             console.log("scrolling to")
-	//             heading.scrollIntoView({ behavior: 'smooth' });
-	//         }
-	//     }
-	// }, 1000)
 });

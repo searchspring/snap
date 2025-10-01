@@ -4,13 +4,13 @@ This configuration refers to the object passed to the `new Snap()` constructor.
 
 ## Client
 
-Required. Config object that is passed to the core [@searchspring/snap-client](https://github.com/searchspring/snap/tree/main/packages/snap-client) package. This service handles the network requests to Searchspring APIs to retrieve data to be displayed.
+Required. Config object that is passed to the core `@searchspring/snap-client` package. This service handles the network requests to Searchspring APIs to retrieve data to be displayed.
 
 
 | Option | Type | Description |
 |---|---|---|
-| client.globals | `Partial<ClientGlobals>` | Base query parameters to the API; these are parameters that will ALWAYS be included on every request. At the bare minimum, `siteId` is required and can be obtained in the [Searchspring Management Console](https://manage.searchspring.net/). See [@searchspring/snap-client](https://github.com/searchspring/snap/tree/main/packages/snap-client) for more information. |
-| client.config | `ClientConfig` | Optional. See [@searchspring/snap-client](https://github.com/searchspring/snap/tree/main/packages/snap-client) for more information. |
+| client.globals | `Partial<ClientGlobals>` | Base query parameters to the API; these are parameters that will ALWAYS be included on every request. At the bare minimum, `siteId` is required and can be obtained in the [Searchspring Management Console](https://manage.searchspring.net/). See [Snap client](https://github.com/searchspring/snap/tree/main/packages/snap-client) for more information. |
+| client.config | `ClientConfig` | Optional. See [Snap client](https://github.com/searchspring/snap/tree/main/packages/snap-client) for more information. |
 
 
 ## Mode
@@ -30,12 +30,11 @@ Optional Context object to be used to set the global context. If no context is p
 
 ## URL
 
-Optional. [`UrlTranslator` config](https://github.com/searchspring/snap/tree/main/packages/snap-url-manager/src/Translators/Url) object that is passed to the core [@searchspring/snap-url-manager](https://github.com/searchspring/snap/tree/main/packages/snap-url-manager) package used by all controllers. This parameter configuration will be applied to all controllers created via Snap, but can be specified per controller for specific customization.
+Optional. [`UrlTranslator` config](https://github.com/searchspring/snap/tree/main/packages/snap-url-manager/src/Translators/Url/README.md) object that is passed to the core `@searchspring/snap-url-manager` package used by all controllers. This parameter configuration will be applied to all controllers created via Snap, but can be specified per controller for specific customization.
 
 | Option | Type | Description |
 |---|---|---|
 | url | `UrlTranslatorConfig` | Optional. Configures URL translation and parameter mapping. |
-
 
 
 ## Tracker

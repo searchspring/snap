@@ -1,4 +1,4 @@
-## Tracking
+# Tracking
 
 To ensure accurate tracking of events used for reporting, the following tracking events should be implemented across Search, Category, Autocomplete and Recommendations result components.
 
@@ -174,33 +174,21 @@ searchspring.tracker.events.product.pageView({
 ### Order Transaction
 Tracks order transaction. Should be invoked from an order confirmation page. Expects an object with the following:
 
-`orderId` - order id
-
-`transactionTotal` - transaction total of all products before tax and shipping
-
-`total` - transaction total of all products after tax and shipping
-
-`vat` - (optional) value added tax rate
-
-`city` - (optional) city name
-
-`state` - (optional) 2 digit state abbreviation (US only)
-
-`country` - (optional) 2 digit country abbreviation	(ie. 'US', 'CA', 'MX', 'PL', 'JP')
-
-`results` - array of products
-
-`results[].uid` - product uid
-
-`results[].sku` - (optional) product sku
-
-`results[].childUid` - (optional) product child uid
-
-`results[].childSku` - (optional) product child sku
-
-`results[].qty` - (optional) product qty
-
-`results[].price` - (optional) product price
+| Option | Type | Required | Description |
+|-----------|------|----------|-------------|
+| `orderId` | string | ✔️ | Order ID |
+| `transactionTotal` | number | ✔️ | Transaction total of all products before tax and shipping |
+| `total` | number | ✔️ | Transaction total of all products after tax and shipping |
+| `vat` | number | ➖ | Value added tax rate |
+| `city` | string | ➖ | City name |
+| `state` | string | ➖ | 2 digit state abbreviation (US only) |
+| `country` | string | ➖ | 2 digit country abbreviation (e.g., 'US', 'CA', 'MX', 'PL', 'JP') |
+| `results[].uid` | string | ✔️ | Product UID |
+| `results[].sku` | string | ➖ | Product SKU |
+| `results[].childUid` | string | ➖ | Product child UID |
+| `results[].childSku` | string | ➖ | Product child SKU |
+| `results[].qty` | number | ➖ | Product quantity |
+| `results[].price` | number | ➖ | Product price |
 
 ```typescript
 searchspring.tracker.events.order.transaction({
@@ -242,21 +230,16 @@ Cart contents can be tracked one of two ways. The first method is to invoke the 
 
 This requires integrating into platform cart events or manually attaching click handlers to add/remove buttons.
 
-`results` - array of products being added or removed from the cart
-
-`cart` - array of products currently in the cart (state after products have been added/removed)
-
-`(results | cart)[].uid` - product uid
-
-`(results | cart)[].sku` - (optional) product sku
-
-`(results | cart)[].childUid` - (optional) product child uid
-
-`(results | cart)[].childSku` - (optional) product child sku
-
-`(results | cart)[].qty` - (optional) product qty
-
-`(results | cart)[].price` - (optional) product price
+| Option | Type | Required | Description |
+|--------|------|----------|-------------|
+| `results` | array | ✔️ | Array of products being added or removed from the cart |
+| `cart` | array | ✔️ | Array of products currently in the cart (state after products have been added/removed) |
+| `(results \| cart)[].uid` | string | ✔️ | Product UID |
+| `(results \| cart)[].sku` | string | ➖ | Product SKU |
+| `(results \| cart)[].childUid` | string | ➖ | Product child UID |
+| `(results \| cart)[].childSku` | string | ➖ | Product child SKU |
+| `(results \| cart)[].qty` | number | ➖ | Product quantity |
+| `(results \| cart)[].price` | number | ➖ | Product price |
 
 ```typescript
 searchspring.tracker.events.cart.add({

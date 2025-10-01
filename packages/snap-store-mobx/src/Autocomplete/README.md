@@ -153,7 +153,7 @@ An array of facets. See [SearchStore](https://github.com/searchspring/snap/tree/
 In addition to all the search facets functionally, the Autocomplete facets will have an added `preview` method
 
 ### `preview` method
-See [terms.preview](#AutocompletePreview) for `facets.preview` usage
+See `terms.preview` for `facets.preview` usage
 
 
 ## `filters` property

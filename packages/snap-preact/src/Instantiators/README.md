@@ -25,7 +25,7 @@ The controller id would be `recommend_trending_0`.
 
 ### cartStore
 
-If the profile type passed to the controller is `bundle`, the controller will automatically create a [cartStore](https://github.com/searchspring/snap/blob/bundledRecComponent/packages/snap-store-mobx/src/Cart/README.md) for use with the Bundle Recommendations.
+If the profile type passed to the controller is `bundle`, the controller will automatically create a [cartStore](https://github.com/searchspring/snap/tree/main/packages/snap-store-mobx/src/Cart) for use with the Bundle Recommendations.
 
 
 ### client
