@@ -34,6 +34,7 @@ import type {
 	ThemeVariablesPartial,
 } from '../../../components/src';
 import type { GlobalThemeStyleScript, IntegrationPlatforms } from '../../types';
+import type { ClientConfig } from '@searchspring/snap-client';
 
 export type TemplateThemeTypes = 'library' | 'local';
 export type TemplateTypes = 'search' | 'autocomplete' | `recommendation/${RecsTemplateTypes}`;
@@ -117,6 +118,7 @@ export type TemplateStoreConfigConfig = {
 		currency?: CurrencyCodes;
 		language?: LanguageCodes;
 		platform?: IntegrationPlatforms;
+		client?: ClientConfig;
 	};
 	plugins?: PluginsConfigs;
 	translations?: {

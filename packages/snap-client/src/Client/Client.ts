@@ -102,6 +102,7 @@ export class Client {
 					initiator: this.config.initiator,
 					mode: this.mode,
 					origin: this.config.recommend?.origin,
+					secondaryOrigin: this.config.recommend?.secondaryOrigin,
 					headers: this.config.recommend?.headers,
 					cache: this.config.recommend?.cache,
 					globals: this.config.recommend?.globals,

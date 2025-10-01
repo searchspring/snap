@@ -379,6 +379,7 @@ export function createSnapConfig(templateConfig: SnapTemplatesConfig, templatesS
 				siteId: templateConfig.config?.siteId,
 			},
 			config: {
+				...(templateConfig.config?.client || {}),
 				initiator: `snap/templates/${version}`,
 			},
 		},
