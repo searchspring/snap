@@ -3,6 +3,9 @@
 Utilizes `formatNumber` from `@searchspring/snap-toolbox` to render a `<span>` containing a formatted number.
 
 ## Usage
+```jsx
+import { FormattedNumber } from '@searchspring/snap-preact-components';
+```
 
 ### value
 The required `value` prop specifies the number to be formatted. 

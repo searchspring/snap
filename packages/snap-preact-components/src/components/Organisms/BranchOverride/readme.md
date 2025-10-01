@@ -8,6 +8,9 @@ Must have `name` and either `details` or `error` props to render.
 - Icon
 
 ## Usage
+```jsx
+import { BranchOverride } from '@searchspring/snap-preact-components';
+```
 
 ### name
 The required `name` prop expects a string containing the name of the override branch.

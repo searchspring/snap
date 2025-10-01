@@ -6,6 +6,9 @@ Renders all facets utilizing the `<Facet />` component.
 - Facet
 
 ## Usage
+```jsx
+import { Facets } from '@searchspring/snap-preact-components';
+```
 
 ### controller
 The `controller` prop specifies a reference to the search controller.

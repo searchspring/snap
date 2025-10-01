@@ -7,6 +7,9 @@ Renders a recommended bundle of products with seed, carousel of recommendations 
 - Result (default)
 
 ## Usage
+```jsx
+import { RecommendationBundle } from '@searchspring/snap-preact-components';
+```
 
 Additional [Swiper Component Props](https://swiperjs.com/react#swiper-props) can be specified, but may need to be camelCased where appropriate.
 Additional [Swiper Modules](https://swiperjs.com/swiper-api#modules) can be provided via the `modules` prop; these may need additional props and or stylesheets.

@@ -3,6 +3,9 @@
 Utilizes `currency` from `@searchspring/snap-toolbox` to render a `<span>` containing a formatted number.
 
 ## Usage
+```jsx
+import { Price } from '@searchspring/snap-preact-components';
+```
 
 The `Price` component utilizes all props from the `FormattedNumber` component with the following additional prop:
 

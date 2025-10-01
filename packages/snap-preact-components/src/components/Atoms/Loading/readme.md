@@ -3,6 +3,9 @@
 Renders a Loading Bar.
 
 ## Usage
+```jsx
+import { LoadingBar } from '@searchspring/snap-preact-components';
+```
 
 ### active
 The required `active` prop specifies when to render the component.

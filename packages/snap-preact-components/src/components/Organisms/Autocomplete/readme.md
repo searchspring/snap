@@ -11,6 +11,9 @@ The autocomplete layout renders terms, facets, banners, and results.
 - Icon
 
 ## Usage
+```jsx
+import { Autocomplete } from '@searchspring/snap-preact-components';
+```
 
 ### input
 The required `input` prop expects either:
