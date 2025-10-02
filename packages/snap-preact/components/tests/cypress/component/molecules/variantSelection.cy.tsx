@@ -47,10 +47,13 @@ const controller = new RecommendationController(recommendConfig, {
 let selection: VariantSelectionType;
 
 describe('VariantSelection Component', async () => {
-	before(async () => {
+	before(() => {
 		cy.intercept('*recommend*', json);
 		cy.intercept('*profile*', profile);
 		cy.intercept('*meta*', meta);
+	});
+
+	before(async () => {
 		await controller.search();
 
 		selection = controller.store.results[0].variants?.selections[1]!;
