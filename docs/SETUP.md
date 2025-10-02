@@ -27,7 +27,7 @@ snapfu login
 
 This will create a new project with git repo from a list of available scaffolds. 
 
-During this you will also be propmpted for your Site ID and secret key, which you find in the [Searchspring Management Console](https://manage.searchspring.net)
+During this you will also be prompted for your Site ID and secret key, which you find in the [Searchspring Management Console](https://manage.searchspring.net)
 
 ```sh
 snapfu init [projectname]

@@ -45,7 +45,7 @@ const config = {
 ### Variant Option Attributes:
 When `realtime` is enabled the attributes `ss-variant-option` and `ss-variant-option-selected` are queried for and used to determine current variant selection and to also attach click events to know when to adjust variant selections in the selection stores. These attributes are needed in order for realtime variants to work properly. 
 
-The attributes are to be added on each variant option in the platform product page main option buttons. The `ss-variant-option` attribute also expects a value of the option feild and option value seperated by a `:`. 
+The attributes are to be added on each variant option in the platform product page main option buttons. The `ss-variant-option` attribute also expects a value of the option field and option value separated by a `:`. 
 
 ```jsx
 <div>

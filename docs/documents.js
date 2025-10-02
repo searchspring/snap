@@ -189,7 +189,7 @@ var documents = [
 						searchable: true,
 					},
 					{
-						label: 'RecommendationsController',
+						label: 'RecommendationController',
 						route: '/reference-controller-recommendation',
 						type: 'markdown',
 						url: './packages/snap-controller/src/Recommendation/README.md',

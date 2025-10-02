@@ -5,7 +5,7 @@ Snap Profiler is a utility available on each controller via `controller.profiler
 
 
 ## `setNamespace` method
-Programatically set the namespace after construction.
+Programmatically set the namespace after construction.
 
 ```typescript
 controller.profiler.setNamespace('namespace');
@@ -59,7 +59,7 @@ console.log(`name: ${searchProfile.name}`);
 ```
 
 ## `context` property
-Profile context that was set in the `create` method `ProfileDetails` parameters. The context is used to provide additional details regarding the profile. A search profile would likely contain the request parameters amoung other things.
+Profile context that was set in the `create` method `ProfileDetails` parameters. The context is used to provide additional details regarding the profile. A search profile would likely contain the request parameters among other things.
 
 ```typescript
 console.log(`context: ${searchProfile.context}`);

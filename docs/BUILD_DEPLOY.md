@@ -48,7 +48,7 @@ To host your own build files follow the below steps in your project.
 1. Ensure you have changed directories so that you are in the root of the project directory
 2. In your terminal run the command `npm run build`, will output build files to `./dist` 
 3. Navigate to `./dist` and copy the generated build files 
-4. Go to the codebase of your E-commerce platform (Shopify, Bigcommerce, Magento, etc.) and copy/paste the generated build files in a directory (most platforms have an ***assets*** directory) 
+4. Go to the codebase of your E-commerce platform (Shopify, BigCommerce, Magento, etc.) and copy/paste the generated build files in a directory (most platforms have an ***assets*** directory) 
 5. On the frontend of the site, add a script block as outlined in the [integration](https://searchspring.github.io/snap/build-deploy-integration) section - be sure to change the `src` attribute to point to the `bundle.js` file and align the URL with your self-hosted build files (eg: /assets/bundle.js)
 
 <!-- TODO: Link to playform specific install docs and update here -->

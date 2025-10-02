@@ -334,7 +334,7 @@ import('./docs/documents.js').then(function (_) {
 	window.postRenderModifications = function () {
 		// highlight code blocks
 		document.querySelectorAll('pre code').forEach((block) => {
-			hljs.highlightBlock(block);
+			hljs.highlightElement(block);
 		});
 
 		function createHeadingId(heading) {
