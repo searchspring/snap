@@ -62,7 +62,7 @@ const OUTPUT_FILE = 'snap-docs.json';
 							const markdown = fs.readFileSync(`${url}`, 'utf8');
 							if (markdown) {
 								// Parse markdown into sections
-								const sections = parseMarkdownSections(markdown, link.label, link.route);
+								const sections = parseMarkdownSections(markdown, link.label);
 
 								sections.forEach((section) => {
 									docEntries.push({
@@ -93,7 +93,7 @@ const OUTPUT_FILE = 'snap-docs.json';
 		});
 	}
 
-	function parseMarkdownSections(markdown, fileTitle, fileRoute) {
+	function parseMarkdownSections(markdown, fileTitle) {
 		const sections = [];
 		const lines = markdown.split('\n');
 		let currentSection = null;

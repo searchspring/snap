@@ -50,7 +50,7 @@ This will start the local development server and serve the project build files a
 | main bundle                  | [https://localhost:3333/dist/bundle.js](https://localhost:3333/dist/bundle.js) |
 | universal bundle             | [https://localhost:3333/dist/universal.bundle.js](https://localhost:3333/dist/universal.bundle.js) |
 
-Note: The local server uses a self-signed certificate for HTTPS any you may be prompted to continue.
+Note: The local server uses a self-signed certificate for HTTPS and you may be prompted to continue.
 
 
 There are two common ways to develop a project, using a local mockup file and leveraging the Snapfu Chrome extension.
