@@ -1,6 +1,6 @@
 # Overview
 
-Snap is built using the Model View Controller (MVC) pattern internally. When constructing an instance of the `Snap` class, the configuration object that is provided contains all the controllers that the project will use and where they will be rendered on the page. Each controller can be configured with various settings and custom functionallity can be implemented via middleware to tie into the search lifecycle.
+Snap is built using the Model View Controller (MVC) pattern internally. When constructing an instance of the `Snap` class, the configuration object that is provided contains all the controllers that the project will use and where they will be rendered on the page. Each controller can be configured with various settings and custom functionality can be implemented via middleware to tie into the search lifecycle.
 
 Each controller contains a `controller.search()` method that is used to trigger a search to Searchspring API with parameters derived from the `controller.urlManager` state. A urlManager contains the state of the url (query and hash paramters), or in the case of Autocomplete, Recommendations, and Finder, is detached from the url and contains it's own state.
 

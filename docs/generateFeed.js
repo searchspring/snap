@@ -98,7 +98,6 @@ const OUTPUT_FILE = 'snap-docs.json';
 		const lines = markdown.split('\n');
 		let currentSection = null;
 		let currentContent = [];
-		let sectionLevel = 0;
 
 		// Helper function to create anchor from title
 		function createAnchor(title) {
@@ -137,7 +136,6 @@ const OUTPUT_FILE = 'snap-docs.json';
 				if (level <= 3) {
 					currentSection = title;
 					currentContent = [line];
-					sectionLevel = level;
 				} else {
 					// For deeper headings, add to current section content
 					if (currentSection) {

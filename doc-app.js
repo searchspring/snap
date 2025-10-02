@@ -155,6 +155,7 @@ import('./docs/documents.js').then(function (_) {
 				const mutations = [];
 				// Select the node that will be observed for mutations
 				const targetNode = document.getElementById('frame').contentWindow.document.querySelector('title');
+				if (!targetNode) return;
 
 				// Options for the observer (which mutations to observe)
 				const config = { characterData: true, attributes: true, childList: true, subtree: true };
@@ -344,6 +345,7 @@ import('./docs/documents.js').then(function (_) {
 			heading.role = 'link';
 			const id = createHeadingId(heading);
 			if (id) {
+				heading.id = id;
 				heading.addEventListener('click', () => {
 					const url = window.location.origin + window.location.pathname + '#' + id;
 					navigator.clipboard.writeText(url);

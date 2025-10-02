@@ -82,7 +82,7 @@ Context variables are set within the script blocks and can be used to set either
 | blockedItems | array of strings | all | SKU values to identify which products to exclude from the response |   |
 | filters | array of filters | all | optional recommendation filters to apply to ALL profiles in the batch |   |
 | cart | array (or function that returns an array) of current cart skus | all | optional method of setting cart contents |   |
-| shopper.id | logged in user unique identifier | all | required for personalization functionallity if not provided to the bundle (global) context |   |
+| shopper.id | logged in user unique identifier | all | required for personalization functionality if not provided to the bundle (global) context |   |
 
 
 ### Profile Specific Variables

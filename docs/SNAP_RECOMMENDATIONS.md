@@ -11,7 +11,7 @@ There are three types of recommendations that Searchspring offers:
 
 This guide will cover usage of the Default templates that are available in the Searchspring Management Console. If you are looking to create a custom template, please refer to the [Custom Templates reference](https://searchspring.github.io/snap/reference-custom-recommendation-templates)
 
-Changes to the recommendation integration scripts were made in Snap `v0.60.0`. Legacy Recommmendation Integrations docs can still be found [`here`](https://searchspring.github.io/snap/integration-legacy-recommendations)
+Changes to the recommendation integration scripts were made in Snap `v0.60.0`. Legacy Recommendation Integrations docs can still be found [`here`](https://searchspring.github.io/snap/integration-legacy-recommendations)
 
 
 ## More Information
@@ -19,7 +19,7 @@ See [Recommendations Controller reference](https://searchspring.github.io/snap/r
 
 ## Product Recommendations / Personalized Recommendations
 
-The Searchspring Management Console contains a `Default` template availble for standard profiles (non-bundle) that does not require the use of the Snapfu CLI to create a custom template. To use the `Default` template, the following instantiator config should be added to your `snap-preact` config.
+The Searchspring Management Console contains a `Default` template available for standard profiles (non-bundle) that does not require the use of the Snapfu CLI to create a custom template. To use the `Default` template, the following instantiator config should be added to your `snap-preact` config.
 
 ```typescript
 // src/index.ts
@@ -96,7 +96,7 @@ export const Recs = observer((props) => {
 
 
 ## Bundle Recommendations
-The Searchspring Management Console also contains a `Bundle` template availble for bundle profiles, this template does not require the use of the Snapfu CLI to create a custom template. To use the `Bundle` template, another component mapping will need to be added to your instantiator config.
+The Searchspring Management Console also contains a `Bundle` template available for bundle profiles, this template does not require the use of the Snapfu CLI to create a custom template. To use the `Bundle` template, another component mapping will need to be added to your instantiator config.
 
 ```typescript
 // src/index.ts

@@ -23,7 +23,7 @@ Profile configurations are applied to recommendation via script context variable
 | cart | array (or function that returns an array) of current cart skus | all | optional method of setting cart contents (global) |
 | blockedItems | array of strings | all | SKU values to identify which products to exclude from the response (global) |
 | filters | array of filters | all | optional recommendation filters (global) |
-| shopper.id | logged in user unique identifier | all | required for personalization functionallity if not provided to the bundle context (global) |
+| shopper.id | logged in user unique identifier | all | required for personalization functionality if not provided to the bundle context (global) |
 | options.siteId | siteId overwrite | all | optional siteId overwrite (will force a new batch) |
 | options.categories | array of category path strings | all | optional category identifiers used in category trending recommendation profiles |
 | options.brands | array of brand strings | all | optional brand identifiers used in brand trending recommendation profiles |
