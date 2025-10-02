@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.10.0](https://github.com/searchspring/snap-1.0/compare/v1.9.2...v1.10.0) (2025-10-02)
+
+### Bug Fixes
+
+- **preact/components/autocomplete:** couple autocomplete bug fixes ([ed5651b](https://github.com/searchspring/snap-1.0/commit/ed5651b5fb8c4fa724fc53c495542d919f50c5be))
+
+### Features
+
+- **client:** moving to Athos APIs ([d773390](https://github.com/searchspring/snap-1.0/commit/d7733901b97e8fc6e3fa5c6b47dba1401bdff203))
+- **preact/templates:** adding ability (temporarily) to set the client config to allow setting "origin" for hitting alternative API domains ([80409c3](https://github.com/searchspring/snap-1.0/commit/80409c32251676e453fd6d3551e34382df29d3b2))
+
 ## [1.9.2](https://github.com/searchspring/snap-1.0/compare/v1.9.1...v1.9.2) (2025-08-29)
 
 **Note:** Version bump only for package @searchspring/snap

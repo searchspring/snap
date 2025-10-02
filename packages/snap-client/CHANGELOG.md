@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.10.0](https://github.com/searchspring/snap/compare/v1.9.2...v1.10.0) (2025-10-02)
+
+### Features
+
+- **client:** moving to Athos APIs ([d773390](https://github.com/searchspring/snap/commit/d7733901b97e8fc6e3fa5c6b47dba1401bdff203))
+
 ## [1.9.2](https://github.com/searchspring/snap/compare/v1.9.1...v1.9.2) (2025-08-29)
 
 **Note:** Version bump only for package @searchspring/snap-client
