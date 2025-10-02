@@ -19,6 +19,7 @@ export interface RequestOpts {
 	query?: HTTPQuery;
 	body?: HTTPBody;
 	origin?: string; // override url origin
+	subDomain?: string; // optional subdomain for requests
 }
 
 export class API {
@@ -105,7 +106,7 @@ export class API {
 			throw new Error(`Request failed. Missing "siteId" parameter.`);
 		}
 
-		const siteIdHost = `https://${siteId}.a.searchspring.io`;
+		const siteIdHost = `https://${siteId}.a${context.subDomain ? `.${context.subDomain}` : ''}.athoscommerce.io`;
 		const origin = (context.origin || this.configuration.origin || siteIdHost).replace(/\/$/, '');
 
 		let url = `${origin}/${context.path.replace(/^\//, '')}`;

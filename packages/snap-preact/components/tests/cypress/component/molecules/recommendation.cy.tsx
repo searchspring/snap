@@ -6,6 +6,7 @@ import { Profiler } from '@searchspring/snap-profiler';
 import { Logger } from '@searchspring/snap-logger';
 import { Client } from '@searchspring/snap-client';
 import { RecommendationController } from '@searchspring/snap-controller';
+import meta from '../../fixtures/meta.json';
 import json from '../../fixtures/recommend-results-default.json';
 import profile from '../../fixtures/profile-default.json';
 import { Recommendation } from '../../../../src/components/Templates/Recommendation';
@@ -46,15 +47,19 @@ const controller = new RecommendationController(recommendConfig, {
 });
 
 describe('Recommendation Component', async () => {
-	before(async () => {
+	before(() => {
 		cy.spy(controller.tracker.events.recommendations, 'render').as('render');
 		cy.spy(controller.track.product, 'impression').as('impression');
+		cy.intercept('*meta*', meta);
 		cy.intercept('*recommend*', json);
 		cy.intercept('*profile*', profile);
+	});
+
+	before(async () => {
 		await controller.search();
 	});
 
-	it('tracks as expected', () => {
+	it('tracks as expected', async () => {
 		expect(controller.store.loaded).to.be.true;
 		expect(controller.store.results.length).to.be.greaterThan(0);
 

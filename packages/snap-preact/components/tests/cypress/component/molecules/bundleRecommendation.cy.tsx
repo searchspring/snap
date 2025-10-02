@@ -11,6 +11,7 @@ import { RecommendationBundle } from '../../../../src/components/Templates/Recom
 import { mount } from '@cypress/react';
 import { ThemeProvider } from '../../../../src/providers';
 import { Result } from '../../../../src/components/Molecules/Result';
+import meta from '../../fixtures/meta.json';
 import json from '../../fixtures/results-bundle.json';
 import profile from '../../fixtures/profile-bundle.json';
 import { observer } from 'mobx-react-lite';
@@ -48,12 +49,13 @@ const theme = {
 
 const client = new Client(globals, {});
 
-let controller;
+let controller: RecommendationController;
 
 describe('RecommendationBundle Component', async () => {
 	before(() => {
 		cy.intercept('*recommend*', json);
 		cy.intercept('*profile*', profile);
+		cy.intercept('*meta*', meta);
 	});
 
 	beforeEach(async () => {

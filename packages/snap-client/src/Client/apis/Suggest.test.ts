@@ -27,7 +27,7 @@ describe('Suggest Api', () => {
 			headers: {},
 			method: 'GET',
 		};
-		const requestUrl = 'https://8uyt2m.a.searchspring.io/api/suggest/query?siteId=8uyt2m&query=dress';
+		const requestUrl = 'https://8uyt2m.a.athoscommerce.io/api/suggest/query?siteId=8uyt2m&query=dress';
 
 		await api.getSuggest({
 			siteId: '8uyt2m',
@@ -49,7 +49,7 @@ describe('Suggest Api', () => {
 			},
 			method: 'POST',
 		};
-		const requestUrl = 'https://abc123.a.searchspring.io/api/suggest/query';
+		const requestUrl = 'https://abc123.a.athoscommerce.io/api/suggest/query';
 
 		const requestMock = jest
 			.spyOn(global.window, 'fetch')
@@ -77,7 +77,7 @@ describe('Suggest Api', () => {
 			method: 'GET',
 		};
 
-		const requestUrl = 'https://8uyt2m.a.searchspring.io/api/suggest/trending?siteId=8uyt2m&limit=4';
+		const requestUrl = 'https://8uyt2m.a.athoscommerce.io/api/suggest/trending?siteId=8uyt2m&limit=4';
 
 		await api.getTrending({
 			siteId: '8uyt2m',
@@ -102,7 +102,7 @@ describe('Suggest Api', () => {
 			},
 			method: 'POST',
 		};
-		const requestUrl = 'https://8uuyt2m.a.searchspring.io/api/suggest/trending';
+		const requestUrl = 'https://8uuyt2m.a.athoscommerce.io/api/suggest/trending';
 
 		await api.postTrending({
 			siteId: '8uuyt2m',

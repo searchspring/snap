@@ -34,7 +34,7 @@ describe('Hybrid Api', () => {
 		const api = new HybridAPI(new ApiConfiguration({}));
 
 		const params = { body: undefined, headers: {}, method: 'GET' };
-		const requestUrl = 'https://8uyt2m.a.searchspring.io/api/meta/meta.json?siteId=8uyt2m';
+		const requestUrl = 'https://8uyt2m.a.athoscommerce.io/api/meta/meta.json?siteId=8uyt2m';
 
 		await api.getMeta({
 			siteId: '8uyt2m',
@@ -55,7 +55,7 @@ describe('Hybrid Api', () => {
 			headers: {},
 			method: 'GET',
 		};
-		const fetchUrl = `https://8uyt2m.a.searchspring.io/api/search/search.json?siteId=8uyt2m&noBeacon=true&ajaxCatalog=snap%2Fclient%2F${version}&resultsFormat=native`;
+		const fetchUrl = `https://8uyt2m.a.athoscommerce.io/api/search/search.json?siteId=8uyt2m&noBeacon=true&ajaxCatalog=snap%2Fclient%2F${version}&resultsFormat=native`;
 
 		await api.getSearch({
 			siteId: '8uyt2m',
@@ -79,7 +79,7 @@ describe('Hybrid Api', () => {
 			method: 'GET',
 		};
 		const cacheKey =
-			'https://8uyt2m.a.searchspring.io/api/suggest/query?siteId=8uyt2m&language=en&query=undefined&suggestionCount=5&disableSpellCorrect=true';
+			'https://8uyt2m.a.athoscommerce.io/api/suggest/query?siteId=8uyt2m&language=en&query=undefined&suggestionCount=5&disableSpellCorrect=true';
 
 		await api.getAutocomplete({
 			siteId: '8uyt2m',
