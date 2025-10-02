@@ -12,6 +12,7 @@ import { ContentSkel } from './components/Content/Skel';
 import { SidebarSkel } from './components/Sidebar/Skel';
 
 import './styles/custom.scss';
+import { ClientConfig } from '@searchspring/snap-client';
 
 // storage for custom configuration
 const configStore = new StorageStore({ type: 'local', key: 'ss-demo-config' });
@@ -37,7 +38,33 @@ if (context.collection?.handle) {
 
 let siteId = '8uyt2m';
 let customOrigin = '';
-let clientConfig = {};
+let clientConfig: ClientConfig = {
+	meta: {
+		origin: `https://${siteId}.a.searchspring.io`,
+	},
+	search: {
+		origin: `https://${siteId}.a.searchspring.io`,
+	},
+	autocomplete: {
+		requesters: {
+			suggest: {
+				origin: `https://${siteId}.a.searchspring.io`,
+			},
+			legacy: {
+				origin: `https://${siteId}.a.searchspring.io`,
+			},
+		},
+	},
+	finder: {
+		origin: `https://${siteId}.a.searchspring.io`,
+	},
+	recommend: {
+		origin: `https://${siteId}.a.searchspring.io`,
+	},
+	suggest: {
+		origin: `https://${siteId}.a.searchspring.io`,
+	},
+};
 
 // grab siteId out of the URL
 const urlObj = url(window.location.href);

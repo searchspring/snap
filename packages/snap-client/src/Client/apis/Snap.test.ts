@@ -27,7 +27,7 @@ describe('Snap Api', () => {
 			method: 'POST',
 		};
 
-		const requestUrl = 'https://8uyt2m.a.searchspring.io/api/v1/meta';
+		const requestUrl = 'https://8uyt2m.a.athoscommerce.io/api/v1/meta';
 
 		await api.postMeta({
 			siteId: '8uyt2m',
@@ -51,7 +51,7 @@ describe('Snap Api', () => {
 			},
 			method: 'POST',
 		};
-		const requestUrl = 'https://8uyt2m.a.searchspring.io/api/v1/search';
+		const requestUrl = 'https://8uyt2m.a.athoscommerce.io/api/v1/search';
 
 		await api.postSearch({ siteId: '8uyt2m' });
 
@@ -73,7 +73,7 @@ describe('Snap Api', () => {
 			},
 			method: 'POST',
 		};
-		const requestUrl = 'https://8uyt2m.a.searchspring.io/api/v1/autocomplete';
+		const requestUrl = 'https://8uyt2m.a.athoscommerce.io/api/v1/autocomplete';
 
 		await api.postAutocomplete({ siteId: '8uyt2m' });
 

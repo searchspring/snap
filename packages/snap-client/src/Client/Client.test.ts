@@ -57,19 +57,19 @@ describe('Snap Client', () => {
 	it('can pass in a client config', () => {
 		const config: ClientConfig = {
 			meta: {
-				origin: 'https://snapi.kube.searchspring.io/meta',
+				origin: 'https://snapi.kube.athoscommerce.io/meta',
 			},
 			search: {
-				origin: 'https://snapi.kube.searchspring.io/search',
+				origin: 'https://snapi.kube.athoscommerce.io/search',
 			},
 			autocomplete: {
-				origin: 'https://snapi.kube.searchspring.io/autocomplete',
+				origin: 'https://snapi.kube.athoscommerce.io/autocomplete',
 			},
 			recommend: {
-				origin: 'https://snapi.kube.searchspring.io/recommend',
+				origin: 'https://snapi.kube.athoscommerce.io/recommend',
 			},
 			suggest: {
-				origin: 'https://snapi.kube.searchspring.io/suggest',
+				origin: 'https://snapi.kube.athoscommerce.io/suggest',
 			},
 		};
 
@@ -356,7 +356,8 @@ describe('Snap Client', () => {
 					'Content-Type': 'text/plain',
 				},
 				method: 'POST',
-				path: '/boost/8uyt2m/recommend',
+				path: '/v1/recommend',
+				subDomain: 'p13n',
 				body: {
 					profiles: [
 						{
@@ -652,7 +653,8 @@ describe('Snap Client', () => {
 						'Content-Type': 'text/plain',
 					},
 					method: 'POST',
-					path: '/boost/8uyt2m/recommend',
+					path: '/v1/recommend',
+					subDomain: 'p13n',
 					body: {
 						profiles: [
 							{

@@ -38,7 +38,7 @@ describe('Recommend Api', () => {
 			method: 'GET',
 		};
 
-		const requestUrl = 'https://8uyt2m.a.searchspring.io/api/personalized-recommendations/profile.json?siteId=8uyt2m&tag=dress';
+		const requestUrl = 'https://8uyt2m.a.athoscommerce.io/api/personalized-recommendations/profile.json?siteId=8uyt2m&tag=dress';
 
 		const requestMock = jest
 			.spyOn(global.window, 'fetch')
@@ -74,7 +74,7 @@ describe('Recommend Api', () => {
 			],
 		};
 
-		const requestUrl = 'https://8uyt2m.a.searchspring.io/boost/8uyt2m/recommend';
+		const requestUrl = 'https://8uyt2m.a.p13n.athoscommerce.io/v1/recommend';
 
 		const requestMock = jest
 			.spyOn(global.window, 'fetch')
@@ -98,7 +98,7 @@ describe('Recommend Api', () => {
 			body: `{"profiles":[{"tag":"similar"}],"siteId":"8uyt2m"}`,
 		};
 
-		const requestUrl = 'https://8uyt2m.a.searchspring.io/boost/8uyt2m/recommend';
+		const requestUrl = 'https://8uyt2m.a.p13n.athoscommerce.io/v1/recommend';
 
 		const requestMock = jest
 			.spyOn(global.window, 'fetch')
@@ -138,7 +138,7 @@ describe('Recommend Api', () => {
 		product: 'marnie-runner-2-7x10',
 	};
 
-	const RequestUrl = 'https://8uyt2m.a.searchspring.io/boost/8uyt2m/recommend';
+	const RequestUrl = 'https://8uyt2m.a.p13n.athoscommerce.io/v1/recommend';
 
 	it('batchRecommendations batches as expected', async () => {
 		const api = new RecommendAPI(new ApiConfiguration(apiConfig));
@@ -343,8 +343,8 @@ describe('Recommend Api', () => {
 		};
 
 		expect(requestMock).toHaveBeenCalledTimes(2);
-		expect(requestMock).toHaveBeenNthCalledWith(1, 'https://8uyt2m.a.searchspring.io/boost/8uyt2m/recommend', firstBatchPOSTParams);
-		expect(requestMock).toHaveBeenNthCalledWith(2, 'https://8uyt2m.a.searchspring.io/boost/8uyt2m/recommend', secondBatchPOSTParams);
+		expect(requestMock).toHaveBeenNthCalledWith(1, 'https://8uyt2m.a.p13n.athoscommerce.io/v1/recommend', firstBatchPOSTParams);
+		expect(requestMock).toHaveBeenNthCalledWith(2, 'https://8uyt2m.a.p13n.athoscommerce.io/v1/recommend', secondBatchPOSTParams);
 		requestMock.mockReset();
 	});
 
@@ -435,8 +435,8 @@ describe('Recommend Api', () => {
 		};
 
 		expect(requestMock).toHaveBeenCalledTimes(2);
-		expect(requestMock).toHaveBeenNthCalledWith(1, 'https://8uyt2m.a.searchspring.io/boost/8uyt2m/recommend', POSTParams8uyt2m);
-		expect(requestMock).toHaveBeenNthCalledWith(2, 'https://123abc.a.searchspring.io/boost/123abc/recommend', POSTParams123abc);
+		expect(requestMock).toHaveBeenNthCalledWith(1, 'https://8uyt2m.a.p13n.athoscommerce.io/v1/recommend', POSTParams8uyt2m);
+		expect(requestMock).toHaveBeenNthCalledWith(2, 'https://123abc.a.p13n.athoscommerce.io/v1/recommend', POSTParams123abc);
 		requestMock.mockReset();
 	});
 
@@ -705,7 +705,7 @@ describe('Recommend Api', () => {
 			}),
 		};
 
-		const POSTRequestUrl = 'https://8uyt2m.a.searchspring.io/boost/8uyt2m/recommend';
+		const POSTRequestUrl = 'https://8uyt2m.a.p13n.athoscommerce.io/v1/recommend';
 
 		const POSTRequestMock = jest
 			.spyOn(global.window, 'fetch')
@@ -827,7 +827,7 @@ describe('Recommend Api', () => {
 			}),
 		};
 
-		const POSTRequestUrl = 'https://8uyt2m.a.searchspring.io/boost/8uyt2m/recommend';
+		const POSTRequestUrl = 'https://8uyt2m.a.p13n.athoscommerce.io/v1/recommend';
 
 		const POSTRequestMock = jest
 			.spyOn(global.window, 'fetch')
@@ -907,7 +907,7 @@ describe('Recommend Api', () => {
 			}),
 		};
 
-		const POSTRequestUrl = 'https://8uyt2m.a.searchspring.io/boost/8uyt2m/recommend';
+		const POSTRequestUrl = 'https://8uyt2m.a.p13n.athoscommerce.io/v1/recommend';
 
 		const POSTRequestMock = jest
 			.spyOn(global.window, 'fetch')

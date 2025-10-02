@@ -1,0 +1,222 @@
+{
+  "sortOptions": [
+    {
+      "type": "relevance",
+      "field": "relevance",
+      "direction": "desc",
+      "label": "Best Match"
+    },
+    {
+      "type": "field",
+      "field": "sales_rank",
+      "direction": "desc",
+      "label": "Most Popular"
+    },
+    {
+      "type": "field",
+      "field": "title",
+      "direction": "asc",
+      "label": "Name (A - Z)"
+    },
+    {
+      "type": "field",
+      "field": "price",
+      "direction": "asc",
+      "label": "Price ($ - $S$)"
+    },
+    {
+      "type": "field",
+      "field": "price",
+      "direction": "desc",
+      "label": "Price ($$$ - $)"
+    },
+    {
+      "type": "field",
+      "field": "title",
+      "direction": "desc",
+      "label": "Name (Z - A)"
+    }
+  ],
+  "facets": {
+    "brand": {
+      "display": "list",
+      "label": "Brand",
+      "collapsed": false,
+      "multiple": "single"
+    },
+    "collection": {
+      "display": "list",
+      "label": "Collection",
+      "collapsed": false,
+      "multiple": "or"
+    },
+    "color_family": {
+      "display": "palette",
+      "label": "Color",
+      "collapsed": true,
+      "multiple": "or"
+    },
+    "dress_length_name": {
+      "display": "list",
+      "label": "Dress Length",
+      "collapsed": true,
+      "multiple": "or"
+    },
+    "material": {
+      "display": "list",
+      "label": "Material",
+      "collapsed": true,
+      "multiple": "or"
+    },
+    "on_sale": {
+      "display": "list",
+      "label": "On Sale",
+      "collapsed": true,
+      "multiple": "or"
+    },
+    "pattern": {
+      "display": "list",
+      "label": "Pattern",
+      "collapsed": true,
+      "multiple": "or"
+    },
+    "price": {
+      "display": "slider",
+      "label": "Price",
+      "collapsed": false,
+      "formatSeparator": "-",
+      "formatValue": "$%01.2f"
+    },
+    "saturation": {
+      "display": "list",
+      "label": "Color Intensity",
+      "collapsed": false,
+      "multiple": "or"
+    },
+    "season": {
+      "display": "list",
+      "label": "Season",
+      "collapsed": true,
+      "multiple": "or"
+    },
+    "size": {
+      "display": "grid",
+      "label": "Size",
+      "collapsed": false,
+      "multiple": "and"
+    },
+    "size_dress": {
+      "display": "grid",
+      "label": "Dress Size",
+      "collapsed": true,
+      "multiple": "single"
+    },
+    "size_footwear": {
+      "display": "grid",
+      "label": "Shoe Size",
+      "collapsed": false,
+      "multiple": "or"
+    },
+    "size_pants": {
+      "display": "list",
+      "label": "Pant Size",
+      "collapsed": true,
+      "multiple": "or"
+    },
+    "ss_category_hierarchy": {
+      "display": "hierarchy",
+      "label": "Category",
+      "collapsed": false,
+      "multiple": "single",
+      "hierarchyDelimiter": ">"
+    }
+  },
+  "pagination": {
+    "defaultPageSize": 24
+  },
+  "badges": {
+    "locations": {
+      "left": [
+        {
+          "tag": "left-upper",
+          "name": "Left Upper"
+        },
+        {
+          "tag": "left-middle-upper",
+          "name": "Left Middle Upper"
+        },
+        {
+          "tag": "left-middle",
+          "name": "Left Middle"
+        },
+        {
+          "tag": "left-middle-lower",
+          "name": "Left Middle Lower"
+        },
+        {
+          "tag": "left-lower",
+          "name": "Left Lower"
+        }
+      ],
+      "right": [
+        {
+          "tag": "right-upper",
+          "name": "Right Upper"
+        },
+        {
+          "tag": "right-middle-upper",
+          "name": "Right Middle Upper"
+        },
+        {
+          "tag": "right-middle",
+          "name": "Right Middle"
+        },
+        {
+          "tag": "right-middle-lower",
+          "name": "Right Middle Lower"
+        },
+        {
+          "tag": "right-lower",
+          "name": "Right Lower"
+        }
+      ],
+      "callout": [
+        {
+          "tag": "callout",
+          "name": "Callout"
+        }
+      ]
+    },
+    "tags": {
+      "on-sale": {
+        "location": "left/left-middle",
+        "component": "BadgeText",
+        "priority": 2,
+        "enabled": true,
+        "parameters": {
+          "color": "#0000FF",
+          "colorText": "#FFFFFF"
+        }
+      },
+      "free-shipping": {
+        "location": "callout/callout",
+        "component": "BadgeText",
+        "priority": 1,
+        "enabled": true,
+        "parameters": {
+          "color": "#FF0000",
+          "colorText": "#FFFFFF"
+        }
+      },
+      "christmas": {
+        "location": "left/left-middle",
+        "component": "BadgeImage",
+        "priority": 1,
+        "enabled": true,
+        "parameters": {
+          "url": "//cdn.searchspring.net/ajax_search/img/star-badge-new-blue.png"
+        }
+      }
+    }
+  }
+}
