@@ -54,7 +54,9 @@ export const AutocompleteSlideout = observer((properties: AutocompleteSlideoutPr
 		const existingInputName = (input as HTMLInputElement)?.getAttribute('name');
 		if (existingInputName) {
 			setInputName(existingInputName);
-			(input as HTMLInputElement).setAttribute('name', '');
+			if (props.renderInput) {
+				(input as HTMLInputElement).setAttribute('name', '');
+			}
 		}
 	}
 
