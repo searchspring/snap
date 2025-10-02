@@ -53,15 +53,42 @@ For example, if a global variable `snapConfig` exists on the page (must be defin
 
 ```typescript
 // src/index.ts
-
+const backgroundFilters = [];
 if (snapConfig?.category) {
-	searchConfig.globals.filters.push({
+	backgroundFilters.push({
 		type: 'value',
 		background: true,
 		field: 'categories_hierarchy',
 		value: snapConfig.category.value,
 	});
 }
+const snap = new Snap({
+    client: {
+		globals: {
+			siteId: 'abc123',
+		},
+	},
+    controllers: {
+        search: [
+            {
+                config: {
+                    id: 'search',
+					globals: {
+						filters: backgroundFilters,
+					},
+                },
+                targeters: [
+                    {
+                        selector: '#searchspring-content',
+                        component: async () => {
+                            return (await import('./components/Content/Content')).Content;
+                        },
+                    },
+                ],
+            },
+        ],
+    },
+});
 ```
 
 ## Search Store
@@ -71,7 +98,7 @@ The following properties are specific to a Search Store via a Search Controller.
 
 ### SearchController.store.merchandising
 
-The `merchandising` property contains merchandising redirects and banner content. It is recommended to utlizing the `<Banner/>` component from `@searchspring/snap-preact-components` to display the various merchandising banners.
+The `merchandising` property contains merchandising redirects and banner content. It is recommended to utilize the `<Banner/>` component from `@searchspring/snap-preact-components` to display the various merchandising banners.
 
 The available banner types include: `header`, `banner`, `footer`, `left`, `inline`
 

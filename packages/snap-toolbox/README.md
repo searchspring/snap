@@ -1,7 +1,7 @@
 # Snap Toolbox
 
 
-A collection of utility tools such as DOM targetting, currency formatting & browser feature flags.
+A collection of utility tools such as DOM targeting, currency formatting & browser feature flags.
 
 ## Installation
 

@@ -1,7 +1,7 @@
 # Snap URL Manager
 
 
-Snap URL Manager is available on each controller via `controller.urlManager`. It is core service that provides customizable frontend URL management and a means to subscribe to the URL for changes. It's primary purpose is to provide a standard API to manage URL across Snap products.
+Snap URL Manager is available on each controller via `controller.urlManager`. It is a core service that provides customizable frontend URL management and a means to subscribe to the URL for changes. Its primary purpose is to provide a standard API to manage URL across Snap products.
 
 
 A `urlManager` is constructed with a `Translator` instance. This is the translator that manages your URL scheme, as well as rules for updating the URL. For now, we'll use the included translator that uses query strings and hash fragments and utilizes pushState to modify the URL in the browser.

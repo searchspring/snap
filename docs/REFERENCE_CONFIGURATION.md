@@ -61,7 +61,7 @@ Specifies all of the controllers that we wish to create.
 - Each controller array (e.g. `search`, `autocomplete`, etc.) contains objects with at least a `config` property, and may include `targeters`, `services`, `url`, and `context`.
 - For detailed controller configuration, see the Snap documentation or type definitions for each controller type.
 
-## Features Flags
+## Feature Flags
 
 `config.features` is optional and defines features to enable.
 

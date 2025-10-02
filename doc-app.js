@@ -26,8 +26,6 @@ import('./docs/documents.js').then(function (_) {
 		})
 		.flat()
 		.concat([
-			// other links
-			{ a: `<a `, b: `<a target="_blank"` },
 			{ a: '(https://github.com/searchspring/snap/tree/main/packages/snap-store-mobx/src/Search)', b: '(./reference-store-search)' },
 			{ a: '(https://github.com/searchspring/snap/tree/main/packages/snap-store-mobx/src/Autocomplete)', b: '(./reference-store-autocomplete)' },
 			{ a: '(https://github.com/searchspring/snap/tree/main/packages/snap-store-mobx/src/Recommendation)', b: '(./reference-store-recommendation)' },
@@ -201,7 +199,7 @@ import('./docs/documents.js').then(function (_) {
 			markedHTML() {
 				return marked(this.markdown).replace(/<a\s+href=['"]https:\/\/[^'"]*['"]/g, (match) => {
 					// external links should open in a new tab
-					return match.replace('<a ', '<a target="_blank" ');
+					return match.replace('<a ', '<a target="_blank" rel="noopener noreferrer" ');
 				});
 			},
 		},

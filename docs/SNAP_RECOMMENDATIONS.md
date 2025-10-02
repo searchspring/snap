@@ -1,6 +1,6 @@
 # Recommendations
 
-While it is possible to construct recommendation controllers via the Snap configuration, it is recommended to utilize the instantiator config instead for integration of recommendations. This is because certain pages may not have a script block to target, and the instantiator will handle the targetting and creation of recommendation controllers for script blocks found in the DOM at run time.
+While it is possible to construct recommendation controllers via the Snap configuration, it is recommended to utilize the instantiator config instead for integration of recommendations. This is because certain pages may not have a script block to target, and the instantiator will handle the targeting and creation of recommendation controllers for script blocks found in the DOM at run time.
 
 There are three types of recommendations that Searchspring offers:
 

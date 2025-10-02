@@ -1,6 +1,6 @@
 # Snap Logger
 
-Snap Logger is a available on each controller via `controller.log`. Controller logs are prefixed with the controller's id and it is recommended to use logging methods of the controller in place of `window.console` methods.
+Snap Logger is available on each controller via `controller.log`. Controller logs are prefixed with the controller's id and it is recommended to use logging methods of the controller in place of `window.console` methods.
 
 ```typescript
 controller.log.image({
@@ -19,10 +19,10 @@ controller.log.imageText({
 
 controller.log.debug('debug');
 
-controller.log.dev(`%c ${logger.emoji.vortex} %c${logger.prefix}%c${'magical text'}`,
-`color: ${logger.colors.blue}; font-weight: bold; font-size: 10px; line-height: 12px;`,
-`color: ${logger.colors.bluegreen}; font-weight: normal;`,
-`color: ${logger.colors.bluegreen}; font-weight: bold;`);
+controller.log.dev(`%c ${controller.log.emoji.vortex} %c${controller.log.prefix}%c${'magical text'}`,
+`color: ${controller.log.colors.blue}; font-weight: bold; font-size: 10px; line-height: 12px;`,
+`color: ${controller.log.colors.bluegreen}; font-weight: normal;`,
+`color: ${controller.log.colors.bluegreen}; font-weight: bold;`);
 ```
 
 ## `setMode` method

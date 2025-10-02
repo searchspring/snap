@@ -2,7 +2,7 @@
 
 The heart of controlling Search, Autocomplete, & Finder functionality. The Controller is responsible for tying various Snap services together.
 
-Although `@searchspring/snap-controller` is published as a standalone package, it is not intended to be used directly. Internally it is a depdancy of the `@searchspring/snap-preact` package.
+Although `@searchspring/snap-controller` is published as a standalone package, it is not intended to be used directly. Internally it is a dependency of the `@searchspring/snap-preact` package.
 
 
 ## Configuration

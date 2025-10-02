@@ -176,7 +176,7 @@ table td {
 #content h4::before,
 #content h5::before,
 #content h6::before {
-	content: '🔗' / 'copy permalink';
+	content: '🔗';
 	position: absolute;
 	left: -1.2em;
 	opacity: 0;

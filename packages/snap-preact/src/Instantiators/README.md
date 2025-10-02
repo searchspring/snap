@@ -1,7 +1,7 @@
 # Instantiators
 
 ## RecommendationInstantiator
-The `RecommendationInstantiator` class handles the targetting and creation of recommendation controllers. The instantiator looks for targets in the DOM, creates a controller and injects components into the DOM.
+The `RecommendationInstantiator` class handles the targeting and creation of recommendation controllers. The instantiator looks for targets in the DOM, creates a controller and injects components into the DOM.
 
 
 ### controller

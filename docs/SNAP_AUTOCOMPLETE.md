@@ -54,7 +54,7 @@ const snap = new Snap({
 
 ## Autocomplete Store
 
-It is recommended to utlizing the `Autocomplete` component from `@searchspring/snap-preact-components` to display Autocomplete.
+It is recommended to utilizing the `Autocomplete` component from `@searchspring/snap-preact-components` to display Autocomplete.
 
 The following properties are specific to an Autocomplete Store via an Autocomplete Controller.
 

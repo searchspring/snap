@@ -96,4 +96,4 @@ type ProfileTime = {
 
 
 ## Logging profiles
-It is recommended to using the [Snap Logger's `profile`](https://searchspring.github.io/snap/reference-logger#profile-method) method to log Snap Profiles as it provides a clean output for easy parsing.
+It is recommended to use the [Snap Logger's `profile`](https://searchspring.github.io/snap/reference-logger#profile-method) method to log Snap Profiles as it provides a clean output for easy parsing.

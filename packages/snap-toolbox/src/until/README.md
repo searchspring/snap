@@ -1,7 +1,7 @@
 # until
 This utility function resolves the provided parameter when it becomes truthy.
 
-The function takes a single required parameter containing any function, object, or primative you are awaiting to resolve. 
+The function takes a single required parameter containing any function, object, or primitive you are awaiting to resolve. 
 
 Typical usage may include waiting for a third party function to become available.
 

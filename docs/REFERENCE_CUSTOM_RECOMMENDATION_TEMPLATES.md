@@ -16,7 +16,7 @@ snapfu recs init
 
 In this example, we'll create a new template with a name of "DefaultRecommendations"
 
-This will generate three files which should be commited to your repository: 
+This will generate three files which should be committed to your repository: 
 - The `.jsx` file (/src/components/Recommendations/Default.jsx) is the template itself containing our component.
 - The `.scss` file (/src/components/Recommendations/DefaultRecommendations.scss) is imported by the `.jsx` template file and optional CSS styling can be defined here.
 - The `.json` file (/src/components/Recommendations/DefaultRecommendations.json) contains various meta data for this template and is used when running `snapfu recs sync` to sync this template to Searchspring's Management Console API. See syncing documentation below. 
