@@ -323,7 +323,7 @@ import('./docs/documents.js').then(function (_) {
 	];
 
 	const router = VueRouter.createRouter({
-		history: VueRouter.createWebHistory(),
+		history: VueRouter.createWebHistory(window.location.hostname !== 'localhost' ? '/snap/' : undefined),
 		routes,
 	});
 
