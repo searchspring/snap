@@ -78,7 +78,9 @@ export const AutocompleteFixed = observer((properties: AutocompleteFixedProps): 
 		const existingInputName = (input as HTMLInputElement)?.getAttribute('name');
 		if (existingInputName) {
 			setInputName(existingInputName);
-			(input as HTMLInputElement).setAttribute('name', '');
+			if (props.renderInput) {
+				(input as HTMLInputElement).setAttribute('name', '');
+			}
 		}
 		inputPlaceholderText = (input as HTMLInputElement)?.getAttribute('placeholder');
 	}
@@ -172,10 +174,29 @@ export const AutocompleteFixed = observer((properties: AutocompleteFixedProps): 
 		}
 	};
 
-	const [inputBounds, setInputBounds] = useState<inputBounds>(getInputBounds(input as Element));
+	const [inputBounds, setInputBounds] = useState<inputBounds>({
+		top: 0,
+		left: 0,
+		width: 0,
+		height: 0,
+	});
+
+	const checkForInputChange = () => {
+		const currentInputBounds = getInputBounds(input as Element);
+		if (
+			inputBounds.height !== currentInputBounds.height ||
+			inputBounds.left !== currentInputBounds.left ||
+			inputBounds.top !== currentInputBounds.top ||
+			inputBounds.width !== currentInputBounds.width
+		) {
+			setInputBounds(currentInputBounds);
+		}
+	};
+
+	checkForInputChange();
 
 	const debouncedHandleResize = debounce(() => {
-		setInputBounds(getInputBounds(input as Element));
+		checkForInputChange();
 	}, 10);
 
 	useEffect(() => {
