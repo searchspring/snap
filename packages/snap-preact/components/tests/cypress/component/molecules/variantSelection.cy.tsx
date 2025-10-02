@@ -8,6 +8,7 @@ import { Profiler } from '@searchspring/snap-profiler';
 import { Logger } from '@searchspring/snap-logger';
 import { Client } from '@searchspring/snap-client';
 import { RecommendationController } from '@searchspring/snap-controller';
+import meta from '../../fixtures/meta.json';
 import json from '../../fixtures/results-bundle.json';
 import profile from '../../fixtures/profile-bundle.json';
 
@@ -46,9 +47,13 @@ const controller = new RecommendationController(recommendConfig, {
 let selection: VariantSelectionType;
 
 describe('VariantSelection Component', async () => {
-	before(async () => {
+	before(() => {
 		cy.intercept('*recommend*', json);
 		cy.intercept('*profile*', profile);
+		cy.intercept('*meta*', meta);
+	});
+
+	before(async () => {
 		await controller.search();
 
 		selection = controller.store.results[0].variants?.selections[1]!;

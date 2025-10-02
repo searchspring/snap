@@ -18,6 +18,8 @@ export interface RequestOpts {
 	headers: HTTPHeaders;
 	query?: HTTPQuery;
 	body?: HTTPBody;
+	origin?: string; // override url origin
+	subDomain?: string; // optional subdomain for requests
 }
 
 export class API {
@@ -104,8 +106,8 @@ export class API {
 			throw new Error(`Request failed. Missing "siteId" parameter.`);
 		}
 
-		const siteIdHost = `https://${siteId}.a.searchspring.io`;
-		const origin = (this.configuration.origin || siteIdHost).replace(/\/$/, '');
+		const siteIdHost = `https://${siteId}.a${context.subDomain ? `.${context.subDomain}` : ''}.athoscommerce.io`;
+		const origin = (context.origin || this.configuration.origin || siteIdHost).replace(/\/$/, '');
 
 		let url = `${origin}/${context.path.replace(/^\//, '')}`;
 
@@ -146,6 +148,7 @@ export interface ApiConfigurationParameters {
 	mode?: keyof typeof AppMode | AppMode;
 	initiator?: string;
 	origin?: string; // override url origin
+	secondaryOrigin?: string; // override url origin
 	fetchApi?: FetchAPI; // override for fetch implementation
 	queryParamsStringify?: (params: HTTPQuery) => string; // stringify function for query strings
 	headers?: HTTPHeaders; //header params we want to use on every request
@@ -178,6 +181,10 @@ export class ApiConfiguration {
 
 	get origin(): string {
 		return this.config.origin || '';
+	}
+
+	get secondaryOrigin(): string {
+		return this.config.secondaryOrigin || '';
 	}
 
 	get initiator(): string {

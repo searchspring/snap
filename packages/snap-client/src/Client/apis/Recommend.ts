@@ -43,6 +43,7 @@ export class RecommendAPI extends API {
 		const response = await this.request<ProfileResponseModel>(
 			{
 				path: '/api/personalized-recommendations/profile.json',
+				origin: this.configuration.secondaryOrigin || undefined, // use alternate origin for profile requests
 				method: 'GET',
 				headers: headerParameters,
 				query: queryParameters,
@@ -176,8 +177,13 @@ export class RecommendAPI extends API {
 		const headerParameters: HTTPHeaders = {};
 		headerParameters['Content-Type'] = 'text/plain';
 
-		const siteId = requestParameters.siteId;
-		const path = `/boost/${siteId}/recommend`;
+		let path = `/v1/recommend`;
+
+		if (this.configuration.origin && this.configuration.origin.indexOf('athoscommerce.io') == -1) {
+			// non-athos origin, use old path
+			const siteId = requestParameters.siteId;
+			path = `/boost/${siteId}/recommend`;
+		}
 
 		const response = await this.request<RecommendResponseModel[]>(
 			{
@@ -185,6 +191,7 @@ export class RecommendAPI extends API {
 				method: 'POST',
 				headers: headerParameters,
 				body: requestParameters,
+				subDomain: 'p13n',
 			},
 			JSON.stringify(requestParameters)
 		);

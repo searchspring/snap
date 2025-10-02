@@ -452,7 +452,7 @@ describe('Tracker', () => {
 		// @ts-ignore - Testing private method
 		const productId = tracker.getProductId(product);
 
-		expect(productId).toBe('sku456'); // Expecting uid to be preferred
+		expect(productId).toBe('sku456'); // Expecting sku to be preferred
 	});
 
 	it('can get viewed products', () => {

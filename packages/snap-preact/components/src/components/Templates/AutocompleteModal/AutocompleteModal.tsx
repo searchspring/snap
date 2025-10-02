@@ -92,7 +92,9 @@ export const AutocompleteModal = observer((properties: AutocompleteModalProps): 
 		const existingInputName = (input as HTMLInputElement)?.getAttribute('name');
 		if (existingInputName) {
 			setInputName(existingInputName);
-			(input as HTMLInputElement).setAttribute('name', '');
+			if (props.renderInput) {
+				(input as HTMLInputElement).setAttribute('name', '');
+			}
 		}
 	}
 
