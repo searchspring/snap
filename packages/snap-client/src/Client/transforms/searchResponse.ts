@@ -471,6 +471,6 @@ function decodeProperty(encoded: string | string[] | SearchResponseModelResultBa
 			return item;
 		});
 	} else {
-		return unescapeHTML(String(encoded));
+		return unescapeHTML(String(JSON.stringify(encoded)));
 	}
 }
