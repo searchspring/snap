@@ -466,8 +466,8 @@ describe('search response transformer result', () => {
 
 		// @ts-ignore - typings are wrong intentionally here
 		const result3 = transformSearchResponse.result(resultWithRandomBadgeField2, 0);
+		expect(result3.attributes?.badges).toEqual(JSON.stringify(resultWithRandomBadgeField2.badges));
 		expect(result3.badges).toEqual([]);
-		expect(result3.attributes?.badges).toEqual('[object Object]');
 	});
 });
 
