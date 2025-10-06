@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.10.1](https://github.com/searchspring/snap/compare/v1.10.0...v1.10.1) (2025-10-06)
+
+### Bug Fixes
+
+- **searchresponse.ts:** need to stringify propertys before we unescapeHTML them to ensure we dont end up with [object,object] attributes ([fefa659](https://github.com/searchspring/snap/commit/fefa65925abfec442b086b09d341a5238c83842d))
+
 # [1.10.0](https://github.com/searchspring/snap/compare/v1.9.2...v1.10.0) (2025-10-02)
 
 ### Features
