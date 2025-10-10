@@ -325,7 +325,7 @@ import('./docs/documents.js').then(function (_) {
 	];
 
 	const router = VueRouter.createRouter({
-		history: VueRouter.createWebHistory(window.location.hostname !== 'localhost' ? '/snap/' : undefined),
+		history: VueRouter.createWebHistory(window.location.hostname !== 'localhost' ? `/${window.location.pathname.split('/')[1]}/` : undefined),
 		routes,
 	});
 	router.afterEach((to, from) => {
