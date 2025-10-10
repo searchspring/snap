@@ -15,6 +15,9 @@ The `SearchController` is used when making queries to the API `search` endpoint.
 | settings.facets.trim | facets that do not change results will be removed | true |   |
 | settings.facets.autoOpenActive | setting for "auto open" functionality for facets that are filtered (active), collapsed, and have no stored data | true |   |
 | settings.facets.fields | object keyed by individual facet fields for configuration of any settings.facets options | ➖ |   |
+| settings.filters.hierarchy.showInSummary | boolean to enable/disable selected hierarchy facets from showing in the filters  | ➖ |   |
+| settings.filters.hierarchy.showFullPath | boolean to show the full hierarchy path in the filter  | ➖ |   |
+| settings.filters.hierarchy.displayDelimiter | string to adjust the delimiter between each level of the full hierarchy path | ➖ |   |
 | settings.history.max | how many search terms should be kept in the history store | 25 |   | 
 | settings.history.url | allows for adjust the root URL for history store terms (default is relative URLs) | ➖ |   | 
 | settings.pagination.pageSizeOptions | setting to change the page size options available | ➖ |   | 

@@ -210,13 +210,23 @@ export class SearchController extends AbstractController {
 							if (crumb && crumb.length) {
 								const crumbFullPath = crumb[0].value;
 								const crumbPartialPath = crumb[0].label;
-
-								search.response.filters.push({
-									field: facet.field,
-									label: `${showFullPath ? crumbFullPath.replaceAll(dataDelimiter, displayDelimiter) : crumbPartialPath}`,
-									type: 'hierarchy',
-									value: facet.value,
-								});
+								if (search.response.filters) {
+									search.response.filters.push({
+										field: facet.field,
+										label: `${showFullPath ? crumbFullPath.replaceAll(dataDelimiter, displayDelimiter) : crumbPartialPath}`,
+										type: 'hierarchy',
+										value: facet.value,
+									});
+								} else {
+									search.response.filters = [
+										{
+											field: facet.field,
+											label: `${showFullPath ? crumbFullPath.replaceAll(dataDelimiter, displayDelimiter) : crumbPartialPath}`,
+											type: 'hierarchy',
+											value: facet.value,
+										},
+									];
+								}
 							}
 						}
 					});
