@@ -94,7 +94,7 @@ The client uses the [@searchspring/snapi-types](https://www.npmjs.com/package/@s
 
 ### Methods
 
-#### `meta` method
+#### meta
 
 The `meta` endpoint is used to fetch metadata about the site and also contains common static data such as sort options that don't change between other API queries.
 
@@ -103,7 +103,7 @@ The `meta` endpoint is used to fetch metadata about the site and also contains c
 const meta: MetaResponseModel = await client.meta();
 ```
 
-#### `autocomplete` method
+#### autocomplete
 
 The `autocomplete` endpoint is used to fetch autocomplete suggestions and results for a given search query and also requests the meta data for the site.
 
@@ -122,7 +122,7 @@ const [meta, autocomplete]: [MetaResponseModel, AutocompleteResponseModel] = awa
 });
 ```
 
-#### `search` method
+#### search
 
 The `search` endpoint is used to fetch search results for a given search query and also requests the meta data for the site.
 
@@ -138,7 +138,7 @@ const [meta, search]: [MetaResponseModel, SearchResponseModel] = await client.se
 ```
 
 
-#### `finder` method
+#### finder
 
 The `finder` method makes a request to the Searchspring Finder API to fetch search results for a given search query.
 
@@ -158,7 +158,7 @@ const [meta, finder]: [MetaResponseModel, SearchResponseModel] = await client.fi
 });
 ```
 
-#### `trending` method
+#### trending
 
 The `trending` method makes a request to the Searchspring Trending API to fetch trending search queries.
 
@@ -169,7 +169,7 @@ const results: TrendingResponseModel = await client.trending({
 ```
 
 
-#### `recommend` method
+#### recommend
 
 The `recommend` method makes a request to the Searchspring Profile API and Recommend API to fetch recommendations for a given profile tag. This will also request the meta data.
 

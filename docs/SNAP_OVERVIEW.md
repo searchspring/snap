@@ -11,7 +11,7 @@ A root level Preact component is rendered to the target selector(s) for each con
 Links attached to facet values, pagination, sort by, etc.. that are clicked will update the urlManager state and trigger a new search and re-render of the component.
 
 
-Let's create the bare minimum configuration to create a search controller and render a root level `Content` component to the page.
+Here is an example of the bare minimum configuration to create a search controller and render a root level `Content` component to the page.
 
 ```ts
 // src/index.ts
@@ -43,9 +43,9 @@ const snap = new Snap({
 });
 ```
 
-Let's go over our `Content` component. This is considered a root level component since it is being rendered onto the page using a targeter.
+The `Content` component is considered a root level component since it is being rendered onto the page using a targeter.
 
-We'll want to create a provider such that any subcomponents can have a reference to the controller via its props. The `@searchspring/snap-preact-components` package contains a `ControllerProvider` that we can utilize.
+To provide a reference to the controller via props to any subcomponents, we can utilize the `ControllerProvider` component from the `@searchspring/snap-preact-components` package.
 
 ```tsx
 // src/components/Content/Content.tsx
@@ -53,7 +53,7 @@ We'll want to create a provider such that any subcomponents can have a reference
 import { observer } from 'mobx-react';
 import { ControllerProvider } from '@searchspring/snap-preact-components';
 
-export const Content = observer((props: { controller: SearchController }) => {
+export const Content = observer((props) => {
     const { controller } = props;
 
     return controller.store.loaded ? (
@@ -64,13 +64,14 @@ export const Content = observer((props: { controller: SearchController }) => {
 });
 ```
 
-Then from any subcomponent such as the `Results` component in this example, we'll need to add the `withController` higher order component to access our controller via props and it should be placed before any other decorators/HOCs. 
+Then from any subcomponent such as `Results` in this example, the `withController` higher order component is used to access the controller via props. It should be placed before any other decorators/HOCs. 
 
-Finally, we'll want to add the `observer` higher order component to make it reactive to changes in the store.
+Finally, the `observer` higher order component is used to make the component reactive to changes in the store.
 
 ```tsx
 // src/components/Content/Content.tsx
 
+import { observer } from 'mobx-react';
 import { withController, InlineBanner, Result } from '@searchspring/snap-preact-components';
 
 const Results = withController(observer((props) => {

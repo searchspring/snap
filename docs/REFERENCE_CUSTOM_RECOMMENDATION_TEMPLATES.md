@@ -1,6 +1,6 @@
 # Custom Templates
 
-Let's look at how to setup a custom recommendation template using the Snapfu CLI. See [Getting Started > Setup](https://searchspring.github.io/snap/setup) for installing Snapfu.
+Let's look at how to setup a custom recommendation template using the Snapfu CLI. See [Getting Started > Setup](https://searchspring.github.io/snap/snap-setup) for installing Snapfu.
 
 There are three steps required for adding recommendations:
 - Creating the local template files

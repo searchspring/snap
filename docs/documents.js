@@ -9,25 +9,18 @@ var documents = [
 				url: './docs/ABOUT.md',
 				searchable: false,
 			},
-			{
-				label: 'Setup',
-				route: '/setup',
-				type: 'markdown',
-				url: './docs/SETUP.md',
-				searchable: true,
-			},
-			{
-				label: 'Getting Started',
-				route: '/getting-started',
-				type: 'markdown',
-				url: './docs/GETTING_STARTED.md',
-				searchable: true,
-			},
 		],
 	},
 	{
 		categoryName: 'Snap Integration',
 		links: [
+			{
+				label: 'Setup',
+				route: '/snap-setup',
+				type: 'markdown',
+				url: './docs/SNAP_SETUP.md',
+				searchable: true,
+			},
 			{
 				label: 'Overview',
 				route: '/snap-overview',

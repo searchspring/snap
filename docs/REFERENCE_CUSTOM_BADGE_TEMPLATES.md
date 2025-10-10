@@ -1,6 +1,6 @@
 # Custom Badge Templates
 
-Custom Badge Templates can be created and sync to the Searchspring Management Console using the Snapfu CLI. See [Welcome > Setup](https://searchspring.github.io/snap/setup) for installing Snapfu
+Custom Badge Templates can be created and sync to the Searchspring Management Console using the Snapfu CLI. See [Welcome > Setup](https://searchspring.github.io/snap/snap-setup) for installing Snapfu
 
 ## Initialize Custom Badges
 
@@ -242,7 +242,7 @@ Badge template parameters is an array of objects. Each object is a template para
 
 ## Custom Badge Locations
 
-Custom Badge Locations can be created and synced to the Searchspring Management Console using the Snapfu CLI. See [Welcome > Setup](https://searchspring.github.io/snap/setup) for installing Snapfu
+Custom Badge Locations can be created and synced to the Searchspring Management Console using the Snapfu CLI. See [Welcome > Setup](https://searchspring.github.io/snap/snap-setup) for installing Snapfu
 
 Custom overlay and callout locations can be created by defining a `locations.json` file in the project. It is recommended to create it at: `src/components/Badges/locations.json`
 

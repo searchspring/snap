@@ -56,7 +56,7 @@ To host your own build files follow the below steps in your project.
 
 ## Deploying to Searchspring CDN
 
-Deploying to Searchspring CDN is only possible if the repository is managed by the Searchspring [Github organization](https://github.com/searchspring-implementations). Repositories in this organization are typically managed by the Searchspring professional services team and deployed via a CI/CD pipeline using the [snap-action](https://github.com/searchspring/snap-action) Github Action. An invitation can be requested for collaboration.
+**Deploying to Searchspring CDN is only possible if the repository is managed by the Searchspring [Github organization](https://github.com/searchspring-implementations)**. Repositories in this organization are typically managed by the Searchspring professional services team and deployed via a CI/CD pipeline using the [snap-action](https://github.com/searchspring/snap-action) Github Action. An invitation can be requested for collaboration.
 
 Github action runs triggered on the default branch `production` will build and deploy bundle files to this URL:
 

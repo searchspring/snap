@@ -237,7 +237,7 @@ const OUTPUT_FILE = 'snap-docs.json';
 			}
 
 			const lang = libraryDir.split('-')[1];
-			const route = libraryDir.split('-').reverse().slice(0, 2).join('-'); //.includes('snap-preact-components') ? 'components-preact' : ''; // TODO: refactor once more options
+			const route = 'preact-components';
 			const url = `./packages/${packagePath}`;
 			const componentLibrary = `${lang[0].toUpperCase() + lang.slice(1)}`; // Preact
 			let label = `${componentLibrary}`;

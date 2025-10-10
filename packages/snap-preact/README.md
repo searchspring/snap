@@ -88,7 +88,9 @@ const config = {
 };
 ```
 
-### `config.context` - optional `Context` object to be used to set the global context. If no context is provided, a default context taken from the integration script (`shopper` variable) will be used, otherwise the provided `config.context` is merged with the script context. This context becomes the `globalContext` that is passed to all controllers that are created.
+### config.context
+
+Optional `Context` object to be used to set the global context. If no context is provided, a default context taken from the integration script (`shopper` variable) will be used, otherwise the provided `config.context` is merged with the script context. This context becomes the `globalContext` that is passed to all controllers that are created.
 
 ### config.client
 A single client instance will be created and shared across all services using the provided config. 

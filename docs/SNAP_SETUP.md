@@ -15,23 +15,15 @@ npm install -g snapfu
 ```
 
 
-## Login
-
-Snapfu will prompt you to authenticate with Github.
-
-```sh
-snapfu login
-```
-
 ## Initialize new project
 
-This will create a new project with git repo from a list of available scaffolds. 
+This will create a new project with a git repo from a list of available scaffolds. The `[projectname]` argument is optional and will create a directory with the given name. Otherwise the project will be created in the current directory.
 
 During this you will also be prompted for your Site ID and secret key, which you find in the [Searchspring Management Console](https://manage.searchspring.net)
 
 ```sh
 snapfu init [projectname]
-cd [projectname] && npm install && git checkout -b initial
+cd [projectname] && npm install
 ```
 
 
@@ -53,7 +45,7 @@ This will start the local development server and serve the project build files a
 Note: The local server uses a self-signed certificate for HTTPS and you may be prompted to continue.
 
 
-There are two common ways to develop a project, using a local mockup file and leveraging the Snapfu Chrome extension.
+There are two common ways to develop a project, using a [local mockup file](https://searchspring.github.io/snap/setup#local-mockup-file) and leveraging the [Snapfu Chrome extension](https://searchspring.github.io/snap/setup#snapfu-chrome-extension).
 
 ## Local mockup file
 

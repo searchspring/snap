@@ -102,7 +102,7 @@ The `merchandising` property contains merchandising redirects and banner content
 
 The available banner types include: `header`, `banner`, `footer`, `left`, `inline`
 
-For inline banners, the `<InlineBanner/>` component should be used instead. An example of this usage can be found in the 'store.results' section below.
+For inline banners, the `<InlineBanner/>` component should be used instead. An example of this usage can be found in the [store.results](https://searchspring.github.io/snap/snap-search#searchcontrollerstoreresults) section below.
 
 ```jsx
 import { Banner } from '@searchspring/snap-preact-components';

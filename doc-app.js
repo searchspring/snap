@@ -111,9 +111,11 @@ import('./docs/documents.js').then(function (_) {
 		template: `
             <Navigation :documents="documents"></Navigation>
 
-            <div id="content">
-                <router-view :routes="routes"></router-view>
-            </div>
+			<div id="content-wrapper">
+				<div id="content">
+					<router-view :routes="routes"></router-view>
+				</div>
+			</div>
             <div id="ac-overlay"></div>
         `,
 	};
@@ -252,7 +254,7 @@ import('./docs/documents.js').then(function (_) {
 		components: ['Link'],
 		data() {
 			return {
-				navVisible: true,
+				navVisible: window.innerWidth < 768 ? false : true,
 			};
 		},
 		computed: {
@@ -288,9 +290,9 @@ import('./docs/documents.js').then(function (_) {
                         </div>
                     </div>
                 </router-link>
-                <span class="collapseNav" @click="toggleNav"><i class="fas fa-bars fa-2x"></i></span>
+				<span class="collapseNav" @click="toggleNav"><i class="fas fa-bars fa-2x"></i></span>
                 <div id="search-container">
-                    </div>
+				</div>
                 <div id="navigation" :class="{ visible: navVisible }" >
                     <div v-for="section in documents" class="section">
                         <h3>{{ section.categoryName }}</h3>
@@ -326,73 +328,171 @@ import('./docs/documents.js').then(function (_) {
 		history: VueRouter.createWebHistory(window.location.hostname !== 'localhost' ? '/snap/' : undefined),
 		routes,
 	});
+	router.afterEach((to, from) => {
+		if (to.path !== from.path) {
+			// close navigation on mobile upon changing routes (not applicable to initial load)
+			if (window.innerWidth < 768 && document.getElementById('navigation')?.classList.contains('visible')) {
+				document.querySelector('.collapseNav')?.click();
+			}
+
+			// invoked here to handle removal when iframe is rendered
+			document.querySelector('.legend')?.remove();
+		}
+	});
 
 	app.use(router);
 
 	app.mount('#app');
 
+	const SCROLL_TO_HEADING_DELAY = 2000;
+	const DEBOUNCE_DELAY = 100;
 	window.postRenderModifications = function () {
+		let headingIdsInView = [];
+		let lastScrolledUp = true;
+		let lastScrollY = window.scrollY;
+		let hashId = window.location.hash.split('#')[1];
+		let preventLegendUpdate = Boolean(hashId); // if there is a hash id, prevent the legend from updating while scrolling
+		if (hashId) {
+			// scroll to heading if it exists in the url
+			const heading = document.getElementById(hashId);
+			if (heading && createHeadingId(heading) === hashId) {
+				heading.scrollIntoView({ behavior: 'smooth' });
+				heading.classList.add('scrolled-to');
+				window.setTimeout(function () {
+					heading.classList.remove('scrolled-to');
+					preventLegendUpdate = false;
+				}, SCROLL_TO_HEADING_DELAY);
+			} else {
+				// handle redirects of old routes
+				if (hashId === '/') {
+					router.replace('/');
+				} else if (hashId.match(/^\/components-preact/)) {
+					router.replace(hashId.replace(/^\/components-preact/, '/preact-components'));
+				} else if (hashId.match(/^\/integration-recommendations/)) {
+					router.replace('/snap-recommendations');
+				} else if (hashId.match(/^\/integration-legacy-recommendations/)) {
+					router.replace('/integration-legacy-recommendations');
+				} else if (hashId.match(/^\/start-preact/)) {
+					router.replace('/getting-started');
+				} else if (hashId.match(/^\/start-preact-events/)) {
+					router.replace('/reference-snap-preact-middleware');
+				} else if (hashId.match(/^\/start-github/)) {
+					router.replace('/build-deploy');
+				} else if (hashId.match(/^\/start-setup/)) {
+					router.replace('/snap-setup');
+				}
+			}
+		}
+
 		// highlight code blocks
 		document.querySelectorAll('pre code').forEach((block) => {
 			hljs.highlightElement(block);
 		});
 
-		function createHeadingId(heading) {
-			return heading.id || 'id-' + heading.textContent.toLowerCase().replace(/ /g, '-');
+		const handleScroll = debounce(() => {
+			if (window.scrollY > lastScrollY) {
+				lastScrolledUp = false;
+			} else {
+				lastScrolledUp = true;
+			}
+			lastScrollY = window.scrollY;
+		}, DEBOUNCE_DELAY);
+
+		window.addEventListener('scroll', handleScroll);
+
+		function updateLegend(id) {
+			if (preventLegendUpdate && !id) return;
+
+			document.querySelectorAll(`.legend a`).forEach((item) => {
+				item.classList.remove('active');
+			});
+			const activeHeadingId = id || headingIdsInView[lastScrolledUp ? 0 : headingIdsInView.length - 1];
+			const legendItem = document.querySelector(`.legend a[href="#${activeHeadingId}"]`);
+			if (legendItem) {
+				legendItem.classList.add('active');
+			}
 		}
-		// add permalinks to headings and handle clicks to copy to clipboard
-		document.querySelectorAll('#content h2, #content h3, #content h4, #content h5, #content h6').forEach((heading) => {
+
+		// update active legend item when clicked
+		// setTimeout is needed to prevent the legend from updating if observer fires
+		window.updateLegend = (id) => setTimeout(() => updateLegend(id), 1);
+
+		// adds ids to headings for permalinks and handles clicks to copy to clipboard
+		const headingsRaw = Array.from(document.querySelectorAll('#content h2, #content h3, #content h4, #content h5, #content h6'));
+		const headings = headingsRaw.map((heading) => {
 			heading.role = 'link';
 			const id = createHeadingId(heading);
-			if (id) {
-				heading.id = id;
-				heading.addEventListener('click', () => {
-					const url = window.location.origin + window.location.pathname + '#' + id;
-					navigator.clipboard.writeText(url);
-					router.push({ hash: '#' + id });
-					const span = document.createElement('span');
-					span.textContent = 'Permalink copied!';
-					span.classList.add('permalink');
-					heading.prepend(span);
-					window.setTimeout(function () {
-						span.remove();
-					}, 1000);
+			heading.id = id;
+			heading.addEventListener('click', () => {
+				const url = window.location.origin + window.location.pathname + '#' + id;
+				navigator.clipboard.writeText(url);
+				router.push({ hash: '#' + id });
+				const span = document.createElement('span');
+				span.textContent = 'Permalink copied!';
+				span.classList.add('permalink');
+				heading.prepend(span);
+				window.setTimeout(function () {
+					span.remove();
+				}, SCROLL_TO_HEADING_DELAY);
+			});
+			const observer = new IntersectionObserver((entries) => {
+				entries.forEach((entry) => {
+					if (entry.isIntersecting) {
+						headingIdsInView.push(entry.target.id);
+					} else {
+						headingIdsInView = headingIdsInView.filter((item) => item !== entry.target.id);
+					}
+					headingIdsInView.sort((a, b) => {
+						const aIndex = headingsRaw.findIndex((h) => h.id === a);
+						const bIndex = headingsRaw.findIndex((h) => h.id === b);
+						return aIndex - bIndex;
+					});
+					updateLegend();
 				});
-			}
+			});
+			observer.observe(heading);
+			return heading;
 		});
 
-		// scroll to heading if it exists in the url
-		const id = window.location.hash.split('#')[1];
-		if (id) {
-			const heading = document.getElementById(id);
-			if (heading && createHeadingId(heading) === id) {
-				heading.scrollIntoView({ behavior: 'smooth' });
-				heading.classList.add('scrolled-to');
-				window.setTimeout(function () {
-					heading.classList.remove('scrolled-to');
-				}, 1000);
-			} else {
-				// handle redirects of old routes
-				if (id === '/') {
-					router.replace('/');
-				} else if (id.match(/^\/components-preact/)) {
-					router.replace(id.replace(/^\/components-preact/, '/preact-components'));
-				} else if (id.match(/^\/integration-recommendations/)) {
-					router.replace('/snap-recommendations');
-				} else if (id.match(/^\/integration-legacy-recommendations/)) {
-					router.replace('/integration-legacy-recommendations');
-				} else if (id.match(/^\/start-preact/)) {
-					router.replace('/getting-started');
-				} else if (id.match(/^\/start-preact-events/)) {
-					router.replace('/reference-snap-preact-middleware');
-				} else if (id.match(/^\/start-github/)) {
-					router.replace('/build-deploy');
-				} else if (id.match(/^\/start-setup/)) {
-					router.replace('/setup');
-				}
-
-				// integration tracking
-			}
+		// adds a legend to the top of the page with links to the headings
+		if (headings.length) {
+			const legend = document.createElement('div');
+			legend.classList.add('legend');
+			const title = document.querySelector('#content h1')?.textContent;
+			legend.innerHTML =
+				`<div class="legend-container">` +
+				(title ? `<div class="legend-title">${title}</div>` : '') +
+				`
+						<ul>
+							${headings
+								.map((h) => {
+									const id = h.id;
+									const text = h.textContent;
+									const level = h.tagName.toLowerCase();
+									return `<li class="${level}" onclick="updateLegend('${id}')"><a href="#${id}" class="${
+										hashId === id ? 'active' : ''
+									}">${text}</a></li>`;
+								})
+								.join('')}
+						</ul>
+				</div>`;
+			document.getElementById('content').prepend(legend);
 		}
 	};
+
+	function debounce(func, wait) {
+		let timeout;
+		return function executedFunction(...args) {
+			const later = () => {
+				clearTimeout(timeout);
+				func(...args);
+			};
+			clearTimeout(timeout);
+			timeout = setTimeout(later, wait);
+		};
+	}
+
+	function createHeadingId(heading) {
+		return heading.id || 'id-' + heading.textContent.toLowerCase().replace(/ /g, '-');
+	}
 });
