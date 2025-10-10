@@ -190,6 +190,40 @@ export class SearchController extends AbstractController {
 			this.eventManager.fire('restorePosition', { controller: this, element: elementPosition });
 		});
 
+		const hierarchySettings = this.config.settings?.filters?.hierarchy;
+		if (hierarchySettings && hierarchySettings.showInSummary) {
+			this.eventManager.on('afterSearch', async (search: AfterSearchObj, next: Next): Promise<void | boolean> => {
+				await next();
+
+				const displayDelimiter = hierarchySettings.displayDelimiter || ' / '; // choose delimiter for label
+				const showFullPath = hierarchySettings.showFullPath || false; // display full hierarchy path or just the current level
+
+				// add hierarchy filter to filter summary
+				const facets = search.response.facets;
+				if (facets) {
+					facets.forEach((facet: any) => {
+						const metaFacet = search.response.meta.facets[facet.field];
+						const dataDelimiter = metaFacet.hierarchyDelimiter;
+
+						if (metaFacet.display === 'hierarchy' && facet.filtered && facet.values?.length > 0) {
+							const crumb = facet.values.filter((val: any) => val.filtered == true);
+							if (crumb && crumb.length) {
+								const crumbFullPath = crumb[0].value;
+								const crumbPartialPath = crumb[0].label;
+
+								search.response.filters.push({
+									field: facet.field,
+									label: `${showFullPath ? crumbFullPath.replaceAll(dataDelimiter, displayDelimiter) : crumbPartialPath}`,
+									type: 'hierarchy',
+									value: facet.value,
+								});
+							}
+						}
+					});
+				}
+			});
+		}
+
 		this.eventManager.on('afterStore', async (search: AfterStoreObj, next: Next): Promise<void | boolean> => {
 			await next();
 			const controller = search.controller as SearchController;
