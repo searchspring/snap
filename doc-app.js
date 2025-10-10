@@ -407,7 +407,7 @@ import('./docs/documents.js').then(function (_) {
 				item.classList.remove('active');
 			});
 			const activeHeadingId = id || headingIdsInView[lastScrolledUp ? 0 : headingIdsInView.length - 1];
-			const legendItem = document.querySelector(`.legend a[href="#${activeHeadingId}"]`);
+			const legendItem = document.querySelector(`.legend a[data-id="${activeHeadingId}"]`);
 			if (legendItem) {
 				legendItem.classList.add('active');
 			}
@@ -415,7 +415,11 @@ import('./docs/documents.js').then(function (_) {
 
 		// update active legend item when clicked
 		// setTimeout is needed to prevent the legend from updating if observer fires
-		window.updateLegend = (id) => setTimeout(() => updateLegend(id), 1);
+		window.updateLegend = (id) => {
+			router.push({ hash: '#' + id });
+			document.getElementById(id).scrollIntoView({ behavior: 'instant' });
+			setTimeout(() => updateLegend(id), 1);
+		};
 
 		// adds ids to headings for permalinks and handles clicks to copy to clipboard
 		const headingsRaw = Array.from(document.querySelectorAll('#content h2, #content h3, #content h4, #content h5, #content h6'));
@@ -469,7 +473,7 @@ import('./docs/documents.js').then(function (_) {
 									const id = h.id;
 									const text = h.textContent;
 									const level = h.tagName.toLowerCase();
-									return `<li class="${level}" onclick="updateLegend('${id}')"><a href="#${id}" class="${
+									return `<li class="${level}" onclick="updateLegend('${id}')"><a href="javascript:void(0)" data-id="${id}" class="${
 										hashId === id ? 'active' : ''
 									}">${text}</a></li>`;
 								})
