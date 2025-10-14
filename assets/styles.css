@@ -154,7 +154,7 @@ table td {
 #content {
 	display: flex;
 	flex-direction: row-reverse;
-	max-width: 1700px;
+	max-width: 1400px;
     margin: 0 auto;
 }
 
@@ -323,7 +323,7 @@ code:not([class]) {
 	display: flex;
 }
 
-@media only screen and (max-width: 1750px) {
+@media only screen and (max-width: 1400px) {
 	#markdown {
 		margin: 0px auto;
 		border-radius: 0px;
