@@ -452,7 +452,7 @@ describe('Search Controller', () => {
 		expect(controller.store.filters).toHaveLength(0);
 	});
 
-	it('can set use showFullPath to adjust hierarchy filters in summary', async () => {
+	it('can set showFullPath to adjust hierarchy filters in summary', async () => {
 		const _config: SearchStoreConfig = {
 			...searchConfig,
 			settings: {
@@ -484,7 +484,7 @@ describe('Search Controller', () => {
 		expect(controller.store.filters[0].label).toBe('Category: All Dresses / Shop by Color');
 	});
 
-	it('can set use displayDelimiter & showFullPath to adjust hierarchy filters in summary', async () => {
+	it('can set displayDelimiter & showFullPath to adjust hierarchy filters in summary', async () => {
 		const _config: SearchStoreConfig = {
 			...searchConfig,
 			settings: {
