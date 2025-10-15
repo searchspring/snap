@@ -201,14 +201,13 @@ export class SearchController extends AbstractController {
 				if (products.length === 0 && !search.response._cached) {
 					// handle no results
 					const data = getSearchSchemaData({ params: search.request, response: search.response });
+					this.eventManager.fire('track.product.render', { controller: this, trackEvent: data });
 					this.tracker.events[this.page.type].render({ data, siteId: this.config.globals?.siteId });
 				}
 
 				products.forEach((result: Product) => {
 					if (!search.response._cached) {
-						const data = schemaMap[result.id];
-						this.tracker.events[this.page.type].render({ data, siteId: this.config.globals?.siteId });
-						this.eventManager.fire('track.product.render', { controller: this, product: result, trackEvent: data });
+						this.track.product.render(result);
 					}
 					this.events.product[result.id] = this.events.product[result.id] || {};
 					this.events.product[result.id].render = true;
@@ -350,10 +349,10 @@ export class SearchController extends AbstractController {
 				// store position data or empty object
 				this.storage.set('scrollMap', scrollMap);
 				const data = schemaMap[result.id];
+				this.eventManager.fire('track.product.clickThrough', { controller: this, event: e, product: result, trackEvent: data });
 				this.tracker.events[this.page.type].clickThrough({ data, siteId: this.config.globals?.siteId });
 				this.events.product[result.id] = this.events.product[result.id] || {};
 				this.events.product[result.id].clickThrough = true;
-				this.eventManager.fire('track.product.clickThrough', { controller: this, event: e, product: result, trackEvent: data });
 			},
 			click: (e: MouseEvent, result): void => {
 				if (this.events.product[result.id]?.click) {
@@ -378,10 +377,10 @@ export class SearchController extends AbstractController {
 				}
 
 				const data = schemaMap[result.id];
+				this.eventManager.fire('track.product.render', { controller: this, product: result, trackEvent: data });
 				this.tracker.events[this.page.type].render({ data, siteId: this.config.globals?.siteId });
 				this.events.product[result.id] = this.events.product[result.id] || {};
 				this.events.product[result.id].render = true;
-				this.eventManager.fire('track.product.render', { controller: this, product: result, trackEvent: data });
 			},
 			impression: (result: Product): void => {
 				if (this.events.product[result.id]?.impression || !this.events.product[result.id]?.render) {
@@ -389,24 +388,24 @@ export class SearchController extends AbstractController {
 				}
 
 				const data = schemaMap[result.id];
+				this.eventManager.fire('track.product.impression', { controller: this, product: result, trackEvent: data });
 				this.tracker.events[this.page.type].impression({ data, siteId: this.config.globals?.siteId });
 				this.events.product[result.id] = this.events.product[result.id] || {};
 				this.events.product[result.id].impression = true;
-				this.eventManager.fire('track.product.impression', { controller: this, product: result, trackEvent: data });
 			},
 			addToCart: (result: Product): void => {
 				const data = getSearchAddtocartSchemaData({ searchSchemaData: schemaMap[result.id], results: [result] });
+				this.eventManager.fire('track.product.addToCart', { controller: this, product: result, trackEvent: data });
 				this.tracker.events[this.page.type].addToCart({
 					data,
 					siteId: this.config.globals?.siteId,
 				});
-				this.eventManager.fire('track.product.addToCart', { controller: this, product: result, trackEvent: data });
 			},
 		},
 		redirect: (redirectURL: string): void => {
 			const data = getSearchRedirectSchemaData({ redirectURL });
-			this.tracker.events.search.redirect({ data, siteId: this.config.globals?.siteId });
 			this.eventManager.fire('track.product.redirect', { controller: this, redirectURL, trackEvent: data });
+			this.tracker.events.search.redirect({ data, siteId: this.config.globals?.siteId });
 		},
 	};
 
