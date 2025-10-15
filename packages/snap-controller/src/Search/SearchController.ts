@@ -195,8 +195,8 @@ export class SearchController extends AbstractController {
 			this.eventManager.on('afterSearch', async (search: SearchAfterSearchObj, next: Next): Promise<void | boolean> => {
 				await next();
 
-				const displayDelimiter = hierarchySettings.displayDelimiter || ' / '; // choose delimiter for label
-				const showFullPath = hierarchySettings.showFullPath || false; // display full hierarchy path or just the current level
+				const displayDelimiter = hierarchySettings.displayDelimiter ?? ' / '; // choose delimiter for label
+				const showFullPath = hierarchySettings.showFullPath ?? false; // display full hierarchy path or just the current level
 
 				// add hierarchy filter to filter summary
 				const facets = search.response.facets;
