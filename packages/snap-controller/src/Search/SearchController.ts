@@ -27,6 +27,7 @@ import type {
 	SearchRequestModelFilterRange,
 	SearchRequestModelFilterValue,
 	SearchRequestModelFilter,
+	SearchResponseModelFilter,
 } from '@searchspring/snapi-types';
 import {
 	type AutocompleteAddtocartSchemaDataBgfilterInner,
