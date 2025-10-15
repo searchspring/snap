@@ -215,7 +215,9 @@ export class SearchController extends AbstractController {
 								if (filteredValues && filteredValues.length) {
 									const filterToAdd: SearchResponseModelFilter = {
 										field: facet.field,
-										label: `${showFullPath ? filteredValues[0]!.value?.replaceAll(dataDelimiter, displayDelimiter) : filteredValues[0].label}`,
+										label: showFullPath
+											? (filteredValues[0].value ?? filteredValues[0].label).replaceAll(dataDelimiter, displayDelimiter)
+											: filteredValues[0].label,
 										// @ts-ignore - snapi types
 										type: 'value',
 									};
