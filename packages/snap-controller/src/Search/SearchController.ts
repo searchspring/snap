@@ -6,10 +6,10 @@ import { StorageStore, ErrorType } from '@searchspring/snap-store-mobx';
 import { getSearchParams } from '../utils/getParams';
 import { ControllerTypes, PageContextVariable } from '../types';
 
-import type { Product, Banner, SearchStore } from '@searchspring/snap-store-mobx';
+import type { Product, Banner, SearchStore, ValueFacet } from '@searchspring/snap-store-mobx';
 import type {
 	SearchControllerConfig,
-	AfterSearchObj,
+	SearchAfterSearchObj,
 	AfterStoreObj,
 	ControllerServices,
 	ContextVariables,
@@ -158,7 +158,7 @@ export class SearchController extends AbstractController {
 		});
 
 		// add 'afterSearch' middleware
-		this.eventManager.on('afterSearch', async (search: AfterSearchObj, next: Next): Promise<void | boolean> => {
+		this.eventManager.on('afterSearch', async (search: SearchAfterSearchObj, next: Next): Promise<void | boolean> => {
 			const config = search.controller.config as SearchControllerConfig;
 			const redirectURL = search.response?.merchandising?.redirect;
 			const searchStore = search.controller.store as SearchStore;
@@ -192,7 +192,7 @@ export class SearchController extends AbstractController {
 
 		const hierarchySettings = this.config.settings?.filters?.hierarchy;
 		if (hierarchySettings && hierarchySettings.showInSummary) {
-			this.eventManager.on('afterSearch', async (search: AfterSearchObj, next: Next): Promise<void | boolean> => {
+			this.eventManager.on('afterSearch', async (search: SearchAfterSearchObj, next: Next): Promise<void | boolean> => {
 				await next();
 
 				const displayDelimiter = hierarchySettings.displayDelimiter || ' / '; // choose delimiter for label
@@ -201,31 +201,29 @@ export class SearchController extends AbstractController {
 				// add hierarchy filter to filter summary
 				const facets = search.response.facets;
 				if (facets) {
-					facets.forEach((facet: any) => {
-						const metaFacet = search.response.meta.facets[facet.field];
-						const dataDelimiter = metaFacet.hierarchyDelimiter;
+					facets.forEach((facet) => {
+						if (search.response.meta?.facets && facet.field) {
+							const metaFacet = search.response.meta.facets[facet.field];
+							// @ts-ignore - snapi types are wrong and need to be updated to include hierarchyDelimiter
+							const dataDelimiter = metaFacet?.hierarchyDelimiter || ' / ';
 
-						if (metaFacet.display === 'hierarchy' && facet.filtered && facet.values?.length > 0) {
-							const crumb = facet.values.filter((val: any) => val.filtered == true);
-							if (crumb && crumb.length) {
-								const crumbFullPath = crumb[0].value;
-								const crumbPartialPath = crumb[0].label;
-								if (search.response.filters) {
-									search.response.filters.push({
+							if (metaFacet && metaFacet.display === 'hierarchy' && facet.filtered && (facet as ValueFacet).values?.length > 0) {
+								// @ts-ignore - snapi types
+								const filteredValues = facet.values.filter((val) => val?.filtered === true);
+
+								if (filteredValues && filteredValues.length) {
+									const filterToAdd: SearchResponseModelFilter = {
 										field: facet.field,
-										label: `${showFullPath ? crumbFullPath.replaceAll(dataDelimiter, displayDelimiter) : crumbPartialPath}`,
-										type: 'hierarchy',
-										value: facet.value,
-									});
-								} else {
-									search.response.filters = [
-										{
-											field: facet.field,
-											label: `${showFullPath ? crumbFullPath.replaceAll(dataDelimiter, displayDelimiter) : crumbPartialPath}`,
-											type: 'hierarchy',
-											value: facet.value,
-										},
-									];
+										label: `${showFullPath ? filteredValues[0]!.value?.replaceAll(dataDelimiter, displayDelimiter) : filteredValues[0].label}`,
+										// @ts-ignore - snapi types
+										type: 'value',
+									};
+
+									if (search.response.filters) {
+										search.response.filters.push(filterToAdd);
+									} else {
+										search.response.filters = [filterToAdd];
+									}
 								}
 							}
 						}
