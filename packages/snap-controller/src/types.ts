@@ -51,6 +51,8 @@ export type FinderAfterSearchObj = {
 	request: SearchRequestModel;
 };
 
+export type AfterSearchObj = SearchAfterSearchObj | AutocompleteAfterSearchObj | FinderAfterSearchObj;
+
 export type AfterStoreObj = {
 	controller: AbstractController;
 	request: any;

@@ -56,7 +56,7 @@ export type SearchStoreConfig = StoreConfig & {
 		};
 		filters?: {
 			hierarchy?: {
-				showInSummary?: boolean;
+				enabled?: boolean;
 				displayDelimiter?: string;
 				showFullPath?: boolean;
 			};

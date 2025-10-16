@@ -391,14 +391,14 @@ describe('Search Controller', () => {
 		storagefn.mockClear();
 	});
 
-	it('can set showInSummary for hierarchy filters', async () => {
+	it('can set enabled for hierarchy filters', async () => {
 		const _config: SearchStoreConfig = {
 			...searchConfig,
 			settings: {
 				...searchConfig.settings,
 				filters: {
 					hierarchy: {
-						showInSummary: true,
+						enabled: true,
 					},
 				},
 			},
@@ -422,14 +422,14 @@ describe('Search Controller', () => {
 		expect(controller.store.filters[0].label).toBe('Category: Shop by Color');
 	});
 
-	it('can set showInSummary to false and hide hierarchy filters', async () => {
+	it('can set enabled to false and hide hierarchy filters', async () => {
 		const _config: SearchStoreConfig = {
 			...searchConfig,
 			settings: {
 				...searchConfig.settings,
 				filters: {
 					hierarchy: {
-						showInSummary: false,
+						enabled: false,
 					},
 				},
 			},
@@ -452,14 +452,14 @@ describe('Search Controller', () => {
 		expect(controller.store.filters).toHaveLength(0);
 	});
 
-	it('can set showFullPath to adjust hierarchy filters in summary', async () => {
+	it('can set enabled to adjust hierarchy filters in summary', async () => {
 		const _config: SearchStoreConfig = {
 			...searchConfig,
 			settings: {
 				...searchConfig.settings,
 				filters: {
 					hierarchy: {
-						showInSummary: true,
+						enabled: true,
 						showFullPath: true,
 					},
 				},
@@ -491,7 +491,7 @@ describe('Search Controller', () => {
 				...searchConfig.settings,
 				filters: {
 					hierarchy: {
-						showInSummary: true,
+						enabled: true,
 						displayDelimiter: ' ? ',
 						showFullPath: true,
 					},

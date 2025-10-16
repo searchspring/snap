@@ -196,7 +196,7 @@ export class SearchController extends AbstractController {
 		});
 
 		const hierarchySettings = this.config.settings?.filters?.hierarchy;
-		if (hierarchySettings && hierarchySettings.showInSummary) {
+		if (hierarchySettings && hierarchySettings.enabled) {
 			this.eventManager.on('afterSearch', async (search: SearchAfterSearchObj, next: Next): Promise<void | boolean> => {
 				await next();
 
