@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.69.0](https://github.com/searchspring/snap/compare/v0.68.0...v0.69.0) (2025-10-16)
+
+### Features
+
+- **searchcontroller:** adding the ability to show hierarchy filters in the filterSummary ([43c3890](https://github.com/searchspring/snap/commit/43c3890db4f6e6b2ec5edc7f45fe2069a6f4ce20))
+
 # [0.68.0](https://github.com/searchspring/snap/compare/v0.67.5...v0.68.0) (2025-08-18)
 
 ### Bug Fixes

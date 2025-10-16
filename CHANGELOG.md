@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.69.0](https://github.com/searchspring/snap/compare/v0.68.0...v0.69.0) (2025-10-16)
+
+### Bug Fixes
+
+- **controller/search:** adding 'brand' and 'manufacturer' to the list of known background filters ([273e5e4](https://github.com/searchspring/snap/commit/273e5e482078a75796ac430e87b9aa30a83c1d9a))
+- **snap-preact:** adding additional checks around all cookie/storage usage to ensure things work ([0f6d8e7](https://github.com/searchspring/snap/commit/0f6d8e735c3d3c7eea7cfba6cf59509fafb819bb))
+- **toolbox/domtargeter:** error handling was supressing errors due to await outside of async ([340f8c2](https://github.com/searchspring/snap/commit/340f8c2c97f625a3784eeea58b59ff23d11864cc))
+- **toolbox/domtargeter:** switching to for..of loop ([dac4096](https://github.com/searchspring/snap/commit/dac40968b36b1d69210842a2811448b660f5dba0))
+
+### Features
+
+- **searchcontroller:** adding the ability to show hierarchy filters in the filterSummary ([43c3890](https://github.com/searchspring/snap/commit/43c3890db4f6e6b2ec5edc7f45fe2069a6f4ce20))
+
 # [0.68.0](https://github.com/searchspring/snap/compare/v0.67.5...v0.68.0) (2025-08-18)
 
 ### Bug Fixes
