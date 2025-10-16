@@ -6,7 +6,7 @@ import { getSearchParams } from '../utils/getParams';
 import { ControllerTypes } from '../types';
 
 import { AutocompleteStore } from '@searchspring/snap-store-mobx';
-import type { AutocompleteControllerConfig, AfterSearchObj, AfterStoreObj, ControllerServices, ContextVariables } from '../types';
+import type { AutocompleteControllerConfig, AutocompleteAfterSearchObj, AfterStoreObj, ControllerServices, ContextVariables } from '../types';
 import type { Next } from '@searchspring/snap-event-manager';
 import type { AutocompleteRequestModel, SearchRequestModelFilterRange, SearchRequestModelFilterValue } from '@searchspring/snapi-types';
 import {
@@ -136,11 +136,11 @@ export class AutocompleteController extends AbstractController {
 		});
 
 		// add 'afterSearch' middleware
-		this.eventManager.on('afterSearch', async (ac: AfterSearchObj, next: Next): Promise<void | boolean> => {
+		this.eventManager.on('afterSearch', async (ac: AutocompleteAfterSearchObj, next: Next): Promise<void | boolean> => {
 			await next();
 
 			// cancel search if no input or query doesn't match current urlState
-			if (ac.response.autocomplete.query != ac.controller.urlManager.state.query) {
+			if (ac.response.autocomplete?.query != ac.controller.urlManager.state.query) {
 				return false;
 			}
 		});
