@@ -18,17 +18,21 @@ import type {
 	BeforeSearchObj,
 } from '../types';
 import type { Next } from '@searchspring/snap-event-manager';
-import type {
-	SearchRequestModel,
-	SearchResponseModelResult,
-	SearchRequestModelSearchRedirectResponseEnum,
-	MetaResponseModel,
-	SearchResponseModel,
-	SearchRequestModelFilterRange,
-	SearchRequestModelFilterValue,
-	SearchRequestModelFilter,
-	SearchResponseModelFilter,
+import {
+	type SearchRequestModel,
+	type SearchResponseModelResult,
+	type SearchRequestModelSearchRedirectResponseEnum,
+	type MetaResponseModel,
+	type SearchResponseModel,
+	type SearchRequestModelFilterRange,
+	type SearchRequestModelFilterValue,
+	type SearchRequestModelFilter,
+	type SearchResponseModelFilter,
+	type MetaResponseModelFacetHierarchy,
+	type SearchResponseModelFilterTypeEnum,
+	SearchResponseModelFacetValue,
 } from '@searchspring/snapi-types';
+
 import {
 	type AutocompleteAddtocartSchemaDataBgfilterInner,
 	type AutocompleteAddtocartSchemaDataFilterInner,
@@ -205,21 +209,22 @@ export class SearchController extends AbstractController {
 					facets.forEach((facet) => {
 						if (search.response.meta?.facets && facet.field) {
 							const metaFacet = search.response.meta.facets[facet.field];
-							// @ts-ignore - snapi types are wrong and need to be updated to include hierarchyDelimiter
-							const dataDelimiter = metaFacet?.hierarchyDelimiter || ' / ';
+							const dataDelimiter = (metaFacet as MetaResponseModelFacetHierarchy)?.hierarchyDelimiter || ' / ';
 
 							if (metaFacet && metaFacet.display === 'hierarchy' && facet.filtered && (facet as ValueFacet).values?.length > 0) {
-								// @ts-ignore - snapi types
-								const filteredValues = facet.values.filter((val) => val?.filtered === true);
+								const filteredValues = (facet as SearchResponseModelFacetValue).values?.filter((val) => val?.filtered === true);
 
 								if (filteredValues && filteredValues.length) {
 									const filterToAdd: SearchResponseModelFilter = {
 										field: facet.field,
+										//escape special charactors used in regex
 										label: showFullPath
-											? (filteredValues[0].value ?? filteredValues[0].label).replaceAll(dataDelimiter, displayDelimiter)
+											? (filteredValues[0].value ?? filteredValues[0].label ?? '').replace(
+													new RegExp(dataDelimiter.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'g'),
+													displayDelimiter
+											  )
 											: filteredValues[0].label,
-										// @ts-ignore - snapi types
-										type: 'value',
+										type: 'value' as SearchResponseModelFilterTypeEnum.Value,
 									};
 
 									if (search.response.filters) {
