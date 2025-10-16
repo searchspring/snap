@@ -3,7 +3,9 @@
 Renders callout badges configured in the Searchspring Management Console and returned from the API. This component is intended to be used within a `Result` component to display callout badges.
 
 ## Usage
-
+```jsx
+import { CalloutBadge } from '@searchspring/snap-preact-components';
+```
 
 ### result
 The required `result` prop specifies a reference to a product object from the `results` store array.

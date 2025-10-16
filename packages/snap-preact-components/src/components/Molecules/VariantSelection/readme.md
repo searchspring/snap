@@ -10,6 +10,9 @@ The variantSelection can be rendered as 3 different types, Dropdown, List, or Sw
 - Swatches
 
 ## Usage
+```jsx
+import { VariantSelection } from '@searchspring/snap-preact-components';
+```
 
 ### selection
 The required `selection` prop specifies a reference to the searchResultStores VariantSelection. 

@@ -6,6 +6,9 @@ Renders an Grid of options
 - image
 
 ## Usage
+```jsx
+import { Grid } from '@searchspring/snap-preact-components';
+```
 
 ### options
 The required `options` prop specifies an array of options to render.

@@ -3,6 +3,9 @@
 Renders a div with a animation for use when building loading skeletons. 
 
 ## Usage
+```jsx
+import { Skeleton } from '@searchspring/snap-preact-components';
+```
 
 ### Height
 The `height` prop specifies the css height of the skeleton div.

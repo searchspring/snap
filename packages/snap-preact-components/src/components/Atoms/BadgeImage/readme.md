@@ -4,6 +4,10 @@ Renders an image badge. It is expected to be used with `CalloutBadge` and `Overl
 
 ## Usage
 
+```jsx
+import { BadgeImage } from '@searchspring/snap-preact-components';
+```
+
 ### url
 The required `url` prop specifies the badge image `src` attribute.
 

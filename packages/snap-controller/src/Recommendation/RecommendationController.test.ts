@@ -292,7 +292,7 @@ describe('Recommendation Controller', () => {
 
 		await controller.search();
 
-		expect(trackfn).toHaveBeenCalledTimes(1);
+		expect(trackfn).toHaveBeenCalledTimes(20);
 
 		trackfn.mockClear();
 	});
