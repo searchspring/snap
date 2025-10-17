@@ -3,6 +3,7 @@
         "results": [
             {
                 "id": "8283383202050",
+                "bundleSeed": true,
                 "mappings": {
                     "core": {
                         "uid": "8283383202050",

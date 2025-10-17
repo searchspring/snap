@@ -109,6 +109,16 @@ describe('Recommendation Component', async () => {
 		cy.get('.ss__recommendation .ss__recommendation__title').should('not.exist');
 	});
 
+	it('can use title & description prop', () => {
+		const title = 'some custom title';
+		const description = 'some custom description';
+		mount(<Recommendation controller={controller} title={title} description={description} />);
+
+		cy.get('.ss__recommendation').should('exist');
+		cy.get('.ss__recommendation__title').should('exist').should('have.text', title);
+		cy.get('.ss__recommendation__description').should('exist').should('have.text', description);
+	});
+
 	it('can disable styling', () => {
 		mount(
 			<Recommendation controller={controller} disableStyles>

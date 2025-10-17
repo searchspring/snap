@@ -57,6 +57,16 @@ export default {
 			},
 			control: { type: 'text' },
 		},
+		description: {
+			description: 'recommendation description',
+			table: {
+				type: {
+					summary: 'string | JSX Element',
+				},
+				defaultValue: { summary: '' },
+			},
+			control: { type: 'text' },
+		},
 		loop: {
 			defaultValue: true,
 			description: 'Recommendation pagination loops',
