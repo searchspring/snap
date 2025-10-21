@@ -141,6 +141,8 @@ let config: SnapConfig = {
 			},
 
 			config: {
+				//
+				// branch: BRANCHNAME,
 				branch: 'production',
 				plugins: [[mutateResultsURL]],
 				settings: {

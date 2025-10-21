@@ -1,3 +1,5 @@
+import type { SearchResultStore } from '@searchspring/snap-store-mobx';
+
 export function afterStore(controller: AbstractController) {
 	controller.on('init', async ({}, next) => {
 		controller.log.debug('initialization...');
@@ -25,7 +27,7 @@ export function mutateResultsURL(controller: AbstractController) {
 	});
 }
 
-function mutateResults(results: SearchResultsStore) {
+function mutateResults(results: SearchResultStore) {
 	for (let i = 0; i < results.length; i++) {
 		const result = results[i];
 		//need to ensure at least 2 products are on sale for testing
@@ -34,7 +36,7 @@ function mutateResults(results: SearchResultsStore) {
 		}
 
 		// some products appear to have no name, just need to have something render in these cases.
-		if (result.mappings.core.name == '' || result.mappings.core.name == undefined) {
+		if (result.mappings.core.name === '' || result.mappings.core.name === undefined) {
 			result.mappings.core.name = 'test product ' + i;
 		}
 	}
