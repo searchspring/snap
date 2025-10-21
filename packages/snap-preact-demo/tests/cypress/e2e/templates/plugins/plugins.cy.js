@@ -7,7 +7,7 @@ describe('plugins work based on plaform setting', () => {
 		cy.on('window:before:load', (win) => {
 			win.mergeSnapConfig = {
 				config: {
-					siteId: '8uyt2m',
+					siteId: 'atkzs2',
 					language: 'en',
 					currency: 'usd',
 					platform: undefined, // defaults to 'other'
@@ -44,7 +44,7 @@ describe('plugins work based on plaform setting', () => {
 		cy.on('window:before:load', (win) => {
 			win.mergeSnapConfig = {
 				config: {
-					siteId: '8uyt2m',
+					siteId: 'atkzs2',
 					language: 'en',
 					currency: 'usd',
 					platform: 'somethingRandom',
@@ -80,7 +80,7 @@ describe('plugins work based on plaform setting', () => {
 		cy.on('window:before:load', (win) => {
 			win.mergeSnapConfig = {
 				config: {
-					siteId: '8uyt2m',
+					siteId: 'atkzs2',
 					language: 'en',
 					currency: 'usd',
 					platform: 'other',
@@ -117,7 +117,7 @@ describe('plugins work based on plaform setting', () => {
 		cy.on('window:before:load', (win) => {
 			win.mergeSnapConfig = {
 				config: {
-					siteId: '8uyt2m',
+					siteId: 'atkzs2',
 					language: 'en',
 					currency: 'usd',
 					platform: 'other',
@@ -167,7 +167,7 @@ describe('plugins work based on plaform setting', () => {
 		cy.on('window:before:load', (win) => {
 			win.mergeSnapConfig = {
 				config: {
-					siteId: '8uyt2m',
+					siteId: 'atkzs2',
 					language: 'en',
 					currency: 'usd',
 					platform: 'other',
@@ -224,7 +224,7 @@ describe('plugins work based on plaform setting', () => {
 		cy.on('window:before:load', (win) => {
 			win.mergeSnapConfig = {
 				config: {
-					siteId: '8uyt2m',
+					siteId: 'atkzs2',
 					language: 'en',
 					currency: 'usd',
 					platform: 'shopify',
@@ -263,7 +263,7 @@ describe('plugins work based on plaform setting', () => {
 		cy.on('window:before:load', (win) => {
 			win.mergeSnapConfig = {
 				config: {
-					siteId: '8uyt2m',
+					siteId: 'atkzs2',
 					language: 'en',
 					currency: 'usd',
 					platform: 'bigCommerce',
@@ -301,7 +301,7 @@ describe('plugins work based on plaform setting', () => {
 		cy.on('window:before:load', (win) => {
 			win.mergeSnapConfig = {
 				config: {
-					siteId: '8uyt2m',
+					siteId: 'atkzs2',
 					language: 'en',
 					currency: 'usd',
 					platform: 'magento2',

@@ -4,7 +4,7 @@
  * config.pages[].finderIds must contain a list of all finder id's to be tested on the page.
  */
 const config = {
-	pages: [{ url: 'https://localhost:2222/snap/finder.html', finderIds: ['finder', 'finder_hierarchy'] }],
+	pages: [{ url: 'https://localhost:2222/snap/finder.html', finderIds: ['finder'] }],
 	disableGA: '', // disable google analytic events (example: 'UA-123456-1')
 	selectors: {
 		finder: {

@@ -1,7 +1,8 @@
 import { h, Fragment } from 'preact';
 import { Price, Image, OverlayBadge, CalloutBadge } from '@searchspring/snap-preact/components';
+import { Product } from '@searchspring/snap-store-mobx';
 
-export const CustomResult = (props) => {
+export const CustomResult = (props: { result: Product; controller: SearchController }) => {
 	const { result, controller } = props;
 	const core = result.mappings.core;
 

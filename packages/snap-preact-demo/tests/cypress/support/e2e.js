@@ -31,8 +31,12 @@ Cypress.on('uncaught:exception', (err) => {
 });
 
 beforeEach(() => {
+	cy.intercept('GET', /.*athoscommerce.io\/api\/search\/autocomplete.json/).as('autocomplete');
+	cy.intercept('GET', /.*athoscommerce.io\/api\/search\/search.json/).as('search');
+
 	cy.intercept('GET', /.*searchspring.io\/api\/search\/autocomplete.json/).as('autocomplete');
 	cy.intercept('GET', /.*searchspring.io\/api\/search\/search.json/).as('search');
+
 	cy.intercept('POST', /beacon.searchspring.io\/beacon\/v2\/.*\/shopper\/login/, { success: true }).as('beacon2/shopper/login');
 	cy.intercept('POST', /beacon.searchspring.io\/beacon\/v2\/.*\/autocomplete\/render/, { success: true }).as('beacon2/autocomplete/render');
 	cy.intercept('POST', /beacon.searchspring.io\/beacon\/v2\/.*\/autocomplete\/impression/, { success: true }).as('beacon2/autocomplete/impression');
