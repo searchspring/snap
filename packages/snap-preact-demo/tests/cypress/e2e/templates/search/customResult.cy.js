@@ -49,7 +49,7 @@ describe('Custom Result Compnent', () => {
 					.first()
 					.click()
 					.then(() => {
-						cy.location('pathname').should('include', url);
+						cy.location('href').should('include', url);
 					});
 			});
 		});

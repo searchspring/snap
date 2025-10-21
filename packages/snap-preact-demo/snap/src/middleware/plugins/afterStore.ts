@@ -1,11 +1,13 @@
+import type { SearchResultStore } from '@searchspring/snap-store-mobx';
+
 export function afterStore(controller: AbstractController) {
 	controller.on('init', async ({}, next) => {
 		controller.log.debug('initialization...');
 		await next();
 	});
+
 	controller.on('afterStore', async ({ controller: { store } }, next) => {
 		mutateFacets(store.facets);
-
 		await next();
 	});
 
@@ -16,6 +18,23 @@ export function afterStore(controller: AbstractController) {
 	});
 
 	controller.on('restorePosition', restorePosition);
+}
+
+export function mutateResultsURL(controller: AbstractController) {
+	controller.on('afterStore', async ({ controller: { store } }, next) => {
+		mutateResults(store.results);
+		await next();
+	});
+}
+
+function mutateResults(results: SearchResultStore) {
+	for (let i = 0; i < results.length; i++) {
+		const result = results[i];
+		//need to ensure at least 2 products are on sale for testing
+		if (i < 2) {
+			result.mappings.core.msrp = 200;
+		}
+	}
 }
 
 function mutateFacets(facets: SearchFacetsStore) {

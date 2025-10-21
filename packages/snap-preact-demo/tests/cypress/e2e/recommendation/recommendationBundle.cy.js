@@ -77,12 +77,15 @@ describe('BundledRecommendations', () => {
 				cy.get(`${config?.selectors?.recommendation.cta} .ss__recommendation-bundle__wrapper__cta__subtotal__title`)
 					.should('exist')
 					.should('have.text', 'Subtotal for 4 items');
+
 				//price
-				cy.get(`${config?.selectors?.recommendation.cta} .ss__price--strike`).should('exist').contains(`$${store.cart.msrp}`);
-				//strike
 				cy.get(`${config?.selectors?.recommendation.cta} .ss__recommendation-bundle__wrapper__cta__subtotal__price .ss__price`)
 					.should('exist')
 					.contains(`$${store.cart.price}`);
+
+				//strike
+				cy.get(`${config?.selectors?.recommendation.cta} .ss__price--strike`).should('exist').contains(`$${store.cart.msrp}`);
+
 				//button
 				cy.get(`${config?.selectors?.recommendation.cta} .ss__recommendation-bundle__wrapper__cta__button`)
 					.should('exist')
@@ -99,9 +102,10 @@ describe('BundledRecommendations', () => {
 						cy.get(`${config?.selectors?.recommendation.cta} .ss__recommendation-bundle__wrapper__cta__subtotal__title`)
 							.should('exist')
 							.should('have.text', 'Subtotal for 3 items');
-						//price
-						cy.get(`${config?.selectors?.recommendation.cta} .ss__price--strike`).should('exist').contains(`$${store.cart.msrp}`);
 						//strike
+						cy.get(`${config?.selectors?.recommendation.cta} .ss__price--strike`).should('exist').contains(`$${store.cart.msrp}`);
+
+						//price
 						cy.get(`${config?.selectors?.recommendation.cta} .ss__recommendation-bundle__wrapper__cta__subtotal__price .ss__price`)
 							.should('exist')
 							.contains(`$${store.cart.price}`);
@@ -186,7 +190,7 @@ describe('BundledRecommendations', () => {
 						.first()
 						.click({ force: true })
 						.then(() => {
-							cy.location('pathname').should('include', url);
+							cy.location('href').should('include', url);
 						});
 				});
 			});

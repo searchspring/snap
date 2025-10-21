@@ -3,37 +3,7 @@ import { globalStyles } from './styles';
 import deepmerge from 'deepmerge';
 import { combineMerge } from '../../snap/src/middleware/functions';
 import type { SnapTemplatesConfig } from '@searchspring/snap-preact';
-import { ClientConfig } from '@searchspring/snap-client';
-
-const siteId = '8uyt2m';
-
-const clientConfig: ClientConfig = {
-	meta: {
-		origin: `https://${siteId}.a.searchspring.io`,
-	},
-	search: {
-		origin: `https://${siteId}.a.searchspring.io`,
-	},
-	autocomplete: {
-		requesters: {
-			suggest: {
-				origin: `https://${siteId}.a.searchspring.io`,
-			},
-			legacy: {
-				origin: `https://${siteId}.a.searchspring.io`,
-			},
-		},
-	},
-	finder: {
-		origin: `https://${siteId}.a.searchspring.io`,
-	},
-	recommend: {
-		origin: `https://${siteId}.a.searchspring.io`,
-	},
-	suggest: {
-		origin: `https://${siteId}.a.searchspring.io`,
-	},
-};
+const siteId = 'atkzs2';
 
 let config: SnapTemplatesConfig = {
 	config: {
@@ -41,7 +11,6 @@ let config: SnapTemplatesConfig = {
 		language: 'en',
 		currency: 'usd',
 		platform: 'other',
-		client: clientConfig,
 	},
 	components: {
 		result: {
@@ -107,6 +76,7 @@ if (window.mergeSnapConfig) {
 new SnapTemplates(config);
 
 /*
+
 
 Overrides are taking priority over the theme layouts (responsive) specified within the Search component - but they shouldn't be.
 Look into:

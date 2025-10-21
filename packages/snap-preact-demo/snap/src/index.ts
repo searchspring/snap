@@ -6,13 +6,13 @@ import { Snap } from '@searchspring/snap-preact';
 import { StorageStore } from '@searchspring/snap-store-mobx';
 import { url, getContext } from '@searchspring/snap-toolbox';
 // import { afterSearch } from './middleware/plugins/afterSearch';
-import { afterStore } from './middleware/plugins/afterStore';
+import { afterStore, mutateResultsURL } from './middleware/plugins/afterStore';
 import { combineMerge } from './middleware/functions';
 import { ContentSkel } from './components/Content/Skel';
 import { SidebarSkel } from './components/Sidebar/Skel';
 
 import './styles/custom.scss';
-import { ClientConfig } from '@searchspring/snap-client';
+import type { ClientConfig } from '@searchspring/snap-client';
 
 // storage for custom configuration
 const configStore = new StorageStore({ type: 'local', key: 'ss-demo-config' });
@@ -36,35 +36,9 @@ if (context.collection?.handle) {
 	configuration and instantiation
  */
 
-let siteId = '8uyt2m';
+let siteId = 'atkzs2';
 let customOrigin = '';
-let clientConfig: ClientConfig = {
-	meta: {
-		origin: `https://${siteId}.a.searchspring.io`,
-	},
-	search: {
-		origin: `https://${siteId}.a.searchspring.io`,
-	},
-	autocomplete: {
-		requesters: {
-			suggest: {
-				origin: `https://${siteId}.a.searchspring.io`,
-			},
-			legacy: {
-				origin: `https://${siteId}.a.searchspring.io`,
-			},
-		},
-	},
-	finder: {
-		origin: `https://${siteId}.a.searchspring.io`,
-	},
-	recommend: {
-		origin: `https://${siteId}.a.searchspring.io`,
-	},
-	suggest: {
-		origin: `https://${siteId}.a.searchspring.io`,
-	},
-};
+let clientConfig: ClientConfig;
 
 // grab siteId out of the URL
 const urlObj = url(window.location.href);
@@ -167,8 +141,9 @@ let config: SnapConfig = {
 			},
 
 			config: {
-				branch: BRANCHNAME,
-				plugins: [],
+				// branch: BRANCHNAME,
+				branch: 'production',
+				plugins: [[mutateResultsURL]],
 				settings: {
 					variants: {
 						field: 'ss_variants',
@@ -182,7 +157,7 @@ let config: SnapConfig = {
 			{
 				config: {
 					id: 'search',
-					plugins: [[afterStore]],
+					plugins: [[afterStore], [mutateResultsURL]],
 					settings: {
 						infinite: {
 							backfill: 5,
@@ -248,6 +223,7 @@ let config: SnapConfig = {
 				config: {
 					id: 'autocomplete',
 					selector: 'input.searchspring-ac',
+					plugins: [[mutateResultsURL]],
 					settings: {
 						trending: {
 							limit: 5,
@@ -275,16 +251,12 @@ let config: SnapConfig = {
 					url: '/snap/',
 					fields: [
 						{
-							field: 'size_footwear',
-							label: 'Size',
+							field: 'collection_handle',
+							label: 'Collection',
 						},
 						{
-							field: 'color_family',
+							field: 'color',
 							label: 'Color',
-						},
-						{
-							field: 'brand',
-							label: 'Brand',
 						},
 					],
 				},

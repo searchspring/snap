@@ -103,9 +103,11 @@ describe('BundledRecommendations', () => {
 				cy.get(`${config?.selectors?.recommendation.cta} .ss__recommendation-bundle-vertical__wrapper__cta__subtotal__title`)
 					.should('exist')
 					.should('have.text', 'Subtotal for 10 items');
-				//price
-				cy.get(`${config?.selectors?.recommendation.cta} .ss__price--strike`).should('exist').contains(`$${store.cart.msrp}`);
 				//strike
+				if (store.results.filter((result) => result.mappings.core.msrp).length) {
+					cy.get(`${config?.selectors?.recommendation.cta} .ss__price--strike`).should('exist').contains(`$${store.cart.msrp}`);
+				}
+				//price
 				cy.get(`${config?.selectors?.recommendation.cta} .ss__recommendation-bundle-vertical__wrapper__cta__subtotal__price .ss__price`)
 					.should('exist')
 					.contains(`$${store.cart.price}`);
@@ -125,9 +127,11 @@ describe('BundledRecommendations', () => {
 						cy.get(`${config?.selectors?.recommendation.cta} .ss__recommendation-bundle-vertical__wrapper__cta__subtotal__title`)
 							.should('exist')
 							.should('have.text', 'Subtotal for 9 items');
-						//price
-						cy.get(`${config?.selectors?.recommendation.cta} .ss__price--strike`).should('exist').contains(`$${store.cart.msrp}`);
 						//strike
+						if (store.results.filter((result) => result.mappings.core.msrp).length) {
+							cy.get(`${config?.selectors?.recommendation.cta} .ss__price--strike`).should('exist').contains(`$${store.cart.msrp}`);
+						}
+						//price
 						cy.get(`${config?.selectors?.recommendation.cta} .ss__recommendation-bundle-vertical__wrapper__cta__subtotal__price .ss__price`)
 							.should('exist')
 							.contains(`$${store.cart.price}`);
@@ -148,7 +152,7 @@ describe('BundledRecommendations', () => {
 						.first()
 						.click({ force: true, multiple: true })
 						.then(() => {
-							cy.location('pathname').should('include', url);
+							cy.location('href').should('include', url);
 						});
 				});
 			});

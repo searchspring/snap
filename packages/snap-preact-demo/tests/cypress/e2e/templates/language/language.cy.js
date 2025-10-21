@@ -18,7 +18,7 @@ describe('Templates Language settings', () => {
 			cy.on('window:before:load', (win) => {
 				win.mergeSnapConfig = {
 					config: {
-						siteId: '8uyt2m',
+						siteId: 'atkzs2',
 						language: 'en',
 					},
 					theme: {
@@ -54,7 +54,7 @@ describe('Templates Language settings', () => {
 				win.mergeSnapConfig = {
 					config: {
 						language: 'fr',
-						siteId: '8uyt2m',
+						siteId: 'atkzs2',
 					},
 					theme: {
 						extends: 'base',
@@ -89,7 +89,7 @@ describe('Templates Language settings', () => {
 				win.mergeSnapConfig = {
 					config: {
 						language: 'fr',
-						siteId: '8uyt2m',
+						siteId: 'atkzs2',
 					},
 					translations: {
 						fr: {
