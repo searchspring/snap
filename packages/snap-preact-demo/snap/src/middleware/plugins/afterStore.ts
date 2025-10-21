@@ -34,11 +34,6 @@ function mutateResults(results: SearchResultStore) {
 		if (i < 2) {
 			result.mappings.core.msrp = 200;
 		}
-
-		// some products appear to have no name, just need to have something render in these cases.
-		if (result.mappings.core.name === '' || result.mappings.core.name === undefined) {
-			result.mappings.core.name = 'test product ' + i;
-		}
 	}
 }
 

@@ -77,6 +77,7 @@ new SnapTemplates(config);
 
 /*
 
+
 Overrides are taking priority over the theme layouts (responsive) specified within the Search component - but they shouldn't be.
 Look into:
 			overrides: {
