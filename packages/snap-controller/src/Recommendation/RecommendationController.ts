@@ -83,16 +83,20 @@ export class RecommendationController extends AbstractController {
 			const controller = search.controller as RecommendationController;
 			if (controller.store.loaded && !controller.store.error) {
 				const products = controller.store.results.filter((result) => result.type === 'product') as Product[];
-				const results = products.length === 0 ? [] : products;
-				const data = getRecommendationsSchemaData({ store: this.store, results });
-				if (!search.response._cached) {
+
+				if (products.length === 0 && !search.response._cached) {
+					// handle no results
+					const data = getRecommendationsSchemaData({ store: this.store });
+					this.eventManager.fire('track.product.render', { controller: this, trackEvent: data });
 					this.tracker.events.recommendations.render({ data, siteId: this.config.globals?.siteId });
 				}
+
 				products.forEach((result) => {
-					this.events.product[result.id] = this.events.product[result.id] || {};
-					this.events.product[result.id].render = true;
 					if (!search.response._cached) {
-						this.eventManager.fire('track.product.render', { controller: this, product: result, trackEvent: data });
+						this.track.product.render(result);
+					} else {
+						this.events.product[result.id] = this.events.product[result.id] || {};
+						this.events.product[result.id].render = true;
 					}
 				});
 			}
@@ -122,10 +126,10 @@ export class RecommendationController extends AbstractController {
 				if (this.events.product[result.id]?.clickThrough) return;
 
 				const data = getRecommendationsSchemaData({ store: this.store, results: [result] });
+				this.eventManager.fire('track.product.clickThrough', { controller: this, event: e, product: result, trackEvent: data });
 				this.tracker.events.recommendations.clickThrough({ data, siteId: this.config.globals?.siteId });
 				this.events.product[result.id] = this.events.product[result.id] || {};
 				this.events.product[result.id].clickThrough = true;
-				this.eventManager.fire('track.product.clickThrough', { controller: this, event: e, product: result, trackEvent: data });
 			},
 			click: (e: MouseEvent, result): void => {
 				if (this.events.product[result.id]?.click) {
@@ -148,26 +152,26 @@ export class RecommendationController extends AbstractController {
 				if (this.events.product[result.id]?.impression || !this.events.product[result.id]?.render) return;
 
 				const data = getRecommendationsSchemaData({ store: this.store, results: [result] });
+				this.eventManager.fire('track.product.impression', { controller: this, product: result, trackEvent: data });
 				this.tracker.events.recommendations.impression({ data, siteId: this.config.globals?.siteId });
 				this.events.product[result.id] = this.events.product[result.id] || {};
 				this.events.product[result.id].impression = true;
-				this.eventManager.fire('track.product.impression', { controller: this, product: result, trackEvent: data });
 				return data;
 			},
 			render: (result: Product): RecommendationsSchemaData | undefined => {
 				if (this.events.product[result.id]?.render) return;
 
 				const data = getRecommendationsSchemaData({ store: this.store, results: [result] });
+				this.eventManager.fire('track.product.render', { controller: this, product: result, trackEvent: data });
 				this.tracker.events.recommendations.render({ data, siteId: this.config.globals?.siteId });
 				this.events.product[result.id] = this.events.product[result.id] || {};
 				this.events.product[result.id].render = true;
-				this.eventManager.fire('track.product.render', { controller: this, product: result, trackEvent: data });
 				return data;
 			},
 			addToCart: (result: Product): RecommendationsAddtocartSchemaData | undefined => {
 				const data = getRecommendationsAddtocartSchemaData({ store: this.store, results: [result] });
-				this.tracker.events.recommendations.addToCart({ data, siteId: this.config.globals?.siteId });
 				this.eventManager.fire('track.product.addToCart', { controller: this, product: result, trackEvent: data });
+				this.tracker.events.recommendations.addToCart({ data, siteId: this.config.globals?.siteId });
 				return data;
 			},
 		},

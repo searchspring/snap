@@ -6,7 +6,7 @@ import { getSearchParams } from '../utils/getParams';
 import { ControllerTypes } from '../types';
 
 import { AutocompleteStore } from '@searchspring/snap-store-mobx';
-import type { AutocompleteControllerConfig, AfterSearchObj, AfterStoreObj, ControllerServices, ContextVariables } from '../types';
+import type { AutocompleteControllerConfig, AutocompleteAfterSearchObj, AfterStoreObj, ControllerServices, ContextVariables } from '../types';
 import type { Next } from '@searchspring/snap-event-manager';
 import type { AutocompleteRequestModel, SearchRequestModelFilterRange, SearchRequestModelFilterValue } from '@searchspring/snapi-types';
 import {
@@ -116,27 +116,31 @@ export class AutocompleteController extends AbstractController {
 			const controller = search.controller as AutocompleteController;
 			if (controller.store.loaded && !controller.store.error) {
 				const products = controller.store.results.filter((result) => result.type === 'product') as Product[];
-				const results = products.length === 0 ? [] : products;
-				const data = getAutocompleteSchemaData({ params: search.request, store: this.store, results });
-				if (!search.response._cached) {
+
+				if (products.length === 0 && !search.response._cached) {
+					// handle no results
+					const data = getAutocompleteSchemaData({ params: search.request, store: this.store });
+					this.eventManager.fire('track.product.render', { controller: this, trackEvent: data });
 					this.tracker.events.autocomplete.render({ data, siteId: this.config.globals?.siteId });
 				}
+
 				products.forEach((result) => {
-					this.events.product[result.id] = this.events.product[result.id] || {};
-					this.events.product[result.id].render = true;
 					if (!search.response._cached) {
-						this.eventManager.fire('track.product.render', { controller: this, product: result, trackEvent: data });
+						this.track.product.render(result);
+					} else {
+						this.events.product[result.id] = this.events.product[result.id] || {};
+						this.events.product[result.id].render = true;
 					}
 				});
 			}
 		});
 
 		// add 'afterSearch' middleware
-		this.eventManager.on('afterSearch', async (ac: AfterSearchObj, next: Next): Promise<void | boolean> => {
+		this.eventManager.on('afterSearch', async (ac: AutocompleteAfterSearchObj, next: Next): Promise<void | boolean> => {
 			await next();
 
 			// cancel search if no input or query doesn't match current urlState
-			if (ac.response.autocomplete.query != ac.controller.urlManager.state.query) {
+			if (ac.response.autocomplete?.query != ac.controller.urlManager.state.query) {
 				return false;
 			}
 		});
@@ -177,10 +181,10 @@ export class AutocompleteController extends AbstractController {
 					return;
 				}
 				const data = getAutocompleteSchemaData({ params: this.params, store: this.store, results: [result] });
+				this.eventManager.fire('track.product.clickThrough', { controller: this, event: e, product: result, trackEvent: data });
 				this.tracker.events.autocomplete.clickThrough({ data, siteId: this.config.globals?.siteId });
 				this.events.product[result.id] = this.events.product[result.id] || {};
 				this.events.product[result.id].clickThrough = true;
-				this.eventManager.fire('track.product.clickThrough', { controller: this, event: e, product: result, trackEvent: data });
 			},
 			click: (e: MouseEvent, result): void => {
 				if (this.events.product[result.id]?.click) {
@@ -203,30 +207,30 @@ export class AutocompleteController extends AbstractController {
 				if (this.events.product[result.id]?.render) return;
 
 				const data = getAutocompleteSchemaData({ params: this.params, store: this.store, results: result ? [result] : [] });
+				this.eventManager.fire('track.product.render', { controller: this, product: result, trackEvent: data });
 				this.tracker.events.autocomplete.render({ data, siteId: this.config.globals?.siteId });
 				this.events.product[result.id] = this.events.product[result.id] || {};
 				this.events.product[result.id].render = true;
-				this.eventManager.fire('track.product.render', { controller: this, product: result, trackEvent: data });
 			},
 			impression: (result: Product): void => {
 				if (this.events.product[result.id]?.impression || !this.events.product[result.id]?.render) return;
 
 				const data = getAutocompleteSchemaData({ params: this.params, store: this.store, results: [result] });
+				this.eventManager.fire('track.product.impression', { controller: this, product: result, trackEvent: data });
 				this.tracker.events.autocomplete.impression({ data, siteId: this.config.globals?.siteId });
 				this.events.product[result.id] = this.events.product[result.id] || {};
 				this.events.product[result.id].impression = true;
-				this.eventManager.fire('track.product.impression', { controller: this, product: result, trackEvent: data });
 			},
 			addToCart: (result: Product): void => {
 				const data = getAutocompleteAddtocartSchemaData({ params: this.params, store: this.store, results: [result] });
-				this.tracker.events.autocomplete.addToCart({ data, siteId: this.config.globals?.siteId });
 				this.eventManager.fire('track.product.addToCart', { controller: this, product: result, trackEvent: data });
+				this.tracker.events.autocomplete.addToCart({ data, siteId: this.config.globals?.siteId });
 			},
 		},
 		redirect: (redirectURL: string): void => {
 			const data = getAutocompleteRedirectSchemaData({ redirectURL });
-			this.tracker.events.autocomplete.redirect({ data, siteId: this.config.globals?.siteId });
 			this.eventManager.fire('track.redirect', { controller: this, redirectURL, trackEvent: data });
+			this.tracker.events.autocomplete.redirect({ data, siteId: this.config.globals?.siteId });
 		},
 	};
 

@@ -54,6 +54,13 @@ export type SearchStoreConfig = StoreConfig & {
 				[field: string]: FacetStoreConfig;
 			};
 		};
+		filters?: {
+			hierarchy?: {
+				enabled?: boolean;
+				displayDelimiter?: string;
+				showFullPath?: boolean;
+			};
+		};
 		infinite?: {
 			backfill?: number;
 		};
