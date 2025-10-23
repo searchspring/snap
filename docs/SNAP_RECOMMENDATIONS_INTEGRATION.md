@@ -1,6 +1,6 @@
 # Recommendations Integration
 
-Changes to the recommendation integration scripts were made in Snap `v0.60.0`. Legacy Recommendation Integrations docs can still be found [`here`](https://searchspring.github.io/snap/integration-legacy-recommendations)
+Changes to the recommendation integration scripts were made in Snap `v0.60.0`. Legacy Recommendation Integrations docs can still be found [`here`](https://searchspring.github.io/snap/snap-recommendations-legacy)
 
 ## Prerequisites
 

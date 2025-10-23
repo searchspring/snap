@@ -370,8 +370,8 @@ import('./docs/documents.js').then(function (_) {
 					router.replace(hashId.replace(/^\/components-preact/, '/preact-components'));
 				} else if (hashId.match(/^\/integration-recommendations/)) {
 					router.replace('/snap-recommendations-integration');
-				} else if (hashId.match(/^\/integration-legacy-recommendations/)) {
-					router.replace('/integration-legacy-recommendations');
+				} else if (hashId.match(/^\/snap-recommendations-legacy/)) {
+					router.replace('/snap-recommendations-legacy');
 				} else if (hashId.match(/^\/start-preact/)) {
 					router.replace('/getting-started');
 				} else if (hashId.match(/^\/start-preact-events/)) {

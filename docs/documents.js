@@ -65,7 +65,7 @@ var documents = [
 					},
 					{
 						label: 'Recommendations (legacy)',
-						route: '/integration-legacy-recommendations',
+						route: '/snap-recommendations-legacy',
 						type: 'markdown',
 						url: './docs/SNAP_RECOMMENDATIONS_LEGACY.md',
 						searchable: true,

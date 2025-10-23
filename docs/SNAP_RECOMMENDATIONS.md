@@ -11,7 +11,7 @@ There are three types of recommendations that Searchspring offers:
 
 This guide will cover usage of the Default templates that are available in the Searchspring Management Console. If you are looking to create a custom template, please refer to the [Custom Templates reference](https://searchspring.github.io/snap/reference-custom-recommendation-templates)
 
-Changes to the recommendation integration scripts were made in Snap `v0.60.0`. Legacy Recommendation Integrations docs can still be found [`here`](https://searchspring.github.io/snap/integration-legacy-recommendations)
+Changes to the recommendation integration scripts were made in Snap `v0.60.0`. Legacy Recommendation Integrations docs can still be found [`here`](https://searchspring.github.io/snap/snap-recommendations-legacy)
 
 
 ## More Information
