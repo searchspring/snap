@@ -154,8 +154,11 @@ table td {
 #content {
 	display: flex;
 	flex-direction: row-reverse;
-	max-width: 1400px;
     margin: 0 auto;
+}
+
+#content.markdown {
+	max-width: 1400px;
 }
 
 #content .permalink {
@@ -287,6 +290,7 @@ code:not([class]) {
 	max-width: var(--legend-width);
 	overflow-y: auto;
     max-height: calc(100vh - 3em - 3em);
+	word-break: break-word;
 }
 .legend-title {
 	font-size: 1.2em;

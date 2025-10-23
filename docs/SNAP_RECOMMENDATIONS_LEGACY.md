@@ -11,7 +11,7 @@ It is recommended to utilize the [`RecommendationInstantiator`](https://searchsp
 </script>
 ```
 
-The `RecommendationInstantiator` will look for these elements on the page and attempt to inject components based on the `profile` specified in the script attribute. In the example above, the profile specified is the `recently-viewed` profile, and would typically be setup to display the last products viewed by the shopper. These profiles must be setup in the Searchspring Management Console (SMC).
+The [`RecommendationInstantiator`](https://searchspring.github.io/snap/reference-snap-preact-instantiators) will look for these elements on the page and attempt to inject components based on the `profile` specified in the script attribute. In the example above, the profile specified is the `recently-viewed` profile, and would typically be setup to display the last products viewed by the shopper. These profiles must be setup in the Searchspring Management Console (SMC).
 
 
 ## Recommendation Context Variables
@@ -91,7 +91,7 @@ Alternatively, a profile can be placed in it's own batch via the `batched: false
 
 ## Additional Examples
 
-The examples below assume that profiles used have been setup in the Searchspring Management Console (SMC), and that a Snap `bundle.js` script exists on the page and has been configured with a `RecommendationInstantiator`.
+The examples below assume that profiles used have been setup in the Searchspring Management Console (SMC), and that a Snap `bundle.js` script exists on the page and has been configured with a [`RecommendationInstantiator`](https://searchspring.github.io/snap/reference-snap-preact-instantiators).
 
 A typical "similar" profile that would display products similar to the product passed in via the `product` context variable.
 

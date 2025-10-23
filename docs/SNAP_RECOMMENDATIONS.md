@@ -1,6 +1,6 @@
 # Recommendations
 
-While it is possible to construct recommendation controllers via the Snap configuration, it is recommended to utilize the instantiator config instead for integration of recommendations. This is because certain pages may not have a script block to target, and the instantiator will handle the targeting and creation of recommendation controllers for script blocks found in the DOM at run time.
+While it is possible to construct recommendation controllers via the Snap configuration, it is recommended to utilize the [instantiator config](https://searchspring.github.io/snap/reference-snap-preact-instantiators#recommendationinstantiatorconfig) instead for integration of recommendations. This is because certain pages may not have a script block to target, and the instantiator will handle the targeting and creation of recommendation controllers for script blocks found in the DOM at run time.
 
 There are three types of recommendations that Searchspring offers:
 
@@ -45,7 +45,7 @@ const snap = new Snap({
 Note that the component is not required to be named `Default`, however `instantiators.recommendation.component` must contain the `Default` key as seen in the example above.
 
 
-This example assumes a `recently-viewed` profile has been configured in the Searchspring Management Console (SMC) with the `Default` template selected. The profile (specified via the `tag` property) will render inside the `.ss__recs__recently-viewed` element below the script block. While the target element can be placed anywhere on the page, it's recommended to group elements with their corresponding script blocks for easier integration management. The component configuration is handled within the `RecommendationInstantiator`, and the target element should include a `min-height` inline style to prevent cumulative layout shift.
+This example assumes a `recently-viewed` profile has been configured in the Searchspring Management Console (SMC) with the `Default` template selected. The profile (specified via the `tag` property) will render inside the `.ss__recs__recently-viewed` element below the script block. While the target element can be placed anywhere on the page, it's recommended to group elements with their corresponding script blocks for easier integration management. The component configuration is handled within the [`RecommendationInstantiator`](https://searchspring.github.io/snap/reference-snap-preact-instantiators).
 
 ```html
 <script type="searchspring/recommendations">
@@ -65,7 +65,7 @@ This example assumes a `recently-viewed` profile has been configured in the Sear
 	];
 </script>
 
-<div class="ss__recs__recently-viewed" style="min-height: 100vh;"><!-- recommendations will render here --></div>
+<div class="ss__recs__recently-viewed"><!-- recommendations will render here --></div>
 ```
 
 

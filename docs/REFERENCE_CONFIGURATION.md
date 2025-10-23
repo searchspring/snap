@@ -47,7 +47,7 @@ Optional. [`UrlTranslator` config](https://github.com/searchspring/snap/tree/mai
 
 | Option | Type | Description |
 |---|---|---|
-| instantiators | `{ recommendation?: RecommendationInstantiatorConfig }` | Optional. Custom instantiators for advanced controller/component instantiation, such as recommendations. |
+| instantiators | `{ recommendation?: RecommendationInstantiatorConfig }` | Optional. Custom instantiators for advanced controller/component instantiation, such as recommendations. See [`RecommendationInstantiator`](https://searchspring.github.io/snap/reference-snap-preact-instantiators) for more information. |
 
 ## Controllers
 
@@ -112,7 +112,7 @@ snap.getControllers('search', 'autocomplete').then(([search, autocomplete]) => {
 ### getInstantiator
 
 
-Snap also provides a method to retrieve instantiators. Instantiatiors are used to create instances of the `RecommendationInstantiator` class, which is responsible for instantiating recommendations.
+Snap also provides a method to retrieve instantiators. Instantiatiors are used to create instances of the [`RecommendationInstantiator`](https://searchspring.github.io/snap/reference-snap-preact-instantiators) class, which is responsible for instantiating recommendations.
 
 ```typescript
 const snap = new Snap(config);

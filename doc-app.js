@@ -112,9 +112,7 @@ import('./docs/documents.js').then(function (_) {
             <Navigation :documents="documents"></Navigation>
 
 			<div id="content-wrapper">
-				<div id="content">
-					<router-view :routes="routes"></router-view>
-				</div>
+				<router-view :routes="routes"></router-view>
 			</div>
             <div id="ac-overlay"></div>
         `,
@@ -125,9 +123,11 @@ import('./docs/documents.js').then(function (_) {
 	app.component('Content', {
 		props: ['routes'],
 		template: `
-            <iframe v-if="routeData.type == 'iframe'" :src="routeData.url" id="frame" @load="onLoad"></iframe>
-            <Markdown v-else-if="routeData.type == 'markdown'" :src="routeData.url" />
-            <div id="searchWrapper"></div>
+            <div id="content" :class="{ 'markdown': routeData.type === 'markdown' }">
+                <iframe v-if="routeData.type == 'iframe'" :src="routeData.url" id="frame" @load="onLoad"></iframe>
+                <Markdown v-else-if="routeData.type == 'markdown'" :src="routeData.url" />
+                <div id="searchWrapper"></div>
+            </div>
         `,
 		computed: {
 			currentRoute() {
@@ -369,7 +369,7 @@ import('./docs/documents.js').then(function (_) {
 				} else if (hashId.match(/^\/components-preact/)) {
 					router.replace(hashId.replace(/^\/components-preact/, '/preact-components'));
 				} else if (hashId.match(/^\/integration-recommendations/)) {
-					router.replace('/snap-recommendations');
+					router.replace('/snap-recommendations-integration');
 				} else if (hashId.match(/^\/integration-legacy-recommendations/)) {
 					router.replace('/integration-legacy-recommendations');
 				} else if (hashId.match(/^\/start-preact/)) {
@@ -481,6 +481,11 @@ import('./docs/documents.js').then(function (_) {
 						</ul>
 				</div>`;
 			document.getElementById('content').prepend(legend);
+			// scroll active legend item into view
+			const activeLegendItem = document.querySelector('.legend a.active');
+			if (activeLegendItem) {
+				activeLegendItem.scrollIntoView({ behavior: 'instant' });
+			}
 		}
 	};
 

@@ -18,7 +18,7 @@ A "Snap Integration" is a project that uses the `Snap` export from the `@searchs
 
 An example Snap Integration project can be found [here](https://github.com/searchspring-implementations/demo.shopify).
 
-Continue by referencing the [Snap Integration](https://searchspring.github.io/snap/snap-overview) section.
+Continue by referencing the [Snap Setup](https://searchspring.github.io/snap/snap-setup) section.
 
 <!-- ### Snap Templates Integration
 

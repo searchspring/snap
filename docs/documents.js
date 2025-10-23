@@ -55,8 +55,24 @@ var documents = [
 				type: 'markdown',
 				url: './docs/SNAP_RECOMMENDATIONS.md',
 				searchable: true,
+				links: [
+					{
+						label: 'Recommendations Integration',
+						route: '/snap-recommendations-integration',
+						type: 'markdown',
+						url: './docs/SNAP_RECOMMENDATIONS_INTEGRATION.md',
+						searchable: true,
+					},
+					{
+						label: 'Recommendations (legacy)',
+						route: '/integration-legacy-recommendations',
+						type: 'markdown',
+						url: './docs/SNAP_RECOMMENDATIONS_LEGACY.md',
+						searchable: true,
+						hidden: true,
+					},
+				],
 			},
-
 			{
 				label: 'Tracking',
 				route: '/snap-tracking',
@@ -189,6 +205,13 @@ var documents = [
 						searchable: true,
 					},
 				],
+			},
+			{
+				label: 'Recommendation Instantiator',
+				route: '/reference-instantiator-recommendation',
+				type: 'markdown',
+				url: './packages/snap-preact/src/Instantiators/README.md',
+				searchable: true,
 			},
 			{
 				label: 'Store',
@@ -438,14 +461,6 @@ var documents = [
 				type: 'markdown',
 				url: './docs/REFERENCE_VARIANTS.md',
 				searchable: true,
-			},
-			{
-				label: 'Recommendations (legacy)',
-				route: '/integration-legacy-recommendations',
-				type: 'markdown',
-				url: './docs/INTEGRATION_LEGACY_RECOMMENDATIONS.md',
-				searchable: true,
-				hidden: true,
 			},
 			{
 				label: 'Custom Recommendation Templates',
