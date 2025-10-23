@@ -20,7 +20,7 @@
 		"test:watch": "jest --watch"
 	},
 	"dependencies": {
-		"@searchspring/beacon": "0.0.42",
+		"@searchspring/beacon": "0.0.43",
 		"@searchspring/snap-store-mobx": "0.69.0",
 		"@searchspring/snap-toolbox": "0.69.0",
 		"deepmerge": "4.3.1",
