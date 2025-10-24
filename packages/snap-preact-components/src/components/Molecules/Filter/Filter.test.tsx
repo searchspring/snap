@@ -92,7 +92,7 @@ describe('Filter Component', () => {
 	});
 
 	it('can use a custom separator', () => {
-		const separator = 'gottakeepemseperated';
+		const separator = 'gottakeepemseparated';
 		const rendered = render(<Filter {...args} separator={separator} />);
 
 		const separatorTextElement = rendered.container.querySelector('.ss__filter__label__separator');
