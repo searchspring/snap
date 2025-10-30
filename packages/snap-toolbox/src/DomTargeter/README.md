@@ -147,7 +147,7 @@ new DomTargeter(
 ### `emptyTarget`
 When `true`, removes all child nodes from the target element before executing the `onTarget` callback. This is enabled by default when not using `inject`, but has no effect when using `inject`.
 
-Default: `true` (when not using inject), `undefined` (when using inject)
+Default: `true` (when not using inject)
 
 ```typescript
 {
@@ -169,7 +169,7 @@ Default: `false`
 ```
 
 ### `autoRetarget`
-When `true`, DomTargeter will automatically retry finding the target element if it's not initially found. It uses an exponential backoff strategy, starting with 100ms intervals and increasing by 200ms each retry, up to approximately 12 seconds total.
+When `true`, DomTargeter will automatically retry finding the target element if it's not initially found. It uses an additive backoff strategy, starting at 100ms and increasing by 200ms each retry (100ms, 300ms, 500ms, 700ms, etc.), up to a maximum interval of 2000ms, for approximately 10 seconds total.
 
 Default: `false`
 
@@ -245,7 +245,7 @@ These properties are available in the callback:
 ## Methods
 
 ### `retarget` method
-If the targets are created after the DomTargeter and `DOMContentLoaded` event has fired, the `retarget` method can be used to manually check for target existence.
+If the targets are created after the DomTargeter and `DOMContentLoaded` event has fired, the `retarget` method can be used to manually search for and process all targets. It will execute the `onTarget` callback for any newly found elements.
 
 ```typescript
 // manually retarget
