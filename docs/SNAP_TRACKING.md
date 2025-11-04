@@ -118,7 +118,7 @@ Identifies the logged-in user. Should be invoked if a user is logged into their 
 ```html
 <script src="https://snapui.searchspring.io/[your_site_id]/bundle.js">
 	shopper = {
-		id: 'snapdev'
+		id: '[REPLACE WITH LOGGED IN SHOPPER ID]'
 	};
 </script>
 ```
@@ -128,7 +128,7 @@ Identifies the logged-in user. Should be invoked if a user is logged into their 
 ```typescript
 searchspring.tracker.events.shopper.login({
 	data: {
-		id: 'snapdev'
+		id: '[REPLACE WITH LOGGED IN SHOPPER ID]'
 	}
 });
 ```
@@ -293,7 +293,7 @@ This method will compare the provided cart contents with the current cart conten
 ```html
 <script src="https://snapui.searchspring.io/[your_site_id]/bundle.js">
 	shopper = {
-		id: 'snapdev',
+		id: '[REPLACE WITH LOGGED IN SHOPPER ID]'
 		cart: [
 			{
 				uid: '123',

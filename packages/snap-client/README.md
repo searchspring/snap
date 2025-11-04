@@ -241,6 +241,6 @@ const results = await client.recommend({
   tag: 'similar',
   siteId: 'abc123',
   products: ['product123'],
-  shopper: 'snapdev',
+  shopper: '[REPLACE WITH LOGGED IN SHOPPER ID]'
 });
 ```

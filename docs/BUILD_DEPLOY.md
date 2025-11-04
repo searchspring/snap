@@ -8,36 +8,7 @@ npm run build
 
 The build output files are placed in the `dist` directory. Each project is configured to use Webpack to build the project files and will build two sets of files: A modern build and a universal build.
 
-## Modern Build
-
-The modern build is used for projects targeting the latest browsers supporting the latest JavaScript features (ES6 and above). Example modern build files: `bundle.js` & `bundle.chunk.[hash].js`
-
-A browser is considered modern based on the [@searchspring/browserslist-config-snap modern](https://github.com/searchspring/browserslist-config-snap/blob/main/modern/index.js) rules and is included in the preconfigured scaffold.
-
-
-## Universal Build
-
-The universal build is used for projects targeting legacy browsers and will transpile any usage of modern JavaScript to ES5 as well as polyfill any missing browser features. If you are not targeting legacy browsers, you can omit deploying the universal built files that are prefixed with `universal.` - Example: `universal.bundle.js` and `universal.bundle.chunk.[hash].js`
-
-A browser is considered legacy based on the [@searchspring/browserslist-config-snap universal](https://github.com/searchspring/browserslist-config-snap/blob/main/universal/index.js) rules and is included in the preconfigured scaffold.
-
-However if you are targeting legacy browsers, it is not recommended to always serve the universal build files to all browsers - including modern browsers as this will impact web core vitals and performance negatively. 
-
-Therefore you will require a method for switching the front-end script src to point to the appropriate version of the build files depending on if the browser is modern or legacy. This can be done many ways including:
-
-- Server-side checking the userAgent and serving the appropriate version of the build files.
-- Front-end checking the userAgent and serving the appropriate version of the build files.
-- Lambda function serving the appropriate version of the build files based on the userAgent.
-
-The following is an example of a regex that would match the versions of the `browserlist-config-snap@1.0.7` rules:
-
-```js
-module.exports = /((CPU[ +]OS|iPhone[ +]OS|CPU[ +]iPhone|CPU IPhone OS)[ +]+(14|(1[5-9]|[2-9]\d|\d{3,})|15|(1[6-9]|[2-9]\d|\d{3,}))[_.]\d+(?:[_.]\d+)?)|((?:Chrome).*OPR\/(77|(7[8-9]|[8-9]\d|\d{3,}))\.\d+\.\d+)|(Edge\/(91|(9[2-9]|\d{3,}))(?:\.\d+)?)|((Chromium|Chrome)\/(91|(9[2-9]|\d{3,}))\.\d+(?:\.\d+)?)|(Version\/(14|(1[5-9]|[2-9]\d|\d{3,})|15|(1[6-9]|[2-9]\d|\d{3,}))\.\d+(?:\.\d+)? Safari\/)|(Firefox\/(74|(7[5-9]|[8-9]\d|\d{3,}))\.\d+\.\d+)|(Firefox\/(74|(7[5-9]|[8-9]\d|\d{3,}))\.\d+(pre|[ab]\d+[a-z]*)?)/;
-```
-(regex generated using [browserslist-useragent-regexp](https://www.npmjs.com/package/browserslist-useragent-regexp))
-
-
-## Deploying Self Integrated
+## Deploy
 
 If you are managing the project and repository (also referred to as "Self-Snap"), you will need handle the deployment of the build files to your CDN or hosting provider. (ie. Shopify, BigCommerce, Magento, AWS S3, etc..)
 
@@ -54,7 +25,7 @@ To host your own build files follow the below steps in your project.
 <!-- TODO: Link to playform specific install docs and update here -->
 
 
-## Deploying to Searchspring CDN
+## Deploy to Searchspring CDN
 
 **Deploying to Searchspring CDN is only possible if the repository is managed by the Searchspring [Github organization](https://github.com/searchspring-implementations)**. Repositories in this organization are typically managed by the Searchspring professional services team and deployed via a CI/CD pipeline using the [snap-action](https://github.com/searchspring/snap-action) Github Action. An invitation can be requested for collaboration.
 

@@ -1,6 +1,8 @@
 # Badges
 
-Badges are self-configured in the Searchspring Management Console
+Badges are self-configured in the Searchspring Management Console. 
+
+**Note:** This feature may not be enabled by default. Please contact your account manager to enable this feature.
 
 To displays badges the Result card must include the [OverlayBadge](https://searchspring.github.io/snap/preact-components?params=%3Fpath%3D%2Fstory%2Fmolecules-overlaybadge--default) and [CalloutBadge](https://searchspring.github.io/snap/preact-components?params=%3Fpath%3D%2Fstory%2Fmolecules-calloutbadge--default) components
 

@@ -297,14 +297,14 @@ import('./docs/documents.js').then(function (_) {
                     <div v-for="section in documents" class="section">
                         <h3>{{ section.categoryName }}</h3>
                         <ul class="links">
-                            <li v-for="link in section.links">
+                            <li v-for="link in section.links" :style="link.style">
                                 <Link :link="link" :active="inRoute(link)" />
 
                                 <ul v-if="link.links && inRoute(link)" class="sublinks">
-                                    <li v-for="sublink in link.links">
+                                    <li v-for="sublink in link.links" :style="sublink.style">
                                         <Link :link="sublink" :active="inRoute(sublink)"/>
                                         <ul v-if="sublink?.links && inRoute(sublink)" class="sublinks">
-                                            <li v-for="subsublink in sublink.links">
+                                            <li v-for="subsublink in sublink.links" :style="subsublink.style">
                                                 <Link :link="subsublink" :active="inRoute(subsublink)"/>
                                             </li>
                                         </ul>

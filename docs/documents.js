@@ -43,13 +43,6 @@ var documents = [
 				searchable: true,
 			},
 			{
-				label: 'Finder',
-				route: '/snap-finder',
-				type: 'markdown',
-				url: './docs/SNAP_FINDER.md',
-				searchable: true,
-			},
-			{
 				label: 'Recommendations',
 				route: '/snap-recommendations',
 				type: 'markdown',
@@ -72,6 +65,13 @@ var documents = [
 						hidden: true,
 					},
 				],
+			},
+			{
+				label: 'Finder',
+				route: '/snap-finder',
+				type: 'markdown',
+				url: './docs/SNAP_FINDER.md',
+				searchable: true,
 			},
 			{
 				label: 'Tracking',
@@ -490,6 +490,20 @@ var documents = [
 						url: './docs/BUILD_DEPLOY_INTEGRATION.md',
 						searchable: true,
 					},
+					{
+						label: 'QA Checklist',
+						route: '/build-deploy-ckecklist',
+						type: 'markdown',
+						url: './docs/BUILD_DEPLOY_CHECKLIST.md',
+						searchable: true,
+					},
+					{
+						label: 'Performance Optimization',
+						route: '/build-deploy-performance-optimization',
+						type: 'markdown',
+						url: './docs/BUILD_DEPLOY_PERFORMANCE_OPTIMIZATION.md',
+						searchable: true,
+					},
 				],
 			},
 		],
@@ -503,13 +517,6 @@ var documents = [
 				type: 'markdown',
 				url: './docs/ACCESSIBILITY_STATEMENT.md',
 				searchable: true,
-			},
-			{
-				label: 'Change Log',
-				route: '/dev-changelog',
-				type: 'markdown',
-				url: './CHANGELOG.md',
-				searchable: false,
 			},
 			{
 				label: 'Github Repository',

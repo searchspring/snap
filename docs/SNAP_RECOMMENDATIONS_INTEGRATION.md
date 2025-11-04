@@ -16,11 +16,6 @@ Recommendations script blocks can be placed anywhere on the page and will automa
 
 ```html
 <script type="searchspring/recommendations">
-    globals = {
-        shopper: {
-            id: 'snapdev'
-        }
-    };
     profiles = [
         {
             tag: 'recently-viewed',

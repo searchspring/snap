@@ -49,11 +49,6 @@ This example assumes a `recently-viewed` profile has been configured in the Sear
 
 ```html
 <script type="searchspring/recommendations">
-	globals = {
-		shopper: {
-			id: 'snapdev'
-		}
-	};
 	profiles = [
 		{
 			tag: 'recently-viewed',

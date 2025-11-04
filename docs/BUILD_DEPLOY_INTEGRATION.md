@@ -63,7 +63,7 @@ When used, shopper context should always include at least an `id`; the `cart` co
 ```html
 <script src="https://snapui.searchspring.io/[your_site_id]/bundle.js">
 	shopper = {
-		id: 'snapdev',
+		id: '[REPLACE WITH LOGGED IN SHOPPER ID]',
 		cart: [
 			{
 				uid: '123',
