@@ -1,35 +1,38 @@
-## Recommendations Integration
-It is recommended to utilize the [`RecommendationInstantiator`](https://github.com/searchspring/snap/blob/main/packages/snap-preact/src/Instantiators/README.md) for integration of product recommendations (standard when using Snap object).
+# Recommendations Integration
 
-Changes to the recommendation integration scripts were made in Snap `v0.60.0`. Legacy Recommmendation Integrations docs can still be found [`here`](https://github.com/searchspring/snap/blob/main/docs/INTEGRATION_LEGACY_RECOMMENDATIONS.md)
+Changes to the recommendation integration scripts were made in Snap `v0.60.0`. Legacy Recommendation Integrations docs can still be found [`here`](https://searchspring.github.io/snap/snap-recommendations-legacy)
 
-Recommendations script blocks can be placed anywhere on the page and will automatically target and batch requests for all profiles specified in the block (requires the `bundle.js` script also). Batching profiles is important for deduplication of recommended products (see more below).
+## Prerequisites
 
-The block below uses the `recently-viewed` profile which would typically be setup to display the last products viewed by the shopper. Profiles must be setup in the Searchspring Management Console (SMC) and have associated Snap templates selected.
+Profiles must be setup in the Searchspring Management Console (SMC) and have associated Snap templates selected. The template selected contains a `component` that will be used to render the recommendations profile. This component must be configured in the Snap [RecommendationInstantiator config](https://searchspring.github.io/snap/reference-snap-preact-instantiators#recommendationinstantiatorconfig)
+
+## Installation
+
+Recommendations script blocks can be placed anywhere on the page and will automatically target and batch requests for all profiles specified in the block.
+
+- If this is the **first profile** you are adding to the storefront, you will need to place the script block in a common location that is likely to be present on all pages that contain recommendations. For example, within the `<head>` tag.
+
+- Or **Additional profiles** being added should be appended to the existing script block in the `profiles` array and can be conditionally rendered (via templating logic) based on the page type. However if the page does not contain any elements matching any of the profile's `selector`, the profile will also not be rendered so alternatively the `div` element can be conditionally rendered instead. We do not recommend creating a new script block for each profile, as this will result in multiple API requests and products will not be deduplicated across profiles. Batching profiles is important for deduplication of recommended products across profiles on the same page (see [Deduping](#deduping)).
 
 ```html
 <script type="searchspring/recommendations">
-	globals = {
-		shopper: {
-			id: 'snapdev'
-		}
-	};
-	profiles = [
-		{
-			tag: 'recently-viewed',
-			selector: '.ss__recs__recently-viewed',
-			options: {
-				limit: 5
-			}
-		}
-	];
+    profiles = [
+        {
+            tag: 'recently-viewed',
+            selector: '.ss__recs__recently-viewed',
+            options: {
+                limit: 5
+            }
+        }
+    ];
 </script>
-
-<div class="ss__recs__recently-viewed" style="min-height: 100vh;"><!-- recommendations will render here --></div>
 ```
 
-The `RecommendationInstantiator` will look for these script blocks on the page and attempt to inject components based on the `selector` specified in each profile. In the example above, the profile specified (via tag) is the `recently-viewed` profile, and is set to render inside the `.ss__recs__recently-viewed` element just below the script block. The targeted element could exist anywhere on the page - but it is recommended to group elements with script blocks whenever possible (for easy integration identification). The component to render into the targeted `selector` is setup within the `RecommendationInstantiator` configuration. The targeted element should be given a `min-height` inline style to prevent cumulative layout shift.
+```html
+<div class="ss__recs__recently-viewed"><!-- recommendations will render here --></div>
+```
 
+In this example the `recently-viewed` profile `tag` is set to render inside the `.ss__recs__recently-viewed` element.
 
 ## Recommendation Context Variables
 Context variables are set within the script blocks and can be used to set either global or per profile (profile specific) functionality. Variables are used to alter the results displayed by our recommendations and may be required depending on the profile placements in use.
@@ -41,7 +44,7 @@ Context variables are set within the script blocks and can be used to set either
 | blockedItems | array of strings | all | SKU values to identify which products to exclude from the response |   |
 | filters | array of filters | all | optional recommendation filters to apply to ALL profiles in the batch |   |
 | cart | array (or function that returns an array) of current cart skus | all | optional method of setting cart contents |   |
-| shopper.id | logged in user unique identifier | all | required for personalization functionallity if not provided to the bundle (global) context |   |
+| shopper.id | logged in user unique identifier | all | required for personalization functionality if not provided to the bundle (global) context |   |
 
 
 ### Profile Specific Variables
@@ -57,8 +60,8 @@ Context variables are set within the script blocks and can be used to set either
 | options.dedupe | boolean (default: `true`) | all | dedupe products across all profiles in the batch |   |
 | options.query | string | dynamic custom | query to search |   |
 | options.filters | array of filters | all | optional recommendation filters |   |
-| options.realtime | boolean | all | optional update recommendations if cart contents change (requires [cart attribute tracking](https://github.com/searchspring/snap/blob/main/docs/INTEGRATION_TRACKING.md)) |   |
-| options.limit | number (default: 20, max: 20) | all | optional maximum number of results to display, can also be set globally [via config globals](https://github.com/searchspring/snap/tree/main/packages/snap-controller/src/Recommendation) |   |
+| options.realtime | boolean | all | optional update recommendations if cart contents change (requires [cart attribute tracking](https://github.com/searchspring/snap/tree/main/docs/SNAP_TRACKING.md#cart-attribute-tracking)) |   |
+| options.limit | number (default: 20, max: 20) | all | optional maximum number of results to display, can also be set globally via RecommendationController config globals |   |
 
 
 ## Batching and Ordering
@@ -113,7 +116,7 @@ Here's an example that demonstrates deduping:
 
 ## Additional Examples
 
-The examples below assume the `similar` profile has been setup in the Searchspring Management Console (SMC), and that a Snap `bundle.js` script exists on the page and has been configured with a `RecommendationInstantiator`.
+The examples below assume the `similar` profile has been setup in the Searchspring Management Console (SMC), and that a Snap `bundle.js` script exists on the page and has been configured with a [`RecommendationInstantiator`](https://searchspring.github.io/snap/reference-snap-preact-instantiators)
 
 A typical "similar" profile displays products similar to the product passed in via the `products` global context variable.
 

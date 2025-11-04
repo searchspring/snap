@@ -1,4 +1,4 @@
-## Script Context
+# Script Context
 This utility function gets a script tags attributes and innerHTML declarations and returns them in an object.
 
 ```typescript
