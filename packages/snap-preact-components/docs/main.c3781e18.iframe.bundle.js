@@ -1,4 +1,4 @@
-/*! For license information please see main.625a5c48.iframe.bundle.js.LICENSE.txt */
+/*! For license information please see main.c3781e18.iframe.bundle.js.LICENSE.txt */
 (self.webpackChunk_searchspring_snap_preact_components = self.webpackChunk_searchspring_snap_preact_components || []).push([
 	[792],
 	{
@@ -596,6 +596,15 @@
 						' components.'
 					),
 					(0, esm.yg)('h2', { id: 'usage' }, 'Usage'),
+					(0, esm.yg)(
+						'pre',
+						null,
+						(0, esm.yg)(
+							'code',
+							{ parentName: 'pre', className: 'language-jsx' },
+							"import { BadgeImage } from '@searchspring/snap-preact-components';\n"
+						)
+					),
 					(0, esm.yg)('h3', { id: 'url' }, 'url'),
 					(0, esm.yg)(
 						'p',
@@ -790,6 +799,15 @@
 						' components.'
 					),
 					(0, esm.yg)('h2', { id: 'usage' }, 'Usage'),
+					(0, esm.yg)(
+						'pre',
+						null,
+						(0, esm.yg)(
+							'code',
+							{ parentName: 'pre', className: 'language-jsx' },
+							"import { BadgePill } from '@searchspring/snap-preact-components';\n"
+						)
+					),
 					(0, esm.yg)('h3', { id: 'value' }, 'value'),
 					(0, esm.yg)(
 						'p',
@@ -995,6 +1013,15 @@
 						' components.'
 					),
 					(0, esm.yg)('h2', { id: 'usage' }, 'Usage'),
+					(0, esm.yg)(
+						'pre',
+						null,
+						(0, esm.yg)(
+							'code',
+							{ parentName: 'pre', className: 'language-jsx' },
+							"import { BadgeRectangle } from '@searchspring/snap-preact-components';\n"
+						)
+					),
 					(0, esm.yg)('h3', { id: 'value' }, 'value'),
 					(0, esm.yg)(
 						'p',
@@ -1199,6 +1226,15 @@
 						' components.'
 					),
 					(0, esm.yg)('h2', { id: 'usage' }, 'Usage'),
+					(0, esm.yg)(
+						'pre',
+						null,
+						(0, esm.yg)(
+							'code',
+							{ parentName: 'pre', className: 'language-jsx' },
+							"import { BadgeText } from '@searchspring/snap-preact-components';\n"
+						)
+					),
 					(0, esm.yg)('h3', { id: 'value' }, 'value'),
 					(0, esm.yg)(
 						'p',
@@ -1444,6 +1480,15 @@
 					(0, esm.yg)('h1', { id: 'breadcrumbs' }, 'Breadcrumbs'),
 					(0, esm.yg)('p', null, 'Renders a list of breadcrumbs. '),
 					(0, esm.yg)('h2', { id: 'usage' }, 'Usage'),
+					(0, esm.yg)(
+						'pre',
+						null,
+						(0, esm.yg)(
+							'code',
+							{ parentName: 'pre', className: 'language-jsx' },
+							"import { Breadcrumbs } from '@searchspring/snap-preact-components';\n"
+						)
+					),
 					(0, esm.yg)('h3', { id: 'data' }, 'data'),
 					(0, esm.yg)('p', null, 'The ', (0, esm.yg)('inlineCode', { parentName: 'p' }, 'data'), ' prop specifies an array of breadcrumb objects. '),
 					(0, esm.yg)('h4', { id: 'breadcrumb-object' }, 'breadcrumb object'),
@@ -1559,6 +1604,11 @@
 					(0, esm.yg)('h1', { id: 'button' }, 'Button'),
 					(0, esm.yg)('p', null, 'Renders a native or custom button.'),
 					(0, esm.yg)('h2', { id: 'usage' }, 'Usage'),
+					(0, esm.yg)(
+						'pre',
+						null,
+						(0, esm.yg)('code', { parentName: 'pre', className: 'language-jsx' }, "import { Button } from '@searchspring/snap-preact-components';\n")
+					),
 					(0, esm.yg)('h3', { id: 'content' }, 'content'),
 					(0, esm.yg)(
 						'p',
@@ -1880,6 +1930,15 @@
 						' dropdown or to collapse content. By default any clicks outside of the element will hide the content.'
 					),
 					(0, esm.yg)('h2', { id: 'usage' }, 'Usage'),
+					(0, esm.yg)(
+						'pre',
+						null,
+						(0, esm.yg)(
+							'code',
+							{ parentName: 'pre', className: 'language-jsx' },
+							"import { Dropdown } from '@searchspring/snap-preact-components';\n"
+						)
+					),
 					(0, esm.yg)('h3', { id: 'content' }, 'content'),
 					(0, esm.yg)(
 						'p',
@@ -2547,6 +2606,15 @@
 						' containing a formatted number.'
 					),
 					(0, esm.yg)('h2', { id: 'usage' }, 'Usage'),
+					(0, esm.yg)(
+						'pre',
+						null,
+						(0, esm.yg)(
+							'code',
+							{ parentName: 'pre', className: 'language-jsx' },
+							"import { FormattedNumber } from '@searchspring/snap-preact-components';\n"
+						)
+					),
 					(0, esm.yg)('h3', { id: 'value' }, 'value'),
 					(0, esm.yg)(
 						'p',
@@ -2798,6 +2866,11 @@
 					(0, esm.yg)('h1', { id: 'icon' }, 'Icon'),
 					(0, esm.yg)('p', null, 'Renders an Icon either from our list of available icons or from a custom path. '),
 					(0, esm.yg)('h2', { id: 'usage' }, 'Usage'),
+					(0, esm.yg)(
+						'pre',
+						null,
+						(0, esm.yg)('code', { parentName: 'pre', className: 'language-jsx' }, "import { Icon } from '@searchspring/snap-preact-components';\n")
+					),
 					(0, esm.yg)('h3', { id: 'icon-1' }, 'icon'),
 					(0, esm.yg)('p', null, 'The ', (0, esm.yg)('inlineCode', { parentName: 'p' }, 'icon'), ' prop specifies the name of the icon to display. '),
 					(0, esm.yg)('pre', null, (0, esm.yg)('code', { parentName: 'pre', className: 'language-jsx' }, "<Icon icon='cogs' />\n")),
@@ -3284,6 +3357,11 @@
 					(0, esm.yg)('h1', { id: 'image' }, 'Image'),
 					(0, esm.yg)('p', null, 'Renders an Image with fallback and rollover functionality. '),
 					(0, esm.yg)('h2', { id: 'usage' }, 'Usage'),
+					(0, esm.yg)(
+						'pre',
+						null,
+						(0, esm.yg)('code', { parentName: 'pre', className: 'language-jsx' }, "import { Image } from '@searchspring/snap-preact-components';\n")
+					),
 					(0, esm.yg)('h3', { id: 'src' }, 'src'),
 					(0, esm.yg)(
 						'p',
@@ -3827,6 +3905,15 @@
 					(0, esm.yg)('h1', { id: 'loading-bar' }, 'Loading Bar'),
 					(0, esm.yg)('p', null, 'Renders a Loading Bar.'),
 					(0, esm.yg)('h2', { id: 'usage' }, 'Usage'),
+					(0, esm.yg)(
+						'pre',
+						null,
+						(0, esm.yg)(
+							'code',
+							{ parentName: 'pre', className: 'language-jsx' },
+							"import { LoadingBar } from '@searchspring/snap-preact-components';\n"
+						)
+					),
 					(0, esm.yg)('h3', { id: 'active' }, 'active'),
 					(0, esm.yg)(
 						'p',
@@ -3995,6 +4082,11 @@
 						' component below.'
 					),
 					(0, esm.yg)('h2', { id: 'usage' }, 'Usage'),
+					(0, esm.yg)(
+						'pre',
+						null,
+						(0, esm.yg)('code', { parentName: 'pre', className: 'language-jsx' }, "import { Banner } from '@searchspring/snap-preact-components';\n")
+					),
 					(0, esm.yg)('h3', { id: 'content' }, 'content'),
 					(0, esm.yg)(
 						'p',
@@ -4752,6 +4844,15 @@
 					_extends({}, layoutProps, props, { components, mdxType: 'MDXLayout' }),
 					(0, esm.yg)('h1', { id: 'inline-banner' }, 'Inline Banner'),
 					(0, esm.yg)('h2', { id: 'usage' }, 'Usage'),
+					(0, esm.yg)(
+						'pre',
+						null,
+						(0, esm.yg)(
+							'code',
+							{ parentName: 'pre', className: 'language-jsx' },
+							"import { InlineBanner } from '@searchspring/snap-preact-components';\n"
+						)
+					),
 					(0, esm.yg)('h3', { id: 'banner' }, 'banner'),
 					(0, esm.yg)(
 						'p',
@@ -5392,6 +5493,11 @@
 						'Renders an Overlay. Typically used to blur the background with a foreground element such as a modal or slideout menu.'
 					),
 					(0, esm.yg)('h2', { id: 'usage' }, 'Usage'),
+					(0, esm.yg)(
+						'pre',
+						null,
+						(0, esm.yg)('code', { parentName: 'pre', className: 'language-jsx' }, "import { Overlay } from '@searchspring/snap-preact-components';\n")
+					),
 					(0, esm.yg)('h3', { id: 'active' }, 'active'),
 					(0, esm.yg)(
 						'p',
@@ -5599,6 +5705,11 @@
 						' containing a formatted number.'
 					),
 					(0, esm.yg)('h2', { id: 'usage' }, 'Usage'),
+					(0, esm.yg)(
+						'pre',
+						null,
+						(0, esm.yg)('code', { parentName: 'pre', className: 'language-jsx' }, "import { Price } from '@searchspring/snap-preact-components';\n")
+					),
 					(0, esm.yg)(
 						'p',
 						null,
@@ -5908,6 +6019,15 @@
 					(0, esm.yg)('h1', { id: 'skeleton' }, 'Skeleton'),
 					(0, esm.yg)('p', null, 'Renders a div with a animation for use when building loading skeletons. '),
 					(0, esm.yg)('h2', { id: 'usage' }, 'Usage'),
+					(0, esm.yg)(
+						'pre',
+						null,
+						(0, esm.yg)(
+							'code',
+							{ parentName: 'pre', className: 'language-jsx' },
+							"import { Skeleton } from '@searchspring/snap-preact-components';\n"
+						)
+					),
 					(0, esm.yg)('h3', { id: 'height' }, 'Height'),
 					(0, esm.yg)(
 						'p',
@@ -6110,6 +6230,15 @@
 						' component to display callout badges.'
 					),
 					(0, esm.yg)('h2', { id: 'usage' }, 'Usage'),
+					(0, esm.yg)(
+						'pre',
+						null,
+						(0, esm.yg)(
+							'code',
+							{ parentName: 'pre', className: 'language-jsx' },
+							"import { CalloutBadge } from '@searchspring/snap-preact-components';\n"
+						)
+					),
 					(0, esm.yg)('h3', { id: 'result' }, 'result'),
 					(0, esm.yg)(
 						'p',
@@ -6849,6 +6978,15 @@
 					(0, esm.yg)('h2', { id: 'sub-components' }, 'Sub-components'),
 					(0, esm.yg)('ul', null, (0, esm.yg)('li', { parentName: 'ul' }, 'Icon')),
 					(0, esm.yg)('h2', { id: 'usage' }, 'Usage'),
+					(0, esm.yg)(
+						'pre',
+						null,
+						(0, esm.yg)(
+							'code',
+							{ parentName: 'pre', className: 'language-jsx' },
+							"import { Carousel } from '@searchspring/snap-preact-components';\n"
+						)
+					),
 					(0, esm.yg)(
 						'p',
 						null,
@@ -7728,6 +7866,15 @@
 					(0, esm.yg)('h2', { id: 'sub-components' }, 'Sub-components'),
 					(0, esm.yg)('ul', null, (0, esm.yg)('li', { parentName: 'ul' }, 'Icon')),
 					(0, esm.yg)('h2', { id: 'usage' }, 'Usage'),
+					(0, esm.yg)(
+						'pre',
+						null,
+						(0, esm.yg)(
+							'code',
+							{ parentName: 'pre', className: 'language-jsx' },
+							"import { Checkbox } from '@searchspring/snap-preact-components';\n"
+						)
+					),
 					(0, esm.yg)('h3', { id: 'native' }, 'native'),
 					(0, esm.yg)(
 						'p',
@@ -8509,6 +8656,15 @@
 					(0, esm.yg)('h2', { id: 'sub-components' }, 'Sub-components'),
 					(0, esm.yg)('ul', null, (0, esm.yg)('li', { parentName: 'ul' }, 'Icon'), (0, esm.yg)('li', { parentName: 'ul' }, 'Button')),
 					(0, esm.yg)('h2', { id: 'usage' }, 'Usage'),
+					(0, esm.yg)(
+						'pre',
+						null,
+						(0, esm.yg)(
+							'code',
+							{ parentName: 'pre', className: 'language-jsx' },
+							"import { ErrorHandler } from '@searchspring/snap-preact-components';\n"
+						)
+					),
 					(0, esm.yg)('h3', { id: 'controller' }, 'controller'),
 					(0, esm.yg)(
 						'p',
@@ -8691,6 +8847,15 @@
 					(0, esm.yg)('h1', { id: 'facet-grid-options' }, 'Facet Grid Options'),
 					(0, esm.yg)('p', null, 'Renders a grid of facet options.'),
 					(0, esm.yg)('h2', { id: 'usage' }, 'Usage'),
+					(0, esm.yg)(
+						'pre',
+						null,
+						(0, esm.yg)(
+							'code',
+							{ parentName: 'pre', className: 'language-jsx' },
+							"import { FacetGridOptions } from '@searchspring/snap-preact-components';\n"
+						)
+					),
 					(0, esm.yg)('h3', { id: 'values' }, 'values'),
 					(0, esm.yg)(
 						'p',
@@ -9509,6 +9674,15 @@
 					(0, esm.yg)('h1', { id: 'facet-hierarchy-options' }, 'Facet Hierarchy Options'),
 					(0, esm.yg)('p', null, 'Renders a list of hierarchy options.'),
 					(0, esm.yg)('h2', { id: 'usage' }, 'Usage'),
+					(0, esm.yg)(
+						'pre',
+						null,
+						(0, esm.yg)(
+							'code',
+							{ parentName: 'pre', className: 'language-jsx' },
+							"import { FacetHierarchyOptions } from '@searchspring/snap-preact-components';\n"
+						)
+					),
 					(0, esm.yg)('h3', { id: 'values' }, 'values'),
 					(0, esm.yg)(
 						'p',
@@ -10296,6 +10470,15 @@
 					(0, esm.yg)('h2', { id: 'sub-components' }, 'Sub-components'),
 					(0, esm.yg)('ul', null, (0, esm.yg)('li', { parentName: 'ul' }, 'Checkbox')),
 					(0, esm.yg)('h2', { id: 'usage' }, 'Usage'),
+					(0, esm.yg)(
+						'pre',
+						null,
+						(0, esm.yg)(
+							'code',
+							{ parentName: 'pre', className: 'language-jsx' },
+							"import { FacetListOptions } from '@searchspring/snap-preact-components';\n"
+						)
+					),
 					(0, esm.yg)('h3', { id: 'values' }, 'values'),
 					(0, esm.yg)(
 						'p',
@@ -11110,6 +11293,15 @@
 					(0, esm.yg)('h2', { id: 'sub-components' }, 'Sub-components'),
 					(0, esm.yg)('ul', null, (0, esm.yg)('li', { parentName: 'ul' }, 'Icon')),
 					(0, esm.yg)('h2', { id: 'usage' }, 'Usage'),
+					(0, esm.yg)(
+						'pre',
+						null,
+						(0, esm.yg)(
+							'code',
+							{ parentName: 'pre', className: 'language-jsx' },
+							"import { FacetPaletteOptions } from '@searchspring/snap-preact-components';\n"
+						)
+					),
 					(0, esm.yg)('h3', { id: 'values' }, 'values'),
 					(0, esm.yg)(
 						'p',
@@ -12004,6 +12196,15 @@
 						'.'
 					),
 					(0, esm.yg)('h2', { id: 'usage' }, 'Usage'),
+					(0, esm.yg)(
+						'pre',
+						null,
+						(0, esm.yg)(
+							'code',
+							{ parentName: 'pre', className: 'language-jsx' },
+							"import { FacetSlider } from '@searchspring/snap-preact-components';\n"
+						)
+					),
 					(0, esm.yg)('h3', { id: 'facet' }, 'facet'),
 					(0, esm.yg)(
 						'p',
@@ -12888,6 +13089,11 @@
 					(0, esm.yg)('h2', { id: 'sub-components' }, 'Sub-components'),
 					(0, esm.yg)('ul', null, (0, esm.yg)('li', { parentName: 'ul' }, 'Icon'), (0, esm.yg)('li', { parentName: 'ul' }, 'Button')),
 					(0, esm.yg)('h2', { id: 'usage' }, 'Usage'),
+					(0, esm.yg)(
+						'pre',
+						null,
+						(0, esm.yg)('code', { parentName: 'pre', className: 'language-jsx' }, "import { Filter } from '@searchspring/snap-preact-components';\n")
+					),
 					(0, esm.yg)('h3', { id: 'facetlabel' }, 'facetLabel'),
 					(0, esm.yg)(
 						'p',
@@ -13682,6 +13888,11 @@
 					(0, esm.yg)('h2', { id: 'components-used' }, 'Components Used'),
 					(0, esm.yg)('ul', null, (0, esm.yg)('li', { parentName: 'ul' }, 'image')),
 					(0, esm.yg)('h2', { id: 'usage' }, 'Usage'),
+					(0, esm.yg)(
+						'pre',
+						null,
+						(0, esm.yg)('code', { parentName: 'pre', className: 'language-jsx' }, "import { Grid } from '@searchspring/snap-preact-components';\n")
+					),
 					(0, esm.yg)('h3', { id: 'options' }, 'options'),
 					(0, esm.yg)(
 						'p',
@@ -14490,6 +14701,11 @@
 					(0, esm.yg)('h2', { id: 'sub-components' }, 'Sub-components'),
 					(0, esm.yg)('ul', null, (0, esm.yg)('li', { parentName: 'ul' }, 'Checkbox')),
 					(0, esm.yg)('h2', { id: 'usage' }, 'Usage'),
+					(0, esm.yg)(
+						'pre',
+						null,
+						(0, esm.yg)('code', { parentName: 'pre', className: 'language-jsx' }, "import { List } from '@searchspring/snap-preact-components';\n")
+					),
 					(0, esm.yg)('h3', { id: 'options' }, 'options'),
 					(0, esm.yg)(
 						'p',
@@ -15530,6 +15746,15 @@
 						' component to wrap elements (children) that should have overlay badges.'
 					),
 					(0, esm.yg)('h2', { id: 'usage' }, 'Usage'),
+					(0, esm.yg)(
+						'pre',
+						null,
+						(0, esm.yg)(
+							'code',
+							{ parentName: 'pre', className: 'language-jsx' },
+							"import { OverlayBadge } from '@searchspring/snap-preact-components';\n"
+						)
+					),
 					(0, esm.yg)('h3', { id: 'children' }, 'children'),
 					(0, esm.yg)(
 						'p',
@@ -16608,6 +16833,15 @@
 					(0, esm.yg)('h2', { id: 'sub-components' }, 'Sub-components'),
 					(0, esm.yg)('ul', null, (0, esm.yg)('li', { parentName: 'ul' }, 'Icon')),
 					(0, esm.yg)('h2', { id: 'usage' }, 'Usage'),
+					(0, esm.yg)(
+						'pre',
+						null,
+						(0, esm.yg)(
+							'code',
+							{ parentName: 'pre', className: 'language-jsx' },
+							"import { Pagination } from '@searchspring/snap-preact-components';\n"
+						)
+					),
 					(0, esm.yg)('h3', { id: 'pagination-1' }, 'pagination'),
 					(0, esm.yg)(
 						'p',
@@ -17354,6 +17588,11 @@
 						(0, esm.yg)('li', { parentName: 'ul' }, 'Image')
 					),
 					(0, esm.yg)('h2', { id: 'usage' }, 'Usage'),
+					(0, esm.yg)(
+						'pre',
+						null,
+						(0, esm.yg)('code', { parentName: 'pre', className: 'language-jsx' }, "import { Result } from '@searchspring/snap-preact-components';\n")
+					),
 					(0, esm.yg)('h3', { id: 'result-1' }, 'result'),
 					(0, esm.yg)(
 						'p',
@@ -18309,6 +18548,15 @@
 						(0, esm.yg)(
 							'code',
 							{ parentName: 'pre', className: 'language-jsx' },
+							"import { SearchInput } from '@searchspring/snap-preact-components';\n"
+						)
+					),
+					(0, esm.yg)(
+						'pre',
+						null,
+						(0, esm.yg)(
+							'code',
+							{ parentName: 'pre', className: 'language-jsx' },
 							'<SearchInput onChange={handleChange} placeholder={"placeholder text"}/>\n'
 						)
 					),
@@ -18901,6 +19149,11 @@
 						(0, esm.yg)('li', { parentName: 'ul' }, 'Icon')
 					),
 					(0, esm.yg)('h2', { id: 'usage' }, 'Usage'),
+					(0, esm.yg)(
+						'pre',
+						null,
+						(0, esm.yg)('code', { parentName: 'pre', className: 'language-jsx' }, "import { Select } from '@searchspring/snap-preact-components';\n")
+					),
 					(0, esm.yg)('h3', { id: 'options' }, 'options'),
 					(0, esm.yg)(
 						'p',
@@ -20128,6 +20381,15 @@
 					(0, esm.yg)('h2', { id: 'sub-components' }, 'Sub-components'),
 					(0, esm.yg)('ul', null, (0, esm.yg)('li', { parentName: 'ul' }, 'Overlay')),
 					(0, esm.yg)('h2', { id: 'usage' }, 'Usage'),
+					(0, esm.yg)(
+						'pre',
+						null,
+						(0, esm.yg)(
+							'code',
+							{ parentName: 'pre', className: 'language-jsx' },
+							"import { Slideout } from '@searchspring/snap-preact-components';\n"
+						)
+					),
 					(0, esm.yg)('h3', { id: 'buttoncontent' }, 'buttonContent'),
 					(0, esm.yg)(
 						'p',
@@ -20437,6 +20699,15 @@
 						(0, esm.yg)('li', { parentName: 'ul' }, 'image')
 					),
 					(0, esm.yg)('h2', { id: 'usage' }, 'Usage'),
+					(0, esm.yg)(
+						'pre',
+						null,
+						(0, esm.yg)(
+							'code',
+							{ parentName: 'pre', className: 'language-jsx' },
+							"import { Swatches } from '@searchspring/snap-preact-components';\n"
+						)
+					),
 					(0, esm.yg)('h3', { id: 'options' }, 'options'),
 					(0, esm.yg)(
 						'p',
@@ -21321,6 +21592,15 @@
 						(0, esm.yg)('li', { parentName: 'ul' }, 'Swatches')
 					),
 					(0, esm.yg)('h2', { id: 'usage' }, 'Usage'),
+					(0, esm.yg)(
+						'pre',
+						null,
+						(0, esm.yg)(
+							'code',
+							{ parentName: 'pre', className: 'language-jsx' },
+							"import { VariantSelection } from '@searchspring/snap-preact-components';\n"
+						)
+					),
 					(0, esm.yg)('h3', { id: 'selection' }, 'selection'),
 					(0, esm.yg)(
 						'p',
@@ -22682,6 +22962,15 @@
 						(0, esm.yg)('li', { parentName: 'ul' }, 'Icon')
 					),
 					(0, esm.yg)('h2', { id: 'usage' }, 'Usage'),
+					(0, esm.yg)(
+						'pre',
+						null,
+						(0, esm.yg)(
+							'code',
+							{ parentName: 'pre', className: 'language-jsx' },
+							"import { Autocomplete } from '@searchspring/snap-preact-components';\n"
+						)
+					),
 					(0, esm.yg)('h3', { id: 'input' }, 'input'),
 					(0, esm.yg)('p', null, 'The required ', (0, esm.yg)('inlineCode', { parentName: 'p' }, 'input'), ' prop expects either:'),
 					(0, esm.yg)(
@@ -24283,6 +24572,15 @@
 					(0, esm.yg)('h2', { id: 'components-used' }, 'Components Used'),
 					(0, esm.yg)('ul', null, (0, esm.yg)('li', { parentName: 'ul' }, 'Icon')),
 					(0, esm.yg)('h2', { id: 'usage' }, 'Usage'),
+					(0, esm.yg)(
+						'pre',
+						null,
+						(0, esm.yg)(
+							'code',
+							{ parentName: 'pre', className: 'language-jsx' },
+							"import { BranchOverride } from '@searchspring/snap-preact-components';\n"
+						)
+					),
 					(0, esm.yg)('h3', { id: 'name' }, 'name'),
 					(0, esm.yg)(
 						'p',
@@ -24530,6 +24828,11 @@
 						(0, esm.yg)('li', { parentName: 'ul' }, 'SearchInput')
 					),
 					(0, esm.yg)('h2', { id: 'usage' }, 'Usage'),
+					(0, esm.yg)(
+						'pre',
+						null,
+						(0, esm.yg)('code', { parentName: 'pre', className: 'language-jsx' }, "import { Facet } from '@searchspring/snap-preact-components';\n")
+					),
 					(0, esm.yg)('h3', { id: 'facet-1' }, 'facet'),
 					(0, esm.yg)(
 						'p',
@@ -25970,6 +26273,11 @@
 					(0, esm.yg)('h2', { id: 'sub-components' }, 'Sub-components'),
 					(0, esm.yg)('ul', null, (0, esm.yg)('li', { parentName: 'ul' }, 'Facet')),
 					(0, esm.yg)('h2', { id: 'usage' }, 'Usage'),
+					(0, esm.yg)(
+						'pre',
+						null,
+						(0, esm.yg)('code', { parentName: 'pre', className: 'language-jsx' }, "import { Facets } from '@searchspring/snap-preact-components';\n")
+					),
 					(0, esm.yg)('h3', { id: 'controller' }, 'controller'),
 					(0, esm.yg)(
 						'p',
@@ -26714,6 +27022,15 @@
 					(0, esm.yg)('h2', { id: 'components-used' }, 'Components Used'),
 					(0, esm.yg)('ul', null, (0, esm.yg)('li', { parentName: 'ul' }, 'Filter')),
 					(0, esm.yg)('h2', { id: 'usage' }, 'Usage'),
+					(0, esm.yg)(
+						'pre',
+						null,
+						(0, esm.yg)(
+							'code',
+							{ parentName: 'pre', className: 'language-jsx' },
+							"import { FilterSummary } from '@searchspring/snap-preact-components';\n"
+						)
+					),
 					(0, esm.yg)('h3', { id: 'controller' }, 'controller'),
 					(0, esm.yg)(
 						'p',
@@ -27801,6 +28118,15 @@
 						(0, esm.yg)('li', { parentName: 'ul' }, 'Result (default)')
 					),
 					(0, esm.yg)('h2', { id: 'usage' }, 'Usage'),
+					(0, esm.yg)(
+						'pre',
+						null,
+						(0, esm.yg)(
+							'code',
+							{ parentName: 'pre', className: 'language-jsx' },
+							"import { Recommendation } from '@searchspring/snap-preact-components';\n"
+						)
+					),
 					(0, esm.yg)(
 						'p',
 						null,
@@ -29523,6 +29849,15 @@
 					(0, esm.yg)('ul', null, (0, esm.yg)('li', { parentName: 'ul' }, 'Carousel'), (0, esm.yg)('li', { parentName: 'ul' }, 'Result (default)')),
 					(0, esm.yg)('h2', { id: 'usage' }, 'Usage'),
 					(0, esm.yg)(
+						'pre',
+						null,
+						(0, esm.yg)(
+							'code',
+							{ parentName: 'pre', className: 'language-jsx' },
+							"import { RecommendationBundle } from '@searchspring/snap-preact-components';\n"
+						)
+					),
+					(0, esm.yg)(
 						'p',
 						null,
 						'Additional ',
@@ -30767,6 +31102,11 @@
 						(0, esm.yg)('li', { parentName: 'ul' }, (0, esm.yg)('p', { parentName: 'li' }, 'ResultTracker'))
 					),
 					(0, esm.yg)('h2', { id: 'usage' }, 'Usage'),
+					(0, esm.yg)(
+						'pre',
+						null,
+						(0, esm.yg)('code', { parentName: 'pre', className: 'language-jsx' }, "import { Results } from '@searchspring/snap-preact-components';\n")
+					),
 					(0, esm.yg)('h3', { id: 'controller' }, 'controller'),
 					(0, esm.yg)(
 						'p',
@@ -31744,6 +32084,15 @@
 						'.'
 					),
 					(0, esm.yg)('h2', { id: 'usage' }, 'Usage'),
+					(0, esm.yg)(
+						'pre',
+						null,
+						(0, esm.yg)(
+							'code',
+							{ parentName: 'pre', className: 'language-jsx' },
+							"import { ResultTracker } from '@searchspring/snap-preact-components';\n"
+						)
+					),
 					(0, esm.yg)('h3', { id: 'controller' }, 'controller'),
 					(0, esm.yg)(
 						'p',
@@ -33685,6 +34034,8 @@
 					__webpack_require__('../../node_modules/core-js/modules/es.string.includes.js'),
 					__webpack_require__('../../node_modules/core-js/modules/es.array.every.js'),
 					__webpack_require__('../../node_modules/core-js/modules/es.string.replace.js'),
+					__webpack_require__('../../node_modules/core-js/modules/es.regexp.constructor.js'),
+					__webpack_require__('../../node_modules/core-js/modules/es.regexp.to-string.js'),
 					__webpack_require__('../../node_modules/core-js/modules/es.array.join.js'),
 					__webpack_require__('../../node_modules/core-js/modules/es.string.split.js'),
 					__webpack_require__('../../node_modules/core-js/modules/es.string.trim.js'),
@@ -33696,12 +34047,332 @@
 				cjs_default = __webpack_require__.n(cjs),
 				css_escape = __webpack_require__('../../node_modules/css.escape/css.escape.js'),
 				css_escape_default = __webpack_require__.n(css_escape);
-			__webpack_require__('../../node_modules/core-js/modules/es.regexp.to-string.js'),
-				__webpack_require__('../../node_modules/core-js/modules/es.date.to-string.js'),
+			__webpack_require__('../../node_modules/core-js/modules/es.date.to-string.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.object.keys.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.string.match.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.array.flat-map.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.array.unscopables.flat-map.js');
+			function _createForOfIteratorHelper(r, e) {
+				var t = ('undefined' != typeof Symbol && r[Symbol.iterator]) || r['@@iterator'];
+				if (!t) {
+					if (
+						Array.isArray(r) ||
+						(t = (function _unsupportedIterableToArray(r, a) {
+							if (r) {
+								if ('string' == typeof r) return _arrayLikeToArray(r, a);
+								var t = {}.toString.call(r).slice(8, -1);
+								return (
+									'Object' === t && r.constructor && (t = r.constructor.name),
+									'Map' === t || 'Set' === t
+										? Array.from(r)
+										: 'Arguments' === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t)
+										? _arrayLikeToArray(r, a)
+										: void 0
+								);
+							}
+						})(r)) ||
+						(e && r && 'number' == typeof r.length)
+					) {
+						t && (r = t);
+						var _n = 0,
+							F = function F() {};
+						return {
+							s: F,
+							n: function n() {
+								return _n >= r.length ? { done: !0 } : { done: !1, value: r[_n++] };
+							},
+							e: function e(r) {
+								throw r;
+							},
+							f: F,
+						};
+					}
+					throw new TypeError(
+						'Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.'
+					);
+				}
+				var o,
+					a = !0,
+					u = !1;
+				return {
+					s: function s() {
+						t = t.call(r);
+					},
+					n: function n() {
+						var r = t.next();
+						return (a = r.done), r;
+					},
+					e: function e(r) {
+						(u = !0), (o = r);
+					},
+					f: function f() {
+						try {
+							a || null == t.return || t.return();
+						} finally {
+							if (u) throw o;
+						}
+					},
+				};
+			}
+			function _arrayLikeToArray(r, a) {
+				(null == a || a > r.length) && (a = r.length);
+				for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e];
+				return n;
+			}
+			function _defineProperties(e, r) {
+				for (var t = 0; t < r.length; t++) {
+					var o = r[t];
+					(o.enumerable = o.enumerable || !1),
+						(o.configurable = !0),
+						'value' in o && (o.writable = !0),
+						Object.defineProperty(e, _toPropertyKey(o.key), o);
+				}
+			}
+			function _toPropertyKey(t) {
+				var i = (function _toPrimitive(t, r) {
+					if ('object' != typeof t || !t) return t;
+					var e = t[Symbol.toPrimitive];
+					if (void 0 !== e) {
+						var i = e.call(t, r || 'default');
+						if ('object' != typeof i) return i;
+						throw new TypeError('@@toPrimitive must return a primitive value.');
+					}
+					return ('string' === r ? String : Number)(t);
+				})(t, 'string');
+				return 'symbol' == typeof i ? i : i + '';
+			}
+			var globallyTargetedElems = [],
+				DomTargeter = (function () {
+					return (function _createClass(e, r, t) {
+						return r && _defineProperties(e.prototype, r), t && _defineProperties(e, t), Object.defineProperty(e, 'prototype', { writable: !1 }), e;
+					})(
+						function DomTargeter(targets, onTarget, document) {
+							var _this = this;
+							!(function _classCallCheck(a, n) {
+								if (!(a instanceof n)) throw new TypeError('Cannot call a class as a function');
+							})(this, DomTargeter),
+								(this.targets = []),
+								(this.styleBlockRefs = {}),
+								(this.targetedElems = []),
+								(this.unhideTarget = function (selector) {
+									if (_this.styleBlockRefs[selector])
+										try {
+											_this.document.head.removeChild(_this.styleBlockRefs[selector]), delete _this.styleBlockRefs[selector];
+										} catch (err) {}
+								}),
+								(this.hideTarget = function (selector) {
+									if (!_this.styleBlockRefs[selector]) {
+										var styles = selector + ' { visibility: hidden !important }',
+											styleBlock = _this.document.createElement('style');
+										styleBlock.setAttribute('type', 'text/css'),
+											styleBlock.appendChild(_this.document.createTextNode(styles)),
+											_this.document.head.appendChild(styleBlock),
+											(_this.styleBlockRefs[selector] = styleBlock);
+									}
+								}),
+								(this.document = document || window.document),
+								(this.targets = targets),
+								(this.onTarget = onTarget),
+								this.retarget(),
+								this.targets.forEach(function (target) {
+									var timeoutTime = 100,
+										_checker = function checker() {
+											timeoutTime < 2e3
+												? ((timeoutTime += 200), _this.retarget(), setTimeout(_checker, timeoutTime))
+												: target.hideTarget && _this.unhideTarget(target.selector);
+										};
+									if (target.clickRetarget) {
+										var clickElems = [];
+										'boolean' == typeof target.clickRetarget
+											? clickElems.push(_this.document)
+											: (clickElems = Array.from(_this.document.querySelectorAll(target.clickRetarget))),
+											clickElems.map(function (elem) {
+												elem.addEventListener('click', function () {
+													(timeoutTime = 100), _checker();
+												});
+											});
+									}
+									target.autoRetarget
+										? _checker()
+										: /complete|interactive|loaded/.test(_this.document.readyState)
+										? target.hideTarget && _this.unhideTarget(target.selector)
+										: _this.document.addEventListener('DOMContentLoaded', function () {
+												_this.retarget(), target.hideTarget && _this.unhideTarget(target.selector);
+										  });
+								});
+						},
+						[
+							{
+								key: 'getTargets',
+								value: function getTargets() {
+									return this.targets;
+								},
+							},
+							{
+								key: 'retarget',
+								value: function retarget() {
+									var _step,
+										_this2 = this,
+										targetElemPairs = this.targets.flatMap(function (target) {
+											var _target$inject;
+											target.hideTarget && _this2.hideTarget(target.selector);
+											var elems = _this2.domQuery(target.selector).filter(function (elem) {
+												if (
+													!globallyTargetedElems.find(function (e) {
+														return e == elem;
+													}) &&
+													!_this2.targetedElems.find(function (e) {
+														return e == elem;
+													})
+												)
+													return !0;
+												target.hideTarget && _this2.unhideTarget(target.selector);
+											});
+											return (
+												(null !== (_target$inject = target.inject) && void 0 !== _target$inject && _target$inject.element) ||
+													(globallyTargetedElems = globallyTargetedElems.concat(elems)),
+												elems.map(function (elem) {
+													return { target, elem };
+												})
+											);
+										}),
+										_iterator = _createForOfIteratorHelper(targetElemPairs);
+									try {
+										for (_iterator.s(); !(_step = _iterator.n()).done; ) {
+											var _ref = _step.value,
+												target = _ref.target,
+												elem = _ref.elem;
+											try {
+												var _target$unsetTargetMi;
+												if (target.inject) {
+													var injectedElem = this.inject(elem, target);
+													this.targetedElems = this.targetedElems.concat(elem);
+													var result = this.onTarget(target, injectedElem, elem);
+													result &&
+														'function' == typeof result.then &&
+														result.catch(function (error) {
+															console.error('DomTargeter onTarget async failure:', error);
+														});
+												} else {
+													var _target$emptyTarget;
+													if (
+														((target.emptyTarget =
+															null === (_target$emptyTarget = target.emptyTarget) || void 0 === _target$emptyTarget || _target$emptyTarget),
+														target.emptyTarget)
+													)
+														for (; elem.firstChild && elem.removeChild(elem.firstChild); );
+													var _result = this.onTarget(target, elem);
+													_result &&
+														'function' == typeof _result.then &&
+														_result.catch(function (error) {
+															console.error('DomTargeter onTarget async failure:', error);
+														});
+												}
+												target.hideTarget && this.unhideTarget(target.selector),
+													(target.unsetTargetMinHeight =
+														null === (_target$unsetTargetMi = target.unsetTargetMinHeight) ||
+														void 0 === _target$unsetTargetMi ||
+														_target$unsetTargetMi),
+													target.unsetTargetMinHeight && elem.style.minHeight && (elem.style.minHeight = '');
+											} catch (err) {
+												console.error('DomTargeter retarget failure:', err);
+											}
+										}
+									} catch (err) {
+										_iterator.e(err);
+									} finally {
+										_iterator.f();
+									}
+								},
+							},
+							{
+								key: 'domQuery',
+								value: function domQuery(selector) {
+									return Array.from(this.document.querySelectorAll(selector));
+								},
+							},
+							{
+								key: 'inject',
+								value: function inject(elem, target) {
+									var _target$inject2;
+									if (!target || !target.inject) throw new Error('DomTargeter::inject: Injected element unspecified');
+									var injectedElem = target.inject.element instanceof Function ? target.inject.element(target, elem) : target.inject.element;
+									if (!injectedElem) throw new Error('DomTargeter::inject: Injected element unspecified');
+									if (!elem.parentNode) throw new Error('DomTargeter::inject: Provided element has no parent element');
+									switch (
+										null == target || null === (_target$inject2 = target.inject) || void 0 === _target$inject2 ? void 0 : _target$inject2.action
+									) {
+										case 'before':
+											elem.parentNode.insertBefore(injectedElem, elem);
+											break;
+										case 'after':
+											elem.nextSibling ? elem.parentNode.insertBefore(injectedElem, elem.nextSibling) : elem.parentNode.appendChild(injectedElem);
+											break;
+										case 'append':
+											elem.appendChild(injectedElem);
+											break;
+										case 'prepend':
+											elem.firstChild ? elem.insertBefore(injectedElem, elem.firstChild) : elem.appendChild(injectedElem);
+											break;
+										case 'replace':
+											elem.parentNode.replaceChild(injectedElem, elem);
+									}
+									return injectedElem;
+								},
+							},
+						]
+					);
+				})();
+			function _toConsumableArray(r) {
+				return (
+					(function _arrayWithoutHoles(r) {
+						if (Array.isArray(r)) return AbstractController_arrayLikeToArray(r);
+					})(r) ||
+					_iterableToArray(r) ||
+					AbstractController_unsupportedIterableToArray(r) ||
+					(function _nonIterableSpread() {
+						throw new TypeError(
+							'Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.'
+						);
+					})()
+				);
+			}
+			function _toArray(r) {
+				return (
+					(function _arrayWithHoles(r) {
+						if (Array.isArray(r)) return r;
+					})(r) ||
+					_iterableToArray(r) ||
+					AbstractController_unsupportedIterableToArray(r) ||
+					(function _nonIterableRest() {
+						throw new TypeError(
+							'Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.'
+						);
+					})()
+				);
+			}
+			function AbstractController_unsupportedIterableToArray(r, a) {
+				if (r) {
+					if ('string' == typeof r) return AbstractController_arrayLikeToArray(r, a);
+					var t = {}.toString.call(r).slice(8, -1);
+					return (
+						'Object' === t && r.constructor && (t = r.constructor.name),
+						'Map' === t || 'Set' === t
+							? Array.from(r)
+							: 'Arguments' === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t)
+							? AbstractController_arrayLikeToArray(r, a)
+							: void 0
+					);
+				}
+			}
+			function AbstractController_arrayLikeToArray(r, a) {
+				(null == a || a > r.length) && (a = r.length);
+				for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e];
+				return n;
+			}
+			function _iterableToArray(r) {
+				if (('undefined' != typeof Symbol && null != r[Symbol.iterator]) || null != r['@@iterator']) return Array.from(r);
+			}
 			function _regeneratorRuntime() {
 				_regeneratorRuntime = function _regeneratorRuntime() {
 					return e;
@@ -34051,658 +34722,17 @@
 				}
 				i.done ? t(u) : Promise.resolve(u).then(r, o);
 			}
-			function _defineProperties(e, r) {
-				for (var t = 0; t < r.length; t++) {
-					var o = r[t];
-					(o.enumerable = o.enumerable || !1),
-						(o.configurable = !0),
-						'value' in o && (o.writable = !0),
-						Object.defineProperty(e, _toPropertyKey(o.key), o);
-				}
-			}
-			function _toPropertyKey(t) {
-				var i = (function _toPrimitive(t, r) {
-					if ('object' != typeof t || !t) return t;
-					var e = t[Symbol.toPrimitive];
-					if (void 0 !== e) {
-						var i = e.call(t, r || 'default');
-						if ('object' != typeof i) return i;
-						throw new TypeError('@@toPrimitive must return a primitive value.');
-					}
-					return ('string' === r ? String : Number)(t);
-				})(t, 'string');
-				return 'symbol' == typeof i ? i : i + '';
-			}
-			var globallyTargetedElems = [],
-				DomTargeter = (function () {
-					return (function _createClass(e, r, t) {
-						return r && _defineProperties(e.prototype, r), t && _defineProperties(e, t), Object.defineProperty(e, 'prototype', { writable: !1 }), e;
-					})(
-						function DomTargeter(targets, onTarget, document) {
-							var _this = this;
-							!(function _classCallCheck(a, n) {
-								if (!(a instanceof n)) throw new TypeError('Cannot call a class as a function');
-							})(this, DomTargeter),
-								(this.targets = []),
-								(this.styleBlockRefs = {}),
-								(this.targetedElems = []),
-								(this.unhideTarget = function (selector) {
-									if (_this.styleBlockRefs[selector])
-										try {
-											_this.document.head.removeChild(_this.styleBlockRefs[selector]), delete _this.styleBlockRefs[selector];
-										} catch (err) {}
-								}),
-								(this.hideTarget = function (selector) {
-									if (!_this.styleBlockRefs[selector]) {
-										var styles = selector + ' { visibility: hidden !important }',
-											styleBlock = _this.document.createElement('style');
-										styleBlock.setAttribute('type', 'text/css'),
-											styleBlock.appendChild(_this.document.createTextNode(styles)),
-											_this.document.head.appendChild(styleBlock),
-											(_this.styleBlockRefs[selector] = styleBlock);
-									}
-								}),
-								(this.document = document || window.document),
-								(this.targets = targets),
-								(this.onTarget = onTarget),
-								this.retarget(),
-								this.targets.forEach(function (target) {
-									var timeoutTime = 100,
-										_checker = function checker() {
-											timeoutTime < 2e3
-												? ((timeoutTime += 200), _this.retarget(), setTimeout(_checker, timeoutTime))
-												: target.hideTarget && _this.unhideTarget(target.selector);
-										};
-									if (target.clickRetarget) {
-										var clickElems = [];
-										'boolean' == typeof target.clickRetarget
-											? clickElems.push(_this.document)
-											: (clickElems = Array.from(_this.document.querySelectorAll(target.clickRetarget))),
-											clickElems.map(function (elem) {
-												elem.addEventListener('click', function () {
-													(timeoutTime = 100), _checker();
-												});
-											});
-									}
-									target.autoRetarget
-										? _checker()
-										: /complete|interactive|loaded/.test(_this.document.readyState)
-										? target.hideTarget && _this.unhideTarget(target.selector)
-										: _this.document.addEventListener('DOMContentLoaded', function () {
-												_this.retarget(), target.hideTarget && _this.unhideTarget(target.selector);
-										  });
-								});
-						},
-						[
-							{
-								key: 'getTargets',
-								value: function getTargets() {
-									return this.targets;
-								},
-							},
-							{
-								key: 'retarget',
-								value: function retarget() {
-									var _this2 = this,
-										targetElemPairs = this.targets.flatMap(function (target) {
-											var _target$inject;
-											target.hideTarget && _this2.hideTarget(target.selector);
-											var elems = _this2.domQuery(target.selector).filter(function (elem) {
-												if (
-													!globallyTargetedElems.find(function (e) {
-														return e == elem;
-													}) &&
-													!_this2.targetedElems.find(function (e) {
-														return e == elem;
-													})
-												)
-													return !0;
-												target.hideTarget && _this2.unhideTarget(target.selector);
-											});
-											return (
-												(null !== (_target$inject = target.inject) && void 0 !== _target$inject && _target$inject.element) ||
-													(globallyTargetedElems = globallyTargetedElems.concat(elems)),
-												elems.map(function (elem) {
-													return { target, elem };
-												})
-											);
-										}),
-										errors = [];
-									if (
-										(targetElemPairs.forEach(
-											(function () {
-												var _ref2 = (function _asyncToGenerator(n) {
-													return function () {
-														var t = this,
-															e = arguments;
-														return new Promise(function (r, o) {
-															var a = n.apply(t, e);
-															function _next(n) {
-																asyncGeneratorStep(a, r, o, _next, _throw, 'next', n);
-															}
-															function _throw(n) {
-																asyncGeneratorStep(a, r, o, _next, _throw, 'throw', n);
-															}
-															_next(void 0);
-														});
-													};
-												})(
-													_regeneratorRuntime().mark(function _callee(_ref) {
-														var _target$unsetTargetMi, target, elem, injectedElem, _target$emptyTarget;
-														return _regeneratorRuntime().wrap(
-															function _callee$(_context) {
-																for (;;)
-																	switch ((_context.prev = _context.next)) {
-																		case 0:
-																			if (((target = _ref.target), (elem = _ref.elem), !target.inject)) {
-																				_context.next = 14;
-																				break;
-																			}
-																			return (
-																				(_context.prev = 2),
-																				(injectedElem = _this2.inject(elem, target)),
-																				(_this2.targetedElems = _this2.targetedElems.concat(elem)),
-																				(_context.next = 7),
-																				_this2.onTarget(target, injectedElem, elem)
-																			);
-																		case 7:
-																			_context.next = 12;
-																			break;
-																		case 9:
-																			(_context.prev = 9), (_context.t0 = _context.catch(2)), errors.push(String(_context.t0));
-																		case 12:
-																			_context.next = 18;
-																			break;
-																		case 14:
-																			if (
-																				((target.emptyTarget =
-																					null === (_target$emptyTarget = target.emptyTarget) ||
-																					void 0 === _target$emptyTarget ||
-																					_target$emptyTarget),
-																				target.emptyTarget)
-																			)
-																				for (; elem.firstChild && elem.removeChild(elem.firstChild); );
-																			return (_context.next = 18), _this2.onTarget(target, elem);
-																		case 18:
-																			target.hideTarget && _this2.unhideTarget(target.selector),
-																				(target.unsetTargetMinHeight =
-																					null === (_target$unsetTargetMi = target.unsetTargetMinHeight) ||
-																					void 0 === _target$unsetTargetMi ||
-																					_target$unsetTargetMi),
-																				target.unsetTargetMinHeight && elem.style.minHeight && (elem.style.minHeight = '');
-																		case 21:
-																		case 'end':
-																			return _context.stop();
-																	}
-															},
-															_callee,
-															null,
-															[[2, 9]]
-														);
-													})
-												);
-												return function (_x) {
-													return _ref2.apply(this, arguments);
-												};
-											})()
-										),
-										errors.length)
-									)
-										throw new Error(
-											errors.reduce(function (acc, err) {
-												return acc + (err + '\n');
-											}, '\n')
-										);
-								},
-							},
-							{
-								key: 'domQuery',
-								value: function domQuery(selector) {
-									return Array.from(this.document.querySelectorAll(selector));
-								},
-							},
-							{
-								key: 'inject',
-								value: function inject(elem, target) {
-									var _target$inject2;
-									if (!target || !target.inject) throw new Error('DomTargeter::inject: Injected element unspecified');
-									var injectedElem = target.inject.element instanceof Function ? target.inject.element(target, elem) : target.inject.element;
-									if (!injectedElem) throw new Error('DomTargeter::inject: Injected element unspecified');
-									if (!elem.parentNode) throw new Error('DomTargeter::inject: Provided element has no parent element');
-									switch (
-										null == target || null === (_target$inject2 = target.inject) || void 0 === _target$inject2 ? void 0 : _target$inject2.action
-									) {
-										case 'before':
-											elem.parentNode.insertBefore(injectedElem, elem);
-											break;
-										case 'after':
-											elem.nextSibling ? elem.parentNode.insertBefore(injectedElem, elem.nextSibling) : elem.parentNode.appendChild(injectedElem);
-											break;
-										case 'append':
-											elem.appendChild(injectedElem);
-											break;
-										case 'prepend':
-											elem.firstChild ? elem.insertBefore(injectedElem, elem.firstChild) : elem.appendChild(injectedElem);
-											break;
-										case 'replace':
-											elem.parentNode.replaceChild(injectedElem, elem);
-									}
-									return injectedElem;
-								},
-							},
-						]
-					);
-				})();
-			function _toConsumableArray(r) {
-				return (
-					(function _arrayWithoutHoles(r) {
-						if (Array.isArray(r)) return _arrayLikeToArray(r);
-					})(r) ||
-					_iterableToArray(r) ||
-					_unsupportedIterableToArray(r) ||
-					(function _nonIterableSpread() {
-						throw new TypeError(
-							'Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.'
-						);
-					})()
-				);
-			}
-			function _toArray(r) {
-				return (
-					(function _arrayWithHoles(r) {
-						if (Array.isArray(r)) return r;
-					})(r) ||
-					_iterableToArray(r) ||
-					_unsupportedIterableToArray(r) ||
-					(function _nonIterableRest() {
-						throw new TypeError(
-							'Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.'
-						);
-					})()
-				);
-			}
-			function _unsupportedIterableToArray(r, a) {
-				if (r) {
-					if ('string' == typeof r) return _arrayLikeToArray(r, a);
-					var t = {}.toString.call(r).slice(8, -1);
-					return (
-						'Object' === t && r.constructor && (t = r.constructor.name),
-						'Map' === t || 'Set' === t
-							? Array.from(r)
-							: 'Arguments' === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t)
-							? _arrayLikeToArray(r, a)
-							: void 0
-					);
-				}
-			}
-			function _arrayLikeToArray(r, a) {
-				(null == a || a > r.length) && (a = r.length);
-				for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e];
-				return n;
-			}
-			function _iterableToArray(r) {
-				if (('undefined' != typeof Symbol && null != r[Symbol.iterator]) || null != r['@@iterator']) return Array.from(r);
-			}
-			function AbstractController_regeneratorRuntime() {
-				AbstractController_regeneratorRuntime = function _regeneratorRuntime() {
-					return e;
-				};
-				var t,
-					e = {},
-					r = Object.prototype,
-					n = r.hasOwnProperty,
-					o =
-						Object.defineProperty ||
-						function (t, e, r) {
-							t[e] = r.value;
-						},
-					i = 'function' == typeof Symbol ? Symbol : {},
-					a = i.iterator || '@@iterator',
-					c = i.asyncIterator || '@@asyncIterator',
-					u = i.toStringTag || '@@toStringTag';
-				function define(t, e, r) {
-					return Object.defineProperty(t, e, { value: r, enumerable: !0, configurable: !0, writable: !0 }), t[e];
-				}
-				try {
-					define({}, '');
-				} catch (t) {
-					define = function define(t, e, r) {
-						return (t[e] = r);
-					};
-				}
-				function wrap(t, e, r, n) {
-					var i = e && e.prototype instanceof Generator ? e : Generator,
-						a = Object.create(i.prototype),
-						c = new Context(n || []);
-					return o(a, '_invoke', { value: makeInvokeMethod(t, r, c) }), a;
-				}
-				function tryCatch(t, e, r) {
-					try {
-						return { type: 'normal', arg: t.call(e, r) };
-					} catch (t) {
-						return { type: 'throw', arg: t };
-					}
-				}
-				e.wrap = wrap;
-				var h = 'suspendedStart',
-					l = 'suspendedYield',
-					f = 'executing',
-					s = 'completed',
-					y = {};
-				function Generator() {}
-				function GeneratorFunction() {}
-				function GeneratorFunctionPrototype() {}
-				var p = {};
-				define(p, a, function () {
-					return this;
-				});
-				var d = Object.getPrototypeOf,
-					v = d && d(d(values([])));
-				v && v !== r && n.call(v, a) && (p = v);
-				var g = (GeneratorFunctionPrototype.prototype = Generator.prototype = Object.create(p));
-				function defineIteratorMethods(t) {
-					['next', 'throw', 'return'].forEach(function (e) {
-						define(t, e, function (t) {
-							return this._invoke(e, t);
-						});
-					});
-				}
-				function AsyncIterator(t, e) {
-					function invoke(r, o, i, a) {
-						var c = tryCatch(t[r], t, o);
-						if ('throw' !== c.type) {
-							var u = c.arg,
-								h = u.value;
-							return h && 'object' == typeof h && n.call(h, '__await')
-								? e.resolve(h.__await).then(
-										function (t) {
-											invoke('next', t, i, a);
-										},
-										function (t) {
-											invoke('throw', t, i, a);
-										}
-								  )
-								: e.resolve(h).then(
-										function (t) {
-											(u.value = t), i(u);
-										},
-										function (t) {
-											return invoke('throw', t, i, a);
-										}
-								  );
-						}
-						a(c.arg);
-					}
-					var r;
-					o(this, '_invoke', {
-						value: function value(t, n) {
-							function callInvokeWithMethodAndArg() {
-								return new e(function (e, r) {
-									invoke(t, n, e, r);
-								});
-							}
-							return (r = r ? r.then(callInvokeWithMethodAndArg, callInvokeWithMethodAndArg) : callInvokeWithMethodAndArg());
-						},
-					});
-				}
-				function makeInvokeMethod(e, r, n) {
-					var o = h;
-					return function (i, a) {
-						if (o === f) throw Error('Generator is already running');
-						if (o === s) {
-							if ('throw' === i) throw a;
-							return { value: t, done: !0 };
-						}
-						for (n.method = i, n.arg = a; ; ) {
-							var c = n.delegate;
-							if (c) {
-								var u = maybeInvokeDelegate(c, n);
-								if (u) {
-									if (u === y) continue;
-									return u;
-								}
-							}
-							if ('next' === n.method) n.sent = n._sent = n.arg;
-							else if ('throw' === n.method) {
-								if (o === h) throw ((o = s), n.arg);
-								n.dispatchException(n.arg);
-							} else 'return' === n.method && n.abrupt('return', n.arg);
-							o = f;
-							var p = tryCatch(e, r, n);
-							if ('normal' === p.type) {
-								if (((o = n.done ? s : l), p.arg === y)) continue;
-								return { value: p.arg, done: n.done };
-							}
-							'throw' === p.type && ((o = s), (n.method = 'throw'), (n.arg = p.arg));
-						}
-					};
-				}
-				function maybeInvokeDelegate(e, r) {
-					var n = r.method,
-						o = e.iterator[n];
-					if (o === t)
-						return (
-							(r.delegate = null),
-							('throw' === n && e.iterator.return && ((r.method = 'return'), (r.arg = t), maybeInvokeDelegate(e, r), 'throw' === r.method)) ||
-								('return' !== n && ((r.method = 'throw'), (r.arg = new TypeError("The iterator does not provide a '" + n + "' method")))),
-							y
-						);
-					var i = tryCatch(o, e.iterator, r.arg);
-					if ('throw' === i.type) return (r.method = 'throw'), (r.arg = i.arg), (r.delegate = null), y;
-					var a = i.arg;
-					return a
-						? a.done
-							? ((r[e.resultName] = a.value),
-							  (r.next = e.nextLoc),
-							  'return' !== r.method && ((r.method = 'next'), (r.arg = t)),
-							  (r.delegate = null),
-							  y)
-							: a
-						: ((r.method = 'throw'), (r.arg = new TypeError('iterator result is not an object')), (r.delegate = null), y);
-				}
-				function pushTryEntry(t) {
-					var e = { tryLoc: t[0] };
-					1 in t && (e.catchLoc = t[1]), 2 in t && ((e.finallyLoc = t[2]), (e.afterLoc = t[3])), this.tryEntries.push(e);
-				}
-				function resetTryEntry(t) {
-					var e = t.completion || {};
-					(e.type = 'normal'), delete e.arg, (t.completion = e);
-				}
-				function Context(t) {
-					(this.tryEntries = [{ tryLoc: 'root' }]), t.forEach(pushTryEntry, this), this.reset(!0);
-				}
-				function values(e) {
-					if (e || '' === e) {
-						var r = e[a];
-						if (r) return r.call(e);
-						if ('function' == typeof e.next) return e;
-						if (!isNaN(e.length)) {
-							var o = -1,
-								i = function next() {
-									for (; ++o < e.length; ) if (n.call(e, o)) return (next.value = e[o]), (next.done = !1), next;
-									return (next.value = t), (next.done = !0), next;
-								};
-							return (i.next = i);
-						}
-					}
-					throw new TypeError(typeof e + ' is not iterable');
-				}
-				return (
-					(GeneratorFunction.prototype = GeneratorFunctionPrototype),
-					o(g, 'constructor', { value: GeneratorFunctionPrototype, configurable: !0 }),
-					o(GeneratorFunctionPrototype, 'constructor', { value: GeneratorFunction, configurable: !0 }),
-					(GeneratorFunction.displayName = define(GeneratorFunctionPrototype, u, 'GeneratorFunction')),
-					(e.isGeneratorFunction = function (t) {
-						var e = 'function' == typeof t && t.constructor;
-						return !!e && (e === GeneratorFunction || 'GeneratorFunction' === (e.displayName || e.name));
-					}),
-					(e.mark = function (t) {
-						return (
-							Object.setPrototypeOf
-								? Object.setPrototypeOf(t, GeneratorFunctionPrototype)
-								: ((t.__proto__ = GeneratorFunctionPrototype), define(t, u, 'GeneratorFunction')),
-							(t.prototype = Object.create(g)),
-							t
-						);
-					}),
-					(e.awrap = function (t) {
-						return { __await: t };
-					}),
-					defineIteratorMethods(AsyncIterator.prototype),
-					define(AsyncIterator.prototype, c, function () {
-						return this;
-					}),
-					(e.AsyncIterator = AsyncIterator),
-					(e.async = function (t, r, n, o, i) {
-						void 0 === i && (i = Promise);
-						var a = new AsyncIterator(wrap(t, r, n, o), i);
-						return e.isGeneratorFunction(r)
-							? a
-							: a.next().then(function (t) {
-									return t.done ? t.value : a.next();
-							  });
-					}),
-					defineIteratorMethods(g),
-					define(g, u, 'Generator'),
-					define(g, a, function () {
-						return this;
-					}),
-					define(g, 'toString', function () {
-						return '[object Generator]';
-					}),
-					(e.keys = function (t) {
-						var e = Object(t),
-							r = [];
-						for (var n in e) r.push(n);
-						return (
-							r.reverse(),
-							function next() {
-								for (; r.length; ) {
-									var t = r.pop();
-									if (t in e) return (next.value = t), (next.done = !1), next;
-								}
-								return (next.done = !0), next;
-							}
-						);
-					}),
-					(e.values = values),
-					(Context.prototype = {
-						constructor: Context,
-						reset: function reset(e) {
-							if (
-								((this.prev = 0),
-								(this.next = 0),
-								(this.sent = this._sent = t),
-								(this.done = !1),
-								(this.delegate = null),
-								(this.method = 'next'),
-								(this.arg = t),
-								this.tryEntries.forEach(resetTryEntry),
-								!e)
-							)
-								for (var r in this) 't' === r.charAt(0) && n.call(this, r) && !isNaN(+r.slice(1)) && (this[r] = t);
-						},
-						stop: function stop() {
-							this.done = !0;
-							var t = this.tryEntries[0].completion;
-							if ('throw' === t.type) throw t.arg;
-							return this.rval;
-						},
-						dispatchException: function dispatchException(e) {
-							if (this.done) throw e;
-							var r = this;
-							function handle(n, o) {
-								return (a.type = 'throw'), (a.arg = e), (r.next = n), o && ((r.method = 'next'), (r.arg = t)), !!o;
-							}
-							for (var o = this.tryEntries.length - 1; o >= 0; --o) {
-								var i = this.tryEntries[o],
-									a = i.completion;
-								if ('root' === i.tryLoc) return handle('end');
-								if (i.tryLoc <= this.prev) {
-									var c = n.call(i, 'catchLoc'),
-										u = n.call(i, 'finallyLoc');
-									if (c && u) {
-										if (this.prev < i.catchLoc) return handle(i.catchLoc, !0);
-										if (this.prev < i.finallyLoc) return handle(i.finallyLoc);
-									} else if (c) {
-										if (this.prev < i.catchLoc) return handle(i.catchLoc, !0);
-									} else {
-										if (!u) throw Error('try statement without catch or finally');
-										if (this.prev < i.finallyLoc) return handle(i.finallyLoc);
-									}
-								}
-							}
-						},
-						abrupt: function abrupt(t, e) {
-							for (var r = this.tryEntries.length - 1; r >= 0; --r) {
-								var o = this.tryEntries[r];
-								if (o.tryLoc <= this.prev && n.call(o, 'finallyLoc') && this.prev < o.finallyLoc) {
-									var i = o;
-									break;
-								}
-							}
-							i && ('break' === t || 'continue' === t) && i.tryLoc <= e && e <= i.finallyLoc && (i = null);
-							var a = i ? i.completion : {};
-							return (a.type = t), (a.arg = e), i ? ((this.method = 'next'), (this.next = i.finallyLoc), y) : this.complete(a);
-						},
-						complete: function complete(t, e) {
-							if ('throw' === t.type) throw t.arg;
-							return (
-								'break' === t.type || 'continue' === t.type
-									? (this.next = t.arg)
-									: 'return' === t.type
-									? ((this.rval = this.arg = t.arg), (this.method = 'return'), (this.next = 'end'))
-									: 'normal' === t.type && e && (this.next = e),
-								y
-							);
-						},
-						finish: function finish(t) {
-							for (var e = this.tryEntries.length - 1; e >= 0; --e) {
-								var r = this.tryEntries[e];
-								if (r.finallyLoc === t) return this.complete(r.completion, r.afterLoc), resetTryEntry(r), y;
-							}
-						},
-						catch: function _catch(t) {
-							for (var e = this.tryEntries.length - 1; e >= 0; --e) {
-								var r = this.tryEntries[e];
-								if (r.tryLoc === t) {
-									var n = r.completion;
-									if ('throw' === n.type) {
-										var o = n.arg;
-										resetTryEntry(r);
-									}
-									return o;
-								}
-							}
-							throw Error('illegal catch attempt');
-						},
-						delegateYield: function delegateYield(e, r, n) {
-							return (this.delegate = { iterator: values(e), resultName: r, nextLoc: n }), 'next' === this.method && (this.arg = t), y;
-						},
-					}),
-					e
-				);
-			}
-			function AbstractController_asyncGeneratorStep(n, t, e, r, o, a, c) {
-				try {
-					var i = n[a](c),
-						u = i.value;
-				} catch (n) {
-					return void e(n);
-				}
-				i.done ? t(u) : Promise.resolve(u).then(r, o);
-			}
-			function AbstractController_asyncToGenerator(n) {
+			function _asyncToGenerator(n) {
 				return function () {
 					var t = this,
 						e = arguments;
 					return new Promise(function (r, o) {
 						var a = n.apply(t, e);
 						function _next(n) {
-							AbstractController_asyncGeneratorStep(a, r, o, _next, _throw, 'next', n);
+							asyncGeneratorStep(a, r, o, _next, _throw, 'next', n);
 						}
 						function _throw(n) {
-							AbstractController_asyncGeneratorStep(a, r, o, _next, _throw, 'throw', n);
+							asyncGeneratorStep(a, r, o, _next, _throw, 'throw', n);
 						}
 						_next(void 0);
 					});
@@ -34847,11 +34877,11 @@
 							{
 								key: 'init',
 								value:
-									((_init = AbstractController_asyncToGenerator(
-										AbstractController_regeneratorRuntime().mark(function _callee() {
+									((_init = _asyncToGenerator(
+										_regeneratorRuntime().mark(function _callee() {
 											var initProfile,
 												_this2 = this;
-											return AbstractController_regeneratorRuntime().wrap(
+											return _regeneratorRuntime().wrap(
 												function _callee$(_context) {
 													for (;;)
 														switch ((_context.prev = _context.next)) {
@@ -34929,13 +34959,13 @@
 							{
 								key: 'plugin',
 								value:
-									((_plugin = AbstractController_asyncToGenerator(
-										AbstractController_regeneratorRuntime().mark(function _callee2(func) {
+									((_plugin = _asyncToGenerator(
+										_regeneratorRuntime().mark(function _callee2(func) {
 											var _len,
 												args,
 												_key,
 												_args2 = arguments;
-											return AbstractController_regeneratorRuntime().wrap(
+											return _regeneratorRuntime().wrap(
 												function _callee2$(_context2) {
 													for (;;)
 														switch ((_context2.prev = _context2.next)) {
@@ -35001,79 +35031,57 @@
 					);
 					var _plugin, _init;
 				})(),
-				types = __webpack_require__('../snap-store-mobx/dist/esm/types.js'),
-				cookies = {
-					set: function set(name, val, sameSite, expires, domain) {
-						sameSite = sameSite || 'Lax';
-						var cookie = name + '=' + encodeURIComponent(val) + ';SameSite=' + sameSite + ';path=/;';
-						if (('https:' == window.location.protocol && (cookie += 'Secure;'), expires)) {
-							var d = new Date();
-							d.setTime(d.getTime() + expires), (cookie += 'expires=' + d.toUTCString() + ';');
+				types = __webpack_require__('../snap-store-mobx/dist/esm/types.js');
+			function getFlags() {
+				var _window,
+					userAgent = arguments.length > 0 && void 0 !== arguments[0] ? arguments[0] : '';
+				userAgent = (
+					userAgent ||
+					('undefined' == typeof window ? {} : null === (_window = window) || void 0 === _window ? void 0 : _window.navigator).userAgent ||
+					''
+				).toLowerCase();
+				var ieVersion,
+					isIE = function isIE() {
+						if (void 0 === ieVersion) {
+							var version = (userAgent.match(/(msie|trident\/7.0; rv:) ?([0-9]{1,2})\./) || [])[2];
+							ieVersion = !!version && Number(version);
 						}
-						domain && (cookie += 'domain=' + domain + ';'), (window.document.cookie = cookie);
+						return ieVersion;
+					};
+				return {
+					cors: function cors() {
+						return !isIE() || Number(isIE()) >= 10;
 					},
-					get: function get(name) {
-						name += '=';
-						for (var ca = window.document.cookie.split(';'), i = 0; i < ca.length; i++) {
-							for (var c = ca[i]; ' ' == c.charAt(0); ) c = c.substring(1);
-							if (0 == c.indexOf(name)) return decodeURIComponent(c.substring(name.length, c.length));
+					cookies: function cookies() {
+						var _window2, _window2$navigator;
+						return (
+							'undefined' != typeof window &&
+							(null === (_window2 = window) ||
+							void 0 === _window2 ||
+							null === (_window2$navigator = _window2.navigator) ||
+							void 0 === _window2$navigator
+								? void 0
+								: _window2$navigator.cookieEnabled)
+						);
+					},
+					storage: function storage() {
+						try {
+							var _window3, _window4;
+							return (
+								null === (_window3 = window) || void 0 === _window3 || _window3.localStorage.setItem('ss-test', 'ss-test'),
+								null === (_window4 = window) || void 0 === _window4 || _window4.localStorage.removeItem('ss-test'),
+								!0
+							);
+						} catch (e) {
+							return !1;
 						}
-						return '';
-					},
-					unset: function unset(name, domain) {
-						var cookie = name + '=; path=/; Max-Age=-99999999;';
-						domain && (cookie += 'domain=' + domain + ';'), (window.document.cookie = cookie);
 					},
 				};
-			var flags = (function getFlags() {
-					var _window,
-						userAgent = arguments.length > 0 && void 0 !== arguments[0] ? arguments[0] : '';
-					userAgent = (
-						userAgent ||
-						('undefined' == typeof window ? {} : null === (_window = window) || void 0 === _window ? void 0 : _window.navigator).userAgent ||
-						''
-					).toLowerCase();
-					var ieVersion,
-						isIE = function isIE() {
-							if (void 0 === ieVersion) {
-								var version = (userAgent.match(/(msie|trident\/7.0; rv:) ?([0-9]{1,2})\./) || [])[2];
-								ieVersion = !!version && Number(version);
-							}
-							return ieVersion;
-						};
-					return {
-						cors: function cors() {
-							return !isIE() || Number(isIE()) >= 10;
-						},
-						cookies: function cookies() {
-							var _window2, _window2$navigator;
-							return (
-								'undefined' != typeof window &&
-								(null === (_window2 = window) ||
-								void 0 === _window2 ||
-								null === (_window2$navigator = _window2.navigator) ||
-								void 0 === _window2$navigator
-									? void 0
-									: _window2$navigator.cookieEnabled)
-							);
-						},
-						storage: function storage() {
-							try {
-								var _window3, _window4;
-								return (
-									null === (_window3 = window) || void 0 === _window3 || _window3.localStorage.setItem('ss-test', 'ss-test'),
-									null === (_window4 = window) || void 0 === _window4 || _window4.localStorage.removeItem('ss-test'),
-									!0
-								);
-							} catch (e) {
-								return !1;
-							}
-						},
-					};
-				})(),
+			}
+			var flags = getFlags(),
 				featureFlags_cookies = (flags.cors(), flags.cookies()),
 				featureFlags_storage = flags.storage();
-			function _createForOfIteratorHelper(r, e) {
+			function StorageStore_createForOfIteratorHelper(r, e) {
 				var t = ('undefined' != typeof Symbol && r[Symbol.iterator]) || r['@@iterator'];
 				if (!t) {
 					if (
@@ -35163,7 +35171,35 @@
 				return 'symbol' == typeof i ? i : i + '';
 			}
 			var StorageType,
-				utils_cookies = cookies,
+				utils_cookies = {
+					set: function set(name, val, sameSite, expires, domain) {
+						if (getFlags().cookies()) {
+							sameSite = sameSite || 'Lax';
+							var cookie = name + '=' + encodeURIComponent(val) + ';SameSite=' + sameSite + ';path=/;';
+							if (('https:' == window.location.protocol && (cookie += 'Secure;'), expires)) {
+								var d = new Date();
+								d.setTime(d.getTime() + expires), (cookie += 'expires=' + d.toUTCString() + ';');
+							}
+							domain && (cookie += 'domain=' + domain + ';'), (window.document.cookie = cookie);
+						}
+					},
+					get: function get(name) {
+						if (getFlags().cookies()) {
+							name += '=';
+							for (var ca = window.document.cookie.split(';'), i = 0; i < ca.length; i++) {
+								for (var c = ca[i]; ' ' == c.charAt(0); ) c = c.substring(1);
+								if (0 == c.indexOf(name)) return decodeURIComponent(c.substring(name.length, c.length));
+							}
+						}
+						return '';
+					},
+					unset: function unset(name, domain) {
+						if (getFlags().cookies()) {
+							var cookie = name + '=; path=/; Max-Age=-99999999;';
+							domain && (cookie += 'domain=' + domain + ';'), (window.document.cookie = cookie);
+						}
+					},
+				},
 				StorageStore = (function () {
 					return (function StorageStore_createClass(e, r, t) {
 						return (
@@ -35271,7 +35307,7 @@
 									if (null != paths && paths.length) {
 										var _step,
 											value = this.state,
-											_iterator = _createForOfIteratorHelper(paths);
+											_iterator = StorageStore_createForOfIteratorHelper(paths);
 										try {
 											for (_iterator.s(); !(_step = _iterator.n()).done; ) {
 												var p = _step.value;
@@ -35886,7 +35922,7 @@
 					_setPrototypeOf(t, e)
 				);
 			}
-			var BACKGROUND_FILTER_FIELD_MATCHES = ['collection', 'category', 'categories', 'hierarchy'],
+			var BACKGROUND_FILTER_FIELD_MATCHES = ['collection', 'category', 'categories', 'hierarchy', 'brand', 'manufacturer'],
 				BACKGROUND_FILTERS_VALUE_FLAGS = [1, 0, '1', '0', 'true', 'false', !0, !1],
 				defaultConfig = {
 					id: 'search',
@@ -35900,9 +35936,9 @@
 							_this$context,
 							_this$config$settings8,
 							_this$config$settings9,
-							_this,
 							_this$config$settings10,
 							_this$config$settings11,
+							_this,
 							client = _ref.client,
 							store = _ref.store,
 							urlManager = _ref.urlManager,
@@ -35910,692 +35946,784 @@
 							profiler = _ref.profiler,
 							logger = _ref.logger,
 							tracker = _ref.tracker;
-						((function SearchController_classCallCheck(a, n) {
+						!(function SearchController_classCallCheck(a, n) {
 							if (!(a instanceof n)) throw new TypeError('Cannot call a class as a function');
 						})(this, SearchController),
-						((_this = _callSuper(this, SearchController, [
-							config,
-							{ client, store, urlManager, eventManager, profiler, logger, tracker },
-							context,
-						])).type = ControllerTypes.search),
-						(_this.previousResults = []),
-						(_this.page = { type: 'search' }),
-						(_this.events = { product: {} }),
-						(_this.track = {
-							product: {
-								clickThrough: function clickThrough(e, result) {
-									var _this$events$product$,
-										_result$display,
-										_result$display$mappi,
-										_result$mappings$core,
-										_document,
-										_document$querySelect,
-										_this$config$globals;
-									if (
-										null === (_this$events$product$ = _this.events.product[result.id]) ||
-										void 0 === _this$events$product$ ||
-										!_this$events$product$.clickThrough
-									) {
-										var target = e.target,
-											resultHref =
-												(null === (_result$display = result.display) ||
-												void 0 === _result$display ||
-												null === (_result$display$mappi = _result$display.mappings.core) ||
-												void 0 === _result$display$mappi
-													? void 0
-													: _result$display$mappi.url) ||
-												(null === (_result$mappings$core = result.mappings.core) || void 0 === _result$mappings$core
-													? void 0
-													: _result$mappings$core.url) ||
-												'',
-											elemHref = null == target ? void 0 : target.getAttribute('href'),
-											storedHref = -1 != (null == elemHref ? void 0 : elemHref.indexOf(resultHref)) ? resultHref : elemHref || resultHref,
-											scrollMap = {},
-											selector = (function generateHrefSelector(element, href) {
-												var levels = arguments.length > 2 && void 0 !== arguments[2] ? arguments[2] : 7,
-													level = 0,
-													elem = element;
-												for (; elem && level <= levels; ) {
-													var innerHrefElem = elem.querySelector('[href*="' + href + '"]');
-													if (innerHrefElem) {
-														for (var selector = '', parentElem = innerHrefElem; parentElem && parentElem != elem.parentElement; ) {
-															var escapedClassSelector = parentElem.classList.value
-																.trim()
-																.split(' ')
-																.reduce(function (classes, classname) {
-																	return classname.trim() ? classes + '.' + css_escape_default()(classname.trim()) : classes;
-																}, '');
-															(selector = '' + parentElem.tagName + escapedClassSelector + (selector ? ' ' + selector : '')),
-																(parentElem = parentElem.parentElement);
-														}
-														return selector + '[href*="' + href + '"]';
-													}
-													(elem = elem.parentElement), level++;
-												}
-												return;
-											})(target, storedHref),
-											domRect = selector
-												? null === (_document = document) ||
-												  void 0 === _document ||
-												  null === (_document$querySelect = _document.querySelector(selector)) ||
-												  void 0 === _document$querySelect
-													? void 0
-													: _document$querySelect.getBoundingClientRect()
-												: void 0;
-										if (selector || storedHref || domRect)
-											try {
-												var lastRequest = _this.storage.get('lastStringyParams');
-												if (lastRequest) {
-													var storableRequestParams = getStorableRequestParams(JSON.parse(lastRequest));
-													scrollMap[JSON.stringify(storableRequestParams)] = { domRect, href: storedHref, selector };
-												}
-											} catch (err) {
-												_this.log.warn('Failed to save srcollMap!', err);
-											}
-										_this.storage.set('scrollMap', scrollMap);
-										var data = schemaMap[result.id];
-										_this.tracker.events[_this.page.type].clickThrough({
-											data,
-											siteId:
-												null === (_this$config$globals = _this.config.globals) || void 0 === _this$config$globals
-													? void 0
-													: _this$config$globals.siteId,
-										}),
-											(_this.events.product[result.id] = _this.events.product[result.id] || {}),
-											(_this.events.product[result.id].clickThrough = !0),
-											_this.eventManager.fire('track.product.clickThrough', { controller: _this, event: e, product: result, trackEvent: data });
-									}
-								},
-								click: function click(e, result) {
-									var _this$events$product$2;
-									(null !== (_this$events$product$2 = _this.events.product[result.id]) &&
-										void 0 !== _this$events$product$2 &&
-										_this$events$product$2.click) ||
-										('banner' !== result.type &&
-											(isClickWithinProductLink(e, result) && _this.track.product.clickThrough(e, result),
-											(_this.events.product[result.id] = _this.events.product[result.id] || {}),
-											(_this.events.product[result.id].click = !0),
-											setTimeout(function () {
-												_this.events.product[result.id].click = !1;
-											}, 300)));
-								},
-								render: function render(result) {
-									var _this$events$product$3, _this$config$globals2;
-									if (
-										null === (_this$events$product$3 = _this.events.product[result.id]) ||
-										void 0 === _this$events$product$3 ||
-										!_this$events$product$3.render
-									) {
-										var data = schemaMap[result.id];
-										_this.tracker.events[_this.page.type].render({
-											data,
-											siteId:
-												null === (_this$config$globals2 = _this.config.globals) || void 0 === _this$config$globals2
-													? void 0
-													: _this$config$globals2.siteId,
-										}),
-											(_this.events.product[result.id] = _this.events.product[result.id] || {}),
-											(_this.events.product[result.id].render = !0),
-											_this.eventManager.fire('track.product.render', { controller: _this, product: result, trackEvent: data });
-									}
-								},
-								impression: function impression(result) {
-									var _this$events$product$4, _this$events$product$5, _this$config$globals3;
-									if (
-										!(
-											(null !== (_this$events$product$4 = _this.events.product[result.id]) &&
-												void 0 !== _this$events$product$4 &&
-												_this$events$product$4.impression) ||
-											null === (_this$events$product$5 = _this.events.product[result.id]) ||
-											void 0 === _this$events$product$5
-										) &&
-										_this$events$product$5.render
-									) {
-										var data = schemaMap[result.id];
-										_this.tracker.events[_this.page.type].impression({
-											data,
-											siteId:
-												null === (_this$config$globals3 = _this.config.globals) || void 0 === _this$config$globals3
-													? void 0
-													: _this$config$globals3.siteId,
-										}),
-											(_this.events.product[result.id] = _this.events.product[result.id] || {}),
-											(_this.events.product[result.id].impression = !0),
-											_this.eventManager.fire('track.product.impression', { controller: _this, product: result, trackEvent: data });
-									}
-								},
-								addToCart: function addToCart(result) {
-									var _this$config$globals4,
-										data = (function getSearchAddtocartSchemaData(_ref14) {
-											var searchSchemaData = _ref14.searchSchemaData,
-												results = _ref14.results;
-											return Object.assign({}, searchSchemaData, {
-												results:
-													(null == results
+							((_this = _callSuper(this, SearchController, [
+								config,
+								{ client, store, urlManager, eventManager, profiler, logger, tracker },
+								context,
+							])).type = ControllerTypes.search),
+							(_this.previousResults = []),
+							(_this.page = { type: 'search' }),
+							(_this.events = { product: {} }),
+							(_this.track = {
+								product: {
+									clickThrough: function clickThrough(e, result) {
+										var _this$events$product$,
+											_result$display,
+											_result$display$mappi,
+											_result$mappings$core,
+											_document,
+											_document$querySelect,
+											_this$config$globals;
+										if (
+											null === (_this$events$product$ = _this.events.product[result.id]) ||
+											void 0 === _this$events$product$ ||
+											!_this$events$product$.clickThrough
+										) {
+											var target = e.target,
+												resultHref =
+													(null === (_result$display = result.display) ||
+													void 0 === _result$display ||
+													null === (_result$display$mappi = _result$display.mappings.core) ||
+													void 0 === _result$display$mappi
 														? void 0
-														: results.map(function (result) {
-																var core = result.mappings.core;
-																return { uid: core.uid || '', sku: core.sku, price: Number(core.price), qty: result.quantity || 1 };
-														  })) || [],
-											});
-										})({ searchSchemaData: schemaMap[result.id], results: [result] });
-									_this.tracker.events[_this.page.type].addToCart({
-										data,
-										siteId:
-											null === (_this$config$globals4 = _this.config.globals) || void 0 === _this$config$globals4
-												? void 0
-												: _this$config$globals4.siteId,
-									}),
-										_this.eventManager.fire('track.product.addToCart', { controller: _this, product: result, trackEvent: data });
-								},
-							},
-							redirect: function redirect(redirectURL) {
-								var _this$config$globals5,
-									data = (function getSearchRedirectSchemaData(_ref13) {
-										var redirectURL = _ref13.redirectURL;
-										return { redirect: redirectURL };
-									})({ redirectURL });
-								_this.tracker.events.search.redirect({
-									data,
-									siteId:
-										null === (_this$config$globals5 = _this.config.globals) || void 0 === _this$config$globals5
-											? void 0
-											: _this$config$globals5.siteId,
-								}),
-									_this.eventManager.fire('track.product.redirect', { controller: _this, redirectURL, trackEvent: data });
-							},
-						}),
-						(_this.search = SearchController_asyncToGenerator(
-							SearchController_regeneratorRuntime().mark(function _callee() {
-								var _params$search,
-									_params$search$query,
-									_params$search2,
-									_params$search2$query,
-									_this$config$settings,
-									_params$pagination,
-									params,
-									stringyParams,
-									prevStringyParams,
-									searchProfile,
-									meta,
-									response,
-									_this$config$settings2,
-									_this$config$settings3,
-									_this$config$settings4,
-									preventBackfill,
-									dontBackfill,
-									_params$pagination2,
-									backfillRequestsParams,
-									backfillRequests,
-									backfillResponses,
-									backfillResults,
-									_yield$_this$client$s,
-									_yield$_this$client$s2,
-									_yield$_this$client$s3,
-									_yield$_this$client$s4,
-									afterSearchProfile,
-									afterStoreProfile;
-								return SearchController_regeneratorRuntime().wrap(
-									function _callee$(_context) {
-										for (;;)
-											switch ((_context.prev = _context.next)) {
-												case 0:
-													if (((_context.prev = 0), _this.initialized)) {
-														_context.next = 4;
-														break;
+														: _result$display$mappi.url) ||
+													(null === (_result$mappings$core = result.mappings.core) || void 0 === _result$mappings$core
+														? void 0
+														: _result$mappings$core.url) ||
+													'',
+												elemHref = null == target ? void 0 : target.getAttribute('href'),
+												storedHref = -1 != (null == elemHref ? void 0 : elemHref.indexOf(resultHref)) ? resultHref : elemHref || resultHref,
+												scrollMap = {},
+												selector = (function generateHrefSelector(element, href) {
+													var levels = arguments.length > 2 && void 0 !== arguments[2] ? arguments[2] : 7,
+														level = 0,
+														elem = element;
+													for (; elem && level <= levels; ) {
+														var innerHrefElem = elem.querySelector('[href*="' + href + '"]');
+														if (innerHrefElem) {
+															for (var selector = '', parentElem = innerHrefElem; parentElem && parentElem != elem.parentElement; ) {
+																var escapedClassSelector = parentElem.classList.value
+																	.trim()
+																	.split(' ')
+																	.reduce(function (classes, classname) {
+																		return classname.trim() ? classes + '.' + css_escape_default()(classname.trim()) : classes;
+																	}, '');
+																(selector = '' + parentElem.tagName + escapedClassSelector + (selector ? ' ' + selector : '')),
+																	(parentElem = parentElem.parentElement);
+															}
+															return selector + '[href*="' + href + '"]';
+														}
+														(elem = elem.parentElement), level++;
 													}
-													return (_context.next = 4), _this.init();
-												case 4:
-													return (
-														(params = _this.params),
-														null !== (_params$search = params.search) &&
-															void 0 !== _params$search &&
-															null !== (_params$search$query = _params$search.query) &&
-															void 0 !== _params$search$query &&
-															_params$search$query.string &&
-															null !== (_params$search2 = params.search) &&
-															void 0 !== _params$search2 &&
-															null !== (_params$search2$query = _params$search2.query) &&
-															void 0 !== _params$search2$query &&
-															_params$search2$query.string.length &&
-															_this.store.history.save(params.search.query.string),
-														(_this.store.loading = !0),
-														(_context.prev = 7),
-														(_context.next = 10),
-														_this.eventManager.fire('beforeSearch', { controller: _this, request: params })
-													);
-												case 10:
-													_context.next = 21;
-													break;
-												case 12:
-													if (
-														((_context.prev = 12),
-														(_context.t0 = _context.catch(7)),
-														'cancelled' != (null === _context.t0 || void 0 === _context.t0 ? void 0 : _context.t0.message))
-													) {
-														_context.next = 19;
-														break;
+													return;
+												})(target, storedHref),
+												domRect = selector
+													? null === (_document = document) ||
+													  void 0 === _document ||
+													  null === (_document$querySelect = _document.querySelector(selector)) ||
+													  void 0 === _document$querySelect
+														? void 0
+														: _document$querySelect.getBoundingClientRect()
+													: void 0;
+											if (selector || storedHref || domRect)
+												try {
+													var lastRequest = _this.storage.get('lastStringyParams');
+													if (lastRequest) {
+														var storableRequestParams = getStorableRequestParams(JSON.parse(lastRequest));
+														scrollMap[JSON.stringify(storableRequestParams)] = { domRect, href: storedHref, selector };
 													}
-													return _this.log.warn("'beforeSearch' middleware cancelled"), _context.abrupt('return');
-												case 19:
-													throw (_this.log.error("error in 'beforeSearch' middleware"), _context.t0);
-												case 21:
-													if (
-														((stringyParams = JSON.stringify(getStorableRequestParams(params))),
-														(prevStringyParams = _this.storage.get('lastStringyParams')),
-														stringyParams != prevStringyParams)
-													) {
-														_context.next = 25;
-														break;
-													}
-													return _context.abrupt('return');
-												case 25:
-													if (
-														((searchProfile = _this.profiler.create({ type: 'event', name: 'search', context: params }).start()),
-														(meta = {}),
-														(response = {}),
-														!(
-															null !== (_this$config$settings = _this.config.settings) &&
-															void 0 !== _this$config$settings &&
-															_this$config$settings.infinite &&
-															null !== (_params$pagination = params.pagination) &&
-															void 0 !== _params$pagination &&
-															_params$pagination.page &&
-															params.pagination.page > 1
-														))
-													) {
-														_context.next = 59;
-														break;
-													}
-													if (
-														((preventBackfill =
-															(null === (_this$config$settings2 = _this.config.settings.infinite) || void 0 === _this$config$settings2
-																? void 0
-																: _this$config$settings2.backfill) &&
-															!_this.store.results.length &&
-															params.pagination.page > _this.config.settings.infinite.backfill),
-														(dontBackfill = !(
-															(null !== (_this$config$settings3 = _this.config.settings.infinite) &&
-																void 0 !== _this$config$settings3 &&
-																_this$config$settings3.backfill) ||
-															_this.store.results.length
-														)),
-														!preventBackfill && !dontBackfill)
-													) {
-														_context.next = 35;
-														break;
-													}
-													return _this.storage.set('scrollMap', {}), _this.urlManager.set('page', 1).go(), _context.abrupt('return');
-												case 35:
-													if (
-														null === (_this$config$settings4 = _this.config.settings) ||
-														void 0 === _this$config$settings4 ||
-														!_this$config$settings4.infinite.backfill ||
-														_this.store.loaded
-													) {
-														_context.next = 49;
-														break;
-													}
-													return (
-														(backfillRequestsParams = []),
-														(backfillRequests = Array(params.pagination.page)
-															.fill('backfill')
-															.map(function (v, i) {
-																var _backfillParams$pagin,
-																	_this$config$settings5,
-																	_this$config$settings6,
-																	_backfillParams$searc,
-																	backfillParams = cjs_default()(Object.assign({}, params), {
-																		pagination: { page: i + 1 },
-																		search: { redirectResponse: 'full' },
-																	});
-																i + 1 == 1 &&
-																	(null == backfillParams ||
-																		null === (_backfillParams$pagin = backfillParams.pagination) ||
-																		void 0 === _backfillParams$pagin ||
-																		delete _backfillParams$pagin.page,
-																	null !== (_this$config$settings5 = _this.config.settings) &&
-																		void 0 !== _this$config$settings5 &&
-																		null !== (_this$config$settings6 = _this$config$settings5.redirects) &&
-																		void 0 !== _this$config$settings6 &&
-																		_this$config$settings6.merchandising &&
-																		(null == backfillParams ||
-																			null === (_backfillParams$searc = backfillParams.search) ||
-																			void 0 === _backfillParams$searc ||
-																			delete _backfillParams$searc.redirectResponse));
-																return backfillRequestsParams.push(backfillParams), _this.client.search(backfillParams);
-															})),
-														(_context.next = 40),
-														Promise.all(backfillRequests)
-													);
-												case 40:
-													(backfillResponses = _context.sent),
-														(meta = backfillResponses[0][0]),
-														(response = backfillResponses[0][1]),
-														(backfillResults = backfillResponses.reduce(function (results, response, index) {
-															return (
-																createResultSchemaMapping({ request: backfillRequestsParams[index], response }),
-																results.concat.apply(results, SearchController_toConsumableArray(response[1].results))
-															);
-														}, [])),
-														(response.pagination.totalPages = Math.ceil(response.pagination.totalResults / response.pagination.pageSize)),
-														(response.pagination.page =
-															null === (_params$pagination2 = params.pagination) || void 0 === _params$pagination2
-																? void 0
-																: _params$pagination2.page),
-														(response.results = backfillResults),
-														(_context.next = 57);
-													break;
-												case 49:
-													return (_context.next = 51), _this.client.search(params);
-												case 51:
-													(_yield$_this$client$s = _context.sent),
-														(_yield$_this$client$s2 = _slicedToArray(_yield$_this$client$s, 2)),
-														(meta = _yield$_this$client$s2[0]),
-														(response = _yield$_this$client$s2[1]),
-														createResultSchemaMapping({ request: params, response: [meta, response] }),
-														(response.results = [].concat(
-															SearchController_toConsumableArray(_this.previousResults),
-															SearchController_toConsumableArray(response.results || [])
-														));
-												case 57:
-													_context.next = 68;
-													break;
-												case 59:
-													return (_this.events = { product: {} }), (_this.previousResults = []), (_context.next = 63), _this.client.search(params);
-												case 63:
-													(_yield$_this$client$s3 = _context.sent),
-														(_yield$_this$client$s4 = _slicedToArray(_yield$_this$client$s3, 2)),
-														(meta = _yield$_this$client$s4[0]),
-														(response = _yield$_this$client$s4[1]),
-														createResultSchemaMapping({ request: params, response: [meta, response] });
-												case 68:
-													return (
-														response.meta || (response.meta = meta),
-														searchProfile.stop(),
-														_this.log.profile(searchProfile),
-														(afterSearchProfile = _this.profiler.create({ type: 'event', name: 'afterSearch', context: params }).start()),
-														(_context.prev = 72),
-														(_context.next = 75),
-														_this.eventManager.fire('afterSearch', { controller: _this, request: params, response })
-													);
-												case 75:
-													_context.next = 87;
-													break;
-												case 77:
-													if (
-														((_context.prev = 77),
-														(_context.t1 = _context.catch(72)),
-														'cancelled' != (null === _context.t1 || void 0 === _context.t1 ? void 0 : _context.t1.message))
-													) {
-														_context.next = 85;
-														break;
-													}
-													return _this.log.warn("'afterSearch' middleware cancelled"), afterSearchProfile.stop(), _context.abrupt('return');
-												case 85:
-													throw (_this.log.error("error in 'afterSearch' middleware"), _context.t1);
-												case 87:
-													return (
-														afterSearchProfile.stop(),
-														_this.log.profile(afterSearchProfile),
-														(_this.previousResults = JSON.parse(JSON.stringify(response.results))),
-														_this.store.update(response),
-														(afterStoreProfile = _this.profiler.create({ type: 'event', name: 'afterStore', context: params }).start()),
-														(_context.prev = 92),
-														(_context.next = 95),
-														_this.eventManager.fire('afterStore', { controller: _this, request: params, response })
-													);
-												case 95:
-													_context.next = 107;
-													break;
-												case 97:
-													if (
-														((_context.prev = 97),
-														(_context.t2 = _context.catch(92)),
-														'cancelled' != (null === _context.t2 || void 0 === _context.t2 ? void 0 : _context.t2.message))
-													) {
-														_context.next = 105;
-														break;
-													}
-													return _this.log.warn("'afterStore' middleware cancelled"), afterStoreProfile.stop(), _context.abrupt('return');
-												case 105:
-													throw (_this.log.error("error in 'afterStore' middleware"), _context.t2);
-												case 107:
-													afterStoreProfile.stop(), _this.log.profile(afterStoreProfile), (_context.next = 131);
-													break;
-												case 111:
-													if (((_context.prev = 111), (_context.t3 = _context.catch(0)), !_context.t3)) {
-														_context.next = 131;
-														break;
-													}
-													if (!_context.t3.err || !_context.t3.fetchDetails) {
-														_context.next = 128;
-														break;
-													}
-													(_context.t4 = _context.t3.fetchDetails.status),
-														(_context.next = 429 === _context.t4 ? 118 : 500 === _context.t4 ? 120 : 122);
-													break;
-												case 118:
-													return (
-														(_this.store.error = { code: 429, type: types.B.WARNING, message: 'Too many requests try again later' }),
-														_context.abrupt('break', 124)
-													);
-												case 120:
-													return (
-														(_this.store.error = { code: 500, type: types.B.ERROR, message: 'Invalid Search Request or Service Unavailable' }),
-														_context.abrupt('break', 124)
-													);
-												case 122:
-													return (_this.store.error = { type: types.B.ERROR, message: _context.t3.err.message }), _context.abrupt('break', 124);
-												case 124:
-													_this.log.error(_this.store.error), _this.handleError(_context.t3.err, _context.t3.fetchDetails), (_context.next = 131);
-													break;
-												case 128:
-													(_this.store.error = { type: types.B.ERROR, message: 'Something went wrong... - ' + _context.t3 }),
-														_this.log.error(_context.t3),
-														_this.handleError(_context.t3);
-												case 131:
-													return (_context.prev = 131), (_this.store.loading = !1), _context.finish(131);
-												case 134:
-												case 'end':
-													return _context.stop();
-											}
-									},
-									_callee,
-									null,
-									[
-										[0, 111, 131, 134],
-										[7, 12],
-										[72, 77],
-										[92, 97],
-									]
-								);
-							})
-						)),
-						(_this.addToCart = (function () {
-							var _ref3 = SearchController_asyncToGenerator(
-								SearchController_regeneratorRuntime().mark(function _callee2(_products) {
-									var products;
-									return SearchController_regeneratorRuntime().wrap(function _callee2$(_context2) {
-										for (;;)
-											switch ((_context2.prev = _context2.next)) {
-												case 0:
-													(products = 'function' == typeof _products.slice ? _products.slice() : [_products]).forEach(function (product) {
-														_this.track.product.addToCart(product);
-													}),
-														products.length > 0 && _this.eventManager.fire('addToCart', { controller: _this, products });
-												case 3:
-												case 'end':
-													return _context2.stop();
-											}
-									}, _callee2);
-								})
-							);
-							return function (_x) {
-								return _ref3.apply(this, arguments);
-							};
-						})()),
-						(_this.config = cjs_default()(defaultConfig, _this.config)),
-						null !== (_this$config$settings7 = _this.config.settings) &&
-							void 0 !== _this$config$settings7 &&
-							_this$config$settings7.infinite &&
-							void 0 === _this.config.settings.restorePosition &&
-							(_this.config.settings.restorePosition = { enabled: !0 }),
-						_this.store.setConfig(_this.config),
-						(_this.storage = new StorageStore({ type: 'session', key: 'ss-controller-' + _this.config.id })),
-						_this.storage.set('lastStringyParams', void 0),
-						'object' == typeof (null === (_this$context = _this.context) || void 0 === _this$context ? void 0 : _this$context.page) &&
-							['search', 'category'].includes(_this.context.page.type) &&
-							(_this.page = cjs_default()(_this.page, _this.context.page)),
-						_this.eventManager.on(
-							'beforeSearch',
-							(function () {
-								var _ref5 = SearchController_asyncToGenerator(
-									SearchController_regeneratorRuntime().mark(function _callee3(_ref4, next) {
-										var _req$search, request, req, _req$filters, hasCategoryBackgroundFilters;
-										return SearchController_regeneratorRuntime().wrap(function _callee3$(_context3) {
-											for (;;)
-												switch ((_context3.prev = _context3.next)) {
-													case 0:
-														return (request = _ref4.request), (_context3.next = 3), next();
-													case 3:
-														(null === (_req$search = (req = request).search) || void 0 === _req$search ? void 0 : _req$search.query) ||
-															(null !=
-																(hasCategoryBackgroundFilters =
-																	null === (_req$filters = req.filters) || void 0 === _req$filters
-																		? void 0
-																		: _req$filters
-																				.filter(function (filter) {
-																					return filter.background;
-																				})
-																				.filter(function (filter) {
-																					return BACKGROUND_FILTER_FIELD_MATCHES.find(function (bgFilter) {
-																						var _filter$field;
-																						return null === (_filter$field = filter.field) || void 0 === _filter$field
-																							? void 0
-																							: _filter$field.toLowerCase().includes(bgFilter);
-																					});
-																				})
-																				.filter(function (filter) {
-																					return BACKGROUND_FILTERS_VALUE_FLAGS.every(function (flag) {
-																						return filter.type, filter.value !== flag;
-																					});
-																				})) &&
-																hasCategoryBackgroundFilters.length &&
-																(_this.page = cjs_default()(_this.page, { type: 'category' })));
-													case 6:
-													case 'end':
-														return _context3.stop();
+												} catch (err) {
+													_this.log.warn('Failed to save srcollMap!', err);
 												}
-										}, _callee3);
-									})
-								);
-								return function (_x2, _x3) {
-									return _ref5.apply(this, arguments);
-								};
-							})()
-						),
-						_this.eventManager.on(
-							'afterSearch',
-							(function () {
-								var _ref6 = SearchController_asyncToGenerator(
-									SearchController_regeneratorRuntime().mark(function _callee4(search, next) {
-										var _search$response,
-											_search$response$merc,
-											_config$settings,
-											_config$settings$redi,
-											_search$response2,
-											_search$response2$fil,
-											config,
-											redirectURL,
-											searchStore;
-										return SearchController_regeneratorRuntime().wrap(function _callee4$(_context4) {
+											_this.storage.set('scrollMap', scrollMap);
+											var data = schemaMap[result.id];
+											_this.eventManager.fire('track.product.clickThrough', { controller: _this, event: e, product: result, trackEvent: data }),
+												_this.tracker.events[_this.page.type].clickThrough({
+													data,
+													siteId:
+														null === (_this$config$globals = _this.config.globals) || void 0 === _this$config$globals
+															? void 0
+															: _this$config$globals.siteId,
+												}),
+												(_this.events.product[result.id] = _this.events.product[result.id] || {}),
+												(_this.events.product[result.id].clickThrough = !0);
+										}
+									},
+									click: function click(e, result) {
+										var _this$events$product$2;
+										(null !== (_this$events$product$2 = _this.events.product[result.id]) &&
+											void 0 !== _this$events$product$2 &&
+											_this$events$product$2.click) ||
+											('banner' !== result.type &&
+												(isClickWithinProductLink(e, result) && _this.track.product.clickThrough(e, result),
+												(_this.events.product[result.id] = _this.events.product[result.id] || {}),
+												(_this.events.product[result.id].click = !0),
+												setTimeout(function () {
+													_this.events.product[result.id].click = !1;
+												}, 300)));
+									},
+									render: function render(result) {
+										var _this$events$product$3, _this$config$globals2;
+										if (
+											null === (_this$events$product$3 = _this.events.product[result.id]) ||
+											void 0 === _this$events$product$3 ||
+											!_this$events$product$3.render
+										) {
+											var data = schemaMap[result.id];
+											_this.eventManager.fire('track.product.render', { controller: _this, product: result, trackEvent: data }),
+												_this.tracker.events[_this.page.type].render({
+													data,
+													siteId:
+														null === (_this$config$globals2 = _this.config.globals) || void 0 === _this$config$globals2
+															? void 0
+															: _this$config$globals2.siteId,
+												}),
+												(_this.events.product[result.id] = _this.events.product[result.id] || {}),
+												(_this.events.product[result.id].render = !0);
+										}
+									},
+									impression: function impression(result) {
+										var _this$events$product$4, _this$events$product$5, _this$config$globals3;
+										if (
+											!(
+												(null !== (_this$events$product$4 = _this.events.product[result.id]) &&
+													void 0 !== _this$events$product$4 &&
+													_this$events$product$4.impression) ||
+												null === (_this$events$product$5 = _this.events.product[result.id]) ||
+												void 0 === _this$events$product$5
+											) &&
+											_this$events$product$5.render
+										) {
+											var data = schemaMap[result.id];
+											_this.eventManager.fire('track.product.impression', { controller: _this, product: result, trackEvent: data }),
+												_this.tracker.events[_this.page.type].impression({
+													data,
+													siteId:
+														null === (_this$config$globals3 = _this.config.globals) || void 0 === _this$config$globals3
+															? void 0
+															: _this$config$globals3.siteId,
+												}),
+												(_this.events.product[result.id] = _this.events.product[result.id] || {}),
+												(_this.events.product[result.id].impression = !0);
+										}
+									},
+									addToCart: function addToCart(result) {
+										var _this$config$globals4,
+											data = (function getSearchAddtocartSchemaData(_ref16) {
+												var searchSchemaData = _ref16.searchSchemaData,
+													results = _ref16.results;
+												return Object.assign({}, searchSchemaData, {
+													results:
+														(null == results
+															? void 0
+															: results.map(function (result) {
+																	var core = result.mappings.core;
+																	return { uid: core.uid || '', sku: core.sku, price: Number(core.price), qty: result.quantity || 1 };
+															  })) || [],
+												});
+											})({ searchSchemaData: schemaMap[result.id], results: [result] });
+										_this.eventManager.fire('track.product.addToCart', { controller: _this, product: result, trackEvent: data }),
+											_this.tracker.events[_this.page.type].addToCart({
+												data,
+												siteId:
+													null === (_this$config$globals4 = _this.config.globals) || void 0 === _this$config$globals4
+														? void 0
+														: _this$config$globals4.siteId,
+											});
+									},
+								},
+								redirect: function redirect(redirectURL) {
+									var _this$config$globals5,
+										data = (function getSearchRedirectSchemaData(_ref15) {
+											var redirectURL = _ref15.redirectURL;
+											return { redirect: redirectURL };
+										})({ redirectURL });
+									_this.eventManager.fire('track.product.redirect', { controller: _this, redirectURL, trackEvent: data }),
+										_this.tracker.events.search.redirect({
+											data,
+											siteId:
+												null === (_this$config$globals5 = _this.config.globals) || void 0 === _this$config$globals5
+													? void 0
+													: _this$config$globals5.siteId,
+										});
+								},
+							}),
+							(_this.search = SearchController_asyncToGenerator(
+								SearchController_regeneratorRuntime().mark(function _callee() {
+									var _params$search,
+										_params$search$query,
+										_params$search2,
+										_params$search2$query,
+										_this$config$settings,
+										_params$pagination,
+										params,
+										stringyParams,
+										prevStringyParams,
+										searchProfile,
+										meta,
+										response,
+										_this$config$settings2,
+										_this$config$settings3,
+										_this$config$settings4,
+										preventBackfill,
+										dontBackfill,
+										_params$pagination2,
+										backfillRequestsParams,
+										backfillRequests,
+										backfillResponses,
+										backfillResults,
+										_yield$_this$client$s,
+										_yield$_this$client$s2,
+										_yield$_this$client$s3,
+										_yield$_this$client$s4,
+										afterSearchProfile,
+										afterStoreProfile;
+									return SearchController_regeneratorRuntime().wrap(
+										function _callee$(_context) {
 											for (;;)
-												switch ((_context4.prev = _context4.next)) {
+												switch ((_context.prev = _context.next)) {
 													case 0:
+														if (((_context.prev = 0), _this.initialized)) {
+															_context.next = 4;
+															break;
+														}
+														return (_context.next = 4), _this.init();
+													case 4:
+														return (
+															(params = _this.params),
+															null !== (_params$search = params.search) &&
+																void 0 !== _params$search &&
+																null !== (_params$search$query = _params$search.query) &&
+																void 0 !== _params$search$query &&
+																_params$search$query.string &&
+																null !== (_params$search2 = params.search) &&
+																void 0 !== _params$search2 &&
+																null !== (_params$search2$query = _params$search2.query) &&
+																void 0 !== _params$search2$query &&
+																_params$search2$query.string.length &&
+																_this.store.history.save(params.search.query.string),
+															(_this.store.loading = !0),
+															(_context.prev = 7),
+															(_context.next = 10),
+															_this.eventManager.fire('beforeSearch', { controller: _this, request: params })
+														);
+													case 10:
+														_context.next = 21;
+														break;
+													case 12:
 														if (
-															((config = search.controller.config),
-															(redirectURL =
-																null === (_search$response = search.response) ||
-																void 0 === _search$response ||
-																null === (_search$response$merc = _search$response.merchandising) ||
-																void 0 === _search$response$merc
-																	? void 0
-																	: _search$response$merc.redirect),
-															(searchStore = search.controller.store),
-															!redirectURL ||
-																null == config ||
-																null === (_config$settings = config.settings) ||
-																void 0 === _config$settings ||
-																null === (_config$settings$redi = _config$settings.redirects) ||
-																void 0 === _config$settings$redi ||
-																!_config$settings$redi.merchandising ||
-																(null != search &&
-																	null !== (_search$response2 = search.response) &&
-																	void 0 !== _search$response2 &&
-																	null !== (_search$response2$fil = _search$response2.filters) &&
-																	void 0 !== _search$response2$fil &&
-																	_search$response2$fil.length) ||
-																searchStore.loaded)
+															((_context.prev = 12),
+															(_context.t0 = _context.catch(7)),
+															'cancelled' != (null === _context.t0 || void 0 === _context.t0 ? void 0 : _context.t0.message))
 														) {
-															_context4.next = 8;
+															_context.next = 19;
+															break;
+														}
+														return _this.log.warn("'beforeSearch' middleware cancelled"), _context.abrupt('return');
+													case 19:
+														throw (_this.log.error("error in 'beforeSearch' middleware"), _context.t0);
+													case 21:
+														if (
+															((stringyParams = JSON.stringify(getStorableRequestParams(params))),
+															(prevStringyParams = _this.storage.get('lastStringyParams')),
+															stringyParams != prevStringyParams)
+														) {
+															_context.next = 25;
+															break;
+														}
+														return _context.abrupt('return');
+													case 25:
+														if (
+															((searchProfile = _this.profiler.create({ type: 'event', name: 'search', context: params }).start()),
+															(meta = {}),
+															(response = {}),
+															!(
+																null !== (_this$config$settings = _this.config.settings) &&
+																void 0 !== _this$config$settings &&
+																_this$config$settings.infinite &&
+																null !== (_params$pagination = params.pagination) &&
+																void 0 !== _params$pagination &&
+																_params$pagination.page &&
+																params.pagination.page > 1
+															))
+														) {
+															_context.next = 59;
+															break;
+														}
+														if (
+															((preventBackfill =
+																(null === (_this$config$settings2 = _this.config.settings.infinite) || void 0 === _this$config$settings2
+																	? void 0
+																	: _this$config$settings2.backfill) &&
+																!_this.store.results.length &&
+																params.pagination.page > _this.config.settings.infinite.backfill),
+															(dontBackfill = !(
+																(null !== (_this$config$settings3 = _this.config.settings.infinite) &&
+																	void 0 !== _this$config$settings3 &&
+																	_this$config$settings3.backfill) ||
+																_this.store.results.length
+															)),
+															!preventBackfill && !dontBackfill)
+														) {
+															_context.next = 35;
+															break;
+														}
+														return _this.storage.set('scrollMap', {}), _this.urlManager.set('page', 1).go(), _context.abrupt('return');
+													case 35:
+														if (
+															null === (_this$config$settings4 = _this.config.settings) ||
+															void 0 === _this$config$settings4 ||
+															!_this$config$settings4.infinite.backfill ||
+															_this.store.loaded
+														) {
+															_context.next = 49;
 															break;
 														}
 														return (
-															(searchStore.loaded = !0),
-															_this.track.redirect(redirectURL),
-															window.location.replace(redirectURL),
-															_context4.abrupt('return', !1)
+															(backfillRequestsParams = []),
+															(backfillRequests = Array(params.pagination.page)
+																.fill('backfill')
+																.map(function (v, i) {
+																	var _backfillParams$pagin,
+																		_this$config$settings5,
+																		_this$config$settings6,
+																		_backfillParams$searc,
+																		backfillParams = cjs_default()(Object.assign({}, params), {
+																			pagination: { page: i + 1 },
+																			search: { redirectResponse: 'full' },
+																		});
+																	i + 1 == 1 &&
+																		(null == backfillParams ||
+																			null === (_backfillParams$pagin = backfillParams.pagination) ||
+																			void 0 === _backfillParams$pagin ||
+																			delete _backfillParams$pagin.page,
+																		null !== (_this$config$settings5 = _this.config.settings) &&
+																			void 0 !== _this$config$settings5 &&
+																			null !== (_this$config$settings6 = _this$config$settings5.redirects) &&
+																			void 0 !== _this$config$settings6 &&
+																			_this$config$settings6.merchandising &&
+																			(null == backfillParams ||
+																				null === (_backfillParams$searc = backfillParams.search) ||
+																				void 0 === _backfillParams$searc ||
+																				delete _backfillParams$searc.redirectResponse));
+																	return backfillRequestsParams.push(backfillParams), _this.client.search(backfillParams);
+																})),
+															(_context.next = 40),
+															Promise.all(backfillRequests)
 														);
-													case 8:
-														return (_context4.next = 10), next();
-													case 10:
+													case 40:
+														(backfillResponses = _context.sent),
+															(meta = backfillResponses[0][0]),
+															(response = backfillResponses[0][1]),
+															(backfillResults = backfillResponses.reduce(function (results, response, index) {
+																return (
+																	createResultSchemaMapping({ request: backfillRequestsParams[index], response }),
+																	results.concat.apply(results, SearchController_toConsumableArray(response[1].results))
+																);
+															}, [])),
+															(response.pagination.totalPages = Math.ceil(response.pagination.totalResults / response.pagination.pageSize)),
+															(response.pagination.page =
+																null === (_params$pagination2 = params.pagination) || void 0 === _params$pagination2
+																	? void 0
+																	: _params$pagination2.page),
+															(response.results = backfillResults),
+															(_context.next = 57);
+														break;
+													case 49:
+														return (_context.next = 51), _this.client.search(params);
+													case 51:
+														(_yield$_this$client$s = _context.sent),
+															(_yield$_this$client$s2 = _slicedToArray(_yield$_this$client$s, 2)),
+															(meta = _yield$_this$client$s2[0]),
+															(response = _yield$_this$client$s2[1]),
+															createResultSchemaMapping({ request: params, response: [meta, response] }),
+															(response.results = [].concat(
+																SearchController_toConsumableArray(_this.previousResults),
+																SearchController_toConsumableArray(response.results || [])
+															));
+													case 57:
+														_context.next = 68;
+														break;
+													case 59:
+														return (_this.events = { product: {} }), (_this.previousResults = []), (_context.next = 63), _this.client.search(params);
+													case 63:
+														(_yield$_this$client$s3 = _context.sent),
+															(_yield$_this$client$s4 = _slicedToArray(_yield$_this$client$s3, 2)),
+															(meta = _yield$_this$client$s4[0]),
+															(response = _yield$_this$client$s4[1]),
+															createResultSchemaMapping({ request: params, response: [meta, response] });
+													case 68:
+														return (
+															response.meta || (response.meta = meta),
+															searchProfile.stop(),
+															_this.log.profile(searchProfile),
+															(afterSearchProfile = _this.profiler.create({ type: 'event', name: 'afterSearch', context: params }).start()),
+															(_context.prev = 72),
+															(_context.next = 75),
+															_this.eventManager.fire('afterSearch', { controller: _this, request: params, response })
+														);
+													case 75:
+														_context.next = 87;
+														break;
+													case 77:
+														if (
+															((_context.prev = 77),
+															(_context.t1 = _context.catch(72)),
+															'cancelled' != (null === _context.t1 || void 0 === _context.t1 ? void 0 : _context.t1.message))
+														) {
+															_context.next = 85;
+															break;
+														}
+														return _this.log.warn("'afterSearch' middleware cancelled"), afterSearchProfile.stop(), _context.abrupt('return');
+													case 85:
+														throw (_this.log.error("error in 'afterSearch' middleware"), _context.t1);
+													case 87:
+														return (
+															afterSearchProfile.stop(),
+															_this.log.profile(afterSearchProfile),
+															(_this.previousResults = JSON.parse(JSON.stringify(response.results))),
+															_this.store.update(response),
+															(afterStoreProfile = _this.profiler.create({ type: 'event', name: 'afterStore', context: params }).start()),
+															(_context.prev = 92),
+															(_context.next = 95),
+															_this.eventManager.fire('afterStore', { controller: _this, request: params, response })
+														);
+													case 95:
+														_context.next = 107;
+														break;
+													case 97:
+														if (
+															((_context.prev = 97),
+															(_context.t2 = _context.catch(92)),
+															'cancelled' != (null === _context.t2 || void 0 === _context.t2 ? void 0 : _context.t2.message))
+														) {
+															_context.next = 105;
+															break;
+														}
+														return _this.log.warn("'afterStore' middleware cancelled"), afterStoreProfile.stop(), _context.abrupt('return');
+													case 105:
+														throw (_this.log.error("error in 'afterStore' middleware"), _context.t2);
+													case 107:
+														afterStoreProfile.stop(), _this.log.profile(afterStoreProfile), (_context.next = 131);
+														break;
+													case 111:
+														if (((_context.prev = 111), (_context.t3 = _context.catch(0)), !_context.t3)) {
+															_context.next = 131;
+															break;
+														}
+														if (!_context.t3.err || !_context.t3.fetchDetails) {
+															_context.next = 128;
+															break;
+														}
+														(_context.t4 = _context.t3.fetchDetails.status),
+															(_context.next = 429 === _context.t4 ? 118 : 500 === _context.t4 ? 120 : 122);
+														break;
+													case 118:
+														return (
+															(_this.store.error = { code: 429, type: types.B.WARNING, message: 'Too many requests try again later' }),
+															_context.abrupt('break', 124)
+														);
+													case 120:
+														return (
+															(_this.store.error = { code: 500, type: types.B.ERROR, message: 'Invalid Search Request or Service Unavailable' }),
+															_context.abrupt('break', 124)
+														);
+													case 122:
+														return (_this.store.error = { type: types.B.ERROR, message: _context.t3.err.message }), _context.abrupt('break', 124);
+													case 124:
+														_this.log.error(_this.store.error), _this.handleError(_context.t3.err, _context.t3.fetchDetails), (_context.next = 131);
+														break;
+													case 128:
+														(_this.store.error = { type: types.B.ERROR, message: 'Something went wrong... - ' + _context.t3 }),
+															_this.log.error(_context.t3),
+															_this.handleError(_context.t3);
+													case 131:
+														return (_context.prev = 131), (_this.store.loading = !1), _context.finish(131);
+													case 134:
 													case 'end':
-														return _context4.stop();
+														return _context.stop();
 												}
-										}, _callee4);
-									})
-								);
-								return function (_x4, _x5) {
-									return _ref6.apply(this, arguments);
-								};
-							})()
-						),
-						_this.eventManager.on(
-							'afterStore',
-							(function () {
-								var _ref7 = SearchController_asyncToGenerator(
-									SearchController_regeneratorRuntime().mark(function _callee5(search, next) {
-										var storableRequestParams, stringyParams, scrollMap, elementPosition;
-										return SearchController_regeneratorRuntime().wrap(function _callee5$(_context5) {
+										},
+										_callee,
+										null,
+										[
+											[0, 111, 131, 134],
+											[7, 12],
+											[72, 77],
+											[92, 97],
+										]
+									);
+								})
+							)),
+							(_this.addToCart = (function () {
+								var _ref3 = SearchController_asyncToGenerator(
+									SearchController_regeneratorRuntime().mark(function _callee2(_products) {
+										var products;
+										return SearchController_regeneratorRuntime().wrap(function _callee2$(_context2) {
 											for (;;)
-												switch ((_context5.prev = _context5.next)) {
+												switch ((_context2.prev = _context2.next)) {
 													case 0:
-														return (_context5.next = 2), next();
-													case 2:
-														(storableRequestParams = getStorableRequestParams(search.request)),
-															(stringyParams = JSON.stringify(storableRequestParams)),
-															_this.storage.set('lastStringyParams', stringyParams),
-															(scrollMap = _this.storage.get('scrollMap') || {}),
-															(elementPosition = scrollMap[stringyParams]) || _this.storage.set('scrollMap', {}),
-															_this.eventManager.fire('restorePosition', { controller: _this, element: elementPosition });
-													case 9:
+														(products = 'function' == typeof _products.slice ? _products.slice() : [_products]).forEach(function (product) {
+															_this.track.product.addToCart(product);
+														}),
+															products.length > 0 && _this.eventManager.fire('addToCart', { controller: _this, products });
+													case 3:
 													case 'end':
-														return _context5.stop();
+														return _context2.stop();
 												}
-										}, _callee5);
+										}, _callee2);
 									})
 								);
-								return function (_x6, _x7) {
-									return _ref7.apply(this, arguments);
+								return function (_x) {
+									return _ref3.apply(this, arguments);
 								};
-							})()
-						),
+							})()),
+							(_this.config = cjs_default()(defaultConfig, _this.config)),
+							null !== (_this$config$settings7 = _this.config.settings) &&
+								void 0 !== _this$config$settings7 &&
+								_this$config$settings7.infinite &&
+								void 0 === _this.config.settings.restorePosition &&
+								(_this.config.settings.restorePosition = { enabled: !0 }),
+							_this.store.setConfig(_this.config),
+							(_this.storage = new StorageStore({ type: 'session', key: 'ss-controller-' + _this.config.id })),
+							_this.storage.set('lastStringyParams', void 0),
+							'object' == typeof (null === (_this$context = _this.context) || void 0 === _this$context ? void 0 : _this$context.page) &&
+								['search', 'category'].includes(_this.context.page.type) &&
+								(_this.page = cjs_default()(_this.page, _this.context.page)),
+							_this.eventManager.on(
+								'beforeSearch',
+								(function () {
+									var _ref5 = SearchController_asyncToGenerator(
+										SearchController_regeneratorRuntime().mark(function _callee3(_ref4, next) {
+											var _req$search, request, req, _req$filters, hasCategoryBackgroundFilters;
+											return SearchController_regeneratorRuntime().wrap(function _callee3$(_context3) {
+												for (;;)
+													switch ((_context3.prev = _context3.next)) {
+														case 0:
+															return (request = _ref4.request), (_context3.next = 3), next();
+														case 3:
+															(null === (_req$search = (req = request).search) || void 0 === _req$search ? void 0 : _req$search.query) ||
+																(null !=
+																	(hasCategoryBackgroundFilters =
+																		null === (_req$filters = req.filters) || void 0 === _req$filters
+																			? void 0
+																			: _req$filters
+																					.filter(function (filter) {
+																						return filter.background;
+																					})
+																					.filter(function (filter) {
+																						return BACKGROUND_FILTER_FIELD_MATCHES.find(function (bgFilter) {
+																							var _filter$field;
+																							return null === (_filter$field = filter.field) || void 0 === _filter$field
+																								? void 0
+																								: _filter$field.toLowerCase().includes(bgFilter);
+																						});
+																					})
+																					.filter(function (filter) {
+																						return BACKGROUND_FILTERS_VALUE_FLAGS.every(function (flag) {
+																							return filter.type, filter.value !== flag;
+																						});
+																					})) &&
+																	hasCategoryBackgroundFilters.length &&
+																	(_this.page = cjs_default()(_this.page, { type: 'category' })));
+														case 6:
+														case 'end':
+															return _context3.stop();
+													}
+											}, _callee3);
+										})
+									);
+									return function (_x2, _x3) {
+										return _ref5.apply(this, arguments);
+									};
+								})()
+							),
+							_this.eventManager.on(
+								'afterSearch',
+								(function () {
+									var _ref6 = SearchController_asyncToGenerator(
+										SearchController_regeneratorRuntime().mark(function _callee4(search, next) {
+											var _search$response,
+												_search$response$merc,
+												_config$settings,
+												_config$settings$redi,
+												_search$response2,
+												_search$response2$fil,
+												config,
+												redirectURL,
+												searchStore;
+											return SearchController_regeneratorRuntime().wrap(function _callee4$(_context4) {
+												for (;;)
+													switch ((_context4.prev = _context4.next)) {
+														case 0:
+															if (
+																((config = search.controller.config),
+																(redirectURL =
+																	null === (_search$response = search.response) ||
+																	void 0 === _search$response ||
+																	null === (_search$response$merc = _search$response.merchandising) ||
+																	void 0 === _search$response$merc
+																		? void 0
+																		: _search$response$merc.redirect),
+																(searchStore = search.controller.store),
+																!redirectURL ||
+																	null == config ||
+																	null === (_config$settings = config.settings) ||
+																	void 0 === _config$settings ||
+																	null === (_config$settings$redi = _config$settings.redirects) ||
+																	void 0 === _config$settings$redi ||
+																	!_config$settings$redi.merchandising ||
+																	(null != search &&
+																		null !== (_search$response2 = search.response) &&
+																		void 0 !== _search$response2 &&
+																		null !== (_search$response2$fil = _search$response2.filters) &&
+																		void 0 !== _search$response2$fil &&
+																		_search$response2$fil.length) ||
+																	searchStore.loaded)
+															) {
+																_context4.next = 8;
+																break;
+															}
+															return (
+																(searchStore.loaded = !0),
+																_this.track.redirect(redirectURL),
+																window.location.replace(redirectURL),
+																_context4.abrupt('return', !1)
+															);
+														case 8:
+															return (_context4.next = 10), next();
+														case 10:
+														case 'end':
+															return _context4.stop();
+													}
+											}, _callee4);
+										})
+									);
+									return function (_x4, _x5) {
+										return _ref6.apply(this, arguments);
+									};
+								})()
+							),
+							_this.eventManager.on(
+								'afterStore',
+								(function () {
+									var _ref7 = SearchController_asyncToGenerator(
+										SearchController_regeneratorRuntime().mark(function _callee5(search, next) {
+											var storableRequestParams, stringyParams, scrollMap, elementPosition;
+											return SearchController_regeneratorRuntime().wrap(function _callee5$(_context5) {
+												for (;;)
+													switch ((_context5.prev = _context5.next)) {
+														case 0:
+															return (_context5.next = 2), next();
+														case 2:
+															(storableRequestParams = getStorableRequestParams(search.request)),
+																(stringyParams = JSON.stringify(storableRequestParams)),
+																_this.storage.set('lastStringyParams', stringyParams),
+																(scrollMap = _this.storage.get('scrollMap') || {}),
+																(elementPosition = scrollMap[stringyParams]) || _this.storage.set('scrollMap', {}),
+																_this.eventManager.fire('restorePosition', { controller: _this, element: elementPosition });
+														case 9:
+														case 'end':
+															return _context5.stop();
+													}
+											}, _callee5);
+										})
+									);
+									return function (_x6, _x7) {
+										return _ref7.apply(this, arguments);
+									};
+								})()
+							);
+						var _this$config$settings12,
+							_this$config$settings13,
+							hierarchySettings =
+								null === (_this$config$settings8 = _this.config.settings) ||
+								void 0 === _this$config$settings8 ||
+								null === (_this$config$settings9 = _this$config$settings8.filters) ||
+								void 0 === _this$config$settings9
+									? void 0
+									: _this$config$settings9.hierarchy;
+						(hierarchySettings &&
+							hierarchySettings.enabled &&
+							_this.eventManager.on(
+								'afterSearch',
+								(function () {
+									var _ref8 = SearchController_asyncToGenerator(
+										SearchController_regeneratorRuntime().mark(function _callee6(search, next) {
+											var _hierarchySettings$di, _hierarchySettings$sh, displayDelimiter, showFullPath, facets;
+											return SearchController_regeneratorRuntime().wrap(function _callee6$(_context6) {
+												for (;;)
+													switch ((_context6.prev = _context6.next)) {
+														case 0:
+															return (_context6.next = 2), next();
+														case 2:
+															(displayDelimiter =
+																null !== (_hierarchySettings$di = hierarchySettings.displayDelimiter) && void 0 !== _hierarchySettings$di
+																	? _hierarchySettings$di
+																	: ' / '),
+																(showFullPath =
+																	null !== (_hierarchySettings$sh = hierarchySettings.showFullPath) &&
+																	void 0 !== _hierarchySettings$sh &&
+																	_hierarchySettings$sh),
+																(facets = search.response.facets) &&
+																	facets.forEach(function (facet) {
+																		var _search$response$meta;
+																		if (
+																			null !== (_search$response$meta = search.response.meta) &&
+																			void 0 !== _search$response$meta &&
+																			_search$response$meta.facets &&
+																			facet.field
+																		) {
+																			var _facet$values,
+																				metaFacet = search.response.meta.facets[facet.field],
+																				dataDelimiter = (null == metaFacet ? void 0 : metaFacet.hierarchyDelimiter) || ' / ';
+																			if (
+																				metaFacet &&
+																				'hierarchy' === metaFacet.display &&
+																				facet.filtered &&
+																				(null === (_facet$values = facet.values) || void 0 === _facet$values ? void 0 : _facet$values.length) > 0
+																			) {
+																				var _facet$values2,
+																					filteredValues =
+																						null === (_facet$values2 = facet.values) || void 0 === _facet$values2
+																							? void 0
+																							: _facet$values2.filter(function (val) {
+																									return !0 === (null == val ? void 0 : val.filtered);
+																							  });
+																				if (filteredValues && filteredValues.length) {
+																					var _ref9,
+																						_filteredValues$0$val,
+																						filterToAdd = {
+																							field: facet.field,
+																							label: showFullPath
+																								? (null !==
+																										(_ref9 =
+																											null !== (_filteredValues$0$val = filteredValues[0].value) && void 0 !== _filteredValues$0$val
+																												? _filteredValues$0$val
+																												: filteredValues[0].label) && void 0 !== _ref9
+																										? _ref9
+																										: ''
+																								  ).replace(new RegExp(dataDelimiter.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'g'), displayDelimiter)
+																								: filteredValues[0].label,
+																							type: 'value',
+																						};
+																					search.response.filters
+																						? search.response.filters.push(filterToAdd)
+																						: (search.response.filters = [filterToAdd]);
+																				}
+																			}
+																		}
+																	});
+														case 6:
+														case 'end':
+															return _context6.stop();
+													}
+											}, _callee6);
+										})
+									);
+									return function (_x8, _x9) {
+										return _ref8.apply(this, arguments);
+									};
+								})()
+							),
 						_this.eventManager.on(
 							'afterStore',
 							(function () {
-								var _ref8 = SearchController_asyncToGenerator(
-									SearchController_regeneratorRuntime().mark(function _callee6(search, next) {
+								var _ref10 = SearchController_asyncToGenerator(
+									SearchController_regeneratorRuntime().mark(function _callee7(search, next) {
 										var controller,
 											_search$request,
 											_search$request$filte,
@@ -36610,14 +36738,14 @@
 											data,
 											_config,
 											nonBackgroundFilters;
-										return SearchController_regeneratorRuntime().wrap(function _callee6$(_context6) {
+										return SearchController_regeneratorRuntime().wrap(function _callee7$(_context7) {
 											for (;;)
-												switch ((_context6.prev = _context6.next)) {
+												switch ((_context7.prev = _context7.next)) {
 													case 0:
-														return (_context6.next = 2), next();
+														return (_context7.next = 2), next();
 													case 2:
 														if (!(controller = search.controller).store.loaded || controller.store.error) {
-															_context6.next = 12;
+															_context7.next = 12;
 															break;
 														}
 														if (
@@ -36635,6 +36763,7 @@
 																})).length ||
 																search.response._cached ||
 																((data = getSearchSchemaData({ params: search.request, response: search.response })),
+																_this.eventManager.fire('track.product.render', { controller: _this, trackEvent: data }),
 																_this.tracker.events[_this.page.type].render({
 																	data,
 																	siteId:
@@ -36643,19 +36772,8 @@
 																			: _this$config$globals6.siteId,
 																})),
 															products.forEach(function (result) {
-																if (!search.response._cached) {
-																	var _this$config$globals7,
-																		_data = schemaMap[result.id];
-																	_this.tracker.events[_this.page.type].render({
-																		data: _data,
-																		siteId:
-																			null === (_this$config$globals7 = _this.config.globals) || void 0 === _this$config$globals7
-																				? void 0
-																				: _this$config$globals7.siteId,
-																	}),
-																		_this.eventManager.fire('track.product.render', { controller: _this, product: result, trackEvent: _data });
-																}
-																(_this.events.product[result.id] = _this.events.product[result.id] || {}),
+																search.response._cached || _this.track.product.render(result),
+																	(_this.events.product[result.id] = _this.events.product[result.id] || {}),
 																	(_this.events.product[result.id].render = !0);
 															}),
 															(_config = search.controller.config),
@@ -36691,43 +36809,43 @@
 																		: _search$response4$pag.totalResults) ||
 																(null != nonBackgroundFilters && nonBackgroundFilters.length))
 														) {
-															_context6.next = 12;
+															_context7.next = 12;
 															break;
 														}
 														return (
 															window.location.replace(null == search ? void 0 : search.response.results[0].mappings.core.url),
-															_context6.abrupt('return', !1)
+															_context7.abrupt('return', !1)
 														);
 													case 12:
 													case 'end':
-														return _context6.stop();
+														return _context7.stop();
 												}
-										}, _callee6);
+										}, _callee7);
 									})
 								);
-								return function (_x8, _x9) {
-									return _ref8.apply(this, arguments);
+								return function (_x10, _x11) {
+									return _ref10.apply(this, arguments);
 								};
 							})()
 						),
-						null !== (_this$config$settings8 = _this.config.settings) &&
-							void 0 !== _this$config$settings8 &&
-							null !== (_this$config$settings9 = _this$config$settings8.restorePosition) &&
-							void 0 !== _this$config$settings9 &&
-							_this$config$settings9.enabled) &&
+						null !== (_this$config$settings10 = _this.config.settings) &&
+							void 0 !== _this$config$settings10 &&
+							null !== (_this$config$settings11 = _this$config$settings10.restorePosition) &&
+							void 0 !== _this$config$settings11 &&
+							_this$config$settings11.enabled) &&
 							(_this.eventManager.on(
 								'restorePosition',
 								(function () {
-									var _ref10 = SearchController_asyncToGenerator(
-										SearchController_regeneratorRuntime().mark(function _callee8(_ref9, next) {
+									var _ref12 = SearchController_asyncToGenerator(
+										SearchController_regeneratorRuntime().mark(function _callee9(_ref11, next) {
 											var _element, controller, element, lastRequest, storableRequestParams, stringyParams, scrollMap, scrollToPosition;
-											return SearchController_regeneratorRuntime().wrap(function _callee8$(_context8) {
+											return SearchController_regeneratorRuntime().wrap(function _callee9$(_context9) {
 												for (;;)
-													switch ((_context8.prev = _context8.next)) {
+													switch ((_context9.prev = _context9.next)) {
 														case 0:
 															if (
-																((controller = _ref9.controller),
-																(element = _ref9.element),
+																((controller = _ref11.controller),
+																(element = _ref11.element),
 																(null !== (_element = element) && void 0 !== _element && _element.selector) ||
 																	((lastRequest = _this.storage.get('lastStringyParams')) &&
 																		((storableRequestParams = getStorableRequestParams(JSON.parse(lastRequest))),
@@ -36737,8 +36855,8 @@
 																(scrollToPosition = function scrollToPosition() {
 																	return new Promise(
 																		(function () {
-																			var _ref11 = SearchController_asyncToGenerator(
-																				SearchController_regeneratorRuntime().mark(function _callee7(resolve) {
+																			var _ref13 = SearchController_asyncToGenerator(
+																				SearchController_regeneratorRuntime().mark(function _callee8(resolve) {
 																					var checkTime,
 																						maxScrolls,
 																						maxCheckCount,
@@ -36747,9 +36865,9 @@
 																						scrolledElem,
 																						checkAndScroll,
 																						_element4;
-																					return SearchController_regeneratorRuntime().wrap(function _callee7$(_context7) {
+																					return SearchController_regeneratorRuntime().wrap(function _callee8$(_context8) {
 																						for (;;)
-																							switch ((_context7.prev = _context7.next)) {
+																							switch ((_context8.prev = _context8.next)) {
 																								case 0:
 																									(checkTime = 60),
 																										(maxScrolls = Math.ceil(600 / checkTime)),
@@ -36785,17 +36903,17 @@
 																										});
 																								case 8:
 																									if (!(checkAndScroll() && scrollBackCount <= maxScrolls && checkCount <= maxCheckCount)) {
-																										_context7.next = 13;
+																										_context8.next = 13;
 																										break;
 																									}
 																									return (
-																										(_context7.next = 11),
+																										(_context8.next = 11),
 																										new Promise(function (resolve) {
 																											return setTimeout(resolve, checkTime);
 																										})
 																									);
 																								case 11:
-																									_context7.next = 8;
+																									_context8.next = 8;
 																									break;
 																								case 13:
 																									scrolledElem
@@ -36807,42 +36925,42 @@
 																										resolve();
 																								case 15:
 																								case 'end':
-																									return _context7.stop();
+																									return _context8.stop();
 																							}
-																					}, _callee7);
+																					}, _callee8);
 																				})
 																			);
-																			return function (_x12) {
-																				return _ref11.apply(this, arguments);
+																			return function (_x14) {
+																				return _ref13.apply(this, arguments);
 																			};
 																		})()
 																	);
 																}),
 																!element)
 															) {
-																_context8.next = 6;
+																_context9.next = 6;
 																break;
 															}
-															return (_context8.next = 6), scrollToPosition();
+															return (_context9.next = 6), scrollToPosition();
 														case 6:
-															return (_context8.next = 8), next();
+															return (_context9.next = 8), next();
 														case 8:
 														case 'end':
-															return _context8.stop();
+															return _context9.stop();
 													}
-											}, _callee8);
+											}, _callee9);
 										})
 									);
-									return function (_x10, _x11) {
-										return _ref10.apply(this, arguments);
+									return function (_x12, _x13) {
+										return _ref12.apply(this, arguments);
 									};
 								})()
 							),
-							null !== (_this$config$settings10 = _this.config.settings) &&
-								void 0 !== _this$config$settings10 &&
-								null !== (_this$config$settings11 = _this$config$settings10.restorePosition) &&
-								void 0 !== _this$config$settings11 &&
-								_this$config$settings11.onPageShow &&
+							null !== (_this$config$settings12 = _this.config.settings) &&
+								void 0 !== _this$config$settings12 &&
+								null !== (_this$config$settings13 = _this$config$settings12.restorePosition) &&
+								void 0 !== _this$config$settings13 &&
+								_this$config$settings13.onPageShow &&
 								window.addEventListener('pageshow', function () {
 									_this.eventManager.fire('restorePosition', { controller: _this, element: {} });
 								}));
@@ -36866,16 +36984,16 @@
 							{
 								key: 'params',
 								get: function get() {
-									var _this$config$settings12,
-										_this$config$settings13,
+									var _this$config$settings14,
+										_this$config$settings15,
+										_this$config$globals7,
 										_this$config$globals8,
-										_this$config$globals9,
 										params = cjs_default()(Object.assign({}, getSearchParams(this.urlManager.state)), this.config.globals || {});
-									(null !== (_this$config$settings12 = this.config.settings) &&
-										void 0 !== _this$config$settings12 &&
-										null !== (_this$config$settings13 = _this$config$settings12.redirects) &&
-										void 0 !== _this$config$settings13 &&
-										_this$config$settings13.merchandising &&
+									(null !== (_this$config$settings14 = this.config.settings) &&
+										void 0 !== _this$config$settings14 &&
+										null !== (_this$config$settings15 = _this$config$settings14.redirects) &&
+										void 0 !== _this$config$settings15 &&
+										_this$config$settings15.merchandising &&
 										!this.store.loaded) ||
 										((params.search = params.search || {}), (params.search.redirectResponse = 'full')),
 										(params.tracking = params.tracking || {}),
@@ -36889,11 +37007,11 @@
 										(userId && (params.tracking.userId = userId),
 										sessionId && (params.tracking.sessionId = sessionId),
 										pageLoadId && (params.tracking.pageLoadId = pageLoadId),
-										null === (_this$config$globals8 = this.config.globals) ||
+										null === (_this$config$globals7 = this.config.globals) ||
+											void 0 === _this$config$globals7 ||
+											null === (_this$config$globals8 = _this$config$globals7.personalization) ||
 											void 0 === _this$config$globals8 ||
-											null === (_this$config$globals9 = _this$config$globals8.personalization) ||
-											void 0 === _this$config$globals9 ||
-											!_this$config$globals9.disabled)
+											!_this$config$globals8.disabled)
 									) {
 										var cartItems = this.tracker.cookies.cart.get();
 										cartItems.length &&
@@ -36909,10 +37027,10 @@
 						])
 					);
 				})(AbstractController);
-			function createResultSchemaMapping(_ref12) {
+			function createResultSchemaMapping(_ref14) {
 				var _searchResponse$resul,
-					request = _ref12.request,
-					_response = _slicedToArray(_ref12.response, 2),
+					request = _ref14.request,
+					_response = _slicedToArray(_ref14.response, 2),
 					searchResponse = (_response[0], _response[1]),
 					schema = getSearchSchemaData({ params: request, response: searchResponse });
 				null === (_searchResponse$resul = searchResponse.results) ||
@@ -36974,7 +37092,7 @@
 					},
 				};
 			}
-			function getSearchSchemaData(_ref15) {
+			function getSearchSchemaData(_ref17) {
 				var _params$filters,
 					_response$search,
 					_response$search2,
@@ -36993,8 +37111,8 @@
 					_response$merchandisi4,
 					correctedQuery,
 					_response$search3,
-					params = _ref15.params,
-					response = _ref15.response,
+					params = _ref17.params,
+					response = _ref17.response,
 					filters =
 						null === (_params$filters = params.filters) || void 0 === _params$filters
 							? void 0
@@ -37577,16 +37695,16 @@
 											!_this$events$product$.clickThrough
 										) {
 											var data = getRecommendationsSchemaData({ store: _this.store, results: [result] });
-											_this.tracker.events.recommendations.clickThrough({
-												data,
-												siteId:
-													null === (_this$config$globals = _this.config.globals) || void 0 === _this$config$globals
-														? void 0
-														: _this$config$globals.siteId,
-											}),
+											_this.eventManager.fire('track.product.clickThrough', { controller: _this, event: e, product: result, trackEvent: data }),
+												_this.tracker.events.recommendations.clickThrough({
+													data,
+													siteId:
+														null === (_this$config$globals = _this.config.globals) || void 0 === _this$config$globals
+															? void 0
+															: _this$config$globals.siteId,
+												}),
 												(_this.events.product[result.id] = _this.events.product[result.id] || {}),
-												(_this.events.product[result.id].clickThrough = !0),
-												_this.eventManager.fire('track.product.clickThrough', { controller: _this, event: e, product: result, trackEvent: data });
+												(_this.events.product[result.id].clickThrough = !0);
 										}
 									},
 									click: function click(e, result) {
@@ -37616,6 +37734,7 @@
 										) {
 											var data = getRecommendationsSchemaData({ store: _this.store, results: [result] });
 											return (
+												_this.eventManager.fire('track.product.impression', { controller: _this, product: result, trackEvent: data }),
 												_this.tracker.events.recommendations.impression({
 													data,
 													siteId:
@@ -37625,7 +37744,6 @@
 												}),
 												(_this.events.product[result.id] = _this.events.product[result.id] || {}),
 												(_this.events.product[result.id].impression = !0),
-												_this.eventManager.fire('track.product.impression', { controller: _this, product: result, trackEvent: data }),
 												data
 											);
 										}
@@ -37639,6 +37757,7 @@
 										) {
 											var data = getRecommendationsSchemaData({ store: _this.store, results: [result] });
 											return (
+												_this.eventManager.fire('track.product.render', { controller: _this, product: result, trackEvent: data }),
 												_this.tracker.events.recommendations.render({
 													data,
 													siteId:
@@ -37648,7 +37767,6 @@
 												}),
 												(_this.events.product[result.id] = _this.events.product[result.id] || {}),
 												(_this.events.product[result.id].render = !0),
-												_this.eventManager.fire('track.product.render', { controller: _this, product: result, trackEvent: data }),
 												data
 											);
 										}
@@ -37675,6 +37793,7 @@
 												};
 											})({ store: _this.store, results: [result] });
 										return (
+											_this.eventManager.fire('track.product.addToCart', { controller: _this, product: result, trackEvent: data }),
 											_this.tracker.events.recommendations.addToCart({
 												data,
 												siteId:
@@ -37682,7 +37801,6 @@
 														? void 0
 														: _this$config$globals4.siteId,
 											}),
-											_this.eventManager.fire('track.product.addToCart', { controller: _this, product: result, trackEvent: data }),
 											data
 										);
 									},
@@ -37871,7 +37989,7 @@
 								(function () {
 									var _ref4 = RecommendationController_asyncToGenerator(
 										RecommendationController_regeneratorRuntime().mark(function _callee3(search, next) {
-											var controller, products, results, data, _this$config$globals5;
+											var controller, products, _this$config$globals5, data;
 											return RecommendationController_regeneratorRuntime().wrap(function _callee3$(_context3) {
 												for (;;)
 													switch ((_context3.prev = _context3.next)) {
@@ -37880,24 +37998,25 @@
 														case 2:
 															(controller = search.controller).store.loaded &&
 																!controller.store.error &&
-																((products = controller.store.results.filter(function (result) {
-																	return 'product' === result.type;
-																})),
-																(results = 0 === products.length ? [] : products),
-																(data = getRecommendationsSchemaData({ store: _this.store, results })),
-																search.response._cached ||
+																(0 !==
+																	(products = controller.store.results.filter(function (result) {
+																		return 'product' === result.type;
+																	})).length ||
+																	search.response._cached ||
+																	((data = getRecommendationsSchemaData({ store: _this.store })),
+																	_this.eventManager.fire('track.product.render', { controller: _this, trackEvent: data }),
 																	_this.tracker.events.recommendations.render({
 																		data,
 																		siteId:
 																			null === (_this$config$globals5 = _this.config.globals) || void 0 === _this$config$globals5
 																				? void 0
 																				: _this$config$globals5.siteId,
-																	}),
+																	})),
 																products.forEach(function (result) {
-																	(_this.events.product[result.id] = _this.events.product[result.id] || {}),
-																		(_this.events.product[result.id].render = !0),
-																		search.response._cached ||
-																			_this.eventManager.fire('track.product.render', { controller: _this, product: result, trackEvent: data });
+																	search.response._cached
+																		? ((_this.events.product[result.id] = _this.events.product[result.id] || {}),
+																		  (_this.events.product[result.id].render = !0))
+																		: _this.track.product.render(result);
 																}));
 														case 4:
 														case 'end':
@@ -38507,16 +38626,16 @@
 											!_this$events$product$.clickThrough
 										) {
 											var data = getAutocompleteSchemaData({ params: _this.params, store: _this.store, results: [result] });
-											_this.tracker.events.autocomplete.clickThrough({
-												data,
-												siteId:
-													null === (_this$config$globals = _this.config.globals) || void 0 === _this$config$globals
-														? void 0
-														: _this$config$globals.siteId,
-											}),
+											_this.eventManager.fire('track.product.clickThrough', { controller: _this, event: e, product: result, trackEvent: data }),
+												_this.tracker.events.autocomplete.clickThrough({
+													data,
+													siteId:
+														null === (_this$config$globals = _this.config.globals) || void 0 === _this$config$globals
+															? void 0
+															: _this$config$globals.siteId,
+												}),
 												(_this.events.product[result.id] = _this.events.product[result.id] || {}),
-												(_this.events.product[result.id].clickThrough = !0),
-												_this.eventManager.fire('track.product.clickThrough', { controller: _this, event: e, product: result, trackEvent: data });
+												(_this.events.product[result.id].clickThrough = !0);
 										}
 									},
 									click: function click(e, result) {
@@ -38540,16 +38659,16 @@
 											!_this$events$product$3.render
 										) {
 											var data = getAutocompleteSchemaData({ params: _this.params, store: _this.store, results: result ? [result] : [] });
-											_this.tracker.events.autocomplete.render({
-												data,
-												siteId:
-													null === (_this$config$globals2 = _this.config.globals) || void 0 === _this$config$globals2
-														? void 0
-														: _this$config$globals2.siteId,
-											}),
+											_this.eventManager.fire('track.product.render', { controller: _this, product: result, trackEvent: data }),
+												_this.tracker.events.autocomplete.render({
+													data,
+													siteId:
+														null === (_this$config$globals2 = _this.config.globals) || void 0 === _this$config$globals2
+															? void 0
+															: _this$config$globals2.siteId,
+												}),
 												(_this.events.product[result.id] = _this.events.product[result.id] || {}),
-												(_this.events.product[result.id].render = !0),
-												_this.eventManager.fire('track.product.render', { controller: _this, product: result, trackEvent: data });
+												(_this.events.product[result.id].render = !0);
 										}
 									},
 									impression: function impression(result) {
@@ -38565,16 +38684,16 @@
 											_this$events$product$5.render
 										) {
 											var data = getAutocompleteSchemaData({ params: _this.params, store: _this.store, results: [result] });
-											_this.tracker.events.autocomplete.impression({
-												data,
-												siteId:
-													null === (_this$config$globals3 = _this.config.globals) || void 0 === _this$config$globals3
-														? void 0
-														: _this$config$globals3.siteId,
-											}),
+											_this.eventManager.fire('track.product.impression', { controller: _this, product: result, trackEvent: data }),
+												_this.tracker.events.autocomplete.impression({
+													data,
+													siteId:
+														null === (_this$config$globals3 = _this.config.globals) || void 0 === _this$config$globals3
+															? void 0
+															: _this$config$globals3.siteId,
+												}),
 												(_this.events.product[result.id] = _this.events.product[result.id] || {}),
-												(_this.events.product[result.id].impression = !0),
-												_this.eventManager.fire('track.product.impression', { controller: _this, product: result, trackEvent: data });
+												(_this.events.product[result.id].impression = !0);
 										}
 									},
 									addToCart: function addToCart(result) {
@@ -38594,14 +38713,14 @@
 															  })) || [],
 												});
 											})({ params: _this.params, store: _this.store, results: [result] });
-										_this.tracker.events.autocomplete.addToCart({
-											data,
-											siteId:
-												null === (_this$config$globals4 = _this.config.globals) || void 0 === _this$config$globals4
-													? void 0
-													: _this$config$globals4.siteId,
-										}),
-											_this.eventManager.fire('track.product.addToCart', { controller: _this, product: result, trackEvent: data });
+										_this.eventManager.fire('track.product.addToCart', { controller: _this, product: result, trackEvent: data }),
+											_this.tracker.events.autocomplete.addToCart({
+												data,
+												siteId:
+													null === (_this$config$globals4 = _this.config.globals) || void 0 === _this$config$globals4
+														? void 0
+														: _this$config$globals4.siteId,
+											});
 									},
 								},
 								redirect: function redirect(redirectURL) {
@@ -38610,14 +38729,14 @@
 											var redirectURL = _ref8.redirectURL;
 											return { redirect: redirectURL };
 										})({ redirectURL });
-									_this.tracker.events.autocomplete.redirect({
-										data,
-										siteId:
-											null === (_this$config$globals5 = _this.config.globals) || void 0 === _this$config$globals5
-												? void 0
-												: _this$config$globals5.siteId,
-									}),
-										_this.eventManager.fire('track.redirect', { controller: _this, redirectURL, trackEvent: data });
+									_this.eventManager.fire('track.redirect', { controller: _this, redirectURL, trackEvent: data }),
+										_this.tracker.events.autocomplete.redirect({
+											data,
+											siteId:
+												null === (_this$config$globals5 = _this.config.globals) || void 0 === _this$config$globals5
+													? void 0
+													: _this$config$globals5.siteId,
+										});
 								},
 							}),
 							(_this.handlers = {
@@ -39187,7 +39306,7 @@
 								(function () {
 									var _ref5 = AutocompleteController_asyncToGenerator(
 										AutocompleteController_regeneratorRuntime().mark(function _callee6(search, next) {
-											var controller, products, results, data, _this$config$globals12;
+											var controller, products, _this$config$globals12, data;
 											return AutocompleteController_regeneratorRuntime().wrap(function _callee6$(_context6) {
 												for (;;)
 													switch ((_context6.prev = _context6.next)) {
@@ -39196,24 +39315,25 @@
 														case 2:
 															(controller = search.controller).store.loaded &&
 																!controller.store.error &&
-																((products = controller.store.results.filter(function (result) {
-																	return 'product' === result.type;
-																})),
-																(results = 0 === products.length ? [] : products),
-																(data = getAutocompleteSchemaData({ params: search.request, store: _this.store, results })),
-																search.response._cached ||
+																(0 !==
+																	(products = controller.store.results.filter(function (result) {
+																		return 'product' === result.type;
+																	})).length ||
+																	search.response._cached ||
+																	((data = getAutocompleteSchemaData({ params: search.request, store: _this.store })),
+																	_this.eventManager.fire('track.product.render', { controller: _this, trackEvent: data }),
 																	_this.tracker.events.autocomplete.render({
 																		data,
 																		siteId:
 																			null === (_this$config$globals12 = _this.config.globals) || void 0 === _this$config$globals12
 																				? void 0
 																				: _this$config$globals12.siteId,
-																	}),
+																	})),
 																products.forEach(function (result) {
-																	(_this.events.product[result.id] = _this.events.product[result.id] || {}),
-																		(_this.events.product[result.id].render = !0),
-																		search.response._cached ||
-																			_this.eventManager.fire('track.product.render', { controller: _this, product: result, trackEvent: data });
+																	search.response._cached
+																		? ((_this.events.product[result.id] = _this.events.product[result.id] || {}),
+																		  (_this.events.product[result.id].render = !0))
+																		: _this.track.product.render(result);
 																}));
 														case 4:
 														case 'end':
@@ -39232,13 +39352,18 @@
 								(function () {
 									var _ref6 = AutocompleteController_asyncToGenerator(
 										AutocompleteController_regeneratorRuntime().mark(function _callee7(ac, next) {
+											var _ac$response$autocomp;
 											return AutocompleteController_regeneratorRuntime().wrap(function _callee7$(_context7) {
 												for (;;)
 													switch ((_context7.prev = _context7.next)) {
 														case 0:
 															return (_context7.next = 2), next();
 														case 2:
-															if (ac.response.autocomplete.query == ac.controller.urlManager.state.query) {
+															if (
+																(null === (_ac$response$autocomp = ac.response.autocomplete) || void 0 === _ac$response$autocomp
+																	? void 0
+																	: _ac$response$autocomp.query) == ac.controller.urlManager.state.query
+															) {
 																_context7.next = 4;
 																break;
 															}
@@ -44921,7 +45046,6 @@
 				SearchMerchandisingStore = __webpack_require__('../snap-store-mobx/dist/esm/Search/Stores/SearchMerchandisingStore.js');
 			__webpack_require__('../../node_modules/core-js/modules/es.symbol.species.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.array.species.js'),
-				__webpack_require__('../../node_modules/core-js/modules/es.regexp.constructor.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.map.js');
 			function SearchFacetStore_toConsumableArray(r) {
 				return (
@@ -51324,7 +51448,7 @@
 							((function Tracker_classCallCheck(a, n) {
 								if (!(a instanceof n)) throw new TypeError('Cannot call a class as a function');
 							})(this, Tracker),
-							((config = cjs_default()(Tracker_defaultConfig, config || {})).initiator = 'searchspring/' + config.framework + '/0.68.0'),
+							((config = cjs_default()(Tracker_defaultConfig, config || {})).initiator = 'searchspring/' + config.framework + '/0.69.2'),
 							((_this = Tracker_callSuper(this, Tracker, [globals, config])).targeters = []),
 							(_this.track = {
 								error: function error(data, siteId) {
@@ -51496,7 +51620,7 @@
 							(_this.localStorage = new StorageStore({ type: 'local', key: 'ss-' + _this.config.id })),
 							_this.localStorage.set('siteId', _this.globals.siteId),
 							(null !== (_window$searchspring = window.searchspring) && void 0 !== _window$searchspring && _window$searchspring.tracker) ||
-								((window.searchspring = window.searchspring || {}), (window.searchspring.tracker = _this), (window.searchspring.version = '0.68.0')),
+								((window.searchspring = window.searchspring || {}), (window.searchspring.tracker = _this), (window.searchspring.version = '0.69.2')),
 							setTimeout(function () {
 								_this.targeters.push(
 									new DomTargeter([{ selector: 'script[type^="searchspring/track/"]', emptyTarget: !1 }], function (target, elem) {
@@ -52330,7 +52454,7 @@
 		var __webpack_exec__ = (moduleId) => __webpack_require__((__webpack_require__.s = moduleId));
 		__webpack_require__.O(
 			0,
-			[394],
+			[122],
 			() => (
 				__webpack_exec__('../../node_modules/@storybook/core-client/dist/esm/globals/polyfills.js'),
 				__webpack_exec__('../../node_modules/@storybook/core-client/dist/esm/globals/globals.js'),

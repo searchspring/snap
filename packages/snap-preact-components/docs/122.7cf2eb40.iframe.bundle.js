@@ -1,6 +1,6 @@
-/*! For license information please see 394.f6e5e095.iframe.bundle.js.LICENSE.txt */
+/*! For license information please see 122.7cf2eb40.iframe.bundle.js.LICENSE.txt */
 (self.webpackChunk_searchspring_snap_preact_components = self.webpackChunk_searchspring_snap_preact_components || []).push([
-	[394],
+	[122],
 	{
 		'../../node_modules/@babel/runtime/helpers/esm/defineProperty.js': (
 			__unused_webpack___webpack_module__,
@@ -3682,7 +3682,27 @@
 					return await response.value();
 				}
 			}
-			const esm_browser_native = { randomUUID: 'undefined' != typeof crypto && crypto.randomUUID && crypto.randomUUID.bind(crypto) };
+			const flags = (function getFlags(userAgent = '') {
+					return (
+						(userAgent = (userAgent || ('undefined' == typeof window ? {} : window?.navigator).userAgent || '').toLowerCase()),
+						{
+							cookies: function () {
+								return 'undefined' != typeof window && window?.navigator?.cookieEnabled;
+							},
+							storage: function () {
+								if ('undefined' == typeof window) return !1;
+								try {
+									return window?.localStorage.setItem('ss-test', 'ss-test'), window?.localStorage.removeItem('ss-test'), !0;
+								} catch (e) {
+									return !1;
+								}
+							},
+						}
+					);
+				})(),
+				featureFlags_cookies = flags.cookies(),
+				featureFlags_storage = flags.storage(),
+				esm_browser_native = { randomUUID: 'undefined' != typeof crypto && crypto.randomUUID && crypto.randomUUID.bind(crypto) };
 			let getRandomValues;
 			const rnds8 = new Uint8Array(16);
 			function rng() {
@@ -3729,7 +3749,7 @@
 					}
 					return unsafeStringify(rnds);
 				},
-				{ rE: version } = { rE: '0.0.34' },
+				{ rE: version } = { rE: '0.0.43' },
 				CART_KEY = 'ssCartProducts',
 				VIEWED_KEY = 'ssViewedProducts',
 				COOKIE_DOMAIN = ('undefined' != typeof window && window.location.hostname && '.' + window.location.hostname.replace(/^www\./, '')) || void 0;
@@ -3758,16 +3778,21 @@
 									try {
 										if (Array.isArray(storedProducts)) return storedProducts;
 									} catch {
-										this.setLocalStorageItem(CART_KEY, []), this.setCookie(CART_KEY, '', 'Lax', 0, COOKIE_DOMAIN);
+										window?.localStorage.removeItem(CART_KEY), this.setCookie(CART_KEY, '', 'Lax', 0, COOKIE_DOMAIN);
 									}
 									return [];
 								},
 								set: (products) => {
-									const currentCartProducts = this.storage.cart.get();
-									this.setLocalStorageItem(CART_KEY, products);
+									const currentCartProducts = this.storage.cart.get(),
+										stringifiedProducts = JSON.stringify(products);
+									try {
+										this.setLocalStorageItem(CART_KEY, products);
+									} catch (e) {
+										sendStorageError(e, this, CART_KEY, stringifiedProducts);
+									}
 									const storedProductsCookie = products.map((product) => this.getProductId(product)).join(',');
 									this.setCookie(CART_KEY, storedProductsCookie, 'Lax', 0, COOKIE_DOMAIN);
-									JSON.stringify(currentCartProducts) !== JSON.stringify(products) && this.sendPreflight();
+									JSON.stringify(currentCartProducts) !== stringifiedProducts && this.sendPreflight();
 								},
 								add: (products) => {
 									if (products.length) {
@@ -3823,7 +3848,7 @@
 									try {
 										if (Array.isArray(storedItems)) return storedItems;
 									} catch {
-										this.setLocalStorageItem(VIEWED_KEY, ''), this.setCookie(VIEWED_KEY, '', 'Lax', 47304e6, COOKIE_DOMAIN);
+										window?.localStorage.removeItem(VIEWED_KEY), this.setCookie(VIEWED_KEY, '', 'Lax', 47304e6, COOKIE_DOMAIN);
 									}
 									return [];
 								},
@@ -3831,11 +3856,16 @@
 									const currentViewedItems = this.storage.viewed.get(),
 										normalizedItems = products
 											.map((item) => ({ sku: item.sku, uid: item.uid, childUid: item.childUid, childSku: item.childSku }))
-											.slice(0, 20);
-									this.setLocalStorageItem(VIEWED_KEY, normalizedItems);
+											.slice(0, 20),
+										stringifiedNormalizedItems = JSON.stringify(normalizedItems);
+									try {
+										this.setLocalStorageItem(VIEWED_KEY, normalizedItems);
+									} catch (e) {
+										sendStorageError(e, this, VIEWED_KEY, stringifiedNormalizedItems);
+									}
 									const storedProductsCookie = normalizedItems.map((item) => this.getProductId(item)).join(',');
 									this.setCookie(VIEWED_KEY, storedProductsCookie, 'Lax', 47304e6, COOKIE_DOMAIN);
-									JSON.stringify(currentViewedItems) !== JSON.stringify(normalizedItems) && this.sendPreflight();
+									JSON.stringify(currentViewedItems) !== stringifiedNormalizedItems && this.sendPreflight();
 								},
 								add: (products) => {
 									if (products.length) {
@@ -4090,7 +4120,7 @@
 						this.globals.currency && this.setCurrency(this.globals.currency);
 				}
 				getCookie(name) {
-					if ('undefined' != typeof window) {
+					if ('undefined' != typeof window && featureFlags_cookies) {
 						const cookieName = name + '=',
 							cookiesList = window.document.cookie.split(';');
 						for (let i = 0; i < cookiesList.length; i++) {
@@ -4103,32 +4133,51 @@
 					return '';
 				}
 				setCookie(name, value, samesite, expiration, domain) {
-					let cookie = `${name}=${encodeURIComponent(value)};SameSite=${samesite};path=/;`;
-					if ((('undefined' != typeof window && 'http:' == window.location.protocol) || (cookie += 'Secure;'), -1 === expiration))
-						cookie += 'expires=Thu, 01 Jan 1970 00:00:00 GMT;';
-					else if (expiration) {
-						const d = new Date();
-						d.setTime(d.getTime() + expiration), (cookie += `expires=${d.toUTCString()};`);
-					}
-					domain && (cookie += `domain=${domain};`), 'undefined' != typeof window && (window.document.cookie = cookie);
+					if (featureFlags_cookies)
+						try {
+							const secureString = 'https:' == window.location.protocol ? 'Secure;' : '',
+								sameSiteString = 'SameSite=' + (samesite || 'Lax') + ';';
+							let expiresString = '';
+							if (expiration) {
+								const d = new Date();
+								d.setTime(d.getTime() + expiration), (expiresString = 'expires=' + d.toUTCString() + ';');
+							}
+							const valueString = encodeURIComponent(value) + ';';
+							if (domain)
+								window.document.cookie = name + '=' + valueString + expiresString + sameSiteString + secureString + 'path=/; domain=' + domain;
+							else {
+								const host = window?.location?.hostname;
+								if (host && 1 !== host.split('.').length) {
+									const domainParts = host.split('.');
+									domainParts.shift(),
+										(domain = '.' + domainParts.join('.')),
+										(window.document.cookie = name + '=' + valueString + expiresString + sameSiteString + secureString + 'path=/; domain=' + domain),
+										(null != this.getCookie(name) && this.getCookie(name) == value) ||
+											((domain = '.' + host),
+											(window.document.cookie =
+												name + '=' + valueString + expiresString + sameSiteString + secureString + 'path=/; domain=' + domain));
+								} else window.document.cookie = name + '=' + valueString + expiresString + sameSiteString + secureString + 'path=/';
+							}
+						} catch (e) {
+							console.error(`Failed to set '${name}' cookie:`, e);
+						}
 				}
 				getLocalStorageItem(name) {
-					if ('undefined' != typeof window) {
+					if ('undefined' != typeof window && featureFlags_storage) {
 						const rawData = window.localStorage?.getItem(name) || '';
 						try {
 							const data = JSON.parse(rawData);
 							if (data && data.value) return data.value;
-							this.setLocalStorageItem(name, '');
-						} catch (e) {}
+							window.localStorage.removeItem(name);
+						} catch {}
 					}
 				}
 				setLocalStorageItem(name, value) {
-					if ('undefined' != typeof window)
+					if ('undefined' != typeof window && featureFlags_storage)
 						try {
 							window.localStorage.setItem(name, JSON.stringify({ value }));
 						} catch (e) {
-							console.warn(`something went wrong setting ${name} to local storage`),
-								'QuotaExceededError' === e.name && this.events.error.snap({ data: { message: 'QuotaExceededError', details: { key: name, value } } });
+							throw (console.warn(`Something went wrong setting '${name}' to local storage:`, e), e);
 						}
 				}
 				queueRequest(request) {
@@ -4173,19 +4222,28 @@
 					};
 					return this.currency.code && (context.currency = { ...this.currency }), context;
 				}
-				getStoredId(key, expiration) {
+				getStoredId(key, storageKey, expiration) {
+					const keys = ['userId', 'sessionId'];
 					let uuid = '',
 						storedCookieValue = '';
 					try {
-						storedCookieValue = this.getCookie(key);
-						const data = this.getLocalStorageItem(key);
+						storedCookieValue = this.getCookie(storageKey);
+						const data = this.getLocalStorageItem(storageKey);
 						data.timestamp && new Date(data.timestamp).getTime() < Date.now() - expiration
 							? ((uuid = this.generateId()), (this.attribution = void 0))
 							: (uuid = data.value);
-					} catch (_) {
+					} catch {
 					} finally {
 						const data = { value: storedCookieValue || uuid || this.generateId(), timestamp: this.getTimestamp() };
-						return this.setLocalStorageItem(key, data), this.setCookie(key, data.value, 'Lax', expiration, COOKIE_DOMAIN), data.value;
+						keys.includes(key) && (this[key] = data.value),
+							this.setCookie(storageKey, data.value, 'Lax', -1, COOKIE_DOMAIN),
+							this.setCookie(storageKey, data.value, 'Lax', expiration);
+						try {
+							this.setLocalStorageItem(storageKey, data);
+						} catch (e) {
+							sendStorageError(e, this, storageKey, data.value);
+						}
+						return data.value;
 					}
 				}
 				getPageLoadId() {
@@ -4197,40 +4255,40 @@
 						const { href, value, timestamp } = pageLoadData;
 						href === currentHref && value && timestamp && new Date(timestamp).getTime() > Date.now() - 1e4 && (pageLoadId = value);
 					}
-					return (
-						this.setLocalStorageItem('ssPageLoadId', { href: currentHref, value: pageLoadId, timestamp: this.getTimestamp() }),
-						(this.pageLoadId = pageLoadId),
-						pageLoadId
-					);
+					this.pageLoadId = pageLoadId;
+					try {
+						this.setLocalStorageItem('ssPageLoadId', { href: currentHref, value: pageLoadId, timestamp: this.getTimestamp() });
+					} catch (e) {
+						sendStorageError(e, this, 'ssPageLoadId', pageLoadId);
+					}
+					return pageLoadId;
 				}
 				getUserId() {
-					try {
-						const value = this.getStoredId('ssUserId', 47304e6);
-						return (this.userId = value), this.userId;
-					} catch (e) {
-						return console.error('Failed to get user id:', e), '';
-					}
+					return this.userId || this.getStoredId('userId', 'ssUserId', 47304e6);
 				}
 				getSessionId() {
-					const value = this.getStoredId('ssSessionId', 18e5);
-					return (this.sessionId = value), this.sessionId;
+					return this.sessionId || this.getStoredId('sessionId', 'ssSessionId', 18e5);
 				}
 				getShopperId() {
-					let shopperId = null;
 					try {
-						(shopperId = this.getCookie('ssShopperId') || this.getLocalStorageItem('ssShopperId')), (this.shopperId = shopperId);
+						const cookieValue = this.getCookie('ssShopperId'),
+							storageValue = this.getLocalStorageItem('ssShopperId'),
+							shopperId = cookieValue || (storageValue ? '' + storageValue : void 0);
+						shopperId && (this.shopperId = shopperId);
 					} catch {}
 					return this.shopperId || '';
 				}
 				setShopperId(shopperId) {
 					if (!shopperId) return;
-					return this.getShopperId() !== shopperId
-						? ((this.shopperId = shopperId),
-						  this.setCookie('ssShopperId', shopperId, 'Lax', 47304e6, COOKIE_DOMAIN),
-						  this.setLocalStorageItem('ssShopperId', shopperId),
-						  this.sendPreflight(),
-						  this.shopperId)
-						: void 0;
+					if (this.getShopperId() !== shopperId) {
+						(this.shopperId = '' + shopperId), this.setCookie('ssShopperId', this.shopperId, 'Lax', 47304e6, COOKIE_DOMAIN);
+						try {
+							this.setLocalStorageItem('ssShopperId', this.shopperId);
+						} catch (e) {
+							sendStorageError(e, this, 'ssShopperId', this.shopperId);
+						}
+						return this.sendPreflight(), this.shopperId;
+					}
 				}
 				getAttribution() {
 					let attribution = [],
@@ -4252,13 +4310,16 @@
 							const [type, id] = decodeURIComponent(urlAttribution).split(':');
 							type && id && !attribution.find((attr) => attr.type === type && attr.id === id) && attribution.unshift({ type, id });
 						} catch {}
-					if (attribution.length)
-						return (
-							this.setCookie('ssAttribution', JSON.stringify(attribution), 'Lax', 18e5, COOKIE_DOMAIN),
-							this.setLocalStorageItem('ssAttribution', attribution),
-							(this.attribution = attribution),
-							[...attribution]
-						);
+					if (attribution.length) {
+						const stringifiedAttribution = JSON.stringify(attribution);
+						this.setCookie('ssAttribution', stringifiedAttribution, 'Lax', 18e5, COOKIE_DOMAIN);
+						try {
+							this.setLocalStorageItem('ssAttribution', attribution);
+						} catch (e) {
+							sendStorageError(e, this, 'ssAttribution', stringifiedAttribution);
+						}
+						return (this.attribution = attribution), [...attribution];
+					}
 				}
 				generateId() {
 					return esm_browser_v4();
@@ -4383,6 +4444,9 @@
 							(value += `||matchType=${searchSchema.data.matchType || ''}`);
 				}
 				return value;
+			}
+			function sendStorageError(e, beacon, storageKey, value) {
+				'QuotaExceededError' === e.name && beacon.events.error.snap({ data: { message: 'QuotaExceededError', details: { key: storageKey, value } } });
 			}
 		},
 		'../../node_modules/@storybook/addon-actions/dist/esm/index.js': (module, __webpack_exports__, __webpack_require__) => {
@@ -63631,4 +63695,4 @@
 		},
 	},
 ]);
-//# sourceMappingURL=394.f6e5e095.iframe.bundle.js.map
+//# sourceMappingURL=122.7cf2eb40.iframe.bundle.js.map
