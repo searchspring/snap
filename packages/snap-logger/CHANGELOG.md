@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.69.2](https://github.com/searchspring/snap/compare/v0.69.1...v0.69.2) (2025-11-04)
+
+**Note:** Version bump only for package @searchspring/snap-logger
+
+## [0.69.1](https://github.com/searchspring/snap/compare/v0.69.0...v0.69.1) (2025-10-23)
+
+**Note:** Version bump only for package @searchspring/snap-logger
+
+# [0.69.0](https://github.com/searchspring/snap/compare/v0.68.0...v0.69.0) (2025-10-16)
+
+**Note:** Version bump only for package @searchspring/snap-logger
+
 # [0.68.0](https://github.com/searchspring/snap/compare/v0.67.5...v0.68.0) (2025-08-18)
 
 **Note:** Version bump only for package @searchspring/snap-logger

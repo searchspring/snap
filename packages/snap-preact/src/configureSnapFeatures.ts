@@ -63,7 +63,13 @@ function configureIntegratedSpellCorrection(config: SnapConfig) {
 
 function configureTracking(config: SnapConfig) {
 	// Searchspring's Shopify Web Pixel App compatibility
-	const webPixel = window.sessionStorage?.getItem(SHOPIFY_WEBPIXEL_STORAGE_KEY);
+	let webPixel;
+	try {
+		webPixel = window.sessionStorage?.getItem(SHOPIFY_WEBPIXEL_STORAGE_KEY);
+	} catch {
+		// storage not enabled
+	}
+
 	if (webPixel) {
 		try {
 			const webPixelData = JSON.parse(webPixel);
@@ -76,6 +82,8 @@ function configureTracking(config: SnapConfig) {
 				config.tracker.config = config.tracker.config || {};
 				config.tracker.config.doNotTrack = (config.tracker.config.doNotTrack || []).concat(doNotTrack);
 			}
-		} catch (e) {}
+		} catch {
+			// storage not enabled
+		}
 	}
 }

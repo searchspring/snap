@@ -6,6 +6,9 @@ Renders a native or custom checkbox.
 - Icon
 
 ## Usage
+```jsx
+import { Checkbox } from '@searchspring/snap-preact-components';
+```
 
 ### native
 The `native` prop will render an `<input type='checkbox'>` element.

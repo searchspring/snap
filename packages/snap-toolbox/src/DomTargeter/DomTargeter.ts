@@ -12,7 +12,7 @@ export type Target = {
 	[any: string]: unknown;
 };
 
-export type OnTarget = (target: Target, elem: Element, originalElem?: Element) => void;
+export type OnTarget = (target: Target, elem: Element, originalElem?: Element) => void | Promise<void>;
 
 let globallyTargetedElems: Array<Element> = [];
 export class DomTargeter {
@@ -105,38 +105,47 @@ export class DomTargeter {
 			return elems.map((elem) => ({ target, elem }));
 		});
 
-		const errors: string[] = [];
-
-		targetElemPairs.forEach(async ({ target, elem }) => {
-			if (target.inject) {
-				try {
+		for (const { target, elem } of targetElemPairs) {
+			try {
+				if (target.inject) {
 					const injectedElem = this.inject(elem, target);
 					this.targetedElems = this.targetedElems.concat(elem);
 
-					await this.onTarget(target, injectedElem, elem);
-				} catch (e) {
-					errors.push(String(e));
+					// handle both sync and async onTarget functions
+					const result = this.onTarget(target, injectedElem, elem);
+					if (result && typeof result.then === 'function') {
+						// async function - handle promise
+						result.catch((error) => {
+							console.error('DomTargeter onTarget async failure:', error);
+						});
+					}
+				} else {
+					// empty target selector by default
+					target.emptyTarget = target.emptyTarget ?? true;
+					if (target.emptyTarget) while (elem.firstChild && elem.removeChild(elem.firstChild));
+
+					// handle both sync and async onTarget functions
+					const result = this.onTarget(target, elem);
+					if (result && typeof result.then === 'function') {
+						// async function - handle promise
+						result.catch((error) => {
+							console.error('DomTargeter onTarget async failure:', error);
+						});
+					}
 				}
-			} else {
-				// empty target selector by default
-				target.emptyTarget = target.emptyTarget ?? true;
-				if (target.emptyTarget) while (elem.firstChild && elem.removeChild(elem.firstChild));
 
-				await this.onTarget(target, elem);
+				// unhide target
+				target.hideTarget && this.unhideTarget(target.selector);
+
+				// remove styles by default
+				target.unsetTargetMinHeight = target.unsetTargetMinHeight ?? true;
+				if (target.unsetTargetMinHeight && (elem as HTMLElement).style.minHeight) {
+					(elem as HTMLElement).style.minHeight = '';
+				}
+			} catch (err) {
+				// log the retarget failure but continue with other elements
+				console.error('DomTargeter retarget failure:', err);
 			}
-
-			// unhide target
-			target.hideTarget && this.unhideTarget(target.selector);
-
-			// remove styles by default
-			target.unsetTargetMinHeight = target.unsetTargetMinHeight ?? true;
-			if (target.unsetTargetMinHeight && (elem as HTMLElement).style.minHeight) {
-				(elem as HTMLElement).style.minHeight = '';
-			}
-		});
-
-		if (errors.length) {
-			throw new Error(errors.reduce((acc, err) => (acc += err + '\n'), '\n'));
 		}
 	}
 

@@ -10,6 +10,9 @@ Renders a page of results utilizing `<Result />` components.
 - ResultTracker
 
 ## Usage
+```jsx
+import { Results } from '@searchspring/snap-preact-components';
+```
 
 ### controller
 The `controller` prop specifies a reference to the search controller.

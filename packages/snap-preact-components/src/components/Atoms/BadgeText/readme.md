@@ -3,6 +3,9 @@
 Renders a text badge. It is expected to be used with `CalloutBadge` and `OverlayBadge` components.
 
 ## Usage
+```jsx
+import { BadgeText } from '@searchspring/snap-preact-components';
+```
 
 ### value
 The required `value` prop specifies the badge text contents.
