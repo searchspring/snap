@@ -548,17 +548,10 @@ export class VariantSelection {
 					const thumbnailImageUrl = variant.mappings.core?.thumbnailImageUrl;
 					let disabledValue = false;
 
-					unAvailableVariants.forEach((vrnt) => {
-						const matches = [];
-						Object.keys(vrnt.options).forEach((field) => {
-							if (variant.options[field].value == vrnt.options[field].value) {
-								matches.push(field);
-							}
+					disabledValue = unAvailableVariants.some((vrnt) => {
+						return Object.keys(vrnt.options).every((field) => {
+							return variant.options[field].value == vrnt.options[field].value;
 						});
-
-						if (matches.length == Object.keys(vrnt.options).length) {
-							disabledValue = true;
-						}
 					});
 
 					const mappedValue: {
