@@ -354,7 +354,7 @@ export class Variants {
 
 			// create variants objects
 			this.data = variantData
-				.filter((variant) => variant.attributes.available !== false)
+				.filter((variant) => this.config?.showDisabledSelections || variant.attributes.available !== false)
 				.map((variant) => {
 					// normalize price fields ensuring they are numbers
 					if (variant.mappings.core?.price) {
@@ -530,6 +530,7 @@ export class VariantSelection {
 		const selectedSelections = variants.selections.filter((selection) => selection.field != this.field && selection.selected);
 
 		let availableVariants = variants.data.filter((variant) => variant.available);
+		const unAvailableVariants = variants.data.filter((variant) => !variant.available);
 
 		// loop through selectedSelections and remove products that do not match
 		for (const selectedSelection of selectedSelections) {
@@ -545,8 +546,24 @@ export class VariantSelection {
 					const value = variant.options[this.field].value;
 
 					const thumbnailImageUrl = variant.mappings.core?.thumbnailImageUrl;
+					let disabledValue = false;
+
+					unAvailableVariants.forEach((vrnt) => {
+						const matches = [];
+						Object.keys(vrnt.options).forEach((field) => {
+							if (variant.options[field].value == vrnt.options[field].value) {
+								matches.push(field);
+							}
+						});
+
+						if (matches.length == Object.keys(vrnt.options).length) {
+							disabledValue = true;
+						}
+					});
+
 					const mappedValue: {
 						available: boolean;
+						disabled?: boolean;
 						value: string;
 						label: string;
 						thumbnailImageUrl?: string;
@@ -559,6 +576,7 @@ export class VariantSelection {
 						available: Boolean(
 							availableVariants.some((availableVariant) => availableVariant.options[this.field].value == variant.options[this.field].value)
 						),
+						disabled: disabledValue,
 					};
 
 					if (this.config.thumbnailBackgroundImages) {
