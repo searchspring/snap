@@ -497,6 +497,7 @@ export type VariantSelectionValue = {
 	backgroundImageUrl?: string;
 	background?: string;
 	available?: boolean;
+	disabled?: boolean;
 };
 
 export class VariantSelection {
@@ -528,9 +529,7 @@ export class VariantSelection {
 	public refineValues(variants: Variants) {
 		// current selection should only consider OTHER selections for availability
 		const selectedSelections = variants.selections.filter((selection) => selection.field != this.field && selection.selected);
-
 		let availableVariants = variants.data.filter((variant) => variant.available);
-		const unAvailableVariants = variants.data.filter((variant) => !variant.available);
 
 		// loop through selectedSelections and remove products that do not match
 		for (const selectedSelection of selectedSelections) {
@@ -546,12 +545,11 @@ export class VariantSelection {
 					const value = variant.options[this.field].value;
 
 					const thumbnailImageUrl = variant.mappings.core?.thumbnailImageUrl;
-					let disabledValue = false;
 
-					disabledValue = unAvailableVariants.some((vrnt) => {
-						return Object.keys(vrnt.options).every((field) => {
-							return variant.options[field].value == vrnt.options[field].value;
-						});
+					// A value should only be disabled if there are NO available variants in the entire dataset that have this value for the current field
+					const allAvailableVariants = variants.data.filter((variant) => variant.available);
+					const disabledValue = !allAvailableVariants.some((availableVariant) => {
+						return availableVariant.options[this.field].value === value;
 					});
 
 					const mappedValue: {
