@@ -552,15 +552,7 @@ export class VariantSelection {
 						return availableVariant.options[this.field].value === value;
 					});
 
-					const mappedValue: {
-						available: boolean;
-						disabled?: boolean;
-						value: string;
-						label: string;
-						thumbnailImageUrl?: string;
-						background?: string;
-						backgroundImageUrl?: string;
-					} = {
+					const mappedValue: VariantSelectionValue = {
 						value: value,
 						label: value,
 						thumbnailImageUrl: thumbnailImageUrl,
