@@ -354,7 +354,7 @@ export class Variants {
 
 			// create variants objects
 			this.data = variantData
-				.filter((variant) => this.config?.showDisabledSelections || variant.attributes.available !== false)
+				.filter((variant) => this.config?.showDisabledSelectionValues || variant.attributes.available !== false)
 				.map((variant) => {
 					// normalize price fields ensuring they are numbers
 					if (variant.mappings.core?.price) {

@@ -481,7 +481,7 @@ describe('SearchResultStore', () => {
 			});
 		});
 
-		it('can use showDisabledSelections to show all variants', () => {
+		it('can use showDisabledSelectionValues to show all variants', () => {
 			const searchData = mockData.updateConfig({ siteId: 'z7h1jh' }).searchMeta('variants');
 
 			const variantSearchConfig = {
@@ -489,7 +489,7 @@ describe('SearchResultStore', () => {
 				settings: {
 					variants: {
 						field: 'ss_variants',
-						showDisabledSelections: true,
+						showDisabledSelectionValues: true,
 					},
 				},
 			};
@@ -1315,8 +1315,8 @@ describe('SearchResultStore', () => {
 
 				const mask = new ProductMask();
 
-				// Enable showDisabledSelections to include variant selections with no available options
-				const config = { field: 'ss_variants', showDisabledSelections: true };
+				// Enable showDisabledSelectionValues to include variant selections with no available options
+				const config = { field: 'ss_variants', showDisabledSelectionValues: true };
 				const variants = new Variants(mockVariantData, mask, config);
 
 				const colorSelection = variants.selections.find((selection) => selection.field === 'color');
@@ -1352,7 +1352,7 @@ describe('SearchResultStore', () => {
 				expect(largeSize?.disabled).toBe(true);
 			});
 
-			it('sets disabled to true when no available variants have that value and can show unavailable selections with showDisabledSelections', () => {
+			it('sets disabled to true when no available variants have that value and can show unavailable selections with showDisabledSelectionValues', () => {
 				// Mock variant data where some values have no available variants
 				const mockVariantData: VariantData[] = [
 					{
@@ -1390,8 +1390,8 @@ describe('SearchResultStore', () => {
 				];
 
 				const mask = new ProductMask();
-				// Enable showDisabledSelections to include variant selections with no available options
-				const config = { field: 'ss_variants', showDisabledSelections: true };
+				// Enable showDisabledSelectionValues to include variant selections with no available options
+				const config = { field: 'ss_variants', showDisabledSelectionValues: true };
 				const variants = new Variants(mockVariantData, mask, config);
 
 				const colorSelection = variants.selections.find((selection) => selection.field === 'color');
