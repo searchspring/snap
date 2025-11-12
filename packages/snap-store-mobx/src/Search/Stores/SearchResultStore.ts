@@ -354,7 +354,7 @@ export class Variants {
 
 			// create variants objects
 			this.data = variantData
-				.filter((variant) => variant.attributes.available !== false)
+				.filter((variant) => this.config?.showDisabledSelectionValues || variant.attributes.available !== false)
 				.map((variant) => {
 					// normalize price fields ensuring they are numbers
 					if (variant.mappings.core?.price) {
@@ -497,6 +497,7 @@ export type VariantSelectionValue = {
 	backgroundImageUrl?: string;
 	background?: string;
 	available?: boolean;
+	disabled?: boolean;
 };
 
 export class VariantSelection {
@@ -528,7 +529,6 @@ export class VariantSelection {
 	public refineValues(variants: Variants) {
 		// current selection should only consider OTHER selections for availability
 		const selectedSelections = variants.selections.filter((selection) => selection.field != this.field && selection.selected);
-
 		let availableVariants = variants.data.filter((variant) => variant.available);
 
 		// loop through selectedSelections and remove products that do not match
@@ -545,20 +545,21 @@ export class VariantSelection {
 					const value = variant.options[this.field].value;
 
 					const thumbnailImageUrl = variant.mappings.core?.thumbnailImageUrl;
-					const mappedValue: {
-						available: boolean;
-						value: string;
-						label: string;
-						thumbnailImageUrl?: string;
-						background?: string;
-						backgroundImageUrl?: string;
-					} = {
+
+					// A value should only be disabled if there are NO available variants in the entire dataset that have this value for the current field
+					const allAvailableVariants = variants.data.filter((variant) => variant.available);
+					const disabledValue = !allAvailableVariants.some((availableVariant) => {
+						return availableVariant.options[this.field].value === value;
+					});
+
+					const mappedValue: VariantSelectionValue = {
 						value: value,
 						label: value,
 						thumbnailImageUrl: thumbnailImageUrl,
 						available: Boolean(
 							availableVariants.some((availableVariant) => availableVariant.options[this.field].value == variant.options[this.field].value)
 						),
+						disabled: disabledValue,
 					};
 
 					if (this.config.thumbnailBackgroundImages) {

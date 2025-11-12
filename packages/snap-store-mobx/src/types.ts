@@ -24,6 +24,7 @@ export type VariantConfig = {
 	options?: {
 		[optionField: string]: VariantOptionConfig;
 	};
+	showDisabledSelectionValues?: boolean;
 };
 
 export type VariantOptionConfig = {
