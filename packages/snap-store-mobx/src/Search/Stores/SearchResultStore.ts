@@ -174,6 +174,7 @@ export class Product {
 	public children?: Array<Child> = [];
 	public badges: Badges;
 
+	public bundleSeed: boolean | undefined;
 	public quantity = 1;
 	public mask = new ProductMask();
 	public variants?: Variants;
@@ -190,6 +191,11 @@ export class Product {
 		this.mappings = result.mappings!;
 		this.position = position;
 		this.badges = new Badges(result, metaData);
+		// @ts-ignore - need to add bundleSeed to snapi-types
+		if (result.bundleSeed) {
+			// @ts-ignore - need to add bundleSeed to snapi-types
+			this.bundleSeed = Boolean(result.bundleSeed);
+		}
 		const variantsField = (config as SearchStoreConfig)?.settings?.variants?.field;
 		if (config && variantsField && this.attributes && this.attributes[variantsField]) {
 			try {
