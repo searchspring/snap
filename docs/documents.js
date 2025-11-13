@@ -489,6 +489,29 @@ var documents = [
 						type: 'markdown',
 						url: './docs/BUILD_DEPLOY_INTEGRATION.md',
 						searchable: true,
+						links: [
+							{
+								label: 'Shopify',
+								route: '/build-deploy-integration-shopify',
+								type: 'markdown',
+								url: './docs/BUILD_DEPLOY_INTEGRATION_SHOPIFY.md',
+								searchable: true,
+							},
+							{
+								label: 'BigCommerce',
+								route: '/build-deploy-integration-bigcommerce',
+								type: 'markdown',
+								url: './docs/BUILD_DEPLOY_INTEGRATION_BIGCOMMERCE.md',
+								searchable: true,
+							},
+							{
+								label: 'Magento 2',
+								route: '/build-deploy-integration-magento2',
+								type: 'markdown',
+								url: './docs/BUILD_DEPLOY_INTEGRATION_MAGENTO2.md',
+								searchable: true,
+							},
+						],
 					},
 					{
 						label: 'QA Checklist',
