@@ -22,6 +22,7 @@ The `SearchController` is used when making queries to the API `search` endpoint.
 | settings.history.url | allows for adjust the root URL for history store terms (default is relative URLs) | ➖ |   | 
 | settings.pagination.pageSizeOptions | setting to change the page size options available | ➖ |   | 
 | settings.variants.field | used to set the field in which to grab the variant data from | ➖ |   | 
+| settings.variants.showDisabledSelectionValues | determines if completely out of stock (disabled) options should appear in variant selections | false |   | 
 | settings.variants.realtime.enabled | enable real time variant updates | ➖ |   | 
 | settings.variants.realtime.filters | specify which filters to use to determine which results are updated | ➖ |   | 
 | settings.variants.options | object keyed by option individual option field values for configuration of any option settings  | ➖ |   | 

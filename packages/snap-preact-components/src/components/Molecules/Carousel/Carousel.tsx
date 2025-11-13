@@ -1,5 +1,5 @@
 /** @jsx jsx */
-import { h, Fragment } from 'preact';
+import { h, Fragment, ComponentChild } from 'preact';
 import { useRef, useEffect } from 'preact/hooks';
 
 import { jsx, css } from '@emotion/react';
@@ -447,7 +447,11 @@ export const Carousel = observer((properties: CarouselProps): JSX.Element => {
 					}}
 				>
 					{children.map((child) => {
-						return <SwiperSlide>{child}</SwiperSlide>;
+						if (child != null) {
+							return <SwiperSlide>{child}</SwiperSlide>;
+						} else {
+							return null;
+						}
 					})}
 				</Swiper>
 
@@ -486,7 +490,7 @@ export interface CarouselProps extends ComponentProps {
 	onInit?: (swiper: SwiperTypes) => void;
 	onAfterInit?: (swiper: SwiperTypes) => void;
 	modules?: any[];
-	children: JSX.Element[];
+	children: ComponentChild[];
 }
 
 interface CarouselSubProps {
