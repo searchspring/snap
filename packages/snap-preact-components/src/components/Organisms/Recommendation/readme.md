@@ -49,6 +49,13 @@ The `title` prop specifies the carousel title
 <Recommendation controller={controller} title={'Recommended Products'} />
 ```
 
+### description
+The `description` prop specifies the carousel description
+
+```jsx
+<Recommendation controller={controller} description={'Recommended Products are so awesome!'} />
+```
+
 ### pagination
 The `pagination` prop specifies if the carousel should display pagination dots. 
 

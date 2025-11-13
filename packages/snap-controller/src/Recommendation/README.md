@@ -14,6 +14,7 @@ The `RecommendationController` is used when making queries to the API `recommend
 | globals | keys defined here will be passed to the API request (can overwrite global config)| ➖ |   |
 | settings.searchOnPageShow | causes a search to be conducted when returning using browser back/forward cache | true |   | 
 | settings.variants.field | used to set the field in which to grab the variant data from | ➖ |   | 
+| settings.variants.showDisabledSelectionValues | determines if completely out of stock (disabled) options should appear in variant selections | false |   | 
 | settings.variants.realtime.enabled | enable real time variant updates | ➖ |   | 
 | settings.variants.realtime.filters | specify which filters to use to determine which results are updated | ➖ |   | 
 | settings.variants.options | object keyed by option individual option field values for configuration of any option settings  | ➖ |   | 
