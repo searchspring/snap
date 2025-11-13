@@ -469,10 +469,10 @@ export function createSnapConfig(templateConfig: SnapTemplatesConfig, templatesS
 				},
 			},
 			default: {
-				SnapTemplatesDefaultCarousel: {
+				SnapTemplatesRecommendationCarousel: {
 					component: 'Recommendation',
 				},
-				SnapTemplatesDefaultGrid: {
+				SnapTemplatesRecommendationGrid: {
 					component: 'RecommendationGrid',
 				},
 			},
