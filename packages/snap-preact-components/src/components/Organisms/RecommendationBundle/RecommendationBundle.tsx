@@ -153,8 +153,10 @@ export const RecommendationBundle = observer((properties: RecommendationBundlePr
 		ctaButtonSuccessText: 'Bundle Added!',
 		ctaButtonSuccessTimeout: 2000,
 		ctaInline: true,
-		title: properties.controller?.store?.profile?.display?.templateParameters?.title,
-		description: properties.controller?.store?.profile?.display?.templateParameters?.description,
+
+		/* TODO: Cannot use default values due to breaking changes - must change in 1.0 */
+		// title: properties.controller?.store?.profile?.display?.templateParameters?.title,
+		// description: properties.controller?.store?.profile?.display?.templateParameters?.description,
 
 		// global theme
 		...globalTheme?.components?.recommendationBundle,
