@@ -41,7 +41,6 @@ const CSS = {
 
 			'.ss__recommendation-bundle__wrapper__cta': {
 				width: vertical ? '100%' : `${!ctaInline ? '100%' : `calc(100% / ${(carouselEnabled ? slidesPerView : limit) + 1})`}`,
-				flexShrink: 0,
 				textAlign: 'center',
 
 				'& .ss__recommendation-bundle__wrapper__cta__subtotal__prices': {
