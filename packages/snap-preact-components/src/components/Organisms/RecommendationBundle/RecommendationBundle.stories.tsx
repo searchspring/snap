@@ -260,7 +260,7 @@ export default {
 		lazyRender: {
 			description: 'Lazy render settings object',
 			defaultValue: {
-				enabled: true,
+				enabled: false,
 				offset: '10%',
 			},
 			table: {

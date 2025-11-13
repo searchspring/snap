@@ -2,7 +2,7 @@
 import { h, Fragment } from 'preact';
 import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
-import { useRef, useEffect, useState } from 'preact/hooks';
+import { useRef, useEffect, useState, useMemo } from 'preact/hooks';
 import { observer } from 'mobx-react';
 import deepmerge from 'deepmerge';
 import { Carousel, CarouselProps as CarouselProps } from '../../Molecules/Carousel';
@@ -394,7 +394,7 @@ export const RecommendationBundle = observer((properties: RecommendationBundlePr
 		setIsVisible(true);
 	}
 
-	const GetResults = () => {
+	const renderedResults = useMemo(() => {
 		return resultsToRender.map((result, idx) => {
 			const isSeed = Boolean(result.bundleSeed);
 			const selected = selectedItems.findIndex((item) => item.id == result.id) > -1;
@@ -420,7 +420,7 @@ export const RecommendationBundle = observer((properties: RecommendationBundlePr
 				};
 			}
 			return !isSeed || ((seedInCarousel || carousel?.enabled == false) && isSeed && !hideSeed) ? (
-				<ResultTracker controller={controller} result={result} track={{ impression: Boolean(!isSeed) }}>
+				<ResultTracker key={result.id} controller={controller} result={result} track={{ impression: Boolean(!isSeed) }}>
 					<BundleSelector {...attributes}>
 						{resultComponent ? (
 							cloneWithProps(resultComponent, { result: result, seed: isSeed, selected, onProductSelect })
@@ -431,7 +431,18 @@ export const RecommendationBundle = observer((properties: RecommendationBundlePr
 				</ResultTracker>
 			) : null;
 		});
-	};
+	}, [
+		resultsToRender,
+		selectedItems,
+		hideCheckboxes,
+		separatorIconSeedOnly,
+		separatorIcon,
+		seedInCarousel,
+		hideSeed,
+		resultComponent,
+		props.theme,
+		seedText,
+	]);
 
 	return resultsToRender?.length ? (
 		<CacheProvider>
@@ -507,12 +518,12 @@ export const RecommendationBundle = observer((properties: RecommendationBundlePr
 											{...additionalProps}
 											{...displaySettings}
 											ref={carouselRef}
-											children={GetResults()}
+											children={renderedResults}
 										/>
 									</div>
 								</Fragment>
 							) : (
-								<>{...GetResults()}</>
+								<>{renderedResults}</>
 							)}
 
 							{ctaInline && (
