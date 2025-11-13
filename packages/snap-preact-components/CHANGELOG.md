@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.70.0](https://github.com/searchspring/snap/compare/v0.69.2...v0.70.0) (2025-11-13)
+
+### Bug Fixes
+
+- **preact-components/recommendationbundle:** removing default prop values for title and description ([4ea121d](https://github.com/searchspring/snap/commit/4ea121d788312dc0a138e3243089e3867b75841f))
+- **preact/components/recommendationbundle:** fixing impression tracking in bundles ([e42fa30](https://github.com/searchspring/snap/commit/e42fa3076869b6f742ed9f50fb5f2df2c0699daa))
+
+### Features
+
+- **preact/components/recommendationbundle:** api bundleSeed and refactor recommendationBundle ([28a32ce](https://github.com/searchspring/snap/commit/28a32ce34b9bf9f9a120572b006502a6c1ecbec6))
+- **preact/components/recommendations:** adding new description prop to both recs and bundles ([46888c7](https://github.com/searchspring/snap/commit/46888c75851b0156f202cb165229b90581f0a684))
+
 ## [0.69.2](https://github.com/searchspring/snap/compare/v0.69.1...v0.69.2) (2025-11-04)
 
 **Note:** Version bump only for package @searchspring/snap-preact-components

@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.70.0](https://github.com/searchspring/snap/compare/v0.69.2...v0.70.0) (2025-11-13)
+
+### Bug Fixes
+
+- **preact-components/recommendationbundle:** removing default prop values for title and description ([4ea121d](https://github.com/searchspring/snap/commit/4ea121d788312dc0a138e3243089e3867b75841f))
+- **preact/components/recommendationbundle:** fixing impression tracking in bundles ([e42fa30](https://github.com/searchspring/snap/commit/e42fa3076869b6f742ed9f50fb5f2df2c0699daa))
+- **searchresultstore:** bugfix for disabled variant selection logic ([0346817](https://github.com/searchspring/snap/commit/03468178b8c49d38cabaae74e3f14569c0186c1e))
+
+### Features
+
+- **preact/components/recommendationbundle:** api bundleSeed and refactor recommendationBundle ([28a32ce](https://github.com/searchspring/snap/commit/28a32ce34b9bf9f9a120572b006502a6c1ecbec6))
+- **preact/components/recommendations:** adding new description prop to both recs and bundles ([46888c7](https://github.com/searchspring/snap/commit/46888c75851b0156f202cb165229b90581f0a684))
+- **searchresultstore:** added config setting to showDisabledSelections for the variants ([918dee6](https://github.com/searchspring/snap/commit/918dee65f4ee323a1dcdd0d7aee34f7d5b0163db))
+
 ## [0.69.2](https://github.com/searchspring/snap/compare/v0.69.1...v0.69.2) (2025-11-04)
 
 **Note:** Version bump only for package @searchspring/snap
