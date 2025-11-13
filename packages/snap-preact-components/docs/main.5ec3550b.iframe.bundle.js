@@ -1,4 +1,4 @@
-/*! For license information please see main.c3781e18.iframe.bundle.js.LICENSE.txt */
+/*! For license information please see main.5ec3550b.iframe.bundle.js.LICENSE.txt */
 (self.webpackChunk_searchspring_snap_preact_components = self.webpackChunk_searchspring_snap_preact_components || []).push([
 	[792],
 	{
@@ -7778,7 +7778,9 @@
 												}
 											),
 											children.map(function (child) {
-												return (0, _emotion_react__WEBPACK_IMPORTED_MODULE_17__.Y)(swiper_react__WEBPACK_IMPORTED_MODULE_15__.qr, null, child);
+												return null != child
+													? (0, _emotion_react__WEBPACK_IMPORTED_MODULE_17__.Y)(swiper_react__WEBPACK_IMPORTED_MODULE_15__.qr, null, child)
+													: null;
 											})
 										),
 										(0, _emotion_react__WEBPACK_IMPORTED_MODULE_17__.Y)(
@@ -27819,6 +27821,7 @@
 				ResultTracker = __webpack_require__('./src/components/Trackers/ResultTracker/ResultTracker.tsx'),
 				_excluded = [
 					'title',
+					'description',
 					'controller',
 					'children',
 					'breakpoints',
@@ -27942,6 +27945,7 @@
 					}
 					var _props2 = props,
 						title = _props2.title,
+						description = _props2.description,
 						controller = _props2.controller,
 						children = _props2.children,
 						breakpoints = _props2.breakpoints,
@@ -28029,6 +28033,7 @@
 													RecommendationProfileTracker.l,
 													{ controller },
 													title && (0, emotion_react_browser_esm.Y)('h3', { className: 'ss__recommendation__title' }, title),
+													description && (0, emotion_react_browser_esm.Y)('h4', { className: 'ss__recommendation__description' }, description),
 													(0, emotion_react_browser_esm.Y)(
 														Carousel.FN,
 														Object.assign(
@@ -28206,6 +28211,17 @@
 							'code',
 							{ parentName: 'pre', className: 'language-jsx' },
 							"<Recommendation controller={controller} title={'Recommended Products'} />\n"
+						)
+					),
+					(0, esm.yg)('h3', { id: 'description' }, 'description'),
+					(0, esm.yg)('p', null, 'The ', (0, esm.yg)('inlineCode', { parentName: 'p' }, 'description'), ' prop specifies the carousel description'),
+					(0, esm.yg)(
+						'pre',
+						null,
+						(0, esm.yg)(
+							'code',
+							{ parentName: 'pre', className: 'language-jsx' },
+							"<Recommendation controller={controller} description={'Recommended Products are so awesome!'} />\n"
 						)
 					),
 					(0, esm.yg)('h3', { id: 'pagination' }, 'pagination'),
@@ -28770,6 +28786,11 @@
 							table: { type: { summary: 'string | JSX Element' }, defaultValue: { summary: '' } },
 							control: { type: 'text' },
 						},
+						description: {
+							description: 'recommendation description',
+							table: { type: { summary: 'string | JSX Element' }, defaultValue: { summary: '' } },
+							control: { type: 'text' },
+						},
 						loop: {
 							defaultValue: !0,
 							description: 'Recommendation pagination loops',
@@ -28893,7 +28914,6 @@
 				__webpack_require__.d(__webpack_exports__, { Default: () => Default, default: () => RecommendationBundle_stories });
 			__webpack_require__('../../node_modules/core-js/modules/es.object.assign.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.object.keys.js'),
-				__webpack_require__('../../node_modules/core-js/modules/es.array.reverse.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.promise.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.object.to-string.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.array.for-each.js'),
@@ -28917,13 +28937,14 @@
 				__webpack_require__('../../node_modules/core-js/modules/es.json.to-string-tag.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.object.create.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.object.get-prototype-of.js'),
-				__webpack_require__('../../node_modules/core-js/modules/es.object.set-prototype-of.js');
+				__webpack_require__('../../node_modules/core-js/modules/es.object.set-prototype-of.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.array.reverse.js');
 			var preact_module = __webpack_require__('../../node_modules/preact/dist/preact.module.js'),
 				blocks = __webpack_require__('./node_modules/@storybook/addon-docs/blocks.js'),
 				emotion_react_browser_esm =
-					(__webpack_require__('../../node_modules/core-js/modules/es.array.find-index.js'),
+					(__webpack_require__('../../node_modules/core-js/modules/es.array.filter.js'),
+					__webpack_require__('../../node_modules/core-js/modules/es.array.find-index.js'),
 					__webpack_require__('../../node_modules/core-js/modules/es.array.map.js'),
-					__webpack_require__('../../node_modules/core-js/modules/es.array.filter.js'),
 					__webpack_require__('../../node_modules/core-js/modules/es.array.index-of.js'),
 					__webpack_require__('../../node_modules/@emotion/react/dist/emotion-react.browser.esm.js')),
 				classnames = __webpack_require__('../../node_modules/classnames/index.js'),
@@ -29131,6 +29152,7 @@
 				useIntersection = __webpack_require__('./src/hooks/useIntersection.tsx'),
 				_excluded = [
 					'title',
+					'description',
 					'controller',
 					'breakpoints',
 					'results',
@@ -29219,7 +29241,11 @@
 						spaceBetween = _ref.spaceBetween,
 						ctaInline = _ref.ctaInline,
 						vertical = _ref.vertical,
-						separatorIcon = _ref.separatorIcon;
+						separatorIcon = _ref.separatorIcon,
+						hasSeed = _ref.hasSeed,
+						hideSeed = _ref.hideSeed,
+						carouselEnabled = _ref.carouselEnabled,
+						limit = _ref.limit;
 					return (0, emotion_react_browser_esm.AH)({
 						'.ss__recommendation-bundle__wrapper': { display: 'flex', maxWidth: '100%', margin: '0', padding: '0' },
 						'.ss__recommendation-bundle__wrapper__selector--seed': {
@@ -29230,13 +29256,15 @@
 							width: vertical ? '100%' : 'calc(100% / ' + (slidesPerView + (ctaInline ? 1 : 0)) + ')',
 						},
 						'.ss__recommendation-bundle__wrapper__cta': {
-							width: vertical ? '100%' : ctaInline ? 'calc(100% / ' + (slidesPerView + 1) + ')' : '100%',
+							width: vertical ? '100%' : ctaInline ? 'calc(100% / ' + ((carouselEnabled ? slidesPerView : limit) + 1) + ')' : '100%',
 							textAlign: 'center',
 							'& .ss__recommendation-bundle__wrapper__cta__subtotal__prices': { display: 'block' },
 						},
 						'.ss__recommendation-bundle__wrapper__carousel': {
 							boxSizing: 'border-box',
-							width: vertical ? '100%' : 'calc(calc(100% / ' + (slidesPerView + (ctaInline ? 1 : 0)) + ') * ' + (slidesPerView - 1) + ')',
+							width: vertical
+								? '100%'
+								: 'calc(calc(100% / ' + (slidesPerView + (ctaInline ? 1 : 0)) + ') * ' + (slidesPerView - (hasSeed && !hideSeed ? 1 : 0)) + ')',
 						},
 						'.ss__recommendation-bundle__wrapper--seed-in-carousel': {
 							'.ss__recommendation-bundle__wrapper__cta': { width: vertical ? '100%' : 'calc(100% / ' + (slidesPerView + (ctaInline ? 1 : 0)) + ')' },
@@ -29286,6 +29314,7 @@
 						_controller$store2,
 						_controller$store2$re,
 						_controller$store3,
+						_controller$store3$re,
 						_globalTheme$componen2,
 						_props3,
 						_globalTheme$componen3,
@@ -29339,6 +29368,7 @@
 					}
 					var _props2 = props,
 						title = _props2.title,
+						description = _props2.description,
 						controller = _props2.controller,
 						breakpoints = _props2.breakpoints,
 						results = _props2.results,
@@ -29397,7 +29427,16 @@
 						throw new Error("<RecommendationBundle> Component requires 'controller' prop with an instance of RecommendationController");
 					var resultsToRender =
 						results || (null === (_controller$store = controller.store) || void 0 === _controller$store ? void 0 : _controller$store.results);
-					limit && (resultsToRender = resultsToRender.slice(0, hideSeed ? limit + 1 : limit));
+					limit &&
+						(resultsToRender = resultsToRender.slice(
+							0,
+							hideSeed &&
+								resultsToRender.filter(function (result) {
+									return 1 == result.bundleSeed;
+								}).length
+								? limit + 1
+								: limit
+						));
 					var cartStore = controller.store.cart;
 					if (!cartStore) throw new Error("<RecommendationBundle> Component requires 'cartStore' to exist in the recommendation store");
 					if (
@@ -29415,10 +29454,21 @@
 							(0, emotion_react_browser_esm.Y)(preact_module.FK, null)
 						);
 					var seed = results
-							? results[0]
-							: null === (_controller$store3 = controller.store) || void 0 === _controller$store3
+							? results
+									.filter(function (result) {
+										return 1 == result.bundleSeed;
+									})
+									.pop()
+							: null === (_controller$store3 = controller.store) ||
+							  void 0 === _controller$store3 ||
+							  null === (_controller$store3$re = _controller$store3.results) ||
+							  void 0 === _controller$store3$re
 							? void 0
-							: _controller$store3.results[0],
+							: _controller$store3$re
+									.filter(function (result) {
+										return 1 == result.bundleSeed;
+									})
+									.pop(),
 						subProps = {
 							carousel: Object.assign(
 								{ loop, className: 'ss__recommendation__carousel' },
@@ -29441,10 +29491,28 @@
 							(null === (_props$carousel = props.carousel) || void 0 === _props$carousel ? void 0 : _props$carousel.slidesPerView) ||
 							props.slidesPerView;
 					slidesPerView ? resultsToRender.length < slidesPerView && (slidesPerView = resultsToRender.length) : (slidesPerView = 2);
-					var styling = {};
+					var hasSeed = Boolean(
+							resultsToRender.filter(function (result) {
+								return 1 == result.bundleSeed;
+							}).length
+						),
+						styling = {};
 					disableStyles
 						? style && (styling.css = [style])
-						: (styling.css = [CSS_recommendationBundle({ slidesPerView, spaceBetween, ctaInline, vertical, separatorIcon }), style]);
+						: (styling.css = [
+								CSS_recommendationBundle({
+									slidesPerView,
+									spaceBetween,
+									ctaInline,
+									vertical,
+									separatorIcon,
+									hasSeed,
+									hideSeed,
+									carouselEnabled,
+									limit,
+								}),
+								style,
+						  ]);
 					var _preSelectedCount = 'number' == typeof preselectedCount ? preselectedCount : carouselEnabled ? slidesPerView : resultsToRender.length;
 					(0, hooks_module.vJ)(
 						function () {
@@ -29462,24 +29530,28 @@
 						modifiedBreakpoints = Object.assign({}, breakpoints);
 					carouselEnabled &&
 						Object.keys(props.breakpoints).forEach(function (breakpoint) {
-							var _obj$carousel,
-								_obj$carousel2,
-								obj = props.breakpoints[breakpoint],
-								objSlidesPerView =
-									(null === (_obj$carousel = obj.carousel) || void 0 === _obj$carousel ? void 0 : _obj$carousel.slidesPerView) ||
-									obj.slidesPerView ||
+							var _currentBreakpoint$ca,
+								_currentBreakpoint$ca2,
+								currentBreakpoint = props.breakpoints[breakpoint],
+								currentBreakpointSlidesPerView =
+									(null === (_currentBreakpoint$ca = currentBreakpoint.carousel) || void 0 === _currentBreakpoint$ca
+										? void 0
+										: _currentBreakpoint$ca.slidesPerView) ||
+									currentBreakpoint.slidesPerView ||
 									2,
-								objSlidesPerGroup =
-									(null === (_obj$carousel2 = obj.carousel) || void 0 === _obj$carousel2 ? void 0 : _obj$carousel2.slidesPerGroup) ||
-									obj.slidesPerGroup ||
+								currentBreakpointSlidesPerGroup =
+									(null === (_currentBreakpoint$ca2 = currentBreakpoint.carousel) || void 0 === _currentBreakpoint$ca2
+										? void 0
+										: _currentBreakpoint$ca2.slidesPerGroup) ||
+									currentBreakpoint.slidesPerGroup ||
 									2,
-								newSlidesPerView = objSlidesPerView,
-								newSlidesPerGroup = objSlidesPerGroup,
-								resultCount = seedInCarousel ? resultsToRender.length : resultsToRender.length - 1;
+								newSlidesPerView = currentBreakpointSlidesPerView,
+								newSlidesPerGroup = currentBreakpointSlidesPerGroup,
+								resultCount = !hasSeed || seedInCarousel ? resultsToRender.length : resultsToRender.length - 1;
 							resultCount &&
-								(resultCount >= objSlidesPerView
-									? ((newSlidesPerView = objSlidesPerView - (seedInCarousel ? 0 : 1)),
-									  seedInCarousel || (newSlidesPerGroup = objSlidesPerGroup - 1 || 1))
+								(resultCount >= currentBreakpointSlidesPerView
+									? ((newSlidesPerView = currentBreakpointSlidesPerView - (!seedInCarousel && hasSeed ? 1 : 0)),
+									  seedInCarousel || (newSlidesPerGroup = currentBreakpointSlidesPerGroup - 1 || 1))
 									: ((newSlidesPerView = resultCount), (newSlidesPerGroup = resultCount))),
 								(modifiedBreakpoints[breakpoint] = Object.assign({}, modifiedBreakpoints[breakpoint], {
 									slidesPerView: newSlidesPerView,
@@ -29491,7 +29563,7 @@
 								(selectedItems.findIndex(function (result) {
 									return result.id == product.id;
 								}) > -1
-									? (cartStore.removeItems([product]), 0 == cartStore.items.length && cartStore.items.push(seed))
+									? (cartStore.removeItems([product]), 0 == cartStore.items.length && seed && cartStore.items.push(seed))
 									: cartStore.addItems([product]));
 						},
 						addToCart = function addToCart(e) {
@@ -29503,297 +29575,192 @@
 						isVisible = _useState2[0],
 						setIsVisible = _useState2[1],
 						recsRef = (0, hooks_module.li)(null);
-					return (
-						(null == mergedlazyRender ||
-							!mergedlazyRender.enabled ||
-							(0, useIntersection.v)(recsRef, mergedlazyRender.offset + ' 0px ' + mergedlazyRender.offset + ' 0px', !0)) &&
-							setIsVisible(!0),
-						null !== (_resultsToRender2 = resultsToRender) && void 0 !== _resultsToRender2 && _resultsToRender2.length
-							? (0, emotion_react_browser_esm.Y)(
-									cache._,
-									null,
-									(0, emotion_react_browser_esm.Y)(
-										'div',
-										Object.assign({}, styling, {
-											ref: recsRef,
-											className: classnames_default()('ss__recommendation-bundle', { 'ss__recommendation-bundle--stacked': !ctaInline }, className),
-										}),
-										isVisible
-											? (0, emotion_react_browser_esm.Y)(
-													RecommendationProfileTracker.l,
-													{ controller },
-													title &&
-														(0, emotion_react_browser_esm.Y)(
-															'h3',
-															{ className: 'ss__recommendation-bundle__title' },
-															(0, emotion_react_browser_esm.Y)('span', null, title)
-														),
+					(null == mergedlazyRender ||
+						!mergedlazyRender.enabled ||
+						(0, useIntersection.v)(recsRef, mergedlazyRender.offset + ' 0px ' + mergedlazyRender.offset + ' 0px', !0)) &&
+						setIsVisible(!0);
+					var renderedResults = (0, hooks_module.Kr)(
+						function () {
+							return resultsToRender.map(function (result, idx) {
+								var isSeed = Boolean(result.bundleSeed),
+									selected =
+										selectedItems.findIndex(function (item) {
+											return item.id == result.id;
+										}) > -1,
+									attributes = {
+										onCheck: function onCheck(e) {
+											e.stopPropagation(), onProductSelect(result);
+										},
+										checked: selected,
+										hideCheckboxes,
+										theme: props.theme,
+										icon: !separatorIconSeedOnly && separatorIcon,
+										className: idx + 1 == resultsToRender.length ? 'ss__recommendation-bundle__wrapper__selector--last' : '',
+									};
+								return (
+									isSeed && (attributes = Object.assign({}, attributes, { seedText, seed: !0, icon: separatorIcon })),
+									!isSeed || ((seedInCarousel || 0 == (null == carousel ? void 0 : carousel.enabled)) && isSeed && !hideSeed)
+										? (0, emotion_react_browser_esm.Y)(
+												ResultTracker.o,
+												{ key: result.id, controller, result, track: { impression: Boolean(!isSeed) } },
+												(0, emotion_react_browser_esm.Y)(
+													BundleSelector,
+													Object.assign({}, attributes),
+													resultComponent
+														? (0, cloneWithProps.Y)(resultComponent, { result, seed: isSeed, selected, onProductSelect })
+														: (0, emotion_react_browser_esm.Y)(Result.Q, Object.assign({}, subProps.result, { controller, result }))
+												)
+										  )
+										: null
+								);
+							});
+						},
+						[
+							resultsToRender,
+							selectedItems,
+							hideCheckboxes,
+							separatorIconSeedOnly,
+							separatorIcon,
+							seedInCarousel,
+							hideSeed,
+							resultComponent,
+							props.theme,
+							seedText,
+						]
+					);
+					return null !== (_resultsToRender2 = resultsToRender) && void 0 !== _resultsToRender2 && _resultsToRender2.length
+						? (0, emotion_react_browser_esm.Y)(
+								cache._,
+								null,
+								(0, emotion_react_browser_esm.Y)(
+									'div',
+									Object.assign({}, styling, {
+										ref: recsRef,
+										className: classnames_default()('ss__recommendation-bundle', { 'ss__recommendation-bundle--stacked': !ctaInline }, className),
+									}),
+									isVisible
+										? (0, emotion_react_browser_esm.Y)(
+												RecommendationProfileTracker.l,
+												{ controller },
+												title &&
 													(0, emotion_react_browser_esm.Y)(
-														'div',
-														{
-															className: classnames_default()('ss__recommendation-bundle__wrapper', {
-																'ss__recommendation-bundle__wrapper--seed-in-carousel': seedInCarousel,
-																'ss__recommendation-bundle__wrapper--vertical': vertical,
-															}),
-														},
-														carouselEnabled
-															? (0, emotion_react_browser_esm.Y)(
-																	preact_module.FK,
-																	null,
-																	!seedInCarousel &&
-																		!hideSeed &&
-																		(0, emotion_react_browser_esm.Y)(
-																			'div',
-																			{ className: 'ss__recommendation-bundle__wrapper__seed-container' },
-																			(0, emotion_react_browser_esm.Y)(
-																				ResultTracker.o,
-																				{ controller, result: seed, track: { impression: !1 } },
-																				(0, emotion_react_browser_esm.Y)(
-																					BundleSelector,
-																					{
-																						seedText,
-																						seed: !0,
-																						onCheck: function onCheck(e) {
-																							e.stopPropagation(), onProductSelect(seed);
-																						},
-																						checked:
-																							selectedItems.findIndex(function (item) {
-																								return item.id == seed.id;
-																							}) > -1,
-																						icon: separatorIcon,
-																						hideCheckboxes,
-																						theme: props.theme,
-																						ref: seedRef,
-																					},
-																					resultComponent
-																						? (0, cloneWithProps.Y)(resultComponent, {
-																								result: seed,
-																								seed: !0,
-																								selected:
-																									selectedItems.findIndex(function (item) {
-																										return item.id == seed.id;
-																									}) > -1,
-																								onProductSelect,
-																						  })
-																						: (0, emotion_react_browser_esm.Y)(
-																								Result.Q,
-																								Object.assign({}, subProps.result, { controller, result: seed })
-																						  )
-																				)
-																			)
-																		),
+														'h3',
+														{ className: 'ss__recommendation-bundle__title' },
+														(0, emotion_react_browser_esm.Y)('span', null, title)
+													),
+												description &&
+													(0, emotion_react_browser_esm.Y)(
+														'h4',
+														{ className: 'ss__recommendation-bundle__description' },
+														(0, emotion_react_browser_esm.Y)('span', null, description)
+													),
+												(0, emotion_react_browser_esm.Y)(
+													'div',
+													{
+														className: classnames_default()('ss__recommendation-bundle__wrapper', {
+															'ss__recommendation-bundle__wrapper--seed-in-carousel': seedInCarousel,
+															'ss__recommendation-bundle__wrapper--vertical': vertical,
+														}),
+													},
+													carouselEnabled
+														? (0, emotion_react_browser_esm.Y)(
+																preact_module.FK,
+																null,
+																!seedInCarousel &&
+																	!hideSeed &&
+																	seed &&
 																	(0, emotion_react_browser_esm.Y)(
 																		'div',
-																		{ className: 'ss__recommendation-bundle__wrapper__carousel' },
+																		{ className: 'ss__recommendation-bundle__wrapper__seed-container' },
 																		(0, emotion_react_browser_esm.Y)(
-																			Carousel.FN,
-																			Object.assign(
+																			ResultTracker.o,
+																			{ controller, result: seed, track: { impression: !1 } },
+																			(0, emotion_react_browser_esm.Y)(
+																				BundleSelector,
 																				{
-																					prevButton,
-																					nextButton,
-																					hideButtons,
-																					loop,
-																					spaceBetween,
-																					pagination,
-																					breakpoints: modifiedBreakpoints,
-																					watchSlidesProgress: !0,
-																					observer: !0,
-																					vertical,
-																					onResize: function onResize() {
-																						return (function setSeedwidth() {
-																							if (seedRef.current) {
-																								var _seedRef$current,
-																									_carouselRef$current,
-																									seedElem =
-																										null === (_seedRef$current = seedRef.current) || void 0 === _seedRef$current
-																											? void 0
-																											: _seedRef$current.base,
-																									carouselElem =
-																										null === (_carouselRef$current = carouselRef.current) || void 0 === _carouselRef$current
-																											? void 0
-																											: _carouselRef$current.base,
-																									visibleSlide =
-																										null == carouselElem
-																											? void 0
-																											: carouselElem.querySelector(
-																													'.swiper-slide-visible .ss__recommendation-bundle__wrapper__selector'
-																											  ),
-																									width = null == visibleSlide ? void 0 : visibleSlide.offsetWidth;
-																								seedElem && (seedElem.style.width = width + 'px');
-																							}
-																						})();
+																					seedText,
+																					seed: !0,
+																					onCheck: function onCheck(e) {
+																						e.stopPropagation(), onProductSelect(seed);
 																					},
+																					checked:
+																						selectedItems.findIndex(function (item) {
+																							return item.id == seed.id;
+																						}) > -1,
+																					icon: separatorIcon,
+																					hideCheckboxes,
+																					theme: props.theme,
+																					ref: seedRef,
 																				},
-																				subProps.carousel,
-																				additionalProps,
-																				displaySettings,
-																				{ ref: carouselRef }
-																			),
-																			seedInCarousel
-																				? resultsToRender
-																						.filter(function (result, idx) {
-																							return !hideSeed || 0 != idx;
-																						})
-																						.map(function (result, idx) {
-																							var selected =
+																				resultComponent
+																					? (0, cloneWithProps.Y)(resultComponent, {
+																							result: seed,
+																							seed: !0,
+																							selected:
 																								selectedItems.findIndex(function (item) {
-																									return item.id == result.id;
-																								}) > -1;
-																							return 0 != idx || hideSeed
-																								? (0, emotion_react_browser_esm.Y)(
-																										ResultTracker.o,
-																										{ controller, result },
-																										(0, emotion_react_browser_esm.Y)(
-																											BundleSelector,
-																											{
-																												icon: !separatorIconSeedOnly && separatorIcon,
-																												onCheck: function onCheck(e) {
-																													e.stopPropagation(), onProductSelect(result);
-																												},
-																												checked: selected,
-																												hideCheckboxes,
-																												theme: props.theme,
-																												className:
-																													idx + 1 == resultsToRender.length
-																														? 'ss__recommendation-bundle__wrapper__selector--last'
-																														: '',
-																											},
-																											resultComponent
-																												? (0, cloneWithProps.Y)(resultComponent, { result, seed: !1, selected, onProductSelect })
-																												: (0, emotion_react_browser_esm.Y)(
-																														Result.Q,
-																														Object.assign({}, subProps.result, { controller, result })
-																												  )
-																										)
-																								  )
-																								: (0, emotion_react_browser_esm.Y)(
-																										ResultTracker.o,
-																										{ controller, result, track: { impression: !1 } },
-																										(0, emotion_react_browser_esm.Y)(
-																											BundleSelector,
-																											{
-																												seedText,
-																												seed: !0,
-																												icon: separatorIcon,
-																												onCheck: function onCheck(e) {
-																													e.stopPropagation(), onProductSelect(result);
-																												},
-																												checked: selected,
-																												hideCheckboxes,
-																												theme: props.theme,
-																											},
-																											resultComponent
-																												? (0, cloneWithProps.Y)(resultComponent, { result, seed: !0, selected, onProductSelect })
-																												: (0, emotion_react_browser_esm.Y)(
-																														Result.Q,
-																														Object.assign({}, subProps.result, { controller, result })
-																												  )
-																										)
-																								  );
-																						})
-																				: resultsToRender
-																						.filter(function (result, idx) {
-																							return 0 !== idx;
-																						})
-																						.map(function (result, idx, results) {
-																							var selected =
-																								selectedItems.findIndex(function (item) {
-																									return item.id == result.id;
-																								}) > -1;
-																							return (0, emotion_react_browser_esm.Y)(
-																								ResultTracker.o,
-																								{ controller, result },
-																								(0, emotion_react_browser_esm.Y)(
-																									BundleSelector,
-																									{
-																										icon: !separatorIconSeedOnly && separatorIcon,
-																										onCheck: function onCheck(e) {
-																											e.stopPropagation(), onProductSelect(result);
-																										},
-																										checked: selected,
-																										hideCheckboxes,
-																										theme: props.theme,
-																										className: idx + 1 == results.length ? 'ss__recommendation-bundle__wrapper__selector--last' : '',
-																									},
-																									resultComponent
-																										? (0, cloneWithProps.Y)(resultComponent, { result, seed: !1, selected, onProductSelect })
-																										: (0, emotion_react_browser_esm.Y)(
-																												Result.Q,
-																												Object.assign({}, subProps.result, { controller, result })
-																										  )
-																								)
-																							);
-																						})
+																									return item.id == seed.id;
+																								}) > -1,
+																							onProductSelect,
+																					  })
+																					: (0, emotion_react_browser_esm.Y)(
+																							Result.Q,
+																							Object.assign({}, subProps.result, { controller, result: seed })
+																					  )
+																			)
+																		)
+																	),
+																(0, emotion_react_browser_esm.Y)(
+																	'div',
+																	{ className: 'ss__recommendation-bundle__wrapper__carousel' },
+																	(0, emotion_react_browser_esm.Y)(
+																		Carousel.FN,
+																		Object.assign(
+																			{
+																				prevButton,
+																				nextButton,
+																				hideButtons,
+																				loop,
+																				spaceBetween,
+																				pagination,
+																				breakpoints: modifiedBreakpoints,
+																				watchSlidesProgress: !0,
+																				observer: !0,
+																				vertical,
+																				onResize: function onResize() {
+																					return (function setSeedwidth() {
+																						if (seedRef.current) {
+																							var _seedRef$current,
+																								_carouselRef$current,
+																								seedElem =
+																									null === (_seedRef$current = seedRef.current) || void 0 === _seedRef$current
+																										? void 0
+																										: _seedRef$current.base,
+																								carouselElem =
+																									null === (_carouselRef$current = carouselRef.current) || void 0 === _carouselRef$current
+																										? void 0
+																										: _carouselRef$current.base,
+																								visibleSlide =
+																									null == carouselElem
+																										? void 0
+																										: carouselElem.querySelector(
+																												'.swiper-slide-visible .ss__recommendation-bundle__wrapper__selector'
+																										  ),
+																								width = null == visibleSlide ? void 0 : visibleSlide.offsetWidth;
+																							seedElem && (seedElem.style.width = width + 'px');
+																						}
+																					})();
+																				},
+																			},
+																			subProps.carousel,
+																			additionalProps,
+																			displaySettings,
+																			{ ref: carouselRef, children: renderedResults }
 																		)
 																	)
-															  )
-															: resultsToRender
-																	.filter(function (result, idx) {
-																		return !hideSeed || 0 != idx;
-																	})
-																	.map(function (result, idx) {
-																		var selected =
-																			selectedItems.findIndex(function (item) {
-																				return item.id == result.id;
-																			}) > -1;
-																		return 0 != idx || hideSeed
-																			? (0, emotion_react_browser_esm.Y)(
-																					ResultTracker.o,
-																					{ controller, result },
-																					(0, emotion_react_browser_esm.Y)(
-																						BundleSelector,
-																						{
-																							icon: !separatorIconSeedOnly && separatorIcon,
-																							onCheck: function onCheck(e) {
-																								e.stopPropagation(), onProductSelect(result);
-																							},
-																							checked: selected,
-																							hideCheckboxes,
-																							theme: props.theme,
-																							className:
-																								idx + 1 == resultsToRender.length ? 'ss__recommendation-bundle__wrapper__selector--last' : '',
-																						},
-																						resultComponent
-																							? (0, cloneWithProps.Y)(resultComponent, { result, seed: !1, selected, onProductSelect })
-																							: (0, emotion_react_browser_esm.Y)(Result.Q, Object.assign({}, subProps.result, { controller, result }))
-																					)
-																			  )
-																			: (0, emotion_react_browser_esm.Y)(
-																					ResultTracker.o,
-																					{ controller, result, track: { impression: !1 } },
-																					(0, emotion_react_browser_esm.Y)(
-																						BundleSelector,
-																						{
-																							seedText,
-																							seed: !0,
-																							icon: separatorIcon,
-																							onCheck: function onCheck(e) {
-																								e.stopPropagation(), onProductSelect(result);
-																							},
-																							checked: selected,
-																							hideCheckboxes,
-																							theme: props.theme,
-																						},
-																						resultComponent
-																							? (0, cloneWithProps.Y)(resultComponent, { result, seed: !0, selected, onProductSelect })
-																							: (0, emotion_react_browser_esm.Y)(Result.Q, Object.assign({}, subProps.result, { controller, result }))
-																					)
-																			  );
-																	}),
-														ctaInline &&
-															(0, emotion_react_browser_esm.Y)(BundledCTA, {
-																ctaSlot,
-																cartStore,
-																onAddToCart: function onAddToCart(e) {
-																	return addToCart(e);
-																},
-																ctaButtonText,
-																ctaButtonSuccessText,
-																ctaButtonSuccessTimeout,
-																ctaIcon,
-															})
-													),
-													!ctaInline &&
+																)
+														  )
+														: (0, emotion_react_browser_esm.Y)(preact_module.FK, null, renderedResults),
+													ctaInline &&
 														(0, emotion_react_browser_esm.Y)(BundledCTA, {
 															ctaSlot,
 															cartStore,
@@ -29805,19 +29772,31 @@
 															ctaButtonSuccessTimeout,
 															ctaIcon,
 														})
-											  )
-											: (0, emotion_react_browser_esm.Y)(
-													RecommendationProfileTracker.l,
-													{ controller },
-													resultsToRender.map(function (result) {
-														return (0,
-														emotion_react_browser_esm.Y)(ResultTracker.o, { controller, result }, (0, emotion_react_browser_esm.Y)(preact_module.FK, null));
+												),
+												!ctaInline &&
+													(0, emotion_react_browser_esm.Y)(BundledCTA, {
+														ctaSlot,
+														cartStore,
+														onAddToCart: function onAddToCart(e) {
+															return addToCart(e);
+														},
+														ctaButtonText,
+														ctaButtonSuccessText,
+														ctaButtonSuccessTimeout,
+														ctaIcon,
 													})
-											  )
-									)
-							  )
-							: (0, emotion_react_browser_esm.Y)(preact_module.FK, null)
-					);
+										  )
+										: (0, emotion_react_browser_esm.Y)(
+												RecommendationProfileTracker.l,
+												{ controller },
+												resultsToRender.map(function (result) {
+													return (0,
+													emotion_react_browser_esm.Y)(ResultTracker.o, { controller, result }, (0, emotion_react_browser_esm.Y)(preact_module.FK, null));
+												})
+										  )
+								)
+						  )
+						: (0, emotion_react_browser_esm.Y)(preact_module.FK, null);
 				}),
 				componentArgs = __webpack_require__('./src/utilities/componentArgs.ts'),
 				snapify = __webpack_require__('./src/utilities/snapify.ts'),
@@ -30086,7 +30065,7 @@
 						)
 					),
 					(0, esm.yg)('h3', { id: 'title' }, 'title'),
-					(0, esm.yg)('p', null, 'The ', (0, esm.yg)('inlineCode', { parentName: 'p' }, 'title'), ' prop specifies the carousel title'),
+					(0, esm.yg)('p', null, 'The ', (0, esm.yg)('inlineCode', { parentName: 'p' }, 'title'), ' prop specifies the bundle title'),
 					(0, esm.yg)(
 						'pre',
 						null,
@@ -30094,6 +30073,17 @@
 							'code',
 							{ parentName: 'pre', className: 'language-jsx' },
 							"<RecommendationBundle controller={controller} onAddToCart={(e, items)=>{console.log(items)}} title={'Recommended Bundle'} />\n"
+						)
+					),
+					(0, esm.yg)('h3', { id: 'description' }, 'description'),
+					(0, esm.yg)('p', null, 'The ', (0, esm.yg)('inlineCode', { parentName: 'p' }, 'description'), ' prop specifies the bundle description'),
+					(0, esm.yg)(
+						'pre',
+						null,
+						(0, esm.yg)(
+							'code',
+							{ parentName: 'pre', className: 'language-jsx' },
+							"<RecommendationBundle controller={controller} onAddToCart={(e, items)=>{console.log(items)}} description={'Recommended Bundle products are so awesome!'} />\n"
 						)
 					),
 					(0, esm.yg)('h3', { id: 'resultcomponent' }, 'resultComponent'),
@@ -30871,7 +30861,12 @@
 						},
 						resultComponent: { description: 'Slot for custom result component', table: { type: { summary: 'component' } } },
 						title: {
-							description: 'recommendation title',
+							description: 'recommendation bundle title',
+							table: { type: { summary: 'string | JSX Element' }, defaultValue: { summary: '' } },
+							control: { type: 'text' },
+						},
+						description: {
+							description: 'recommendation bundle description',
 							table: { type: { summary: 'string | JSX Element' }, defaultValue: { summary: '' } },
 							control: { type: 'text' },
 						},
@@ -30956,7 +30951,7 @@
 						ctaSlot: { description: 'Slot for custom add to cart component', table: { type: { summary: 'component' } } },
 						lazyRender: {
 							description: 'Lazy render settings object',
-							defaultValue: { enabled: !0, offset: '10%' },
+							defaultValue: { enabled: !1, offset: '10%' },
 							table: { type: { summary: 'object' }, defaultValue: { summary: 'Lazy render settings object' } },
 							control: { type: 'object' },
 						},
@@ -30977,7 +30972,7 @@
 				}),
 				Default = function Default(props, _ref) {
 					var controller = _ref.loaded.controller;
-					return (0, preact_module.h)(RecommendationBundle, Object.assign({}, props, { controller, results: controller.store.results.reverse() }));
+					return (0, preact_module.h)(RecommendationBundle, Object.assign({}, props, { controller, results: controller.store.results }));
 				};
 			Default.loaders = [
 				_asyncToGenerator(
@@ -46219,7 +46214,8 @@
 								(this.attributes = result.attributes),
 								(this.mappings = result.mappings),
 								(this.position = position),
-								(this.badges = new Badges(result, metaData));
+								(this.badges = new Badges(result, metaData)),
+								result.bundleSeed && (this.bundleSeed = Boolean(result.bundleSeed));
 							var variantsField =
 								null == config ||
 								null === (_config$settings3 = config.settings) ||
@@ -46417,7 +46413,12 @@
 										var options = [];
 										(this.data = variantData
 											.filter(function (variant) {
-												return !1 !== variant.attributes.available;
+												var _this2$config;
+												return (
+													(null === (_this2$config = _this2.config) || void 0 === _this2$config
+														? void 0
+														: _this2$config.showDisabledSelectionValues) || !1 !== variant.attributes.available
+												);
 											})
 											.map(function (variant) {
 												var _variant$mappings$cor, _variant$mappings$cor3, _variant$mappings$cor2, _variant$mappings$cor4;
@@ -46449,9 +46450,9 @@
 											})),
 											(this.selections = []),
 											options.map(function (option) {
-												var _this2$config,
+												var _this2$config2,
 													variantOptionConfig =
-														(null === (_this2$config = _this2.config) || void 0 === _this2$config ? void 0 : _this2$config.options) &&
+														(null === (_this2$config2 = _this2.config) || void 0 === _this2$config2 ? void 0 : _this2$config2.options) &&
 														_this2.config.options[option];
 												_this2.selections.push(new VariantSelection(_this2, option, variantOptionConfig));
 											});
@@ -46628,6 +46629,12 @@
 														null === (_variant$mappings$cor5 = variant.mappings.core) || void 0 === _variant$mappings$cor5
 															? void 0
 															: _variant$mappings$cor5.thumbnailImageUrl,
+													allAvailableVariants = variants.data.filter(function (variant) {
+														return variant.available;
+													}),
+													disabledValue = !allAvailableVariants.some(function (availableVariant) {
+														return availableVariant.options[_this5.field].value === value;
+													}),
 													mappedValue = {
 														value,
 														label: value,
@@ -46637,6 +46644,7 @@
 																return availableVariant.options[_this5.field].value == variant.options[_this5.field].value;
 															})
 														),
+														disabled: disabledValue,
 													};
 												if (
 													(_this5.config.thumbnailBackgroundImages
@@ -51448,7 +51456,7 @@
 							((function Tracker_classCallCheck(a, n) {
 								if (!(a instanceof n)) throw new TypeError('Cannot call a class as a function');
 							})(this, Tracker),
-							((config = cjs_default()(Tracker_defaultConfig, config || {})).initiator = 'searchspring/' + config.framework + '/0.69.2'),
+							((config = cjs_default()(Tracker_defaultConfig, config || {})).initiator = 'searchspring/' + config.framework + '/0.70.0'),
 							((_this = Tracker_callSuper(this, Tracker, [globals, config])).targeters = []),
 							(_this.track = {
 								error: function error(data, siteId) {
@@ -51620,7 +51628,7 @@
 							(_this.localStorage = new StorageStore({ type: 'local', key: 'ss-' + _this.config.id })),
 							_this.localStorage.set('siteId', _this.globals.siteId),
 							(null !== (_window$searchspring = window.searchspring) && void 0 !== _window$searchspring && _window$searchspring.tracker) ||
-								((window.searchspring = window.searchspring || {}), (window.searchspring.tracker = _this), (window.searchspring.version = '0.69.2')),
+								((window.searchspring = window.searchspring || {}), (window.searchspring.tracker = _this), (window.searchspring.version = '0.70.0')),
 							setTimeout(function () {
 								_this.targeters.push(
 									new DomTargeter([{ selector: 'script[type^="searchspring/track/"]', emptyTarget: !1 }], function (target, elem) {
