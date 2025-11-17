@@ -422,7 +422,7 @@ import('./docs/documents.js').then(function (_) {
 		};
 
 		// adds ids to headings for permalinks and handles clicks to copy to clipboard
-		const headingsRaw = Array.from(document.querySelectorAll('#content h2, #content h3, #content h4, #content h5, #content h6'));
+		const headingsRaw = Array.from(document.querySelectorAll('#content h2, #content h3'));
 		const headings = headingsRaw.map((heading) => {
 			heading.role = 'link';
 			const id = createHeadingId(heading);

@@ -120,6 +120,49 @@ You will see an interface overlay on the bottom right of the viewport indicating
 
 This will also be persisted across page navigation. To stop previewing a branch build, you must click the `Stop Preview` button in the interface or clear the `ssBranch` cookie. The interface can also be minimized. 
 
+## Modern vs Universal Builds
+
+If your project is hosted in Searchspring's Github organization, we'll automatically handle serving the appropriate version of the build files for you. However if you are hosting your own build files, you can either: 
+
+- only serve the modern build to all users, however this will break functionallity for IE11.
+- change the build targets, although this may impact core web vitals negatively.
+- serve the appropriate bundle via a check of the userAgent. More information below.
+
+Always serve the build to modern browsers and the universal build only to legacy browsers. Serving universal builds to modern browsers negatively impacts Core Web Vitals:
+
+```html
+<!-- Modern browsers - use modern build -->
+<script src="https://snapui.searchspring.io/[siteId]/bundle.js"></script>
+
+<!-- Legacy browsers - use universal build -->
+<script src="https://snapui.searchspring.io/[siteId]/universal.bundle.js"></script>
+```
+
+The modern build is used for projects targeting the latest browsers supporting the latest JavaScript features (ES6 and above). Example modern build files: `bundle.js` & `bundle.chunk.[hash].js`
+
+A browser is considered modern based on the [@searchspring/browserslist-config-snap modern](https://github.com/searchspring/browserslist-config-snap/blob/main/modern/index.js) rules and is included in the preconfigured scaffold.
+
+
+The universal build is used for projects targeting legacy browsers and will transpile any usage of modern JavaScript to ES5 as well as polyfill any missing browser features. If you are not targeting legacy browsers, you can omit deploying the universal built files that are prefixed with `universal.` - Example: `universal.bundle.js` and `universal.bundle.chunk.[hash].js`
+
+A browser is considered legacy based on the [@searchspring/browserslist-config-snap universal](https://github.com/searchspring/browserslist-config-snap/blob/main/universal/index.js) rules and is included in the preconfigured scaffold.
+
+However, if you are targeting legacy browsers, it is not recommended to always serve the universal build files to all browsers—including modern browsers—as this will impact Core Web Vitals and performance negatively. 
+
+Therefore, you will require a method for switching the front-end script `src` to point to the appropriate version of the build files depending on whether the browser is modern or legacy. This can be done in many ways, including:
+
+- Server-side checking the userAgent and serving the appropriate version of the build files.
+- Front-end checking the userAgent and serving the appropriate version of the build files.
+- Lambda function serving the appropriate version of the build files based on the userAgent.
+
+The following is an example of a regex that would match the versions of the `browserlist-config-snap@1.0.7` rules:
+
+```js
+module.exports = /((CPU[ +]OS|iPhone[ +]OS|CPU[ +]iPhone|CPU IPhone OS)[ +]+(14|(1[5-9]|[2-9]\d|\d{3,})|15|(1[6-9]|[2-9]\d|\d{3,}))[_.]\d+(?:[_.]\d+)?)|((?:Chrome).*OPR\/(77|(7[8-9]|[8-9]\d|\d{3,}))\.\d+\.\d+)|(Edge\/(91|(9[2-9]|\d{3,}))(?:\.\d+)?)|((Chromium|Chrome)\/(91|(9[2-9]|\d{3,}))\.\d+(?:\.\d+)?)|(Version\/(14|(1[5-9]|[2-9]\d|\d{3,})|15|(1[6-9]|[2-9]\d|\d{3,}))\.\d+(?:\.\d+)? Safari\/)|(Firefox\/(74|(7[5-9]|[8-9]\d|\d{3,}))\.\d+\.\d+)|(Firefox\/(74|(7[5-9]|[8-9]\d|\d{3,}))\.\d+(pre|[ab]\d+[a-z]*)?)/;
+```
+(regex generated using [browserslist-useragent-regexp](https://www.npmjs.com/package/browserslist-useragent-regexp))
+
+
 
 ## Build Tools
 

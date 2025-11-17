@@ -65,6 +65,35 @@ snap.getController('search').then((controller) => {
 });
 ```
 
+## Skeleton Component
+A `skeleton` component can be defined to render inside the target until search is ready to render the `component`.
+
+A [Skeleton component](https://searchspring.github.io/snap/preact-components?params=%3Fpath%3D%2Fstory%2Fatoms-skeleton--default) is available in the components package.
+
+```jsx
+import { Snap } from '@searchspring/snap-preact';
+import { Skeleton } from '@searchspring/snap-preact-components';
+
+const ContentSkeleton = () => {
+  return (<Skeleton height="300px" width="250px" />);
+};
+
+const config = {
+  controllers: {
+    search: [{
+      config: {
+        id: 'search',
+      },
+      targeters: [{
+        selector: '#searchspring-content',
+        component: () => import('./Search'),
+        skeleton: () => ContentSkeleton,
+        hideTarget: false, // Keep target visible to render skeleton
+      }]
+    }]
+  }
+};
+```
 
 ## Targeter Methods
 
