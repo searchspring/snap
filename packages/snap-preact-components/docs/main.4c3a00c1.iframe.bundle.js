@@ -1,4 +1,4 @@
-/*! For license information please see main.5ec3550b.iframe.bundle.js.LICENSE.txt */
+/*! For license information please see main.4c3a00c1.iframe.bundle.js.LICENSE.txt */
 (self.webpackChunk_searchspring_snap_preact_components = self.webpackChunk_searchspring_snap_preact_components || []).push([
 	[792],
 	{
@@ -31814,8 +31814,10 @@
 						var _createImpressionObse = (0, createImpressionObserver.Q)({ resetKey }),
 							ref = _createImpressionObse.ref;
 						_createImpressionObse.inViewport &&
-							'product' === (null == result ? void 0 : result.type) &&
-							(null == controller || controller.track.product.impression(result));
+							('product' !== (null == result ? void 0 : result.type) ||
+								(null != result && result.bundleSeed) ||
+								null == controller ||
+								controller.track.product.impression(result));
 						var currentRef = ref.current;
 						if (currentRef) {
 							var handleClick = (0, hooks_module.hb)(function (e) {
@@ -51456,7 +51458,7 @@
 							((function Tracker_classCallCheck(a, n) {
 								if (!(a instanceof n)) throw new TypeError('Cannot call a class as a function');
 							})(this, Tracker),
-							((config = cjs_default()(Tracker_defaultConfig, config || {})).initiator = 'searchspring/' + config.framework + '/0.70.0'),
+							((config = cjs_default()(Tracker_defaultConfig, config || {})).initiator = 'searchspring/' + config.framework + '/0.70.1'),
 							((_this = Tracker_callSuper(this, Tracker, [globals, config])).targeters = []),
 							(_this.track = {
 								error: function error(data, siteId) {
@@ -51628,7 +51630,7 @@
 							(_this.localStorage = new StorageStore({ type: 'local', key: 'ss-' + _this.config.id })),
 							_this.localStorage.set('siteId', _this.globals.siteId),
 							(null !== (_window$searchspring = window.searchspring) && void 0 !== _window$searchspring && _window$searchspring.tracker) ||
-								((window.searchspring = window.searchspring || {}), (window.searchspring.tracker = _this), (window.searchspring.version = '0.70.0')),
+								((window.searchspring = window.searchspring || {}), (window.searchspring.tracker = _this), (window.searchspring.version = '0.70.1')),
 							setTimeout(function () {
 								_this.targeters.push(
 									new DomTargeter([{ selector: 'script[type^="searchspring/track/"]', emptyTarget: !1 }], function (target, elem) {
