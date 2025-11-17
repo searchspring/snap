@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.70.1](https://github.com/searchspring/snap/compare/v0.70.0...v0.70.1) (2025-11-17)
+
+### Bug Fixes
+
+- **preact-components/withtracking:** updating HOC to not send impressions if the product is a seed ([6c30f34](https://github.com/searchspring/snap/commit/6c30f34ab2a86293d0b6d03a04fa93de9f1ad7b9))
+
 # [0.70.0](https://github.com/searchspring/snap/compare/v0.69.2...v0.70.0) (2025-11-13)
 
 ### Bug Fixes
