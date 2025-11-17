@@ -45,7 +45,7 @@ export function withTracking<Props extends WithTrackingProps>(WrappedComponent: 
 
 		if (inViewport) {
 			// TODO: add support for disabling tracking events via config like in ResultTracker
-			if (result?.type === 'product' && !result.bundleSeed) {
+			if (result?.type === 'product' && !result?.bundleSeed) {
 				controller?.track.product.impression(result as Product);
 			} else {
 				// track banner in future
