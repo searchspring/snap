@@ -8,6 +8,7 @@ export interface UseIntersectionOptions {
 	resetKey?: string;
 }
 
+const VISIBILITY_POLL_INTERVAL = 100;
 export const useIntersectionAdvanced = (ref: MutableRef<HTMLElement | null>, options: UseIntersectionOptions = {}): boolean => {
 	const { rootMargin = '0px', fireOnce = false, threshold = 0, minVisibleTime = 0, resetKey } = options;
 	// State and setter for storing whether element is visible
@@ -35,48 +36,85 @@ export const useIntersectionAdvanced = (ref: MutableRef<HTMLElement | null>, opt
 	useEffect(() => {
 		setIntersecting(false);
 		let observer: IntersectionObserver | null = null;
+		let pollInterval: number | null = null;
 
 		if (!ref.current) return;
 
+		const clearPoll = () => {
+			if (pollInterval) {
+				window.clearInterval(pollInterval);
+				pollInterval = null;
+			}
+		};
+
+		const handleVisible = () => {
+			// Start tracking visibility time if minVisibleTime is set
+			if (minVisibleTime > 0) {
+				visibleStartRef.current = Date.now();
+				// Clear any existing timer
+				if (visibleTimerRef.current) {
+					window.clearTimeout(visibleTimerRef.current);
+				}
+
+				// Set up a timer for the minimum visibility duration
+				visibleTimerRef.current = window.setTimeout(() => {
+					setIntersecting(true);
+
+					if (fireOnce && ref.current && observer) {
+						observer.unobserve(ref.current);
+					}
+				}, minVisibleTime);
+			} else {
+				// If no minimum time required, update state immediately
+				setIntersecting(true);
+
+				if (fireOnce && ref.current && observer) {
+					observer.unobserve(ref.current);
+				}
+			}
+		};
+
+		const handleHidden = () => {
+			// Element is no longer visible
+			if (visibleTimerRef.current) {
+				// Clear the timer if element goes out of view before minimum time
+				window.clearTimeout(visibleTimerRef.current);
+			}
+
+			visibleTimerRef.current = null;
+			visibleStartRef.current = null;
+
+			setIntersecting(false);
+		};
+
 		observer = new IntersectionObserver(
 			([entry]) => {
-				// If element becomes visible
 				if (entry.isIntersecting) {
-					// Start tracking visibility time if minVisibleTime is set
-					if (minVisibleTime > 0) {
-						visibleStartRef.current = Date.now();
-						// Clear any existing timer
-						if (visibleTimerRef.current) {
-							window.clearTimeout(visibleTimerRef.current);
-						}
-
-						// Set up a timer for the minimum visibility duration
-						visibleTimerRef.current = window.setTimeout(() => {
-							setIntersecting(true);
-
-							if (fireOnce && ref.current && observer) {
-								observer.unobserve(ref.current);
-							}
-						}, minVisibleTime);
+					if (ref.current && elementIsVisible(ref.current)) {
+						clearPoll();
+						handleVisible();
 					} else {
-						// If no minimum time required, update state immediately
-						setIntersecting(true);
+						// Element is intersecting but not visible (e.g. opacity 0)
+						// Treat as hidden but start polling for visibility
+						handleHidden();
 
-						if (fireOnce && ref.current && observer) {
-							observer.unobserve(ref.current);
+						if (!pollInterval) {
+							pollInterval = window.setInterval(() => {
+								if (!ref.current) {
+									clearPoll();
+									return;
+								}
+								if (elementIsVisible(ref.current)) {
+									clearPoll();
+									handleVisible();
+								}
+							}, VISIBILITY_POLL_INTERVAL);
 						}
 					}
 				} else {
-					// Element is no longer visible
-					if (visibleTimerRef.current) {
-						// Clear the timer if element goes out of view before minimum time
-						window.clearTimeout(visibleTimerRef.current);
-					}
-
-					visibleTimerRef.current = null;
-					visibleStartRef.current = null;
-
-					setIntersecting(false);
+					// Element is no longer intersecting
+					clearPoll();
+					handleHidden();
 				}
 			},
 			{
@@ -91,6 +129,7 @@ export const useIntersectionAdvanced = (ref: MutableRef<HTMLElement | null>, opt
 
 		return () => {
 			setIntersecting(false);
+			clearPoll();
 			if (visibleTimerRef.current) {
 				window.clearTimeout(visibleTimerRef.current);
 			}
@@ -104,3 +143,24 @@ export const useIntersectionAdvanced = (ref: MutableRef<HTMLElement | null>, opt
 
 	return isIntersecting;
 };
+
+function elementIsVisible(el: HTMLElement): boolean {
+	// Check if element is connected to the DOM
+	if (!el.isConnected) {
+		return false;
+	}
+
+	// Check for explicit hidden attributes
+	if (el.hidden || el.getAttribute('aria-hidden') === 'true') {
+		return false;
+	}
+
+	// Check for explicit hidden css properties
+	const computedStyle = getComputedStyle(el);
+	if (computedStyle.display === 'none' || computedStyle.visibility === 'hidden' || parseFloat(computedStyle.opacity) === 0) {
+		return false;
+	}
+
+	// Assume visibile
+	return true;
+}
