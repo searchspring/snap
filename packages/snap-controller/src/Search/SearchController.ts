@@ -121,9 +121,6 @@ export class SearchController extends AbstractController {
 			key: `ss-controller-${this.config.id}`,
 		});
 
-		// set last params to undefined for compare in search
-		this.storage.set('lastStringyParams', undefined);
-
 		if (typeof this.context?.page === 'object' && ['search', 'category'].includes(this.context.page.type)) {
 			this.page = deepmerge<PageContextVariable>(this.page, this.context.page);
 		}
@@ -160,6 +157,9 @@ export class SearchController extends AbstractController {
 					this.page = deepmerge<PageContextVariable>(this.page, { type: 'category' });
 				}
 			}
+
+			// reset last params to undefined for compare in search
+			this.storage.set('lastStringyParams', undefined);
 		});
 
 		// add 'afterSearch' middleware
@@ -352,8 +352,10 @@ export class SearchController extends AbstractController {
 
 			// fire restorePosition event on 'pageshow' when setting is enabled
 			if (this.config.settings?.restorePosition?.onPageShow) {
-				window.addEventListener('pageshow', () => {
-					this.eventManager.fire('restorePosition', { controller: this, element: {} });
+				window.addEventListener('pageshow', (e) => {
+					if (e.persisted && this.store.loaded) {
+						this.eventManager.fire('restorePosition', { controller: this, element: {} });
+					}
 				});
 			}
 		}
@@ -537,7 +539,7 @@ export class SearchController extends AbstractController {
 
 			const stringyParams = JSON.stringify(getStorableRequestParams(params));
 			const prevStringyParams = this.storage.get('lastStringyParams');
-			if (stringyParams == prevStringyParams) {
+			if (this.store.loaded && stringyParams == prevStringyParams) {
 				// no param change - not searching
 				return;
 			}
