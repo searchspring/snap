@@ -539,7 +539,7 @@ export class SearchController extends AbstractController {
 
 			const stringyParams = JSON.stringify(getStorableRequestParams(params));
 			const prevStringyParams = this.storage.get('lastStringyParams');
-			if (this.store.loaded && stringyParams == prevStringyParams) {
+			if (this.store.loaded && stringyParams === prevStringyParams) {
 				// no param change - not searching
 				return;
 			}
