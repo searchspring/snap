@@ -157,9 +157,6 @@ export class SearchController extends AbstractController {
 					this.page = deepmerge<PageContextVariable>(this.page, { type: 'category' });
 				}
 			}
-
-			// reset last params to undefined for compare in search
-			this.storage.set('lastStringyParams', undefined);
 		});
 
 		// add 'afterSearch' middleware
