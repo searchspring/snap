@@ -94,40 +94,11 @@ All facets contain the following base properties:
 
 The type property will be one of three values:
 
-#### `value` type
-This is the default facet type.
-
-#### `range` type
-Range facets can only apply to a field that contains all numerical values. It is typically seen in use for price sliders.
-
-In addition to the base properties, facets of type `range` will contain the following properties:
-
-```typescript
-{
-	step: 5,
-	range: {
-		low: 0,
-		high: 0
-	},
-	active: {
-		low: 0,
-		high: 0
-	},
-	formatSeparator: '',
-	formatValue: ''
-}
-```
-
-#### `range-buckets` type
-Similar to value facets, with the added ability to group values into "buckets".
-
-For example, a price facet with a range-buckets type would typically be used to create the following groups:
-```
-Less than $10
-$10 - $20
-$20 - $50
-$50 and up
-```
+| Type | Description |
+|---|---|
+| `value` | This is the default facet type. |
+| `range` | Range facets can only apply to a field that contains all numerical values. It is typically seen in use for price sliders.<br>In addition to the base properties, facets of type `range` will contain the following properties: `step`, `range`, `active`, `formatSeparator`, `formatValue`. |
+| `range-buckets` | Similar to value facets, with the added ability to group values into "buckets".<br>For example, a price facet with a range-buckets type would typically be used to create groups like "Less than $10", "$10 - $20", etc. |
 
 ### `field` property
 
@@ -228,45 +199,10 @@ Only applicable to facets where `type` is `value` or `range-buckets`.
 
 Contains an array of facet value objects for this facet.
 
-#### `values` object with facet type `value`
-
-If the facet `display` property is `hierarchy`, the object will contain the following properties:
-
-`level` - numerical hierarchy level, set to `0` if no hierarchy selections have been selected yet
-
-`history` - boolean set to true if the value's level is less than or equal to the filtered level
-
-Otherwise, If the facet `display` property is `palette`, `list`, or `slider`, the object will contain the following properties:
-
-`label` - inherited from facet
-
-`count` - inherited from facet
-
-`filtered` - inherited from facet
-
-`value` - inherited from facet
-
-`custom` - inherited from facet
-
-`url` - generated URL for this value
-
-#### `values` object for type `range-buckets`
-Object will contain the following properties:
-
-`label` - inherited from facet
-
-`count` - inherited from facet
-
-`filtered` - inherited from facet
-
-`low` - inherited from facet
-
-`high` - inherited from facet
-
-`custom` - inherited from facet
-
-`url` - generated URL for this value
-
+| Facet Type | Description |
+|---|---|
+| `value` | **'hierarchy' display**: `level`, `history`.<br>**'palette', 'list', or 'slider' displays**: `label`, `count`, `filtered`, `value`, `custom`, `url`. |
+| `range-buckets` | `label`, `count`, `filtered`, `low`, `high`, `custom`, `url`. |
 
 ### `search` property
 Only applicable to facets where `type` is `value` or `range-buckets`
@@ -304,37 +240,15 @@ Only applicable to facets where `type` is `value` or `range-buckets`
 
 Facet overflow state to handle the 'show more' facet functionality. 
 
-#### `enabled` property
-Boolean containing the overflow active state
-
-#### `limited` property
-Boolean containing the saved overflow active state from StorageStore. This allows the state to be remembered across page navigation via StorageStore.
-
-#### `limit` property
-Number of values to display before overflow occurs
-
-#### `remaining` property
-Number of values remaining in the overflow.  `remaining = values.length - overflow.limit`
-
-#### `setLimit` function
-Set limit value. This is the number of values to display before the remaining values overflow
-
-```typescript
-facet.overflow.setLimit(10)
-```
-
-#### `toggle` function
-Toggles collapse state. 
-
-Typical usage would be to invoke `toggle` when the 'show more/less' is clicked.
-
-```typescript
-facet.overflow.toggle()
-```
-
-#### `calculate` function
-Recalculates overflow state. Is also invoked when `setLimit` or `toggle` has been invoked.
-
+| Property | Description |
+|---|---|
+| `enabled` | Boolean containing the overflow active state. |
+| `limited` | Boolean containing the saved overflow active state from StorageStore. This allows the state to be remembered across page navigation via StorageStore. |
+| `limit` | Number of values to display before overflow occurs. |
+| `remaining` | Number of values remaining in the overflow. `remaining = values.length - overflow.limit`. |
+| `setLimit(limit)` | Set limit value. This is the number of values to display before the remaining values overflow.<br>Usage: `facet.overflow.setLimit(10)` |
+| `toggle()` | Toggles collapse state. Typical usage would be to invoke `toggle` when the 'show more/less' is clicked.<br>Usage: `facet.overflow.toggle()` |
+| `calculate()` | Recalculates overflow state. Is also invoked when `setLimit` or `toggle` has been invoked. |
 
 ## `filters` property
 
@@ -347,7 +261,7 @@ Filter objects that contain a filter `type` of `range`, will have the following 
 
 `value` - an object containing the following properties: `low` - facet low value & `high` - facet high value & `label` - facet label
 
-`label` - value label is prepended with facet label, ie. `` `${filter.facet.label}: ${filter.value.label}` ``
+`label` - value label is prepended with facet label, ie. `${filter.facet.label}: ${filter.value.label}`
 
 `url` - generated URL for this value
 
@@ -358,7 +272,7 @@ Filter objects that contain a filter `type` of `value` or `range-buckets`, will 
 
 `value` - an object containing the following properties: `value` - facet value & `label` - facet label
 
-`label` - value label is prepended with facet label, ie. `` `${filter.facet.label}: ${filter.value.label}` ``
+`label` - value label is prepended with facet label, ie. `${filter.facet.label}: ${filter.value.label}`
 
 `url` - generated URL for this value
 
@@ -377,7 +291,7 @@ The `type` property has two possible values:
 ### `id` property
 Internal product id.
 
-If `type` is `banner`, id will be set to `` `ssid-${banner.config.position.index}` ``
+If `type` is `banner`, id will be set to `ssid-${banner.config.position.index}`
 
 ### `attributes` property
 Only applicable to results with `type` of `product` or `child`
@@ -619,18 +533,12 @@ onChange={(e) => {
 ### `Page` object
 A page object is returned when invoking the following getters/methods: `current`, `first`, `last`, `next`, `previous`, `getPages`.
 
-#### `number` property
-The number of the page.
-
-#### `active` property
-Boolean showing if this page is the 'active' or current page.
-
-#### `url` property
-Set to an instance of UrlManager for the page. Typical usage would be to tie into the linker of the UrlManager and attach the `href` and `onclick` properties.
-
-#### `key` property
-A unique value (set to `url.href`) available to use as a `key` prop when rendering [react keys](https://reactjs.org/docs/lists-and-keys.html).
-
+| Property | Description |
+|---|---|
+| `number` | The number of the page. |
+| `active` | Boolean showing if this page is the 'active' or current page. |
+| `url` | Set to an instance of UrlManager for the page. Typical usage would be to tie into the linker of the UrlManager and attach the `href` and `onclick` properties. |
+| `key` | A unique value (set to `url.href`) available to use as a `key` prop when rendering [react keys](https://reactjs.org/docs/lists-and-keys.html). |
 
 ## `sorting` property
 
@@ -644,34 +552,13 @@ Returns an `Option` object of the current selected sort option
 
 ### `Option` object
 
-#### `active` property
-Boolean set `true` if this option is the current selection
-
-#### `default` property
-Boolean set `true` if this option is the first selection
-
-#### `field` property
-The field name of the sorting option ie. 'ss_price'
-
-#### `label` property
-Label of this sorting, ie. 'Price'
-
-#### `direction` property
-Sorting direction. It will be one of two possible values:
-
-`asc` - ascending
-
-`desc` - descending
-
-#### `type` property
-Sorting type. Will be one of two possible values:
-
-`field` - the Option is sorting using a field
-
-`relevance` - the Option is sorting by relevance
-
-#### `value` property
-The value of the sorting Option, set to `` `${option.field}:${option.direction}` ``, ie. 'ss_price:asc'
-
-#### `url` property
-Set to an instance of UrlManager for the sorting Option. 
+| Property | Description |
+|---|---|
+| `active` | Boolean set `true` if this option is the current selection. |
+| `default` | Boolean set `true` if this option is the first selection. |
+| `field` | The field name of the sorting option ie. 'ss_price'. |
+| `label` | Label of this sorting, ie. 'Price'. |
+| `direction` | Sorting direction. `asc` (ascending) or `desc` (descending). |
+| `type` | Sorting type. `field` (sorting using a field) or `relevance` (sorting by relevance). |
+| `value` | The value of the sorting Option, set to `${option.field}:${option.direction}`, ie. 'ss_price:asc'. |
+| `url` | Set to an instance of UrlManager for the sorting Option. |

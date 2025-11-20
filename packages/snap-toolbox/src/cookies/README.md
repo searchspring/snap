@@ -1,4 +1,4 @@
-## Cookies
+# Cookies
 An interface for setting and getting cookies.
 
 ```typescript
