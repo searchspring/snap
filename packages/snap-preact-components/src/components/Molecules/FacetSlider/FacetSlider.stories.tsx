@@ -135,6 +135,16 @@ export default {
 			},
 			control: { type: 'boolean' },
 		},
+		separateHandles: {
+			description: 'separates slider handles by one step value to prevent min and max from being equal',
+			table: {
+				type: {
+					summary: 'boolean',
+				},
+				defaultValue: { summary: false },
+			},
+			control: { type: 'boolean' },
+		},
 		handleDraggingColor: {
 			description: 'Slider handle color when dragging',
 			table: {
@@ -154,7 +164,8 @@ export default {
 			action: 'onDrag',
 		},
 		onChange: {
-			description: 'Slider onChange event handler - fires after touchEnd (used to trigger search)',
+			description:
+				'Slider onChange event handler - fires after touchEnd and before URL manager updates (used to trigger search and allows for value mutation)',
 			table: {
 				type: {
 					summary: 'function',
