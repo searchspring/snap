@@ -481,6 +481,43 @@ describe('SearchResultStore', () => {
 			});
 		});
 
+		it('can use showDisabledSelectionValues to show all variants', () => {
+			const searchData = mockData.updateConfig({ siteId: 'z7h1jh' }).searchMeta('variants');
+
+			const variantSearchConfig = {
+				...searchConfig,
+				settings: {
+					variants: {
+						field: 'ss_variants',
+						showDisabledSelectionValues: true,
+					},
+				},
+			};
+
+			const results = new SearchResultStore(
+				variantSearchConfig,
+				services,
+				searchData.meta,
+				searchData.results,
+				searchData.pagination,
+				searchData.merchandising
+			);
+
+			expect(results.length).toBe(searchData.results?.length);
+
+			results.forEach((result, index) => {
+				const productData = searchData.results && searchData.results[index];
+				const variantData = productData?.attributes?.ss_variants;
+				expect(variantData).toBeDefined();
+				const parsedVariantData = JSON.parse(variantData as unknown as string);
+
+				const variants = (result as Product).variants;
+
+				expect(variants?.data.length).toStrictEqual(parsedVariantData.length);
+				expect(variants?.selections.length).toBe(Object.keys(parsedVariantData[0].options).length);
+			});
+		});
+
 		it('can be configured to preselect certain variants', () => {
 			const searchData = mockData.updateConfig({ siteId: 'z7h1jh' }).searchMeta('variants');
 
@@ -1078,6 +1115,313 @@ describe('SearchResultStore', () => {
 			expect(selectionValueWithMappings?.label).toEqual(mappedLabel);
 			expect(selectionValueWithMappings?.background).toEqual(mappedBackground);
 			expect(selectionValueWithMappings?.backgroundImageUrl).toEqual(mappedBackgroundImageUrl);
+		});
+
+		describe('variant selection disabled logic', () => {
+			it('correctly sets disabled property based on available variants', () => {
+				const mockVariantData: VariantData[] = [
+					// Available variants
+					{
+						mappings: { core: {} },
+						attributes: { available: true },
+						options: {
+							size: { value: '33' },
+							wash: { value: 'Palm Springs' },
+						},
+					},
+					{
+						mappings: { core: {} },
+						attributes: { available: true },
+						options: {
+							size: { value: '35' },
+							wash: { value: 'washy' },
+						},
+					},
+					// Unavailable variants
+					{
+						mappings: { core: {} },
+						attributes: { available: false },
+						options: {
+							size: { value: '23' },
+							wash: { value: 'dark blue' },
+						},
+					},
+					{
+						mappings: { core: {} },
+						attributes: { available: false },
+						options: {
+							size: { value: '24' },
+							wash: { value: 'dark blue' },
+						},
+					},
+				];
+
+				const mask = new ProductMask();
+				const variants = new Variants(mockVariantData, mask);
+
+				// Find size and wash selections
+				const sizeSelection = variants.selections.find((selection) => selection.field === 'size');
+				const washSelection = variants.selections.find((selection) => selection.field === 'wash');
+
+				expect(sizeSelection).toBeDefined();
+				expect(washSelection).toBeDefined();
+
+				// Check that we only get values for sizes that exist in the data
+				expect(sizeSelection!.values).toHaveLength(2);
+				expect(washSelection!.values).toHaveLength(2);
+
+				// Check selection values
+				const size33 = sizeSelection!.values.find((val) => val.value === '33');
+				const size35 = sizeSelection!.values.find((val) => val.value === '35');
+				const size23 = sizeSelection!.values.find((val) => val.value === '23');
+				const size24 = sizeSelection!.values.find((val) => val.value === '24');
+
+				const palmSprings = washSelection!.values.find((val) => val.value === 'Palm Springs');
+				const washy = washSelection!.values.find((val) => val.value === 'washy');
+
+				const darkblue = washSelection!.values.find((val) => val.value === 'dark blue');
+
+				// Assertions for size values - both should be enabled since there are available variants for both
+				expect(size33?.disabled).toBe(false); // Available variant with size 33 (33 / Palm Springs)
+				expect(size35?.disabled).toBe(false); // Available variant with size 35 (35 / washy)
+
+				// Assertions for wash values - both should be enabled since there are available variants for both
+				expect(palmSprings?.disabled).toBe(false); // Available variant with Palm Springs wash (33 / Palm Springs)
+				expect(washy?.disabled).toBe(false); // Available variant with washy wash (35 / washy)
+
+				//removes unavailable selections by default
+				expect(darkblue).toBe(undefined); // Unavailable
+				expect(size23).toBe(undefined); // Unavailable
+				expect(size24).toBe(undefined); // Unavailable
+			});
+
+			it('correctly handles disabled logic when selecting different options', () => {
+				// Mock variant data with multiple combinations
+				const mockVariantData: VariantData[] = [
+					{
+						mappings: { core: {} },
+						attributes: { available: true },
+						options: {
+							color: { value: 'red' },
+							size: { value: 'small' },
+						},
+					},
+					{
+						mappings: { core: {} },
+						attributes: { available: true },
+						options: {
+							color: { value: 'red' },
+							size: { value: 'medium' },
+						},
+					},
+					{
+						mappings: { core: {} },
+						attributes: { available: false },
+						options: {
+							color: { value: 'blue' },
+							size: { value: 'small' },
+						},
+					},
+					{
+						mappings: { core: {} },
+						attributes: { available: true },
+						options: {
+							color: { value: 'blue' },
+							size: { value: 'large' },
+						},
+					},
+				];
+
+				const mask = new ProductMask();
+				const variants = new Variants(mockVariantData, mask);
+
+				const colorSelection = variants.selections.find((selection) => selection.field === 'color');
+				const sizeSelection = variants.selections.find((selection) => selection.field === 'size');
+
+				expect(colorSelection).toBeDefined();
+				expect(sizeSelection).toBeDefined();
+
+				// Initially, all colors should be enabled because there are available variants for both red and blue
+				const redColor = colorSelection!.values.find((val) => val.value === 'red');
+				const blueColor = colorSelection!.values.find((val) => val.value === 'blue');
+
+				expect(redColor?.disabled).toBe(false); // Available variants: red/small, red/medium
+				expect(blueColor?.disabled).toBe(false); // Available variant: blue/large
+
+				// All sizes should be enabled because there are available variants for small, medium, and large
+				const smallSize = sizeSelection!.values.find((val) => val.value === 'small');
+				const mediumSize = sizeSelection!.values.find((val) => val.value === 'medium');
+				const largeSize = sizeSelection!.values.find((val) => val.value === 'large');
+
+				expect(smallSize?.disabled).toBe(false); // Available variant: red/small
+				expect(mediumSize?.disabled).toBe(false); // Available variant: red/medium
+				expect(largeSize?.disabled).toBe(false); // Available variant: blue/large
+
+				// Now select red color and check if disabled values update correctly
+				colorSelection!.select('red');
+
+				// After selecting red, we need to check the availability again
+				// The available property should be based on filtered variants, but disabled should still be based on all available variants
+				const updatedRedColor = colorSelection!.values.find((val) => val.value === 'red');
+				const updatedBlueColor = colorSelection!.values.find((val) => val.value === 'blue');
+				const updatedSmallSize = sizeSelection!.values.find((val) => val.value === 'small');
+				const updatedMediumSize = sizeSelection!.values.find((val) => val.value === 'medium');
+				const updatedLargeSize = sizeSelection!.values.find((val) => val.value === 'large');
+
+				// Disabled should still be based on whether ANY available variant has that value
+				expect(updatedRedColor?.disabled).toBe(false);
+				expect(updatedBlueColor?.disabled).toBe(false);
+				expect(updatedSmallSize?.disabled).toBe(false);
+				expect(updatedMediumSize?.disabled).toBe(false);
+				expect(updatedLargeSize?.disabled).toBe(false);
+			});
+
+			it('handles all variants unavailable correctly', () => {
+				// Mock variant data where all values have no available variants
+				const mockVariantData: VariantData[] = [
+					{
+						mappings: { core: {} },
+						attributes: { available: false },
+						options: {
+							color: { value: 'red' },
+							size: { value: 'small' },
+						},
+					},
+					{
+						mappings: { core: {} },
+						attributes: { available: false },
+						options: {
+							color: { value: 'blue' },
+							size: { value: 'medium' },
+						},
+					},
+					{
+						mappings: { core: {} },
+						attributes: { available: false },
+						options: {
+							color: { value: 'green' },
+							size: { value: 'large' },
+						},
+					},
+					{
+						mappings: { core: {} },
+						attributes: { available: false },
+						options: {
+							color: { value: 'orange' },
+							size: { value: 'small' },
+						},
+					},
+				];
+
+				const mask = new ProductMask();
+
+				// Enable showDisabledSelectionValues to include variant selections with no available options
+				const config = { field: 'ss_variants', showDisabledSelectionValues: true };
+				const variants = new Variants(mockVariantData, mask, config);
+
+				const colorSelection = variants.selections.find((selection) => selection.field === 'color');
+				const sizeSelection = variants.selections.find((selection) => selection.field === 'size');
+
+				expect(colorSelection).toBeDefined();
+				expect(sizeSelection).toBeDefined();
+
+				// Ensure that no active variant is selected
+				expect(variants.active).toBeUndefined();
+				// Ensure that no variant selections are selected
+				expect(colorSelection?.selected).toBeUndefined();
+				expect(sizeSelection?.selected).toBeUndefined();
+
+				// Check color values
+				const redColor = colorSelection!.values.find((val) => val.value === 'red');
+				const blueColor = colorSelection!.values.find((val) => val.value === 'blue');
+				const greenColor = colorSelection!.values.find((val) => val.value === 'green');
+				const orangeColor = colorSelection!.values.find((val) => val.value === 'orange');
+
+				expect(redColor?.disabled).toBe(true);
+				expect(blueColor?.disabled).toBe(true);
+				expect(greenColor?.disabled).toBe(true);
+				expect(orangeColor?.disabled).toBe(true);
+
+				// Check size values
+				const smallSize = sizeSelection!.values.find((val) => val.value === 'small');
+				const mediumSize = sizeSelection!.values.find((val) => val.value === 'medium');
+				const largeSize = sizeSelection!.values.find((val) => val.value === 'large');
+
+				expect(smallSize?.disabled).toBe(true);
+				expect(mediumSize?.disabled).toBe(true);
+				expect(largeSize?.disabled).toBe(true);
+			});
+
+			it('sets disabled to true when no available variants have that value and can show unavailable selections with showDisabledSelectionValues', () => {
+				// Mock variant data where some values have no available variants
+				const mockVariantData: VariantData[] = [
+					{
+						mappings: { core: {} },
+						attributes: { available: true },
+						options: {
+							color: { value: 'red' },
+							size: { value: 'small' },
+						},
+					},
+					{
+						mappings: { core: {} },
+						attributes: { available: false },
+						options: {
+							color: { value: 'blue' },
+							size: { value: 'medium' },
+						},
+					},
+					{
+						mappings: { core: {} },
+						attributes: { available: false },
+						options: {
+							color: { value: 'green' },
+							size: { value: 'large' },
+						},
+					},
+					{
+						mappings: { core: {} },
+						attributes: { available: false },
+						options: {
+							color: { value: 'orange' },
+							size: { value: 'small' },
+						},
+					},
+				];
+
+				const mask = new ProductMask();
+				// Enable showDisabledSelectionValues to include variant selections with no available options
+				const config = { field: 'ss_variants', showDisabledSelectionValues: true };
+				const variants = new Variants(mockVariantData, mask, config);
+
+				const colorSelection = variants.selections.find((selection) => selection.field === 'color');
+				const sizeSelection = variants.selections.find((selection) => selection.field === 'size');
+
+				expect(colorSelection).toBeDefined();
+				expect(sizeSelection).toBeDefined();
+
+				// All variant selection values should be created, including disabled ones
+
+				// Check color values
+				const redColor = colorSelection!.values.find((val) => val.value === 'red');
+				const blueColor = colorSelection!.values.find((val) => val.value === 'blue');
+				const greenColor = colorSelection!.values.find((val) => val.value === 'green');
+				const orangeColor = colorSelection!.values.find((val) => val.value === 'orange');
+
+				expect(redColor?.disabled).toBe(false); // Available variant: red/small
+				expect(blueColor?.disabled).toBe(true); // No available variants with blue
+				expect(greenColor?.disabled).toBe(true); // No available variants with green
+				expect(orangeColor?.disabled).toBe(true); // No available variants with orange
+
+				// Check size values
+				const smallSize = sizeSelection!.values.find((val) => val.value === 'small');
+				const mediumSize = sizeSelection!.values.find((val) => val.value === 'medium');
+				const largeSize = sizeSelection!.values.find((val) => val.value === 'large');
+
+				expect(smallSize?.disabled).toBe(false); // Available variant: red/small
+				expect(mediumSize?.disabled).toBe(true); // No available variants with medium
+				expect(largeSize?.disabled).toBe(true); // No available variants with large
+			});
 		});
 
 		describe('variant class', () => {

@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.70.1](https://github.com/searchspring/snap/compare/v0.70.0...v0.70.1) (2025-11-17)
+
+**Note:** Version bump only for package @searchspring/snap-store-mobx
+
+# [0.70.0](https://github.com/searchspring/snap/compare/v0.69.2...v0.70.0) (2025-11-13)
+
+### Bug Fixes
+
+- **searchresultstore:** bugfix for disabled variant selection logic ([0346817](https://github.com/searchspring/snap/commit/03468178b8c49d38cabaae74e3f14569c0186c1e))
+
+### Features
+
+- **preact/components/recommendationbundle:** api bundleSeed and refactor recommendationBundle ([28a32ce](https://github.com/searchspring/snap/commit/28a32ce34b9bf9f9a120572b006502a6c1ecbec6))
+- **searchresultstore:** added config setting to showDisabledSelections for the variants ([918dee6](https://github.com/searchspring/snap/commit/918dee65f4ee323a1dcdd0d7aee34f7d5b0163db))
+
+## [0.69.2](https://github.com/searchspring/snap/compare/v0.69.1...v0.69.2) (2025-11-04)
+
+**Note:** Version bump only for package @searchspring/snap-store-mobx
+
 ## [0.69.1](https://github.com/searchspring/snap/compare/v0.69.0...v0.69.1) (2025-10-23)
 
 **Note:** Version bump only for package @searchspring/snap-store-mobx
