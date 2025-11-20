@@ -25,7 +25,7 @@ The `SearchController` is used when making queries to the API `search` endpoint.
 | settings.variants.showDisabledSelectionValues | determines if completely out of stock (disabled) options should appear in variant selections | false |   | 
 | settings.variants.realtime.enabled | enable real time variant updates | ➖ |   | 
 | settings.variants.realtime.filters | specify which filters to use to determine which results are updated | ➖ |   | 
-| settings.variants.options | object keyed by option individual option field values for configuration of any option settings  | ➖ |   | 
+| settings.variants.options | object keyed by individual option field values for configuration of any option settings  | ➖ |   | 
 | settings.infinite | enable infinite scrolling by setting to empty object | ➖ |   |
 | settings.infinite.backfill | number of pages allowed for backfill | ➖ |   |
 | settings.restorePosition.enabled | boolean to enable/disable using `restorePosition` event middleware to restore the window scroll position when navigating back to previous page (when using infinite this is automatically set to true) | false |   |
@@ -44,6 +44,13 @@ This will invoke a search request to Searchspring's search API and populate the 
 
 ```typescript
 searchController.search();
+```
+
+## AddToCart
+This will invoke an addToCart event (see below). Takes an array of Products as a parameter. 
+
+```typescript
+searchController.addToCart([searchController.store.results[0]]);
 ```
 
 ## Search History

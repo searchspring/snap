@@ -64,6 +64,7 @@ import('./docs/documents.js').then(function (_) {
 				b: '(./reference-url-manager-react-linker)',
 			},
 			{ a: '(https://github.com/searchspring/snap/tree/main/docs/REFERENCE_CONFIGURATION_MIDDLEWARE.md)', b: '(./reference-snap-preact-middleware)' },
+			{ a: '(https://github.com/searchspring/snap/tree/main/docs/REFERENCE_VARIANTS.md)', b: '(./reference-variants)' },
 			{ a: '(https://searchspring.github.io/snap/preact-components)', b: '(./preact-components)' },
 			{ a: '(https://searchspring.github.io/snap/preact-components?params=', b: '(./preact-components?params=' },
 		]);

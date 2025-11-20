@@ -17,7 +17,7 @@ The `RecommendationController` is used when making queries to the API `recommend
 | settings.variants.showDisabledSelectionValues | determines if completely out of stock (disabled) options should appear in variant selections | false |   | 
 | settings.variants.realtime.enabled | enable real time variant updates | ➖ |   | 
 | settings.variants.realtime.filters | specify which filters to use to determine which results are updated | ➖ |   | 
-| settings.variants.options | object keyed by option individual option field values for configuration of any option settings  | ➖ |   | 
+| settings.variants.options | object keyed by individual option field values for configuration of any option settings  | ➖ |   | 
 
 
 ## Initialize
@@ -25,6 +25,13 @@ Invoking the `init` method is required to subscribe to changes that occur in the
 
 ```typescript
 recommendationController.init();
+```
+
+## AddToCart
+This will invoke an addToCart event (see below). Takes an array of Products as a parameter. 
+
+```typescript
+recommendationController.addToCart([recommendationController.store.results[0]]);
 ```
 
 ## Events
