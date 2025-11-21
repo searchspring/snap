@@ -18,10 +18,15 @@ function getSharedParentObserver(): MutationObserver {
 	if (!sharedParentObserver) {
 		sharedParentObserver = new MutationObserver((mutations) => {
 			// Call callbacks for all affected elements
+			// De-duplicate callbacks to avoid multiple checks per frame if multiple parents mutate
+			const callbacksToRun = new Set<() => void>();
+
 			for (const mutation of mutations) {
 				const callbacks = parentObserverCallbacks.get(mutation.target as Element);
-				callbacks?.forEach((callback) => callback());
+				callbacks?.forEach((callback) => callbacksToRun.add(callback));
 			}
+
+			callbacksToRun.forEach((callback) => callback());
 		});
 	}
 	return sharedParentObserver;
@@ -89,6 +94,7 @@ export const useIntersectionAdvanced = (ref: MutableRef<HTMLElement | null>, opt
 		let mutationObserver: MutationObserver | null = null;
 		let cleanupParentObserver: (() => void) | null = null;
 		let isIntersectingViewport = false;
+		let rafId: number | null = null;
 
 		if (!ref.current) return;
 
@@ -136,15 +142,36 @@ export const useIntersectionAdvanced = (ref: MutableRef<HTMLElement | null>, opt
 		const checkVisibility = () => {
 			if (!ref.current) return;
 
-			const isVisible = elementIsVisible(ref.current);
-			const shouldBeVisible = isIntersectingViewport && isVisible;
-			const isCurrentlyVisible = visibleTimerRef.current !== null || isIntersecting;
-
-			if (shouldBeVisible && !isCurrentlyVisible) {
-				handleVisible();
-			} else if (!shouldBeVisible && isCurrentlyVisible) {
-				handleHidden();
+			// Cancel any pending check to debounce within the same frame
+			if (rafId) {
+				cancelAnimationFrame(rafId);
 			}
+
+			rafId = requestAnimationFrame(() => {
+				rafId = null;
+				if (!ref.current) return;
+
+				const isCurrentlyVisible = visibleTimerRef.current !== null || isIntersecting;
+
+				// Optimization: Check intersection with viewport first.
+				// If not intersecting viewport, we are definitely not visible in the sense of "intersection + visibility".
+				// This avoids expensive getComputedStyle calls in elementIsVisible for off-screen elements.
+				if (!isIntersectingViewport) {
+					if (isCurrentlyVisible) {
+						handleHidden();
+					}
+					return;
+				}
+
+				// If we are intersecting the viewport, we must check if the element is actually visible (opacity, display, etc).
+				const isVisible = elementIsVisible(ref.current);
+
+				if (isVisible && !isCurrentlyVisible) {
+					handleVisible();
+				} else if (!isVisible && isCurrentlyVisible) {
+					handleHidden();
+				}
+			});
 		};
 
 		mutationObserver = new MutationObserver(checkVisibility);
@@ -169,6 +196,9 @@ export const useIntersectionAdvanced = (ref: MutableRef<HTMLElement | null>, opt
 		return () => {
 			setIntersecting(false);
 			clearTimer();
+			if (rafId) {
+				cancelAnimationFrame(rafId);
+			}
 			if (observer && ref.current) {
 				observer.unobserve(ref.current);
 			}
