@@ -18,7 +18,7 @@ const CSS = {
 			justifyContent: 'center',
 			height: 'auto',
 			'& img': {
-				visibility: visibility as React.CSSProperties['visibility'],
+				visibility: visibility === 'hidden' ? 'hidden' : undefined,
 				flexShrink: '0',
 				objectFit: 'contain',
 				maxWidth: '100%',
