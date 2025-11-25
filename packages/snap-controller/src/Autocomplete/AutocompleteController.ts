@@ -70,6 +70,7 @@ export class AutocompleteController extends AbstractController {
 	declare store: AutocompleteStore;
 	declare config: AutocompleteControllerConfig;
 	public storage: StorageStore;
+	private lastSearchQuery: string | undefined;
 
 	events: {
 		product: Record<
@@ -674,7 +675,6 @@ export class AutocompleteController extends AbstractController {
 
 			const searchProfile = this.profiler.create({ type: 'event', name: 'search', context: params }).start();
 
-			this.events = { product: {} };
 			const [meta, response] = await this.client.autocomplete(params);
 			// @ts-ignore : MockClient will overwrite the client search() method and use SearchData to return mock data which already contains meta data
 			if (!response.meta) {
@@ -684,6 +684,19 @@ export class AutocompleteController extends AbstractController {
 
 			searchProfile.stop();
 			this.log.profile(searchProfile);
+
+			if (response.search?.query === this.lastSearchQuery) {
+				const impressedResultIds = Object.keys(this.events.product).filter((resultId) => this.events.product[resultId]?.impression);
+				this.events = {
+					product: impressedResultIds.reduce<Record<string, { impression: boolean }>>((acc, resultId) => {
+						acc[resultId] = { impression: true };
+						return acc;
+					}, {}),
+				};
+			} else {
+				this.events = { product: {} };
+				this.lastSearchQuery = response.search?.query;
+			}
 
 			const afterSearchProfile = this.profiler.create({ type: 'event', name: 'afterSearch', context: params }).start();
 
