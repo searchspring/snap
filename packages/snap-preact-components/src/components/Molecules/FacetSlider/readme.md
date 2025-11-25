@@ -66,6 +66,16 @@ The `stickyHandleLabel` prop specifies if the handle value text should display a
 />
 ```
 
+### separateHandles
+The `separateHandles` prop prevents the minimum and maximum slider values from being equal. When enabled, if a user attempts to set both handles to the same value, they will be automatically separated by one step value. The component intelligently determines whether to adjust the min or max value based on the available range.
+
+```jsx
+<FacetSlider 
+	facet={controller.store.facets.filter(facet => facet.display === 'slider').pop()} 
+	separateHandles={true}
+/>
+```
+
 ### handleDraggingColor
 The `handleDraggingColor` prop specifies the handle color while dragging.
 
@@ -109,7 +119,7 @@ The `railColor` prop specifies the slider rail (foreground) color.
 ### Events
 
 #### onChange
-The `onChange` prop allows for a custom callback function for when a slider handle has been changed.
+The `onChange` prop allows for a custom callback function for when a slider handle has been changed. This callback is invoked **before** the URL manager updates occur, allowing for mutation of values or other operations prior to API request.
 
 ```jsx
 <FacetSlider 
