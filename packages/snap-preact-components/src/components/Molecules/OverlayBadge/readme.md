@@ -41,7 +41,7 @@ The required `result` prop specifies a reference to a product object from the `r
 ```
 
 ### componentMap
-The `componentMap` prop allows for custom badge components. This functionallity requires the component and accompanying files to be synced to the Searchspring Management Console using Snapfu.
+The `componentMap` prop allows for custom badge components. This functionality requires the component and accompanying files to be synced to the Searchspring Management Console using Snapfu.
 
 ```jsx
 import { CustomOnSale } from './components/Badges/CustomOnSale';

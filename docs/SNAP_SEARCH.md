@@ -1,22 +1,95 @@
-## Displaying Data
+# Search
 
-At this point you are ready to start building components that render data from the controller's store. Here are a few common store properties and suggested usage in components. If you have used Snapfu to start with a template, these component examples will already be included.
+To set up Search using Snap, we'll need to define a search controller in our Snap configuration. See [SearchController reference](https://searchspring.github.io/snap/reference-controller-search) for all available configuration options.
 
-## All Stores
 
-All of the following properties are available on all stores (Search, Autocomplete, Finder, & Recommendations)
+```ts
+// src/index.ts
 
-### controller.store.loaded
+const snap = new Snap({
+    client: {
+		globals: {
+			siteId: 'abc123',
+		},
+	},
+    controllers: {
+        search: [
+            {
+                config: {
+                    id: 'search',
+                },
+                targeters: [
+                    {
+                        selector: '#searchspring-content',
+                        component: async () => {
+                            return (await import('./components/Content/Content')).Content;
+                        },
+                    },
+                ],
+            },
+        ],
+    },
+});
+```
 
-The `loaded` property will be true when the store has been loaded with data and is available to be consumed. This property is recommended to conditionally render a component.
+### Category Pages / Background Filters
+Optionally, apply filters from the page's content to the SearchControllerConfig `globals.filters` property. The controller globals are similar to the client globals in that all search requests will include the parameters specified. This can be used to configure category/brand pages, or other special filtering to apply to the current page's search requests.
 
-### controller.store.loading
+For example, if a global variable `snapConfig` exists on the page (must be defined prior to our Snap script):
 
-The `loading` property will be true is a network request is in progress. This property is recommended to conditionally render a loading status (ie. spinning icon or loading bar)
+```html
+<script>
+	const snapConfig = {
+		shopper: {
+			id: 'shopper@emailprovider.com'
+		},
+		category: {
+			name: 'Shirts',
+			value: 'Clothing/Shirts'
+		}
+	}
+</script>
+```
 
-### controller.store.custom
-
-See [`custom` property](https://github.com/searchspring/snap/tree/main/packages/snap-store-mobx/src/Abstract)
+```typescript
+// src/index.ts
+const backgroundFilters = [];
+if (snapConfig?.category) {
+	backgroundFilters.push({
+		type: 'value',
+		background: true,
+		field: 'categories_hierarchy',
+		value: snapConfig.category.value,
+	});
+}
+const snap = new Snap({
+    client: {
+		globals: {
+			siteId: 'abc123',
+		},
+	},
+    controllers: {
+        search: [
+            {
+                config: {
+                    id: 'search',
+					globals: {
+						filters: backgroundFilters,
+					},
+                },
+                targeters: [
+                    {
+                        selector: '#searchspring-content',
+                        component: async () => {
+                            return (await import('./components/Content/Content')).Content;
+                        },
+                    },
+                ],
+            },
+        ],
+    },
+});
+```
 
 ## Search Store
 
@@ -25,11 +98,11 @@ The following properties are specific to a Search Store via a Search Controller.
 
 ### SearchController.store.merchandising
 
-The `merchandising` property contains merchandising redirects and banner content. It is recommended to utlizing the `<Banner/>` component from `@searchspring/snap-preact-components` to display the various merchandising banners.
+The `merchandising` property contains merchandising redirects and banner content. It is recommended to utilize the `<Banner/>` component from `@searchspring/snap-preact-components` to display the various merchandising banners.
 
 The available banner types include: `header`, `banner`, `footer`, `left`, `inline`
 
-For inline banners, the `<InlineBanner/>` component should be used instead. An example of this usage can be found in the 'store.results' section below.
+For inline banners, the `<InlineBanner/>` component should be used instead. An example of this usage can be found in the [store.results](https://searchspring.github.io/snap/snap-search#searchcontrollerstoreresults) section below.
 
 ```jsx
 import { Banner } from '@searchspring/snap-preact-components';
@@ -121,7 +194,7 @@ export class SearchHeader extends Component {
 
 ### SearchController.store.pagination
 
-The `pagination` property is not only used for information about the current query, but also contains everything needed for handling pagination of a query that yields multiple pages. Invoking the `getPages` method will retrieve the specified number of page objects. For more about the pagination store, checkout the [Search Controller docs](#/package-controller-search).
+The `pagination` property is not only used for information about the current query, but also contains everything needed for handling pagination of a query that yields multiple pages. Invoking the `getPages` method will retrieve the specified number of page objects. For more about the pagination store, checkout the [Search Controller reference](https://searchspring.github.io/snap/reference-controller-search).
 
 ```jsx
 @withController
@@ -214,6 +287,18 @@ Each result object contains the following notable properties:
 `result.mappings.core` core attributes configured in the [Searchspring Management Console](https://manage.searchspring.net/)
 
 `result.attributes` remaining attributes
+
+`result.mask` provides a way to temporarily modify result data without changing the underlying store data. This can be used in combination with the `result.display` for simple UI effects like showing alternate product images on hover, or more complex interactions like updating displayed prices when selecting different product variants.
+
+`result.mask.merge` a function to merge new mask data with the current display state. This function accepts a single object as its only parameter.
+
+`result.mask.set` a function to set the mask data. Overwrites the current mask data. This function accepts a single object as its only parameter.
+
+`result.mask.clear` a function to clear the mask data, reverting to the original display state.
+
+`result.display` an object used for display in result components. Containing the currently set display state from the `result.mask` combined with the underlying core data for the result. 
+
+`result.variants` contains information about product variants like size and color options, as well as the variant selections data. (requires variants to be enabled and configured) For more variant integration information, see [Variants Reference](https://github.com/searchspring/snap/tree/main/docs/REFERENCE_VARIANTS.md)
 
 `result.custom` an empty object that is not modified by core Snap packages. This is available for you to modify and store custom data to be rendered. See [`custom` property](https://github.com/searchspring/snap/tree/main/packages/snap-store-mobx/src/Abstract)
 
@@ -413,55 +498,4 @@ export class FilterSummary extends Component {
 	}
 }
 ```
-
-
-## Autocomplete Store
-
-It is recommended to utlizing the `<Autocomplete/>` component from `@searchspring/snap-preact-components` to display Autocomplete.
-
-The following properties are specific to an Autocomplete Store via an Autocomplete Controller.
-
-### AutocompleteController.store.merchandising
-
-See `SearchController.store.merchandising` section above.
-
-### AutocompleteController.store.search
-
-The `search` property contains information about the current query. However unlike SearchController.store.search, AutocompleteController.store.search does not contain a `didYouMean` query. 
-
-
-### AutocompleteController.store.facets
-
-See `SearchController.store.facets` section above.
-
-In addition, each facet value will contain a `preview` method that should be invoked on the `onFocus` event of a facet value. This method will lock the current facets such that when the store is updated with the filtered results, the original facets do not get replaced with the new facets from the filtered query. 
-
-### AutocompleteController.store.filters
-
-See `SearchController.store.filters` section above.
-
-### AutocompleteController.store.results
-
-See `SearchController.store.results` section above.
-
-### AutocompleteController.store.terms
-
-The `terms` property contains an array of autocomplete terms that are relevant to the query. Each term contains a `preview` method that should be invoked on the `onFocus` event of a term value. This method will lock the current terms and unlock the previous facets (if changing terms with a facet filter applied) such that when the store is updated with the results for the new term, the original terms do not change.
-
-### AutocompleteController.store.trending
-
-The `trending` property contains an array of trending `terms`. Trending terms are not relevant to the current query and are generated from collected reporting data. It is recommended to display trending terms as a starting point when the `<input/>` is focused and does not yet contain a value. Trending terms must be enabled via settings in the AutocompleteController config.
-
-
-### AutocompleteController.store.pagination
-
-See `SearchController.store.pagination` section above.
-
-### AutocompleteController.store.sorting
-
-See `SearchController.store.sorting` section above.
-
-### AutocompleteController.store.history
-
-The `history` property contains an array of previously searched `terms`. Historical terms are not relevant to the current query and are stored in localstorage. Historical terms can be displayed in the Autocomplete component in place of or in addition to trending and suggested terms. Historical terms must be enabled via settings in the AutocompleteController config.
 

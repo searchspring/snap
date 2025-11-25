@@ -1,4 +1,4 @@
-## DomTargeter
+# DomTargeter
 `DomTargeter` is a utility used for rendering components in specified DOM targets. 
 
 ```typescript
