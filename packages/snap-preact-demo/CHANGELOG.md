@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.71.0](https://github.com/searchspring/snap/compare/v0.70.1...v0.71.0) (2025-11-26)
+
+### Bug Fixes
+
+- **autocomplete:** prevent impressing results when subsequent queries are the same ([2a154b5](https://github.com/searchspring/snap/commit/2a154b5fdecd3d56fbcd122205e16a9edf50b5ec))
+
 ## [0.70.1](https://github.com/searchspring/snap/compare/v0.70.0...v0.70.1) (2025-11-17)
 
 **Note:** Version bump only for package @searchspring/snap-preact-demo

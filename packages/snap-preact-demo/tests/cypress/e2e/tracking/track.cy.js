@@ -201,6 +201,42 @@ describe('Tracking Beacon 2.0', () => {
 		});
 	});
 
+	it('tracked autocomplete impression only once per unique search query', () => {
+		let counter = 0;
+		cy.intercept('POST', /beacon.searchspring.io\/beacon\/v2\/.*\/autocomplete\/impression/, (req) => {
+			counter++;
+			req.reply({ success: true });
+		}).as('beacon2/autocomplete/impression-custom');
+
+		cy.visit('https://localhost:2222');
+		cy.get('input[name="q"]').type('s');
+		cy.wait(`@beacon2/autocomplete/impression-custom`).then(({ request, response }) => {
+			expect(response.body).to.have.property('success').to.equal(true);
+
+			expect(counter).to.equal(1);
+
+			cy.intercept('POST', /beacon.searchspring.io\/beacon\/v2\/.*\/autocomplete\/impression/, (req) => {
+				counter++;
+				req.reply({ success: true });
+			});
+
+			cy.get('.ss__autocomplete__terms__option--active')
+				.first()
+				.invoke('text')
+				.then((activeTermText) => {
+					expect(activeTermText).to.be.a('string');
+					expect(activeTermText.length).to.be.greaterThan(1);
+
+					const { data } = JSON.parse(request.body);
+					expect(data).to.have.property('q').to.be.a('string').and.to.equal(activeTermText);
+					cy.get('input[name="q"]').type(activeTermText.substring(1, 2));
+					cy.wait(2000).then(() => {
+						expect(counter).to.equal(1);
+					});
+				});
+		});
+	});
+
 	it('tracked recommendation render, impression, clickthrough', () => {
 		cy.visit('https://localhost:2222/product.html');
 
