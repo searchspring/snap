@@ -108,7 +108,7 @@ const CSS = {
 					position: 'relative',
 					margin: `0px ${5 + (spaceBetween || 0)}px`,
 				},
-				'& .ss__recommendation-bundle__wrapper__selector__result-wrapper__checkbox': {
+				'& .ss__recommendation-bundle__wrapper__selector__result-wrapper__checkbox-wrapper': {
 					position: 'absolute',
 					top: '0',
 					right: '0',
@@ -152,7 +152,8 @@ export const RecommendationBundle = observer((properties: RecommendationBundlePr
 		ctaButtonSuccessText: 'Bundle Added!',
 		ctaButtonSuccessTimeout: 2000,
 		ctaInline: true,
-
+		hideTooltip: true,
+		checkboxClickPadding: 5,
 		/* TODO: Cannot use default values due to breaking changes - must change in 1.0 */
 		// title: properties.controller?.store?.profile?.display?.templateParameters?.title,
 		// description: properties.controller?.store?.profile?.display?.templateParameters?.description,
@@ -186,6 +187,7 @@ export const RecommendationBundle = observer((properties: RecommendationBundlePr
 		hideCheckboxes,
 		limit,
 		seedText,
+		hideTooltip,
 		vertical,
 		onAddToCart,
 		separatorIconSeedOnly,
@@ -197,6 +199,7 @@ export const RecommendationBundle = observer((properties: RecommendationBundlePr
 		ctaButtonSuccessTimeout,
 		disableStyles,
 		ctaIcon,
+		checkboxClickPadding,
 		ctaInline,
 		style,
 		lazyRender,
@@ -410,6 +413,8 @@ export const RecommendationBundle = observer((properties: RecommendationBundlePr
 				theme: props.theme,
 				icon: separatorIconSeedOnly ? false : separatorIcon,
 				className: idx + 1 == resultsToRender.length ? 'ss__recommendation-bundle__wrapper__selector--last' : '',
+				checkboxClickPadding: checkboxClickPadding,
+				hideTooltip: hideTooltip,
 			};
 
 			if (isSeed) {
@@ -482,6 +487,7 @@ export const RecommendationBundle = observer((properties: RecommendationBundlePr
 														e.stopPropagation();
 														onProductSelect(seed);
 													}}
+													checkboxClickPadding={checkboxClickPadding}
 													checked={selectedItems.findIndex((item) => item.id == seed.id) > -1}
 													icon={separatorIcon}
 													hideCheckboxes={hideCheckboxes}
@@ -584,6 +590,8 @@ export interface RecommendationBundleProps extends ComponentProps {
 	resultComponent?: JSX.Element;
 	preselectedCount?: number;
 	hideCheckboxes?: boolean;
+	hideTooltip?: boolean;
+	checkboxClickPadding?: number;
 	hideSeed?: boolean;
 	seedText?: string;
 	separatorIconSeedOnly?: boolean;
