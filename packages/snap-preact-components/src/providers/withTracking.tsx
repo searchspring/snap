@@ -2,7 +2,7 @@ import { h, ComponentType, FunctionComponent } from 'preact';
 import type { Product } from '@searchspring/snap-store-mobx';
 import type { SearchController, AutocompleteController, RecommendationController } from '@searchspring/snap-controller';
 import { createImpressionObserver } from '../utilities';
-import { useCallback } from 'preact/hooks';
+import { useEffect, useCallback } from 'preact/hooks';
 
 interface WithTrackingProps {
 	controller?: SearchController | AutocompleteController | RecommendationController;
@@ -52,16 +52,23 @@ export function withTracking<Props extends WithTrackingProps>(WrappedComponent: 
 			}
 		}
 
-		const currentRef = ref.current;
-		if (currentRef) {
-			const handleClick = useCallback((e: MouseEvent) => {
+		const handleClick = useCallback(
+			(e: MouseEvent) => {
 				controller?.track.product.click(e, result as Product);
-			}, []);
-			currentRef.setAttribute('sstracking', 'true');
-			currentRef.removeEventListener('click', handleClick);
-			currentRef.addEventListener('click', handleClick);
-		}
+			},
+			[controller, result]
+		);
 
+		useEffect(() => {
+			const currentRef = ref.current;
+			if (currentRef) {
+				currentRef.setAttribute('sstracking', 'true');
+				currentRef.addEventListener('click', handleClick, true); // Use capture phase
+				return () => {
+					currentRef.removeEventListener('click', handleClick, true);
+				};
+			}
+		}, [ref, handleClick]);
 		const trackingProps = {
 			...restProps,
 			controller,

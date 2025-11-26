@@ -204,6 +204,7 @@ describe('addToCart', () => {
 			client.mockData.updateConfig({ siteId: 'tfdz6e', search: 'variants' });
 			const optionSearchConfig: SearchStoreConfig = {
 				...searchConfig,
+				id: 'searchVariants',
 				settings: {
 					redirects: {
 						singleResult: false,
