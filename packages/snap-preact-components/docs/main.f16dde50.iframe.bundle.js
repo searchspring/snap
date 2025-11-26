@@ -1,4 +1,4 @@
-/*! For license information please see main.4c3a00c1.iframe.bundle.js.LICENSE.txt */
+/*! For license information please see main.f16dde50.iframe.bundle.js.LICENSE.txt */
 (self.webpackChunk_searchspring_snap_preact_components = self.webpackChunk_searchspring_snap_preact_components || []).push([
 	[792],
 	{
@@ -3695,7 +3695,13 @@
 							flexDirection: 'column',
 							justifyContent: 'center',
 							height: 'auto',
-							'& img': { visibility, flexShrink: '0', objectFit: 'contain', maxWidth: '100%', maxHeight: '100%' },
+							'& img': {
+								visibility: 'hidden' === visibility ? 'hidden' : void 0,
+								flexShrink: '0',
+								objectFit: 'contain',
+								maxWidth: '100%',
+								maxHeight: '100%',
+							},
 						});
 					},
 				};
@@ -12311,6 +12317,23 @@
 							"<FacetSlider \n    facet={controller.store.facets.filter(facet => facet.display === 'slider').pop()} \n    stickyHandleLabel={true}\n/>\n"
 						)
 					),
+					(0, esm.yg)('h3', { id: 'separatehandles' }, 'separateHandles'),
+					(0, esm.yg)(
+						'p',
+						null,
+						'The ',
+						(0, esm.yg)('inlineCode', { parentName: 'p' }, 'separateHandles'),
+						' prop prevents the minimum and maximum slider values from being equal. When enabled, if a user attempts to set both handles to the same value, they will be automatically separated by one step value. The component intelligently determines whether to adjust the min or max value based on the available range.'
+					),
+					(0, esm.yg)(
+						'pre',
+						null,
+						(0, esm.yg)(
+							'code',
+							{ parentName: 'pre', className: 'language-jsx' },
+							"<FacetSlider \n    facet={controller.store.facets.filter(facet => facet.display === 'slider').pop()} \n    separateHandles={true}\n/>\n"
+						)
+					),
 					(0, esm.yg)('h3', { id: 'handledraggingcolor' }, 'handleDraggingColor'),
 					(0, esm.yg)(
 						'p',
@@ -12380,7 +12403,9 @@
 						null,
 						'The ',
 						(0, esm.yg)('inlineCode', { parentName: 'p' }, 'onChange'),
-						' prop allows for a custom callback function for when a slider handle has been changed.'
+						' prop allows for a custom callback function for when a slider handle has been changed. This callback is invoked ',
+						(0, esm.yg)('strong', { parentName: 'p' }, 'before'),
+						' the URL manager updates occur, allowing for mutation of values or other operations prior to API request.'
 					),
 					(0, esm.yg)(
 						'pre',
@@ -12467,6 +12492,11 @@
 							table: { type: { summary: 'boolean' }, defaultValue: { summary: !1 } },
 							control: { type: 'boolean' },
 						},
+						separateHandles: {
+							description: 'separates slider handles by one step value to prevent min and max from being equal',
+							table: { type: { summary: 'boolean' }, defaultValue: { summary: !1 } },
+							control: { type: 'boolean' },
+						},
 						handleDraggingColor: {
 							description: 'Slider handle color when dragging',
 							table: { type: { summary: 'string' } },
@@ -12478,7 +12508,8 @@
 							action: 'onDrag',
 						},
 						onChange: {
-							description: 'Slider onChange event handler - fires after touchEnd (used to trigger search)',
+							description:
+								'Slider onChange event handler - fires after touchEnd and before URL manager updates (used to trigger search and allows for value mutation)',
 							table: { type: { summary: 'function' } },
 							action: 'onChange',
 						},
@@ -12779,8 +12810,8 @@
 						_facet$active7,
 						_facet$active8,
 						_facet$active9,
-						_facet$range,
-						_facet$range2,
+						_facet$range3,
+						_facet$range4,
 						_properties$facet3,
 						_properties$facet4,
 						globalTheme = (0, emotion_element_cbed451f_browser_esm.a)(),
@@ -12812,6 +12843,7 @@
 						showTicks = props.showTicks,
 						facet = props.facet,
 						stickyHandleLabel = props.stickyHandleLabel,
+						separateHandles = props.separateHandles,
 						_onChange = props.onChange,
 						_onDrag = props.onDrag,
 						disableStyles = props.disableStyles,
@@ -12845,7 +12877,24 @@
 							2
 						),
 						active = _useState4[0],
-						setActive = _useState4[1];
+						setActive = _useState4[1],
+						ensureValueSeparation = function ensureValueSeparation(val) {
+							var _facet$range, _facet$range2;
+							if (!separateHandles || !facet.step) return val;
+							var _val = _slicedToArray(val, 2),
+								minVal = _val[0],
+								maxVal = _val[1],
+								rangeMin = null === (_facet$range = facet.range) || void 0 === _facet$range ? void 0 : _facet$range.low,
+								rangeMax = null === (_facet$range2 = facet.range) || void 0 === _facet$range2 ? void 0 : _facet$range2.high,
+								step = facet.step;
+							return minVal === maxVal
+								? maxVal + step <= rangeMax
+									? [minVal, maxVal + step]
+									: minVal - step >= rangeMin
+									? [minVal - step, maxVal]
+									: val
+								: val;
+						};
 					((((null !== (_facet$active5 = facet.active) && void 0 !== _facet$active5 && _facet$active5.low) ||
 						0 === (null === (_facet$active6 = facet.active) || void 0 === _facet$active6 ? void 0 : _facet$active6.low)) &&
 						null !== (_facet$active7 = facet.active) &&
@@ -12864,28 +12913,30 @@
 					var _useRanger = (0, react_ranger.d)({
 							values: active,
 							onChange: function onChange(val) {
-								var _facet$services;
-								setActive(val),
+								var _facet$services,
+									adjustedVal = ensureValueSeparation(val);
+								setActive(adjustedVal),
+									_onChange && _onChange(adjustedVal),
 									null != facet &&
 										null !== (_facet$services = facet.services) &&
 										void 0 !== _facet$services &&
 										_facet$services.urlManager &&
-										(val[0] == facet.range.low && val[1] == facet.range.high
+										(adjustedVal[0] == facet.range.low && adjustedVal[1] == facet.range.high
 											? facet.services.urlManager
 													.remove('page')
 													.remove('filter.' + facet.field)
 													.go()
 											: facet.services.urlManager
 													.remove('page')
-													.set('filter.' + facet.field, { low: val[0], high: val[1] })
-													.go()),
-									_onChange && _onChange(val);
+													.set('filter.' + facet.field, { low: adjustedVal[0], high: adjustedVal[1] })
+													.go());
 							},
 							onDrag: function onDrag(val) {
-								setActive(val), _onDrag && _onDrag(val);
+								var adjustedVal = ensureValueSeparation(val);
+								setActive(adjustedVal), _onDrag && _onDrag(adjustedVal);
 							},
-							min: null === (_facet$range = facet.range) || void 0 === _facet$range ? void 0 : _facet$range.low,
-							max: null === (_facet$range2 = facet.range) || void 0 === _facet$range2 ? void 0 : _facet$range2.high,
+							min: null === (_facet$range3 = facet.range) || void 0 === _facet$range3 ? void 0 : _facet$range3.low,
+							max: null === (_facet$range4 = facet.range) || void 0 === _facet$range4 ? void 0 : _facet$range4.high,
 							stepSize: facet.step,
 							tickSize,
 						}),
@@ -12937,12 +12988,12 @@
 												'div',
 												{ className: 'ss__facet-slider__handles' },
 												handles.map(function (_ref4, idx) {
-													var _facet$range3,
-														_facet$range4,
-														_facet$range5,
+													var _facet$range5,
 														_facet$range6,
 														_facet$range7,
 														_facet$range8,
+														_facet$range9,
+														_facet$range10,
 														value = _ref4.value,
 														active = _ref4.active,
 														getHandleProps = _ref4.getHandleProps;
@@ -12958,15 +13009,15 @@
 																	' slider button, current value ' +
 																	value +
 																	', ' +
-																	(null !== (_facet$range3 = facet.range) && void 0 !== _facet$range3 && _facet$range3.low
+																	(null !== (_facet$range5 = facet.range) && void 0 !== _facet$range5 && _facet$range5.low
 																		? 'min value ' +
-																		  (null === (_facet$range4 = facet.range) || void 0 === _facet$range4 ? void 0 : _facet$range4.low) +
+																		  (null === (_facet$range6 = facet.range) || void 0 === _facet$range6 ? void 0 : _facet$range6.low) +
 																		  ','
 																		: '') +
 																	' ' +
-																	(null !== (_facet$range5 = facet.range) && void 0 !== _facet$range5 && _facet$range5.high
+																	(null !== (_facet$range7 = facet.range) && void 0 !== _facet$range7 && _facet$range7.high
 																		? 'max value ' +
-																		  (null === (_facet$range6 = facet.range) || void 0 === _facet$range6 ? void 0 : _facet$range6.high)
+																		  (null === (_facet$range8 = facet.range) || void 0 === _facet$range8 ? void 0 : _facet$range8.high)
 																		: ''),
 																ref: function ref(e) {
 																	return (0, useA11y.i)(e);
@@ -12988,17 +13039,17 @@
 																				'ss__facet-slider__handle__label--pinleft':
 																					0 == idx &&
 																					value ==
-																						(null == facet || null === (_facet$range7 = facet.range) || void 0 === _facet$range7
+																						(null == facet || null === (_facet$range9 = facet.range) || void 0 === _facet$range9
 																							? void 0
-																							: _facet$range7.low),
+																							: _facet$range9.low),
 																			},
 																			{
 																				'ss__facet-slider__handle__label--pinright':
 																					1 == idx &&
 																					value ==
-																						(null == facet || null === (_facet$range8 = facet.range) || void 0 === _facet$range8
+																						(null == facet || null === (_facet$range10 = facet.range) || void 0 === _facet$range10
 																							? void 0
-																							: _facet$range8.high),
+																							: _facet$range10.high),
 																			}
 																		),
 																	},
@@ -31818,15 +31869,26 @@
 								(null != result && result.bundleSeed) ||
 								null == controller ||
 								controller.track.product.impression(result));
-						var currentRef = ref.current;
-						if (currentRef) {
-							var handleClick = (0, hooks_module.hb)(function (e) {
+						var handleClick = (0, hooks_module.hb)(
+							function (e) {
 								null == controller || controller.track.product.click(e, result);
-							}, []);
-							currentRef.setAttribute('sstracking', 'true'),
-								currentRef.removeEventListener('click', handleClick),
-								currentRef.addEventListener('click', handleClick);
-						}
+							},
+							[controller, result]
+						);
+						(0, hooks_module.vJ)(
+							function () {
+								var currentRef = ref.current;
+								if (currentRef)
+									return (
+										currentRef.setAttribute('sstracking', 'true'),
+										currentRef.addEventListener('click', handleClick, !0),
+										function () {
+											currentRef.removeEventListener('click', handleClick, !0);
+										}
+									);
+							},
+							[ref, handleClick]
+						);
 						var trackingProps = Object.assign({}, restProps, { controller, result, trackingRef: ref });
 						return (0, preact_module.h)(WrappedComponent, Object.assign({}, trackingProps));
 					};
@@ -33847,65 +33909,86 @@
 				return n;
 			}
 			var useIntersectionAdvanced = function useIntersectionAdvanced(ref) {
-					var options = arguments.length > 1 && void 0 !== arguments[1] ? arguments[1] : {},
-						_options$rootMargin = options.rootMargin,
-						rootMargin = void 0 === _options$rootMargin ? '0px' : _options$rootMargin,
-						_options$fireOnce = options.fireOnce,
-						fireOnce = void 0 !== _options$fireOnce && _options$fireOnce,
-						_options$threshold = options.threshold,
-						threshold = void 0 === _options$threshold ? 0 : _options$threshold,
-						_options$minVisibleTi = options.minVisibleTime,
-						minVisibleTime = void 0 === _options$minVisibleTi ? 0 : _options$minVisibleTi,
-						resetKey = options.resetKey,
-						_useState2 = _slicedToArray((0, hooks_module.J0)(!1), 2),
-						isIntersecting = _useState2[0],
-						setIntersecting = _useState2[1],
-						visibleTimerRef = (0, hooks_module.li)(null),
-						visibleStartRef = (0, hooks_module.li)(null),
-						lastResetKeyRef = (0, hooks_module.li)(resetKey);
-					return (
-						resetKey !== lastResetKeyRef.current &&
-							(setIntersecting(!1),
-							visibleTimerRef.current && (window.clearTimeout(visibleTimerRef.current), (visibleTimerRef.current = null)),
-							(visibleStartRef.current = null),
-							(lastResetKeyRef.current = resetKey)),
-						(0, hooks_module.vJ)(
-							function () {
-								setIntersecting(!1);
-								var observer = null;
-								if (ref.current)
-									return (
-										(observer = new IntersectionObserver(
-											function (_ref) {
-												_slicedToArray(_ref, 1)[0].isIntersecting
-													? minVisibleTime > 0
-														? ((visibleStartRef.current = Date.now()),
-														  visibleTimerRef.current && window.clearTimeout(visibleTimerRef.current),
-														  (visibleTimerRef.current = window.setTimeout(function () {
-																setIntersecting(!0), fireOnce && ref.current && observer && observer.unobserve(ref.current);
-														  }, minVisibleTime)))
-														: (setIntersecting(!0), fireOnce && ref.current && observer && observer.unobserve(ref.current))
-													: (visibleTimerRef.current && window.clearTimeout(visibleTimerRef.current),
-													  (visibleTimerRef.current = null),
-													  (visibleStartRef.current = null),
-													  setIntersecting(!1));
-											},
-											{ rootMargin, threshold }
-										)),
-										ref.current && observer.observe(ref.current),
-										function () {
-											setIntersecting(!1),
-												visibleTimerRef.current && window.clearTimeout(visibleTimerRef.current),
-												observer && ref.current && observer.unobserve(ref.current);
-										}
-									);
-							},
-							[ref, resetKey]
-						),
-						isIntersecting
-					);
-				},
-				IMPRESSION_VISIBILITY_THRESHOLD = 0.7,
+				var options = arguments.length > 1 && void 0 !== arguments[1] ? arguments[1] : {},
+					_options$rootMargin = options.rootMargin,
+					rootMargin = void 0 === _options$rootMargin ? '0px' : _options$rootMargin,
+					_options$fireOnce = options.fireOnce,
+					fireOnce = void 0 !== _options$fireOnce && _options$fireOnce,
+					_options$threshold = options.threshold,
+					threshold = void 0 === _options$threshold ? 0 : _options$threshold,
+					_options$minVisibleTi = options.minVisibleTime,
+					minVisibleTime = void 0 === _options$minVisibleTi ? 0 : _options$minVisibleTi,
+					resetKey = options.resetKey,
+					_useState2 = _slicedToArray((0, hooks_module.J0)(!1), 2),
+					isIntersecting = _useState2[0],
+					setIntersecting = _useState2[1],
+					visibleTimerRef = (0, hooks_module.li)(null),
+					visibleStartRef = (0, hooks_module.li)(null),
+					lastResetKeyRef = (0, hooks_module.li)(resetKey);
+				return (
+					resetKey !== lastResetKeyRef.current &&
+						(setIntersecting(!1),
+						visibleTimerRef.current && (window.clearTimeout(visibleTimerRef.current), (visibleTimerRef.current = null)),
+						(visibleStartRef.current = null),
+						(lastResetKeyRef.current = resetKey)),
+					(0, hooks_module.vJ)(
+						function () {
+							setIntersecting(!1);
+							var observer = null,
+								pollInterval = null;
+							if (ref.current) {
+								var clearPoll = function clearPoll() {
+										pollInterval && (window.clearInterval(pollInterval), (pollInterval = null));
+									},
+									handleVisible = function handleVisible() {
+										minVisibleTime > 0
+											? ((visibleStartRef.current = Date.now()),
+											  visibleTimerRef.current && window.clearTimeout(visibleTimerRef.current),
+											  (visibleTimerRef.current = window.setTimeout(function () {
+													setIntersecting(!0), fireOnce && ref.current && observer && observer.unobserve(ref.current);
+											  }, minVisibleTime)))
+											: (setIntersecting(!0), fireOnce && ref.current && observer && observer.unobserve(ref.current));
+									},
+									handleHidden = function handleHidden() {
+										visibleTimerRef.current && window.clearTimeout(visibleTimerRef.current),
+											(visibleTimerRef.current = null),
+											(visibleStartRef.current = null),
+											setIntersecting(!1);
+									};
+								return (
+									(observer = new IntersectionObserver(
+										function (_ref) {
+											_slicedToArray(_ref, 1)[0].isIntersecting
+												? ref.current && elementIsVisible(ref.current)
+													? (clearPoll(), handleVisible())
+													: (handleHidden(),
+													  pollInterval ||
+															(pollInterval = window.setInterval(function () {
+																ref.current ? elementIsVisible(ref.current) && (clearPoll(), handleVisible()) : clearPoll();
+															}, 250)))
+												: (clearPoll(), handleHidden());
+										},
+										{ rootMargin, threshold }
+									)),
+									ref.current && observer.observe(ref.current),
+									function () {
+										setIntersecting(!1),
+											clearPoll(),
+											visibleTimerRef.current && window.clearTimeout(visibleTimerRef.current),
+											observer && ref.current && observer.unobserve(ref.current);
+									}
+								);
+							}
+						},
+						[ref, resetKey]
+					),
+					isIntersecting
+				);
+			};
+			function elementIsVisible(el) {
+				return !el || !('checkVisibility' in el) || el.checkVisibility({ contentVisibilityAuto: !0, opacityProperty: !0, visibilityProperty: !0 });
+			}
+			var IMPRESSION_VISIBILITY_THRESHOLD = 0.7,
 				IMPRESSION_MIN_VISIBLE_TIME = 1e3;
 			function createImpressionObserver(options) {
 				var ref = (0, hooks_module.li)(null);
@@ -36216,7 +36299,7 @@
 														if (
 															((stringyParams = JSON.stringify(getStorableRequestParams(params))),
 															(prevStringyParams = _this.storage.get('lastStringyParams')),
-															stringyParams != prevStringyParams)
+															!_this.store.loaded || stringyParams !== prevStringyParams)
 														) {
 															_context.next = 25;
 															break;
@@ -36476,7 +36559,6 @@
 								(_this.config.settings.restorePosition = { enabled: !0 }),
 							_this.store.setConfig(_this.config),
 							(_this.storage = new StorageStore({ type: 'session', key: 'ss-controller-' + _this.config.id })),
-							_this.storage.set('lastStringyParams', void 0),
 							'object' == typeof (null === (_this$context = _this.context) || void 0 === _this$context ? void 0 : _this$context.page) &&
 								['search', 'category'].includes(_this.context.page.type) &&
 								(_this.page = cjs_default()(_this.page, _this.context.page)),
@@ -36958,8 +37040,8 @@
 								null !== (_this$config$settings13 = _this$config$settings12.restorePosition) &&
 								void 0 !== _this$config$settings13 &&
 								_this$config$settings13.onPageShow &&
-								window.addEventListener('pageshow', function () {
-									_this.eventManager.fire('restorePosition', { controller: _this, element: {} });
+								window.addEventListener('pageshow', function (e) {
+									e.persisted && _this.store.loaded && _this.eventManager.fire('restorePosition', { controller: _this, element: {} });
 								}));
 						return _this.use(_this.config), _this;
 					}
@@ -39099,12 +39181,15 @@
 								AutocompleteController_regeneratorRuntime().mark(function _callee4() {
 									var _params$search,
 										_params$search$query,
+										_response$search,
 										params,
 										searchProfile,
 										_yield$_this$client$a,
 										_yield$_this$client$a2,
 										meta,
 										response,
+										impressedResultIds,
+										_response$search2,
 										afterSearchProfile,
 										afterStoreProfile;
 									return AutocompleteController_regeneratorRuntime().wrap(
@@ -39162,11 +39247,10 @@
 													case 25:
 														return (
 															(searchProfile = _this.profiler.create({ type: 'event', name: 'search', context: params }).start()),
-															(_this.events = { product: {} }),
-															(_context4.next = 29),
+															(_context4.next = 28),
 															_this.client.autocomplete(params)
 														);
-													case 29:
+													case 28:
 														return (
 															(_yield$_this$client$a = _context4.sent),
 															(_yield$_this$client$a2 = AutocompleteController_slicedToArray(_yield$_this$client$a, 2)),
@@ -39174,6 +39258,24 @@
 															(response = _yield$_this$client$a2[1]).meta || (response.meta = meta),
 															searchProfile.stop(),
 															_this.log.profile(searchProfile),
+															(null === (_response$search = response.search) || void 0 === _response$search ? void 0 : _response$search.query) ===
+															_this.lastSearchQuery
+																? ((impressedResultIds = Object.keys(_this.events.product).filter(function (resultId) {
+																		var _this$events$product$6;
+																		return null === (_this$events$product$6 = _this.events.product[resultId]) || void 0 === _this$events$product$6
+																			? void 0
+																			: _this$events$product$6.impression;
+																  })),
+																  (_this.events = {
+																		product: impressedResultIds.reduce(function (acc, resultId) {
+																			return (acc[resultId] = { impression: !0 }), acc;
+																		}, {}),
+																  }))
+																: ((_this.events = { product: {} }),
+																  (_this.lastSearchQuery =
+																		null === (_response$search2 = response.search) || void 0 === _response$search2
+																			? void 0
+																			: _response$search2.query)),
 															(afterSearchProfile = _this.profiler.create({ type: 'event', name: 'afterSearch', context: params }).start()),
 															(_context4.prev = 37),
 															(_context4.next = 40),
@@ -51458,7 +51560,7 @@
 							((function Tracker_classCallCheck(a, n) {
 								if (!(a instanceof n)) throw new TypeError('Cannot call a class as a function');
 							})(this, Tracker),
-							((config = cjs_default()(Tracker_defaultConfig, config || {})).initiator = 'searchspring/' + config.framework + '/0.70.1'),
+							((config = cjs_default()(Tracker_defaultConfig, config || {})).initiator = 'searchspring/' + config.framework + '/0.71.0'),
 							((_this = Tracker_callSuper(this, Tracker, [globals, config])).targeters = []),
 							(_this.track = {
 								error: function error(data, siteId) {
@@ -51630,7 +51732,7 @@
 							(_this.localStorage = new StorageStore({ type: 'local', key: 'ss-' + _this.config.id })),
 							_this.localStorage.set('siteId', _this.globals.siteId),
 							(null !== (_window$searchspring = window.searchspring) && void 0 !== _window$searchspring && _window$searchspring.tracker) ||
-								((window.searchspring = window.searchspring || {}), (window.searchspring.tracker = _this), (window.searchspring.version = '0.70.1')),
+								((window.searchspring = window.searchspring || {}), (window.searchspring.tracker = _this), (window.searchspring.version = '0.71.0')),
 							setTimeout(function () {
 								_this.targeters.push(
 									new DomTargeter([{ selector: 'script[type^="searchspring/track/"]', emptyTarget: !1 }], function (target, elem) {
