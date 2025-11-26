@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.71.0](https://github.com/searchspring/snap/compare/v0.70.1...v0.71.0) (2025-11-26)
+
+### Bug Fixes
+
+- **autocomplete:** prevent impressing results when subsequent queries are the same ([2a154b5](https://github.com/searchspring/snap/commit/2a154b5fdecd3d56fbcd122205e16a9edf50b5ec))
+- **controller/search:** changing when 'lastStringyParams' is cleared and ensuring persisted pageshow ([7148731](https://github.com/searchspring/snap/commit/71487319cb130af204b833d0ab097694914dd100))
+- **image:** remove visibility style when value is not hidden ([e1e33df](https://github.com/searchspring/snap/commit/e1e33dff124582ac58a88f92cd0ee1be91bd7a71))
+- **preact/withtracking:** refactoring to useEffect and switching to capture for click event handler ([f862978](https://github.com/searchspring/snap/commit/f86297861da17394caa2c0a83886461b3938d959))
+- **useintersectionadvanced:** prevent non-visible elements from being impressed ([74455cf](https://github.com/searchspring/snap/commit/74455cfe340067278b5bcf88b5e0c2415d814510))
+
+### Features
+
+- **preact/components/facetslider:** adding 'separateHandles' prop and adjusting onChange ([dc2f7fc](https://github.com/searchspring/snap/commit/dc2f7fcb1a9a85876d3a235cbf3e83694a5e6a93))
+
 ## [0.70.1](https://github.com/searchspring/snap/compare/v0.70.0...v0.70.1) (2025-11-17)
 
 ### Bug Fixes
