@@ -129,6 +129,27 @@ export default {
 			},
 			control: { type: 'number' },
 		},
+		checkboxClickPadding: {
+			description: 'Number of px to pad the click box of the checkbox component',
+			table: {
+				type: {
+					summary: 'number',
+				},
+				defaultValue: { summary: 5 },
+			},
+			control: { type: 'number' },
+		},
+		hideTooltip: {
+			defaultValue: true,
+			description: 'Hide/show bundle checkboxes tooltips',
+			table: {
+				type: {
+					summary: 'boolean',
+				},
+				defaultValue: { summary: true },
+			},
+			control: { type: 'boolean' },
+		},
 		hideCheckboxes: {
 			defaultValue: false,
 			description: 'Hide/show bundle checkboxes in results',
