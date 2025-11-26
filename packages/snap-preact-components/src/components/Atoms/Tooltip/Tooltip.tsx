@@ -64,7 +64,7 @@ const CSS = {
 			position: 'relative',
 			display: 'inline-flex',
 			'.ss__tooltip__content': {
-				//dont hide the content if theres no children to hover to active it.
+				// don't hide the content if there are no children to hover to activate it.
 				visibility: children ? 'hidden' : 'visible',
 				opacity: children ? 0 : 1,
 				...sharedContentStyles,
