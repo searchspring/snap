@@ -1,6 +1,6 @@
 # Recommendations
 
-While it is possible to construct recommendation controllers via the Snap configuration, it is recommended to utilize the [instantiator config](https://searchspring.github.io/snap/reference-snap-preact-instantiators#recommendationinstantiatorconfig) instead for integration of recommendations. This is because certain pages may not have a script block to target, and the instantiator will handle the targeting and creation of recommendation controllers for script blocks found in the DOM at run time.
+While it is possible to construct recommendation controllers via the Snap configuration, it is recommended to utilize the [RecommendationInstantiator config](https://searchspring.github.io/snap/reference-snap-preact-instantiators#recommendationinstantiatorconfig) instead for integration of recommendations. The `RecommendationInstantiator` will only create recommendation controllers if the page contains recommendation profiles.
 
 There are three types of recommendations that Searchspring offers:
 
@@ -21,13 +21,15 @@ See [Recommendations Controller reference](https://searchspring.github.io/snap/r
 
 The Searchspring Management Console contains a `Default` template available for standard profiles (non-bundle) that does not require the use of the Snapfu CLI to create a custom template. To use the `Default` template, the following instantiator config should be added to your `snap-preact` config.
 
-```typescript
-// src/index.ts
+```js
+// src/index.js
+
+import { Snap } from '@searchspring/snap-preact';
 
 const snap = new Snap({
     client: {
         globals: {
-            siteId: 'abc123',
+            siteId: 'REPLACE_WITH_YOUR_SITE_ID',
         },
     },
     instantiators: {
@@ -72,20 +74,29 @@ In this example, the `Recs` component is a wrapper around the `Recommendation` c
 
 import { h } from 'preact';
 import { observer } from 'mobx-react';
-
+import { useEffect } from 'preact/hooks';
 import { Recommendation } from '@searchspring/snap-preact-components';
 
+import './Recs.scss';
+
 export const Recs = observer((props) => {
+	
 	const controller = props.controller;
 	const store = controller?.store;
 
-	if (!controller.store.loaded && !controller.store.loading) {
-		controller.search();
-	}
+	useEffect(() => {
+		if (!controller.store.loaded && !controller.store.loading) {
+			controller.search();
+		}
+	}, []);
 
 	const parameters = store?.profile?.display?.templateParameters;
 
-	return store.results.length > 0 && <Recommendation controller={controller} title={parameters?.title}/>;
+	return (
+		store.results.length > 0 && (
+			<Recommendation controller={controller} title={parameters?.title}/>
+		)
+	);
 });
 ```
 
@@ -93,13 +104,13 @@ export const Recs = observer((props) => {
 ## Bundle Recommendations
 The Searchspring Management Console also contains a `Bundle` template available for bundle profiles, this template does not require the use of the Snapfu CLI to create a custom template. To use the `Bundle` template, another component mapping will need to be added to your instantiator config.
 
-```typescript
-// src/index.ts
+```js
+// src/index.js
 
 const snap = new Snap({
     client: {
         globals: {
-            siteId: 'abc123',
+            siteId: 'REPLACE_WITH_YOUR_SITE_ID',
         },
     },
     instantiators: {
@@ -119,10 +130,62 @@ const snap = new Snap({
 
 Note that the component is not required to be named `Bundle`, however `instantiators.recommendation.component` must contain the `Bundle` key as seen in the example above.
 
+This example assumes a `bundle` profile has been configured in the Searchspring Management Console (SMC) with the `Bundle` template selected. The profile (specified via the `tag` property) will render inside the `.ss__recs__bundle` element below the script block. While the target element can be placed anywhere on the page, it's recommended to group elements with their corresponding script blocks for easier integration management. The component configuration is handled within the [`RecommendationInstantiator`](https://searchspring.github.io/snap/reference-snap-preact-instantiators). 
+
+The `products` global context variable is required for bundle recommendations to specify the sku of the currently viewed product.
+
+```html
+<script type="searchspring/recommendations">
+	global: {
+		products: ['product_sku_123'],
+	};
+	profiles = [
+		{
+			tag: 'bundle',
+			selector: '.ss__recs__bundle',
+			options: {
+				limit: 5
+			}
+		}
+	];
+</script>
+
+<div class="ss__recs__bundle"><!-- recommendations will render here --></div>
+```
+
 ### Bundle Component
 The example `Bundled` component below uses the `RecommendationBundle` component imported from the snap component library. See [Components Preact > RecommendationBundle](https://searchspring.github.io/snap/preact-components?params=%3Fpath%3D%2Fstory%2Forganisms-recommendationbundle--default) for more details. 
 
 ```jsx
+// components/Recommendations/Bundled.jsx
+
+import { h } from 'preact';
+import { useEffect } from 'preact/hooks';
+import { observer } from 'mobx-react';
+import { RecommendationBundle } from '@searchspring/snap-preact-components';
+
+import './Bundled.scss';
+
+const addToCart = (data) => {
+	// handle adding products to the cart
+};
+
+export const Bundled = observer((props) => {
+	const controller = props.controller;
+	const store = controller?.store;
+
+	useEffect(() => {
+		if (!controller.store.loaded && !controller.store.loading) {
+			controller.search();
+		}
+	}, []);
+
+	const parameters = store?.profile?.display?.templateParameters;
+
+	return store.results.length > 0 && <RecommendationBundle controller={controller} onAddToCart={(e, data) => addToCart(data)} title={parameters?.title} />;
+});
+
+
 import { h } from 'preact';
 import { observer } from 'mobx-react';
 

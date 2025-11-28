@@ -16,7 +16,7 @@ The `middleware` property is an object that has event name(s) as the key and and
 
 The value can be a single function or an array of functions if attaching multiple middleware to a single event. 
 
-```typescript
+```js
 const initMiddleware = async(eventData, next) => {
 	console.log("runs on init", eventData);
 	await next();
@@ -35,7 +35,7 @@ const afterSearchMiddlewareTwo = async(eventData, next) => {
 const config = {
 	client: {
 		globals: {
-			siteId: 'xxxxxx',
+			siteId: 'REPLACE_WITH_YOUR_SITE_ID',
 		},
 	},
 	controllers: {
@@ -62,7 +62,9 @@ const config = {
 
 The `plugins` property is an array of arrays of functions and optional function parameters that are used to attach functionality to controllers. Parameters can optionally be passed to the functions as shown with the `paramPlugin` below:
 
-```typescript
+```js
+import { Snap } from '@searchspring/snap-preact';
+
 const plugin = (controller) => {
 	controller.on('init', async(eventData, next) => {
 		console.log("runs on init", eventData);
@@ -80,7 +82,7 @@ const paramPlugin = (controller, ...params) => {
 const config = {
 	client: {
 		globals: {
-			siteId: 'xxxxxx',
+			siteId: 'REPLACE_WITH_YOUR_SITE_ID',
 		},
 	},
 	controllers: {
@@ -107,7 +109,9 @@ We can attach events to our controllers after they have been created by a Snap i
 
 Let's use the `config` from above. Since our search controller has an `id` of `'search'`, we can reference it as follows:
 
-```typescript
+```js
+import { Snap } from '@searchspring/snap-preact';
+
 const snap = new Snap(config);
 snap.getController('search').then((search) => {
 	console.log("Search Controller: ", search);
@@ -118,7 +122,9 @@ We can now attach middleware events in the following methods:
 
 ### controller.on
 
-```typescript
+```js
+import { Snap } from '@searchspring/snap-preact';
+
 snap.getController('search').then((search) => {
 	search.on('afterSearch', async(eventData, next) => {
 		console.log("runs on afterSearch", eventData);
@@ -129,7 +135,9 @@ snap.getController('search').then((search) => {
 
 ### controller.plugin
 
-```typescript
+```js
+import { Snap } from '@searchspring/snap-preact';
+
 snap.getController('search').then((search) => {
 	search.plugin((controller) => {
 		controller.on('afterStore', async(eventData, next) => {
@@ -143,7 +151,9 @@ snap.getController('search').then((search) => {
 
 Next we will attach a plugin that takes additional parameters. This could be useful for sending contextual data into your plugin.
 
-```typescript
+```js
+import { Snap } from '@searchspring/snap-preact';
+
 const paramPlugin = (controller, ...params) => {
 	// params = [ 'param1', 'param2' ]
 	controller.on('afterStore', async(eventData, next) => {
@@ -163,7 +173,7 @@ snap.getController('search').then((search) => {
 We can attach global events to the `window.searchspring` object via the event-manager created by the Snap instance. These events can be listened for or fired via the `on` and `fire` methods. 
 
 Example: 
-```typescript
+```js
 	window.searchspring.on('myEvent', (data) => {
 		console.log('myEvent happened!', data); 
 	})
@@ -180,13 +190,13 @@ This event will loop through all available controllers on the window, find match
 
 The `controllerIds` can be an exact controller id string match or an array of matches - 
 
-```typescript
+```js
 controllerIds: `search`,
 controllerIds: [`search`, `autocomplete`]
 ```
 
 it can also take regex for partial matches -
 
-```typescript
+```js
 controllerIds: [/^recommend_/]
 ```

@@ -50,7 +50,7 @@ The `hideImage` prop will prevent the image from rendering.
 ### detailSlot
 The `detailSlot` prop is a JSX element to used display additional content below the title and pricing sections.
 
-```typescript
+```js
 const productDetails = (props) => {
 	const listEntries = props?.product?.attributes?.descriptionList.split('|');
 	return (

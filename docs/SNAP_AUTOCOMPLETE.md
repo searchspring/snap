@@ -4,20 +4,22 @@ To set up Autocomplete using Snap, we'll need to define an autocomplete controll
 
 One notable thing to mention as you may see a duplicate `selector` property in both the `config` and `targeter`.
 
-The `config.selector` specifies the `<input/>` element(s) to attach events to that respond to Autocomplete actions. This supports a selector that targets many elements. 
+The `config.selector` specifies the `<input/>` element(s) to attach events (focus, keydown, submit) to that respond to Autocomplete actions. This supports a selector that targets many elements. 
 
 The `targeter.selector` specifies the DOM node where the `targeter.component` will be rendered into.
 
-However in our example, since they are both the same value, the Autocomplete component will rendered as a child DOM node below the `<input/>` element that is currently focused. 
+However in our example, since they are both the same value, the Autocomplete component will be rendered as a child DOM node below the `<input/>` element that is currently focused. 
 
 
-```ts
-// src/index.ts
+```js
+// src/index.js
+
+import { Snap } from '@searchspring/snap-preact';
 
 const snap = new Snap({
     client: {
 		globals: {
-			siteId: 'abc123',
+			siteId: 'REPLACE_WITH_YOUR_SITE_ID',
 		},
 	},
     controllers: {
@@ -54,7 +56,7 @@ const snap = new Snap({
 
 ## Autocomplete Store
 
-It is recommended to utilizing the `Autocomplete` component from `@searchspring/snap-preact-components` to display Autocomplete.
+It is recommended to utilizing the [Autocomplete](https://searchspring.github.io/snap/preact-components?params=?path=/story/organisms-autocomplete--default) component from `@searchspring/snap-preact-components` to display Autocomplete.
 
 The following properties are specific to an Autocomplete Store via an Autocomplete Controller.
 

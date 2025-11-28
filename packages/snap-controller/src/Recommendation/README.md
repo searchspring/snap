@@ -23,14 +23,14 @@ The `RecommendationController` is used when making queries to the API `recommend
 ## Initialize
 Invoking the `init` method is required to subscribe to changes that occur in the UrlManager. This is typically done automatically prior to calling the first `search`.
 
-```typescript
+```js
 recommendationController.init();
 ```
 
 ## AddToCart
 This will invoke an addToCart event (see below). Takes an array of Products as a parameter. 
 
-```typescript
+```js
 recommendationController.addToCart([recommendationController.store.results[0]]);
 ```
 

@@ -66,7 +66,7 @@ If using within Autocomplete, the `previewOnFocus` prop will invoke the `value.p
 ### valueProps
 The `valueProps` prop will be spread onto each value's `<a>` element. Typical usage would be to provide custom callback functions when used within Autocomplete.
 
-```typescript
+```js
 const valueProps = {
 	onMouseEnter: (e) => {
 		clearTimeout(delayTimeout);

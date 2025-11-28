@@ -13,7 +13,7 @@ Configure variants by setting the variant field in either:
 - Controller config: `controllers[controller].config.settings.variants.field`
 - Recommendation config: `instantiators.recommendation.config.settings.variants.field`
 
-```typescript
+```js
 const config = {
 	instantiators: {
 		recommendation: {
@@ -67,7 +67,7 @@ Use `result.variants.update(newData)` to modify variant data after initializatio
 
 The update function expects the new variant data to match the variantData type.
 
-```typescript
+```js
 export type VariantData = {
 	mappings: SearchResponseModelResultMappings;
 	attributes: Record<string, unknown>;
@@ -112,7 +112,7 @@ The `result.variants.selections` object helps you build variant option picker co
 | `select(value)` | Select a variant option (e.g. `selection.select('blue')`) |
 | `reset()` | Reset selection to default state |
 
-```typescript
+```js
 export type VariantSelectionValue = {
 	value: string;
 	label?: string;
@@ -161,7 +161,7 @@ Automatically sync variant selections between your product page and recommendati
 
 1. Enable the feature in your instantiator config:
 
-```typescript
+```js
 const config = {
 	instantiators: {
 		recommendation: {
@@ -223,7 +223,7 @@ You can filter which results update in realtime by adding filters to your config
 - `first` - Updates only the first product in results (useful for Bundle Recommendations' seed product)
 - `unaltered` - Updates only products that haven't been manually selected by the user on the current page.
 
-```typescript
+```js
 variants: {
     field: 'ss_variants',
     realtime: {
@@ -247,7 +247,7 @@ Configure individual variant fields using `controllers[controller].config.settin
 | `mappings[optionValue].background` | Override background color for a specific option value | ➖ | |
 | `mappings[optionValue].backgroundImageUrl` | Override background image URL for a specific option value | ➖ | |
 
-```typescript
+```js
 const config = {
 	settings:  {
 		variants: {

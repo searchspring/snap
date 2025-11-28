@@ -13,7 +13,7 @@ npm install --save @searchspring/snap-preact
 
 ## Instantiation
 
-```typescript
+```js
 import { Snap } from '@searchspring/snap-preact';
 
 const snap = new Snap(config);
@@ -24,7 +24,7 @@ A configuration object provided to Snap will determine the services that will be
 
 Full example:
 
-```typescript
+```js
 const config = {
 	context: globalContext,
 	url: {
@@ -36,7 +36,7 @@ const config = {
 	},
 	client: {
 		globals: {
-			siteId: 'xxxxxx',
+			siteId: 'REPLACE_WITH_YOUR_SITE_ID',
 		},
 	},
 	controllers: {
@@ -97,11 +97,11 @@ A single client instance will be created and shared across all services using th
 
 See [@searchspring/snap-client](https://github.com/searchspring/snap/tree/main/packages/snap-client) documentation for full client config options.
 
-```typescript
+```js
 const config = {
 	client: {
 		globals: {
-			siteId: 'xxxxxx'
+			siteId: 'REPLACE_WITH_YOUR_SITE_ID'
 		}
 	}
 }
@@ -110,7 +110,7 @@ const config = {
 ### config.instantiators
 The `instantiators` object must be defined if any Recommendation controllers have also been defined via `config.controllers.recommendation`
 
-```typescript
+```js
 const config = {
 	instantiators: {
 		recommendation: {
@@ -148,7 +148,7 @@ const config = {
 ### config.url
 The `url` object contains the config provided to each [`UrlTranslator`](https://github.com/searchspring/snap/tree/main/packages/snap-url-manager/src/Translators/Url) created by Snap Preact.
 
-```typescript
+```js
 const config = {
 	url: {
 		parameters: {
@@ -171,7 +171,7 @@ Available controllers:
 - [FinderController](https://github.com/searchspring/snap/tree/main/packages/snap-controller/src/Finder)
 - [RecommendationController](https://github.com/searchspring/snap/tree/main/packages/snap-controller/src/Recommendation)
 
-```typescript
+```js
 const config = {
 	controllers: {
 		search: [],
@@ -188,7 +188,7 @@ Each array entry contains an object with the following properties:
 
 `targets` - optional array of Target objects. Targets that have been found will have the corresponding controller provided to the target component `controller` prop and the controller's `search` method invoked.
 
-```typescript
+```js
 type ExtendedTarget = {
 	selector: string;
 	inject?: {
@@ -215,7 +215,7 @@ type ExtendedTarget = {
 
 An example creating a SearchController:
 
-```typescript
+```js
 const config = {
 	controllers: {
 		search: [
@@ -246,7 +246,7 @@ The controller config `id` will be the name of the controller that you will then
 
 For example, if using the `config` example above:
 
-```typescript
+```js
 const snap = new Snap(config);
 const { search } = snap.controllers;
 ```
@@ -281,7 +281,7 @@ A reference to `RecommendationInstantiator` instance if creating recommendation 
 
 Snap Preact provides various polyfills to ensure legacy browser support.
 
-```typescript
+```js
 import { polyfills } from '@searchspring/snap-preact';
 
 polyfills.then(() => {

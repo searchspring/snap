@@ -1,7 +1,7 @@
 # RecommendationStore
 The recommendation store is meant to hold the recommend and profile API response and associated state. It extends the AbstractStore and the recommend response by adding several additional properties and methods to make working with the data easier.
 
-```typescript
+```js
 import { RecommendationStore } from '@searchspring/snap-store-mobx'
 import { UrlManager, UrlTranslator } from '@searchspring/snap-url-manager';
 
@@ -21,7 +21,7 @@ console.log(store.toJSON());
 ## `reset` method
 Reset store to the initial state by clearing data
 
-```typescript
+```js
 const store = new RecommendationStore();
 
 store.reset()

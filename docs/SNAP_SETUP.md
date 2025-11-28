@@ -39,8 +39,8 @@ This will start the local development server and serve the project build files a
 |------------------------------|----------------------------------------------------------|
 | public/index.html            | [https://localhost:3333/](https://localhost:3333/)       |
 | public/mockup.html (or other files) | [https://localhost:3333/mockup.html](https://localhost:3333/mockup.html) |
-| main bundle                  | [https://localhost:3333/dist/bundle.js](https://localhost:3333/dist/bundle.js) |
-| universal bundle             | [https://localhost:3333/dist/universal.bundle.js](https://localhost:3333/dist/universal.bundle.js) |
+| main bundle                  | [https://localhost:3333/bundle.js](https://localhost:3333/bundle.js) |
+| universal bundle             | [https://localhost:3333/universal.bundle.js](https://localhost:3333/universal.bundle.js) |
 
 Note: The local server uses a self-signed certificate for HTTPS and you may be prompted to continue.
 
@@ -77,7 +77,7 @@ The Snapfu Chrome Extension is a Chrome extension that you can install manually 
 
 Visit the website you are developing for, then click the extension to enable it and set the mode to `local`, then press `Save`.
 
-The page will reload with the local development bundle [https://localhost:3333/dist/bundle.js](https://localhost:3333/dist/bundle.js) injected into the current website. While `npm run dev` is running, the page will automatically reload upon saving any code modifications.
+The page will reload with the local development bundle [https://localhost:3333/bundle.js](https://localhost:3333/bundle.js) injected into the current website. While `npm run dev` is running, the page will automatically reload upon saving any code modifications.
 
 For more information, see the [Snapfu Chrome Extension](https://github.com/searchspring/snapfu-extension) repository.
 
@@ -88,5 +88,5 @@ For more information, see the [Snapfu Chrome Extension](https://github.com/searc
 Other possible but less desirable methods of serving the local development server while previewing changes on a live domain include:
 
 - Browser local override modifying script src, typically requires an override per page
-- Alternative development domain (e.g. `https://dev.mysite.com`) or unpublished storefront theme with script src pointing to `https://localhost:3333/dist/bundle.js` or a ngrok tunnel
+- Alternative development domain (e.g. `https://dev.mysite.com`) or unpublished storefront theme with script src pointing to `https://localhost:3333/bundle.js` or a ngrok tunnel
 

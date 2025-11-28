@@ -67,7 +67,7 @@ Next we'll integrate Searchspring into the theme.
 
 **Note:** If you are only integrating Search page functionality, you can use the following snippet. Otherwise skip this section and continue below to install both search and category functionality.
 
-- Replace `xxxxxx` with the correct site id.
+- Replace `REPLACE_WITH_YOUR_SITE_ID` with the correct site id.
 - Replace `000000` with the search category id that was noted when creating the category page.
 
 ```php
@@ -76,7 +76,7 @@ Next we'll integrate Searchspring into the theme.
 	$ss_enable = true;
 	
 	// Initial attributes values for Searchspring script tag
-	$ss_site_id = 'xxxxxx';
+	$ss_site_id = 'REPLACE_WITH_YOUR_SITE_ID';
 	$ss_defer_config = ' defer';
 
 	// Get data from objectManager
@@ -95,7 +95,7 @@ Next we'll integrate Searchspring into the theme.
 
 #### Search and Category
 
-- Replace `xxxxxx` with the correct site id.
+- Replace `REPLACE_WITH_YOUR_SITE_ID` with the correct site id.
 - Replace `000000` with the search category id that was noted when creating the category page.
 - (Optional) If the category path attribute has a parent level you want to exclude, add to the `$ss_category_exclude` array.
 
@@ -107,7 +107,7 @@ Next we'll integrate Searchspring into the theme.
 	$ss_replace = '&quot;';
 	
 	// Initial attributes values for Searchspring script tag
-	$ss_site_id = 'xxxxxx';
+	$ss_site_id = 'REPLACE_WITH_YOUR_SITE_ID';
 	$ss_defer_config = ' defer';
 	$ss_category_config = '';
 
@@ -315,7 +315,7 @@ import { magento2 } from './scripts/magento2';
 const snap = new Snap({
 	client: {
 		globals: {
-			siteId: 'abc123',
+			siteId: 'REPLACE_WITH_YOUR_SITE_ID',
 		},
 	},
 	controllers: {
@@ -425,7 +425,7 @@ import { magento2 } from './scripts/magento2';
 const snap = new Snap({
 	client: {
 		globals: {
-			siteId: 'abc123',
+			siteId: 'REPLACE_WITH_YOUR_SITE_ID',
 		},
 	},
 	controllers: {

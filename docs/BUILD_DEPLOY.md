@@ -42,7 +42,7 @@ Builds on different branch names will be deployed to:
 - Repository must be managed by the Searchspring [Github organization](https://github.com/searchspring-implementations)
 - Repository must have a default branch named `production`
 - Repository must have repository secrets for each siteId in the repository. Found at `https://github.com/[owner]/[repository]/settings/secrets/actions`
-  - Secret Key Name: `WEBSITE_SECRET_KEY_[SITEID]` where `[SITEID]` is the siteId found in the [Searchspring Management Console](https://manage.searchspring.net). For example: `WEBSITE_SECRET_KEY_ABC123`
+  - Secret Key Name: `WEBSITE_SECRET_KEY_[SITEID]` where `[SITEID]` should be replaced with the 6 character alphanumeric siteId found in the [Searchspring Management Console](https://manage.searchspring.net). For example: `WEBSITE_SECRET_KEY_ABC123`
   - Value: `secretKey` located adjacent to the siteId in the [Searchspring Management Console](https://manage.searchspring.net)
 - Repository must have a `snap-action` workflow file in the `.github/workflows` directory. See section below.
 - Repository must have a `package.json` file that contains all siteIds associated with this project. See section below.
@@ -132,10 +132,10 @@ Always serve the build to modern browsers and the universal build only to legacy
 
 ```html
 <!-- Modern browsers - use modern build -->
-<script src="https://snapui.searchspring.io/[siteId]/bundle.js"></script>
+<script src="https://snapui.searchspring.io/[siteId]/bundle.js" id="searchspring-context"></script>
 
 <!-- Legacy browsers - use universal build -->
-<script src="https://snapui.searchspring.io/[siteId]/universal.bundle.js"></script>
+<script src="https://snapui.searchspring.io/[siteId]/universal.bundle.js" id="searchspring-context"></script>
 ```
 
 The modern build is used for projects targeting the latest browsers supporting the latest JavaScript features (ES6 and above). Example modern build files: `bundle.js` & `bundle.chunk.[hash].js`

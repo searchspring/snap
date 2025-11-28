@@ -34,7 +34,7 @@ The `AutocompleteController` is used when making queries to the API `autocomplet
 ## Initialize
 Invoking the `init` method is required to subscribe to changes that occur in the UrlManager. This is typically done automatically prior to calling the first `search`.
 
-```typescript
+```js
 autocompleteController.init();
 ```
 
@@ -42,7 +42,7 @@ autocompleteController.init();
 <!-- TODO: set/test link to DomTargeter -->
 Invoking the `bind` method is required to attach event listeners to each input specified as `selector` in the `AutocompleteControllerConfig`.
 
-```typescript
+```js
 autocompleteController.bind();
 ```
 
@@ -50,21 +50,21 @@ autocompleteController.bind();
 <!-- TODO: set/test link to DomTargeter -->
 Invoking the `unbind` method will remove attached event listeners previously attached by the `bind` method.
 
-```typescript
+```js
 autocompleteController.unbind();
 ```
 
 ## Search
 This will invoke a search request to Searchspring's search API and populate the store with the response. This should be automatically called by the DOM event binding that occurs when the `bind` method (see above) is invoked.
 
-```typescript
+```js
 autocompleteController.search();
 ```
 
 ## AddToCart
 This will invoke an addToCart event (see below). Takes an array of Products as a parameter. 
 
-```typescript
+```js
 autocompleteController.addToCart([autocompleteController.store.results[0]]);
 ```
 

@@ -11,7 +11,7 @@ npm install --save @searchspring/snap-toolbox
 
 
 ## Import
-```typescript
+```js
 import { 
     filters, 
     DomTargeter, 

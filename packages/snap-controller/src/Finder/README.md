@@ -23,7 +23,7 @@ The `FinderController` should be used for building product finders. It makes que
 ### Persisting Selections
 Persisting selections allow for finder selections to be persisted across page navigation. If enabled, selections are saved to the browser's local storage upon invoking the controller's `find` method. Selections are then populated automatically upon the next instantiation. (Default: `false`)
 
-```typescript
+```js
 const finderConfig = {
 	id: 'finder',
 	url: '/search',
@@ -37,7 +37,7 @@ const finderConfig = {
 #### expiration
 Persisted selections will reset automatically if the `persist.expiration` duration has elapsed (milliseconds), or the `config` itself has changed over time. (Default: `0`, never expires)
 
-```typescript
+```js
 const finderConfig = {
 	id: 'finder',
 	url: '/search',
@@ -52,7 +52,7 @@ const finderConfig = {
 #### lockSelections
 The `config.persist.lockSelections` option will disable selections from being changed after they have been persisted. This forces the user to reset the selections by invoking the controller's `reset` method and making new selections. (Default: `true`)
 
-```typescript
+```js
 const finderConfig = {
 	id: 'finder',
 	url: '/search',
@@ -68,28 +68,28 @@ const finderConfig = {
 ## Initialize
 Invoking the `init` method is required to subscribe to changes that occur in the UrlManager. This is typically done automatically prior to calling the first `search`.
 
-```typescript
+```js
 finderController.init();
 ```
 
 ## Search
 This will invoke a search request to Searchspring's search API and populate the store with the response. This should be called initially and after finder selections have been made.
 
-```typescript
+```js
 finderController.search();
 ```
 
 ## Find
 After selection(s) have been made, the user will click on a 'Find' button. This click event should invoke the `find` method of the `FinderController` which will redirect to the specified `url` in the config, along with its selection data.
 
-```typescript
+```js
 finderController.find();
 ```
 
 ## Reset
 This mthod should be invoked to 'reset' or remove all finder selections. This will also clear out any persisted selection storage data.
 
-```typescript
+```js
 finderController.reset();
 ```
 

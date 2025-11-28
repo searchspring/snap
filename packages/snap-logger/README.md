@@ -2,7 +2,7 @@
 
 Snap Logger is available on each controller via `controller.log`. Controller logs are prefixed with the controller's id and it is recommended to use logging methods of the controller in place of `window.console` methods.
 
-```typescript
+```js
 controller.log.image({
 	url: 'https://searchspring.com/wp-content/uploads/2020/01/SearchSpring-Primary-FullColor-800-1-1-640x208.png',
 	width: '90px',
@@ -35,14 +35,14 @@ When set to `development`, all logging methods will be visible.
 
 ## `error` method
 This method takes any number of parameters and logs them to the console. It is best to use this method for error handling.
-```typescript
+```js
 controller.log.error('error!!!');
 controller.log.error('text about the error', errorObject, 'more', 'text');
 ```
 
 ## `warn` method
 This method takes any number of parameters and logs them to the console. It is best to use this method for displaying warnings.
-```typescript
+```js
 controller.log.warn('warning!!!');
 controller.log.warn('warning', warningObject, 'more text');
 ```
@@ -50,20 +50,20 @@ controller.log.warn('warning', warningObject, 'more text');
 ## `dev` method
 This method takes any number of parameters and logs them to the console. If mode is set to `LogMode.PRODUCTION`, the `dev` logs will not be displayed.
 
-```typescript
+```js
 controller.log.dev('dev')
 ```
 
 ## `debug` method
 This method takes any number of parameters and logs them to the console. If mode is set to `LogMode.PRODUCTION`, `debug` logs will not be displayed.
 
-```typescript
+```js
 controller.log.debug('debug');
 ```
 ## `image` method
 This method takes any number of parameters and logs them to the console. The first parameter is special and takes properties that specify the image details. If mode is set to `LogMode.PRODUCTION`, `image` logs will not be displayed.
 
-```typescript
+```js
 controller.log.image({ 
 		url: 'https://searchspring.com/wp-content/uploads/2020/01/SearchSpring-Primary-FullColor-800-1-1-640x208.png',
 		width: '30px', 
@@ -74,7 +74,7 @@ controller.log.image({
 ## `imageText` method
 This method takes any number of parameters and logs them to the console. The first parameter is special and takes properties that specify the image details. If mode is set to `LogMode.PRODUCTION`, `imageText` logs will not be displayed.
 
-```typescript
+```js
 controller.log.imageText({
 	url: 'https://searchspring.com/wp-content/uploads/2020/01/SearchSpring-Primary-FullColor-800-1-1-640x208.png',
 	text: `imageText`,
@@ -85,7 +85,7 @@ controller.log.imageText({
 ## `profile` method
 
 This method takes any number of parameters and logs them to the console. The first parameter is special and takes a [Snap profile](https://searchspring.github.io/snap/reference-profiler). If mode is set to `LogMode.PRODUCTION`, `profile` logs will not be displayed.
-```typescript
+```js
 const searchProfile = controller.profiler.create({ 
 	type: 'event', 
 	name: 'search', 
@@ -108,7 +108,7 @@ The following emojis are available:
 
 <img src="https://github.com/searchspring/snap/blob/main/images/emojis.png?raw=true" />
 
-```typescript
+```js
 const emoji = {
 	bang: String.fromCodePoint(0x203c),
 	bright: String.fromCodePoint(0x1f506),
@@ -136,7 +136,7 @@ The following colors are available:
 
 <img src="https://github.com/searchspring/snap/blob/main/images/colors.png?raw=true" />
 
-```typescript
+```js
 const colors = {
 	blue: '#3379c1',
 	bluelight: '#688BA3',

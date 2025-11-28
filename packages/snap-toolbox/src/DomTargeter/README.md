@@ -1,7 +1,7 @@
 # DomTargeter
 `DomTargeter` is a utility used for rendering components in specified DOM targets. 
 
-```typescript
+```js
 import { DomTargeter } from '@searchspring/snap-toolbox';
 ```
 
@@ -11,7 +11,7 @@ When the DomTargeter is constructed it will immediately look for elements in the
 
 Typical usage would be to render a component into the DOM.
 
-```typescript
+```js
 const contentTarget = new DomTargeter(
 	[
 		{
@@ -33,7 +33,7 @@ Each target in the array can have the following configuration options:
 ### `selector` (required)
 The CSS selector string used to find DOM elements.
 
-```typescript
+```js
 {
 	selector: '#searchspring-content'
 }
@@ -49,7 +49,7 @@ The `inject` object requires two properties:
 #### Inject Actions
 
 **`before`** - Insert the new element before the target element (as a sibling)
-```typescript
+```js
 {
 	selector: '#content',
 	inject: {
@@ -60,7 +60,7 @@ The `inject` object requires two properties:
 ```
 
 **`after`** - Insert the new element after the target element (as a sibling)
-```typescript
+```js
 {
 	selector: '#content',
 	inject: {
@@ -71,7 +71,7 @@ The `inject` object requires two properties:
 ```
 
 **`append`** - Append the new element as the last child of the target element
-```typescript
+```js
 {
 	selector: '#content',
 	inject: {
@@ -82,7 +82,7 @@ The `inject` object requires two properties:
 ```
 
 **`prepend`** - Prepend the new element as the first child of the target element
-```typescript
+```js
 {
 	selector: '#content',
 	inject: {
@@ -93,7 +93,7 @@ The `inject` object requires two properties:
 ```
 
 **`replace`** - Replace the target element with the new element
-```typescript
+```js
 {
 	selector: '#content',
 	inject: {
@@ -107,7 +107,7 @@ The `inject` object requires two properties:
 
 The `element` property can also be a function that receives the target configuration and the original element, allowing for dynamic element creation:
 
-```typescript
+```js
 {
 	selector: '#content',
 	inject: {
@@ -127,7 +127,7 @@ When using `inject`, the `onTarget` callback receives three parameters:
 - `elem`: The newly injected element
 - `originalElem`: The original element that was found by the selector
 
-```typescript
+```js
 new DomTargeter(
 	[{
 		selector: '#content',
@@ -149,7 +149,7 @@ When `true`, removes all child nodes from the target element before executing th
 
 Default: `true` (when not using inject)
 
-```typescript
+```js
 {
 	selector: '#content',
 	emptyTarget: true // Clear existing content
@@ -161,7 +161,7 @@ When `true`, the target element will be hidden using CSS (`visibility: hidden !i
 
 Default: `false`
 
-```typescript
+```js
 {
 	selector: '#content',
 	hideTarget: true // Hide until content is injected
@@ -173,7 +173,7 @@ When `true`, DomTargeter will automatically retry finding the target element if 
 
 Default: `false`
 
-```typescript
+```js
 {
 	selector: '#dynamic-content',
 	autoRetarget: true // Keep looking for dynamically added elements
@@ -188,7 +188,7 @@ Enables retargeting when a click event occurs. This is useful for single-page ap
 
 Default: `false`
 
-```typescript
+```js
 // Listen for any click on the document
 {
 	selector: '#content',
@@ -207,7 +207,7 @@ When `true`, removes any `min-height` CSS property from the target element after
 
 Default: `true`
 
-```typescript
+```js
 {
 	selector: '#content',
 	unsetTargetMinHeight: true // Remove min-height after targeting
@@ -223,7 +223,7 @@ Default: `true`
 ### Custom Properties
 The Target type supports arbitrary custom properties that can be accessed in the `onTarget` callback or inject element function. This is useful for passing component-specific data or configuration.
 
-```typescript
+```js
 {
 	selector: '#content',
 	component: <MyComponent />,
@@ -234,7 +234,7 @@ The Target type supports arbitrary custom properties that can be accessed in the
 
 These properties are available in the callback:
 
-```typescript
+```js
 (target, elem) => {
 	render(target.component, elem);
 	console.log(target.customData); // { theme: 'dark' }
@@ -247,7 +247,7 @@ These properties are available in the callback:
 ### `retarget` method
 If the targets are created after the DomTargeter and `DOMContentLoaded` event has fired, the `retarget` method can be used to manually search for and process all targets. It will execute the `onTarget` callback for any newly found elements.
 
-```typescript
+```js
 // manually retarget
 contentTarget.retarget();
 ```
@@ -255,13 +255,13 @@ contentTarget.retarget();
 ### `getTargets` method
 Returns the array of targets specified during construction.
 
-```typescript
+```js
 const targets = contentTarget.getTargets();
 ```
 
 ## Complete Example
 
-```typescript
+```js
 import { DomTargeter } from '@searchspring/snap-toolbox';
 import { render } from 'preact';
 

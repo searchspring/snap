@@ -14,14 +14,14 @@ Background filters allow a page to be refined without displaying the active filt
 In this example, we'll retrieve the `collection` object from the context and apply it as a category background filter for our search controller.
 
 ```html
-<script src="https://snapui.searchspring.io/[your_site_id]/bundle.js">
+<script src="https://snapui.searchspring.io/[your_site_id]/bundle.js" id="searchspring-context">
 	collection = {
 		handle: 'Shirts'
 	};
 </script>
 ```
 
-```typescript
+```js
 import { getContext } from '@searchspring/snap-toolbox';
 
 const context = getContext(['collection']);
@@ -42,7 +42,7 @@ if (context.collection?.handle) {
 const config = {
 	client: {
 		globals: {
-			siteId: 'abc123',
+			siteId: 'REPLACE_WITH_YOUR_SITE_ID',
 		},
 	},
 	controllers: {

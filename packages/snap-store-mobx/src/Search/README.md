@@ -12,7 +12,7 @@ Contains redirect, banner, and campaigns merchandising data returned by the Sear
 
 `merchandising.campaigns` - Shows what merchandising campaigns were applied to the search. Has array of campaign objects containing `id`, `title`, and `type`. Campaigns are listed in order, where index 0 will be the "highest scoring" of the campaigns.
 
-```typescript
+```js
 [
 	{
 		id: "144744",
@@ -29,7 +29,7 @@ Contains redirect, banner, and campaigns merchandising data returned by the Sear
 
 `merchandising.content` - merchandising banner object that has `ContentType` key and value containing an array of single or more banners.
 
-```typescript
+```js
 enum ContentType {
 	HEADER = 'header',
 	BANNER = 'banner',
@@ -53,7 +53,7 @@ Contains information about the query that was requested from the Search API.
 ### Query object
 An Query object contains the respective query `string` and generated query `url`.
 
-```typescript
+```js
 {
 	string: 'dress',
 	url: '/?q=dress'
@@ -77,7 +77,7 @@ Contains an array of facet objects pertaining to the current query. The facet ob
 
 All facets contain the following base properties:
 
-```typescript
+```js
 {
 	type: 'range',
 	field: 'ss_price',
@@ -113,7 +113,7 @@ See [`custom` property](https://github.com/searchspring/snap/tree/main/packages/
 
 Example inside of a `SearchController` middleware:
 
-```typescript
+```js
 cntrlr.on('afterStore', async ({ controller }, next) => {
 	controller.store.facets.forEach(facet => {
 		facet.custom = { description: `Choose a ${facet.label}...`}
@@ -141,7 +141,7 @@ Collapse state that will contain an initial state that can be defined in the Sea
 ### `display` property
 Contains the facet display type as configured in the Searchspring Management Console.
 
-```typescript
+```js
 enum FacetDisplay {
 	GRID = 'grid',
 	PALETTE = 'palette',
@@ -226,7 +226,7 @@ Facet `multiple` can be configured per facet in the Searchspring Management Cons
 
 `and` - a facet can have multiple active selections and the filtered results will contain a result set that matches all selected values. For example, selecting a 'color' facet value of 'red' and 'pink' will yield results that contain both a 'color' of 'red' and 'pink' variants
 
-```typescript
+```js
 enum FacetMultiple {
 	SINGLE = 'single',
 	OR = 'or',
@@ -457,7 +457,7 @@ An array of objects containing results per page options. Typically used in a `<s
 `active` - boolean stating if current page size matches the value of this option
 
 Default values:
-```typescript
+```js
 [
 	{
 		label: `Show ${this.defaultPageSize}`,
@@ -510,12 +510,12 @@ Returns a `Page` object of the previous page.
 Returns an array of `Page` objects.
 
 Typical usage to retrieve 5 pages:
-```typescript
+```js
 const pages = getPages(5) // 1, 2, *3*, 4, 5
 ```
 
 Typical usage to retrieve 2 pages to the left, and 5 pages to the right of the active page
-```typescript
+```js
 const pages = getPages(2, 5) // 2, 3, *4*, 5, 6, 7, 8
 ```
 

@@ -77,7 +77,7 @@ Next, we'll add the Searchspring theme settings. Theme settings are defined to p
 			"type": "text",
 			"id": "ss_site_id",
 			"label": "Site ID",
-			"default": "xxxxxx"
+			"default": "REPLACE_WITH_YOUR_SITE_ID"
 		},
 		{
 			"type": "text",
@@ -94,7 +94,7 @@ Next, we'll add the Searchspring theme settings. Theme settings are defined to p
 }
 ```
 
-- Replace `xxxxxx` on line 15 with the correct siteId found in the Searchspring Management Console.
+- Replace `REPLACE_WITH_YOUR_SITE_ID` on line 15 with the correct siteId found in the Searchspring Management Console.
 - (if applicable) Replace `shop` on line 21 with the search collection handle if it was not `shop`.
 
 
@@ -354,7 +354,7 @@ import { sharedPlugin } from './plugins/sharedPlugin';
 const snap = new Snap({
     client: {
         globals: {
-            siteId: 'abc123',
+            siteId: 'REPLACE_WITH_YOUR_SITE_ID',
         },
     },
     controllers: {

@@ -5,7 +5,7 @@
 ## `update` method
 Update the store's properties with `data` object that has been retrieved from Searchspring's Search API.
 
-```typescript
+```js
 const store = new SearchStore();
 
 store.update(data)
@@ -14,7 +14,7 @@ store.update(data)
 ## `toJSON` method
 Converts store to JSON object for easier debugging.
 
-```typescript
+```js
 console.log(store.toJSON())
 ```
 
@@ -25,7 +25,7 @@ The `custom` object is an observable property that can be accessed in your compo
 
 The following example will still have the `view` property available in your components, however will **NOT** yield a component rerender if its data has changed. 
 
-```typescript
+```js
 const middleware = (controller) => {
     controller.store.custom.view = {
         value: 'grid',
@@ -42,7 +42,7 @@ const middleware = (controller) => {
 
 In order for properties to be observable, the `custom` object must set directly each time.
 
-```typescript
+```js
 const middleware = (controller) => {
     controller.store.custom = {
         view: {
@@ -61,7 +61,7 @@ const middleware = (controller) => {
 
 OR defined in advanced:
 
-```typescript
+```js
 const middleware = (controller) => {
     controller.store.custom = { view: undefined }
     controller.store.custom.view = {
@@ -79,7 +79,7 @@ const middleware = (controller) => {
 
 If you wish to add additional properties further in your logic, the previous properties can be spread when setting the object.
 
-```typescript
+```js
 const middleware = (controller) => {
     controller.store.custom = { ...controller.store.custom, isActive: true }
 };

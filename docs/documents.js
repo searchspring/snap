@@ -50,7 +50,7 @@ var documents = [
 				searchable: true,
 				links: [
 					{
-						label: 'Recommendations Integration',
+						label: 'Integration',
 						route: '/snap-recommendations-integration',
 						type: 'markdown',
 						url: './docs/SNAP_RECOMMENDATIONS_INTEGRATION.md',

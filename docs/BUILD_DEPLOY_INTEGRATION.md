@@ -53,7 +53,7 @@ There are a few core context variables utilized by Snap, `shopper`, `merchandisi
 The custom variable example below shows a custom context being added for 'page'. The value would typically be assigned server side using template logic. This would be used to possibly toggle the siteId utilized by the client (to fetch different catalog data) or to modify text or currency displays.
 
 ```html
-<script src="https://snapui.searchspring.io/[your_site_id]/bundle.js">
+<script src="https://snapui.searchspring.io/[your_site_id]/bundle.js" id="searchspring-context">
 	page = "404";
 </script>
 ```
@@ -61,7 +61,7 @@ The custom variable example below shows a custom context being added for 'page'.
 When used, shopper context should always include at least an `id`; the `cart` contents can optionally be provided to ensure personalization is applied on every page. Standard Snap integrations will automatically take this context data and apply it for personalization.
 
 ```html
-<script src="https://snapui.searchspring.io/[your_site_id]/bundle.js">
+<script src="https://snapui.searchspring.io/[your_site_id]/bundle.js" id="searchspring-context">
 	shopper = {
 		id: '[REPLACE WITH LOGGED IN SHOPPER ID]',
 		cart: [
@@ -84,7 +84,7 @@ When used, shopper context should always include at least an `id`; the `cart` co
 Merchandising segmentation will automatically be applied if passed in via a script context variable. Standard Snap integrations will automatically take this context data and apply it for merchandising.
 
 ```html
-<script src="https://snapui.searchspring.io/[your_site_id]/bundle.js">
+<script src="https://snapui.searchspring.io/[your_site_id]/bundle.js" id="searchspring-context">
 	merchandising = {
 		segments: ['segment1', 'segment2']
 	};
@@ -94,7 +94,7 @@ Merchandising segmentation will automatically be applied if passed in via a scri
 Example using multiple context variables together.
 
 ```html
-<script src="https://snapui.searchspring.io/[your_site_id]/bundle.js">
+<script src="https://snapui.searchspring.io/[your_site_id]/bundle.js" id="searchspring-context">
 	page = "404";
 	shopper = {
 		id: 'canadian@shopper.com'

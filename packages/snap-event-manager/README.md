@@ -11,7 +11,7 @@ Snap Event Manager is a dependency of Snap Controller and it is recommended to u
 ### `on` method
 Used to attach middleware to an event. If the event name previously had middleware attached, it will add to the middleware stack.
 
-```typescript
+```js
 controller.eventManager.on('interestingEvent', async (eventData, next) => {
 	// do something with the eventData
 
@@ -27,7 +27,7 @@ If a middleware returns `false` the entire middleware flow is interrupted and an
 ### `fire` method
 Invoke custom event. Data passed into the second parameter gets handed off to the middleware attached with the `on` method.
 
-```typescript
+```js
 controller.eventManager.fire('interestingEvent', { data: { some: 'string' } });
 ```
 
@@ -39,7 +39,7 @@ The first middleware attached with the `on` method is the first to execute. When
 
 ### Order Flow Example
 
-```typescript
+```js
 controller.eventManager.on('interestingEvent', async (data, next) => {
 	console.log('first middleware start');
 	await next();

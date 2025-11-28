@@ -89,7 +89,7 @@ In snap-preact controllers are created only as needed (typically when a targeter
 
 For example:
 
-```typescript
+```js
 const snap = new Snap(config);
 snap.getController('search').then((search) => {
 	// do things with controller
@@ -101,7 +101,7 @@ snap.getController('search').then((search) => {
 
 If multiple controllers are needed at the same time, usage of the `getControllers` method is necessary. The `getControllers` method returns a promise that resolves to an array of controllers in the order requested by the parameters. The promise only resolves when ALL of the controllers have been created - if a controller is specified that is never created the promise will never resolve. For this reason this method should only be used when all controllers are needed simultaneously.
 
-```typescript
+```js
 const snap = new Snap(config);
 snap.getControllers('search', 'autocomplete').then(([search, autocomplete]) => {
 	// do things with controllers
@@ -114,7 +114,7 @@ snap.getControllers('search', 'autocomplete').then(([search, autocomplete]) => {
 
 Snap also provides a method to retrieve instantiators. Instantiatiors are used to create instances of the [`RecommendationInstantiator`](https://searchspring.github.io/snap/reference-snap-preact-instantiators) class, which is responsible for instantiating recommendations.
 
-```typescript
+```js
 const snap = new Snap(config);
 snap.getInstantiator('recommendation').then((instantiator) => {
 	// do things with instantiator
@@ -124,38 +124,9 @@ snap.getInstantiator('recommendation').then((instantiator) => {
 
 ## Snap Properties
 
-### client
-
-The `client` property is used to configure the client side of the Snap instance.
-
-```typescript
-const snap = new Snap(config);
-snap.client.globals.siteId = 'abc123';
-```
-
-### tracker
-
-The `tracker` property is used to configure the tracker side of the Snap instance.
-
-```typescript
-const snap = new Snap(config);
-snap.tracker.globals.siteId = 'abc123';
-```
-
-### context
-
-The `context` property is used to configure the context side of the Snap instance.
-
-```typescript
-const snap = new Snap(config);
-snap.context.siteId = 'abc123';
-```
-
-### controllers
-
-The `controllers` property is used to configure the controllers side of the Snap instance.
-
-```typescript
-const snap = new Snap(config);
-snap.controllers.search.globals.siteId = 'abc123';
-```
+| Property | Description |
+|---|---|
+| `client` | A reference to the [snap-client](https://github.com/searchspring/snap/tree/main/packages/snap-client) default instance used when constructing all controllers |
+| `tracker` | A reference to the [snap-tracker](https://github.com/searchspring/snap/tree/main/packages/snap-tracker) default instance used when constructing all controllers. It can also be used to access storage helper methods and event tracking methods. |
+| `context` | A reference to the context object used when constructing all controllers. |
+| `controllers` | An object containing all controllers that have been constructed. |

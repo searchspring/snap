@@ -22,8 +22,8 @@ export type RecommendationInstantiatorConfig = {
 	components: {
 		[name: string]: () => Promise<any> | any;
 	};
-	config: {
-		branch: string;
+	config?: {
+		branch?: string;
 		realtime?: boolean;
 		batched?: boolean;
 		limit?: number;
@@ -66,6 +66,7 @@ type ExtendedRecommendaitonProfileTarget = Target & {
 	profile?: ProfileSpecificProfile;
 };
 
+const DEFAULT_BRANCH = 'production';
 export class RecommendationInstantiator {
 	private mode = AppMode.production;
 	public client: Client;
@@ -90,7 +91,8 @@ export class RecommendationInstantiator {
 		}
 
 		if (!this.config.config?.branch) {
-			throw new Error(`Recommendation Instantiator config must contain 'branch' property`);
+			this.config.config = this.config.config || {};
+			this.config.config.branch = DEFAULT_BRANCH;
 		}
 
 		if (!this.config.components || typeof this.config.components != 'object' || !Object.keys(this.config.components).length) {

@@ -21,13 +21,13 @@ Each object in the array defines an entry point on the page where a component wi
 
 In this example we're creating a single search controller with two targeters. The `<Content>` component is injected into `<div id="searchspring-content">` and the `<Sidebar>` component is injected into `<div id="searchspring-sidebar">`. Each component will have access to the same controller via it's props.
 
-```ts
-// src/index.ts
+```js
+// src/index.js
 
 const snap = new Snap({
     client: {
 		globals: {
-			siteId: 'abc123',
+			siteId: 'REPLACE_WITH_YOUR_SITE_ID',
 		},
 	},
     controllers: {
@@ -58,7 +58,7 @@ const snap = new Snap({
 
 To access the targeters after they have been created, we can first retrieve the controller and then use the `controller.targeters` property. This is a map of the targeter names (or selector if name is not provided) to the targeter objects.
 
-```ts
+```js
 snap.getController('search').then((controller) => {
     const contentTargeter = controller.targeters['#searchspring-content'];
     const sidebarTargeter = controller.targeters['#searchspring-sidebar'];
@@ -106,7 +106,7 @@ const config = {
 
 If the targets are created after the DomTargeter and DOMContentLoaded event has fired, the retarget method can be used to check for target existence.
 
-```ts
+```js
 // manually retarget
 searchPageTarget.retarget();
 ```

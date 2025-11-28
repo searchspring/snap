@@ -13,14 +13,14 @@ Links attached to facet values, pagination, sort by, etc.. that are clicked will
 
 Here is an example of the bare minimum configuration to create a search controller and render a root level `Content` component to the page.
 
-```ts
-// src/index.ts
+```js
+// src/index.js
 import { Snap } from '@searchspring/snap-preact';
 
 const snap = new Snap({
     client: {
 		globals: {
-			siteId: 'abc123',
+			siteId: 'REPLACE_WITH_YOUR_SITE_ID',
 		},
 	},
     controllers: {
@@ -47,11 +47,13 @@ The `Content` component is considered a root level component since it is being r
 
 To provide a reference to the controller via props to any subcomponents, we can utilize the `ControllerProvider` component from the `@searchspring/snap-preact-components` package.
 
-```tsx
-// src/components/Content/Content.tsx
+```jsx
+// src/components/Content/Content.jsx
 
+import { h } from 'preact';
 import { observer } from 'mobx-react';
 import { ControllerProvider } from '@searchspring/snap-preact-components';
+import { Results } from '../Results/Results';
 
 export const Content = observer((props) => {
     const { controller } = props;
@@ -68,13 +70,14 @@ Then from any subcomponent such as `Results` in this example, the `withControlle
 
 Finally, the `observer` higher order component is used to make the component reactive to changes in the store.
 
-```tsx
-// src/components/Content/Content.tsx
+```jsx
+// src/components/Results/Results.jsx
 
+import { h } from 'preact';
 import { observer } from 'mobx-react';
 import { withController, InlineBanner, Result } from '@searchspring/snap-preact-components';
 
-const Results = withController(observer((props) => {
+export const Results = withController(observer((props) => {
     const { controller } = props;
 
     return (

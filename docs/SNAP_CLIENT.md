@@ -9,7 +9,7 @@ When constructing a new Client, the first argument is a `ClientGlobals` object. 
 
 You can find your Searchspring siteId in the [Searchspring Management Console](https://manage.searchspring.net)
 
-```ts
+```js
 import { Client } from '@searchspring/snap-client';
 
 const client = new Client({
@@ -42,7 +42,7 @@ The second argument is an optional `ClientConfig` object.
 
 Where `RequesterConfig<T>` is defined as:
 
-```ts
+```js
 type RequesterConfig<T> = {
 	origin?: string;
 	headers?: { [key: string]: string };
@@ -59,7 +59,7 @@ type RequesterConfig<T> = {
 
 Example: 
 
-```ts
+```js
 import { Client } from '@searchspring/snap-client';
 
 const client = new Client({
@@ -99,7 +99,7 @@ The client uses the [@searchspring/snapi-types](https://www.npmjs.com/package/@s
 The `meta` endpoint is used to fetch metadata about the site and also contains common static data such as sort options that don't change between other API queries.
 
 
-```ts
+```js
 const meta: MetaResponseModel = await client.meta();
 ```
 
@@ -108,7 +108,7 @@ const meta: MetaResponseModel = await client.meta();
 The `autocomplete` endpoint is used to fetch autocomplete suggestions and results for a given search query and also requests the meta data for the site.
 
 
-```ts
+```js
 const [meta, autocomplete]: [MetaResponseModel, AutocompleteResponseModel] = await client.autocomplete({
 	suggestions: {
 		count: 5
@@ -127,7 +127,7 @@ const [meta, autocomplete]: [MetaResponseModel, AutocompleteResponseModel] = awa
 The `search` endpoint is used to fetch search results for a given search query and also requests the meta data for the site.
 
 
-```ts
+```js
 const [meta, search]: [MetaResponseModel, SearchResponseModel] = await client.search({
 	search: {
 		query: {
@@ -142,7 +142,7 @@ const [meta, search]: [MetaResponseModel, SearchResponseModel] = await client.se
 
 The `finder` method makes a request to the Searchspring Finder API to fetch search results for a given search query.
 
-```ts
+```js
 const [meta, finder]: [MetaResponseModel, SearchResponseModel] = await client.finder({
 	search: {
 		query: {
@@ -162,7 +162,7 @@ const [meta, finder]: [MetaResponseModel, SearchResponseModel] = await client.fi
 
 The `trending` method makes a request to the Searchspring Trending API to fetch trending search queries.
 
-```ts
+```js
 const results: TrendingResponseModel = await client.trending({
 	limit: 5
 });
@@ -173,7 +173,7 @@ const results: TrendingResponseModel = await client.trending({
 
 The `recommend` method makes a request to the Searchspring Profile API and Recommend API to fetch recommendations for a given profile tag. This will also request the meta data.
 
-```ts
+```js
 const results: RecommendCombinedResponseModel = await client.recommend({
 	tag: 'similar',
 	products: ['product123'],

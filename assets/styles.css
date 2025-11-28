@@ -5,16 +5,30 @@
 	--athos-secondary-AAA: #005F82;
 	--navigation-width: 250px;
 	--legend-width: 250px;
+	
+	/* Light mode colors */
+	--bg-primary: #ffffff;
+	--bg-secondary: #fafafa;
+	--bg-tertiary: #fafafa;
+	--text-primary: #222;
+	--text-secondary: #777;
+	--text-inverse: #ffffff;
+	--border-color: #eee;
+	--shadow-color: rgb(0 0 0 / 35%);
+	--code-bg: rgba(27,31,35,0.05);
+	--pre-bg: #fafafa;
+	--table-header-bg: var(--athos-secondary-AA);
+	--table-header-text: #ffffff;
+	--table-row-even: #fafafa;
 }
 
 html {
 	box-sizing: border-box;
-	color: #222;
+	color: var(--text-primary);
 }
 
 body {
 	margin: 0;
-	background: #fafafa;
 	font-family: 'Inter', sans-serif;
 	-webkit-font-smoothing: antialiased;
 }
@@ -36,22 +50,22 @@ a:hover {
 
 table {
 	border-collapse: collapse;
-	background-color: #ffffff;
+	background-color: var(--bg-primary);
 	border-radius: 3px;
 	width: 100%;
-	box-shadow: 0 0 1px rgb(0 0 0 / 35%);
+	box-shadow: 0 0 1px var(--shadow-color);
 }
 
 table thead {
-	background-color: var(--athos-secondary-AA);
-	color: #ffffff;
+	background-color: var(--table-header-bg);
+	color: var(--table-header-text);
 	text-transform: uppercase;
 	font-size: 0.9em;
 	font-weight: bold;
 }
 
 table tr:nth-child(even) {
-	background-color: #fafafa;
+	background-color: var(--table-row-even);
 }
 
 table th {
@@ -95,8 +109,8 @@ table td {
 	position: fixed;
 	top: 0;
 	left: 0;
-	background: #fff;
-	box-shadow: 0 0 2px rgb(0 0 0 / 35%);
+	background: var(--bg-primary);
+	box-shadow: 0 0 2px var(--shadow-color);
 }
 
 #navigation-wrapper .collapseNav {
@@ -126,7 +140,7 @@ table td {
 }
 
 #navigation ul li a .fas {
-	color: #777;
+	color: var(--text-secondary);
 	float: right;
 	font-size: 10px;
 }
@@ -214,7 +228,7 @@ table td {
 #markdown {
 	padding: 3% 5%;
 	line-height: 1.5;
-	background: white;
+	background: var(--bg-primary);
 	overflow: auto;
 	width: 100%;
 }
@@ -254,15 +268,15 @@ table td {
 
 pre {
 	overflow: auto;
-	background-color: #fafafa;
+	background-color: var(--pre-bg);
 	border-radius: 0px;
-	border: 1px solid #eee;
+	border: 1px solid var(--border-color);
 }
 
 code:not([class]) {
 	padding: 0.2em 0.4em;
 	margin: 0;
-	background-color: rgba(27,31,35,0.05);
+	background-color: var(--code-bg);
 	border-radius: 3px;
 }
 
@@ -379,4 +393,64 @@ code:not([class]) {
 		width: unset;
 	}
 	
+}
+
+/* Dark mode */
+@media (prefers-color-scheme: dark) {
+	:root {
+		--bg-primary: #1a1a1a;
+		--bg-secondary: #2d2d2d;
+		--bg-tertiary: #252525;
+		--text-primary: #e0e0e0;
+		--text-secondary: #a0a0a0;
+		--text-inverse: #1a1a1a;
+		--border-color: #404040;
+		--shadow-color: rgb(0 0 0 / 60%);
+		--code-bg: rgba(0, 0, 0, 0.3);
+		--pre-bg: #252525;
+		--pre-text: #e0e0e0;
+		--table-header-bg: var(--athos-secondary-AA);
+		--table-header-text: #ffffff;
+		--table-row-even: #252525;
+		--heading-color: #6ba3d8;
+		--link-color: #4db8e8;
+	}
+	
+	body {
+		background-color: var(--bg-primary);
+		color: var(--text-primary);
+	}
+	
+	/* Fix headings - use lighter blue for better contrast */
+	#markdown h2,
+	#markdown h1,
+	#navigation h3 {
+		color: var(--heading-color);
+	}
+	
+	/* Fix links - use brighter blue for better contrast */
+	a {
+		color: var(--link-color);
+	}
+	
+	#content .permalink {
+		color: var(--link-color);
+	}
+	
+	/* Fix pre blocks - ensure text is visible (override hljs.css) */
+	pre {
+		color: var(--pre-text) !important;
+	}
+	
+	/* Fix code blocks - ensure better contrast */
+	code:not([class]) {
+		color: var(--text-primary) !important;
+		background-color: var(--code-bg) !important;
+	}
+	
+	/* Fix code blocks inside pre elements */
+	pre code {
+		color: var(--pre-text) !important;
+		background-color: transparent !important;
+	}
 }

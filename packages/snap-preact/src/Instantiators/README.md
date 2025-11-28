@@ -37,7 +37,7 @@ Branching allows for branch builds of templates. For production-ready templates,
 
 If you plan to utilize template branching, `instantiators.recommendation.config.branch` must define the current git branch name. Otherwise, a fallback value with the repository default branch name (typically `production`) should be defined. The `BRANCHNAME` can be defined at runtime via webpack's `DefinePlugin`
 
-```javascript
+```js
 const webpack = require('webpack');
 const childProcess = require('child_process');
 const branchName = childProcess.execSync('git rev-parse --abbrev-ref HEAD').toString().trim();
@@ -51,13 +51,13 @@ module.exports = {
 }
 ```
 
-```typescript
-// src/index.ts
+```js
+// src/index.js
 
 const snap = new Snap({
     client: {
         globals: {
-            siteId: 'abc123',
+            siteId: 'REPLACE_WITH_YOUR_SITE_ID',
         },
     },
     instantiators: {

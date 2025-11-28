@@ -10,7 +10,7 @@ The configuration object provided during instantiation provides a way of configu
 ## Services
 Along with a configuration, each controller is passed a collection of services during instantiation. These services are then used by the controller and made available via controller methods. Sometimes controllers might share a reference to a service (the `client` service for example), but in most cases a controller will have it's own instance of a service. Some services (like the `SearchStore`) share services with the controller (in the example above, the `UrlManager` is shared).
 
-```typescript
+```js
 { client, store, urlManager, eventManager, profiler, logger }
 ```
 ### client
@@ -34,7 +34,7 @@ The `logger` service provides logging functionality to a controller. Each contro
 Each Controller can optionally take a 3rd parameter for `Context`. This is to allow each individual controller to have its own individual context if so desired.
 
 The context is exposed as `controller.context`
-```typescript
+```js
 controller.context;
 ```
 
@@ -42,7 +42,7 @@ controller.context;
 ## Initialization
 Invoking the `init` method is required to subscribe to changes that occur in the UrlManager. It also fires the `init` event which executes attached middleware. This can be fired manually as needed; if it was not manually fired it will happen automatically on the first call to the controller `search` method.
 
-```typescript
+```js
 controller.init();
 ```
 
@@ -51,7 +51,7 @@ The `search` method of a controller will run the search that is expected by leve
 
 Most controllers will provide a means of manipulating the request and response using `beforeSearch` and `afterSearch` events respectively. Read on for details about events.
 
-```typescript
+```js
 controller.search();
 ```
 
@@ -61,7 +61,7 @@ Different controller types will utilize different Snap Stores (typically of the 
 ## Events
 Each controller will fire various events. Some of the event names are shared between controllers for consistency (ex: `beforeSearch`, `afterSearch`, `afterStore`); however the attaching of middleware and execution of it must remain separate. This is why a new `EventManager` instance is created for each controller. Middleware are attached to events via the `on` method and the functions should almost always end with `await next()` unless purposefully preventing the next attached middleware from executing.
 
-```typescript
+```js
 controller.on('init', async (eventData, next) => {
 	const { controller } = eventData;
 
@@ -75,7 +75,7 @@ Note: Groups of middleware (plugins) can be attached using the `plugin` method.
 
 The data available within a middleware (first parameter) is determined by what gets passed into the `fire` method. For existing events on the controller, the `fire` method is already being called when appropriate to the event, and the `eventData` will typically be an object containing a reference to the controller and any other details that may be of importance to the particular event. Custom events can be created as needed; but keep in mind that any middleware tied to the event should be bound (using `on` or `plugin`) prior to the execution of the `fire` method.
 
-```typescript
+```js
 controller.eventManager.fire('customEventName', { thing1: 'one', thing2: 2 });
 ```
 
@@ -86,13 +86,13 @@ A controller's environment is initialized at build time, and is used to control 
 ## Logging
 The logger provides a clear way of outputting details like profile data or errors to the developer console. A `production` build will supress most logs while a `development` build will show them all. The environment is automatically determined, but can be toggled during runtime by setting it to either `development` or `production`.
 
-```typescript
+```js
 controller.environment = 'development';
 ```
 
 The use of `console.log()` is discouraged. Logging should be done via controller instance to help debug and navigate the sea of console logs. Each controller will output the `id` for easily deciphering which controller made the log.
 
-```typescript
+```js
 controller.log.warn('THIS IS A WARNING!');
 ```
 

@@ -9,7 +9,7 @@ npm install --save @searchspring/snap-client
 ```
 
 ## Import
-```typescript
+```js
 import { Client } from '@searchspring/snap-client';
 ```
 
@@ -20,7 +20,7 @@ Globals are API parameters that will be applied to all searches requested by the
 
 `siteId` (required)
 
-```typescript
+```js
 const globals = {
 	siteId: 'a1b2c3'
 };
@@ -30,7 +30,7 @@ Any other keys defined here will be passed to the API request
 
 For example, with background filter:
 
-```typescript
+```js
 const globals = {
 	siteId: 'a1b2c3',
   filters: [{
@@ -45,7 +45,7 @@ const globals = {
 ## Client Config
 Optional configuration for each requester. This can be used to specifiy a development origin URL or to configure cache settings per requester.
 
-```typescript
+```js
 type ClientConfig = {
 	mode?: keyof typeof AppMode | AppMode;
 	fetchApi?: WindowOrWorkerGlobalScope['fetch'];
@@ -90,7 +90,7 @@ Each requester in the Snap Client has its own cache settings, which can be confi
 
   `entries`: to allow preload the cache. This is primarily used in Email Recommendations. 
 
-```typescript
+```js
 const metaResponse = {
     "facets": {
         "brand": {
@@ -152,7 +152,7 @@ const results = await client.search({
 ```
 
 ## Standalone usage
-```typescript
+```js
 const client = new Client(globals, clientConfig);
 
 const [meta, results] = await client.search({
@@ -167,7 +167,7 @@ const [meta, results] = await client.search({
 ## `search` method
 Makes a request to the Searchspring Search API and returns a promise.  
 
-```typescript
+```js
 const client = new Client(globals, clientConfig);
 
 const [meta, results] = await client.search({
@@ -182,7 +182,7 @@ const [meta, results] = await client.search({
 ## `autocomplete` method
 Makes a request to the Searchspring Autocomplete API and returns a promise.  
 
-```typescript
+```js
 const client = new Client(globals, clientConfig);
 
 const [meta, results] = await client.autocomplete({
@@ -201,7 +201,7 @@ const [meta, results] = await client.autocomplete({
 ## `meta` method
 Makes a request to the Searchspring Search API to fetch meta properties, it returns a promise. The `search` method utilizes this method.
 
-```typescript
+```js
 const client = new Client(globals, clientConfig);
 const meta = await client.meta();
 ```
@@ -209,10 +209,10 @@ const meta = await client.meta();
 ## `trending` method
 Makes a request to the Searchspring Trending API and returns a promise.
 
-```typescript
+```js
 const client = new Client(globals, clientConfig);
 const results = await client.trending({
-  siteId: 'abc123',
+  siteId: 'REPLACE_WITH_YOUR_SITE_ID',
   limit: 5
 });
 ```
@@ -220,7 +220,7 @@ const results = await client.trending({
 ## `finder` method
 Makes a request to the Searchspring finder API and returns a promise.
 
-```typescript
+```js
 const client = new Client(globals, clientConfig);
 const [meta, results] = await client.finder({
   filters: [{
@@ -235,11 +235,11 @@ const [meta, results] = await client.finder({
 ## `recommend` method
 Makes a request to the Searchspring Recommend API and returns a promise.
 
-```typescript
+```js
 const client = new Client(globals, clientConfig);
 const results = await client.recommend({
   tag: 'similar',
-  siteId: 'abc123',
+  siteId: 'REPLACE_WITH_YOUR_SITE_ID',
   products: ['product123'],
   shopper: '[REPLACE WITH LOGGED IN SHOPPER ID]'
 });

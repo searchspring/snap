@@ -3,13 +3,15 @@
 To set up Search using Snap, we'll need to define a search controller in our Snap configuration. See [SearchController reference](https://searchspring.github.io/snap/reference-controller-search) for all available configuration options.
 
 
-```ts
-// src/index.ts
+```js
+// src/index.js
+
+import { Snap } from '@searchspring/snap-preact';
 
 const snap = new Snap({
     client: {
 		globals: {
-			siteId: 'abc123',
+			siteId: 'REPLACE_WITH_YOUR_SITE_ID',
 		},
 	},
     controllers: {
@@ -32,7 +34,7 @@ const snap = new Snap({
 });
 ```
 
-### Category Pages / Background Filters
+## Category Pages / Background Filters
 Optionally, apply filters from the page's content to the SearchControllerConfig `globals.filters` property. The controller globals are similar to the client globals in that all search requests will include the parameters specified. This can be used to configure category/brand pages, or other special filtering to apply to the current page's search requests.
 
 For example, if a global variable `snapConfig` exists on the page (must be defined prior to our Snap script):
@@ -51,8 +53,11 @@ For example, if a global variable `snapConfig` exists on the page (must be defin
 </script>
 ```
 
-```typescript
-// src/index.ts
+```js
+// src/index.js
+
+import { Snap } from '@searchspring/snap-preact';
+
 const backgroundFilters = [];
 if (snapConfig?.category) {
 	backgroundFilters.push({
@@ -65,7 +70,7 @@ if (snapConfig?.category) {
 const snap = new Snap({
     client: {
 		globals: {
-			siteId: 'abc123',
+			siteId: 'REPLACE_WITH_YOUR_SITE_ID',
 		},
 	},
     controllers: {
@@ -93,7 +98,7 @@ const snap = new Snap({
 
 ## Search Store
 
-The following properties are specific to a Search Store via a Search Controller.
+This section covers the properties available on the Search Store via a Search Controller with examples of how to implement common custom components. Alternatively, equivalent and additional components are available in the `@searchspring/snap-preact-components` package. See [Preact Component Library](https://searchspring.github.io/snap/preact-components) for all available components and their usage.
 
 
 ### SearchController.store.merchandising
@@ -105,35 +110,35 @@ The available banner types include: `header`, `banner`, `footer`, `left`, `inlin
 For inline banners, the `<InlineBanner/>` component should be used instead. An example of this usage can be found in the [store.results](https://searchspring.github.io/snap/snap-search#searchcontrollerstoreresults) section below.
 
 ```jsx
-import { Banner } from '@searchspring/snap-preact-components';
+// src/components/Content/Content.jsx
 
-@observer
-export class Content extends Component {
-	render() {
-		const controller = this.props.controller;
-		const { store } = controller;
-		const { pagination, merchandising } = store;
+import { h } from 'preact';
+import { observer } from 'mobx-react';
+import { ControllerProvider, Banner, Pagination } from '@searchspring/snap-preact-components';
+import { Results } from '../Results/Results';
+import { NoResults } from '../NoResults/NoResults';
+import { SearchHeader } from '../SearchHeader/SearchHeader';
 
-		return (
-			store.loaded && (
-				<ControllerProvider controller={controller}>
-					<div class="ss__content">
-						<Banner content={merchandising.content} type="header" />
-						<Banner content={merchandising.content} type="banner" />
-						<SearchHeader />
-						{
-							pagination.totalResults > 0 
-							? (<Results />) : 
-							(<NoResults />)
-						}
-						<Pagination />
-						<Banner content={merchandising.content} type="footer" />
-					</div>
-				</ControllerProvider>
-			)
-		);
-	}
-}
+export const Content = observer((props) => {
+    const { controller } = props;
+
+    return controller.store.loaded ? (
+        <ControllerProvider controller={controller}>
+            <div class="ss__content">
+				<Banner content={merchandising.content} type="header" />
+				<Banner content={merchandising.content} type="banner" />
+				<SearchHeader />
+				{
+					pagination.totalResults > 0 
+					? (<Results />) : 
+					(<NoResults />)
+				}
+				<Pagination />
+				<Banner content={merchandising.content} type="footer" />
+			</div>
+        </ControllerProvider>
+    ) : null;
+});
 ```
 
 ### SearchController.store.search
@@ -141,55 +146,57 @@ export class Content extends Component {
 The `search` property contains information about the current query, typically displayed above results and used in combination with the `store.pagination` data.
 
 ```jsx
-@withController
-@observer
-export class SearchHeader extends Component {
-	render() {
-		const { controller } = this.props;
-		const { store } = controller;
-		const { pagination, search } = store;
-		const originalQuery = search.originalQuery;
+// src/components/SearchHeader/SearchHeader.jsx
 
-		return (
-			store.loaded && (
-				<div class="ss__search-header">
-					{pagination.totalResults ? (
-						<h1 class="ss__search-header--results">
-							{`Showing `}
-							{pagination.multiplePages && <span class="ss__search-header__count-range">{` ${pagination.begin} - ${pagination.end} of `}</span>}
-							<span class="ss__search-header__count-total">{pagination.totalResults}</span>
-							{` result${pagination.totalResults == 1 ? '' : 's'}`}
-							{search?.query && (
+import { h } from 'preact';
+import { observer } from 'mobx-react';
+import { withController } from '@searchspring/snap-preact-components';
+
+export const SearchHeader = withController(observer((props) => {
+    const { controller } = props;
+	const { store } = controller;
+	const { pagination, search } = store;
+	const originalQuery = search.originalQuery;
+
+	return (
+		store.loaded && (
+			<div class="ss__search-header">
+				{pagination.totalResults ? (
+					<h1 class="ss__search-header--results">
+						{`Showing `}
+						{pagination.multiplePages && <span class="ss__search-header__count-range">{` ${pagination.begin} - ${pagination.end} of `}</span>}
+						<span class="ss__search-header__count-total">{pagination.totalResults}</span>
+						{` result${pagination.totalResults == 1 ? '' : 's'}`}
+						{search?.query && (
+							<span>
+								{` for `}
+								<span class="ss__search-header__query">"{search.query.string}"</span>
+							</span>
+						)}
+					</h1>
+				) : (
+					pagination.totalResults === 0 && (
+						<h1 class="ss__search-header--noresults">
+							{search?.query ? (
 								<span>
-									{` for `}
-									<span class="ss__search-header__query">"{search.query.string}"</span>
+									No results for <span class="ss__search-header__query">"{search.query.string}"</span> found.
 								</span>
+							) : (
+								<span>No results found.</span>
 							)}
 						</h1>
-					) : (
-						pagination.totalResults === 0 && (
-							<h1 class="ss__search-header--noresults">
-								{search?.query ? (
-									<span>
-										No results for <span class="ss__search-header__query">"{search.query.string}"</span> found.
-									</span>
-								) : (
-									<span>No results found.</span>
-								)}
-							</h1>
-						)
-					)}
+					)
+				)}
 
-					{originalQuery && (
-						<div class="ss__oq">
-							Search instead for "<a href={originalQuery.url.href}>{originalQuery.string}</a>"
-						</div>
-					)}
-				</div>
-			)
-		);
-	}
-}
+				{originalQuery && (
+					<div class="ss__oq">
+						Search instead for "<a href={originalQuery.url.href}>{originalQuery.string}</a>"
+					</div>
+				)}
+			</div>
+		)
+	);
+}));
 ```
 
 ### SearchController.store.pagination
@@ -197,43 +204,46 @@ export class SearchHeader extends Component {
 The `pagination` property is not only used for information about the current query, but also contains everything needed for handling pagination of a query that yields multiple pages. Invoking the `getPages` method will retrieve the specified number of page objects. For more about the pagination store, checkout the [Search Controller reference](https://searchspring.github.io/snap/reference-controller-search).
 
 ```jsx
-@withController
-@observer
-export class Pagination extends Component {
-	render() {
-		const controller = this.props.controller;
-		const {
-			store: { pagination },
-		} = controller;
-		const pages = pagination.getPages(5);
+// src/components/Pagination/Pagination.jsx
 
-		return (
-			<div class="ss__pagination">
-				{pagination.previous && (
-					<span class="ss__pagination__prev">
-						<a {...pagination.previous.url.link} title="Previous">
-							Prev
-						</a>
-					</span>
-				)}
+import { h } from 'preact';
+import { observer } from 'mobx-react';
+import { withController } from '@searchspring/snap-preact-components';
 
-				{pages.map((page) => (
-					<span key={page.key} class={`ss__pagination__page ${page.active ? 'ss__pagination__page--current' : ''}`}>
-						<a {...page.url.link}>{page.number}</a>
-					</span>
-				))}
+export const Pagination = withController(observer((props) => {
+	const { controller } = props;
+	const { store } = props.controller;
+	const { pagination } = store;
+	
+	const MINIMUM_PAGES = 5;
+	const pages = pagination.getPages(MINIMUM_PAGES);
+	
+	return (
+		<div class="ss__pagination">
+			{pagination.previous && (
+				<span class="ss__pagination__prev">
+					<a {...pagination.previous.url.link} title="Previous">
+						Prev
+					</a>
+				</span>
+			)}
 
-				{pagination.next && (
-					<span class="ss__pagination__next">
-						<a {...pagination.next.url.link} title="Next">
-							Next
-						</a>
-					</span>
-				)}
-			</div>
-		);
-	}
-}
+			{pages.map((page) => (
+				<span key={page.key} class={`ss__pagination__page ${page.active ? 'ss__pagination__page--current' : ''}`}>
+					<a {...page.url.link}>{page.number}</a>
+				</span>
+			))}
+
+			{pagination.next && (
+				<span class="ss__pagination__next">
+					<a {...pagination.next.url.link} title="Next">
+						Next
+					</a>
+				</span>
+			)}
+		</div>
+	)
+}));
 ```
 
 ### SearchController.store.sorting
@@ -243,37 +253,38 @@ The `sorting` property contains sorting options applicable to the current query.
 Sorting settings can be configured in the [Searchspring Management Console](https://manage.searchspring.net/)
 
 ```jsx
-@withController
-@observer
-export class SortBy extends Component {
-	render() {
-		const controller = this.props.controller;
-		const { sorting } = controller.store;
+// src/components/SortBy/SortBy.jsx
 
-		return (
-			sorting.length !== 0 && (
-				<div class="ss__sorting">
-					<label for="ss__sort--select">Sort</label>
+import { h } from 'preact';
+import { observer } from 'mobx-react';
+import { withController } from '@searchspring/snap-preact-components';
 
-					<select
-						name="ss__sort--select"
-						id="ss__sort--select"
-						onChange={(e) => {
-							const selectedOption = sorting.options.filter((option) => option.value == e.target.value).pop();
-							selectedOption && selectedOption.url.go();
-						}}
-					>
-						{sorting.options.map((option) => (
-							<option value={option.value} selected={option.value === sorting.current.value}>
-								{option.label}
-							</option>
-						))}
-					</select>
-				</div>
-			)
-		);
-	}
-}
+export const SortBy = withController(observer((props) => {
+	const { controller } = props;
+	const { store } = controller;
+	const { sorting } = store;
+	
+	return sorting.length !== 0 ? (
+		<div class="ss__sorting">
+			<label for="ss__sort--select">Sort</label>
+
+			<select
+				name="ss__sort--select"
+				id="ss__sort--select"
+				onChange={(e) => {
+					const selectedOption = sorting.options.filter((option) => option.value == e.target.value).pop();
+					selectedOption && selectedOption.url.go();
+				}}
+			>
+				{sorting.options.map((option) => (
+					<option value={option.value} selected={option.value === sorting.current.value}>
+						{option.label}
+					</option>
+				))}
+			</select>
+		</div>
+	) : null;
+}));
 ```
 
 ### SearchController.store.results
@@ -302,54 +313,47 @@ Each result object contains the following notable properties:
 
 `result.custom` an empty object that is not modified by core Snap packages. This is available for you to modify and store custom data to be rendered. See [`custom` property](https://github.com/searchspring/snap/tree/main/packages/snap-store-mobx/src/Abstract)
 
-Note: if you will be creating a custom Result component, be sure to include intellisuggest product click tracking. Available via `controller.track.product.click()` as seen in the example below. This should be invoked `onClick` or `onMouseDown` on each Result.
+Note: if you will be creating a custom Result component, the `withTracking` hook is required to capture product impression and click analytics. See [Tracking](https://github.com/searchspring/snap/tree/main/docs/SNAP_TRACKING.md#impressions) for more information.
 
 ```jsx
-@withController
-@observer
-export class Results extends Component {
-	render() {
-		const controller = this.props.controller;
-		const { results } = controller.store;
+// src/components/Results/Results.jsx
 
-		return (
-			<ul class="ss__results">
-				{results.map((result) => (
-					<li class="ss__result" key={result.id}>
-						{{
-							banner: <InlineBanner banner={result} />,
-						}[result.type] || <Result result={result} />}
-					</li>
-				))}
-			</ul>
-		);
-	}
-}
+import { h } from 'preact';
+import { observer } from 'mobx-react';
+import { withController, withTracking, InlineBanner, Price } from '@searchspring/snap-preact-components';
 
-@withController
-@observer
-class Result extends Component {
-	render() {
-		const { result } = this.props;
-		const {
-			attributes,
-			mappings: { core },
-		} = result;
-		const intellisuggest = (e) => controller.track.product.click(e, result);
+export const Results = withController(observer((props) => {
+	const { controller } = props;
+	const { store } = controller;
+	const { results } = store;
+	
+	return (
+		<ul class="ss__results">
+			{results.map((result) => (
+				<li class="ss__result" key={result.id}>
+					{{
+						banner: <InlineBanner banner={result} />,
+					}[result.type] || <Result result={result} />}
+				</li>
+			))}
+		</ul>
+	)
+}));
 
-		return (
-			result && (
-				<div>
-					<a href={core.url} onClick={intellisuggest}>
-						{core.name}
-					</a>
-					<hr />
-					<Price value={core.price} />
-				</div>
-			)
-		);
-	}
-}
+const Result = withController(withTracking(observer((props) => {
+	const { trackingRef, controller, result } = props;
+	const { core } = result.mappings;
+
+	return (
+		<div className="ss__result" ref={trackingRef}>
+			<a href={core.url}>
+				{ core.name }
+			</a>
+			<Price value={core.price} />
+			<button onClick={(e)=> controller.addToCart(result)}>Add to cart</button>
+		</div>
+	)
+})));
 ```
 
 ### SearchController.store.facets
@@ -391,78 +395,72 @@ Facets with a `type` value of `value` or `range-buckets` will contain the follow
 `facet.values` original facet values - it is not recommended to directly render facet values using this in your components - `facet.refinedValues` should be used instead - however, if you are using an `afterStore` event to reference facet values, `facet.values` should be used
 
 ```jsx
-@withController
-@observer
-export class Facets extends Component {
-	render() {
-		const { facets } = this.props.controller.store;
+// src/components/Facets/Facets.jsx
 
-		return (
-			facets.length !== 0 && (
-				<div class="ss__facets">
-					{facets.map((facet) => (
-						<Facet facet={facet} />
-					))}
-				</div>
-			)
-		);
-	}
-}
+import { h } from 'preact';
+import { observer } from 'mobx-react';
+import { withController, SearchInput, FacetGridOptions, FacetPaletteOptions, FacetOptionsHierarchy, FacetSlider } from '@searchspring/snap-preact-components';
 
-@withController
-@observer
-export class Facet extends Component {
-	render() {
-		const { facet } = this.props;
+export const Facets = withController(observer((props) => {
+	const { controller } = props;
+	const { store } = controller;
+	const { facets } = store;
+	
+	return facets.length !== 0 ? (
+		<div class="ss__facets">
+			{facets.map((facet) => (
+				<Facet facet={facet} key={facet.field} />
+			))}
+		</div>
+	) : null;
+}));
 
-		return (
-			facet && (
-				<div class="ss__facet">
-					<h5
-						onClick={() => {
-							facet.toggleCollapse();
-						}}
-					>
-						{facet.label}
-					</h5>
+const Facet = withController(observer((props) => {
+	const { facet } = props;
+	
+	return facets.length !== 0 ? (
+		<div class="ss__facet">
+			<h5 
+				onClick={() => { 
+					facet.toggleCollapse() 
+				}}
+				className={`ss__facet__header ${facet.collapsed ? 'ss__facet__header--collapsed' : 'ss__facet__header--expanded'}`}>
+				{facet.label}
+			</h5>
+			{['list', 'grid', 'palette'].includes(facet.display) && (
+				<SearchInput onChange={(e) => facet.search.input = e.target.value} placeholder={`Search ${facet.label}`} />
+			)}
+			<div className="ss__facet__options">
+				{{
+					grid: <FacetGridOptions facet={facet} />,
+					palette: <FacetPaletteOptions facet={facet} />,
+					hierarchy: <FacetOptionsHierarchy facet={facet} />,
+					slider: <FacetSlider facet={facet} />,
+				}[facet.display] || <FacetOptionsList facet={facet} />}
+			</div>
+		</div>
+	) : null;
+}));
 
-					<div class={`ss__facet--field-${facet.field} ss__facet--display-${facet.display} ${facet.collapsed ? 'ss__facet--collapsed' : ''}`}>
-						<div class="collapsible-content__inner">
-							{{
-								grid: <div>grid component</div>,
-								palette: <div>palette component</div>,
-								hierarchy: <div>hierarchy component</div>,
-								slider: <FacetSlider facet={facet} />,
-							}[facet.display] || <FacetOptionsList facet={facet} />}
-						</div>
-					</div>
-				</div>
-			)
-		);
-	}
-}
-
-@observer
-class FacetOptionsList extends Component {
-	render() {
-		const facet = this.props.facet;
-		const values = facet.refinedValues;
-
-		return (
-			<ul class="ss__facet-options-list">
-				{values.map((value) => {
-					return (
-						<li class={`ss__facet-options-list__option ${value.filtered ? 'ss__facet-options-list__option--active' : ''}`}>
-							<a {...value.url.link} title={`Remove filter ${value.label}`}>
-								{value.label}
-							</a>
-						</li>
-					);
-				})}
-			</ul>
-		);
-	}
-}
+// custom FacetOptionsList component instead of importing from @searchspring/snap-preact-components
+const FacetOptionsList = withController(observer((props) => {
+	const { facet } = props;
+	const values = facet.refinedValues;
+	
+	return (
+		<ul class="ss__facet__options__list">
+			{values.map((value) => {
+				return (
+					<li class={`ss__facet__options__list__option ${value.filtered ? 'ss__facet__options__list__option--active' : ''}`}>
+						<a {...value.url.link} title={`Remove filter ${value.label}`}>
+							{value.label}
+						</a>
+					</li>
+				);
+			})}
+		</ul>
+	)
+}));
 ```
 
 
@@ -473,29 +471,37 @@ The `filters` property contains an array of filters that are currently applied t
 Typically used to display a filter summary with options to remove filters.
 
 ```jsx
-@withController
-@observer
-export class FilterSummary extends Component {
-	render() {
-		const controller = this.props.controller;
-		const {
-			store: { filters },
-		} = controller;
+// src/components/FilterSummary/FilterSummary.jsx
 
-		return (
-			filters.length !== 0 && (
-				<ul class="ss__filters">
-					{filters.map((filter) => (
-						<li class="ss__filters__filter">
-							<a {...filter.url.link} title={`Remove filter ${filter.label}`}>
-								{filter.label}
-							</a>
-						</li>
-					))}
-				</ul>
-			)
-		);
-	}
-}
+import { h } from 'preact';
+import { observer } from 'mobx-react';
+import { withController } from '@searchspring/snap-preact-components';
+
+export const FilterSummary = withController(observer((props) => {
+	const { controller } = props;
+	const { store } = controller;
+	const { filters } = store;
+	
+	return filters.length !== 0 ? (
+		<ul class="ss__filter-summary">
+			<div className="ss__filter-summary__title">Current Filters</div>
+			{filters.map((filter) => (
+				<li class="ss__filter-summary__filter" key={filter.label}>
+					<a
+						title={`Remove filter ${filter.label}`}
+						className="ss__filter-summary__filter__link"
+						aria-label={`remove selected ${filter.facet.label} filter ${filter.value.label}`}
+						{...filter.url.link}
+					>
+						<span className="ss__filter__label">
+							{filter.facet.label}:
+						</span>
+						<span className="ss__filter__value">{filter.value.label}</span>
+					</a>
+				</li>
+			))}
+		</ul>	
+	) : null;
+}));
 ```
 

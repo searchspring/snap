@@ -46,6 +46,7 @@ import('./docs/documents.js').then(function (_) {
 			{ a: '(https://github.com/searchspring/snap/tree/main/packages/snap-logger)', b: '(./reference-logger)' },
 			{ a: '(https://github.com/searchspring/snap/tree/main/packages/snap-tracker)', b: '(./reference-tracker)' },
 			{ a: '(https://github.com/searchspring/snap/tree/main/docs/SNAP_TRACKING.md)', b: '(./snap-tracking)' },
+			{ a: '(https://github.com/searchspring/snap/tree/main/docs/SNAP_TRACKING.md#', b: '(./snap-tracking#' },
 			{
 				a: '(https://github.com/searchspring/snap/tree/main/docs/SNAP_TRACKING.md#cart-attribute-tracking)',
 				b: '(./snap-tracking#cart-attribute-tracking)',

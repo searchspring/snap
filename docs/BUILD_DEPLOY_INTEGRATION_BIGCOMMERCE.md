@@ -68,14 +68,14 @@ Next we'll integrate Searchspring into the theme.
 
 **Note:** If you are only integrating Search page functionality, you can use the following snippet. Otherwise skip this section and continue below to install both search, category, and brand functionality.
 
-- Update `xxxxxx` with the correct site id.
+- Update `REPLACE_WITH_YOUR_SITE_ID` with the correct site id.
 - If your search page url was not `/shop/`, update this as needed.
 
 ```handlebars
 {{!-- START: Searchspring Integration code --}}
 
 {{!-- define initial variables --}}
-{{assignVar 'ss_site_id' 'xxxxxx'}}
+{{assignVar 'ss_site_id' 'REPLACE_WITH_YOUR_SITE_ID'}}
 {{assignVar 'ss_search_url' '/shop/'}}
 {{assignVar 'ss_page_type' 'other'}}
 
@@ -98,7 +98,7 @@ Next we'll integrate Searchspring into the theme.
 
 #### Search, Category, and Brand
 
-- Update `xxxxxx` with the correct site id.
+- Update `REPLACE_WITH_YOUR_SITE_ID` with the correct site id.
 - If your search page url was not `/shop/`, update this as needed.
 - Replace the `>` character in the breadcrumb trail if the data is using a different delimiter.
 
@@ -106,7 +106,7 @@ Next we'll integrate Searchspring into the theme.
 {{!-- START: Searchspring Integration code --}}
 
 {{!-- define initial variables --}}
-{{assignVar 'ss_site_id' 'xxxxxx'}}
+{{assignVar 'ss_site_id' 'REPLACE_WITH_YOUR_SITE_ID'}}
 {{assignVar 'ss_search_url' '/shop/'}}
 {{assignVar 'ss_page_type' 'other'}}
 {{assignVar 'ss_is_loaded' 'false'}}
@@ -264,7 +264,7 @@ const context = getContext(['shopper', 'siteId']);
 
 Still within `index.js`, add objects to setup a `site` and `page` config. This may already be present depending on what Snap templates you are using.
 
-**Note:** Update `xxxxxx` with the correct, default site id.
+**Note:** Update `REPLACE_WITH_YOUR_SITE_ID` with the correct, default site id.
 
 **Note:** If the default query parameter is something other than "search_query", update the parameter.
 
@@ -275,7 +275,7 @@ Still within `index.js`, add objects to setup a `site` and `page` config. This m
 
 /* set up site details config */
 let site = {
-	id: context?.siteId ? context.siteId : 'xxxxxx',
+	id: context?.siteId ? context.siteId : 'REPLACE_WITH_YOUR_SITE_ID',
 	currency: 'usd',
 	lang: 'en',
 	parameters: {
@@ -385,7 +385,7 @@ import { sharedPlugin } from './plugins/sharedPlugin';
 const snap = new Snap({
     client: {
         globals: {
-            siteId: 'abc123',
+            siteId: 'REPLACE_WITH_YOUR_SITE_ID',
         },
     },
     controllers: {

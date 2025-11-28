@@ -35,21 +35,21 @@ The `SearchController` is used when making queries to the API `search` endpoint.
 ## Initialize
 Invoking the `init` method is required to subscribe to changes that occur in the UrlManager. This is typically done automatically prior to calling the first `search`.
 
-```typescript
+```js
 searchController.init();
 ```
 
 ## Search
 This will invoke a search request to Searchspring's search API and populate the store with the response.
 
-```typescript
+```js
 searchController.search();
 ```
 
 ## AddToCart
 This will invoke an addToCart event (see below). Takes an array of Products as a parameter. 
 
-```typescript
+```js
 searchController.addToCart([searchController.store.results[0]]);
 ```
 
@@ -61,7 +61,7 @@ When `config.settings.infinite` is defined and `store.pagination.next.url.go({ h
 
 If the page has been reloaded, the results will be reset to page 1.
 
-```typescript
+```js
 const searchConfig = {
 	id: 'search',
 	globals: {
@@ -78,7 +78,7 @@ const searchConfig = {
 ### Backfill
 If `config.settings.infinite.backfill` is specified, any page reloads when paginated up to the specified value will fetch previous pages to backfill.
 
-```typescript
+```js
 const searchConfig = {
 	id: 'search',
 	globals: {
@@ -101,7 +101,7 @@ Any time you navigate back to a previous page, this setting will tell the contro
 
 When using infinite scroll, it is recommended to specify a value for `config.settings.infinite.backfill` to ensure that when returning to the product listing page, that the product is there to scroll to.
 
-```typescript
+```js
 const searchConfig = {
 	id: 'search',
 	globals: {
@@ -135,7 +135,7 @@ The optional `pageSizeOptions` property gives the ability to overwrite the defau
 `active` - boolean stating if current page size matches the value of this option
 
 
-```typescript
+```js
 const searchConfig = {
 	id: 'search',
 	settings: {

@@ -22,11 +22,11 @@ Foreground filters provide a way for pre-applying a filter on page load. The app
 
 In the simplified example below, a foreground filter is used to pre-apply a filter for the `on_sale` field. 
 
-```typescript
+```js
 const config = {
 	client: {
 		globals: {
-			siteId: 'abc123',
+			siteId: 'REPLACE_WITH_YOUR_SITE_ID',
 		},
 	},
 	controllers: {
@@ -59,11 +59,11 @@ The `initial.parameters` object is keyed by `UrlManager` state parameters - such
 
 There is also an optional `ignoreParameter` param you can set on the `initial.settings` object, this allows for specifying additional UrlManager state parameters to be added to the ignore list. See example where the `initial.state` filter `on_sale:yes` will be set even if there are other `filter` params present in the UrlManager state. The default values in the `ignoreParameter` are `query`, `tag`, `oq` and `fallbackQuery`. This list is used to determine wether or not to apply the initial state provided - if the UrlManager state contains any states that are not being ignored, the initial state will not be applied.
 
-```typescript
+```js
 const config = {
 	client: {
 		globals: {
-			siteId: 'abc123',
+			siteId: 'REPLACE_WITH_YOUR_SITE_ID',
 		},
 	},
 	controllers: {
@@ -101,11 +101,11 @@ More configuration can be made within each `initial.parameter` object. It is pos
 
 Example using advanced configurations shown below:
 
-```typescript
+```js
 const config = {
 	client: {
 		globals: {
-			siteId: 'abc123',
+			siteId: 'REPLACE_WITH_YOUR_SITE_ID',
 		},
 	},
 	controllers: {
