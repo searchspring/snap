@@ -218,17 +218,10 @@ The `hideCheckboxes` prop specifies if the bundle checkboxes should be rendered.
 ```
 
 ### checkboxClickPadding
-The `checkboxClickPadding` prop specifies the padding in pixels around the checkbox to increase the clickable area. Defaults to `5`.
+The `checkboxClickPadding` prop specifies the padding around the checkbox to increase the clickable area. Can take a string or number to be converted to px. 
 
 ```jsx
 <RecommendationBundle controller={controller} onAddToCart={(e, items)=>{console.log(items)}} checkboxClickPadding={10} />
-```
-
-### hideTooltip
-The `hideTooltip` prop specifies if the tooltip should be hidden when hovering over the checkbox. Defaults to `true`.
-
-```jsx
-<RecommendationBundle controller={controller} onAddToCart={(e, items)=>{console.log(items)}} hideTooltip={false} />
 ```
 
 ### vertical

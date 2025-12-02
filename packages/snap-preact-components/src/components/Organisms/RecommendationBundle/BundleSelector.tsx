@@ -7,7 +7,6 @@ import { Theme, useTheme } from '../../../providers';
 import { Checkbox, CheckboxProps } from '../../Molecules/Checkbox';
 import { Icon, IconProps } from '../../Atoms/Icon';
 import type { ComponentProps } from '../../../types';
-import { Tooltip, TooltipProps } from '../../Atoms/Tooltip';
 
 export const BundleSelector = observer((properties: BundleSelectorProps): JSX.Element => {
 	const globalTheme: Theme = useTheme();
@@ -19,7 +18,9 @@ export const BundleSelector = observer((properties: BundleSelectorProps): JSX.El
 		...properties,
 	};
 
-	const { className, children, checked, icon, seedText, seed, hideCheckboxes, hideTooltip, checkboxClickPadding, onCheck } = props;
+	const { className, children, checked, icon, seedText, seed, hideCheckboxes, onCheck } = props;
+
+	const checkboxClickPadding = isNaN(Number(props.checkboxClickPadding)) ? props.checkboxClickPadding : `${props.checkboxClickPadding}px`;
 
 	const subProps: BundleSelectorSubProps = {
 		icon: {
@@ -41,15 +42,6 @@ export const BundleSelector = observer((properties: BundleSelectorProps): JSX.El
 			// component theme overrides
 			theme: props?.theme,
 		},
-		tooltip: {
-			// default props
-			className: 'ss__recommendation-bundle__wrapper__selector__tooltip',
-			usePortal: true,
-			// global theme
-			...globalTheme?.components?.tooltip,
-			// component theme overrides
-			theme: props?.theme,
-		},
 	};
 
 	return (
@@ -64,17 +56,11 @@ export const BundleSelector = observer((properties: BundleSelectorProps): JSX.El
 			<div className="ss__recommendation-bundle__wrapper__selector__result-wrapper">
 				{!hideCheckboxes && (
 					<div
-						style={{ padding: `${checkboxClickPadding}px`, display: 'inline-flex', cursor: 'pointer' }}
+						style={{ padding: checkboxClickPadding, display: 'inline-flex', cursor: 'pointer' }}
 						onClick={onCheck}
 						className={`ss__recommendation-bundle__wrapper__selector__result-wrapper__checkbox-wrapper`}
 					>
-						{!hideTooltip ? (
-							<Tooltip {...subProps.tooltip} content={checked ? 'remove from bundle' : 'add to bundle'} position="left">
-								<Checkbox {...subProps.checkbox} />
-							</Tooltip>
-						) : (
-							<Checkbox {...subProps.checkbox} />
-						)}
+						<Checkbox {...subProps.checkbox} />
 					</div>
 				)}
 				{seedText && <div className={'ss__recommendation-bundle__wrapper__selector__result-wrapper__seed-badge'}>{seedText}</div>}
@@ -88,7 +74,6 @@ export const BundleSelector = observer((properties: BundleSelectorProps): JSX.El
 export interface BundleSelectorSubProps {
 	icon: Partial<IconProps>;
 	checkbox: Partial<CheckboxProps>;
-	tooltip: Partial<TooltipProps>;
 }
 
 export interface BundleSelectorProps extends ComponentProps {
@@ -97,8 +82,7 @@ export interface BundleSelectorProps extends ComponentProps {
 	seedText?: string;
 	seed?: boolean;
 	hideCheckboxes?: boolean;
-	hideTooltip?: boolean;
-	checkboxClickPadding?: number;
+	checkboxClickPadding?: string | number;
 	onCheck?: (e: React.MouseEvent<HTMLElement, MouseEvent>) => void;
 	icon?: string | Partial<IconProps> | boolean;
 }

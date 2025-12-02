@@ -114,6 +114,10 @@ const CSS = {
 					right: '0',
 					zIndex: '1',
 					cursor: 'pointer',
+
+					'& .ss__recommendation-bundle__wrapper__selector__result-wrapper__checkbox': {
+						position: 'absolute',
+					},
 				},
 			},
 		}),
@@ -152,8 +156,6 @@ export const RecommendationBundle = observer((properties: RecommendationBundlePr
 		ctaButtonSuccessText: 'Bundle Added!',
 		ctaButtonSuccessTimeout: 2000,
 		ctaInline: true,
-		hideTooltip: true,
-		checkboxClickPadding: 5,
 		/* TODO: Cannot use default values due to breaking changes - must change in 1.0 */
 		// title: properties.controller?.store?.profile?.display?.templateParameters?.title,
 		// description: properties.controller?.store?.profile?.display?.templateParameters?.description,
@@ -187,7 +189,6 @@ export const RecommendationBundle = observer((properties: RecommendationBundlePr
 		hideCheckboxes,
 		limit,
 		seedText,
-		hideTooltip,
 		vertical,
 		onAddToCart,
 		separatorIconSeedOnly,
@@ -414,7 +415,6 @@ export const RecommendationBundle = observer((properties: RecommendationBundlePr
 				icon: separatorIconSeedOnly ? false : separatorIcon,
 				className: idx + 1 == resultsToRender.length ? 'ss__recommendation-bundle__wrapper__selector--last' : '',
 				checkboxClickPadding: checkboxClickPadding,
-				hideTooltip: hideTooltip,
 			};
 
 			if (isSeed) {
@@ -590,8 +590,7 @@ export interface RecommendationBundleProps extends ComponentProps {
 	resultComponent?: JSX.Element;
 	preselectedCount?: number;
 	hideCheckboxes?: boolean;
-	hideTooltip?: boolean;
-	checkboxClickPadding?: number;
+	checkboxClickPadding?: string | number;
 	hideSeed?: boolean;
 	seedText?: string;
 	separatorIconSeedOnly?: boolean;
