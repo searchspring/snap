@@ -357,7 +357,8 @@ describe('Snap Client', () => {
 					'Content-Type': 'text/plain',
 				},
 				method: 'POST',
-				path: '/boost/8uyt2m/recommend',
+				path: '/v1/recommend',
+				subDomain: 'p13n',
 				body: {
 					profiles: [
 						{
@@ -605,7 +606,8 @@ describe('Snap Client', () => {
 						'Content-Type': 'text/plain',
 					},
 					method: 'POST',
-					path: '/boost/8uyt2m/recommend',
+					path: '/v1/recommend',
+					subDomain: 'p13n',
 					body: {
 						profiles: [
 							{
