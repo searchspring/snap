@@ -408,7 +408,7 @@ export class Snap {
 				});
 			}
 
-			const initiator = window.searchspring.initiator || 'self-snap';
+			const initiator = window?.searchspring?.initiator || 'self-snap';
 			const trackerConfig = deepmerge(this.config.tracker?.config || {}, { framework: `${initiator}/preact`, mode: this.mode });
 			this.tracker = services?.tracker || new Tracker(trackerGlobals, trackerConfig);
 
