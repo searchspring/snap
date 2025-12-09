@@ -350,8 +350,7 @@ import('./docs/documents.js').then(function (_) {
 	];
 
 	const router = VueRouter.createRouter({
-		// history: VueRouter.createWebHistory(window.location.hostname !== 'localhost' ? `/${window.location.pathname.split('/')[1]}/` : undefined),
-		history: VueRouter.createWebHistory(),
+		history: VueRouter.createWebHistory(window.location.hostname !== 'localhost' ? `/${window.location.pathname.split('/')[1]}/` : undefined),
 		routes,
 	});
 	router.afterEach((to, from) => {
