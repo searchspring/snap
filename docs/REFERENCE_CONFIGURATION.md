@@ -57,9 +57,9 @@ Specifies all of the controllers that we wish to create.
 |---|---|---|
 | controllers | `{ search?: Controller[]; autocomplete?: Controller[]; finder?: Controller[]; recommendation?: Controller[] }` | Optional. Defines the controllers to instantiate (search, autocomplete, finder, recommendation), each with their own config. | 
 
-**Notes:**
-- Each controller array (e.g. `search`, `autocomplete`, etc.) contains objects with at least a `config` property, and may include `targeters`, `services`, `url`, and `context`.
-- For detailed controller configuration, see the Snap documentation or type definitions for each controller type.
+> [!NOTE]
+> - Each controller array (e.g. `search`, `autocomplete`, etc.) contains objects with at least a `config` property, and may include `targeters`, `services`, `url`, and `context`.
+> - For detailed controller configuration, see the Snap documentation or type definitions for each controller type.
 
 ## Feature Flags
 

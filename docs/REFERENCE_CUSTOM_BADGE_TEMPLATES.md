@@ -70,7 +70,8 @@ snapfu badges sync [badgename]
 
 Finally in order to use a custom badge component, we'll need to provide a `componentMap` prop containing a mapping of our custom components to the `OverlayBadge` and `CalloutBadge` components
 
-**Note:** This is not required if using the default selection of badges
+> [!NOTE]
+> This is not required if using the default selection of badges
 
 ```jsx
 import { CustomBadge } from './components/Badges/CustomBadge';
@@ -257,7 +258,8 @@ Custom overlay and callout locations can be created by defining a `locations.jso
 
 `['left' | 'right' | 'callout'].name` - badge location name that is displayed when selecting this location within the Searchspring Management Console
 
-**important** - it is strongly recommended to keep the default location tags (ie. `left[0].tag="left"`, `right[0].tag="right"`, `callout[0].tag="callout"`) to ensure any existing badges are backwards compatible with additional locations
+> [!IMPORTANT]
+> It is strongly recommended to keep the default location tags (ie. `left[0].tag="left"`, `right[0].tag="right"`, `callout[0].tag="callout"`) to ensure any existing badges are backwards compatible with additional locations
 
 ```json
 {

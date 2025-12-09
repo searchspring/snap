@@ -19,7 +19,8 @@ See [IntelliSuggest Tracking for BigCommerce Stencil](https://searchspring.zende
 
 ## Create a Category Search Page
 
-**Warning:** Before creating this category page, ensure that the url does not already exist by going to `https://[domain]/shop`. If the url is active, alternative paths would be `search` or `ssearch`.
+> [!WARNING]
+> Before creating this category page, ensure that the url does not already exist by going to `https://[domain]/shop`. If the url is active, alternative paths would be `search` or `ssearch`.
 
 - Products > Product Categories and click "Create a Category".
 - Set the category details to the following:
@@ -48,7 +49,8 @@ See [IntelliSuggest Tracking for BigCommerce Stencil](https://searchspring.zende
 - You do not need to add products to these categories.
 - You can preview the category by going to `https://[domain]/shop`.
 
-**Caution:** If you are not seeing your category page, it may be because the page is locked down (by default) to certain customer groups. Go to Customers > Customer Groups > "..." under Actions > Edit > Group Details > Group Access.
+> [!CAUTION]
+> If you are not seeing your category page, it may be because the page is locked down (by default) to certain customer groups. Go to Customers > Customer Groups > "..." under Actions > Edit > Group Details > Group Access.
 
 ## Theme Integration
 
@@ -66,7 +68,8 @@ Next we'll integrate Searchspring into the theme.
 
 #### Search Only
 
-**Note:** If you are only integrating Search page functionality, you can use the following snippet. Otherwise skip this section and continue below to install both search, category, and brand functionality.
+> [!NOTE]
+> If you are only integrating Search page functionality, you can use the following snippet. Otherwise skip this section and continue below to install both search, category, and brand functionality.
 
 - Update `REPLACE_WITH_YOUR_SITE_ID` with the correct site id.
 - If your search page url was not `/shop/`, update this as needed.
@@ -264,11 +267,14 @@ const context = getContext(['shopper', 'siteId']);
 
 Still within `index.js`, add objects to setup a `site` and `page` config. This may already be present depending on what Snap templates you are using.
 
-**Note:** Update `REPLACE_WITH_YOUR_SITE_ID` with the correct, default site id.
+> [!NOTE]
+> Update `REPLACE_WITH_YOUR_SITE_ID` with the correct, default site id.
 
-**Note:** If the default query parameter is something other than "search_query", update the parameter.
+> [!NOTE]
+> If the default query parameter is something other than "search_query", update the parameter.
 
-**Warning:** Due to certain issues with BigCommerce integrations, these sites should always change the pagination parameter to not match the default. "p" as the page parameter is usually our default for this platform.
+> [!WARNING]
+> Due to certain issues with BigCommerce integrations, these sites should always change the pagination parameter to not match the default. "p" as the page parameter is usually our default for this platform.
 
 ```js
 // src/index.js
@@ -420,7 +426,8 @@ const snap = new Snap({
 });
 ```
 
-**Note:** Typically, you should complete the brand integration even if brand pages are not visible. This gives the client the option to show brand integration later. You can find brand pages by going to `https://[domain]/brands` then click on one of the brands in the listing.
+> [!NOTE]
+> Typically, you should complete the brand integration even if brand pages are not visible. This gives the client the option to show brand integration later. You can find brand pages by going to `https://[domain]/brands` then click on one of the brands in the listing.
 
 ## Additional Targets (Optional)
 

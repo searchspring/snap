@@ -17,6 +17,7 @@ function flattenDocumentLinks(docs) {
 	return flattened;
 }
 
+marked.use(markedAlert());
 import('./docs/documents.js').then(function (_) {
 	const documents = _.default;
 	const replaces = flattenDocumentLinks(documents)
@@ -80,7 +81,24 @@ import('./docs/documents.js').then(function (_) {
 		data() {
 			return {
 				documents,
+				darkMode: localStorage.getItem('darkMode') === 'true',
 			};
+		},
+		mounted() {
+			if (this.darkMode) {
+				document.body.classList.add('dark-mode');
+			}
+		},
+		methods: {
+			toggleDarkMode() {
+				this.darkMode = !this.darkMode;
+				localStorage.setItem('darkMode', this.darkMode);
+				if (this.darkMode) {
+					document.body.classList.add('dark-mode');
+				} else {
+					document.body.classList.remove('dark-mode');
+				}
+			},
 		},
 		computed: {
 			routes() {
@@ -115,6 +133,11 @@ import('./docs/documents.js').then(function (_) {
 
 			<div id="content-wrapper">
 				<router-view :routes="routes"></router-view>
+			</div>
+			<div class="theme-toggle">
+				<button @click="toggleDarkMode" :title="darkMode ? 'Switch to light mode' : 'Switch to dark mode'">
+					<i :class="darkMode ? 'fas fa-sun fa-2x' : 'fas fa-moon fa-2x'"></i>
+				</button>
 			</div>
             <div id="ac-overlay"></div>
         `,
@@ -327,7 +350,8 @@ import('./docs/documents.js').then(function (_) {
 	];
 
 	const router = VueRouter.createRouter({
-		history: VueRouter.createWebHistory(window.location.hostname !== 'localhost' ? `/${window.location.pathname.split('/')[1]}/` : undefined),
+		// history: VueRouter.createWebHistory(window.location.hostname !== 'localhost' ? `/${window.location.pathname.split('/')[1]}/` : undefined),
+		history: VueRouter.createWebHistory(),
 		routes,
 	});
 	router.afterEach((to, from) => {

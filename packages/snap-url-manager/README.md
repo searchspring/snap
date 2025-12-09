@@ -190,7 +190,8 @@ console.log(urlManagerWithColor.href); // ?q=dress#/filter:color_family:Blue/new
 console.log(urlManagerWithColorButWithoutNewParam.href); // ?q=dress#/filter:color_family:Blue
 ```
 
-**Note:** UrlManagers with different instantiations will not notify each other about URL updates. For example:
+> [!NOTE]
+> UrlManagers with different instantiations will not notify each other about URL updates. For example:
 
 ```js
 const originalUrlManager = new UrlManager(new QueryStringTranslator());

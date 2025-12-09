@@ -31,7 +31,8 @@ Most if not all Shopify sites have an "All" collection page located at `[domain]
 
 To add a search results page, we'll need to create a new collection in Shopify.
 
-**Warning:** Before creating this collection page, ensure that the url does not already exist by going to `https://[domain]/collections/shop`. If the url is active, an alternative path could be `search`.
+> [!WARNING]
+> Before creating this collection page, ensure that the url does not already exist by going to `https://[domain]/collections/shop`. If the url is active, an alternative path could be `search`.
 
 - Within the Shopify Admin, navigate to Products > Collections > Create collection.
 - Set the collection details to the following:
@@ -108,7 +109,8 @@ Create a new snippet which will be used to store the Searchspring integration sc
 
 ### Search Only
 
-**Note:** If you are only integrating Search page functionality, you can use the following snippet. Otherwise skip this section and continue below to install both search and collections functionality.
+> [!NOTE]
+> If you are only integrating Search page functionality, you can use the following snippet. Otherwise skip this section and continue below to install both search and collections functionality.
 
 ```liquid
 {%- if settings.ss_branch_name != blank -%}
@@ -282,7 +284,8 @@ const context = getContext(['collection', 'tags', 'template', 'shopper', 'siteId
 
 Below this, add code to support background filters on a `search` controller. As a best practice, we use `collection_handle` as this has unique values in comparison to collection name. Certain integrations also use tags to further filter products on collections (for example: `/collections/shirts/red` where `red` is a color tag), which is why we set an additional filter on `tags`. Additionally, this code snippet updates page details so you can use conditionals matching the current page in code.
 
-**Note:** Shopify has default collections to store vendors and types with urls of `/collections/vendors` and `/collections/types` respectively. To show a vendor or type, a query is applied to the url like `/collections/vendors?q=Awesome Brand`. To show results on these pages, in the code below we will take the page title from script context and apply it as a background filter with the `vendor` or `product_type` field.
+> [!NOTE]
+> Shopify has default collections to store vendors and types with urls of `/collections/vendors` and `/collections/types` respectively. To show a vendor or type, a query is applied to the url like `/collections/vendors?q=Awesome Brand`. To show results on these pages, in the code below we will take the page title from script context and apply it as a background filter with the `vendor` or `product_type` field.
 
 ```js
 // src/index.js
@@ -422,9 +425,11 @@ export const sharedPlugin = (controller, page) => {
 }
 ```
 
-**Note:** Both code blocks above use the `page` config, so make sure that is defined.
+> [!NOTE]
+> Both code blocks above use the `page` config, so make sure that is defined.
 
-**Warning:** Only use this function on product results, meaning do not use it if you have content tabs with blog articles. It should also not be run on Autocomplete, as it could result in invalid urls. For example: if you are on a collection page for "shoes" and search "shirts", this would format the url as "/collections/shoes" which could result in invalid urls for the results.
+> [!WARNING]
+> Only use this function on product results, meaning do not use it if you have content tabs with blog articles. It should also not be run on Autocomplete, as it could result in invalid urls. For example: if you are on a collection page for "shoes" and search "shirts", this would format the url as "/collections/shoes" which could result in invalid urls for the results.
 
 
 ## Additional Targets (Optional)

@@ -29,9 +29,11 @@ Notify the client which site id to use for the section "How to Install", step 4,
 
 ## Create a Category Search Page
 
-**Warning:** Before creating this category page, ensure that the url does not already exist by going to `https://[domain]/shop.html`. If the url is active, alternative paths would be `search` or `ssearch`.
+> [!WARNING]
+> Before creating this category page, ensure that the url does not already exist by going to `https://[domain]/shop.html`. If the url is active, alternative paths would be `search` or `ssearch`.
 
-**Note:** If this is a re-mockup (and sometimes even a re-platform), it is recommended to keep the same search page url (and query parameter) so customers do not need to create redirects. If the site was previously integrated using CMS page rather than a category search page, you should be able to proceed with the below methods. This is because CMS and category page urls can be formatted the same way.
+> [!NOTE]
+> If this is a re-mockup (and sometimes even a re-platform), it is recommended to keep the same search page url (and query parameter) so customers do not need to create redirects. If the site was previously integrated using CMS page rather than a category search page, you should be able to proceed with the below methods. This is because CMS and category page urls can be formatted the same way.
 
 - Magento 2 Admin > Left Navigation > Catalog > Categories > Add Subcategory.
 - The category should be created wherever most categories are in the current view, which means usually you wouldn't use the "Add Root Category" button. Set the details to the following:
@@ -53,19 +55,22 @@ Notify the client which site id to use for the section "How to Install", step 4,
 
 Next we'll integrate Searchspring into the theme.
 
-**Note:** If possible, have the site owner enable Template Path Hints. This will make it easier to find which files need to be changed.
+> [!NOTE]
+> If possible, have the site owner enable Template Path Hints. This will make it easier to find which files need to be changed.
 
 ### Root.phtml Edits
 
 - FTP > app > design > frontend > [theme vendor] > [theme name] > Magento_Theme > templates > root.phtml.
 
-**Caution:** If this file doesn't exist, find the root file of the same, make a copy, and upload it to the path above. Try looking in: vendor > magento > magento-theme > view > frontend > templates > root.phtml. Do not edit the root files directly because if the client updates Magento, this could erase the changes and break the integration.
+> [!CAUTION]
+> If this file doesn't exist, find the root file of the same, make a copy, and upload it to the path above. Try looking in: vendor > magento > magento-theme > view > frontend > templates > root.phtml. Do not edit the root files directly because if the client updates Magento, this could erase the changes and break the integration.
 
 - Add the below code at the end of the file.
 
 #### Search Only
 
-**Note:** If you are only integrating Search page functionality, you can use the following snippet. Otherwise skip this section and continue below to install both search and category functionality.
+> [!NOTE]
+> If you are only integrating Search page functionality, you can use the following snippet. Otherwise skip this section and continue below to install both search and category functionality.
 
 - Replace `REPLACE_WITH_YOUR_SITE_ID` with the correct site id.
 - Replace `000000` with the search category id that was noted when creating the category page.
@@ -161,7 +166,8 @@ Targets are defined in your Snap configuration and will only be injected into if
 
 - FTP > app > design > frontend > [theme vendor] > [theme name] > Magento_Catalog > templates > product > list.phtml.
 
-**Caution:** If this file doesn't exist, find the root file of the same, make a copy, and upload it to the path above. Try looking in: vendor > magento > magento-catalog > view > frontend > templates > list.phtml. Do not edit the root files directly because if the client updates Magento, this could erase the changes and break the integration.
+> [!CAUTION]
+> If this file doesn't exist, find the root file of the same, make a copy, and upload it to the path above. Try looking in: vendor > magento > magento-catalog > view > frontend > templates > list.phtml. Do not edit the root files directly because if the client updates Magento, this could erase the changes and break the integration.
 
 - Once the correct file is found, ensure that all of your search controller targets are added to the category listing.
 - Some category templates will only display sidebar or results content if products are assigned to the category. Look for conditions that may be checking for product count and adjust as needed (likely altering the product count conditional).
@@ -174,7 +180,8 @@ Targets are defined in your Snap configuration and will only be injected into if
 
 - FTP > app > design > frontend > [theme vendor] > [theme name] > Magento_LayeredNavigation > templates > layer > view.phtml.
 
-**Caution:** If this file doesn't exist, find the root file of the same, make a copy, and upload it to the path above. Try looking in: vendor > magento > magento-layerednavigation > view > frontend > templates > view.phtml. Do not edit the root files directly because if the client updates Magento, this could erase the changes and break the integration.
+> [!CAUTION]
+> If this file doesn't exist, find the root file of the same, make a copy, and upload it to the path above. Try looking in: vendor > magento > magento-layerednavigation > view > frontend > templates > view.phtml. Do not edit the root files directly because if the client updates Magento, this could erase the changes and break the integration.
 
 - Once the correct file is found, ensure that all of your search controller targets are added to the category sidebar.
 
@@ -188,7 +195,8 @@ Next we'll update the search form to submit to the search results category page 
 
 - FTP > app > design > frontend > [theme vendor] > [theme name] > Magento_Search > templates > form.mini.phtml.
 
-**Caution:** If this file doesn't exist, find the root file of the same, make a copy, and upload it to the path above. Try looking in: vendor > magento > magento-search > view > frontend > templates > form.mini.phtml. Do not edit the root files directly because if the client updates Magento, this could erase the changes and break the integration.
+> [!CAUTION]
+> If this file doesn't exist, find the root file of the same, make a copy, and upload it to the path above. Try looking in: vendor > magento > magento-search > view > frontend > templates > form.mini.phtml. Do not edit the root files directly because if the client updates Magento, this could erase the changes and break the integration.
 
 - Above the form, add a php flag to enable and disable Searchspring:
 
@@ -381,7 +389,8 @@ const context = getContext(['category']);
 
 Below this, add code to support background filters on a `search` controller. As a best practice, we use `category_hierarchy` as it contains a unique, hierarchal path for the category.
 
-**Caution:** The background filter will almost always be `category_hierarchy`, but there are times when we create a custom field such as `ss_category` or `ss_category_hierarchy`. The background filter should match the category facet if there is one set. If you do need to update, be sure to change the below code to set the background filter on that field instead.
+> [!CAUTION]
+> The background filter will almost always be `category_hierarchy`, but there are times when we create a custom field such as `ss_category` or `ss_category_hierarchy`. The background filter should match the category facet if there is one set. If you do need to update, be sure to change the below code to set the background filter on that field instead.
 
 ```js
 // src/index.js
@@ -476,7 +485,8 @@ const snap = new Snap({
 });
 ```
 
-**Note:** In the above code, we concat `visibilityFilters` and `backgroundFilters` to the search controller. The autocomplete controller only needs a background filter on visibility.
+> [!NOTE]
+> In the above code, we concat `visibilityFilters` and `backgroundFilters` to the search controller. The autocomplete controller only needs a background filter on visibility.
 
 ## Additional Targets (Optional)
 

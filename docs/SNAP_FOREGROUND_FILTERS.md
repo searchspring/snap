@@ -1,5 +1,7 @@
 # Foreground Filters
-***Note:*** **Foreground filters are only usable with a SearchController.**
+
+> [!NOTE]
+> Foreground filters are only usable with a SearchController
 
 Foreground filters provide a way for pre-applying a filter on page load. The applied filter will be applied to the URL and can be removed as any other applied filter would. Foreground filtering is accomplished by setting the initial UrlManager state; this can be used for setting various states, but only filtering will be covered in this document.
 
