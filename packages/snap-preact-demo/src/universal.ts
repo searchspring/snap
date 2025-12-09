@@ -13,6 +13,7 @@ Promise.all(promises).then(() => {
 	window.searchspring = window.searchspring || {};
 	// @ts-ignore - types not important
 	window.searchspring.build = 'universal';
-
+	// @ts-ignore - types not important
+	window.searchspring.initiator = 'managed-snap';
 	import('./index');
 });
