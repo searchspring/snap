@@ -35,22 +35,70 @@ export class NetworkCache {
 					}
 				}
 
+				let ignoreKeys: string[] = [];
+				const navigationType = (performance.getEntriesByType('navigation')[0] as PerformanceNavigationTiming | undefined)?.type;
+				if (typeof window !== 'undefined' && navigationType === 'back_forward') {
+					ignoreKeys = ['lastViewed', 'cart'];
+				}
+
 				if (typeof window !== 'undefined' && window?.sessionStorage) {
 					const stored = window.sessionStorage.getItem(CACHE_STORAGE_KEY);
 					const localData: Cache = stored && JSON.parse(stored);
 
-					if (localData && key && localData[key]) {
-						// compare the expiry time of the item with the current time
-						if (Date.now() >= localData[key].expires) {
-							// remove item
-							const newStored = {
-								...localData,
-							};
-							delete newStored[key];
-							// update storage
-							window.sessionStorage.setItem(CACHE_STORAGE_KEY, JSON.stringify(newStored));
-						} else {
-							return localData[key].value;
+					if (localData && key) {
+						let storageKey = key;
+
+						//this only applies to search calls
+						if (ignoreKeys.length && key.startsWith('/api/search/search.json')) {
+							try {
+								const url = key.split('{')[0];
+								const payload = '{' + key.split('{')[1];
+								const searchParams = JSON.parse(payload);
+
+								const foundKey = Object.keys(localData).find((cachedResponse) => {
+									try {
+										const storedUrl = cachedResponse.split('{')[0];
+										if (storedUrl == url) {
+											const storedPayload = '{' + cachedResponse.split('{')[1];
+
+											const parsedPayload = JSON.parse(storedPayload);
+
+											const allKeys = Array.from(new Set([...Object.keys(searchParams), ...Object.keys(parsedPayload)]));
+
+											for (const k of allKeys) {
+												if (ignoreKeys.includes(k)) continue;
+												if (JSON.stringify(searchParams[k]) !== JSON.stringify(parsedPayload[k])) {
+													return false;
+												}
+											}
+											return true;
+										} else return false;
+									} catch {
+										return false;
+									}
+								});
+
+								if (foundKey) {
+									storageKey = foundKey;
+								}
+							} catch (e) {
+								// key is not json
+							}
+						}
+
+						if (localData[storageKey]) {
+							// compare the expiry time of the item with the current time
+							if (Date.now() >= localData[storageKey].expires) {
+								// remove item
+								const newStored = {
+									...localData,
+								};
+								delete newStored[storageKey];
+								// update storage
+								window.sessionStorage.setItem(CACHE_STORAGE_KEY, JSON.stringify(newStored));
+							} else {
+								return localData[storageKey].value;
+							}
 						}
 					}
 				}

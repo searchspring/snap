@@ -213,4 +213,72 @@ describe('Network Cache', () => {
 			expect(cache.get(key)).toEqual(typedResponse);
 		});
 	});
+
+	describe('get function behavior', () => {
+		it('can retrieve a cached response with ignored keys during back/forward navigation', async () => {
+			const cache = new NetworkCache();
+			const url = '/api/search/search.json';
+			const payload = { q: 'dress', lastViewed: ['123'], cart: ['456'] };
+			const key = `${url}${JSON.stringify(payload)}`;
+			const cachedPayload = { q: 'dress', lastViewed: ['789'], cart: ['012'] };
+			const cachedKey = `${url}${JSON.stringify(cachedPayload)}`;
+
+			// Mock performance.getEntriesByType
+			Object.defineProperty(performance, 'getEntriesByType', {
+				value: jest.fn().mockReturnValue([{ type: 'back_forward' }]),
+				writable: true,
+			});
+
+			// Set initial cache
+			cache.set(cachedKey, typedResponse);
+
+			// Attempt to get with different ignored keys
+			const response = cache.get(key);
+			expect(response).toEqual(typedResponse);
+		});
+
+		it('does not retrieve a cached response with different non-ignored keys during back/forward navigation', async () => {
+			const cache = new NetworkCache();
+			const url = '/api/search/search.json';
+			const payload = { q: 'dress', lastViewed: ['123'], cart: ['456'] };
+			const key = `${url}${JSON.stringify(payload)}`;
+			const cachedPayload = { q: 'shoes', lastViewed: ['789'], cart: ['012'] };
+			const cachedKey = `${url}${JSON.stringify(cachedPayload)}`;
+
+			// Mock performance.getEntriesByType
+			Object.defineProperty(performance, 'getEntriesByType', {
+				value: jest.fn().mockReturnValue([{ type: 'back_forward' }]),
+				writable: true,
+			});
+
+			// Set initial cache
+			cache.set(cachedKey, typedResponse);
+
+			// Attempt to get with different non-ignored keys
+			const response = cache.get(key);
+			expect(response).toBeUndefined();
+		});
+
+		it('does not ignore keys during normal navigation', async () => {
+			const cache = new NetworkCache();
+			const url = '/api/search/search.json';
+			const payload = { q: 'dress', lastViewed: ['123'], cart: ['456'] };
+			const key = `${url}${JSON.stringify(payload)}`;
+			const cachedPayload = { q: 'dress', lastViewed: ['789'], cart: ['012'] };
+			const cachedKey = `${url}${JSON.stringify(cachedPayload)}`;
+
+			// Mock performance.getEntriesByType
+			Object.defineProperty(performance, 'getEntriesByType', {
+				value: jest.fn().mockReturnValue([{ type: 'navigate' }]),
+				writable: true,
+			});
+
+			// Set initial cache
+			cache.set(cachedKey, typedResponse);
+
+			// Attempt to get with different ignored keys
+			const response = cache.get(key);
+			expect(response).toBeUndefined();
+		});
+	});
 });
