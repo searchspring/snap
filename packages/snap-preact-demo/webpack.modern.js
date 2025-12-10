@@ -1,3 +1,4 @@
+/* eslint-disable */
 const { merge } = require('webpack-merge');
 const common = require('./webpack.common.js');
 const path = require('path');
@@ -6,7 +7,7 @@ const branchName = childProcess.execSync('git rev-parse --abbrev-ref HEAD').toSt
 
 module.exports = merge(common, {
 	mode: 'production',
-	entry: './src/index.ts',
+	entry: './src/modern.ts',
 	output: {
 		filename: 'bundle.js',
 		chunkFilename: 'bundle.chunk.[fullhash:8].[id].js',
