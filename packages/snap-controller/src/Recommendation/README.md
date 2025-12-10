@@ -27,6 +27,13 @@ Invoking the `init` method is required to subscribe to changes that occur in the
 recommendationController.init();
 ```
 
+## Search
+This will invoke a search request to Searchspring's search API and populate the store with the response.
+
+```js
+recommendationController.search();
+```
+
 ## AddToCart
 This will invoke an addToCart event (see below). Takes an array of Products as a parameter. 
 
