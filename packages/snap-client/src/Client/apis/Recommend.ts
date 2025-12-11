@@ -174,8 +174,7 @@ export class RecommendAPI extends API {
 		const headerParameters: HTTPHeaders = {};
 		headerParameters['Content-Type'] = 'text/plain';
 
-		const siteId = requestParameters.siteId;
-		const path = `/boost/${siteId}/recommend`;
+		const path = `/v1/recommend`;
 
 		const response = await this.request(
 			{
@@ -183,6 +182,7 @@ export class RecommendAPI extends API {
 				method: 'POST',
 				headers: headerParameters,
 				body: requestParameters,
+				subDomain: 'p13n',
 			},
 			JSON.stringify(requestParameters)
 		);
