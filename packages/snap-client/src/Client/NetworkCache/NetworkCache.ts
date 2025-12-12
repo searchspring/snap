@@ -7,7 +7,7 @@ const CACHE_STORAGE_KEY = 'ss-networkcache';
 const defaultConfig: DefaultCacheConfig = {
 	enabled: true,
 	ttl: 300000, // ms
-	maxSize: 200, // KB
+	maxSize: 1000, // KB
 	purgeable: true,
 };
 
