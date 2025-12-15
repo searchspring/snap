@@ -54,7 +54,7 @@ describe('Abstract Api', () => {
 			config: {
 				enabled: true,
 				ttl: 300000, // ms
-				maxSize: 200, // KB
+				maxSize: 1000, // KB
 				purgeable: true,
 			},
 			memoryCache: {},
