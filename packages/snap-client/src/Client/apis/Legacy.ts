@@ -2,7 +2,7 @@ import { MetaRequestModel, MetaResponseModel } from '@searchspring/snapi-types';
 
 import { API, HTTPQuery } from '.';
 import { HTTPHeaders } from '../../types';
-import { NO_BEACON_PARAM } from '../transforms';
+import { BEACON_PARAM, SOURCE_PARAM, INPUT_PARAM } from '../transforms';
 
 export class LegacyAPI extends API {
 	private async getEndpoint(queryParameters: any, path = '/api/search/search.json') {
@@ -13,7 +13,9 @@ export class LegacyAPI extends API {
 		const cacheParameters = { ...queryParameters };
 		delete cacheParameters.pageLoadId;
 		delete cacheParameters.domain;
-		delete cacheParameters[NO_BEACON_PARAM];
+		delete cacheParameters[BEACON_PARAM];
+		delete cacheParameters[INPUT_PARAM];
+		delete cacheParameters[SOURCE_PARAM];
 
 		const legacyResponse = await this.request(
 			{
@@ -65,6 +67,11 @@ export class LegacyAPI extends API {
 	async getSearch(queryParameters: any): Promise<any> {
 		queryParameters.ajaxCatalog = 'Snap';
 		return this.getEndpoint(queryParameters, '/api/search/search.json');
+	}
+
+	async getCategory(queryParameters: any): Promise<any> {
+		queryParameters.ajaxCatalog = 'Snap';
+		return this.getEndpoint(queryParameters, '/api/search/category.json');
 	}
 
 	async getAutocomplete(queryParameters: any): Promise<any> {

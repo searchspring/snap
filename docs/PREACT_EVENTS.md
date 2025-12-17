@@ -224,9 +224,13 @@ snap.getController('search').then((search) => {
 - If an element position data exists, `element` data will include `domRect` (of the element with selector), `href` and `selector`
 - Invoked during final stages of `afterStore` just prior to setting loading state to false
 
-### track.product.render
+### track.banner.impression
 - Called with `eventData` = { controller, product, trackEvent } 
-- Always invoked after `track.product.render()` method has been invoked
+- Always invoked after `track.product.impression()` method has been invoked
+
+### track.banner.clickThrough
+- Called with `eventData` = { controller, event, product, trackEvent } 
+- Always invoked after `track.banner.clickThrough()` or `track.banner.click()` method has been invoked
 
 ### track.product.impression
 - Called with `eventData` = { controller, product, trackEvent } 
@@ -282,9 +286,13 @@ snap.getController('search').then((search) => {
 - Called with `eventData` = { controller, input }
 - Invoked prior to submission of autocomplete search
 
-### track.product.render
+### track.banner.impression
 - Called with `eventData` = { controller, product, trackEvent } 
-- Always invoked after `track.product.render()` method has been invoked
+- Always invoked after `track.banner.impression()` method has been invoked
+
+### track.banner.clickThrough
+- Called with `eventData` = { controller, event, product, trackEvent } 
+- Always invoked after `track.banner.clickThrough()` or `track.banner.click()` method has been invoked
 
 ### track.product.impression
 - Called with `eventData` = { controller, product, trackEvent } 
@@ -369,10 +377,6 @@ snap.getController('search').then((search) => {
 ### track.product.impression
 - Called with `eventData` = { controller, result, trackEvent } 
 - Always invoked after `track.product.impression()` method has been invoked
-
-### track.product.render
-- Called with `eventData` = { controller, result, trackEvent } 
-- Always invoked after `track.product.render()` method has been invoked
 
 ### track.product.addToCart
 - Called with `eventData` = { controller, product, trackEvent } 

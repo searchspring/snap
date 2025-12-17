@@ -52,7 +52,8 @@ export class AutocompleteTermStore extends Array<Term> {
 					},
 					terms,
 					resetTerms,
-					rootState
+					rootState,
+					'suggestion'
 				)
 			)
 		);
@@ -66,16 +67,19 @@ export class Term {
 	public value: string;
 	public preview: () => void;
 	public url: UrlManager;
+	public type: 'popular' | 'historical' | 'suggestion' | 'typed';
 
 	constructor(
 		services: StoreServices,
 		term: { active: boolean; value: string },
 		terms: Term[],
 		resetTerms: () => void,
-		rootState: AutocompleteStateStore
+		rootState: AutocompleteStateStore,
+		type: 'popular' | 'historical' | 'suggestion' | 'typed'
 	) {
 		this.active = term.active;
 		this.value = term.value;
+		this.type = type;
 
 		this.url = services?.urlManager?.set({ query: this.value });
 
@@ -84,7 +88,7 @@ export class Term {
 			terms.map((term) => {
 				term.active = false;
 			});
-
+			rootState.source = type;
 			this.active = true;
 			rootState.locks.terms.lock();
 			rootState.locks.facets.unlock();

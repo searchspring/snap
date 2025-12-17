@@ -189,9 +189,9 @@ describe('Snap Preact', () => {
 				shopper: {
 					id: 'snapdev',
 					cart: [
-						{ uid: 'sku1', qty: 1, price: 100 },
-						{ uid: 'sku2', qty: 2, price: 200 },
-						{ uid: 'sku3', qty: 3, price: 300 },
+						{ parentUid: 'sku1', uid: 'sku1', qty: 1, price: 100 },
+						{ parentUid: 'sku2', uid: 'sku2', qty: 2, price: 200 },
+						{ parentUid: 'sku3', uid: 'sku3', qty: 3, price: 300 },
 					],
 				},
 			},

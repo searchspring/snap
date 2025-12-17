@@ -20,7 +20,8 @@ export class AutocompleteHistoryStore extends Array<Term> {
 					},
 					terms,
 					resetTerms,
-					rootState
+					rootState,
+					'historical'
 				)
 			);
 		});

@@ -3,7 +3,7 @@ import { Client } from './Client';
 import type { ClientConfig } from '../types';
 import { MockData } from '@searchspring/snap-shared';
 import { AppMode } from '@searchspring/snap-toolbox';
-import { NO_BEACON_PARAM } from './transforms';
+import { BEACON_PARAM } from './transforms';
 
 const mockData = new MockData();
 
@@ -126,6 +126,9 @@ describe('Snap Client', () => {
 	});
 
 	describe('each fetch method uses the expected requester', () => {
+		beforeEach(() => {
+			jest.clearAllMocks();
+		});
 		it('Autocomplete method', async () => {
 			const fetchApiMock = jest
 				.spyOn(global.window, 'fetch')
@@ -197,10 +200,11 @@ describe('Snap Client', () => {
 					redirectResponse: 'full',
 					resultsFormat: 'native',
 					siteId: ['8uyt2m'],
-					noBeacon: true,
+					[BEACON_PARAM]: true,
+					test: true,
 				},
 			};
-			const acCacheKey = '{"siteId":["8uyt2m"],"redirectResponse":"full","ajaxCatalog":"Snap","resultsFormat":"native"}';
+			const acCacheKey = '{"siteId":["8uyt2m"],"redirectResponse":"full","test":true,"ajaxCatalog":"Snap","resultsFormat":"native"}';
 
 			expect(acRequesterSpy).toHaveBeenCalledTimes(1);
 			expect(acRequesterSpy.mock.calls).toEqual([
@@ -272,10 +276,10 @@ describe('Snap Client', () => {
 				headers: {},
 				method: 'GET',
 				path: '/api/search/search.json',
-				query: { resultsFormat: 'native', siteId: ['8uyt2m'], noBeacon: true, ajaxCatalog: 'Snap' },
+				query: { resultsFormat: 'native', siteId: ['8uyt2m'], test: true, [BEACON_PARAM]: true, ajaxCatalog: 'Snap' },
 			};
 
-			const searchcacheKey = '{"siteId":["8uyt2m"],"ajaxCatalog":"Snap","resultsFormat":"native"}';
+			const searchcacheKey = '{"siteId":["8uyt2m"],"test":true,"ajaxCatalog":"Snap","resultsFormat":"native"}';
 
 			expect(searchRequesterSpy).toHaveBeenCalledTimes(1);
 			expect(searchRequesterSpy.mock.calls).toEqual([[searchparams, searchcacheKey]]);
@@ -367,11 +371,11 @@ describe('Snap Client', () => {
 					],
 					test: true,
 					siteId: '8uyt2m',
-					[NO_BEACON_PARAM]: true,
+					[BEACON_PARAM]: true,
 				},
 			};
 
-			const recommendCacheKey = `{"profiles":[{"tag":"dress"}],"siteId":"8uyt2m","${NO_BEACON_PARAM}":true,"test":true}`;
+			const recommendCacheKey = `{"profiles":[{"tag":"dress"}],"siteId":"8uyt2m","${BEACON_PARAM}":true,"test":true}`;
 
 			expect(recommendRequesterSpy).toHaveBeenCalledTimes(2);
 			expect(recommendRequesterSpy.mock.calls).toEqual([
@@ -455,10 +459,11 @@ describe('Snap Client', () => {
 						redirectResponse: 'full',
 						resultsFormat: 'native',
 						siteId: ['8uyt2m'],
-						noBeacon: true,
+						[BEACON_PARAM]: true,
+						test: true,
 					},
 				};
-				const acCacheKey = '{"siteId":["8uyt2m"],"redirectResponse":"full","ajaxCatalog":"Snap","resultsFormat":"native"}';
+				const acCacheKey = '{"siteId":["8uyt2m"],"redirectResponse":"full","test":true,"ajaxCatalog":"Snap","resultsFormat":"native"}';
 
 				expect(acRequesterSpy).toHaveBeenCalledTimes(1);
 				expect(acRequesterSpy.mock.calls).toEqual([
@@ -525,10 +530,10 @@ describe('Snap Client', () => {
 					headers: {},
 					method: 'GET',
 					path: '/api/search/search.json',
-					query: { resultsFormat: 'native', siteId: ['8uyt2m'], noBeacon: true, ajaxCatalog: 'Snap' },
+					query: { resultsFormat: 'native', siteId: ['8uyt2m'], test: true, [BEACON_PARAM]: true, ajaxCatalog: 'Snap' },
 				};
 
-				const searchcacheKey = '{"siteId":["8uyt2m"],"ajaxCatalog":"Snap","resultsFormat":"native"}';
+				const searchcacheKey = '{"siteId":["8uyt2m"],"test":true,"ajaxCatalog":"Snap","resultsFormat":"native"}';
 
 				expect(searchRequesterSpy).toHaveBeenCalledTimes(1);
 				expect(searchRequesterSpy.mock.calls).toEqual([[searchparams, searchcacheKey]]);
@@ -576,7 +581,7 @@ describe('Snap Client', () => {
 			});
 
 			it('Recommend method with custom fetchApi', async () => {
-				const fetchApiMock = jest.fn(() => Promise.resolve({ status: 200, json: () => Promise.resolve({}) } as Response));
+				const fetchApiMock = jest.fn(() => Promise.resolve({ status: 200, json: () => Promise.resolve([{}]) } as Response));
 
 				const client = new Client({ siteId: '8uyt2m' }, { mode: 'development', fetchApi: fetchApiMock });
 
@@ -616,11 +621,11 @@ describe('Snap Client', () => {
 						],
 						test: true,
 						siteId: '8uyt2m',
-						[NO_BEACON_PARAM]: true,
+						[BEACON_PARAM]: true,
 					},
 				};
 
-				const recommendCacheKey = `{"profiles":[{"tag":"dress"}],"siteId":"8uyt2m","${NO_BEACON_PARAM}":true,"test":true}`;
+				const recommendCacheKey = `{"profiles":[{"tag":"dress"}],"siteId":"8uyt2m","${BEACON_PARAM}":true,"test":true}`;
 
 				expect(recommendRequesterSpy).toHaveBeenCalledTimes(2);
 				expect(recommendRequesterSpy.mock.calls).toEqual([

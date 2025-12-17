@@ -93,10 +93,6 @@ recommendationController.init();
 - Called with `eventData` = { controller, result, trackEvent } 
 - Always invoked after `track.product.impression()` method has been invoked
 
-### track.product.render
-- Called with `eventData` = { controller, result, trackEvent } 
-- Always invoked after `track.product.render()` method has been invoked
-
 ### track.product.addToCart
 - Called with `eventData` = { controller, product, trackEvent } 
 - Always invoked after `track.product.addToCart()` method has been invoked

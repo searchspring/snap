@@ -11,8 +11,9 @@ import {
 } from '@searchspring/snapi-types';
 
 import { API, ApiConfigurationParameters, LegacyAPI, SuggestAPI, ApiConfiguration } from '.';
-import { transformSearchRequest, transformSearchResponse, transformSuggestResponse } from '../transforms';
+import { INPUT_PARAM, SOURCE_PARAM, transformSearchRequest, transformSearchResponse, transformSuggestResponse } from '../transforms';
 import type { SuggestRequestModel, HybridRequesterConfig } from '../../types';
+export const DEVELOPMENT_MODE_PARAM = 'test';
 
 export class HybridAPI extends API {
 	private requesters: {
@@ -34,7 +35,7 @@ export class HybridAPI extends API {
 		);
 
 		if (configuration.mode == AppMode.development) {
-			legacyConfig.headers = { ...legacyConfig.headers, 'searchspring-no-beacon': '' };
+			legacyConfig.headers = { ...legacyConfig.headers };
 		}
 
 		const suggestConfig: ApiConfigurationParameters = deepmerge(
@@ -64,13 +65,33 @@ export class HybridAPI extends API {
 	async getSearch(requestParameters: SearchRequestModel): Promise<SearchResponseModel> {
 		const legacyRequestParameters = transformSearchRequest(requestParameters);
 
+		if (this.configuration.mode == AppMode.development) {
+			legacyRequestParameters[DEVELOPMENT_MODE_PARAM] = true;
+		}
+
 		const legacyData = await this.requesters.legacy.getSearch(legacyRequestParameters);
+
+		return transformSearchResponse(legacyData, requestParameters);
+	}
+
+	async getCategory(requestParameters: SearchRequestModel): Promise<SearchResponseModel> {
+		const legacyRequestParameters = transformSearchRequest(requestParameters);
+
+		if (this.configuration.mode == AppMode.development) {
+			legacyRequestParameters[DEVELOPMENT_MODE_PARAM] = true;
+		}
+
+		const legacyData = await this.requesters.legacy.getCategory(legacyRequestParameters);
 
 		return transformSearchResponse(legacyData, requestParameters);
 	}
 
 	async getFinder(requestParameters: SearchRequestModel): Promise<SearchResponseModel> {
 		const legacyRequestParameters = transformSearchRequest(requestParameters);
+
+		if (this.configuration.mode == AppMode.development) {
+			legacyRequestParameters[DEVELOPMENT_MODE_PARAM] = true;
+		}
 
 		const legacyData = await this.requesters.legacy.getFinder(legacyRequestParameters);
 
@@ -106,9 +127,23 @@ export class HybridAPI extends API {
 			q,
 		};
 
+		if (this.configuration.mode == AppMode.development) {
+			queryParameters[DEVELOPMENT_MODE_PARAM] = true;
+		}
+
 		// modify the original request parameter for the transform
 		if (requestParameters.search?.query?.string) {
 			requestParameters.search.query.string = q;
+		}
+
+		if (transformedSuggestResults.query) {
+			queryParameters[INPUT_PARAM] = transformedSuggestResults.query;
+		}
+
+		// @ts-ignore - AutocompleteRequestModel to be updated
+		if (requestParameters[SOURCE_PARAM]) {
+			// @ts-ignore - AutocompleteRequestModel to be updated
+			queryParameters[SOURCE_PARAM] = requestParameters[SOURCE_PARAM];
 		}
 
 		const legacyResults = await this.requesters.legacy.getAutocomplete(queryParameters);

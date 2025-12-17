@@ -13,11 +13,12 @@ import type { Product } from '@searchspring/snap-store-mobx';
 
 const mockData = new MockData();
 const searchResponse = mockData.searchMeta();
-
+const responseId = 'responseId-mock';
 const mockResults = new SearchResultStore(
 	{ id: 'test' },
 	{ urlManager: new UrlManager(new UrlTranslator()) },
 	searchResponse.meta,
+	responseId,
 	searchResponse.results,
 	searchResponse.pagination,
 	searchResponse.merchandising

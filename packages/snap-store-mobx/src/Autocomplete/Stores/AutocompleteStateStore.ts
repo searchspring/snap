@@ -10,6 +10,7 @@ export class AutocompleteStateStore {
 
 	public focusedInput: HTMLInputElement | undefined = undefined;
 	public input: string | undefined = undefined;
+	public source: 'historical' | 'popular' | 'suggestion' | 'typed' = 'typed';
 	public url: UrlManager;
 
 	constructor(services: StoreServices) {

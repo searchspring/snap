@@ -13,7 +13,7 @@ import { InlineBanner, InlineBannerProps } from '../../Atoms/Merchandising/Inlin
 import { Result, ResultProps } from '../../Molecules/Result';
 import { ComponentProps, Layout, LayoutType, BreakpointsProps, StylingCSS } from '../../../types';
 import { defined } from '../../../utilities';
-import { Theme, useTheme, CacheProvider, withTracking } from '../../../providers';
+import { Theme, useTheme, CacheProvider } from '../../../providers';
 import { useDisplaySettings } from '../../../hooks/useDisplaySettings';
 
 const CSS = {
@@ -40,8 +40,6 @@ const CSS = {
 			},
 		}),
 };
-
-const ResultComponent = withTracking<ResultProps>(Result);
 
 export const Results = observer((properties: ResultsProp): JSX.Element => {
 	const globalTheme: Theme = useTheme();
@@ -90,6 +88,7 @@ export const Results = observer((properties: ResultsProp): JSX.Element => {
 		result: {
 			// default props
 			className: 'ss__results__result',
+			controller,
 			// global theme
 			...globalTheme?.components?.result,
 			// inherited props
@@ -102,6 +101,7 @@ export const Results = observer((properties: ResultsProp): JSX.Element => {
 		inlineBanner: {
 			// default props
 			className: 'ss__results__inline-banner',
+			controller,
 			// global theme
 			...globalTheme?.components?.inlineBanner,
 			// inherited props
@@ -134,15 +134,7 @@ export const Results = observer((properties: ResultsProp): JSX.Element => {
 							case ContentType.BANNER:
 								return <InlineBanner {...subProps.inlineBanner} key={result.id} banner={result as Banner} layout={props.layout} />;
 							default:
-								return (
-									<ResultComponent
-										key={(result as Product).id}
-										{...subProps.result}
-										result={result as Product}
-										layout={props.layout}
-										controller={controller}
-									/>
-								);
+								return <Result key={(result as Product).id} {...subProps.result} result={result as Product} layout={props.layout} />;
 						}
 					})()
 				)}

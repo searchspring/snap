@@ -1,9 +1,9 @@
 import { AppMode } from '@searchspring/snap-toolbox';
-import type { ContextCurrency, Product } from '@searchspring/beacon';
+import type { Currency, Product } from '@searchspring/beacon';
 
 export type TrackerGlobals = {
 	siteId: string;
-	currency?: ContextCurrency;
+	currency?: Currency;
 	cart?: Product[];
 };
 
@@ -45,6 +45,7 @@ export interface TrackErrorEvent {
 }
 export interface ProductViewEvent {
 	uid?: string;
+	parentUid?: string;
 	sku?: string;
 	childUid?: string;
 	childSku?: string;

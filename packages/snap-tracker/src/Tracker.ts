@@ -4,7 +4,7 @@ import { StorageStore } from '@searchspring/snap-store-mobx';
 import { version, DomTargeter, getContext } from '@searchspring/snap-toolbox';
 import { AppMode } from '@searchspring/snap-toolbox';
 import { Beacon } from '@searchspring/beacon';
-import type { Item, OrderTransactionSchemaData, Product, BeaconConfig } from '@searchspring/beacon';
+import type { OrderTransactionSchemaData, Product, BeaconConfig, ProductPageviewSchemaData } from '@searchspring/beacon';
 
 import {
 	TrackerGlobals,
@@ -179,18 +179,13 @@ export class Tracker extends Beacon {
 				// length check here to be able to sent error event if invalid array of objects is provided
 				const currentCart: Product[] = cart
 					.filter(
-						(item) =>
-							typeof item === 'object' &&
-							(item.uid || item.sku || item.childUid || item.childSku) &&
-							item.qty !== undefined &&
-							item.price !== undefined
+						(item) => typeof item === 'object' && (item.parentUid || item.uid || item.sku) && item.qty !== undefined && item.price !== undefined
 					)
 					.map((item): Product => {
 						return {
+							parentUid: item.parentUid || item.uid,
 							uid: item.uid,
-							childUid: item.childUid,
 							sku: item.sku,
-							childSku: item.childSku,
 							price: item.price,
 							qty: item.qty,
 						};
@@ -217,12 +212,7 @@ export class Tracker extends Beacon {
 				} else if (currentCart.length) {
 					currentCart.forEach((item) => {
 						const existingItem = storedCart.find((existingItem) => {
-							return (
-								existingItem.uid === item.uid &&
-								existingItem.sku === item.sku &&
-								existingItem.childUid === item.childUid &&
-								existingItem.childSku === item.childSku
-							);
+							return existingItem.parentUid === item.parentUid && existingItem.uid === item.uid && existingItem.sku === item.sku;
 						});
 						if (!existingItem) {
 							// item does not exist in cart, add it
@@ -322,15 +312,25 @@ export class Tracker extends Beacon {
 				if (this.doNotTrack?.includes('product.view')) {
 					return;
 				}
-				let result = data;
-				if (!data.uid && data.sku) {
-					result = {
-						...data,
-						uid: data.sku,
+				let dataPayload: ProductPageviewSchemaData = {
+					result: {
+						parentUid: data.parentUid || data.uid || '',
+						uid: data.uid || data.parentUid || data.sku || '',
+						sku: data.sku,
+					},
+				};
+
+				if ((data.childSku || data.childUid) && !data.parentUid) {
+					dataPayload = {
+						result: {
+							parentUid: data.uid || data.childUid || '',
+							uid: data.childUid || data.uid || '',
+							sku: data.childSku || data.sku,
+						},
 					};
 				}
 
-				this.events.product.pageView({ data: { result: result as Item }, siteId });
+				this.events.product.pageView({ data: dataPayload, siteId });
 			},
 			/**
 			 * @deprecated tracker.track.product.click() is deprecated and will be removed. Use tracker.events['search' | 'category'].clickThrough() instead
@@ -367,11 +367,9 @@ export class Tracker extends Beacon {
 					country: order?.country,
 					results: items.map((item) => {
 						return {
-							// uid is required - fallback to get most relevant
-							uid: item.uid || item.sku || '',
-							childUid: item.childUid,
+							parentUid: item.parentUid || item.uid || '', // TODO: confirm this is correct
+							uid: item.uid || item.parentUid || item.sku || '',
 							sku: item.sku,
-							childSku: item.childSku,
 							qty: Number(item.qty),
 							price: Number(item.price),
 						};
@@ -390,18 +388,18 @@ export class Tracker extends Beacon {
 			},
 			set: (items: string[]): void => {
 				const cartItems = items.map((item) => `${item}`.trim());
-				const uniqueCartItems: Product[] = Array.from(new Set(cartItems)).map((uid) => ({ uid, sku: uid, price: 0, qty: 1 }));
+				const uniqueCartItems: Product[] = Array.from(new Set(cartItems)).map((uid) => ({ parentUid: uid, uid, sku: uid, price: 0, qty: 1 })); // TODO: confirm this is correct
 				this.storage.cart.set(uniqueCartItems);
 			},
 			add: (items: string[]): void => {
 				if (items.length) {
-					const itemsToAdd: Product[] = items.map((item) => `${item}`.trim()).map((uid) => ({ uid, sku: uid, price: 0, qty: 1 }));
+					const itemsToAdd: Product[] = items.map((item) => `${item}`.trim()).map((uid) => ({ parentUid: uid, uid, sku: uid, price: 0, qty: 1 })); // TODO: confirm this is correct
 					this.storage.cart.add(itemsToAdd);
 				}
 			},
 			remove: (items: string[]): void => {
 				if (items.length) {
-					const itemsToRemove: Product[] = items.map((item) => `${item}`.trim()).map((uid) => ({ uid, sku: uid, price: 0, qty: 1 }));
+					const itemsToRemove: Product[] = items.map((item) => `${item}`.trim()).map((uid) => ({ parentUid: uid, uid, sku: uid, price: 0, qty: 1 })); // TODO: confirm this is correct
 					this.storage.cart.remove(itemsToRemove);
 				}
 			},

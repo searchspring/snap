@@ -84,10 +84,10 @@ export class SearchStore extends AbstractStore {
 		this.update();
 	}
 
-	public update(data: SearchResponseModel & { meta?: MetaResponseModel } = {}): void {
+	public update(data: SearchResponseModel & { meta?: MetaResponseModel; responseId?: string } = {}): void {
 		this.error = undefined;
 		this.meta = new MetaStore(data.meta);
-		this.merchandising = new SearchMerchandisingStore(this.services, data?.merchandising || {});
+		this.merchandising = new SearchMerchandisingStore(this.services, data?.merchandising || {}, data.responseId!);
 		this.search = new SearchQueryStore(this.services, data?.search || {});
 		this.facets = new SearchFacetStore(
 			this.config as SearchStoreConfig,
@@ -103,6 +103,7 @@ export class SearchStore extends AbstractStore {
 			this.config,
 			this.services,
 			this.meta.data,
+			data.responseId!,
 			data?.results || [],
 			data.pagination,
 			data.merchandising,

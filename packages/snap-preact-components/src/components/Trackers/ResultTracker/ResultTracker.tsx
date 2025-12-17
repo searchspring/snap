@@ -17,7 +17,6 @@ const CSS = {
 export const ResultTracker = observer((properties: ResultTrackerProps): JSX.Element => {
 	const globalTheme: Theme = useTheme();
 	const defaultTrack = {
-		render: true,
 		impression: true,
 		click: true,
 	};
@@ -40,11 +39,7 @@ export const ResultTracker = observer((properties: ResultTrackerProps): JSX.Elem
 
 	const { ref, inViewport } = createImpressionObserver();
 	if (inViewport && mergedTrack.impression) {
-		if (result.type === 'product') {
-			controller?.track.product.impression(result as Product);
-		} else {
-			// track banner in future
-		}
+		controller?.track.product.impression(result);
 	}
 
 	const styling: { css?: StylingCSS } = {};
@@ -58,8 +53,8 @@ export const ResultTracker = observer((properties: ResultTrackerProps): JSX.Elem
 		<div
 			className={classnames('ss__result-tracker', `ss__${controller?.type}-result-tracker`, className)}
 			onClick={(e: any) => {
-				if (result.type === 'product' && mergedTrack.click) {
-					controller?.track.product.click(e, result as Product);
+				if (mergedTrack.click) {
+					controller?.track.product.click(e, result);
 				}
 			}}
 			ref={ref as Ref<HTMLDivElement>}
@@ -75,7 +70,6 @@ export interface ResultTrackerProps extends ComponentProps {
 	result: Product | Banner;
 	controller: SearchController | AutocompleteController | RecommendationController;
 	track?: {
-		render?: boolean;
 		impression?: boolean;
 		click?: boolean;
 	};

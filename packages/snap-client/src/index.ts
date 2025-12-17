@@ -8,3 +8,5 @@ export {
 	RecommendationRequestFilterModel,
 	RecommendCombinedResponseModel,
 } from './types';
+
+export { INPUT_PARAM, SOURCE_PARAM } from './Client/transforms';
