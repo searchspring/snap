@@ -538,6 +538,7 @@ export class AutocompleteController extends AbstractController {
 					return;
 				}
 
+				this.store.state.source = 'typed'; // TODO: create a shared type for this
 				this.store.state.input = value;
 
 				// remove merch redirect to prevent race condition

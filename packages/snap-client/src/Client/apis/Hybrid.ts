@@ -136,8 +136,10 @@ export class HybridAPI extends API {
 			requestParameters.search.query.string = q;
 		}
 
-		if (transformedSuggestResults.query) {
-			queryParameters[INPUT_PARAM] = transformedSuggestResults.query;
+		// @ts-ignore - AutocompleteRequestModel to be updated
+		if (requestParameters[INPUT_PARAM]) {
+			// @ts-ignore - AutocompleteRequestModel to be updated
+			queryParameters[INPUT_PARAM] = requestParameters[INPUT_PARAM];
 		}
 
 		// @ts-ignore - AutocompleteRequestModel to be updated
