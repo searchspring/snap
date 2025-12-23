@@ -33,6 +33,7 @@ export class SearchResultStore extends Array<Product | Banner> {
 		config: StoreConfigs,
 		services: StoreServices,
 		metaData: MetaResponseModel,
+		responseId: string,
 		resultData?: SearchResponseModelResult[],
 		paginationData?: SearchResponseModelPagination,
 		merchData?: SearchResponseModelMerchandising,
@@ -40,8 +41,8 @@ export class SearchResultStore extends Array<Product | Banner> {
 		previousPaginationData?: SearchResponseModelPagination, // used for infinite scroll functionality
 		previousResults?: (Product | Banner)[] // used for infinite scroll functionality
 	) {
-		let results: (Product | Banner)[] = (resultData || []).map((result, idx) => {
-			return new Product(services, result, metaData, idx + 1, config);
+		let results: (Product | Banner)[] = (resultData || []).map((result) => {
+			return new Product(services, result, metaData, responseId, config);
 		});
 
 		const variantConfig = (config as SearchStoreConfig | AutocompleteStoreConfig | RecommendationStoreConfig)?.settings?.variants;
@@ -97,7 +98,7 @@ export class SearchResultStore extends Array<Product | Banner> {
 					return a.config!.position!.index! - b.config!.position!.index!;
 				})
 				.map((banner) => {
-					return new Banner(services, banner);
+					return new Banner(services, banner, responseId);
 				});
 
 			if (banners && paginationData.totalResults) {
@@ -112,6 +113,7 @@ export class SearchResultStore extends Array<Product | Banner> {
 export class Banner {
 	public type = 'banner';
 	public id: string;
+	public responseId: string;
 	public attributes: Record<string, unknown> = {};
 	public mappings: SearchResponseModelResultMappings = {
 		core: {},
@@ -120,8 +122,12 @@ export class Banner {
 	public config: SearchResponseModelMerchandisingContentConfig;
 	public value: string;
 
-	constructor(services: StoreServices, banner: SearchResponseModelMerchandisingContentInline) {
-		this.id = 'ss-ib-' + banner.config!.position!.index;
+	constructor(services: StoreServices, banner: SearchResponseModelMerchandisingContentInline, responseId: string) {
+		const htmlString = banner.value;
+		const match = typeof htmlString === 'string' && htmlString.match(/data-banner-id="(\d+)"/);
+		const uid = match ? match[1] : 'ss-ib-' + banner.config!.position!.index;
+		this.id = uid;
+		this.responseId = responseId;
 		this.config = banner.config!;
 		this.value = banner.value!;
 
@@ -165,7 +171,7 @@ type SearchResponseModelResultVariants = {
 export class Product {
 	public type = 'product';
 	public id: string;
-	public position: number;
+	public responseId: string;
 	public attributes: Record<string, unknown> = {};
 	public mappings: SearchResponseModelResultMappings = {
 		core: {},
@@ -181,15 +187,15 @@ export class Product {
 
 	constructor(
 		services: StoreServices,
-		result: SearchResponseModelResult & { variants?: SearchResponseModelResultVariants },
+		result: SearchResponseModelResult & { responseId?: string; variants?: SearchResponseModelResultVariants },
 		metaData: MetaResponseModel,
-		position: number,
+		responseId: string,
 		config?: StoreConfigs
 	) {
 		this.id = result.id!;
 		this.attributes = result.attributes!;
 		this.mappings = result.mappings!;
-		this.position = position;
+		this.responseId = result.responseId || responseId;
 		this.badges = new Badges(result, metaData);
 		// @ts-ignore - need to add bundleSeed to snapi-types
 		if (result.bundleSeed) {
@@ -735,6 +741,26 @@ function addBannersToResults(
 			bannersAndResults.splice(resultIndex, 0, banner);
 		}
 	});
+
+	// when using infinite, need to adjust the inline banner responseIds
+	if ((config as SearchStoreConfig)?.settings?.infinite) {
+		bannersAndResults.forEach((item, index) => {
+			if (item.type === 'banner') {
+				// need to determine what the correctResponseId is based on the index position, pageSize (current page) and adjacent product responseIds
+				const pageSize = paginationData.pageSize;
+				const currentPage = Math.floor(index / pageSize) + 1;
+				const firstItemIndexOnPage = (currentPage - 1) * pageSize;
+				const lastItemIndexOnPage = firstItemIndexOnPage + pageSize - 1;
+				// find the first product on the current page to grab its responseId
+				for (let i = firstItemIndexOnPage; i < lastItemIndexOnPage; i++) {
+					if (bannersAndResults[i].type === 'product') {
+						(item as Banner).responseId = bannersAndResults[i].responseId;
+						break;
+					}
+				}
+			}
+		});
+	}
 
 	return bannersAndResults;
 }

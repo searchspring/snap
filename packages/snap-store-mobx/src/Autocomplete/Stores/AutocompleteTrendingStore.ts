@@ -21,7 +21,8 @@ export class AutocompleteTrendingStore extends Array<Term> {
 					},
 					terms,
 					resetTerms,
-					rootState
+					rootState,
+					'popular'
 				)
 			);
 		});

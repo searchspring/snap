@@ -118,7 +118,7 @@ describe('Snap Client Node Integration Tests', () => {
 
 		it(`can run 'recommend'`, async () => {
 			// mock fetch
-			const fetchApiMock = jest.fn(() => Promise.resolve({ status: 200, json: () => Promise.resolve({}) } as Response));
+			const fetchApiMock = jest.fn(() => Promise.resolve({ status: 200, json: () => Promise.resolve([{}]) } as Response));
 
 			const client = new Client(globals, { fetchApi: fetchApiMock });
 

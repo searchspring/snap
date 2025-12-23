@@ -9,7 +9,7 @@ There are a few core context variables utilized by Snap, `shopper`, `merchandisi
 | Option | Value | Page | Description |
 |---|---|:---:|---|
 | shopper.id | logged in user unique identifier | all | required for personalization functionallity |
-| shopper.cart | array of cart objects, each object in the array can contain `uid` (required), `childUid`, `sku`, `childSku`, `price`, `qty` | all | current cart contents, required if checkout process does not contain a dedicated cart page (ie. slideout cart) |
+| shopper.cart | array of cart objects, each object in the array should contain `uid` (required), `parentUid` (required), `sku`, `price`, `qty` | all | current cart contents, required if checkout process does not contain a dedicated cart page (ie. slideout cart) |
 | currency.code | currency code string, ie. 'EUR' (ISO 4217) | all | currency code of the shopper's cart contents or order confirmation. Used for beacon events containing pricing data |
 | merchandising.segments | array of strings used for merchandising | any | segmented merchandising allows for custom control over products returned on search requests and must also be setup within the Searchspring Management Console (SMC) |
 | config | object containing Snap configurations | any | advanced usage of Snap (not recommended for standard integrations) |
@@ -33,10 +33,9 @@ When used, shopper context should always include at least an `id`; the `cart` co
 		id: 'snapdev',
 		cart: [
 			{
-				uid: '123',
-				childUid: '123_a',
-				sku: 'product123',
-				childSku: 'product123_a',
+				uid: 'product123_red',
+				parentUid: 'product123',
+				sku: 'product123_red',
 				price: 99.99,
 				qty: 1
 			}

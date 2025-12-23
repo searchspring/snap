@@ -135,7 +135,7 @@ export class AutocompleteStore extends AbstractStore {
 		);
 	}
 
-	public update(data: AutocompleteResponseModel & { meta?: MetaResponseModel } = {}): void {
+	public update(data: AutocompleteResponseModel & { meta?: MetaResponseModel; responseId?: string } = {}): void {
 		if (!data) return;
 		this.error = undefined;
 		this.meta = new MetaStore(data.meta);
@@ -163,7 +163,7 @@ export class AutocompleteStore extends AbstractStore {
 			data.autocomplete && this.state.locks.terms.lock();
 		}
 
-		this.merchandising = new SearchMerchandisingStore(this.services, data.merchandising || {});
+		this.merchandising = new SearchMerchandisingStore(this.services, data.merchandising || {}, data.responseId!);
 
 		this.search = new AutocompleteQueryStore(this.services, data.autocomplete || {}, data.search || {}, this.config as AutocompleteStoreConfig);
 
@@ -186,6 +186,7 @@ export class AutocompleteStore extends AbstractStore {
 			this.config,
 			this.services,
 			this.meta.data,
+			data.responseId!,
 			data.results || [],
 			data.pagination,
 			data.merchandising,

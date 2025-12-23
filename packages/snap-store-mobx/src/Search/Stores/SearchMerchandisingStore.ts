@@ -1,7 +1,6 @@
 import type { StoreServices } from '../../types';
 import type {
 	SearchResponseModelMerchandising,
-	SearchResponseModelMerchandisingContentInline,
 	SearchResponseModelMerchandisingCampaigns,
 	SearchResponseModelMerchandisingExperiments,
 } from '@searchspring/snapi-types';
@@ -18,20 +17,33 @@ export type BannerContent = Partial<Record<ContentType, Content>>;
 
 export class SearchMerchandisingStore {
 	public redirect = '';
+	public responseId = '';
 	public content: BannerContent = {};
 	public campaigns: SearchResponseModelMerchandisingCampaigns[] = [];
 	public landingPage?: SearchResponseModelMerchandisingCampaigns;
 	public personalized?: boolean = false;
 	public experiments: SearchResponseModelMerchandisingExperiments[] = [];
 
-	constructor(services: StoreServices, merchData: SearchResponseModelMerchandising) {
+	constructor(services: StoreServices, merchData: SearchResponseModelMerchandising, responseId: string) {
 		if (merchData) {
 			this.redirect = merchData.redirect || '';
+			this.responseId = responseId; // Autocomplete 'beforeSubmit' doesn't have a response reference
 
 			if (merchData.content) {
 				Object.values(ContentType).forEach((type) => {
 					if (merchData.content && merchData.content[type]) {
-						this.content[type] = new Content(merchData.content[type]!);
+						// Extract data-banner-id from the HTML string
+						const htmlString = merchData.content[type]?.[0] || '';
+						const match = typeof htmlString === 'string' && htmlString.match(/data-banner-id="(\d+)"/);
+						const uid = match ? match[1] : '';
+
+						this.content[type] = new Content([
+							{
+								value: merchData.content[type]!,
+								uid,
+								responseId,
+							},
+						] as MerchandisingContentBanner[]);
 					}
 				});
 			}
@@ -54,12 +66,17 @@ export class SearchMerchandisingStore {
 	}
 }
 
-class Content extends Array<string | SearchResponseModelMerchandisingContentInline> {
+export type MerchandisingContentBanner = {
+	value: string[];
+	uid: string;
+	responseId: string;
+};
+class Content extends Array<MerchandisingContentBanner> {
 	static get [Symbol.species](): ArrayConstructor {
 		return Array;
 	}
 
-	constructor(content: string[] | SearchResponseModelMerchandisingContentInline[]) {
+	constructor(content: MerchandisingContentBanner[]) {
 		super(...content);
 	}
 }

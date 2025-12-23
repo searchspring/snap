@@ -108,6 +108,7 @@ type breadcrumb = {
 };
 
 export type searchResponseType = {
+	responseId: string;
 	pagination: {
 		totalResults: number;
 		begin: number;
@@ -161,15 +162,17 @@ export type searchResponseType = {
 };
 
 class Result implements SearchResponseModelResult {
-	constructor(result: SearchResponseModelResult) {
+	constructor(result: SearchResponseModelResult & { responseId: string }) {
 		Object.assign(this, result);
 	}
 }
 
 export function transformSearchResponse(response: searchResponseType, request: SearchRequestModel) {
+	response.responseId = response.responseId || `responseId-${JSON.stringify(request).length}`;
 	return {
 		// @ts-ignore - temporary to be removed when auto beaconing is implemented
 		_cached: response._cached ?? false,
+		responseId: response.responseId,
 		...transformSearchResponse.pagination(response),
 		...transformSearchResponse.results(response),
 		...transformSearchResponse.filters(response),
@@ -196,10 +199,14 @@ transformSearchResponse.pagination = (response: searchResponseType): { paginatio
 transformSearchResponse.results = (response: searchResponseType) => {
 	const results = response?.results || [];
 
-	return { results: results.map(transformSearchResponse.result) };
+	return {
+		results: results.map((result) => {
+			return transformSearchResponse.result(result, response);
+		}),
+	};
 };
 
-transformSearchResponse.result = (rawResult: rawResult): SearchResponseModelResult => {
+transformSearchResponse.result = (rawResult: rawResult, response: searchResponseType): SearchResponseModelResult => {
 	const coreFieldValues: SearchResponseModelResultCoreMappings = CORE_FIELDS.reduce((coreFields, key) => {
 		if (typeof rawResult[key as keyof rawResult] != 'undefined') {
 			return {
@@ -240,6 +247,7 @@ transformSearchResponse.result = (rawResult: rawResult): SearchResponseModelResu
 
 	return new Result({
 		id: rawResult.uid,
+		responseId: response.responseId,
 		mappings: {
 			core: coreFieldValues,
 		},

@@ -156,16 +156,15 @@ searchspring.tracker.setCurrency({
 
 
 ### Product View
-Tracks product page views. Should only be installed on product detail pages. A `uid` and/or `sku` and/or `childSku` and/or `childUid` are required (provide as many of these product identifiers that are available).
+Tracks product page views. Should only be installed on product detail pages. A `parentUid` and `uid` are required while  `sku` is optional.
 
 ```typescript
 searchspring.tracker.events.product.pageView({
 	data: {
 		result: {
-			uid: '123',
-			sku: 'product123',
-			childUid: '123_a',
-			childSku: 'product123_a'
+			parentUid: 'product123',
+			uid: 'product123_red',
+			sku: 'product123_red',
 		}
 	}
 });
@@ -190,13 +189,11 @@ Tracks order transaction. Should be invoked from an order confirmation page. Exp
 
 `results` - array of products
 
+`results[].parentUid` - parent product uid
+
 `results[].uid` - product uid
 
 `results[].sku` - (optional) product sku
-
-`results[].childUid` - (optional) product child uid
-
-`results[].childSku` - (optional) product child sku
 
 `results[].qty` - (optional) product qty
 
@@ -214,18 +211,16 @@ searchspring.tracker.events.order.transaction({
 		country: 'US',
 		results: [
 			{
-				uid: '123',
-				sku: 'product123',
-				childUid: '123_a',
-				childSku: 'product123_a',
+				parentUid: 'product123',
+				uid: 'product123_red',
+				sku: 'product123_red',
 				qty: '1',
 				price: '9.99'
 			},
 			{
-				uid: '456',
-				sku: 'product456',
-				childUid: '456_a',
-				childSku: 'product456_a',
+				parentUid: 'product_456',
+				uid: 'product_456_blue',
+				sku: 'product_456_blue',
 				qty: '2',
 				price: '10.99'
 			}
@@ -246,13 +241,11 @@ This requires integrating into platform cart events or manually attaching click 
 
 `cart` - array of products currently in the cart (state after products have been added/removed)
 
+`(results | cart)[].parentUid` - parent product uid
+
 `(results | cart)[].uid` - product uid
 
 `(results | cart)[].sku` - (optional) product sku
-
-`(results | cart)[].childUid` - (optional) product child uid
-
-`(results | cart)[].childSku` - (optional) product child sku
 
 `(results | cart)[].qty` - (optional) product qty
 
@@ -263,20 +256,18 @@ searchspring.tracker.events.cart.add({
 	data: {
 		results: [
 			{
-				uid: '123',
-				sku: 'product123',
-				childUid: '123_a',
-				childSku: 'product123_a',
+				parentUid: 'product123',
+				uid: 'product123_red',
+				sku: 'product123_red',
 				qty: '1',
 				price: '9.99'
 			}
 		],
 		cart: [
 			{
-				uid: '123',
-				sku: 'product123',
-				childUid: '123_a',
-				childSku: 'product123_a',
+				parentUid: 'product_456',
+				uid: 'product_456_blue',
+				sku: 'product_456_blue',
 				qty: '1',
 				price: '9.99'
 			}
@@ -290,10 +281,9 @@ searchspring.tracker.events.cart.remove({
 	data: {
 		results: [
 			{
-				uid: '123',
-				sku: 'product123',
-				childUid: '123_a',
-				childSku: 'product123_a',
+				parentUid: 'product123',
+				uid: 'product123_red',
+				sku: 'product123_red',
 				qty: '1',
 				price: '9.99'
 			}
@@ -313,10 +303,9 @@ This method will compare the provided cart contents with the current cart conten
 		id: 'snapdev',
 		cart: [
 			{
-				uid: '123',
-				childUid: '123_a',
-				sku: 'product123',
-				childSku: 'product123_a',
+				parentUid: 'product123',
+				uid: 'product123_red',
+				sku: 'product123_red',
 				price: 99.99,
 				qty: 1
 			}
@@ -338,10 +327,14 @@ Adding the following attributes to clickable cart elements allows for real-time 
 If you are using multiple custom Tracker instances with a different tracker `config.id`, attributes are namespaced by the trackers `id` (Default: `'track'`, Example: `ss-track-cart-add`)
 
 ### Add to cart
-Adds product `uid` or `sku` (or `childSku`/`childUid`) to `ssCartProducts` cookie. It is preferable to use the more specific variant `childSku` or `childUid` if available. Supports multiple products using a comma delimiter.
+Adds product identifier to `ssCartProducts` cookie. Supports multiple products using a comma delimiter. It is preferable to use the more specific variant `uid` or `sku` instead of `parentUid` when available.
 
 ```html
-<button ss-track-cart-add='product123'>Add to cart</button>
+<button ss-track-cart-add='product123_red'>Add to cart</button>
+```
+
+```html
+<button ss-track-cart-add='product123_red,product_456_blue'>Add to cart</button>
 ```
 
 Alternatively, this can also be integrated using the `searchspring.tracker.cookies.cart.add` method
@@ -352,10 +345,14 @@ searchspring.tracker.cookies.cart.add(['product123'])
 
 
 ### Remove from cart
-Removes product `uid` or `sku` (or `childSku`/`childUid`) to `ssCartProducts` cookie. It is preferable to use the more specific variant `childSku` or `childUid` if available. Supports multiple products using a comma delimiter.
+Removes product identifier from `ssCartProducts` cookie. Supports multiple products using a comma delimiter. It is preferable to use the more specific variant `uid` or `sku` instead of `parentUid` when available.
 
 ```html
-<button ss-track-cart-remove='product123'>Remove</button>
+<button ss-track-cart-remove='product123_red'>Remove</button>
+```
+
+```html
+<button ss-track-cart-remove='product123_red,product_456_blue'>Remove</button>
 ```
 
 Alternatively, this can also be integrated using the `searchspring.tracker.cookies.cart.remove` method
@@ -372,7 +369,7 @@ Clears all products currently stored in the `ssCartProducts` cookie.
 <button ss-track-cart-clear>Clear Cart</button>
 ```
 
-Alternatively, this can also be integrated using the `searchspring.tracker.cookies.cart.remove` method
+Alternatively, this can also be integrated using the `searchspring.tracker.cookies.cart.clear` method
 
 ```typescript
 searchspring.tracker.cookies.cart.clear()

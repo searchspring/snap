@@ -1,4 +1,4 @@
-export { SearchMerchandisingStore, BannerContent, ContentType } from './SearchMerchandisingStore';
+export { SearchMerchandisingStore, BannerContent, ContentType, MerchandisingContentBanner } from './SearchMerchandisingStore';
 export { SearchFacetStore, ValueFacet, RangeFacet, FacetValue, FacetHierarchyValue, FacetRangeValue } from './SearchFacetStore';
 export { SearchFilterStore, Filter } from './SearchFilterStore';
 export { SearchPaginationStore } from './SearchPaginationStore';
