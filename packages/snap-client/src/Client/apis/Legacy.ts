@@ -71,7 +71,7 @@ export class LegacyAPI extends API {
 
 	async getCategory(queryParameters: any): Promise<any> {
 		queryParameters.ajaxCatalog = 'Snap';
-		return this.getEndpoint(queryParameters, '/api/search/category.json');
+		return this.getEndpoint(queryParameters, '/api/search/category');
 	}
 
 	async getAutocomplete(queryParameters: any): Promise<any> {
