@@ -22,6 +22,7 @@ import type {
 } from '@searchspring/snapi-types';
 
 import deepmerge from 'deepmerge';
+import { ConversationalSearchAPI } from './apis/ConversationalSearch';
 
 const defaultConfig: ClientConfig = {
 	mode: AppMode.production,
@@ -32,6 +33,9 @@ const defaultConfig: ClientConfig = {
 	},
 	search: {
 		// origin: 'https://snapi.kube.athoscommerce.io'
+	},
+	conversationalSearch: {
+		origin: 'https://moi-ai.ksearchnet.com',
 	},
 	autocomplete: {
 		// origin: 'https://snapi.kube.athoscommerce.io'
@@ -55,6 +59,7 @@ export class Client {
 		autocomplete: HybridAPI;
 		meta: HybridAPI;
 		search: HybridAPI;
+		conversationalSearch: ConversationalSearchAPI;
 		recommend: RecommendAPI;
 		suggest: SuggestAPI;
 		finder: HybridAPI;
@@ -119,6 +124,17 @@ export class Client {
 					globals: this.config.search?.globals,
 				})
 			),
+			conversationalSearch: new ConversationalSearchAPI(
+				new ApiConfiguration({
+					fetchApi: this.config.fetchApi,
+					initiator: this.config.initiator,
+					mode: this.mode,
+					origin: this.config.conversationalSearch?.origin,
+					headers: this.config.conversationalSearch?.headers,
+					cache: this.config.conversationalSearch?.cache,
+					globals: this.config.conversationalSearch?.globals,
+				})
+			),
 			finder: new HybridAPI(
 				new ApiConfiguration({
 					fetchApi: this.config.fetchApi,
@@ -166,6 +182,13 @@ export class Client {
 		params = deepmerge(this.globals, params);
 
 		const [meta, search] = await Promise.all([this.meta({ siteId: params.siteId || '' }), this.requesters.search.getSearch(params)]);
+		return { meta, search };
+	}
+
+	async conversationalSearch(params: SearchRequestModel = {}): Promise<{ meta: MetaResponseModel; search: SearchResponseModel }> {
+		params = deepmerge(this.globals, params);
+
+		const [meta, search] = await Promise.all([this.meta({ siteId: params.siteId || '' }), this.requesters.conversationalSearch.postMessage(params)]);
 		return { meta, search };
 	}
 

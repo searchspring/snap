@@ -72,6 +72,12 @@ export type VariantOptionConfigMappings = {
 	};
 };
 
+// ConversationalSearch Config
+export type ConversationalSearchStoreConfig = StoreConfig & {
+	// globals?: Partial<any>;
+	// settings?: SearchStoreConfigSettings;
+};
+
 // Search Config
 export type SearchStoreConfig = StoreConfig & {
 	globals?: Partial<SearchRequestModel>;

@@ -1,4 +1,11 @@
-import type { AbstractController, AutocompleteController, SearchController, FinderController, RecommendationController } from './index';
+import type {
+	AbstractController,
+	AutocompleteController,
+	SearchController,
+	FinderController,
+	RecommendationController,
+	ConversationalSearchController,
+} from './index';
 import type { EventManager, Middleware } from '@searchspring/snap-event-manager';
 
 import type { Client } from '@searchspring/snap-client';
@@ -12,6 +19,7 @@ import type {
 	FinderStoreConfig,
 	AutocompleteStoreConfig,
 	RecommendationStoreConfig,
+	ConversationalSearchStoreConfig,
 } from '@searchspring/snap-store-mobx';
 import type { Tracker, ProductViewEvent } from '@searchspring/snap-tracker';
 import type { Profiler } from '@searchspring/snap-profiler';
@@ -52,12 +60,13 @@ export type ElementPositionObj = {
 
 export enum ControllerTypes {
 	search = 'search',
+	conversationalSearch = 'conversationalSearch',
 	autocomplete = 'autocomplete',
 	finder = 'finder',
 	recommendation = 'recommendation',
 }
 
-export type Controllers = SearchController | AutocompleteController | FinderController | RecommendationController;
+export type Controllers = SearchController | ConversationalSearchController | AutocompleteController | FinderController | RecommendationController;
 
 export type ControllerServices = {
 	client: Client;
@@ -95,6 +104,8 @@ export type ControllerConfig = StoreConfig & Attachments;
 
 // Search Config
 export type SearchControllerConfig = ControllerConfig & SearchStoreConfig;
+// ConversationalSearch Config
+export type ConversationalSearchControllerConfig = ControllerConfig & ConversationalSearchStoreConfig;
 // Finder Config
 export type FinderControllerConfig = ControllerConfig & FinderStoreConfig;
 // Autocomplete config

@@ -2,6 +2,7 @@ export { AbstractStore } from './Abstract/AbstractStore';
 export { AutocompleteStore } from './Autocomplete/AutocompleteStore';
 export { FinderStore } from './Finder/FinderStore';
 export { SearchStore } from './Search/SearchStore';
+export { ConversationalSearchStore } from './ConversationalSearch/ConversationalSearchStore';
 export * from './Search/Stores/';
 export * from './Autocomplete/Stores/';
 export { RecommendationStore } from './Recommendation/RecommendationStore';

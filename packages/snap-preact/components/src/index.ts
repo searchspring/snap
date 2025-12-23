@@ -63,6 +63,7 @@ export * from './components/Organisms/Sidebar';
 export * from './components/Organisms/Toolbar';
 export * from './components/Organisms/Autocomplete';
 export * from './components/Organisms/TermsList';
+export * from './components/Organisms/ConversationalSearch';
 
 // TEMPLATES
 export * from './components/Templates/Recommendation';

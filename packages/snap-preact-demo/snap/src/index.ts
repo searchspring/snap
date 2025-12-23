@@ -153,6 +153,22 @@ let config: SnapConfig = {
 		},
 	},
 	controllers: {
+		conversationalSearch: [
+			{
+				config: {
+					id: 'conversationalSearch',
+				},
+				targeters: [
+					{
+						selector: '#searchspring-conversational-search',
+						hideTarget: true,
+						component: async () => {
+							return (await import('./components/ConversationalSearch/ConversationalSearch')).ConversationalSearch;
+						},
+					},
+				],
+			},
+		],
 		search: [
 			{
 				config: {
