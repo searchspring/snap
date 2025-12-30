@@ -179,7 +179,6 @@ export class SearchController extends AbstractController {
 			if (redirectURL && config?.settings?.redirects?.merchandising && !search?.response?.filters?.length && !searchStore.loaded) {
 				//set loaded to true to prevent infinite search/reloading from happening
 				searchStore.loaded = true;
-				// @ts-ignore - responseId
 				this.track.redirect({ redirectURL, responseId: search.response.tracking.responseId });
 				window.location.replace(redirectURL);
 				return false;
@@ -482,7 +481,6 @@ export class SearchController extends AbstractController {
 				}
 			},
 			impression: (result: Product | Banner): void => {
-				// @ts-ignore - responseId
 				const responseId = result.responseId;
 				if (this.events[responseId]?.product[result.id]?.impression) {
 					return;
@@ -666,7 +664,6 @@ export class SearchController extends AbstractController {
 
 					// accumulate results from all backfill responses
 					const backfillResults: SearchResponseModelResult[] = backfillResponses.reduce((results, response) => {
-						// @ts-ignore - responseId
 						const responseId = response[1].tracking.responseId;
 						this.events[responseId] = this.events[responseId] || { product: {}, banner: {} };
 						return results.concat(...response[1].results!);
@@ -682,7 +679,6 @@ export class SearchController extends AbstractController {
 					// infinite with no backfills.
 					[meta, response] = await this.client[this.page.type](params);
 
-					// @ts-ignore - responseId
 					const responseId = response.tracking.responseId;
 					this.events[responseId] = this.events[responseId] || { product: {}, banner: {} };
 
@@ -694,7 +690,6 @@ export class SearchController extends AbstractController {
 				// clear previousResults to prevent infinite scroll from using them
 				this.previousResults = [];
 				[meta, response] = await this.client[this.page.type](params);
-				// @ts-ignore - responseId
 				const responseId = response.tracking.responseId;
 				this.events[responseId] = this.events[responseId] || { product: {}, banner: {} };
 			}

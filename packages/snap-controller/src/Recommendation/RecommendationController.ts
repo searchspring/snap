@@ -112,7 +112,7 @@ export class RecommendationController extends AbstractController {
 		product: {
 			clickThrough: (e: MouseEvent, result): void => {
 				const responseId = result.responseId;
-				if (this.events[responseId].product[result.id]?.productClickThrough) return;
+				if (this.events[responseId]?.product[result.id]?.productClickThrough) return;
 				const beaconResult: ClickthroughResultsInner = {
 					type: result.type as ResultProductType,
 					uid: result.id,
@@ -133,7 +133,7 @@ export class RecommendationController extends AbstractController {
 			click: (e: MouseEvent, result): void => {
 				const responseId = result.responseId;
 				if (result.type === 'banner') {
-					if (this.events[responseId].product[result.id]?.inlineBannerClickThrough) {
+					if (this.events[responseId]?.product[result.id]?.inlineBannerClickThrough) {
 						return;
 					}
 					this.track.product.clickThrough(e, result);
@@ -156,7 +156,7 @@ export class RecommendationController extends AbstractController {
 			},
 			impression: (result): void => {
 				const responseId = result.responseId;
-				if (this.events[responseId].product[result.id]?.impression) {
+				if (this.events[responseId]?.product[result.id]?.impression) {
 					return;
 				}
 				const item: ResultsInner = {
