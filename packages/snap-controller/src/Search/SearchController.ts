@@ -180,7 +180,7 @@ export class SearchController extends AbstractController {
 				//set loaded to true to prevent infinite search/reloading from happening
 				searchStore.loaded = true;
 				// @ts-ignore - responseId
-				this.track.redirect({ redirectURL, responseId: search.response.responseId });
+				this.track.redirect({ redirectURL, responseId: search.response.tracking.responseId });
 				window.location.replace(redirectURL);
 				return false;
 			}
@@ -253,7 +253,7 @@ export class SearchController extends AbstractController {
 		this.eventManager.on('afterStore', async (search: AfterStoreObj, next: Next): Promise<void | boolean> => {
 			await next();
 			const controller = search.controller as SearchController;
-			const responseId = search.response.responseId;
+			const responseId = search.response.tracking.responseId;
 			if (controller.store.loaded && !controller.store.error) {
 				if (!search.response._cached) {
 					const data: RenderSchemaData = { responseId };
@@ -618,7 +618,7 @@ export class SearchController extends AbstractController {
 			const searchProfile = this.profiler.create({ type: 'event', name: 'search', context: params }).start();
 
 			let meta: MetaResponseModel = {};
-			let response: SearchResponseModel & { meta?: MetaResponseModel } = {};
+			let response: SearchResponseModel & { meta?: MetaResponseModel };
 
 			// infinite scroll functionality (after page 1)
 			if (this.config.settings?.infinite && params.pagination?.page && params.pagination.page > 1) {
@@ -667,7 +667,7 @@ export class SearchController extends AbstractController {
 					// accumulate results from all backfill responses
 					const backfillResults: SearchResponseModelResult[] = backfillResponses.reduce((results, response) => {
 						// @ts-ignore - responseId
-						const responseId = response[1].responseId;
+						const responseId = response[1].tracking.responseId;
 						this.events[responseId] = this.events[responseId] || { product: {}, banner: {} };
 						return results.concat(...response[1].results!);
 					}, [] as SearchResponseModelResult[]);
@@ -683,7 +683,7 @@ export class SearchController extends AbstractController {
 					[meta, response] = await this.client[this.page.type](params);
 
 					// @ts-ignore - responseId
-					const responseId = response.responseId;
+					const responseId = response.tracking.responseId;
 					this.events[responseId] = this.events[responseId] || { product: {}, banner: {} };
 
 					// append new results to previous results
@@ -695,7 +695,7 @@ export class SearchController extends AbstractController {
 				this.previousResults = [];
 				[meta, response] = await this.client[this.page.type](params);
 				// @ts-ignore - responseId
-				const responseId = response.responseId;
+				const responseId = response.tracking.responseId;
 				this.events[responseId] = this.events[responseId] || { product: {}, banner: {} };
 			}
 

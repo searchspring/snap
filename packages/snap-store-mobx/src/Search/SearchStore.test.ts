@@ -30,7 +30,7 @@ describe('Search Store', () => {
 		expect(searchStore.meta.data).toStrictEqual({});
 
 		expect(searchStore.merchandising).toBeDefined();
-		expect(searchStore.merchandising).toEqual({ redirect: '', personalized: false, experiments: [], content: {}, campaigns: [] });
+		expect(searchStore.merchandising).toEqual({ redirect: '', personalized: false, experiments: [], content: {}, campaigns: [], responseId: '' });
 
 		expect(searchStore.search).toBeDefined();
 		expect(searchStore.search).toEqual({ query: undefined });
@@ -62,7 +62,7 @@ describe('Search Store', () => {
 		expect(searchStore.search?.query).toStrictEqual(searchData.search?.query);
 
 		expect(searchStore.merchandising).toBeDefined();
-		expect(searchStore.merchandising).toEqual(searchData.merchandising);
+		expect(searchStore.merchandising).toEqual({ ...searchData.merchandising, responseId: searchData.tracking.responseId });
 
 		expect(searchStore.facets).toHaveLength(searchData.facets?.length!);
 

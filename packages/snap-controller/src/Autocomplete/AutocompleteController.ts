@@ -6,13 +6,11 @@ import { getSearchParams } from '../utils/getParams';
 import { ControllerTypes } from '../types';
 
 import { AutocompleteStore } from '@searchspring/snap-store-mobx';
-import { INPUT_PARAM, SOURCE_PARAM } from '@searchspring/snap-client';
 import type { AutocompleteControllerConfig, AutocompleteAfterSearchObj, AfterStoreObj, ControllerServices, ContextVariables } from '../types';
 import type { Next } from '@searchspring/snap-event-manager';
-import type { AutocompleteRequestModel } from '@searchspring/snapi-types';
+import type { AutocompleteRequestModel, AutocompleteRequestModelSearchSourceEnum } from '@searchspring/snapi-types';
 import type {
 	Product as BeaconProduct,
-	BannersInner,
 	ResultsInner,
 	ResultProductType,
 	RenderSchemaData,
@@ -127,7 +125,7 @@ export class AutocompleteController extends AbstractController {
 		this.eventManager.on('afterStore', async (search: AfterStoreObj, next: Next): Promise<void | boolean> => {
 			await next();
 			const controller = search.controller as AutocompleteController;
-			const responseId = search.response.responseId;
+			const responseId = search.response.tracking.responseId;
 			if (controller.store.loaded && !controller.store.error) {
 				if (!search.response._cached) {
 					const data: RenderSchemaData = { responseId };
@@ -177,11 +175,12 @@ export class AutocompleteController extends AbstractController {
 
 	track: AutocompleteTrackMethods = {
 		banner: {
-			impression: ({ uid, responseId }): void => {
+			impression: (banner): void => {
+				const { responseId, uid } = banner;
 				if (this.events[responseId]?.banner?.[uid]?.impression) {
 					return;
 				}
-				const banner: BannersInner = { uid };
+
 				const data: ImpressionSchemaData = {
 					responseId,
 					banners: [banner],
@@ -332,6 +331,16 @@ export class AutocompleteController extends AbstractController {
 		}
 		if (pageLoadId) {
 			params.tracking!.pageLoadId = pageLoadId;
+		}
+
+		if (this.store.state.input) {
+			params.search = params.search || {};
+			params.search.input = this.store.state.input;
+		}
+
+		if (this.store.state.source) {
+			params.search = params.search || {};
+			params.search.source = this.store.state.source;
 		}
 
 		if (!this.config.globals?.personalization?.disabled) {
@@ -538,7 +547,7 @@ export class AutocompleteController extends AbstractController {
 					return;
 				}
 
-				this.store.state.source = 'typed'; // TODO: create a shared type for this
+				this.store.state.source = 'typed' as AutocompleteRequestModelSearchSourceEnum;
 				this.store.state.input = value;
 
 				// remove merch redirect to prevent race condition
@@ -728,10 +737,6 @@ export class AutocompleteController extends AbstractController {
 			}
 
 			const params = this.params;
-			// @ts-ignore - AutocompleteRequestModel to be updated
-			params[INPUT_PARAM] = this.store.state.input;
-			// @ts-ignore - AutocompleteRequestModel to be updated
-			params[SOURCE_PARAM] = this.store.state.source;
 
 			// if params have no query do not search
 			if (!params?.search?.query?.string) {
@@ -769,8 +774,7 @@ export class AutocompleteController extends AbstractController {
 			searchProfile.stop();
 			this.log.profile(searchProfile);
 
-			// @ts-ignore - responseId
-			const responseId = response.responseId;
+			const responseId = response.tracking.responseId;
 			this.events[responseId] = this.events[responseId] || { product: {}, banner: {} };
 
 			if (response.search?.query === this.lastSearchQuery) {

@@ -2,6 +2,7 @@ import type { TrendingResponseModel } from '@searchspring/snap-client';
 import type { StoreServices } from '../../types';
 import type { AutocompleteStateStore } from './AutocompleteStateStore';
 import { Term } from './AutocompleteTermStore';
+import { AutocompleteRequestModelSearchSourceEnum } from '@searchspring/snapi-types';
 
 export class AutocompleteTrendingStore extends Array<Term> {
 	static get [Symbol.species](): ArrayConstructor {
@@ -22,7 +23,7 @@ export class AutocompleteTrendingStore extends Array<Term> {
 					terms,
 					resetTerms,
 					rootState,
-					'popular'
+					'popular' as AutocompleteRequestModelSearchSourceEnum
 				)
 			);
 		});

@@ -18,7 +18,7 @@ const searchConfig = {
 };
 
 describe('SearchResultStore', () => {
-	const responseId = 'responseId-mock';
+	const tracking = { responseId: 'responseId-mock' };
 	beforeEach(() => {
 		expect.hasAssertions();
 	});
@@ -35,7 +35,7 @@ describe('SearchResultStore', () => {
 	});
 
 	it('returns an empty array when passed an empty array [] of results', () => {
-		const results = new SearchResultStore(searchConfig, services, {}, responseId, [], undefined, undefined);
+		const results = new SearchResultStore(searchConfig, services, {}, tracking, [], undefined, undefined);
 
 		expect(results.length).toBe(0);
 	});
@@ -43,15 +43,7 @@ describe('SearchResultStore', () => {
 	it('returns an array the same length as the results passed in', () => {
 		const searchData = mockData.searchMeta();
 
-		const results = new SearchResultStore(
-			searchConfig,
-			services,
-			{},
-			responseId,
-			searchData.results,
-			searchData.pagination,
-			searchData.merchandising
-		);
+		const results = new SearchResultStore(searchConfig, services, {}, tracking, searchData.results, searchData.pagination, searchData.merchandising);
 
 		expect(results.length).toBe(searchData.results?.length);
 	});
@@ -59,15 +51,7 @@ describe('SearchResultStore', () => {
 	it('has result data that matches what was passed in', () => {
 		const searchData = mockData.searchMeta();
 
-		const results = new SearchResultStore(
-			searchConfig,
-			services,
-			{},
-			responseId,
-			searchData.results,
-			searchData.pagination,
-			searchData.merchandising
-		);
+		const results = new SearchResultStore(searchConfig, services, {}, tracking, searchData.results, searchData.pagination, searchData.merchandising);
 
 		results.forEach((result, index) => {
 			// check id
@@ -87,7 +71,7 @@ describe('SearchResultStore', () => {
 				expect(result.attributes[key]).toStrictEqual(value);
 			});
 
-			expect(result.responseId).toBe(responseId);
+			expect(result.responseId).toBe(tracking.responseId);
 		});
 	});
 
@@ -103,7 +87,7 @@ describe('SearchResultStore', () => {
 			infiniteConfig,
 			services,
 			{},
-			responseId,
+			tracking,
 			dataPage1.results,
 			dataPage1.pagination,
 			dataPage1.merchandising,
@@ -119,7 +103,7 @@ describe('SearchResultStore', () => {
 			infiniteConfig,
 			services,
 			{},
-			responseId,
+			tracking,
 			dataPage2.results,
 			dataPage2.pagination,
 			dataPage2.merchandising,
@@ -135,7 +119,7 @@ describe('SearchResultStore', () => {
 			infiniteConfig,
 			services,
 			{},
-			responseId,
+			tracking,
 			dataPage3.results,
 			dataPage3.pagination,
 			dataPage3.merchandising,
@@ -181,7 +165,7 @@ describe('SearchResultStore', () => {
 			infiniteConfig,
 			services,
 			{},
-			responseId,
+			tracking,
 			dataPage1.results,
 			dataPage1.pagination,
 			dataPage1.merchandising,
@@ -198,7 +182,7 @@ describe('SearchResultStore', () => {
 			infiniteConfig,
 			services,
 			{},
-			responseId,
+			tracking,
 			dataPage3.results,
 			dataPage3.pagination,
 			dataPage3.merchandising,
@@ -245,7 +229,7 @@ describe('SearchResultStore', () => {
 			infiniteConfig,
 			services,
 			{},
-			responseId,
+			tracking,
 			dataPage1.results,
 			dataPage1.pagination,
 			dataPage1.merchandising,
@@ -262,7 +246,7 @@ describe('SearchResultStore', () => {
 			infiniteConfig,
 			services,
 			{},
-			responseId,
+			tracking,
 			dataPage2.results,
 			dataPage2.pagination,
 			dataPage2.merchandising,
@@ -354,7 +338,7 @@ describe('SearchResultStore', () => {
 				searchConfig,
 				services,
 				searchData.meta,
-				responseId,
+				tracking,
 				searchData.results,
 				searchData.pagination,
 				searchData.merchandising
@@ -405,7 +389,7 @@ describe('SearchResultStore', () => {
 				searchConfig,
 				services,
 				searchData.meta,
-				responseId,
+				tracking,
 				searchData.results,
 				searchData.pagination,
 				searchData.merchandising
@@ -438,7 +422,7 @@ describe('SearchResultStore', () => {
 				variantSearchConfig,
 				services,
 				searchData.meta,
-				responseId,
+				tracking,
 				searchData.results,
 				searchData.pagination,
 				searchData.merchandising
@@ -474,7 +458,7 @@ describe('SearchResultStore', () => {
 				variantSearchConfig,
 				services,
 				searchData.meta,
-				responseId,
+				tracking,
 				searchData.results,
 				searchData.pagination,
 				searchData.merchandising
@@ -528,7 +512,7 @@ describe('SearchResultStore', () => {
 				variantSearchConfig,
 				services,
 				searchData.meta,
-				responseId,
+				tracking,
 				searchData.results,
 				searchData.pagination,
 				searchData.merchandising
@@ -573,7 +557,7 @@ describe('SearchResultStore', () => {
 				variantSearchConfig,
 				services,
 				searchData.meta,
-				responseId,
+				tracking,
 				searchData.results,
 				searchData.pagination,
 				searchData.merchandising
@@ -621,7 +605,7 @@ describe('SearchResultStore', () => {
 				variantSearchConfig,
 				services,
 				searchData.meta,
-				responseId,
+				tracking,
 				searchData.results,
 				searchData.pagination,
 				searchData.merchandising
@@ -698,7 +682,7 @@ describe('SearchResultStore', () => {
 				variantSearchConfig,
 				services,
 				searchData.meta,
-				responseId,
+				tracking,
 				searchData.results,
 				searchData.pagination,
 				searchData.merchandising
@@ -825,7 +809,7 @@ describe('SearchResultStore', () => {
 				variantSearchConfig,
 				services,
 				searchData.meta,
-				responseId,
+				tracking,
 				searchData.results,
 				searchData.pagination,
 				searchData.merchandising
@@ -869,7 +853,7 @@ describe('SearchResultStore', () => {
 				variantSearchConfig,
 				services,
 				searchData.meta,
-				responseId,
+				tracking,
 				searchData.results,
 				searchData.pagination,
 				searchData.merchandising
@@ -923,7 +907,7 @@ describe('SearchResultStore', () => {
 				variantSearchConfig,
 				services,
 				searchData.meta,
-				responseId,
+				tracking,
 				searchData.results,
 				searchData.pagination,
 				searchData.merchandising
@@ -976,7 +960,7 @@ describe('SearchResultStore', () => {
 				variantSearchConfig,
 				services,
 				searchData.meta,
-				responseId,
+				tracking,
 				searchData.results,
 				searchData.pagination,
 				searchData.merchandising
@@ -1032,7 +1016,7 @@ describe('SearchResultStore', () => {
 				variantSearchConfig,
 				services,
 				searchData.meta,
-				responseId,
+				tracking,
 				searchData.results,
 				searchData.pagination,
 				searchData.merchandising
@@ -1084,7 +1068,7 @@ describe('SearchResultStore', () => {
 				variantSearchConfig,
 				services,
 				searchData.meta,
-				responseId,
+				tracking,
 				searchData.results,
 				searchData.pagination,
 				searchData.merchandising
@@ -1131,7 +1115,7 @@ describe('SearchResultStore', () => {
 				variantSearchConfig,
 				services,
 				searchData.meta,
-				responseId,
+				tracking,
 				searchData.results,
 				searchData.pagination,
 				searchData.merchandising
@@ -1642,7 +1626,7 @@ describe('SearchResultStore', () => {
 				searchConfig,
 				services,
 				{},
-				responseId,
+				tracking,
 				searchData.results,
 				searchData.pagination,
 				searchData.merchandising
@@ -1659,7 +1643,7 @@ describe('SearchResultStore', () => {
 				searchConfig,
 				services,
 				{},
-				responseId,
+				tracking,
 				searchData.results,
 				searchData.pagination,
 				searchData.merchandising
@@ -1680,7 +1664,7 @@ describe('SearchResultStore', () => {
 				searchConfig,
 				services,
 				{},
-				responseId,
+				tracking,
 				searchData.results,
 				searchData.pagination,
 				searchData.merchandising
@@ -1699,7 +1683,7 @@ describe('SearchResultStore', () => {
 				searchConfig,
 				services,
 				{},
-				responseId,
+				tracking,
 				searchData.results,
 				searchData.pagination,
 				searchData.merchandising
@@ -1763,7 +1747,7 @@ describe('SearchResultStore', () => {
 				searchConfig,
 				services,
 				{},
-				responseId,
+				tracking,
 				searchData.results,
 				searchData.pagination,
 				searchData.merchandising
@@ -1823,7 +1807,7 @@ describe('SearchResultStore', () => {
 				searchConfig,
 				services,
 				{},
-				responseId,
+				tracking,
 				searchData.results,
 				searchData.pagination,
 				searchData.merchandising
@@ -1843,7 +1827,7 @@ describe('SearchResultStore', () => {
 				searchConfig,
 				services,
 				searchData.meta,
-				responseId,
+				tracking,
 				searchData.results,
 				searchData.pagination,
 				searchData.merchandising
@@ -1888,7 +1872,7 @@ describe('SearchResultStore', () => {
 				searchConfig,
 				services,
 				searchData.meta,
-				responseId,
+				tracking,
 				searchData.results,
 				searchData.pagination,
 				searchData.merchandising
@@ -1935,7 +1919,7 @@ describe('SearchResultStore', () => {
 				searchConfig,
 				services,
 				searchData.meta,
-				responseId,
+				tracking,
 				searchData.results,
 				searchData.pagination,
 				searchData.merchandising
@@ -1972,7 +1956,7 @@ describe('SearchResultStore', () => {
 				searchConfig,
 				services,
 				searchData.meta,
-				responseId,
+				tracking,
 				searchData.results,
 				searchData.pagination,
 				searchData.merchandising

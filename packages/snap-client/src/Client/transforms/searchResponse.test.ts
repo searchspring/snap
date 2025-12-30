@@ -306,6 +306,7 @@ describe('search response transformer', () => {
 		const pagination = jest.spyOn(transformSearchResponse, 'pagination');
 		const merchandising = jest.spyOn(transformSearchResponse, 'merchandising');
 		const search = jest.spyOn(transformSearchResponse, 'search');
+		const tracking = jest.spyOn(transformSearchResponse, 'tracking');
 
 		transformSearchResponse(mockResponse, mockRequest);
 
@@ -315,6 +316,7 @@ describe('search response transformer', () => {
 		expect(pagination).toHaveBeenCalled();
 		expect(merchandising).toHaveBeenCalled();
 		expect(search).toHaveBeenCalled();
+		expect(tracking).toHaveBeenCalled();
 
 		expect(results.mock.calls[0][0]).toEqual(mockResponse);
 		expect(filters.mock.calls[0][0]).toEqual(mockResponse);
@@ -336,6 +338,22 @@ describe('search response transformer', () => {
 		pagination.mockRestore();
 		merchandising.mockRestore();
 		search.mockRestore();
+	});
+});
+
+describe('search response transformer tracking', () => {
+	it('transforms pagination', () => {
+		const response = transformSearchResponse.tracking({
+			responseId: 'mock-response-id',
+		} as searchResponseType);
+
+		expect(response.tracking.responseId).toEqual('mock-response-id');
+	});
+
+	it('still returns object if passed undefined', () => {
+		// @ts-ignore
+		expect(typeof transformSearchResponse.pagination().pagination).toEqual('object');
+		expect(typeof transformSearchResponse.pagination({} as searchResponseType).pagination).toEqual('object');
 	});
 });
 

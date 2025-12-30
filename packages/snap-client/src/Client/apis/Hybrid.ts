@@ -11,7 +11,7 @@ import {
 } from '@searchspring/snapi-types';
 
 import { API, ApiConfigurationParameters, LegacyAPI, SuggestAPI, ApiConfiguration } from '.';
-import { INPUT_PARAM, SOURCE_PARAM, transformSearchRequest, transformSearchResponse, transformSuggestResponse } from '../transforms';
+import { transformSearchRequest, transformSearchResponse, transformSuggestResponse } from '../transforms';
 import type { SuggestRequestModel, HybridRequesterConfig } from '../../types';
 export const DEVELOPMENT_MODE_PARAM = 'test';
 
@@ -134,18 +134,6 @@ export class HybridAPI extends API {
 		// modify the original request parameter for the transform
 		if (requestParameters.search?.query?.string) {
 			requestParameters.search.query.string = q;
-		}
-
-		// @ts-ignore - AutocompleteRequestModel to be updated
-		if (requestParameters[INPUT_PARAM]) {
-			// @ts-ignore - AutocompleteRequestModel to be updated
-			queryParameters[INPUT_PARAM] = requestParameters[INPUT_PARAM];
-		}
-
-		// @ts-ignore - AutocompleteRequestModel to be updated
-		if (requestParameters[SOURCE_PARAM]) {
-			// @ts-ignore - AutocompleteRequestModel to be updated
-			queryParameters[SOURCE_PARAM] = requestParameters[SOURCE_PARAM];
 		}
 
 		const legacyResults = await this.requesters.legacy.getAutocomplete(queryParameters);

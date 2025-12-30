@@ -2,7 +2,12 @@ import { observable, makeObservable } from 'mobx';
 import type { UrlManager } from '@searchspring/snap-url-manager';
 import type { AutocompleteStateStore } from './AutocompleteStateStore';
 import type { AutocompleteStoreConfig, StoreServices } from '../../types';
-import type { AutocompleteResponseModelAllOfAutocomplete, SearchResponseModelPagination, SearchResponseModelSearch } from '@searchspring/snapi-types';
+import type {
+	AutocompleteRequestModelSearchSourceEnum,
+	AutocompleteResponseModelAllOfAutocomplete,
+	SearchResponseModelPagination,
+	SearchResponseModelSearch,
+} from '@searchspring/snapi-types';
 
 export class AutocompleteTermStore extends Array<Term> {
 	static get [Symbol.species](): ArrayConstructor {
@@ -53,7 +58,7 @@ export class AutocompleteTermStore extends Array<Term> {
 					terms,
 					resetTerms,
 					rootState,
-					'suggestion'
+					'suggested' as AutocompleteRequestModelSearchSourceEnum
 				)
 			)
 		);
@@ -67,7 +72,7 @@ export class Term {
 	public value: string;
 	public preview: () => void;
 	public url: UrlManager;
-	public type: 'popular' | 'historical' | 'suggestion' | 'typed';
+	public type: AutocompleteRequestModelSearchSourceEnum;
 
 	constructor(
 		services: StoreServices,
@@ -75,7 +80,7 @@ export class Term {
 		terms: Term[],
 		resetTerms: () => void,
 		rootState: AutocompleteStateStore,
-		type: 'popular' | 'historical' | 'suggestion' | 'typed'
+		type: AutocompleteRequestModelSearchSourceEnum
 	) {
 		this.active = term.active;
 		this.value = term.value;

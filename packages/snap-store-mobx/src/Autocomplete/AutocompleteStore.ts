@@ -20,7 +20,7 @@ import {
 	AutocompleteHistoryStore,
 } from './Stores';
 
-import type { AutocompleteResponseModel, MetaResponseModel } from '@searchspring/snapi-types';
+import type { AutocompleteResponseModel, MetaResponseModel, SearchResponseModelTracking } from '@searchspring/snapi-types';
 import type { TrendingResponseModel } from '@searchspring/snap-client';
 import type { AutocompleteStoreConfig, StoreServices } from '../types';
 import { MetaStore } from '../Meta/MetaStore';
@@ -135,8 +135,8 @@ export class AutocompleteStore extends AbstractStore {
 		);
 	}
 
-	public update(data: AutocompleteResponseModel & { meta?: MetaResponseModel; responseId?: string } = {}): void {
-		if (!data) return;
+	public update(data?: AutocompleteResponseModel & { meta?: MetaResponseModel; tracking?: SearchResponseModelTracking }): void {
+		if (!data) data = { tracking: { responseId: '' } }; // tracking is required
 		this.error = undefined;
 		this.meta = new MetaStore(data.meta);
 
@@ -163,7 +163,7 @@ export class AutocompleteStore extends AbstractStore {
 			data.autocomplete && this.state.locks.terms.lock();
 		}
 
-		this.merchandising = new SearchMerchandisingStore(this.services, data.merchandising || {}, data.responseId!);
+		this.merchandising = new SearchMerchandisingStore(this.services, data.merchandising || {}, data.tracking || {});
 
 		this.search = new AutocompleteQueryStore(this.services, data.autocomplete || {}, data.search || {}, this.config as AutocompleteStoreConfig);
 
@@ -186,7 +186,7 @@ export class AutocompleteStore extends AbstractStore {
 			this.config,
 			this.services,
 			this.meta.data,
-			data.responseId!,
+			data.tracking,
 			data.results || [],
 			data.pagination,
 			data.merchandising,

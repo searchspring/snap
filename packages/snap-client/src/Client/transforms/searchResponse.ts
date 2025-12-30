@@ -9,6 +9,7 @@ import {
 	SearchResponseModelSearchMatchTypeEnum,
 	SearchResponseModelMerchandising,
 	SearchResponseModelResultBadges,
+	AutocompleteRequestModel,
 } from '@searchspring/snapi-types';
 
 // TODO: Add all core fields
@@ -167,8 +168,8 @@ class Result implements SearchResponseModelResult {
 	}
 }
 
-export function transformSearchResponse(response: searchResponseType, request: SearchRequestModel) {
-	response.responseId = response.responseId || `responseId-${JSON.stringify(request).length}`;
+export function transformSearchResponse(response: searchResponseType, request: SearchRequestModel | AutocompleteRequestModel) {
+	response.responseId = response.responseId;
 	return {
 		// @ts-ignore - temporary to be removed when auto beaconing is implemented
 		_cached: response._cached ?? false,
@@ -180,6 +181,7 @@ export function transformSearchResponse(response: searchResponseType, request: S
 		...transformSearchResponse.sorting(response),
 		...transformSearchResponse.merchandising(response),
 		...transformSearchResponse.search(response, request),
+		...transformSearchResponse.tracking(response),
 	};
 }
 
@@ -285,7 +287,7 @@ transformSearchResponse.filters = (response: searchResponseType): any => {
 	};
 };
 
-transformSearchResponse.facets = (response: searchResponseType, request: SearchRequestModel = {}) => {
+transformSearchResponse.facets = (response: searchResponseType, request: SearchRequestModel | AutocompleteRequestModel = {}) => {
 	const filters = request.filters || [];
 	const facets = response?.facets || [];
 	const limit = request?.facets?.limit;
@@ -440,7 +442,7 @@ transformSearchResponse.merchandising = (response: searchResponseType) => {
 	};
 };
 
-transformSearchResponse.search = (response: searchResponseType, request: SearchRequestModel) => {
+transformSearchResponse.search = (response: searchResponseType, request: SearchRequestModel | AutocompleteRequestModel) => {
 	const searchObj: {
 		search: {
 			query?: string;
@@ -466,6 +468,20 @@ transformSearchResponse.search = (response: searchResponseType, request: SearchR
 	}
 
 	return searchObj;
+};
+
+transformSearchResponse.tracking = (response: searchResponseType) => {
+	const trackingObj: {
+		tracking: {
+			responseId: string;
+		};
+	} = {
+		tracking: {
+			responseId: response.responseId,
+		},
+	};
+
+	return trackingObj;
 };
 
 // used for HTML entities decoding

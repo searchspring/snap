@@ -8,7 +8,6 @@ const services = {
 };
 
 const mockData = new MockData();
-const responseId = 'responseId-mock';
 
 describe('Merchandising Store', () => {
 	const emptyMerchStore = { redirect: '', personalized: false, experiments: [], content: {}, campaigns: [], responseId: '' };
@@ -19,20 +18,20 @@ describe('Merchandising Store', () => {
 		expect(merchStore).toEqual(emptyMerchStore);
 
 		// @ts-ignore
-		merchStore = new SearchMerchandisingStore(services, undefined, responseId);
+		merchStore = new SearchMerchandisingStore(services, undefined, { responseId: '' });
 		expect(merchStore).toEqual(emptyMerchStore);
 
 		// @ts-ignore
 		merchStore = new SearchMerchandisingStore(undefined, {}, undefined);
-		expect(merchStore).toEqual({ ...emptyMerchStore, responseId: undefined });
+		expect(merchStore).toEqual({ ...emptyMerchStore, responseId: '' });
 
-		merchStore = new SearchMerchandisingStore(services, {}, responseId);
-		expect(merchStore).toEqual({ ...emptyMerchStore, responseId });
+		merchStore = new SearchMerchandisingStore(services, {}, { responseId: '' });
+		expect(merchStore).toEqual({ ...emptyMerchStore, responseId: '' });
 	});
 
 	it('has banner content', () => {
 		const data = mockData.searchMeta('merchandising');
-		const merchStore = new SearchMerchandisingStore(services, data.merchandising!, responseId);
+		const merchStore = new SearchMerchandisingStore(services, data.merchandising!, data.tracking);
 
 		const expectedContent = Object.entries(data.merchandising?.content!).reduce((acc, [type, value]) => {
 			const htmlString = value[0] || '';
@@ -43,7 +42,7 @@ describe('Merchandising Store', () => {
 				{
 					value,
 					uid,
-					responseId,
+					responseId: data.tracking.responseId,
 				},
 			];
 			return acc;
@@ -54,7 +53,7 @@ describe('Merchandising Store', () => {
 
 	it('has more banner content', () => {
 		const data = mockData.updateConfig({ siteId: 'ga9kq2' }).searchMeta('merchandising_page1');
-		const merchStore = new SearchMerchandisingStore(services, data.merchandising!, responseId);
+		const merchStore = new SearchMerchandisingStore(services, data.merchandising!, data.tracking);
 
 		const expectedContent = Object.entries(data.merchandising?.content!).reduce((acc, [type, value]) => {
 			const htmlString = value[0] || '';
@@ -65,7 +64,7 @@ describe('Merchandising Store', () => {
 				{
 					value,
 					uid,
-					responseId,
+					responseId: data.tracking.responseId,
 				},
 			];
 			return acc;
@@ -76,26 +75,26 @@ describe('Merchandising Store', () => {
 
 	it('has redirect', () => {
 		const data = mockData.resetConfig().searchMeta('redirect');
-		const merchStore = new SearchMerchandisingStore(services, data.merchandising!, responseId);
+		const merchStore = new SearchMerchandisingStore(services, data.merchandising!, data.tracking);
 		expect(merchStore.redirect).toEqual(data.merchandising?.redirect);
 	});
 
 	it('has campaigns', () => {
 		const data = mockData.updateConfig({ siteId: 'ga9kq2' }).searchMeta('merchandising_page1');
-		const merchStore = new SearchMerchandisingStore(services, data.merchandising!, responseId);
+		const merchStore = new SearchMerchandisingStore(services, data.merchandising!, data.tracking);
 		expect(merchStore.campaigns).toEqual(data.merchandising?.campaigns);
 	});
 
 	it('has personalized bool', () => {
 		const data = mockData.updateConfig({ siteId: 'ga9kq2' }).searchMeta('merchandising_page1');
-		const merchStore = new SearchMerchandisingStore(services, data.merchandising!, responseId);
+		const merchStore = new SearchMerchandisingStore(services, data.merchandising!, data.tracking);
 		expect(merchStore.personalized).toEqual(data.merchandising?.personalized);
 	});
 
 	it('updates landingPage when landing page is found', () => {
 		const data = mockData.updateConfig({ siteId: 'ga9kq2', search: 'landingPage' }).searchMeta();
 
-		const merchStore = new SearchMerchandisingStore(services, data.merchandising!, responseId);
+		const merchStore = new SearchMerchandisingStore(services, data.merchandising!, data.tracking);
 
 		expect(merchStore.campaigns).toBeDefined();
 		expect(merchStore.campaigns).toEqual(data.merchandising?.campaigns);

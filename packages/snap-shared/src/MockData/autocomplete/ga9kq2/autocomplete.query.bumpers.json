@@ -1,652 +1,619 @@
 {
-    "autocomplete": {
-      "query": "bumpers",
-      "suggested": {
-        "text": "bumpers",
-        "type": "exact",
-        "source": "popular-query"
+  "autocomplete": {
+    "query": "bumpers",
+    "suggested": {
+      "text": "bumpers",
+      "type": "exact",
+      "source": "popular-query"
+    },
+    "alternatives": [
+      {
+        "text": "ranch hand bumpers"
       },
-      "alternatives": [
+      {
+        "text": "jk bumpers"
+      },
+      {
+        "text": "smittybilt bumpers"
+      }
+    ]
+  },
+  "search": {
+    "query": "bumpers"
+  },
+  "pagination": {
+    "totalResults": 1837,
+    "page": 1,
+    "pageSize": 6
+  },
+  "sorting": [],
+  "results": [
+    {
+      "id": "143077",
+      "mappings": {
+        "core": {
+          "uid": "143077",
+          "price": 191.97,
+          "msrp": 211.17,
+          "url": "https://www.bbwheelsonline.com/smittybilt-jb44-r-rear-bumper-w-o-hitch-black-jeep-wrangler-wrangler-unlimited/",
+          "thumbnailImageUrl": "https://cdn11.bigcommerce.com/s-1gfd17pa/products/143077/images/254177/JB44-R-SMB__94360.1551415678.200.190.jpg?c=2",
+          "imageUrl": "https://cdn11.bigcommerce.com/s-1gfd17pa/products/143077/images/254177/JB44-R-SMB__94360.1551415678.200.190.jpg?c=2",
+          "name": "Smittybilt | JB44-R | Rear Bumper w/o Hitch - Black | Jeep Wrangler, Wrangler Unlimited",
+          "sku": "DSBP JB44-R",
+          "brand": "Smittybilt"
+        }
+      },
+      "attributes": {
+        "intellisuggestData": "eJxLT7TMLjRiYEgqzS1ILSpmcAl2ClDwcjIx0Q1iMARCMwZDC2NzhvSizBQAAkAK2w",
+        "intellisuggestSignature": "4215c7e76918e7dfb0e6b5b4ba4f534bab8ca051c02b32323cd960dca90c6db0",
+        "reviews_product_score": "4.85714",
+        "reviews_total_reviews": "14",
+        "ss_boosting_rule": "21",
+        "option_set_id": "184",
+        "categories": ["Accessories", "Accessories By Brand", "SMITTYBILT", "Bumper", "Bumpers - Guards &amp; Grills"],
+        "reviews_rating_sum": "0",
+        "reviews_count": "0",
+        "rating": "4.85714",
+        "product_type_unigram": "bumper",
+        "ratingCount": "14",
+        "id": "ae33356ff41a4dba1ad46d165b034586"
+      }
+    },
+    {
+      "id": "143072",
+      "mappings": {
+        "core": {
+          "uid": "143072",
+          "price": 199.97,
+          "msrp": 219.97,
+          "url": "https://www.bbwheelsonline.com/smittybilt-jb44-rt-rear-bumper-w-o-hitch-black-texture-jeep-wrangler-wrangler-unlimited/",
+          "thumbnailImageUrl": "https://cdn11.bigcommerce.com/s-1gfd17pa/products/143072/images/254184/JB44-RT-SMB__22099.1551415696.200.190.jpg?c=2",
+          "imageUrl": "https://cdn11.bigcommerce.com/s-1gfd17pa/products/143072/images/254184/JB44-RT-SMB__22099.1551415696.200.190.jpg?c=2",
+          "name": "Smittybilt | JB44-RT | Rear Bumper w/o Hitch - Black Texture | Jeep Wrangler, Wrangler Unlimited",
+          "sku": "DSBP JB44-RT",
+          "brand": "Smittybilt"
+        }
+      },
+      "attributes": {
+        "intellisuggestData": "eJxLT7TMLjRiYEgqzS1ILSpmcAl2ClDwcjIx0Q0KYTBkMGIwYzC0MDZnSC_KTAEAD6sLMA",
+        "intellisuggestSignature": "69c15b2efe498cf7bbd03d96c991d0b0ef56ef8239243aae4fa9650df4d69c9c",
+        "reviews_product_score": "4.85714",
+        "reviews_total_reviews": "14",
+        "ss_boosting_rule": "21",
+        "option_set_id": "184",
+        "categories": ["Accessories", "Accessories By Brand", "SMITTYBILT", "Bumper", "Bumpers - Guards &amp; Grills"],
+        "reviews_rating_sum": "0",
+        "reviews_count": "0",
+        "rating": "4.85714",
+        "product_type_unigram": "bumper",
+        "ratingCount": "14",
+        "id": "f069ca26f26e943cca979733994c7471"
+      }
+    },
+    {
+      "id": "143063",
+      "mappings": {
+        "core": {
+          "uid": "143063",
+          "price": 199.97,
+          "msrp": 219.97,
+          "url": "https://www.bbwheelsonline.com/smittybilt-jb48-rt-rear-bumper-w-o-hitch-black-texture-jeep-wrangler-wrangler-unlimited/",
+          "thumbnailImageUrl": "https://cdn11.bigcommerce.com/s-1gfd17pa/products/143063/images/254194/JB48-RT-SMB__85104.1551415728.200.190.jpg?c=2",
+          "imageUrl": "https://cdn11.bigcommerce.com/s-1gfd17pa/products/143063/images/254194/JB48-RT-SMB__85104.1551415728.200.190.jpg?c=2",
+          "name": "Smittybilt | JB48-RT | Rear Bumper w/o Hitch - Black Texture | Jeep Wrangler, Wrangler Unlimited",
+          "sku": "DSBP JB48-RT",
+          "brand": "Smittybilt"
+        }
+      },
+      "attributes": {
+        "intellisuggestData": "eJxLT7TMLjRiYEgqzS1ILSpmcAl2ClDwcjKx0A0KYTBkMGYwYzC0MDZnSC_KTAEAEAgLNQ",
+        "intellisuggestSignature": "d4c37b4c61abebd4b2b4579a1fcff540260311d767e0b9cbd273e6037dc352ba",
+        "reviews_product_score": "4.85714",
+        "reviews_total_reviews": "14",
+        "ss_boosting_rule": "21",
+        "option_set_id": "184",
+        "categories": ["Accessories", "Accessories By Brand", "SMITTYBILT", "Bumper", "Bumpers - Guards &amp; Grills"],
+        "reviews_rating_sum": "0",
+        "reviews_count": "0",
+        "rating": "4.85714",
+        "product_type_unigram": "bumper",
+        "ratingCount": "14",
+        "id": "b07de0a6b55d113194a79328e310fbda"
+      }
+    },
+    {
+      "id": "143032",
+      "mappings": {
+        "core": {
+          "uid": "143032",
+          "price": 177.97,
+          "msrp": 195.77,
+          "url": "https://www.bbwheelsonline.com/smittybilt-rb01-t-rear-bumper-w-o-hitch-black-textured-jeep-wrangler/",
+          "thumbnailImageUrl": "https://cdn11.bigcommerce.com/s-1gfd17pa/products/143032/images/254241/RB01-T-SMB__66440.1551415828.200.190.jpg?c=2",
+          "imageUrl": "https://cdn11.bigcommerce.com/s-1gfd17pa/products/143032/images/254241/RB01-T-SMB__66440.1551415828.200.190.jpg?c=2",
+          "name": "Smittybilt | RB01-T | Rear Bumper w/o Hitch - Black Textured | Jeep Wrangler",
+          "sku": "DSBP RB01-T",
+          "brand": "Smittybilt"
+        }
+      },
+      "attributes": {
+        "intellisuggestData": "eJxLT7TMLjRiYEgqzS1ILSpmcAl2ClAIcjIw1A1hMGQwYTBjMLQwNmdIL8pMAQACsArh",
+        "intellisuggestSignature": "65e471e80045b00f3b17a14aa787eee473a34dc246d30737b357e4c122673f9a",
+        "reviews_product_score": "4.85714",
+        "reviews_total_reviews": "14",
+        "ss_boosting_rule": "21",
+        "option_set_id": "184",
+        "categories": ["Accessories", "Accessories By Brand", "SMITTYBILT", "Bumper", "Bumpers - Guards &amp; Grills"],
+        "reviews_rating_sum": "0",
+        "reviews_count": "0",
+        "rating": "4.85714",
+        "product_type_unigram": "bumper",
+        "ratingCount": "14",
+        "id": "e3cec4016c20aea7c660dc63442f55d5"
+      }
+    },
+    {
+      "id": "641437",
+      "mappings": {
+        "core": {
+          "uid": "641437",
+          "price": 441.97,
+          "msrp": 486.17,
+          "url": "https://www.bbwheelsonline.com/Poison-Spyder-13-16-020-DB-BFH-Front-Bumper-wBrawler-Bar-free-shipping-Jeep-Wrangler/",
+          "thumbnailImageUrl": "https://cdn11.bigcommerce.com/s-1gfd17pa/products/641437/images/1037431/13-16-020-DB__43627.1586316567.200.190.jpg?c=2",
+          "imageUrl": "https://cdn11.bigcommerce.com/s-1gfd17pa/products/641437/images/1037431/13-16-020-DB__43627.1586316567.200.190.jpg?c=2",
+          "name": "Poison Spyder 13-16-020-DB BFH Front Bumper w/Brawler Bar | Jeep Wrangler",
+          "sku": "FVNN 13-16-020-DB",
+          "brand": "Poison Spyder"
+        }
+      },
+      "attributes": {
+        "intellisuggestData": "eJxLT7TMLjRiYEgqzS1ILSpmcAvz81MwNNY1NNM1MDLQdXFiMGQwZTBjMLQwNmdIL8pMAQBDuAvl",
+        "intellisuggestSignature": "bb604115d948d86ff9e4201a40cbd8b641b0e1d1a589d2f4707ff4f396f591d0",
+        "ss_boosting_rule": "19",
+        "option_set_id": "184",
+        "categories": ["Accessories", "Bumpers - Guards &amp; Grills", "Bumper", "Accessories By Brand", "Poison Spyder"],
+        "reviews_rating_sum": "0",
+        "reviews_count": "0",
+        "product_type_unigram": "bumper",
+        "id": "2fa2060fe9627fc6563d2da62fd8e6ac"
+      }
+    },
+    {
+      "id": "641433",
+      "mappings": {
+        "core": {
+          "uid": "641433",
+          "price": 447.97,
+          "msrp": 492.77,
+          "url": "https://www.bbwheelsonline.com/Poison-Spyder-14-16-020-DS-BFH-Front-Bumper-wTrail-Stinger-free-shipping-Jeep-TJ-Wrangler/",
+          "thumbnailImageUrl": "https://cdn11.bigcommerce.com/s-1gfd17pa/products/641433/images/1037428/14-16-020-DS_01__68167.1586316564.200.190.jpg?c=2",
+          "imageUrl": "https://cdn11.bigcommerce.com/s-1gfd17pa/products/641433/images/1037428/14-16-020-DS_01__68167.1586316564.200.190.jpg?c=2",
+          "name": "Poison Spyder 14-16-020-DS BFH Front Bumper w/Trail Stinger | Jeep TJ Wrangler",
+          "sku": "FVNN 14-16-020-DS",
+          "brand": "Poison Spyder"
+        }
+      },
+      "attributes": {
+        "intellisuggestData": "eJxLT7TMLjRiYEgqzS1ILSpmcAvz81MwNNE1NNM1MDLQdQlmMGQwA0JDC2NzhvSizBQARQEL-A",
+        "intellisuggestSignature": "468b19202c197501dd6c00bb306618439c0c6febc641eeb86a59f46aa8229c13",
+        "ss_boosting_rule": "19",
+        "option_set_id": "184",
+        "categories": ["Accessories", "Bumpers - Guards &amp; Grills", "Bumper", "Accessories By Brand", "Poison Spyder"],
+        "reviews_rating_sum": "0",
+        "reviews_count": "0",
+        "product_type_unigram": "bumper",
+        "id": "3a65f779d1ef519777b185a6166e4b3d"
+      }
+    }
+  ],
+  "facets": [
+    {
+      "type": "value",
+      "field": "custom_deal_type",
+      "filtered": false,
+      "values": [
         {
-          "text": "ranch hand bumpers"
-        },
-        {
-          "text": "jk bumpers"
-        },
-        {
-          "text": "smittybilt bumpers"
+          "filtered": false,
+          "value": "FREE GIFT!",
+          "label": "FREE GIFT!",
+          "count": 612
         }
       ]
     },
-    "search": {
-      "query": "bumpers"
+    {
+      "type": "value",
+      "field": "custom_accessory_type",
+      "filtered": false,
+      "values": [
+        {
+          "filtered": false,
+          "value": "Brush Guard",
+          "label": "Brush Guard",
+          "count": 737
+        },
+        {
+          "filtered": false,
+          "value": "Bumper",
+          "label": "Bumper",
+          "count": 836
+        },
+        {
+          "filtered": false,
+          "value": "Bumper Corner Set",
+          "label": "Bumper Corner Set",
+          "count": 14
+        },
+        {
+          "filtered": false,
+          "value": "Bumper D-Ring",
+          "label": "Bumper D-Ring",
+          "count": 13
+        },
+        {
+          "filtered": false,
+          "value": "Bumper Grill Insert",
+          "label": "Bumper Grill Insert",
+          "count": 58
+        },
+        {
+          "filtered": false,
+          "value": "Bumper Insert",
+          "label": "Bumper Insert",
+          "count": 3
+        },
+        {
+          "filtered": false,
+          "value": "Cargo Area Liner",
+          "label": "Cargo Area Liner",
+          "count": 44
+        },
+        {
+          "filtered": false,
+          "value": "Fender Flare",
+          "label": "Fender Flare",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "Grill",
+          "label": "Grill",
+          "count": 67
+        },
+        {
+          "filtered": false,
+          "value": "Grill Insert",
+          "label": "Grill Insert",
+          "count": 47
+        },
+        {
+          "filtered": false,
+          "value": "Light Bar Mounting Kit",
+          "label": "Light Bar Mounting Kit",
+          "count": 2
+        },
+        {
+          "filtered": false,
+          "value": "Skid Plate",
+          "label": "Skid Plate",
+          "count": 7
+        },
+        {
+          "filtered": false,
+          "value": "Trailer Hitch",
+          "label": "Trailer Hitch",
+          "count": 7
+        },
+        {
+          "filtered": false,
+          "value": "Winch Fairlead Mount Bracket",
+          "label": "Winch Fairlead Mount Bracket",
+          "count": 1
+        }
+      ]
     },
-    "pagination": {
-      "totalResults": 1837,
-      "page": 1,
-      "pageSize": 6
+    {
+      "type": "value",
+      "field": "accessory_location",
+      "filtered": false,
+      "values": [
+        {
+          "filtered": false,
+          "value": "Front",
+          "label": "Front",
+          "count": 547
+        },
+        {
+          "filtered": false,
+          "value": "Rear",
+          "label": "Rear",
+          "count": 290
+        }
+      ]
     },
-    "sorting": [],
-    "results": [
-      {
-        "id": "143077",
-        "mappings": {
-          "core": {
-            "uid": "143077",
-            "price": 191.97,
-            "msrp": 211.17,
-            "url": "https://www.bbwheelsonline.com/smittybilt-jb44-r-rear-bumper-w-o-hitch-black-jeep-wrangler-wrangler-unlimited/",
-            "thumbnailImageUrl": "https://cdn11.bigcommerce.com/s-1gfd17pa/products/143077/images/254177/JB44-R-SMB__94360.1551415678.200.190.jpg?c=2",
-            "imageUrl": "https://cdn11.bigcommerce.com/s-1gfd17pa/products/143077/images/254177/JB44-R-SMB__94360.1551415678.200.190.jpg?c=2",
-            "name": "Smittybilt | JB44-R | Rear Bumper w/o Hitch - Black | Jeep Wrangler, Wrangler Unlimited",
-            "sku": "DSBP JB44-R",
-            "brand": "Smittybilt"
-          }
+    {
+      "type": "value",
+      "field": "custom_color",
+      "filtered": false,
+      "values": [
+        {
+          "filtered": false,
+          "value": "Black",
+          "label": "Black",
+          "count": 40
         },
-        "attributes": {
-          "intellisuggestData": "eJxLT7TMLjRiYEgqzS1ILSpmcAl2ClDwcjIx0Q1iMARCMwZDC2NzhvSizBQAAkAK2w",
-          "intellisuggestSignature": "4215c7e76918e7dfb0e6b5b4ba4f534bab8ca051c02b32323cd960dca90c6db0",
-          "reviews_product_score": "4.85714",
-          "reviews_total_reviews": "14",
-          "ss_boosting_rule": "21",
-          "option_set_id": "184",
-          "categories": [
-            "Accessories",
-            "Accessories By Brand",
-            "SMITTYBILT",
-            "Bumper",
-            "Bumpers - Guards &amp; Grills"
-          ],
-          "reviews_rating_sum": "0",
-          "reviews_count": "0",
-          "rating": "4.85714",
-          "product_type_unigram": "bumper",
-          "ratingCount": "14",
-          "id": "ae33356ff41a4dba1ad46d165b034586"
+        {
+          "filtered": false,
+          "value": "Gray",
+          "label": "Gray",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "Tan",
+          "label": "Tan",
+          "count": 3
         }
+      ]
+    },
+    {
+      "type": "value",
+      "field": "custom_product_brand",
+      "filtered": false,
+      "values": [
+        {
+          "filtered": false,
+          "value": "Aries",
+          "label": "Aries",
+          "count": 313
+        },
+        {
+          "filtered": false,
+          "value": "Bestop",
+          "label": "Bestop",
+          "count": 3
+        },
+        {
+          "filtered": false,
+          "value": "Curt",
+          "label": "Curt",
+          "count": 4
+        },
+        {
+          "filtered": false,
+          "value": "Egr",
+          "label": "Egr",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "Fab Fours",
+          "label": "Fab Fours",
+          "count": 247
+        },
+        {
+          "filtered": false,
+          "value": "Frontier Truck Gear",
+          "label": "Frontier Truck Gear",
+          "count": 73
+        },
+        {
+          "filtered": false,
+          "value": "Go Rhino",
+          "label": "Go Rhino",
+          "count": 47
+        },
+        {
+          "filtered": false,
+          "value": "Ici (Innovative Creations)",
+          "label": "Ici (Innovative Creations)",
+          "count": 13
+        },
+        {
+          "filtered": false,
+          "value": "Iron Cross Automotive",
+          "label": "Iron Cross Automotive",
+          "count": 124
+        },
+        {
+          "filtered": false,
+          "value": "Lund",
+          "label": "Lund",
+          "count": 15
+        },
+        {
+          "filtered": false,
+          "value": "Luverne",
+          "label": "Luverne",
+          "count": 122
+        },
+        {
+          "filtered": false,
+          "value": "Mbrp Exhaust",
+          "label": "Mbrp Exhaust",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "N-Fab",
+          "label": "N-Fab",
+          "count": 12
+        },
+        {
+          "filtered": false,
+          "value": "Poison Spyder",
+          "label": "Poison Spyder",
+          "count": 27
+        },
+        {
+          "filtered": false,
+          "value": "Putco",
+          "label": "Putco",
+          "count": 40
+        },
+        {
+          "filtered": false,
+          "value": "Ranch Hand",
+          "label": "Ranch Hand",
+          "count": 159
+        },
+        {
+          "filtered": false,
+          "value": "Rugged Ridge",
+          "label": "Rugged Ridge",
+          "count": 42
+        },
+        {
+          "filtered": false,
+          "value": "Smittybilt",
+          "label": "Smittybilt",
+          "count": 114
+        },
+        {
+          "filtered": false,
+          "value": "T-Rex Grilles",
+          "label": "T-Rex Grilles",
+          "count": 75
+        },
+        {
+          "filtered": false,
+          "value": "Weathertech",
+          "label": "Weathertech",
+          "count": 44
+        },
+        {
+          "filtered": false,
+          "value": "Westin",
+          "label": "Westin",
+          "count": 361
+        }
+      ]
+    },
+    {
+      "type": "range",
+      "field": "calculated_price",
+      "filtered": false,
+      "step": 100,
+      "range": {
+        "low": 0,
+        "high": 3300
       },
-      {
-        "id": "143072",
-        "mappings": {
-          "core": {
-            "uid": "143072",
-            "price": 199.97,
-            "msrp": 219.97,
-            "url": "https://www.bbwheelsonline.com/smittybilt-jb44-rt-rear-bumper-w-o-hitch-black-texture-jeep-wrangler-wrangler-unlimited/",
-            "thumbnailImageUrl": "https://cdn11.bigcommerce.com/s-1gfd17pa/products/143072/images/254184/JB44-RT-SMB__22099.1551415696.200.190.jpg?c=2",
-            "imageUrl": "https://cdn11.bigcommerce.com/s-1gfd17pa/products/143072/images/254184/JB44-RT-SMB__22099.1551415696.200.190.jpg?c=2",
-            "name": "Smittybilt | JB44-RT | Rear Bumper w/o Hitch - Black Texture | Jeep Wrangler, Wrangler Unlimited",
-            "sku": "DSBP JB44-RT",
-            "brand": "Smittybilt"
-          }
-        },
-        "attributes": {
-          "intellisuggestData": "eJxLT7TMLjRiYEgqzS1ILSpmcAl2ClDwcjIx0Q0KYTBkMGIwYzC0MDZnSC_KTAEAD6sLMA",
-          "intellisuggestSignature": "69c15b2efe498cf7bbd03d96c991d0b0ef56ef8239243aae4fa9650df4d69c9c",
-          "reviews_product_score": "4.85714",
-          "reviews_total_reviews": "14",
-          "ss_boosting_rule": "21",
-          "option_set_id": "184",
-          "categories": [
-            "Accessories",
-            "Accessories By Brand",
-            "SMITTYBILT",
-            "Bumper",
-            "Bumpers - Guards &amp; Grills"
-          ],
-          "reviews_rating_sum": "0",
-          "reviews_count": "0",
-          "rating": "4.85714",
-          "product_type_unigram": "bumper",
-          "ratingCount": "14",
-          "id": "f069ca26f26e943cca979733994c7471"
-        }
-      },
-      {
-        "id": "143063",
-        "mappings": {
-          "core": {
-            "uid": "143063",
-            "price": 199.97,
-            "msrp": 219.97,
-            "url": "https://www.bbwheelsonline.com/smittybilt-jb48-rt-rear-bumper-w-o-hitch-black-texture-jeep-wrangler-wrangler-unlimited/",
-            "thumbnailImageUrl": "https://cdn11.bigcommerce.com/s-1gfd17pa/products/143063/images/254194/JB48-RT-SMB__85104.1551415728.200.190.jpg?c=2",
-            "imageUrl": "https://cdn11.bigcommerce.com/s-1gfd17pa/products/143063/images/254194/JB48-RT-SMB__85104.1551415728.200.190.jpg?c=2",
-            "name": "Smittybilt | JB48-RT | Rear Bumper w/o Hitch - Black Texture | Jeep Wrangler, Wrangler Unlimited",
-            "sku": "DSBP JB48-RT",
-            "brand": "Smittybilt"
-          }
-        },
-        "attributes": {
-          "intellisuggestData": "eJxLT7TMLjRiYEgqzS1ILSpmcAl2ClDwcjKx0A0KYTBkMGYwYzC0MDZnSC_KTAEAEAgLNQ",
-          "intellisuggestSignature": "d4c37b4c61abebd4b2b4579a1fcff540260311d767e0b9cbd273e6037dc352ba",
-          "reviews_product_score": "4.85714",
-          "reviews_total_reviews": "14",
-          "ss_boosting_rule": "21",
-          "option_set_id": "184",
-          "categories": [
-            "Accessories",
-            "Accessories By Brand",
-            "SMITTYBILT",
-            "Bumper",
-            "Bumpers - Guards &amp; Grills"
-          ],
-          "reviews_rating_sum": "0",
-          "reviews_count": "0",
-          "rating": "4.85714",
-          "product_type_unigram": "bumper",
-          "ratingCount": "14",
-          "id": "b07de0a6b55d113194a79328e310fbda"
-        }
-      },
-      {
-        "id": "143032",
-        "mappings": {
-          "core": {
-            "uid": "143032",
-            "price": 177.97,
-            "msrp": 195.77,
-            "url": "https://www.bbwheelsonline.com/smittybilt-rb01-t-rear-bumper-w-o-hitch-black-textured-jeep-wrangler/",
-            "thumbnailImageUrl": "https://cdn11.bigcommerce.com/s-1gfd17pa/products/143032/images/254241/RB01-T-SMB__66440.1551415828.200.190.jpg?c=2",
-            "imageUrl": "https://cdn11.bigcommerce.com/s-1gfd17pa/products/143032/images/254241/RB01-T-SMB__66440.1551415828.200.190.jpg?c=2",
-            "name": "Smittybilt | RB01-T | Rear Bumper w/o Hitch - Black Textured | Jeep Wrangler",
-            "sku": "DSBP RB01-T",
-            "brand": "Smittybilt"
-          }
-        },
-        "attributes": {
-          "intellisuggestData": "eJxLT7TMLjRiYEgqzS1ILSpmcAl2ClAIcjIw1A1hMGQwYTBjMLQwNmdIL8pMAQACsArh",
-          "intellisuggestSignature": "65e471e80045b00f3b17a14aa787eee473a34dc246d30737b357e4c122673f9a",
-          "reviews_product_score": "4.85714",
-          "reviews_total_reviews": "14",
-          "ss_boosting_rule": "21",
-          "option_set_id": "184",
-          "categories": [
-            "Accessories",
-            "Accessories By Brand",
-            "SMITTYBILT",
-            "Bumper",
-            "Bumpers - Guards &amp; Grills"
-          ],
-          "reviews_rating_sum": "0",
-          "reviews_count": "0",
-          "rating": "4.85714",
-          "product_type_unigram": "bumper",
-          "ratingCount": "14",
-          "id": "e3cec4016c20aea7c660dc63442f55d5"
-        }
-      },
-      {
-        "id": "641437",
-        "mappings": {
-          "core": {
-            "uid": "641437",
-            "price": 441.97,
-            "msrp": 486.17,
-            "url": "https://www.bbwheelsonline.com/Poison-Spyder-13-16-020-DB-BFH-Front-Bumper-wBrawler-Bar-free-shipping-Jeep-Wrangler/",
-            "thumbnailImageUrl": "https://cdn11.bigcommerce.com/s-1gfd17pa/products/641437/images/1037431/13-16-020-DB__43627.1586316567.200.190.jpg?c=2",
-            "imageUrl": "https://cdn11.bigcommerce.com/s-1gfd17pa/products/641437/images/1037431/13-16-020-DB__43627.1586316567.200.190.jpg?c=2",
-            "name": "Poison Spyder 13-16-020-DB BFH Front Bumper w/Brawler Bar | Jeep Wrangler",
-            "sku": "FVNN 13-16-020-DB",
-            "brand": "Poison Spyder"
-          }
-        },
-        "attributes": {
-          "intellisuggestData": "eJxLT7TMLjRiYEgqzS1ILSpmcAvz81MwNNY1NNM1MDLQdXFiMGQwZTBjMLQwNmdIL8pMAQBDuAvl",
-          "intellisuggestSignature": "bb604115d948d86ff9e4201a40cbd8b641b0e1d1a589d2f4707ff4f396f591d0",
-          "ss_boosting_rule": "19",
-          "option_set_id": "184",
-          "categories": [
-            "Accessories",
-            "Bumpers - Guards &amp; Grills",
-            "Bumper",
-            "Accessories By Brand",
-            "Poison Spyder"
-          ],
-          "reviews_rating_sum": "0",
-          "reviews_count": "0",
-          "product_type_unigram": "bumper",
-          "id": "2fa2060fe9627fc6563d2da62fd8e6ac"
-        }
-      },
-      {
-        "id": "641433",
-        "mappings": {
-          "core": {
-            "uid": "641433",
-            "price": 447.97,
-            "msrp": 492.77,
-            "url": "https://www.bbwheelsonline.com/Poison-Spyder-14-16-020-DS-BFH-Front-Bumper-wTrail-Stinger-free-shipping-Jeep-TJ-Wrangler/",
-            "thumbnailImageUrl": "https://cdn11.bigcommerce.com/s-1gfd17pa/products/641433/images/1037428/14-16-020-DS_01__68167.1586316564.200.190.jpg?c=2",
-            "imageUrl": "https://cdn11.bigcommerce.com/s-1gfd17pa/products/641433/images/1037428/14-16-020-DS_01__68167.1586316564.200.190.jpg?c=2",
-            "name": "Poison Spyder 14-16-020-DS BFH Front Bumper w/Trail Stinger | Jeep TJ Wrangler",
-            "sku": "FVNN 14-16-020-DS",
-            "brand": "Poison Spyder"
-          }
-        },
-        "attributes": {
-          "intellisuggestData": "eJxLT7TMLjRiYEgqzS1ILSpmcAvz81MwNNE1NNM1MDLQdQlmMGQwA0JDC2NzhvSizBQARQEL-A",
-          "intellisuggestSignature": "468b19202c197501dd6c00bb306618439c0c6febc641eeb86a59f46aa8229c13",
-          "ss_boosting_rule": "19",
-          "option_set_id": "184",
-          "categories": [
-            "Accessories",
-            "Bumpers - Guards &amp; Grills",
-            "Bumper",
-            "Accessories By Brand",
-            "Poison Spyder"
-          ],
-          "reviews_rating_sum": "0",
-          "reviews_count": "0",
-          "product_type_unigram": "bumper",
-          "id": "3a65f779d1ef519777b185a6166e4b3d"
-        }
+      "active": {
+        "low": 0,
+        "high": 3300
       }
-    ],
-    "facets": [
-      {
-        "type": "value",
-        "field": "custom_deal_type",
-        "filtered": false,
-        "values": [
-          {
-            "filtered": false,
-            "value": "FREE GIFT!",
-            "label": "FREE GIFT!",
-            "count": 612
-          }
-        ]
-      },
-      {
-        "type": "value",
-        "field": "custom_accessory_type",
-        "filtered": false,
-        "values": [
-          {
-            "filtered": false,
-            "value": "Brush Guard",
-            "label": "Brush Guard",
-            "count": 737
-          },
-          {
-            "filtered": false,
-            "value": "Bumper",
-            "label": "Bumper",
-            "count": 836
-          },
-          {
-            "filtered": false,
-            "value": "Bumper Corner Set",
-            "label": "Bumper Corner Set",
-            "count": 14
-          },
-          {
-            "filtered": false,
-            "value": "Bumper D-Ring",
-            "label": "Bumper D-Ring",
-            "count": 13
-          },
-          {
-            "filtered": false,
-            "value": "Bumper Grill Insert",
-            "label": "Bumper Grill Insert",
-            "count": 58
-          },
-          {
-            "filtered": false,
-            "value": "Bumper Insert",
-            "label": "Bumper Insert",
-            "count": 3
-          },
-          {
-            "filtered": false,
-            "value": "Cargo Area Liner",
-            "label": "Cargo Area Liner",
-            "count": 44
-          },
-          {
-            "filtered": false,
-            "value": "Fender Flare",
-            "label": "Fender Flare",
-            "count": 1
-          },
-          {
-            "filtered": false,
-            "value": "Grill",
-            "label": "Grill",
-            "count": 67
-          },
-          {
-            "filtered": false,
-            "value": "Grill Insert",
-            "label": "Grill Insert",
-            "count": 47
-          },
-          {
-            "filtered": false,
-            "value": "Light Bar Mounting Kit",
-            "label": "Light Bar Mounting Kit",
-            "count": 2
-          },
-          {
-            "filtered": false,
-            "value": "Skid Plate",
-            "label": "Skid Plate",
-            "count": 7
-          },
-          {
-            "filtered": false,
-            "value": "Trailer Hitch",
-            "label": "Trailer Hitch",
-            "count": 7
-          },
-          {
-            "filtered": false,
-            "value": "Winch Fairlead Mount Bracket",
-            "label": "Winch Fairlead Mount Bracket",
-            "count": 1
-          }
-        ]
-      },
-      {
-        "type": "value",
-        "field": "accessory_location",
-        "filtered": false,
-        "values": [
-          {
-            "filtered": false,
-            "value": "Front",
-            "label": "Front",
-            "count": 547
-          },
-          {
-            "filtered": false,
-            "value": "Rear",
-            "label": "Rear",
-            "count": 290
-          }
-        ]
-      },
-      {
-        "type": "value",
-        "field": "custom_color",
-        "filtered": false,
-        "values": [
-          {
-            "filtered": false,
-            "value": "Black",
-            "label": "Black",
-            "count": 40
-          },
-          {
-            "filtered": false,
-            "value": "Gray",
-            "label": "Gray",
-            "count": 1
-          },
-          {
-            "filtered": false,
-            "value": "Tan",
-            "label": "Tan",
-            "count": 3
-          }
-        ]
-      },
-      {
-        "type": "value",
-        "field": "custom_product_brand",
-        "filtered": false,
-        "values": [
-          {
-            "filtered": false,
-            "value": "Aries",
-            "label": "Aries",
-            "count": 313
-          },
-          {
-            "filtered": false,
-            "value": "Bestop",
-            "label": "Bestop",
-            "count": 3
-          },
-          {
-            "filtered": false,
-            "value": "Curt",
-            "label": "Curt",
-            "count": 4
-          },
-          {
-            "filtered": false,
-            "value": "Egr",
-            "label": "Egr",
-            "count": 1
-          },
-          {
-            "filtered": false,
-            "value": "Fab Fours",
-            "label": "Fab Fours",
-            "count": 247
-          },
-          {
-            "filtered": false,
-            "value": "Frontier Truck Gear",
-            "label": "Frontier Truck Gear",
-            "count": 73
-          },
-          {
-            "filtered": false,
-            "value": "Go Rhino",
-            "label": "Go Rhino",
-            "count": 47
-          },
-          {
-            "filtered": false,
-            "value": "Ici (Innovative Creations)",
-            "label": "Ici (Innovative Creations)",
-            "count": 13
-          },
-          {
-            "filtered": false,
-            "value": "Iron Cross Automotive",
-            "label": "Iron Cross Automotive",
-            "count": 124
-          },
-          {
-            "filtered": false,
-            "value": "Lund",
-            "label": "Lund",
-            "count": 15
-          },
-          {
-            "filtered": false,
-            "value": "Luverne",
-            "label": "Luverne",
-            "count": 122
-          },
-          {
-            "filtered": false,
-            "value": "Mbrp Exhaust",
-            "label": "Mbrp Exhaust",
-            "count": 1
-          },
-          {
-            "filtered": false,
-            "value": "N-Fab",
-            "label": "N-Fab",
-            "count": 12
-          },
-          {
-            "filtered": false,
-            "value": "Poison Spyder",
-            "label": "Poison Spyder",
-            "count": 27
-          },
-          {
-            "filtered": false,
-            "value": "Putco",
-            "label": "Putco",
-            "count": 40
-          },
-          {
-            "filtered": false,
-            "value": "Ranch Hand",
-            "label": "Ranch Hand",
-            "count": 159
-          },
-          {
-            "filtered": false,
-            "value": "Rugged Ridge",
-            "label": "Rugged Ridge",
-            "count": 42
-          },
-          {
-            "filtered": false,
-            "value": "Smittybilt",
-            "label": "Smittybilt",
-            "count": 114
-          },
-          {
-            "filtered": false,
-            "value": "T-Rex Grilles",
-            "label": "T-Rex Grilles",
-            "count": 75
-          },
-          {
-            "filtered": false,
-            "value": "Weathertech",
-            "label": "Weathertech",
-            "count": 44
-          },
-          {
-            "filtered": false,
-            "value": "Westin",
-            "label": "Westin",
-            "count": 361
-          }
-        ]
-      },
-      {
-        "type": "range",
-        "field": "calculated_price",
-        "filtered": false,
-        "step": 100,
-        "range": {
-          "low": 0,
-          "high": 3300
+    },
+    {
+      "type": "value",
+      "field": "ss_vehicle",
+      "filtered": false,
+      "values": []
+    },
+    {
+      "type": "value",
+      "field": "ss_accessory",
+      "filtered": false,
+      "values": [
+        {
+          "filtered": false,
+          "value": "Body Protection & Doors",
+          "label": "Body Protection & Doors",
+          "count": 7
         },
-        "active": {
-          "low": 0,
-          "high": 3300
+        {
+          "filtered": false,
+          "value": "Bumpers - Guards & Grills",
+          "label": "Bumpers - Guards & Grills",
+          "count": 1633
+        },
+        {
+          "filtered": false,
+          "value": "Fender & Flares",
+          "label": "Fender & Flares",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "Floor Mats & Interior Liners",
+          "label": "Floor Mats & Interior Liners",
+          "count": 44
+        },
+        {
+          "filtered": false,
+          "value": "Lighting",
+          "label": "Lighting",
+          "count": 2
+        },
+        {
+          "filtered": false,
+          "value": "Towing",
+          "label": "Towing",
+          "count": 7
+        },
+        {
+          "filtered": false,
+          "value": "Winches",
+          "label": "Winches",
+          "count": 1
         }
-      },
-      {
-        "type": "value",
-        "field": "ss_vehicle",
-        "filtered": false,
-        "values": []
-      },
-      {
-        "type": "value",
-        "field": "ss_accessory",
-        "filtered": false,
-        "values": [
-          {
-            "filtered": false,
-            "value": "Body Protection & Doors",
-            "label": "Body Protection & Doors",
-            "count": 7
-          },
-          {
-            "filtered": false,
-            "value": "Bumpers - Guards & Grills",
-            "label": "Bumpers - Guards & Grills",
-            "count": 1633
-          },
-          {
-            "filtered": false,
-            "value": "Fender & Flares",
-            "label": "Fender & Flares",
-            "count": 1
-          },
-          {
-            "filtered": false,
-            "value": "Floor Mats & Interior Liners",
-            "label": "Floor Mats & Interior Liners",
-            "count": 44
-          },
-          {
-            "filtered": false,
-            "value": "Lighting",
-            "label": "Lighting",
-            "count": 2
-          },
-          {
-            "filtered": false,
-            "value": "Towing",
-            "label": "Towing",
-            "count": 7
-          },
-          {
-            "filtered": false,
-            "value": "Winches",
-            "label": "Winches",
-            "count": 1
-          }
-        ]
-      },
-      {
-        "type": "value",
-        "field": "ss_tire",
-        "filtered": false,
-        "values": []
-      },
-      {
-        "type": "range-buckets",
-        "field": "reviews_product_score",
-        "filtered": false,
-        "values": [
-          {
-            "filtered": false,
-            "low": 5,
-            "high": 5,
-            "label": "5 stars",
-            "count": 162
-          },
-          {
-            "filtered": false,
-            "low": 4,
-            "high": 5,
-            "label": "4 stars and up",
-            "count": 383
-          },
-          {
-            "filtered": false,
-            "low": 3,
-            "high": 5,
-            "label": "3 stars and up",
-            "count": 383
-          },
-          {
-            "filtered": false,
-            "low": 2,
-            "high": 5,
-            "label": "2 stars and up",
-            "count": 383
-          },
-          {
-            "filtered": false,
-            "low": 1,
-            "high": 5,
-            "label": "1 star and up",
-            "count": 383
-          }
-        ]
-      }
-    ],
-    "merchandising": {
-      "redirect": "",
-      "content": {},
-      "experiments": [],
-      "personalized": false
+      ]
+    },
+    {
+      "type": "value",
+      "field": "ss_tire",
+      "filtered": false,
+      "values": []
+    },
+    {
+      "type": "range-buckets",
+      "field": "reviews_product_score",
+      "filtered": false,
+      "values": [
+        {
+          "filtered": false,
+          "low": 5,
+          "high": 5,
+          "label": "5 stars",
+          "count": 162
+        },
+        {
+          "filtered": false,
+          "low": 4,
+          "high": 5,
+          "label": "4 stars and up",
+          "count": 383
+        },
+        {
+          "filtered": false,
+          "low": 3,
+          "high": 5,
+          "label": "3 stars and up",
+          "count": 383
+        },
+        {
+          "filtered": false,
+          "low": 2,
+          "high": 5,
+          "label": "2 stars and up",
+          "count": 383
+        },
+        {
+          "filtered": false,
+          "low": 1,
+          "high": 5,
+          "label": "1 star and up",
+          "count": 383
+        }
+      ]
     }
+  ],
+  "merchandising": {
+    "redirect": "",
+    "content": {},
+    "experiments": [],
+    "personalized": false
+  },
+  "tracking": {
+    "responseId": "550e8400-e29b-41d4-a716-446655440000"
   }
+}

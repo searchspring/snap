@@ -3,6 +3,7 @@ import type {
 	SearchResponseModelMerchandising,
 	SearchResponseModelMerchandisingCampaigns,
 	SearchResponseModelMerchandisingExperiments,
+	SearchResponseModelTracking,
 } from '@searchspring/snapi-types';
 
 export enum ContentType {
@@ -24,10 +25,10 @@ export class SearchMerchandisingStore {
 	public personalized?: boolean = false;
 	public experiments: SearchResponseModelMerchandisingExperiments[] = [];
 
-	constructor(services: StoreServices, merchData: SearchResponseModelMerchandising, responseId: string) {
+	constructor(services: StoreServices, merchData: SearchResponseModelMerchandising, tracking: SearchResponseModelTracking) {
 		if (merchData) {
 			this.redirect = merchData.redirect || '';
-			this.responseId = responseId; // Autocomplete 'beforeSubmit' doesn't have a response reference
+			this.responseId = tracking?.responseId || ''; // Autocomplete 'beforeSubmit' doesn't have a response reference
 
 			if (merchData.content) {
 				Object.values(ContentType).forEach((type) => {
@@ -41,7 +42,7 @@ export class SearchMerchandisingStore {
 							{
 								value: merchData.content[type]!,
 								uid,
-								responseId,
+								responseId: this.responseId,
 							},
 						] as MerchandisingContentBanner[]);
 					}

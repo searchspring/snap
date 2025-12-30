@@ -19,6 +19,7 @@ import type {
 	SearchResponseModelMerchandisingContentInline,
 	SearchResponseModelMerchandisingContentConfig,
 	MetaResponseModel,
+	SearchResponseModelTracking,
 } from '@searchspring/snapi-types';
 
 const VARIANT_ATTRIBUTE = 'ss-variant-option';
@@ -33,7 +34,7 @@ export class SearchResultStore extends Array<Product | Banner> {
 		config: StoreConfigs,
 		services: StoreServices,
 		metaData: MetaResponseModel,
-		responseId: string,
+		tracking?: SearchResponseModelTracking,
 		resultData?: SearchResponseModelResult[],
 		paginationData?: SearchResponseModelPagination,
 		merchData?: SearchResponseModelMerchandising,
@@ -42,7 +43,7 @@ export class SearchResultStore extends Array<Product | Banner> {
 		previousResults?: (Product | Banner)[] // used for infinite scroll functionality
 	) {
 		let results: (Product | Banner)[] = (resultData || []).map((result) => {
-			return new Product(services, result, metaData, responseId, config);
+			return new Product(services, result, metaData, tracking?.responseId || '', config);
 		});
 
 		const variantConfig = (config as SearchStoreConfig | AutocompleteStoreConfig | RecommendationStoreConfig)?.settings?.variants;
@@ -98,7 +99,7 @@ export class SearchResultStore extends Array<Product | Banner> {
 					return a.config!.position!.index! - b.config!.position!.index!;
 				})
 				.map((banner) => {
-					return new Banner(services, banner, responseId);
+					return new Banner(services, banner, tracking?.responseId || '');
 				});
 
 			if (banners && paginationData.totalResults) {

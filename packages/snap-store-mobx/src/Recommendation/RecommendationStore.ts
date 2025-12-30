@@ -37,7 +37,7 @@ export class RecommendationStore extends AbstractStore {
 		this.update();
 	}
 
-	public update(data?: RecommendCombinedResponseModel & { meta?: MetaResponseModel; responseId?: string }): void {
+	public update(data?: RecommendCombinedResponseModel & { meta?: MetaResponseModel }): void {
 		this.error = undefined;
 		this.meta = new MetaStore(data?.meta);
 		this.profile = new RecommendationProfileStore(this.services, data);
@@ -45,7 +45,7 @@ export class RecommendationStore extends AbstractStore {
 			this.config,
 			this.services,
 			this.meta.data,
-			data?.responseId!,
+			{ responseId: data?.responseId || '' },
 			data?.results,
 			undefined,
 			undefined,

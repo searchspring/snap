@@ -1,19 +1,22 @@
 {
-    "search": {
-      "query": "wheel"
-    },
-    "pagination": {
-      "totalResults": 0,
-      "page": 1,
-      "pageSize": 30
-    },
-    "sorting": [],
-    "results": [],
-    "facets": [],
-    "merchandising": {
-      "redirect": "https://www.bbwheelsonline.com/search-truck-wheels-by-vehicle/",
-      "content": {},
-      "experiments": [],
-      "personalized": false
-    }
+  "search": {
+    "query": "wheel"
+  },
+  "pagination": {
+    "totalResults": 0,
+    "page": 1,
+    "pageSize": 30
+  },
+  "sorting": [],
+  "results": [],
+  "facets": [],
+  "merchandising": {
+    "redirect": "https://www.bbwheelsonline.com/search-truck-wheels-by-vehicle/",
+    "content": {},
+    "experiments": [],
+    "personalized": false
+  },
+  "tracking": {
+    "responseId": "550e8400-e29b-41d4-a716-446655440000"
   }
+}
