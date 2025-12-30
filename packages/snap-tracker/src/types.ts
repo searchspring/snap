@@ -1,5 +1,5 @@
 import { AppMode } from '@searchspring/snap-toolbox';
-import type { Currency, Product } from '@searchspring/beacon';
+import type { BeaconConfig, Currency, Product } from '@searchspring/beacon';
 
 export type TrackerGlobals = {
 	siteId: string;
@@ -9,18 +9,10 @@ export type TrackerGlobals = {
 
 export type TrackerEvents = 'error' | 'shopper.login' | 'product.view' | 'product.click' | 'cart.view' | 'order.transaction';
 
-export type TrackerConfig = {
+export type TrackerConfig = BeaconConfig & {
 	id?: string;
 	framework?: string;
 	mode?: keyof typeof AppMode | AppMode;
-	requesters?: {
-		personalization?: {
-			origin: string;
-		};
-		beacon?: {
-			origin?: string;
-		};
-	};
 	doNotTrack?: TrackerEvents[];
 };
 
@@ -45,10 +37,10 @@ export interface TrackErrorEvent {
 }
 export interface ProductViewEvent {
 	uid?: string;
-	parentUid?: string;
+	parentId?: string;
 	sku?: string;
-	childUid?: string;
-	childSku?: string;
+	childUid?: string; // legacy support
+	childSku?: string; // legacy support
 }
 
 export interface ProductData extends ProductViewEvent {

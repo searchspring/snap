@@ -226,8 +226,7 @@ export class AutocompleteController extends AbstractController {
 				const item: ClickthroughResultsInner = {
 					type: result.type as ResultProductType,
 					uid: result.id,
-					// @ts-ignore - parentId
-					parentUid: result.mappings.core?.parentId || result.id,
+					parentId: result.id,
 					sku: result.mappings.core?.sku,
 				};
 
@@ -271,8 +270,7 @@ export class AutocompleteController extends AbstractController {
 				const item: ResultsInner = {
 					type: result.type as ResultProductType,
 					uid: result.id,
-					// @ts-ignore - parentId
-					parentUid: result.mappings.core?.parentId || result.id,
+					parentId: result.id,
 					sku: result.mappings.core?.sku,
 				};
 				const data: ImpressionSchemaData = {
@@ -288,8 +286,7 @@ export class AutocompleteController extends AbstractController {
 			addToCart: (result: Product): void => {
 				const responseId = result.responseId;
 				const product: BeaconProduct = {
-					// @ts-ignore - parentId
-					parentUid: result.mappings.core?.parentId || result.id,
+					parentId: result.id,
 					uid: result.id,
 					sku: result.mappings.core?.sku,
 					qty: result.quantity || 1,

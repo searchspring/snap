@@ -116,8 +116,7 @@ export class RecommendationController extends AbstractController {
 				const beaconResult: ClickthroughResultsInner = {
 					type: result.type as ResultProductType,
 					uid: result.id,
-					// @ts-ignore - parentId
-					parentUid: result.mappings.core?.parentId || result.id,
+					parentId: result.id,
 					sku: result.mappings.core?.sku,
 				};
 				const data: RecommendationsClickthroughSchemaData = {
@@ -162,8 +161,7 @@ export class RecommendationController extends AbstractController {
 				const item: ResultsInner = {
 					type: result.type as ResultProductType,
 					uid: result.id,
-					// @ts-ignore - parentId
-					parentUid: result.mappings.core?.parentId || result.id,
+					parentId: result.id,
 					sku: result.mappings.core?.sku,
 				};
 				const data: RecommendationsImpressionSchemaData = {
@@ -180,8 +178,7 @@ export class RecommendationController extends AbstractController {
 			addToCart: (result: Product): void => {
 				const responseId = result.responseId;
 				const product: BeaconProduct = {
-					// @ts-ignore - parentId
-					parentUid: result.mappings.core?.parentId || result.id,
+					parentId: result.id,
 					uid: result.id,
 					sku: result.mappings.core?.sku,
 					qty: result.quantity || 1,

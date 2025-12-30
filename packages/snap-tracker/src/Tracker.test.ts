@@ -383,7 +383,7 @@ describe('Tracker', () => {
 		expect(fetchSpy).toHaveBeenCalledTimes(0);
 
 		// simulate product cart tracking
-		const productData = [{ parentUid: 'product123', uid: 'product123', sku: 'product123', qty: 1, price: 10.99 }];
+		const productData = [{ parentId: 'product123', uid: 'product123', sku: 'product123', qty: 1, price: 10.99 }];
 		tracker.storage.cart.set(productData);
 
 		const sendPreflight = jest.spyOn(tracker, 'sendPreflight');
@@ -505,7 +505,7 @@ describe('Tracker', () => {
 	it('can track product view events', () => {
 		const tracker = new Tracker(globals, config);
 
-		const productData = { parentUid: 'product123', uid: 'product123', sku: 'product123' };
+		const productData = { parentId: 'product123', uid: 'product123', sku: 'product123' };
 
 		const eventsSpy = jest.spyOn(tracker.events.product, 'pageView');
 
@@ -535,7 +535,7 @@ describe('Tracker', () => {
 			},
 			items: [
 				{
-					parentUid: 'product123',
+					parentId: 'product123',
 					uid: 'product123',
 					sku: 'product123',
 					qty: '2',
@@ -559,7 +559,7 @@ describe('Tracker', () => {
 			country: 'US',
 			results: [
 				{
-					parentUid: 'product123',
+					parentId: 'product123',
 					uid: 'product123',
 					sku: 'product123',
 					qty: 2,
@@ -591,16 +591,6 @@ describe('Tracker', () => {
 
 		expect(productId).toBe(product.sku); // Expecting sku to be preferred
 	});
-
-	// it('correctly handles product ID extraction with childUid and childSku', () => {
-	// 	const tracker = new Tracker(globals, config);
-	// 	const product = { uid: 'product123', childUid: 'child123', sku: 'sku456', childSku: 'child456' };
-
-	// 	// @ts-ignore - Testing private method
-	// 	const productId = tracker.getProductId(product);
-
-	// 	expect(productId).toBe(product.childSku); // Expecting sku to be preferred
-	// });
 
 	it('can get viewed products', () => {
 		const tracker = new Tracker(globals, config);
@@ -644,8 +634,8 @@ describe('Cart inferance from context', () => {
 	it('can set current cart from globals', async () => {
 		// set initial cart
 		const cart = [
-			{ parentUid: 'productUid1', uid: 'productUid1', sku: 'productSku1', qty: 1, price: 9.99 },
-			{ parentUid: 'productUid2', uid: 'productUid2', sku: 'productSku2', qty: 2, price: 10.99 },
+			{ parentId: 'productUid1', uid: 'productUid1', sku: 'productSku1', qty: 1, price: 9.99 },
+			{ parentId: 'productUid2', uid: 'productUid2', sku: 'productSku2', qty: 2, price: 10.99 },
 		];
 		tracker = new Tracker(
 			{
@@ -663,7 +653,7 @@ describe('Cart inferance from context', () => {
 		expect(mockFetchApi).not.toHaveBeenCalled();
 
 		// simulate updated cart with one item added
-		const newProduct = { parentUid: 'productUid3', uid: 'productUid3', sku: 'productSku3', qty: 3, price: 9.99 };
+		const newProduct = { parentId: 'productUid3', uid: 'productUid3', sku: 'productSku3', qty: 3, price: 9.99 };
 		const cart2 = [...cart, newProduct];
 		tracker = new Tracker(
 			{
@@ -680,7 +670,7 @@ describe('Cart inferance from context', () => {
 		expect(mockFetchApi).not.toHaveBeenCalled();
 
 		// simulate adding 1 quantity of existing item in cart
-		const cart3 = [...cart, { parentUid: 'productUid3', uid: 'productUid3', sku: 'productSku3', qty: 4, price: 9.99 }];
+		const cart3 = [...cart, { parentId: 'productUid3', uid: 'productUid3', sku: 'productSku3', qty: 4, price: 9.99 }];
 		tracker = new Tracker(
 			{
 				...globals,
@@ -696,7 +686,7 @@ describe('Cart inferance from context', () => {
 		expect(mockFetchApi).not.toHaveBeenCalled();
 
 		// simulate removing 1 quantity of exisiting item in cart
-		const cart4 = [...cart, { parentUid: 'productUid3', uid: 'productUid3', sku: 'productSku3', qty: 1, price: 9.99 }];
+		const cart4 = [...cart, { parentId: 'productUid3', uid: 'productUid3', sku: 'productSku3', qty: 1, price: 9.99 }];
 		tracker = new Tracker(
 			{
 				...globals,
