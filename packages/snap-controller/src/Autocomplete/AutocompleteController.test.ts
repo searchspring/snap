@@ -575,7 +575,7 @@ describe('Autocomplete Controller', () => {
 			tracker: new Tracker(globals),
 		});
 
-		const sourceValue = 'typed' as AutocompleteRequestModelSearchSourceEnum;
+		const sourceValue = 'input' as AutocompleteRequestModelSearchSourceEnum;
 		controller.store.state.source = sourceValue;
 
 		expect(controller.params.search?.source).toEqual(sourceValue);
@@ -595,7 +595,7 @@ describe('Autocomplete Controller', () => {
 		await controller.init();
 
 		const query = 'wh';
-		const sourceValue = 'typed' as AutocompleteRequestModelSearchSourceEnum;
+		const sourceValue = 'input' as AutocompleteRequestModelSearchSourceEnum;
 		controller.store.state.input = query;
 		controller.store.state.source = sourceValue;
 		controller.urlManager = controller.urlManager.reset().set('query', query);

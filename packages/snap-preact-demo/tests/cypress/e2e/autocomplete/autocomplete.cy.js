@@ -118,7 +118,7 @@ describe('Autocomplete', () => {
 			cy.wait('@autocomplete').then((interception) => {
 				const url = new URL(interception.request.url);
 				expect(url.searchParams.get('input')).to.equal(config.startingQuery);
-				expect(url.searchParams.get('source')).to.equal('typed');
+				expect(url.searchParams.get('source')).to.equal('input');
 			});
 
 			cy.snapController('autocomplete').then(({ store }) => {

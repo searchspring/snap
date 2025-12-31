@@ -544,7 +544,7 @@ export class AutocompleteController extends AbstractController {
 					return;
 				}
 
-				this.store.state.source = 'typed' as AutocompleteRequestModelSearchSourceEnum;
+				this.store.state.source = 'input' as AutocompleteRequestModelSearchSourceEnum;
 				this.store.state.input = value;
 
 				// remove merch redirect to prevent race condition

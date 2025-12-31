@@ -11,7 +11,7 @@ export class AutocompleteStateStore {
 
 	public focusedInput: HTMLInputElement | undefined = undefined;
 	public input: string | undefined = undefined;
-	public source: AutocompleteRequestModelSearchSourceEnum = 'typed' as AutocompleteRequestModelSearchSourceEnum;
+	public source: AutocompleteRequestModelSearchSourceEnum = 'input' as AutocompleteRequestModelSearchSourceEnum;
 	public url: UrlManager;
 
 	constructor(services: StoreServices) {
