@@ -1,25 +1,35 @@
 import { h, ComponentType, FunctionComponent } from 'preact';
-import type { Product } from '@searchspring/snap-store-mobx';
+import type { Banner, MerchandisingContentBanner, Product } from '@searchspring/snap-store-mobx';
 import type { SearchController, AutocompleteController, RecommendationController } from '@searchspring/snap-controller';
+import type { ContentType, BannerContent } from '@searchspring/snap-store-mobx';
 import { createImpressionObserver } from '../utilities';
 import { useEffect, useCallback } from 'preact/hooks';
 
+export const TRACKING_ATTRIBUTE = 'sstracking';
 interface WithTrackingProps {
 	controller?: SearchController | AutocompleteController | RecommendationController;
 	result?: Product;
+	banner?: Banner;
+	type?: ContentType;
+	content?: BannerContent;
 	[key: string]: any;
 }
 
 export function withTracking<Props extends WithTrackingProps>(WrappedComponent: ComponentType<Props>) {
 	const WithTracking: FunctionComponent<Props> = (props) => {
-		const { controller, result, ...restProps } = props;
+		const { controller, result, banner, type, content, ...restProps } = props;
 
-		if (!controller) {
-			console.warn('Warning: No controller provided to withTracking');
+		if (props.trackingRef) {
+			// case where withTracking may get used more than once
+			return <WrappedComponent {...props} />;
 		}
 
-		if (!result) {
-			console.warn('Warning: No result provided to withTracking');
+		if (!controller && (!type || !content)) {
+			console.warn('Warning: No controller provided to withTracking', props);
+		}
+
+		if (!result && !banner && (!type || !content)) {
+			console.warn('Warning: No result or banner provided to withTracking');
 		}
 
 		let resetKey;
@@ -45,24 +55,28 @@ export function withTracking<Props extends WithTrackingProps>(WrappedComponent: 
 
 		if (inViewport) {
 			// TODO: add support for disabling tracking events via config like in ResultTracker
-			if (result?.type === 'product' && !result?.bundleSeed) {
-				controller?.track.product.impression(result as Product);
-			} else {
-				// track banner in future
+			if (type && content && !result && ['search', 'autocomplete'].includes(controller?.type || '')) {
+				(controller as SearchController | AutocompleteController)?.track.banner.impression(content[type]![0] as MerchandisingContentBanner);
+			} else if (!result?.bundleSeed) {
+				controller?.track.product.impression((result || banner)!);
 			}
 		}
 
 		const handleClick = useCallback(
 			(e: MouseEvent) => {
-				controller?.track.product.click(e, result as Product);
+				if (type && content && !result && ['search', 'autocomplete'].includes(controller?.type || '')) {
+					(controller as SearchController | AutocompleteController)?.track.banner.click(e, content[type]![0] as MerchandisingContentBanner);
+				} else {
+					controller?.track.product.click(e, (result || banner)!);
+				}
 			},
-			[controller, result]
+			[controller, result, banner, type, content]
 		);
 
 		useEffect(() => {
 			const currentRef = ref.current;
 			if (currentRef) {
-				currentRef.setAttribute('sstracking', 'true');
+				currentRef.setAttribute(TRACKING_ATTRIBUTE, 'true');
 				currentRef.addEventListener('click', handleClick, true); // Use capture phase
 				return () => {
 					currentRef.removeEventListener('click', handleClick, true);
@@ -73,6 +87,9 @@ export function withTracking<Props extends WithTrackingProps>(WrappedComponent: 
 			...restProps,
 			controller,
 			result,
+			banner,
+			type,
+			content,
 			trackingRef: ref,
 		};
 

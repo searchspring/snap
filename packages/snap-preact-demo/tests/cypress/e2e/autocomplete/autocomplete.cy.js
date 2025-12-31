@@ -115,7 +115,11 @@ describe('Autocomplete', () => {
 
 			cy.get(config.selectors.website.input).first().should('exist').focus().type(config.startingQuery, { force: true });
 
-			cy.wait('@autocomplete').should('exist');
+			cy.wait('@autocomplete').then((interception) => {
+				const url = new URL(interception.request.url);
+				expect(url.searchParams.get('input')).to.equal(config.startingQuery);
+				expect(url.searchParams.get('source')).to.equal('input');
+			});
 
 			cy.snapController('autocomplete').then(({ store }) => {
 				expect(store.state.input).to.equal(config.startingQuery);
@@ -143,7 +147,10 @@ describe('Autocomplete', () => {
 
 				cy.get(`${config.selectors.autocomplete.term}`).last().find('a').should('exist').rightclick({ force: true }); // trigger onFocus event
 
-				cy.wait('@autocomplete').should('exist');
+				cy.wait('@autocomplete').then((interception) => {
+					const url = new URL(interception.request.url);
+					expect(url.searchParams.get('source')).to.equal('suggested');
+				});
 
 				cy.snapController('autocomplete').then(({ store }) => {
 					const lastTerm = store.terms[store.terms.length - 1];

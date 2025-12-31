@@ -39,7 +39,7 @@ export class FinderStore extends AbstractStore {
 
 		this.storage = new StorageStore();
 
-		this.update({ meta: {} });
+		this.update();
 
 		makeObservable(this, {
 			selections: observable,
@@ -95,7 +95,8 @@ export class FinderStore extends AbstractStore {
 		}
 	}
 
-	public update(data: SearchResponseModel & { meta?: MetaResponseModel }, selectedSelections?: SelectedSelection[]): void {
+	public update(data?: SearchResponseModel & { meta?: MetaResponseModel }, selectedSelections?: SelectedSelection[]): void {
+		if (!data) data = { tracking: { responseId: '' } }; // tracking is required
 		this.error = undefined;
 		this.loaded = !!data.pagination;
 		this.meta = new MetaStore(data.meta);

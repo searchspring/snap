@@ -2,7 +2,7 @@ import deepmerge from 'deepmerge';
 import cssEscape from 'css.escape';
 
 import { AbstractController } from '../Abstract/AbstractController';
-import { StorageStore, ErrorType } from '@searchspring/snap-store-mobx';
+import { StorageStore, ErrorType, MerchandisingContentBanner } from '@searchspring/snap-store-mobx';
 import { getSearchParams } from '../utils/getParams';
 import { ControllerTypes, PageContextVariable } from '../types';
 
@@ -34,17 +34,20 @@ import {
 } from '@searchspring/snapi-types';
 
 import {
-	type AutocompleteAddtocartSchemaDataBgfilterInner,
-	type AutocompleteAddtocartSchemaDataFilterInner,
-	type AutocompleteAddtocartSchemaDataSortInnerDirEnum,
 	type Product as BeaconProduct,
-	type SearchAddtocartSchemaData,
-	type SearchRedirectSchemaData,
-	type SearchSchemaData,
-	type SearchSchemaDataMatchTypeEnum,
-	ItemTypeEnum,
+	ResultProductType,
+	RenderSchemaData,
+	ImpressionSchemaData,
+	ClickthroughSchemaData,
+	AddtocartSchemaData,
+	RedirectSchemaData,
+	ClickthroughResultsInner,
+	ResultsInner,
+	ClickthroughBannersInner,
+	BannersInner,
 } from '@searchspring/beacon';
 import { CLICK_DUPLICATION_TIMEOUT, isClickWithinProductLink } from '../utils/isClickWithinProductLink';
+import { isClickWithinBannerLink } from '../utils/isClickWithinBannerLink';
 
 const BACKGROUND_FILTER_FIELD_MATCHES = ['collection', 'category', 'categories', 'hierarchy', 'brand', 'manufacturer'];
 const BACKGROUND_FILTERS_VALUE_FLAGS = [1, 0, '1', '0', 'true', 'false', true, false];
@@ -67,17 +70,20 @@ const defaultConfig: SearchControllerConfig = {
 };
 
 type SearchTrackMethods = {
+	banner: {
+		click: (e: MouseEvent, merchandisingBanner: MerchandisingContentBanner) => void;
+		clickThrough: (e: MouseEvent, merchandisingBanner: MerchandisingContentBanner) => void;
+		impression: (merchandisingBanner: MerchandisingContentBanner) => void;
+	};
 	product: {
-		clickThrough: (e: MouseEvent, result: Product) => void;
+		clickThrough: (e: MouseEvent, result: Product | Banner) => void;
 		click: (e: MouseEvent, result: Product | Banner) => void;
-		render: (result: Product) => void;
-		impression: (result: Product) => void;
+		impression: (result: Product | Banner) => void;
 		addToCart: (results: Product) => void;
 	};
-	redirect: (redirectURL: string) => void;
+	redirect: ({ redirectURL, responseId }: { redirectURL: string; responseId: string }) => void;
 };
 
-const schemaMap: Record<string, SearchSchemaData> = {};
 export class SearchController extends AbstractController {
 	public type = ControllerTypes.search;
 	declare store: SearchStore;
@@ -88,16 +94,22 @@ export class SearchController extends AbstractController {
 		type: 'search',
 	};
 	private events: {
-		product: Record<
-			string,
-			{
-				click?: boolean;
-				clickThrough?: boolean;
-				impression?: boolean;
-				render?: boolean;
-			}
-		>;
-	} = { product: {} };
+		[responseId: string]: {
+			product: {
+				[id: string]: {
+					inlineBannerClickThrough?: boolean;
+					productClickThrough?: boolean;
+					impression?: boolean;
+				};
+			};
+			banner: {
+				[id: string]: {
+					impression?: boolean;
+					clickThrough?: boolean;
+				};
+			};
+		};
+	} = {};
 
 	constructor(
 		config: SearchControllerConfig,
@@ -167,7 +179,7 @@ export class SearchController extends AbstractController {
 			if (redirectURL && config?.settings?.redirects?.merchandising && !search?.response?.filters?.length && !searchStore.loaded) {
 				//set loaded to true to prevent infinite search/reloading from happening
 				searchStore.loaded = true;
-				this.track.redirect(redirectURL);
+				this.track.redirect({ redirectURL, responseId: search.response.tracking.responseId });
 				window.location.replace(redirectURL);
 				return false;
 			}
@@ -240,25 +252,12 @@ export class SearchController extends AbstractController {
 		this.eventManager.on('afterStore', async (search: AfterStoreObj, next: Next): Promise<void | boolean> => {
 			await next();
 			const controller = search.controller as SearchController;
+			const responseId = search.response.tracking.responseId;
 			if (controller.store.loaded && !controller.store.error) {
-				const products = controller.store.results.filter(
-					(result) => result.type === 'product' && !this.events.product[result.id]?.render
-				) as Product[];
-
-				if (products.length === 0 && !search.response._cached) {
-					// handle no results
-					const data = getSearchSchemaData({ params: search.request, response: search.response });
-					this.eventManager.fire('track.product.render', { controller: this, trackEvent: data });
+				if (!search.response._cached) {
+					const data: RenderSchemaData = { responseId };
 					this.tracker.events[this.page.type].render({ data, siteId: this.config.globals?.siteId });
 				}
-
-				products.forEach((result: Product) => {
-					if (!search.response._cached) {
-						this.track.product.render(result);
-					}
-					this.events.product[result.id] = this.events.product[result.id] || {};
-					this.events.product[result.id].render = true;
-				});
 
 				const config = search.controller.config as SearchControllerConfig;
 				const nonBackgroundFilters = search?.request?.filters?.filter((filter: SearchRequestModelFilter) => !filter.background);
@@ -362,13 +361,57 @@ export class SearchController extends AbstractController {
 	}
 
 	track: SearchTrackMethods = {
-		product: {
-			clickThrough: (e: MouseEvent, result): void => {
-				if (this.events.product[result.id]?.clickThrough) {
+		banner: {
+			impression: ({ uid, responseId }: MerchandisingContentBanner): void => {
+				if (this.events[responseId]?.banner[uid]?.impression) {
 					return;
 				}
+				const banner: BannersInner = { uid };
+				const data: ImpressionSchemaData = {
+					responseId,
+					banners: [banner],
+					results: [],
+				};
+
+				this.eventManager.fire('track.banner.impression', { controller: this, product: { uid }, trackEvent: data });
+				this.tracker.events[this.page.type].impression({ data, siteId: this.config.globals?.siteId });
+				this.events[responseId].banner[uid] = this.events[responseId].banner[uid] || {};
+				this.events[responseId].banner[uid].impression = true;
+			},
+			click: (e: MouseEvent, banner: MerchandisingContentBanner): void => {
+				const { responseId, uid } = banner;
+				if (isClickWithinBannerLink(e)) {
+					if (this.events?.[responseId]?.banner[uid]?.clickThrough) {
+						return;
+					}
+					this.track.banner.clickThrough(e, banner);
+					this.events[responseId].banner[uid] = this.events[responseId].banner[uid] || {};
+					this.events[responseId].banner[uid].clickThrough = true;
+					setTimeout(() => {
+						this.events[responseId].banner[uid].clickThrough = false;
+					}, CLICK_DUPLICATION_TIMEOUT);
+				}
+			},
+			clickThrough: (e: MouseEvent, { uid, responseId }: MerchandisingContentBanner): void => {
+				const banner: ClickthroughBannersInner = { uid };
+				const data: ClickthroughSchemaData = {
+					responseId,
+					banners: [banner],
+				};
+				this.eventManager.fire('track.banner.clickThrough', { controller: this, event: e, product: { uid }, trackEvent: data });
+				this.tracker.events[this.page.type].clickThrough({ data, siteId: this.config.globals?.siteId });
+				this.events[responseId].banner[uid] = this.events[responseId].banner[uid] || {};
+				this.events[responseId].banner[uid].clickThrough = true;
+				setTimeout(() => {
+					this.events[responseId].banner[uid].clickThrough = false;
+				}, CLICK_DUPLICATION_TIMEOUT);
+			},
+		},
+		product: {
+			clickThrough: (e: MouseEvent, result: Product | Banner): void => {
+				const responseId = result.responseId;
 				const target = e.target as HTMLAnchorElement;
-				const resultHref = result.display?.mappings.core?.url || result.mappings.core?.url || '';
+				const resultHref = (result as Product).display?.mappings.core?.url || (result as Product).mappings.core?.url || '';
 				const elemHref = target?.getAttribute('href');
 
 				// the href that should be used for restoration - if the elemHref contains the resultHref - use resultHref
@@ -397,63 +440,89 @@ export class SearchController extends AbstractController {
 
 				// store position data or empty object
 				this.storage.set('scrollMap', scrollMap);
-				const data = schemaMap[result.id];
+
+				const item: ClickthroughResultsInner = {
+					type: result.type as ResultProductType,
+					uid: result.id,
+					parentId: result.id,
+					sku: result.mappings.core?.sku,
+				};
+
+				const data: ClickthroughSchemaData = {
+					responseId,
+					results: [item],
+				};
 				this.eventManager.fire('track.product.clickThrough', { controller: this, event: e, product: result, trackEvent: data });
 				this.tracker.events[this.page.type].clickThrough({ data, siteId: this.config.globals?.siteId });
-				this.events.product[result.id] = this.events.product[result.id] || {};
-				this.events.product[result.id].clickThrough = true;
 			},
-			click: (e: MouseEvent, result): void => {
-				if (this.events.product[result.id]?.click) {
-					return;
+			click: (e: MouseEvent, result: Product | Banner): void => {
+				const responseId = result.responseId;
+				if (result.type === 'banner' && isClickWithinBannerLink(e)) {
+					if (this.events?.[responseId]?.product[result.id]?.inlineBannerClickThrough) {
+						return;
+					}
+					this.track.product.clickThrough(e, result as Banner);
+					this.events[responseId].product[result.id] = this.events[responseId].product[result.id] || {};
+					this.events[responseId].product[result.id].inlineBannerClickThrough = true;
+					setTimeout(() => {
+						this.events[responseId].product[result.id].inlineBannerClickThrough = false;
+					}, CLICK_DUPLICATION_TIMEOUT);
+				} else if (isClickWithinProductLink(e, result as Product)) {
+					if (this.events?.[responseId]?.product[result.id]?.productClickThrough) {
+						return;
+					}
+					this.track.product.clickThrough(e, result as Product);
+					this.events[responseId].product[result.id] = this.events[responseId].product[result.id] || {};
+					this.events[responseId].product[result.id].productClickThrough = true;
+					setTimeout(() => {
+						this.events[responseId].product[result.id].productClickThrough = false;
+					}, CLICK_DUPLICATION_TIMEOUT);
 				}
-
-				if (result.type === 'banner') {
-					return;
-				}
-
-				isClickWithinProductLink(e, result as Product) && this.track.product.clickThrough(e, result as Product);
-
-				this.events.product[result.id] = this.events.product[result.id] || {};
-				this.events.product[result.id].click = true;
-				setTimeout(() => {
-					this.events.product[result.id].click = false;
-				}, CLICK_DUPLICATION_TIMEOUT);
 			},
-			render: (result: Product) => {
-				if (this.events.product[result.id]?.render) {
+			impression: (result: Product | Banner): void => {
+				const responseId = result.responseId;
+				if (this.events[responseId]?.product[result.id]?.impression) {
 					return;
 				}
-
-				const data = schemaMap[result.id];
-				this.eventManager.fire('track.product.render', { controller: this, product: result, trackEvent: data });
-				this.tracker.events[this.page.type].render({ data, siteId: this.config.globals?.siteId });
-				this.events.product[result.id] = this.events.product[result.id] || {};
-				this.events.product[result.id].render = true;
-			},
-			impression: (result: Product): void => {
-				if (this.events.product[result.id]?.impression || !this.events.product[result.id]?.render) {
-					return;
-				}
-
-				const data = schemaMap[result.id];
+				const item: ResultsInner = {
+					type: result.type as ResultProductType,
+					uid: result.id,
+					parentId: result.id,
+					sku: result.mappings.core?.sku,
+				};
+				const data: ImpressionSchemaData = {
+					responseId,
+					results: [item],
+					banners: [],
+				};
 				this.eventManager.fire('track.product.impression', { controller: this, product: result, trackEvent: data });
 				this.tracker.events[this.page.type].impression({ data, siteId: this.config.globals?.siteId });
-				this.events.product[result.id] = this.events.product[result.id] || {};
-				this.events.product[result.id].impression = true;
+				this.events[responseId].product[result.id] = this.events[responseId].product[result.id] || {};
+				this.events[responseId].product[result.id].impression = true;
 			},
 			addToCart: (result: Product): void => {
-				const data = getSearchAddtocartSchemaData({ searchSchemaData: schemaMap[result.id], results: [result] });
+				const responseId = result.responseId;
+				const product: BeaconProduct = {
+					parentId: result.id,
+					uid: result.id,
+					sku: result.mappings.core?.sku,
+					qty: result.quantity || 1,
+					price: Number(result.mappings.core?.price),
+				};
+				const data: AddtocartSchemaData = {
+					responseId,
+					results: [product],
+				};
 				this.eventManager.fire('track.product.addToCart', { controller: this, product: result, trackEvent: data });
-				this.tracker.events[this.page.type].addToCart({
-					data,
-					siteId: this.config.globals?.siteId,
-				});
+				this.tracker.events[this.page.type].addToCart({ data, siteId: this.config.globals?.siteId });
 			},
 		},
-		redirect: (redirectURL: string): void => {
-			const data = getSearchRedirectSchemaData({ redirectURL });
-			this.eventManager.fire('track.product.redirect', { controller: this, redirectURL, trackEvent: data });
+		redirect: ({ redirectURL, responseId }): void => {
+			const data: RedirectSchemaData = {
+				responseId,
+				redirect: redirectURL,
+			};
+			this.eventManager.fire('track.redirect', { controller: this, redirectURL, trackEvent: data });
 			this.tracker.events.search.redirect({ data, siteId: this.config.globals?.siteId });
 		},
 	};
@@ -544,7 +613,7 @@ export class SearchController extends AbstractController {
 			const searchProfile = this.profiler.create({ type: 'event', name: 'search', context: params }).start();
 
 			let meta: MetaResponseModel = {};
-			let response: SearchResponseModel & { meta?: MetaResponseModel } = {};
+			let response: SearchResponseModel & { meta?: MetaResponseModel };
 
 			// infinite scroll functionality (after page 1)
 			if (this.config.settings?.infinite && params.pagination?.page && params.pagination.page > 1) {
@@ -580,7 +649,7 @@ export class SearchController extends AbstractController {
 								}
 							}
 							backfillRequestsParams.push(backfillParams);
-							return this.client.search(backfillParams);
+							return this.client[this.page.type](backfillParams);
 						});
 
 					const backfillResponses = await Promise.all(backfillRequests);
@@ -591,8 +660,9 @@ export class SearchController extends AbstractController {
 					response = backfillResponses[0][1];
 
 					// accumulate results from all backfill responses
-					const backfillResults: SearchResponseModelResult[] = backfillResponses.reduce((results, response, index) => {
-						createResultSchemaMapping({ request: backfillRequestsParams[index], response: response });
+					const backfillResults: SearchResponseModelResult[] = backfillResponses.reduce((results, response) => {
+						const responseId = response[1].tracking.responseId;
+						this.events[responseId] = this.events[responseId] || { product: {}, banner: {} };
 						return results.concat(...response[1].results!);
 					}, [] as SearchResponseModelResult[]);
 
@@ -604,21 +674,21 @@ export class SearchController extends AbstractController {
 					response.results = backfillResults;
 				} else {
 					// infinite with no backfills.
-					[meta, response] = await this.client.search(params);
-					createResultSchemaMapping({ request: params, response: [meta, response] });
+					[meta, response] = await this.client[this.page.type](params);
+
+					const responseId = response.tracking.responseId;
+					this.events[responseId] = this.events[responseId] || { product: {}, banner: {} };
+
 					// append new results to previous results
 					response.results = [...this.previousResults, ...(response.results || [])];
 				}
 			} else {
 				// normal request
-
-				// reset events for new search
-				this.events = { product: {} };
-
 				// clear previousResults to prevent infinite scroll from using them
 				this.previousResults = [];
-				[meta, response] = await this.client.search(params);
-				createResultSchemaMapping({ request: params, response: [meta, response] });
+				[meta, response] = await this.client[this.page.type](params);
+				const responseId = response.tracking.responseId;
+				this.events[responseId] = this.events[responseId] || { product: {}, banner: {} };
 			}
 
 			// MockClient will overwrite the client search() method and use SearchData to return mock data which already contains meta data
@@ -736,28 +806,6 @@ export class SearchController extends AbstractController {
 	};
 }
 
-function createResultSchemaMapping({ request, response }: { request: SearchRequestModel; response: [MetaResponseModel, SearchResponseModel] }): void {
-	const [_, searchResponse] = response;
-	const schema = getSearchSchemaData({
-		params: request,
-		response: searchResponse,
-	});
-
-	searchResponse.results?.forEach((result, idx) => {
-		schemaMap[result.id!] = {
-			...schema,
-			results: [
-				{
-					type: ItemTypeEnum.Product,
-					position: idx + 1,
-					uid: result.mappings?.core?.uid || '',
-					sku: result.mappings?.core?.sku,
-				},
-			],
-		};
-	});
-}
-
 export function getStorableRequestParams(request: SearchRequestModel): SearchRequestModel {
 	return {
 		siteId: request.siteId,
@@ -809,105 +857,4 @@ export function generateHrefSelector(element: HTMLElement, href: string, levels 
 	}
 
 	return;
-}
-
-function getSearchRedirectSchemaData({ redirectURL }: { redirectURL: string }): SearchRedirectSchemaData {
-	return {
-		redirect: redirectURL,
-	};
-}
-
-function getSearchAddtocartSchemaData({
-	searchSchemaData,
-	results,
-}: {
-	searchSchemaData: SearchSchemaData;
-	results?: Product[];
-}): SearchAddtocartSchemaData {
-	return {
-		...searchSchemaData,
-		results:
-			results?.map((result: Product): BeaconProduct => {
-				const core = (result as Product).mappings.core!;
-				return {
-					uid: core.uid || '',
-					sku: core.sku,
-					price: Number(core.price),
-					qty: result.quantity || 1,
-				};
-			}) || [],
-	};
-}
-
-function getSearchSchemaData({ params, response }: { params: SearchRequestModel; response: SearchResponseModel }): SearchSchemaData {
-	const filters = params.filters?.reduce<{
-		bgfilter?: Array<AutocompleteAddtocartSchemaDataBgfilterInner>;
-		filter?: Array<AutocompleteAddtocartSchemaDataFilterInner>;
-	}>((acc, filter) => {
-		const key = filter.background ? 'bgfilter' : 'filter';
-		acc[key] = acc[key] || [];
-
-		const value =
-			filter.type === 'range' &&
-			!isNaN((filter as SearchRequestModelFilterRange).value?.low!) &&
-			!isNaN((filter as SearchRequestModelFilterRange).value?.high!)
-				? [`low=${(filter as SearchRequestModelFilterRange).value?.low}`, `high=${(filter as SearchRequestModelFilterRange).value?.high}`]
-				: [`${(filter as SearchRequestModelFilterValue).value}`];
-
-		const existing = acc[key]!.find((item) => item.field === filter.field);
-		if (existing && !existing.value!.includes(value[0])) {
-			existing.value!.push(...value);
-		} else {
-			acc[key]!.push({
-				field: filter.field,
-				value,
-			});
-		}
-
-		return acc;
-	}, {});
-
-	let correctedQuery: string | undefined;
-	if (response?.search?.originalQuery && response?.search?.query) {
-		correctedQuery = response?.search?.query;
-	}
-
-	const campaigns = response?.merchandising?.campaigns || [];
-	const experiments = response?.merchandising?.experiments || [];
-
-	return {
-		q: params.search?.query?.string || '',
-		rq: params.search?.subQuery ? params.search?.subQuery : undefined,
-		correctedQuery,
-		matchType: response?.search?.matchType as SearchSchemaDataMatchTypeEnum,
-		...filters,
-		sort: params.sorts?.map((sort) => {
-			return {
-				field: sort.field,
-				dir: sort.direction as AutocompleteAddtocartSchemaDataSortInnerDirEnum,
-			};
-		}),
-		pagination: {
-			totalResults: response?.pagination?.totalResults!,
-			page: response?.pagination?.page!,
-			resultsPerPage: response?.pagination?.pageSize!,
-		},
-		merchandising: {
-			personalized: response?.merchandising?.personalized,
-			redirect: response?.merchandising?.redirect,
-			triggeredCampaigns:
-				(campaigns.length &&
-					campaigns.map((campaign) => {
-						const experiement = experiments.find((experiment) => experiment.campaignId === campaign.id);
-						return {
-							id: campaign.id,
-							experimentId: experiement?.experimentId,
-							variationId: experiement?.variationId,
-						};
-					})) ||
-				undefined,
-		},
-		banners: [],
-		results: [],
-	};
 }
