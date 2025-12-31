@@ -1,4 +1,4 @@
 window.searchspring = window.searchspring || {};
-window.searchspring.initiator = 'snap-managed';
+window.searchspring.managed = true;
 
 import('./index');
