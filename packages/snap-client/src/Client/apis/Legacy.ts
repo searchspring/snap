@@ -16,7 +16,6 @@ export class LegacyAPI extends API {
 		delete cacheParameters.domain;
 		// autocomplete only params
 		delete cacheParameters.input;
-		delete cacheParameters.source;
 
 		const legacyResponse = await this.request(
 			{
