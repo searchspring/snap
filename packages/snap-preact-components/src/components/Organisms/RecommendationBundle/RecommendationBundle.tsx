@@ -396,6 +396,9 @@ export const RecommendationBundle = observer((properties: RecommendationBundlePr
 	}
 
 	const renderedResults = useMemo(() => {
+		// when seed is not in carousel and we have a seed, offset the index by 1
+		const indexOffset = hasSeed && resultsToRender.filter((result) => result.bundleSeed == true).length ? 0 : 1;
+
 		return resultsToRender.map((result, idx) => {
 			const isSeed = Boolean(result.bundleSeed);
 			const selected = selectedItems.findIndex((item) => item.id == result.id) > -1;
@@ -424,7 +427,7 @@ export const RecommendationBundle = observer((properties: RecommendationBundlePr
 				<ResultTracker key={result.id} controller={controller} result={result} track={{ impression: Boolean(!isSeed) }}>
 					<BundleSelector {...attributes}>
 						{resultComponent ? (
-							cloneWithProps(resultComponent, { result: result, seed: isSeed, selected, onProductSelect })
+							cloneWithProps(resultComponent, { result: result, seed: isSeed, selected, onProductSelect, index: idx + indexOffset })
 						) : (
 							<Result {...subProps.result} controller={controller} result={result} />
 						)}
@@ -494,6 +497,7 @@ export const RecommendationBundle = observer((properties: RecommendationBundlePr
 															seed: true,
 															selected: selectedItems.findIndex((item) => item.id == seed.id) > -1,
 															onProductSelect,
+															index: 0, // seed is always index 0
 														})
 													) : (
 														<Result {...subProps.result} controller={controller} result={seed} />
