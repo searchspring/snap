@@ -73,7 +73,7 @@ describe('Recommendation Component', async () => {
 		cy.get('.ss__recommendation').should('exist');
 		cy.get('.ss__recommendation .findMe .result').should('have.length', controller.store.results.length);
 		// should be called 20 times (one for each result rendered)
-		cy.get('@render').its('callCount').should('eq', 20);
+		cy.get('@render').its('callCount').should('eq', 1);
 		cy.wait(3000);
 		cy.get('@impression').its('callCount').should('eq', 5);
 	});

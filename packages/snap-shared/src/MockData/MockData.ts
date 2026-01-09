@@ -125,6 +125,7 @@ export class MockData {
 				meta: this.meta(),
 				profile: getJSON(profileFile).profile,
 				results: getJSON(resultsFile)[0].results,
+				responseId: getJSON(resultsFile)[0].responseId || 'responseId-mock', // TODO remove fallback
 			};
 		} catch (err) {
 			throw `Recommend JSON not found. Profile: '${profileFile}', Results: '${resultsFile}'`;

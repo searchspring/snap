@@ -42,7 +42,7 @@ export class SnapAPI extends API {
 			JSON.stringify(requestParameters)
 		);
 
-		return response as SearchResponseModel;
+		return response as any as SearchResponseModel;
 	}
 
 	async postAutocomplete(requestParameters: AutocompleteRequestModel): Promise<AutocompleteResponseModel> {
@@ -59,6 +59,6 @@ export class SnapAPI extends API {
 			JSON.stringify(requestParameters)
 		);
 
-		return response as AutocompleteResponseModel;
+		return response as any as AutocompleteResponseModel;
 	}
 }

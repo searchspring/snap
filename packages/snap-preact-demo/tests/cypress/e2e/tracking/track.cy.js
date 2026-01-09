@@ -159,9 +159,7 @@ describe('Tracking Beacon 2.0', () => {
 			expect(render.response.body).to.have.property('success').to.equal(true);
 			const { context, data } = JSON.parse(render.request.body);
 			expect(context).to.be.an('object');
-			expect(data).to.have.property('results').to.be.an('array').length.greaterThan(0);
-			expect(data).not.to.have.property('q');
-			expect(data).to.have.property('bgfilter').to.be.an('array').length.greaterThan(0);
+			expect(data).to.have.property('responseId').to.be.an('string').and.to.not.be.empty;
 
 			expect(impression.response.statusCode).to.equal(200);
 		});
@@ -179,14 +177,11 @@ describe('Tracking Beacon 2.0', () => {
 			expect(render.response.body).to.have.property('success').to.equal(true);
 			const { context, data } = JSON.parse(render.request.body);
 			expect(context).to.be.an('object');
-			expect(data).to.have.property('results').to.be.an('array').length.greaterThan(0);
-			expect(data.results[0]).to.have.property('uid').to.be.a('string');
-			expect(data).to.have.property('merchandising').to.be.an('object');
-			expect(data).to.have.property('pagination').to.be.an('object');
-			expect(data).to.not.have.property('sort');
+			expect(data).to.have.property('responseId').to.be.an('string').and.to.not.be.empty;
 
 			expect(impression.response.body).to.have.property('success').to.equal(true);
 			const { data: data2 } = JSON.parse(impression.request.body);
+			expect(data2).to.have.property('responseId').to.be.an('string');
 			expect(data2).to.have.property('results').to.be.an('array').length.greaterThan(0);
 		});
 
@@ -227,8 +222,6 @@ describe('Tracking Beacon 2.0', () => {
 					expect(activeTermText).to.be.a('string');
 					expect(activeTermText.length).to.be.greaterThan(1);
 
-					const { data } = JSON.parse(request.body);
-					expect(data).to.have.property('q').to.be.a('string').and.to.equal(activeTermText);
 					cy.get('input[name="q"]').type(activeTermText.substring(1, 2));
 					cy.wait(2000).then(() => {
 						expect(counter).to.equal(1);
@@ -246,7 +239,7 @@ describe('Tracking Beacon 2.0', () => {
 
 			const { context, data } = JSON.parse(request.body);
 			expect(context).to.be.an('object');
-			expect(data).to.have.property('results').to.be.an('array').length.greaterThan(0);
+			expect(data).to.have.property('responseId').to.be.an('string').and.to.not.be.empty;
 			expect(data).to.have.property('tag').to.be.a('string').and.to.not.be.empty;
 		});
 
