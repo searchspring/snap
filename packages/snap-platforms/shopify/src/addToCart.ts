@@ -2,7 +2,7 @@ import type { Product } from '@searchspring/snap-store-mobx';
 
 type ShopifyAddToCartConfig = {
 	redirect?: boolean | string;
-	idFieldName?: string; // display.mappings.core.id
+	idFieldName?: string; // display.mappings.core.uid
 };
 
 declare global {
