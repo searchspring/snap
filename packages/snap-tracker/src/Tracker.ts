@@ -23,6 +23,11 @@ const defaultConfig: TrackerConfig = {
 	id: 'track',
 	framework: 'snap',
 	mode: AppMode.production,
+	requesters: {
+		beacon: {
+			origin: 'https://beacon.searchspring.io/beacon/v2',
+		},
+	},
 };
 
 export class Tracker extends Beacon {
@@ -36,11 +41,11 @@ export class Tracker extends Beacon {
 		config = deepmerge(defaultConfig, config || {});
 		config.initiator = `searchspring/${config.framework}/${version}`;
 
-		super(globals, config);
 		if (typeof globals != 'object' || typeof globals.siteId != 'string') {
 			throw new Error(`Invalid config passed to tracker. The "siteId" attribute must be provided.`);
 		}
 
+		super(globals, config);
 		this.config = config;
 
 		this.doNotTrack = this.config.doNotTrack || [];
