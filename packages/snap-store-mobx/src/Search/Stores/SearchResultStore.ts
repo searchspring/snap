@@ -45,14 +45,30 @@ export class SearchResultStore extends Array<Product | Banner> {
 		});
 
 		const variantConfig = (config as SearchStoreConfig | AutocompleteStoreConfig | RecommendationStoreConfig)?.settings?.variants;
-
 		// preselected variant options
 		if (variantConfig?.realtime?.enabled) {
 			// attach click events - ONLY happens once (known limitation)
 			if (!loaded && results.length) {
 				document.querySelectorAll(`[${VARIANT_ATTRIBUTE}]`).forEach((elem) => {
 					if (variantConfig?.field && !variantConfig?.realtime?.enabled === false) {
-						elem.addEventListener('click', () => variantOptionClick(elem, variantConfig, results));
+						if (elem.tagName == 'OPTION') {
+							const parentSelect = elem.closest('select');
+							if (parentSelect) {
+								parentSelect.addEventListener('change', (e) => {
+									const val = (e.target as HTMLSelectElement)?.value;
+									const clickedOption = Array.from(document.querySelectorAll(`[${VARIANT_ATTRIBUTE}]`)).filter(
+										(elem) => (elem as HTMLOptionElement).value == val
+									);
+									variantOptionClick(clickedOption[0], variantConfig, results);
+								});
+							} else {
+								console.warn('Warning: unable to add realtime variant event listener for element - ', elem);
+							}
+						} else {
+							elem.addEventListener('click', () => {
+								variantOptionClick(elem, variantConfig, results);
+							});
+						}
 					}
 				});
 			}
