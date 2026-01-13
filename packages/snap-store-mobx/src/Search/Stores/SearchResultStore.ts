@@ -49,18 +49,22 @@ export class SearchResultStore extends Array<Product | Banner> {
 		if (variantConfig?.realtime?.enabled) {
 			// attach click events - ONLY happens once (known limitation)
 			if (!loaded && results.length) {
+				const processedSelects = new Set<Element>();
 				document.querySelectorAll(`[${VARIANT_ATTRIBUTE}]`).forEach((elem) => {
 					if (variantConfig?.field && !variantConfig?.realtime?.enabled === false) {
 						if (elem.tagName == 'OPTION') {
 							const parentSelect = elem.closest('select');
 							if (parentSelect) {
-								parentSelect.addEventListener('change', (e) => {
-									const val = (e.target as HTMLSelectElement)?.value;
-									const clickedOption = Array.from(document.querySelectorAll(`[${VARIANT_ATTRIBUTE}]`)).filter(
-										(elem) => (elem as HTMLOptionElement).value == val
-									);
-									variantOptionClick(clickedOption[0], variantConfig, results);
-								});
+								if (!processedSelects.has(parentSelect)) {
+									processedSelects.add(parentSelect);
+									parentSelect.addEventListener('change', (e) => {
+										const val = (e.target as HTMLSelectElement)?.value;
+										const clickedOption = Array.from(document.querySelectorAll(`[${VARIANT_ATTRIBUTE}]`)).filter(
+											(elem) => (elem as HTMLOptionElement).value == val
+										);
+										variantOptionClick(clickedOption[0], variantConfig, results);
+									});
+								}
 							} else {
 								console.warn('Warning: unable to add realtime variant event listener for element - ', elem);
 							}
