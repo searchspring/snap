@@ -51,49 +51,47 @@ export class SearchResultStore extends Array<Product | Banner> {
 			if (!loaded && results.length) {
 				const processedSelects = new Set<Element>();
 				document.querySelectorAll(`[${VARIANT_ATTRIBUTE}]`).forEach((elem) => {
-					if (variantConfig?.field && !variantConfig?.realtime?.enabled === false) {
-						if (elem.tagName == 'OPTION') {
-							const parentSelect = elem.closest('select');
-							if (parentSelect) {
-								if (!processedSelects.has(parentSelect)) {
-									processedSelects.add(parentSelect);
-									parentSelect.addEventListener('change', (e) => {
-										const val = (e.target as HTMLSelectElement)?.value;
-										const clickedOption = Array.from(document.querySelectorAll(`[${VARIANT_ATTRIBUTE}]`)).filter(
-											(elem) => (elem as HTMLOptionElement).value == val
-										);
+					if (elem.tagName == 'OPTION') {
+						const parentSelect = elem.closest('select');
+						if (parentSelect) {
+							if (!processedSelects.has(parentSelect)) {
+								processedSelects.add(parentSelect);
+								parentSelect.addEventListener('change', (e) => {
+									const val = (e.target as HTMLSelectElement)?.value;
+									const clickedOption = Array.from(document.querySelectorAll(`[${VARIANT_ATTRIBUTE}]`)).filter(
+										(elem) => (elem as HTMLOptionElement).value == val
+									);
+									if (clickedOption.length > 0) {
 										variantOptionClick(clickedOption[0], variantConfig, results);
-									});
-								}
-							} else {
-								console.warn('Warning: unable to add realtime variant event listener for element - ', elem);
+									}
+								});
 							}
 						} else {
-							elem.addEventListener('click', () => {
-								variantOptionClick(elem, variantConfig, results);
-							});
+							console.warn('Warning: unable to add realtime variant event listener for element - ', elem);
 						}
+					} else {
+						elem.addEventListener('click', () => {
+							variantOptionClick(elem, variantConfig, results);
+						});
 					}
 				});
 			}
 
 			// check for attributes for preselection
 			if (results.length) {
-				if (variantConfig?.field && !variantConfig?.realtime?.enabled === false) {
-					const options: Record<string, string[]> = {};
-					// grab values from elements on the page to form preselected elements
-					document.querySelectorAll(`[${VARIANT_ATTRIBUTE_SELECTED}]`).forEach((elem) => {
-						const attr = elem.getAttribute(VARIANT_ATTRIBUTE);
-						if (attr) {
-							const [option, value] = attr.split(':');
-							if (option && value) {
-								options[option.toLowerCase()] = [value.toLowerCase()];
-							}
+				const options: Record<string, string[]> = {};
+				// grab values from elements on the page to form preselected elements
+				document.querySelectorAll(`[${VARIANT_ATTRIBUTE_SELECTED}]`).forEach((elem) => {
+					const attr = elem.getAttribute(VARIANT_ATTRIBUTE);
+					if (attr) {
+						const [option, value] = attr.split(':');
+						if (option && value) {
+							options[option.toLowerCase()] = [value.toLowerCase()];
 						}
-					});
+					}
+				});
 
-					makeVariantSelections(variantConfig, options, results);
-				}
+				makeVariantSelections(variantConfig, options, results);
 			}
 		}
 
