@@ -58,7 +58,7 @@ export class SearchResultStore extends Array<Product | Banner> {
 								processedSelects.add(parentSelect);
 								parentSelect.addEventListener('change', (e) => {
 									const val = (e.target as HTMLSelectElement)?.value;
-									const clickedOption = Array.from(document.querySelectorAll(`[${VARIANT_ATTRIBUTE}]`)).filter(
+									const clickedOption = Array.from(parentSelect.querySelectorAll(`[${VARIANT_ATTRIBUTE}]`)).filter(
 										(elem) => (elem as HTMLOptionElement).value == val
 									);
 									if (clickedOption.length > 0) {
@@ -85,7 +85,9 @@ export class SearchResultStore extends Array<Product | Banner> {
 					const attr = elem.getAttribute(VARIANT_ATTRIBUTE);
 					if (attr) {
 						const [option, value] = attr.split(':');
-						if (option && value) {
+						if (!option || !value) {
+							console.error('Error!: realtime variant is missing option or value (option:value)!', elem, attr);
+						} else if (option && value) {
 							options[option.toLowerCase()] = [value.toLowerCase()];
 						}
 					}
