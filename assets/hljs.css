@@ -92,7 +92,7 @@ pre {
 }
 
 /* Dark mode overrides - ensure accessible colors on dark backgrounds */
-@media (prefers-color-scheme: dark) {
+body.dark-mode {
 	pre {
 		color: #e0e0e0;
 	}
