@@ -85,9 +85,7 @@ export class SearchResultStore extends Array<Product | Banner> {
 					const attr = elem.getAttribute(VARIANT_ATTRIBUTE);
 					if (attr) {
 						const [option, value] = attr.split(':');
-						if (!option || !value) {
-							console.error('Error!: realtime variant is missing option or value (option:value)!', elem, attr);
-						} else if (option && value) {
+						if (option && value) {
 							options[option.toLowerCase()] = [value.toLowerCase()];
 						}
 					}
@@ -764,9 +762,12 @@ function variantOptionClick(elem: Element, variantConfig: VariantConfig, results
 	const attr = elem.getAttribute(VARIANT_ATTRIBUTE);
 	if (attr) {
 		const [option, value] = attr.split(':');
-		options[option.toLowerCase()] = [value.toLowerCase()];
-
-		makeVariantSelections(variantConfig, options, results);
+		if (!option || !value) {
+			console.error('Error!: realtime variant is missing option or value (option:value)!', elem, attr);
+		} else {
+			options[option.toLowerCase()] = [value.toLowerCase()];
+			makeVariantSelections(variantConfig, options, results);
+		}
 	}
 }
 
