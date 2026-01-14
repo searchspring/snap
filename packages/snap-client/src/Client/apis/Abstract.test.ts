@@ -54,7 +54,7 @@ describe('Abstract Api', () => {
 			config: {
 				enabled: true,
 				ttl: 300000, // ms
-				maxSize: 200, // KB
+				maxSize: 1000, // KB
 				purgeable: true,
 			},
 			memoryCache: {},
@@ -205,6 +205,54 @@ describe('Abstract Api', () => {
 		// @ts-ignore
 		const params = api2.createFetchParams(contextWithQuery);
 		expect(params.url).toBe('https://searchspring.com/api/v1/autocomplete?key=value');
+	});
+
+	it('can handle subDomain parameter in createFetchParams', async () => {
+		const config: ApiConfigurationParameters = {
+			fetchApi: global.window.fetch,
+			headers: customHeaders,
+		};
+
+		const api = new API(new ApiConfiguration(config));
+
+		const body = { siteId: '8uyt2m' };
+		const contextWithSubDomain = {
+			path: '/api/v1/autocomplete',
+			method: 'POST',
+			headers: config.headers,
+			body: body,
+			subDomain: 'test',
+		};
+
+		// test with subDomain - should generate URL with subdomain in the path
+		// @ts-ignore - private method
+		const fetchParamsWithSubDomain = api.createFetchParams(contextWithSubDomain);
+		expect(fetchParamsWithSubDomain.url).toBe('https://8uyt2m.a.test.searchspring.io/api/v1/autocomplete');
+
+		// test without subDomain - should generate URL without subdomain
+		const contextWithoutSubDomain = {
+			path: '/api/v1/autocomplete',
+			method: 'POST',
+			headers: config.headers,
+			body: body,
+		};
+
+		// @ts-ignore - private method
+		const fetchParamsWithoutSubDomain = api.createFetchParams(contextWithoutSubDomain);
+		expect(fetchParamsWithoutSubDomain.url).toBe('https://8uyt2m.a.searchspring.io/api/v1/autocomplete');
+
+		// test with custom origin and subDomain - origin should take precedence
+		const configWithOrigin: ApiConfigurationParameters = {
+			origin: 'https://custom-origin.com',
+			fetchApi: global.window.fetch,
+			headers: customHeaders,
+		};
+
+		const apiWithOrigin = new API(new ApiConfiguration(configWithOrigin));
+
+		// @ts-ignore - private method
+		const fetchParamsWithOrigin = apiWithOrigin.createFetchParams(contextWithSubDomain);
+		expect(fetchParamsWithOrigin.url).toBe('https://custom-origin.com/api/v1/autocomplete');
 	});
 
 	it('can use cacheKey', async () => {

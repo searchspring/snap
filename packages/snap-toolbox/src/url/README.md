@@ -1,13 +1,13 @@
-## url
+# url
 This utility function parses a given url.
 
-```typescript
+```js
 import { url } from '@searchspring/snap-toolbox';
 ```
 
 The function takes a single required parameter containing a url string and returns an object with the following properties:
 
-```typescript
+```js
 {
 	base: string;
 	params: {
@@ -30,7 +30,7 @@ The function takes a single required parameter containing a url string and retur
 
 Typical usage may include parsing the current url to see if a certain parameter is present: 
 
-```typescript
+```js
 const currentUrl = url(window.location.href);
 if(currentUrl.params.query?.dev) {
     console.log("url contains dev query parameter")
@@ -39,7 +39,7 @@ if(currentUrl.params.query?.dev) {
 
 Or adding additional parameters to a url: 
 
-```typescript
+```js
 const currentUrl = url(window.location.href);
 // https://localhost:3333/search
 

@@ -365,7 +365,7 @@ describe('getInitialUrlState function', () => {
 		});
 	});
 
-	it('will use several inital parameters at once (including custom ones)', () => {
+	it('will use several initial parameters at once (including custom ones)', () => {
 		const initialConfig = {
 			parameters: {
 				query: {

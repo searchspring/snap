@@ -58,7 +58,7 @@ const errorObject = {
 
 ## ErrorHandle Types
 
-```typescript
+```js
 import { ErrorType } from '@searchspring/snap-store-mobx';
 
 export enum ErrorType {

@@ -124,7 +124,7 @@ The default configuration contains the following properties, however **`any Reco
 
 `spaceBetween` - spacing between each product
 
-```typescript
+```js
 const defaultRecommendationBreakpoints = {
 	0: {
 		slidesPerView: 1,

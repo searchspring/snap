@@ -32,7 +32,7 @@ The `pagination` prop can take a bool to enable pagination dots, or an object co
 
 or
 
-```typescript
+```js
 const paginationConfig = {
 	bulletActiveClass: "active",
 	bulletClass: 'bullet',
@@ -123,7 +123,7 @@ The default configuration contains the following properties, however **`any Caro
 
 `spaceBetween` - spacing between each product
 
-```typescript
+```js
 const defaultCarouselBreakpoints = {
 	0: {
 		slidesPerView: 1,

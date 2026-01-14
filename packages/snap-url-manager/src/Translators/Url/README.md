@@ -73,7 +73,7 @@ The `serialize` and `deserialize` methods are abstracted away by the `UrlManager
 ### Core Parameter Configuration
 
 Default core parameter configuration:
-```javascript
+```js
 query: { name: 'q', type: 'query' },
 oq: { name: 'oq', type: 'query' },
 rq: { name: 'rq', type: 'query' },

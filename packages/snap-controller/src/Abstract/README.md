@@ -11,7 +11,7 @@ The required configuration for all controllers is an `id`. This identifier shoul
 
 <br>
 
-```typescript
+```js
 const abstractConfig = {
 	id: 'abstract',
 };
@@ -49,7 +49,7 @@ This is an abstract method that must be defined in the subclass.
 ## on
 This method is used to attach event middleware. Each controller defines it's own events, this method provides a means to attach to them.
 
-```typescript
+```js
 controller.on('init', async(eventData, next) => {
 	eventData.controller.log.debug('initialized!');
 	await next();
@@ -59,7 +59,7 @@ controller.on('init', async(eventData, next) => {
 ## plugin
 Modification or extension of functionality as well as attaching groups of event middleware can be done using the `plugin` method. Plugin functions can be passed additional parameters if needed.
 
-```typescript
+```js
 const paramPlugin = (controller, ...params) => {
 	// params = [ 'param1', 'param2' ]
 	controller.on('init', async({ controller }, next) => {

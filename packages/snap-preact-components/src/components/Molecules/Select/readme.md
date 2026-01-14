@@ -21,7 +21,7 @@ The required `options` prop specifies an array of Option Objects to be rendered.
 
 #### Option Object
 
-```typescript
+```js
 {
 	label: 'Price',
 	value: 'asc'

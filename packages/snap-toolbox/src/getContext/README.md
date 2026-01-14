@@ -1,7 +1,7 @@
-## Script Context
+# Script Context
 This utility function gets a script tags attributes and innerHTML declarations and returns them in an object.
 
-```typescript
+```js
 import { getContext } from '@searchspring/snap-toolbox';
 ```
 
@@ -19,7 +19,7 @@ If siteId is passed as a variable to evaluate, it will grab it out of the contex
 ### Example Integration Context
 
 ```html
-<script type="text/javascript" src="https://snapui.searchspring.io/abc123/bundle.js">
+<script src="https://snapui.searchspring.io/REPLACE_WITH_YOUR_SITE_ID/bundle.js" id="searchspring-context">
 	shopper = {
 		id: 'snapdev'
 	};
@@ -27,12 +27,12 @@ If siteId is passed as a variable to evaluate, it will grab it out of the contex
 </script>
 ```
 
-```typescript
+```js
 const context = getContext(['shopper', 'category']);
 /*
 	context = {
 		type: 'text/javascript',
-		src: 'https://snapui.searchspring.io/abc123/bundle.js',
+		src: 'https://snapui.searchspring.io/REPLACE_WITH_YOUR_SITE_ID/bundle.js',
 		shopper: {
 			id: 'snapdev'
 		},
@@ -50,12 +50,12 @@ const context = getContext(['shopper', 'category']);
 		id: 'snapdev'
 	};
 	options = {
-		siteId: 'abc123'
+		siteId: 'REPLACE_WITH_YOUR_SITE_ID'
 	};
 </script>
 ```
 
-```typescript
+```js
 const scriptTag = document.querySelector('script[type="searchspring/recommend"');
 const context = getContext(['product', 'shopper', 'options'], scriptTag);
 /*
@@ -67,7 +67,7 @@ const context = getContext(['product', 'shopper', 'options'], scriptTag);
 			id: 'snapdev'
 		},
 		options: {
-			siteId: 'abc123'
+			siteId: 'REPLACE_WITH_YOUR_SITE_ID'
 		}
 	}
 */

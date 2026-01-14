@@ -5,7 +5,7 @@ A theme object contains a `components` object with one or more objects where the
 
 For example, this `globalTheme` theme object will apply the prop `color={'blue'}` for all `<Button />` components and `hideCount={false}` for all `<facetListOptions />` components.
 
-```typescript
+```js
 const globalTheme = {
 	components: {
 		button: {
@@ -20,7 +20,7 @@ const globalTheme = {
 
 If a component contains multiple sub-components (ie. Molecule or Organisms), it is also possible to provide sub-component props as follows:
 
-```typescript
+```js
 const globalTheme = {
 	components: {
 		facetListOptions: {
@@ -39,7 +39,7 @@ const globalTheme = {
 
 The theme object also contains colors used throughout components:
 
-```typescript
+```js
 const globalTheme = {
 	colors: {
 		primary: '#3A23AD',
@@ -65,7 +65,7 @@ const globalTheme = {
 ### ThemeProvider
 Using a ThemeProvider applies a global theme to all its children components
 
-```typescript
+```js
 import { ThemeProvider, Button } from '@searchspring/snap-preact-components'
 ```
 
@@ -82,7 +82,7 @@ The component `theme` is merged with the global theme, therefore component theme
 
 In the following example, the `<Button />` component will contain `color={'green'}` from `propTheme` and `native={true}` from `globalTheme`
 
-```typescript
+```js
 const globalTheme = {
 	components: {
 		button: {
@@ -122,7 +122,7 @@ Standard CSS:
 ```
 
 In CSS object syntax, properties are camel case and `'-'` are removed:
-```typescript
+```js
 { 
 	backgroundColor: '#ffff00',
 	color: '#cccccc',
@@ -133,7 +133,7 @@ In CSS object syntax, properties are camel case and `'-'` are removed:
 
 Global level styling via `theme` prop:
 
-```typescript
+```js
 const globalTheme = {
 	components: {
 		button: {
@@ -154,7 +154,7 @@ const globalTheme = {
 
 Component level styling via `style` prop:
 
-```typescript
+```js
 const buttonStyles = {
 	backgroundColor: '#ffff00',
 	color: '#cccccc'
@@ -170,7 +170,7 @@ The `disableStyles` prop is available on all components and allows for disabling
 
 This can be done at the global level:
 
-```typescript
+```js
 const globalTheme = {
 	components: {
 		button: {
@@ -199,7 +199,7 @@ By default, all components will contain a class name of `ss-${componentname}`, f
 
 This can be done at the global level:
 
-```typescript
+```js
 const globalTheme = {
 	components: {
 		button: {
