@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.72.0](https://github.com/searchspring/snap/compare/v0.71.0...v0.72.0) (2026-01-14)
+
+### Bug Fixes
+
+- **networkcache:** bugfix to prevent memoryCache from growing too large, and delete expired entries ([0534b6c](https://github.com/searchspring/snap/commit/0534b6c4ccb62389669c19f8f9f87cbd098fa6a5))
+
+### Features
+
+- **client:** adding support to have separate subdomain in api - using this for recommend requests ([ceb6d65](https://github.com/searchspring/snap/commit/ceb6d6500c2c8a57df0356535d0f74d8d0464fae))
+- **networkcache:** get function no longer accounts for personalization params when backforward nav ([de52d7e](https://github.com/searchspring/snap/commit/de52d7e02c7ed70488a31a4f92bd26820a8f3823))
+
 # [0.71.0](https://github.com/searchspring/snap/compare/v0.70.1...v0.71.0) (2025-11-26)
 
 **Note:** Version bump only for package @searchspring/snap-client

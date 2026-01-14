@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.72.0](https://github.com/searchspring/snap/compare/v0.71.0...v0.72.0) (2026-01-14)
+
+### Features
+
+- **client:** adding support to have separate subdomain in api - using this for recommend requests ([ceb6d65](https://github.com/searchspring/snap/commit/ceb6d6500c2c8a57df0356535d0f74d8d0464fae))
+- **snap.tsx:** adding support for configurable initiator ([f286c5c](https://github.com/searchspring/snap/commit/f286c5c5f416ddad5771002bf00a0dc2e570922f))
+
 # [0.71.0](https://github.com/searchspring/snap/compare/v0.70.1...v0.71.0) (2025-11-26)
 
 ### Bug Fixes

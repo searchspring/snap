@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.72.0](https://github.com/searchspring/snap/compare/v0.71.0...v0.72.0) (2026-01-14)
+
+### Bug Fixes
+
+- **searchresultstore:** adding support for option element to be used in realtime variants ([167f867](https://github.com/searchspring/snap/commit/167f867f12b06a6fb0f8f84f4553a9d9e6b2d884))
+
 # [0.71.0](https://github.com/searchspring/snap/compare/v0.70.1...v0.71.0) (2025-11-26)
 
 **Note:** Version bump only for package @searchspring/snap-store-mobx
