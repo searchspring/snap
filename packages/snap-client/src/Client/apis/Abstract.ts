@@ -18,6 +18,7 @@ export interface RequestOpts {
 	headers: HTTPHeaders;
 	query?: HTTPQuery;
 	body?: HTTPBody;
+	subDomain?: string; // optional subdomain for requests
 }
 
 export class API {
@@ -103,7 +104,7 @@ export class API {
 			throw new Error(`Request failed. Missing "siteId" parameter.`);
 		}
 
-		const siteIdHost = `https://${siteId}.a.searchspring.io`;
+		const siteIdHost = `https://${siteId}.a${context.subDomain ? `.${context.subDomain}` : ''}.searchspring.io`;
 		const origin = (this.configuration.origin || siteIdHost).replace(/\/$/, '');
 
 		let url = `${origin}/${context.path.replace(/^\//, '')}`;
