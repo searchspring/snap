@@ -1,38 +1,21 @@
 # Snap URL Manager
 
 
-The Snap URL manager is a service that provides customizable frontend URL management and a means to subscribe to the URL for changes. It's primary purpose is to provide a standard API to manage URL across Snap products.
+Snap URL Manager is available on each controller via `controller.urlManager`. It is a core service that provides customizable frontend URL management and a means to subscribe to the URL for changes. Its primary purpose is to provide a standard API to manage URL across Snap products.
 
-## Installation
 
-```sh
-npm install --save-dev @searchspring/url-manager
-```
-
-## Import
-
-```js
-import { UrlManager, UrlTranslator } from '@searchspring/url-manager';
-```
-
-## Instantiation
-
-The UrlManager class takes one parameter. This is the translator that manages your URL scheme, as well as rules for updating the URL. For now, we'll use the included translator that uses query strings and hash fragments and utilizes pushState to modify the URL in the browser.
+A `urlManager` is constructed with a `Translator` instance. This is the translator that manages your URL scheme, as well as rules for updating the URL. For now, we'll use the included translator that uses query strings and hash fragments and utilizes pushState to modify the URL in the browser.
 
 See [Translators](https://github.com/searchspring/snap/tree/main/packages/snap-url-manager/src/Translators) for more info.
 
-```js
-const urlManager = new UrlManager(new UrlTranslator());
-```
-
-Depending on the translator, the instantiated url manager will automatically start tracking from the browser URL.
+Depending on the translator, the instantiated `urlManager` will automatically start tracking from the browser URL.
 
 ## Navigate to another location using transforms.
 
 Let's add a new parameter, `page=2`, to the browser's address bar.
 
 ```js
-urlManager.merge({ page: 2 }).go();
+controller.urlManager.merge({ page: 2 }).go();
 ```
 
 In this example, we first created a new url manager with internal state that reflects `page=2` . Url managers are never directly modified, but when merging or setting parameters, a new url manager is created with a new state.
@@ -50,19 +33,19 @@ Paths can be expressed in either of these formats:
 Therefore, you can also accomplish this same transformation with the following:
 
 ```js
-const newManager = urlManager.set('page', 2);
+const newManager = controller.urlManager.set('page', 2);
 ```
 
 The page parameter can be removed with the following:
 
 ```js
-const newManager = urlManager.remove('page');
+const newManager = controller.urlManager.remove('page');
 ```
 
 Setting a value in a longer, nested path would look like this:
 
 ```js
-const newManager = urlManager.set('filter.color', 'blue');
+const newManager = controller.urlManager.set('filter.color', 'blue');
 ```
 
 This will produce 1 value for `filter.color` and remove any others.
@@ -80,7 +63,7 @@ const newManager = urlManager
 You can access a url manager's href property at any time with
 
 ```js
-urlManager.href;
+controller.urlManager.href;
 ```
 
 ## Many copies
@@ -93,7 +76,7 @@ const facetValuesWithUrls = (facet, facetValues) => {
 	return facetValues.map((facetValue) => {
 		return {
 			...facetValue,
-			url: urlManager.merge(['filter', facet.field], facetValue.value),
+			url: controller.urlManager.merge(['filter', facet.field], facetValue.value),
 		};
 	});
 };
@@ -148,7 +131,7 @@ See [Linkers](https://github.com/searchspring/snap/tree/main/packages/snap-url-m
 You can subscribe to URL changes like so:
 
 ```js
-urlManager.subscribe((prev, next) => {
+controller.urlManager.subscribe((prev, next) => {
 	console.log(prev, next);
 });
 ```
@@ -171,11 +154,11 @@ Take the following example:
 ```js
 const urlManager = new UrlManager(new UrlTranslator());
 
-const urlManagerWithColor = urlManager.merge('filter.color_family', 'blue');
+const urlManagerWithColor = controller.urlManager.merge('filter.color_family', 'blue');
 
 console.log(window.location.href); // https://try.searchspring.com?q=dress
 
-console.log(urlManager.href); // ?q=dress
+console.log(controller.urlManager.href); // ?q=dress
 console.log(urlManagerWithColor.href); // ?q=dress#/filter:color_family:Blue
 ```
 
@@ -184,11 +167,11 @@ You can see that the href of `urlManager` matches the parameters of the page URL
 Now let's navigate to a new URL using the `go` function and check the href's again:
 
 ```js
-const urlManagerWithNewParam = urlManager.merge({ newParam: 'newValue' });
+const urlManagerWithNewParam = controller.urlManager.merge({ newParam: 'newValue' });
 
 urlManagerWithNewParam.go();
 console.log(window.location.href); // https://try.searchspring.com?q=dress#/newParam:newValue
-console.log(urlManager.href); // ?q=dress#/newParam:newValue
+console.log(controller.urlManager.href); // ?q=dress#/newParam:newValue
 console.log(urlManagerWithNewParam.href); // ?q=dress#/newParam:newValue
 
 console.log(urlManagerWithColor.href); // ?q=dress#/filter:color_family:Blue/newParam:newValue
@@ -200,14 +183,15 @@ state of `urlManagerWithColor` remains unmodified. This holds true for removals 
 ```js
 const urlManagerWithColorButWithoutNewParam = urlManagerWithColor.remove('newParam');
 
-console.log(urlManager.href); // ?q=dress#/newParam:newValue
+console.log(controller.urlManager.href); // ?q=dress#/newParam:newValue
 console.log(urlManagerWithNewParam.href); // ?q=dress#/newParam:newValue
 
 console.log(urlManagerWithColor.href); // ?q=dress#/filter:color_family:Blue/newParam:newValuecolor=blue
 console.log(urlManagerWithColorButWithoutNewParam.href); // ?q=dress#/filter:color_family:Blue
 ```
 
-**Note:** UrlManagers with different instantiations will not notify each other about URL updates. For example:
+> [!NOTE]
+> UrlManagers with different instantiations will not notify each other about URL updates. For example:
 
 ```js
 const originalUrlManager = new UrlManager(new QueryStringTranslator());

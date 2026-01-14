@@ -69,7 +69,7 @@ describe('until', () => {
 		expect(returnVal).toBe(thing);
 	});
 
-	it('should resolve immediate - primative', async () => {
+	it('should resolve immediate - primitive', async () => {
 		const thing = 'success';
 		expect.assertions(1);
 
@@ -100,7 +100,7 @@ describe('until', () => {
 		expect(returnVal).toBe('success');
 	});
 
-	it('should resolve defer - primative', async () => {
+	it('should resolve defer - primitive', async () => {
 		const thing = 'success';
 		expect.assertions(1);
 

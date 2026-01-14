@@ -14,7 +14,7 @@ A `UrlManager` is instantiated with a translator. The `Translator` defines the b
 
 `Translator` typescript interface:
 
-```typescript
+```js
 interface Translator {
 	getCurrentUrl(): string;
 	getConfig(): Record<string, unknown>;
@@ -48,7 +48,7 @@ Default behavior of an existing translator can be overridden by extending the cl
 Consider this mock translator:
 
 ```js
-// filename: urls.test.ts
+// filename: urls.test.js
 
 let url = '';
 
@@ -108,7 +108,7 @@ This is to ensure a canonical internal state structure when performing transform
 
 Typescript type for `UrlState`:
 
-```typescript
+```js
 enum RangeValueProperties {
 	LOW = 'low',
 	HIGH = 'high',
