@@ -1,4 +1,4 @@
-## Tracking
+# Tracking
 
 To ensure accurate tracking of events used for reporting, the following tracking events should be implemented across Search, Category, Autocomplete and Recommendations result components.
 
@@ -102,7 +102,8 @@ const Results = withController((props) => {
 
 ## Events invoked outside of the integration code
 
-**Note**: if using Shopify and you have installed Searchspring's Shopify Pixel Tracking extension, the following events will be tracked by the extension and integrating these events is not required.
+> [!NOTE]
+> If using Shopify and you have installed Searchspring's Shopify Pixel Tracking extension, the following events will be tracked by the extension and integrating these events is not required.
 
 Some reports rely on beacon data that is tracked outside of the main integration code. To ensure accurate reporting, these tracking events should be implemented on the relevant pages. Note that these tracking methods require the `bundle.js` script to be present on any page where they are used.
 
@@ -116,19 +117,19 @@ Identifies the logged-in user. Should be invoked if a user is logged into their 
 - (Recommended) using the `shopper.id` context variable on the main `/bundle.js` script.
 
 ```html
-<script src="https://snapui.searchspring.io/[your_site_id]/bundle.js">
+<script src="https://snapui.searchspring.io/[your_site_id]/bundle.js" id="searchspring-context">
 	shopper = {
-		id: 'snapdev'
+		id: '[REPLACE WITH LOGGED IN SHOPPER ID]'
 	};
 </script>
 ```
 
 - (Alternative) using the global `searchspring.tracker.track.shopper.login` method.
 
-```typescript
+```js
 searchspring.tracker.events.shopper.login({
 	data: {
-		id: 'snapdev'
+		id: '[REPLACE WITH LOGGED IN SHOPPER ID]'
 	}
 });
 ```
@@ -139,7 +140,7 @@ Defines the currency of the shopper. This is not required if the storefront is c
 - (Recommended) using the `currency` context variable on the main `/bundle.js` script.
 
 ```html
-<script src="https://snapui.searchspring.io/[your_site_id]/bundle.js">
+<script src="https://snapui.searchspring.io/[your_site_id]/bundle.js" id="searchspring-context">
 	currency = {
 		code: 'EUR'
 	};
@@ -148,7 +149,7 @@ Defines the currency of the shopper. This is not required if the storefront is c
 
 - (Alternative) using the global `searchspring.tracker.setCurrency` method.
 
-```typescript
+```js
 searchspring.tracker.setCurrency({
 	code: 'EUR'
 })
@@ -158,7 +159,7 @@ searchspring.tracker.setCurrency({
 ### Product View
 Tracks product page views. Should only be installed on product detail pages. A `uid` and/or `sku` and/or `childSku` and/or `childUid` are required (provide as many of these product identifiers that are available).
 
-```typescript
+```js
 searchspring.tracker.events.product.pageView({
 	data: {
 		result: {
@@ -174,35 +175,23 @@ searchspring.tracker.events.product.pageView({
 ### Order Transaction
 Tracks order transaction. Should be invoked from an order confirmation page. Expects an object with the following:
 
-`orderId` - order id
+| Option | Type | Required | Description |
+|-----------|------|----------|-------------|
+| `orderId` | string | ✔️ | Order ID |
+| `transactionTotal` | number | ✔️ | Transaction total of all products before tax and shipping |
+| `total` | number | ✔️ | Transaction total of all products after tax and shipping |
+| `vat` | number | ➖ | Value added tax rate |
+| `city` | string | ➖ | City name |
+| `state` | string | ➖ | 2 digit state abbreviation (US only) |
+| `country` | string | ➖ | 2 digit country abbreviation (e.g., 'US', 'CA', 'MX', 'PL', 'JP') |
+| `results[].uid` | string | ✔️ | Product UID |
+| `results[].sku` | string | ➖ | Product SKU |
+| `results[].childUid` | string | ➖ | Product child UID |
+| `results[].childSku` | string | ➖ | Product child SKU |
+| `results[].qty` | number | ➖ | Product quantity |
+| `results[].price` | number | ➖ | Product price |
 
-`transactionTotal` - transaction total of all products before tax and shipping
-
-`total` - transaction total of all products after tax and shipping
-
-`vat` - (optional) value added tax rate
-
-`city` - (optional) city name
-
-`state` - (optional) 2 digit state abbreviation (US only)
-
-`country` - (optional) 2 digit country abbreviation	(ie. 'US', 'CA', 'MX', 'PL', 'JP')
-
-`results` - array of products
-
-`results[].uid` - product uid
-
-`results[].sku` - (optional) product sku
-
-`results[].childUid` - (optional) product child uid
-
-`results[].childSku` - (optional) product child sku
-
-`results[].qty` - (optional) product qty
-
-`results[].price` - (optional) product price
-
-```typescript
+```js
 searchspring.tracker.events.order.transaction({
 	data: {
 		orderId: '123456',
@@ -242,23 +231,18 @@ Cart contents can be tracked one of two ways. The first method is to invoke the 
 
 This requires integrating into platform cart events or manually attaching click handlers to add/remove buttons.
 
-`results` - array of products being added or removed from the cart
+| Option | Type | Required | Description |
+|--------|------|----------|-------------|
+| `results` | array | ✔️ | Array of products being added or removed from the cart |
+| `cart` | array | ✔️ | Array of products currently in the cart (state after products have been added/removed) |
+| `(results \| cart)[].uid` | string | ✔️ | Product UID |
+| `(results \| cart)[].sku` | string | ➖ | Product SKU |
+| `(results \| cart)[].childUid` | string | ➖ | Product child UID |
+| `(results \| cart)[].childSku` | string | ➖ | Product child SKU |
+| `(results \| cart)[].qty` | number | ➖ | Product quantity |
+| `(results \| cart)[].price` | number | ➖ | Product price |
 
-`cart` - array of products currently in the cart (state after products have been added/removed)
-
-`(results | cart)[].uid` - product uid
-
-`(results | cart)[].sku` - (optional) product sku
-
-`(results | cart)[].childUid` - (optional) product child uid
-
-`(results | cart)[].childSku` - (optional) product child sku
-
-`(results | cart)[].qty` - (optional) product qty
-
-`(results | cart)[].price` - (optional) product price
-
-```typescript
+```js
 searchspring.tracker.events.cart.add({
 	data: {
 		results: [
@@ -285,7 +269,7 @@ searchspring.tracker.events.cart.add({
 });
 ```
 
-```typescript
+```js
 searchspring.tracker.events.cart.remove({
 	data: {
 		results: [
@@ -308,9 +292,9 @@ searchspring.tracker.events.cart.remove({
 This method will compare the provided cart contents with the current cart contents stored in local storage and only send events if there are differences.
 
 ```html
-<script src="https://snapui.searchspring.io/[your_site_id]/bundle.js">
+<script src="https://snapui.searchspring.io/[your_site_id]/bundle.js" id="searchspring-context">
 	shopper = {
-		id: 'snapdev',
+		id: '[REPLACE WITH LOGGED IN SHOPPER ID]'
 		cart: [
 			{
 				uid: '123',
@@ -346,7 +330,7 @@ Adds product `uid` or `sku` (or `childSku`/`childUid`) to `ssCartProducts` cooki
 
 Alternatively, this can also be integrated using the `searchspring.tracker.cookies.cart.add` method
 
-```typescript
+```js
 searchspring.tracker.cookies.cart.add(['product123'])
 ```
 
@@ -360,7 +344,7 @@ Removes product `uid` or `sku` (or `childSku`/`childUid`) to `ssCartProducts` co
 
 Alternatively, this can also be integrated using the `searchspring.tracker.cookies.cart.remove` method
 
-```typescript
+```js
 searchspring.tracker.cookies.cart.remove(['product123'])
 ```
 
@@ -374,7 +358,7 @@ Clears all products currently stored in the `ssCartProducts` cookie.
 
 Alternatively, this can also be integrated using the `searchspring.tracker.cookies.cart.remove` method
 
-```typescript
+```js
 searchspring.tracker.cookies.cart.clear()
 ```
 

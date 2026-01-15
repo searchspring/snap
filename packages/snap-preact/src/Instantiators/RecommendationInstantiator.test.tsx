@@ -71,25 +71,6 @@ describe('RecommendationInstantiator', () => {
 		}).toThrow();
 	});
 
-	it('throws if configuration is missing branch config', () => {
-		const invalidConfig = {
-			client: {
-				globals: {
-					siteId: '8uyt2m',
-				},
-			},
-			components: {
-				Default: async () => Component,
-			},
-			config: {},
-		};
-
-		expect(() => {
-			// @ts-ignore - testing bad instantiation
-			new RecommendationInstantiator(invalidConfig);
-		}).toThrow();
-	});
-
 	it('throws if configuration is missing client globals', () => {
 		const invalidConfig = {
 			components: {
@@ -911,7 +892,7 @@ describe('RecommendationInstantiator', () => {
 		const attachmentConfig = {
 			...baseConfig,
 			config: {
-				branch: baseConfig.config.branch,
+				branch: baseConfig.config?.branch,
 				plugins: [[plugin, 'param1', { thing: 'here' }] as PluginGrouping, [plugin2] as PluginGrouping],
 				middleware: {
 					beforeSearch: middleware,
@@ -944,7 +925,7 @@ describe('RecommendationInstantiator', () => {
 		const attachmentConfig = {
 			...baseConfig,
 			config: {
-				branch: baseConfig.config.branch,
+				branch: baseConfig.config?.branch,
 			},
 		};
 

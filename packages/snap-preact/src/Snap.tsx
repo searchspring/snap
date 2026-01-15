@@ -408,7 +408,8 @@ export class Snap {
 				});
 			}
 
-			const trackerConfig = deepmerge(this.config.tracker?.config || {}, { framework: 'snap/preact', mode: this.mode });
+			const initiatorPrefix = window?.searchspring?.managed ? `managed/` : '';
+			const trackerConfig = deepmerge(this.config.tracker?.config || {}, { framework: `${initiatorPrefix}snap/preact`, mode: this.mode });
 			this.tracker = services?.tracker || new Tracker(trackerGlobals, trackerConfig);
 
 			// log version

@@ -1,7 +1,7 @@
 # StorageStore
 An interface for storing data in the browser session storage, local storage, cookies, or memory
 
-```typescript
+```js
 import { StorageStore } from '@searchspring/snap-store-mobx';
 
 const config = {
@@ -31,7 +31,7 @@ If `config` is not provided, storage will be saved to its internal `state` objec
 
 `cookie.sameSite` - cookie sameSite attribute, allows you to declare if cookies should be restricted to a first-party or same-site context, default is undefined
 
-```typescript
+```js
 const config = {
 	type: 'cookie',
 	key: 'ss-storage',
@@ -45,27 +45,27 @@ const config = {
 ## `set` method
 Accepts a path and value to save to storage
 
-```typescript
+```js
 storage.set(`facet.values`, facet.values)
 ```
 
 ## `get` method
 Retrieves a value by path from storage
 
-```typescript
+```js
 storage.get(`facet.values`)
 ```
 
 It is also possible to retrieve the entire storage without providing a path:
 
-```typescript
+```js
 storage.get()
 ```
 
 ## `clear` method
 Clears all data from storage
 
-```typescript
+```js
 storage.clear()
 ```
 
@@ -74,7 +74,7 @@ If a config has not been provided, the StorageStore will manage its `state` obje
 
 This `state` object can be accessed directly:
 
-```typescript
+```js
 storage.state
 ```
 

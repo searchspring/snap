@@ -7,7 +7,7 @@ It is typically spread on an anchor tag when used.
 ```
 
 Type of object returned by `link`:
-```typescript
+```js
 type linkObject = {
 	href: string;
 	onClick: (e: Event) => void;

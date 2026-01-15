@@ -1,132 +1,83 @@
 # Snap Profiler
 
-<a href="https://www.npmjs.com/package/@searchspring/snap-profiler"><img alt="NPM Status" src="https://img.shields.io/npm/v/@searchspring/snap-profiler.svg?style=flat"></a>
 
-A utility for recording how long something takes to complete. `Profiler` is used in finding API response, component rendering and Middleware execution times.
+Snap Profiler is a utility available on each controller via `controller.profiler` for recording how long something takes to complete. `Profiler` is used in finding API response, component rendering and Middleware execution times.
 
 
-## Dependency
+## `setNamespace` method
+Programmatically set the namespace after construction.
 
-Snap Profiler is a dependency of [@searchspring/snap-controller](https://github.com/searchspring/snap/tree/main/packages/snap-controller) <a href="https://www.npmjs.com/package/@searchspring/snap-controller"><img alt="NPM Status" src="https://img.shields.io/npm/v/@searchspring/snap-controller.svg?style=flat"></a>
-
-## Installation
-
-```bash
-npm install --save @searchspring/snap-profiler
+```js
+controller.profiler.setNamespace('namespace');
 ```
 
-## Import
-```typescript
-import { Profiler } from '@searchspring/snap-profiler';
-```
-
-
-<h2 id="Profiler">Profiler</h2>
-An optional `namespace` can be passed to the Profiler constructor for profile organization.
-
-```typescript
-import { Profiler } from '@searchspring/snap-profiler';
-
-const profiler = new Profiler('namespace');
-```
-
-### `setNamespace` method
-Programatically set the namespace after construction.
-
-```typescript
-import { Profiler } from '@searchspring/snap-profiler';
-
-const profiler = new Profiler();
-
-profiler.setNamespace('namespace');
-```
-
-### `create` method
+## `create` method
 Create a new profile.
 
-```typescript
-import { Profiler } from '@searchspring/snap-profiler';
-
-const profiler = new Profiler();
-
-const searchProfile = profiler.create({ 
+```js
+const searchProfile = controller.profiler.create({ 
 	type: 'event', 
 	name: 'search', 
-	context: params
-}: ProfileDetails);
+	context: params // any additional context
+});
 ```
 
-```typescript
-type ProfileDetails<T> = { 
-	type: string; 
-	name: string; 
-	context: T;
-}
-```
-
-Returns an instance of `Profile`. 
-
-
-<h2 id="Profile">Profile</h2>
-
-`Profile` is not an exported member of the Snap Profiler package. It is only returned in the Profiler `create` method.
-
-### `start` method
+## `start` method
 
 This will start the profiler timer.
 
-```typescript
+```js
 searchProfile.start();
 ```
 
-### `stop` method
+## `stop` method
 This will stop the profiler timer.
 
-```typescript
+```js
 searchProfile.stop();
 ```
 
-### `namespace` property
+## `namespace` property
 Profile namespace that was set using the `Profiler` constructor or the `setNamespace` method.
 
-```typescript
+```js
 console.log(`namespace: ${searchProfile.namespace}`);
 ```
 
-### `type` property
+## `type` property
 Profile type that was set in the `create` method `ProfileDetails` parameters.
 
-```typescript
+```js
 console.log(`type: ${searchProfile.type}`);
 ```
 
-### `name` property
+## `name` property
 Profile name that was set in the `create` method `ProfileDetails` parameters.
 
-```typescript
+```js
 console.log(`name: ${searchProfile.name}`);
 ```
 
-### `context` property
-Profile context that was set in the `create` method `ProfileDetails` parameters. The context is used to provide additional details regarding the profile. A search profile would likely contain the request parameters amoung other things.
+## `context` property
+Profile context that was set in the `create` method `ProfileDetails` parameters. The context is used to provide additional details regarding the profile. A search profile would likely contain the request parameters among other things.
 
-```typescript
+```js
 console.log(`context: ${searchProfile.context}`);
 ```
 
-### `status` property
+## `status` property
 Profile status. The default value is `pending`.
 
 The value will change to `started` when the `start` method is invoked and to `finished` when the `stop` method is invoked.
 
-```typescript
+```js
 console.log(`context: ${searchProfile.status}`);
 ```
 
-### `time` property
+## `time` property
 Profile time object is of type `ProfileTime`:
 
-```typescript
+```js
 type ProfileTime = {
 	date: number;
 	begin: number;
@@ -145,4 +96,4 @@ type ProfileTime = {
 
 
 ## Logging profiles
-It is recommended to using the Snap Logger's `profile` method to log Snap Profiles as it provides a clean output for easy parsing.
+It is recommended to use the [Snap Logger's `profile`](https://searchspring.github.io/snap/reference-logger#profile-method) method to log Snap Profiles as it provides a clean output for easy parsing.

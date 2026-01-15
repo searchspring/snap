@@ -66,7 +66,7 @@ Typically used to adjust the layout and how many products are shown at any scree
 
 Default Results `breakpoints` object:
 
-```typescript
+```js
 const breakpoints = {
 	0: {
 		columns: 1,
