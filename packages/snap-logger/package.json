@@ -1,6 +1,6 @@
 {
 	"name": "@searchspring/snap-logger",
-	"version": "0.72.0",
+	"version": "0.72.1",
 	"description": "Snap Logger",
 	"main": "dist/cjs/index.js",
 	"module": "dist/esm/index.js",
@@ -20,7 +20,7 @@
 		"test:watch": "jest --watch"
 	},
 	"dependencies": {
-		"@searchspring/snap-toolbox": "0.72.0"
+		"@searchspring/snap-toolbox": "0.72.1"
 	},
 	"sideEffects": false,
 	"files": [
