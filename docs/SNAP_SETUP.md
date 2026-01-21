@@ -45,7 +45,7 @@ This will start the local development server and serve the project build files a
 Note: The local server uses a self-signed certificate for HTTPS and you may be prompted to continue.
 
 
-There are two common ways to develop a project, using a [local mockup file](https://searchspring.github.io/snap/setup#local-mockup-file) and leveraging the [Snapfu Chrome extension](https://searchspring.github.io/snap/setup#snapfu-chrome-extension).
+There are two common ways to develop a project, using a [local mockup file](#local-mockup-file) or leveraging the [Snapfu Chrome extension](#snapfu-chrome-extension).
 
 ## Local mockup file
 
