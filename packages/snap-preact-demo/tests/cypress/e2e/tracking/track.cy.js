@@ -229,7 +229,7 @@ describe('Tracking Beacon 2.0', () => {
 
 					const { data } = JSON.parse(request.body);
 					expect(data).to.have.property('q').to.be.a('string').and.to.equal(activeTermText);
-					cy.get('input[name="q"]').type(activeTermText.substring(1, 2));
+					cy.get('input[name="q"]').type(activeTermText);
 					cy.wait(2000).then(() => {
 						expect(counter).to.equal(1);
 					});
