@@ -209,7 +209,7 @@ describe('Tracking Beacon 2.0', () => {
 		}).as('beacon2/autocomplete/impression-custom');
 
 		cy.visit('https://localhost:2222');
-		cy.get('input[name="q"]').type('r');
+		cy.get('input[name="q"]').type('s');
 		cy.wait(`@beacon2/autocomplete/impression-custom`).then(({ request, response }) => {
 			expect(response.body).to.have.property('success').to.equal(true);
 
