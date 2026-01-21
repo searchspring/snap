@@ -45,6 +45,7 @@ import {
 	ItemTypeEnum,
 } from '@searchspring/beacon';
 import { CLICK_DUPLICATION_TIMEOUT, isClickWithinProductLink } from '../utils/isClickWithinProductLink';
+import { restorePosition } from '../utils/restorePosition';
 
 const BACKGROUND_FILTER_FIELD_MATCHES = ['collection', 'category', 'categories', 'hierarchy', 'brand', 'manufacturer'];
 const BACKGROUND_FILTERS_VALUE_FLAGS = [1, 0, '1', '0', 'true', 'false', true, false];
@@ -288,62 +289,7 @@ export class SearchController extends AbstractController {
 					}
 				}
 
-				const scrollToPosition = () => {
-					return new Promise<void>(async (resolve) => {
-						const maxCheckTime = 600;
-						const checkTime = 60;
-						const maxScrolls = Math.ceil(maxCheckTime / checkTime);
-						const maxCheckCount = maxScrolls + 2;
-
-						let scrollBackCount = 0;
-						let checkCount = 0;
-						let scrolledElem: Element | undefined = undefined;
-
-						const checkAndScroll = () => {
-							let offset = element?.domRect?.top || 0;
-							let elem = document.querySelector(element?.selector!);
-
-							// for case where the element clicked on has no height
-							while (elem && !elem.getBoundingClientRect().height) {
-								elem = elem.parentElement;
-								// original offset no longer applies since using different element
-								offset = 0;
-							}
-
-							if (elem) {
-								const { y } = elem.getBoundingClientRect();
-
-								scrollBackCount++;
-
-								// if the offset is off, we need to scroll into position (can be caused by lazy loaded images)
-								if (y > offset + 1 || y < offset - 1) {
-									window.scrollBy(0, y - offset);
-								} else {
-									// don't need to scroll - it is right where we want it
-									scrolledElem = elem;
-								}
-							} else {
-								checkCount++;
-							}
-
-							return true;
-						};
-
-						while (checkAndScroll() && scrollBackCount <= maxScrolls && checkCount <= maxCheckCount) {
-							await new Promise((resolve) => setTimeout(resolve, checkTime));
-						}
-
-						if (scrolledElem) {
-							controller.log.debug('restored position to: ', scrolledElem);
-						} else {
-							controller.log.debug('attempted to scroll back to element with selector: ', element?.selector);
-						}
-
-						resolve();
-					});
-				};
-
-				if (element) await scrollToPosition();
+				if (element) await restorePosition(element, controller);
 				await next();
 			});
 
