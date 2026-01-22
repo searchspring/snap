@@ -1,7 +1,7 @@
 # AutocompleteStore
 The autocomplete store is meant to hold the suggest and search API response and associated state. It extends the AbstractStore and the recommend response by adding several additional properties and methods to make working with the data easier.
 
-```typescript
+```js
 import { AutocompleteStore } from '@searchspring/snap-store-mobx'
 import { UrlManager, UrlTranslator } from '@searchspring/snap-url-manager';
 
@@ -30,7 +30,7 @@ Used to update any services on the store
 ## `reset` method
 Reset store to the initial state by clearing data and locks
 
-```typescript
+```js
 store.reset()
 ```
 
@@ -86,7 +86,7 @@ Sets lock state to `false`
 ### `locked` getter
 Boolean `true` if the Lock state is locked
 
-```typescript
+```js
 let lock;
 lock = new Lock()
 console.log(lock.locked) // false
@@ -153,7 +153,7 @@ An array of facets. See [SearchStore](https://github.com/searchspring/snap/tree/
 In addition to all the search facets functionally, the Autocomplete facets will have an added `preview` method
 
 ### `preview` method
-See [terms.preview](#AutocompletePreview) for `facets.preview` usage
+See `terms.preview` for `facets.preview` usage
 
 
 ## `filters` property

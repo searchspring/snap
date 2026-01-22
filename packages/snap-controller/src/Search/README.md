@@ -25,61 +25,32 @@ The `SearchController` is used when making queries to the API `search` endpoint.
 | settings.variants.showDisabledSelectionValues | determines if completely out of stock (disabled) options should appear in variant selections | false |   | 
 | settings.variants.realtime.enabled | enable real time variant updates | ➖ |   | 
 | settings.variants.realtime.filters | specify which filters to use to determine which results are updated | ➖ |   | 
-| settings.variants.options | object keyed by option individual option field values for configuration of any option settings  | ➖ |   | 
+| settings.variants.options | object keyed by individual option field values for configuration of any option settings  | ➖ |   | 
 | settings.infinite | enable infinite scrolling by setting to empty object | ➖ |   |
 | settings.infinite.backfill | number of pages allowed for backfill | ➖ |   |
 | settings.restorePosition.enabled | boolean to enable/disable using `restorePosition` event middleware to restore the window scroll position when navigating back to previous page (when using infinite this is automatically set to true) | false |   |
 | settings.restorePosition.onPageShow | boolean to enable/disable having restorePosition occur on the 'pageshow' window event (requires `restorePosition.enable`) | false |   |
 
-<br>
-
-```typescript
-const searchConfig = {
-	id: 'search',
-	globals: {
-		pagination: {
-			pageSize: 12
-		}
-	}
-};
-```
-## Instantiate
-`SearchController` requires a `SearchControllerConfig` and `ControllerServices` object and is paired with a `SearchStore`. The `SearchStore` takes the same config, and shares the `UrlManager` service with the controller.
-
-```typescript
-import { SearchController } from '@searchspring/snap-controller';
-import { Client } from '@searchspring/snap-client';
-import { SearchStore } from '@searchspring/snap-store-mobx';
-import { UrlManager, UrlTranslator, reactLinker } from '@searchspring/snap-url-manager';
-import { EventManager } from '@searchspring/snap-event-manager';
-import { Profiler } from '@searchspring/snap-profiler';
-import { Logger } from '@searchspring/snap-logger';
-import { Tracker } from '@searchspring/snap-tracker';
-
-const searchUrlManager = new UrlManager(new UrlTranslator(), reactLinker);
-const searchController = new SearchController(searchConfig, {
-	client: new Client({ siteId: 'abc123' }),
-	store: new SearchStore(searchConfig, { urlManager: searchUrlManager }),
-	urlManager: searchUrlManager,
-	eventManager: new EventManager(),
-	profiler: new Profiler(),
-	logger: new Logger(),
-	tracker: new Tracker(),
-});
-```
 
 ## Initialize
 Invoking the `init` method is required to subscribe to changes that occur in the UrlManager. This is typically done automatically prior to calling the first `search`.
 
-```typescript
+```js
 searchController.init();
 ```
 
 ## Search
 This will invoke a search request to Searchspring's search API and populate the store with the response.
 
-```typescript
+```js
 searchController.search();
+```
+
+## AddToCart
+This will invoke an addToCart event (see below). Takes an array of Products as a parameter. 
+
+```js
+searchController.addToCart([searchController.store.results[0]]);
 ```
 
 ## Search History
@@ -90,7 +61,7 @@ When `config.settings.infinite` is defined and `store.pagination.next.url.go({ h
 
 If the page has been reloaded, the results will be reset to page 1.
 
-```typescript
+```js
 const searchConfig = {
 	id: 'search',
 	globals: {
@@ -107,7 +78,7 @@ const searchConfig = {
 ### Backfill
 If `config.settings.infinite.backfill` is specified, any page reloads when paginated up to the specified value will fetch previous pages to backfill.
 
-```typescript
+```js
 const searchConfig = {
 	id: 'search',
 	globals: {
@@ -130,7 +101,7 @@ Any time you navigate back to a previous page, this setting will tell the contro
 
 When using infinite scroll, it is recommended to specify a value for `config.settings.infinite.backfill` to ensure that when returning to the product listing page, that the product is there to scroll to.
 
-```typescript
+```js
 const searchConfig = {
 	id: 'search',
 	globals: {
@@ -164,7 +135,7 @@ The optional `pageSizeOptions` property gives the ability to overwrite the defau
 `active` - boolean stating if current page size matches the value of this option
 
 
-```typescript
+```js
 const searchConfig = {
 	id: 'search',
 	settings: {
@@ -282,66 +253,3 @@ export class Content extends Component {
 ### addToCart
 - Called with `eventData` = { controller, products } 
 - Always invoked after `addToCart()` method has been invoked
-
-## Variants
-
-### Variant Options Configuration
-The `settings.variants.options` is an object keyed by individual option field name for configuration of any option settings.
-
-| option | description | default value | required | 
-|---|---|:---:|:---:|
-| label | allows for changing the label of the option - (color -> colour) | ➖ |   | 
-| preSelected | array of option values to preselect - ['red','blue'] | ➖ |   | 
-| thumbnailBackgroundImages | boolean used for setting the option background image as the variant thumbnail image  | ➖ |   | 
-| mappings | object keyed by individual optionValues for mapping value attribute overrides  | ➖ |   | 
-| mappings[optionValue].label | setting to override the value label  | ➖ |   | 
-| mappings[optionValue].background | setting to override the value background  | ➖ |   | 
-| mappings[optionValue].backgroundImageUrl | setting to override the value backgroundImageUrl  | ➖ |   | 
-
-```jsx
-const config = {
-	settings:  {
-		variants: {
-			field: "ss__variants",
-			options: {
-				color: {
-					label: "Colour",
-					preSelected: ['transparent'],
-					mappings: {
-						red: {
-							label: 'Cherry',
-							backroundImageUrl: '/images/cherry.png'
-						},
-						blue: {
-							label: "Sky",
-							background: "teal",
-						}
-					}
-				}
-			}
-		}
-	}	
-}
-```
-
-### Realtime Variants
-
-#### Variant Option Attributes:
-When `realtime` is enabled the attributes `ss-variant-option` and `ss-variant-option-selected` are queried for and used to determine current variant selection and to also attach click events to know when to adjust variant selections in the selection stores. These attributes are needed in order for realtime variants to work properly. 
-
-The attributes are to be added on each variant option in the platform product page main option buttons. The `ss-variant-option` attribute also expects a value of the option feild and option value seperated by a `:`. 
-
-```jsx
-<div>
-	<a href="/products/tee--red" ss-variant-option="Color:red" ss-variant-option-selected>Red</a>
-	<a href="/products/tee--blue" ss-variant-option="Color:Blue">Blue</a>
-	<a href="/products/tee--green" ss-variant-option="Color:Green">Green</a>
-	<a href="/products/tee--yellow" ss-variant-option="Color:Yellow">Yellow</a>
-</div>
-```
-
-### Variant Option filters:
-When `realtime` is enabled, by default the realtime updates will apply to all results in the store that have matching options available. However if this is not desired behaviour you may pass an array of filters to `settings.variants.realtime.filters`. 
-
-Available filters include `first` and `unaltered`. The `first` filter will only update the first result in the store. The `unaltered` filter will update any result that has not yet been altered by the user. 
-

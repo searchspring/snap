@@ -1,62 +1,76 @@
 # Instantiators
 
 ## RecommendationInstantiator
-The `RecommendationInstantiator` class handles the targetting and creation of recommendation controllers. The instantiator looks for targets in the DOM, creates a controller and injects components into the DOM.
+The `RecommendationInstantiator` class handles the targeting and creation of recommendation controllers. The instantiator looks for targets in the DOM, creates a controller and injects components into the DOM.
 
 
-### controller
+## RecommendationInstantiatorConfig
 
-The `controller` property is an object of recommendation controller instances that have been created.
+| Property | Type | Required | Description |
+|----------|------|----------|-------------|
+| `mode` | `keyof typeof AppMode \| AppMode` | No | Application mode (e.g., 'production', 'development'). Defaults to 'production'. |
+| `client` | `object` | No | Client configuration for API communication. |
+| `client.globals` | `ClientGlobals` | Yes* | Global client settings. Must include `siteId` if no services provided. |
+| `client.globals.siteId` | `string` | Yes* | Searchspring site identifier. Required if no client service provided. |
+| `client.config` | `ClientConfig` | No | Optional client configuration for cache settings, origins, etc. |
+| `components` | `object` | Yes | Mapping of component names to component loaders. |
+| `components[name]` | `() => Promise<any> \| any` | Yes | Function that loads a component. Keys should match template names (e.g., 'Default', 'Bundle'). |
+| `config` | `object` | Yes | Core configuration for recommendation behavior. |
+| `config.branch` | `string` | Yes | Git branch name for template branching. |
+| `config.realtime` | `boolean` | No | Enable real-time recommendations. |
+| `config.batched` | `boolean` | No | Enable batched recommendation requests. |
+| `config.limit` | `number` | No | Default limit for recommendation results. |
+| `config.variants` | `VariantConfig` | No | Configuration for variant handling. |
+| `config.middleware` | `object` | No | Event middleware configuration. |
+| `config.plugins` | `PluginGrouping[]` | No | Plugin configurations. |
+| `selector` | `string` | No | Custom selector for targeting script elements. Defaults to `'script[type="searchspring/recommend"], script[type="searchspring/personalized-recommendations"]'`. |
+| `url` | `UrlTranslatorConfig` | No | URL translation configuration for state management. |
+| `context` | `ContextVariables` | No | Context variables available to components. |
 
-All controllers can be accessed via the `controller` object where the key is the id of the controller that was created. The controller id is generated based on the `profile` attribute and it's occurance count (starting at 0.) It follows the following format: 
 
-```typescript
-id: `recommend_${tag}_${profileCount[tag] - 1}`,
+`*` Required if no corresponding service is provided in the constructor
+
+<!-- TODO: Add Examples -->
+
+## Branching
+Branching allows for branch builds of templates. For production-ready templates, please ensure you are on the repository's default branch (typically `production`) before running `snapfu recs sync`.
+
+If you plan to utilize template branching, `instantiators.recommendation.config.branch` must define the current git branch name. Otherwise, a fallback value with the repository default branch name (typically `production`) should be defined. The `BRANCHNAME` can be defined at runtime via webpack's `DefinePlugin`
+
+```js
+const webpack = require('webpack');
+const childProcess = require('child_process');
+const branchName = childProcess.execSync('git rev-parse --abbrev-ref HEAD').toString().trim();
+module.exports = {
+    ...
+    plugins: [
+		new webpack.DefinePlugin({
+			BRANCHNAME: `"${branchName}"`,
+		}),
+	],
+}
 ```
 
-For example, if the page contains the following single recommendation instance:
+```js
+// src/index.js
 
-```html
-<script type="searchspring/personalized-recommendations" profile="trending"></script>
+const snap = new Snap({
+    client: {
+        globals: {
+            siteId: 'REPLACE_WITH_YOUR_SITE_ID',
+        },
+    },
+    instantiators: {
+		recommendation: {
+			components: {
+				Default: async () => {
+					return (await import('./components/Recommendations/Recs')).Recs;
+				},
+			},
+			config: {
+				branch: BRANCHNAME || 'production',
+			},
+		},
+	},
+});
 ```
-
-The controller id would be `recommend_trending_0`.
-
-
-### cartStore
-
-If the profile type passed to the controller is `bundle`, the controller will automatically create a [cartStore](https://github.com/searchspring/snap/blob/bundledRecComponent/packages/snap-store-mobx/src/Cart/README.md) for use with the Bundle Recommendations.
-
-
-### client
-
-A reference to the shared [@searchspring/snap-client](https://github.com/searchspring/snap/tree/main/packages/snap-client) instance used by each controller.
-
-
-### tracker
-
-A reference to the shared [@searchspring/snap-tracker](https://github.com/searchspring/snap/tree/main/packages/snap-tracker) instance used by each controller.
-
-
-### logger
-
-A reference to the shared [@searchspring/snap-logger](https://github.com/searchspring/snap/tree/main/packages/snap-logger) instance used by each controller.
-
-
-### config
-
-A reference to the config object used in instantiation.
-
-### uses
-
-A reference to any middleware added from invoking `RecommendationInstantiator.use()`
-
-### plugins
-
-A reference to any middleware added from invoking `RecommendationInstantiator.plugin()`
-
-### middleware
-
-A reference to any middleware added from invoking `RecommendationInstantiator.on()`
-
-

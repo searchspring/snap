@@ -257,7 +257,7 @@ The default configuration contains the following properties, however **`any Bund
 
 `spaceBetween` - spacing between each product
 
-```typescript
+```js
 const defaultRecommendationBreakpoints = {
 	0: {
 		carousel: {

@@ -7,7 +7,7 @@ Many component props are tied to the design of the store for ease of use:
 In this example, the `store.pagination` property is provided to the `pagination` prop of the `<Pagination />` component.
 
 
-```typescript
+```js
 import { SearchController } from '@searchspring/snap-controller';
 
 const searchController = new SearchController(searchConfig, searchControllerServices);
@@ -15,7 +15,7 @@ const searchController = new SearchController(searchConfig, searchControllerServ
 console.log(searchController.store)
 ```
 
-```typescript
+```js
 import { Pagination } from '@searchspring/snap-preact-components';
 ```
 

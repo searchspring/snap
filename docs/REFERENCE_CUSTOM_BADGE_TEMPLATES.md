@@ -1,44 +1,8 @@
-## Badges
+# Custom Badge Templates
 
-Badges are self-configured in the Searchspring Management Console
+Custom Badge Templates can be created and sync to the Searchspring Management Console using the Snapfu CLI. See [Welcome > Setup](https://searchspring.github.io/snap/snap-setup) for installing Snapfu
 
-To displays badges the Result card must include the [OverlayBadge](https://searchspring.github.io/snap/#/components-preact?params=%3Fpath%3D%2Fstory%2Fmolecules-overlaybadge--default) and [CalloutBadge](https://searchspring.github.io/snap/#/components-preact?params=%3Fpath%3D%2Fstory%2Fmolecules-calloutbadge--default) components
-
-
-### OverlayBadge
-
-The `OverlayBadge` component wraps elements (children) that should have badges overlayed - typically the product image
-
-```jsx
-<OverlayBadge controller={controller} result={controller.store.results[0]}>
-	<img src='/images/example.png'/>
-</OverlayBadge>
-```
-
-### CalloutBadge
-
-The `CalloutBadge` component displays badges inline and can be placed in any position in the Result card
-
-```jsx
-<CalloutBadge result={controller.store.results[0]} />
-```
-
-### Badge Components
-The `OverlayBadge` and `CalloutBadge` components are responsible for displaying badges
-
-The default badges available: 
-
-- [BadgePill](https://searchspring.github.io/snap/#/components-preact?params=%3Fpath%3D%2Fstory%2Fatoms-badgepill--default)
-- [BadgeText](https://searchspring.github.io/snap/#/components-preact?params=%3Fpath%3D%2Fstory%2Fatoms-badgetext--default)
-- [BadgeRectangle](https://searchspring.github.io/snap/#/components-preact?params=%3Fpath%3D%2Fstory%2Fatoms-badgerectangle--default)
-- [BadgeImage](https://searchspring.github.io/snap/#/components-preact?params=%3Fpath%3D%2Fstory%2Fatoms-badgeimage--default)
-
-
-## Custom Badge Templates
-
-Custom Badge Templates can be created and sync to the Searchspring Management Console using the Snapfu CLI. See [Getting Started > Setup](https://searchspring.github.io/snap/#/start-setup) for installing Snapfu
-
-### Initialize Custom Badges
+## Initialize Custom Badges
 
 First we'll initialize a new custom badge. The code examples on this page will use a `[badgename]` of `CustomBadge`
 
@@ -94,7 +58,7 @@ export const CustomBadge = observer((props) => {
 }
 ```
 
-### Syncing Custom Badges
+## Syncing Custom Badges
 
 Next we'll sync our custom badge - registering it to the Searchspring Management Console
 
@@ -102,11 +66,12 @@ Next we'll sync our custom badge - registering it to the Searchspring Management
 snapfu badges sync [badgename]
 ```
 
-### Using Custom Badges
+## Using Custom Badges
 
 Finally in order to use a custom badge component, we'll need to provide a `componentMap` prop containing a mapping of our custom components to the `OverlayBadge` and `CalloutBadge` components
 
-**Note:** This is not required if using the default selection of badges
+> [!NOTE]
+> This is not required if using the default selection of badges
 
 ```jsx
 import { CustomBadge } from './components/Badges/CustomBadge';
@@ -131,38 +96,25 @@ import { CustomBadge } from './components/Badges/CustomBadge';
 
 The `componentMap` prop can also be used to overwrite the default badge components without the need of initializing and syncing a dedicated custom component
 
-### Badge Template Overview (JSON file)
+## Badge Template Overview (JSON file)
 
-#### Required:
-
-`type` - should not be changed. It is utilized by the Snapfu CLI when syncing
-
-`name` - unique badge template identifier
-
-`label` - label that is displayed when selecting this badge template within the Searchspring Management Console
-
-`description` - badge template description
-
-`component` - component name this badge template should use. It should line up with the mapping provided to the `componentMap` props. See `Using Custom Badges` section above
-
-`locations` - a list of template locations this badge template can be placed in. This can be used to restrict certain badges to certain locations. See `Custom Badge Locations` section below for adding locations. See `Badge Template Locations` section below for possible values
-
-`parameters` - a list of badge template parameters. Can be an empty array to not contain template parameters. See `Badge Template Parameters` section below for possible parameters
-
-#### Optional:
-
-`value.enabled` - boolean that when true, required a badge `value` to be provided when using this template
-
-`value.validations.min` - ensures `value` meets a numerical minimum or string length
-
-`value.validations.max` - ensures `value` meets a numerical maximum or string length
-
-`value.validations.regex` - ensures `value` meets a regex definition. Must also provide `value.validations.regexExplain`
-
-`value.validations.regexExplain` - required if using `value.validations.regex`. Describes the regex definition and is displayed as an error message if the regex validation fails
+| Field | Required | Description |
+|-------|----------|-------------|
+| `type` | ✔️ | Should not be changed. It is utilized by the Snapfu CLI when syncing |
+| `name` | ✔️ | Unique badge template identifier |
+| `label` | ✔️ | Label that is displayed when selecting this badge template within the Searchspring Management Console |
+| `description` | ✔️ | Badge template description |
+| `component` | ✔️ | Component name this badge template should use. It should line up with the mapping provided to the `componentMap` props. See `Using Custom Badges` section above |
+| `locations` | ✔️ | A list of template locations this badge template can be placed in. This can be used to restrict certain badges to certain locations. See `Custom Badge Locations` section below for adding locations. See `Badge Template Locations` section below for possible values |
+| `parameters` | ✔️ | A list of badge template parameters. Can be an empty array to not contain template parameters. See `Badge Template Parameters` section below for possible parameters |
+| `value.enabled` | ➖ | Boolean that when true, required a badge `value` to be provided when using this template |
+| `value.validations.min` | ➖ | Ensures `value` meets a numerical minimum or string length |
+| `value.validations.max` | ➖ | Ensures `value` meets a numerical maximum or string length |
+| `value.validations.regex` | ➖ | Ensures `value` meets a regex definition. Must also provide `value.validations.regexExplain` |
+| `value.validations.regexExplain` | ➖ | Required if using `value.validations.regex`. Describes the regex definition and is displayed as an error message if the regex validation fails |
 
 
-### Badge Template Locations
+## Badge Template Locations
 Badge template locations is an array of strings
 
 Possible values when using default locations: `left`, `left/left`, `right`, `right/right`, `callout`, `callout/callout`
@@ -189,43 +141,24 @@ For example, if the locations.json file contains the following location definiti
 To restrict a badge template to a custom location, the badge template `locations` array should contain the `tag` of the locations. Ie. `left/left-bottom`
 
 
-### Badge Template Parameters
-Badge template parameters is an array of objects. Each object is a template parameter and contains the following properties: 
+## Badge Template Parameters
+Badge template parameters is an array of objects. Each object is a template parameter and contains the following properties:
 
-#### Required:
+| Field | Required | Type | Description |
+|-------|----------|------|-------------|
+| `name` | ✔️ | string | Unique badge parameter identifier |
+| `type` | ✔️ | string | Parameter value type. Available types: `array`, `string`, `color`, `url`, `integer`, `decimal`, `boolean`, `checkbox`, `toggle`. See example below for example usage of each type |
+| `label` | ✔️ | string | Label that is displayed when selecting this badge parameter within the Searchspring Management Console |
+| `description` | ✔️ | string | Badge parameter description |
+| `options` | ✔️* | string[] | Required only if `type` is `array`. Define an array of strings containing dropdown value options |
+| `defaultValue` | ➖ | string | Default value that will be used unless specified when configuring a new badge rule. Must be a string regardless of different `type` options |
+| `validations` | ➖ | object | Only applicable if `type` is `string`, `url`, `integer`, `decimal` |
+| `validations.min` | ➖ | number | Only applicable if `type` is `integer`, `decimal`, `string`, `url`. Should be a number (negative values also accepted). If `type` is `integer` or `decimal`, ensures `defaultValue` or the user defined `value` meets a **numerical minimum**. If `type` is `string` or `url`, ensures `defaultValue` or the user defined `value` meets a minimum **character length** |
+| `validations.max` | ➖ | number | Only applicable if `type` is `integer`, `decimal`, `string`, `url`. Should be a number (negative values also accepted). If `type` is `integer` or `decimal`, ensures `defaultValue` or the user defined `value` meets a **numerical maximum**. If `type` is `string` or `url`, ensures `defaultValue` or the user defined `value` meets a maximum **character length** |
+| `validations.regex` | ➖ | string | Ensures `defaultValue` or the user defined `value` meets a regex definition. Must also provide `validations.regexExplain` |
+| `validations.regexExplain` | ➖ | string | Required if using `validations.regex`. Describes the regex definition and is displayed as an error message if the regex validation fails |
 
-`name` - unique badge parameter identifier
-
-`type` - parameter value type. Available types: `array`, `string`, `color`, `url`, `integer`, `decimal`, `boolean`, `checkbox`, `toggle`. See example below for example usage of each type
-
-`label` - label that is displayed when selecting this badge parameter within the Searchspring Management Console
-
-`description` - badge parameter description
-
-`options` - required only if `type` is `array`. Define an array of strings containing dropdown value options
-
-
-#### Optional:
-
-`defaultValue` - default value that will be used unless specified when configuring a new badge rule. Must be a string regardless of different `type` options
-
-`validations` - only applicable if `type` is `string`, `url`. `integer`, `decimal`
-
-`validations.min` - only applicable if `type` is `integer`, `decimal`, `string`, `url`. Should be a number (negative values also accepted)
-
-- If `type` is `integer` or `decimal`, ensures `defaultValue` or the user defined `value` meets a **numerical minimum** 
-
-- If `type` is `string` or `url`, ensures `defaultValue` or the user defined `value` meets a minimum **character length**
-
-`validations.max` - only applicable if `type` is `integer`, `decimal`, `string`, `url`. Should be a number (negative values also accepted)
-
-- If `type` is `integer` or `decimal`, ensures `defaultValue` or the user defined `value` meets a **numerical maximum** 
-
-- If `type` is `string` or `url`, ensures `defaultValue` or the user defined `value` meets a maximum **character length**
-
-`validations.regex` - ensures `defaultValue` or the user defined `value` meets a regex definition. Must also provide `validations.regexExplain`
-
-`validations.regexExplain` - required if using `validations.regex`. Describes the regex definition and is displayed as an error message if the regex validation fails
+*Required only when `type` is `array`
 
 
 ```json
@@ -310,7 +243,7 @@ Badge template parameters is an array of objects. Each object is a template para
 
 ## Custom Badge Locations
 
-Custom Badge Locations can be created and synced to the Searchspring Management Console using the Snapfu CLI. See [Getting Started > Setup](https://searchspring.github.io/snap/#/start-setup) for installing Snapfu
+Custom Badge Locations can be created and synced to the Searchspring Management Console using the Snapfu CLI. See [Welcome > Setup](https://searchspring.github.io/snap/snap-setup) for installing Snapfu
 
 Custom overlay and callout locations can be created by defining a `locations.json` file in the project. It is recommended to create it at: `src/components/Badges/locations.json`
 
@@ -325,7 +258,8 @@ Custom overlay and callout locations can be created by defining a `locations.jso
 
 `['left' | 'right' | 'callout'].name` - badge location name that is displayed when selecting this location within the Searchspring Management Console
 
-**important** - it is strongly recommended to keep the default location tags (ie. `left[0].tag="left"`, `right[0].tag="right"`, `callout[0].tag="callout"`) to ensure any existing badges are backwards compatible with additional locations
+> [!IMPORTANT]
+> It is strongly recommended to keep the default location tags (ie. `left[0].tag="left"`, `right[0].tag="right"`, `callout[0].tag="callout"`) to ensure any existing badges are backwards compatible with additional locations
 
 ```json
 {

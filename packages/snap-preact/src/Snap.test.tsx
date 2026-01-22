@@ -1399,7 +1399,7 @@ describe('Snap Preact', () => {
 
 			const instantiator = await snap.getInstantiator('recommendation');
 			expect(instantiator).toBeDefined();
-			expect(instantiator.config.config.branch).toBe('production');
+			expect(instantiator.config.config?.branch).toBe('production');
 		});
 	});
 

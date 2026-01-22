@@ -1,7 +1,7 @@
 # FinderStore
 The finder store is meant to hold the API response and associated selection state. It extends the AbstractStore and the search response by adding several additional properties and methods to make working with the data easier.
 
-```typescript
+```js
 import { FinderStore, FinderStoreConfig } from '@searchspring/snap-store-mobx'
 import { UrlManager, UrlTranslator } from '@searchspring/snap-url-manager';
 
@@ -80,7 +80,7 @@ The `select` method should be invoked when a selection has been made, such as in
 })}
 ```
 
-```typescript
+```js
 const value = selections[0].values[0]
 selections[0].select(value)
 ```

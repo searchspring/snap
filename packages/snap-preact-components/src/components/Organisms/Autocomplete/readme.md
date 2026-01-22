@@ -218,7 +218,7 @@ When the viewport is between the Object's key value, those props will be merged 
 
 Default Autocomplete `breakpoints` object:
 
-```typescript
+```js
 const breakpoints = {
     0: {
         columns: 2,
@@ -249,7 +249,7 @@ See `<Results />` component documentation for further details.
 The `onFacetOptionClick` prop contains a custom onClick event handler for facet options. Function is passed the click event. 
 
 
-```typescript
+```js
 const CustomOnClickFunc = (e) => {
     console.log('You Clicked a Facet Option!' , e)
 };
@@ -265,7 +265,7 @@ const CustomOnClickFunc = (e) => {
 The `onTermClick` prop contains a custom onClick event handler for Suggested & Trending Terms. Function is passed the click event. 
 
 
-```typescript
+```js
 const customOnClickFunc = (e) => {
     console.log('You Clicked a term!' , e)
 };

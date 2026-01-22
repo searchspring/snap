@@ -119,7 +119,7 @@ The object key specified the viewport for when the parameters will be applied.
 
 Depending on the `type` prop passed, the default configuration contains the following properties, however **`any swatches props`**, can be specified. 
 
-```typescript
+```js
     const defaultCarouselBreakpoints = {
 		0: {
 			carousel: {

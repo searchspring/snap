@@ -3,6 +3,31 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.72.2](https://github.com/searchspring/snap/compare/v0.72.1...v0.72.2) (2026-01-21)
+
+**Note:** Version bump only for package @searchspring/snap
+
+## [0.72.1](https://github.com/searchspring/snap/compare/v0.72.0...v0.72.1) (2026-01-15)
+
+**Note:** Version bump only for package @searchspring/snap
+
+# [0.72.0](https://github.com/searchspring/snap/compare/v0.71.0...v0.72.0) (2026-01-14)
+
+### Bug Fixes
+
+- base url ([4f7926a](https://github.com/searchspring/snap/commit/4f7926aa5995c9bd5df594cf3fd304e92f572c2e))
+- change content width and legend breakpoint ([d16e865](https://github.com/searchspring/snap/commit/d16e865986dfb6e6306271a81df3d475c9c38d7c))
+- legend links ([b753591](https://github.com/searchspring/snap/commit/b753591cb63e07b80311aa0529310cde38a7879d))
+- **networkcache:** bugfix to prevent memoryCache from growing too large, and delete expired entries ([0534b6c](https://github.com/searchspring/snap/commit/0534b6c4ccb62389669c19f8f9f87cbd098fa6a5))
+- route base path for non-localhost ([511529a](https://github.com/searchspring/snap/commit/511529ac6194535d8049e667de3eee8b38a8b50f))
+- **searchresultstore:** adding support for option element to be used in realtime variants ([167f867](https://github.com/searchspring/snap/commit/167f867f12b06a6fb0f8f84f4553a9d9e6b2d884))
+
+### Features
+
+- **client:** adding support to have separate subdomain in api - using this for recommend requests ([ceb6d65](https://github.com/searchspring/snap/commit/ceb6d6500c2c8a57df0356535d0f74d8d0464fae))
+- **networkcache:** get function no longer accounts for personalization params when backforward nav ([de52d7e](https://github.com/searchspring/snap/commit/de52d7e02c7ed70488a31a4f92bd26820a8f3823))
+- **snap.tsx:** adding support for configurable initiator ([f286c5c](https://github.com/searchspring/snap/commit/f286c5c5f416ddad5771002bf00a0dc2e570922f))
+
 # [0.71.0](https://github.com/searchspring/snap/compare/v0.70.1...v0.71.0) (2025-11-26)
 
 ### Bug Fixes

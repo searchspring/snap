@@ -221,8 +221,7 @@ describe('Tracking Beacon 2.0', () => {
 				.then((activeTermText) => {
 					expect(activeTermText).to.be.a('string');
 					expect(activeTermText.length).to.be.greaterThan(1);
-
-					cy.get('input[name="q"]').type(activeTermText.substring(1, 2));
+					cy.get('input[name="q"]').type(activeTermText);
 					cy.wait(2000).then(() => {
 						expect(counter).to.equal(1);
 					});
