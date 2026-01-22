@@ -18,6 +18,7 @@ const searchConfig = {
 };
 
 describe('SearchResultStore', () => {
+	const tracking = { responseId: 'responseId-mock' };
 	beforeEach(() => {
 		expect.hasAssertions();
 	});
@@ -28,13 +29,13 @@ describe('SearchResultStore', () => {
 
 	it('returns an empty array when nothing is passed to the constructor', () => {
 		// @ts-ignore
-		const results = new SearchResultStore(undefined, undefined, undefined, undefined, undefined, undefined);
+		const results = new SearchResultStore(undefined, undefined, undefined, undefined, undefined, undefined, undefined);
 
 		expect(results.length).toBe(0);
 	});
 
 	it('returns an empty array when passed an empty array [] of results', () => {
-		const results = new SearchResultStore(searchConfig, services, {}, [], undefined, undefined);
+		const results = new SearchResultStore(searchConfig, services, {}, tracking, [], undefined, undefined);
 
 		expect(results.length).toBe(0);
 	});
@@ -42,7 +43,7 @@ describe('SearchResultStore', () => {
 	it('returns an array the same length as the results passed in', () => {
 		const searchData = mockData.searchMeta();
 
-		const results = new SearchResultStore(searchConfig, services, {}, searchData.results, searchData.pagination, searchData.merchandising);
+		const results = new SearchResultStore(searchConfig, services, {}, tracking, searchData.results, searchData.pagination, searchData.merchandising);
 
 		expect(results.length).toBe(searchData.results?.length);
 	});
@@ -50,7 +51,7 @@ describe('SearchResultStore', () => {
 	it('has result data that matches what was passed in', () => {
 		const searchData = mockData.searchMeta();
 
-		const results = new SearchResultStore(searchConfig, services, {}, searchData.results, searchData.pagination, searchData.merchandising);
+		const results = new SearchResultStore(searchConfig, services, {}, tracking, searchData.results, searchData.pagination, searchData.merchandising);
 
 		results.forEach((result, index) => {
 			// check id
@@ -69,6 +70,8 @@ describe('SearchResultStore', () => {
 				const value = attributes && attributes[key];
 				expect(result.attributes[key]).toStrictEqual(value);
 			});
+
+			expect(result.responseId).toBe(tracking.responseId);
 		});
 	});
 
@@ -84,6 +87,7 @@ describe('SearchResultStore', () => {
 			infiniteConfig,
 			services,
 			{},
+			tracking,
 			dataPage1.results,
 			dataPage1.pagination,
 			dataPage1.merchandising,
@@ -99,6 +103,7 @@ describe('SearchResultStore', () => {
 			infiniteConfig,
 			services,
 			{},
+			tracking,
 			dataPage2.results,
 			dataPage2.pagination,
 			dataPage2.merchandising,
@@ -114,6 +119,7 @@ describe('SearchResultStore', () => {
 			infiniteConfig,
 			services,
 			{},
+			tracking,
 			dataPage3.results,
 			dataPage3.pagination,
 			dataPage3.merchandising,
@@ -159,6 +165,7 @@ describe('SearchResultStore', () => {
 			infiniteConfig,
 			services,
 			{},
+			tracking,
 			dataPage1.results,
 			dataPage1.pagination,
 			dataPage1.merchandising,
@@ -175,6 +182,7 @@ describe('SearchResultStore', () => {
 			infiniteConfig,
 			services,
 			{},
+			tracking,
 			dataPage3.results,
 			dataPage3.pagination,
 			dataPage3.merchandising,
@@ -221,6 +229,7 @@ describe('SearchResultStore', () => {
 			infiniteConfig,
 			services,
 			{},
+			tracking,
 			dataPage1.results,
 			dataPage1.pagination,
 			dataPage1.merchandising,
@@ -237,6 +246,7 @@ describe('SearchResultStore', () => {
 			infiniteConfig,
 			services,
 			{},
+			tracking,
 			dataPage2.results,
 			dataPage2.pagination,
 			dataPage2.merchandising,
@@ -328,6 +338,7 @@ describe('SearchResultStore', () => {
 				searchConfig,
 				services,
 				searchData.meta,
+				tracking,
 				searchData.results,
 				searchData.pagination,
 				searchData.merchandising
@@ -378,6 +389,7 @@ describe('SearchResultStore', () => {
 				searchConfig,
 				services,
 				searchData.meta,
+				tracking,
 				searchData.results,
 				searchData.pagination,
 				searchData.merchandising
@@ -410,6 +422,7 @@ describe('SearchResultStore', () => {
 				variantSearchConfig,
 				services,
 				searchData.meta,
+				tracking,
 				searchData.results,
 				searchData.pagination,
 				searchData.merchandising
@@ -445,6 +458,7 @@ describe('SearchResultStore', () => {
 				variantSearchConfig,
 				services,
 				searchData.meta,
+				tracking,
 				searchData.results,
 				searchData.pagination,
 				searchData.merchandising
@@ -498,6 +512,7 @@ describe('SearchResultStore', () => {
 				variantSearchConfig,
 				services,
 				searchData.meta,
+				tracking,
 				searchData.results,
 				searchData.pagination,
 				searchData.merchandising
@@ -542,6 +557,7 @@ describe('SearchResultStore', () => {
 				variantSearchConfig,
 				services,
 				searchData.meta,
+				tracking,
 				searchData.results,
 				searchData.pagination,
 				searchData.merchandising
@@ -589,6 +605,7 @@ describe('SearchResultStore', () => {
 				variantSearchConfig,
 				services,
 				searchData.meta,
+				tracking,
 				searchData.results,
 				searchData.pagination,
 				searchData.merchandising
@@ -665,6 +682,7 @@ describe('SearchResultStore', () => {
 				variantSearchConfig,
 				services,
 				searchData.meta,
+				tracking,
 				searchData.results,
 				searchData.pagination,
 				searchData.merchandising
@@ -791,6 +809,7 @@ describe('SearchResultStore', () => {
 				variantSearchConfig,
 				services,
 				searchData.meta,
+				tracking,
 				searchData.results,
 				searchData.pagination,
 				searchData.merchandising
@@ -834,6 +853,7 @@ describe('SearchResultStore', () => {
 				variantSearchConfig,
 				services,
 				searchData.meta,
+				tracking,
 				searchData.results,
 				searchData.pagination,
 				searchData.merchandising
@@ -887,6 +907,7 @@ describe('SearchResultStore', () => {
 				variantSearchConfig,
 				services,
 				searchData.meta,
+				tracking,
 				searchData.results,
 				searchData.pagination,
 				searchData.merchandising
@@ -939,6 +960,7 @@ describe('SearchResultStore', () => {
 				variantSearchConfig,
 				services,
 				searchData.meta,
+				tracking,
 				searchData.results,
 				searchData.pagination,
 				searchData.merchandising
@@ -994,6 +1016,7 @@ describe('SearchResultStore', () => {
 				variantSearchConfig,
 				services,
 				searchData.meta,
+				tracking,
 				searchData.results,
 				searchData.pagination,
 				searchData.merchandising
@@ -1045,6 +1068,7 @@ describe('SearchResultStore', () => {
 				variantSearchConfig,
 				services,
 				searchData.meta,
+				tracking,
 				searchData.results,
 				searchData.pagination,
 				searchData.merchandising
@@ -1058,7 +1082,6 @@ describe('SearchResultStore', () => {
 			expect(selection).toBeDefined();
 
 			selection?.values.forEach((value) => {
-				console.log(value);
 				expect(value.backgroundImageUrl).toEqual(value.thumbnailImageUrl);
 			});
 		});
@@ -1092,6 +1115,7 @@ describe('SearchResultStore', () => {
 				variantSearchConfig,
 				services,
 				searchData.meta,
+				tracking,
 				searchData.results,
 				searchData.pagination,
 				searchData.merchandising
@@ -1598,7 +1622,15 @@ describe('SearchResultStore', () => {
 		it('splices inline banners into the results array', () => {
 			const searchData = mockData.updateConfig({ siteId: '8uyt2m' }).searchMeta('inlineBanners.page1');
 
-			const results = new SearchResultStore(searchConfig, services, {}, searchData.results, searchData.pagination, searchData.merchandising);
+			const results = new SearchResultStore(
+				searchConfig,
+				services,
+				{},
+				tracking,
+				searchData.results,
+				searchData.pagination,
+				searchData.merchandising
+			);
 
 			expect(results.length).toBe(searchData.pagination?.pageSize);
 			expect((results[1] as Banner).value).toBe(searchData.merchandising?.content?.inline && searchData.merchandising.content.inline[0].value);
@@ -1607,7 +1639,15 @@ describe('SearchResultStore', () => {
 		it('splices inline banners into the results array', () => {
 			const searchData = mockData.updateConfig({ siteId: 'ga9kq2' }).searchMeta('merchandising_page1');
 
-			const results = new SearchResultStore(searchConfig, services, {}, searchData.results, searchData.pagination, searchData.merchandising);
+			const results = new SearchResultStore(
+				searchConfig,
+				services,
+				{},
+				tracking,
+				searchData.results,
+				searchData.pagination,
+				searchData.merchandising
+			);
 
 			expect(results.length).toBe(searchData.pagination?.pageSize);
 			const inlineData = searchData.merchandising?.content?.inline!;
@@ -1620,7 +1660,15 @@ describe('SearchResultStore', () => {
 		it('splices inline banners into the results array', () => {
 			const searchData = mockData.updateConfig({ siteId: 'ga9kq2' }).searchMeta('merchandising_page2');
 
-			const results = new SearchResultStore(searchConfig, services, {}, searchData.results, searchData.pagination, searchData.merchandising);
+			const results = new SearchResultStore(
+				searchConfig,
+				services,
+				{},
+				tracking,
+				searchData.results,
+				searchData.pagination,
+				searchData.merchandising
+			);
 
 			expect(results.length).toBe(1);
 			const inlineData = searchData.merchandising?.content?.inline!;
@@ -1631,7 +1679,15 @@ describe('SearchResultStore', () => {
 		it('correctly splices four inline banners into the results array with low numbers of results', () => {
 			const searchData = mockData.updateConfig({ siteId: '8uyt2m' }).searchMeta('inlineBanners-x4');
 
-			const results = new SearchResultStore(searchConfig, services, {}, searchData.results, searchData.pagination, searchData.merchandising);
+			const results = new SearchResultStore(
+				searchConfig,
+				services,
+				{},
+				tracking,
+				searchData.results,
+				searchData.pagination,
+				searchData.merchandising
+			);
 
 			expect(results.length).toBe(11);
 			const inlineData = searchData.merchandising?.content?.inline!;
@@ -1687,7 +1743,15 @@ describe('SearchResultStore', () => {
 					},
 				},
 			};
-			const results = new SearchResultStore(searchConfig, services, {}, searchData.results, searchData.pagination, searchData.merchandising);
+			const results = new SearchResultStore(
+				searchConfig,
+				services,
+				{},
+				tracking,
+				searchData.results,
+				searchData.pagination,
+				searchData.merchandising
+			);
 
 			expect(results.length).toBe(1);
 			expect(results[0].id).toBe(`ss-ib-${searchData.merchandising.content.inline[2].config.position.index}`);
@@ -1739,7 +1803,15 @@ describe('SearchResultStore', () => {
 					},
 				},
 			};
-			const results = new SearchResultStore(searchConfig, services, {}, searchData.results, searchData.pagination, searchData.merchandising);
+			const results = new SearchResultStore(
+				searchConfig,
+				services,
+				{},
+				tracking,
+				searchData.results,
+				searchData.pagination,
+				searchData.merchandising
+			);
 
 			expect(results.length).toBe(4);
 			expect(results[0].id).toBe(`product-1`);
@@ -1755,6 +1827,7 @@ describe('SearchResultStore', () => {
 				searchConfig,
 				services,
 				searchData.meta,
+				tracking,
 				searchData.results,
 				searchData.pagination,
 				searchData.merchandising
@@ -1799,6 +1872,7 @@ describe('SearchResultStore', () => {
 				searchConfig,
 				services,
 				searchData.meta,
+				tracking,
 				searchData.results,
 				searchData.pagination,
 				searchData.merchandising
@@ -1845,6 +1919,7 @@ describe('SearchResultStore', () => {
 				searchConfig,
 				services,
 				searchData.meta,
+				tracking,
 				searchData.results,
 				searchData.pagination,
 				searchData.merchandising
@@ -1881,6 +1956,7 @@ describe('SearchResultStore', () => {
 				searchConfig,
 				services,
 				searchData.meta,
+				tracking,
 				searchData.results,
 				searchData.pagination,
 				searchData.merchandising

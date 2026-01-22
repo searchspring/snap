@@ -31,6 +31,7 @@ export const useIntersectionAdvanced = (ref: MutableRef<HTMLElement | null>, opt
 		}
 		visibleStartRef.current = null;
 		lastResetKeyRef.current = resetKey;
+		return false;
 	}
 
 	useEffect(() => {

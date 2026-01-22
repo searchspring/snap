@@ -1,3 +1,4 @@
+import { AutocompleteRequestModelSearchSourceEnum } from '@searchspring/snapi-types';
 import type { StoreServices } from '../../types';
 import type { AutocompleteStateStore } from './AutocompleteStateStore';
 import { Term } from './AutocompleteTermStore';
@@ -20,7 +21,8 @@ export class AutocompleteHistoryStore extends Array<Term> {
 					},
 					terms,
 					resetTerms,
-					rootState
+					rootState,
+					'historical' as AutocompleteRequestModelSearchSourceEnum
 				)
 			);
 		});

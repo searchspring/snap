@@ -49,7 +49,14 @@ describe('Autocomplete Store', () => {
 		expect(autocompleteStore.terms).toStrictEqual([]);
 
 		expect(autocompleteStore.merchandising).toBeDefined();
-		expect(autocompleteStore.merchandising).toEqual({ redirect: '', personalized: false, experiments: [], content: {}, campaigns: [] });
+		expect(autocompleteStore.merchandising).toEqual({
+			redirect: '',
+			personalized: false,
+			experiments: [],
+			content: {},
+			campaigns: [],
+			responseId: '',
+		});
 
 		expect(autocompleteStore.search).toBeDefined();
 		expect(autocompleteStore.search?.query).toBeUndefined();
@@ -90,7 +97,7 @@ describe('Autocomplete Store', () => {
 		expect(autocompleteStore.search?.originalQuery).toBeUndefined();
 
 		expect(autocompleteStore.merchandising).toBeDefined();
-		expect(autocompleteStore.merchandising).toEqual(searchData.merchandising);
+		expect(autocompleteStore.merchandising).toEqual({ ...searchData.merchandising, responseId: searchData.tracking.responseId });
 
 		expect(autocompleteStore.facets).toHaveLength(searchData?.facets?.length!);
 
