@@ -1,2322 +1,2325 @@
 {
-    "pagination": {
-      "totalResults": 286,
-      "page": 1,
-      "pageSize": 30,
-      "totalPages": 10
-    },
-    "results": [
-      {
-        "id": "152061",
-        "mappings": {
-          "core": {
-            "uid": "152061",
-            "sku": "C-EN-R2-D3626",
-            "name": "The Heart of Life Tomato Red Dress",
-            "url": "/product/C-EN-R2-D3626",
-            "addToCartUrl": "/product/C-EN-R2-D3626",
-            "price": 42,
-            "msrp": 50,
-            "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/46_8189_copyright_reddressboutique_2016_copy_large.jpg",
-            "secureImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/46_8189_copyright_reddressboutique_2016_copy_large.jpg",
-            "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/46_8189_copyright_reddressboutique_2016_copy_thumb_med.jpg",
-            "rating": "5",
-            "ratingCount": "1111",
-            "description": "This Heart of Life Tomato Red Dress beats to the rhythm of its own drummer! It’s always changing tempo but never letting up from driving you towards your greatest wish! Going from dream to dream requires a special something that causes this heart to go all a-flutter! No matter if your heart finds itself caught up in the crocheted neckline or the lacy hem, this is one dress that is sure to fill up your heart with style and a lot of rhythm!! This A-line dress features crochet detail at the bust, a small keyhole on the back with a double button loop closure, and a scalloped hemline with lace. Model is wearing a small. • 100% Rayon • Hand Wash Cold • Semi Lined • Semi Sheer • Imported",
-            "stockMessage": "In stock",
-            "brand": "Entro",
-            "popularity": "4385",
-            "caption": "Captions!"
-          }
-        },
-        "attributes": {
-          "id": "deaaafaa7a4f2e6def6eb610969cedef",
-          "intellisuggestData": "eJyyKK0sMcplYChKTVFIKUotLmZw1nX10w0y0nUxNjMyYzBkMGQwYDCyMGNIL8pMAQQAAP__KAALhA",
-          "intellisuggestSignature": "15b3dd037db7db9d761005c87ec14dcf478dd7c3d681853a3225453c472fb65a",
-          "product_type_unigram": "dress"
-        },
-        "children": []
-      },
-      {
-        "id": "153270",
-        "mappings": {
-          "core": {
-            "uid": "153270",
-            "sku": "C-CES-R4-I3347",
-            "name": "Lakeside Tomato Red Maxi Dress",
-            "url": "/product/C-CES-R4-I3347",
-            "addToCartUrl": "/product/C-CES-R4-I3347",
-            "price": 39,
-            "msrp": 50,
-            "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/203_9020_copyright_reddressboutique_2016_large.jpg",
-            "secureImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/203_9020_copyright_reddressboutique_2016_large.jpg",
-            "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/203_9020_copyright_reddressboutique_2016_thumb_med.jpg",
-            "rating": "5",
-            "ratingCount": "1111",
-            "description": "Whether you’re relaxing Lakeside, or going to lunch with friends, you can dress this ravishing Tomato Red Maxi Dress up or down to suit your mood. This simply lovely maxi is a great choice for whatever is on the schedule. This sleeveless maxi dress features a crew neckline, an elastic waist with drawstring closure, a wrap style hi-lo hemline, and a keyhole with button loop closure on the back. Model is wearing a small. • 95% Rayon, 5% Spandex • Hand Wash Cold • Lined Top • Faintly Sheer • Made in the USA",
-            "stockMessage": "In stock",
-            "brand": "Ces Femme",
-            "popularity": "4302",
-            "caption": "Captions!"
-          }
-        },
-        "attributes": {
-          "id": "bd5acee1a78236c68b4001e738e8b997",
-          "intellisuggestData": "eJyyKK0sMcplYChKTVFIKUotLmZw1nV2DdYNMtH1NDY2MWcwZDBiMGAwsjBjSC_KTAEEAAD__zZMC9Q",
-          "intellisuggestSignature": "c89cd6da2b210b1e202ede4e997d7a8103cfaff1f26caf8afe41507a8eb7c5fb",
-          "product_type_unigram": "dress"
-        },
-        "children": []
-      },
-      {
-        "id": "153243",
-        "mappings": {
-          "core": {
-            "uid": "153243",
-            "sku": "C-NBK-R1-D7187",
-            "name": "She's Unforgettable Red Off-The-Shoulder Dress",
-            "url": "/product/C-NBK-R1-D7187",
-            "addToCartUrl": "/product/C-NBK-R1-D7187",
-            "price": 39,
-            "msrp": 50,
-            "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/215_9184_copyright_reddressboutique_2016_large.jpg",
-            "secureImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/215_9184_copyright_reddressboutique_2016_large.jpg",
-            "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/215_9184_copyright_reddressboutique_2016_thumb_med.jpg",
-            "rating": "5",
-            "ratingCount": "1111",
-            "description": "They all agree that She's Unforgettable, but help them recall why when you’re in this radiant Red Off-The-Shoulder Dress. They won’t be able to get you or this dress off their mind! This shift dress features an elastic off-the-shoulder design with a gathered overlay. Model is wearing a small. • 55% Linen, 45% Rayon • Hand Wash Cold • Fully Lined • Made in the USA",
-            "stockMessage": "In stock",
-            "brand": "Newbury Kustom",
-            "popularity": "4244",
-            "caption": "Captions!"
-          }
-        },
-        "attributes": {
-          "id": "05c83dbf7f6fca66142c7011978063c0",
-          "intellisuggestData": "eJyyKK0sMcplYChKTVFIKUotLmZw1vVz8tYNMtR1MTe0MGcwZDBmMGAwsjBjSC_KTAEEAAD__zYxC9M",
-          "intellisuggestSignature": "16c36efc7aa458e7b25bffea90049871126855bacaa0b24d5022c0337ebf9d22",
-          "product_type_unigram": "dress"
-        },
-        "children": []
-      },
-      {
-        "id": "153108",
-        "mappings": {
-          "core": {
-            "uid": "153108",
-            "sku": "C-NBK-R4-D7206",
-            "name": "Let's Celebrate Red Embroidered Dress",
-            "url": "/product/C-NBK-R4-D7206",
-            "addToCartUrl": "/product/C-NBK-R4-D7206",
-            "price": 39,
-            "msrp": 50,
-            "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/29_8447_copyright_reddressboutique_2016_large.jpg",
-            "secureImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/29_8447_copyright_reddressboutique_2016_large.jpg",
-            "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/29_8447_copyright_reddressboutique_2016_thumb_med.jpg",
-            "rating": "5",
-            "ratingCount": "1111",
-            "description": "A fun event is right around the corner, and now you’ll have this cute Red Embroidered Dress, so Let's Celebrate! Go ahead and get the party started with a look that brings nothing but good fun and good style to the table! (Hopefully there will be some good mac-n-cheese at the table too!) This dress features a split scoop neck with embroidery and tassels and an elastic waist. Model is wearing a small. • 95% Rayon, 5% Spandex • Hand Wash Cold • Unlined • Made in the USA",
-            "stockMessage": "In stock",
-            "brand": "Newbury Kustom",
-            "popularity": "4193",
-            "caption": "Captions!"
-          }
-        },
-        "attributes": {
-          "id": "668dd854959ce2ce849ee89dd15245e3",
-          "intellisuggestData": "eJyyKK0sMcplYChKTVFIKUotLmZw1vVz8tYNMtF1MTcyMGMwZDBhMGAwsjBjSC_KTAEEAAD__zX5C88",
-          "intellisuggestSignature": "b57d8f4c0107f4370c5b0fd7dbd76fcf37c6248a0259ec7db1a4c036e16881a4",
-          "product_type_unigram": "dress"
-        },
-        "children": []
-      },
-      {
-        "id": "153306",
-        "mappings": {
-          "core": {
-            "uid": "153306",
-            "sku": "C-RDB-R2-6451G",
-            "name": "Color My Soul Red Ruffle Dress",
-            "url": "/product/C-RDB-R2-6451G",
-            "addToCartUrl": "/product/C-RDB-R2-6451G",
-            "price": 36,
-            "msrp": 50,
-            "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/123_8374_copyright_reddressboutique_2016_large.jpg",
-            "secureImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/123_8374_copyright_reddressboutique_2016_large.jpg",
-            "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/123_8374_copyright_reddressboutique_2016_thumb_med.jpg",
-            "rating": "5",
-            "ratingCount": "1111",
-            "description": "There’s something about you that I can’t quite place my finger on, but whenever I’m around you, it’s like I’m suddenly flooded with a lighter and happier feeling, you Color My Soul Red Ruffle Dress! Put into concrete words, I was once living a grayscale kind of life, but when I met you, it’s like you brought the Color back into My Soul. This dress features spaghetti straps, a deep v-neckline, and a ruffled hemline. Model is wearing a small. • 100% Rayon • Hand Wash Cold • Fully Lined • Made in the USA",
-            "stockMessage": "In stock",
-            "brand": "RDB",
-            "popularity": "4112",
-            "caption": "Captions!"
-          }
-        },
-        "attributes": {
-          "id": "b8640f7448f81cff44948195eb9f412f",
-          "intellisuggestData": "eJyyKK0sMcplYChKTVFIKUotLmZw1g1ycdINMtI1MzE1dGcwZDBlMGAwsjBjSC_KTAEEAAD__zWeC88",
-          "intellisuggestSignature": "5148a364b6f240754946f905cbcd82600fb2e5c8186fe3ca4bb57b8e05d32fa5",
-          "product_type_unigram": "dress"
-        },
-        "children": []
-      },
-      {
-        "id": "157250",
-        "mappings": {
-          "core": {
-            "uid": "157250",
-            "sku": "C-PLC-R2-12813",
-            "name": "Envy The Girl Red Floral Print Dress",
-            "url": "/product/C-PLC-R2-12813",
-            "addToCartUrl": "/product/C-PLC-R2-12813",
-            "price": 44,
-            "msrp": 50,
-            "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/844a7048_2_large.jpg",
-            "secureImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/844a7048_2_large.jpg",
-            "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/844a7048_2_thumb_med.jpg",
-            "rating": "5",
-            "ratingCount": "1111",
-            "description": "Even if you make friends everywhere you go, there’s sure to be some who will Envy The Girl when you’re in this amazing Red Floral Print Dress. You can’t make everyone love you, but at least they’ll love this dress! What can you do?! This sleeveless print shift dress features a crew neckline with a keyhole and double button loop closure on the back. Model is wearing a small. • 100% Polyester • Hand Wash Cold • Fully Lined • Made in the USA",
-            "stockMessage": "In stock",
-            "brand": "PLC",
-            "popularity": "4111",
-            "caption": "Captions!"
-          }
-        },
-        "attributes": {
-          "id": "a5011489ab3c04f2c5e02876050d18b1",
-          "intellisuggestData": "eJyyKK0sMcplYChKTVFIKUotLmZw1g3wcdYNMtI1NLIwNGYwZDBjMGAwsjBjSC_KTAEEAAD__zTJC78",
-          "intellisuggestSignature": "dd074d551b28eb2bbb655885369ea4f36b4913109e3d0b51afa5fdf391fe9fed",
-          "product_type_unigram": "dress"
-        },
-        "children": []
-      },
-      {
-        "id": "143166",
-        "mappings": {
-          "core": {
-            "uid": "143166",
-            "sku": "C-MIT-R3-02321",
-            "name": "Bright Places Red Scallop Dress",
-            "url": "/product/C-MIT-R3-02321",
-            "addToCartUrl": "/product/C-MIT-R3-02321",
-            "price": 36,
-            "msrp": 50,
-            "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/844a2871_large.jpg",
-            "secureImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/844a2871_large.jpg",
-            "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/844a2871_thumb_med.jpg",
-            "rating": "5",
-            "ratingCount": "1111",
-            "description": "We see Bright Places in your future when you wear this radiant Red Scallop Dress. This sleeveless shift dress has a scalloped hemline and a keyhole on the back with a button loop closure. Model is wearing a small. ** This garment contains no stretch or give. RDB Stylists recommend sizing up for a more comfortable fit! ** • 100% Polyester • Hand Wash Cold • Unlined • Imported",
-            "stockMessage": "In stock",
-            "brand": "Mitto Shop",
-            "popularity": "4094",
-            "caption": "Captions!"
-          }
-        },
-        "attributes": {
-          "id": "73516abe411ee7cdd3cfea7358805dfd",
-          "intellisuggestData": "eJyyKK0sMcplYChKTVFIKUotLmZw1vX1DNENMtY1MDI2MmQwZDBnMGAwsjBjSC_KTAEEAAD__zV4C8U",
-          "intellisuggestSignature": "edc39a131446a3c59d93a779720d89efd6ad755b4e3fd5634811c0296bc54c6f",
-          "product_type_unigram": "dress"
-        },
-        "children": []
-      },
-      {
-        "id": "172159",
-        "mappings": {
-          "core": {
-            "uid": "172159",
-            "sku": "C-ESS-R4-31035",
-            "name": "Main Attraction Red Print Dress",
-            "url": "/product/C-ESS-R4-31035",
-            "addToCartUrl": "/product/C-ESS-R4-31035",
-            "price": 44,
-            "msrp": 50,
-            "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/416_lcp_2025_copyright_loganpotterf_2016_large.jpg",
-            "secureImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/416_lcp_2025_copyright_loganpotterf_2016_large.jpg",
-            "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/416_lcp_2025_copyright_loganpotterf_2016_thumb_med.jpg",
-            "rating": "5",
-            "ratingCount": "1111",
-            "description": "With all of the decorations (thank you Pinterest for upping the game and making everyone's holiday parties look like a page out of Pottery Barn) it's tough to be the Main Attraction at your gathering of choice. So what's a gal to do? Come to the Red Dress Boutique of course. This dress, paired with your good looks, dashed together with your wit and charm, is sure to bring all eyes to you and you alone. No tree or fancy table full of handmade decor can compete. Neither can anyone else in the room, but we were already assuming that since you're you and naturally you're fabulous. Model is wearing a small. • 100% Polyester • Hand Wash Cold • Fully Lined • Imported",
-            "stockMessage": "In stock",
-            "brand": "Essue",
-            "popularity": "3889",
-            "caption": "Captions!"
-          }
-        },
-        "attributes": {
-          "id": "8740cfeb3243613b875368d6bd776c9d",
-          "intellisuggestData": "eJyyKK0sMcplYChKTVFIKUotLmZw1nUNDtYNMtE1NjQwNmUwZLBgMGAwsjBjSC_KTAEEAAD__zXxC8w",
-          "intellisuggestSignature": "c597079edef2db34d5a1516d21bce4d9c4bcb20d92bf40b0a5f0fca46de7f636",
-          "product_type_unigram": "dress"
-        },
-        "children": []
-      },
-      {
-        "id": "144246",
-        "mappings": {
-          "core": {
-            "uid": "144246",
-            "sku": "C-PUH-R4-0AU03",
-            "name": "Fringe Perfect Match Red Paisley Print Maxi Dress",
-            "url": "/product/C-PUH-R4-0AU03",
-            "addToCartUrl": "/product/C-PUH-R4-0AU03",
-            "price": 40,
-            "msrp": 50,
-            "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/844a5962_2_large.jpg",
-            "secureImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/844a5962_2_large.jpg",
-            "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/844a5962_2_thumb_med.jpg",
-            "rating": "5",
-            "ratingCount": "1111",
-            "description": "You and this figure flattering Red Paisley Print Maxi Dress are a Fringe Perfect Match! Beautiful and becoming, this flowy number will have you feeling fine and foxy. This paisley print maxi features a deep V-neckline with button loop closures, a rope tie at the waist, and slits on the sides. Model is wearing a small. • 100% Viscose • Hand Wash Cold • Unlined • Imported",
-            "stockMessage": "In stock",
-            "brand": "Pure Hype",
-            "popularity": "3516",
-            "caption": "Captions!"
-          }
-        },
-        "attributes": {
-          "id": "0f866383d4c6b9e311c16881da905188",
-          "intellisuggestData": "eJyyKK0sMcplYChKTVFIKUotLmZw1g0I9dANMtE1cAw1MGYwZLBkMGAwsjBjSC_KTAEEAAD__zmCC_w",
-          "intellisuggestSignature": "3abb00a0079c461cd74bf04827fc96e8327ab444346bcf820d373c68621bcb8b",
-          "product_type_unigram": "dress"
-        },
-        "children": []
-      },
-      {
-        "id": "155190",
-        "mappings": {
-          "core": {
-            "uid": "155190",
-            "sku": "C-EN-R5-2475",
-            "name": "Fringe She's Everything Ruby Red Lace-Up Dress",
-            "url": "/product/C-EN-R5-2475",
-            "addToCartUrl": "/product/C-EN-R5-2475",
-            "price": 34,
-            "msrp": 50,
-            "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/844a3864_2_large.jpg",
-            "secureImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/844a3864_2_large.jpg",
-            "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/844a3864_2_thumb_med.jpg",
-            "rating": "5",
-            "ratingCount": "1111",
-            "description": "When he sees you in this Ruby Red Lace-Up Dress, he’ll be so astounded that all he can say is Fringe She's Everything! There’s just too many things to even begin listing! Leave them dumbfounded, mesmerized, and in a daze when you step out in this stunner. This sleeveless shift dress features a lace-up V-neckline and functional side pockets. Model is wearing a small. • 95% Rayon, 5% Spandex • Hand Wash Cold • Unlined • Made in the USA",
-            "stockMessage": "In stock",
-            "brand": "Entro",
-            "popularity": "3449",
-            "caption": "Captions!"
-          }
-        },
-        "attributes": {
-          "id": "b54934c8c60500e8675cf203cdce0ef9",
-          "intellisuggestData": "eJyyKK0sMcplYChKTVFIKUotLmZw1nX10w0y1TUyMTdlMGQwNGAwYDCyMGNIL8pMAQQAAP__JnQLdA",
-          "intellisuggestSignature": "e0a69092c744f1b27b8c7f309a458954f9bf3bb5e0b8008c2f1ae0d52979c02c",
-          "product_type_unigram": "dress"
-        },
-        "children": []
-      },
-      {
-        "id": "151863",
-        "mappings": {
-          "core": {
-            "uid": "151863",
-            "sku": "C-EAS-R2-D3149",
-            "name": "Fringe What Can I Fray Tomato Red Dress",
-            "url": "/product/C-EAS-R2-D3149",
-            "addToCartUrl": "/product/C-EAS-R2-D3149",
-            "price": 44,
-            "msrp": 50,
-            "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/6b9a6037_1_large.jpg",
-            "secureImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/6b9a6037_1_large.jpg",
-            "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/6b9a6037_1_thumb_med.jpg",
-            "rating": "5",
-            "ratingCount": "1111",
-            "description": "Fringe What Can I Fray, you’d look absolutely amazing in this Tomato Red Dress! We’re sure others will be at a loss for words when they see you in this lovely number. This A-line dress features a scoop neckline, flutter sleeves, and frayed detail on the sleeves and hemline. Model is wearing a small. • Self: 100% Cotton • Lining: 100% Rayon • Hand Wash Cold • Fully Lined • Imported",
-            "stockMessage": "In stock",
-            "brand": "Easel",
-            "popularity": "3311",
-            "caption": "Captions!"
-          }
-        },
-        "attributes": {
-          "id": "c6182f761f9f3d714d0ff5621f76f3b5",
-          "intellisuggestData": "eJyyKK0sMcplYChKTVFIKUotLmZw1nV1DNYNMtJ1MTY0sWQwZDA0ZDBgMLIwY0gvykwBBAAA__9BGgv7",
-          "intellisuggestSignature": "02e641c164c9a25969fcf4e13336835ca1ad7e458d95d0da6f2c5c8574edb56b",
-          "product_type_unigram": "dress"
-        },
-        "children": []
-      },
-      {
-        "id": "176900",
-        "mappings": {
-          "core": {
-            "uid": "176900",
-            "sku": "C-SHE-R4-L4088",
-            "name": "Caught In A Reverie Red Lace Dress",
-            "url": "/product/C-SHE-R4-L4088",
-            "addToCartUrl": "/product/C-SHE-R4-L4088",
-            "price": 46,
-            "msrp": 50,
-            "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/copyright_rdb_studio_2_4833_large.jpg",
-            "secureImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/copyright_rdb_studio_2_4833_large.jpg",
-            "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/copyright_rdb_studio_2_4833_thumb_med.jpg",
-            "rating": "5",
-            "ratingCount": "1111",
-            "description": "As wondrous as life can be at its best, there are an equal number of times when it can be dull as dirt. Thank goodness for your active imagination, because you can while away the hours with the most rewarding of daydreams. A bit of advice though, if we may: dress as though you expect something exciting to happen at any moment, even at the height of your boredom. You don’t want to be caught in a reverie, unprepared to make your daydreams a reality when opportunity strikes. This lace dress is versatile in that way, and stunning to boot. Model is wearing a small. • 70% Cotton 30% Polyester • Lining 100% Polyester • Hand Wash Cold • Lined • Imported",
-            "stockMessage": "In stock",
-            "brand": "She + Sky",
-            "popularity": "3271",
-            "caption": "Captions!"
-          }
-        },
-        "attributes": {
-          "id": "f87d1aab1e57ba82c8a558838128ce7b",
-          "intellisuggestData": "eJyyKK0sMcplYChKTVFIKUotLmZw1g32cNUNMtH1MTGwsGAwZDA0YjBgMLIwY0gvykwBBAAA__9DDQwQ",
-          "intellisuggestSignature": "a85d79337d8113ca1e25a34ad9653cfdeaad83bcff47570ef6e2f0bb2fdc7255",
-          "product_type_unigram": "dress"
-        },
-        "children": []
-      },
-      {
-        "id": "172163",
-        "mappings": {
-          "core": {
-            "uid": "172163",
-            "sku": "C-AKA-R4-1046H",
-            "name": "Hear The Bells Red Dress",
-            "url": "/product/C-AKA-R4-1046H",
-            "addToCartUrl": "/product/C-AKA-R4-1046H",
-            "price": 42,
-            "msrp": 50,
-            "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/16_11_home_for_christmas_870_large.jpg",
-            "secureImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/16_11_home_for_christmas_870_large.jpg",
-            "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/16_11_home_for_christmas_870_thumb_med.jpg",
-            "rating": "5",
-            "ratingCount": "1111",
-            "description": "Dresses, dresses, and more dresses. What's to be done with all these choices? How do you know exactly which dress is right for you? Our solution is a simple one: Buy them all and blame it on Santa. Who is going to argue with that? I mean, it's Christmas, right, so isn't it the time for good will and all that? That totally extends to your wardrobe. You're just spreading the holiday cheer to your socks. They never get out. At least with a proper holiday dress in the closet, they'll see a glimpse of the glamorous life from the floor. Model is wearing a small. • 100% Polyester • Dry Clean Only • Fully Lined • Imported",
-            "stockMessage": "In stock",
-            "brand": "Aakaa",
-            "popularity": "3136",
-            "caption": "Captions!"
-          }
-        },
-        "attributes": {
-          "id": "6ea22d98120008beab7e64c4f07262e4",
-          "intellisuggestData": "eJyyKK0sMcplYChKTVFIKUotLmZw1nX0dtQNMtE1NDAx82AwZDA0ZjBgMLIwY0gvykwBBAAA__8_uwvx",
-          "intellisuggestSignature": "b2c5e4b23d13533c32424f4537293c35e88e56fb6b7a857a44f19e0c4fdd93bc",
-          "product_type_unigram": "dress"
-        },
-        "children": []
-      },
-      {
-        "id": "183154",
-        "mappings": {
-          "core": {
-            "uid": "183154",
-            "sku": "C-EN-O4-D7560",
-            "name": "Modern Makeover Coral Red Dress",
-            "url": "/product/C-EN-O4-D7560",
-            "addToCartUrl": "/product/C-EN-O4-D7560",
-            "price": 42,
-            "msrp": 50,
-            "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/2472_copyright_reddressboutique_2017__large.jpg",
-            "secureImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/2472_copyright_reddressboutique_2017__large.jpg",
-            "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/2472_copyright_reddressboutique_2017__thumb_med.jpg",
-            "rating": "5",
-            "ratingCount": "1111",
-            "description": "What is a Modern Makeover? Well, frankly, it's whatever you consider it to be! Even if you wear dresses like this all the time, you could still buy it, slip it on, and change your outlook for the day. I mean, look at this fantastic color! Would it not make your day every single time you passed your reflection? We'd smile when we saw you (we would no matter what, so that might be a moot point). Sleeveless shift dress with a scallop front panel. Dress has pockets and a single button and loop closure that creates a small keyhole at the back. Model is wearing a small. • 100% Cotton • Machine Wash Cold • Lined • Imported",
-            "stockMessage": "In stock",
-            "brand": "Entro",
-            "popularity": "3111",
-            "caption": "Captions!"
-          }
-        },
-        "attributes": {
-          "id": "5ae13f5ebf8899f4b2214986797108a9",
-          "intellisuggestData": "eJyyKK0sMcplYChKTVFIKUotLmZw1nX10_U30XUxNzUzYDBkMDRhMGAwsjBjSC_KTAEEAAD__zODC7g",
-          "intellisuggestSignature": "4742cc3c0950b72a25c8304889af7ac7de2f46fe0b2a3781d4d8b86bdf31a7bd",
-          "product_type_unigram": "dress"
-        },
-        "children": []
-      },
-      {
-        "id": "179559",
-        "mappings": {
-          "core": {
-            "uid": "179559",
-            "sku": "C-MB-R4-16591",
-            "name": "Two Become One Red Lace Dress",
-            "url": "/product/C-MB-R4-16591",
-            "addToCartUrl": "/product/C-MB-R4-16591",
-            "price": 56,
-            "msrp": 75,
-            "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/17_03_20_studio_26246_large.jpg",
-            "secureImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/17_03_20_studio_26246_large.jpg",
-            "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/17_03_20_studio_26246_thumb_med.jpg",
-            "rating": "5",
-            "ratingCount": "1111",
-            "description": "When it comes to white lace, how’s a girl supposed to wear it and not immediately think of a fairy tale wedding? At some point in all of our lives we’ve dreamed about it (though some of us hold onto that dream longer than others). But as enticing as the promise of “Two Become One” is, white lace has a far more practical, and far more effective purpose—making you look your most beautiful, no matter the occasion. Bodycon style dress features a red crochet lace overlay with a peek-a-boo midriff and plunging neckline. Dress has a slight stretch and features a v back with peek-a-boo panels and an invisible back zipper. Model is wearing a small. • 100% Polyester • Hand Wash Cold • Lined • Imported",
-            "stockMessage": "In stock",
-            "brand": "Marine",
-            "popularity": "2945",
-            "caption": "Captions!"
-          }
-        },
-        "attributes": {
-          "id": "50becf03396f0a78cb790fc837d94bb0",
-          "intellisuggestData": "eJyyKK0sMcplYChKTVFIKUotLmZw1vV10g0y0TU0M7U0ZDBkMDRlMGAwsjBjSC_KTAEEAAD__zIbC6g",
-          "intellisuggestSignature": "09bfd8403be33dad55a0658f4be547b938b7a3b2f238dbdddf7c36c1bad45adc",
-          "product_type_unigram": "dress"
-        },
-        "children": []
-      },
-      {
-        "id": "180367",
-        "mappings": {
-          "core": {
-            "uid": "180367",
-            "sku": "C-MB-R4-16707",
-            "name": "Drop Dead Gorgeous Red Lace Dress",
-            "url": "/product/C-MB-R4-16707",
-            "addToCartUrl": "/product/C-MB-R4-16707",
-            "price": 58,
-            "msrp": 75,
-            "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/17_03_20_studio_26498_large.jpg",
-            "secureImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/17_03_20_studio_26498_large.jpg",
-            "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/17_03_20_studio_26498_thumb_med.jpg",
-            "rating": "5",
-            "ratingCount": "1111",
-            "description": "Trying to pick his jaw off the floor is exactly what he will be doing when he sees you in this Drop Dead Gorgeous Red Lace Dress. The other ladies at the party will have to keep their husbands (and jealousy) in check because you will for sure be THE talk of the night. Red lace dress features a form fitting silhouette with invisible back zipper toped with a double hook and eye closure. Model is wearing a small. • 100% Polyester • Dry Clean Only • Lined • Imported",
-            "stockMessage": "In stock",
-            "brand": "Ever After",
-            "popularity": "2822",
-            "caption": "Captions!"
-          }
-        },
-        "attributes": {
-          "id": "aca53db2b9610a10b97b1f9bde400693",
-          "intellisuggestData": "eJyyKK0sMcplYChKTVFIKUotLmZw1vV10g0y0TU0MzcwZzBkMDRjMGAwsjBjSC_KTAEEAAD__zIRC6g",
-          "intellisuggestSignature": "a45f266819f3f0655ee413746282a3215cfbfa0017bee6a41d60eef87b6f4e29",
-          "product_type_unigram": "dress"
-        },
-        "children": []
-      },
-      {
-        "id": "181225",
-        "mappings": {
-          "core": {
-            "uid": "181225",
-            "sku": "C-LXL-R4-D3819",
-            "name": "With All My Heart Red Dress",
-            "url": "/product/C-LXL-R4-D3819",
-            "addToCartUrl": "/product/C-LXL-R4-D3819",
-            "price": 54,
-            "msrp": 75,
-            "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/2041_copyright_reddressboutique_2017__large.jpg",
-            "secureImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/2041_copyright_reddressboutique_2017__large.jpg",
-            "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/2041_copyright_reddressboutique_2017__thumb_med.jpg",
-            "rating": "5",
-            "ratingCount": "1111",
-            "description": "Dear Ex-boyfriend, I bought a new dress online the other day. It has precisely the shape that you love on me, even the color. I can see us at our favorite restaurant, in that quiet little booth in the corner, all cuddled up, enjoying our meal and our time together. Unfortunately, you turned into one of ‘those’ guys. The controlling type that likes to tell women what to do and where to go, and I’m just not for that. So to answer your text from last night: No we’re never ever ever getting back together. To cement that answer, enclosed in this envelope you will find a picture of me in the dress, on a date with my new boyfriend. Enjoy. With All My Heart, your loving and now happy Ex-girlfriend. This dress features a sweetheart neckline, zipper and fish hook in the back and visible stitching along bust and bottom. Also features adjustable sash tie around arms, full lining and a structured bodice. Model is wearing a small. • 95% Polyester 5% Spandex • Hand Wash Cold • Unlined • Made in the",
-            "stockMessage": "In stock",
-            "brand": "Ever After",
-            "popularity": "2635",
-            "caption": "Captions!"
-          }
-        },
-        "attributes": {
-          "id": "45a834a3145d55fe9e05a8a0fd501d91",
-          "intellisuggestData": "eJyyKK0sMcplYChKTVFIKUotLmZw1vWJ8NENMtF1MbYwtGQwZDA0ZzBgMLIwY0gvykwBBAAA__9EWgwe",
-          "intellisuggestSignature": "e3684f5cc69b6c45c24e93415203f937f7415488c67a128bc4ec2d26bea913ff",
-          "product_type_unigram": "dress"
-        },
-        "children": []
-      },
-      {
-        "id": "147305",
-        "mappings": {
-          "core": {
-            "uid": "147305",
-            "sku": "C-MB-R4-1577",
-            "name": "From The Heart Red Lace Dress",
-            "url": "/product/C-MB-R4-1577",
-            "addToCartUrl": "/product/C-MB-R4-1577",
-            "price": 46,
-            "msrp": 50,
-            "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/e_large.jpg",
-            "secureImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/e_large.jpg",
-            "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/e_thumb_med.jpg",
-            "rating": "5",
-            "ratingCount": "1111",
-            "description": "Any compliments given when you’re wearing this lovely Red Lace Dress will come straight From The Heart because you’ll look amazing! This lace dress features a bodycon silhouette and a deep V-back with a zipper down the full back of the dress. Model is wearing a small. • 100% Polyester • Dry Clean Only • Fully Lined • Imported",
-            "stockMessage": "In stock",
-            "brand": "Marine",
-            "popularity": "2599",
-            "caption": "Captions!"
-          }
-        },
-        "attributes": {
-          "id": "a46142a4963d369389d3b8bcb90c384d",
-          "intellisuggestData": "eJyyKK0sMcplYChKTVFIKUotLmZw1vV10g0y0TU0NTdnMGQwtGAwYDCyMGNIL8pMAQQAAP__JoMLeQ",
-          "intellisuggestSignature": "3bb43cb10c123ac7a32e740ad796983db107d782fa7442a8946369d824cf483d",
-          "product_type_unigram": "dress"
-        },
-        "children": []
-      },
-      {
-        "id": "160852",
-        "mappings": {
-          "core": {
-            "uid": "160852",
-            "sku": "C-EN-R6-D5465",
-            "name": "Happily Red Dress",
-            "url": "/product/C-EN-R6-D5465",
-            "addToCartUrl": "/product/C-EN-R6-D5465",
-            "price": 46,
-            "msrp": 50,
-            "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/844a0838_4_large.jpg",
-            "secureImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/844a0838_4_large.jpg",
-            "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/844a0838_4_thumb_med.jpg",
-            "rating": "5",
-            "ratingCount": "1111",
-            "description": "And she lived stylishly Happily Ever After, wearing this lovely Red Dress to end the story. The future has to be fortunate when you look this amazing! This dress features floral crochet embroidery at the bust, ladder detail throughout, a round neck with a keyhole, a keyhole on the back with button loop closure, and long bell sleeves. Model is wearing a small. • Self: 100% Rayon • Lining: 100% Polyester • Dry Clean Only • Fully Lined • Imported",
-            "stockMessage": "In stock",
-            "brand": "Entro",
-            "popularity": "2581",
-            "caption": "Captions!"
-          }
-        },
-        "attributes": {
-          "id": "8b55fb0bcf4daecbe2dc2b9731c76dfe",
-          "intellisuggestData": "eJyyKK0sMcplYChKTVFIKUotLmZw1nX10w0y03UxNTEzZTBkMLRkMGAwsjBjSC_KTAEEAAD__zRPC8Q",
-          "intellisuggestSignature": "3024626a985ca748c44d3b8bebbd2c01e5d501ade9d7c6bc18a97727bd2a7bbd",
-          "product_type_unigram": "dress"
-        },
-        "children": []
-      },
-      {
-        "id": "175613",
-        "mappings": {
-          "core": {
-            "uid": "175613",
-            "sku": "C-MB-R4-15668",
-            "name": "Festive Mood Red Lace Dress",
-            "url": "/product/C-MB-R4-15668",
-            "addToCartUrl": "/product/C-MB-R4-15668",
-            "price": 54,
-            "msrp": 75,
-            "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/rdb_studio_1_3013_large.jpg",
-            "secureImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/rdb_studio_1_3013_large.jpg",
-            "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/rdb_studio_1_3013_thumb_med.jpg",
-            "rating": "5",
-            "ratingCount": "1111",
-            "description": "It's the holiday season & we're in a Festive Mood that's why we're breaking out ALL of the stops in this sexy lace beauty! With sheer lace panels on both sides and back--you'll be showing just enough skin while still looking perfectly classic! Model is wearing a small. This garment runs small. RDB Stylists recommend sizing up for a more comfortable fit! • 100% Polyester • Dry Clean Only • Semi Lined • Faintly Sheer • Imported",
-            "stockMessage": "In stock",
-            "brand": "Marine",
-            "popularity": "2386",
-            "caption": "Captions!"
-          }
-        },
-        "attributes": {
-          "id": "c324b5899a45085dca030091bf2986c8",
-          "intellisuggestData": "eJyyKK0sMcplYChKTVFIKUotLmZw1vV10g0y0TU0NTOzYDBkMDJgMGAwsjBjSC_KTAEEAAD__zIsC6g",
-          "intellisuggestSignature": "f5fd7dfecef7407477880fc6df49df05b7de5d3ef8cc320fe4204f5a3ef6f7e5",
-          "product_type_unigram": "dress"
-        },
-        "children": []
-      },
-      {
-        "id": "183186",
-        "mappings": {
-          "core": {
-            "uid": "183186",
-            "sku": "C-MB-R4-16687",
-            "name": "Make A Statement Red Lace Dress",
-            "url": "/product/C-MB-R4-16687",
-            "addToCartUrl": "/product/C-MB-R4-16687",
-            "price": 58,
-            "msrp": 75,
-            "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/5783_copyright_reddressboutique_2017__large.jpg",
-            "secureImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/5783_copyright_reddressboutique_2017__large.jpg",
-            "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/5783_copyright_reddressboutique_2017__thumb_med.jpg",
-            "rating": "5",
-            "ratingCount": "1111",
-            "description": "How do you gain the attention of an entire room? The banging of a loud gavel would do it, sure, but how polite is that? Not at all. Screaming? Sure it would work but it would panic everyone and the screaming would pretty much be everything you would accomplish. Slowly descend a Cinderella staircase while clad in a gorgeous dress? Yup, that's the ticket! That's the best way to Make A Statement and make it stick! Mid-length dress features a lace up peek-a-boo front and an exposed back zipper with hook and eye closure. Model is wearing a small. • 100% Polyester • Hand Wash Cold • Lined • Imported",
-            "stockMessage": "In stock",
-            "brand": "Marine",
-            "popularity": "2189",
-            "caption": "Captions!"
-          }
-        },
-        "attributes": {
-          "id": "1dc304ec5e609e6343e5e5dee278358b",
-          "intellisuggestData": "eJyyKK0sMcplYChKTVFIKUotLmZw1vV10g0y0TU0M7MwZzBkMDJkMGAwsjBjSC_KTAEEAAD__zJfC6s",
-          "intellisuggestSignature": "b507dc769c05426d67713dbbb3b8198213cc02cec5284263f812fb7be5a98c77",
-          "product_type_unigram": "dress"
-        },
-        "children": []
-      },
-      {
-        "id": "145203",
-        "mappings": {
-          "core": {
-            "uid": "145203",
-            "sku": "C-MB-R3-1581",
-            "name": "I'll Be Seeing You Red Lace Dress",
-            "url": "/product/C-MB-R3-1581",
-            "addToCartUrl": "/product/C-MB-R3-1581",
-            "price": 48,
-            "msrp": 50,
-            "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/844a7152_3_large.jpg",
-            "secureImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/844a7152_3_large.jpg",
-            "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/844a7152_3_thumb_med.jpg",
-            "rating": "5",
-            "ratingCount": "1111",
-            "description": "He’ll end the conversation with I'll Be Seeing You because as radiant as you’ll look in this Red Lace Dress, he’ll make sure of it! And we expect that meeting to be ASAP! This sleeveless bodycon dress features a lace overlay, a sweetheart neckline, and an open back with a visible zipper on the back. Model is wearing a small. • 100% Polyester • Dry Clean Only • Fully Lined • Imported",
-            "stockMessage": "In stock",
-            "brand": "Marine",
-            "popularity": "2183",
-            "caption": "Captions!"
-          }
-        },
-        "attributes": {
-          "id": "f78a01c971d78a8cb03398e458963f46",
-          "intellisuggestData": "eJyyKK0sMcplYChKTVFIKUotLmZw1vV10g0y1jU0tTBkMGQwMmIwYDCyMGNIL8pMAQQAAP__Jd4Lbg",
-          "intellisuggestSignature": "c1219044669e4842fd8f2b3559d435b8dab909b35cbf8b1673a3d7f5eea48195",
-          "product_type_unigram": "dress"
-        },
-        "children": []
-      },
-      {
-        "id": "140163",
-        "mappings": {
-          "core": {
-            "uid": "140163",
-            "sku": "C-CEZ-R2-9016A",
-            "name": "Fringe Don't Smock Me Red Maxi Dress",
-            "url": "/product/C-CEZ-R2-9016A",
-            "addToCartUrl": "/product/C-CEZ-R2-9016A",
-            "price": 49,
-            "msrp": 50,
-            "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/844a2630_2_large.jpg",
-            "secureImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/844a2630_2_large.jpg",
-            "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/844a2630_2_thumb_med.jpg",
-            "rating": "5",
-            "ratingCount": "1111",
-            "description": "Tell them Fringe Don't Smock Me, but if they want to use you as style inspiration after seeing you in this ravishing Red Maxi Dress, that’s perfectly okay. As enviable as you’ll look in this coveted maxi, many will be wanting to look just like you. Afterall, imitation is the highest form of flattery. Don’t worry about looking the same because you’ve got your own way of wearing things so cool and effortlessly that it can’t be duplicated. This maxi dress features a smocked bodice with a halter neckline and an open back. Model is wearing a small. • 100% Rayon • Hand Wash Cold • Unlined • Imported",
-            "stockMessage": "In stock",
-            "brand": "Cezanne",
-            "popularity": "2122",
-            "caption": "Captions!"
-          }
-        },
-        "attributes": {
-          "id": "110b3b0a65498bc2aaf9045eb68383d5",
-          "intellisuggestData": "eJyyKK0sMcplYChKTVFIKUotLmZw1nV2jdINMtK1NDA0c2QwZDAyZjBgMLIwY0gvykwBBAAA__9BsgwD",
-          "intellisuggestSignature": "216b93cc252eb40fab2fa8de65eb5624dd0f73d3dfe3b812f750b4f2e15e93d6",
-          "product_type_unigram": "dress"
-        },
-        "children": []
-      },
-      {
-        "id": "149865",
-        "mappings": {
-          "core": {
-            "uid": "149865",
-            "sku": "C-NZ-R3-71732",
-            "name": "Need Me Red Halter Dress",
-            "url": "/product/C-NZ-R3-71732",
-            "addToCartUrl": "/product/C-NZ-R3-71732",
-            "price": 38,
-            "msrp": 50,
-            "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/844a1548_3_large.jpg",
-            "secureImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/844a1548_3_large.jpg",
-            "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/844a1548_3_thumb_med.jpg",
-            "rating": "5",
-            "ratingCount": "1111",
-            "description": "This Red Halter Dress is so stunning that it’s practically screaming you Need Me! You know you hear it! This halter dress features a knotted detail that forms a keyhole on the front and a visible zipper on the back. Model is wearing a small. • 100% Polyester • Hand Wash Cold • Fully Lined • Imported",
-            "stockMessage": "In stock",
-            "brand": "Naked Zebra",
-            "popularity": "2100",
-            "caption": "Captions!"
-          }
-        },
-        "attributes": {
-          "id": "1f1ea7efd83323101704c0f7d580d296",
-          "intellisuggestData": "eJyyKK0sMcplYChKTVFIKUotLmZw1vWL0g0y1jU3NDc2YjBkMDJhMGAwsjBjSC_KTAEEAAD__zR1C74",
-          "intellisuggestSignature": "bd3aca39c3fd5ed1d617a39e5d535943eae313b2fa0c08d8408c4bdc4f3e0c40",
-          "product_type_unigram": "dress"
-        },
-        "children": []
-      },
-      {
-        "id": "173841",
-        "mappings": {
-          "core": {
-            "uid": "173841",
-            "sku": "C-MNJ-R4-23421",
-            "name": "Lady Of Class Red Skater Dress",
-            "url": "/product/C-MNJ-R4-23421",
-            "addToCartUrl": "/product/C-MNJ-R4-23421",
-            "price": 42,
-            "msrp": 50,
-            "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/16_12_holiday_2_029_large.jpg",
-            "secureImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/16_12_holiday_2_029_large.jpg",
-            "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/16_12_holiday_2_029_thumb_med.jpg",
-            "rating": "5",
-            "ratingCount": "1111",
-            "description": "A Lady of Class is a great many things; an excellent judge of character, a poised and elegant woman of intelligence, a smart, judicial, shrewd gal who knows how to get what she wants, but above all else, she knows when to say something and when to say nothing at all. In other words, she knows when to let her wardrobe do all the talking for her. This dress says volumes, and we'll leave it up to you, what you want it say and to whom you would like it to speak. We hear it works wonders on ex-husbands and current mother-in-laws. Dress features scoop neckline, hidden back zipper, lace arm detail. Model is wearing a small. • 100% Polyester • Hand Wash Cold • Imported",
-            "stockMessage": "In stock",
-            "brand": "Maniju",
-            "popularity": "2039",
-            "caption": "Captions!"
-          }
-        },
-        "attributes": {
-          "id": "61cfd10dcafe7a6908095caeafa1d3d5",
-          "intellisuggestData": "eJyyKK0sMcplYChKTVFIKUotLmZw1vX189INMtE1MjYxMmQwZDAyZTBgMLIwY0gvykwBBAAA__9A7Qv1",
-          "intellisuggestSignature": "b7c7240f64cbc17c40c4199f970126848d080abb5e2bc6932cfae7ea96bade9a",
-          "product_type_unigram": "dress"
-        },
-        "children": []
-      },
-      {
-        "id": "181845",
-        "mappings": {
-          "core": {
-            "uid": "181845",
-            "sku": "C-US-R4-94464",
-            "name": "Escape To Mexico Red Off-The-Shoulder Dress",
-            "url": "/product/C-US-R4-94464",
-            "addToCartUrl": "/product/C-US-R4-94464",
-            "price": 42,
-            "msrp": 50,
-            "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/2457_copyright_reddressboutique_2017__large.jpg",
-            "secureImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/2457_copyright_reddressboutique_2017__large.jpg",
-            "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/2457_copyright_reddressboutique_2017__thumb_med.jpg",
-            "rating": "5",
-            "ratingCount": "1111",
-            "description": "Craving a jalapeno margarita? Some real salsa and chips (amongst more food and drinks that I can't even begin to list because I will wind up hungry for the next gazillion years until I can scrounge up enough money for a plane ticket to go to Mexico myself)? Well, if you're like me and you can't afford to just fly to Mexico, or charter a private jet (dream big or go home, right?) then enjoy the warmer climes of Summer in this Escape To Mexico Red Off The Shoulder Dress. It's Beautiful, breathlessly embroidered, and gives the most exotic vibe! It won't make the guacamole for you, but it's a great addition for your very own Mexican Night if you wanted to host one. Even if you were the only one in attendance. And no, we totally wouldn't judge. Not even a little bit. Though ... if you want to invite us, we would at least consider coming. Off the shoulder embroidered dress features an a-line silhouette with an elasticized neckline and short sleeves. Model is wearing a small. • 100% Cotton •",
-            "stockMessage": "In stock",
-            "brand": "Under Skies",
-            "popularity": "2034",
-            "caption": "Captions!"
-          }
-        },
-        "attributes": {
-          "id": "e83396a40d8fc2c8ca2bf57d1075ca3a",
-          "intellisuggestData": "eJyyKK0sMcplYChKTVFIKUotLmZw1g0N1g0y0bU0MTEzYTBkMDJjMGAwsjBjSC_KTAEEAAD__zUwC8g",
-          "intellisuggestSignature": "a840457566b28ccc555c440d00672c920c0ff0446c24644ae21c8684956ccef4",
-          "product_type_unigram": "dress"
-        },
-        "children": []
-      },
-      {
-        "id": "163747",
-        "mappings": {
-          "core": {
-            "uid": "163747",
-            "sku": "C-PLC-R3-25602",
-            "name": "Never Back Down Red Tie-Dye Dress",
-            "url": "/product/C-PLC-R3-25602",
-            "addToCartUrl": "/product/C-PLC-R3-25602",
-            "price": 39,
-            "msrp": 50,
-            "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/844a2242_2_large.jpg",
-            "secureImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/844a2242_2_large.jpg",
-            "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/844a2242_2_thumb_med.jpg",
-            "rating": "5",
-            "ratingCount": "1111",
-            "description": "Never Back Down, keep your style and spirit strong, no matter the score, in this winning Red Tie-Dye Dress! You’ll be an undefeated style champion in this tie-dye cutie! This sleeveless tie-dye shift dress features a small keyhole on the back. Model is wearing a small. • 94% Rayon, 6% Spandex • Hand Wash Cold • Unlined • Made in the USA",
-            "stockMessage": "In stock",
-            "brand": "PLC",
-            "popularity": "1952",
-            "caption": "Captions!"
-          }
-        },
-        "attributes": {
-          "id": "417c98fdadb0720e1f6d66101b7aae33",
-          "intellisuggestData": "eJyyKK0sMcplYChKTVFIKUotLmZw1g3wcdYNMtY1MjUzMGIwZDAyZzBgMLIwY0gvykwBBAAA__9AkQvz",
-          "intellisuggestSignature": "f02e179fb9c7479af17bef55d0edb75d8d0367cdeadded802a1877c008f26761",
-          "product_type_unigram": "dress"
-        },
-        "children": []
-      },
-      {
-        "id": "144336",
-        "mappings": {
-          "core": {
-            "uid": "144336",
-            "sku": "C-LEL-R6-01063",
-            "name": "Turning Tables Red Shift Dress",
-            "url": "/product/C-LEL-R6-01063",
-            "addToCartUrl": "/product/C-LEL-R6-01063",
-            "price": 39,
-            "msrp": 50,
-            "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/rd_studio_7_18_16_568_large.jpg",
-            "secureImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/rd_studio_7_18_16_568_large.jpg",
-            "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/rd_studio_7_18_16_568_thumb_med.jpg",
-            "rating": "5",
-            "ratingCount": "1111",
-            "description": "You’ll be Turning Tables and turning heads when you’re in this adorable Red Shift Dress. Perfect for a summer outing, this cute number will have you turning out in style. This mini shift dress features a scoop neckline, short sleeves, and a hidden zipper. Model is wearing a small. • 100% Cotton • Hand Wash Cold • Unlined • Made in the USA",
-            "stockMessage": "In stock",
-            "brand": "Le Lis",
-            "popularity": "1919",
-            "caption": "Captions!"
-          }
-        },
-        "attributes": {
-          "id": "eb8f7e2237f6e9a9e16a4981d6e6ef17",
-          "intellisuggestData": "eJyyKK0sMcplYChKTVFIKUotLmZw1vVx9dENMtM1MDQwM2YwZDCyYDBgMLIwY0gvykwBBAAA__9AMAvw",
-          "intellisuggestSignature": "49edea60a32c41119b5fac0bd49f2a0bc86b030ca9c09936d7b291409b3b0f05",
-          "product_type_unigram": "dress"
-        },
-        "children": []
-      },
-      {
-        "id": "164836",
-        "mappings": {
-          "core": {
-            "uid": "164836",
-            "sku": "C-ETC-R2-D013A",
-            "name": "Gives Me Life Red Maxi Dress",
-            "url": "/product/C-ETC-R2-D013A",
-            "addToCartUrl": "/product/C-ETC-R2-D013A",
-            "price": 54,
-            "msrp": 75,
-            "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/7-21-164311_1_large.jpg",
-            "secureImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/7-21-164311_1_large.jpg",
-            "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/7-21-164311_1_thumb_med.jpg",
-            "rating": "5",
-            "ratingCount": "1111",
-            "description": "If you agree that fashion Gives Me Life and makes things right, then this Red Maxi Dress will awaken your soul! This bright red stunner will bring life to your day and be a sightly treat to everyone you meet! This sleeveless print maxi dress features a V-neckline with strappy detail, cutouts down the bodice, an open, strappy back, and a hi-lo hemline. Model is wearing a small. • 100% Rayon • Hand Wash Cold • Fully Lined • Imported",
-            "stockMessage": "In stock",
-            "brand": "E2 Clothing",
-            "popularity": "1808",
-            "caption": "Captions!"
-          }
-        },
-        "attributes": {
-          "id": "d7e16b335b93847407492f2b1836d67a",
-          "intellisuggestData": "eJyyKK0sMcplYChKTVFIKUotLmZw1nUNcdYNMtJ1MTA0dmQwZDCyZDBgMLIwY0gvykwBBAAA__9CIgwL",
-          "intellisuggestSignature": "f36b35918312ec15a02559eb18b84b95a97228818a850246eece52d03f967a88",
-          "product_type_unigram": "dress"
-        },
-        "children": []
-      },
-      {
-        "id": "182128",
-        "mappings": {
-          "core": {
-            "uid": "182128",
-            "sku": "C-AD-R4-924MD",
-            "name": "Take Me To Havana Red Off-The-Shoulder Dress",
-            "url": "/product/C-AD-R4-924MD",
-            "addToCartUrl": "/product/C-AD-R4-924MD",
-            "price": 42,
-            "msrp": 50,
-            "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/4851_copyright_reddressboutique_2017__large.jpg",
-            "secureImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/4851_copyright_reddressboutique_2017__large.jpg",
-            "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/4851_copyright_reddressboutique_2017__thumb_med.jpg",
-            "rating": "5",
-            "ratingCount": "1111",
-            "description": "When you need a sexy dress that will unravel a man like a Cuban cigar, look no further than our Take Me To Havana Red Off The Shoulder Dress. It helps to know how to dance, but it's not required. Merely showing up and being near him with your womanly wiles and your feminine charms will serve as ammunition enough. So if you're in the spy game, this is the perfect dress for you. Of course, I've now blown your cover and for that, a thousand apologies. But you if merely wish to look fabulous on a date, then by all means, check out the dress. It will suit your needs just as well. What you choose to use the functional pockets for is entirely up to you (as a spy or not, of course). Off the shoulder dress features a tier top complete with a decorative front tie. An elastic waistline and two functional pockets complete the dress. Model is wearing a small. • 95% Rayon 5% Spandex • Hand Wash Cold • Unlined • Made in the USA",
-            "stockMessage": "In stock",
-            "brand": "Adrienne",
-            "popularity": "1704",
-            "caption": "Captions!"
-          }
-        },
-        "attributes": {
-          "id": "4477c769e0adbe4f0336b9283a610e27",
-          "intellisuggestData": "eJyyKK0sMcplYChKTVFIKUotLmZw1nV00Q0y0bU0MvF1YTBkMDZgMGAwsjBjSC_KTAEEAAD__zPZC8U",
-          "intellisuggestSignature": "95e9e15cfa66eb2b32ae539af4ac9bc870a90598e069929eff5acda5631ccff5",
-          "product_type_unigram": "dress"
-        },
-        "children": []
-      }
-    ],
-    "filters": [],
-    "facets": [
-      {
-        "field": "color_family",
-        "type": "value",
-        "filtered": false,
-        "values": [
-          {
-            "filtered": false,
-            "value": "Red",
-            "label": "Red",
-            "count": 112
-          },
-          {
-            "filtered": false,
-            "value": "Blue",
-            "label": "Blue",
-            "count": 40
-          },
-          {
-            "filtered": false,
-            "value": "White",
-            "label": "White",
-            "count": 39
-          },
-          {
-            "filtered": false,
-            "value": "Pink",
-            "label": "Pink",
-            "count": 18
-          },
-          {
-            "filtered": false,
-            "value": "Black",
-            "label": "Black",
-            "count": 12
-          },
-          {
-            "filtered": false,
-            "value": "Green",
-            "label": "Green",
-            "count": 12
-          },
-          {
-            "filtered": false,
-            "value": "Beige",
-            "label": "Beige",
-            "count": 8
-          },
-          {
-            "filtered": false,
-            "value": "Gray",
-            "label": "Gray",
-            "count": 8
-          },
-          {
-            "filtered": false,
-            "value": "Orange",
-            "label": "Orange",
-            "count": 5
-          },
-          {
-            "filtered": false,
-            "value": "Purple",
-            "label": "Purple",
-            "count": 3
-          },
-          {
-            "filtered": false,
-            "value": "Yellow",
-            "label": "Yellow",
-            "count": 3
-          },
-          {
-            "filtered": false,
-            "value": "Black, Grey",
-            "label": "Black, Grey",
-            "count": 1
-          }
-        ]
-      },
-      {
-        "field": "size",
-        "type": "value",
-        "filtered": false,
-        "values": [
-          {
-            "filtered": false,
-            "value": "Medium",
-            "label": "Medium",
-            "count": 284
-          },
-          {
-            "filtered": false,
-            "value": "Large",
-            "label": "Large",
-            "count": 284
-          },
-          {
-            "filtered": false,
-            "value": "Small",
-            "label": "Small",
-            "count": 284
-          },
-          {
-            "filtered": false,
-            "value": "X-Large",
-            "label": "X-Large",
-            "count": 6
-          },
-          {
-            "filtered": false,
-            "value": "X-Small",
-            "label": "X-Small",
-            "count": 6
-          },
-          {
-            "filtered": false,
-            "value": "6",
-            "label": "6",
-            "count": 2
-          },
-          {
-            "filtered": false,
-            "value": "8",
-            "label": "8",
-            "count": 2
-          },
-          {
-            "filtered": false,
-            "value": "10",
-            "label": "10",
-            "count": 1
-          },
-          {
-            "filtered": false,
-            "value": "1X",
-            "label": "1X",
-            "count": 1
-          },
-          {
-            "filtered": false,
-            "value": "2",
-            "label": "2",
-            "count": 1
-          },
-          {
-            "filtered": false,
-            "value": "2X",
-            "label": "2X",
-            "count": 1
-          },
-          {
-            "filtered": false,
-            "value": "3X",
-            "label": "3X",
-            "count": 1
-          },
-          {
-            "filtered": false,
-            "value": "4",
-            "label": "4",
-            "count": 1
-          },
-          {
-            "filtered": false,
-            "value": "5.5",
-            "label": "5.5",
-            "count": 1
-          },
-          {
-            "filtered": false,
-            "value": "6.5",
-            "label": "6.5",
-            "count": 1
-          },
-          {
-            "filtered": false,
-            "value": "7",
-            "label": "7",
-            "count": 1
-          },
-          {
-            "filtered": false,
-            "value": "7.5",
-            "label": "7.5",
-            "count": 1
-          },
-          {
-            "filtered": false,
-            "value": "8.5",
-            "label": "8.5",
-            "count": 1
-          },
-          {
-            "filtered": false,
-            "value": "9",
-            "label": "9",
-            "count": 1
-          }
-        ]
-      },
-      {
-        "field": "price",
-        "type": "range",
-        "filtered": false,
-        "step": 2.5,
-        "range": {
-          "low": 17.5,
-          "high": 92
-        },
-        "active": {
-          "low": 17.5,
-          "high": 92
+  "pagination": {
+    "totalResults": 286,
+    "page": 1,
+    "pageSize": 30,
+    "totalPages": 10
+  },
+  "results": [
+    {
+      "id": "152061",
+      "mappings": {
+        "core": {
+          "uid": "152061",
+          "sku": "C-EN-R2-D3626",
+          "name": "The Heart of Life Tomato Red Dress",
+          "url": "/product/C-EN-R2-D3626",
+          "addToCartUrl": "/product/C-EN-R2-D3626",
+          "price": 42,
+          "msrp": 50,
+          "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/46_8189_copyright_reddressboutique_2016_copy_large.jpg",
+          "secureImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/46_8189_copyright_reddressboutique_2016_copy_large.jpg",
+          "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/46_8189_copyright_reddressboutique_2016_copy_thumb_med.jpg",
+          "rating": "5",
+          "ratingCount": "1111",
+          "description": "This Heart of Life Tomato Red Dress beats to the rhythm of its own drummer! It’s always changing tempo but never letting up from driving you towards your greatest wish! Going from dream to dream requires a special something that causes this heart to go all a-flutter! No matter if your heart finds itself caught up in the crocheted neckline or the lacy hem, this is one dress that is sure to fill up your heart with style and a lot of rhythm!! This A-line dress features crochet detail at the bust, a small keyhole on the back with a double button loop closure, and a scalloped hemline with lace. Model is wearing a small. • 100% Rayon • Hand Wash Cold • Semi Lined • Semi Sheer • Imported",
+          "stockMessage": "In stock",
+          "brand": "Entro",
+          "popularity": "4385",
+          "caption": "Captions!"
         }
       },
-      {
-        "field": "brand",
-        "type": "value",
-        "filtered": false,
-        "values": [
-          {
-            "filtered": false,
-            "value": "4 Sienna",
-            "label": "4 Sienna",
-            "count": 1
-          },
-          {
-            "filtered": false,
-            "value": "12 PM by Mon Ami",
-            "label": "12 PM by Mon Ami",
-            "count": 1
-          },
-          {
-            "filtered": false,
-            "value": "Aakaa",
-            "label": "Aakaa",
-            "count": 14
-          },
-          {
-            "filtered": false,
-            "value": "Adrienne",
-            "label": "Adrienne",
-            "count": 6
-          },
-          {
-            "filtered": false,
-            "value": "After Market",
-            "label": "After Market",
-            "count": 1
-          },
-          {
-            "filtered": false,
-            "value": "Anama",
-            "label": "Anama",
-            "count": 2
-          },
-          {
-            "filtered": false,
-            "value": "Ark & Co",
-            "label": "Ark & Co",
-            "count": 1
-          },
-          {
-            "filtered": false,
-            "value": "Aryeh",
-            "label": "Aryeh",
-            "count": 3
-          },
-          {
-            "filtered": false,
-            "value": "Aura L'atiste",
-            "label": "Aura L'atiste",
-            "count": 45
-          },
-          {
-            "filtered": false,
-            "value": "Ayepeach",
-            "label": "Ayepeach",
-            "count": 2
-          },
-          {
-            "filtered": false,
-            "value": "BB Dakota",
-            "label": "BB Dakota",
-            "count": 2
-          },
-          {
-            "filtered": false,
-            "value": "BB Daktota",
-            "label": "BB Daktota",
-            "count": 1
-          },
-          {
-            "filtered": false,
-            "value": "Blu Pepper",
-            "label": "Blu Pepper",
-            "count": 3
-          },
-          {
-            "filtered": false,
-            "value": "Ces Femme",
-            "label": "Ces Femme",
-            "count": 2
-          },
-          {
-            "filtered": false,
-            "value": "Cezanne",
-            "label": "Cezanne",
-            "count": 1
-          },
-          {
-            "filtered": false,
-            "value": "City Classified",
-            "label": "City Classified",
-            "count": 1
-          },
-          {
-            "filtered": false,
-            "value": "Color Thread",
-            "label": "Color Thread",
-            "count": 5
-          },
-          {
-            "filtered": false,
-            "value": "Deco",
-            "label": "Deco",
-            "count": 1
-          },
-          {
-            "filtered": false,
-            "value": "Do+Be",
-            "label": "Do+Be",
-            "count": 1
-          },
-          {
-            "filtered": false,
-            "value": "Dress Forum",
-            "label": "Dress Forum",
-            "count": 2
-          },
-          {
-            "filtered": false,
-            "value": "E2 Clothing",
-            "label": "E2 Clothing",
-            "count": 3
-          },
-          {
-            "filtered": false,
-            "value": "Easel",
-            "label": "Easel",
-            "count": 1
-          },
-          {
-            "filtered": false,
-            "value": "Entro",
-            "label": "Entro",
-            "count": 9
-          },
-          {
-            "filtered": false,
-            "value": "Essue",
-            "label": "Essue",
-            "count": 1
-          },
-          {
-            "filtered": false,
-            "value": "Ever After",
-            "label": "Ever After",
-            "count": 25
-          },
-          {
-            "filtered": false,
-            "value": "Everly",
-            "label": "Everly",
-            "count": 5
-          },
-          {
-            "filtered": false,
-            "value": "Ezra",
-            "label": "Ezra",
-            "count": 1
-          },
-          {
-            "filtered": false,
-            "value": "Fable",
-            "label": "Fable",
-            "count": 3
-          },
-          {
-            "filtered": false,
-            "value": "Fashionomics",
-            "label": "Fashionomics",
-            "count": 1
-          },
-          {
-            "filtered": false,
-            "value": "Flying Tomato",
-            "label": "Flying Tomato",
-            "count": 5
-          },
-          {
-            "filtered": false,
-            "value": "Fringe",
-            "label": "Fringe",
-            "count": 13
-          },
-          {
-            "filtered": false,
-            "value": "Hello Miss",
-            "label": "Hello Miss",
-            "count": 4
-          },
-          {
-            "filtered": false,
-            "value": "Hommage",
-            "label": "Hommage",
-            "count": 2
-          },
-          {
-            "filtered": false,
-            "value": "Honey Punch",
-            "label": "Honey Punch",
-            "count": 1
-          },
-          {
-            "filtered": false,
-            "value": "Hot + Delicious",
-            "label": "Hot + Delicious",
-            "count": 2
-          },
-          {
-            "filtered": false,
-            "value": "Hyfve",
-            "label": "Hyfve",
-            "count": 2
-          },
-          {
-            "filtered": false,
-            "value": "Illa Illa",
-            "label": "Illa Illa",
-            "count": 1
-          },
-          {
-            "filtered": false,
-            "value": "INA Fashion",
-            "label": "INA Fashion",
-            "count": 2
-          },
-          {
-            "filtered": false,
-            "value": "Janette",
-            "label": "Janette",
-            "count": 2
-          },
-          {
-            "filtered": false,
-            "value": "JJ's Fairyland",
-            "label": "JJ's Fairyland",
-            "count": 1
-          },
-          {
-            "filtered": false,
-            "value": "Jodifl",
-            "label": "Jodifl",
-            "count": 4
-          },
-          {
-            "filtered": false,
-            "value": "Just Me",
-            "label": "Just Me",
-            "count": 2
-          },
-          {
-            "filtered": false,
-            "value": "L'Atiste",
-            "label": "L'Atiste",
-            "count": 6
-          },
-          {
-            "filtered": false,
-            "value": "LacBleu",
-            "label": "LacBleu",
-            "count": 1
-          },
-          {
-            "filtered": false,
-            "value": "Latiste",
-            "label": "Latiste",
-            "count": 2
-          },
-          {
-            "filtered": false,
-            "value": "Le Lis",
-            "label": "Le Lis",
-            "count": 1
-          },
-          {
-            "filtered": false,
-            "value": "Love In",
-            "label": "Love In",
-            "count": 1
-          },
-          {
-            "filtered": false,
-            "value": "Love Riche",
-            "label": "Love Riche",
-            "count": 3
-          },
-          {
-            "filtered": false,
-            "value": "Love Stitch",
-            "label": "Love Stitch",
-            "count": 2
-          },
-          {
-            "filtered": false,
-            "value": "LovPosh",
-            "label": "LovPosh",
-            "count": 1
-          }
-        ]
+      "attributes": {
+        "id": "deaaafaa7a4f2e6def6eb610969cedef",
+        "intellisuggestData": "eJyyKK0sMcplYChKTVFIKUotLmZw1nX10w0y0nUxNjMyYzBkMGQwYDCyMGNIL8pMAQQAAP__KAALhA",
+        "intellisuggestSignature": "15b3dd037db7db9d761005c87ec14dcf478dd7c3d681853a3225453c472fb65a",
+        "product_type_unigram": "dress"
       },
-      {
-        "field": "ss_category_hierarchy",
-        "type": "value",
-        "filtered": false,
-        "values": [
-          {
-            "filtered": false,
-            "value": "Gifts for Her",
-            "label": "Gifts for Her",
-            "count": 286
-          },
-          {
-            "filtered": false,
-            "value": "Shop By Trend",
-            "label": "Shop By Trend",
-            "count": 149
-          },
-          {
-            "filtered": false,
-            "value": "Brands We Love",
-            "label": "Brands We Love",
-            "count": 141
-          },
-          {
-            "filtered": false,
-            "value": "All Dresses",
-            "label": "All Dresses",
-            "count": 116
-          },
-          {
-            "filtered": false,
-            "value": "Special Occasion",
-            "label": "Special Occasion",
-            "count": 40
-          },
-          {
-            "filtered": false,
-            "value": "Trending",
-            "label": "Trending",
-            "count": 37
-          },
-          {
-            "filtered": false,
-            "value": "Playsuits",
-            "label": "Playsuits",
-            "count": 35
-          },
-          {
-            "filtered": false,
-            "value": "All Tops",
-            "label": "All Tops",
-            "count": 19
-          },
-          {
-            "filtered": false,
-            "value": "Style Influencer",
-            "label": "Style Influencer",
-            "count": 13
-          },
-          {
-            "filtered": false,
-            "value": "All Sale",
-            "label": "All Sale",
-            "count": 11
-          },
-          {
-            "filtered": false,
-            "value": "Memorial Day Sale",
-            "label": "Memorial Day Sale",
-            "count": 10
-          },
-          {
-            "filtered": false,
-            "value": "Valentine's Day",
-            "label": "Valentine's Day",
-            "count": 9
-          },
-          {
-            "filtered": false,
-            "value": "Athleisure",
-            "label": "Athleisure",
-            "count": 8
-          },
-          {
-            "filtered": false,
-            "value": "What's New",
-            "label": "What's New",
-            "count": 8
-          },
-          {
-            "filtered": false,
-            "value": "White & Blue Looks",
-            "label": "White & Blue Looks",
-            "count": 7
-          },
-          {
-            "filtered": false,
-            "value": "All Bottoms",
-            "label": "All Bottoms",
-            "count": 4
-          },
-          {
-            "filtered": false,
-            "value": "Going Fast",
-            "label": "Going Fast",
-            "count": 4
-          },
-          {
-            "filtered": false,
-            "value": "All Intimates",
-            "label": "All Intimates",
-            "count": 3
-          },
-          {
-            "filtered": false,
-            "value": "Swimwear",
-            "label": "Swimwear",
-            "count": 2
-          },
-          {
-            "filtered": false,
-            "value": "All Shoes",
-            "label": "All Shoes",
-            "count": 1
-          },
-          {
-            "filtered": false,
-            "value": "Back in Stock",
-            "label": "Back in Stock",
-            "count": 1
-          },
-          {
-            "filtered": false,
-            "value": "Notify of Restock",
-            "label": "Notify of Restock",
-            "count": 1
-          }
-        ]
-      },
-      {
-        "field": "days_since_published",
-        "type": "value",
-        "filtered": false,
-        "values": [
-          {
-            "filtered": false,
-            "value": 147,
-            "label": 147,
-            "count": 6
-          },
-          {
-            "filtered": false,
-            "value": 121,
-            "label": 121,
-            "count": 5
-          },
-          {
-            "filtered": false,
-            "value": 66,
-            "label": 66,
-            "count": 5
-          },
-          {
-            "filtered": false,
-            "value": 67,
-            "label": 67,
-            "count": 3
-          },
-          {
-            "filtered": false,
-            "value": 136,
-            "label": 136,
-            "count": 4
-          },
-          {
-            "filtered": false,
-            "value": 14,
-            "label": 14,
-            "count": 4
-          },
-          {
-            "filtered": false,
-            "value": 20,
-            "label": 20,
-            "count": 4
-          },
-          {
-            "filtered": false,
-            "value": 47,
-            "label": 47,
-            "count": 4
-          },
-          {
-            "filtered": false,
-            "value": 63,
-            "label": 63,
-            "count": 4
-          },
-          {
-            "filtered": false,
-            "value": 69,
-            "label": 69,
-            "count": 4
-          },
-          {
-            "filtered": false,
-            "value": 89,
-            "label": 89,
-            "count": 4
-          },
-          {
-            "filtered": false,
-            "value": 94,
-            "label": 94,
-            "count": 4
-          },
-          {
-            "filtered": false,
-            "value": 125,
-            "label": 125,
-            "count": 4
-          },
-          {
-            "filtered": false,
-            "value": 6,
-            "label": 6,
-            "count": 3
-          },
-          {
-            "filtered": false,
-            "value": 23,
-            "label": 23,
-            "count": 3
-          },
-          {
-            "filtered": false,
-            "value": 61,
-            "label": 61,
-            "count": 3
-          },
-          {
-            "filtered": false,
-            "value": 127,
-            "label": 127,
-            "count": 3
-          },
-          {
-            "filtered": false,
-            "value": 162,
-            "label": 162,
-            "count": 3
-          },
-          {
-            "filtered": false,
-            "value": 5,
-            "label": 5,
-            "count": 3
-          },
-          {
-            "filtered": false,
-            "value": 22,
-            "label": 22,
-            "count": 3
-          },
-          {
-            "filtered": false,
-            "value": 24,
-            "label": 24,
-            "count": 3
-          },
-          {
-            "filtered": false,
-            "value": 26,
-            "label": 26,
-            "count": 3
-          },
-          {
-            "filtered": false,
-            "value": 40,
-            "label": 40,
-            "count": 3
-          },
-          {
-            "filtered": false,
-            "value": 45,
-            "label": 45,
-            "count": 3
-          },
-          {
-            "filtered": false,
-            "value": 46,
-            "label": 46,
-            "count": 3
-          },
-          {
-            "filtered": false,
-            "value": 51,
-            "label": 51,
-            "count": 3
-          },
-          {
-            "filtered": false,
-            "value": 60,
-            "label": 60,
-            "count": 3
-          },
-          {
-            "filtered": false,
-            "value": 64,
-            "label": 64,
-            "count": 3
-          },
-          {
-            "filtered": false,
-            "value": 75,
-            "label": 75,
-            "count": 3
-          },
-          {
-            "filtered": false,
-            "value": 81,
-            "label": 81,
-            "count": 3
-          },
-          {
-            "filtered": false,
-            "value": 84,
-            "label": 84,
-            "count": 3
-          },
-          {
-            "filtered": false,
-            "value": 87,
-            "label": 87,
-            "count": 3
-          },
-          {
-            "filtered": false,
-            "value": 90,
-            "label": 90,
-            "count": 3
-          },
-          {
-            "filtered": false,
-            "value": 96,
-            "label": 96,
-            "count": 3
-          },
-          {
-            "filtered": false,
-            "value": 117,
-            "label": 117,
-            "count": 3
-          },
-          {
-            "filtered": false,
-            "value": 133,
-            "label": 133,
-            "count": 3
-          },
-          {
-            "filtered": false,
-            "value": 134,
-            "label": 134,
-            "count": 3
-          },
-          {
-            "filtered": false,
-            "value": 142,
-            "label": 142,
-            "count": 3
-          },
-          {
-            "filtered": false,
-            "value": 149,
-            "label": 149,
-            "count": 3
-          },
-          {
-            "filtered": false,
-            "value": 177,
-            "label": 177,
-            "count": 3
-          },
-          {
-            "filtered": false,
-            "value": 50,
-            "label": 50,
-            "count": 2
-          },
-          {
-            "filtered": false,
-            "value": 144,
-            "label": 144,
-            "count": 2
-          },
-          {
-            "filtered": false,
-            "value": 164,
-            "label": 164,
-            "count": 2
-          },
-          {
-            "filtered": false,
-            "value": 4,
-            "label": 4,
-            "count": 2
-          },
-          {
-            "filtered": false,
-            "value": 10,
-            "label": 10,
-            "count": 2
-          },
-          {
-            "filtered": false,
-            "value": 13,
-            "label": 13,
-            "count": 2
-          },
-          {
-            "filtered": false,
-            "value": 17,
-            "label": 17,
-            "count": 2
-          },
-          {
-            "filtered": false,
-            "value": 19,
-            "label": 19,
-            "count": 2
-          },
-          {
-            "filtered": false,
-            "value": 28,
-            "label": 28,
-            "count": 2
-          },
-          {
-            "filtered": false,
-            "value": 29,
-            "label": 29,
-            "count": 2
-          }
-        ]
-      },
-      {
-        "field": "material",
-        "type": "value",
-        "filtered": false,
-        "values": [
-          {
-            "filtered": false,
-            "value": "Wool",
-            "label": "Wool",
-            "count": 1
-          },
-          {
-            "filtered": false,
-            "value": "Spandex",
-            "label": "Spandex",
-            "count": 22
-          },
-          {
-            "filtered": false,
-            "value": "Silk",
-            "label": "Silk",
-            "count": 4
-          },
-          {
-            "filtered": false,
-            "value": "Polyester",
-            "label": "Polyester",
-            "count": 151
-          },
-          {
-            "filtered": false,
-            "value": "Linen",
-            "label": "Linen",
-            "count": 1
-          },
-          {
-            "filtered": false,
-            "value": "Cotton",
-            "label": "Cotton",
-            "count": 38
-          },
-          {
-            "filtered": false,
-            "value": "",
-            "label": "",
-            "count": 69
-          }
-        ]
-      },
-      {
-        "field": "on_sale",
-        "type": "value",
-        "filtered": false,
-        "values": [
-          {
-            "filtered": false,
-            "value": "Yes",
-            "label": "Yes",
-            "count": 51
-          },
-          {
-            "filtered": false,
-            "value": "No",
-            "label": "No",
-            "count": 235
-          }
-        ]
-      },
-      {
-        "field": "size_dress",
-        "type": "value",
-        "filtered": false,
-        "values": [
-          {
-            "filtered": false,
-            "value": "1X",
-            "label": "1X",
-            "count": 1
-          },
-          {
-            "filtered": false,
-            "value": "2X",
-            "label": "2X",
-            "count": 1
-          },
-          {
-            "filtered": false,
-            "value": "3X",
-            "label": "3X",
-            "count": 1
-          },
-          {
-            "filtered": false,
-            "value": "Large",
-            "label": "Large",
-            "count": 284
-          },
-          {
-            "filtered": false,
-            "value": "Medium",
-            "label": "Medium",
-            "count": 284
-          },
-          {
-            "filtered": false,
-            "value": "Small",
-            "label": "Small",
-            "count": 284
-          },
-          {
-            "filtered": false,
-            "value": "X-Large",
-            "label": "X-Large",
-            "count": 6
-          },
-          {
-            "filtered": false,
-            "value": "X-Small",
-            "label": "X-Small",
-            "count": 6
-          }
-        ]
-      },
-      {
-        "field": "season",
-        "type": "value",
-        "filtered": false,
-        "values": [
-          {
-            "filtered": false,
-            "value": "Summer",
-            "label": "Summer",
-            "count": 64
-          },
-          {
-            "filtered": false,
-            "value": "Spring",
-            "label": "Spring",
-            "count": 54
-          },
-          {
-            "filtered": false,
-            "value": "Fall",
-            "label": "Fall",
-            "count": 18
-          },
-          {
-            "filtered": false,
-            "value": "Winter",
-            "label": "Winter",
-            "count": 1
-          }
-        ]
-      },
-      {
-        "field": "dress_length_name",
-        "type": "value",
-        "filtered": false,
-        "values": [
-          {
-            "filtered": false,
-            "value": "Mini",
-            "label": "Mini",
-            "count": 32
-          },
-          {
-            "filtered": false,
-            "value": "Micro",
-            "label": "Micro",
-            "count": 9
-          },
-          {
-            "filtered": false,
-            "value": "Knee",
-            "label": "Knee",
-            "count": 8
-          },
-          {
-            "filtered": false,
-            "value": "Floor",
-            "label": "Floor",
-            "count": 22
-          },
-          {
-            "filtered": false,
-            "value": "Calf",
-            "label": "Calf",
-            "count": 3
-          },
-          {
-            "filtered": false,
-            "value": "Below knee",
-            "label": "Below knee",
-            "count": 2
-          },
-          {
-            "filtered": false,
-            "value": "Below Knee",
-            "label": "Below Knee",
-            "count": 2
-          },
-          {
-            "filtered": false,
-            "value": "Ankle",
-            "label": "Ankle",
-            "count": 13
-          },
-          {
-            "filtered": false,
-            "value": "Above knee",
-            "label": "Above knee",
-            "count": 25
-          },
-          {
-            "filtered": false,
-            "value": "Above Knee",
-            "label": "Above Knee",
-            "count": 19
-          }
-        ]
-      },
-      {
-        "field": "pattern",
-        "type": "value",
-        "filtered": false,
-        "values": [
-          {
-            "filtered": false,
-            "value": "Print",
-            "label": "Print",
-            "count": 54
-          },
-          {
-            "filtered": false,
-            "value": "Floral",
-            "label": "Floral",
-            "count": 18
-          },
-          {
-            "filtered": false,
-            "value": "Stripe",
-            "label": "Stripe",
-            "count": 14
-          },
-          {
-            "filtered": false,
-            "value": "Embroidered",
-            "label": "Embroidered",
-            "count": 11
-          },
-          {
-            "filtered": false,
-            "value": "Paisley",
-            "label": "Paisley",
-            "count": 1
-          }
-        ]
-      },
-      {
-        "field": "saturation",
-        "type": "value",
-        "filtered": false,
-        "values": [
-          {
-            "filtered": false,
-            "value": "high",
-            "label": "high",
-            "count": 22
-          },
-          {
-            "filtered": false,
-            "value": "low",
-            "label": "low",
-            "count": 25
-          },
-          {
-            "filtered": false,
-            "value": "med",
-            "label": "med",
-            "count": 19
-          }
-        ]
-      },
-      {
-        "field": "collection",
-        "type": "value",
-        "filtered": false,
-        "values": [
-          {
-            "filtered": false,
-            "value": "Chasing Daydreams",
-            "label": "Chasing Daydreams",
-            "count": 2
-          },
-          {
-            "filtered": false,
-            "value": "Mine To Keep",
-            "label": "Mine To Keep",
-            "count": 2
-          },
-          {
-            "filtered": false,
-            "value": "Set To Jet",
-            "label": "Set To Jet",
-            "count": 3
-          },
-          {
-            "filtered": false,
-            "value": "Stories Don't End",
-            "label": "Stories Don't End",
-            "count": 1
-          },
-          {
-            "filtered": false,
-            "value": "Sunny State Of Mind",
-            "label": "Sunny State Of Mind",
-            "count": 1
-          },
-          {
-            "filtered": false,
-            "value": "The Story",
-            "label": "The Story",
-            "count": 1
-          }
-        ]
-      },
-      {
-        "field": "size_footwear",
-        "type": "value",
-        "filtered": false,
-        "values": [
-          {
-            "filtered": false,
-            "value": "5.5",
-            "label": "5.5",
-            "count": 1
-          },
-          {
-            "filtered": false,
-            "value": "6",
-            "label": "6",
-            "count": 1
-          },
-          {
-            "filtered": false,
-            "value": "6.5",
-            "label": "6.5",
-            "count": 1
-          },
-          {
-            "filtered": false,
-            "value": "7",
-            "label": "7",
-            "count": 1
-          },
-          {
-            "filtered": false,
-            "value": "7.5",
-            "label": "7.5",
-            "count": 1
-          },
-          {
-            "filtered": false,
-            "value": "8",
-            "label": "8",
-            "count": 1
-          },
-          {
-            "filtered": false,
-            "value": "8.5",
-            "label": "8.5",
-            "count": 1
-          },
-          {
-            "filtered": false,
-            "value": "9",
-            "label": "9",
-            "count": 1
-          },
-          {
-            "filtered": false,
-            "value": "10",
-            "label": "10",
-            "count": 1
-          }
-        ]
-      }
-    ],
-    "sorting": [],
-    "merchandising": {
-      "redirect": "",
-      "is_elevated": [],
-      "elevated": [],
-      "removed": [],
-      "content": {},
-      "facets": [],
-      "facetsHide": [],
-      "experiments": [],
-      "variants": [],
-      "personalized": false
+      "children": []
     },
-    "search": {
-      "query": "red dress"
-    },
-    "autocomplete": {
-      "query": "red dress",
-      "suggested": {
-        "text": "red dress",
-        "type": "exact",
-        "source": "popular-query"
+    {
+      "id": "153270",
+      "mappings": {
+        "core": {
+          "uid": "153270",
+          "sku": "C-CES-R4-I3347",
+          "name": "Lakeside Tomato Red Maxi Dress",
+          "url": "/product/C-CES-R4-I3347",
+          "addToCartUrl": "/product/C-CES-R4-I3347",
+          "price": 39,
+          "msrp": 50,
+          "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/203_9020_copyright_reddressboutique_2016_large.jpg",
+          "secureImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/203_9020_copyright_reddressboutique_2016_large.jpg",
+          "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/203_9020_copyright_reddressboutique_2016_thumb_med.jpg",
+          "rating": "5",
+          "ratingCount": "1111",
+          "description": "Whether you’re relaxing Lakeside, or going to lunch with friends, you can dress this ravishing Tomato Red Maxi Dress up or down to suit your mood. This simply lovely maxi is a great choice for whatever is on the schedule. This sleeveless maxi dress features a crew neckline, an elastic waist with drawstring closure, a wrap style hi-lo hemline, and a keyhole with button loop closure on the back. Model is wearing a small. • 95% Rayon, 5% Spandex • Hand Wash Cold • Lined Top • Faintly Sheer • Made in the USA",
+          "stockMessage": "In stock",
+          "brand": "Ces Femme",
+          "popularity": "4302",
+          "caption": "Captions!"
+        }
       },
-      "alternatives": []
+      "attributes": {
+        "id": "bd5acee1a78236c68b4001e738e8b997",
+        "intellisuggestData": "eJyyKK0sMcplYChKTVFIKUotLmZw1nV2DdYNMtH1NDY2MWcwZDBiMGAwsjBjSC_KTAEEAAD__zZMC9Q",
+        "intellisuggestSignature": "c89cd6da2b210b1e202ede4e997d7a8103cfaff1f26caf8afe41507a8eb7c5fb",
+        "product_type_unigram": "dress"
+      },
+      "children": []
+    },
+    {
+      "id": "153243",
+      "mappings": {
+        "core": {
+          "uid": "153243",
+          "sku": "C-NBK-R1-D7187",
+          "name": "She's Unforgettable Red Off-The-Shoulder Dress",
+          "url": "/product/C-NBK-R1-D7187",
+          "addToCartUrl": "/product/C-NBK-R1-D7187",
+          "price": 39,
+          "msrp": 50,
+          "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/215_9184_copyright_reddressboutique_2016_large.jpg",
+          "secureImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/215_9184_copyright_reddressboutique_2016_large.jpg",
+          "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/215_9184_copyright_reddressboutique_2016_thumb_med.jpg",
+          "rating": "5",
+          "ratingCount": "1111",
+          "description": "They all agree that She's Unforgettable, but help them recall why when you’re in this radiant Red Off-The-Shoulder Dress. They won’t be able to get you or this dress off their mind! This shift dress features an elastic off-the-shoulder design with a gathered overlay. Model is wearing a small. • 55% Linen, 45% Rayon • Hand Wash Cold • Fully Lined • Made in the USA",
+          "stockMessage": "In stock",
+          "brand": "Newbury Kustom",
+          "popularity": "4244",
+          "caption": "Captions!"
+        }
+      },
+      "attributes": {
+        "id": "05c83dbf7f6fca66142c7011978063c0",
+        "intellisuggestData": "eJyyKK0sMcplYChKTVFIKUotLmZw1vVz8tYNMtR1MTe0MGcwZDBmMGAwsjBjSC_KTAEEAAD__zYxC9M",
+        "intellisuggestSignature": "16c36efc7aa458e7b25bffea90049871126855bacaa0b24d5022c0337ebf9d22",
+        "product_type_unigram": "dress"
+      },
+      "children": []
+    },
+    {
+      "id": "153108",
+      "mappings": {
+        "core": {
+          "uid": "153108",
+          "sku": "C-NBK-R4-D7206",
+          "name": "Let's Celebrate Red Embroidered Dress",
+          "url": "/product/C-NBK-R4-D7206",
+          "addToCartUrl": "/product/C-NBK-R4-D7206",
+          "price": 39,
+          "msrp": 50,
+          "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/29_8447_copyright_reddressboutique_2016_large.jpg",
+          "secureImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/29_8447_copyright_reddressboutique_2016_large.jpg",
+          "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/29_8447_copyright_reddressboutique_2016_thumb_med.jpg",
+          "rating": "5",
+          "ratingCount": "1111",
+          "description": "A fun event is right around the corner, and now you’ll have this cute Red Embroidered Dress, so Let's Celebrate! Go ahead and get the party started with a look that brings nothing but good fun and good style to the table! (Hopefully there will be some good mac-n-cheese at the table too!) This dress features a split scoop neck with embroidery and tassels and an elastic waist. Model is wearing a small. • 95% Rayon, 5% Spandex • Hand Wash Cold • Unlined • Made in the USA",
+          "stockMessage": "In stock",
+          "brand": "Newbury Kustom",
+          "popularity": "4193",
+          "caption": "Captions!"
+        }
+      },
+      "attributes": {
+        "id": "668dd854959ce2ce849ee89dd15245e3",
+        "intellisuggestData": "eJyyKK0sMcplYChKTVFIKUotLmZw1vVz8tYNMtF1MTcyMGMwZDBhMGAwsjBjSC_KTAEEAAD__zX5C88",
+        "intellisuggestSignature": "b57d8f4c0107f4370c5b0fd7dbd76fcf37c6248a0259ec7db1a4c036e16881a4",
+        "product_type_unigram": "dress"
+      },
+      "children": []
+    },
+    {
+      "id": "153306",
+      "mappings": {
+        "core": {
+          "uid": "153306",
+          "sku": "C-RDB-R2-6451G",
+          "name": "Color My Soul Red Ruffle Dress",
+          "url": "/product/C-RDB-R2-6451G",
+          "addToCartUrl": "/product/C-RDB-R2-6451G",
+          "price": 36,
+          "msrp": 50,
+          "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/123_8374_copyright_reddressboutique_2016_large.jpg",
+          "secureImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/123_8374_copyright_reddressboutique_2016_large.jpg",
+          "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/123_8374_copyright_reddressboutique_2016_thumb_med.jpg",
+          "rating": "5",
+          "ratingCount": "1111",
+          "description": "There’s something about you that I can’t quite place my finger on, but whenever I’m around you, it’s like I’m suddenly flooded with a lighter and happier feeling, you Color My Soul Red Ruffle Dress! Put into concrete words, I was once living a grayscale kind of life, but when I met you, it’s like you brought the Color back into My Soul. This dress features spaghetti straps, a deep v-neckline, and a ruffled hemline. Model is wearing a small. • 100% Rayon • Hand Wash Cold • Fully Lined • Made in the USA",
+          "stockMessage": "In stock",
+          "brand": "RDB",
+          "popularity": "4112",
+          "caption": "Captions!"
+        }
+      },
+      "attributes": {
+        "id": "b8640f7448f81cff44948195eb9f412f",
+        "intellisuggestData": "eJyyKK0sMcplYChKTVFIKUotLmZw1g1ycdINMtI1MzE1dGcwZDBlMGAwsjBjSC_KTAEEAAD__zWeC88",
+        "intellisuggestSignature": "5148a364b6f240754946f905cbcd82600fb2e5c8186fe3ca4bb57b8e05d32fa5",
+        "product_type_unigram": "dress"
+      },
+      "children": []
+    },
+    {
+      "id": "157250",
+      "mappings": {
+        "core": {
+          "uid": "157250",
+          "sku": "C-PLC-R2-12813",
+          "name": "Envy The Girl Red Floral Print Dress",
+          "url": "/product/C-PLC-R2-12813",
+          "addToCartUrl": "/product/C-PLC-R2-12813",
+          "price": 44,
+          "msrp": 50,
+          "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/844a7048_2_large.jpg",
+          "secureImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/844a7048_2_large.jpg",
+          "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/844a7048_2_thumb_med.jpg",
+          "rating": "5",
+          "ratingCount": "1111",
+          "description": "Even if you make friends everywhere you go, there’s sure to be some who will Envy The Girl when you’re in this amazing Red Floral Print Dress. You can’t make everyone love you, but at least they’ll love this dress! What can you do?! This sleeveless print shift dress features a crew neckline with a keyhole and double button loop closure on the back. Model is wearing a small. • 100% Polyester • Hand Wash Cold • Fully Lined • Made in the USA",
+          "stockMessage": "In stock",
+          "brand": "PLC",
+          "popularity": "4111",
+          "caption": "Captions!"
+        }
+      },
+      "attributes": {
+        "id": "a5011489ab3c04f2c5e02876050d18b1",
+        "intellisuggestData": "eJyyKK0sMcplYChKTVFIKUotLmZw1g3wcdYNMtI1NLIwNGYwZDBjMGAwsjBjSC_KTAEEAAD__zTJC78",
+        "intellisuggestSignature": "dd074d551b28eb2bbb655885369ea4f36b4913109e3d0b51afa5fdf391fe9fed",
+        "product_type_unigram": "dress"
+      },
+      "children": []
+    },
+    {
+      "id": "143166",
+      "mappings": {
+        "core": {
+          "uid": "143166",
+          "sku": "C-MIT-R3-02321",
+          "name": "Bright Places Red Scallop Dress",
+          "url": "/product/C-MIT-R3-02321",
+          "addToCartUrl": "/product/C-MIT-R3-02321",
+          "price": 36,
+          "msrp": 50,
+          "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/844a2871_large.jpg",
+          "secureImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/844a2871_large.jpg",
+          "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/844a2871_thumb_med.jpg",
+          "rating": "5",
+          "ratingCount": "1111",
+          "description": "We see Bright Places in your future when you wear this radiant Red Scallop Dress. This sleeveless shift dress has a scalloped hemline and a keyhole on the back with a button loop closure. Model is wearing a small. ** This garment contains no stretch or give. RDB Stylists recommend sizing up for a more comfortable fit! ** • 100% Polyester • Hand Wash Cold • Unlined • Imported",
+          "stockMessage": "In stock",
+          "brand": "Mitto Shop",
+          "popularity": "4094",
+          "caption": "Captions!"
+        }
+      },
+      "attributes": {
+        "id": "73516abe411ee7cdd3cfea7358805dfd",
+        "intellisuggestData": "eJyyKK0sMcplYChKTVFIKUotLmZw1vX1DNENMtY1MDI2MmQwZDBnMGAwsjBjSC_KTAEEAAD__zV4C8U",
+        "intellisuggestSignature": "edc39a131446a3c59d93a779720d89efd6ad755b4e3fd5634811c0296bc54c6f",
+        "product_type_unigram": "dress"
+      },
+      "children": []
+    },
+    {
+      "id": "172159",
+      "mappings": {
+        "core": {
+          "uid": "172159",
+          "sku": "C-ESS-R4-31035",
+          "name": "Main Attraction Red Print Dress",
+          "url": "/product/C-ESS-R4-31035",
+          "addToCartUrl": "/product/C-ESS-R4-31035",
+          "price": 44,
+          "msrp": 50,
+          "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/416_lcp_2025_copyright_loganpotterf_2016_large.jpg",
+          "secureImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/416_lcp_2025_copyright_loganpotterf_2016_large.jpg",
+          "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/416_lcp_2025_copyright_loganpotterf_2016_thumb_med.jpg",
+          "rating": "5",
+          "ratingCount": "1111",
+          "description": "With all of the decorations (thank you Pinterest for upping the game and making everyone's holiday parties look like a page out of Pottery Barn) it's tough to be the Main Attraction at your gathering of choice. So what's a gal to do? Come to the Red Dress Boutique of course. This dress, paired with your good looks, dashed together with your wit and charm, is sure to bring all eyes to you and you alone. No tree or fancy table full of handmade decor can compete. Neither can anyone else in the room, but we were already assuming that since you're you and naturally you're fabulous. Model is wearing a small. • 100% Polyester • Hand Wash Cold • Fully Lined • Imported",
+          "stockMessage": "In stock",
+          "brand": "Essue",
+          "popularity": "3889",
+          "caption": "Captions!"
+        }
+      },
+      "attributes": {
+        "id": "8740cfeb3243613b875368d6bd776c9d",
+        "intellisuggestData": "eJyyKK0sMcplYChKTVFIKUotLmZw1nUNDtYNMtE1NjQwNmUwZLBgMGAwsjBjSC_KTAEEAAD__zXxC8w",
+        "intellisuggestSignature": "c597079edef2db34d5a1516d21bce4d9c4bcb20d92bf40b0a5f0fca46de7f636",
+        "product_type_unigram": "dress"
+      },
+      "children": []
+    },
+    {
+      "id": "144246",
+      "mappings": {
+        "core": {
+          "uid": "144246",
+          "sku": "C-PUH-R4-0AU03",
+          "name": "Fringe Perfect Match Red Paisley Print Maxi Dress",
+          "url": "/product/C-PUH-R4-0AU03",
+          "addToCartUrl": "/product/C-PUH-R4-0AU03",
+          "price": 40,
+          "msrp": 50,
+          "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/844a5962_2_large.jpg",
+          "secureImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/844a5962_2_large.jpg",
+          "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/844a5962_2_thumb_med.jpg",
+          "rating": "5",
+          "ratingCount": "1111",
+          "description": "You and this figure flattering Red Paisley Print Maxi Dress are a Fringe Perfect Match! Beautiful and becoming, this flowy number will have you feeling fine and foxy. This paisley print maxi features a deep V-neckline with button loop closures, a rope tie at the waist, and slits on the sides. Model is wearing a small. • 100% Viscose • Hand Wash Cold • Unlined • Imported",
+          "stockMessage": "In stock",
+          "brand": "Pure Hype",
+          "popularity": "3516",
+          "caption": "Captions!"
+        }
+      },
+      "attributes": {
+        "id": "0f866383d4c6b9e311c16881da905188",
+        "intellisuggestData": "eJyyKK0sMcplYChKTVFIKUotLmZw1g0I9dANMtE1cAw1MGYwZLBkMGAwsjBjSC_KTAEEAAD__zmCC_w",
+        "intellisuggestSignature": "3abb00a0079c461cd74bf04827fc96e8327ab444346bcf820d373c68621bcb8b",
+        "product_type_unigram": "dress"
+      },
+      "children": []
+    },
+    {
+      "id": "155190",
+      "mappings": {
+        "core": {
+          "uid": "155190",
+          "sku": "C-EN-R5-2475",
+          "name": "Fringe She's Everything Ruby Red Lace-Up Dress",
+          "url": "/product/C-EN-R5-2475",
+          "addToCartUrl": "/product/C-EN-R5-2475",
+          "price": 34,
+          "msrp": 50,
+          "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/844a3864_2_large.jpg",
+          "secureImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/844a3864_2_large.jpg",
+          "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/844a3864_2_thumb_med.jpg",
+          "rating": "5",
+          "ratingCount": "1111",
+          "description": "When he sees you in this Ruby Red Lace-Up Dress, he’ll be so astounded that all he can say is Fringe She's Everything! There’s just too many things to even begin listing! Leave them dumbfounded, mesmerized, and in a daze when you step out in this stunner. This sleeveless shift dress features a lace-up V-neckline and functional side pockets. Model is wearing a small. • 95% Rayon, 5% Spandex • Hand Wash Cold • Unlined • Made in the USA",
+          "stockMessage": "In stock",
+          "brand": "Entro",
+          "popularity": "3449",
+          "caption": "Captions!"
+        }
+      },
+      "attributes": {
+        "id": "b54934c8c60500e8675cf203cdce0ef9",
+        "intellisuggestData": "eJyyKK0sMcplYChKTVFIKUotLmZw1nX10w0y1TUyMTdlMGQwNGAwYDCyMGNIL8pMAQQAAP__JnQLdA",
+        "intellisuggestSignature": "e0a69092c744f1b27b8c7f309a458954f9bf3bb5e0b8008c2f1ae0d52979c02c",
+        "product_type_unigram": "dress"
+      },
+      "children": []
+    },
+    {
+      "id": "151863",
+      "mappings": {
+        "core": {
+          "uid": "151863",
+          "sku": "C-EAS-R2-D3149",
+          "name": "Fringe What Can I Fray Tomato Red Dress",
+          "url": "/product/C-EAS-R2-D3149",
+          "addToCartUrl": "/product/C-EAS-R2-D3149",
+          "price": 44,
+          "msrp": 50,
+          "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/6b9a6037_1_large.jpg",
+          "secureImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/6b9a6037_1_large.jpg",
+          "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/6b9a6037_1_thumb_med.jpg",
+          "rating": "5",
+          "ratingCount": "1111",
+          "description": "Fringe What Can I Fray, you’d look absolutely amazing in this Tomato Red Dress! We’re sure others will be at a loss for words when they see you in this lovely number. This A-line dress features a scoop neckline, flutter sleeves, and frayed detail on the sleeves and hemline. Model is wearing a small. • Self: 100% Cotton • Lining: 100% Rayon • Hand Wash Cold • Fully Lined • Imported",
+          "stockMessage": "In stock",
+          "brand": "Easel",
+          "popularity": "3311",
+          "caption": "Captions!"
+        }
+      },
+      "attributes": {
+        "id": "c6182f761f9f3d714d0ff5621f76f3b5",
+        "intellisuggestData": "eJyyKK0sMcplYChKTVFIKUotLmZw1nV1DNYNMtJ1MTY0sWQwZDA0ZDBgMLIwY0gvykwBBAAA__9BGgv7",
+        "intellisuggestSignature": "02e641c164c9a25969fcf4e13336835ca1ad7e458d95d0da6f2c5c8574edb56b",
+        "product_type_unigram": "dress"
+      },
+      "children": []
+    },
+    {
+      "id": "176900",
+      "mappings": {
+        "core": {
+          "uid": "176900",
+          "sku": "C-SHE-R4-L4088",
+          "name": "Caught In A Reverie Red Lace Dress",
+          "url": "/product/C-SHE-R4-L4088",
+          "addToCartUrl": "/product/C-SHE-R4-L4088",
+          "price": 46,
+          "msrp": 50,
+          "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/copyright_rdb_studio_2_4833_large.jpg",
+          "secureImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/copyright_rdb_studio_2_4833_large.jpg",
+          "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/copyright_rdb_studio_2_4833_thumb_med.jpg",
+          "rating": "5",
+          "ratingCount": "1111",
+          "description": "As wondrous as life can be at its best, there are an equal number of times when it can be dull as dirt. Thank goodness for your active imagination, because you can while away the hours with the most rewarding of daydreams. A bit of advice though, if we may: dress as though you expect something exciting to happen at any moment, even at the height of your boredom. You don’t want to be caught in a reverie, unprepared to make your daydreams a reality when opportunity strikes. This lace dress is versatile in that way, and stunning to boot. Model is wearing a small. • 70% Cotton 30% Polyester • Lining 100% Polyester • Hand Wash Cold • Lined • Imported",
+          "stockMessage": "In stock",
+          "brand": "She + Sky",
+          "popularity": "3271",
+          "caption": "Captions!"
+        }
+      },
+      "attributes": {
+        "id": "f87d1aab1e57ba82c8a558838128ce7b",
+        "intellisuggestData": "eJyyKK0sMcplYChKTVFIKUotLmZw1g32cNUNMtH1MTGwsGAwZDA0YjBgMLIwY0gvykwBBAAA__9DDQwQ",
+        "intellisuggestSignature": "a85d79337d8113ca1e25a34ad9653cfdeaad83bcff47570ef6e2f0bb2fdc7255",
+        "product_type_unigram": "dress"
+      },
+      "children": []
+    },
+    {
+      "id": "172163",
+      "mappings": {
+        "core": {
+          "uid": "172163",
+          "sku": "C-AKA-R4-1046H",
+          "name": "Hear The Bells Red Dress",
+          "url": "/product/C-AKA-R4-1046H",
+          "addToCartUrl": "/product/C-AKA-R4-1046H",
+          "price": 42,
+          "msrp": 50,
+          "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/16_11_home_for_christmas_870_large.jpg",
+          "secureImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/16_11_home_for_christmas_870_large.jpg",
+          "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/16_11_home_for_christmas_870_thumb_med.jpg",
+          "rating": "5",
+          "ratingCount": "1111",
+          "description": "Dresses, dresses, and more dresses. What's to be done with all these choices? How do you know exactly which dress is right for you? Our solution is a simple one: Buy them all and blame it on Santa. Who is going to argue with that? I mean, it's Christmas, right, so isn't it the time for good will and all that? That totally extends to your wardrobe. You're just spreading the holiday cheer to your socks. They never get out. At least with a proper holiday dress in the closet, they'll see a glimpse of the glamorous life from the floor. Model is wearing a small. • 100% Polyester • Dry Clean Only • Fully Lined • Imported",
+          "stockMessage": "In stock",
+          "brand": "Aakaa",
+          "popularity": "3136",
+          "caption": "Captions!"
+        }
+      },
+      "attributes": {
+        "id": "6ea22d98120008beab7e64c4f07262e4",
+        "intellisuggestData": "eJyyKK0sMcplYChKTVFIKUotLmZw1nX0dtQNMtE1NDAx82AwZDA0ZjBgMLIwY0gvykwBBAAA__8_uwvx",
+        "intellisuggestSignature": "b2c5e4b23d13533c32424f4537293c35e88e56fb6b7a857a44f19e0c4fdd93bc",
+        "product_type_unigram": "dress"
+      },
+      "children": []
+    },
+    {
+      "id": "183154",
+      "mappings": {
+        "core": {
+          "uid": "183154",
+          "sku": "C-EN-O4-D7560",
+          "name": "Modern Makeover Coral Red Dress",
+          "url": "/product/C-EN-O4-D7560",
+          "addToCartUrl": "/product/C-EN-O4-D7560",
+          "price": 42,
+          "msrp": 50,
+          "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/2472_copyright_reddressboutique_2017__large.jpg",
+          "secureImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/2472_copyright_reddressboutique_2017__large.jpg",
+          "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/2472_copyright_reddressboutique_2017__thumb_med.jpg",
+          "rating": "5",
+          "ratingCount": "1111",
+          "description": "What is a Modern Makeover? Well, frankly, it's whatever you consider it to be! Even if you wear dresses like this all the time, you could still buy it, slip it on, and change your outlook for the day. I mean, look at this fantastic color! Would it not make your day every single time you passed your reflection? We'd smile when we saw you (we would no matter what, so that might be a moot point). Sleeveless shift dress with a scallop front panel. Dress has pockets and a single button and loop closure that creates a small keyhole at the back. Model is wearing a small. • 100% Cotton • Machine Wash Cold • Lined • Imported",
+          "stockMessage": "In stock",
+          "brand": "Entro",
+          "popularity": "3111",
+          "caption": "Captions!"
+        }
+      },
+      "attributes": {
+        "id": "5ae13f5ebf8899f4b2214986797108a9",
+        "intellisuggestData": "eJyyKK0sMcplYChKTVFIKUotLmZw1nX10_U30XUxNzUzYDBkMDRhMGAwsjBjSC_KTAEEAAD__zODC7g",
+        "intellisuggestSignature": "4742cc3c0950b72a25c8304889af7ac7de2f46fe0b2a3781d4d8b86bdf31a7bd",
+        "product_type_unigram": "dress"
+      },
+      "children": []
+    },
+    {
+      "id": "179559",
+      "mappings": {
+        "core": {
+          "uid": "179559",
+          "sku": "C-MB-R4-16591",
+          "name": "Two Become One Red Lace Dress",
+          "url": "/product/C-MB-R4-16591",
+          "addToCartUrl": "/product/C-MB-R4-16591",
+          "price": 56,
+          "msrp": 75,
+          "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/17_03_20_studio_26246_large.jpg",
+          "secureImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/17_03_20_studio_26246_large.jpg",
+          "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/17_03_20_studio_26246_thumb_med.jpg",
+          "rating": "5",
+          "ratingCount": "1111",
+          "description": "When it comes to white lace, how’s a girl supposed to wear it and not immediately think of a fairy tale wedding? At some point in all of our lives we’ve dreamed about it (though some of us hold onto that dream longer than others). But as enticing as the promise of “Two Become One” is, white lace has a far more practical, and far more effective purpose—making you look your most beautiful, no matter the occasion. Bodycon style dress features a red crochet lace overlay with a peek-a-boo midriff and plunging neckline. Dress has a slight stretch and features a v back with peek-a-boo panels and an invisible back zipper. Model is wearing a small. • 100% Polyester • Hand Wash Cold • Lined • Imported",
+          "stockMessage": "In stock",
+          "brand": "Marine",
+          "popularity": "2945",
+          "caption": "Captions!"
+        }
+      },
+      "attributes": {
+        "id": "50becf03396f0a78cb790fc837d94bb0",
+        "intellisuggestData": "eJyyKK0sMcplYChKTVFIKUotLmZw1vV10g0y0TU0M7U0ZDBkMDRlMGAwsjBjSC_KTAEEAAD__zIbC6g",
+        "intellisuggestSignature": "09bfd8403be33dad55a0658f4be547b938b7a3b2f238dbdddf7c36c1bad45adc",
+        "product_type_unigram": "dress"
+      },
+      "children": []
+    },
+    {
+      "id": "180367",
+      "mappings": {
+        "core": {
+          "uid": "180367",
+          "sku": "C-MB-R4-16707",
+          "name": "Drop Dead Gorgeous Red Lace Dress",
+          "url": "/product/C-MB-R4-16707",
+          "addToCartUrl": "/product/C-MB-R4-16707",
+          "price": 58,
+          "msrp": 75,
+          "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/17_03_20_studio_26498_large.jpg",
+          "secureImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/17_03_20_studio_26498_large.jpg",
+          "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/17_03_20_studio_26498_thumb_med.jpg",
+          "rating": "5",
+          "ratingCount": "1111",
+          "description": "Trying to pick his jaw off the floor is exactly what he will be doing when he sees you in this Drop Dead Gorgeous Red Lace Dress. The other ladies at the party will have to keep their husbands (and jealousy) in check because you will for sure be THE talk of the night. Red lace dress features a form fitting silhouette with invisible back zipper toped with a double hook and eye closure. Model is wearing a small. • 100% Polyester • Dry Clean Only • Lined • Imported",
+          "stockMessage": "In stock",
+          "brand": "Ever After",
+          "popularity": "2822",
+          "caption": "Captions!"
+        }
+      },
+      "attributes": {
+        "id": "aca53db2b9610a10b97b1f9bde400693",
+        "intellisuggestData": "eJyyKK0sMcplYChKTVFIKUotLmZw1vV10g0y0TU0MzcwZzBkMDRjMGAwsjBjSC_KTAEEAAD__zIRC6g",
+        "intellisuggestSignature": "a45f266819f3f0655ee413746282a3215cfbfa0017bee6a41d60eef87b6f4e29",
+        "product_type_unigram": "dress"
+      },
+      "children": []
+    },
+    {
+      "id": "181225",
+      "mappings": {
+        "core": {
+          "uid": "181225",
+          "sku": "C-LXL-R4-D3819",
+          "name": "With All My Heart Red Dress",
+          "url": "/product/C-LXL-R4-D3819",
+          "addToCartUrl": "/product/C-LXL-R4-D3819",
+          "price": 54,
+          "msrp": 75,
+          "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/2041_copyright_reddressboutique_2017__large.jpg",
+          "secureImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/2041_copyright_reddressboutique_2017__large.jpg",
+          "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/2041_copyright_reddressboutique_2017__thumb_med.jpg",
+          "rating": "5",
+          "ratingCount": "1111",
+          "description": "Dear Ex-boyfriend, I bought a new dress online the other day. It has precisely the shape that you love on me, even the color. I can see us at our favorite restaurant, in that quiet little booth in the corner, all cuddled up, enjoying our meal and our time together. Unfortunately, you turned into one of ‘those’ guys. The controlling type that likes to tell women what to do and where to go, and I’m just not for that. So to answer your text from last night: No we’re never ever ever getting back together. To cement that answer, enclosed in this envelope you will find a picture of me in the dress, on a date with my new boyfriend. Enjoy. With All My Heart, your loving and now happy Ex-girlfriend. This dress features a sweetheart neckline, zipper and fish hook in the back and visible stitching along bust and bottom. Also features adjustable sash tie around arms, full lining and a structured bodice. Model is wearing a small. • 95% Polyester 5% Spandex • Hand Wash Cold • Unlined • Made in the",
+          "stockMessage": "In stock",
+          "brand": "Ever After",
+          "popularity": "2635",
+          "caption": "Captions!"
+        }
+      },
+      "attributes": {
+        "id": "45a834a3145d55fe9e05a8a0fd501d91",
+        "intellisuggestData": "eJyyKK0sMcplYChKTVFIKUotLmZw1vWJ8NENMtF1MbYwtGQwZDA0ZzBgMLIwY0gvykwBBAAA__9EWgwe",
+        "intellisuggestSignature": "e3684f5cc69b6c45c24e93415203f937f7415488c67a128bc4ec2d26bea913ff",
+        "product_type_unigram": "dress"
+      },
+      "children": []
+    },
+    {
+      "id": "147305",
+      "mappings": {
+        "core": {
+          "uid": "147305",
+          "sku": "C-MB-R4-1577",
+          "name": "From The Heart Red Lace Dress",
+          "url": "/product/C-MB-R4-1577",
+          "addToCartUrl": "/product/C-MB-R4-1577",
+          "price": 46,
+          "msrp": 50,
+          "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/e_large.jpg",
+          "secureImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/e_large.jpg",
+          "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/e_thumb_med.jpg",
+          "rating": "5",
+          "ratingCount": "1111",
+          "description": "Any compliments given when you’re wearing this lovely Red Lace Dress will come straight From The Heart because you’ll look amazing! This lace dress features a bodycon silhouette and a deep V-back with a zipper down the full back of the dress. Model is wearing a small. • 100% Polyester • Dry Clean Only • Fully Lined • Imported",
+          "stockMessage": "In stock",
+          "brand": "Marine",
+          "popularity": "2599",
+          "caption": "Captions!"
+        }
+      },
+      "attributes": {
+        "id": "a46142a4963d369389d3b8bcb90c384d",
+        "intellisuggestData": "eJyyKK0sMcplYChKTVFIKUotLmZw1vV10g0y0TU0NTdnMGQwtGAwYDCyMGNIL8pMAQQAAP__JoMLeQ",
+        "intellisuggestSignature": "3bb43cb10c123ac7a32e740ad796983db107d782fa7442a8946369d824cf483d",
+        "product_type_unigram": "dress"
+      },
+      "children": []
+    },
+    {
+      "id": "160852",
+      "mappings": {
+        "core": {
+          "uid": "160852",
+          "sku": "C-EN-R6-D5465",
+          "name": "Happily Red Dress",
+          "url": "/product/C-EN-R6-D5465",
+          "addToCartUrl": "/product/C-EN-R6-D5465",
+          "price": 46,
+          "msrp": 50,
+          "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/844a0838_4_large.jpg",
+          "secureImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/844a0838_4_large.jpg",
+          "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/844a0838_4_thumb_med.jpg",
+          "rating": "5",
+          "ratingCount": "1111",
+          "description": "And she lived stylishly Happily Ever After, wearing this lovely Red Dress to end the story. The future has to be fortunate when you look this amazing! This dress features floral crochet embroidery at the bust, ladder detail throughout, a round neck with a keyhole, a keyhole on the back with button loop closure, and long bell sleeves. Model is wearing a small. • Self: 100% Rayon • Lining: 100% Polyester • Dry Clean Only • Fully Lined • Imported",
+          "stockMessage": "In stock",
+          "brand": "Entro",
+          "popularity": "2581",
+          "caption": "Captions!"
+        }
+      },
+      "attributes": {
+        "id": "8b55fb0bcf4daecbe2dc2b9731c76dfe",
+        "intellisuggestData": "eJyyKK0sMcplYChKTVFIKUotLmZw1nX10w0y03UxNTEzZTBkMLRkMGAwsjBjSC_KTAEEAAD__zRPC8Q",
+        "intellisuggestSignature": "3024626a985ca748c44d3b8bebbd2c01e5d501ade9d7c6bc18a97727bd2a7bbd",
+        "product_type_unigram": "dress"
+      },
+      "children": []
+    },
+    {
+      "id": "175613",
+      "mappings": {
+        "core": {
+          "uid": "175613",
+          "sku": "C-MB-R4-15668",
+          "name": "Festive Mood Red Lace Dress",
+          "url": "/product/C-MB-R4-15668",
+          "addToCartUrl": "/product/C-MB-R4-15668",
+          "price": 54,
+          "msrp": 75,
+          "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/rdb_studio_1_3013_large.jpg",
+          "secureImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/rdb_studio_1_3013_large.jpg",
+          "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/rdb_studio_1_3013_thumb_med.jpg",
+          "rating": "5",
+          "ratingCount": "1111",
+          "description": "It's the holiday season & we're in a Festive Mood that's why we're breaking out ALL of the stops in this sexy lace beauty! With sheer lace panels on both sides and back--you'll be showing just enough skin while still looking perfectly classic! Model is wearing a small. This garment runs small. RDB Stylists recommend sizing up for a more comfortable fit! • 100% Polyester • Dry Clean Only • Semi Lined • Faintly Sheer • Imported",
+          "stockMessage": "In stock",
+          "brand": "Marine",
+          "popularity": "2386",
+          "caption": "Captions!"
+        }
+      },
+      "attributes": {
+        "id": "c324b5899a45085dca030091bf2986c8",
+        "intellisuggestData": "eJyyKK0sMcplYChKTVFIKUotLmZw1vV10g0y0TU0NTOzYDBkMDJgMGAwsjBjSC_KTAEEAAD__zIsC6g",
+        "intellisuggestSignature": "f5fd7dfecef7407477880fc6df49df05b7de5d3ef8cc320fe4204f5a3ef6f7e5",
+        "product_type_unigram": "dress"
+      },
+      "children": []
+    },
+    {
+      "id": "183186",
+      "mappings": {
+        "core": {
+          "uid": "183186",
+          "sku": "C-MB-R4-16687",
+          "name": "Make A Statement Red Lace Dress",
+          "url": "/product/C-MB-R4-16687",
+          "addToCartUrl": "/product/C-MB-R4-16687",
+          "price": 58,
+          "msrp": 75,
+          "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/5783_copyright_reddressboutique_2017__large.jpg",
+          "secureImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/5783_copyright_reddressboutique_2017__large.jpg",
+          "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/5783_copyright_reddressboutique_2017__thumb_med.jpg",
+          "rating": "5",
+          "ratingCount": "1111",
+          "description": "How do you gain the attention of an entire room? The banging of a loud gavel would do it, sure, but how polite is that? Not at all. Screaming? Sure it would work but it would panic everyone and the screaming would pretty much be everything you would accomplish. Slowly descend a Cinderella staircase while clad in a gorgeous dress? Yup, that's the ticket! That's the best way to Make A Statement and make it stick! Mid-length dress features a lace up peek-a-boo front and an exposed back zipper with hook and eye closure. Model is wearing a small. • 100% Polyester • Hand Wash Cold • Lined • Imported",
+          "stockMessage": "In stock",
+          "brand": "Marine",
+          "popularity": "2189",
+          "caption": "Captions!"
+        }
+      },
+      "attributes": {
+        "id": "1dc304ec5e609e6343e5e5dee278358b",
+        "intellisuggestData": "eJyyKK0sMcplYChKTVFIKUotLmZw1vV10g0y0TU0M7MwZzBkMDJkMGAwsjBjSC_KTAEEAAD__zJfC6s",
+        "intellisuggestSignature": "b507dc769c05426d67713dbbb3b8198213cc02cec5284263f812fb7be5a98c77",
+        "product_type_unigram": "dress"
+      },
+      "children": []
+    },
+    {
+      "id": "145203",
+      "mappings": {
+        "core": {
+          "uid": "145203",
+          "sku": "C-MB-R3-1581",
+          "name": "I'll Be Seeing You Red Lace Dress",
+          "url": "/product/C-MB-R3-1581",
+          "addToCartUrl": "/product/C-MB-R3-1581",
+          "price": 48,
+          "msrp": 50,
+          "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/844a7152_3_large.jpg",
+          "secureImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/844a7152_3_large.jpg",
+          "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/844a7152_3_thumb_med.jpg",
+          "rating": "5",
+          "ratingCount": "1111",
+          "description": "He’ll end the conversation with I'll Be Seeing You because as radiant as you’ll look in this Red Lace Dress, he’ll make sure of it! And we expect that meeting to be ASAP! This sleeveless bodycon dress features a lace overlay, a sweetheart neckline, and an open back with a visible zipper on the back. Model is wearing a small. • 100% Polyester • Dry Clean Only • Fully Lined • Imported",
+          "stockMessage": "In stock",
+          "brand": "Marine",
+          "popularity": "2183",
+          "caption": "Captions!"
+        }
+      },
+      "attributes": {
+        "id": "f78a01c971d78a8cb03398e458963f46",
+        "intellisuggestData": "eJyyKK0sMcplYChKTVFIKUotLmZw1vV10g0y1jU0tTBkMGQwMmIwYDCyMGNIL8pMAQQAAP__Jd4Lbg",
+        "intellisuggestSignature": "c1219044669e4842fd8f2b3559d435b8dab909b35cbf8b1673a3d7f5eea48195",
+        "product_type_unigram": "dress"
+      },
+      "children": []
+    },
+    {
+      "id": "140163",
+      "mappings": {
+        "core": {
+          "uid": "140163",
+          "sku": "C-CEZ-R2-9016A",
+          "name": "Fringe Don't Smock Me Red Maxi Dress",
+          "url": "/product/C-CEZ-R2-9016A",
+          "addToCartUrl": "/product/C-CEZ-R2-9016A",
+          "price": 49,
+          "msrp": 50,
+          "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/844a2630_2_large.jpg",
+          "secureImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/844a2630_2_large.jpg",
+          "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/844a2630_2_thumb_med.jpg",
+          "rating": "5",
+          "ratingCount": "1111",
+          "description": "Tell them Fringe Don't Smock Me, but if they want to use you as style inspiration after seeing you in this ravishing Red Maxi Dress, that’s perfectly okay. As enviable as you’ll look in this coveted maxi, many will be wanting to look just like you. Afterall, imitation is the highest form of flattery. Don’t worry about looking the same because you’ve got your own way of wearing things so cool and effortlessly that it can’t be duplicated. This maxi dress features a smocked bodice with a halter neckline and an open back. Model is wearing a small. • 100% Rayon • Hand Wash Cold • Unlined • Imported",
+          "stockMessage": "In stock",
+          "brand": "Cezanne",
+          "popularity": "2122",
+          "caption": "Captions!"
+        }
+      },
+      "attributes": {
+        "id": "110b3b0a65498bc2aaf9045eb68383d5",
+        "intellisuggestData": "eJyyKK0sMcplYChKTVFIKUotLmZw1nV2jdINMtK1NDA0c2QwZDAyZjBgMLIwY0gvykwBBAAA__9BsgwD",
+        "intellisuggestSignature": "216b93cc252eb40fab2fa8de65eb5624dd0f73d3dfe3b812f750b4f2e15e93d6",
+        "product_type_unigram": "dress"
+      },
+      "children": []
+    },
+    {
+      "id": "149865",
+      "mappings": {
+        "core": {
+          "uid": "149865",
+          "sku": "C-NZ-R3-71732",
+          "name": "Need Me Red Halter Dress",
+          "url": "/product/C-NZ-R3-71732",
+          "addToCartUrl": "/product/C-NZ-R3-71732",
+          "price": 38,
+          "msrp": 50,
+          "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/844a1548_3_large.jpg",
+          "secureImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/844a1548_3_large.jpg",
+          "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/844a1548_3_thumb_med.jpg",
+          "rating": "5",
+          "ratingCount": "1111",
+          "description": "This Red Halter Dress is so stunning that it’s practically screaming you Need Me! You know you hear it! This halter dress features a knotted detail that forms a keyhole on the front and a visible zipper on the back. Model is wearing a small. • 100% Polyester • Hand Wash Cold • Fully Lined • Imported",
+          "stockMessage": "In stock",
+          "brand": "Naked Zebra",
+          "popularity": "2100",
+          "caption": "Captions!"
+        }
+      },
+      "attributes": {
+        "id": "1f1ea7efd83323101704c0f7d580d296",
+        "intellisuggestData": "eJyyKK0sMcplYChKTVFIKUotLmZw1vWL0g0y1jU3NDc2YjBkMDJhMGAwsjBjSC_KTAEEAAD__zR1C74",
+        "intellisuggestSignature": "bd3aca39c3fd5ed1d617a39e5d535943eae313b2fa0c08d8408c4bdc4f3e0c40",
+        "product_type_unigram": "dress"
+      },
+      "children": []
+    },
+    {
+      "id": "173841",
+      "mappings": {
+        "core": {
+          "uid": "173841",
+          "sku": "C-MNJ-R4-23421",
+          "name": "Lady Of Class Red Skater Dress",
+          "url": "/product/C-MNJ-R4-23421",
+          "addToCartUrl": "/product/C-MNJ-R4-23421",
+          "price": 42,
+          "msrp": 50,
+          "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/16_12_holiday_2_029_large.jpg",
+          "secureImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/16_12_holiday_2_029_large.jpg",
+          "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/16_12_holiday_2_029_thumb_med.jpg",
+          "rating": "5",
+          "ratingCount": "1111",
+          "description": "A Lady of Class is a great many things; an excellent judge of character, a poised and elegant woman of intelligence, a smart, judicial, shrewd gal who knows how to get what she wants, but above all else, she knows when to say something and when to say nothing at all. In other words, she knows when to let her wardrobe do all the talking for her. This dress says volumes, and we'll leave it up to you, what you want it say and to whom you would like it to speak. We hear it works wonders on ex-husbands and current mother-in-laws. Dress features scoop neckline, hidden back zipper, lace arm detail. Model is wearing a small. • 100% Polyester • Hand Wash Cold • Imported",
+          "stockMessage": "In stock",
+          "brand": "Maniju",
+          "popularity": "2039",
+          "caption": "Captions!"
+        }
+      },
+      "attributes": {
+        "id": "61cfd10dcafe7a6908095caeafa1d3d5",
+        "intellisuggestData": "eJyyKK0sMcplYChKTVFIKUotLmZw1vX189INMtE1MjYxMmQwZDAyZTBgMLIwY0gvykwBBAAA__9A7Qv1",
+        "intellisuggestSignature": "b7c7240f64cbc17c40c4199f970126848d080abb5e2bc6932cfae7ea96bade9a",
+        "product_type_unigram": "dress"
+      },
+      "children": []
+    },
+    {
+      "id": "181845",
+      "mappings": {
+        "core": {
+          "uid": "181845",
+          "sku": "C-US-R4-94464",
+          "name": "Escape To Mexico Red Off-The-Shoulder Dress",
+          "url": "/product/C-US-R4-94464",
+          "addToCartUrl": "/product/C-US-R4-94464",
+          "price": 42,
+          "msrp": 50,
+          "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/2457_copyright_reddressboutique_2017__large.jpg",
+          "secureImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/2457_copyright_reddressboutique_2017__large.jpg",
+          "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/2457_copyright_reddressboutique_2017__thumb_med.jpg",
+          "rating": "5",
+          "ratingCount": "1111",
+          "description": "Craving a jalapeno margarita? Some real salsa and chips (amongst more food and drinks that I can't even begin to list because I will wind up hungry for the next gazillion years until I can scrounge up enough money for a plane ticket to go to Mexico myself)? Well, if you're like me and you can't afford to just fly to Mexico, or charter a private jet (dream big or go home, right?) then enjoy the warmer climes of Summer in this Escape To Mexico Red Off The Shoulder Dress. It's Beautiful, breathlessly embroidered, and gives the most exotic vibe! It won't make the guacamole for you, but it's a great addition for your very own Mexican Night if you wanted to host one. Even if you were the only one in attendance. And no, we totally wouldn't judge. Not even a little bit. Though ... if you want to invite us, we would at least consider coming. Off the shoulder embroidered dress features an a-line silhouette with an elasticized neckline and short sleeves. Model is wearing a small. • 100% Cotton •",
+          "stockMessage": "In stock",
+          "brand": "Under Skies",
+          "popularity": "2034",
+          "caption": "Captions!"
+        }
+      },
+      "attributes": {
+        "id": "e83396a40d8fc2c8ca2bf57d1075ca3a",
+        "intellisuggestData": "eJyyKK0sMcplYChKTVFIKUotLmZw1g0N1g0y0bU0MTEzYTBkMDJjMGAwsjBjSC_KTAEEAAD__zUwC8g",
+        "intellisuggestSignature": "a840457566b28ccc555c440d00672c920c0ff0446c24644ae21c8684956ccef4",
+        "product_type_unigram": "dress"
+      },
+      "children": []
+    },
+    {
+      "id": "163747",
+      "mappings": {
+        "core": {
+          "uid": "163747",
+          "sku": "C-PLC-R3-25602",
+          "name": "Never Back Down Red Tie-Dye Dress",
+          "url": "/product/C-PLC-R3-25602",
+          "addToCartUrl": "/product/C-PLC-R3-25602",
+          "price": 39,
+          "msrp": 50,
+          "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/844a2242_2_large.jpg",
+          "secureImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/844a2242_2_large.jpg",
+          "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/844a2242_2_thumb_med.jpg",
+          "rating": "5",
+          "ratingCount": "1111",
+          "description": "Never Back Down, keep your style and spirit strong, no matter the score, in this winning Red Tie-Dye Dress! You’ll be an undefeated style champion in this tie-dye cutie! This sleeveless tie-dye shift dress features a small keyhole on the back. Model is wearing a small. • 94% Rayon, 6% Spandex • Hand Wash Cold • Unlined • Made in the USA",
+          "stockMessage": "In stock",
+          "brand": "PLC",
+          "popularity": "1952",
+          "caption": "Captions!"
+        }
+      },
+      "attributes": {
+        "id": "417c98fdadb0720e1f6d66101b7aae33",
+        "intellisuggestData": "eJyyKK0sMcplYChKTVFIKUotLmZw1g3wcdYNMtY1MjUzMGIwZDAyZzBgMLIwY0gvykwBBAAA__9AkQvz",
+        "intellisuggestSignature": "f02e179fb9c7479af17bef55d0edb75d8d0367cdeadded802a1877c008f26761",
+        "product_type_unigram": "dress"
+      },
+      "children": []
+    },
+    {
+      "id": "144336",
+      "mappings": {
+        "core": {
+          "uid": "144336",
+          "sku": "C-LEL-R6-01063",
+          "name": "Turning Tables Red Shift Dress",
+          "url": "/product/C-LEL-R6-01063",
+          "addToCartUrl": "/product/C-LEL-R6-01063",
+          "price": 39,
+          "msrp": 50,
+          "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/rd_studio_7_18_16_568_large.jpg",
+          "secureImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/rd_studio_7_18_16_568_large.jpg",
+          "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/rd_studio_7_18_16_568_thumb_med.jpg",
+          "rating": "5",
+          "ratingCount": "1111",
+          "description": "You’ll be Turning Tables and turning heads when you’re in this adorable Red Shift Dress. Perfect for a summer outing, this cute number will have you turning out in style. This mini shift dress features a scoop neckline, short sleeves, and a hidden zipper. Model is wearing a small. • 100% Cotton • Hand Wash Cold • Unlined • Made in the USA",
+          "stockMessage": "In stock",
+          "brand": "Le Lis",
+          "popularity": "1919",
+          "caption": "Captions!"
+        }
+      },
+      "attributes": {
+        "id": "eb8f7e2237f6e9a9e16a4981d6e6ef17",
+        "intellisuggestData": "eJyyKK0sMcplYChKTVFIKUotLmZw1vVx9dENMtM1MDQwM2YwZDCyYDBgMLIwY0gvykwBBAAA__9AMAvw",
+        "intellisuggestSignature": "49edea60a32c41119b5fac0bd49f2a0bc86b030ca9c09936d7b291409b3b0f05",
+        "product_type_unigram": "dress"
+      },
+      "children": []
+    },
+    {
+      "id": "164836",
+      "mappings": {
+        "core": {
+          "uid": "164836",
+          "sku": "C-ETC-R2-D013A",
+          "name": "Gives Me Life Red Maxi Dress",
+          "url": "/product/C-ETC-R2-D013A",
+          "addToCartUrl": "/product/C-ETC-R2-D013A",
+          "price": 54,
+          "msrp": 75,
+          "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/7-21-164311_1_large.jpg",
+          "secureImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/7-21-164311_1_large.jpg",
+          "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/7-21-164311_1_thumb_med.jpg",
+          "rating": "5",
+          "ratingCount": "1111",
+          "description": "If you agree that fashion Gives Me Life and makes things right, then this Red Maxi Dress will awaken your soul! This bright red stunner will bring life to your day and be a sightly treat to everyone you meet! This sleeveless print maxi dress features a V-neckline with strappy detail, cutouts down the bodice, an open, strappy back, and a hi-lo hemline. Model is wearing a small. • 100% Rayon • Hand Wash Cold • Fully Lined • Imported",
+          "stockMessage": "In stock",
+          "brand": "E2 Clothing",
+          "popularity": "1808",
+          "caption": "Captions!"
+        }
+      },
+      "attributes": {
+        "id": "d7e16b335b93847407492f2b1836d67a",
+        "intellisuggestData": "eJyyKK0sMcplYChKTVFIKUotLmZw1nUNcdYNMtJ1MTA0dmQwZDCyZDBgMLIwY0gvykwBBAAA__9CIgwL",
+        "intellisuggestSignature": "f36b35918312ec15a02559eb18b84b95a97228818a850246eece52d03f967a88",
+        "product_type_unigram": "dress"
+      },
+      "children": []
+    },
+    {
+      "id": "182128",
+      "mappings": {
+        "core": {
+          "uid": "182128",
+          "sku": "C-AD-R4-924MD",
+          "name": "Take Me To Havana Red Off-The-Shoulder Dress",
+          "url": "/product/C-AD-R4-924MD",
+          "addToCartUrl": "/product/C-AD-R4-924MD",
+          "price": 42,
+          "msrp": 50,
+          "imageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/4851_copyright_reddressboutique_2017__large.jpg",
+          "secureImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_large/4851_copyright_reddressboutique_2017__large.jpg",
+          "thumbnailImageUrl": "https://searchspring-demo-content.s3.amazonaws.com/demo/fashion/product_images_thumb_med/4851_copyright_reddressboutique_2017__thumb_med.jpg",
+          "rating": "5",
+          "ratingCount": "1111",
+          "description": "When you need a sexy dress that will unravel a man like a Cuban cigar, look no further than our Take Me To Havana Red Off The Shoulder Dress. It helps to know how to dance, but it's not required. Merely showing up and being near him with your womanly wiles and your feminine charms will serve as ammunition enough. So if you're in the spy game, this is the perfect dress for you. Of course, I've now blown your cover and for that, a thousand apologies. But you if merely wish to look fabulous on a date, then by all means, check out the dress. It will suit your needs just as well. What you choose to use the functional pockets for is entirely up to you (as a spy or not, of course). Off the shoulder dress features a tier top complete with a decorative front tie. An elastic waistline and two functional pockets complete the dress. Model is wearing a small. • 95% Rayon 5% Spandex • Hand Wash Cold • Unlined • Made in the USA",
+          "stockMessage": "In stock",
+          "brand": "Adrienne",
+          "popularity": "1704",
+          "caption": "Captions!"
+        }
+      },
+      "attributes": {
+        "id": "4477c769e0adbe4f0336b9283a610e27",
+        "intellisuggestData": "eJyyKK0sMcplYChKTVFIKUotLmZw1nV00Q0y0bU0MvF1YTBkMDZgMGAwsjBjSC_KTAEEAAD__zPZC8U",
+        "intellisuggestSignature": "95e9e15cfa66eb2b32ae539af4ac9bc870a90598e069929eff5acda5631ccff5",
+        "product_type_unigram": "dress"
+      },
+      "children": []
     }
+  ],
+  "filters": [],
+  "facets": [
+    {
+      "field": "color_family",
+      "type": "value",
+      "filtered": false,
+      "values": [
+        {
+          "filtered": false,
+          "value": "Red",
+          "label": "Red",
+          "count": 112
+        },
+        {
+          "filtered": false,
+          "value": "Blue",
+          "label": "Blue",
+          "count": 40
+        },
+        {
+          "filtered": false,
+          "value": "White",
+          "label": "White",
+          "count": 39
+        },
+        {
+          "filtered": false,
+          "value": "Pink",
+          "label": "Pink",
+          "count": 18
+        },
+        {
+          "filtered": false,
+          "value": "Black",
+          "label": "Black",
+          "count": 12
+        },
+        {
+          "filtered": false,
+          "value": "Green",
+          "label": "Green",
+          "count": 12
+        },
+        {
+          "filtered": false,
+          "value": "Beige",
+          "label": "Beige",
+          "count": 8
+        },
+        {
+          "filtered": false,
+          "value": "Gray",
+          "label": "Gray",
+          "count": 8
+        },
+        {
+          "filtered": false,
+          "value": "Orange",
+          "label": "Orange",
+          "count": 5
+        },
+        {
+          "filtered": false,
+          "value": "Purple",
+          "label": "Purple",
+          "count": 3
+        },
+        {
+          "filtered": false,
+          "value": "Yellow",
+          "label": "Yellow",
+          "count": 3
+        },
+        {
+          "filtered": false,
+          "value": "Black, Grey",
+          "label": "Black, Grey",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "field": "size",
+      "type": "value",
+      "filtered": false,
+      "values": [
+        {
+          "filtered": false,
+          "value": "Medium",
+          "label": "Medium",
+          "count": 284
+        },
+        {
+          "filtered": false,
+          "value": "Large",
+          "label": "Large",
+          "count": 284
+        },
+        {
+          "filtered": false,
+          "value": "Small",
+          "label": "Small",
+          "count": 284
+        },
+        {
+          "filtered": false,
+          "value": "X-Large",
+          "label": "X-Large",
+          "count": 6
+        },
+        {
+          "filtered": false,
+          "value": "X-Small",
+          "label": "X-Small",
+          "count": 6
+        },
+        {
+          "filtered": false,
+          "value": "6",
+          "label": "6",
+          "count": 2
+        },
+        {
+          "filtered": false,
+          "value": "8",
+          "label": "8",
+          "count": 2
+        },
+        {
+          "filtered": false,
+          "value": "10",
+          "label": "10",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "1X",
+          "label": "1X",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "2",
+          "label": "2",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "2X",
+          "label": "2X",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "3X",
+          "label": "3X",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "4",
+          "label": "4",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "5.5",
+          "label": "5.5",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "6.5",
+          "label": "6.5",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "7",
+          "label": "7",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "7.5",
+          "label": "7.5",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "8.5",
+          "label": "8.5",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "9",
+          "label": "9",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "field": "price",
+      "type": "range",
+      "filtered": false,
+      "step": 2.5,
+      "range": {
+        "low": 17.5,
+        "high": 92
+      },
+      "active": {
+        "low": 17.5,
+        "high": 92
+      }
+    },
+    {
+      "field": "brand",
+      "type": "value",
+      "filtered": false,
+      "values": [
+        {
+          "filtered": false,
+          "value": "4 Sienna",
+          "label": "4 Sienna",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "12 PM by Mon Ami",
+          "label": "12 PM by Mon Ami",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "Aakaa",
+          "label": "Aakaa",
+          "count": 14
+        },
+        {
+          "filtered": false,
+          "value": "Adrienne",
+          "label": "Adrienne",
+          "count": 6
+        },
+        {
+          "filtered": false,
+          "value": "After Market",
+          "label": "After Market",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "Anama",
+          "label": "Anama",
+          "count": 2
+        },
+        {
+          "filtered": false,
+          "value": "Ark & Co",
+          "label": "Ark & Co",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "Aryeh",
+          "label": "Aryeh",
+          "count": 3
+        },
+        {
+          "filtered": false,
+          "value": "Aura L'atiste",
+          "label": "Aura L'atiste",
+          "count": 45
+        },
+        {
+          "filtered": false,
+          "value": "Ayepeach",
+          "label": "Ayepeach",
+          "count": 2
+        },
+        {
+          "filtered": false,
+          "value": "BB Dakota",
+          "label": "BB Dakota",
+          "count": 2
+        },
+        {
+          "filtered": false,
+          "value": "BB Daktota",
+          "label": "BB Daktota",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "Blu Pepper",
+          "label": "Blu Pepper",
+          "count": 3
+        },
+        {
+          "filtered": false,
+          "value": "Ces Femme",
+          "label": "Ces Femme",
+          "count": 2
+        },
+        {
+          "filtered": false,
+          "value": "Cezanne",
+          "label": "Cezanne",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "City Classified",
+          "label": "City Classified",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "Color Thread",
+          "label": "Color Thread",
+          "count": 5
+        },
+        {
+          "filtered": false,
+          "value": "Deco",
+          "label": "Deco",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "Do+Be",
+          "label": "Do+Be",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "Dress Forum",
+          "label": "Dress Forum",
+          "count": 2
+        },
+        {
+          "filtered": false,
+          "value": "E2 Clothing",
+          "label": "E2 Clothing",
+          "count": 3
+        },
+        {
+          "filtered": false,
+          "value": "Easel",
+          "label": "Easel",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "Entro",
+          "label": "Entro",
+          "count": 9
+        },
+        {
+          "filtered": false,
+          "value": "Essue",
+          "label": "Essue",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "Ever After",
+          "label": "Ever After",
+          "count": 25
+        },
+        {
+          "filtered": false,
+          "value": "Everly",
+          "label": "Everly",
+          "count": 5
+        },
+        {
+          "filtered": false,
+          "value": "Ezra",
+          "label": "Ezra",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "Fable",
+          "label": "Fable",
+          "count": 3
+        },
+        {
+          "filtered": false,
+          "value": "Fashionomics",
+          "label": "Fashionomics",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "Flying Tomato",
+          "label": "Flying Tomato",
+          "count": 5
+        },
+        {
+          "filtered": false,
+          "value": "Fringe",
+          "label": "Fringe",
+          "count": 13
+        },
+        {
+          "filtered": false,
+          "value": "Hello Miss",
+          "label": "Hello Miss",
+          "count": 4
+        },
+        {
+          "filtered": false,
+          "value": "Hommage",
+          "label": "Hommage",
+          "count": 2
+        },
+        {
+          "filtered": false,
+          "value": "Honey Punch",
+          "label": "Honey Punch",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "Hot + Delicious",
+          "label": "Hot + Delicious",
+          "count": 2
+        },
+        {
+          "filtered": false,
+          "value": "Hyfve",
+          "label": "Hyfve",
+          "count": 2
+        },
+        {
+          "filtered": false,
+          "value": "Illa Illa",
+          "label": "Illa Illa",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "INA Fashion",
+          "label": "INA Fashion",
+          "count": 2
+        },
+        {
+          "filtered": false,
+          "value": "Janette",
+          "label": "Janette",
+          "count": 2
+        },
+        {
+          "filtered": false,
+          "value": "JJ's Fairyland",
+          "label": "JJ's Fairyland",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "Jodifl",
+          "label": "Jodifl",
+          "count": 4
+        },
+        {
+          "filtered": false,
+          "value": "Just Me",
+          "label": "Just Me",
+          "count": 2
+        },
+        {
+          "filtered": false,
+          "value": "L'Atiste",
+          "label": "L'Atiste",
+          "count": 6
+        },
+        {
+          "filtered": false,
+          "value": "LacBleu",
+          "label": "LacBleu",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "Latiste",
+          "label": "Latiste",
+          "count": 2
+        },
+        {
+          "filtered": false,
+          "value": "Le Lis",
+          "label": "Le Lis",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "Love In",
+          "label": "Love In",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "Love Riche",
+          "label": "Love Riche",
+          "count": 3
+        },
+        {
+          "filtered": false,
+          "value": "Love Stitch",
+          "label": "Love Stitch",
+          "count": 2
+        },
+        {
+          "filtered": false,
+          "value": "LovPosh",
+          "label": "LovPosh",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "field": "ss_category_hierarchy",
+      "type": "value",
+      "filtered": false,
+      "values": [
+        {
+          "filtered": false,
+          "value": "Gifts for Her",
+          "label": "Gifts for Her",
+          "count": 286
+        },
+        {
+          "filtered": false,
+          "value": "Shop By Trend",
+          "label": "Shop By Trend",
+          "count": 149
+        },
+        {
+          "filtered": false,
+          "value": "Brands We Love",
+          "label": "Brands We Love",
+          "count": 141
+        },
+        {
+          "filtered": false,
+          "value": "All Dresses",
+          "label": "All Dresses",
+          "count": 116
+        },
+        {
+          "filtered": false,
+          "value": "Special Occasion",
+          "label": "Special Occasion",
+          "count": 40
+        },
+        {
+          "filtered": false,
+          "value": "Trending",
+          "label": "Trending",
+          "count": 37
+        },
+        {
+          "filtered": false,
+          "value": "Playsuits",
+          "label": "Playsuits",
+          "count": 35
+        },
+        {
+          "filtered": false,
+          "value": "All Tops",
+          "label": "All Tops",
+          "count": 19
+        },
+        {
+          "filtered": false,
+          "value": "Style Influencer",
+          "label": "Style Influencer",
+          "count": 13
+        },
+        {
+          "filtered": false,
+          "value": "All Sale",
+          "label": "All Sale",
+          "count": 11
+        },
+        {
+          "filtered": false,
+          "value": "Memorial Day Sale",
+          "label": "Memorial Day Sale",
+          "count": 10
+        },
+        {
+          "filtered": false,
+          "value": "Valentine's Day",
+          "label": "Valentine's Day",
+          "count": 9
+        },
+        {
+          "filtered": false,
+          "value": "Athleisure",
+          "label": "Athleisure",
+          "count": 8
+        },
+        {
+          "filtered": false,
+          "value": "What's New",
+          "label": "What's New",
+          "count": 8
+        },
+        {
+          "filtered": false,
+          "value": "White & Blue Looks",
+          "label": "White & Blue Looks",
+          "count": 7
+        },
+        {
+          "filtered": false,
+          "value": "All Bottoms",
+          "label": "All Bottoms",
+          "count": 4
+        },
+        {
+          "filtered": false,
+          "value": "Going Fast",
+          "label": "Going Fast",
+          "count": 4
+        },
+        {
+          "filtered": false,
+          "value": "All Intimates",
+          "label": "All Intimates",
+          "count": 3
+        },
+        {
+          "filtered": false,
+          "value": "Swimwear",
+          "label": "Swimwear",
+          "count": 2
+        },
+        {
+          "filtered": false,
+          "value": "All Shoes",
+          "label": "All Shoes",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "Back in Stock",
+          "label": "Back in Stock",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "Notify of Restock",
+          "label": "Notify of Restock",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "field": "days_since_published",
+      "type": "value",
+      "filtered": false,
+      "values": [
+        {
+          "filtered": false,
+          "value": 147,
+          "label": 147,
+          "count": 6
+        },
+        {
+          "filtered": false,
+          "value": 121,
+          "label": 121,
+          "count": 5
+        },
+        {
+          "filtered": false,
+          "value": 66,
+          "label": 66,
+          "count": 5
+        },
+        {
+          "filtered": false,
+          "value": 67,
+          "label": 67,
+          "count": 3
+        },
+        {
+          "filtered": false,
+          "value": 136,
+          "label": 136,
+          "count": 4
+        },
+        {
+          "filtered": false,
+          "value": 14,
+          "label": 14,
+          "count": 4
+        },
+        {
+          "filtered": false,
+          "value": 20,
+          "label": 20,
+          "count": 4
+        },
+        {
+          "filtered": false,
+          "value": 47,
+          "label": 47,
+          "count": 4
+        },
+        {
+          "filtered": false,
+          "value": 63,
+          "label": 63,
+          "count": 4
+        },
+        {
+          "filtered": false,
+          "value": 69,
+          "label": 69,
+          "count": 4
+        },
+        {
+          "filtered": false,
+          "value": 89,
+          "label": 89,
+          "count": 4
+        },
+        {
+          "filtered": false,
+          "value": 94,
+          "label": 94,
+          "count": 4
+        },
+        {
+          "filtered": false,
+          "value": 125,
+          "label": 125,
+          "count": 4
+        },
+        {
+          "filtered": false,
+          "value": 6,
+          "label": 6,
+          "count": 3
+        },
+        {
+          "filtered": false,
+          "value": 23,
+          "label": 23,
+          "count": 3
+        },
+        {
+          "filtered": false,
+          "value": 61,
+          "label": 61,
+          "count": 3
+        },
+        {
+          "filtered": false,
+          "value": 127,
+          "label": 127,
+          "count": 3
+        },
+        {
+          "filtered": false,
+          "value": 162,
+          "label": 162,
+          "count": 3
+        },
+        {
+          "filtered": false,
+          "value": 5,
+          "label": 5,
+          "count": 3
+        },
+        {
+          "filtered": false,
+          "value": 22,
+          "label": 22,
+          "count": 3
+        },
+        {
+          "filtered": false,
+          "value": 24,
+          "label": 24,
+          "count": 3
+        },
+        {
+          "filtered": false,
+          "value": 26,
+          "label": 26,
+          "count": 3
+        },
+        {
+          "filtered": false,
+          "value": 40,
+          "label": 40,
+          "count": 3
+        },
+        {
+          "filtered": false,
+          "value": 45,
+          "label": 45,
+          "count": 3
+        },
+        {
+          "filtered": false,
+          "value": 46,
+          "label": 46,
+          "count": 3
+        },
+        {
+          "filtered": false,
+          "value": 51,
+          "label": 51,
+          "count": 3
+        },
+        {
+          "filtered": false,
+          "value": 60,
+          "label": 60,
+          "count": 3
+        },
+        {
+          "filtered": false,
+          "value": 64,
+          "label": 64,
+          "count": 3
+        },
+        {
+          "filtered": false,
+          "value": 75,
+          "label": 75,
+          "count": 3
+        },
+        {
+          "filtered": false,
+          "value": 81,
+          "label": 81,
+          "count": 3
+        },
+        {
+          "filtered": false,
+          "value": 84,
+          "label": 84,
+          "count": 3
+        },
+        {
+          "filtered": false,
+          "value": 87,
+          "label": 87,
+          "count": 3
+        },
+        {
+          "filtered": false,
+          "value": 90,
+          "label": 90,
+          "count": 3
+        },
+        {
+          "filtered": false,
+          "value": 96,
+          "label": 96,
+          "count": 3
+        },
+        {
+          "filtered": false,
+          "value": 117,
+          "label": 117,
+          "count": 3
+        },
+        {
+          "filtered": false,
+          "value": 133,
+          "label": 133,
+          "count": 3
+        },
+        {
+          "filtered": false,
+          "value": 134,
+          "label": 134,
+          "count": 3
+        },
+        {
+          "filtered": false,
+          "value": 142,
+          "label": 142,
+          "count": 3
+        },
+        {
+          "filtered": false,
+          "value": 149,
+          "label": 149,
+          "count": 3
+        },
+        {
+          "filtered": false,
+          "value": 177,
+          "label": 177,
+          "count": 3
+        },
+        {
+          "filtered": false,
+          "value": 50,
+          "label": 50,
+          "count": 2
+        },
+        {
+          "filtered": false,
+          "value": 144,
+          "label": 144,
+          "count": 2
+        },
+        {
+          "filtered": false,
+          "value": 164,
+          "label": 164,
+          "count": 2
+        },
+        {
+          "filtered": false,
+          "value": 4,
+          "label": 4,
+          "count": 2
+        },
+        {
+          "filtered": false,
+          "value": 10,
+          "label": 10,
+          "count": 2
+        },
+        {
+          "filtered": false,
+          "value": 13,
+          "label": 13,
+          "count": 2
+        },
+        {
+          "filtered": false,
+          "value": 17,
+          "label": 17,
+          "count": 2
+        },
+        {
+          "filtered": false,
+          "value": 19,
+          "label": 19,
+          "count": 2
+        },
+        {
+          "filtered": false,
+          "value": 28,
+          "label": 28,
+          "count": 2
+        },
+        {
+          "filtered": false,
+          "value": 29,
+          "label": 29,
+          "count": 2
+        }
+      ]
+    },
+    {
+      "field": "material",
+      "type": "value",
+      "filtered": false,
+      "values": [
+        {
+          "filtered": false,
+          "value": "Wool",
+          "label": "Wool",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "Spandex",
+          "label": "Spandex",
+          "count": 22
+        },
+        {
+          "filtered": false,
+          "value": "Silk",
+          "label": "Silk",
+          "count": 4
+        },
+        {
+          "filtered": false,
+          "value": "Polyester",
+          "label": "Polyester",
+          "count": 151
+        },
+        {
+          "filtered": false,
+          "value": "Linen",
+          "label": "Linen",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "Cotton",
+          "label": "Cotton",
+          "count": 38
+        },
+        {
+          "filtered": false,
+          "value": "",
+          "label": "",
+          "count": 69
+        }
+      ]
+    },
+    {
+      "field": "on_sale",
+      "type": "value",
+      "filtered": false,
+      "values": [
+        {
+          "filtered": false,
+          "value": "Yes",
+          "label": "Yes",
+          "count": 51
+        },
+        {
+          "filtered": false,
+          "value": "No",
+          "label": "No",
+          "count": 235
+        }
+      ]
+    },
+    {
+      "field": "size_dress",
+      "type": "value",
+      "filtered": false,
+      "values": [
+        {
+          "filtered": false,
+          "value": "1X",
+          "label": "1X",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "2X",
+          "label": "2X",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "3X",
+          "label": "3X",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "Large",
+          "label": "Large",
+          "count": 284
+        },
+        {
+          "filtered": false,
+          "value": "Medium",
+          "label": "Medium",
+          "count": 284
+        },
+        {
+          "filtered": false,
+          "value": "Small",
+          "label": "Small",
+          "count": 284
+        },
+        {
+          "filtered": false,
+          "value": "X-Large",
+          "label": "X-Large",
+          "count": 6
+        },
+        {
+          "filtered": false,
+          "value": "X-Small",
+          "label": "X-Small",
+          "count": 6
+        }
+      ]
+    },
+    {
+      "field": "season",
+      "type": "value",
+      "filtered": false,
+      "values": [
+        {
+          "filtered": false,
+          "value": "Summer",
+          "label": "Summer",
+          "count": 64
+        },
+        {
+          "filtered": false,
+          "value": "Spring",
+          "label": "Spring",
+          "count": 54
+        },
+        {
+          "filtered": false,
+          "value": "Fall",
+          "label": "Fall",
+          "count": 18
+        },
+        {
+          "filtered": false,
+          "value": "Winter",
+          "label": "Winter",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "field": "dress_length_name",
+      "type": "value",
+      "filtered": false,
+      "values": [
+        {
+          "filtered": false,
+          "value": "Mini",
+          "label": "Mini",
+          "count": 32
+        },
+        {
+          "filtered": false,
+          "value": "Micro",
+          "label": "Micro",
+          "count": 9
+        },
+        {
+          "filtered": false,
+          "value": "Knee",
+          "label": "Knee",
+          "count": 8
+        },
+        {
+          "filtered": false,
+          "value": "Floor",
+          "label": "Floor",
+          "count": 22
+        },
+        {
+          "filtered": false,
+          "value": "Calf",
+          "label": "Calf",
+          "count": 3
+        },
+        {
+          "filtered": false,
+          "value": "Below knee",
+          "label": "Below knee",
+          "count": 2
+        },
+        {
+          "filtered": false,
+          "value": "Below Knee",
+          "label": "Below Knee",
+          "count": 2
+        },
+        {
+          "filtered": false,
+          "value": "Ankle",
+          "label": "Ankle",
+          "count": 13
+        },
+        {
+          "filtered": false,
+          "value": "Above knee",
+          "label": "Above knee",
+          "count": 25
+        },
+        {
+          "filtered": false,
+          "value": "Above Knee",
+          "label": "Above Knee",
+          "count": 19
+        }
+      ]
+    },
+    {
+      "field": "pattern",
+      "type": "value",
+      "filtered": false,
+      "values": [
+        {
+          "filtered": false,
+          "value": "Print",
+          "label": "Print",
+          "count": 54
+        },
+        {
+          "filtered": false,
+          "value": "Floral",
+          "label": "Floral",
+          "count": 18
+        },
+        {
+          "filtered": false,
+          "value": "Stripe",
+          "label": "Stripe",
+          "count": 14
+        },
+        {
+          "filtered": false,
+          "value": "Embroidered",
+          "label": "Embroidered",
+          "count": 11
+        },
+        {
+          "filtered": false,
+          "value": "Paisley",
+          "label": "Paisley",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "field": "saturation",
+      "type": "value",
+      "filtered": false,
+      "values": [
+        {
+          "filtered": false,
+          "value": "high",
+          "label": "high",
+          "count": 22
+        },
+        {
+          "filtered": false,
+          "value": "low",
+          "label": "low",
+          "count": 25
+        },
+        {
+          "filtered": false,
+          "value": "med",
+          "label": "med",
+          "count": 19
+        }
+      ]
+    },
+    {
+      "field": "collection",
+      "type": "value",
+      "filtered": false,
+      "values": [
+        {
+          "filtered": false,
+          "value": "Chasing Daydreams",
+          "label": "Chasing Daydreams",
+          "count": 2
+        },
+        {
+          "filtered": false,
+          "value": "Mine To Keep",
+          "label": "Mine To Keep",
+          "count": 2
+        },
+        {
+          "filtered": false,
+          "value": "Set To Jet",
+          "label": "Set To Jet",
+          "count": 3
+        },
+        {
+          "filtered": false,
+          "value": "Stories Don't End",
+          "label": "Stories Don't End",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "Sunny State Of Mind",
+          "label": "Sunny State Of Mind",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "The Story",
+          "label": "The Story",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "field": "size_footwear",
+      "type": "value",
+      "filtered": false,
+      "values": [
+        {
+          "filtered": false,
+          "value": "5.5",
+          "label": "5.5",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "6",
+          "label": "6",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "6.5",
+          "label": "6.5",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "7",
+          "label": "7",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "7.5",
+          "label": "7.5",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "8",
+          "label": "8",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "8.5",
+          "label": "8.5",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "9",
+          "label": "9",
+          "count": 1
+        },
+        {
+          "filtered": false,
+          "value": "10",
+          "label": "10",
+          "count": 1
+        }
+      ]
+    }
+  ],
+  "sorting": [],
+  "merchandising": {
+    "redirect": "",
+    "is_elevated": [],
+    "elevated": [],
+    "removed": [],
+    "content": {},
+    "facets": [],
+    "facetsHide": [],
+    "experiments": [],
+    "variants": [],
+    "personalized": false
+  },
+  "search": {
+    "query": "red dress"
+  },
+  "autocomplete": {
+    "query": "red dress",
+    "suggested": {
+      "text": "red dress",
+      "type": "exact",
+      "source": "popular-query"
+    },
+    "alternatives": []
+  },
+  "tracking": {
+    "responseId": "550e8400-e29b-41d4-a716-446655440000"
   }
+}

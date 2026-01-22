@@ -13,6 +13,7 @@ import { waitFor } from '@testing-library/preact';
 
 import { MockClient } from '@searchspring/snap-shared';
 import deepmerge from 'deepmerge';
+import { AutocompleteRequestModelSearchSourceEnum } from '@searchspring/snapi-types';
 
 const KEY_ENTER = 13;
 const KEY_ESCAPE = 27;
@@ -546,6 +547,67 @@ describe('Autocomplete Controller', () => {
 		expect(controller.params.personalization!.shopper).toEqual(shopper.id);
 	});
 
+	it('can set search input param from state', async () => {
+		const controller = new AutocompleteController(acConfig, {
+			client: new MockClient(globals, {}),
+			store: new AutocompleteStore(acConfig, services),
+			urlManager,
+			eventManager: new EventManager(),
+			profiler: new Profiler(),
+			logger: new Logger(),
+			tracker: new Tracker(globals),
+		});
+
+		const inputValue = 'test query';
+		controller.store.state.input = inputValue;
+
+		expect(controller.params.search?.input).toEqual(inputValue);
+	});
+
+	it('can set search source param from state', async () => {
+		const controller = new AutocompleteController(acConfig, {
+			client: new MockClient(globals, {}),
+			store: new AutocompleteStore(acConfig, services),
+			urlManager,
+			eventManager: new EventManager(),
+			profiler: new Profiler(),
+			logger: new Logger(),
+			tracker: new Tracker(globals),
+		});
+
+		const sourceValue = 'input' as AutocompleteRequestModelSearchSourceEnum;
+		controller.store.state.source = sourceValue;
+
+		expect(controller.params.search?.source).toEqual(sourceValue);
+	});
+
+	it('includes both input and source params in search request', async () => {
+		const controller = new AutocompleteController(acConfig, {
+			client: new MockClient(globals, {}),
+			store: new AutocompleteStore(acConfig, services),
+			urlManager,
+			eventManager: new EventManager(),
+			profiler: new Profiler(),
+			logger: new Logger(),
+			tracker: new Tracker(globals),
+		});
+
+		await controller.init();
+
+		const query = 'wh';
+		const sourceValue = 'input' as AutocompleteRequestModelSearchSourceEnum;
+		controller.store.state.input = query;
+		controller.store.state.source = sourceValue;
+		controller.urlManager = controller.urlManager.reset().set('query', query);
+
+		(controller.client as MockClient).mockData.updateConfig({ autocomplete: 'autocomplete.query.wh' });
+
+		const params = controller.params;
+
+		expect(params.search?.input).toEqual(query);
+		expect(params.search?.source).toEqual(sourceValue);
+	});
+
 	it('resets inputs', async () => {
 		const controller = new AutocompleteController(acConfig, {
 			client: new MockClient(globals, {}),
@@ -876,7 +938,7 @@ describe('Autocomplete Controller', () => {
 			expect(controller.store.search.originalQuery).toBeDefined();
 		});
 
-		//@ts-ignore
+		// @ts-ignore
 		delete window.location;
 		window.location = {
 			...window.location,

@@ -7,12 +7,13 @@ import classnames from 'classnames';
 
 import { Image, ImageProps } from '../../Atoms/Image';
 import { Price, PriceProps } from '../../Atoms/Price';
-import { Theme, useTheme, CacheProvider } from '../../../providers';
+import { Theme, useTheme, CacheProvider, withController } from '../../../providers';
 import { defined, cloneWithProps } from '../../../utilities';
 import { filters } from '@searchspring/snap-toolbox';
 import { ComponentProps, LayoutType, Layout, StylingCSS } from '../../../types';
 import { CalloutBadge, CalloutBadgeProps } from '../../Molecules/CalloutBadge';
 import { OverlayBadge, OverlayBadgeProps } from '../../Molecules/OverlayBadge';
+import { withTracking } from '../../../providers';
 import type { SearchController, AutocompleteController, RecommendationController } from '@searchspring/snap-controller';
 import type { Product } from '@searchspring/snap-store-mobx';
 
@@ -74,170 +75,174 @@ const CSS = {
 		}),
 };
 
-export const Result = observer((properties: ResultProps): JSX.Element => {
-	const globalTheme: Theme = useTheme();
+export const Result = withController<any>(
+	withTracking(
+		observer((properties: ResultProps): JSX.Element => {
+			const globalTheme: Theme = useTheme();
 
-	const props: ResultProps = {
-		// default props
-		layout: Layout.GRID,
-		// global theme
-		...globalTheme?.components?.result,
-		// props
-		...properties,
-		...properties.theme?.components?.result,
-	};
+			const props: ResultProps = {
+				// default props
+				layout: Layout.GRID,
+				// global theme
+				...globalTheme?.components?.result,
+				// props
+				...properties,
+				...properties.theme?.components?.result,
+			};
 
-	const {
-		trackingRef,
-		result,
-		hideBadge,
-		hideTitle,
-		hidePricing,
-		hideImage,
-		detailSlot,
-		fallback,
-		disableStyles,
-		className,
-		layout,
-		onClick,
-		style,
-		controller,
-	} = props;
-
-	const core = result?.display?.mappings.core || result?.mappings?.core;
-
-	const subProps: ResultSubProps = {
-		price: {
-			// global theme
-			className: 'ss__result__price',
-			...globalTheme?.components?.price,
-			// inherited props
-			...defined({
-				disableStyles,
-			}),
-			// component theme overrides
-			theme: props.theme,
-		},
-		calloutBadge: {
-			// default props
-			className: 'ss__result__callout-badge',
-			// global theme
-			...globalTheme?.components?.calloutBadge,
-			// inherited props
-			...defined({
-				disableStyles,
+			const {
+				trackingRef,
 				result,
-			}),
-			// component theme overrides
-			theme: props.theme,
-		},
-		overlayBadge: {
-			// default props
-			className: 'ss__result__overlay-badge',
-			// global theme
-			...globalTheme?.components?.overlayBadge,
-			// inherited props
-			...defined({
+				hideBadge,
+				hideTitle,
+				hidePricing,
+				hideImage,
+				detailSlot,
+				fallback,
 				disableStyles,
-				result,
-			}),
-			// component theme overrides
-			theme: props.theme,
-		},
-		image: {
-			// default props
-			className: 'ss__result__image',
-			alt: core?.name,
-			src: core?.imageUrl,
-			// global theme
-			...globalTheme?.components?.image,
-			// inherited props
-			...defined({
-				disableStyles,
-				fallback: fallback,
-			}),
-			// component theme overrides
-			theme: props?.theme,
-		},
-	};
+				className,
+				layout,
+				onClick,
+				style,
+				controller,
+			} = props;
 
-	let displayName = core?.name;
-	if (props.truncateTitle) {
-		displayName = filters.truncate(core?.name || '', props.truncateTitle.limit, props.truncateTitle.append);
-	}
+			const core = result?.display?.mappings.core || result?.mappings?.core;
 
-	const styling: { css?: StylingCSS } = {};
-	if (!disableStyles) {
-		styling.css = [CSS.result(), style];
-	} else if (style) {
-		styling.css = [style];
-	}
+			const subProps: ResultSubProps = {
+				price: {
+					// global theme
+					className: 'ss__result__price',
+					...globalTheme?.components?.price,
+					// inherited props
+					...defined({
+						disableStyles,
+					}),
+					// component theme overrides
+					theme: props.theme,
+				},
+				calloutBadge: {
+					// default props
+					className: 'ss__result__callout-badge',
+					// global theme
+					...globalTheme?.components?.calloutBadge,
+					// inherited props
+					...defined({
+						disableStyles,
+						result,
+					}),
+					// component theme overrides
+					theme: props.theme,
+				},
+				overlayBadge: {
+					// default props
+					className: 'ss__result__overlay-badge',
+					// global theme
+					...globalTheme?.components?.overlayBadge,
+					// inherited props
+					...defined({
+						disableStyles,
+						result,
+					}),
+					// component theme overrides
+					theme: props.theme,
+				},
+				image: {
+					// default props
+					className: 'ss__result__image',
+					alt: core?.name,
+					src: core?.imageUrl,
+					// global theme
+					...globalTheme?.components?.image,
+					// inherited props
+					...defined({
+						disableStyles,
+						fallback: fallback,
+					}),
+					// component theme overrides
+					theme: props?.theme,
+				},
+			};
 
-	return core ? (
-		<CacheProvider>
-			<article {...styling} ref={trackingRef} className={classnames('ss__result', `ss__result--${layout}`, className)}>
-				<div className="ss__result__image-wrapper">
-					<a
-						href={core!.url}
-						onClick={(e: React.MouseEvent<HTMLAnchorElement, Event>) => {
-							onClick && onClick(e);
-						}}
-					>
-						{!hideImage &&
-							(!hideBadge ? (
-								<OverlayBadge
-									{...subProps.overlayBadge}
-									controller={controller as SearchController | AutocompleteController | RecommendationController}
-								>
-									<Image {...subProps.image} />
-								</OverlayBadge>
-							) : (
-								<Image {...subProps.image} />
-							))}
-					</a>
-				</div>
+			let displayName = core?.name;
+			if (props.truncateTitle) {
+				displayName = filters.truncate(core?.name || '', props.truncateTitle.limit, props.truncateTitle.append);
+			}
 
-				<div className="ss__result__details">
-					{!hideBadge && (
-						<CalloutBadge
-							{...subProps.calloutBadge}
-							controller={controller as SearchController | AutocompleteController | RecommendationController}
-						/>
-					)}
-					{!hideTitle && (
-						<div className="ss__result__details__title">
+			const styling: { css?: StylingCSS } = {};
+			if (!disableStyles) {
+				styling.css = [CSS.result(), style];
+			} else if (style) {
+				styling.css = [style];
+			}
+
+			return core ? (
+				<CacheProvider>
+					<article {...styling} ref={trackingRef} className={classnames('ss__result', `ss__result--${layout}`, className)}>
+						<div className="ss__result__image-wrapper">
 							<a
-								href={core.url}
+								href={core!.url}
 								onClick={(e: React.MouseEvent<HTMLAnchorElement, Event>) => {
 									onClick && onClick(e);
 								}}
-								dangerouslySetInnerHTML={{
-									__html: displayName || '',
-								}}
-							/>
+							>
+								{!hideImage &&
+									(!hideBadge ? (
+										<OverlayBadge
+											{...subProps.overlayBadge}
+											controller={controller as SearchController | AutocompleteController | RecommendationController}
+										>
+											<Image {...subProps.image} />
+										</OverlayBadge>
+									) : (
+										<Image {...subProps.image} />
+									))}
+							</a>
 						</div>
-					)}
-					{!hidePricing && (
-						<div className="ss__result__details__pricing">
-							{core.msrp && core.price && core.price < core.msrp ? (
-								<>
-									<Price {...subProps.price} value={core.msrp} lineThrough={true} />
-									&nbsp;
-									<Price {...subProps.price} value={core.price} />
-								</>
-							) : (
-								<Price {...subProps.price} value={core.price!} />
+
+						<div className="ss__result__details">
+							{!hideBadge && (
+								<CalloutBadge
+									{...subProps.calloutBadge}
+									controller={controller as SearchController | AutocompleteController | RecommendationController}
+								/>
 							)}
+							{!hideTitle && (
+								<div className="ss__result__details__title">
+									<a
+										href={core.url}
+										onClick={(e: React.MouseEvent<HTMLAnchorElement, Event>) => {
+											onClick && onClick(e);
+										}}
+										dangerouslySetInnerHTML={{
+											__html: displayName || '',
+										}}
+									/>
+								</div>
+							)}
+							{!hidePricing && (
+								<div className="ss__result__details__pricing">
+									{core.msrp && core.price && core.price < core.msrp ? (
+										<>
+											<Price {...subProps.price} value={core.msrp} lineThrough={true} />
+											&nbsp;
+											<Price {...subProps.price} value={core.price} />
+										</>
+									) : (
+										<Price {...subProps.price} value={core.price!} />
+									)}
+								</div>
+							)}
+							{cloneWithProps(detailSlot, { result })}
 						</div>
-					)}
-					{cloneWithProps(detailSlot, { result })}
-				</div>
-			</article>
-		</CacheProvider>
-	) : (
-		<Fragment></Fragment>
-	);
-});
+					</article>
+				</CacheProvider>
+			) : (
+				<Fragment></Fragment>
+			);
+		})
+	)
+);
 
 interface ResultSubProps {
 	calloutBadge: CalloutBadgeProps;

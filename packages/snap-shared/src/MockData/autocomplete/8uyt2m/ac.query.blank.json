@@ -1,22 +1,25 @@
 {
-    "autocomplete": {
-      "query": ""
-    },
-    "search": {
-      "query": ""
-    },
-    "pagination": {
-      "totalResults": 0,
-      "page": 1,
-      "pageSize": 6
-    },
-    "sorting": [],
-    "results": [],
-    "facets": [],
-    "merchandising": {
-      "redirect": "",
-      "content": {},
-      "experiments": [],
-      "personalized": false
-    }
+  "autocomplete": {
+    "query": ""
+  },
+  "search": {
+    "query": ""
+  },
+  "pagination": {
+    "totalResults": 0,
+    "page": 1,
+    "pageSize": 6
+  },
+  "sorting": [],
+  "results": [],
+  "facets": [],
+  "merchandising": {
+    "redirect": "",
+    "content": {},
+    "experiments": [],
+    "personalized": false
+  },
+  "tracking": {
+    "responseId": "550e8400-e29b-41d4-a716-446655440000"
   }
+}

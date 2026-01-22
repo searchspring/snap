@@ -266,6 +266,7 @@ const mockMatchType = {
 };
 
 const mockResponse: searchResponseType = {
+	responseId: 'responseId-mock',
 	results: [mockSingleResult, mockSingleResult],
 	filterSummary: mockFilterSummary,
 	facets: mockFacets,
@@ -305,6 +306,7 @@ describe('search response transformer', () => {
 		const pagination = jest.spyOn(transformSearchResponse, 'pagination');
 		const merchandising = jest.spyOn(transformSearchResponse, 'merchandising');
 		const search = jest.spyOn(transformSearchResponse, 'search');
+		const tracking = jest.spyOn(transformSearchResponse, 'tracking');
 
 		transformSearchResponse(mockResponse, mockRequest);
 
@@ -314,6 +316,7 @@ describe('search response transformer', () => {
 		expect(pagination).toHaveBeenCalled();
 		expect(merchandising).toHaveBeenCalled();
 		expect(search).toHaveBeenCalled();
+		expect(tracking).toHaveBeenCalled();
 
 		expect(results.mock.calls[0][0]).toEqual(mockResponse);
 		expect(filters.mock.calls[0][0]).toEqual(mockResponse);
@@ -338,6 +341,22 @@ describe('search response transformer', () => {
 	});
 });
 
+describe('search response transformer tracking', () => {
+	it('transforms pagination', () => {
+		const response = transformSearchResponse.tracking({
+			responseId: 'mock-response-id',
+		} as searchResponseType);
+
+		expect(response.tracking.responseId).toEqual('mock-response-id');
+	});
+
+	it('still returns object if passed undefined', () => {
+		// @ts-ignore
+		expect(typeof transformSearchResponse.pagination().pagination).toEqual('object');
+		expect(typeof transformSearchResponse.pagination({} as searchResponseType).pagination).toEqual('object');
+	});
+});
+
 describe('search response transformer pagination', () => {
 	it('transforms pagination', () => {
 		const response = transformSearchResponse.pagination({
@@ -359,7 +378,7 @@ describe('search response transformer pagination', () => {
 
 describe('search response transformer result', () => {
 	it('builds response format', () => {
-		const result = transformSearchResponse.result(mockSingleResult);
+		const result = transformSearchResponse.result(mockSingleResult, mockResponse);
 
 		expect(result.id).toEqual(mockSingleResult.uid);
 
@@ -369,7 +388,7 @@ describe('search response transformer result', () => {
 	});
 
 	it('builds core fields', () => {
-		const result = transformSearchResponse.result(mockSingleResult);
+		const result = transformSearchResponse.result(mockSingleResult, mockResponse);
 
 		// TODO: Add all core fields
 
@@ -384,7 +403,7 @@ describe('search response transformer result', () => {
 	});
 
 	it('leaves core fields out of attributes', () => {
-		const result = transformSearchResponse.result(mockSingleResult);
+		const result = transformSearchResponse.result(mockSingleResult, mockResponse);
 
 		// TODO: Add all core fields
 
@@ -399,7 +418,7 @@ describe('search response transformer result', () => {
 	});
 
 	it('builds attributes', () => {
-		const result = transformSearchResponse.result(mockSingleResult);
+		const result = transformSearchResponse.result(mockSingleResult, mockResponse);
 
 		expect(result.attributes?.ss_in_stock).toEqual('In Stock');
 		expect(result.attributes?.handle).toEqual('over-this-shit-face-mask');
@@ -453,17 +472,17 @@ describe('search response transformer result', () => {
 			},
 		};
 
-		const result = transformSearchResponse.result(resultWithBadgeFeature);
+		const result = transformSearchResponse.result(resultWithBadgeFeature, mockResponse);
 		expect(result.attributes?.badges).toBeUndefined();
 		expect(result.badges).toEqual(resultWithBadgeFeature.badges);
 
 		// @ts-ignore - typings are wrong intentionally here
-		const result2 = transformSearchResponse.result(resultWithRandomBadgeField);
+		const result2 = transformSearchResponse.result(resultWithRandomBadgeField, mockResponse);
 		expect(result2.attributes?.badges).toEqual(resultWithRandomBadgeField.badges);
 		expect(result2.badges).toEqual([]);
 
 		// @ts-ignore - typings are wrong intentionally here
-		const result3 = transformSearchResponse.result(resultWithRandomBadgeField2);
+		const result3 = transformSearchResponse.result(resultWithRandomBadgeField2, mockResponse);
 		expect(result3.badges).toEqual([]);
 		expect(result3.attributes?.badges).toEqual('[object Object]');
 	});
