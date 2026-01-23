@@ -1,59 +1,51 @@
+'use strict';
 (self.webpackChunk_searchspring_snap_preact_components = self.webpackChunk_searchspring_snap_preact_components || []).push([
 	[839],
 	{
-		'../../node_modules/@storybook/components/dist/esm/tooltip/WithTooltip.js': (
-			__unused_webpack_module,
-			__webpack_exports__,
-			__webpack_require__
-		) => {
-			'use strict';
-			__webpack_require__.r(__webpack_exports__),
-				__webpack_require__.d(__webpack_exports__, {
-					WithToolTipState: () => WithToolTipState,
-					WithTooltip: () => WithToolTipState,
-					WithTooltipPure: () => WithTooltipPure,
-				});
-			__webpack_require__('../../node_modules/core-js/modules/es.array.slice.js'),
-				__webpack_require__('../../node_modules/core-js/modules/es.object.freeze.js'),
-				__webpack_require__('../../node_modules/core-js/modules/es.object.keys.js'),
-				__webpack_require__('../../node_modules/core-js/modules/es.symbol.js'),
-				__webpack_require__('../../node_modules/core-js/modules/es.object.assign.js'),
-				__webpack_require__('../../node_modules/core-js/modules/es.symbol.description.js'),
-				__webpack_require__('../../node_modules/core-js/modules/es.object.to-string.js'),
-				__webpack_require__('../../node_modules/core-js/modules/es.symbol.iterator.js'),
-				__webpack_require__('../../node_modules/core-js/modules/es.array.iterator.js'),
-				__webpack_require__('../../node_modules/core-js/modules/web.dom-collections.iterator.js'),
-				__webpack_require__('../../node_modules/core-js/modules/es.function.name.js'),
-				__webpack_require__('../../node_modules/core-js/modules/es.array.from.js'),
-				__webpack_require__('../../node_modules/core-js/modules/es.string.iterator.js'),
-				__webpack_require__('../../node_modules/core-js/modules/web.dom-collections.for-each.js');
-			var compat_module = __webpack_require__('../../node_modules/preact/compat/dist/compat.module.js'),
-				esm = __webpack_require__('../../node_modules/@storybook/theming/dist/esm/index.js'),
-				global_window = __webpack_require__('../../node_modules/global/window.js'),
+		33839(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+			__webpack_require__.d(__webpack_exports__, { WithTooltip: () => WithToolTipState, WithTooltipPure: () => WithTooltipPure });
+			__webpack_require__(56569),
+				__webpack_require__(45968),
+				__webpack_require__(68291),
+				__webpack_require__(58070),
+				__webpack_require__(87050),
+				__webpack_require__(93510),
+				__webpack_require__(80630),
+				__webpack_require__(2432),
+				__webpack_require__(33873),
+				__webpack_require__(47010),
+				__webpack_require__(93277),
+				__webpack_require__(11875),
+				__webpack_require__(11011),
+				__webpack_require__(18867);
+			var react = __webpack_require__(14041),
+				esm = __webpack_require__(99364),
+				global_window = __webpack_require__(82553),
 				window_default = __webpack_require__.n(global_window),
-				objectWithoutPropertiesLoose = __webpack_require__('../../node_modules/@babel/runtime/helpers/esm/objectWithoutPropertiesLoose.js'),
-				esm_extends = __webpack_require__('../../node_modules/@babel/runtime/helpers/esm/extends.js'),
-				inheritsLoose = __webpack_require__('../../node_modules/@babel/runtime/helpers/esm/inheritsLoose.js'),
-				ManagerReferenceNodeContext = compat_module.createContext(),
-				ManagerReferenceNodeSetterContext = compat_module.createContext();
+				objectWithoutPropertiesLoose = __webpack_require__(17502),
+				esm_extends = __webpack_require__(89575),
+				inheritsLoose = __webpack_require__(79140),
+				react_dom = __webpack_require__(43144),
+				ManagerReferenceNodeContext = react.createContext(),
+				ManagerReferenceNodeSetterContext = react.createContext();
 			function Manager(_ref) {
 				var children = _ref.children,
-					_React$useState = compat_module.useState(null),
+					_React$useState = react.useState(null),
 					referenceNode = _React$useState[0],
 					setReferenceNode = _React$useState[1],
-					hasUnmounted = compat_module.useRef(!1);
-				compat_module.useEffect(function () {
+					hasUnmounted = react.useRef(!1);
+				react.useEffect(function () {
 					return function () {
 						hasUnmounted.current = !0;
 					};
 				}, []);
-				var handleSetReferenceNode = compat_module.useCallback(function (node) {
+				var handleSetReferenceNode = react.useCallback(function (node) {
 					hasUnmounted.current || setReferenceNode(node);
 				}, []);
-				return compat_module.createElement(
+				return react.createElement(
 					ManagerReferenceNodeContext.Provider,
 					{ value: referenceNode },
-					compat_module.createElement(ManagerReferenceNodeSetterContext.Provider, { value: handleSetReferenceNode }, children)
+					react.createElement(ManagerReferenceNodeSetterContext.Provider, { value: handleSetReferenceNode }, children)
 				);
 			}
 			var unwrapArray = function unwrapArray(arg) {
@@ -78,7 +70,7 @@
 					}, {});
 				},
 				useIsomorphicLayoutEffect =
-					'undefined' != typeof window && window.document && window.document.createElement ? compat_module.useLayoutEffect : compat_module.useEffect;
+					'undefined' != typeof window && window.document && window.document.createElement ? react.useLayoutEffect : react.useEffect;
 			function getWindow(node) {
 				if (null == node) return window;
 				if ('[object Window]' !== node.toString()) {
@@ -257,7 +249,7 @@
 							})(element) ||
 							window;
 			}
-			var enums = __webpack_require__('../../node_modules/@popperjs/core/lib/enums.js');
+			var enums = __webpack_require__(71541);
 			function order(modifiers) {
 				var map = new Map(),
 					visited = new Set(),
@@ -1254,7 +1246,7 @@
 						},
 					],
 				}),
-				react_fast_compare = __webpack_require__('../../node_modules/react-fast-compare/index.js'),
+				react_fast_compare = __webpack_require__(79772),
 				react_fast_compare_default = __webpack_require__.n(react_fast_compare),
 				EMPTY_MODIFIERS = [],
 				NOOP = function NOOP() {},
@@ -1273,20 +1265,20 @@
 					onFirstUpdate = _ref.onFirstUpdate,
 					innerRef = _ref.innerRef,
 					children = _ref.children,
-					referenceNode = compat_module.useContext(ManagerReferenceNodeContext),
-					_React$useState = compat_module.useState(null),
+					referenceNode = react.useContext(ManagerReferenceNodeContext),
+					_React$useState = react.useState(null),
 					popperElement = _React$useState[0],
 					setPopperElement = _React$useState[1],
-					_React$useState2 = compat_module.useState(null),
+					_React$useState2 = react.useState(null),
 					arrowElement = _React$useState2[0],
 					setArrowElement = _React$useState2[1];
-				compat_module.useEffect(
+				react.useEffect(
 					function () {
 						setRef(innerRef, popperElement);
 					},
 					[innerRef, popperElement]
 				);
-				var options = compat_module.useMemo(
+				var options = react.useMemo(
 						function () {
 							return {
 								placement,
@@ -1299,20 +1291,20 @@
 					),
 					_usePopper = (function usePopper(referenceElement, popperElement, options) {
 						void 0 === options && (options = {});
-						var prevOptions = compat_module.useRef(null),
+						var prevOptions = react.useRef(null),
 							optionsWithDefaults = {
 								onFirstUpdate: options.onFirstUpdate,
 								placement: options.placement || 'bottom',
 								strategy: options.strategy || 'absolute',
 								modifiers: options.modifiers || EMPTY_MODIFIERS,
 							},
-							_React$useState = compat_module.useState({
+							_React$useState = react.useState({
 								styles: { popper: { position: optionsWithDefaults.strategy, left: '0', top: '0' }, arrow: { position: 'absolute' } },
 								attributes: {},
 							}),
 							state = _React$useState[0],
 							setState = _React$useState[1],
-							updateStateModifier = compat_module.useMemo(function () {
+							updateStateModifier = react.useMemo(function () {
 								return {
 									name: 'updateState',
 									enabled: !0,
@@ -1320,7 +1312,7 @@
 									fn: function fn(_ref) {
 										var state = _ref.state,
 											elements = Object.keys(state.elements);
-										compat_module.flushSync(function () {
+										react_dom.flushSync(function () {
 											setState({
 												styles: fromEntries(
 													elements.map(function (element) {
@@ -1338,7 +1330,7 @@
 									requires: ['computeStyles'],
 								};
 							}, []),
-							popperOptions = compat_module.useMemo(
+							popperOptions = react.useMemo(
 								function () {
 									var newOptions = {
 										onFirstUpdate: optionsWithDefaults.onFirstUpdate,
@@ -1358,7 +1350,7 @@
 									updateStateModifier,
 								]
 							),
-							popperInstanceRef = compat_module.useRef();
+							popperInstanceRef = react.useRef();
 						return (
 							useIsomorphicLayoutEffect(
 								function () {
@@ -1393,7 +1385,7 @@
 					styles = _usePopper.styles,
 					forceUpdate = _usePopper.forceUpdate,
 					update = _usePopper.update,
-					childrenProps = compat_module.useMemo(
+					childrenProps = react.useMemo(
 						function () {
 							return {
 								ref: setPopperElement,
@@ -1410,25 +1402,25 @@
 					);
 				return unwrapArray(children)(childrenProps);
 			}
-			var warning = __webpack_require__('../../node_modules/warning/warning.js'),
+			var warning = __webpack_require__(64674),
 				warning_default = __webpack_require__.n(warning);
 			function Reference(_ref) {
 				var children = _ref.children,
 					innerRef = _ref.innerRef,
-					setReferenceNode = compat_module.useContext(ManagerReferenceNodeSetterContext),
-					refHandler = compat_module.useCallback(
+					setReferenceNode = react.useContext(ManagerReferenceNodeSetterContext),
+					refHandler = react.useCallback(
 						function (node) {
 							setRef(innerRef, node), safeInvoke(setReferenceNode, node);
 						},
 						[innerRef, setReferenceNode]
 					);
 				return (
-					compat_module.useEffect(function () {
+					react.useEffect(function () {
 						return function () {
 							return setRef(innerRef, null);
 						};
 					}, []),
-					compat_module.useEffect(
+					react.useEffect(
 						function () {
 							warning_default()(Boolean(setReferenceNode), '`Reference` should not be used outside of a `Manager` component.');
 						},
@@ -1437,7 +1429,7 @@
 					unwrapArray(children)({ ref: refHandler })
 				);
 			}
-			var TooltipContext = compat_module.default.createContext({}),
+			var TooltipContext = react.createContext({}),
 				callAll = function callAll() {
 					for (var _len = arguments.length, fns = new Array(_len), _key = 0; _key < _len; _key++) fns[_key] = arguments[_key];
 					return function () {
@@ -1570,7 +1562,7 @@
 								arrowProps = _this$props3.arrowProps,
 								placement = _this$props3.placement,
 								tooltip = _this$props3.tooltip;
-							return compat_module.default.createElement(
+							return react.createElement(
 								TooltipContext.Provider,
 								{ value: this.contextValue },
 								tooltip({
@@ -1588,7 +1580,7 @@
 						}),
 						Tooltip
 					);
-				})(compat_module.Component);
+				})(react.Component);
 			Tooltip.contextType = TooltipContext;
 			var TooltipTrigger = (function (_Component) {
 				function TooltipTrigger() {
@@ -1704,7 +1696,7 @@
 								'getTooltipRef',
 								'mutationObserverOptions',
 							]),
-							popper = compat_module.default.createElement(
+							popper = react.createElement(
 								Popper,
 								(0, esm_extends.A)(
 									{
@@ -1741,7 +1733,7 @@
 											y = pageY + height > window.pageYOffset + document.body.offsetHeight ? pageY - height : pageY;
 										style.transform = 'translate3d(' + x + 'px, ' + y + 'px, 0';
 									}
-									return compat_module.default.createElement(
+									return react.createElement(
 										Tooltip,
 										(0, esm_extends.A)(
 											{ arrowProps, closeOnReferenceHidden, isReferenceHidden, placement, update, style, tooltip, trigger, mutationObserverOptions },
@@ -1750,14 +1742,14 @@
 									);
 								}
 							);
-						return compat_module.default.createElement(
+						return react.createElement(
 							Manager,
 							null,
-							compat_module.default.createElement(Reference, { innerRef: getTriggerRef }, function (_ref4) {
+							react.createElement(Reference, { innerRef: getTriggerRef }, function (_ref4) {
 								var ref = _ref4.ref;
 								return children({ getTriggerProps: _this2.getTriggerProps, triggerRef: ref });
 							}),
-							this.getState() && (usePortal ? (0, compat_module.createPortal)(popper, portalContainer) : popper)
+							this.getState() && (usePortal ? (0, react_dom.createPortal)(popper, portalContainer) : popper)
 						);
 					}),
 					(_proto.isControlled = function isControlled() {
@@ -1772,7 +1764,7 @@
 					}),
 					TooltipTrigger
 				);
-			})(compat_module.Component);
+			})(react.Component);
 			TooltipTrigger.defaultProps = {
 				closeOnReferenceHidden: !0,
 				defaultTooltipShown: !1,
@@ -1788,13 +1780,10 @@
 				modifiers: [],
 			};
 			const react_popper_tooltip = TooltipTrigger;
-			__webpack_require__('../../node_modules/core-js/modules/es.string.split.js'),
-				__webpack_require__('../../node_modules/core-js/modules/es.regexp.exec.js'),
-				__webpack_require__('../../node_modules/core-js/modules/es.string.starts-with.js'),
-				__webpack_require__('../../node_modules/core-js/modules/es.array.concat.js');
-			var memoizerific = __webpack_require__('../../node_modules/memoizerific/memoizerific.js'),
+			__webpack_require__(58225), __webpack_require__(98376), __webpack_require__(86741), __webpack_require__(16411);
+			var memoizerific = __webpack_require__(27430),
 				memoizerific_default = __webpack_require__.n(memoizerific),
-				utils = __webpack_require__('../../node_modules/@storybook/theming/dist/esm/utils.js');
+				utils = __webpack_require__(75865);
 			function _extends() {
 				return (
 					(_extends =
@@ -1918,10 +1907,10 @@
 						arrowRef = _ref5.arrowRef,
 						color = _ref5.color,
 						props = _objectWithoutProperties(_ref5, ['placement', 'hasChrome', 'children', 'arrowProps', 'tooltipRef', 'arrowRef', 'color']);
-					return compat_module.default.createElement(
+					return react.createElement(
 						Wrapper,
 						_extends({ hasChrome, placement, ref: tooltipRef }, props, { color }),
-						hasChrome && compat_module.default.createElement(Arrow, _extends({ placement, ref: arrowRef }, arrowProps, { color })),
+						hasChrome && react.createElement(Arrow, _extends({ placement, ref: arrowRef }, arrowProps, { color })),
 						children
 					);
 				};
@@ -2042,7 +2031,7 @@
 							'onVisibilityChange',
 						]),
 						Container = svg ? TargetSvgContainer : TargetContainer;
-					return compat_module.default.createElement(
+					return react.createElement(
 						react_popper_tooltip,
 						{
 							placement,
@@ -2056,7 +2045,7 @@
 									tooltipRef = _ref2.tooltipRef,
 									arrowRef = _ref2.arrowRef,
 									tooltipPlacement = _ref2.placement;
-								return compat_module.default.createElement(
+								return react.createElement(
 									Tooltip_Tooltip,
 									WithTooltip_extends(
 										{ hasChrome, placement: tooltipPlacement, tooltipRef, arrowRef, arrowProps: getArrowProps() },
@@ -2075,7 +2064,7 @@
 						function (_ref3) {
 							var getTriggerProps = _ref3.getTriggerProps,
 								triggerRef = _ref3.triggerRef;
-							return compat_module.default.createElement(Container, WithTooltip_extends({ ref: triggerRef }, getTriggerProps(), props), children);
+							return react.createElement(Container, WithTooltip_extends({ ref: triggerRef }, getTriggerProps(), props), children);
 						}
 					);
 				};
@@ -2097,17 +2086,17 @@
 				var startOpen = _ref4.startOpen,
 					onChange = _ref4.onVisibilityChange,
 					rest = WithTooltip_objectWithoutProperties(_ref4, ['startOpen', 'onVisibilityChange']),
-					_useState2 = _slicedToArray((0, compat_module.useState)(startOpen || !1), 2),
+					_useState2 = _slicedToArray((0, react.useState)(startOpen || !1), 2),
 					tooltipShown = _useState2[0],
 					setTooltipShown = _useState2[1],
-					onVisibilityChange = (0, compat_module.useCallback)(
+					onVisibilityChange = (0, react.useCallback)(
 						function (visibility) {
 							(onChange && !1 === onChange(visibility)) || setTooltipShown(visibility);
 						},
 						[onChange]
 					);
 				return (
-					(0, compat_module.useEffect)(function () {
+					(0, react.useEffect)(function () {
 						var hide = function hide() {
 							return onVisibilityChange(!1);
 						};
@@ -2141,67 +2130,12 @@
 							}
 						);
 					}),
-					compat_module.default.createElement(WithTooltipPure, WithTooltip_extends({}, rest, { tooltipShown, onVisibilityChange }))
+					react.createElement(WithTooltipPure, WithTooltip_extends({}, rest, { tooltipShown, onVisibilityChange }))
 				);
 			};
 			WithToolTipState.displayName = 'WithToolTipState';
 		},
-		'../../node_modules/react-fast-compare/index.js': (module) => {
-			var hasElementType = 'undefined' != typeof Element,
-				hasMap = 'function' == typeof Map,
-				hasSet = 'function' == typeof Set,
-				hasArrayBuffer = 'function' == typeof ArrayBuffer && !!ArrayBuffer.isView;
-			function equal(a, b) {
-				if (a === b) return !0;
-				if (a && b && 'object' == typeof a && 'object' == typeof b) {
-					if (a.constructor !== b.constructor) return !1;
-					var length, i, keys, it;
-					if (Array.isArray(a)) {
-						if ((length = a.length) != b.length) return !1;
-						for (i = length; 0 != i--; ) if (!equal(a[i], b[i])) return !1;
-						return !0;
-					}
-					if (hasMap && a instanceof Map && b instanceof Map) {
-						if (a.size !== b.size) return !1;
-						for (it = a.entries(); !(i = it.next()).done; ) if (!b.has(i.value[0])) return !1;
-						for (it = a.entries(); !(i = it.next()).done; ) if (!equal(i.value[1], b.get(i.value[0]))) return !1;
-						return !0;
-					}
-					if (hasSet && a instanceof Set && b instanceof Set) {
-						if (a.size !== b.size) return !1;
-						for (it = a.entries(); !(i = it.next()).done; ) if (!b.has(i.value[0])) return !1;
-						return !0;
-					}
-					if (hasArrayBuffer && ArrayBuffer.isView(a) && ArrayBuffer.isView(b)) {
-						if ((length = a.length) != b.length) return !1;
-						for (i = length; 0 != i--; ) if (a[i] !== b[i]) return !1;
-						return !0;
-					}
-					if (a.constructor === RegExp) return a.source === b.source && a.flags === b.flags;
-					if (a.valueOf !== Object.prototype.valueOf && 'function' == typeof a.valueOf && 'function' == typeof b.valueOf)
-						return a.valueOf() === b.valueOf();
-					if (a.toString !== Object.prototype.toString && 'function' == typeof a.toString && 'function' == typeof b.toString)
-						return a.toString() === b.toString();
-					if ((length = (keys = Object.keys(a)).length) !== Object.keys(b).length) return !1;
-					for (i = length; 0 != i--; ) if (!Object.prototype.hasOwnProperty.call(b, keys[i])) return !1;
-					if (hasElementType && a instanceof Element) return !1;
-					for (i = length; 0 != i--; )
-						if ((('_owner' !== keys[i] && '__v' !== keys[i] && '__o' !== keys[i]) || !a.$$typeof) && !equal(a[keys[i]], b[keys[i]])) return !1;
-					return !0;
-				}
-				return a != a && b != b;
-			}
-			module.exports = function isEqual(a, b) {
-				try {
-					return equal(a, b);
-				} catch (error) {
-					if ((error.message || '').match(/stack|recursion/i)) return console.warn('react-fast-compare cannot handle circular refs'), !1;
-					throw error;
-				}
-			};
-		},
-		'../../node_modules/warning/warning.js': (module) => {
-			'use strict';
+		64674(module) {
 			var warning = function () {};
 			module.exports = warning;
 		},

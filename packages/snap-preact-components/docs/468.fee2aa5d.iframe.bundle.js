@@ -1,7 +1,7 @@
 (self.webpackChunk_searchspring_snap_preact_components = self.webpackChunk_searchspring_snap_preact_components || []).push([
 	[468],
 	{
-		'../../node_modules/@storybook/components/dist/esm/controls/Color.js': (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+		'../../node_modules/@storybook/components/dist/esm/controls/Color.js'(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 			'use strict';
 			__webpack_require__.r(__webpack_exports__),
 				__webpack_require__.d(__webpack_exports__, { ColorControl: () => ColorControl, default: () => Color });
@@ -972,7 +972,7 @@
 			ColorControl.displayName = 'ColorControl';
 			const Color = ColorControl;
 		},
-		'../../node_modules/color-convert/conversions.js': (module, __unused_webpack_exports, __webpack_require__) => {
+		'../../node_modules/color-convert/conversions.js'(module, __unused_webpack_exports, __webpack_require__) {
 			function _slicedToArray(r, e) {
 				return (
 					(function _arrayWithHoles(r) {
@@ -1094,6 +1094,9 @@
 					Object.defineProperty(convert[model], 'channels', { value: channels }),
 					Object.defineProperty(convert[model], 'labels', { value: labels });
 			}
+			function comparativeDistance(x, y) {
+				return (x[0] - y[0]) ** 2 + (x[1] - y[1]) ** 2 + (x[2] - y[2]) ** 2;
+			}
 			(convert.rgb.hsl = function (rgb) {
 				var h,
 					r = rgb[0] / 255,
@@ -1150,13 +1153,12 @@
 					var reversed = reverseKeywords[rgb];
 					if (reversed) return reversed;
 					for (
-						var currentClosestKeyword, x, y, currentClosestDistance = 1 / 0, _i3 = 0, _Object$keys3 = Object.keys(cssKeywords);
+						var currentClosestKeyword, currentClosestDistance = 1 / 0, _i3 = 0, _Object$keys3 = Object.keys(cssKeywords);
 						_i3 < _Object$keys3.length;
 						_i3++
 					) {
 						var keyword = _Object$keys3[_i3],
-							value = cssKeywords[keyword],
-							distance = ((y = value), ((x = rgb)[0] - y[0]) ** 2 + (x[1] - y[1]) ** 2 + (x[2] - y[2]) ** 2);
+							distance = comparativeDistance(rgb, cssKeywords[keyword]);
 						distance < currentClosestDistance && ((currentClosestDistance = distance), (currentClosestKeyword = keyword));
 					}
 					return currentClosestKeyword;
@@ -1519,7 +1521,7 @@
 					return [((rgb[0] + rgb[1] + rgb[2]) / 3 / 255) * 100];
 				});
 		},
-		'../../node_modules/color-convert/index.js': (module, __unused_webpack_exports, __webpack_require__) => {
+		'../../node_modules/color-convert/index.js'(module, __unused_webpack_exports, __webpack_require__) {
 			__webpack_require__('../../node_modules/core-js/modules/es.object.keys.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.array.for-each.js'),
 				__webpack_require__('../../node_modules/core-js/modules/web.dom-collections.for-each.js'),
@@ -1558,7 +1560,7 @@
 			}),
 				(module.exports = convert);
 		},
-		'../../node_modules/color-convert/route.js': (module, __unused_webpack_exports, __webpack_require__) => {
+		'../../node_modules/color-convert/route.js'(module, __unused_webpack_exports, __webpack_require__) {
 			__webpack_require__('../../node_modules/core-js/modules/es.object.keys.js');
 			var conversions = __webpack_require__('../../node_modules/color-convert/conversions.js');
 			function deriveBFS(fromModel) {
@@ -1598,7 +1600,7 @@
 				return conversion;
 			};
 		},
-		'../../node_modules/color-name/index.js': (module) => {
+		'../../node_modules/color-name/index.js'(module) {
 			'use strict';
 			module.exports = {
 				aliceblue: [240, 248, 255],
@@ -1751,21 +1753,21 @@
 				yellowgreen: [154, 205, 50],
 			};
 		},
-		'../../node_modules/lodash/_baseTrim.js': (module, __unused_webpack_exports, __webpack_require__) => {
+		'../../node_modules/lodash/_baseTrim.js'(module, __unused_webpack_exports, __webpack_require__) {
 			var trimmedEndIndex = __webpack_require__('../../node_modules/lodash/_trimmedEndIndex.js'),
 				reTrimStart = /^\s+/;
 			module.exports = function baseTrim(string) {
 				return string ? string.slice(0, trimmedEndIndex(string) + 1).replace(reTrimStart, '') : string;
 			};
 		},
-		'../../node_modules/lodash/_trimmedEndIndex.js': (module) => {
+		'../../node_modules/lodash/_trimmedEndIndex.js'(module) {
 			var reWhitespace = /\s/;
 			module.exports = function trimmedEndIndex(string) {
 				for (var index = string.length; index-- && reWhitespace.test(string.charAt(index)); );
 				return index;
 			};
 		},
-		'../../node_modules/lodash/debounce.js': (module, __unused_webpack_exports, __webpack_require__) => {
+		'../../node_modules/lodash/debounce.js'(module, __unused_webpack_exports, __webpack_require__) {
 			var isObject = __webpack_require__('../../node_modules/lodash/isObject.js'),
 				now = __webpack_require__('../../node_modules/lodash/now.js'),
 				toNumber = __webpack_require__('../../node_modules/lodash/toNumber.js'),
@@ -1834,13 +1836,13 @@
 				);
 			};
 		},
-		'../../node_modules/lodash/now.js': (module, __unused_webpack_exports, __webpack_require__) => {
+		'../../node_modules/lodash/now.js'(module, __unused_webpack_exports, __webpack_require__) {
 			var root = __webpack_require__('../../node_modules/lodash/_root.js');
 			module.exports = function () {
 				return root.Date.now();
 			};
 		},
-		'../../node_modules/lodash/throttle.js': (module, __unused_webpack_exports, __webpack_require__) => {
+		'../../node_modules/lodash/throttle.js'(module, __unused_webpack_exports, __webpack_require__) {
 			var debounce = __webpack_require__('../../node_modules/lodash/debounce.js'),
 				isObject = __webpack_require__('../../node_modules/lodash/isObject.js');
 			module.exports = function throttle(func, wait, options) {
@@ -1854,7 +1856,7 @@
 				);
 			};
 		},
-		'../../node_modules/lodash/toNumber.js': (module, __unused_webpack_exports, __webpack_require__) => {
+		'../../node_modules/lodash/toNumber.js'(module, __unused_webpack_exports, __webpack_require__) {
 			var baseTrim = __webpack_require__('../../node_modules/lodash/_baseTrim.js'),
 				isObject = __webpack_require__('../../node_modules/lodash/isObject.js'),
 				isSymbol = __webpack_require__('../../node_modules/lodash/isSymbol.js'),

@@ -1,12 +1,12 @@
-/*! For license information please see 777.546485aa.iframe.bundle.js.LICENSE.txt */
+/*! For license information please see 777.cc4813c9.iframe.bundle.js.LICENSE.txt */
 (self.webpackChunk_searchspring_snap_preact_components = self.webpackChunk_searchspring_snap_preact_components || []).push([
 	[777],
 	{
-		'../../node_modules/@storybook/components/dist/esm/syntaxhighlighter/syntaxhighlighter.js': (
+		'../../node_modules/@storybook/components/dist/esm/syntaxhighlighter/syntaxhighlighter.js'(
 			__unused_webpack_module,
 			__webpack_exports__,
 			__webpack_require__
-		) => {
+		) {
 			'use strict';
 			__webpack_require__.r(__webpack_exports__),
 				__webpack_require__.d(__webpack_exports__, {
@@ -14,7 +14,7 @@
 					createCopyToClipboardFunction: () => createCopyToClipboardFunction,
 					default: () => syntaxhighlighter,
 				});
-			__webpack_require__('../../node_modules/@storybook/components/node_modules/regenerator-runtime/runtime.js'),
+			__webpack_require__('../../node_modules/regenerator-runtime/runtime.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.object.entries.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.object.assign.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.string.trim.js'),
@@ -742,39 +742,36 @@
 			syntaxhighlighter_SyntaxHighlighter.displayName = 'SyntaxHighlighter';
 			const syntaxhighlighter = syntaxhighlighter_SyntaxHighlighter;
 		},
-		'../../node_modules/character-entities-legacy/index.json': (module) => {
+		'../../node_modules/character-entities-legacy/index.json'(module) {
 			'use strict';
 			module.exports = JSON.parse(
 				'{"AElig":"Æ","AMP":"&","Aacute":"Á","Acirc":"Â","Agrave":"À","Aring":"Å","Atilde":"Ã","Auml":"Ä","COPY":"©","Ccedil":"Ç","ETH":"Ð","Eacute":"É","Ecirc":"Ê","Egrave":"È","Euml":"Ë","GT":">","Iacute":"Í","Icirc":"Î","Igrave":"Ì","Iuml":"Ï","LT":"<","Ntilde":"Ñ","Oacute":"Ó","Ocirc":"Ô","Ograve":"Ò","Oslash":"Ø","Otilde":"Õ","Ouml":"Ö","QUOT":"\\"","REG":"®","THORN":"Þ","Uacute":"Ú","Ucirc":"Û","Ugrave":"Ù","Uuml":"Ü","Yacute":"Ý","aacute":"á","acirc":"â","acute":"´","aelig":"æ","agrave":"à","amp":"&","aring":"å","atilde":"ã","auml":"ä","brvbar":"¦","ccedil":"ç","cedil":"¸","cent":"¢","copy":"©","curren":"¤","deg":"°","divide":"÷","eacute":"é","ecirc":"ê","egrave":"è","eth":"ð","euml":"ë","frac12":"½","frac14":"¼","frac34":"¾","gt":">","iacute":"í","icirc":"î","iexcl":"¡","igrave":"ì","iquest":"¿","iuml":"ï","laquo":"«","lt":"<","macr":"¯","micro":"µ","middot":"·","nbsp":" ","not":"¬","ntilde":"ñ","oacute":"ó","ocirc":"ô","ograve":"ò","ordf":"ª","ordm":"º","oslash":"ø","otilde":"õ","ouml":"ö","para":"¶","plusmn":"±","pound":"£","quot":"\\"","raquo":"»","reg":"®","sect":"§","shy":"­","sup1":"¹","sup2":"²","sup3":"³","szlig":"ß","thorn":"þ","times":"×","uacute":"ú","ucirc":"û","ugrave":"ù","uml":"¨","uuml":"ü","yacute":"ý","yen":"¥","yuml":"ÿ"}'
 			);
 		},
-		'../../node_modules/character-reference-invalid/index.json': (module) => {
+		'../../node_modules/character-reference-invalid/index.json'(module) {
 			'use strict';
 			module.exports = JSON.parse(
 				'{"0":"�","128":"€","130":"‚","131":"ƒ","132":"„","133":"…","134":"†","135":"‡","136":"ˆ","137":"‰","138":"Š","139":"‹","140":"Œ","142":"Ž","145":"‘","146":"’","147":"“","148":"”","149":"•","150":"–","151":"—","152":"˜","153":"™","154":"š","155":"›","156":"œ","158":"ž","159":"Ÿ"}'
 			);
 		},
-		'../../node_modules/comma-separated-tokens/index.js': (__unused_webpack_module, exports) => {
+		'../../node_modules/comma-separated-tokens/index.js'(__unused_webpack_module, exports) {
 			'use strict';
 			exports.q = function parse(value) {
 				var val,
 					values = [],
-					input = String(value || empty),
-					index = input.indexOf(comma),
+					input = String(value || ''),
+					index = input.indexOf(','),
 					lastIndex = 0,
 					end = !1;
 				for (; !end; )
 					-1 === index && ((index = input.length), (end = !0)),
 						(!(val = input.slice(lastIndex, index).trim()) && end) || values.push(val),
 						(lastIndex = index + 1),
-						(index = input.indexOf(comma, lastIndex));
+						(index = input.indexOf(',', lastIndex));
 				return values;
 			};
-			var comma = ',',
-				space = ' ',
-				empty = '';
 		},
-		'../../node_modules/hast-util-parse-selector/index.js': (module) => {
+		'../../node_modules/hast-util-parse-selector/index.js'(module) {
 			'use strict';
 			module.exports = function parse(selector, defaultTagName) {
 				var subvalue,
@@ -801,7 +798,7 @@
 			};
 			var search = /[#.]/g;
 		},
-		'../../node_modules/hastscript/factory.js': (module, __unused_webpack_exports, __webpack_require__) => {
+		'../../node_modules/hastscript/factory.js'(module, __unused_webpack_exports, __webpack_require__) {
 			'use strict';
 			var find = __webpack_require__('../../node_modules/property-information/find.js'),
 				normalize = __webpack_require__('../../node_modules/property-information/normalize.js'),
@@ -898,24 +895,24 @@
 				);
 			}
 		},
-		'../../node_modules/hastscript/html.js': (module, __unused_webpack_exports, __webpack_require__) => {
+		'../../node_modules/hastscript/html.js'(module, __unused_webpack_exports, __webpack_require__) {
 			'use strict';
 			var schema = __webpack_require__('../../node_modules/property-information/html.js'),
 				html = __webpack_require__('../../node_modules/hastscript/factory.js')(schema, 'div');
 			(html.displayName = 'html'), (module.exports = html);
 		},
-		'../../node_modules/hastscript/index.js': (module, __unused_webpack_exports, __webpack_require__) => {
+		'../../node_modules/hastscript/index.js'(module, __unused_webpack_exports, __webpack_require__) {
 			'use strict';
 			module.exports = __webpack_require__('../../node_modules/hastscript/html.js');
 		},
-		'../../node_modules/is-alphabetical/index.js': (module) => {
+		'../../node_modules/is-alphabetical/index.js'(module) {
 			'use strict';
 			module.exports = function alphabetical(character) {
 				var code = 'string' == typeof character ? character.charCodeAt(0) : character;
 				return (code >= 97 && code <= 122) || (code >= 65 && code <= 90);
 			};
 		},
-		'../../node_modules/is-alphanumerical/index.js': (module, __unused_webpack_exports, __webpack_require__) => {
+		'../../node_modules/is-alphanumerical/index.js'(module, __unused_webpack_exports, __webpack_require__) {
 			'use strict';
 			var alphabetical = __webpack_require__('../../node_modules/is-alphabetical/index.js'),
 				decimal = __webpack_require__('../../node_modules/is-decimal/index.js');
@@ -923,21 +920,21 @@
 				return alphabetical(character) || decimal(character);
 			};
 		},
-		'../../node_modules/is-decimal/index.js': (module) => {
+		'../../node_modules/is-decimal/index.js'(module) {
 			'use strict';
 			module.exports = function decimal(character) {
 				var code = 'string' == typeof character ? character.charCodeAt(0) : character;
 				return code >= 48 && code <= 57;
 			};
 		},
-		'../../node_modules/is-hexadecimal/index.js': (module) => {
+		'../../node_modules/is-hexadecimal/index.js'(module) {
 			'use strict';
 			module.exports = function hexadecimal(character) {
 				var code = 'string' == typeof character ? character.charCodeAt(0) : character;
 				return (code >= 97 && code <= 102) || (code >= 65 && code <= 70) || (code >= 48 && code <= 57);
 			};
 		},
-		'../../node_modules/parse-entities/decode-entity.browser.js': (module) => {
+		'../../node_modules/parse-entities/decode-entity.browser.js'(module) {
 			'use strict';
 			var el;
 			module.exports = function decodeEntity(characters) {
@@ -951,7 +948,7 @@
 				return char !== entity && char;
 			};
 		},
-		'../../node_modules/parse-entities/index.js': (module, __unused_webpack_exports, __webpack_require__) => {
+		'../../node_modules/parse-entities/index.js'(module, __unused_webpack_exports, __webpack_require__) {
 			'use strict';
 			var legacy = __webpack_require__('../../node_modules/character-entities-legacy/index.json'),
 				invalid = __webpack_require__('../../node_modules/character-reference-invalid/index.json'),
@@ -1007,14 +1004,14 @@
 					'string' == typeof additional && (additional = additional.charCodeAt(0));
 					(prev = now()), (warning = handleWarning ? parseError : noop), index--, length++;
 					for (; ++index < length; )
-						if ((character === lineFeed && (column = indent[lines] || 1), (character = value.charCodeAt(index)) === ampersand)) {
+						if ((10 === character && (column = indent[lines] || 1), 38 === (character = value.charCodeAt(index)))) {
 							if (
-								(following = value.charCodeAt(index + 1)) === tab ||
-								following === lineFeed ||
-								following === formFeed ||
-								following === space ||
-								following === ampersand ||
-								following === lessThan ||
+								9 === (following = value.charCodeAt(index + 1)) ||
+								10 === following ||
+								12 === following ||
+								32 === following ||
+								38 === following ||
+								60 === following ||
 								following != following ||
 								(additional && following === additional)
 							) {
@@ -1024,11 +1021,9 @@
 							for (
 								begin = start = index + 1,
 									end = start,
-									following === numberSign
+									35 === following
 										? ((end = ++begin),
-										  (following = value.charCodeAt(end)) === uppercaseX || following === lowercaseX
-												? ((type = hexa), (end = ++begin))
-												: (type = deci))
+										  88 === (following = value.charCodeAt(end)) || 120 === following ? ((type = hexa), (end = ++begin)) : (type = deci))
 										: (type = name),
 									entityCharacters = '',
 									entity = '',
@@ -1040,36 +1035,36 @@
 							)
 								(characters += fromCharCode(following)),
 									type === name && own.call(legacy, characters) && ((entityCharacters = characters), (entity = legacy[characters]));
-							(terminated = value.charCodeAt(end) === semicolon) &&
+							(terminated = 59 === value.charCodeAt(end)) &&
 								(end++, (namedEntity = type === name && decodeEntity(characters)) && ((entityCharacters = characters), (entity = namedEntity))),
 								(diff = 1 + end - start),
 								(terminated || nonTerminated) &&
 									(characters
 										? type === name
 											? (terminated && !entity
-													? warning(namedUnknown, 1)
+													? warning(5, 1)
 													: (entityCharacters !== characters && ((diff = 1 + (end = begin + entityCharacters.length) - begin), (terminated = !1)),
 													  terminated ||
-															((reason = entityCharacters ? namedNotTerminated : namedEmpty),
+															((reason = entityCharacters ? 1 : 3),
 															settings.attribute
-																? (following = value.charCodeAt(end)) === equalsTo
+																? 61 === (following = value.charCodeAt(end))
 																	? (warning(reason, diff), (entity = null))
 																	: alphanumerical(following)
 																	? (entity = null)
 																	: warning(reason, diff)
 																: warning(reason, diff))),
 											  (reference = entity))
-											: (terminated || warning(numericNotTerminated, diff),
+											: (terminated || warning(2, diff),
 											  prohibited((reference = parseInt(characters, bases[type])))
-													? (warning(numericProhibited, diff), (reference = fromCharCode(replacementCharacter)))
+													? (warning(7, diff), (reference = fromCharCode(65533)))
 													: reference in invalid
-													? (warning(numericDisallowed, diff), (reference = invalid[reference]))
+													? (warning(6, diff), (reference = invalid[reference]))
 													: ((output = ''),
-													  disallowed(reference) && warning(numericDisallowed, diff),
+													  disallowed(reference) && warning(6, diff),
 													  reference > 65535 &&
 															((output += fromCharCode(((reference -= 65536) >>> 10) | 55296)), (reference = 56320 | (1023 & reference))),
 													  (reference = output + fromCharCode(reference))))
-										: type !== name && warning(numericEmpty, diff)),
+										: type !== name && warning(4, diff)),
 								reference
 									? (flush(),
 									  (prev = now()),
@@ -1110,18 +1105,6 @@
 					attribute: !1,
 					nonTerminated: !0,
 				},
-				tab = 9,
-				lineFeed = 10,
-				formFeed = 12,
-				space = 32,
-				ampersand = 38,
-				semicolon = 59,
-				lessThan = 60,
-				equalsTo = 61,
-				numberSign = 35,
-				uppercaseX = 88,
-				lowercaseX = 120,
-				replacementCharacter = 65533,
 				name = 'named',
 				hexa = 'hexadecimal',
 				deci = 'decimal',
@@ -1129,14 +1112,7 @@
 			(bases[hexa] = 16), (bases[deci] = 10);
 			var tests = {};
 			(tests[name] = alphanumerical), (tests[deci] = decimal), (tests[hexa] = hexadecimal);
-			var namedNotTerminated = 1,
-				numericNotTerminated = 2,
-				namedEmpty = 3,
-				numericEmpty = 4,
-				namedUnknown = 5,
-				numericDisallowed = 6,
-				numericProhibited = 7,
-				messages = {};
+			var messages = {};
 			function prohibited(code) {
 				return (code >= 55296 && code <= 57343) || code > 1114111;
 			}
@@ -1151,15 +1127,15 @@
 					65534 == (65535 & code)
 				);
 			}
-			(messages[namedNotTerminated] = 'Named character references must be terminated by a semicolon'),
-				(messages[numericNotTerminated] = 'Numeric character references must be terminated by a semicolon'),
-				(messages[namedEmpty] = 'Named character references cannot be empty'),
-				(messages[numericEmpty] = 'Numeric character references cannot be empty'),
-				(messages[namedUnknown] = 'Named character references must be known'),
-				(messages[numericDisallowed] = 'Numeric character references cannot be disallowed'),
-				(messages[numericProhibited] = 'Numeric character references cannot be outside the permissible Unicode range');
+			(messages[1] = 'Named character references must be terminated by a semicolon'),
+				(messages[2] = 'Numeric character references must be terminated by a semicolon'),
+				(messages[3] = 'Named character references cannot be empty'),
+				(messages[4] = 'Numeric character references cannot be empty'),
+				(messages[5] = 'Named character references must be known'),
+				(messages[6] = 'Numeric character references cannot be disallowed'),
+				(messages[7] = 'Numeric character references cannot be outside the permissible Unicode range');
 		},
-		'../../node_modules/property-information/find.js': (module, __unused_webpack_exports, __webpack_require__) => {
+		'../../node_modules/property-information/find.js'(module, __unused_webpack_exports, __webpack_require__) {
 			'use strict';
 			var normalize = __webpack_require__('../../node_modules/property-information/normalize.js'),
 				DefinedInfo = __webpack_require__('../../node_modules/property-information/lib/util/defined-info.js'),
@@ -1196,7 +1172,7 @@
 				return $0.charAt(1).toUpperCase();
 			}
 		},
-		'../../node_modules/property-information/html.js': (module, __unused_webpack_exports, __webpack_require__) => {
+		'../../node_modules/property-information/html.js'(module, __unused_webpack_exports, __webpack_require__) {
 			'use strict';
 			var merge = __webpack_require__('../../node_modules/property-information/lib/util/merge.js'),
 				xlink = __webpack_require__('../../node_modules/property-information/lib/xlink.js'),
@@ -1206,7 +1182,7 @@
 				html = __webpack_require__('../../node_modules/property-information/lib/html.js');
 			module.exports = merge([xml, xlink, xmlns, aria, html]);
 		},
-		'../../node_modules/property-information/lib/aria.js': (module, __unused_webpack_exports, __webpack_require__) => {
+		'../../node_modules/property-information/lib/aria.js'(module, __unused_webpack_exports, __webpack_require__) {
 			'use strict';
 			var types = __webpack_require__('../../node_modules/property-information/lib/util/types.js'),
 				create = __webpack_require__('../../node_modules/property-information/lib/util/create.js'),
@@ -1270,7 +1246,7 @@
 				},
 			});
 		},
-		'../../node_modules/property-information/lib/html.js': (module, __unused_webpack_exports, __webpack_require__) => {
+		'../../node_modules/property-information/lib/html.js'(module, __unused_webpack_exports, __webpack_require__) {
 			'use strict';
 			var types = __webpack_require__('../../node_modules/property-information/lib/util/types.js'),
 				create = __webpack_require__('../../node_modules/property-information/lib/util/create.js'),
@@ -1567,20 +1543,20 @@
 				},
 			});
 		},
-		'../../node_modules/property-information/lib/util/case-insensitive-transform.js': (module, __unused_webpack_exports, __webpack_require__) => {
+		'../../node_modules/property-information/lib/util/case-insensitive-transform.js'(module, __unused_webpack_exports, __webpack_require__) {
 			'use strict';
 			var caseSensitiveTransform = __webpack_require__('../../node_modules/property-information/lib/util/case-sensitive-transform.js');
 			module.exports = function caseInsensitiveTransform(attributes, property) {
 				return caseSensitiveTransform(attributes, property.toLowerCase());
 			};
 		},
-		'../../node_modules/property-information/lib/util/case-sensitive-transform.js': (module) => {
+		'../../node_modules/property-information/lib/util/case-sensitive-transform.js'(module) {
 			'use strict';
 			module.exports = function caseSensitiveTransform(attributes, attribute) {
 				return attribute in attributes ? attributes[attribute] : attribute;
 			};
 		},
-		'../../node_modules/property-information/lib/util/create.js': (module, __unused_webpack_exports, __webpack_require__) => {
+		'../../node_modules/property-information/lib/util/create.js'(module, __unused_webpack_exports, __webpack_require__) {
 			'use strict';
 			var normalize = __webpack_require__('../../node_modules/property-information/normalize.js'),
 				Schema = __webpack_require__('../../node_modules/property-information/lib/util/schema.js'),
@@ -1604,7 +1580,7 @@
 				return new Schema(property, normal, space);
 			};
 		},
-		'../../node_modules/property-information/lib/util/defined-info.js': (module, __unused_webpack_exports, __webpack_require__) => {
+		'../../node_modules/property-information/lib/util/defined-info.js'(module, __unused_webpack_exports, __webpack_require__) {
 			'use strict';
 			var Info = __webpack_require__('../../node_modules/property-information/lib/util/info.js'),
 				types = __webpack_require__('../../node_modules/property-information/lib/util/types.js');
@@ -1621,7 +1597,7 @@
 				value && (values[key] = value);
 			}
 		},
-		'../../node_modules/property-information/lib/util/info.js': (module) => {
+		'../../node_modules/property-information/lib/util/info.js'(module) {
 			'use strict';
 			module.exports = Info;
 			var proto = Info.prototype;
@@ -1641,7 +1617,7 @@
 				(proto.mustUseProperty = !1),
 				(proto.defined = !1);
 		},
-		'../../node_modules/property-information/lib/util/merge.js': (module, __unused_webpack_exports, __webpack_require__) => {
+		'../../node_modules/property-information/lib/util/merge.js'(module, __unused_webpack_exports, __webpack_require__) {
 			'use strict';
 			var xtend = __webpack_require__('../../node_modules/xtend/immutable.js'),
 				Schema = __webpack_require__('../../node_modules/property-information/lib/util/schema.js');
@@ -1656,7 +1632,7 @@
 				return new Schema(xtend.apply(null, property), xtend.apply(null, normal), space);
 			};
 		},
-		'../../node_modules/property-information/lib/util/schema.js': (module) => {
+		'../../node_modules/property-information/lib/util/schema.js'(module) {
 			'use strict';
 			module.exports = Schema;
 			var proto = Schema.prototype;
@@ -1665,7 +1641,7 @@
 			}
 			(proto.space = null), (proto.normal = {}), (proto.property = {});
 		},
-		'../../node_modules/property-information/lib/util/types.js': (__unused_webpack_module, exports) => {
+		'../../node_modules/property-information/lib/util/types.js'(__unused_webpack_module, exports) {
 			'use strict';
 			var powers = 0;
 			function increment() {
@@ -1679,7 +1655,7 @@
 				(exports.commaSeparated = increment()),
 				(exports.commaOrSpaceSeparated = increment());
 		},
-		'../../node_modules/property-information/lib/xlink.js': (module, __unused_webpack_exports, __webpack_require__) => {
+		'../../node_modules/property-information/lib/xlink.js'(module, __unused_webpack_exports, __webpack_require__) {
 			'use strict';
 			var create = __webpack_require__('../../node_modules/property-information/lib/util/create.js');
 			module.exports = create({
@@ -1690,7 +1666,7 @@
 				properties: { xLinkActuate: null, xLinkArcRole: null, xLinkHref: null, xLinkRole: null, xLinkShow: null, xLinkTitle: null, xLinkType: null },
 			});
 		},
-		'../../node_modules/property-information/lib/xml.js': (module, __unused_webpack_exports, __webpack_require__) => {
+		'../../node_modules/property-information/lib/xml.js'(module, __unused_webpack_exports, __webpack_require__) {
 			'use strict';
 			var create = __webpack_require__('../../node_modules/property-information/lib/util/create.js');
 			module.exports = create({
@@ -1701,7 +1677,7 @@
 				properties: { xmlLang: null, xmlBase: null, xmlSpace: null },
 			});
 		},
-		'../../node_modules/property-information/lib/xmlns.js': (module, __unused_webpack_exports, __webpack_require__) => {
+		'../../node_modules/property-information/lib/xmlns.js'(module, __unused_webpack_exports, __webpack_require__) {
 			'use strict';
 			var create = __webpack_require__('../../node_modules/property-information/lib/util/create.js'),
 				caseInsensitiveTransform = __webpack_require__('../../node_modules/property-information/lib/util/case-insensitive-transform.js');
@@ -1712,13 +1688,13 @@
 				properties: { xmlns: null, xmlnsXLink: null },
 			});
 		},
-		'../../node_modules/property-information/normalize.js': (module) => {
+		'../../node_modules/property-information/normalize.js'(module) {
 			'use strict';
 			module.exports = function normalize(value) {
 				return value.toLowerCase();
 			};
 		},
-		'../../node_modules/refractor/core.js': (module, __unused_webpack_exports, __webpack_require__) => {
+		'../../node_modules/refractor/core.js'(module, __unused_webpack_exports, __webpack_require__) {
 			'use strict';
 			var ctx =
 					'object' == typeof globalThis
@@ -1837,7 +1813,7 @@
 					);
 				});
 		},
-		'../../node_modules/refractor/lang/bash.js': (module) => {
+		'../../node_modules/refractor/lang/bash.js'(module) {
 			'use strict';
 			function bash(Prism) {
 				!(function (Prism) {
@@ -1958,7 +1934,7 @@
 			}
 			(module.exports = bash), (bash.displayName = 'bash'), (bash.aliases = ['shell']);
 		},
-		'../../node_modules/refractor/lang/clike.js': (module) => {
+		'../../node_modules/refractor/lang/clike.js'(module) {
 			'use strict';
 			function clike(Prism) {
 				Prism.languages.clike = {
@@ -1982,7 +1958,7 @@
 			}
 			(module.exports = clike), (clike.displayName = 'clike'), (clike.aliases = []);
 		},
-		'../../node_modules/refractor/lang/css.js': (module) => {
+		'../../node_modules/refractor/lang/css.js'(module) {
 			'use strict';
 			function css(Prism) {
 				!(function (Prism) {
@@ -2020,7 +1996,7 @@
 			}
 			(module.exports = css), (css.displayName = 'css'), (css.aliases = []);
 		},
-		'../../node_modules/refractor/lang/graphql.js': (module) => {
+		'../../node_modules/refractor/lang/graphql.js'(module) {
 			'use strict';
 			function graphql(Prism) {
 				(Prism.languages.graphql = {
@@ -2118,7 +2094,7 @@
 			}
 			(module.exports = graphql), (graphql.displayName = 'graphql'), (graphql.aliases = []);
 		},
-		'../../node_modules/refractor/lang/javascript.js': (module) => {
+		'../../node_modules/refractor/lang/javascript.js'(module) {
 			'use strict';
 			function javascript(Prism) {
 				(Prism.languages.javascript = Prism.languages.extend('clike', {
@@ -2237,7 +2213,7 @@
 			}
 			(module.exports = javascript), (javascript.displayName = 'javascript'), (javascript.aliases = ['js']);
 		},
-		'../../node_modules/refractor/lang/js-extras.js': (module) => {
+		'../../node_modules/refractor/lang/js-extras.js'(module) {
 			'use strict';
 			function jsExtras(Prism) {
 				!(function (Prism) {
@@ -2316,7 +2292,7 @@
 			}
 			(module.exports = jsExtras), (jsExtras.displayName = 'jsExtras'), (jsExtras.aliases = []);
 		},
-		'../../node_modules/refractor/lang/json.js': (module) => {
+		'../../node_modules/refractor/lang/json.js'(module) {
 			'use strict';
 			function json(Prism) {
 				(Prism.languages.json = {
@@ -2333,7 +2309,7 @@
 			}
 			(module.exports = json), (json.displayName = 'json'), (json.aliases = ['webmanifest']);
 		},
-		'../../node_modules/refractor/lang/jsx.js': (module) => {
+		'../../node_modules/refractor/lang/jsx.js'(module) {
 			'use strict';
 			function jsx(Prism) {
 				!(function (Prism) {
@@ -2435,7 +2411,7 @@
 			}
 			(module.exports = jsx), (jsx.displayName = 'jsx'), (jsx.aliases = []);
 		},
-		'../../node_modules/refractor/lang/markdown.js': (module) => {
+		'../../node_modules/refractor/lang/markdown.js'(module) {
 			'use strict';
 			function markdown(Prism) {
 				!(function (Prism) {
@@ -2624,7 +2600,7 @@
 			}
 			(module.exports = markdown), (markdown.displayName = 'markdown'), (markdown.aliases = ['md']);
 		},
-		'../../node_modules/refractor/lang/markup.js': (module) => {
+		'../../node_modules/refractor/lang/markup.js'(module) {
 			'use strict';
 			function markup(Prism) {
 				(Prism.languages.markup = {
@@ -2722,7 +2698,7 @@
 			}
 			(module.exports = markup), (markup.displayName = 'markup'), (markup.aliases = ['html', 'mathml', 'svg', 'xml', 'ssml', 'atom', 'rss']);
 		},
-		'../../node_modules/refractor/lang/tsx.js': (module, __unused_webpack_exports, __webpack_require__) => {
+		'../../node_modules/refractor/lang/tsx.js'(module, __unused_webpack_exports, __webpack_require__) {
 			'use strict';
 			var refractorJsx = __webpack_require__('../../node_modules/refractor/lang/jsx.js'),
 				refractorTypescript = __webpack_require__('../../node_modules/refractor/lang/typescript.js');
@@ -2740,7 +2716,7 @@
 			}
 			(module.exports = tsx), (tsx.displayName = 'tsx'), (tsx.aliases = []);
 		},
-		'../../node_modules/refractor/lang/typescript.js': (module) => {
+		'../../node_modules/refractor/lang/typescript.js'(module) {
 			'use strict';
 			function typescript(Prism) {
 				!(function (Prism) {
@@ -2780,7 +2756,7 @@
 			}
 			(module.exports = typescript), (typescript.displayName = 'typescript'), (typescript.aliases = ['ts']);
 		},
-		'../../node_modules/refractor/lang/yaml.js': (module) => {
+		'../../node_modules/refractor/lang/yaml.js'(module) {
 			'use strict';
 			function yaml(Prism) {
 				!(function (Prism) {
@@ -2856,7 +2832,7 @@
 			}
 			(module.exports = yaml), (yaml.displayName = 'yaml'), (yaml.aliases = ['yml']);
 		},
-		'../../node_modules/refractor/node_modules/prismjs/components/prism-core.js': (module, __unused_webpack_exports, __webpack_require__) => {
+		'../../node_modules/refractor/node_modules/prismjs/components/prism-core.js'(module, __unused_webpack_exports, __webpack_require__) {
 			var Prism = (function (_self) {
 				var lang = /(?:^|\s)lang(?:uage)?-([\w-]+)(?=\s|$)/i,
 					uniqueId = 0,
@@ -3213,17 +3189,15 @@
 			})('undefined' != typeof window ? window : 'undefined' != typeof WorkerGlobalScope && self instanceof WorkerGlobalScope ? self : {});
 			module.exports && (module.exports = Prism), void 0 !== __webpack_require__.g && (__webpack_require__.g.Prism = Prism);
 		},
-		'../../node_modules/space-separated-tokens/index.js': (__unused_webpack_module, exports) => {
+		'../../node_modules/space-separated-tokens/index.js'(__unused_webpack_module, exports) {
 			'use strict';
 			exports.q = function parse(value) {
-				var input = String(value || empty).trim();
-				return input === empty ? [] : input.split(whiteSpace);
+				var input = String(value || '').trim();
+				return '' === input ? [] : input.split(whiteSpace);
 			};
-			var empty = '',
-				space = ' ',
-				whiteSpace = /[ \t\n\r\f]+/g;
+			var whiteSpace = /[ \t\n\r\f]+/g;
 		},
-		'../../node_modules/xtend/immutable.js': (module) => {
+		'../../node_modules/xtend/immutable.js'(module) {
 			module.exports = function extend() {
 				for (var target = {}, i = 0; i < arguments.length; i++) {
 					var source = arguments[i];

@@ -1,13 +1,13 @@
 (self.webpackChunk_searchspring_snap_preact_components = self.webpackChunk_searchspring_snap_preact_components || []).push([
 	[468],
 	{
-		31759: (__unused_webpack_module, __unused_webpack_exports, __webpack_require__) => {
+		31759(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
 			'use strict';
 			var $ = __webpack_require__(5613),
 				$parseInt = __webpack_require__(49364);
 			$({ global: !0, forced: parseInt !== $parseInt }, { parseInt: $parseInt });
 		},
-		37172: (module, __unused_webpack_exports, __webpack_require__) => {
+		37172(module, __unused_webpack_exports, __webpack_require__) {
 			function _slicedToArray(r, e) {
 				return (
 					(function _arrayWithHoles(r) {
@@ -126,6 +126,9 @@
 					Object.defineProperty(convert[model], 'channels', { value: channels }),
 					Object.defineProperty(convert[model], 'labels', { value: labels });
 			}
+			function comparativeDistance(x, y) {
+				return (x[0] - y[0]) ** 2 + (x[1] - y[1]) ** 2 + (x[2] - y[2]) ** 2;
+			}
 			(convert.rgb.hsl = function (rgb) {
 				var h,
 					r = rgb[0] / 255,
@@ -182,13 +185,12 @@
 					var reversed = reverseKeywords[rgb];
 					if (reversed) return reversed;
 					for (
-						var currentClosestKeyword, x, y, currentClosestDistance = 1 / 0, _i3 = 0, _Object$keys3 = Object.keys(cssKeywords);
+						var currentClosestKeyword, currentClosestDistance = 1 / 0, _i3 = 0, _Object$keys3 = Object.keys(cssKeywords);
 						_i3 < _Object$keys3.length;
 						_i3++
 					) {
 						var keyword = _Object$keys3[_i3],
-							value = cssKeywords[keyword],
-							distance = ((y = value), ((x = rgb)[0] - y[0]) ** 2 + (x[1] - y[1]) ** 2 + (x[2] - y[2]) ** 2);
+							distance = comparativeDistance(rgb, cssKeywords[keyword]);
 						distance < currentClosestDistance && ((currentClosestDistance = distance), (currentClosestKeyword = keyword));
 					}
 					return currentClosestKeyword;
@@ -551,7 +553,7 @@
 					return [((rgb[0] + rgb[1] + rgb[2]) / 3 / 255) * 100];
 				});
 		},
-		49364: (module, __unused_webpack_exports, __webpack_require__) => {
+		49364(module, __unused_webpack_exports, __webpack_require__) {
 			'use strict';
 			var globalThis = __webpack_require__(79117),
 				fails = __webpack_require__(5234),
@@ -578,7 +580,7 @@
 				  }
 				: $parseInt;
 		},
-		61165: (module, __unused_webpack_exports, __webpack_require__) => {
+		61165(module, __unused_webpack_exports, __webpack_require__) {
 			__webpack_require__(68291), __webpack_require__(79620), __webpack_require__(18867), __webpack_require__(75668);
 			var conversions = __webpack_require__(37172),
 				route = __webpack_require__(93284),
@@ -614,7 +616,7 @@
 			}),
 				(module.exports = convert);
 		},
-		76931: (module) => {
+		76931(module) {
 			'use strict';
 			module.exports = {
 				aliceblue: [240, 248, 255],
@@ -767,7 +769,7 @@
 				yellowgreen: [154, 205, 50],
 			};
 		},
-		93284: (module, __unused_webpack_exports, __webpack_require__) => {
+		93284(module, __unused_webpack_exports, __webpack_require__) {
 			__webpack_require__(68291);
 			var conversions = __webpack_require__(37172);
 			function deriveBFS(fromModel) {
@@ -807,7 +809,7 @@
 				return conversion;
 			};
 		},
-		97468: (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+		97468(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 			'use strict';
 			__webpack_require__.r(__webpack_exports__),
 				__webpack_require__.d(__webpack_exports__, { ColorControl: () => ColorControl, default: () => Color });

@@ -1,7 +1,7 @@
 (self.webpackChunk_searchspring_snap_preact_components = self.webpackChunk_searchspring_snap_preact_components || []).push([
 	[317],
 	{
-		72317: (module) => {
+		72317(module) {
 			module.exports = function (e, n) {
 				return (
 					(n = n || {}),

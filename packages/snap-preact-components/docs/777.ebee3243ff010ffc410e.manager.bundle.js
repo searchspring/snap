@@ -1,8 +1,8 @@
-/*! For license information please see 777.a41ef5f75b087069aa3a.manager.bundle.js.LICENSE.txt */
+/*! For license information please see 777.ebee3243ff010ffc410e.manager.bundle.js.LICENSE.txt */
 (self.webpackChunk_searchspring_snap_preact_components = self.webpackChunk_searchspring_snap_preact_components || []).push([
 	[777],
 	{
-		493: (module, __unused_webpack_exports, __webpack_require__) => {
+		493(module, __unused_webpack_exports, __webpack_require__) {
 			'use strict';
 			var ctx =
 					'object' == typeof globalThis
@@ -121,7 +121,7 @@
 					);
 				});
 		},
-		2719: (module, __unused_webpack_exports, __webpack_require__) => {
+		2719(module, __unused_webpack_exports, __webpack_require__) {
 			'use strict';
 			var find = __webpack_require__(24721),
 				normalize = __webpack_require__(66615),
@@ -218,7 +218,7 @@
 				);
 			}
 		},
-		3061: (module, __unused_webpack_exports, __webpack_require__) => {
+		3061(module, __unused_webpack_exports, __webpack_require__) {
 			'use strict';
 			var Info = __webpack_require__(62733),
 				types = __webpack_require__(51496);
@@ -235,13 +235,13 @@
 				value && (values[key] = value);
 			}
 		},
-		5621: (module) => {
+		5621(module) {
 			'use strict';
 			module.exports = function caseSensitiveTransform(attributes, attribute) {
 				return attribute in attributes ? attributes[attribute] : attribute;
 			};
 		},
-		8487: (module) => {
+		8487(module) {
 			'use strict';
 			module.exports = function parse(selector, defaultTagName) {
 				var subvalue,
@@ -268,7 +268,7 @@
 			};
 			var search = /[#.]/g;
 		},
-		9136: (module) => {
+		9136(module) {
 			'use strict';
 			function jsx(Prism) {
 				!(function (Prism) {
@@ -370,7 +370,7 @@
 			}
 			(module.exports = jsx), (jsx.displayName = 'jsx'), (jsx.aliases = []);
 		},
-		15175: (module, __unused_webpack_exports, __webpack_require__) => {
+		15175(module, __unused_webpack_exports, __webpack_require__) {
 			'use strict';
 			var types = __webpack_require__(51496),
 				create = __webpack_require__(18481),
@@ -667,18 +667,18 @@
 				},
 			});
 		},
-		15364: (module) => {
+		15364(module) {
 			'use strict';
 			module.exports = function decimal(character) {
 				var code = 'string' == typeof character ? character.charCodeAt(0) : character;
 				return code >= 48 && code <= 57;
 			};
 		},
-		17845: (module, __unused_webpack_exports, __webpack_require__) => {
+		17845(module, __unused_webpack_exports, __webpack_require__) {
 			'use strict';
 			module.exports = __webpack_require__(36512);
 		},
-		18481: (module, __unused_webpack_exports, __webpack_require__) => {
+		18481(module, __unused_webpack_exports, __webpack_require__) {
 			'use strict';
 			var normalize = __webpack_require__(66615),
 				Schema = __webpack_require__(99750),
@@ -702,7 +702,7 @@
 				return new Schema(property, normal, space);
 			};
 		},
-		24721: (module, __unused_webpack_exports, __webpack_require__) => {
+		24721(module, __unused_webpack_exports, __webpack_require__) {
 			'use strict';
 			var normalize = __webpack_require__(66615),
 				DefinedInfo = __webpack_require__(3061),
@@ -739,7 +739,7 @@
 				return $0.charAt(1).toUpperCase();
 			}
 		},
-		26505: (module, __unused_webpack_exports, __webpack_require__) => {
+		26505(module, __unused_webpack_exports, __webpack_require__) {
 			'use strict';
 			var create = __webpack_require__(18481);
 			module.exports = create({
@@ -750,7 +750,7 @@
 				properties: { xmlLang: null, xmlBase: null, xmlSpace: null },
 			});
 		},
-		27341: (module, __unused_webpack_exports, __webpack_require__) => {
+		27341(module, __unused_webpack_exports, __webpack_require__) {
 			'use strict';
 			var xtend = __webpack_require__(93227),
 				Schema = __webpack_require__(99750);
@@ -765,7 +765,7 @@
 				return new Schema(xtend.apply(null, property), xtend.apply(null, normal), space);
 			};
 		},
-		29027: (module) => {
+		29027(module) {
 			'use strict';
 			var el;
 			module.exports = function decodeEntity(characters) {
@@ -779,14 +779,14 @@
 				return char !== entity && char;
 			};
 		},
-		29816: (module) => {
+		29816(module) {
 			'use strict';
 			module.exports = function hexadecimal(character) {
 				var code = 'string' == typeof character ? character.charCodeAt(0) : character;
 				return (code >= 97 && code <= 102) || (code >= 65 && code <= 70) || (code >= 48 && code <= 57);
 			};
 		},
-		30218: (module, __unused_webpack_exports, __webpack_require__) => {
+		30218(module, __unused_webpack_exports, __webpack_require__) {
 			'use strict';
 			var create = __webpack_require__(18481),
 				caseInsensitiveTransform = __webpack_require__(41652);
@@ -797,384 +797,7 @@
 				properties: { xmlns: null, xmlnsXLink: null },
 			});
 		},
-		32914: (module) => {
-			var runtime = (function (exports) {
-				'use strict';
-				var Op = Object.prototype,
-					hasOwn = Op.hasOwnProperty,
-					defineProperty =
-						Object.defineProperty ||
-						function (obj, key, desc) {
-							obj[key] = desc.value;
-						},
-					$Symbol = 'function' == typeof Symbol ? Symbol : {},
-					iteratorSymbol = $Symbol.iterator || '@@iterator',
-					asyncIteratorSymbol = $Symbol.asyncIterator || '@@asyncIterator',
-					toStringTagSymbol = $Symbol.toStringTag || '@@toStringTag';
-				function define(obj, key, value) {
-					return Object.defineProperty(obj, key, { value, enumerable: !0, configurable: !0, writable: !0 }), obj[key];
-				}
-				try {
-					define({}, '');
-				} catch (err) {
-					define = function (obj, key, value) {
-						return (obj[key] = value);
-					};
-				}
-				function wrap(innerFn, outerFn, self, tryLocsList) {
-					var protoGenerator = outerFn && outerFn.prototype instanceof Generator ? outerFn : Generator,
-						generator = Object.create(protoGenerator.prototype),
-						context = new Context(tryLocsList || []);
-					return defineProperty(generator, '_invoke', { value: makeInvokeMethod(innerFn, self, context) }), generator;
-				}
-				function tryCatch(fn, obj, arg) {
-					try {
-						return { type: 'normal', arg: fn.call(obj, arg) };
-					} catch (err) {
-						return { type: 'throw', arg: err };
-					}
-				}
-				exports.wrap = wrap;
-				var GenStateSuspendedStart = 'suspendedStart',
-					GenStateSuspendedYield = 'suspendedYield',
-					GenStateExecuting = 'executing',
-					GenStateCompleted = 'completed',
-					ContinueSentinel = {};
-				function Generator() {}
-				function GeneratorFunction() {}
-				function GeneratorFunctionPrototype() {}
-				var IteratorPrototype = {};
-				define(IteratorPrototype, iteratorSymbol, function () {
-					return this;
-				});
-				var getProto = Object.getPrototypeOf,
-					NativeIteratorPrototype = getProto && getProto(getProto(values([])));
-				NativeIteratorPrototype &&
-					NativeIteratorPrototype !== Op &&
-					hasOwn.call(NativeIteratorPrototype, iteratorSymbol) &&
-					(IteratorPrototype = NativeIteratorPrototype);
-				var Gp = (GeneratorFunctionPrototype.prototype = Generator.prototype = Object.create(IteratorPrototype));
-				function defineIteratorMethods(prototype) {
-					['next', 'throw', 'return'].forEach(function (method) {
-						define(prototype, method, function (arg) {
-							return this._invoke(method, arg);
-						});
-					});
-				}
-				function AsyncIterator(generator, PromiseImpl) {
-					function invoke(method, arg, resolve, reject) {
-						var record = tryCatch(generator[method], generator, arg);
-						if ('throw' !== record.type) {
-							var result = record.arg,
-								value = result.value;
-							return value && 'object' == typeof value && hasOwn.call(value, '__await')
-								? PromiseImpl.resolve(value.__await).then(
-										function (value) {
-											invoke('next', value, resolve, reject);
-										},
-										function (err) {
-											invoke('throw', err, resolve, reject);
-										}
-								  )
-								: PromiseImpl.resolve(value).then(
-										function (unwrapped) {
-											(result.value = unwrapped), resolve(result);
-										},
-										function (error) {
-											return invoke('throw', error, resolve, reject);
-										}
-								  );
-						}
-						reject(record.arg);
-					}
-					var previousPromise;
-					defineProperty(this, '_invoke', {
-						value: function enqueue(method, arg) {
-							function callInvokeWithMethodAndArg() {
-								return new PromiseImpl(function (resolve, reject) {
-									invoke(method, arg, resolve, reject);
-								});
-							}
-							return (previousPromise = previousPromise
-								? previousPromise.then(callInvokeWithMethodAndArg, callInvokeWithMethodAndArg)
-								: callInvokeWithMethodAndArg());
-						},
-					});
-				}
-				function makeInvokeMethod(innerFn, self, context) {
-					var state = GenStateSuspendedStart;
-					return function invoke(method, arg) {
-						if (state === GenStateExecuting) throw new Error('Generator is already running');
-						if (state === GenStateCompleted) {
-							if ('throw' === method) throw arg;
-							return doneResult();
-						}
-						for (context.method = method, context.arg = arg; ; ) {
-							var delegate = context.delegate;
-							if (delegate) {
-								var delegateResult = maybeInvokeDelegate(delegate, context);
-								if (delegateResult) {
-									if (delegateResult === ContinueSentinel) continue;
-									return delegateResult;
-								}
-							}
-							if ('next' === context.method) context.sent = context._sent = context.arg;
-							else if ('throw' === context.method) {
-								if (state === GenStateSuspendedStart) throw ((state = GenStateCompleted), context.arg);
-								context.dispatchException(context.arg);
-							} else 'return' === context.method && context.abrupt('return', context.arg);
-							state = GenStateExecuting;
-							var record = tryCatch(innerFn, self, context);
-							if ('normal' === record.type) {
-								if (((state = context.done ? GenStateCompleted : GenStateSuspendedYield), record.arg === ContinueSentinel)) continue;
-								return { value: record.arg, done: context.done };
-							}
-							'throw' === record.type && ((state = GenStateCompleted), (context.method = 'throw'), (context.arg = record.arg));
-						}
-					};
-				}
-				function maybeInvokeDelegate(delegate, context) {
-					var methodName = context.method,
-						method = delegate.iterator[methodName];
-					if (undefined === method)
-						return (
-							(context.delegate = null),
-							('throw' === methodName &&
-								delegate.iterator.return &&
-								((context.method = 'return'), (context.arg = undefined), maybeInvokeDelegate(delegate, context), 'throw' === context.method)) ||
-								('return' !== methodName &&
-									((context.method = 'throw'), (context.arg = new TypeError("The iterator does not provide a '" + methodName + "' method")))),
-							ContinueSentinel
-						);
-					var record = tryCatch(method, delegate.iterator, context.arg);
-					if ('throw' === record.type) return (context.method = 'throw'), (context.arg = record.arg), (context.delegate = null), ContinueSentinel;
-					var info = record.arg;
-					return info
-						? info.done
-							? ((context[delegate.resultName] = info.value),
-							  (context.next = delegate.nextLoc),
-							  'return' !== context.method && ((context.method = 'next'), (context.arg = undefined)),
-							  (context.delegate = null),
-							  ContinueSentinel)
-							: info
-						: ((context.method = 'throw'),
-						  (context.arg = new TypeError('iterator result is not an object')),
-						  (context.delegate = null),
-						  ContinueSentinel);
-				}
-				function pushTryEntry(locs) {
-					var entry = { tryLoc: locs[0] };
-					1 in locs && (entry.catchLoc = locs[1]),
-						2 in locs && ((entry.finallyLoc = locs[2]), (entry.afterLoc = locs[3])),
-						this.tryEntries.push(entry);
-				}
-				function resetTryEntry(entry) {
-					var record = entry.completion || {};
-					(record.type = 'normal'), delete record.arg, (entry.completion = record);
-				}
-				function Context(tryLocsList) {
-					(this.tryEntries = [{ tryLoc: 'root' }]), tryLocsList.forEach(pushTryEntry, this), this.reset(!0);
-				}
-				function values(iterable) {
-					if (iterable) {
-						var iteratorMethod = iterable[iteratorSymbol];
-						if (iteratorMethod) return iteratorMethod.call(iterable);
-						if ('function' == typeof iterable.next) return iterable;
-						if (!isNaN(iterable.length)) {
-							var i = -1,
-								next = function next() {
-									for (; ++i < iterable.length; ) if (hasOwn.call(iterable, i)) return (next.value = iterable[i]), (next.done = !1), next;
-									return (next.value = undefined), (next.done = !0), next;
-								};
-							return (next.next = next);
-						}
-					}
-					return { next: doneResult };
-				}
-				function doneResult() {
-					return { value: undefined, done: !0 };
-				}
-				return (
-					(GeneratorFunction.prototype = GeneratorFunctionPrototype),
-					defineProperty(Gp, 'constructor', { value: GeneratorFunctionPrototype, configurable: !0 }),
-					defineProperty(GeneratorFunctionPrototype, 'constructor', { value: GeneratorFunction, configurable: !0 }),
-					(GeneratorFunction.displayName = define(GeneratorFunctionPrototype, toStringTagSymbol, 'GeneratorFunction')),
-					(exports.isGeneratorFunction = function (genFun) {
-						var ctor = 'function' == typeof genFun && genFun.constructor;
-						return !!ctor && (ctor === GeneratorFunction || 'GeneratorFunction' === (ctor.displayName || ctor.name));
-					}),
-					(exports.mark = function (genFun) {
-						return (
-							Object.setPrototypeOf
-								? Object.setPrototypeOf(genFun, GeneratorFunctionPrototype)
-								: ((genFun.__proto__ = GeneratorFunctionPrototype), define(genFun, toStringTagSymbol, 'GeneratorFunction')),
-							(genFun.prototype = Object.create(Gp)),
-							genFun
-						);
-					}),
-					(exports.awrap = function (arg) {
-						return { __await: arg };
-					}),
-					defineIteratorMethods(AsyncIterator.prototype),
-					define(AsyncIterator.prototype, asyncIteratorSymbol, function () {
-						return this;
-					}),
-					(exports.AsyncIterator = AsyncIterator),
-					(exports.async = function (innerFn, outerFn, self, tryLocsList, PromiseImpl) {
-						void 0 === PromiseImpl && (PromiseImpl = Promise);
-						var iter = new AsyncIterator(wrap(innerFn, outerFn, self, tryLocsList), PromiseImpl);
-						return exports.isGeneratorFunction(outerFn)
-							? iter
-							: iter.next().then(function (result) {
-									return result.done ? result.value : iter.next();
-							  });
-					}),
-					defineIteratorMethods(Gp),
-					define(Gp, toStringTagSymbol, 'Generator'),
-					define(Gp, iteratorSymbol, function () {
-						return this;
-					}),
-					define(Gp, 'toString', function () {
-						return '[object Generator]';
-					}),
-					(exports.keys = function (val) {
-						var object = Object(val),
-							keys = [];
-						for (var key in object) keys.push(key);
-						return (
-							keys.reverse(),
-							function next() {
-								for (; keys.length; ) {
-									var key = keys.pop();
-									if (key in object) return (next.value = key), (next.done = !1), next;
-								}
-								return (next.done = !0), next;
-							}
-						);
-					}),
-					(exports.values = values),
-					(Context.prototype = {
-						constructor: Context,
-						reset: function (skipTempReset) {
-							if (
-								((this.prev = 0),
-								(this.next = 0),
-								(this.sent = this._sent = undefined),
-								(this.done = !1),
-								(this.delegate = null),
-								(this.method = 'next'),
-								(this.arg = undefined),
-								this.tryEntries.forEach(resetTryEntry),
-								!skipTempReset)
-							)
-								for (var name in this) 't' === name.charAt(0) && hasOwn.call(this, name) && !isNaN(+name.slice(1)) && (this[name] = undefined);
-						},
-						stop: function () {
-							this.done = !0;
-							var rootRecord = this.tryEntries[0].completion;
-							if ('throw' === rootRecord.type) throw rootRecord.arg;
-							return this.rval;
-						},
-						dispatchException: function (exception) {
-							if (this.done) throw exception;
-							var context = this;
-							function handle(loc, caught) {
-								return (
-									(record.type = 'throw'),
-									(record.arg = exception),
-									(context.next = loc),
-									caught && ((context.method = 'next'), (context.arg = undefined)),
-									!!caught
-								);
-							}
-							for (var i = this.tryEntries.length - 1; i >= 0; --i) {
-								var entry = this.tryEntries[i],
-									record = entry.completion;
-								if ('root' === entry.tryLoc) return handle('end');
-								if (entry.tryLoc <= this.prev) {
-									var hasCatch = hasOwn.call(entry, 'catchLoc'),
-										hasFinally = hasOwn.call(entry, 'finallyLoc');
-									if (hasCatch && hasFinally) {
-										if (this.prev < entry.catchLoc) return handle(entry.catchLoc, !0);
-										if (this.prev < entry.finallyLoc) return handle(entry.finallyLoc);
-									} else if (hasCatch) {
-										if (this.prev < entry.catchLoc) return handle(entry.catchLoc, !0);
-									} else {
-										if (!hasFinally) throw new Error('try statement without catch or finally');
-										if (this.prev < entry.finallyLoc) return handle(entry.finallyLoc);
-									}
-								}
-							}
-						},
-						abrupt: function (type, arg) {
-							for (var i = this.tryEntries.length - 1; i >= 0; --i) {
-								var entry = this.tryEntries[i];
-								if (entry.tryLoc <= this.prev && hasOwn.call(entry, 'finallyLoc') && this.prev < entry.finallyLoc) {
-									var finallyEntry = entry;
-									break;
-								}
-							}
-							finallyEntry &&
-								('break' === type || 'continue' === type) &&
-								finallyEntry.tryLoc <= arg &&
-								arg <= finallyEntry.finallyLoc &&
-								(finallyEntry = null);
-							var record = finallyEntry ? finallyEntry.completion : {};
-							return (
-								(record.type = type),
-								(record.arg = arg),
-								finallyEntry ? ((this.method = 'next'), (this.next = finallyEntry.finallyLoc), ContinueSentinel) : this.complete(record)
-							);
-						},
-						complete: function (record, afterLoc) {
-							if ('throw' === record.type) throw record.arg;
-							return (
-								'break' === record.type || 'continue' === record.type
-									? (this.next = record.arg)
-									: 'return' === record.type
-									? ((this.rval = this.arg = record.arg), (this.method = 'return'), (this.next = 'end'))
-									: 'normal' === record.type && afterLoc && (this.next = afterLoc),
-								ContinueSentinel
-							);
-						},
-						finish: function (finallyLoc) {
-							for (var i = this.tryEntries.length - 1; i >= 0; --i) {
-								var entry = this.tryEntries[i];
-								if (entry.finallyLoc === finallyLoc) return this.complete(entry.completion, entry.afterLoc), resetTryEntry(entry), ContinueSentinel;
-							}
-						},
-						catch: function (tryLoc) {
-							for (var i = this.tryEntries.length - 1; i >= 0; --i) {
-								var entry = this.tryEntries[i];
-								if (entry.tryLoc === tryLoc) {
-									var record = entry.completion;
-									if ('throw' === record.type) {
-										var thrown = record.arg;
-										resetTryEntry(entry);
-									}
-									return thrown;
-								}
-							}
-							throw new Error('illegal catch attempt');
-						},
-						delegateYield: function (iterable, resultName, nextLoc) {
-							return (
-								(this.delegate = { iterator: values(iterable), resultName, nextLoc }),
-								'next' === this.method && (this.arg = undefined),
-								ContinueSentinel
-							);
-						},
-					}),
-					exports
-				);
-			})(module.exports);
-			try {
-				regeneratorRuntime = runtime;
-			} catch (accidentalStrictMode) {
-				'object' == typeof globalThis ? (globalThis.regeneratorRuntime = runtime) : Function('r', 'regeneratorRuntime = r')(runtime);
-			}
-		},
-		33098: (module) => {
+		33098(module) {
 			'use strict';
 			function javascript(Prism) {
 				(Prism.languages.javascript = Prism.languages.extend('clike', {
@@ -1293,27 +916,27 @@
 			}
 			(module.exports = javascript), (javascript.displayName = 'javascript'), (javascript.aliases = ['js']);
 		},
-		36512: (module, __unused_webpack_exports, __webpack_require__) => {
+		36512(module, __unused_webpack_exports, __webpack_require__) {
 			'use strict';
 			var schema = __webpack_require__(50019),
 				html = __webpack_require__(2719)(schema, 'div');
 			(html.displayName = 'html'), (module.exports = html);
 		},
-		37295: (module) => {
+		37295(module) {
 			'use strict';
 			module.exports = function alphabetical(character) {
 				var code = 'string' == typeof character ? character.charCodeAt(0) : character;
 				return (code >= 97 && code <= 122) || (code >= 65 && code <= 90);
 			};
 		},
-		41652: (module, __unused_webpack_exports, __webpack_require__) => {
+		41652(module, __unused_webpack_exports, __webpack_require__) {
 			'use strict';
 			var caseSensitiveTransform = __webpack_require__(5621);
 			module.exports = function caseInsensitiveTransform(attributes, property) {
 				return caseSensitiveTransform(attributes, property.toLowerCase());
 			};
 		},
-		43623: (module, __unused_webpack_exports, __webpack_require__) => {
+		43623(module, __unused_webpack_exports, __webpack_require__) {
 			'use strict';
 			var alphabetical = __webpack_require__(37295),
 				decimal = __webpack_require__(15364);
@@ -1321,7 +944,7 @@
 				return alphabetical(character) || decimal(character);
 			};
 		},
-		50019: (module, __unused_webpack_exports, __webpack_require__) => {
+		50019(module, __unused_webpack_exports, __webpack_require__) {
 			'use strict';
 			var merge = __webpack_require__(27341),
 				xlink = __webpack_require__(84344),
@@ -1331,7 +954,7 @@
 				html = __webpack_require__(15175);
 			module.exports = merge([xml, xlink, xmlns, aria, html]);
 		},
-		50311: (module, __unused_webpack_exports, __webpack_require__) => {
+		50311(module, __unused_webpack_exports, __webpack_require__) {
 			'use strict';
 			var types = __webpack_require__(51496),
 				create = __webpack_require__(18481),
@@ -1395,7 +1018,7 @@
 				},
 			});
 		},
-		51496: (__unused_webpack_module, exports) => {
+		51496(__unused_webpack_module, exports) {
 			'use strict';
 			var powers = 0;
 			function increment() {
@@ -1409,17 +1032,15 @@
 				(exports.commaSeparated = increment()),
 				(exports.commaOrSpaceSeparated = increment());
 		},
-		53551: (__unused_webpack_module, exports) => {
+		53551(__unused_webpack_module, exports) {
 			'use strict';
 			exports.q = function parse(value) {
-				var input = String(value || empty).trim();
-				return input === empty ? [] : input.split(whiteSpace);
+				var input = String(value || '').trim();
+				return '' === input ? [] : input.split(whiteSpace);
 			};
-			var empty = '',
-				space = ' ',
-				whiteSpace = /[ \t\n\r\f]+/g;
+			var whiteSpace = /[ \t\n\r\f]+/g;
 		},
-		53807: (module) => {
+		53807(module) {
 			'use strict';
 			function bash(Prism) {
 				!(function (Prism) {
@@ -1540,7 +1161,7 @@
 			}
 			(module.exports = bash), (bash.displayName = 'bash'), (bash.aliases = ['shell']);
 		},
-		54274: (module, __unused_webpack_exports, __webpack_require__) => {
+		54274(module, __unused_webpack_exports, __webpack_require__) {
 			'use strict';
 			var refractorJsx = __webpack_require__(9136),
 				refractorTypescript = __webpack_require__(83410);
@@ -1558,7 +1179,7 @@
 			}
 			(module.exports = tsx), (tsx.displayName = 'tsx'), (tsx.aliases = []);
 		},
-		59835: (module, __unused_webpack_exports, __webpack_require__) => {
+		59835(module, __unused_webpack_exports, __webpack_require__) {
 			'use strict';
 			var legacy = __webpack_require__(80414),
 				invalid = __webpack_require__(61492),
@@ -1614,14 +1235,14 @@
 					'string' == typeof additional && (additional = additional.charCodeAt(0));
 					(prev = now()), (warning = handleWarning ? parseError : noop), index--, length++;
 					for (; ++index < length; )
-						if ((character === lineFeed && (column = indent[lines] || 1), (character = value.charCodeAt(index)) === ampersand)) {
+						if ((10 === character && (column = indent[lines] || 1), 38 === (character = value.charCodeAt(index)))) {
 							if (
-								(following = value.charCodeAt(index + 1)) === tab ||
-								following === lineFeed ||
-								following === formFeed ||
-								following === space ||
-								following === ampersand ||
-								following === lessThan ||
+								9 === (following = value.charCodeAt(index + 1)) ||
+								10 === following ||
+								12 === following ||
+								32 === following ||
+								38 === following ||
+								60 === following ||
 								following != following ||
 								(additional && following === additional)
 							) {
@@ -1631,11 +1252,9 @@
 							for (
 								begin = start = index + 1,
 									end = start,
-									following === numberSign
+									35 === following
 										? ((end = ++begin),
-										  (following = value.charCodeAt(end)) === uppercaseX || following === lowercaseX
-												? ((type = hexa), (end = ++begin))
-												: (type = deci))
+										  88 === (following = value.charCodeAt(end)) || 120 === following ? ((type = hexa), (end = ++begin)) : (type = deci))
 										: (type = name),
 									entityCharacters = '',
 									entity = '',
@@ -1647,36 +1266,36 @@
 							)
 								(characters += fromCharCode(following)),
 									type === name && own.call(legacy, characters) && ((entityCharacters = characters), (entity = legacy[characters]));
-							(terminated = value.charCodeAt(end) === semicolon) &&
+							(terminated = 59 === value.charCodeAt(end)) &&
 								(end++, (namedEntity = type === name && decodeEntity(characters)) && ((entityCharacters = characters), (entity = namedEntity))),
 								(diff = 1 + end - start),
 								(terminated || nonTerminated) &&
 									(characters
 										? type === name
 											? (terminated && !entity
-													? warning(namedUnknown, 1)
+													? warning(5, 1)
 													: (entityCharacters !== characters && ((diff = 1 + (end = begin + entityCharacters.length) - begin), (terminated = !1)),
 													  terminated ||
-															((reason = entityCharacters ? namedNotTerminated : namedEmpty),
+															((reason = entityCharacters ? 1 : 3),
 															settings.attribute
-																? (following = value.charCodeAt(end)) === equalsTo
+																? 61 === (following = value.charCodeAt(end))
 																	? (warning(reason, diff), (entity = null))
 																	: alphanumerical(following)
 																	? (entity = null)
 																	: warning(reason, diff)
 																: warning(reason, diff))),
 											  (reference = entity))
-											: (terminated || warning(numericNotTerminated, diff),
+											: (terminated || warning(2, diff),
 											  prohibited((reference = parseInt(characters, bases[type])))
-													? (warning(numericProhibited, diff), (reference = fromCharCode(replacementCharacter)))
+													? (warning(7, diff), (reference = fromCharCode(65533)))
 													: reference in invalid
-													? (warning(numericDisallowed, diff), (reference = invalid[reference]))
+													? (warning(6, diff), (reference = invalid[reference]))
 													: ((output = ''),
-													  disallowed(reference) && warning(numericDisallowed, diff),
+													  disallowed(reference) && warning(6, diff),
 													  reference > 65535 &&
 															((output += fromCharCode(((reference -= 65536) >>> 10) | 55296)), (reference = 56320 | (1023 & reference))),
 													  (reference = output + fromCharCode(reference))))
-										: type !== name && warning(numericEmpty, diff)),
+										: type !== name && warning(4, diff)),
 								reference
 									? (flush(),
 									  (prev = now()),
@@ -1717,18 +1336,6 @@
 					attribute: !1,
 					nonTerminated: !0,
 				},
-				tab = 9,
-				lineFeed = 10,
-				formFeed = 12,
-				space = 32,
-				ampersand = 38,
-				semicolon = 59,
-				lessThan = 60,
-				equalsTo = 61,
-				numberSign = 35,
-				uppercaseX = 88,
-				lowercaseX = 120,
-				replacementCharacter = 65533,
 				name = 'named',
 				hexa = 'hexadecimal',
 				deci = 'decimal',
@@ -1736,14 +1343,7 @@
 			(bases[hexa] = 16), (bases[deci] = 10);
 			var tests = {};
 			(tests[name] = alphanumerical), (tests[deci] = decimal), (tests[hexa] = hexadecimal);
-			var namedNotTerminated = 1,
-				numericNotTerminated = 2,
-				namedEmpty = 3,
-				numericEmpty = 4,
-				namedUnknown = 5,
-				numericDisallowed = 6,
-				numericProhibited = 7,
-				messages = {};
+			var messages = {};
 			function prohibited(code) {
 				return (code >= 55296 && code <= 57343) || code > 1114111;
 			}
@@ -1758,21 +1358,21 @@
 					65534 == (65535 & code)
 				);
 			}
-			(messages[namedNotTerminated] = 'Named character references must be terminated by a semicolon'),
-				(messages[numericNotTerminated] = 'Numeric character references must be terminated by a semicolon'),
-				(messages[namedEmpty] = 'Named character references cannot be empty'),
-				(messages[numericEmpty] = 'Numeric character references cannot be empty'),
-				(messages[namedUnknown] = 'Named character references must be known'),
-				(messages[numericDisallowed] = 'Numeric character references cannot be disallowed'),
-				(messages[numericProhibited] = 'Numeric character references cannot be outside the permissible Unicode range');
+			(messages[1] = 'Named character references must be terminated by a semicolon'),
+				(messages[2] = 'Numeric character references must be terminated by a semicolon'),
+				(messages[3] = 'Named character references cannot be empty'),
+				(messages[4] = 'Numeric character references cannot be empty'),
+				(messages[5] = 'Named character references must be known'),
+				(messages[6] = 'Numeric character references cannot be disallowed'),
+				(messages[7] = 'Numeric character references cannot be outside the permissible Unicode range');
 		},
-		61492: (module) => {
+		61492(module) {
 			'use strict';
 			module.exports = JSON.parse(
 				'{"0":"�","128":"€","130":"‚","131":"ƒ","132":"„","133":"…","134":"†","135":"‡","136":"ˆ","137":"‰","138":"Š","139":"‹","140":"Œ","142":"Ž","145":"‘","146":"’","147":"“","148":"”","149":"•","150":"–","151":"—","152":"˜","153":"™","154":"š","155":"›","156":"œ","158":"ž","159":"Ÿ"}'
 			);
 		},
-		61777: (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+		61777(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 			'use strict';
 			__webpack_require__.r(__webpack_exports__),
 				__webpack_require__.d(__webpack_exports__, {
@@ -1780,7 +1380,7 @@
 					createCopyToClipboardFunction: () => createCopyToClipboardFunction,
 					default: () => syntaxhighlighter,
 				});
-			__webpack_require__(32914),
+			__webpack_require__(68989),
 				__webpack_require__(69431),
 				__webpack_require__(87050),
 				__webpack_require__(72273),
@@ -2502,7 +2102,7 @@
 			syntaxhighlighter_SyntaxHighlighter.displayName = 'SyntaxHighlighter';
 			const syntaxhighlighter = syntaxhighlighter_SyntaxHighlighter;
 		},
-		62733: (module) => {
+		62733(module) {
 			'use strict';
 			module.exports = Info;
 			var proto = Info.prototype;
@@ -2522,33 +2122,30 @@
 				(proto.mustUseProperty = !1),
 				(proto.defined = !1);
 		},
-		66615: (module) => {
+		66615(module) {
 			'use strict';
 			module.exports = function normalize(value) {
 				return value.toLowerCase();
 			};
 		},
-		70532: (__unused_webpack_module, exports) => {
+		70532(__unused_webpack_module, exports) {
 			'use strict';
 			exports.q = function parse(value) {
 				var val,
 					values = [],
-					input = String(value || empty),
-					index = input.indexOf(comma),
+					input = String(value || ''),
+					index = input.indexOf(','),
 					lastIndex = 0,
 					end = !1;
 				for (; !end; )
 					-1 === index && ((index = input.length), (end = !0)),
 						(!(val = input.slice(lastIndex, index).trim()) && end) || values.push(val),
 						(lastIndex = index + 1),
-						(index = input.indexOf(comma, lastIndex));
+						(index = input.indexOf(',', lastIndex));
 				return values;
 			};
-			var comma = ',',
-				space = ' ',
-				empty = '';
 		},
-		74207: (module) => {
+		74207(module) {
 			'use strict';
 			function clike(Prism) {
 				Prism.languages.clike = {
@@ -2572,7 +2169,7 @@
 			}
 			(module.exports = clike), (clike.displayName = 'clike'), (clike.aliases = []);
 		},
-		77643: (module) => {
+		77643(module) {
 			'use strict';
 			function json(Prism) {
 				(Prism.languages.json = {
@@ -2589,7 +2186,7 @@
 			}
 			(module.exports = json), (json.displayName = 'json'), (json.aliases = ['webmanifest']);
 		},
-		78836: (module) => {
+		78836(module) {
 			'use strict';
 			function markdown(Prism) {
 				!(function (Prism) {
@@ -2778,13 +2375,13 @@
 			}
 			(module.exports = markdown), (markdown.displayName = 'markdown'), (markdown.aliases = ['md']);
 		},
-		80414: (module) => {
+		80414(module) {
 			'use strict';
 			module.exports = JSON.parse(
 				'{"AElig":"Æ","AMP":"&","Aacute":"Á","Acirc":"Â","Agrave":"À","Aring":"Å","Atilde":"Ã","Auml":"Ä","COPY":"©","Ccedil":"Ç","ETH":"Ð","Eacute":"É","Ecirc":"Ê","Egrave":"È","Euml":"Ë","GT":">","Iacute":"Í","Icirc":"Î","Igrave":"Ì","Iuml":"Ï","LT":"<","Ntilde":"Ñ","Oacute":"Ó","Ocirc":"Ô","Ograve":"Ò","Oslash":"Ø","Otilde":"Õ","Ouml":"Ö","QUOT":"\\"","REG":"®","THORN":"Þ","Uacute":"Ú","Ucirc":"Û","Ugrave":"Ù","Uuml":"Ü","Yacute":"Ý","aacute":"á","acirc":"â","acute":"´","aelig":"æ","agrave":"à","amp":"&","aring":"å","atilde":"ã","auml":"ä","brvbar":"¦","ccedil":"ç","cedil":"¸","cent":"¢","copy":"©","curren":"¤","deg":"°","divide":"÷","eacute":"é","ecirc":"ê","egrave":"è","eth":"ð","euml":"ë","frac12":"½","frac14":"¼","frac34":"¾","gt":">","iacute":"í","icirc":"î","iexcl":"¡","igrave":"ì","iquest":"¿","iuml":"ï","laquo":"«","lt":"<","macr":"¯","micro":"µ","middot":"·","nbsp":" ","not":"¬","ntilde":"ñ","oacute":"ó","ocirc":"ô","ograve":"ò","ordf":"ª","ordm":"º","oslash":"ø","otilde":"õ","ouml":"ö","para":"¶","plusmn":"±","pound":"£","quot":"\\"","raquo":"»","reg":"®","sect":"§","shy":"­","sup1":"¹","sup2":"²","sup3":"³","szlig":"ß","thorn":"þ","times":"×","uacute":"ú","ucirc":"û","ugrave":"ù","uml":"¨","uuml":"ü","yacute":"ý","yen":"¥","yuml":"ÿ"}'
 			);
 		},
-		80450: (module) => {
+		80450(module) {
 			'use strict';
 			function yaml(Prism) {
 				!(function (Prism) {
@@ -2860,7 +2457,7 @@
 			}
 			(module.exports = yaml), (yaml.displayName = 'yaml'), (yaml.aliases = ['yml']);
 		},
-		80626: (module) => {
+		80626(module) {
 			'use strict';
 			function css(Prism) {
 				!(function (Prism) {
@@ -2898,7 +2495,7 @@
 			}
 			(module.exports = css), (css.displayName = 'css'), (css.aliases = []);
 		},
-		80929: (module) => {
+		80929(module) {
 			'use strict';
 			function markup(Prism) {
 				(Prism.languages.markup = {
@@ -2996,7 +2593,7 @@
 			}
 			(module.exports = markup), (markup.displayName = 'markup'), (markup.aliases = ['html', 'mathml', 'svg', 'xml', 'ssml', 'atom', 'rss']);
 		},
-		82016: (module, __unused_webpack_exports, __webpack_require__) => {
+		82016(module, __unused_webpack_exports, __webpack_require__) {
 			var Prism = (function (_self) {
 				var lang = /(?:^|\s)lang(?:uage)?-([\w-]+)(?=\s|$)/i,
 					uniqueId = 0,
@@ -3353,7 +2950,7 @@
 			})('undefined' != typeof window ? window : 'undefined' != typeof WorkerGlobalScope && self instanceof WorkerGlobalScope ? self : {});
 			module.exports && (module.exports = Prism), void 0 !== __webpack_require__.g && (__webpack_require__.g.Prism = Prism);
 		},
-		83410: (module) => {
+		83410(module) {
 			'use strict';
 			function typescript(Prism) {
 				!(function (Prism) {
@@ -3393,7 +2990,7 @@
 			}
 			(module.exports = typescript), (typescript.displayName = 'typescript'), (typescript.aliases = ['ts']);
 		},
-		84344: (module, __unused_webpack_exports, __webpack_require__) => {
+		84344(module, __unused_webpack_exports, __webpack_require__) {
 			'use strict';
 			var create = __webpack_require__(18481);
 			module.exports = create({
@@ -3404,7 +3001,7 @@
 				properties: { xLinkActuate: null, xLinkArcRole: null, xLinkHref: null, xLinkRole: null, xLinkShow: null, xLinkTitle: null, xLinkType: null },
 			});
 		},
-		89024: (module) => {
+		89024(module) {
 			'use strict';
 			function jsExtras(Prism) {
 				!(function (Prism) {
@@ -3483,7 +3080,7 @@
 			}
 			(module.exports = jsExtras), (jsExtras.displayName = 'jsExtras'), (jsExtras.aliases = []);
 		},
-		93227: (module) => {
+		93227(module) {
 			module.exports = function extend() {
 				for (var target = {}, i = 0; i < arguments.length; i++) {
 					var source = arguments[i];
@@ -3493,7 +3090,7 @@
 			};
 			var hasOwnProperty = Object.prototype.hasOwnProperty;
 		},
-		96356: (module) => {
+		96356(module) {
 			'use strict';
 			function graphql(Prism) {
 				(Prism.languages.graphql = {
@@ -3591,7 +3188,7 @@
 			}
 			(module.exports = graphql), (graphql.displayName = 'graphql'), (graphql.aliases = []);
 		},
-		99750: (module) => {
+		99750(module) {
 			'use strict';
 			module.exports = Schema;
 			var proto = Schema.prototype;

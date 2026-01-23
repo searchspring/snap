@@ -1,8 +1,6 @@
 (() => {
 	'use strict';
 	var deferred,
-		leafPrototypes,
-		getProto,
 		inProgress,
 		__webpack_modules__ = {},
 		__webpack_module_cache__ = {};
@@ -38,21 +36,6 @@
 			var getter = module && module.__esModule ? () => module.default : () => module;
 			return __webpack_require__.d(getter, { a: getter }), getter;
 		}),
-		(getProto = Object.getPrototypeOf ? (obj) => Object.getPrototypeOf(obj) : (obj) => obj.__proto__),
-		(__webpack_require__.t = function (value, mode) {
-			if ((1 & mode && (value = this(value)), 8 & mode)) return value;
-			if ('object' == typeof value && value) {
-				if (4 & mode && value.__esModule) return value;
-				if (16 & mode && 'function' == typeof value.then) return value;
-			}
-			var ns = Object.create(null);
-			__webpack_require__.r(ns);
-			var def = {};
-			leafPrototypes = leafPrototypes || [null, getProto({}), getProto([]), getProto(getProto)];
-			for (var current = 2 & mode && value; 'object' == typeof current && !~leafPrototypes.indexOf(current); current = getProto(current))
-				Object.getOwnPropertyNames(current).forEach((key) => (def[key] = () => value[key]));
-			return (def.default = () => value), __webpack_require__.d(ns, def), ns;
-		}),
 		(__webpack_require__.d = (exports, definition) => {
 			for (var key in definition)
 				__webpack_require__.o(definition, key) &&
@@ -65,15 +48,8 @@
 		(__webpack_require__.u = (chunkId) =>
 			chunkId +
 			'.' +
-			{
-				306: '26c2c9a9396cf6e4f03e',
-				317: '911997734e492f059903',
-				468: 'f22c2f775743504c5fa0',
-				592: '573ed282ebb4d9fc19c2',
-				777: 'a41ef5f75b087069aa3a',
-				839: 'a30cc69613318e9fa8bd',
-			}[chunkId] +
-			'.manager.bundle.js'),
+			{ 306: 'b20e5b59', 468: 'fee2aa5d', 592: 'a6f9a083', 673: 'f16e1d3a', 777: 'cc4813c9', 839: 'f6866cf9' }[chunkId] +
+			'.iframe.bundle.js'),
 		(__webpack_require__.g = (function () {
 			if ('object' == typeof globalThis) return globalThis;
 			try {
@@ -109,7 +85,6 @@
 				script ||
 					((needAttach = !0),
 					((script = document.createElement('script')).charset = 'utf-8'),
-					(script.timeout = 120),
 					__webpack_require__.nc && script.setAttribute('nonce', __webpack_require__.nc),
 					script.setAttribute('data-webpack', '@searchspring/snap-preact-components:' + key),
 					(script.src = url)),

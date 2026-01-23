@@ -1,7 +1,7 @@
 (self.webpackChunk_searchspring_snap_preact_components = self.webpackChunk_searchspring_snap_preact_components || []).push([
 	[792],
 	{
-		16503: (__unused_webpack_module, __unused_webpack___webpack_exports__, __webpack_require__) => {
+		16503(__unused_webpack_module, __unused_webpack___webpack_exports__, __webpack_require__) {
 			'use strict';
 			var esm = __webpack_require__(27893),
 				create = __webpack_require__(22013);
@@ -17,7 +17,7 @@
 				});
 			esm.MC.setConfig({ theme: searchspringTheme });
 		},
-		86973: () => {},
+		86973() {},
 	},
 	(__webpack_require__) => {
 		var __webpack_exec__ = (moduleId) => __webpack_require__((__webpack_require__.s = moduleId));

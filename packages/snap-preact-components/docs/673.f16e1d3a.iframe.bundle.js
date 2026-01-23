@@ -2,10 +2,10 @@
 (self.webpackChunk_searchspring_snap_preact_components = self.webpackChunk_searchspring_snap_preact_components || []).push([
 	[673],
 	{
-		'../../node_modules/@storybook/preview-web/dist/esm/renderDocs.js': (__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+		'../../node_modules/@storybook/preview-web/dist/esm/renderDocs.js'(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 			__webpack_require__.r(__webpack_exports__),
 				__webpack_require__.d(__webpack_exports__, { renderDocs: () => renderDocs, unmountDocs: () => unmountDocs });
-			__webpack_require__('../../node_modules/@storybook/preview-web/node_modules/regenerator-runtime/runtime.js'),
+			__webpack_require__('../../node_modules/regenerator-runtime/runtime.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.promise.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.object.to-string.js');
 			var compat_module = __webpack_require__('../../node_modules/preact/compat/dist/compat.module.js'),
