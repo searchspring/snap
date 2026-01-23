@@ -4,6 +4,9 @@ on:
   push:
     branches:
       - 'main'
+permissions:
+  id-token: write  # Required for OIDC
+  contents: write
 
 jobs:
   Publish:
@@ -54,7 +57,6 @@ jobs:
       - name: Publish packages
         run: npm run publish
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Configure AWS credentials
