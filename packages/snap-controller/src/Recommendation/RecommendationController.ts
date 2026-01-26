@@ -83,10 +83,8 @@ export class RecommendationController extends AbstractController {
 			const controller = search.controller as RecommendationController;
 			const responseId = search.response.responseId;
 			if (controller.store.loaded && !controller.store.error) {
-				if (!search.response._cached) {
-					const data: RecommendationsRenderSchemaData = { responseId, tag: controller.store.profile.tag };
-					this.tracker.events.recommendations.render({ data, siteId: this.config.globals?.siteId });
-				}
+				const data: RecommendationsRenderSchemaData = { responseId, tag: controller.store.profile.tag };
+				this.tracker.events.recommendations.render({ data, siteId: this.config.globals?.siteId });
 			}
 		});
 

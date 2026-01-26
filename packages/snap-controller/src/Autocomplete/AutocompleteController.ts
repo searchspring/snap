@@ -20,6 +20,7 @@ import type {
 	RedirectSchemaData,
 	ClickthroughResultsInner,
 	ClickthroughBannersInner,
+	BannersInner,
 } from '@searchspring/beacon';
 import { CLICK_DUPLICATION_TIMEOUT, isClickWithinProductLink } from '../utils/isClickWithinProductLink';
 import { isClickWithinBannerLink } from '../utils/isClickWithinBannerLink';
@@ -127,10 +128,8 @@ export class AutocompleteController extends AbstractController {
 			const controller = search.controller as AutocompleteController;
 			const responseId = search.response.tracking.responseId;
 			if (controller.store.loaded && !controller.store.error) {
-				if (!search.response._cached) {
-					const data: RenderSchemaData = { responseId };
-					this.tracker.events.autocomplete.render({ data, siteId: this.config.globals?.siteId });
-				}
+				const data: RenderSchemaData = { responseId };
+				this.tracker.events.autocomplete.render({ data, siteId: this.config.globals?.siteId });
 			}
 		});
 
@@ -175,12 +174,13 @@ export class AutocompleteController extends AbstractController {
 
 	track: AutocompleteTrackMethods = {
 		banner: {
-			impression: (banner): void => {
-				const { responseId, uid } = banner;
+			impression: (_banner): void => {
+				const { responseId, uid } = _banner;
 				if (this.events[responseId]?.banner?.[uid]?.impression) {
 					return;
 				}
 
+				const banner: BannersInner = { uid };
 				const data: ImpressionSchemaData = {
 					responseId,
 					banners: [banner],

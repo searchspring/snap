@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.73.6](https://github.com/searchspring/snap/compare/v0.73.5...v0.73.6) (2026-01-26)
+
+### Bug Fixes
+
+- remove \_cached, reimpress products for previous searches when non-inifinite, fix banner impres ([348ff75](https://github.com/searchspring/snap/commit/348ff759147b04d575ab05a3ee46c53c94ee8721))
+
 ## [0.73.5](https://github.com/searchspring/snap/compare/v0.73.4...v0.73.5) (2026-01-23)
 
 **Note:** Version bump only for package @searchspring/snap-client

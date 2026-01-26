@@ -3,11 +3,14 @@ import { Fragment, h } from 'preact';
 
 import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
+import { observer } from 'mobx-react';
+import { useCallback } from 'preact/hooks';
 
 import { ComponentProps, StylingCSS } from '../../../../types';
 import { Theme, useTheme, CacheProvider, withController, withTracking } from '../../../../providers';
 import { BannerContent, ContentType } from '@searchspring/snap-store-mobx';
 import type { SearchController, AutocompleteController, RecommendationController } from '@searchspring/snap-controller';
+
 const CSS = {
 	banner: () =>
 		css({
@@ -19,7 +22,7 @@ const CSS = {
 };
 
 export const Banner = withController<any>(
-	withTracking((properties: BannerProps): JSX.Element => {
+	observer((properties: BannerProps): JSX.Element => {
 		const globalTheme: Theme = useTheme();
 
 		const props: BannerProps = {
@@ -30,7 +33,7 @@ export const Banner = withController<any>(
 			...properties.theme?.components?.banner,
 		};
 
-		const { trackingRef, content, type, disableStyles, className, style } = props;
+		const { content, type, disableStyles, className, style } = props;
 
 		if (type === ContentType.INLINE) {
 			console.warn(`BannerType '${ContentType.INLINE}' is not supported in <Banner /> component`);
@@ -49,16 +52,25 @@ export const Banner = withController<any>(
 			return <Fragment></Fragment>;
 		}
 
+		const Content = useCallback(
+			withTracking((trackingProps) => {
+				return (
+					<div
+						className={classnames('ss__banner', `ss__banner--${type}`, className)}
+						{...styling}
+						ref={trackingProps.trackingRef}
+						dangerouslySetInnerHTML={{
+							__html: typeof value === 'string' ? value : value.join(''),
+						}}
+					/>
+				);
+			}),
+			[value, type]
+		);
+
 		return (
 			<CacheProvider>
-				<div
-					className={classnames('ss__banner', `ss__banner--${type}`, className)}
-					{...styling}
-					ref={trackingRef}
-					dangerouslySetInnerHTML={{
-						__html: typeof value === 'string' ? value : value.join(''),
-					}}
-				/>
+				<Content {...props} />
 			</CacheProvider>
 		);
 	})
