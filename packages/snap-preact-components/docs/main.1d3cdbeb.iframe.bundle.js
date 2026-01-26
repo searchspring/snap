@@ -1,4 +1,4 @@
-/*! For license information please see main.dd84f31a.iframe.bundle.js.LICENSE.txt */
+/*! For license information please see main.1d3cdbeb.iframe.bundle.js.LICENSE.txt */
 (self.webpackChunk_searchspring_snap_preact_components = self.webpackChunk_searchspring_snap_preact_components || []).push([
 	[792],
 	{
@@ -4507,25 +4507,27 @@
 				_emotion_react__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__('../../node_modules/@emotion/react/dist/emotion-react.browser.esm.js'),
 				classnames__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__('../../node_modules/classnames/index.js'),
 				classnames__WEBPACK_IMPORTED_MODULE_4___default = __webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_4__),
-				_providers__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__('./src/providers/cache.tsx'),
-				_providers__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__('./src/providers/controller.tsx'),
-				_providers__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__('./src/providers/withTracking.tsx'),
-				_providers__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(
+				mobx_react__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__('../../node_modules/mobx-react/dist/mobxreact.esm.js'),
+				preact_hooks__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__('../../node_modules/preact/hooks/dist/hooks.module.js'),
+				_providers__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__('./src/providers/cache.tsx'),
+				_providers__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__('./src/providers/controller.tsx'),
+				_providers__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(
 					'../../node_modules/@emotion/react/dist/emotion-element-cbed451f.browser.esm.js'
 				),
-				_searchspring_snap_store_mobx__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(
+				_providers__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__('./src/providers/withTracking.tsx'),
+				_searchspring_snap_store_mobx__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(
 					'../snap-store-mobx/dist/esm/Search/Stores/SearchMerchandisingStore.js'
 				),
 				CSS_banner = function banner() {
 					return (0, _emotion_react__WEBPACK_IMPORTED_MODULE_3__.AH)({ '& iframe, img': { maxWidth: '100%', height: 'auto' } });
 				},
-				Banner = (0, _providers__WEBPACK_IMPORTED_MODULE_6__.Bk)(
-					(0, _providers__WEBPACK_IMPORTED_MODULE_7__.W)(function (properties) {
+				Banner = (0, _providers__WEBPACK_IMPORTED_MODULE_8__.Bk)(
+					(0, mobx_react__WEBPACK_IMPORTED_MODULE_5__.PA)(function (properties) {
 						var _globalTheme$componen,
 							_properties$theme,
 							_properties$theme$com,
 							_content$type,
-							globalTheme = (0, _providers__WEBPACK_IMPORTED_MODULE_8__.a)(),
+							globalTheme = (0, _providers__WEBPACK_IMPORTED_MODULE_9__.a)(),
 							props = Object.assign(
 								{},
 								null == globalTheme || null === (_globalTheme$componen = globalTheme.components) || void 0 === _globalTheme$componen
@@ -4539,16 +4541,15 @@
 									? void 0
 									: _properties$theme$com.banner
 							),
-							trackingRef = props.trackingRef,
 							content = props.content,
 							type = props.type,
 							disableStyles = props.disableStyles,
 							className = props.className,
 							style = props.style;
-						if (type === _searchspring_snap_store_mobx__WEBPACK_IMPORTED_MODULE_9__.c.INLINE)
+						if (type === _searchspring_snap_store_mobx__WEBPACK_IMPORTED_MODULE_11__.c.INLINE)
 							return (
 								console.warn(
-									"BannerType '" + _searchspring_snap_store_mobx__WEBPACK_IMPORTED_MODULE_9__.c.INLINE + "' is not supported in <Banner /> component"
+									"BannerType '" + _searchspring_snap_store_mobx__WEBPACK_IMPORTED_MODULE_11__.c.INLINE + "' is not supported in <Banner /> component"
 								),
 								(0, _emotion_react__WEBPACK_IMPORTED_MODULE_3__.Y)(preact__WEBPACK_IMPORTED_MODULE_2__.FK, null)
 							);
@@ -4556,20 +4557,16 @@
 						disableStyles ? style && (styling.css = [style]) : (styling.css = [CSS_banner(), style]);
 						var banner = null == content || null === (_content$type = content[type]) || void 0 === _content$type ? void 0 : _content$type[0],
 							value = null == banner ? void 0 : banner.value;
-						return type && value
-							? (0, _emotion_react__WEBPACK_IMPORTED_MODULE_3__.Y)(
-									_providers__WEBPACK_IMPORTED_MODULE_5__._,
-									null,
-									(0, _emotion_react__WEBPACK_IMPORTED_MODULE_3__.Y)(
-										'div',
-										Object.assign(
-											{ className: classnames__WEBPACK_IMPORTED_MODULE_4___default()('ss__banner', 'ss__banner--' + type, className) },
-											styling,
-											{ ref: trackingRef, dangerouslySetInnerHTML: { __html: 'string' == typeof value ? value : value.join('') } }
-										)
-									)
-							  )
-							: (0, _emotion_react__WEBPACK_IMPORTED_MODULE_3__.Y)(preact__WEBPACK_IMPORTED_MODULE_2__.FK, null);
+						if (!type || !value) return (0, _emotion_react__WEBPACK_IMPORTED_MODULE_3__.Y)(preact__WEBPACK_IMPORTED_MODULE_2__.FK, null);
+						var Content = (0, preact_hooks__WEBPACK_IMPORTED_MODULE_6__.hb)(
+							(0, _providers__WEBPACK_IMPORTED_MODULE_10__.W)(function (trackingProps) {
+								return (0,
+								_emotion_react__WEBPACK_IMPORTED_MODULE_3__.Y)('div', Object.assign({ className: classnames__WEBPACK_IMPORTED_MODULE_4___default()('ss__banner', 'ss__banner--' + type, className) }, styling, { ref: trackingProps.trackingRef, dangerouslySetInnerHTML: { __html: 'string' == typeof value ? value : value.join('') } }));
+							}),
+							[value, type]
+						);
+						return (0,
+						_emotion_react__WEBPACK_IMPORTED_MODULE_3__.Y)(_providers__WEBPACK_IMPORTED_MODULE_7__._, null, (0, _emotion_react__WEBPACK_IMPORTED_MODULE_3__.Y)(Content, Object.assign({}, props)));
 					})
 				);
 		},
@@ -31447,7 +31444,7 @@
 															(meta = _yield$_this$client$_4[0]),
 															(response = _yield$_this$client$_4[1]),
 															(_responseId = response.tracking.responseId),
-															(_this.events[_responseId] = _this.events[_responseId] || { product: {}, banner: {} });
+															(_this.events[_responseId] = { product: {}, banner: {} });
 													case 15:
 														return (
 															response.meta || (response.meta = meta),
@@ -31813,6 +31810,7 @@
 									SearchController_regenerator().m(function _callee7(search, next) {
 										var controller,
 											responseId,
+											_this$config$globals7,
 											_search$request,
 											_search$request$filte,
 											_config$settings2,
@@ -31821,7 +31819,6 @@
 											_search$response3$sea,
 											_search$response4,
 											_search$response4$pag,
-											_this$config$globals7,
 											data,
 											config,
 											nonBackgroundFilters;
@@ -31840,15 +31837,14 @@
 															break;
 														}
 														if (
-															(search.response._cached ||
-																((data = { responseId }),
-																_this.tracker.events[_this.page.type].render({
-																	data,
-																	siteId:
-																		null === (_this$config$globals7 = _this.config.globals) || void 0 === _this$config$globals7
-																			? void 0
-																			: _this$config$globals7.siteId,
-																})),
+															((data = { responseId }),
+															_this.tracker.events[_this.page.type].render({
+																data,
+																siteId:
+																	null === (_this$config$globals7 = _this.config.globals) || void 0 === _this$config$globals7
+																		? void 0
+																		: _this$config$globals7.siteId,
+															}),
 															(config = search.controller.config),
 															(nonBackgroundFilters =
 																null == search ||
@@ -32699,15 +32695,14 @@
 																(responseId = search.response.responseId),
 																controller.store.loaded &&
 																	!controller.store.error &&
-																	(search.response._cached ||
-																		((data = { responseId, tag: controller.store.profile.tag }),
-																		_this.tracker.events.recommendations.render({
-																			data,
-																			siteId:
-																				null === (_this$config$globals4 = _this.config.globals) || void 0 === _this$config$globals4
-																					? void 0
-																					: _this$config$globals4.siteId,
-																		})));
+																	((data = { responseId, tag: controller.store.profile.tag }),
+																	_this.tracker.events.recommendations.render({
+																		data,
+																		siteId:
+																			null === (_this$config$globals4 = _this.config.globals) || void 0 === _this$config$globals4
+																				? void 0
+																				: _this$config$globals4.siteId,
+																	}));
 														case 2:
 															return _context3.a(2);
 													}
@@ -33088,13 +33083,13 @@
 							(_this.events = {}),
 							(_this.track = {
 								banner: {
-									impression: function impression(banner) {
+									impression: function impression(_banner) {
 										var _this$events$response,
 											_this$events$response2,
 											_this$events$response3,
 											_this$config$globals,
-											responseId = banner.responseId,
-											uid = banner.uid;
+											responseId = _banner.responseId,
+											uid = _banner.uid;
 										if (
 											null === (_this$events$response = _this.events[responseId]) ||
 											void 0 === _this$events$response ||
@@ -33104,7 +33099,7 @@
 											void 0 === _this$events$response3 ||
 											!_this$events$response3.impression
 										) {
-											var data = { responseId, banners: [banner], results: [] };
+											var data = { responseId, banners: [{ uid }], results: [] };
 											_this.eventManager.fire('track.banner.impression', { controller: _this, product: { uid }, trackEvent: data }),
 												_this.tracker.events.autocomplete.impression({
 													data,
@@ -33897,15 +33892,14 @@
 																(responseId = search.response.tracking.responseId),
 																controller.store.loaded &&
 																	!controller.store.error &&
-																	(search.response._cached ||
-																		((data = { responseId }),
-																		_this.tracker.events.autocomplete.render({
-																			data,
-																			siteId:
-																				null === (_this$config$globals11 = _this.config.globals) || void 0 === _this$config$globals11
-																					? void 0
-																					: _this$config$globals11.siteId,
-																		})));
+																	((data = { responseId }),
+																	_this.tracker.events.autocomplete.render({
+																		data,
+																		siteId:
+																			null === (_this$config$globals11 = _this.config.globals) || void 0 === _this$config$globals11
+																				? void 0
+																				: _this$config$globals11.siteId,
+																	}));
 														case 2:
 															return _context6.a(2);
 													}
@@ -34875,16 +34869,7 @@
 																	_context.n = 1;
 																	break;
 																}
-																return (
-																	(this.retryCount = 0),
-																	(this.retryDelay = 1e3),
-																	Array.isArray(cachedResponse)
-																		? cachedResponse.forEach(function (response) {
-																				response._cached = !0;
-																		  })
-																		: (cachedResponse._cached = !0),
-																	_context.a(2, cachedResponse)
-																);
+																return (this.retryCount = 0), (this.retryDelay = 1e3), _context.a(2, cachedResponse);
 															case 1:
 																return (_context.p = 1), (_context.n = 2), this.fetchApi(url, init);
 															case 2:
@@ -36189,23 +36174,16 @@
 						Object.assign(this, result);
 				});
 			function transformSearchResponse(response, request) {
-				var _response$_cached;
-				return (
-					(response.responseId = response.responseId),
-					Object.assign(
-						{
-							_cached: null !== (_response$_cached = response._cached) && void 0 !== _response$_cached && _response$_cached,
-							responseId: response.responseId,
-						},
-						transformSearchResponse.pagination(response),
-						transformSearchResponse.results(response),
-						transformSearchResponse.filters(response),
-						transformSearchResponse.facets(response, request),
-						transformSearchResponse.sorting(response),
-						transformSearchResponse.merchandising(response),
-						transformSearchResponse.search(response, request),
-						transformSearchResponse.tracking(response)
-					)
+				return Object.assign(
+					{},
+					transformSearchResponse.pagination(response),
+					transformSearchResponse.results(response),
+					transformSearchResponse.filters(response),
+					transformSearchResponse.facets(response, request),
+					transformSearchResponse.sorting(response),
+					transformSearchResponse.merchandising(response),
+					transformSearchResponse.search(response, request),
+					transformSearchResponse.tracking(response)
 				);
 			}
 			function decodeProperty(encoded) {
@@ -38197,7 +38175,6 @@
 																			meta,
 																			results: recommendations[0] && recommendations[0].results,
 																			responseId: recommendations[0] ? recommendations[0].responseId : '',
-																			_cached: !!profile._cached && !(!recommendations[0] || !recommendations[0]._cached),
 																		})
 																	)
 																);
@@ -44417,7 +44394,7 @@
 							((function Tracker_classCallCheck(a, n) {
 								if (!(a instanceof n)) throw new TypeError('Cannot call a class as a function');
 							})(this, Tracker),
-							((config = cjs_default()(Tracker_defaultConfig, config || {})).initiator = 'searchspring/' + config.framework + '/0.73.5'),
+							((config = cjs_default()(Tracker_defaultConfig, config || {})).initiator = 'searchspring/' + config.framework + '/0.73.6'),
 							'object' != typeof globals || 'string' != typeof globals.siteId)
 						)
 							throw new Error('Invalid config passed to tracker. The "siteId" attribute must be provided.');
@@ -44597,7 +44574,7 @@
 							(_this.localStorage = new StorageStore({ type: 'local', key: 'ss-' + _this.config.id })),
 							_this.localStorage.set('siteId', _this.globals.siteId),
 							(null !== (_window$searchspring = window.searchspring) && void 0 !== _window$searchspring && _window$searchspring.tracker) ||
-								((window.searchspring = window.searchspring || {}), (window.searchspring.tracker = _this), (window.searchspring.version = '0.73.5')),
+								((window.searchspring = window.searchspring || {}), (window.searchspring.tracker = _this), (window.searchspring.version = '0.73.6')),
 							setTimeout(function () {
 								_this.targeters.push(
 									new DomTargeter([{ selector: 'script[type^="searchspring/track/"]', emptyTarget: !1 }], function (target, elem) {
