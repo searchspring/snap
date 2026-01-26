@@ -254,10 +254,8 @@ export class SearchController extends AbstractController {
 			const controller = search.controller as SearchController;
 			const responseId = search.response.tracking.responseId;
 			if (controller.store.loaded && !controller.store.error) {
-				if (!search.response._cached) {
-					const data: RenderSchemaData = { responseId };
-					this.tracker.events[this.page.type].render({ data, siteId: this.config.globals?.siteId });
-				}
+				const data: RenderSchemaData = { responseId };
+				this.tracker.events[this.page.type].render({ data, siteId: this.config.globals?.siteId });
 
 				const config = search.controller.config as SearchControllerConfig;
 				const nonBackgroundFilters = search?.request?.filters?.filter((filter: SearchRequestModelFilter) => !filter.background);
@@ -688,7 +686,7 @@ export class SearchController extends AbstractController {
 				this.previousResults = [];
 				[meta, response] = await this.client[this.page.type](params);
 				const responseId = response.tracking.responseId;
-				this.events[responseId] = this.events[responseId] || { product: {}, banner: {} };
+				this.events[responseId] = { product: {}, banner: {} };
 			}
 
 			// MockClient will overwrite the client search() method and use SearchData to return mock data which already contains meta data
