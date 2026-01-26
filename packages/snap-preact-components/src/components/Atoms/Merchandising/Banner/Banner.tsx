@@ -3,12 +3,14 @@ import { Fragment, h } from 'preact';
 
 import { jsx, css } from '@emotion/react';
 import classnames from 'classnames';
+import { observer } from 'mobx-react';
+import { useCallback } from 'preact/hooks';
 
 import { ComponentProps, StylingCSS } from '../../../../types';
 import { Theme, useTheme, CacheProvider, withController, withTracking } from '../../../../providers';
 import { BannerContent, ContentType } from '@searchspring/snap-store-mobx';
 import type { SearchController, AutocompleteController, RecommendationController } from '@searchspring/snap-controller';
-import { observer } from 'mobx-react';
+
 const CSS = {
 	banner: () =>
 		css({
@@ -20,38 +22,38 @@ const CSS = {
 };
 
 export const Banner = withController<any>(
-	observer(
-		withTracking((properties: BannerProps): JSX.Element => {
-			const globalTheme: Theme = useTheme();
+	observer((properties: BannerProps): JSX.Element => {
+		const globalTheme: Theme = useTheme();
 
-			const props: BannerProps = {
-				// global theme
-				...globalTheme?.components?.banner,
-				// props
-				...properties,
-				...properties.theme?.components?.banner,
-			};
+		const props: BannerProps = {
+			// global theme
+			...globalTheme?.components?.banner,
+			// props
+			...properties,
+			...properties.theme?.components?.banner,
+		};
 
-			const { content, type, disableStyles, className, style } = props;
+		const { content, type, disableStyles, className, style } = props;
 
-			if (type === ContentType.INLINE) {
-				console.warn(`BannerType '${ContentType.INLINE}' is not supported in <Banner /> component`);
-				return <Fragment></Fragment>;
-			}
-			const styling: { css?: StylingCSS } = {};
-			if (!disableStyles) {
-				styling.css = [CSS.banner(), style];
-			} else if (style) {
-				styling.css = [style];
-			}
+		if (type === ContentType.INLINE) {
+			console.warn(`BannerType '${ContentType.INLINE}' is not supported in <Banner /> component`);
+			return <Fragment></Fragment>;
+		}
+		const styling: { css?: StylingCSS } = {};
+		if (!disableStyles) {
+			styling.css = [CSS.banner(), style];
+		} else if (style) {
+			styling.css = [style];
+		}
 
-			const banner = content?.[type]?.[0];
-			const value = banner?.value;
-			if (!type || !value) {
-				return <Fragment></Fragment>;
-			}
+		const banner = content?.[type]?.[0];
+		const value = banner?.value;
+		if (!type || !value) {
+			return <Fragment></Fragment>;
+		}
 
-			const Content = withTracking((trackingProps) => {
+		const Content = useCallback(
+			withTracking((trackingProps) => {
 				return (
 					<div
 						className={classnames('ss__banner', `ss__banner--${type}`, className)}
@@ -62,15 +64,16 @@ export const Banner = withController<any>(
 						}}
 					/>
 				);
-			});
+			}),
+			[value, type]
+		);
 
-			return (
-				<CacheProvider>
-					<Content {...props} />
-				</CacheProvider>
-			);
-		})
-	)
+		return (
+			<CacheProvider>
+				<Content {...props} />
+			</CacheProvider>
+		);
+	})
 );
 
 export interface BannerProps extends ComponentProps {
