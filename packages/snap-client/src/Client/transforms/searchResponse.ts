@@ -169,11 +169,7 @@ class Result implements SearchResponseModelResult {
 }
 
 export function transformSearchResponse(response: searchResponseType, request: SearchRequestModel | AutocompleteRequestModel) {
-	response.responseId = response.responseId;
 	return {
-		// @ts-ignore - temporary to be removed when auto beaconing is implemented
-		_cached: response._cached ?? false,
-		responseId: response.responseId,
 		...transformSearchResponse.pagination(response),
 		...transformSearchResponse.results(response),
 		...transformSearchResponse.filters(response),
