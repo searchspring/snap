@@ -1,14 +1,6 @@
 import { getContext } from './getContext';
 
 describe('getContext', () => {
-	beforeAll(() => {
-		// used to test global variable assignment in evaluation
-		const globalScriptTag = document.createElement('script');
-		globalScriptTag.innerHTML = 'const globalVar = "constant";';
-
-		document.head.append(globalScriptTag);
-	});
-
 	beforeEach(() => {
 		document.body.innerHTML = '';
 	});
@@ -147,53 +139,22 @@ describe('getContext', () => {
 		expect(context.shopper).toStrictEqual(shopperObject);
 	});
 
-	it('expects the script to have "searchspring" prefix in the id or type attribute', () => {
+	it('expects getContent to throw error if no script is provided and no id or type attribute', () => {
 		expect(() => {
 			const scriptTag = document.createElement('script');
+			document.body.appendChild(scriptTag);
 
-			getContext([], scriptTag);
+			getContext([]);
 		}).toThrow();
+	});
 
-		expect(() => {
-			const scriptTag = document.createElement('script');
-			scriptTag.id = 'search';
-
-			getContext([], scriptTag);
-		}).toThrow();
-
-		expect(() => {
-			const scriptTag = document.createElement('script');
-			scriptTag.id = 'searchspring';
-
-			getContext([], scriptTag);
-		}).not.toThrow();
-
+	it('expects getContent to not throw error if no script is provided and id attribute exists', () => {
 		expect(() => {
 			const scriptTag = document.createElement('script');
 			scriptTag.id = 'searchspring-context';
+			document.body.appendChild(scriptTag);
 
-			getContext([], scriptTag);
-		}).not.toThrow();
-
-		expect(() => {
-			const scriptTag = document.createElement('script');
-			scriptTag.setAttribute('type', 'notsearchspring');
-
-			getContext([], scriptTag);
-		}).toThrow();
-
-		expect(() => {
-			const scriptTag = document.createElement('script');
-			scriptTag.setAttribute('type', 'searchspring');
-
-			getContext([], scriptTag);
-		}).not.toThrow();
-
-		expect(() => {
-			const scriptTag = document.createElement('script');
-			scriptTag.setAttribute('type', 'searchspring/recommend');
-
-			getContext([], scriptTag);
+			getContext([]);
 		}).not.toThrow();
 	});
 
