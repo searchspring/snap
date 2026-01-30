@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.73.7](https://github.com/searchspring/snap/compare/v0.73.6...v0.73.7) (2026-01-30)
+
+### Bug Fixes
+
+- removed type requirement from getContext ([35662e4](https://github.com/searchspring/snap/commit/35662e45f5739c453e0e4aee49f82ebb49cbb91e))
+
 ## [0.73.6](https://github.com/searchspring/snap/compare/v0.73.5...v0.73.6) (2026-01-26)
 
 ### Bug Fixes
