@@ -1,4 +1,4 @@
-/*! For license information please see main.1d3cdbeb.iframe.bundle.js.LICENSE.txt */
+/*! For license information please see main.7a79a3b5.iframe.bundle.js.LICENSE.txt */
 (self.webpackChunk_searchspring_snap_preact_components = self.webpackChunk_searchspring_snap_preact_components || []).push([
 	[792],
 	{
@@ -44394,7 +44394,7 @@
 							((function Tracker_classCallCheck(a, n) {
 								if (!(a instanceof n)) throw new TypeError('Cannot call a class as a function');
 							})(this, Tracker),
-							((config = cjs_default()(Tracker_defaultConfig, config || {})).initiator = 'searchspring/' + config.framework + '/0.73.6'),
+							((config = cjs_default()(Tracker_defaultConfig, config || {})).initiator = 'searchspring/' + config.framework + '/0.73.7'),
 							'object' != typeof globals || 'string' != typeof globals.siteId)
 						)
 							throw new Error('Invalid config passed to tracker. The "siteId" attribute must be provided.');
@@ -44574,44 +44574,40 @@
 							(_this.localStorage = new StorageStore({ type: 'local', key: 'ss-' + _this.config.id })),
 							_this.localStorage.set('siteId', _this.globals.siteId),
 							(null !== (_window$searchspring = window.searchspring) && void 0 !== _window$searchspring && _window$searchspring.tracker) ||
-								((window.searchspring = window.searchspring || {}), (window.searchspring.tracker = _this), (window.searchspring.version = '0.73.6')),
+								((window.searchspring = window.searchspring || {}), (window.searchspring.tracker = _this), (window.searchspring.version = '0.73.7')),
 							setTimeout(function () {
 								_this.targeters.push(
 									new DomTargeter([{ selector: 'script[type^="searchspring/track/"]', emptyTarget: !1 }], function (target, elem) {
 										var _getContext = (function getContext() {
-												var _scriptElem$getAttrib,
-													_scriptElem$id,
-													_scriptElem$src,
+												var _script$id,
+													_script$src,
+													_script,
+													_script3,
 													_scriptInnerHTML$repl,
+													script,
 													evaluate = arguments.length > 0 && void 0 !== arguments[0] ? arguments[0] : [],
-													script = arguments.length > 1 ? arguments[1] : void 0;
-												if (
-													((script && 'string' != typeof script) ||
-														(script = Array.from(
-															document.querySelectorAll(script || 'script[id^=searchspring], script[src*="snapui.searchspring.io"]')
-														)
-															.sort(function (a, b) {
-																return a.innerHTML.length - b.innerHTML.length;
-															})
-															.pop()),
-													!script || 'object' != typeof script || 'SCRIPT' !== script.tagName)
-												)
-													throw new Error('getContext: did not find a script tag');
-												var scriptElem = script;
+													scriptOrSelector = arguments.length > 1 ? arguments[1] : void 0;
+												if (scriptOrSelector && 'string' != typeof scriptOrSelector)
+													scriptOrSelector && 'SCRIPT' === scriptOrSelector.tagName && (script = scriptOrSelector);
+												else {
+													var scripts = Array.from(
+														document.querySelectorAll(scriptOrSelector || 'script[id^=searchspring], script[src*="snapui.searchspring.io"]')
+													);
+													script = scripts
+														.sort(function (a, b) {
+															return a.innerHTML.length - b.innerHTML.length;
+														})
+														.pop();
+												}
+												if (!script) throw new Error('getContext: did not find a script tag');
 												if (
 													!(
-														(null !== (_scriptElem$getAttrib = scriptElem.getAttribute('type')) &&
-															void 0 !== _scriptElem$getAttrib &&
-															_scriptElem$getAttrib.match(/^searchspring/i)) ||
-														(null !== (_scriptElem$id = scriptElem.id) && void 0 !== _scriptElem$id && _scriptElem$id.match(/^searchspring/i)) ||
-														(null !== (_scriptElem$src = scriptElem.src) &&
-															void 0 !== _scriptElem$src &&
-															_scriptElem$src.match(/\/\/snapui.searchspring.io/i))
+														scriptOrSelector ||
+														(null !== (_script$id = script.id) && void 0 !== _script$id && _script$id.match(/^searchspring/i)) ||
+														(null !== (_script$src = script.src) && void 0 !== _script$src && _script$src.match(/\/\/snapui.searchspring.io/i))
 													)
 												)
-													throw new Error(
-														'getContext: did not find a script from Snap CDN or with attribute (type, id) starting with "searchspring"'
-													);
+													throw new Error('getContext: did not find a script from Snap CDN or with attribute \'id\' starting with "searchspring"');
 												if (
 													(evaluate && !Array.isArray(evaluate)) ||
 													(evaluate &&
@@ -44621,12 +44617,14 @@
 												)
 													throw new Error('getContext: first parameter must be an array of strings');
 												var attributeVariables = {};
-												Object.values(scriptElem.attributes).map(function (attr) {
-													var name = attr.nodeName;
-													evaluate.includes(name) && (attributeVariables[name] = scriptElem.getAttribute(name));
+												Object.values(null === (_script = script) || void 0 === _script ? void 0 : _script.attributes).map(function (attr) {
+													var _script2,
+														name = attr.nodeName;
+													evaluate.includes(name) &&
+														(attributeVariables[name] = null === (_script2 = script) || void 0 === _script2 ? void 0 : _script2.getAttribute(name));
 												});
 												var scriptVariables = {},
-													scriptInnerHTML = scriptElem.innerHTML,
+													scriptInnerHTML = null === (_script3 = script) || void 0 === _script3 ? void 0 : _script3.innerHTML,
 													scriptInnerVars =
 														null ===
 															(_scriptInnerHTML$repl = scriptInnerHTML
