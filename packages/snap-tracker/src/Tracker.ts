@@ -3,8 +3,8 @@ import deepmerge from 'deepmerge';
 import { StorageStore } from '@searchspring/snap-store-mobx';
 import { version, DomTargeter, getContext } from '@searchspring/snap-toolbox';
 import { AppMode } from '@searchspring/snap-toolbox';
-import { Beacon } from '@searchspring/beacon';
-import type { OrderTransactionSchemaData, Product, ProductPageviewSchemaData } from '@searchspring/beacon';
+import { Beacon } from '@athoscommerce/beacon';
+import type { OrderTransactionSchemaData, Product, ProductPageviewSchemaData } from '@athoscommerce/beacon';
 
 import {
 	TrackerGlobals,

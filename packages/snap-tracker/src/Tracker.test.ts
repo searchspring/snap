@@ -1,7 +1,7 @@
 import 'whatwg-fetch';
 import { Tracker } from './Tracker';
 import { TrackerConfig, TrackErrorEvent, OrderTransactionData } from './types';
-import type { BeaconConfig, Product } from '@searchspring/beacon';
+import type { BeaconConfig, Product } from '@athoscommerce/beacon';
 
 // mocks fetch so beacon client does not make network requests
 const fetchSpy = jest
