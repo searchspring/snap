@@ -2,8 +2,8 @@ import { h, ComponentType, FunctionComponent } from 'preact';
 import type { Banner, MerchandisingContentBanner, Product } from '@searchspring/snap-store-mobx';
 import type { SearchController, AutocompleteController, RecommendationController } from '@searchspring/snap-controller';
 import type { ContentType, BannerContent } from '@searchspring/snap-store-mobx';
-import { createImpressionObserver } from '../utilities';
-import { useEffect, useCallback } from 'preact/hooks';
+import { useIntersectionAdvanced } from '../hooks';
+import { useEffect, useCallback, useState, useRef } from 'preact/hooks';
 
 export const TRACKING_ATTRIBUTE = 'sstracking';
 interface WithTrackingProps {
@@ -18,6 +18,7 @@ interface WithTrackingProps {
 export function withTracking<Props extends WithTrackingProps>(WrappedComponent: ComponentType<Props>) {
 	const WithTracking: FunctionComponent<Props> = (props) => {
 		const { controller, result, banner, type, content, ...restProps } = props;
+		const [isMounted, setIsMounted] = useState(false);
 
 		if (props.trackingRef) {
 			// case where withTracking may get used more than once
@@ -32,7 +33,7 @@ export function withTracking<Props extends WithTrackingProps>(WrappedComponent: 
 			console.warn('Warning: No result or banner provided to withTracking');
 		}
 
-		let resetKey;
+		let resetKey: string | undefined;
 		if (controller?.type === 'search' || controller?.type === 'autocomplete') {
 			const urlManager = (controller as SearchController | AutocompleteController).urlManager;
 			resetKey = JSON.stringify({
@@ -51,16 +52,46 @@ export function withTracking<Props extends WithTrackingProps>(WrappedComponent: 
 			});
 		}
 
-		const { ref, inViewport } = createImpressionObserver({ resetKey });
-
-		if (inViewport) {
-			// TODO: add support for disabling tracking events via config like in ResultTracker
-			if (type && content && !result && ['search', 'autocomplete'].includes(controller?.type || '')) {
-				(controller as SearchController | AutocompleteController)?.track.banner.impression(content[type]![0] as MerchandisingContentBanner);
-			} else if (!result?.bundleSeed) {
-				controller?.track.product.impression((result || banner)!);
-			}
+		if (resetKey) {
+			resetKey += `-${isMounted}`;
+		} else {
+			resetKey = `${isMounted}`;
 		}
+
+		const ref = useRef<HTMLElement>(null);
+
+		if (isMounted) {
+			const inViewport = useIntersectionAdvanced(ref, {
+				resetKey,
+				fireOnce: false,
+				threshold: 0.7,
+				minVisibleTime: 1000,
+			});
+
+			useEffect(() => {
+				if (inViewport) {
+					// TODO: add support for disabling tracking events via config like in ResultTracker
+					if (type && content && !result && ['search', 'autocomplete'].includes(controller?.type || '')) {
+						(controller as SearchController | AutocompleteController)?.track.banner.impression(content[type]![0] as MerchandisingContentBanner);
+					} else if (!result?.bundleSeed) {
+						controller?.track.product.impression((result || banner)!);
+					}
+				}
+			}, [inViewport]);
+		}
+
+		const setRef = useCallback(
+			(node: any) => {
+				if (ref) {
+					// @ts-ignore - ref.current is read-only but we need to set it here
+					ref.current = node;
+					if (node) {
+						setIsMounted(true);
+					}
+				}
+			},
+			[ref]
+		);
 
 		const handleClick = useCallback(
 			(e: MouseEvent) => {
@@ -82,7 +113,7 @@ export function withTracking<Props extends WithTrackingProps>(WrappedComponent: 
 					currentRef.removeEventListener('click', handleClick, true);
 				};
 			}
-		}, [ref, handleClick]);
+		}, [ref, handleClick, isMounted]);
 		const trackingProps = {
 			...restProps,
 			controller,
@@ -90,7 +121,7 @@ export function withTracking<Props extends WithTrackingProps>(WrappedComponent: 
 			banner,
 			type,
 			content,
-			trackingRef: ref,
+			trackingRef: setRef,
 		};
 
 		return <WrappedComponent {...(trackingProps as Props)} />;
