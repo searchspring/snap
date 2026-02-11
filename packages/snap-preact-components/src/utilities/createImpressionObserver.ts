@@ -8,7 +8,7 @@ export function createImpressionObserver(options?: UseIntersectionOptions): {
 	inViewport: boolean;
 	updateRef: (el: HTMLElement | null) => void;
 } {
-	const ref = useRef<HTMLElement>(null);
+	const ref = useRef<HTMLElement | null>(null);
 	const { inViewport, updateRef } = useIntersectionAdvanced(ref, {
 		...options,
 		fireOnce: true,

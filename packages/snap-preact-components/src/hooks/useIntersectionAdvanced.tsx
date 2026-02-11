@@ -28,8 +28,10 @@ export const useIntersectionAdvanced = (
 	const [counter, setCounter] = useState(0);
 	const updateRef = (el: HTMLElement | null) => {
 		// setting ref.current does not update useEffect, counter used to force useEffect
-		ref.current = el;
-		setCounter((c) => c + 1);
+		if (!ref.current || ref.current !== el) {
+			ref.current = el;
+			setCounter((c) => c + 1);
+		}
 	};
 
 	// Reset state if resetKey has changed
@@ -150,7 +152,7 @@ export const useIntersectionAdvanced = (
 				observer.unobserve(ref.current);
 			}
 		};
-	}, [ref.current, resetKey, counter]);
+	}, [ref, resetKey, counter]);
 
 	return { inViewport: isIntersecting, updateRef };
 };

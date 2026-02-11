@@ -82,7 +82,7 @@ export function withTracking<Props extends WithTrackingProps>(WrappedComponent: 
 					currentRef.removeEventListener('click', handleClick, true);
 				};
 			}
-		}, [ref, ref.current, handleClick]);
+		}, [ref, handleClick]);
 		const trackingProps = {
 			...restProps,
 			controller,
@@ -90,11 +90,14 @@ export function withTracking<Props extends WithTrackingProps>(WrappedComponent: 
 			banner,
 			type,
 			content,
-			trackingRef: useCallback((el: HTMLElement | null) => {
-				if (!ref.current && el?.getAttribute(TRACKING_ATTRIBUTE) !== 'true') {
-					updateRef(el);
-				}
-			}, []),
+			trackingRef: useCallback(
+				(el: HTMLElement | null) => {
+					if (!ref.current && el?.getAttribute(TRACKING_ATTRIBUTE) !== 'true') {
+						updateRef(el);
+					}
+				},
+				[ref, updateRef]
+			),
 		};
 
 		return <WrappedComponent {...(trackingProps as Props)} />;
