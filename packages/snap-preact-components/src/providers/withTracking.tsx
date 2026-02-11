@@ -51,7 +51,7 @@ export function withTracking<Props extends WithTrackingProps>(WrappedComponent: 
 			});
 		}
 
-		const { ref, inViewport } = createImpressionObserver({ resetKey });
+		const { ref, inViewport, updateRef } = createImpressionObserver({ resetKey });
 
 		if (inViewport) {
 			// TODO: add support for disabling tracking events via config like in ResultTracker
@@ -82,7 +82,7 @@ export function withTracking<Props extends WithTrackingProps>(WrappedComponent: 
 					currentRef.removeEventListener('click', handleClick, true);
 				};
 			}
-		}, [ref, handleClick]);
+		}, [ref, ref.current, handleClick]);
 		const trackingProps = {
 			...restProps,
 			controller,
@@ -90,7 +90,11 @@ export function withTracking<Props extends WithTrackingProps>(WrappedComponent: 
 			banner,
 			type,
 			content,
-			trackingRef: ref,
+			trackingRef: useCallback((el: HTMLElement | null) => {
+				if (!ref.current && el?.getAttribute(TRACKING_ATTRIBUTE) !== 'true') {
+					updateRef(el);
+				}
+			}, []),
 		};
 
 		return <WrappedComponent {...(trackingProps as Props)} />;

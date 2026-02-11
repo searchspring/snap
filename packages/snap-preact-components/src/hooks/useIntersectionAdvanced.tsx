@@ -9,7 +9,10 @@ export interface UseIntersectionOptions {
 }
 
 const VISIBILITY_POLL_INTERVAL = 250;
-export const useIntersectionAdvanced = (ref: MutableRef<HTMLElement | null>, options: UseIntersectionOptions = {}): boolean => {
+export const useIntersectionAdvanced = (
+	ref: MutableRef<HTMLElement | null>,
+	options: UseIntersectionOptions = {}
+): { inViewport: boolean; updateRef: (el: HTMLElement | null) => void } => {
 	const { rootMargin = '0px', fireOnce = false, threshold = 0, minVisibleTime = 0, resetKey } = options;
 	// State and setter for storing whether element is visible
 	const [isIntersecting, setIntersecting] = useState<boolean>(false);
@@ -22,6 +25,13 @@ export const useIntersectionAdvanced = (ref: MutableRef<HTMLElement | null>, opt
 	// Track the last reset key to detect changes
 	const lastResetKeyRef = useRef<string | undefined>(resetKey);
 
+	const [counter, setCounter] = useState(0);
+	const updateRef = (el: HTMLElement | null) => {
+		// setting ref.current does not update useEffect, counter used to force useEffect
+		ref.current = el;
+		setCounter((c) => c + 1);
+	};
+
 	// Reset state if resetKey has changed
 	if (resetKey !== lastResetKeyRef.current) {
 		setIntersecting(false);
@@ -31,7 +41,7 @@ export const useIntersectionAdvanced = (ref: MutableRef<HTMLElement | null>, opt
 		}
 		visibleStartRef.current = null;
 		lastResetKeyRef.current = resetKey;
-		return false;
+		return { inViewport: false, updateRef };
 	}
 
 	useEffect(() => {
@@ -140,9 +150,9 @@ export const useIntersectionAdvanced = (ref: MutableRef<HTMLElement | null>, opt
 				observer.unobserve(ref.current);
 			}
 		};
-	}, [ref, resetKey]);
+	}, [ref.current, resetKey, counter]);
 
-	return isIntersecting;
+	return { inViewport: isIntersecting, updateRef };
 };
 
 function elementIsVisible(el: HTMLElement): boolean {
