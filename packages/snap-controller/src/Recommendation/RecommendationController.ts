@@ -118,11 +118,16 @@ export class RecommendationController extends AbstractController {
 				}
 				const responseId = result.responseId;
 				if (this.events[responseId]?.product[result.id]?.productClickThrough) return;
+				const type = (['product', 'banner'].includes(result.type) ? result.type : 'product') as ResultProductType;
 				const beaconResult: ClickthroughResultsInner = {
-					type: (['product', 'banner'].includes(result.type) ? result.type : 'product') as ResultProductType,
-					uid: '' + result.id,
-					parentId: '' + result.id,
-					sku: '' + result.mappings.core?.sku,
+					type,
+					uid: result.id ? '' + result.id : '',
+					...(type === 'product'
+						? {
+								parentId: result.id ? '' + result.id : '',
+								sku: result.mappings.core?.sku ? '' + result.mappings.core?.sku : undefined,
+						  }
+						: {}),
 				};
 				const data: RecommendationsClickthroughSchemaData = {
 					tag: this.store.profile.tag,
@@ -171,11 +176,16 @@ export class RecommendationController extends AbstractController {
 				if (this.events[responseId]?.product[result.id]?.impression) {
 					return;
 				}
+				const type = (['product', 'banner'].includes(result.type) ? result.type : 'product') as ResultProductType;
 				const item: ResultsInner = {
-					type: (['product', 'banner'].includes(result.type) ? result.type : 'product') as ResultProductType,
-					uid: '' + result.id,
-					parentId: '' + result.id,
-					sku: '' + result.mappings.core?.sku,
+					type,
+					uid: result.id ? '' + result.id : '',
+					...(type === 'product'
+						? {
+								parentId: result.id ? '' + result.id : '',
+								sku: result.mappings.core?.sku ? '' + result.mappings.core?.sku : undefined,
+						  }
+						: {}),
 				};
 				const data: RecommendationsImpressionSchemaData = {
 					tag: this.store.profile.tag,
@@ -370,7 +380,7 @@ export class RecommendationController extends AbstractController {
 	};
 
 	addToCart = async (_products: Product[] | Product): Promise<void> => {
-		const products = typeof (_products as Product[]).slice == 'function' ? (_products as Product[]).slice() : [_products];
+		const products = typeof (_products as Product[])?.slice == 'function' ? (_products as Product[]).slice() : [_products];
 		if (!_products || products.length === 0) {
 			this.log.warn('No products provided to recommendation controller.addToCart');
 			return;

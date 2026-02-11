@@ -1,12 +1,9 @@
-import 'whatwg-fetch';
 import { Tracker } from './Tracker';
 import { TrackerConfig, TrackErrorEvent, OrderTransactionData } from './types';
 import type { BeaconConfig, Product } from '@athoscommerce/beacon';
 
+const PREFLIGHT_DEBOUNCE_TIMEOUT = 300;
 // mocks fetch so beacon client does not make network requests
-const fetchSpy = jest
-	.spyOn(global.window, 'fetch')
-	.mockImplementation(() => Promise.resolve({ status: 200, json: () => Promise.resolve({}) } as Response));
 
 const globals = {
 	siteId: 'xxxzzz',
@@ -378,49 +375,37 @@ describe('Tracker', () => {
 		expect(devTracker.mode).toBe('development');
 	});
 
-	it('will make preflight request when there are cart products set', () => {
+	it('will make preflight request when there are cart products set', async () => {
 		const tracker = new Tracker(globals, config);
-		expect(fetchSpy).toHaveBeenCalledTimes(0);
-
+		const sendPreflight = jest.spyOn(tracker, 'sendPreflight');
 		// simulate product cart tracking
 		const productData = [{ parentId: 'product123', uid: 'product123', sku: 'product123', qty: 1, price: 10.99 }];
 		tracker.storage.cart.set(productData);
-
-		const sendPreflight = jest.spyOn(tracker, 'sendPreflight');
-		tracker.sendPreflight();
+		await new Promise((resolve) => setTimeout(resolve, PREFLIGHT_DEBOUNCE_TIMEOUT));
 
 		expect(sendPreflight).toHaveBeenCalledTimes(1);
-		expect(fetchSpy).toHaveBeenCalledTimes(2);
 	});
 
-	it('will make preflight request when there are viewed products set', () => {
+	it('will make preflight request when there are viewed products set', async () => {
 		const tracker = new Tracker(globals, config);
-		expect(fetchSpy).toHaveBeenCalledTimes(0);
-
+		const sendPreflight = jest.spyOn(tracker, 'sendPreflight');
 		// simulate product view tracking
 		const productData = { sku: 'product123' };
 		tracker.track.product.view(productData);
-
-		const sendPreflight = jest.spyOn(tracker, 'sendPreflight');
-		tracker.sendPreflight();
+		await new Promise((resolve) => setTimeout(resolve, PREFLIGHT_DEBOUNCE_TIMEOUT));
 
 		expect(sendPreflight).toHaveBeenCalledTimes(1);
-		expect(fetchSpy).toHaveBeenCalledTimes(2);
 	});
 
-	it('will make preflight request when there is a shopperId set', () => {
+	it('will make preflight request when there is a shopperId set', async () => {
 		const tracker = new Tracker(globals, config);
-		expect(fetchSpy).toHaveBeenCalledTimes(0);
-
+		const sendPreflight = jest.spyOn(tracker, 'sendPreflight');
 		// simulate shopper login
 		const shopperData = { id: 'shopper123' };
 		tracker.track.shopper.login(shopperData);
-
-		const sendPreflight = jest.spyOn(tracker, 'sendPreflight');
-		tracker.sendPreflight();
+		await new Promise((resolve) => setTimeout(resolve, PREFLIGHT_DEBOUNCE_TIMEOUT));
 
 		expect(sendPreflight).toHaveBeenCalledTimes(1);
-		expect(fetchSpy).toHaveBeenCalledTimes(2);
 	});
 
 	it('can retarget DOM elements', () => {
@@ -607,13 +592,13 @@ describe('Tracker', () => {
 
 describe('Cart inferance from context', () => {
 	let tracker: Tracker;
-	const mockFetchApi = jest.fn().mockResolvedValue(Promise.resolve({ status: 200, json: () => Promise.resolve({}) }));
 	let config: TrackerConfig & BeaconConfig;
-
+	let mockFetchApi: jest.Mock;
 	beforeEach(() => {
 		jest.clearAllMocks();
 		resetAllCookies();
 		localStorageMock.clear();
+		mockFetchApi = jest.fn().mockResolvedValue(Promise.resolve({ status: 200, json: () => Promise.resolve({}) }));
 		config = { mode: 'development', apis: { fetch: mockFetchApi } };
 		tracker = new Tracker(globals, config);
 	});
@@ -644,7 +629,7 @@ describe('Cart inferance from context', () => {
 			},
 			config
 		);
-		await new Promise((resolve) => setTimeout(resolve, 0));
+		await new Promise((resolve) => setTimeout(resolve, PREFLIGHT_DEBOUNCE_TIMEOUT));
 
 		expect(tracker.storage.cart.get()).toEqual(cart);
 		expect(mockFetchApi).toHaveBeenCalledWith(expect.stringContaining('/cart/add'), expect.any(Object));
@@ -662,7 +647,7 @@ describe('Cart inferance from context', () => {
 			},
 			config
 		);
-		await new Promise((resolve) => setTimeout(resolve, 0));
+		await new Promise((resolve) => setTimeout(resolve, PREFLIGHT_DEBOUNCE_TIMEOUT));
 		expect(tracker.storage.cart.get()).toEqual(cart2);
 		expect(mockFetchApi).toHaveBeenCalledWith(expect.stringContaining('/cart/add'), expect.any(Object));
 		expect(mockFetchApi).toHaveBeenCalledWith(expect.stringContaining('/preflightCache'), expect.any(Object));
@@ -678,7 +663,7 @@ describe('Cart inferance from context', () => {
 			},
 			config
 		);
-		await new Promise((resolve) => setTimeout(resolve, 0));
+		await new Promise((resolve) => setTimeout(resolve, PREFLIGHT_DEBOUNCE_TIMEOUT));
 		expect(tracker.storage.cart.get()).toEqual(cart3);
 		expect(mockFetchApi).toHaveBeenCalledWith(expect.stringContaining('/cart/add'), expect.any(Object));
 		expect(mockFetchApi).toHaveBeenCalledWith(expect.stringContaining('/preflightCache'), expect.any(Object));
@@ -694,7 +679,7 @@ describe('Cart inferance from context', () => {
 			},
 			config
 		);
-		await new Promise((resolve) => setTimeout(resolve, 0));
+		await new Promise((resolve) => setTimeout(resolve, PREFLIGHT_DEBOUNCE_TIMEOUT));
 		expect(tracker.storage.cart.get()).toEqual(cart4);
 		expect(mockFetchApi).toHaveBeenCalledWith(expect.stringContaining('/cart/remove'), expect.any(Object));
 		expect(mockFetchApi).toHaveBeenCalledWith(expect.stringContaining('/preflightCache'), expect.any(Object));
@@ -710,7 +695,7 @@ describe('Cart inferance from context', () => {
 			},
 			config
 		);
-		await new Promise((resolve) => setTimeout(resolve, 0));
+		await new Promise((resolve) => setTimeout(resolve, PREFLIGHT_DEBOUNCE_TIMEOUT));
 		expect(tracker.storage.cart.get()).toEqual(cart4); // should be previous cart
 		expect(mockFetchApi).toHaveBeenCalledWith(expect.stringContaining('/log/snap'), expect.any(Object));
 		expect(mockFetchApi).not.toHaveBeenCalledWith(expect.stringContaining('/preflightCache'), expect.any(Object));
@@ -726,7 +711,7 @@ describe('Cart inferance from context', () => {
 			},
 			config
 		);
-		await new Promise((resolve) => setTimeout(resolve, 0));
+		await new Promise((resolve) => setTimeout(resolve, PREFLIGHT_DEBOUNCE_TIMEOUT));
 		expect(tracker.storage.cart.get()).toEqual(cart6);
 		expect(mockFetchApi).toHaveBeenCalledWith(expect.stringContaining('/cart/remove'), expect.any(Object));
 		expect(mockFetchApi).toHaveBeenCalledWith(expect.stringContaining('/preflightCache'), expect.any(Object));
@@ -743,7 +728,7 @@ describe('Cart inferance from context', () => {
 			},
 			config
 		);
-		await new Promise((resolve) => setTimeout(resolve, 0));
+		await new Promise((resolve) => setTimeout(resolve, PREFLIGHT_DEBOUNCE_TIMEOUT));
 		expect(tracker.storage.cart.get()).toEqual(cart7);
 		expect(mockFetchApi).toHaveBeenCalledWith(expect.stringContaining('/cart/remove'), expect.any(Object));
 		expect(mockFetchApi).toHaveBeenCalledWith(expect.stringContaining('/preflightCache'), expect.any(Object));

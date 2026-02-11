@@ -455,11 +455,16 @@ export class SearchController extends AbstractController {
 				// store position data or empty object
 				this.storage.set('scrollMap', scrollMap);
 
+				const type = (['product', 'banner'].includes(result.type) ? result.type : 'product') as ResultProductType;
 				const item: ClickthroughResultsInner = {
-					type: (['product', 'banner'].includes(result.type) ? result.type : 'product') as ResultProductType,
-					uid: '' + result.id,
-					parentId: '' + result.id,
-					sku: '' + result.mappings.core?.sku,
+					type,
+					uid: result.id ? '' + result.id : '',
+					...(type === 'product'
+						? {
+								parentId: result.id ? '' + result.id : '',
+								sku: result.mappings.core?.sku ? '' + result.mappings.core?.sku : undefined,
+						  }
+						: {}),
 				};
 
 				const data: ClickthroughSchemaData = {
@@ -506,11 +511,16 @@ export class SearchController extends AbstractController {
 				if (this.events[responseId]?.product[result.id]?.impression) {
 					return;
 				}
+				const type = (['product', 'banner'].includes(result.type) ? result.type : 'product') as ResultProductType;
 				const item: ResultsInner = {
-					type: (['product', 'banner'].includes(result.type) ? result.type : 'product') as ResultProductType,
-					uid: '' + result.id,
-					parentId: '' + result.id,
-					sku: '' + result.mappings.core?.sku,
+					type,
+					uid: result.id ? '' + result.id : '',
+					...(type === 'product'
+						? {
+								parentId: result.id ? '' + result.id : '',
+								sku: result.mappings.core?.sku ? '' + result.mappings.core?.sku : undefined,
+						  }
+						: {}),
 				};
 				const data: ImpressionSchemaData = {
 					responseId,
@@ -867,9 +877,17 @@ export function generateHrefSelector(element: HTMLElement, href: string, levels 
 	let elem: HTMLElement | null = element;
 
 	while (elem && level <= levels) {
-		// check within
-		const selector = window?.CSS?.escape ? window.CSS.escape(`[href*="${href}"]`) : `[href*="${href}"]`;
-		const innerHrefElem = elem.querySelector(selector) as HTMLElement;
+		let innerHrefElem: HTMLElement | null = null;
+		try {
+			innerHrefElem = elem.querySelector(`[href*="${href}"]`);
+		} catch (e) {
+			if (window?.CSS?.escape) {
+				try {
+					innerHrefElem = elem.querySelector(window.CSS.escape(`[href*="${href}"]`));
+				} catch {}
+			}
+		}
+
 		if (innerHrefElem) {
 			// innerHrefElem was found! now get selectors up to elem that contained it
 			let selector = '';

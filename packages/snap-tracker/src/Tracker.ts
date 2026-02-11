@@ -61,6 +61,10 @@ export class Tracker extends Beacon {
 
 		this.localStorage.set('siteId', this.globals.siteId);
 
+		if ((this.globals as TrackerGlobals).currency) {
+			this.setCurrency((this.globals as TrackerGlobals).currency!);
+		}
+
 		if (!window.searchspring?.tracker) {
 			window.searchspring = window.searchspring || {};
 			window.searchspring.tracker = this;
