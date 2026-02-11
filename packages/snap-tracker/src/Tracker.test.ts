@@ -598,7 +598,10 @@ describe('Cart inferance from context', () => {
 		jest.clearAllMocks();
 		resetAllCookies();
 		localStorageMock.clear();
-		mockFetchApi = jest.fn().mockResolvedValue(Promise.resolve({ status: 200, json: () => Promise.resolve({}) }));
+		mockFetchApi = jest.fn().mockResolvedValue({
+			status: 200,
+			json: () => Promise.resolve({}),
+		} as Response);
 		config = { mode: 'development', apis: { fetch: mockFetchApi } };
 		tracker = new Tracker(globals, config);
 	});
