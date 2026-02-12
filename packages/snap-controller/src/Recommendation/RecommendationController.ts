@@ -15,8 +15,7 @@ import {
 } from '@athoscommerce/beacon';
 import type { Banner, RecommendationStore } from '@searchspring/snap-store-mobx';
 import type { RecommendRequestModel } from '@searchspring/snap-client';
-import type { RecommendationControllerConfig, ControllerServices, ContextVariables, AfterStoreObj } from '../types';
-import type { Next } from '@searchspring/snap-event-manager';
+import type { RecommendationControllerConfig, ControllerServices, ContextVariables } from '../types';
 import { CLICK_DUPLICATION_TIMEOUT, isClickWithinProductLink } from '../utils/isClickWithinProductLink';
 
 type RecommendationTrackMethods = {
@@ -80,16 +79,6 @@ export class RecommendationController extends AbstractController {
 		// deep merge config with defaults
 		this.config = deepmerge(defaultConfig, this.config);
 		this.store.setConfig(this.config);
-
-		this.eventManager.on('afterStore', async (search: AfterStoreObj, next: Next): Promise<void | boolean> => {
-			await next();
-			const controller = search.controller as RecommendationController;
-			const responseId = search.response.responseId;
-			if (controller.store.loaded && !controller.store.error) {
-				const data: RecommendationsRenderSchemaData = { responseId, tag: controller.store.profile.tag };
-				this.config.beacon?.enabled && this.tracker.events.recommendations.render({ data, siteId: this.config.globals?.siteId });
-			}
-		});
 
 		// add 'afterStore' middleware
 		// this.eventManager.on('afterStore', async (recommend: AfterStoreObj, next: Next): Promise<void | boolean> => {
@@ -310,6 +299,9 @@ export class RecommendationController extends AbstractController {
 
 			// update the store
 			this.store.update(response);
+
+			const data: RecommendationsRenderSchemaData = { responseId, tag: this.store.profile.tag };
+			this.config.beacon?.enabled && this.tracker.events.recommendations.render({ data, siteId: this.config.globals?.siteId });
 
 			const afterStoreProfile = this.profiler.create({ type: 'event', name: 'afterStore', context: params }).start();
 

@@ -126,16 +126,6 @@ export class AutocompleteController extends AbstractController {
 			key: `ss-controller-${this.config.id}`,
 		});
 
-		this.eventManager.on('afterStore', async (search: AfterStoreObj, next: Next): Promise<void | boolean> => {
-			await next();
-			const controller = search.controller as AutocompleteController;
-			const responseId = search.response.tracking.responseId;
-			if (controller.store.loaded && !controller.store.error) {
-				const data: RenderSchemaData = { responseId };
-				this.config.beacon?.enabled && this.tracker.events.autocomplete.render({ data, siteId: this.config.globals?.siteId });
-			}
-		});
-
 		// add 'afterSearch' middleware
 		this.eventManager.on('afterSearch', async (ac: AutocompleteAfterSearchObj, next: Next): Promise<void | boolean> => {
 			await next();
@@ -859,6 +849,9 @@ export class AutocompleteController extends AbstractController {
 
 			// update the store
 			this.store.update(response);
+
+			const data: RenderSchemaData = { responseId };
+			this.config.beacon?.enabled && this.tracker.events.autocomplete.render({ data, siteId: this.config.globals?.siteId });
 
 			const afterStoreProfile = this.profiler.create({ type: 'event', name: 'afterStore', context: params }).start();
 
