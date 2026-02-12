@@ -881,11 +881,9 @@ export function generateHrefSelector(element: HTMLElement, href: string, levels 
 		try {
 			innerHrefElem = elem.querySelector(`[href*="${href}"]`);
 		} catch (e) {
-			if (window?.CSS?.escape) {
-				try {
-					innerHrefElem = elem.querySelector(window.CSS.escape(`[href*="${href}"]`));
-				} catch {}
-			}
+			try {
+				innerHrefElem = elem.querySelector(cssEscape(`[href*="${href}"]`));
+			} catch {}
 		}
 
 		if (innerHrefElem) {
