@@ -337,11 +337,11 @@ async function readyTheController(
 		instance.uses.forEach((attachements) => controller.use(attachements));
 		instance.plugins.forEach((plugin) => controller.plugin(plugin.func, ...plugin.args));
 		instance.middleware.forEach((middleware) => controller.on(middleware.event, ...middleware.func));
-	} else {
-		// run a search on the controller if it is not currently
-		if (!controller.store.loading) {
-			await controller.search();
-		}
+	}
+
+	// run a search on the controller if it is not currently
+	if (!controller.store.loading) {
+		await controller.search();
 	}
 
 	controller.addTargeter(instance.targeter);
