@@ -4,8 +4,8 @@ export const CLICK_DUPLICATION_TIMEOUT = 300;
 export const CLICK_THROUGH_CLOSEST_MAX_LEVELS = 12;
 
 export const isClickWithinProductLink = (e: MouseEvent, result: Product): boolean => {
-	const resultCoreUrl = (result as Product)?.display?.mappings.core?.url || '';
-	const resultDisplayUrl = (result as Product)?.mappings.core?.url || '';
+	const resultDisplayUrl = (result as Product)?.display?.mappings.core?.url || '';
+	const resultCoreUrl = (result as Product)?.mappings.core?.url || '';
 
 	// Get the composed path to handle shadow DOM elements
 	const path = e.composedPath ? e.composedPath() : [e.target];
