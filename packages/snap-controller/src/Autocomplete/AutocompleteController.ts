@@ -168,7 +168,7 @@ export class AutocompleteController extends AbstractController {
 	track: AutocompleteTrackMethods = {
 		banner: {
 			impression: (_banner): void => {
-				if (!_banner?.uid) {
+				if (!_banner) {
 					this.log.warn('No banner provided to track.banner.impression');
 					return;
 				}
@@ -189,7 +189,7 @@ export class AutocompleteController extends AbstractController {
 				this.events[responseId].banner[uid].impression = true;
 			},
 			click: (e: MouseEvent, banner: MerchandisingContentBanner): void => {
-				if (!banner?.uid) {
+				if (!banner) {
 					this.log.warn('No banner provided to track.banner.click');
 					return;
 				}

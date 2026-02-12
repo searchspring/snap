@@ -381,7 +381,7 @@ export class SearchController extends AbstractController {
 				this.events[responseId].banner[uid].impression = true;
 			},
 			click: (e: MouseEvent, banner: MerchandisingContentBanner): void => {
-				if (!banner?.uid) {
+				if (!banner) {
 					this.log.warn('No banner provided to track.banner.click');
 					return;
 				}
