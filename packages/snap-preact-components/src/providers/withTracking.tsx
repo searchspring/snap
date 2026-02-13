@@ -92,7 +92,7 @@ export function withTracking<Props extends WithTrackingProps>(WrappedComponent: 
 			content,
 			trackingRef: useCallback(
 				(el: HTMLElement | null) => {
-					if (!ref.current && el?.getAttribute(TRACKING_ATTRIBUTE) !== 'true') {
+					if (!ref.current) {
 						updateRef(el);
 					}
 				},
