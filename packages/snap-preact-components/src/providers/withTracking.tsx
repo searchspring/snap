@@ -34,10 +34,14 @@ export function withTracking<Props extends WithTrackingProps>(WrappedComponent: 
 
 		let resetKey;
 		if (controller?.type === 'search' || controller?.type === 'autocomplete') {
-			const urlManager = (controller as SearchController | AutocompleteController).urlManager;
+			const searchController = controller as SearchController | AutocompleteController;
+			const urlManager = searchController.urlManager;
+			const isInfinite = (searchController as SearchController).config?.settings?.infinite;
 			resetKey = JSON.stringify({
 				q: urlManager.state.query,
-				p: urlManager.state.page,
+				// exclude page from resetKey when infinite scroll is enabled
+				// since results are concatenated, page changes should not reset impression tracking
+				...(!isInfinite && { p: urlManager.state.page }),
 				ps: urlManager.state.pageSize,
 				s: urlManager.state.sort,
 				f: urlManager.state.filter,
