@@ -20,6 +20,8 @@ export const BundleSelector = observer((properties: BundleSelectorProps): JSX.El
 
 	const { className, children, checked, icon, seedText, seed, hideCheckboxes, onCheck } = props;
 
+	const checkboxClickPadding = isNaN(Number(props.checkboxClickPadding)) ? props.checkboxClickPadding : `${props.checkboxClickPadding}px`;
+
 	const subProps: BundleSelectorSubProps = {
 		icon: {
 			// default props
@@ -52,7 +54,15 @@ export const BundleSelector = observer((properties: BundleSelectorProps): JSX.El
 			)}
 		>
 			<div className="ss__recommendation-bundle__wrapper__selector__result-wrapper">
-				{!hideCheckboxes && <Checkbox {...subProps.checkbox} />}
+				{!hideCheckboxes && (
+					<div
+						style={{ padding: checkboxClickPadding, display: 'inline-flex', cursor: 'pointer' }}
+						onClick={onCheck}
+						className={`ss__recommendation-bundle__wrapper__selector__result-wrapper__checkbox-wrapper`}
+					>
+						<Checkbox {...subProps.checkbox} />
+					</div>
+				)}
 				{seedText && <div className={'ss__recommendation-bundle__wrapper__selector__result-wrapper__seed-badge'}>{seedText}</div>}
 				{children}
 			</div>
@@ -72,6 +82,7 @@ export interface BundleSelectorProps extends ComponentProps {
 	seedText?: string;
 	seed?: boolean;
 	hideCheckboxes?: boolean;
+	checkboxClickPadding?: string | number;
 	onCheck?: (e: React.MouseEvent<HTMLElement, MouseEvent>) => void;
 	icon?: string | Partial<IconProps> | boolean;
 }
