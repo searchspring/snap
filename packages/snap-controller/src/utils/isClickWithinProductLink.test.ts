@@ -50,16 +50,14 @@ describe('isClickWithinProductLink', () => {
 		const parentElement = document.createElement('a');
 		parentElement.href = 'https://www.example.com/product/123';
 
-		const path: HTMLElement[] = [];
+		const path: HTMLElement[] = [parentElement];
 		let currentElement: HTMLElement = parentElement;
 		for (let i = 0; i < CLICK_THROUGH_CLOSEST_MAX_LEVELS; i++) {
 			const childElement = document.createElement('span');
 			currentElement.appendChild(childElement);
 			currentElement = childElement;
-			path.push(currentElement);
+			path.unshift(currentElement);
 		}
-		// Add the parent element beyond the max levels
-		path.push(parentElement);
 
 		// Mock composedPath to return path that has the link beyond max levels
 		Object.defineProperty(e, 'composedPath', {
@@ -76,16 +74,14 @@ describe('isClickWithinProductLink', () => {
 		const parentElement = document.createElement('a');
 		parentElement.href = 'https://www.example.com/product/123';
 
-		const path: HTMLElement[] = [];
+		const path: HTMLElement[] = [parentElement];
 		let currentElement: HTMLElement = parentElement;
 		for (let i = 0; i < CLICK_THROUGH_CLOSEST_MAX_LEVELS - 1; i++) {
 			const childElement = document.createElement('span');
 			currentElement.appendChild(childElement);
 			currentElement = childElement;
-			path.push(currentElement);
+			path.unshift(currentElement);
 		}
-		// Add the parent element at the boundary of max levels
-		path.push(parentElement);
 
 		// Mock composedPath to return path with link at max level boundary
 		Object.defineProperty(e, 'composedPath', {
