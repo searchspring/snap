@@ -93,7 +93,7 @@ export function withTracking<Props extends WithTrackingProps>(WrappedComponent: 
 					currentRef.removeEventListener('click', handleClick, true);
 				};
 			}
-		}, [ref, handleClick]);
+		}, [handleClick]);
 		const trackingProps = {
 			...restProps,
 			controller,
@@ -107,7 +107,7 @@ export function withTracking<Props extends WithTrackingProps>(WrappedComponent: 
 						updateRef(el);
 					}
 				},
-				[ref, updateRef]
+				[updateRef]
 			),
 		};
 
