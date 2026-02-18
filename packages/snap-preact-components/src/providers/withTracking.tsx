@@ -38,20 +38,35 @@ export function withTracking<Props extends WithTrackingProps>(WrappedComponent: 
 		// Each Product/Banner gets a new responseId per search response, so this naturally
 		// resets when query/sort/filters change without needing global controller state.
 		// Calling updateRef(ref.current) re-observes the same element with fresh state.
-		const resultIdentity = (result || banner)?.responseId;
+		const resultIdentity = (result || banner || (type && content?.[type]?.[0]))?.responseId;
 		const prevIdentityRef = useRef(resultIdentity);
-		const identityChanged = prevIdentityRef.current !== resultIdentity;
+
+		// Tracks whether we're waiting for the observer to reset after an identity change.
+		// Set synchronously during render to block impressions immediately when identity
+		// changes, preventing a stale inViewport=true from firing before the observer resets.
+		const awaitingReobservationRef = useRef(false);
+		if (prevIdentityRef.current !== resultIdentity) {
+			awaitingReobservationRef.current = true;
+		}
 
 		useEffect(() => {
-			if (identityChanged) {
+			if (prevIdentityRef.current !== resultIdentity) {
 				prevIdentityRef.current = resultIdentity;
 				updateRef(ref.current);
 			}
 		}, [resultIdentity, updateRef]);
 
-		if (inViewport && !identityChanged) {
+		useEffect(() => {
+			if (awaitingReobservationRef.current && !inViewport) {
+				awaitingReobservationRef.current = false;
+			}
+		}, [inViewport]);
+
+		const isBannerTracking = type && content && !result && ['search', 'autocomplete'].includes(controller?.type || '');
+
+		if (inViewport && !awaitingReobservationRef.current) {
 			// TODO: add support for disabling tracking events via config like in ResultTracker
-			if (type && content && !result && ['search', 'autocomplete'].includes(controller?.type || '')) {
+			if (isBannerTracking) {
 				(controller as SearchController | AutocompleteController)?.track.banner.impression(content[type]![0] as MerchandisingContentBanner);
 			} else if (!result?.bundleSeed) {
 				controller?.track.product.impression((result || banner)!);
@@ -60,7 +75,7 @@ export function withTracking<Props extends WithTrackingProps>(WrappedComponent: 
 
 		const handleClick = useCallback(
 			(e: MouseEvent) => {
-				if (type && content && !result && ['search', 'autocomplete'].includes(controller?.type || '')) {
+				if (isBannerTracking) {
 					(controller as SearchController | AutocompleteController)?.track.banner.click(e, content[type]![0] as MerchandisingContentBanner);
 				} else {
 					controller?.track.product.click(e, (result || banner)!);
