@@ -3,7 +3,7 @@ import type { Banner, MerchandisingContentBanner, Product } from '@searchspring/
 import type { SearchController, AutocompleteController, RecommendationController } from '@searchspring/snap-controller';
 import type { ContentType, BannerContent } from '@searchspring/snap-store-mobx';
 import { createImpressionObserver } from '../utilities';
-import { useEffect, useCallback } from 'preact/hooks';
+import { useEffect, useCallback, useRef } from 'preact/hooks';
 
 export const TRACKING_ATTRIBUTE = 'sstracking';
 interface WithTrackingProps {
@@ -32,32 +32,24 @@ export function withTracking<Props extends WithTrackingProps>(WrappedComponent: 
 			console.warn('Warning: No result or banner provided to withTracking');
 		}
 
-		let resetKey;
-		if (controller?.type === 'search' || controller?.type === 'autocomplete') {
-			const searchController = controller as SearchController | AutocompleteController;
-			const urlManager = searchController.urlManager;
-			const isInfinite = (searchController as SearchController).config?.settings?.infinite;
-			resetKey = JSON.stringify({
-				q: urlManager.state.query,
-				// exclude page from resetKey when infinite scroll is enabled
-				// since results are concatenated, page changes should not reset impression tracking
-				...(!isInfinite && { p: urlManager.state.page }),
-				ps: urlManager.state.pageSize,
-				s: urlManager.state.sort,
-				f: urlManager.state.filter,
-			});
-		} else if (controller?.type === 'recommendation') {
-			// For recommendations, use a combination of tag and other relevant state
-			const recStore = (controller as RecommendationController).store;
-			resetKey = JSON.stringify({
-				tag: recStore.profile?.tag,
-				ids: recStore.results.map((result) => result.id).join(','),
-			});
-		}
+		const { ref, inViewport, updateRef } = createImpressionObserver();
 
-		const { ref, inViewport, updateRef } = createImpressionObserver({ resetKey });
+		// Reset impression tracking when the result identity changes (e.g. new search context).
+		// Each Product/Banner gets a new responseId per search response, so this naturally
+		// resets when query/sort/filters change without needing global controller state.
+		// Calling updateRef(ref.current) re-observes the same element with fresh state.
+		const resultIdentity = (result || banner)?.responseId;
+		const prevIdentityRef = useRef(resultIdentity);
+		const identityChanged = prevIdentityRef.current !== resultIdentity;
 
-		if (inViewport) {
+		useEffect(() => {
+			if (identityChanged) {
+				prevIdentityRef.current = resultIdentity;
+				updateRef(ref.current);
+			}
+		}, [resultIdentity, updateRef]);
+
+		if (inViewport && !identityChanged) {
 			// TODO: add support for disabling tracking events via config like in ResultTracker
 			if (type && content && !result && ['search', 'autocomplete'].includes(controller?.type || '')) {
 				(controller as SearchController | AutocompleteController)?.track.banner.impression(content[type]![0] as MerchandisingContentBanner);
