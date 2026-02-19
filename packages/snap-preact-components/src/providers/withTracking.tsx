@@ -65,7 +65,6 @@ export function withTracking<Props extends WithTrackingProps>(WrappedComponent: 
 		const isBannerTracking = type && content && !result && ['search', 'autocomplete'].includes(controller?.type || '');
 
 		if (inViewport && !awaitingReobservationRef.current) {
-			// TODO: add support for disabling tracking events via config like in ResultTracker
 			if (isBannerTracking) {
 				(controller as SearchController | AutocompleteController)?.track.banner.impression(content[type]![0] as MerchandisingContentBanner);
 			} else if (!result?.bundleSeed) {
