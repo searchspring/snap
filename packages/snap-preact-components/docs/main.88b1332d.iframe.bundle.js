@@ -1,4 +1,4 @@
-/*! For license information please see main.7a79a3b5.iframe.bundle.js.LICENSE.txt */
+/*! For license information please see main.88b1332d.iframe.bundle.js.LICENSE.txt */
 (self.webpackChunk_searchspring_snap_preact_components = self.webpackChunk_searchspring_snap_preact_components || []).push([
 	[792],
 	{
@@ -40,532 +40,6 @@
 				},
 			]);
 			const __WEBPACK_DEFAULT_EXPORT__ = ___CSS_LOADER_EXPORT___;
-		},
-		'../snap-store-mobx/dist/esm/Search/Stores/SearchMerchandisingStore.js'(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
-			'use strict';
-			__webpack_require__.d(__webpack_exports__, { W: () => SearchMerchandisingStore, c: () => ContentType });
-			var ContentType;
-			__webpack_require__('../../node_modules/core-js/modules/es.array.for-each.js'),
-				__webpack_require__('../../node_modules/core-js/modules/web.dom-collections.for-each.js'),
-				__webpack_require__('../../node_modules/core-js/modules/es.object.values.js'),
-				__webpack_require__('../../node_modules/core-js/modules/es.string.match.js'),
-				__webpack_require__('../../node_modules/core-js/modules/es.regexp.exec.js'),
-				__webpack_require__('../../node_modules/core-js/modules/es.symbol.species.js'),
-				__webpack_require__('../../node_modules/core-js/modules/es.array.species.js'),
-				__webpack_require__('../../node_modules/core-js/modules/es.symbol.js'),
-				__webpack_require__('../../node_modules/core-js/modules/es.symbol.description.js'),
-				__webpack_require__('../../node_modules/core-js/modules/es.object.to-string.js'),
-				__webpack_require__('../../node_modules/core-js/modules/es.symbol.to-primitive.js'),
-				__webpack_require__('../../node_modules/core-js/modules/es.date.to-primitive.js'),
-				__webpack_require__('../../node_modules/core-js/modules/es.number.constructor.js'),
-				__webpack_require__('../../node_modules/core-js/modules/es.object.define-property.js'),
-				__webpack_require__('../../node_modules/core-js/modules/es.object.set-prototype-of.js'),
-				__webpack_require__('../../node_modules/core-js/modules/es.function.bind.js'),
-				__webpack_require__('../../node_modules/core-js/modules/es.object.get-prototype-of.js'),
-				__webpack_require__('../../node_modules/core-js/modules/es.array.index-of.js'),
-				__webpack_require__('../../node_modules/core-js/modules/es.regexp.to-string.js'),
-				__webpack_require__('../../node_modules/core-js/modules/es.date.to-string.js'),
-				__webpack_require__('../../node_modules/core-js/modules/es.reflect.construct.js'),
-				__webpack_require__('../../node_modules/core-js/modules/es.map.js'),
-				__webpack_require__('../../node_modules/core-js/modules/es.string.iterator.js'),
-				__webpack_require__('../../node_modules/core-js/modules/es.array.iterator.js'),
-				__webpack_require__('../../node_modules/core-js/modules/web.dom-collections.iterator.js'),
-				__webpack_require__('../../node_modules/core-js/modules/es.object.create.js'),
-				__webpack_require__('../../node_modules/core-js/modules/es.array.is-array.js'),
-				__webpack_require__('../../node_modules/core-js/modules/es.symbol.iterator.js'),
-				__webpack_require__('../../node_modules/core-js/modules/es.array.from.js'),
-				__webpack_require__('../../node_modules/core-js/modules/es.array.slice.js'),
-				__webpack_require__('../../node_modules/core-js/modules/es.function.name.js');
-			function _toConsumableArray(r) {
-				return (
-					(function _arrayWithoutHoles(r) {
-						if (Array.isArray(r)) return _arrayLikeToArray(r);
-					})(r) ||
-					(function _iterableToArray(r) {
-						if (('undefined' != typeof Symbol && null != r[Symbol.iterator]) || null != r['@@iterator']) return Array.from(r);
-					})(r) ||
-					(function _unsupportedIterableToArray(r, a) {
-						if (r) {
-							if ('string' == typeof r) return _arrayLikeToArray(r, a);
-							var t = {}.toString.call(r).slice(8, -1);
-							return (
-								'Object' === t && r.constructor && (t = r.constructor.name),
-								'Map' === t || 'Set' === t
-									? Array.from(r)
-									: 'Arguments' === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t)
-									? _arrayLikeToArray(r, a)
-									: void 0
-							);
-						}
-					})(r) ||
-					(function _nonIterableSpread() {
-						throw new TypeError(
-							'Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.'
-						);
-					})()
-				);
-			}
-			function _arrayLikeToArray(r, a) {
-				(null == a || a > r.length) && (a = r.length);
-				for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e];
-				return n;
-			}
-			function _callSuper(t, o, e) {
-				return (
-					(o = _getPrototypeOf(o)),
-					(function _possibleConstructorReturn(t, e) {
-						if (e && ('object' == typeof e || 'function' == typeof e)) return e;
-						if (void 0 !== e) throw new TypeError('Derived constructors may only return object or undefined');
-						return (function _assertThisInitialized(e) {
-							if (void 0 === e) throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
-							return e;
-						})(t);
-					})(t, _isNativeReflectConstruct() ? Reflect.construct(o, e || [], _getPrototypeOf(t).constructor) : o.apply(t, e))
-				);
-			}
-			function _wrapNativeSuper(t) {
-				var r = 'function' == typeof Map ? new Map() : void 0;
-				return (
-					(_wrapNativeSuper = function _wrapNativeSuper(t) {
-						if (
-							null === t ||
-							!(function _isNativeFunction(t) {
-								try {
-									return -1 !== Function.toString.call(t).indexOf('[native code]');
-								} catch (n) {
-									return 'function' == typeof t;
-								}
-							})(t)
-						)
-							return t;
-						if ('function' != typeof t) throw new TypeError('Super expression must either be null or a function');
-						if (void 0 !== r) {
-							if (r.has(t)) return r.get(t);
-							r.set(t, Wrapper);
-						}
-						function Wrapper() {
-							return (function _construct(t, e, r) {
-								if (_isNativeReflectConstruct()) return Reflect.construct.apply(null, arguments);
-								var o = [null];
-								o.push.apply(o, e);
-								var p = new (t.bind.apply(t, o))();
-								return r && _setPrototypeOf(p, r.prototype), p;
-							})(t, arguments, _getPrototypeOf(this).constructor);
-						}
-						return (
-							(Wrapper.prototype = Object.create(t.prototype, { constructor: { value: Wrapper, enumerable: !1, writable: !0, configurable: !0 } })),
-							_setPrototypeOf(Wrapper, t)
-						);
-					}),
-					_wrapNativeSuper(t)
-				);
-			}
-			function _isNativeReflectConstruct() {
-				try {
-					var t = !Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {}));
-				} catch (t) {}
-				return (_isNativeReflectConstruct = function _isNativeReflectConstruct() {
-					return !!t;
-				})();
-			}
-			function _setPrototypeOf(t, e) {
-				return (
-					(_setPrototypeOf = Object.setPrototypeOf
-						? Object.setPrototypeOf.bind()
-						: function (t, e) {
-								return (t.__proto__ = e), t;
-						  }),
-					_setPrototypeOf(t, e)
-				);
-			}
-			function _getPrototypeOf(t) {
-				return (
-					(_getPrototypeOf = Object.setPrototypeOf
-						? Object.getPrototypeOf.bind()
-						: function (t) {
-								return t.__proto__ || Object.getPrototypeOf(t);
-						  }),
-					_getPrototypeOf(t)
-				);
-			}
-			function _defineProperties(e, r) {
-				for (var t = 0; t < r.length; t++) {
-					var o = r[t];
-					(o.enumerable = o.enumerable || !1),
-						(o.configurable = !0),
-						'value' in o && (o.writable = !0),
-						Object.defineProperty(e, _toPropertyKey(o.key), o);
-				}
-			}
-			function _createClass(e, r, t) {
-				return r && _defineProperties(e.prototype, r), t && _defineProperties(e, t), Object.defineProperty(e, 'prototype', { writable: !1 }), e;
-			}
-			function _toPropertyKey(t) {
-				var i = (function _toPrimitive(t, r) {
-					if ('object' != typeof t || !t) return t;
-					var e = t[Symbol.toPrimitive];
-					if (void 0 !== e) {
-						var i = e.call(t, r || 'default');
-						if ('object' != typeof i) return i;
-						throw new TypeError('@@toPrimitive must return a primitive value.');
-					}
-					return ('string' === r ? String : Number)(t);
-				})(t, 'string');
-				return 'symbol' == typeof i ? i : i + '';
-			}
-			function _classCallCheck(a, n) {
-				if (!(a instanceof n)) throw new TypeError('Cannot call a class as a function');
-			}
-			!(function (ContentType) {
-				(ContentType.HEADER = 'header'),
-					(ContentType.BANNER = 'banner'),
-					(ContentType.FOOTER = 'footer'),
-					(ContentType.LEFT = 'left'),
-					(ContentType.INLINE = 'inline');
-			})(ContentType || (ContentType = {}));
-			var SearchMerchandisingStore = _createClass(function SearchMerchandisingStore(services, merchData, tracking) {
-					var _this = this;
-					_classCallCheck(this, SearchMerchandisingStore),
-						(this.redirect = ''),
-						(this.responseId = ''),
-						(this.content = {}),
-						(this.campaigns = []),
-						(this.personalized = !1),
-						(this.experiments = []),
-						merchData &&
-							((this.redirect = merchData.redirect || ''),
-							(this.responseId = (null == tracking ? void 0 : tracking.responseId) || ''),
-							merchData.content &&
-								Object.values(ContentType).forEach(function (type) {
-									if (merchData.content && merchData.content[type]) {
-										var _merchData$content$ty,
-											htmlString =
-												(null === (_merchData$content$ty = merchData.content[type]) || void 0 === _merchData$content$ty
-													? void 0
-													: _merchData$content$ty[0]) || '',
-											match = 'string' == typeof htmlString && htmlString.match(/data-banner-id="(\d+)"/),
-											uid = match ? match[1] : '';
-										_this.content[type] = new Content([{ value: merchData.content[type], uid, responseId: _this.responseId }]);
-									}
-								}),
-							merchData.campaigns &&
-								((this.campaigns = merchData.campaigns),
-								merchData.campaigns.forEach(function (campaign) {
-									'landing-page' == campaign.type && (_this.landingPage = campaign);
-								})),
-							merchData.experiments && (this.experiments = merchData.experiments),
-							(this.personalized = !!merchData.personalized));
-				}),
-				Content = (function (_Array) {
-					function Content(content) {
-						return _classCallCheck(this, Content), _callSuper(this, Content, _toConsumableArray(content));
-					}
-					return (
-						(function _inherits(t, e) {
-							if ('function' != typeof e && null !== e) throw new TypeError('Super expression must either be null or a function');
-							(t.prototype = Object.create(e && e.prototype, { constructor: { value: t, writable: !0, configurable: !0 } })),
-								Object.defineProperty(t, 'prototype', { writable: !1 }),
-								e && _setPrototypeOf(t, e);
-						})(Content, _Array),
-						_createClass(Content, null, [
-							{
-								key: Symbol.species,
-								get: function get() {
-									return Array;
-								},
-							},
-						])
-					);
-				})(_wrapNativeSuper(Array));
-		},
-		'../snap-store-mobx/dist/esm/types.js'(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
-			'use strict';
-			var ErrorType;
-			__webpack_require__.d(__webpack_exports__, { B: () => ErrorType }),
-				(function (ErrorType) {
-					(ErrorType.WARNING = 'warning'), (ErrorType.INFO = 'info'), (ErrorType.ERROR = 'error');
-				})(ErrorType || (ErrorType = {}));
-		},
-		'../snap-toolbox/dist/esm/filters/formatNumber.js'(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
-			'use strict';
-			__webpack_require__.d(__webpack_exports__, { Z: () => formatNumber });
-			__webpack_require__('../../node_modules/core-js/modules/es.object.assign.js'),
-				__webpack_require__('../../node_modules/core-js/modules/es.number.is-nan.js'),
-				__webpack_require__('../../node_modules/core-js/modules/es.number.constructor.js'),
-				__webpack_require__('../../node_modules/core-js/modules/es.string.split.js'),
-				__webpack_require__('../../node_modules/core-js/modules/es.regexp.exec.js'),
-				__webpack_require__('../../node_modules/core-js/modules/es.string.replace.js'),
-				__webpack_require__('../../node_modules/core-js/modules/es.string.pad-end.js'),
-				__webpack_require__('../../node_modules/core-js/modules/es.array.join.js'),
-				__webpack_require__('../../node_modules/core-js/modules/es.object.to-string.js'),
-				__webpack_require__('../../node_modules/core-js/modules/es.regexp.to-string.js'),
-				__webpack_require__('../../node_modules/core-js/modules/es.date.to-string.js'),
-				__webpack_require__('../../node_modules/core-js/modules/es.array.index-of.js');
-			function formatNumber(input, opts) {
-				var options = Object.assign(
-					{ symbol: '', decimalPlaces: 3, padDecimalPlaces: !0, thousandsSeparator: '', decimalSeparator: '.', symbolAfter: !1 },
-					opts
-				);
-				if ('number' == typeof input && !Number.isNaN(input)) {
-					var split = (function truncateDecimals(input, digits) {
-						var numString = input.toString(),
-							decimalPosition = numString.indexOf('.'),
-							substrLength = -1 == decimalPosition ? numString.length : 1 + decimalPosition + (digits || -1);
-						return numString.substr(0, substrLength);
-					})(input, options.decimalPlaces).split('.');
-					(split[0] = split[0].replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1' + options.thousandsSeparator)),
-						options.decimalPlaces > 0 && options.padDecimalPlaces && (split[1] = (split[1] || '').padEnd(options.decimalPlaces, '0'));
-					var output = split.join(options.decimalSeparator);
-					return options.symbolAfter ? (output += options.symbol) : (output = options.symbol + output), output;
-				}
-			}
-		},
-		'../snap-toolbox/dist/esm/filters/handleize.js'(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
-			'use strict';
-			__webpack_require__.d(__webpack_exports__, { p: () => handleize });
-			__webpack_require__('../../node_modules/core-js/modules/es.string.trim.js'),
-				__webpack_require__('../../node_modules/core-js/modules/es.string.replace.js'),
-				__webpack_require__('../../node_modules/core-js/modules/es.regexp.exec.js');
-			function handleize(input) {
-				if ('string' != typeof input) return input;
-				var handleized = input.toLowerCase();
-				return (handleized = (handleized = handleized.replace(/[^\w\s]/g, '').trim()).replace(/\s/g, '-'));
-			}
-		},
-		'./.storybook/preview.js-generated-config-entry.js'(__unused_webpack_module, __unused_webpack___webpack_exports__, __webpack_require__) {
-			'use strict';
-			var preview_namespaceObject = {};
-			__webpack_require__.r(preview_namespaceObject),
-				__webpack_require__.d(preview_namespaceObject, { decorators: () => decorators, parameters: () => parameters });
-			__webpack_require__('../../node_modules/core-js/modules/es.object.keys.js'),
-				__webpack_require__('../../node_modules/core-js/modules/es.symbol.js'),
-				__webpack_require__('../../node_modules/core-js/modules/es.array.filter.js'),
-				__webpack_require__('../../node_modules/core-js/modules/es.object.get-own-property-descriptor.js'),
-				__webpack_require__('../../node_modules/core-js/modules/es.array.for-each.js'),
-				__webpack_require__('../../node_modules/core-js/modules/web.dom-collections.for-each.js'),
-				__webpack_require__('../../node_modules/core-js/modules/es.object.get-own-property-descriptors.js'),
-				__webpack_require__('../../node_modules/core-js/modules/es.object.define-properties.js'),
-				__webpack_require__('../../node_modules/core-js/modules/es.object.define-property.js');
-			var ClientApi = __webpack_require__('../../node_modules/@storybook/client-api/dist/esm/ClientApi.js'),
-				esm = __webpack_require__('../../node_modules/@storybook/client-logger/dist/esm/index.js'),
-				preact_module = __webpack_require__('../../node_modules/preact/dist/preact.module.js'),
-				ThemeProvider = __webpack_require__('../../node_modules/@emotion/react/dist/emotion-element-cbed451f.browser.esm.js').b,
-				defaultTheme = {
-					colors: {
-						primary: '#3A23AD',
-						secondary: '#00cee1',
-						hover: '#f8f6fd',
-						text: { secondary: '#ffffff' },
-						message: { error: '#cc1212', warning: '#ecaa15', info: '#4c3ce2' },
-					},
-					components: {},
-				},
-				injectStylesIntoStyleTag = __webpack_require__(
-					'../../node_modules/@storybook/builder-webpack5/node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js'
-				),
-				injectStylesIntoStyleTag_default = __webpack_require__.n(injectStylesIntoStyleTag),
-				styles = __webpack_require__(
-					'../../node_modules/@storybook/builder-webpack5/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].use[1]!./.storybook/styles.css'
-				),
-				options = { insert: 'head', singleton: !1 };
-			injectStylesIntoStyleTag_default()(styles.A, options);
-			styles.A.locals;
-			var decorators = [
-					function (Story) {
-						return (0, preact_module.h)(ThemeProvider, { theme: defaultTheme }, (0, preact_module.h)(Story, null));
-					},
-				],
-				parameters = { actions: { argTypesRegex: '^on[A-Z].*', disabled: !1 }, controls: { expanded: !0, disabled: !1 }, options: { showPanel: !0 } };
-			function ownKeys(object, enumerableOnly) {
-				var keys = Object.keys(object);
-				if (Object.getOwnPropertySymbols) {
-					var symbols = Object.getOwnPropertySymbols(object);
-					enumerableOnly &&
-						(symbols = symbols.filter(function (sym) {
-							return Object.getOwnPropertyDescriptor(object, sym).enumerable;
-						})),
-						keys.push.apply(keys, symbols);
-				}
-				return keys;
-			}
-			function _defineProperty(obj, key, value) {
-				return key in obj ? Object.defineProperty(obj, key, { value, enumerable: !0, configurable: !0, writable: !0 }) : (obj[key] = value), obj;
-			}
-			Object.keys(preview_namespaceObject).forEach(function (key) {
-				var value = preview_namespaceObject[key];
-				switch (key) {
-					case 'args':
-					case 'argTypes':
-						return esm.vF.warn('Invalid args/argTypes in config, ignoring.', JSON.stringify(value));
-					case 'decorators':
-						return value.forEach(function (decorator) {
-							return (0, ClientApi.dK)(decorator, !1);
-						});
-					case 'loaders':
-						return value.forEach(function (loader) {
-							return (0, ClientApi.$K)(loader, !1);
-						});
-					case 'parameters':
-						return (0, ClientApi.Gu)(
-							(function _objectSpread(target) {
-								for (var i = 1; i < arguments.length; i++) {
-									var source = null != arguments[i] ? arguments[i] : {};
-									i % 2
-										? ownKeys(Object(source), !0).forEach(function (key) {
-												_defineProperty(target, key, source[key]);
-										  })
-										: Object.getOwnPropertyDescriptors
-										? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source))
-										: ownKeys(Object(source)).forEach(function (key) {
-												Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));
-										  });
-								}
-								return target;
-							})({}, value),
-							!1
-						);
-					case 'argTypesEnhancers':
-						return value.forEach(function (enhancer) {
-							return (0, ClientApi.T$)(enhancer);
-						});
-					case 'argsEnhancers':
-						return value.forEach(function (enhancer) {
-							return (0, ClientApi.FW)(enhancer);
-						});
-					case 'render':
-						return (0, ClientApi.kf)(value);
-					case 'globals':
-					case 'globalTypes':
-						var v = {};
-						return (v[key] = value), (0, ClientApi.Gu)(v, !1);
-					case '__namedExportsOrder':
-					case 'decorateStory':
-					case 'renderToDOM':
-						return null;
-					default:
-						return console.log(key + ' was not supported :( !');
-				}
-			});
-		},
-		'./generated-stories-entry.js'(module, __unused_webpack_exports, __webpack_require__) {
-			'use strict';
-			(module = __webpack_require__.nmd(module)),
-				(0, __webpack_require__('../../node_modules/@storybook/preact/dist/esm/client/index.js').configure)(
-					[
-						__webpack_require__('./src sync recursive ^\\.(?:(?:^%7C\\/%7C(?:(?:(?%21(?:^%7C\\/)\\.).)*?)\\/)(?%21\\.)(?=.)[^/]*?\\.stories\\.mdx)$'),
-						__webpack_require__(
-							'./src sync recursive ^\\.(?:(?:^%7C\\/%7C(?:(?:(?%21(?:^%7C\\/)\\.).)*?)\\/)(?%21\\.)(?=.)[^/]*?\\.stories\\.(js%7Cjsx%7Cts%7Ctsx))$'
-						),
-					],
-					module,
-					!1
-				);
-		},
-		'./src sync recursive ^\\.(?:(?:^%7C\\/%7C(?:(?:(?%21(?:^%7C\\/)\\.).)*?)\\/)(?%21\\.)(?=.)[^/]*?\\.stories\\.(js%7Cjsx%7Cts%7Ctsx))$'(
-			module,
-			__unused_webpack_exports,
-			__webpack_require__
-		) {
-			var map = {
-				'./components/Atoms/BadgeImage/BadgeImage.stories.tsx': './src/components/Atoms/BadgeImage/BadgeImage.stories.tsx',
-				'./components/Atoms/BadgePill/BadgePill.stories.tsx': './src/components/Atoms/BadgePill/BadgePill.stories.tsx',
-				'./components/Atoms/BadgeRectangle/BadgeRectangle.stories.tsx': './src/components/Atoms/BadgeRectangle/BadgeRectangle.stories.tsx',
-				'./components/Atoms/BadgeText/BadgeText.stories.tsx': './src/components/Atoms/BadgeText/BadgeText.stories.tsx',
-				'./components/Atoms/Breadcrumbs/Breadcrumbs.stories.tsx': './src/components/Atoms/Breadcrumbs/Breadcrumbs.stories.tsx',
-				'./components/Atoms/Button/Button.stories.tsx': './src/components/Atoms/Button/Button.stories.tsx',
-				'./components/Atoms/Dropdown/Dropdown.stories.tsx': './src/components/Atoms/Dropdown/Dropdown.stories.tsx',
-				'./components/Atoms/FormattedNumber/FormattedNumber.stories.tsx': './src/components/Atoms/FormattedNumber/FormattedNumber.stories.tsx',
-				'./components/Atoms/Icon/Icon.stories.tsx': './src/components/Atoms/Icon/Icon.stories.tsx',
-				'./components/Atoms/Image/Image.stories.tsx': './src/components/Atoms/Image/Image.stories.tsx',
-				'./components/Atoms/Loading/LoadingBar.stories.tsx': './src/components/Atoms/Loading/LoadingBar.stories.tsx',
-				'./components/Atoms/Merchandising/Banner/Banner.stories.tsx': './src/components/Atoms/Merchandising/Banner/Banner.stories.tsx',
-				'./components/Atoms/Merchandising/InlineBanner/InlineBanner.stories.tsx':
-					'./src/components/Atoms/Merchandising/InlineBanner/InlineBanner.stories.tsx',
-				'./components/Atoms/Overlay/Overlay.stories.tsx': './src/components/Atoms/Overlay/Overlay.stories.tsx',
-				'./components/Atoms/Price/Price.stories.tsx': './src/components/Atoms/Price/Price.stories.tsx',
-				'./components/Atoms/Skeleton/Skeleton.stories.tsx': './src/components/Atoms/Skeleton/Skeleton.stories.tsx',
-				'./components/Molecules/CalloutBadge/CalloutBadge.stories.tsx': './src/components/Molecules/CalloutBadge/CalloutBadge.stories.tsx',
-				'./components/Molecules/Carousel/Carousel.stories.tsx': './src/components/Molecules/Carousel/Carousel.stories.tsx',
-				'./components/Molecules/Checkbox/Checkbox.stories.tsx': './src/components/Molecules/Checkbox/Checkbox.stories.tsx',
-				'./components/Molecules/ErrorHandler/ErrorHandler.stories.tsx': './src/components/Molecules/ErrorHandler/ErrorHandler.stories.tsx',
-				'./components/Molecules/FacetGridOptions/FacetGridOptions.stories.tsx':
-					'./src/components/Molecules/FacetGridOptions/FacetGridOptions.stories.tsx',
-				'./components/Molecules/FacetHierarchyOptions/FacetHierarchyOptions.stories.tsx':
-					'./src/components/Molecules/FacetHierarchyOptions/FacetHierarchyOptions.stories.tsx',
-				'./components/Molecules/FacetListOptions/FacetListOptions.stories.tsx':
-					'./src/components/Molecules/FacetListOptions/FacetListOptions.stories.tsx',
-				'./components/Molecules/FacetPaletteOptions/FacetPaletteOptions.stories.tsx':
-					'./src/components/Molecules/FacetPaletteOptions/FacetPaletteOptions.stories.tsx',
-				'./components/Molecules/FacetSlider/FacetSlider.stories.tsx': './src/components/Molecules/FacetSlider/FacetSlider.stories.tsx',
-				'./components/Molecules/Filter/Filter.stories.tsx': './src/components/Molecules/Filter/Filter.stories.tsx',
-				'./components/Molecules/Grid/Grid.stories.tsx': './src/components/Molecules/Grid/Grid.stories.tsx',
-				'./components/Molecules/List/List.stories.tsx': './src/components/Molecules/List/List.stories.tsx',
-				'./components/Molecules/OverlayBadge/OverlayBadge.stories.tsx': './src/components/Molecules/OverlayBadge/OverlayBadge.stories.tsx',
-				'./components/Molecules/Pagination/Pagination.stories.tsx': './src/components/Molecules/Pagination/Pagination.stories.tsx',
-				'./components/Molecules/Result/Result.stories.tsx': './src/components/Molecules/Result/Result.stories.tsx',
-				'./components/Molecules/SearchInput/SearchInput.stories.tsx': './src/components/Molecules/SearchInput/SearchInput.stories.tsx',
-				'./components/Molecules/Select/Select.stories.tsx': './src/components/Molecules/Select/Select.stories.tsx',
-				'./components/Molecules/Slideout/Slideout.stories.tsx': './src/components/Molecules/Slideout/Slideout.stories.tsx',
-				'./components/Molecules/Swatches/Swatches.stories.tsx': './src/components/Molecules/Swatches/Swatches.stories.tsx',
-				'./components/Molecules/VariantSelection/VariantSelection.stories.tsx':
-					'./src/components/Molecules/VariantSelection/VariantSelection.stories.tsx',
-				'./components/Organisms/Autocomplete/Autocomplete.stories.tsx': './src/components/Organisms/Autocomplete/Autocomplete.stories.tsx',
-				'./components/Organisms/BranchOverride/BranchOverride.stories.tsx': './src/components/Organisms/BranchOverride/BranchOverride.stories.tsx',
-				'./components/Organisms/Facet/Facet.stories.tsx': './src/components/Organisms/Facet/Facet.stories.tsx',
-				'./components/Organisms/Facets/Facets.stories.tsx': './src/components/Organisms/Facets/Facets.stories.tsx',
-				'./components/Organisms/FilterSummary/FilterSummary.stories.tsx': './src/components/Organisms/FilterSummary/FilterSummary.stories.tsx',
-				'./components/Organisms/Recommendation/Recommendation.stories.tsx': './src/components/Organisms/Recommendation/Recommendation.stories.tsx',
-				'./components/Organisms/RecommendationBundle/RecommendationBundle.stories.tsx':
-					'./src/components/Organisms/RecommendationBundle/RecommendationBundle.stories.tsx',
-				'./components/Organisms/Results/Results.stories.tsx': './src/components/Organisms/Results/Results.stories.tsx',
-				'./components/Trackers/ResultTracker/ResultTracker.stories.tsx': './src/components/Trackers/ResultTracker/ResultTracker.stories.tsx',
-			};
-			function webpackContext(req) {
-				var id = webpackContextResolve(req);
-				return __webpack_require__(id);
-			}
-			function webpackContextResolve(req) {
-				if (!__webpack_require__.o(map, req)) {
-					var e = new Error("Cannot find module '" + req + "'");
-					throw ((e.code = 'MODULE_NOT_FOUND'), e);
-				}
-				return map[req];
-			}
-			(webpackContext.keys = function webpackContextKeys() {
-				return Object.keys(map);
-			}),
-				(webpackContext.resolve = webpackContextResolve),
-				(module.exports = webpackContext),
-				(webpackContext.id =
-					'./src sync recursive ^\\.(?:(?:^%7C\\/%7C(?:(?:(?%21(?:^%7C\\/)\\.).)*?)\\/)(?%21\\.)(?=.)[^/]*?\\.stories\\.(js%7Cjsx%7Cts%7Ctsx))$');
-		},
-		'./src sync recursive ^\\.(?:(?:^%7C\\/%7C(?:(?:(?%21(?:^%7C\\/)\\.).)*?)\\/)(?%21\\.)(?=.)[^/]*?\\.stories\\.mdx)$'(
-			module,
-			__unused_webpack_exports,
-			__webpack_require__
-		) {
-			var map = {
-				'./documentation/About/About.stories.mdx': './src/documentation/About/About.stories.mdx',
-				'./documentation/Theme/Theme.stories.mdx': './src/documentation/Theme/Theme.stories.mdx',
-				'./documentation/Usage/Usage.stories.mdx': './src/documentation/Usage/Usage.stories.mdx',
-			};
-			function webpackContext(req) {
-				var id = webpackContextResolve(req);
-				return __webpack_require__(id);
-			}
-			function webpackContextResolve(req) {
-				if (!__webpack_require__.o(map, req)) {
-					var e = new Error("Cannot find module '" + req + "'");
-					throw ((e.code = 'MODULE_NOT_FOUND'), e);
-				}
-				return map[req];
-			}
-			(webpackContext.keys = function webpackContextKeys() {
-				return Object.keys(map);
-			}),
-				(webpackContext.resolve = webpackContextResolve),
-				(module.exports = webpackContext),
-				(webpackContext.id = './src sync recursive ^\\.(?:(?:^%7C\\/%7C(?:(?:(?%21(?:^%7C\\/)\\.).)*?)\\/)(?%21\\.)(?=.)[^/]*?\\.stories\\.mdx)$');
 		},
 		'./src/components/Atoms/BadgeImage/BadgeImage.stories.tsx'(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 			'use strict';
@@ -27946,620 +27420,6 @@
 					);
 				});
 		},
-		'./src/documentation/About/About.stories.mdx'(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
-			'use strict';
-			__webpack_require__.r(__webpack_exports__), __webpack_require__.d(__webpack_exports__, { __page: () => __page, default: () => About_stories });
-			__webpack_require__('../../node_modules/preact/compat/dist/compat.module.js');
-			var esm = __webpack_require__('../../node_modules/@mdx-js/react/dist/esm.js'),
-				dist_esm = __webpack_require__('./node_modules/@storybook/addon-docs/dist/esm/index.js'),
-				blocks = __webpack_require__('./node_modules/@storybook/addon-docs/blocks.js');
-			function _extends() {
-				return (
-					(_extends = Object.assign
-						? Object.assign.bind()
-						: function (n) {
-								for (var e = 1; e < arguments.length; e++) {
-									var t = arguments[e];
-									for (var r in t) ({}.hasOwnProperty.call(t, r) && (n[r] = t[r]));
-								}
-								return n;
-						  }),
-					_extends.apply(null, arguments)
-				);
-			}
-			const layoutProps = {};
-			function MDXContent({ components, ...props }) {
-				return (0, esm.yg)(
-					'wrapper',
-					_extends({}, layoutProps, props, { components, mdxType: 'MDXLayout' }),
-					(0, esm.yg)(
-						'p',
-						null,
-						"Welcome to the Snap React Component Library!\nThis collection of ecommerce components allows you to quickly build and theme a layout for use with Searchspring's Snap SDK."
-					),
-					(0, esm.yg)('h3', { id: 'installation' }, 'Installation'),
-					(0, esm.yg)(
-						'pre',
-						null,
-						(0, esm.yg)('code', { parentName: 'pre', className: 'language-sh' }, 'npm install --save @searchspring/snap-preact-components\n')
-					),
-					(0, esm.yg)('h2', { id: 'atomic-design-methodology' }, 'Atomic Design Methodology'),
-					(0, esm.yg)('p', null, 'Snap components follow the Atomic design methodology. Components are organized into three levels:'),
-					(0, esm.yg)('h3', { id: 'atoms' }, 'Atoms'),
-					(0, esm.yg)(
-						'p',
-						null,
-						'Atom level components are the basic building blocks of an ecommerce layout. This includes components such as Badge, Button, and Icon.'
-					),
-					(0, esm.yg)(
-						'p',
-						null,
-						'Like atoms in nature they’re fairly abstract and often not terribly useful on their own. However, they’re good as a reference in the context of a pattern library as you can see all your global styles laid out at a glance.'
-					),
-					(0, esm.yg)('h3', { id: 'molecules' }, 'Molecules'),
-					(0, esm.yg)(
-						'p',
-						null,
-						'Molecule level components utilize one or more atom components to start building the contents of a layout. This includes components such as Pagination, Select, and Slider.'
-					),
-					(0, esm.yg)(
-						'p',
-						null,
-						'Things start getting more interesting and tangible when we start combining atoms together. Molecules are groups of atoms bonded together and are the smallest fundamental units of a compound. These molecules take on their own properties and serve as the backbone of our design systems.'
-					),
-					(0, esm.yg)('h3', { id: 'organisms' }, 'Organisms'),
-					(0, esm.yg)(
-						'p',
-						null,
-						'Organisms level components utilize one or more molecule components to start building complex sections of a layout. This includes components such as Autocomplete, Facets, and Results.'
-					),
-					(0, esm.yg)(
-						'p',
-						null,
-						'Molecules give us some building blocks to work with, and we can now combine them together to form organisms. Organisms are groups of molecules joined together to form a relatively complex, distinct section of an interface.'
-					)
-				);
-			}
-			function About_stories_extends() {
-				return (
-					(About_stories_extends = Object.assign
-						? Object.assign.bind()
-						: function (n) {
-								for (var e = 1; e < arguments.length; e++) {
-									var t = arguments[e];
-									for (var r in t) ({}.hasOwnProperty.call(t, r) && (n[r] = t[r]));
-								}
-								return n;
-						  }),
-					About_stories_extends.apply(null, arguments)
-				);
-			}
-			MDXContent.isMDXComponent = !0;
-			const About_stories_layoutProps = {};
-			function About_stories_MDXContent({ components, ...props }) {
-				return (0, esm.yg)(
-					'wrapper',
-					About_stories_extends({}, About_stories_layoutProps, props, { components, mdxType: 'MDXLayout' }),
-					(0, esm.yg)(blocks.W8, { title: 'Documentation/About', mdxType: 'Meta' }),
-					(0, esm.yg)(
-						'style',
-						null,
-						'\n\t.header {\n\t\tdisplay: flex;\n\t\talign-items: center;\n\t}\n\n\t.header .subtitle {\n\t\ttext-transform: uppercase;\n\t\tcolor: #00AEEF;\n\t}\n\n\t.header img {\n\t\t\twidth: 300px;\n\t\t\tmargin-right: 20px;\n\t\t}\n'
-					),
-					(0, esm.yg)('div', { class: 'header' }, (0, esm.yg)('span', { class: 'subtitle' }, 'SNAP PREACT COMPONENTS')),
-					(0, esm.yg)('hr', null),
-					(0, esm.yg)(MDXContent, { mdxType: 'Readme' })
-				);
-			}
-			About_stories_MDXContent.isMDXComponent = !0;
-			const __page = () => {
-				throw new Error('Docs-only story');
-			};
-			__page.parameters = { docsOnly: !0 };
-			const componentMeta = { title: 'Documentation/About', includeStories: ['__page'] },
-				mdxStoryNameToKey = {};
-			(componentMeta.parameters = componentMeta.parameters || {}),
-				(componentMeta.parameters.docs = {
-					...(componentMeta.parameters.docs || {}),
-					page: () =>
-						(0, esm.yg)(dist_esm.hT, { mdxStoryNameToKey, mdxComponentAnnotations: componentMeta }, (0, esm.yg)(About_stories_MDXContent, null)),
-				});
-			const About_stories = componentMeta;
-		},
-		'./src/documentation/Theme/Theme.stories.mdx'(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
-			'use strict';
-			__webpack_require__.r(__webpack_exports__), __webpack_require__.d(__webpack_exports__, { __page: () => __page, default: () => Theme_stories });
-			__webpack_require__('../../node_modules/preact/compat/dist/compat.module.js');
-			var esm = __webpack_require__('../../node_modules/@mdx-js/react/dist/esm.js'),
-				dist_esm = __webpack_require__('./node_modules/@storybook/addon-docs/dist/esm/index.js'),
-				blocks = __webpack_require__('./node_modules/@storybook/addon-docs/blocks.js');
-			function _extends() {
-				return (
-					(_extends = Object.assign
-						? Object.assign.bind()
-						: function (n) {
-								for (var e = 1; e < arguments.length; e++) {
-									var t = arguments[e];
-									for (var r in t) ({}.hasOwnProperty.call(t, r) && (n[r] = t[r]));
-								}
-								return n;
-						  }),
-					_extends.apply(null, arguments)
-				);
-			}
-			const layoutProps = {};
-			function MDXContent({ components, ...props }) {
-				return (0, esm.yg)(
-					'wrapper',
-					_extends({}, layoutProps, props, { components, mdxType: 'MDXLayout' }),
-					(0, esm.yg)('p', null, 'Snap components allows for theming at both the global and component level.'),
-					(0, esm.yg)('h3', { id: 'theme-object' }, 'Theme object'),
-					(0, esm.yg)(
-						'p',
-						null,
-						'A theme object contains a ',
-						(0, esm.yg)('inlineCode', { parentName: 'p' }, 'components'),
-						' object with one or more objects where the key is the name of the component (lowercase), and the value is an object containing prop keys and values.'
-					),
-					(0, esm.yg)(
-						'p',
-						null,
-						'For example, this ',
-						(0, esm.yg)('inlineCode', { parentName: 'p' }, 'globalTheme'),
-						' theme object will apply the prop ',
-						(0, esm.yg)('inlineCode', { parentName: 'p' }, "color={'blue'}"),
-						' for all ',
-						(0, esm.yg)('inlineCode', { parentName: 'p' }, '<Button />'),
-						' components and ',
-						(0, esm.yg)('inlineCode', { parentName: 'p' }, 'hideCount={false}'),
-						' for all ',
-						(0, esm.yg)('inlineCode', { parentName: 'p' }, '<facetListOptions />'),
-						' components.'
-					),
-					(0, esm.yg)(
-						'pre',
-						null,
-						(0, esm.yg)(
-							'code',
-							{ parentName: 'pre', className: 'language-js' },
-							"const globalTheme = {\n    components: {\n        button: {\n            color: 'blue',\n        },\n        facetListOptions: {\n            hideCount: false,\n        },\n    },\n};\n"
-						)
-					),
-					(0, esm.yg)(
-						'p',
-						null,
-						'If a component contains multiple sub-components (ie. Molecule or Organisms), it is also possible to provide sub-component props as follows:'
-					),
-					(0, esm.yg)(
-						'pre',
-						null,
-						(0, esm.yg)(
-							'code',
-							{ parentName: 'pre', className: 'language-js' },
-							'const globalTheme = {\n    components: {\n        facetListOptions: {\n            hideCount: false,\n            theme: {\n                components: {\n                    checkbox: {\n                        native: true\n                    }\n                }\n            }\n        }\n    }\n};\n'
-						)
-					),
-					(0, esm.yg)('p', null, 'The theme object also contains colors used throughout components:'),
-					(0, esm.yg)(
-						'pre',
-						null,
-						(0, esm.yg)(
-							'code',
-							{ parentName: 'pre', className: 'language-js' },
-							"const globalTheme = {\n    colors: {\n        primary: '#3A23AD',\n        secondary: '#00cee1',\n        hover: '#f8f6fd',\n        text: {\n            secondary: '#ffffff'  \n        }\n    },\n    components: {}\n}\n"
-						)
-					),
-					(0, esm.yg)(
-						'p',
-						null,
-						(0, esm.yg)('inlineCode', { parentName: 'p' }, 'theme.colors.primary'),
-						' - primary color used throughout components'
-					),
-					(0, esm.yg)(
-						'p',
-						null,
-						(0, esm.yg)('inlineCode', { parentName: 'p' }, 'theme.colors.secondary'),
-						' - secondary color used to accent components'
-					),
-					(0, esm.yg)('p', null, (0, esm.yg)('inlineCode', { parentName: 'p' }, 'theme.colors.hover'), ' - background color for element hover state'),
-					(0, esm.yg)(
-						'p',
-						null,
-						(0, esm.yg)('inlineCode', { parentName: 'p' }, 'theme.colors.text.secondary'),
-						' - text color when element background is ',
-						(0, esm.yg)('inlineCode', { parentName: 'p' }, 'theme.colors.primary')
-					),
-					(0, esm.yg)('h3', { id: 'themeprovider' }, 'ThemeProvider'),
-					(0, esm.yg)('p', null, 'Using a ThemeProvider applies a global theme to all its children components'),
-					(0, esm.yg)(
-						'pre',
-						null,
-						(0, esm.yg)(
-							'code',
-							{ parentName: 'pre', className: 'language-js' },
-							"import { ThemeProvider, Button } from '@searchspring/snap-preact-components'\n"
-						)
-					),
-					(0, esm.yg)(
-						'pre',
-						null,
-						(0, esm.yg)(
-							'code',
-							{ parentName: 'pre', className: 'language-jsx' },
-							"<ThemeProvider theme={globalTheme}>\n    <Button content={'click me!'} />\n</ThemeProvider>\n"
-						)
-					),
-					(0, esm.yg)('h3', { id: 'component-theme' }, 'Component Theme'),
-					(0, esm.yg)(
-						'p',
-						null,
-						'The ',
-						(0, esm.yg)('inlineCode', { parentName: 'p' }, 'theme'),
-						' prop is available on all components and allows for theming of a single component. '
-					),
-					(0, esm.yg)(
-						'p',
-						null,
-						'The component ',
-						(0, esm.yg)('inlineCode', { parentName: 'p' }, 'theme'),
-						' is merged with the global theme, therefore component theme props will overwrite any common props on the global theme object.'
-					),
-					(0, esm.yg)(
-						'p',
-						null,
-						'In the following example, the ',
-						(0, esm.yg)('inlineCode', { parentName: 'p' }, '<Button />'),
-						' component will contain ',
-						(0, esm.yg)('inlineCode', { parentName: 'p' }, "color={'green'}"),
-						' from ',
-						(0, esm.yg)('inlineCode', { parentName: 'p' }, 'propTheme'),
-						' and ',
-						(0, esm.yg)('inlineCode', { parentName: 'p' }, 'native={true}'),
-						' from ',
-						(0, esm.yg)('inlineCode', { parentName: 'p' }, 'globalTheme')
-					),
-					(0, esm.yg)(
-						'pre',
-						null,
-						(0, esm.yg)(
-							'code',
-							{ parentName: 'pre', className: 'language-js' },
-							"const globalTheme = {\n    components: {\n        button: {\n            color: 'blue',\n            native: true\n        },\n    },\n};\nconst propTheme = {\n    components: {\n        button: {\n            color: 'green',\n        },\n    },\n};\n"
-						)
-					),
-					(0, esm.yg)(
-						'pre',
-						null,
-						(0, esm.yg)(
-							'code',
-							{ parentName: 'pre', className: 'language-jsx' },
-							"\n<ThemeProvider theme={globalTheme}>\n    <Button content={'click me!'} theme={propTheme} />\n</ThemeProvider>\n"
-						)
-					),
-					(0, esm.yg)('h3', { id: 'component-style' }, 'Component Style'),
-					(0, esm.yg)(
-						'p',
-						null,
-						'The ',
-						(0, esm.yg)('inlineCode', { parentName: 'p' }, 'style'),
-						' prop is available on all components and allows for styling of components at the global (via the ',
-						(0, esm.yg)('inlineCode', { parentName: 'p' }, 'theme'),
-						' prop) or the component level (via the ',
-						(0, esm.yg)('inlineCode', { parentName: 'p' }, 'style'),
-						' prop)'
-					),
-					(0, esm.yg)('p', null, 'Styles are applied to the root element of the component and uses CSS object syntax.'),
-					(0, esm.yg)('p', null, 'Standard CSS:'),
-					(0, esm.yg)(
-						'pre',
-						null,
-						(0, esm.yg)('code', { parentName: 'pre', className: 'language-css' }, '{\n    background-color: red;\n    color: #cccccc;\n}\n')
-					),
-					(0, esm.yg)(
-						'p',
-						null,
-						'In CSS object syntax, properties are camel case and ',
-						(0, esm.yg)('inlineCode', { parentName: 'p' }, "'-'"),
-						' are removed:'
-					),
-					(0, esm.yg)(
-						'pre',
-						null,
-						(0, esm.yg)('code', { parentName: 'pre', className: 'language-js' }, "{ \n    backgroundColor: '#ffff00',\n    color: '#cccccc',\n}\n")
-					),
-					(0, esm.yg)('p', null, 'Global level styling via ', (0, esm.yg)('inlineCode', { parentName: 'p' }, 'theme'), ' prop:'),
-					(0, esm.yg)(
-						'pre',
-						null,
-						(0, esm.yg)(
-							'code',
-							{ parentName: 'pre', className: 'language-js' },
-							"const globalTheme = {\n    components: {\n        button: {\n            style: {\n                backgroundColor: '#ffff00',\n                color: '#cccccc'\n            }\n        },\n    },\n};\n"
-						)
-					),
-					(0, esm.yg)(
-						'pre',
-						null,
-						(0, esm.yg)(
-							'code',
-							{ parentName: 'pre', className: 'language-jsx' },
-							"<ThemeProvider theme={globalTheme}>\n    <Button content={'click me!'} />\n</ThemeProvider>\n"
-						)
-					),
-					(0, esm.yg)('p', null, 'Component level styling via ', (0, esm.yg)('inlineCode', { parentName: 'p' }, 'style'), ' prop:'),
-					(0, esm.yg)(
-						'pre',
-						null,
-						(0, esm.yg)(
-							'code',
-							{ parentName: 'pre', className: 'language-js' },
-							"const buttonStyles = {\n    backgroundColor: '#ffff00',\n    color: '#cccccc'\n};\n"
-						)
-					),
-					(0, esm.yg)(
-						'pre',
-						null,
-						(0, esm.yg)('code', { parentName: 'pre', className: 'language-jsx' }, "<Button content={'click me!'} style={buttonStyles} />\n")
-					),
-					(0, esm.yg)('h3', { id: 'disable-component-styles' }, 'Disable Component Styles'),
-					(0, esm.yg)(
-						'p',
-						null,
-						'The ',
-						(0, esm.yg)('inlineCode', { parentName: 'p' }, 'disableStyles'),
-						' prop is available on all components and allows for disabling all styles of the component, including any styles being applied at the global or component level. '
-					),
-					(0, esm.yg)('p', null, 'This can be done at the global level:'),
-					(0, esm.yg)(
-						'pre',
-						null,
-						(0, esm.yg)(
-							'code',
-							{ parentName: 'pre', className: 'language-js' },
-							'const globalTheme = {\n    components: {\n        button: {\n            disableStyles: true,\n    },\n};\n'
-						)
-					),
-					(0, esm.yg)(
-						'pre',
-						null,
-						(0, esm.yg)(
-							'code',
-							{ parentName: 'pre', className: 'language-jsx' },
-							"<ThemeProvider theme={globalTheme}>\n    <Button content={'click me!'} />\n</ThemeProvider>\n"
-						)
-					),
-					(0, esm.yg)('p', null, 'Or at the component level:'),
-					(0, esm.yg)(
-						'pre',
-						null,
-						(0, esm.yg)('code', { parentName: 'pre', className: 'language-jsx' }, "<Button content={'click me!'} disableStyles={true} />\n")
-					),
-					(0, esm.yg)('h3', { id: 'component-class-names' }, 'Component Class Names'),
-					(0, esm.yg)(
-						'p',
-						null,
-						'The ',
-						(0, esm.yg)('inlineCode', { parentName: 'p' }, 'className'),
-						' prop is available on all components and allows for adding a class to the root level class list of a component. '
-					),
-					(0, esm.yg)(
-						'p',
-						null,
-						'By default, all components will contain a class name of ',
-						(0, esm.yg)('inlineCode', { parentName: 'p' }, 'ss-${componentname}'),
-						', for example ',
-						(0, esm.yg)('inlineCode', { parentName: 'p' }, "'ss-button'")
-					),
-					(0, esm.yg)('p', null, 'This can be done at the global level:'),
-					(0, esm.yg)(
-						'pre',
-						null,
-						(0, esm.yg)(
-							'code',
-							{ parentName: 'pre', className: 'language-js' },
-							"const globalTheme = {\n    components: {\n        button: {\n            className: 'my-btn-class',\n    },\n};\n"
-						)
-					),
-					(0, esm.yg)(
-						'pre',
-						null,
-						(0, esm.yg)(
-							'code',
-							{ parentName: 'pre', className: 'language-jsx' },
-							"<ThemeProvider theme={globalTheme}>\n    <Button content={'click me!'} />\n</ThemeProvider>\n"
-						)
-					),
-					(0, esm.yg)('p', null, 'Or at the component level:'),
-					(0, esm.yg)(
-						'pre',
-						null,
-						(0, esm.yg)('code', { parentName: 'pre', className: 'language-jsx' }, "<Button content={'click me!'} className={'my-btn-class'} />\n")
-					)
-				);
-			}
-			function Theme_stories_extends() {
-				return (
-					(Theme_stories_extends = Object.assign
-						? Object.assign.bind()
-						: function (n) {
-								for (var e = 1; e < arguments.length; e++) {
-									var t = arguments[e];
-									for (var r in t) ({}.hasOwnProperty.call(t, r) && (n[r] = t[r]));
-								}
-								return n;
-						  }),
-					Theme_stories_extends.apply(null, arguments)
-				);
-			}
-			MDXContent.isMDXComponent = !0;
-			const Theme_stories_layoutProps = {};
-			function Theme_stories_MDXContent({ components, ...props }) {
-				return (0, esm.yg)(
-					'wrapper',
-					Theme_stories_extends({}, Theme_stories_layoutProps, props, { components, mdxType: 'MDXLayout' }),
-					(0, esm.yg)(blocks.W8, { title: 'Documentation/Theme', mdxType: 'Meta' }),
-					(0, esm.yg)(
-						'style',
-						null,
-						'\n\t.header {\n\t\tdisplay: flex;\n\t\talign-items: center;\n\t}\n\n\t.header .subtitle {\n\t\ttext-transform: uppercase;\n\t\tcolor: #00cee1;\n\t}\n\n\t.header img {\n\t\twidth: 300px;\n\t\tmargin-right: 20px;\n\t}\n'
-					),
-					(0, esm.yg)('div', { class: 'header' }, (0, esm.yg)('span', { class: 'subtitle' }, 'SNAP PREACT COMPONENETS')),
-					(0, esm.yg)('hr', null),
-					(0, esm.yg)(MDXContent, { mdxType: 'Readme' })
-				);
-			}
-			Theme_stories_MDXContent.isMDXComponent = !0;
-			const __page = () => {
-				throw new Error('Docs-only story');
-			};
-			__page.parameters = { docsOnly: !0 };
-			const componentMeta = { title: 'Documentation/Theme', includeStories: ['__page'] },
-				mdxStoryNameToKey = {};
-			(componentMeta.parameters = componentMeta.parameters || {}),
-				(componentMeta.parameters.docs = {
-					...(componentMeta.parameters.docs || {}),
-					page: () =>
-						(0, esm.yg)(dist_esm.hT, { mdxStoryNameToKey, mdxComponentAnnotations: componentMeta }, (0, esm.yg)(Theme_stories_MDXContent, null)),
-				});
-			const Theme_stories = componentMeta;
-		},
-		'./src/documentation/Usage/Usage.stories.mdx'(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
-			'use strict';
-			__webpack_require__.r(__webpack_exports__), __webpack_require__.d(__webpack_exports__, { __page: () => __page, default: () => Usage_stories });
-			__webpack_require__('../../node_modules/preact/compat/dist/compat.module.js');
-			var esm = __webpack_require__('../../node_modules/@mdx-js/react/dist/esm.js'),
-				dist_esm = __webpack_require__('./node_modules/@storybook/addon-docs/dist/esm/index.js'),
-				blocks = __webpack_require__('./node_modules/@storybook/addon-docs/blocks.js');
-			function _extends() {
-				return (
-					(_extends = Object.assign
-						? Object.assign.bind()
-						: function (n) {
-								for (var e = 1; e < arguments.length; e++) {
-									var t = arguments[e];
-									for (var r in t) ({}.hasOwnProperty.call(t, r) && (n[r] = t[r]));
-								}
-								return n;
-						  }),
-					_extends.apply(null, arguments)
-				);
-			}
-			const layoutProps = {};
-			function MDXContent({ components, ...props }) {
-				return (0, esm.yg)(
-					'wrapper',
-					_extends({}, layoutProps, props, { components, mdxType: 'MDXLayout' }),
-					(0, esm.yg)(
-						'p',
-						null,
-						'Snap Preact components are designed to be used with the Snap MobX store package ',
-						(0, esm.yg)('inlineCode', { parentName: 'p' }, '@searchspring/snap-store-mobx'),
-						' .'
-					),
-					(0, esm.yg)(
-						'p',
-						null,
-						'Snap stores are a dependency for Snap controllers ',
-						(0, esm.yg)('inlineCode', { parentName: 'p' }, '@searchspring/snap-controller'),
-						'. Snap controllers such as ',
-						(0, esm.yg)('inlineCode', { parentName: 'p' }, 'SearchController'),
-						' contain a reference to the ',
-						(0, esm.yg)('inlineCode', { parentName: 'p' }, 'SearchStore'),
-						' that was provided in the ',
-						(0, esm.yg)('inlineCode', { parentName: 'p' }, 'ControllerServices'),
-						' object named ',
-						(0, esm.yg)('inlineCode', { parentName: 'p' }, 'searchControllerServices'),
-						' below.'
-					),
-					(0, esm.yg)('p', null, 'Many component props are tied to the design of the store for ease of use:'),
-					(0, esm.yg)(
-						'p',
-						null,
-						'In this example, the ',
-						(0, esm.yg)('inlineCode', { parentName: 'p' }, 'store.pagination'),
-						' property is provided to the ',
-						(0, esm.yg)('inlineCode', { parentName: 'p' }, 'pagination'),
-						' prop of the ',
-						(0, esm.yg)('inlineCode', { parentName: 'p' }, '<Pagination />'),
-						' component.'
-					),
-					(0, esm.yg)(
-						'pre',
-						null,
-						(0, esm.yg)(
-							'code',
-							{ parentName: 'pre', className: 'language-js' },
-							"import { SearchController } from '@searchspring/snap-controller';\n\nconst searchController = new SearchController(searchConfig, searchControllerServices);\n\nconsole.log(searchController.store)\n"
-						)
-					),
-					(0, esm.yg)(
-						'pre',
-						null,
-						(0, esm.yg)(
-							'code',
-							{ parentName: 'pre', className: 'language-js' },
-							"import { Pagination } from '@searchspring/snap-preact-components';\n"
-						)
-					),
-					(0, esm.yg)(
-						'pre',
-						null,
-						(0, esm.yg)('code', { parentName: 'pre', className: 'language-jsx' }, '<Pagination pagination={searchController.store.pagination} />\n')
-					),
-					(0, esm.yg)('br', null),
-					(0, esm.yg)(
-						'p',
-						null,
-						(0, esm.yg)('strong', { parentName: 'p' }, "Usage examples for each component can be seen in the component's 'Docs' tab.")
-					)
-				);
-			}
-			function Usage_stories_extends() {
-				return (
-					(Usage_stories_extends = Object.assign
-						? Object.assign.bind()
-						: function (n) {
-								for (var e = 1; e < arguments.length; e++) {
-									var t = arguments[e];
-									for (var r in t) ({}.hasOwnProperty.call(t, r) && (n[r] = t[r]));
-								}
-								return n;
-						  }),
-					Usage_stories_extends.apply(null, arguments)
-				);
-			}
-			MDXContent.isMDXComponent = !0;
-			const Usage_stories_layoutProps = {};
-			function Usage_stories_MDXContent({ components, ...props }) {
-				return (0, esm.yg)(
-					'wrapper',
-					Usage_stories_extends({}, Usage_stories_layoutProps, props, { components, mdxType: 'MDXLayout' }),
-					(0, esm.yg)(blocks.W8, { title: 'Documentation/Usage', mdxType: 'Meta' }),
-					(0, esm.yg)(
-						'style',
-						null,
-						'\n\t.header {\n\t\tdisplay: flex;\n\t\talign-items: center;\n\t}\n\n\t.header .subtitle {\n\t\ttext-transform: uppercase;\n\t\tcolor: #00cee1;\n\t}\n\n\t.header img {\n\t\twidth: 300px;\n\t\tmargin-right: 20px;\n\t}\n'
-					),
-					(0, esm.yg)('div', { class: 'header' }, (0, esm.yg)('span', { class: 'subtitle' }, 'SNAP PREACT COMPONENETS')),
-					(0, esm.yg)('hr', null),
-					(0, esm.yg)(MDXContent, { mdxType: 'Readme' })
-				);
-			}
-			Usage_stories_MDXContent.isMDXComponent = !0;
-			const __page = () => {
-				throw new Error('Docs-only story');
-			};
-			__page.parameters = { docsOnly: !0 };
-			const componentMeta = { title: 'Documentation/Usage', includeStories: ['__page'] },
-				mdxStoryNameToKey = {};
-			(componentMeta.parameters = componentMeta.parameters || {}),
-				(componentMeta.parameters.docs = {
-					...(componentMeta.parameters.docs || {}),
-					page: () =>
-						(0, esm.yg)(dist_esm.hT, { mdxStoryNameToKey, mdxComponentAnnotations: componentMeta }, (0, esm.yg)(Usage_stories_MDXContent, null)),
-				});
-			const Usage_stories = componentMeta;
-		},
 		'./src/hooks/useA11y.tsx'(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
 			'use strict';
 			function useA11y(elem, tabIndex) {
@@ -28986,18 +27846,15 @@
 			__webpack_require__('../../node_modules/core-js/modules/es.array.index-of.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.symbol.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.object.assign.js'),
-				__webpack_require__('../../node_modules/core-js/modules/es.array.sort.js'),
-				__webpack_require__('../../node_modules/core-js/modules/es.array.filter.js'),
-				__webpack_require__('../../node_modules/core-js/modules/es.array.join.js'),
-				__webpack_require__('../../node_modules/core-js/modules/es.array.map.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.array.includes.js');
-			var preact__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__('../../node_modules/preact/dist/preact.module.js'),
-				_utilities__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__('./src/utilities/createImpressionObserver.ts'),
-				preact_hooks__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__('../../node_modules/preact/hooks/dist/hooks.module.js'),
+			var preact__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__('../../node_modules/preact/dist/preact.module.js'),
+				_utilities__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__('./src/utilities/createImpressionObserver.ts'),
+				preact_hooks__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__('../../node_modules/preact/hooks/dist/hooks.module.js'),
 				_excluded = ['controller', 'result', 'banner', 'type', 'content'];
 			function withTracking(WrappedComponent) {
 				return function WithTracking(props) {
-					var resetKey,
+					var _ref,
+						_content$type,
 						controller = props.controller,
 						result = props.result,
 						banner = props.banner,
@@ -29023,47 +27880,53 @@
 							}
 							return i;
 						})(props, _excluded);
-					if (props.trackingRef) return (0, preact__WEBPACK_IMPORTED_MODULE_8__.h)(WrappedComponent, Object.assign({}, props));
-					if (
-						(controller || (type && content) || console.warn('Warning: No controller provided to withTracking', props),
-						result || banner || (type && content) || console.warn('Warning: No result or banner provided to withTracking'),
-						'search' === (null == controller ? void 0 : controller.type) || 'autocomplete' === (null == controller ? void 0 : controller.type))
-					) {
-						var urlManager = controller.urlManager;
-						resetKey = JSON.stringify({
-							q: urlManager.state.query,
-							p: urlManager.state.page,
-							ps: urlManager.state.pageSize,
-							s: urlManager.state.sort,
-							f: urlManager.state.filter,
-						});
-					} else if ('recommendation' === (null == controller ? void 0 : controller.type)) {
-						var _recStore$profile,
-							recStore = controller.store;
-						resetKey = JSON.stringify({
-							tag: null === (_recStore$profile = recStore.profile) || void 0 === _recStore$profile ? void 0 : _recStore$profile.tag,
-							ids: recStore.results
-								.map(function (result) {
-									return result.id;
-								})
-								.join(','),
-						});
-					}
-					var _createImpressionObse = (0, _utilities__WEBPACK_IMPORTED_MODULE_9__.Q)({ resetKey }),
-						ref = _createImpressionObse.ref;
-					_createImpressionObse.inViewport &&
-						(type && content && !result && ['search', 'autocomplete'].includes((null == controller ? void 0 : controller.type) || '')
+					if (props.trackingRef) return (0, preact__WEBPACK_IMPORTED_MODULE_4__.h)(WrappedComponent, Object.assign({}, props));
+					controller || (type && content) || console.warn('Warning: No controller provided to withTracking', props),
+						result || banner || (type && content) || console.warn('Warning: No result or banner provided to withTracking');
+					var _createImpressionObse = (0, _utilities__WEBPACK_IMPORTED_MODULE_5__.Q)(),
+						ref = _createImpressionObse.ref,
+						inViewport = _createImpressionObse.inViewport,
+						updateRef = _createImpressionObse.updateRef,
+						resultIdentity =
+							null ===
+								(_ref =
+									result ||
+									banner ||
+									(type && (null == content || null === (_content$type = content[type]) || void 0 === _content$type ? void 0 : _content$type[0]))) ||
+							void 0 === _ref
+								? void 0
+								: _ref.responseId,
+						prevIdentityRef = (0, preact_hooks__WEBPACK_IMPORTED_MODULE_6__.li)(resultIdentity),
+						awaitingReobservationRef = (0, preact_hooks__WEBPACK_IMPORTED_MODULE_6__.li)(!1);
+					prevIdentityRef.current !== resultIdentity && (awaitingReobservationRef.current = !0),
+						(0, preact_hooks__WEBPACK_IMPORTED_MODULE_6__.vJ)(
+							function () {
+								prevIdentityRef.current !== resultIdentity && ((prevIdentityRef.current = resultIdentity), updateRef(ref.current));
+							},
+							[resultIdentity, updateRef]
+						),
+						(0, preact_hooks__WEBPACK_IMPORTED_MODULE_6__.vJ)(
+							function () {
+								awaitingReobservationRef.current && !inViewport && (awaitingReobservationRef.current = !1);
+							},
+							[inViewport, resultIdentity]
+						);
+					var isBannerTracking =
+						type && content && !result && ['search', 'autocomplete'].includes((null == controller ? void 0 : controller.type) || '');
+					inViewport &&
+						!awaitingReobservationRef.current &&
+						(isBannerTracking
 							? null == controller || controller.track.banner.impression(content[type][0])
 							: (null != result && result.bundleSeed) || null == controller || controller.track.product.impression(result || banner));
-					var handleClick = (0, preact_hooks__WEBPACK_IMPORTED_MODULE_10__.hb)(
+					var handleClick = (0, preact_hooks__WEBPACK_IMPORTED_MODULE_6__.hb)(
 						function (e) {
-							type && content && !result && ['search', 'autocomplete'].includes((null == controller ? void 0 : controller.type) || '')
+							isBannerTracking
 								? null == controller || controller.track.banner.click(e, content[type][0])
 								: null == controller || controller.track.product.click(e, result || banner);
 						},
 						[controller, result, banner, type, content]
 					);
-					(0, preact_hooks__WEBPACK_IMPORTED_MODULE_10__.vJ)(
+					(0, preact_hooks__WEBPACK_IMPORTED_MODULE_6__.vJ)(
 						function () {
 							var currentRef = ref.current;
 							if (currentRef)
@@ -29075,10 +27938,22 @@
 									}
 								);
 						},
-						[ref, handleClick]
+						[handleClick]
 					);
-					var trackingProps = Object.assign({}, restProps, { controller, result, banner, type, content, trackingRef: ref });
-					return (0, preact__WEBPACK_IMPORTED_MODULE_8__.h)(WrappedComponent, Object.assign({}, trackingProps));
+					var trackingProps = Object.assign({}, restProps, {
+						controller,
+						result,
+						banner,
+						type,
+						content,
+						trackingRef: (0, preact_hooks__WEBPACK_IMPORTED_MODULE_6__.hb)(
+							function (el) {
+								updateRef(el);
+							},
+							[updateRef]
+						),
+					});
+					return (0, preact__WEBPACK_IMPORTED_MODULE_4__.h)(WrappedComponent, Object.assign({}, trackingProps));
 				};
 			}
 		},
@@ -29238,7 +28113,7 @@
 			}
 			function createImpressionObserver(options) {
 				var ref = (0, hooks_module.li)(null),
-					inViewport = (function useIntersectionAdvanced(ref) {
+					_useIntersectionAdvan = (function useIntersectionAdvanced(ref) {
 						var options = arguments.length > 1 && void 0 !== arguments[1] ? arguments[1] : {},
 							_options$rootMargin = options.rootMargin,
 							rootMargin = void 0 === _options$rootMargin ? '0px' : _options$rootMargin,
@@ -29248,73 +28123,76 @@
 							threshold = void 0 === _options$threshold ? 0 : _options$threshold,
 							_options$minVisibleTi = options.minVisibleTime,
 							minVisibleTime = void 0 === _options$minVisibleTi ? 0 : _options$minVisibleTi,
-							resetKey = options.resetKey,
 							_useState2 = _slicedToArray((0, hooks_module.J0)(!1), 2),
 							isIntersecting = _useState2[0],
 							setIntersecting = _useState2[1],
 							visibleTimerRef = (0, hooks_module.li)(null),
 							visibleStartRef = (0, hooks_module.li)(null),
-							lastResetKeyRef = (0, hooks_module.li)(resetKey);
-						return resetKey !== lastResetKeyRef.current
-							? (setIntersecting(!1),
-							  visibleTimerRef.current && (window.clearTimeout(visibleTimerRef.current), (visibleTimerRef.current = null)),
-							  (visibleStartRef.current = null),
-							  (lastResetKeyRef.current = resetKey),
-							  !1)
-							: ((0, hooks_module.vJ)(
-									function () {
-										setIntersecting(!1);
-										var observer = null,
-											pollInterval = null;
-										if (ref.current) {
-											var clearPoll = function clearPoll() {
-													pollInterval && (window.clearInterval(pollInterval), (pollInterval = null));
+							_useState4 = _slicedToArray((0, hooks_module.J0)(0), 2),
+							counter = _useState4[0],
+							setCounter = _useState4[1],
+							updateRef = (0, hooks_module.hb)(function (el) {
+								(ref.current = el),
+									setCounter(function (c) {
+										return c + 1;
+									});
+							}, []);
+						return (
+							(0, hooks_module.vJ)(
+								function () {
+									setIntersecting(!1);
+									var observer = null,
+										pollInterval = null;
+									if (ref.current) {
+										var clearPoll = function clearPoll() {
+												pollInterval && (window.clearInterval(pollInterval), (pollInterval = null));
+											},
+											handleVisible = function handleVisible() {
+												minVisibleTime > 0
+													? ((visibleStartRef.current = Date.now()),
+													  visibleTimerRef.current && window.clearTimeout(visibleTimerRef.current),
+													  (visibleTimerRef.current = window.setTimeout(function () {
+															setIntersecting(!0), fireOnce && ref.current && observer && observer.unobserve(ref.current);
+													  }, minVisibleTime)))
+													: (setIntersecting(!0), fireOnce && ref.current && observer && observer.unobserve(ref.current));
+											},
+											handleHidden = function handleHidden() {
+												visibleTimerRef.current && window.clearTimeout(visibleTimerRef.current),
+													(visibleTimerRef.current = null),
+													(visibleStartRef.current = null),
+													setIntersecting(!1);
+											};
+										return (
+											(observer = new IntersectionObserver(
+												function (_ref) {
+													_slicedToArray(_ref, 1)[0].isIntersecting
+														? ref.current && elementIsVisible(ref.current)
+															? (clearPoll(), handleVisible())
+															: (handleHidden(),
+															  pollInterval ||
+																	(pollInterval = window.setInterval(function () {
+																		ref.current ? elementIsVisible(ref.current) && (clearPoll(), handleVisible()) : clearPoll();
+																	}, 250)))
+														: (clearPoll(), handleHidden());
 												},
-												handleVisible = function handleVisible() {
-													minVisibleTime > 0
-														? ((visibleStartRef.current = Date.now()),
-														  visibleTimerRef.current && window.clearTimeout(visibleTimerRef.current),
-														  (visibleTimerRef.current = window.setTimeout(function () {
-																setIntersecting(!0), fireOnce && ref.current && observer && observer.unobserve(ref.current);
-														  }, minVisibleTime)))
-														: (setIntersecting(!0), fireOnce && ref.current && observer && observer.unobserve(ref.current));
-												},
-												handleHidden = function handleHidden() {
+												{ rootMargin, threshold }
+											)),
+											ref.current && observer.observe(ref.current),
+											function () {
+												setIntersecting(!1),
+													clearPoll(),
 													visibleTimerRef.current && window.clearTimeout(visibleTimerRef.current),
-														(visibleTimerRef.current = null),
-														(visibleStartRef.current = null),
-														setIntersecting(!1);
-												};
-											return (
-												(observer = new IntersectionObserver(
-													function (_ref) {
-														_slicedToArray(_ref, 1)[0].isIntersecting
-															? ref.current && elementIsVisible(ref.current)
-																? (clearPoll(), handleVisible())
-																: (handleHidden(),
-																  pollInterval ||
-																		(pollInterval = window.setInterval(function () {
-																			ref.current ? elementIsVisible(ref.current) && (clearPoll(), handleVisible()) : clearPoll();
-																		}, 250)))
-															: (clearPoll(), handleHidden());
-													},
-													{ rootMargin, threshold }
-												)),
-												ref.current && observer.observe(ref.current),
-												function () {
-													setIntersecting(!1),
-														clearPoll(),
-														visibleTimerRef.current && window.clearTimeout(visibleTimerRef.current),
-														observer && ref.current && observer.unobserve(ref.current);
-												}
-											);
-										}
-									},
-									[ref, resetKey]
-							  ),
-							  isIntersecting);
+													observer && ref.current && observer.unobserve(ref.current);
+											}
+										);
+									}
+								},
+								[ref, counter]
+							),
+							{ inViewport: isIntersecting, updateRef }
+						);
 					})(ref, Object.assign({}, options, { fireOnce: !0, threshold: 0.7, minVisibleTime: 1e3 }));
-				return { ref, inViewport };
+				return { ref, inViewport: _useIntersectionAdvan.inViewport, updateRef: _useIntersectionAdvan.updateRef };
 			}
 		},
 		'./src/utilities/defaultBadgeComponentMap.ts'(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
@@ -29414,15 +28292,15 @@
 					__webpack_require__('../../node_modules/core-js/modules/es.regexp.exec.js'),
 					__webpack_require__('../../node_modules/core-js/modules/web.timers.js'),
 					__webpack_require__('../../node_modules/core-js/modules/es.array.index-of.js'),
+					__webpack_require__('../../node_modules/core-js/modules/es.array.includes.js'),
+					__webpack_require__('../../node_modules/core-js/modules/es.object.assign.js'),
 					__webpack_require__('../../node_modules/core-js/modules/es.array.map.js'),
 					__webpack_require__('../../node_modules/core-js/modules/es.array.fill.js'),
-					__webpack_require__('../../node_modules/core-js/modules/es.object.assign.js'),
 					__webpack_require__('../../node_modules/core-js/modules/es.array.reduce.js'),
 					__webpack_require__('../../node_modules/core-js/modules/es.array.concat.js'),
 					__webpack_require__('../../node_modules/core-js/modules/es.array.slice.js'),
 					__webpack_require__('../../node_modules/core-js/modules/es.array.for-each.js'),
 					__webpack_require__('../../node_modules/core-js/modules/web.dom-collections.for-each.js'),
-					__webpack_require__('../../node_modules/core-js/modules/es.array.includes.js'),
 					__webpack_require__('../../node_modules/core-js/modules/es.array.filter.js'),
 					__webpack_require__('../../node_modules/core-js/modules/es.array.find.js'),
 					__webpack_require__('../../node_modules/core-js/modules/es.string.includes.js'),
@@ -30564,6 +29442,73 @@
 					params
 				);
 			}
+			function isClickWithinProductLink_createForOfIteratorHelper(r, e) {
+				var t = ('undefined' != typeof Symbol && r[Symbol.iterator]) || r['@@iterator'];
+				if (!t) {
+					if (
+						Array.isArray(r) ||
+						(t = (function isClickWithinProductLink_unsupportedIterableToArray(r, a) {
+							if (r) {
+								if ('string' == typeof r) return isClickWithinProductLink_arrayLikeToArray(r, a);
+								var t = {}.toString.call(r).slice(8, -1);
+								return (
+									'Object' === t && r.constructor && (t = r.constructor.name),
+									'Map' === t || 'Set' === t
+										? Array.from(r)
+										: 'Arguments' === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t)
+										? isClickWithinProductLink_arrayLikeToArray(r, a)
+										: void 0
+								);
+							}
+						})(r)) ||
+						(e && r && 'number' == typeof r.length)
+					) {
+						t && (r = t);
+						var _n = 0,
+							F = function F() {};
+						return {
+							s: F,
+							n: function n() {
+								return _n >= r.length ? { done: !0 } : { done: !1, value: r[_n++] };
+							},
+							e: function e(r) {
+								throw r;
+							},
+							f: F,
+						};
+					}
+					throw new TypeError(
+						'Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.'
+					);
+				}
+				var o,
+					a = !0,
+					u = !1;
+				return {
+					s: function s() {
+						t = t.call(r);
+					},
+					n: function n() {
+						var r = t.next();
+						return (a = r.done), r;
+					},
+					e: function e(r) {
+						(u = !0), (o = r);
+					},
+					f: function f() {
+						try {
+							a || null == t.return || t.return();
+						} finally {
+							if (u) throw o;
+						}
+					},
+				};
+			}
+			function isClickWithinProductLink_arrayLikeToArray(r, a) {
+				(null == a || a > r.length) && (a = r.length);
+				for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e];
+				return n;
+			}
 			!(function (ControllerTypes) {
 				(ControllerTypes.search = 'search'),
 					(ControllerTypes.autocomplete = 'autocomplete'),
@@ -30571,34 +29516,35 @@
 					(ControllerTypes.recommendation = 'recommendation');
 			})(ControllerTypes || (ControllerTypes = {}));
 			var isClickWithinProductLink = function isClickWithinProductLink(e, result) {
-					for (
-						var _result$display,
-							_result$display$mappi,
-							_result$mappings$core,
-							currentElement = e.target,
-							href = null,
-							level = 0,
-							resultCoreUrl =
-								(null == result ||
-								null === (_result$display = result.display) ||
-								void 0 === _result$display ||
-								null === (_result$display$mappi = _result$display.mappings.core) ||
-								void 0 === _result$display$mappi
-									? void 0
-									: _result$display$mappi.url) || '',
-							resultDisplayUrl =
-								(null == result || null === (_result$mappings$core = result.mappings.core) || void 0 === _result$mappings$core
-									? void 0
-									: _result$mappings$core.url) || '';
-						currentElement && level < 12;
-
-					) {
-						if (
-							(href = currentElement.getAttribute('href')) &&
-							((resultCoreUrl && href.includes(resultCoreUrl)) || (resultDisplayUrl && href.includes(resultDisplayUrl)))
-						)
-							return !0;
-						(currentElement = currentElement.parentElement), level++;
+					var _result$display,
+						_result$display$mappi,
+						_result$mappings$core,
+						_step,
+						resultDisplayUrl =
+							(null == result ||
+							null === (_result$display = result.display) ||
+							void 0 === _result$display ||
+							null === (_result$display$mappi = _result$display.mappings.core) ||
+							void 0 === _result$display$mappi
+								? void 0
+								: _result$display$mappi.url) || '',
+						resultCoreUrl =
+							(null == result || null === (_result$mappings$core = result.mappings.core) || void 0 === _result$mappings$core
+								? void 0
+								: _result$mappings$core.url) || '',
+						_iterator = isClickWithinProductLink_createForOfIteratorHelper((e.composedPath ? e.composedPath() : [e.target]).slice(0, 12));
+					try {
+						for (_iterator.s(); !(_step = _iterator.n()).done; ) {
+							var element = _step.value;
+							if (element instanceof Element) {
+								var href = element.getAttribute('href');
+								if (href && ((resultCoreUrl && href.includes(resultCoreUrl)) || (resultDisplayUrl && href.includes(resultDisplayUrl)))) return !0;
+							}
+						}
+					} catch (err) {
+						_iterator.e(err);
+					} finally {
+						_iterator.f();
 					}
 					return !1;
 				},
@@ -30919,6 +29865,7 @@
 				defaultConfig = {
 					id: 'search',
 					globals: {},
+					beacon: { enabled: !0 },
 					settings: { redirects: { merchandising: !0, singleResult: !0 }, facets: { trim: !0, pinFiltered: !0, storeRange: !0, autoOpenActive: !0 } },
 				},
 				SearchController = (function (_AbstractController) {
@@ -30953,70 +29900,84 @@
 									impression: function impression(_ref2) {
 										var _this$events$response,
 											_this$events$response2,
+											_this$config$beacon,
 											_this$config$globals,
 											uid = _ref2.uid,
 											responseId = _ref2.responseId;
-										if (
-											null === (_this$events$response = _this.events[responseId]) ||
-											void 0 === _this$events$response ||
-											null === (_this$events$response2 = _this$events$response.banner[uid]) ||
-											void 0 === _this$events$response2 ||
-											!_this$events$response2.impression
-										) {
-											var data = { responseId, banners: [{ uid }], results: [] };
-											_this.eventManager.fire('track.banner.impression', { controller: _this, product: { uid }, trackEvent: data }),
-												_this.tracker.events[_this.page.type].impression({
-													data,
-													siteId:
-														null === (_this$config$globals = _this.config.globals) || void 0 === _this$config$globals
-															? void 0
-															: _this$config$globals.siteId,
-												}),
-												(_this.events[responseId].banner[uid] = _this.events[responseId].banner[uid] || {}),
-												(_this.events[responseId].banner[uid].impression = !0);
-										}
+										if (uid) {
+											if (
+												null === (_this$events$response = _this.events[responseId]) ||
+												void 0 === _this$events$response ||
+												null === (_this$events$response2 = _this$events$response.banner[uid]) ||
+												void 0 === _this$events$response2 ||
+												!_this$events$response2.impression
+											) {
+												var data = { responseId, banners: [{ uid }], results: [] };
+												_this.eventManager.fire('track.banner.impression', { controller: _this, product: { uid }, trackEvent: data }),
+													(null === (_this$config$beacon = _this.config.beacon) || void 0 === _this$config$beacon
+														? void 0
+														: _this$config$beacon.enabled) &&
+														_this.tracker.events[_this.page.type].impression({
+															data,
+															siteId:
+																null === (_this$config$globals = _this.config.globals) || void 0 === _this$config$globals
+																	? void 0
+																	: _this$config$globals.siteId,
+														}),
+													(_this.events[responseId].banner[uid] = _this.events[responseId].banner[uid] || {}),
+													(_this.events[responseId].banner[uid].impression = !0);
+											}
+										} else _this.log.warn('No banner provided to track.banner.impression');
 									},
 									click: function click(e, banner) {
-										var responseId = banner.responseId,
-											uid = banner.uid;
-										if (isClickWithinBannerLink(e)) {
-											var _this$events, _this$events$response3, _this$events$response4;
-											if (
-												null !== (_this$events = _this.events) &&
-												void 0 !== _this$events &&
-												null !== (_this$events$response3 = _this$events[responseId]) &&
-												void 0 !== _this$events$response3 &&
-												null !== (_this$events$response4 = _this$events$response3.banner[uid]) &&
-												void 0 !== _this$events$response4 &&
-												_this$events$response4.clickThrough
-											)
-												return;
-											_this.track.banner.clickThrough(e, banner),
+										if (banner) {
+											var responseId = banner.responseId,
+												uid = banner.uid;
+											if (isClickWithinBannerLink(e)) {
+												var _this$events, _this$events$response3, _this$events$response4;
+												if (
+													null !== (_this$events = _this.events) &&
+													void 0 !== _this$events &&
+													null !== (_this$events$response3 = _this$events[responseId]) &&
+													void 0 !== _this$events$response3 &&
+													null !== (_this$events$response4 = _this$events$response3.banner[uid]) &&
+													void 0 !== _this$events$response4 &&
+													_this$events$response4.clickThrough
+												)
+													return;
+												_this.track.banner.clickThrough(e, banner),
+													(_this.events[responseId].banner[uid] = _this.events[responseId].banner[uid] || {}),
+													(_this.events[responseId].banner[uid].clickThrough = !0),
+													setTimeout(function () {
+														_this.events[responseId].banner[uid].clickThrough = !1;
+													}, 300);
+											}
+										} else _this.log.warn('No banner provided to track.banner.click');
+									},
+									clickThrough: function clickThrough(e, _ref3) {
+										var _this$config$beacon2,
+											_this$config$globals2,
+											uid = _ref3.uid,
+											responseId = _ref3.responseId;
+										if (uid) {
+											var data = { responseId, banners: [{ uid }] };
+											_this.eventManager.fire('track.banner.clickThrough', { controller: _this, event: e, product: { uid }, trackEvent: data }),
+												(null === (_this$config$beacon2 = _this.config.beacon) || void 0 === _this$config$beacon2
+													? void 0
+													: _this$config$beacon2.enabled) &&
+													_this.tracker.events[_this.page.type].clickThrough({
+														data,
+														siteId:
+															null === (_this$config$globals2 = _this.config.globals) || void 0 === _this$config$globals2
+																? void 0
+																: _this$config$globals2.siteId,
+													}),
 												(_this.events[responseId].banner[uid] = _this.events[responseId].banner[uid] || {}),
 												(_this.events[responseId].banner[uid].clickThrough = !0),
 												setTimeout(function () {
 													_this.events[responseId].banner[uid].clickThrough = !1;
 												}, 300);
-										}
-									},
-									clickThrough: function clickThrough(e, _ref3) {
-										var _this$config$globals2,
-											uid = _ref3.uid,
-											responseId = _ref3.responseId,
-											data = { responseId, banners: [{ uid }] };
-										_this.eventManager.fire('track.banner.clickThrough', { controller: _this, event: e, product: { uid }, trackEvent: data }),
-											_this.tracker.events[_this.page.type].clickThrough({
-												data,
-												siteId:
-													null === (_this$config$globals2 = _this.config.globals) || void 0 === _this$config$globals2
-														? void 0
-														: _this$config$globals2.siteId,
-											}),
-											(_this.events[responseId].banner[uid] = _this.events[responseId].banner[uid] || {}),
-											(_this.events[responseId].banner[uid].clickThrough = !0),
-											setTimeout(function () {
-												_this.events[responseId].banner[uid].clickThrough = !1;
-											}, 300);
+										} else _this.log.warn('No banner provided to track.banner.clickThrough');
 									},
 								},
 								product: {
@@ -31027,213 +29988,264 @@
 											_document,
 											_document$querySelect,
 											_result$mappings$core2,
-											_this$config$globals3,
-											responseId = result.responseId,
-											target = e.target,
-											resultHref =
-												(null === (_result$display = result.display) ||
-												void 0 === _result$display ||
-												null === (_result$display$mappi = _result$display.mappings.core) ||
-												void 0 === _result$display$mappi
-													? void 0
-													: _result$display$mappi.url) ||
-												(null === (_result$mappings$core = result.mappings.core) || void 0 === _result$mappings$core
-													? void 0
-													: _result$mappings$core.url) ||
-												'',
-											elemHref = null == target ? void 0 : target.getAttribute('href'),
-											storedHref = -1 != (null == elemHref ? void 0 : elemHref.indexOf(resultHref)) ? resultHref : elemHref || resultHref,
-											scrollMap = {},
-											selector = (function generateHrefSelector(element, href) {
-												var levels = arguments.length > 2 && void 0 !== arguments[2] ? arguments[2] : 7,
-													level = 0,
-													elem = element;
-												for (; elem && level <= levels; ) {
-													var innerHrefElem = elem.querySelector('[href*="' + href + '"]');
-													if (innerHrefElem) {
-														for (var selector = '', parentElem = innerHrefElem; parentElem && parentElem != elem.parentElement; ) {
-															var escapedClassSelector = parentElem.classList.value
-																.trim()
-																.split(' ')
-																.reduce(function (classes, classname) {
-																	return classname.trim() ? classes + '.' + css_escape_default()(classname.trim()) : classes;
-																}, '');
-															(selector = '' + parentElem.tagName + escapedClassSelector + (selector ? ' ' + selector : '')),
-																(parentElem = parentElem.parentElement);
-														}
-														return selector + '[href*="' + href + '"]';
-													}
-													(elem = elem.parentElement), level++;
-												}
-												return;
-											})(target, storedHref),
-											domRect = selector
-												? null === (_document = document) ||
-												  void 0 === _document ||
-												  null === (_document$querySelect = _document.querySelector(selector)) ||
-												  void 0 === _document$querySelect
-													? void 0
-													: _document$querySelect.getBoundingClientRect()
-												: void 0;
-										if (selector || storedHref || domRect)
-											try {
-												var lastRequest = _this.storage.get('lastStringyParams');
-												if (lastRequest) {
-													var storableRequestParams = getStorableRequestParams(JSON.parse(lastRequest));
-													scrollMap[JSON.stringify(storableRequestParams)] = { domRect, href: storedHref, selector };
-												}
-											} catch (err) {
-												_this.log.warn('Failed to save srcollMap!', err);
-											}
-										_this.storage.set('scrollMap', scrollMap);
-										var data = {
-											responseId,
-											results: [
-												{
-													type: result.type,
-													uid: result.id,
-													parentId: result.id,
-													sku:
-														null === (_result$mappings$core2 = result.mappings.core) || void 0 === _result$mappings$core2
-															? void 0
-															: _result$mappings$core2.sku,
-												},
-											],
-										};
-										_this.eventManager.fire('track.product.clickThrough', { controller: _this, event: e, product: result, trackEvent: data }),
-											_this.tracker.events[_this.page.type].clickThrough({
-												data,
-												siteId:
-													null === (_this$config$globals3 = _this.config.globals) || void 0 === _this$config$globals3
+											_result$mappings$core3,
+											_this$config$beacon3,
+											_this$config$globals3;
+										if (result) {
+											var responseId = result.responseId,
+												target = e.target,
+												resultHref =
+													(null === (_result$display = result.display) ||
+													void 0 === _result$display ||
+													null === (_result$display$mappi = _result$display.mappings.core) ||
+													void 0 === _result$display$mappi
 														? void 0
-														: _this$config$globals3.siteId,
-											});
+														: _result$display$mappi.url) ||
+													(null === (_result$mappings$core = result.mappings.core) || void 0 === _result$mappings$core
+														? void 0
+														: _result$mappings$core.url) ||
+													'',
+												elemHref = null == target ? void 0 : target.getAttribute('href'),
+												storedHref = -1 != (null == elemHref ? void 0 : elemHref.indexOf(resultHref)) ? resultHref : elemHref || resultHref,
+												scrollMap = {},
+												selector = (function generateHrefSelector(element, href) {
+													var levels = arguments.length > 2 && void 0 !== arguments[2] ? arguments[2] : 7,
+														level = 0,
+														elem = element;
+													for (; elem && level <= levels; ) {
+														var innerHrefElem = null;
+														try {
+															innerHrefElem = elem.querySelector('[href*="' + href + '"]');
+														} catch (e) {
+															try {
+																innerHrefElem = elem.querySelector(css_escape_default()('[href*="' + href + '"]'));
+															} catch (_unused) {}
+														}
+														if (innerHrefElem) {
+															for (var selector = '', parentElem = innerHrefElem; parentElem && parentElem != elem.parentElement; ) {
+																var escapedClassSelector = parentElem.classList.value
+																	.trim()
+																	.split(' ')
+																	.reduce(function (classes, classname) {
+																		return classname.trim() ? classes + '.' + css_escape_default()(classname.trim()) : classes;
+																	}, '');
+																(selector = '' + parentElem.tagName + escapedClassSelector + (selector ? ' ' + selector : '')),
+																	(parentElem = parentElem.parentElement);
+															}
+															return selector + '[href*="' + href + '"]';
+														}
+														(elem = elem.parentElement), level++;
+													}
+													return;
+												})(target, storedHref),
+												domRect = selector
+													? null === (_document = document) ||
+													  void 0 === _document ||
+													  null === (_document$querySelect = _document.querySelector(selector)) ||
+													  void 0 === _document$querySelect
+														? void 0
+														: _document$querySelect.getBoundingClientRect()
+													: void 0;
+											if (selector || storedHref || domRect)
+												try {
+													var lastRequest = _this.storage.get('lastStringyParams');
+													if (lastRequest) {
+														var storableRequestParams = getStorableRequestParams(JSON.parse(lastRequest));
+														scrollMap[JSON.stringify(storableRequestParams)] = { domRect, href: storedHref, selector };
+													}
+												} catch (err) {
+													_this.log.warn('Failed to save srcollMap!', err);
+												}
+											_this.storage.set('scrollMap', scrollMap);
+											var type = ['product', 'banner'].includes(result.type) ? result.type : 'product',
+												data = {
+													responseId,
+													results: [
+														Object.assign(
+															{ type, uid: result.id ? '' + result.id : '' },
+															'product' === type
+																? {
+																		parentId: result.id ? '' + result.id : '',
+																		sku:
+																			null !== (_result$mappings$core2 = result.mappings.core) &&
+																			void 0 !== _result$mappings$core2 &&
+																			_result$mappings$core2.sku
+																				? '' +
+																				  (null === (_result$mappings$core3 = result.mappings.core) || void 0 === _result$mappings$core3
+																						? void 0
+																						: _result$mappings$core3.sku)
+																				: void 0,
+																  }
+																: {}
+														),
+													],
+												};
+											_this.eventManager.fire('track.product.clickThrough', { controller: _this, event: e, product: result, trackEvent: data }),
+												(null === (_this$config$beacon3 = _this.config.beacon) || void 0 === _this$config$beacon3
+													? void 0
+													: _this$config$beacon3.enabled) &&
+													_this.tracker.events[_this.page.type].clickThrough({
+														data,
+														siteId:
+															null === (_this$config$globals3 = _this.config.globals) || void 0 === _this$config$globals3
+																? void 0
+																: _this$config$globals3.siteId,
+													});
+										} else _this.log.warn('No result provided to track.product.clickThrough');
 									},
 									click: function click(e, result) {
-										var responseId = result.responseId;
-										if ('banner' === result.type && isClickWithinBannerLink(e)) {
-											var _this$events2, _this$events2$respons, _this$events2$respons2;
-											if (
-												null !== (_this$events2 = _this.events) &&
-												void 0 !== _this$events2 &&
-												null !== (_this$events2$respons = _this$events2[responseId]) &&
-												void 0 !== _this$events2$respons &&
-												null !== (_this$events2$respons2 = _this$events2$respons.product[result.id]) &&
-												void 0 !== _this$events2$respons2 &&
-												_this$events2$respons2.inlineBannerClickThrough
-											)
-												return;
-											_this.track.product.clickThrough(e, result),
-												(_this.events[responseId].product[result.id] = _this.events[responseId].product[result.id] || {}),
-												(_this.events[responseId].product[result.id].inlineBannerClickThrough = !0),
-												setTimeout(function () {
-													_this.events[responseId].product[result.id].inlineBannerClickThrough = !1;
-												}, 300);
-										} else if (isClickWithinProductLink(e, result)) {
-											var _this$events3, _this$events3$respons, _this$events3$respons2;
-											if (
-												null !== (_this$events3 = _this.events) &&
-												void 0 !== _this$events3 &&
-												null !== (_this$events3$respons = _this$events3[responseId]) &&
-												void 0 !== _this$events3$respons &&
-												null !== (_this$events3$respons2 = _this$events3$respons.product[result.id]) &&
-												void 0 !== _this$events3$respons2 &&
-												_this$events3$respons2.productClickThrough
-											)
-												return;
-											_this.track.product.clickThrough(e, result),
-												(_this.events[responseId].product[result.id] = _this.events[responseId].product[result.id] || {}),
-												(_this.events[responseId].product[result.id].productClickThrough = !0),
-												setTimeout(function () {
-													_this.events[responseId].product[result.id].productClickThrough = !1;
-												}, 300);
-										}
+										if (result) {
+											var responseId = result.responseId;
+											if ('banner' === result.type && isClickWithinBannerLink(e)) {
+												var _this$events2, _this$events2$respons, _this$events2$respons2;
+												if (
+													null !== (_this$events2 = _this.events) &&
+													void 0 !== _this$events2 &&
+													null !== (_this$events2$respons = _this$events2[responseId]) &&
+													void 0 !== _this$events2$respons &&
+													null !== (_this$events2$respons2 = _this$events2$respons.product[result.id]) &&
+													void 0 !== _this$events2$respons2 &&
+													_this$events2$respons2.inlineBannerClickThrough
+												)
+													return;
+												_this.track.product.clickThrough(e, result),
+													(_this.events[responseId].product[result.id] = _this.events[responseId].product[result.id] || {}),
+													(_this.events[responseId].product[result.id].inlineBannerClickThrough = !0),
+													setTimeout(function () {
+														_this.events[responseId].product[result.id].inlineBannerClickThrough = !1;
+													}, 300);
+											} else if (isClickWithinProductLink(e, result)) {
+												var _this$events3, _this$events3$respons, _this$events3$respons2;
+												if (
+													null !== (_this$events3 = _this.events) &&
+													void 0 !== _this$events3 &&
+													null !== (_this$events3$respons = _this$events3[responseId]) &&
+													void 0 !== _this$events3$respons &&
+													null !== (_this$events3$respons2 = _this$events3$respons.product[result.id]) &&
+													void 0 !== _this$events3$respons2 &&
+													_this$events3$respons2.productClickThrough
+												)
+													return;
+												_this.track.product.clickThrough(e, result),
+													(_this.events[responseId].product[result.id] = _this.events[responseId].product[result.id] || {}),
+													(_this.events[responseId].product[result.id].productClickThrough = !0),
+													setTimeout(function () {
+														_this.events[responseId].product[result.id].productClickThrough = !1;
+													}, 300);
+											}
+										} else _this.log.warn('No result provided to track.product.click');
 									},
 									impression: function impression(result) {
 										var _this$events$response5,
 											_this$events$response6,
-											_result$mappings$core3,
-											_this$config$globals4,
-											responseId = result.responseId;
-										if (
-											null === (_this$events$response5 = _this.events[responseId]) ||
-											void 0 === _this$events$response5 ||
-											null === (_this$events$response6 = _this$events$response5.product[result.id]) ||
-											void 0 === _this$events$response6 ||
-											!_this$events$response6.impression
-										) {
-											var data = {
-												responseId,
-												results: [
-													{
-														type: result.type,
-														uid: result.id,
-														parentId: result.id,
-														sku:
-															null === (_result$mappings$core3 = result.mappings.core) || void 0 === _result$mappings$core3
-																? void 0
-																: _result$mappings$core3.sku,
-													},
-												],
-												banners: [],
-											};
-											_this.eventManager.fire('track.product.impression', { controller: _this, product: result, trackEvent: data }),
-												_this.tracker.events[_this.page.type].impression({
-													data,
-													siteId:
-														null === (_this$config$globals4 = _this.config.globals) || void 0 === _this$config$globals4
-															? void 0
-															: _this$config$globals4.siteId,
-												}),
-												(_this.events[responseId].product[result.id] = _this.events[responseId].product[result.id] || {}),
-												(_this.events[responseId].product[result.id].impression = !0);
-										}
+											_result$mappings$core4,
+											_result$mappings$core5,
+											_this$config$beacon4,
+											_this$config$globals4;
+										if (result) {
+											var responseId = result.responseId;
+											if (
+												null === (_this$events$response5 = _this.events[responseId]) ||
+												void 0 === _this$events$response5 ||
+												null === (_this$events$response6 = _this$events$response5.product[result.id]) ||
+												void 0 === _this$events$response6 ||
+												!_this$events$response6.impression
+											) {
+												var type = ['product', 'banner'].includes(result.type) ? result.type : 'product',
+													data = {
+														responseId,
+														results: [
+															Object.assign(
+																{ type, uid: result.id ? '' + result.id : '' },
+																'product' === type
+																	? {
+																			parentId: result.id ? '' + result.id : '',
+																			sku:
+																				null !== (_result$mappings$core4 = result.mappings.core) &&
+																				void 0 !== _result$mappings$core4 &&
+																				_result$mappings$core4.sku
+																					? '' +
+																					  (null === (_result$mappings$core5 = result.mappings.core) || void 0 === _result$mappings$core5
+																							? void 0
+																							: _result$mappings$core5.sku)
+																					: void 0,
+																	  }
+																	: {}
+															),
+														],
+														banners: [],
+													};
+												_this.eventManager.fire('track.product.impression', { controller: _this, product: result, trackEvent: data }),
+													(null === (_this$config$beacon4 = _this.config.beacon) || void 0 === _this$config$beacon4
+														? void 0
+														: _this$config$beacon4.enabled) &&
+														_this.tracker.events[_this.page.type].impression({
+															data,
+															siteId:
+																null === (_this$config$globals4 = _this.config.globals) || void 0 === _this$config$globals4
+																	? void 0
+																	: _this$config$globals4.siteId,
+														}),
+													(_this.events[responseId].product[result.id] = _this.events[responseId].product[result.id] || {}),
+													(_this.events[responseId].product[result.id].impression = !0);
+											}
+										} else _this.log.warn('No result provided to track.product.impression');
 									},
 									addToCart: function addToCart(result) {
-										var _result$mappings$core4,
-											_result$mappings$core5,
-											_this$config$globals5,
-											data = {
+										var _result$mappings$core6, _result$mappings$core7, _this$config$beacon5, _this$config$globals5;
+										if (result) {
+											var data = {
 												responseId: result.responseId,
 												results: [
 													{
 														parentId: result.id,
 														uid: result.id,
 														sku:
-															null === (_result$mappings$core4 = result.mappings.core) || void 0 === _result$mappings$core4
+															null === (_result$mappings$core6 = result.mappings.core) || void 0 === _result$mappings$core6
 																? void 0
-																: _result$mappings$core4.sku,
+																: _result$mappings$core6.sku,
 														qty: result.quantity || 1,
 														price: Number(
-															null === (_result$mappings$core5 = result.mappings.core) || void 0 === _result$mappings$core5
+															null === (_result$mappings$core7 = result.mappings.core) || void 0 === _result$mappings$core7
 																? void 0
-																: _result$mappings$core5.price
+																: _result$mappings$core7.price
 														),
 													},
 												],
 											};
-										_this.eventManager.fire('track.product.addToCart', { controller: _this, product: result, trackEvent: data }),
-											_this.tracker.events[_this.page.type].addToCart({
-												data,
-												siteId:
-													null === (_this$config$globals5 = _this.config.globals) || void 0 === _this$config$globals5
-														? void 0
-														: _this$config$globals5.siteId,
-											});
+											_this.eventManager.fire('track.product.addToCart', { controller: _this, product: result, trackEvent: data }),
+												(null === (_this$config$beacon5 = _this.config.beacon) || void 0 === _this$config$beacon5
+													? void 0
+													: _this$config$beacon5.enabled) &&
+													_this.tracker.events[_this.page.type].addToCart({
+														data,
+														siteId:
+															null === (_this$config$globals5 = _this.config.globals) || void 0 === _this$config$globals5
+																? void 0
+																: _this$config$globals5.siteId,
+													});
+										} else _this.log.warn('No result provided to track.product.addToCart');
 									},
 								},
 								redirect: function redirect(_ref4) {
-									var _this$config$globals6,
+									var _this$config$beacon6,
+										_this$config$globals6,
 										redirectURL = _ref4.redirectURL,
-										data = { responseId: _ref4.responseId, redirect: redirectURL };
-									_this.eventManager.fire('track.redirect', { controller: _this, redirectURL, trackEvent: data }),
-										_this.tracker.events.search.redirect({
-											data,
-											siteId:
-												null === (_this$config$globals6 = _this.config.globals) || void 0 === _this$config$globals6
-													? void 0
-													: _this$config$globals6.siteId,
-										});
+										responseId = _ref4.responseId;
+									if (redirectURL) {
+										var data = { responseId, redirect: redirectURL };
+										_this.eventManager.fire('track.redirect', { controller: _this, redirectURL, trackEvent: data }),
+											(null === (_this$config$beacon6 = _this.config.beacon) || void 0 === _this$config$beacon6
+												? void 0
+												: _this$config$beacon6.enabled) &&
+												_this.tracker.events.search.redirect({
+													data,
+													siteId:
+														null === (_this$config$globals6 = _this.config.globals) || void 0 === _this$config$globals6
+															? void 0
+															: _this$config$globals6.siteId,
+												});
+									} else _this.log.warn('No redirectURL provided to track.redirect');
 								},
 							}),
 							(_this.search = SearchController_asyncToGenerator(
@@ -31244,6 +30256,8 @@
 										_params$search2$query,
 										_this$config$settings,
 										_params$pagination,
+										_this$config$beacon7,
+										_this$config$globals7,
 										params,
 										stringyParams,
 										prevStringyParams,
@@ -31267,6 +30281,7 @@
 										_yield$_this$client$_4,
 										_responseId,
 										afterSearchProfile,
+										data,
 										afterStoreProfile,
 										_t,
 										_t2,
@@ -31472,6 +30487,17 @@
 															_this.log.profile(afterSearchProfile),
 															(_this.previousResults = JSON.parse(JSON.stringify(response.results))),
 															_this.store.update(response),
+															(data = { responseId: response.tracking.responseId }),
+															(null === (_this$config$beacon7 = _this.config.beacon) || void 0 === _this$config$beacon7
+																? void 0
+																: _this$config$beacon7.enabled) &&
+																_this.tracker.events[_this.page.type].render({
+																	data,
+																	siteId:
+																		null === (_this$config$globals7 = _this.config.globals) || void 0 === _this$config$globals7
+																			? void 0
+																			: _this$config$globals7.siteId,
+																}),
 															(afterStoreProfile = _this.profiler.create({ type: 'event', name: 'afterStore', context: params }).start()),
 															(_context.p = 21),
 															(_context.n = 22),
@@ -31546,11 +30572,20 @@
 											for (;;)
 												switch (_context2.n) {
 													case 0:
-														(products = 'function' == typeof _products.slice ? _products.slice() : [_products]).forEach(function (product) {
+														if (
+															((products = 'function' == typeof (null == _products ? void 0 : _products.slice) ? _products.slice() : [_products]),
+															_products && 0 !== products.length)
+														) {
+															_context2.n = 1;
+															break;
+														}
+														return _this.log.warn('No products provided to search controller.addToCart'), _context2.a(2);
+													case 1:
+														products.forEach(function (product) {
 															_this.track.product.addToCart(product);
 														}),
 															products.length > 0 && _this.eventManager.fire('addToCart', { controller: _this, products });
-													case 1:
+													case 2:
 														return _context2.a(2);
 												}
 										}, _callee2);
@@ -31809,8 +30844,6 @@
 								var _ref11 = SearchController_asyncToGenerator(
 									SearchController_regenerator().m(function _callee7(search, next) {
 										var controller,
-											responseId,
-											_this$config$globals7,
 											_search$request,
 											_search$request$filte,
 											_config$settings2,
@@ -31819,7 +30852,6 @@
 											_search$response3$sea,
 											_search$response4,
 											_search$response4$pag,
-											data,
 											config,
 											nonBackgroundFilters;
 										return SearchController_regenerator().w(function (_context7) {
@@ -31828,24 +30860,12 @@
 													case 0:
 														return (_context7.n = 1), next();
 													case 1:
-														if (
-															((controller = search.controller),
-															(responseId = search.response.tracking.responseId),
-															!controller.store.loaded || controller.store.error)
-														) {
+														if (!(controller = search.controller).store.loaded || controller.store.error) {
 															_context7.n = 2;
 															break;
 														}
 														if (
-															((data = { responseId }),
-															_this.tracker.events[_this.page.type].render({
-																data,
-																siteId:
-																	null === (_this$config$globals7 = _this.config.globals) || void 0 === _this$config$globals7
-																		? void 0
-																		: _this$config$globals7.siteId,
-															}),
-															(config = search.controller.config),
+															((config = search.controller.config),
 															(nonBackgroundFilters =
 																null == search ||
 																null === (_search$request = search.request) ||
@@ -32352,7 +31372,7 @@
 					RecommendationController_setPrototypeOf(t, e)
 				);
 			}
-			var RecommendationController_defaultConfig = { id: 'recommend', tag: '', batched: !0, realtime: !1, globals: {} },
+			var RecommendationController_defaultConfig = { id: 'recommend', beacon: { enabled: !0 }, tag: '', batched: !0, realtime: !1, globals: {} },
 				RecommendationController = (function (_AbstractController) {
 					function RecommendationController(config, _ref, context) {
 						var _config$settings,
@@ -32380,144 +31400,194 @@
 										var _this$events$response,
 											_this$events$response2,
 											_result$mappings$core,
-											_this$config$globals,
-											responseId = result.responseId;
-										if (
-											null === (_this$events$response = _this.events[responseId]) ||
-											void 0 === _this$events$response ||
-											null === (_this$events$response2 = _this$events$response.product[result.id]) ||
-											void 0 === _this$events$response2 ||
-											!_this$events$response2.productClickThrough
-										) {
-											var beaconResult = {
-													type: result.type,
-													uid: result.id,
-													parentId: result.id,
-													sku:
-														null === (_result$mappings$core = result.mappings.core) || void 0 === _result$mappings$core
-															? void 0
-															: _result$mappings$core.sku,
-												},
-												data = { tag: _this.store.profile.tag, responseId, results: [beaconResult] };
-											_this.eventManager.fire('track.product.clickThrough', { controller: _this, event: e, product: result, trackEvent: data }),
-												_this.tracker.events.recommendations.clickThrough({
-													data,
-													siteId:
-														null === (_this$config$globals = _this.config.globals) || void 0 === _this$config$globals
-															? void 0
-															: _this$config$globals.siteId,
-												}),
-												(_this.events[responseId].product[result.id] = _this.events[responseId].product[result.id] || {}),
-												(_this.events[responseId].product[result.id].productClickThrough = !0);
-										}
+											_result$mappings$core2,
+											_this$config$beacon,
+											_this$config$globals;
+										if (result) {
+											var responseId = result.responseId;
+											if (
+												null === (_this$events$response = _this.events[responseId]) ||
+												void 0 === _this$events$response ||
+												null === (_this$events$response2 = _this$events$response.product[result.id]) ||
+												void 0 === _this$events$response2 ||
+												!_this$events$response2.productClickThrough
+											) {
+												var type = ['product', 'banner'].includes(result.type) ? result.type : 'product',
+													beaconResult = Object.assign(
+														{ type, uid: result.id ? '' + result.id : '' },
+														'product' === type
+															? {
+																	parentId: result.id ? '' + result.id : '',
+																	sku:
+																		null !== (_result$mappings$core = result.mappings.core) &&
+																		void 0 !== _result$mappings$core &&
+																		_result$mappings$core.sku
+																			? '' +
+																			  (null === (_result$mappings$core2 = result.mappings.core) || void 0 === _result$mappings$core2
+																					? void 0
+																					: _result$mappings$core2.sku)
+																			: void 0,
+															  }
+															: {}
+													),
+													data = { tag: _this.store.profile.tag, responseId, results: [beaconResult] };
+												_this.eventManager.fire('track.product.clickThrough', { controller: _this, event: e, product: result, trackEvent: data }),
+													(null === (_this$config$beacon = _this.config.beacon) || void 0 === _this$config$beacon
+														? void 0
+														: _this$config$beacon.enabled) &&
+														_this.tracker.events.recommendations.clickThrough({
+															data,
+															siteId:
+																null === (_this$config$globals = _this.config.globals) || void 0 === _this$config$globals
+																	? void 0
+																	: _this$config$globals.siteId,
+														}),
+													(_this.events[responseId].product[result.id] = _this.events[responseId].product[result.id] || {}),
+													(_this.events[responseId].product[result.id].productClickThrough = !0);
+											}
+										} else _this.log.warn('No result provided to track.product.clickThrough');
 									},
 									click: function click(e, result) {
-										var responseId = result.responseId;
-										if ('banner' === result.type) {
-											var _this$events$response3, _this$events$response4;
-											if (
-												null !== (_this$events$response3 = _this.events[responseId]) &&
-												void 0 !== _this$events$response3 &&
-												null !== (_this$events$response4 = _this$events$response3.product[result.id]) &&
-												void 0 !== _this$events$response4 &&
-												_this$events$response4.inlineBannerClickThrough
-											)
-												return;
-											_this.track.product.clickThrough(e, result),
-												(_this.events[responseId].product[result.id] = _this.events[responseId].product[result.id] || {}),
-												(_this.events[responseId].product[result.id].inlineBannerClickThrough = !0),
-												setTimeout(function () {
-													_this.events[responseId].product[result.id].inlineBannerClickThrough = !1;
-												}, 300);
-										} else if (isClickWithinProductLink(e, result)) {
-											var _this$events, _this$events$response5, _this$events$response6;
-											if (
-												null !== (_this$events = _this.events) &&
-												void 0 !== _this$events &&
-												null !== (_this$events$response5 = _this$events[responseId]) &&
-												void 0 !== _this$events$response5 &&
-												null !== (_this$events$response6 = _this$events$response5.product[result.id]) &&
-												void 0 !== _this$events$response6 &&
-												_this$events$response6.productClickThrough
-											)
-												return;
-											_this.track.product.clickThrough(e, result),
-												(_this.events[responseId].product[result.id] = _this.events[responseId].product[result.id] || {}),
-												(_this.events[responseId].product[result.id].productClickThrough = !0),
-												setTimeout(function () {
-													_this.events[responseId].product[result.id].productClickThrough = !1;
-												}, 300);
-										}
+										if (result) {
+											var responseId = result.responseId;
+											if ('banner' === result.type) {
+												var _this$events$response3, _this$events$response4;
+												if (
+													null !== (_this$events$response3 = _this.events[responseId]) &&
+													void 0 !== _this$events$response3 &&
+													null !== (_this$events$response4 = _this$events$response3.product[result.id]) &&
+													void 0 !== _this$events$response4 &&
+													_this$events$response4.inlineBannerClickThrough
+												)
+													return;
+												_this.track.product.clickThrough(e, result),
+													(_this.events[responseId].product[result.id] = _this.events[responseId].product[result.id] || {}),
+													(_this.events[responseId].product[result.id].inlineBannerClickThrough = !0),
+													setTimeout(function () {
+														_this.events[responseId].product[result.id].inlineBannerClickThrough = !1;
+													}, 300);
+											} else if (isClickWithinProductLink(e, result)) {
+												var _this$events, _this$events$response5, _this$events$response6;
+												if (
+													null !== (_this$events = _this.events) &&
+													void 0 !== _this$events &&
+													null !== (_this$events$response5 = _this$events[responseId]) &&
+													void 0 !== _this$events$response5 &&
+													null !== (_this$events$response6 = _this$events$response5.product[result.id]) &&
+													void 0 !== _this$events$response6 &&
+													_this$events$response6.productClickThrough
+												)
+													return;
+												_this.track.product.clickThrough(e, result),
+													(_this.events[responseId].product[result.id] = _this.events[responseId].product[result.id] || {}),
+													(_this.events[responseId].product[result.id].productClickThrough = !0),
+													setTimeout(function () {
+														_this.events[responseId].product[result.id].productClickThrough = !1;
+													}, 300);
+											}
+										} else _this.log.warn('No result provided to track.product.click');
 									},
 									impression: function impression(result) {
 										var _this$events$response7,
 											_this$events$response8,
-											_result$mappings$core2,
-											_this$config$globals2,
-											responseId = result.responseId;
-										if (
-											null === (_this$events$response7 = _this.events[responseId]) ||
-											void 0 === _this$events$response7 ||
-											null === (_this$events$response8 = _this$events$response7.product[result.id]) ||
-											void 0 === _this$events$response8 ||
-											!_this$events$response8.impression
-										) {
-											var item = {
-													type: result.type,
-													uid: result.id,
-													parentId: result.id,
-													sku:
-														null === (_result$mappings$core2 = result.mappings.core) || void 0 === _result$mappings$core2
-															? void 0
-															: _result$mappings$core2.sku,
-												},
-												data = { tag: _this.store.profile.tag, responseId, results: [item], banners: [] };
-											_this.eventManager.fire('track.product.impression', { controller: _this, product: result, trackEvent: data }),
-												_this.tracker.events.recommendations.impression({
-													data,
-													siteId:
-														null === (_this$config$globals2 = _this.config.globals) || void 0 === _this$config$globals2
-															? void 0
-															: _this$config$globals2.siteId,
-												}),
-												(_this.events[responseId].product[result.id] = _this.events[responseId].product[result.id] || {}),
-												(_this.events[responseId].product[result.id].impression = !0);
-										}
+											_result$mappings$core3,
+											_result$mappings$core4,
+											_this$config$beacon2,
+											_this$config$globals2;
+										if (result) {
+											var responseId = result.responseId;
+											if (
+												null === (_this$events$response7 = _this.events[responseId]) ||
+												void 0 === _this$events$response7 ||
+												null === (_this$events$response8 = _this$events$response7.product[result.id]) ||
+												void 0 === _this$events$response8 ||
+												!_this$events$response8.impression
+											) {
+												var type = ['product', 'banner'].includes(result.type) ? result.type : 'product',
+													item = Object.assign(
+														{ type, uid: result.id ? '' + result.id : '' },
+														'product' === type
+															? {
+																	parentId: result.id ? '' + result.id : '',
+																	sku:
+																		null !== (_result$mappings$core3 = result.mappings.core) &&
+																		void 0 !== _result$mappings$core3 &&
+																		_result$mappings$core3.sku
+																			? '' +
+																			  (null === (_result$mappings$core4 = result.mappings.core) || void 0 === _result$mappings$core4
+																					? void 0
+																					: _result$mappings$core4.sku)
+																			: void 0,
+															  }
+															: {}
+													),
+													data = { tag: _this.store.profile.tag, responseId, results: [item], banners: [] };
+												_this.eventManager.fire('track.product.impression', { controller: _this, product: result, trackEvent: data }),
+													(null === (_this$config$beacon2 = _this.config.beacon) || void 0 === _this$config$beacon2
+														? void 0
+														: _this$config$beacon2.enabled) &&
+														_this.tracker.events.recommendations.impression({
+															data,
+															siteId:
+																null === (_this$config$globals2 = _this.config.globals) || void 0 === _this$config$globals2
+																	? void 0
+																	: _this$config$globals2.siteId,
+														}),
+													(_this.events[responseId].product[result.id] = _this.events[responseId].product[result.id] || {}),
+													(_this.events[responseId].product[result.id].impression = !0);
+											}
+										} else _this.log.warn('No result provided to track.product.impression');
 									},
 									addToCart: function addToCart(result) {
-										var _result$mappings$core3,
-											_result$mappings$core4,
-											_this$config$globals3,
-											responseId = result.responseId,
-											product = {
-												parentId: result.id,
-												uid: result.id,
-												sku:
-													null === (_result$mappings$core3 = result.mappings.core) || void 0 === _result$mappings$core3
-														? void 0
-														: _result$mappings$core3.sku,
-												qty: result.quantity || 1,
-												price: Number(
-													null === (_result$mappings$core4 = result.mappings.core) || void 0 === _result$mappings$core4
-														? void 0
-														: _result$mappings$core4.price
-												),
-											},
-											data = { responseId, tag: _this.store.profile.tag, results: [product] };
-										_this.eventManager.fire('track.product.addToCart', { controller: _this, product: result, trackEvent: data }),
-											_this.tracker.events.recommendations.addToCart({
-												data,
-												siteId:
-													null === (_this$config$globals3 = _this.config.globals) || void 0 === _this$config$globals3
-														? void 0
-														: _this$config$globals3.siteId,
-											});
+										var _result$mappings$core5, _result$mappings$core6, _this$config$beacon3, _this$config$globals3;
+										if (result) {
+											var responseId = result.responseId,
+												product = {
+													parentId: result.id,
+													uid: result.id,
+													sku:
+														null === (_result$mappings$core5 = result.mappings.core) || void 0 === _result$mappings$core5
+															? void 0
+															: _result$mappings$core5.sku,
+													qty: result.quantity || 1,
+													price: Number(
+														null === (_result$mappings$core6 = result.mappings.core) || void 0 === _result$mappings$core6
+															? void 0
+															: _result$mappings$core6.price
+													),
+												},
+												data = { responseId, tag: _this.store.profile.tag, results: [product] };
+											_this.eventManager.fire('track.product.addToCart', { controller: _this, product: result, trackEvent: data }),
+												(null === (_this$config$beacon3 = _this.config.beacon) || void 0 === _this$config$beacon3
+													? void 0
+													: _this$config$beacon3.enabled) &&
+													_this.tracker.events.recommendations.addToCart({
+														data,
+														siteId:
+															null === (_this$config$globals3 = _this.config.globals) || void 0 === _this$config$globals3
+																? void 0
+																: _this$config$globals3.siteId,
+													});
+										} else _this.log.warn('No result provided to track.product.addToCart');
 									},
 								},
 							}),
 							(_this.search = RecommendationController_asyncToGenerator(
 								RecommendationController_regenerator().m(function _callee() {
-									var params, searchProfile, response, responseId, afterSearchProfile, afterStoreProfile, _t, _t2, _t3, _t4, _t5;
+									var _this$config$beacon4,
+										_this$config$globals4,
+										params,
+										searchProfile,
+										response,
+										responseId,
+										afterSearchProfile,
+										data,
+										afterStoreProfile,
+										_t,
+										_t2,
+										_t3,
+										_t4,
+										_t5;
 									return RecommendationController_regenerator().w(
 										function (_context) {
 											for (;;)
@@ -32581,6 +31651,17 @@
 															afterSearchProfile.stop(),
 															_this.log.profile(afterSearchProfile),
 															_this.store.update(response),
+															(data = { responseId, tag: _this.store.profile.tag }),
+															(null === (_this$config$beacon4 = _this.config.beacon) || void 0 === _this$config$beacon4
+																? void 0
+																: _this$config$beacon4.enabled) &&
+																_this.tracker.events.recommendations.render({
+																	data,
+																	siteId:
+																		null === (_this$config$globals4 = _this.config.globals) || void 0 === _this$config$globals4
+																			? void 0
+																			: _this$config$globals4.siteId,
+																}),
 															(afterStoreProfile = _this.profiler.create({ type: 'event', name: 'afterStore', context: params }).start()),
 															(_context.p = 13),
 															(_context.n = 14),
@@ -32655,11 +31736,20 @@
 											for (;;)
 												switch (_context2.n) {
 													case 0:
-														(products = 'function' == typeof _products.slice ? _products.slice() : [_products]).forEach(function (product) {
+														if (
+															((products = 'function' == typeof (null == _products ? void 0 : _products.slice) ? _products.slice() : [_products]),
+															_products && 0 !== products.length)
+														) {
+															_context2.n = 1;
+															break;
+														}
+														return _this.log.warn('No products provided to recommendation controller.addToCart'), _context2.a(2);
+													case 1:
+														products.forEach(function (product) {
 															_this.track.product.addToCart(product);
 														}),
 															products.length > 0 && _this.eventManager.fire('addToCart', { controller: _this, products });
-													case 1:
+													case 2:
 														return _context2.a(2);
 												}
 										}, _callee2);
@@ -32679,41 +31769,6 @@
 								}),
 							(_this.config = cjs_default()(RecommendationController_defaultConfig, _this.config)),
 							_this.store.setConfig(_this.config),
-							_this.eventManager.on(
-								'afterStore',
-								(function () {
-									var _ref4 = RecommendationController_asyncToGenerator(
-										RecommendationController_regenerator().m(function _callee3(search, next) {
-											var controller, responseId, _this$config$globals4, data;
-											return RecommendationController_regenerator().w(function (_context3) {
-												for (;;)
-													switch (_context3.n) {
-														case 0:
-															return (_context3.n = 1), next();
-														case 1:
-															(controller = search.controller),
-																(responseId = search.response.responseId),
-																controller.store.loaded &&
-																	!controller.store.error &&
-																	((data = { responseId, tag: controller.store.profile.tag }),
-																	_this.tracker.events.recommendations.render({
-																		data,
-																		siteId:
-																			null === (_this$config$globals4 = _this.config.globals) || void 0 === _this$config$globals4
-																				? void 0
-																				: _this$config$globals4.siteId,
-																	}));
-														case 2:
-															return _context3.a(2);
-													}
-											}, _callee3);
-										})
-									);
-									return function (_x2, _x3) {
-										return _ref4.apply(this, arguments);
-									};
-								})()
-							),
 							_this.use(_this.config),
 							_this
 						);
@@ -33049,6 +32104,7 @@
 					selector: '',
 					action: '',
 					globals: {},
+					beacon: { enabled: !0 },
 					settings: {
 						integratedSpellCorrection: !1,
 						initializeFromUrl: !0,
@@ -33084,232 +32140,284 @@
 							(_this.track = {
 								banner: {
 									impression: function impression(_banner) {
-										var _this$events$response,
-											_this$events$response2,
-											_this$events$response3,
-											_this$config$globals,
-											responseId = _banner.responseId,
-											uid = _banner.uid;
-										if (
-											null === (_this$events$response = _this.events[responseId]) ||
-											void 0 === _this$events$response ||
-											null === (_this$events$response2 = _this$events$response.banner) ||
-											void 0 === _this$events$response2 ||
-											null === (_this$events$response3 = _this$events$response2[uid]) ||
-											void 0 === _this$events$response3 ||
-											!_this$events$response3.impression
-										) {
-											var data = { responseId, banners: [{ uid }], results: [] };
-											_this.eventManager.fire('track.banner.impression', { controller: _this, product: { uid }, trackEvent: data }),
-												_this.tracker.events.autocomplete.impression({
-													data,
-													siteId:
-														null === (_this$config$globals = _this.config.globals) || void 0 === _this$config$globals
-															? void 0
-															: _this$config$globals.siteId,
-												}),
-												(_this.events[responseId].banner[uid] = _this.events[responseId].banner[uid] || {}),
-												(_this.events[responseId].banner[uid].impression = !0);
-										}
+										var _this$events$response, _this$events$response2, _this$events$response3, _this$config$beacon, _this$config$globals;
+										if (_banner) {
+											var responseId = _banner.responseId,
+												uid = _banner.uid;
+											if (
+												null === (_this$events$response = _this.events[responseId]) ||
+												void 0 === _this$events$response ||
+												null === (_this$events$response2 = _this$events$response.banner) ||
+												void 0 === _this$events$response2 ||
+												null === (_this$events$response3 = _this$events$response2[uid]) ||
+												void 0 === _this$events$response3 ||
+												!_this$events$response3.impression
+											) {
+												var data = { responseId, banners: [{ uid }], results: [] };
+												_this.eventManager.fire('track.banner.impression', { controller: _this, product: { uid }, trackEvent: data }),
+													(null === (_this$config$beacon = _this.config.beacon) || void 0 === _this$config$beacon
+														? void 0
+														: _this$config$beacon.enabled) &&
+														_this.tracker.events.autocomplete.impression({
+															data,
+															siteId:
+																null === (_this$config$globals = _this.config.globals) || void 0 === _this$config$globals
+																	? void 0
+																	: _this$config$globals.siteId,
+														}),
+													(_this.events[responseId].banner[uid] = _this.events[responseId].banner[uid] || {}),
+													(_this.events[responseId].banner[uid].impression = !0);
+											}
+										} else _this.log.warn('No banner provided to track.banner.impression');
 									},
 									click: function click(e, banner) {
-										var responseId = banner.responseId,
-											uid = banner.uid;
-										if (isClickWithinBannerLink(e)) {
-											var _this$events, _this$events$response4, _this$events$response5;
-											if (
-												null !== (_this$events = _this.events) &&
-												void 0 !== _this$events &&
-												null !== (_this$events$response4 = _this$events[responseId]) &&
-												void 0 !== _this$events$response4 &&
-												null !== (_this$events$response5 = _this$events$response4.banner[uid]) &&
-												void 0 !== _this$events$response5 &&
-												_this$events$response5.clickThrough
-											)
-												return;
-											_this.track.banner.clickThrough(e, banner),
+										if (banner) {
+											var responseId = banner.responseId,
+												uid = banner.uid;
+											if (isClickWithinBannerLink(e)) {
+												var _this$events, _this$events$response4, _this$events$response5;
+												if (
+													null !== (_this$events = _this.events) &&
+													void 0 !== _this$events &&
+													null !== (_this$events$response4 = _this$events[responseId]) &&
+													void 0 !== _this$events$response4 &&
+													null !== (_this$events$response5 = _this$events$response4.banner[uid]) &&
+													void 0 !== _this$events$response5 &&
+													_this$events$response5.clickThrough
+												)
+													return;
+												_this.track.banner.clickThrough(e, banner),
+													(_this.events[responseId].banner[uid] = _this.events[responseId].banner[uid] || {}),
+													(_this.events[responseId].banner[uid].clickThrough = !0),
+													setTimeout(function () {
+														_this.events[responseId].banner[uid].clickThrough = !1;
+													}, 300);
+											}
+										} else _this.log.warn('No banner provided to track.banner.click');
+									},
+									clickThrough: function clickThrough(e, _ref2) {
+										var _this$config$beacon2,
+											_this$config$globals2,
+											uid = _ref2.uid,
+											responseId = _ref2.responseId;
+										if (uid) {
+											var data = { responseId, banners: [{ uid }] };
+											_this.eventManager.fire('track.banner.clickThrough', { controller: _this, event: e, product: { uid }, trackEvent: data }),
+												(null === (_this$config$beacon2 = _this.config.beacon) || void 0 === _this$config$beacon2
+													? void 0
+													: _this$config$beacon2.enabled) &&
+													_this.tracker.events.autocomplete.clickThrough({
+														data,
+														siteId:
+															null === (_this$config$globals2 = _this.config.globals) || void 0 === _this$config$globals2
+																? void 0
+																: _this$config$globals2.siteId,
+													}),
 												(_this.events[responseId].banner[uid] = _this.events[responseId].banner[uid] || {}),
 												(_this.events[responseId].banner[uid].clickThrough = !0),
 												setTimeout(function () {
 													_this.events[responseId].banner[uid].clickThrough = !1;
 												}, 300);
-										}
-									},
-									clickThrough: function clickThrough(e, _ref2) {
-										var _this$config$globals2,
-											uid = _ref2.uid,
-											responseId = _ref2.responseId,
-											data = { responseId, banners: [{ uid }] };
-										_this.eventManager.fire('track.banner.clickThrough', { controller: _this, event: e, product: { uid }, trackEvent: data }),
-											_this.tracker.events.autocomplete.clickThrough({
-												data,
-												siteId:
-													null === (_this$config$globals2 = _this.config.globals) || void 0 === _this$config$globals2
-														? void 0
-														: _this$config$globals2.siteId,
-											}),
-											(_this.events[responseId].banner[uid] = _this.events[responseId].banner[uid] || {}),
-											(_this.events[responseId].banner[uid].clickThrough = !0),
-											setTimeout(function () {
-												_this.events[responseId].banner[uid].clickThrough = !1;
-											}, 300);
+										} else _this.log.warn('No banner uid provided to track.banner.clickThrough');
 									},
 								},
 								product: {
 									clickThrough: function clickThrough(e, result) {
-										var _result$mappings$core,
-											_this$config$globals3,
-											data = {
-												responseId: result.responseId,
-												results: [
-													{
-														type: result.type,
-														uid: result.id,
-														parentId: result.id,
-														sku:
-															null === (_result$mappings$core = result.mappings.core) || void 0 === _result$mappings$core
+										var _result$mappings$core, _result$mappings$core2, _this$config$beacon3, _this$config$globals3;
+										if (result) {
+											var responseId = result.responseId,
+												type = ['product', 'banner'].includes(result.type) ? result.type : 'product',
+												data = {
+													responseId,
+													results: [
+														Object.assign(
+															{ type, uid: result.id ? '' + result.id : '' },
+															'product' === type
+																? {
+																		parentId: result.id ? '' + result.id : '',
+																		sku:
+																			null !== (_result$mappings$core = result.mappings.core) &&
+																			void 0 !== _result$mappings$core &&
+																			_result$mappings$core.sku
+																				? '' +
+																				  (null === (_result$mappings$core2 = result.mappings.core) || void 0 === _result$mappings$core2
+																						? void 0
+																						: _result$mappings$core2.sku)
+																				: void 0,
+																  }
+																: {}
+														),
+													],
+												};
+											_this.eventManager.fire('track.product.clickThrough', { controller: _this, event: e, product: result, trackEvent: data }),
+												(null === (_this$config$beacon3 = _this.config.beacon) || void 0 === _this$config$beacon3
+													? void 0
+													: _this$config$beacon3.enabled) &&
+													_this.tracker.events.autocomplete.clickThrough({
+														data,
+														siteId:
+															null === (_this$config$globals3 = _this.config.globals) || void 0 === _this$config$globals3
 																? void 0
-																: _result$mappings$core.sku,
-													},
-												],
-											};
-										_this.eventManager.fire('track.product.clickThrough', { controller: _this, event: e, product: result, trackEvent: data }),
-											_this.tracker.events.autocomplete.clickThrough({
-												data,
-												siteId:
-													null === (_this$config$globals3 = _this.config.globals) || void 0 === _this$config$globals3
-														? void 0
-														: _this$config$globals3.siteId,
-											});
+																: _this$config$globals3.siteId,
+													});
+										} else _this.log.warn('No result provided to track.product.clickThrough');
 									},
 									click: function click(e, result) {
-										var responseId = result.responseId;
-										if ('banner' === result.type && isClickWithinBannerLink(e)) {
-											var _this$events2, _this$events2$respons, _this$events2$respons2;
-											if (
-												null !== (_this$events2 = _this.events) &&
-												void 0 !== _this$events2 &&
-												null !== (_this$events2$respons = _this$events2[responseId]) &&
-												void 0 !== _this$events2$respons &&
-												null !== (_this$events2$respons2 = _this$events2$respons.product[result.id]) &&
-												void 0 !== _this$events2$respons2 &&
-												_this$events2$respons2.inlineBannerClickThrough
-											)
-												return;
-											_this.track.product.clickThrough(e, result),
-												(_this.events[responseId].product[result.id] = _this.events[responseId].product[result.id] || {}),
-												(_this.events[responseId].product[result.id].inlineBannerClickThrough = !0),
-												setTimeout(function () {
-													_this.events[responseId].product[result.id].inlineBannerClickThrough = !1;
-												}, 300);
-										} else if (isClickWithinProductLink(e, result)) {
-											var _this$events3, _this$events3$respons, _this$events3$respons2;
-											if (
-												null !== (_this$events3 = _this.events) &&
-												void 0 !== _this$events3 &&
-												null !== (_this$events3$respons = _this$events3[responseId]) &&
-												void 0 !== _this$events3$respons &&
-												null !== (_this$events3$respons2 = _this$events3$respons.product[result.id]) &&
-												void 0 !== _this$events3$respons2 &&
-												_this$events3$respons2.productClickThrough
-											)
-												return;
-											_this.track.product.clickThrough(e, result),
-												(_this.events[responseId].product[result.id] = _this.events[responseId].product[result.id] || {}),
-												(_this.events[responseId].product[result.id].productClickThrough = !0),
-												setTimeout(function () {
-													_this.events[responseId].product[result.id].productClickThrough = !1;
-												}, 300);
-										}
+										if (result) {
+											var responseId = result.responseId;
+											if ('banner' === result.type && isClickWithinBannerLink(e)) {
+												var _this$events2, _this$events2$respons, _this$events2$respons2;
+												if (
+													null !== (_this$events2 = _this.events) &&
+													void 0 !== _this$events2 &&
+													null !== (_this$events2$respons = _this$events2[responseId]) &&
+													void 0 !== _this$events2$respons &&
+													null !== (_this$events2$respons2 = _this$events2$respons.product[result.id]) &&
+													void 0 !== _this$events2$respons2 &&
+													_this$events2$respons2.inlineBannerClickThrough
+												)
+													return;
+												_this.track.product.clickThrough(e, result),
+													(_this.events[responseId].product[result.id] = _this.events[responseId].product[result.id] || {}),
+													(_this.events[responseId].product[result.id].inlineBannerClickThrough = !0),
+													setTimeout(function () {
+														_this.events[responseId].product[result.id].inlineBannerClickThrough = !1;
+													}, 300);
+											} else if (isClickWithinProductLink(e, result)) {
+												var _this$events3, _this$events3$respons, _this$events3$respons2;
+												if (
+													null !== (_this$events3 = _this.events) &&
+													void 0 !== _this$events3 &&
+													null !== (_this$events3$respons = _this$events3[responseId]) &&
+													void 0 !== _this$events3$respons &&
+													null !== (_this$events3$respons2 = _this$events3$respons.product[result.id]) &&
+													void 0 !== _this$events3$respons2 &&
+													_this$events3$respons2.productClickThrough
+												)
+													return;
+												_this.track.product.clickThrough(e, result),
+													(_this.events[responseId].product[result.id] = _this.events[responseId].product[result.id] || {}),
+													(_this.events[responseId].product[result.id].productClickThrough = !0),
+													setTimeout(function () {
+														_this.events[responseId].product[result.id].productClickThrough = !1;
+													}, 300);
+											}
+										} else _this.log.warn('No result provided to track.product.click');
 									},
 									impression: function impression(result) {
 										var _this$events4,
 											_this$events4$respons,
 											_this$events4$respons2,
-											_result$mappings$core2,
-											_this$config$globals4,
-											responseId = result.responseId;
-										if (
-											null === (_this$events4 = _this.events) ||
-											void 0 === _this$events4 ||
-											null === (_this$events4$respons = _this$events4[responseId]) ||
-											void 0 === _this$events4$respons ||
-											null === (_this$events4$respons2 = _this$events4$respons.product[result.id]) ||
-											void 0 === _this$events4$respons2 ||
-											!_this$events4$respons2.impression
-										) {
-											var data = {
-												responseId,
-												results: [
-													{
-														type: result.type,
-														uid: result.id,
-														parentId: result.id,
-														sku:
-															null === (_result$mappings$core2 = result.mappings.core) || void 0 === _result$mappings$core2
-																? void 0
-																: _result$mappings$core2.sku,
-													},
-												],
-												banners: [],
-											};
-											_this.eventManager.fire('track.product.impression', { controller: _this, product: result, trackEvent: data }),
-												_this.tracker.events.autocomplete.impression({
-													data,
-													siteId:
-														null === (_this$config$globals4 = _this.config.globals) || void 0 === _this$config$globals4
-															? void 0
-															: _this$config$globals4.siteId,
-												}),
-												(_this.events[responseId].product[result.id] = _this.events[responseId].product[result.id] || {}),
-												(_this.events[responseId].product[result.id].impression = !0);
-										}
+											_result$mappings$core3,
+											_result$mappings$core4,
+											_this$config$beacon4,
+											_this$config$globals4;
+										if (result) {
+											var responseId = result.responseId;
+											if (
+												null === (_this$events4 = _this.events) ||
+												void 0 === _this$events4 ||
+												null === (_this$events4$respons = _this$events4[responseId]) ||
+												void 0 === _this$events4$respons ||
+												null === (_this$events4$respons2 = _this$events4$respons.product[result.id]) ||
+												void 0 === _this$events4$respons2 ||
+												!_this$events4$respons2.impression
+											) {
+												var type = ['product', 'banner'].includes(result.type) ? result.type : 'product',
+													data = {
+														responseId,
+														results: [
+															Object.assign(
+																{ type, uid: result.id ? '' + result.id : '' },
+																'product' === type
+																	? {
+																			parentId: result.id ? '' + result.id : '',
+																			sku:
+																				null !== (_result$mappings$core3 = result.mappings.core) &&
+																				void 0 !== _result$mappings$core3 &&
+																				_result$mappings$core3.sku
+																					? '' +
+																					  (null === (_result$mappings$core4 = result.mappings.core) || void 0 === _result$mappings$core4
+																							? void 0
+																							: _result$mappings$core4.sku)
+																					: void 0,
+																	  }
+																	: {}
+															),
+														],
+														banners: [],
+													};
+												_this.eventManager.fire('track.product.impression', { controller: _this, product: result, trackEvent: data }),
+													(null === (_this$config$beacon4 = _this.config.beacon) || void 0 === _this$config$beacon4
+														? void 0
+														: _this$config$beacon4.enabled) &&
+														_this.tracker.events.autocomplete.impression({
+															data,
+															siteId:
+																null === (_this$config$globals4 = _this.config.globals) || void 0 === _this$config$globals4
+																	? void 0
+																	: _this$config$globals4.siteId,
+														}),
+													(_this.events[responseId].product[result.id] = _this.events[responseId].product[result.id] || {}),
+													(_this.events[responseId].product[result.id].impression = !0);
+											}
+										} else _this.log.warn('No result provided to track.product.impression');
 									},
 									addToCart: function addToCart(result) {
-										var _result$mappings$core3,
-											_result$mappings$core4,
-											_this$config$globals5,
-											data = {
+										var _result$mappings$core5, _result$mappings$core6, _this$config$beacon5, _this$config$globals5;
+										if (result) {
+											var data = {
 												responseId: result.responseId,
 												results: [
 													{
 														parentId: result.id,
 														uid: result.id,
 														sku:
-															null === (_result$mappings$core3 = result.mappings.core) || void 0 === _result$mappings$core3
+															null === (_result$mappings$core5 = result.mappings.core) || void 0 === _result$mappings$core5
 																? void 0
-																: _result$mappings$core3.sku,
+																: _result$mappings$core5.sku,
 														qty: result.quantity || 1,
 														price: Number(
-															null === (_result$mappings$core4 = result.mappings.core) || void 0 === _result$mappings$core4
+															null === (_result$mappings$core6 = result.mappings.core) || void 0 === _result$mappings$core6
 																? void 0
-																: _result$mappings$core4.price
+																: _result$mappings$core6.price
 														),
 													},
 												],
 											};
-										_this.eventManager.fire('track.product.addToCart', { controller: _this, product: result, trackEvent: data }),
-											_this.tracker.events.autocomplete.addToCart({
-												data,
-												siteId:
-													null === (_this$config$globals5 = _this.config.globals) || void 0 === _this$config$globals5
-														? void 0
-														: _this$config$globals5.siteId,
-											});
+											_this.eventManager.fire('track.product.addToCart', { controller: _this, product: result, trackEvent: data }),
+												(null === (_this$config$beacon5 = _this.config.beacon) || void 0 === _this$config$beacon5
+													? void 0
+													: _this$config$beacon5.enabled) &&
+													_this.tracker.events.autocomplete.addToCart({
+														data,
+														siteId:
+															null === (_this$config$globals5 = _this.config.globals) || void 0 === _this$config$globals5
+																? void 0
+																: _this$config$globals5.siteId,
+													});
+										} else _this.log.warn('No result provided to track.product.addToCart');
 									},
 								},
 								redirect: function redirect(_ref3) {
-									var _this$config$globals6,
+									var _this$config$beacon6,
+										_this$config$globals6,
 										redirectURL = _ref3.redirectURL,
-										data = { responseId: _ref3.responseId, redirect: redirectURL };
-									_this.eventManager.fire('track.redirect', { controller: _this, redirectURL, trackEvent: data }),
-										_this.tracker.events.autocomplete.redirect({
-											data,
-											siteId:
-												null === (_this$config$globals6 = _this.config.globals) || void 0 === _this$config$globals6
-													? void 0
-													: _this$config$globals6.siteId,
-										});
+										responseId = _ref3.responseId;
+									if (redirectURL) {
+										var data = { responseId, redirect: redirectURL };
+										_this.eventManager.fire('track.redirect', { controller: _this, redirectURL, trackEvent: data }),
+											(null === (_this$config$beacon6 = _this.config.beacon) || void 0 === _this$config$beacon6
+												? void 0
+												: _this$config$beacon6.enabled) &&
+												_this.tracker.events.autocomplete.redirect({
+													data,
+													siteId:
+														null === (_this$config$globals6 = _this.config.globals) || void 0 === _this$config$globals6
+															? void 0
+															: _this$config$globals6.siteId,
+												});
+									} else _this.log.warn('No redirectURL provided to track.redirect');
 								},
 							}),
 							(_this.handlers = {
@@ -33660,7 +32768,9 @@
 								AutocompleteController_regenerator().m(function _callee4() {
 									var _params$search,
 										_params$search$query,
-										_response$search,
+										_this$store$results$,
+										_this$config$beacon7,
+										_this$config$globals11,
 										params,
 										searchProfile,
 										_yield$_this$client$a,
@@ -33668,9 +32778,10 @@
 										meta,
 										response,
 										responseId,
+										previousResponseId,
 										impressedResultIds,
-										_response$search2,
 										afterSearchProfile,
+										data,
 										afterStoreProfile,
 										_t3,
 										_t4,
@@ -33741,8 +32852,10 @@
 															_this.log.profile(searchProfile),
 															(responseId = response.tracking.responseId),
 															(_this.events[responseId] = _this.events[responseId] || { product: {}, banner: {} }),
-															(null === (_response$search = response.search) || void 0 === _response$search ? void 0 : _response$search.query) ===
-															_this.lastSearchQuery
+															(previousResponseId =
+																null === (_this$store$results$ = _this.store.results[0]) || void 0 === _this$store$results$
+																	? void 0
+																	: _this$store$results$.responseId) && previousResponseId === responseId
 																? ((impressedResultIds = Object.keys(_this.events[responseId].product || {}).filter(function (resultId) {
 																		var _this$events$response6, _this$events$response7;
 																		return null === (_this$events$response6 = _this.events[responseId].product) ||
@@ -33758,11 +32871,7 @@
 																		}, {}),
 																		banner: _this.events[responseId].banner,
 																  }))
-																: ((_this.events[responseId] = { product: {}, banner: {} }),
-																  (_this.lastSearchQuery =
-																		null === (_response$search2 = response.search) || void 0 === _response$search2
-																			? void 0
-																			: _response$search2.query)),
+																: (_this.events[responseId] = { product: {}, banner: {} }),
 															(afterSearchProfile = _this.profiler.create({ type: 'event', name: 'afterSearch', context: params }).start()),
 															(_context4.p = 10),
 															(_context4.n = 11),
@@ -33784,6 +32893,17 @@
 															afterSearchProfile.stop(),
 															_this.log.profile(afterSearchProfile),
 															_this.store.update(response),
+															(data = { responseId }),
+															(null === (_this$config$beacon7 = _this.config.beacon) || void 0 === _this$config$beacon7
+																? void 0
+																: _this$config$beacon7.enabled) &&
+																_this.tracker.events.autocomplete.render({
+																	data,
+																	siteId:
+																		null === (_this$config$globals11 = _this.config.globals) || void 0 === _this$config$globals11
+																			? void 0
+																			: _this$config$globals11.siteId,
+																}),
 															(afterStoreProfile = _this.profiler.create({ type: 'event', name: 'afterStore', context: params }).start()),
 															(_context4.p = 15),
 															(_context4.n = 16),
@@ -33858,11 +32978,20 @@
 											for (;;)
 												switch (_context5.n) {
 													case 0:
-														(products = 'function' == typeof _products.slice ? _products.slice() : [_products]).forEach(function (product) {
+														if (
+															((products = 'function' == typeof (null == _products ? void 0 : _products.slice) ? _products.slice() : [_products]),
+															_products && 0 !== products.length)
+														) {
+															_context5.n = 1;
+															break;
+														}
+														return _this.log.warn('No products provided to autocomplete controller.addToCart'), _context5.a(2);
+													case 1:
+														products.forEach(function (product) {
 															_this.track.product.addToCart(product);
 														}),
 															products.length > 0 && _this.eventManager.fire('addToCart', { controller: _this, products });
-													case 1:
+													case 2:
 														return _context5.a(2);
 												}
 										}, _callee5);
@@ -33877,29 +33006,26 @@
 							_this.config.settings.initializeFromUrl && ((_this.store.state.input = _this.urlManager.state.query), _this.urlManager.reset().go()),
 							(_this.storage = new StorageStore({ type: 'session', key: 'ss-controller-' + _this.config.id })),
 							_this.eventManager.on(
-								'afterStore',
+								'afterSearch',
 								(function () {
 									var _ref7 = AutocompleteController_asyncToGenerator(
-										AutocompleteController_regenerator().m(function _callee6(search, next) {
-											var controller, responseId, _this$config$globals11, data;
+										AutocompleteController_regenerator().m(function _callee6(ac, next) {
+											var _ac$response$autocomp;
 											return AutocompleteController_regenerator().w(function (_context6) {
 												for (;;)
 													switch (_context6.n) {
 														case 0:
 															return (_context6.n = 1), next();
 														case 1:
-															(controller = search.controller),
-																(responseId = search.response.tracking.responseId),
-																controller.store.loaded &&
-																	!controller.store.error &&
-																	((data = { responseId }),
-																	_this.tracker.events.autocomplete.render({
-																		data,
-																		siteId:
-																			null === (_this$config$globals11 = _this.config.globals) || void 0 === _this$config$globals11
-																				? void 0
-																				: _this$config$globals11.siteId,
-																	}));
+															if (
+																(null === (_ac$response$autocomp = ac.response.autocomplete) || void 0 === _ac$response$autocomp
+																	? void 0
+																	: _ac$response$autocomp.query) == ac.controller.urlManager.state.query
+															) {
+																_context6.n = 2;
+																break;
+															}
+															return _context6.a(2, !1);
 														case 2:
 															return _context6.a(2);
 													}
@@ -33912,42 +33038,10 @@
 								})()
 							),
 							_this.eventManager.on(
-								'afterSearch',
+								'beforeSubmit',
 								(function () {
 									var _ref8 = AutocompleteController_asyncToGenerator(
 										AutocompleteController_regenerator().m(function _callee7(ac, next) {
-											var _ac$response$autocomp;
-											return AutocompleteController_regenerator().w(function (_context7) {
-												for (;;)
-													switch (_context7.n) {
-														case 0:
-															return (_context7.n = 1), next();
-														case 1:
-															if (
-																(null === (_ac$response$autocomp = ac.response.autocomplete) || void 0 === _ac$response$autocomp
-																	? void 0
-																	: _ac$response$autocomp.query) == ac.controller.urlManager.state.query
-															) {
-																_context7.n = 2;
-																break;
-															}
-															return _context7.a(2, !1);
-														case 2:
-															return _context7.a(2);
-													}
-											}, _callee7);
-										})
-									);
-									return function (_x6, _x7) {
-										return _ref8.apply(this, arguments);
-									};
-								})()
-							),
-							_this.eventManager.on(
-								'beforeSubmit',
-								(function () {
-									var _ref9 = AutocompleteController_asyncToGenerator(
-										AutocompleteController_regenerator().m(function _callee8(ac, next) {
 											var _ac$controller$store$,
 												_this$config2,
 												_this$config2$setting,
@@ -33962,17 +33056,17 @@
 												results,
 												filteredResults,
 												singleResultUrl;
-											return AutocompleteController_regenerator().w(function (_context8) {
+											return AutocompleteController_regenerator().w(function (_context7) {
 												for (;;)
-													switch (_context8.n) {
+													switch (_context7.n) {
 														case 0:
-															return (_context8.n = 1), next();
+															return (_context7.n = 1), next();
 														case 1:
 															if (!ac.controller.store.loading) {
-																_context8.n = 2;
+																_context7.n = 2;
 																break;
 															}
-															return _context8.a(2);
+															return _context7.a(2);
 														case 2:
 															if (
 																((inputState = ac.controller.store.state.input),
@@ -33992,7 +33086,7 @@
 																	redirectURL
 																))
 															) {
-																_context8.n = 3;
+																_context7.n = 3;
 																break;
 															}
 															return (
@@ -34004,7 +33098,7 @@
 																			: _ac$controller$store$2.responseId,
 																}),
 																(window.location.href = redirectURL),
-																_context8.a(2, !1)
+																_context7.a(2, !1)
 															);
 														case 3:
 															if (
@@ -34016,7 +33110,7 @@
 																void 0 === _this$config3$setting2 ||
 																!_this$config3$setting2.singleResult
 															) {
-																_context8.n = 4;
+																_context7.n = 4;
 																break;
 															}
 															if (
@@ -34030,18 +33124,18 @@
 																		? void 0
 																		: _filteredResults$0$ma.url)))
 															) {
-																_context8.n = 4;
+																_context7.n = 4;
 																break;
 															}
-															return (window.location.href = singleResultUrl), _context8.a(2, !1);
+															return (window.location.href = singleResultUrl), _context7.a(2, !1);
 														case 4:
-															return _context8.a(2);
+															return _context7.a(2);
 													}
-											}, _callee8);
+											}, _callee7);
 										})
 									);
-									return function (_x8, _x9) {
-										return _ref9.apply(this, arguments);
+									return function (_x6, _x7) {
+										return _ref8.apply(this, arguments);
 									};
 								})()
 							),
@@ -34105,48 +33199,48 @@
 								key: 'setFocused',
 								value:
 									((_setFocused = AutocompleteController_asyncToGenerator(
-										AutocompleteController_regenerator().m(function _callee9(inputElement) {
+										AutocompleteController_regenerator().m(function _callee8(inputElement) {
 											var _t8, _t9;
 											return AutocompleteController_regenerator().w(
-												function (_context9) {
+												function (_context8) {
 													for (;;)
-														switch ((_context9.p = _context9.n)) {
+														switch ((_context8.p = _context8.n)) {
 															case 0:
 																if (this.store.state.focusedInput === inputElement) {
-																	_context9.n = 8;
+																	_context8.n = 8;
 																	break;
 																}
 																return (
 																	(this.store.state.focusedInput = inputElement),
-																	(_context9.p = 1),
-																	(_context9.p = 2),
-																	(_context9.n = 3),
+																	(_context8.p = 1),
+																	(_context8.p = 2),
+																	(_context8.n = 3),
 																	this.eventManager.fire('focusChange', { controller: this })
 																);
 															case 3:
-																_context9.n = 6;
+																_context8.n = 6;
 																break;
 															case 4:
-																if (((_context9.p = 4), 'cancelled' != (null == (_t8 = _context9.v) ? void 0 : _t8.message))) {
-																	_context9.n = 5;
+																if (((_context8.p = 4), 'cancelled' != (null == (_t8 = _context8.v) ? void 0 : _t8.message))) {
+																	_context8.n = 5;
 																	break;
 																}
-																this.log.warn("'focusChange' middleware cancelled"), (_context9.n = 6);
+																this.log.warn("'focusChange' middleware cancelled"), (_context8.n = 6);
 																break;
 															case 5:
 																throw (this.log.error("error in 'focusChange' middleware"), _t8);
 															case 6:
-																_context9.n = 8;
+																_context8.n = 8;
 																break;
 															case 7:
-																(_context9.p = 7), (_t9 = _context9.v) && console.error(_t9);
+																(_context8.p = 7), (_t9 = _context8.v) && console.error(_t9);
 															case 8:
 																null == inputElement || inputElement.dispatchEvent(new Event('input'));
 															case 9:
-																return _context9.a(2);
+																return _context8.a(2);
 														}
 												},
-												_callee9,
+												_callee8,
 												this,
 												[
 													[2, 4],
@@ -34155,7 +33249,7 @@
 											);
 										})
 									)),
-									function setFocused(_x0) {
+									function setFocused(_x8) {
 										return _setFocused.apply(this, arguments);
 									}),
 							},
@@ -34196,7 +33290,7 @@
 								key: 'bind',
 								value:
 									((_bind = AutocompleteController_asyncToGenerator(
-										AutocompleteController_regenerator().m(function _callee0() {
+										AutocompleteController_regenerator().m(function _callee9() {
 											var _this$config$settings11,
 												_this$config$settings12,
 												_this$config$settings13,
@@ -34205,15 +33299,15 @@
 												_this$config$settings15,
 												_this3 = this;
 											return AutocompleteController_regenerator().w(
-												function (_context0) {
+												function (_context9) {
 													for (;;)
-														switch (_context0.n) {
+														switch (_context9.n) {
 															case 0:
 																if (this.initialized) {
-																	_context0.n = 1;
+																	_context9.n = 1;
 																	break;
 																}
-																return (_context0.n = 1), this.init();
+																return (_context9.n = 1), this.init();
 															case 1:
 																this.unbind(),
 																	document.querySelectorAll(this.config.selector).forEach(function (input) {
@@ -34303,10 +33397,10 @@
 																		_this$config$settings15.disableClickOutside) ||
 																		document.addEventListener('click', this.handlers.document.click);
 															case 2:
-																return _context0.a(2);
+																return _context9.a(2);
 														}
 												},
-												_callee0,
+												_callee9,
 												this
 											);
 										})
@@ -34330,22 +33424,22 @@
 						_form$querySelector.remove(),
 					form.append(inputElem);
 			}
-			function timeout(_x1) {
+			function timeout(_x9) {
 				return _timeout.apply(this, arguments);
 			}
 			function _timeout() {
 				return (_timeout = AutocompleteController_asyncToGenerator(
-					AutocompleteController_regenerator().m(function _callee1(time) {
-						return AutocompleteController_regenerator().w(function (_context1) {
+					AutocompleteController_regenerator().m(function _callee0(time) {
+						return AutocompleteController_regenerator().w(function (_context0) {
 							for (;;)
-								if (0 === _context1.n)
-									return _context1.a(
+								if (0 === _context0.n)
+									return _context0.a(
 										2,
 										new Promise(function (resolve) {
 											window.setTimeout(resolve, time);
 										})
 									);
-						}, _callee1);
+						}, _callee0);
 					})
 				)).apply(this, arguments);
 			}
@@ -44282,7 +43376,7 @@
 					variables
 				);
 			}
-			var src = __webpack_require__('../../node_modules/@searchspring/beacon/dist/esm/src/index.js'),
+			var src = __webpack_require__('../../node_modules/@athoscommerce/beacon/dist/esm/src/index.js'),
 				Tracker_excluded = ['stack', 'message'];
 			function Tracker_toConsumableArray(r) {
 				return (
@@ -44389,12 +43483,12 @@
 				},
 				Tracker = (function (_Beacon) {
 					function Tracker(globals, config) {
-						var _window$searchspring, _this;
+						var _this$globals, _window$searchspring, _this;
 						if (
 							((function Tracker_classCallCheck(a, n) {
 								if (!(a instanceof n)) throw new TypeError('Cannot call a class as a function');
 							})(this, Tracker),
-							((config = cjs_default()(Tracker_defaultConfig, config || {})).initiator = 'searchspring/' + config.framework + '/0.73.7'),
+							((config = cjs_default()(Tracker_defaultConfig, config || {})).initiator = 'searchspring/' + config.framework + '/0.74.0'),
 							'object' != typeof globals || 'string' != typeof globals.siteId)
 						)
 							throw new Error('Invalid config passed to tracker. The "siteId" attribute must be provided.');
@@ -44572,9 +43666,11 @@
 							(_this.doNotTrack = _this.config.doNotTrack || []),
 							Object.values(AppMode).includes(_this.config.mode) && (_this.mode = _this.config.mode),
 							(_this.localStorage = new StorageStore({ type: 'local', key: 'ss-' + _this.config.id })),
-							_this.localStorage.set('siteId', _this.globals.siteId),
+							_this.localStorage.set('siteId', _this.globals.siteId);
+						var currency = null === (_this$globals = _this.globals) || void 0 === _this$globals ? void 0 : _this$globals.currency;
+						currency && _this.setCurrency(currency),
 							(null !== (_window$searchspring = window.searchspring) && void 0 !== _window$searchspring && _window$searchspring.tracker) ||
-								((window.searchspring = window.searchspring || {}), (window.searchspring.tracker = _this), (window.searchspring.version = '0.73.7')),
+								((window.searchspring = window.searchspring || {}), (window.searchspring.tracker = _this), (window.searchspring.version = '0.74.0')),
 							setTimeout(function () {
 								_this.targeters.push(
 									new DomTargeter([{ selector: 'script[type^="searchspring/track/"]', emptyTarget: !1 }], function (target, elem) {
@@ -45179,9 +44275,1149 @@
 					);
 				})();
 		},
+		'../snap-store-mobx/dist/esm/Search/Stores/SearchMerchandisingStore.js'(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+			'use strict';
+			__webpack_require__.d(__webpack_exports__, { W: () => SearchMerchandisingStore, c: () => ContentType });
+			var ContentType;
+			__webpack_require__('../../node_modules/core-js/modules/es.array.for-each.js'),
+				__webpack_require__('../../node_modules/core-js/modules/web.dom-collections.for-each.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.object.values.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.string.match.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.regexp.exec.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.symbol.species.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.array.species.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.symbol.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.symbol.description.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.object.to-string.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.symbol.to-primitive.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.date.to-primitive.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.number.constructor.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.object.define-property.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.object.set-prototype-of.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.function.bind.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.object.get-prototype-of.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.array.index-of.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.regexp.to-string.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.date.to-string.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.reflect.construct.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.map.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.string.iterator.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.array.iterator.js'),
+				__webpack_require__('../../node_modules/core-js/modules/web.dom-collections.iterator.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.object.create.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.array.is-array.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.symbol.iterator.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.array.from.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.array.slice.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.function.name.js');
+			function _toConsumableArray(r) {
+				return (
+					(function _arrayWithoutHoles(r) {
+						if (Array.isArray(r)) return _arrayLikeToArray(r);
+					})(r) ||
+					(function _iterableToArray(r) {
+						if (('undefined' != typeof Symbol && null != r[Symbol.iterator]) || null != r['@@iterator']) return Array.from(r);
+					})(r) ||
+					(function _unsupportedIterableToArray(r, a) {
+						if (r) {
+							if ('string' == typeof r) return _arrayLikeToArray(r, a);
+							var t = {}.toString.call(r).slice(8, -1);
+							return (
+								'Object' === t && r.constructor && (t = r.constructor.name),
+								'Map' === t || 'Set' === t
+									? Array.from(r)
+									: 'Arguments' === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t)
+									? _arrayLikeToArray(r, a)
+									: void 0
+							);
+						}
+					})(r) ||
+					(function _nonIterableSpread() {
+						throw new TypeError(
+							'Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.'
+						);
+					})()
+				);
+			}
+			function _arrayLikeToArray(r, a) {
+				(null == a || a > r.length) && (a = r.length);
+				for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e];
+				return n;
+			}
+			function _callSuper(t, o, e) {
+				return (
+					(o = _getPrototypeOf(o)),
+					(function _possibleConstructorReturn(t, e) {
+						if (e && ('object' == typeof e || 'function' == typeof e)) return e;
+						if (void 0 !== e) throw new TypeError('Derived constructors may only return object or undefined');
+						return (function _assertThisInitialized(e) {
+							if (void 0 === e) throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
+							return e;
+						})(t);
+					})(t, _isNativeReflectConstruct() ? Reflect.construct(o, e || [], _getPrototypeOf(t).constructor) : o.apply(t, e))
+				);
+			}
+			function _wrapNativeSuper(t) {
+				var r = 'function' == typeof Map ? new Map() : void 0;
+				return (
+					(_wrapNativeSuper = function _wrapNativeSuper(t) {
+						if (
+							null === t ||
+							!(function _isNativeFunction(t) {
+								try {
+									return -1 !== Function.toString.call(t).indexOf('[native code]');
+								} catch (n) {
+									return 'function' == typeof t;
+								}
+							})(t)
+						)
+							return t;
+						if ('function' != typeof t) throw new TypeError('Super expression must either be null or a function');
+						if (void 0 !== r) {
+							if (r.has(t)) return r.get(t);
+							r.set(t, Wrapper);
+						}
+						function Wrapper() {
+							return (function _construct(t, e, r) {
+								if (_isNativeReflectConstruct()) return Reflect.construct.apply(null, arguments);
+								var o = [null];
+								o.push.apply(o, e);
+								var p = new (t.bind.apply(t, o))();
+								return r && _setPrototypeOf(p, r.prototype), p;
+							})(t, arguments, _getPrototypeOf(this).constructor);
+						}
+						return (
+							(Wrapper.prototype = Object.create(t.prototype, { constructor: { value: Wrapper, enumerable: !1, writable: !0, configurable: !0 } })),
+							_setPrototypeOf(Wrapper, t)
+						);
+					}),
+					_wrapNativeSuper(t)
+				);
+			}
+			function _isNativeReflectConstruct() {
+				try {
+					var t = !Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {}));
+				} catch (t) {}
+				return (_isNativeReflectConstruct = function _isNativeReflectConstruct() {
+					return !!t;
+				})();
+			}
+			function _setPrototypeOf(t, e) {
+				return (
+					(_setPrototypeOf = Object.setPrototypeOf
+						? Object.setPrototypeOf.bind()
+						: function (t, e) {
+								return (t.__proto__ = e), t;
+						  }),
+					_setPrototypeOf(t, e)
+				);
+			}
+			function _getPrototypeOf(t) {
+				return (
+					(_getPrototypeOf = Object.setPrototypeOf
+						? Object.getPrototypeOf.bind()
+						: function (t) {
+								return t.__proto__ || Object.getPrototypeOf(t);
+						  }),
+					_getPrototypeOf(t)
+				);
+			}
+			function _defineProperties(e, r) {
+				for (var t = 0; t < r.length; t++) {
+					var o = r[t];
+					(o.enumerable = o.enumerable || !1),
+						(o.configurable = !0),
+						'value' in o && (o.writable = !0),
+						Object.defineProperty(e, _toPropertyKey(o.key), o);
+				}
+			}
+			function _createClass(e, r, t) {
+				return r && _defineProperties(e.prototype, r), t && _defineProperties(e, t), Object.defineProperty(e, 'prototype', { writable: !1 }), e;
+			}
+			function _toPropertyKey(t) {
+				var i = (function _toPrimitive(t, r) {
+					if ('object' != typeof t || !t) return t;
+					var e = t[Symbol.toPrimitive];
+					if (void 0 !== e) {
+						var i = e.call(t, r || 'default');
+						if ('object' != typeof i) return i;
+						throw new TypeError('@@toPrimitive must return a primitive value.');
+					}
+					return ('string' === r ? String : Number)(t);
+				})(t, 'string');
+				return 'symbol' == typeof i ? i : i + '';
+			}
+			function _classCallCheck(a, n) {
+				if (!(a instanceof n)) throw new TypeError('Cannot call a class as a function');
+			}
+			!(function (ContentType) {
+				(ContentType.HEADER = 'header'),
+					(ContentType.BANNER = 'banner'),
+					(ContentType.FOOTER = 'footer'),
+					(ContentType.LEFT = 'left'),
+					(ContentType.INLINE = 'inline');
+			})(ContentType || (ContentType = {}));
+			var SearchMerchandisingStore = _createClass(function SearchMerchandisingStore(services, merchData, tracking) {
+					var _this = this;
+					_classCallCheck(this, SearchMerchandisingStore),
+						(this.redirect = ''),
+						(this.responseId = ''),
+						(this.content = {}),
+						(this.campaigns = []),
+						(this.personalized = !1),
+						(this.experiments = []),
+						merchData &&
+							((this.redirect = merchData.redirect || ''),
+							(this.responseId = (null == tracking ? void 0 : tracking.responseId) || ''),
+							merchData.content &&
+								Object.values(ContentType).forEach(function (type) {
+									if (merchData.content && merchData.content[type]) {
+										var _merchData$content$ty,
+											htmlString =
+												(null === (_merchData$content$ty = merchData.content[type]) || void 0 === _merchData$content$ty
+													? void 0
+													: _merchData$content$ty[0]) || '',
+											match = 'string' == typeof htmlString && htmlString.match(/data-banner-id="(\d+)"/),
+											uid = match ? match[1] : '';
+										_this.content[type] = new Content([{ value: merchData.content[type], uid, responseId: _this.responseId }]);
+									}
+								}),
+							merchData.campaigns &&
+								((this.campaigns = merchData.campaigns),
+								merchData.campaigns.forEach(function (campaign) {
+									'landing-page' == campaign.type && (_this.landingPage = campaign);
+								})),
+							merchData.experiments && (this.experiments = merchData.experiments),
+							(this.personalized = !!merchData.personalized));
+				}),
+				Content = (function (_Array) {
+					function Content(content) {
+						return _classCallCheck(this, Content), _callSuper(this, Content, _toConsumableArray(content));
+					}
+					return (
+						(function _inherits(t, e) {
+							if ('function' != typeof e && null !== e) throw new TypeError('Super expression must either be null or a function');
+							(t.prototype = Object.create(e && e.prototype, { constructor: { value: t, writable: !0, configurable: !0 } })),
+								Object.defineProperty(t, 'prototype', { writable: !1 }),
+								e && _setPrototypeOf(t, e);
+						})(Content, _Array),
+						_createClass(Content, null, [
+							{
+								key: Symbol.species,
+								get: function get() {
+									return Array;
+								},
+							},
+						])
+					);
+				})(_wrapNativeSuper(Array));
+		},
+		'../snap-store-mobx/dist/esm/types.js'(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+			'use strict';
+			var ErrorType;
+			__webpack_require__.d(__webpack_exports__, { B: () => ErrorType }),
+				(function (ErrorType) {
+					(ErrorType.WARNING = 'warning'), (ErrorType.INFO = 'info'), (ErrorType.ERROR = 'error');
+				})(ErrorType || (ErrorType = {}));
+		},
+		'../snap-toolbox/dist/esm/filters/formatNumber.js'(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+			'use strict';
+			__webpack_require__.d(__webpack_exports__, { Z: () => formatNumber });
+			__webpack_require__('../../node_modules/core-js/modules/es.object.assign.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.number.is-nan.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.number.constructor.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.string.split.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.regexp.exec.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.string.replace.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.string.pad-end.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.array.join.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.object.to-string.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.regexp.to-string.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.date.to-string.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.array.index-of.js');
+			function formatNumber(input, opts) {
+				var options = Object.assign(
+					{ symbol: '', decimalPlaces: 3, padDecimalPlaces: !0, thousandsSeparator: '', decimalSeparator: '.', symbolAfter: !1 },
+					opts
+				);
+				if ('number' == typeof input && !Number.isNaN(input)) {
+					var split = (function truncateDecimals(input, digits) {
+						var numString = input.toString(),
+							decimalPosition = numString.indexOf('.'),
+							substrLength = -1 == decimalPosition ? numString.length : 1 + decimalPosition + (digits || -1);
+						return numString.substr(0, substrLength);
+					})(input, options.decimalPlaces).split('.');
+					(split[0] = split[0].replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1' + options.thousandsSeparator)),
+						options.decimalPlaces > 0 && options.padDecimalPlaces && (split[1] = (split[1] || '').padEnd(options.decimalPlaces, '0'));
+					var output = split.join(options.decimalSeparator);
+					return options.symbolAfter ? (output += options.symbol) : (output = options.symbol + output), output;
+				}
+			}
+		},
+		'../snap-toolbox/dist/esm/filters/handleize.js'(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+			'use strict';
+			__webpack_require__.d(__webpack_exports__, { p: () => handleize });
+			__webpack_require__('../../node_modules/core-js/modules/es.string.trim.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.string.replace.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.regexp.exec.js');
+			function handleize(input) {
+				if ('string' != typeof input) return input;
+				var handleized = input.toLowerCase();
+				return (handleized = (handleized = handleized.replace(/[^\w\s]/g, '').trim()).replace(/\s/g, '-'));
+			}
+		},
+		'./.storybook/preview.js-generated-config-entry.js'(__unused_webpack_module, __unused_webpack___webpack_exports__, __webpack_require__) {
+			'use strict';
+			var preview_namespaceObject = {};
+			__webpack_require__.r(preview_namespaceObject),
+				__webpack_require__.d(preview_namespaceObject, { decorators: () => decorators, parameters: () => parameters });
+			__webpack_require__('../../node_modules/core-js/modules/es.object.keys.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.symbol.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.array.filter.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.object.get-own-property-descriptor.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.array.for-each.js'),
+				__webpack_require__('../../node_modules/core-js/modules/web.dom-collections.for-each.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.object.get-own-property-descriptors.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.object.define-properties.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.object.define-property.js');
+			var ClientApi = __webpack_require__('../../node_modules/@storybook/client-api/dist/esm/ClientApi.js'),
+				esm = __webpack_require__('../../node_modules/@storybook/client-logger/dist/esm/index.js'),
+				preact_module = __webpack_require__('../../node_modules/preact/dist/preact.module.js'),
+				ThemeProvider = __webpack_require__('../../node_modules/@emotion/react/dist/emotion-element-cbed451f.browser.esm.js').b,
+				defaultTheme = {
+					colors: {
+						primary: '#3A23AD',
+						secondary: '#00cee1',
+						hover: '#f8f6fd',
+						text: { secondary: '#ffffff' },
+						message: { error: '#cc1212', warning: '#ecaa15', info: '#4c3ce2' },
+					},
+					components: {},
+				},
+				injectStylesIntoStyleTag = __webpack_require__(
+					'../../node_modules/@storybook/builder-webpack5/node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js'
+				),
+				injectStylesIntoStyleTag_default = __webpack_require__.n(injectStylesIntoStyleTag),
+				styles = __webpack_require__(
+					'../../node_modules/@storybook/builder-webpack5/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].use[1]!./.storybook/styles.css'
+				),
+				options = { insert: 'head', singleton: !1 };
+			injectStylesIntoStyleTag_default()(styles.A, options);
+			styles.A.locals;
+			var decorators = [
+					function (Story) {
+						return (0, preact_module.h)(ThemeProvider, { theme: defaultTheme }, (0, preact_module.h)(Story, null));
+					},
+				],
+				parameters = { actions: { argTypesRegex: '^on[A-Z].*', disabled: !1 }, controls: { expanded: !0, disabled: !1 }, options: { showPanel: !0 } };
+			function ownKeys(object, enumerableOnly) {
+				var keys = Object.keys(object);
+				if (Object.getOwnPropertySymbols) {
+					var symbols = Object.getOwnPropertySymbols(object);
+					enumerableOnly &&
+						(symbols = symbols.filter(function (sym) {
+							return Object.getOwnPropertyDescriptor(object, sym).enumerable;
+						})),
+						keys.push.apply(keys, symbols);
+				}
+				return keys;
+			}
+			function _defineProperty(obj, key, value) {
+				return key in obj ? Object.defineProperty(obj, key, { value, enumerable: !0, configurable: !0, writable: !0 }) : (obj[key] = value), obj;
+			}
+			Object.keys(preview_namespaceObject).forEach(function (key) {
+				var value = preview_namespaceObject[key];
+				switch (key) {
+					case 'args':
+					case 'argTypes':
+						return esm.vF.warn('Invalid args/argTypes in config, ignoring.', JSON.stringify(value));
+					case 'decorators':
+						return value.forEach(function (decorator) {
+							return (0, ClientApi.dK)(decorator, !1);
+						});
+					case 'loaders':
+						return value.forEach(function (loader) {
+							return (0, ClientApi.$K)(loader, !1);
+						});
+					case 'parameters':
+						return (0, ClientApi.Gu)(
+							(function _objectSpread(target) {
+								for (var i = 1; i < arguments.length; i++) {
+									var source = null != arguments[i] ? arguments[i] : {};
+									i % 2
+										? ownKeys(Object(source), !0).forEach(function (key) {
+												_defineProperty(target, key, source[key]);
+										  })
+										: Object.getOwnPropertyDescriptors
+										? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source))
+										: ownKeys(Object(source)).forEach(function (key) {
+												Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));
+										  });
+								}
+								return target;
+							})({}, value),
+							!1
+						);
+					case 'argTypesEnhancers':
+						return value.forEach(function (enhancer) {
+							return (0, ClientApi.T$)(enhancer);
+						});
+					case 'argsEnhancers':
+						return value.forEach(function (enhancer) {
+							return (0, ClientApi.FW)(enhancer);
+						});
+					case 'render':
+						return (0, ClientApi.kf)(value);
+					case 'globals':
+					case 'globalTypes':
+						var v = {};
+						return (v[key] = value), (0, ClientApi.Gu)(v, !1);
+					case '__namedExportsOrder':
+					case 'decorateStory':
+					case 'renderToDOM':
+						return null;
+					default:
+						return console.log(key + ' was not supported :( !');
+				}
+			});
+		},
+		'./generated-stories-entry.js'(module, __unused_webpack_exports, __webpack_require__) {
+			'use strict';
+			(module = __webpack_require__.nmd(module)),
+				(0, __webpack_require__('../../node_modules/@storybook/preact/dist/esm/client/index.js').configure)(
+					[
+						__webpack_require__('./src sync recursive ^\\.(?:(?:^%7C\\/%7C(?:(?:(?%21(?:^%7C\\/)\\.).)*?)\\/)(?%21\\.)(?=.)[^/]*?\\.stories\\.mdx)$'),
+						__webpack_require__(
+							'./src sync recursive ^\\.(?:(?:^%7C\\/%7C(?:(?:(?%21(?:^%7C\\/)\\.).)*?)\\/)(?%21\\.)(?=.)[^/]*?\\.stories\\.(js%7Cjsx%7Cts%7Ctsx))$'
+						),
+					],
+					module,
+					!1
+				);
+		},
 		'./storybook-init-framework-entry.js'(__unused_webpack_module, __unused_webpack___webpack_exports__, __webpack_require__) {
 			'use strict';
 			__webpack_require__('../../node_modules/@storybook/preact/dist/esm/client/index.js');
+		},
+		'./src/documentation/About/About.stories.mdx'(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+			'use strict';
+			__webpack_require__.r(__webpack_exports__), __webpack_require__.d(__webpack_exports__, { __page: () => __page, default: () => About_stories });
+			__webpack_require__('../../node_modules/preact/compat/dist/compat.module.js');
+			var esm = __webpack_require__('../../node_modules/@mdx-js/react/dist/esm.js'),
+				dist_esm = __webpack_require__('./node_modules/@storybook/addon-docs/dist/esm/index.js'),
+				blocks = __webpack_require__('./node_modules/@storybook/addon-docs/blocks.js');
+			function _extends() {
+				return (
+					(_extends = Object.assign
+						? Object.assign.bind()
+						: function (n) {
+								for (var e = 1; e < arguments.length; e++) {
+									var t = arguments[e];
+									for (var r in t) ({}.hasOwnProperty.call(t, r) && (n[r] = t[r]));
+								}
+								return n;
+						  }),
+					_extends.apply(null, arguments)
+				);
+			}
+			const layoutProps = {};
+			function MDXContent({ components, ...props }) {
+				return (0, esm.yg)(
+					'wrapper',
+					_extends({}, layoutProps, props, { components, mdxType: 'MDXLayout' }),
+					(0, esm.yg)(
+						'p',
+						null,
+						"Welcome to the Snap React Component Library!\nThis collection of ecommerce components allows you to quickly build and theme a layout for use with Searchspring's Snap SDK."
+					),
+					(0, esm.yg)('h3', { id: 'installation' }, 'Installation'),
+					(0, esm.yg)(
+						'pre',
+						null,
+						(0, esm.yg)('code', { parentName: 'pre', className: 'language-sh' }, 'npm install --save @searchspring/snap-preact-components\n')
+					),
+					(0, esm.yg)('h2', { id: 'atomic-design-methodology' }, 'Atomic Design Methodology'),
+					(0, esm.yg)('p', null, 'Snap components follow the Atomic design methodology. Components are organized into three levels:'),
+					(0, esm.yg)('h3', { id: 'atoms' }, 'Atoms'),
+					(0, esm.yg)(
+						'p',
+						null,
+						'Atom level components are the basic building blocks of an ecommerce layout. This includes components such as Badge, Button, and Icon.'
+					),
+					(0, esm.yg)(
+						'p',
+						null,
+						'Like atoms in nature they’re fairly abstract and often not terribly useful on their own. However, they’re good as a reference in the context of a pattern library as you can see all your global styles laid out at a glance.'
+					),
+					(0, esm.yg)('h3', { id: 'molecules' }, 'Molecules'),
+					(0, esm.yg)(
+						'p',
+						null,
+						'Molecule level components utilize one or more atom components to start building the contents of a layout. This includes components such as Pagination, Select, and Slider.'
+					),
+					(0, esm.yg)(
+						'p',
+						null,
+						'Things start getting more interesting and tangible when we start combining atoms together. Molecules are groups of atoms bonded together and are the smallest fundamental units of a compound. These molecules take on their own properties and serve as the backbone of our design systems.'
+					),
+					(0, esm.yg)('h3', { id: 'organisms' }, 'Organisms'),
+					(0, esm.yg)(
+						'p',
+						null,
+						'Organisms level components utilize one or more molecule components to start building complex sections of a layout. This includes components such as Autocomplete, Facets, and Results.'
+					),
+					(0, esm.yg)(
+						'p',
+						null,
+						'Molecules give us some building blocks to work with, and we can now combine them together to form organisms. Organisms are groups of molecules joined together to form a relatively complex, distinct section of an interface.'
+					)
+				);
+			}
+			function About_stories_extends() {
+				return (
+					(About_stories_extends = Object.assign
+						? Object.assign.bind()
+						: function (n) {
+								for (var e = 1; e < arguments.length; e++) {
+									var t = arguments[e];
+									for (var r in t) ({}.hasOwnProperty.call(t, r) && (n[r] = t[r]));
+								}
+								return n;
+						  }),
+					About_stories_extends.apply(null, arguments)
+				);
+			}
+			MDXContent.isMDXComponent = !0;
+			const About_stories_layoutProps = {};
+			function About_stories_MDXContent({ components, ...props }) {
+				return (0, esm.yg)(
+					'wrapper',
+					About_stories_extends({}, About_stories_layoutProps, props, { components, mdxType: 'MDXLayout' }),
+					(0, esm.yg)(blocks.W8, { title: 'Documentation/About', mdxType: 'Meta' }),
+					(0, esm.yg)(
+						'style',
+						null,
+						'\n\t.header {\n\t\tdisplay: flex;\n\t\talign-items: center;\n\t}\n\n\t.header .subtitle {\n\t\ttext-transform: uppercase;\n\t\tcolor: #00AEEF;\n\t}\n\n\t.header img {\n\t\t\twidth: 300px;\n\t\t\tmargin-right: 20px;\n\t\t}\n'
+					),
+					(0, esm.yg)('div', { class: 'header' }, (0, esm.yg)('span', { class: 'subtitle' }, 'SNAP PREACT COMPONENTS')),
+					(0, esm.yg)('hr', null),
+					(0, esm.yg)(MDXContent, { mdxType: 'Readme' })
+				);
+			}
+			About_stories_MDXContent.isMDXComponent = !0;
+			const __page = () => {
+				throw new Error('Docs-only story');
+			};
+			__page.parameters = { docsOnly: !0 };
+			const componentMeta = { title: 'Documentation/About', includeStories: ['__page'] },
+				mdxStoryNameToKey = {};
+			(componentMeta.parameters = componentMeta.parameters || {}),
+				(componentMeta.parameters.docs = {
+					...(componentMeta.parameters.docs || {}),
+					page: () =>
+						(0, esm.yg)(dist_esm.hT, { mdxStoryNameToKey, mdxComponentAnnotations: componentMeta }, (0, esm.yg)(About_stories_MDXContent, null)),
+				});
+			const About_stories = componentMeta;
+		},
+		'./src/documentation/Theme/Theme.stories.mdx'(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+			'use strict';
+			__webpack_require__.r(__webpack_exports__), __webpack_require__.d(__webpack_exports__, { __page: () => __page, default: () => Theme_stories });
+			__webpack_require__('../../node_modules/preact/compat/dist/compat.module.js');
+			var esm = __webpack_require__('../../node_modules/@mdx-js/react/dist/esm.js'),
+				dist_esm = __webpack_require__('./node_modules/@storybook/addon-docs/dist/esm/index.js'),
+				blocks = __webpack_require__('./node_modules/@storybook/addon-docs/blocks.js');
+			function _extends() {
+				return (
+					(_extends = Object.assign
+						? Object.assign.bind()
+						: function (n) {
+								for (var e = 1; e < arguments.length; e++) {
+									var t = arguments[e];
+									for (var r in t) ({}.hasOwnProperty.call(t, r) && (n[r] = t[r]));
+								}
+								return n;
+						  }),
+					_extends.apply(null, arguments)
+				);
+			}
+			const layoutProps = {};
+			function MDXContent({ components, ...props }) {
+				return (0, esm.yg)(
+					'wrapper',
+					_extends({}, layoutProps, props, { components, mdxType: 'MDXLayout' }),
+					(0, esm.yg)('p', null, 'Snap components allows for theming at both the global and component level.'),
+					(0, esm.yg)('h3', { id: 'theme-object' }, 'Theme object'),
+					(0, esm.yg)(
+						'p',
+						null,
+						'A theme object contains a ',
+						(0, esm.yg)('inlineCode', { parentName: 'p' }, 'components'),
+						' object with one or more objects where the key is the name of the component (lowercase), and the value is an object containing prop keys and values.'
+					),
+					(0, esm.yg)(
+						'p',
+						null,
+						'For example, this ',
+						(0, esm.yg)('inlineCode', { parentName: 'p' }, 'globalTheme'),
+						' theme object will apply the prop ',
+						(0, esm.yg)('inlineCode', { parentName: 'p' }, "color={'blue'}"),
+						' for all ',
+						(0, esm.yg)('inlineCode', { parentName: 'p' }, '<Button />'),
+						' components and ',
+						(0, esm.yg)('inlineCode', { parentName: 'p' }, 'hideCount={false}'),
+						' for all ',
+						(0, esm.yg)('inlineCode', { parentName: 'p' }, '<facetListOptions />'),
+						' components.'
+					),
+					(0, esm.yg)(
+						'pre',
+						null,
+						(0, esm.yg)(
+							'code',
+							{ parentName: 'pre', className: 'language-js' },
+							"const globalTheme = {\n    components: {\n        button: {\n            color: 'blue',\n        },\n        facetListOptions: {\n            hideCount: false,\n        },\n    },\n};\n"
+						)
+					),
+					(0, esm.yg)(
+						'p',
+						null,
+						'If a component contains multiple sub-components (ie. Molecule or Organisms), it is also possible to provide sub-component props as follows:'
+					),
+					(0, esm.yg)(
+						'pre',
+						null,
+						(0, esm.yg)(
+							'code',
+							{ parentName: 'pre', className: 'language-js' },
+							'const globalTheme = {\n    components: {\n        facetListOptions: {\n            hideCount: false,\n            theme: {\n                components: {\n                    checkbox: {\n                        native: true\n                    }\n                }\n            }\n        }\n    }\n};\n'
+						)
+					),
+					(0, esm.yg)('p', null, 'The theme object also contains colors used throughout components:'),
+					(0, esm.yg)(
+						'pre',
+						null,
+						(0, esm.yg)(
+							'code',
+							{ parentName: 'pre', className: 'language-js' },
+							"const globalTheme = {\n    colors: {\n        primary: '#3A23AD',\n        secondary: '#00cee1',\n        hover: '#f8f6fd',\n        text: {\n            secondary: '#ffffff'  \n        }\n    },\n    components: {}\n}\n"
+						)
+					),
+					(0, esm.yg)(
+						'p',
+						null,
+						(0, esm.yg)('inlineCode', { parentName: 'p' }, 'theme.colors.primary'),
+						' - primary color used throughout components'
+					),
+					(0, esm.yg)(
+						'p',
+						null,
+						(0, esm.yg)('inlineCode', { parentName: 'p' }, 'theme.colors.secondary'),
+						' - secondary color used to accent components'
+					),
+					(0, esm.yg)('p', null, (0, esm.yg)('inlineCode', { parentName: 'p' }, 'theme.colors.hover'), ' - background color for element hover state'),
+					(0, esm.yg)(
+						'p',
+						null,
+						(0, esm.yg)('inlineCode', { parentName: 'p' }, 'theme.colors.text.secondary'),
+						' - text color when element background is ',
+						(0, esm.yg)('inlineCode', { parentName: 'p' }, 'theme.colors.primary')
+					),
+					(0, esm.yg)('h3', { id: 'themeprovider' }, 'ThemeProvider'),
+					(0, esm.yg)('p', null, 'Using a ThemeProvider applies a global theme to all its children components'),
+					(0, esm.yg)(
+						'pre',
+						null,
+						(0, esm.yg)(
+							'code',
+							{ parentName: 'pre', className: 'language-js' },
+							"import { ThemeProvider, Button } from '@searchspring/snap-preact-components'\n"
+						)
+					),
+					(0, esm.yg)(
+						'pre',
+						null,
+						(0, esm.yg)(
+							'code',
+							{ parentName: 'pre', className: 'language-jsx' },
+							"<ThemeProvider theme={globalTheme}>\n    <Button content={'click me!'} />\n</ThemeProvider>\n"
+						)
+					),
+					(0, esm.yg)('h3', { id: 'component-theme' }, 'Component Theme'),
+					(0, esm.yg)(
+						'p',
+						null,
+						'The ',
+						(0, esm.yg)('inlineCode', { parentName: 'p' }, 'theme'),
+						' prop is available on all components and allows for theming of a single component. '
+					),
+					(0, esm.yg)(
+						'p',
+						null,
+						'The component ',
+						(0, esm.yg)('inlineCode', { parentName: 'p' }, 'theme'),
+						' is merged with the global theme, therefore component theme props will overwrite any common props on the global theme object.'
+					),
+					(0, esm.yg)(
+						'p',
+						null,
+						'In the following example, the ',
+						(0, esm.yg)('inlineCode', { parentName: 'p' }, '<Button />'),
+						' component will contain ',
+						(0, esm.yg)('inlineCode', { parentName: 'p' }, "color={'green'}"),
+						' from ',
+						(0, esm.yg)('inlineCode', { parentName: 'p' }, 'propTheme'),
+						' and ',
+						(0, esm.yg)('inlineCode', { parentName: 'p' }, 'native={true}'),
+						' from ',
+						(0, esm.yg)('inlineCode', { parentName: 'p' }, 'globalTheme')
+					),
+					(0, esm.yg)(
+						'pre',
+						null,
+						(0, esm.yg)(
+							'code',
+							{ parentName: 'pre', className: 'language-js' },
+							"const globalTheme = {\n    components: {\n        button: {\n            color: 'blue',\n            native: true\n        },\n    },\n};\nconst propTheme = {\n    components: {\n        button: {\n            color: 'green',\n        },\n    },\n};\n"
+						)
+					),
+					(0, esm.yg)(
+						'pre',
+						null,
+						(0, esm.yg)(
+							'code',
+							{ parentName: 'pre', className: 'language-jsx' },
+							"\n<ThemeProvider theme={globalTheme}>\n    <Button content={'click me!'} theme={propTheme} />\n</ThemeProvider>\n"
+						)
+					),
+					(0, esm.yg)('h3', { id: 'component-style' }, 'Component Style'),
+					(0, esm.yg)(
+						'p',
+						null,
+						'The ',
+						(0, esm.yg)('inlineCode', { parentName: 'p' }, 'style'),
+						' prop is available on all components and allows for styling of components at the global (via the ',
+						(0, esm.yg)('inlineCode', { parentName: 'p' }, 'theme'),
+						' prop) or the component level (via the ',
+						(0, esm.yg)('inlineCode', { parentName: 'p' }, 'style'),
+						' prop)'
+					),
+					(0, esm.yg)('p', null, 'Styles are applied to the root element of the component and uses CSS object syntax.'),
+					(0, esm.yg)('p', null, 'Standard CSS:'),
+					(0, esm.yg)(
+						'pre',
+						null,
+						(0, esm.yg)('code', { parentName: 'pre', className: 'language-css' }, '{\n    background-color: red;\n    color: #cccccc;\n}\n')
+					),
+					(0, esm.yg)(
+						'p',
+						null,
+						'In CSS object syntax, properties are camel case and ',
+						(0, esm.yg)('inlineCode', { parentName: 'p' }, "'-'"),
+						' are removed:'
+					),
+					(0, esm.yg)(
+						'pre',
+						null,
+						(0, esm.yg)('code', { parentName: 'pre', className: 'language-js' }, "{ \n    backgroundColor: '#ffff00',\n    color: '#cccccc',\n}\n")
+					),
+					(0, esm.yg)('p', null, 'Global level styling via ', (0, esm.yg)('inlineCode', { parentName: 'p' }, 'theme'), ' prop:'),
+					(0, esm.yg)(
+						'pre',
+						null,
+						(0, esm.yg)(
+							'code',
+							{ parentName: 'pre', className: 'language-js' },
+							"const globalTheme = {\n    components: {\n        button: {\n            style: {\n                backgroundColor: '#ffff00',\n                color: '#cccccc'\n            }\n        },\n    },\n};\n"
+						)
+					),
+					(0, esm.yg)(
+						'pre',
+						null,
+						(0, esm.yg)(
+							'code',
+							{ parentName: 'pre', className: 'language-jsx' },
+							"<ThemeProvider theme={globalTheme}>\n    <Button content={'click me!'} />\n</ThemeProvider>\n"
+						)
+					),
+					(0, esm.yg)('p', null, 'Component level styling via ', (0, esm.yg)('inlineCode', { parentName: 'p' }, 'style'), ' prop:'),
+					(0, esm.yg)(
+						'pre',
+						null,
+						(0, esm.yg)(
+							'code',
+							{ parentName: 'pre', className: 'language-js' },
+							"const buttonStyles = {\n    backgroundColor: '#ffff00',\n    color: '#cccccc'\n};\n"
+						)
+					),
+					(0, esm.yg)(
+						'pre',
+						null,
+						(0, esm.yg)('code', { parentName: 'pre', className: 'language-jsx' }, "<Button content={'click me!'} style={buttonStyles} />\n")
+					),
+					(0, esm.yg)('h3', { id: 'disable-component-styles' }, 'Disable Component Styles'),
+					(0, esm.yg)(
+						'p',
+						null,
+						'The ',
+						(0, esm.yg)('inlineCode', { parentName: 'p' }, 'disableStyles'),
+						' prop is available on all components and allows for disabling all styles of the component, including any styles being applied at the global or component level. '
+					),
+					(0, esm.yg)('p', null, 'This can be done at the global level:'),
+					(0, esm.yg)(
+						'pre',
+						null,
+						(0, esm.yg)(
+							'code',
+							{ parentName: 'pre', className: 'language-js' },
+							'const globalTheme = {\n    components: {\n        button: {\n            disableStyles: true,\n    },\n};\n'
+						)
+					),
+					(0, esm.yg)(
+						'pre',
+						null,
+						(0, esm.yg)(
+							'code',
+							{ parentName: 'pre', className: 'language-jsx' },
+							"<ThemeProvider theme={globalTheme}>\n    <Button content={'click me!'} />\n</ThemeProvider>\n"
+						)
+					),
+					(0, esm.yg)('p', null, 'Or at the component level:'),
+					(0, esm.yg)(
+						'pre',
+						null,
+						(0, esm.yg)('code', { parentName: 'pre', className: 'language-jsx' }, "<Button content={'click me!'} disableStyles={true} />\n")
+					),
+					(0, esm.yg)('h3', { id: 'component-class-names' }, 'Component Class Names'),
+					(0, esm.yg)(
+						'p',
+						null,
+						'The ',
+						(0, esm.yg)('inlineCode', { parentName: 'p' }, 'className'),
+						' prop is available on all components and allows for adding a class to the root level class list of a component. '
+					),
+					(0, esm.yg)(
+						'p',
+						null,
+						'By default, all components will contain a class name of ',
+						(0, esm.yg)('inlineCode', { parentName: 'p' }, 'ss-${componentname}'),
+						', for example ',
+						(0, esm.yg)('inlineCode', { parentName: 'p' }, "'ss-button'")
+					),
+					(0, esm.yg)('p', null, 'This can be done at the global level:'),
+					(0, esm.yg)(
+						'pre',
+						null,
+						(0, esm.yg)(
+							'code',
+							{ parentName: 'pre', className: 'language-js' },
+							"const globalTheme = {\n    components: {\n        button: {\n            className: 'my-btn-class',\n    },\n};\n"
+						)
+					),
+					(0, esm.yg)(
+						'pre',
+						null,
+						(0, esm.yg)(
+							'code',
+							{ parentName: 'pre', className: 'language-jsx' },
+							"<ThemeProvider theme={globalTheme}>\n    <Button content={'click me!'} />\n</ThemeProvider>\n"
+						)
+					),
+					(0, esm.yg)('p', null, 'Or at the component level:'),
+					(0, esm.yg)(
+						'pre',
+						null,
+						(0, esm.yg)('code', { parentName: 'pre', className: 'language-jsx' }, "<Button content={'click me!'} className={'my-btn-class'} />\n")
+					)
+				);
+			}
+			function Theme_stories_extends() {
+				return (
+					(Theme_stories_extends = Object.assign
+						? Object.assign.bind()
+						: function (n) {
+								for (var e = 1; e < arguments.length; e++) {
+									var t = arguments[e];
+									for (var r in t) ({}.hasOwnProperty.call(t, r) && (n[r] = t[r]));
+								}
+								return n;
+						  }),
+					Theme_stories_extends.apply(null, arguments)
+				);
+			}
+			MDXContent.isMDXComponent = !0;
+			const Theme_stories_layoutProps = {};
+			function Theme_stories_MDXContent({ components, ...props }) {
+				return (0, esm.yg)(
+					'wrapper',
+					Theme_stories_extends({}, Theme_stories_layoutProps, props, { components, mdxType: 'MDXLayout' }),
+					(0, esm.yg)(blocks.W8, { title: 'Documentation/Theme', mdxType: 'Meta' }),
+					(0, esm.yg)(
+						'style',
+						null,
+						'\n\t.header {\n\t\tdisplay: flex;\n\t\talign-items: center;\n\t}\n\n\t.header .subtitle {\n\t\ttext-transform: uppercase;\n\t\tcolor: #00cee1;\n\t}\n\n\t.header img {\n\t\twidth: 300px;\n\t\tmargin-right: 20px;\n\t}\n'
+					),
+					(0, esm.yg)('div', { class: 'header' }, (0, esm.yg)('span', { class: 'subtitle' }, 'SNAP PREACT COMPONENETS')),
+					(0, esm.yg)('hr', null),
+					(0, esm.yg)(MDXContent, { mdxType: 'Readme' })
+				);
+			}
+			Theme_stories_MDXContent.isMDXComponent = !0;
+			const __page = () => {
+				throw new Error('Docs-only story');
+			};
+			__page.parameters = { docsOnly: !0 };
+			const componentMeta = { title: 'Documentation/Theme', includeStories: ['__page'] },
+				mdxStoryNameToKey = {};
+			(componentMeta.parameters = componentMeta.parameters || {}),
+				(componentMeta.parameters.docs = {
+					...(componentMeta.parameters.docs || {}),
+					page: () =>
+						(0, esm.yg)(dist_esm.hT, { mdxStoryNameToKey, mdxComponentAnnotations: componentMeta }, (0, esm.yg)(Theme_stories_MDXContent, null)),
+				});
+			const Theme_stories = componentMeta;
+		},
+		'./src/documentation/Usage/Usage.stories.mdx'(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+			'use strict';
+			__webpack_require__.r(__webpack_exports__), __webpack_require__.d(__webpack_exports__, { __page: () => __page, default: () => Usage_stories });
+			__webpack_require__('../../node_modules/preact/compat/dist/compat.module.js');
+			var esm = __webpack_require__('../../node_modules/@mdx-js/react/dist/esm.js'),
+				dist_esm = __webpack_require__('./node_modules/@storybook/addon-docs/dist/esm/index.js'),
+				blocks = __webpack_require__('./node_modules/@storybook/addon-docs/blocks.js');
+			function _extends() {
+				return (
+					(_extends = Object.assign
+						? Object.assign.bind()
+						: function (n) {
+								for (var e = 1; e < arguments.length; e++) {
+									var t = arguments[e];
+									for (var r in t) ({}.hasOwnProperty.call(t, r) && (n[r] = t[r]));
+								}
+								return n;
+						  }),
+					_extends.apply(null, arguments)
+				);
+			}
+			const layoutProps = {};
+			function MDXContent({ components, ...props }) {
+				return (0, esm.yg)(
+					'wrapper',
+					_extends({}, layoutProps, props, { components, mdxType: 'MDXLayout' }),
+					(0, esm.yg)(
+						'p',
+						null,
+						'Snap Preact components are designed to be used with the Snap MobX store package ',
+						(0, esm.yg)('inlineCode', { parentName: 'p' }, '@searchspring/snap-store-mobx'),
+						' .'
+					),
+					(0, esm.yg)(
+						'p',
+						null,
+						'Snap stores are a dependency for Snap controllers ',
+						(0, esm.yg)('inlineCode', { parentName: 'p' }, '@searchspring/snap-controller'),
+						'. Snap controllers such as ',
+						(0, esm.yg)('inlineCode', { parentName: 'p' }, 'SearchController'),
+						' contain a reference to the ',
+						(0, esm.yg)('inlineCode', { parentName: 'p' }, 'SearchStore'),
+						' that was provided in the ',
+						(0, esm.yg)('inlineCode', { parentName: 'p' }, 'ControllerServices'),
+						' object named ',
+						(0, esm.yg)('inlineCode', { parentName: 'p' }, 'searchControllerServices'),
+						' below.'
+					),
+					(0, esm.yg)('p', null, 'Many component props are tied to the design of the store for ease of use:'),
+					(0, esm.yg)(
+						'p',
+						null,
+						'In this example, the ',
+						(0, esm.yg)('inlineCode', { parentName: 'p' }, 'store.pagination'),
+						' property is provided to the ',
+						(0, esm.yg)('inlineCode', { parentName: 'p' }, 'pagination'),
+						' prop of the ',
+						(0, esm.yg)('inlineCode', { parentName: 'p' }, '<Pagination />'),
+						' component.'
+					),
+					(0, esm.yg)(
+						'pre',
+						null,
+						(0, esm.yg)(
+							'code',
+							{ parentName: 'pre', className: 'language-js' },
+							"import { SearchController } from '@searchspring/snap-controller';\n\nconst searchController = new SearchController(searchConfig, searchControllerServices);\n\nconsole.log(searchController.store)\n"
+						)
+					),
+					(0, esm.yg)(
+						'pre',
+						null,
+						(0, esm.yg)(
+							'code',
+							{ parentName: 'pre', className: 'language-js' },
+							"import { Pagination } from '@searchspring/snap-preact-components';\n"
+						)
+					),
+					(0, esm.yg)(
+						'pre',
+						null,
+						(0, esm.yg)('code', { parentName: 'pre', className: 'language-jsx' }, '<Pagination pagination={searchController.store.pagination} />\n')
+					),
+					(0, esm.yg)('br', null),
+					(0, esm.yg)(
+						'p',
+						null,
+						(0, esm.yg)('strong', { parentName: 'p' }, "Usage examples for each component can be seen in the component's 'Docs' tab.")
+					)
+				);
+			}
+			function Usage_stories_extends() {
+				return (
+					(Usage_stories_extends = Object.assign
+						? Object.assign.bind()
+						: function (n) {
+								for (var e = 1; e < arguments.length; e++) {
+									var t = arguments[e];
+									for (var r in t) ({}.hasOwnProperty.call(t, r) && (n[r] = t[r]));
+								}
+								return n;
+						  }),
+					Usage_stories_extends.apply(null, arguments)
+				);
+			}
+			MDXContent.isMDXComponent = !0;
+			const Usage_stories_layoutProps = {};
+			function Usage_stories_MDXContent({ components, ...props }) {
+				return (0, esm.yg)(
+					'wrapper',
+					Usage_stories_extends({}, Usage_stories_layoutProps, props, { components, mdxType: 'MDXLayout' }),
+					(0, esm.yg)(blocks.W8, { title: 'Documentation/Usage', mdxType: 'Meta' }),
+					(0, esm.yg)(
+						'style',
+						null,
+						'\n\t.header {\n\t\tdisplay: flex;\n\t\talign-items: center;\n\t}\n\n\t.header .subtitle {\n\t\ttext-transform: uppercase;\n\t\tcolor: #00cee1;\n\t}\n\n\t.header img {\n\t\twidth: 300px;\n\t\tmargin-right: 20px;\n\t}\n'
+					),
+					(0, esm.yg)('div', { class: 'header' }, (0, esm.yg)('span', { class: 'subtitle' }, 'SNAP PREACT COMPONENETS')),
+					(0, esm.yg)('hr', null),
+					(0, esm.yg)(MDXContent, { mdxType: 'Readme' })
+				);
+			}
+			Usage_stories_MDXContent.isMDXComponent = !0;
+			const __page = () => {
+				throw new Error('Docs-only story');
+			};
+			__page.parameters = { docsOnly: !0 };
+			const componentMeta = { title: 'Documentation/Usage', includeStories: ['__page'] },
+				mdxStoryNameToKey = {};
+			(componentMeta.parameters = componentMeta.parameters || {}),
+				(componentMeta.parameters.docs = {
+					...(componentMeta.parameters.docs || {}),
+					page: () =>
+						(0, esm.yg)(dist_esm.hT, { mdxStoryNameToKey, mdxComponentAnnotations: componentMeta }, (0, esm.yg)(Usage_stories_MDXContent, null)),
+				});
+			const Usage_stories = componentMeta;
+		},
+		'./src sync recursive ^\\.(?:(?:^%7C\\/%7C(?:(?:(?%21(?:^%7C\\/)\\.).)*?)\\/)(?%21\\.)(?=.)[^/]*?\\.stories\\.(js%7Cjsx%7Cts%7Ctsx))$'(
+			module,
+			__unused_webpack_exports,
+			__webpack_require__
+		) {
+			var map = {
+				'./components/Atoms/BadgeImage/BadgeImage.stories.tsx': './src/components/Atoms/BadgeImage/BadgeImage.stories.tsx',
+				'./components/Atoms/BadgePill/BadgePill.stories.tsx': './src/components/Atoms/BadgePill/BadgePill.stories.tsx',
+				'./components/Atoms/BadgeRectangle/BadgeRectangle.stories.tsx': './src/components/Atoms/BadgeRectangle/BadgeRectangle.stories.tsx',
+				'./components/Atoms/BadgeText/BadgeText.stories.tsx': './src/components/Atoms/BadgeText/BadgeText.stories.tsx',
+				'./components/Atoms/Breadcrumbs/Breadcrumbs.stories.tsx': './src/components/Atoms/Breadcrumbs/Breadcrumbs.stories.tsx',
+				'./components/Atoms/Button/Button.stories.tsx': './src/components/Atoms/Button/Button.stories.tsx',
+				'./components/Atoms/Dropdown/Dropdown.stories.tsx': './src/components/Atoms/Dropdown/Dropdown.stories.tsx',
+				'./components/Atoms/FormattedNumber/FormattedNumber.stories.tsx': './src/components/Atoms/FormattedNumber/FormattedNumber.stories.tsx',
+				'./components/Atoms/Icon/Icon.stories.tsx': './src/components/Atoms/Icon/Icon.stories.tsx',
+				'./components/Atoms/Image/Image.stories.tsx': './src/components/Atoms/Image/Image.stories.tsx',
+				'./components/Atoms/Loading/LoadingBar.stories.tsx': './src/components/Atoms/Loading/LoadingBar.stories.tsx',
+				'./components/Atoms/Merchandising/Banner/Banner.stories.tsx': './src/components/Atoms/Merchandising/Banner/Banner.stories.tsx',
+				'./components/Atoms/Merchandising/InlineBanner/InlineBanner.stories.tsx':
+					'./src/components/Atoms/Merchandising/InlineBanner/InlineBanner.stories.tsx',
+				'./components/Atoms/Overlay/Overlay.stories.tsx': './src/components/Atoms/Overlay/Overlay.stories.tsx',
+				'./components/Atoms/Price/Price.stories.tsx': './src/components/Atoms/Price/Price.stories.tsx',
+				'./components/Atoms/Skeleton/Skeleton.stories.tsx': './src/components/Atoms/Skeleton/Skeleton.stories.tsx',
+				'./components/Molecules/CalloutBadge/CalloutBadge.stories.tsx': './src/components/Molecules/CalloutBadge/CalloutBadge.stories.tsx',
+				'./components/Molecules/Carousel/Carousel.stories.tsx': './src/components/Molecules/Carousel/Carousel.stories.tsx',
+				'./components/Molecules/Checkbox/Checkbox.stories.tsx': './src/components/Molecules/Checkbox/Checkbox.stories.tsx',
+				'./components/Molecules/ErrorHandler/ErrorHandler.stories.tsx': './src/components/Molecules/ErrorHandler/ErrorHandler.stories.tsx',
+				'./components/Molecules/FacetGridOptions/FacetGridOptions.stories.tsx':
+					'./src/components/Molecules/FacetGridOptions/FacetGridOptions.stories.tsx',
+				'./components/Molecules/FacetHierarchyOptions/FacetHierarchyOptions.stories.tsx':
+					'./src/components/Molecules/FacetHierarchyOptions/FacetHierarchyOptions.stories.tsx',
+				'./components/Molecules/FacetListOptions/FacetListOptions.stories.tsx':
+					'./src/components/Molecules/FacetListOptions/FacetListOptions.stories.tsx',
+				'./components/Molecules/FacetPaletteOptions/FacetPaletteOptions.stories.tsx':
+					'./src/components/Molecules/FacetPaletteOptions/FacetPaletteOptions.stories.tsx',
+				'./components/Molecules/FacetSlider/FacetSlider.stories.tsx': './src/components/Molecules/FacetSlider/FacetSlider.stories.tsx',
+				'./components/Molecules/Filter/Filter.stories.tsx': './src/components/Molecules/Filter/Filter.stories.tsx',
+				'./components/Molecules/Grid/Grid.stories.tsx': './src/components/Molecules/Grid/Grid.stories.tsx',
+				'./components/Molecules/List/List.stories.tsx': './src/components/Molecules/List/List.stories.tsx',
+				'./components/Molecules/OverlayBadge/OverlayBadge.stories.tsx': './src/components/Molecules/OverlayBadge/OverlayBadge.stories.tsx',
+				'./components/Molecules/Pagination/Pagination.stories.tsx': './src/components/Molecules/Pagination/Pagination.stories.tsx',
+				'./components/Molecules/Result/Result.stories.tsx': './src/components/Molecules/Result/Result.stories.tsx',
+				'./components/Molecules/SearchInput/SearchInput.stories.tsx': './src/components/Molecules/SearchInput/SearchInput.stories.tsx',
+				'./components/Molecules/Select/Select.stories.tsx': './src/components/Molecules/Select/Select.stories.tsx',
+				'./components/Molecules/Slideout/Slideout.stories.tsx': './src/components/Molecules/Slideout/Slideout.stories.tsx',
+				'./components/Molecules/Swatches/Swatches.stories.tsx': './src/components/Molecules/Swatches/Swatches.stories.tsx',
+				'./components/Molecules/VariantSelection/VariantSelection.stories.tsx':
+					'./src/components/Molecules/VariantSelection/VariantSelection.stories.tsx',
+				'./components/Organisms/Autocomplete/Autocomplete.stories.tsx': './src/components/Organisms/Autocomplete/Autocomplete.stories.tsx',
+				'./components/Organisms/BranchOverride/BranchOverride.stories.tsx': './src/components/Organisms/BranchOverride/BranchOverride.stories.tsx',
+				'./components/Organisms/Facet/Facet.stories.tsx': './src/components/Organisms/Facet/Facet.stories.tsx',
+				'./components/Organisms/Facets/Facets.stories.tsx': './src/components/Organisms/Facets/Facets.stories.tsx',
+				'./components/Organisms/FilterSummary/FilterSummary.stories.tsx': './src/components/Organisms/FilterSummary/FilterSummary.stories.tsx',
+				'./components/Organisms/Recommendation/Recommendation.stories.tsx': './src/components/Organisms/Recommendation/Recommendation.stories.tsx',
+				'./components/Organisms/RecommendationBundle/RecommendationBundle.stories.tsx':
+					'./src/components/Organisms/RecommendationBundle/RecommendationBundle.stories.tsx',
+				'./components/Organisms/Results/Results.stories.tsx': './src/components/Organisms/Results/Results.stories.tsx',
+				'./components/Trackers/ResultTracker/ResultTracker.stories.tsx': './src/components/Trackers/ResultTracker/ResultTracker.stories.tsx',
+			};
+			function webpackContext(req) {
+				var id = webpackContextResolve(req);
+				return __webpack_require__(id);
+			}
+			function webpackContextResolve(req) {
+				if (!__webpack_require__.o(map, req)) {
+					var e = new Error("Cannot find module '" + req + "'");
+					throw ((e.code = 'MODULE_NOT_FOUND'), e);
+				}
+				return map[req];
+			}
+			(webpackContext.keys = function webpackContextKeys() {
+				return Object.keys(map);
+			}),
+				(webpackContext.resolve = webpackContextResolve),
+				(module.exports = webpackContext),
+				(webpackContext.id =
+					'./src sync recursive ^\\.(?:(?:^%7C\\/%7C(?:(?:(?%21(?:^%7C\\/)\\.).)*?)\\/)(?%21\\.)(?=.)[^/]*?\\.stories\\.(js%7Cjsx%7Cts%7Ctsx))$');
+		},
+		'./src sync recursive ^\\.(?:(?:^%7C\\/%7C(?:(?:(?%21(?:^%7C\\/)\\.).)*?)\\/)(?%21\\.)(?=.)[^/]*?\\.stories\\.mdx)$'(
+			module,
+			__unused_webpack_exports,
+			__webpack_require__
+		) {
+			var map = {
+				'./documentation/About/About.stories.mdx': './src/documentation/About/About.stories.mdx',
+				'./documentation/Theme/Theme.stories.mdx': './src/documentation/Theme/Theme.stories.mdx',
+				'./documentation/Usage/Usage.stories.mdx': './src/documentation/Usage/Usage.stories.mdx',
+			};
+			function webpackContext(req) {
+				var id = webpackContextResolve(req);
+				return __webpack_require__(id);
+			}
+			function webpackContextResolve(req) {
+				if (!__webpack_require__.o(map, req)) {
+					var e = new Error("Cannot find module '" + req + "'");
+					throw ((e.code = 'MODULE_NOT_FOUND'), e);
+				}
+				return map[req];
+			}
+			(webpackContext.keys = function webpackContextKeys() {
+				return Object.keys(map);
+			}),
+				(webpackContext.resolve = webpackContextResolve),
+				(module.exports = webpackContext),
+				(webpackContext.id = './src sync recursive ^\\.(?:(?:^%7C\\/%7C(?:(?:(?%21(?:^%7C\\/)\\.).)*?)\\/)(?%21\\.)(?=.)[^/]*?\\.stories\\.mdx)$');
 		},
 		'?c95a'() {},
 	},
@@ -45189,7 +45425,7 @@
 		var __webpack_exec__ = (moduleId) => __webpack_require__((__webpack_require__.s = moduleId));
 		__webpack_require__.O(
 			0,
-			[748],
+			[205],
 			() => (
 				__webpack_exec__('../../node_modules/@storybook/core-client/dist/esm/globals/polyfills.js'),
 				__webpack_exec__('../../node_modules/@storybook/core-client/dist/esm/globals/globals.js'),
