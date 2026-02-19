@@ -3,7 +3,7 @@ import type { Banner, MerchandisingContentBanner, Product } from '@searchspring/
 import type { SearchController, AutocompleteController, RecommendationController } from '@searchspring/snap-controller';
 import type { ContentType, BannerContent } from '@searchspring/snap-store-mobx';
 import { createImpressionObserver } from '../utilities';
-import { useEffect, useCallback } from 'preact/hooks';
+import { useEffect, useCallback, useRef } from 'preact/hooks';
 
 export const TRACKING_ATTRIBUTE = 'sstracking';
 interface WithTrackingProps {
@@ -32,30 +32,41 @@ export function withTracking<Props extends WithTrackingProps>(WrappedComponent: 
 			console.warn('Warning: No result or banner provided to withTracking');
 		}
 
-		let resetKey;
-		if (controller?.type === 'search' || controller?.type === 'autocomplete') {
-			const urlManager = (controller as SearchController | AutocompleteController).urlManager;
-			resetKey = JSON.stringify({
-				q: urlManager.state.query,
-				p: urlManager.state.page,
-				ps: urlManager.state.pageSize,
-				s: urlManager.state.sort,
-				f: urlManager.state.filter,
-			});
-		} else if (controller?.type === 'recommendation') {
-			// For recommendations, use a combination of tag and other relevant state
-			const recStore = (controller as RecommendationController).store;
-			resetKey = JSON.stringify({
-				tag: recStore.profile?.tag,
-				ids: recStore.results.map((result) => result.id).join(','),
-			});
+		const { ref, inViewport, updateRef } = createImpressionObserver();
+
+		// Reset impression tracking when the result identity changes (e.g. new search context).
+		// Each Product/Banner gets a new responseId per search response, so this naturally
+		// resets when query/sort/filters change without needing global controller state.
+		// Calling updateRef(ref.current) re-observes the same element with fresh state.
+		const resultIdentity = (result || banner || (type && content?.[type]?.[0]))?.responseId;
+		const prevIdentityRef = useRef(resultIdentity);
+
+		// Tracks whether we're waiting for the observer to reset after an identity change.
+		// Set synchronously during render to block impressions immediately when identity
+		// changes, preventing a stale inViewport=true from firing before the observer resets.
+		const awaitingReobservationRef = useRef(false);
+		if (prevIdentityRef.current !== resultIdentity) {
+			awaitingReobservationRef.current = true;
 		}
 
-		const { ref, inViewport } = createImpressionObserver({ resetKey });
+		useEffect(() => {
+			if (prevIdentityRef.current !== resultIdentity) {
+				prevIdentityRef.current = resultIdentity;
+				updateRef(ref.current);
+			}
+		}, [resultIdentity, updateRef]);
 
-		if (inViewport) {
+		useEffect(() => {
+			if (awaitingReobservationRef.current && !inViewport) {
+				awaitingReobservationRef.current = false;
+			}
+		}, [inViewport, resultIdentity]);
+
+		const isBannerTracking = type && content && !result && ['search', 'autocomplete'].includes(controller?.type || '');
+
+		if (inViewport && !awaitingReobservationRef.current) {
 			// TODO: add support for disabling tracking events via config like in ResultTracker
-			if (type && content && !result && ['search', 'autocomplete'].includes(controller?.type || '')) {
+			if (isBannerTracking) {
 				(controller as SearchController | AutocompleteController)?.track.banner.impression(content[type]![0] as MerchandisingContentBanner);
 			} else if (!result?.bundleSeed) {
 				controller?.track.product.impression((result || banner)!);
@@ -64,7 +75,7 @@ export function withTracking<Props extends WithTrackingProps>(WrappedComponent: 
 
 		const handleClick = useCallback(
 			(e: MouseEvent) => {
-				if (type && content && !result && ['search', 'autocomplete'].includes(controller?.type || '')) {
+				if (isBannerTracking) {
 					(controller as SearchController | AutocompleteController)?.track.banner.click(e, content[type]![0] as MerchandisingContentBanner);
 				} else {
 					controller?.track.product.click(e, (result || banner)!);
@@ -82,7 +93,7 @@ export function withTracking<Props extends WithTrackingProps>(WrappedComponent: 
 					currentRef.removeEventListener('click', handleClick, true);
 				};
 			}
-		}, [ref, handleClick]);
+		}, [handleClick]);
 		const trackingProps = {
 			...restProps,
 			controller,
@@ -90,7 +101,12 @@ export function withTracking<Props extends WithTrackingProps>(WrappedComponent: 
 			banner,
 			type,
 			content,
-			trackingRef: ref,
+			trackingRef: useCallback(
+				(el: HTMLElement | null) => {
+					updateRef(el);
+				},
+				[updateRef]
+			),
 		};
 
 		return <WrappedComponent {...(trackingProps as Props)} />;
