@@ -1,6 +1,6 @@
 {
 	"name": "@searchspring/snap-tracker",
-	"version": "0.73.7",
+	"version": "0.74.0",
 	"description": "Snap Tracker",
 	"main": "dist/cjs/index.js",
 	"module": "dist/esm/index.js",
@@ -21,8 +21,8 @@
 	},
 	"dependencies": {
 		"@athoscommerce/beacon": "1.0.1",
-		"@searchspring/snap-store-mobx": "0.73.7",
-		"@searchspring/snap-toolbox": "0.73.7",
+		"@searchspring/snap-store-mobx": "0.74.0",
+		"@searchspring/snap-toolbox": "0.74.0",
 		"deepmerge": "4.3.1",
 		"uuid": "9.0.1"
 	},

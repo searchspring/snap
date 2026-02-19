@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.74.0](https://github.com/searchspring/snap/compare/v0.73.7...v0.74.0) (2026-02-19)
+
+### Bug Fixes
+
+- add awaitingReobservationRef ([6e95625](https://github.com/searchspring/snap/commit/6e956254083bc4a5baaf1d177c6384ee3b258078))
+- add resultIdentity to dep arr ([ed5e6b1](https://github.com/searchspring/snap/commit/ed5e6b1af1513b3eee9c8b88d9aa9cc2e86c6846))
+- impression bug with infinite ([367f786](https://github.com/searchspring/snap/commit/367f7861a4f42069a8cb9e5dcfd7d676d0876d22))
+- pr review ([5f2212c](https://github.com/searchspring/snap/commit/5f2212c97a4865033af401eeee4c1d08b01dd8e6))
+- pr review ([b56638d](https://github.com/searchspring/snap/commit/b56638d18a03d9a52fd6f9aac54d719f04914b6a))
+- remove resetKey ([4810e32](https://github.com/searchspring/snap/commit/4810e3232874b5a71363791a76111a0cc9590f43))
+- use useCallback as trackingRef to observe ref changes ([a32640a](https://github.com/searchspring/snap/commit/a32640aa3849dc398420daa5e594fd08a4ae05a5))
+- withtracking improvement ([1a99359](https://github.com/searchspring/snap/commit/1a99359db60323a866a2ca84c7161a8c7c4f921c))
+
+### Features
+
+- **preact/components/withtracking:** adjusting the way that impressions events handled ([12f76bb](https://github.com/searchspring/snap/commit/12f76bbdf7e75ee5ed0b10ca458df342bf678678))
+
 ## [0.73.7](https://github.com/searchspring/snap/compare/v0.73.6...v0.73.7) (2026-01-30)
 
 **Note:** Version bump only for package @searchspring/snap-preact-components

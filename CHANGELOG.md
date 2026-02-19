@@ -3,6 +3,32 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.74.0](https://github.com/searchspring/snap/compare/v0.73.7...v0.74.0) (2026-02-19)
+
+### Bug Fixes
+
+- ac filters reset impressions ([57005a1](https://github.com/searchspring/snap/commit/57005a1147f2c5223f5c2ce593bb75421c56773b))
+- add awaitingReobservationRef ([6e95625](https://github.com/searchspring/snap/commit/6e956254083bc4a5baaf1d177c6384ee3b258078))
+- add resultIdentity to dep arr ([ed5e6b1](https://github.com/searchspring/snap/commit/ed5e6b1af1513b3eee9c8b88d9aa9cc2e86c6846))
+- change banner.uid check ([2738b61](https://github.com/searchspring/snap/commit/2738b61b4d172efb297e17d8e7e9fc0d5c79bba8))
+- **controller:** adding support for shadow dom click originations for tracking clickthrough events ([ec59ec0](https://github.com/searchspring/snap/commit/ec59ec072d732d80a9a11e0d0b423da64e21373a))
+- impression bug with infinite ([367f786](https://github.com/searchspring/snap/commit/367f7861a4f42069a8cb9e5dcfd7d676d0876d22))
+- move render event to search method for all controllers ([26aea6c](https://github.com/searchspring/snap/commit/26aea6ca30beb3b6ec529bbf0c06e112c175abbf))
+- pr feedback ([1976b2f](https://github.com/searchspring/snap/commit/1976b2f058c39e8a98a7151714410a796e77fe86))
+- pr review ([5f2212c](https://github.com/searchspring/snap/commit/5f2212c97a4865033af401eeee4c1d08b01dd8e6))
+- pr review ([b56638d](https://github.com/searchspring/snap/commit/b56638d18a03d9a52fd6f9aac54d719f04914b6a))
+- **recommendationinstantiator:** always run a search on ready the controller if re-using a controlle ([b74f8fd](https://github.com/searchspring/snap/commit/b74f8fdd08472271b9e624805092e0ab63a2ce9c))
+- remove resetKey ([4810e32](https://github.com/searchspring/snap/commit/4810e3232874b5a71363791a76111a0cc9590f43))
+- update tracker tests, pr review ([6a9d4ad](https://github.com/searchspring/snap/commit/6a9d4add7c9646bc9b8e5fc1b8e757346dcc4117))
+- use cssEscape package ([0b982b8](https://github.com/searchspring/snap/commit/0b982b868bc47d7c7b51abc10ef3a7207864a411))
+- use latest beacon from athos packages, improvements ([9655c11](https://github.com/searchspring/snap/commit/9655c11ad0c0309c113a74f3245cb0ea82c234c0))
+- use useCallback as trackingRef to observe ref changes ([a32640a](https://github.com/searchspring/snap/commit/a32640aa3849dc398420daa5e594fd08a4ae05a5))
+- withtracking improvement ([1a99359](https://github.com/searchspring/snap/commit/1a99359db60323a866a2ca84c7161a8c7c4f921c))
+
+### Features
+
+- **preact/components/withtracking:** adjusting the way that impressions events handled ([12f76bb](https://github.com/searchspring/snap/commit/12f76bbdf7e75ee5ed0b10ca458df342bf678678))
+
 ## [0.73.7](https://github.com/searchspring/snap/compare/v0.73.6...v0.73.7) (2026-01-30)
 
 ### Bug Fixes

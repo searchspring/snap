@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.74.0](https://github.com/searchspring/snap/compare/v0.73.7...v0.74.0) (2026-02-19)
+
+### Bug Fixes
+
+- ac filters reset impressions ([57005a1](https://github.com/searchspring/snap/commit/57005a1147f2c5223f5c2ce593bb75421c56773b))
+- change banner.uid check ([2738b61](https://github.com/searchspring/snap/commit/2738b61b4d172efb297e17d8e7e9fc0d5c79bba8))
+- **controller:** adding support for shadow dom click originations for tracking clickthrough events ([ec59ec0](https://github.com/searchspring/snap/commit/ec59ec072d732d80a9a11e0d0b423da64e21373a))
+- move render event to search method for all controllers ([26aea6c](https://github.com/searchspring/snap/commit/26aea6ca30beb3b6ec529bbf0c06e112c175abbf))
+- pr review ([5f2212c](https://github.com/searchspring/snap/commit/5f2212c97a4865033af401eeee4c1d08b01dd8e6))
+- update tracker tests, pr review ([6a9d4ad](https://github.com/searchspring/snap/commit/6a9d4add7c9646bc9b8e5fc1b8e757346dcc4117))
+- use cssEscape package ([0b982b8](https://github.com/searchspring/snap/commit/0b982b868bc47d7c7b51abc10ef3a7207864a411))
+- use latest beacon from athos packages, improvements ([9655c11](https://github.com/searchspring/snap/commit/9655c11ad0c0309c113a74f3245cb0ea82c234c0))
+
 ## [0.73.7](https://github.com/searchspring/snap/compare/v0.73.6...v0.73.7) (2026-01-30)
 
 **Note:** Version bump only for package @searchspring/snap-controller
