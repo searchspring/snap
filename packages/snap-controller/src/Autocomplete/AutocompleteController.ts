@@ -773,7 +773,7 @@ export class AutocompleteController extends AbstractController {
 
 			const responseId = response.tracking.responseId;
 			this.events[responseId] = this.events[responseId] || { product: {}, banner: {} };
-			const currentSearchKey = response.search?.query + JSON.stringify(this.urlManager.state.filter || {});
+			const currentSearchKey = responseId;
 			if (currentSearchKey === this.lastSearchKey) {
 				const impressedResultIds = Object.keys(this.events[responseId].product || {}).filter(
 					(resultId) => this.events[responseId].product?.[resultId]?.impression
