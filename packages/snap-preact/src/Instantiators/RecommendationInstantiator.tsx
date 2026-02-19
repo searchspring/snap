@@ -321,7 +321,6 @@ async function readyTheController(
 				})
 			);
 		})[0];
-
 	if (!controller) {
 		// no existing controller found of same configuration - creating a new controller
 		const createRecommendationController = (await import('../create/createRecommendationController')).default;
@@ -340,8 +339,8 @@ async function readyTheController(
 		instance.middleware.forEach((middleware) => controller.on(middleware.event, ...middleware.func));
 	}
 
-	// run a search on the controller if it has not yet and it is not currently
-	if (!controller.store.loaded && !controller.store.loading) {
+	// run a search on the controller if it is not currently
+	if (!controller.store.loading) {
 		await controller.search();
 	}
 
