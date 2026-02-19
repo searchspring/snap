@@ -60,7 +60,7 @@ export function withTracking<Props extends WithTrackingProps>(WrappedComponent: 
 			if (awaitingReobservationRef.current && !inViewport) {
 				awaitingReobservationRef.current = false;
 			}
-		}, [inViewport]);
+		}, [inViewport, resultIdentity]);
 
 		const isBannerTracking = type && content && !result && ['search', 'autocomplete'].includes(controller?.type || '');
 
