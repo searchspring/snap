@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.74.0](https://github.com/searchspring/snap/compare/v0.73.7...v0.74.0) (2026-02-19)
+
+### Bug Fixes
+
+- use latest beacon from athos packages, improvements ([9655c11](https://github.com/searchspring/snap/commit/9655c11ad0c0309c113a74f3245cb0ea82c234c0))
+
 ## [0.73.7](https://github.com/searchspring/snap/compare/v0.73.6...v0.73.7) (2026-01-30)
 
 **Note:** Version bump only for package @searchspring/snap-store-mobx

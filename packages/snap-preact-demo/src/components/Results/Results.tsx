@@ -37,13 +37,13 @@ export class Results extends Component<ResultsProps> {
 		const infiniteEnabled = Boolean(controller.config.settings.infinite);
 		const infiniteRef = useRef(null);
 		if (infiniteEnabled) {
-			const atBottom = useIntersectionAdvanced(infiniteRef, {
+			const { inViewport } = useIntersectionAdvanced(infiniteRef, {
 				rootMargin: '0px',
 				threshold: 1,
 				minVisibleTime: 300,
 			});
 
-			if (atBottom && pagination.next && !loading && pagination.totalResults > 0) {
+			if (inViewport && pagination.next && !loading && pagination.totalResults > 0) {
 				setTimeout(() => {
 					pagination.next.url.go({ history: 'replace' });
 				});

@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.74.0](https://github.com/searchspring/snap/compare/v0.73.7...v0.74.0) (2026-02-19)
+
+### Bug Fixes
+
+- use useCallback as trackingRef to observe ref changes ([a32640a](https://github.com/searchspring/snap/commit/a32640aa3849dc398420daa5e594fd08a4ae05a5))
+
 ## [0.73.7](https://github.com/searchspring/snap/compare/v0.73.6...v0.73.7) (2026-01-30)
 
 **Note:** Version bump only for package @searchspring/snap-preact-demo

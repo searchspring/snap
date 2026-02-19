@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.74.0](https://github.com/searchspring/snap/compare/v0.73.7...v0.74.0) (2026-02-19)
+
+### Bug Fixes
+
+- pr feedback ([1976b2f](https://github.com/searchspring/snap/commit/1976b2f058c39e8a98a7151714410a796e77fe86))
+- update tracker tests, pr review ([6a9d4ad](https://github.com/searchspring/snap/commit/6a9d4add7c9646bc9b8e5fc1b8e757346dcc4117))
+- use latest beacon from athos packages, improvements ([9655c11](https://github.com/searchspring/snap/commit/9655c11ad0c0309c113a74f3245cb0ea82c234c0))
+
 ## [0.73.7](https://github.com/searchspring/snap/compare/v0.73.6...v0.73.7) (2026-01-30)
 
 **Note:** Version bump only for package @searchspring/snap-tracker
