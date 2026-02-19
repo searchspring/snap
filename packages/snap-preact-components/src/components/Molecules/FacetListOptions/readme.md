@@ -38,6 +38,13 @@ The `hideCount` prop will disable the facet count values.
 <FacetListOptions values={listFacet.values} hideCount={true} />
 ```
 
+### hideCountParenthesis
+The `hideCountParenthesis` prop will disable the facet count parenthesis from rendering.
+
+```jsx
+<FacetListOptions values={listFacet.values} hideCountParenthesis={true} />
+```
+
 ### previewOnFocus
 If using within Autocomplete, the `previewOnFocus` prop will invoke the `value.preview()` method when the value has been hovered over.
 
