@@ -1,16 +1,18 @@
-import { useState, useEffect, useRef, MutableRef } from 'preact/hooks';
+import { useState, useEffect, useRef, useCallback, MutableRef } from 'preact/hooks';
 
 export interface UseIntersectionOptions {
 	rootMargin?: string;
 	fireOnce?: boolean;
 	threshold?: number | number[];
 	minVisibleTime?: number; // Minimum time in ms the element must be visible
-	resetKey?: string;
 }
 
 const VISIBILITY_POLL_INTERVAL = 250;
-export const useIntersectionAdvanced = (ref: MutableRef<HTMLElement | null>, options: UseIntersectionOptions = {}): boolean => {
-	const { rootMargin = '0px', fireOnce = false, threshold = 0, minVisibleTime = 0, resetKey } = options;
+export const useIntersectionAdvanced = (
+	ref: MutableRef<HTMLElement | null>,
+	options: UseIntersectionOptions = {}
+): { inViewport: boolean; updateRef: (el: HTMLElement | null) => void } => {
+	const { rootMargin = '0px', fireOnce = false, threshold = 0, minVisibleTime = 0 } = options;
 	// State and setter for storing whether element is visible
 	const [isIntersecting, setIntersecting] = useState<boolean>(false);
 
@@ -19,20 +21,11 @@ export const useIntersectionAdvanced = (ref: MutableRef<HTMLElement | null>, opt
 	// Track when the element started being visible
 	const visibleStartRef = useRef<number | null>(null);
 
-	// Track the last reset key to detect changes
-	const lastResetKeyRef = useRef<string | undefined>(resetKey);
-
-	// Reset state if resetKey has changed
-	if (resetKey !== lastResetKeyRef.current) {
-		setIntersecting(false);
-		if (visibleTimerRef.current) {
-			window.clearTimeout(visibleTimerRef.current);
-			visibleTimerRef.current = null;
-		}
-		visibleStartRef.current = null;
-		lastResetKeyRef.current = resetKey;
-		return false;
-	}
+	const [counter, setCounter] = useState(0);
+	const updateRef = useCallback((el: HTMLElement | null) => {
+		ref.current = el;
+		setCounter((c) => c + 1);
+	}, []);
 
 	useEffect(() => {
 		setIntersecting(false);
@@ -140,9 +133,9 @@ export const useIntersectionAdvanced = (ref: MutableRef<HTMLElement | null>, opt
 				observer.unobserve(ref.current);
 			}
 		};
-	}, [ref, resetKey]);
+	}, [ref, counter]);
 
-	return isIntersecting;
+	return { inViewport: isIntersecting, updateRef };
 };
 
 function elementIsVisible(el: HTMLElement): boolean {

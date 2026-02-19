@@ -12,11 +12,10 @@ import {
 	RecommendationsRenderSchemaData,
 	ResultsInner,
 	ClickthroughResultsInner,
-} from '@searchspring/beacon';
+} from '@athoscommerce/beacon';
 import type { Banner, RecommendationStore } from '@searchspring/snap-store-mobx';
 import type { RecommendRequestModel } from '@searchspring/snap-client';
-import type { RecommendationControllerConfig, ControllerServices, ContextVariables, AfterStoreObj } from '../types';
-import type { Next } from '@searchspring/snap-event-manager';
+import type { RecommendationControllerConfig, ControllerServices, ContextVariables } from '../types';
 import { CLICK_DUPLICATION_TIMEOUT, isClickWithinProductLink } from '../utils/isClickWithinProductLink';
 
 type RecommendationTrackMethods = {
@@ -30,6 +29,9 @@ type RecommendationTrackMethods = {
 
 const defaultConfig: RecommendationControllerConfig = {
 	id: 'recommend',
+	beacon: {
+		enabled: true,
+	},
 	tag: '',
 	batched: true,
 	realtime: false,
@@ -78,16 +80,6 @@ export class RecommendationController extends AbstractController {
 		this.config = deepmerge(defaultConfig, this.config);
 		this.store.setConfig(this.config);
 
-		this.eventManager.on('afterStore', async (search: AfterStoreObj, next: Next): Promise<void | boolean> => {
-			await next();
-			const controller = search.controller as RecommendationController;
-			const responseId = search.response.responseId;
-			if (controller.store.loaded && !controller.store.error) {
-				const data: RecommendationsRenderSchemaData = { responseId, tag: controller.store.profile.tag };
-				this.tracker.events.recommendations.render({ data, siteId: this.config.globals?.siteId });
-			}
-		});
-
 		// add 'afterStore' middleware
 		// this.eventManager.on('afterStore', async (recommend: AfterStoreObj, next: Next): Promise<void | boolean> => {
 		// 	await next();
@@ -109,13 +101,22 @@ export class RecommendationController extends AbstractController {
 	track: RecommendationTrackMethods = {
 		product: {
 			clickThrough: (e: MouseEvent, result): void => {
+				if (!result) {
+					this.log.warn('No result provided to track.product.clickThrough');
+					return;
+				}
 				const responseId = result.responseId;
 				if (this.events[responseId]?.product[result.id]?.productClickThrough) return;
+				const type = (['product', 'banner'].includes(result.type) ? result.type : 'product') as ResultProductType;
 				const beaconResult: ClickthroughResultsInner = {
-					type: result.type as ResultProductType,
-					uid: result.id,
-					parentId: result.id,
-					sku: result.mappings.core?.sku,
+					type,
+					uid: result.id ? '' + result.id : '',
+					...(type === 'product'
+						? {
+								parentId: result.id ? '' + result.id : '',
+								sku: result.mappings.core?.sku ? '' + result.mappings.core?.sku : undefined,
+						  }
+						: {}),
 				};
 				const data: RecommendationsClickthroughSchemaData = {
 					tag: this.store.profile.tag,
@@ -123,11 +124,15 @@ export class RecommendationController extends AbstractController {
 					results: [beaconResult],
 				};
 				this.eventManager.fire('track.product.clickThrough', { controller: this, event: e, product: result, trackEvent: data });
-				this.tracker.events.recommendations.clickThrough({ data, siteId: this.config.globals?.siteId });
+				this.config.beacon?.enabled && this.tracker.events.recommendations.clickThrough({ data, siteId: this.config.globals?.siteId });
 				this.events[responseId].product[result.id] = this.events[responseId].product[result.id] || {};
 				this.events[responseId].product[result.id].productClickThrough = true;
 			},
 			click: (e: MouseEvent, result): void => {
+				if (!result) {
+					this.log.warn('No result provided to track.product.click');
+					return;
+				}
 				const responseId = result.responseId;
 				if (result.type === 'banner') {
 					if (this.events[responseId]?.product[result.id]?.inlineBannerClickThrough) {
@@ -152,15 +157,24 @@ export class RecommendationController extends AbstractController {
 				}
 			},
 			impression: (result): void => {
+				if (!result) {
+					this.log.warn('No result provided to track.product.impression');
+					return;
+				}
 				const responseId = result.responseId;
 				if (this.events[responseId]?.product[result.id]?.impression) {
 					return;
 				}
+				const type = (['product', 'banner'].includes(result.type) ? result.type : 'product') as ResultProductType;
 				const item: ResultsInner = {
-					type: result.type as ResultProductType,
-					uid: result.id,
-					parentId: result.id,
-					sku: result.mappings.core?.sku,
+					type,
+					uid: result.id ? '' + result.id : '',
+					...(type === 'product'
+						? {
+								parentId: result.id ? '' + result.id : '',
+								sku: result.mappings.core?.sku ? '' + result.mappings.core?.sku : undefined,
+						  }
+						: {}),
 				};
 				const data: RecommendationsImpressionSchemaData = {
 					tag: this.store.profile.tag,
@@ -169,11 +183,15 @@ export class RecommendationController extends AbstractController {
 					banners: [],
 				};
 				this.eventManager.fire('track.product.impression', { controller: this, product: result, trackEvent: data });
-				this.tracker.events.recommendations.impression({ data, siteId: this.config.globals?.siteId });
+				this.config.beacon?.enabled && this.tracker.events.recommendations.impression({ data, siteId: this.config.globals?.siteId });
 				this.events[responseId].product[result.id] = this.events[responseId].product[result.id] || {};
 				this.events[responseId].product[result.id].impression = true;
 			},
 			addToCart: (result: Product): void => {
+				if (!result) {
+					this.log.warn('No result provided to track.product.addToCart');
+					return;
+				}
 				const responseId = result.responseId;
 				const product: BeaconProduct = {
 					parentId: result.id,
@@ -188,7 +206,7 @@ export class RecommendationController extends AbstractController {
 					results: [product],
 				};
 				this.eventManager.fire('track.product.addToCart', { controller: this, product: result, trackEvent: data });
-				this.tracker.events.recommendations.addToCart({ data, siteId: this.config.globals?.siteId });
+				this.config.beacon?.enabled && this.tracker.events.recommendations.addToCart({ data, siteId: this.config.globals?.siteId });
 			},
 		},
 	};
@@ -282,6 +300,9 @@ export class RecommendationController extends AbstractController {
 			// update the store
 			this.store.update(response);
 
+			const data: RecommendationsRenderSchemaData = { responseId, tag: this.store.profile.tag };
+			this.config.beacon?.enabled && this.tracker.events.recommendations.render({ data, siteId: this.config.globals?.siteId });
+
 			const afterStoreProfile = this.profiler.create({ type: 'event', name: 'afterStore', context: params }).start();
 
 			try {
@@ -351,7 +372,11 @@ export class RecommendationController extends AbstractController {
 	};
 
 	addToCart = async (_products: Product[] | Product): Promise<void> => {
-		const products = typeof (_products as Product[]).slice == 'function' ? (_products as Product[]).slice() : [_products];
+		const products = typeof (_products as Product[])?.slice == 'function' ? (_products as Product[]).slice() : [_products];
+		if (!_products || products.length === 0) {
+			this.log.warn('No products provided to recommendation controller.addToCart');
+			return;
+		}
 		(products as Product[]).forEach((product) => {
 			this.track.product.addToCart(product);
 		});

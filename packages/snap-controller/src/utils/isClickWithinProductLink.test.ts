@@ -16,7 +16,11 @@ describe('isClickWithinProductLink', () => {
 		// Mock the target element and its parent chain
 		const targetElement = document.createElement('a');
 		targetElement.href = 'https://www.example.com/product/123';
-		Object.defineProperty(e, 'target', { value: targetElement });
+
+		// Mock composedPath to return the element
+		Object.defineProperty(e, 'composedPath', {
+			value: () => [targetElement],
+		});
 
 		expect(isClickWithinProductLink(e, result)).toBe(true);
 	});
@@ -31,7 +35,10 @@ describe('isClickWithinProductLink', () => {
 		const childElement = document.createElement('span');
 		parentElement.appendChild(childElement);
 
-		Object.defineProperty(e, 'target', { value: childElement });
+		// Mock composedPath to return the path from child to parent
+		Object.defineProperty(e, 'composedPath', {
+			value: () => [childElement, parentElement],
+		});
 
 		expect(isClickWithinProductLink(e, result)).toBe(true);
 	});
@@ -43,14 +50,19 @@ describe('isClickWithinProductLink', () => {
 		const parentElement = document.createElement('a');
 		parentElement.href = 'https://www.example.com/product/123';
 
+		const path: HTMLElement[] = [parentElement];
 		let currentElement: HTMLElement = parentElement;
 		for (let i = 0; i < CLICK_THROUGH_CLOSEST_MAX_LEVELS; i++) {
 			const childElement = document.createElement('span');
 			currentElement.appendChild(childElement);
 			currentElement = childElement;
+			path.unshift(currentElement);
 		}
 
-		Object.defineProperty(e, 'target', { value: currentElement });
+		// Mock composedPath to return path that has the link beyond max levels
+		Object.defineProperty(e, 'composedPath', {
+			value: () => path,
+		});
 
 		expect(isClickWithinProductLink(e, result)).toBe(false);
 	});
@@ -62,14 +74,19 @@ describe('isClickWithinProductLink', () => {
 		const parentElement = document.createElement('a');
 		parentElement.href = 'https://www.example.com/product/123';
 
+		const path: HTMLElement[] = [parentElement];
 		let currentElement: HTMLElement = parentElement;
 		for (let i = 0; i < CLICK_THROUGH_CLOSEST_MAX_LEVELS - 1; i++) {
 			const childElement = document.createElement('span');
 			currentElement.appendChild(childElement);
 			currentElement = childElement;
+			path.unshift(currentElement);
 		}
 
-		Object.defineProperty(e, 'target', { value: currentElement });
+		// Mock composedPath to return path with link at max level boundary
+		Object.defineProperty(e, 'composedPath', {
+			value: () => path,
+		});
 
 		expect(isClickWithinProductLink(e, result)).toBe(true);
 	});
@@ -80,7 +97,11 @@ describe('isClickWithinProductLink', () => {
 
 		const targetElement = document.createElement('a');
 		targetElement.href = 'https://www.example.com/different-url';
-		Object.defineProperty(e, 'target', { value: targetElement });
+
+		// Mock composedPath to return the element
+		Object.defineProperty(e, 'composedPath', {
+			value: () => [targetElement],
+		});
 
 		expect(isClickWithinProductLink(e, result)).toBe(false);
 	});
@@ -91,7 +112,11 @@ describe('isClickWithinProductLink', () => {
 
 		const targetElement = document.createElement('a');
 		targetElement.href = 'https://www.example.com/product/123?variant=3';
-		Object.defineProperty(e, 'target', { value: targetElement });
+
+		// Mock composedPath to return the element
+		Object.defineProperty(e, 'composedPath', {
+			value: () => [targetElement],
+		});
 
 		expect(isClickWithinProductLink(e, result)).toBe(true);
 	});
@@ -102,7 +127,46 @@ describe('isClickWithinProductLink', () => {
 
 		const targetElement = document.createElement('a');
 		targetElement.href = 'https://www.example.com/product/123';
+
+		// Mock composedPath to return the element
+		Object.defineProperty(e, 'composedPath', {
+			value: () => [targetElement],
+		});
+
+		expect(isClickWithinProductLink(e, result)).toBe(true);
+	});
+
+	it('should handle clicks originating from within shadow DOM', () => {
+		const e = new MouseEvent('click');
+		const result = createMockProduct('https://www.example.com/product/123');
+
+		// Create a shadow DOM structure
+		const hostElement = document.createElement('div');
+		const linkElement = document.createElement('a');
+		linkElement.href = 'https://www.example.com/product/123';
+
+		// Simulate a button inside the shadow DOM that's inside the link
+		const shadowButton = document.createElement('button');
+
+		// Mock composedPath to simulate shadow DOM traversal
+		// The path includes elements from within the shadow DOM and crosses the shadow boundary
+		Object.defineProperty(e, 'composedPath', {
+			value: () => [shadowButton, linkElement, hostElement, document.body, document.documentElement],
+		});
+
+		expect(isClickWithinProductLink(e, result)).toBe(true);
+	});
+
+	it('should fallback to target when composedPath is not available', () => {
+		const e = new MouseEvent('click');
+		const result = createMockProduct('https://www.example.com/product/123');
+
+		const targetElement = document.createElement('a');
+		targetElement.href = 'https://www.example.com/product/123';
+
+		// Don't mock composedPath - let it use the fallback
 		Object.defineProperty(e, 'target', { value: targetElement });
+		Object.defineProperty(e, 'composedPath', { value: undefined });
 
 		expect(isClickWithinProductLink(e, result)).toBe(true);
 	});
