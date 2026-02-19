@@ -70,6 +70,21 @@ describe('ListValue Component hiding checkbox and count', () => {
 });
 
 describe('FacetListOptions generic props work', () => {
+	it('can hide count parenthesis', () => {
+		const rendered = render(<FacetListOptions values={listFacetMock.values as FacetValue[]} hideCountParenthesis={true} />);
+
+		const listOption = rendered.container.querySelectorAll('.ss__facet-list-options__option');
+
+		expect(listOption).toHaveLength(listFacetMock.values!.length);
+
+		expect(listOption[0]).toHaveTextContent(listFacetMock.values![0].label!);
+
+		const optionCount = listOption[0].querySelector('.ss__facet-list-options__option__value__count');
+		expect(optionCount).toHaveTextContent(listFacetMock.values![0].count!.toString());
+		expect(optionCount).not.toHaveTextContent('(');
+		expect(optionCount).not.toHaveTextContent(')');
+	});
+
 	it('can disable styling', () => {
 		const rendered = render(<FacetListOptions values={listFacetMock.values as FacetValue[]} disableStyles={true} />);
 
