@@ -77,7 +77,6 @@ export class AutocompleteController extends AbstractController {
 	declare store: AutocompleteStore;
 	declare config: AutocompleteControllerConfig;
 	public storage: StorageStore;
-	private lastSearchKey: string | undefined;
 
 	private events: {
 		[responseId: string]: {
@@ -773,8 +772,9 @@ export class AutocompleteController extends AbstractController {
 
 			const responseId = response.tracking.responseId;
 			this.events[responseId] = this.events[responseId] || { product: {}, banner: {} };
-			const currentSearchKey = responseId;
-			if (currentSearchKey === this.lastSearchKey) {
+
+			const previousResponseId = this.store.results[0]?.responseId;
+			if (previousResponseId && previousResponseId === responseId) {
 				const impressedResultIds = Object.keys(this.events[responseId].product || {}).filter(
 					(resultId) => this.events[responseId].product?.[resultId]?.impression
 				);
@@ -787,7 +787,6 @@ export class AutocompleteController extends AbstractController {
 				};
 			} else {
 				this.events[responseId] = { product: {}, banner: {} };
-				this.lastSearchKey = currentSearchKey;
 			}
 
 			const afterSearchProfile = this.profiler.create({ type: 'event', name: 'afterSearch', context: params }).start();
