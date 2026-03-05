@@ -7,7 +7,7 @@ const branchName = childProcess.execSync('git rev-parse --abbrev-ref HEAD').toSt
 
 module.exports = merge(common, {
 	mode: 'production',
-	entry: './src/modern.ts',
+	entry: './src/index.ts',
 	output: {
 		filename: 'bundle.js',
 		chunkFilename: 'bundle.chunk.[fullhash:8].[id].js',
@@ -33,23 +33,5 @@ module.exports = merge(common, {
 				},
 			},
 		],
-	},
-	devServer: {
-		client: false,
-		server: 'https',
-		port: 2222,
-		hot: false,
-		allowedHosts: 'all',
-		headers: {
-			'Access-Control-Allow-Origin': '*',
-		},
-		static: {
-			directory: path.join(__dirname, 'public'),
-			publicPath: ['/'],
-			watch: false,
-		},
-		devMiddleware: {
-			publicPath: '/dist/',
-		},
 	},
 });
