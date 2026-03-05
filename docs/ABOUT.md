@@ -1,8 +1,12 @@
-# Snap Documentation
+# Searchspring Snap Documentation
 
 Snap is not an acronym! Snap is an open source SDK for building e-commerce experiences powered by Searchspring.
 
 The SDK includes multiple core packages published to npm that in combination with each other, provide the complete front-end tooling for building e-commerce experiences with Searchspring. However to simplify usage, the `@searchspring/snap-preact` package is an abstraction that combines all core packages into a single dependency in combination with Preact to render the UI. This documentation is primarily focused on the usage of this package.
+
+> [!NOTE]
+> This documentation is only applicable when using packages from `@searchspring/snap-preact`  
+> If you are using Athos Commerce packages, see [@athoscommerce documentation](https://athoscommerce.github.io/snap/)
 
 ## Getting Started
 

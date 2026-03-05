@@ -1,9 +1,13 @@
 <p align="center">
-  <img src="images/flat-logo-snap.svg"/>  
+  <img src="images/flat-logo-snap_legacy.svg"/>  
 </p>
 <br/><br/>
 
 Welcome to Snap - Searchspring's SDK for integrating into front end web apps. We invite your participation through issues, discussions and pull requests! Please reference Searchspring's [Community Contribution Guidelines](https://github.com/searchspring/community/blob/main/CONTRIBUTING.md).
+
+> [!NOTE]
+> This documentation is only applicable when using packages from `@searchspring/snap-preact`  
+> If you are using Athos Commerce packages, see [athoscommerce snap](https://github.com/athoscommerce/snap)
 
 Please reference the [Snap Documentation](https://searchspring.github.io/snap/) to get started using Snap to build applications.
 
