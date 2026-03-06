@@ -78,8 +78,6 @@ jobs:
         run: |
           aws s3 sync --acl public-read packages/snap-preact-demo/dist s3://${{ secrets.SNAPFU_AWS_BUCKET }}/snap/${{ env.current_tag }}
           aws s3 sync --acl public-read packages/snap-preact-demo/public s3://${{ secrets.SNAPFU_AWS_BUCKET }}/snap/${{ env.current_tag }}
-          aws s3 sync --acl public-read packages/snap-preact-demo/dist s3://${{ secrets.SNAPFU_AWS_BUCKET }}/snap/production
-          aws s3 sync --acl public-read packages/snap-preact-demo/public s3://${{ secrets.SNAPFU_AWS_BUCKET }}/snap/production
 
       - name: Invalidate CDN Files
         env:

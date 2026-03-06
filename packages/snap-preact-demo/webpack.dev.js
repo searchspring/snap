@@ -37,7 +37,7 @@ const universal = merge(common, {
 
 const modern = merge(common, {
 	mode: 'development',
-	entry: './src/modern.ts',
+	entry: './src/index.ts',
 	output: {
 		filename: 'bundle.js',
 		chunkFilename: 'bundle.chunk.[fullhash:8].[id].js',
@@ -82,6 +82,7 @@ const modern = merge(common, {
 			publicPath: '/',
 		},
 		client: {
+			logging: 'error',
 			overlay: {
 				errors: true,
 				warnings: false,
