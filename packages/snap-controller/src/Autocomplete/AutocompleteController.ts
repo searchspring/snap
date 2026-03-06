@@ -848,9 +848,11 @@ export class AutocompleteController extends AbstractController {
 
 			// update the store
 			this.store.update(response);
-
-			const data: RenderSchemaData = { responseId };
-			this.config.beacon?.enabled && this.tracker.events.autocomplete.render({ data, siteId: this.config.globals?.siteId });
+			// @ts-ignore - _cached does not exist on type
+			if (!response._cached) {
+				const data: RenderSchemaData = { responseId };
+				this.config.beacon?.enabled && this.tracker.events.autocomplete.render({ data, siteId: this.config.globals?.siteId });
+			}
 
 			const afterStoreProfile = this.profiler.create({ type: 'event', name: 'afterStore', context: params }).start();
 
