@@ -105,7 +105,14 @@ export class RecommendationController extends AbstractController {
 					this.log.warn('No result provided to track.product.clickThrough');
 					return;
 				}
+
 				const responseId = result.responseId;
+
+				if (!this.events[responseId]) {
+					this.log.warn('No responseId found in controller, ensure correct controller is used');
+					return;
+				}
+
 				if (this.events[responseId]?.product[result.id]?.productClickThrough) return;
 				const type = (['product', 'banner'].includes(result.type) ? result.type : 'product') as ResultProductType;
 				const beaconResult: ClickthroughResultsInner = {
@@ -133,7 +140,14 @@ export class RecommendationController extends AbstractController {
 					this.log.warn('No result provided to track.product.click');
 					return;
 				}
+
 				const responseId = result.responseId;
+
+				if (!this.events[responseId]) {
+					this.log.warn('No responseId found in controller, ensure correct controller is used');
+					return;
+				}
+
 				if (result.type === 'banner') {
 					if (this.events[responseId]?.product[result.id]?.inlineBannerClickThrough) {
 						return;
@@ -161,10 +175,16 @@ export class RecommendationController extends AbstractController {
 					this.log.warn('No result provided to track.product.impression');
 					return;
 				}
+
 				const responseId = result.responseId;
-				if (this.events[responseId]?.product[result.id]?.impression) {
+
+				if (!this.events[responseId]) {
+					this.log.warn('No responseId found in controller, ensure correct controller is used');
+					return;
+				} else if (this.events[responseId]?.product[result.id]?.impression) {
 					return;
 				}
+
 				const type = (['product', 'banner'].includes(result.type) ? result.type : 'product') as ResultProductType;
 				const item: ResultsInner = {
 					type,
@@ -192,7 +212,14 @@ export class RecommendationController extends AbstractController {
 					this.log.warn('No result provided to track.product.addToCart');
 					return;
 				}
+
 				const responseId = result.responseId;
+
+				if (!this.events[responseId]) {
+					this.log.warn('No responseId found in controller, ensure correct controller is used');
+					return;
+				}
+
 				const product: BeaconProduct = {
 					parentId: result.id,
 					uid: result.id,
