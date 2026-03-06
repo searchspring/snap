@@ -143,7 +143,7 @@ import('./docs/documents.js').then(function (_) {
 			<div id="globalbanner" v-if="showGlobalBanner">
 				<div class="banner-text">If you are using Athos Commerce packages, see <a target="_blank" rel="noopener noreferrer" href="https://athoscommerce.github.io/snap/">Athos Commerce Documentation</a></div>
 				<div class="dontshow">
-					<div @click="closeGlobalBanner(e, true)">Don't Show Again</div>
+					<div @click="closeGlobalBanner($event, true)">Don't Show Again</div>
 					<i @click="closeGlobalBanner" class="fas fa-times fa-1x" title="hide"></i>
 				</div>
 			</div>
