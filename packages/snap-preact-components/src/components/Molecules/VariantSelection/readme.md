@@ -34,3 +34,10 @@ The `onSelect` prop allows you to provide a callback function that is triggered 
 ```jsx
 <VariantSelection selection={VariantSelection} type={'swatches'} onSelect={(e, val) => console.log(e, val)}/>
 ```
+
+### hideSelectedOptionParentheses
+The `hideSelectedOptionParentheses` prop will disable the selected option parenthesis from rendering.
+
+```jsx
+<VariantSelection selection={VariantSelection} hideSelectedOptionParentheses={true} />
+```
