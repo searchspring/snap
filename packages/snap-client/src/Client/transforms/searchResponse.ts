@@ -110,7 +110,6 @@ type breadcrumb = {
 
 export type searchResponseType = {
 	responseId: string;
-	_cached?: boolean;
 	pagination: {
 		totalResults: number;
 		begin: number;
@@ -171,7 +170,6 @@ class Result implements SearchResponseModelResult {
 
 export function transformSearchResponse(response: searchResponseType, request: SearchRequestModel | AutocompleteRequestModel) {
 	return {
-		_cached: response._cached ?? false,
 		...transformSearchResponse.pagination(response),
 		...transformSearchResponse.results(response),
 		...transformSearchResponse.filters(response),

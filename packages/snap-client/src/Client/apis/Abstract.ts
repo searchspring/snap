@@ -43,11 +43,6 @@ export class API {
 			if (cachedResponse) {
 				this.retryCount = 0; // reset count and delay incase rate limit occurs again before a page refresh
 				this.retryDelay = 1000;
-				if (!Array.isArray(cachedResponse)) {
-					// ignore recommendations array response
-					// @ts-ignore - _cached does not exist on type
-					cachedResponse._cached = true;
-				}
 				return cachedResponse;
 			}
 		}
