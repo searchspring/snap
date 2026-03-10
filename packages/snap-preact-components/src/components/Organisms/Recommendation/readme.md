@@ -18,7 +18,7 @@ import { Recommendation } from '@searchspring/snap-preact-components';
 ```
 
 Additional <a target="_blank" rel="noopener noreferrer" href="https://swiperjs.com/react#swiper-props">Swiper Component Props</a> can be specified, but may need to be camelCased where appropriate.
-Additional <a target="_blank" rel="noopener noreferrer" href="https://swiperjs.com/swiper-api#modules">[Swiper Modules</a> can be provided via the `modules` prop; these may need additional props and or stylesheets.
+Additional <a target="_blank" rel="noopener noreferrer" href="https://swiperjs.com/swiper-api#modules">Swiper Modules</a> can be provided via the `modules` prop; these may need additional props and or stylesheets.
 
 ### controller
 The required `controller` prop specifies a reference to the RecommendationController
@@ -26,6 +26,7 @@ The required `controller` prop specifies a reference to the RecommendationContro
 ```jsx
 <Recommendation controller={controller} />
 ```
+
 ### loop
 The `loop` prop enables 'infinite' looping through the result set when swiping or using the arrow buttons.
 

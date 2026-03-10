@@ -24,7 +24,7 @@ The `loop` prop enables 'infinite' looping through the result set when swiping o
 ```
 
 ### pagination
-The `pagination` prop can take a bool to enable pagination dots, or an object containing a SwiperOptions.pagination config object. Types can be found in <a target="_blank" rel="noopener noreferrer" href="https://swiperjs.com/swiper-api#pagination">swiper docs</a>
+The `pagination` prop can take a bool to enable pagination dots, or an object containing a SwiperOptions.pagination config object. Types can be found in <a target="_blank" rel="noopener noreferrer" href="https://swiperjs.com/swiper-api#pagination">swiper docs</a>.
 
 ```jsx
 <Carousel pagination={true}>{children}</Carousel>
