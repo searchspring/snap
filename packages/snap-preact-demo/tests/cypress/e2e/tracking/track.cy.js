@@ -196,6 +196,57 @@ describe('Tracking Beacon 2.0', () => {
 		});
 	});
 
+	it('does not send autocomplete render or impression events for repeated searches', () => {
+		let renderCounter = 0;
+		let impressionCounter = 0;
+		let initialResponseId;
+		cy.intercept('POST', /beacon.searchspring.io\/beacon\/v2\/.*\/autocomplete\/render/, (req) => {
+			renderCounter++;
+			req.reply({ success: true });
+		}).as('beacon2/autocomplete/render-initial');
+		cy.intercept('POST', /beacon.searchspring.io\/beacon\/v2\/.*\/autocomplete\/impression/, (req) => {
+			impressionCounter++;
+			req.reply({ success: true });
+		}).as('beacon2/autocomplete/impression-initial');
+
+		cy.visit('https://localhost:2222');
+		cy.get('input[name="q"]').type('glas');
+
+		cy.wait(`@beacon2/autocomplete/render-initial`).then(({ request }) => {
+			const { data } = JSON.parse(request.body);
+			initialResponseId = data.responseId;
+			expect(initialResponseId).to.be.a('string').and.to.not.be.empty;
+			expect(renderCounter).to.equal(1);
+
+			// re-register intercepts to keep counting
+			cy.intercept('POST', /beacon.searchspring.io\/beacon\/v2\/.*\/autocomplete\/render/, (req) => {
+				renderCounter++;
+				req.reply({ success: true });
+			});
+		});
+		cy.wait(`@beacon2/autocomplete/impression-initial`).then(({ request }) => {
+			const { data } = JSON.parse(request.body);
+			expect(data.responseId).to.equal(initialResponseId);
+			expect(impressionCounter).to.equal(1);
+
+			cy.intercept('POST', /beacon.searchspring.io\/beacon\/v2\/.*\/autocomplete\/impression/, (req) => {
+				impressionCounter++;
+				req.reply({ success: true });
+			});
+
+			// append 's' to make 'glass' - should return cached response (same responseId)
+			cy.get('input[name="q"]').type('s');
+			cy.wait(2000).then(() => {
+				// verify the store still has the same responseId (cached response)
+				cy.snapController('autocomplete').then(({ store }) => {
+					expect(store.results.find((result) => result.type === 'product').responseId).to.equal(initialResponseId);
+				});
+				expect(renderCounter).to.equal(1);
+				expect(impressionCounter).to.equal(1);
+			});
+		});
+	});
+
 	it('tracked autocomplete impression only once per unique search query', () => {
 		let counter = 0;
 		cy.intercept('POST', /beacon.searchspring.io\/beacon\/v2\/.*\/autocomplete\/impression/, (req) => {
