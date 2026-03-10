@@ -1,6 +1,6 @@
 # Price
 
-Utilizes `currency` from `@searchspring/snap-toolbox` to render a `<span>` containing a formatted number.
+Utilizes `currency` from <a target="_blank" rel="noopener noreferrer" href="https://searchspring.github.io/snap/reference-toolbox-filters">@searchspring/snap-preact/toolbox</a> to render a `<span>` containing a formatted number.
 
 ## Usage
 ```jsx

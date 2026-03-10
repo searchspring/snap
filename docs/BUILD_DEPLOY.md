@@ -175,7 +175,7 @@ We hope to maintain this page with the most common build tools and their respect
 
 ### Vite
 
-[@preact/preset-vite](https://github.com/preactjs/presets/tree/main/packages/preset-vite) is a plugin for Vite that allows you to use Preact in your Vite project.
+[@preact/preset-vite](https://www.npmjs.com/package/@preact/preset-vite) is a plugin for Vite that allows you to use Preact in your Vite project.
 
 ```js
 // vite.config.js

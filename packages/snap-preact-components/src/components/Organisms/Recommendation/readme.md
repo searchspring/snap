@@ -17,8 +17,8 @@ Any modification to the results array and data are recommended to be made using 
 import { Recommendation } from '@searchspring/snap-preact-components';
 ```
 
-Additional [Swiper Component Props](https://swiperjs.com/react#swiper-props) can be specified, but may need to be camelCased where appropriate.
-Additional [Swiper Modules](https://swiperjs.com/swiper-api#modules) can be provided via the `modules` prop; these may need additional props and or stylesheets.
+Additional <a target="_blank" rel="noopener noreferrer" href="https://swiperjs.com/react#swiper-props">Swiper Component Props</a> can be specified, but may need to be camelCased where appropriate.
+Additional <a target="_blank" rel="noopener noreferrer" href="https://swiperjs.com/swiper-api#modules">[Swiper Modules</a> can be provided via the `modules` prop; these may need additional props and or stylesheets.
 
 ### controller
 The required `controller` prop specifies a reference to the RecommendationController
@@ -92,7 +92,7 @@ The `nextButton` prop specifies the next button element of the carousel. This ca
 ```
 
 ### modules
-The `modules` prop accepts additional [Swiper Modules](https://swiperjs.com/swiper-api#modules) - these may need additional props and or stylesheets to function. We include `Navigation`, `Pagination` and `A11y` modules by default.
+The `modules` prop accepts additional <a target="_blank" rel="noopener noreferrer" href="https://swiperjs.com/swiper-api#modules">Swiper Modules</a> - these may need additional props and or stylesheets to function. We include `Navigation`, `Pagination` and `A11y` modules by default.
 
 ```jsx
 import { Scrollbar } from 'swiper';
@@ -116,7 +116,7 @@ An object that modifies the responsive behavior of the carousel at various viewp
 
 The object key specified the viewport for when the parameters will be applied. 
 
-The default configuration contains the following properties, however **`any Recommendation props`**, or [Swiper API parameters](https://swiperjs.com/react#swiper-props) can also be specified. 
+The default configuration contains the following properties, however **`any Recommendation props`**, or <a target="_blank" rel="noopener noreferrer" href="https://swiperjs.com/react#swiper-props">Swiper API parameters</a> can also be specified. 
 
 `slidesPerView` - number of products to display per page (for a peekaboo effect use a decimal number here)
 
