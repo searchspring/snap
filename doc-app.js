@@ -54,6 +54,10 @@ import('./docs/documents.js').then(function (_) {
 			},
 			{ a: '(https://github.com/searchspring/snap/tree/main/packages/snap-client)', b: '(./snap-client)' },
 			{
+				a: '(https://github.com/searchspring/snap/tree/main/packages/snap-url-manager/src/Translators)',
+				b: '(./reference-url-manager-translators)',
+			},
+			{
 				a: '(https://github.com/searchspring/snap/tree/main/packages/snap-url-manager/src/Translators/Url)',
 				b: '(./reference-snap-preact-url-translator)',
 			},
@@ -67,8 +71,20 @@ import('./docs/documents.js').then(function (_) {
 			},
 			{ a: '(https://github.com/searchspring/snap/tree/main/docs/REFERENCE_CONFIGURATION_MIDDLEWARE.md)', b: '(./reference-snap-preact-middleware)' },
 			{ a: '(https://github.com/searchspring/snap/tree/main/docs/REFERENCE_VARIANTS.md)', b: '(./reference-variants)' },
+			{ a: '(https://github.com/searchspring/snap/tree/main/packages/snap-preact-components)', b: '(./preact-components)' },
 			{ a: '(https://searchspring.github.io/snap/preact-components)', b: '(./preact-components)' },
 			{ a: '(https://searchspring.github.io/snap/preact-components?params=', b: '(./preact-components?params=' },
+
+			{ a: '(https://github.com/searchspring/snap/tree/main/packages/snap-platforms/common)', b: '(./package-platforms-common)' },
+
+			{ a: '(https://github.com/searchspring/snap/tree/main/packages/snap-platforms/shopify)', b: '(./reference-platforms-shopify)' },
+			{ a: '(https://github.com/searchspring/snap/tree/main/packages/snap-platforms/magento2)', b: '(./reference-platforms-magento2)' },
+			{ a: '(https://github.com/searchspring/snap/tree/main/packages/snap-platforms/bigcommerce)', b: '(./reference-platforms-bigcommerce)' },
+
+			{ a: '(https://github.com/searchspring/snap/blob/main/docs/TEMPLATES_THEMING.md)', b: '(./templates-theming)' },
+
+			{ a: '(https://github.com/searchspring/snap/blob/main/docs/INTEGRATION_VARIANTS.md)', b: '(./reference-variants)' },
+			{ a: '(https://github.com/searchspring/snap/blob/main/docs/TEMPLATES_ABOUT.md)', b: '(./templates-about)' },
 		]);
 
 	const modifyLinks = (markdown) => {
