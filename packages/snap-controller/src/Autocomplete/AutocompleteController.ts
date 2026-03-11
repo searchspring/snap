@@ -171,8 +171,13 @@ export class AutocompleteController extends AbstractController {
 					this.log.warn('No banner provided to track.banner.impression');
 					return;
 				}
+
 				const { responseId, uid } = _banner;
-				if (this.events[responseId]?.banner?.[uid]?.impression) {
+
+				if (!this.events[responseId]) {
+					this.log.warn('No responseId found in controller, ensure correct controller is used');
+					return;
+				} else if (this.events?.[responseId]?.banner?.[uid]?.impression) {
 					return;
 				}
 
@@ -192,7 +197,14 @@ export class AutocompleteController extends AbstractController {
 					this.log.warn('No banner provided to track.banner.click');
 					return;
 				}
+
 				const { responseId, uid } = banner;
+
+				if (!this.events[responseId]) {
+					this.log.warn('No responseId found in controller, ensure correct controller is used');
+					return;
+				}
+
 				if (isClickWithinBannerLink(e)) {
 					if (this.events?.[responseId]?.banner[uid]?.clickThrough) {
 						return;
@@ -210,6 +222,12 @@ export class AutocompleteController extends AbstractController {
 					this.log.warn('No banner uid provided to track.banner.clickThrough');
 					return;
 				}
+
+				if (!this.events[responseId]) {
+					this.log.warn('No responseId found in controller, ensure correct controller is used');
+					return;
+				}
+
 				const banner: ClickthroughBannersInner = { uid };
 				const data: ClickthroughSchemaData = {
 					responseId,
@@ -230,7 +248,14 @@ export class AutocompleteController extends AbstractController {
 					this.log.warn('No result provided to track.product.clickThrough');
 					return;
 				}
+
 				const responseId = result.responseId;
+
+				if (!this.events[responseId]) {
+					this.log.warn('No responseId found in controller, ensure correct controller is used');
+					return;
+				}
+
 				const type = (['product', 'banner'].includes(result.type) ? result.type : 'product') as ResultProductType;
 				const item: ClickthroughResultsInner = {
 					type,
@@ -255,7 +280,13 @@ export class AutocompleteController extends AbstractController {
 					this.log.warn('No result provided to track.product.click');
 					return;
 				}
+
 				const responseId = result.responseId;
+
+				if (!this.events[responseId]) {
+					this.log.warn('No responseId found in controller, ensure correct controller is used');
+					return;
+				}
 
 				if (result.type === 'banner' && isClickWithinBannerLink(e)) {
 					if (this.events?.[responseId]?.product[result.id]?.inlineBannerClickThrough) {
@@ -284,10 +315,16 @@ export class AutocompleteController extends AbstractController {
 					this.log.warn('No result provided to track.product.impression');
 					return;
 				}
+
 				const responseId = result.responseId;
-				if (this.events?.[responseId]?.product[result.id]?.impression) {
+
+				if (!this.events[responseId]) {
+					this.log.warn('No responseId found in controller, ensure correct controller is used');
+					return;
+				} else if (this.events?.[responseId]?.product[result.id]?.impression) {
 					return;
 				}
+
 				const type = (['product', 'banner'].includes(result.type) ? result.type : 'product') as ResultProductType;
 				const item: ResultsInner = {
 					type,
@@ -314,7 +351,14 @@ export class AutocompleteController extends AbstractController {
 					this.log.warn('No result provided to track.product.addToCart');
 					return;
 				}
+
 				const responseId = result.responseId;
+
+				if (!this.events[responseId]) {
+					this.log.warn('No responseId found in controller, ensure correct controller is used');
+					return;
+				}
+
 				const product: BeaconProduct = {
 					parentId: result.id,
 					uid: result.id,
@@ -809,7 +853,8 @@ export class AutocompleteController extends AbstractController {
 			this.events[responseId] = this.events[responseId] || { product: {}, banner: {} };
 
 			const previousResponseId = this.store.results[0]?.responseId;
-			if (previousResponseId && previousResponseId === responseId) {
+			const repeatedSearch = previousResponseId && previousResponseId === responseId;
+			if (repeatedSearch) {
 				const impressedResultIds = Object.keys(this.events[responseId].product || {}).filter(
 					(resultId) => this.events[responseId].product?.[resultId]?.impression
 				);
@@ -849,8 +894,10 @@ export class AutocompleteController extends AbstractController {
 			// update the store
 			this.store.update(response);
 
-			const data: RenderSchemaData = { responseId };
-			this.config.beacon?.enabled && this.tracker.events.autocomplete.render({ data, siteId: this.config.globals?.siteId });
+			if (!repeatedSearch) {
+				const data: RenderSchemaData = { responseId };
+				this.config.beacon?.enabled && this.tracker.events.autocomplete.render({ data, siteId: this.config.globals?.siteId });
+			}
 
 			const afterStoreProfile = this.profiler.create({ type: 'event', name: 'afterStore', context: params }).start();
 

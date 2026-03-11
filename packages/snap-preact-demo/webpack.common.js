@@ -16,6 +16,11 @@ module.exports = {
 		new webpack.DefinePlugin({
 			BRANCHNAME: `"${branchName}"`,
 		}),
+		new webpack.BannerPlugin({
+			banner: 'window.searchspring = window.searchspring || {};\nwindow.searchspring.managed = true;',
+			raw: true,
+			entryOnly: true,
+		}),
 		// to disable code splitting, include the following:
 		// new webpack.optimize.LimitChunkCountPlugin({
 		// 	maxChunks: 1,

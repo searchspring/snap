@@ -64,6 +64,17 @@ export default {
 			},
 			action: 'onSelect',
 		},
+		hideSelectedOptionParentheses: {
+			defaultValue: false,
+			description: 'Hide selected option parenthesis',
+			table: {
+				type: {
+					summary: 'boolean',
+				},
+				defaultValue: { summary: false },
+			},
+			control: { type: 'boolean' },
+		},
 		...componentArgs,
 	},
 };

@@ -52,7 +52,8 @@ export const FacetListOptions = observer((properties: FacetListOptionsProps): JS
 		...properties.theme?.components?.facetListOptions,
 	};
 
-	const { values, hideCheckbox, hideCount, onClick, previewOnFocus, valueProps, facet, disableStyles, className, style } = props;
+	const { values, hideCheckbox, hideCount, hideCountParenthesis, onClick, previewOnFocus, valueProps, facet, disableStyles, className, style } =
+		props;
 
 	const subProps: FacetListOptionsSubProps = {
 		checkbox: {
@@ -102,7 +103,9 @@ export const FacetListOptions = observer((properties: FacetListOptionsProps): JS
 						{!hideCheckbox && <Checkbox {...subProps.checkbox} checked={value.filtered} disableA11y={true} />}
 						<span className="ss__facet-list-options__option__value">
 							{value.label}
-							{!hideCount && value?.count > 0 && <span className="ss__facet-list-options__option__value__count">({value.count})</span>}
+							{!hideCount && value?.count > 0 && (
+								<span className="ss__facet-list-options__option__value__count">{hideCountParenthesis ? `${value.count}` : `(${value.count})`}</span>
+							)}
 						</span>
 					</a>
 				))}
@@ -117,6 +120,7 @@ export interface FacetListOptionsProps extends ComponentProps {
 	values?: FacetValue[];
 	hideCheckbox?: boolean;
 	hideCount?: boolean;
+	hideCountParenthesis?: boolean;
 	facet?: ValueFacet;
 	onClick?: (e: React.MouseEvent) => void;
 	previewOnFocus?: boolean;
