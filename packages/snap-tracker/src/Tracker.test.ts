@@ -636,7 +636,7 @@ describe('Cart inferance from context', () => {
 
 		expect(tracker.storage.cart.get()).toEqual(cart);
 		expect(mockFetchApi).toHaveBeenCalledWith(expect.stringContaining('/cart/add'), expect.any(Object));
-		expect(mockFetchApi).toHaveBeenCalledWith(expect.stringContaining('/preflightCache'), expect.any(Object));
+		expect(mockFetchApi).toHaveBeenCalledWith(expect.stringContaining('/preflight'), expect.any(Object));
 		mockFetchApi.mockClear();
 		expect(mockFetchApi).not.toHaveBeenCalled();
 
@@ -653,7 +653,7 @@ describe('Cart inferance from context', () => {
 		await new Promise((resolve) => setTimeout(resolve, PREFLIGHT_DEBOUNCE_TIMEOUT));
 		expect(tracker.storage.cart.get()).toEqual(cart2);
 		expect(mockFetchApi).toHaveBeenCalledWith(expect.stringContaining('/cart/add'), expect.any(Object));
-		expect(mockFetchApi).toHaveBeenCalledWith(expect.stringContaining('/preflightCache'), expect.any(Object));
+		expect(mockFetchApi).toHaveBeenCalledWith(expect.stringContaining('/preflight'), expect.any(Object));
 		mockFetchApi.mockClear();
 		expect(mockFetchApi).not.toHaveBeenCalled();
 
@@ -669,7 +669,7 @@ describe('Cart inferance from context', () => {
 		await new Promise((resolve) => setTimeout(resolve, PREFLIGHT_DEBOUNCE_TIMEOUT));
 		expect(tracker.storage.cart.get()).toEqual(cart3);
 		expect(mockFetchApi).toHaveBeenCalledWith(expect.stringContaining('/cart/add'), expect.any(Object));
-		expect(mockFetchApi).toHaveBeenCalledWith(expect.stringContaining('/preflightCache'), expect.any(Object));
+		expect(mockFetchApi).toHaveBeenCalledWith(expect.stringContaining('/preflight'), expect.any(Object));
 		mockFetchApi.mockClear();
 		expect(mockFetchApi).not.toHaveBeenCalled();
 
@@ -685,7 +685,7 @@ describe('Cart inferance from context', () => {
 		await new Promise((resolve) => setTimeout(resolve, PREFLIGHT_DEBOUNCE_TIMEOUT));
 		expect(tracker.storage.cart.get()).toEqual(cart4);
 		expect(mockFetchApi).toHaveBeenCalledWith(expect.stringContaining('/cart/remove'), expect.any(Object));
-		expect(mockFetchApi).toHaveBeenCalledWith(expect.stringContaining('/preflightCache'), expect.any(Object));
+		expect(mockFetchApi).toHaveBeenCalledWith(expect.stringContaining('/preflight'), expect.any(Object));
 		mockFetchApi.mockClear();
 		expect(mockFetchApi).not.toHaveBeenCalled();
 
@@ -701,7 +701,7 @@ describe('Cart inferance from context', () => {
 		await new Promise((resolve) => setTimeout(resolve, PREFLIGHT_DEBOUNCE_TIMEOUT));
 		expect(tracker.storage.cart.get()).toEqual(cart4); // should be previous cart
 		expect(mockFetchApi).toHaveBeenCalledWith(expect.stringContaining('/log/snap'), expect.any(Object));
-		expect(mockFetchApi).not.toHaveBeenCalledWith(expect.stringContaining('/preflightCache'), expect.any(Object));
+		expect(mockFetchApi).not.toHaveBeenCalledWith(expect.stringContaining('/preflight'), expect.any(Object));
 		mockFetchApi.mockClear();
 		expect(mockFetchApi).not.toHaveBeenCalled();
 
@@ -717,7 +717,7 @@ describe('Cart inferance from context', () => {
 		await new Promise((resolve) => setTimeout(resolve, PREFLIGHT_DEBOUNCE_TIMEOUT));
 		expect(tracker.storage.cart.get()).toEqual(cart6);
 		expect(mockFetchApi).toHaveBeenCalledWith(expect.stringContaining('/cart/remove'), expect.any(Object));
-		expect(mockFetchApi).toHaveBeenCalledWith(expect.stringContaining('/preflightCache'), expect.any(Object));
+		expect(mockFetchApi).toHaveBeenCalledWith(expect.stringContaining('/preflight'), expect.any(Object));
 		mockFetchApi.mockClear();
 		expect(mockFetchApi).not.toHaveBeenCalled();
 
@@ -734,7 +734,7 @@ describe('Cart inferance from context', () => {
 		await new Promise((resolve) => setTimeout(resolve, PREFLIGHT_DEBOUNCE_TIMEOUT));
 		expect(tracker.storage.cart.get()).toEqual(cart7);
 		expect(mockFetchApi).toHaveBeenCalledWith(expect.stringContaining('/cart/remove'), expect.any(Object));
-		expect(mockFetchApi).toHaveBeenCalledWith(expect.stringContaining('/preflightCache'), expect.any(Object));
+		expect(mockFetchApi).toHaveBeenCalledWith(expect.stringContaining('/preflight'), expect.any(Object));
 		mockFetchApi.mockClear();
 		expect(mockFetchApi).not.toHaveBeenCalled();
 	});

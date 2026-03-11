@@ -30,7 +30,7 @@ Optional Context object to be used to set the global context. If no context is p
 
 ## URL
 
-Optional. [`UrlTranslator` config](https://github.com/searchspring/snap/tree/main/packages/snap-url-manager/src/Translators/Url/README.md) object that is passed to the core `@searchspring/snap-url-manager` package used by all controllers. This parameter configuration will be applied to all controllers created via Snap, but can be specified per controller for specific customization.
+Optional. [`UrlTranslator` config](https://github.com/searchspring/snap/tree/main/packages/snap-url-manager/src/Translators/Url) object that is passed to the core `@searchspring/snap-url-manager` package used by all controllers. This parameter configuration will be applied to all controllers created via Snap, but can be specified per controller for specific customization.
 
 | Option | Type | Description |
 |---|---|---|

@@ -1,6 +1,6 @@
 import type { Product } from '@searchspring/snap-store-mobx';
 
-export const CLICK_DUPLICATION_TIMEOUT = 300;
+export const CLICK_DUPLICATION_TIMEOUT = 1000;
 export const CLICK_THROUGH_CLOSEST_MAX_LEVELS = 12;
 
 export const isClickWithinProductLink = (e: MouseEvent, result: Product): boolean => {

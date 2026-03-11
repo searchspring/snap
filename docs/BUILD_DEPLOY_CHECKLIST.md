@@ -4,7 +4,7 @@
 
 - [Background Filters](./snap-background-filters) are being read from script context and applied as client globals to handle Category pages.
 
-- (If applicable) [Foreground Filters](./snap-background-filters) are added as client globals to handle custom filtering (ie. only show results in stock)
+- (If applicable) [Foreground Filters](./snap-foreground-filters) are added as client globals to handle custom filtering (ie. only show results in stock)
 
 - Merchandising [Banner](https://searchspring.github.io/snap/preact-components?params=%3Fpath%3D%2Fstory%2Fatoms-banner--footer) components have been added for all banner locations: `header`, `banner`, `footer`, `left`. See [Search > Search Store Merchandising](./snap-search#searchcontrollerstoremerchandising)
 

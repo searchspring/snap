@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.75.0](https://github.com/searchspring/snap/compare/v0.74.0...v0.75.0) (2026-03-11)
+
+### Bug Fixes
+
+- **controller/tracking:** updating controllers to be defensive about tracking events ([b141a57](https://github.com/searchspring/snap/commit/b141a570a08c0803ff0768d79b50c08e1a586f85))
+- prevent autocomplete render event for cached responses, increate click debounce time ([887963f](https://github.com/searchspring/snap/commit/887963fb35452724394cb79296e8e6969da446ac))
+
 # [0.74.0](https://github.com/searchspring/snap/compare/v0.73.7...v0.74.0) (2026-02-19)
 
 ### Bug Fixes

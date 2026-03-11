@@ -72,7 +72,7 @@ export const VariantSelection = observer((properties: VariantSelectionProps): JS
 		...properties.theme?.components?.variantSelection,
 	};
 
-	const { type, selection, onSelect, disableStyles, className, style } = props;
+	const { type, selection, onSelect, hideSelectedOptionParentheses, disableStyles, className, style } = props;
 
 	const onSelectHandler = (e: React.MouseEvent<HTMLElement, MouseEvent>, option: ListOption) => {
 		if (onSelect) {
@@ -171,7 +171,9 @@ export const VariantSelection = observer((properties: VariantSelectionProps): JS
 														<span className="ss__dropdown__button-wrapper__label">{selection.label}</span>
 
 														{selection.selected ? (
-															<span className="ss__dropdown__button-wrapper__selection">({selection.selected.value})</span>
+															<span className="ss__dropdown__button-wrapper__selection">
+																{hideSelectedOptionParentheses ? `${selection.selected.value}` : `(${selection.selected.value})`}
+															</span>
 														) : (
 															<></>
 														)}
@@ -241,4 +243,5 @@ export interface VariantSelectionProps extends ComponentProps {
 	selection: VariantSelectionType;
 	type?: 'dropdown' | 'swatches' | 'list';
 	onSelect?: (e: React.MouseEvent<HTMLElement, MouseEvent>, option: ListOption) => void;
+	hideSelectedOptionParentheses: boolean;
 }

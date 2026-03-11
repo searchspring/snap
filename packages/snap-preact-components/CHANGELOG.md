@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.75.0](https://github.com/searchspring/snap/compare/v0.74.0...v0.75.0) (2026-03-11)
+
+### Features
+
+- **components:** added props to toggle parentheses in variantSelection & facetlistOptions ([0511efa](https://github.com/searchspring/snap/commit/0511efa816d7581090bda9469b1d3db4e2f64682))
+
 # [0.74.0](https://github.com/searchspring/snap/compare/v0.73.7...v0.74.0) (2026-02-19)
 
 ### Bug Fixes

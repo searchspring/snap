@@ -54,6 +54,10 @@ import('./docs/documents.js').then(function (_) {
 			},
 			{ a: '(https://github.com/searchspring/snap/tree/main/packages/snap-client)', b: '(./snap-client)' },
 			{
+				a: '(https://github.com/searchspring/snap/tree/main/packages/snap-url-manager/src/Translators)',
+				b: '(./reference-url-manager-translators)',
+			},
+			{
 				a: '(https://github.com/searchspring/snap/tree/main/packages/snap-url-manager/src/Translators/Url)',
 				b: '(./reference-snap-preact-url-translator)',
 			},
@@ -67,8 +71,20 @@ import('./docs/documents.js').then(function (_) {
 			},
 			{ a: '(https://github.com/searchspring/snap/tree/main/docs/REFERENCE_CONFIGURATION_MIDDLEWARE.md)', b: '(./reference-snap-preact-middleware)' },
 			{ a: '(https://github.com/searchspring/snap/tree/main/docs/REFERENCE_VARIANTS.md)', b: '(./reference-variants)' },
+			{ a: '(https://github.com/searchspring/snap/tree/main/packages/snap-preact-components)', b: '(./preact-components)' },
 			{ a: '(https://searchspring.github.io/snap/preact-components)', b: '(./preact-components)' },
 			{ a: '(https://searchspring.github.io/snap/preact-components?params=', b: '(./preact-components?params=' },
+
+			{ a: '(https://github.com/searchspring/snap/tree/main/packages/snap-platforms/common)', b: '(./package-platforms-common)' },
+
+			{ a: '(https://github.com/searchspring/snap/tree/main/packages/snap-platforms/shopify)', b: '(./reference-platforms-shopify)' },
+			{ a: '(https://github.com/searchspring/snap/tree/main/packages/snap-platforms/magento2)', b: '(./reference-platforms-magento2)' },
+			{ a: '(https://github.com/searchspring/snap/tree/main/packages/snap-platforms/bigcommerce)', b: '(./reference-platforms-bigcommerce)' },
+
+			{ a: '(https://github.com/searchspring/snap/blob/main/docs/TEMPLATES_THEMING.md)', b: '(./templates-theming)' },
+
+			{ a: '(https://github.com/searchspring/snap/blob/main/docs/INTEGRATION_VARIANTS.md)', b: '(./reference-variants)' },
+			{ a: '(https://github.com/searchspring/snap/blob/main/docs/TEMPLATES_ABOUT.md)', b: '(./templates-about)' },
 		]);
 
 	const modifyLinks = (markdown) => {
@@ -82,6 +98,7 @@ import('./docs/documents.js').then(function (_) {
 			return {
 				documents,
 				darkMode: localStorage.getItem('darkMode') === 'true',
+				showGlobalBanner: sessionStorage.getItem('hideGlobalBanner') !== 'true' && localStorage.getItem('hideGlobalBanner') !== 'true',
 			};
 		},
 		mounted() {
@@ -98,6 +115,16 @@ import('./docs/documents.js').then(function (_) {
 				} else {
 					document.body.classList.remove('dark-mode');
 				}
+			},
+			closeGlobalBanner(e, permanently) {
+				const el = document.getElementById('globalbanner');
+				if (permanently) {
+					localStorage.setItem('hideGlobalBanner', 'true');
+				} else {
+					sessionStorage.setItem('hideGlobalBanner', 'true');
+				}
+				el.style.display = 'none';
+				this.showGlobalBanner = false;
 			},
 		},
 		computed: {
@@ -129,18 +156,32 @@ import('./docs/documents.js').then(function (_) {
 			},
 		},
 		template: `
-            <Navigation :documents="documents"></Navigation>
+			<div id="globalbanner" v-if="showGlobalBanner">
+				<div class="banner-text">If you are using Athos Commerce packages, see <a target="_blank" rel="noopener noreferrer" href="https://athoscommerce.github.io/snap/">Athos Commerce Documentation</a></div>
+				<div class="dontshow">
+					<div @click="closeGlobalBanner($event, true)">Don't Show Again</div>
+					<i @click="closeGlobalBanner" class="fas fa-times fa-1x" title="hide"></i>
+				</div>
+			</div>
 
-			<div id="content-wrapper">
-				<router-view :routes="routes"></router-view>
+			<div id="main-wrapper">
+				<div id="navigation-wrapper" :class="{ 'with-banner': showGlobalBanner }">
+					<Navigation :documents="documents"></Navigation>
+				</div>
+
+				<div id="content-wrapper" :class="{ 'with-banner': showGlobalBanner }">
+					<router-view :routes="routes"></router-view>
+				</div>
+			
+				<div class="theme-toggle" :class="{ 'with-banner': showGlobalBanner }">
+					<button @click="toggleDarkMode" :title="darkMode ? 'Switch to light mode' : 'Switch to dark mode'">
+						<i :class="darkMode ? 'fas fa-sun fa-2x' : 'fas fa-moon fa-2x'"></i>
+					</button>
+				</div>
+
+				<div id="ac-overlay"></div>
 			</div>
-			<div class="theme-toggle">
-				<button @click="toggleDarkMode" :title="darkMode ? 'Switch to light mode' : 'Switch to dark mode'">
-					<i :class="darkMode ? 'fas fa-sun fa-2x' : 'fas fa-moon fa-2x'"></i>
-				</button>
-			</div>
-            <div id="ac-overlay"></div>
-        `,
+		`,
 	};
 
 	const app = Vue.createApp(App);
@@ -148,12 +189,12 @@ import('./docs/documents.js').then(function (_) {
 	app.component('Content', {
 		props: ['routes'],
 		template: `
-            <div id="content" :class="{ 'markdown': routeData.type === 'markdown' }">
-                <iframe v-if="routeData.type == 'iframe'" :src="routeData.url" id="frame" @load="onLoad"></iframe>
-                <Markdown v-else-if="routeData.type == 'markdown'" :src="routeData.url" />
-                <div id="searchWrapper"></div>
-            </div>
-        `,
+			<div id="content" :class="{ 'markdown': routeData.type === 'markdown' }">
+				<iframe v-if="routeData.type == 'iframe'" :src="routeData.url" id="frame" @load="onLoad"></iframe>
+				<Markdown v-else-if="routeData.type == 'markdown'" :src="routeData.url" />
+				<div id="searchWrapper"></div>
+			</div>
+		`,
 		computed: {
 			currentRoute() {
 				return this.$route.path;
@@ -211,8 +252,8 @@ import('./docs/documents.js').then(function (_) {
 	app.component('Markdown', {
 		props: ['src'],
 		template: `
-            <div id="markdown" v-html="markedHTML"></div>
-        `,
+			<div id="markdown" v-html="markedHTML"></div>
+		`,
 		data() {
 			return {
 				markdown: '',
@@ -263,15 +304,15 @@ import('./docs/documents.js').then(function (_) {
 	app.component('Link', {
 		props: ['link', 'active'],
 		template: `
-            <router-link v-if="link.route && !link.hidden" :key="link.route" :to="'' + link.route" :class="{ 'active': active }">
-                {{link.label}}
-            </router-link>
-    
-            <a v-else-if="link.type == 'external'" :href="link.url" target="_blank">
-                {{link.label}}
-                <i v-if="link.icon" :class="link.icon"></i>
-            </a>
-        `,
+			<router-link v-if="link.route && !link.hidden" :key="link.route" :to="'' + link.route" :class="{ 'active': active }">
+				{{link.label}}
+			</router-link>
+
+			<a v-else-if="link.type == 'external'" :href="link.url" target="_blank">
+				{{link.label}}
+				<i v-if="link.icon" :class="link.icon"></i>
+			</a>
+		`,
 	});
 
 	app.component('Navigation', {
@@ -307,39 +348,40 @@ import('./docs/documents.js').then(function (_) {
 			},
 		},
 		template: `
-            <div id="navigation-wrapper">
-                <router-link :key="'/'" :to="'/'">
-                    <div id="header">
-                        <div class="logo-container">
-                            <img src="./images/logo-snap.svg"/>
-                        </div>
-                    </div>
-                </router-link>
-				<span class="collapseNav" @click="toggleNav"><i class="fas fa-bars fa-2x"></i></span>
-                <div id="search-container">
+			<router-link :key="'/'" :to="'/'">
+				<div id="header">
+					<div class="logo-container">
+						<img src="./images/logo-snap_legacy.svg"/>
+					</div>
 				</div>
-                <div id="navigation" :class="{ visible: navVisible }" >
-                    <div v-for="section in documents" class="section">
-                        <h3>{{ section.categoryName }}</h3>
-                        <ul class="links">
-                            <li v-for="link in section.links" :style="link.style">
-                                <Link :link="link" :active="inRoute(link)" />
+			</router-link>
 
-                                <ul v-if="link.links && inRoute(link)" class="sublinks">
-                                    <li v-for="sublink in link.links" :style="sublink.style">
-                                        <Link :link="sublink" :active="inRoute(sublink)"/>
-                                        <ul v-if="sublink?.links && inRoute(sublink)" class="sublinks">
-                                            <li v-for="subsublink in sublink.links" :style="subsublink.style">
-                                                <Link :link="subsublink" :active="inRoute(subsublink)"/>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
+			<span class="collapseNav" @click="toggleNav"><i class="fas fa-bars fa-2x"></i></span>
+
+			<div id="search-container"></div>
+
+			<div id="navigation" :class="{ visible: navVisible }" >
+				<div v-for="section in documents" class="section">
+					<h3>{{ section.categoryName }}</h3>
+					<ul class="links">
+							<li v-for="link in section.links" :style="link.style">
+								<Link :link="link" :active="inRoute(link)" />
+
+								<ul v-if="link.links && inRoute(link)" class="sublinks">
+									<li v-for="sublink in link.links" :style="sublink.style">
+										<Link :link="sublink" :active="inRoute(sublink)"/>
+										<ul v-if="sublink?.links && inRoute(sublink)" class="sublinks">
+											<li v-for="subsublink in sublink.links" :style="subsublink.style">
+												<Link :link="subsublink" :active="inRoute(subsublink)"/>
+											</li>
+										</ul>
+									</li>
+								</ul>
+							</li>
+						</ul>
+				</div>
+			</div>
+            
         `,
 	});
 
@@ -492,18 +534,18 @@ import('./docs/documents.js').then(function (_) {
 				`<div class="legend-container">` +
 				(title ? `<div class="legend-title">${title}</div>` : '') +
 				`
-						<ul>
-							${headings
-								.map((h) => {
-									const id = h.id;
-									const text = h.textContent;
-									const level = h.tagName.toLowerCase();
-									return `<li class="${level}" onclick="updateLegend('${id}')"><a href="javascript:void(0)" data-id="${id}" class="${
-										hashId === id ? 'active' : ''
-									}">${text}</a></li>`;
-								})
-								.join('')}
-						</ul>
+					<ul>
+						${headings
+							.map((h) => {
+								const id = h.id;
+								const text = h.textContent;
+								const level = h.tagName.toLowerCase();
+								return `<li class="${level}" onclick="updateLegend('${id}')"><a href="javascript:void(0)" data-id="${id}" class="${
+									hashId === id ? 'active' : ''
+								}">${text}</a></li>`;
+							})
+							.join('')}
+					</ul>
 				</div>`;
 			document.getElementById('content').prepend(legend);
 			// scroll active legend item into view

@@ -365,9 +365,14 @@ export class SearchController extends AbstractController {
 					this.log.warn('No banner provided to track.banner.impression');
 					return;
 				}
-				if (this.events[responseId]?.banner[uid]?.impression) {
+
+				if (!this.events[responseId]) {
+					this.log.warn('No responseId found in controller, ensure correct controller is used');
+					return;
+				} else if (this.events[responseId]?.banner[uid]?.impression) {
 					return;
 				}
+
 				const banner: BannersInner = { uid };
 				const data: ImpressionSchemaData = {
 					responseId,
@@ -385,7 +390,14 @@ export class SearchController extends AbstractController {
 					this.log.warn('No banner provided to track.banner.click');
 					return;
 				}
+
 				const { responseId, uid } = banner;
+
+				if (!this.events[responseId]) {
+					this.log.warn('No responseId found in controller, ensure correct controller is used');
+					return;
+				}
+
 				if (isClickWithinBannerLink(e)) {
 					if (this.events?.[responseId]?.banner[uid]?.clickThrough) {
 						return;
@@ -403,6 +415,12 @@ export class SearchController extends AbstractController {
 					this.log.warn('No banner provided to track.banner.clickThrough');
 					return;
 				}
+
+				if (!this.events[responseId]) {
+					this.log.warn('No responseId found in controller, ensure correct controller is used');
+					return;
+				}
+
 				const banner: ClickthroughBannersInner = { uid };
 				const data: ClickthroughSchemaData = {
 					responseId,
@@ -423,7 +441,14 @@ export class SearchController extends AbstractController {
 					this.log.warn('No result provided to track.product.clickThrough');
 					return;
 				}
+
 				const responseId = result.responseId;
+
+				if (!this.events[responseId]) {
+					this.log.warn('No responseId found in controller, ensure correct controller is used');
+					return;
+				}
+
 				const target = e.target as HTMLAnchorElement;
 				const resultHref = (result as Product).display?.mappings.core?.url || (result as Product).mappings.core?.url || '';
 				const elemHref = target?.getAttribute('href');
@@ -479,7 +504,14 @@ export class SearchController extends AbstractController {
 					this.log.warn('No result provided to track.product.click');
 					return;
 				}
+
 				const responseId = result.responseId;
+
+				if (!this.events[responseId]) {
+					this.log.warn('No responseId found in controller, ensure correct controller is used');
+					return;
+				}
+
 				if (result.type === 'banner' && isClickWithinBannerLink(e)) {
 					if (this.events?.[responseId]?.product[result.id]?.inlineBannerClickThrough) {
 						return;
@@ -507,10 +539,16 @@ export class SearchController extends AbstractController {
 					this.log.warn('No result provided to track.product.impression');
 					return;
 				}
+
 				const responseId = result.responseId;
-				if (this.events[responseId]?.product[result.id]?.impression) {
+
+				if (!this.events[responseId]) {
+					this.log.warn('No responseId found in controller, ensure correct controller is used');
+					return;
+				} else if (this.events[responseId]?.product[result.id]?.impression) {
 					return;
 				}
+
 				const type = (['product', 'banner'].includes(result.type) ? result.type : 'product') as ResultProductType;
 				const item: ResultsInner = {
 					type,
@@ -537,7 +575,14 @@ export class SearchController extends AbstractController {
 					this.log.warn('No result provided to track.product.addToCart');
 					return;
 				}
+
 				const responseId = result.responseId;
+
+				if (!this.events[responseId]) {
+					this.log.warn('No responseId found in controller, ensure correct controller is used');
+					return;
+				}
+
 				const product: BeaconProduct = {
 					parentId: result.id,
 					uid: result.id,
