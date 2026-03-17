@@ -162,6 +162,12 @@ export class NetworkCache {
 					currentSize = new Blob([JSON.stringify(this.memoryCache)], { endings: 'native' }).size / 1024;
 				}
 
+				// if we still can't fit the new object after purging, skip caching
+				if (currentSize + newObjectSize > this.config.maxSize) {
+					console.warn(`Unable to cache entry for key "${key}" without exceeding maxSize (${this.config.maxSize}KB), skipping cache`);
+					return;
+				}
+
 				// store cache in memory
 				this.memoryCache[key] = cacheObject;
 
