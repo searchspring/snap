@@ -6,6 +6,7 @@ const CACHE_STORAGE_KEY = 'ss-networkcache';
 
 const defaultConfig: DefaultCacheConfig = {
 	enabled: true,
+	memoryOnly: false,
 	ttl: 300000, // ms
 	maxSize: 1000, // KB
 	purgeable: true,
@@ -31,7 +32,7 @@ export class NetworkCache {
 
 	public load(): void {
 		// initialize cache from session storage
-		if (typeof window !== 'undefined' && window?.sessionStorage) {
+		if (typeof window !== 'undefined' && window?.sessionStorage && !this.config.memoryOnly) {
 			const stored: any = window.sessionStorage.getItem(CACHE_STORAGE_KEY);
 			const newStored: Cache = {
 				...(stored && JSON.parse(stored)),
@@ -105,15 +106,18 @@ export class NetworkCache {
 								...this.memoryCache,
 							};
 							delete newStored[storageKey];
-							// update storage
-							window.sessionStorage.setItem(CACHE_STORAGE_KEY, JSON.stringify(newStored));
+
+							if (!this.config.memoryOnly) {
+								// update storage
+								window.sessionStorage.setItem(CACHE_STORAGE_KEY, JSON.stringify(newStored));
+							}
 						} else {
 							return this.memoryCache[storageKey].value;
 						}
 					}
 				}
 			} catch (err) {
-				console.warn('something went wrong getting from cache', err);
+				console.warn('something went wrong getting from cache: ', err);
 			}
 		}
 	}
@@ -128,12 +132,12 @@ export class NetworkCache {
 
 		// update storage
 		try {
-			if (typeof window !== 'undefined' && window?.sessionStorage) {
+			if (typeof window !== 'undefined' && window?.sessionStorage && !this.config.memoryOnly) {
 				const stringifiedCache = JSON.stringify(this.memoryCache);
 				window.sessionStorage.setItem(CACHE_STORAGE_KEY, stringifiedCache);
 			}
-		} catch {
-			console.warn('failed to store network cache');
+		} catch (e) {
+			console.warn('failed to store network cache: ', e);
 		}
 	}
 
@@ -148,9 +152,17 @@ export class NetworkCache {
 					purgeable: this.config.purgeable,
 				};
 
-				// purge old items if we are over max size
-				let size = new Blob([JSON.stringify(this.memoryCache)], { endings: 'native' }).size / 1024;
-				while (size > this.config.maxSize) {
+				const newObjectSize = new Blob([JSON.stringify({ [key]: cacheObject })], { endings: 'native' }).size / 1024;
+
+				// if the new object alone exceeds maxSize, don't cache it
+				if (newObjectSize > this.config.maxSize) {
+					console.warn(`Cache object size (${newObjectSize.toFixed(2)}KB) exceeds maxSize (${this.config.maxSize}KB), skipping cache`);
+					return;
+				}
+
+				// purge old items if adding the new object would exceed max size
+				let currentSize = new Blob([JSON.stringify(this.memoryCache)], { endings: 'native' }).size / 1024;
+				while (currentSize + newObjectSize > this.config.maxSize) {
 					const oldestKey = Object.keys(this.memoryCache)
 						.filter((key) => this.memoryCache[key].purgeable)
 						.sort((a, b) => {
@@ -161,17 +173,17 @@ export class NetworkCache {
 					delete this.memoryCache[oldestKey];
 
 					// recalculate size after removing oldest
-					size = new Blob([JSON.stringify(this.memoryCache)], { endings: 'native' }).size / 1024;
+					currentSize = new Blob([JSON.stringify(this.memoryCache)], { endings: 'native' }).size / 1024;
 				}
 
 				// store cache in memory
 				this.memoryCache[key] = cacheObject;
 
-				if (typeof window !== 'undefined' && window?.sessionStorage) {
+				if (typeof window !== 'undefined' && window?.sessionStorage && !this.config.memoryOnly) {
 					window.sessionStorage.setItem(CACHE_STORAGE_KEY, JSON.stringify(this.memoryCache));
 				}
-			} catch {
-				console.warn('something went wrong setting to cache');
+			} catch (e) {
+				console.warn('something went wrong setting to cache: ', e);
 			}
 		}
 	}
@@ -179,11 +191,11 @@ export class NetworkCache {
 	public clear() {
 		try {
 			this.memoryCache = {};
-			if (typeof window !== 'undefined' && window?.sessionStorage) {
+			if (typeof window !== 'undefined' && window?.sessionStorage && !this.config.memoryOnly) {
 				window.sessionStorage.setItem(CACHE_STORAGE_KEY, '');
 			}
-		} catch {
-			console.warn('something went wrong clearing cache');
+		} catch (e) {
+			console.warn('something went wrong clearing cache: ', e);
 		}
 	}
 }

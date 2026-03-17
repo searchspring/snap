@@ -7,12 +7,15 @@ import type {
 	MetaResponseModelBadgeTag,
 	SearchResponseModelResultBadges,
 } from '@searchspring/snapi-types';
+
+export type beaconSettings = {
+	enabled: boolean;
+};
+
 // Abstract
 export type StoreConfig = {
 	id: string;
-	beacon?: {
-		enabled: boolean;
-	};
+	beacon?: beaconSettings;
 	[any: string]: unknown;
 };
 

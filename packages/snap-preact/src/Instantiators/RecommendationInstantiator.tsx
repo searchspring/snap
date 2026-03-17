@@ -9,7 +9,7 @@ import { Tracker } from '@searchspring/snap-tracker';
 import type { ClientConfig, ClientGlobals, RecommendRequestModel, RecommendationRequestFilterModel } from '@searchspring/snap-client';
 import type { UrlTranslatorConfig } from '@searchspring/snap-url-manager';
 import type { AbstractController, RecommendationController, Attachments, ContextVariables } from '@searchspring/snap-controller';
-import type { VariantConfig } from '@searchspring/snap-store-mobx';
+import type { beaconSettings, VariantConfig } from '@searchspring/snap-store-mobx';
 import type { Middleware } from '@searchspring/snap-event-manager';
 import type { Target } from '@searchspring/snap-toolbox';
 
@@ -28,6 +28,7 @@ export type RecommendationInstantiatorConfig = {
 		batched?: boolean;
 		limit?: number;
 		variants?: VariantConfig;
+		beacon?: beaconSettings;
 	} & Attachments;
 	selector?: string;
 	url?: UrlTranslatorConfig;
