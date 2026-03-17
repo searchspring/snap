@@ -231,6 +231,35 @@ describe('Network Cache', () => {
 			consoleWarnSpy.mockRestore();
 		});
 
+		it('skips caching when entry cannot fit after purging non-purgeable items', async () => {
+			const consoleWarnSpy = jest.spyOn(console, 'warn').mockImplementation();
+
+			// First cache a non-purgeable item that takes up space
+			const nonPurgeableCache = new NetworkCache({
+				ttl: 10000,
+				enabled: true,
+				maxSize: 4, // KB - small enough that we'll hit the limit
+				purgeable: false,
+			});
+
+			nonPurgeableCache.set('nonPurgeableKey', typedResponse);
+
+			// Now try to add another item with the same cache instance
+			// The non-purgeable item can't be evicted, so the new item won't fit
+			nonPurgeableCache.set('newKey', typedResponse);
+
+			// The non-purgeable entry should still exist
+			expect(nonPurgeableCache.get('nonPurgeableKey')).toEqual(typedResponse);
+
+			// The new entry should not be cached since it couldn't fit
+			expect(nonPurgeableCache.get('newKey')).toBeUndefined();
+
+			// Verify warning was logged about being unable to cache
+			expect(consoleWarnSpy).toHaveBeenCalledWith(expect.stringContaining('Unable to cache entry'));
+
+			consoleWarnSpy.mockRestore();
+		});
+
 		it('can pass in cache to set', async () => {
 			const key = 'key';
 			const cacheConfig = {
