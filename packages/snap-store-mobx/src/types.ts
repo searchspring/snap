@@ -8,14 +8,14 @@ import type {
 	SearchResponseModelResultBadges,
 } from '@searchspring/snapi-types';
 
-export type beaconSettings = {
+export type BeaconSettings = {
 	enabled: boolean;
 };
 
 // Abstract
 export type StoreConfig = {
 	id: string;
-	beacon?: beaconSettings;
+	beacon?: BeaconSettings;
 	[any: string]: unknown;
 };
 
