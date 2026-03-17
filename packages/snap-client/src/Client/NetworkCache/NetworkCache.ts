@@ -99,21 +99,7 @@ export class NetworkCache {
 					}
 
 					if (this.memoryCache[storageKey]) {
-						// compare the expiry time of the item with the current time
-						if (Date.now() >= this.memoryCache[storageKey].expires) {
-							// remove item
-							const newStored = {
-								...this.memoryCache,
-							};
-							delete newStored[storageKey];
-
-							if (!this.config.memoryOnly) {
-								// update storage
-								window.sessionStorage.setItem(CACHE_STORAGE_KEY, JSON.stringify(newStored));
-							}
-						} else {
-							return this.memoryCache[storageKey].value;
-						}
+						return this.memoryCache[storageKey].value;
 					}
 				}
 			} catch (err) {
@@ -125,7 +111,7 @@ export class NetworkCache {
 	private purgeExpired(): void {
 		Object.keys(this.memoryCache).forEach((cacheKey) => {
 			//clean up expired cache keys in memory
-			if (Date.now() > this.memoryCache[cacheKey].expires) {
+			if (Date.now() >= this.memoryCache[cacheKey].expires) {
 				delete this.memoryCache[cacheKey];
 			}
 		});
