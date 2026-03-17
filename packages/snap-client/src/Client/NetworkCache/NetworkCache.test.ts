@@ -204,6 +204,33 @@ describe('Network Cache', () => {
 			expect(localData['thisRemains'].value).toEqual(typedResponse);
 		});
 
+		it('skips caching when entry alone exceeds maxSize', async () => {
+			const consoleWarnSpy = jest.spyOn(console, 'warn').mockImplementation();
+
+			const cacheConfig = {
+				ttl: 10000,
+				enabled: true,
+				maxSize: 0.001, // very small maxSize (1 byte)
+				purgeable: true,
+			};
+
+			const cache = new NetworkCache(cacheConfig);
+
+			// Try to cache an object that exceeds maxSize
+			cache.set('oversizedKey', typedResponse);
+
+			// The entry should not be cached
+			expect(cache.get('oversizedKey')).toBeUndefined();
+
+			// @ts-ignore
+			expect(cache.memoryCache['oversizedKey']).toBeUndefined();
+
+			// Verify warning was logged
+			expect(consoleWarnSpy).toHaveBeenCalledWith(expect.stringContaining('exceeds maxSize'));
+
+			consoleWarnSpy.mockRestore();
+		});
+
 		it('can pass in cache to set', async () => {
 			const key = 'key';
 			const cacheConfig = {
