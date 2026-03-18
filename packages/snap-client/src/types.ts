@@ -39,6 +39,7 @@ export type DefaultCacheConfig = {
 	enabled: boolean;
 	ttl: number;
 	maxSize: number;
+	type: 'memory' | 'sessionStorage';
 	purgeable: boolean;
 	entries?: { [key: string]: Response };
 };
