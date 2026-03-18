@@ -379,10 +379,10 @@ describe('Network Cache', () => {
 		});
 	});
 
-	describe('memoryOnly config setting', () => {
-		it('does not write to session storage when memoryOnly is true', async () => {
+	describe('type config setting', () => {
+		it('does not write to session storage when type is memory', async () => {
 			mockStorage = {};
-			const cache = new NetworkCache({ memoryOnly: true });
+			const cache = new NetworkCache({ type: 'memory' });
 
 			cache.set('memoryOnlyKey', typedResponse);
 
@@ -393,9 +393,9 @@ describe('Network Cache', () => {
 			expect(mockStorage[CACHE_STORAGE_KEY]).toBeUndefined();
 		});
 
-		it('does write to session storage when memoryOnly is false (default)', async () => {
+		it('does write to session storage when type is sessionStorage (default)', async () => {
 			mockStorage = {};
-			const cache = new NetworkCache({ memoryOnly: false });
+			const cache = new NetworkCache({ type: 'sessionStorage' });
 
 			cache.set('persistedKey', typedResponse);
 
@@ -408,7 +408,7 @@ describe('Network Cache', () => {
 			expect(stored['persistedKey']).toBeDefined();
 		});
 
-		it('does not load from session storage when memoryOnly is true', async () => {
+		it('does not load from session storage when type is memory', async () => {
 			// Pre-populate session storage
 			const storedCache = {
 				preExistingKey: {
@@ -419,13 +419,13 @@ describe('Network Cache', () => {
 			};
 			mockStorage[CACHE_STORAGE_KEY] = JSON.stringify(storedCache);
 
-			const cache = new NetworkCache({ memoryOnly: true });
+			const cache = new NetworkCache({ type: 'memory' });
 
-			// Should not find the pre-existing key since memoryOnly skips loading from storage
+			// Should not find the pre-existing key since memory type skips loading from storage
 			expect(cache.get('preExistingKey')).toBeUndefined();
 		});
 
-		it('does load from session storage when memoryOnly is false', async () => {
+		it('does load from session storage when type is sessionStorage', async () => {
 			// Pre-populate session storage
 			const storedCache = {
 				preExistingKey: {
@@ -436,15 +436,15 @@ describe('Network Cache', () => {
 			};
 			mockStorage[CACHE_STORAGE_KEY] = JSON.stringify(storedCache);
 
-			const cache = new NetworkCache({ memoryOnly: false });
+			const cache = new NetworkCache({ type: 'sessionStorage' });
 
 			// Should find the pre-existing key
 			expect(cache.get('preExistingKey')).toEqual(typedResponse);
 		});
 
-		it('does not update session storage on purgeExpired when memoryOnly is true', async () => {
+		it('does not update session storage on purgeExpired when type is memory', async () => {
 			mockStorage = {};
-			const cache = new NetworkCache({ memoryOnly: true, ttl: 0 });
+			const cache = new NetworkCache({ type: 'memory', ttl: 0 });
 
 			cache.set('expiredKey', typedResponse);
 
@@ -455,7 +455,7 @@ describe('Network Cache', () => {
 			expect(mockStorage[CACHE_STORAGE_KEY]).toBeUndefined();
 		});
 
-		it('does not clear session storage when memoryOnly is true', async () => {
+		it('does not clear session storage when type is memory', async () => {
 			// Pre-populate session storage
 			const storedCache = {
 				existingKey: {
@@ -466,7 +466,7 @@ describe('Network Cache', () => {
 			};
 			mockStorage[CACHE_STORAGE_KEY] = JSON.stringify(storedCache);
 
-			const cache = new NetworkCache({ memoryOnly: true });
+			const cache = new NetworkCache({ type: 'memory' });
 
 			// Add something to memory cache
 			cache.set('memoryKey', typedResponse);
@@ -482,9 +482,9 @@ describe('Network Cache', () => {
 			expect(mockStorage[CACHE_STORAGE_KEY]).toEqual(JSON.stringify(storedCache));
 		});
 
-		it('clears session storage when memoryOnly is false', async () => {
+		it('clears session storage when type is sessionStorage', async () => {
 			mockStorage = {};
-			const cache = new NetworkCache({ memoryOnly: false });
+			const cache = new NetworkCache({ type: 'sessionStorage' });
 
 			cache.set('keyToClear', typedResponse);
 
@@ -497,26 +497,26 @@ describe('Network Cache', () => {
 			expect(mockStorage[CACHE_STORAGE_KEY]).toEqual('');
 		});
 
-		it('memoryOnly cache is isolated per instance', async () => {
+		it('memory type cache is isolated per instance', async () => {
 			mockStorage = {};
 
-			const cache1 = new NetworkCache({ memoryOnly: true });
-			const cache2 = new NetworkCache({ memoryOnly: true });
+			const cache1 = new NetworkCache({ type: 'memory' });
+			const cache2 = new NetworkCache({ type: 'memory' });
 
 			cache1.set('cache1Key', typedResponse);
 
 			// cache1 should have its key
 			expect(cache1.get('cache1Key')).toEqual(typedResponse);
 
-			// cache2 should not have cache1's key since memoryOnly caches don't share via session storage
+			// cache2 should not have cache1's key since memory caches don't share via session storage
 			expect(cache2.get('cache1Key')).toBeUndefined();
 		});
 
-		it('pre-populated entries work with memoryOnly', async () => {
+		it('pre-populated entries work with memory type', async () => {
 			mockStorage = {};
 			const key = 'prePopulatedKey';
 			const cache = new NetworkCache({
-				memoryOnly: true,
+				type: 'memory',
 				entries: {
 					[key]: typedResponse,
 				},
@@ -527,6 +527,34 @@ describe('Network Cache', () => {
 
 			// Session storage should remain empty
 			expect(mockStorage[CACHE_STORAGE_KEY]).toBeUndefined();
+		});
+
+		it('evicts oldest entries when the memory cache is full', () => {
+			const cacheSizeKB = 10 * 1024; // 10MB in KB — reduce if test is too slow
+			const entryFraction = 10; // number of entries that fit in the cache
+			const entrySize = Math.floor((cacheSizeKB * 1024) / entryFraction);
+
+			const cache = new NetworkCache({
+				type: 'memory',
+				maxSize: cacheSizeKB,
+				purgeable: true,
+				ttl: 300000,
+			});
+
+			const largeResponse = 'x'.repeat(entrySize) as unknown as Response;
+
+			// Push entries into the cache until key1 is evicted
+			let i = 1;
+			cache.set('key1', largeResponse);
+			while (cache.get('key1') !== undefined && i < 1000) {
+				i++;
+				cache.set(`key${i}`, largeResponse);
+			}
+
+			// key1 should have been evicted once the cache became full
+			expect(cache.get('key1')).toBeUndefined();
+			// The most recently added entry should still be present
+			expect(cache.get(`key${i}`)).toEqual(largeResponse);
 		});
 	});
 });

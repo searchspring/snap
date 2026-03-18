@@ -6,7 +6,7 @@ const CACHE_STORAGE_KEY = 'ss-networkcache';
 
 const defaultConfig: DefaultCacheConfig = {
 	enabled: true,
-	memoryOnly: false,
+	type: 'sessionStorage',
 	ttl: 300000, // ms
 	maxSize: 1000, // KB
 	purgeable: true,
@@ -32,7 +32,7 @@ export class NetworkCache {
 
 	public load(): void {
 		// initialize cache from session storage
-		if (typeof window !== 'undefined' && window?.sessionStorage && !this.config.memoryOnly) {
+		if (typeof window !== 'undefined' && window?.sessionStorage && this.config.type === 'sessionStorage') {
 			const stored: any = window.sessionStorage.getItem(CACHE_STORAGE_KEY);
 			const newStored: Cache = {
 				...(stored && JSON.parse(stored)),
@@ -118,7 +118,7 @@ export class NetworkCache {
 
 		// update storage
 		try {
-			if (typeof window !== 'undefined' && window?.sessionStorage && !this.config.memoryOnly) {
+			if (typeof window !== 'undefined' && window?.sessionStorage && this.config.type === 'sessionStorage') {
 				const stringifiedCache = JSON.stringify(this.memoryCache);
 				window.sessionStorage.setItem(CACHE_STORAGE_KEY, stringifiedCache);
 			}
@@ -171,7 +171,7 @@ export class NetworkCache {
 				// store cache in memory
 				this.memoryCache[key] = cacheObject;
 
-				if (typeof window !== 'undefined' && window?.sessionStorage && !this.config.memoryOnly) {
+				if (typeof window !== 'undefined' && window?.sessionStorage && this.config.type === 'sessionStorage') {
 					window.sessionStorage.setItem(CACHE_STORAGE_KEY, JSON.stringify(this.memoryCache));
 				}
 			} catch (e) {
@@ -183,7 +183,7 @@ export class NetworkCache {
 	public clear() {
 		try {
 			this.memoryCache = {};
-			if (typeof window !== 'undefined' && window?.sessionStorage && !this.config.memoryOnly) {
+			if (typeof window !== 'undefined' && window?.sessionStorage && this.config.type === 'sessionStorage') {
 				window.sessionStorage.setItem(CACHE_STORAGE_KEY, '');
 			}
 		} catch (e) {
