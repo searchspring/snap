@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.76.0](https://github.com/searchspring/snap/compare/v0.75.0...v0.76.0) (2026-03-18)
+
+### Bug Fixes
+
+- **networkcache:** bugfix for network cache and the way it handles storing large objects ([4ca21a4](https://github.com/searchspring/snap/commit/4ca21a413312787810ad7f66f6819f6941ed3f16))
+
+### Features
+
+- **client:** network cache 'type' for memory vs. sessionStorage ([b4ff79a](https://github.com/searchspring/snap/commit/b4ff79afdb34f08cf773aaa0c4903d96bccf60ee))
+
 # [0.75.0](https://github.com/searchspring/snap/compare/v0.74.0...v0.75.0) (2026-03-11)
 
 **Note:** Version bump only for package @searchspring/snap-client
