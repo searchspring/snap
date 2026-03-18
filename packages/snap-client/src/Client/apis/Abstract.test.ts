@@ -1,6 +1,6 @@
 import 'whatwg-fetch';
 import { API, ApiConfiguration, ApiConfigurationParameters } from './Abstract';
-import { HTTPHeaders } from '../../types';
+import { CacheConfig, HTTPHeaders } from '../../types';
 
 describe('ApiConfiguration', () => {
 	it('has default configurations', () => {
@@ -56,6 +56,7 @@ describe('Abstract Api', () => {
 				ttl: 300000, // ms
 				maxSize: 1000, // KB
 				purgeable: true,
+				type: 'sessionStorage',
 			},
 			memoryCache: {},
 		});
@@ -88,11 +89,12 @@ describe('Abstract Api', () => {
 		customheader: 'customkey',
 	};
 
-	const CustomCacheConfig = {
+	const CustomCacheConfig: CacheConfig = {
 		ttl: 2222,
 		enabled: false,
 		maxSize: 4, // KB
 		purgeable: false,
+		type: 'sessionStorage',
 	};
 
 	// set up

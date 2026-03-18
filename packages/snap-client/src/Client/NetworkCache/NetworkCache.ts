@@ -6,6 +6,7 @@ const CACHE_STORAGE_KEY = 'ss-networkcache';
 
 const defaultConfig: DefaultCacheConfig = {
 	enabled: true,
+	type: 'sessionStorage',
 	ttl: 300000, // ms
 	maxSize: 1000, // KB
 	purgeable: true,
@@ -31,7 +32,7 @@ export class NetworkCache {
 
 	public load(): void {
 		// initialize cache from session storage
-		if (typeof window !== 'undefined' && window?.sessionStorage) {
+		if (typeof window !== 'undefined' && window?.sessionStorage && this.config.type === 'sessionStorage') {
 			const stored: any = window.sessionStorage.getItem(CACHE_STORAGE_KEY);
 			const newStored: Cache = {
 				...(stored && JSON.parse(stored)),
@@ -98,22 +99,11 @@ export class NetworkCache {
 					}
 
 					if (this.memoryCache[storageKey]) {
-						// compare the expiry time of the item with the current time
-						if (Date.now() >= this.memoryCache[storageKey].expires) {
-							// remove item
-							const newStored = {
-								...this.memoryCache,
-							};
-							delete newStored[storageKey];
-							// update storage
-							window.sessionStorage.setItem(CACHE_STORAGE_KEY, JSON.stringify(newStored));
-						} else {
-							return this.memoryCache[storageKey].value;
-						}
+						return this.memoryCache[storageKey].value;
 					}
 				}
 			} catch (err) {
-				console.warn('something went wrong getting from cache', err);
+				console.warn('something went wrong getting from cache: ', err);
 			}
 		}
 	}
@@ -121,19 +111,19 @@ export class NetworkCache {
 	private purgeExpired(): void {
 		Object.keys(this.memoryCache).forEach((cacheKey) => {
 			//clean up expired cache keys in memory
-			if (Date.now() > this.memoryCache[cacheKey].expires) {
+			if (Date.now() >= this.memoryCache[cacheKey].expires) {
 				delete this.memoryCache[cacheKey];
 			}
 		});
 
 		// update storage
 		try {
-			if (typeof window !== 'undefined' && window?.sessionStorage) {
+			if (typeof window !== 'undefined' && window?.sessionStorage && this.config.type === 'sessionStorage') {
 				const stringifiedCache = JSON.stringify(this.memoryCache);
 				window.sessionStorage.setItem(CACHE_STORAGE_KEY, stringifiedCache);
 			}
-		} catch {
-			console.warn('failed to store network cache');
+		} catch (e) {
+			console.warn('failed to store network cache: ', e);
 		}
 	}
 
@@ -148,9 +138,17 @@ export class NetworkCache {
 					purgeable: this.config.purgeable,
 				};
 
-				// purge old items if we are over max size
-				let size = new Blob([JSON.stringify(this.memoryCache)], { endings: 'native' }).size / 1024;
-				while (size > this.config.maxSize) {
+				const newObjectSize = new Blob([JSON.stringify({ [key]: cacheObject })], { endings: 'native' }).size / 1024;
+
+				// if the new object alone exceeds maxSize, don't cache it
+				if (newObjectSize > this.config.maxSize) {
+					console.warn(`Cache object size (${newObjectSize.toFixed(2)}KB) exceeds maxSize (${this.config.maxSize}KB), skipping cache`);
+					return;
+				}
+
+				// purge old items if adding the new object would exceed max size
+				let currentSize = new Blob([JSON.stringify(this.memoryCache)], { endings: 'native' }).size / 1024;
+				while (currentSize + newObjectSize > this.config.maxSize) {
 					const oldestKey = Object.keys(this.memoryCache)
 						.filter((key) => this.memoryCache[key].purgeable)
 						.sort((a, b) => {
@@ -161,17 +159,23 @@ export class NetworkCache {
 					delete this.memoryCache[oldestKey];
 
 					// recalculate size after removing oldest
-					size = new Blob([JSON.stringify(this.memoryCache)], { endings: 'native' }).size / 1024;
+					currentSize = new Blob([JSON.stringify(this.memoryCache)], { endings: 'native' }).size / 1024;
+				}
+
+				// if we still can't fit the new object after purging, skip caching
+				if (currentSize + newObjectSize > this.config.maxSize) {
+					console.warn(`Unable to cache entry for key "${key}" without exceeding maxSize (${this.config.maxSize}KB), skipping cache`);
+					return;
 				}
 
 				// store cache in memory
 				this.memoryCache[key] = cacheObject;
 
-				if (typeof window !== 'undefined' && window?.sessionStorage) {
+				if (typeof window !== 'undefined' && window?.sessionStorage && this.config.type === 'sessionStorage') {
 					window.sessionStorage.setItem(CACHE_STORAGE_KEY, JSON.stringify(this.memoryCache));
 				}
-			} catch {
-				console.warn('something went wrong setting to cache');
+			} catch (e) {
+				console.warn('something went wrong setting to cache: ', e);
 			}
 		}
 	}
@@ -179,11 +183,11 @@ export class NetworkCache {
 	public clear() {
 		try {
 			this.memoryCache = {};
-			if (typeof window !== 'undefined' && window?.sessionStorage) {
+			if (typeof window !== 'undefined' && window?.sessionStorage && this.config.type === 'sessionStorage') {
 				window.sessionStorage.setItem(CACHE_STORAGE_KEY, '');
 			}
-		} catch {
-			console.warn('something went wrong clearing cache');
+		} catch (e) {
+			console.warn('something went wrong clearing cache: ', e);
 		}
 	}
 }

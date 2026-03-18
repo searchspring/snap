@@ -27,7 +27,7 @@ export class Email extends Component<EmailProps> {
 					// DO NOT REMOVE OR EDIT IT
 					<div key={idx} id={`ss-emailrec${idx}`} className="ss-emailrec" style={{ display: 'block', width: '240px' }}>
 						{/* make your result changes here  */}
-						<Result result={result} theme={theme}></Result>
+						<Result result={result} theme={theme} controller={controller}></Result>
 					</div>
 				))}
 			</div>
