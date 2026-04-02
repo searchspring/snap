@@ -650,6 +650,80 @@ export class VariantSelection {
 			}
 		}
 
+		/**
+		 * SORT VALUES TO MAINTAIN CONSISTENT ORDERING
+		 *
+		 * Problem: When building selection values (e.g., sizes like XS, S, M, L, XL, XXL),
+		 * they get added in the order variants are encountered. If the first color in the
+		 * data only has sizes M, L, XL, XXL, those get added first.
+		 * When we later encounter a color with XS and S, those sizes
+		 * get appended to the END, resulting in incorrect order: M, L, XL, XXL, XS, S
+		 *
+		 * Solution: Find a "reference group" - the color that has the MOST complete set
+		 * of sizes - and use that group's ordering as the canonical sort order.
+		 *
+		 * Example with the hoodie product:
+		 *   - variant A has sizes: M, L, XL, XXL (4 sizes)
+		 *   - variant B has sizes: S, M, L, XL, XXL (5 sizes)
+		 *   - variant C has sizes: XS, S, M, L, XL, XXL (6 sizes) <-- most complete, use this!
+		 *
+		 * Result: Sizes will be sorted as XS, S, M, L, XL, XXL (Bay Leaf's order)
+		 */
+
+		// Step 1: Get all the "other" selection fields (fields that are NOT the current one)
+		// Example: If we're sorting "size" values, otherFields would be ["colour"]
+		const otherFields = variants.selections.filter((s) => s.field !== this.field).map((s) => s.field);
+
+		// Step 2: Group variants by their "other field" values
+		// This creates groups like: "red" -> [all red variants], "blue" -> [all blue variants]
+		const variantGroups: Map<string, Variant[]> = new Map();
+		for (const variant of variants.data) {
+			// Skip variants that don't have the current field (e.g., skip if variant has no size)
+			if (!variant.options[this.field]) continue;
+
+			// Create a group key from the other field values (e.g., "red" or "blue")
+			const groupKey = otherFields.map((f) => variant.options[f]?.value || '').join('|');
+
+			// Initialize the group array if it doesn't exist
+			if (!variantGroups.has(groupKey)) {
+				variantGroups.set(groupKey, []);
+			}
+
+			// Add this variant to its group
+			variantGroups.get(groupKey)!.push(variant);
+		}
+
+		// Step 3: Find the group with the most unique values for this field
+		// This is the "most complete" group - e.g., blue with 6 different sizes
+		let referenceGroup: Variant[] = [];
+		let maxUniqueValues = 0;
+		for (const group of variantGroups.values()) {
+			// Count how many unique values this group has for the current field
+			const uniqueValues = new Set(group.map((v) => v.options[this.field]?.value));
+
+			// If this group has more unique values, it becomes our new reference
+			if (uniqueValues.size > maxUniqueValues) {
+				maxUniqueValues = uniqueValues.size;
+				referenceGroup = group;
+			}
+		}
+
+		// Step 4: Sort newValues based on the order values appear in the reference group
+		// Values not found in reference group go to the end (Infinity)
+		newValues.sort((a, b) => {
+			const getValueIndex = (value: string): number => {
+				// Find the first variant in reference group that has this value
+				for (let i = 0; i < referenceGroup.length; i++) {
+					if (referenceGroup[i].options[this.field]?.value === value) {
+						return i;
+					}
+				}
+				// Value not found in reference group - put at end
+				return Infinity;
+			};
+			return getValueIndex(a.value) - getValueIndex(b.value);
+		});
+
 		this.values = newValues;
 	}
 
