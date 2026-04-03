@@ -697,9 +697,9 @@ export class VariantSelection {
 		// This is the "most complete" group - e.g., blue with 6 different sizes
 		let referenceGroup: Variant[] = [];
 		let maxUniqueValues = 0;
-		for (const group of variantGroups.values()) {
+		for (const group of Array.from(variantGroups.values())) {
 			// Count how many unique values this group has for the current field
-			const uniqueValues = new Set(group.map((v) => v.options[this.field]?.value));
+			const uniqueValues = new Set(group.map((v: Variant) => v.options[this.field]?.value));
 
 			// If this group has more unique values, it becomes our new reference
 			if (uniqueValues.size > maxUniqueValues) {
