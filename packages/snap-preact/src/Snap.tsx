@@ -385,6 +385,7 @@ export class Snap {
 			// client mode uses client config over snap config
 			if (this.config.client) {
 				this.config.client.config = this.config.client.config || {};
+				this.config.client.config.initiator = `snap/preact/${version}`;
 				this.config.client.config.mode = this.config.client.config.mode || this.mode;
 			}
 

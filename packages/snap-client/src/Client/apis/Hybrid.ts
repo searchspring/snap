@@ -30,6 +30,7 @@ export class HybridAPI extends API {
 				origin: this.configuration.origin,
 				cache: this.configuration.cache,
 				fetchApi: this.configuration.fetchApi,
+				initiator: this.configuration.initiator,
 			},
 			requesterConfigurations?.legacy || {}
 		);
