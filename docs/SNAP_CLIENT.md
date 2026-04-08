@@ -31,6 +31,7 @@ The second argument is an optional `ClientConfig` object.
 | Option | Type | Description |
 |--------|------|-------------|
 | mode | `string` \| `AppMode` enum <br>(e.g. `'development'`, `'production'`, `AppMode.development`, `AppMode.production`) | Optional. Sets the client mode. `'development'` disables network caching; |
+| initiator | `string` | Optional. Identifies the initiator of requests (e.g. for analytics/debugging). |
 | fetchApi | `WindowOrWorkerGlobalScope['fetch']` | Alternative fetch implementation to use for requests. Defaults to global `fetch`. |
 | meta | `RequesterConfig<MetaRequestModel>` | Configuration for the `meta` endpoint (origin, headers, cache, globals). |
 | search | `RequesterConfig<SearchRequestModel>` | Configuration for the `search` endpoint (origin, headers, cache, globals). |

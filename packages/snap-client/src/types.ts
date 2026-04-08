@@ -26,6 +26,7 @@ export type ClientConfig = {
 	finder?: RequesterConfig<SearchRequestModel>;
 	recommend?: RequesterConfig<RecommendRequestModel>;
 	suggest?: RequesterConfig<SuggestRequestModel>;
+	initiator?: string;
 };
 
 export type HybridRequesterConfig = {
