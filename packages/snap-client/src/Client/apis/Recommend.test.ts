@@ -1031,4 +1031,41 @@ describe('Recommend Api', () => {
 		expect(body).not.toHaveProperty('withRecInfo');
 		requestMock.mockReset();
 	});
+
+	it('batchRecommendations enables withRecInfo for whole batch if any request sets it to true', async () => {
+		const api = new RecommendAPI(new ApiConfiguration(apiConfig));
+
+		const requestMock = jest
+			.spyOn(global.window, 'fetch')
+			.mockImplementation(() =>
+				Promise.resolve({ status: 200, json: () => Promise.resolve([mockData.recommend(), mockData.recommend()]) } as Response)
+			);
+
+		// only one of the two batched requests sets withRecInfo
+		api.batchRecommendations({
+			tag: 'similar',
+			siteId: '8uyt2m',
+			batched: true,
+			withRecInfo: true,
+		});
+
+		api.batchRecommendations({
+			tag: 'crossSell',
+			siteId: '8uyt2m',
+			batched: true,
+		});
+
+		await wait(250);
+
+		const POSTParams = {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'text/plain',
+			},
+			body: `{"profiles":[{"tag":"similar"},{"tag":"crossSell"}],"siteId":"8uyt2m","withRecInfo":true,"${BEACON_PARAM}":true}`,
+		};
+
+		expect(requestMock).toHaveBeenCalledWith(RequestUrl, POSTParams);
+		requestMock.mockReset();
+	});
 });
