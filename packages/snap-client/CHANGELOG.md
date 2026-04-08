@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.76.1](https://github.com/searchspring/snap/compare/v0.76.0...v0.76.1) (2026-04-08)
+
+### Bug Fixes
+
+- **client/recommend:** adding support for rectype ([f8fe440](https://github.com/searchspring/snap/commit/f8fe440e6acf4a55e363febac956872cee780f7c))
+
 # [0.76.0](https://github.com/searchspring/snap/compare/v0.75.0...v0.76.0) (2026-03-18)
 
 ### Bug Fixes

@@ -140,6 +140,7 @@ export interface ApiConfigurationParameters {
 	maxRetry?: number;
 	cache?: CacheConfig;
 	globals?: GenericGlobals;
+	initiator?: string;
 }
 
 export class ApiConfiguration {
@@ -194,6 +195,10 @@ export class ApiConfiguration {
 
 	get mode(): AppMode {
 		return this.config.mode! as AppMode;
+	}
+
+	get initiator(): string {
+		return this.config.initiator || 'Snap';
 	}
 }
 

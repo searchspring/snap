@@ -6,7 +6,7 @@ type Magento2AddToCartConfig = {
 	formKey?: string;
 	uenc?: string;
 	redirect?: boolean | string;
-	idFieldName?: string; // display.mappings.core.id
+	idFieldName?: string; // display.mappings.core.uid
 };
 
 type LineItems = {
