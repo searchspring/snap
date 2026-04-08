@@ -26,6 +26,7 @@ export type ClientConfig = {
 	finder?: RequesterConfig<SearchRequestModel>;
 	recommend?: RequesterConfig<RecommendRequestModel>;
 	suggest?: RequesterConfig<SuggestRequestModel>;
+	initiator?: string;
 };
 
 export type HybridRequesterConfig = {
@@ -120,6 +121,7 @@ export type RecommendRequestGlobalsModel = {
 	blockedItems?: string[];
 	batchId?: number;
 	test?: boolean;
+	withRecInfo?: boolean;
 };
 
 export type RecommendRequestOptionsModel = {

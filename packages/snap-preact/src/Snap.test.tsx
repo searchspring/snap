@@ -5,7 +5,7 @@ import { cleanup, waitFor } from '@testing-library/preact';
 import { MockClient } from '@searchspring/snap-shared';
 import { Tracker, TrackerGlobals } from '@searchspring/snap-tracker';
 import { Logger } from '@searchspring/snap-logger';
-import { cookies } from '@searchspring/snap-toolbox';
+import { cookies, version } from '@searchspring/snap-toolbox';
 
 import type { SearchControllerConfig, AutocompleteControllerConfig } from '@searchspring/snap-controller';
 
@@ -85,6 +85,7 @@ describe('Snap Preact', () => {
 		// snap passes the app mode down to the client config
 		const extendedBaseConfig = { ...baseConfig };
 		extendedBaseConfig.client!.config = {
+			initiator: `snap/preact/${version}`,
 			mode: 'production',
 		};
 
@@ -137,6 +138,7 @@ describe('Snap Preact', () => {
 		// snap passes the app mode down to the client config
 		const extendedBaseConfig = { ...baseConfig };
 		extendedBaseConfig.client!.config = {
+			initiator: `snap/preact/${version}`,
 			mode: 'development',
 		};
 

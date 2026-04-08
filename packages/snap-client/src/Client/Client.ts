@@ -80,6 +80,7 @@ export class Client {
 					headers: this.config.autocomplete?.headers,
 					cache: this.config.autocomplete?.cache,
 					globals: this.config.autocomplete?.globals,
+					initiator: this.config.initiator,
 				}),
 				this.config.autocomplete?.requesters
 			),
@@ -91,6 +92,7 @@ export class Client {
 					headers: this.config.meta?.headers,
 					cache: this.config.meta?.cache,
 					globals: this.config.meta?.globals,
+					initiator: this.config.initiator,
 				})
 			),
 			recommend: new RecommendAPI(
@@ -101,6 +103,7 @@ export class Client {
 					headers: this.config.recommend?.headers,
 					cache: this.config.recommend?.cache,
 					globals: this.config.recommend?.globals,
+					initiator: this.config.initiator,
 				})
 			),
 			search: new HybridAPI(
@@ -111,6 +114,7 @@ export class Client {
 					headers: this.config.search?.headers,
 					cache: this.config.search?.cache,
 					globals: this.config.search?.globals,
+					initiator: this.config.initiator,
 				})
 			),
 			finder: new HybridAPI(
@@ -121,6 +125,7 @@ export class Client {
 					headers: this.config.finder?.headers,
 					cache: this.config.finder?.cache,
 					globals: this.config.finder?.globals,
+					initiator: this.config.initiator,
 				})
 			),
 			suggest: new SuggestAPI(
@@ -131,6 +136,7 @@ export class Client {
 					headers: this.config.suggest?.headers,
 					cache: this.config.suggest?.cache,
 					globals: this.config.suggest?.globals,
+					initiator: this.config.initiator,
 				})
 			),
 		};
