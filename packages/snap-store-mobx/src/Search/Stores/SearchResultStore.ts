@@ -708,20 +708,20 @@ export class VariantSelection {
 			}
 		}
 
-		// Step 4: Sort newValues based on the order values appear in the reference group
-		// Values not found in reference group go to the end (Infinity)
+		// Step 4: Precompute a value→index map from the reference group for O(1) lookups
+		const valueIndexMap = new Map<string, number>();
+		for (let i = 0; i < referenceGroup.length; i++) {
+			const val = referenceGroup[i].options[this.field]?.value;
+			if (val !== undefined && !valueIndexMap.has(val)) {
+				valueIndexMap.set(val, i);
+			}
+		}
+		const fallbackIndex = referenceGroup.length;
+
+		// Sort newValues based on the order values appear in the reference group
+		// Values not found in reference group go to the end
 		newValues.sort((a, b) => {
-			const getValueIndex = (value: string): number => {
-				// Find the first variant in reference group that has this value
-				for (let i = 0; i < referenceGroup.length; i++) {
-					if (referenceGroup[i].options[this.field]?.value === value) {
-						return i;
-					}
-				}
-				// Value not found in reference group - put at end
-				return Infinity;
-			};
-			return getValueIndex(a.value) - getValueIndex(b.value);
+			return (valueIndexMap.get(a.value) ?? fallbackIndex) - (valueIndexMap.get(b.value) ?? fallbackIndex);
 		});
 
 		this.values = newValues;
