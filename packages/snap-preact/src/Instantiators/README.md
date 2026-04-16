@@ -21,6 +21,7 @@ The `RecommendationInstantiator` class handles the targeting and creation of rec
 | `config.batched` | `boolean` | No | Enable batched recommendation requests. |
 | `config.limit` | `number` | No | Default limit for recommendation results. |
 | `config.variants` | `VariantConfig` | No | Configuration for variant handling. |
+| `config.beacon` | `BeaconSettings` | No | Configuration for beacon tracking. Set `{ enabled: false }` to disable tracking on all controllers created by the instantiator. Defaults to `{ enabled: true }`. |
 | `config.middleware` | `object` | No | Event middleware configuration. |
 | `config.plugins` | `PluginGrouping[]` | No | Plugin configurations. |
 | `selector` | `string` | No | Custom selector for targeting script elements. Defaults to `'script[type="searchspring/recommend"], script[type="searchspring/personalized-recommendations"]'`. |

@@ -919,6 +919,81 @@ describe('RecommendationInstantiator', () => {
 		});
 	});
 
+	it('passes beacon config to controllers created from legacy integration', async () => {
+		document.body.innerHTML = `<script type="searchspring/recommend" profile="${DEFAULT_PROFILE}"></script>`;
+
+		const client = new MockClient(baseConfig.client!.globals, {});
+
+		const beaconDisabledConfig: RecommendationInstantiatorConfig = {
+			...baseConfig,
+			config: {
+				...baseConfig.config,
+				beacon: {
+					enabled: false,
+				},
+			},
+		};
+
+		const recommendationInstantiator = new RecommendationInstantiator(beaconDisabledConfig, { client });
+		await wait();
+
+		expect(Object.keys(recommendationInstantiator.controller).length).toBe(1);
+		Object.keys(recommendationInstantiator.controller).forEach((controllerId) => {
+			const controller = recommendationInstantiator.controller[controllerId];
+			expect(controller.config.beacon).toStrictEqual({ enabled: false });
+		});
+	});
+
+	it('passes beacon config to controllers created from grouped block integration', async () => {
+		document.body.innerHTML = `
+			<div id="tout1"></div>
+			<script type="searchspring/recommendations">
+				profiles = [
+					{
+						tag: 'trending',
+						selector: '#tout1',
+					},
+				];
+			</script>
+		`;
+
+		const client = new MockClient(baseConfig.client!.globals, {});
+
+		const beaconDisabledConfig: RecommendationInstantiatorConfig = {
+			...baseConfig,
+			config: {
+				...baseConfig.config,
+				beacon: {
+					enabled: false,
+				},
+			},
+		};
+
+		const recommendationInstantiator = new RecommendationInstantiator(beaconDisabledConfig, { client });
+		await wait();
+
+		expect(Object.keys(recommendationInstantiator.controller).length).toBe(1);
+		Object.keys(recommendationInstantiator.controller).forEach((controllerId) => {
+			const controller = recommendationInstantiator.controller[controllerId];
+			expect(controller.config.beacon).toStrictEqual({ enabled: false });
+		});
+	});
+
+	it('has beacon enabled by default when not specified in config', async () => {
+		document.body.innerHTML = `<script type="searchspring/recommend" profile="${DEFAULT_PROFILE}"></script>`;
+
+		const client = new MockClient(baseConfig.client!.globals, {});
+
+		const recommendationInstantiator = new RecommendationInstantiator(baseConfig, { client });
+		await wait();
+
+		expect(Object.keys(recommendationInstantiator.controller).length).toBe(1);
+		Object.keys(recommendationInstantiator.controller).forEach((controllerId) => {
+			const controller = recommendationInstantiator.controller[controllerId];
+			expect(controller.config.beacon).toStrictEqual({ enabled: true });
+		});
+	});
+
 	it(`searchOnPageShow triggers search on persisted pageshow event `, async function () {
 		document.body.innerHTML = `<script type="searchspring/recommend" profile="${DEFAULT_PROFILE}"></script>`;
 
