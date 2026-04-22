@@ -236,28 +236,54 @@ describe('RecommendationInstantiator', () => {
 		});
 	});
 
-	it('creates a controller for each target it finds', async () => {
+	it('does not create duplicate controllers when multiple targets with the same config are processed concurrently', async () => {
 		document.body.innerHTML = `
-		<script type="searchspring/recommend" profile="trending"></script>
-		<script type="searchspring/recommend" profile="trending"></script>
-		<script type="searchspring/recommend" profile="trending"></script>
-		<script type="searchspring/recommend" profile="similar"></script>`;
-
-		const profileCount: {
-			[key: string]: number;
-		} = {};
+			<div class="ss__recs__trending1"></div>
+			<div class="ss__recs__trending2"></div>
+			<script type="searchspring/recommendations">
+				profiles = [
+					{
+						tag: '${DEFAULT_PROFILE}',
+						selector: '.ss__recs__trending1',
+					},
+					{
+						tag: '${DEFAULT_PROFILE}',
+						selector: '.ss__recs__trending2',
+					},
+				];
+			</script>
+		`;
 
 		const client = new MockClient(baseConfig.client!.globals, {});
 		const clientSpy = jest.spyOn(client, 'recommend');
 
 		const recommendationInstantiator = new RecommendationInstantiator(baseConfig, { client });
 		await wait();
-		expect(Object.keys(recommendationInstantiator.controller).length).toBe(4);
-		Object.keys(recommendationInstantiator.controller).forEach((controllerId) => {
-			const controller = recommendationInstantiator.controller[controllerId];
-			profileCount[controller.context.profile] = profileCount[controller.context.profile] + 1 || 0;
-			expect(controllerId).toBe(`recommend_${controller.context.profile}_${profileCount[controller.context.profile]}`);
-		});
+
+		// both targets share the same config (tag, globals, batched, etc.)
+		// so only one controller should be created and reused for both
+		expect(Object.keys(recommendationInstantiator.controller).length).toBe(1);
+
+		// the single controller should exist in the global namespace
+		expect(window.searchspring.controller[Object.keys(recommendationInstantiator.controller)[0]]).toBeDefined();
+	});
+
+	it('creates a controller for each unique target configuration it finds', async () => {
+		document.body.innerHTML = `
+		<script type="searchspring/recommend" profile="trending"></script>
+		<script type="searchspring/recommend" profile="trending"></script>
+		<script type="searchspring/recommend" profile="trending"></script>
+		<script type="searchspring/recommend" profile="similar"></script>`;
+
+		const client = new MockClient(baseConfig.client!.globals, {});
+		const clientSpy = jest.spyOn(client, 'recommend');
+
+		const recommendationInstantiator = new RecommendationInstantiator(baseConfig, { client });
+		await wait();
+		// duplicate trending targets with the same config reuse a single controller
+		expect(Object.keys(recommendationInstantiator.controller).length).toBe(2);
+		expect(recommendationInstantiator.controller['recommend_trending_0']).toBeDefined();
+		expect(recommendationInstantiator.controller['recommend_similar_0']).toBeDefined();
 		expect(clientSpy).toHaveBeenCalledTimes(4);
 	});
 
@@ -832,7 +858,8 @@ describe('RecommendationInstantiator', () => {
 	});
 
 	it('will utilize attachments (plugins / middleware) added via methods upon creation of controller', async () => {
-		document.body.innerHTML = `<script type="searchspring/recommend" profile="${DEFAULT_PROFILE}"></script>`;
+		// start with no targets so attachments can be registered before controller creation
+		document.body.innerHTML = '';
 
 		const plugin = jest.fn();
 		const plugin2 = jest.fn();
@@ -861,6 +888,10 @@ describe('RecommendationInstantiator', () => {
 				afterStore: middleware,
 			},
 		});
+
+		// add target and retarget so controller creation picks up registered attachments
+		document.body.innerHTML = `<script type="searchspring/recommend" profile="${DEFAULT_PROFILE}"></script>`;
+		recommendationInstantiator.targeter.retarget();
 		await wait();
 
 		Object.keys(recommendationInstantiator.controller).forEach((controllerId) => {

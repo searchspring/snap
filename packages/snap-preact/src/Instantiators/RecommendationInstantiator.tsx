@@ -12,6 +12,7 @@ import type { AbstractController, RecommendationController, Attachments, Context
 import type { BeaconSettings, VariantConfig } from '@searchspring/snap-store-mobx';
 import type { Middleware } from '@searchspring/snap-event-manager';
 import type { Target } from '@searchspring/snap-toolbox';
+import { createRecommendationController } from '../create';
 
 export type RecommendationInstantiatorConfig = {
 	mode?: keyof typeof AppMode | AppMode;
@@ -324,7 +325,6 @@ async function readyTheController(
 		})[0];
 	if (!controller) {
 		// no existing controller found of same configuration - creating a new controller
-		const createRecommendationController = (await import('../create/createRecommendationController')).default;
 		controller = createRecommendationController(
 			{
 				url: instance.config.url,
@@ -340,16 +340,17 @@ async function readyTheController(
 		instance.middleware.forEach((middleware) => controller.on(middleware.event, ...middleware.func));
 	}
 
+	// add controller to instantiator and global namespace
+	instance.controller[controller.config.id] = controller;
+	window.searchspring.controller = window.searchspring.controller || {};
+	window.searchspring.controller[controller.config.id] = controller;
+
 	// run a search on the controller if it is not currently
 	if (!controller.store.loading) {
 		await controller.search();
 	}
 
 	controller.addTargeter(instance.targeter);
-
-	instance.controller[controller.config.id] = controller;
-	window.searchspring.controller = window.searchspring.controller || {};
-	window.searchspring.controller[controller.config.id] = controller;
 
 	const profileVars = controller.store.profile.display.templateParameters;
 	const component = controller.store.profile.display.template?.component;
