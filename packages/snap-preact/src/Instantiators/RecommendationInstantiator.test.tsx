@@ -221,22 +221,21 @@ describe('RecommendationInstantiator', () => {
 		const recommendationInstantiator = new RecommendationInstantiator(baseConfig, { client });
 		await wait();
 		expect(Object.keys(recommendationInstantiator.controller).length).toBe(1);
-		Object.keys(recommendationInstantiator.controller).forEach((controllerId, index) => {
-			expect(controllerId).toBe(`recommend_${DEFAULT_PROFILE}_${index}`);
-		});
+		expect(recommendationInstantiator.controller['recommend_trending_0']).toBeDefined();
 		expect(clientSpy).toHaveBeenCalledTimes(1);
 
-		// reset document body to allow for retargeting
+		// reset document body - this disconnects the old script element, so old controller is cleaned up
+		// and a new controller is created for the new script element
 		document.body.innerHTML = `<script type="searchspring/recommend" profile="${DEFAULT_PROFILE}"></script>`;
 		recommendationInstantiator.targeter.retarget();
 		await wait();
 		expect(Object.keys(recommendationInstantiator.controller).length).toBe(1);
-		Object.keys(recommendationInstantiator.controller).forEach((controllerId, index) => {
-			expect(controllerId).toBe(`recommend_${DEFAULT_PROFILE}_${index}`);
-		});
+		// old controller was cleaned up because its target was disconnected; new one gets next profileCount
+		const controllerId = Object.keys(recommendationInstantiator.controller)[0];
+		expect(controllerId).toMatch(/^recommend_trending_/);
 	});
 
-	it('does not create duplicate controllers when multiple targets with the same config are processed concurrently', async () => {
+	it('creates a controller for each unique target element even with the same config', async () => {
 		document.body.innerHTML = `
 			<div class="ss__recs__trending1"></div>
 			<div class="ss__recs__trending2"></div>
@@ -260,15 +259,16 @@ describe('RecommendationInstantiator', () => {
 		const recommendationInstantiator = new RecommendationInstantiator(baseConfig, { client });
 		await wait();
 
-		// both targets share the same config (tag, globals, batched, etc.)
-		// so only one controller should be created and reused for both
-		expect(Object.keys(recommendationInstantiator.controller).length).toBe(1);
+		// each target element is unique, so each gets its own controller
+		expect(Object.keys(recommendationInstantiator.controller).length).toBe(2);
 
-		// the single controller should exist in the global namespace
-		expect(window.searchspring.controller[Object.keys(recommendationInstantiator.controller)[0]]).toBeDefined();
+		// both controllers should exist in the global namespace
+		Object.keys(recommendationInstantiator.controller).forEach((id) => {
+			expect(window.searchspring.controller[id]).toBeDefined();
+		});
 	});
 
-	it('creates a controller for each unique target configuration it finds', async () => {
+	it('creates a controller for each unique target element it finds', async () => {
 		document.body.innerHTML = `
 		<script type="searchspring/recommend" profile="trending"></script>
 		<script type="searchspring/recommend" profile="trending"></script>
@@ -280,9 +280,11 @@ describe('RecommendationInstantiator', () => {
 
 		const recommendationInstantiator = new RecommendationInstantiator(baseConfig, { client });
 		await wait();
-		// duplicate trending targets with the same config reuse a single controller
-		expect(Object.keys(recommendationInstantiator.controller).length).toBe(2);
+		// each legacy script tag injects a unique DOM element, so each gets its own controller
+		expect(Object.keys(recommendationInstantiator.controller).length).toBe(4);
 		expect(recommendationInstantiator.controller['recommend_trending_0']).toBeDefined();
+		expect(recommendationInstantiator.controller['recommend_trending_1']).toBeDefined();
+		expect(recommendationInstantiator.controller['recommend_trending_2']).toBeDefined();
 		expect(recommendationInstantiator.controller['recommend_similar_0']).toBeDefined();
 		expect(clientSpy).toHaveBeenCalledTimes(4);
 	});
@@ -988,6 +990,137 @@ describe('RecommendationInstantiator', () => {
 			await waitFor(() => {
 				expect(searchSpy).toHaveBeenCalled();
 			});
+		});
+	});
+
+	describe('cleanupStaleControllers', () => {
+		it('removes controllers whose targeted elements are no longer connected to the DOM', async () => {
+			document.body.innerHTML = `<script type="searchspring/recommend" profile="${DEFAULT_PROFILE}"></script>`;
+
+			const client = new MockClient(baseConfig.client!.globals, {});
+
+			const recommendationInstantiator = new RecommendationInstantiator(baseConfig, { client });
+			await wait();
+			expect(Object.keys(recommendationInstantiator.controller).length).toBe(1);
+			expect(window.searchspring.controller['recommend_trending_0']).toBeDefined();
+
+			// simulate SPA navigation removing all content from the DOM
+			document.body.innerHTML = '';
+
+			recommendationInstantiator.cleanupStaleControllers();
+
+			expect(Object.keys(recommendationInstantiator.controller).length).toBe(0);
+			expect(window.searchspring.controller['recommend_trending_0']).toBeUndefined();
+		});
+
+		it('keeps controllers whose targeted elements are still connected to the DOM', async () => {
+			document.body.innerHTML = `<script type="searchspring/recommend" profile="${DEFAULT_PROFILE}"></script>`;
+
+			const client = new MockClient(baseConfig.client!.globals, {});
+
+			const recommendationInstantiator = new RecommendationInstantiator(baseConfig, { client });
+			await wait();
+			expect(Object.keys(recommendationInstantiator.controller).length).toBe(1);
+
+			// elements are still in the DOM - cleanup should not remove anything
+			recommendationInstantiator.cleanupStaleControllers();
+
+			expect(Object.keys(recommendationInstantiator.controller).length).toBe(1);
+			expect(window.searchspring.controller['recommend_trending_0']).toBeDefined();
+		});
+
+		it('clears controller targeters when cleaning up', async () => {
+			document.body.innerHTML = `<script type="searchspring/recommend" profile="${DEFAULT_PROFILE}"></script>`;
+
+			const client = new MockClient(baseConfig.client!.globals, {});
+
+			const recommendationInstantiator = new RecommendationInstantiator(baseConfig, { client });
+			await wait();
+
+			const controller = recommendationInstantiator.controller['recommend_trending_0'];
+			expect(Object.keys(controller.targeters).length).toBeGreaterThan(0);
+
+			// simulate SPA navigation removing all content from the DOM
+			document.body.innerHTML = '';
+
+			recommendationInstantiator.cleanupStaleControllers();
+
+			expect(Object.keys(controller.targeters).length).toBe(0);
+		});
+	});
+
+	describe('profileCount', () => {
+		it('increments profileCount when DOM is replaced and retargeted', async () => {
+			document.body.innerHTML = `<script type="searchspring/recommend" profile="${DEFAULT_PROFILE}"></script>`;
+
+			const client = new MockClient(baseConfig.client!.globals, {});
+
+			const recommendationInstantiator = new RecommendationInstantiator(baseConfig, { client });
+			await wait();
+			expect(Object.keys(recommendationInstantiator.controller).length).toBe(1);
+			expect(recommendationInstantiator.controller['recommend_trending_0']).toBeDefined();
+
+			// reset DOM and retarget - old controller is cleaned up (disconnected element),
+			// new controller is created with incremented profileCount
+			document.body.innerHTML = `<script type="searchspring/recommend" profile="${DEFAULT_PROFILE}"></script>`;
+			recommendationInstantiator.targeter.retarget();
+			await wait();
+
+			// old controller cleaned up, new one created with next profileCount
+			expect(Object.keys(recommendationInstantiator.controller).length).toBe(1);
+			const controllerId = Object.keys(recommendationInstantiator.controller)[0];
+			expect(controllerId).toMatch(/^recommend_trending_/);
+		});
+	});
+
+	describe('SPA navigation (grouped block)', () => {
+		it('skips inner DomTargeter callback when source script element is disconnected', async () => {
+			document.body.innerHTML = `
+				<div class="ss__recs__trending"></div>
+				<script type="searchspring/recommendations">
+					globals = {
+						products: ["SKU-A"],
+					};
+					profiles = [
+						{
+							tag: '${DEFAULT_PROFILE}',
+							selector: '.ss__recs__trending',
+						},
+					];
+				</script>
+			`;
+
+			const client = new MockClient(baseConfig.client!.globals, {});
+			const clientSpy = jest.spyOn(client, 'recommend');
+
+			const recommendationInstantiator = new RecommendationInstantiator(baseConfig, { client });
+			await wait();
+			expect(Object.keys(recommendationInstantiator.controller).length).toBe(1);
+			expect(clientSpy).toHaveBeenCalledTimes(1);
+
+			// simulate SPA navigation: remove old content, add new with different SKU
+			document.body.innerHTML = `
+				<div class="ss__recs__trending"></div>
+				<script type="searchspring/recommendations">
+					globals = {
+						products: ["SKU-B"],
+					};
+					profiles = [
+						{
+							tag: '${DEFAULT_PROFILE}',
+							selector: '.ss__recs__trending',
+						},
+					];
+				</script>
+			`;
+
+			recommendationInstantiator.targeter.retarget();
+			await wait();
+
+			// new controller should be created with the new SKU
+			const controllerIds = Object.keys(recommendationInstantiator.controller);
+			const latestController = recommendationInstantiator.controller[controllerIds[controllerIds.length - 1]];
+			expect(latestController.config.globals?.products).toContain('SKU-B');
 		});
 	});
 });

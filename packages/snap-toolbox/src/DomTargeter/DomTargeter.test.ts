@@ -1043,4 +1043,73 @@ describe('DomTargeter', () => {
 
 		consoleSpy.mockRestore();
 	});
+
+	describe('getTargetedElems', () => {
+		it('returns targeted elements for non-inject targets', () => {
+			const dom = createDocument(`
+				<div id="content">
+					<div class="target-a"></div>
+					<div class="target-b"></div>
+				</div>
+			`);
+
+			const document = dom.window.document;
+
+			const targeter = new DomTargeter(
+				[{ selector: '.target-a' }, { selector: '.target-b' }],
+				() => {},
+				document
+			);
+
+			const elems = targeter.getTargetedElems();
+			expect(elems.length).toBe(2);
+			expect(elems[0].className).toBe('target-a');
+			expect(elems[1].className).toBe('target-b');
+		});
+
+		it('returns targeted elements for inject targets', () => {
+			const dom = createDocument(`
+				<div id="content">
+					<div class="original"></div>
+				</div>
+			`);
+
+			const document = dom.window.document;
+
+			const targeter = new DomTargeter(
+				[
+					{
+						selector: '.original',
+						inject: {
+							action: 'before',
+							element: () => {
+								const el = document.createElement('div');
+								el.className = 'injected';
+								return el;
+							},
+						},
+					},
+				],
+				() => {},
+				document
+			);
+
+			const elems = targeter.getTargetedElems();
+			expect(elems.length).toBe(1);
+			expect(elems[0].className).toBe('original');
+		});
+
+		it('returns empty array when no elements are found', () => {
+			const dom = createDocument(`<div id="content"></div>`);
+			const document = dom.window.document;
+
+			const targeter = new DomTargeter(
+				[{ selector: '.nonexistent' }],
+				() => {},
+				document
+			);
+
+			expect(targeter.getTargetedElems()).toEqual([]);
+		});
+	});
 });

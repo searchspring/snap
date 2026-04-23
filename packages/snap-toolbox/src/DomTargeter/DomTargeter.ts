@@ -84,6 +84,10 @@ export class DomTargeter {
 		return this.targets;
 	}
 
+	getTargetedElems(): Array<Element> {
+		return this.targetedElems;
+	}
+
 	retarget(): void {
 		const targetElemPairs = this.targets.flatMap((target) => {
 			// hide targets before found
@@ -120,6 +124,8 @@ export class DomTargeter {
 						});
 					}
 				} else {
+					this.targetedElems = this.targetedElems.concat(elem);
+
 					// empty target selector by default
 					target.emptyTarget = target.emptyTarget ?? true;
 					if (target.emptyTarget) while (elem.firstChild && elem.removeChild(elem.firstChild));
