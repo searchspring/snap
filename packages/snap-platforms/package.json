@@ -1,6 +1,6 @@
 {
 	"name": "@searchspring/snap-platforms",
-	"version": "0.76.1",
+	"version": "0.77.0",
 	"description": "Snap Platforms Library",
 	"author": "Searchspring",
 	"license": "MIT",
@@ -12,16 +12,16 @@
 		"build": "rm -rf ./dist && tsc && tsc -p tsconfig.cjs.json",
 		"build:docs": "echo 'no docs for snap-platforms'",
 		"dev": "tsc --watch",
-		"format": "prettier --write 'src/**/*.{js,jsx,ts,tsx}'",
+		"format": "prettier --write '{shopify,magento2,bigcommerce}/**/src/**/*.{js,jsx,ts,tsx}'",
 		"lint": "eslint './**/*.{js,jsx,ts,tsx}'",
 		"test": "jest",
 		"test:watch": "jest --watch"
 	},
 	"dependencies": {
-		"@searchspring/snap-toolbox": "0.76.1"
+		"@searchspring/snap-toolbox": "0.77.0"
 	},
 	"devDependencies": {
-		"@searchspring/snap-store-mobx": "0.76.1"
+		"@searchspring/snap-store-mobx": "0.77.0"
 	},
 	"sideEffects": false,
 	"files": [

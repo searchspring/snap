@@ -12,6 +12,7 @@ import type { AbstractController, RecommendationController, Attachments, Context
 import type { BeaconSettings, VariantConfig } from '@searchspring/snap-store-mobx';
 import type { Middleware } from '@searchspring/snap-event-manager';
 import type { Target } from '@searchspring/snap-toolbox';
+import { createRecommendationController } from '../create';
 
 export type RecommendationInstantiatorConfig = {
 	mode?: keyof typeof AppMode | AppMode;
@@ -63,7 +64,7 @@ type ProfileSpecificGlobals = {
 	shopper?: { id?: string };
 };
 
-type ExtendedRecommendaitonProfileTarget = Target & {
+type ExtendedRecommendationProfileTarget = Target & {
 	profile?: ProfileSpecificProfile;
 };
 
@@ -122,6 +123,7 @@ export class RecommendationInstantiator {
 
 		const profileCount: RecommendationProfileCounts = {};
 
+		// script block targeter for "grouped" and "legacy" blocks
 		this.targeter = new DomTargeter(
 			[
 				{
@@ -130,16 +132,7 @@ export class RecommendationInstantiator {
 					}, script[type="searchspring/recommend"][profile="email"]`,
 					autoRetarget: true,
 					clickRetarget: true,
-					inject: {
-						action: 'before',
-						element: (target: Target, origElement: Element) => {
-							const profile = origElement.getAttribute('profile') || '';
-
-							const recsContainer = document.createElement('div');
-							recsContainer.setAttribute('searchspring-recommend', profile);
-							return recsContainer;
-						},
-					},
+					emptyTarget: false,
 				},
 				{
 					selector: 'script[type="searchspring/recommendations"]',
@@ -148,7 +141,10 @@ export class RecommendationInstantiator {
 					emptyTarget: false,
 				},
 			],
-			async (target: Target, elem: Element | undefined, originalElem: Element | undefined) => {
+			async (target: Target, elem: Element | undefined, _originalElem?: Element, targeter?: DomTargeter) => {
+				this.targeter = this.targeter || targeter!;
+
+				const scriptElement = elem as HTMLScriptElement;
 				const elemContext = getContext(
 					[
 						'shopperId',
@@ -165,7 +161,7 @@ export class RecommendationInstantiator {
 						'profiles',
 						'globals',
 					],
-					(originalElem || elem) as HTMLScriptElement
+					scriptElement
 				);
 
 				if (elemContext.profiles && elemContext.profiles.length) {
@@ -183,44 +179,73 @@ export class RecommendationInstantiator {
 							cart: scriptContextGlobals?.cart && getArrayFunc(scriptContextGlobals.cart),
 							products: scriptContextGlobals?.products,
 							shopper: scriptContextGlobals?.shopper?.id,
-							batchId: Math.random(),
+							batchId: Math.floor(Math.random() * Number.MAX_SAFE_INTEGER),
 						}),
 					};
 
-					const targetsArr: ExtendedRecommendaitonProfileTarget[] = [];
-
-					// build out the targets array for each profile
+					// create a per-profile DomTargeter for each profile so each controller
+					// gets its own targeter tracking its specific element
 					scriptContextProfiles.forEach((profile) => {
 						if (profile.selector) {
-							const targetObj = {
+							const profileTarget: ExtendedRecommendationProfileTarget = {
 								selector: profile.selector,
 								autoRetarget: true,
-								clickRetarget: true,
 								profile,
 							};
 
-							targetsArr.push(targetObj);
+							// track the controller for this profile so multiple matched elements share it
+							let profileControllerPromise: Promise<RecommendationController | undefined> | undefined;
+
+							new DomTargeter(
+								[profileTarget],
+								async (
+									target: ExtendedRecommendationProfileTarget,
+									targetElem: Element | undefined,
+									_originalElem?: Element,
+									targeter?: DomTargeter
+								) => {
+									// skip retarget if the source script element was removed from the DOM (SPA navigation)
+									if (!scriptElement.isConnected) {
+										return;
+									}
+
+									if (target.profile?.profile || target.profile?.tag) {
+										const profileRequestGlobals: RecommendRequestModel = {
+											...requestGlobals,
+											profile: target.profile?.options,
+											tag: target.profile.tag! || target.profile.profile!, // have to support both tag and profile due to having profile at release, but will favor tag
+										};
+										const profileContext: ContextVariables = deepmerge(
+											this.context,
+											defined({ globals: scriptContextGlobals, profile: target.profile })
+										);
+										if (elemContext.custom) {
+											profileContext.custom = elemContext.custom;
+										}
+
+										if (!profileControllerPromise) {
+											// first element match — create the controller
+											profileControllerPromise = readyTheController(
+												this,
+												targetElem,
+												profileContext,
+												profileCount,
+												scriptElement,
+												profileRequestGlobals,
+												targeter!
+											);
+										} else {
+											// subsequent element matches — reuse the existing controller and just render
+											const controller = await profileControllerPromise;
+											if (controller && targetElem) {
+												renderController(this, controller, targetElem, scriptElement);
+											}
+										}
+									}
+								}
+							);
 						}
 					});
-
-					new DomTargeter(
-						targetsArr,
-						async (target: ExtendedRecommendaitonProfileTarget, elem: Element | undefined, originalElem: Element | undefined) => {
-							if (target.profile?.profile || target.profile?.tag) {
-								const profileRequestGlobals: RecommendRequestModel = {
-									...requestGlobals,
-									profile: target.profile?.options,
-									tag: target.profile.tag! || target.profile.profile!, // have to support both tag and profile due to having profile at release, but will favor tag
-								};
-								const profileContext: ContextVariables = deepmerge(this.context, defined({ globals: scriptContextGlobals, profile: target.profile }));
-								if (elemContext.custom) {
-									profileContext.custom = elemContext.custom;
-								}
-
-								readyTheController(this, elem, profileContext, profileCount, originalElem, profileRequestGlobals);
-							}
-						}
-					);
 				} else {
 					// using the "legacy" integration structure
 					const { profile, products, product, seed, filters, blockedItems, options, shopper, shopperId } = elemContext;
@@ -239,7 +264,26 @@ export class RecommendationInstantiator {
 						}),
 					};
 
-					readyTheController(this, elem, deepmerge(this.context, elemContext), profileCount, originalElem, profileRequestGlobals);
+					// inject a render container before the script element
+					const profileAttr = scriptElement.getAttribute('profile') || '';
+					const recsContainer = document.createElement('div');
+					recsContainer.setAttribute('searchspring-recommend', profileAttr);
+					scriptElement.before(recsContainer);
+
+					const legacyContext = deepmerge(this.context, elemContext);
+
+					// create a per-element DomTargeter for the injected div (mirrors grouped block pattern)
+					new DomTargeter(
+						[{ selector: `[searchspring-recommend="${profileAttr}"]`, name: `legacy_${profile}_${profileCount[profile || ''] || 0}` }],
+						async (_target: Target, targetElem: Element | undefined, _originalElem?: Element, targeter?: DomTargeter) => {
+							// skip retarget if the source script element was removed from the DOM (SPA navigation)
+							if (!scriptElement.isConnected) {
+								return;
+							}
+
+							readyTheController(this, targetElem, legacyContext, profileCount, scriptElement, profileRequestGlobals, targeter!);
+						}
+					);
 				}
 			}
 		);
@@ -256,22 +300,40 @@ export class RecommendationInstantiator {
 	public use(attachments: Attachments): void {
 		this.uses.push(attachments);
 	}
+
+	// cleanup to ensure we release controllers no longer rendering in the DOM (memory leak prevention for SPA's)
+	public cleanupStaleControllers(): void {
+		Object.keys(this.controller).forEach((id) => {
+			const controller = this.controller[id];
+			const targeters = Object.values(controller.targeters);
+
+			const hasConnectedTarget = targeters.some((targeter) => targeter.getTargetedElems().some((elem) => elem.isConnected));
+			if (!hasConnectedTarget) {
+				controller.targeters = {};
+				delete this.controller[id];
+				if (window.searchspring?.controller) {
+					delete window.searchspring.controller[id];
+				}
+			}
+		});
+	}
 }
 
 async function readyTheController(
 	instance: RecommendationInstantiator,
-	injectedElem: Element | undefined,
+	targetElem: Element | undefined,
 	context: ContextVariables,
 	profileCount: RecommendationProfileCounts,
-	elem: Element | undefined,
-	controllerGlobals: Partial<RecommendRequestModel>
-) {
+	scriptElem: Element | undefined,
+	controllerGlobals: Partial<RecommendRequestModel>,
+	targeter: DomTargeter
+): Promise<RecommendationController | undefined> {
 	const { profile, batchId, cart, tag } = controllerGlobals;
 	const batched = profile?.batched ?? controllerGlobals.batched ?? true;
 
 	if (!tag) {
 		// FEEDBACK: change message depending on script integration type (profile vs. legacy)
-		instance.logger.warn(`'tag' is missing from <script> tag, skipping this profile`, elem);
+		instance.logger.warn(`'tag' is missing from <script> tag, skipping this profile`, scriptElem);
 		return;
 	}
 
@@ -279,16 +341,13 @@ async function readyTheController(
 		instance.tracker.cookies.cart.set(cart);
 	}
 
-	profileCount[tag] = profileCount[tag] + 1 || 1;
-
 	const globals: Partial<RecommendRequestModel> = deepmerge.all([
 		instance.config.client?.globals || {},
 		instance.config.config?.globals || {},
 		controllerGlobals,
 	]);
 
-	const controllerConfig = {
-		id: `recommend_${tag}_${profileCount[tag] - 1}`,
+	const controllerConfigBase = {
 		tag,
 		batched: batched ?? true,
 		realtime: Boolean(context.options?.realtime ?? context.profile?.options?.realtime),
@@ -298,61 +357,46 @@ async function readyTheController(
 	};
 
 	if (profile?.branch) {
-		controllerConfig.branch = profile?.branch;
+		controllerConfigBase.branch = profile?.branch;
 	}
 
-	// try to find an existing controller by similar configuration
-	let controller = Object.keys(instance.controller)
-		.map((id) => instance.controller[id])
-		.filter((controller) => {
-			return (
-				JSON.stringify({
-					batched: controller.config.batched,
-					branch: controller.config.branch,
-					globals: controller.config.globals,
-					tag: controller.config.tag,
-					realtime: controller.config.realtime,
-				}) ==
-				JSON.stringify({
-					batched: controllerConfig.batched,
-					branch: controllerConfig.branch,
-					globals: controllerConfig.globals,
-					tag: controllerConfig.tag,
-					realtime: controllerConfig.realtime,
-				})
-			);
-		})[0];
-	if (!controller) {
-		// no existing controller found of same configuration - creating a new controller
-		const createRecommendationController = (await import('../create/createRecommendationController')).default;
-		controller = createRecommendationController(
-			{
-				url: instance.config.url,
-				controller: controllerConfig,
-				context,
-				mode: instance.config.mode,
-			},
-			{ client: instance.client, tracker: instance.tracker }
-		);
+	// clean up controllers whose rendered elements are no longer in the DOM (SPA navigation)
+	instance.cleanupStaleControllers();
 
-		instance.uses.forEach((attachements) => controller.use(attachements));
-		instance.plugins.forEach((plugin) => controller.plugin(plugin.func, ...plugin.args));
-		instance.middleware.forEach((middleware) => controller.on(middleware.event, ...middleware.func));
-	}
+	profileCount[tag] = profileCount[tag] + 1 || 1;
+	const controllerConfig = {
+		id: `recommend_${tag}_${profileCount[tag] - 1}`,
+		...controllerConfigBase,
+	};
+
+	const controller = createRecommendationController(
+		{
+			url: instance.config.url,
+			controller: controllerConfig,
+			context,
+			mode: instance.config.mode,
+		},
+		{ client: instance.client, tracker: instance.tracker }
+	);
+
+	instance.uses.forEach((attachements) => controller.use(attachements));
+	instance.plugins.forEach((plugin) => controller.plugin(plugin.func, ...plugin.args));
+	instance.middleware.forEach((middleware) => controller.on(middleware.event, ...middleware.func));
+
+	// add controller to instantiator and global namespace
+	instance.controller[controller.config.id] = controller;
+	window.searchspring.controller = window.searchspring.controller || {};
+	window.searchspring.controller[controller.config.id] = controller;
+
+	// register targeter on the controller for element tracking
+	controller.addTargeter(targeter);
 
 	// run a search on the controller if it is not currently
 	if (!controller.store.loading) {
 		await controller.search();
 	}
 
-	controller.addTargeter(instance.targeter);
-
-	instance.controller[controller.config.id] = controller;
-	window.searchspring.controller = window.searchspring.controller || {};
-	window.searchspring.controller[controller.config.id] = controller;
-
 	const profileVars = controller.store.profile.display.templateParameters;
-	const component = controller.store.profile.display.template?.component;
 
 	if (controller.store.error) {
 		//something went wrong
@@ -361,17 +405,33 @@ async function readyTheController(
 	}
 
 	if (!controller.store.profile.display.template) {
-		instance.logger.error(`profile '${tag}' found on the following element is missing a template!\n${elem?.outerHTML}`);
+		instance.logger.error(`profile '${tag}' found on the following element is missing a template!\n${scriptElem?.outerHTML}`);
 		return;
 	}
 
 	if (!profileVars) {
-		instance.logger.error(`profile '${tag}' found on the following element is missing templateParameters!\n${elem?.outerHTML}`);
+		instance.logger.error(`profile '${tag}' found on the following element is missing templateParameters!\n${scriptElem?.outerHTML}`);
 		return;
 	}
 
+	if (targetElem) {
+		await renderController(instance, controller, targetElem, scriptElem);
+	}
+
+	return controller;
+}
+
+async function renderController(
+	instance: RecommendationInstantiator,
+	controller: RecommendationController,
+	targetElem: Element,
+	scriptElem: Element | undefined
+) {
+	const tag = controller.config.tag;
+	const component = controller.store.profile.display.template?.component;
+
 	if (!component) {
-		instance.logger.error(`profile '${tag}' found on the following element is missing a component!\n${elem?.outerHTML}`);
+		instance.logger.error(`profile '${tag}' found on the following element is missing a component!\n${scriptElem?.outerHTML}`);
 		return;
 	}
 
@@ -383,15 +443,14 @@ async function readyTheController(
 
 	if (!RecommendationsComponent) {
 		instance.logger.error(
-			`profile '${tag}' found on the following element is expecting component mapping for '${component}' - verify instantiator config.\n${elem?.outerHTML}`
+			`profile '${tag}' found on the following element is expecting component mapping for '${component}' - verify instantiator config.\n${scriptElem?.outerHTML}`
 		);
 		return;
 	}
 
 	setTimeout(() => {
-		if (injectedElem) {
-			render(<RecommendationsComponent controller={controller} />, injectedElem);
-		}
+		targetElem.setAttribute('ss-controller-id', controller.config.id);
+		render(<RecommendationsComponent controller={controller} />, targetElem);
 	});
 }
 

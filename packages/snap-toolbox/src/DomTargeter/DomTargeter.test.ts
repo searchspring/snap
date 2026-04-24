@@ -1043,4 +1043,178 @@ describe('DomTargeter', () => {
 
 		consoleSpy.mockRestore();
 	});
+
+	describe('getTargetedElems', () => {
+		it('returns targeted elements for non-inject targets', () => {
+			const dom = createDocument(`
+				<div id="content">
+					<div class="target-a"></div>
+					<div class="target-b"></div>
+				</div>
+			`);
+
+			const document = dom.window.document;
+
+			const targeter = new DomTargeter([{ selector: '.target-a' }, { selector: '.target-b' }], () => {}, document);
+
+			const elems = targeter.getTargetedElems();
+			expect(elems.length).toBe(2);
+			expect(elems[0].className).toBe('target-a');
+			expect(elems[1].className).toBe('target-b');
+		});
+
+		it('returns targeted elements for inject targets', () => {
+			const dom = createDocument(`
+				<div id="content">
+					<div class="original"></div>
+				</div>
+			`);
+
+			const document = dom.window.document;
+
+			const targeter = new DomTargeter(
+				[
+					{
+						selector: '.original',
+						inject: {
+							action: 'before',
+							element: () => {
+								const el = document.createElement('div');
+								el.className = 'injected';
+								return el;
+							},
+						},
+					},
+				],
+				() => {},
+				document
+			);
+
+			const elems = targeter.getTargetedElems();
+			expect(elems.length).toBe(1);
+			expect(elems[0].className).toBe('original');
+		});
+
+		it('returns empty array when no elements are found', () => {
+			const dom = createDocument(`<div id="content"></div>`);
+			const document = dom.window.document;
+
+			const targeter = new DomTargeter([{ selector: '.nonexistent' }], () => {}, document);
+
+			expect(targeter.getTargetedElems()).toEqual([]);
+		});
+
+		it('prunes disconnected elements from targetedElems', () => {
+			const dom = createDocument(`
+				<div id="content">
+					<div class="target-a"></div>
+					<div class="target-b"></div>
+				</div>
+			`);
+
+			const document = dom.window.document;
+
+			const targeter = new DomTargeter([{ selector: '.target-a' }, { selector: '.target-b' }], () => {}, document);
+
+			expect(targeter.getTargetedElems().length).toBe(2);
+
+			// remove one element from the DOM
+			const elemA = document.querySelector('.target-a')!;
+			elemA.parentNode!.removeChild(elemA);
+
+			// disconnected element should be pruned
+			const elems = targeter.getTargetedElems();
+			expect(elems.length).toBe(1);
+			expect(elems[0].className).toBe('target-b');
+		});
+
+		it('prunes disconnected elements during retarget and allows re-targeting', () => {
+			const dom = createDocument(`
+				<div id="content">
+					<div class="target"></div>
+				</div>
+			`);
+
+			const document = dom.window.document;
+			const onTarget = jest.fn();
+
+			const targeter = new DomTargeter([{ selector: '.target' }], onTarget, document);
+
+			expect(onTarget).toHaveBeenCalledTimes(1);
+			expect(targeter.getTargetedElems().length).toBe(1);
+
+			// retarget should not call onTarget again for the same connected element
+			targeter.retarget();
+			expect(onTarget).toHaveBeenCalledTimes(1);
+
+			// remove the element and add a new one with the same selector
+			const oldElem = document.querySelector('.target')!;
+			oldElem.parentNode!.removeChild(oldElem);
+			const newElem = document.createElement('div');
+			newElem.className = 'target';
+			document.getElementById('content')!.appendChild(newElem);
+
+			// retarget should prune the disconnected element and target the new one
+			targeter.retarget();
+			expect(onTarget).toHaveBeenCalledTimes(2);
+			expect(targeter.getTargetedElems().length).toBe(1);
+			expect(targeter.getTargetedElems()[0]).toBe(newElem);
+		});
+	});
+
+	describe('onTarget targeter parameter', () => {
+		it('passes the DomTargeter instance as the fourth argument to onTarget', () => {
+			const dom = createDocument(`
+				<div id="content">
+					<div class="target"></div>
+				</div>
+			`);
+
+			const document = dom.window.document;
+			let receivedTargeter: DomTargeter | undefined;
+
+			const targeter = new DomTargeter(
+				[{ selector: '.target' }],
+				(_target, _elem, _originalElem, t) => {
+					receivedTargeter = t;
+				},
+				document
+			);
+
+			expect(receivedTargeter).toBe(targeter);
+		});
+
+		it('passes the DomTargeter instance for inject targets', () => {
+			const dom = createDocument(`
+				<div id="content">
+					<div class="target"></div>
+				</div>
+			`);
+
+			const document = dom.window.document;
+			let receivedTargeter: DomTargeter | undefined;
+
+			const targeter = new DomTargeter(
+				[
+					{
+						selector: '.target',
+						inject: {
+							action: 'append',
+							element: () => {
+								const el = document.createElement('div');
+								el.className = 'injected';
+								return el;
+							},
+						},
+					},
+				],
+				(_target, _elem, _originalElem, t) => {
+					receivedTargeter = t;
+				},
+				document
+			);
+
+			expect(receivedTargeter).toBe(targeter);
+		});
+	});
 });
