@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.77.0](https://github.com/searchspring/snap/compare/v0.76.1...v0.77.0) (2026-04-24)
+
+### Bug Fixes
+
+- **preact/recommendationinstantiator:** supporting SPA behvior for targeting ([e9f0f48](https://github.com/searchspring/snap/commit/e9f0f48216a04ae7abbedb43e4f1a1b39465ad47))
+
+### Features
+
+- **toolbox/domtargeter:** adding new parameter to provide self reference ([71331a7](https://github.com/searchspring/snap/commit/71331a73eb23f93658d846bc8d921c0c620e113b))
+
 ## [0.76.1](https://github.com/searchspring/snap/compare/v0.76.0...v0.76.1) (2026-04-08)
 
 **Note:** Version bump only for package @searchspring/snap-toolbox
