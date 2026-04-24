@@ -64,7 +64,7 @@ type ProfileSpecificGlobals = {
 	shopper?: { id?: string };
 };
 
-type ExtendedRecommendaitonProfileTarget = Target & {
+type ExtendedRecommendationProfileTarget = Target & {
 	profile?: ProfileSpecificProfile;
 };
 
@@ -187,7 +187,7 @@ export class RecommendationInstantiator {
 					// gets its own targeter tracking its specific element
 					scriptContextProfiles.forEach((profile) => {
 						if (profile.selector) {
-							const profileTarget: ExtendedRecommendaitonProfileTarget = {
+							const profileTarget: ExtendedRecommendationProfileTarget = {
 								selector: profile.selector,
 								autoRetarget: true,
 								profile,
@@ -199,7 +199,7 @@ export class RecommendationInstantiator {
 							new DomTargeter(
 								[profileTarget],
 								async (
-									target: ExtendedRecommendaitonProfileTarget,
+									target: ExtendedRecommendationProfileTarget,
 									targetElem: Element | undefined,
 									_originalElem?: Element,
 									targeter?: DomTargeter
