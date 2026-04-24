@@ -457,14 +457,12 @@ describe('Recommend Api', () => {
 	it('batchRecommendations handles order prop as expected', async () => {
 		const api = new RecommendAPI(new ApiConfiguration(apiConfig));
 
-		const requestMock = jest
-			.spyOn(global.window, 'fetch')
-			.mockImplementation(() =>
-				Promise.resolve({
-					status: 200,
-					json: () => Promise.resolve([mockData.recommend(), mockData.recommend(), mockData.recommend(), mockData.recommend()]),
-				} as Response)
-			);
+		const requestMock = jest.spyOn(global.window, 'fetch').mockImplementation(() =>
+			Promise.resolve({
+				status: 200,
+				json: () => Promise.resolve([mockData.recommend(), mockData.recommend(), mockData.recommend(), mockData.recommend()]),
+			} as Response)
+		);
 
 		//shirt category
 		api.batchRecommendations({

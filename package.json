@@ -25,7 +25,8 @@
 		"format": "lerna exec --parallel --stream 'npm run format'",
 		"storybook:preact": "npm run storybook --workspace=@searchspring/snap-preact-components",
 		"publish": "lerna publish --exact --conventional-commits --no-git-reset --no-verify-access --force-publish --yes --create-release github",
-		"publish:canary": "lerna publish --exact --canary --pre-dist-tag alpha --conventional-commits --no-git-reset --no-verify-access --force-publish --yes"
+		"publish:canary": "lerna publish --exact --canary --pre-dist-tag alpha --conventional-commits --no-git-reset --no-verify-access --force-publish --yes",
+		"prepare": "husky"
 	},
 	"prettier": "@searchspring/prettier",
 	"devDependencies": {
