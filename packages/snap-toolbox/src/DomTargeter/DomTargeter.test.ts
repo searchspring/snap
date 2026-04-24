@@ -1055,11 +1055,7 @@ describe('DomTargeter', () => {
 
 			const document = dom.window.document;
 
-			const targeter = new DomTargeter(
-				[{ selector: '.target-a' }, { selector: '.target-b' }],
-				() => {},
-				document
-			);
+			const targeter = new DomTargeter([{ selector: '.target-a' }, { selector: '.target-b' }], () => {}, document);
 
 			const elems = targeter.getTargetedElems();
 			expect(elems.length).toBe(2);
@@ -1103,11 +1099,7 @@ describe('DomTargeter', () => {
 			const dom = createDocument(`<div id="content"></div>`);
 			const document = dom.window.document;
 
-			const targeter = new DomTargeter(
-				[{ selector: '.nonexistent' }],
-				() => {},
-				document
-			);
+			const targeter = new DomTargeter([{ selector: '.nonexistent' }], () => {}, document);
 
 			expect(targeter.getTargetedElems()).toEqual([]);
 		});
@@ -1122,11 +1114,7 @@ describe('DomTargeter', () => {
 
 			const document = dom.window.document;
 
-			const targeter = new DomTargeter(
-				[{ selector: '.target-a' }, { selector: '.target-b' }],
-				() => {},
-				document
-			);
+			const targeter = new DomTargeter([{ selector: '.target-a' }, { selector: '.target-b' }], () => {}, document);
 
 			expect(targeter.getTargetedElems().length).toBe(2);
 
@@ -1150,11 +1138,7 @@ describe('DomTargeter', () => {
 			const document = dom.window.document;
 			const onTarget = jest.fn();
 
-			const targeter = new DomTargeter(
-				[{ selector: '.target' }],
-				onTarget,
-				document
-			);
+			const targeter = new DomTargeter([{ selector: '.target' }], onTarget, document);
 
 			expect(onTarget).toHaveBeenCalledTimes(1);
 			expect(targeter.getTargetedElems().length).toBe(1);
