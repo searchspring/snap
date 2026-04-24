@@ -1123,4 +1123,88 @@ describe('RecommendationInstantiator', () => {
 			expect(latestController.config.globals?.products).toContain('SKU-B');
 		});
 	});
+
+	describe('shared controller for multiple matched elements (grouped block)', () => {
+		it('creates only one controller when a single profile selector matches multiple elements', async () => {
+			document.body.innerHTML = `
+				<div class="ss__recs__trending"></div>
+				<div class="ss__recs__trending"></div>
+				<div class="ss__recs__trending"></div>
+				<script type="searchspring/recommendations">
+					profiles = [
+						{
+							tag: '${DEFAULT_PROFILE}',
+							selector: '.ss__recs__trending',
+						},
+					];
+				</script>
+			`;
+
+			const client = new MockClient(baseConfig.client!.globals, {});
+			const clientSpy = jest.spyOn(client, 'recommend');
+
+			const recommendationInstantiator = new RecommendationInstantiator(baseConfig, { client });
+			await wait();
+
+			// only one controller should be created, not three
+			expect(Object.keys(recommendationInstantiator.controller).length).toBe(1);
+			expect(clientSpy).toHaveBeenCalledTimes(1);
+		});
+
+		it('renders into all matched elements with the shared controller', async () => {
+			document.body.innerHTML = `
+				<div class="ss__recs__trending"></div>
+				<div class="ss__recs__trending"></div>
+				<script type="searchspring/recommendations">
+					profiles = [
+						{
+							tag: '${DEFAULT_PROFILE}',
+							selector: '.ss__recs__trending',
+						},
+					];
+				</script>
+			`;
+
+			const client = new MockClient(baseConfig.client!.globals, {});
+
+			const recommendationInstantiator = new RecommendationInstantiator(baseConfig, { client });
+			await wait(100);
+
+			// both elements should have content rendered into them
+			const recsElements = document.querySelectorAll('.ss__recs__trending');
+			expect(recsElements.length).toBe(2);
+			recsElements.forEach((elem) => {
+				expect(elem.querySelector('.injectedComponent')).not.toBeNull();
+			});
+		});
+
+		it('creates separate controllers for different profile entries even if same tag', async () => {
+			document.body.innerHTML = `
+				<div class="ss__recs__trending1"></div>
+				<div class="ss__recs__trending2"></div>
+				<script type="searchspring/recommendations">
+					profiles = [
+						{
+							tag: '${DEFAULT_PROFILE}',
+							selector: '.ss__recs__trending1',
+						},
+						{
+							tag: '${DEFAULT_PROFILE}',
+							selector: '.ss__recs__trending2',
+						},
+					];
+				</script>
+			`;
+
+			const client = new MockClient(baseConfig.client!.globals, {});
+			const clientSpy = jest.spyOn(client, 'recommend');
+
+			const recommendationInstantiator = new RecommendationInstantiator(baseConfig, { client });
+			await wait();
+
+			// two separate profile entries = two controllers
+			expect(Object.keys(recommendationInstantiator.controller).length).toBe(2);
+			expect(clientSpy).toHaveBeenCalledTimes(2);
+		});
+	});
 });

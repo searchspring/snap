@@ -141,12 +141,11 @@ export class RecommendationInstantiator {
 					emptyTarget: false,
 				},
 			],
-			async (target: Target, elem: Element | undefined, originalElem: Element | undefined) => {
-				// defer so this.targeter is assigned before the callback body runs (needed to attach to controller)
-				await Promise.resolve();
+			async (target: Target, elem: Element | undefined, _originalElem?: Element, targeter?: DomTargeter) => {
+				this.targeter = this.targeter || targeter!;
 
-				const scriptElement = (originalElem || elem) as HTMLScriptElement;
-					const elemContext = getContext(
+				const scriptElement = elem as HTMLScriptElement;
+				const elemContext = getContext(
 					[
 						'shopperId',
 						'shopper',
@@ -194,12 +193,12 @@ export class RecommendationInstantiator {
 								profile,
 							};
 
-							const profileTargeter = new DomTargeter(
-								[profileTarget],
-								async (target: ExtendedRecommendaitonProfileTarget, elem: Element | undefined, originalElem: Element | undefined) => {
-									// defer to ensure profileTargeter is assigned (constructor fires onTarget synchronously)
-									await Promise.resolve();
+							// track the controller for this profile so multiple matched elements share it
+							let profileControllerPromise: Promise<RecommendationController | undefined> | undefined;
 
+							new DomTargeter(
+								[profileTarget],
+								async (target: ExtendedRecommendaitonProfileTarget, targetElem: Element | undefined, _originalElem?: Element, targeter?: DomTargeter) => {
 									// skip retarget if the source script element was removed from the DOM (SPA navigation)
 									if (!scriptElement.isConnected) {
 										return;
@@ -216,7 +215,16 @@ export class RecommendationInstantiator {
 											profileContext.custom = elemContext.custom;
 										}
 
-										readyTheController(this, elem, profileContext, profileCount, originalElem, profileRequestGlobals, profileTargeter);
+										if (!profileControllerPromise) {
+											// first element match — create the controller
+											profileControllerPromise = readyTheController(this, targetElem, profileContext, profileCount, scriptElement, profileRequestGlobals, targeter!);
+										} else {
+											// subsequent element matches — reuse the existing controller and just render
+											const controller = await profileControllerPromise;
+											if (controller && targetElem) {
+												renderController(this, controller, targetElem, scriptElement);
+											}
+										}
 									}
 								}
 							);
@@ -249,11 +257,15 @@ export class RecommendationInstantiator {
 					const legacyContext = deepmerge(this.context, elemContext);
 
 					// create a per-element DomTargeter for the injected div (mirrors grouped block pattern)
-					const legacyTargeter = new DomTargeter(
+					new DomTargeter(
 						[{ selector: `[searchspring-recommend="${profileAttr}"]`, name: `legacy_${profile}_${profileCount[profile || ''] || 0}` }],
-						async (_target: Target, targetElem: Element | undefined) => {
-							await Promise.resolve();
-							readyTheController(this, targetElem, legacyContext, profileCount, scriptElement, profileRequestGlobals, legacyTargeter);
+						async (_target: Target, targetElem: Element | undefined, _originalElem?: Element, targeter?: DomTargeter) => {
+							// skip retarget if the source script element was removed from the DOM (SPA navigation)
+							if (!scriptElement.isConnected) {
+								return;
+							}
+
+							readyTheController(this, targetElem, legacyContext, profileCount, scriptElement, profileRequestGlobals, targeter!);
 						}
 					);
 				}
@@ -279,11 +291,6 @@ export class RecommendationInstantiator {
 			const controller = this.controller[id];
 			const targeters = Object.values(controller.targeters);
 
-			// skip controllers that haven't registered their targeter yet (still initializing)
-			if (!targeters.length) {
-				return;
-			}
-
 			const hasConnectedTarget = targeters.some((targeter) =>
 				targeter.getTargetedElems().some((elem) => elem.isConnected)
 			);
@@ -300,19 +307,19 @@ export class RecommendationInstantiator {
 
 async function readyTheController(
 	instance: RecommendationInstantiator,
-	injectedElem: Element | undefined,
+	targetElem: Element | undefined,
 	context: ContextVariables,
 	profileCount: RecommendationProfileCounts,
-	elem: Element | undefined,
+	scriptElem: Element | undefined,
 	controllerGlobals: Partial<RecommendRequestModel>,
 	targeter: DomTargeter
-) {
+): Promise<RecommendationController | undefined> {
 	const { profile, batchId, cart, tag } = controllerGlobals;
 	const batched = profile?.batched ?? controllerGlobals.batched ?? true;
 
 	if (!tag) {
 		// FEEDBACK: change message depending on script integration type (profile vs. legacy)
-		instance.logger.warn(`'tag' is missing from <script> tag, skipping this profile`, elem);
+		instance.logger.warn(`'tag' is missing from <script> tag, skipping this profile`, scriptElem);
 		return;
 	}
 
@@ -376,7 +383,6 @@ async function readyTheController(
 	}
 
 	const profileVars = controller.store.profile.display.templateParameters;
-	const component = controller.store.profile.display.template?.component;
 
 	if (controller.store.error) {
 		//something went wrong
@@ -385,17 +391,33 @@ async function readyTheController(
 	}
 
 	if (!controller.store.profile.display.template) {
-		instance.logger.error(`profile '${tag}' found on the following element is missing a template!\n${elem?.outerHTML}`);
+		instance.logger.error(`profile '${tag}' found on the following element is missing a template!\n${scriptElem?.outerHTML}`);
 		return;
 	}
 
 	if (!profileVars) {
-		instance.logger.error(`profile '${tag}' found on the following element is missing templateParameters!\n${elem?.outerHTML}`);
+		instance.logger.error(`profile '${tag}' found on the following element is missing templateParameters!\n${scriptElem?.outerHTML}`);
 		return;
 	}
 
+	if (targetElem) {
+		await renderController(instance, controller, targetElem, scriptElem);
+	}
+
+	return controller;
+}
+
+async function renderController(
+	instance: RecommendationInstantiator,
+	controller: RecommendationController,
+	targetElem: Element,
+	scriptElem: Element | undefined
+) {
+	const tag = controller.config.tag;
+	const component = controller.store.profile.display.template?.component;
+
 	if (!component) {
-		instance.logger.error(`profile '${tag}' found on the following element is missing a component!\n${elem?.outerHTML}`);
+		instance.logger.error(`profile '${tag}' found on the following element is missing a component!\n${scriptElem?.outerHTML}`);
 		return;
 	}
 
@@ -407,15 +429,13 @@ async function readyTheController(
 
 	if (!RecommendationsComponent) {
 		instance.logger.error(
-			`profile '${tag}' found on the following element is expecting component mapping for '${component}' - verify instantiator config.\n${elem?.outerHTML}`
+			`profile '${tag}' found on the following element is expecting component mapping for '${component}' - verify instantiator config.\n${scriptElem?.outerHTML}`
 		);
 		return;
 	}
 
 	setTimeout(() => {
-		if (injectedElem) {
-			render(<RecommendationsComponent controller={controller} />, injectedElem);
-		}
+		render(<RecommendationsComponent controller={controller} />, targetElem);
 	});
 }
 
