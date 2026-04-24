@@ -34,6 +34,9 @@ Recommendations script blocks can be placed anywhere on the page and will automa
 
 In this example the `recently-viewed` profile `tag` is set to render inside the `.ss__recs__recently-viewed` element.
 
+> [!IMPORTANT]
+> Each profile entry creates a single controller and API request, regardless of how many DOM elements match its `selector`. If multiple elements match, they all render using the same shared controller and recommendation data. To render different recommendation data in different locations, use separate profile entries.
+
 ## Recommendation Context Variables
 Context variables are set within the script blocks and can be used to set either global or per profile (profile specific) functionality. Variables are used to alter the results displayed by our recommendations and may be required depending on the profile placements in use.
 
