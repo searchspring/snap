@@ -1175,6 +1175,7 @@ describe('RecommendationInstantiator', () => {
 			expect(recsElements.length).toBe(2);
 			recsElements.forEach((elem) => {
 				expect(elem.querySelector('.injectedComponent')).not.toBeNull();
+				expect(elem.getAttribute('ss-controller-id')).toMatch(/^recommend_trending_/);
 			});
 		});
 

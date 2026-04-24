@@ -435,6 +435,7 @@ async function renderController(
 	}
 
 	setTimeout(() => {
+		targetElem.setAttribute('ss-controller-id', controller.config.id);
 		render(<RecommendationsComponent controller={controller} />, targetElem);
 	});
 }
