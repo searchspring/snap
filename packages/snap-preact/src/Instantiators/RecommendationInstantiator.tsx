@@ -198,7 +198,12 @@ export class RecommendationInstantiator {
 
 							new DomTargeter(
 								[profileTarget],
-								async (target: ExtendedRecommendaitonProfileTarget, targetElem: Element | undefined, _originalElem?: Element, targeter?: DomTargeter) => {
+								async (
+									target: ExtendedRecommendaitonProfileTarget,
+									targetElem: Element | undefined,
+									_originalElem?: Element,
+									targeter?: DomTargeter
+								) => {
 									// skip retarget if the source script element was removed from the DOM (SPA navigation)
 									if (!scriptElement.isConnected) {
 										return;
@@ -210,14 +215,25 @@ export class RecommendationInstantiator {
 											profile: target.profile?.options,
 											tag: target.profile.tag! || target.profile.profile!, // have to support both tag and profile due to having profile at release, but will favor tag
 										};
-										const profileContext: ContextVariables = deepmerge(this.context, defined({ globals: scriptContextGlobals, profile: target.profile }));
+										const profileContext: ContextVariables = deepmerge(
+											this.context,
+											defined({ globals: scriptContextGlobals, profile: target.profile })
+										);
 										if (elemContext.custom) {
 											profileContext.custom = elemContext.custom;
 										}
 
 										if (!profileControllerPromise) {
 											// first element match — create the controller
-											profileControllerPromise = readyTheController(this, targetElem, profileContext, profileCount, scriptElement, profileRequestGlobals, targeter!);
+											profileControllerPromise = readyTheController(
+												this,
+												targetElem,
+												profileContext,
+												profileCount,
+												scriptElement,
+												profileRequestGlobals,
+												targeter!
+											);
 										} else {
 											// subsequent element matches — reuse the existing controller and just render
 											const controller = await profileControllerPromise;
@@ -291,9 +307,7 @@ export class RecommendationInstantiator {
 			const controller = this.controller[id];
 			const targeters = Object.values(controller.targeters);
 
-			const hasConnectedTarget = targeters.some((targeter) =>
-				targeter.getTargetedElems().some((elem) => elem.isConnected)
-			);
+			const hasConnectedTarget = targeters.some((targeter) => targeter.getTargetedElems().some((elem) => elem.isConnected));
 			if (!hasConnectedTarget) {
 				controller.targeters = {};
 				delete this.controller[id];

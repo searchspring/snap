@@ -12,7 +12,7 @@
 		"build": "rm -rf ./dist && tsc && tsc -p tsconfig.cjs.json",
 		"build:docs": "echo 'no docs for snap-platforms'",
 		"dev": "tsc --watch",
-		"format": "prettier --write 'src/**/*.{js,jsx,ts,tsx}'",
+		"format": "prettier --write '{shopify,magento2,bigcommerce}/**/src/**/*.{js,jsx,ts,tsx}'",
 		"lint": "eslint './**/*.{js,jsx,ts,tsx}'",
 		"test": "jest",
 		"test:watch": "jest --watch"
