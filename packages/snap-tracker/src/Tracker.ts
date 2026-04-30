@@ -132,13 +132,15 @@ export class Tracker extends Beacon {
 				elem = event && (event.target as HTMLElement);
 
 				while (Object.keys(attributes).length == 0 && elem !== null && levels <= MAX_PARENT_LEVELS) {
-					Object.values(elem.attributes).forEach((attr: Attr) => {
-						const attrName = attr.nodeName;
+					if (elem.attributes) {
+						Object.values(elem.attributes).forEach((attr: Attr) => {
+							const attrName = attr.nodeName;
 
-						if (attributeList.indexOf(attrName) != -1) {
-							attributes[attrName] = elem && elem.getAttribute(attrName);
-						}
-					});
+							if (attributeList.indexOf(attrName) != -1) {
+								attributes[attrName] = elem && elem.getAttribute(attrName);
+							}
+						});
+					}
 
 					elem = elem.parentElement;
 					levels++;
