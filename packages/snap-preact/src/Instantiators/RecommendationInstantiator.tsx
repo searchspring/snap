@@ -66,6 +66,7 @@ type ProfileSpecificGlobals = {
 
 type ExtendedRecommendationProfileTarget = Target & {
 	profile?: ProfileSpecificProfile;
+	order?: number;
 };
 
 const DEFAULT_BRANCH = 'production';
@@ -185,12 +186,13 @@ export class RecommendationInstantiator {
 
 					// create a per-profile DomTargeter for each profile so each controller
 					// gets its own targeter tracking its specific element
-					scriptContextProfiles.forEach((profile) => {
+					scriptContextProfiles.forEach((profile, index) => {
 						if (profile.selector) {
 							const profileTarget: ExtendedRecommendationProfileTarget = {
 								selector: profile.selector,
 								autoRetarget: true,
 								profile,
+								order: index,
 							};
 
 							// track the controller for this profile so multiple matched elements share it
@@ -212,7 +214,7 @@ export class RecommendationInstantiator {
 									if (target.profile?.profile || target.profile?.tag) {
 										const profileRequestGlobals: RecommendRequestModel = {
 											...requestGlobals,
-											profile: target.profile?.options,
+											profile: { ...target.profile?.options, order: target.order },
 											tag: target.profile.tag! || target.profile.profile!, // have to support both tag and profile due to having profile at release, but will favor tag
 										};
 										const profileContext: ContextVariables = deepmerge(

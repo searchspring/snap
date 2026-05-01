@@ -202,8 +202,8 @@ export class RecommendAPI extends API {
 function sortBatchEntries(a: BatchEntry, b: BatchEntry) {
 	const one = a.request as RecommendRequestModel;
 	const two = b.request as RecommendRequestModel;
-	const orderOne = one.order || one.profile?.order;
-	const orderTwo = two.order || two.profile?.order;
+	const orderOne = one.order ?? one.profile?.order;
+	const orderTwo = two.order ?? two.profile?.order;
 
 	// undefined order goes last
 	if (orderOne == undefined && orderTwo == undefined) {
