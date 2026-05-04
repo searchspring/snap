@@ -143,6 +143,8 @@ export class RecommendationInstantiator {
 				},
 			],
 			async (target: Target, elem: Element | undefined, _originalElem?: Element, targeter?: DomTargeter) => {
+				this.cleanupStaleControllers();
+
 				this.targeter = this.targeter || targeter!;
 
 				const scriptElement = elem as HTMLScriptElement;
@@ -206,8 +208,11 @@ export class RecommendationInstantiator {
 									_originalElem?: Element,
 									targeter?: DomTargeter
 								) => {
-									// skip retarget if the source script element was removed from the DOM (SPA navigation)
+									// skip retarget if the source script element was removed and release the current target
 									if (!scriptElement.isConnected) {
+										if (targetElem) {
+											targeter?.releaseTargets([targetElem]);
+										}
 										return;
 									}
 
@@ -278,8 +283,11 @@ export class RecommendationInstantiator {
 					new DomTargeter(
 						[{ selector: `[searchspring-recommend="${profileAttr}"]`, name: `legacy_${profile}_${profileCount[profile || ''] || 0}` }],
 						async (_target: Target, targetElem: Element | undefined, _originalElem?: Element, targeter?: DomTargeter) => {
-							// skip retarget if the source script element was removed from the DOM (SPA navigation)
+							// skip retarget if the source script element was removed and release the current target
 							if (!scriptElement.isConnected) {
+								if (targetElem) {
+									targeter?.releaseTargets([targetElem]);
+								}
 								return;
 							}
 
@@ -309,8 +317,11 @@ export class RecommendationInstantiator {
 			const controller = this.controller[id];
 			const targeters = Object.values(controller.targeters);
 
-			const hasConnectedTarget = targeters.some((targeter) => targeter.getTargetedElems().some((elem) => elem.isConnected));
+			const hasConnectedTarget = targeters.some((targeter) =>
+				targeter.getTargetedElems().some((elem) => elem.isConnected && elem.getAttribute('ss-controller-id'))
+			);
 			if (!hasConnectedTarget) {
+				Object.keys(controller.targeters).forEach((targeterId) => controller.targeters[targeterId].releaseTargets());
 				controller.targeters = {};
 				delete this.controller[id];
 				if (window.searchspring?.controller) {
@@ -362,8 +373,10 @@ async function readyTheController(
 		controllerConfigBase.branch = profile?.branch;
 	}
 
-	// clean up controllers whose rendered elements are no longer in the DOM (SPA navigation)
-	instance.cleanupStaleControllers();
+	// mark element immediately to prevent cleanupStaleControllers from releasing it before async work completes
+	if (targetElem) {
+		targetElem.setAttribute('ss-controller-id', '...');
+	}
 
 	profileCount[tag] = profileCount[tag] + 1 || 1;
 	const controllerConfig = {
@@ -429,6 +442,11 @@ async function renderController(
 	targetElem: Element,
 	scriptElem: Element | undefined
 ) {
+	// update the element with the real controller ID (replaces 'loading' placeholder)
+	if (targetElem) {
+		targetElem.setAttribute('ss-controller-id', controller.config.id);
+	}
+
 	const tag = controller.config.tag;
 	const component = controller.store.profile.display.template?.component;
 
@@ -451,7 +469,6 @@ async function renderController(
 	}
 
 	setTimeout(() => {
-		targetElem.setAttribute('ss-controller-id', controller.config.id);
 		render(<RecommendationsComponent controller={controller} />, targetElem);
 	});
 }

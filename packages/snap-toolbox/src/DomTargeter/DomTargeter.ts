@@ -89,6 +89,21 @@ export class DomTargeter {
 		return [...this.targetedElems];
 	}
 
+	releaseTargets(elems?: Element[]): void {
+		const toRelease = elems || this.targetedElems;
+		toRelease.forEach((elem) => {
+			const idx = globallyTargetedElems.indexOf(elem);
+			if (idx !== -1) {
+				globallyTargetedElems.splice(idx, 1);
+			}
+		});
+		if (elems) {
+			this.targetedElems = this.targetedElems.filter((elem) => !elems.includes(elem));
+		} else {
+			this.targetedElems = [];
+		}
+	}
+
 	retarget(): void {
 		// prune references to elements no longer in the DOM
 		globallyTargetedElems = globallyTargetedElems.filter((elem) => elem.isConnected);
@@ -116,9 +131,11 @@ export class DomTargeter {
 
 		for (const { target, elem } of targetElemPairs) {
 			try {
+				// track targeted elements
+				this.targetedElems = this.targetedElems.concat(elem);
+
 				if (target.inject) {
 					const injectedElem = this.inject(elem, target);
-					this.targetedElems = this.targetedElems.concat(elem);
 
 					// handle both sync and async onTarget functions
 					const result = this.onTarget(target, injectedElem, elem, this);
@@ -129,8 +146,6 @@ export class DomTargeter {
 						});
 					}
 				} else {
-					this.targetedElems = this.targetedElems.concat(elem);
-
 					// empty target selector by default
 					target.emptyTarget = target.emptyTarget ?? true;
 					if (target.emptyTarget) while (elem.firstChild && elem.removeChild(elem.firstChild));
