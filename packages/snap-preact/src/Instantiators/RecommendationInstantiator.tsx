@@ -132,13 +132,13 @@ export class RecommendationInstantiator {
 						this.config.selector || 'script[type="searchspring/recommend"], script[type="searchspring/personalized-recommendations"]'
 					}, script[type="searchspring/recommend"][profile="email"]`,
 					autoRetarget: true,
-					clickRetarget: true,
+					navigationRetarget: true,
 					emptyTarget: false,
 				},
 				{
 					selector: 'script[type="searchspring/recommendations"]',
 					autoRetarget: true,
-					clickRetarget: true,
+					navigationRetarget: true,
 					emptyTarget: false,
 				},
 			],

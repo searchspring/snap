@@ -180,8 +180,11 @@ Default: `false`
 }
 ```
 
-### `clickRetarget`
-Enables retargeting when a click event occurs. This is useful for single-page applications or dynamic content that appears after user interaction.
+### `clickRetarget` (deprecated)
+
+> **Deprecated**: Use `navigationRetarget` instead. `clickRetarget` uses click events as a rough proxy for navigation, which is unreliable (misses back/forward navigation, fires on irrelevant clicks). `navigationRetarget` uses the Navigation API for precise SPA navigation detection.
+
+Enables retargeting when a click event occurs.
 
 - When set to `true`: Listens for clicks on the document
 - When set to a selector string: Listens for clicks only on matching elements
@@ -199,6 +202,23 @@ Default: `false`
 {
 	selector: '#content',
 	clickRetarget: '.trigger-button'
+}
+```
+
+### `navigationRetarget`
+Enables retargeting when a SPA navigation occurs. Uses the [Navigation API](https://developer.mozilla.org/en-US/docs/Web/API/Navigation_API) (`navigatesuccess` event) when available in the browser. In browsers without Navigation API support, the `autoRetarget` polling behavior serves as the fallback.
+
+This is the recommended approach for single-page applications. When a SPA navigation completes, DomTargeter will restart its retargeting cycle to find new or replaced elements.
+
+Best used in combination with `autoRetarget: true` to ensure elements are found in all browsers.
+
+Default: `false`
+
+```js
+{
+	selector: '#dynamic-content',
+	navigationRetarget: true,
+	autoRetarget: true // fallback for browsers without Navigation API
 }
 ```
 
@@ -286,7 +306,8 @@ const targeter = new DomTargeter(
 				}
 			},
 			hideTarget: true,
-			clickRetarget: '.apply-filters'
+			autoRetarget: true,
+			navigationRetarget: true
 		}
 	],
 	(target, elem, originalElem) => {

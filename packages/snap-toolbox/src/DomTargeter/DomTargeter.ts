@@ -8,7 +8,14 @@ export type Target = {
 	hideTarget?: boolean;
 	autoRetarget?: boolean;
 	unsetTargetMinHeight?: boolean;
+	/** @deprecated Use `navigationRetarget` instead. Retargets on click events. */
 	clickRetarget?: boolean | string;
+	/**
+	 * Enables retargeting when a SPA navigation occurs.
+	 * Uses the Navigation API (`navigatesuccess` event) when available.
+	 * Falls back to `autoRetarget` polling behavior in browsers without Navigation API support.
+	 */
+	navigationRetarget?: boolean;
 	[any: string]: unknown;
 };
 
@@ -31,6 +38,9 @@ export class DomTargeter {
 
 		this.retarget();
 
+		// collect checkers that should be restarted on SPA navigation
+		const navigationCheckers: Array<() => void> = [];
+
 		this.targets.forEach((target) => {
 			let timeoutTime = 100;
 			const checker = () => {
@@ -46,6 +56,12 @@ export class DomTargeter {
 				}
 			};
 
+			// restart checker from the beginning (used by both clickRetarget and navigationRetarget)
+			const restartChecker = () => {
+				timeoutTime = 100;
+				checker();
+			};
+
 			// add click event to restart retargeting check
 			if (target.clickRetarget) {
 				let clickElems: (Element | Document)[] = [];
@@ -57,11 +73,13 @@ export class DomTargeter {
 				}
 
 				clickElems.map((elem) => {
-					elem.addEventListener('click', () => {
-						timeoutTime = 100;
-						checker();
-					});
+					elem.addEventListener('click', restartChecker);
 				});
+			}
+
+			// collect navigation checkers for targets that opt in
+			if (target.navigationRetarget) {
+				navigationCheckers.push(restartChecker);
 			}
 
 			if (target.autoRetarget) {
@@ -78,6 +96,16 @@ export class DomTargeter {
 				});
 			}
 		});
+
+		// register a single Navigation API listener if any target opted in
+		if (navigationCheckers.length > 0) {
+			const win = this.document.defaultView || (typeof window !== 'undefined' ? window : undefined);
+			if (win && (win as any).navigation) {
+				(win as any).navigation.addEventListener('navigatesuccess', () => {
+					navigationCheckers.forEach((restart) => restart());
+				});
+			}
+		}
 	}
 
 	getTargets(): Array<Target> {

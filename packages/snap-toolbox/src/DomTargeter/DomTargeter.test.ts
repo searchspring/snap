@@ -1383,4 +1383,289 @@ describe('DomTargeter', () => {
 			expect(receivedTargeter).toBe(targeter);
 		});
 	});
+
+	describe('navigationRetarget', () => {
+		it('retargets when navigatesuccess event fires on window.navigation', async () => {
+			const dom = createDocument(`
+				<div id="content"></div>
+			`);
+
+			const document = dom.window.document;
+			const onTarget = jest.fn();
+
+			// mock the Navigation API on the JSDOM window
+			const listeners: Record<string, Array<() => void>> = {};
+			(dom.window as any).navigation = {
+				addEventListener(event: string, handler: () => void) {
+					listeners[event] = listeners[event] || [];
+					listeners[event].push(handler);
+				},
+			};
+
+			new DomTargeter(
+				[
+					{
+						selector: '.target',
+						navigationRetarget: true,
+					},
+				],
+				onTarget,
+				document
+			);
+
+			// no elements yet
+			expect(onTarget).toHaveBeenCalledTimes(0);
+
+			// simulate SPA navigation: new element appears in the DOM
+			const newElem = document.createElement('div');
+			newElem.className = 'target';
+			document.getElementById('content')!.appendChild(newElem);
+
+			// fire navigatesuccess to trigger retarget cycle
+			listeners['navigatesuccess']?.forEach((fn) => fn());
+
+			await wait(200);
+
+			expect(onTarget).toHaveBeenCalledTimes(1);
+			expect(onTarget.mock.calls[0][1]).toBe(newElem);
+		});
+
+		it('retargets after SPA navigation replaces DOM elements', async () => {
+			const dom = createDocument(`
+				<div id="content">
+					<div class="target">old</div>
+				</div>
+			`);
+
+			const document = dom.window.document;
+			const onTarget = jest.fn();
+
+			const listeners: Record<string, Array<() => void>> = {};
+			(dom.window as any).navigation = {
+				addEventListener(event: string, handler: () => void) {
+					listeners[event] = listeners[event] || [];
+					listeners[event].push(handler);
+				},
+			};
+
+			const targeter = new DomTargeter(
+				[
+					{
+						selector: '.target',
+						navigationRetarget: true,
+					},
+				],
+				onTarget,
+				document
+			);
+
+			// initial element is targeted
+			expect(onTarget).toHaveBeenCalledTimes(1);
+			const oldElem = document.querySelector('.target')!;
+			expect(onTarget.mock.calls[0][1]).toBe(oldElem);
+
+			// simulate SPA navigation: old element removed, new one added
+			oldElem.parentNode!.removeChild(oldElem);
+			const newElem = document.createElement('div');
+			newElem.className = 'target';
+			document.getElementById('content')!.appendChild(newElem);
+
+			// fire navigatesuccess
+			listeners['navigatesuccess']?.forEach((fn) => fn());
+
+			await wait(200);
+
+			// new element should be targeted
+			expect(onTarget).toHaveBeenCalledTimes(2);
+			expect(onTarget.mock.calls[1][1]).toBe(newElem);
+			expect(targeter.getTargetedElems().length).toBe(1);
+			expect(targeter.getTargetedElems()[0]).toBe(newElem);
+		});
+
+		it('does not register listener when Navigation API is not available', () => {
+			const dom = createDocument(`
+				<div id="content">
+					<div class="target"></div>
+				</div>
+			`);
+
+			const document = dom.window.document;
+			const onTarget = jest.fn();
+
+			// ensure no navigation API is present (JSDOM default)
+			expect((dom.window as any).navigation).toBeUndefined();
+
+			new DomTargeter(
+				[
+					{
+						selector: '.target',
+						navigationRetarget: true,
+					},
+				],
+				onTarget,
+				document
+			);
+
+			// initial targeting still works via standard retarget
+			expect(onTarget).toHaveBeenCalledTimes(1);
+		});
+
+		it('does not register listener when navigationRetarget is not set', () => {
+			const dom = createDocument(`
+				<div id="content">
+					<div class="target"></div>
+				</div>
+			`);
+
+			const document = dom.window.document;
+			const onTarget = jest.fn();
+
+			const addEventListenerSpy = jest.fn();
+			(dom.window as any).navigation = {
+				addEventListener: addEventListenerSpy,
+			};
+
+			new DomTargeter(
+				[
+					{
+						selector: '.target',
+					},
+				],
+				onTarget,
+				document
+			);
+
+			expect(addEventListenerSpy).not.toHaveBeenCalled();
+			expect(onTarget).toHaveBeenCalledTimes(1);
+		});
+
+		it('registers only one listener for multiple targets with navigationRetarget', () => {
+			const dom = createDocument(`
+				<div id="content">
+					<div class="target-a"></div>
+					<div class="target-b"></div>
+				</div>
+			`);
+
+			const document = dom.window.document;
+			const addEventListenerSpy = jest.fn();
+			(dom.window as any).navigation = {
+				addEventListener: addEventListenerSpy,
+			};
+
+			new DomTargeter(
+				[
+					{ selector: '.target-a', navigationRetarget: true },
+					{ selector: '.target-b', navigationRetarget: true },
+				],
+				() => {},
+				document
+			);
+
+			// should register exactly one 'navigatesuccess' listener
+			expect(addEventListenerSpy).toHaveBeenCalledTimes(1);
+			expect(addEventListenerSpy).toHaveBeenCalledWith('navigatesuccess', expect.any(Function));
+		});
+
+		it('handles multiple navigations in sequence', async () => {
+			const dom = createDocument(`
+				<div id="content"></div>
+			`);
+
+			const document = dom.window.document;
+			const onTarget = jest.fn();
+
+			const listeners: Record<string, Array<() => void>> = {};
+			(dom.window as any).navigation = {
+				addEventListener(event: string, handler: () => void) {
+					listeners[event] = listeners[event] || [];
+					listeners[event].push(handler);
+				},
+			};
+
+			new DomTargeter(
+				[
+					{
+						selector: '.target',
+						navigationRetarget: true,
+					},
+				],
+				onTarget,
+				document
+			);
+
+			expect(onTarget).toHaveBeenCalledTimes(0);
+
+			// first navigation: add element
+			const elem1 = document.createElement('div');
+			elem1.className = 'target';
+			document.getElementById('content')!.appendChild(elem1);
+
+			listeners['navigatesuccess']?.forEach((fn) => fn());
+			await wait(200);
+
+			expect(onTarget).toHaveBeenCalledTimes(1);
+
+			// second navigation: remove old, add new
+			elem1.parentNode!.removeChild(elem1);
+			const elem2 = document.createElement('div');
+			elem2.className = 'target';
+			document.getElementById('content')!.appendChild(elem2);
+
+			listeners['navigatesuccess']?.forEach((fn) => fn());
+			await wait(200);
+
+			expect(onTarget).toHaveBeenCalledTimes(2);
+			expect(onTarget.mock.calls[1][1]).toBe(elem2);
+		});
+
+		it('works with inject targets on navigation', async () => {
+			const dom = createDocument(`
+				<div id="content"></div>
+			`);
+
+			const document = dom.window.document;
+			const onTarget = jest.fn();
+
+			const listeners: Record<string, Array<() => void>> = {};
+			(dom.window as any).navigation = {
+				addEventListener(event: string, handler: () => void) {
+					listeners[event] = listeners[event] || [];
+					listeners[event].push(handler);
+				},
+			};
+
+			new DomTargeter(
+				[
+					{
+						selector: '.target',
+						navigationRetarget: true,
+						inject: {
+							action: 'append',
+							element: () => {
+								const el = document.createElement('div');
+								el.className = 'injected';
+								return el;
+							},
+						},
+					},
+				],
+				onTarget,
+				document
+			);
+
+			expect(onTarget).toHaveBeenCalledTimes(0);
+
+			// simulate navigation: target element appears
+			const targetElem = document.createElement('div');
+			targetElem.className = 'target';
+			document.getElementById('content')!.appendChild(targetElem);
+
+			listeners['navigatesuccess']?.forEach((fn) => fn());
+			await wait(200);
+
+			expect(onTarget).toHaveBeenCalledTimes(1);
+			expect(document.querySelector('.injected')).not.toBeNull();
+		});
+	});
 });
