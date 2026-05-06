@@ -9,21 +9,32 @@ export type Target = {
 	autoRetarget?: boolean;
 	unsetTargetMinHeight?: boolean;
 	clickRetarget?: boolean | string;
+	navigationRetarget?: boolean;
 	[any: string]: unknown;
 };
 
 export type OnTarget = (target: Target, elem: Element, originalElem?: Element, targeter?: DomTargeter) => void | Promise<void>;
 
 let globallyTargetedElems: Array<Element> = [];
+
 export class DomTargeter {
 	private targets: Array<Target> = [];
 	private onTarget: OnTarget;
 	private document: Document;
 	private styleBlockRefs: Record<string, Node> = {};
 	private targetedElems: Array<Element> = [];
+	private abortController?: AbortController;
 
 	constructor(targets: Array<Target>, onTarget: OnTarget, document?: Document) {
 		this.document = document || window.document;
+
+		// use the document's own window AbortController to ensure realm compatibility (e.g., JSDOM)
+		// and gracefully handle environments where AbortController is not available (e.g., IE11)
+		try {
+			this.abortController = new ((this.document.defaultView || window) as any).AbortController();
+		} catch (e) {
+			// AbortController not available - listeners won't auto-cleanup on destroy()
+		}
 
 		this.targets = targets;
 
@@ -34,6 +45,9 @@ export class DomTargeter {
 		this.targets.forEach((target) => {
 			let timeoutTime = 100;
 			const checker = () => {
+				if (this.abortController?.signal.aborted) {
+					return;
+				}
 				// lets not just keep trying forever - this waits roughly 12 seconds before giving up.
 				if (timeoutTime < 2000) {
 					// increase the time till next check
@@ -57,11 +71,31 @@ export class DomTargeter {
 				}
 
 				clickElems.map((elem) => {
-					elem.addEventListener('click', () => {
-						timeoutTime = 100;
-						checker();
-					});
+					elem.addEventListener(
+						'click',
+						() => {
+							timeoutTime = 100;
+							setTimeout(checker); // allow the click to complete
+						},
+						{ capture: true, signal: this.abortController!.signal }
+					);
 				});
+			}
+
+			// listen for SPA navigations via the Navigation API to restart retargeting
+			if (target.navigationRetarget) {
+				try {
+					(this.document.defaultView as any)?.navigation?.addEventListener(
+						'navigate',
+						() => {
+							timeoutTime = 100;
+							checker();
+						},
+						{ signal: this.abortController!.signal }
+					);
+				} catch (e) {
+					// Navigation API not available
+				}
 			}
 
 			if (target.autoRetarget) {
@@ -72,10 +106,14 @@ export class DomTargeter {
 				target.hideTarget && this.unhideTarget(target.selector);
 			} else {
 				// attempt retarget on DOMContentLoaded
-				this.document.addEventListener('DOMContentLoaded', () => {
-					this.retarget();
-					target.hideTarget && this.unhideTarget(target.selector);
-				});
+				this.document.addEventListener(
+					'DOMContentLoaded',
+					() => {
+						this.retarget();
+						target.hideTarget && this.unhideTarget(target.selector);
+					},
+					{ signal: this.abortController!.signal }
+				);
 			}
 		});
 	}
@@ -89,7 +127,7 @@ export class DomTargeter {
 		return [...this.targetedElems];
 	}
 
-	releaseTargets(elems?: Element[]): void {
+	releaseTargets(elems?: ReadonlyArray<Element>): void {
 		const toRelease = elems || this.targetedElems;
 		toRelease.forEach((elem) => {
 			const idx = globallyTargetedElems.indexOf(elem);
@@ -102,6 +140,12 @@ export class DomTargeter {
 		} else {
 			this.targetedElems = [];
 		}
+	}
+
+	destroy(): void {
+		this.abortController?.abort();
+		this.releaseTargets();
+		Object.keys(this.styleBlockRefs).forEach((selector) => this.unhideTarget(selector));
 	}
 
 	retarget(): void {

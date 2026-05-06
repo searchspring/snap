@@ -1383,4 +1383,131 @@ describe('DomTargeter', () => {
 			expect(receivedTargeter).toBe(targeter);
 		});
 	});
+
+	describe('destroy', () => {
+		it('releases all tracked elements', () => {
+			const dom = createDocument(`
+				<div id="content">
+					<div class="target-a"></div>
+					<div class="target-b"></div>
+				</div>
+			`);
+
+			const document = dom.window.document;
+			const targeter = new DomTargeter([{ selector: '.target-a' }, { selector: '.target-b' }], () => {}, document);
+
+			expect(targeter.getTargetedElems().length).toBe(2);
+
+			targeter.destroy();
+			expect(targeter.getTargetedElems().length).toBe(0);
+		});
+
+		it('stops autoRetarget polling after destroy', async () => {
+			const dom = createDocument(`
+				<div id="content"></div>
+			`);
+
+			const document = dom.window.document;
+			const onTarget = jest.fn();
+
+			const targeter = new DomTargeter([{ selector: '.dynamic', autoRetarget: true }], onTarget, document);
+
+			expect(onTarget).toHaveBeenCalledTimes(0);
+
+			targeter.destroy();
+
+			// add the element after destroy
+			const elem = document.createElement('div');
+			elem.className = 'dynamic';
+			document.getElementById('content')!.appendChild(elem);
+
+			await wait(500);
+
+			// should not have been targeted because polling was stopped
+			expect(onTarget).toHaveBeenCalledTimes(0);
+		});
+
+		it('removes click listeners after destroy', async () => {
+			const dom = createDocument(`
+				<div id="content"></div>
+			`);
+
+			const document = dom.window.document;
+			const onTarget = jest.fn();
+
+			const targeter = new DomTargeter([{ selector: '.dynamic', clickRetarget: true }], onTarget, document);
+
+			targeter.destroy();
+
+			// add element and click
+			const elem = document.createElement('div');
+			elem.className = 'dynamic';
+			document.getElementById('content')!.appendChild(elem);
+			document.dispatchEvent(new dom.window.MouseEvent('click', { bubbles: true }));
+
+			await wait(300);
+
+			expect(onTarget).toHaveBeenCalledTimes(0);
+		});
+
+		it('stops autoRetarget and listeners after destroy', async () => {
+			const dom = createDocument(`
+				<div id="content"></div>
+			`);
+
+			const document = dom.window.document;
+			const onTarget = jest.fn();
+
+			const targeter = new DomTargeter([{ selector: '.dynamic', autoRetarget: true }], onTarget, document);
+
+			targeter.destroy();
+
+			// add element after destroy - listeners should be cleaned up
+			const elem = document.createElement('div');
+			elem.className = 'dynamic';
+			document.getElementById('content')!.appendChild(elem);
+
+			await wait(300);
+
+			expect(onTarget).toHaveBeenCalledTimes(0);
+		});
+
+		it('frees elements for other targeters after destroy', () => {
+			const dom = createDocument(`
+				<div id="content">
+					<div class="target"></div>
+				</div>
+			`);
+
+			const document = dom.window.document;
+
+			const targeterA = new DomTargeter([{ selector: '.target' }], () => {}, document);
+
+			const onTargetB = jest.fn();
+			new DomTargeter([{ selector: '.target' }], onTargetB, document);
+			expect(onTargetB).toHaveBeenCalledTimes(0);
+
+			targeterA.destroy();
+
+			const onTargetC = jest.fn();
+			new DomTargeter([{ selector: '.target' }], onTargetC, document);
+			expect(onTargetC).toHaveBeenCalledTimes(1);
+		});
+
+		it('is safe to call multiple times', () => {
+			const dom = createDocument(`
+				<div id="content">
+					<div class="target"></div>
+				</div>
+			`);
+
+			const document = dom.window.document;
+			const targeter = new DomTargeter([{ selector: '.target' }], () => {}, document);
+
+			expect(() => {
+				targeter.destroy();
+				targeter.destroy();
+			}).not.toThrow();
+		});
+	});
 });

@@ -133,12 +133,14 @@ export class RecommendationInstantiator {
 					}, script[type="searchspring/recommend"][profile="email"]`,
 					autoRetarget: true,
 					clickRetarget: true,
+					navigationRetarget: true,
 					emptyTarget: false,
 				},
 				{
 					selector: 'script[type="searchspring/recommendations"]',
 					autoRetarget: true,
 					clickRetarget: true,
+					navigationRetarget: true,
 					emptyTarget: false,
 				},
 			],
@@ -318,7 +320,10 @@ export class RecommendationInstantiator {
 			const targeters = Object.values(controller.targeters);
 
 			const hasConnectedTarget = targeters.some((targeter) =>
-				targeter.getTargetedElems().some((elem) => elem.isConnected && elem.getAttribute('ss-controller-id'))
+				targeter.getTargetedElems().some((elem) => {
+					const attr = elem.isConnected && elem.getAttribute('ss-controller-id');
+					return attr === id || attr === '...';
+				})
 			);
 			if (!hasConnectedTarget) {
 				Object.keys(controller.targeters).forEach((targeterId) => controller.targeters[targeterId].releaseTargets());
