@@ -77,7 +77,7 @@ export class DomTargeter {
 							timeoutTime = 100;
 							setTimeout(checker); // allow the click to complete
 						},
-						{ capture: true, signal: this.abortController!.signal }
+						{ capture: true, signal: this.abortController?.signal }
 					);
 				});
 			}
@@ -91,7 +91,7 @@ export class DomTargeter {
 							timeoutTime = 100;
 							checker();
 						},
-						{ signal: this.abortController!.signal }
+						{ signal: this.abortController?.signal }
 					);
 				} catch (e) {
 					// Navigation API not available
@@ -112,7 +112,7 @@ export class DomTargeter {
 						this.retarget();
 						target.hideTarget && this.unhideTarget(target.selector);
 					},
-					{ signal: this.abortController!.signal }
+					{ signal: this.abortController?.signal }
 				);
 			}
 		});
