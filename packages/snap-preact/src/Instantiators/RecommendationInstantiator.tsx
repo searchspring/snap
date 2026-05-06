@@ -322,11 +322,11 @@ export class RecommendationInstantiator {
 			const hasConnectedTarget = targeters.some((targeter) =>
 				targeter.getTargetedElems().some((elem) => {
 					const attr = elem.isConnected && elem.getAttribute('ss-controller-id');
-					return attr === id || attr === '...';
+					return attr === id;
 				})
 			);
 			if (!hasConnectedTarget) {
-				Object.keys(controller.targeters).forEach((targeterId) => controller.targeters[targeterId].releaseTargets());
+				Object.keys(controller.targeters).forEach((targeterId) => controller.targeters[targeterId].destroy());
 				controller.targeters = {};
 				delete this.controller[id];
 				if (window.searchspring?.controller) {
@@ -378,11 +378,6 @@ async function readyTheController(
 		controllerConfigBase.branch = profile?.branch;
 	}
 
-	// mark element immediately to prevent cleanupStaleControllers from releasing it before async work completes
-	if (targetElem) {
-		targetElem.setAttribute('ss-controller-id', '...');
-	}
-
 	profileCount[tag] = profileCount[tag] + 1 || 1;
 	const controllerConfig = {
 		id: `recommend_${tag}_${profileCount[tag] - 1}`,
@@ -398,6 +393,11 @@ async function readyTheController(
 		},
 		{ client: instance.client, tracker: instance.tracker }
 	);
+
+	// mark element with controller id so cleanupStaleControllers knows it's active
+	if (targetElem) {
+		targetElem.setAttribute('ss-controller-id', controller.id);
+	}
 
 	instance.uses.forEach((attachements) => controller.use(attachements));
 	instance.plugins.forEach((plugin) => controller.plugin(plugin.func, ...plugin.args));
@@ -447,9 +447,9 @@ async function renderController(
 	targetElem: Element,
 	scriptElem: Element | undefined
 ) {
-	// update the element with the real controller ID (replaces 'loading' placeholder)
+	// update the element with the controller id
 	if (targetElem) {
-		targetElem.setAttribute('ss-controller-id', controller.config.id);
+		targetElem.setAttribute('ss-controller-id', controller.id);
 	}
 
 	const tag = controller.config.tag;
