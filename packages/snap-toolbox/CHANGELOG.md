@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.78.0](https://github.com/searchspring/snap/compare/v0.77.0...v0.78.0) (2026-05-06)
+
+### Features
+
+- **toolbox/domtargeter:** adding a releaseTargets method to allow for retargeting in SPA ([3d3ab6a](https://github.com/searchspring/snap/commit/3d3ab6ac8a731cc8a834c8b3cb0f07dc0f0eff8a))
+- **toolbox/domtargeter:** adding navigationRetarget for SPA support ([1d2fc97](https://github.com/searchspring/snap/commit/1d2fc97abf1bdad8e2720bdea4e8da77540ab3eb))
+
 # [0.77.0](https://github.com/searchspring/snap/compare/v0.76.1...v0.77.0) (2026-04-24)
 
 ### Bug Fixes

@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.78.0](https://github.com/searchspring/snap/compare/v0.77.0...v0.78.0) (2026-05-06)
+
+### Bug Fixes
+
+- **tracker:** adding a guard for elements that may not have attributes ([bbb38b5](https://github.com/searchspring/snap/commit/bbb38b539c03a3513d54d9ae1ecdbbce9cd330a6))
+
 # [0.77.0](https://github.com/searchspring/snap/compare/v0.76.1...v0.77.0) (2026-04-24)
 
 **Note:** Version bump only for package @searchspring/snap-tracker
