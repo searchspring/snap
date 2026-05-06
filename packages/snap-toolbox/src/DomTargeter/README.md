@@ -202,6 +202,22 @@ Default: `false`
 }
 ```
 
+Note: Click listeners use the capture phase to ensure they fire even when frameworks call `stopPropagation()` on click events.
+
+### `navigationRetarget`
+When `true`, listens for SPA navigation events using the [Navigation API](https://developer.mozilla.org/en-US/docs/Web/API/Navigation_API) (`navigate` event). When a navigation occurs, the retargeting checker is restarted. This is useful for single-page applications that use `pushState` or `replaceState` for client-side routing.
+
+Falls back gracefully in browsers that do not support the Navigation API.
+
+Default: `false`
+
+```js
+{
+	selector: '#content',
+	navigationRetarget: true
+}
+```
+
 ### `unsetTargetMinHeight`
 When `true`, removes any `min-height` CSS property from the target element after successful targeting. This is useful for removing placeholder styles.
 
@@ -259,6 +275,31 @@ Returns the array of targets specified during construction.
 const targets = contentTarget.getTargets();
 ```
 
+### `getTargetedElems` method
+Returns a read-only array of elements currently tracked by this DomTargeter instance. Automatically prunes disconnected elements before returning.
+
+```js
+const elems = contentTarget.getTargetedElems();
+```
+
+### `releaseTargets` method
+Releases elements from both instance and global tracking, allowing them to be retargeted by other DomTargeter instances. Can release all tracked elements or a specific subset.
+
+```js
+// release all tracked elements
+contentTarget.releaseTargets();
+
+// release specific elements
+contentTarget.releaseTargets([elem1, elem2]);
+```
+
+### `destroy` method
+Fully cleans up the DomTargeter instance. Aborts all event listeners (click, navigation, DOMContentLoaded), releases all tracked elements, and removes any style blocks created by `hideTarget`.
+
+```js
+contentTarget.destroy();
+```
+
 ## Complete Example
 
 ```js
@@ -272,6 +313,8 @@ const targeter = new DomTargeter(
 			component: <SearchResults />,
 			hideTarget: true,
 			autoRetarget: true,
+			clickRetarget: true,
+			navigationRetarget: true,
 			unsetTargetMinHeight: true
 		},
 		{

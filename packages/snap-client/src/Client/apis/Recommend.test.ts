@@ -469,7 +469,7 @@ describe('Recommend Api', () => {
 			tag: 'similar',
 			categories: ['shirts'],
 			limit: 14,
-			order: 3,
+			order: 2,
 			batched: true,
 			...batchParams,
 		});
@@ -484,7 +484,7 @@ describe('Recommend Api', () => {
 		api.batchRecommendations({
 			tag: 'another',
 			limit: 10,
-			order: 2,
+			order: 1,
 			batched: true,
 			...batchParams,
 		});
@@ -493,7 +493,7 @@ describe('Recommend Api', () => {
 			tag: 'andanother',
 			categories: ['pants'],
 			limit: 10,
-			order: 1,
+			order: 0,
 			batched: true,
 			...batchParams,
 		});
@@ -525,7 +525,7 @@ describe('Recommend Api', () => {
 			tag: 'similar',
 			categories: ['shirts'],
 			limit: 10,
-			order: 2,
+			order: 1,
 			batched: true,
 			...batchParams,
 		});
@@ -534,7 +534,7 @@ describe('Recommend Api', () => {
 			tag: 'crosssell',
 			categories: ['dress'],
 			limit: 20,
-			order: 1,
+			order: 0,
 			batched: true,
 			...batchParams,
 		});
@@ -571,7 +571,7 @@ describe('Recommend Api', () => {
 		const promise1 = api.batchRecommendations({
 			tag: 'second',
 			profile: {
-				order: 2,
+				order: 1,
 				categories: ['shirts'],
 				limit: 10,
 			},
@@ -582,7 +582,7 @@ describe('Recommend Api', () => {
 		const promise2 = api.batchRecommendations({
 			tag: 'first',
 			profile: {
-				order: 1,
+				order: 0,
 				categories: ['dress'],
 				limit: 20,
 			},

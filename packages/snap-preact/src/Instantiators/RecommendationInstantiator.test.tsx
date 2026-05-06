@@ -776,6 +776,7 @@ describe('RecommendationInstantiator', () => {
 				categories: ['1234'],
 				limit: 1,
 				siteId: 'abc123',
+				order: 0,
 				filters: [
 					{
 						field: 'price',
@@ -803,6 +804,7 @@ describe('RecommendationInstantiator', () => {
 				limit: 2,
 				brands: ['65432'],
 				categories: ['5678'],
+				order: 1,
 				filters: [
 					{
 						field: 'color',
@@ -856,6 +858,9 @@ describe('RecommendationInstantiator', () => {
 			siteId: baseConfig.client?.globals.siteId,
 			branch: 'production',
 			batched: true,
+			profile: {
+				order: 0,
+			},
 		});
 	});
 
