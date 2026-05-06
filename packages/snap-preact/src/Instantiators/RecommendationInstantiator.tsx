@@ -66,6 +66,7 @@ type ProfileSpecificGlobals = {
 
 type ExtendedRecommendationProfileTarget = Target & {
 	profile?: ProfileSpecificProfile;
+	order?: number;
 };
 
 const DEFAULT_BRANCH = 'production';
@@ -132,16 +133,20 @@ export class RecommendationInstantiator {
 					}, script[type="searchspring/recommend"][profile="email"]`,
 					autoRetarget: true,
 					clickRetarget: true,
+					navigationRetarget: true,
 					emptyTarget: false,
 				},
 				{
 					selector: 'script[type="searchspring/recommendations"]',
 					autoRetarget: true,
 					clickRetarget: true,
+					navigationRetarget: true,
 					emptyTarget: false,
 				},
 			],
 			async (target: Target, elem: Element | undefined, _originalElem?: Element, targeter?: DomTargeter) => {
+				this.cleanupStaleControllers();
+
 				this.targeter = this.targeter || targeter!;
 
 				const scriptElement = elem as HTMLScriptElement;
@@ -185,12 +190,13 @@ export class RecommendationInstantiator {
 
 					// create a per-profile DomTargeter for each profile so each controller
 					// gets its own targeter tracking its specific element
-					scriptContextProfiles.forEach((profile) => {
+					scriptContextProfiles.forEach((profile, index) => {
 						if (profile.selector) {
 							const profileTarget: ExtendedRecommendationProfileTarget = {
 								selector: profile.selector,
 								autoRetarget: true,
 								profile,
+								order: index,
 							};
 
 							// track the controller for this profile so multiple matched elements share it
@@ -204,15 +210,18 @@ export class RecommendationInstantiator {
 									_originalElem?: Element,
 									targeter?: DomTargeter
 								) => {
-									// skip retarget if the source script element was removed from the DOM (SPA navigation)
+									// skip retarget if the source script element was removed and release the current target
 									if (!scriptElement.isConnected) {
+										if (targetElem) {
+											targeter?.releaseTargets([targetElem]);
+										}
 										return;
 									}
 
 									if (target.profile?.profile || target.profile?.tag) {
 										const profileRequestGlobals: RecommendRequestModel = {
 											...requestGlobals,
-											profile: target.profile?.options,
+											profile: { ...target.profile?.options, order: target.order },
 											tag: target.profile.tag! || target.profile.profile!, // have to support both tag and profile due to having profile at release, but will favor tag
 										};
 										const profileContext: ContextVariables = deepmerge(
@@ -276,8 +285,11 @@ export class RecommendationInstantiator {
 					new DomTargeter(
 						[{ selector: `[searchspring-recommend="${profileAttr}"]`, name: `legacy_${profile}_${profileCount[profile || ''] || 0}` }],
 						async (_target: Target, targetElem: Element | undefined, _originalElem?: Element, targeter?: DomTargeter) => {
-							// skip retarget if the source script element was removed from the DOM (SPA navigation)
+							// skip retarget if the source script element was removed and release the current target
 							if (!scriptElement.isConnected) {
+								if (targetElem) {
+									targeter?.releaseTargets([targetElem]);
+								}
 								return;
 							}
 
@@ -307,8 +319,14 @@ export class RecommendationInstantiator {
 			const controller = this.controller[id];
 			const targeters = Object.values(controller.targeters);
 
-			const hasConnectedTarget = targeters.some((targeter) => targeter.getTargetedElems().some((elem) => elem.isConnected));
+			const hasConnectedTarget = targeters.some((targeter) =>
+				targeter.getTargetedElems().some((elem) => {
+					const attr = elem.isConnected && elem.getAttribute('ss-controller-id');
+					return attr === id;
+				})
+			);
 			if (!hasConnectedTarget) {
+				Object.keys(controller.targeters).forEach((targeterId) => controller.targeters[targeterId].destroy());
 				controller.targeters = {};
 				delete this.controller[id];
 				if (window.searchspring?.controller) {
@@ -360,9 +378,6 @@ async function readyTheController(
 		controllerConfigBase.branch = profile?.branch;
 	}
 
-	// clean up controllers whose rendered elements are no longer in the DOM (SPA navigation)
-	instance.cleanupStaleControllers();
-
 	profileCount[tag] = profileCount[tag] + 1 || 1;
 	const controllerConfig = {
 		id: `recommend_${tag}_${profileCount[tag] - 1}`,
@@ -378,6 +393,11 @@ async function readyTheController(
 		},
 		{ client: instance.client, tracker: instance.tracker }
 	);
+
+	// mark element with controller id so cleanupStaleControllers knows it's active
+	if (targetElem) {
+		targetElem.setAttribute('ss-controller-id', controller.id);
+	}
 
 	instance.uses.forEach((attachements) => controller.use(attachements));
 	instance.plugins.forEach((plugin) => controller.plugin(plugin.func, ...plugin.args));
@@ -427,6 +447,11 @@ async function renderController(
 	targetElem: Element,
 	scriptElem: Element | undefined
 ) {
+	// update the element with the controller id
+	if (targetElem) {
+		targetElem.setAttribute('ss-controller-id', controller.id);
+	}
+
 	const tag = controller.config.tag;
 	const component = controller.store.profile.display.template?.component;
 
@@ -449,7 +474,6 @@ async function renderController(
 	}
 
 	setTimeout(() => {
-		targetElem.setAttribute('ss-controller-id', controller.config.id);
 		render(<RecommendationsComponent controller={controller} />, targetElem);
 	});
 }
