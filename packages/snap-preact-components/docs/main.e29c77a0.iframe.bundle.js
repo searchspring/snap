@@ -1,4 +1,4 @@
-/*! For license information please see main.fc9354c7.iframe.bundle.js.LICENSE.txt */
+/*! For license information please see main.e29c77a0.iframe.bundle.js.LICENSE.txt */
 (self.webpackChunk_searchspring_snap_preact_components = self.webpackChunk_searchspring_snap_preact_components || []).push([
 	[792],
 	{
@@ -28349,6 +28349,7 @@
 			__webpack_require__('../../node_modules/core-js/modules/es.date.to-string.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.object.keys.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.string.match.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.array.splice.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.array.flat-map.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.array.unscopables.flat-map.js');
 			function _toConsumableArray(r) {
@@ -28437,16 +28438,23 @@
 											(_this.styleBlockRefs[selector] = styleBlock);
 									}
 								}),
-								(this.document = document || window.document),
-								(this.targets = targets),
+								(this.document = document || window.document);
+							try {
+								this.abortController = new (this.document.defaultView || window).AbortController();
+							} catch (e) {}
+							(this.targets = targets),
 								(this.onTarget = onTarget),
 								this.retarget(),
 								this.targets.forEach(function (target) {
 									var timeoutTime = 100,
 										_checker = function checker() {
-											timeoutTime < 2e3
-												? ((timeoutTime += 200), _this.retarget(), setTimeout(_checker, timeoutTime))
-												: target.hideTarget && _this.unhideTarget(target.selector);
+											var _this$abortController;
+											(null !== (_this$abortController = _this.abortController) &&
+												void 0 !== _this$abortController &&
+												_this$abortController.signal.aborted) ||
+												(timeoutTime < 2e3
+													? ((timeoutTime += 200), _this.retarget(), setTimeout(_checker, timeoutTime))
+													: target.hideTarget && _this.unhideTarget(target.selector));
 										};
 									if (target.clickRetarget) {
 										var clickElems = [];
@@ -28454,18 +28462,59 @@
 											? clickElems.push(_this.document)
 											: (clickElems = Array.from(_this.document.querySelectorAll(target.clickRetarget))),
 											clickElems.map(function (elem) {
-												elem.addEventListener('click', function () {
-													(timeoutTime = 100), _checker();
-												});
+												var _this$abortController2;
+												elem.addEventListener(
+													'click',
+													function () {
+														(timeoutTime = 100), setTimeout(_checker);
+													},
+													{
+														capture: !0,
+														signal:
+															null === (_this$abortController2 = _this.abortController) || void 0 === _this$abortController2
+																? void 0
+																: _this$abortController2.signal,
+													}
+												);
 											});
 									}
-									target.autoRetarget
-										? _checker()
-										: /complete|interactive|loaded/.test(_this.document.readyState)
-										? target.hideTarget && _this.unhideTarget(target.selector)
-										: _this.document.addEventListener('DOMContentLoaded', function () {
+									if (target.navigationRetarget)
+										try {
+											var _this$document$defaul, _this$document$defaul2, _this$abortController3;
+											null === (_this$document$defaul = _this.document.defaultView) ||
+												void 0 === _this$document$defaul ||
+												null === (_this$document$defaul2 = _this$document$defaul.navigation) ||
+												void 0 === _this$document$defaul2 ||
+												_this$document$defaul2.addEventListener(
+													'navigate',
+													function () {
+														(timeoutTime = 100), _checker();
+													},
+													{
+														signal:
+															null === (_this$abortController3 = _this.abortController) || void 0 === _this$abortController3
+																? void 0
+																: _this$abortController3.signal,
+													}
+												);
+										} catch (e) {}
+									if (target.autoRetarget) _checker();
+									else if (/complete|interactive|loaded/.test(_this.document.readyState)) target.hideTarget && _this.unhideTarget(target.selector);
+									else {
+										var _this$abortController4;
+										_this.document.addEventListener(
+											'DOMContentLoaded',
+											function () {
 												_this.retarget(), target.hideTarget && _this.unhideTarget(target.selector);
-										  });
+											},
+											{
+												signal:
+													null === (_this$abortController4 = _this.abortController) || void 0 === _this$abortController4
+														? void 0
+														: _this$abortController4.signal,
+											}
+										);
+									}
 								});
 						},
 						[
@@ -28487,9 +28536,35 @@
 								},
 							},
 							{
+								key: 'releaseTargets',
+								value: function releaseTargets(elems) {
+									(elems || this.targetedElems).forEach(function (elem) {
+										var idx = globallyTargetedElems.indexOf(elem);
+										-1 !== idx && globallyTargetedElems.splice(idx, 1);
+									}),
+										(this.targetedElems = elems
+											? this.targetedElems.filter(function (elem) {
+													return !elems.includes(elem);
+											  })
+											: []);
+								},
+							},
+							{
+								key: 'destroy',
+								value: function destroy() {
+									var _this$abortController5,
+										_this2 = this;
+									null === (_this$abortController5 = this.abortController) || void 0 === _this$abortController5 || _this$abortController5.abort(),
+										this.releaseTargets(),
+										Object.keys(this.styleBlockRefs).forEach(function (selector) {
+											return _this2.unhideTarget(selector);
+										});
+								},
+							},
+							{
 								key: 'retarget',
 								value: function retarget() {
-									var _this2 = this;
+									var _this3 = this;
 									(globallyTargetedElems = globallyTargetedElems.filter(function (elem) {
 										return elem.isConnected;
 									})),
@@ -28499,18 +28574,18 @@
 									var _step,
 										targetElemPairs = this.targets.flatMap(function (target) {
 											var _target$inject;
-											target.hideTarget && _this2.hideTarget(target.selector);
-											var elems = _this2.domQuery(target.selector).filter(function (elem) {
+											target.hideTarget && _this3.hideTarget(target.selector);
+											var elems = _this3.domQuery(target.selector).filter(function (elem) {
 												if (
 													!globallyTargetedElems.find(function (e) {
 														return e == elem;
 													}) &&
-													!_this2.targetedElems.find(function (e) {
+													!_this3.targetedElems.find(function (e) {
 														return e == elem;
 													})
 												)
 													return !0;
-												target.hideTarget && _this2.unhideTarget(target.selector);
+												target.hideTarget && _this3.unhideTarget(target.selector);
 											});
 											return (
 												(null !== (_target$inject = target.inject) && void 0 !== _target$inject && _target$inject.element) ||
@@ -28572,10 +28647,9 @@
 												elem = _ref.elem;
 											try {
 												var _target$unsetTargetMi;
-												if (target.inject) {
-													var injectedElem = this.inject(elem, target);
-													this.targetedElems = this.targetedElems.concat(elem);
-													var result = this.onTarget(target, injectedElem, elem, this);
+												if (((this.targetedElems = this.targetedElems.concat(elem)), target.inject)) {
+													var injectedElem = this.inject(elem, target),
+														result = this.onTarget(target, injectedElem, elem, this);
 													result &&
 														'function' == typeof result.then &&
 														result.catch(function (error) {
@@ -28584,8 +28658,7 @@
 												} else {
 													var _target$emptyTarget;
 													if (
-														((this.targetedElems = this.targetedElems.concat(elem)),
-														(target.emptyTarget =
+														((target.emptyTarget =
 															null === (_target$emptyTarget = target.emptyTarget) || void 0 === _target$emptyTarget || _target$emptyTarget),
 														target.emptyTarget)
 													)
@@ -36737,12 +36810,24 @@
 					var _postRecommendations, _batchRecommendations, _getProfile;
 				})(API);
 			function sortBatchEntries(a, b) {
-				var _one$profile,
+				var _one$order,
+					_one$profile,
+					_two$order,
 					_two$profile,
 					one = a.request,
 					two = b.request,
-					orderOne = one.order || (null === (_one$profile = one.profile) || void 0 === _one$profile ? void 0 : _one$profile.order),
-					orderTwo = two.order || (null === (_two$profile = two.profile) || void 0 === _two$profile ? void 0 : _two$profile.order);
+					orderOne =
+						null !== (_one$order = one.order) && void 0 !== _one$order
+							? _one$order
+							: null === (_one$profile = one.profile) || void 0 === _one$profile
+							? void 0
+							: _one$profile.order,
+					orderTwo =
+						null !== (_two$order = two.order) && void 0 !== _two$order
+							? _two$order
+							: null === (_two$profile = two.profile) || void 0 === _two$profile
+							? void 0
+							: _two$profile.order;
 				return null == orderOne && null == orderTwo
 					? 0
 					: null == orderOne && null != orderTwo
@@ -37436,8 +37521,7 @@
 					);
 					var _recommend, _trending, _finder, _category, _search, _autocomplete, _meta;
 				})();
-			__webpack_require__('../../node_modules/core-js/modules/es.number.is-integer.js'),
-				__webpack_require__('../../node_modules/core-js/modules/es.array.splice.js');
+			__webpack_require__('../../node_modules/core-js/modules/es.number.is-integer.js');
 			function SearchQueryStore_defineProperties(e, r) {
 				for (var t = 0; t < r.length; t++) {
 					var o = r[t];
@@ -43636,7 +43720,7 @@
 							((function Tracker_classCallCheck(a, n) {
 								if (!(a instanceof n)) throw new TypeError('Cannot call a class as a function');
 							})(this, Tracker),
-							((config = cjs_default()(Tracker_defaultConfig, config || {})).initiator = 'searchspring/' + config.framework + '/0.77.0'),
+							((config = cjs_default()(Tracker_defaultConfig, config || {})).initiator = 'searchspring/' + config.framework + '/0.78.0'),
 							'object' != typeof globals || 'string' != typeof globals.siteId)
 						)
 							throw new Error('Invalid config passed to tracker. The "siteId" attribute must be provided.');
@@ -43818,7 +43902,7 @@
 						var currency = null === (_this$globals = _this.globals) || void 0 === _this$globals ? void 0 : _this$globals.currency;
 						currency && _this.setCurrency(currency),
 							(null !== (_window$searchspring = window.searchspring) && void 0 !== _window$searchspring && _window$searchspring.tracker) ||
-								((window.searchspring = window.searchspring || {}), (window.searchspring.tracker = _this), (window.searchspring.version = '0.77.0')),
+								((window.searchspring = window.searchspring || {}), (window.searchspring.tracker = _this), (window.searchspring.version = '0.78.0')),
 							setTimeout(function () {
 								_this.targeters.push(
 									new DomTargeter([{ selector: 'script[type^="searchspring/track/"]', emptyTarget: !1 }], function (target, elem) {
@@ -43969,10 +44053,11 @@
 											levels = 0,
 											elem = null;
 										for (elem = event && event.target; 0 == Object.keys(attributes).length && null !== elem && levels <= 3; )
-											Object.values(elem.attributes).forEach(function (attr) {
-												var attrName = attr.nodeName;
-												-1 != attributeList.indexOf(attrName) && (attributes[attrName] = elem && elem.getAttribute(attrName));
-											}),
+											elem.attributes &&
+												Object.values(elem.attributes).forEach(function (attr) {
+													var attrName = attr.nodeName;
+													-1 != attributeList.indexOf(attrName) && (attributes[attrName] = elem && elem.getAttribute(attrName));
+												}),
 												(elem = elem.parentElement),
 												levels++;
 										return attributes;
