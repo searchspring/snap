@@ -144,10 +144,8 @@ export class RecommendationInstantiator {
 					emptyTarget: false,
 				},
 			],
-			async (target: Target, elem: Element | undefined, _originalElem?: Element, targeter?: DomTargeter) => {
+			async (target: Target, elem: Element | undefined) => {
 				this.cleanupStaleControllers();
-
-				this.targeter = this.targeter || targeter!;
 
 				const scriptElement = elem as HTMLScriptElement;
 				const elemContext = getContext(
