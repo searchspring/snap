@@ -209,7 +209,7 @@ export class RecommendationInstantiator {
 									targeter?: DomTargeter
 								) => {
 									// skip retarget if the source script element was removed and release the current target
-									if (!scriptElement.isConnected) {
+									if (scriptElement.isConnected === false) {
 										if (targetElem) {
 											targeter?.releaseTargets([targetElem]);
 										}
@@ -227,7 +227,7 @@ export class RecommendationInstantiator {
 											defined({ globals: scriptContextGlobals, profile: target.profile })
 										);
 										if (elemContext.custom) {
-											profileContext.custom = elemContext.custom;
+											profileContext.custom = deepmerge(profileContext.custom, elemContext.custom);
 										}
 
 										if (!profileControllerPromise) {
@@ -284,7 +284,7 @@ export class RecommendationInstantiator {
 						[{ selector: `[searchspring-recommend="${profileAttr}"]`, name: `legacy_${profile}_${profileCount[profile || ''] || 0}` }],
 						async (_target: Target, targetElem: Element | undefined, _originalElem?: Element, targeter?: DomTargeter) => {
 							// skip retarget if the source script element was removed and release the current target
-							if (!scriptElement.isConnected) {
+							if (scriptElement.isConnected === false) {
 								if (targetElem) {
 									targeter?.releaseTargets([targetElem]);
 								}
@@ -319,7 +319,7 @@ export class RecommendationInstantiator {
 
 			const hasConnectedTarget = targeters.some((targeter) =>
 				targeter.getTargetedElems().some((elem) => {
-					const attr = elem.isConnected && elem.getAttribute('ss-controller-id');
+					const attr = elem.isConnected !== false && elem.getAttribute('ss-controller-id');
 					return attr === id;
 				})
 			);
