@@ -364,7 +364,7 @@ export class AutocompleteController extends AbstractController {
 					uid: result.id,
 					sku: result.mappings.core?.sku,
 					qty: result.quantity || 1,
-					price: Number(result.mappings.core?.price),
+					price: Number(result.mappings.core?.price) || 0,
 				};
 				const data: AddtocartSchemaData = {
 					responseId,
