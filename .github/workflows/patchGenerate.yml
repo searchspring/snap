@@ -17,7 +17,8 @@ jobs:
       - name: Checkout Snap repository
         uses: actions/checkout@v3
         with:
-          ref: ${{ github.event.workflow_run.head_sha }}
+          ref: main
+          fetch-depth: 0
 
       - name: Checkout snapfu-library repository
         uses: actions/checkout@v3
