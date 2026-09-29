@@ -111,3 +111,5 @@ Example using multiple context variables together.
 
 If your site requires a strict [Content Security Policy (CSP)](https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/CSP), an entry of `https://*.searchspring.io` should be added to your CSP configuration to ensure Searchspring is functional. 
 
+The `'unsafe-eval'` source expression is NOT required, as long as context scripts contain only variable assignments of literal values (strings, numbers, booleans, objects, and arrays) — as shown in all of the examples above. Context variables are read using a static parser that performs no JavaScript evaluation. Context scripts containing functions, expressions, or references such as `window.something` require `'unsafe-eval'` to be evaluated; on a site whose CSP disallows it, no variables are read from the script at all (an error naming the unsupported statement is logged to the console, and the site id is still taken from the script `src`).
+
