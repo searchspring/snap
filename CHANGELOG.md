@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.79.0](https://github.com/searchspring/snap/compare/v0.78.0...v0.79.0) (2026-09-30)
+
+### Bug Fixes
+
+- **preact/recommendationinstantiator:** removing incorrect reassignment to this.targeter ([13255cd](https://github.com/searchspring/snap/commit/13255cdcd96eb6c7b995aec7dfd10b66c44525ca))
+
+### Features
+
+- **getcontext:** switching to parse first approach to prevent csp flagging during eval of context ([c8d960f](https://github.com/searchspring/snap/commit/c8d960f51942065a5469dd752b0af47608d8acde))
+
 # [0.78.0](https://github.com/searchspring/snap/compare/v0.77.0...v0.78.0) (2026-05-06)
 
 ### Bug Fixes
