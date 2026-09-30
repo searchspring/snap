@@ -124,7 +124,7 @@ describe('BundledRecommendations', () => {
 					//get the initial active product
 					const intialActive = doc.querySelector(
 						`${config?.selectors?.recommendation.activeSlide} ${config?.selectors?.recommendation.result} .ss__result__details__title a`
-					).innerHTML;
+					).textContent;
 					let newActive;
 					//click the next button
 					cy.get(config?.selectors?.recommendation.nextArrow)
@@ -133,7 +133,7 @@ describe('BundledRecommendations', () => {
 							//get the new active product
 							newActive = doc.querySelector(
 								`${config?.selectors?.recommendation.activeSlide} ${config?.selectors?.recommendation.result} .ss__result__details__title a`
-							).innerHTML;
+							).textContent;
 
 							//get the new active again
 
