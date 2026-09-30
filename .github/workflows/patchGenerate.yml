@@ -17,7 +17,8 @@ jobs:
       - name: Checkout Snap repository
         uses: actions/checkout@v3
         with:
-          ref: ${{ github.event.workflow_run.head_sha }}
+          ref: main
+          fetch-depth: 0
 
       - name: Checkout snapfu-library repository
         uses: actions/checkout@v3
@@ -48,13 +49,13 @@ jobs:
         run: |
           git config --global user.name "searchspring-machine"
           git config --global user.email "machine@searchspring.com"
-          git checkout -b patch-generate-${{ matrix.framework }}-${{ env.version }}
+          git checkout -b patch-generate-searchspring-${{ matrix.framework }}-${{ env.version }}
           git add .
           git commit -m "auto generated patch files from 'Patch Generate' action workflow"
-          git push -u origin patch-generate-${{ matrix.framework }}-${{ env.version }}
+          git push -u origin patch-generate-searchspring-${{ matrix.framework }}-${{ env.version }}
 
       - name: Create PR
         run: |
-          gh pr create --title "Patch file ${{ matrix.framework }}/${{ env.version }}" --body "" --repo "https://github.com/athoscommerce/snapfu-library" --base "main" --head "patch-generate-${{ matrix.framework }}-${{ env.version }}" --project "Snap" --reviewer "athoscommerce/snap-team"
+          gh pr create --title "Patch file searchspring/${{ matrix.framework }}/${{ env.version }}" --body "" --repo "https://github.com/athoscommerce/snapfu-library" --base "main" --head "patch-generate-searchspring-${{ matrix.framework }}-${{ env.version }}" --reviewer "athoscommerce/snap-team"
         env:
           GITHUB_TOKEN: ${{ secrets.MACHINE_ACTION_WORKFLOW_PAT }}
