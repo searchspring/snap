@@ -1,52 +1,11 @@
+import { parseContext, findAssignedNames, JAVASCRIPT_KEYWORDS } from './parseContext';
+
 type ContextVariables = {
 	[variable: string]: any;
 };
 
-const JAVASCRIPT_KEYWORDS = new Set([
-	'break',
-	'case',
-	'catch',
-	'class',
-	'const',
-	'continue',
-	'debugger',
-	'default',
-	'delete',
-	'do',
-	'else',
-	'export',
-	'extends',
-	'finally',
-	'for',
-	'function',
-	'if',
-	'import',
-	'in',
-	'instanceof',
-	'new',
-	'return',
-	'super',
-	'switch',
-	'this',
-	'throw',
-	'try',
-	'typeof',
-	'var',
-	'void',
-	'while',
-	'with',
-	'yield',
-	'let',
-	'static',
-	'enum',
-	'await',
-	'implements',
-	'package',
-	'protected',
-	'interface',
-	'private',
-	'public',
-]);
+// what `new Function` throws for the script itself - anything else means the host refused to evaluate (CSP, Trusted Types)
+const SCRIPT_ERRORS = ['SyntaxError', 'RangeError', 'InternalError'];
 
 export function getContext(evaluate: string[] = [], scriptOrSelector?: HTMLScriptElement | string): ContextVariables {
 	let script: HTMLScriptElement | undefined;
@@ -94,15 +53,8 @@ export function getContext(evaluate: string[] = [], scriptOrSelector?: HTMLScrip
 	const scriptVariables: ContextVariables = {};
 	const scriptInnerHTML = script?.innerHTML;
 
-	// attempt to grab inner HTML variables
-	const scriptInnerVars = scriptInnerHTML
-		// first remove all string literals (including template literals) to avoid false matches
-		.replace(/`(?:\\[\s\S]|[^`\\])*`|'(?:\\[\s\S]|[^'\\])*'|"(?:\\[\s\S]|[^"\\])*"/g, '')
-		// then find variable assignments
-		.match(/([a-zA-Z_$][a-zA-Z_$0-9]*)\s*=/g)
-		?.map((match) => match.replace(/[\s=]/g, ''));
-
-	const combinedVars = evaluate.concat(scriptInnerVars || []);
+	// find the variables the script assigns, to declare them (so they do not leak into the global scope)
+	const combinedVars = evaluate.concat(findAssignedNames(scriptInnerHTML));
 
 	// de-dupe vars
 	const evaluateVars = combinedVars.filter((item, index) => {
@@ -114,25 +66,47 @@ export function getContext(evaluate: string[] = [], scriptOrSelector?: HTMLScrip
 		return combinedVars.indexOf(item) === index && !isKeyword;
 	});
 
-	// evaluate text and put into variables
-	evaluate?.forEach((name) => {
-		try {
-			const fn = new Function(`
-				var ${evaluateVars.join(', ')};
-				${scriptInnerHTML}
-				return ${name};
-			`);
-			scriptVariables[name] = fn();
-		} catch (err) {
-			// if evaluation fails, set to undefined
-			const isKeyword = JAVASCRIPT_KEYWORDS.has(name);
-			if (!isKeyword) {
-				console.error(`getContext: error evaluating '${name}'`);
-				console.error(err);
+	// attempt to statically parse the context script - CSP safe (no evaluation)
+	const parsed = parseContext(scriptInnerHTML);
+
+	if (parsed.success) {
+		// fully declarative script - no evaluation needed
+		evaluate?.forEach((name) => {
+			scriptVariables[name] = parsed.variables.has(name) ? parsed.variables.get(name) : undefined;
+		});
+	} else {
+		// script contains code the static parser does not support - evaluation required (needs CSP 'unsafe-eval')
+		let blocked = false;
+
+		evaluate.forEach((name) => {
+			// once evaluation is refused it stays refused, and every further attempt would be another CSP violation
+			if (blocked) return;
+
+			let fn: () => any;
+			try {
+				fn = new Function(`
+					var ${evaluateVars.join(', ')};
+					${scriptInnerHTML}
+					return ${name};
+				`) as () => any;
+			} catch (err) {
+				// a syntax error is the script's own; anything else means the host refused to evaluate
+				if (SCRIPT_ERRORS.includes((err as Error)?.name ?? '')) return logEvaluationError(name, err);
+				blocked = true;
+				console.error(
+					`getContext: this site's Content Security Policy ('unsafe-eval') or Trusted Types policy blocks evaluation, and the context script cannot be read without it: ${parsed.reason}. ` +
+						`Context scripts must only contain variable assignments of literal values (strings, numbers, booleans, objects, arrays).`
+				);
+				return;
 			}
-			scriptVariables[name] = undefined;
-		}
-	});
+
+			try {
+				scriptVariables[name] = fn();
+			} catch (err) {
+				logEvaluationError(name, err);
+			}
+		});
+	}
 
 	const variables = {
 		...removeUndefined(attributeVariables),
@@ -150,6 +124,13 @@ export function getContext(evaluate: string[] = [], scriptOrSelector?: HTMLScrip
 	}
 
 	return variables;
+}
+
+function logEvaluationError(name: string, err: unknown): void {
+	// a keyword cannot be returned - it was already reported when the variable list was built
+	if (JAVASCRIPT_KEYWORDS.has(name)) return;
+	console.error(`getContext: error evaluating '${name}'`);
+	console.error(err);
 }
 
 function removeUndefined(variables: ContextVariables) {

@@ -123,7 +123,7 @@ export class DomTargeter {
 	}
 
 	getTargetedElems(): ReadonlyArray<Element> {
-		this.targetedElems = this.targetedElems.filter((elem) => elem.isConnected);
+		this.targetedElems = this.targetedElems.filter((elem) => elem.isConnected !== false);
 		return [...this.targetedElems];
 	}
 
@@ -150,8 +150,8 @@ export class DomTargeter {
 
 	retarget(): void {
 		// prune references to elements no longer in the DOM
-		globallyTargetedElems = globallyTargetedElems.filter((elem) => elem.isConnected);
-		this.targetedElems = this.targetedElems.filter((elem) => elem.isConnected);
+		globallyTargetedElems = globallyTargetedElems.filter((elem) => elem.isConnected !== false);
+		this.targetedElems = this.targetedElems.filter((elem) => elem.isConnected !== false);
 
 		const targetElemPairs = this.targets.flatMap((target) => {
 			// hide targets before found
