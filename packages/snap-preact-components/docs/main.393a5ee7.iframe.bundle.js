@@ -1,4 +1,4 @@
-/*! For license information please see main.e29c77a0.iframe.bundle.js.LICENSE.txt */
+/*! For license information please see main.393a5ee7.iframe.bundle.js.LICENSE.txt */
 (self.webpackChunk_searchspring_snap_preact_components = self.webpackChunk_searchspring_snap_preact_components || []).push([
 	[792],
 	{
@@ -28529,7 +28529,7 @@
 								value: function getTargetedElems() {
 									return (
 										(this.targetedElems = this.targetedElems.filter(function (elem) {
-											return elem.isConnected;
+											return !1 !== elem.isConnected;
 										})),
 										_toConsumableArray(this.targetedElems)
 									);
@@ -28566,10 +28566,10 @@
 								value: function retarget() {
 									var _this3 = this;
 									(globallyTargetedElems = globallyTargetedElems.filter(function (elem) {
-										return elem.isConnected;
+										return !1 !== elem.isConnected;
 									})),
 										(this.targetedElems = this.targetedElems.filter(function (elem) {
-											return elem.isConnected;
+											return !1 !== elem.isConnected;
 										}));
 									var _step,
 										targetElemPairs = this.targets.flatMap(function (target) {
@@ -30349,11 +30349,12 @@
 																	? void 0
 																	: _result$mappings$core6.sku,
 															qty: result.quantity || 1,
-															price: Number(
-																null === (_result$mappings$core7 = result.mappings.core) || void 0 === _result$mappings$core7
-																	? void 0
-																	: _result$mappings$core7.price
-															),
+															price:
+																Number(
+																	null === (_result$mappings$core7 = result.mappings.core) || void 0 === _result$mappings$core7
+																		? void 0
+																		: _result$mappings$core7.price
+																) || 0,
 														},
 													],
 												};
@@ -31702,11 +31703,12 @@
 																? void 0
 																: _result$mappings$core5.sku,
 														qty: result.quantity || 1,
-														price: Number(
-															null === (_result$mappings$core6 = result.mappings.core) || void 0 === _result$mappings$core6
-																? void 0
-																: _result$mappings$core6.price
-														),
+														price:
+															Number(
+																null === (_result$mappings$core6 = result.mappings.core) || void 0 === _result$mappings$core6
+																	? void 0
+																	: _result$mappings$core6.price
+															) || 0,
 													},
 													data = { responseId, tag: _this.store.profile.tag, results: [product] };
 												_this.eventManager.fire('track.product.addToCart', { controller: _this, product: result, trackEvent: data }),
@@ -32551,11 +32553,12 @@
 																	? void 0
 																	: _result$mappings$core5.sku,
 															qty: result.quantity || 1,
-															price: Number(
-																null === (_result$mappings$core6 = result.mappings.core) || void 0 === _result$mappings$core6
-																	? void 0
-																	: _result$mappings$core6.price
-															),
+															price:
+																Number(
+																	null === (_result$mappings$core6 = result.mappings.core) || void 0 === _result$mappings$core6
+																		? void 0
+																		: _result$mappings$core6.price
+																) || 0,
 														},
 													],
 												};
@@ -43555,51 +43558,433 @@
 					]
 				);
 			})();
-			var JAVASCRIPT_KEYWORDS = new Set([
-				'break',
-				'case',
-				'catch',
-				'class',
-				'const',
-				'continue',
-				'debugger',
-				'default',
-				'delete',
-				'do',
-				'else',
-				'export',
-				'extends',
-				'finally',
-				'for',
-				'function',
-				'if',
-				'import',
-				'in',
-				'instanceof',
-				'new',
-				'return',
-				'super',
-				'switch',
-				'this',
-				'throw',
-				'try',
-				'typeof',
-				'var',
-				'void',
-				'while',
-				'with',
-				'yield',
-				'let',
-				'static',
-				'enum',
-				'await',
-				'implements',
-				'package',
-				'protected',
-				'interface',
-				'private',
-				'public',
-			]);
+			__webpack_require__('../../node_modules/core-js/modules/es.object.entries.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.parse-int.js');
+			function parseContext_slicedToArray(r, e) {
+				return (
+					(function parseContext_arrayWithHoles(r) {
+						if (Array.isArray(r)) return r;
+					})(r) ||
+					(function parseContext_iterableToArrayLimit(r, l) {
+						var t = null == r ? null : ('undefined' != typeof Symbol && r[Symbol.iterator]) || r['@@iterator'];
+						if (null != t) {
+							var e,
+								n,
+								i,
+								u,
+								a = [],
+								f = !0,
+								o = !1;
+							try {
+								if (((i = (t = t.call(r)).next), 0 === l)) {
+									if (Object(t) !== t) return;
+									f = !1;
+								} else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0);
+							} catch (r) {
+								(o = !0), (n = r);
+							} finally {
+								try {
+									if (!f && null != t.return && ((u = t.return()), Object(u) !== u)) return;
+								} finally {
+									if (o) throw n;
+								}
+							}
+							return a;
+						}
+					})(r, e) ||
+					(function parseContext_unsupportedIterableToArray(r, a) {
+						if (r) {
+							if ('string' == typeof r) return parseContext_arrayLikeToArray(r, a);
+							var t = {}.toString.call(r).slice(8, -1);
+							return (
+								'Object' === t && r.constructor && (t = r.constructor.name),
+								'Map' === t || 'Set' === t
+									? Array.from(r)
+									: 'Arguments' === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t)
+									? parseContext_arrayLikeToArray(r, a)
+									: void 0
+							);
+						}
+					})(r, e) ||
+					(function parseContext_nonIterableRest() {
+						throw new TypeError(
+							'Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.'
+						);
+					})()
+				);
+			}
+			function parseContext_arrayLikeToArray(r, a) {
+				(null == a || a > r.length) && (a = r.length);
+				for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e];
+				return n;
+			}
+			function parseContext_defineProperties(e, r) {
+				for (var t = 0; t < r.length; t++) {
+					var o = r[t];
+					(o.enumerable = o.enumerable || !1),
+						(o.configurable = !0),
+						'value' in o && (o.writable = !0),
+						Object.defineProperty(e, parseContext_toPropertyKey(o.key), o);
+				}
+			}
+			function parseContext_toPropertyKey(t) {
+				var i = (function parseContext_toPrimitive(t, r) {
+					if ('object' != typeof t || !t) return t;
+					var e = t[Symbol.toPrimitive];
+					if (void 0 !== e) {
+						var i = e.call(t, r || 'default');
+						if ('object' != typeof i) return i;
+						throw new TypeError('@@toPrimitive must return a primitive value.');
+					}
+					return ('string' === r ? String : Number)(t);
+				})(t, 'string');
+				return 'symbol' == typeof i ? i : i + '';
+			}
+			var JAVASCRIPT_KEYWORDS = new Set(
+					'break case catch class const continue debugger default delete do else export extends finally for function if import\n\tin instanceof new return super switch this throw try typeof var void while with yield let static enum await\n\timplements package protected interface private public'.split(
+						/\s+/
+					)
+				),
+				LITERAL_VALUES = new Map(Object.entries({ true: !0, false: !1, null: null, undefined: void 0 })),
+				STRING_LITERALS = /`(?:\\[\s\S]|[^`\\])*`|'(?:\\[\s\S]|[^'\\])*'|"(?:\\[\s\S]|[^"\\])*"/g;
+			var ESCAPES = new Map(Object.entries({ n: '\n', t: '\t', r: '\r', b: '\b', f: '\f', v: '\v' })),
+				LINE_TERMINATOR = /[\n\r\u2028\u2029]/,
+				TRIVIA = new RegExp(
+					'[\\t-\\r \\xA0\\u1680\\u2000-\\u200A\\u2028\\u2029\\u202F\\u205F\\u3000\\uFEFF]+|\\/\\/(?:[\\0-\\t\\x0B\\f\\x0E-\\u2027\\u202A-\\uD7FF\\uE000-\\uFFFF]|[\\uD800-\\uDBFF][\\uDC00-\\uDFFF]|[\\uD800-\\uDBFF](?![\\uDC00-\\uDFFF])|(?:[^\\uD800-\\uDBFF]|^)[\\uDC00-\\uDFFF])*|\\/\\*(?:[\\0-\\uFFFF]|[\\uD800-\\uDBFF][\\uDC00-\\uDFFF])*?\\*\\/',
+					'y'
+				),
+				NAME = new RegExp('[A-Za-z_$][\\w$]*', 'y'),
+				ASSIGNMENT_START = new RegExp('[A-Za-z_$][\\w$]*\\s*=(?!=)', 'y'),
+				DECIMAL = new RegExp('\\d+(\\.\\d+)?', 'y'),
+				HEX4 = new RegExp('[0-9a-fA-F]{4}', 'y');
+			var ContextParser = (function () {
+					return (function parseContext_createClass(e, r, t) {
+						return (
+							r && parseContext_defineProperties(e.prototype, r),
+							t && parseContext_defineProperties(e, t),
+							Object.defineProperty(e, 'prototype', { writable: !1 }),
+							e
+						);
+					})(
+						function ContextParser(src) {
+							!(function parseContext_classCallCheck(a, n) {
+								if (!(a instanceof n)) throw new TypeError('Cannot call a class as a function');
+							})(this, ContextParser),
+								(this.src = src),
+								(this.pos = 0);
+						},
+						[
+							{
+								key: 'parseScript',
+								value: function parseScript() {
+									var variables = new Map();
+									for (this.skipTrivia(); !this.atEnd(); this.skipTrivia())
+										if (!this.tryConsume(';')) {
+											var _this$parseStatement2 = parseContext_slicedToArray(this.parseStatement(), 2),
+												name = _this$parseStatement2[0],
+												value = _this$parseStatement2[1];
+											variables.set(name, value);
+										}
+									return variables;
+								},
+							},
+							{
+								key: 'parseStatement',
+								value: function parseStatement() {
+									var name = this.parseName();
+									(JAVASCRIPT_KEYWORDS.has(name) || LITERAL_VALUES.has(name)) && this.fail("'" + name + "' cannot be assigned"),
+										this.skipTrivia(),
+										this.consume('='),
+										this.skipTrivia();
+									var value = this.parseValue(),
+										crossedNewline = this.skipTrivia();
+									return (
+										this.atEnd() || this.tryConsume(';') || (crossedNewline && this.atAssignmentStart()) || this.fail("expected ';'"), [name, value]
+									);
+								},
+							},
+							{
+								key: 'parseValue',
+								value: function parseValue() {
+									var ch = this.peek();
+									if ('"' === ch || "'" === ch) return this.parseString();
+									if ('[' === ch) return this.parseArray();
+									if ('{' === ch) return this.parseObject();
+									if ('-' === ch || /\d/.test(ch)) return this.parseNumber();
+									if (/[A-Za-z_$]/.test(ch)) {
+										var word = this.parseName();
+										if (LITERAL_VALUES.has(word)) return LITERAL_VALUES.get(word);
+										this.fail("unsupported value '" + word + "'");
+									}
+									this.fail("unexpected '" + ch + "'");
+								},
+							},
+							{
+								key: 'parseString',
+								value: function parseString() {
+									for (var quote = this.next(), value = ''; ; ) {
+										var ch = this.next();
+										if ((('' !== ch && '\n' !== ch && '\r' !== ch) || this.fail('unterminated string'), ch === quote)) return value;
+										value += '\\' === ch ? this.parseEscape() : ch;
+									}
+								},
+							},
+							{
+								key: 'parseEscape',
+								value: function parseEscape() {
+									var _this$match,
+										ch = this.next();
+									return 'u' === ch
+										? String.fromCharCode(
+												parseInt(
+													null !== (_this$match = this.match(HEX4)) && void 0 !== _this$match ? _this$match : this.fail('invalid \\u escape'),
+													16
+												)
+										  )
+										: ESCAPES.has(ch)
+										? ESCAPES.get(ch)
+										: (('' === ch || 'x' === ch || /\d/.test(ch) || LINE_TERMINATOR.test(ch)) && this.fail('unsupported escape sequence'), ch);
+								},
+							},
+							{
+								key: 'parseNumber',
+								value: function parseNumber() {
+									var _this$match2,
+										negative = this.tryConsume('-'),
+										digits = null !== (_this$match2 = this.match(DECIMAL)) && void 0 !== _this$match2 ? _this$match2 : this.fail('expected a number');
+									return (
+										(/^0\d/.test(digits) || /[\w$.]/.test(this.peek())) && this.fail('unsupported number'),
+										negative ? -Number(digits) : Number(digits)
+									);
+								},
+							},
+							{
+								key: 'parseArray',
+								value: function parseArray() {
+									this.consume('[');
+									var items = [];
+									for (this.skipTrivia(); !this.tryConsume(']'); this.skipTrivia())
+										items.push(this.parseValue()), this.skipTrivia(), this.tryConsume(',') || ']' === this.peek() || this.fail("expected ',' or ']'");
+									return items;
+								},
+							},
+							{
+								key: 'parseObject',
+								value: function parseObject() {
+									this.consume('{');
+									var obj = {};
+									for (this.skipTrivia(); !this.tryConsume('}'); this.skipTrivia()) {
+										var key = this.parseObjectKey();
+										'__proto__' === key && this.fail("unsupported key '__proto__'"),
+											this.skipTrivia(),
+											this.consume(':'),
+											this.skipTrivia(),
+											Object.defineProperty(obj, key, { value: this.parseValue(), enumerable: !0, writable: !0, configurable: !0 }),
+											this.skipTrivia(),
+											this.tryConsume(',') || '}' === this.peek() || this.fail("expected ',' or '}'");
+									}
+									return obj;
+								},
+							},
+							{
+								key: 'parseObjectKey',
+								value: function parseObjectKey() {
+									var ch = this.peek();
+									return '"' === ch || "'" === ch ? this.parseString() : /\d/.test(ch) ? String(this.parseNumber()) : this.parseName();
+								},
+							},
+							{
+								key: 'parseName',
+								value: function parseName() {
+									var _this$match3;
+									return null !== (_this$match3 = this.match(NAME)) && void 0 !== _this$match3 ? _this$match3 : this.fail('expected a name');
+								},
+							},
+							{
+								key: 'skipTrivia',
+								value: function skipTrivia() {
+									for (var crossedNewline = !1, skipped = this.match(TRIVIA); void 0 !== skipped; skipped = this.match(TRIVIA))
+										LINE_TERMINATOR.test(skipped) && (crossedNewline = !0);
+									return this.src.startsWith('/*', this.pos) && this.fail('unterminated comment'), crossedNewline;
+								},
+							},
+							{
+								key: 'atAssignmentStart',
+								value: function atAssignmentStart() {
+									return (ASSIGNMENT_START.lastIndex = this.pos), ASSIGNMENT_START.test(this.src);
+								},
+							},
+							{
+								key: 'atEnd',
+								value: function atEnd() {
+									return this.pos >= this.src.length;
+								},
+							},
+							{
+								key: 'peek',
+								value: function peek() {
+									var _this$src$this$pos;
+									return null !== (_this$src$this$pos = this.src[this.pos]) && void 0 !== _this$src$this$pos ? _this$src$this$pos : '';
+								},
+							},
+							{
+								key: 'next',
+								value: function next() {
+									var _this$src$this$pos2;
+									return null !== (_this$src$this$pos2 = this.src[this.pos++]) && void 0 !== _this$src$this$pos2 ? _this$src$this$pos2 : '';
+								},
+							},
+							{
+								key: 'tryConsume',
+								value: function tryConsume(ch) {
+									return this.peek() === ch && ++this.pos > 0;
+								},
+							},
+							{
+								key: 'consume',
+								value: function consume(ch) {
+									this.tryConsume(ch) || this.fail("expected '" + ch + "'");
+								},
+							},
+							{
+								key: 'match',
+								value: function match(pattern) {
+									pattern.lastIndex = this.pos;
+									var found = pattern.exec(this.src);
+									return found && (this.pos = pattern.lastIndex), null == found ? void 0 : found[0];
+								},
+							},
+							{
+								key: 'fail',
+								value: function fail(message) {
+									var line = (this.src.slice(0, this.pos).match(/\r\n|[\n\r\u2028\u2029]/g) || []).length + 1;
+									throw new Error(message + ' (line ' + line + ')');
+								},
+							},
+						]
+					);
+				})(),
+				SCRIPT_ERRORS = ['SyntaxError', 'RangeError', 'InternalError'];
+			function getContext() {
+				var _script$id,
+					_script$src,
+					_script,
+					_script3,
+					script,
+					evaluate = arguments.length > 0 && void 0 !== arguments[0] ? arguments[0] : [],
+					scriptOrSelector = arguments.length > 1 ? arguments[1] : void 0;
+				if (scriptOrSelector && 'string' != typeof scriptOrSelector)
+					scriptOrSelector && 'SCRIPT' === scriptOrSelector.tagName && (script = scriptOrSelector);
+				else {
+					var scripts = Array.from(document.querySelectorAll(scriptOrSelector || 'script[id^=searchspring], script[src*="snapui.searchspring.io"]'));
+					script = scripts
+						.sort(function (a, b) {
+							return a.innerHTML.length - b.innerHTML.length;
+						})
+						.pop();
+				}
+				if (!script) throw new Error('getContext: did not find a script tag');
+				if (
+					!(
+						scriptOrSelector ||
+						(null !== (_script$id = script.id) && void 0 !== _script$id && _script$id.match(/^searchspring/i)) ||
+						(null !== (_script$src = script.src) && void 0 !== _script$src && _script$src.match(/\/\/snapui.searchspring.io/i))
+					)
+				)
+					throw new Error('getContext: did not find a script from Snap CDN or with attribute \'id\' starting with "searchspring"');
+				if (
+					(evaluate && !Array.isArray(evaluate)) ||
+					(evaluate &&
+						!evaluate.reduce(function (accu, name) {
+							return accu && 'string' == typeof name;
+						}, !0))
+				)
+					throw new Error('getContext: first parameter must be an array of strings');
+				var attributeVariables = {};
+				Object.values(null === (_script = script) || void 0 === _script ? void 0 : _script.attributes).map(function (attr) {
+					var _script2,
+						name = attr.nodeName;
+					evaluate.includes(name) &&
+						(attributeVariables[name] = null === (_script2 = script) || void 0 === _script2 ? void 0 : _script2.getAttribute(name));
+				});
+				var scriptVariables = {},
+					scriptInnerHTML = null === (_script3 = script) || void 0 === _script3 ? void 0 : _script3.innerHTML,
+					combinedVars = evaluate.concat(
+						(function findAssignedNames(script) {
+							return (script.replace(STRING_LITERALS, '').match(/([a-zA-Z_$][a-zA-Z_$0-9]*)\s*=(?![=>])/g) || [])
+								.map(function (match) {
+									return match.replace(/[\s=]/g, '');
+								})
+								.filter(function (name) {
+									return !LITERAL_VALUES.has(name);
+								});
+						})(scriptInnerHTML)
+					),
+					evaluateVars = combinedVars.filter(function (item, index) {
+						var isKeyword = JAVASCRIPT_KEYWORDS.has(item);
+						return (
+							isKeyword && console.error("getContext: JavaScript keyword found: '" + item + "'! Please use a different variable name."),
+							combinedVars.indexOf(item) === index && !isKeyword
+						);
+					}),
+					parsed = (function parseContext(script) {
+						try {
+							return { success: !0, variables: new ContextParser(script).parseScript() };
+						} catch (err) {
+							var _err$message;
+							return {
+								success: !1,
+								reason: null !== (_err$message = null == err ? void 0 : err.message) && void 0 !== _err$message ? _err$message : String(err),
+							};
+						}
+					})(scriptInnerHTML);
+				if (parsed.success)
+					null == evaluate ||
+						evaluate.forEach(function (name) {
+							scriptVariables[name] = parsed.variables.has(name) ? parsed.variables.get(name) : void 0;
+						});
+				else {
+					var blocked = !1;
+					evaluate.forEach(function (name) {
+						if (!blocked) {
+							var fn;
+							try {
+								fn = new Function(
+									'\n\t\t\t\t\tvar ' + evaluateVars.join(', ') + ';\n\t\t\t\t\t' + scriptInnerHTML + '\n\t\t\t\t\treturn ' + name + ';\n\t\t\t\t'
+								);
+							} catch (err) {
+								var _err$name;
+								return SCRIPT_ERRORS.includes(null !== (_err$name = null == err ? void 0 : err.name) && void 0 !== _err$name ? _err$name : '')
+									? logEvaluationError(name, err)
+									: ((blocked = !0),
+									  void console.error(
+											"getContext: this site's Content Security Policy ('unsafe-eval') or Trusted Types policy blocks evaluation, and the context script cannot be read without it: " +
+												parsed.reason +
+												'. Context scripts must only contain variable assignments of literal values (strings, numbers, booleans, objects, arrays).'
+									  ));
+							}
+							try {
+								scriptVariables[name] = fn();
+							} catch (err) {
+								logEvaluationError(name, err);
+							}
+						}
+					});
+				}
+				var variables = Object.assign({}, removeUndefined(attributeVariables), removeUndefined(scriptVariables));
+				if (evaluate.includes('siteId') && !variables.siteId) {
+					var _script$getAttribute,
+						siteId =
+							null === (_script$getAttribute = script.getAttribute('src')) || void 0 === _script$getAttribute
+								? void 0
+								: _script$getAttribute.match(/.*snapui.searchspring.io\/([a-zA-Z0-9]{6})\//);
+					siteId && siteId.length > 1 && (variables.siteId = siteId[1]);
+				}
+				return variables;
+			}
+			function logEvaluationError(name, err) {
+				JAVASCRIPT_KEYWORDS.has(name) || (console.error("getContext: error evaluating '" + name + "'"), console.error(err));
+			}
 			function removeUndefined(variables) {
 				return (
 					Object.keys(variables).forEach(function (key) {
@@ -43720,7 +44105,7 @@
 							((function Tracker_classCallCheck(a, n) {
 								if (!(a instanceof n)) throw new TypeError('Cannot call a class as a function');
 							})(this, Tracker),
-							((config = cjs_default()(Tracker_defaultConfig, config || {})).initiator = 'searchspring/' + config.framework + '/0.78.0'),
+							((config = cjs_default()(Tracker_defaultConfig, config || {})).initiator = 'searchspring/' + config.framework + '/0.79.0'),
 							'object' != typeof globals || 'string' != typeof globals.siteId)
 						)
 							throw new Error('Invalid config passed to tracker. The "siteId" attribute must be provided.');
@@ -43902,104 +44287,11 @@
 						var currency = null === (_this$globals = _this.globals) || void 0 === _this$globals ? void 0 : _this$globals.currency;
 						currency && _this.setCurrency(currency),
 							(null !== (_window$searchspring = window.searchspring) && void 0 !== _window$searchspring && _window$searchspring.tracker) ||
-								((window.searchspring = window.searchspring || {}), (window.searchspring.tracker = _this), (window.searchspring.version = '0.78.0')),
+								((window.searchspring = window.searchspring || {}), (window.searchspring.tracker = _this), (window.searchspring.version = '0.79.0')),
 							setTimeout(function () {
 								_this.targeters.push(
 									new DomTargeter([{ selector: 'script[type^="searchspring/track/"]', emptyTarget: !1 }], function (target, elem) {
-										var _getContext = (function getContext() {
-												var _script$id,
-													_script$src,
-													_script,
-													_script3,
-													_scriptInnerHTML$repl,
-													script,
-													evaluate = arguments.length > 0 && void 0 !== arguments[0] ? arguments[0] : [],
-													scriptOrSelector = arguments.length > 1 ? arguments[1] : void 0;
-												if (scriptOrSelector && 'string' != typeof scriptOrSelector)
-													scriptOrSelector && 'SCRIPT' === scriptOrSelector.tagName && (script = scriptOrSelector);
-												else {
-													var scripts = Array.from(
-														document.querySelectorAll(scriptOrSelector || 'script[id^=searchspring], script[src*="snapui.searchspring.io"]')
-													);
-													script = scripts
-														.sort(function (a, b) {
-															return a.innerHTML.length - b.innerHTML.length;
-														})
-														.pop();
-												}
-												if (!script) throw new Error('getContext: did not find a script tag');
-												if (
-													!(
-														scriptOrSelector ||
-														(null !== (_script$id = script.id) && void 0 !== _script$id && _script$id.match(/^searchspring/i)) ||
-														(null !== (_script$src = script.src) && void 0 !== _script$src && _script$src.match(/\/\/snapui.searchspring.io/i))
-													)
-												)
-													throw new Error('getContext: did not find a script from Snap CDN or with attribute \'id\' starting with "searchspring"');
-												if (
-													(evaluate && !Array.isArray(evaluate)) ||
-													(evaluate &&
-														!evaluate.reduce(function (accu, name) {
-															return accu && 'string' == typeof name;
-														}, !0))
-												)
-													throw new Error('getContext: first parameter must be an array of strings');
-												var attributeVariables = {};
-												Object.values(null === (_script = script) || void 0 === _script ? void 0 : _script.attributes).map(function (attr) {
-													var _script2,
-														name = attr.nodeName;
-													evaluate.includes(name) &&
-														(attributeVariables[name] = null === (_script2 = script) || void 0 === _script2 ? void 0 : _script2.getAttribute(name));
-												});
-												var scriptVariables = {},
-													scriptInnerHTML = null === (_script3 = script) || void 0 === _script3 ? void 0 : _script3.innerHTML,
-													scriptInnerVars =
-														null ===
-															(_scriptInnerHTML$repl = scriptInnerHTML
-																.replace(/`(?:\\[\s\S]|[^`\\])*`|'(?:\\[\s\S]|[^'\\])*'|"(?:\\[\s\S]|[^"\\])*"/g, '')
-																.match(/([a-zA-Z_$][a-zA-Z_$0-9]*)\s*=/g)) || void 0 === _scriptInnerHTML$repl
-															? void 0
-															: _scriptInnerHTML$repl.map(function (match) {
-																	return match.replace(/[\s=]/g, '');
-															  }),
-													combinedVars = evaluate.concat(scriptInnerVars || []),
-													evaluateVars = combinedVars.filter(function (item, index) {
-														var isKeyword = JAVASCRIPT_KEYWORDS.has(item);
-														return (
-															isKeyword &&
-																console.error("getContext: JavaScript keyword found: '" + item + "'! Please use a different variable name."),
-															combinedVars.indexOf(item) === index && !isKeyword
-														);
-													});
-												null == evaluate ||
-													evaluate.forEach(function (name) {
-														try {
-															var fn = new Function(
-																'\n\t\t\t\tvar ' +
-																	evaluateVars.join(', ') +
-																	';\n\t\t\t\t' +
-																	scriptInnerHTML +
-																	'\n\t\t\t\treturn ' +
-																	name +
-																	';\n\t\t\t'
-															);
-															scriptVariables[name] = fn();
-														} catch (err) {
-															JAVASCRIPT_KEYWORDS.has(name) || (console.error("getContext: error evaluating '" + name + "'"), console.error(err)),
-																(scriptVariables[name] = void 0);
-														}
-													});
-												var variables = Object.assign({}, removeUndefined(attributeVariables), removeUndefined(scriptVariables));
-												if (evaluate.includes('siteId') && !variables.siteId) {
-													var _script$getAttribute,
-														siteId =
-															null === (_script$getAttribute = script.getAttribute('src')) || void 0 === _script$getAttribute
-																? void 0
-																: _script$getAttribute.match(/.*snapui.searchspring.io\/([a-zA-Z0-9]{6})\//);
-													siteId && siteId.length > 1 && (variables.siteId = siteId[1]);
-												}
-												return variables;
-											})(['item', 'items', 'siteId', 'shopper', 'order', 'type', 'currency'], elem),
+										var _getContext = getContext(['item', 'items', 'siteId', 'shopper', 'order', 'type', 'currency'], elem),
 											item = _getContext.item,
 											items = _getContext.items,
 											siteId = _getContext.siteId,
