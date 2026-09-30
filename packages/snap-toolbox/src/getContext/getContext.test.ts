@@ -421,3 +421,247 @@ describe('variable name parsing', () => {
 		expect(vars).not.toHaveProperty('nested');
 	});
 });
+
+describe('variable name parsing tolerates comments', () => {
+	it('does not declare literal names found in comments when evaluating', () => {
+		const scriptTag = document.createElement('script');
+		scriptTag.setAttribute('type', 'searchspring');
+		// the function forces the evaluation path; the comments contain `word =` patterns with literal names, which cannot be declared
+		scriptTag.innerHTML = `
+			// when true = the shopper is logged in
+			/* null = nothing; see https://example.com/docs */
+			siteId = 'abc123'; // url = "https://example.com/it's"
+			func = () => 'returned value';
+		`;
+
+		const consoleError = jest.spyOn(console, 'error').mockImplementation();
+		const vars = getContext(['siteId', 'func'], scriptTag);
+		expect(vars.siteId).toBe('abc123');
+		expect(vars.func()).toBe('returned value');
+		expect(consoleError).not.toHaveBeenCalled();
+		consoleError.mockRestore();
+	});
+
+	it('does not treat comment markers inside strings as comments', () => {
+		const scriptTag = document.createElement('script');
+		scriptTag.setAttribute('type', 'searchspring');
+		scriptTag.innerHTML = `
+			url = "https://example.com/path"; // comment
+			glob = '/* not a comment */';
+			after = 'value';
+			func = () => after;
+		`;
+
+		const vars = getContext(['url', 'glob', 'after', 'func'], scriptTag);
+		expect(vars).toMatchObject({ url: 'https://example.com/path', glob: '/* not a comment */', after: 'value' });
+		expect(vars.func()).toBe('value');
+	});
+});
+
+describe('scripts that cannot be evaluated either', () => {
+	it('does not throw on nesting too deep for the parser or the engine', () => {
+		const depth = 100000;
+		const scriptTag = document.createElement('script');
+		scriptTag.setAttribute('type', 'searchspring');
+		scriptTag.innerHTML = `siteId = 'abc123'; value = ${'['.repeat(depth)}${']'.repeat(depth)};`;
+
+		const consoleError = jest.spyOn(console, 'error').mockImplementation();
+		expect(() => getContext(['siteId', 'value'], scriptTag)).not.toThrow();
+		consoleError.mockRestore();
+	});
+});
+
+describe('CSP safe static parsing', () => {
+	it('does not construct a Function for declarative context scripts', () => {
+		const scriptTag = document.createElement('script');
+		scriptTag.setAttribute('type', 'searchspring');
+		scriptTag.innerHTML = `
+			// context variables go here
+			siteId = 'abc123';
+			shopper = {
+				id: 'snapdev',
+				cart: [{ uid: 'product123_red', parentId: 'product123', sku: 'product123_red', price: 99.99, qty: 1 }],
+			};
+			currency = { code: 'EUR' };
+		`;
+
+		const functionSpy = jest.spyOn(global, 'Function');
+
+		const vars = getContext(['siteId', 'shopper', 'currency'], scriptTag);
+
+		expect(functionSpy).not.toHaveBeenCalled();
+		expect(vars).toStrictEqual({
+			siteId: 'abc123',
+			shopper: {
+				id: 'snapdev',
+				cart: [{ uid: 'product123_red', parentId: 'product123', sku: 'product123_red', price: 99.99, qty: 1 }],
+			},
+			currency: { code: 'EUR' },
+		});
+
+		functionSpy.mockRestore();
+	});
+
+	it('parses platform rendered scripts with entities, blank lines and irregular whitespace', () => {
+		const scriptTag = document.createElement('script');
+		scriptTag.setAttribute('type', 'searchspring');
+		// shape emitted by liquid/php/handlebars conditional template blocks
+		scriptTag.innerHTML = `
+
+				shopper = { id : "12345", group : "2" };
+
+
+				category = { id : "185", name : "Some &quot;Quoted&quot; Category", path : "Kitchen>Sinks" };
+
+			format = '\${{amount}}';
+		`;
+
+		const functionSpy = jest.spyOn(global, 'Function');
+
+		const vars = getContext(['shopper', 'category', 'format'], scriptTag);
+
+		expect(functionSpy).not.toHaveBeenCalled();
+		expect(vars).toStrictEqual({
+			shopper: { id: '12345', group: '2' },
+			category: { id: '185', name: 'Some &quot;Quoted&quot; Category', path: 'Kitchen>Sinks' },
+			format: '${{amount}}',
+		});
+
+		functionSpy.mockRestore();
+	});
+});
+
+describe('behavior under a CSP that blocks unsafe-eval', () => {
+	let functionSpy: jest.SpyInstance;
+
+	beforeEach(() => {
+		// getContext evaluates via the global `Function` constructor - this mock stands in for a CSP without 'unsafe-eval'
+		functionSpy = jest.spyOn(global, 'Function').mockImplementation(() => {
+			throw new EvalError(`Refused to evaluate a string as JavaScript because 'unsafe-eval' is not an allowed source of script`);
+		});
+	});
+
+	afterEach(() => {
+		functionSpy.mockRestore();
+	});
+
+	it('still resolves fully declarative context scripts', () => {
+		const scriptTag = document.createElement('script');
+		scriptTag.setAttribute('type', 'searchspring');
+		scriptTag.innerHTML = `
+			siteId = 'abc123';
+			merchandising = { segments: ['country:canada'] };
+		`;
+
+		const vars = getContext(['siteId', 'merchandising'], scriptTag);
+		expect(vars).toStrictEqual({
+			siteId: 'abc123',
+			merchandising: { segments: ['country:canada'] },
+		});
+	});
+
+	it('reads nothing from a script that also contains unsupported code, and says what and where', () => {
+		const scriptTag = document.createElement('script');
+		scriptTag.setAttribute('type', 'searchspring');
+		scriptTag.innerHTML = `
+			siteId = 'abc123';
+			func = () => 'returned value';
+			shopper = { id: 'snapdev' };
+		`;
+
+		const consoleError = jest.spyOn(console, 'error').mockImplementation();
+
+		const vars = getContext(['siteId', 'func', 'shopper'], scriptTag);
+		expect(vars).toStrictEqual({});
+
+		// a single error naming the unsupported statement - no per-variable errors
+		expect(consoleError).toHaveBeenCalledTimes(1);
+		expect(consoleError.mock.calls[0][0]).toContain(`Content Security Policy ('unsafe-eval') or Trusted Types policy blocks evaluation`);
+		expect(consoleError.mock.calls[0][0]).toContain(`unexpected '(' (line 3)`);
+
+		consoleError.mockRestore();
+	});
+
+	it('attempts evaluation once per call - every blocked attempt is a separate CSP violation', () => {
+		const scriptTag = document.createElement('script');
+		scriptTag.setAttribute('type', 'searchspring');
+		scriptTag.innerHTML = `
+			siteId = 'abc123';
+			func = () => 'returned value';
+			shopper = { id: 'snapdev' };
+		`;
+		jest.spyOn(console, 'error').mockImplementation();
+
+		getContext(['siteId', 'func', 'shopper'], scriptTag);
+		expect(functionSpy).toHaveBeenCalledTimes(1);
+
+		jest.mocked(console.error).mockRestore();
+	});
+
+	it('still takes the siteId from the script src and reads script attributes', () => {
+		const scriptTag = document.createElement('script');
+		scriptTag.setAttribute('src', 'https://snapui.searchspring.io/abc123/bundle.js');
+		scriptTag.setAttribute('id', 'searchspring-context');
+		scriptTag.setAttribute('branch', 'production');
+		scriptTag.innerHTML = `
+			shopper = { id: 'snapdev' };
+			func = () => 'returned value';
+		`;
+		jest.spyOn(console, 'error').mockImplementation();
+
+		const vars = getContext(['siteId', 'shopper', 'func', 'branch'], scriptTag);
+		expect(vars).toStrictEqual({ siteId: 'abc123', branch: 'production' });
+
+		jest.mocked(console.error).mockRestore();
+	});
+});
+
+describe('evaluation fallback', () => {
+	afterEach(() => {
+		jest.restoreAllMocks();
+	});
+
+	it('declares names assigned after a regular expression containing //', () => {
+		const scriptTag = document.createElement('script');
+		scriptTag.setAttribute('type', 'searchspring');
+		scriptTag.innerHTML = `re = /^https?:\\/\\//; utils = utils || {}; siteId = 'abc123';`;
+		const consoleError = jest.spyOn(console, 'error').mockImplementation();
+
+		const vars = getContext(['siteId'], scriptTag);
+		expect(vars).toStrictEqual({ siteId: 'abc123' });
+		expect(consoleError).not.toHaveBeenCalled();
+		expect(window).not.toHaveProperty('utils');
+	});
+
+	it('does not declare null, or globals that are only compared with ==', () => {
+		(window as any).Shopify = { formatMoney: (value: number) => `$${value}` };
+		const scriptTag = document.createElement('script');
+		scriptTag.setAttribute('type', 'searchspring');
+		scriptTag.innerHTML = `
+			shopper = { id: 'snapdev' };
+			fmt = function (e) { return null == e ? '' : String(e); };
+			format = function (value) { return typeof Shopify == 'undefined' ? String(value) : Shopify.formatMoney(value); };
+		`;
+
+		try {
+			const vars = getContext(['shopper', 'fmt', 'format'], scriptTag);
+			expect(vars.shopper).toEqual({ id: 'snapdev' });
+			expect(vars.fmt(null)).toBe('');
+			expect(vars.format(5)).toBe('$5');
+		} finally {
+			delete (window as any).Shopify;
+		}
+	});
+
+	it('leaves requested keywords out of the declared names', () => {
+		const scriptTag = document.createElement('script');
+		scriptTag.setAttribute('type', 'searchspring');
+		scriptTag.innerHTML = `func = () => 'returned value';`;
+		const consoleError = jest.spyOn(console, 'error').mockImplementation();
+
+		const vars = getContext(['class', 'func'], scriptTag);
+		expect(vars.func()).toBe('returned value');
+		expect(consoleError).toHaveBeenCalledTimes(1);
+		expect(consoleError).toHaveBeenCalledWith("getContext: JavaScript keyword found: 'class'! Please use a different variable name.");
+	});
+});

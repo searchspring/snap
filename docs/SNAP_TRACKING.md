@@ -286,7 +286,7 @@ This method will compare the provided cart contents with the current cart conten
 ```html
 <script src="https://snapui.searchspring.io/[your_site_id]/bundle.js" id="searchspring-context">
 	shopper = {
-		id: '[REPLACE WITH LOGGED IN SHOPPER ID]'
+		id: '[REPLACE WITH LOGGED IN SHOPPER ID]',
 		cart: [
 			{
 				parentId: 'product123',
