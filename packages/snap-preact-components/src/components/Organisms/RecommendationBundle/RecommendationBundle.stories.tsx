@@ -129,6 +129,15 @@ export default {
 			},
 			control: { type: 'number' },
 		},
+		checkboxClickPadding: {
+			description: 'Amount of padding to add to the click box of the checkbox component',
+			table: {
+				type: {
+					summary: 'string | number',
+				},
+			},
+			control: { type: 'string' },
+		},
 		hideCheckboxes: {
 			defaultValue: false,
 			description: 'Hide/show bundle checkboxes in results',

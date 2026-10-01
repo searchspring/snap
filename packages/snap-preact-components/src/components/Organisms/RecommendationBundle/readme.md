@@ -217,6 +217,13 @@ The `hideCheckboxes` prop specifies if the bundle checkboxes should be rendered.
 <RecommendationBundle controller={controller} onAddToCart={(e, items)=>{console.log(items)}} hideCheckboxes={true} />
 ```
 
+### checkboxClickPadding
+The `checkboxClickPadding` prop specifies the padding around the checkbox to increase the clickable area. Can take a string or number to be converted to px. 
+
+```jsx
+<RecommendationBundle controller={controller} onAddToCart={(e, items)=>{console.log(items)}} checkboxClickPadding={10} />
+```
+
 ### vertical
 The `vertical` prop sets the carousel scroll direction to vertical.
 
