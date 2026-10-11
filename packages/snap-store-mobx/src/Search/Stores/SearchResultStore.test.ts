@@ -1615,6 +1615,78 @@ describe('SearchResultStore', () => {
 				const previouslySelectedSelections = variants.selections.map((selection) => selection.selected?.value);
 				expect(previouslySelectedSelections).toStrictEqual(['Desert', '30', '34']);
 			});
+
+			it('sorts selection values correctly when first color group has incomplete sizes', () => {
+				const mask = new ProductMask();
+
+				// Simulate data where first color (Snow Marle) is missing XS, S sizes
+				// but later color (Bay Leaf) has complete sizes XS, S, M, L, XL, XXL
+				const variantData: VariantData[] = [
+					// Snow Marle - only has M, L, XL, XXL (missing XS, S)
+					{
+						mappings: { core: { price: 79.95, thumbnailImageUrl: 'snow-m.jpg' } },
+						attributes: { available: true },
+						options: { colour: { value: 'Snow Marle' }, size: { value: 'M' } },
+					},
+					{
+						mappings: { core: { price: 79.95, thumbnailImageUrl: 'snow-l.jpg' } },
+						attributes: { available: true },
+						options: { colour: { value: 'Snow Marle' }, size: { value: 'L' } },
+					},
+					{
+						mappings: { core: { price: 79.95, thumbnailImageUrl: 'snow-xl.jpg' } },
+						attributes: { available: true },
+						options: { colour: { value: 'Snow Marle' }, size: { value: 'XL' } },
+					},
+					{
+						mappings: { core: { price: 79.95, thumbnailImageUrl: 'snow-xxl.jpg' } },
+						attributes: { available: true },
+						options: { colour: { value: 'Snow Marle' }, size: { value: 'XXL' } },
+					},
+					// Bay Leaf - has complete sizes XS, S, M, L, XL, XXL
+					{
+						mappings: { core: { price: 79.95, thumbnailImageUrl: 'bay-xs.jpg' } },
+						attributes: { available: true },
+						options: { colour: { value: 'Bay Leaf' }, size: { value: 'XS' } },
+					},
+					{
+						mappings: { core: { price: 79.95, thumbnailImageUrl: 'bay-s.jpg' } },
+						attributes: { available: true },
+						options: { colour: { value: 'Bay Leaf' }, size: { value: 'S' } },
+					},
+					{
+						mappings: { core: { price: 79.95, thumbnailImageUrl: 'bay-m.jpg' } },
+						attributes: { available: true },
+						options: { colour: { value: 'Bay Leaf' }, size: { value: 'M' } },
+					},
+					{
+						mappings: { core: { price: 79.95, thumbnailImageUrl: 'bay-l.jpg' } },
+						attributes: { available: true },
+						options: { colour: { value: 'Bay Leaf' }, size: { value: 'L' } },
+					},
+					{
+						mappings: { core: { price: 79.95, thumbnailImageUrl: 'bay-xl.jpg' } },
+						attributes: { available: true },
+						options: { colour: { value: 'Bay Leaf' }, size: { value: 'XL' } },
+					},
+					{
+						mappings: { core: { price: 79.95, thumbnailImageUrl: 'bay-xxl.jpg' } },
+						attributes: { available: true },
+						options: { colour: { value: 'Bay Leaf' }, size: { value: 'XXL' } },
+					},
+				];
+
+				const variants = new Variants(variantData, mask);
+
+				// Find the size selection
+				const sizeSelection = variants.selections.find((s) => s.field === 'size');
+				expect(sizeSelection).toBeDefined();
+
+				// Values should be sorted based on complete color group (Bay Leaf): XS, S, M, L, XL, XXL
+				// NOT the order from incomplete Snow Marle: M, L, XL, XXL, XS, S
+				const sizeValues = sizeSelection!.values.map((v) => v.value);
+				expect(sizeValues).toStrictEqual(['XS', 'S', 'M', 'L', 'XL', 'XXL']);
+			});
 		});
 	});
 
