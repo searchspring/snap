@@ -295,7 +295,7 @@ export class RecommendationController extends AbstractController {
 
 			const searchProfile = this.profiler.create({ type: 'event', name: 'search', context: params }).start();
 
-			const response = await this.client.recommend(params);
+			const response = await this.client.recommend(params, { beacon: this.config.beacon?.enabled });
 			searchProfile.stop();
 			this.log.profile(searchProfile);
 

@@ -152,6 +152,33 @@ describe('Autocomplete Controller', () => {
 		});
 	});
 
+	it.each([
+		{ name: 'by default', beacon: undefined, expected: { beacon: true } },
+		{ name: 'when beacon is disabled', beacon: { enabled: false }, expected: { beacon: false } },
+	])('passes beacon.enabled to the client request options $name', async ({ beacon, expected }) => {
+		if (beacon) acConfig = { ...acConfig, beacon };
+
+		const controller = new AutocompleteController(acConfig, {
+			client: new MockClient(globals, {}),
+			store: new AutocompleteStore(acConfig, services),
+			urlManager,
+			eventManager: new EventManager(),
+			profiler: new Profiler(),
+			logger: new Logger(),
+			tracker: new Tracker(globals),
+		});
+		const autocompletefn = jest.spyOn(controller.client, 'autocomplete');
+
+		await controller.init();
+		controller.urlManager = controller.urlManager.reset().set('query', 'wh');
+		(controller.client as MockClient).mockData.updateConfig({ autocomplete: 'autocomplete.query.wh' });
+
+		await controller.search();
+
+		expect(autocompletefn).toHaveBeenCalledTimes(1);
+		expect(autocompletefn.mock.calls[0][1]).toStrictEqual(expected);
+	});
+
 	it('has results after search method called', async () => {
 		const controller = new AutocompleteController(acConfig, {
 			client: new MockClient(globals, {}),

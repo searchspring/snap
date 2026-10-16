@@ -10,6 +10,7 @@ The `AutocompleteController` is used when making queries to the API `autocomplet
 | selector | css selector for input elements that DOM events should be bound to | ➖ | ✔️ |
 | action | optional way to override the form action or provide one when it does not exist | ➖ |   |
 | globals | keys defined here will be passed to the API request (can overwrite global config)| ➖ |   |
+| beacon.enabled | enables beacon tracking for this controller. When `false`, beacon events are not sent and the controller's API requests opt out of tracking (see the [Client request options](https://github.com/searchspring/snap/tree/main/packages/snap-client#request-options)) | true |   |
 | settings.integratedSpellCorrection | integrated spell correction feature flag | false |   |
 | settings.initializeFromUrl | initialize the controller with query parameter from URL (pre-fill input with current search) | true |   |
 | settings.disableClickOutside | prevent the autocomplete from closing on clicks to the document | false |   |

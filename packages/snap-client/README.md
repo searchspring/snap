@@ -164,6 +164,30 @@ const [meta, results] = await client.search({
 });
 ```
 
+## Request options
+The `search`, `category`, `autocomplete`, `finder` and `recommend` methods accept request options as an optional second parameter.
+
+| option | description | default value |
+|---|---|:---:|
+| beacon | when `false`, the request opts out of API tracking: it is sent with `noBeacon=true` instead of `beacon=true` | true |
+
+Recommendation requests with `beacon: false` are batched separately from tracked requests, since the beacon parameter applies to the whole batch. Controllers set this option from their `beacon.enabled` config.
+
+```js
+const client = new Client(globals, clientConfig);
+
+const [meta, results] = await client.search(
+  {
+    search: {
+      query: {
+        string: 'dress'
+      }
+    }
+  },
+  { beacon: false }
+);
+```
+
 ## `search` method
 Makes a request to the Searchspring Search API and returns a promise.  
 

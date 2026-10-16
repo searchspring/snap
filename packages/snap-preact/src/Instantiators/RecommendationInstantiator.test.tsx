@@ -315,14 +315,17 @@ describe('RecommendationInstantiator', () => {
 		expect(Object.keys(recommendationInstantiator.controller).length).toBe(1);
 		expect(recommendationInstantiator.controller['recommend_legacy_0']).toBeDefined();
 		expect(clientSpy).toHaveBeenCalledTimes(1);
-		expect(clientSpy).toHaveBeenCalledWith({
-			batchId: undefined,
-			batched: true,
-			branch: 'production',
-			products: ['prod1234'],
-			siteId: '8uyt2m',
-			tag: 'legacy',
-		});
+		expect(clientSpy).toHaveBeenCalledWith(
+			{
+				batchId: undefined,
+				batched: true,
+				branch: 'production',
+				products: ['prod1234'],
+				siteId: '8uyt2m',
+				tag: 'legacy',
+			},
+			{ beacon: true }
+		);
 	});
 
 	it('supports legacy script type with array values in product', async () => {
@@ -338,14 +341,17 @@ describe('RecommendationInstantiator', () => {
 		expect(Object.keys(recommendationInstantiator.controller).length).toBe(1);
 		expect(recommendationInstantiator.controller['recommend_legacy_0']).toBeDefined();
 		expect(clientSpy).toHaveBeenCalledTimes(1);
-		expect(clientSpy).toHaveBeenCalledWith({
-			batchId: undefined,
-			batched: true,
-			branch: 'production',
-			products: ['prod1234'],
-			siteId: '8uyt2m',
-			tag: 'legacy',
-		});
+		expect(clientSpy).toHaveBeenCalledWith(
+			{
+				batchId: undefined,
+				batched: true,
+				branch: 'production',
+				products: ['prod1234'],
+				siteId: '8uyt2m',
+				tag: 'legacy',
+			},
+			{ beacon: true }
+		);
 	});
 
 	it('supports legacy script type with array values in products', async () => {
@@ -361,14 +367,17 @@ describe('RecommendationInstantiator', () => {
 		expect(Object.keys(recommendationInstantiator.controller).length).toBe(1);
 		expect(recommendationInstantiator.controller['recommend_legacy_0']).toBeDefined();
 		expect(clientSpy).toHaveBeenCalledTimes(1);
-		expect(clientSpy).toHaveBeenCalledWith({
-			batchId: undefined,
-			batched: true,
-			branch: 'production',
-			products: ['prod1234', 'prod4567'],
-			siteId: '8uyt2m',
-			tag: 'legacy',
-		});
+		expect(clientSpy).toHaveBeenCalledWith(
+			{
+				batchId: undefined,
+				batched: true,
+				branch: 'production',
+				products: ['prod1234', 'prod4567'],
+				siteId: '8uyt2m',
+				tag: 'legacy',
+			},
+			{ beacon: true }
+		);
 	});
 
 	it('supports legacy script type with config context', async () => {
@@ -428,41 +437,53 @@ describe('RecommendationInstantiator', () => {
 		expect(Object.keys(recommendationInstantiator.controller).length).toBe(3);
 		expect(recommendationInstantiator.controller['recommend_legacy_0']).toBeDefined();
 		expect(clientSpy).toHaveBeenCalledTimes(3);
-		expect(clientSpy).toHaveBeenNthCalledWith(1, {
-			batchId: undefined,
-			batched: true,
-			branch: 'production',
-			products: ['prod1234', 'prod4567'],
-			profile: {
+		expect(clientSpy).toHaveBeenNthCalledWith(
+			1,
+			{
+				batchId: undefined,
 				batched: true,
+				branch: 'production',
+				products: ['prod1234', 'prod4567'],
+				profile: {
+					batched: true,
+				},
+				siteId: '8uyt2m',
+				tag: 'legacy',
 			},
-			siteId: '8uyt2m',
-			tag: 'legacy',
-		});
+			{ beacon: true }
+		);
 
-		expect(clientSpy).toHaveBeenNthCalledWith(2, {
-			batchId: undefined,
-			batched: false,
-			branch: 'production',
-			products: ['prod0'],
-			profile: {
+		expect(clientSpy).toHaveBeenNthCalledWith(
+			2,
+			{
+				batchId: undefined,
 				batched: false,
+				branch: 'production',
+				products: ['prod0'],
+				profile: {
+					batched: false,
+				},
+				siteId: '8uyt2m',
+				tag: 'legacy',
 			},
-			siteId: '8uyt2m',
-			tag: 'legacy',
-		});
+			{ beacon: true }
+		);
 
-		expect(clientSpy).toHaveBeenNthCalledWith(3, {
-			batchId: undefined,
-			batched: true,
-			branch: 'production',
-			products: ['prod789'],
-			profile: {
+		expect(clientSpy).toHaveBeenNthCalledWith(
+			3,
+			{
+				batchId: undefined,
 				batched: true,
+				branch: 'production',
+				products: ['prod789'],
+				profile: {
+					batched: true,
+				},
+				siteId: '8uyt2m',
+				tag: 'legacy',
 			},
-			siteId: '8uyt2m',
-			tag: 'legacy',
-		});
+			{ beacon: true }
+		);
 	});
 
 	it('makes the context found on the target and in the config available', async () => {
@@ -538,33 +559,36 @@ describe('RecommendationInstantiator', () => {
 		});
 
 		expect(clientSpy).toHaveBeenCalledTimes(1);
-		expect(clientSpy).toHaveBeenCalledWith({
-			tag: 'trending',
-			products: ['sku1'],
-			shopper: 'snapdev',
-			branch: 'testing',
-			batched: true,
-			siteId: baseConfig.client?.globals.siteId,
-			profile: {
-				siteId: 'abc123',
+		expect(clientSpy).toHaveBeenCalledWith(
+			{
+				tag: 'trending',
+				products: ['sku1'],
+				shopper: 'snapdev',
 				branch: 'testing',
-				categories: ['cats', 'dogs'],
-				filters: [
-					{
-						type: 'value',
-						field: 'color',
-						value: 'blue',
-					},
-					{
-						type: 'range',
-						field: 'price',
-						value: { low: 0, high: 20 },
-					},
-				],
-				brands: ['nike', 'h&m'],
-				limit: 5,
+				batched: true,
+				siteId: baseConfig.client?.globals.siteId,
+				profile: {
+					siteId: 'abc123',
+					branch: 'testing',
+					categories: ['cats', 'dogs'],
+					filters: [
+						{
+							type: 'value',
+							field: 'color',
+							value: 'blue',
+						},
+						{
+							type: 'range',
+							field: 'price',
+							value: { low: 0, high: 20 },
+						},
+					],
+					brands: ['nike', 'h&m'],
+					limit: 5,
+				},
 			},
-		});
+			{ beacon: true }
+		);
 	});
 
 	it('uses the globals from the config in the request', async () => {
@@ -619,28 +643,31 @@ describe('RecommendationInstantiator', () => {
 		});
 
 		expect(clientSpy).toHaveBeenCalledTimes(1);
-		expect(clientSpy).toHaveBeenCalledWith({
-			tag: 'trending',
-			branch: 'production',
-			batched: true,
-			siteId: baseConfig.client?.globals.siteId,
-			filters: [
-				{
-					type: 'value',
-					field: 'color',
-					value: 'red',
-				},
-			],
-			profile: {
+		expect(clientSpy).toHaveBeenCalledWith(
+			{
+				tag: 'trending',
+				branch: 'production',
+				batched: true,
+				siteId: baseConfig.client?.globals.siteId,
 				filters: [
 					{
 						type: 'value',
 						field: 'color',
-						value: 'blue',
+						value: 'red',
 					},
 				],
+				profile: {
+					filters: [
+						{
+							type: 'value',
+							field: 'color',
+							value: 'blue',
+						},
+					],
+				},
 			},
-		});
+			{ beacon: true }
+		);
 	});
 
 	it('can use new style script tags and context', async () => {
@@ -761,59 +788,67 @@ describe('RecommendationInstantiator', () => {
 		const batchId = recommendationInstantiator.controller[Object.keys(recommendationInstantiator.controller)[0]].store.config.batchId;
 
 		expect(clientSpy).toHaveBeenCalledTimes(2);
-		expect(clientSpy).toHaveBeenNthCalledWith(1, {
-			tag: 'trending',
-			products: ['C-AD-W1-1869P'],
-			cart: ['5678'],
-			blockedItems: ['1234', '5678'],
-			shopper: 'snapdev',
-			batchId,
-			siteId: baseConfig.client?.globals.siteId,
-			branch: 'production',
-			batched: true,
-			profile: {
-				brands: ['12345'],
-				categories: ['1234'],
-				limit: 1,
-				siteId: 'abc123',
-				order: 0,
-				filters: [
-					{
-						field: 'price',
-						type: 'range',
-						value: {
-							low: 20,
-							high: 40,
+		expect(clientSpy).toHaveBeenNthCalledWith(
+			1,
+			{
+				tag: 'trending',
+				products: ['C-AD-W1-1869P'],
+				cart: ['5678'],
+				blockedItems: ['1234', '5678'],
+				shopper: 'snapdev',
+				batchId,
+				siteId: baseConfig.client?.globals.siteId,
+				branch: 'production',
+				batched: true,
+				profile: {
+					brands: ['12345'],
+					categories: ['1234'],
+					limit: 1,
+					siteId: 'abc123',
+					order: 0,
+					filters: [
+						{
+							field: 'price',
+							type: 'range',
+							value: {
+								low: 20,
+								high: 40,
+							},
 						},
-					},
-				],
+					],
+				},
 			},
-		});
+			{ beacon: true }
+		);
 
-		expect(clientSpy).toHaveBeenNthCalledWith(2, {
-			tag: 'similar',
-			products: ['C-AD-W1-1869P'],
-			shopper: 'snapdev',
-			batchId,
-			siteId: baseConfig.client?.globals.siteId,
-			batched: true,
-			blockedItems: ['1234', '5678'],
-			branch: 'production',
-			cart: ['5678'],
-			profile: {
-				limit: 2,
-				brands: ['65432'],
-				categories: ['5678'],
-				order: 1,
-				filters: [
-					{
-						field: 'color',
-						type: 'value',
-						value: 'blue',
-					},
-				],
+		expect(clientSpy).toHaveBeenNthCalledWith(
+			2,
+			{
+				tag: 'similar',
+				products: ['C-AD-W1-1869P'],
+				shopper: 'snapdev',
+				batchId,
+				siteId: baseConfig.client?.globals.siteId,
+				batched: true,
+				blockedItems: ['1234', '5678'],
+				branch: 'production',
+				cart: ['5678'],
+				profile: {
+					limit: 2,
+					brands: ['65432'],
+					categories: ['5678'],
+					order: 1,
+					filters: [
+						{
+							field: 'color',
+							type: 'value',
+							value: 'blue',
+						},
+					],
+				},
 			},
-		});
+			{ beacon: true }
+		);
 	});
 
 	it('can use new style script (without globals)', async () => {
@@ -852,16 +887,20 @@ describe('RecommendationInstantiator', () => {
 		const batchId = recommendationInstantiator.controller[Object.keys(recommendationInstantiator.controller)[0]].store.config.batchId;
 
 		expect(clientSpy).toHaveBeenCalledTimes(1);
-		expect(clientSpy).toHaveBeenNthCalledWith(1, {
-			tag: '404',
-			batchId,
-			siteId: baseConfig.client?.globals.siteId,
-			branch: 'production',
-			batched: true,
-			profile: {
-				order: 0,
+		expect(clientSpy).toHaveBeenNthCalledWith(
+			1,
+			{
+				tag: '404',
+				batchId,
+				siteId: baseConfig.client?.globals.siteId,
+				branch: 'production',
+				batched: true,
+				profile: {
+					order: 0,
+				},
 			},
-		});
+			{ beacon: true }
+		);
 	});
 
 	it('will utilize attachments (plugins / middleware) added via methods upon creation of controller', async () => {

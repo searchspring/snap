@@ -125,6 +125,45 @@ describe('Snap Client', () => {
 		expect(client.meta).toBeDefined();
 	});
 
+	describe('passes request options to the requesters', () => {
+		const options = { beacon: false };
+
+		it.each([
+			['search', 'search', 'getSearch'],
+			['category', 'search', 'getCategory'],
+			['finder', 'finder', 'getFinder'],
+			['autocomplete', 'autocomplete', 'getAutocomplete'],
+		] as const)('%s', async (method, requester, requesterMethod) => {
+			const client = new Client({ siteId: '8uyt2m' });
+
+			// @ts-ignore - accessing private property
+			jest.spyOn(client.requesters.meta, 'getMeta').mockResolvedValue({});
+			// @ts-ignore - accessing private property
+			const requesterSpy = jest.spyOn(client.requesters[requester], requesterMethod).mockResolvedValue({});
+
+			await client[method]({ search: { query: { string: 'dress' } } }, options);
+
+			expect(requesterSpy).toHaveBeenCalledTimes(1);
+			expect(requesterSpy).toHaveBeenCalledWith({ siteId: '8uyt2m', search: { query: { string: 'dress' } } }, options);
+		});
+
+		it('recommend', async () => {
+			const client = new Client({ siteId: '8uyt2m' });
+
+			// @ts-ignore - accessing private property
+			jest.spyOn(client.requesters.meta, 'getMeta').mockResolvedValue({});
+			// @ts-ignore - accessing private property
+			jest.spyOn(client.requesters.recommend, 'getProfile').mockResolvedValue({});
+			// @ts-ignore - accessing private property
+			const requesterSpy = jest.spyOn(client.requesters.recommend, 'batchRecommendations').mockResolvedValue([]);
+
+			await client.recommend({ tag: 'similar' }, options);
+
+			expect(requesterSpy).toHaveBeenCalledTimes(1);
+			expect(requesterSpy).toHaveBeenCalledWith({ tag: 'similar', siteId: '8uyt2m' }, options);
+		});
+	});
+
 	describe('each fetch method uses the expected requester', () => {
 		beforeEach(() => {
 			jest.clearAllMocks();

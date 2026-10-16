@@ -12,6 +12,7 @@ The `RecommendationController` is used when making queries to the API `recommend
 | batched | batch multiple recommendations into a single network request | true |   |
 | limit | maximum number of results to display, can also be set globally via globals | 20 |  |
 | globals | keys defined here will be passed to the API request (can overwrite global config)| ➖ |   |
+| beacon.enabled | enables beacon tracking for this controller. When `false`, beacon events are not sent and the controller's API requests opt out of tracking (see the [Client request options](https://github.com/searchspring/snap/tree/main/packages/snap-client#request-options)) | true |   |
 | settings.searchOnPageShow | causes a search to be conducted when returning using browser back/forward cache | true |   | 
 | settings.variants.field | used to set the field in which to grab the variant data from | ➖ |   | 
 | settings.variants.showDisabledSelectionValues | determines if completely out of stock (disabled) options should appear in variant selections | false |   | 

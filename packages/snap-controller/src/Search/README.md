@@ -8,6 +8,7 @@ The `SearchController` is used when making queries to the API `search` endpoint.
 |---|---|:---:|:---:|
 | id | unique identifier for this controller | ➖ | ✔️ |
 | globals | keys defined here will be passed to the API request (can overwrite global config)| ➖ |   |
+| beacon.enabled | enables beacon tracking for this controller. When `false`, beacon events are not sent and the controller's API requests opt out of tracking (see the [Client request options](https://github.com/searchspring/snap/tree/main/packages/snap-client#request-options)) | true |   |
 | settings.redirects.merchandising | enable merchandising redirects | true |   |
 | settings.redirects.singleResult | enable redirect to product detail page if search yields 1 result count | true |   |
 | settings.facets.pinFiltered | selected facet options move to the top of the options array | true |   |
