@@ -54,6 +54,29 @@ describe('Finder Controller', () => {
 				config.id = uuidv4().split('-').join('');
 			});
 
+			it.each([
+				{ name: 'by default', beacon: undefined, expected: { beacon: true } },
+				{ name: 'when beacon is disabled', beacon: { enabled: false }, expected: { beacon: false } },
+			])('passes beacon.enabled to the client request options $name', async ({ beacon, expected }) => {
+				if (beacon) config = { ...config, beacon };
+
+				const controller = new FinderController(config, {
+					client: new MockClient(globals, {}),
+					store: new FinderStore(config, services),
+					urlManager,
+					eventManager: new EventManager(),
+					profiler: new Profiler(),
+					logger: new Logger(),
+					tracker: new Tracker(globals),
+				});
+				const finderfn = jest.spyOn(controller.client, 'finder');
+
+				await controller.search();
+
+				expect(finderfn).toHaveBeenCalledTimes(1);
+				expect(finderfn.mock.calls[0][1]).toStrictEqual(expected);
+			});
+
 			it(`can persist selections`, async () => {
 				config = {
 					...config,

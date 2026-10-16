@@ -153,7 +153,7 @@ export class FinderController extends AbstractController {
 
 			const searchProfile = this.profiler.create({ type: 'event', name: 'search', context: params }).start();
 
-			const [meta, response] = await this.client.finder(params);
+			const [meta, response] = await this.client.finder(params, { beacon: this.config.beacon?.enabled });
 			// @ts-ignore : MockClient will overwrite the client search() method and use SearchData to return mock data which already contains meta data
 			if (!response.meta) {
 				// @ts-ignore : MockClient will overwrite the client search() method and use SearchData to return mock data which already contains meta data

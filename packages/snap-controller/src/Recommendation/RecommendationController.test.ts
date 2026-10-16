@@ -67,6 +67,29 @@ describe('Recommendation Controller', () => {
 		}).toThrow();
 	});
 
+	it.each([
+		{ name: 'by default', beacon: undefined, expected: { beacon: true } },
+		{ name: 'when beacon is disabled', beacon: { enabled: false }, expected: { beacon: false } },
+	])('passes beacon.enabled to the client request options $name', async ({ beacon, expected }) => {
+		const config: RecommendationStoreConfig = beacon ? { ...recommendConfig, beacon } : recommendConfig;
+
+		const controller = new RecommendationController(config, {
+			client: new MockClient(globals, {}),
+			store: new RecommendationStore(config, services),
+			urlManager,
+			eventManager: new EventManager(),
+			profiler: new Profiler(),
+			logger: new Logger(),
+			tracker: new Tracker(globals),
+		});
+		const recommendfn = jest.spyOn(controller.client, 'recommend');
+
+		await controller.search();
+
+		expect(recommendfn).toHaveBeenCalledTimes(1);
+		expect(recommendfn.mock.calls[0][1]).toStrictEqual(expected);
+	});
+
 	const events = ['beforeSearch', 'afterSearch', 'afterStore'];
 	events.forEach((event) => {
 		it(`tests ${event} middleware cancellation handled`, async function () {
