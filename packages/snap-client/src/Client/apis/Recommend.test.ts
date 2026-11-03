@@ -4,7 +4,7 @@ import { RecommendAPI } from './Recommend';
 import { MockData } from '@searchspring/snap-shared';
 
 import type { RecommendPostRequestModel } from '../../types';
-import { BEACON_PARAM, NO_BEACON_PARAM } from '../transforms';
+import { BEACON_PARAM } from '../transforms';
 
 const mockData = new MockData();
 
@@ -139,7 +139,7 @@ describe('Recommend Api', () => {
 			headers: {
 				'Content-Type': 'text/plain',
 			},
-			body: `{"profiles":[{"tag":"similar"}],"siteId":"8uyt2m","${NO_BEACON_PARAM}":true}`,
+			body: `{"profiles":[{"tag":"similar"}],"siteId":"8uyt2m","noBeacon":true}`,
 		});
 		requestMock.mockReset();
 	});
@@ -174,7 +174,7 @@ describe('Recommend Api', () => {
 		});
 		expect(requestMock).toHaveBeenCalledWith('https://8uyt2m.a.p13n.searchspring.io/v1/recommend', {
 			...POSTParams,
-			body: `{"profiles":[{"tag":"hidden"}],"siteId":"8uyt2m","${NO_BEACON_PARAM}":true}`,
+			body: `{"profiles":[{"tag":"hidden"}],"siteId":"8uyt2m","noBeacon":true}`,
 		});
 		requestMock.mockReset();
 	});

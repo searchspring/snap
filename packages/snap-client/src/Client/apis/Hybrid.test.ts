@@ -2,7 +2,7 @@ import 'whatwg-fetch';
 import { ApiConfiguration } from './Abstract';
 import { HybridAPI } from './Hybrid';
 import { MockData } from '@searchspring/snap-shared';
-import { BEACON_PARAM, NO_BEACON_PARAM } from '../transforms';
+import { BEACON_PARAM } from '../transforms';
 
 const mockData = new MockData();
 
@@ -111,7 +111,7 @@ describe('Hybrid Api', () => {
 
 			expect(requestMock).toHaveBeenCalledTimes(1);
 			expect(requestMock).toHaveBeenCalledWith(
-				`https://8uyt2m.a.searchspring.io/api/search/${endpoint}.json?siteId=8uyt2m&q=untracked&${NO_BEACON_PARAM}=true&ajaxCatalog=Snap&resultsFormat=native`,
+				`https://8uyt2m.a.searchspring.io/api/search/${endpoint}.json?siteId=8uyt2m&q=untracked&noBeacon=true&ajaxCatalog=Snap&resultsFormat=native`,
 				params
 			);
 
@@ -132,7 +132,7 @@ describe('Hybrid Api', () => {
 			expect(requestMock).toHaveBeenCalledTimes(2);
 			expect(requestMock).toHaveBeenNthCalledWith(
 				2,
-				`https://8uyt2m.a.searchspring.io/api/search/autocomplete.json?siteId=8uyt2m&q=untracked&${NO_BEACON_PARAM}=true&redirectResponse=full&ajaxCatalog=Snap&resultsFormat=native`,
+				`https://8uyt2m.a.searchspring.io/api/search/autocomplete.json?siteId=8uyt2m&q=untracked&noBeacon=true&redirectResponse=full&ajaxCatalog=Snap&resultsFormat=native`,
 				params
 			);
 
@@ -160,7 +160,7 @@ describe('Hybrid Api', () => {
 			// repeated untracked request is served from the cache
 			expect(requestMock).toHaveBeenCalledTimes(1);
 			expect(requestMock).toHaveBeenLastCalledWith(
-				`https://8uyt2m.a.searchspring.io/api/search/search.json?siteId=8uyt2m&q=cached&${NO_BEACON_PARAM}=true&ajaxCatalog=Snap&resultsFormat=native`,
+				`https://8uyt2m.a.searchspring.io/api/search/search.json?siteId=8uyt2m&q=cached&noBeacon=true&ajaxCatalog=Snap&resultsFormat=native`,
 				params
 			);
 

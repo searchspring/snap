@@ -697,7 +697,7 @@ export class SearchController extends AbstractController {
 
 			const searchProfile = this.profiler.create({ type: 'event', name: 'search', context: params }).start();
 
-			const requestOptions = { beacon: this.config.beacon?.enabled };
+			const requestOptions = { beacon: !!this.config.beacon?.enabled };
 			let meta: MetaResponseModel = {};
 			let response: SearchResponseModel & { meta?: MetaResponseModel };
 
