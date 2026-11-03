@@ -111,6 +111,7 @@ describe('Search Controller', () => {
 
 		//@ts-ignore
 		delete window.location;
+		// @ts-ignore - modifying window
 		window.location = {
 			...window.location,
 			replace: jest.fn(),
@@ -141,6 +142,7 @@ describe('Search Controller', () => {
 
 		//@ts-ignore
 		delete window.location;
+		// @ts-ignore - modifying window
 		window.location = {
 			...window.location,
 			replace: jest.fn(),
@@ -180,6 +182,7 @@ describe('Search Controller', () => {
 		expect(controller.urlManager.state.query).toBe(redirectQuery);
 		//@ts-ignore
 		delete window.location;
+		// @ts-ignore - modifying window
 		window.location = {
 			...window.location,
 			replace: jest.fn(),
