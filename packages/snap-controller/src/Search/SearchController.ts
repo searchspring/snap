@@ -624,6 +624,7 @@ export class SearchController extends AbstractController {
 
 		params.tracking = params.tracking || {};
 		params.tracking.domain = window.location.href;
+		params.tracking.beacon = !!this.config.beacon?.enabled;
 
 		const { userId, sessionId, pageLoadId, shopperId } = this.tracker.getContext();
 		if (userId) {
@@ -697,7 +698,6 @@ export class SearchController extends AbstractController {
 
 			const searchProfile = this.profiler.create({ type: 'event', name: 'search', context: params }).start();
 
-			const requestOptions = { beacon: !!this.config.beacon?.enabled };
 			let meta: MetaResponseModel = {};
 			let response: SearchResponseModel & { meta?: MetaResponseModel };
 
@@ -735,7 +735,7 @@ export class SearchController extends AbstractController {
 								}
 							}
 							backfillRequestsParams.push(backfillParams);
-							return this.client[this.page.type](backfillParams, requestOptions);
+							return this.client[this.page.type](backfillParams);
 						});
 
 					const backfillResponses = await Promise.all(backfillRequests);
@@ -760,7 +760,7 @@ export class SearchController extends AbstractController {
 					response.results = backfillResults;
 				} else {
 					// infinite with no backfills.
-					[meta, response] = await this.client[this.page.type](params, requestOptions);
+					[meta, response] = await this.client[this.page.type](params);
 
 					const responseId = response.tracking.responseId;
 					this.events[responseId] = this.events[responseId] || { product: {}, banner: {} };
@@ -772,7 +772,7 @@ export class SearchController extends AbstractController {
 				// normal request
 				// clear previousResults to prevent infinite scroll from using them
 				this.previousResults = [];
-				[meta, response] = await this.client[this.page.type](params, requestOptions);
+				[meta, response] = await this.client[this.page.type](params);
 				const responseId = response.tracking.responseId;
 				this.events[responseId] = { product: {}, banner: {} };
 			}

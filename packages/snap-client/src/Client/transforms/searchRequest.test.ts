@@ -18,16 +18,16 @@ describe('search request transformer', () => {
 		expect(Object.keys(searchRequest)).toEqual(['q', 'sort.name', BEACON_PARAM]);
 	});
 
-	it('adds the beacon param when the beacon option is not false', () => {
+	it('adds the beacon param when tracking.beacon is not false', () => {
 		const expected = { q: ['red dress'], 'sort.name': ['asc'], [BEACON_PARAM]: true };
 
 		expect(transformSearchRequest(mockRequest)).toEqual(expected);
-		expect(transformSearchRequest(mockRequest, {})).toEqual(expected);
-		expect(transformSearchRequest(mockRequest, { beacon: true })).toEqual(expected);
+		expect(transformSearchRequest({ ...mockRequest, tracking: {} })).toEqual(expected);
+		expect(transformSearchRequest({ ...mockRequest, tracking: { beacon: true } })).toEqual(expected);
 	});
 
-	it('adds the no beacon param instead of the beacon param when the beacon option is false', () => {
-		const searchRequest = transformSearchRequest(mockRequest, { beacon: false });
+	it('adds the no beacon param instead of the beacon param when tracking.beacon is false', () => {
+		const searchRequest = transformSearchRequest({ ...mockRequest, tracking: { beacon: false } });
 
 		expect(searchRequest).toEqual({ q: ['red dress'], 'sort.name': ['asc'], [NO_BEACON_PARAM]: true });
 	});

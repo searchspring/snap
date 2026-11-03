@@ -591,11 +591,11 @@ describe('Search Controller', () => {
 	});
 
 	it.each([
-		{ name: 'by default', beacon: undefined, expected: { beacon: true } },
-		{ name: 'when beacon is disabled', beacon: { enabled: false }, expected: { beacon: false } },
-		{ name: 'when beacon.enabled is null', beacon: { enabled: null as unknown as boolean }, expected: { beacon: false } },
-		{ name: 'when beacon.enabled is undefined', beacon: { enabled: undefined as unknown as boolean }, expected: { beacon: false } },
-	])('passes beacon.enabled to the client request options $name', async ({ beacon, expected }) => {
+		{ name: 'by default', beacon: undefined, expected: true },
+		{ name: 'when beacon is disabled', beacon: { enabled: false }, expected: false },
+		{ name: 'when beacon.enabled is null', beacon: { enabled: null as unknown as boolean }, expected: false },
+		{ name: 'when beacon.enabled is undefined', beacon: { enabled: undefined as unknown as boolean }, expected: false },
+	])('sets tracking.beacon in the request from beacon.enabled $name', async ({ beacon, expected }) => {
 		if (beacon) searchConfig = { ...searchConfig, beacon };
 
 		const controller = new SearchController(searchConfig, {
@@ -612,10 +612,10 @@ describe('Search Controller', () => {
 		await controller.search();
 
 		expect(searchfn).toHaveBeenCalledTimes(1);
-		expect(searchfn.mock.calls[0][1]).toStrictEqual(expected);
+		expect(searchfn.mock.calls[0][0]?.tracking?.beacon).toBe(expected);
 	});
 
-	it('passes beacon.enabled to the client request options on category pages', async () => {
+	it('sets tracking.beacon in the request on category pages', async () => {
 		searchConfig = { ...searchConfig, beacon: { enabled: false } };
 
 		const controller = new SearchController(
@@ -637,7 +637,7 @@ describe('Search Controller', () => {
 		await controller.search();
 
 		expect(categoryfn).toHaveBeenCalledTimes(1);
-		expect(categoryfn.mock.calls[0][1]).toStrictEqual({ beacon: false });
+		expect(categoryfn.mock.calls[0][0]?.tracking?.beacon).toBe(false);
 	});
 
 	const errorEvents = ['init', 'beforeSearch', 'afterSearch', 'afterStore'];
@@ -1091,13 +1091,9 @@ describe('Search Controller', () => {
 			expect(searchfn).toHaveBeenCalledTimes(page);
 
 			// asserting that search API has been called the same number of times as the current page parameter
-			expect(searchfn).toHaveBeenNthCalledWith(1, expect.objectContaining({ pagination: {} }), { beacon: true });
-			expect(searchfn).toHaveBeenNthCalledWith(2, expect.objectContaining({ pagination: { page: 2 }, search: { redirectResponse: 'full' } }), {
-				beacon: true,
-			});
-			expect(searchfn).toHaveBeenNthCalledWith(3, expect.objectContaining({ pagination: { page: 3 }, search: { redirectResponse: 'full' } }), {
-				beacon: true,
-			});
+			expect(searchfn).toHaveBeenNthCalledWith(1, expect.objectContaining({ pagination: {} }));
+			expect(searchfn).toHaveBeenNthCalledWith(2, expect.objectContaining({ pagination: { page: 2 }, search: { redirectResponse: 'full' } }));
+			expect(searchfn).toHaveBeenNthCalledWith(3, expect.objectContaining({ pagination: { page: 3 }, search: { redirectResponse: 'full' } }));
 
 			expect(controller.store.results.length).toBe(mockClient.mockData.search().pagination?.totalResults);
 
@@ -1196,13 +1192,9 @@ describe('Search Controller', () => {
 			expect(searchfn).toHaveBeenCalledTimes(page);
 
 			// asserting that search API has been called the same number of times as the current page parameter
-			expect(searchfn).toHaveBeenNthCalledWith(1, expect.objectContaining({ pagination: {} }), { beacon: true });
-			expect(searchfn).toHaveBeenNthCalledWith(2, expect.objectContaining({ pagination: { page: 2 }, search: { redirectResponse: 'full' } }), {
-				beacon: true,
-			});
-			expect(searchfn).toHaveBeenNthCalledWith(3, expect.objectContaining({ pagination: { page: 3 }, search: { redirectResponse: 'full' } }), {
-				beacon: true,
-			});
+			expect(searchfn).toHaveBeenNthCalledWith(1, expect.objectContaining({ pagination: {} }));
+			expect(searchfn).toHaveBeenNthCalledWith(2, expect.objectContaining({ pagination: { page: 2 }, search: { redirectResponse: 'full' } }));
+			expect(searchfn).toHaveBeenNthCalledWith(3, expect.objectContaining({ pagination: { page: 3 }, search: { redirectResponse: 'full' } }));
 
 			expect(controller.store.results.length).toBe(pageSize * page);
 

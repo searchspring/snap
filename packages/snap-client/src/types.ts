@@ -8,6 +8,14 @@ import type {
 } from '@searchspring/snapi-types';
 import { BEACON_PARAM, NO_BEACON_PARAM } from './Client/transforms';
 
+// declares `tracking.beacon` on search requests until @searchspring/snapi-types includes it
+declare module '@searchspring/snapi-types/models/SearchRequestModelTracking' {
+	interface SearchRequestModelTracking {
+		// false opts the request out of API tracking (sends NO_BEACON_PARAM instead of BEACON_PARAM)
+		beacon?: boolean;
+	}
+}
+
 export type HTTPHeaders = { [key: string]: string };
 
 type RequesterConfig<T> = {
@@ -60,11 +68,6 @@ export type GenericGlobals = {
 
 export type ClientGlobals = GenericGlobals & {
 	siteId: string;
-};
-
-export type ClientRequestOptions = {
-	// false opts the request out of API tracking (sends NO_BEACON_PARAM instead of BEACON_PARAM)
-	beacon?: boolean;
 };
 
 export type SuggestRequestModel = {
@@ -127,6 +130,10 @@ export type RecommendRequestGlobalsModel = {
 	batchId?: number;
 	test?: boolean;
 	withRecInfo?: boolean;
+	tracking?: {
+		// false opts the request out of API tracking (sends NO_BEACON_PARAM instead of BEACON_PARAM)
+		beacon?: boolean;
+	};
 };
 
 export type RecommendRequestOptionsModel = {

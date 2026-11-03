@@ -68,11 +68,11 @@ describe('Recommendation Controller', () => {
 	});
 
 	it.each([
-		{ name: 'by default', beacon: undefined, expected: { beacon: true } },
-		{ name: 'when beacon is disabled', beacon: { enabled: false }, expected: { beacon: false } },
-		{ name: 'when beacon.enabled is null', beacon: { enabled: null as unknown as boolean }, expected: { beacon: false } },
-		{ name: 'when beacon.enabled is undefined', beacon: { enabled: undefined as unknown as boolean }, expected: { beacon: false } },
-	])('passes beacon.enabled to the client request options $name', async ({ beacon, expected }) => {
+		{ name: 'by default', beacon: undefined, expected: true },
+		{ name: 'when beacon is disabled', beacon: { enabled: false }, expected: false },
+		{ name: 'when beacon.enabled is null', beacon: { enabled: null as unknown as boolean }, expected: false },
+		{ name: 'when beacon.enabled is undefined', beacon: { enabled: undefined as unknown as boolean }, expected: false },
+	])('sets tracking.beacon in the request from beacon.enabled $name', async ({ beacon, expected }) => {
 		const config: RecommendationStoreConfig = beacon ? { ...recommendConfig, beacon } : recommendConfig;
 
 		const controller = new RecommendationController(config, {
@@ -89,7 +89,7 @@ describe('Recommendation Controller', () => {
 		await controller.search();
 
 		expect(recommendfn).toHaveBeenCalledTimes(1);
-		expect(recommendfn.mock.calls[0][1]).toStrictEqual(expected);
+		expect(recommendfn.mock.calls[0][0].tracking?.beacon).toBe(expected);
 	});
 
 	const events = ['beforeSearch', 'afterSearch', 'afterStore'];

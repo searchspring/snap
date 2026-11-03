@@ -12,7 +12,7 @@ import {
 
 import { API, ApiConfigurationParameters, LegacyAPI, SuggestAPI, ApiConfiguration } from '.';
 import { transformSearchRequest, transformSearchResponse, transformSuggestResponse } from '../transforms';
-import type { SuggestRequestModel, HybridRequesterConfig, ClientRequestOptions } from '../../types';
+import type { SuggestRequestModel, HybridRequesterConfig } from '../../types';
 export const DEVELOPMENT_MODE_PARAM = 'test';
 
 export class HybridAPI extends API {
@@ -63,8 +63,8 @@ export class HybridAPI extends API {
 		return this.requesters.legacy.getMeta(legacyRequestParameters);
 	}
 
-	async getSearch(requestParameters: SearchRequestModel, options?: ClientRequestOptions): Promise<SearchResponseModel> {
-		const legacyRequestParameters = transformSearchRequest(requestParameters, options);
+	async getSearch(requestParameters: SearchRequestModel): Promise<SearchResponseModel> {
+		const legacyRequestParameters = transformSearchRequest(requestParameters);
 
 		if (this.configuration.mode == AppMode.development) {
 			legacyRequestParameters[DEVELOPMENT_MODE_PARAM] = true;
@@ -75,8 +75,8 @@ export class HybridAPI extends API {
 		return transformSearchResponse(legacyData, requestParameters);
 	}
 
-	async getCategory(requestParameters: SearchRequestModel, options?: ClientRequestOptions): Promise<SearchResponseModel> {
-		const legacyRequestParameters = transformSearchRequest(requestParameters, options);
+	async getCategory(requestParameters: SearchRequestModel): Promise<SearchResponseModel> {
+		const legacyRequestParameters = transformSearchRequest(requestParameters);
 
 		if (this.configuration.mode == AppMode.development) {
 			legacyRequestParameters[DEVELOPMENT_MODE_PARAM] = true;
@@ -87,8 +87,8 @@ export class HybridAPI extends API {
 		return transformSearchResponse(legacyData, requestParameters);
 	}
 
-	async getFinder(requestParameters: SearchRequestModel, options?: ClientRequestOptions): Promise<SearchResponseModel> {
-		const legacyRequestParameters = transformSearchRequest(requestParameters, options);
+	async getFinder(requestParameters: SearchRequestModel): Promise<SearchResponseModel> {
+		const legacyRequestParameters = transformSearchRequest(requestParameters);
 
 		if (this.configuration.mode == AppMode.development) {
 			legacyRequestParameters[DEVELOPMENT_MODE_PARAM] = true;
@@ -99,8 +99,8 @@ export class HybridAPI extends API {
 		return transformSearchResponse(legacyData, requestParameters);
 	}
 
-	async getAutocomplete(requestParameters: AutocompleteRequestModel, options?: ClientRequestOptions): Promise<AutocompleteResponseModel> {
-		const legacyRequestParameters = transformSearchRequest(requestParameters, options);
+	async getAutocomplete(requestParameters: AutocompleteRequestModel): Promise<AutocompleteResponseModel> {
+		const legacyRequestParameters = transformSearchRequest(requestParameters);
 
 		const suggestParams: SuggestRequestModel = {
 			siteId: legacyRequestParameters.siteId,

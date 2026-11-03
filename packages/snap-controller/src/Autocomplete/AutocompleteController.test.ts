@@ -153,11 +153,11 @@ describe('Autocomplete Controller', () => {
 	});
 
 	it.each([
-		{ name: 'by default', beacon: undefined, expected: { beacon: true } },
-		{ name: 'when beacon is disabled', beacon: { enabled: false }, expected: { beacon: false } },
-		{ name: 'when beacon.enabled is null', beacon: { enabled: null as unknown as boolean }, expected: { beacon: false } },
-		{ name: 'when beacon.enabled is undefined', beacon: { enabled: undefined as unknown as boolean }, expected: { beacon: false } },
-	])('passes beacon.enabled to the client request options $name', async ({ beacon, expected }) => {
+		{ name: 'by default', beacon: undefined, expected: true },
+		{ name: 'when beacon is disabled', beacon: { enabled: false }, expected: false },
+		{ name: 'when beacon.enabled is null', beacon: { enabled: null as unknown as boolean }, expected: false },
+		{ name: 'when beacon.enabled is undefined', beacon: { enabled: undefined as unknown as boolean }, expected: false },
+	])('sets tracking.beacon in the request from beacon.enabled $name', async ({ beacon, expected }) => {
 		if (beacon) acConfig = { ...acConfig, beacon };
 
 		const controller = new AutocompleteController(acConfig, {
@@ -178,7 +178,7 @@ describe('Autocomplete Controller', () => {
 		await controller.search();
 
 		expect(autocompletefn).toHaveBeenCalledTimes(1);
-		expect(autocompletefn.mock.calls[0][1]).toStrictEqual(expected);
+		expect(autocompletefn.mock.calls[0][0]?.tracking?.beacon).toBe(expected);
 	});
 
 	it('has results after search method called', async () => {

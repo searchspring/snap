@@ -1,5 +1,5 @@
 import { API, ApiConfiguration } from './Abstract';
-import { HTTPHeaders, RecommendPostRequestProfileModel, ClientRequestOptions } from '../../types';
+import { HTTPHeaders, RecommendPostRequestProfileModel } from '../../types';
 import { AppMode } from '@searchspring/snap-toolbox';
 import { beaconParams, NO_BEACON_PARAM, transformRecommendationFiltersPost } from '../transforms';
 import { ProfileRequestModel, ProfileResponseModel, RecommendResponseModel, RecommendRequestModel, RecommendPostRequestModel } from '../../types';
@@ -54,12 +54,12 @@ export class RecommendAPI extends API {
 		return response as unknown as ProfileResponseModel;
 	}
 
-	async batchRecommendations(parameters: RecommendRequestModel, options: ClientRequestOptions = {}): Promise<RecommendResponseModel> {
+	async batchRecommendations(parameters: RecommendRequestModel): Promise<RecommendResponseModel> {
 		const batchId = parameters.batchId || 1;
 
 		// set up batch key and deferred promises
 		// the beacon param applies to the whole batch, so requests opting out of tracking are batched separately
-		const beaconKey = options.beacon === false ? `:${NO_BEACON_PARAM}` : '';
+		const beaconKey = parameters.tracking?.beacon === false ? `:${NO_BEACON_PARAM}` : '';
 		const key = (parameters.batched ? `${parameters.profile?.siteId || parameters.siteId}:${batchId}` : `${Math.random()}:${batchId}`) + beaconKey;
 		const batch = (this.batches[key] = this.batches[key] || { timeout: null, request: { profiles: [] }, entries: [] });
 		const deferred = new Deferred();
@@ -128,7 +128,7 @@ export class RecommendAPI extends API {
 				}
 
 				// parameters used globally
-				const { products, blockedItems, filters, test, cart, lastViewed, shopper, withRecInfo } = entry.request;
+				const { products, blockedItems, filters, test, cart, lastViewed, shopper, withRecInfo, tracking } = entry.request;
 
 				// merge and de-dupe global array fields
 				const dedupedProducts = Array.from(new Set((batch.request.products || []).concat(products || [])));
@@ -153,7 +153,7 @@ export class RecommendAPI extends API {
 						shopper,
 						withRecInfo: mergedWithRecInfo,
 					}),
-					...beaconParams(options),
+					...beaconParams(tracking?.beacon),
 				};
 				if (this.configuration.mode == AppMode.development) {
 					batch.request[DEVELOPMENT_MODE_PARAM] = true;

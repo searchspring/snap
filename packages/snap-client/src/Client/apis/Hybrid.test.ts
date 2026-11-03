@@ -90,7 +90,7 @@ describe('Hybrid Api', () => {
 		requestMock.mockReset();
 	});
 
-	describe('beacon request option', () => {
+	describe('tracking.beacon request parameter', () => {
 		const params = {
 			body: undefined,
 			headers: {},
@@ -101,13 +101,13 @@ describe('Hybrid Api', () => {
 			['getSearch', 'search'],
 			['getCategory', 'category'],
 			['getFinder', 'finder'],
-		] as const)('%s sends the no beacon param instead of the beacon param when beacon is false', async (method, endpoint) => {
+		] as const)('%s sends the no beacon param instead of the beacon param when tracking.beacon is false', async (method, endpoint) => {
 			const api = new HybridAPI(new ApiConfiguration({}));
 			const requestMock = jest
 				.spyOn(global.window, 'fetch')
 				.mockImplementation(() => Promise.resolve({ status: 200, json: () => Promise.resolve(mockData.search()) } as Response));
 
-			await api[method]({ siteId: '8uyt2m', search: { query: { string: 'untracked' } } }, { beacon: false });
+			await api[method]({ siteId: '8uyt2m', search: { query: { string: 'untracked' } }, tracking: { beacon: false } });
 
 			expect(requestMock).toHaveBeenCalledTimes(1);
 			expect(requestMock).toHaveBeenCalledWith(
@@ -118,7 +118,7 @@ describe('Hybrid Api', () => {
 			requestMock.mockReset();
 		});
 
-		it('getAutocomplete sends the no beacon param instead of the beacon param when beacon is false', async () => {
+		it('getAutocomplete sends the no beacon param instead of the beacon param when tracking.beacon is false', async () => {
 			const api = new HybridAPI(new ApiConfiguration({}));
 			const requestMock = jest
 				.spyOn(global.window, 'fetch')
@@ -126,7 +126,7 @@ describe('Hybrid Api', () => {
 				// suggest response determines the autocomplete query
 				.mockImplementationOnce(() => Promise.resolve({ status: 200, json: () => Promise.resolve({ query: 'untracked' }) } as Response));
 
-			await api.getAutocomplete({ siteId: '8uyt2m', search: { query: { string: 'untracked' } } }, { beacon: false });
+			await api.getAutocomplete({ siteId: '8uyt2m', search: { query: { string: 'untracked' } }, tracking: { beacon: false } });
 
 			// first request is to suggest, second is the autocomplete request that carries the beacon param
 			expect(requestMock).toHaveBeenCalledTimes(2);
@@ -153,9 +153,10 @@ describe('Hybrid Api', () => {
 				.mockImplementation(() => Promise.resolve({ status: 200, json: () => Promise.resolve(mockData.search()) } as Response));
 
 			const request = { siteId: '8uyt2m', search: { query: { string: 'cached' } } };
+			const untrackedRequest = { ...request, tracking: { beacon: false } };
 
-			await api.getSearch(request, { beacon: false });
-			await api.getSearch(request, { beacon: false });
+			await api.getSearch(untrackedRequest);
+			await api.getSearch(untrackedRequest);
 
 			// repeated untracked request is served from the cache
 			expect(requestMock).toHaveBeenCalledTimes(1);

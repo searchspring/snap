@@ -116,20 +116,18 @@ describe('Recommend Api', () => {
 		requestMock.mockReset();
 	});
 
-	it('batchRecommendations sends the no beacon param instead of the beacon param when beacon is false', async () => {
+	it('batchRecommendations sends the no beacon param instead of the beacon param when tracking.beacon is false', async () => {
 		const api = new RecommendAPI(new ApiConfiguration(apiConfig));
 
 		const requestMock = jest
 			.spyOn(global.window, 'fetch')
 			.mockImplementation(() => Promise.resolve({ status: 200, json: () => Promise.resolve([mockData.recommend()]) } as Response));
 
-		await api.batchRecommendations(
-			{
-				siteId: '8uyt2m',
-				tag: 'similar',
-			},
-			{ beacon: false }
-		);
+		await api.batchRecommendations({
+			siteId: '8uyt2m',
+			tag: 'similar',
+			tracking: { beacon: false },
+		});
 		//add delay for paramBatch.timeout
 		await wait(250);
 
@@ -144,7 +142,7 @@ describe('Recommend Api', () => {
 		requestMock.mockReset();
 	});
 
-	it('batchRecommendations batches requests with beacon false separately from tracked requests', async () => {
+	it('batchRecommendations batches requests with tracking.beacon false separately from tracked requests', async () => {
 		const api = new RecommendAPI(new ApiConfiguration(apiConfig));
 
 		const requestMock = jest
@@ -154,7 +152,7 @@ describe('Recommend Api', () => {
 			);
 
 		api.batchRecommendations({ siteId: '8uyt2m', tag: 'similar', batched: true });
-		api.batchRecommendations({ siteId: '8uyt2m', tag: 'hidden', batched: true }, { beacon: false });
+		api.batchRecommendations({ siteId: '8uyt2m', tag: 'hidden', batched: true, tracking: { beacon: false } });
 		api.batchRecommendations({ siteId: '8uyt2m', tag: 'crossSell', batched: true });
 
 		//add delay for paramBatch.timeout

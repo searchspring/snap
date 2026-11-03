@@ -265,6 +265,9 @@ export class RecommendationController extends AbstractController {
 			}
 		}
 
+		params.tracking = params.tracking || {};
+		params.tracking.beacon = !!this.config.beacon?.enabled;
+
 		return params as RecommendRequestModel;
 	}
 
@@ -295,7 +298,7 @@ export class RecommendationController extends AbstractController {
 
 			const searchProfile = this.profiler.create({ type: 'event', name: 'search', context: params }).start();
 
-			const response = await this.client.recommend(params, { beacon: !!this.config.beacon?.enabled });
+			const response = await this.client.recommend(params);
 			searchProfile.stop();
 			this.log.profile(searchProfile);
 

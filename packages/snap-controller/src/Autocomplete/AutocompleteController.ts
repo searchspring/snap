@@ -397,6 +397,7 @@ export class AutocompleteController extends AbstractController {
 		params.tracking = params.tracking || {};
 
 		params.tracking.domain = window.location.href;
+		params.tracking.beacon = !!this.config.beacon?.enabled;
 
 		if (userId) {
 			params.tracking.userId = userId;
@@ -839,7 +840,7 @@ export class AutocompleteController extends AbstractController {
 
 			const searchProfile = this.profiler.create({ type: 'event', name: 'search', context: params }).start();
 
-			const [meta, response] = await this.client.autocomplete(params, { beacon: !!this.config.beacon?.enabled });
+			const [meta, response] = await this.client.autocomplete(params);
 			// @ts-ignore : MockClient will overwrite the client search() method and use SearchData to return mock data which already contains meta data
 			if (!response.meta) {
 				// @ts-ignore : MockClient will overwrite the client search() method and use SearchData to return mock data which already contains meta data
