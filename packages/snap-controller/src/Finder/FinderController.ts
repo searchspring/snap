@@ -82,7 +82,10 @@ export class FinderController extends AbstractController {
 			tracking!.pageLoadId = pageLoadId;
 		}
 		tracking.domain = window.location.href;
-		tracking.beacon = !!this.config.beacon?.enabled;
+		// opt the request out of API tracking when beacon is not enabled
+		if (!this.config.beacon?.enabled) {
+			tracking.beacon = false;
+		}
 
 		// get only the finder fields and disable auto drill down
 		const defaultParams = {

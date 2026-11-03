@@ -6,7 +6,7 @@ import type {
 	AutocompleteRequestModel,
 	MetaResponseModel,
 } from '@searchspring/snapi-types';
-import { BEACON_PARAM, NO_BEACON_PARAM } from './Client/transforms';
+import { BEACON_PARAM } from './Client/transforms';
 
 export type HTTPHeaders = { [key: string]: string };
 
@@ -122,10 +122,8 @@ export type RecommendRequestGlobalsModel = {
 	batchId?: number;
 	test?: boolean;
 	withRecInfo?: boolean;
-	tracking?: {
-		// false opts the request out of API tracking (sends NO_BEACON_PARAM instead of BEACON_PARAM)
-		beacon?: boolean;
-	};
+	// false opts the request out of API tracking (sent as BEACON_PARAM: false)
+	beacon?: boolean;
 };
 
 export type RecommendRequestOptionsModel = {
@@ -156,7 +154,6 @@ export type RecommendPostRequestModel = {
 	blockedItems?: string[];
 	filters?: RecommendPostRequestFiltersModel[];
 	[BEACON_PARAM]?: boolean;
-	[NO_BEACON_PARAM]?: boolean;
 };
 
 export type RecommendPostRequestProfileModel = {

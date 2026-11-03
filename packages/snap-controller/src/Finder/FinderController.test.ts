@@ -55,11 +55,11 @@ describe('Finder Controller', () => {
 			});
 
 			it.each([
-				{ name: 'by default', beacon: undefined, expected: true },
+				{ name: 'by default', beacon: undefined, expected: undefined },
 				{ name: 'when beacon is disabled', beacon: { enabled: false }, expected: false },
 				{ name: 'when beacon.enabled is null', beacon: { enabled: null as unknown as boolean }, expected: false },
 				{ name: 'when beacon.enabled is undefined', beacon: { enabled: undefined as unknown as boolean }, expected: false },
-			])('sets tracking.beacon in the request from beacon.enabled $name', async ({ beacon, expected }) => {
+			])('passes tracking.beacon: $expected to the client $name', async ({ beacon, expected }) => {
 				if (beacon) config = { ...config, beacon };
 
 				const controller = new FinderController(config, {

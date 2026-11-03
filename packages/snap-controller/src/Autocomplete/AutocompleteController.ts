@@ -397,7 +397,10 @@ export class AutocompleteController extends AbstractController {
 		params.tracking = params.tracking || {};
 
 		params.tracking.domain = window.location.href;
-		params.tracking.beacon = !!this.config.beacon?.enabled;
+		// opt the request out of API tracking when beacon is not enabled
+		if (!this.config.beacon?.enabled) {
+			params.tracking.beacon = false;
+		}
 
 		if (userId) {
 			params.tracking.userId = userId;
