@@ -92,6 +92,29 @@ describe('Recommendation Controller', () => {
 		expect(recommendfn.mock.calls[0][0].beacon).toBe(expected);
 	});
 
+	it('does not modify the globals config when opting the request out of tracking', async () => {
+		const configGlobals = { ...recommendConfig.globals, beacon: true };
+		const config: RecommendationStoreConfig = { ...recommendConfig, beacon: { enabled: false }, globals: configGlobals };
+
+		const controller = new RecommendationController(config, {
+			client: new MockClient(globals, {}),
+			store: new RecommendationStore(config, services),
+			urlManager,
+			eventManager: new EventManager(),
+			profiler: new Profiler(),
+			logger: new Logger(),
+			tracker: new Tracker(globals),
+		});
+		const recommendfn = jest.spyOn(controller.client, 'recommend');
+
+		await controller.search();
+
+		expect(recommendfn).toHaveBeenCalledTimes(1);
+		expect(recommendfn.mock.calls[0][0].beacon).toBe(false);
+		expect(configGlobals).toStrictEqual({ product: mockSkus[0], beacon: true });
+		expect(controller.config.globals?.beacon).toBe(true);
+	});
+
 	const events = ['beforeSearch', 'afterSearch', 'afterStore'];
 	events.forEach((event) => {
 		it(`tests ${event} middleware cancellation handled`, async function () {
