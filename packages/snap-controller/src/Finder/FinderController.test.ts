@@ -278,6 +278,7 @@ describe('Finder Controller', () => {
 
 				//@ts-ignore
 				delete window.location;
+				// @ts-ignore - modifying window
 				window.location = {
 					...window.location,
 					href: '', // jest does not support window location changes
