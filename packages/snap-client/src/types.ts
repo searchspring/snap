@@ -122,6 +122,8 @@ export type RecommendRequestGlobalsModel = {
 	batchId?: number;
 	test?: boolean;
 	withRecInfo?: boolean;
+	// false opts the request out of API tracking (sent as BEACON_PARAM: false)
+	beacon?: boolean;
 };
 
 export type RecommendRequestOptionsModel = {

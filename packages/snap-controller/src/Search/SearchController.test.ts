@@ -593,6 +593,56 @@ describe('Search Controller', () => {
 		searchfn.mockClear();
 	});
 
+	it.each([
+		{ name: 'by default', beacon: undefined, expected: undefined },
+		{ name: 'when beacon is disabled', beacon: { enabled: false }, expected: false },
+		{ name: 'when beacon.enabled is null', beacon: { enabled: null as unknown as boolean }, expected: false },
+		{ name: 'when beacon.enabled is undefined', beacon: { enabled: undefined as unknown as boolean }, expected: false },
+	])('passes tracking.beacon: $expected to the client $name', async ({ beacon, expected }) => {
+		if (beacon) searchConfig = { ...searchConfig, beacon };
+
+		const controller = new SearchController(searchConfig, {
+			client: new MockClient(globals, {}),
+			store: new SearchStore(searchConfig, services),
+			urlManager,
+			eventManager: new EventManager(),
+			profiler: new Profiler(),
+			logger: new Logger(),
+			tracker: new Tracker(globals),
+		});
+		const searchfn = jest.spyOn(controller.client, 'search');
+
+		await controller.search();
+
+		expect(searchfn).toHaveBeenCalledTimes(1);
+		expect(searchfn.mock.calls[0][0]?.tracking?.beacon).toBe(expected);
+	});
+
+	it('sets tracking.beacon in the request on category pages', async () => {
+		searchConfig = { ...searchConfig, beacon: { enabled: false } };
+
+		const controller = new SearchController(
+			searchConfig,
+			{
+				client: new MockClient(globals, {}),
+				store: new SearchStore(searchConfig, services),
+				urlManager,
+				eventManager: new EventManager(),
+				profiler: new Profiler(),
+				logger: new Logger(),
+				tracker: new Tracker(globals),
+			},
+			{ page: { type: 'category' } }
+		);
+		// MockClient does not mock category requests, so respond with search mock data
+		const categoryfn = jest.spyOn(controller.client, 'category').mockImplementation(() => (controller.client as MockClient).search());
+
+		await controller.search();
+
+		expect(categoryfn).toHaveBeenCalledTimes(1);
+		expect(categoryfn.mock.calls[0][0]?.tracking?.beacon).toBe(false);
+	});
+
 	const errorEvents = ['init', 'beforeSearch', 'afterSearch', 'afterStore'];
 	errorEvents.forEach((event) => {
 		it(`logs error if middleware throws in ${event}`, async function () {

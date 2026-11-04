@@ -89,4 +89,93 @@ describe('Hybrid Api', () => {
 
 		requestMock.mockReset();
 	});
+
+	describe('tracking.beacon request parameter', () => {
+		const params = {
+			body: undefined,
+			headers: {},
+			method: 'GET',
+		};
+
+		it.each([
+			['getSearch', 'search'],
+			['getCategory', 'category'],
+			['getFinder', 'finder'],
+		] as const)('%s sends the no beacon param instead of the beacon param when tracking.beacon is false', async (method, endpoint) => {
+			const api = new HybridAPI(new ApiConfiguration({}));
+			const requestMock = jest
+				.spyOn(global.window, 'fetch')
+				.mockImplementation(() => Promise.resolve({ status: 200, json: () => Promise.resolve(mockData.search()) } as Response));
+
+			await api[method]({ siteId: '8uyt2m', search: { query: { string: 'untracked' } }, tracking: { beacon: false } });
+
+			expect(requestMock).toHaveBeenCalledTimes(1);
+			expect(requestMock).toHaveBeenCalledWith(
+				`https://8uyt2m.a.searchspring.io/api/search/${endpoint}.json?siteId=8uyt2m&q=untracked&noBeacon=true&ajaxCatalog=Snap&resultsFormat=native`,
+				params
+			);
+
+			requestMock.mockReset();
+		});
+
+		it('getAutocomplete sends the no beacon param instead of the beacon param when tracking.beacon is false', async () => {
+			const api = new HybridAPI(new ApiConfiguration({}));
+			const requestMock = jest
+				.spyOn(global.window, 'fetch')
+				.mockImplementation(() => Promise.resolve({ status: 200, json: () => Promise.resolve(mockData.autocomplete()) } as Response))
+				// suggest response determines the autocomplete query
+				.mockImplementationOnce(() => Promise.resolve({ status: 200, json: () => Promise.resolve({ query: 'untracked' }) } as Response));
+
+			await api.getAutocomplete({ siteId: '8uyt2m', search: { query: { string: 'untracked' } }, tracking: { beacon: false } });
+
+			// first request is to suggest, second is the autocomplete request that carries the beacon param
+			expect(requestMock).toHaveBeenCalledTimes(2);
+			expect(requestMock).toHaveBeenNthCalledWith(
+				2,
+				`https://8uyt2m.a.searchspring.io/api/search/autocomplete.json?siteId=8uyt2m&q=untracked&noBeacon=true&redirectResponse=full&ajaxCatalog=Snap&resultsFormat=native`,
+				params
+			);
+
+			requestMock.mockReset();
+		});
+
+		it('does not answer a tracked request from the cache entry of an untracked request', async () => {
+			// jsdom lacks performance.getEntriesByType, which NetworkCache reads before returning a cached entry
+			Object.defineProperty(window.performance, 'getEntriesByType', {
+				value: jest.fn().mockReturnValue([{ type: 'navigate' }]),
+				writable: true,
+				configurable: true,
+			});
+
+			const api = new HybridAPI(new ApiConfiguration({}));
+			const requestMock = jest
+				.spyOn(global.window, 'fetch')
+				.mockImplementation(() => Promise.resolve({ status: 200, json: () => Promise.resolve(mockData.search()) } as Response));
+
+			const request = { siteId: '8uyt2m', search: { query: { string: 'cached' } } };
+			const untrackedRequest = { ...request, tracking: { beacon: false } };
+
+			await api.getSearch(untrackedRequest);
+			await api.getSearch(untrackedRequest);
+
+			// repeated untracked request is served from the cache
+			expect(requestMock).toHaveBeenCalledTimes(1);
+			expect(requestMock).toHaveBeenLastCalledWith(
+				`https://8uyt2m.a.searchspring.io/api/search/search.json?siteId=8uyt2m&q=cached&noBeacon=true&ajaxCatalog=Snap&resultsFormat=native`,
+				params
+			);
+
+			await api.getSearch(request);
+
+			expect(requestMock).toHaveBeenCalledTimes(2);
+			expect(requestMock).toHaveBeenLastCalledWith(
+				`https://8uyt2m.a.searchspring.io/api/search/search.json?siteId=8uyt2m&q=cached&${BEACON_PARAM}=true&ajaxCatalog=Snap&resultsFormat=native`,
+				params
+			);
+
+			requestMock.mockReset();
+			// @ts-ignore - removing the stub added above
+			delete window.performance.getEntriesByType;
+		});
+	});
 });
