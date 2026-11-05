@@ -626,6 +626,12 @@ export class VariantSelection {
 				return values;
 			}, []);
 
+		// values are collected in data order - sort them into a consistent order before any are reselected below
+		const valueOrder = this.getValueOrder(variants);
+		const valuePositions = new Map<string, number>();
+		valueOrder.forEach((value, index) => valuePositions.set(value, index));
+		newValues.sort((a, b) => (valuePositions.get(a.value) ?? valueOrder.length) - (valuePositions.get(b.value) ?? valueOrder.length));
+
 		// if selection has been made
 		if (this.selected) {
 			// check if the selection is stil available
@@ -650,81 +656,59 @@ export class VariantSelection {
 			}
 		}
 
-		/**
-		 * SORT VALUES TO MAINTAIN CONSISTENT ORDERING
-		 *
-		 * Problem: When building selection values (e.g., sizes like XS, S, M, L, XL, XXL),
-		 * they get added in the order variants are encountered. If the first color in the
-		 * data only has sizes M, L, XL, XXL, those get added first.
-		 * When we later encounter a color with XS and S, those sizes
-		 * get appended to the END, resulting in incorrect order: M, L, XL, XXL, XS, S
-		 *
-		 * Solution: Find a "reference group" - the color that has the MOST complete set
-		 * of sizes - and use that group's ordering as the canonical sort order.
-		 *
-		 * Example with the hoodie product:
-		 *   - variant A has sizes: M, L, XL, XXL (4 sizes)
-		 *   - variant B has sizes: S, M, L, XL, XXL (5 sizes)
-		 *   - variant C has sizes: XS, S, M, L, XL, XXL (6 sizes) <-- most complete, use this!
-		 *
-		 * Result: Sizes will be sorted as XS, S, M, L, XL, XXL (Bay Leaf's order)
-		 */
+		this.values = newValues;
+	}
 
-		// Step 1: Get all the "other" selection fields (fields that are NOT the current one)
-		// Example: If we're sorting "size" values, otherFields would be ["colour"]
-		const otherFields = variants.selections.filter((s) => s.field !== this.field).map((s) => s.field);
+	/** Orders values by the group (e.g. a colour) with the most values, slotting in any it lacks next to their neighbours in other groups. */
+	private getValueOrder(variants: Variants): string[] {
+		// one group per combination of the other options, e.g. per colour when ordering sizes
+		const groups = new Map<string, string[]>();
+		variants.data.forEach((variant) => {
+			const value = variant.options?.[this.field]?.value;
+			if (value === undefined) return;
 
-		// Step 2: Group variants by their "other field" values
-		// This creates groups like: "red" -> [all red variants], "blue" -> [all blue variants]
-		const variantGroups: Map<string, Variant[]> = new Map();
-		for (const variant of variants.data) {
-			// Skip variants that don't have the current field (e.g., skip if variant has no size)
-			if (!variant.options[this.field]) continue;
+			// keyed from the variant's own options, as not every selection exists yet while they are being created
+			const groupKey = Object.keys(variant.options)
+				.filter((field) => field !== this.field)
+				.sort()
+				.map((field) => `${field}:${variant.options[field]?.value}`)
+				.join('|');
 
-			// Create a group key from the other field values (e.g., "red" or "blue")
-			const groupKey = otherFields.map((f) => variant.options[f]?.value || '').join('|');
-
-			// Initialize the group array if it doesn't exist
-			if (!variantGroups.has(groupKey)) {
-				variantGroups.set(groupKey, []);
+			const group = groups.get(groupKey) || [];
+			if (!group.includes(value)) {
+				group.push(value);
 			}
-
-			// Add this variant to its group
-			variantGroups.get(groupKey)!.push(variant);
-		}
-
-		// Step 3: Find the group with the most unique values for this field
-		// This is the "most complete" group - e.g., blue with 6 different sizes
-		let referenceGroup: Variant[] = [];
-		let maxUniqueValues = 0;
-		for (const group of Array.from(variantGroups.values())) {
-			// Count how many unique values this group has for the current field
-			const uniqueValues = new Set(group.map((v: Variant) => v.options[this.field]?.value));
-
-			// If this group has more unique values, it becomes our new reference
-			if (uniqueValues.size > maxUniqueValues) {
-				maxUniqueValues = uniqueValues.size;
-				referenceGroup = group;
-			}
-		}
-
-		// Step 4: Precompute a value→index map from the reference group for O(1) lookups
-		const valueIndexMap = new Map<string, number>();
-		for (let i = 0; i < referenceGroup.length; i++) {
-			const val = referenceGroup[i].options[this.field]?.value;
-			if (val !== undefined && !valueIndexMap.has(val)) {
-				valueIndexMap.set(val, i);
-			}
-		}
-		const fallbackIndex = referenceGroup.length;
-
-		// Sort newValues based on the order values appear in the reference group
-		// Values not found in reference group go to the end
-		newValues.sort((a, b) => {
-			return (valueIndexMap.get(a.value) ?? fallbackIndex) - (valueIndexMap.get(b.value) ?? fallbackIndex);
+			groups.set(groupKey, group);
 		});
 
-		this.values = newValues;
+		// largest group first, and equal sized groups in data order
+		const sortedGroups = Array.from(groups.values())
+			.map((values, position) => ({ values, position }))
+			.sort((a, b) => b.values.length - a.values.length || a.position - b.position)
+			.map(({ values }) => values);
+
+		const order: string[] = [];
+		sortedGroups.forEach((group) => {
+			group.forEach((value, index) => {
+				if (order.includes(value)) return;
+
+				if (index > 0) {
+					// right after the value it follows in this group, which is already ordered
+					order.splice(order.indexOf(group[index - 1]) + 1, 0, value);
+					return;
+				}
+
+				// otherwise right before the first value it comes before, or at the end when none are ordered yet
+				const nextOrderedValue = group.find((groupValue) => order.includes(groupValue));
+				if (nextOrderedValue !== undefined) {
+					order.splice(order.indexOf(nextOrderedValue), 0, value);
+				} else {
+					order.push(value);
+				}
+			});
+		});
+
+		return order;
 	}
 
 	public reset() {

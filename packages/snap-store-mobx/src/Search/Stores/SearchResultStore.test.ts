@@ -1687,6 +1687,51 @@ describe('SearchResultStore', () => {
 				const sizeValues = sizeSelection!.values.map((v) => v.value);
 				expect(sizeValues).toStrictEqual(['XS', 'S', 'M', 'L', 'XL', 'XXL']);
 			});
+
+			it('slots values missing from the most complete group in next to their neighbours', () => {
+				const mask = new ProductMask();
+				const variant = (colour: string, size: string): VariantData => ({
+					mappings: { core: { price: 79.95 } },
+					attributes: { available: true },
+					options: { colour: { value: colour }, size: { value: size } },
+				});
+
+				// Snow Marle and Bay Leaf tie for the most sizes, and neither has all of them; only Clay has 3XL
+				const variantData: VariantData[] = [
+					...['M', 'L', 'XL', 'XXL'].map((size) => variant('Snow Marle', size)),
+					...['XS', 'S', 'M', 'L'].map((size) => variant('Bay Leaf', size)),
+					...['XXL', '3XL'].map((size) => variant('Clay', size)),
+				];
+
+				const variants = new Variants(variantData, mask);
+				const sizeSelection = variants.selections.find((s) => s.field === 'size');
+
+				// XS and S go before M (where Bay Leaf puts them), 3XL goes after XXL (where Clay puts it)
+				expect(sizeSelection!.values.map((v) => v.value)).toStrictEqual(['XS', 'S', 'M', 'L', 'XL', 'XXL', '3XL']);
+			});
+
+			it('sorts the values of the first option before any selections are made', () => {
+				const mask = new ProductMask();
+				const variant = (size: string, colour: string): VariantData => ({
+					mappings: { core: { price: 79.95 } },
+					attributes: { available: true },
+					// size is the first option, so its selection is created before the colour selection exists
+					options: { size: { value: size }, colour: { value: colour } },
+				});
+
+				const variantData: VariantData[] = [
+					...['M', 'L'].map((size) => variant(size, 'Snow Marle')),
+					...['S', 'M', 'L'].map((size) => variant(size, 'Bay Leaf')),
+				];
+
+				const variants = new Variants(variantData, mask);
+				const sizeSelection = variants.selections.find((s) => s.field === 'size');
+
+				expect(sizeSelection!.values.map((v) => v.value)).toStrictEqual(['S', 'M', 'L']);
+				// the first available value is selected by default, now that the values are sorted when it is chosen
+				expect(sizeSelection!.selected?.value).toBe('S');
+				expect(variants.active?.options.colour.value).toBe('Bay Leaf');
+			});
 		});
 	});
 
