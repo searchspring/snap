@@ -667,12 +667,13 @@ export class VariantSelection {
 			const value = variant.options?.[this.field]?.value;
 			if (value === undefined) return;
 
-			// keyed from the variant's own options, as not every selection exists yet while they are being created
-			const groupKey = Object.keys(variant.options)
-				.filter((field) => field !== this.field)
-				.sort()
-				.map((field) => `${field}:${variant.options[field]?.value}`)
-				.join('|');
+			// keyed from the variant's own options (not every selection exists yet), as JSON so no option value can collide with a separator
+			const groupKey = JSON.stringify(
+				Object.keys(variant.options)
+					.filter((field) => field !== this.field)
+					.sort()
+					.map((field) => [field, variant.options[field]?.value])
+			);
 
 			const group = groups.get(groupKey) || [];
 			if (!group.includes(value)) {
@@ -682,13 +683,17 @@ export class VariantSelection {
 		});
 
 		// largest group first, and equal sized groups in data order
-		const sortedGroups = Array.from(groups.values())
+		let remainingGroups = Array.from(groups.values())
 			.map((values, position) => ({ values, position }))
 			.sort((a, b) => b.values.length - a.values.length || a.position - b.position)
 			.map(({ values }) => values);
 
 		const order: string[] = [];
-		sortedGroups.forEach((group) => {
+		while (remainingGroups.length) {
+			// take the largest group that shares a value with the order, so a group is only appended once no other group can link it in
+			const group = remainingGroups.find((values) => values.some((value) => order.includes(value))) || remainingGroups[0];
+			remainingGroups = remainingGroups.filter((values) => values !== group);
+
 			group.forEach((value, index) => {
 				if (order.includes(value)) return;
 
@@ -706,7 +711,7 @@ export class VariantSelection {
 					order.push(value);
 				}
 			});
-		});
+		}
 
 		return order;
 	}

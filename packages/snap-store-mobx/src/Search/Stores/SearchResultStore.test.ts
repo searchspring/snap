@@ -1710,6 +1710,28 @@ describe('SearchResultStore', () => {
 				expect(sizeSelection!.values.map((v) => v.value)).toStrictEqual(['XS', 'S', 'M', 'L', 'XL', 'XXL', '3XL']);
 			});
 
+			it('links in a group that shares no values with the largest group through a later group', () => {
+				const mask = new ProductMask();
+				const variant = (colour: string, size: string): VariantData => ({
+					mappings: { core: { price: 79.95 } },
+					attributes: { available: true },
+					options: { colour: { value: colour }, size: { value: size } },
+				});
+
+				// Bay Leaf shares no sizes with Snow Marle - only the smaller Clay group says that M comes before L
+				const variantData: VariantData[] = [
+					...['L', 'XL', 'XXL', '3XL'].map((size) => variant('Snow Marle', size)),
+					...['XS', 'S', 'M'].map((size) => variant('Bay Leaf', size)),
+					...['M', 'L'].map((size) => variant('Clay', size)),
+				];
+
+				const variants = new Variants(variantData, mask);
+				const sizeSelection = variants.selections.find((s) => s.field === 'size');
+
+				// NOT L, XL, XXL, 3XL, XS, S, M from appending Bay Leaf before Clay links it in
+				expect(sizeSelection!.values.map((v) => v.value)).toStrictEqual(['XS', 'S', 'M', 'L', 'XL', 'XXL', '3XL']);
+			});
+
 			it('sorts the values of the first option before any selections are made', () => {
 				const mask = new ProductMask();
 				const variant = (size: string, colour: string): VariantData => ({
