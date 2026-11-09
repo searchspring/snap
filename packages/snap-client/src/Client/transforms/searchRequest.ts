@@ -11,6 +11,12 @@ import {
 } from '@searchspring/snapi-types';
 
 export const BEACON_PARAM = 'beacon';
+// sent in place of BEACON_PARAM when a request opts out of API tracking (`tracking.beacon: false` in the request)
+export const NO_BEACON_PARAM = 'noBeacon';
+
+export function beaconParams(beacon?: boolean): { [param: string]: boolean } {
+	return { [beacon === false ? NO_BEACON_PARAM : BEACON_PARAM]: true };
+}
 
 export function transformSearchRequest(request: SearchRequestModel | AutocompleteRequestModel): any {
 	const data = mergeParams(
@@ -24,9 +30,8 @@ export function transformSearchRequest(request: SearchRequestModel | Autocomplet
 		transformSearchRequest.tracking(request),
 		transformSearchRequest.personalization(request)
 	);
-	data[BEACON_PARAM] = true;
 
-	return data;
+	return { ...data, ...beaconParams(request.tracking?.beacon) };
 }
 
 transformSearchRequest.sorts = (request: SearchRequestModel | AutocompleteRequestModel = {}) => {

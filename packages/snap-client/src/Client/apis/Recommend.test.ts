@@ -116,6 +116,67 @@ describe('Recommend Api', () => {
 		requestMock.mockReset();
 	});
 
+	it('batchRecommendations sends the beacon param as false when beacon is false', async () => {
+		const api = new RecommendAPI(new ApiConfiguration(apiConfig));
+
+		const requestMock = jest
+			.spyOn(global.window, 'fetch')
+			.mockImplementation(() => Promise.resolve({ status: 200, json: () => Promise.resolve([mockData.recommend()]) } as Response));
+
+		await api.batchRecommendations({
+			siteId: '8uyt2m',
+			tag: 'similar',
+			beacon: false,
+		});
+		//add delay for paramBatch.timeout
+		await wait(250);
+
+		expect(requestMock).toHaveBeenCalledTimes(1);
+		expect(requestMock).toHaveBeenCalledWith('https://8uyt2m.a.p13n.searchspring.io/v1/recommend', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'text/plain',
+			},
+			body: `{"profiles":[{"tag":"similar"}],"siteId":"8uyt2m","beacon":false}`,
+		});
+		requestMock.mockReset();
+	});
+
+	it('batchRecommendations batches requests with beacon false separately from tracked requests', async () => {
+		const api = new RecommendAPI(new ApiConfiguration(apiConfig));
+
+		const requestMock = jest
+			.spyOn(global.window, 'fetch')
+			.mockImplementation(() =>
+				Promise.resolve({ status: 200, json: () => Promise.resolve([mockData.recommend(), mockData.recommend()]) } as Response)
+			);
+
+		api.batchRecommendations({ siteId: '8uyt2m', tag: 'similar', batched: true });
+		api.batchRecommendations({ siteId: '8uyt2m', tag: 'hidden', batched: true, beacon: false });
+		api.batchRecommendations({ siteId: '8uyt2m', tag: 'crossSell', batched: true });
+
+		//add delay for paramBatch.timeout
+		await wait(250);
+
+		const POSTParams = {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'text/plain',
+			},
+		};
+
+		expect(requestMock).toHaveBeenCalledTimes(2);
+		expect(requestMock).toHaveBeenCalledWith('https://8uyt2m.a.p13n.searchspring.io/v1/recommend', {
+			...POSTParams,
+			body: `{"profiles":[{"tag":"similar"},{"tag":"crossSell"}],"siteId":"8uyt2m","${BEACON_PARAM}":true}`,
+		});
+		expect(requestMock).toHaveBeenCalledWith('https://8uyt2m.a.p13n.searchspring.io/v1/recommend', {
+			...POSTParams,
+			body: `{"profiles":[{"tag":"hidden"}],"siteId":"8uyt2m","beacon":false}`,
+		});
+		requestMock.mockReset();
+	});
+
 	const batchParams = {
 		siteId: '8uyt2m',
 		lastViewed: [

@@ -94,6 +94,11 @@ export class FinderController extends AbstractController {
 
 		const params: Record<string, any> = deepmerge({ ...getSearchParams(urlState) }, deepmerge(defaultParams, this.config.globals));
 
+		// opt the request out of API tracking when beacon is not enabled (after globals are merged, so they cannot override it)
+		if (!this.config.beacon?.enabled) {
+			params.tracking.beacon = false;
+		}
+
 		return params;
 	}
 

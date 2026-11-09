@@ -164,6 +164,28 @@ const [meta, results] = await client.search({
 });
 ```
 
+## Opting out of API tracking
+Requests made by the `search`, `category`, `autocomplete`, `finder` and `recommend` methods are tracked by the API (they are sent with `beacon=true`). To opt a `search`, `category`, `autocomplete` or `finder` request out of API tracking, set `tracking.beacon` to `false` in its parameters; the request is then sent with `noBeacon=true` instead.
+
+To opt a `recommend` request out, set `beacon` to `false` in its parameters; the request is then sent with `beacon: false`. Recommendation requests with `beacon: false` are batched separately from tracked requests, since the beacon parameter applies to the whole batch.
+
+Controllers opt their requests out when their `beacon.enabled` config is not `true`.
+
+```js
+const client = new Client(globals, clientConfig);
+
+const [meta, results] = await client.search({
+  search: {
+    query: {
+      string: 'dress'
+    }
+  },
+  tracking: {
+    beacon: false
+  }
+});
+```
+
 ## `search` method
 Makes a request to the Searchspring Search API and returns a promise.  
 

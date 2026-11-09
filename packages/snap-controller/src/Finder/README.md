@@ -10,6 +10,7 @@ The `FinderController` should be used for building product finders. It makes que
 | id | unique identifier for this controller | ➖ | ✔️ |
 | url | URL to be redirected to upon clicking finder's 'find' button | ➖ | ✔️ |
 | globals | keys defined here will be passed to the API request (can overwrite global config)| ```{ pagination: { pageSize: 0 } }``` |   |
+| beacon.enabled | enables API request tracking for this controller. When `false`, the controller's API requests opt out of tracking by sending `tracking.beacon: false` (see [Opting out of API tracking](https://github.com/searchspring/snap/tree/main/packages/snap-client#opting-out-of-api-tracking)) | true |   |
 | fields | an array of finder field configurations | ➖ | ✔️ |
 | fields.field | required field name | ➖ | ✔️ |
 | fields.label | optional finder label | ➖ |   |

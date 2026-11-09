@@ -626,6 +626,12 @@ export class VariantSelection {
 				return values;
 			}, []);
 
+		// values are collected in data order - sort them into a consistent order before any are reselected below
+		const valueOrder = this.getValueOrder(variants);
+		const valuePositions = new Map<string, number>();
+		valueOrder.forEach((value, index) => valuePositions.set(value, index));
+		newValues.sort((a, b) => (valuePositions.get(a.value) ?? valueOrder.length) - (valuePositions.get(b.value) ?? valueOrder.length));
+
 		// if selection has been made
 		if (this.selected) {
 			// check if the selection is stil available
@@ -651,6 +657,57 @@ export class VariantSelection {
 		}
 
 		this.values = newValues;
+	}
+
+	/** Orders values to keep the order every group (e.g. every colour) lists them in, favouring the largest groups where that leaves a choice. */
+	private getValueOrder(variants: Variants): string[] {
+		// one group per combination of the other options, e.g. per colour when ordering sizes
+		const groups = new Map<string, string[]>();
+		variants.data.forEach((variant) => {
+			const value = variant.options?.[this.field]?.value;
+			if (value === undefined) return;
+
+			// keyed from the variant's own options (not every selection exists yet), as JSON so no option value can collide with a separator
+			const groupKey = JSON.stringify(
+				Object.keys(variant.options)
+					.filter((field) => field !== this.field)
+					.sort()
+					.map((field) => [field, variant.options[field]?.value])
+			);
+
+			const group = groups.get(groupKey) || [];
+			if (!group.includes(value)) {
+				group.push(value);
+			}
+			groups.set(groupKey, group);
+		});
+
+		// largest group first, and equal sized groups in data order
+		const sortedGroups = Array.from(groups.values())
+			.map((values, position) => ({ values, position }))
+			.sort((a, b) => b.values.length - a.values.length || a.position - b.position)
+			.map(({ values }) => values);
+
+		// the values each value follows in any group, keyed in the order the largest groups list them
+		const valuesBefore = new Map<string, string[]>();
+		sortedGroups.forEach((group) =>
+			group.forEach((value, index) => {
+				const before = valuesBefore.get(value) || [];
+				if (index > 0) before.push(group[index - 1]);
+				valuesBefore.set(value, before);
+			})
+		);
+
+		const order = new Set<string>();
+		let remaining = Array.from(valuesBefore.keys());
+		while (remaining.length) {
+			// the first value whose preceding values are all ordered, or just the first left when groups disagree on the order
+			const next = remaining.find((value) => valuesBefore.get(value)?.every((before) => order.has(before))) ?? remaining[0];
+			order.add(next);
+			remaining = remaining.filter((value) => value !== next);
+		}
+
+		return Array.from(order);
 	}
 
 	public reset() {
