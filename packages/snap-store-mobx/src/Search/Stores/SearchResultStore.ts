@@ -659,7 +659,7 @@ export class VariantSelection {
 		this.values = newValues;
 	}
 
-	/** Orders values by the group (e.g. a colour) with the most values, slotting in any it lacks next to their neighbours in other groups. */
+	/** Orders values to keep the order every group (e.g. every colour) lists them in, favouring the largest groups where that leaves a choice. */
 	private getValueOrder(variants: Variants): string[] {
 		// one group per combination of the other options, e.g. per colour when ordering sizes
 		const groups = new Map<string, string[]>();
@@ -683,37 +683,31 @@ export class VariantSelection {
 		});
 
 		// largest group first, and equal sized groups in data order
-		let remainingGroups = Array.from(groups.values())
+		const sortedGroups = Array.from(groups.values())
 			.map((values, position) => ({ values, position }))
 			.sort((a, b) => b.values.length - a.values.length || a.position - b.position)
 			.map(({ values }) => values);
 
-		const order: string[] = [];
-		while (remainingGroups.length) {
-			// take the largest group that shares a value with the order, so a group is only appended once no other group can link it in
-			const group = remainingGroups.find((values) => values.some((value) => order.includes(value))) || remainingGroups[0];
-			remainingGroups = remainingGroups.filter((values) => values !== group);
-
+		// the values each value follows in any group, keyed in the order the largest groups list them
+		const valuesBefore = new Map<string, string[]>();
+		sortedGroups.forEach((group) =>
 			group.forEach((value, index) => {
-				if (order.includes(value)) return;
+				const before = valuesBefore.get(value) || [];
+				if (index > 0) before.push(group[index - 1]);
+				valuesBefore.set(value, before);
+			})
+		);
 
-				if (index > 0) {
-					// right after the value it follows in this group, which is already ordered
-					order.splice(order.indexOf(group[index - 1]) + 1, 0, value);
-					return;
-				}
-
-				// otherwise right before the first value it comes before, or at the end when none are ordered yet
-				const nextOrderedValue = group.find((groupValue) => order.includes(groupValue));
-				if (nextOrderedValue !== undefined) {
-					order.splice(order.indexOf(nextOrderedValue), 0, value);
-				} else {
-					order.push(value);
-				}
-			});
+		const order = new Set<string>();
+		let remaining = Array.from(valuesBefore.keys());
+		while (remaining.length) {
+			// the first value whose preceding values are all ordered, or just the first left when groups disagree on the order
+			const next = remaining.find((value) => valuesBefore.get(value)?.every((before) => order.has(before))) ?? remaining[0];
+			order.add(next);
+			remaining = remaining.filter((value) => value !== next);
 		}
 
-		return order;
+		return Array.from(order);
 	}
 
 	public reset() {

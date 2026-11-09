@@ -1732,6 +1732,47 @@ describe('SearchResultStore', () => {
 				expect(sizeSelection!.values.map((v) => v.value)).toStrictEqual(['XS', 'S', 'M', 'L', 'XL', 'XXL', '3XL']);
 			});
 
+			it('keeps the order of every group, including groups whose values are all ordered already', () => {
+				const mask = new ProductMask();
+				const variant = (colour: string, size: string): VariantData => ({
+					mappings: { core: { price: 79.95 } },
+					attributes: { available: true },
+					options: { colour: { value: colour }, size: { value: size } },
+				});
+
+				// Bay Leaf only says that XS comes before L - Clay says it also comes before S
+				const variantData: VariantData[] = [
+					...['S', 'M', 'L'].map((size) => variant('Snow Marle', size)),
+					...['XS', 'L'].map((size) => variant('Bay Leaf', size)),
+					...['XS', 'S'].map((size) => variant('Clay', size)),
+				];
+
+				const variants = new Variants(variantData, mask);
+				const sizeSelection = variants.selections.find((s) => s.field === 'size');
+
+				// NOT S, M, XS, L from slotting XS in before L and then skipping Clay
+				expect(sizeSelection!.values.map((v) => v.value)).toStrictEqual(['XS', 'S', 'M', 'L']);
+			});
+
+			it('follows the largest group when groups disagree on the order', () => {
+				const mask = new ProductMask();
+				const variant = (colour: string, size: string): VariantData => ({
+					mappings: { core: { price: 79.95 } },
+					attributes: { available: true },
+					options: { colour: { value: colour }, size: { value: size } },
+				});
+
+				const variantData: VariantData[] = [
+					...['S', 'M', 'L'].map((size) => variant('Snow Marle', size)),
+					...['M', 'S'].map((size) => variant('Bay Leaf', size)),
+				];
+
+				const variants = new Variants(variantData, mask);
+				const sizeSelection = variants.selections.find((s) => s.field === 'size');
+
+				expect(sizeSelection!.values.map((v) => v.value)).toStrictEqual(['S', 'M', 'L']);
+			});
+
 			it('sorts the values of the first option before any selections are made', () => {
 				const mask = new ProductMask();
 				const variant = (size: string, colour: string): VariantData => ({
