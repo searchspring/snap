@@ -626,6 +626,12 @@ export class VariantSelection {
 				return values;
 			}, []);
 
+		// values are collected in data order - sort them into a consistent order before any are reselected below
+		const valueOrder = this.getValueOrder(variants);
+		const valuePositions = new Map<string, number>();
+		valueOrder.forEach((value, index) => valuePositions.set(value, index));
+		newValues.sort((a, b) => (valuePositions.get(a.value) ?? valueOrder.length) - (valuePositions.get(b.value) ?? valueOrder.length));
+
 		// if selection has been made
 		if (this.selected) {
 			// check if the selection is stil available
@@ -651,6 +657,63 @@ export class VariantSelection {
 		}
 
 		this.values = newValues;
+	}
+
+	/** Orders values by the group (e.g. a colour) with the most values, slotting in any it lacks next to their neighbours in other groups. */
+	private getValueOrder(variants: Variants): string[] {
+		// one group per combination of the other options, e.g. per colour when ordering sizes
+		const groups = new Map<string, string[]>();
+		variants.data.forEach((variant) => {
+			const value = variant.options?.[this.field]?.value;
+			if (value === undefined) return;
+
+			// keyed from the variant's own options (not every selection exists yet), as JSON so no option value can collide with a separator
+			const groupKey = JSON.stringify(
+				Object.keys(variant.options)
+					.filter((field) => field !== this.field)
+					.sort()
+					.map((field) => [field, variant.options[field]?.value])
+			);
+
+			const group = groups.get(groupKey) || [];
+			if (!group.includes(value)) {
+				group.push(value);
+			}
+			groups.set(groupKey, group);
+		});
+
+		// largest group first, and equal sized groups in data order
+		let remainingGroups = Array.from(groups.values())
+			.map((values, position) => ({ values, position }))
+			.sort((a, b) => b.values.length - a.values.length || a.position - b.position)
+			.map(({ values }) => values);
+
+		const order: string[] = [];
+		while (remainingGroups.length) {
+			// take the largest group that shares a value with the order, so a group is only appended once no other group can link it in
+			const group = remainingGroups.find((values) => values.some((value) => order.includes(value))) || remainingGroups[0];
+			remainingGroups = remainingGroups.filter((values) => values !== group);
+
+			group.forEach((value, index) => {
+				if (order.includes(value)) return;
+
+				if (index > 0) {
+					// right after the value it follows in this group, which is already ordered
+					order.splice(order.indexOf(group[index - 1]) + 1, 0, value);
+					return;
+				}
+
+				// otherwise right before the first value it comes before, or at the end when none are ordered yet
+				const nextOrderedValue = group.find((groupValue) => order.includes(groupValue));
+				if (nextOrderedValue !== undefined) {
+					order.splice(order.indexOf(nextOrderedValue), 0, value);
+				} else {
+					order.push(value);
+				}
+			});
+		}
+
+		return order;
 	}
 
 	public reset() {
