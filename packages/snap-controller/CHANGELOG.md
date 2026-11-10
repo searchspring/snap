@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.79.1](https://github.com/searchspring/snap/compare/v0.79.0...v0.79.1) (2026-11-10)
+
+### Bug Fixes
+
+- **beacon:** apply the finder opt-out after merging globals ([3cd04fa](https://github.com/searchspring/snap/commit/3cd04fa8764e25e93776011c5f3844852f04dde2))
+- **beacon:** send beacon false to the recommend API and only opt out when beacon is disabled ([0391691](https://github.com/searchspring/snap/commit/0391691ee6c813e95206e368917231432383f303))
+- **beacon:** use nobeacon=true ([76f97d6](https://github.com/searchspring/snap/commit/76f97d61264d41cb5153fe029661c832cc06a519))
+
 # [0.79.0](https://github.com/searchspring/snap/compare/v0.78.0...v0.79.0) (2026-09-30)
 
 **Note:** Version bump only for package @searchspring/snap-controller

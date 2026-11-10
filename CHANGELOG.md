@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.79.1](https://github.com/searchspring/snap/compare/v0.79.0...v0.79.1) (2026-11-10)
+
+### Bug Fixes
+
+- **beacon:** apply the finder opt-out after merging globals ([3cd04fa](https://github.com/searchspring/snap/commit/3cd04fa8764e25e93776011c5f3844852f04dde2))
+- **beacon:** send beacon false to the recommend API and only opt out when beacon is disabled ([0391691](https://github.com/searchspring/snap/commit/0391691ee6c813e95206e368917231432383f303))
+- **beacon:** use nobeacon=true ([76f97d6](https://github.com/searchspring/snap/commit/76f97d61264d41cb5153fe029661c832cc06a519))
+- **searchresultstore.ts:** added a new sort for the searchresultstore that sorts values correctly ([d3ffdd8](https://github.com/searchspring/snap/commit/d3ffdd8240d591e8cf2754833557bbde1a499aaf))
+- **searchresultstore:** keep every variant group's value order ([7143e54](https://github.com/searchspring/snap/commit/7143e54ac3395d6d28532fa26fa3514b34734374))
+- **searchresultstore:** link variant groups in through later groups and use JSON group keys ([b41c9dd](https://github.com/searchspring/snap/commit/b41c9ddb8bff6c4d3670bea40372edaaff2aac8e))
+
 # [0.79.0](https://github.com/searchspring/snap/compare/v0.78.0...v0.79.0) (2026-09-30)
 
 ### Bug Fixes
