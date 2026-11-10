@@ -4,6 +4,16 @@ on:
   push:
     branches:
       - 'main'
+    # workflow-only changes don't need a release
+    paths-ignore:
+      - '.github/**'
+  workflow_dispatch:
+    inputs:
+      resume:
+        description: 'Resume a failed publish (lerna from-package, no version bump)'
+        type: boolean
+        default: false
+
 permissions:
   id-token: write  # Required for OIDC
   contents: write
@@ -55,11 +65,19 @@ jobs:
         run: npm run test
 
       - name: Publish packages
+        if: github.event_name == 'push' && github.ref_name == 'main'
         run: npm run publish
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: Resume failed publish (from-package)
+        if: github.event_name == 'workflow_dispatch' && github.event.inputs.resume == 'true' && github.ref_name == 'main'
+        run: npx lerna publish from-package --yes --no-verify-access
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
       - name: Configure AWS credentials
+        if: github.event_name == 'push' && github.ref_name == 'main'
         uses: aws-actions/configure-aws-credentials@v1
         with:
           aws-access-key-id: ${{ secrets.SNAPFU_AWS_KEY_ID }}
@@ -67,7 +85,9 @@ jobs:
           aws-region: us-east-1
 
       - name: Generate Metrics Files
+        if: github.event_name == 'push' && github.ref_name == 'main'
         run: npm run build:metrics
 
       - name: Upload Metrics Files to S3
+        if: github.event_name == 'push' && github.ref_name == 'main'
         run: aws s3 sync --region us-east-1 ./metrics/data s3://datawarehouse-stage/team-metrics-import/
