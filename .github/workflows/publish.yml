@@ -55,6 +55,14 @@ jobs:
       - name: Install packages
         run: npm ci
 
+      # lerna gives Rekor 5s then retries - the retry 409s on the entry the first attempt created
+      # fetch that entry instead of failing (npm/cli#10078) - the grep fails the job if sigstore changes this line
+      - name: Recover from duplicate Rekor entries
+        run: |
+          f=node_modules/sigstore/dist/config.js
+          grep -q 'fetchOnConflict: false' "$f"
+          sed -i 's/fetchOnConflict: false/fetchOnConflict: true/' "$f"
+
       - name: Build
         run: | 
           npm run build
@@ -72,7 +80,8 @@ jobs:
 
       - name: Resume failed publish (from-package)
         if: github.event_name == 'workflow_dispatch' && github.event.inputs.resume == 'true' && github.ref_name == 'main'
-        run: npx lerna publish from-package --yes --no-verify-access
+        # --ignore-scripts: without it lerna runs the root `publish` script afterwards - a full versioned publish
+        run: npx lerna publish from-package --yes --no-verify-access --ignore-scripts
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
