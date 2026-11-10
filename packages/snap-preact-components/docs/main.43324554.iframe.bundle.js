@@ -1,4 +1,4 @@
-/*! For license information please see main.393a5ee7.iframe.bundle.js.LICENSE.txt */
+/*! For license information please see main.43324554.iframe.bundle.js.LICENSE.txt */
 (self.webpackChunk_searchspring_snap_preact_components = self.webpackChunk_searchspring_snap_preact_components || []).push([
 	[792],
 	{
@@ -31217,6 +31217,7 @@
 								get: function get() {
 									var _this$config$settings12,
 										_this$config$settings13,
+										_this$config$beacon8,
 										_this$config$globals8,
 										_this$config$globals9,
 										params = cjs_default()(Object.assign({}, getSearchParams(this.urlManager.state)), this.config.globals || {});
@@ -31228,7 +31229,9 @@
 										!this.store.loaded) ||
 										((params.search = params.search || {}), (params.search.redirectResponse = 'full')),
 										(params.tracking = params.tracking || {}),
-										(params.tracking.domain = window.location.href);
+										(params.tracking.domain = window.location.href),
+										(null !== (_this$config$beacon8 = this.config.beacon) && void 0 !== _this$config$beacon8 && _this$config$beacon8.enabled) ||
+											(params.tracking.beacon = !1);
 									var _this$tracker$getCont = this.tracker.getContext(),
 										userId = _this$tracker$getCont.userId,
 										sessionId = _this$tracker$getCont.sessionId,
@@ -31946,7 +31949,8 @@
 							{
 								key: 'params',
 								get: function get() {
-									var params = Object.assign(
+									var _this$config$beacon5,
+										params = Object.assign(
 											{
 												tag: this.config.tag,
 												batched: this.config.batched,
@@ -31961,7 +31965,11 @@
 											lastViewed = this.tracker.cookies.viewed.get();
 										null != cart && cart.length && (params.cart = cart), null != lastViewed && lastViewed.length && (params.lastViewed = lastViewed);
 									}
-									return params;
+									return (
+										(null !== (_this$config$beacon5 = this.config.beacon) && void 0 !== _this$config$beacon5 && _this$config$beacon5.enabled) ||
+											(params.beacon = !1),
+										params
+									);
 								},
 							},
 						])
@@ -33342,7 +33350,8 @@
 							{
 								key: 'params',
 								get: function get() {
-									var _this$config$globals12,
+									var _this$config$beacon8,
+										_this$config$globals12,
 										_this$config$globals13,
 										urlState = this.urlManager.state,
 										params = cjs_default()(Object.assign({}, getSearchParams(urlState)), this.config.globals),
@@ -33354,6 +33363,8 @@
 									if (
 										((params.tracking = params.tracking || {}),
 										(params.tracking.domain = window.location.href),
+										(null !== (_this$config$beacon8 = this.config.beacon) && void 0 !== _this$config$beacon8 && _this$config$beacon8.enabled) ||
+											(params.tracking.beacon = !1),
 										userId && (params.tracking.userId = userId),
 										sessionId && (params.tracking.sessionId = sessionId),
 										pageLoadId && (params.tracking.pageLoadId = pageLoadId),
@@ -34427,29 +34438,37 @@
 			}
 			__webpack_require__('../../node_modules/core-js/modules/es.array.reverse.js');
 			function transformSearchRequest(request) {
-				var data = (function mergeParams() {
-					for (var ret = {}, _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) args[_key] = arguments[_key];
-					return (
-						args.reverse().forEach(function (params) {
-							Object.keys(params).forEach(function (key) {
-								var values = params[key] instanceof Array ? params[key] : [params[key]];
-								ret[key] = (ret[key] || []).concat(values);
-							});
-						}),
-						ret
+				var _request$tracking,
+					data = (function mergeParams() {
+						for (var ret = {}, _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) args[_key] = arguments[_key];
+						return (
+							args.reverse().forEach(function (params) {
+								Object.keys(params).forEach(function (key) {
+									var values = params[key] instanceof Array ? params[key] : [params[key]];
+									ret[key] = (ret[key] || []).concat(values);
+								});
+							}),
+							ret
+						);
+					})(
+						transformSearchRequest.sorts(request),
+						transformSearchRequest.search(request),
+						transformSearchRequest.filters(request),
+						transformSearchRequest.merchandising(request),
+						transformSearchRequest.pagination(request),
+						transformSearchRequest.siteId(request),
+						transformSearchRequest.facets(request),
+						transformSearchRequest.tracking(request),
+						transformSearchRequest.personalization(request)
 					);
-				})(
-					transformSearchRequest.sorts(request),
-					transformSearchRequest.search(request),
-					transformSearchRequest.filters(request),
-					transformSearchRequest.merchandising(request),
-					transformSearchRequest.pagination(request),
-					transformSearchRequest.siteId(request),
-					transformSearchRequest.facets(request),
-					transformSearchRequest.tracking(request),
-					transformSearchRequest.personalization(request)
+				return Object.assign(
+					{},
+					data,
+					(function beaconParams(beacon) {
+						var _ref;
+						return ((_ref = {})[!1 === beacon ? 'noBeacon' : 'beacon'] = !0), _ref;
+					})(null === (_request$tracking = request.tracking) || void 0 === _request$tracking ? void 0 : _request$tracking.beacon)
 				);
-				return (data.beacon = !0), data;
 			}
 			function Legacy_regenerator() {
 				var e,
@@ -36587,6 +36606,7 @@
 										Recommend_regenerator().m(function _callee3(parameters) {
 											var _parameters$profile,
 												batchId,
+												beaconKey,
 												key,
 												batch,
 												deferred,
@@ -36599,13 +36619,15 @@
 														if (0 === _context3.n)
 															return (
 																(batchId = parameters.batchId || 1),
-																(key = parameters.batched
-																	? ((null === (_parameters$profile = parameters.profile) || void 0 === _parameters$profile
-																			? void 0
-																			: _parameters$profile.siteId) || parameters.siteId) +
-																	  ':' +
-																	  batchId
-																	: Math.random() + ':' + batchId),
+																(beaconKey = !1 === parameters.beacon ? ':beacon=false' : ''),
+																(key =
+																	(parameters.batched
+																		? ((null === (_parameters$profile = parameters.profile) || void 0 === _parameters$profile
+																				? void 0
+																				: _parameters$profile.siteId) || parameters.siteId) +
+																		  ':' +
+																		  batchId
+																		: Math.random() + ':' + batchId) + beaconKey),
 																(batch = this.batches[key] = this.batches[key] || { timeout: null, request: { profiles: [] }, entries: [] }),
 																(deferred = new Deferred()),
 																batch.entries.push({ request: parameters, deferred }),
@@ -36692,6 +36714,7 @@
 																											lastViewed = _entry$request3.lastViewed,
 																											shopper = _entry$request3.shopper,
 																											withRecInfo = _entry$request3.withRecInfo,
+																											beacon = _entry$request3.beacon,
 																											dedupedProducts = Array.from(new Set((batch.request.products || []).concat(products || []))),
 																											dedupedBlockedItems = Array.from(
 																												new Set((batch.request.blockedItems || []).concat(blockedItems || []))
@@ -36726,7 +36749,7 @@
 																												shopper,
 																												withRecInfo: mergedWithRecInfo,
 																											}),
-																											(((_Object$assign = {}).beacon = !0), _Object$assign)
+																											(((_Object$assign = {}).beacon = !1 !== beacon), _Object$assign)
 																										)),
 																											_this3.configuration.mode == AppMode.development && (batch.request.test = !0);
 																									}),
@@ -39272,64 +39295,81 @@
 										_iterator2.f();
 									}
 									var newValues = variants.data
-										.filter(function (variant) {
-											return variant.options[_this5.field];
-										})
-										.reduce(function (values, variant) {
-											if (
-												!values.some(function (val) {
-													return variant.options[_this5.field].value == val.value;
-												})
-											) {
-												var _variant$mappings$cor5,
-													value = variant.options[_this5.field].value,
-													thumbnailImageUrl =
-														null === (_variant$mappings$cor5 = variant.mappings.core) || void 0 === _variant$mappings$cor5
-															? void 0
-															: _variant$mappings$cor5.thumbnailImageUrl,
-													allAvailableVariants = variants.data.filter(function (variant) {
-														return variant.available;
-													}),
-													disabledValue = !allAvailableVariants.some(function (availableVariant) {
-														return availableVariant.options[_this5.field].value === value;
-													}),
-													mappedValue = {
-														value,
-														label: value,
-														thumbnailImageUrl,
-														available: Boolean(
-															availableVariants.some(function (availableVariant) {
-																return availableVariant.options[_this5.field].value == variant.options[_this5.field].value;
-															})
-														),
-														disabled: disabledValue,
-													};
+											.filter(function (variant) {
+												return variant.options[_this5.field];
+											})
+											.reduce(function (values, variant) {
 												if (
-													(_this5.config.thumbnailBackgroundImages
-														? (mappedValue.backgroundImageUrl = thumbnailImageUrl)
-														: variant.options[_this5.field].backgroundImageUrl &&
-														  (mappedValue.backgroundImageUrl = variant.options[_this5.field].backgroundImageUrl),
-													variant.options[_this5.field].background && (mappedValue.background = variant.options[_this5.field].background),
-													_this5.config.mappings && _this5.config.mappings && _this5.config.mappings[value.toString().toLowerCase()])
+													!values.some(function (val) {
+														return variant.options[_this5.field].value == val.value;
+													})
 												) {
-													var mapping = _this5.config.mappings[value.toString().toLowerCase()];
-													mapping.label && (mappedValue.label = mapping.label),
-														mapping.background && (mappedValue.background = mapping.background),
-														mapping.backgroundImageUrl && (mappedValue.backgroundImageUrl = mapping.backgroundImageUrl);
+													var _variant$mappings$cor5,
+														value = variant.options[_this5.field].value,
+														thumbnailImageUrl =
+															null === (_variant$mappings$cor5 = variant.mappings.core) || void 0 === _variant$mappings$cor5
+																? void 0
+																: _variant$mappings$cor5.thumbnailImageUrl,
+														allAvailableVariants = variants.data.filter(function (variant) {
+															return variant.available;
+														}),
+														disabledValue = !allAvailableVariants.some(function (availableVariant) {
+															return availableVariant.options[_this5.field].value === value;
+														}),
+														mappedValue = {
+															value,
+															label: value,
+															thumbnailImageUrl,
+															available: Boolean(
+																availableVariants.some(function (availableVariant) {
+																	return availableVariant.options[_this5.field].value == variant.options[_this5.field].value;
+																})
+															),
+															disabled: disabledValue,
+														};
+													if (
+														(_this5.config.thumbnailBackgroundImages
+															? (mappedValue.backgroundImageUrl = thumbnailImageUrl)
+															: variant.options[_this5.field].backgroundImageUrl &&
+															  (mappedValue.backgroundImageUrl = variant.options[_this5.field].backgroundImageUrl),
+														variant.options[_this5.field].background && (mappedValue.background = variant.options[_this5.field].background),
+														_this5.config.mappings && _this5.config.mappings && _this5.config.mappings[value.toString().toLowerCase()])
+													) {
+														var mapping = _this5.config.mappings[value.toString().toLowerCase()];
+														mapping.label && (mappedValue.label = mapping.label),
+															mapping.background && (mappedValue.background = mapping.background),
+															mapping.backgroundImageUrl && (mappedValue.backgroundImageUrl = mapping.backgroundImageUrl);
+													}
+													values.push(mappedValue);
 												}
-												values.push(mappedValue);
-											}
-											return values;
-										}, []);
+												return values;
+											}, []),
+										valueOrder = this.getValueOrder(variants),
+										valuePositions = new Map();
 									if (
-										this.selected &&
-										!newValues.some(function (val) {
-											var _this5$selected;
+										(valueOrder.forEach(function (value, index) {
+											return valuePositions.set(value, index);
+										}),
+										newValues.sort(function (a, b) {
+											var _valuePositions$get, _valuePositions$get2;
 											return (
-												val.value == (null === (_this5$selected = _this5.selected) || void 0 === _this5$selected ? void 0 : _this5$selected.value) &&
-												val.available
+												(null !== (_valuePositions$get = valuePositions.get(a.value)) && void 0 !== _valuePositions$get
+													? _valuePositions$get
+													: valueOrder.length) -
+												(null !== (_valuePositions$get2 = valuePositions.get(b.value)) && void 0 !== _valuePositions$get2
+													? _valuePositions$get2
+													: valueOrder.length)
 											);
-										})
+										}),
+										this.selected &&
+											!newValues.some(function (val) {
+												var _this5$selected;
+												return (
+													val.value ==
+														(null === (_this5$selected = _this5.selected) || void 0 === _this5$selected ? void 0 : _this5$selected.value) &&
+													val.available
+												);
+											}))
 									)
 										if (
 											this.selected !== this.previouslySelected &&
@@ -39355,6 +39395,88 @@
 											}
 										}
 									this.values = newValues;
+								},
+							},
+							{
+								key: 'getValueOrder',
+								value: function getValueOrder(variants) {
+									var _this6 = this,
+										groups = new Map();
+									variants.data.forEach(function (variant) {
+										var _variant$options2,
+											_variant$options2$_th,
+											value =
+												null === (_variant$options2 = variant.options) ||
+												void 0 === _variant$options2 ||
+												null === (_variant$options2$_th = _variant$options2[_this6.field]) ||
+												void 0 === _variant$options2$_th
+													? void 0
+													: _variant$options2$_th.value;
+										if (void 0 !== value) {
+											var groupKey = JSON.stringify(
+													Object.keys(variant.options)
+														.filter(function (field) {
+															return field !== _this6.field;
+														})
+														.sort()
+														.map(function (field) {
+															var _variant$options$fiel;
+															return [
+																field,
+																null === (_variant$options$fiel = variant.options[field]) || void 0 === _variant$options$fiel
+																	? void 0
+																	: _variant$options$fiel.value,
+															];
+														})
+												),
+												group = groups.get(groupKey) || [];
+											group.includes(value) || group.push(value), groups.set(groupKey, group);
+										}
+									});
+									var sortedGroups = Array.from(groups.values())
+											.map(function (values, position) {
+												return { values, position };
+											})
+											.sort(function (a, b) {
+												return b.values.length - a.values.length || a.position - b.position;
+											})
+											.map(function (_ref) {
+												return _ref.values;
+											}),
+										valuesBefore = new Map();
+									sortedGroups.forEach(function (group) {
+										return group.forEach(function (value, index) {
+											var before = valuesBefore.get(value) || [];
+											index > 0 && before.push(group[index - 1]), valuesBefore.set(value, before);
+										});
+									});
+									for (
+										var order = new Set(),
+											remaining = Array.from(valuesBefore.keys()),
+											_loop3 = function _loop3() {
+												var _remaining$find,
+													next =
+														null !==
+															(_remaining$find = remaining.find(function (value) {
+																var _valuesBefore$get;
+																return null === (_valuesBefore$get = valuesBefore.get(value)) || void 0 === _valuesBefore$get
+																	? void 0
+																	: _valuesBefore$get.every(function (before) {
+																			return order.has(before);
+																	  });
+															})) && void 0 !== _remaining$find
+															? _remaining$find
+															: remaining[0];
+												order.add(next),
+													(remaining = remaining.filter(function (value) {
+														return value !== next;
+													}));
+											};
+										remaining.length;
+
+									)
+										_loop3();
+									return Array.from(order);
 								},
 							},
 							{
@@ -43558,7 +43680,9 @@
 					]
 				);
 			})();
+			var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7;
 			__webpack_require__('../../node_modules/core-js/modules/es.object.entries.js'),
+				__webpack_require__('../../node_modules/core-js/modules/es.string.raw.js'),
 				__webpack_require__('../../node_modules/core-js/modules/es.parse-int.js');
 			function parseContext_slicedToArray(r, e) {
 				return (
@@ -43640,6 +43764,9 @@
 				})(t, 'string');
 				return 'symbol' == typeof i ? i : i + '';
 			}
+			function _taggedTemplateLiteralLoose(e, t) {
+				return t || (t = e.slice(0)), (e.raw = t), e;
+			}
 			var JAVASCRIPT_KEYWORDS = new Set(
 					'break case catch class const continue debugger default delete do else export extends finally for function if import\n\tin instanceof new return super switch this throw try typeof var void while with yield let static enum await\n\timplements package protected interface private public'.split(
 						/\s+/
@@ -43648,15 +43775,38 @@
 				LITERAL_VALUES = new Map(Object.entries({ true: !0, false: !1, null: null, undefined: void 0 })),
 				STRING_LITERALS = /`(?:\\[\s\S]|[^`\\])*`|'(?:\\[\s\S]|[^'\\])*'|"(?:\\[\s\S]|[^"\\])*"/g;
 			var ESCAPES = new Map(Object.entries({ n: '\n', t: '\t', r: '\r', b: '\b', f: '\f', v: '\v' })),
-				LINE_TERMINATOR = /[\n\r\u2028\u2029]/,
+				LINE_TERMINATOR = new RegExp(
+					String.raw(_templateObject || (_templateObject = _taggedTemplateLiteralLoose(['[\n\rp{Zl}p{Zp}]'], ['[\\n\\r\\p{Zl}\\p{Zp}]']))),
+					'u'
+				),
+				LINE_BREAKS = new RegExp(
+					String.raw(
+						_templateObject2 || (_templateObject2 = _taggedTemplateLiteralLoose(['\r\n|[\n\rp{Zl}p{Zp}]'], ['\\r\\n|[\\n\\r\\p{Zl}\\p{Zp}]']))
+					),
+					'gu'
+				),
 				TRIVIA = new RegExp(
-					'[\\t-\\r \\xA0\\u1680\\u2000-\\u200A\\u2028\\u2029\\u202F\\u205F\\u3000\\uFEFF]+|\\/\\/(?:[\\0-\\t\\x0B\\f\\x0E-\\u2027\\u202A-\\uD7FF\\uE000-\\uFFFF]|[\\uD800-\\uDBFF][\\uDC00-\\uDFFF]|[\\uD800-\\uDBFF](?![\\uDC00-\\uDFFF])|(?:[^\\uD800-\\uDBFF]|^)[\\uDC00-\\uDFFF])*|\\/\\*(?:[\\0-\\uFFFF]|[\\uD800-\\uDBFF][\\uDC00-\\uDFFF])*?\\*\\/',
+					String.raw(
+						_templateObject3 ||
+							(_templateObject3 = _taggedTemplateLiteralLoose(
+								['s+|//[^\n\rp{Zl}p{Zp}]*|/*[sS]*?*/'],
+								['\\s+|\\/\\/[^\\n\\r\\p{Zl}\\p{Zp}]*|\\/\\*[\\s\\S]*?\\*\\/']
+							))
+					),
+					'uy'
+				),
+				NAME = new RegExp(
+					String.raw(_templateObject4 || (_templateObject4 = _taggedTemplateLiteralLoose(['[A-Za-z_$][w$]*'], ['[A-Za-z_$][\\w$]*']))),
 					'y'
 				),
-				NAME = new RegExp('[A-Za-z_$][\\w$]*', 'y'),
-				ASSIGNMENT_START = new RegExp('[A-Za-z_$][\\w$]*\\s*=(?!=)', 'y'),
-				DECIMAL = new RegExp('\\d+(\\.\\d+)?', 'y'),
-				HEX4 = new RegExp('[0-9a-fA-F]{4}', 'y');
+				ASSIGNMENT_START = new RegExp(
+					String.raw(
+						_templateObject5 || (_templateObject5 = _taggedTemplateLiteralLoose(['[A-Za-z_$][w$]*s*=(?!=)'], ['[A-Za-z_$][\\w$]*\\s*=(?!=)']))
+					),
+					'y'
+				),
+				DECIMAL = new RegExp(String.raw(_templateObject6 || (_templateObject6 = _taggedTemplateLiteralLoose(['d+(.d+)?'], ['\\d+(\\.\\d+)?']))), 'y'),
+				HEX4 = new RegExp(String.raw(_templateObject7 || (_templateObject7 = _taggedTemplateLiteralLoose(['[0-9a-fA-F]{4}']))), 'y');
 			var ContextParser = (function () {
 					return (function parseContext_createClass(e, r, t) {
 						return (
@@ -43857,7 +44007,7 @@
 							{
 								key: 'fail',
 								value: function fail(message) {
-									var line = (this.src.slice(0, this.pos).match(/\r\n|[\n\r\u2028\u2029]/g) || []).length + 1;
+									var line = (this.src.slice(0, this.pos).match(LINE_BREAKS) || []).length + 1;
 									throw new Error(message + ' (line ' + line + ')');
 								},
 							},
@@ -44105,7 +44255,7 @@
 							((function Tracker_classCallCheck(a, n) {
 								if (!(a instanceof n)) throw new TypeError('Cannot call a class as a function');
 							})(this, Tracker),
-							((config = cjs_default()(Tracker_defaultConfig, config || {})).initiator = 'searchspring/' + config.framework + '/0.79.0'),
+							((config = cjs_default()(Tracker_defaultConfig, config || {})).initiator = 'searchspring/' + config.framework + '/0.79.2'),
 							'object' != typeof globals || 'string' != typeof globals.siteId)
 						)
 							throw new Error('Invalid config passed to tracker. The "siteId" attribute must be provided.');
@@ -44287,7 +44437,7 @@
 						var currency = null === (_this$globals = _this.globals) || void 0 === _this$globals ? void 0 : _this$globals.currency;
 						currency && _this.setCurrency(currency),
 							(null !== (_window$searchspring = window.searchspring) && void 0 !== _window$searchspring && _window$searchspring.tracker) ||
-								((window.searchspring = window.searchspring || {}), (window.searchspring.tracker = _this), (window.searchspring.version = '0.79.0')),
+								((window.searchspring = window.searchspring || {}), (window.searchspring.tracker = _this), (window.searchspring.version = '0.79.2')),
 							setTimeout(function () {
 								_this.targeters.push(
 									new DomTargeter([{ selector: 'script[type^="searchspring/track/"]', emptyTarget: !1 }], function (target, elem) {
@@ -45950,7 +46100,7 @@
 		var __webpack_exec__ = (moduleId) => __webpack_require__((__webpack_require__.s = moduleId));
 		__webpack_require__.O(
 			0,
-			[47],
+			[937],
 			() => (
 				__webpack_exec__('../../node_modules/@storybook/core-client/dist/esm/globals/polyfills.js'),
 				__webpack_exec__('../../node_modules/@storybook/core-client/dist/esm/globals/globals.js'),
