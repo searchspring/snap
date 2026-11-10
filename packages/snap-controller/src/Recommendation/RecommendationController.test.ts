@@ -67,6 +67,54 @@ describe('Recommendation Controller', () => {
 		}).toThrow();
 	});
 
+	it.each([
+		{ name: 'by default', beacon: undefined, expected: undefined },
+		{ name: 'when beacon is disabled', beacon: { enabled: false }, expected: false },
+		{ name: 'when beacon.enabled is null', beacon: { enabled: null as unknown as boolean }, expected: false },
+		{ name: 'when beacon.enabled is undefined', beacon: { enabled: undefined as unknown as boolean }, expected: false },
+	])('passes beacon: $expected to the client $name', async ({ beacon, expected }) => {
+		const config: RecommendationStoreConfig = beacon ? { ...recommendConfig, beacon } : recommendConfig;
+
+		const controller = new RecommendationController(config, {
+			client: new MockClient(globals, {}),
+			store: new RecommendationStore(config, services),
+			urlManager,
+			eventManager: new EventManager(),
+			profiler: new Profiler(),
+			logger: new Logger(),
+			tracker: new Tracker(globals),
+		});
+		const recommendfn = jest.spyOn(controller.client, 'recommend');
+
+		await controller.search();
+
+		expect(recommendfn).toHaveBeenCalledTimes(1);
+		expect(recommendfn.mock.calls[0][0].beacon).toBe(expected);
+	});
+
+	it('does not modify the globals config when opting the request out of tracking', async () => {
+		const configGlobals = { ...recommendConfig.globals, beacon: true };
+		const config: RecommendationStoreConfig = { ...recommendConfig, beacon: { enabled: false }, globals: configGlobals };
+
+		const controller = new RecommendationController(config, {
+			client: new MockClient(globals, {}),
+			store: new RecommendationStore(config, services),
+			urlManager,
+			eventManager: new EventManager(),
+			profiler: new Profiler(),
+			logger: new Logger(),
+			tracker: new Tracker(globals),
+		});
+		const recommendfn = jest.spyOn(controller.client, 'recommend');
+
+		await controller.search();
+
+		expect(recommendfn).toHaveBeenCalledTimes(1);
+		expect(recommendfn.mock.calls[0][0].beacon).toBe(false);
+		expect(configGlobals).toStrictEqual({ product: mockSkus[0], beacon: true });
+		expect(controller.config.globals?.beacon).toBe(true);
+	});
+
 	const events = ['beforeSearch', 'afterSearch', 'afterStore'];
 	events.forEach((event) => {
 		it(`tests ${event} middleware cancellation handled`, async function () {

@@ -1,6 +1,6 @@
 import { SearchRequestModelFilterValue, SearchRequestModelFilterRange, SearchRequestModelFilter } from '@searchspring/snapi-types';
 
-import { BEACON_PARAM, transformSearchRequest } from './searchRequest';
+import { BEACON_PARAM, NO_BEACON_PARAM, transformSearchRequest } from './searchRequest';
 
 const mockRequest = {
 	sorts: [{ field: 'name', direction: 'asc' as any }],
@@ -16,6 +16,20 @@ describe('search request transformer', () => {
 		const searchRequest = transformSearchRequest(mockRequest);
 
 		expect(Object.keys(searchRequest)).toEqual(['q', 'sort.name', BEACON_PARAM]);
+	});
+
+	it('adds the beacon param when tracking.beacon is not false', () => {
+		const expected = { q: ['red dress'], 'sort.name': ['asc'], [BEACON_PARAM]: true };
+
+		expect(transformSearchRequest(mockRequest)).toEqual(expected);
+		expect(transformSearchRequest({ ...mockRequest, tracking: {} })).toEqual(expected);
+		expect(transformSearchRequest({ ...mockRequest, tracking: { beacon: true } })).toEqual(expected);
+	});
+
+	it('adds the no beacon param instead of the beacon param when tracking.beacon is false', () => {
+		const searchRequest = transformSearchRequest({ ...mockRequest, tracking: { beacon: false } });
+
+		expect(searchRequest).toEqual({ q: ['red dress'], 'sort.name': ['asc'], [NO_BEACON_PARAM]: true });
 	});
 });
 

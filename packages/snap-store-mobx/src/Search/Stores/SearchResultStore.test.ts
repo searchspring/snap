@@ -1615,6 +1615,186 @@ describe('SearchResultStore', () => {
 				const previouslySelectedSelections = variants.selections.map((selection) => selection.selected?.value);
 				expect(previouslySelectedSelections).toStrictEqual(['Desert', '30', '34']);
 			});
+
+			it('sorts selection values correctly when first color group has incomplete sizes', () => {
+				const mask = new ProductMask();
+
+				// Simulate data where first color (Snow Marle) is missing XS, S sizes
+				// but later color (Bay Leaf) has complete sizes XS, S, M, L, XL, XXL
+				const variantData: VariantData[] = [
+					// Snow Marle - only has M, L, XL, XXL (missing XS, S)
+					{
+						mappings: { core: { price: 79.95, thumbnailImageUrl: 'snow-m.jpg' } },
+						attributes: { available: true },
+						options: { colour: { value: 'Snow Marle' }, size: { value: 'M' } },
+					},
+					{
+						mappings: { core: { price: 79.95, thumbnailImageUrl: 'snow-l.jpg' } },
+						attributes: { available: true },
+						options: { colour: { value: 'Snow Marle' }, size: { value: 'L' } },
+					},
+					{
+						mappings: { core: { price: 79.95, thumbnailImageUrl: 'snow-xl.jpg' } },
+						attributes: { available: true },
+						options: { colour: { value: 'Snow Marle' }, size: { value: 'XL' } },
+					},
+					{
+						mappings: { core: { price: 79.95, thumbnailImageUrl: 'snow-xxl.jpg' } },
+						attributes: { available: true },
+						options: { colour: { value: 'Snow Marle' }, size: { value: 'XXL' } },
+					},
+					// Bay Leaf - has complete sizes XS, S, M, L, XL, XXL
+					{
+						mappings: { core: { price: 79.95, thumbnailImageUrl: 'bay-xs.jpg' } },
+						attributes: { available: true },
+						options: { colour: { value: 'Bay Leaf' }, size: { value: 'XS' } },
+					},
+					{
+						mappings: { core: { price: 79.95, thumbnailImageUrl: 'bay-s.jpg' } },
+						attributes: { available: true },
+						options: { colour: { value: 'Bay Leaf' }, size: { value: 'S' } },
+					},
+					{
+						mappings: { core: { price: 79.95, thumbnailImageUrl: 'bay-m.jpg' } },
+						attributes: { available: true },
+						options: { colour: { value: 'Bay Leaf' }, size: { value: 'M' } },
+					},
+					{
+						mappings: { core: { price: 79.95, thumbnailImageUrl: 'bay-l.jpg' } },
+						attributes: { available: true },
+						options: { colour: { value: 'Bay Leaf' }, size: { value: 'L' } },
+					},
+					{
+						mappings: { core: { price: 79.95, thumbnailImageUrl: 'bay-xl.jpg' } },
+						attributes: { available: true },
+						options: { colour: { value: 'Bay Leaf' }, size: { value: 'XL' } },
+					},
+					{
+						mappings: { core: { price: 79.95, thumbnailImageUrl: 'bay-xxl.jpg' } },
+						attributes: { available: true },
+						options: { colour: { value: 'Bay Leaf' }, size: { value: 'XXL' } },
+					},
+				];
+
+				const variants = new Variants(variantData, mask);
+
+				// Find the size selection
+				const sizeSelection = variants.selections.find((s) => s.field === 'size');
+				expect(sizeSelection).toBeDefined();
+
+				// Values should be sorted based on complete color group (Bay Leaf): XS, S, M, L, XL, XXL
+				// NOT the order from incomplete Snow Marle: M, L, XL, XXL, XS, S
+				const sizeValues = sizeSelection!.values.map((v) => v.value);
+				expect(sizeValues).toStrictEqual(['XS', 'S', 'M', 'L', 'XL', 'XXL']);
+			});
+
+			it('slots values missing from the most complete group in next to their neighbours', () => {
+				const mask = new ProductMask();
+				const variant = (colour: string, size: string): VariantData => ({
+					mappings: { core: { price: 79.95 } },
+					attributes: { available: true },
+					options: { colour: { value: colour }, size: { value: size } },
+				});
+
+				// Snow Marle and Bay Leaf tie for the most sizes, and neither has all of them; only Clay has 3XL
+				const variantData: VariantData[] = [
+					...['M', 'L', 'XL', 'XXL'].map((size) => variant('Snow Marle', size)),
+					...['XS', 'S', 'M', 'L'].map((size) => variant('Bay Leaf', size)),
+					...['XXL', '3XL'].map((size) => variant('Clay', size)),
+				];
+
+				const variants = new Variants(variantData, mask);
+				const sizeSelection = variants.selections.find((s) => s.field === 'size');
+
+				// XS and S go before M (where Bay Leaf puts them), 3XL goes after XXL (where Clay puts it)
+				expect(sizeSelection!.values.map((v) => v.value)).toStrictEqual(['XS', 'S', 'M', 'L', 'XL', 'XXL', '3XL']);
+			});
+
+			it('links in a group that shares no values with the largest group through a later group', () => {
+				const mask = new ProductMask();
+				const variant = (colour: string, size: string): VariantData => ({
+					mappings: { core: { price: 79.95 } },
+					attributes: { available: true },
+					options: { colour: { value: colour }, size: { value: size } },
+				});
+
+				// Bay Leaf shares no sizes with Snow Marle - only the smaller Clay group says that M comes before L
+				const variantData: VariantData[] = [
+					...['L', 'XL', 'XXL', '3XL'].map((size) => variant('Snow Marle', size)),
+					...['XS', 'S', 'M'].map((size) => variant('Bay Leaf', size)),
+					...['M', 'L'].map((size) => variant('Clay', size)),
+				];
+
+				const variants = new Variants(variantData, mask);
+				const sizeSelection = variants.selections.find((s) => s.field === 'size');
+
+				// NOT L, XL, XXL, 3XL, XS, S, M from appending Bay Leaf before Clay links it in
+				expect(sizeSelection!.values.map((v) => v.value)).toStrictEqual(['XS', 'S', 'M', 'L', 'XL', 'XXL', '3XL']);
+			});
+
+			it('keeps the order of every group, including groups whose values are all ordered already', () => {
+				const mask = new ProductMask();
+				const variant = (colour: string, size: string): VariantData => ({
+					mappings: { core: { price: 79.95 } },
+					attributes: { available: true },
+					options: { colour: { value: colour }, size: { value: size } },
+				});
+
+				// Bay Leaf only says that XS comes before L - Clay says it also comes before S
+				const variantData: VariantData[] = [
+					...['S', 'M', 'L'].map((size) => variant('Snow Marle', size)),
+					...['XS', 'L'].map((size) => variant('Bay Leaf', size)),
+					...['XS', 'S'].map((size) => variant('Clay', size)),
+				];
+
+				const variants = new Variants(variantData, mask);
+				const sizeSelection = variants.selections.find((s) => s.field === 'size');
+
+				// NOT S, M, XS, L from slotting XS in before L and then skipping Clay
+				expect(sizeSelection!.values.map((v) => v.value)).toStrictEqual(['XS', 'S', 'M', 'L']);
+			});
+
+			it('follows the largest group when groups disagree on the order', () => {
+				const mask = new ProductMask();
+				const variant = (colour: string, size: string): VariantData => ({
+					mappings: { core: { price: 79.95 } },
+					attributes: { available: true },
+					options: { colour: { value: colour }, size: { value: size } },
+				});
+
+				const variantData: VariantData[] = [
+					...['S', 'M', 'L'].map((size) => variant('Snow Marle', size)),
+					...['M', 'S'].map((size) => variant('Bay Leaf', size)),
+				];
+
+				const variants = new Variants(variantData, mask);
+				const sizeSelection = variants.selections.find((s) => s.field === 'size');
+
+				expect(sizeSelection!.values.map((v) => v.value)).toStrictEqual(['S', 'M', 'L']);
+			});
+
+			it('sorts the values of the first option before any selections are made', () => {
+				const mask = new ProductMask();
+				const variant = (size: string, colour: string): VariantData => ({
+					mappings: { core: { price: 79.95 } },
+					attributes: { available: true },
+					// size is the first option, so its selection is created before the colour selection exists
+					options: { size: { value: size }, colour: { value: colour } },
+				});
+
+				const variantData: VariantData[] = [
+					...['M', 'L'].map((size) => variant(size, 'Snow Marle')),
+					...['S', 'M', 'L'].map((size) => variant(size, 'Bay Leaf')),
+				];
+
+				const variants = new Variants(variantData, mask);
+				const sizeSelection = variants.selections.find((s) => s.field === 'size');
+
+				expect(sizeSelection!.values.map((v) => v.value)).toStrictEqual(['S', 'M', 'L']);
+				// the first available value is selected by default, now that the values are sorted when it is chosen
+				expect(sizeSelection!.selected?.value).toBe('S');
+				expect(variants.active?.options.colour.value).toBe('Bay Leaf');
+			});
 		});
 	});
 

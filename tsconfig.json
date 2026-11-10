@@ -8,6 +8,7 @@
 		"esModuleInterop": true,
 		"lib": [
 			"es2020",
+			"esnext.collection",
 			"dom"
 		],
 		"resolveJsonModule": true,

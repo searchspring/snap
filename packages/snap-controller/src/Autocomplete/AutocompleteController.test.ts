@@ -152,6 +152,35 @@ describe('Autocomplete Controller', () => {
 		});
 	});
 
+	it.each([
+		{ name: 'by default', beacon: undefined, expected: undefined },
+		{ name: 'when beacon is disabled', beacon: { enabled: false }, expected: false },
+		{ name: 'when beacon.enabled is null', beacon: { enabled: null as unknown as boolean }, expected: false },
+		{ name: 'when beacon.enabled is undefined', beacon: { enabled: undefined as unknown as boolean }, expected: false },
+	])('passes tracking.beacon: $expected to the client $name', async ({ beacon, expected }) => {
+		if (beacon) acConfig = { ...acConfig, beacon };
+
+		const controller = new AutocompleteController(acConfig, {
+			client: new MockClient(globals, {}),
+			store: new AutocompleteStore(acConfig, services),
+			urlManager,
+			eventManager: new EventManager(),
+			profiler: new Profiler(),
+			logger: new Logger(),
+			tracker: new Tracker(globals),
+		});
+		const autocompletefn = jest.spyOn(controller.client, 'autocomplete');
+
+		await controller.init();
+		controller.urlManager = controller.urlManager.reset().set('query', 'wh');
+		(controller.client as MockClient).mockData.updateConfig({ autocomplete: 'autocomplete.query.wh' });
+
+		await controller.search();
+
+		expect(autocompletefn).toHaveBeenCalledTimes(1);
+		expect(autocompletefn.mock.calls[0][0]?.tracking?.beacon).toBe(expected);
+	});
+
 	it('has results after search method called', async () => {
 		const controller = new AutocompleteController(acConfig, {
 			client: new MockClient(globals, {}),
@@ -940,6 +969,7 @@ describe('Autocomplete Controller', () => {
 
 		// @ts-ignore
 		delete window.location;
+		// @ts-ignore - modifying window
 		window.location = {
 			...window.location,
 			href: '', // jest does not support window location changes
@@ -991,6 +1021,7 @@ describe('Autocomplete Controller', () => {
 
 		// @ts-ignore
 		delete window.location;
+		// @ts-ignore - modifying window
 		window.location = {
 			...window.location,
 			href: '', // jest does not support window location changes
@@ -1044,6 +1075,7 @@ describe('Autocomplete Controller', () => {
 
 		// @ts-ignore
 		delete window.location;
+		// @ts-ignore - modifying window
 		window.location = {
 			...window.location,
 			href: '', // jest does not support window location changes
@@ -1096,6 +1128,7 @@ describe('Autocomplete Controller', () => {
 
 		// @ts-ignore
 		delete window.location;
+		// @ts-ignore - modifying window
 		window.location = {
 			...window.location,
 			href: '', // jest does not support window location changes
@@ -1153,6 +1186,7 @@ describe('Autocomplete Controller', () => {
 
 		// @ts-ignore
 		delete window.location;
+		// @ts-ignore - modifying window
 		window.location = {
 			...window.location,
 			href: '', // jest does not support window location changes
@@ -1203,6 +1237,7 @@ describe('Autocomplete Controller', () => {
 
 		// @ts-ignore
 		delete window.location;
+		// @ts-ignore - modifying window
 		window.location = {
 			...window.location,
 			href: '', // jest does not support window location changes
@@ -1274,6 +1309,7 @@ describe('Autocomplete Controller', () => {
 
 		//@ts-ignore
 		delete window.location;
+		// @ts-ignore - modifying window
 		window.location = {
 			...window.location,
 			href: '', // jest does not support window location changes

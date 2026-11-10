@@ -624,6 +624,10 @@ export class SearchController extends AbstractController {
 
 		params.tracking = params.tracking || {};
 		params.tracking.domain = window.location.href;
+		// opt the request out of API tracking when beacon is not enabled
+		if (!this.config.beacon?.enabled) {
+			params.tracking.beacon = false;
+		}
 
 		const { userId, sessionId, pageLoadId, shopperId } = this.tracker.getContext();
 		if (userId) {

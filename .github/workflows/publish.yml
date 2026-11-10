@@ -4,6 +4,16 @@ on:
   push:
     branches:
       - 'main'
+    # workflow-only changes don't need a release
+    paths-ignore:
+      - '.github/**'
+  workflow_dispatch:
+    inputs:
+      resume:
+        description: 'Resume a failed publish (lerna from-package, no version bump)'
+        type: boolean
+        default: false
+
 permissions:
   id-token: write  # Required for OIDC
   contents: write
@@ -45,6 +55,14 @@ jobs:
       - name: Install packages
         run: npm ci
 
+      # lerna gives Rekor 5s then retries - the retry 409s on the entry the first attempt created
+      # fetch that entry instead of failing (npm/cli#10078) - the grep fails the job if sigstore changes this line
+      - name: Recover from duplicate Rekor entries
+        run: |
+          f=node_modules/sigstore/dist/config.js
+          grep -q 'fetchOnConflict: false' "$f"
+          sed -i 's/fetchOnConflict: false/fetchOnConflict: true/' "$f"
+
       - name: Build
         run: | 
           npm run build
@@ -55,11 +73,20 @@ jobs:
         run: npm run test
 
       - name: Publish packages
+        if: github.event_name == 'push' && github.ref_name == 'main'
         run: npm run publish
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: Resume failed publish (from-package)
+        if: github.event_name == 'workflow_dispatch' && github.event.inputs.resume == 'true' && github.ref_name == 'main'
+        # --ignore-scripts: without it lerna runs the root `publish` script afterwards - a full versioned publish
+        run: npx lerna publish from-package --yes --no-verify-access --ignore-scripts
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
       - name: Configure AWS credentials
+        if: github.event_name == 'push' && github.ref_name == 'main'
         uses: aws-actions/configure-aws-credentials@v1
         with:
           aws-access-key-id: ${{ secrets.SNAPFU_AWS_KEY_ID }}
@@ -67,7 +94,9 @@ jobs:
           aws-region: us-east-1
 
       - name: Generate Metrics Files
+        if: github.event_name == 'push' && github.ref_name == 'main'
         run: npm run build:metrics
 
       - name: Upload Metrics Files to S3
+        if: github.event_name == 'push' && github.ref_name == 'main'
         run: aws s3 sync --region us-east-1 ./metrics/data s3://datawarehouse-stage/team-metrics-import/

@@ -43,14 +43,17 @@ export function findAssignedNames(script: string): string[] {
 
 const ESCAPES = new Map(Object.entries({ n: '\n', t: '\t', r: '\r', b: '\b', f: '\f', v: '\v' }));
 
+// regexes using the `u` and `y` flags are built with the RegExp constructor - TypeScript rejects
+// those flags in literals when targeting es5 (cjs build), but leaves them untouched at runtime either way
 // \p{Zl} and \p{Zp} are the U+2028 and U+2029 line terminators
-const LINE_TERMINATOR = /[\n\r\p{Zl}\p{Zp}]/u;
+const LINE_TERMINATOR = new RegExp(String.raw`[\n\r\p{Zl}\p{Zp}]`, 'u');
+const LINE_BREAKS = new RegExp(String.raw`\r\n|[\n\r\p{Zl}\p{Zp}]`, 'gu');
 // sticky patterns, matched at the current position
-const TRIVIA = /\s+|\/\/[^\n\r\p{Zl}\p{Zp}]*|\/\*[\s\S]*?\*\//uy;
-const NAME = /[A-Za-z_$][\w$]*/y;
-const ASSIGNMENT_START = /[A-Za-z_$][\w$]*\s*=(?!=)/y;
-const DECIMAL = /\d+(\.\d+)?/y;
-const HEX4 = /[0-9a-fA-F]{4}/y;
+const TRIVIA = new RegExp(String.raw`\s+|\/\/[^\n\r\p{Zl}\p{Zp}]*|\/\*[\s\S]*?\*\/`, 'uy');
+const NAME = new RegExp(String.raw`[A-Za-z_$][\w$]*`, 'y');
+const ASSIGNMENT_START = new RegExp(String.raw`[A-Za-z_$][\w$]*\s*=(?!=)`, 'y');
+const DECIMAL = new RegExp(String.raw`\d+(\.\d+)?`, 'y');
+const HEX4 = new RegExp(String.raw`[0-9a-fA-F]{4}`, 'y');
 
 export type ParseContextResult = { success: true; variables: Map<string, any> } | { success: false; reason: string };
 
@@ -217,7 +220,7 @@ class ContextParser {
 	}
 
 	private fail(message: string): never {
-		const line = (this.src.slice(0, this.pos).match(/\r\n|[\n\r\p{Zl}\p{Zp}]/gu) || []).length + 1;
+		const line = (this.src.slice(0, this.pos).match(LINE_BREAKS) || []).length + 1;
 		throw new Error(`${message} (line ${line})`);
 	}
 }
