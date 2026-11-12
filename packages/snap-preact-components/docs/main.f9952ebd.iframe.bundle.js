@@ -1,4 +1,4 @@
-/*! For license information please see main.43324554.iframe.bundle.js.LICENSE.txt */
+/*! For license information please see main.f9952ebd.iframe.bundle.js.LICENSE.txt */
 (self.webpackChunk_searchspring_snap_preact_components = self.webpackChunk_searchspring_snap_preact_components || []).push([
 	[792],
 	{
@@ -29431,10 +29431,13 @@
 									config.type)
 								) {
 									case StorageType.session:
-										(this.type = featureFlags_storage ? config.type : null),
-											this.type &&
-												((this.state = JSON.parse(window.sessionStorage.getItem(this.key) || '{}')),
-												window.sessionStorage.setItem(this.key, JSON.stringify(this.state)));
+										if (((this.type = featureFlags_storage ? config.type : null), this.type))
+											try {
+												(this.state = JSON.parse(window.sessionStorage.getItem(this.key) || '{}')),
+													window.sessionStorage.setItem(this.key, JSON.stringify(this.state));
+											} catch (_unused) {
+												this.type = null;
+											}
 										break;
 									case StorageType.local:
 										(this.type = featureFlags_storage ? config.type : null),
@@ -33731,6 +33734,7 @@
 				return 'symbol' == typeof i ? i : i + '';
 			}
 			var NetworkCache_defaultConfig = { enabled: !0, type: 'sessionStorage', ttl: 3e5, maxSize: 1e3, purgeable: !0 },
+				warnedStorageUnavailable = !1,
 				NetworkCache = (function () {
 					return (function NetworkCache_createClass(e, r, t) {
 						return (
@@ -33758,18 +33762,16 @@
 							{
 								key: 'load',
 								value: function load() {
-									var _window;
-									if (
-										'undefined' != typeof window &&
-										null !== (_window = window) &&
-										void 0 !== _window &&
-										_window.sessionStorage &&
-										'sessionStorage' === this.config.type
-									) {
-										var stored = window.sessionStorage.getItem('ss-networkcache'),
-											newStored = Object.assign({}, stored && JSON.parse(stored));
-										this.memoryCache = newStored || {};
-									}
+									if ('sessionStorage' === this.config.type && 'undefined' != typeof window)
+										try {
+											var stored = window.sessionStorage.getItem('ss-networkcache');
+											this.memoryCache = (stored && JSON.parse(stored)) || {};
+										} catch (e) {
+											(this.config.type = 'memory'),
+												warnedStorageUnavailable ||
+													((warnedStorageUnavailable = !0),
+													console.warn('network cache could not load from sessionStorage, falling back to memory: ', e));
+										}
 									this.purgeExpired();
 								},
 							},
@@ -33847,14 +33849,7 @@
 										Date.now() >= _this2.memoryCache[cacheKey].expires && delete _this2.memoryCache[cacheKey];
 									});
 									try {
-										var _window2;
-										if (
-											'undefined' != typeof window &&
-											null !== (_window2 = window) &&
-											void 0 !== _window2 &&
-											_window2.sessionStorage &&
-											'sessionStorage' === this.config.type
-										) {
+										if ('sessionStorage' === this.config.type && 'undefined' != typeof window && window.sessionStorage) {
 											var stringifiedCache = JSON.stringify(this.memoryCache);
 											window.sessionStorage.setItem('ss-networkcache', stringifiedCache);
 										}
@@ -33871,7 +33866,6 @@
 										this.load();
 										try {
 											var _JSON$stringify,
-												_window3,
 												cacheObject = { value, expires: Date.now() + this.config.ttl, purgeable: this.config.purgeable },
 												newObjectSize =
 													new Blob([JSON.stringify(((_JSON$stringify = {}), (_JSON$stringify[key] = cacheObject), _JSON$stringify))], {
@@ -33902,11 +33896,9 @@
 													'Unable to cache entry for key "' + key + '" without exceeding maxSize (' + this.config.maxSize + 'KB), skipping cache'
 												);
 											(this.memoryCache[key] = cacheObject),
-												'undefined' != typeof window &&
-													null !== (_window3 = window) &&
-													void 0 !== _window3 &&
-													_window3.sessionStorage &&
-													'sessionStorage' === this.config.type &&
+												'sessionStorage' === this.config.type &&
+													'undefined' != typeof window &&
+													window.sessionStorage &&
 													window.sessionStorage.setItem('ss-networkcache', JSON.stringify(this.memoryCache));
 										} catch (e) {
 											console.warn('something went wrong setting to cache: ', e);
@@ -33918,13 +33910,10 @@
 								key: 'clear',
 								value: function clear() {
 									try {
-										var _window4;
 										(this.memoryCache = {}),
-											'undefined' != typeof window &&
-												null !== (_window4 = window) &&
-												void 0 !== _window4 &&
-												_window4.sessionStorage &&
-												'sessionStorage' === this.config.type &&
+											'sessionStorage' === this.config.type &&
+												'undefined' != typeof window &&
+												window.sessionStorage &&
 												window.sessionStorage.setItem('ss-networkcache', '');
 									} catch (e) {
 										console.warn('something went wrong clearing cache: ', e);
@@ -44255,7 +44244,7 @@
 							((function Tracker_classCallCheck(a, n) {
 								if (!(a instanceof n)) throw new TypeError('Cannot call a class as a function');
 							})(this, Tracker),
-							((config = cjs_default()(Tracker_defaultConfig, config || {})).initiator = 'searchspring/' + config.framework + '/0.79.2'),
+							((config = cjs_default()(Tracker_defaultConfig, config || {})).initiator = 'searchspring/' + config.framework + '/0.79.3'),
 							'object' != typeof globals || 'string' != typeof globals.siteId)
 						)
 							throw new Error('Invalid config passed to tracker. The "siteId" attribute must be provided.');
@@ -44437,7 +44426,7 @@
 						var currency = null === (_this$globals = _this.globals) || void 0 === _this$globals ? void 0 : _this$globals.currency;
 						currency && _this.setCurrency(currency),
 							(null !== (_window$searchspring = window.searchspring) && void 0 !== _window$searchspring && _window$searchspring.tracker) ||
-								((window.searchspring = window.searchspring || {}), (window.searchspring.tracker = _this), (window.searchspring.version = '0.79.2')),
+								((window.searchspring = window.searchspring || {}), (window.searchspring.tracker = _this), (window.searchspring.version = '0.79.3')),
 							setTimeout(function () {
 								_this.targeters.push(
 									new DomTargeter([{ selector: 'script[type^="searchspring/track/"]', emptyTarget: !1 }], function (target, elem) {
