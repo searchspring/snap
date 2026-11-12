@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.79.3](https://github.com/searchspring/snap/compare/v0.79.2...v0.79.3) (2026-11-12)
+
+### Bug Fixes
+
+- keep snap running when sessionStorage is blocked ([77ec4df](https://github.com/searchspring/snap/commit/77ec4dff1c355dcb2ff29977bdc16d1e184eac49))
+
 ## [0.79.2](https://github.com/searchspring/snap/compare/v0.79.1...v0.79.2) (2026-11-10)
 
 **Note:** Version bump only for package @searchspring/snap-preact
