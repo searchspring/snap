@@ -105,6 +105,70 @@ describe('Snap Preact', () => {
 		expect(snap.client.globals.siteId).toBe(baseConfig.client.globals.siteId);
 	});
 
+	it('starts and creates controllers when the browser blocks sessionStorage', async () => {
+		const storageError = new DOMException('Access is denied', 'SecurityError');
+		const throwStorageError = () => {
+			throw storageError;
+		};
+		const originalDescriptor = Object.getOwnPropertyDescriptor(window, 'sessionStorage')!;
+		// jsdom swallows errors thrown from window getters, so the blocked storage throws from its methods instead
+		Object.defineProperty(window, 'sessionStorage', {
+			configurable: true,
+			get: () => ({ getItem: throwStorageError, setItem: throwStorageError, removeItem: throwStorageError }),
+		});
+		const warnSpy = jest.spyOn(console, 'warn').mockImplementation(() => {});
+		const logger = new Logger({ prefix: 'Snap Preact ' });
+		const errorSpy = jest.spyOn(logger, 'error');
+
+		try {
+			const snap = new Snap(
+				{
+					...generateBaseConfig(),
+					controllers: {
+						search: [{ config: { id: 'search' } }],
+						autocomplete: [{ config: { id: 'ac', selector: '.ss-ac-input' } }],
+					},
+				},
+				{ logger }
+			);
+
+			expect(snap.client).toBeDefined();
+			expect(snap.tracker).toBeDefined();
+			expect(window.searchspring.client).toBe(snap.client);
+			expect(snap.controllers.search.type).toBe('search');
+			expect((await snap.getController('ac')).type).toBe('autocomplete');
+			expect(errorSpy).not.toHaveBeenCalled();
+		} finally {
+			Object.defineProperty(window, 'sessionStorage', originalDescriptor);
+			warnSpy.mockRestore();
+		}
+	});
+
+	it('logs the original error when the client cannot be created', () => {
+		const clientError = new Error('client failed');
+		const logger = new Logger({ prefix: 'Snap Preact ' });
+		const errorSpy = jest.spyOn(logger, 'error').mockImplementation(() => {});
+
+		try {
+			jest.isolateModules(() => {
+				jest.doMock('@searchspring/snap-client', () => ({
+					...jest.requireActual('@searchspring/snap-client'),
+					Client: jest.fn(() => {
+						throw clientError;
+					}),
+				}));
+				const { Snap: IsolatedSnap } = require('./Snap');
+
+				expect(() => new IsolatedSnap(generateBaseConfig(), { logger })).not.toThrow();
+			});
+		} finally {
+			jest.dontMock('@searchspring/snap-client');
+		}
+
+		expect(errorSpy).toHaveBeenCalledTimes(1);
+		expect(errorSpy).toHaveBeenCalledWith(clientError);
+	});
+
 	it('merges config found in context and prioritizes the config found in the context', () => {
 		document.body.innerHTML = `<script id="searchspring-context">config = { client: { globals: { siteId: 'yyyyyy' } } };</script>`;
 		const baseConfig = generateBaseConfig();

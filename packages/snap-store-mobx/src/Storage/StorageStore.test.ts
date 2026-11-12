@@ -211,6 +211,68 @@ describe('Storage Store', () => {
 		});
 	});
 
+	describe('Storage Store when sessionStorage is blocked', () => {
+		const originalDescriptor = Object.getOwnPropertyDescriptor(window, 'sessionStorage')!;
+
+		beforeEach(() => {
+			// jsdom swallows errors thrown from window getters, so the blocked storage throws from its methods instead
+			const throwStorageError = () => {
+				throw new DOMException('Access is denied', 'SecurityError');
+			};
+			Object.defineProperty(window, 'sessionStorage', {
+				configurable: true,
+				get: () => ({ getItem: throwStorageError, setItem: throwStorageError, removeItem: throwStorageError }),
+			});
+		});
+
+		afterEach(() => {
+			Object.defineProperty(window, 'sessionStorage', originalDescriptor);
+		});
+
+		it('keeps session state in memory', () => {
+			const storage = new StorageStore({ type: StorageType.session, key: 'ss-blocked' });
+
+			// @ts-ignore - private property
+			expect(storage.type).toBe(null);
+			expect(storage.state).toStrictEqual({});
+
+			storage.set('some.path', 'value');
+			expect(storage.get('some.path')).toBe('value');
+			expect(storage.state).toStrictEqual({ some: { path: 'value' } });
+
+			storage.clear();
+			expect(storage.state).toStrictEqual({});
+		});
+
+		it('still uses localStorage for local storage', () => {
+			const storage = new StorageStore({ type: StorageType.local, key: 'ss-blocked-local' });
+			storage.set('some.path', 'value');
+
+			// @ts-ignore - private property
+			expect(storage.type).toBe(StorageType.local);
+			expect(window.localStorage.getItem('ss-blocked-local')).toBe(JSON.stringify({ some: { path: 'value' } }));
+
+			storage.clear();
+		});
+	});
+
+	it('keeps session state in memory when the stored entry is not valid JSON', () => {
+		window.sessionStorage.setItem('ss-unreadable', '{"unterminated":');
+
+		try {
+			const storage = new StorageStore({ type: StorageType.session, key: 'ss-unreadable' });
+
+			// @ts-ignore - private property
+			expect(storage.type).toBe(null);
+			expect(storage.state).toStrictEqual({});
+
+			storage.set('some.path', 'value');
+			expect(storage.get('some.path')).toBe('value');
+		} finally {
+			window.sessionStorage.removeItem('ss-unreadable');
+		}
+	});
+
 	describe('Storage Store sets custom config', () => {
 		const config = {
 			type: StorageType.session,

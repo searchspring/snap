@@ -12,6 +12,8 @@ const defaultConfig: DefaultCacheConfig = {
 	purgeable: true,
 };
 
+let warnedStorageUnavailable = false;
+
 export class NetworkCache {
 	protected memoryCache: Cache = {};
 	protected config: DefaultCacheConfig;
@@ -32,13 +34,20 @@ export class NetworkCache {
 
 	public load(): void {
 		// initialize cache from session storage
-		if (typeof window !== 'undefined' && window?.sessionStorage && this.config.type === 'sessionStorage') {
-			const stored: any = window.sessionStorage.getItem(CACHE_STORAGE_KEY);
-			const newStored: Cache = {
-				...(stored && JSON.parse(stored)),
-			};
+		if (this.config.type === 'sessionStorage' && typeof window !== 'undefined') {
+			try {
+				const stored = window.sessionStorage.getItem(CACHE_STORAGE_KEY);
+				this.memoryCache = (stored && JSON.parse(stored)) || {};
+			} catch (e) {
+				// sessionStorage is blocked (browsers throw when site data is blocked), missing, or holds an unreadable cache - keep the cache in memory
+				this.config.type = 'memory';
 
-			this.memoryCache = newStored || {};
+				// every requester has its own cache - warn once per page rather than once per cache
+				if (!warnedStorageUnavailable) {
+					warnedStorageUnavailable = true;
+					console.warn('network cache could not load from sessionStorage, falling back to memory: ', e);
+				}
+			}
 		}
 
 		this.purgeExpired();
@@ -118,7 +127,7 @@ export class NetworkCache {
 
 		// update storage
 		try {
-			if (typeof window !== 'undefined' && window?.sessionStorage && this.config.type === 'sessionStorage') {
+			if (this.config.type === 'sessionStorage' && typeof window !== 'undefined' && window.sessionStorage) {
 				const stringifiedCache = JSON.stringify(this.memoryCache);
 				window.sessionStorage.setItem(CACHE_STORAGE_KEY, stringifiedCache);
 			}
@@ -171,7 +180,7 @@ export class NetworkCache {
 				// store cache in memory
 				this.memoryCache[key] = cacheObject;
 
-				if (typeof window !== 'undefined' && window?.sessionStorage && this.config.type === 'sessionStorage') {
+				if (this.config.type === 'sessionStorage' && typeof window !== 'undefined' && window.sessionStorage) {
 					window.sessionStorage.setItem(CACHE_STORAGE_KEY, JSON.stringify(this.memoryCache));
 				}
 			} catch (e) {
@@ -183,7 +192,7 @@ export class NetworkCache {
 	public clear() {
 		try {
 			this.memoryCache = {};
-			if (typeof window !== 'undefined' && window?.sessionStorage && this.config.type === 'sessionStorage') {
+			if (this.config.type === 'sessionStorage' && typeof window !== 'undefined' && window.sessionStorage) {
 				window.sessionStorage.setItem(CACHE_STORAGE_KEY, '');
 			}
 		} catch (e) {
