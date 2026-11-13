@@ -237,7 +237,7 @@ Now we'll ensure our integration code captures the context variables and sets up
 
 In the `src/scripts` folder, create a plugin called `magento2.js` and add the below code. This snippet will provide tracking for shopper id; setting form key and uenc; and a few common pieces of Magento 2 logic used in results display.
 
-The shopper id is the Magento customer id from the tracking module's `searchspring-tracking` section. If that section is not available, a SHA-256 hash of the customer's email (or telephone, when there is no email) is used when the site's `customer` section provides one; otherwise no shopper id is tracked. Do not use `customer.data_id` - it is a timestamp Magento uses for cache invalidation, it changes over time and is also set for guests.
+The shopper id is the Magento customer id from the tracking module's `searchspring-tracking` section. If that section is not available, the customer's email (or telephone, when there is no email) is used when the site's `customer` section provides one; otherwise no shopper id is tracked. Do not use `customer.data_id` - it is a timestamp Magento uses for cache invalidation, it changes over time and is also set for guests.
 
 ```js
 // src/scripts/magento2.js
@@ -246,27 +246,13 @@ import { cookies } from '@searchspring/snap-toolbox';
 export const magento2 = (controller) => {
 	// get shopper id from magento cache
 	const mageCacheStorage = JSON.parse(localStorage.getItem('mage-cache-storage'));
-	// shopper id is the Magento customer id provided by the tracking module (`customer.data_id` is a cache timestamp, not a shopper id)
+	// shopper id is the Magento customer id provided by the tracking module, otherwise the customer email or telephone
+	// (`customer.data_id` is a cache timestamp that is also set for guests, not a shopper id)
 	const mageShopperId = mageCacheStorage?.['searchspring-tracking']?.shopper_id || mageCacheStorage?.['athoscommerce-tracking']?.shopper_id;
-	let shopperId = mageShopperId ? String(mageShopperId) : false;
-
-	// without a customer id, fall back to a SHA-256 hash of the customer email (or telephone when there is no email)
-	if (!shopperId) {
-		const { email, telephone } = mageCacheStorage?.customer || {};
-		const mageEmail = String(email || '').trim();
-		const mageContact = mageEmail.toLowerCase() || String(telephone || '').replace(/\D/g, '');
-		if (mageContact && window.crypto?.subtle) {
-			window.crypto.subtle
-				.digest('SHA-256', new TextEncoder().encode(mageContact))
-				.then((digest) => {
-					const hashedId = Array.from(new Uint8Array(digest), (byte) => byte.toString(16).padStart(2, '0')).join('');
-					controller.tracker.track.shopper.login({ id: hashedId });
-				})
-				.catch((err) => {
-					controller.log.warn('unable to hash magento2 shopper id', err);
-				});
-		}
-	}
+	const mageCustomer = mageCacheStorage?.customer || {};
+	const mageEmail = String(mageCustomer.email || '').trim();
+	const mageContact = mageEmail.toLowerCase() || String(mageCustomer.telephone || '').replace(/\D/g, '');
+	let shopperId = mageShopperId ? String(mageShopperId) : mageContact || false;
 
 	// track shopperId
 	if (shopperId) {
