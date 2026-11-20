@@ -1,4 +1,4 @@
-/*! For license information please see main.f9952ebd.iframe.bundle.js.LICENSE.txt */
+/*! For license information please see main.06705f45.iframe.bundle.js.LICENSE.txt */
 (self.webpackChunk_searchspring_snap_preact_components = self.webpackChunk_searchspring_snap_preact_components || []).push([
 	[792],
 	{
@@ -30005,10 +30005,10 @@
 					function SearchController(config, _ref, context) {
 						var _this$config$settings7,
 							_this$context,
-							_this$config$settings8,
 							_this$config$settings9,
 							_this$config$settings0,
 							_this$config$settings1,
+							_this$config$settings10,
 							_this,
 							client = _ref.client,
 							store = _ref.store,
@@ -30868,23 +30868,54 @@
 								})()
 							),
 							_this.eventManager.on(
-								'afterStore',
+								'afterSearch',
 								(function () {
 									var _ref0 = SearchController_asyncToGenerator(
 										SearchController_regenerator().m(function _callee5(search, next) {
-											var storableRequestParams, stringyParams, scrollMap, elementPosition;
+											var _search$request$pagin, _search$response$pagi, _search$response$pagi2, _this$config$settings8, requestedPage, totalPages;
 											return SearchController_regenerator().w(function (_context5) {
 												for (;;)
 													switch (_context5.n) {
 														case 0:
-															return (_context5.n = 1), next();
+															if (
+																((requestedPage =
+																	null === (_search$request$pagin = search.request.pagination) || void 0 === _search$request$pagin
+																		? void 0
+																		: _search$request$pagin.page),
+																(totalPages =
+																	null !==
+																		(_search$response$pagi =
+																			null === (_search$response$pagi2 = search.response.pagination) || void 0 === _search$response$pagi2
+																				? void 0
+																				: _search$response$pagi2.totalPages) && void 0 !== _search$response$pagi
+																		? _search$response$pagi
+																		: 0),
+																!(
+																	(null === (_this$config$settings8 = _this.config.settings) ||
+																		void 0 === _this$config$settings8 ||
+																		!_this$config$settings8.infinite) &&
+																	void 0 !== requestedPage &&
+																	totalPages > 0 &&
+																	requestedPage > totalPages
+																))
+															) {
+																_context5.n = 1;
+																break;
+															}
+															return (
+																_this.log.warn(
+																	'requested page ' +
+																		requestedPage +
+																		' exceeds the last page (' +
+																		totalPages +
+																		') - redirecting to page ' +
+																		totalPages
+																),
+																_this.urlManager.set('page', totalPages).go({ history: 'replace' }),
+																_context5.a(2, !1)
+															);
 														case 1:
-															(storableRequestParams = getStorableRequestParams(search.request)),
-																(stringyParams = JSON.stringify(storableRequestParams)),
-																_this.storage.set('lastStringyParams', stringyParams),
-																(scrollMap = _this.storage.get('scrollMap') || {}),
-																(elementPosition = scrollMap[stringyParams]) || _this.storage.set('scrollMap', {}),
-																_this.eventManager.fire('restorePosition', { controller: _this, element: elementPosition });
+															return (_context5.n = 2), next();
 														case 2:
 															return _context5.a(2);
 													}
@@ -30895,29 +30926,58 @@
 										return _ref0.apply(this, arguments);
 									};
 								})()
-							);
-						var _this$config$settings10,
-							_this$config$settings11,
-							hierarchySettings =
-								null === (_this$config$settings8 = _this.config.settings) ||
-								void 0 === _this$config$settings8 ||
-								null === (_this$config$settings9 = _this$config$settings8.filters) ||
-								void 0 === _this$config$settings9
-									? void 0
-									: _this$config$settings9.hierarchy;
-						(hierarchySettings &&
-							hierarchySettings.enabled &&
+							),
 							_this.eventManager.on(
-								'afterSearch',
+								'afterStore',
 								(function () {
 									var _ref1 = SearchController_asyncToGenerator(
 										SearchController_regenerator().m(function _callee6(search, next) {
-											var _hierarchySettings$di, _hierarchySettings$sh, displayDelimiter, showFullPath, facets;
+											var storableRequestParams, stringyParams, scrollMap, elementPosition;
 											return SearchController_regenerator().w(function (_context6) {
 												for (;;)
 													switch (_context6.n) {
 														case 0:
 															return (_context6.n = 1), next();
+														case 1:
+															(storableRequestParams = getStorableRequestParams(search.request)),
+																(stringyParams = JSON.stringify(storableRequestParams)),
+																_this.storage.set('lastStringyParams', stringyParams),
+																(scrollMap = _this.storage.get('scrollMap') || {}),
+																(elementPosition = scrollMap[stringyParams]) || _this.storage.set('scrollMap', {}),
+																_this.eventManager.fire('restorePosition', { controller: _this, element: elementPosition });
+														case 2:
+															return _context6.a(2);
+													}
+											}, _callee6);
+										})
+									);
+									return function (_x8, _x9) {
+										return _ref1.apply(this, arguments);
+									};
+								})()
+							);
+						var _this$config$settings11,
+							_this$config$settings12,
+							hierarchySettings =
+								null === (_this$config$settings9 = _this.config.settings) ||
+								void 0 === _this$config$settings9 ||
+								null === (_this$config$settings0 = _this$config$settings9.filters) ||
+								void 0 === _this$config$settings0
+									? void 0
+									: _this$config$settings0.hierarchy;
+						(hierarchySettings &&
+							hierarchySettings.enabled &&
+							_this.eventManager.on(
+								'afterSearch',
+								(function () {
+									var _ref10 = SearchController_asyncToGenerator(
+										SearchController_regenerator().m(function _callee7(search, next) {
+											var _hierarchySettings$di, _hierarchySettings$sh, displayDelimiter, showFullPath, facets;
+											return SearchController_regenerator().w(function (_context7) {
+												for (;;)
+													switch (_context7.n) {
+														case 0:
+															return (_context7.n = 1), next();
 														case 1:
 															(displayDelimiter =
 																null !== (_hierarchySettings$di = hierarchySettings.displayDelimiter) && void 0 !== _hierarchySettings$di
@@ -30953,17 +31013,17 @@
 																									return !0 === (null == val ? void 0 : val.filtered);
 																							  });
 																				if (filteredValues && filteredValues.length) {
-																					var _ref10,
+																					var _ref11,
 																						_filteredValues$0$val,
 																						filterToAdd = {
 																							field: facet.field,
 																							label: showFullPath
 																								? (null !==
-																										(_ref10 =
+																										(_ref11 =
 																											null !== (_filteredValues$0$val = filteredValues[0].value) && void 0 !== _filteredValues$0$val
 																												? _filteredValues$0$val
-																												: filteredValues[0].label) && void 0 !== _ref10
-																										? _ref10
+																												: filteredValues[0].label) && void 0 !== _ref11
+																										? _ref11
 																										: ''
 																								  ).replace(new RegExp(dataDelimiter.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'g'), displayDelimiter)
 																								: filteredValues[0].label,
@@ -30977,21 +31037,21 @@
 																		}
 																	});
 														case 2:
-															return _context6.a(2);
+															return _context7.a(2);
 													}
-											}, _callee6);
+											}, _callee7);
 										})
 									);
-									return function (_x8, _x9) {
-										return _ref1.apply(this, arguments);
+									return function (_x0, _x1) {
+										return _ref10.apply(this, arguments);
 									};
 								})()
 							),
 						_this.eventManager.on(
 							'afterStore',
 							(function () {
-								var _ref11 = SearchController_asyncToGenerator(
-									SearchController_regenerator().m(function _callee7(search, next) {
+								var _ref12 = SearchController_asyncToGenerator(
+									SearchController_regenerator().m(function _callee8(search, next) {
 										var controller,
 											_search$request,
 											_search$request$filte,
@@ -31003,14 +31063,14 @@
 											_search$response4$pag,
 											config,
 											nonBackgroundFilters;
-										return SearchController_regenerator().w(function (_context7) {
+										return SearchController_regenerator().w(function (_context8) {
 											for (;;)
-												switch (_context7.n) {
+												switch (_context8.n) {
 													case 0:
-														return (_context7.n = 1), next();
+														return (_context8.n = 1), next();
 													case 1:
 														if (!(controller = search.controller).store.loaded || controller.store.error) {
-															_context7.n = 2;
+															_context8.n = 2;
 															break;
 														}
 														if (
@@ -31047,41 +31107,41 @@
 																		: _search$response4$pag.totalResults) ||
 																(null != nonBackgroundFilters && nonBackgroundFilters.length))
 														) {
-															_context7.n = 2;
+															_context8.n = 2;
 															break;
 														}
 														return (
-															window.location.replace(null == search ? void 0 : search.response.results[0].mappings.core.url), _context7.a(2, !1)
+															window.location.replace(null == search ? void 0 : search.response.results[0].mappings.core.url), _context8.a(2, !1)
 														);
 													case 2:
-														return _context7.a(2);
+														return _context8.a(2);
 												}
-										}, _callee7);
+										}, _callee8);
 									})
 								);
-								return function (_x0, _x1) {
-									return _ref11.apply(this, arguments);
+								return function (_x10, _x11) {
+									return _ref12.apply(this, arguments);
 								};
 							})()
 						),
-						null !== (_this$config$settings0 = _this.config.settings) &&
-							void 0 !== _this$config$settings0 &&
-							null !== (_this$config$settings1 = _this$config$settings0.restorePosition) &&
+						null !== (_this$config$settings1 = _this.config.settings) &&
 							void 0 !== _this$config$settings1 &&
-							_this$config$settings1.enabled) &&
+							null !== (_this$config$settings10 = _this$config$settings1.restorePosition) &&
+							void 0 !== _this$config$settings10 &&
+							_this$config$settings10.enabled) &&
 							(_this.eventManager.on(
 								'restorePosition',
 								(function () {
-									var _ref13 = SearchController_asyncToGenerator(
-										SearchController_regenerator().m(function _callee9(_ref12, next) {
+									var _ref14 = SearchController_asyncToGenerator(
+										SearchController_regenerator().m(function _callee0(_ref13, next) {
 											var _element, controller, element, lastRequest, storableRequestParams, stringyParams, scrollMap, scrollToPosition;
-											return SearchController_regenerator().w(function (_context9) {
+											return SearchController_regenerator().w(function (_context0) {
 												for (;;)
-													switch (_context9.n) {
+													switch (_context0.n) {
 														case 0:
 															if (
-																((controller = _ref12.controller),
-																(element = _ref12.element),
+																((controller = _ref13.controller),
+																(element = _ref13.element),
 																(null !== (_element = element) && void 0 !== _element && _element.selector) ||
 																	((lastRequest = _this.storage.get('lastStringyParams')) &&
 																		((storableRequestParams = getStorableRequestParams(JSON.parse(lastRequest))),
@@ -31091,8 +31151,8 @@
 																(scrollToPosition = function scrollToPosition() {
 																	return new Promise(
 																		(function () {
-																			var _ref14 = SearchController_asyncToGenerator(
-																				SearchController_regenerator().m(function _callee8(resolve) {
+																			var _ref15 = SearchController_asyncToGenerator(
+																				SearchController_regenerator().m(function _callee9(resolve) {
 																					var checkTime,
 																						maxScrolls,
 																						maxCheckCount,
@@ -31101,9 +31161,9 @@
 																						scrolledElem,
 																						checkAndScroll,
 																						_element4;
-																					return SearchController_regenerator().w(function (_context8) {
+																					return SearchController_regenerator().w(function (_context9) {
 																						for (;;)
-																							switch (_context8.n) {
+																							switch (_context9.n) {
 																								case 0:
 																									(checkTime = 60),
 																										(maxScrolls = Math.ceil(600 / checkTime)),
@@ -31139,17 +31199,17 @@
 																										});
 																								case 1:
 																									if (!(checkAndScroll() && scrollBackCount <= maxScrolls && checkCount <= maxCheckCount)) {
-																										_context8.n = 3;
+																										_context9.n = 3;
 																										break;
 																									}
 																									return (
-																										(_context8.n = 2),
+																										(_context9.n = 2),
 																										new Promise(function (resolve) {
 																											return setTimeout(resolve, checkTime);
 																										})
 																									);
 																								case 2:
-																									_context8.n = 1;
+																									_context9.n = 1;
 																									break;
 																								case 3:
 																									scrolledElem
@@ -31160,41 +31220,41 @@
 																										  ),
 																										resolve();
 																								case 4:
-																									return _context8.a(2);
+																									return _context9.a(2);
 																							}
-																					}, _callee8);
+																					}, _callee9);
 																				})
 																			);
-																			return function (_x12) {
-																				return _ref14.apply(this, arguments);
+																			return function (_x14) {
+																				return _ref15.apply(this, arguments);
 																			};
 																		})()
 																	);
 																}),
 																!element)
 															) {
-																_context9.n = 1;
+																_context0.n = 1;
 																break;
 															}
-															return (_context9.n = 1), scrollToPosition();
+															return (_context0.n = 1), scrollToPosition();
 														case 1:
-															return (_context9.n = 2), next();
+															return (_context0.n = 2), next();
 														case 2:
-															return _context9.a(2);
+															return _context0.a(2);
 													}
-											}, _callee9);
+											}, _callee0);
 										})
 									);
-									return function (_x10, _x11) {
-										return _ref13.apply(this, arguments);
+									return function (_x12, _x13) {
+										return _ref14.apply(this, arguments);
 									};
 								})()
 							),
-							null !== (_this$config$settings10 = _this.config.settings) &&
-								void 0 !== _this$config$settings10 &&
-								null !== (_this$config$settings11 = _this$config$settings10.restorePosition) &&
+							null !== (_this$config$settings11 = _this.config.settings) &&
 								void 0 !== _this$config$settings11 &&
-								_this$config$settings11.onPageShow &&
+								null !== (_this$config$settings12 = _this$config$settings11.restorePosition) &&
+								void 0 !== _this$config$settings12 &&
+								_this$config$settings12.onPageShow &&
 								window.addEventListener('pageshow', function (e) {
 									e.persisted && _this.store.loaded && _this.eventManager.fire('restorePosition', { controller: _this, element: {} });
 								}));
@@ -31218,17 +31278,17 @@
 							{
 								key: 'params',
 								get: function get() {
-									var _this$config$settings12,
-										_this$config$settings13,
+									var _this$config$settings13,
+										_this$config$settings14,
 										_this$config$beacon8,
 										_this$config$globals8,
 										_this$config$globals9,
 										params = cjs_default()(Object.assign({}, getSearchParams(this.urlManager.state)), this.config.globals || {});
-									(null !== (_this$config$settings12 = this.config.settings) &&
-										void 0 !== _this$config$settings12 &&
-										null !== (_this$config$settings13 = _this$config$settings12.redirects) &&
+									(null !== (_this$config$settings13 = this.config.settings) &&
 										void 0 !== _this$config$settings13 &&
-										_this$config$settings13.merchandising &&
+										null !== (_this$config$settings14 = _this$config$settings13.redirects) &&
+										void 0 !== _this$config$settings14 &&
+										_this$config$settings14.merchandising &&
 										!this.store.loaded) ||
 										((params.search = params.search || {}), (params.search.redirectResponse = 'full')),
 										(params.tracking = params.tracking || {}),
@@ -44244,7 +44304,7 @@
 							((function Tracker_classCallCheck(a, n) {
 								if (!(a instanceof n)) throw new TypeError('Cannot call a class as a function');
 							})(this, Tracker),
-							((config = cjs_default()(Tracker_defaultConfig, config || {})).initiator = 'searchspring/' + config.framework + '/0.79.3'),
+							((config = cjs_default()(Tracker_defaultConfig, config || {})).initiator = 'searchspring/' + config.framework + '/0.79.4'),
 							'object' != typeof globals || 'string' != typeof globals.siteId)
 						)
 							throw new Error('Invalid config passed to tracker. The "siteId" attribute must be provided.');
@@ -44426,7 +44486,7 @@
 						var currency = null === (_this$globals = _this.globals) || void 0 === _this$globals ? void 0 : _this$globals.currency;
 						currency && _this.setCurrency(currency),
 							(null !== (_window$searchspring = window.searchspring) && void 0 !== _window$searchspring && _window$searchspring.tracker) ||
-								((window.searchspring = window.searchspring || {}), (window.searchspring.tracker = _this), (window.searchspring.version = '0.79.3')),
+								((window.searchspring = window.searchspring || {}), (window.searchspring.tracker = _this), (window.searchspring.version = '0.79.4')),
 							setTimeout(function () {
 								_this.targeters.push(
 									new DomTargeter([{ selector: 'script[type^="searchspring/track/"]', emptyTarget: !1 }], function (target, elem) {
