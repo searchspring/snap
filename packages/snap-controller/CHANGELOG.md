@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.79.4](https://github.com/searchspring/snap/compare/v0.79.3...v0.79.4) (2026-11-20)
+
+### Bug Fixes
+
+- redirect out-of-range page to last page ([906ea57](https://github.com/searchspring/snap/commit/906ea5759920c098072c4f1cb6c2c16d3c05d806))
+
 ## [0.79.3](https://github.com/searchspring/snap/compare/v0.79.2...v0.79.3) (2026-11-12)
 
 **Note:** Version bump only for package @searchspring/snap-controller
