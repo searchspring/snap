@@ -190,6 +190,22 @@ export class SearchController extends AbstractController {
 			await next();
 		});
 
+		// send a page past the last page to the last page (infinite handles deep pages itself)
+		// registered after the merchandising redirect so that a merchandising redirect takes precedence
+		this.eventManager.on('afterSearch', async (search: SearchAfterSearchObj, next: Next): Promise<void | boolean> => {
+			const requestedPage = search.request.pagination?.page;
+			const totalPages = search.response.pagination?.totalPages ?? 0;
+
+			// no results (or no pagination) means there is no last page to send the shopper to - so 0 rather than 1
+			if (!this.config.settings?.infinite && requestedPage !== undefined && totalPages > 0 && requestedPage > totalPages) {
+				this.log.warn(`requested page ${requestedPage} exceeds the last page (${totalPages}) - redirecting to page ${totalPages}`);
+				this.urlManager.set('page', totalPages).go({ history: 'replace' });
+				return false;
+			}
+
+			await next();
+		});
+
 		this.eventManager.on('afterStore', async (search: AfterStoreObj, next: Next): Promise<void | boolean> => {
 			await next();
 			// get scrollTo positioning and send it to 'restorePosition' event

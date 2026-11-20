@@ -278,6 +278,113 @@ describe('Search Controller', () => {
 		expect(controller.params.pagination!.page).toBe(page);
 	});
 
+	describe('requested page beyond the last page', () => {
+		let go: jest.SpyInstance;
+
+		const createController = () =>
+			new SearchController(searchConfig, {
+				client: new MockClient(globals, {}),
+				store: new SearchStore(searchConfig, services),
+				urlManager,
+				eventManager: new EventManager(),
+				profiler: new Profiler(),
+				logger: new Logger(),
+				tracker: new Tracker(globals),
+			});
+
+		// makes the next search return the default mock response with the given parts of the response replaced
+		const mockSearchResponse = (controller: SearchController, search: Partial<SearchResponseModel>) => {
+			const { mockData } = controller.client as MockClient;
+			jest.spyOn(controller.client, 'search').mockResolvedValue([mockData.meta(), { ...mockData.search(), ...search }]);
+		};
+
+		beforeEach(() => {
+			// `go` is mocked so the URL never changes - these tests end at the redirect itself
+			// outside of tests the URL change triggers a second search (for the last page) via the urlManager subscription
+			// the UrlManager that `go` was called on is at `go.mock.instances`
+			go = jest.spyOn(UrlManager.prototype, 'go').mockImplementation(() => undefined);
+		});
+
+		afterEach(() => {
+			go.mockRestore();
+		});
+
+		it('redirects to the last page', async () => {
+			const controller = createController();
+			controller.urlManager = controller.urlManager.reset().set('page', 5);
+			mockSearchResponse(controller, {
+				pagination: { page: 5, pageSize: 30, totalResults: 90, totalPages: 3 },
+				results: [],
+			});
+
+			await controller.search();
+
+			expect(go).toHaveBeenCalledTimes(1);
+			expect(go).toHaveBeenCalledWith({ history: 'replace' });
+			expect((go.mock.instances[0] as UrlManager).state.page).toBe(3);
+
+			// the redirect cancels this search, so the empty page 5 response is discarded before the store is updated
+			// the store is loaded by the search that follows the redirect, which never runs here because `go` is mocked
+			expect(controller.store.loaded).toBe(false);
+		});
+
+		it('does not redirect when the requested page is the last page', async () => {
+			const controller = createController();
+			controller.urlManager = controller.urlManager.reset().set('page', 3);
+			mockSearchResponse(controller, {
+				pagination: { page: 3, pageSize: 30, totalResults: 90, totalPages: 3 },
+			});
+
+			await controller.search();
+
+			expect(go).not.toHaveBeenCalled();
+			expect(controller.store.loaded).toBe(true);
+			expect(controller.store.pagination.page).toBe(3);
+		});
+
+		it('does not redirect when there are no results', async () => {
+			const controller = createController();
+			controller.urlManager = controller.urlManager.reset().set('page', 5);
+			mockSearchResponse(controller, {
+				pagination: { page: 5, pageSize: 30, totalResults: 0, totalPages: 0 },
+				results: [],
+			});
+
+			await controller.search();
+
+			expect(go).not.toHaveBeenCalled();
+			expect(controller.store.loaded).toBe(true);
+			expect(controller.store.results.length).toBe(0);
+		});
+
+		it('follows a merchandising redirect instead of redirecting to the last page', async () => {
+			const controller = createController();
+			controller.urlManager = controller.urlManager.reset().set('page', 5);
+			mockSearchResponse(controller, {
+				pagination: { page: 5, pageSize: 30, totalResults: 90, totalPages: 3 },
+				results: [],
+				merchandising: { redirect: 'https://www.example.com/redirected' },
+			});
+
+			const originalLocation = window.location;
+			//@ts-ignore - replacing window.location to spy on location.replace
+			delete window.location;
+			//@ts-ignore - replacing window.location to spy on location.replace
+			window.location = { ...originalLocation, replace: jest.fn() } as unknown as string & Location;
+
+			try {
+				await controller.search();
+
+				expect(window.location.replace).toHaveBeenCalledTimes(1);
+				expect(window.location.replace).toHaveBeenCalledWith('https://www.example.com/redirected');
+				expect(go).not.toHaveBeenCalled();
+			} finally {
+				//@ts-ignore - restoring window.location
+				window.location = originalLocation;
+			}
+		});
+	});
+
 	it('can set pageSize param', async () => {
 		const controller = new SearchController(searchConfig, {
 			client: new MockClient(globals, {}),
